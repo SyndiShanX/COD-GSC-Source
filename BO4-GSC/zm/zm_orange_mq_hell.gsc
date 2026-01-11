@@ -712,4 +712,3 @@ test_hell() {
     e_pap zm_orange_pap::function_e3921120(0);
   }
 }
-

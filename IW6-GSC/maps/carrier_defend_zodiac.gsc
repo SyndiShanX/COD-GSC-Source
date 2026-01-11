@@ -140,23 +140,26 @@ gunship_attack_autosave() {
   if(common_scripts\utility::flag("dz_warning_right") || common_scripts\utility::flag("dz_warning_front") || common_scripts\utility::flag("dz_warning_rear")) {
     return;
   }
-  if(level.player istouching(getent("gunship_attack_save_vol", "targetname")))
+  if(level.player istouching(getent("gunship_attack_save_vol", "targetname"))) {
     thread maps\_utility::autosave_now();
+  }
 }
 
 cleanup_deck_transition() {
   common_scripts\utility::flag_wait("defend_zodiac_wave_01");
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 kill();
+  }
 
   wait 2;
   var_4 = vehicle_getarray();
 
   foreach(var_6 in var_4) {
-    if(isDefined(var_6.classname) && !issubstr(var_6.classname, "mig"))
+    if(isDefined(var_6.classname) && !issubstr(var_6.classname, "mig")) {
       thread maps\_utility::ai_delete_when_out_of_sight([var_6], 4000);
+    }
   }
 
   thread maps\carrier_code::phalanx_gun_offline("crr_phalanx_03");
@@ -230,8 +233,9 @@ hesh_initial_sprint() {
   var_1 = distance(var_0.origin, level.player.origin);
   var_2 = distance(var_0.origin, level.hesh.origin);
 
-  if(var_1 <= var_2 + 200)
+  if(var_1 <= var_2 + 200) {
     level.hesh maps\_utility::enable_sprint();
+  }
 }
 
 enable_flinch() {
@@ -257,8 +261,9 @@ run_vo() {
   wait 5;
   level.hesh maps\_utility::smart_dialogue("carrier_hsh_letsgotheyretrying");
 
-  if(!common_scripts\utility::flag("defend_zodiac_arrived_right"))
+  if(!common_scripts\utility::flag("defend_zodiac_arrived_right")) {
     hesh_nag_follow_vo();
+  }
 
   wait 1;
   level.hesh maps\_utility::smart_dialogue("carrier_hsh_takeoutthezodiacs");
@@ -320,8 +325,9 @@ zodiacs_defend_vo() {
   wait 4;
   var_0 = get_closest_ally();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 maps\_utility::smart_dialogue("carrier_us2_mandown");
+  }
 
   wait 2;
   level.hesh maps\_utility::smart_dialogue("carrier_hsh_takeoutthezodiacs");
@@ -332,8 +338,9 @@ zodiacs_defend_vo() {
   wait 5;
   var_0 = get_closest_ally();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 maps\_utility::smart_dialogue("carrier_us2_clearthoseropes");
+  }
 }
 
 zodiac_defend_clear_vo() {
@@ -341,16 +348,18 @@ zodiac_defend_clear_vo() {
   defend_zodiac_waittill_enemies_remaining(1, 999);
   var_0 = get_closest_ally();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 maps\_utility::smart_dialogue("carrier_us2_ropesclear");
+  }
 }
 
 intermission_vo() {
   wait 3;
   var_0 = get_closest_ally();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 maps\_utility::smart_dialogue("carrier_us2_mandown");
+  }
 
   wait 4;
   level.hesh maps\_utility::smart_dialogue("carrier_hsh_takeoutthezodiacs");
@@ -380,8 +389,9 @@ run_enemies() {
   thread initial_drone_allies();
   waittill_kickoff_zodiac();
 
-  if(!common_scripts\utility::flag("dz_warning_right") && !common_scripts\utility::flag("dz_warning_front") && !common_scripts\utility::flag("dz_warning_rear"))
+  if(!common_scripts\utility::flag("dz_warning_right") && !common_scripts\utility::flag("dz_warning_front") && !common_scripts\utility::flag("dz_warning_rear")) {
     thread maps\_utility::autosave_now();
+  }
 
   common_scripts\utility::flag_set("defend_zodiac_wave_01");
   maps\_utility::delaythread(3.5, ::initial_rpgs);
@@ -511,16 +521,18 @@ lookdown_zodiacs() {
     return;
   }
   foreach(var_2 in var_0) {
-    if(player_can_see(var_2))
+    if(player_can_see(var_2)) {
       return;
+    }
   }
 
   var_4 = maps\carrier_code_zodiac::spawn_zodiacs("defend_zodiac_05");
 }
 
 player_can_see(var_0) {
-  if(sighttracepassed(level.player getEye(), var_0.origin, 0, level.player))
+  if(sighttracepassed(level.player getEye(), var_0.origin, 0, level.player)) {
     return 1;
+  }
 
   return 0;
 }
@@ -550,16 +562,18 @@ initial_climb_over() {
   var_0 notify("stop_loop");
 
   if(isalive(var_0)) {
-    if(isDefined(var_0.magic_bullet_shield))
+    if(isDefined(var_0.magic_bullet_shield)) {
       var_0 maps\_utility::stop_magic_bullet_shield();
+    }
 
     var_0 ally_edge_death();
   }
 }
 
 climb_over(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_4 = common_scripts\utility::getstruct(var_0 + "_rappel", "targetname");
   var_5 = maps\carrier_code_zodiac::setup_rope(var_4);
@@ -577,8 +591,9 @@ climb_over(var_0, var_1, var_2, var_3) {
   var_8.ref_node = var_4;
   var_8 thread maps\carrier_code_zodiac::rappel_exit(var_4, var_1, var_2, var_3);
 
-  if(isai(var_8))
+  if(isai(var_8)) {
     var_8 maps\_utility::delaythread(var_1 + randomfloatrange(2, 3), maps\_utility::set_ignoreme, 0);
+  }
 
   return var_8;
 }
@@ -633,8 +648,9 @@ get_zodiacs(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.zodiacs) {
-    if(isDefined(var_3.saved_targetname) && var_3.saved_targetname == var_0)
+    if(isDefined(var_3.saved_targetname) && var_3.saved_targetname == var_0) {
       var_1 = common_scripts\utility::array_add(var_1, var_3);
+    }
   }
 
   return var_1;
@@ -644,8 +660,9 @@ get_gunboats(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.gunboats) {
-    if(isDefined(var_3.saved_targetname) && var_3.saved_targetname == var_0)
+    if(isDefined(var_3.saved_targetname) && var_3.saved_targetname == var_0) {
       var_1 = common_scripts\utility::array_add(var_1, var_3);
+    }
   }
 
   return var_1;
@@ -686,8 +703,9 @@ osprey_intermission() {
   var_2 = getent("inhibit_intermission_climbover", "targetname");
   var_3 = getaicount("all");
 
-  if(var_3 < 20 && !level.player istouching(var_2))
+  if(var_3 < 20 && !level.player istouching(var_2)) {
     thread intermission_climbover();
+  }
   else {}
 }
 
@@ -713,19 +731,22 @@ intermission_climbover() {
     var_1 ally_push();
   }
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     var_1 maps\_utility::stop_magic_bullet_shield();
+  }
 
   wait 1;
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     var_1 kill();
+  }
 }
 
 cleanup_intermission_enemies() {
   foreach(var_1 in level.dz_intermission_enemies) {
-    if(isalive(var_1))
+    if(isalive(var_1)) {
       var_1 kill();
+    }
   }
 }
 
@@ -775,16 +796,18 @@ get_all_enemies() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "enemy_defend_zodiac")
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "enemy_defend_zodiac") {
       var_1 = common_scripts\utility::array_add(var_1, var_3);
+    }
   }
 
   var_5 = level.drones["axis"].array;
   var_6 = [];
 
   foreach(var_8 in var_5) {
-    if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "enemy_defend_zodiac")
+    if(isDefined(var_8.script_noteworthy) && var_8.script_noteworthy == "enemy_defend_zodiac") {
       var_6 = common_scripts\utility::array_add(var_6, var_8);
+    }
   }
 
   return common_scripts\utility::array_combine(var_1, var_6);
@@ -795,8 +818,9 @@ run_helis() {
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("dz_heli_01");
 
   foreach(var_2 in var_0.riders) {
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       var_2.accuracy = var_2.accuracy / 2;
+    }
   }
 
   var_0 thread update_heli_crash_location();
@@ -805,8 +829,9 @@ run_helis() {
   var_0 maps\_vehicle::godoff();
   level.player waittill("using_depth_charge");
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 delete();
+  }
 }
 
 update_heli_crash_location() {
@@ -912,8 +937,9 @@ run_jet_takeoff() {
 }
 
 run_allies(var_0) {
-  if(maps\carrier_code::eval(var_0))
+  if(maps\carrier_code::eval(var_0)) {
     spawn_checkpoint_only_allies();
+  }
   else {
     var_1 = getEntArray("defend_zodiac_ally", "targetname");
     maps\_utility::array_delete(var_1);
@@ -929,8 +955,9 @@ run_allies(var_0) {
     common_scripts\utility::array_thread(var_2, ::ally_think);
 
     if(var_2.size < 5) {
-      for(var_3 = var_2.size; var_3 < 4; var_3++)
+      for(var_3 = var_2.size; var_3 < 4; var_3++) {
         thread defend_zodiac_spawn_reinforcement();
+      }
     }
   }
 
@@ -978,8 +1005,9 @@ ally_think() {
   self.goalradius = 8;
   self.downaimlimit = -90;
 
-  if(!isDefined(level.zodiac_allies))
+  if(!isDefined(level.zodiac_allies)) {
     level.zodiac_allies = [];
+  }
 
   level.zodiac_allies = common_scripts\utility::array_add(level.zodiac_allies, self);
   thread traversal_hack();
@@ -994,8 +1022,9 @@ ally_node_logic() {
     self.mynode = var_0;
     thread ally_edge_think(var_0);
   } else {
-    for(var_0 = get_free_shoot_node(); !isDefined(var_0); var_0 = get_free_shoot_node())
+    for(var_0 = get_free_shoot_node(); !isDefined(var_0); var_0 = get_free_shoot_node()) {
       wait 1;
+    }
 
     self.mynode = var_0;
     thread ally_shoot_think(var_0);
@@ -1004,8 +1033,9 @@ ally_node_logic() {
 
 get_free_edge_node() {
   foreach(var_1 in level.ally_edge_nodes) {
-    if(!isDefined(var_1.reserved) || !var_1.reserved)
+    if(!isDefined(var_1.reserved) || !var_1.reserved) {
       return var_1;
+    }
   }
 
   return undefined;
@@ -1013,8 +1043,9 @@ get_free_edge_node() {
 
 get_free_shoot_node() {
   foreach(var_1 in level.ally_shoot_nodes) {
-    if(!isDefined(var_1.reserved) || !var_1.reserved)
+    if(!isDefined(var_1.reserved) || !var_1.reserved) {
       return var_1;
+    }
   }
 
   return undefined;
@@ -1081,8 +1112,9 @@ ally_edge_think(var_0) {
   maps\_utility::set_ignoreall(0);
 
   for(;;) {
-    if(should_lean())
+    if(should_lean()) {
       lean_anim(var_0, 1);
+    }
     else {
       thread ally_shoot_think(var_0, 1);
       return;
@@ -1096,8 +1128,9 @@ run_ally_edge_death() {
   self endon("death");
   wait(randomfloatrange(2, 3));
 
-  if(self.leaning && randomint(100) > 80 && !maps\carrier_code::eval(self.no_edge_death))
+  if(self.leaning && randomint(100) > 80 && !maps\carrier_code::eval(self.no_edge_death)) {
     thread ally_edge_death();
+  }
 }
 
 ally_edge_death() {
@@ -1119,8 +1152,9 @@ lean_anim(var_0, var_1) {
   var_2 = var_0;
   self.goal_node = var_2;
 
-  if(!maps\carrier_code::eval(var_1))
+  if(!maps\carrier_code::eval(var_1)) {
     var_2 maps\_anim::anim_generic_reach(self, "carrier_rappel_defend_ally_lean_enter");
+  }
 
   var_2 maps\_anim::anim_generic(self, "carrier_rappel_defend_ally_lean_enter");
   self.leaning = 1;
@@ -1128,8 +1162,9 @@ lean_anim(var_0, var_1) {
   var_3 = 25;
 
   while(should_lean()) {
-    if(self != level.hesh)
+    if(self != level.hesh) {
       thread run_ally_edge_death();
+    }
 
     self notify("stop_loop");
     thread maps\_anim::anim_generic_loop(self, "carrier_rappel_defend_ally_lean_shoot_long", "stop_loop");
@@ -1162,8 +1197,9 @@ should_lean() {
   var_3 = [];
 
   foreach(var_5 in var_2) {
-    if(!isspawner(var_5) && isalive(var_5))
+    if(!isspawner(var_5) && isalive(var_5)) {
       var_3[var_3.size] = var_5;
+    }
   }
 
   foreach(var_8 in var_3) {
@@ -1171,8 +1207,9 @@ should_lean() {
     var_10 = distance2dsquared(self.origin, var_9);
     var_11 = maps\_utility::players_within_distance(64, self.origin);
 
-    if(var_10 <= var_0 * var_0 && !var_11)
+    if(var_10 <= var_0 * var_0 && !var_11) {
       return 1;
+    }
   }
 
   return 0;
@@ -1181,13 +1218,15 @@ should_lean() {
 ally_cleanup() {
   common_scripts\utility::flag_wait("defend_zodiac_finished");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     thread disable_defend_zodiac_replace_on_death();
+  }
 
   common_scripts\utility::flag_wait("defend_zodiac_ally_cleanup");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self kill();
+  }
 }
 
 ally_drone_cleanup() {
@@ -1196,8 +1235,9 @@ ally_drone_cleanup() {
   for(;;) {
     if(level.dead_ally_drones.size > 6) {
       while(level.dead_ally_drones.size > 6) {
-        if(isDefined(level.dead_ally_drones[0]))
+        if(isDefined(level.dead_ally_drones[0])) {
           level.dead_ally_drones[0] delete();
+        }
 
         level.dead_ally_drones = maps\_utility::array_remove_index(level.dead_ally_drones, 0);
       }
@@ -1227,8 +1267,9 @@ kill_push_enemy() {
   maps\carrier_code_zodiac::splash_on_hit_water_ragdoll();
   wait 1;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 defend_zodiac_replace_on_death() {
@@ -1246,8 +1287,9 @@ defend_zodiac_replace_on_death() {
 defend_zodiac_spawn_reinforcement() {
   var_0 = defend_zodiac_spawn_hidden_reinforcement();
 
-  if(isDefined(level.friendly_startup_thread))
+  if(isDefined(level.friendly_startup_thread)) {
     var_0 thread[[level.friendly_startup_thread]]();
+  }
 }
 
 defend_zodiac_spawn_hidden_reinforcement() {
@@ -1255,8 +1297,9 @@ defend_zodiac_spawn_hidden_reinforcement() {
 
   for(;;) {
     if(!maps\_colors::respawn_friendlies_without_vision_check()) {
-      if(!isDefined(level.friendly_respawn_vision_checker_thread))
+      if(!isDefined(level.friendly_respawn_vision_checker_thread)) {
         thread maps\_colors::friendly_spawner_vision_checker();
+      }
 
       for(;;) {
         maps\_colors::wait_until_vision_check_satisfied_or_disabled();
@@ -1348,8 +1391,9 @@ run_osprey_nag_vo() {
     level.hesh maps\_utility::smart_dialogue(var_0[var_1]);
     var_1++;
 
-    if(var_1 >= var_0.size)
+    if(var_1 >= var_0.size) {
       var_1 = 0;
+    }
 
     wait(randomfloatrange(8, 12));
   }
@@ -1385,8 +1429,9 @@ run_osprey_hit_vo() {
     } else if(var_1 >= 2) {
       var_2 = ["carrier_com_multiplehitstitanthreeone", "carrier_ttn_multipleboatsconfirmedhit", "carrier_hsh_goodhits", "carrier_hsh_multiplehits"];
 
-      if(level.osprey_hit_zodiacs > 0)
+      if(level.osprey_hit_zodiacs > 0) {
         var_2 = common_scripts\utility::array_add(var_2, "carrier_ttn_zodiacsdown");
+      }
 
       wait 1;
       maps\_utility::smart_radio_dialogue(var_2[randomint(var_2.size)]);
@@ -1444,8 +1489,9 @@ run_enemy_destroyer_2() {
   level.fed_destroyer_guys = maps\_utility::array_spawn_targetname("osprey_destroyer_guys");
 
   foreach(var_1 in level.fed_destroyer_guys) {
-    if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "first_run_only")
+    if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "first_run_only") {
       var_1 delete();
+    }
   }
 
   level.player waittill("depth_charge_exit");
@@ -1466,13 +1512,15 @@ run_enemy_destroyer_gun() {
 
 cleanup_enemy_destroyer() {
   foreach(var_1 in level.destroyer_targets_big) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
   }
 
   foreach(var_4 in level.fed_destroyer_guys) {
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 delete();
+    }
   }
 }
 
@@ -1579,8 +1627,9 @@ gunship_attack() {
   setsaveddvar("ai_friendlyFireBlockDuration", var_3);
   thread cleanup_boats();
 
-  if(isDefined(level.defend_zodiac_osprey))
+  if(isDefined(level.defend_zodiac_osprey)) {
     level.defend_zodiac_osprey delete();
+  }
 }
 
 waittill_knockdown_moment() {
@@ -1593,8 +1642,9 @@ gunship_damage() {
   common_scripts\utility::array_thread(level.deck_ac130_dmg_clip, maps\_utility::show_entity);
   var_0 = common_scripts\utility::getstructarray("deck_ac130_dmg_badplace", "targetname");
 
-  foreach(var_3, var_2 in var_0)
+  foreach(var_3, var_2 in var_0) {
   badplace_cylinder("deck_ac130_dmg_badplace" + var_3, -1, var_2.origin, var_2.radius, 100, "allies");
+  }
 
   level.deck_ac130_dmg_badplace_size = var_0.size;
   common_scripts\utility::array_thread(level.elevator_ac130_dmg, maps\carrier_code::show_and_raise_entity);
@@ -1605,8 +1655,9 @@ gunship_damage() {
   common_scripts\utility::array_thread(getEntArray("odin_impact_objects_2", "targetname"), maps\_utility::hide_entity);
   var_4 = getscriptablearray("scriptable_destructible_barrel", "targetname");
 
-  foreach(var_6 in var_4)
+  foreach(var_6 in var_4) {
   var_6 delete();
+  }
 
   var_8 = getEntArray("deck_combat_weapons", "targetname");
   maps\_utility::array_delete(var_8);
@@ -1642,8 +1693,9 @@ allies_gunship_run() {
   var_0 = getent("gunship_trans_ally_runto_elevator_vol", "targetname");
 
   foreach(var_2 in level.zodiac_allies) {
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       var_2 thread single_ally_run(var_0);
+    }
   }
 }
 
@@ -1651,15 +1703,17 @@ single_ally_run(var_0) {
   self endon("death");
   self notify("stop_edge_think");
 
-  if(maps\carrier_code::eval(self.leaning))
+  if(maps\carrier_code::eval(self.leaning)) {
     stop_lean();
+  }
 
   maps\_utility::enable_sprint();
   self setgoalpos(self.origin);
   self setgoalvolumeauto(var_0);
 
-  while(!self istouching(var_0))
+  while(!self istouching(var_0)) {
     common_scripts\utility::waitframe();
+  }
 
   thread maps\carrier_code::run_to_volume_and_delete("gunship_trans_ally_runto_vol");
 }
@@ -1683,10 +1737,12 @@ hesh_gunship_run() {
     } else
       var_1 thread maps\_anim::anim_single_solo(level.hesh, "carrier_rappel_defend_hesh_dialog");
   } else {
-    if(maps\carrier_code::eval(level.hesh.leaning))
+    if(maps\carrier_code::eval(level.hesh.leaning)) {
       level.hesh stop_lean();
-    else
+    }
+    else {
       wait 2;
+    }
 
     level.hesh thread maps\_utility::smart_dialogue("carrier_hsh_wevegottoget_3");
   }
@@ -1694,10 +1750,12 @@ hesh_gunship_run() {
   level.hesh disable_flinch();
   level.hesh maps\_utility::enable_sprint();
 
-  if(!maps\carrier_code::eval(level.player.near_knockdown))
+  if(!maps\carrier_code::eval(level.player.near_knockdown)) {
     wait 2;
-  else
+  }
+  else {
     wait 0.1;
+  }
 
   common_scripts\utility::flag_set("gunship_attacking");
   common_scripts\utility::flag_set("obj_defend_carrier_complete");
@@ -1712,8 +1770,9 @@ hesh_gunship_run() {
 }
 
 hesh_close_to_knockdown(var_0) {
-  while(distance2d(level.hesh.origin, var_0.origin) > 80)
+  while(distance2d(level.hesh.origin, var_0.origin) > 80) {
     common_scripts\utility::waitframe();
+  }
 
   common_scripts\utility::flag_set("hesh_close_to_knockdown");
 }
@@ -1755,10 +1814,12 @@ reset_player_speed() {
 }
 
 teleport_hesh_post_osprey() {
-  if(level.player.origin[2] > 1380)
+  if(level.player.origin[2] > 1380) {
     var_0 = common_scripts\utility::getstructarray("hesh_post_osprey_teleport_deck", "targetname");
-  else
+  }
+  else {
     var_0 = common_scripts\utility::getstructarray("hesh_post_osprey_teleport", "targetname");
+  }
 
   var_0 = sortbydistance(var_0, level.player.origin + (0, 550, 0));
   var_1 = var_0[0];
@@ -1884,16 +1945,18 @@ elevator_105(var_0) {
   common_scripts\utility::waitframe();
 
   foreach(var_4 in var_1) {
-    if(isalive(var_4))
+    if(isalive(var_4)) {
       var_4 kill();
+    }
   }
 }
 
 elevator_105_guys(var_0) {
   var_1 = maps\_utility::array_spawn_targetname("dz_elevator_explode_guy");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 maps\_utility::magic_bullet_shield(1);
+  }
 
   return var_1;
 }
@@ -1906,8 +1969,9 @@ elevator_lean_over(var_0) {
   self.grenadeammo = 0;
   var_1 = common_scripts\utility::getstruct(self.target, "targetname");
 
-  if(!maps\carrier_code::eval(var_0))
+  if(!maps\carrier_code::eval(var_0)) {
     var_1 maps\_anim::anim_generic_reach(self, "carrier_rappel_defend_ally_lean_enter");
+  }
 
   var_1 maps\_anim::anim_generic(self, "carrier_rappel_defend_ally_lean_enter");
 
@@ -1983,18 +2047,21 @@ spawner_cleanup() {
   var_2 = vehicle_getspawnerarray();
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4.targetname) && (issubstr(var_4.targetname, "defend_zodiac") || issubstr(var_4.targetname, "defend_gunboat")))
+    if(isDefined(var_4.targetname) && (issubstr(var_4.targetname, "defend_zodiac") || issubstr(var_4.targetname, "defend_gunboat"))) {
       var_4 delete();
+    }
   }
 
   foreach(var_7 in var_0) {
-    if(isDefined(var_7) && isspawner(var_7))
+    if(isDefined(var_7) && isspawner(var_7)) {
       var_7 delete();
+    }
   }
 
   foreach(var_7 in var_1) {
-    if(isDefined(var_7) && isspawner(var_7))
+    if(isDefined(var_7) && isspawner(var_7)) {
       var_7 delete();
+    }
   }
 }
 
@@ -2002,10 +2069,12 @@ defend_zodiac_autosave(var_0, var_1) {
   if(common_scripts\utility::flag("dz_warning_right") || common_scripts\utility::flag("dz_warning_front") || common_scripts\utility::flag("dz_warning_rear")) {
     return;
   }
-  if(maps\carrier_code::eval(var_0))
+  if(maps\carrier_code::eval(var_0)) {
     maps\_utility::autosave_now_silent();
-  else
+  }
+  else {
     maps\_utility::autosave_now();
+  }
 
   if(maps\carrier_code::eval(var_1)) {
     level.player enabledeathshield(1);
@@ -2050,8 +2119,9 @@ kill_trigger(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(common_scripts\utility::flag("defend_osprey_online") && !maps\carrier_code::eval(level.player.osprey_control))
+    if(common_scripts\utility::flag("defend_osprey_online") && !maps\carrier_code::eval(level.player.osprey_control)) {
       level.player thread maps\carrier_depth_charge::depth_charge_give_control();
+    }
 
     common_scripts\utility::flag_clear(var_1);
     common_scripts\utility::flag_clear(var_2);
@@ -2062,8 +2132,9 @@ kill_trigger(var_0, var_1, var_2, var_3) {
 
 is_touching_any(var_0) {
   foreach(var_2 in var_0) {
-    if(self istouching(var_2))
+    if(self istouching(var_2)) {
       return 1;
+    }
   }
 
   return 0;

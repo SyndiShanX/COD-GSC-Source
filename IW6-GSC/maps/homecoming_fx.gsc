@@ -287,10 +287,12 @@ lgt_init() {
   var_0 = getent("chopper_sun", "script_noteworthy");
 
   if(isDefined(var_0)) {
-    if(maps\_utility::is_gen4())
+    if(maps\_utility::is_gen4()) {
       var_0 lgt_sun_intensity_ng();
-    else
+    }
+    else {
       var_0 lgt_sun_intensity_cg();
+    }
   }
 }
 
@@ -429,8 +431,9 @@ setup_volumetric_lights() {
   level.recruits_godrays = getEntArray("recruits_god_ray_emitter", "targetname");
   level.recruits_anim_light = getent("chopper_sun", "targetname");
 
-  if(isDefined(level.recruits_anim_light))
+  if(isDefined(level.recruits_anim_light)) {
     level.recruits_anim_light_source_pos = level.recruits_anim_light.origin;
+  }
 
   level.recruits_anim_light_struct = common_scripts\utility::getstruct("recruit_anim_node_l", "script_noteworthy");
   level.recruits_anim_light_smodel = spawn("script_model", level.recruits_anim_light_struct.origin);
@@ -455,8 +458,9 @@ setup_volumetric_lights() {
   level.recruits_anim_light_struct thread maps\_anim::anim_single(var_0, "hc_recruit_lightmotion");
 
   for(;;) {
-    foreach(var_2 in level.recruits_godrays)
+    foreach(var_2 in level.recruits_godrays) {
     var_2 rotateto(level.recruits_anim_light_smodel.angles, 0.1);
+    }
 
     if(isDefined(level.recruits_anim_light)) {}
 
@@ -521,15 +525,17 @@ fx_recruit_smoke_window() {
   while(!common_scripts\utility::flag("fx_stop_flak")) {
     common_scripts\utility::exploder("recruit_smoke_window");
 
-    if(randomint(2) == 1)
+    if(randomint(2) == 1) {
       common_scripts\utility::exploder("recruit_cloud_side");
+    }
 
     wait(randomfloatrange(1.0, 2.5));
   }
 
   for(;;) {
-    if(randomint(3) > 0)
+    if(randomint(3) > 0) {
       common_scripts\utility::exploder("recruit_cloud_ahead");
+    }
 
     common_scripts\utility::exploder("recruit_cloud_side");
     wait(randomfloatrange(1.0, 2.5));

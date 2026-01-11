@@ -30,11 +30,13 @@ init() {
   }
 }
 useKillstreakMortar(hardpointType) {
-  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false)
+  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) {
     return false;
+  }
   result = self maps\mp\_mortar::selectMortarLocation(hardpointType);
-  if(!isDefined(result) || !result)
+  if(!isDefined(result) || !result) {
     return false;
+  }
   return true;
 }
 mortarWaiter() {
@@ -45,28 +47,33 @@ mortarWaiter() {
     if(!isDefined(level.mortarInProgress)) {
       pos = (0, 0, 0);
       clientNum = -1;
-      if(isDefined(owner))
+      if(isDefined(owner)) {
         clientNum = owner getEntityNumber();
+      }
       artilleryiconlocation(pos, 0, 0, 1, clientNum);
     }
   }
 }
 useMortar(positions) {
-  if(self maps\mp\_killstreakrules::killstreakStart("mortar_mp", self.team) == false)
+  if(self maps\mp\_killstreakrules::killstreakStart("mortar_mp", self.team) == false) {
     return false;
+  }
   level.mortarInProgress = true;
   trace = bulletTrace(self.origin + (0, 0, 10000), self.origin, false, undefined);
-  for(i = 0; i < level.mortarSelectionCount; i++)
+  for(i = 0; i < level.mortarSelectionCount; i++) {
     positions[i] = (positions[i][0], positions[i][1], trace["position"][2] - 514);
+  }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("team", "allowHardpointStreakAfterDeath")) {
     ownerDeathCount = self.deathCount;
   } else {
     ownerDeathCount = self.pers["hardPointItemDeathCountmortar_mp"];
   }
-  if(level.teambased)
+  if(level.teambased) {
     teamType = self.team;
-  else
+  }
+  else {
     teamType = "none";
+  }
   thread doMortar(positions, self, teamType, ownerDeathCount);
   return true;
 }
@@ -130,8 +137,9 @@ getBestFlakDirection(hitpos, team) {
   negative_t = false;
   for(i = 0; i < origins.size; i++) {
     result = closest_point_on_line_to_point(hitpos, level.mapcenter, origins[i]);
-    if(result.t > 0 && negative_t)
+    if(result.t > 0 && negative_t) {
       continue;
+    }
     if(result.distsqr < closest_dist || (!negative_t && result.t < 0)) {
       closest_dist = result.distsqr;
       closest_index = i;
@@ -238,8 +246,9 @@ playSoundAfterTime(sound, time) {
   self delete();
 }
 doMortarStrike(owner, requiredDeathCount, bombsite, yaw, distance, startRatio) {
-  if(!isDefined(owner))
+  if(!isDefined(owner)) {
     return;
+  }
   fireAngle = (0, yaw, 0);
   firePos = bombsite + vector_scale(anglesToForward(fireAngle), -1 * distance);
   pitch = GetDvarFloat(#"scr_mortarAngle");
@@ -261,8 +270,9 @@ doMortarFireSound(shots, fireDelay, volleyCoord, yaw, distance) {
   }
 }
 mortarShellshock(type, duration) {
-  if(isDefined(self.beingMortarShellshocked) && self.beingMortarShellshocked)
+  if(isDefined(self.beingMortarShellshocked) && self.beingMortarShellshocked) {
     return;
+  }
   self.beingMortarShellshocked = true;
   self shellshock(type, duration);
   wait(duration + 1);
@@ -271,8 +281,9 @@ mortarShellshock(type, duration) {
 radiusMortarShellshock(pos, radius, maxduration, minduration, owner) {
   players = level.players;
   for(i = 0; i < players.size; i++) {
-    if(!isalive(players[i]))
+    if(!isalive(players[i])) {
       continue;
+    }
     playerpos = players[i].origin + (0, 0, 32);
     dist = distance(pos, playerpos);
     if(dist < radius) {
@@ -288,11 +299,13 @@ mortarDamageEntsThread() {
   self notify("mortarDamageEntsThread");
   self endon("mortarDamageEntsThread");
   for(; level.mortarDamagedEntsIndex < level.mortarDamagedEntsCount; level.mortarDamagedEntsIndex++) {
-    if(!isDefined(level.mortarDamagedEnts[level.mortarDamagedEntsIndex]))
+    if(!isDefined(level.mortarDamagedEnts[level.mortarDamagedEntsIndex])) {
       continue;
+    }
     ent = level.mortarDamagedEnts[level.mortarDamagedEntsIndex];
-    if(!isDefined(ent.entity))
+    if(!isDefined(ent.entity)) {
       continue;
+    }
     if((!ent.isPlayer && !ent.isActor) || isAlive(ent.entity)) {
       ent maps\mp\gametypes\_weapons::damageEnt(
         ent.eInflictor,
@@ -304,8 +317,9 @@ mortarDamageEntsThread() {
         vectornormalize(ent.damageCenter - ent.pos)
       );
       level.mortarDamagedEnts[level.mortarDamagedEntsIndex] = undefined;
-      if(ent.isPlayer || ent.isActor)
+      if(ent.isPlayer || ent.isActor) {
         wait(0.05);
+      }
     } else {
       level.mortarDamagedEnts[level.mortarDamagedEntsIndex] = undefined;
     }
@@ -322,10 +336,12 @@ getSingleMortarDanger(point, origin, forward) {
   perpendicularPart = diff - forwardPart;
   circlePos = perpendicularPart + forwardPart / level.mortarDangerOvalScale;
   distsq = lengthSquared(circlePos);
-  if(distsq > level.mortarDangerMaxRadius * level.mortarDangerMaxRadius)
+  if(distsq > level.mortarDangerMaxRadius * level.mortarDangerMaxRadius) {
     return 0;
-  if(distsq < level.mortarDangerMinRadius * level.mortarDangerMinRadius)
+  }
+  if(distsq < level.mortarDangerMinRadius * level.mortarDangerMinRadius) {
     return 1;
+  }
   dist = sqrt(distsq);
   distFrac = (dist - level.mortarDangerMinRadius) / (level.mortarDangerMaxRadius - level.mortarDangerMinRadius);
   assertEx(distFrac >= 0 && distFrac <= 1, distFrac);
@@ -367,15 +383,17 @@ doMortar(origins, owner, team, ownerDeathCount) {
       if(!level.hardcoreMode) {
         for(i = 0; i < players.size; i++) {
           if(isalive(players[i]) && (isDefined(players[i].team)) && (players[i].team == team)) {
-            if(pointIsInMortarArea(players[i].origin, targetpos[currentMortar]))
+            if(pointIsInMortarArea(players[i].origin, targetpos[currentMortar])) {
               players[i] DisplayGameModeMessage(&"MP_WAR_MORTAR_INBOUND_NEAR_YOUR_POSITION", "uin_alert_slideout");
+            }
           }
         }
       }
     } else {
       if(!level.hardcoreMode) {
-        if(pointIsInMortarArea(owner.origin, targetpos[currentMortar]))
+        if(pointIsInMortarArea(owner.origin, targetpos[currentMortar])) {
           owner DisplayGameModeMessage(&"MP_WAR_MORTAR_INBOUND_NEAR_YOUR_POSITION", "uin_alert_slideout");
+        }
       }
     }
   }
@@ -403,8 +421,9 @@ doMortar(origins, owner, team, ownerDeathCount) {
   owner thread mortarImpactEffects();
   startRatio = GetDvarFloatDefault(#"scr_mortarStartRatio", 0.3);
   clientNum = -1;
-  if(isDefined(owner))
+  if(isDefined(owner)) {
     clientNum = owner getEntityNumber();
+  }
   for(currentMortar = 0; currentMortar < level.mortarSelectionCount; currentMortar++) {
     artilleryiconlocation(targetpos[currentMortar], team, 1, 1, clientNum);
     callMortarStrike(owner, targetpos[currentMortar], yaws[currentMortar], flakDistance, startRatio, ownerDeathCount);

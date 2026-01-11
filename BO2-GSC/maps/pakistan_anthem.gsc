@@ -65,8 +65,9 @@ crosby_behavior() {
 init_courtyard_ai() {
   a_courtyard_enemies = [];
 
-  for(i = 0; i < 4; i++)
+  for(i = 0; i < 4; i++) {
     a_courtyard_enemies[i] = simple_spawn_single("anthem_courtyard_soldiers" + i);
+  }
 
   a_enemies = a_courtyard_enemies;
 
@@ -75,8 +76,9 @@ init_courtyard_ai() {
     ai_enemy set_ignoreme(1);
   }
 
-  foreach(e_spawner in getEntArray("btr_guys", "script_noteworthy"))
+  foreach(e_spawner in getEntArray("btr_guys", "script_noteworthy")) {
   e_spawner add_spawn_function(::btr_scene_spawn_func);
+  }
 
   run_scene_first_frame("courtyard_btr_entrance");
   level thread run_scene("courtyard_btr_director");
@@ -133,11 +135,13 @@ courtyard_btrs() {
   level.a_vh_btrs = [];
   a_start_nodes = [];
 
-  for(i = 1; i < 5; i++)
+  for(i = 1; i < 5; i++) {
     a_s_spawnpts[i] = getstruct("courtyard_btr_spawnpt" + i, "targetname");
+  }
 
-  for(i = 1; i < 5; i++)
+  for(i = 1; i < 5; i++) {
     a_start_nodes[i] = getvehiclenode("start_btr" + i, "targetname");
+  }
 
   for(i = 1; i < 5; i++) {
     level.a_vh_btrs[i] = spawn_vehicle_from_targetname("isi_btr");
@@ -163,8 +167,9 @@ courtyard_btr_logic() {
     level.a_vh_btrs[i] thread gopath();
     level.a_vh_btrs[i] thread delete_vehicle_at_end();
 
-    if(i == 3)
+    if(i == 3) {
       level thread confirm_menendez_gaz_driveaway();
+    }
 
     wait 4.0;
   }
@@ -175,8 +180,9 @@ delete_vehicle_at_end() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 courtyard_spawn_funcs() {
@@ -233,8 +239,9 @@ vtol_spawn_func() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 
   vtol_launch_ent delete();
 }
@@ -323,20 +330,27 @@ argus_enable() {
   clientnotify("enable_argus");
 
   foreach(ai_enemy in a_enemies) {
-    if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_1")
+    if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_1") {
       addargus(ai_enemy, "soldier1");
-    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_2")
+    }
+    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_2") {
       addargus(ai_enemy, "soldier2");
-    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_3")
+    }
+    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_3") {
       addargus(ai_enemy, "soldier3");
-    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_4")
+    }
+    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_4") {
       addargus(ai_enemy, "soldier4");
-    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_5")
+    }
+    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_5") {
       addargus(ai_enemy, "soldier5");
-    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_6")
+    }
+    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_6") {
       addargus(ai_enemy, "soldier6");
-    else
+    }
+    else {
       addargus(ai_enemy, "soldier6");
+    }
 
     luinotifyevent(&"hud_pak_add_poi", 1, ai_enemy getentitynumber());
   }
@@ -350,8 +364,9 @@ argus_disable() {
 }
 
 setup_doors() {
-  foreach(e_door in getEntArray("animated_door", "script_noteworthy"))
+  foreach(e_door in getEntArray("animated_door", "script_noteworthy")) {
   getent(e_door.target, "targetname") linkto(e_door, "door_hinge_jnt");
+  }
 
   run_scene_first_frame("rooftop_entrance_open");
   run_scene_first_frame("tower_chair");
@@ -364,8 +379,9 @@ setup_doors() {
 }
 
 setup_lights() {
-  foreach(m_spotlight in getEntArray("modern_spotlights", "targetname"))
+  foreach(m_spotlight in getEntArray("modern_spotlights", "targetname")) {
   playFXOnTag(getfx("courtyard_spotlight"), m_spotlight, "tag_light");
+  }
 }
 
 wall_grapple_event() {
@@ -390,14 +406,16 @@ wall_grapple_event() {
   level.player enableweapons();
   level.player enableoffhandweapons();
 
-  while(level.player fragbuttonpressed())
+  while(level.player fragbuttonpressed()) {
     wait 0.05;
+  }
 
   screen_message_create(&"PAKISTAN_SHARED_GRENADE_GRAPPLE");
   e_grapple_target = getent("grapple_target", "targetname");
 
-  while(!level.player fragbuttonpressed())
+  while(!level.player fragbuttonpressed()) {
     wait 0.05;
+  }
 
   level.player thread monitor_grapple_grenade_ammo();
   screen_message_delete();
@@ -475,8 +493,9 @@ check_grapple_target() {
   while(true) {
     add_visor_text("PAKISTAN_SHARED_GRAPPLE_STANDBY", 0);
 
-    while(!self fragbuttonpressed())
+    while(!self fragbuttonpressed()) {
       wait 0.05;
+    }
 
     remove_visor_text("PAKISTAN_SHARED_GRAPPLE_STANDBY");
 
@@ -510,18 +529,21 @@ harper_grappel() {
   level thread harper_rooftop_melee();
   run_scene("id_melee_approach_harper");
 
-  if(!flag("id_melee_success_started"))
+  if(!flag("id_melee_success_started")) {
     level thread run_scene("id_melee_approach_idle_harper");
+  }
 }
 
 harper_rooftop_melee() {
   flag_wait("id_melee_started");
 
-  if(!flag("id_melee_approach_harper_done"))
+  if(!flag("id_melee_approach_harper_done")) {
     end_scene("id_melee_approach_harper");
+  }
 
-  if(flag("id_melee_approach_idle_harper_started"))
+  if(flag("id_melee_approach_idle_harper_started")) {
     end_scene("id_melee_approach_idle_harper");
+  }
 
   wait 4;
   run_scene("id_melee_success");
@@ -571,8 +593,9 @@ grapple_rope(e_grenade) {
   s_grapple_point = getstruct("anthem_grapple_point");
   len = distance(start, s_grapple_point.origin);
 
-  if(len > 400)
+  if(len > 400) {
     len = 400;
+  }
 
   e_player_body = get_model_or_models_from_scene("anthem_grapple_player_setup", "player_body");
   rope_id = createrope(start, (0, 0, 0), len, e_grenade);
@@ -606,8 +629,9 @@ monitor_grapple_grenade_ammo() {
   self endon("grapple_done");
 
   while(true) {
-    if(self getweaponammoclip("grenade_grapple_pakistan_sp") < 1)
+    if(self getweaponammoclip("grenade_grapple_pakistan_sp") < 1) {
       self givemaxammo("grenade_grapple_pakistan_sp");
+    }
 
     wait 0.1;
   }
@@ -651,8 +675,9 @@ pregrappel_osprey_flyby() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 pregrappel_drone_flyby_logic() {
@@ -671,8 +696,9 @@ pregrappel_drone_flyby_logic() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 wall_climb_drone() {
@@ -704,8 +730,9 @@ wall_climb_drone() {
   vh_drone.delete_on_death = 1;
   vh_drone notify("death");
 
-  if(!isalive(vh_drone))
+  if(!isalive(vh_drone)) {
     vh_drone delete();
+  }
 }
 
 grapple_drone_flyby() {
@@ -730,8 +757,9 @@ grapple_drone_flyby() {
   vh_drone.delete_on_death = 1;
   vh_drone notify("death");
 
-  if(!isalive(vh_drone))
+  if(!isalive(vh_drone)) {
     vh_drone delete();
+  }
 }
 
 ground_drone_landing() {
@@ -757,8 +785,9 @@ ground_drone_landing() {
   vh_drone.delete_on_death = 1;
   vh_drone notify("death");
 
-  if(!isalive(vh_drone))
+  if(!isalive(vh_drone)) {
     vh_drone delete();
+  }
 }
 
 vehicles_rollout() {
@@ -786,8 +815,9 @@ btr_entrance_lights() {
   anim_length = getanimlength( % v_pakistan_5_3_activity_below_btr_gate_entrance_btr);
   wait(anim_length);
 
-  if(isDefined(vh_btr))
+  if(isDefined(vh_btr)) {
     vh_btr delete();
+  }
 }
 
 headlights_on() {
@@ -812,8 +842,9 @@ ambient_drone_start(n_drone) {
   vh_drone.delete_on_death = 1;
   vh_drone notify("death");
 
-  if(!isalive(vh_drone))
+  if(!isalive(vh_drone)) {
     vh_drone delete();
+  }
 
   e_spotlight_target delete();
 }
@@ -842,8 +873,9 @@ id_menendez_event() {
   level notify("id_complete");
   level thread argus_disable();
 
-  if(flag("anthem_facial_recognition_complete"))
+  if(flag("anthem_facial_recognition_complete")) {
     level thread autosave_by_name("anthem_id_complete");
+  }
 }
 
 vo_nag_id_menendez() {
@@ -859,8 +891,9 @@ surveillance_zoom_hint() {
   wait 2.0;
   level thread screen_message_create(&"PAKISTAN_SHARED_SURV_ZOOM", undefined, undefined, undefined, 5);
 
-  while(!level.player adsbuttonpressed())
+  while(!level.player adsbuttonpressed()) {
     wait 0.05;
+  }
 
   screen_message_delete();
 }
@@ -973,8 +1006,9 @@ take_train_car() {
   engine waittill("movedone");
   script_car linkto(engine);
 
-  for(i = 0; i < train_cars.size; i++)
+  for(i = 0; i < train_cars.size; i++) {
     train_cars[i] linkto(engine);
+  }
 
   level thread courtyard_btr_logic();
   playsoundatposition("evt_anthem_train_depart", engine.origin);
@@ -983,8 +1017,9 @@ take_train_car() {
   engine delete();
   script_car delete();
 
-  for(i = 0; i < train_cars.size; i++)
+  for(i = 0; i < train_cars.size; i++) {
     train_cars[i] delete();
+  }
 }
 
 spawn_rooftop_melee() {
@@ -1064,17 +1099,20 @@ id_melee_guards_alerted() {
   level.player enableweapons();
   wait 2;
 
-  if(get_ai_group_count("group_rooftop_melee"))
+  if(get_ai_group_count("group_rooftop_melee")) {
     flag_set("alert_drones");
+  }
   else {
     level.player setlowready(1);
     level.player set_ignoreme(1);
 
-    if(!flag("id_melee_approach_harper_done") && flag("id_melee_approach_harper_started"))
+    if(!flag("id_melee_approach_harper_done") && flag("id_melee_approach_harper_started")) {
       scene_wait("id_melee_approach_harper");
+    }
 
-    if(flag("id_melee_approach_idle_harper_started") && !flag("id_melee_approach_idle_harper_done"))
+    if(flag("id_melee_approach_idle_harper_started") && !flag("id_melee_approach_idle_harper_done")) {
       end_scene("id_melee_approach_idle_harper");
+    }
 
     run_scene("confirm_menendez_reach");
     run_scene("confirm_menendez");
@@ -1106,8 +1144,9 @@ guard_alerted_by_touch() {
       if(level.player.origin[0] <= ai_guard.origin[0] + 35) {
         wait 1;
 
-        if(level.player.origin[0] <= ai_guard.origin[0] + 35)
+        if(level.player.origin[0] <= ai_guard.origin[0] + 35) {
           flag_set("rooftop_guards_alerted");
+        }
       }
     }
 
@@ -1122,16 +1161,18 @@ alerted_by_gunfire() {
   while(true) {
     level.player waittill_any("weapon_fired", "grenade_fire", "grenade_launcher_fire");
 
-    if(level.player isfiring() && !issubstr(level.player getcurrentweapon(), "silencer"))
+    if(level.player isfiring() && !issubstr(level.player getcurrentweapon(), "silencer")) {
       flag_set("alert_drones");
+    }
   }
 }
 
 id_melee_approach(str_anim, str_idle) {
   run_scene(str_anim);
 
-  if(isalive(getent("id_melee_guard_ai", "targetname")))
+  if(isalive(getent("id_melee_guard_ai", "targetname"))) {
     run_scene(str_idle);
+  }
 }
 
 spawn_courtyard_runners() {
@@ -1165,8 +1206,9 @@ confirm_menendez_gaz_driveaway() {
   veh_gaz.delete_on_death = 1;
   veh_gaz notify("death");
 
-  if(!isalive(veh_gaz))
+  if(!isalive(veh_gaz)) {
     veh_gaz delete();
+  }
 }
 
 gaz_tigers_go() {
@@ -1206,8 +1248,9 @@ gaz_tigers_go() {
   vh_gaz1.delete_on_death = 1;
   vh_gaz1 notify("death");
 
-  if(!isalive(vh_gaz1))
+  if(!isalive(vh_gaz1)) {
     vh_gaz1 delete();
+  }
 
   ai_guy0 delete();
   ai_guy1 delete();
@@ -1215,8 +1258,9 @@ gaz_tigers_go() {
   vh_gaz2.delete_on_death = 1;
   vh_gaz2 notify("death");
 
-  if(!isalive(vh_gaz2))
+  if(!isalive(vh_gaz2)) {
     vh_gaz2 delete();
+  }
 
   ai_guy2 delete();
   ai_guy3 delete();
@@ -1247,8 +1291,9 @@ vehicle_delete_at_end_of_path() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 menendez_crew_pathing() {
@@ -1320,8 +1365,9 @@ dropdown_drone() {
   vh_drone.delete_on_death = 1;
   vh_drone notify("death");
 
-  if(!isalive(vh_drone))
+  if(!isalive(vh_drone)) {
     vh_drone delete();
+  }
 }
 
 drop_down_invulnerability_think() {
@@ -1512,8 +1558,9 @@ rooftop_blocker_logic() {
   level endon("player_detected");
 
   while(true) {
-    if(level.player.origin[1] <= self.origin[1] + 50 && level.player.origin[0] >= self.origin[0] - 300)
+    if(level.player.origin[1] <= self.origin[1] + 50 && level.player.origin[0] >= self.origin[0] - 300) {
       flag_set("alert_drones");
+    }
 
     wait 0.1;
   }
@@ -1552,18 +1599,22 @@ spotlight_detection() {
 }
 
 surveillance_prone_hint() {
-  if(!level.console && !self gamepadusedlast())
+  if(!level.console && !self gamepadusedlast()) {
     screen_message_create(&"PAKISTAN_SHARED_HINT_PRONE_KEYBOARD");
-  else
+  }
+  else {
     screen_message_create(&"PAKISTAN_SHARED_HINT_PRONE");
+  }
 
-  if(self getstance() != "prone")
+  if(self getstance() != "prone") {
     level.harper thread say_dialog("harp_get_down_man_0", 0.5);
+  }
 
   level thread vo_prone_bridge();
 
-  while(self getstance() != "prone")
+  while(self getstance() != "prone") {
     wait 0.1;
+  }
 
   screen_message_delete();
 }
@@ -1588,8 +1639,9 @@ rooftop_spotlight_target_move() {
 
   self movex(-1500, 10);
 
-  while(self.origin[0] > -17700)
+  while(self.origin[0] > -17700) {
     wait 0.05;
+  }
 
   flag_set("searchlight_focus_off");
 }
@@ -1598,8 +1650,9 @@ detect_player_on_rooftop() {
   level endon("harper_path2_started");
 
   while(true) {
-    if(distance2dsquared(self.origin, level.player.origin) < 90000)
+    if(distance2dsquared(self.origin, level.player.origin) < 90000) {
       flag_set("alert_drones");
+    }
 
     wait 0.5;
   }
@@ -1682,8 +1735,9 @@ spotlight_dodge_fail_think() {
 rooftop_meeting_scene_setup_think() {
   trigger_wait("tower_melee_prompt_trigger");
 
-  foreach(ai_soldier in getEntArray("anthem_helipad_soldiers_ai", "targetname"))
+  foreach(ai_soldier in getEntArray("anthem_helipad_soldiers_ai", "targetname")) {
   ai_soldier set_ignoreall(1);
+  }
 }
 
 detection_fail_think() {
@@ -1756,8 +1810,9 @@ handle_surveillance_toggle() {
   flag_set("xcam_off");
   screen_message_create(&"PAKISTAN_SHARED_SURV_ACTIVATE");
 
-  while(!level.player actionslotonebuttonpressed())
+  while(!level.player actionslotonebuttonpressed()) {
     wait 0.05;
+  }
 
   screen_message_delete();
   turn_on_xcam();
@@ -1774,8 +1829,9 @@ handle_surveillance_toggle() {
   if(!flag("xcam_off")) {
     screen_message_create(&"PAKISTAN_SHARED_SURV_TOGGLE");
 
-    while(!flag("xcam_off"))
+    while(!flag("xcam_off")) {
       wait 0.05;
+    }
 
     screen_message_delete();
   }
@@ -1836,21 +1892,24 @@ vo_prone_bridge() {
   level.harper say_dialog("harp_here_they_come_bet_0", 3);
   wait 1;
 
-  if(level.player getstance() != "prone")
+  if(level.player getstance() != "prone") {
     level.harper say_dialog("harp_you_re_gonna_give_aw_0", 0.5);
+  }
 }
 
 vo_scanner_nag() {
   level endon("player_detected");
   wait 3;
 
-  if(level.str_hud_current_state != "recording")
+  if(level.str_hud_current_state != "recording") {
     level.harper queue_dialog("harp_keep_the_scanner_on_0", 1);
+  }
 
   wait 3;
 
-  if(level.str_hud_current_state != "recording")
+  if(level.str_hud_current_state != "recording") {
     level.harper queue_dialog("harp_come_on_section_s_0", 0.5);
+  }
 }
 
 turn_on_xcam() {
@@ -1865,8 +1924,9 @@ turn_on_xcam() {
   if(level.wiiu) {
     controller_type = level.player getcontrollertype();
 
-    if(controller_type == "remote")
+    if(controller_type == "remote") {
       setsaveddvar("wiiu_viewmodelTrackOffsetY", -12);
+    }
   }
 
   level.player waittill("weapon_change_complete");
@@ -1881,8 +1941,9 @@ turn_on_xcam() {
 
   level.e_xcam setclientflag(6);
 
-  if(isDefined(level.menendez))
+  if(isDefined(level.menendez)) {
     level.menendez setclientflag(3);
+  }
 
   clientnotify("xcam_on");
   wait 1.5;
@@ -1904,18 +1965,21 @@ turn_off_xcam() {
   remove_visor_text("PAKISTAN_SHARED_SURVEILLANCE_ACTIVE");
   wait 0.3;
 
-  if(level.wiiu)
+  if(level.wiiu) {
     setsaveddvar("wiiu_viewmodelTrackOffsetY", 0);
+  }
 
   add_visor_text("PAKISTAN_SHARED_SURVEILLANCE_DEACTIVATE", 3);
   maps\_glasses::perform_visor_wipe(0.5);
   wait 0.25;
 
-  if(isDefined(level.e_xcam))
+  if(isDefined(level.e_xcam)) {
     level.e_xcam clearclientflag(6);
+  }
 
-  if(isDefined(level.menendez))
+  if(isDefined(level.menendez)) {
     level.menendez clearclientflag(3);
+  }
 
   level clientnotify("surv_END");
   flag_set("xcam_off");
@@ -1967,8 +2031,9 @@ delete_drone(s_delete) {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 drone_punishment() {

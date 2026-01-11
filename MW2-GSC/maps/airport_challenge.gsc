@@ -47,8 +47,9 @@ start_common_ap_ch() {
 
   ai = getaiarray("allies");
   foreach(actor in ai) {
-    if(actor is_hero())
+    if(actor is_hero()) {
       continue;
+    }
     actor delete();
   }
 }
@@ -60,8 +61,10 @@ team_init_ch() {
 }
 
 switch_teams() {
-  if(self.team == "axis")
+  if(self.team == "axis") {
     self.team = "allies";
-  else
+  }
+  else {
     self.team = "axis";
+  }
 }

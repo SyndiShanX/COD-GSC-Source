@@ -67,8 +67,9 @@ main() {
   level.onTimeLimit = ::onTimeLimit;
   level.onPlayerScore = ::onPlayerScore;
 
-  if(level.matchRules_damageMultiplier || level.matchRules_vampirism)
+  if(level.matchRules_damageMultiplier || level.matchRules_vampirism) {
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
+  }
 }
 
 initializeMatchRules() {
@@ -167,10 +168,12 @@ getSpawnPoint() {
     self.class = self.pers["class"];
     self.lastClass = self.pers["lastClass"];
 
-    if(cointoss())
+    if(cointoss()) {
       self maps\mp\gametypes\_menus::addToTeam("axis", true);
-    else
+    }
+    else {
       self maps\mp\gametypes\_menus::addToTeam("allies", true);
+    }
   }
 
   spawnPoints = maps\mp\gametypes\_spawnlogic::getTeamSpawnPoints(self.pers["team"]);
@@ -261,8 +264,9 @@ giveNextGun(doSetSpawnWeapon) {
   self takeAllWeapons();
   _giveWeapon(newWeapon);
 
-  if(isDefined(doSetSpawnWeapon))
+  if(isDefined(doSetSpawnWeapon)) {
     self setSpawnWeapon(newWeapon);
+  }
 
   self.pers["primaryWeapon"] = newWeapon;
   self.primaryWeapon = newWeapon;
@@ -293,15 +297,19 @@ onTimeLimit() {
   level.finalKillCam_winner = "none";
   winners = getHighestProgressedPlayers();
 
-  if(!isDefined(winners) || !winners.size)
+  if(!isDefined(winners) || !winners.size) {
     thread maps\mp\gametypes\_gamelogic::endGame("tie", game["end_reason"]["time_limit_reached"]);
-  else if(winners.size == 1)
+  }
+  else if(winners.size == 1) {
     thread maps\mp\gametypes\_gamelogic::endGame(winners[0], game["end_reason"]["time_limit_reached"]);
+  }
   else {
-    if(winners[winners.size - 1].gunGameGunIndex > winners[winners.size - 2].gunGameGunIndex)
+    if(winners[winners.size - 1].gunGameGunIndex > winners[winners.size - 2].gunGameGunIndex) {
       thread maps\mp\gametypes\_gamelogic::endGame(winners[winners.size - 1], game["end_reason"]["time_limit_reached"]);
-    else
+    }
+    else {
       thread maps\mp\gametypes\_gamelogic::endGame("tie", game["end_reason"]["time_limit_reached"]);
+    }
   }
 }
 
@@ -346,11 +354,13 @@ setGuns() {
   level.selectedWeapons = [];
 
   numGuns = 0;
-  if(isUsingMatchRulesData())
+  if(isUsingMatchRulesData()) {
     numGuns = GetMatchRulesData("gunData", "numGuns");
+  }
 
-  if(numGuns > 20)
+  if(numGuns > 20) {
     numGuns = 20;
+  }
 
   if(numGuns) {
     for(i = 0; i < numGuns; i++) {

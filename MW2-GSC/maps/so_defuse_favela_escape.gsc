@@ -102,8 +102,9 @@ defuse_objectives() {
     obj_id = flag_wait("defuse_update_score"); // obj_id passed from ::briefcase_defuse( ... )
     flag_clear("defuse_update_score");
 
-    if(isDefined(obj_id))
+    if(isDefined(obj_id)) {
       objective_state(obj_id, "done");
+    }
   }
 
   flag_set("defuse_complete");
@@ -190,8 +191,9 @@ change_combatmode_trigger() {
 
     ai_array = getaiarray("axis");
     foreach(ai in ai_array) {
-      if(distancesquared(ai.origin, origin_ent.origin) > dist_sqrd)
+      if(distancesquared(ai.origin, origin_ent.origin) > dist_sqrd) {
         continue;
+      }
 
       ai notify("stop_going_to_node");
       ai.combatMode = "cover";
@@ -237,23 +239,26 @@ clean_up_volume() {
       }
     }
 
-    if(!player_in_volume)
+    if(!player_in_volume) {
       level notify("clean_up", volume.script_group);
+    }
   }
 }
 
 clean_up_spawnfunc() {
   self endon("death");
 
-  if(!isDefined(self.script_group))
+  if(!isDefined(self.script_group)) {
     return;
+  }
 
   spawner = self.spawner;
 
   while(true) {
     level waittill("clean_up", script_group);
-    if(self.script_group != script_group)
+    if(self.script_group != script_group) {
       continue;
+    }
 
     // to avoid multiple traces on the same frame
     wait randomfloat(.3);
@@ -281,8 +286,9 @@ clean_up_respawn_trigger() {
     while(true) {
       level waittill("clean_up", script_group);
 
-      if(self.script_group != script_group)
+      if(self.script_group != script_group) {
         continue;
+      }
 
       self thread maps\_spawner::trigger_spawner(self);
       break;
@@ -333,8 +339,9 @@ civilian_death() {
 
   self waittill("death", killer, type);
 
-  if(!isplayer(killer))
+  if(!isplayer(killer)) {
     return;
+  }
 
   so_force_deadquote("@SO_DEFUSE_FAVELA_ESCAPE_MISSION_FAILED_CIVILIAN");
   thread missionfailedwrapper();
@@ -343,16 +350,20 @@ civilian_death() {
 ai_on_death() {
   self waittill("death", attacker, cause);
 
-  if(!isplayer(attacker))
+  if(!isplayer(attacker)) {
     return;
+  }
 
   attacker.defuse_kills++;
-  if(self isFlashed())
+  if(self isFlashed()) {
     attacker.defuse_flashed_kills++;
-  if(common_scripts\_destructible::getDamageType(cause) == "splash")
+  }
+  if(common_scripts\_destructible::getDamageType(cause) == "splash") {
     attacker.defuse_frag_kills++;
-  if(common_scripts\_destructible::getDamageType(cause) == "melee")
+  }
+  if(common_scripts\_destructible::getDamageType(cause) == "melee") {
     attacker.defuse_knife_kills++;
+  }
 
   flag_set("defuse_update_score");
 }
@@ -467,8 +478,9 @@ defuse_use_bar(fill_time, briefcase) {
 
 notify_area_clear() {
   if(isDefined(level.area_clear_time)) {
-    if((level.area_clear_time + 5000) > gettime())
+    if((level.area_clear_time + 5000) > gettime()) {
       return;
+    }
   }
 
   level.area_clear_time = gettime();
@@ -476,12 +488,15 @@ notify_area_clear() {
 }
 
 use_active() {
-  if(!self UseButtonPressed())
+  if(!self UseButtonPressed()) {
     return false;
-  if(flag("special_op_failed"))
+  }
+  if(flag("special_op_failed")) {
     return false;
-  if(self ent_flag_exist("coop_downed") && self ent_flag("coop_downed"))
+  }
+  if(self ent_flag_exist("coop_downed") && self ent_flag("coop_downed")) {
     return false;
+  }
 
   return true;
 }

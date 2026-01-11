@@ -55,12 +55,14 @@ main() {
 
 delete_on_veteran() {
   assert(isDefined(level.gameskill));
-  if(level.gameskill != 3)
+  if(level.gameskill != 3) {
     return;
+  }
 
   delete_ents = getEntArray("delete_on_veteran", "script_noteworthy");
-  foreach(ent in delete_ents)
+  foreach(ent in delete_ents) {
   ent delete();
+  }
 }
 
 so_favela_setup_regular() {
@@ -112,11 +114,13 @@ so_favela_init() {
 
   // Remove unwanted weapons
   sentries = getEntArray("misc_turret", "classname");
-  foreach(sentry in sentries)
+  foreach(sentry in sentries) {
   sentry Delete();
+  }
   stingers = getEntArray("weapon_stinger", "classname");
-  foreach(stinger in stingers)
+  foreach(stinger in stingers) {
   stinger Delete();
+  }
 
   assert(isDefined(level.gameskill));
 
@@ -190,8 +194,9 @@ start_so_favela() {
   first_wave_trigs = [];
   first_wave_trigs[0] = seeker_spawn_trig;
 
-  if(randomint(100) > 66)
+  if(randomint(100) > 66) {
     first_wave_trigs[1] = original_roof_spawn_trig;
+  }
 
   favela_spawn_ambush_trigger = getent("so_favela_ambush_spawn_trigger", "script_noteworthy");
 
@@ -213,16 +218,19 @@ start_so_favela() {
 
 // takes both array of triggers or just one
 spawn_wave_by_trigger(trigger) {
-  foreach(trig in trigger)
+  foreach(trig in trigger) {
   trig notify("trigger");
+  }
 }
 
 spawn_enemy_secondary_wave(trigger, max_spawned) {
   spawn_trig = [];
-  if(!isArray(trigger))
+  if(!isArray(trigger)) {
     spawn_trig[0] = trigger;
-  else
+  }
+  else {
     spawn_trig = trigger;
+  }
 
   if(!isDefined(max_spawned) || max_spawned < 0) {
     spawn_wave_by_trigger(spawn_trig);
@@ -242,8 +250,9 @@ spawn_enemy_secondary_wave(trigger, max_spawned) {
         spawner.count = 1;
         guy = spawner spawn_ai();
 
-        if(!spawn_failed(guy))
+        if(!spawn_failed(guy)) {
           already_spawned++;
+        }
       }
     }
   }
@@ -314,15 +323,17 @@ enemy_population_watch( delay, sample_duration )
 	{
 		population_data[ population_data.size ] = getAiArray( "axis" ).size;
 		
-		while( population_data.size > repeat )
+		while( population_data.size > repeat ) {
 			population_data = queue_push( population_data );
+		}
 		
 		level.population_data = population_data;
 		
 		// avg population over duration
 		sum = 0;
-		foreach ( data in population_data )
+		foreach ( data in population_data ) {
 			sum += data;
+		}
 
 		level.current_enemy_population = int( sum/population_data.size );
 		flag_set( "enemy_population_info_available" );
@@ -334,15 +345,17 @@ enemy_population_watch( delay, sample_duration )
 
 queue_push(array) {
   newArray = [];
-  for(i = 1; i < (array.size - 1); i++)
+  for(i = 1; i < (array.size - 1); i++) {
     newArray[newArray.size] = array[i];
+  }
 
   return newArray;
 }
 
 doggy_attack() {
-  if(level.max_dogs_at_once <= 0)
+  if(level.max_dogs_at_once <= 0) {
     return;
+  }
 
   level endon("special_op_terminated");
 
@@ -350,8 +363,9 @@ doggy_attack() {
 
   while(1) {
     level waittill("enemy_downed");
-    if(should_release_dog())
+    if(should_release_dog()) {
       level notify("who_let_the_dogs_out");
+    }
   }
 }
 
@@ -381,13 +395,15 @@ custom_eog_summary() {
   foreach(player in level.players) {
     player add_custom_eog_summary_line("@SPECIAL_OPS_UI_KILLS", player.stats["kills"] - player.dogs_killed);
     player add_custom_eog_summary_line("@SO_KILLSPREE_FAVELA_KILLS_CIVILIANS", player.civilians_killed);
-    if(level.max_dogs_at_once > 0)
+    if(level.max_dogs_at_once > 0) {
       player add_custom_eog_summary_line("@SO_KILLSPREE_FAVELA_KILLS_DOGS", player.dogs_killed);
+    }
 
     if(is_coop_online()) {
       other_player = get_other_player(player);
-      if(level.max_dogs_at_once <= 0)
+      if(level.max_dogs_at_once <= 0) {
         player maps\_endmission::use_custom_eog_default_difficulty(other_player);
+      }
       player maps\_endmission::use_custom_eog_default_kills(other_player);
     }
   }

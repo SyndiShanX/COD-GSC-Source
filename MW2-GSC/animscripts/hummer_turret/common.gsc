@@ -309,8 +309,9 @@ guy_gets_on_turret(vehicle, pos, turret, animation) {
 
   self.no_ai = true;
   animation = % humvee_passenger_2_turret;
-  if(!isDefined(animation))
+  if(!isDefined(animation)) {
     animation = self.passenger_2_turret_anim;
+  }
 
   // get the origin/angles of the vehicle tag where this guy is riding
   animpos = maps\_vehicle_aianim::anim_pos(vehicle, pos);
@@ -695,8 +696,9 @@ DoCustomAnim(turret, anime, centerTurretFirst) {
   for(;;) {
     // broke into a loop so I can debug the notetracks
     self waittill("special_anim", notetrack);
-    if(notetrack == "end")
+    if(notetrack == "end") {
       break;
+    }
   }
 
   // turn the ROOT down, not the anim under the root

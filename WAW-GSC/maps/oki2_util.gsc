@@ -511,8 +511,9 @@ manage_spawners_nogoal(strSquadName, mincount, maxcount, ender, spawntime, spawn
     maps\_utility::error("SQUAD MANAGER:Could not find spawners for squad " + strSquadName);
     return;
   }
-  if(!isDefined(spawntime))
+  if(!isDefined(spawntime)) {
     spawntime = 0.05;
+  }
   while(1) {
     aSquad = alive_array(strSquadName);
     okiPrint("Squad " + strSquadName + " population is " + aSquad.size);
@@ -533,8 +534,9 @@ manage_spawners_nogoal(strSquadName, mincount, maxcount, ender, spawntime, spawn
           }
         }
         spawn_index = spawn_index + 1;
-        if(spawn_index >= squad_spawn.size)
+        if(spawn_index >= squad_spawn.size) {
           spawn_index = 0;
+        }
         wait(spawntime);
       }
     }

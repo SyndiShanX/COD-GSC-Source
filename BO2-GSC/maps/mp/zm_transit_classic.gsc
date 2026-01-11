@@ -61,8 +61,9 @@ main() {
   level.ta_vaultfee = 100;
   level.ta_tellerfee = 100;
 
-  if(!isDefined(level.custom_ai_type))
+  if(!isDefined(level.custom_ai_type)) {
     level.custom_ai_type = [];
+  }
 
   level.custom_ai_type[level.custom_ai_type.size] = maps\mp\zombies\_zm_ai_screecher::init;
   level.custom_ai_type[level.custom_ai_type.size] = maps\mp\zombies\_zm_ai_avogadro::init;
@@ -127,8 +128,9 @@ zm_traversal_override(traversealias) {
   sndchance = 0;
 
   if(!(isDefined(self.isscreecher) && self.isscreecher) && !(isDefined(self.is_avogadro) && self.is_avogadro)) {
-    if(isDefined(self.traversestartnode) && isDefined(self.traversestartnode.script_string) && self.traversestartnode.script_string == "ignore_traverse_override")
+    if(isDefined(self.traversestartnode) && isDefined(self.traversestartnode.script_string) && self.traversestartnode.script_string == "ignore_traverse_override") {
       return traversealias;
+    }
 
     switch (traversealias) {
       case "jump_down_48":
@@ -160,8 +162,9 @@ zm_traversal_override(traversealias) {
     }
 
     if(chance != 0 && randomint(100) <= chance) {
-      if(isDefined(sndalias) && randomint(100) <= sndchance)
+      if(isDefined(sndalias) && randomint(100) <= sndchance) {
         playsoundatposition(sndalias, self.origin);
+      }
 
       traversealias = traversealias + suffix;
     }
@@ -176,10 +179,12 @@ init_bus() {
 }
 
 closest_player_transit(origin, players) {
-  if(isDefined(level.the_bus) && level.the_bus.numaliveplayersridingbus > 0 || !(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths))
+  if(isDefined(level.the_bus) && level.the_bus.numaliveplayersridingbus > 0 || !(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths)) {
     player = getclosest(origin, players);
-  else
+  }
+  else {
     player = get_closest_player_using_paths(origin, players);
+  }
 
   return player;
 }
@@ -223,18 +228,21 @@ vault_breach_think() {
       continue;
     }
     if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
-      if(self.damage_state == 0)
+      if(self.damage_state == 0) {
         self.damage_state = 1;
+      }
 
       playFXOnTag(level._effect["def_explosion"], self, "tag_origin");
       self playSound("exp_vault_explode");
       self bunkerdoorrotate(1);
 
-      if(isDefined(self.script_flag))
+      if(isDefined(self.script_flag)) {
         flag_set(self.script_flag);
+      }
 
-      if(isDefined(self.clip))
+      if(isDefined(self.clip)) {
         self.clip connectpaths();
+      }
 
       wait 1;
       playsoundatposition("zmb_cha_ching_loud", self.origin);
@@ -250,13 +258,15 @@ track_clip_damage() {
 }
 
 bunkerdoorrotate(open, time) {
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 0.2;
+  }
 
   rotate = self.script_float;
 
-  if(!open)
+  if(!open) {
     rotate = rotate * -1;
+  }
 
   if(isDefined(self.script_angles)) {
     self notsolid();
@@ -282,10 +292,12 @@ collapsing_bridge_init() {
   trig thread play_delayed_sound(time);
 
   for(i = 0; i < bridge.size; i++) {
-    if(isDefined(bridge[i].script_angles))
+    if(isDefined(bridge[i].script_angles)) {
       rot_angle = bridge[i].script_angles;
-    else
+    }
+    else {
       rot_angle = (0, 0, 0);
+    }
 
     earthquake(randomfloatrange(0.5, 1), 1.5, bridge[i].origin, 1000);
     exploder(150);
@@ -342,8 +354,9 @@ bus_roof_damage() {
     self waittill("trigger", who);
 
     if(isplayer(who)) {
-      if(who getstance() == "stand")
+      if(who getstance() == "stand") {
         who dodamage(1, who.origin);
+      }
     } else if(!(isDefined(who.marked_for_death) && who.marked_for_death) && (isDefined(who.has_legs) && who.has_legs)) {
       who dodamage(who.health + 100, who.origin);
       who.marked_for_death = 1;
@@ -375,13 +388,15 @@ diner_hatch_access() {
 inert_zombies_init() {
   inert_spawn_location = getstructarray("inert_location", "script_noteworthy");
 
-  if(isDefined(inert_spawn_location))
+  if(isDefined(inert_spawn_location)) {
     array_thread(inert_spawn_location, ::spawn_inert_zombies);
+  }
 }
 
 spawn_inert_zombies() {
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   wait 0.1;
 
@@ -404,24 +419,30 @@ callback_spectator_respawn_custom_score() {
   difference = 1500 - self.score;
   money_required = 1;
 
-  if(difference >= 1000)
+  if(difference >= 1000) {
     money_required = 2;
+  }
 
   if(!sessionmodeisonlinegame()) {
-    if(!isDefined(self.account_val))
+    if(!isDefined(self.account_val)) {
       self.account_val = 0;
+    }
 
-    if(self.account_val >= money_required)
+    if(self.account_val >= money_required) {
       self.account_val = self.account_val - money_required;
-    else
+    }
+    else {
       self.account_val = 0;
+    }
   } else {
     account_val = self maps\mp\zombies\_zm_stats::get_map_stat("depositBox");
 
-    if(account_val >= money_required)
+    if(account_val >= money_required) {
       self set_map_stat("depositBox", account_val - money_required);
-    else
+    }
+    else {
       self set_map_stat("depositBox", 0);
+    }
   }
 }
 
@@ -430,8 +451,9 @@ transit_custom_deny_vox(door_buy) {
     case 0:
       alias = randomintrange(2, 5);
 
-      if(isDefined(door_buy) && door_buy)
+      if(isDefined(door_buy) && door_buy) {
         alias = undefined;
+      }
 
       self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "door_deny", undefined, alias);
       break;
@@ -444,20 +466,24 @@ transit_custom_deny_vox(door_buy) {
     case 3:
       x = randomint(100);
 
-      if(x > 66)
+      if(x > 66) {
         self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "perk_deny", undefined, 0);
-      else if(x > 33)
+      }
+      else if(x > 33) {
         self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "no_money_box", undefined, 0);
-      else
+      }
+      else {
         self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "no_money_weapon", undefined, 0);
+      }
 
       break;
   }
 }
 
 transit_custom_death_vox() {
-  if(self.characterindex != 2)
+  if(self.characterindex != 2) {
     return false;
+  }
 
   self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "pain_high");
   return true;
@@ -468,9 +494,11 @@ transit_custom_powerup_vo_response(powerup_player, powerup) {
   players = get_players();
 
   foreach(player in players) {
-    if(player == powerup_player)
+    if(player == powerup_player) {
       continue;
-    else if(distancesquared(player.origin, powerup_player.origin) < dist)
+    }
+    else if(distancesquared(player.origin, powerup_player.origin) < dist) {
       player do_player_general_vox("general", "exert_laugh", 10, 5);
+    }
   }
 }

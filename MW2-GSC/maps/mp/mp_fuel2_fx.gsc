@@ -23,6 +23,7 @@ main() {
 
   level._effect["insect_trail_runner_icbm"] = loadfx("misc/insect_trail_runner_icbm");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_fuel2_fx::main();
+  }
 }

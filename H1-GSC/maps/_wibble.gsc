@@ -10,13 +10,15 @@ set_cloth_wibble(var_0) {
 }
 
 setup_wibble_triggers(var_0, var_1, var_2, var_3, var_4) {
-  if(var_3)
+  if(var_3) {
     set_cloth_wibble(1.0);
+  }
 
   level.current_wibble_location = var_2;
 
-  if(var_4 && var_2 == "exterior" && !var_3)
+  if(var_4 && var_2 == "exterior" && !var_3) {
     set_cloth_wibble(0.5);
+  }
 
   var_5 = getEntArray("trigger_wibble", "targetname");
   common_scripts\utility::array_thread(var_5, ::wibble_trigger_think, var_0, var_1, var_4);
@@ -24,8 +26,9 @@ setup_wibble_triggers(var_0, var_1, var_2, var_3, var_4) {
 }
 
 setup_wibble_helis(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     common_scripts\utility::flag_wait(var_1);
+  }
 
   if(var_0) {
     wait 2;
@@ -81,8 +84,9 @@ wibble_trigger_think(var_0, var_1, var_2) {
 }
 
 wibble_add_heli_to_track(var_0) {
-  if(!isDefined(level.helis))
+  if(!isDefined(level.helis)) {
     level.helis = [];
+  }
 
   level.helis = common_scripts\utility::array_add(level.helis, var_0);
 }

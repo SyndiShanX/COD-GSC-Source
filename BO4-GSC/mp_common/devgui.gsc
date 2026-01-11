@@ -1072,4 +1072,3 @@ private function_57edec18() {
     waitframe(1);
   }
 }
-

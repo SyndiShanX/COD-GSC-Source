@@ -53,14 +53,18 @@ isSmallMapVersion() {
     return true;
   }
   gametype = getDvar(#"g_gametype");
-  if(gametype == "oic")
+  if(gametype == "oic") {
     return true;
-  if(gametype == "hlnd")
+  }
+  if(gametype == "hlnd") {
     return true;
-  if(gametype == "shrp")
+  }
+  if(gametype == "shrp") {
     return true;
-  if(gametype == "gun")
+  }
+  if(gametype == "gun") {
     return true;
+  }
   return false;
 }
 cosmodrome_intermission() {

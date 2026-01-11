@@ -75,10 +75,12 @@ vampire_main() {
 
 vampire_regen_health(health) {
   sav = self.maxhealth;
-  if((self.health + health) > self.maxhealth)
+  if((self.health + health) > self.maxhealth) {
     self.health = self.maxhealth;
-  else
+  }
+  else {
     self.health = self.health + health;
+  }
   self.maxhealth = sav;
 }
 
@@ -92,8 +94,9 @@ vampire_regen_damage() {
       continue;
     }
     regen = Int(damage / 3);
-    if(regen < 1)
+    if(regen < 1) {
       regen = 1;
+    }
     vampire_regen_health(regen);
   }
 }
@@ -115,8 +118,9 @@ berserker_main(cheat) {
   self endon("disconnect");
   self endon("death");
   self endon("berserker_end");
-  if(!isDefined(cheat))
+  if(!isDefined(cheat)) {
     cheat = false;
+  }
   self SetClientDvar("cg_fov", 65);
   self VisionSetBerserker(0, 0);
   self SetClientDvar("cg_gun_x", "0");
@@ -133,8 +137,9 @@ berserker_main(cheat) {
       if(self.berserker_kill_streak == 1) {
         self thread berserker_kill_timer();
       }
-      if(self.berserker_kill_streak < 3)
+      if(self.berserker_kill_streak < 3) {
         continue;
+      }
     }
     time = 0;
     while(time < 5 && (self getcurrentweapon() == "mortar_round" || self getcurrentweapon() == "satchel_charge_new" || isDefined(self.disableBerserker))) {
@@ -207,8 +212,9 @@ berserker_think() {
   wait(0.2);
   self VisionSetBerserker(2, 0.6);
   pistol = "colt";
-  if(isDefined(level.laststandpistol))
+  if(isDefined(level.laststandpistol)) {
     pistol = level.laststandpistol;
+  }
   self GiveWeapon(pistol);
   self SwitchToWeapon(pistol);
   self SetClientDvar("cg_gun_x", "-7");
@@ -299,12 +305,14 @@ sticksstones_main() {
     if(self GetCurrentWeapon() == "rocket_barrage" || self GetCurrentWeapon() == "air_support" || self GetCurrentWeapon() == "satchel_charge_new") {} else if(self GetCurrentWeapon() == "russian_flag") {} else if(!self maps\_laststand::player_is_in_laststand()) {
       weaponInventory = self GetWeaponsList();
       for(i = 0; i < weaponInventory.size; i++) {
-        if(weaponInventory[i] != "rocket_barrage" && weaponInventory[i] != "air_support" && weaponInventory[i] != "satchel_charge_new")
+        if(weaponInventory[i] != "rocket_barrage" && weaponInventory[i] != "air_support" && weaponInventory[i] != "satchel_charge_new") {
           self TakeWeapon(weaponInventory[i]);
+        }
       }
       pistol = "colt";
-      if(isDefined(level.laststandpistol))
+      if(isDefined(level.laststandpistol)) {
         pistol = level.laststandpistol;
+      }
       self GiveWeapon(pistol);
       self SwitchToWeapon(pistol);
       offhand = "fraggrenade";

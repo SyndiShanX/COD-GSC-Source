@@ -19,8 +19,9 @@ updategametypedvars() {
 isplayeroutsideofanybombsite(var_0) {
   if(isDefined(level.bombzones)) {
     foreach(var_2 in level.bombzones) {
-      if(distancesquared(self.origin, var_2.trigger.origin) < 4096)
+      if(distancesquared(self.origin, var_2.trigger.origin) < 4096) {
         return 0;
+      }
     }
   }
 
@@ -28,17 +29,20 @@ isplayeroutsideofanybombsite(var_0) {
 }
 
 onnormaldeath(var_0, var_1, var_2) {
-  if(game["state"] == "postgame" && (var_0.team == game["defenders"] || !level.bombplanted))
+  if(game["state"] == "postgame" && (var_0.team == game["defenders"] || !level.bombplanted)) {
     var_1.finalkill = 1;
+  }
 
   if(var_0.isplanting || var_0.isdefusing) {
     var_1 thread maps\mp\_events::defendobjectiveevent(var_0, var_2);
 
-    if(var_0.isplanting)
+    if(var_0.isplanting) {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_interrupt");
+    }
 
-    if(var_0.isdefusing)
+    if(var_0.isdefusing) {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_" + level.gametype + "_protector");
+    }
   }
 
   if(waseliminatedbyenemy(var_0, var_1)) {
@@ -48,11 +52,13 @@ onnormaldeath(var_0, var_1, var_2) {
 }
 
 waseliminatedbyenemy(var_0, var_1) {
-  if(maps\mp\gametypes\_damage::isfriendlyfire(var_0, var_1))
+  if(maps\mp\gametypes\_damage::isfriendlyfire(var_0, var_1)) {
     return 0;
+  }
 
-  if(var_0 maps\mp\gametypes\_playerlogic::mayspawn())
+  if(var_0 maps\mp\gametypes\_playerlogic::mayspawn()) {
     return 0;
+  }
 
   return 1;
 }
@@ -60,10 +66,12 @@ waseliminatedbyenemy(var_0, var_1) {
 onpickup(var_0) {
   maps\mp\gametypes\common_bomb_gameobject::oncarrybombpickup(var_0, game["attackers"]);
 
-  if(var_0.team == "allies")
+  if(var_0.team == "allies") {
     var_0.objective = 1;
-  else
+  }
+  else {
     var_0.objective = 2;
+  }
 
   if(isDefined(level.carrierloadouts) && isDefined(level.carrierloadouts[var_0.team])) {
     var_0.isrespawningwithbombcarrierclass = 1;
@@ -98,10 +106,12 @@ bombs() {
     level.sdbomb = maps\mp\gametypes\common_bomb_gameobject::createbombcarryobject(game["attackers"], "friendly", var_0, var_1);
     thread maps\mp\_utility::streamcarrierweaponstoplayers(level.sdbomb, [game["attackers"]], ::shouldstreamcarrierclasstoplayer);
 
-    if(game["attackers"] == "allies")
+    if(game["attackers"] == "allies") {
       maps\mp\_utility::setmlgicons(level.sdbomb, "waypoint_bomb_green");
-    else
+    }
+    else {
       maps\mp\_utility::setmlgicons(level.sdbomb, "waypoint_bomb_red");
+    }
 
     level.sdbomb.onpickup = ::onpickup;
     level.sdbomb.ondrop = ::ondrop;
@@ -126,8 +136,9 @@ bombs() {
       }
     }
   } else {
-    for(var_7 = 0; var_7 < var_3.size; var_7++)
+    for(var_7 = 0; var_7 < var_3.size; var_7++) {
       removebombzone(var_3[var_7]);
+    }
   }
 
   var_2 = common_scripts\utility::array_combine(var_2, var_3);
@@ -137,8 +148,9 @@ bombs() {
     var_1 = getEntArray(var_2[var_7].target, "targetname");
     var_8 = undefined;
 
-    if(!level.multibomb)
+    if(!level.multibomb) {
       var_8 = level.sdbomb;
+    }
 
     var_9 = maps\mp\gametypes\common_bomb_gameobject::createbombzoneobject(game["defenders"], "enemy", "any", var_0, var_8, 1);
     maps\mp\_utility::setmlgicons(var_9, "waypoint_esports_snd_target" + var_9.label + "_white");
@@ -157,8 +169,9 @@ bombs() {
     var_10 = [];
 
     for(var_11 = 0; var_11 < level.bombzones.size; var_11++) {
-      if(var_11 != var_7)
+      if(var_11 != var_7) {
         var_10[var_10.size] = level.bombzones[var_11];
+      }
     }
 
     level.bombzones[var_7].otherbombzones = var_10;
@@ -168,11 +181,13 @@ bombs() {
 }
 
 shouldstreamcarrierclasstoplayer(var_0, var_1) {
-  if(level.bombplanted)
+  if(level.bombplanted) {
     return 0;
+  }
 
-  if(isDefined(var_0.carrier) && var_0.carrier == var_1)
+  if(isDefined(var_0.carrier) && var_0.carrier == var_1) {
     return 0;
+  }
 
   return 1;
 }
@@ -187,8 +202,9 @@ removebombzone(var_0) {
     if(!isDefined(var_3.script_label)) {
       continue;
     }
-    if(issubstr(var_3.script_label, var_0.script_label) && issubstr(var_3.script_label, var_0.targetname))
+    if(issubstr(var_3.script_label, var_0.script_label) && issubstr(var_3.script_label, var_0.targetname)) {
       var_3 delete();
+    }
   }
 
   var_5 = getEntArray(var_0.target, "targetname");
@@ -197,8 +213,9 @@ removebombzone(var_0) {
     if(isDefined(var_7.target)) {
       var_8 = getEntArray(var_7.target, "targetname");
 
-      foreach(var_10 in var_8)
+      foreach(var_10 in var_8) {
       var_10 delete();
+      }
     }
 
     var_7 delete();
@@ -233,8 +250,9 @@ onuseplantobject(var_0) {
 }
 
 onbeginuse(var_0) {
-  if(maps\mp\gametypes\_gameobjects::isfriendlyteam(var_0.pers["team"]))
+  if(maps\mp\gametypes\_gameobjects::isfriendlyteam(var_0.pers["team"])) {
     maps\mp\gametypes\common_bomb_gameobject::onbegindefusebomb(var_0, level.sdbombmodel);
+  }
   else {
     maps\mp\gametypes\common_bomb_gameobject::onbeginplantbomb(var_0);
 
@@ -265,8 +283,9 @@ bombplantedanim(var_0) {
   var_0 playerlinkto(level.sdbombmodel);
   var_0 playerlinkedoffsetenable();
 
-  while(var_0 getcurrentweapon() == self.useweapon)
+  while(var_0 getcurrentweapon() == self.useweapon) {
     waitframe();
+  }
 
   var_0 unlink();
 }
@@ -306,10 +325,12 @@ bombplanted(var_0, var_1) {
   var_5.nousebar = 1;
   var_5.id = "defuseObject";
 
-  if(var_2 == "_a" || var_2 == "_A")
+  if(var_2 == "_a" || var_2 == "_A") {
     setomnvar("ui_mlg_game_mode_status_1", 1);
-  else if(var_2 == "_b" || var_2 == "_B")
+  }
+  else if(var_2 == "_b" || var_2 == "_B") {
     setomnvar("ui_mlg_game_mode_status_1", 2);
+  }
 
   bombtimerwait(var_5 isbombsiteb());
   setomnvar("ui_bomb_timer", 0);
@@ -326,8 +347,9 @@ bombplanted(var_0, var_1) {
   level.sdbombmodel hide();
   var_0 maps\mp\gametypes\common_bomb_gameobject::onbombexploded(var_6, 300, var_1);
 
-  for(var_7 = 0; var_7 < level.bombzones.size; var_7++)
+  for(var_7 = 0; var_7 < level.bombzones.size; var_7++) {
     level.bombzones[var_7] maps\mp\gametypes\_gameobjects::disableobject();
+  }
 
   var_5 maps\mp\gametypes\_gameobjects::disableobject();
   setgameendtime(0);
@@ -340,10 +362,12 @@ isbombsiteb() {
 }
 
 setbombendtime(var_0, var_1) {
-  if(var_1)
+  if(var_1) {
     setomnvar("ui_bomb_timer_endtime_2", var_0);
-  else
+  }
+  else {
     setomnvar("ui_bomb_timer_endtime", var_0);
+  }
 }
 
 bombtimerwait(var_0) {
@@ -364,8 +388,9 @@ handlehostmigration(var_0, var_1) {
   setbombendtime(0, var_1);
   var_2 = maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     setbombendtime(var_0 + var_2, var_1);
+  }
 }
 
 ondrop(var_0) {
@@ -380,11 +405,13 @@ onusedefuseobject(var_0) {
 getdefusetype(var_0) {
   var_1 = "defuse";
 
-  if(isDefined(level.bombowner) && maps\mp\_utility::isreallyalive(level.bombowner))
+  if(isDefined(level.bombowner) && maps\mp\_utility::isreallyalive(level.bombowner)) {
     var_1 = "ninja_defuse";
+  }
 
-  if(islastplayeralive(var_0))
+  if(islastplayeralive(var_0)) {
     var_1 = "last_man_defuse";
+  }
 
   return var_1;
 }
@@ -394,11 +421,13 @@ islastplayeralive(var_0) {
     if(var_2 == var_0) {
       continue;
     }
-    if(var_2 maps\mp\gametypes\_playerlogic::mayspawn())
+    if(var_2 maps\mp\gametypes\_playerlogic::mayspawn()) {
       return 0;
+    }
 
-    if(maps\mp\_utility::isreallyalive(var_2))
+    if(maps\mp\_utility::isreallyalive(var_2)) {
       return 0;
+    }
   }
 
   return 1;
@@ -428,13 +457,15 @@ sd_endgame(var_0, var_1) {
   level.finalkillcam_winner = var_0;
 
   if(var_0 == game["attackers"]) {
-    if(!isDefined(game["attackerWinCount"]))
+    if(!isDefined(game["attackerWinCount"])) {
       game["attackerWinCount"] = 0;
+    }
 
     game["attackerWinCount"]++;
   } else if(var_0 == game["defenders"]) {
-    if(!isDefined(game["defenderWinCount"]))
+    if(!isDefined(game["defenderWinCount"])) {
       game["defenderWinCount"] = 0;
+    }
 
     game["defenderWinCount"]++;
   }
@@ -449,8 +480,9 @@ sd_endgame(var_0, var_1) {
       }
     }
 
-    if(var_2)
+    if(var_2) {
       maps\mp\gametypes\_damage::erasefinalkillcam();
+    }
   }
 
   maps\mp\gametypes\_gamescore::giveteamscoreforobjective(var_0, 1);
@@ -471,8 +503,9 @@ checkallowspectating() {
     var_0 = 1;
   }
 
-  if(var_0)
+  if(var_0) {
     maps\mp\gametypes\_spectating::updatespectatesettings();
+  }
 }
 
 onplayerdisconnect() {
@@ -488,10 +521,12 @@ ondeadevent(var_0) {
     return;
   }
   if(var_0 == "all") {
-    if(level.bombplanted)
+    if(level.bombplanted) {
       sd_endgame(game["attackers"], game["end_reason"][game["defenders"] + "_eliminated"]);
-    else
+    }
+    else {
       sd_endgame(game["defenders"], game["end_reason"][game["attackers"] + "_eliminated"]);
+    }
   } else if(var_0 == game["attackers"]) {
     if(level.bombplanted) {
       return;

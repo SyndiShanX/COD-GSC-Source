@@ -171,8 +171,9 @@ fxanim_props_think(localclientnum) {
   self endon("delete");
   wait 3;
 
-  if(isDefined(self.fxanim_wait))
+  if(isDefined(self.fxanim_wait)) {
     wait(self.fxanim_wait);
+  }
 
   if(isDefined(self.fxanim_scene_1) && self.fxanim_scene_1 == "porch") {
     wait(randomintrange(5, 10) * 1000);
@@ -182,10 +183,12 @@ fxanim_props_think(localclientnum) {
   self useanimtree(#animtree);
 
   if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_1])) {
-    if(issubstr(self.fxanim_scene_1, "wire"))
+    if(issubstr(self.fxanim_scene_1, "wire")) {
       self thread fxanim_wire_think(localclientnum);
-    else
+    }
+    else {
       self setflaggedanim("nuketown_fxanim", level.scr_anim["fxanim_props"][self.fxanim_scene_1], 1.0, 0.0, 1.0);
+    }
   }
 }
 
@@ -206,8 +209,9 @@ fxanim_wire_think(localclientnum) {
       continue;
     }
 
-    if(self.fxanim_scene_1 == "wirespark_med")
+    if(self.fxanim_scene_1 == "wirespark_med") {
       playFXOnTag(localclientnum, level._effect["wire_spark"], self, "med_spark_06_jnt");
+    }
   }
 }
 
@@ -219,12 +223,14 @@ main() {
   precache_fxanim_props();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0)
+  if(!isDefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
+  }
 
   waitforclient(0);
   players = level.localplayers;
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     play_fx_prop_anims(i);
+  }
 }

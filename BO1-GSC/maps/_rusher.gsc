@@ -17,10 +17,12 @@ init_rusher() {
 
 rush(endon_flag, timeout) {
   self endon("death");
-  if(!IsAlive(self))
+  if(!IsAlive(self)) {
     return;
-  if(isDefined(self.rusher))
+  }
+  if(isDefined(self.rusher)) {
     return;
+  }
   self.rusher = true;
   if(self.animType == "vc") {
     self.moveplaybackrate = 1.6;
@@ -59,8 +61,9 @@ rusher_go_back_to_normal(endon_flag, timeout) {
   if(isDefined(timeout)) {
     self thread notifyTimeOut(timeout, false, "stop_rushing_timeout");
   }
-  if(!isDefined(endon_flag))
+  if(!isDefined(endon_flag)) {
     endon_flag = "nothing";
+  }
   self waittill_any(endon_flag, "stop_rushing_timeout");
   self notify("stop_rushing");
   self rusher_reset();
@@ -119,8 +122,9 @@ notifyTimeOut(timeout, endon_goal, notify_string) {
 rusher_yelling() {
   self endon("death");
   self endon("stop_rushing");
-  if(isDefined(self.noRusherYell) && self.noRusherYell)
+  if(isDefined(self.noRusherYell) && self.noRusherYell) {
     return;
+  }
   while(1) {
     wait(RandomFloatRange(1, 3));
     self playSound("chr_npc_charge_viet");

@@ -37,8 +37,9 @@ gas_station_ancestor_logic(var_0) {
   var_0 maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_path_to_node("gas_station_attack_spot");
   var_0 maps\mp\alien\_utility::disable_alien_scripted();
 
-  if(var_0 maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check"))
+  if(var_0 maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check")) {
     var_0 maps\mp\alien\_utility::ent_flag_set("activate_shield_health_check");
+  }
 }
 
 gas_station_blocker_ancestor_leave(var_0) {
@@ -51,8 +52,9 @@ gas_station_blocker_ancestor_leave(var_0) {
     var_1 = 0;
 
     foreach(var_3 in level.players) {
-      if(var_3.origin[0] < -750 && var_3.origin[1] > 400)
+      if(var_3.origin[0] < -750 && var_3.origin[1] > 400) {
         var_1 = 1;
+      }
     }
 
     wait 0.25;
@@ -187,14 +189,16 @@ do_garage_blocker() {
   wait 0.5;
   var_2 = getnode("ancestor_garage_start_01", "targetname");
 
-  if(level.current_hive_name == "conduit_parking_1")
+  if(level.current_hive_name == "conduit_parking_1") {
     var_2 = getnode("ancestor_garage_start_02", "targetname");
+  }
 
   var_1 maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::assign_path_node(var_2);
   wait 1.0;
 
-  if(isalive(var_1) && var_1 maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check"))
+  if(isalive(var_1) && var_1 maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check")) {
     var_1 maps\mp\alien\_utility::ent_flag_set("activate_shield_health_check");
+  }
 
   var_3 = ["last_gdf_spottedanancestor"];
   thread maps\mp\mp_alien_last::play_last_vignette_vo(var_3);
@@ -213,10 +217,12 @@ ancestor_attack_conduits(var_0) {
   wait 15;
   var_0 maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_enter_scripted();
 
-  if(level.current_hive_name == "conduit_parking_1")
+  if(level.current_hive_name == "conduit_parking_1") {
     var_0 maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_path_to_node("ancestor_garage_attack_02");
-  else
+  }
+  else {
     var_0 maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_path_to_node("ancestor_garage_attack_01");
+  }
 
   wait 0.1;
   var_1 = level.current_encounter_info.conduit;
@@ -237,8 +243,9 @@ ancestor_run_away(var_0, var_1) {
     var_0 maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_enter_scripted();
     var_2 = getnode("ancestor_retreat_node", "targetname");
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_0 maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_path_to_node("ancestor_retreat_node");
+    }
   }
 
   common_scripts\utility::waitframe();
@@ -259,8 +266,9 @@ do_rooftops_blocker() {
 }
 
 give_blocker_awards() {
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 maps\mp\alien\_persistence::try_award_bonus_pool_token();
+  }
 }
 
 spawn_proto_ancestor() {

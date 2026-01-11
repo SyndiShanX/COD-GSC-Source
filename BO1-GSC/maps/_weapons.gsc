@@ -127,14 +127,17 @@ begin_other_grenade_tracking() {
 
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
-  if(!isDefined(doLOS))
+  if(!isDefined(doLOS)) {
     doLOS = false;
-  if(!isDefined(startRadius))
+  }
+  if(!isDefined(startRadius)) {
     startRadius = 0;
+  }
   players = GetPlayers();
   for(i = 0; i < players.size; i++) {
-    if(!isalive(players[i]) || players[i].sessionstate != "playing")
+    if(!isalive(players[i]) || players[i].sessionstate != "playing") {
       continue;
+    }
     playerpos = players[i].origin + (0, 0, 32);
     dist = distance(pos, playerpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, playerpos, startRadius, undefined))) {
@@ -204,8 +207,9 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
 weaponDamageTracePassed(from, to, startRadius, ignore) {
   midpos = undefined;
   diff = to - from;
-  if(lengthsquared(diff) < startRadius * startRadius)
+  if(lengthsquared(diff) < startRadius * startRadius) {
     midpos = to;
+  }
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
   trace = bulletTrace(midpos, to, false, ignore);
@@ -231,8 +235,9 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
   } else if(IsAlive(self.entity)) {
     self.entity DoDamage(iDamage, damagepos, eAttacker, eInflictor, sMeansOfDeath, 0);
   } else {
-    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "mine_bouncing_betty_mp"))
+    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "mine_bouncing_betty_mp")) {
       return;
+    }
     self.entity damage_notify_wrapper(iDamage, eAttacker, (0, 0, 0), (0, 0, 0), "mod_explosive", "", "");
   }
 }

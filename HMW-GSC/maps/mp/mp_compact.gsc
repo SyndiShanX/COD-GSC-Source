@@ -50,16 +50,20 @@ main() {
 
 doMagnet() {
   strength = 18000;
-  if(getdvar("scr_compact_magnet_strength") != "")
+  if(getdvar("scr_compact_magnet_strength") != "") {
     strength = getdvarfloat("scr_compact_magnet_strength");
-  if(strength == 0)
+  }
+  if(strength == 0) {
     return;
+  }
 
   radius = 250;
-  if(getdvar("scr_compact_magnet_radius") != "")
+  if(getdvar("scr_compact_magnet_radius") != "") {
     radius = getdvarfloat("scr_compact_magnet_radius");
-  if(radius <= 0)
+  }
+  if(radius <= 0) {
     return;
+  }
 
   magnet = getent("magnetorg", "targetname");
   Missile_CreateAttractorEnt(magnet, strength, radius);
@@ -128,8 +132,9 @@ crusherControl() {
     wait 2;
 
     // wait until no players are on
-    while(gettime() - playerDetector.triggertime <= 2000)
+    while(gettime() - playerDetector.triggertime <= 2000) {
       wait .05;
+    }
   }
 }
 
@@ -155,7 +160,8 @@ crushEmThread() {
   for(;;) {
     self waittill("trigger", player);
 
-    if(player isTouching(crushBottom) && isReallyAlive(player))
+    if(player isTouching(crushBottom) && isReallyAlive(player)) {
       player _suicide();
+    }
   }
 }

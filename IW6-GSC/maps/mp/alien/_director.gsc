@@ -16,8 +16,9 @@ TABLE_COL_AI_TYPE_BEGIN = 2;
 TABLE_COL_AI_TYPE_MAX_TYPES = 16;
 
 alien_attribute_table_init() {
-  if(!isDefined(level.default_alien_definition))
+  if(!isDefined(level.default_alien_definition)) {
     level.default_alien_definition = ATTRIBUTE_TABLE;
+  }
 
   att_idx = [];
   att_idx["ref"] = "0";
@@ -82,11 +83,13 @@ alien_attribute_table_init() {
   level.alien_types = [];
 
   maxIndex = TABLE_COL_AI_TYPE_BEGIN + TABLE_COL_AI_TYPE_MAX_TYPES;
-  for(typeIndex = TABLE_COL_AI_TYPE_BEGIN; typeIndex < maxIndex; typeIndex++)
+  for(typeIndex = TABLE_COL_AI_TYPE_BEGIN; typeIndex < maxIndex; typeIndex++) {
     setup_alien_type(att_idx, typeIndex);
+  }
 
-  if(isDefined(level.custom_alien_attribute_table_init))
+  if(isDefined(level.custom_alien_attribute_table_init)) {
     [[level.custom_alien_attribute_table_init]]();
+  }
 }
 
 setup_alien_type(att_idx, type) {
@@ -104,10 +107,12 @@ setup_alien_type(att_idx, type) {
     value = TableLookup(level.default_alien_definition, TABLE_COL_INDEX, index, type);
 
     if(!isString(index)) {
-      if(!IsSubStr(value, "."))
+      if(!IsSubStr(value, ".")) {
         value = int(value);
-      else
+      }
+      else {
         value = float(value);
+      }
     }
 
     level.alien_types[type_ref].attributes[key] = value;
@@ -154,8 +159,9 @@ alien_cloak() {
 near_player_notify() {
   self endon("death");
   while(1) {
-    if(any_player_nearby(self.origin, CONST_DECLOAK_DIST))
+    if(any_player_nearby(self.origin, CONST_DECLOAK_DIST)) {
       self notify("near_player");
+    }
 
     wait 0.05;
   }

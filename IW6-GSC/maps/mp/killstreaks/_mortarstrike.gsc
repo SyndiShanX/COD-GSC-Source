@@ -19,8 +19,9 @@ createMortar(config) {
 
 RUMBLE_MORTARS_WEIGHT = 85;
 mortarCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
@@ -117,14 +118,16 @@ update_mortars() {
     self.mortar_sources = getEntArray(self.sourceEnts, "targetname");
   }
   foreach(source in self.mortar_sources) {
-    if(!isDefined(source.radius))
+    if(!isDefined(source.radius)) {
       source.radius = 300;
+    }
   }
 
   self.mortar_targets = getstructarray(self.targetStructs, "targetname");
   foreach(mortar_target in self.mortar_targets) {
-    if(!isDefined(mortar_target.radius))
+    if(!isDefined(mortar_target.radius)) {
       mortar_target.radius = 100;
+    }
   }
 
   while(1) {
@@ -186,11 +189,13 @@ mortar_fire(delay_min, delay_max, airtime_min, airtime_max, mortar_time_sec, own
         continue;
       }
       if(level.teamBased) {
-        if(player.team == level.air_raid_team_called)
+        if(player.team == level.air_raid_team_called) {
           continue;
+        }
       } else {
-        if(isDefined(owner) && player == owner)
+        if(isDefined(owner) && player == owner) {
           continue;
+        }
       }
 
       if(player.spawnTime + 8000 > GetTime()) {
@@ -199,8 +204,9 @@ mortar_fire(delay_min, delay_max, airtime_min, airtime_max, mortar_time_sec, own
       vel = player GetVelocity();
 
       mortar_air_time = airtime_min;
-      if(airtime_max > airtime_min)
+      if(airtime_max > airtime_min) {
         mortar_air_time = RandomFloatRange(airtime_min, airtime_max);
+      }
 
       mortar_target_pos = player.origin + (vel * mortar_air_time);
 
@@ -223,14 +229,16 @@ mortar_fire(delay_min, delay_max, airtime_min, airtime_max, mortar_time_sec, own
       while(mortars_launched < mortars_per_loop) {
         source_struct = source_structs[air_raid_num];
         air_raid_num++;
-        if(air_raid_num >= source_structs.size)
+        if(air_raid_num >= source_structs.size) {
           air_raid_num = 0;
+        }
 
         target_struct = random(self.mortar_targets);
 
         mortar_air_time = airtime_min;
-        if(airtime_max > airtime_min)
+        if(airtime_max > airtime_min) {
           mortar_air_time = RandomFloatRange(airtime_min, airtime_max);
+        }
 
         start = random_point_in_circle(source_struct.origin, source_struct.radius);
         end = random_point_in_circle(target_struct.origin, target_struct.radius);
@@ -324,8 +332,9 @@ random_mortars_fire_run(start_org, end_org, air_time, owner, launch_dir, play_fx
 
   mortar_model waittill("movedone");
 
-  if(level.createFX_enabled && !isDefined(level.players))
+  if(level.createFX_enabled && !isDefined(level.players)) {
     level.players = [];
+  }
 
   if(isDefined(owner)) {
     mortar_model RadiusDamage(end_org, 250, 750, 500, owner, "MOD_EXPLOSIVE", self.weaponName);
@@ -379,13 +388,15 @@ random_mortars_get_source_structs(owner_team) {
 
   if(level.teamBased) {
     foreach(struct in self.mortar_sources) {
-      if(isDefined(struct.script_team) && struct.script_team == owner_team)
+      if(isDefined(struct.script_team) && struct.script_team == owner_team) {
         source_structs[source_structs.size] = struct;
+      }
     }
   }
 
-  if(source_structs.size == 0)
+  if(source_structs.size == 0) {
     source_structs = self.mortar_sources;
+  }
 
   return source_structs;
 }

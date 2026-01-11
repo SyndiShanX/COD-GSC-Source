@@ -67,8 +67,9 @@ saygenericdialogue(var_0) {
   if(isDefined(self.generic_voice_override)) {
     var_6 = self.generic_voice_override + "_" + var_0 + "_" + var_2;
 
-    if(!soundexists(var_6))
+    if(!soundexists(var_6)) {
       var_6 = "generic_" + var_0 + "_" + var_2;
+    }
   } else
     var_6 = "generic_" + var_0 + "_" + var_2;
 
@@ -153,8 +154,9 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
       self.facewaiting[var_6]["notifyNum"] = var_7;
       thread playface_waitfornotify("animscript face stop waiting " + self.facewaiting[var_6]["notifyNum"], "Face done waiting", "Face done waiting");
 
-      if(isDefined(var_5))
+      if(isDefined(var_5)) {
         thread playface_waitfortime(var_5, "Face done waiting", "Face done waiting");
+      }
 
       self waittill("Face done waiting");
       var_6 = undefined;
@@ -166,8 +168,9 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
         }
       }
 
-      if(self.a.facewaitforresult == "notify")
+      if(self.a.facewaitforresult == "notify") {
         playfacethread(self.facewaiting[var_6]["facialanim"], self.facewaiting[var_6]["soundAlias"], self.facewaiting[var_6]["importance"], self.facewaiting[var_6]["notifyString"]);
+      }
       else if(isDefined(var_3)) {
         self.faceresult = "failed";
         self notify(var_3);
@@ -216,8 +219,9 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
           thread waitforfacesound();
         }
 
-        while(!self.a.facialanimdone || !self.a.facialsounddone)
+        while(!self.a.facialanimdone || !self.a.facialsounddone) {
           self waittill("animscript facedone");
+        }
 
         self.a.currentdialogimportance = 0;
         self.a.currentdialogsound = undefined;
@@ -314,8 +318,9 @@ animhasfacialoverride(var_0) {
 }
 
 playfacialanim(var_0, var_1, var_2) {
-  if(isDefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims)
+  if(isDefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims) {
     self clearanim( % head, 0.2);
+  }
   else {
     if(isDefined(var_0) && animhasfacialoverride(var_0)) {
       self clearanim( % head, 0.2);
@@ -325,10 +330,12 @@ playfacialanim(var_0, var_1, var_2) {
     if(!isDefined(anim.facial[var_1])) {
       return;
     }
-    if(isDefined(var_2) && var_2 >= 0 && var_2 < anim.facial[var_1].size)
+    if(isDefined(var_2) && var_2 >= 0 && var_2 < anim.facial[var_1].size) {
       var_3 = var_2;
-    else
+    }
+    else {
       var_3 = randomint(anim.facial[var_1].size);
+    }
 
     var_4 = anim.facial[var_1][var_3];
     self setanimknob(var_4);

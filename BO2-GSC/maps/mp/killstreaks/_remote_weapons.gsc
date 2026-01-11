@@ -51,8 +51,9 @@ initremoteweapon(weapon, weaponname) {
   weapon thread watchfindremoteweapon(self);
 
   if(isDefined(self.remoteweapon)) {
-    if(!isusingremote())
+    if(!isusingremote()) {
       self notify("remove_remote_weapon", 1);
+    }
   } else
     self thread setactiveremotecontrolledweapon(weapon);
 }
@@ -63,8 +64,9 @@ setactiveremotecontrolledweapon(weapon) {
   if(isDefined(self.remoteweapon)) {
     return;
   }
-  while(!isalive(self))
+  while(!isalive(self)) {
     wait 0.05;
+  }
 
   self notify("set_active_remote_weapon");
   self.remoteweapon = weapon;
@@ -95,8 +97,9 @@ watchremoteweaponpings() {
   while(true) {
     self waittill("remote_weapon_ping", weapon);
 
-    if(isDefined(weapon))
+    if(isDefined(weapon)) {
       self.remoteweaponqueue[self.remoteweaponqueue.size] = weapon;
+    }
   }
 }
 
@@ -107,8 +110,9 @@ collectweaponpings() {
   self waittill("remote_weapon_ping");
   wait 0.1;
 
-  while(!isalive(self))
+  while(!isalive(self)) {
     wait 0.05;
+  }
 
   if(isDefined(self)) {
     assert(isDefined(self.remoteweaponqueue));
@@ -116,13 +120,15 @@ collectweaponpings() {
 
     foreach(weapon in self.remoteweaponqueue) {
       if(isDefined(weapon) && isalive(weapon)) {
-        if(!isDefined(best_weapon) || best_weapon.inittime < weapon.inittime)
+        if(!isDefined(best_weapon) || best_weapon.inittime < weapon.inittime) {
           best_weapon = weapon;
+        }
       }
     }
 
-    if(isDefined(best_weapon))
+    if(isDefined(best_weapon)) {
       self thread setactiveremotecontrolledweapon(best_weapon);
+    }
   }
 }
 
@@ -131,8 +137,9 @@ watchremotecontrolledweapondeath() {
   assert(isDefined(self.remoteweapon));
   self.remoteweapon waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("remove_remote_weapon", 1);
+  }
 }
 
 watchremoveremotecontrolledweapon(weaponname) {
@@ -140,19 +147,22 @@ watchremoveremotecontrolledweapon(weaponname) {
   self waittill("remove_remote_weapon", trytoreplace);
   self removeremotecontrolledweapon(weaponname);
 
-  while(isDefined(self.remoteweapon))
+  while(isDefined(self.remoteweapon)) {
     wait 0.05;
+  }
 
-  if(trytoreplace == 1)
+  if(trytoreplace == 1) {
     self notify("find_remote_weapon");
+  }
 }
 
 removeremotecontrolledweapon(weaponname) {
   if(self isusingremote()) {
     remoteweaponname = self getremotename();
 
-    if(remoteweaponname == weaponname)
+    if(remoteweaponname == weaponname) {
       self baseendremotecontrolweaponuse(weaponname, 1);
+    }
   }
 
   self destroyremotecontrolactionprompthud();
@@ -201,14 +211,16 @@ watchremotetriggeruse(weaponname) {
       continue;
     }
     if(isDefined(self.remoteweapon) && isDefined(self.remoteweapon.hackertrigger) && isDefined(self.remoteweapon.hackertrigger.progressbar)) {
-      if(weaponname == "killstreak_remote_turret_mp")
+      if(weaponname == "killstreak_remote_turret_mp") {
         self iprintlnbold(&"KILLSTREAK_AUTO_TURRET_NOT_AVAILABLE");
+      }
 
       continue;
     }
 
-    if(self usebuttonpressed() && !self.throwinggrenade && !self meleebuttonpressed() && !self isusingremote())
+    if(self usebuttonpressed() && !self.throwinggrenade && !self meleebuttonpressed() && !self isusingremote()) {
       self useremotecontrolweapon(weaponname);
+    }
   }
 }
 
@@ -217,8 +229,9 @@ useremotecontrolweapon(weaponname, allowexit) {
   self giveweapon(weaponname);
   self switchtoweapon(weaponname);
 
-  if(!isDefined(allowexit))
+  if(!isDefined(allowexit)) {
     allowexit = 1;
+  }
 
   self thread maps\mp\killstreaks\_killstreaks::watchforemoveremoteweapon();
   self waittill("weapon_change", newweapon);
@@ -233,8 +246,9 @@ useremotecontrolweapon(weaponname, allowexit) {
   result = self maps\mp\killstreaks\_killstreaks::initridekillstreak(weaponname);
 
   if(allowexit && result != "success") {
-    if(result != "disconnect")
+    if(result != "disconnect") {
       self clearusingremote();
+    }
   } else if(allowexit && !self isonground()) {
     self clearusingremote();
     return;
@@ -243,16 +257,18 @@ useremotecontrolweapon(weaponname, allowexit) {
     self.remoteweapon.killcament = self;
     self.remoteweapon notify("remote_start");
 
-    if(!isDefined(allowexit) || allowexit)
+    if(!isDefined(allowexit) || allowexit) {
       self thread watchremotecontroldeactivate(weaponname);
+    }
 
     self thread[[level.remoteweapons[weaponname].usecallback]](self.remoteweapon);
   }
 }
 
 createremotecontrolactionprompthud() {
-  if(!isDefined(self.hud_prompt_exit))
+  if(!isDefined(self.hud_prompt_exit)) {
     self.hud_prompt_exit = newclienthudelem(self);
+  }
 
   self.hud_prompt_exit.alignx = "left";
   self.hud_prompt_exit.aligny = "bottom";
@@ -268,8 +284,9 @@ createremotecontrolactionprompthud() {
 }
 
 destroyremotecontrolactionprompthud() {
-  if(isDefined(self) && isDefined(self.hud_prompt_exit))
+  if(isDefined(self) && isDefined(self.hud_prompt_exit)) {
     self.hud_prompt_exit destroy();
+  }
 }
 
 watchremotecontroldeactivate(weaponname) {
@@ -297,8 +314,9 @@ watchremotecontroldeactivate(weaponname) {
 }
 
 endremotecontrolweaponuse(weaponname) {
-  if(isDefined(self.hud_prompt_exit))
+  if(isDefined(self.hud_prompt_exit)) {
     self.hud_prompt_exit settext("");
+  }
 
   self[[level.remoteweapons[weaponname].endusecallback]](self.remoteweapon);
 }
@@ -328,8 +346,9 @@ baseendremotecontrolweaponuse(weaponname, isdead) {
   }
 
   if(isDefined(self.remoteweapon)) {
-    if(isdead)
+    if(isdead) {
       self.remoteweapon.wascontrollednowdead = self.remoteweapon.controlled;
+    }
 
     self.remoteweapon.controlled = 0;
     self[[level.remoteweapons[weaponname].endusecallback]](self.remoteweapon, isdead);
@@ -339,12 +358,14 @@ baseendremotecontrolweaponuse(weaponname, isdead) {
     self destroyremotehud();
     self clientnotify("nofutz");
 
-    if(isDefined(level.gameended) && level.gameended)
+    if(isDefined(level.gameended) && level.gameended) {
       self freezecontrolswrapper(1);
+    }
   }
 
-  if(isDefined(self.hud_prompt_exit))
+  if(isDefined(self.hud_prompt_exit)) {
     self.hud_prompt_exit settext("");
+  }
 
   self notify("remove_remote_weapon", 1);
 }
@@ -353,50 +374,65 @@ destroyremotehud() {
   self useservervisionset(0);
   self setinfraredvision(0);
 
-  if(isDefined(self.fullscreen_static))
+  if(isDefined(self.fullscreen_static)) {
     self.fullscreen_static destroy();
+  }
 
-  if(isDefined(self.remote_hud_reticle))
+  if(isDefined(self.remote_hud_reticle)) {
     self.remote_hud_reticle destroy();
+  }
 
-  if(isDefined(self.remote_hud_bracket_right))
+  if(isDefined(self.remote_hud_bracket_right)) {
     self.remote_hud_bracket_right destroy();
+  }
 
-  if(isDefined(self.remote_hud_bracket_left))
+  if(isDefined(self.remote_hud_bracket_left)) {
     self.remote_hud_bracket_left destroy();
+  }
 
-  if(isDefined(self.remote_hud_arrow_right))
+  if(isDefined(self.remote_hud_arrow_right)) {
     self.remote_hud_arrow_right destroy();
+  }
 
-  if(isDefined(self.remote_hud_arrow_left))
+  if(isDefined(self.remote_hud_arrow_left)) {
     self.remote_hud_arrow_left destroy();
+  }
 
-  if(isDefined(self.tank_rocket_1))
+  if(isDefined(self.tank_rocket_1)) {
     self.tank_rocket_1 destroy();
+  }
 
-  if(isDefined(self.tank_rocket_2))
+  if(isDefined(self.tank_rocket_2)) {
     self.tank_rocket_2 destroy();
+  }
 
-  if(isDefined(self.tank_rocket_3))
+  if(isDefined(self.tank_rocket_3)) {
     self.tank_rocket_3 destroy();
+  }
 
-  if(isDefined(self.tank_rocket_hint))
+  if(isDefined(self.tank_rocket_hint)) {
     self.tank_rocket_hint destroy();
+  }
 
-  if(isDefined(self.tank_mg_bar))
+  if(isDefined(self.tank_mg_bar)) {
     self.tank_mg_bar destroy();
+  }
 
-  if(isDefined(self.tank_mg_arrow))
+  if(isDefined(self.tank_mg_arrow)) {
     self.tank_mg_arrow destroy();
+  }
 
-  if(isDefined(self.tank_mg_hint))
+  if(isDefined(self.tank_mg_hint)) {
     self.tank_mg_hint destroy();
+  }
 
-  if(isDefined(self.tank_fullscreen_effect))
+  if(isDefined(self.tank_fullscreen_effect)) {
     self.tank_fullscreen_effect destroy();
+  }
 
-  if(isDefined(self.hud_prompt_exit))
+  if(isDefined(self.hud_prompt_exit)) {
     self.hud_prompt_exit destroy();
+  }
 }
 
 stunstaticfx(duration) {

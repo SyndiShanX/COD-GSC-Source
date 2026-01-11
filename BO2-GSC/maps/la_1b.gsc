@@ -95,8 +95,9 @@ load_roof_gump() {
     spawn_roof_sam();
     trigger_wait("load_plaza_gump");
 
-    if(isDefined(level.veh_roof_sam))
+    if(isDefined(level.veh_roof_sam)) {
       level.veh_roof_sam delete();
+    }
 
     wait 0.25;
     level thread load_gump("la_1b_gump_1");
@@ -128,15 +129,18 @@ init_vehicles() {
   a_script_models = getEntArray("script_model", "classname");
   a_vehicles = arraycombine(a_script_models, getEntArray("script_vehicle", "classname"), 0, 0);
 
-  foreach(veh in a_vehicles)
+  foreach(veh in a_vehicles) {
   global_vehicle_spawn_func(veh);
+  }
 }
 
 global_vehicle_spawn_func(veh) {
-  if(is_police_car(veh))
+  if(is_police_car(veh)) {
     veh thread police_car();
-  else if(is_police_motorcycle(veh))
+  }
+  else if(is_police_motorcycle(veh)) {
     veh thread police_motorcycle();
+  }
 }
 
 level_precache() {

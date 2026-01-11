@@ -5,62 +5,78 @@
 ********************************/
 
 main(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "weapon_c4";
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "weapon_c4_obj";
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     level.c4_weaponname = "c4";
-  else
+  }
+  else {
     level.c4_weaponname = var_0;
+  }
 
   precachemodel(var_1);
   precachemodel(var_2);
   precacheitem(level.c4_weaponname);
 
-  if(isDefined(level.c4_explosion_fx_override))
+  if(isDefined(level.c4_explosion_fx_override)) {
     level._effect["c4_explosion"] = level.c4_explosion_fx_override;
-  else
+  }
+  else {
     level._effect["c4_explosion"] = loadfx("fx\explosions\grenadeExp_metal");
+  }
 }
 
 c4_location(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = undefined;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = (0, 0, 0);
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = "weapon_c4";
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = "weapon_c4_obj";
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_6 = self gettagorigin(var_0);
-  else if(isDefined(var_3))
+  }
+  else if(isDefined(var_3)) {
     var_6 = var_3;
+  }
   else {}
 
   var_7 = spawn("script_model", var_6 + var_1);
   var_7 setModel(var_5);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_7 linkto(self, var_0, var_1, var_2);
-  else
+  }
+  else {
     var_7.angles = self.angles;
+  }
 
   var_7.trigger = get_use_trigger();
 
-  if(isDefined(level.c4_hintstring))
+  if(isDefined(level.c4_hintstring)) {
     var_7.trigger sethintstring(level.c4_hintstring);
-  else
+  }
+  else {
     var_7.trigger sethintstring(&"SCRIPT_PLATFORM_HINT_PLANTEXPLOSIVES");
+  }
 
   if(isDefined(var_0)) {
     var_7.trigger linkto(self, var_0, var_1, var_2);
@@ -70,8 +86,9 @@ c4_location(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_7 thread handle_use(self, var_4);
 
-  if(!isDefined(self.multiple_c4))
+  if(!isDefined(self.multiple_c4)) {
     var_7 thread handle_delete(self);
+  }
 
   var_7 thread handle_clear_c4(self);
   return var_7;
@@ -86,14 +103,17 @@ playc4effects() {
 handle_use(var_0, var_1) {
   var_0 endon("clear_c4");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "weapon_c4";
+  }
 
-  if(!isDefined(var_0.multiple_c4))
+  if(!isDefined(var_0.multiple_c4)) {
     var_0 endon("c4_planted");
+  }
 
-  if(!isDefined(var_0.c4_count))
+  if(!isDefined(var_0.c4_count)) {
     var_0.c4_count = 0;
+  }
 
   var_0.c4_count++;
   self.trigger usetriggerrequirelookat();
@@ -106,8 +126,9 @@ handle_use(var_0, var_1) {
   thread playc4effects();
   var_0.c4_count--;
 
-  if(!isDefined(var_0.multiple_c4) || !var_0.c4_count)
+  if(!isDefined(var_0.multiple_c4) || !var_0.c4_count) {
     var_2 switch_to_detonator();
+  }
 
   thread handle_detonation(var_0, var_2);
   var_0 notify("c4_planted", self);
@@ -128,14 +149,16 @@ handle_detonation(var_0, var_1) {
   playFX(level._effect["c4_explosion"], self.origin);
   var_2 = spawn("script_origin", self.origin);
 
-  if(isDefined(level.c4_sound_override))
+  if(isDefined(level.c4_sound_override)) {
     var_2 playSound("detpack_explo_main", "sound_done");
+  }
 
   self radiusdamage(self.origin, 256, 200, 50);
   earthquake(0.4, 1, self.origin, 1000);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 
   var_1 thread remove_detonator();
   var_0 notify("c4_detonation");
@@ -150,11 +173,13 @@ handle_clear_c4(var_0) {
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(self.trigger.inuse) && self.trigger.inuse)
+  if(isDefined(self.trigger.inuse) && self.trigger.inuse) {
     self.trigger release_use_trigger();
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 
   level.player thread remove_detonator();
 }
@@ -170,8 +195,9 @@ remove_detonator() {
       self switchtoweapon(self getweaponslistprimaries()[0]);
     } else if(self hasweapon(self.old_weapon) && self.old_weapon != level.c4_weaponname)
       self switchtoweapon(self.old_weapon);
-    else
+    else {
       self switchtoweapon(self getweaponslistprimaries()[0]);
+    }
   }
 
   self.old_weapon = undefined;
@@ -186,8 +212,9 @@ remove_detonator() {
 switch_to_detonator() {
   var_0 = undefined;
 
-  if(!isDefined(self.old_weapon))
+  if(!isDefined(self.old_weapon)) {
     self.old_weapon = self getcurrentweapon();
+  }
 
   var_1 = self getweaponslistall();
 
@@ -214,8 +241,9 @@ get_use_trigger() {
     if(isDefined(var_0[var_1].inuse) && var_0[var_1].inuse) {
       continue;
     }
-    if(!isDefined(var_0[var_1].inuse))
+    if(!isDefined(var_0[var_1].inuse)) {
       var_0[var_1] enablelinkto();
+    }
 
     var_0[var_1].inuse = 1;
     var_0[var_1].oldorigin = var_0[var_1].origin;
@@ -224,8 +252,9 @@ get_use_trigger() {
 }
 
 release_use_trigger() {
-  if(isDefined(self.islinked))
+  if(isDefined(self.islinked)) {
     self unlink();
+  }
 
   self.islinked = undefined;
   self.origin = self.oldorigin;

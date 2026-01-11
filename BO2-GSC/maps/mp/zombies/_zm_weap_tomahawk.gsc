@@ -51,10 +51,12 @@ watch_for_tomahawk_throw() {
     grenade.owner = self;
     self notify("throwing_tomahawk");
 
-    if(isDefined(self.n_tomahawk_cooking_time))
+    if(isDefined(self.n_tomahawk_cooking_time)) {
       grenade.n_cookedtime = grenade.birthtime - self.n_tomahawk_cooking_time;
-    else
+    }
+    else {
       grenade.n_cookedtime = 0;
+    }
 
     self thread check_for_time_out(grenade);
     self thread tomahawk_thrown(grenade);
@@ -86,8 +88,9 @@ watch_for_grenade_cancel() {
   waittillframeend;
   weapon = "none";
 
-  while(self isthrowinggrenade() && weapon == "none")
+  while(self isthrowinggrenade() && weapon == "none") {
     self waittill("weapon_change", weapon);
+  }
 
   self notify("grenade_throw_cancelled");
 }
@@ -104,10 +107,12 @@ play_charge_fx() {
     self.current_tactical_grenade = self get_player_tactical_grenade();
 
     if(time >= time_to_pulse) {
-      if(self.current_tactical_grenade == "upgraded_tomahawk_zm")
+      if(self.current_tactical_grenade == "upgraded_tomahawk_zm") {
         playFXOnTag(level._effect["tomahawk_charge_up_ug"], self, "tag_origin");
-      else
+      }
+      else {
         playFXOnTag(level._effect["tomahawk_charge_up"], self, "tag_origin");
+      }
 
       time_to_pulse = time_to_pulse + 1000;
       self playrumbleonentity("reload_small");
@@ -129,19 +134,22 @@ get_grenade_charge_power(player) {
   player endon("disconnect");
 
   if(self.n_cookedtime > 1000 && self.n_cookedtime < 2000) {
-    if(player.current_tomahawk_weapon == "upgraded_tomahawk_zm")
+    if(player.current_tomahawk_weapon == "upgraded_tomahawk_zm") {
       return 4.5;
+    }
 
     return 1.5;
   } else if(self.n_cookedtime > 2000 && self.n_cookedtime < 3000) {
-    if(player.current_tomahawk_weapon == "upgraded_tomahawk_zm")
+    if(player.current_tomahawk_weapon == "upgraded_tomahawk_zm") {
       return 6;
+    }
 
     return 2;
   } else if(self.n_cookedtime >= 3000 && player.current_tomahawk_weapon != "upgraded_tomahawk_zm")
     return 2;
-  else if(self.n_cookedtime >= 3000)
+  else if(self.n_cookedtime >= 3000) {
     return 3;
+  }
 
   return 1;
 }
@@ -151,8 +159,9 @@ tomahawk_thrown(grenade) {
   grenade endon("in_hellhole");
   grenade_owner = undefined;
 
-  if(isDefined(grenade.owner))
+  if(isDefined(grenade.owner)) {
     grenade_owner = grenade.owner;
+  }
 
   playFXOnTag(level._effect["tomahawk_charged_trail"], grenade, "tag_origin");
   self setclientfieldtoplayer("tomahawk_in_use", 2);
@@ -192,8 +201,9 @@ tomahawk_thrown(grenade) {
     self thread tomahawk_return_player(m_tomahawk, 0);
     return;
   } else {
-    foreach(ai_zombie in a_zombies)
+    foreach(ai_zombie in a_zombies) {
     ai_zombie.hit_by_tomahawk = 0;
+    }
   }
 
   if(isDefined(a_zombies[0]) && isalive(a_zombies[0])) {
@@ -215,8 +225,9 @@ tomahawk_thrown(grenade) {
     m_tomahawk = tomahawk_spawn(grenade_origin, n_grenade_charge_power);
     m_tomahawk.n_grenade_charge_power = n_grenade_charge_power;
 
-    if(isDefined(grenade))
+    if(isDefined(grenade)) {
       grenade delete();
+    }
 
     self thread tomahawk_return_player(m_tomahawk, 0);
   }
@@ -255,17 +266,20 @@ tomahawk_attack_zombies(m_tomahawk, a_zombies) {
     return;
   }
 
-  if(a_zombies.size <= 4)
+  if(a_zombies.size <= 4) {
     n_attack_limit = a_zombies.size;
-  else
+  }
+  else {
     n_attack_limit = 4;
+  }
 
   for(i = 0; i < n_attack_limit; i++) {
     if(isDefined(a_zombies[i]) && isalive(a_zombies[i])) {
       tag = "J_Head";
 
-      if(a_zombies[i].isdog)
+      if(a_zombies[i].isdog) {
         tag = "J_Spine1";
+      }
 
       if(isDefined(a_zombies[i].hit_by_tomahawk) && !a_zombies[i].hit_by_tomahawk) {
         v_target = a_zombies[i] gettagorigin(tag);
@@ -273,10 +287,12 @@ tomahawk_attack_zombies(m_tomahawk, a_zombies) {
         m_tomahawk waittill("movedone");
 
         if(isDefined(a_zombies[i]) && isalive(a_zombies[i])) {
-          if(self.current_tactical_grenade == "upgraded_tomahawk_zm")
+          if(self.current_tactical_grenade == "upgraded_tomahawk_zm") {
             playFXOnTag(level._effect["tomahawk_impact_ug"], a_zombies[i], tag);
-          else
+          }
+          else {
             playFXOnTag(level._effect["tomahawk_impact"], a_zombies[i], tag);
+          }
 
           playFXOnTag(level._effect["tomahawk_fire_dot"], a_zombies[i], "j_spineupper");
           a_zombies[i] setclientfield("play_tomahawk_hit_sound", 1);
@@ -298,8 +314,9 @@ tomahawk_return_player(m_tomahawk, num_zombie_hit) {
   self endon("disconnect");
   n_dist = distance2dsquared(m_tomahawk.origin, self.origin);
 
-  if(!isDefined(num_zombie_hit))
+  if(!isDefined(num_zombie_hit)) {
     num_zombie_hit = 5;
+  }
 
   while(n_dist > 4096) {
     m_tomahawk moveto(self getEye(), 0.25);
@@ -315,8 +332,9 @@ tomahawk_return_player(m_tomahawk, num_zombie_hit) {
 
   if(isDefined(m_tomahawk.a_has_powerup)) {
     foreach(powerup in m_tomahawk.a_has_powerup) {
-      if(isDefined(powerup))
+      if(isDefined(powerup)) {
         powerup.origin = self.origin;
+      }
     }
   }
 
@@ -328,8 +346,9 @@ tomahawk_return_player(m_tomahawk, num_zombie_hit) {
   self givemaxammo(self.current_tomahawk_weapon);
   a_zombies = getaispeciesarray("axis", "all");
 
-  foreach(ai_zombie in a_zombies)
+  foreach(ai_zombie in a_zombies) {
   ai_zombie.hit_by_tomahawk = 0;
+  }
 
   self setclientfieldtoplayer("tomahawk_in_use", 3);
 }
@@ -341,8 +360,9 @@ tomahawk_check_for_zombie(grenade) {
   a_zombies = get_array_of_closest(grenade.origin, a_zombies, undefined, undefined, 100);
 
   if(isDefined(a_zombies[0]) && distance2dsquared(grenade.origin, a_zombies[0].origin) <= 10000) {
-    if(isDefined(a_zombies[0].hit_by_tomahawk) && !a_zombies[0].hit_by_tomahawk)
+    if(isDefined(a_zombies[0].hit_by_tomahawk) && !a_zombies[0].hit_by_tomahawk) {
       self tomahawk_hit_zombie(a_zombies[0], grenade);
+    }
   }
 }
 
@@ -352,18 +372,21 @@ tomahawk_hit_zombie(ai_zombie, grenade) {
   if(isDefined(ai_zombie) && isalive(ai_zombie)) {
     tag = "J_Head";
 
-    if(ai_zombie.isdog)
+    if(ai_zombie.isdog) {
       tag = "J_Spine1";
+    }
 
     v_target = ai_zombie gettagorigin(tag);
     grenade moveto(v_target, 0.3);
     grenade waittill("movedone");
 
     if(isDefined(ai_zombie) && isalive(ai_zombie)) {
-      if(self.current_tactical_grenade == "upgraded_tomahawk_zm")
+      if(self.current_tactical_grenade == "upgraded_tomahawk_zm") {
         playFXOnTag(level._effect["tomahawk_impact_ug"], ai_zombie, tag);
-      else
+      }
+      else {
         playFXOnTag(level._effect["tomahawk_impact"], ai_zombie, tag);
+      }
 
       ai_zombie setclientfield("play_tomahawk_hit_sound", 1);
       n_tomahawk_damage = calculate_tomahawk_damage(ai_zombie, grenade.n_grenade_charge_power, grenade);
@@ -380,13 +403,16 @@ tomahawk_spawn(grenade_origin, charged) {
   m_tomahawk thread tomahawk_spin();
   m_tomahawk playLoopSound("wpn_tomahawk_flying_loop");
 
-  if(self.current_tactical_grenade == "upgraded_tomahawk_zm")
+  if(self.current_tactical_grenade == "upgraded_tomahawk_zm") {
     playFXOnTag(level._effect["tomahawk_trail_ug"], m_tomahawk, "tag_origin");
-  else
+  }
+  else {
     playFXOnTag(level._effect["tomahawk_trail"], m_tomahawk, "tag_origin");
+  }
 
-  if(isDefined(charged) && charged > 1)
+  if(isDefined(charged) && charged > 1) {
     playFXOnTag(level._effect["tomahawk_charged_trail"], m_tomahawk, "tag_origin");
+  }
 
   m_tomahawk.low_level_instant_kill_charge = 1;
   return m_tomahawk;
@@ -439,12 +465,14 @@ tomahawk_pickup_trigger() {
   while(true) {
     self waittill("trigger", player);
 
-    if(isDefined(player.current_tactical_grenade) && !issubstr(player.current_tactical_grenade, "tomahawk_zm"))
+    if(isDefined(player.current_tactical_grenade) && !issubstr(player.current_tactical_grenade, "tomahawk_zm")) {
       player takeweapon(player.current_tactical_grenade);
+    }
 
     if(player.current_tomahawk_weapon == "upgraded_tomahawk_zm") {
-      if(!is_true(player.afterlife))
+      if(!is_true(player.afterlife)) {
         continue;
+      }
       else {
         player disable_player_move_states(1);
         gun = player getcurrentweapon();
@@ -476,8 +504,9 @@ tomahawk_pickup_trigger() {
         player thread tomahawk_tutorial_hint();
         player set_player_tactical_grenade(player.current_tomahawk_weapon);
 
-        if(self.script_noteworthy == "retriever_pickup_trigger")
+        if(self.script_noteworthy == "retriever_pickup_trigger") {
           player.retriever_trigger = self;
+        }
 
         player notify("tomahawk_picked_up");
         player setclientfieldtoplayer("tomahawk_in_use", 1);
@@ -489,8 +518,9 @@ tomahawk_pickup_trigger() {
         player switchtoweapon("zombie_tomahawk_flourish");
         player waittill_any("player_downed", "weapon_change_complete");
 
-        if(self.script_noteworthy == "redeemer_pickup_trigger")
+        if(self.script_noteworthy == "redeemer_pickup_trigger") {
           player setclientfieldtoplayer("upgraded_tomahawk_in_use", 1);
+        }
 
         player switchtoweapon(gun);
       }
@@ -511,8 +541,9 @@ tomahawk_pickup_spin() {
 }
 
 calculate_tomahawk_damage(n_target_zombie, n_tomahawk_power, tomahawk) {
-  if(n_tomahawk_power > 2)
+  if(n_tomahawk_power > 2) {
     return n_target_zombie.health + 1;
+  }
   else if(level.round_number >= 10 && level.round_number < 13 && tomahawk.low_level_instant_kill_charge <= 3) {
     tomahawk.low_level_instant_kill_charge = tomahawk.low_level_instant_kill_charge + 1;
     return n_target_zombie.health + 1;

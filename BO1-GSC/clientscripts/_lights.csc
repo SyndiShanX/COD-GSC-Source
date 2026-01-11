@@ -98,8 +98,9 @@ play_light_sound(light_struct, sound) {
 }
 
 play_light_fx(light_struct, fx) {
-  if(!isDefined(level._effect[fx]))
+  if(!isDefined(level._effect[fx])) {
     return;
+  }
   if((self.mixer.active == 0) && (self.mixer.mix_val == light_struct.side)) {
     players = getLocalPlayers();
     org = self.origin;
@@ -574,8 +575,9 @@ tv_changes_color(light_struct) {
 }
 
 triggered_lights_think(light_struct) {
-  if(!isDefined(self.script_noteworthy))
+  if(!isDefined(self.script_noteworthy)) {
     return;
+  }
   level waittill(self.script_noteworthy);
   if(isDefined(self.script_float)) {
     set_light_intensity(light_struct, self.script_float);

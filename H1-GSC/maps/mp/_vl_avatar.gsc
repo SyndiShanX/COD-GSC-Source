@@ -58,8 +58,9 @@ set_agent_values(var_0, var_1) {
 }
 
 alloc_avatar() {
-  if(!isDefined(level.vlavatarpool))
+  if(!isDefined(level.vlavatarpool)) {
     init_avatar_pool();
+  }
 
   foreach(var_1 in level.vlavatarpool) {
     if(var_1.isfree) {
@@ -98,8 +99,9 @@ teleport_avatar_stick(var_0, var_1, var_2) {
   var_0.teleportlinker.angles = var_1.angles;
   var_0.teleportlinker dontinterpolatewrapper();
 
-  if(!maps\mp\_utility::is_true(level.vl_setup))
+  if(!maps\mp\_utility::is_true(level.vl_setup)) {
     maps\mp\_utility::waittillplayersnextsnapshot(var_2);
+  }
 
   var_0 linktosynchronizedparent(var_0.teleportlinker, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_2 setorigin(var_1.origin, 1);
@@ -108,24 +110,28 @@ teleport_avatar_stick(var_0, var_1, var_2) {
 }
 
 dontinterpolatewrapper() {
-  if(!isDefined(self.lastinterpolatetime))
+  if(!isDefined(self.lastinterpolatetime)) {
     self.lastinterpolatetime = 0;
+  }
 
   var_0 = gettime();
   var_1 = self.lastinterpolatetime == var_0;
 
-  if(!var_1)
+  if(!var_1) {
     self dontinterpolate();
+  }
 
   self.lastinterpolatetime = var_0;
 }
 
 spawn_an_avatar(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(!isDefined(var_8))
+  if(!isDefined(var_8)) {
     var_8 = 0;
+  }
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = 1;
+  }
 
   var_11 = "allies";
   var_12 = "none";
@@ -162,24 +168,30 @@ spawn_an_avatar(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
     var_0 thread wait_load_costume(var_13, var_7);
   }
 
-  if(!isscriptedagent(var_13))
+  if(!isscriptedagent(var_13)) {
     var_13 enableanimstate(1);
+  }
 
-  if(var_8)
+  if(var_8) {
     var_13.isdepotagent = 1;
+  }
   else {
     level.vlavatars[var_6] = var_13;
 
-    if(var_7)
+    if(var_7) {
       var_0 playerteleportavatartoweaponroom(var_13, level.camparams.camera);
-    else
+    }
+    else {
       var_13 agentplaycacanim();
+    }
   }
 
-  if(var_7)
+  if(var_7) {
     show_avatar(var_13, !var_8);
-  else
+  }
+  else {
     hide_avatar(var_13);
+  }
 
   var_13.fakemember = undefined;
   return var_13;
@@ -189,8 +201,9 @@ wait_load_costume_show(var_0) {
   if(isalive(var_0)) {
     var_1 = isDefined(level.cac_weap);
 
-    if(!var_1)
+    if(!var_1) {
       show_avatar(var_0);
+    }
   }
 }
 
@@ -210,38 +223,44 @@ wait_load_costume(var_0, var_1) {
   var_0 endon("wait_load_costume");
   var_0 endon("death");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   hide_avatar(var_0);
 
-  if(var_1)
+  if(var_1) {
     thread wait_load_costume_timeout(5.0, var_0);
+  }
 
   var_2 = "none";
 
-  if(isDefined(var_0.primaryweapon))
+  if(isDefined(var_0.primaryweapon)) {
     var_2 = var_0.primaryweapon;
+  }
 
   var_3 = maps\mp\_vl_cac::getfactionteam();
   var_4 = maps\mp\_vl_cac::getfactionenvironment();
   var_0.costumeloaded = 0;
 
-  for(var_5 = self loadcostumemodels(var_0.costume, var_0.team, var_2, var_4); !var_5; var_5 = self loadcostumemodels(var_0.costume, var_0.team, var_2, var_4))
+  for(var_5 = self loadcostumemodels(var_0.costume, var_0.team, var_2, var_4); !var_5; var_5 = self loadcostumemodels(var_0.costume, var_0.team, var_2, var_4)) {
     waitframe();
+  }
 
   var_0.costumeloaded = 1;
 
-  if(var_1)
+  if(var_1) {
     wait_load_costume_show(var_0);
+  }
 
   var_0 notify("wait_load_costume");
 }
 
 allcostumesloaded() {
   foreach(var_1 in level.vlavatars) {
-    if(!maps\mp\_utility::is_true(var_1.costumeloaded))
+    if(!maps\mp\_utility::is_true(var_1.costumeloaded)) {
       return 0;
+    }
   }
 
   return 1;
@@ -278,8 +297,9 @@ show_avatar(var_0, var_1) {
   var_0 show();
   var_0 showallparts();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   if(var_1) {
     show_avatar_primary_weapon(var_0);
@@ -327,32 +347,38 @@ hide_avatar_weapons(var_0) {
 }
 
 hide_avatars() {
-  foreach(var_1 in level.vlavatars)
+  foreach(var_1 in level.vlavatars) {
   hide_avatar(var_1);
+  }
 }
 
 show_avatars() {
-  foreach(var_1 in level.vlavatars)
+  foreach(var_1 in level.vlavatars) {
   show_avatar(var_1);
+  }
 }
 
 get_xuid_for_avatar(var_0) {
-  if(isDefined(var_0.xuid))
+  if(isDefined(var_0.xuid)) {
     return var_0.xuid;
+  }
 
-  if(isDefined(var_0.loadout))
+  if(isDefined(var_0.loadout)) {
     return var_0.loadout.xuid;
+  }
 
   return "";
 }
 
 get_avatar_for_xuid(var_0) {
   foreach(var_2 in level.vlavatars) {
-    if(isDefined(var_2.xuid) && var_2.xuid == var_0)
+    if(isDefined(var_2.xuid) && var_2.xuid == var_0) {
       return var_2;
+    }
 
-    if(isDefined(var_2.loadout) && var_2.loadout.xuid == var_0)
+    if(isDefined(var_2.loadout) && var_2.loadout.xuid == var_0) {
       return var_2;
+    }
   }
 
   return undefined;
@@ -360,8 +386,9 @@ get_avatar_for_xuid(var_0) {
 
 get_ownerid_for_avatar(var_0) {
   foreach(var_3, var_2 in level.vlavatars) {
-    if(var_0 == var_2)
+    if(var_0 == var_2) {
       return var_3;
+    }
   }
 
   return 0;
@@ -387,8 +414,9 @@ removelobbyavatar(var_0) {
   var_0.headmodel = undefined;
   var_0 hideallparts();
 
-  if(isDefined(var_0.avatar_spawnpoint.spawned_avatar))
+  if(isDefined(var_0.avatar_spawnpoint.spawned_avatar)) {
     var_0.avatar_spawnpoint.spawned_avatar = undefined;
+  }
 
   if(isDefined(var_0.primaryweaponent)) {
     var_0.primaryweaponent delete();
@@ -405,20 +433,23 @@ removelobbyavatar(var_0) {
   var_0.weapclasschanged = undefined;
   free_avatar(var_0);
 
-  if(level.vl_focus == var_1)
+  if(level.vl_focus == var_1) {
     level.vl_focus = 0;
+  }
 }
 
 vl_avatar_costume(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_1.costume = var_2;
+  }
 
   var_1 maps\mp\gametypes\_teams::applycostume(var_3, var_4, var_5);
 }
 
 vl_avatar_loadout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = level.vlavatars[var_1];
+  }
 
   var_7 = maps\mp\_vl_cac::getfactionteam();
   var_8 = maps\mp\_vl_cac::getfactionenvironment();
@@ -446,17 +477,20 @@ vl_give_weapons(var_0) {
   if(!isDefined(var_0.primaryweapon)) {
     return;
   }
-  if(var_0.primaryweapon != "" && var_0.primaryweapon != "none" && var_0.primaryweapon != "specialty_null")
+  if(var_0.primaryweapon != "" && var_0.primaryweapon != "none" && var_0.primaryweapon != "specialty_null") {
     var_0 avatarattachprimaryweapons();
-  else
+  }
+  else {
     hide_avatar_weapons(var_0);
+  }
 }
 
 avatarattachprimaryweapons() {
   if(getdvarint("scr_vl_link_primary_weap", 0) != 0) {
     if(isDefined(self.heldweapon)) {
-      if(self hasweapon(self.heldweapon))
+      if(self hasweapon(self.heldweapon)) {
         self takeweapon(self.heldweapon);
+      }
 
       self.heldweapon = undefined;
       self notify("heldWeaponGone");
@@ -475,8 +509,9 @@ avatarattachprimaryweapons() {
       self.primaryweaponent setpickupweapon(self.primaryweapon);
     }
 
-    if(isDefined(self.primaryweaponent))
+    if(isDefined(self.primaryweaponent)) {
       thread attachprimaryweapon(self);
+    }
   } else {
     if(isDefined(self.primaryweaponent)) {
       var_1 = get_xuid_for_avatar(self);
@@ -485,8 +520,9 @@ avatarattachprimaryweapons() {
     }
 
     if(!isDefined(self.heldweapon) || self.heldweapon != self.primaryweapon || !maps\mp\_utility::is_true(self.hideweapons) && !self hasweapon(self.heldweapon)) {
-      if(isDefined(self.heldweapon))
+      if(isDefined(self.heldweapon)) {
         self takeweapon(self.heldweapon);
+      }
 
       self.heldweapon = self.primaryweapon;
       thread avatargiveheldweapon();
@@ -497,16 +533,19 @@ avatarattachprimaryweapons() {
 attachprimaryweapon(var_0) {
   var_1 = undefined;
 
-  if(isDefined(var_0.player))
+  if(isDefined(var_0.player)) {
     var_1 = var_0.player;
+  }
 
   var_2 = "tag_weapon_right";
 
-  if(issubstr(var_0.primaryweaponent.primaryweapon, "combatknife"))
+  if(issubstr(var_0.primaryweaponent.primaryweapon, "combatknife")) {
     var_2 = "tag_inhand";
+  }
 
-  if(issubstr(var_0.primaryweaponent.primaryweapon, "riotshield"))
+  if(issubstr(var_0.primaryweaponent.primaryweapon, "riotshield")) {
     var_2 = "tag_weapon_left";
+  }
 
   var_0.primaryweaponent unlink();
   var_0.primaryweaponent.origin = var_0 gettagorigin(var_2);
@@ -562,8 +601,9 @@ agentplaylobbyanim(var_0, var_1, var_2) {
   if(!isDefined(self.lastanim) || self.lastanim != var_6) {
     var_7 = 0.0;
 
-    if(maps\mp\_utility::is_true(var_2))
+    if(maps\mp\_utility::is_true(var_2)) {
       var_7 = randomfloat(1.0);
+    }
 
     self setanimclass("vlobby_animclass");
     self setanimstate(var_4, var_5, 1, var_7);
@@ -639,8 +679,9 @@ startweaponroompropanimations(var_0, var_1, var_2) {
 
   if(var_2 == "LMG") {
     if(isDefined(var_3)) {
-      if(!var_3 islinked())
+      if(!var_3 islinked()) {
         var_3 linktosynchronizedparent(var_0, "J_prop_3", (0, 0, 0), (0, 0, 0));
+      }
 
       var_3 show();
       var_3 scriptmodelplayanimdeltamotionfrompos("h1_lobby_mk19_idle", var_1.origin, var_1.angles, "mk19_anim");

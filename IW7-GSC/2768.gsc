@@ -6,10 +6,12 @@
 init() {
   var_00 = getdvarint("scr_match_recording", 0);
 
-  if(!func_B408(var_00))
+  if(!func_B408(var_00)) {
     return;
-  else
+  }
+  else {
     level.matchrecording_type = var_00;
+  }
 
   level.matchreceventcountline = 0;
   level.matchrecevents = [];
@@ -20,10 +22,12 @@ init() {
   level.matchrecording_generateid = ::matchrecording_generateid;
   level.matchrecording_usereventthink = ::matchrecording_usereventthink;
 
-  if(level.matchrecording_type == 1)
+  if(level.matchrecording_type == 1) {
     func_B3F5();
-  else if(level.matchrecording_type == 3)
+  }
+  else if(level.matchrecording_type == 3) {
     matchrecording_scriptdata_openfileaddheader(1);
+  }
 
   level thread matchrecording_logallplayerposthink();
   level thread matchrecording_onplayerconnect();
@@ -33,15 +37,18 @@ init() {
 func_B408(var_00) {
   var_01 = 1;
 
-  if(var_00 == 0)
+  if(var_00 == 0) {
     var_01 = 0;
-  else if(var_00 < 0 || var_00 > 4)
+  }
+  else if(var_00 < 0 || var_00 > 4) {
     var_01 = 0;
+  }
   else if(var_00 == 3 || var_00 == 4) {
     var_02 = 0;
 
-    if(!var_02)
+    if(!var_02) {
       var_01 = 0;
+    }
   } else if(var_00 == 1 || var_00 == 2) {
     var_03 = getdvarint("g_logEnable", 0);
     var_01 = var_03 == 1;
@@ -55,12 +62,15 @@ matchrecording_isenabled() {
 }
 
 matchrecording_teammap(var_00) {
-  if(isDefined(level.teambased) && !level.teambased)
+  if(isDefined(level.teambased) && !level.teambased) {
     var_01 = 2;
-  else if(!isDefined(var_00) || var_00 == "allies")
+  }
+  else if(!isDefined(var_00) || var_00 == "allies") {
     var_01 = 2;
-  else
+  }
+  else {
     var_01 = 3;
+  }
 
   return var_01;
 }
@@ -180,13 +190,15 @@ matchrecording_logevent(var_00, var_01, var_02, var_03, var_04, var_05, var_06, 
 
   var_12 = "";
 
-  if(isDefined(var_06))
+  if(isDefined(var_06)) {
     var_12 = " s:" + var_06;
+  }
 
   var_13 = "";
 
-  if(isDefined(var_07) && isDefined(var_08))
+  if(isDefined(var_07) && isDefined(var_08)) {
     var_13 = " " + int(var_07) + "," + int(var_08);
+  }
 
   var_14 = "|" + var_00 + " " + var_09 + " " + var_11 + " " + var_10 + " " + var_05 + var_13 + var_12;
   level.matchrecevents[level.matchrecevents.size - 1] = level.matchrecevents[level.matchrecevents.size - 1] + var_14;
@@ -200,10 +212,12 @@ matchrecording_logeventmsg(var_00, var_01, var_02) {
   var_03 = matchrecording_eventcharmap(var_00);
 
   if(var_02 != "") {
-    if(!isDefined(var_02))
+    if(!isDefined(var_02)) {
       var_02 = "";
-    else
+    }
+    else {
       var_02 = " \"" + var_02 + "\"";
+    }
   }
 
   var_04 = "|0 0 " + var_03 + " " + var_01 + var_02;
@@ -228,8 +242,9 @@ matchrecording_inceventlinecount() {
     level.matchrecevents[level.matchrecevents.size] = "<mrec_events> ";
     level.matchreceventcountline = 0;
   } else if(level.matchreceventcountline > 30 || level.matchrecevents[level.matchrecevents.size - 1].size > 800) {
-    if(level.matchrecording_type == 1 || level.matchrecording_type == 3)
+    if(level.matchrecording_type == 1 || level.matchrecording_type == 3) {
       matchrecording_dump();
+    }
 
     level.matchrecevents[level.matchrecevents.size] = "<mrec_events> ";
     level.matchreceventcountline = 0;
@@ -258,11 +273,13 @@ matchrecording_dump() {
 }
 
 matchrecording_glog_dump() {
-  if(level.matchrecording_type == 2)
+  if(level.matchrecording_type == 2) {
     func_B3F5();
+  }
 
-  foreach(var_01 in level.matchrecevents)
+  foreach(var_01 in level.matchrecevents) {
   logprint(var_01 + "\\n");
+  }
 
   level.matchrecevents = [];
 }
@@ -270,8 +287,9 @@ matchrecording_glog_dump() {
 func_B3F5() {
   var_00 = func_B3F4();
 
-  foreach(var_02 in var_00)
+  foreach(var_02 in var_00) {
   logprint(var_02);
+  }
 }
 
 matchrecording_scriptdata_openfilewrite() {}
@@ -327,8 +345,9 @@ func_B3FE() {
         var_02 = var_02 + var_08;
         var_1++;
 
-        if(var_08 > 75.0)
+        if(var_08 > 75.0) {
           var_0++;
+        }
       }
     }
 
@@ -345,14 +364,16 @@ func_B3FE() {
     matchrecording_logeventmsg("LOG_STAT", gettime(), "Avg. Death Angle: " + var_02 / var_01);
   }
 
-  if(var_03 > 0)
+  if(var_03 > 0) {
     matchrecording_logeventmsg("LOG_STAT", gettime(), "Avg. Engagement Length: " + var_04 / var_03 / 1000.0 + "s");
+  }
 
   if(isDefined(level.func_744D) && isDefined(level.func_744D.func_12F92) && isDefined(level.func_744D.func_5AFE)) {
     var_14 = level.func_744D.func_12F92 + level.func_744D.func_5AFE;
 
-    if(var_14 > 0.0)
+    if(var_14 > 0.0) {
       matchrecording_logeventmsg("LOG_STAT", gettime(), "Frontline Uptime: " + level.func_744D.func_12F92 / var_14 * 100.0 + "%");
+    }
   }
 }
 
@@ -379,8 +400,9 @@ matchrecording_usereventthink() {
 }
 
 matchrecording_generateid() {
-  if(!isDefined(game["matchRecording_nextID"]))
+  if(!isDefined(game["matchRecording_nextID"])) {
     game["matchRecording_nextID"] = 100;
+  }
 
   var_00 = game["matchRecording_nextID"];
   game["matchRecording_nextID"]++;

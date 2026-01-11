@@ -17,13 +17,16 @@ bot_hq_think() {
   }
   self.bot.update_objective = time + randomintrange(500, 1500);
 
-  if(bot_should_patrol_hq())
+  if(bot_should_patrol_hq()) {
     self bot_patrol_hq();
-  else if(!bot_has_hq_goal())
+  }
+  else if(!bot_has_hq_goal()) {
     self bot_move_to_hq();
+  }
 
-  if(self bot_is_capturing_hq())
+  if(self bot_is_capturing_hq()) {
     self bot_capture_hq();
+  }
 
   bot_hq_tactical_insertion();
   bot_hq_grenade();
@@ -32,8 +35,9 @@ bot_hq_think() {
     mine = getnearestnode(self.origin);
     node = hq_nearest_node();
 
-    if(isDefined(mine) && nodesvisible(mine, node))
+    if(isDefined(mine) && nodesvisible(mine, node)) {
       self lookat(level.radio.baseorigin + vectorscale((0, 0, 1), 30.0));
+    }
   }
 }
 
@@ -42,8 +46,9 @@ bot_has_hq_goal() {
 
   if(isDefined(origin)) {
     foreach(node in level.radio.nodes) {
-      if(distancesquared(origin, node.origin) < 4096)
+      if(distancesquared(origin, node.origin) < 4096) {
         return true;
+      }
     }
   }
 
@@ -55,14 +60,17 @@ bot_is_capturing_hq() {
 }
 
 bot_should_patrol_hq() {
-  if(level.radio.gameobject.ownerteam == "neutral")
+  if(level.radio.gameobject.ownerteam == "neutral") {
     return false;
+  }
 
-  if(level.radio.gameobject.ownerteam != self.team)
+  if(level.radio.gameobject.ownerteam != self.team) {
     return false;
+  }
 
-  if(hq_is_contested())
+  if(hq_is_contested()) {
     return false;
+  }
 
   return true;
 }
@@ -73,17 +81,20 @@ bot_patrol_hq() {
   if(self atgoal("hq_patrol")) {
     node = getnearestnode(self.origin);
 
-    if(node.type == "Path")
+    if(node.type == "Path") {
       self setstance("crouch");
-    else
+    }
+    else {
       self setstance("stand");
+    }
 
     if(gettime() > self.bot.update_lookat) {
       origin = self bot_get_look_at();
       z = 20;
 
-      if(distancesquared(origin, self.origin) > 262144)
+      if(distancesquared(origin, self.origin) > 262144) {
         z = randomintrange(16, 60);
+      }
 
       self lookat(origin + (0, 0, z));
 
@@ -124,8 +135,9 @@ bot_patrol_hq() {
       self lookat(origin);
     }
 
-    if(distancesquared(self.origin, goal) < 16384)
+    if(distancesquared(self.origin, goal) < 16384) {
       self.bot.update_objective_patrol = gettime() + randomintrange(3000, 6000);
+    }
 
     mine = getnearestnode(goal);
 
@@ -183,27 +195,31 @@ bot_get_look_at() {
   if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
 
-    if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384)
+    if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384) {
       return node.origin;
+    }
   }
 
   enemies = self maps\mp\bots\_bot::bot_get_enemies(0);
 
-  if(enemies.size)
+  if(enemies.size) {
     enemy = random(enemies);
+  }
 
   if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
 
-    if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384)
+    if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384) {
       return node.origin;
+    }
   }
 
   spawn = random(level.spawnpoints);
   node = getvisiblenode(self.origin, spawn.origin);
 
-  if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384)
+  if(isDefined(node) && distancesquared(self.origin, node.origin) > 16384) {
     return node.origin;
+  }
 
   return level.radio.baseorigin;
 }
@@ -216,8 +232,9 @@ bot_capture_hq() {
     origin = self bot_get_look_at();
     z = 20;
 
-    if(distancesquared(origin, self.origin) > 262144)
+    if(distancesquared(origin, self.origin) > 262144) {
       z = randomintrange(16, 60);
+    }
 
     self lookat(origin + (0, 0, z));
 
@@ -237,21 +254,24 @@ any_other_team_touching(skip_team) {
     if(team == skip_team) {
       continue;
     }
-    if(level.radio.gameobject.numtouching[team])
+    if(level.radio.gameobject.numtouching[team]) {
       return true;
+    }
   }
 
   return false;
 }
 
 is_hq_contested(skip_team) {
-  if(any_other_team_touching(skip_team))
+  if(any_other_team_touching(skip_team)) {
     return true;
+  }
 
   enemy = self maps\mp\bots\_bot::bot_get_closest_enemy(level.radio.baseorigin, 1);
 
-  if(isDefined(enemy) && distancesquared(enemy.origin, level.radio.baseorigin) < 262144)
+  if(isDefined(enemy) && distancesquared(enemy.origin, level.radio.baseorigin) < 262144) {
     return true;
+  }
 
   return false;
 }
@@ -266,8 +286,9 @@ bot_hq_grenade() {
     if(self getweaponammostock("proximity_grenade_mp") > 0) {
       origin = bot_get_look_at();
 
-      if(self maps\mp\bots\_bot_combat::bot_combat_throw_proximity(origin))
+      if(self maps\mp\bots\_bot_combat::bot_combat_throw_proximity(origin)) {
         return;
+      }
     }
   }
 
@@ -278,17 +299,20 @@ bot_hq_grenade() {
 
   enemy = self maps\mp\bots\_bot::bot_get_closest_enemy(level.radio.baseorigin, 0);
 
-  if(isDefined(enemy))
+  if(isDefined(enemy)) {
     origin = enemy.origin;
-  else
+  }
+  else {
     origin = level.radio.baseorigin;
+  }
 
   dir = vectornormalize(self.origin - origin);
   dir = (0, dir[1], 0);
   origin = origin + vectorscale(dir, 128);
 
-  if(!self maps\mp\bots\_bot_combat::bot_combat_throw_lethal(origin))
+  if(!self maps\mp\bots\_bot_combat::bot_combat_throw_lethal(origin)) {
     self maps\mp\bots\_bot_combat::bot_combat_throw_tactical(origin);
+  }
 }
 
 bot_hq_tactical_insertion() {
@@ -308,8 +332,9 @@ bot_hq_tactical_insertion() {
     origin = self.origin + vectorscale(dir, dist);
     next = getnearestnode(origin);
 
-    if(isDefined(next) && nodesvisible(next, node))
+    if(isDefined(next) && nodesvisible(next, node)) {
       bot_combat_tactical_insertion(self.origin);
+    }
   }
 }
 

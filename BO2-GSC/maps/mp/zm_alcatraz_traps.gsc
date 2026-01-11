@@ -131,8 +131,9 @@ activate_fan_trap() {
 fan_trap_timeout() {
   self.zombie_dmg_trig endon("trap_finished_" + self.script_string);
 
-  for(n_duration = 0; n_duration < 25; n_duration = n_duration + 0.05)
+  for(n_duration = 0; n_duration < 25; n_duration = n_duration + 0.05) {
     wait 0.05;
+  }
 
   self.zombie_dmg_trig notify("trap_finished_" + self.script_string);
 }
@@ -144,8 +145,9 @@ fan_trap_rumble_think() {
     self.rumble_trig waittill("trigger", ent);
 
     if(isplayer(ent)) {
-      if(!is_true(ent.fan_trap_rumble))
+      if(!is_true(ent.fan_trap_rumble)) {
         self thread fan_trap_rumble(ent);
+      }
     }
   }
 }
@@ -179,8 +181,9 @@ fan_trap_damage(parent) {
   while(true) {
     self waittill("trigger", ent);
 
-    if(isplayer(ent))
+    if(isplayer(ent)) {
       ent thread player_fan_trap_damage();
+    }
     else {
       if(is_true(ent.is_brutus)) {
         ent maps\mp\zombies\_zm_ai_brutus::trap_damage_callback(self);
@@ -213,10 +216,12 @@ player_fan_trap_damage() {
   self endon("death");
   self endon("disconnect");
 
-  if(!self hasperk("specialty_armorvest") || self.health - 100 < 1)
+  if(!self hasperk("specialty_armorvest") || self.health - 100 < 1) {
     radiusdamage(self.origin, 10, self.health + 100, self.health + 100);
-  else
+  }
+  else {
     self dodamage(50, self.origin);
+  }
 }
 
 zombie_fan_trap_death() {
@@ -291,14 +296,17 @@ acid_trap_think() {
           self.zombie_dmg_trig waittill("acid_trap_fx_done");
           clientnotify(self.script_string + "off");
 
-          if(isDefined(self.fx_org))
+          if(isDefined(self.fx_org)) {
             self.fx_org delete();
+          }
 
-          if(isDefined(self.zapper_fx_org))
+          if(isDefined(self.zapper_fx_org)) {
             self.zapper_fx_org delete();
+          }
 
-          if(isDefined(self.zapper_fx_switch_org))
+          if(isDefined(self.zapper_fx_switch_org)) {
             self.zapper_fx_switch_org delete();
+          }
 
           self.zombie_dmg_trig notify("acid_trap_finished");
           self.zombie_dmg_trig.active = 0;
@@ -351,8 +359,9 @@ acid_trap_damage() {
   while(true) {
     self waittill("trigger", ent);
 
-    if(isplayer(ent))
+    if(isplayer(ent)) {
       ent thread player_acid_damage(self);
+    }
     else {
       if(is_true(ent.is_brutus)) {
         ent maps\mp\zombies\_zm_ai_brutus::trap_damage_callback(self);
@@ -405,8 +414,9 @@ player_acid_damage_cooldown() {
   self endon("disconnect");
   wait 1;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.is_in_acid = undefined;
+  }
 }
 
 acid_trap_fx(notify_ent) {
@@ -437,8 +447,9 @@ acid_trap_host_migration_listener() {
 init_tower_trap_trigs() {
   trap_trigs = getEntArray("tower_trap_activate_trigger", "targetname");
 
-  foreach(trigger in trap_trigs)
+  foreach(trigger in trap_trigs) {
   trigger thread tower_trap_trigger_think();
+  }
 }
 
 tower_trap_trigger_think() {
@@ -553,8 +564,9 @@ tower_trap_move_switch(parent) {
   self waittill("available");
   tswitch rotatepitch(180, 0.5);
 
-  if(isDefined(parent.script_noteworthy))
+  if(isDefined(parent.script_noteworthy)) {
     zapper_light_green(light_name);
+  }
 }
 
 activate_tower_trap() {
@@ -568,8 +580,9 @@ activate_tower_trap() {
     zombies_sorted = [];
 
     foreach(zombie in zombies) {
-      if(zombie istouching(self.range_trigger))
+      if(zombie istouching(self.range_trigger)) {
         zombies_sorted[zombies_sorted.size] = zombie;
+      }
     }
 
     if(zombies_sorted.size <= 0) {
@@ -638,10 +651,12 @@ tower_trap_fires(a_zombies) {
 }
 
 hint_string(string, cost) {
-  if(isDefined(cost))
+  if(isDefined(cost)) {
     self sethintstring(string, cost);
-  else
+  }
+  else {
     self sethintstring(string);
+  }
 
   self setcursorhint("HINT_NOICON");
 }
@@ -649,15 +664,17 @@ hint_string(string, cost) {
 zapper_light_red(lightname) {
   zapper_lights = getEntArray(lightname, "targetname");
 
-  for(i = 0; i < zapper_lights.size; i++)
+  for(i = 0; i < zapper_lights.size; i++) {
     zapper_lights[i] setModel("p6_zm_al_wall_trap_control_red");
+  }
 }
 
 zapper_light_green(lightname) {
   zapper_lights = getEntArray(lightname, "targetname");
 
-  for(i = 0; i < zapper_lights.size; i++)
+  for(i = 0; i < zapper_lights.size; i++) {
     zapper_lights[i] setModel("p6_zm_al_wall_trap_control");
+  }
 }
 
 get_trap_light_name() {

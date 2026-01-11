@@ -38,95 +38,120 @@ get_damage_direction(direction) {
 
   possible_directions = ["left", "center", "right"];
 
-  if(!isDefined(direction))
+  if(!isDefined(direction)) {
     return possible_directions[randomInt(possible_directions.size)];
+  }
 
   direction *= -1;
 
   self_forward = anglesToForward(self.angles);
   forward_dot_product = VectorDot(direction, self_forward);
 
-  if(forward_dot_product > COS_15)
+  if(forward_dot_product > COS_15) {
     return "center";
+  }
 
   self_right = anglesToRight(self.angles);
   right_dot_product = VectorDot(direction, self_right);
 
-  if(right_dot_product > 0)
+  if(right_dot_product > 0) {
     return "right";
-  else
+  }
+  else {
     return "left";
+  }
 }
 
 play_basic_pain_overlay(damage_direction) {
-  if(damage_direction == "left")
+  if(damage_direction == "left") {
     PlayFXOnTagForClients(level._effect["vfx_blood_hit_left"], self, "tag_eye", self);
-  else if(damage_direction == "center")
+  }
+  else if(damage_direction == "center") {
     PlayFXOnTagForClients(level._effect["vfx_melee_blood_spray"], self, "tag_eye", self);
-  else if(damage_direction == "right")
+  }
+  else if(damage_direction == "right") {
     PlayFXOnTagForClients(level._effect["vfx_blood_hit_right"], self, "tag_eye", self);
-  else
+  }
+  else {
     AssertMsg("Unknown damage_direction: " + damage_direction);
+  }
 }
 
 play_spitter_pain_overlay(damage_direction) {
-  if(damage_direction == "left")
+  if(damage_direction == "left") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_left"], self, "tag_eye", self);
-  else if(damage_direction == "center")
+  }
+  else if(damage_direction == "center") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_center"], self, "tag_eye", self);
-  else if(damage_direction == "right")
+  }
+  else if(damage_direction == "right") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_right"], self, "tag_eye", self);
-  else
+  }
+  else {
     AssertMsg("Unknown damage_direction: " + damage_direction);
+  }
 }
 
 play_slash_pain_overlay(damage_direction) {
-  if(damage_direction == "center")
+  if(damage_direction == "center") {
     damage_direction = random_pick_R_or_L();
+  }
 
-  if(damage_direction == "left")
+  if(damage_direction == "left") {
     PlayFXOnTagForClients(level._effect["vfx_blood_hit_left"], self, "tag_eye", self);
-  else if(damage_direction == "right")
+  }
+  else if(damage_direction == "right") {
     PlayFXOnTagForClients(level._effect["vfx_blood_hit_right"], self, "tag_eye", self);
-  else
+  }
+  else {
     AssertMsg("Unknown damage_direction: " + damage_direction);
+  }
 }
 
 play_goo_pain_overlay(damage_direction) {
-  if(damage_direction == "left")
+  if(damage_direction == "left") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_left"], self, "tag_eye", self);
-  else if(damage_direction == "center")
+  }
+  else if(damage_direction == "center") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_center"], self, "tag_eye", self);
-  else if(damage_direction == "right")
+  }
+  else if(damage_direction == "right") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_right"], self, "tag_eye", self);
-  else
+  }
+  else {
     AssertMsg("Unknown damage_direction: " + damage_direction);
+  }
 }
 
 random_pick_R_or_L() {
-  if(cointoss())
+  if(cointoss()) {
     return "right";
-  else
+  }
+  else {
     return "left";
+  }
 }
 
 is_spitter_spit(weapon_name) {
-  if(!isDefined(weapon_name))
+  if(!isDefined(weapon_name)) {
     return false;
+  }
 
   return (weapon_name == "alienspit_mp");
 }
 
 is_spitter_gas(weapon_name) {
-  if(!isDefined(weapon_name))
+  if(!isDefined(weapon_name)) {
     return false;
+  }
 
   return (weapon_name == "alienspit_gas_mp");
 }
 
 is_elite_attack(attacker) {
-  if(!isDefined(attacker) || !attacker maps\mp\alien\_utility::is_alien_agent())
+  if(!isDefined(attacker) || !attacker maps\mp\alien\_utility::is_alien_agent()) {
     return false;
+  }
 
   return (attacker maps\mp\alien\_utility::get_alien_type() == "elite");
 }
@@ -151,8 +176,9 @@ makeReviveIcon(owner, color, bleedOutTime) {
 
   reviveIcon thread deleteReviveIcon(owner);
 
-  if(isDefined(bleedOutTime))
+  if(isDefined(bleedOutTime)) {
     reviveIcon thread lastStandUpdateReviveIconColorAlien(bleedOutTime);
+  }
 
   return reviveIcon;
 }
@@ -166,8 +192,9 @@ deleteReviveIcon(owner) {
 
 hideHudElementOnGameEnd(hudElement) {
   level waittill("game_ended");
-  if(isDefined(hudElement))
+  if(isDefined(hudElement)) {
     hudElement.alpha = 0;
+  }
 }
 
 blocker_hive_hp_bar() {
@@ -223,10 +250,12 @@ create_hud_laststand_count(xpos, ypos, scale) {
   hud_score.label = &"";
   hud_score setValue(0);
 
-  if(getDvarInt("debug_alien_laststand_hud", 0) == 1)
+  if(getDvarInt("debug_alien_laststand_hud", 0) == 1) {
     hud_score.alpha = 1;
-  else
+  }
+  else {
     hud_score.alpha = 0;
+  }
 
   return hud_score;
 }
@@ -237,10 +266,12 @@ update_hud_laststand_count() {
 }
 
 createSpendHintHUD(resource, rank, message) {
-  if(!isDefined(message))
+  if(!isDefined(message)) {
     self setLowerMessage("spend_hint", &"ALIEN_COLLECTIBLES_PULL_TO_SPEND");
-  else
+  }
+  else {
     self setLowerMessage("spend_hint", message);
+  }
   self thread hideSpendHintIcon();
 }
 
@@ -275,16 +306,19 @@ intro_black_screen() {
 }
 
 introscreen_corner_line(string, index_key) {
-  if(!isDefined(level.intro_offset))
+  if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  else
+  }
+  else {
     level.intro_offset++;
+  }
 
   y = cornerline_height();
 
   font_scale = 1.6;
-  if(level.splitscreen)
+  if(level.splitscreen) {
     font_scale = 2;
+  }
 
   hudelem = NewHudElem();
   hudelem.x = 20;
@@ -310,8 +344,9 @@ introscreen_corner_line(string, index_key) {
 cornerline_height() {
   offset = -92;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     offset = -110;
+  }
 
   return (((level.intro_offset) * 20) - 92);
 }
@@ -337,18 +372,22 @@ alienOutcomeNotify(winner, end_reason_text_index) {
   wait(0.5);
 
   team = self.pers["team"];
-  if(!isDefined(team) || (team != "allies" && team != "axis"))
+  if(!isDefined(team) || (team != "allies" && team != "axis")) {
     team = "allies";
+  }
 
-  while(self maps\mp\gametypes\_hud_message::isDoingSplash())
+  while(self maps\mp\gametypes\_hud_message::isDoingSplash()) {
     wait 0.05;
+  }
 
   self endon("reset_outcome");
 
-  if(isDefined(self.pers["team"]) && winner == team)
+  if(isDefined(self.pers["team"]) && winner == team) {
     outcome_title_index = get_end_game_string_index("win");
-  else
+  }
+  else {
     outcome_title_index = get_end_game_string_index("fail");
+  }
 
   self setClientOmnvar("ui_round_end_title", outcome_title_index);
   self setClientOmnvar("ui_round_end_reason", end_reason_text_index);
@@ -356,10 +395,12 @@ alienOutcomeNotify(winner, end_reason_text_index) {
 }
 
 register_end_game_string_index() {
-  if(isDefined(level.end_game_string_override))
+  if(isDefined(level.end_game_string_override)) {
     [[level.end_game_string_override]]();
-  else
+  }
+  else {
     register_default_end_game_string_index();
+  }
 }
 
 register_default_end_game_string_index() {
@@ -485,8 +526,9 @@ unfreeze_combo_meter() {
 }
 
 set_event_count(event_id, event_count) {
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player SetClientOmnvar("ui_alien_eog_score_row_" + event_id, event_count);
+  }
 }
 
 set_has_chaos_class_skill_bonus(player, class_index) {

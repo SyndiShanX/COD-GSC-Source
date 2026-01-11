@@ -12,8 +12,9 @@ init() {
   if(getdvar(#"createfx") == "on") {
     return;
   }
-  if(!clientscripts\mp\zombies\_zm_weapons::is_weapon_included("jetgun_zm"))
+  if(!clientscripts\mp\zombies\_zm_weapons::is_weapon_included("jetgun_zm")) {
     return;
+  }
 }
 
 player_init() {
@@ -36,15 +37,17 @@ jetgun_fx_power_cell(localclientnum) {
   for(;;) {
     waitrealtime(0.1);
 
-    while(!clienthassnapshot(0))
+    while(!clienthassnapshot(0)) {
       wait 0.05;
+    }
 
     weaponname = undefined;
     currentweapon = getcurrentweapon(localclientnum);
 
     if(!level.jetgun_play_fx_power_cell[localclientnum] || isthrowinggrenade(localclientnum) || ismeleeing(localclientnum) || isonturret(localclientnum) || currentweapon != "jetgun_zm" && currentweapon != "jetgun_upgraded_zm") {
-      if(oldammo != -1)
+      if(oldammo != -1) {
         jetgun_play_power_cell_fx(localclientnum, 0);
+      }
 
       oldammo = -1;
       oldcount = -1;
@@ -53,16 +56,19 @@ jetgun_fx_power_cell(localclientnum) {
 
     ammo = getweaponammoclip(localclientnum, currentweapon);
 
-    if(oldammo > 0 && oldammo != ammo)
+    if(oldammo > 0 && oldammo != ammo) {
       jetgun_fx_fire(localclientnum);
+    }
 
     oldammo = ammo;
 
-    if(ammo > level.jetgun_power_cell_fx_handles.size)
+    if(ammo > level.jetgun_power_cell_fx_handles.size) {
       ammo = level.jetgun_power_cell_fx_handles.size;
+    }
 
-    if(oldcount == -1 || oldcount != ammo)
+    if(oldcount == -1 || oldcount != ammo) {
       level thread jetgun_play_power_cell_fx(localclientnum, ammo);
+    }
 
     oldcount = ammo;
   }
@@ -94,8 +100,9 @@ jetgun_play_power_cell_fx(localclientnum, count) {
     for(i = count; i > 0; i--) {
       fx = level._effect["jetgun_viewmodel_power_cell" + i];
 
-      if(currentweapon == "jetgun_upgraded_zm")
+      if(currentweapon == "jetgun_upgraded_zm") {
         fx = level._effect["jetgun_viewmodel_power_cell_upgraded" + i];
+      }
 
       level.jetgun_power_cell_fx_handles[i - 1] = playviewmodelfx(localclientnum, fx, "tag_bulb" + i);
     }
@@ -108,11 +115,13 @@ jetgun_fx_fire(localclientnum) {
   currentweapon = getcurrentweapon(localclientnum);
   fx = level._effect["jetgun_viewmodel_steam"];
 
-  if(currentweapon == "jetgun_upgraded_zm")
+  if(currentweapon == "jetgun_upgraded_zm") {
     fx = level._effect["jetgun_viewmodel_steam_upgraded"];
+  }
 
-  for(i = level.jetgun_steam_vents; i > 0; i--)
+  for(i = level.jetgun_steam_vents; i > 0; i--) {
     playviewmodelfx(localclientnum, fx, "tag_steam" + i);
+  }
 
   playSound(localclientnum, "wpn_thunder_breath", (0, 0, 0));
 }

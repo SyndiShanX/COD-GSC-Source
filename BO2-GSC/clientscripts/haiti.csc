@@ -74,8 +74,9 @@ oxygen_mask_smoke() {
   while(level.mask_smoke_amount < 1) {
     level.mask_smoke_amount = level.mask_smoke_amount + 1 * 0.05;
 
-    if(level.mask_smoke_amount > 1)
+    if(level.mask_smoke_amount > 1) {
       level.mask_smoke_amount = 1;
+    }
 
     set_filter_oxygenmask_smoke_amount(level.localplayers[0], 0, level.mask_smoke_amount);
     wait 0.05;
@@ -89,8 +90,9 @@ oxygen_mask_smoke_clear() {
   while(level.mask_smoke_amount > 0) {
     level.mask_smoke_amount = level.mask_smoke_amount - 1 * 0.05;
 
-    if(level.mask_smoke_amount < 0)
+    if(level.mask_smoke_amount < 0) {
       level.mask_smoke_amount = 0;
+    }
 
     set_filter_oxygenmask_smoke_amount(level.localplayers[0], 0, level.mask_smoke_amount);
     wait 0.05;
@@ -117,15 +119,17 @@ walkway_bridge_pieces() {
   a_n_piece_index[2] = findstaticmodelindex((-7686.81, 7519.54, 454.5));
 
   foreach(n_index in a_n_piece_index) {
-    if(isDefined(n_index))
+    if(isDefined(n_index)) {
       hidestaticmodel(n_index);
+    }
   }
 
   level waittill("unhide_debris");
 
   foreach(n_index in a_n_piece_index) {
-    if(isDefined(n_index))
+    if(isDefined(n_index)) {
       unhidestaticmodel(n_index);
+    }
   }
 }
 

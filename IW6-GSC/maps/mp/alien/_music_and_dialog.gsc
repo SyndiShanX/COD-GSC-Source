@@ -70,11 +70,13 @@ onPlayerSpawned() {
   self waittill("spawned_player");
 
   if(level.script != "mp_alien_last" && (!level.splitscreen || level.splitscreen && !isDefined(level.playedStartingMusic))) {
-    if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary())
+    if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary()) {
       self playLocalSound(game["music"]["spawn_" + self.team]);
+    }
 
-    if(level.splitscreen)
+    if(level.splitscreen) {
       level.playedStartingMusic = true;
+    }
   }
 }
 
@@ -83,8 +85,9 @@ onGameEnded() {
 
   if(level.teamBased) {
     if(level.splitscreen) {
-      if(winner == "allies")
+      if(winner == "allies") {
         wait .01;
+      }
 
       else if(winner == "axis") {
         foreach(player in level.players) {
@@ -132,12 +135,15 @@ onGameEnded() {
       if(player isSplitscreenPlayer() && !player isSplitscreenPlayerPrimary()) {
         continue;
       }
-      if(player.pers["team"] != "allies" && player.pers["team"] != "axis")
+      if(player.pers["team"] != "allies" && player.pers["team"] != "axis") {
         player playLocalSound(game["music"]["nuke_music"]);
-      else if(isDefined(winner) && isPlayer(winner) && player == winner)
+      }
+      else if(isDefined(winner) && isPlayer(winner) && player == winner) {
         player playLocalSound(game["music"]["victory_" + player.pers["team"]]);
-      else if(!level.splitScreen)
+      }
+      else if(!level.splitScreen) {
         player playLocalSound(game["music"]["defeat_" + player.pers["team"]]);
+      }
     }
   }
 }
@@ -189,8 +195,9 @@ musicController() {
 
     }
   } else {
-    if(!level.hardcoreMode)
+    if(!level.hardcoreMode) {
       playSoundOnPlayers(game["music"]["losing_allies"]);
+    }
 
   }
 }
@@ -208,8 +215,9 @@ suspenseMusic() {
 
   for(;;) {
     wait(randomFloatRange(60, 90));
-    if(!flag("alien_music_playing"))
+    if(!flag("alien_music_playing")) {
       playSoundOnPlayers(game["music"]["suspense"][randomInt(numTracks)]);
+    }
   }
 }
 
@@ -226,10 +234,12 @@ alienPlayerPainBreathingSound() {
     wait(0.2);
 
     if(shouldPlayPainBreathingSound()) {
-      if(self hasFemaleCustomizationModel())
+      if(self hasFemaleCustomizationModel()) {
         self playLocalSound("Fem_breathing_hurt");
-      else
+      }
+      else {
         self playLocalSound("breathing_hurt_alien");
+      }
       wait(.784);
       wait(0.1 + randomfloat(0.8));
     }
@@ -244,8 +254,9 @@ shouldPlayPainBreathingSound() {
     self.health > self.maxhealth * self.healthRegenMaxPercent * VERY_HURT_HEALTH
   )
     return false;
-  else
+  else {
     return true;
+  }
 }
 
 playMusicBeforeReachLayer(time_to_reach_layer) {
@@ -258,8 +269,9 @@ playMusicBeforeReachLayer(time_to_reach_layer) {
   }
   wait(time_to_reach_layer - wave_music_length);
 
-  if(!flag("alien_music_playing"))
+  if(!flag("alien_music_playing")) {
     level thread play_alien_music(NEW_WAVE_MUSIC_ALIAS);
+  }
 }
 
 playVOForDowned(player) {
@@ -309,8 +321,9 @@ playVOForBombDetonate(hive) {
   while(maps\mp\agents\_agent_utility::getActiveAgentsOfType("alien").size > 0) {
     wait(1);
     counter++;
-    if(counter > 30)
+    if(counter > 30) {
       return;
+    }
   }
 
   if(hive is_door() || hive is_door_hive()) {
@@ -372,15 +385,17 @@ play_vo_for_grab_drill() {
     return;
   }
   foreach(player in players) {
-    if(isDefined(level.drill_carrier) && level.drill_carrier == player)
+    if(isDefined(level.drill_carrier) && level.drill_carrier == player) {
       return;
+    }
   }
 
   player = random(players);
 
   line = player.vo_prefix + "get_drill";
-  if(!SoundExists(line))
+  if(!SoundExists(line)) {
     line = player.vo_prefix + "order_grab_drill";
+  }
   player play_vo_on_player(line, undefined, 10);
 }
 
@@ -399,8 +414,9 @@ PlayVOForIntro() {
   }
 
   foreach(player in players) {
-    if(isDefined(level.drill_carrier) && level.drill_carrier == player)
+    if(isDefined(level.drill_carrier) && level.drill_carrier == player) {
       return;
+    }
   }
 
   line = player.vo_prefix + "intro";
@@ -447,8 +463,9 @@ playVOforBlockerHive() {
   while(maps\mp\agents\_agent_utility::getActiveAgentsOfType("alien").size > 0) {
     wait(1);
     counter++;
-    if(counter > 30)
+    if(counter > 30) {
       return;
+    }
   }
 
   hasdrill = false;
@@ -459,8 +476,9 @@ playVOforBlockerHive() {
   }
   player = random(players);
   foreach(player in players) {
-    if(player hasweapon("alienbomb_mp"))
+    if(player hasweapon("alienbomb_mp")) {
       hasdrill = true;
+    }
   }
   if(!hasdrill) {
     line = player.vo_prefix + "get_drill";
@@ -552,8 +570,9 @@ handleFirstEliteArrival(elite) {
       player StopLocalSound("mus_alien_newwave");
       flag_clear("alien_music_playing");
     }
-    if(!flag("exfil_music_playing"))
+    if(!flag("exfil_music_playing")) {
       level thread play_alien_music("mus_alien_queen");
+    }
   }
 }
 
@@ -672,15 +691,17 @@ playVOForIMS(player) {
 }
 
 playVOForDrone(player) {
-  if(isPlayingSolo())
+  if(isPlayingSolo()) {
     return;
+  }
   line = player.vo_prefix + "online_drone";
   player play_vo_on_player(line);
 }
 
 playVOForMortarStrike(player) {
-  if(isPlayingSolo())
+  if(isPlayingSolo()) {
     return;
+  }
   line = player.vo_prefix + "inbound_mortar";
   player play_vo_on_player(line);
 }
@@ -759,8 +780,9 @@ PlayVOForRandombox(player) {
 PlayVOForTeamArmor(player) {
   line = player.vo_prefix + "drop_armor";
 
-  if(randomint(100) > 50)
+  if(randomint(100) > 50) {
     line = player.vo_prefix + "inform_armor";
+  }
 
   if(isPlayingSolo()) {
     if(randomint(100) > 50) {
@@ -791,8 +813,9 @@ PlayVOForMeteor() {
 
     players = get_array_of_valid_players();
     player = random(players);
-    if(!isDefined(player))
+    if(!isDefined(player)) {
       return;
+    }
     line = player.vo_prefix + "inbound_meteor";
     player play_vo_on_player(line);
   }
@@ -832,8 +855,9 @@ playVOForTrapActivation(player, trap_type) {
 playVOForPillage(player) {
   alias = player.vo_prefix + "good_loot";
 
-  if(alias_2d_version_exists(player, alias))
+  if(alias_2d_version_exists(player, alias)) {
     player playlocalsound(get_alias_2d_version(player, alias));
+  }
   else if(SoundExists(alias)) {
     player playlocalsound(alias);
   }
@@ -846,8 +870,9 @@ playVOforDrillHot() {
   }
 
   players = get_array_of_valid_players(true, level.drill.origin);
-  if(players.size < 1)
+  if(players.size < 1) {
     return;
+  }
   player = players[0];
   line = player.vo_prefix + "drill_hot";
   player thread play_vo_on_player(line, undefined, 10);
@@ -855,8 +880,9 @@ playVOforDrillHot() {
 
 playVOforNukeArmed(player) {
   players = get_array_of_valid_players(true, level.drill.origin);
-  if(players.size < 1)
+  if(players.size < 1) {
     return;
+  }
   player = players[0];
   line = player.vo_prefix + "nuke_armed";
   player thread play_vo_on_player(line);
@@ -867,8 +893,9 @@ playVOforNukeArmed(player) {
 playVOForNukeCountdown() {
   wait(10);
   players = get_array_of_valid_players(true, level.drill.origin);
-  if(players.size < 1)
+  if(players.size < 1) {
     return;
+  }
   player = players[0];
   line = player.vo_prefix + "nuke_countdown";
   player thread play_vo_on_player(line);
@@ -876,8 +903,9 @@ playVOForNukeCountdown() {
 
 playVoFor30Seconds() {
   players = get_array_of_valid_players(true, level.drill.origin);
-  if(players.size < 1)
+  if(players.size < 1) {
     return;
+  }
   player = players[0];
   line = player.vo_prefix + "30_seconds";
   player thread play_vo_on_player(line);
@@ -887,8 +915,9 @@ playVoFor30Seconds() {
 
 playVoFor10Seconds() {
   players = get_array_of_valid_players(true, level.drill.origin);
-  if(players.size < 1)
+  if(players.size < 1) {
     return;
+  }
   player = players[0];
   line = player.vo_prefix + "10_seconds";
   player thread play_vo_on_player(line);
@@ -896,8 +925,9 @@ playVoFor10Seconds() {
 
 playVOforGetToLz() {
   players = get_array_of_valid_players(true, level.drill.origin);
-  if(players.size < 1)
+  if(players.size < 1) {
     return;
+  }
   player = random(players);
   line = player.vo_prefix + "gettolz";
   player thread play_vo_on_player(line);
@@ -951,8 +981,9 @@ play_vo_on_player(alias, priority, timeout, interrupt, pause_time, only_local) {
 }
 
 playVOToAllPlayers(alias, priority, timeout, interrupt, pause_time) {
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player add_to_VO_system(alias, priority, timeout, interrupt, pause_time);
+  }
 }
 
 add_to_VO_system(alias, priority, timeout, interrupt, pause_time, only_local) {
@@ -967,19 +998,22 @@ add_to_VO_system_internal(alias, priority, timeout, interrupt, pause_time, only_
   if(should_interrupt_VO_system(interrupt)) {
     add_to_interrupt_VO(VO_data);
 
-    if(is_VO_system_playing())
+    if(is_VO_system_playing()) {
       interrupt_current_VO();
+    }
   } else {
     add_to_queue_at_priority(VO_data, priority);
   }
 
-  if(!is_VO_system_playing())
+  if(!is_VO_system_playing()) {
     play_VO_system();
+  }
 }
 
 get_validated_priority(priority) {
-  if(!isDefined(priority))
+  if(!isDefined(priority)) {
     return level.alien_VO_priority_level[level.alien_VO_priority_level.size - 1];
+  }
 
   AssertEx(array_contains(level.alien_VO_priority_level, priority), "'" + priority + "' is not a valid priority level.");
   return priority;
@@ -1006,8 +1040,9 @@ start_VO_system() {
 
       self waittill("play_VO_system");
 
-      if(is_VO_system_paused())
+      if(is_VO_system_paused()) {
         self waittill("unpause_VO_system");
+      }
 
       continue;
     }
@@ -1030,8 +1065,9 @@ playVOForScriptable(scriptable_name) {
 
   if(!isDefined(level.next_scriptable_vo_time) || level.next_scriptable_vo_time < current_time) {
     if(isDefined(level.next_scriptable_vo_time)) {
-      if(randomint(100) < 60)
+      if(randomint(100) < 60) {
         return;
+      }
     }
 
     level.next_scriptable_vo_time = current_time + randomintrange(SCRIPTABLE_VO_COOL_DOWN_TIME, SCRIPTABLE_VO_COOL_DOWN_TIME + 5000);
@@ -1065,21 +1101,25 @@ play_VO(VO_to_play) {
     return;
   }
 
-  if(self is_in_laststand() && !(IsSubStr(alias, "downed") || IsSubStr(alias, "last_stand")))
+  if(self is_in_laststand() && !(IsSubStr(alias, "downed") || IsSubStr(alias, "last_stand"))) {
     return;
+  }
   self.vo_system_playing_vo = true;
   foreach(player in level.players) {
     if(player isSplitScreenPlayer() && !player isSplitScreenPlayerPrimary()) {
       continue;
     }
     if(player == self) {
-      if(alias_2d_version_exists(player, alias))
+      if(alias_2d_version_exists(player, alias)) {
         player playlocalsound(get_alias_2d_version(player, alias));
-      else
+      }
+      else {
         player playlocalsound(alias);
+      }
     } else {
-      if(!is_true(VO_to_play.only_local))
+      if(!is_true(VO_to_play.only_local)) {
         self playSoundToPlayer(alias, player);
+      }
     }
   }
 
@@ -1095,33 +1135,39 @@ create_VO_data(alias, timeout, pause_time, only_local) {
   VO_data = spawnStruct();
   VO_data.alias = alias;
 
-  if(!isDefined(timeout))
+  if(!isDefined(timeout)) {
     timeout = DEFAULT_TIMEOUT;
+  }
 
   VO_data.expire_time = getTime() + timeout * 1000;
 
-  if(!isDefined(pause_time))
+  if(!isDefined(pause_time)) {
     pause_time = randomFloatRange(MIN_BETWEEN_VO_WAIT, MAX_BETWEEN_VO_WAIT);
+  }
 
   VO_data.pause_time = pause_time;
 
-  if(is_true(only_local))
+  if(is_true(only_local)) {
     VO_data.only_local = true;
-  else
+  }
+  else {
     VO_data.only_local = false;
+  }
 
   return VO_data;
 }
 
 get_VO_to_play() {
   VO_to_play = retrieve_interrupt_VO();
-  if(isDefined(VO_to_play))
+  if(isDefined(VO_to_play)) {
     return VO_to_play;
+  }
 
   foreach(array_index, priority_level in level.alien_VO_priority_level) {
     VO_to_play = retrieve_VO_from_queue(priority_level);
-    if(isDefined(VO_to_play))
+    if(isDefined(VO_to_play)) {
       return VO_to_play;
+    }
   }
 
   return undefined;
@@ -1140,8 +1186,9 @@ retrieve_VO_from_queue(priority) {
 
 pop_first_VO_out_of_queue(priority) {
   first_VO = self.VO_system.VO_queue[priority][0];
-  if(!isDefined(first_VO))
+  if(!isDefined(first_VO)) {
     return first_VO;
+  }
 
   new_array = [];
   for(array_index = 1; array_index < self.VO_system.VO_queue[priority].size; array_index++) {
@@ -1159,8 +1206,9 @@ remove_expired_VO_from_queue(priority) {
   current_time = getTime();
   new_array = [];
   foreach(array_index, VO_data in self.VO_system.VO_queue[priority]) {
-    if(!VO_expired(VO_data, current_time))
+    if(!VO_expired(VO_data, current_time)) {
       new_array[new_array.size] = self.VO_system.VO_queue[priority][array_index];
+    }
   }
   self.VO_system.VO_queue[priority] = new_array;
 }
@@ -1187,11 +1235,13 @@ init_VO_system() {
 }
 
 pause_between_VO(VO_to_play) {
-  if(is_VO_system_paused())
+  if(is_VO_system_paused()) {
     self waittill("unpause_VO_system");
+  }
 
-  if(VO_to_play.pause_time > 0)
+  if(VO_to_play.pause_time > 0) {
     wait VO_to_play.pause_time;
+  }
 }
 
 is_VO_system_paused() {
@@ -1199,8 +1249,9 @@ is_VO_system_paused() {
 }
 
 pause_VO_system(player_list) {
-  foreach(player in player_list)
+  foreach(player in player_list) {
   player.pause_VO_system = true;
+  }
 }
 
 unpause_VO_system(player_list) {
@@ -1270,14 +1321,18 @@ player_pain_vo() {
   } else if(current_time < self.next_pain_vo_time) {
     return;
   }
-  if(self.vo_prefix == "p1_")
+  if(self.vo_prefix == "p1_") {
     self PlayLocalSound("female_death_american_1_plr");
-  if(self.vo_prefix == "p2_")
+  }
+  if(self.vo_prefix == "p2_") {
     self PlayLocalSound("generic_death_american_1_plr");
-  if(self.vo_prefix == "p3_")
+  }
+  if(self.vo_prefix == "p3_") {
     self PlayLocalSound("generic_death_american_2_plr");
-  if(self.vo_prefix == "p4_")
+  }
+  if(self.vo_prefix == "p4_") {
     self PlayLocalSound("generic_death_american_3_plr");
+  }
 
   self.next_pain_vo_time = current_time + randomintrange(PAIN_VO_COOL_DOWN_TIME, PAIN_VO_COOL_DOWN_TIME + 1500);
 }
@@ -1297,8 +1352,9 @@ play_alien_music(alias) {
   flag_set("alien_music_playing");
 
   foreach(player in level.players) {
-    if(isReallyAlive(player))
+    if(isReallyAlive(player)) {
       player playLocalSound(alias);
+    }
   }
 
   wait(sound_length);
@@ -1323,8 +1379,9 @@ ext_last_stand_sfx() {
 
 play_solo_vo(line, priority, timeout, interrupt, pause_time, only_local) {
   solo_line = line + "_solo";
-  if(SoundExists(solo_line))
+  if(SoundExists(solo_line)) {
     self play_vo_on_player(solo_line);
+  }
 }
 
 alias_2d_version_exists(player, alias) {
@@ -1340,8 +1397,9 @@ get_alias_2d_version(player, alias) {
 remove_VO_data(alias_substring, priority) {
   new_array = [];
   foreach(array_index, VO_data in self.VO_system.VO_queue[priority]) {
-    if(!((VO_data.alias == (self.vo_prefix + alias_substring)) || (VO_data.alias == (self.vo_prefix + "plr_" + alias_substring))))
+    if(!((VO_data.alias == (self.vo_prefix + alias_substring)) || (VO_data.alias == (self.vo_prefix + "plr_" + alias_substring)))) {
       new_array[new_array.size] = self.VO_system.VO_queue[priority][array_index];
+    }
   }
   self.VO_system.VO_queue[priority] = new_array;
 }

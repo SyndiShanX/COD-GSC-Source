@@ -16,8 +16,9 @@ main() {
   r_rimintensity = getdvar(#"r_rimIntensity");
   setsaveddvar("r_rimIntensity", 8);
 
-  foreach(m_godray in getEntArray("godrays", "targetname"))
+  foreach(m_godray in getEntArray("godrays", "targetname")) {
   m_godray hide();
+  }
 
   level.map_default_sun_direction = getdvar(#"r_lightTweakSunDirection");
   setsaveddvar("r_lightTweakSunDirection", (-12.9, 3.6, 0));
@@ -69,8 +70,9 @@ main() {
   n_sun_sample_size = 0.25;
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 
-  foreach(m_godray in getEntArray("godrays", "targetname"))
+  foreach(m_godray in getEntArray("godrays", "targetname")) {
   m_godray show();
+  }
 
   flag_wait("done_rappelling");
   start_dist = 224.631;
@@ -148,16 +150,19 @@ swap_vista() {
   a_skyline_2 = getEntArray("downtown_skyline_2", "targetname");
   a_skyline_1 = getEntArray("downtown_skyline_1", "targetname");
 
-  foreach(model in a_skyline_2)
+  foreach(model in a_skyline_2) {
   model hide();
+  }
 
   flag_wait("la_1_vista_swap");
 
-  foreach(model in a_skyline_1)
+  foreach(model in a_skyline_1) {
   model hide();
+  }
 
-  foreach(model in a_skyline_2)
+  foreach(model in a_skyline_2) {
   model show();
+  }
 }
 
 mount_turret_dof1(m_player_body) {
@@ -276,8 +281,9 @@ intro_player_dof15(m_player_body) {
 }
 
 lerp_sun_direction(v_sun_direction_angles, n_time) {
-  if(!isDefined(n_time))
+  if(!isDefined(n_time)) {
     n_time = 0;
+  }
 
   if(n_time > 0) {
     r_lighttweaksundirection = getdvar(#"r_lightTweakSunDirection");

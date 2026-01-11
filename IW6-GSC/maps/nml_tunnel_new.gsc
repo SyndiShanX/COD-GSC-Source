@@ -33,8 +33,9 @@ tunnel_new() {
   common_scripts\utility::flag_wait("tunnel_exit");
   common_scripts\utility::flag_wait("tunnel_exit_clear");
 
-  while(isDefined(level.dog.teleported) && level.dog.teleported)
+  while(isDefined(level.dog.teleported) && level.dog.teleported) {
     wait 0.05;
+  }
 
   maps\nml_util::hero_paths("tunnel_exit_path", 300, 300, 200, 0, 1);
   wait 1;
@@ -144,8 +145,9 @@ tunnel_vehix_sounds(var_0) {
   var_0 = sortbydistance(var_0, level.player.origin);
   var_1 = ["scn_nml_hummer1_passby", "scn_nml_truck1_passby", "scn_nml_truck2_passby"];
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_0[var_2] thread maps\_utility::play_sound_on_entity(var_1[var_2]);
+  }
 
   var_3 = ["scn_nml_hummer1_tires", "scn_nml_truck1_tires", "scn_nml_truck2_tires"];
   var_4 = ["scn_nml_jeep_stop", "scn_nml_btr1_stop", "scn_nml_btr2_stop"];
@@ -166,11 +168,13 @@ btr_stopping_sounds(var_0) {
   self endon("death");
   level endon("_stealth_spotted");
 
-  while(self vehicle_getspeed() < 4)
+  while(self vehicle_getspeed() < 4) {
     common_scripts\utility::waitframe();
+  }
 
-  while(self vehicle_getspeed() > 4)
+  while(self vehicle_getspeed() > 4) {
     common_scripts\utility::waitframe();
+  }
 
   thread maps\_utility::play_sound_on_entity(var_0);
 }
@@ -268,8 +272,9 @@ fire_flicker() {
 flicker(var_0) {
   wait 0.1;
 
-  if(!isDefined(self.script_maxdist))
+  if(!isDefined(self.script_maxdist)) {
     self.script_maxdist = 20;
+  }
 
   var_1 = self getlightintensity();
 

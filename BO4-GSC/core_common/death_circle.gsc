@@ -1214,4 +1214,3 @@ circle_color(circleindex, maxindex) {
   utilitycolor = vectorlerp(colorscale[colorindex], colorscale[colorindex + 1], colorfrac);
   return utilitycolor;
 }
-

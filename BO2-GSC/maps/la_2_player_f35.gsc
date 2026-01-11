@@ -49,8 +49,9 @@ material_test() {
     a_trace = bulletTrace(level.player get_eye(), level.player getplayerangles() * 9000, 0, self);
     str_surface_type = "NONE";
 
-    if(isDefined(a_trace["surfacetype"]))
+    if(isDefined(a_trace["surfacetype"])) {
       str_surface_type = a_trace["surfacetype"];
+    }
 
     iprintln(str_surface_type);
     wait 0.25;
@@ -123,8 +124,9 @@ f35_health_regen_think() {
   self thread f35_hud_damage();
 
   while(true) {
-    if(self.health_regen.time_since_last_damaged > self.health_regen.time_before_regen)
+    if(self.health_regen.time_since_last_damaged > self.health_regen.time_before_regen) {
       self thread f35_health_regen_start();
+    }
 
     wait 0.05;
   }
@@ -145,10 +147,12 @@ f35_player_damage_watcher() {
       if(isDefined(level.f35_hud_damage_ent)) {
         level.n_hud_damage = 1;
 
-        if(damage > 5)
+        if(damage > 5) {
           level.f35_hud_damage_ent setclientflag(6);
-        else
+        }
+        else {
           level.f35_hud_damage_ent setclientflag(5);
+        }
 
         level.f35_hud_damage_ent clearclientflag(3);
         level.n_last_damage_time = gettime();
@@ -231,11 +235,13 @@ f35_health_regen_start() {
   while(!b_health_at_full) {
     self.health_regen.health = self.health_regen.health + self.health_regen.health_regen_per_frame;
 
-    if(self.health_regen.health > self.health_regen.health_max)
+    if(self.health_regen.health > self.health_regen.health_max) {
       self.health_regen.health = self.health_regen.health_max;
+    }
 
-    if(self.health_regen.health == self.health_regen.health_max)
+    if(self.health_regen.health == self.health_regen.health_max) {
       b_health_at_full = 1;
+    }
 
     wait 0.05;
   }
@@ -250,10 +256,12 @@ save_restored_function() {
   level.f35 _restore_f35_health();
   level.f35 _restore_f35_hud();
 
-  if(!flag("dogfights_story_done"))
+  if(!flag("dogfights_story_done")) {
     level.player setclientdvar("cg_fov", 70);
-  else
+  }
+  else {
     level.player setclientdvar("cg_fov", 90);
+  }
 
   if(flag("roadblock_done") && !flag("player_at_convoy_end")) {
     v_to_goal = vectortoangles(level.convoy.vh_potus.origin - level.f35.origin);
@@ -302,22 +310,27 @@ f35_fire_guns() {
     a_temp = [];
     b_has_target = 0;
 
-    if(isDefined(self.vtol) && self.is_vtol)
+    if(isDefined(self.vtol) && self.is_vtol) {
       n_radius = 32;
+    }
 
     for(i = 0; i < a_axis_vehicles.size; i++) {
-      if(target_isincircle(a_axis_vehicles[i], level.player, n_fov, n_radius))
+      if(target_isincircle(a_axis_vehicles[i], level.player, n_fov, n_radius)) {
         a_temp[a_temp.size] = a_axis_vehicles[i];
+      }
     }
 
     if(a_temp.size > 0) {
-      if(isDefined(level.f35_lockon_target) && isinarray(a_temp, level.f35_lockon_target))
+      if(isDefined(level.f35_lockon_target) && isinarray(a_temp, level.f35_lockon_target)) {
         e_target = level.f35_lockon_target;
-      else
+      }
+      else {
         e_target = get_closest_element(self.origin, a_temp);
+      }
 
-      if(isDefined(e_target))
+      if(isDefined(e_target)) {
         b_has_target = 1;
+      }
     }
 
     if(b_has_target) {
@@ -335,8 +348,9 @@ f35_fire_guns() {
       if(b_has_target) {
         n_distance_to_target = distancesquared(e_target.origin, self.origin);
 
-        if(self _can_bullet_hit_target(self.origin, e_target))
+        if(self _can_bullet_hit_target(self.origin, e_target)) {
           b_do_damage = 1;
+        }
 
         if(b_do_damage) {
           n_damage = f35_guns_get_damage(e_target);
@@ -394,24 +408,30 @@ f35_guns_get_damage(e_target) {
   n_damage = 0;
 
   if(is_alive(e_target)) {
-    if(n_distance < 3000)
+    if(n_distance < 3000) {
       n_damage = 125;
-    else if(n_distance > 3000 && n_distance < 13000)
+    }
+    else if(n_distance > 3000 && n_distance < 13000) {
       n_damage = linear_map(n_distance, 3000, 13000, 100, 125);
-    else if(n_distance > 13000 && n_distance < 20000)
+    }
+    else if(n_distance > 13000 && n_distance < 20000) {
       n_damage = linear_map(n_distance, 13000, 20000, 50, 75);
-    else if(n_distance > 20000 && n_distance < 30000)
+    }
+    else if(n_distance > 20000 && n_distance < 30000) {
       n_damage = linear_map(n_distance, 20000, 30000, 0, 50);
-    else
+    }
+    else {
       n_damage = 0;
+    }
   }
 
   return int(n_damage);
 }
 
 f35_setup_visor() {
-  if(flag("player_flying"))
+  if(flag("player_flying")) {
     level.player visionsetnaked("helmet_f35_low", 0.5);
+  }
 }
 
 f35_remove_visor() {
@@ -459,14 +479,17 @@ update_ember_fx(str_fx_name) {
 }
 
 f35_player_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  if(eattacker != level.f35)
+  if(eattacker != level.f35) {
     idamage = 0;
+  }
 
   if(self.health - idamage < 1) {
-    if(self.health > 1)
+    if(self.health > 1) {
       idamage = self.health - 1;
-    else
+    }
+    else {
       idamage = 0;
+    }
   }
 
   return idamage;
@@ -536,14 +559,18 @@ missile_incoming_watcher() {
     flag_wait("missile_event_started");
     n_index = randomint(4);
 
-    if(n_index == 0)
+    if(n_index == 0) {
       self thread say_dialog("missile_warning_028");
-    else if(n_index == 1)
+    }
+    else if(n_index == 1) {
       self thread say_dialog("incoming_missile_029");
-    else if(n_index == 2)
+    }
+    else if(n_index == 2) {
       e_harper thread say_dialog("dammit_septic__th_011");
-    else
+    }
+    else {
       e_harper thread say_dialog("missiles_on_your_013");
+    }
 
     level.player playSound("wpn_sam_warning");
     flag_waitopen("missile_event_started");
@@ -648,8 +675,9 @@ approach_point_debug() {
 
   while(true) {
     for(i = 0; i < a_keys_row.size; i++) {
-      for(j = 0; j < a_keys_col.size; j++)
+      for(j = 0; j < a_keys_col.size; j++) {
         level thread draw_line_for_time(self.origin, self.a_goal_ents[a_keys_row[i]][a_keys_col[j]].origin, 1, 1, 1, 1);
+      }
     }
 
     wait 1;
@@ -660,15 +688,17 @@ approach_point_debug() {
 f35_get_available_approach_point() {
   n_max_occupants = level.f35.n_max_flyby_count;
 
-  if(level.f35.n_goal_ents_occupied >= n_max_occupants)
+  if(level.f35.n_goal_ents_occupied >= n_max_occupants) {
     n_available_index = 20;
+  }
   else {
     a_temp = level.f35.a_goal_index;
     a_pool = [];
 
     for(i = 0; i < level.f35.a_goal_index.size; i++) {
-      if(isDefined(a_temp[i]) && !a_temp[i])
+      if(isDefined(a_temp[i]) && !a_temp[i]) {
         a_pool[a_pool.size] = i;
+      }
     }
 
     n_available_index = random(a_pool);
@@ -712,8 +742,9 @@ f35_collision_detection() {
   n_update_time = 0.25;
   n_scale_forward = 9000;
 
-  if(!isDefined(self.is_vtol))
+  if(!isDefined(self.is_vtol)) {
     self.is_vtol = 1;
+  }
 
   while(isalive(self)) {
     b_is_vtol = self.is_vtol;
@@ -723,8 +754,9 @@ f35_collision_detection() {
     v_end_pos = self.origin + v_forward_scaled;
     a_trace = bulletTrace(level.player.origin, v_end_pos, 0, self);
 
-    if(a_trace["surfacetype"] != "none" && !isDefined(a_trace["entity"]))
+    if(a_trace["surfacetype"] != "none" && !isDefined(a_trace["entity"])) {
       b_collision_imminent = 1;
+    }
 
     if(b_collision_imminent) {
     }
@@ -793,8 +825,9 @@ _f35_collision_magnitude_test(v_impact_velocity, n_threshold) {
   b_passed_threshold = 0;
 
   for(i = 0; i < 2; i++) {
-    if(abs(v_impact_velocity[i]) > n_threshold)
+    if(abs(v_impact_velocity[i]) > n_threshold) {
       b_passed_threshold = 1;
+    }
   }
 
   return b_passed_threshold;
@@ -823,8 +856,9 @@ f35_enable_ads() {
       b_can_toggle_ads = !b_pressed_last_frame && b_is_vtol_mode;
       n_fov = n_fov_zoomed;
 
-      if(b_using_ads || !b_is_vtol_mode)
+      if(b_using_ads || !b_is_vtol_mode) {
         n_fov = n_fov_normal;
+      }
 
       if(b_can_toggle_ads) {
         e_player setclientdvar("cg_fov", n_fov);
@@ -844,13 +878,15 @@ f35_restore_fov(default_fov) {
   level waittill("start_dogfight_event");
   n_fov = getdvarint(#"cg_fov");
 
-  if(n_fov != default_fov)
+  if(n_fov != default_fov) {
     level.player setclientdvar("cg_fov", default_fov);
+  }
 }
 
 f35_hit_object_switch_to_vtol() {
-  if(!isDefined(self.vtol_mode_collision))
+  if(!isDefined(self.vtol_mode_collision)) {
     self.vtol_mode_collision = 0;
+  }
 
   if(self.vtol_mode_collision) {
     return;
@@ -878,29 +914,36 @@ f35_wait_until_path_clear(b_require_push_forward) {
   n_frame_counter_forward = 0;
   n_frame_counter_forward_threshold = 5;
 
-  if(!isDefined(b_require_push_forward))
+  if(!isDefined(b_require_push_forward)) {
     b_require_push_forward = 1;
+  }
 
   while(!b_jet_mode_ready) {
-    if(!self.is_collision_imminent)
+    if(!self.is_collision_imminent) {
       n_frame_counter_collision++;
-    else
+    }
+    else {
       n_frame_counter_collision = 0;
+    }
 
     b_has_clear_path = n_frame_counter_collision > n_frame_counter_collision_threshold;
 
-    if(player_pressing_forward_on_throttle())
+    if(player_pressing_forward_on_throttle()) {
       n_frame_counter_forward++;
-    else
+    }
+    else {
       n_frame_counter_forward = 0;
+    }
 
     b_player_pushing_forward = n_frame_counter_forward > n_frame_counter_forward_threshold;
 
-    if(!b_require_push_forward)
+    if(!b_require_push_forward) {
       b_player_pushing_forward = 1;
+    }
 
-    if(b_has_clear_path && b_player_pushing_forward)
+    if(b_has_clear_path && b_player_pushing_forward) {
       b_jet_mode_ready = 1;
+    }
 
     wait(n_update_time);
   }
@@ -930,8 +973,9 @@ death_blossom_think() {
   n_death_blossom_cooldown = 5;
   n_death_blossom_cooldown_ms = n_death_blossom_cooldown * 1000;
 
-  if(!isDefined(level.death_blossom_kills))
+  if(!isDefined(level.death_blossom_kills)) {
     level.death_blossom_kills = 0;
+  }
 
   level.player thread f35_death_blossom_watcher();
   death_blossom_cooldown_notification();
@@ -967,8 +1011,9 @@ f35_death_blossom_watcher() {
   while(true) {
     self waittill("missile_fire", e_missile, str_weapon_name, e_target);
 
-    if(str_weapon_name == "f35_missile_turret_player" && isDefined(e_target) && level.f35.death_blossom_active)
+    if(str_weapon_name == "f35_missile_turret_player" && isDefined(e_target) && level.f35.death_blossom_active) {
       e_missile thread f35_death_blossom(e_target);
+    }
   }
 }
 
@@ -981,10 +1026,12 @@ f35_death_blossom(target) {
   target thread death_blossom_track_3x();
   blossom_radius = 100000;
 
-  if(isDefined(self) && isDefined(self.origin))
+  if(isDefined(self) && isDefined(self.origin)) {
     v_origin = self.origin;
-  else
+  }
+  else {
     v_origin = target.origin;
+  }
 
   sort_vehicles = get_array_of_closest(v_origin, vehicles, excluded, 3, blossom_radius);
 
@@ -1001,22 +1048,26 @@ death_blossom_track_3x() {
   self waittill("death");
   level.death_blossom_kills++;
 
-  if(level.death_blossom_kills == 3)
+  if(level.death_blossom_kills == 3) {
     level notify("skybuster_kill_3x");
+  }
 }
 
 f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   n_heavy_threshold = 100;
 
-  if(isplayer(eattacker))
+  if(isplayer(eattacker)) {
     idamage = 0;
-  else if(isDefined(type) && type == "MOD_CRUSH")
+  }
+  else if(isDefined(type) && type == "MOD_CRUSH") {
     idamage = 0;
+  }
   else if(isai(eattacker)) {
     str_team = eattacker.team;
 
-    if(str_team == "allies")
+    if(str_team == "allies") {
       return 0;
+    }
     else if(str_team == "axis") {
       idamage = 1;
 
@@ -1028,8 +1079,9 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
   } else if(eattacker == level.convoy.vh_van)
     idamage = 0;
   else if(isDefined(eattacker.classname) && eattacker.classname == "script_vehicle") {
-    if(eattacker.vteam == "allies")
+    if(eattacker.vteam == "allies") {
       idamage = 0;
+    }
     else if(sweapon == "pegasus_missile_turret_doublesize") {
       idamage = 0;
 
@@ -1048,8 +1100,9 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
   } else {
     str_weapon = "UNKNOWN";
 
-    if(isDefined(sweapon))
+    if(isDefined(sweapon)) {
       str_weapon = sweapon;
+    }
 
     println("unhandled damage source on F35: " + eattacker.classname + " weapon = " + str_weapon);
 
@@ -1071,11 +1124,13 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
     self f35_try_to_play_damage_bink();
   }
 
-  if(!isgodmode(level.player))
+  if(!isgodmode(level.player)) {
     self.health_regen.health = self.health_regen.health - idamage;
+  }
 
-  if(idamage > 0 && flag("convoy_at_dogfight"))
+  if(idamage > 0 && flag("convoy_at_dogfight")) {
     idamage = 1;
+  }
 
   if(isDefined(level.f35_damage_shader)) {
     time = gettime();
@@ -1087,10 +1142,12 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
     }
   }
 
-  if(type == "MOD_UNKNOWN")
+  if(type == "MOD_UNKNOWN") {
     level.player playSound("evt_collision_alarm");
-  else if(idamage > 0 && !issubstr(sweapon, "rpg") && sweapon != "pegasus_missile_turret_doublesize")
+  }
+  else if(idamage > 0 && !issubstr(sweapon, "rpg") && sweapon != "pegasus_missile_turret_doublesize") {
     level.player playSound("prj_bullet_impact_f35");
+  }
 
   if(self.health_regen.health - idamage <= 0 || self.health - idamage <= 0) {
     if(!flag("eject_sequence_started")) {
@@ -1109,8 +1166,9 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
 
   idamage = 1;
 
-  if(randomint(100) < 10)
+  if(randomint(100) < 10) {
     level.player finishplayerdamage(einflictor, level.f35, 1, idflags, type, sweapon, vpoint, vdir, "none", 0, psoffsettime);
+  }
 
   return idamage;
 }
@@ -1132,8 +1190,9 @@ f35_hud_damage_event() {
     time = gettime();
 
     if(time - level.n_last_damage_time > 1000) {
-      if(!flag("missile_event_started"))
+      if(!flag("missile_event_started")) {
         luinotifyevent(&"hud_damage", 1, -1);
+      }
 
       if(isDefined(level.f35_damage_shader)) {
         level.f35_damage_shader.alpha = 0.0;
@@ -1176,16 +1235,18 @@ flyby_feedback_watcher() {
   while(true) {
     t_flyby waittill("trigger", e_triggered);
 
-    if(e_triggered != self && e_triggered.vehicleclass == "plane")
+    if(e_triggered != self && e_triggered.vehicleclass == "plane") {
       e_triggered thread flyby_feedback(t_flyby);
+    }
   }
 }
 
 flyby_feedback(t_flyby) {
   self endon("death");
 
-  if(!isDefined(self.flyby_feedback_active))
+  if(!isDefined(self.flyby_feedback_active)) {
     self.flyby_feedback_active = 0;
+  }
 
   if(!self.flyby_feedback_active) {
     self.flyby_feedback_active = 1;
@@ -1197,8 +1258,9 @@ flyby_feedback(t_flyby) {
     earthquake(n_earthquake_magnitude, n_earthquake_duration, level.player.origin, 512, level.player);
     level.player thread rumble_loop(n_rumble_count, n_rumble_delay, str_rumble);
 
-    while(self istouching(t_flyby))
+    while(self istouching(t_flyby)) {
       wait 0.5;
+    }
 
     self.flyby_feedback_active = 0;
   }
@@ -1236,14 +1298,16 @@ f35_switch_modes() {
     while(!b_player_within_range) {
       n_distance_current_sq = distancesquared(level.convoy.vh_potus.origin, level.player.origin);
 
-      if(n_distance_sq > n_distance_current_sq)
+      if(n_distance_sq > n_distance_current_sq) {
         b_player_within_range = 1;
+      }
 
       wait 0.1;
     }
 
-    if(!self.is_vtol)
+    if(!self.is_vtol) {
       self _f35_set_vtol_mode(undefined, 1);
+    }
   }
 }
 
@@ -1275,8 +1339,9 @@ f35_zoom_fov() {
   while(n_fov < 90) {
     n_fov = n_fov + 1.25;
 
-    if(n_fov > 90)
+    if(n_fov > 90) {
       n_fov = 90;
+    }
 
     level.player setclientdvar("cg_fov", n_fov);
     wait 0.05;
@@ -1354,8 +1419,9 @@ _f35_set_conventional_flight_mode() {
 }
 
 f35_startup_console(e_player_rig) {
-  if(!isDefined(level.f35.base_console))
+  if(!isDefined(level.f35.base_console)) {
     level.f35.base_console = "tag_display_flight";
+  }
 
   level.f35 showpart(level.f35.base_console);
   f35_show_console();
@@ -1382,14 +1448,16 @@ f35_show_console(console) {
   self endon("death");
 
   if(level.f35.model == "veh_t6_air_fa38") {
-    if(isDefined(level.f35.current_console))
+    if(isDefined(level.f35.current_console)) {
       level.f35 hidepart(level.f35.current_console);
+    }
 
     level.f35.current_console = console;
 
     if(isDefined(console)) {
-      if(console == "tag_display_damage")
+      if(console == "tag_display_damage") {
         level.f35 hidepart(level.f35.base_console);
+      }
 
       level.f35 showpart(level.f35.current_console);
     }
@@ -1401,8 +1469,9 @@ f35_show_base_console() {
 }
 
 f35_try_to_play_damage_bink() {
-  if(!isDefined(self.current_console) || self.current_console != "tag_display_damage")
+  if(!isDefined(self.current_console) || self.current_console != "tag_display_damage") {
     level.f35 thread f35_damage_bink();
+  }
 }
 
 f35_damage_bink() {
@@ -1419,8 +1488,9 @@ anim_f35_mode_switch() {
   level.player.body linkto(level.f35, "tag_driver");
   level.player.body maps\_anim::anim_single(level.player.body, "F35_mode_switch");
 
-  if(isDefined(level.player.body))
+  if(isDefined(level.player.body)) {
     level.player.body delete();
+  }
 }
 
 _f35_conventional_flight_mode_throttle() {
@@ -1431,13 +1501,16 @@ _f35_conventional_flight_mode_throttle() {
   n_counter = 0;
 
   while(!b_using_throttle) {
-    if(player_pressing_forward_on_throttle())
+    if(player_pressing_forward_on_throttle()) {
       n_counter++;
-    else
+    }
+    else {
       n_counter = 0;
+    }
 
-    if(n_counter > n_mode_switch_frames)
+    if(n_counter > n_mode_switch_frames) {
       b_using_throttle = 1;
+    }
 
     wait 0.05;
   }
@@ -1451,8 +1524,9 @@ player_pressing_forward_on_throttle() {
   b_pressing_forward = 0;
   v_movement = level.player getnormalizedmovement();
 
-  if(v_movement[0] > n_threshold)
+  if(v_movement[0] > n_threshold) {
     b_pressing_forward = 1;
+  }
 
   return b_pressing_forward;
 }
@@ -1466,24 +1540,29 @@ _f35_set_vtol_mode(b_is_first_time, b_use_force_protection_vo) {
   n_height_mesh_min_dist = -120;
   b_set_speed = 1;
 
-  if(!isDefined(b_is_first_time))
+  if(!isDefined(b_is_first_time)) {
     b_is_first_time = 0;
+  }
 
-  if(b_is_first_time)
+  if(b_is_first_time) {
     b_set_speed = 0;
+  }
 
-  if(!isDefined(b_use_force_protection_vo))
+  if(!isDefined(b_use_force_protection_vo)) {
     b_use_force_protection_vo = 0;
+  }
 
   if(!b_is_first_time) {
     level.f35 thread anim_f35_mode_switch();
     level.f35 waittill("f35_switch_modes_now");
     level.player visionsetnaked("helmet_f35_low", 0.5);
 
-    if(b_use_force_protection_vo)
+    if(b_use_force_protection_vo) {
       level.f35 thread say_dialog("switching_to_vtol_071");
-    else
+    }
+    else {
       self thread say_dialog("vtol_flight_mode_e_033");
+    }
   }
 
   self playSound("veh_vtol_engage_c");
@@ -1529,21 +1608,24 @@ _f35_set_vtol_mode_v2() {
 }
 
 _f35_should_be_flying() {
-  if(length(self.velocity) == 0)
+  if(length(self.velocity) == 0) {
     return false;
+  }
 
   plane_speed = vectordot(self.velocity, anglesToForward(self.angles)) / 17.6;
   plane_dot = plane_speed / length(self.velocity) * 17.6;
 
-  if(plane_speed > 150 && plane_dot > 0.6)
+  if(plane_speed > 150 && plane_dot > 0.6) {
     return true;
+  }
 
   return false;
 }
 
 _f35_flying_upwards() {
-  if(!(self.angles[0] <= 180 && self.angles[0] >= 0))
+  if(!(self.angles[0] <= 180 && self.angles[0] >= 0)) {
     return true;
+  }
 
   return false;
 }
@@ -1584,14 +1666,16 @@ _can_bullet_hit_target(v_start_pos, e_target) {
     if(b_hit_surface || b_hit_ent) {
       b_trace_done = 1;
 
-      if(b_hit_ent && e_target == a_trace["entity"])
+      if(b_hit_ent && e_target == a_trace["entity"]) {
         b_hit_target = 1;
+      }
     } else {
       v_start_current = a_trace["position"];
       n_distance_current = distancesquared(v_start_pos, v_start_current);
 
-      if(n_distance_current >= n_distance_to_target)
+      if(n_distance_current >= n_distance_to_target) {
         b_trace_done = 1;
+      }
     }
   }
 
@@ -1599,38 +1683,48 @@ _can_bullet_hit_target(v_start_pos, e_target) {
 }
 
 f35_tutorial(b_show_move_prompt, b_show_hover_prompt, b_show_weapon_prompt, b_show_ads_prompt, b_show_death_blossom_prompt, b_show_speed_boost_prompt) {
-  if(!isDefined(b_show_move_prompt))
+  if(!isDefined(b_show_move_prompt)) {
     b_show_move_prompt = 1;
+  }
 
-  if(!isDefined(b_show_hover_prompt))
+  if(!isDefined(b_show_hover_prompt)) {
     b_show_hover_prompt = 1;
+  }
 
-  if(!isDefined(b_show_weapon_prompt))
+  if(!isDefined(b_show_weapon_prompt)) {
     b_show_weapon_prompt = 1;
+  }
 
-  if(!isDefined(b_show_ads_prompt))
+  if(!isDefined(b_show_ads_prompt)) {
     b_show_ads_prompt = 1;
+  }
 
-  if(!isDefined(b_show_death_blossom_prompt))
+  if(!isDefined(b_show_death_blossom_prompt)) {
     b_show_death_blossom_prompt = 0;
+  }
 
-  if(!isDefined(b_show_speed_boost_prompt))
+  if(!isDefined(b_show_speed_boost_prompt)) {
     b_show_speed_boost_prompt = 0;
+  }
 
   if(b_show_move_prompt) {
     stick_layout = getlocalprofileint("gpad_sticksConfig");
 
-    if(stick_layout == 2 || stick_layout == 3)
+    if(stick_layout == 2 || stick_layout == 3) {
       self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE_LEGACY", &"LA_2_FLIGHT_CONTROL_LOOK_LEGACY", ::f35_control_check_movement);
-    else
+    }
+    else {
       self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE", &"LA_2_FLIGHT_CONTROL_LOOK", ::f35_control_check_movement);
+    }
   }
 
-  if(b_show_hover_prompt)
+  if(b_show_hover_prompt) {
     self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_HOVER_UP", &"LA_2_FLIGHT_CONTROL_HOVER_DOWN", ::f35_control_check_hover);
+  }
 
-  if(b_show_weapon_prompt)
+  if(b_show_weapon_prompt) {
     self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_GUN", &"LA_2_FLIGHT_CONTROL_MISSILE", ::f35_control_check_weapons);
+  }
 
   if(b_show_ads_prompt) {
   }
@@ -1641,16 +1735,18 @@ f35_tutorial(b_show_move_prompt, b_show_hover_prompt, b_show_weapon_prompt, b_sh
   }
 
   if(b_show_death_blossom_prompt) {
-    if(flag("F35_pilot_saved"))
+    if(flag("F35_pilot_saved")) {
       self f35_tutorial_func(&"LA_2_HINT_DEATHBLOSSOM", undefined, ::f35_control_check_deathblossom, undefined, -30);
+    }
   }
 
   flag_set("tutorial_done");
 }
 
 f35_tutorial_func(str_message_1, str_message_2, func_button_check, str_flag, n_offset_y) {
-  if(!isDefined(n_offset_y))
+  if(!isDefined(n_offset_y)) {
     n_offset_y = -60;
+  }
 
   n_polling_delay = 0.05;
   n_hint_remove_delay = 2;
@@ -1664,8 +1760,9 @@ f35_tutorial_func(str_message_1, str_message_2, func_button_check, str_flag, n_o
     wait(n_polling_delay);
     n_frame_counter++;
 
-    if(n_frame_counter >= n_timeout_frames)
+    if(n_frame_counter >= n_timeout_frames) {
       b_timeout_hit = 1;
+    }
   }
 
   wait(n_hint_remove_delay);
@@ -1710,8 +1807,9 @@ f35_control_check_ads() {
 f35_control_check_boost() {
   b_is_pressing_button = level.player sprintbuttonpressed();
 
-  if(b_is_pressing_button)
+  if(b_is_pressing_button) {
     wait 2;
+  }
 
   return b_is_pressing_button;
 }
@@ -1786,12 +1884,14 @@ _watch_for_boost() {
       self.sprint_meter = self.sprint_meter + sprint_recover_rate * 0.05;
 
       if(bmeterempty) {
-        if(self.sprint_meter > self.sprint_meter_min)
+        if(self.sprint_meter > self.sprint_meter_min) {
           bmeterempty = 0;
+        }
       }
 
-      if(self.sprint_meter > self.sprint_meter_max)
+      if(self.sprint_meter > self.sprint_meter_max) {
         self.sprint_meter = self.sprint_meter_max;
+      }
 
       self setvehmaxspeed(self.max_speed);
 
@@ -1844,8 +1944,9 @@ do_very_damaged_feedback() {
       spin_time = spin_time - 0.05;
 
       if(spin_time < 2.0 && spin_time > 0.0) {
-        if(r_stick[1] < 0.0)
+        if(r_stick[1] < 0.0) {
           spin = 0;
+        }
       } else if(spin_time <= 0.0)
         spin = 0;
     } else {

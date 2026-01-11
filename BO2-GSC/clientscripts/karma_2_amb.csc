@@ -188,8 +188,9 @@ splash_trigs_think() {
     if(who isplayer()) {
       playSound(0, "fly_player_jump_into_water", who.origin);
 
-      while(who istouching(self))
+      while(who istouching(self)) {
         wait 0.1;
+      }
     }
 
     wait 0.1;

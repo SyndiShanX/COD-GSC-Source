@@ -248,8 +248,9 @@ execintro() {
 
   var_11 = maps\coup_code::scripted_array_spawn("intro_tiedcivilian", "targetname", 1);
 
-  for(var_10 = 0; var_10 < var_11.size; var_10++)
+  for(var_10 = 0; var_10 < var_11.size; var_10++) {
     thread ziptied(var_11[var_10], 45);
+  }
 
   var_12 = maps\coup_code::scripted_array_spawn("intro_eatingdogs", "targetname", 1);
 
@@ -609,10 +610,12 @@ h1_drive_roadrumble(var_0, var_1) {
   for(var_8 = 0; var_4 <= var_1; var_4 = var_4 + var_5) {
     var_9 = randomintrange(0, 100);
 
-    if(var_9 < var_2)
+    if(var_9 < var_2) {
       var_8 = 1;
-    else
+    }
+    else {
       var_6 = var_6 + var_5;
+    }
 
     if(var_8 == 1) {
       thread h1_drive_shakesandrumbleslogic(var_3);
@@ -620,8 +623,9 @@ h1_drive_roadrumble(var_0, var_1) {
       if(randomintrange(0, 2) == 1 && var_3 != "road_normal") {
         maps\_utility::delaythread(0.15, ::h1_drive_shakesandrumbleslogic, "road_normal");
 
-        if(randomintrange(0, 2) == 1 && var_3 != "road_noisy")
+        if(randomintrange(0, 2) == 1 && var_3 != "road_noisy") {
           maps\_utility::delaythread(0.35, ::h1_drive_shakesandrumbleslogic, "road_normal");
+        }
       }
 
       var_8 = 0;
@@ -740,29 +744,34 @@ h1_drive_shakesandrumbleslogic(var_0) {
       break;
   }
 
-  if(var_4 == 0.0)
+  if(var_4 == 0.0) {
     var_4 = var_3;
+  }
 
   if(var_1 == "normal") {
-    if(var_5 != "")
+    if(var_5 != "") {
       level.player playrumbleonentity(var_5);
+    }
 
     earthquake(var_2, var_4, var_9, 100);
     wait(var_3);
 
-    if(var_5 == "tank_rumble")
+    if(var_5 == "tank_rumble") {
       level.player stoprumble("tank_rumble");
+    }
   } else if(var_1 == "fade") {
-    if(var_5 != "")
+    if(var_5 != "") {
       level.player playrumbleonentity(var_5);
+    }
 
     earthquake(var_2 * 0.6, var_4 / 4.0, var_9, 10000);
     wait(var_3 / 4.0);
     earthquake(var_2 * 1.0, var_4 / 4.0, var_9, 10000);
     wait(var_3 / 4.0);
 
-    if(var_5 == "tank_rumble")
+    if(var_5 == "tank_rumble") {
       level.player stoprumble("tank_rumble");
+    }
 
     earthquake(var_2 * 0.5, var_4 / 4.0, var_9, 10000);
     wait(var_3 / 4.0);
@@ -853,8 +862,9 @@ execdrive(var_0) {
     level.car setanimtime(var_4, var_0);
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait 0.1;
+  }
 
   level.car thread maps\_anim::anim_single_solo(level.car.driver, "cardriver_fulldrive");
   level.car thread maps\_anim::anim_single_solo(level.car.passenger, "carpassenger_fulldrive");
@@ -968,8 +978,9 @@ execcarexit() {
   wait 2;
   var_8 = maps\coup_code::scripted_array_spawn("ending_idleguards", "targetname", 1);
 
-  for(var_9 = 0; var_9 < var_8.size; var_9++)
+  for(var_9 = 0; var_9 < var_8.size; var_9++) {
     var_8[var_9].animname = "human";
+  }
 
   var_10 = maps\coup_code::scripted_array_spawn("ending_smokingguards", "targetname", 1);
 
@@ -1382,8 +1393,9 @@ drive_gunpoint1() {
   var_3 = maps\coup_code::scripted_spawn2("gunpoint1_crouchcivilian", "targetname", 1);
   var_4 = maps\coup_code::scripted_array_spawn("gunpoint1_tiedcivilian", "targetname", 1);
 
-  for(var_5 = 0; var_5 < var_4.size; var_5++)
+  for(var_5 = 0; var_5 < var_4.size; var_5++) {
     thread ziptied(var_4[var_5], 20);
+  }
 
   thread gunpoint_stand(var_0, var_1, 20);
   thread gunpoint_crouch(var_2, var_3, 20);
@@ -1540,8 +1552,9 @@ drive_ziptie4() {
   common_scripts\utility::flag_wait("drive_ziptie4");
   var_0 = maps\coup_code::scripted_array_spawn("ziptie4_tiedcivilian", "targetname", 1);
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     thread ziptied(var_0[var_1], 20);
+  }
 
   var_2 = getent("tag_ziptie4_replacing_generic", "targetname");
   var_3 = maps\coup_code::scripted_spawn2("ziptie4_civilian", "targetname", 1);
@@ -1652,8 +1665,9 @@ drive_casualguards3() {
 
   var_2 = maps\coup_code::scripted_array_spawn("casualguards3_idleguards", "targetname", 1);
 
-  for(var_1 = 0; var_1 < var_2.size; var_1++)
+  for(var_1 = 0; var_1 < var_2.size; var_1++) {
     var_2[var_1].animname = "human";
+  }
 }
 
 drive_endcrowd() {
@@ -1669,8 +1683,9 @@ drive_endcrowd() {
 
   var_2 = maps\coup_code::scripted_array_spawn("endcrowd_idleguards", "targetname", 1);
 
-  for(var_1 = 0; var_1 < var_2.size; var_1++)
+  for(var_1 = 0; var_1 < var_2.size; var_1++) {
     var_2[var_1].animname = "human";
+  }
 
   var_3 = maps\coup_code::scripted_array_spawn("endcrowd_crowdmember", "targetname", 1);
 
@@ -1737,8 +1752,9 @@ drive_welcoming_guards() {
   common_scripts\utility::flag_wait("welcoming_soldier");
   var_0 thread maps\_anim::anim_loop_solo(var_0, "crowdmember_soldier_welcome_4", undefined, "stop_loop");
 
-  while(distance2dsquared(var_0.origin, level.player.origin) > 19600)
+  while(distance2dsquared(var_0.origin, level.player.origin) > 19600) {
     wait 0.1;
+  }
 
   wait 0.2;
   var_0 notify("stop_loop");
@@ -1833,8 +1849,9 @@ drive_ziptie5() {
   common_scripts\utility::flag_wait("drive_ziptie5");
   var_0 = maps\coup_code::scripted_array_spawn("ziptie5_tiedcivilian", "targetname", 1);
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     thread ziptied(var_0[var_1], 20);
+  }
 }
 
 drive_dogchase1() {
@@ -1868,8 +1885,9 @@ dumpsterhide(var_0, var_1, var_2) {
   var_4.angles = var_3.angles;
   var_4 removedroneweapon();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   var_4 thread maps\_anim::anim_single_solo(var_4, "dumpster_open");
   var_3 maps\_anim::anim_single_solo(var_3, "dumpster_open");
@@ -1904,8 +1922,9 @@ carjack(var_0, var_1, var_2) {
   var_3 maps\_anim::anim_first_frame_solo(var_8, "carjack_backright", "tag_detach");
   var_3 maps\_anim::anim_reach_solo(var_7, "carjack_backleft", "tag_detach");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   var_5 thread carjacker(var_3, "carjack_driver", "cardriver_idle");
   var_6 thread carjacker(var_3, "carjack_frontright", "carpassenger_idle");
@@ -1928,8 +1947,9 @@ fenceclimb(var_0, var_1, var_2) {
   var_4.disableexits = 1;
   var_4 maps\_utility::set_run_anim("run_panicked2", 1);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   var_3 maps\_anim::anim_reach_solo(var_4, "wall_climb");
   var_3 thread maps\_anim::anim_single_solo(var_4, "wall_climb");
@@ -1944,8 +1964,9 @@ fencedog(var_0, var_1, var_2) {
   var_4 = maps\coup_code::scripted_spawn2(var_0 + "_fencedog_dog", "targetname", 1);
   var_4.animname = "dog";
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   var_3 maps\_anim::anim_reach_solo(var_4, "fence_attack");
   var_3 thread maps\_anim::anim_single_solo(var_4, "fence_attack");
@@ -1961,20 +1982,24 @@ passenger_event() {
       var_0 = level.passenger_events[self.script_noteworthy].animation.anime;
       var_1 = level.passenger_events[self.script_noteworthy].animation.delay;
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         level maps\_utility::delaythread(var_1, ::animthread, var_0);
-      else
+      }
+      else {
         thread animthread(var_0);
+      }
     }
 
     if(isDefined(level.passenger_events[self.script_noteworthy].dialog)) {
       var_2 = level.passenger_events[self.script_noteworthy].dialog.soundalias;
       var_3 = level.passenger_events[self.script_noteworthy].dialog.delay;
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         level maps\_utility::delaythread(var_3, ::dialogthread, var_2);
-      else
+      }
+      else {
         thread dialogthread(var_2);
+      }
     }
   }
 }
@@ -1997,8 +2022,9 @@ loudspeaker_event() {
   }
   var_0 = getent(self.target, "targetname");
 
-  if(isDefined(var_0.script_noteworthy))
+  if(isDefined(var_0.script_noteworthy)) {
     var_0 playSound(var_0.script_noteworthy);
+  }
 }
 
 crowdmember_setuptriggers() {
@@ -2010,13 +2036,15 @@ crowdmember_setuptriggers() {
   }
   var_1 = self.script_duration;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 10;
+  }
 
   var_2 = self.script_noteworthy;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "jeer";
+  }
 
   var_3 = getEntArray(self.target, "targetname");
   common_scripts\utility::array_thread(var_3, ::crowdmember_status, var_2, var_1);
@@ -2026,13 +2054,15 @@ crowdmember_triggerevent(var_0) {
   var_0 waittill("trigger");
   var_1 = var_0.script_duration;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 3;
+  }
 
   var_2 = var_0.script_noteworthy;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "idle";
+  }
 
   var_3 = self.crowdstatus;
   self.crowdstatus = var_2;
@@ -2197,24 +2227,29 @@ initcredits() {
   var_6 = undefined;
 
   for(var_7 = 0; var_7 < level.namelist.size; var_7++) {
-    if(var_5 == 0)
+    if(var_5 == 0) {
       var_6 = createpage(var_1[var_0], var_2[var_0], 340);
+    }
 
     var_6 addcredit(level.namelist[var_7], var_4[var_3]);
 
-    if(var_3)
+    if(var_3) {
       var_3 = 0;
-    else
+    }
+    else {
       var_3 = 1;
+    }
 
     if(var_5 >= 2) {
       level.credits addpage(var_6);
       var_5 = 0;
 
-      if(var_0)
+      if(var_0) {
         var_0 = 0;
-      else
+      }
+      else {
         var_0 = 1;
+      }
 
       continue;
     }
@@ -2222,8 +2257,9 @@ initcredits() {
     var_5++;
   }
 
-  if(var_5)
+  if(var_5) {
     level.credits addpage(var_6);
+  }
 }
 
 addname(var_0) {
@@ -2248,8 +2284,9 @@ addpage(var_0) {
 }
 
 addcredit(var_0, var_1) {
-  if(!isDefined(self.names))
+  if(!isDefined(self.names)) {
     self.names = [];
+  }
 
   var_2 = spawnStruct();
   var_2.name = var_0;
@@ -2326,10 +2363,12 @@ displaypage(var_0) {
       var_1[var_2].alignx = var_0.alignment;
       var_1[var_2].horzalign = var_0.alignment;
 
-      if(var_0.alignment == "left")
+      if(var_0.alignment == "left") {
         var_1[var_2].x = var_0.x + var_2 * 46;
-      else if(var_0.alignment == "right")
+      }
+      else if(var_0.alignment == "right") {
         var_1[var_2].x = var_0.x + var_2 * 46 - 138;
+      }
 
       var_1[var_2].y = var_0.y + var_2 * 16;
       var_1[var_2] settext(var_0.names[var_2].name);
@@ -2356,8 +2395,9 @@ displaypage(var_0) {
   wait 4.5;
 
   if(isDefined(var_1)) {
-    for(var_2 = 0; var_2 < var_1.size; var_2++)
+    for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_1[var_2] destroy();
+    }
   }
 }
 
@@ -2446,8 +2486,9 @@ doorkick(var_0, var_1, var_2, var_3, var_4) {
   thread maps\_anim::anim_first_frame_solo(var_0, "doorkick_left_idle");
   thread maps\_anim::anim_first_frame_solo(var_1, "doorkick_right_idle");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     wait(var_2);
+  }
 
   var_0 thread kickdoor(var_13, var_14);
   thread maps\_anim::anim_single_solo(var_1, "doorkick_right_stepout_runin");
@@ -2483,27 +2524,31 @@ ziptie(var_0, var_1, var_2) {
   var_9.animname = "human";
   var_9.ignoreweaponintracksuitmode = 1;
 
-  if(var_8)
+  if(var_8) {
     var_9 maps\coup_code::opfor_swaphead_for_facialanim();
+  }
 
   var_10 = maps\coup_code::scripted_spawn2(var_0 + "_civilian", "targetname", 1);
   var_10.animname = "human";
   var_5 thread maps\_anim::anim_first_frame_solo(var_9, var_3);
   var_5 thread maps\_anim::anim_first_frame_solo(var_10, var_4);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
-  if(var_6 == 1)
+  if(var_6 == 1) {
     maps\_utility::delaythread(var_2, maps\coup_code::deleteentity, var_5);
+  }
 
   maps\_utility::delaythread(var_2, maps\coup_code::deleteentity, var_9);
   maps\_utility::delaythread(var_2, maps\coup_code::deleteentity, var_10);
   var_5 thread maps\_anim::anim_single_solo(var_9, var_3);
   var_5 maps\_anim::anim_single_solo(var_10, var_4);
 
-  if(var_7 == 1)
+  if(var_7 == 1) {
     var_5 maps\_anim::anim_loop_solo(var_10, "ziptie_civilian_idle");
+  }
 }
 
 ziptied(var_0, var_1) {
@@ -2613,10 +2658,12 @@ celebrate() {
   var_3 = undefined;
 
   for(;;) {
-    if(self.crowdstatus == "fire")
+    if(self.crowdstatus == "fire") {
       var_3 = var_0[var_2]["fire"][randomint(var_0[var_2]["fire"].size)];
-    else
+    }
+    else {
       var_3 = var_0[var_2][self.crowdstatus];
+    }
 
     if(isDefined(self.crowdanims_starting)) {
       var_4 = maps\_utility::getanim(var_3);
@@ -2651,11 +2698,13 @@ playcarsound(var_0) {
 }
 
 addpassengerevent(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.passenger_events))
+  if(!isDefined(level.passenger_events)) {
     level.passenger_events = [];
+  }
 
-  if(!isDefined(level.passenger_events[var_0]))
+  if(!isDefined(level.passenger_events[var_0])) {
     level.passenger_events[var_0] = spawnStruct();
+  }
 
   if(var_1 == "animation") {
     var_4 = spawnStruct();
@@ -2671,16 +2720,18 @@ addpassengerevent(var_0, var_1, var_2, var_3) {
 }
 
 removeweapon() {
-  if(isai(self))
+  if(isai(self)) {
     maps\_utility::gun_remove();
+  }
   else {
     var_0 = self getattachsize();
 
     for(var_1 = 0; var_1 < var_0; var_1++) {
       var_2 = self getattachmodelname(var_1);
 
-      if(var_2 == self.weapon)
+      if(var_2 == self.weapon) {
         self detach(var_2);
+      }
     }
   }
 }
@@ -2750,11 +2801,13 @@ subtitle(var_0, var_1, var_2, var_3) {
   wait(var_2);
   var_4 destroy();
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_5 destroy();
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level notify("continue_credits");
+  }
 }
 
 playmirrorvideo() {
@@ -2838,6 +2891,7 @@ animvarietyforalleyrunners() {
   var_0[2] maps\_utility::delaythread(3.5, maps\_utility::play_sound_on_entity, "coup_runner_follow");
   wait 20;
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 maps\_utility::delaythread(randomfloat(0.5), maps\_utility::clear_generic_run_anim);
+  }
 }

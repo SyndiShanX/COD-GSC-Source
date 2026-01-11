@@ -34,8 +34,9 @@ onmenuresponse() {
     }
 
     if(response == "endround") {
-      if(!level.gameended)
+      if(!level.gameended) {
         level thread maps\_cooplogic::forceend();
+      }
       else {
         self closemenu();
         self closeingamemenu();
@@ -44,7 +45,8 @@ onmenuresponse() {
       continue;
     }
 
-    if(response == "close_all_ingame_menus")
+    if(response == "close_all_ingame_menus") {
       self closeingamemenu();
+    }
   }
 }

@@ -49,8 +49,9 @@ brutusfootstepcbfunc(localclientnum, pos, surface, notetrack, bone) {
       players[i] earthquake(0.5, 0.1, self.origin, 1500);
       playerlocalclientnum = players[i] getlocalclientnumber();
 
-      if(isDefined(playerlocalclientnum))
+      if(isDefined(playerlocalclientnum)) {
         playrumbleonposition(playerlocalclientnum, "brutus_footsteps", self.origin);
+      }
     }
   }
 
@@ -58,8 +59,9 @@ brutusfootstepcbfunc(localclientnum, pos, surface, notetrack, bone) {
 }
 
 registerbrutusfootstepcb(aitype, func) {
-  if(!isDefined(level._footstepcbfuncs))
+  if(!isDefined(level._footstepcbfuncs)) {
     level._footstepcbfuncs = [];
+  }
 
   if(isDefined(level._footstepcbfuncs[aitype])) {
     println("Attempting to register footstep callback function for ai type " + aitype + " multiple times.");

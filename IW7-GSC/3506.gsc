@@ -45,13 +45,15 @@ func_128F2(var_00) {
   self endon("disconnect");
   var_01 = var_0.func_98F2;
 
-  if(isDefined(self.underwater) && self.underwater)
+  if(isDefined(self.underwater) && self.underwater) {
     return 0;
+  }
 
   var_02 = func_10DD3(var_0.streakname);
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
   return var_02;
 }
@@ -59,8 +61,9 @@ func_128F2(var_00) {
 func_10DD3(var_00, var_01) {
   level endon("game_ended");
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0;
+  }
 
   self.restoreangles = vectortoangles(anglesToForward(self.angles));
   func_C6CB();
@@ -253,10 +256,12 @@ func_10129() {
   wait 1.0;
   var_00 = func_7E6A(self.targeting_marker.origin);
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     playFXOnTag(level._effect["odin_targeting"], self.targeting_marker, "tag_origin");
-  else
+  }
+  else {
     playFXOnTag(level._effect["odin_targeting_bad"], self.targeting_marker, "tag_origin");
+  }
 }
 
 func_C6C7(var_00) {
@@ -265,8 +270,9 @@ func_C6C7(var_00) {
   var_01 = level.func_C6D7["orbital_deployment"];
   scripts\mp\utility\game::leaderdialog(var_1.votimedout);
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner func_C6C5(self, var_00);
+  }
 
   self notify("gone");
   func_4074();
@@ -277,11 +283,13 @@ func_C6C7(var_00) {
 }
 
 func_4074() {
-  if(isDefined(self.targeting_marker))
+  if(isDefined(self.targeting_marker)) {
     self.targeting_marker delete();
+  }
 
-  if(isDefined(self.func_C6CA))
+  if(isDefined(self.func_C6CA)) {
     self.func_C6CA delete();
+  }
 }
 
 func_C6CC(var_00) {
@@ -298,8 +306,9 @@ func_C6C5(var_00, var_01) {
     self notify("odin_ride_ended");
     func_C6C4();
 
-    if(getdvarint("camera_thirdPerson"))
+    if(getdvarint("camera_thirdPerson")) {
       scripts\mp\utility\game::setthirdpersondof(1);
+    }
 
     self thermalvisionfofoverlayoff();
     self remotecontrolvehicleoff(var_00);
@@ -316,15 +325,18 @@ func_C6C5(var_00, var_01) {
     self stopolcalsound("odin_positive_action");
 
     foreach(var_03 in level.func_C6D7["orbital_deployment"].weapon) {
-      if(isDefined(var_3.func_D5E4))
+      if(isDefined(var_3.func_D5E4)) {
         self stopolcalsound(var_3.func_D5E4);
+      }
 
-      if(isDefined(var_3.func_D5DD))
+      if(isDefined(var_3.func_D5DD)) {
         self stopolcalsound(var_3.func_D5DD);
+      }
     }
 
-    if(isDefined(var_0.func_A4A3))
+    if(isDefined(var_0.func_A4A3)) {
       var_0.func_A4A3 scripts\mp\bots\bots_strategy::bot_guard_player(self, 350);
+    }
 
     self notify("stop_odin");
   }
@@ -339,18 +351,21 @@ func_108F5() {
   self setorigin(var_01, 1);
 
   foreach(var_04 in level.players) {
-    if(var_04 != self)
+    if(var_04 != self) {
       self giveperkequipment(var_04);
+    }
   }
 }
 
 func_10DD8() {
   var_00 = undefined;
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     var_00 = "axis";
-  else if(self.team == "axis")
+  }
+  else if(self.team == "axis") {
     var_00 = "allies";
+  }
   else {}
 
   var_01 = anglesToForward(self.angles);
@@ -375,8 +390,9 @@ func_C6CB() {
 }
 
 func_C6C4() {
-  if(isDefined(self))
+  if(isDefined(self)) {
     scripts\mp\utility\game::clearusingremote();
+  }
 }
 
 func_10DD4(var_00, var_01, var_02) {
@@ -388,8 +404,9 @@ func_10DD4(var_00, var_01, var_02) {
   level thread monitorobjectivecamera(self);
   var_03 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_02);
 
-  if(var_03 == "success")
+  if(var_03 == "success") {
     level thread func_1285(var_00, var_01, self, var_02);
+  }
   else {
     self notify("end_kill_streak");
     func_C6C4();
@@ -417,8 +434,9 @@ func_1285(var_00, var_01, var_02, var_03) {
   var_9.owner = var_02;
   var_09 scripts\mp\killstreaks\utility::func_1843(var_03, "Killstreak_Air", var_9.owner, 1);
 
-  if(scripts\mp\utility\game::isreallyalive(var_02))
+  if(scripts\mp\utility\game::isreallyalive(var_02)) {
     var_02 func_10DD8();
+  }
 
   if(isDefined(var_2.fauxdeath) && var_2.fauxdeath) {
     var_2.faux_spawn_stance = var_02 getstance();
@@ -458,8 +476,9 @@ func_1285(var_00, var_01, var_02, var_03) {
   if(isDefined(var_08)) {
     var_00 = var_8.origin;
 
-    if(isDefined(var_02))
+    if(isDefined(var_02)) {
       var_02 scripts\mp\matchdata::logkillstreakevent(var_03, var_8.origin);
+    }
   }
 
   level thread func_E474(var_02, undefined, var_00, var_09, var_04);
@@ -567,20 +586,24 @@ monitordeath(var_00, var_01) {
   var_00 waittill("death");
   scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  if(isDefined(var_0.func_114F1))
+  if(isDefined(var_0.func_114F1)) {
     var_0.func_114F1 delete();
+  }
 
-  if(isDefined(var_0.entitynumber))
+  if(isDefined(var_0.entitynumber)) {
     level.rockets[var_0.entitynumber] = undefined;
+  }
 
-  if(var_01)
+  if(var_01) {
     level.remotemissileinprogress = undefined;
+  }
 }
 
 func_E474(var_00, var_01, var_02, var_03, var_04) {
   if(!isDefined(var_00)) {
-    if(isDefined(var_03))
+    if(isDefined(var_03)) {
       var_03 thread func_51B1();
+    }
 
     return;
   }
@@ -591,8 +614,9 @@ func_E474(var_00, var_01, var_02, var_03, var_04) {
   var_00 thermalvisionfofoverlayoff();
   var_00 controlsunlink();
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.95);
+  }
 
   var_00 cameraunlink();
   var_00 setclientomnvar("ui_predator_missile", 0);
@@ -610,8 +634,9 @@ func_E474(var_00, var_01, var_02, var_03, var_04) {
   var_00 scripts\mp\utility\game::freezecontrolswrapper(0);
   var_00 scripts\engine\utility::allow_usability(1);
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_00 func_10D89(var_02, var_03);
+  }
 }
 
 func_10D89(var_00, var_01) {
@@ -623,8 +648,9 @@ func_10D89(var_00, var_01) {
   self setorigin(var_00 + (0, 0, 15), 1);
 
   foreach(var_04 in level.players) {
-    if(var_04 != self)
+    if(var_04 != self) {
       self giveperkequipment(var_04);
+    }
   }
 
   self notify("weapon_change", self getcurrentweapon());
@@ -680,8 +706,9 @@ func_D39C(var_00) {
   for(var_02 = 0; var_02 <= 3; var_2++) {
     var_03 = var_1[var_02];
 
-    if(isDefined(var_03) && var_3.streakname == var_00 && var_3.func_269A)
+    if(isDefined(var_03) && var_3.streakname == var_00 && var_3.func_269A) {
       return 1;
+    }
   }
 
   return 0;

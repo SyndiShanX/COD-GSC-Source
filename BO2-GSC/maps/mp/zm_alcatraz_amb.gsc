@@ -20,16 +20,18 @@ main() {
   thread sndsetupendgamemusicstates();
   thread sndspectatorsetup();
 
-  if(is_classic())
+  if(is_classic()) {
     thread sndmusicegg();
+  }
 }
 
 sndspectatorsetup() {
   flag_wait("initial_players_connected");
   players = getplayers();
 
-  foreach(player in players)
+  foreach(player in players) {
   player thread sndspectatorafterliferevert();
+  }
 }
 
 sndspectatorafterliferevert() {
@@ -38,8 +40,9 @@ sndspectatorafterliferevert() {
   while(true) {
     self waittill("spawned_spectator");
 
-    while(self.sessionstate == "spectator")
+    while(self.sessionstate == "spectator") {
       wait 1;
+    }
 
     self clientnotify("sndSR");
   }
@@ -53,8 +56,9 @@ sndsetupendgamemusicstates() {
 }
 
 sndperksacolajingle(perksacola) {
-  if(!isDefined(self.jingle_is_playing))
+  if(!isDefined(self.jingle_is_playing)) {
     self.jingle_is_playing = 0;
+  }
 
   if(!isDefined(self.script_sound)) {
     return;
@@ -80,8 +84,9 @@ sndperksacolaloop() {
   while(true) {
     wait(randomfloatrange(31, 45));
 
-    if(randomint(100) < 15)
+    if(randomint(100) < 15) {
       self thread sndperksacolajingle();
+    }
   }
 }
 
@@ -89,8 +94,9 @@ sndeventstingertriggers() {
   flag_wait("start_zombie_round_logic");
   triggers = getEntArray("sndMusicEventStinger", "targetname");
 
-  foreach(trigger in triggers)
+  foreach(trigger in triggers) {
   trigger thread sndeventstingertriggerthink();
+  }
 }
 
 sndeventstingertriggerthink() {
@@ -123,20 +129,23 @@ sndgettensionlevel(struct) {
   players = getplayers();
 
   foreach(player in players) {
-    if(is_true(player.laststand))
+    if(is_true(player.laststand)) {
       tension_level++;
+    }
   }
 
   num_zombs = get_current_zombie_count();
 
-  if(num_zombs >= 12)
+  if(num_zombs >= 12) {
     tension_level++;
+  }
 
   enemies = getaispeciesarray("axis", "all");
 
   foreach(enemy in enemies) {
-    if(enemy.animname == "brutus_zombie")
+    if(enemy.animname == "brutus_zombie") {
       tension_level++;
+    }
   }
 
   if(tension_level > 2) {
@@ -187,8 +196,9 @@ locationstingerwait(zone_name, type) {
     if(!sndlocationshouldplay(array, activezone)) {
       continue;
     }
-    if(is_true(level.sndroundwait))
+    if(is_true(level.sndroundwait)) {
       continue;
+    }
     else if(is_true(level.sndstinger.isplaying)) {
       level thread sndlocationqueue(activezone);
       continue;
@@ -198,15 +208,18 @@ locationstingerwait(zone_name, type) {
     array = sndcurrentlocationarray(array, activezone, numcut, sndnorepeats);
     level.sndlastzone = activezone;
 
-    if(numcut >= sndnorepeats)
+    if(numcut >= sndnorepeats) {
       numcut = 0;
-    else
+    }
+    else {
       numcut++;
+    }
 
     level waittill("between_round_over");
 
-    while(is_true(level.sndroundwait))
+    while(is_true(level.sndroundwait)) {
       wait 0.1;
+    }
   }
 }
 
@@ -227,34 +240,40 @@ sndlocationshouldplay(array, activezone) {
   shouldplay = 0;
 
   foreach(place in array) {
-    if(place == activezone)
+    if(place == activezone) {
       shouldplay = 1;
+    }
   }
 
-  if(shouldplay == 0)
+  if(shouldplay == 0) {
     return shouldplay;
+  }
 
   playersinlocal = 0;
   players = getplayers();
 
   foreach(player in players) {
     if(player maps\mp\zombies\_zm_zonemgr::is_player_in_zone(activezone)) {
-      if(!is_true(player.afterlife))
+      if(!is_true(player.afterlife)) {
         playersinlocal++;
+      }
     }
   }
 
-  if(playersinlocal >= 1)
+  if(playersinlocal >= 1) {
     shouldplay = 1;
-  else
+  }
+  else {
     shouldplay = 0;
+  }
 
   return shouldplay;
 }
 
 sndcurrentlocationarray(current_array, activezone, numcut, max_num_removed) {
-  if(numcut >= max_num_removed)
+  if(numcut >= max_num_removed) {
     current_array = sndlocationsarray();
+  }
 
   foreach(place in current_array) {
     if(place == activezone) {
@@ -292,23 +311,26 @@ sndlocationbetweenrounds() {
 sndlocationbetweenroundswait() {
   flag_wait("afterlife_start_over");
 
-  while(is_true(level.sndroundwait))
+  while(is_true(level.sndroundwait)) {
     wait 0.1;
+  }
 
   while(true) {
     level thread sndlocationbetweenrounds();
     level waittill("between_round_over");
 
-    while(is_true(level.sndroundwait))
+    while(is_true(level.sndroundwait)) {
       wait 0.1;
+    }
   }
 }
 
 sndlocationqueue(zone) {
   level endon("newzoneActive");
 
-  while(is_true(level.sndstinger.isplaying))
+  while(is_true(level.sndstinger.isplaying)) {
     wait 0.5;
+  }
 
   level notify("newzoneActive", zone);
 }
@@ -403,8 +425,9 @@ sndplaystinger(state, player) {
     return;
   }
 
-  if(s.states[state].interrupt == "queue")
+  if(s.states[state].interrupt == "queue") {
     level thread sndqueuestinger(state, player);
+  }
 }
 
 playstinger(state, player, ignore) {
@@ -417,10 +440,12 @@ playstinger(state, player, ignore) {
     return;
   }
   if(is_true(ignore)) {
-    if(isDefined(player))
+    if(isDefined(player)) {
       player playsoundtoplayer(s.states[state].alias, player);
-    else
+    }
+    else {
       s.ent playSound(s.states[state].alias);
+    }
   } else if(isDefined(player)) {
     player playsoundtoplayer(s.states[state].alias, player);
     wait 8;
@@ -433,16 +458,19 @@ playstinger(state, player, ignore) {
 sndqueuestinger(state, player) {
   s = level.sndstinger;
 
-  if(is_true(s.queue))
+  if(is_true(s.queue)) {
     return;
+  }
   else {
     s.queue = 1;
 
     while(true) {
-      if(is_true(level.sndroundwait) || is_true(s.isplaying))
+      if(is_true(level.sndroundwait) || is_true(s.isplaying)) {
         wait 0.5;
-      else
+      }
+      else {
         break;
+      }
     }
 
     level thread sndplaystinger(state, player);
@@ -478,10 +506,12 @@ sndstingerroundwait_end() {
 sndlastlifesetup() {
   flag_wait("start_zombie_round_logic");
 
-  if(flag("solo_game"))
+  if(flag("solo_game")) {
     level thread sndlastlife_solo();
-  else
+  }
+  else {
     level thread sndlastlife_multi();
+  }
 }
 
 sndlastlife_solo() {
@@ -492,8 +522,9 @@ sndlastlife_solo() {
     player waittill("sndLifeGone");
 
     if(player.lives == 0) {
-      while(is_true(player.afterlife))
+      while(is_true(player.afterlife)) {
         wait 0.1;
+      }
 
       level notify("sndStopBrutusLoop");
       level thread maps\mp\zombies\_zm_audio::change_zombie_music("last_life");
@@ -515,11 +546,13 @@ sndlastlife_multi() {
     if(players.size - sndplayersdead <= 1) {
       last_alive = sndlastlife_multi_getlastplayer();
 
-      while(last_alive.lives > 0)
+      while(last_alive.lives > 0) {
         wait 0.1;
+      }
 
-      while(is_true(last_alive.afterlife))
+      while(is_true(last_alive.afterlife)) {
         wait 0.1;
+      }
 
       level notify("sndStopBrutusLoop");
       level thread maps\mp\zombies\_zm_audio::change_zombie_music("last_life");
@@ -554,8 +587,9 @@ sndmusicegg() {
   level.meteor_counter = 0;
   level.music_override = 0;
 
-  for(i = 0; i < origins.size; i++)
+  for(i = 0; i < origins.size; i++) {
     level thread sndmusicegg_wait(origins[i]);
+  }
 }
 
 sndmusicegg_wait(bottle_origin) {
@@ -577,8 +611,9 @@ sndmusicegg_wait(bottle_origin) {
 }
 
 sndmusicegg_override() {
-  if(is_true(level.music_override))
+  if(is_true(level.music_override)) {
     return false;
+  }
 
   return true;
 }

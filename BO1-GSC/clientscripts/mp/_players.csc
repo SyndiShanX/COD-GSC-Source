@@ -43,8 +43,9 @@ on_connect(localclientnum) {
   init_filter_infrared(player);
   init_filter_scope(player);
   init_filter_tvguided(player);
-  if(isDefined(level.infraredVisionset))
+  if(isDefined(level.infraredVisionset)) {
     player SetInfraredVisionset(level.infraredVisionset);
+  }
   if(isDefined(level.onPlayerConnect)) {
     level thread[[level.onPlayerConnect]](localclientnum);
   }
@@ -55,10 +56,12 @@ dtp_effects() {
     self waittill("dtp_land", localClientNum);
     localPlayer = GetLocalPlayer(localClientNum);
     if(!IsSplitscreen() && isDefined(localPlayer) && localPlayer == self) {
-      if(isDefined(level.isWinter) && level.isWinter)
+      if(isDefined(level.isWinter) && level.isWinter) {
         AnimateUI(localClientNum, "fullscreen_snow", "dirt", "in", 0);
-      else
+      }
+      else {
         AnimateUI(localClientNum, "fullscreen_dirt", "dirt", "in", 0);
+      }
     }
   }
 }

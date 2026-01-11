@@ -39,11 +39,13 @@ start() {
   var_0 = getEntArray("bridge_end_1", "script_noteworthy");
   var_1 = getEntArray("bridge_end_2", "script_noteworthy");
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 hide();
+  }
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 hide();
+  }
 
   common_scripts\utility::flag_set("flag_end_wreck_start");
   maps\_utility::vision_set_fog_changes("skyway_endwreck", 0.1);
@@ -94,8 +96,9 @@ part_2_setup() {
   var_0 maps\_utility::gun_remove();
   thread part_2_dialog(var_0);
 
-  if(!isDefined(level._boss))
+  if(!isDefined(level._boss)) {
     maps\skyway_util::spawn_boss();
+  }
 
   var_1 = level._boss;
   var_1 maps\_utility::gun_remove();
@@ -129,14 +132,16 @@ part_2_dialog(var_0) {
   level endon("player_missed");
   level endon("shot_successful");
 
-  if(!common_scripts\utility::flag("player_got_gun"))
+  if(!common_scripts\utility::flag("player_got_gun")) {
     var_0 thread maps\_utility::smart_dialogue("skyway_hsh_getthegun");
+  }
 
   common_scripts\utility::flag_wait("player_got_gun");
   wait 3;
 
-  if(!common_scripts\utility::flag("dry_fire"))
+  if(!common_scripts\utility::flag("dry_fire")) {
     var_0 thread maps\_utility::smart_dialogue("skyway_hsh_shoothim");
+  }
 
   level waittill("hesch_speedloader_vo");
   var_0 thread maps\_utility::smart_dialogue("skyway_hsh_here");
@@ -235,13 +240,15 @@ part_2_crash(var_0, var_1, var_2, var_3, var_4) {
 wreck_enemy_setup() {
   var_0 = getEntArray("loco_breach_enemy", "targetname");
 
-  if(!isDefined(level.end_enemies))
+  if(!isDefined(level.end_enemies)) {
     level.end_enemies = [];
+  }
   else {
     foreach(var_2 in level.end_enemies) {
       if(isalive(var_2)) {
-        if(isDefined(var_2.magic_bullet_shield))
+        if(isDefined(var_2.magic_bullet_shield)) {
           var_2 thread maps\_utility::stop_magic_bullet_shield();
+        }
 
         var_2 delete();
       }
@@ -275,8 +282,9 @@ part_2_ambient_animations(var_0) {
   common_scripts\utility::flag_wait("flag_end_wreck_end");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.magic_bullet_shield))
+    if(isDefined(var_2.magic_bullet_shield)) {
       var_2 thread maps\_utility::stop_magic_bullet_shield();
+    }
 
     var_2 delete();
   }
@@ -316,8 +324,9 @@ glass_crack_effects() {
 player_glass_crack(var_0) {
   var_1 = getent("get_speedloader_trigger", "targetname");
 
-  while(!level.player istouching(var_1))
+  while(!level.player istouching(var_1)) {
     wait 0.01;
+  }
 
   var_0 show();
   level.player playSound("scn_sw_uw_plyr_glass");
@@ -432,8 +441,9 @@ part_2_knife_logic(var_0) {
   common_scripts\utility::flag_set("knife_attached");
   level waittill("flag_end_wreck_end");
 
-  if(common_scripts\utility::flag("knife_attached"))
+  if(common_scripts\utility::flag("knife_attached")) {
     var_0 detach("weapon_parabolic_knife", "tag_inhand");
+  }
 }
 
 detach_knife(var_0) {
@@ -529,8 +539,9 @@ part_2_shoot_chance(var_0, var_1) {
     level waittill("gun_down");
     thread maps\skyway_fx::fx_hesh_neck_cut();
 
-    if(!common_scripts\utility::flag("gun_loaded"))
+    if(!common_scripts\utility::flag("gun_loaded")) {
       level notify("stop_reload");
+    }
 
     level.player thread maps\_anim::anim_single_solo(level.playerviewmodel, "pt2_fire_win");
     wait 3.2;
@@ -624,8 +635,9 @@ part_2_gun_fire(var_0) {
       level.player playrumbleonentity("damage_light");
       level.playerviewmodel setanimrestart(level.scr_anim["player_rig_magnum"]["pt2_fire_empty"]);
 
-      if(!common_scripts\utility::flag("dry_fire"))
+      if(!common_scripts\utility::flag("dry_fire")) {
         thread part_2_gun_reload();
+      }
 
       common_scripts\utility::flag_set("dry_fire");
       wait 0.3;
@@ -730,13 +742,15 @@ fade_in_from_black() {
 trigger_qte_prompt_check(var_0) {
   level endon("stop_blink");
 
-  while(!level.player istouching(var_0))
+  while(!level.player istouching(var_0)) {
     wait 0.05;
+  }
 
   fade_qte_prompt(0.05, 1);
 
-  while(level.player istouching(var_0))
+  while(level.player istouching(var_0)) {
     wait 0.05;
+  }
 
   fade_qte_prompt(0.05, 0);
   wait 0.05;
@@ -747,8 +761,9 @@ event_qte_bullet_catch() {
   level waittill("notify_slomo_start");
   var_0 = maps\_utility::get_dot(level.player.origin, level.player.angles, level._ally.origin);
 
-  if(var_0 < 0.6)
+  if(var_0 < 0.6) {
     common_scripts\utility::flag_wait("flag_qte_end");
+  }
   else {
     thread qte_bullet_catch_slomo();
     thread qte_bullet_catch_dof();
@@ -895,8 +910,9 @@ qte_bullet_catch_slomo() {
 create_qte_prompt(var_0, var_1, var_2, var_3) {
   var_4 = -3;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 70;
+  }
 
   var_5 = var_2;
   var_6 = 3;
@@ -971,8 +987,9 @@ fade_qte_prompt(var_0, var_1) {
   if(!isDefined(level.qte_prompt)) {
     return;
   }
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1.5;
+  }
 
   foreach(var_3 in level.qte_prompt) {
     var_3 fadeovertime(var_0);
@@ -993,8 +1010,9 @@ destroy_qte_prompt() {
 
   level notify("stop_blink");
 
-  foreach(var_1 in level.qte_prompt)
+  foreach(var_1 in level.qte_prompt) {
   var_1 destroy();
+  }
 
   level.qte_prompt = undefined;
 }

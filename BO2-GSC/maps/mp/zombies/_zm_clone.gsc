@@ -12,17 +12,21 @@ init() {
 }
 
 spawn_player_clone(player, origin, forceweapon, forcemodel) {
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     origin = player.origin;
+  }
 
   primaryweapons = player getweaponslistprimaries();
 
-  if(isDefined(forceweapon))
+  if(isDefined(forceweapon)) {
     weapon = forceweapon;
-  else if(primaryweapons.size)
+  }
+  else if(primaryweapons.size) {
     weapon = primaryweapons[0];
-  else
+  }
+  else {
     weapon = player getcurrentweapon();
+  }
 
   weaponmodel = getweaponmodel(weapon);
   spawner = getent("fake_player_spawner", "targetname");
@@ -36,8 +40,9 @@ spawn_player_clone(player, origin, forceweapon, forcemodel) {
     clone.isactor = 0;
   }
 
-  if(isDefined(forcemodel))
+  if(isDefined(forcemodel)) {
     clone setModel(forcemodel);
+  }
   else {
     clone setModel(self.model);
 
@@ -47,8 +52,9 @@ spawn_player_clone(player, origin, forceweapon, forcemodel) {
     }
   }
 
-  if(weaponmodel != "" && weaponmodel != "none")
+  if(weaponmodel != "" && weaponmodel != "none") {
     clone attach(weaponmodel, "tag_weapon_right");
+  }
 
   clone.team = player.team;
   clone.is_inert = 1;
@@ -61,8 +67,9 @@ spawn_player_clone(player, origin, forceweapon, forcemodel) {
 clone_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
   idamage = 0;
 
-  if(sweapon == "knife_ballistic_upgraded_zm" || sweapon == "knife_ballistic_bowie_upgraded_zm" || sweapon == "knife_ballistic_no_melee_upgraded_zm" || sweapon == "knife_ballistic_sickle_upgraded_zm")
+  if(sweapon == "knife_ballistic_upgraded_zm" || sweapon == "knife_ballistic_bowie_upgraded_zm" || sweapon == "knife_ballistic_no_melee_upgraded_zm" || sweapon == "knife_ballistic_sickle_upgraded_zm") {
     self notify("player_revived", eattacker);
+  }
 
   return idamage;
 }
@@ -70,15 +77,18 @@ clone_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapo
 clone_give_weapon(weapon) {
   weaponmodel = getweaponmodel(weapon);
 
-  if(weaponmodel != "" && weaponmodel != "none")
+  if(weaponmodel != "" && weaponmodel != "none") {
     self attach(weaponmodel, "tag_weapon_right");
+  }
 }
 
 clone_animate(animtype) {
-  if(self.isactor)
+  if(self.isactor) {
     self thread clone_actor_animate(animtype);
-  else
+  }
+  else {
     self thread clone_mover_animate(animtype);
+  }
 }
 
 clone_actor_animate(animtype) {

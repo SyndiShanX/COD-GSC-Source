@@ -224,13 +224,15 @@ UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
     yawDiff = self GetLookaheadAngle();
     animWeights = animscripts\zombie_utility::QuadrantAnimWeights(yawDiff);
     tempYawDiff = yawDiff;
-    if(tempYawDiff < 0)
+    if(tempYawDiff < 0) {
       tempYawDiff *= -1;
+    }
     minYaw = GetDvarFloat(#"ai_slowdownMinYawDiff");
     if(tempYawDiff >= minYaw) {
       maxYaw = GetDvarFloat(#"ai_slowdownMaxYawDiff");
-      if(tempYawDiff > maxYaw)
+      if(tempYawDiff > maxYaw) {
         tempYawDiff = maxYaw;
+      }
       maxYaw -= minYaw;
       tempYawDiff -= minYaw;
       minRate = GetDvarFloat(#"ai_slowdownMinRate");

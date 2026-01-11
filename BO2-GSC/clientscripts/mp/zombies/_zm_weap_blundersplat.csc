@@ -21,8 +21,9 @@ spawned(localclientnum) {
   enemy = 0;
   self.fxtagname = "tag_origin";
 
-  if(self.team != player.team)
+  if(self.team != player.team) {
     enemy = 1;
+  }
 
   self thread loop_local_sound(localclientnum, "wpn_blundersplat_alert", 0.3, level._effect["dart_light"]);
   self thread sndfuseloop();
@@ -38,8 +39,9 @@ loop_local_sound(localclientnum, alias, interval, fx) {
     stopfx(localclientnum, n_id);
     interval = interval / 1.2;
 
-    if(interval < 0.1)
+    if(interval < 0.1) {
       interval = 0.1;
+    }
   }
 }
 

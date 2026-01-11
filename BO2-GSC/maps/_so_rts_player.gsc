@@ -23,13 +23,15 @@ friendly_player() {
       total = get_number_in_queue(ref);
       squad = maps\_so_rts_squad::getsquadbypkg(ref, "allies");
 
-      if(isDefined(squad))
+      if(isDefined(squad)) {
         total = total + squad.members.size;
+      }
 
       total = total + maps\_so_rts_catalog::getnumberofpkgsbeingtransported("allies", ref) * packages_avail[i].numunits;
 
-      if(isDefined(level.rts.player.ally) && level.rts.player.ally.pkg_ref.ref == ref)
+      if(isDefined(level.rts.player.ally) && level.rts.player.ally.pkg_ref.ref == ref) {
         total = total + 1;
+      }
 
       if(total >= packages_avail[i].max_friendly) {
         continue;
@@ -70,21 +72,24 @@ friendly_squad_spawner() {
 }
 
 order_new_squad(squadid) {
-  if(isDefined(level.rts.order_new_allysquadcb))
+  if(isDefined(level.rts.order_new_allysquadcb)) {
     [[level.rts.order_new_allysquadcb]](squadid);
+  }
 }
 
 get_number_in_queue(ref) {
   pkg_ref = package_getpackagebytype(ref);
 
-  if(!isDefined(pkg_ref))
+  if(!isDefined(pkg_ref)) {
     return 0;
+  }
 
   count = 0;
 
   for(i = 0; i < level.rts.friendly_squad_queue.size; i++) {
-    if(level.rts.friendly_squad_queue[i] == ref)
+    if(level.rts.friendly_squad_queue[i] == ref) {
       count = count + pkg_ref.numunits;
+    }
   }
 
   return count;

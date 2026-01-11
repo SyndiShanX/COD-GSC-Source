@@ -10,10 +10,12 @@ init() {
   level.objpointnames = [];
   level.objpoints = [];
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     level.objpointsize = 15;
-  else
+  }
+  else {
     level.objpointsize = 8;
+  }
 
   level.objpoint_alpha_default = 0.5;
   level.objpointscale = 1.0;
@@ -23,19 +25,24 @@ createteamobjpoint(name, origin, team, shader, alpha, scale, isdistanceshown) {
   assert(team == "axis" || team == "allies" || team == "all");
   objpoint = getobjpointbyname(name);
 
-  if(isDefined(objpoint))
+  if(isDefined(objpoint)) {
     deleteobjpoint(objpoint);
+  }
 
-  if(!isDefined(shader))
+  if(!isDefined(shader)) {
     shader = "objpoint_default";
+  }
 
-  if(!isDefined(scale))
+  if(!isDefined(scale)) {
     scale = 1.0;
+  }
 
-  if(team != "all")
+  if(team != "all") {
     objpoint = newteamhudelem(team);
-  else
+  }
+  else {
     objpoint = newhudelem();
+  }
 
   objpoint.name = name;
   objpoint.x = origin[0];
@@ -46,16 +53,19 @@ createteamobjpoint(name, origin, team, shader, alpha, scale, isdistanceshown) {
   objpoint.isshown = 1;
   objpoint.isdistanceshown = 0;
 
-  if(isDefined(isdistanceshown))
+  if(isDefined(isdistanceshown)) {
     objpoint.isdistanceshown = isdistanceshown;
+  }
 
   objpoint setshader(shader, level.objpointsize, level.objpointsize);
   objpoint setwaypoint(1, "", objpoint.isdistanceshown);
 
-  if(isDefined(alpha))
+  if(isDefined(alpha)) {
     objpoint.alpha = alpha;
-  else
+  }
+  else {
     objpoint.alpha = level.objpoint_alpha_default;
+  }
 
   objpoint.basealpha = objpoint.alpha;
   objpoint.index = level.objpointnames.size;
@@ -87,14 +97,17 @@ deleteobjpoint(oldobjpoint) {
 }
 
 updateorigin(origin) {
-  if(self.x != origin[0])
+  if(self.x != origin[0]) {
     self.x = origin[0];
+  }
 
-  if(self.y != origin[1])
+  if(self.y != origin[1]) {
     self.y = origin[1];
+  }
 
-  if(self.z != origin[2])
+  if(self.z != origin[2]) {
     self.z = origin[2];
+  }
 }
 
 setoriginbyname(name, origin) {
@@ -103,17 +116,21 @@ setoriginbyname(name, origin) {
 }
 
 getobjpointbyname(name) {
-  if(isDefined(level.objpoints[name]))
+  if(isDefined(level.objpoints[name])) {
     return level.objpoints[name];
-  else
+  }
+  else {
     return undefined;
+  }
 }
 
 getobjpointbyindex(index) {
-  if(isDefined(level.objpointnames[index]))
+  if(isDefined(level.objpointnames[index])) {
     return level.objpoints[level.objpointnames[index]];
-  else
+  }
+  else {
     return undefined;
+  }
 }
 
 startflashing() {

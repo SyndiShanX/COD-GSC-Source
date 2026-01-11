@@ -46,8 +46,9 @@ main() {
 }
 
 onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(smeansofdeath == "MOD_PISTOL_BULLET" || smeansofdeath == "MOD_RIFLE_BULLET" || smeansofdeath == "MOD_HEAD_SHOT")
+  if(smeansofdeath == "MOD_PISTOL_BULLET" || smeansofdeath == "MOD_RIFLE_BULLET" || smeansofdeath == "MOD_HEAD_SHOT") {
     idamage = self.maxhealth + 1;
+  }
 
   return idamage;
 }
@@ -131,25 +132,30 @@ onspawnplayerunified() {
   maps\mp\gametypes\_spawning::onspawnplayer_unified();
   livesleft = self.pers["lives"];
 
-  if(livesleft == 2)
+  if(livesleft == 2) {
     self maps\mp\gametypes\_wager::wagerannouncer("wm_2_lives");
-  else if(livesleft == 1)
+  }
+  else if(livesleft == 1) {
     self maps\mp\gametypes\_wager::wagerannouncer("wm_final_life");
+  }
 }
 
 onspawnplayer(predictedspawn) {
   spawnpoints = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(self.pers["team"]);
   spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_dm(spawnpoints);
 
-  if(predictedspawn)
+  if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  else
+  }
+  else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "oic");
+  }
 }
 
 onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer))
+  if(isDefined(winningplayer) && isplayer(winningplayer)) {
     [[level._setplayerscore]](winningplayer, [[level._getplayerscore]](winningplayer) + 1);
+  }
 }
 
 onstartwagersidebets() {
@@ -187,8 +193,9 @@ getplayersleft() {
     if(!isDefined(player)) {
       continue;
     }
-    if(!isplayereliminated(player))
+    if(!isplayereliminated(player)) {
       playersremaining[playersremaining.size] = player;
+    }
   }
 
   return playersremaining;
@@ -205,8 +212,9 @@ onwagerfinalizeround() {
     if(isDefined(players[playerindex].pers["sideBetMade"])) {
       sidebetpool = sidebetpool + getdvarint(#"scr_wagerSideBet");
 
-      if(players[playerindex].pers["sideBetMade"] == lastmanstanding.name)
+      if(players[playerindex].pers["sideBetMade"] == lastmanstanding.name) {
         sidebetwinners[sidebetwinners.size] = players[playerindex];
+      }
     }
   }
 
@@ -232,20 +240,24 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     if(smeansofdeath == "MOD_MELEE") {
       attacker maps\mp\gametypes\_globallogic_score::givepointstowin(level.pointspermeleekill);
 
-      if(attackerammo > 0)
+      if(attackerammo > 0) {
         maps\mp\_scoreevents::processscoreevent("knife_with_ammo_oic", attacker, self, sweapon);
+      }
 
-      if(victimammo > attackerammo)
+      if(victimammo > attackerammo) {
         maps\mp\_scoreevents::processscoreevent("kill_enemy_with_more_ammo_oic", attacker, self, sweapon);
+      }
     } else {
       attacker maps\mp\gametypes\_globallogic_score::givepointstowin(level.pointsperweaponkill);
 
-      if(victimammo > attackerammo + 1)
+      if(victimammo > attackerammo + 1) {
         maps\mp\_scoreevents::processscoreevent("kill_enemy_with_more_ammo_oic", attacker, self, sweapon);
+      }
     }
 
-    if(self.pers["lives"] == 0)
+    if(self.pers["lives"] == 0) {
       maps\mp\_scoreevents::processscoreevent("eliminate_oic", attacker, self, sweapon);
+    }
   }
 }
 
@@ -256,11 +268,13 @@ giveammo(amount) {
 }
 
 shouldreceivesurvivorbonus() {
-  if(isalive(self))
+  if(isalive(self)) {
     return true;
+  }
 
-  if(self.hasspawned && self.pers["lives"] > 0)
+  if(self.hasspawned && self.pers["lives"] > 0) {
     return true;
+  }
 
   return false;
 }
@@ -288,20 +302,23 @@ watchelimination() {
 onwagerawards() {
   stabs = self maps\mp\gametypes\_globallogic_score::getpersstat("stabs");
 
-  if(!isDefined(stabs))
+  if(!isDefined(stabs)) {
     stabs = 0;
+  }
 
   self maps\mp\gametypes\_persistence::setafteractionreportstat("wagerAwards", stabs, 0);
   longshots = self maps\mp\gametypes\_globallogic_score::getpersstat("longshots");
 
-  if(!isDefined(longshots))
+  if(!isDefined(longshots)) {
     longshots = 0;
+  }
 
   self maps\mp\gametypes\_persistence::setafteractionreportstat("wagerAwards", longshots, 1);
   bestkillstreak = self maps\mp\gametypes\_globallogic_score::getpersstat("best_kill_streak");
 
-  if(!isDefined(bestkillstreak))
+  if(!isDefined(bestkillstreak)) {
     bestkillstreak = 0;
+  }
 
   self maps\mp\gametypes\_persistence::setafteractionreportstat("wagerAwards", bestkillstreak, 2);
 }

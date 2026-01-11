@@ -11,8 +11,9 @@
 #include maps\mp\zombies\_zm;
 
 onplayerconnect_sq_fc() {
-  if(!isDefined(level.sq_fc_still_valid))
+  if(!isDefined(level.sq_fc_still_valid)) {
     level.sq_fc_still_valid = 1;
+  }
 
   if(flag("afterlife_start_over") || !level.sq_fc_still_valid) {
     return;
@@ -35,8 +36,9 @@ watch_for_touching_controls() {
     v_new_forward_vec = vectornormalize(v_new_forward_point - self.origin);
     move_length = length((self.origin[0], self.origin[1], 0) - v_original_origin);
 
-    if(self actionslotonebuttonpressed() || self actionslottwobuttonpressed() || self actionslotthreebuttonpressed() || self actionslotfourbuttonpressed() || self adsbuttonpressed() || self attackbuttonpressed() || self fragbuttonpressed() || self inventorybuttonpressed() || self jumpbuttonpressed() || self meleebuttonpressed() || self secondaryoffhandbuttonpressed() || self sprintbuttonpressed() || self stancebuttonpressed() || self throwbuttonpressed() || self usebuttonpressed() || self changeseatbuttonpressed() || move_length > 2 || vectordot(v_original_forward_vec, v_new_forward_vec) < 0.99)
+    if(self actionslotonebuttonpressed() || self actionslottwobuttonpressed() || self actionslotthreebuttonpressed() || self actionslotfourbuttonpressed() || self adsbuttonpressed() || self attackbuttonpressed() || self fragbuttonpressed() || self inventorybuttonpressed() || self jumpbuttonpressed() || self meleebuttonpressed() || self secondaryoffhandbuttonpressed() || self sprintbuttonpressed() || self stancebuttonpressed() || self throwbuttonpressed() || self usebuttonpressed() || self changeseatbuttonpressed() || move_length > 2 || vectordot(v_original_forward_vec, v_new_forward_vec) < 0.99) {
       level.sq_fc_still_valid = 0;
+    }
 
     wait 0.05;
   }
@@ -54,8 +56,9 @@ watch_for_trigger_condition() {
   level.custom_intermission = ::player_intermission_prison;
   players = getplayers();
 
-  foreach(player in players)
+  foreach(player in players) {
   maps\mp\_visionset_mgr::vsmgr_activate("visionset", "zm_audio_log", player);
+  }
 }
 
 player_intermission_prison() {
@@ -98,8 +101,9 @@ player_intermission_prison() {
     for(i = 0; i < points.size; i++) {
       point = points[i];
 
-      if(!isDefined(org))
+      if(!isDefined(org)) {
         self spawn(point.origin, point.angles);
+      }
 
       if(isDefined(points[i].target)) {
         if(!isDefined(org)) {
@@ -119,16 +123,18 @@ player_intermission_prison() {
 
         speed = 20;
 
-        if(isDefined(points[i].speed))
+        if(isDefined(points[i].speed)) {
           speed = points[i].speed;
+        }
 
         target_point = getstruct(points[i].target, "targetname");
         dist = distance(points[i].origin, target_point.origin);
         time = dist / speed;
         q_time = time * 0.25;
 
-        if(q_time > 1)
+        if(q_time > 1) {
           q_time = 1;
+        }
 
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 0;

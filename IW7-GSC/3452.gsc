@@ -21,11 +21,13 @@ func_2EA3() {
 }
 
 func_9F8B(var_00) {
-  if(!isDefined(level.func_2D1D))
+  if(!isDefined(level.func_2D1D)) {
     return 0;
+  }
 
-  if(!isDefined(level.func_2D1D[var_00]))
+  if(!isDefined(level.func_2D1D[var_00])) {
     return 0;
+  }
 
   return 1;
 }
@@ -79,8 +81,9 @@ bot_think_supers() {
     if(!isDefined(self.loadoutsuper)) {
       continue;
     }
-    if(isDefined(level.func_2D1D[self.loadoutsuper]))
+    if(isDefined(level.func_2D1D[self.loadoutsuper])) {
       self[[level.func_2D1D[self.loadoutsuper]]]();
+    }
     else {}
 
     self botsetflag("super_ready", 0);
@@ -99,8 +102,9 @@ func_89EF() {
     if(!isalive(self)) {
       continue;
     }
-    if(!isDefined(self.enemy) || !isalive(self.enemy))
+    if(!isDefined(self.enemy) || !isalive(self.enemy)) {
       scripts\engine\utility::waittill_any("enemy", "death");
+    }
 
     if(!isalive(self)) {
       continue;
@@ -111,8 +115,9 @@ func_89EF() {
     var_01 = distance(self.enemy.origin, self.origin);
 
     if(var_01 < 800 && scripts\mp\bots\bots_powers::func_8BEE()) {
-      if(var_01 < 550)
+      if(var_01 < 550) {
         continue;
+      }
     }
 
     self botsetflag("super_ready", 1);
@@ -133,8 +138,9 @@ func_89EE() {
     if(!isalive(self)) {
       continue;
     }
-    if(!isDefined(self.enemy) || !isalive(self.enemy))
+    if(!isDefined(self.enemy) || !isalive(self.enemy)) {
       scripts\engine\utility::waittill_any("enemy", "death");
+    }
 
     if(!isalive(self)) {
       continue;
@@ -142,8 +148,9 @@ func_89EE() {
     if(scripts\mp\bots\bots_powers::func_8BEE()) {
       var_00 = distance(self.enemy.origin, self.origin);
 
-      if(var_00 < 600)
+      if(var_00 < 600) {
         continue;
+      }
     }
 
     break;

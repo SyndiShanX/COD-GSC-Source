@@ -19,8 +19,9 @@ dog_start_monitor() {
     level waittill("dog_start");
     players = getlocalplayers();
 
-    for(i = 0; i < players.size; i++)
+    for(i = 0; i < players.size; i++) {
       setworldfogactivebank(i, 2);
+    }
   }
 }
 
@@ -28,12 +29,14 @@ dog_stop_monitor() {
   while(true) {
     level waittill("dog_stop");
 
-    if(!isDefined(level.current_fog))
+    if(!isDefined(level.current_fog)) {
       level.current_fog = 8;
+    }
 
     players = getlocalplayers();
 
-    for(i = 0; i < players.size; i++)
+    for(i = 0; i < players.size; i++) {
       setworldfogactivebank(i, level.current_fog);
+    }
   }
 }

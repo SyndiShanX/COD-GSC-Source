@@ -79,8 +79,9 @@ onSpawnPlayer() {
   self spawn(spawnPoint.origin, spawnPoint.angles, "dm");
 }
 onEndGame(winningPlayer) {
-  if(isDefined(winningPlayer) && isPlayer(winningPlayer))
+  if(isDefined(winningPlayer) && isPlayer(winningPlayer)) {
     [[level._setPlayerScore]](winningPlayer, winningPlayer[[level._getPlayerScore]]() + 1);
+  }
 }
 onScoreCloseMusic() {
   while(!level.gameEnded) {

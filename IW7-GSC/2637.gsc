@@ -6,8 +6,9 @@
 init_coop_challenge() {
   func_956D();
 
-  if(!isDefined(level.challenge_scalar_func))
+  if(!isDefined(level.challenge_scalar_func)) {
     level.challenge_scalar_func = ::func_4FE2;
+  }
 
   func_97B0();
 }
@@ -24,13 +25,15 @@ func_956D() {
   level.zombie_challenge_table = "cp\zombies\" + var_00 + "
   _challenges.csv ";
 
-  if(!_tableexists(level.zombie_challenge_table))
+  if(!_tableexists(level.zombie_challenge_table)) {
     level.zombie_challenge_table = undefined;
+  }
 
   level.challenge_data = [];
 
-  if(isDefined(level.challenge_registration_func))
+  if(isDefined(level.challenge_registration_func)) {
     [[level.challenge_registration_func]]();
+  }
 
   level.current_challenge_index = -1;
   level.current_challenge_progress_max = -1;
@@ -59,8 +62,9 @@ update_challenge(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07,
 }
 
 func_62C6() {
-  if(current_challenge_exist() && scripts\cp\utility::coop_mode_has("challenge"))
+  if(current_challenge_exist() && scripts\cp\utility::coop_mode_has("challenge")) {
     deactivate_current_challenge();
+  }
 }
 
 deactivate_current_challenge() {
@@ -75,21 +79,25 @@ deactivate_current_challenge() {
     var_00[[var_0.func_E4C5]]();
     var_01 = "challenge";
 
-    if(isDefined(level.func_3C24))
+    if(isDefined(level.func_3C24)) {
       var_01 = level.func_3C24;
+    }
 
     scripts\cp\cp_gamescore::update_players_encounter_performance(var_01, "challenge_complete");
     scripts\cp\cp_persistence::update_lb_aliensession_challenge(1);
     scripts\cp\cp_analytics::update_challenges_status(var_0.ref, 1);
 
     if(func_9F17(var_00)) {
-      if(level.current_challenge_timer - level.storechallengetime <= 0.01)
+      if(level.current_challenge_timer - level.storechallengetime <= 0.01) {
         scripts\cp\zombies\zombie_analytics::func_AF63(var_0.ref, level.wave_num, level.storechallengetime - level.current_challenge_timer);
-      else
+      }
+      else {
         scripts\cp\zombies\zombie_analytics::func_AF63(var_0.ref, level.wave_num, level.current_challenge_timer);
+      }
 
-      foreach(var_03 in level.players)
+      foreach(var_03 in level.players) {
       var_03 thread scripts\cp\cp_vo::try_to_play_vo("challenge_success_generic", "zmb_comment_vo");
+      }
 
       level.func_C1E1++;
     }
@@ -97,13 +105,16 @@ deactivate_current_challenge() {
     func_56AD("challenge_failed", 0);
 
     if(func_9F17(var_00)) {
-      if(isDefined(level.func_3C2B[var_0.ref]) && func_9F17(var_00))
+      if(isDefined(level.func_3C2B[var_0.ref]) && func_9F17(var_00)) {
         level.func_3C2B[var_0.ref]++;
+      }
 
-      if(var_0.ref == "no_laststand" || var_0.ref == "no_bleedout" || var_0.ref == "protect_player")
+      if(var_0.ref == "no_laststand" || var_0.ref == "no_bleedout" || var_0.ref == "protect_player") {
         scripts\cp\zombies\zombie_analytics::func_AF64(var_0.ref, level.wave_num, 0, level.func_3C2B[var_0.ref]);
-      else
+      }
+      else {
         scripts\cp\zombies\zombie_analytics::func_AF64(var_0.ref, level.wave_num, var_0.current_progress / var_0.goal * 100, level.func_3C2B[var_0.ref]);
+      }
 
       foreach(var_03 in level.players) {
         if(!scripts\cp\utility::isplayingsolo() && level.players.size > 1) {
@@ -139,8 +150,9 @@ func_9F17(var_00) {
 activate_new_challenge(var_00) {
   var_01 = level.challenge_data[var_00];
 
-  if(!isDefined(level.func_3C2B[var_00]) && var_00 != "next_challenge")
+  if(!isDefined(level.func_3C2B[var_00]) && var_00 != "next_challenge") {
     level.func_3C2B[var_00] = 0;
+  }
 
   if(var_01[[var_1.func_386E]]()) {
     var_02 = func_7897(var_00);
@@ -169,14 +181,16 @@ func_3C15() {
   level endon("game_ended");
   var_00 = int(gettime() + 5000);
 
-  foreach(var_02 in level.players)
+  foreach(var_02 in level.players) {
   var_02 setclientomnvar("ui_intel_title", 1);
+  }
 
   level.current_challenge_title = 1;
   wait 5;
 
-  foreach(var_02 in level.players)
+  foreach(var_02 in level.players) {
   var_02 setclientomnvar("ui_intel_title", -1);
+  }
 
   level.current_challenge_title = -1;
   wait 0.5;
@@ -198,10 +212,12 @@ func_56AD(var_00, var_01, var_02) {
       level.current_challenge_index = int(var_03);
       level.current_challenge_pre_challenge = 1;
 
-      if(var_00 == "next_challenge")
+      if(var_00 == "next_challenge") {
         var_05 playlocalsound("zmb_challenge_config");
-      else
+      }
+      else {
         var_05 playlocalsound("zmb_challenge_start");
+      }
 
       var_05 setclientomnvar("zm_show_challenge", 4);
       level.current_zm_show_challenge = 4;
@@ -211,8 +227,9 @@ func_56AD(var_00, var_01, var_02) {
   if(var_01) {
     return;
   }
-  if(level.current_zm_show_challenge != 2 && level.current_zm_show_challenge != 3 && level.current_zm_show_challenge != 4)
+  if(level.current_zm_show_challenge != 2 && level.current_zm_show_challenge != 3 && level.current_zm_show_challenge != 4) {
     level thread func_100CB(var_00, var_03);
+  }
 }
 
 func_100CB(var_00, var_01) {
@@ -234,8 +251,9 @@ func_100CB(var_00, var_01) {
 
   wait 3.0;
 
-  foreach(var_03 in level.players)
+  foreach(var_03 in level.players) {
   var_03 thread reset_omnvars();
+  }
 
   setomnvar("zm_challenge_progress", 0);
   level.current_challenge_index = -1;
@@ -267,31 +285,36 @@ register_challenge(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_0
   var_11.default_success = var_02;
   var_11.func_9F82 = ::func_4FFA;
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_11.func_9F82 = var_03;
+  }
 
   var_11.func_386E = ::func_4FDD;
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     var_11.func_386E = var_04;
+  }
 
   var_11.func_1609 = var_05;
   var_11.func_4DDE = var_06;
   var_11.func_6ACB = ::func_4FED;
 
-  if(isDefined(var_07))
+  if(isDefined(var_07)) {
     var_11.func_6ACB = var_07;
+  }
 
   var_11.func_12E9C = var_08;
   var_11.func_E4C5 = ::func_5011;
 
-  if(isDefined(var_09))
+  if(isDefined(var_09)) {
     var_11.func_E4C5 = var_09;
+  }
 
   var_11.func_6AD0 = ::func_4FEE;
 
-  if(isDefined(var_10))
+  if(isDefined(var_10)) {
     var_11.func_6AD0 = var_10;
+  }
 
   level.challenge_data[var_00] = var_11;
 }
@@ -318,17 +341,21 @@ func_4FDD() {
 func_4FED() {}
 
 func_4FFA() {
-  if(isDefined(self.success))
+  if(isDefined(self.success)) {
     return self.success;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 default_successfunc() {
-  if(isDefined(self.success))
+  if(isDefined(self.success)) {
     return self.success;
-  else
+  }
+  else {
     return self.default_success;
+  }
 }
 
 func_4FEE() {}
@@ -358,10 +385,12 @@ func_F31A(var_00) {
 }
 
 func_7B31() {
-  if(!isDefined(level.func_C1E1))
+  if(!isDefined(level.func_C1E1)) {
     return 0;
-  else
+  }
+  else {
     return level.func_C1E1;
+  }
 }
 
 func_97B0() {
@@ -411,8 +440,9 @@ update_death_challenges(var_00, var_01, var_02, var_03, var_04, var_05, var_06, 
   if(isDefined(level.custom_death_challenge_func)) {
     var_10 = self[[level.custom_death_challenge_func]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08);
 
-    if(!scripts\engine\utility::is_true(var_10))
+    if(!scripts\engine\utility::is_true(var_10)) {
       return;
+    }
   }
 }
 
@@ -444,8 +474,9 @@ update_current_challenge_timer(var_00) {
 
     level.current_challenge_timer = level.current_challenge_timer - 0.1;
 
-    if(isDefined(var_00))
+    if(isDefined(var_00)) {
       update_challenge_progress(int(var_02 - level.current_challenge_timer), int(var_02));
+    }
   }
 }
 

@@ -2656,4 +2656,3 @@ switch_team(entity, watcher, owner) {
     }
   }
 }
-

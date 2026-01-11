@@ -8,8 +8,9 @@ main() {
   var_0 = getEntArray("script_model", "classname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_exploder))
+    if(isDefined(var_2.script_exploder)) {
       var_2 thread exploderanim_think();
+    }
   }
 }
 
@@ -24,10 +25,12 @@ anim_play() {
   var_0 = undefined;
   var_1 = strtok(self.targetname, ":;, ");
 
-  if(var_1.size > 1 && isDefined(var_1[1]))
+  if(var_1.size > 1 && isDefined(var_1[1])) {
     var_0 = var_1[1];
-  else
+  }
+  else {
     var_0 = self.model + "_anim";
+  }
 
   var_2 = get_animtree(var_0);
   maps\_utility::assign_animtree(var_2);

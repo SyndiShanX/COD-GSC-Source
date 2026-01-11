@@ -112,8 +112,9 @@ MissileImpactWatcher(missile) {
   self endon("guided_missile_exploded");
   while(1) {
     self waittill("projectile_impact", weapon);
-    if(weapon != "m220_tow_mp")
+    if(weapon != "m220_tow_mp") {
       continue;
+    }
     self PlayRumbleOnEntity("grenade_rumble");
     Target_Remove(missile);
     if(!self GetWeaponAmmoStock("m220_tow_mp")) {
@@ -267,8 +268,9 @@ fade_to_white_on_death() {
   waittillframeend;
   self.guided_missile_lost_signal.alpha = 1.0;
   wait(1.0);
-  if(isDefined(self.guided_missile_lost_signal))
+  if(isDefined(self.guided_missile_lost_signal)) {
     self.guided_missile_lost_signal Destroy();
+  }
 }
 outOfBoundsWatcher(missile) {
   self endon("disconnect");
@@ -285,32 +287,36 @@ outOfBoundsWatcher(missile) {
       }
       if(!isDefined(missile.beingWarnedAboutLeaving)) {
         missile.beingWarnedAboutLeaving = true;
-        if(isDefined(self.leaving_play_area.alpha))
+        if(isDefined(self.leaving_play_area.alpha)) {
           self.leaving_play_area.alpha = 1.0;
+        }
         missile SetClientFlag(level.const_flag_outofbounds);
         self thread warnLeavingBattlefield(missile);
       }
     } else if(!missile.useMeshBounds && !(missile isMissileInsideHeightLockBackupCheck())) {
       if(!isDefined(missile.beingWarnedAboutLeaving)) {
         missile.beingWarnedAboutLeaving = true;
-        if(isDefined(self.leaving_play_area.alpha))
+        if(isDefined(self.leaving_play_area.alpha)) {
           self.leaving_play_area.alpha = 1.0;
+        }
         missile SetClientFlag(level.const_flag_outofbounds);
         self thread warnLeavingBattlefield(missile);
       }
     } else if(missile.origin[2] >= level.GuidedMissileMaxHight) {
       if(!isDefined(missile.beingWarnedAboutLeaving)) {
         missile.beingWarnedAboutLeaving = true;
-        if(isDefined(self.leaving_play_area.alpha))
+        if(isDefined(self.leaving_play_area.alpha)) {
           self.leaving_play_area.alpha = 1.0;
+        }
         missile SetClientFlag(level.const_flag_outofbounds);
         self thread warnLeavingBattlefield(missile);
       }
     } else if(isDefined(missile.beingWarnedAboutLeaving)) {
       missile notify("reentered_battlefield");
       missile.beingWarnedAboutLeaving = undefined;
-      if(isDefined(self.leaving_play_area.alpha))
+      if(isDefined(self.leaving_play_area.alpha)) {
         self.leaving_play_area.alpha = 0.0;
+      }
       missile ClearClientFlag(level.const_flag_outofbounds);
       self thread FadeFromWhite(missile);
     }
@@ -369,8 +375,9 @@ FadeFromWhite(missile) {
     newAlpha = Float(fadeTime - GetTime()) / (missile.fadeInTime * 1000.0);
     newAlpha *= beginning_alpha;
     PrintLn("newAlpha fade out: " + newAlpha);
-    if(newAlpha < 0)
+    if(newAlpha < 0) {
       return;
+    }
     self.guided_missile_lost_signal.alpha = newAlpha;
     if(newAlpha < 0.5) {
       self PlayRumbleOnEntity("damage_light");

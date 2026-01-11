@@ -178,4 +178,3 @@ function_7eabf705() {
     waitframe(1);
   }
 }
-

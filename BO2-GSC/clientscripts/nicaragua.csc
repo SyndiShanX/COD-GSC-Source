@@ -30,8 +30,9 @@ main() {
 }
 
 debug_loop() {
-  while(true)
+  while(true) {
     wait 0.05;
+  }
 }
 
 setup_rage() {
@@ -70,8 +71,9 @@ rage_mode_disable() {
 
 rage_mode_reset() {
   if(level.str_rage_mode != "reset") {
-    if(!isDefined(level.rageloopid))
+    if(!isDefined(level.rageloopid)) {
       level setuprageloopid();
+    }
 
     level.str_rage_mode = "reset";
     level.is_rage_mode_low = 0;
@@ -82,10 +84,12 @@ rage_mode_reset() {
     n_rage_warp_previous = level.n_rage_warp_final;
     level.n_rage_warp_final = 0;
 
-    if(n_rage_warp_previous < level.n_rage_warp_final)
+    if(n_rage_warp_previous < level.n_rage_warp_final) {
       level thread fade_warp_low_to_high(n_rage_warp_previous, level.n_rage_warp_final, 1);
-    else if(n_rage_warp_previous > level.n_rage_warp_final)
+    }
+    else if(n_rage_warp_previous > level.n_rage_warp_final) {
       level thread fade_warp_high_to_low(n_rage_warp_previous, level.n_rage_warp_final, 1);
+    }
 
     n_rage_value_previous = level.n_rage_value_high;
     level.n_rage_value_high = 0;
@@ -95,8 +99,9 @@ rage_mode_reset() {
 
 rage_mode_low() {
   if(level.str_rage_mode != "low") {
-    if(!isDefined(level.rageloopid))
+    if(!isDefined(level.rageloopid)) {
       level setuprageloopid();
+    }
 
     level.str_rage_mode = "low";
     deactivateambientroom(0, "rage_mode_high", 50);
@@ -107,10 +112,12 @@ rage_mode_low() {
     n_rage_warp_previous = level.n_rage_warp_final;
     level.n_rage_warp_final = 0;
 
-    if(n_rage_warp_previous < level.n_rage_warp_final)
+    if(n_rage_warp_previous < level.n_rage_warp_final) {
       level thread fade_warp_low_to_high(n_rage_warp_previous, level.n_rage_warp_final, 0.5);
-    else if(n_rage_warp_previous > level.n_rage_warp_final)
+    }
+    else if(n_rage_warp_previous > level.n_rage_warp_final) {
       level thread fade_warp_high_to_low(n_rage_warp_previous, level.n_rage_warp_final, 0.5);
+    }
 
     n_rage_value_previous = level.n_rage_value_high;
     level.n_rage_value_high = 0.5;
@@ -120,8 +127,9 @@ rage_mode_low() {
 
 rage_mode_medium() {
   if(level.str_rage_mode != "medium") {
-    if(!isDefined(level.rageloopid))
+    if(!isDefined(level.rageloopid)) {
       level setuprageloopid();
+    }
 
     level.str_rage_mode = "medium";
     deactivateambientroom(0, "rage_mode_high", 50);
@@ -138,8 +146,9 @@ rage_mode_high() {
   e_player = level.localplayers[0];
 
   if(level.str_rage_mode != "high") {
-    if(!isDefined(level.rageloopid))
+    if(!isDefined(level.rageloopid)) {
       level setuprageloopid();
+    }
 
     level.str_rage_mode = "high";
     activateambientroom(0, "rage_mode_high", 50);
@@ -181,16 +190,19 @@ rage_mode_high_warping() {
 fade_fov_lerp(n_fov_1, n_fov_2, n_fade_time, n_time_increment) {
   e_player = level.localplayers[0];
 
-  if(!isDefined(n_time_increment))
+  if(!isDefined(n_time_increment)) {
     n_time_increment = 0.0166667;
+  }
 
   for(i = 0; i <= n_fade_time; i = i + n_time_increment) {
     n_time = i / n_fade_time;
 
-    if(n_fov_1 < n_fov_2)
+    if(n_fov_1 < n_fov_2) {
       n_fov = n_fov_1 * (1 - n_time) + n_fov_2 * n_time;
-    else
+    }
+    else {
       n_fov = n_fov_1 + n_fov_2 - (n_fov_2 * (1 - n_time) + n_fov_1 * n_time);
+    }
 
     setclientdvar("cg_fov", n_fov);
     wait(n_time_increment);
@@ -217,10 +229,12 @@ rage_mode_fade(n_rage_value_previous) {
   level.n_blend_amount = level.n_rage_values_diff / level.n_steps;
 
   for(i = 0; i <= level.n_steps; i++) {
-    if(n_rage_value_previous < level.n_rage_value_high)
+    if(n_rage_value_previous < level.n_rage_value_high) {
       level.n_rage_value = level.n_start_value + i * level.n_blend_amount;
-    else
+    }
+    else {
       level.n_rage_value = level.n_start_value - i * level.n_blend_amount;
+    }
 
     set_filter_rage_amount(e_player, 1, level.n_rage_value);
     wait 0.05;
@@ -228,10 +242,12 @@ rage_mode_fade(n_rage_value_previous) {
 }
 
 _get_number_of_steps(n_step_size, n_rage_values_diff) {
-  if(n_rage_values_diff == 0)
+  if(n_rage_values_diff == 0) {
     n_steps = 1;
-  else
+  }
+  else {
     n_steps = n_rage_values_diff / n_step_size;
+  }
 
   return n_steps;
 }
@@ -300,8 +316,9 @@ blood_splat_life_change(n_life_new) {
 
 rage_mode_low_images() {
   while(level.is_rage_image_on) {
-    if(level.is_rage_mode_low)
+    if(level.is_rage_mode_low) {
       rage_mode_fade_image();
+    }
 
     wait 6;
   }
@@ -447,10 +464,12 @@ rage_health_fade(n_alpha_1, n_alpha_2, n_fade_time) {
     for(i = 0; i <= n_fade_time; i = i + n_time_increment) {
       n_time = i / n_fade_time;
 
-      if(n_alpha_1 < n_alpha_2)
+      if(n_alpha_1 < n_alpha_2) {
         n_alpha = n_alpha_1 * (1 - n_time) + n_alpha_2 * n_time;
-      else
+      }
+      else {
         n_alpha = n_alpha_1 + n_alpha_2 - (n_alpha_2 * (1 - n_time) + n_alpha_1 * n_time);
+      }
 
       set_filter_rage_hit(e_player, 1, n_alpha);
       wait(n_time_increment);
@@ -465,14 +484,17 @@ rage_health_state_change(n_alpha, n_alpha_previous, b_do_health_hit) {
   e_player = level.localplayers[0];
 
   if(n_alpha_previous < 0.2 && n_alpha >= 0.2) {
-    if(isDefined(b_do_health_hit))
+    if(isDefined(b_do_health_hit)) {
       rage_health_hit();
+    }
   } else if(n_alpha_previous < 0.25 && n_alpha >= 0.25) {
-    if(isDefined(b_do_health_hit))
+    if(isDefined(b_do_health_hit)) {
       rage_health_hit();
+    }
   } else if(n_alpha_previous < 0.5 && n_alpha >= 0.5) {
-    if(isDefined(b_do_health_hit))
+    if(isDefined(b_do_health_hit)) {
       rage_health_hit();
+    }
   }
 }
 
@@ -492,10 +514,12 @@ rage_health_hit_fade(n_opacity_1, n_opacity_2) {
   for(i = 0; i <= 0.25; i = i + n_time_increment) {
     n_time = i / 0.25;
 
-    if(n_opacity_1 < n_opacity_2)
+    if(n_opacity_1 < n_opacity_2) {
       n_opacity = n_opacity_1 * (1 - n_time) + n_opacity_2 * n_time;
-    else
+    }
+    else {
       n_opacity = n_opacity_1 + n_opacity_2 - (n_opacity_2 * (1 - n_time) + n_opacity_1 * n_time);
+    }
 
     set_filter_rage_hit(e_player, 1, n_opacity);
     wait(n_time_increment);
@@ -567,8 +591,9 @@ enable_bunker_lightflares() {
     break;
   }
 
-  foreach(light in a_lights)
+  foreach(light in a_lights) {
   a_light_fx[a_light_fx.size] = playfxondynent(level._effect["fx_nic_tinhat_cage"], light);
+  }
 
   disable_bunker_lightflares(a_light_fx);
 }
@@ -576,8 +601,9 @@ enable_bunker_lightflares() {
 disable_bunker_lightflares(a_fx) {
   level waittill("bunker_lightflares_off");
 
-  foreach(fx in a_fx)
+  foreach(fx in a_fx) {
   deletefx(0, fx);
+  }
 }
 
 set_lut_bank(n_bank) {

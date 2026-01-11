@@ -60,8 +60,9 @@ init_spawns() {
     }
   }
 
-  if(!level.dog_spawns.size)
+  if(!level.dog_spawns.size) {
     println("No dog spawns connect to MP spawn nodes");
+  }
 
   dog delete();
 }
@@ -78,17 +79,20 @@ initkillstreak() {
 }
 
 usekillstreakdogs(hardpointtype) {
-  if(!dog_killstreak_init())
+  if(!dog_killstreak_init()) {
     return false;
+  }
 
-  if(!self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team))
+  if(!self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team)) {
     return false;
+  }
 
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart("dogs_mp", self.team);
   self thread ownerhadactivedogs();
 
-  if(killstreak_id == -1)
+  if(killstreak_id == -1) {
     return false;
+  }
 
   if(level.teambased) {
     foreach(team in level.teams) {
@@ -260,8 +264,9 @@ dog_manager_spawn_dogs(owner, deathcount, killstreak_id) {
     if(dogs.size <= 0) {
       maps\mp\killstreaks\_killstreakrules::killstreakstop("dogs_mp", team, killstreak_id);
 
-      if(isDefined(owner))
+      if(isDefined(owner)) {
         owner notify("dogs_complete");
+      }
 
       return;
     }
@@ -274,8 +279,9 @@ dog_abort() {
   level.dog_abort = 1;
   dogs = dog_manager_get_dogs();
 
-  foreach(dog in dogs)
+  foreach(dog in dogs) {
   dog notify("abort");
+  }
 
   level notify("dog_abort");
 }
@@ -337,17 +343,20 @@ dog_patrol() {
     if(!nodes.size) {
       player = self dog_patrol_near_enemy();
 
-      if(isDefined(player))
+      if(isDefined(player)) {
         nodes = getnodesinradius(player.origin, 1024, 0, 128, "Path", 8);
+      }
     }
 
     if(!nodes.size && isDefined(self.script_owner)) {
-      if(isalive(self.script_owner) && self.script_owner.sessionstate == "playing")
+      if(isalive(self.script_owner) && self.script_owner.sessionstate == "playing") {
         nodes = getnodesinradius(self.script_owner.origin, 512, 256, 512, "Path", 16);
+      }
     }
 
-    if(!nodes.size)
+    if(!nodes.size) {
       nodes = getnodesinradius(self.origin, 1024, 512, 512, "Path");
+    }
 
     if(nodes.size) {
       nodes = array_randomize(nodes);
@@ -364,8 +373,9 @@ dog_patrol() {
         nodes = [];
         event = self waittill_any_return("goal", "bad_path", "enemy", "abort");
 
-        if(event == "goal")
+        if(event == "goal") {
           wait_endon(randomintrange(3, 5), "damage", "enemy", "abort");
+        }
 
         node.dog_claimed = undefined;
         break;
@@ -382,8 +392,9 @@ dog_patrol_near_objective() {
     level.dog_objective_next_update = 0;
   }
 
-  if(level.gametype == "tdm" || level.gametype == "dm")
+  if(level.gametype == "tdm" || level.gametype == "dm") {
     return level.dog_objectives;
+  }
 
   if(gettime() >= level.dog_objective_next_update) {
     level.dog_objectives = [];
@@ -393,15 +404,17 @@ dog_patrol_near_objective() {
 
       foreach(ent in ents) {
         if(level.gametype == "koth") {
-          if(isDefined(ent.targetname) && ent.targetname == "radiotrigger")
+          if(isDefined(ent.targetname) && ent.targetname == "radiotrigger") {
             level.dog_objectives[level.dog_objectives.size] = ent;
+          }
 
           continue;
         }
 
         if(level.gametype == "sd") {
-          if(isDefined(ent.targetname) && ent.targetname == "bombzone")
+          if(isDefined(ent.targetname) && ent.targetname == "bombzone") {
             level.dog_objectives[level.dog_objectives.size] = ent;
+          }
 
           continue;
         }
@@ -441,8 +454,9 @@ dog_patrol_near_enemy() {
       continue;
     }
     if(level.teambased) {
-      if(player.team == self.aiteam)
+      if(player.team == self.aiteam) {
         continue;
+      }
     }
 
     if(gettime() - player.lastfiretime > 3000) {
@@ -550,8 +564,9 @@ selfdefensechallenge() {
     }
     if(isDefined(self.attackers)) {
       foreach(player in self.attackers) {
-        if(player != attacker)
+        if(player != attacker) {
           maps\mp\_scoreevents::processscoreevent("killed_dog_assist", player);
+        }
       }
     }
 
@@ -576,14 +591,17 @@ flash_dogs(area) {
       do_flash = 1;
 
       if(isplayer(self)) {
-        if(level.teambased && dog.aiteam == self.team)
+        if(level.teambased && dog.aiteam == self.team) {
           do_flash = 0;
-        else if(!level.teambased && isDefined(dog.script_owner) && self == dog.script_owner)
+        }
+        else if(!level.teambased && isDefined(dog.script_owner) && self == dog.script_owner) {
           do_flash = 0;
+        }
       }
 
-      if(isDefined(dog.lastflashed) && dog.lastflashed + 1500 > gettime())
+      if(isDefined(dog.lastflashed) && dog.lastflashed + 1500 > gettime()) {
         do_flash = 0;
+      }
 
       if(do_flash) {
         dog setflashbanged(1, 500);
@@ -639,8 +657,9 @@ devgui_dog_think() {
         break;
     }
 
-    if(cmd != "")
+    if(cmd != "") {
       setdvar("devgui_dog", "");
+    }
 
     wait 0.5;
   }
@@ -685,8 +704,9 @@ devgui_dog_spawn(team) {
 devgui_dog_camera() {
   player = gethostplayer();
 
-  if(!isDefined(level.devgui_dog_camera))
+  if(!isDefined(level.devgui_dog_camera)) {
     level.devgui_dog_camera = 0;
+  }
 
   dog = undefined;
   dogs = dog_manager_get_dogs();
@@ -748,17 +768,20 @@ devgui_crate_delete() {
   if(!isDefined(level.devgui_crates)) {
     return;
   }
-  for(i = 0; i < level.devgui_crates.size; i++)
+  for(i = 0; i < level.devgui_crates.size; i++) {
     level.devgui_crates[i] delete();
+  }
 
   level.devgui_crates = [];
 }
 
 devgui_spawn_show() {
-  if(!isDefined(level.dog_spawn_show))
+  if(!isDefined(level.dog_spawn_show)) {
     level.dog_spawn_show = 1;
-  else
+  }
+  else {
     level.dog_spawn_show = !level.dog_spawn_show;
+  }
 
   if(!level.dog_spawn_show) {
     level notify("hide_dog_spawns");
@@ -768,15 +791,18 @@ devgui_spawn_show() {
   spawns = level.dog_spawns;
   color = (0, 1, 0);
 
-  for(i = 0; i < spawns.size; i++)
+  for(i = 0; i < spawns.size; i++) {
     maps\mp\gametypes\_dev::showonespawnpoint(spawns[i], color, "hide_dog_spawns", 32, "dog_spawn");
+  }
 }
 
 devgui_exit_show() {
-  if(!isDefined(level.dog_exit_show))
+  if(!isDefined(level.dog_exit_show)) {
     level.dog_exit_show = 1;
-  else
+  }
+  else {
     level.dog_exit_show = !level.dog_exit_show;
+  }
 
   if(!level.dog_exit_show) {
     level notify("hide_dog_exits");
@@ -786,8 +812,9 @@ devgui_exit_show() {
   exits = getnodearray("exit", "script_noteworthy");
   color = (1, 0, 0);
 
-  for(i = 0; i < exits.size; i++)
+  for(i = 0; i < exits.size; i++) {
     maps\mp\gametypes\_dev::showonespawnpoint(exits[i], color, "hide_dog_exits", 32, "dog_exit");
+  }
 }
 
 dog_debug_patrol(node1, node2) {

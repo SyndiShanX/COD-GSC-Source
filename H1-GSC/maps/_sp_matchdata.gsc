@@ -38,8 +38,9 @@ register_death(var_0, var_1) {
   if(isDefined(var_0)) {
     var_0 = getweaponbasename(var_0);
 
-    if(!cause_is_explosive(var_1))
+    if(!cause_is_explosive(var_1)) {
       set_weapon_data(var_0, "deaths_total");
+    }
   }
 
   var_2 = getspmatchdata("checkpoints", "deaths_total") + 1;
@@ -47,8 +48,9 @@ register_death(var_0, var_1) {
   maps\_utility::save_time_played();
   var_3 = level.player getplayerdata(common_scripts\utility::getstatsgroup_sp(), "career", "deaths_total");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level.player setplayerdata(common_scripts\utility::getstatsgroup_sp(), "career", "deaths_total", var_3 + 1);
+  }
 }
 
 register_boost_jump() {

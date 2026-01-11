@@ -153,8 +153,9 @@ hind_condition_callback_to_flyby(var_0, var_1) {
   var_3 = var_0["distance2d"];
   var_4 = var_0["speed"];
 
-  if(isDefined(level.disablepassby) && level.disablepassby)
+  if(isDefined(level.disablepassby) && level.disablepassby) {
     return 0;
+  }
 
   if(!isDefined(var_1.flyby)) {
     var_1.flyby = spawnStruct();

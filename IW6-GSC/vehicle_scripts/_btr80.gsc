@@ -26,12 +26,15 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_light(var_2, "spotlight_turret", "TAG_TURRET_LIGHT", "fx/misc/spotlight_btr80", "spotlight_turret", 0.0);
   maps\_vehicle::build_drive( % btr80_movement, % btr80_movement_backwards, 10);
 
-  if(issubstr(var_0, "_snow"))
+  if(issubstr(var_0, "_snow")) {
     maps\_vehicle::build_turret("btr80_turret2", "tag_turret2", "vehicle_btr80_machine_gun_snow");
-  else if(issubstr(var_2, "_ac130"))
+  }
+  else if(issubstr(var_2, "_ac130")) {
     maps\_vehicle::build_turret("btr80_ac130_turret", "tag_turret2", "vehicle_btr80_machine_gun");
-  else
+  }
+  else {
     maps\_vehicle::build_turret("btr80_turret2", "tag_turret2", "vehicle_btr80_machine_gun");
+  }
 
   maps\_vehicle::build_radiusdamage((0, 0, 53), 512, 300, 20, 0);
   maps\_vehicle::build_treadfx();
@@ -93,8 +96,9 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 4; var_1++)
+  for(var_1 = 0; var_1 < 4; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   var_0[0].sittag = "tag_detach";
   var_0[1].sittag = "tag_detach";

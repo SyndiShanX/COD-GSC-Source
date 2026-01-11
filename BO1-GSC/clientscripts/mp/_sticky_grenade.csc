@@ -43,12 +43,15 @@ loop_local_sound(localClientNum, alias, interval, fx) {
         if(self.stuckToPlayer.team == "free" || self.stuckToPlayer.team != owner.team) {
           self.stuckToPlayer PlayRumbleOnEntity(localClientNum, "buzz_high");
           if((localPlayer == self.stuckToPlayer) && !(localPlayer IsDriving(localClientNum))) {
-            if(IsSplitscreen())
+            if(IsSplitscreen()) {
               AnimateUI(localClientNum, "sticky_grenade_overlay" + localClientNum, "overlay", "pulse", 0);
-            else
+            }
+            else {
               AnimateUI(localClientNum, "sticky_grenade_overlay", "overlay", "pulse", 0);
-            if(!IsSplitscreen() && GetDvarInt(#"ui_hud_hardcore") == 0)
+            }
+            if(!IsSplitscreen() && GetDvarInt(#"ui_hud_hardcore") == 0) {
               AnimateUI(localClientNum, "stuck", "sticky_grenade", "pulse", 0);
+            }
           }
         }
       }

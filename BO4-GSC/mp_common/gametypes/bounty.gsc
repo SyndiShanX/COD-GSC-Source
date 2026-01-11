@@ -1670,4 +1670,3 @@ function_b968a61c() {
     setdvar(#"hash_312d65fd43c7008c", 0);
   }
 }
-

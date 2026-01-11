@@ -20,8 +20,9 @@ main() {
 
 func_DFC0() {
   foreach(var_02, var_01 in level.func_9953) {
-    if(!isDefined(var_1.func_E0E2))
+    if(!isDefined(var_1.func_E0E2)) {
       var_01 func_E041();
+    }
   }
 }
 
@@ -58,21 +59,24 @@ poll_for_found() {
   self endon("end_loop_thread");
 
   if(isDefined(self)) {
-    if(func_3DAD())
+    if(func_3DAD()) {
       func_E041();
+    }
   } else
     return;
 
-  while(!func_3DAD())
+  while(!func_3DAD()) {
     wait 0.05;
+  }
 
   func_E041();
 }
 
 func_3DAD() {
   foreach(var_01 in level.players) {
-    if(!var_01 _meth_8153(self.func_C1D5))
+    if(!var_01 _meth_8153(self.func_C1D5)) {
       return 0;
+    }
   }
 
   return 1;
@@ -99,8 +103,9 @@ func_48A1() {
     if(isDefined(var_03) && var_03 != "undefined") {
       var_04 = strtok(var_03, ",");
 
-      for(var_05 = 0; var_05 < var_4.size; var_5++)
+      for(var_05 = 0; var_05 < var_4.size; var_5++) {
         var_4[var_05] = int(var_4[var_05]);
+      }
 
       var_1[var_02] = (var_4[0], var_4[1], var_4[2]);
       continue;
@@ -158,8 +163,9 @@ func_906C() {
   self endon("stopped_pressing");
 
   while(isDefined(self) && isDefined(level.player)) {
-    if(level.player usebuttonpressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player))
+    if(level.player usebuttonpressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player)) {
       level.player.func_906B++;
+    }
     else {
       setdvar("ui_securing", "");
       self stoploopsound("intelligence_pickup_loop");
@@ -194,13 +200,16 @@ func_9961(var_00, var_01) {
   var_04 = 0;
 
   for(var_05 = 0; var_05 < var_02; var_5++) {
-    if(var_04 > var_03)
+    if(var_04 > var_03) {
       var_04 = 0;
+    }
 
-    if(var_04 < var_03 / 2)
+    if(var_04 < var_03 / 2) {
       var_00 give_zap_perk(&"SCRIPT_INTELLIGENCE_UPLOADING");
-    else
+    }
+    else {
       var_00 give_zap_perk("");
+    }
 
     var_1.label = int(var_05 / var_02 * 100);
     var_01 give_zap_perk(&"SCRIPT_INTELLIGENCE_PERCENT");
@@ -250,8 +259,9 @@ func_9952(var_00) {
     var_06 setpulsefx(60, var_01, var_02);
     var_07 = 0;
 
-    if(var_00 == var_05 && var_05 _meth_8153(self.func_C1D5))
+    if(var_00 == var_05 && var_05 _meth_8153(self.func_C1D5)) {
       var_6.label = &"SCRIPT_RORKEFILE_PREV_FOUND";
+    }
     else {
       var_6.label = &"SCRIPT_INTELLIGENCE_OF_EIGHTEEN";
       var_05 setplayerangles();
@@ -259,8 +269,9 @@ func_9952(var_00) {
       var_06 setvalue(var_07);
     }
 
-    if(var_07 == 18)
+    if(var_07 == 18) {
       var_05 scripts\sp\utility::func_D0A1("EXT_1");
+    }
 
     var_06 scripts\engine\utility::delaycall(var_03, ::destroy);
   }
@@ -284,8 +295,9 @@ func_23AF() {
     var_02 = tablelookup("sp\intel_items.csv", 0, var_01, 4);
     var_03 = strtok(var_02, ",");
 
-    for(var_01 = 0; var_01 < var_3.size; var_1++)
+    for(var_01 = 0; var_01 < var_3.size; var_1++) {
       var_3[var_01] = int(var_3[var_01]);
+    }
 
     var_0[var_01] = (var_3[0], var_3[1], var_3[2]);
   }
@@ -317,7 +329,8 @@ func_7B42(var_00) {
     if(!isDefined(level.func_113C7[var_01])) {
       continue;
     }
-    if(distancesquared(var_00, level.func_113C7[var_01]) < squared(75))
+    if(distancesquared(var_00, level.func_113C7[var_01]) < squared(75)) {
       return var_01;
+    }
   }
 }

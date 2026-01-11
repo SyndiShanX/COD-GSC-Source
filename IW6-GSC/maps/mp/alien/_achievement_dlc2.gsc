@@ -51,8 +51,9 @@ update_alien_kill_achievements_dlc2(var_0, var_1, var_2, var_3, var_4, var_5, va
   if(!isDefined(var_1) || !isplayer(var_1)) {
     return;
   }
-  if(isDefined(self.alien_type) && self.alien_type == "seeder_spore")
+  if(isDefined(self.alien_type) && self.alien_type == "seeder_spore") {
     var_1 maps\mp\alien\_achievement::update_achievement("KILL_SEEDER_TURRETS", 1);
+  }
 }
 
 is_using_relic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
@@ -71,8 +72,9 @@ update_blocker_achievements(var_0, var_1) {
       maps\mp\alien\_achievement::update_achievement_all_players("KILL_KRAKEN_1ST_TIME", 1);
       maps\mp\alien\_achievement::update_achievement_all_players("KILL_KRAKEN_AND_ALL_CHALLENGES", 1);
 
-      foreach(var_3 in level.players)
+      foreach(var_3 in level.players) {
       var_3 maps\mp\alien\_achievement::update_achievement("KILL_KRAKEN_WITH_RELIC", 1, var_3);
+      }
 
       break;
     default:
@@ -85,6 +87,7 @@ update_hypno_trap_rhino() {
 }
 
 update_craft_all_items_achievement(var_0) {
-  if(self _meth_842A(var_0))
+  if(self _meth_842A(var_0)) {
     maps\mp\alien\_achievement::update_achievement("CRAFT_ALL_ITEMS", 1);
+  }
 }

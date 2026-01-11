@@ -100,8 +100,9 @@ init() {
   level thread onPlayerConnect();
 
   civilian_jet = getEnt("civilian_jet_origin", "targetname");
-  if(isDefined(civilian_jet))
+  if(isDefined(civilian_jet)) {
     civilian_jet thread civilian_jet_flyby();
+  }
 }
 
 onPlayerConnect() {
@@ -188,11 +189,13 @@ jet_init() {
   }
 
   // extend jet's engine fx origins
-  foreach(engine_fx in self.engine_fxs)
+  foreach(engine_fx in self.engine_fxs) {
   engine_fx.origin += negative_vec;
+  }
 
-  foreach(flash_fx in self.flash_fxs)
+  foreach(flash_fx in self.flash_fxs) {
   flash_fx.origin += negative_vec;
+  }
 
   // -------------- flight time and vector calculation -------------
   jet_origin = self.origin; // origin is the nose of the jet
@@ -219,16 +222,19 @@ jet_timer() {
   timelimit = max(10, match_timelimit);
   timelimit = min(timelimit, 100);
 
-  if(getdvar("jet_flyby_timer") != "")
+  if(getdvar("jet_flyby_timer") != "") {
     level.civilianJetFlyBy_timer = 5 + getdvarint("jet_flyby_timer");
-  else
+  }
+  else {
     level.civilianJetFlyBy_timer = (0.25 + randomFloatRange(0.3, 0.7)) * 60 * timeLimit; // seconds into the match when jet flys by
+  }
 
   wait level.civilianJetFlyBy_timer;
 
   // wait till all the airborne kill streaks are done
-  while(isDefined(level.airstrikeInProgress) || isDefined(level.ac130player) || isDefined(level.chopper) || isDefined(level.remoteMissileInProgress))
+  while(isDefined(level.airstrikeInProgress) || isDefined(level.ac130player) || isDefined(level.chopper) || isDefined(level.remoteMissileInProgress)) {
     wait 0.05;
+  }
 
   // start flyby
   self notify("start_flyby");
@@ -240,13 +246,16 @@ jet_timer() {
 }
 
 getTimeInterval() {
-  if(isSP())
+  if(isSP()) {
     return 10.0;
+  }
 
-  if(isDefined(game["status"]) && game["status"] == "overtime")
+  if(isDefined(game["status"]) && game["status"] == "overtime") {
     return 1.0;
-  else
+  }
+  else {
     return getWatchedDvar("timelimit");
+  }
 }
 
 getWatchedDvar(dvarString) {
@@ -256,8 +265,9 @@ getWatchedDvar(dvarString) {
 
 jet_flyby() {
   // show plane
-  foreach(part in self.jet_parts)
+  foreach(part in self.jet_parts) {
   part show();
+  }
 
   engine_fx_array = [];
   flash_fx_array = [];
@@ -283,53 +293,65 @@ jet_flyby() {
   wait 0.05;
 
   // play engine fx on fx ents
-  foreach(engine_fx_ent in engine_fx_array)
+  foreach(engine_fx_ent in engine_fx_array) {
   playFXOnTag(self.jet_engine_fx, engine_fx_ent, "tag_origin");
+  }
 
   // play flash fx on fx ents
   foreach(flash_fx_ent in flash_fx_array) {
-    if(isDefined(flash_fx_ent.color) && flash_fx_ent.color == "blink")
+    if(isDefined(flash_fx_ent.color) && flash_fx_ent.color == "blink") {
       playFXOnTag(self.jet_flash_fx_blink, flash_fx_ent, "tag_origin");
-    else if(isDefined(flash_fx_ent.color) && flash_fx_ent.color == "red")
+    }
+    else if(isDefined(flash_fx_ent.color) && flash_fx_ent.color == "red") {
       playFXOnTag(self.jet_flash_fx_red, flash_fx_ent, "tag_origin");
-    else
+    }
+    else {
       playFXOnTag(self.jet_flash_fx_green, flash_fx_ent, "tag_origin");
+    }
   }
 
   // move plane
-  foreach(part in self.jet_parts)
+  foreach(part in self.jet_parts) {
   part moveTo(part.origin + self.jet_fly_vec, self.jet_flight_time);
+  }
 
   // move fx ents
-  foreach(engine_fx_ent in engine_fx_array)
+  foreach(engine_fx_ent in engine_fx_array) {
   engine_fx_ent moveTo(engine_fx_ent.origin + self.jet_fly_vec, self.jet_flight_time);
-  foreach(flash_fx_ent in flash_fx_array)
+  }
+  foreach(flash_fx_ent in flash_fx_array) {
   flash_fx_ent moveTo(flash_fx_ent.origin + self.jet_fly_vec, self.jet_flight_time);
+  }
 
   wait(self.jet_flight_time + 1);
 
   // delete fxs
-  foreach(engine_fx_ent in engine_fx_array)
+  foreach(engine_fx_ent in engine_fx_array) {
   engine_fx_ent delete();
-  foreach(flash_fx_ent in flash_fx_array)
+  }
+  foreach(flash_fx_ent in flash_fx_array) {
   flash_fx_ent delete();
+  }
 
   self notify("flyby_done");
 }
 
 jet_planeSound(plane, bombsite) {
   plane thread playsound_loop_on_ent("veh_mig29_dist_loop");
-  while(!targetisclose(plane, bombsite))
+  while(!targetisclose(plane, bombsite)) {
     wait .05;
+  }
 
   plane thread playsound_loop_on_ent("veh_mig29_close_loop");
-  while(targetisinfront(plane, bombsite))
+  while(targetisinfront(plane, bombsite)) {
     wait .05;
+  }
   wait .5;
 
   plane thread playsound_float("veh_mig29_sonic_boom");
-  while(targetisclose(plane, bombsite))
+  while(targetisclose(plane, bombsite)) {
     wait .05;
+  }
 
   plane notify("stop sound" + "veh_mig29_close_loop");
   self waittill("flyby_done");
@@ -340,13 +362,16 @@ jet_planeSound(plane, bombsite) {
 playsound_float(alias, origin, master) {
   org = spawn("script_origin", (0, 0, 1));
   org hide();
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     origin = self.origin;
+  }
   org.origin = origin;
-  if(isDefined(master) && master)
+  if(isDefined(master) && master) {
     org playsoundasmaster(alias);
-  else
+  }
+  else {
     org playSound(alias);
+  }
   wait(10.0);
   org delete();
 }
@@ -378,29 +403,35 @@ targetisinfront(other, target) {
   normalvec = vectorNormalize(flat_origin(target) - other.origin);
   dot = vectordot(forwardvec, normalvec);
 
-  if(dot > 0)
+  if(dot > 0) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 targetisclose(other, target) {
   infront = targetisinfront(other, target);
 
-  if(infront)
+  if(infront) {
     dir = 1;
-  else
+  }
+  else {
     dir = -1;
+  }
 
   a = flat_origin(other.origin);
   b = a + Vector_Multiply(anglesToForward(flat_angle(other.angles)), (dir * 100000));
   point = pointOnSegmentNearestToPoint(a, b, target);
   dist = distance(a, point);
 
-  if(dist < 3000)
+  if(dist < 3000) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 // ================================================================================ //
@@ -425,8 +456,9 @@ vending_machine() {
   self.vm_launch_to = getent(self.vm_launch_from.target, "targetname");
   assertex(isDefined(self.vm_launch_to), "launch-from can script_origin is missing target to the physics launch-to script_origin");
 
-  if(isDefined(self.vm_launch_to.target))
+  if(isDefined(self.vm_launch_to.target)) {
     self.vm_fx_loc = getent(self.vm_launch_to.target, "targetname");
+  }
 
   //assertex( isDefined( self.vm_launch_to ), "launch-to can script_origin is missing target to the fx location script_origin" );
 
@@ -461,12 +493,14 @@ vending_machine() {
     //level.players[0] iprintln( "used" );
 
     self playSound("vending_machine_button_press");
-    if(!self.soda_count)
+    if(!self.soda_count) {
       continue;
+    }
 
     // drop a can, and shoot out the previous one if in slot
-    if(isDefined(self.soda_slot))
+    if(isDefined(self.soda_slot)) {
       self soda_can_eject();
+    }
     soda_can_drop(spawn_soda());
     wait 0.05;
   }
@@ -482,12 +516,14 @@ vending_machine_damage_monitor(vending_machine) {
     vending_machine waittill("damage", damage, other, direction_vec, P, type);
 
     if(isDefined(type)) {
-      if(isSubStr(exp_dmg, ToLower(type)))
+      if(isSubStr(exp_dmg, ToLower(type))) {
         damage *= CONST_soda_splash_dmg_scaler; // multiply explosive dmg
+      }
 
       self.hp -= damage;
-      if(self.hp > 0)
+      if(self.hp > 0) {
         continue;
+      }
 
       // vending machine is now dead, button usage is disabled
       self notify("death");
@@ -495,10 +531,12 @@ vending_machine_damage_monitor(vending_machine) {
       // disable use trigger
       self.origin += (0, 0, 10000);
 
-      if(!isDefined(self.vm_fx_loc))
+      if(!isDefined(self.vm_fx_loc)) {
         playfx_loc = self.vm_normal.origin + ((17, -13, 52) - (-20, 18, 0));
-      else
+      }
+      else {
         playfx_loc = self.vm_fx_loc.origin;
+      }
 
       playFX(sparks_fx, playfx_loc);
 
@@ -507,8 +545,9 @@ vending_machine_damage_monitor(vending_machine) {
 
       while(self.soda_count > 0) {
         // drop a can, and shoot out the previous one if in slot
-        if(isDefined(self.soda_slot))
+        if(isDefined(self.soda_slot)) {
           self soda_can_eject();
+        }
         soda_can_drop(spawn_soda());
         wait 0.05;
       }
@@ -539,8 +578,9 @@ soda_can_drop(soda) {
 soda_can_eject() {
   self endon("death");
 
-  if(isDefined(self.soda_slot.ejected) && self.soda_slot.ejected == true)
+  if(isDefined(self.soda_slot.ejected) && self.soda_slot.ejected == true) {
     return;
+  }
 
   // physics launch
   force_max = CONST_soda_launch_force * (1 + CONST_soda_random_factor);
@@ -618,10 +658,12 @@ metal_detector() {
   bound_org_1 delete();
   bound_org_2 delete();
 
-  if(!isSP())
+  if(!isSP()) {
     self.alarm_interval = CONST_alarm_interval;
-  else
+  }
+  else {
     self.alarm_interval = CONST_alarm_interval_sp;
+  }
 
   self.alarm_playing = 0;
   self.alarm_annoyance = 0;
@@ -651,8 +693,9 @@ playsound_and_light(sound, light, light_pos1, light_pos2) {
     self.alarm_playing = 1;
     self thread annoyance_tracker();
 
-    if(!self.alarm_annoyance)
+    if(!self.alarm_annoyance) {
       self playSound(sound);
+    }
 
     // 1000ms red light fx
     playFX(light, light_pos1);
@@ -666,20 +709,24 @@ playsound_and_light(sound, light, light_pos1, light_pos2) {
 annoyance_tracker() {
   level endon("game_ended");
 
-  if(!self.tolerance)
+  if(!self.tolerance) {
     return;
+  }
 
   interval = self.alarm_interval + 0.15;
-  if(self.tolerance)
+  if(self.tolerance) {
     self.tolerance--;
-  else
+  }
+  else {
     self.alarm_annoyance = 1;
+  }
 
   current_time = gettime(); // ms
 
   alarm_timeout = CONST_alarm_interval;
-  if(isSP())
+  if(isSP()) {
     alarm_timeout = CONST_alarm_interval_sp;
+  }
 
   self waittill_any_or_timeout("dmg_triggered", "touch_triggered", "weapon_triggered", (alarm_timeout + 2));
 
@@ -707,8 +754,9 @@ metal_detector_weapons(bounds, weapon_1, weapon_2) {
     all_grenades = getEntArray("grenade", "classname");
     foreach(grenade in all_grenades) {
       if(isDefined(grenade.model) && (grenade.model == weapon_1 || grenade.model == weapon_2)) {
-        if(isInBound(grenade, bounds))
+        if(isInBound(grenade, bounds)) {
           self thread weapon_notify_loop(grenade, bounds);
+        }
       }
     }
   }
@@ -743,8 +791,9 @@ isInBound(ent, bounds) {
 
   if(isInBound_single(ent_x, bound_x_min, bound_x_max)) {
     if(isInBound_single(ent_y, bound_y_min, bound_y_max)) {
-      if(isInBound_single(ent_z, bound_z_min, bound_z_max))
+      if(isInBound_single(ent_z, bound_z_min, bound_z_max)) {
         return true;
+      }
     }
   }
   return false;
@@ -761,8 +810,9 @@ metal_detector_dmg_monitor(damage_trig) {
   level endon("game_ended");
   while(1) {
     damage_trig waittill("damage", damage, other, direction_vec, P, type);
-    if(isDefined(type) && alarm_validate_damage(type))
+    if(isDefined(type) && alarm_validate_damage(type)) {
       self notify("dmg_triggered");
+    }
   }
 }
 
@@ -785,8 +835,9 @@ alarm_validate_damage(damageType) {
   allowed_dmg_array = strtok(allowed_dmg, " ");
 
   foreach(dmg in allowed_dmg_array) {
-    if(ToLower(dmg) == ToLower(damageType))
+    if(ToLower(dmg) == ToLower(damageType)) {
       return true;
+    }
   }
   return false;
 }
@@ -810,8 +861,9 @@ do_creak(trigger) {
 
   for(;;) {
     self waittill("trigger_leave", leftTrigger);
-    if(trigger != leftTrigger)
+    if(trigger != leftTrigger) {
       continue;
+    }
 
     self playSound("step_walk_plr_woodcreak_off");
     return;
@@ -832,8 +884,9 @@ motion_light() {
   foreach(light in lights) {
     light.lightRigs = [];
     infoNull = getEnt(light.target, "targetname");
-    if(!isDefined(infoNull.target))
+    if(!isDefined(infoNull.target)) {
       continue;
+    }
 
     light.lightRigs = getEntArray(infoNull.target, "targetname");
   }
@@ -844,8 +897,9 @@ motion_light() {
     while(anythingTouchingTrigger(self)) {
       objectMoved = false;
       foreach(object in self.touchList) {
-        if(isDefined(object.distMoved) && object.distMoved > 5.0)
+        if(isDefined(object.distMoved) && object.distMoved > 5.0) {
           objectMoved = true;
+        }
       }
 
       if(objectMoved) {
@@ -857,8 +911,9 @@ motion_light() {
             light setLightIntensity(1.0);
 
             if(isDefined(light.lightRigs)) {
-              foreach(rig in light.lightRigs)
+              foreach(rig in light.lightRigs) {
               rig setModel("com_two_light_fixture_on");
+              }
             }
           }
         }
@@ -879,8 +934,9 @@ motion_light_timeout(lights, timeOut) {
   foreach(light in lights) {
     light setLightIntensity(0);
     if(isDefined(light.lightRigs)) {
-      foreach(rig in light.lightRigs)
+      foreach(rig in light.lightRigs) {
       rig setModel("com_two_light_fixture_off");
+      }
     }
   }
 
@@ -912,8 +968,9 @@ outdoor_motion_dlight() {
     while(anythingTouchingTrigger(self)) {
       objectMoved = false;
       foreach(object in self.touchList) {
-        if(isDefined(object.distMoved) && object.distMoved > 5.0)
+        if(isDefined(object.distMoved) && object.distMoved > 5.0) {
           objectMoved = true;
+        }
       }
 
       if(objectMoved) {
@@ -967,8 +1024,9 @@ dog_bark() {
     while(anythingTouchingTrigger(self)) {
       maxDistMoved = 0;
       foreach(object in self.touchList) {
-        if(isDefined(object.distMoved) && object.distMoved > maxDistMoved)
+        if(isDefined(object.distMoved) && object.distMoved > maxDistMoved) {
           maxDistMoved = object.distMoved;
+        }
       }
 
       if(maxDistMoved > 6.0) {
@@ -995,23 +1053,27 @@ trigger_door() {
 
     doorEnt thread doorOpen(openTime, self getDoorSide(player));
 
-    if(anythingTouchingTrigger(self))
+    if(anythingTouchingTrigger(self)) {
       self waittill("trigger_empty");
+    }
 
     wait(3.0);
 
-    if(anythingTouchingTrigger(self))
+    if(anythingTouchingTrigger(self)) {
       self waittill("trigger_empty");
+    }
 
     doorEnt thread doorClose(openTime);
   }
 }
 
 doorOpen(openTime, doorSide) {
-  if(doorSide)
+  if(doorSide) {
     self rotateTo((0, self.baseYaw + 90, 1), openTime, 0.1, 0.75);
-  else
+  }
+  else {
     self rotateTo((0, self.baseYaw - 90, 1), openTime, 0.1, 0.75);
+  }
 
   self playSound("door_generic_house_open");
 
@@ -1034,28 +1096,32 @@ getVectorRightAngle(vDir) {
 }
 
 use_toggle() {
-  if(self.classname != "trigger_use_touch")
+  if(self.classname != "trigger_use_touch") {
     return;
+  }
 
   lights = getEntArray(self.target, "targetname");
   assert(lights.size);
 
   self.lightsOn = 1;
-  foreach(light in lights)
+  foreach(light in lights) {
   light setLightIntensity(1.5 * self.lightsOn);
+  }
 
   for(;;) {
     self waittill("trigger");
 
     self.lightsOn = !self.lightsOn;
     if(self.lightsOn) {
-      foreach(light in lights)
+      foreach(light in lights) {
       light setLightIntensity(1.5);
+      }
 
       self playSound("switch_auto_lights_on");
     } else {
-      foreach(light in lights)
+      foreach(light in lights) {
       light setLightIntensity(0);
+      }
 
       self playSound("switch_auto_lights_off");
     }
@@ -1094,8 +1160,9 @@ get_photo_copier(trigger) {
     copier = toys[0];
     foreach(toy in toys) {
       if(isDefined(toy.destructible_type) && toy.destructible_type == "toy_copier") {
-        if(distance(trigger.origin, copier.origin) > distance(trigger.origin, toy.origin))
+        if(distance(trigger.origin, copier.origin) > distance(trigger.origin, toy.origin)) {
           copier = toy;
+        }
       }
     }
     assertex(distance(trigger.origin, copier.origin) < 128, "Photocopier at " + trigger.origin + " doesn't contain a photo copier");
@@ -1177,8 +1244,9 @@ photo_copier_copy_bar_goes() {
     intensity = i * 0.05;
     intensity /= timer;
     intensity = 1 - (intensity * light.intensity);
-    if(intensity > 0)
+    if(intensity > 0) {
       light setlightintensity(intensity);
+    }
     wait(0.05);
   }
 }
@@ -1235,12 +1303,15 @@ fan_blade_rotate(type) {
     speed_multiplier = self.speed;
   }
 
-  if(type == "slow")
+  if(type == "slow") {
     speed = randomfloatrange(100 * speed_multiplier, 360 * speed_multiplier);
-  else if(type == "fast")
+  }
+  else if(type == "fast") {
     speed = randomfloatrange(720 * speed_multiplier, 1000 * speed_multiplier);
-  else
+  }
+  else {
     assertmsg("Type must be fast or slow");
+  }
 
   wait randomfloatrange(0, 1);
 
@@ -1253,14 +1324,18 @@ fan_blade_rotate(type) {
     dot_y = abs(vectorDot(fan_vec, (0, 1, 0)));
     dot_z = abs(vectorDot(fan_vec, (0, 0, 1)));
 
-    if(dot_x > 0.9)
+    if(dot_x > 0.9) {
       self rotatevelocity((speed, 0, 0), time);
-    else if(dot_y > 0.9)
+    }
+    else if(dot_y > 0.9) {
       self rotatevelocity((speed, 0, 0), time);
-    else if(dot_z > 0.9)
+    }
+    else if(dot_z > 0.9) {
       self rotatevelocity((0, speed, 0), time);
-    else
+    }
+    else {
       self rotatevelocity((0, speed, 0), time);
+    }
 
     wait time;
   }
@@ -1274,68 +1349,82 @@ triggerTouchThink(enterFunc, exitFunc) {
   while(true) {
     self waittill("trigger", player);
 
-    if(!isPlayer(player) && !isDefined(player.finished_spawning))
+    if(!isPlayer(player) && !isDefined(player.finished_spawning)) {
       continue;
+    }
 
-    if(!isAlive(player))
+    if(!isAlive(player)) {
       continue;
+    }
 
-    if(!isDefined(player.touchTriggers[self.entNum]))
+    if(!isDefined(player.touchTriggers[self.entNum])) {
       player thread playerTouchTriggerThink(self, enterFunc, exitFunc);
+    }
   }
 }
 
 playerTouchTriggerThink(trigger, enterFunc, exitFunc) {
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     self endon("death");
+  }
 
-  if(!isSP())
+  if(!isSP()) {
     touchName = self.guid; // generate GUID
-  else
+  }
+  else {
     touchName = "player" + gettime(); // generate GUID
+  }
 
   trigger.touchList[touchName] = self;
-  if(isDefined(trigger.moveTracker))
+  if(isDefined(trigger.moveTracker)) {
     self.moveTrackers++;
+  }
 
   trigger notify("trigger_enter", self);
   self notify("trigger_enter", trigger);
 
-  if(isDefined(enterFunc))
+  if(isDefined(enterFunc)) {
     self thread[[enterFunc]](trigger);
+  }
 
   self.touchTriggers[trigger.entNum] = trigger;
 
-  while(isAlive(self) && self isTouching(trigger) && (isSP() || !level.gameEnded))
+  while(isAlive(self) && self isTouching(trigger) && (isSP() || !level.gameEnded)) {
     wait(0.05);
+  }
 
   // disconnected player will skip this code
   if(isDefined(self)) {
     self.touchTriggers[trigger.entNum] = undefined;
-    if(isDefined(trigger.moveTracker))
+    if(isDefined(trigger.moveTracker)) {
       self.moveTrackers--;
+    }
 
     self notify("trigger_leave", trigger);
 
-    if(isDefined(exitFunc))
+    if(isDefined(exitFunc)) {
       self thread[[exitFunc]](trigger);
+    }
   }
 
-  if(!isSP() && level.gameEnded)
+  if(!isSP() && level.gameEnded) {
     return;
+  }
 
   trigger.touchList[touchName] = undefined;
   trigger notify("trigger_leave", self);
 
-  if(!anythingTouchingTrigger(trigger))
+  if(!anythingTouchingTrigger(trigger)) {
     trigger notify("trigger_empty");
+  }
 }
 
 movementTracker() {
   self endon("disconnect");
 
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     self endon("death");
+  }
 
   self.moveTrackers = 0;
   self.distMoved = 0;

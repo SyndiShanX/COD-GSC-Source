@@ -295,8 +295,9 @@ turn_off_vision_settings() {
 player_speed_set(speed, time) {
   currspeed = int(getdvar("g_speed"));
   goalspeed = speed;
-  if(!isDefined(self.g_speed))
+  if(!isDefined(self.g_speed)) {
     self.g_speed = currspeed;
+  }
   range = goalspeed - currspeed;
   interval = .05;
   numcycles = time / interval;

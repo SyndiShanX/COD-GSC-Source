@@ -28,10 +28,12 @@ on_spawn(watcher, player) {
     retrievable_model.angles = angles;
     retrievable_model.name = watcher.weapon;
     if(isDefined(prey)) {
-      if(isPlayer(prey) && player.team == prey.team)
+      if(isPlayer(prey) && player.team == prey.team) {
         isFriendly = true;
-      else if(isAI(prey) && player.team == prey.team)
+      }
+      else if(isAI(prey) && player.team == prey.team) {
         isFriendly = true;
+      }
       if(!isFriendly) {
         retrievable_model LinkTo(prey, bone);
         retrievable_model thread force_drop_knives_to_ground_on_death(player, prey);
@@ -73,8 +75,9 @@ on_spawn_retrieve_trigger(watcher, player) {
   player endon("zmb_lost_knife");
   level endon("game_ended");
   player waittill("ballistic_knife_stationary", retrievable_model, normal, prey);
-  if(!isDefined(retrievable_model))
+  if(!isDefined(retrievable_model)) {
     return;
+  }
   vec_scale = 10;
   trigger_pos = [];
   if(isDefined(prey)) {
@@ -122,19 +125,25 @@ watch_use_trigger(trigger, model, callback, weapon, playerSoundOnUse, npcSoundOn
   level endon("game_ended");
   while(true) {
     trigger waittill("trigger", player);
-    if(!IsAlive(player))
+    if(!IsAlive(player)) {
       continue;
-    if(!player IsOnGround())
+    }
+    if(!player IsOnGround()) {
       continue;
-    if(isDefined(trigger.triggerTeam) && (player.team != trigger.triggerTeam))
+    }
+    if(isDefined(trigger.triggerTeam) && (player.team != trigger.triggerTeam)) {
       continue;
-    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy))
+    }
+    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy)) {
       continue;
+    }
     if(player UseButtonPressed() && !player.throwingGrenade && !player meleeButtonPressed()) {
-      if(isDefined(playerSoundOnUse))
+      if(isDefined(playerSoundOnUse)) {
         player playLocalSound(playerSoundOnUse);
-      if(isDefined(npcSoundOnUse))
+      }
+      if(isDefined(npcSoundOnUse)) {
         player playSound(npcSoundOnUse);
+      }
       player thread[[callback]](weapon, model, trigger);
       break;
     }

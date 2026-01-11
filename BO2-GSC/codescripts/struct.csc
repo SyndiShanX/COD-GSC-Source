@@ -15,8 +15,9 @@ createstruct() {
 
 findstruct(position) {
   for(i = 0; i < level.struct.size; i++) {
-    if(distancesquared(level.struct[i].origin, position) < 1)
+    if(distancesquared(level.struct[i].origin, position) < 1) {
       return level.struct[i];
+    }
   }
 
   return undefined;

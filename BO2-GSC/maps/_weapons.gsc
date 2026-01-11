@@ -78,8 +78,9 @@ watch_weapon_usage() {
         break;
       case "grenade":
       case "rocketlauncher":
-        if(weaponinventorytype(curweapon) != "item")
+        if(weaponinventorytype(curweapon) != "item") {
           self thread maps\_shellshock::rocket_earthquake();
+        }
 
         break;
       default:
@@ -162,8 +163,9 @@ begin_grenade_tracking() {
   starttime = gettime();
   self waittill("grenade_fire", grenade, weaponname);
 
-  if(gettime() - starttime > 1000)
+  if(gettime() - starttime > 1000) {
     grenade.iscooked = 1;
+  }
 
   switch (weaponname) {
     case "frag_grenade_80s_sp":
@@ -227,19 +229,22 @@ watch_emp_grenade(owner, weaponname) {
   ents = getdamageableents(origin, 512);
 
   foreach(ent in ents) {
-    if(isplayer(ent.entity) || isDefined(ent.entity.classname) && ent.entity.classname == "script_vehicle" || isDefined(ent.entity.isbigdog) && ent.entity.isbigdog)
+    if(isplayer(ent.entity) || isDefined(ent.entity.classname) && ent.entity.classname == "script_vehicle" || isDefined(ent.entity.isbigdog) && ent.entity.isbigdog) {
       ent.entity dodamage(1, origin, owner, "none", "MOD_GRENADE_SPLASH", 0, weaponname);
+    }
   }
 }
 
 getdamageableents(pos, radius, dolos, startradius) {
   ents = [];
 
-  if(!isDefined(dolos))
+  if(!isDefined(dolos)) {
     dolos = 0;
+  }
 
-  if(!isDefined(startradius))
+  if(!isDefined(startradius)) {
     startradius = 0;
+  }
 
   players = getplayers();
 
@@ -347,8 +352,9 @@ weapondamagetracepassed(from, to, startradius, ignore) {
   midpos = undefined;
   diff = to - from;
 
-  if(lengthsquared(diff) < startradius * startradius)
+  if(lengthsquared(diff) < startradius * startradius) {
     midpos = to;
+  }
 
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
@@ -384,8 +390,9 @@ watchsmokegrenadedetonation() {
 }
 
 isreloadablealtweapon(weapon) {
-  if(getsubstr(weapon, 0, 3) == "gl_")
+  if(getsubstr(weapon, 0, 3) == "gl_") {
     return true;
+  }
 
   switch (weapon) {
     case "exptitus6_sp":
@@ -478,8 +485,9 @@ scavenger_think() {
 }
 
 islauncherkweapon(weapon) {
-  if(getsubstr(weapon, 0, 2) == "gl_")
+  if(getsubstr(weapon, 0, 2) == "gl_") {
     return true;
+  }
 
   switch (weapon) {
     case "china_lake_sp":

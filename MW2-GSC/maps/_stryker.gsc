@@ -64,8 +64,9 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 11; i++)
+  for(i = 0; i < 11; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].getout_delete = true;
   return positions;

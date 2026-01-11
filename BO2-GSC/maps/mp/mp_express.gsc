@@ -35,8 +35,9 @@ main() {
   registerclientfield("vehicle", "train_moving", 1, 1, "int");
   registerclientfield("scriptmover", "train_moving", 1, 1, "int");
 
-  if(getgametypesetting("allowMapScripting"))
+  if(getgametypesetting("allowMapScripting")) {
     level thread maps\mp\mp_express_train::init();
+  }
 
   level thread devgui_express();
   execdevgui("devgui_mp_express");
@@ -64,8 +65,9 @@ devgui_express() {
         break;
     }
 
-    if(getdvar(#"devgui_notify") != "")
+    if(getdvar(#"devgui_notify") != "") {
       setdvar("devgui_notify", "");
+    }
   }
 
 }

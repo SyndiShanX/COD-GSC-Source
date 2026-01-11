@@ -23,8 +23,9 @@
 #include maps\_quadrotor;
 
 skipto_street() {
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     init_hero("harper");
+  }
 
   skipto_teleport("skipto_street");
   exploder(56);
@@ -74,13 +75,15 @@ main() {
 street_opitimizations() {
   a_cell_structs = getstructarray("plaza_cell", "targetname");
 
-  foreach(struct in a_cell_structs)
+  foreach(struct in a_cell_structs) {
   setcellinvisibleatpos(struct.origin);
+  }
 
   flag_wait("player_moved_down_the_street");
 
-  foreach(struct in a_cell_structs)
+  foreach(struct in a_cell_structs) {
   setcellvisibleatpos(struct.origin);
+  }
 }
 
 street_deathposes() {
@@ -106,16 +109,18 @@ street_objectives() {
   set_objective(level.obj_street_regroup);
   wait 2.0;
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     set_objective(level.obj_follow, level.harper, "follow");
+  }
 
   flag_wait("bdog_front_spawned");
   set_objective(level.obj_follow, undefined, "delete");
   set_objective(level.obj_street_regroup, undefined, "deactivate");
   assert(isDefined(level.street_bdog_front));
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     set_objective(level.obj_big_dogs, undefined, undefined, level.n_bdogs_killed);
+  }
 
   set_objective(level.obj_big_dogs, level.street_bdog_front, "destroy", -1);
   flag_wait("bdog_back_spawned");
@@ -175,28 +180,32 @@ street_move_remaining_ais() {
   a_street_ais = getaiarray("axis");
 
   foreach(ai_street in a_street_ais) {
-    if(ai_street.weapon != "dsr50_sp" && !ai_street is_rusher())
+    if(ai_street.weapon != "dsr50_sp" && !ai_street is_rusher()) {
       ai_street setgoalvolumeauto(e_street_volume);
+    }
   }
 }
 
 street_kill_extra_enemies() {
   ai_stair_sniper = getent("street_sniper_stair_ai", "targetname");
 
-  if(isalive(ai_stair_sniper))
+  if(isalive(ai_stair_sniper)) {
     ai_stair_sniper bloody_death();
+  }
 
   a_generic_ai = getEntArray("street_generic_ai", "targetname");
 
   foreach(ai_generic in a_generic_ai) {
-    if(isalive(ai_generic))
+    if(isalive(ai_generic)) {
       ai_generic bloody_death();
+    }
   }
 
   a_enemy_ais = getaiarray("axis");
 
-  while(a_enemy_ais.size > 6)
+  while(a_enemy_ais.size > 6) {
     wait 0.05;
+  }
 
   level notify("end_enemy_street_vo");
 }
@@ -241,11 +250,13 @@ street_claw(func_logic, attack_player) {
   wait_network_frame();
   self thread street_claw_vo_grenade();
 
-  if(isDefined(attack_player) && attack_player)
+  if(isDefined(attack_player) && attack_player) {
     self.favoriteenemy = level.player;
+  }
 
-  if(isDefined(func_logic))
+  if(isDefined(func_logic)) {
     self thread[[func_logic]]();
+  }
 
   self waittill("death");
   level.n_bdogs_killed++;
@@ -340,8 +351,9 @@ claw_front_track_death() {
   flag_set("bdog_front_dead");
   setmusicstate("LA_1B_STREET_CLAW_DEAD");
 
-  if(!flag("bdog_front_dead_friendlies_moved") && flag("bdog_front_claw_friendlies_moved"))
+  if(!flag("bdog_front_dead_friendlies_moved") && flag("bdog_front_claw_friendlies_moved")) {
     trigger_use("bdog_front_dead_friendlies_move");
+  }
 
   level thread autosave_by_name("claw_front_death");
 }
@@ -376,8 +388,9 @@ claw_back_track_death() {
   flag_set("bdog_back_dead");
   flag_wait("bdog_front_claw_friendlies_moved");
 
-  if(!flag("bdog_back_dead_friendlies_moved_to_plaza"))
+  if(!flag("bdog_back_dead_friendlies_moved_to_plaza")) {
     trigger_use("bdog_back_dead_move_friendlies_to_plaza");
+  }
 
   level thread autosave_by_name("claw_back_death");
 }
@@ -427,14 +440,16 @@ street_anim_entries() {
     add_generic_ai_to_scene(ai_generic, str_scene);
     flag_set("someone_near_hotel");
 
-    if(randomint(2) == 0)
+    if(randomint(2) == 0) {
       ai_generic thread queue_dialog("pmc0_they_re_in_the_killz_0");
+    }
 
     run_scene(str_scene);
     flag_clear("someone_near_hotel");
 
-    if(isalive(ai_generic))
+    if(isalive(ai_generic)) {
       ai_generic force_goal(undefined, 16);
+    }
   }
 }
 
@@ -458,8 +473,9 @@ street_hotdog_cart() {
   m_cart_dyn_path disconnectpaths();
   ai_cart_2 = getent("guy_push_cart_2_ai", "targetname");
 
-  if(isalive(ai_cart_2))
+  if(isalive(ai_cart_2)) {
     ai_cart_2 queue_dialog("pmc0_they_re_in_the_killz_0");
+  }
 }
 
 street_cart_listener() {
@@ -516,8 +532,9 @@ enemy_on_top_of_metro() {
     ai_climber = find_metro_climber();
     total_metro_guys++;
 
-    if(isDefined(ai_climber))
+    if(isDefined(ai_climber)) {
       ai_climber thread move_on_top_of_metro();
+    }
 
     wait 3;
   }
@@ -538,8 +555,9 @@ find_metro_climber() {
       continue;
     }
 
-    if(ai_enemy.weapon == "dsr50_sp")
+    if(ai_enemy.weapon == "dsr50_sp") {
       a_enemy_ais[n_key] = undefined;
+    }
   }
 
   arrayremovevalue(a_enemy_ais, undefined);
@@ -638,8 +656,9 @@ cougar_exit_cop_car() {
 cop_car_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
   m_ce_cop_car = getent("ce_cop_car", "script_noteworthy");
 
-  if(isDefined(e_inflictor) && isDefined(m_ce_cop_car) && m_ce_cop_car == e_inflictor)
+  if(isDefined(e_inflictor) && isDefined(m_ce_cop_car) && m_ce_cop_car == e_inflictor) {
     return 50;
+  }
 
   return n_damage;
 }
@@ -748,8 +767,9 @@ intersection_osprey() {
   intersection_osprey.delete_on_death = 1;
   intersection_osprey notify("death");
 
-  if(!isalive(intersection_osprey))
+  if(!isalive(intersection_osprey)) {
     intersection_osprey delete();
+  }
 }
 
 clear_the_street() {
@@ -777,8 +797,9 @@ setup_clear_the_street_ai() {
   wait 0.1;
   e_clear_street1 = get_ais_from_scene("clear_the_street_ter", "ter_clear_the_street");
 
-  if(isalive(e_clear_street1))
+  if(isalive(e_clear_street1)) {
     e_clear_street1 disable_long_death();
+  }
 
   a_clear_street = get_ais_from_scene("clear_street_ter_semi");
 
@@ -786,8 +807,9 @@ setup_clear_the_street_ai() {
     if(isalive(clear_guy)) {
       self.goalradius = 512;
 
-      if(isDefined(self.target))
+      if(isDefined(self.target)) {
         clear_guy setgoalnode(getnode(self.target, "targetname"));
+      }
 
       clear_guy disable_long_death();
     }
@@ -828,8 +850,9 @@ brute_force_fail() {
 semi_ammo_cache_think() {
   a_semi_caches = getEntArray("semi_ammo_cache", "script_noteworthy");
 
-  foreach(m_cache in a_semi_caches)
+  foreach(m_cache in a_semi_caches) {
   m_cache hide();
+  }
 
   flag_wait("fl_clear_the_street");
   wait 5;
@@ -851,8 +874,9 @@ street_veh_unload() {
   self playSound("evt_van_incoming");
   level notify("white_truck");
 
-  while(self getspeedmph() > 0)
+  while(self getspeedmph() > 0) {
     wait 0.05;
+  }
 
   m_fire_hydrant = getent("truck_hydrant", "script_noteworthy");
   m_fire_hydrant dodamage(m_fire_hydrant.health, m_fire_hydrant.origin, undefined, undefined, "riflebullet");
@@ -895,13 +919,15 @@ street_fire_hydrant() {
   n_cos_player_fov = cos(n_player_fov);
   level waittill("street_battle_started");
 
-  for(n_fh_dist_from_player = distance2dsquared(m_fire_hydrant.origin, level.player.origin); !level.player is_player_looking_at(m_fire_hydrant.origin, 1) && n_fh_dist_from_player > 65536; n_fh_dist_from_player = distance2dsquared(m_fire_hydrant.origin, level.player.origin))
+  for(n_fh_dist_from_player = distance2dsquared(m_fire_hydrant.origin, level.player.origin); !level.player is_player_looking_at(m_fire_hydrant.origin, 1) && n_fh_dist_from_player > 65536; n_fh_dist_from_player = distance2dsquared(m_fire_hydrant.origin, level.player.origin)) {
     wait 0.05;
+  }
 
   m_fire_hydrant dodamage(m_fire_hydrant.health, m_fire_hydrant.origin, undefined, undefined, "riflebullet");
 
-  while(!level.player is_player_looking_at(m_fire_hydrant.origin, 0.01) && n_fh_dist_from_player > 65536)
+  while(!level.player is_player_looking_at(m_fire_hydrant.origin, 0.01) && n_fh_dist_from_player > 65536) {
     wait 0.05;
+  }
 
   m_fire_hydrant dodamage(m_fire_hydrant.health, m_fire_hydrant.origin, undefined, undefined, "riflebullet");
 }
@@ -925,8 +951,9 @@ street_run_ahead_check() {
 player_skipped_claws() {
   trigger_wait("player_near_plaza");
 
-  if(!flag("bdog_noharper_dead") || !flag("bdog_front_dead") || !flag("bdog_back_dead"))
+  if(!flag("bdog_noharper_dead") || !flag("bdog_front_dead") || !flag("bdog_back_dead")) {
     drone_shoot_at_player_skipped_claws();
+  }
 }
 
 drone_shoot_at_player_skipped_claws() {
@@ -971,10 +998,12 @@ drone_shoot_at_player() {
 drone_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
   if(isDefined(e_inflictor.classname) && e_inflictor.classname == "script_vehicle") {
     if(e_inflictor.vehicletype == "heli_quadrotor") {
-      if(isDefined(e_inflictor.team) && e_inflictor.team == "allies")
+      if(isDefined(e_inflictor.team) && e_inflictor.team == "allies") {
         n_damage = 0;
-      else
+      }
+      else {
         n_damage = n_damage * 2;
+      }
     }
   }
 
@@ -1090,8 +1119,9 @@ street_vo_pmc_callouts() {
 harper_waittill_not_talking() {
   do_talk = 1;
 
-  if(isDefined(level.harper.is_talking) && level.harper.is_talking)
+  if(isDefined(level.harper.is_talking) && level.harper.is_talking) {
     do_talk = 0;
+  }
 
   return do_talk;
 }
@@ -1102,18 +1132,21 @@ street_claw_vo_player() {
   if(!flag("got_hit_by_claw")) {
     flag_set("got_hit_by_claw");
 
-    if(!flag("harper_dead"))
+    if(!flag("harper_dead")) {
       level.harper queue_dialog("pmc0_they_re_in_the_killz_0");
-    else
+    }
+    else {
       level.cop_1 queue_dialog("pmc0_they_re_in_the_killz_0");
+    }
 
     flag_clear("got_hit_by_claw");
   }
 }
 
 claw_vo_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
-  if(isDefined(e_attacker.weaponinfo) && isstring(e_attacker.weaponinfo) && e_attacker.weaponinfo == "bigdog_dual_turret")
+  if(isDefined(e_attacker.weaponinfo) && isstring(e_attacker.weaponinfo) && e_attacker.weaponinfo == "bigdog_dual_turret") {
     level thread street_claw_vo_player();
+  }
 
   return n_damage;
 }
@@ -1130,17 +1163,21 @@ street_claw_vo_grenade() {
       n_random = randomint(3);
 
       if(n_random == 0) {
-        if(!flag("harper_dead"))
+        if(!flag("harper_dead")) {
           level.harper priority_dialog("grenade_026");
+        }
       } else if(n_random == 1) {
-        if(!flag("harper_dead"))
+        if(!flag("harper_dead")) {
           level.harper priority_dialog("harp_move_section_0");
+        }
       } else if(n_random == 2) {
-        if(!flag("harper_dead"))
+        if(!flag("harper_dead")) {
           level.harper priority_dialog("get_outta_there_028");
+        }
       } else if(n_random == 3) {
-        if(!flag("harper_dead"))
+        if(!flag("harper_dead")) {
           level.harper priority_dialog("throw_it_back_029");
+        }
       }
     }
   }
@@ -1149,8 +1186,9 @@ street_claw_vo_grenade() {
 street_shellshock_and_visionset() {
   current_vision_set = level.player getvisionsetnaked();
 
-  if(current_vision_set == "")
+  if(current_vision_set == "") {
     current_vision_set = "default";
+  }
 
   visionsetnaked("sp_la_1b_crash_exit");
   wait 1;
@@ -1229,8 +1267,9 @@ init_attackdrones_start_ai() {
 }
 
 follow_player(follow_close) {
-  if(!isDefined(follow_close))
+  if(!isDefined(follow_close)) {
     follow_close = 0;
+  }
 
   self endon("death");
   self endon("stop_follow");
@@ -1239,10 +1278,12 @@ follow_player(follow_close) {
     v_goal = level.player.origin + vectornormalize(anglesToForward(level.player.angles)) * 300;
     self defend(v_goal, 300);
 
-    if(follow_close)
+    if(follow_close) {
       wait 0.5;
-    else
+    }
+    else {
       wait 3;
+    }
   }
 }
 
@@ -1265,8 +1306,9 @@ street_quadrotors() {
 
   scene_wait("cougar_exit_player");
 
-  if(!(isDefined(level.la_fire_direction_inited) && level.la_fire_direction_inited))
+  if(!(isDefined(level.la_fire_direction_inited) && level.la_fire_direction_inited)) {
     level.player maps\_fire_direction::init_fire_direction();
+  }
 }
 
 turn_on_quad_sounds() {

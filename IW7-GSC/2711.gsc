@@ -37,8 +37,9 @@ func_0118(var_00, var_01, var_02, var_03) {
 }
 
 onweapondamage(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return;
+  }
   else if(var_02 == "MOD_IMPACT") {
     return;
   }
@@ -58,8 +59,9 @@ func_20BF(var_00, var_01) {
 
   var_04 = 1 - distance(self.origin, var_0.origin) / 512;
 
-  if(var_04 < 0)
+  if(var_04 < 0) {
     var_04 = 0;
+  }
 
   var_05 = var_02 + var_03 * var_04;
   var_05 = scripts\mp\perks\perkfunctions::applystunresistence(var_01, self, var_05);
@@ -74,16 +76,18 @@ func_20BF(var_00, var_01) {
 
 func_20C3(var_00, var_01) {
   if(!scripts\mp\killstreaks\emp_common::func_FFC5()) {
-    if(var_01 != self)
+    if(var_01 != self) {
       var_01 scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
+    }
 
     return;
   }
 
   var_02 = 3;
 
-  if(self == var_01)
+  if(self == var_01) {
     var_02 = 1;
+  }
 
   scripts\mp\killstreaks\emp_common::func_20C7(var_02);
   thread scripts\mp\gamescore::func_11ACF(var_01, self, "emp_grenade_mp", var_02);
@@ -97,17 +101,21 @@ func_A639(var_00) {
 }
 
 func_B92C(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(var_03) || !isDefined(var_04) || !isDefined(var_01) || !isDefined(var_02))
+  if(!isDefined(var_03) || !isDefined(var_04) || !isDefined(var_01) || !isDefined(var_02)) {
     return var_00;
+  }
 
-  if(var_04 != "concussion_grenade_mp" && var_04 != "emp_grenade_mp")
+  if(var_04 != "concussion_grenade_mp" && var_04 != "emp_grenade_mp") {
     return var_00;
+  }
 
-  if(var_01 != var_02)
+  if(var_01 != var_02) {
     return var_00;
+  }
 
-  if(distancesquared(var_2.origin, var_3.origin) <= 65536)
+  if(distancesquared(var_2.origin, var_3.origin) <= 65536) {
     return var_00;
+  }
 
   return 0;
 }

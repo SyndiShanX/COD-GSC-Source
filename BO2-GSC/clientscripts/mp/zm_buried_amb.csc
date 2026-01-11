@@ -128,23 +128,27 @@ init_audio_snapshot_clientfields() {
 }
 
 audio_snapshot_clientfield_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     playloopat(fieldname, (0, 0, 0));
-  else
+  }
+  else {
     stoploopat(fieldname, (0, 0, 0));
+  }
 }
 
 add_fxanim_stop_loop(fieldname, soundname, origin, start_sound_on_register) {
-  if(!isDefined(start_sound_on_register))
+  if(!isDefined(start_sound_on_register)) {
     start_sound_on_register = 1;
+  }
 
   s = spawnStruct();
   s.soundname = soundname;
   s.origin = origin;
   level.fxanim_stop_loops[fieldname] = s;
 
-  if(start_sound_on_register)
+  if(start_sound_on_register) {
     playloopat(s.soundname, s.origin);
+  }
 }
 
 add_fxanim_start_loop(fieldname, soundname, origin) {
@@ -158,17 +162,21 @@ fxanim_loop_audio(fieldname, val) {
   if(isDefined(level.fxanim_stop_loops[fieldname])) {
     s = level.fxanim_stop_loops[fieldname];
 
-    if(val)
+    if(val) {
       stoploopat(s.soundname, s.origin);
-    else
+    }
+    else {
       playloopat(s.soundname, s.origin);
+    }
   } else if(isDefined(level.fxanim_start_loops[fieldname])) {
     s = level.fxanim_start_loops[fieldname];
 
-    if(val)
+    if(val) {
       playloopat(s.soundname, s.origin);
-    else
+    }
+    else {
       stoploopat(s.soundname, s.origin);
+    }
   }
 }
 
@@ -252,8 +260,9 @@ sndslidewoodaudio(calling_trig) {
   trig = getent(0, "sndWoodStop", "targetname");
   trig waittill("trigger", who);
 
-  if(who == self)
+  if(who == self) {
     self playSound(0, "zmb_slide_woodstop");
+  }
 }
 
 snd_play_loopers() {
@@ -315,8 +324,9 @@ snd_start_autofx_audio() {
 }
 
 sndbackgroundtrack(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(!isDefined(self.sndbackgroundtrack))
+  if(!isDefined(self.sndbackgroundtrack)) {
     self.sndbackgroundtrack = spawn(0, (0, 0, 0), "script_origin");
+  }
 
   if(newval == oldval) {
     return;

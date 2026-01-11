@@ -106,4 +106,3 @@ debug_star(origin, seconds, color) {
   frames = int(20 * seconds);
   debugstar(origin, frames, color);
 }
-

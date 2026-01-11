@@ -61,8 +61,9 @@ main() {
   level thread snow();
   var_0 = getEntArray("sn_fan", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread rotatefan();
+  }
 }
 
 snow() {

@@ -18,8 +18,9 @@ chill_init() {
 }
 
 chill(var_00, var_01) {
-  if(!isDefined(self.chill_data))
+  if(!isDefined(self.chill_data)) {
     self.chill_data = spawnStruct();
+  }
 
   var_02 = self.chill_data;
   thread chill_blind();
@@ -37,8 +38,9 @@ chill(var_00, var_01) {
     self setscriptablepartstate("chilled", "active", 0);
     thread chill_update();
   } else {
-    if(!isDefined(var_2.times[var_00]))
+    if(!isDefined(var_2.times[var_00])) {
       var_2.active++;
+    }
 
     var_01 = var_01 * 1000;
     var_03 = gettime();
@@ -74,8 +76,9 @@ chill_resetdata() {
 chill_resetscriptable() {
   self setscriptablepartstate("chilled", "neutral", 0);
 
-  foreach(var_01 in level.chill_data.blindparts)
+  foreach(var_01 in level.chill_data.blindparts) {
   self setscriptablepartstate(var_01, "neutral", 0);
+  }
 }
 
 chill_impair() {
@@ -83,8 +86,9 @@ chill_impair() {
   scripts\engine\utility::allow_slide(0);
   scripts\engine\utility::allow_wallrun(0);
 
-  if(!level.tactical)
+  if(!level.tactical) {
     scripts\engine\utility::allow_doublejump(0);
+  }
 
   scripts\engine\utility::allow_mantle(0);
 }
@@ -94,8 +98,9 @@ chill_impairend() {
   scripts\engine\utility::allow_slide(1);
   scripts\engine\utility::allow_wallrun(1);
 
-  if(!level.tactical)
+  if(!level.tactical) {
     scripts\engine\utility::allow_doublejump(1);
+  }
 
   scripts\engine\utility::allow_mantle(1);
 }
@@ -120,8 +125,9 @@ chill_blind() {
     }
     var_07 = var_1.blindparts[var_02];
 
-    if(var_07 != var_04)
+    if(var_07 != var_04) {
       self setscriptablepartstate(var_07, "neutral", 0);
+    }
 
     self setscriptablepartstate(var_04, var_05, 0);
     var_0.func_2B9B = var_03;
@@ -153,8 +159,9 @@ chill_update() {
         var_08 = var_01 - var_05;
         var_09 = 1 - var_08 / var_07;
 
-        if(var_09 > var_02)
+        if(var_09 > var_02) {
           var_02 = var_09;
+        }
 
         continue;
       }

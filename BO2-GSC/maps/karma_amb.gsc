@@ -22,14 +22,17 @@ vtol_doors_open(brah) {
 }
 
 advertisements() {
-  if(self.script_noteworthy == "solar")
+  if(self.script_noteworthy == "solar") {
     self playLoopSound("vox_ads_1_01_005a_pa");
+  }
 
-  if(self.script_noteworthy == "mall")
+  if(self.script_noteworthy == "mall") {
     self playLoopSound("vox_ads_1_01_003a_pa");
+  }
 
-  if(self.script_noteworthy == "pool")
+  if(self.script_noteworthy == "pool") {
     self playLoopSound("vox_ads_1_01_006a_pa");
+  }
 
   self waittill("damage");
   self stoploopsound();

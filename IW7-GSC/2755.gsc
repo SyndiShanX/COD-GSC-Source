@@ -88,8 +88,9 @@ updatemissionteamperformancestats() {
 func_AE1D(var_00) {
   var_01 = func_B02D(var_00);
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return undefined;
+  }
 
   var_02 = spawnStruct();
   var_2.ref = var_01;
@@ -112,8 +113,9 @@ func_AE1D(var_00) {
 func_B02D(var_00) {
   var_01 = tablelookup("mp\intelChallenges.csv", 0, var_00, 1);
 
-  if(!isDefined(var_01) || var_01 == "")
+  if(!isDefined(var_01) || var_01 == "") {
     return undefined;
+  }
 
   return var_01;
 }
@@ -121,8 +123,9 @@ func_B02D(var_00) {
 func_B02E(var_00, var_01) {
   var_02 = tablelookup("mp\intelChallenges.csv", 0, var_00, 5 + var_01 * 2);
 
-  if(!isDefined(var_02) || var_02 == "")
+  if(!isDefined(var_02) || var_02 == "") {
     return undefined;
+  }
 
   return int(var_02);
 }
@@ -130,8 +133,9 @@ func_B02E(var_00, var_01) {
 setwaypoint(var_00, var_01) {
   var_02 = self.pers["intelChallengeInfo"];
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_03 = var_02;
+  }
   else {
     var_03 = func_AE1D(var_00);
     self setrankedplayerdata("mp", "activeMissionComplete", -1);
@@ -169,8 +173,9 @@ func_F75C() {
     self setrankedplayerdata("mp", "missionsCompleted", var_01 + 1);
   }
 
-  if(var_0.func_4C0D == var_0.func_118A7.size - 1)
+  if(var_0.func_4C0D == var_0.func_118A7.size - 1) {
     self notify("intel_max_tier_complete");
+  }
 
   thread scripts\mp\hud_message::showsplash("intel_completed_" + (var_0.func_4C0D + 1) + "_team_" + var_0.func_B8D4);
   var_0.func_4C0D++;
@@ -178,11 +183,13 @@ func_F75C() {
 }
 
 func_9E94() {
-  if(!isDefined(self.func_9978))
+  if(!isDefined(self.func_9978)) {
     return 0;
+  }
 
-  if(self.func_9978.func_4C0D < self.func_9978.func_118A7.size)
+  if(self.func_9978.func_4C0D < self.func_9978.func_118A7.size) {
     return 0;
+  }
 
   return 1;
 }
@@ -190,8 +197,9 @@ func_9E94() {
 func_BA09() {
   level waittill("round_switch");
 
-  if(isDefined(self.func_9978))
+  if(isDefined(self.func_9978)) {
     self.pers["intelChallengeInfo"] = self.func_9978;
+  }
 }
 
 func_9884(var_00) {

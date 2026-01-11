@@ -37,11 +37,13 @@ func_1290D(var_00, var_01) {
 }
 
 func_130F5(var_00, var_01) {
-  if(scripts\mp\utility\game::isusingremote() || self isusingturret())
+  if(scripts\mp\utility\game::isusingremote() || self isusingturret()) {
     return 0;
+  }
 
-  if(isDefined(self.underwater) && self.underwater)
+  if(isDefined(self.underwater) && self.underwater) {
     return 0;
+  }
 
   if(exceededmaxvanguards(self.team) || level.littlebirds.size >= 4) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
@@ -67,10 +69,12 @@ func_130F5(var_00, var_01) {
 }
 
 exceededmaxvanguards(var_00) {
-  if(level.teambased)
+  if(level.teambased) {
     return isDefined(level.remote_uav[var_00]);
-  else
+  }
+  else {
     return isDefined(level.remote_uav[var_00]) || isDefined(level.remote_uav[level.otherteam[var_00]]);
+  }
 }
 
 func_6CCC(var_00, var_01) {
@@ -80,49 +84,58 @@ func_6CCC(var_00, var_01) {
   var_05 = var_04 + (0, 0, var_01);
   var_06 = var_05 + var_00 * var_02;
 
-  if(func_3E5C(var_04, var_06))
+  if(func_3E5C(var_04, var_06)) {
     return var_06;
+  }
 
   var_06 = var_05 - var_00 * var_02;
 
-  if(func_3E5C(var_04, var_06))
+  if(func_3E5C(var_04, var_06)) {
     return var_06;
+  }
 
   var_06 = var_06 + var_00 * var_03;
 
-  if(func_3E5C(var_04, var_06))
+  if(func_3E5C(var_04, var_06)) {
     return var_06;
+  }
 
   var_06 = var_05 - var_00 * var_03;
 
-  if(func_3E5C(var_04, var_06))
+  if(func_3E5C(var_04, var_06)) {
     return var_06;
+  }
 
   var_06 = var_05;
 
-  if(func_3E5C(var_04, var_06))
+  if(func_3E5C(var_04, var_06)) {
     return var_06;
+  }
 
   scripts\engine\utility::waitframe();
   var_06 = var_05 + 0.707 * var_00 * (var_02 + var_03);
 
-  if(func_3E5C(var_04, var_06))
+  if(func_3E5C(var_04, var_06)) {
     return var_06;
+  }
 
   var_06 = var_05 + 0.707 * var_00 * (var_02 - var_03);
 
-  if(func_3E5C(var_04, var_06))
+  if(func_3E5C(var_04, var_06)) {
     return var_06;
+  }
 
   var_06 = var_05 + 0.707 * var_00 * (var_03 - var_02);
 
-  if(func_3E5C(var_04, var_06))
+  if(func_3E5C(var_04, var_06)) {
     return var_06;
+  }
 
   var_06 = var_05 + 0.707 * var_00 * (-1 * var_02 - var_03);
 
-  if(func_3E5C(var_04, var_06))
+  if(func_3E5C(var_04, var_06)) {
     return var_06;
+  }
 
   return undefined;
 }
@@ -130,8 +143,9 @@ func_6CCC(var_00, var_01) {
 func_3E5C(var_00, var_01) {
   var_02 = 0;
 
-  if(capsuletracepassed(var_01, 20, 40.01, undefined, 1, 1))
+  if(capsuletracepassed(var_01, 20, 40.01, undefined, 1, 1)) {
     var_02 = bullettracepassed(var_00, var_01, 0, undefined);
+  }
 
   return var_02;
 }
@@ -145,8 +159,9 @@ setturretcanaidetach(var_00, var_01, var_02) {
     if(!isDefined(var_03)) {
       var_03 = func_6CCC(80, 35);
 
-      if(!isDefined(var_03))
+      if(!isDefined(var_03)) {
         var_03 = func_6CCC(80, 0);
+      }
     }
   }
 
@@ -154,8 +169,9 @@ setturretcanaidetach(var_00, var_01, var_02) {
     var_04 = self.angles;
     var_05 = func_4A30(var_00, self, var_01, var_03, var_04, var_02);
 
-    if(!isDefined(var_05))
+    if(!isDefined(var_05)) {
       scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+    }
 
     return var_05;
   } else {
@@ -169,8 +185,9 @@ func_10E0A(var_00, var_01, var_02) {
   scripts\mp\utility\game::freezecontrolswrapper(1);
   self.restoreangles = self.angles;
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(0);
+  }
 
   thread watchintrocleared(var_00);
   var_03 = scripts\mp\killstreaks\killstreaks::initridekillstreak("vanguard");
@@ -193,8 +210,9 @@ func_10E0A(var_00, var_01, var_02) {
 }
 
 func_1316F(var_00) {
-  if(!isDefined(var_0.lasttouchedplatform.destroydroneoncollision) || var_0.lasttouchedplatform.destroydroneoncollision || !isDefined(self.func_108D4) || gettime() > self.func_108D4)
+  if(!isDefined(var_0.lasttouchedplatform.destroydroneoncollision) || var_0.lasttouchedplatform.destroydroneoncollision || !isDefined(self.func_108D4) || gettime() > self.func_108D4) {
     thread handledeathdamage(undefined, undefined, undefined, undefined);
+  }
   else {
     wait 1.0;
     thread scripts\mp\movers::handle_moving_platform_touch(var_00);
@@ -204,8 +222,9 @@ func_1316F(var_00) {
 func_4A30(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 = spawnhelicopter(var_01, var_03, var_04, "remote_uav_mp", "veh_mil_air_un_pocketdrone_mp");
 
-  if(!isDefined(var_06))
+  if(!isDefined(var_06)) {
     return undefined;
+  }
 
   var_06 scripts\mp\killstreaks\helicopter::addtolittlebirdlist();
   var_06 thread scripts\mp\killstreaks\helicopter::func_E111();
@@ -226,8 +245,9 @@ func_4A30(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_6.owner = var_01;
   var_06 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var_01);
 
-  if(issentient(var_06))
+  if(issentient(var_06)) {
     var_06 setthreatbiasgroup("DogsDontAttack");
+  }
 
   var_6.health = 999999;
   var_6.maxhealth = 750;
@@ -293,8 +313,9 @@ watchintrocleared(var_00) {
   thread func_1317C(var_00);
   var_00 thread func_13175();
 
-  if(!level.hardcoremode)
+  if(!level.hardcoremode) {
     var_00 thread func_13176();
+  }
 
   thread watchhostmigrationfinishedinit(var_00);
   scripts\mp\utility\game::freezecontrolswrapper(0);
@@ -313,8 +334,9 @@ func_1316C(var_00) {
   var_00 thread scripts\mp\killstreaks\killstreaks::allowridekillstreakplayerexit();
   var_00 waittill("killstreakExit");
 
-  if(isDefined(var_0.owner))
+  if(isDefined(var_0.owner)) {
     var_0.owner scripts\mp\utility\game::leaderdialogonplayer("gryphon_gone");
+  }
 
   var_00 notify("death");
 }
@@ -325,8 +347,9 @@ func_1317C(var_00) {
   var_00 endon("death");
   var_00 endon("end_remote");
 
-  while(!isDefined(var_0.attackarrow))
+  while(!isDefined(var_0.attackarrow)) {
     wait 0.05;
+  }
 
   var_00 setotherent(var_0.attackarrow);
   var_00 setturrettargetent(var_0.attackarrow);
@@ -339,8 +362,9 @@ func_1317A(var_00) {
   var_00 endon("end_remote");
 
   for(;;) {
-    if(var_00 scripts\mp\utility\game::touchingbadtrigger("gryphon"))
+    if(var_00 scripts\mp\utility\game::touchingbadtrigger("gryphon")) {
       var_00 notify("damage", 1019, self, self.angles, self.origin, "MOD_EXPLOSIVE", undefined, undefined, undefined, undefined, "c4_mp");
+    }
 
     self.func_AEF8 = var_0.attackarrow.origin;
     scripts\engine\utility::waitframe();
@@ -396,11 +420,13 @@ isdualwielding(var_00, var_01) {
   var_05 = var_02 + var_04 * 15000;
   var_06 = bulletTrace(var_02, var_05, 0, var_01);
 
-  if(var_6["surfacetype"] == "none")
+  if(var_6["surfacetype"] == "none") {
     return undefined;
+  }
 
-  if(var_6["surfacetype"] == "default")
+  if(var_6["surfacetype"] == "default") {
     return undefined;
+  }
 
   var_07 = var_6["entity"];
   var_08 = [];
@@ -425,8 +451,9 @@ func_1316A(var_00) {
     if(isDefined(level.hostmigrationtimer)) {
       continue;
     }
-    if(isDefined(self.func_AEF8) && gettime() >= var_0.func_6D7F)
+    if(isDefined(self.func_AEF8) && gettime() >= var_0.func_6D7F) {
       self thread[[level.func_1317F]](var_00, self.func_AEF8);
+    }
   }
 }
 
@@ -509,19 +536,22 @@ getturrettarget(var_00, var_01) {
   var_04 = rotatevector(var_03, (0, 25, 0));
   var_05 = var_01 + var_04 * var_02;
 
-  if(func_9FE6(var_05, var_01))
+  if(func_9FE6(var_05, var_01)) {
     return var_05;
+  }
 
   var_04 = rotatevector(var_03, (0, -25, 0));
   var_05 = var_01 + var_04 * var_02;
 
-  if(func_9FE6(var_05, var_01))
+  if(func_9FE6(var_05, var_01)) {
     return var_05;
+  }
 
   var_05 = var_01 + var_03 * var_02;
 
-  if(func_9FE6(var_05, var_01))
+  if(func_9FE6(var_05, var_01)) {
     return var_05;
+  }
 
   return var_01 + (0, 0, 3000);
 }
@@ -529,8 +559,9 @@ getturrettarget(var_00, var_01) {
 func_9FE6(var_00, var_01) {
   var_02 = bulletTrace(var_00, var_01, 0);
 
-  if(var_2["fraction"] > 0.99)
+  if(var_2["fraction"] > 0.99) {
     return 1;
+  }
 
   return 0;
 }
@@ -560,12 +591,15 @@ func_1317D() {
           thread func_13173();
         }
 
-        if(isDefined(self.heliinproximity))
+        if(isDefined(self.heliinproximity)) {
           var_01 = distance(self.origin, self.heliinproximity.origin);
-        else if(isDefined(level.func_5618))
+        }
+        else if(isDefined(level.func_5618)) {
           var_01 = 467.5;
-        else
+        }
+        else {
           var_01 = distance(self.origin, var_00);
+        }
 
         var_02 = getentityvelocity(var_01);
         self.owner setclientomnvar("ui_vanguard", var_02);
@@ -596,25 +630,31 @@ getentityvelocity(var_00) {
 }
 
 vanguard_in_range() {
-  if(!isDefined(level.func_13183) || !isDefined(level.func_13180))
+  if(!isDefined(level.func_13183) || !isDefined(level.func_13180)) {
     return 0;
+  }
 
-  if(isDefined(self.inheliproximity) && self.inheliproximity)
+  if(isDefined(self.inheliproximity) && self.inheliproximity) {
     return 0;
+  }
 
-  if(isDefined(level.func_5618))
+  if(isDefined(level.func_5618)) {
     return 0;
+  }
 
   if(isDefined(level.func_13182[0])) {
     foreach(var_01 in level.func_13182) {
-      if(self istouching(var_01))
+      if(self istouching(var_01)) {
         return 0;
+      }
     }
 
-    if(level.func_9C46)
+    if(level.func_9C46) {
       return self.origin[2] < level.func_13180;
-    else
+    }
+    else {
       return 1;
+    }
   } else if(distance2dsquared(self.origin, level.mapcenter) < level.func_13183 && self.origin[2] < level.func_13180)
     return 1;
 
@@ -625,10 +665,12 @@ func_13173() {
   self endon("death");
   self endon("in_range");
 
-  if(isDefined(self.heliinproximity))
+  if(isDefined(self.heliinproximity)) {
     var_00 = 3;
-  else
+  }
+  else {
     var_00 = 6;
+  }
 
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
   self notify("death", "range_death");
@@ -645,8 +687,9 @@ func_1316E(var_00, var_01) {
   var_02 = 60;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_02);
 
-  if(isDefined(var_0.owner))
+  if(isDefined(var_0.owner)) {
     var_0.owner scripts\mp\utility\game::leaderdialogonplayer("gryphon_gone");
+  }
 
   var_00 notify("death");
 }
@@ -662,8 +705,9 @@ func_13169(var_00) {
   var_00 playSound("ball_drone_explode");
   var_01 delete();
 
-  if(isDefined(var_0.func_1155D))
+  if(isDefined(var_0.func_1155D)) {
     var_0.func_1155D delete();
+  }
 
   vanguard_endride(var_0.owner, var_00);
 }
@@ -685,8 +729,9 @@ vanguard_endride(var_00, var_01) {
   level.remote_uav[var_1.team] = undefined;
   scripts\mp\utility::decrementfauxvehiclecount();
 
-  if(isDefined(var_1.killcament))
+  if(isDefined(var_1.killcament)) {
     var_1.killcament delete();
+  }
 
   var_1.attackarrow delete();
   var_01 delete();
@@ -705,8 +750,9 @@ func_13174(var_00, var_01) {
   var_00 func_E2E5();
   var_00 setclientomnvar("ui_vanguard", 0);
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     var_00 scripts\mp\utility\game::setthirdpersondof(1);
+  }
 
   var_00 cameraunlink(var_01);
   var_00 remotecontrolvehicleoff(var_01);
@@ -751,8 +797,9 @@ func_1317E() {
       }
     }
 
-    if(!self.inheliproximity && var_00)
+    if(!self.inheliproximity && var_00) {
       self.inheliproximity = 1;
+    }
     else if(self.inheliproximity && !var_00) {
       self.inheliproximity = 0;
       self.heliinproximity = undefined;
@@ -782,8 +829,9 @@ func_1317B() {
   for(;;) {
     self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
 
-    if(isDefined(self.parent))
+    if(isDefined(self.parent)) {
       self.parent scripts\mp\damage::monitordamageoneshot(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, "remote_uav", ::handledeathdamage, ::modifydamage, 1);
+    }
   }
 }
 
@@ -794,8 +842,9 @@ modifydamage(var_00, var_01, var_02, var_03) {
   var_04 = scripts\mp\damage::handlegrenadedamage(var_01, var_02, var_04);
   var_04 = scripts\mp\damage::handleapdamage(var_01, var_02, var_04);
 
-  if(var_02 == "MOD_MELEE")
+  if(var_02 == "MOD_MELEE") {
     var_04 = self.maxhealth * 0.34;
+  }
 
   playfxontagforclients(level.vanguard_fx["hit"], self, "tag_origin", self.owner);
 
@@ -808,8 +857,9 @@ modifydamage(var_00, var_01, var_02, var_03) {
 }
 
 handledeathdamage(var_00, var_01, var_02, var_03) {
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner scripts\mp\utility\game::leaderdialogonplayer("gryphon_destroyed");
+  }
 
   scripts\mp\damage::onkillstreakkilled("vanguard", var_00, var_01, var_02, var_03, "destroyed_vanguard", undefined, "callout_destroyed_vanguard");
 

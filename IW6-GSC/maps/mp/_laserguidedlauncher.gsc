@@ -488,10 +488,12 @@ LGM_targetNotifyMissiles(targetVeh, attacker, missiles) {
 LGM_getTargetOffset(target) {
   targetPoint = undefined;
 
-  if(target.model != "vehicle_av8b_harrier_jet_mp")
+  if(target.model != "vehicle_av8b_harrier_jet_mp") {
     targetPoint = target GetTagOrigin("tag_missile_target");
-  else
+  }
+  else {
     targetPoint = target GetTagOrigin("tag_body");
+  }
 
   if(!isDefined(targetPoint)) {
     targetPoint = target GetPointInBounds(0, 0, 0);

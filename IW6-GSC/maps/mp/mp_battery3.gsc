@@ -431,11 +431,13 @@ debugEvents() {
 
 checkDbgDvar(dvarName, callback, notifyStr) {
   if(GetDvarInt(dvarName) > 0) {
-    if(isDefined(callback))
+    if(isDefined(callback)) {
       [[callback]](GetDvarInt(dvarName));
+    }
 
-    if(isDefined(notifyStr))
+    if(isDefined(notifyStr)) {
       level notify(notifyStr);
+    }
 
     SetDvar(dvarName, 0);
   }
@@ -451,8 +453,9 @@ dbgTemple(repeats) {
   while(repeats != 0) {
     pre = getEntArray("temple_pre", "targetname");
     foreach(chunk in pre) {
-      if(isDefined(chunk.clip))
+      if(isDefined(chunk.clip)) {
         chunk blockPath();
+      }
     }
 
     setupTemple();

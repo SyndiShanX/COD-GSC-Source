@@ -15,8 +15,9 @@ setDeadQuote() {
   level endon("new_quote_string");
 
   // player can be dead if the player died at the same point that setDeadQuote was called from another script
-  if(isalive(level.player))
+  if(isalive(level.player)) {
     level.player waittill("death");
+  }
 
   if(!level.missionfailed) {
     deadQuoteSize = (Int(TableLookup("sp/deathQuoteTable.csv", 1, "size", 0)));
@@ -24,16 +25,18 @@ setDeadQuote() {
 
     // This is used for testing
     if(GetDvar("cycle_deathquotes") != "") {
-      if(GetDvar("ui_deadquote_index") == "")
+      if(GetDvar("ui_deadquote_index") == "") {
         SetDvar("ui_deadquote_index", "0");
+      }
 
       deadQuoteIndex = GetDvarInt("ui_deadquote_index");
 
       SetDvar("ui_deadquote", lookupDeathQuote(deadQuoteIndex));
 
       deadQuoteIndex++;
-      if(deadQuoteIndex > (deadQuoteSize - 1))
+      if(deadQuoteIndex > (deadQuoteSize - 1)) {
         deadQuoteIndex = 0;
+      }
 
       SetDvar("ui_deadquote_index", deadQuoteIndex);
     } else {
@@ -62,10 +65,12 @@ setDeadQuote_so() {
     while(keep_searching) {
       if(deadquote_recently_used(deadquotes[i])) {
         i++;
-        if(i >= deadquotes.size)
+        if(i >= deadquotes.size) {
           i = 0;
-        if(i == original_i)
+        }
+        if(i == original_i) {
           keep_searching = false;
+        }
       } else {
         keep_searching = false;
       }
@@ -103,21 +108,25 @@ setDeadQuote_so() {
 }
 
 deadquote_recently_used(deadquote) {
-  if(deadquote == getdvar("ui_deadquote_v1"))
+  if(deadquote == getdvar("ui_deadquote_v1")) {
     return true;
+  }
 
-  if(deadquote == getdvar("ui_deadquote_v2"))
+  if(deadquote == getdvar("ui_deadquote_v2")) {
     return true;
+  }
 
-  if(deadquote == getdvar("ui_deadquote_v3"))
+  if(deadquote == getdvar("ui_deadquote_v3")) {
     return true;
+  }
 
   return false;
 }
 
 so_buildDeadQuote() {
-  if(should_use_custom_deadquotes())
+  if(should_use_custom_deadquotes()) {
     return level.so_deadquotes;
+  }
 
   deadquotes = [];
   deadquotes[deadquotes.size] = "@DEADQUOTE_SO_TRY_NEW_DIFFICULTY";
@@ -147,11 +156,13 @@ so_buildDeadQuote() {
 }
 
 should_use_custom_deadquotes() {
-  if(!isDefined(level.so_deadquotes))
+  if(!isDefined(level.so_deadquotes)) {
     return false;
+  }
 
-  if(level.so_deadquotes.size <= 0)
+  if(level.so_deadquotes.size <= 0) {
     return false;
+  }
 
   assertex(isDefined(level.so_deadquotes_chance), "level.so_deadquotes had contents, but level.so_deadquote_chance was undefined.");
 

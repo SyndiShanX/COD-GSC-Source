@@ -42,11 +42,13 @@ init() {
   game["dialog"]["last_alive"] = "lastalive";
   game["dialog"]["boost"] = "boost";
 
-  if(!isDefined(game["dialog"]["offense_obj"]))
+  if(!isDefined(game["dialog"]["offense_obj"])) {
     game["dialog"]["offense_obj"] = "boost";
+  }
 
-  if(!isDefined(game["dialog"]["defense_obj"]))
+  if(!isDefined(game["dialog"]["defense_obj"])) {
     game["dialog"]["defense_obj"] = "boost";
+  }
 
   game["dialog"]["hardcore"] = "hardcore";
   game["dialog"]["highspeed"] = "highspeed";
@@ -146,27 +148,33 @@ onplayerspawned() {
 
   if(getdvar("virtuallobbyactive") == "0") {
     if(!level.splitscreen || level.splitscreen && !isDefined(level.playedstartingmusic)) {
-      if(!maps\mp\_utility::issecondarysplitscreenplayer())
+      if(!maps\mp\_utility::issecondarysplitscreenplayer()) {
         self playlocalsound(game["music"]["spawn_" + self.team]);
+      }
 
-      if(level.splitscreen)
+      if(level.splitscreen) {
         level.playedstartingmusic = 1;
+      }
     }
 
     if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
-      if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies")
+      if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies") {
         maps\mp\_utility::leaderdialogonplayer("allies_gametype");
-      else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis")
+      }
+      else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
         maps\mp\_utility::leaderdialogonplayer("axis_gametype");
-      else if(!maps\mp\_utility::issecondarysplitscreenplayer())
+      }
+      else if(!maps\mp\_utility::issecondarysplitscreenplayer()) {
         maps\mp\_utility::leaderdialogonplayer("gametype");
+      }
     }
 
     maps\mp\_utility::gameflagwait("prematch_done");
 
     if(self.team == game["attackers"]) {
-      if(!maps\mp\_utility::issecondarysplitscreenplayer())
+      if(!maps\mp\_utility::issecondarysplitscreenplayer()) {
         maps\mp\_utility::leaderdialogonplayer("offense_obj", "introboost");
+      }
     } else if(!maps\mp\_utility::issecondarysplitscreenplayer())
       maps\mp\_utility::leaderdialogonplayer("defense_obj", "introboost");
   }
@@ -223,10 +231,12 @@ ongameended() {
 
   if(level.teambased) {
     if(level.splitscreen) {
-      if(var_0 == "allies")
+      if(var_0 == "allies") {
         maps\mp\_utility::playsoundonplayers(game["music"]["victory_allies"], "allies");
-      else if(var_0 == "axis")
+      }
+      else if(var_0 == "axis") {
         maps\mp\_utility::playsoundonplayers(game["music"]["victory_axis"], "axis");
+      }
       else {
         maps\mp\_utility::playsoundonplayers(game["music"]["defeat_allies"], "allies");
         maps\mp\_utility::playsoundonplayers(game["music"]["defeat_axis"], "axis");
@@ -256,8 +266,9 @@ ongameended() {
         continue;
       }
 
-      if(!level.splitscreen)
+      if(!level.splitscreen) {
         var_2 playlocalsound(game["music"]["defeat_" + var_2.pers["team"]]);
+      }
     }
   }
 }
@@ -266,8 +277,9 @@ roundwinnerdialog() {
   level waittill("round_win", var_0);
   var_1 = level.roundenddelay / 4;
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     wait(var_1);
+  }
 
   if(!isDefined(var_0) || isplayer(var_0)) {
     return;
@@ -285,8 +297,9 @@ gamewinnerdialog() {
   level waittill("game_win", var_0);
   var_1 = level.postroundtime / 2;
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     wait(var_1);
+  }
 
   if(!isDefined(var_0) || isplayer(var_0)) {
     return;
@@ -295,8 +308,9 @@ gamewinnerdialog() {
     maps\mp\_utility::leaderdialog("mission_success", "allies");
     maps\mp\_utility::leaderdialog("mission_failure", "axis");
   } else if(var_0 == "axis") {
-    if(isDefined(level.ishorde))
+    if(isDefined(level.ishorde)) {
       [[level.hordevomissionfail]]();
+    }
     else {
       maps\mp\_utility::leaderdialog("mission_success", "axis");
       maps\mp\_utility::leaderdialog("mission_failure", "allies");
@@ -308,8 +322,9 @@ gamewinnerdialog() {
 musiccontroller() {
   level endon("game_ended");
 
-  if(!level.hardcoremode && getdvar("virtualLobbyActive") == "0")
+  if(!level.hardcoremode && getdvar("virtualLobbyActive") == "0") {
     thread suspensemusic();
+  }
 
   level waittill("match_ending_soon", var_0);
 
@@ -335,8 +350,9 @@ musiccontroller() {
             maps\mp\_utility::leaderdialog("losing_time", "allies");
           }
         } else {
-          if(!level.hardcoremode)
+          if(!level.hardcoremode) {
             maps\mp\_utility::playsoundonplayers(game["music"]["losing_time"]);
+          }
 
           maps\mp\_utility::leaderdialog("timesup");
         }
@@ -384,8 +400,9 @@ musiccontroller() {
       maps\mp\_utility::leaderdialog("timesup");
     }
   } else {
-    if(!level.hardcoremode)
+    if(!level.hardcoremode) {
       maps\mp\_utility::playsoundonplayers(game["music"]["losing_allies"]);
+    }
 
     maps\mp\_utility::leaderdialog("timesup");
   }

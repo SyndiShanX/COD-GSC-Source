@@ -43,10 +43,12 @@ main() {
   precacheLevelStuff();
   vehicleScripts();
 
-  if(level.console)
+  if(level.console) {
     level.hint_text_size = 1.6;
-  else
+  }
+  else {
     level.hint_text_size = 1.2;
+  }
 
   precacheShader("dpad_laser_designator");
 
@@ -111,8 +113,9 @@ main() {
 }
 
 gameplay_logic(gametype) {
-  if(!isDefined(gametype))
+  if(!isDefined(gametype)) {
     gametype = "default";
+  }
 
   flag_init("timer_expired");
   flag_init("specop_challenge_completed");
@@ -134,10 +137,12 @@ gameplay_logic(gametype) {
   maps\_ac130::init(); // pops up the menu and sets who level.ac130gunner is
   thread maps\co_hunted_amb::main();
 
-  if(level.player == level.ac130gunner)
+  if(level.player == level.ac130gunner) {
     level.ground_player = level.player2;
-  else
+  }
+  else {
     level.ground_player = level.player;
+  }
 
   level.ground_player thread add_beacon_effect();
   level.ground_player thread hint_timeout();
@@ -213,10 +218,12 @@ move_enemies_to_closest_goal_radius(gametype) {
   spawners = getspawnerarray();
   array_thread(spawners, ::add_spawn_function, ::create_hunter_enemy);
 
-  if(gametype == "specop")
+  if(gametype == "specop") {
     move_deadlier_hunters_to_new_goal(level.current_goal);
-  else
+  }
+  else {
     move_hunters_to_new_goal(level.current_goal);
+  }
 
   while(1) {
     closest_goal = getclosest(level.ground_player.origin, goals);
@@ -224,18 +231,21 @@ move_enemies_to_closest_goal_radius(gametype) {
     if(level.current_goal != closest_goal) {
       level.current_goal = closest_goal;
 
-      if(gametype == "specop")
+      if(gametype == "specop") {
         move_deadlier_hunters_to_new_goal(closest_goal);
-      else
+      }
+      else {
         move_hunters_to_new_goal(closest_goal);
+      }
     }
     wait 1;
   }
 }
 
 create_hunter_enemy() {
-  if(self.team != "axis")
+  if(self.team != "axis") {
     return;
+  }
   level.hunter_enemies[self.unique_id] = self;
   self setgoalpos(level.current_goal.origin);
 
@@ -249,8 +259,9 @@ move_hunters_to_new_goal(closest_goal) {
   //waittillframeend because you may be in the part of the frame that is before
   //the script has received the "death" notify but after the AI has died.
 
-  foreach(enemy in level.hunter_enemies)
+  foreach(enemy in level.hunter_enemies) {
   enemy setgoalpos(closest_goal.origin);
+  }
 }
 
 move_deadlier_hunters_to_new_goal(closest_goal) {
@@ -258,10 +269,12 @@ move_deadlier_hunters_to_new_goal(closest_goal) {
   //Sent half the enemies to player, and the other half to set goal,
 
   foreach(enemy in level.hunter_enemies) {
-    if(RandomInt(100) < CONST_specop_difficulty)
+    if(RandomInt(100) < CONST_specop_difficulty) {
       enemy setgoalpos(closest_goal.origin);
-    else
+    }
+    else {
       enemy setgoalentity(level.ground_player);
+    }
   }
 }
 
@@ -279,18 +292,22 @@ hint_timeout() {
 }
 
 ShouldBreakLaserHintPrint() {
-  if(!isDefined(level.ground_player))
+  if(!isDefined(level.ground_player)) {
     return false;
-  else if(isDefined(level.ground_player.hint_timeout) && level.ground_player.hint_timeout <= 0)
+  }
+  else if(isDefined(level.ground_player.hint_timeout) && level.ground_player.hint_timeout <= 0) {
     return true;
-  else
+  }
+  else {
     return level.ground_player ent_flag("player_used_laser");
+  }
 }
 
 ac130_change_weapon_hint() {
   wait 12;
-  if(!flag("player_changed_weapons"))
+  if(!flag("player_changed_weapons")) {
     level.ac130gunner thread display_hint("ac130_changed_weapons");
+  }
   // Press ^3[{weapnext}]^7 to cycle through weapons.
   //hintPrint_coop(&"AC130_HINT_CYCLE_WEAPONS" );
 }
@@ -500,18 +517,21 @@ enemy_monitor() {
 
 spawn_enemy_group() {
   if(level.selection >= level.enemy_force.size) {
-    if(getdvar("no_respawn", 1) == "1")
+    if(getdvar("no_respawn", 1) == "1") {
       return;
-    else
+    }
+    else {
       level.selection = 0;
+    }
   }
   s_name = level.enemy_force[level.selection].name;
   s_number = level.selection;
   level.selection++;
 
   if(level.enemy_force[s_number].type == "one_use_vehicle") {
-    if(level.enemy_force[s_number].drove)
+    if(level.enemy_force[s_number].drove) {
       return;
+    }
     vehicle = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(s_name);
     level.enemy_force[s_number].drove = true;
     return;
@@ -523,8 +543,9 @@ spawn_enemy_group() {
   }
 
   enemy_spawners = getEntArray(s_name, "targetname");
-  for(i = 0; i < enemy_spawners.size; i++)
+  for(i = 0; i < enemy_spawners.size; i++) {
     guy = enemy_spawners[i] spawn_ai();
+  }
 
   wait 1; // make sure the spawning is done before checking to see how many are spawned
 }
@@ -535,14 +556,17 @@ enemy_monitor_loop() {
     total = enemies.size;
     roaming = total;
 
-    for(i = 0; i < enemies.size; i++)
+    for(i = 0; i < enemies.size; i++) {
       if(isDefined(enemies[i].script_noteworthy))
-        if(enemies[i].script_noteworthy == "defender")
+    }
+        if(enemies[i].script_noteworthy == "defender") {
           roaming--;
+        }
 
     println("roaming/total: " + roaming + "/" + total);
-    if(roaming < 13)
+    if(roaming < 13) {
       spawn_enemy_group();
+    }
     wait 1;
   }
 }
@@ -566,8 +590,9 @@ timer_start(gametype) {
   assert(isDefined(level.challenge_time_limit));
 
   // Causes the player monitor to short circuit and not allow them to toggle them on and off.
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player.so_infohud_toggle_state = "none";
+  }
   enable_challenge_timer("leaving_crash_site", "specop_challenge_completed");
 
   // Offset the time so it doesn't interfere with the ac130 hud
@@ -651,8 +676,9 @@ threeD_objective_hint(shader, destroyer_msg) {
 
 kill_after_time(time) {
   wait(time);
-  if(isalive(self))
+  if(isalive(self)) {
     self kill();
+  }
 }
 
 set_thermal_LOD() {
@@ -696,11 +722,13 @@ noprone() {
   while(true) {
     self waittill("trigger", player);
 
-    if(!isDefined(player))
+    if(!isDefined(player)) {
       continue;
+    }
 
-    if(!isplayer(player))
+    if(!isplayer(player)) {
       continue;
+    }
 
     while(player IsTouching(self)) {
       player AllowProne(false);

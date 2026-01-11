@@ -106,8 +106,9 @@ snd_dyn_wind() {
 snd_add_exploder_alias(num, alias) {
   for(i = 0; i < level.createfxent.size; i++) {
     if(isDefined(level.createfxent[i].v["exploder"])) {
-      if(level.createfxent[i].v["exploder"] == num)
+      if(level.createfxent[i].v["exploder"] == num) {
         level.createfxent[i].v["soundalias"] = alias;
+      }
     }
   }
 }

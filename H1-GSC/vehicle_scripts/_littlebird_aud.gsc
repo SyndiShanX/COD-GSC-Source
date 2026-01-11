@@ -11,8 +11,9 @@ handle_littlebird_audio() {
   if(issubstr(self.classname, "sentinel") || issubstr(self.classname, "armed") || issubstr(self.classname, "atlas_bench")) {
     var_0 = 0.25;
 
-    if(level.currentgen)
+    if(level.currentgen) {
       var_0 = 1.0;
+    }
 
     var_1 = 0;
     var_2 = 0;
@@ -265,8 +266,9 @@ lbs_condition_callback_to_state_hover(var_0, var_1) {
   var_4 = var_0["distance2d"];
   var_5 = soundscripts\_audio_vehicle_manager::units2yards(var_4);
 
-  if(var_3 <= 5.1 && var_5 < 100.0)
+  if(var_3 <= 5.1 && var_5 < 100.0) {
     var_2 = 1;
+  }
 
   return var_2;
 }
@@ -277,8 +279,9 @@ lbs_condition_callback_to_state_flying(var_0, var_1) {
   var_4 = var_0["distance2d"];
   var_5 = soundscripts\_audio_vehicle_manager::units2yards(var_4);
 
-  if(var_3 > 5.1 && var_5 < 100.0)
+  if(var_3 > 5.1 && var_5 < 100.0) {
     var_2 = 1;
+  }
 
   return var_2;
 }
@@ -288,8 +291,9 @@ lbs_condition_callback_to_state_distant(var_0, var_1) {
   var_3 = var_0["distance2d"];
   var_4 = soundscripts\_audio_vehicle_manager::units2yards(var_3);
 
-  if(var_4 >= 100.0)
+  if(var_4 >= 100.0) {
     var_2 = 1;
+  }
 
   return var_2;
 }
@@ -306,8 +310,9 @@ lbs_condition_callback_to_state_flyby(var_0, var_1) {
   } else {
     var_5 = var_4 - var_1.flyby.prev_yards;
 
-    if(var_5 < 0 && var_4 < 6.0)
+    if(var_5 < 0 && var_4 < 6.0) {
       var_2 = 1;
+    }
 
     var_1.flyby.prev_yards = var_4;
     var_1.flyby.prev_dx = var_5;
@@ -322,8 +327,9 @@ lbs_condition_callback_to_state_flyover(var_0, var_1) {
   var_4 = var_0["relative_speed"];
   var_5 = soundscripts\_audio_vehicle_manager::units2yards(var_3);
 
-  if(var_5 < 30)
+  if(var_5 < 30) {
     var_2 = 1;
+  }
 
   return var_2;
 }

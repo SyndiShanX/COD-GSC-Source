@@ -90,4 +90,3 @@ deathcounter() {
   level.rat.deathcount++;
   setdvar(#"rat_death_count", level.rat.deathcount);
 }
-

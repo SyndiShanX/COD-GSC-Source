@@ -21,8 +21,9 @@ init_level_lighting_flags() {
 }
 
 setup_dof_presets() {
-  if(getdvarint("no_cinematic_fx") != 1)
+  if(getdvarint("no_cinematic_fx") != 1) {
     return;
+  }
 }
 
 player_dof_attenuation() {
@@ -99,8 +100,9 @@ handle_building_collapses() {
     var_5 = 0;
     level waittill("building_collapse", var_5);
 
-    if(var_5 > 0 && var_5 <= 5)
+    if(var_5 > 0 && var_5 <= 5) {
       var_1[var_5] maps\_cinematography::cinseq_start_sequence();
+    }
   }
 }
 

@@ -26,6 +26,7 @@ main() {
   level._effect["mp_overgrown_leavesground01"] = loadfx("ambient_runners/mp_overgrown_leavesground01");
 
   /#		
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_overgrown_fx::main();
+  }
 }

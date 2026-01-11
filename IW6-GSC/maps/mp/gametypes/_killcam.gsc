@@ -67,8 +67,9 @@ setCinematicCameraStyle(cameraStyle, leadingActorId, supportingActorId) {
       self SetClientOmnvar("ui_killcam_killedby_weapon", weaponRowIdx);
       self SetClientOmnvar("ui_killcam_killedby_killstreak", -1);
 
-      if(weaponName != "iw6_knifeonly")
+      if(weaponName != "iw6_knifeonly") {
         attachments = GetWeaponAttachments(sWeapon);
+      }
     } else {
       self SetClientOmnvar("ui_killcam_killedby_weapon", -1);
       self SetClientOmnvar("ui_killcam_killedby_killstreak", -1);
@@ -87,8 +88,9 @@ setCinematicCameraStyle(cameraStyle, leadingActorId, supportingActorId) {
     pers_loadout_perks = attacker.pers["loadoutPerks"];
     for(i = 0; i < pers_loadout_perks.size; i++) {
       idx = int(TableLookup("mp/killCamAbilitiesBitMaskTable.csv", 1, pers_loadout_perks[i], 0));
-      if(idx == 0)
+      if(idx == 0) {
         continue;
+      }
       bitmaskIdx = int((idx - 1) / 24);
       bit = 1 << ((idx - 1) % 24);
       bit_mask[bitmaskIdx] |= bit;
@@ -110,8 +112,9 @@ setCinematicCameraStyle(cameraStyle, leadingActorId, supportingActorId) {
   startTime = getTime();
   self notify("begin_killcam", startTime);
 
-  if(!isAgent(attacker) && isDefined(attacker))
+  if(!isAgent(attacker) && isDefined(attacker)) {
     attacker visionsyncwithplayer(victim);
+  }
 
   self updateSessionState("spectator", "hud_status_dead");
   self.spectatekillcam = true;
@@ -127,8 +130,9 @@ setCinematicCameraStyle(cameraStyle, leadingActorId, supportingActorId) {
 
   usingCinematicKillCam = self setKillCameraStyle(eInflictor, inflictorAgentInfo, attackerNum, victim, killcamentityindex, killcamTimes);
 
-  if(!usingCinematicKillCam)
+  if(!usingCinematicKillCam) {
     self thread setKillCamEntity(killcamentityindex, killcamTimes.killcamoffset, killcamentitystarttime);
+  }
 
   self.archivetime = killcamTimes.killcamoffset;
   self.killcamlength = killcamTimes.killcamlength;
@@ -180,14 +184,17 @@ setCinematicCameraStyle(cameraStyle, leadingActorId, supportingActorId) {
   showFinalKillcamFX = level.showingFinalKillcam;
 
   self SetClientOmnvar("ui_killcam_end_milliseconds", int(killcamTimes.killcamlength * 1000) + GetTime());
-  if(showFinalKillcamFX)
+  if(showFinalKillcamFX) {
     self SetClientOmnvar("ui_killcam_victim_or_attacker", 1);
+  }
 
-  if(getDvarInt("scr_devfinalkillcam") != 0)
+  if(getDvarInt("scr_devfinalkillcam") != 0) {
     showFinalKillcamFX = !IsBot(victim) && !IsAgent(victim);
+  }
 
-  if(showFinalKillcamFX)
+  if(showFinalKillcamFX) {
     self thread doFinalKillCamFX(killcamTimes, self.killcamentity, attacker, victim, sMeansOfDeath);
+  }
 
   self.killcam = true;
 
@@ -197,10 +204,12 @@ setCinematicCameraStyle(cameraStyle, leadingActorId, supportingActorId) {
 
   self thread spawnedKillcamCleanup();
 
-  if(!level.showingFinalKillcam)
+  if(!level.showingFinalKillcam) {
     self thread waitSkipKillcamButton(timeUntilRespawn);
-  else
+  }
+  else {
     self notify("showing_final_killcam");
+  }
 
   self thread endKillcamIfNothingToShow();
 
@@ -229,8 +238,9 @@ doFinalKillCamFX(killcamInfo, killcamentityindex, eAttacker, eVictim, sMeansOfDe
 
   victimNum = eVictim GetEntityNumber();
 
-  if(!isDefined(killcamInfo.attackerNum))
+  if(!isDefined(killcamInfo.attackerNum)) {
     killcamInfo.attackerNum = eAttacker GetEntityNumber();
+  }
 
   intoSlowMoTime = camTime;
   if(intoSlowMoTime > 1.0) {
@@ -270,8 +280,9 @@ setKillCamEntity(killcamentityindex, killcamoffset, starttime) {
     killcamoffset = self.archivetime;
     killcamtime = (gettime() - killcamoffset * 1000);
 
-    if(starttime > killcamtime)
+    if(starttime > killcamtime) {
       wait(starttime - killcamtime) / 1000;
+    }
   }
   self.killcamentity = killcamentityindex;
 }
@@ -288,11 +299,13 @@ waitSkipKillcamButton(timeUntilRespawn) {
 
     self.cancelKillcam = true;
 
-    if(!matchMakingGame())
+    if(!matchMakingGame()) {
       self incPlayerStat("killcamskipped", 1);
+    }
 
-    if(timeUntilRespawn <= 0)
+    if(timeUntilRespawn <= 0) {
       clearLowerMessage("kc_info");
+    }
 
     self notify("abort_killcam");
   }
@@ -342,11 +355,13 @@ killcamCleanup(clearState) {
     level.doingFinalKillcamFx = undefined;
   }
 
-  if(!showingFinalKillcam)
+  if(!showingFinalKillcam) {
     self setCinematicCameraStyle("unknown", -1, -1);
+  }
 
-  if(!level.gameEnded)
+  if(!level.gameEnded) {
     self clearLowerMessage("kc_info");
+  }
 
   self thread maps\mp\gametypes\_spectating::setSpectatePermissions();
 

@@ -50,28 +50,36 @@ func_13B32() {
     var_02 = self getentityvelocity();
     var_03 = length(var_02);
 
-    if(var_03 >= 0 && var_03 <= 120)
+    if(var_03 >= 0 && var_03 <= 120) {
       var_01 = -25;
-    else if(var_03 > 120 && var_03 <= 150)
+    }
+    else if(var_03 > 120 && var_03 <= 150) {
       var_01 = -20;
-    else if(var_03 > 150 && var_03 <= 180)
+    }
+    else if(var_03 > 150 && var_03 <= 180) {
       var_01 = -15;
-    else if(var_03 > 180 && var_03 <= 210)
+    }
+    else if(var_03 > 180 && var_03 <= 210) {
       var_01 = -10;
-    else if(var_03 > 210 && var_03 <= 250)
+    }
+    else if(var_03 > 210 && var_03 <= 250) {
       var_01 = 0;
-    else if(var_03 > 250 && var_03 <= 330)
+    }
+    else if(var_03 > 250 && var_03 <= 330) {
       var_01 = 5;
-    else if(var_03 > 330)
+    }
+    else if(var_03 > 330) {
       var_01 = 10;
+    }
 
     var_00 = var_00 + var_01;
     var_00 = clamp(var_00, 0, 100);
     var_04 = func_7FC8(var_00);
     self.func_B94B = var_04;
 
-    if(scripts\mp\utility::_hasperk("specialty_scoutping") || scripts\mp\utility::_hasperk("passive_scoutping"))
+    if(scripts\mp\utility::_hasperk("specialty_scoutping") || scripts\mp\utility::_hasperk("passive_scoutping")) {
       scripts\mp\perks\perkfunctions::updatescoutpingvalues(var_04);
+    }
 
     wait 0.5;
   }
@@ -80,24 +88,33 @@ func_13B32() {
 func_7FC8(var_00) {
   var_01 = 0;
 
-  if(var_00 >= 10 && var_00 <= 20)
+  if(var_00 >= 10 && var_00 <= 20) {
     var_01 = 1;
-  else if(var_00 > 20 && var_00 <= 30)
+  }
+  else if(var_00 > 20 && var_00 <= 30) {
     var_01 = 2;
-  else if(var_00 > 30 && var_00 <= 40)
+  }
+  else if(var_00 > 30 && var_00 <= 40) {
     var_01 = 3;
-  else if(var_00 > 40 && var_00 <= 50)
+  }
+  else if(var_00 > 40 && var_00 <= 50) {
     var_01 = 4;
-  else if(var_00 > 50 && var_00 <= 60)
+  }
+  else if(var_00 > 50 && var_00 <= 60) {
     var_01 = 5;
-  else if(var_00 > 60 && var_00 <= 70)
+  }
+  else if(var_00 > 60 && var_00 <= 70) {
     var_01 = 6;
-  else if(var_00 > 70 && var_00 <= 80)
+  }
+  else if(var_00 > 70 && var_00 <= 80) {
     var_01 = 7;
-  else if(var_00 > 80 && var_00 <= 90)
+  }
+  else if(var_00 > 80 && var_00 <= 90) {
     var_01 = 8;
-  else if(var_00 > 90 && var_00 <= 100)
+  }
+  else if(var_00 > 90 && var_00 <= 100) {
     var_01 = 9;
+  }
 
   return var_01;
 }
@@ -121,8 +138,9 @@ func_139F9() {
     }
     self.dodging = 1;
 
-    if(scripts\mp\utility::_hasperk("specialty_dodge_defense"))
+    if(scripts\mp\utility::_hasperk("specialty_dodge_defense")) {
       self setclientomnvar("ui_light_armor", 1);
+    }
 
     thread func_139FB();
     var_00 = self getnormalizedmovement();
@@ -174,16 +192,19 @@ func_139F9() {
         break;
     }
 
-    if(isDefined(self.func_5809))
+    if(isDefined(self.func_5809)) {
       triggerfx(self.func_5809);
-
-    foreach(var_02 in level.players) {
-      if(isDefined(var_02) && var_02 != self)
-        playfxontagforclients(level._effect["dash_trail"], self, "tag_shield_back", var_02);
     }
 
-    if(!self isjumping())
+    foreach(var_02 in level.players) {
+      if(isDefined(var_02) && var_02 != self) {
+        playfxontagforclients(level._effect["dash_trail"], self, "tag_shield_back", var_02);
+      }
+    }
+
+    if(!self isjumping()) {
       playFXOnTag(level._effect["dodge_ground_spark_fx"], self, "tag_origin");
+    }
 
     self playlocalsound("synaptic_dash");
     self playSound("synaptic_dash_npc");
@@ -200,10 +221,12 @@ func_5802() {
     var_00 = self energy_getenergy(1);
     var_01 = self energy_getmax(1);
 
-    if(var_00 >= var_01)
+    if(var_00 >= var_01) {
       self setclientomnvar("ui_dodge_charges", 1);
-    else
+    }
+    else {
       self setclientomnvar("ui_dodge_charges", 0);
+    }
 
     wait 0.05;
   }
@@ -214,14 +237,17 @@ func_139FB() {
   scripts\engine\utility::waittill_any("dodgeEnd", "death", "disconnect");
   self.dodging = 0;
 
-  if(scripts\mp\utility::_hasperk("specialty_dodge_defense"))
+  if(scripts\mp\utility::_hasperk("specialty_dodge_defense")) {
     self setclientomnvar("ui_light_armor", 0);
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     stopFXOnTag(level._effect["dash_trail"], self, "tag_shield_back");
+  }
 
-  if(isDefined(self.func_5809))
+  if(isDefined(self.func_5809)) {
     self.func_5809 delete();
+  }
 }
 
 func_E175() {
@@ -318,8 +344,9 @@ func_11320() {
           self setweaponammostock(var_08, var_05);
         }
 
-        if(var_10 == var_07)
+        if(var_10 == var_07) {
           scripts\mp\utility::_switchtoweapon(var_08);
+        }
       }
     }
   }
@@ -336,17 +363,21 @@ func_139FA() {
   self endon("disconnect");
   self endon("removeArchetype");
 
-  if(0)
+  if(0) {
     thread func_E844();
+  }
 
-  if(0)
+  if(0) {
     thread func_E85D();
+  }
 
-  if(0)
+  if(0) {
     thread func_E864();
+  }
 
-  if(0)
+  if(0) {
     thread func_E89E();
+  }
 }
 
 func_E844() {
@@ -374,8 +405,9 @@ func_E89E() {
   self endon("disconnect");
   self endon("removeArchetype");
 
-  for(;;)
+  for(;;) {
     self waittill("dodgeEnd");
+  }
 }
 
 func_E864() {
@@ -386,8 +418,9 @@ func_E864() {
   for(;;) {
     self waittill("dodgeEnd");
 
-    if(!isDefined(self.func_B94A))
+    if(!isDefined(self.func_B94A)) {
       self.func_B94A = 1.5;
+    }
     else {
       self.func_B94A = self.func_B94A + 1.5;
       continue;
@@ -404,8 +437,9 @@ func_B949() {
   self.movespeedscaler = 1.2;
   scripts\mp\weapons::updatemovespeedscale();
 
-  for(var_00 = gettime(); var_00 + self.func_B94A * 1000 > gettime(); self.func_B94A = self.func_B94A - 0.05)
+  for(var_00 = gettime(); var_00 + self.func_B94A * 1000 > gettime(); self.func_B94A = self.func_B94A - 0.05) {
     scripts\engine\utility::waitframe();
+  }
 
   self.movespeedscaler = 1;
   scripts\mp\weapons::updatemovespeedscale();
@@ -440,8 +474,9 @@ func_261E(var_00) {
   self endon("disconnect");
   self endon("giveLoadout_start");
 
-  if(self != var_00)
+  if(self != var_00) {
     var_00 thread scripts\mp\utility::giveunifiedpoints("buff_teammate");
+  }
 
   self.movespeedscaler = 1.1;
   scripts\mp\weapons::updatemovespeedscale();
@@ -475,8 +510,9 @@ func_B947() {
   for(;;) {
     self waittill("got_a_kill", var_00, var_01, var_02);
 
-    if(scripts\engine\utility::isbulletdamage(var_02) || var_02 == "MOD_MELEE")
+    if(scripts\engine\utility::isbulletdamage(var_02) || var_02 == "MOD_MELEE") {
       thread func_B942();
+    }
   }
 }
 
@@ -506,6 +542,7 @@ func_B945() {
 }
 
 func_B946() {
-  if(self.loadoutarchetype == "archetype_scout" && level.gametype != "infect")
+  if(self.loadoutarchetype == "archetype_scout" && level.gametype != "infect") {
     self setscriptablepartstate("momentumScreen", "momentumScreen_Off", 0);
+  }
 }

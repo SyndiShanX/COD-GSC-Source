@@ -48,16 +48,19 @@ isTacSpawnTouchingCrates(origin, angles) {
   return false;
 }
 overridespawn() {
-  if(!isDefined(self.tacticalInsertion))
+  if(!isDefined(self.tacticalInsertion)) {
     return false;
+  }
   origin = self.tacticalInsertion.origin;
   angles = self.tacticalInsertion.angles;
   team = self.tacticalInsertion.team;
   self.tacticalInsertion destroy_tactical_insertion();
-  if(team != self.team)
+  if(team != self.team) {
     return false;
-  if(isTacSpawnTouchingCrates(origin))
+  }
+  if(isTacSpawnTouchingCrates(origin)) {
     return false;
+  }
   self spawn(origin, angles, "tactical insertion");
   self SetSpawnClientFlag("SCDFL_DISABLE_LOGGING");
   self maps\mp\gametypes\_globallogic_score::setWeaponStat("tactical_insertion_mp", 1, "used");
@@ -76,19 +79,25 @@ watchUseTrigger(trigger, callback, playerSoundOnUse, npcSoundOnUse) {
   self endon("delete");
   while(true) {
     trigger waittill("trigger", player);
-    if(!isAlive(player))
+    if(!isAlive(player)) {
       continue;
-    if(!player isOnGround())
+    }
+    if(!player isOnGround()) {
       continue;
-    if(isDefined(trigger.triggerTeam) && (player.team != trigger.triggerTeam))
+    }
+    if(isDefined(trigger.triggerTeam) && (player.team != trigger.triggerTeam)) {
       continue;
-    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy))
+    }
+    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy)) {
       continue;
+    }
     if(player useButtonPressed() && !player.throwingGrenade && !player meleeButtonPressed()) {
-      if(isDefined(playerSoundOnUse))
+      if(isDefined(playerSoundOnUse)) {
         player playLocalSound(playerSoundOnUse);
-      if(isDefined(npcSoundOnUse))
+      }
+      if(isDefined(npcSoundOnUse)) {
         player playSound(npcSoundOnUse);
+      }
       self thread[[callback]](player);
     }
   }
@@ -119,8 +128,9 @@ destroy_tactical_insertion(attacker) {
   self delete();
 }
 fizzle(attacker) {
-  if(isDefined(self.fizzle) && self.fizzle)
+  if(isDefined(self.fizzle) && self.fizzle) {
     return;
+  }
   self.fizzle = true;
   playFX(level._effect["tacticalInsertionFizzle"], self.origin);
   self.owner maps\mp\gametypes\_globallogic_audio::leaderDialogOnPlayer("tact_destroyed", "item_destroyed");
@@ -168,32 +178,39 @@ spawnTacticalInsertion() {
   watcher = maps\mp\gametypes\_weaponobjects::getWeaponObjectWatcherByWeapon(level.tacticalInsertionWeapon);
   self.tacticalInsertion thread watchUseTrigger(self.tacticalInsertion.friendlyTrigger, ::pickUp, watcher.pickUpSoundPlayer, watcher.pickUpSound);
   self.tacticalInsertion thread watchUseTrigger(self.tacticalInsertion.enemyTrigger, ::fizzle);
-  if(isDefined(self.tacticalInsertionCount))
+  if(isDefined(self.tacticalInsertionCount)) {
     self.tacticalInsertionCount++;
-  else
+  }
+  else {
     self.tacticalInsertionCount = 1;
+  }
   self.tacticalInsertion setCanDamage(true);
   while(true) {
     self.tacticalInsertion waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weaponName, iDFlags);
-    if(level.teamBased && (!isDefined(attacker) || !isPlayer(attacker) || attacker.team == self.team) && attacker != self)
+    if(level.teamBased && (!isDefined(attacker) || !isPlayer(attacker) || attacker.team == self.team) && attacker != self) {
       continue;
-    if(attacker != self)
+    }
+    if(attacker != self) {
       attacker maps\mp\_properks::destroyedEquiptment();
+    }
     if(isDefined(weaponName)) {
       switch (weaponName) {
         case "concussion_grenade_mp":
         case "flash_grenade_mp":
           if(level.teambased && self.tacticalInsertion.owner.team != attacker.team) {
-            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
+            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
               attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
+            }
           } else if(!level.teambased && self.tacticalInsertion.owner != attacker) {
-            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
+            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
               attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
+            }
           }
           break;
         default:
-          if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
+          if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
             attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
+          }
           break;
       }
     }

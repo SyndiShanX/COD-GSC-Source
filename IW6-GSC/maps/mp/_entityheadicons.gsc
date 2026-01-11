@@ -8,8 +8,9 @@
 #include maps\mp\gametypes\_hud_util;
 
 init() {
-  if(isDefined(level.initedEntityHeadIcons))
+  if(isDefined(level.initedEntityHeadIcons)) {
     return;
+  }
   level.initedEntityHeadIcons = true;
 
   if(level.multiTeamBased) {
@@ -31,31 +32,39 @@ setHeadIcon(showTo, icon, offset, width, height, archived, delay, constantSize, 
   if(IsGameParticipant(showTo) && !IsPlayer(showTo)) {
     return;
   }
-  if(!isDefined(self.entityHeadIcons))
+  if(!isDefined(self.entityHeadIcons)) {
     self.entityHeadIcons = [];
+  }
 
-  if(!isDefined(archived))
+  if(!isDefined(archived)) {
     archived = true;
+  }
 
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0.05;
+  }
 
-  if(!isDefined(constantSize))
+  if(!isDefined(constantSize)) {
     constantSize = true;
+  }
 
-  if(!isDefined(pinToScreenEdge))
+  if(!isDefined(pinToScreenEdge)) {
     pinToScreenEdge = true;
+  }
 
-  if(!isDefined(fadeOutPinnedIcon))
+  if(!isDefined(fadeOutPinnedIcon)) {
     fadeOutPinnedIcon = false;
+  }
 
-  if(!isDefined(is3D))
+  if(!isDefined(is3D)) {
     is3D = true;
+  }
 
   if(!isPlayer(showTo) && showTo == "none") {
     foreach(key, headIcon in self.entityHeadIcons) {
-      if(isDefined(headIcon))
+      if(isDefined(headIcon)) {
         headIcon destroy();
+      }
 
       self.entityHeadIcons[key] = undefined;
     }
@@ -123,10 +132,12 @@ setHeadIcon(showTo, icon, offset, width, height, archived, delay, constantSize, 
 
   headIcon thread keepPositioned(self, offset, delay);
   self thread destroyIconsOnDeath();
-  if(isPlayer(showTo))
+  if(isPlayer(showTo)) {
     headIcon thread destroyOnOwnerDisconnect(showTo);
-  if(isPlayer(self))
+  }
+  if(isPlayer(self)) {
     headIcon thread destroyOnOwnerDisconnect(self);
+  }
 
   return headIcon;
 }
@@ -206,16 +217,19 @@ setTeamHeadIcon(team, offset) {
 
   self.entityHeadIconTeam = team;
 
-  if(isDefined(offset))
+  if(isDefined(offset)) {
     self.entityHeadIconOffset = offset;
-  else
+  }
+  else {
     self.entityHeadIconOffset = (0, 0, 0);
+  }
 
   self notify("kill_entity_headicon_thread");
 
   if(team == "none") {
-    if(isDefined(self.entityHeadIcon))
+    if(isDefined(self.entityHeadIcon)) {
       self.entityHeadIcon destroy();
+    }
     return;
   }
 
@@ -245,18 +259,21 @@ setPlayerHeadIcon(player, offset) {
   self notify("kill_entity_headicon_thread");
 
   if(!isDefined(player)) {
-    if(isDefined(self.entityHeadIcon))
+    if(isDefined(self.entityHeadIcon)) {
       self.entityHeadIcon destroy();
+    }
     return;
   }
 
   team = player.team;
   self.entityHeadIconTeam = team;
 
-  if(isDefined(offset))
+  if(isDefined(offset)) {
     self.entityHeadIconOffset = offset;
-  else
+  }
+  else {
     self.entityHeadIconOffset = (0, 0, 0);
+  }
 
   shader = game["entity_headicon_" + team];
 

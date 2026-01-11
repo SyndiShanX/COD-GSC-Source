@@ -20,8 +20,9 @@ vision_set_trigger_think() {
   while(true) {
     self waittill("trigger");
 
-    if(level.haiti_vision != self.script_string)
+    if(level.haiti_vision != self.script_string) {
       vision_set_change(self.script_string);
+    }
 
     wait 0.1;
   }
@@ -50,15 +51,17 @@ vision_set_change(str_vision_set) {
 vision_set() {
   time = 2.0;
 
-  if(isDefined(self.script_float))
+  if(isDefined(self.script_float)) {
     time = self.script_float;
+  }
 
   while(true) {
     self waittill("trigger");
     player = get_players()[0];
 
-    if(player getvisionsetnaked() != self.script_noteworthy)
+    if(player getvisionsetnaked() != self.script_noteworthy) {
       visionsetnaked(self.script_noteworthy, time);
+    }
   }
 }
 

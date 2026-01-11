@@ -161,19 +161,22 @@ show_total_money() {
   currentCount = 0;
   moneyToAddPerFrame = 10;
   for(;;) {
-    while(self.summary["summary"]["total_money"] == currentCount)
+    while(self.summary["summary"]["total_money"] == currentCount) {
       wait 0.05;
+    }
 
     currentCount += moneyToAddPerFrame;
-    if(currentCount > self.summary["summary"]["total_money"])
+    if(currentCount > self.summary["summary"]["total_money"]) {
       currentCount = self.summary["summary"]["total_money"];
+    }
 
     self notify("stop_total_money_fade");
     self.hud_totalmoney.alpha = 1;
     self.hud_totalmoney setValue(currentCount);
 
-    if(self.summary["summary"]["total_money"] == currentCount)
+    if(self.summary["summary"]["total_money"] == currentCount) {
       self thread show_total_money_fadeout();
+    }
 
     wait 0.05;
   }
@@ -195,8 +198,9 @@ money_mailNotify() {
 
   // notify condition A
   // send player email every CONST_money_notify_interval dollars
-  if(cur_emails < int(cur_money / CONST_money_notify_interval))
+  if(cur_emails < int(cur_money / CONST_money_notify_interval)) {
     self email_popup();
+  }
 }
 
 email_popup() {
@@ -227,13 +231,15 @@ giveMoney_think() {
 
 giveMoney_helper(attacker, type) {
   if(isDefined(attacker) && !isplayer(attacker)) {
-    if(isDefined(self.saved_player_attacker))
+    if(isDefined(self.saved_player_attacker)) {
       attacker = self.saved_player_attacker;
+    }
   }
 
   // if AI removed by script/game, no money to player
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return;
+  }
 
   playBonusSound = false;
   juggernaut = false;
@@ -246,10 +252,12 @@ giveMoney_helper(attacker, type) {
 
   // Melee kills are worth more money cuz you're good like dat
   if((isDefined(type)) && (issubstr(tolower(type), "melee"))) {
-    if(juggernaut)
+    if(juggernaut) {
       killType = "juggernaut_kill_melee";
-    else
+    }
+    else {
       killType = "kill_melee";
+    }
     playBonusSound = true;
   }
 
@@ -258,36 +266,42 @@ giveMoney_helper(attacker, type) {
     if(getdvar("money_sharing") == "1") {
       foreach(player in level.players) {
         if(isDefined(self.kill_reward_money)) {
-          if(killType == "kill_melee" && isDefined(self.kill_melee_reward_money))
+          if(killType == "kill_melee" && isDefined(self.kill_melee_reward_money)) {
             player thread giveMoney(killType, self.kill_melee_reward_money, attacker);
-          else
+          }
+          else {
             player thread giveMoney(killType, self.kill_reward_money, attacker);
+          }
         } else
           player thread giveMoney(killType, undefined, attacker);
       }
     } else
       attacker thread giveMoney(killType);
 
-    if(playBonusSound)
+    if(playBonusSound) {
       attacker playLocalSound(CONST_bonus_money_sound);
+    }
 
     return;
   }
 
   // no money if enemy was finished off by other enemies
-  if(isAI(attacker) && attacker isBadGuy())
+  if(isAI(attacker) && attacker isBadGuy()) {
     return;
+  }
 
   // if enemy shot by player was killed by destructibles
   if(is_special_targetname_attacker(attacker)) {
-    if(isDefined(attacker.attacker))
+    if(isDefined(attacker.attacker)) {
       self thread giveMoney_helper(attacker.attacker);
+    }
     return;
   }
 
   // if enemy shot by player was killed by natural causes, no money
-  if(!isPlayer(attacker) && !isAI(attacker))
+  if(!isPlayer(attacker) && !isAI(attacker)) {
     return;
+  }
 
   /*
   // if enemy shot by player was killed by friendly, give assist
@@ -296,8 +310,9 @@ giveMoney_helper(attacker, type) {
   	for( i = 0; i < self.attacker_list.size; i++ )
   	{
   		// if attacker is player and not the last to kill, give player assist points
-  		if( isPlayer( self.attacker_list[ i ] ) && self.attacker_list[ i ] != attacker )
+  		if( isPlayer( self.attacker_list[ i ] ) && self.attacker_list[ i ] != attacker ) {
   			self.attacker_list[ i ] thread giveMoney( "assist" );
+  		}
   	}
   }
   */
@@ -305,24 +320,29 @@ giveMoney_helper(attacker, type) {
 
 give_objective_reward() {
   if(getdvar("money_sharing") == "1") {
-    foreach(player in level.players)
+    foreach(player in level.players) {
     player giveMoney("objective");
+    }
   } else if(isDefined(self) && isPlayer(self))
     self giveMoney("objective");
-  else
+  else {
     level.player giveMoney("objective");
+  }
 }
 
 is_special_targetname_attacker(attacker) {
   assert(isDefined(attacker));
-  if(!isDefined(attacker.targetname))
+  if(!isDefined(attacker.targetname)) {
     return false;
+  }
 
-  if(attacker.targetname == "destructible")
+  if(attacker.targetname == "destructible") {
     return true;
+  }
 
-  if(string_starts_with(attacker.targetname, "sentry_"))
+  if(string_starts_with(attacker.targetname, "sentry_")) {
     return true;
+  }
 
   return false;
 }
@@ -340,12 +360,14 @@ took_damage(damage, attacker, direction_vec, point, type, modelName, tagName) {
     return;
   }
 
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return;
+  }
 
   // this is to make sure player gets money after killing enemy during their traversal anim
-  if(isplayer(attacker))
+  if(isplayer(attacker)) {
     self.saved_player_attacker = attacker;
+  }
 
   currentTime = gettime();
   timeElapsed = currentTime - self.last_attacked;
@@ -366,8 +388,9 @@ updatePlayerMoney(type, value, attacker) {
   self notify("update_money");
   self endon("update_money");
 
-  if(getdvar("money_enable", "0") != "1")
+  if(getdvar("money_enable", "0") != "1") {
     return;
+  }
 
   // optional in game reward control
   if(getdvar("in_game_reward") != "1") {
@@ -379,35 +402,41 @@ updatePlayerMoney(type, value, attacker) {
     //disabled_types_array = strTok( disabled_types, " " );
 
     foreach(s_type in allowed_types_array) {
-      if(type != s_type)
+      if(type != s_type) {
         return;
+      }
     }
   }
 
   if(!isDefined(value)) {
-    if(isDefined(level.scoreInfo[type]))
+    if(isDefined(level.scoreInfo[type])) {
       value = getScoreInfoValue(type);
-    else
+    }
+    else {
       value = getScoreInfoValue("kill");
+    }
   }
 
   // update reward value trackers
 
   value = int(value);
 
-  if(!(type == "kill" || type == "kill_melee" || type == "headshot"))
+  if(!(type == "kill" || type == "kill_melee" || type == "headshot")) {
     self.summary["summary"]["completion"] += value; // if custom reward type, it counts towards level completion
+  }
   else if(type == "assist") {
     // assist points can never add up over kill points
-    if(value > getScoreInfoValue("kill"))
+    if(value > getScoreInfoValue("kill")) {
       value = getScoreInfoValue("kill");
+    }
   }
 
   self.moneyUpdateTotal += value;
 
   bShowMoneyUpdate = true;
-  if(isDefined(attacker) && self != attacker)
+  if(isDefined(attacker) && self != attacker) {
     bShowMoneyUpdate = false;
+  }
 
   if(bShowMoneyUpdate) {
     // $
@@ -518,10 +547,12 @@ showMoney(amount) {
   self.moneyString.alpha = 1;
   self.moneyString.color = CONST_lootColor;
 
-  if(getDvarInt("scr_loot_slowPrint"))
+  if(getDvarInt("scr_loot_slowPrint")) {
     self.moneyString setPulseFX(100, int(getDvarFloat("scr_loot_showTime") * 1000), 1000);
-  else
+  }
+  else {
     self.moneyString thread fontPulse(self);
+  }
 
   wait(getDvarFloat("scr_loot_showTime"));
   self.moneyString fadeOverTime(1.0);
@@ -552,10 +583,12 @@ showLoot(lootString, lootIcon, lootSound, lootColor) {
   self.lootString.alpha = 1;
   self.lootString.color = lootColor;
 
-  if(getDvarInt("scr_loot_slowPrint"))
+  if(getDvarInt("scr_loot_slowPrint")) {
     self.lootString setPulseFX(100, int(getDvarFloat("scr_loot_showTime") * 1000), 1000);
-  else
+  }
+  else {
     self.lootString thread fontPulse(self);
+  }
 
   self.lootIcon setIconShader(lootIcon);
   self.lootIcon.alpha = 1;
@@ -569,20 +602,25 @@ showLoot(lootString, lootIcon, lootSound, lootColor) {
 setupLoot() {
   precacheShader("temp_mail_icon");
 
-  if(getDvar("scr_loot_dropDelay") == "")
+  if(getDvar("scr_loot_dropDelay") == "") {
     setDvar("scr_loot_dropDelay", 0.0);
+  }
 
-  if(getDvar("scr_loot_showTime") == "")
+  if(getDvar("scr_loot_showTime") == "") {
     setDvar("scr_loot_showTime", 7.0);
+  }
 
-  if(getDvar("scr_loot_offsetX") == "")
+  if(getDvar("scr_loot_offsetX") == "") {
     setDvar("scr_loot_offsetX", 0);
+  }
 
-  if(getDvar("scr_loot_offsetY") == "")
+  if(getDvar("scr_loot_offsetY") == "") {
     setDvar("scr_loot_offsetY", 0);
+  }
 
-  if(getDvar("scr_loot_slowPrint") == "")
+  if(getDvar("scr_loot_slowPrint") == "") {
     setDvar("scr_loot_slowPrint", 1);
+  }
 }
 
 // ============== helpers ===============

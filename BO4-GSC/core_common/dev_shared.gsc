@@ -686,4 +686,3 @@ dev_get_point_pair() {
   points[1] = end;
   return points;
 }
-

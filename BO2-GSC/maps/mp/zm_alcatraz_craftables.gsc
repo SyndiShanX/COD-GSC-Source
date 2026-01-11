@@ -169,8 +169,9 @@ planecraftable() {
   level thread alcatraz_craftable_trigger_think("plane_craftable_trigger", "plane", "plane", "", 1, 0);
   level setclientfield("quest_plane_craft_complete", 0);
 
-  for(i = 1; i <= 5; i++)
+  for(i = 1; i <= 5; i++) {
     level setclientfield("quest_state" + i, 2);
+  }
 }
 
 planefuelable() {
@@ -182,8 +183,9 @@ planefuelable_think() {
   t_plane_fuelable = getent("plane_fuelable_trigger", "targetname");
   t_plane_fuelable trigger_on();
 
-  for(i = 1; i <= 5; i++)
+  for(i = 1; i <= 5; i++) {
     level setclientfield("quest_state" + i, 5);
+  }
 
   alcatraz_craftable_trigger_think("plane_fuelable_trigger", "refuelable_plane", "refuelable_plane", "", 1, 0);
 }
@@ -236,13 +238,15 @@ ondisconnect_common(player) {
   level setclientfield("piece_player" + player_num, 0);
   m_plane_piece = get_craftable_piece_model("plane", self.piecename);
 
-  if(isDefined(m_plane_piece))
+  if(isDefined(m_plane_piece)) {
     playFXOnTag(level._effect["quest_item_glow"], m_plane_piece, "tag_origin");
+  }
 
   m_fuel_can = get_craftable_piece_model("refuelable_plane", self.piecename);
 
-  if(isDefined(m_fuel_can))
+  if(isDefined(m_fuel_can)) {
     playFXOnTag(level._effect["quest_item_glow"], m_fuel_can, "tag_origin");
+  }
 }
 
 prison_open_craftablestub_update_prompt(player, b_set_hint_string_now, trigger) {
@@ -253,10 +257,12 @@ prison_open_craftablestub_update_prompt(player, b_set_hint_string_now, trigger) 
 onpickup_key(player) {
   flag_set("key_found");
 
-  if(level.is_master_key_west)
+  if(level.is_master_key_west) {
     level clientnotify("fxanim_west_pulley_up_start");
-  else
+  }
+  else {
     level clientnotify("fxanim_east_pulley_up_start");
+  }
 
   a_m_checklist = getEntArray("plane_checklist", "targetname");
 
@@ -268,8 +274,9 @@ onpickup_key(player) {
   a_door_structs = getstructarray("quest_trigger", "script_noteworthy");
 
   foreach(struct in a_door_structs) {
-    if(isDefined(struct.unitrigger_stub))
+    if(isDefined(struct.unitrigger_stub)) {
       struct.unitrigger_stub maps\mp\zombies\_zm_unitrigger::run_visibility_function_for_all_triggers();
+    }
   }
 
   player playSound("evt_key_pickup");
@@ -331,8 +338,9 @@ onpickup_plane(player) {
 
   level.plane_pieces_picked_up = level.plane_pieces_picked_up + 1;
 
-  if(level.plane_pieces_picked_up == 5)
+  if(level.plane_pieces_picked_up == 5) {
     level thread roof_nag_vo();
+  }
 
   if(level.sndplanepieces == level.plane_pieces_picked_up) {
     level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent("piece_" + level.sndplanepieces);
@@ -378,8 +386,9 @@ onpickup_plane(player) {
 
   vo_alias_call = self check_if_newly_found();
 
-  if(isDefined(vo_alias_call))
+  if(isDefined(vo_alias_call)) {
     level thread play_plane_piece_call_and_response_vo(player, vo_alias_call);
+  }
 
   self thread ondisconnect_common(player);
 }
@@ -407,8 +416,9 @@ check_if_newly_found() {
     level.n_plane_pieces_found++;
     flag_set(self.piecename + "_found");
 
-    if(self.piecename == "cloth")
+    if(self.piecename == "cloth") {
       level clientnotify("fxanim_dryer_hide_start");
+    }
 
     return vo_alias_call;
   }
@@ -433,10 +443,12 @@ play_plane_piece_call_and_response_vo(player, vo_alias_call) {
         n_dist = distance(player.origin, closest_other_player.origin);
 
         if(isDefined(closest_other_player) && n_dist < n_response_range) {
-          if(level.n_plane_pieces_found < 5)
+          if(level.n_plane_pieces_found < 5) {
             vo_alias_response = "sidequest_parts" + level.n_plane_pieces_found + "_prog";
-          else
+          }
+          else {
             vo_alias_response = "sidequest_all_parts";
+          }
 
           closest_other_player do_player_general_vox("quest", vo_alias_response, undefined, 100);
         }
@@ -461,8 +473,9 @@ roof_nag_vo() {
     players = getplayers();
 
     foreach(player in players) {
-      if(player istouching(zone_roof) || player istouching(zone_roof_infirmary))
+      if(player istouching(zone_roof) || player istouching(zone_roof_infirmary)) {
         b_is_a_player_on_the_roof = 1;
+      }
     }
 
     if(!b_is_a_player_on_the_roof) {
@@ -498,8 +511,9 @@ oncrafted_plane(player) {
   plane_craftable hidepart("tag_clothes_ground");
   plane_craftable hidepart("tag_fuel_hose");
 
-  if(!isDefined(level.sndplanecrafted))
+  if(!isDefined(level.sndplanecrafted)) {
     level.sndplanecrafted = 0;
+  }
 
   level.sndplanecrafted++;
   level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent("plane_crafted_" + level.sndplanecrafted);
@@ -507,23 +521,28 @@ oncrafted_plane(player) {
   if(is_part_crafted("plane", "rigging")) {
     plane_craftable showpart("tag_support_upper");
 
-    if(is_part_crafted("plane", "cloth"))
+    if(is_part_crafted("plane", "cloth")) {
       plane_craftable showpart("tag_wing_skins_up");
+    }
 
-    if(is_part_crafted("plane", "engine"))
+    if(is_part_crafted("plane", "engine")) {
       plane_craftable showpart("tag_engines_up");
+    }
   } else {
     plane_craftable showpart("tag_wings_down");
 
-    if(is_part_crafted("plane", "cloth"))
+    if(is_part_crafted("plane", "cloth")) {
       m_plane_hideable_clothes_pile show();
+    }
 
-    if(is_part_crafted("plane", "engine"))
+    if(is_part_crafted("plane", "engine")) {
       m_plane_hideable_engine show();
+    }
   }
 
-  if(is_part_crafted("plane", "steering") && is_part_crafted("plane", "fueltanks"))
+  if(is_part_crafted("plane", "steering") && is_part_crafted("plane", "fueltanks")) {
     plane_craftable showpart("tag_fuel_hose");
+  }
 
   switch (self.piecename) {
     case "cloth":
@@ -561,8 +580,9 @@ ondrop_fuel(player) {
   self.piece_owner = undefined;
   playFXOnTag(level._effect["quest_item_glow"], self.model, "tag_origin");
 
-  if(isDefined(level.sndfuelpieces))
+  if(isDefined(level.sndfuelpieces)) {
     level.sndfuelpieces--;
+  }
 
   switch (self.piecename) {
     case "fuel1":
@@ -593,16 +613,18 @@ ondrop_fuel(player) {
 onpickup_fuel(player) {
   player playSound("zmb_craftable_pickup");
 
-  if(!isDefined(level.sndfuelpieces) || level.sndfuelpieces >= 5)
+  if(!isDefined(level.sndfuelpieces) || level.sndfuelpieces >= 5) {
     level.sndfuelpieces = 0;
+  }
 
   level.sndfuelpieces++;
   level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent("gas_" + level.sndfuelpieces);
   self pickupfrommover();
   self.piece_owner = player;
 
-  if(isDefined(player))
+  if(isDefined(player)) {
     player do_player_general_vox("quest", "fuel_pickup", undefined, 100);
+  }
 
   switch (self.piecename) {
     case "fuel1":
@@ -690,8 +712,9 @@ onfullycrafted_refueled(player) {
 onfullycrafted_refueled_think(player) {
   flag_wait("spawn_fuel_tanks");
 
-  for(i = 1; i <= 5; i++)
+  for(i = 1; i <= 5; i++) {
     level setclientfield("quest_state" + i, 5);
+  }
 
   maps\mp\zombies\_zm_craftables::stub_uncraft_craftable(self, 1, undefined, undefined, 1);
 }
@@ -701,11 +724,13 @@ sqcommoncraftable() {
 }
 
 onbuyweapon_riotshield(player) {
-  if(isDefined(player.player_shield_reset_health))
+  if(isDefined(player.player_shield_reset_health)) {
     player[[player.player_shield_reset_health]]();
+  }
 
-  if(isDefined(player.player_shield_reset_location))
+  if(isDefined(player.player_shield_reset_location)) {
     player[[player.player_shield_reset_location]]();
+  }
 }
 
 onbuyweapon_plane(player) {
@@ -717,13 +742,16 @@ droponmover(player) {
   if(isDefined(player) && player maps\mp\zm_alcatraz_travel::is_player_on_gondola()) {
     str_location = undefined;
 
-    if(isDefined(level.e_gondola.is_moving) && level.e_gondola.is_moving && isDefined(level.e_gondola.destination))
+    if(isDefined(level.e_gondola.is_moving) && level.e_gondola.is_moving && isDefined(level.e_gondola.destination)) {
       str_location = level.e_gondola.destination;
-    else
+    }
+    else {
       str_location = level.e_gondola.location;
+    }
 
-    if(!isDefined(str_location))
+    if(!isDefined(str_location)) {
       str_location = "roof";
+    }
 
     a_s_part_teleport = getstructarray("gondola_dropped_parts_" + str_location, "targetname");
 
@@ -769,22 +797,25 @@ in_game_checklist_setup() {
 in_game_checklist_plane_piece_picked_up(str_partname) {
   a_m_checklist = getEntArray("plane_checklist", "targetname");
 
-  foreach(m_checklist in a_m_checklist)
+  foreach(m_checklist in a_m_checklist) {
   m_checklist showpart("j_check_" + str_partname);
+  }
 }
 
 in_game_checklist_plane_piece_dropped(str_partname) {
   a_m_checklist = getEntArray("plane_checklist", "targetname");
 
-  foreach(m_checklist in a_m_checklist)
+  foreach(m_checklist in a_m_checklist) {
   m_checklist hidepart("j_check_" + str_partname);
+  }
 }
 
 in_game_checklist_plane_piece_crafted(str_partname) {
   a_m_checklist = getEntArray("plane_checklist", "targetname");
 
-  foreach(m_checklist in a_m_checklist)
+  foreach(m_checklist in a_m_checklist) {
   m_checklist showpart("j_strike_" + str_partname);
+  }
 }
 
 alcatraz_craftable_trigger_think(trigger_targetname, equipname, weaponname, trigger_hintstring, delete_trigger, persistent) {
@@ -809,14 +840,16 @@ alcatraz_setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigge
   unitrigger_stub.craftablestub = level.zombie_include_craftables[equipname];
   angles = trig.script_angles;
 
-  if(!isDefined(angles))
+  if(!isDefined(angles)) {
     angles = (0, 0, 0);
+  }
 
   unitrigger_stub.origin = trig.origin + anglestoright(angles) * -6;
   unitrigger_stub.angles = trig.angles;
 
-  if(isDefined(trig.script_angles))
+  if(isDefined(trig.script_angles)) {
     unitrigger_stub.angles = trig.script_angles;
+  }
 
   unitrigger_stub.equipname = equipname;
   unitrigger_stub.weaponname = weaponname;
@@ -830,20 +863,26 @@ alcatraz_setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigge
   unitrigger_stub.onuse = ::onuseplantobjectuts;
   unitrigger_stub.oncantuse = ::oncantuseuts;
 
-  if(isDefined(trig.script_length))
+  if(isDefined(trig.script_length)) {
     unitrigger_stub.script_length = trig.script_length;
-  else
+  }
+  else {
     unitrigger_stub.script_length = 32;
+  }
 
-  if(isDefined(trig.script_width))
+  if(isDefined(trig.script_width)) {
     unitrigger_stub.script_width = trig.script_width;
-  else
+  }
+  else {
     unitrigger_stub.script_width = 100;
+  }
 
-  if(isDefined(trig.script_height))
+  if(isDefined(trig.script_height)) {
     unitrigger_stub.script_height = trig.script_height;
-  else
+  }
+  else {
     unitrigger_stub.script_height = 64;
+  }
 
   unitrigger_stub.target = trig.target;
   unitrigger_stub.targetname = trig.targetname;
@@ -851,15 +890,17 @@ alcatraz_setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigge
   unitrigger_stub.script_parameters = trig.script_parameters;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
 
-  if(isDefined(level.zombie_craftablestubs[equipname].hint))
+  if(isDefined(level.zombie_craftablestubs[equipname].hint)) {
     unitrigger_stub.hint_string = level.zombie_craftablestubs[equipname].hint;
+  }
 
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   unitrigger_stub.require_look_at = 0;
   unitrigger_force_per_player_triggers(unitrigger_stub, 1);
 
-  if(isDefined(unitrigger_stub.craftablestub.custom_craftablestub_update_prompt))
+  if(isDefined(unitrigger_stub.craftablestub.custom_craftablestub_update_prompt)) {
     unitrigger_stub.custom_craftablestub_update_prompt = unitrigger_stub.craftablestub.custom_craftablestub_update_prompt;
+  }
 
   unitrigger_stub.prompt_and_visibility_func = ::craftabletrigger_update_prompt;
   maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(unitrigger_stub, ::craftable_place_think);
@@ -871,8 +912,9 @@ alcatraz_setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigge
     unitrigger_stub.model = getent(unitrigger_stub.target, "targetname");
 
     if(isDefined(unitrigger_stub.model)) {
-      if(isDefined(unitrigger_stub.zombie_weapon_upgrade))
+      if(isDefined(unitrigger_stub.zombie_weapon_upgrade)) {
         unitrigger_stub.model useweaponhidetags(unitrigger_stub.zombie_weapon_upgrade);
+      }
 
       unitrigger_stub.model ghost();
       unitrigger_stub.model notsolid();
@@ -881,8 +923,9 @@ alcatraz_setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigge
 
   unitrigger_stub.craftablespawn = unitrigger_stub craftable_piece_unitriggers(equipname, unitrigger_stub.origin);
 
-  if(delete_trigger)
+  if(delete_trigger) {
     trig delete();
+  }
 
   level.a_uts_craftables[level.a_uts_craftables.size] = unitrigger_stub;
   return unitrigger_stub;

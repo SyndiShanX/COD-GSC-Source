@@ -25,8 +25,9 @@ elite_approach(enemy, attack_counter) {
   /# maps\mp\agents\alien\_alien_think::debug_alien_ai_state( "elite_approach" ); #/ /
   # maps\mp\agents\alien\_alien_think::debug_alien_attacker_state("attacking");
 
-  if(DistanceSquared(enemy.origin, self.origin) > ALIEN_CHARGE_ATTACK_DISTANCE_MAX * ALIEN_CHARGE_ATTACK_DISTANCE_MAX)
+  if(DistanceSquared(enemy.origin, self.origin) > ALIEN_CHARGE_ATTACK_DISTANCE_MAX * ALIEN_CHARGE_ATTACK_DISTANCE_MAX) {
     self maps\mp\agents\alien\_alien_think::run_near_enemy(ALIEN_CHARGE_ATTACK_DISTANCE_MAX, enemy);
+  }
 
   while(true) {
     if(can_do_charge_attack(enemy)) {
@@ -44,8 +45,9 @@ run_to_slam(enemy) {
   self thread run_to_enemy(enemy);
 
   msg = self common_scripts\utility::waittill_any_return("run_to_slam_complete", "in_charge_range", "enemy", "bad_path");
-  if(!self AgentCanSeeSentient(enemy))
+  if(!self AgentCanSeeSentient(enemy)) {
     return false;
+  }
 
   return (msg == "run_to_slam_complete");
 }
@@ -59,8 +61,9 @@ run_to_enemy(enemy) {
 
   self maps\mp\agents\alien\_alien_think::run_near_enemy(ALIEN_SLAM_MIN_DISTANCE, enemy);
 
-  if(startTime == GetTime())
+  if(startTime == GetTime()) {
     wait 0.05;
+  }
 
   self notify("run_to_slam_complete");
 }
@@ -86,14 +89,17 @@ monitor_charge_range(enemy) {
 }
 
 can_do_charge_attack(enemy) {
-  if(gettime() < self.last_charge_time + ALIEN_CHARGE_COOLDOWN_MSEC)
+  if(gettime() < self.last_charge_time + ALIEN_CHARGE_COOLDOWN_MSEC) {
     return false;
+  }
 
-  if(DistanceSquared(self.origin, enemy.origin) < ALIEN_CHARGE_ATTACK_DISTANCE_MIN * ALIEN_CHARGE_ATTACK_DISTANCE_MIN)
+  if(DistanceSquared(self.origin, enemy.origin) < ALIEN_CHARGE_ATTACK_DISTANCE_MIN * ALIEN_CHARGE_ATTACK_DISTANCE_MIN) {
     return false;
+  }
 
-  if(!maps\mp\agents\_scriptedagents::CanMovePointToPoint(self.origin, enemy.origin))
+  if(!maps\mp\agents\_scriptedagents::CanMovePointToPoint(self.origin, enemy.origin)) {
     return false;
+  }
 
   return self maps\mp\alien\_utility::is_normal_upright(anglesToUp(self.angles));
 }
@@ -124,8 +130,9 @@ do_ground_slam(enemy) {
   self area_damage_and_impulse(ALIEN_SLAM_RADIUS, min_damage, max_damage, ALIEN_ELITE_GROUND_SLAM_IMPULSE);
   self maps\mp\agents\_scriptedagents::WaitUntilNotetrack("attack_melee", "end");
 
-  if(!isDefined(self.elite_angered))
+  if(!isDefined(self.elite_angered)) {
     meleeSuccess = self maps\mp\agents\alien\_alien_melee::move_back(enemy, true);
+  }
   self set_alien_emissive_default(0.2);
 }
 
@@ -172,8 +179,9 @@ do_charge_attack(enemy) {
     self notify("charge_complete");
     self ScrAgentSetOrientMode("face angle abs", self.angles);
 
-    if(!isDefined(result))
+    if(!isDefined(result)) {
       result = "fail";
+    }
 
     switch (result) {
       case "success":
@@ -218,10 +226,12 @@ track_enemy(enemy) {
 play_stop_anim(anim_index) {
   FORWARD_CLEARANCE = 120;
 
-  if(hit_geo(FORWARD_CLEARANCE))
+  if(hit_geo(FORWARD_CLEARANCE)) {
     go_hit_geo();
-  else
+  }
+  else {
     self maps\mp\agents\_scriptedagents::SafelyPlayAnimNAtRateUntilNotetrack("charge_attack_stop", anim_index, 1.0, "charge_attack_stop", "end", ::chargeEndNotetrackHandler);
+  }
 }
 
 go_hit_geo() {
@@ -255,19 +265,24 @@ watch_charge_hit(enemy, anim_index) {
   shortLookAheadDistance = (animDistance / animLength) * FRAME_TIME * 3;
 
   for(i = 0; i < num_loops; i++) {
-    if(hit_player())
+    if(hit_player()) {
       return "success";
+    }
 
-    if(self.charge_tracking_enemy)
+    if(self.charge_tracking_enemy) {
       lookAheadDistance = Distance(enemy.origin, self.origin);
-    else
+    }
+    else {
       lookAheadDistance = shortlookAheadDistance;
+    }
 
-    if(hit_geo(lookAheadDistance))
+    if(hit_geo(lookAheadDistance)) {
       return "fail";
+    }
 
-    if(!self.charge_tracking_enemy && missed_enemy(enemy))
+    if(!self.charge_tracking_enemy && missed_enemy(enemy)) {
       return "fail";
+    }
 
     common_scripts\utility::waitframe();
   }
@@ -333,15 +348,17 @@ missed_enemy(enemy) {
   pastEnemyDistance = -256;
   can_see_enemy = can_see_enemy(enemy);
 
-  if(!can_see_enemy)
+  if(!can_see_enemy) {
     return true;
+  }
 
   self_to_enemy = enemy.origin - self.origin;
   self_forward = anglesToForward(self.angles);
   distancePast = VectorDot(self_to_enemy, self_forward);
 
-  if(distancePast > 0)
+  if(distancePast > 0) {
     return false;
+  }
 
   return distancePast < pastEnemyDistance;
 }
@@ -495,10 +512,12 @@ deploy_health_regen_shield() {
 }
 
 play_shield_impact_fx(vPoint, vDir) {
-  if(isDefined(vDir))
+  if(isDefined(vDir)) {
     forward_vector = vDir * -1;
-  else
+  }
+  else {
     forward_vector = anglesToForward(self.angles);
+  }
 
   up_vector = anglesToUp(vectorToAngles(forward_vector));
   playFX(level._effect["queen_shield_impact"], vPoint, forward_vector, up_vector);

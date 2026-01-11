@@ -15,8 +15,9 @@ start_outside() {
   maps\_utility::activate_trigger_with_targetname("trig_derrick_ally_7");
   var_1 = getglassarray("glass_command_center");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   destroyglass(var_3);
+  }
 
   thread maps\black_ice_refinery::util_refinery_stack_cleanup();
   thread command_godrays();
@@ -35,8 +36,9 @@ start_inside() {
   level._allies maps\black_ice_util::teleport_allies(var_0);
   var_1 = getglassarray("glass_command_center");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   destroyglass(var_3);
+  }
 
   thread maps\black_ice_refinery::util_refinery_stack_cleanup();
   thread command_godrays();
@@ -163,13 +165,15 @@ dialog_baker_start() {
     wait(var_1);
     level._allies[0] maps\_utility::smart_dialogue(var_2[var_0]);
 
-    if(var_1 < 30)
+    if(var_1 < 30) {
       var_1 = var_1 + 3;
+    }
 
     var_0 = var_0 + 1;
 
-    if(var_0 == var_2.size)
+    if(var_0 == var_2.size) {
       var_0 = 0;
+    }
   }
 }
 
@@ -182,14 +186,16 @@ dialog_baker_success() {
 door_close() {
   var_0 = level._command.door_in;
 
-  if(level.start_point != "command_inside")
+  if(level.start_point != "command_inside") {
     maps\black_ice_util::waittill_trigger_ent_targetname("trig_command_ally", level._allies);
+  }
 
   common_scripts\utility::flag_wait("flag_command_start");
   common_scripts\utility::flag_wait("flag_player_start_sequence");
 
-  if(level.start_point != "command_inside")
+  if(level.start_point != "command_inside") {
     var_0 maps\black_ice_util::close_door(undefined, 0.6);
+  }
 
   maps\_utility::activate_trigger_with_targetname("trig_command_ally2_position");
   cleanup_pipedeck();
@@ -213,8 +219,9 @@ allies() {
     var_0 maps\_anim::anim_single_solo(level._allies[0], "command_enter_approach");
     level._allies[0] maps\black_ice_util::cover_left_idle();
 
-    while(!level.player maps\_utility::player_looking_at(level._allies[0].origin, 0.5))
+    while(!level.player maps\_utility::player_looking_at(level._allies[0].origin, 0.5)) {
       wait 0.05;
+    }
 
     level._allies[0] notify("stop_loop");
     level._allies[0] thread maps\black_ice_audio::sfx_command_center_door_open();
@@ -323,11 +330,13 @@ player_disable_suppression_sequence() {
   thread allies_baker_console_anims(var_1, var_2);
   thread player_input_console_animate(var_0, var_2, var_7);
 
-  foreach(var_10 in var_3)
+  foreach(var_10 in var_3) {
   var_10 thread maps\_anim::anim_single_solo(var_10, "command_shutoff_button");
+  }
 
-  foreach(var_16 in var_5)
+  foreach(var_16 in var_5) {
   var_16 thread maps\_anim::anim_single_solo(var_16, "command_monitor_baker");
+  }
 
   var_25 = 0;
 
@@ -350,8 +359,9 @@ player_disable_suppression_sequence() {
     thread maps\black_ice_audio::sfx_blackice_console_fail_explo();
     var_1 thread maps\_anim::anim_single_solo(level._allies[0], "command_late");
 
-    foreach(var_13 in var_4)
+    foreach(var_13 in var_4) {
     var_13 thread maps\_anim::anim_single_solo(var_13, "command_baker_late");
+    }
 
     level.player lerpviewangleclamp(2.0, 0, 0, 0, 0, 0, 0);
     wait 2;
@@ -372,25 +382,30 @@ player_disable_suppression_sequence() {
     thread sucess_swelling_rumble(var_33, 0.4, 0.3);
     level._allies[0] thread allies_baker_command_end_anim(var_1);
 
-    if(maps\_utility::is_gen4() && !level.ps4)
+    if(maps\_utility::is_gen4() && !level.ps4) {
       setsaveddvar("r_mbEnable", 2);
+    }
 
     common_scripts\utility::flag_set("flag_start_lights");
 
-    foreach(var_16 in var_5)
+    foreach(var_16 in var_5) {
     var_16 thread maps\_anim::anim_single_solo(var_16, "command_monitor_baker_end");
+    }
 
-    foreach(var_16 in var_8)
+    foreach(var_16 in var_8) {
     var_16 thread maps\_anim::anim_single_solo(var_16, "command_monitor_player_end");
+    }
 
-    foreach(var_13 in var_4)
+    foreach(var_13 in var_4) {
     var_13 thread maps\_anim::anim_single_solo(var_13, "command_baker_end");
+    }
 
     common_scripts\utility::flag_set("flag_control_sequence_over");
     thread maps\black_ice_audio::sfx_cmd_seq_end();
 
-    if(getdvarint("bi_command_pressure_trial", 0) <= 1)
+    if(getdvarint("bi_command_pressure_trial", 0) <= 1) {
       level.player maps\_utility::player_giveachievement_wrapper("LEVEL_11A");
+    }
 
     level._command.enemy_chair delete();
     level.player springcamdisabled(0.5);
@@ -419,8 +434,9 @@ disable_player() {
   level.player allowprone(0);
   level.player allowmelee(0);
 
-  if(issubstr(level.player getcurrentweapon(), "panzerfaust"))
+  if(issubstr(level.player getcurrentweapon(), "panzerfaust")) {
     wait 0.75;
+  }
 }
 
 player_control_sequence() {
@@ -432,14 +448,16 @@ player_control_sequence() {
   thread player_control_baker_nag_and_fail();
   level notify("notify_player_start_input_test");
 
-  while(!common_scripts\utility::flag("flag_player_started_input"))
+  while(!common_scripts\utility::flag("flag_player_started_input")) {
     wait(level.timestep);
+  }
 
   check_hold_bar_in_green();
   common_scripts\utility::flag_set("flag_player_held_green");
 
-  while(common_scripts\utility::flag("flag_baker_instructing"))
+  while(common_scripts\utility::flag("flag_baker_instructing")) {
     wait(level.timestep);
+  }
 
   level notify("notify_start_control_minigame");
   thread explosion_progression_control_sequence();
@@ -489,15 +507,19 @@ display_lever_hint() {
   var_0 = getsticksconfig();
 
   if(isDefined(level.ps3) && level.ps3 || isDefined(level.ps4) && level.ps4) {
-    if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacysouthpaw")
+    if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacysouthpaw") {
       maps\_utility::display_hint("pull_lever_no_glyph_reverse");
-    else
+    }
+    else {
       maps\_utility::display_hint("pull_lever_no_glyph");
+    }
   } else if(level.console || level.player usinggamepad()) {
-    if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacysouthpaw")
+    if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacysouthpaw") {
       maps\_utility::display_hint("pull_lever_reverse");
-    else
+    }
+    else {
       maps\_utility::display_hint("pull_lever");
+    }
   } else
     maps\_utility::display_hint("pull_lever_pc");
 }
@@ -562,8 +584,9 @@ player_control_baker_nag_and_fail() {
 }
 
 wait_while_color_status_in_green() {
-  while(level.color_status == 0)
+  while(level.color_status == 0) {
     wait(level.timestep);
+  }
 }
 
 dialog_line_with_flag(var_0, var_1, var_2) {
@@ -695,10 +718,12 @@ monitor_controls_and_fx(var_0) {
 
     var_3 = monitor_color_status(var_3, var_10);
 
-    if(var_10 < 0.5)
+    if(var_10 < 0.5) {
       var_19 = 1;
-    else
+    }
+    else {
       var_19 = 0;
+    }
 
     if(common_scripts\utility::flag("flag_player_failed_control")) {
       if(!var_5) {
@@ -782,8 +807,9 @@ monitor_controls_and_fx(var_0) {
       var_4 = var_3;
     }
 
-    if(common_scripts\utility::flag("flag_audio_feedback"))
+    if(common_scripts\utility::flag("flag_audio_feedback")) {
       thread maps\black_ice_audio::sfx_lever_logic(var_2);
+    }
 
     if(common_scripts\utility::flag("flag_start_control_monitor_fx")) {
       switch (var_2) {
@@ -848,15 +874,19 @@ monitor_color_status(var_0, var_1) {
   var_3 = [0.14, 0.8];
 
   if(var_1 < var_2[0]) {
-    if(var_1 < var_3[0])
+    if(var_1 < var_3[0]) {
       var_0 = 2;
-    else
+    }
+    else {
       var_0 = 1;
+    }
   } else if(var_1 > var_2[1]) {
-    if(var_1 > var_3[1])
+    if(var_1 > var_3[1]) {
       var_0 = 2;
-    else
+    }
+    else {
       var_0 = 1;
+    }
   } else
     var_0 = 0;
 
@@ -871,8 +901,9 @@ monitor_bar_noise(var_0, var_1) {
     var_0[1] = randomfloatrange(0 - var_1, var_1);
   } else if(var_0[0] > var_0[1])
     var_0[0] = var_0[0] - var_2;
-  else
+  else {
     var_0[0] = var_0[0] + var_2;
+  }
 
   var_0[2] = lerp_value(var_0[2], var_0[0], 0.13);
   return var_0;
@@ -884,18 +915,22 @@ monitor_bar_drift(var_0) {
   var_3 = 3.5;
 
   if(var_0[2] < 0.0) {
-    if(var_0[1] == 0)
+    if(var_0[1] == 0) {
       var_0[1] = 1;
-    else
+    }
+    else {
       var_0[1] = 0;
+    }
 
     var_0[2] = randomfloatrange(var_3, var_2);
   }
 
-  if(var_0[1] == 0)
+  if(var_0[1] == 0) {
     var_0[0] = lerp_value(var_0[0], level.bar_drift_rate, var_1);
-  else
+  }
+  else {
     var_0[0] = lerp_value(var_0[0], 0 - level.bar_drift_rate, var_1);
+  }
 
   var_0[2] = var_0[2] - level.timestep;
   return var_0;
@@ -954,8 +989,9 @@ command_light_change() {
   var_2 = [var_0, var_1];
   var_3 = getEntArray("emergency_red_exfil_light", "targetname");
 
-  foreach(var_5 in var_2)
+  foreach(var_5 in var_2) {
   var_5 setlightintensity(2);
+  }
 
   var_7 = getEntArray("command_light_siren", "targetname");
   var_8 = getEntArray("command_light_siren_nolight", "targetname");
@@ -983,14 +1019,17 @@ command_light_change() {
     var_12 = var_12 + 1;
   }
 
-  foreach(var_14 in var_7)
+  foreach(var_14 in var_7) {
   var_14 hide();
+  }
 
-  foreach(var_14 in var_8)
+  foreach(var_14 in var_8) {
   var_14 hide();
+  }
 
-  if(level.start_point != "exfil")
+  if(level.start_point != "exfil") {
     level waittill("flag_start_lights");
+  }
 
   wait 0.55;
 
@@ -1006,55 +1045,71 @@ command_light_change() {
     maps\_utility::stop_exploder("exfil_wall_alarm_yellow");
     wait(level.timestep);
 
-    if(!common_scripts\utility::flag("flag_vision_exfil_deck") && !common_scripts\utility::flag("flag_player_dying_on_rig"))
+    if(!common_scripts\utility::flag("flag_vision_exfil_deck") && !common_scripts\utility::flag("flag_player_dying_on_rig")) {
       maps\_utility::vision_set_fog_changes("black_ice_command_red", 0);
+    }
 
-    foreach(var_27 in var_11)
+    foreach(var_27 in var_11) {
     playFXOnTag(level._effect["command_siren_red"], var_27, "tag_origin");
+    }
 
-    foreach(var_27 in var_16)
+    foreach(var_27 in var_16) {
     playFXOnTag(level._effect["command_siren_red_low"], var_27, "tag_origin");
+    }
 
-    foreach(var_5 in var_3)
+    foreach(var_5 in var_3) {
     var_5 setlightintensity(1.2);
+    }
 
-    foreach(var_14 in var_7)
+    foreach(var_14 in var_7) {
     var_14 show();
+    }
 
-    foreach(var_14 in var_8)
+    foreach(var_14 in var_8) {
     var_14 show();
+    }
 
-    foreach(var_14 in var_9)
+    foreach(var_14 in var_9) {
     var_14 hide();
+    }
 
-    foreach(var_14 in var_10)
+    foreach(var_14 in var_10) {
     var_14 hide();
+    }
 
     wait(var_25);
 
-    if(!common_scripts\utility::flag("flag_vision_exfil_deck") && !common_scripts\utility::flag("flag_player_dying_on_rig"))
+    if(!common_scripts\utility::flag("flag_vision_exfil_deck") && !common_scripts\utility::flag("flag_player_dying_on_rig")) {
       maps\_utility::vision_set_fog_changes("black_ice_command_yellow", 0);
+    }
 
-    foreach(var_27 in var_11)
+    foreach(var_27 in var_11) {
     stopFXOnTag(level._effect["command_siren_red"], var_27, "tag_origin");
+    }
 
-    foreach(var_27 in var_16)
+    foreach(var_27 in var_16) {
     stopFXOnTag(level._effect["command_siren_red_low"], var_27, "tag_origin");
+    }
 
-    foreach(var_5 in var_3)
+    foreach(var_5 in var_3) {
     var_5 setlightintensity(0.0001);
+    }
 
-    foreach(var_14 in var_7)
+    foreach(var_14 in var_7) {
     var_14 hide();
+    }
 
-    foreach(var_14 in var_8)
+    foreach(var_14 in var_8) {
     var_14 hide();
+    }
 
-    foreach(var_14 in var_9)
+    foreach(var_14 in var_9) {
     var_14 show();
+    }
 
-    foreach(var_14 in var_10)
+    foreach(var_14 in var_10) {
     var_14 show();
+    }
 
     wait(level.timestep);
     common_scripts\utility::exploder("exfil_wall_alarm_yellow");
@@ -1144,30 +1199,34 @@ blend_to_exploder(var_0, var_1) {
   for(var_3 = 0.1; var_2 > 0; var_2 = var_2 - 1) {
     maps\_utility::stop_exploder(var_0);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       common_scripts\utility::exploder(var_1);
+    }
 
     wait(var_3 / var_2);
     common_scripts\utility::exploder(var_0);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       maps\_utility::stop_exploder(var_1);
+    }
 
     wait(var_3 - var_3 / var_2);
   }
 
   maps\_utility::stop_exploder(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     common_scripts\utility::exploder(var_1);
+  }
 }
 
 event_pipe_explosions() {
   common_scripts\utility::flag_wait("flag_command_start");
   var_0 = getEntArray("model_pipedeck_explosion3_old", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 
   var_4 = maps\black_ice_util::setup_tag_anim_rig("pipe_explosion2", "pipedeck_explosion2_rig");
   var_5 = maps\black_ice_util::setup_tag_anim_rig("pipe_explosion3", "pipedeck_explosion3_rig");
@@ -1262,8 +1321,9 @@ notetrack_blast_shake_late(var_0) {
 command_godrays() {
   var_0 = getent("cc_gr_origin", "targetname");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     maps\black_ice_util::god_rays_from_world_location(var_0.origin, "flag_command_start", "flag_teleport_rig", undefined, undefined);
+  }
 }
 
 command_geyser_light() {
@@ -1282,22 +1342,27 @@ shrink_pdeck_lights() {
   var_2 = getEntArray("lights_pipedeck_c", "targetname");
   var_3 = [getent("escape_emergency_1", "targetname")];
 
-  foreach(var_5 in var_0)
+  foreach(var_5 in var_0) {
   var_5 setlightradius(12);
+  }
 
-  foreach(var_5 in var_1)
+  foreach(var_5 in var_1) {
   var_5 setlightradius(12);
+  }
 
-  foreach(var_5 in var_2)
+  foreach(var_5 in var_2) {
   var_5 setlightradius(12);
+  }
 
-  foreach(var_5 in var_3)
+  foreach(var_5 in var_3) {
   var_5 setlightradius(12);
+  }
 
   level waittill("flag_start_lights");
 
-  foreach(var_5 in var_3)
+  foreach(var_5 in var_3) {
   var_5 setlightradius(350);
+  }
 }
 
 copy_node(var_0) {
@@ -1314,10 +1379,12 @@ lerp_value(var_0, var_1, var_2) {
 }
 
 cap_range(var_0, var_1, var_2) {
-  if(var_0 > var_2)
+  if(var_0 > var_2) {
     var_0 = var_2;
-  else if(var_0 < var_1)
+  }
+  else if(var_0 < var_1) {
     var_0 = var_1;
+  }
 
   return var_0;
 }

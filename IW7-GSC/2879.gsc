@@ -7,16 +7,19 @@ setparent(var_00) {
   if(isDefined(self.parent) && self.parent == var_00) {
     return;
   }
-  if(isDefined(self.parent))
+  if(isDefined(self.parent)) {
     self.parent removechild(self);
+  }
 
   self.parent = var_00;
   self.parent addchild(self);
 
-  if(isDefined(self.point))
+  if(isDefined(self.point)) {
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  else
+  }
+  else {
     setpoint("TOPLEFT");
+  }
 }
 
 getparent() {
@@ -60,57 +63,70 @@ removechild(var_00) {
 }
 
 setpoint(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     var_04 = 0;
+  }
 
   var_05 = getparent();
 
-  if(var_04)
+  if(var_04) {
     self moveovertime(var_04);
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
   self.xoffset = var_02;
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0;
+  }
 
   self.yoffset = var_03;
   self.point = var_00;
   self.alignx = "center";
   self.aligny = "middle";
 
-  if(issubstr(var_00, "TOP"))
+  if(issubstr(var_00, "TOP")) {
     self.aligny = "top";
+  }
 
-  if(issubstr(var_00, "BOTTOM"))
+  if(issubstr(var_00, "BOTTOM")) {
     self.aligny = "bottom";
+  }
 
-  if(issubstr(var_00, "LEFT"))
+  if(issubstr(var_00, "LEFT")) {
     self.alignx = "left";
+  }
 
-  if(issubstr(var_00, "RIGHT"))
+  if(issubstr(var_00, "RIGHT")) {
     self.alignx = "right";
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = var_00;
+  }
 
   self.relativepoint = var_01;
   var_06 = "center";
   var_07 = "middle";
 
-  if(issubstr(var_01, "TOP"))
+  if(issubstr(var_01, "TOP")) {
     var_07 = "top";
+  }
 
-  if(issubstr(var_01, "BOTTOM"))
+  if(issubstr(var_01, "BOTTOM")) {
     var_07 = "bottom";
+  }
 
-  if(issubstr(var_01, "LEFT"))
+  if(issubstr(var_01, "LEFT")) {
     var_06 = "left";
+  }
 
-  if(issubstr(var_01, "RIGHT"))
+  if(issubstr(var_01, "RIGHT")) {
     var_06 = "right";
+  }
 
   if(var_05 == level.uiparent) {
     self.horzalign = var_06;
@@ -126,17 +142,21 @@ setpoint(var_00, var_01, var_02, var_03, var_04) {
   } else if(var_06 == "center" || var_5.alignx == "center") {
     var_08 = int(var_5.width / 2);
 
-    if(var_06 == "left" || var_5.alignx == "right")
+    if(var_06 == "left" || var_5.alignx == "right") {
       var_09 = -1;
-    else
+    }
+    else {
       var_09 = 1;
+    }
   } else {
     var_08 = var_5.width;
 
-    if(var_06 == "left")
+    if(var_06 == "left") {
       var_09 = -1;
-    else
+    }
+    else {
       var_09 = 1;
+    }
   }
 
   self.x = var_5.x + var_08 * var_09;
@@ -147,17 +167,21 @@ setpoint(var_00, var_01, var_02, var_03, var_04) {
   } else if(var_07 == "middle" || var_5.aligny == "middle") {
     var_10 = int(var_5.height / 2);
 
-    if(var_07 == "top" || var_5.aligny == "bottom")
+    if(var_07 == "top" || var_5.aligny == "bottom") {
       var_11 = -1;
-    else
+    }
+    else {
       var_11 = 1;
+    }
   } else {
     var_10 = var_5.height;
 
-    if(var_07 == "top")
+    if(var_07 == "top") {
       var_11 = -1;
-    else
+    }
+    else {
       var_11 = 1;
+    }
   }
 
   self.y = var_5.y + var_10 * var_11;
@@ -180,12 +204,15 @@ setpointbar(var_00, var_01, var_02, var_03) {
   self.bar.aligny = self.aligny;
   self.bar.y = self.y;
 
-  if(self.alignx == "left")
+  if(self.alignx == "left") {
     self.bar.x = self.x + self.func_13E1E;
-  else if(self.alignx == "right")
+  }
+  else if(self.alignx == "right") {
     self.bar.x = self.x - (self.width - self.func_13E1E);
-  else
+  }
+  else {
     self.bar.x = self.x - int((self.width - self.func_13E1E * 2) / 2);
+  }
 
   updatebar(self.bar.frac);
 }
@@ -193,8 +220,9 @@ setpointbar(var_00, var_01, var_02, var_03) {
 updatebar(var_00) {
   var_01 = int((self.width - self.func_13E1E * 2) * var_00);
 
-  if(!var_01)
+  if(!var_01) {
     var_01 = 1;
+  }
 
   self.bar.frac = var_00;
   self.bar setshader(self.bar.shader, var_01, self.height - self.func_13E5D * 2);
@@ -313,24 +341,29 @@ createicon_hudelem(var_00, var_01, var_02, var_03) {
   var_0.children = [];
   var_00 setparent(level.uiparent);
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_00 setshader(var_01, var_02, var_03);
+  }
 
   return var_00;
 }
 
 createbar(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = "white";
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = "black";
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 100;
+  }
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 9;
+  }
 
   var_05 = newhudelem();
   var_5.x = 2;
@@ -378,11 +411,13 @@ func_499C(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 }
 
 func_4997(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     var_05 = 2;
+  }
 
-  if(!isDefined(var_06))
+  if(!isDefined(var_06)) {
     var_06 = 2;
+  }
 
   var_07 = newclienthudelem(self);
   var_7.x = 0 - var_05;
@@ -421,13 +456,15 @@ setflashfrac(var_00) {
 }
 
 func_6AAB(var_00, var_01) {
-  if(isDefined(var_01) && var_01 > 0)
+  if(isDefined(var_01) && var_01 > 0) {
     self fadeovertime(var_01);
+  }
 
   self.alpha = var_00;
 
-  if(isDefined(var_01) && var_01 > 0)
+  if(isDefined(var_01) && var_01 > 0) {
     wait(var_01);
+  }
 }
 
 flashthread() {
@@ -454,15 +491,18 @@ destroyelem() {
   if(isDefined(self.children) && self.children.size) {
     var_00 = [];
 
-    for(var_01 = 0; var_01 < self.children.size; var_1++)
+    for(var_01 = 0; var_01 < self.children.size; var_1++) {
       var_0[var_01] = self.children[var_01];
+    }
 
-    for(var_01 = 0; var_01 < var_0.size; var_1++)
+    for(var_01 = 0; var_01 < var_0.size; var_1++) {
       var_0[var_01] setparent(getparent());
+    }
   }
 
-  if(isDefined(self.elemtype) && self.elemtype == "bar")
+  if(isDefined(self.elemtype) && self.elemtype == "bar") {
     self.bar destroy();
+  }
 
   self destroy();
 }
@@ -497,17 +537,20 @@ func_10B56(var_00) {
     return;
   }
 
-  if(isDefined(level.func_10B54))
+  if(isDefined(level.func_10B54)) {
     level.func_10B54 destroy();
+  }
 
   _setsaveddvar("hud_showStance", "0");
   level.func_10B54 = newhudelem();
   level.func_10B54.x = -75;
 
-  if(level.console)
+  if(level.console) {
     level.func_10B54.y = -20;
-  else
+  }
+  else {
     level.func_10B54.y = -10;
+  }
 
   level.func_10B54 setshader("stance_carry", 64, 64);
   level.func_10B54.alignx = "right";
@@ -555,30 +598,39 @@ func_491A() {
 }
 
 func_78E6(var_00, var_01, var_02, var_03) {
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0;
+  }
 
   var_04 = undefined;
 
-  if(!level.console)
+  if(!level.console) {
     var_04 = -250;
-  else if(!isDefined(var_00))
+  }
+  else if(!isDefined(var_00)) {
     var_04 = -225;
-  else
+  }
+  else {
     var_04 = var_00;
+  }
 
-  if(var_03)
+  if(var_03) {
     var_04 = var_00;
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_05 = 100;
-  else
+  }
+  else {
     var_05 = var_01;
+  }
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_06 = newclienthudelem(var_02);
-  else
+  }
+  else {
     var_06 = newhudelem();
+  }
 
   var_6.alignx = "left";
   var_6.aligny = "middle";
@@ -598,30 +650,39 @@ func_78E6(var_00, var_01, var_02, var_03) {
 }
 
 func_7956(var_00, var_01, var_02, var_03) {
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0;
+  }
 
   var_04 = undefined;
 
-  if(!level.console)
+  if(!level.console) {
     var_04 = -250;
-  else if(!isDefined(var_00))
+  }
+  else if(!isDefined(var_00)) {
     var_04 = -170;
-  else
+  }
+  else {
     var_04 = var_00;
+  }
 
-  if(var_03)
+  if(var_03) {
     var_04 = var_00;
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_05 = 100;
-  else
+  }
+  else {
     var_05 = var_01;
+  }
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_06 = newclienthudelem(var_02);
-  else
+  }
+  else {
     var_06 = newhudelem();
+  }
 
   var_6.alignx = "right";
   var_6.aligny = "middle";
@@ -641,10 +702,12 @@ func_7956(var_00, var_01, var_02, var_03) {
 }
 
 func_48B7(var_00, var_01, var_02) {
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_03 = newclienthudelem(var_02);
-  else
+  }
+  else {
     var_03 = newhudelem();
+  }
 
   var_3.x = 0;
   var_3.y = 0;
@@ -663,14 +726,17 @@ func_48B8(var_00, var_01, var_02, var_03, var_04) {
   var_05 = scripts\sp\utility::func_7B92();
   var_06 = newclienthudelem(var_05);
 
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     var_04 = 1;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0;
+  }
 
   var_6.x = var_02;
   var_6.y = var_03;
@@ -689,8 +755,9 @@ func_48B9(var_00, var_01, var_02, var_03, var_04) {
   var_05 = scripts\sp\utility::func_7B92();
   var_06 = newclienthudelem(var_05);
 
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     var_04 = 1;
+  }
 
   var_6.x = var_02;
   var_6.y = var_03;
@@ -709,8 +776,9 @@ func_6A99(var_00, var_01) {
   if(level.func_B8D0) {
     return;
   }
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 0.3;
+  }
 
   var_02 = func_7B4F(var_01);
   var_02 fadeovertime(var_00);
@@ -719,20 +787,23 @@ func_6A99(var_00, var_01) {
 }
 
 func_7B4F(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = "black";
+  }
 
   return func_7B5D(var_00);
 }
 
 func_6AA3(var_00, var_01) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 0.3;
+  }
 
   var_02 = func_7B4F(var_01);
 
-  if(var_00 > 0)
+  if(var_00 > 0) {
     var_02 fadeovertime(var_00);
+  }
 
   var_2.alpha = 1;
   wait(var_00);
@@ -744,16 +815,20 @@ func_10CCC(var_00) {
 }
 
 func_7B5D(var_00) {
-  if(isplayer(self))
+  if(isplayer(self)) {
     var_01 = self;
-  else
+  }
+  else {
     var_01 = level.player;
+  }
 
-  if(!isDefined(var_1.func_C7FD))
+  if(!isDefined(var_1.func_C7FD)) {
     var_1.func_C7FD = [];
+  }
 
-  if(!isDefined(var_1.func_C7FD[var_00]))
+  if(!isDefined(var_1.func_C7FD[var_00])) {
     var_1.func_C7FD[var_00] = func_48B7(var_00, 0, var_01);
+  }
 
   var_1.func_C7FD[var_00].sort = 0;
   var_1.func_C7FD[var_00].foreground = 1;

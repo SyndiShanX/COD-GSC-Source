@@ -132,4 +132,3 @@ private function_1fc427dc() {
   waitframe(1);
   adddebugcommand("<dev string:x17a>" + mapname + "<dev string:x18a>");
 }
-

@@ -8,8 +8,9 @@
 #include maps\mp\gametypes\_hud_util;
 
 init() {
-  if(isDefined(level.initedEntityHeadIcons))
+  if(isDefined(level.initedEntityHeadIcons)) {
     return;
+  }
   level.initedEntityHeadIcons = true;
 
   game["entity_headicon_allies"] = maps\mp\gametypes\_teams::getTeamHeadIcon("allies");
@@ -18,22 +19,25 @@ init() {
   precacheShader(game["entity_headicon_allies"]);
   precacheShader(game["entity_headicon_axis"]);
 
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return;
+  }
 }
 
 // This can show to single players or to teams.Showing to a single player destroys instances of
 // the icon that are shown to their team.Showing to a team destroys instances of the icon that
 // are shown to players on that team
 setHeadIcon(showTo, icon, offset, width, height) {
-  if(!isDefined(self.entityHeadIcons))
+  if(!isDefined(self.entityHeadIcons)) {
     self.entityHeadIcons = [];
+  }
 
   if(!isPlayer(showTo) && showTo == "none") {
     foreach(key, headIcon in self.entityHeadIcons) {
       // TODO: remove and fix properly after ship
-      if(isDefined(headIcon))
+      if(isDefined(headIcon)) {
         headIcon destroy();
+      }
 
       self.entityHeadIcons[key] = undefined;
     }
@@ -47,8 +51,9 @@ setHeadIcon(showTo, icon, offset, width, height) {
       self.entityHeadIcons[showTo.guid] = undefined;
     }
 
-    if(icon == "")
+    if(icon == "") {
       return;
+    }
 
     // remove from team or we'd have two icons
     if(isDefined(self.entityHeadIcons[showTo.team])) {
@@ -67,12 +72,14 @@ setHeadIcon(showTo, icon, offset, width, height) {
       self.entityHeadIcons[showTo] = undefined;
     }
 
-    if(icon == "")
+    if(icon == "") {
       return;
+    }
 
     foreach(key, hudIcon in self.entityHeadIcons) {
-      if(key == "axis" || key == "allies")
+      if(key == "axis" || key == "allies") {
         continue;
+      }
 
       player = getPlayerForGuid(key);
       if(player.team == showTo) {
@@ -96,15 +103,18 @@ setHeadIcon(showTo, icon, offset, width, height) {
   headIcon.z = self.origin[2] + offset[2];
   headIcon.alpha = 0.85;
   headIcon setShader(icon, width, height);
-  if(isPlayer(showTo))
+  if(isPlayer(showTo)) {
     headIcon setWaypoint(true, true, false);
-  else
+  }
+  else {
     headIcon setWaypoint(true, true, false);
+  }
 
   headIcon thread keepPositioned(self, offset);
   self thread destroyIconsOnDeath();
-  if(isPlayer(showTo))
+  if(isPlayer(showTo)) {
     headIcon thread destroyOnOwnerDisconnect(showTo);
+  }
 }
 
 destroyOnOwnerDisconnect(owner) {
@@ -123,8 +133,9 @@ destroyIconsOnDeath() {
 
   foreach(key, headIcon in self.entityHeadIcons) {
     // TODO: remove and fix properly after ship
-    if(!isDefined(headIcon)) //needed for FFA host migration (when host has active head icons)
+    if(!isDefined(headIcon)) //needed for FFA host migration (when host has active head icons) {
       continue;
+    }
 
     headIcon destroy();
   }
@@ -150,8 +161,9 @@ keepPositioned(owner, offset) {
 
 setTeamHeadIcon(team, offset) // "allies", "axis", "all", "none"
 {
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return;
+  }
 
   if(!isDefined(self.entityHeadIconTeam)) {
     self.entityHeadIconTeam = "none";
@@ -162,16 +174,19 @@ setTeamHeadIcon(team, offset) // "allies", "axis", "all", "none"
 
   self.entityHeadIconTeam = team;
 
-  if(isDefined(offset))
+  if(isDefined(offset)) {
     self.entityHeadIconOffset = offset;
-  else
+  }
+  else {
     self.entityHeadIconOffset = (0, 0, 0);
+  }
 
   self notify("kill_entity_headicon_thread");
 
   if(team == "none") {
-    if(isDefined(self.entityHeadIcon))
+    if(isDefined(self.entityHeadIcon)) {
       self.entityHeadIcon destroy();
+    }
     return;
   }
 
@@ -191,8 +206,9 @@ setTeamHeadIcon(team, offset) // "allies", "axis", "all", "none"
 
 setPlayerHeadIcon(player, offset) // "allies", "axis", "all", "none"
 {
-  if(level.teamBased)
+  if(level.teamBased) {
     return;
+  }
 
   if(!isDefined(self.entityHeadIconTeam)) {
     self.entityHeadIconTeam = "none";
@@ -202,18 +218,21 @@ setPlayerHeadIcon(player, offset) // "allies", "axis", "all", "none"
   self notify("kill_entity_headicon_thread");
 
   if(!isDefined(player)) {
-    if(isDefined(self.entityHeadIcon))
+    if(isDefined(self.entityHeadIcon)) {
       self.entityHeadIcon destroy();
+    }
     return;
   }
 
   team = player.team;
   self.entityHeadIconTeam = team;
 
-  if(isDefined(offset))
+  if(isDefined(offset)) {
     self.entityHeadIconOffset = offset;
-  else
+  }
+  else {
     self.entityHeadIconOffset = (0, 0, 0);
+  }
 
   shader = game["entity_headicon_" + team];
 
@@ -250,8 +269,9 @@ destroyHeadIconsOnDeath() {
   self waittill("death");
 
   // TODO: remove and fix properly after ship
-  if(!isDefined(self.entityHeadIcon))
+  if(!isDefined(self.entityHeadIcon)) {
     return;
+  }
 
   self.entityHeadIcon destroy();
 }

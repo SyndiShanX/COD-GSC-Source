@@ -26,10 +26,12 @@ teleportThreadEx(verticalOffset, delay, frames) {
   }
   wait delay;
   amount = verticalOffset / frames;
-  if(amount > 10.0)
+  if(amount > 10.0) {
     amount = 10.0;
-  else if(amount < -10.0)
+  }
+  else if(amount < -10.0) {
     amount = -10.0;
+  }
   offset = (0, 0, amount);
   for(i = 0; i < frames; i++) {
     self teleport(self.origin + offset);

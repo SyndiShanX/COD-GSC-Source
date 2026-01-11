@@ -74,8 +74,9 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
     }
     org = ent.origin + vectorscale(angles, 180);
     oldOrigin = get_suppress_point(self getEye(), ent.origin, org);
-    if(!isDefined(oldOrigin))
+    if(!isDefined(oldOrigin)) {
       oldOrigin = ent.origin;
+    }
     ent moveto(ent.origin + vectorscale(angles, 80) + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
     wait(3.5);
     ent moveto(oldOrigin + vectorscale(angles, -20), 3, 1, 1);
@@ -148,8 +149,9 @@ mgTeam_take_turns_firing(mgTeam) {
 solo_firing(mgTeam) {
   mgGunner = undefined;
   for(i = 0; i < mgTeam.size; i++) {
-    if(!isalive(mgTeam[i]))
+    if(!isalive(mgTeam[i])) {
       continue;
+    }
     mgGunner = mgTeam[i];
     break;
   }
@@ -169,15 +171,18 @@ solo_fires() {
 }
 
 dual_firing(mgTeam) {
-  for(i = 0; i < mgTeam.size; i++)
+  for(i = 0; i < mgTeam.size; i++) {
     mgTeam[i] endon("death");
+  }
   a = 0;
   b = 1;
   for(;;) {
-    if(isalive(mgTeam[a]))
+    if(isalive(mgTeam[a])) {
       mgTeam[a] set_firing(true);
-    if(isalive(mgTeam[b]))
+    }
+    if(isalive(mgTeam[b])) {
       mgTeam[b] set_firing(false);
+    }
     c = a;
     a = b;
     b = c;
@@ -212,10 +217,12 @@ spotted_an_enemy(ent, enemy) {
 
 get_suppress_point(origin, trace_start, trace_end) {
   traces = distance(trace_start, trace_end) * 0.05;
-  if(traces < 5)
+  if(traces < 5) {
     traces = 5;
-  if(traces > 20)
+  }
+  if(traces > 20) {
     traces = 20;
+  }
   vectorDif = trace_end - trace_start;
   vectorDif = (vectorDif[0] / traces, vectorDif[1] / traces, vectorDif[2] / traces);
   offset = (0, 0, 0);

@@ -7,8 +7,9 @@
 #include maps\_hud_util;
 
 init() {
-  if(level.script == "frontend")
+  if(level.script == "frontend") {
     return;
+  }
   PrecacheItem("syrette_sp");
   precachestring(&"GAME_BUTTON_TO_REVIVE_PLAYER");
   precachestring(&"GAME_PLAYER_NEEDS_TO_BE_REVIVED");

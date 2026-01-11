@@ -1510,4 +1510,3 @@ private function_fc42d325() {
     waitframe(2);
   }
 }
-

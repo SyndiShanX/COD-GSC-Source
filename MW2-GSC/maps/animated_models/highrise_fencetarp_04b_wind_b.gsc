@@ -6,8 +6,9 @@
 #include common_scripts\utility;
 
 main() {
-  if(!isDefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
+  }
 
   // Uses .animation
   model = "highrise_fencetarp_04b_wind_b";

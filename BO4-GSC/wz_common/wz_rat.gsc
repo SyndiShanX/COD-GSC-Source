@@ -125,4 +125,3 @@ function_89684f6a(params) {
   player = [[level.rat.common.gethostplayer]]();
   return player.inventory.items[10].networkid != 32767;
 }
-

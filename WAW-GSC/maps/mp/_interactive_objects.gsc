@@ -301,8 +301,9 @@ getClosestEnt(org, array) {
   ent = undefined;
   for(i = 0; i < array.size; i++) {
     newdist = distance(array[i] getorigin(), org);
-    if(newdist >= dist)
+    if(newdist >= dist) {
       continue;
+    }
     dist = newdist;
     ent = array[i];
   }

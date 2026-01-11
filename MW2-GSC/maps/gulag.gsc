@@ -1167,8 +1167,9 @@ gulag_cellblocks() {
 
   ai = GetAIArray("allies");
   foreach(guy in ai) {
-    if(isDefined(guy.old_pathrandompercent))
+    if(isDefined(guy.old_pathrandompercent)) {
       guy pathrandompercent_reset();
+    }
   }
 
   add_global_spawn_function("axis", ::ambush_behavior);
@@ -1191,8 +1192,9 @@ gulag_cellblocks() {
 
   level.soap set_force_color("cyan");
 
-  if(!flag("player_nears_cell_door1"))
+  if(!flag("player_nears_cell_door1")) {
     activate_trigger_with_targetname("outside_gulag_postup");
+  }
 
   //flag_wait_either( "outside_gulag_dialogue", "enable_interior_fx" );
   //	flag_wait_either( "soap_chats_outside_gulag", "enable_interior_fx" );
@@ -1219,8 +1221,9 @@ gulag_cellblocks() {
 
   ai = remove_dead_from_array(ai);
   for(i = purple_guys; i < 2; i++) {
-    if(!isalive(ai[i]))
+    if(!isalive(ai[i])) {
       continue;
+    }
 
     ai[i] set_force_color("p");
     ai[i] = undefined;
@@ -1231,8 +1234,9 @@ gulag_cellblocks() {
     guy set_force_color("o");
   }
 
-  if(!flag("player_nears_cell_door1"))
+  if(!flag("player_nears_cell_door1")) {
     activate_trigger_with_targetname("pre_controlroom_postup");
+  }
 
   //thread gulag_cellblocks_friendlies_go_to_control_room();
 
@@ -1243,8 +1247,9 @@ gulag_cellblocks() {
   volume = GetEnt("control_room_hallway_volume", "targetname");
   volume waittill_volume_dead_or_dying();
 
-  if(!flag("player_nears_cell_door1"))
+  if(!flag("player_nears_cell_door1")) {
     activate_trigger_with_targetname("control_room_postup");
+  }
 
   flag_wait("disable_exterior_fx");
 
@@ -1275,8 +1280,9 @@ gulag_cellblocks() {
   // the 2 closest guys stay on the friendly chain
   for(i = 0; i < extra_friendlies; i++) {
     guy = ai[i];
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
+    }
 
     guy set_force_color("g");
     guy allies_have_low_attacker_accuracy();
@@ -1293,8 +1299,9 @@ gulag_cellblocks() {
 
   flag_set("ghost_goes_to_laptop");
 
-  if(isalive(level.ghost))
+  if(isalive(level.ghost)) {
     level.ghost set_battlechatter(false);
+  }
 
   // I'll tap into their system and look for the prisoner! It's gonna take some time!	
   ghost_line("gulag_cmt_tapinto");
@@ -1303,8 +1310,9 @@ gulag_cellblocks() {
 
   thread friendly_cellblock_respawner();
 
-  if(!flag("player_nears_cell_door1"))
+  if(!flag("player_nears_cell_door1")) {
     activate_trigger_with_targetname("first_cell_postup");
+  }
 
   // Copy that! Roach, we're on cell duty! Follow me!	
   level.soap dialogue_queue("gulag_cmt_cellduty");
@@ -1554,8 +1562,9 @@ gulag_armory() {
 
   wait(8);
 
-  if(!player_has_weapon("riotshield"))
+  if(!player_has_weapon("riotshield")) {
     set_player_attacker_accuracy(1.5);
+  }
 
   thread player_riotshield_nag();
   wait(5);
@@ -1737,11 +1746,13 @@ gulag_rappel() {
   // delete the extraneous friendlies
   ai = GetAIArray("allies");
   foreach(guy in ai) {
-    if(guy is_hero())
+    if(guy is_hero()) {
       continue;
+    }
 
-    if(isDefined(guy.magic_bullet_shield))
+    if(isDefined(guy.magic_bullet_shield)) {
       guy stop_magic_bullet_shield();
+    }
 
     guy Delete();
   }
@@ -1788,8 +1799,9 @@ gulag_rappel() {
   level.player delayCall(2, ::StopRumble, "damage_heavy");
   axis = GetAIArray("axis");
   foreach(guy in axis) {
-    if(Distance(level.player.origin, guy.origin) < 350)
+    if(Distance(level.player.origin, guy.origin) < 350) {
       guy delayCall(0.5, ::Kill);
+    }
   }
 
   allies = GetAIArray("allies");
@@ -1945,8 +1957,9 @@ gulag_bathroom() {
 
   axis = getaiarray("axis");
   foreach(guy in axis) {
-    if(!isDefined(guy.spawn_time) || guy.spawn_time != gettime())
+    if(!isDefined(guy.spawn_time) || guy.spawn_time != gettime()) {
       guy thread die_soon();
+    }
   }
 
   volume = GetEnt("gulag_shower_destructibles", "script_noteworthy");
@@ -2065,8 +2078,9 @@ gulag_bathroom() {
 }
 
 gulag_cistern_dialogue() {
-  if(flag("player_approaches_rescue_breach"))
+  if(flag("player_approaches_rescue_breach")) {
     return;
+  }
   level endon("player_approaches_rescue_breach");
 
   flag_wait("friendly_rappels_from_bathroom");
@@ -2143,8 +2157,9 @@ gulag_rescue() {
   for(;;) {
     // make sure the breach started
     trigger_from waittill("trigger");
-    if(!level.player maps\_slowmo_breach::breach_failed_to_start())
+    if(!level.player maps\_slowmo_breach::breach_failed_to_start()) {
       break;
+    }
   }
 
   SetSavedDvar("g_friendlynamedist", 0);
@@ -2357,21 +2372,25 @@ gulag_finish_rescue_thread(trigger_to, ai) {
 
   friendlies = GetAIArray("allies");
   foreach(guy in friendlies) {
-    if(guy is_hero())
+    if(guy is_hero()) {
       continue;
+    }
 
-    if(isDefined(guy.magic_bullet_shield))
+    if(isDefined(guy.magic_bullet_shield)) {
       guy stop_magic_bullet_shield();
+    }
 
     guy Delete();
   }
 
   foreach(guy in ai) {
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
+    }
 
-    if(isDefined(guy.magic_bullet_shield))
+    if(isDefined(guy.magic_bullet_shield)) {
       guy stop_magic_bullet_shield();
+    }
 
     guy Delete();
   }
@@ -2386,8 +2405,9 @@ finish_rescue_sequence(offset) {
   weapons = level.player GetWeaponsListPrimaries();
 
   foreach(weapon in weapons) {
-    if(IsSubStr(weapon, "riot"))
+    if(IsSubStr(weapon, "riot")) {
       continue;
+    }
 
     level.player SwitchToWeapon(weapon);
     break;
@@ -2548,21 +2568,24 @@ gulag_startpoint_catchup_thread() {
   waittillframeend; // let the actual start functions run before this one
   start = level.start_point;
 
-  if(is_default_start())
+  if(is_default_start()) {
     return;
+  }
 
   thread control_room_destructibles_turn_on();
 
-  if(start == "intro")
+  if(start == "intro") {
     return;
+  }
 
   SetSavedDvar("compass", "0");
   SetSavedDvar("ammoCounterHide", 1);
   SetSavedDvar("hud_showStance", 0);
   SetSavedDvar("hud_drawhud", 1);
 
-  if(start == "approach")
+  if(start == "approach") {
     return;
+  }
 
   flag_set("player_heli_uses_modified_yaw");
 
@@ -2578,10 +2601,12 @@ gulag_startpoint_catchup_thread() {
 
   flag_set("stab2_clear");
 
-  if(start == "unload")
+  if(start == "unload") {
     return;
-  if(start == "f15")
+  }
+  if(start == "f15") {
     return;
+  }
 
   thread armory_roach_is_down();
 
@@ -2597,13 +2622,15 @@ gulag_startpoint_catchup_thread() {
   wait(0.05);
   vision_set_fog_changes("gulag", 1);
 
-  if(start == "bhd")
+  if(start == "bhd") {
     return;
+  }
 
   flag_set("access_control_room");
   flag_set("player_progresses_passed_ext_area");
-  if(start == "control_room")
+  if(start == "control_room") {
     return;
+  }
 
   remove_global_spawn_function("allies", ::no_grenades);
 
@@ -2619,22 +2646,25 @@ gulag_startpoint_catchup_thread() {
 
   flag_set("spotlight_turns_on");
   flag_set("start_armory_music");
-  if(start == "armory")
+  if(start == "armory") {
     return;
+  }
 
   thread player_riotshield_bash_hint();
 
   flag_set("access_control_room");
   flag_set("run_from_armory");
 
-  if(start == "rappel")
+  if(start == "rappel") {
     return;
+  }
 
   fog_set_changes("gulag_hallways");
   flag_set("cell_duty");
   flag_set("go_to_pipearea_postup");
-  if(start == "tunnel")
+  if(start == "tunnel") {
     return;
+  }
 
   flag_set("nearing_bathroom_breach");
   flag_set("leaving_pipe_area");
@@ -2643,11 +2673,13 @@ gulag_startpoint_catchup_thread() {
   flag_set("control_room");
   flag_set("leaving_pipe_area");
 
-  if(start == "bathroom")
+  if(start == "bathroom") {
     return;
+  }
 
-  if(start == "so_showers")
+  if(start == "so_showers") {
     return;
+  }
 
   fog_set_changes("gulag");
   flag_set("player_enters_bathroom");

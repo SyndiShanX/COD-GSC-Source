@@ -36,12 +36,14 @@ main() {
   var_5 = getstartangles(self._tag_entity.origin, self._tag_entity.angles, var_3);
   var_6 = self getdroptofloorposition(var_4);
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_4 = var_6;
+  }
   else {}
 
-  if(!isDefined(self.noteleport))
+  if(!isDefined(self.noteleport)) {
     self teleport(var_4, var_5);
+  }
 
   self.pushable = 0;
   var_7 = 0.3;
@@ -66,10 +68,12 @@ main() {
   var_11 = "end";
 
   if(!var_0) {
-    if(animhasnotetrack(var_3, "finish"))
+    if(animhasnotetrack(var_3, "finish")) {
       var_11 = "finish";
-    else if(animhasnotetrack(var_3, "stop anim"))
+    }
+    else if(animhasnotetrack(var_3, "stop anim")) {
       var_11 = "stop anim";
+    }
   }
 
   for(;;) {
@@ -90,8 +94,9 @@ main() {
     break;
   }
 
-  if(var_11 != "end")
+  if(var_11 != "end") {
     self orientmode("face motion");
+  }
 
   self notify("finished_custom_animmode" + var_1);
 }

@@ -21,16 +21,19 @@ func_1970() {
     }
     wait(randomfloatrange(1, 3));
 
-    if(self.func_AEDF.locked)
+    if(self.func_AEDF.locked) {
       func_51FA();
+    }
   }
 }
 
 func_FF26() {
-  if(randomint(100) < 100 * level.func_D127.func_68AB.func_5BE3)
+  if(randomint(100) < 100 * level.func_D127.func_68AB.func_5BE3) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 func_51FA() {

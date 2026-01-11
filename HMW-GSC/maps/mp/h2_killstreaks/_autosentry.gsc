@@ -80,8 +80,9 @@ tryUseAutoSentry(lifeId) {
 
 tryUseAutoGlSentry(lifeId) {
   result = self giveSentry("sentry_gun", lifeId);
-  if(result)
+  if(result) {
     self maps\mp\_matchdata::logKillstreakEvent("sentry_mp", self.origin);
+  }
 
   return (result);
 }
@@ -95,10 +96,12 @@ giveSentry(sentryType, lifeId) {
   self setCarryingSentry(sentryGun, true);
 
   // if we failed to place the sentry, it will have been deleted at this point
-  if(isDefined(sentryGun))
+  if(isDefined(sentryGun)) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 /* ============================
@@ -128,16 +131,18 @@ setCarryingSentry(sentryGun, allowCancel) {
     }
 
     if(result == "cancel_sentry") {
-      if(!allowCancel)
+      if(!allowCancel) {
         continue;
+      }
 
       sentryGun sentry_setCancelled();
       self _enableWeapon();
       return false;
     }
 
-    if(!sentryGun.canBePlaced)
+    if(!sentryGun.canBePlaced) {
       continue;
+    }
 
     sentryGun sentry_setPlaced();
     self _enableWeapon();
@@ -183,11 +188,13 @@ sentry_handleDamage() {
     }
 
     // 7x damage for explosives - GRENADES
-    if(isExplosiveDamageMod(type))
+    if(isExplosiveDamageMod(type)) {
       self.health -= (amount * 1);
+    }
 
-    if(type == "MOD_MELEE")
+    if(type == "MOD_MELEE") {
       self.health = 0;
+    }
 
     if(isPlayer(attacker)) {
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("sentry");
@@ -206,8 +213,9 @@ sentry_handleDamage() {
         attacker notify("destroyed_killstreak");
       }
 
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self.owner thread leaderDialogOnPlayer("sentry_destroyed");
+      }
 
       self notify("death");
       return;
@@ -226,8 +234,9 @@ sentry_handleDeath() {
 
   self removeFromTurretList(entNum);
   // this handles cases of deletion
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   self setModel(level.sentrySettings[self.sentryType].modelDestroyed);
 
@@ -241,8 +250,9 @@ sentry_handleDeath() {
 
   wait(5);
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   self playSound("sentry_explode_smoke");
 
@@ -261,8 +271,9 @@ sentry_handleUse() {
     assert(player == self.owner);
     assert(!isDefined(self.carriedBy));
 
-    if(!isReallyAlive(player))
+    if(!isReallyAlive(player)) {
       continue;
+    }
 
     player setCarryingSentry(self, false);
   }
@@ -388,10 +399,12 @@ sentry_onCarrierDeath(carrier) {
 
   carrier waittill("death");
 
-  if(self.canBePlaced)
+  if(self.canBePlaced) {
     self sentry_setPlaced();
-  else
+  }
+  else {
     self delete();
+  }
 }
 
 sentry_onCarrierDisconnect(carrier) {
@@ -421,10 +434,12 @@ sentry_setActive() {
   self makeUsable();
 
   foreach(player in level.players) {
-    if(player == self.owner)
+    if(player == self.owner) {
       self enablePlayerUse(player);
-    else
+    }
+    else {
       self disablePlayerUse(player);
+    }
   }
 }
 
@@ -442,8 +457,9 @@ sentry_makeNotSolid() {
 }
 
 isFriendlyToSentry(sentryGun) {
-  if(level.teamBased && self.team == sentryGun.team)
+  if(level.teamBased && self.team == sentryGun.team) {
     return true;
+  }
 
   return false;
 }
@@ -492,12 +508,14 @@ sentry_timeOut() {
     wait(1.0);
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
-    if(!isDefined(self.carriedBy))
+    if(!isDefined(self.carriedBy)) {
       lifeSpan = max(0, lifeSpan - 1.0);
+    }
   }
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner thread leaderDialogOnPlayer("sentry_gone");
+  }
 
   self notify("death");
 }
@@ -572,10 +590,12 @@ sentry_heatMonitor() {
   lastFxTime = 0;
 
   for(;;) {
-    if(self.heatLevel != lastHeatLevel)
+    if(self.heatLevel != lastHeatLevel) {
       wait(fireTime);
-    else
+    }
+    else {
       self.heatLevel = max(0, self.heatLevel - 0.05);
+    }
 
     if(self.heatLevel > SENTRY_OVERHEAT_TIME) {
       self.overheated = true;
@@ -614,7 +634,8 @@ sentry_beepSounds() {
   for(;;) {
     wait(3.0);
 
-    if(!isDefined(self.carriedBy))
+    if(!isDefined(self.carriedBy)) {
       self playSound("sentry_gun_beep");
+    }
   }
 }

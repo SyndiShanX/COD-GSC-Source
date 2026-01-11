@@ -15,28 +15,34 @@ main() {
 }
 
 vehicle_wait(startinvehicle) {
-  if(!isDefined(startinvehicle))
+  if(!isDefined(startinvehicle)) {
     startinvehicle = false;
+  }
   else if(startinvehicle) {
-    if(getdvar("player_vehicle_dismountable") == "off")
+    if(getdvar("player_vehicle_dismountable") == "off") {
       self makeUnusable();
+    }
   }
   self endon("death");
   self endon("stop_vehicle_wait");
   while(self.health > 0) {
-    if(!(startinvehicle))
+    if(!(startinvehicle)) {
       self waittill("trigger");
+    }
     else {
       startinvehicle = false;
       self useby(level.player);
     }
     owner = self getvehicleowner();
-    if(isDefined(owner) && isplayer(owner))
+    if(isDefined(owner) && isplayer(owner)) {
       self thread vehicle_enter();
-    else
+    }
+    else {
       self thread vehicle_exit();
-    if(startinvehicle)
+    }
+    if(startinvehicle) {
       break;
+    }
     wait 0.05;
   }
 }
@@ -51,12 +57,15 @@ vehicle_exit() {
     level.player.oldthreatbias = undefined;
   }
   //	level.player.ignoreme = false;
-  if(isDefined(level.vehicleHUD))
+  if(isDefined(level.vehicleHUD)) {
     level.vehicleHUD destroy();
-  if(isDefined(level.vehicleHUD2))
+  }
+  if(isDefined(level.vehicleHUD2)) {
     level.vehicleHUD2 destroy();
-  if(isDefined(level.VehicleFireIcon))
+  }
+  if(isDefined(level.VehicleFireIcon)) {
     level.VehicleFireIcon destroy();
+  }
 }
 
 vehicle_enter() {
@@ -80,16 +89,21 @@ vehicle_giveHealth() {
   //GIVE THE VEHICLE HEALTH BASED ON SKILL LEVEL
   skill = getdifficulty();
 
-  if(skill == ("easy"))
+  if(skill == ("easy")) {
     self.health = 3000;
-  else if(skill == ("medium"))
+  }
+  else if(skill == ("medium")) {
     self.health = 2500;
-  else if(skill == ("hard"))
+  }
+  else if(skill == ("hard")) {
     self.health = 2000;
-  else if(skill == ("fu"))
+  }
+  else if(skill == ("fu")) {
     self.health = 1300;
-  else
+  }
+  else {
     self.health = 2000;
+  }
 
   if(isDefined(self.healthbuffer)) {
     self.health += self.healthbuffer; // restore healthbuffer
@@ -119,16 +133,19 @@ Protect_Player() {
     /*
     		if(self.vehicletype != "flak88" && self.vehicletype != "flak88_forward")
     		{
-    			if(self.health <= 0)
+    			if(self.health <= 0) {
     				level.player kill ( (0,0,0) );
-    			else
+    			}
+    			else {
     				level.player.health = playerCurrentHealth;
+    			}
     		}
     		else
     		{
     */
-    if(self.health <= 0)
+    if(self.health <= 0) {
       level.player kill((0, 0, 0));
+    }
     level.player.health += int(ammount * .2);
     //		}
 
@@ -189,21 +206,25 @@ vehicle_ridehandle() {
   regeninctimer = gettime();
   while(1) {
     if(self.damaged) {
-      if(getdvar("debug_vehicleplayerhealth") != "off")
+      if(getdvar("debug_vehicleplayerhealth") != "off") {
         iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
+      }
       self.damaged = false;
       regentimer = gettime() + health_regentimer;
     }
 
     time = gettime();
     if(self.health < self.maximumhealth && time > regentimer && time > regeninctimer) {
-      if(self.health + health_regeninc > self.maximumhealth)
+      if(self.health + health_regeninc > self.maximumhealth) {
         self.health = self.maximumhealth;
-      else
+      }
+      else {
         self.health += health_regeninc;
+      }
       regeninctimer = gettime() + 250;
-      if(getdvar("debug_vehicleplayerhealth") != "off")
+      if(getdvar("debug_vehicleplayerhealth") != "off") {
         iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
+      }
     }
 
     wait .05;
@@ -241,13 +262,15 @@ vehicle_reloadsound() {
 }
 
 vehicle_hud_tank_fireicon() {
-  if(getdvar("player_vehicle_dismountable") != "off")
+  if(getdvar("player_vehicle_dismountable") != "off") {
     return;
+  }
   level endon("player exited vehicle");
   level.player endon("death");
   self endon("death");
-  if(isDefined(level.VehicleFireIcon))
+  if(isDefined(level.VehicleFireIcon)) {
     level.VehicleFireIcon destroy();
+  }
 
   level.VehicleFireIcon = newHudElem();
   level.VehicleFireIcon.x = -32;

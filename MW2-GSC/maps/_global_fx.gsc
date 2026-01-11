@@ -14,8 +14,9 @@
 // global_FX( "targetname", "fxIDname", "fxFile", "delay"
 
 main() {
-  if(!isDefined(level.global_fx))
+  if(!isDefined(level.global_fx)) {
     level.global_fx = [];
+  }
 
   level._global_fx_ents = [];
   randomStartDelay = randomfloatrange(-20, -15);
@@ -120,16 +121,19 @@ global_FX(targetname, fxName, fxFile, delay, soundalias, randomrange) {
 
   // script_structs
   ents = getstructarray(targetname, "targetname");
-  if(!isDefined(ents))
+  if(!isDefined(ents)) {
     return;
-  if(ents.size <= 0)
+  }
+  if(ents.size <= 0) {
     return;
+  }
 
   for(i = 0; i < ents.size; i++) {
     ent = ents[i] global_FX_create(fxName, fxFile, delay, soundalias, randomrange);
 
-    if(!isDefined(ents[i].script_noteworthy))
+    if(!isDefined(ents[i].script_noteworthy)) {
       continue;
+    }
 
     note = ents[i].script_noteworthy;
     if(!isDefined(level._global_fx_ents[note])) {
@@ -141,18 +145,21 @@ global_FX(targetname, fxName, fxFile, delay, soundalias, randomrange) {
 }
 
 global_FX_create(fxName, fxFile, delay, soundalias, randomrange) {
-  if(!isDefined(level._effect))
+  if(!isDefined(level._effect)) {
     level._effect = [];
-  if(!isDefined(level._effect[fxName]))
+  }
+  if(!isDefined(level._effect[fxName])) {
     level._effect[fxName] = loadfx(fxFile);
+  }
 
   if(isDefined(randomrange)) {
     delay += RandomFloat(randomrange);
   }
 
   // default effect angles if they dont exist
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   ent = createOneshotEffect(fxName);
   ent.v["origin"] = (self.origin);
@@ -166,13 +173,15 @@ global_FX_create(fxName, fxFile, delay, soundalias, randomrange) {
   //resetting un-needed members to undefined to save child variables
   array = level.struct_class_names["targetname"][self.targetname];
   foreach(index, struct in array) {
-    if(struct == self)
+    if(struct == self) {
       level.struct_class_names["targetname"][self.targetname][index] = undefined;
+    }
   }
 
   foreach(index, struct in level.struct) {
-    if(struct == self)
+    if(struct == self) {
       level.struct[index] = undefined;
+    }
   }
 
   return ent;

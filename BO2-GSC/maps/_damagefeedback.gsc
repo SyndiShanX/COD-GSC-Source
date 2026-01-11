@@ -21,8 +21,9 @@ init(fadetime) {
   self.hud_damagefeedback.archived = 1;
   self.hud_damagefeedback setshader("damage_feedback_glow", 24, 48);
 
-  if(!(isDefined(level.era) && (level.era == "twentytwenty" || level.era == "")))
+  if(!(isDefined(level.era) && (level.era == "twentytwenty" || level.era == ""))) {
     self.hud_damagefeedback setshader("damage_feedback", 24, 48);
+  }
 
   self.hud_damagefeedback_blue = newdamageindicatorhudelem(self);
   self.hud_damagefeedback_blue.horzalign = "center";

@@ -32,8 +32,9 @@ rotate_ring(forward) {
   level endon("end_game");
   dir = -360;
 
-  if(forward)
+  if(forward) {
     dir = 360;
+  }
 
   while(true) {
     self rotateyaw(dir, 9);

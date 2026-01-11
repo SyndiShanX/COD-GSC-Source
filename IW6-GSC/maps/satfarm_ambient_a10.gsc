@@ -74,8 +74,9 @@ a10_wait_start_firing() {
     switch (self.script_parameters) {
       case "bridge_enemy_a10_gun_dive_2":
         foreach(var_1 in level.enemytanks) {
-          if(isDefined(var_1.script_noteworthy) && isalive(var_1) && var_1.script_noteworthy == "bridge_enemy_tank")
+          if(isDefined(var_1.script_noteworthy) && isalive(var_1) && var_1.script_noteworthy == "bridge_enemy_tank") {
             var_1 thread maps\satfarm_code::random_wait_and_kill(1.0, 2.0);
+          }
         }
     }
   }
@@ -158,8 +159,9 @@ mig29_wait_fire_missile() {
         thread mig29_fire_missiles(level.crash_site_a10_gun_dive_1, 1);
       }
     } else if(self.script_parameters == "intro_mig29_missile_c17_01") {
-      if(isDefined(level.crashedc17_missile_org))
+      if(isDefined(level.crashedc17_missile_org)) {
         thread mig29_fire_missiles(level.crashedc17_missile_org, 1);
+      }
     } else if(self.script_parameters == "intro_mig29_missile_c17_02") {
       foreach(var_1 in level.intro_allies_killed_by_mig) {
         thread mig29_fire_missiles(var_1);
@@ -207,13 +209,15 @@ a10_missile_set_target(var_0) {
   wait 0.2;
   self missile_settargetent(var_0);
 
-  if(!var_0 maps\satfarm_code::istank() && isDefined(var_0.godmode) && var_0.godmode == 1)
+  if(!var_0 maps\satfarm_code::istank() && isDefined(var_0.godmode) && var_0.godmode == 1) {
     var_0 maps\_vehicle::godoff();
+  }
 
   self waittill("death");
 
-  if(isDefined(var_0) && var_0 maps\satfarm_code::istank())
+  if(isDefined(var_0) && var_0 maps\satfarm_code::istank()) {
     var_0 thread maps\satfarm_code::handle_tank_death();
+  }
 }
 
 mig29_missile_set_target(var_0) {
@@ -221,13 +225,15 @@ mig29_missile_set_target(var_0) {
   wait 0.2;
   self missile_settargetent(var_0);
 
-  if(!var_0 maps\satfarm_code::istank() && isDefined(var_0.godmode) && var_0.godmode == 1)
+  if(!var_0 maps\satfarm_code::istank() && isDefined(var_0.godmode) && var_0.godmode == 1) {
     var_0 maps\_vehicle::godoff();
+  }
 
   self waittill("death");
 
-  if(isDefined(var_0) && var_0 maps\satfarm_code::istank())
+  if(isDefined(var_0) && var_0 maps\satfarm_code::istank()) {
     var_0 thread maps\satfarm_code::handle_tank_death();
+  }
 }
 
 a10_fire_missiles(var_0, var_1) {
@@ -242,8 +248,9 @@ a10_fire_missiles(var_0, var_1) {
   if(isDefined(var_0)) {
     var_4 thread a10_missile_set_target(var_0);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_4 thread monitor_missile_distance(14400, var_0, var_5);
+    }
   }
 }
 
@@ -259,16 +266,18 @@ mig29_fire_missiles(var_0, var_1) {
   if(isDefined(var_0)) {
     var_4 thread mig29_missile_set_target(var_0);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_4 thread monitor_missile_distance(14400, var_0, var_5);
+    }
   }
 }
 
 monitor_missile_distance(var_0, var_1, var_2) {
   var_1 endon("death");
 
-  while(isDefined(self) && isDefined(var_1) && distancesquared(self.origin, var_1.origin) > var_0)
+  while(isDefined(self) && isDefined(var_1) && distancesquared(self.origin, var_1.origin) > var_0) {
     wait 0.05;
+  }
 
   if(!isDefined(var_1)) {
     return;
@@ -288,16 +297,19 @@ monitor_missile_distance(var_0, var_1, var_2) {
     if(var_1 maps\_vehicle::isvehicle()) {
       var_1 maps\_vehicle::godoff();
 
-      if(var_1 maps\satfarm_code::istank())
+      if(var_1 maps\satfarm_code::istank()) {
         var_1 thread maps\satfarm_code::handle_tank_death();
-      else
+      }
+      else {
         var_1 kill();
+      }
     }
 
     wait 0.25;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
   } else {
     if(!isDefined(var_1)) {
       return;
@@ -313,8 +325,9 @@ a10_30mm_fire() {
   self endon("death");
   self endon("stop_firing");
 
-  if(isDefined(self.script_parameters) && self.script_parameters == "no_magic_bullet")
+  if(isDefined(self.script_parameters) && self.script_parameters == "no_magic_bullet") {
     self.no_magic_bullet = 1;
+  }
 
   self playLoopSound("satf_gatling_loop");
 
@@ -323,8 +336,9 @@ a10_30mm_fire() {
     var_1 = self gettagorigin("tag_gun");
     var_2 = var_1 + var_0 * 999999999;
 
-    if(!isDefined(self.no_magic_bullet))
+    if(!isDefined(self.no_magic_bullet)) {
       magicbullet("a10_30mm_player_satfarm", var_1 + var_0, var_2);
+    }
 
     playFXOnTag(level._effect["a10_muzzle_flash"], self, "tag_gun");
     earthquake(0.2, 0.05, self.origin, 1000);
@@ -337,16 +351,18 @@ mig29_fire() {
   self endon("stop_firing");
   self playLoopSound("satf_gatling_loop");
 
-  if(isDefined(self.script_parameters) && self.script_parameters == "no_magic_bullet")
+  if(isDefined(self.script_parameters) && self.script_parameters == "no_magic_bullet") {
     self.no_magic_bullet = 1;
+  }
 
   for(;;) {
     var_0 = anglesToForward(self.angles);
     var_1 = self gettagorigin("tag_flash");
     var_2 = var_1 + var_0 * 999999999;
 
-    if(!isDefined(self.no_magic_bullet))
+    if(!isDefined(self.no_magic_bullet)) {
       magicbullet("a10_30mm_player_satfarm", var_1 + var_0, var_2);
+    }
 
     playFXOnTag(level._effect["a10_muzzle_flash"], self, "tag_flash");
     earthquake(0.2, 0.05, self.origin, 1000);
@@ -386,6 +402,7 @@ wait_kill_me(var_0) {
 
   wait 0.05;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }

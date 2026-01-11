@@ -8,13 +8,16 @@ move_player_to_start(var_0) {
   level.player setorigin(var_1.origin);
   var_2 = undefined;
 
-  if(isDefined(var_1.target))
+  if(isDefined(var_1.target)) {
     var_2 = getent(var_1.target, "targetname");
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.player setplayerangles(vectortoangles(var_2.origin - var_1.origin));
-  else
+  }
+  else {
     level.player setplayerangles(var_1.angles);
+  }
 }
 
 tank_fire_at_enemies(var_0) {
@@ -31,8 +34,9 @@ tank_fire_at_enemies(var_0) {
         self fireweapon();
 
         if(self.tank_think_fire_count >= 3) {
-          if((!isDefined(var_1.damageshield) || var_1.damageshield == 0) && (!isDefined(var_1.magic_bullet_shield) || var_1.magic_bullet_shield == 0))
+          if((!isDefined(var_1.damageshield) || var_1.damageshield == 0) && (!isDefined(var_1.magic_bullet_shield) || var_1.magic_bullet_shield == 0)) {
             var_1 notify("death");
+          }
         }
 
         wait(randomintrange(4, 10));
@@ -72,8 +76,9 @@ get_tank_target_by_script_noteworthy(var_0) {
 }
 
 spawn_friendlies(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_4 = getEntArray(var_1, "script_noteworthy");
   var_5 = [];
@@ -81,8 +86,9 @@ spawn_friendlies(var_0, var_1, var_2, var_3) {
   var_7 = [];
 
   foreach(var_9 in var_4) {
-    if(isspawner(var_9))
+    if(isspawner(var_9)) {
       var_5[var_5.size] = var_9;
+    }
   }
 
   var_11 = common_scripts\utility::getstruct(var_0, "targetname");
@@ -91,24 +97,27 @@ spawn_friendlies(var_0, var_1, var_2, var_3) {
   foreach(var_14 in var_5) {
     var_15 = var_14 maps\_utility::spawn_ai(1);
 
-    if(var_2)
+    if(var_2) {
       var_15 thread maps\_utility::replace_on_death();
+    }
 
     var_15 forceteleport(var_11.origin, var_11.angles);
     var_15 setgoalpos(var_15.origin);
     var_7 = common_scripts\utility::array_add(var_7, var_15);
     var_12++;
 
-    if(isDefined(var_3) && var_12 >= var_3)
+    if(isDefined(var_3) && var_12 >= var_3) {
       return var_7;
+    }
   }
 
   return var_7;
 }
 
 setupplayerforanimations() {
-  if(level.player isthrowinggrenade())
+  if(level.player isthrowinggrenade()) {
     wait 1.2;
+  }
 
   level.player allowmelee(0);
   level.player disableoffhandweapons();
@@ -131,28 +140,32 @@ setupplayerforgameplay() {
 }
 
 forceplayerweapon_start(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   level.old_force_weapon = level.player getcurrentweapon();
   level.player giveweapon(level.force_weapon);
   level.player givemaxammo(level.force_weapon);
   level.player switchtoweaponimmediate(level.force_weapon);
 
-  if(var_0)
+  if(var_0) {
     level.player enableweapons();
+  }
 
   level.player disableweaponswitch();
 }
 
 forceplayerweapon_end(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   level.player takeweapon(level.force_weapon);
 
-  if(isDefined(level.old_force_weapon))
+  if(isDefined(level.old_force_weapon)) {
     level.player switchtoweapon(level.old_force_weapon);
+  }
 
   if(var_0) {
     level.player enableweapons();
@@ -184,16 +197,18 @@ monitorscopechange() {
   var_3 = 0;
   level.players[0].sniper_dvar = "cg_playerFovScale0";
 
-  if(level.players.size == 2)
+  if(level.players.size == 2) {
     level.players[1].sniper_dvar = "cg_playerFovScale1";
+  }
 
   foreach(var_1 in level.players) {
     var_1 thread monitormagcycle();
     var_1 thread disablevariablescopehudondeath();
   }
 
-  if(!isDefined(level.variable_scope_weapons))
+  if(!isDefined(level.variable_scope_weapons)) {
     level.variable_scope_weapons = [];
+  }
 
   var_6 = undefined;
   var_7 = undefined;
@@ -238,22 +253,25 @@ monitorscopechange() {
             }
           }
 
-          if(isDefined(var_14))
+          if(isDefined(var_14)) {
             setsaveddvar("sm_sunShadowCenter", var_14);
+          }
         }
       } else if(var_3) {
         var_3 = 0;
 
-        if(isDefined(var_6))
+        if(isDefined(var_6)) {
           var_6 turnoffvariablescopehud();
+        }
 
         setsaveddvar("sm_sunShadowCenter", "0 0 0");
       }
     } else if(var_3) {
       var_3 = 0;
 
-      if(isDefined(var_7))
+      if(isDefined(var_7)) {
         var_7 turnoffvariablescopehud();
+      }
 
       setsaveddvar("sm_sunShadowCenter", "0 0 0");
     }
@@ -267,8 +285,9 @@ turnonvariablescopehud(var_0) {
   setsaveddvar(self.sniper_dvar, self.fov_snipe);
   self.sniper_zoom_hint_hud.alpha = 1;
 
-  if(!var_0)
+  if(!var_0) {
     level notify("variable_sniper_hud_enter");
+  }
 }
 
 turnoffvariablescopehud() {
@@ -302,11 +321,13 @@ disablevariablescopehudondeath() {
 }
 
 convert_fov_string(var_0) {
-  if(var_0 == 0.5)
+  if(var_0 == 0.5) {
     return 10;
+  }
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     return 5;
+  }
 
   return 5;
 }
@@ -314,8 +335,9 @@ convert_fov_string(var_0) {
 createdebugtexthud(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = 2.0;
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_6 = var_5;
+  }
 
   var_7 = level.player maps\_hud_util::createclientfontstring("default", var_6);
   var_7.x = var_1;
@@ -325,13 +347,15 @@ createdebugtexthud(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7.vertalign = "fullscreen";
   var_7.alpha = 1.0;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = (1, 1, 1);
+  }
 
   var_7.color = var_3;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_7.label = var_4;
+  }
 
   level.debug_text_hud[var_0] = var_7;
 }
@@ -358,18 +382,21 @@ dialogue_reminder(var_0, var_1, var_2, var_3, var_4) {
   level endon("missionfailed");
   var_5 = undefined;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 10;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 20;
+  }
 
   while(!common_scripts\utility::flag(var_1)) {
     var_6 = randomfloatrange(var_3, var_4);
     var_7 = common_scripts\utility::random(var_2);
 
-    if(isDefined(var_5) && var_7 == var_5)
+    if(isDefined(var_5) && var_7 == var_5) {
       continue;
+    }
     else {
       var_5 = var_7;
       wait(var_6);
@@ -391,8 +418,9 @@ dialogue_reminder(var_0, var_1, var_2, var_3, var_4) {
 }
 
 conversation_start() {
-  if(!common_scripts\utility::flag_exist("flag_conversation_in_progress"))
+  if(!common_scripts\utility::flag_exist("flag_conversation_in_progress")) {
     common_scripts\utility::flag_init("flag_conversation_in_progress");
+  }
 
   common_scripts\utility::flag_waitopen("flag_conversation_in_progress");
   common_scripts\utility::flag_set("flag_conversation_in_progress");
@@ -406,13 +434,15 @@ array_combine_unique(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(!isDefined(common_scripts\utility::array_find(var_2, var_4)))
+    if(!isDefined(common_scripts\utility::array_find(var_2, var_4))) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   foreach(var_4 in var_1) {
-    if(!isDefined(common_scripts\utility::array_find(var_2, var_4)))
+    if(!isDefined(common_scripts\utility::array_find(var_2, var_4))) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   return var_2;
@@ -455,24 +485,29 @@ laser_targeting_device(var_0) {
 shouldforcedisablelaser() {
   var_0 = self getcurrentweapon();
 
-  if(var_0 == "rpg")
+  if(var_0 == "rpg") {
     return 1;
+  }
 
-  if(common_scripts\utility::string_starts_with(var_0, "gl"))
+  if(common_scripts\utility::string_starts_with(var_0, "gl")) {
     return 1;
+  }
 
   if(isDefined(level.laser_designator_disable_list) && isarray(level.laser_designator_disable_list)) {
     foreach(var_2 in level.laser_designator_disable_list) {
-      if(var_0 == var_2)
+      if(var_0 == var_2) {
         return 1;
+      }
     }
   }
 
-  if(self isreloading())
+  if(self isreloading()) {
     return 1;
+  }
 
-  if(self isthrowinggrenade())
+  if(self isthrowinggrenade()) {
     return 1;
+  }
 
   return 0;
 }
@@ -525,8 +560,9 @@ laser_designate_target() {
 }
 
 gettargettriggerhit(var_0) {
-  if(!isDefined(level.laser_triggers) || level.laser_triggers.size == 0)
+  if(!isDefined(level.laser_triggers) || level.laser_triggers.size == 0) {
     return undefined;
+  }
 
   foreach(var_2 in level.laser_triggers) {
     var_3 = distance2d(var_0, var_2.origin);
@@ -555,8 +591,9 @@ get_laser_designated_trace() {
   var_4 = bulletTrace(var_0, var_3, 1, self);
   var_5 = var_4["entity"];
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_4["position"] = var_5.origin;
+  }
 
   return var_4;
 }
@@ -569,21 +606,24 @@ laser_artillery(var_0) {
   var_1 = level.player;
   wait 2.5;
 
-  if(!isDefined(var_0.script_index))
+  if(!isDefined(var_0.script_index)) {
     var_0.script_index = 99;
+  }
 
   wait 1;
 
   if(isDefined(var_0.script_group)) {
     var_2 = get_geo_group("geo_before", var_0.script_group);
 
-    if(var_2.size > 0)
+    if(var_2.size > 0) {
       common_scripts\utility::array_call(var_2, ::hide);
+    }
 
     var_3 = get_geo_group("geo_after", var_0.script_group);
 
-    if(var_3.size > 0)
+    if(var_3.size > 0) {
       common_scripts\utility::array_call(var_3, ::show);
+    }
   }
 
   wait(level.player.lasercooldownafterhit);
@@ -596,8 +636,9 @@ get_geo_group(var_0, var_1) {
   var_3 = [];
 
   foreach(var_5 in var_2) {
-    if(isDefined(var_5.script_group) && var_5.script_group == var_1)
+    if(isDefined(var_5.script_group) && var_5.script_group == var_1) {
       var_3[var_3.size] = var_5;
+    }
   }
 
   return var_3;
@@ -606,8 +647,9 @@ get_geo_group(var_0, var_1) {
 vision_change_multiple_init() {
   var_0 = getEntArray("shg_vision_multiple_trigger", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread vision_change_multiple_internal();
+  }
 }
 
 vision_change_multiple_internal() {
@@ -637,8 +679,9 @@ vision_change_multiple_internal() {
 
       var_12 = 1;
 
-      if(isDefined(var_7.script_duration))
+      if(isDefined(var_7.script_duration)) {
         var_12 = var_7.script_duration;
+      }
 
       var_7 maps\_lights::set_sun_shadow_params(var_12);
       wait(var_12);
@@ -657,41 +700,47 @@ update_weapon_tag_visibility(var_0, var_1) {
     var_3 = 0;
     var_4 = getweaponmodel(var_0, var_3);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_4 = var_1;
+    }
 
-    for(var_5 = 0; var_5 < var_2.size; var_5++)
+    for(var_5 = 0; var_5 < var_2.size; var_5++) {
       self hidepart(var_2[var_5], var_4);
+    }
   }
 }
 
 multiple_dialogue_queue(var_0) {
   maps\_utility::bcs_scripted_dialogue_start();
 
-  if(isDefined(self.last_queue_time))
+  if(isDefined(self.last_queue_time)) {
     maps\_utility::wait_for_buffer_time_to_pass(self.last_queue_time, 0.5);
+  }
 
   var_1 = [];
   var_1[0] = [self, 0];
   maps\_utility::function_stack(::anim_single_end_early, var_1, var_0);
 
-  if(isalive(self))
+  if(isalive(self)) {
     self.last_queue_time = gettime();
+  }
 }
 
 anim_single_end_early(var_0, var_1, var_2) {
   var_3 = self;
   var_4 = [];
 
-  foreach(var_7, var_6 in var_0)
+  foreach(var_7, var_6 in var_0) {
   var_4[var_7] = var_6[0];
+  }
 
   foreach(var_9 in var_4) {
     if(!isDefined(var_9)) {
       continue;
     }
-    if(!isDefined(var_9._animactive))
+    if(!isDefined(var_9._animactive)) {
       var_9._animactive = 0;
+    }
 
     var_9._animactive++;
   }
@@ -722,11 +771,13 @@ anim_single_end_early(var_0, var_1, var_2) {
       var_22 = level.scr_sound[var_24][var_1];
     }
 
-    if(isDefined(level.scr_anim[var_24]) && isDefined(level.scr_anim[var_24][var_1]) && (!isai(var_9) || !var_9 maps\_utility::doinglongdeath()))
+    if(isDefined(level.scr_anim[var_24]) && isDefined(level.scr_anim[var_24][var_1]) && (!isai(var_9) || !var_9 maps\_utility::doinglongdeath())) {
       var_20 = 1;
+    }
 
-    if(isDefined(level.scr_animsound[var_24]) && isDefined(level.scr_animsound[var_24][var_1]))
+    if(isDefined(level.scr_animsound[var_24]) && isDefined(level.scr_animsound[var_24][var_1])) {
       var_9 playSound(level.scr_animsound[var_24][var_1]);
+    }
 
     if(var_20) {
       var_9 maps\_anim::last_anim_time_check();
@@ -748,13 +799,15 @@ anim_single_end_early(var_0, var_1, var_2) {
 
     if(var_18 || var_19) {
       if(var_18) {
-        if(var_19)
+        if(var_19) {
           var_9 thread dofacialdialogue(var_1, var_18, var_22, level.scr_face[var_24][var_1]);
+        }
 
         thread maps\_anim::anim_facialanim(var_9, var_1, level.scr_face[var_24][var_1]);
       } else if(isai(var_9)) {
-        if(var_20)
+        if(var_20) {
           var_9 animscripts\face::sayspecificdialogue(var_23, var_22, 1.0);
+        }
         else {
           var_9 thread maps\_anim::anim_facialfiller("single dialogue");
           var_9 animscripts\face::sayspecificdialogue(var_23, var_22, 1.0, "single dialogue");
@@ -854,10 +907,12 @@ dofacialdialogue(var_0, var_1, var_2, var_3) {
     thread warn_facial_dialogue_too_many(var_0);
     var_4 = [];
 
-    if(!isarray(var_2))
+    if(!isarray(var_2)) {
       var_4[0] = var_2;
-    else
+    }
+    else {
       var_4 = var_2;
+    }
 
     foreach(var_6 in var_4) {
       self waittillmatch("face_done_" + var_0, "dialogue_line");

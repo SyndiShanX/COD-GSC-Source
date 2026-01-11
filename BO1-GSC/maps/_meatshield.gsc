@@ -598,8 +598,9 @@ meatshield_ai_targets_vox() {
 
 play_fake_battlechatter() {
   self endon("death");
-  if(!isDefined(level.meatshield_ai_speaking))
+  if(!isDefined(level.meatshield_ai_speaking)) {
     level.meatshield_ai_speaking = false;
+  }
   fake_conversation = [];
   fake_conversation[0] = "_act_fragout";
   fake_conversation[1] = "_rspns_killfirm";

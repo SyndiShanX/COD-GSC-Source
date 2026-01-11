@@ -592,8 +592,9 @@ define_cliffhanger_fog() {
 }
 
 create_vision_set_fog(var_0) {
-  if(!isDefined(level.vision_set_fog))
+  if(!isDefined(level.vision_set_fog)) {
     level.vision_set_fog = [];
+  }
 
   var_1 = spawnStruct();
   var_1.name = var_0;

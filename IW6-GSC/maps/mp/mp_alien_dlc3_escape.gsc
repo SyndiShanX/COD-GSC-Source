@@ -24,8 +24,9 @@ hide_escape_geo(var_0) {
 
   var_3 = getent(var_2, "targetname");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 setscriptablepartstate(0, "ff_down");
+  }
 }
 
 show_escape_geo(var_0) {
@@ -49,8 +50,9 @@ show_escape_geo(var_0) {
 
   var_3 = getent(var_2, "targetname");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 setscriptablepartstate(0, "open");
+  }
 }
 
 escape_timer() {
@@ -59,14 +61,16 @@ escape_timer() {
   set_escape_earthquake_values(0.12, 0.18, 3, 5);
   level thread escape_earthquakes();
 
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 thread escape_timer_fx();
+  }
 
   wait 300;
   level.escape_timer_expired = 1;
 
-  if(!maps\mp\alien\_utility::is_true(level.final_blocker_finished))
+  if(!maps\mp\alien\_utility::is_true(level.final_blocker_finished)) {
     level thread maps\mp\gametypes\aliens::alienendgame("axis", 3);
+  }
 }
 
 aud_loop_starts() {
@@ -97,8 +101,9 @@ run_out_music() {
 
     common_scripts\utility::flag_set("alien_music_playing");
 
-    if(maps\mp\_utility::isreallyalive(var_1))
+    if(maps\mp\_utility::isreallyalive(var_1)) {
       var_1 playlocalsound("mus_alien_dlc3_ark_runout");
+    }
   }
 }
 
@@ -171,16 +176,18 @@ escape_global_logic() {
   }
 
   foreach(var_5 in level.players) {
-    if(maps\mp\alien\_utility::is_true(var_5.dlc3_escaped))
+    if(maps\mp\alien\_utility::is_true(var_5.dlc3_escaped)) {
       var_5 maps\mp\alien\_persistence::award_completion_tokens();
+    }
   }
 
   thread descent_win_music();
   maps\mp\alien\_achievement_dlc3::update_progression_achievements("awakening_escape");
   var_9 = "all_escape";
 
-  if(var_2.size != level.players.size)
+  if(var_2.size != level.players.size) {
     var_9 = "some_escape";
+  }
 
   var_10 = gettime() - var_0;
   update_lb_aliensession_dlc3_escape(var_10);
@@ -239,12 +246,14 @@ display_cortex_warning() {
 
 player_has_cortex_or_cortex_in_position() {
   foreach(var_1 in level.players) {
-    if(var_1 hasweapon("aliencortex_mp"))
+    if(var_1 hasweapon("aliencortex_mp")) {
       return 1;
+    }
   }
 
-  if(isDefined(level.cortex) && distancesquared(level.cortex.origin, (2368, -7056, 1151.22)) <= 10000)
+  if(isDefined(level.cortex) && distancesquared(level.cortex.origin, (2368, -7056, 1151.22)) <= 10000) {
     return 1;
+  }
 
   return 0;
 }
@@ -265,14 +274,18 @@ get_lb_final_escape_rank(var_0) {
   var_2 = 240000;
   var_3 = 270000;
 
-  if(var_0 <= var_1)
+  if(var_0 <= var_1) {
     return 0;
-  else if(var_0 <= var_2)
+  }
+  else if(var_0 <= var_2) {
     return 1;
-  else if(var_0 <= var_3)
+  }
+  else if(var_0 <= var_3) {
     return 2;
-  else
+  }
+  else {
     return 3;
+  }
 }
 
 descent_win_music() {
@@ -290,8 +303,9 @@ descent_win_music() {
 
     common_scripts\utility::flag_set("alien_music_playing");
 
-    if(maps\mp\_utility::isreallyalive(var_1))
+    if(maps\mp\_utility::isreallyalive(var_1)) {
       var_1 playlocalsound("mus_alien_dlc3_win_screen");
+    }
   }
 }
 
@@ -305,8 +319,9 @@ escape_blocker_gate(var_0, var_1, var_2) {
 
 get_win_condition() {
   foreach(var_1 in level.players) {
-    if(maps\mp\alien\_utility::is_true(var_1.inlaststand))
+    if(maps\mp\alien\_utility::is_true(var_1.inlaststand)) {
       return "some_escape";
+    }
   }
 
   return "all_escape";
@@ -444,8 +459,9 @@ escape_earthquakes() {
 escape_falling_debris_fx_delete() {
   wait 10;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 escape_falling_boulders_fx() {
@@ -468,8 +484,9 @@ escape_falling_boulders_fx() {
 }
 
 wait_for_player_to_place_cortex(var_0) {
-  foreach(var_2 in level.players)
+  foreach(var_2 in level.players) {
   var_2 thread check_for_player_near_spot_with_cortex(var_0);
+  }
 
   var_4 = common_scripts\utility::getstruct(var_0, "targetname");
   var_5 = "waypoint_alien_blocker";
@@ -488,13 +505,16 @@ alien_death_trail(var_0) {
   wait 0.5;
   var_1 = spawnStruct();
 
-  while(!isDefined(level.drill) && !isDefined(level.drill_carrier))
+  while(!isDefined(level.drill) && !isDefined(level.drill_carrier)) {
     wait 0.1;
+  }
 
-  if(isDefined(level.drill))
+  if(isDefined(level.drill)) {
     var_1.origin = level.drill.origin + (0, 0, 0);
-  else if(isDefined(level.drill_carrier))
+  }
+  else if(isDefined(level.drill_carrier)) {
     var_1.origin = level.drill_carrier.origin + (0, 0, 0);
+  }
 
   playFX(level._effect["bio_trail_cap"], var_1.origin);
 }
@@ -511,13 +531,16 @@ do_trail_death() {
   if(var_1 > 1000) {
     var_3 = spawnStruct();
 
-    while(!isDefined(level.drill) && !isDefined(level.drill_carrier))
+    while(!isDefined(level.drill) && !isDefined(level.drill_carrier)) {
       wait 0.1;
+    }
 
-    if(isDefined(level.drill))
+    if(isDefined(level.drill)) {
       var_3.origin = level.drill.origin + (0, 0, 70);
-    else if(isDefined(level.drill_carrier))
+    }
+    else if(isDefined(level.drill_carrier)) {
       var_3.origin = level.drill_carrier.origin + (0, 0, 70);
+    }
 
     var_4 = 1;
     var_1 = distance(self.origin, var_3.origin);
@@ -525,8 +548,9 @@ do_trail_death() {
 
   var_5 = var_1 / var_2;
 
-  if(var_5 < 0.05)
+  if(var_5 < 0.05) {
     var_5 = 0.05;
+  }
 
   self moveto(var_3.origin, var_5);
   self waittill("movedone");
@@ -557,8 +581,9 @@ do_trail_death() {
 }
 
 clear_cortex_lowermessage() {
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 maps\mp\_utility::clearlowermessage("plant_cortex");
+  }
 }
 
 wait_for_cortex_planted(var_0) {
@@ -592,15 +617,17 @@ check_for_player_near_spot_with_cortex(var_0) {
       if(!isDefined(level.cortex_carrier) || isDefined(level.cortex_carrier) && level.cortex_carrier != self) {
         maps\mp\_utility::setlowermessage("plant_cortex", &"MP_ALIEN_DESCENT_CORTEX_HINT", undefined, 10);
 
-        while(player_should_see_cortex_hint(var_2, var_1, 1))
+        while(player_should_see_cortex_hint(var_2, var_1, 1)) {
           wait 0.05;
+        }
 
         maps\mp\_utility::clearlowermessage("plant_cortex");
       } else {
         maps\mp\_utility::setlowermessage("plant_cortex", &"MP_ALIEN_DESCENT_CORTEX_PLANT", undefined, 10);
 
-        while(player_should_see_cortex_hint(var_2, var_1, 0))
+        while(player_should_see_cortex_hint(var_2, var_1, 0)) {
           wait 0.05;
+        }
 
         maps\mp\_utility::clearlowermessage("plant_cortex");
       }
@@ -611,19 +638,24 @@ check_for_player_near_spot_with_cortex(var_0) {
 }
 
 player_should_see_cortex_hint(var_0, var_1, var_2) {
-  if(distancesquared(var_0.origin, self.origin) > var_1)
+  if(distancesquared(var_0.origin, self.origin) > var_1) {
     return 0;
+  }
 
-  if(self.inlaststand)
+  if(self.inlaststand) {
     return 0;
+  }
 
-  if(isDefined(self.usingremote))
+  if(isDefined(self.usingremote)) {
     return 0;
+  }
 
-  if(maps\mp\alien\_utility::is_true(var_2))
+  if(maps\mp\alien\_utility::is_true(var_2)) {
     return 1;
-  else if(maps\mp\alien\_utility::is_true(self.iscarrying))
+  }
+  else if(maps\mp\alien\_utility::is_true(self.iscarrying)) {
     return 0;
+  }
 
   return 1;
 }
@@ -651,12 +683,14 @@ nag_players_who_leave_the_drill_behind() {
       var_2 = 0;
 
       foreach(var_5 in level.players) {
-        if(distancesquared(var_5.origin, level.cortex.origin) < var_1)
+        if(distancesquared(var_5.origin, level.cortex.origin) < var_1) {
           var_2 = 1;
+        }
       }
 
-      if(!var_2)
+      if(!var_2) {
         level thread maps\mp\mp_alien_dlc3_vignettes::descent_vo_escape_cortex_left_behind();
+      }
     }
 
     wait(var_3);

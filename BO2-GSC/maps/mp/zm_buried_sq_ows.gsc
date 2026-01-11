@@ -17,10 +17,12 @@ init() {
 }
 
 init_stage() {
-  if(flag("sq_is_max_tower_built"))
+  if(flag("sq_is_max_tower_built")) {
     level thread stage_vo_max();
-  else
+  }
+  else {
     level thread stage_vo_ric();
+  }
 
   level._cur_stage_name = "ows";
   clientnotify("ows");
@@ -76,8 +78,9 @@ ows_targets_start() {
   while(n_cur_second < 40) {
     a_spawn_spots = ows_targets_get_cur_spots(n_cur_second);
 
-    if(isDefined(a_spawn_spots) && a_spawn_spots.size > 0)
+    if(isDefined(a_spawn_spots) && a_spawn_spots.size > 0) {
       ows_targets_spawn(a_spawn_spots);
+    }
 
     wait 1;
     n_cur_second++;
@@ -101,8 +104,9 @@ ows_targets_get_cur_spots(n_time) {
     if(isDefined(s_spot.script_string)) {
       a_spawn_times = strtok(s_spot.script_string, " ");
 
-      if(isinarray(a_spawn_times, str_time))
+      if(isinarray(a_spawn_times, str_time)) {
         a_to_spawn[a_to_spawn.size] = s_spot;
+      }
     }
   }
 
@@ -120,8 +124,9 @@ ows_targets_spawn(a_spawn_spots) {
     playFXOnTag(level._effect["sq_spawn"], m_target, "tag_origin");
     m_target playSound("zmb_sq_target_spawn");
 
-    if(isDefined(s_spot.target))
+    if(isDefined(s_spot.target)) {
       m_target thread ows_target_move(s_spot.target);
+    }
 
     m_target thread ows_target_think();
     m_target thread sndhit();
@@ -162,8 +167,9 @@ ows_target_delete_timer() {
 }
 
 sndsidequestowsmusic() {
-  while(is_true(level.music_override))
+  while(is_true(level.music_override)) {
     wait 0.1;
+  }
 
   level.music_override = 1;
   level setclientfield("mus_zmb_egg_snapshot_loop", 1);

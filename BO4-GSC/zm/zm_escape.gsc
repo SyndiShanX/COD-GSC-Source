@@ -1098,4 +1098,3 @@ function_6b733771() {
   level notify(#"hash_6a6919e3cb8ef81");
   level notify(#"all_macguffins_acquired");
 }
-

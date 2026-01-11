@@ -48,8 +48,9 @@ onPlayerSpawned() {
 }
 
 getMapCenter() {
-  if(isDefined(level.mapCenter))
+  if(isDefined(level.mapCenter)) {
     return level.mapCenter;
+  }
 
   alliesStart = GetSpawnArray("mp_tdm_spawn_allies_start");
   axisStart = GetSpawnArray("mp_tdm_spawn_axis_start");
@@ -81,8 +82,9 @@ doHeliInsertion(teamHeli, axisPoint, alliesPoint) {
   hoverOffset = 1200;
   leaveOffset = 1000;
 
-  if(!isDefined(teamHeli))
+  if(!isDefined(teamHeli)) {
     teamHeli = "both";
+  }
 
   if(teamHeli == "axis") {
     self thread insertaxisInsertChopper(axisPoint);
@@ -100,8 +102,9 @@ insertalliesInsertChopper(pointOverRide) {
   hoverOffset = 1200;
   leaveOffset = 1000;
 
-  if(!isDefined(pointOverRide))
+  if(!isDefined(pointOverRide)) {
     pointOverRide = startSpawns["allies"][0];
+  }
 
   forward1 = anglesToForward(startSpawns["allies"][0].angles) * 300;
   up1 = AnglesToUp(startSpawns["allies"][0].angles) * spawnHeight;
@@ -319,10 +322,12 @@ doPavelow() {
   mapCenter = getMapCenter();
   traceData = bulletTrace(mapCenter + (0, 0, 500), mapCenter - (0, 0, 500), false);
   if(isDefined(traceData["position"])) {
-    if(cointoss())
+    if(cointoss()) {
       vehicleModel = "vehicle_pavelow";
-    else
+    }
+    else {
       vehicleModel = "vehicle_pavelow_opfor";
+    }
     chopper = spawnHelicopter(self, traceData["position"] + (0, 0, 1000), (0, 0, 0), "pavelow_mp", vehicleModel);
     if(!isDefined(chopper)) {
       return;

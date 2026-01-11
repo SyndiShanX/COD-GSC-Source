@@ -95,10 +95,12 @@ givecustomloadout() {
 onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime) {
   if(sweapon == "crossbow_mp" && smeansofdeath == "MOD_IMPACT") {
     if(isDefined(eattacker) && isplayer(eattacker)) {
-      if(!isDefined(eattacker.pers["sticks"]))
+      if(!isDefined(eattacker.pers["sticks"])) {
         eattacker.pers["sticks"] = 1;
-      else
+      }
+      else {
         eattacker.pers["sticks"]++;
+      }
 
       eattacker.sticks = eattacker.pers["sticks"];
     }
@@ -111,8 +113,9 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
   if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
     baseweaponname = getreffromitemindex(getbaseweaponitemindex(sweapon)) + "_mp";
 
-    if(smeansofdeath == "MOD_MELEE")
+    if(smeansofdeath == "MOD_MELEE") {
       attacker maps\mp\gametypes\_globallogic_score::givepointstowin(level.pointspermeleekill);
+    }
     else if(baseweaponname == "crossbow_mp") {
       attacker.killswithprimary++;
 
@@ -123,10 +126,12 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
 
       attacker maps\mp\gametypes\_globallogic_score::givepointstowin(level.pointsperprimarykill);
     } else if(baseweaponname == "hatchet_mp") {
-      if(maps\mp\gametypes\_globallogic::istopscoringplayer(self))
+      if(maps\mp\gametypes\_globallogic::istopscoringplayer(self)) {
         maps\mp\_scoreevents::processscoreevent("kill_leader_with_axe_sas", attacker, self, sweapon);
-      else
+      }
+      else {
         maps\mp\_scoreevents::processscoreevent("kill_with_axe_sas", attacker, self, sweapon);
+      }
 
       attacker maps\mp\gametypes\_globallogic_score::givepointstowin(level.pointsperprimarygrenadekill);
     } else {
@@ -146,10 +151,12 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
       self.pers["humiliated"]++;
       self.humiliated = self.pers["humiliated"];
 
-      if(level.setbacks == 0)
+      if(level.setbacks == 0) {
         self maps\mp\gametypes\_globallogic_score::setpointstowin(0);
-      else
+      }
+      else {
         self maps\mp\gametypes\_globallogic_score::givepointstowin(level.setbacks * -1);
+      }
 
       attacker playlocalsound(game["dialog"]["wm_humiliation"]);
       self playlocalsound(game["dialog"]["wm_humiliation"]);
@@ -159,10 +166,12 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     self.pers["humiliated"]++;
     self.humiliated = self.pers["humiliated"];
 
-    if(level.setbacks == 0)
+    if(level.setbacks == 0) {
       self maps\mp\gametypes\_globallogic_score::setpointstowin(0);
-    else
+    }
+    else {
       self maps\mp\gametypes\_globallogic_score::givepointstowin(level.setbacks * -1);
+    }
 
     self thread maps\mp\gametypes\_wager::queuewagerpopup(&"MP_HUMILIATED", 0, &"MP_BANKRUPTED", "wm_humiliated");
     self playlocalsound(game["dialog"]["wm_humiliated"]);
@@ -223,29 +232,34 @@ onspawnplayer(predictedspawn) {
   spawnpoints = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(self.pers["team"]);
   spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_dm(spawnpoints);
 
-  if(predictedspawn)
+  if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  else
+  }
+  else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "sas");
+  }
 }
 
 onwagerawards() {
   tomahawks = self maps\mp\gametypes\_globallogic_score::getpersstat("tomahawks");
 
-  if(!isDefined(tomahawks))
+  if(!isDefined(tomahawks)) {
     tomahawks = 0;
+  }
 
   self maps\mp\gametypes\_persistence::setafteractionreportstat("wagerAwards", tomahawks, 0);
   sticks = self maps\mp\gametypes\_globallogic_score::getpersstat("sticks");
 
-  if(!isDefined(sticks))
+  if(!isDefined(sticks)) {
     sticks = 0;
+  }
 
   self maps\mp\gametypes\_persistence::setafteractionreportstat("wagerAwards", sticks, 1);
   bestkillstreak = self maps\mp\gametypes\_globallogic_score::getpersstat("best_kill_streak");
 
-  if(!isDefined(bestkillstreak))
+  if(!isDefined(bestkillstreak)) {
     bestkillstreak = 0;
+  }
 
   self maps\mp\gametypes\_persistence::setafteractionreportstat("wagerAwards", bestkillstreak, 2);
 }

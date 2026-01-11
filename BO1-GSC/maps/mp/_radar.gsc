@@ -41,61 +41,74 @@ init() {
   }
 }
 useKillstreakRadar(hardpointType) {
-  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false)
+  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) {
     return false;
-  if(self maps\mp\_killstreakrules::killstreakStart(hardpointType, self.team) == false)
+  }
+  if(self maps\mp\_killstreakrules::killstreakStart(hardpointType, self.team) == false) {
     return false;
+  }
   self thread maps\mp\_spyplane::callspyplane(hardpointType, false);
   return true;
 }
 useKillstreakCounterUAV(hardpointType) {
-  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false)
+  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) {
     return false;
-  if(self maps\mp\_killstreakrules::killstreakStart(hardpointType, self.team) == false)
+  }
+  if(self maps\mp\_killstreakrules::killstreakStart(hardpointType, self.team) == false) {
     return false;
+  }
   self thread maps\mp\_spyplane::callcounteruav(hardpointType, false);
   return true;
 }
 useKillstreakSatellite(hardpointType) {
-  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false)
+  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) {
     return false;
-  if(self maps\mp\_killstreakrules::killstreakStart(hardpointType, self.team) == false)
+  }
+  if(self maps\mp\_killstreakrules::killstreakStart(hardpointType, self.team) == false) {
     return false;
+  }
   self thread maps\mp\_spyplane::callsatellite(hardpointType, false);
   return true;
 }
 teamHasSpyplane(team) {
   spyplaneActive = getTeamSpyplane(team);
-  if(spyplaneActive > 0)
+  if(spyplaneActive > 0) {
     spyplaneActive = 1;
+  }
   return spyplaneActive;
 }
 teamHasSatellite(team) {
   satelliteActive = getTeamSatellite(team);
-  if(satelliteActive > 0)
+  if(satelliteActive > 0) {
     satelliteActive = 1;
+  }
   return satelliteActive;
 }
 useRadarItem(hardpointType, team, displayMessage) {
   team = self.team;
   otherteam = "axis";
-  if(team == "axis")
+  if(team == "axis") {
     otherteam = "allies";
+  }
   assert(isDefined(level.players));
   self maps\mp\gametypes\_hardpoints::playKillstreakStartDialog(hardpointType, team);
   if(level.teambased) {
-    if(!isDefined(level.spyplane[team]))
+    if(!isDefined(level.spyplane[team])) {
       level.spyplaneType[team] = 0;
+    }
     currentTypeSpyplane = level.spyplaneType[team];
-    if(!isDefined(level.satelliteType[team]))
+    if(!isDefined(level.satelliteType[team])) {
       level.satelliteType[team] = 0;
+    }
     currentTypeSatellite = level.satelliteType[team];
   } else {
-    if(!isDefined(self.pers["spyplaneType"]))
+    if(!isDefined(self.pers["spyplaneType"])) {
       self.pers["spyplaneType"] = 0;
+    }
     currentTypeSpyplane = self.pers["spyplaneType"];
-    if(!isDefined(self.pers["satelliteType"]))
+    if(!isDefined(self.pers["satelliteType"])) {
       self.pers["satelliteType"] = 0;
+    }
     currentTypeSatellite = self.pers["satelliteType"];
   }
   radarViewType = 0;
@@ -137,8 +150,9 @@ useRadarItem(hardpointType, team, displayMessage) {
     break;
   }
   if(displayMessage) {
-    if(isDefined(level.killstreaks[hardpointType]) && isDefined(level.killstreaks[hardpointType].inboundtext))
+    if(isDefined(level.killstreaks[hardpointType]) && isDefined(level.killstreaks[hardpointType].inboundtext)) {
       level thread maps\mp\_popups::DisplayKillstreakTeamMessageToAll(hardpointType, self);
+    }
   }
   return viewTime;
 }
@@ -159,21 +173,26 @@ resetSatelliteTypeOnEnd(type) {
 setTeamSpyplaneWrapper(team, value) {
   setTeamSpyplane(team, value);
   radarType = "ui_radar_" + team;
-  if(radarType == "ui_radar_allies")
+  if(radarType == "ui_radar_allies") {
     setMatchFlag("radar_allies", value);
-  else
+  }
+  else {
     setMatchFlag("radar_axis", value);
+  }
   level notify("radar_status_change", team);
 }
 setTeamSatelliteWrapper(team, value) {
   setTeamSatellite(team, value);
   radarType = "ui_radar_" + team;
-  if(radarType == "ui_radar_allies")
+  if(radarType == "ui_radar_allies") {
     setMatchFlag("radar_allies", value);
-  else
+  }
+  else {
     setMatchFlag("radar_axis", value);
-  if(value == false)
+  }
+  if(value == false) {
     level notify("satellite_finished_" + team);
+  }
   level notify("radar_status_change", team);
 }
 enemyObituaryText(type, numseconds) {
@@ -214,4 +233,3 @@ friendlyObituaryText(type, callingPlayer, numseconds) {
     }
   }
 }
-

@@ -97,16 +97,18 @@ sndx_play_alias(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   var_12 = var_3 == "3d" && !isDefined(var_2);
   var_13 = self;
 
-  if(!var_12)
+  if(!var_12) {
     var_13 = level.player;
+  }
 
   if(!isDefined(var_13)) {
     return;
   }
   var_14 = var_13.origin;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_14 = var_2;
+  }
 
   var_15 = spawn("script_origin", var_14);
   var_13 thread sndx_play_alias_thread(var_0, var_1, var_12, var_2, var_3, var_15, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
@@ -129,18 +131,21 @@ sndx_play_alias_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
   if(var_2) {
     var_15 = "tag_origin";
 
-    if(isDefined(var_13.model) || var_13.model != "" || var_13 gettagindex(var_15) < 0)
+    if(isDefined(var_13.model) || var_13.model != "" || var_13 gettagindex(var_15) < 0) {
       var_15 = "";
+    }
 
     var_5 linkto(var_13, var_15, var_10, (0, 0, 0));
     var_5 thread sndx_play_alias_monitor_linkdeath(var_8, var_14, var_13);
   }
 
   if(var_11 > 0) {
-    if(var_12)
+    if(var_12) {
       soundscripts\_audio::aud_slomo_wait(var_11);
-    else
+    }
+    else {
       wait(var_11);
+    }
   }
 
   if(var_1 == "oneshot") {
@@ -153,8 +158,9 @@ sndx_play_alias_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 
   var_5 scalevolume(0, 0);
 
-  if(isstring(var_6))
+  if(isstring(var_6)) {
     var_5 thread sndx_play_alias_monitor_stopnotify(var_8, var_14, var_6);
+  }
 
   var_5 scalevolume(var_9, var_7);
 }
@@ -194,8 +200,9 @@ sndx_play_alias_fade_delete(var_0, var_1) {
       waittillframeend;
     }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 }
 
@@ -238,8 +245,9 @@ snd_play_amb_loop(var_0, var_1, var_2, var_3) {
     var_5 playLoopSound(var_0);
     level waittill(var_2);
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_4 = var_3;
+    }
 
     if(isDefined(var_5)) {
       var_5 scalevolume(0, var_4);

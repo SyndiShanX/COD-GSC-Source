@@ -113,8 +113,9 @@ sq_atd_watch_elevator(str_flag) {
 
     flag_set(str_flag);
 
-    while(isalive(e_who) && e_who istouching(self))
+    while(isalive(e_who) && e_who istouching(self)) {
       wait 0.05;
+    }
 
     flag_clear(str_flag);
   }
@@ -125,11 +126,13 @@ sq_atd_drg_puzzle() {
   a_puzzle_trigs = getEntArray("trig_atd_drg_puzzle", "targetname");
   a_puzzle_trigs = array_randomize(a_puzzle_trigs);
 
-  for(i = 0; i < a_puzzle_trigs.size; i++)
+  for(i = 0; i < a_puzzle_trigs.size; i++) {
     a_puzzle_trigs[i] thread drg_puzzle_trig_think(i);
+  }
 
-  while(level.sq_atd_cur_drg < 4)
+  while(level.sq_atd_cur_drg < 4) {
     wait 1;
+  }
 
   flag_set("sq_atd_drg_puzzle_complete");
   level thread vo_maxis_atd_order_complete();
@@ -148,8 +151,9 @@ drg_puzzle_trig_think(n_order_id) {
     if(self.drg_active) {
       level waittill_either("sq_atd_drg_puzzle_complete", "drg_puzzle_reset");
 
-      if(flag("sq_atd_drg_puzzle_complete"))
+      if(flag("sq_atd_drg_puzzle_complete")) {
         continue;
+      }
     }
 
     self waittill("trigger", e_who);
@@ -166,8 +170,9 @@ drg_puzzle_trig_think(n_order_id) {
 
       self thread drg_puzzle_trig_watch_fade(m_lit, m_unlit, v_top, v_hidden);
     } else {
-      if(!flag("sq_atd_drg_puzzle_1st_error"))
+      if(!flag("sq_atd_drg_puzzle_1st_error")) {
         level thread vo_maxis_atd_order_error();
+      }
 
       level.sq_atd_cur_drg = 0;
       level notify("drg_puzzle_reset");
@@ -177,8 +182,9 @@ drg_puzzle_trig_think(n_order_id) {
       wait 0.5;
     }
 
-    while(e_who istouching(self))
+    while(e_who istouching(self)) {
       wait 0.5;
+    }
   }
 }
 

@@ -4,31 +4,37 @@
 *****************************************************/
 
 _autosave_stealthcheck_nml() {
-  if(common_scripts\utility::flag("_stealth_spotted"))
+  if(common_scripts\utility::flag("_stealth_spotted")) {
     return 0;
+  }
 
-  if(!maps\_stealth_utility::stealth_is_everything_normal())
+  if(!maps\_stealth_utility::stealth_is_everything_normal()) {
     return 0;
+  }
 
-  if(common_scripts\utility::flag("_stealth_player_nade"))
+  if(common_scripts\utility::flag("_stealth_player_nade")) {
     return 0;
+  }
 
   if(common_scripts\utility::flag_exist("_radiation_poisoning")) {
-    if(common_scripts\utility::flag("_radiation_poisoning"))
+    if(common_scripts\utility::flag("_radiation_poisoning")) {
       return 0;
+    }
   }
 
   var_0 = getEntArray("destructible", "classname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.healthdrain))
+    if(isDefined(var_2.healthdrain)) {
       return 0;
+    }
   }
 
   var_4 = getEntArray("grenade", "classname");
 
-  if(var_4.size > 0)
+  if(var_4.size > 0) {
     return 0;
+  }
 
   return 1;
 }
@@ -105,8 +111,9 @@ stealth_shot(var_0) {
   var_2 = var_0 gettagorigin("j_head");
   var_3 = bulletTrace(var_1, var_2, 1);
 
-  while(!isDefined(self.a.array) || !isDefined(self.a.array["single"]) || self.a.array["single"].size <= 0)
+  while(!isDefined(self.a.array) || !isDefined(self.a.array["single"]) || self.a.array["single"].size <= 0) {
     wait 0.05;
+  }
 
   var_4 = randomint(self.a.array["single"].size);
   var_5 = self.a.array["single"][var_4];
@@ -148,8 +155,9 @@ magic_stealth_shot(var_0, var_1) {
     playFX(common_scripts\utility::getfx("flesh_hit_head_fatal_exit_exaggerated"), var_8, var_4 * -1, (0, 0, 1));
     wait 0.1;
 
-    if(isalive(var_0))
+    if(isalive(var_0)) {
       var_0 kill();
+    }
   }
 }
 
@@ -199,8 +207,9 @@ dog_stealth_visibility() {
     self.ignoreme = 0;
     self waittill("dog_command_complete");
 
-    if(!maps\_stealth_utility::stealth_group_spotted_flag())
+    if(!maps\_stealth_utility::stealth_group_spotted_flag()) {
       self.ignoreme = var_0;
+    }
   }
 }
 
@@ -259,8 +268,9 @@ dialog_found_a_body() {
       maps\_utility::smart_radio_dialogue(var_0[var_1], 0.1);
       var_1++;
 
-      if(var_1 >= var_0.size)
+      if(var_1 >= var_0.size) {
         var_1 = 0;
+      }
     }
 
     common_scripts\utility::flag_waitopen("_stealth_found_corpse");
@@ -286,8 +296,9 @@ dialog_player_kill() {
     if(!maps\_stealth_utility::stealth_is_everything_normal()) {
       return;
     }
-    if(!isDefined(level.player_kill_time))
+    if(!isDefined(level.player_kill_time)) {
       level.player_kill_time = gettime();
+    }
     else if(gettime() < level.player_kill_time + 15000) {
       return;
     }
@@ -330,8 +341,9 @@ wait_till_every_thing_stealth_normal_for(var_0) {
     if(maps\_stealth_utility::stealth_is_everything_normal()) {
       wait(var_0);
 
-      if(maps\_stealth_utility::stealth_is_everything_normal())
+      if(maps\_stealth_utility::stealth_is_everything_normal()) {
         return;
+      }
     }
 
     wait 1;
@@ -349,8 +361,9 @@ listen_dog_attack() {
     var_2 = sortbydistance(var_2, self.origin);
     var_3 = 250;
 
-    if(var_1 == "F")
+    if(var_1 == "F") {
       var_3 = 500;
+    }
 
     foreach(var_5 in var_2) {
       if(var_5 != self && isDefined(var_5._stealth)) {
@@ -435,8 +448,9 @@ btr_stop_when_not_normal() {
   btr_mg_off();
 
   for(;;) {
-    while(maps\_stealth_utility::stealth_is_everything_normal())
+    while(maps\_stealth_utility::stealth_is_everything_normal()) {
       wait 0.05;
+    }
 
     self vehicle_setspeed(0, 10, 10);
     wait_till_every_thing_stealth_normal_for(0.5);
@@ -445,16 +459,18 @@ btr_stop_when_not_normal() {
 }
 
 btr_mg_off() {
-  foreach(var_1 in self.mgturret)
+  foreach(var_1 in self.mgturret) {
   var_1 notify("stop_burst_fire_unmanned");
+  }
 }
 
 stealth_is_everything_normal_for_group(var_0) {
   var_1 = maps\_stealth_shared_utilities::group_get_ai_in_group(var_0);
 
   foreach(var_3 in var_1) {
-    if(!var_3 maps\_utility::ent_flag("_stealth_normal"))
+    if(!var_3 maps\_utility::ent_flag("_stealth_normal")) {
       return 0;
+    }
   }
 
   return 1;
@@ -468,14 +484,16 @@ dog_footstep_logic() {
   for(;;) {
     var_0 = length(level.player getnormalizedmovement());
 
-    if(!isDefined(level.dog.sprint))
+    if(!isDefined(level.dog.sprint)) {
       level.dog.sprint = 0;
+    }
 
     if(level.dog isdogbeingdriven() && var_0 > 0) {
       var_1 = level._stealth.logic.detect_range["hidden"]["prone"];
 
-      if(level.dog.sprint)
+      if(level.dog.sprint) {
         var_1 = level._stealth.logic.detect_range["hidden"]["crouch"];
+      }
       else {
         var_1 = 64;
         var_1 = var_0 * var_0 * var_1;
@@ -505,8 +523,9 @@ keep_dog_threat() {
   level.dog endon("death");
 
   for(;;) {
-    if(level.dog.ignoreme)
+    if(level.dog.ignoreme) {
       level.dog.ignoreme = 0;
+    }
 
     common_scripts\utility::waitframe();
   }

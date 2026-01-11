@@ -17,8 +17,9 @@ MoveCQB() {
   if(self.a.pose != "stand") {
     // (get rid of any prone or other stuff that might be going on)
     self clearAnim( % root, 0.2);
-    if(self.a.pose == "prone")
+    if(self.a.pose == "prone") {
       self ExitProneWrapper(1);
+    }
     self.a.pose = "stand";
   }
   self.a.movement = self.moveMode;
@@ -31,13 +32,16 @@ MoveCQB() {
 
   rate = self.moveplaybackrate;
 
-  if(self.moveMode == "walk")
+  if(self.moveMode == "walk") {
     rate *= 0.6;
+  }
 
-  if(self.stairsState == "none")
+  if(self.stairsState == "none") {
     transTime = 0.3;
-  else
+  }
+  else {
     transTime = 0.1; // need to transition to stairs quickly
+  }
 
   // (we don't use %body because that would reset the aiming knobs)
   self setFlaggedAnimKnobAll("runanim", cqbWalkAnim, % walk_and_run_loops, 1, transTime, rate, true);
@@ -51,21 +55,26 @@ MoveCQB() {
 }
 
 DetermineCQBAnim() {
-  if(isDefined(self.customMoveAnimSet) && isDefined(self.customMoveAnimSet["cqb"]))
+  if(isDefined(self.customMoveAnimSet) && isDefined(self.customMoveAnimSet["cqb"])) {
     return animscripts\run::GetRunAnim();
+  }
 
-  if(self.stairsState == "up")
+  if(self.stairsState == "up") {
     return % traverse_stair_run;
+  }
 
-  if(self.stairsState == "down")
+  if(self.stairsState == "down") {
     return % traverse_stair_run_down_01;
+  }
 
-  if(self.movemode == "walk")
+  if(self.movemode == "walk") {
     return % walk_CQB_F;
+  }
 
   variation = getRandomIntFromSeed(self.a.runLoopCount, 2);
-  if(variation == 0)
+  if(variation == 0) {
     return % run_CQB_F_search_v1;
+  }
 
   return % run_CQB_F_search_v2;
 }
@@ -74,8 +83,9 @@ CQBTracking() {
   assert(isDefined(self.aim_while_moving_thread) == isDefined(self.trackLoopThread));
   assertex(!isDefined(self.trackLoopThread) || (self.trackLoopThreadType == "faceEnemyAimTracking"), self.trackLoopThreadType);
 
-  if(animscripts\move::MayShootWhileMoving())
+  if(animscripts\move::MayShootWhileMoving()) {
     animscripts\run::runShootWhileMovingThreads();
+  }
 
   animscripts\run::faceEnemyAimTracking();
 }
@@ -90,13 +100,15 @@ setupCQBPointsOfInterest() {
 }
 
 findCQBPointsOfInterest() {
-  if(isDefined(anim.findingCQBPointsOfInterest))
+  if(isDefined(anim.findingCQBPointsOfInterest)) {
     return;
+  }
   anim.findingCQBPointsOfInterest = true;
 
   // one AI per frame, find best point of interest.
-  if(!level.cqbPointsOfInterest.size)
+  if(!level.cqbPointsOfInterest.size) {
     return;
+  }
 
   while(1) {
     ai = getaiarray();
@@ -123,35 +135,42 @@ findCQBPointsOfInterest() {
           dist = distanceSquared(point, lookAheadPoint);
           if(dist < bestdist) {
             if(moving) {
-              if(distanceSquared(point, shootAtPos) < 64 * 64)
+              if(distanceSquared(point, shootAtPos) < 64 * 64) {
                 continue;
+              }
               dot = vectorDot(vectorNormalize(point - shootAtPos), forward);
-              if(dot < 0.643 || dot > 0.966) // 0.643 = cos( 50 ), 0.966 = cos( 15 )
+              if(dot < 0.643 || dot > 0.966) // 0.643 = cos( 50 ), 0.966 = cos( 15 ) {
                 continue;
+              }
             } else {
-              if(dist < 50 * 50)
+              if(dist < 50 * 50) {
                 continue;
+              }
             }
 
-            if(!sightTracePassed(lookAheadPoint, point, false, undefined))
+            if(!sightTracePassed(lookAheadPoint, point, false, undefined)) {
               continue;
+            }
 
             bestdist = dist;
             best = j;
           }
         }
 
-        if(best < 0)
+        if(best < 0) {
           guy.cqb_point_of_interest = undefined;
-        else
+        }
+        else {
           guy.cqb_point_of_interest = level.cqbPointsOfInterest[best];
+        }
 
         wait .05;
         waited = true;
       }
     }
-    if(!waited)
+    if(!waited) {
       wait .25;
+    }
   }
 }
 
@@ -204,8 +223,9 @@ CQBDebug() {
 }
 
 CQBDebugGlobal() {
-  if(isDefined(level.cqbdebugglobal))
+  if(isDefined(level.cqbdebugglobal)) {
     return;
+  }
   level.cqbdebugglobal = true;
 
   while(1) {

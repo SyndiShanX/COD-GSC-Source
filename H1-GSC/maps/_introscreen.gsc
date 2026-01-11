@@ -5,8 +5,9 @@
 ********************************/
 
 main() {
-  if(isDefined(level.credits_active))
+  if(isDefined(level.credits_active)) {
     return 0;
+  }
 
   introscreen_init();
 
@@ -32,33 +33,38 @@ introscreen_init() {
   precacheshader("black");
   precacheshader("white");
 
-  if(getdvar("introscreen") == "")
+  if(getdvar("introscreen") == "") {
     setdvar("introscreen", "1");
+  }
 
   waittillframeend;
   waittillframeend;
 }
 
 introscreen_should_activate() {
-  if(!introscreen_is_enabled())
+  if(!introscreen_is_enabled()) {
     return 0;
+  }
 
-  if(!maps\_utility::is_h1_level())
+  if(!maps\_utility::is_h1_level()) {
     return 0;
+  }
 
   return 1;
 }
 
 introscreen_is_enabled() {
-  if(getdvar("beautiful_corner") == "1")
+  if(getdvar("beautiful_corner") == "1") {
     return 0;
+  }
 
   return 1;
 }
 
 activate_intro() {
-  if(should_revive_ammo_counter())
+  if(should_revive_ammo_counter()) {
     thread revive_ammo_counter();
+  }
 
   common_scripts\utility::flag_set("introscreen_activate");
 
@@ -190,8 +196,9 @@ flying_intro() {
   wait 0.3;
   var_5 rotateto((var_5.angles[0] - 89, var_5.angles[1], 0), 0.5, 0.3, 0.2);
 
-  if(!var_3)
+  if(!var_3) {
     savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);
+  }
 
   wait 0.5;
   common_scripts\utility::flag_set("pullup_weapon");
@@ -530,8 +537,9 @@ introscreen_generic_white_fade_in(var_0, var_1) {
 }
 
 introscreen_generic_fade_in(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1.5;
+  }
 
   var_3 = newhudelem();
   var_3.x = 0;
@@ -550,8 +558,9 @@ introscreen_create_line(var_0) {
   var_1 = level.introstring.size;
   var_2 = var_1 * 30;
 
-  if(level.console)
+  if(level.console) {
     var_2 = var_2 - 60;
+  }
 
   var_3 = newhudelem();
   var_3.x = 0;
@@ -578,17 +587,20 @@ introscreen_fadeouttext() {
 
   wait 1.5;
 
-  for(var_0 = 0; var_0 < level.introstring.size; var_0++)
+  for(var_0 = 0; var_0 < level.introstring.size; var_0++) {
     level.introstring[var_0] destroy();
+  }
 }
 
 _cornerlinethread(var_0, var_1, var_2, var_3) {
   level notify("new_introscreen_element");
 
-  if(!isDefined(level.intro_offset))
+  if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  else
+  }
+  else {
     level.intro_offset++;
+  }
 
   var_4 = _cornerlinethread_height();
   var_5 = newhudelem();
@@ -620,8 +632,9 @@ _cornerlinethread(var_0, var_1, var_2, var_3) {
   if(!isstring(var_3)) {
     return;
   }
-  if(var_3 != "date")
+  if(var_3 != "date") {
     return;
+  }
 }
 
 _cornerlinethread_height() {
@@ -654,8 +667,9 @@ weapon_pullout() {
 revive_ammo_counter() {
   common_scripts\utility::flag_wait("safe_for_objectives");
 
-  if(!isDefined(level.nocompass))
+  if(!isDefined(level.nocompass)) {
     setsaveddvar("compass", 1);
+  }
 
   setsaveddvar("ammoCounterHide", "0");
   setsaveddvar("actionSlotsHide", "0");
@@ -663,8 +677,9 @@ revive_ammo_counter() {
 }
 
 introscreen_add_line(var_0) {
-  if(!isDefined(level.introscreen_lines))
+  if(!isDefined(level.introscreen_lines)) {
     level.introscreen_lines = [];
+  }
 
   precachestring(var_0);
   level.introscreen_lines[level.introscreen_lines.size] = var_0;

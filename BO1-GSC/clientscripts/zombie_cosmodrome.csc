@@ -819,8 +819,9 @@ close_lander_bay_doors(door_name) {
 }
 
 rocket_fx(localClientNum, set, newEnt) {
-  if(!set)
+  if(!set) {
     return;
+  }
   playFXOnTag(localClientNum, level._effect["rocket_blast_trail"], self, "tag_engine");
 }
 
@@ -862,8 +863,9 @@ start_ground_sounds() {
   while(isDefined(self)) {
     wait(.15);
     if(isDefined(self.stop_ground_sounds) && self.stop_ground_sounds) {
-      if(isDefined(self.ground_sound_ent))
+      if(isDefined(self.ground_sound_ent)) {
         self.ground_sound_ent stopLoopSound(2);
+      }
       return;
     }
     if(DistanceSquared(pre_origin, self gettagorigin("tag_bellow")) < 144) {
@@ -871,8 +873,9 @@ start_ground_sounds() {
     }
     pre_origin = self gettagorigin("tag_bellow");
     trace = bulletTrace(self gettagorigin("tag_bellow"), self gettagorigin("tag_bellow") - (0, 0, 100000), false, undefined);
-    if(!isDefined(trace))
+    if(!isDefined(trace)) {
       continue;
+    }
     if(!isDefined(trace["position"])) {
       self.ground_sound_ent stopLoopSound(2);
       continue;

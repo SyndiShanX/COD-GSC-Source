@@ -152,15 +152,19 @@ adjustmovespeed(var_00, var_01) {
     var_0.allowpain = 0;
   }
 
-  if(scripts\engine\utility::is_true(var_0.slowed))
+  if(scripts\engine\utility::is_true(var_0.slowed)) {
     var_0.slowed = undefined;
-  else
+  }
+  else {
     return;
+  }
 
-  if(!isDefined(var_0.asm.cur_move_mode))
+  if(!isDefined(var_0.asm.cur_move_mode)) {
     var_02 = self.movemode;
-  else
+  }
+  else {
     var_02 = var_0.asm.cur_move_mode;
+  }
 
   var_02 = var_0.asm.cur_move_mode;
 
@@ -188,8 +192,9 @@ removefrozentickontimeout(var_00) {
   var_00 endon("death");
   wait 1;
 
-  if(isDefined(var_0.frozentick))
+  if(isDefined(var_0.frozentick)) {
     var_0.frozentick = undefined;
+  }
 
   var_00 notify("defrosted");
   var_00 thread applyzombiescriptablestate(var_00);
@@ -203,12 +208,15 @@ freeze_zombie(var_00) {
   var_0.full_gib = 1;
   var_0.noturnanims = 1;
 
-  if(isDefined(var_0.func_7387) && issubstr(var_0.func_7387, "window"))
+  if(isDefined(var_0.func_7387) && issubstr(var_0.func_7387, "window")) {
     var_00 setscriptablepartstate("frozen", "frozen_traverse");
-  else if(scripts\engine\utility::is_true(var_0.dismember_crawl))
+  }
+  else if(scripts\engine\utility::is_true(var_0.dismember_crawl)) {
     var_00 setscriptablepartstate("frozen", "frozen_crawl");
-  else
+  }
+  else {
     var_00 setscriptablepartstate("frozen", "frozen");
+  }
 
   wait 10.1;
   var_0.isfrozen = undefined;
@@ -294,8 +302,9 @@ func_12973(var_00, var_01) {
     var_00 setscriptablepartstate("cold", "inactive", 1);
   }
 
-  if(scripts\engine\utility::is_true(var_01))
+  if(scripts\engine\utility::is_true(var_01)) {
     var_0.isfrozen = undefined;
+  }
 }
 
 turn_off_states_on_death(var_00) {
@@ -313,21 +322,25 @@ turn_off_states_on_death(var_00) {
   var_00 setscriptablepartstate("arcane_white", "inactive", 1);
   var_00 setscriptablepartstate("cold", "inactive", 1);
 
-  if(isDefined(var_0.has_backpack))
+  if(isDefined(var_0.has_backpack)) {
     var_00 setscriptablepartstate("backpack", "hide", 1);
+  }
 
   var_00 getrandomhovernodesaroundtargetpos(2, 0);
 }
 
 func_FFAA(var_00) {
-  if(!isDefined(var_0.species))
+  if(!isDefined(var_0.species)) {
     return 0;
+  }
 
-  if(isDefined(level.the_hoff) && var_00 == level.the_hoff)
+  if(isDefined(level.the_hoff) && var_00 == level.the_hoff) {
     return 0;
+  }
 
-  if(isDefined(var_0.electrocuted))
+  if(isDefined(var_0.electrocuted)) {
     return 0;
+  }
 
   switch (var_0.species) {
     case "zombie_grey":

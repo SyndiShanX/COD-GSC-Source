@@ -3228,4 +3228,3 @@ function_4ead318d() {
     line(rightfront + (0, 0, 25), rightfront - (0, 0, 75), (1, 1, 0), 1);
   }
 }
-

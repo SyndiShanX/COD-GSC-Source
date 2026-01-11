@@ -671,8 +671,9 @@ on_zombie_spawn(localClientNum) {
   if(isDefined(self) && self haseyes()) {
     self createZombieEyes(localClientNum);
   }
-  if(isDefined(self))
+  if(isDefined(self)) {
     self mapshaderconstant(localClientNum, 0, "scriptVector0", -4.0, -1.0, 0.0, -1.0);
+  }
 }
 
 zombie_eye_callback(localClientNum, hasEyes) {

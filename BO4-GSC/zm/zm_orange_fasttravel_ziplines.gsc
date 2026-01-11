@@ -726,4 +726,3 @@ function_80a9077f() {
     level flag::set(#"facility_available");
   }
 }
-

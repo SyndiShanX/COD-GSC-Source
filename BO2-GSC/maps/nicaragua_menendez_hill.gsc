@@ -70,8 +70,9 @@ menendez_hill_intro_vo() {
 
   ai_mh_intro = getent("mh_intro_brutality_ai", "targetname");
 
-  if(isalive(ai_mh_intro))
+  if(isalive(ai_mh_intro)) {
     ai_mh_intro say_dialog("pdf3_stop_where_you_are_0");
+  }
 
   trigger_wait("trig_mh_move_to_front_door");
   ai_mh_intro = get_closest_living(level.player.origin, getaiarray("axis"));
@@ -118,8 +119,9 @@ menendez_hill_spawn_funcs() {
 }
 
 fall_destruction() {
-  while(isDefined(self))
+  while(isDefined(self)) {
     wait 0.05;
+  }
 
   s_dyn_ents_center = getstruct("struct_mh_coke_dest", "targetname");
   radiusdamage(s_dyn_ents_center.origin, 32, 1, 1);
@@ -174,8 +176,9 @@ menendez_hill_retreat_2nd_floor() {
   nd_coke_2nd_floor = getnode("mh_coke_2nd_open", "script_noteworthy");
   ai_2nd_floor = getnodeowner(nd_coke_2nd_floor);
 
-  if(isalive(ai_2nd_floor))
+  if(isalive(ai_2nd_floor)) {
     ai_2nd_floor fake_rush();
+  }
 }
 
 menendez_hill_retreat_intro() {
@@ -237,8 +240,9 @@ menendez_hill_ai_vs_ai() {
   ai_cartel thread melee_wrestle_logic();
   ai_cartel waittill("death");
 
-  if(isalive(ai_pdf))
+  if(isalive(ai_pdf)) {
     ai_pdf.b_not_part_of_rage = 0;
+  }
 }
 
 melee_wrestle_logic() {
@@ -269,8 +273,9 @@ menendez_hill_door_back_logic(str_door_clip, m_door, n_rotate_angle) {
     level notify("door_death_back_started");
     ai_pdf = getent("mh_front_door_pdf_ai", "targetname");
 
-    if(isalive(ai_pdf))
+    if(isalive(ai_pdf)) {
       ai_pdf delete();
+    }
 
     door_death_path_connect(str_door_clip, m_door, n_rotate_angle);
   }
@@ -324,13 +329,15 @@ menendez_hill_door_front_logic(str_door_clip, m_door, n_rotate_angle) {
     level notify("door_death_front_started");
     t_back_door_pdf = getent("trig_mh_back_door_pdf", "targetname");
 
-    if(isDefined(t_back_door_pdf))
+    if(isDefined(t_back_door_pdf)) {
       t_back_door_pdf delete();
+    }
 
     ai_pdf = getent("mh_back_door_pdf_ai", "targetname");
 
-    if(isalive(ai_pdf))
+    if(isalive(ai_pdf)) {
       ai_pdf delete();
+    }
 
     door_death_path_connect(str_door_clip, m_door, n_rotate_angle);
   }
@@ -371,10 +378,12 @@ door_ai_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_o
 }
 
 door_death() {
-  if(self.targetname == "mh_front_door_pdf_ai")
+  if(self.targetname == "mh_front_door_pdf_ai") {
     add_scene_properties("door_death", "anim_mh_door_death_front");
-  else
+  }
+  else {
     add_scene_properties("door_death", "anim_mh_door_death_back");
+  }
 
   add_generic_ai_to_scene(self, "door_death");
   level thread run_scene("door_death", 0.15);
@@ -397,8 +406,9 @@ nicaragua_hill_objectives() {
 }
 
 menendez_hill_animations() {
-  if(level.skip_hill_spawning == 0)
+  if(level.skip_hill_spawning == 0) {
     level thread mh_ransack_pdf_anims();
+  }
 }
 
 cartel_react_to_menendez_arrival() {
@@ -440,18 +450,21 @@ mh_shot_in_the_back_civs() {
   scene_wait("mh_shot_in_the_back_civs");
   ai_pdf = get_ais_from_scene("mh_shot_in_the_back_civs", "mh_shot_in_the_back_pdf_1");
 
-  if(isalive(ai_pdf))
+  if(isalive(ai_pdf)) {
     ai_pdf setgoalpos(ai_pdf.origin);
+  }
 }
 
 nicaragua_hill_spawning() {
-  if(level.skipto_point == "menendez_hill")
+  if(level.skipto_point == "menendez_hill") {
     wait 1;
+  }
 
   kill_spawnernum(0);
 
-  if(level.skip_hill_spawning == 0)
+  if(level.skip_hill_spawning == 0) {
     level thread ladder_ai_drop();
+  }
 }
 
 shoot_at_targets_ahead_of_me(str_target_names, total_time) {

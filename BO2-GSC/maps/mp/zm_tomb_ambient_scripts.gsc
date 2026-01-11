@@ -33,8 +33,9 @@ init_zeppelin(str_script_noteworthy, str_ender) {
     m_zeppelin setModel("veh_t6_dlc_zm_zeppelin");
     m_zeppelin setforcenocull();
 
-    while(true)
+    while(true) {
       m_zeppelin move_zeppelin_down_new_path(a_path_structs);
+    }
   }
 }
 
@@ -63,15 +64,18 @@ get_unused_struct(a_structs) {
 
   while(!a_valid_structs.size) {
     foreach(struct in a_structs) {
-      if(!isDefined(struct.used) || b_no_unused_structs)
+      if(!isDefined(struct.used) || b_no_unused_structs) {
         struct.used = 0;
+      }
 
-      if(!struct.used)
+      if(!struct.used) {
         a_valid_structs[a_valid_structs.size] = struct;
+      }
     }
 
-    if(!a_valid_structs.size)
+    if(!a_valid_structs.size) {
       b_no_unused_structs = 1;
+    }
   }
 
   s_unused = random(a_valid_structs);
@@ -91,8 +95,9 @@ vista_robot_pose() {
   a_robots = getstructarray("trench_downed_robot_struct", "targetname");
 
   for(i = 0; i < a_robots.size; i++) {
-    if(!isDefined(a_robots[i].angles))
+    if(!isDefined(a_robots[i].angles)) {
       a_robots[i].angles = (0, 0, 0);
+    }
 
     v_origin = getstartorigin(a_robots[i].origin, a_robots[i].angles, % ai_zombie_giant_robot_vista);
     v_angles = getstartangles(a_robots[i].origin, a_robots[i].angles, % ai_zombie_giant_robot_vista);

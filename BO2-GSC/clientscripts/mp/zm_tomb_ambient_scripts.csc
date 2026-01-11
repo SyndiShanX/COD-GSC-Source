@@ -20,18 +20,21 @@ setup_dogfights() {
 }
 
 dogfights_callback(localclientnumber, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     level thread dogfights_start(localclientnumber);
+  }
 }
 
 dogfights_start(localclientnumber) {
   disable_all_dogfight_planes(localclientnumber);
 
   for(i = 0; i < 3; i++) {
-    if(i % 2 == 0)
+    if(i % 2 == 0) {
       str_identifier = "dogfight_planes_1";
-    else
+    }
+    else {
       str_identifier = "dogfight_planes_2";
+    }
 
     level thread _dogfights_start(str_identifier, localclientnumber);
   }
@@ -42,20 +45,25 @@ disable_all_dogfight_planes(localclientnumber) {
 
   if(isDefined(level.dogfight_planes)) {
     foreach(struct in level.dogfight_planes) {
-      if(isDefined(struct.plane_front_fx_smoke) && isDefined(struct.plane_front_fx_smoke[localclientnumber]))
+      if(isDefined(struct.plane_front_fx_smoke) && isDefined(struct.plane_front_fx_smoke[localclientnumber])) {
         deletefx(localclientnumber, struct.plane_front_fx_smoke[localclientnumber]);
+      }
 
-      if(isDefined(struct.plane_rear_fx_tracer_left) && isDefined(struct.plane_rear_fx_tracer_left[localclientnumber]))
+      if(isDefined(struct.plane_rear_fx_tracer_left) && isDefined(struct.plane_rear_fx_tracer_left[localclientnumber])) {
         deletefx(localclientnumber, struct.plane_rear_fx_tracer_left[localclientnumber]);
+      }
 
-      if(isDefined(struct.plane_rear_fx_tracer_right) && isDefined(struct.plane_rear_fx_tracer_right[localclientnumber]))
+      if(isDefined(struct.plane_rear_fx_tracer_right) && isDefined(struct.plane_rear_fx_tracer_right[localclientnumber])) {
         deletefx(localclientnumber, struct.plane_rear_fx_tracer_right[localclientnumber]);
+      }
 
-      if(!isDefined(struct.in_use))
+      if(!isDefined(struct.in_use)) {
         struct.in_use = [];
+      }
 
-      if(isDefined(struct.in_use[localclientnumber]))
+      if(isDefined(struct.in_use[localclientnumber])) {
         struct.in_use[localclientnumber] = 0;
+      }
     }
   }
 }
@@ -70,8 +78,9 @@ _dogfights_start(str_name, localclientnumber) {
 }
 
 add_dogfight_pair(str_plane_front_tag_smoke, str_plane_rear_tag_fire_right, str_plane_rear_tag_fire_left) {
-  if(!isDefined(level.dogfight_planes))
+  if(!isDefined(level.dogfight_planes)) {
     level.dogfight_planes = [];
+  }
 
   s_temp = spawnStruct();
   s_temp.plane_front_tag_smoke = str_plane_front_tag_smoke;
@@ -105,11 +114,13 @@ plane_front_smoke_fx_start(localclientnumber, s_temp) {
 }
 
 plane_front_smoke_fx_end(localclientnumber, s_temp) {
-  if(!isDefined(s_temp.plane_front_fx_smoke))
+  if(!isDefined(s_temp.plane_front_fx_smoke)) {
     s_temp.plane_front_fx_smoke = [];
+  }
 
-  if(isDefined(s_temp.plane_front_fx_smoke[localclientnumber]))
+  if(isDefined(s_temp.plane_front_fx_smoke[localclientnumber])) {
     deletefx(localclientnumber, s_temp.plane_front_fx_smoke[localclientnumber], 0);
+  }
 }
 
 plane_rear_tracer_fx_start(localclientnumber, s_temp) {
@@ -120,28 +131,35 @@ plane_rear_tracer_fx_start(localclientnumber, s_temp) {
 }
 
 plane_rear_tracer_fx_end(localclientnumber, s_temp) {
-  if(!isDefined(s_temp.plane_rear_fx_tracer_right))
+  if(!isDefined(s_temp.plane_rear_fx_tracer_right)) {
     s_temp.plane_rear_fx_tracer_right = [];
+  }
 
-  if(isDefined(s_temp.plane_rear_fx_tracer_right[localclientnumber]))
+  if(isDefined(s_temp.plane_rear_fx_tracer_right[localclientnumber])) {
     deletefx(localclientnumber, s_temp.plane_rear_fx_tracer_right[localclientnumber], 0);
+  }
 
-  if(!isDefined(s_temp.plane_rear_fx_tracer_left))
+  if(!isDefined(s_temp.plane_rear_fx_tracer_left)) {
     s_temp.plane_rear_fx_tracer_left = [];
+  }
 
-  if(isDefined(s_temp.plane_rear_fx_tracer_left[localclientnumber]))
+  if(isDefined(s_temp.plane_rear_fx_tracer_left[localclientnumber])) {
     deletefx(localclientnumber, s_temp.plane_rear_fx_tracer_left[localclientnumber], 0);
+  }
 }
 
 get_dogfight_plane_model(localclientnumber, str_identifier) {
-  if(!isDefined(level.dogfight_plane_models))
+  if(!isDefined(level.dogfight_plane_models)) {
     level.dogfight_plane_models = [];
+  }
 
-  if(!isDefined(level.dogfight_plane_models[str_identifier]))
+  if(!isDefined(level.dogfight_plane_models[str_identifier])) {
     level.dogfight_plane_models[str_identifier] = [];
+  }
 
-  if(!isDefined(level.dogfight_plane_models[str_identifier][localclientnumber]))
+  if(!isDefined(level.dogfight_plane_models[str_identifier][localclientnumber])) {
     level.dogfight_plane_models[str_identifier][localclientnumber] = get_fxanim_from_script_noteworthy(localclientnumber, str_identifier);
+  }
 
   assert(isDefined(level.dogfight_plane_models[str_identifier][localclientnumber]), "tomb ambient scripts can't find dogfight plane model with script_noteworthy " + str_identifier);
   level.dogfight_plane_models[str_identifier][localclientnumber] waittill_dobj(localclientnumber);
@@ -152,8 +170,9 @@ get_fxanim_from_script_noteworthy(localclientnumber, str_identifier) {
   a_fxanims = getEntArray(localclientnumber, "fxanim", "targetname");
 
   foreach(ent in a_fxanims) {
-    if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == str_identifier)
+    if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == str_identifier) {
       return ent;
+    }
   }
 }
 
@@ -161,11 +180,13 @@ get_random_unused_plane_pair(localclientnumber) {
   a_unused = [];
 
   foreach(s_pair in level.dogfight_planes) {
-    if(!isDefined(s_pair.in_use[localclientnumber]))
+    if(!isDefined(s_pair.in_use[localclientnumber])) {
       s_pair.in_use[localclientnumber] = 0;
+    }
 
-    if(!s_pair.in_use[localclientnumber])
+    if(!s_pair.in_use[localclientnumber]) {
       a_unused[a_unused.size] = s_pair;
+    }
   }
 
   assert(a_unused.size > 0, "get_random_unused_plane_pair() couldn't find any unused dogfight pairs for ambient planes!");

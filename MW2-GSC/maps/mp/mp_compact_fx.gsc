@@ -14,6 +14,7 @@ main() {
 
   level._effect["falling_junk_ring_runner"] = loadfx("misc/falling_junk_ring_runner");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_compact_fx::main();
+  }
 }

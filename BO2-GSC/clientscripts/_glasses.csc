@@ -104,17 +104,21 @@ setup_player_control(localclientnum) {
     x = new_angles[0] - movement[0];
     y = new_angles[1] - movement[1];
 
-    if(x < -4.5)
+    if(x < -4.5) {
       x = -4.5;
+    }
 
-    if(x > 6)
+    if(x > 6) {
       x = 6;
+    }
 
-    if(y > 19)
+    if(y > 19) {
       y = 19;
+    }
 
-    if(y < -1.5)
+    if(y < -1.5) {
       y = -1.5;
+    }
 
     new_angles = (x, y, 0);
     self.angles = new_angles;
@@ -124,10 +128,12 @@ setup_player_control(localclientnum) {
 }
 
 karma_vitals_cam(localclientnum, set, newent) {
-  if(set)
+  if(set) {
     start_karma_vitals_cam(localclientnum);
-  else
+  }
+  else {
     stop_karma_vitals_cam(localclientnum);
+  }
 }
 
 start_karma_vitals_cam(localclientnum) {
@@ -155,16 +161,18 @@ start_karma_vitals_cam(localclientnum) {
           if(dt > min_zoomed_in_time) {
             current_fov = current_fov + fov_inc;
 
-            if(current_fov >= required_fov)
+            if(current_fov >= required_fov) {
               current_fov = required_fov;
+            }
           }
         }
 
         if(current_fov > required_fov) {
           current_fov = current_fov - fov_inc;
 
-          if(current_fov <= required_fov)
+          if(current_fov <= required_fov) {
             current_fov = required_fov;
+          }
         }
 
         setextracamfov(localclientnum, current_fov);
@@ -190,14 +198,17 @@ start_sw_cam(fade_in_time, hold_static_time, static_time) {
   level.localplayers[0] set_filter_pass_constant(level.pip_filterid, level.pip_passid, 0, level.pip_opacity);
   level.localplayers[0] set_filter_pass_constant(level.pip_filterid, level.pip_passid, 1, level.pip_squash);
 
-  if(!isDefined(fade_in_time))
+  if(!isDefined(fade_in_time)) {
     fade_in_time = 2.0;
+  }
 
-  if(!isDefined(hold_static_time))
+  if(!isDefined(hold_static_time)) {
     hold_static_time = 0.6;
+  }
 
-  if(!isDefined(static_time))
+  if(!isDefined(static_time)) {
     static_time = 2.2;
+  }
 
   level thread fade_in_sw_extra_cam(fade_in_time, hold_static_time, static_time);
 }
@@ -216,8 +227,9 @@ fade_in_sw_extra_cam(fade_in_time, hold_static_time, static_time) {
   while(time < fade_in_time) {
     time = (getrealtime() - start_time) / 1000;
 
-    if(time > fade_in_time)
+    if(time > fade_in_time) {
       time = fade_in_time;
+    }
 
     alpha = 1.0 - (fade_in_time - time) / fade_in_time;
     level.localplayers[0] set_filter_pass_constant(level.pip_filterid, level.pip_passid, 0, alpha);
@@ -232,8 +244,9 @@ fade_in_sw_extra_cam(fade_in_time, hold_static_time, static_time) {
   while(time < static_time) {
     time = (getrealtime() - start_time) / 1000;
 
-    if(time > static_time)
+    if(time > static_time) {
       time = static_time;
+    }
 
     frac = 1.0 - (static_time - time) / static_time;
     fuzz = 0.85 * frac;
@@ -252,14 +265,16 @@ fade_out_sw_extra_cam(fade_out_time, hold_static_time, static_time) {
   while(time < static_time) {
     time = (getrealtime() - start_time) / 1000;
 
-    if(time > static_time)
+    if(time > static_time) {
       time = static_time;
+    }
 
     frac = (static_time - time) / static_time;
     fuzz = frac;
 
-    if(fuzz < 0.01)
+    if(fuzz < 0.01) {
       fuzz = 0.01;
+    }
 
     level.localplayers[0] set_filter_pass_constant(level.pip_filterid, level.pip_passid, 0, alpha);
     level.localplayers[0] set_filter_pass_constant(level.pip_filterid, level.pip_passid, 2, fuzz);
@@ -273,8 +288,9 @@ fade_out_sw_extra_cam(fade_out_time, hold_static_time, static_time) {
   while(time < fade_out_time) {
     time = (getrealtime() - start_time) / 1000;
 
-    if(time > fade_out_time)
+    if(time > fade_out_time) {
       time = fade_out_time;
+    }
 
     alpha = (fade_out_time - time) / fade_out_time;
     level.localplayers[0] set_filter_pass_constant(level.pip_filterid, level.pip_passid, 0, alpha);

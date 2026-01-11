@@ -101,8 +101,9 @@ init_main_and_ending_common_stuff() {
   maps\createart\af_chase_fog::main();
 
   waittillframeend; // after _load	
-  if(isDefined(level.stop_load) && level.stop_load)
+  if(isDefined(level.stop_load) && level.stop_load) {
     return;
+  }
 
   level thread maps\af_chase_amb::main();
 }
@@ -202,8 +203,9 @@ wakeup_after_crash() {
   level.eq_ent.origin = (1, 0, 0);
   level.player SetEqLerp(0, level.eq_main_track);
 
-  if(do_wakeup_anim)
+  if(do_wakeup_anim) {
     thread fade_in_from_crash();
+  }
 
   SetBlur(20, 0);
   SetBlur(0, 8);
@@ -240,8 +242,9 @@ wakeup_after_crash() {
     player_rig SetAnim(animation, 1, 0, 25);
     for(;;) {
       animtime = player_rig GetAnimTime(animation);
-      if(animtime >= 0.95)
+      if(animtime >= 0.95) {
         break;
+      }
       wait 0.05;
     }
   }
@@ -309,8 +312,9 @@ fight_turnbuckle() {
   flag_set("stop_aftermath_player");
   fade_in(1); // in case we were fading out
 
-  if(isDefined(level.shepherd.function_stack))
+  if(isDefined(level.shepherd.function_stack)) {
     level.shepherd function_stack_clear(); // stop the dialogue
+  }
 
   level.shepherd StopSounds();
 
@@ -379,8 +383,9 @@ fight_turnbuckle() {
   level.shepherd delayThread(9.9, ::play_sound_on_entity, "scn_afchase_tbuckle_standup_mono");
 
   anim_scene = "turn_buckle";
-  if(flag("player_touched_shepherd"))
+  if(flag("player_touched_shepherd")) {
     anim_scene = "turn_buckle_alt";
+  }
 
   knife hide();
   level.shepherd Attach(level.scr_model["knife"], "tag_inhand");
@@ -504,8 +509,9 @@ gun_drop() {
 
   wait .05;
 
-  foreach(guy in guys)
+  foreach(guy in guys) {
   guy LinkTo(anim_node_ent);
+  }
 
   wait wait_to_blendout - .05;
   anim_node_ent MoveTo(anim_node_ent.origin + (200, 0, 0), blendout_time + 1, 0, 0);
@@ -558,16 +564,18 @@ gun_crawl() {
 
   //	anim_node anim_first_frame( guys , "gun_crawl_01");
 
-  if(!is_default_start())
+  if(!is_default_start()) {
     thread blend_player_to_crawl();
+  }
 
   level notify("stop_heart");
   button_index = 0;
 
   for(i = 0; i < 7; i++) {
     anim_node thread anim_loop(guys, "gun_crawl_0" + i + "_idle", "stop_crawl");
-    if(i == 1)
+    if(i == 1) {
       thread dof_target_to_gun_crawl();
+    }
     button_wait(button_alt, button_track, button_index);
 
     player_rig thread play_sound_on_entity("sand_crawl");
@@ -588,8 +596,9 @@ gun_crawl() {
     time = getanimlength(animation);
     delaythread(time - 0.25, ::crawl_earthquake);
 
-    if(i == 6)
+    if(i == 6) {
       break;
+    }
 
     button_index++;
     button_index %= button_alt.size;
@@ -722,8 +731,9 @@ wounded_show() {
 
   	for( ;; )
   	{
-  		if( level.price GetAnimTime( animation ) >= 0.89 )
+  		if( level.price GetAnimTime( animation ) >= 0.89 ) {
   			break;
+  		}
 
   		wait( 0.05 );
   	}
@@ -752,8 +762,9 @@ wounded_show() {
   // blah
 
   for(;;) {
-    if(level.price GetAnimTime(animation) >= 0.39)
+    if(level.price GetAnimTime(animation) >= 0.39) {
       break;
+    }
 
     wait(0.05);
   }
@@ -996,8 +1007,9 @@ start_knife_kill() {
 }
 
 knife_kill() {
-  if(flag("missionfailed"))
+  if(flag("missionfailed")) {
     return;
+  }
   level endon("missionfailed");
 
   maps\af_chase_anim::add_fighte_animsounds();
@@ -1300,11 +1312,13 @@ startpoint_catchup() {
   flag_set("killed_pickup_heli");
   flag_set("fell_off_waterfall");
 
-  if(start == "wakeup")
+  if(start == "wakeup") {
     return;
+  }
 
-  if(start == "wakefast")
+  if(start == "wakefast") {
     return;
+  }
 
   flag_set("start_doing_aftermath_walk");
 
@@ -1314,8 +1328,9 @@ startpoint_catchup() {
 
   flag_set("player_standing");
 
-  if(start == "turnbuckle")
+  if(start == "turnbuckle") {
     return;
+  }
 
   level notify("stop_drunk_walk");
   level notify("kill_limp");
@@ -1334,38 +1349,47 @@ startpoint_catchup() {
   flag_set("player_near_shepherd");
   flag_set("turn_buckle_fadeout");
 
-  if(start == "gloat")
+  if(start == "gloat") {
     return;
+  }
 
   flag_set("bloody_player_rig");
 
-  if(start == "gun_drop")
+  if(start == "gun_drop") {
     return;
-  if(start == "crawl")
+  }
+  if(start == "crawl") {
     return;
-  if(start == "gun_kick")
+  }
+  if(start == "gun_kick") {
     return;
+  }
   maps\af_chase_knife_fight_code::shep_beatup();
 
   player_rig = maps\af_chase_knife_fight_code::beat_up_prices_head();
 
   set_vision_set("af_chase_ending_noshock", 0);
   maps\af_chase_knife_fight_code::remove_fences();
-  if(start == "wounded")
+  if(start == "wounded") {
     return;
+  }
   maps\af_chase_knife_fight_code::set_wounded_fov();
   maps\af_chase_knife_fight_code::sandstorm_wounded_settings();
-  if(start == "pullout")
+  if(start == "pullout") {
     return;
-  if(start == "kill")
+  }
+  if(start == "kill") {
     return;
+  }
 
   level.fov_ent.origin = (65, 0, 0);
 
-  if(start == "price_wakeup")
+  if(start == "price_wakeup") {
     return;
-  if(start == "walkoff")
+  }
+  if(start == "walkoff") {
     return;
+  }
 
   assertex("Start point " + start + " is not handled by the catchup thread.");
 }

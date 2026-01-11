@@ -64,11 +64,13 @@ main() {
   setdvarifuninitialized("balcony_hind_killed_player", 0);
   setdvarifuninitialized("daniel", 0);
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     maps\_art::disable_ssao_over_time(0);
+  }
 
-  if(maps\_utility::game_is_current_gen())
+  if(maps\_utility::game_is_current_gen()) {
     setsaveddvar("fx_alphathreshold", 10);
+  }
 
   level.tower_courtyard_mortars = common_scripts\utility::getstructarray("courtyard_mortar_spots", "script_noteworthy");
   level.mortarexcluders = [];
@@ -481,8 +483,9 @@ start_tower_retreat() {
   common_scripts\utility::flag_set("FLAG_trench_respawner_2");
   var_1 = getEntArray("retreat_start_friendlies", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 maps\_utility::add_spawn_function(maps\homecoming_trench::trench_main_friendlies);
+  }
 
   maps\_utility::array_spawn(var_1);
   level.hesh maps\_utility::set_force_color("r");
@@ -571,8 +574,9 @@ start_a10_test() {
   foreach(var_4 in var_2) {
     var_5 = 0;
 
-    if(isDefined(var_4.script_wait))
+    if(isDefined(var_4.script_wait)) {
       var_5 = var_4.script_wait;
+    }
 
     var_4 maps\_utility::delaythread(var_5, maps\homecoming_drones::beach_path_drones);
   }
@@ -593,8 +597,9 @@ start_balcony_fall() {
   maps\homecoming_beach::bunker_balcony_damage_state(level.balcony);
   var_0 = getglassarray("balcony_glass");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   deleteglass(var_2);
+  }
 
   maps\homecoming_beach::player_fall_off_balcony();
   common_scripts\utility::flag_wait("FLAG_balcony_getup_done");
@@ -711,17 +716,21 @@ set_default_mb_values() {
 }
 
 prone_hint_off() {
-  if(common_scripts\utility::flag("FLAG_player_went_prone"))
+  if(common_scripts\utility::flag("FLAG_player_went_prone")) {
     return 1;
+  }
 
-  if(common_scripts\utility::flag("TRIGFLAG_player_through_beam_blocker"))
+  if(common_scripts\utility::flag("TRIGFLAG_player_through_beam_blocker")) {
     return 1;
+  }
 
-  if(!common_scripts\utility::flag("player_not_doing_strafe"))
+  if(!common_scripts\utility::flag("player_not_doing_strafe")) {
     return 1;
+  }
 
-  if(!common_scripts\utility::flag("FLAG_start_trenches") && !common_scripts\utility::flag("FLAG_hind_is_targeting_player"))
+  if(!common_scripts\utility::flag("FLAG_start_trenches") && !common_scripts\utility::flag("FLAG_hind_is_targeting_player")) {
     return 1;
+  }
 
   var_0 = level.player getstance();
 

@@ -28,13 +28,15 @@ main() {
 
   thread tweakart();
 
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = ToLower(GetDvar("mapname"));
+  }
 }
 
 tweakart() {
-  if(!isDefined(level.tweakfile))
+  if(!isDefined(level.tweakfile)) {
     level.tweakfile = false;
+  }
 
   // not in DEVGUI
   SetDevDvar("scr_fog_fraction", "1.0");
@@ -58,8 +60,9 @@ tweakart() {
     while(GetDvarInt("scr_art_tweak", 0) == 0) {
       AssertEx(GetDvarInt("scr_art_dump", 0) == 0, "Must Enable Art Tweaks to export _art file.");
       wait .05;
-      if(!GetDvarInt("scr_art_tweak", 0) == 0)
+      if(!GetDvarInt("scr_art_tweak", 0) == 0) {
         common_scripts\_artCommon::setfogsliders(); // sets the sliders to whatever the current fog value is
+      }
     }
 
     if(GetDvarInt("scr_art_tweak_message")) {
@@ -119,8 +122,9 @@ fovslidercheck() {
 }
 
 dumpsettings() {
-  if(GetDvarInt("scr_art_dump") == 0)
+  if(GetDvarInt("scr_art_dump") == 0) {
     return false;
+  }
 
   filename = "createart/" + GetDvar("scr_art_visionfile") + "_art.gsc";
 
@@ -164,8 +168,9 @@ dumpsettings() {
   fileprint_launcher("r_primaryLightTweakDiffuseStrength \"" + GetDvar("r_primaryLightTweakDiffuseStrength") + "\"");
   fileprint_launcher("r_primaryLightTweakSpecularStrength\"" + GetDvar("r_primaryLightTweakSpecularStrength") + "\"");
 
-  if(!artEndVisionFileExport())
+  if(!artEndVisionFileExport()) {
     return false;
+  }
 
   IPrintLnBold("ART DUMPED SUCCESSFULLY");
   return true;

@@ -73,8 +73,9 @@ ice_puzzle_1_init() {
 ice_puzzle_1_cleanup() {
   a_ceiling_tile_brushes = getEntArray("ice_ceiling_tile", "script_noteworthy");
 
-  foreach(tile in a_ceiling_tile_brushes)
+  foreach(tile in a_ceiling_tile_brushes) {
   tile thread ceiling_tile_flip(0);
+  }
 
   a_ice_ternary_digit_brushes = getEntArray("ice_chamber_digit", "targetname");
   array_delete(a_ice_ternary_digit_brushes);
@@ -84,8 +85,9 @@ ice_tiles_randomize() {
   a_original_tiles = getEntArray("ice_tile_original", "targetname");
   a_original_positions = [];
 
-  foreach(e_tile in a_original_tiles)
+  foreach(e_tile in a_original_tiles) {
   a_original_positions[a_original_positions.size] = e_tile.origin;
+  }
 
   a_unused_tiles = getEntArray("ice_ceiling_tile", "script_noteworthy");
   n_total_tiles = a_unused_tiles.size;
@@ -104,8 +106,9 @@ ice_tiles_randomize() {
 reset_tiles() {
   a_ceiling_tile_brushes = getEntArray("ice_ceiling_tile", "script_noteworthy");
 
-  foreach(tile in a_ceiling_tile_brushes)
+  foreach(tile in a_ceiling_tile_brushes) {
   tile thread ceiling_tile_flip(1);
+  }
 }
 
 update_ternary_display() {
@@ -123,8 +126,9 @@ update_ternary_display() {
         shown_value = level.ternary_digits[newval][digit_slot];
         digit_value = int(digit.script_string);
 
-        if(shown_value == digit_value)
+        if(shown_value == digit_value) {
           digit show();
+        }
       }
     }
   }
@@ -150,8 +154,9 @@ process_gem_shooting() {
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, mod, tagname, modelname, partname, weaponname);
 
-    if(weaponname == "staff_water_zm")
+    if(weaponname == "staff_water_zm") {
       change_ice_gem_value();
+    }
   }
 }
 
@@ -161,8 +166,9 @@ ice_puzzle_1_run() {
 }
 
 ceiling_tile_flip(b_flip_to_tile_side) {
-  if(!isDefined(b_flip_to_tile_side))
+  if(!isDefined(b_flip_to_tile_side)) {
     b_flip_to_tile_side = !self.showing_tile_side;
+  }
 
   if(b_flip_to_tile_side == self.showing_tile_side) {
     return;
@@ -171,10 +177,12 @@ ceiling_tile_flip(b_flip_to_tile_side) {
   self rotateroll(180, 0.5, 0.1, 0.1);
   self playSound("zmb_squest_ice_tile_flip");
 
-  if(!self.showing_tile_side)
+  if(!self.showing_tile_side) {
     arrayremovevalue(level.unsolved_tiles, self, 0);
-  else
+  }
+  else {
     level.unsolved_tiles[level.unsolved_tiles.size] = self;
+  }
 
   if(level.unsolved_tiles.size == 0 && !flag("ice_puzzle_1_complete")) {
     self thread maps\mp\zm_tomb_vo::say_puzzle_completion_line(4);
@@ -276,14 +284,16 @@ ice_stone_run() {
     level.weather_snow = 5;
     level.weather_rain = 0;
 
-    foreach(player in getplayers())
+    foreach(player in getplayers()) {
     player set_weather_to_player();
+    }
 
     wait 5.0;
     level.weather_snow = 0;
     level.weather_rain = 0;
 
-    foreach(player in getplayers())
+    foreach(player in getplayers()) {
     player set_weather_to_player();
+    }
   }
 }

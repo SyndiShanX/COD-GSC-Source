@@ -9,14 +9,16 @@ func_BE57(var_00, var_01, var_02) {
   if(getdvarint("narrative_debug") == 1) {
     if(!isDefined(self)) {}
 
-    if(!isDefined(var_02))
+    if(!isDefined(var_02)) {
       var_02 = (0, 0, 0);
+    }
 
     self endon("death");
     self endon("narrative_debug_stop");
 
-    for(var_03 = 0; var_03 < var_01; var_3++)
+    for(var_03 = 0; var_03 < var_01; var_3++) {
       scripts\engine\utility::waitframe();
+    }
   }
 }
 
@@ -24,19 +26,24 @@ func_BE56(var_00, var_01, var_02) {
   setdvarifuninitialized("narrative_debug", 0);
 
   if(getdvarint("narrative_debug") == 1) {
-    if(!isDefined(self.origin))
+    if(!isDefined(self.origin)) {
       return;
-    else
+    }
+    else {
       var_03 = self.origin;
+    }
 
-    if(!isDefined(var_00))
+    if(!isDefined(var_00)) {
       var_00 = 6;
+    }
 
-    if(!isDefined(var_01))
+    if(!isDefined(var_01)) {
       var_01 = (1, 1, 1);
+    }
 
-    if(!isDefined(var_02))
+    if(!isDefined(var_02)) {
       var_02 = 400;
+    }
   }
 }
 
@@ -44,17 +51,21 @@ func_BE55(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   setdvarifuninitialized("narrative_debug", 0);
 
   if(getdvarint("narrative_debug") == 1) {
-    if(!isDefined(var_02))
+    if(!isDefined(var_02)) {
       var_02 = (1, 1, 1);
+    }
 
-    if(!isDefined(var_03))
+    if(!isDefined(var_03)) {
       var_03 = 1;
+    }
 
-    if(!isDefined(var_04))
+    if(!isDefined(var_04)) {
       var_04 = 0;
+    }
 
-    if(!isDefined(var_05))
+    if(!isDefined(var_05)) {
       var_05 = 200;
+    }
 
     if(isDefined(var_06)) {
       if(isDefined(var_07)) {
@@ -87,8 +98,9 @@ func_48A9() {
 }
 
 func_DFCC() {
-  if(isDefined(self.func_2AC1))
+  if(isDefined(self.func_2AC1)) {
     self.func_2AC1 delete();
+  }
 }
 
 func_196B(var_00, var_01, var_02, var_03) {
@@ -112,11 +124,13 @@ func_194A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   if(isDefined(var_06) && scripts\engine\utility::flag(var_06)) {
     return;
   }
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0;
+  }
 
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     var_04 = 0.7;
+  }
 
   thread func_1949(var_00);
 
@@ -138,8 +152,9 @@ func_194A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 func_1961(var_00, var_01, var_02, var_03) {
   self endon("death");
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
   thread func_1949(var_00);
   func_0C4C::func_1960(var_01);
@@ -155,17 +170,21 @@ func_1949(var_00) {
 func_195C(var_00, var_01, var_02, var_03, var_04) {
   self endon("death");
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 4.0;
+  }
 
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     var_04 = 1.0;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0.25;
+  }
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0.35;
+  }
 
   var_00 = func_0EFB::func_7D7A(var_00);
   thread func_0C4C::func_1955(var_00, var_01, var_02);
@@ -174,6 +193,7 @@ func_195C(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_10348(var_00, var_01) {
-  if(!scripts\engine\utility::flag(var_01))
+  if(!scripts\engine\utility::flag(var_01)) {
     scripts\sp\utility::func_10347(var_00);
+  }
 }

@@ -66,10 +66,12 @@ main() {
   level.alien_character_cac_table = "mp/alien/alien_cac_presets.csv";
   level.container_spawn_table = "mp/alien/armory_container_spawn.csv";
 
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.base_player_count_multiplier = 1;
-  else
+  }
+  else {
     level.base_player_count_multiplier = 0.49;
+  }
 
   level.additional_player_count_multiplier = 0.17;
   level.waypoint_dist_override = 2500;
@@ -110,8 +112,9 @@ main() {
   level.should_play_next_hive_vo_func = ::should_play_next_hive_vo_func;
   register_encounter();
 
-  if(!maps\mp\alien\_utility::is_chaos_mode())
+  if(!maps\mp\alien\_utility::is_chaos_mode()) {
     init_container_spawn();
+  }
 
   maps\mp\alien\_alien_class_skills_main::main();
   maps\mp\alien\_pillage_intel::create_intel_spots();
@@ -205,13 +208,15 @@ spider_initial_intro() {
 spider_hide_all_debris() {
   var_0 = getscriptablearray("snow_debris", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 setscriptablepartstate(0, 1);
+  }
 }
 
 debris_fx() {
-  if(maps\mp\_utility::is_gen4())
+  if(maps\mp\_utility::is_gen4()) {
     level._effect["spider_reveal_dense_particles"] = loadfx("vfx/spider_reveal_particles");
+  }
 }
 
 spider_play_snow_debris_anim() {
@@ -219,8 +224,9 @@ spider_play_snow_debris_anim() {
   var_0 = getent("snow_debris_static", "targetname");
   var_1 = getscriptablearray("snow_debris", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 setscriptablepartstate(0, 0);
+  }
 
   var_0 delete();
 
@@ -267,8 +273,9 @@ play_spider_intro_music() {
       common_scripts\utility::flag_clear("alien_music_playing");
     }
 
-    if(!common_scripts\utility::flag("exfil_music_playing"))
+    if(!common_scripts\utility::flag("exfil_music_playing")) {
       level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_dlc1_spider");
+    }
   }
 }
 
@@ -276,8 +283,9 @@ play_spider_intro_loop() {
   self endon("death");
   self endon("end_spider_intro_loop");
 
-  for(;;)
+  for(;;) {
     maps\mp\agents\_scriptedagents::playanimnatrateuntilnotetrack("spawn", 1, 1.0, "spawn", "end");
+  }
 }
 
 monitor_spider_intro_damage() {
@@ -355,10 +363,12 @@ spider_start_cycle(var_0) {
   var_2 = level.alien_types[level.spider.alien_type].attributes[var_1]["cycle_delay"];
   var_3 = "spider_fight_" + var_0 + "_complete";
 
-  if(var_2 > 0.0)
+  if(var_2 > 0.0) {
     var_4 = common_scripts\utility::waittill_notify_or_timeout_return(var_3, var_2);
-  else
+  }
+  else {
     var_4 = "no_delay";
+  }
 
   if(isDefined(var_4)) {
     maps\mp\alien\_spawn_director::start_cycle(level.cycle_count);
@@ -368,8 +378,9 @@ spider_start_cycle(var_0) {
 
   level.cycle_count++;
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     connect_snow_paths();
+  }
 }
 
 link_spider_collision() {
@@ -423,8 +434,9 @@ first_spider_fight() {
   wait 0.05;
   var_3 = getEntArray("fence_blocker_01_clip", "targetname");
 
-  foreach(var_5 in var_3)
+  foreach(var_5 in var_3) {
   var_5 delete();
+  }
 
   wait 6;
   level thread egg_cleanup();
@@ -437,11 +449,13 @@ first_spider_fight() {
   maps\mp\alien\_achievement_dlc::update_boss_achievements("compound");
   give_reward_box_post_first_spider();
 
-  if(maps\mp\alien\_utility::isplayingsolo() && !issplitscreen())
+  if(maps\mp\alien\_utility::isplayingsolo() && !issplitscreen()) {
     maps\mp\alien\_laststand::give_laststand(level.players[0], 1);
+  }
 
-  foreach(var_8 in level.players)
+  foreach(var_8 in level.players) {
   var_8 maps\mp\alien\_persistence::try_award_bonus_pool_token();
+  }
 }
 
 egg_cleanup() {
@@ -500,8 +514,9 @@ activate_first_spider_fight_challenge() {
   var_0 = "kill_spider";
 
   if(!maps\mp\alien\_utility::isplayingsolo()) {
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_0 = "kill_eggs";
+    }
   }
 
   maps\mp\alien\_challenge::activate_new_challenge(var_0);
@@ -524,13 +539,15 @@ give_reward_box_post_first_spider() {
 skip_first_spider_fight() {
   level notify("first_spider_fight_skipped");
 
-  if(isDefined(level.spider))
+  if(isDefined(level.spider)) {
     level.spider suicide();
+  }
 
   var_0 = getEntArray("fence_blocker_01", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 
   level.cycle_count++;
   maps\mp\mp_alien_armory_fx::fx_snow("medium_snow");
@@ -549,14 +566,16 @@ second_spider_fight() {
   maps\mp\mp_alien_armory_fx::fx_snow("heavy_snow_no_fog");
   var_0 = getEntArray("blocker_02", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 
   level notify("factory_blocker_gone");
   maps\mp\alien\_achievement_dlc::update_boss_achievements("facility");
 
-  if(maps\mp\alien\_utility::isplayingsolo() && !issplitscreen())
+  if(maps\mp\alien\_utility::isplayingsolo() && !issplitscreen()) {
     maps\mp\alien\_laststand::give_laststand(level.players[0], 1);
+  }
 }
 
 third_spider_fight() {
@@ -587,8 +606,9 @@ third_spider_fight() {
   clearfog(3);
   update_lb_aliensession_final_spider(var_0);
 
-  if(!maps\mp\alien\_utility::is_casual_mode())
+  if(!maps\mp\alien\_utility::is_casual_mode()) {
     set_players_escaped();
+  }
 
   give_players_completion_tokens();
   maps\mp\alien\_unlock::update_escape_item_unlock(level.players);
@@ -603,19 +623,22 @@ third_spider_fight() {
 }
 
 set_players_escaped() {
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 maps\mp\alien\_persistence::set_player_escaped();
+  }
 }
 
 give_players_completion_tokens() {
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 maps\mp\alien\_persistence::award_completion_tokens();
+  }
 }
 
 get_win_condition() {
   foreach(var_1 in level.players) {
-    if(maps\mp\alien\_utility::is_true(var_1.inlaststand))
+    if(maps\mp\alien\_utility::is_true(var_1.inlaststand)) {
       return "some_escape";
+    }
   }
 
   return "all_escape";
@@ -637,8 +660,9 @@ armory_victory_music() {
       common_scripts\utility::flag_clear("alien_music_playing");
     }
 
-    if(!common_scripts\utility::flag("exfil_music_playing"))
+    if(!common_scripts\utility::flag("exfil_music_playing")) {
       level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_exfil");
+    }
   }
 }
 
@@ -657,14 +681,18 @@ get_lb_final_spider_rank(var_0) {
   var_2 = 600000;
   var_3 = 900000;
 
-  if(var_0 <= var_1)
+  if(var_0 <= var_1) {
     return 0;
-  else if(var_0 <= var_2)
+  }
+  else if(var_0 <= var_2) {
     return 1;
-  else if(var_0 <= var_3)
+  }
+  else if(var_0 <= var_3) {
     return 2;
-  else
+  }
+  else {
     return 3;
+  }
 }
 
 spawn_second_spider_in_third_fight(var_0) {
@@ -689,12 +717,15 @@ spawn_second_spider_in_third_fight(var_0) {
 }
 
 spawn_spider(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
-  else if(isDefined(level.players))
+  }
+  else if(isDefined(level.players)) {
     var_2 = vectortoangles(level.players[0].origin - var_0);
-  else
+  }
+  else {
     var_2 = (0, 0, 0);
+  }
 
   return maps\mp\agents\alien\alien_spider\_alien_spider::alienspiderspawn(var_0, var_2);
 }
@@ -702,8 +733,9 @@ spawn_spider(var_0, var_1) {
 skip_second_spider_fight() {
   var_0 = getEntArray("blocker_02", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 
   maps\mp\mp_alien_armory_fx::fx_snow("heavy_snow_no_fog");
 }
@@ -711,20 +743,23 @@ skip_second_spider_fight() {
 skip_third_spider_fight() {}
 
 armory_enter_area_func(var_0) {
-  if(!maps\mp\alien\_utility::is_chaos_mode())
+  if(!maps\mp\alien\_utility::is_chaos_mode()) {
     maps\mp\alien\_container_spawn::activate_container_spawners_in_area(var_0);
+  }
 }
 
 armory_leave_area_func(var_0) {
-  if(!maps\mp\alien\_utility::is_chaos_mode())
+  if(!maps\mp\alien\_utility::is_chaos_mode()) {
     maps\mp\alien\_container_spawn::deactivate_container_spawners_in_area(var_0);
+  }
 }
 
 facility_hive() {
   maps\mp\alien\_hive::regular_hive();
 
-  if(level.current_hive_name == "facility_hive_01_post")
+  if(level.current_hive_name == "facility_hive_01_post") {
     thread maps\mp\mp_alien_armory_vignettes::cross_lab_scene();
+  }
 }
 
 last_facility_hive() {
@@ -853,8 +888,9 @@ mp_alien_armory_onspawnplayer_func() {
 }
 
 mp_alien_armory_scale_alien_damage_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(is_spider_beam_weapon(var_5))
+  if(is_spider_beam_weapon(var_5)) {
     var_2 = var_2 * 15;
+  }
 
   return var_2;
 }
@@ -929,8 +965,9 @@ monitor_conduit_hit() {
 
     if(isDefined(var_2) && isplayer(var_2) && isDefined(var_5) && var_5 == "MOD_EXPLOSIVE" && isDefined(var_9) && var_9 == 5 && !isDefined(var_10)) {
       if(self.window_active) {
-        if(level.easter_egg_conduit_hits == 0)
+        if(level.easter_egg_conduit_hits == 0) {
           level thread monitor_fail_condition();
+        }
 
         self.hit = 1;
         level.easter_egg_conduit_hits++;
@@ -951,8 +988,9 @@ monitor_fail_condition() {
   wait 24;
   wait 0.5;
 
-  if(level.easter_egg_conduit_hits < 4)
+  if(level.easter_egg_conduit_hits < 4) {
     level notify("easter_egg_conduit_failed");
+  }
   else {
     level thread activate_easter_egg_conduit();
     level notify("easter_egg_conduit_complete");
@@ -970,21 +1008,25 @@ activate_easter_egg_conduit() {
 armory_cangive_weapon_handler_func(var_0, var_1, var_2, var_3) {
   var_4 = 0;
 
-  if(self hasweapon("aliensoflam_mp"))
+  if(self hasweapon("aliensoflam_mp")) {
     var_4++;
+  }
 
-  if(self.hasriotshield || self.hasriotshieldequipped)
+  if(self.hasriotshield || self.hasriotshieldequipped) {
     var_4++;
+  }
 
-  if(var_1 == "iw6_aliendlc11_mp" && var_0.size + 1 > var_3 + var_4)
+  if(var_1 == "iw6_aliendlc11_mp" && var_0.size + 1 > var_3 + var_4) {
     return 0;
+  }
 
   return 1;
 }
 
 armory_give_weapon_handler_func(var_0) {
-  if(self getcurrentweapon() == "iw6_aliendlc11_mp")
+  if(self getcurrentweapon() == "iw6_aliendlc11_mp") {
     return 0;
+  }
 
   return undefined;
 }
@@ -1019,8 +1061,9 @@ wait_for_scene_trig_over(var_0) {
 is_generic_electric_trap_func() {
   var_0 = ["container_electric_node_01", "checkpoint_electric_trap_node_01b", "electric_trap_node_01", "catwalk_electric_trap", "electric_node_00b"];
 
-  if(isDefined(self.generator) && isDefined(self.generator.target) && common_scripts\utility::array_contains(var_0, self.generator.target))
+  if(isDefined(self.generator) && isDefined(self.generator.target) && common_scripts\utility::array_contains(var_0, self.generator.target)) {
     return 1;
+  }
 
   return 0;
 }
@@ -1074,20 +1117,23 @@ select_best_intermission_point() {
       return get_best_struct_facing_boss(var_1, level.spider);
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return common_scripts\utility::random(var_1);
+  }
 }
 
 get_best_struct_facing_boss(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(common_scripts\utility::within_fov(var_1.origin, var_1.angles, var_4.origin, cos(35)))
+    if(common_scripts\utility::within_fov(var_1.origin, var_1.angles, var_4.origin, cos(35))) {
       var_2[var_2.size] = var_4;
+    }
   }
 
-  if(var_2.size < 1)
+  if(var_2.size < 1) {
     return common_scripts\utility::random(var_0);
+  }
 
   return common_scripts\utility::random(var_2);
 }
@@ -1098,8 +1144,9 @@ create_dropped_pillage_item(var_0, var_1, var_2, var_3, var_4) {
   var_5.pillage_trigger setModel(var_1);
   var_5.pillage_trigger setcursorhint("HINT_NOICON");
 
-  if(maps\mp\alien\_utility::alien_mode_has("outline"))
+  if(maps\mp\alien\_utility::alien_mode_has("outline")) {
     maps\mp\alien\_outline_proto::add_to_outline_pillage_watch_list(var_5.pillage_trigger, 0);
+  }
 
   var_6 = spawnStruct();
   var_6.type = var_0;
@@ -1118,16 +1165,19 @@ create_dropped_pillage_item(var_0, var_1, var_2, var_3, var_4) {
   var_5.pillageinfo = spawnStruct();
   var_5.pillageinfo.type = var_0;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1;
+  }
 
   var_5.pillageinfo.ammo = var_4;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5.pillageinfo.item = var_3;
+  }
 
-  if(var_6.type == "explosive")
+  if(var_6.type == "explosive") {
     var_5.pillageinfo.item = var_6.explosive_type;
+  }
 
   var_9 = common_scripts\utility::drop_to_ground(var_5.pillage_trigger.origin);
   var_5.pillage_trigger moveto(var_9 + (0, 0, 4), 0.75);
@@ -1187,8 +1237,9 @@ armory_locker_weapon_pickup_string_func(var_0) {
 }
 
 should_play_next_hive_vo_func() {
-  if(!maps\mp\alien\_utility::isplayingsolo() && (level.cycle_count == 3 || level.cycle_count == 7 || level.cycle_count == 8 || level.cycle_count == 10))
+  if(!maps\mp\alien\_utility::isplayingsolo() && (level.cycle_count == 3 || level.cycle_count == 7 || level.cycle_count == 8 || level.cycle_count == 10)) {
     return 1;
+  }
 
   return 0;
 }
@@ -1251,11 +1302,13 @@ teleport_dog_tags() {
 
   foreach(var_4, var_3 in level.players) {
     if(var_3.sessionstate == "spectator") {
-      if(isDefined(var_3.reviveent))
+      if(isDefined(var_3.reviveent)) {
         var_3.reviveent.origin = var_0[var_4].origin;
+      }
 
-      if(isDefined(var_3.reviveiconent))
+      if(isDefined(var_3.reviveiconent)) {
         var_3.reviveiconent.origin = var_0[var_4].origin + var_1;
+      }
 
       var_3.forceteleportorigin = var_0[var_4].origin;
       var_3.forceteleportangles = var_0[var_4].angles;
@@ -1266,11 +1319,13 @@ teleport_dog_tags() {
 should_teleport_player() {
   var_0 = getent("final_battle_player_check", "targetname");
 
-  if(isDefined(self.being_teleported))
+  if(isDefined(self.being_teleported)) {
     return 0;
+  }
 
-  if(!isalive(self) || self istouching(var_0))
+  if(!isalive(self) || self istouching(var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -1341,8 +1396,9 @@ teleport_black_screen() {
 }
 
 set_spawn_table() {
-  if(maps\mp\alien\_utility::is_chaos_mode())
+  if(maps\mp\alien\_utility::is_chaos_mode()) {
     set_chaos_spawn_table();
+  }
   else {
     if(maps\mp\alien\_utility::is_hardcore_mode()) {
       set_hardcore_extinction_spawn_table();
@@ -1382,10 +1438,12 @@ set_chaos_spawn_table() {
 }
 
 set_regular_extinction_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table = "mp/alien/cycle_spawn_armory_sp.csv";
-  else
+  }
+  else {
     level.alien_cycle_table = "mp/alien/cycle_spawn_armory.csv";
+  }
 }
 
 chaos_init() {
@@ -1410,8 +1468,9 @@ delete_snow_mound() {
   var_0 = getEntArray("snow_debris_static", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 
   var_4 = getEntArray("spider_mound_clip", "targetname");
@@ -1539,8 +1598,9 @@ open_intro_fence() {
   var_0 = getEntArray("intro_fence", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 
   var_4 = getscriptablearray("intro_fence_script", "targetname");
@@ -1548,10 +1608,12 @@ open_intro_fence() {
 }
 
 set_hardcore_extinction_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_armory_hardcore_sp.csv";
-  else
+  }
+  else {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_armory_hardcore.csv";
+  }
 }
 
 move_clip_brush_checkpoint_lakeside() {

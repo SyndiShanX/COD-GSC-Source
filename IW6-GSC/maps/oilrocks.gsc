@@ -23,8 +23,9 @@ main() {
   maps\_load::main();
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 7);
 
-  if(level.xenon)
+  if(level.xenon) {
     setsaveddvar("r_texFilterProbeBilinear", 1);
+  }
 
   setdvar("music_enable", 1);
   maps\oilrocks_audio::main();

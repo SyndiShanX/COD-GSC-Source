@@ -46,8 +46,9 @@ leak_barrel_setup() {
   var_1 = vectordot(self.up, var_0);
   var_2 = self.b;
 
-  if(var_1 < 0)
+  if(var_1 < 0) {
     var_2 = self.a;
+  }
 
   var_1 = abs(1 - abs(var_1));
   self.lowz = physicstrace(self.org, self.org + (0, 0, -80))[2];
@@ -78,23 +79,28 @@ leak_drain(var_0) {
   var_1 = pointonsegmentnearesttopoint(self.a, self.b, var_0);
   var_2 = undefined;
 
-  if(var_1 == self.a)
+  if(var_1 == self.a) {
     var_2 = self.up * -1;
-  else if(var_1 == self.b)
+  }
+  else if(var_1 == self.b) {
     var_2 = self.up;
-  else
+  }
+  else {
     var_2 = vectorfromlinetopoint(self.a, self.b, var_0);
+  }
 
   var_3 = var_0[2] - self.lowz;
 
-  if(var_3 < 0.02)
+  if(var_3 < 0.02) {
     var_3 = 0;
+  }
 
   var_4 = var_3 / (self.highz - self.lowz) * self.volume;
 
   if(self.curvol > var_4) {
-    if(self.canspawnpool)
+    if(self.canspawnpool) {
       thread leak_pool(var_0, var_2);
+    }
 
     thread common_scripts\utility::play_sound_in_space(level._sound["leak_interactive_leak"][self.script_noteworthy], var_0);
 
@@ -107,8 +113,9 @@ leak_drain(var_0) {
     playFX(level._effect["leak_interactive_drain"][self.script_noteworthy], var_0, var_2);
   }
 
-  if(self.curvol / self.volume <= 0.05)
+  if(self.curvol / self.volume <= 0.05) {
     self notify("drained");
+  }
 }
 
 leak_pool(var_0, var_1) {

@@ -138,8 +138,9 @@ flags() {
 
 createfx_setup() {
   // this array will be filled with code commands that SP or MP may use but doesn't exist in the other.
-  if(!isDefined(level.func))
+  if(!isDefined(level.func)) {
     level.func = [];
+  }
   level.func["create_triggerfx"] = ::dcemp_create_triggerfx;
 
   //ROBOT -> change fx groups here
@@ -206,8 +207,9 @@ global_inits() {
 
   for(i = 1; i <= level.bg_iss_darknum; i++) {
     name = "bg_iss_dark0";
-    if(i > 9)
+    if(i > 9) {
       name = "bg_iss_dark";
+    }
     precachemodel(name + i);
   }
 
@@ -361,8 +363,9 @@ iss_main() {
   add_func(::iss_organize_ents);
   thread do_wait();
 
-  if(!isDefined(level.white_overlay))
+  if(!isDefined(level.white_overlay)) {
     level.white_overlay = create_client_overlay("white", 1);
+  }
 
   flag_wait("iss_organize_ents");
 
@@ -426,11 +429,13 @@ iss_wait_player_see_icbm(timeout) {
   self endon("iss_wait_player_see_icbm");
   level.iss_missile endon("death");
 
-  if(isDefined(timeout))
+  if(isDefined(timeout)) {
     self thread notify_delay("iss_wait_player_see_icbm", timeout);
+  }
 
-  while(!(self WorldPointInReticle_Circle(level.iss_missile.origin, getdvarint("cg_fov"), 200)))
+  while(!(self WorldPointInReticle_Circle(level.iss_missile.origin, getdvarint("cg_fov"), 200))) {
     wait .1;
+  }
 
   return true;
 }
@@ -439,12 +444,14 @@ iss_nag_dialogue() {
   level endon("iss_nag_dialogue");
 
   while(1) {
-    if(!isDefined(level.player iss_wait_player_see_icbm(.5)))
+    if(!isDefined(level.player iss_wait_player_see_icbm(.5))) {
       //Sat1, rotate your view a little further to the right will ya?
+    }
       thread radio_dialogue("dcemp_iss_rotateview");
 
-    if(isDefined(level.player iss_wait_player_see_icbm(13)))
+    if(isDefined(level.player iss_wait_player_see_icbm(13))) {
       break;
+    }
   }
 }
 
@@ -734,8 +741,9 @@ emp_empaftermath() {
   level.player freezecontrols(false);
   level.player allowcrouch(true);
 
-  if(isDefined(level.emp_player_stance))
+  if(isDefined(level.emp_player_stance)) {
     level.player setstance(level.emp_player_stance);
+  }
 
   time = 1.5;
   thread maps\_ambient::blend_to_eq_track(level.eq_main_track, time);
@@ -1310,8 +1318,9 @@ init_meetup_allies() {
 corner_main() {
   flag_wait("corner_main");
 
-  foreach(member in level.team)
+  foreach(member in level.team) {
   member.walkDistFacingMotion = 0;
+  }
 
   array_thread(level.team, ::enable_arrivals);
   array_thread(level.team, ::enable_exits);
@@ -2132,8 +2141,9 @@ lobby_go_dunn(node) {
 lobby_dunn_threads_foley_flash() {
   wait 1.15;
 
-  if(level.foley ent_flag("lobby_door_ready"))
+  if(level.foley ent_flag("lobby_door_ready")) {
     level.foley.lobby_node thread anim_generic(level.foley, "CQB_stand_grenade_throw");
+  }
 }
 
 lobby_go_foley(node) {
@@ -2318,8 +2328,9 @@ lobby_go_rear(node) {
   self follow_path(node);
   self disable_cqbwalk();
 
-  if(flag("office_go_red"))
+  if(flag("office_go_red")) {
     return;
+  }
   level endon("office_go_red");
 
   flag_wait("lobby_door_kick");
@@ -2349,8 +2360,9 @@ lobby_go_extra(node) {
   self follow_path(node);
   self disable_cqbwalk();
 
-  if(flag("office_go_red"))
+  if(flag("office_go_red")) {
     return;
+  }
   level endon("office_go_red");
 
   flag_wait("lobby_door_kick");
@@ -2408,8 +2420,9 @@ office_main() {
   //wave 2
   enemies = get_living_ai_array("office_enemies_wave1", "script_noteworthy");
   spawners = getEntArray("office_enemies_wave2", "targetname");
-  for(i = 0; i < enemies.size; i++)
+  for(i = 0; i < enemies.size; i++) {
     spawners[i] delete();
+  }
 
   //blue retreat 1	
   array_thread(enemies, ::set_force_color, "blue");
@@ -2449,8 +2462,9 @@ office_main() {
   spawners = getEntArray("office_enemies_wave3", "targetname");
 
   if(enemies.size < spawners.size) {
-    for(i = 0; i < enemies.size; i++)
+    for(i = 0; i < enemies.size; i++) {
       spawners[i] delete();
+    }
   } else
     array_call(spawners, ::delete);
 
@@ -2470,8 +2484,9 @@ office_main() {
 office_bcs_fix() {
   wait 9.5;
 
-  foreach(member in level.team)
+  foreach(member in level.team) {
   member._animActive = 0;
+  }
 }
 
 office_enemies_wait_spawn_final() {
@@ -2488,11 +2503,13 @@ office_enemies_wait_spawn_final() {
 office_kill_enemies() {
   flag_wait("parking_player_jumped_down");
 
-  if(flag("office_done"))
+  if(flag("office_done")) {
     return;
+  }
 
-  if(isalive(level.team["marine1"]))
+  if(isalive(level.team["marine1"])) {
     level.team["marine1"] kill();
+  }
 
   ai = getaiarray("axis");
 
@@ -2590,8 +2607,9 @@ parking_lights_setup() {
 
 parking_dialogue() {
   parking_dialogue_wait();
-  if(flag("parking_player_jumped_down"))
+  if(flag("parking_player_jumped_down")) {
     return;
+  }
 
   level endon("parking_open_fire");
 
@@ -2602,13 +2620,15 @@ parking_dialogue() {
 }
 
 parking_dialogue_wait() {
-  if(flag("parking_player_jumped_down"))
+  if(flag("parking_player_jumped_down")) {
     return;
+  }
   level endon("parking_player_jumped_down");
 
   foreach(actor in level.team) {
-    while(actor.isSpeaking)
+    while(actor.isSpeaking) {
       wait .1;
+    }
   }
 }
 
@@ -2626,8 +2646,9 @@ parking_dialogue2() {
 }
 
 parking_building_scene() {
-  if(flag("parking_player_jumped_down"))
+  if(flag("parking_player_jumped_down")) {
     return;
+  }
 
   level endon("parking_open_fire");
 
@@ -2667,8 +2688,9 @@ parking_start(name) {
 }
 
 parking_start_moveup(node) {
-  if(flag("parking_open_fire"))
+  if(flag("parking_open_fire")) {
     return;
+  }
   level endon("parking_open_fire");
 
   self setgoalnode(node);
@@ -2711,13 +2733,16 @@ parking_open_fire() {
     flashorigin = self gettagorigin("TAG_FLASH");
     vec1 = vectornormalize(node.origin - flashorigin);
     vec2 = anglesToForward(self gettagAngles("TAG_FLASH"));
-    if(vectordot(vec1, vec2) > .7)
+    if(vectordot(vec1, vec2) > .7) {
       self shoot();
-    else
+    }
+    else {
     if(!player_looking_at(self getEye()) && distancesquared(self.origin, level.player.origin) > squared(512)) {
+    }
       array = bulletTrace(self getEye(), node.origin, false, self);
-      if(!isDefined(array["entity"]) || !isplayer(array["entity"]))
+      if(!isDefined(array["entity"]) || !isplayer(array["entity"])) {
         magicbullet(self.weapon, self getEye(), node.origin);
+      }
     }
     wait .1;
   }
@@ -2731,8 +2756,9 @@ parking_open_fire() {
 }
 
 parking_go_marine1(node) {
-  if(flag("parking_open_fire"))
+  if(flag("parking_open_fire")) {
     return;
+  }
   level endon("parking_open_fire");
 
   self setgoalnode(node);
@@ -2792,8 +2818,9 @@ parking_go_marine1(node) {
 }
 
 parking_go_foley(node) {
-  if(flag("parking_open_fire"))
+  if(flag("parking_open_fire")) {
     return;
+  }
   level endon("parking_open_fire");
 
   self setgoalnode(node);
@@ -2854,8 +2881,9 @@ parking_go_foley(node) {
 }
 
 parking_go_dunn(node) {
-  if(flag("parking_open_fire"))
+  if(flag("parking_open_fire")) {
     return;
+  }
   level endon("parking_open_fire");
 
   self setgoalnode(node);
@@ -3035,18 +3063,21 @@ parking_btr_guys() {
   add_func(::flag_set, "parking_btr_shot_at");
   thread do_wait_any();
 
-  if(!isDefined(level.parking_btr_guys))
+  if(!isDefined(level.parking_btr_guys)) {
     level.parking_btr_guys = [];
+  }
   level.parking_btr_guys[level.parking_btr_guys.size] = self;
 
-  if(level.parking_btr_guys.size == 3)
+  if(level.parking_btr_guys.size == 3) {
     thread parking_btr_guys_dialogue();
+  }
 
   switch (self.script_animation) {
     case "DCemp_BTR_moment_guy1":
       node anim_generic(self, "DCemp_BTR_moment_climb_guy1");
-      if(!flag("parking_open_fire"))
+      if(!flag("parking_open_fire")) {
         node thread anim_generic_loop(self, "DCemp_BTR_moment_idle_guy1");
+      }
 
       flag_wait("parking_btr_shot_at");
       self notify("stop_loop");
@@ -3058,8 +3089,9 @@ parking_btr_guys() {
 
     case "DCemp_BTR_moment_guy2":
       node anim_generic(self, "DCemp_BTR_moment_climb_guy2");
-      if(!flag("parking_open_fire"))
+      if(!flag("parking_open_fire")) {
         node thread anim_generic_loop(self, "DCemp_BTR_moment_idle_guy2");
+      }
 
       flag_wait("parking_btr_shot_at");
       self notify("stop_loop");
@@ -3073,8 +3105,9 @@ parking_btr_guys() {
       parking_btr_extra_wait();
 
       node anim_generic(self, "DCemp_BTR_moment_climb_guy3");
-      if(!flag("parking_open_fire"))
+      if(!flag("parking_open_fire")) {
         node thread anim_generic_loop(self, "DCemp_BTR_moment_idle_guy3");
+      }
 
       flag_wait("parking_btr_shot_at");
       self notify("stop_loop");
@@ -3111,8 +3144,9 @@ plaza_main() {
 
   add_wait(::flag_wait, "parking_high_spec");
   foreach(member in level.team) {
-    if(member.script_noteworthy == "marine1")
+    if(member.script_noteworthy == "marine1") {
       continue;
+    }
 
     member ent_flag_init("plaza_at_tree");
     member add_wait(::ent_flag_wait, "plaza_at_tree");
@@ -3214,8 +3248,9 @@ plaza_main2() {
   array_thread(level.team, ::set_force_color, "red");
   array_thread(level.team, ::set_moveplaybackrate, 1.0);
 
-  foreach(member in level.team)
+  foreach(member in level.team) {
   member.grenadeammo = member.oldgrenade;
+  }
 
   thread plaza_kill_enemies();
 
@@ -3239,14 +3274,16 @@ plaza_main2() {
   array_thread(level.team, ::ent_flag_init, "plaza_moveout_exit");
   array_thread(level.team, ::ent_flag_init, "plaza_moveout_exit2");
 
-  foreach(member in level.team)
+  foreach(member in level.team) {
   member add_wait(::ent_flag_wait, "plaza_moveout_exit");
+  }
   add_wait(::flag_wait, "plaza_player_exit1");
   add_func(::flag_set, "plaza_moveout_exit");
   thread do_wait();
 
-  foreach(member in level.team)
+  foreach(member in level.team) {
   member add_wait(::ent_flag_wait, "plaza_moveout_exit2");
+  }
   add_wait(::flag_wait, "plaza_player_exit2");
   add_func(::flag_set, "plaza_moveout_exit2");
   thread do_wait();
@@ -3266,30 +3303,35 @@ plaza_main2() {
 plaza_kill_enemies() {
   flag_wait("tunnels_dunn_anim_end");
 
-  if(flag("parking_plaza_guys_dead"))
+  if(flag("parking_plaza_guys_dead")) {
     return;
+  }
 
   //this means the player ran back to join the fight
-  if(flag("parking_high_spec"))
+  if(flag("parking_high_spec")) {
     return;
+  }
 
   ai = getaiarray("axis");
-  foreach(member in ai)
+  foreach(member in ai) {
   member.diequietly = true;
+  }
   array_call(ai, ::kill);
 }
 
 plaza_moveup_marine1_backup() {
-  if(flag("plaza_flare_thrown"))
+  if(flag("plaza_flare_thrown")) {
     return;
+  }
   level endon("plaza_flare_thrown");
   self endon("plaza_moveup_kill_backup");
 
   flag_wait("plaza_open_fire");
 
   self notify("stop_loop");
-  if(isDefined(self.refnode))
+  if(isDefined(self.refnode)) {
     self.refnode notify("stop_loop");
+  }
   self anim_stopanimscripted();
   self.moveplaybackrate = 1.25;
   self unlink();
@@ -3302,16 +3344,18 @@ plaza_moveup_marine1_backup() {
 }
 
 plaza_moveup_dunn_backup() {
-  if(flag("plaza_flare_thrown"))
+  if(flag("plaza_flare_thrown")) {
     return;
+  }
   level endon("plaza_flare_thrown");
   self endon("plaza_moveup_kill_backup");
 
   flag_wait("plaza_open_fire");
 
   self notify("stop_loop");
-  if(isDefined(self.refnode))
+  if(isDefined(self.refnode)) {
     self.refnode notify("stop_loop");
+  }
   self anim_stopanimscripted();
   self.moveplaybackrate = 1.25;
   self unlink();
@@ -3328,8 +3372,9 @@ plaza_moveup_foley_backup() {
   flag_wait("plaza_open_fire");
 
   self notify("stop_loop");
-  if(isDefined(self.refnode))
+  if(isDefined(self.refnode)) {
     self.refnode notify("stop_loop");
+  }
   self anim_stopanimscripted();
   self.moveplaybackrate = 1.25;
   self unlink();
@@ -3340,8 +3385,9 @@ plaza_moveup_foley_backup() {
 }
 
 plaza_moveup_marine1() {
-  if(flag("plaza_open_fire"))
+  if(flag("plaza_open_fire")) {
     return;
+  }
   level endon("plaza_open_fire");
 
   node = getnode("park_moveup_marine1", "targetname");
@@ -3411,8 +3457,9 @@ plaza_moveup_marine1() {
 }
 
 plaza_moveup_dunn() {
-  if(flag("plaza_open_fire"))
+  if(flag("plaza_open_fire")) {
     return;
+  }
   level endon("plaza_open_fire");
 
   node = getnode("park_moveup_dunn", "targetname");
@@ -3472,8 +3519,9 @@ plaza_moveup_dunn() {
 plaza_moveup_foley() {
   self ent_flag_init("corner_trans_out");
 
-  if(flag("plaza_open_fire"))
+  if(flag("plaza_open_fire")) {
     return;
+  }
   level endon("plaza_open_fire");
 
   node = getnode("park_moveup_foley", "targetname");
@@ -3527,8 +3575,9 @@ plaza_moveup_foley_end() {
   node anim_generic(self, "street_flare_throw");
   flag_set("plaza_flare_thrown");
 
-  if(flag("plaza_open_fire"))
+  if(flag("plaza_open_fire")) {
     return;
+  }
 
   self setgoalpos(self.origin);
   self.goalradius = 8;
@@ -3892,8 +3941,9 @@ start_corner() {
 
   glass = getglassarray("street_hide_glass");
   dir = anglesToForward((0, 345, 0));
-  foreach(piece in glass)
+  foreach(piece in glass) {
   noself_delaycall(1, ::destroyglass, piece, dir * 200);
+  }
 
   thread battlechatter_off();
   array_thread(level.team, ::pathrandompercent_zero);
@@ -3909,8 +3959,9 @@ start_corner() {
   emp_teleport_team_specific(level.team, nodes);
   emp_teleport_player();
 
-  foreach(member in level.team)
+  foreach(member in level.team) {
   member.alertLevel = "alert";
+  }
 
   node = getnode("corner_macey_hide_node", "targetname");
   level.foley delaycall(.5, ::setgoalnode, node);
@@ -4165,8 +4216,9 @@ dcemp_music() {
   flag_init("dc_emp_missile");
   flag_init("dc_emp_missile_hit");
   flag_init("dc_emp_afternath");
-  if(!flag_exist("dc_emp_bunker"))
+  if(!flag_exist("dc_emp_bunker")) {
     flag_init("dc_emp_bunker");
+  }
 
   switch (level.start_point) {
     case "default":

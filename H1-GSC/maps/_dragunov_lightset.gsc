@@ -9,8 +9,9 @@ dragunov_scope_init() {
   var_0["bog_b"] = "bog_b_dragunov";
   var_0["armada"] = "armada_dragunov";
 
-  if(isDefined(var_0[level.script]))
+  if(isDefined(var_0[level.script])) {
     thread dragunov_scope_monitor(var_0[level.script]);
+  }
 }
 
 dragunov_scope_monitor(var_0) {
@@ -23,10 +24,12 @@ dragunov_scope_monitor(var_0) {
     var_5 = var_4 == 1.0 || var_4 > var_1;
     var_6 = isDefined(var_3) && var_3 == "dragunov" && var_5;
 
-    if(var_6 && !var_2)
+    if(var_6 && !var_2) {
       level.player lightsetoverrideenableforplayer(var_0, 0);
-    else if(!var_6 && var_2)
+    }
+    else if(!var_6 && var_2) {
       level.player lightsetoverridedisableforplayer(0);
+    }
 
     var_2 = var_6;
     var_1 = var_4;

@@ -64,8 +64,9 @@ main() {
   level.physics_drop_models[6] = "trash_can2";
   level.physics_drop_models[7] = "trash_can3";
   level.physics_drop_models[8] = "trash_can4";
-  foreach(model in level.physics_drop_models)
+  foreach(model in level.physics_drop_models) {
   precacheModel(model);
+  }
 
   precacheString(&"FAVELA_OBJ_CATCH_RUNNER");
   precacheString(&"FAVELA_OBJ_REACH_TOP");
@@ -102,8 +103,9 @@ main() {
   all_axis_spawners = getspawnerteamarray("axis");
   script_parameter_spawners = [];
   foreach(spawner in all_axis_spawners) {
-    if(!isDefined(spawner.script_parameters))
+    if(!isDefined(spawner.script_parameters)) {
       continue;
+    }
     script_parameter_spawners[script_parameter_spawners.size] = spawner;
   }
   array_spawn_function(script_parameter_spawners, ::process_ai_script_parameters);
@@ -242,8 +244,9 @@ startFavela() {
   // delete any AI ( dead or alive ) that might be left over from before
   thread delete_ai_during_blackscreen();
   array_call(getCorpseArray(), ::delete);
-  if(isDefined(level.runner))
+  if(isDefined(level.runner)) {
     level.runner delete();
+  }
 
   flag_set("visionset_torture");
 
@@ -342,8 +345,9 @@ spawn_talkers(targetname) {
     guy set_ignoreall(true);
     guy.goalradius = 16;
     guy setGoalPos(guy.origin);
-    if(!isDefined(spawner.animation))
+    if(!isDefined(spawner.animation)) {
       continue;
+    }
     guy.animname = "trailer";
     guy thread anim_loop_solo(guy, spawner.animation);
   }
@@ -381,8 +385,9 @@ torture_sequence() {
   door = getent("torture_door", "targetname");
 
   torture_enemy_spawner_targetname = "torture_enemy_spawner";
-  if(getdvarint("favela_trailer") > 0)
+  if(getdvarint("favela_trailer") > 0) {
     torture_enemy_spawner_targetname = "torture_enemy_spawner_trailer";
+  }
 
   guys[0] = spawn_targetname(torture_enemy_spawner_targetname);
   guys[0].animname = "torture_enemy";
@@ -850,8 +855,9 @@ teleport_runner_for_takedown_1() {
   trig waittill("trigger");
 
   // Only teleport him if he's gone around the corner out of sight
-  if(!flag("runner_in_alley"))
+  if(!flag("runner_in_alley")) {
     return;
+  }
 
   self forceTeleport(teleportLoc.origin, teleportLoc.angles);
 }
@@ -865,8 +871,9 @@ teleport_runner_for_takedown_2() {
   trig waittill("trigger");
 
   // Only teleport him if he's gone around the corner out of sight
-  if(!flag("runner_in_alley2"))
+  if(!flag("runner_in_alley2")) {
     return;
+  }
 
   self forceTeleport(teleportLoc.origin, teleportLoc.angles);
 }
@@ -881,18 +888,22 @@ makarov_alley_fall() {
     self waittill("damage", damage, attacker, direction_vec, point, type);
 
     // Only Soap and the player can damage him
-    if(!isDefined(attacker))
+    if(!isDefined(attacker)) {
       continue;
-    if(attacker != level.player && attacker != level.soap)
+    }
+    if(attacker != level.player && attacker != level.soap) {
       continue;
+    }
 
     // If damage is only 1 ignore it. This happens when flashbangs and other things bounce off him
-    if(damage <= 1)
+    if(damage <= 1) {
       continue;
+    }
 
     // If player uses grenades you fail
-    if(!isDefined(type))
+    if(!isDefined(type)) {
       continue;
+    }
     if(issubstr(type, "GRENADE")) {
       self thread makarov_alley_killed(point);
       return;
@@ -911,16 +922,19 @@ makarov_alley_fall() {
 was_shot_in_lethal_area() {
   assert(isDefined(self));
 
-  if(isDefined(self.disableLethalCheck))
+  if(isDefined(self.disableLethalCheck)) {
     return false;
+  }
 
-  if(!isDefined(self.damagelocation))
+  if(!isDefined(self.damagelocation)) {
     return true;
+  }
 
   switch (self.damagelocation) {
     case "none":
-      if(flag("makarov_alley_wounded"))
+      if(flag("makarov_alley_wounded")) {
         return false;
+      }
       return true;
     case "helmet":
     case "head":
@@ -936,8 +950,9 @@ was_shot_in_lethal_area() {
 makarov_alley_wounded() {
   level notify("runner_shot");
 
-  if(flag("makarov_alley_wounded"))
+  if(flag("makarov_alley_wounded")) {
     return;
+  }
   flag_set("makarov_alley_wounded");
 
   self thread makarov_alley_wounded_and_crawl();
@@ -956,8 +971,9 @@ makarov_alley_wounded_and_crawl() {
   self endon("deleted");
   self endon("death");
 
-  if(flag("runner_disable_crawl"))
+  if(flag("runner_disable_crawl")) {
     self clear_deathanim();
+  }
 
   self stop_magic_bullet_shield();
   level.runner = self;
@@ -1003,11 +1019,13 @@ stop_sounds_during_black() {
   X_LINE = -50;
   ents = getEntArray();
   foreach(ent in ents) {
-    if(ent.origin[0] < X_LINE)
+    if(ent.origin[0] < X_LINE) {
       continue;
+    }
 
-    if(!isDefined(ent.code_classname))
+    if(!isDefined(ent.code_classname)) {
       continue;
+    }
     switch (ent.classname) {
       case "script_vehicle":
       case "script_origin":
@@ -1039,8 +1057,9 @@ fade_to_black_alley(fadeInTime, fadeOutTime, duration) {
   overlay.vertAlign = "fullscreen";
 
   overlay.alpha = 0;
-  if(fadeInTime > 0)
+  if(fadeInTime > 0) {
     overlay fadeOverTime(fadeInTime);
+  }
   overlay.alpha = 1;
 
   wait fadeInTime;
@@ -1054,8 +1073,9 @@ fade_to_black_alley(fadeInTime, fadeOutTime, duration) {
   level.player freezeControls(false);
   level notify("black_screen_finish");
 
-  if(fadeOutTime > 0)
+  if(fadeOutTime > 0) {
     overlay fadeOverTime(fadeOutTime);
+  }
   overlay.alpha = 0;
 
   wait fadeOutTime;
@@ -1096,8 +1116,9 @@ break_windshield(vehicle) {
   vehicle showpart("TAG_BLOOD");
   vehicle hidepart("TAG_GLASS_FRONT");
 
-  if(!isDefined(level.hula_girl))
+  if(!isDefined(level.hula_girl)) {
     return;
+  }
 
   level.hula_girl unlink();
   force = 150;
@@ -1194,8 +1215,9 @@ makarov_shoot_player(vehicle) {
 
     if(i >= shot_kill_start && i <= shot_kill_stop) {
       // this is a deadly bullet! Check that the player is crouching
-      if(!flag("player_is_ducking"))
+      if(!flag("player_is_ducking")) {
         self thread kill_player();
+      }
     }
 
     self setAnimKnobRestart(fireAnim, 1, .2, 1.0);
@@ -1213,8 +1235,9 @@ kill_player() {
   level.player disableInvulnerability();
   level.player doDamage(level.player.health + 50000, level.player getEye(), self);
   wait 0.05;
-  if(isalive(level.player))
+  if(isalive(level.player)) {
     level.player kill();
+  }
   assert(!isAlive(level.player));
 }
 
@@ -1258,8 +1281,9 @@ favela_opening_civilians_think() {
   civilian = self spawn_ai(true);
   civilian endon("death");
 
-  if(!isDefined(level.favelaCivilians))
+  if(!isDefined(level.favelaCivilians)) {
     level.favelaCivilians = [];
+  }
   level.favelaCivilians[level.favelaCivilians.size] = civilian;
 
   wait 0.05;
@@ -1379,8 +1403,9 @@ random_favela_background_runners() {
   for(;;) {
     spawners = array_randomize(spawners);
     foreach(spawner in spawners) {
-      if(flag("cleared_favela"))
+      if(flag("cleared_favela")) {
         return;
+      }
 
       spawner.count = 1;
       spawner thread spawn_ai(true);
@@ -1461,8 +1486,9 @@ faust_appearance_3_dialog() {
   // We've got eyes on Faust - wait! Shite! he's headed back towards you!
   radio_dialogue("favela_cmt_backtowards");
 
-  if(flag("ending_sequence_dialog"))
+  if(flag("ending_sequence_dialog")) {
     return;
+  }
 
   // Roach, keep pushing him up the hill! Don't let him double back!
   radio_dialogue("favela_cmt_doubleback");
@@ -1634,8 +1660,9 @@ alert_favela_civilians() {
   wait 1.5;
 
   foreach(civilian in level.favelaCivilians) {
-    if(isDefined(civilian))
+    if(isDefined(civilian)) {
       civilian.alertlevel = "alert";
+    }
   }
 }
 
@@ -1730,11 +1757,13 @@ royce_dies_dialog() {
   self waittill("death");
 
   withinView = false;
-  if(isDefined(self) && isDefined(self.origin))
+  if(isDefined(self) && isDefined(self.origin)) {
     withinView = level.player player_looking_at(self.origin, cos(45));
+  }
 
-  if(!withinView)
+  if(!withinView) {
     radio_dialogue("favela_ryc_imhit"); // Roach! I'm down! Meat's dead! They're all over - (gunfire, angry shouting in Portuguese)
+  }
 }
 
 upper_village_triggered_dialog() {
@@ -1838,8 +1867,9 @@ final_bend_dialog() {
 final_staircase_dialog() {
   flag_wait("player_approaching_final_stairs");
 
-  if(flag("ending_sequence_dialog"))
+  if(flag("ending_sequence_dialog")) {
     return;
+  }
   level endon("ending_sequence_dialog");
 
   // Ghost, I'm going far right!
@@ -1981,8 +2011,9 @@ ending_sequence_dialog() {
 ending_sequence_slowmo() {
   wait 0.15;
 
-  if(!player_looking_at(self.origin, undefined, true))
+  if(!player_looking_at(self.origin, undefined, true)) {
     return;
+  }
 
   slomoLerpTime_in = 0.5;
   slomoLerpTime_out = 0.65;

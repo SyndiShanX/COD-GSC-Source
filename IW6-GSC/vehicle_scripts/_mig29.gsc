@@ -42,8 +42,9 @@ init_local() {
   thread playengineeffects();
   thread playcontrail();
 
-  if(self.model != "vehicle_av8b_harrier_jet")
+  if(self.model != "vehicle_av8b_harrier_jet") {
     maps\_vehicle::vehicle_lights_on("running");
+  }
 
   thread landing_gear_up();
 }
@@ -64,8 +65,9 @@ landing_gear_up() {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 1; var_1++)
+  for(var_1 = 0; var_1 < 1; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   return var_0;
 }
@@ -100,20 +102,24 @@ playcontrail() {
 playerisclose(var_0) {
   var_1 = playerisinfront(var_0);
 
-  if(var_1)
+  if(var_1) {
     var_2 = 1;
-  else
+  }
+  else {
     var_2 = -1;
+  }
 
   var_3 = common_scripts\utility::flat_origin(var_0.origin);
   var_4 = var_3 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_2 * 100000);
   var_5 = pointonsegmentnearesttopoint(var_3, var_4, level.player.origin);
   var_6 = distance(var_3, var_5);
 
-  if(var_6 < 3000)
+  if(var_6 < 3000) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 playerisinfront(var_0) {
@@ -121,10 +127,12 @@ playerisinfront(var_0) {
   var_2 = vectornormalize(common_scripts\utility::flat_origin(level.player.origin) - var_0.origin);
   var_3 = vectordot(var_1, var_2);
 
-  if(var_3 > 0)
+  if(var_3 > 0) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 plane_sound_node(var_0, var_1) {
@@ -137,8 +145,9 @@ plane_sound_players(var_0, var_1) {
   thread plane_sound_node();
   var_2 thread common_scripts\utility::play_loop_sound_on_entity(var_0);
 
-  while(playerisinfront(var_2))
+  while(playerisinfront(var_2)) {
     wait 0.05;
+  }
 
   wait 0.5;
   var_2 thread common_scripts\utility::play_sound_in_space(var_1);
@@ -161,8 +170,9 @@ plane_bomb_node() {
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_2++;
 
-    if(var_2 == 3)
+    if(var_2 == 3) {
       var_2 = 1;
+    }
 
     var_1[var_3] thread maps\_utility::play_sound_on_entity("airstrike_explosion");
     playFX(level._effect["plane_bomb_explosion" + var_2], var_1[var_3].origin);
@@ -182,8 +192,9 @@ plane_bomb_cluster() {
   var_4 = anglestoup(var_1.angles) * -0.2;
   var_5 = [];
 
-  for(var_6 = 0; var_6 < 3; var_6++)
+  for(var_6 = 0; var_6 < 3; var_6++) {
     var_5[var_6] = (var_3[var_6] + var_4[var_6]) / 2;
+  }
 
   var_5 = (var_5[0], var_5[1], var_5[2]);
   var_5 = var_5 * 7000;

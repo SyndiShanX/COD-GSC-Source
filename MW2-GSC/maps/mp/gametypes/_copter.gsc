@@ -43,10 +43,12 @@ getAboveBuildingsLocation(location) {
 
 vectorAngle(v1, v2) {
   dot = vectordot(v1, v2);
-  if(dot >= 1)
+  if(dot >= 1) {
     return 0;
-  else if(dot <= -1)
+  }
+  else if(dot <= -1) {
     return 180;
+  }
   return acos(dot);
 }
 vectorTowardsOtherVector(v1, v2, angle) {
@@ -89,8 +91,9 @@ createCopter(location, team, damagetrig) {
   scriptorigin.dontascend = false;
 
   scriptorigin.health = 2000;
-  if(getdvar("scr_copter_health") != "")
+  if(getdvar("scr_copter_health") != "") {
     scriptorigin.health = getdvarfloat("scr_copter_health");
+  }
 
   scriptorigin.team = team;
 
@@ -163,8 +166,9 @@ copterAI() {
         if(isalive(players[i]) && isDefined(players[i].pers["team"]) && players[i].pers["team"] != self.team && !isDefined(players[i].usingObj)) {
           playerorigin = players[i].origin;
           playerorigin = (playerorigin[0], playerorigin[1], self.areaEnt.origin[2]);
-          if(distance(playerorigin, self.areaEnt.origin) < self.areaEnt.radius)
+          if(distance(playerorigin, self.areaEnt.origin) < self.areaEnt.radius) {
             enemyTargets[enemyTargets.size] = players[i];
+          }
         }
       }
     }
@@ -179,11 +183,13 @@ copterAI() {
     for(i = 0; i < enemyTargets.size; i++) {
       inside = false;
       trace = bulletTrace(enemyTargets[i].origin + (0, 0, 10), enemyTargets[i].origin + (0, 0, 10000), false, undefined);
-      if(trace["position"][2] >= skyheight)
+      if(trace["position"][2] >= skyheight) {
         // outside.
+      }
         outsideTargets[outsideTargets.size] = enemyTargets[i];
-      else
+      else {
         // inside.
+      }
         insideTargets[insideTargets.size] = enemyTargets[i];
     }
 
@@ -199,10 +205,12 @@ copterAI() {
 
         result = determineBestEnt(insideTargets, self.areaDescentPoints, self.origin);
         descendingEnt = result["descendEnt"];
-        if(isDefined(descendingEnt))
+        if(isDefined(descendingEnt)) {
           goToPos = result["position"];
-        else
+        }
+        else {
           flying = true;
+        }
       }
     } else {
       oldDescendingEnt = descendingEnt;
@@ -211,20 +219,23 @@ copterAI() {
       } else {
         // if we can't get a good target, and there are outside targets, give up and fly
         if(outsideTargets.size > 0) {
-          if(!isDefined(descendingEnt))
+          if(!isDefined(descendingEnt)) {
             flying = true;
+          }
           else {
             calcedGoToPos = true;
             goToPos = determineBestPos(insideTargets, descendingEnt, self.origin);
-            if(!isDefined(goToPos))
+            if(!isDefined(goToPos)) {
               flying = true;
+            }
           }
         }
         // determine where to go.
         if(isDefined(descendingEnt)) {
           // we're already descended. try to find a good place to shoot into the door/window from.
-          if(!calcedGoToPos)
+          if(!calcedGoToPos) {
             goToPos = determineBestPos(insideTargets, descendingEnt, self.origin);
+          }
         }
         if(!isDefined(goToPos)) {
           result = determineBestEnt(insideTargets, self.areaDescentPoints, self.origin);
@@ -234,17 +245,20 @@ copterAI() {
             reachedDescendingEnt = false;
           } else {
             if(isDefined(descendingEnt)) {
-              if(isDefined(self.finalDest))
+              if(isDefined(self.finalDest)) {
                 goToPos = self.finalDest;
-              else
+              }
+              else {
                 goToPos = descendingEnt.origin;
+              }
             } else
               goToPos = undefined;
           }
         }
         // couldn't find a place to descend?
-        if(!isDefined(goToPos))
+        if(!isDefined(goToPos)) {
           flying = true;
+        }
       }
     }
 
@@ -254,10 +268,12 @@ copterAI() {
       desireddist = 1024 * 2.5;
 
       distToArea = distance((self.origin[0], self.origin[1], self.areaEnt.origin[2]), self.areaEnt.origin);
-      if(outsideTargets.size == 0 && distToArea > self.areaEnt.radius + desireddist * .25)
+      if(outsideTargets.size == 0 && distToArea > self.areaEnt.radius + desireddist * .25) {
         returningToArea = true;
-      else if(distToArea < self.areaEnt.radius * .5)
+      }
+      else if(distToArea < self.areaEnt.radius * .5) {
         returningToArea = false;
+      }
       if(outsideTargets.size == 0 && !returningToArea) {
         // no outside targets? look again for any enemies outside the radius we're defending - just so
         // we don't look stupid when we could be making ourself useful.
@@ -266,8 +282,9 @@ copterAI() {
             if(isalive(players[i]) && isDefined(players[i].pers["team"]) && players[i].pers["team"] != self.team && !isDefined(players[i].usingObj)) {
               playerorigin = players[i].origin;
               playerorigin = (playerorigin[0], playerorigin[1], self.areaEnt.origin[2]);
-              if(distance(players[i].origin, self.areaEnt.origin) > self.areaEnt.radius)
+              if(distance(players[i].origin, self.areaEnt.origin) > self.areaEnt.radius) {
                 outsideTargets[outsideTargets.size] = players[i];
+              }
             }
           }
         }
@@ -309,8 +326,9 @@ copterAI() {
         wait(1);
       }
     } else {
-      if(distance(self.origin, descendingEnt.origin) < descendingEnt.radius)
+      if(distance(self.origin, descendingEnt.origin) < descendingEnt.radius) {
         reachedDescendingEnt = true;
+      }
 
       //iprintln("going to descent pos");
 
@@ -420,10 +438,12 @@ determineBestAttackPos(targetpos, curpos, desireddist) {
     goToPos = bestpos;
   } else {
     dist = distance(targetposcopterheight, curpos);
-    if(dist > desireddist)
+    if(dist > desireddist) {
       goToPos = self.origin + vecscale(vectornormalize(attackdirx), 0 - (dist - desireddist));
-    else
+    }
+    else {
       goToPos = self.origin;
+    }
   }
   return goToPos;
 }
@@ -432,8 +452,9 @@ getRandomPos(origin, radius) {
   // no sqrt so have to do this the guess and check way.
 
   pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0);
-  while(distanceSquared(pos, origin) > radius * radius)
+  while(distanceSquared(pos, origin) > radius * radius) {
     pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0);
+  }
 
   return pos;
 }
@@ -453,8 +474,9 @@ copterShoot() {
 
       if(vectordot(curdir, enemydir) > cosThreshold) {
         canseetarget = bullettracepassed(mypos, enemypos, false, undefined);
-        if(!canseetarget && isplayer(self.desiredDirEntity) && isalive(self.desiredDirEntity))
+        if(!canseetarget && isplayer(self.desiredDirEntity) && isalive(self.desiredDirEntity)) {
           canseetarget = bullettracepassed(mypos, self.desiredDirEntity getEye(), false, undefined);
+        }
         if(canseetarget) {
           // shoot.
           self playSound("mp_copter_shoot");
@@ -490,8 +512,9 @@ copterShoot() {
 }
 myMagicBullet(pos, dir) {
   damage = 20;
-  if(getdvar("scr_copter_damage") != "")
+  if(getdvar("scr_copter_damage") != "") {
     damage = getdvarint("scr_copter_damage");
+  }
 
   // for now just shoot from origin
   trace = bulletTrace(pos, pos + vecscale(dir, 10000), true, undefined);
@@ -515,15 +538,18 @@ myMagicBullet(pos, dir) {
 
 setCopterDest(newlocation, descend, dontascend) {
   self.finalDest = getAboveBuildingsLocation(newlocation);
-  if(isDefined(descend) && descend)
+  if(isDefined(descend) && descend) {
     self.finalZDest = newlocation[2];
-  else
+  }
+  else {
     self.finalZDest = self.finalDest[2];
+  }
 
   self.intransit = true;
   self.dontascend = false;
-  if(isDefined(dontascend))
+  if(isDefined(dontascend)) {
     self.dontascend = dontascend;
+  }
 }
 notifyArrived() {
   wait .05;
@@ -535,16 +561,18 @@ vecscale(vec, scalar) {
 }
 
 abs(x) {
-  if(x < 0)
+  if(x < 0) {
     return 0 - x;
+  }
   return x;
 }
 
 copterMove() {
   self endon("death");
 
-  if(isDefined(self.copterMoveRunning))
+  if(isDefined(self.copterMoveRunning)) {
     return;
+  }
   self.copterMoveRunning = true;
 
   self.intransit = false;
@@ -567,8 +595,9 @@ copterMove() {
       // movement
       movingHorizontally = true;
       movingVertically = false;
-      if(self.dontascend)
+      if(self.dontascend) {
         movingVertically = true;
+      }
       else {
         // if we're not near our horizontal goal position
         if(!nearDest) {
@@ -578,16 +607,19 @@ copterMove() {
           movingVertically = !movingHorizontally; // we're moving vertically if we aren't
         }
         // if we are near our horizontal goal position
-        else
+        else {
           movingVertically = true;
+        }
       }
 
       // determine our destination
       if(movingHorizontally) {
-        if(movingVertically)
+        if(movingVertically) {
           thisDest = (self.finalDest[0], self.finalDest[1], self.finalZDest);
-        else
+        }
+        else {
           thisDest = self.finalDest;
+        }
       } else {
         assert(movingVertically);
         thisDest = (self.origin[0], self.origin[1], desiredZ);
@@ -637,14 +669,16 @@ copterMove() {
     		self.dontascend = false;
     		
     		// if we descended to get to this point, we'll be ascending to get out
-    		if(self.finalZDest != self.finalDest[2])
+    		if(self.finalZDest != self.finalDest[2]) {
     			self.ascending = true;
+    		}
     		
     		self notify("arrived");
     	}
     	
-    	if(isDefined(self.desiredDir))
+    	if(isDefined(self.desiredDir)) {
     		self.destDir = self.desiredDir;
+    	}
     	else {
     		self.destDir = anglesToForward(self.angles);
     		self.destDir = vectornormalize((self.destDir[0], self.destDir[1], 0));
@@ -675,8 +709,9 @@ copterMove() {
 
     if(angle > .001 && thisRotSpeed > .001) {
       thisangle = thisRotSpeed * interval;
-      if(thisangle > angle)
+      if(thisangle > angle) {
         thisangle = angle;
+      }
 
       newdir2d = vectorTowardsOtherVector(olddir2d, newdir2d, thisangle);
       oldz = olddir[2] / veclength((olddir[0], olddir[1], 0));
@@ -690,8 +725,9 @@ copterMove() {
     } else if(angle3d > .001 && thisRotSpeed > .001) {
       // need to rotate vertically
       thisangle = thisRotSpeed * interval;
-      if(thisangle > angle3d)
+      if(thisangle > angle3d) {
         thisangle = angle3d;
+      }
 
       newdir = vectorTowardsOtherVector(olddir, newdir, thisangle);
       newdir = vectornormalize(newdir);
@@ -712,8 +748,9 @@ copterDamage(damagetrig) {
     damagetrig waittill("damage", amount, attacker);
 
     // disallow friendly fire
-    if(isDefined(attacker) && isplayer(attacker) && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.team)
+    if(isDefined(attacker) && isplayer(attacker) && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.team) {
       continue;
+    }
 
     self.health -= amount;
     if(self.health <= 0) {
@@ -744,8 +781,9 @@ copterDie() {
 
     // check for collision with ground
     pathclear = bullettracepassed(self.origin, newpos, false, undefined);
-    if(!pathclear)
+    if(!pathclear) {
       break;
+    }
 
     self moveto(newpos, interval * .999);
 

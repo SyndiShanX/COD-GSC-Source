@@ -165,6 +165,7 @@ intermission_settings() {
   level waittill("znfg");
   players = getlocalplayers();
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     setworldfogactivebank(i, 2);
+  }
 }

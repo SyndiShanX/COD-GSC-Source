@@ -132,8 +132,9 @@ onDisconnect() {
 }
 
 get_team_mask(team) {
-  if(!level.teambased || !isDefined(team))
+  if(!level.teambased || !isDefined(team)) {
     return level.spawnsystem.iSPAWN_TEAMMASK_FREE;
+  }
   switch (team) {
     case "axis":
       return level.spawnsystem.iSPAWN_TEAMMASK_AXIS;
@@ -261,16 +262,21 @@ remove_player_influencers() {
 }
 
 enable_player_influencers(enabled) {
-  if(isDefined(self.influencer_friendly_sphere))
+  if(isDefined(self.influencer_friendly_sphere)) {
     enableinfluencer(self.influencer_friendly_sphere, enabled);
-  if(isDefined(self.influencer_friendly_cylinder))
+  }
+  if(isDefined(self.influencer_friendly_cylinder)) {
     enableinfluencer(self.influencer_friendly_cylinder, enabled);
-  if(isDefined(self.influencer_enemy_sphere))
+  }
+  if(isDefined(self.influencer_enemy_sphere)) {
     enableinfluencer(self.influencer_enemy_sphere, enabled);
-  if(isDefined(self.influencer_weapon_cylinder))
+  }
+  if(isDefined(self.influencer_weapon_cylinder)) {
     enableinfluencer(self.influencer_weapon_cylinder, enabled);
-  if(isDefined(self.influencer_squad))
+  }
+  if(isDefined(self.influencer_squad)) {
     enableinfluencer(self.influencer_squad, enabled);
+  }
 }
 
 player_influencers_set_team() {
@@ -287,16 +293,21 @@ player_influencers_set_team() {
   if(level.friendlyfire != 0 && level.teamBased) {
     weapon_team_mask |= team_mask;
   }
-  if(isDefined(self.influencer_friendly_sphere))
+  if(isDefined(self.influencer_friendly_sphere)) {
     setinfluencerteammask(self.influencer_friendly_sphere, team_mask);
-  if(isDefined(self.influencer_friendly_cylinder))
+  }
+  if(isDefined(self.influencer_friendly_cylinder)) {
     setinfluencerteammask(self.influencer_friendly_cylinder, team_mask);
-  if(isDefined(self.influencer_enemy_sphere))
+  }
+  if(isDefined(self.influencer_enemy_sphere)) {
     setinfluencerteammask(self.influencer_enemy_sphere, other_team_mask);
-  if(isDefined(self.influencer_weapon_cylinder))
+  }
+  if(isDefined(self.influencer_weapon_cylinder)) {
     setinfluencerteammask(self.influencer_weapon_cylinder, weapon_team_mask);
-  if(isDefined(self.influencer_squad))
+  }
+  if(isDefined(self.influencer_squad)) {
     setinfluencerteammask(self.influencer_squad, team_mask);
+  }
 }
 
 create_squad_influencers() {
@@ -759,8 +770,9 @@ is_hardcore() {
 teams_have_enmity(
   team1,
   team2) {
-  if(!isDefined(team1) || !isDefined(team2) || (level.gameType == "dm"))
+  if(!isDefined(team1) || !isDefined(team2) || (level.gameType == "dm")) {
     return true;
+  }
   return team1 != "neutral" &&
     team2 != "neutral" &&
     team1 != team2;

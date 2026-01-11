@@ -104,11 +104,13 @@ func_F8F7(var_00, var_01, var_02) {
     self.team = "axis";
   }
 
-  if(!isDefined(var_01) || int(var_01) < 0)
+  if(!isDefined(var_01) || int(var_01) < 0) {
     var_01 = 1;
+  }
 
-  if(!isDefined(var_02) || int(var_02) < 0)
+  if(!isDefined(var_02) || int(var_02) < 0) {
     var_02 = 1;
+  }
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_cannon_large_ca";
@@ -144,10 +146,12 @@ func_F8F7(var_00, var_01, var_02) {
   self.func_10241.health = 2500 * int(var_01);
   self.func_10241.func_AF57 = func_0BB6::func_6D4D;
 
-  if(isDefined(var_00) && var_00 == "allies")
+  if(isDefined(var_00) && var_00 == "allies") {
     self.func_10241.func_6D32 = "capitalship_megacannon_fire";
-  else
+  }
+  else {
     self.func_10241.func_6D32 = "capitalship_megacannon_fire";
+  }
 
   self.func_3AF3 = "large_target";
   self.func_11549 = "JACKAL_76MM_DSM";
@@ -162,11 +166,13 @@ func_F8FE(var_00, var_01, var_02, var_03) {
     self.team = "axis";
   }
 
-  if(!isDefined(var_01) || int(var_01) < 0)
+  if(!isDefined(var_01) || int(var_01) < 0) {
     var_01 = 1;
+  }
 
-  if(!isDefined(var_02) || int(var_02) < 0)
+  if(!isDefined(var_02) || int(var_02) < 0) {
     var_02 = 1;
+  }
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_small_constant";
@@ -203,8 +209,9 @@ func_F8FE(var_00, var_01, var_02, var_03) {
   self.func_10241.func_AF57 = func_0BB6::func_6D4D;
   self.func_10241.func_6CF8 = func_0BB6::func_6D4F;
 
-  if(isDefined(var_00) && var_00 == "allies")
+  if(isDefined(var_00) && var_00 == "allies") {
     self.func_10241.func_6CF8 = func_0BB6::func_6D4D;
+  }
 
   self.func_10241.func_6D34 = "capship_phalanx_fire_lp";
   self.func_10241.func_6D36 = "capship_phalanx_fire_stop";
@@ -240,11 +247,13 @@ func_F8F6(var_00, var_01, var_02) {
     self.team = "axis";
   }
 
-  if(!isDefined(var_01) || int(var_01) < 0)
+  if(!isDefined(var_01) || int(var_01) < 0) {
     var_01 = 1;
+  }
 
-  if(!isDefined(var_02) || int(var_02) < 0)
+  if(!isDefined(var_02) || int(var_02) < 0) {
     var_02 = 1;
+  }
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_med_flak";
@@ -297,11 +306,13 @@ func_F8FD(var_00, var_01, var_02) {
   self.model = "ship_exterior_un_turret_a_rig";
   self.team = var_00;
 
-  if(!isDefined(var_01) || int(var_01) < 0)
+  if(!isDefined(var_01) || int(var_01) < 0) {
     var_01 = 1;
+  }
 
-  if(!isDefined(var_02) || int(var_02) < 0)
+  if(!isDefined(var_02) || int(var_02) < 0) {
     var_02 = 1;
+  }
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_phalanx";
@@ -358,11 +369,13 @@ func_F8FA(var_00, var_01, var_02) {
     self.team = "axis";
   }
 
-  if(!isDefined(var_01) || int(var_01) < 0)
+  if(!isDefined(var_01) || int(var_01) < 0) {
     var_01 = 1;
+  }
 
-  if(!isDefined(var_02) || int(var_02) < 0)
+  if(!isDefined(var_02) || int(var_02) < 0) {
     var_02 = 1;
+  }
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_missile_barrage";
@@ -414,11 +427,13 @@ func_F8FC(var_00, var_01, var_02) {
     self.team = "axis";
   }
 
-  if(!isDefined(var_01) || int(var_01) < 0)
+  if(!isDefined(var_01) || int(var_01) < 0) {
     var_01 = 1;
+  }
 
-  if(!isDefined(var_02) || int(var_02) < 0)
+  if(!isDefined(var_02) || int(var_02) < 0) {
     var_02 = 1;
+  }
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_missile_barrage";
@@ -583,11 +598,13 @@ func_F9DB(var_00, var_01) {
   self.model = "veh_mil_air_ca_missile_boat_turret";
   self.team = "axis";
 
-  if(!isDefined(var_00) || int(var_00) < 0)
+  if(!isDefined(var_00) || int(var_00) < 0) {
     var_00 = 1;
+  }
 
-  if(!isDefined(var_01) || int(var_01) < 0)
+  if(!isDefined(var_01) || int(var_01) < 0) {
     var_01 = 1;
+  }
 
   self.func_B8F9 = "manual";
   self.type = "cap_turret_small_constant";

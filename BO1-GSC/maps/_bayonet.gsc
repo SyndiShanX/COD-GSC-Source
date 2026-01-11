@@ -13,7 +13,8 @@ init() {
 
 has_bayonet() {
   currentWeapon = self.weapon;
-  if(!isDefined(currentWeapon))
+  if(!isDefined(currentWeapon)) {
     return false;
+  }
   return IsSubStr(currentWeapon, "_bayonet");
 }

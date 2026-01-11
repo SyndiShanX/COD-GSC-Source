@@ -30,20 +30,24 @@ trackloop(var_0, var_1, var_2, var_3, var_4) {
     var_14 = 0;
     var_15 = 0;
 
-    if(isDefined(self.covercrouchlean_aimmode))
+    if(isDefined(self.covercrouchlean_aimmode)) {
       var_14 = anim.covercrouchleanpitch;
+    }
 
     var_16 = self.script;
 
     if(var_16 == "cover_multi") {
-      if(self.cover.state == "right")
+      if(self.cover.state == "right") {
         var_16 = "cover_right";
-      else if(self.cover.state == "left")
+      }
+      else if(self.cover.state == "left") {
         var_16 = "cover_left";
+      }
     }
 
-    if((var_16 == "cover_left" || var_16 == "cover_right") && isDefined(self.a.cornermode) && self.a.cornermode == "lean")
+    if((var_16 == "cover_left" || var_16 == "cover_right") && isDefined(self.a.cornermode) && self.a.cornermode == "lean") {
       var_15 = self.covernode.angles[1] - self.angles[1];
+    }
 
     var_12 = (var_14, var_15, 0);
   }
@@ -53,24 +57,28 @@ trackloop(var_0, var_1, var_2, var_3, var_4) {
     var_17 = animscripts\shared::getshootfrompos();
     var_18 = self.shootpos;
 
-    if(isDefined(self.shootent))
+    if(isDefined(self.shootent)) {
       var_18 = self.shootent getshootatpos();
+    }
 
-    if(!isDefined(var_18) && animscripts\utility::shouldcqb())
+    if(!isDefined(var_18) && animscripts\utility::shouldcqb()) {
       var_18 = trackloop_cqbshootpos(var_17);
+    }
 
     var_19 = isDefined(self.onsnowmobile) || isDefined(self.onatv);
     var_20 = isDefined(var_18);
     var_21 = (0, 0, 0);
 
-    if(var_20)
+    if(var_20) {
       var_21 = var_18;
+    }
 
     var_22 = 0;
     var_23 = isDefined(self.stepoutyaw);
 
-    if(var_23)
+    if(var_23) {
       var_22 = self.stepoutyaw;
+    }
 
     var_7 = self getaimangle(var_17, var_21, var_20, var_12, var_22, var_23, var_19);
     var_24 = var_7[0];
@@ -132,8 +140,9 @@ trackloop_cqbshootpos(var_0) {
     var_1 = self.cqb_target getshootatpos();
 
     if(isDefined(self.cqb_wide_target_track)) {
-      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177)
+      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
+      }
     } else if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.643)
       var_1 = undefined;
   }
@@ -142,8 +151,9 @@ trackloop_cqbshootpos(var_0) {
     var_1 = self.cqb_point_of_interest;
 
     if(isDefined(self.cqb_wide_poi_track)) {
-      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177)
+      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
+      }
     } else if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.643)
       var_1 = undefined;
   }
@@ -161,8 +171,9 @@ trackloop_anglesfornoshootpos(var_0, var_1) {
   var_4 = 0;
   var_5 = 0;
 
-  if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 16)
+  if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 16) {
     var_5 = angleclamp180(self.angles[1] - self.node.angles[1]);
+  }
   else {
     var_6 = self getanglestolikelyenemypath();
 
@@ -180,8 +191,9 @@ trackloop_getdesiredangles(var_0, var_1) {
   var_3 = 0;
   var_4 = 0;
 
-  if(self.stairsstate == "up")
+  if(self.stairsstate == "up") {
     var_3 = -40;
+  }
   else if(self.stairsstate == "down") {
     var_3 = 40;
     var_4 = 12;
@@ -190,8 +202,9 @@ trackloop_getdesiredangles(var_0, var_1) {
   var_5 = 360 - var_2[0];
   var_5 = angleclamp180(var_5 + var_1[0] + var_3);
 
-  if(isDefined(self.stepoutyaw))
+  if(isDefined(self.stepoutyaw)) {
     var_6 = self.stepoutyaw - var_2[1];
+  }
   else {
     var_7 = angleclamp180(self.desiredangle - self.angles[1]) * 0.5;
     var_6 = var_7 + self.angles[1] - var_2[1];
@@ -203,19 +216,23 @@ trackloop_getdesiredangles(var_0, var_1) {
 
 trackloop_clampangles(var_0, var_1, var_2) {
   if(isDefined(self.onsnowmobile) || isDefined(self.onatv)) {
-    if(var_1 > self.rightaimlimit || var_1 < self.leftaimlimit)
+    if(var_1 > self.rightaimlimit || var_1 < self.leftaimlimit) {
       var_1 = 0;
+    }
 
-    if(var_0 > self.upaimlimit || var_0 < self.downaimlimit)
+    if(var_0 > self.upaimlimit || var_0 < self.downaimlimit) {
       var_0 = 0;
+    }
   } else if(var_2 && (abs(var_1) > anim.maxanglecheckyawdelta || abs(var_0) > anim.maxanglecheckpitchdelta)) {
     var_1 = 0;
     var_0 = 0;
   } else {
-    if(self.gunblockedbywall)
+    if(self.gunblockedbywall) {
       var_1 = clamp(var_1, -10, 10);
-    else
+    }
+    else {
       var_1 = clamp(var_1, self.leftaimlimit, self.rightaimlimit);
+    }
 
     var_0 = clamp(var_0, self.downaimlimit, self.upaimlimit);
   }
@@ -251,8 +268,9 @@ trackloop_setanimweights(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self setanimlimited(var_2, var_10, 0.1, 1, 1);
   self setanimlimited(var_3, var_11, 0.1, 1, 1);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     self setanimlimited(var_4, var_9, 0.1, 1, 1);
+  }
 }
 
 setanimaimweight(var_0, var_1) {
@@ -262,8 +280,9 @@ setanimaimweight(var_0, var_1) {
     self.a.aimweight_end = var_0;
     self.a.aimweight_transframes = 0;
   } else {
-    if(!isDefined(self.a.aimweight))
+    if(!isDefined(self.a.aimweight)) {
       self.a.aimweight = 0;
+    }
 
     self.a.aimweight_start = self.a.aimweight;
     self.a.aimweight_end = var_0;

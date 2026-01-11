@@ -97,8 +97,9 @@ dialogue() {
 }
 
 dialogue_foreman() {
-  while(!isDefined(level._flarestack.foreman))
+  while(!isDefined(level._flarestack.foreman)) {
     wait 0.05;
+  }
 
   level._flarestack.foreman thread dialogue_foreman_line1();
   level._flarestack.foreman thread dialogue_foreman_line3();
@@ -317,32 +318,40 @@ light_alarm_lights() {
 
   for(;;) {
     if(common_scripts\utility::flag("flag_flamestack_alarm_light")) {
-      foreach(var_5 in var_0)
+      foreach(var_5 in var_0) {
       var_5 show();
+      }
 
-      foreach(var_5 in var_1)
+      foreach(var_5 in var_1) {
       var_5 hide();
+      }
 
-      foreach(var_14 in var_2)
+      foreach(var_14 in var_2) {
       playFXOnTag(level._effect["flarestack_siren_red"], var_14, "tag_origin");
+      }
 
-      foreach(var_5 in var_8)
+      foreach(var_5 in var_8) {
       var_5 setlightintensity(2.0);
+      }
     }
 
     wait 1;
 
-    foreach(var_5 in var_0)
+    foreach(var_5 in var_0) {
     var_5 hide();
+    }
 
-    foreach(var_5 in var_1)
+    foreach(var_5 in var_1) {
     var_5 show();
+    }
 
-    foreach(var_14 in var_2)
+    foreach(var_14 in var_2) {
     stopFXOnTag(level._effect["flarestack_siren_red"], var_14, "tag_origin");
+    }
 
-    foreach(var_5 in var_8)
+    foreach(var_5 in var_8) {
     var_5 setlightintensity(0.01);
+    }
 
     wait 0.5;
   }
@@ -357,8 +366,9 @@ audio_start_pressure() {
 flamestack_godrays() {
   var_0 = getent("origin_flarestack_fx", "targetname");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     maps\black_ice_util::god_rays_from_world_location(var_0.origin, "flag_flarestack_scene_start", "flag_flarestack_player_pressed_button", "black_ice_flamestack", undefined);
+  }
 }
 
 light_flamestack() {
@@ -409,8 +419,9 @@ event_pressure_buildup_start(var_0) {
   var_1 = common_scripts\utility::getstruct("struct_rumble_dist", "targetname");
   var_2 = 0.0;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 9.0;
+  }
 
   var_3 = 0.11;
   var_4 = 0.05;
@@ -498,8 +509,9 @@ fx_flarestack_motion() {
   var_1 = getent("flarestack_anim_node", "script_noteworthy");
   var_2 = var_1 common_scripts\utility::spawn_tag_origin();
 
-  foreach(var_4 in var_0)
+  foreach(var_4 in var_0) {
   var_4 linkto(var_2);
+  }
 
   wait 0.5;
   var_2 vibrate((1, 0, 0), 0.2, 1.7, 1.0);

@@ -15,13 +15,15 @@ func_5910(var_00) {
   var_00 missileoutline();
   scripts\mp\utility\game::_launchgrenade("domeshield_plant_mp", var_0.origin, (0, 0, 0), 100, 1, var_00);
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_00 linkto(var_01);
+  }
 
   var_02 = domeshield_getplacementinfo(self, var_0.origin);
 
-  if(var_2.func_38EE)
+  if(var_2.func_38EE) {
     thread func_590C(var_00, var_01, var_02);
+  }
   else {
     scripts\mp\hud_message::showerrormessage("MP_CANNOT_PLACE_DOMESHIELD");
     scripts\mp\powers::func_D74C("power_domeshield");
@@ -36,11 +38,13 @@ func_590C(var_00, var_01, var_02) {
     var_04 thread domeshield_destroy(1);
   }
 
-  if(!isDefined(self.func_590F))
+  if(!isDefined(self.func_590F)) {
     self.func_590F = [];
+  }
 
-  if(self.func_590F.size + 1 > domeshield_getmax())
+  if(self.func_590F.size + 1 > domeshield_getmax()) {
     self.func_590F[0] thread domeshield_destroy(0);
+  }
 
   var_00 setotherent(self);
   var_00 give_player_tickets(1);
@@ -87,10 +91,12 @@ domeshield_deploysequence() {
 domeshield_destroy(var_00) {
   thread domeshield_delete(1.6);
 
-  if(var_00)
+  if(var_00) {
     domeshield_setstate(3);
-  else
+  }
+  else {
     domeshield_setstate(4);
+  }
 
   wait 1.5;
   domeshield_setstate(5);
@@ -102,11 +108,13 @@ domeshield_delete(var_00) {
   self.exploding = 1;
   thread domeshield_removefromarrays(self, self.owner, self getentitynumber());
 
-  if(isDefined(self.func_58EF))
+  if(isDefined(self.func_58EF)) {
     self.func_58EF delete();
+  }
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     wait(var_00);
+  }
 
   self delete();
 }
@@ -122,23 +130,26 @@ domeshield_handledamage(var_00, var_01, var_02, var_03, var_04) {
 domeshield_handledamagefatal(var_00, var_01, var_02, var_03, var_04) {
   domeshield_awardpoints(var_00);
 
-  if(isDefined(var_00) && isplayer(var_00) && isDefined(var_02) && scripts\engine\utility::isbulletdamage(var_02) && var_00 != self.owner)
+  if(isDefined(var_00) && isplayer(var_00) && isDefined(var_02) && scripts\engine\utility::isbulletdamage(var_02) && var_00 != self.owner) {
     var_00 scripts\mp\missions::func_D991("ch_dome_kill");
+  }
 
   thread domeshield_destroy(1);
 }
 
 domeshield_domehandledamage(var_00, var_01, var_02, var_03, var_04) {
-  if(var_02 == "MOD_MELEE")
+  if(var_02 == "MOD_MELEE") {
     var_03 = 0;
+  }
   else {
     var_03 = scripts\mp\damage::handleshotgundamage(var_01, var_02, var_03);
     var_03 = scripts\mp\damage::handleapdamage(var_01, var_02, var_03);
     var_03 = domeshield_domehandlesuperdamage(var_01, var_02, var_03);
   }
 
-  if(var_03 > 0)
+  if(var_03 > 0) {
     self.owner scripts\mp\missions::func_D991("ch_tactical_domeshield", var_03);
+  }
 
   self.owner scripts\mp\missions::func_D998(var_00, var_01, self);
   self.owner scripts\mp\damage::combatrecordtacticalstat("power_domeshield", var_03);
@@ -154,8 +165,9 @@ domeshield_domehandlesuperdamage(var_00, var_01, var_02) {
   var_03 = 1;
   var_04 = getweaponbasename(var_00);
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     var_00 = var_04;
+  }
 
   switch (var_00) {
     case "micro_turret_gun_mp":
@@ -177,8 +189,9 @@ domeshield_destroyonemp() {
   self waittill("emp_damage", var_00, var_01, var_02, var_03, var_04);
 
   if(isDefined(var_03) && var_03 == "emp_grenade_mp") {
-    if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00)))
+    if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00))) {
       var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
+    }
   }
 
   domeshield_awardpoints(var_00);
@@ -203,8 +216,9 @@ domeshield_deleteondisowned(var_00) {
   var_00 scripts\engine\utility::waittill_any("joined_team", "joined_spectators", "disconnect");
   thread domeshield_removefromarrays(self, self.owner, self getentitynumber());
 
-  if(isDefined(self.func_58EF))
+  if(isDefined(self.func_58EF)) {
     self.func_58EF delete();
+  }
 
   self delete();
 }
@@ -236,8 +250,9 @@ domeshield_getplacementinfo(var_00, var_01) {
 }
 
 domeshield_setstate(var_00) {
-  if(!isDefined(self.state))
+  if(!isDefined(self.state)) {
     self.state = -1;
+  }
 
   if(self.state == var_00) {
     return;
@@ -275,11 +290,13 @@ domeshield_setstate(var_00) {
 domeshield_givedamagefeedback(var_00) {
   var_01 = "";
 
-  if(scripts\mp\utility\game::istrue(self.hasruggedeqp))
+  if(scripts\mp\utility\game::istrue(self.hasruggedeqp)) {
     var_01 = "hitequip";
+  }
 
-  if(isplayer(var_00))
+  if(isplayer(var_00)) {
     var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_01);
+  }
 }
 
 domeshield_awardpoints(var_00) {
@@ -292,8 +309,9 @@ domeshield_awardpoints(var_00) {
 domeshield_getmax() {
   var_00 = 1;
 
-  if(scripts\mp\utility\game::_hasperk("specialty_rugged_eqp"))
+  if(scripts\mp\utility\game::_hasperk("specialty_rugged_eqp")) {
     var_0++;
+  }
 
   return var_00;
 }
@@ -306,8 +324,9 @@ func_7E80(var_00) {
       if(!isDefined(var_03)) {
         continue;
       }
-      if(distancesquared(var_0.origin, var_3.origin) < var_01)
+      if(distancesquared(var_0.origin, var_3.origin) < var_01) {
         return var_03;
+      }
     }
   }
 
@@ -319,8 +338,9 @@ isdomeshield() {
 }
 
 domeshield_addtoarrays(var_00, var_01) {
-  if(!isDefined(var_1.func_590F))
+  if(!isDefined(var_1.func_590F)) {
     var_1.func_590F = [];
+  }
 
   var_02 = [];
 
@@ -344,8 +364,9 @@ domeshield_addtoarrays(var_00, var_01) {
 domeshield_removefromarrays(var_00, var_01, var_02) {
   var_00 notify("domeShield_removeFromArrays");
 
-  if(isDefined(var_01) && isDefined(var_1.func_590F) && isDefined(var_00))
+  if(isDefined(var_01) && isDefined(var_1.func_590F) && isDefined(var_00)) {
     var_1.func_590F = scripts\engine\utility::array_remove(var_1.func_590F, var_00);
+  }
 
   level.func_590F[var_02] = undefined;
 }

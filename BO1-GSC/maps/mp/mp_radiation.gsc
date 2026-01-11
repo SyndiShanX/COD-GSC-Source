@@ -449,8 +449,9 @@ getWatcherForWeapon(weapname) {
   return undefined;
 }
 addNoTurretTrigger(position, radius, height) {
-  while(!isDefined(level.noTurretPlacementTriggers))
+  while(!isDefined(level.noTurretPlacementTriggers)) {
     wait(0.1);
+  }
   trigger = spawn("trigger_radius", position, 0, radius, height);
   level.noTurretPlacementTriggers[level.noTurretPlacementTriggers.size] = trigger;
 }

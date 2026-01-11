@@ -307,8 +307,9 @@ _monkey_zombieTempleDeathCallback() {
   self thread maps\_zombiemode_audio::do_zombies_playvocals("death", self.animname);
   self thread maps\_zombiemode_spawner::zombie_eye_glow_stop();
   playFX(level._effect["monkey_death"], self.origin);
-  if(isDefined(self.attacker) && IsPlayer(self.attacker))
+  if(isDefined(self.attacker) && IsPlayer(self.attacker)) {
     self.attacker maps\_zombiemode_audio::create_and_play_dialog("kill", "thief");
+  }
   if(self.damagemod == "MOD_BURNED") {
     self thread animscripts\zombie_death::flame_death_fx();
   }

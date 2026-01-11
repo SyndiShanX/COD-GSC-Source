@@ -57,8 +57,9 @@ glance(spot, duration, ignoreLOS) {
   if(!isDefined(spot)) {
     return;
   }
-  if(!isDefined(ignoreLOS))
+  if(!isDefined(ignoreLOS)) {
     ignoreLOS = false;
+  }
   if(!bullettracepassed(self getshootatpos(), spot, false, undefined) && (ignoreLOS == false)) {
     return;
   }
@@ -86,8 +87,9 @@ lookThread() {
 }
 
 chooseSomethingToLookAt() {
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return self.enemy getshootatpos();
+  }
 }
 
 TryToGlanceAtThePlayerNow() {

@@ -20,26 +20,32 @@ hostmigrationwaitforplayers() {
 }
 
 hostmigrationname(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return "<removed_ent>";
+  }
 
   var_01 = -1;
   var_02 = "?";
 
-  if(isDefined(var_0.entity_number))
+  if(isDefined(var_0.entity_number)) {
     var_01 = var_0.entity_number;
+  }
 
-  if(isplayer(var_00) && isDefined(var_0.name))
+  if(isplayer(var_00) && isDefined(var_0.name)) {
     var_02 = var_0.name;
+  }
 
-  if(isplayer(var_00))
+  if(isplayer(var_00)) {
     return "player <" + var_02 + ">";
+  }
 
-  if(isagent(var_00) && scripts\cp\utility::isgameparticipant(var_00))
+  if(isagent(var_00) && scripts\cp\utility::isgameparticipant(var_00)) {
     return "participant agent <" + var_01 + ">";
+  }
 
-  if(isagent(var_00))
+  if(isagent(var_00)) {
     return "non-participant agent <" + var_01 + ">";
+  }
 
   return "unknown entity <" + var_01 + ">";
 }
@@ -48,8 +54,9 @@ hostmigrationtimerthink_internal() {
   level endon("host_migration_begin");
   level endon("host_migration_end");
 
-  while(!scripts\cp\utility::isreallyalive(self))
+  while(!scripts\cp\utility::isreallyalive(self)) {
     self waittill("spawned");
+  }
 
   self.hostmigrationcontrolsfrozen = 1;
   scripts\cp\utility::freezecontrolswrapper(1);
@@ -61,16 +68,18 @@ hostmigrationtimerthink() {
   hostmigrationtimerthink_internal();
 
   if(self.hostmigrationcontrolsfrozen) {
-    if(scripts\cp\utility::gameflag("prematch_done"))
+    if(scripts\cp\utility::gameflag("prematch_done")) {
       scripts\cp\utility::freezecontrolswrapper(0);
+    }
 
     self.hostmigrationcontrolsfrozen = undefined;
   }
 }
 
 waittillhostmigrationdone() {
-  if(!isDefined(level.hostmigrationtimer))
+  if(!isDefined(level.hostmigrationtimer)) {
     return 0;
+  }
 
   var_00 = gettime();
   level waittill("host_migration_end");
@@ -177,8 +186,9 @@ matchstarttimer_internal(var_00) {
   while(var_00 > 0 && !level.gameended) {
     setomnvar("ui_match_start_countdown", var_00);
 
-    if(var_00 == 0)
+    if(var_00 == 0) {
       visionsetnaked("", 0);
+    }
 
     var_0--;
     wait 1.0;
@@ -188,8 +198,9 @@ matchstarttimer_internal(var_00) {
 }
 
 introvisionset() {
-  if(!isDefined(level.introvisionset))
+  if(!isDefined(level.introvisionset)) {
     level.introvisionset = "mpIntro";
+  }
 
   visionsetnaked(level.introvisionset, 0);
 }

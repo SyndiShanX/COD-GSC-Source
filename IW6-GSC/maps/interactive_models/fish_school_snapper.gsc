@@ -89,8 +89,9 @@ main() {
   var_0.line.tagmodels["28"] = 1;
   var_0.line.tagmodels["31"] = 1;
 
-  if(!isDefined(level._interactive))
+  if(!isDefined(level._interactive)) {
     level._interactive = [];
+  }
 
   level._interactive["fish_school_snapper"] = var_0;
   thread maps\interactive_models\fish_school_sardines::sardines(var_0);

@@ -6,19 +6,24 @@
 main(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 = "allies";
 
-  if(issubstr(var_02, "enemy"))
+  if(issubstr(var_02, "enemy")) {
     var_06 = "axis";
+  }
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     precachevehicle(var_03);
-  else
+  }
+  else {
     var_03 = var_01;
+  }
 
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     var_04 = 0;
+  }
 
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     var_05 = 0;
+  }
 
   if(var_01 == "jackal_un" || var_01 == "jackal_un_space") {
     precachevehicle(var_01 + "_thrustperk");
@@ -136,8 +141,10 @@ func_B323(var_00) {
 }
 
 func_57AF(var_00, var_01) {
-  if(var_00 == "axis")
+  if(var_00 == "axis") {
     scripts\sp\vehicle_build::func_31B0("veh_mil_air_ca_jackal_01_player", var_01);
-  else
+  }
+  else {
     scripts\sp\vehicle_build::func_31B0("veh_mil_air_un_jackal_02_player", var_01);
+  }
 }

@@ -27,8 +27,9 @@ _get_pegasus_death_model_fx_tag_array() {
 }
 
 precache_extra_models(is_2x) {
-  if(!isDefined(is_2x))
+  if(!isDefined(is_2x)) {
     is_2x = 0;
+  }
 
   if(is_2x) {
     a_models = _get_pegasus_death_model_2x_array();
@@ -45,8 +46,9 @@ precache_extra_models(is_2x) {
 }
 
 precache_crash_fx(is_2x) {
-  if(!isDefined(self.fx_crash_effects))
+  if(!isDefined(self.fx_crash_effects)) {
     self.fx_crash_effects = [];
+  }
 
   if(self.vehicletype == "drone_pegasus_fast_haiti") {
     return;
@@ -76,8 +78,9 @@ set_deathmodel(v_point, v_dir) {
     self playSound("evt_drone_explo_close");
     playsoundatposition("evt_debris_flythrough", self.origin);
 
-    if(isDefined(self.fx_crash_effects["fireball_trail_lg"]))
+    if(isDefined(self.fx_crash_effects["fireball_trail_lg"])) {
       playFXOnTag(self.fx_crash_effects["fireball_trail_lg"], self, "tag_origin");
+    }
   }
 
   deathmodel_pieces = [];
@@ -98,8 +101,9 @@ set_deathmodel(v_point, v_dir) {
     num_pieces = 1;
 
     if(isDefined(self.last_damage_mod)) {
-      if(self.last_damage_mod == "MOD_PROJECTILE")
+      if(self.last_damage_mod == "MOD_PROJECTILE") {
         num_pieces = 2;
+      }
     }
 
     for(i = 0; i < num_pieces; i++) {
@@ -109,8 +113,9 @@ set_deathmodel(v_point, v_dir) {
       deathmodel_pieces[i] thread rotate_dead_piece();
       deathmodel_pieces[i].b_launched = 1;
 
-      if(isDefined(self.fx_crash_effects["fire_trail_lg"]))
+      if(isDefined(self.fx_crash_effects["fire_trail_lg"])) {
         playFXOnTag(self.fx_crash_effects["fire_trail_lg"], deathmodel_pieces[i], "tag_origin");
+      }
     }
   }
 }
@@ -141,8 +146,9 @@ update_damage_states() {
     self waittill("damage");
 
     if(self.health <= self.maxhealth * 0.5) {
-      if(isDefined(self.fx_crash_effects["fire_trail_lg"]))
+      if(isDefined(self.fx_crash_effects["fire_trail_lg"])) {
         playFXOnTag(self.fx_crash_effects["fire_trail_lg"], self, "tag_origin");
+      }
 
       is_damaged = 1;
     }
@@ -155,8 +161,9 @@ clear_objective_model_on_death() {
   if(isDefined(self)) {
     self clearclientflag(15);
 
-    if(isDefined(level.f35_lockon_target) && level.f35_lockon_target == self)
+    if(isDefined(level.f35_lockon_target) && level.f35_lockon_target == self) {
       level.f35_lockon_target = undefined;
+    }
   }
 }
 
@@ -164,18 +171,21 @@ rotate_dead_piece() {
   self endon("death");
   torque = (0, randomintrange(-90, 90), randomintrange(90, 720));
 
-  if(randomint(100) < 50)
+  if(randomint(100) < 50) {
     torque = (torque[0], torque[1], torque[2] * -1);
+  }
 
   ang_vel = (0, 0, 0);
 
   while(isDefined(self)) {
     ang_vel = ang_vel + torque * 0.05;
 
-    if(ang_vel[2] < 500 * -1)
+    if(ang_vel[2] < 500 * -1) {
       ang_vel = (ang_vel[0], ang_vel[1], 500 * -1);
-    else if(ang_vel[2] > 500)
+    }
+    else if(ang_vel[2] > 500) {
       ang_vel = (ang_vel[0], ang_vel[1], 500);
+    }
 
     self.angles = self.angles + ang_vel * 0.05;
     wait 0.05;

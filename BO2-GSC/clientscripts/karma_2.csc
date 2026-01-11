@@ -50,10 +50,12 @@ face_swap(localclientnum, set, newent) {
 }
 
 glow_metal(localclientnum, set, newent) {
-  if(set)
+  if(set) {
     lerp_shader_constant(localclientnum, 0, "ScriptVector0", 1, 0.01, 1);
-  else
+  }
+  else {
     lerp_shader_constant(localclientnum, 0, "ScriptVector0", 1, 0.01, 0);
+  }
 }
 
 float_body(localclientnum, set, newent) {

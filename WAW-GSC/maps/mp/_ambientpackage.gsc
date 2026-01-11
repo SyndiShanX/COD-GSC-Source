@@ -28,10 +28,12 @@ monitor_for_player_leave_trigger(trigPlayer, useAmbientRoom, useAmbientPackage) 
     wait 0.1;
   }
   self.in_volume[trigPlayer getentitynumber()] = 0;
-  if(useAmbientPackage)
+  if(useAmbientPackage) {
     deactivateAmbientPackage(self.script_ambientpackage, self.script_ambientpriority, trigPlayer);
-  if(useAmbientRoom)
+  }
+  if(useAmbientRoom) {
     deactivateAmbientRoom(self.script_ambientroom, self.script_ambientpriority, trigPlayer);
+  }
 }
 
 player_entered_trigger(trigPlayer, useAmbientRoom, useAmbientPackage) {
@@ -40,10 +42,12 @@ player_entered_trigger(trigPlayer, useAmbientRoom, useAmbientPackage) {
     self.in_volume[index] = 0;
   }
   if(self.in_volume[index] == 0) {
-    if(useAmbientPackage)
+    if(useAmbientPackage) {
       activateAmbientPackage(self.script_ambientpackage, self.script_ambientpriority, trigPlayer);
-    if(useAmbientRoom)
+    }
+    if(useAmbientRoom) {
       activateAmbientRoom(self.script_ambientroom, self.script_ambientpriority, trigPlayer);
+    }
     self.in_volume[index] = 1;
     self thread monitor_for_player_leave_trigger(trigPlayer, useAmbientRoom, useAmbientPackage);
   }

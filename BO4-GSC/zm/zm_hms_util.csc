@@ -32,4 +32,3 @@ function_774b42ac() {
     waitframe(30);
   }
 }
-

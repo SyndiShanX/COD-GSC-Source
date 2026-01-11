@@ -53,11 +53,13 @@ main(var_00, var_01, var_02) {
   precacheturret("cap_turret_cannon_large_ca_zerog");
   precachemodel("veh_mil_air_ca_olympus_mons_gun_rig");
 
-  if(issubstr(var_02, "_damaged"))
+  if(issubstr(var_02, "_damaged")) {
     precachemodel("veh_mil_air_ca_olympus_mons_dmg");
+  }
 
-  if(issubstr(var_02, "_heistspace_end"))
+  if(issubstr(var_02, "_heistspace_end")) {
     precachemodel("veh_mil_air_ca_olympus_mons_heist_space");
+  }
 
   func_0BB6::func_12A89();
   scripts\sp\vehicle_build::func_31C6(var_02, "default", "vfx\iw7\core\tread\tread_airship_mons_titan.vfx", 0);
@@ -73,11 +75,13 @@ main(var_00, var_01, var_02) {
 }
 
 init_location() {
-  if(issubstr(self.classname, "_damaged"))
+  if(issubstr(self.classname, "_damaged")) {
     self.func_B210 = "veh_mil_air_ca_olympus_mons_dmg";
+  }
 
-  if(issubstr(self.classname, "_heistspace_end"))
+  if(issubstr(self.classname, "_heistspace_end")) {
     self.func_B210 = "veh_mil_air_ca_olympus_mons_heist_space";
+  }
 
   self.func_24C4 = ["tag_origin", "amb_turret_r_6", "amb_turret_sml_r_1", "amb_turret_l_5", "amb_turret_sml_r_6", "amb_turret_l_1", "amb_turret_sml_r_16", "amb_turret_sml_l_14", "fx_light_main_a_1", "fx_light_running_lrg_b3_4", "fx_light_running_lrg_b3_2", "amb_missile_l_4", "amb_missile_r_16", "amb_missile_r_25", "fx_entryburn_1"];
   thread func_0BA9::func_396E("ca");
@@ -122,15 +126,17 @@ init_location() {
   self.func_7499 = "mons_ca_warp_in";
   self.func_749A = 0.195;
 
-  if(self.classname != "script_vehicle_capitalship_mons_heistspace" && self.classname != "script_vehicle_capitalship_mons_damaged")
+  if(self.classname != "script_vehicle_capitalship_mons_heistspace" && self.classname != "script_vehicle_capitalship_mons_damaged") {
     thread func_245B();
+  }
 }
 
 func_7479() {
   wait 0.5;
 
-  if(isDefined(self.delay_warp_core))
+  if(isDefined(self.delay_warp_core)) {
     self waittill(self.delay_warp_core);
+  }
 
   self.func_7479 = 1;
   playFXOnTag(level._effect["vfx_vehicle_mons_warp_out_ftldrive_core"], self, "TAG_ORIGIN");
@@ -261,8 +267,9 @@ func_BA6A(var_00, var_01, var_02) {
   level endon("mons_cannon_targeting");
   level endon("removing_mons_cannon");
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 1;
+  }
 
   var_03 = "tag_fx";
 
@@ -292,10 +299,12 @@ func_BA6A(var_00, var_01, var_02) {
   var_01 = var_04 + var_01 * 1000;
 
   while(gettime() < var_01) {
-    if(var_02)
+    if(var_02) {
       var_06 = self.cannon getturrettarget(0).origin;
-    else
+    }
+    else {
       var_06 = self.cannon.func_11512.origin;
+    }
 
     var_07 = self.cannon gettagorigin(var_03);
     var_08 = self.cannon gettagangles(var_03);

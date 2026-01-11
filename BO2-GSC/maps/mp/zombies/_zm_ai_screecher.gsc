@@ -36,8 +36,9 @@ init() {
   level.zombie_ai_limit_screecher = 2;
   level.zombie_screecher_count = 0;
 
-  if(!isDefined(level.vsmgr_prio_overlay_zm_ai_screecher_blur))
+  if(!isDefined(level.vsmgr_prio_overlay_zm_ai_screecher_blur)) {
     level.vsmgr_prio_overlay_zm_ai_screecher_blur = 50;
+  }
 
   maps\mp\_visionset_mgr::vsmgr_register_info("overlay", "zm_ai_screecher_blur", 1, level.vsmgr_prio_overlay_zm_ai_screecher_blur, 1, 1, maps\mp\_visionset_mgr::vsmgr_timeout_lerp_thread_per_player, 0);
   level thread screecher_spawning_logic();
@@ -67,17 +68,21 @@ screecher_spawning_logic() {
   }
 
   while(true) {
-    while(!isDefined(level.zombie_screecher_locations) || level.zombie_screecher_locations.size <= 0)
+    while(!isDefined(level.zombie_screecher_locations) || level.zombie_screecher_locations.size <= 0) {
       wait 0.1;
+    }
 
-    while(level.zombie_screecher_count >= level.zombie_ai_limit_screecher)
+    while(level.zombie_screecher_count >= level.zombie_ai_limit_screecher) {
       wait 0.1;
+    }
 
-    while(getdvarint(#"scr_screecher_ignore_player"))
+    while(getdvarint(#"scr_screecher_ignore_player")) {
       wait 0.1;
+    }
 
-    if(!flag("spawn_zombies"))
+    if(!flag("spawn_zombies")) {
       flag_wait("spawn_zombies");
+    }
 
     valid_players_in_screecher_zone = 0;
     valid_players = [];
@@ -94,8 +99,9 @@ screecher_spawning_logic() {
       }
 
       if(players.size == 1) {
-        if(is_player_valid(players[0]) && !player_in_screecher_zone(players[0]))
+        if(is_player_valid(players[0]) && !player_in_screecher_zone(players[0])) {
           level.spawn_delay = 1;
+        }
       }
 
       wait 0.1;
@@ -113,15 +119,19 @@ screecher_spawning_logic() {
       spawn_points = get_array_of_closest(valid_players[0].origin, level.zombie_screecher_locations);
       spawn_point = undefined;
 
-      if(spawn_points.size >= 3)
+      if(spawn_points.size >= 3) {
         spawn_point = spawn_points[2];
-      else if(spawn_points.size >= 2)
+      }
+      else if(spawn_points.size >= 2) {
         spawn_point = spawn_points[1];
-      else if(spawn_points.size >= 1)
+      }
+      else if(spawn_points.size >= 1) {
         spawn_point = spawn_points[0];
+      }
 
-      if(isDefined(spawn_point))
+      if(isDefined(spawn_point)) {
         playsoundatposition("zmb_vocals_screecher_spawn", spawn_point.origin);
+      }
 
       delay_time = gettime() + 5000;
       now_zone = getent("screecher_spawn_now", "targetname");
@@ -139,8 +149,9 @@ screecher_spawning_logic() {
           break;
         }
 
-        if(player_in_screecher_zone(valid_players[0]))
+        if(player_in_screecher_zone(valid_players[0])) {
           in_zone = 1;
+        }
 
         if(!in_zone) {
           player_left_zone = 1;
@@ -182,15 +193,17 @@ screecher_spawning_logic() {
         level.last_spawn[level.last_spawn_index] = spawn_point;
         level.last_spawn_index++;
 
-        if(level.last_spawn_index > 1)
+        if(level.last_spawn_index > 1) {
           level.last_spawn_index = 0;
+        }
 
         break;
       }
     }
 
-    if(!isDefined(spawn_point))
+    if(!isDefined(spawn_point)) {
       spawn_point = spawn_points[0];
+    }
 
     if(isDefined(level.screecher_spawners)) {
       spawner = random(level.screecher_spawners);
@@ -232,8 +245,9 @@ screecher_should_runaway(player) {
     }
   }
 
-  if(isDefined(level.screecher_should_runaway))
+  if(isDefined(level.screecher_should_runaway)) {
     return self[[level.screecher_should_runaway]](player);
+  }
 
   return 0;
 }
@@ -242,30 +256,37 @@ screecher_get_closest_valid_player(origin, ignore_player) {
   valid_player_found = 0;
   players = get_players();
 
-  if(isDefined(level._zombie_using_humangun) && level._zombie_using_humangun)
+  if(isDefined(level._zombie_using_humangun) && level._zombie_using_humangun) {
     players = arraycombine(players, level._zombie_human_array, 0, 0);
+  }
 
   if(isDefined(ignore_player)) {
-    for(i = 0; i < ignore_player.size; i++)
+    for(i = 0; i < ignore_player.size; i++) {
       arrayremovevalue(players, ignore_player[i]);
+    }
   }
 
   while(!valid_player_found) {
-    if(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths)
+    if(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths) {
       player = get_closest_player_using_paths(origin, players);
-    else
+    }
+    else {
       player = getclosest(origin, players);
+    }
 
-    if(!isDefined(player))
+    if(!isDefined(player)) {
       return undefined;
+    }
 
-    if(isDefined(level._zombie_using_humangun) && level._zombie_using_humangun && isai(player))
+    if(isDefined(level._zombie_using_humangun) && level._zombie_using_humangun && isai(player)) {
       return player;
+    }
 
     screecher_claimed = isDefined(player.screecher) && player.screecher != self;
 
-    if(players.size == 1 && screecher_claimed)
+    if(players.size == 1 && screecher_claimed) {
       return undefined;
+    }
 
     if(!is_player_valid(player, 1) || !player_in_screecher_zone(player) || screecher_claimed) {
       arrayremovevalue(players, player);
@@ -309,15 +330,18 @@ screecher_find_flesh() {
   while(true) {
     self.favoriteenemy = screecher_get_closest_valid_player(self.origin);
 
-    if(isDefined(self.favoriteenemy))
+    if(isDefined(self.favoriteenemy)) {
       self thread zombie_pathing();
-    else
+    }
+    else {
       self thread screecher_runaway();
+    }
 
     self.zombie_path_timer = gettime() + randomfloatrange(1, 3) * 1000;
 
-    while(gettime() < self.zombie_path_timer)
+    while(gettime() < self.zombie_path_timer) {
       wait 0.1;
+    }
 
     self notify("path_timer_done");
     self zombie_history("find flesh -> bottom of loop");
@@ -342,8 +366,9 @@ screecher_prespawn() {
   if(isDefined(self.spawn_point)) {
     spot = self.spawn_point;
 
-    if(!isDefined(spot.angles))
+    if(!isDefined(spot.angles)) {
       spot.angles = (0, 0, 0);
+    }
 
     self forceteleport(spot.origin, spot.angles);
   } else {
@@ -379,8 +404,9 @@ screecher_prespawn() {
   self.player_score = 0;
   self.screecher_score = 0;
 
-  if(isDefined(level.screecher_init_done))
+  if(isDefined(level.screecher_init_done)) {
     self thread[[level.screecher_init_done]]();
+  }
 }
 
 play_screecher_fx() {
@@ -399,8 +425,9 @@ play_screecher_damaged_yelps() {
   while(true) {
     self waittill("damage", damage, attacker, dir, point, mod);
 
-    if(isDefined(attacker) && isplayer(attacker))
+    if(isDefined(attacker) && isplayer(attacker)) {
       self playSound("zmb_vocals_screecher_pain");
+    }
   }
 }
 
@@ -482,10 +509,12 @@ screecher_attack() {
   self endon("death");
   player = self.favoriteenemy;
 
-  if(isDefined(player.screecher))
+  if(isDefined(player.screecher)) {
     return;
-  else
+  }
+  else {
     player.screecher = self;
+  }
 
   self notify("stop_find_flesh");
   self notify("zombie_acquire_enemy");
@@ -570,8 +599,9 @@ screecher_fly_to_player(player) {
 }
 
 finish_planting_equipment() {
-  while(self isthrowinggrenade() && is_equipment(self getcurrentweapon()))
+  while(self isthrowinggrenade() && is_equipment(self getcurrentweapon())) {
     wait 0.05;
+  }
 }
 
 screecher_start_attack() {
@@ -596,8 +626,9 @@ screecher_start_attack() {
       }
     } else if(player.screecher_weapon == "riotshield_zm")
       player switchtoweaponimmediate("screecher_arms_zm");
-    else
+    else {
       player switchtoweapon("screecher_arms_zm");
+    }
 
     player increment_is_drinking();
     wait 0.5;
@@ -616,8 +647,9 @@ screecher_start_attack() {
     self.state = "attacking";
     self.attack_time = gettime();
 
-    if(!getdvarint(#"scr_screecher_poison"))
+    if(!getdvarint(#"scr_screecher_poison")) {
       player startpoisoning();
+    }
 
     self thread screecher_player_down();
   } else
@@ -729,25 +761,30 @@ screecher_detach(player) {
   if(isDefined(player)) {
     player clientnotify("scrEnd");
 
-    if(!(isDefined(player.isonbus) && player.isonbus))
+    if(!(isDefined(player.isonbus) && player.isonbus)) {
       player allowprone(1);
+    }
 
     player takeweapon("screecher_arms_zm");
 
-    if(!getdvarint(#"scr_screecher_poison"))
+    if(!getdvarint(#"scr_screecher_poison")) {
       player stoppoisoning();
+    }
 
-    if(!player maps\mp\zombies\_zm_laststand::player_is_in_laststand() && !(isDefined(player.intermission) && player.intermission))
+    if(!player maps\mp\zombies\_zm_laststand::player_is_in_laststand() && !(isDefined(player.intermission) && player.intermission)) {
       player decrement_is_drinking();
+    }
 
-    if(isDefined(player.screecher_weapon) && player.screecher_weapon != "none" && is_player_valid(player) && !is_equipment_that_blocks_purchase(player.screecher_weapon))
+    if(isDefined(player.screecher_weapon) && player.screecher_weapon != "none" && is_player_valid(player) && !is_equipment_that_blocks_purchase(player.screecher_weapon)) {
       player switchtoweapon(player.screecher_weapon);
+    }
     else if(flag("solo_game") && player hasperk("specialty_quickrevive")) {
     } else if(!player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
       primaryweapons = player getweaponslistprimaries();
 
-      if(isDefined(primaryweapons) && primaryweapons.size > 0)
+      if(isDefined(primaryweapons) && primaryweapons.size > 0) {
         player switchtoweapon(primaryweapons[0]);
+      }
     }
 
     player.screecher_weapon = undefined;
@@ -808,8 +845,9 @@ claw_fx(player, timeout) {
   self endon("death");
   claw_timeout = 0.25;
 
-  if(!isDefined(self.claw_fx))
+  if(!isDefined(self.claw_fx)) {
     self create_claw_fx_hud(player);
+  }
 
   self choose_claw_fx();
   self.claw_fx fadeovertime(claw_timeout);
@@ -822,8 +860,9 @@ screecher_cleanup() {
   self waittill("death", attacker);
 
   if(isDefined(attacker) && isplayer(attacker)) {
-    if(isDefined(self.damagelocation) && isDefined(self.damagemod))
+    if(isDefined(self.damagelocation) && isDefined(self.damagemod)) {
       level thread maps\mp\zombies\_zm_audio::player_zombie_kill_vox(self.damagelocation, attacker, self.damagemod, self);
+    }
   }
 
   if(isDefined(self.loopsoundent)) {
@@ -841,38 +880,46 @@ screecher_cleanup() {
     if(isDefined(player.screecher_weapon)) {
       player clientnotify("scrEnd");
 
-      if(!(isDefined(player.isonbus) && player.isonbus))
+      if(!(isDefined(player.isonbus) && player.isonbus)) {
         player allowprone(1);
+      }
 
       player takeweapon("screecher_arms_zm");
 
-      if(!getdvarint(#"scr_screecher_poison"))
+      if(!getdvarint(#"scr_screecher_poison")) {
         player stoppoisoning();
+      }
 
-      if(!player maps\mp\zombies\_zm_laststand::player_is_in_laststand() && !(isDefined(player.intermission) && player.intermission))
+      if(!player maps\mp\zombies\_zm_laststand::player_is_in_laststand() && !(isDefined(player.intermission) && player.intermission)) {
         player decrement_is_drinking();
+      }
 
-      if(player.screecher_weapon != "none" && is_player_valid(player))
+      if(player.screecher_weapon != "none" && is_player_valid(player)) {
         player switchtoweapon(player.screecher_weapon);
+      }
       else {
         primaryweapons = player getweaponslistprimaries();
 
-        if(isDefined(primaryweapons) && primaryweapons.size > 0)
+        if(isDefined(primaryweapons) && primaryweapons.size > 0) {
           player switchtoweapon(primaryweapons[0]);
+        }
       }
 
       player.screecher_weapon = undefined;
     }
   }
 
-  if(isDefined(self.claw_fx))
+  if(isDefined(self.claw_fx)) {
     self.claw_fx destroy();
+  }
 
-  if(isDefined(self.anchor))
+  if(isDefined(self.anchor)) {
     self.anchor delete();
+  }
 
-  if(isDefined(level.screecher_cleanup))
+  if(isDefined(level.screecher_cleanup)) {
     self[[level.screecher_cleanup]]();
+  }
 
   if(level.zombie_screecher_count > 0) {
     level.zombie_screecher_count--;
@@ -909,8 +956,9 @@ screecher_distance_tracking() {
     if(can_delete) {
       self notify("zombie_delete");
 
-      if(isDefined(self.anchor))
+      if(isDefined(self.anchor)) {
         self.anchor delete();
+      }
 
       self delete();
       recalc_zombie_array();
@@ -929,8 +977,9 @@ screecher_melee_button_watcher() {
     if(player meleebuttonpressed() && player ismeleeing()) {
       self screecher_melee_damage(player);
 
-      while(player meleebuttonpressed() || player ismeleeing())
+      while(player meleebuttonpressed() || player ismeleeing()) {
         wait 0.05;
+      }
     }
 
     wait 0.05;
@@ -942,19 +991,24 @@ screecher_melee_damage(player) {
   melee_score = 0;
 
   if(player hasweapon("bowie_knife_zm")) {
-    if(one_player)
+    if(one_player) {
       melee_score = 30;
-    else
+    }
+    else {
       melee_score = 10;
+    }
   } else if(player hasweapon("tazer_knuckles_zm")) {
-    if(one_player)
+    if(one_player) {
       melee_score = 30;
-    else
+    }
+    else {
       melee_score = 15;
+    }
   } else if(one_player)
     melee_score = 15;
-  else
+  else {
     melee_score = 6;
+  }
 
   extra_score = 0;
 
@@ -969,27 +1023,32 @@ screecher_melee_damage(player) {
   if(self.screecher_score <= 0 || one_player) {
     self.player_score = self.player_score + melee_score;
 
-    if(extra_score > 0)
+    if(extra_score > 0) {
       self.player_score = self.player_score + extra_score;
+    }
   }
 
   self playSound("zmb_vocals_screecher_pain");
 
-  if(level.zombie_vars[player.team]["zombie_insta_kill"])
+  if(level.zombie_vars[player.team]["zombie_insta_kill"]) {
     self.player_score = 30;
-  else
+  }
+  else {
     player thread do_player_general_vox("general", "screecher_cut");
+  }
 
-  if(getdvarint(#"_id_6A65F83E"))
+  if(getdvarint(#"_id_6A65F83E")) {
     self.player_score = 30;
+  }
 
   self screecher_check_score();
 }
 
 screecher_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
   if(isDefined(self.linked_ent)) {
-    if(isplayer(einflictor) && smeansofdeath == "MOD_MELEE")
+    if(isplayer(einflictor) && smeansofdeath == "MOD_MELEE") {
       return 0;
+    }
   }
 
   return idamage;
@@ -1023,8 +1082,9 @@ screecher_check_score() {
 
     self dodamage(self.health + 666, self.origin);
   } else if(self.screecher_score >= 15) {
-    if(getdvarint(#"_id_6A65F83E"))
+    if(getdvarint(#"_id_6A65F83E")) {
       return false;
+    }
 
     player = self.linked_ent;
 
@@ -1074,8 +1134,9 @@ screecher_print(str) {
     iprintln("screecher: " + str + "\\n");
 
     if(isDefined(self)) {
-      if(isDefined(self.debug_msg))
+      if(isDefined(self.debug_msg)) {
         self.debug_msg[self.debug_msg.size] = str;
+      }
       else {
         self.debug_msg = [];
         self.debug_msg[self.debug_msg.size] = str;

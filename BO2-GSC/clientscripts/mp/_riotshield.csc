@@ -42,8 +42,9 @@ riotshield_deploy_anim(localclientnum, instant) {
     playFXOnTag(localclientnum, level._effect["riotshield_dust"], self, "tag_origin");
   }
 
-  if(!instant)
+  if(!instant) {
     wait 0.8;
+  }
 
   self.shieldlightfx = playFXOnTag(localclientnum, level._effect["riotshield_light"], self, "tag_fx");
 }
@@ -55,18 +56,21 @@ watch_riotshield_damage() {
     self waittill("damage", damage_loc, damage_type);
     self useanimtree(#animtree);
 
-    if(damage_type == "MOD_MELEE")
+    if(damage_type == "MOD_MELEE") {
       self setanim( % o_riot_stand_melee_front, 1.0, 0.0, 1.0);
-    else
+    }
+    else {
       self setanim( % o_riot_stand_shot, 1.0, 0.0, 1.0);
+    }
   }
 }
 
 riotshield_destroy_anim(localclientnum) {
   self endon("entityshutdown");
 
-  if(isDefined(self.shieldlightfx))
+  if(isDefined(self.shieldlightfx)) {
     stopfx(localclientnum, self.shieldlightfx);
+  }
 
   wait 0.05;
   self playSound(localclientnum, "wpn_shield_destroy");

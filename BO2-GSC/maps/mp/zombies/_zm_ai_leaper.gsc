@@ -33,8 +33,9 @@ init() {
   leaper_spawner_init();
   leaper_calc_anim_offsets();
 
-  if(!isDefined(level.leapers_per_player))
+  if(!isDefined(level.leapers_per_player)) {
     level.leapers_per_player = 2;
+  }
 
   level.no_jump_triggers = getEntArray("leaper_no_jump_trigger", "targetname");
 }
@@ -87,8 +88,9 @@ leaper_spawner_init() {
   level.leaper_health = 100;
   array_thread(level.leaper_spawners, ::add_spawn_function, ::leaper_init);
 
-  if(isDefined(level.leaper_rounds_enabled) && level.leaper_rounds_enabled)
+  if(isDefined(level.leaper_rounds_enabled) && level.leaper_rounds_enabled) {
     level thread leaper_spawner_zone_check();
+  }
 }
 
 leaper_spawner_zone_check() {
@@ -129,8 +131,9 @@ leaper_init() {
   if(isDefined(self.spawn_point)) {
     spot = self.spawn_point;
 
-    if(!isDefined(spot.angles))
+    if(!isDefined(spot.angles)) {
       spot.angles = (0, 0, 0);
+    }
 
     self forceteleport(spot.origin, spot.angles);
   }
@@ -154,8 +157,9 @@ leaper_init() {
   self maps\mp\zombies\_zm_spawner::zombie_complete_emerging_into_playable_area();
   self setfreecameralockonallowed(0);
 
-  if(isDefined(self.spawn_point.script_parameters) && (self.spawn_point.script_parameters == "emerge_bottom" || self.spawn_point.script_parameters == "emerge_top"))
+  if(isDefined(self.spawn_point.script_parameters) && (self.spawn_point.script_parameters == "emerge_bottom" || self.spawn_point.script_parameters == "emerge_top")) {
     self thread do_leaper_emerge(self.spawn_point);
+  }
 
   self thread leaper_death();
   self thread leaper_check_zone();
@@ -197,8 +201,9 @@ leaper_death() {
   if(isplayer(self.attacker)) {
     event = "death";
 
-    if(issubstr(self.damageweapon, "knife_ballistic_"))
+    if(issubstr(self.damageweapon, "knife_ballistic_")) {
       event = "ballistic_knife_death";
+    }
 
     self.attacker thread do_player_general_vox("general", "leaper_killed", 20, 20);
     self.attacker maps\mp\zombies\_zm_score::player_add_points(event, self.damagemod, self.damagelocation, 1);
@@ -237,47 +242,55 @@ leaper_can_use_anim(local_mid, local_end, dir) {
   end_bottom = end + vectorscale((0, 0, -1), 60.0);
   trace = bulletTrace(start, mid, 1, self);
 
-  if(isDefined(trace["entity"]))
+  if(isDefined(trace["entity"])) {
     return false;
+  }
 
   if(isDefined(trace["fraction"]) && trace["fraction"] < 1) {
     if(trace["fraction"] < 0.2) {
-      if(getdvarint(#"_id_5B4FE0B3") == 1)
+      if(getdvarint(#"_id_5B4FE0B3") == 1) {
         line(start, mid, (1, 0, 0), 1, 0, 100);
+      }
 
       return false;
     }
 
     if(dir == "up") {
-      if(trace["fraction"] < 0.9)
+      if(trace["fraction"] < 0.9) {
         return false;
+      }
     }
 
     mid = trace["position"];
 
-    if(getdvarint(#"_id_5B4FE0B3") >= 1)
+    if(getdvarint(#"_id_5B4FE0B3") >= 1) {
       line(start, mid, (0, 1, 0), 1, 0, 100);
+    }
 
     if(dir != "up") {
       trace = bulletTrace(forward_org, real_mid, 1, self);
 
-      if(isDefined(trace["entity"]))
+      if(isDefined(trace["entity"])) {
         return false;
+      }
 
       if(isDefined(trace["fraction"]) && trace["fraction"] < 1) {
-        if(getdvarint(#"_id_5B4FE0B3") == 1)
+        if(getdvarint(#"_id_5B4FE0B3") == 1) {
           line(forward_org, real_mid, (1, 0, 0), 1, 0, 100);
+        }
 
       } else {
-        if(getdvarint(#"_id_5B4FE0B3") == 1)
+        if(getdvarint(#"_id_5B4FE0B3") == 1) {
           line(forward_org, real_mid, (0, 1, 0), 1, 0, 100);
+        }
 
         return false;
       }
     }
   } else {
-    if(getdvarint(#"_id_5B4FE0B3") == 1)
+    if(getdvarint(#"_id_5B4FE0B3") == 1) {
       line(start, mid, (1, 0, 0), 1, 0, 100);
+    }
 
     return false;
   }
@@ -285,26 +298,30 @@ leaper_can_use_anim(local_mid, local_end, dir) {
   trace = bulletTrace(mid, end, 1, self);
 
   if(isDefined(trace["fraction"]) && trace["fraction"] < 1) {
-    if(getdvarint(#"_id_5B4FE0B3") == 1)
+    if(getdvarint(#"_id_5B4FE0B3") == 1) {
       line(mid, end, (1, 0, 0), 1, 0, 100);
+    }
 
     return false;
   } else {
-    if(getdvarint(#"_id_5B4FE0B3") >= 1)
+    if(getdvarint(#"_id_5B4FE0B3") >= 1) {
       line(mid, end, (0, 1, 0), 1, 0, 100);
+    }
 
   }
 
   trace = bulletTrace(end_top, end_bottom, 1, self);
 
   if(isDefined(trace["fraction"]) && trace["fraction"] >= 1) {
-    if(getdvarint(#"_id_5B4FE0B3") == 1)
+    if(getdvarint(#"_id_5B4FE0B3") == 1) {
       line(end_top, end_bottom, (1, 0, 0), 1, 0, 100);
+    }
 
     return false;
   } else {
-    if(getdvarint(#"_id_5B4FE0B3") >= 1)
+    if(getdvarint(#"_id_5B4FE0B3") >= 1) {
       line(end_top, end_bottom, (0, 1, 0), 1, 0, 100);
+    }
 
   }
 
@@ -327,8 +344,9 @@ leaper_building_jump() {
 leaper_check_wall() {
   self endon("death");
 
-  if(!isDefined(self.next_leap_time))
+  if(!isDefined(self.next_leap_time)) {
     self.next_leap_time = gettime() + 500;
+  }
 
   if(is_true(self.sliding_on_goo) || is_true(self.is_leaping)) {
     return;
@@ -336,18 +354,23 @@ leaper_check_wall() {
   if(gettime() > self.next_leap_time && !is_true(self.no_jump)) {
     wall_anim = [];
 
-    if(self leaper_can_use_anim(level.leaper_anim.up_mid, level.leaper_anim.up_end, "up"))
+    if(self leaper_can_use_anim(level.leaper_anim.up_mid, level.leaper_anim.up_end, "up")) {
       wall_anim[wall_anim.size] = "zm_wall_up";
+    }
 
-    if(self leaper_can_use_anim(level.leaper_anim.left_mid, level.leaper_anim.left_end, "left"))
+    if(self leaper_can_use_anim(level.leaper_anim.left_mid, level.leaper_anim.left_end, "left")) {
       wall_anim[wall_anim.size] = "zm_wall_left";
-    else if(self leaper_can_use_anim(level.leaper_anim.left_large_mid, level.leaper_anim.left_large_end, "left_large"))
+    }
+    else if(self leaper_can_use_anim(level.leaper_anim.left_large_mid, level.leaper_anim.left_large_end, "left_large")) {
       wall_anim[wall_anim.size] = "zm_wall_left_large";
+    }
 
-    if(self leaper_can_use_anim(level.leaper_anim.right_mid, level.leaper_anim.right_end, "right"))
+    if(self leaper_can_use_anim(level.leaper_anim.right_mid, level.leaper_anim.right_end, "right")) {
       wall_anim[wall_anim.size] = "zm_wall_right";
-    else if(self leaper_can_use_anim(level.leaper_anim.right_large_mid, level.leaper_anim.right_large_end, "right_large"))
+    }
+    else if(self leaper_can_use_anim(level.leaper_anim.right_large_mid, level.leaper_anim.right_large_end, "right_large")) {
       wall_anim[wall_anim.size] = "zm_wall_right_large";
+    }
 
     b_should_play_wall_jump_anim = !self isinscriptedstate() && wall_anim.size > 0;
 
@@ -428,8 +451,9 @@ leaper_start_trail_fx() {
 }
 
 leaper_stop_trail_fx() {
-  if(isDefined(self.trail_fx))
+  if(isDefined(self.trail_fx)) {
     self.trail_fx delete();
+  }
 }
 
 leaper_play_anim() {
@@ -497,8 +521,9 @@ leaper_round_spawning() {
   level endon("leaper_round_ending");
   level.leaper_targets = getplayers();
 
-  for(i = 0; i < level.leaper_targets.size; i++)
+  for(i = 0; i < level.leaper_targets.size; i++) {
     level.leaper_targets[i].hunted_by = 0;
+  }
 
   level endon("kill_round");
 
@@ -516,10 +541,12 @@ leaper_round_spawning() {
   playsoundatposition("vox_zmba_event_dogstart_0", (0, 0, 0));
   wait 1;
 
-  if(level.leaper_round_count < 3)
+  if(level.leaper_round_count < 3) {
     max = players.size * level.leapers_per_player;
-  else
+  }
+  else {
     max = players.size * level.leapers_per_player;
+  }
 
   level.zombie_total = max;
   leaper_health_increase();
@@ -546,8 +573,9 @@ leaper_round_spawning() {
     num_player_valid = get_number_of_valid_players();
     per_player = 2;
 
-    if(getdvarint(#"_id_5A273E4B") == 2)
+    if(getdvarint(#"_id_5A273E4B") == 2) {
       per_player = 1;
+    }
 
     while(get_current_zombie_count() >= num_player_valid * per_player) {
       wait 2;
@@ -587,13 +615,15 @@ leaper_round_accuracy_tracking() {
     total_shots_end_leaper_round = players[i] maps\mp\gametypes_zm\_globallogic_score::getpersstat("total_shots") - players[i].total_shots_start_leaper_round;
     total_hits_end_leaper_round = players[i] maps\mp\gametypes_zm\_globallogic_score::getpersstat("hits") - players[i].total_hits_start_leaper_round;
 
-    if(total_shots_end_leaper_round == total_hits_end_leaper_round)
+    if(total_shots_end_leaper_round == total_hits_end_leaper_round) {
       level.leaper_round_accurate_players++;
+    }
   }
 
   if(level.leaper_round_accurate_players == players.size) {
-    for(i = 0; i < players.size; i++)
+    for(i = 0; i < players.size; i++) {
       players[i] maps\mp\zombies\_zm_score::add_to_player_score(2000);
+    }
 
     if(isDefined(level.last_leaper_origin)) {
       trace = groundtrace(level.last_leaper_origin + vectorscale((0, 0, 1), 10.0), level.last_leaper_origin + vectorscale((0, 0, -1), 150.0), 0, undefined, 1);
@@ -606,33 +636,40 @@ leaper_round_accuracy_tracking() {
 leaper_round_wait() {
   level endon("restart_round");
 
-  if(getdvarint(#"_id_FA81816F") == 2 || getdvarint(#"_id_FA81816F") >= 4)
+  if(getdvarint(#"_id_FA81816F") == 2 || getdvarint(#"_id_FA81816F") >= 4) {
     level waittill("forever");
+  }
 
   wait 1;
 
   if(flag("leaper_round")) {
     wait 7;
 
-    while(level.leaper_intermission)
+    while(level.leaper_intermission) {
       wait 0.5;
+    }
   }
 }
 
 leaper_health_increase() {
   players = getplayers();
 
-  if(level.leaper_round_count == 1)
+  if(level.leaper_round_count == 1) {
     level.leaper_health = 400;
-  else if(level.leaper_round_count == 2)
+  }
+  else if(level.leaper_round_count == 2) {
     level.leaper_health = 900;
-  else if(level.leaper_round_count == 3)
+  }
+  else if(level.leaper_round_count == 3) {
     level.leaper_health = 1300;
-  else if(level.leaper_round_count == 4)
+  }
+  else if(level.leaper_round_count == 4) {
     level.leaper_health = 1600;
+  }
 
-  if(level.leaper_health > 1600)
+  if(level.leaper_health > 1600) {
     level.leaper_health = 1600;
+  }
 }
 
 get_favorite_enemy() {
@@ -640,17 +677,20 @@ get_favorite_enemy() {
   least_hunted = leaper_targets[0];
 
   for(i = 0; i < leaper_targets.size; i++) {
-    if(!isDefined(leaper_targets[i].hunted_by))
+    if(!isDefined(leaper_targets[i].hunted_by)) {
       leaper_targets[i].hunted_by = 0;
+    }
 
     if(!is_player_valid(leaper_targets[i])) {
       continue;
     }
-    if(!is_player_valid(least_hunted))
+    if(!is_player_valid(least_hunted)) {
       least_hunted = leaper_targets[i];
+    }
 
-    if(leaper_targets[i].hunted_by < least_hunted.hunted_by)
+    if(leaper_targets[i].hunted_by < least_hunted.hunted_by) {
       least_hunted = leaper_targets[i];
+    }
   }
 
   least_hunted.hunted_by = least_hunted.hunted_by + 1;
@@ -661,8 +701,9 @@ leaper_watch_enemy() {
   self endon("death");
 
   while(true) {
-    if(!is_player_valid(self.favoriteenemy))
+    if(!is_player_valid(self.favoriteenemy)) {
       self.favoriteenemy = get_favorite_enemy();
+    }
 
     wait 0.2;
   }
@@ -678,8 +719,9 @@ leaper_spawn_logic_old(leaper_array, favorite_enemy) {
 
   for(i = 0; i < leaper_locs.size; i++) {
     if(leaper_locs.size > 1) {
-      if(isDefined(level.old_leaper_spawn) && level.old_leaper_spawn == leaper_locs[i])
+      if(isDefined(level.old_leaper_spawn) && level.old_leaper_spawn == leaper_locs[i]) {
         continue;
+      }
     }
 
     dist_squared = distancesquared(leaper_locs[i].origin, favorite_enemy.origin);
@@ -698,32 +740,37 @@ leaper_spawn_logic(leaper_array, favorite_enemy) {
   a_zones_occupied = [];
 
   foreach(zone in a_zones_active) {
-    if(level.zones[zone].is_occupied)
+    if(level.zones[zone].is_occupied) {
       a_zones_occupied[a_zones_occupied.size] = zone;
+    }
   }
 
   a_leaper_spawn_points = [];
 
-  foreach(zone in a_zones_occupied)
+  foreach(zone in a_zones_occupied) {
   a_leaper_spawn_points = arraycombine(a_leaper_spawn_points, level.zones[zone].leaper_locations, 0, 0);
+  }
 
   if(a_leaper_spawn_points.size == 0) {
-    foreach(zone in a_zones_active)
+    foreach(zone in a_zones_active) {
     a_leaper_spawn_points = arraycombine(a_leaper_spawn_points, level.zones[zone].leaper_locations, 0, 0);
+    }
   }
 
   if(a_leaper_spawn_points.size == 0) {
     str_zone_list_occupied = "";
     a_keys_error = getarraykeys(a_zones_occupied);
 
-    foreach(key in a_zones_occupied)
+    foreach(key in a_zones_occupied) {
     str_zone_list_occupied = str_zone_list_occupied + "" + key;
+    }
 
     str_zone_list_active = "";
     a_keys_error = getarraykeys(a_zones_active);
 
-    foreach(key in a_zones_active)
+    foreach(key in a_zones_active) {
     str_zone_list_active = str_zone_list_active + "" + key;
+    }
 
     assertmsg("No leaper spawn locations were found in any of the occupied or active zones. Occupied zones: " + str_zone_list_occupied + ". Active zones: " + str_zone_list_active);
 
@@ -762,8 +809,9 @@ select_leaper_spawn_point(a_spawn_points) {
   if(a_valid_nodes.size == 0) {
     iprintln("All leaper spawns used...resetting");
 
-    for(i = 0; i < a_spawn_points.size; i++)
+    for(i = 0; i < a_spawn_points.size; i++) {
       a_spawn_points[i].has_spawned_leaper_this_round = 0;
+    }
 
     a_valid_nodes = get_valid_spawner_array(a_spawn_points);
   }
@@ -787,11 +835,13 @@ get_valid_spawner_array(a_spawn_points) {
     if(isDefined(a_spawn_points[i].is_blocked) && a_spawn_points[i].is_blocked || !(isDefined(a_spawn_points[i].is_enabled) && a_spawn_points[i].is_enabled) || isDefined(a_spawn_points[i].is_spawning) && a_spawn_points[i].is_spawning) {
       continue;
     }
-    if(!isDefined(a_spawn_points[i].has_spawned_leaper_this_round))
+    if(!isDefined(a_spawn_points[i].has_spawned_leaper_this_round)) {
       a_spawn_points[i].has_spawned_leaper_this_round = 0;
+    }
 
-    if(!a_spawn_points[i].has_spawned_leaper_this_round)
+    if(!a_spawn_points[i].has_spawned_leaper_this_round) {
       a_valid_nodes[a_valid_nodes.size] = a_spawn_points[i];
+    }
   }
 
   return a_valid_nodes;
@@ -815,14 +865,18 @@ leaper_spawn_fx(ai, ent) {
 waiting_for_next_leaper_spawn(count, max) {
   default_wait = 1.5;
 
-  if(level.leaper_round_count == 1)
+  if(level.leaper_round_count == 1) {
     default_wait = 3;
-  else if(level.leaper_round_count == 2)
+  }
+  else if(level.leaper_round_count == 2) {
     default_wait = 2.5;
-  else if(level.leaper_round_count == 3)
+  }
+  else if(level.leaper_round_count == 3) {
     default_wait = 2;
-  else
+  }
+  else {
     default_wait = 1.5;
+  }
 
   default_wait = default_wait - count / max;
   default_wait = clamp(default_wait, 0, 3);
@@ -839,8 +893,9 @@ leaper_round_aftermath() {
     power_up_origin = trace["position"];
   }
 
-  if(isDefined(power_up_origin))
+  if(isDefined(power_up_origin)) {
     level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("full_ammo", power_up_origin);
+  }
 
   wait 2;
   clientnotify("leaper_stop");
@@ -897,10 +952,12 @@ leaper_playable_area_failsafe() {
     b_outside_playable_space_this_frame = is_leaper_outside_playable_space(playable_area);
     n_current_time = gettime();
 
-    if(b_outside_playable_space_this_frame && !b_outside_playable_last_check)
+    if(b_outside_playable_space_this_frame && !b_outside_playable_last_check) {
       self.leaper_outside_playable_space_time = n_current_time;
-    else if(!b_outside_playable_space_this_frame)
+    }
+    else if(!b_outside_playable_space_this_frame) {
       self.leaper_outside_playable_space = -1;
+    }
 
     b_leaper_has_been_alive_long_enough = n_current_time - self.leaper_failsafe_start_time > 3000;
     b_leaper_is_in_scripted_state = self isinscriptedstate();
@@ -913,8 +970,9 @@ leaper_playable_area_failsafe() {
 
       str_traversal_data = "";
 
-      if(isDefined(self.traversestartnode))
+      if(isDefined(self.traversestartnode)) {
         str_traversal_data = " Last traversal used = " + self.traversestartnode.animscript + " at " + self.traversestartnode.origin;
+      }
 
       iprintln("leaper at " + self.origin + " with spawn point " + self.spawn_point.origin + " out of play space. DELETING!" + str_traversal_data);
 
@@ -930,8 +988,9 @@ is_leaper_outside_playable_space(playable_area) {
   b_outside_play_space = 1;
 
   foreach(area in playable_area) {
-    if(self istouching(area))
+    if(self istouching(area)) {
       b_outside_play_space = 0;
+    }
   }
 
   return b_outside_play_space;
@@ -953,8 +1012,9 @@ leaper_spawn_failsafe() {
     dist_sq = 0;
 
     for(i = 0; i < 3; i++) {
-      if(is_true(self.sliding_on_goo))
+      if(is_true(self.sliding_on_goo)) {
         dist_sq = dist_sq + 576;
+      }
 
       wait 1;
       dist_sq = dist_sq + distancesquared(self.origin, prevorigin);
@@ -967,16 +1027,18 @@ leaper_spawn_failsafe() {
 
         str_traversal_data = "";
 
-        if(isDefined(self.traversestartnode))
+        if(isDefined(self.traversestartnode)) {
           str_traversal_data = " Last traversal used = " + self.traversestartnode.animscript + " at " + self.traversestartnode.origin;
+        }
 
         iprintln("leaper_spawn_failsafe() killing leaper at " + self.origin + " with spawn point " + self.spawn_point.origin + "!\\n" + str_traversal_data);
 
         self dodamage(self.health + 100, (0, 0, 0));
         break;
       } else {
-        if(getdvarint(#"_id_5A273E4B") == 1)
+        if(getdvarint(#"_id_5A273E4B") == 1) {
           iprintln("leaper tried melee");
+        }
 
         self.melee_attack = 0;
       }
@@ -996,8 +1058,9 @@ do_leaper_emerge(spot) {
   self thread maps\mp\zombies\_zm_spawner::hide_pop();
   self thread leaper_death_wait("spawn_anim");
 
-  if(isDefined(level.custom_faller_entrance_logic))
+  if(isDefined(level.custom_faller_entrance_logic)) {
     self thread[[level.custom_faller_entrance_logic]]();
+  }
 
   self leaper_emerge();
   wait 0.1;
@@ -1020,10 +1083,12 @@ leaper_death_wait(endon_notify) {
 leaper_emerge() {
   self endon("death");
 
-  if(self.spawn_point.script_parameters == "emerge_bottom")
+  if(self.spawn_point.script_parameters == "emerge_bottom") {
     self animscripted(self.spawn_point.origin, self.spawn_point.angles, "zm_spawn_elevator_from_floor");
-  else
+  }
+  else {
     self animscripted(self.spawn_point.origin, self.spawn_point.angles, "zm_spawn_elevator_from_ceiling");
+  }
 
   self maps\mp\animscripts\zm_shared::donotetracks("spawn_anim");
   self.deathfunction = maps\mp\zombies\_zm_spawner::zombie_death_animscript;
@@ -1101,8 +1166,9 @@ check_traverse_height() {
   if(isDefined(self.traversestartnode)) {
     traverse_height = self.traversestartnode.origin[2] - self.origin[2];
 
-    if(traverse_height > 300)
+    if(traverse_height > 300) {
       return true;
+    }
   }
 
   return false;

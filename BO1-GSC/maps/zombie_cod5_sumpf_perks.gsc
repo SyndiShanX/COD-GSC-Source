@@ -65,8 +65,9 @@ get_vending_machine(start_location) {
       machine = machine_array[i];
     }
   }
-  if(!isDefined(machine))
+  if(!isDefined(machine)) {
     return;
+  }
   if(isDefined(machine_clip)) {
     machine_clip LinkTo(machine);
   }

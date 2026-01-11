@@ -23,21 +23,25 @@ init() {
 }
 
 isgamerepinitialized() {
-  if(!isDefined(game["gameRepInitialized"]) || !game["gameRepInitialized"])
+  if(!isDefined(game["gameRepInitialized"]) || !game["gameRepInitialized"]) {
     return false;
+  }
 
   return true;
 }
 
 isgamerepenabled() {
-  if(maps\mp\bots\_bot::is_bot_ranked_match())
+  if(maps\mp\bots\_bot::is_bot_ranked_match()) {
     return false;
+  }
 
-  if(sessionmodeiszombiesgame())
+  if(sessionmodeiszombiesgame()) {
     return false;
+  }
 
-  if(!level.rankedmatch)
+  if(!level.rankedmatch) {
     return false;
+  }
 
   return true;
 }
@@ -185,8 +189,9 @@ gamerepupdatenonpersistentplayerinformation() {
   }
   game["gameRep"]["players"][name]["totalTimePlayed"] = game["gameRep"]["players"][name]["totalTimePlayed"] + self.timeplayed["total"];
 
-  if(isDefined(self.tacticalinsertioncount))
+  if(isDefined(self.tacticalinsertioncount)) {
     game["gameRep"]["players"][name]["tacticalInsertions"] = game["gameRep"]["players"][name]["tacticalInsertions"] + self.tacticalinsertioncount;
+  }
 }
 
 gamerepupdatepersistentplayerinformation() {
@@ -195,20 +200,24 @@ gamerepupdatepersistentplayerinformation() {
   if(!isDefined(game["gameRep"]["players"][name])) {
     return;
   }
-  if(game["gameRep"]["players"][name]["totalTimePlayed"] != 0)
+  if(game["gameRep"]["players"][name]["totalTimePlayed"] != 0) {
     timeplayed = game["gameRep"]["players"][name]["totalTimePlayed"];
-  else
+  }
+  else {
     timeplayed = 1;
+  }
 
   game["gameRep"]["players"][name]["score"] = self.score;
   game["gameRep"]["players"][name]["scorePerMin"] = int(game["gameRep"]["players"][name]["score"] / (timeplayed / 60));
   game["gameRep"]["players"][name]["kills"] = self.kills;
   game["gameRep"]["players"][name]["deaths"] = self.deaths;
 
-  if(game["gameRep"]["players"][name]["deaths"] != 0)
+  if(game["gameRep"]["players"][name]["deaths"] != 0) {
     game["gameRep"]["players"][name]["killDeathRatio"] = int(game["gameRep"]["players"][name]["kills"] / game["gameRep"]["players"][name]["deaths"] * 100);
-  else
+  }
+  else {
     game["gameRep"]["players"][name]["killDeathRatio"] = game["gameRep"]["players"][name]["kills"] * 100;
+  }
 
   game["gameRep"]["players"][name]["killsPerMin"] = int(game["gameRep"]["players"][name]["kills"] / (timeplayed / 60));
   game["gameRep"]["players"][name]["plants"] = self.plants;
@@ -220,8 +229,9 @@ gamerepupdatepersistentplayerinformation() {
 }
 
 getparamvalueforplayer(playername, paramname) {
-  if(isDefined(game["gameRep"]["players"][playername][paramname]))
+  if(isDefined(game["gameRep"]["players"][playername][paramname])) {
     return game["gameRep"]["players"][playername][paramname];
+  }
 
   assertmsg("Unknown parameter " + paramname + "for individual player");
 }
@@ -229,24 +239,29 @@ getparamvalueforplayer(playername, paramname) {
 isgamerepparamvalid(paramname) {
   gametype = level.gametype;
 
-  if(!isDefined(game["gameRep"]))
+  if(!isDefined(game["gameRep"])) {
     return false;
+  }
 
-  if(!isDefined(game["gameRep"]["gameLimit"]))
+  if(!isDefined(game["gameRep"]["gameLimit"])) {
     return false;
+  }
 
-  if(!isDefined(game["gameRep"]["gameLimit"][gametype]))
+  if(!isDefined(game["gameRep"]["gameLimit"][gametype])) {
     return false;
+  }
 
-  if(!isDefined(game["gameRep"]["gameLimit"][gametype][paramname]) && !isDefined(game["gameRep"]["gameLimit"]["default"][paramname]))
+  if(!isDefined(game["gameRep"]["gameLimit"][gametype][paramname]) && !isDefined(game["gameRep"]["gameLimit"]["default"][paramname])) {
     return false;
+  }
 
   return true;
 }
 
 isgamerepparamignoredforreporting(paramname) {
-  if(isDefined(game["gameRep"]["ignoreParams"][paramname]))
+  if(isDefined(game["gameRep"]["ignoreParams"][paramname])) {
     return true;
+  }
 
   return false;
 }
@@ -255,12 +270,14 @@ getgamerepparamlimit(paramname) {
   gametype = level.gametype;
 
   if(isDefined(game["gameRep"]["gameLimit"][gametype])) {
-    if(isDefined(game["gameRep"]["gameLimit"][gametype][paramname]))
+    if(isDefined(game["gameRep"]["gameLimit"][gametype][paramname])) {
       return game["gameRep"]["gameLimit"][gametype][paramname];
+    }
   }
 
-  if(isDefined(game["gameRep"]["gameLimit"]["default"][paramname]))
+  if(isDefined(game["gameRep"]["gameLimit"]["default"][paramname])) {
     return game["gameRep"]["gameLimit"]["default"][paramname];
+  }
 
   assertmsg("Default values for parameter " + paramname + " is not defined.");
 }
@@ -271,8 +288,9 @@ setmaximumparamvalueforcurrentgame(paramname, value) {
     return;
   }
 
-  if(game["gameRep"]["max"][paramname] < value)
+  if(game["gameRep"]["max"][paramname] < value) {
     game["gameRep"]["max"][paramname] = value;
+  }
 }
 
 gamerepupdateinformationforround() {
@@ -306,8 +324,9 @@ gamerepanalyzeandreport() {
     for(j = 0; j < game["gameRep"]["params"].size; j++) {
       paramname = game["gameRep"]["params"][j];
 
-      if(isgamerepparamvalid(paramname))
+      if(isgamerepparamvalid(paramname)) {
         setmaximumparamvalueforcurrentgame(paramname, getparamvalueforplayer(playername, paramname));
+      }
     }
 
     paramname = "splitscreen";
@@ -319,14 +338,16 @@ gamerepanalyzeandreport() {
   for(j = 0; j < game["gameRep"]["params"].size; j++) {
     paramname = game["gameRep"]["params"][j];
 
-    if(isgamerepparamvalid(paramname) && game["gameRep"]["max"][paramname] >= getgamerepparamlimit(paramname))
+    if(isgamerepparamvalid(paramname) && game["gameRep"]["max"][paramname] >= getgamerepparamlimit(paramname)) {
       gamerepprepareandreport(paramname);
+    }
   }
 
   paramname = "splitscreen";
 
-  if(game["gameRep"]["max"][paramname] >= getgamerepparamlimit(paramname))
+  if(game["gameRep"]["max"][paramname] >= getgamerepparamlimit(paramname)) {
     gamerepprepareandreport(paramname);
+  }
 }
 
 gamerepprepareandreport(paramname) {

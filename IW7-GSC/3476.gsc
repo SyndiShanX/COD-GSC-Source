@@ -40,8 +40,9 @@ init() {
 func_128E1(var_00, var_01) {
   var_02 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_00, "deployable_vest");
 
-  if(!isDefined(var_02) || !var_02)
+  if(!isDefined(var_02) || !var_02) {
     return 0;
+  }
 
   scripts\mp\matchdata::logkillstreakevent("deployable_vest", self.origin);
   return 1;
@@ -50,8 +51,9 @@ func_128E1(var_00, var_01) {
 func_3937(var_00) {
   return !scripts\mp\lightarmor::haslightarmor(self) && !scripts\mp\utility\game::isjuggernaut();
 
-  if(isDefined(var_00) && var_0.owner == self && !isDefined(var_0.func_1A64))
+  if(isDefined(var_00) && var_0.owner == self && !isDefined(var_0.func_1A64)) {
     return 0;
+  }
 
   return !scripts\mp\utility\game::isjuggernaut();
 }
@@ -61,8 +63,9 @@ onusedeployable(var_00) {
 }
 
 get_adjusted_armor(var_00, var_01) {
-  if(var_00 + level.deployablebox_vest_rank[var_01] > level.deployablebox_vest_max)
+  if(var_00 + level.deployablebox_vest_rank[var_01] > level.deployablebox_vest_max) {
     return level.deployablebox_vest_max;
+  }
 
   return var_00 + level.deployablebox_vest_rank[var_01];
 }

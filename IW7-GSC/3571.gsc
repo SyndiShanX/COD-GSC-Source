@@ -19,8 +19,9 @@ func_BFCD() {
   self endon("niagara_end");
   self.func_BFB8.func_13CE4 = self getcurrentprimaryweapon();
 
-  if(self.func_BFB8.func_13CE4 == "none")
+  if(self.func_BFB8.func_13CE4 == "none") {
     self.func_BFB8.func_13CE4 = self.lastdroppableweaponobj;
+  }
 
   scripts\engine\utility::allow_weapon_switch(0);
   scripts\engine\utility::allow_offhand_weapons(0);
@@ -34,8 +35,9 @@ func_BFCD() {
   self.func_BFB8.func_55DB = 1;
   var_00 = "none";
 
-  while(var_00 != "iw7_niagara_mp")
+  while(var_00 != "iw7_niagara_mp") {
     self waittill("weapon_change", var_00);
+  }
 
   thread func_BFCC();
   scripts\engine\utility::allow_weapon_switch(1);
@@ -53,26 +55,31 @@ func_BFBB(var_00, var_01) {
   if(!isDefined(self)) {
     return;
   }
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 1;
+  }
 
   if(self hasweapon("iw7_niagara_mp") && var_00) {
     if(self getcurrentprimaryweapon() == "iw7_niagara_mp") {
-      if(!isDefined(var_01) || var_01 == "none" || !scripts\mp\weapons::isprimaryweapon(var_01))
+      if(!isDefined(var_01) || var_01 == "none" || !scripts\mp\weapons::isprimaryweapon(var_01)) {
         var_01 = self.func_BFB8.func_13CE4;
+      }
 
-      if(!self hasweapon(var_01))
+      if(!self hasweapon(var_01)) {
         var_01 = self.lastdroppableweaponobj;
+      }
 
-      if(isDefined(var_01) && self hasweapon(var_01))
+      if(isDefined(var_01) && self hasweapon(var_01)) {
         scripts\mp\utility::_switchtoweaponimmediate(var_01);
+      }
     }
 
     scripts\mp\utility::_takeweapon("iw7_niagara_mp");
   }
 
-  if(isDefined(self.func_BFB8.func_55DB))
+  if(isDefined(self.func_BFB8.func_55DB)) {
     self _meth_80DB();
+  }
 
   if(isDefined(self.func_BFB8.disabledusability)) {
     scripts\engine\utility::allow_weapon_switch(1);
@@ -80,8 +87,9 @@ func_BFBB(var_00, var_01) {
     scripts\engine\utility::allow_usability(1);
   }
 
-  if(isDefined(self.func_BFB8.disabledfire))
+  if(isDefined(self.func_BFB8.disabledfire)) {
     self allowfire(1);
+  }
 
   self.func_BFB8 = undefined;
   self notify("powers_niagara_update", -1);
@@ -93,8 +101,9 @@ func_BFC8() {
   self endon("niagara_end");
   var_00 = "iw7_niagara_mp";
 
-  while(var_00 == "iw7_niagara_mp")
+  while(var_00 == "iw7_niagara_mp") {
     self waittill("weapon_change", var_00);
+  }
 
   thread func_BFBB(1, var_00);
 }
@@ -129,10 +138,12 @@ func_BFBC(var_00) {
   thread func_BFC1(var_03, var_00);
   thread func_BFC4(var_00, var_03);
 
-  if(var_0.func_6C1A)
+  if(var_0.func_6C1A) {
     thread func_BFC6(var_00, var_03, 1);
-  else
+  }
+  else {
     thread func_BFC6(var_00, var_03, 0);
+  }
 
   self.func_BFB8.func_6D96 = gettime();
   self.func_BFB8.func_6D9A = anglesToForward(self getplayerangles()) * 1175 + (0, 0, 10);
@@ -206,13 +217,16 @@ func_BFC4(var_00, var_01) {
   thread func_BFBA(var_0.origin, var_0.angles);
   thread func_BFC2(var_01, var_07);
 
-  if(var_0.func_6C1A)
+  if(var_0.func_6C1A) {
     thread func_BFC6(var_00, undefined, 1);
-  else
+  }
+  else {
     thread func_BFC6(var_00, undefined, 0);
+  }
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 delete();
+  }
 }
 
 func_BFC6(var_00, var_01, var_02) {
@@ -229,13 +243,15 @@ func_BFC6(var_00, var_01, var_02) {
     self.func_BFB8.disabledfire = undefined;
   }
 
-  if(var_02)
+  if(var_02) {
     thread func_BFBB();
+  }
 
   scripts\engine\utility::waitframe();
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_01 delete();
+  }
 }
 
 func_BFC1(var_00, var_01) {
@@ -246,14 +262,16 @@ func_BFC1(var_00, var_01) {
   for(;;) {
     var_03 = var_02 - var_0.origin;
 
-    if(lengthsquared(var_03) > 1024)
+    if(lengthsquared(var_03) > 1024) {
       var_00 moveto(var_02, 0.1, 0, 0);
+    }
 
     var_00 rotateto(vectortoangles(var_03), 0.1);
     wait 0.1;
 
-    if(isDefined(var_01))
+    if(isDefined(var_01)) {
       var_02 = var_1.origin;
+    }
   }
 }
 
@@ -265,8 +283,9 @@ func_BFC2(var_00, var_01) {
   for(;;) {
     var_03 = var_02 - var_0.origin;
 
-    if(lengthsquared(var_03) > 65536)
+    if(lengthsquared(var_03) > 65536) {
       var_00 moveto(var_02, 0.15, 0, 0);
+    }
 
     var_00 rotateto(vectortoangles(var_03), 0.15);
     wait 0.15;
@@ -303,8 +322,9 @@ func_BFB9(var_00) {
     var_1++;
   }
 
-  if(var_01 == 0)
+  if(var_01 == 0) {
     return undefined;
+  }
 
   return var_02 / var_01;
 }

@@ -303,8 +303,9 @@ fire_guys_in_area(event_flag, trigger_targetname, goal_volume) {
     self clearturrettarget();
     axis_guys = getAIarrayTouchingVolume("axis", goal_volume);
     i = 0;
-    if(axis_guys.size >= 2)
+    if(axis_guys.size >= 2) {
       i = randomintrange(0, axis_guys.size - 1);
+    }
     if(axis_guys.size >= 1) {
       if(!flag(event_flag) && isalive(axis_guys[i]) && axis_guys[i] istouching(area_trigger)) {
         self setturrettargetent(axis_guys[i], (0, 0, randomintrange(30, 60)));
@@ -325,8 +326,9 @@ check_ai_existance(event_flag, area_trigger, goal_volume) {
     ai_count = 0;
     axis_guys = getAIarrayTouchingVolume("axis", goal_volume);
     for(i = 0; i < axis_guys.size; i++) {
-      if(isalive(axis_guys[i]) && axis_guys[i] istouching(area_trigger))
+      if(isalive(axis_guys[i]) && axis_guys[i] istouching(area_trigger)) {
         ai_count++;
+      }
     }
     if(ai_count == 0 && !flag(event_flag)) {
       flag_set(event_flag);
@@ -559,8 +561,9 @@ ev2_tank_move_up_dialog() {
 ev2_stay_behind_tank_dialog() {
   trigger = getent("flametank_middle", "targetname");
   trigger waittill("trigger");
-  if(isDefined(level.flametank) && isalive(level.flametank))
+  if(isDefined(level.flametank) && isalive(level.flametank)) {
     level.sarge say_dialogue("watch_tank");
+  }
 }
 
 ev2_enter_tunnel_dialog() {

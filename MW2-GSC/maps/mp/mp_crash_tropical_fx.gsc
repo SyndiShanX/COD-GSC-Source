@@ -30,6 +30,7 @@ main() {
   //level._effect[ "green_flare" ] 								= loadfx( "misc/handflare_green" );
   */
 
-  if(common_scripts\utility::shouldRunServerSideEffects())
+  if(common_scripts\utility::shouldRunServerSideEffects()) {
     maps\createfx\mp_crash_tropical_fx::main();
+  }
 }

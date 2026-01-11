@@ -16,8 +16,9 @@ main() {
     combatIdle();
     return;
   }
-  if(IsPlayer(self.enemy))
+  if(IsPlayer(self.enemy)) {
     self meleeBiteAttackPlayer(self.enemy);
+  }
 }
 
 combatIdle() {
@@ -53,8 +54,9 @@ combatIdlePreventOverlappingPlayer() {
     }
     offsetVec = (offsetVec[0], offsetVec[1], 0);
     offset = length(offsetVec);
-    if(offset < 1)
+    if(offset < 1) {
       offsetVec = anglesToForward(self.angles);
+    }
     if(offset < 30) {
       offsetVec = vectorscale(offsetVec, 3 / offset);
       self teleport(self.origin - offsetVec);
@@ -96,8 +98,9 @@ meleeBiteAttackPlayer(player) {
     prepareAttackPlayer(player);
     self clearpitchorient();
 
-    if(getdvarint("debug_dog_sound"))
+    if(getdvarint("debug_dog_sound")) {
       iprintln("dog " + (self getentnum()) + " attack player " + getTime());
+    }
     player setNextDogAttackAllowTime(200);
     if(dog_cant_kill_in_one_hit(player)) {
       level.lastDogMeleePlayerTime = getTime();
@@ -141,8 +144,9 @@ doMeleeAfterWait(time) {
   wait(time);
   hitEnt = self melee();
   if(isDefined(hitEnt)) {
-    if(isplayer(hitEnt))
+    if(isplayer(hitEnt)) {
       hitEnt shellshock("dog_bite", 1);
+    }
   }
 }
 
@@ -155,8 +159,9 @@ handleMeleeBiteAttackNoteTracks(note, player) {
       }
       hitEnt = self melee(anglesToForward(self.angles));
       if(isDefined(hitEnt)) {
-        if(isplayer(hitEnt))
+        if(isplayer(hitEnt)) {
           hitEnt shellshock("dog_bite", 1);
+        }
       } else {
         attackMiss();
         return true;
@@ -234,8 +239,9 @@ orientToPlayerDeadReckoning(player, time_till_bite) {
 }
 
 checkEndCombat(meleeRange) {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
   distToTargetSq = distanceSquared(self.origin, self.enemy.origin);
   return (distToTargetSq > meleeRange * meleeRange);
 }
@@ -303,8 +309,9 @@ dog_cant_kill_in_one_hit(player) {
     assertex(player.dogs_dont_instant_kill, "Dont set player.dogs_dont_instant_kill to false, set to undefined");
     return true;
   }
-  if(getTime() - level.lastDogMeleePlayerTime > 8000)
+  if(getTime() - level.lastDogMeleePlayerTime > 8000) {
     level.dogMeleePlayerCounter = 0;
+  }
   return level.dogMeleePlayerCounter < level.dog_hits_before_kill &&
     player.health > 25;
 }

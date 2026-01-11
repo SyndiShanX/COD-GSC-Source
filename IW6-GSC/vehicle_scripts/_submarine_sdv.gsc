@@ -4,10 +4,12 @@
 **********************************************/
 
 main(var_0, var_1, var_2, var_3) {
-  if(var_0 == "vehicle_submarine_sdv" || var_0 == "vehicle_mini_sub_iw6")
+  if(var_0 == "vehicle_submarine_sdv" || var_0 == "vehicle_mini_sub_iw6") {
     maps\_vehicle::build_template("submarine_sdv", var_0, var_1, var_2);
-  else
+  }
+  else {
     maps\_vehicle::build_template("blackshadow_730", var_0, var_1, var_2);
+  }
 
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel(var_0);
@@ -19,8 +21,9 @@ main(var_0, var_1, var_2, var_3) {
   }
 
   if(!isDefined(var_3) || !var_3) {
-    if(var_0 == "vehicle_mini_sub_iw6")
+    if(var_0 == "vehicle_mini_sub_iw6") {
       maps\_vehicle::build_rumble("subtle_tank_rumble", 0.05, 1.5, 900, 1, 1);
+    }
   }
 
   maps\_vehicle::build_team("allies");
@@ -35,8 +38,9 @@ init_local() {
   self.light_tag = common_scripts\utility::spawn_tag_origin();
   self.light_tag linkto(self, "TAG_BIG_LIGHT1", (0, 0, 0), (0, 0, 0));
 
-  if(self.model == "vehicle_mini_sub_iw6")
+  if(self.model == "vehicle_mini_sub_iw6") {
     self.moving_unload = 1;
+  }
 
   thread cleanup_sdv();
   thread handle_move();
@@ -52,17 +56,21 @@ handle_move() {
     thread maps\_utility::play_sound_on_tag("sdv_start", "TAG_PROPELLER");
     maps\_utility::delaythread(1, maps\_utility::play_loop_sound_on_tag, "sdv_move_loop", "TAG_PROPELLER", 1);
 
-    if(self.model == "vehicle_mini_sub_iw6")
+    if(self.model == "vehicle_mini_sub_iw6") {
       thread mini_sub_prop_wash();
-    else
+    }
+    else {
       playFXOnTag(common_scripts\utility::getfx("sdv_prop_wash_1"), self, "TAG_PROPELLER");
+    }
 
     maps\_utility::ent_flag_waitopen("moving");
 
-    if(self.model == "vehicle_mini_sub_iw6")
+    if(self.model == "vehicle_mini_sub_iw6") {
       thread mini_sub_prop_wash_stop();
-    else
+    }
+    else {
       stopFXOnTag(common_scripts\utility::getfx("sdv_prop_wash_1"), self, "TAG_PROPELLER");
+    }
 
     self notify("stop soundsdv_move_loop");
     thread maps\_utility::play_sound_on_tag("sdv_stop", "TAG_PROPELLER");
@@ -116,8 +124,9 @@ handle_lights() {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 6; var_1++)
+  for(var_1 = 0; var_1 < 6; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   var_0[0].idle = % minisub_enemy_idle_r_01;
   var_0[1].idle = % minisub_enemy_idle_r_02;

@@ -127,16 +127,19 @@ fxanim_props_think(localclientnum) {
   self endon("delete");
   wait 3;
 
-  if(isDefined(self.fxanim_waittill_1))
+  if(isDefined(self.fxanim_waittill_1)) {
     level waittill(self.fxanim_waittill_1);
+  }
 
-  if(isDefined(self.fxanim_wait))
+  if(isDefined(self.fxanim_wait)) {
     wait(self.fxanim_wait);
+  }
 
   self useanimtree(#animtree);
 
-  if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_1]))
+  if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_1])) {
     self setflaggedanim("highrise_fxanim", level.scr_anim["fxanim_props"][self.fxanim_scene_1], 1.0, 0.0, 1.0);
+  }
 }
 
 main() {
@@ -147,14 +150,16 @@ main() {
   precache_fxanim_props();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0)
+  if(!isDefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
+  }
 }
 
 setup_prop_anims() {
   waitforclient(0);
   players = level.localplayers;
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     play_fx_prop_anims(i);
+  }
 }

@@ -13,10 +13,12 @@ initWeapon(weapon, slot) {
   self.weaponInfo[weapon] = spawnStruct();
   self.weaponInfo[weapon].position = "none";
   self.weaponInfo[weapon].hasClip = true;
-  if(getWeaponClipModel(weapon) != "")
+  if(getWeaponClipModel(weapon) != "") {
     self.weaponInfo[weapon].useClip = true;
-  else
+  }
+  else {
     self.weaponInfo[weapon].useClip = false;
+  }
 }
 
 main() {
@@ -58,8 +60,9 @@ main() {
   self.a.gunHand = "none";
   self.a.PrevPutGunInHandTime = -1;
   animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
-  if(weaponclass(self.secondaryweapon) == "spread")
+  if(weaponclass(self.secondaryweapon) == "spread") {
     animscripts\shared::placeWeaponOn(self.secondaryweapon, "back");
+  }
   self.a.needsToRechamber = 0;
   self.a.isRechambering = 0;
   self.a.combatEndTime = gettime();
@@ -117,8 +120,9 @@ main() {
   self.a.crouchpain = false;
   self.a.nextStandingHitDying = false;
   anim_set_next_move_to_new_cover();
-  if(!isDefined(self.script_forcegrenade))
+  if(!isDefined(self.script_forcegrenade)) {
     self.script_forcegrenade = 0;
+  }
   self.a.lastDebugPrint = "";
   self.a.StopCowering = ::DoNothing;
   SetupUniqueAnims();
@@ -129,22 +133,30 @@ main() {
   self.combatTime = 0;
   self.suppressed = false;
   self.suppressedTime = 0;
-  if(self.team == "allies")
+  if(self.team == "allies") {
     self.suppressionThreshold = 0.75;
-  else
+  }
+  else {
     self.suppressionThreshold = 0.5;
-  if(self.team == "allies")
+  }
+  if(self.team == "allies") {
     self.randomGrenadeRange = 0;
-  else
+  }
+  else {
     self.randomGrenadeRange = 128;
-  if(animscripts\weaponList::usingAutomaticWeapon())
+  }
+  if(animscripts\weaponList::usingAutomaticWeapon()) {
     self.ramboChance = 15;
-  else if(animscripts\weaponList::usingSemiAutoWeapon())
+  }
+  else if(animscripts\weaponList::usingSemiAutoWeapon()) {
     self.ramboChance = 7;
-  else
+  }
+  else {
     self.ramboChance = 0;
-  if(self.team == "axis")
+  }
+  if(self.team == "axis") {
     self.ramboChance *= 2;
+  }
   self.coverIdleSelectTime = -696969;
   self.exception = [];
   self.exception["corner"] = 1;
@@ -172,8 +184,9 @@ main() {
 printEyeOffsetFromNode() {
   self endon("death");
   while(1) {
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: init.gsc. Function: printEyeOffsetFromNode() - INNER LOOP START\n");
+    }
     if(getdvarint("scr_eyeoffset") == self getentnum()) {
       if(isDefined(self.coverNode)) {
         offset = self getEye() - self.coverNode.origin;
@@ -184,50 +197,62 @@ printEyeOffsetFromNode() {
       }
     } else
       wait 2;
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: init.gsc. Function: printEyeOffsetFromNode() - INNER LOOP STOP\n");
+    }
     wait .1;
   }
 }
 
 showLikelyEnemyPathDir() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: init.gsc. Function: showLikelyEnemyPathDir()\n");
+  }
   self endon("death");
-  if(getdvar("scr_showlikelyenemypathdir") == "")
+  if(getdvar("scr_showlikelyenemypathdir") == "") {
     setdvar("scr_showlikelyenemypathdir", "-1");
+  }
   while(1) {
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: init.gsc. Function: showLikelyEnemyPathDir() - INNER LOOP START\n");
+    }
     if(getdvarint("scr_showlikelyenemypathdir") == self getentnum()) {
       yaw = self.angles[1];
       dir = self getAnglesToLikelyEnemyPath();
-      if(isDefined(dir))
+      if(isDefined(dir)) {
         yaw = dir[1];
+      }
       printpos = self.origin + (0, 0, 60) + anglesToForward((0, yaw, 0)) * 100;
       line(self.origin + (0, 0, 60), printpos);
-      if(isDefined(dir))
+      if(isDefined(dir)) {
         print3d(printpos, "likelyEnemyPathDir: " + yaw, (1, 1, 1), 1, 0.5);
-      else
+      }
+      else {
         print3d(printpos, "likelyEnemyPathDir: undefined", (1, 1, 1), 1, 0.5);
-      if(getdebugdvar("replay_debug") == "1")
+      }
+      if(getdebugdvar("replay_debug") == "1") {
         println("File: init.gsc. Function: showLikelyEnemyPathDir() - INNER LOOP START WAIT .05\n");
+      }
       wait .05;
-      if(getdebugdvar("replay_debug") == "1")
+      if(getdebugdvar("replay_debug") == "1") {
         println("File: init.gsc. Function: showLikelyEnemyPathDir() - INNER LOOP STOP WAIT .05\n");
+      }
     } else
       wait 2;
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: init.gsc. Function: showLikelyEnemyPathDir() - INNER LOOP STOP\n");
+    }
   }
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: init.gsc. Function: showLikelyEnemyPathDir() - COMPLETE\n");
+  }
 }
 
 setNameAndRank() {
   self endon("death");
-  if(!isDefined(level.loadoutComplete))
+  if(!isDefined(level.loadoutComplete)) {
     level waittill("loadout complete");
+  }
   self maps\_names::get_name();
 }
 SetWeaponDist() {
@@ -295,18 +320,21 @@ set_anim_playback_rate() {
 }
 
 infiniteLoop(one, two, three, whatever) {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: init.gsc. Function: infiniteLoop() - START WAIT FOR new exceptions\n");
+  }
   anim waittill("new exceptions");
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: init.gsc. Function: infiniteLoop() - STOP WAIT FOR new exceptions\n");
+  }
 }
 
 empty(one, two, three, whatever) {}
 removeFirstArrayIndex(array) {
   newArray = [];
-  for(i = 1; i < array.size; i++)
+  for(i = 1; i < array.size; i++) {
     newArray[newArray.size] = array[i];
+  }
   return newArray;
 }
 
@@ -357,8 +385,9 @@ clearEnemy() {
 previewSightPos() {
   self endon("death");
   for(;;) {
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: init.gsc. Function: previewSightPos() - INNER LOOP START\n");
+    }
     if(getdebugdvar("debug_lastsightpos") != "on") {
       wait(1);
       continue;
@@ -368,18 +397,21 @@ previewSightPos() {
       continue;
     }
     print3d(self.lastEnemySightPos, "X", (0.2, 0.5, 1.0), 1, 1.0);
-    if(getdebugdvar("replay_debug") == "1")
+    if(getdebugdvar("replay_debug") == "1") {
       println("File: init.gsc. Function: previewSightPos() - INNER LOOP END\n");
+    }
   }
 }
 
 previewAccuracy() {
-  if(!isDefined(level.offsetNum))
+  if(!isDefined(level.offsetNum)) {
     level.offsetNum = 0;
+  }
   offset = 1;
   level.offsetNum++;
-  if(level.offsetNum > 5)
+  if(level.offsetNum > 5) {
     level.offsetNum = 1;
+  }
   self endon("death");
   for(;;) {
     if(getdebugdvar("debug_accuracypreview") != "on") {
@@ -404,11 +436,13 @@ enemyNotify() {
   if(1) return;
   for(;;) {
     self waittill("enemy");
-    if(!isalive(self.enemy))
+    if(!isalive(self.enemy)) {
       continue;
+    }
     while(IsPlayer(self.enemy)) {
-      if(hasEnemySightPos())
+      if(hasEnemySightPos()) {
         level.lastPlayerSighted = gettime();
+      }
       wait(2);
     }
   }
@@ -436,8 +470,9 @@ testLifeThink() {
   assert(isalive(self));
   for(;;) {
     assertEX(isalive(self), "This should never be hittable due to endon killanimscript. Make your peace and prepare to die.");
-    if(isalive(self))
+    if(isalive(self)) {
       wait(0.05);
+    }
   }
 }
 
@@ -782,8 +817,9 @@ initMoveStartStopTransitions() {
         continue;
       }
       len = length(anim.coverTransDist[trans][i]);
-      if(len > anim.longestExposedApproachDist)
+      if(len > anim.longestExposedApproachDist) {
         anim.longestExposedApproachDist = len;
+      }
     }
   }
   anim.coverExitSplit = [];
@@ -844,10 +880,12 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
     for(i = 0; i < numiter; i++) {
       splitTime = 1.0 * i / (numiter - 1);
       delta = getMoveDelta(exitanim, 0, splitTime);
-      if(isapproach)
+      if(isapproach) {
         delta = DeltaRotate(fullDelta - delta, 180 - angleDelta);
-      if(isright)
+      }
+      if(isright) {
         delta = (delta[0], 0 - delta[1], delta[2]);
+      }
       val = min(delta[0] - 32, delta[1]);
       if(val > bestvalue || bestsplit < 0) {
         bestvalue = val;
@@ -867,10 +905,12 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       return (delta[0] * cosine - delta[1] * sine, delta[1] * cosine + delta[0] * sine, 0);
     }
     AssertIsValidLeftSplitDelta(delta, debugname) {
-      if(delta[0] < 32)
+      if(delta[0] < 32) {
         println("^0 ^1" + debugname + " doesn't go out from the node far enough in the given split time (delta = " + delta + ")");
-      if(delta[1] < 0)
+      }
+      if(delta[1] < 0) {
         println("^0 ^1" + debugname + " goes into the wall during the given split time (delta = " + delta + ")");
+      }
     }
     AssertIsValidRightSplitDelta(delta, debugname) {
       delta = (delta[0], 0 - delta[1], delta[2]);
@@ -890,10 +930,12 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
         for(j = 0; j < transTypes.size; j++) {
           trans = transTypes[j];
           idealAdd = 0;
-          if(trans == "left" || trans == "left_crouch")
+          if(trans == "left" || trans == "left_crouch") {
             idealAdd = 90;
-          else if(trans == "right" || trans == "right_crouch")
+          }
+          else if(trans == "right" || trans == "right_crouch") {
             idealAdd = -90;
+          }
           if(isDefined(anim.coverTransAngles[trans][i])) {
             correctAngle = AngleClamp180(idealTransAngles[i] + idealAdd);
             actualAngle = AngleClamp180(anim.coverTransAngles[trans][i]);
@@ -907,10 +949,12 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
         for(j = 0; j < transTypes.size; j++) {
           trans = transTypes[j];
           idealAdd = 0;
-          if(trans == "left" || trans == "left_crouch")
+          if(trans == "left" || trans == "left_crouch") {
             idealAdd = 90;
-          else if(trans == "right" || trans == "right_crouch")
+          }
+          else if(trans == "right" || trans == "right_crouch") {
             idealAdd = -90;
+          }
           if(isDefined(anim.coverExitAngles[trans][i])) {
             correctAngle = AngleClamp180(-1 * (idealTransAngles[i] + idealAdd + 180));
             actualAngle = AngleClamp180(anim.coverExitAngles[trans][i]);
@@ -934,43 +978,57 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       return (middleFrame - startFrame) / (endFrame - startFrame);
     }
     firstInit() {
-      if(getdebugdvar("replay_debug") == "1")
+      if(getdebugdvar("replay_debug") == "1") {
         println("File: init.gsc. Function: firstInit()\n");
+      }
       if(isDefined(anim.NotFirstTime)) {
-        if(getdebugdvar("replay_debug") == "1")
+        if(getdebugdvar("replay_debug") == "1") {
           println("File: init.gsc. Function: firstInit() - COMPLETE EARLY\n");
+        }
         return;
       }
       anim.NotFirstTime = true;
       anim.useFacialAnims = false;
-      if(!isDefined(anim.dog_health))
+      if(!isDefined(anim.dog_health)) {
         anim.dog_health = 1;
-      if(!isDefined(anim.dog_presstime))
+      }
+      if(!isDefined(anim.dog_presstime)) {
         anim.dog_presstime = 350;
-      if(!isDefined(anim.dog_hits_before_kill))
+      }
+      if(!isDefined(anim.dog_hits_before_kill)) {
         anim.dog_hits_before_kill = 1;
-      if(getdvar("scr_forceshotgun") == "on")
+      }
+      if(getdvar("scr_forceshotgun") == "on") {
         precacheItem("winchester1200");
+      }
       level.nextGrenadeDrop = randomint(3);
       level.lastPlayerSighted = 100;
       anim.defaultException = animscripts\init::empty;
-      if(getdebugdvar("debug_noanimscripts") == "")
+      if(getdebugdvar("debug_noanimscripts") == "") {
         setdvar("debug_noanimscripts", "off");
-      else
+      }
+      else {
       if(getdebugdvar("debug_noanimscripts") == "on")
+      }
         anim.defaultException = animscripts\init::infiniteLoop;
-      if(getdebugdvar("debug_grenadehand") == "")
+      if(getdebugdvar("debug_grenadehand") == "") {
         setdvar("debug_grenadehand", "off");
-      if(getdebugdvar("anim_trace") == "")
+      }
+      if(getdebugdvar("anim_trace") == "") {
         setdvar("anim_trace", "-1");
-      if(getdebugdvar("anim_dotshow") == "")
+      }
+      if(getdebugdvar("anim_dotshow") == "") {
         setdvar("anim_dotshow", "-1");
-      if(getdebugdvar("anim_debug") == "")
+      }
+      if(getdebugdvar("anim_debug") == "") {
         setdvar("anim_debug", "");
-      if(getdebugdvar("debug_misstime") == "")
+      }
+      if(getdebugdvar("debug_misstime") == "") {
         setdvar("debug_misstime", "");
-      if(getdvar("modern") == "")
+      }
+      if(getdvar("modern") == "") {
         setdvar("modern", "on");
+      }
       anim.sniperRifles = [];
       anim.sniperRifles["kar98k_scoped"] = 1;
       anim.sniperRifles["kar98k_scoped_bayonet"] = 1;
@@ -982,8 +1040,9 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       anim.sniperRifles["springfield_scoped_bayonet"] = 1;
       anim.sniperRifles["type99_rifle_scoped"] = 1;
       anim.sniperRifles["type99_rifle_scoped_bayonet"] = 1;
-      if(getdvar("scr_ai_auto_fire_rate") == "")
+      if(getdvar("scr_ai_auto_fire_rate") == "") {
         setdvar("scr_ai_auto_fire_rate", "1.0");
+      }
       setdvar("scr_expDeathMayMoveCheck", "on");
       maps\_names::setup_names();
       anim.CoverStandShots = 0;
@@ -995,8 +1054,9 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       anim.chargeLongRangeSq = 512 * 512;
       anim.aiVsAiMeleeRangeSq = 400 * 400;
       anim.animFlagNameIndex = 0;
-      if(!isDefined(level.squadEnt))
+      if(!isDefined(level.squadEnt)) {
         level.squadEnt = [];
+      }
       anim.masterGroup["axis"] = spawnStruct();
       anim.masterGroup["axis"].sightTime = 0;
       anim.masterGroup["allies"] = spawnStruct();
@@ -1048,8 +1108,9 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       anim.shootFlameThrowerWrapper_func = ::shootFlameThrowerWrapper_normal;
       anim.notetracks = [];
       animscripts\shared::registerNoteTracks();
-      if(getdvar("debug_delta") == "")
+      if(getdvar("debug_delta") == "") {
         setdvar("debug_delta", "off");
+      }
       if(!isDefined(level.flag)) {
         level.flag = [];
         level.flags_lock = [];
@@ -1098,8 +1159,9 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       anim.lastCarExplosionTime = -100000;
       setupRandomTable();
       thread AITurnNotifies();
-      if(getdebugdvar("replay_debug") == "1")
+      if(getdebugdvar("replay_debug") == "1") {
         println("File: init.gsc. Function: firstInit() - COMPLETE\n");
+      }
     }
     onPlayerConnect() {
       player = self;
@@ -1123,8 +1185,9 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
           continue;
         }
         for(i = 0; i < ai.size; i++) {
-          if(!isDefined(ai[i]))
+          if(!isDefined(ai[i])) {
             continue;
+          }
           ai[i] notify("do_slow_things");
           numTurnsThisFrame++;
           if(numTurnsThisFrame == maxAIPerFrame) {
@@ -1138,16 +1201,18 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       waittillframeend;
       if(isDefined(anim.playerGrenadeRangeTime)) {
         maxTime = int(anim.playerGrenadeRangeTime * 0.7);
-        if(maxTime < 1)
+        if(maxTime < 1) {
           maxTime = 1;
+        }
         anim.grenadeTimers["player_fraggrenade"] = randomIntRange(0, maxTime);
         anim.grenadeTimers["player_flash_grenade"] = randomIntRange(0, maxTime);
       }
       if(isDefined(anim.playerDoubleGrenadeTime)) {
         maxTime = int(anim.playerDoubleGrenadeTime);
         minTime = int(maxTime / 2);
-        if(maxTime <= minTime)
+        if(maxTime <= minTime) {
           maxTime = minTime + 1;
+        }
         anim.grenadeTimers["player_double_grenade"] = randomIntRange(minTime, maxTime);
       }
     }
@@ -1161,8 +1226,9 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
     setupRandomTable() {
       anim.randomIntTableSize = 60;
       anim.randomIntTable = [];
-      for(i = 0; i < anim.randomIntTableSize; i++)
+      for(i = 0; i < anim.randomIntTableSize; i++) {
         anim.randomIntTable[i] = i;
+      }
       for(i = 0; i < anim.randomIntTableSize; i++) {
         switchwith = randomint(anim.randomIntTableSize);
         temp = anim.randomIntTable[i];
@@ -1185,7 +1251,8 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
     onDeath() {
       self waittill("death");
       if(!isDefined(self)) {
-        if(isDefined(self.a.usingTurret))
+        if(isDefined(self.a.usingTurret)) {
           self.a.usingTurret delete();
+        }
       }
     }

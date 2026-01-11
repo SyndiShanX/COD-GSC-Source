@@ -141,8 +141,9 @@ clinic_light_shake() {
   earthquake(0.5, 1.5, level.player.origin, 250);
   a_structs = getstructarray("clinic_move_light", "targetname");
 
-  foreach(s_pos in a_structs)
+  foreach(s_pos in a_structs) {
   physicsexplosioncylinder(s_pos.origin, 200, 190, 0.5);
+  }
 }
 
 start_crying_woman() {
@@ -171,8 +172,9 @@ digbat_tackle() {
     vehicle.delete_on_death = 1;
     vehicle notify("death");
 
-    if(!isalive(vehicle))
+    if(!isalive(vehicle)) {
       vehicle delete();
+    }
   }
 
   level notify("digbat_tackle_started");
@@ -275,8 +277,9 @@ digbat_guantlet_fail_safe() {
     enemies = getaiarray("axis");
 
     foreach(ai in enemies) {
-      if(isDefined(ai.digbat_melee_weapon))
+      if(isDefined(ai.digbat_melee_weapon)) {
         ai die();
+      }
     }
 
     wait 1;
@@ -303,8 +306,9 @@ digbat_challenge_track() {
   if(!isDefined(attacker)) {
     return;
   }
-  if(attacker == level.player)
+  if(attacker == level.player) {
     level.total_digbat_killed++;
+  }
 }
 
 gauntlet_recover() {
@@ -340,16 +344,18 @@ building_stairwell_flashlights() {
   wait 0.5;
   a_flashlights = get_model_or_models_from_scene("hallway_flashlights_enter");
 
-  foreach(m_flashlight in a_flashlights)
+  foreach(m_flashlight in a_flashlights) {
   playFXOnTag(level._effect["flashlight"], m_flashlight, "tag_origin");
+  }
 
   scene_wait("hallway_flashlights_enter");
   array_delete(a_flashlights);
   level thread run_scene("hallway_flashlights_loop");
   a_flashlights = get_model_or_models_from_scene("hallway_flashlights_loop");
 
-  foreach(m_flashlight in a_flashlights)
+  foreach(m_flashlight in a_flashlights) {
   playFXOnTag(level._effect["flashlight"], m_flashlight, "origin_animate_jnt");
+  }
 
   flag_wait("clinic_stairwell_top");
   array_delete(a_flashlights);
@@ -452,8 +458,9 @@ play_random_gauntlet_vo() {
   self endon("death");
   self thread digbat_challenge_track();
 
-  if(level.digbat_gauntlet_vo_count >= 4)
+  if(level.digbat_gauntlet_vo_count >= 4) {
     level.digbat_gauntlet_vo_count = -1;
+  }
 
   level.digbat_gauntlet_vo_count++;
   self say_dialog(level.digbat_gauntlet_vo[level.digbat_gauntlet_vo_count], randomfloatrange(0.5, 3));

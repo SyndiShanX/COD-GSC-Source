@@ -185,8 +185,9 @@ fireAtTarget(curTarget) {
     return;
   }
   owner = undefined;
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     owner = self.owner;
+  }
 
   forwardVec = 384 * anglesToForward(self.angles);
 
@@ -210,8 +211,9 @@ startMissileGuidance(curTarget, igniteTime, missileArray) {
   if(isDefined(curTarget)) {
     targetPoint = undefined;
 
-    if(curTarget.model != "vehicle_av8b_harrier_jet_mp")
+    if(curTarget.model != "vehicle_av8b_harrier_jet_mp") {
       targetPoint = curTarget GetTagOrigin("tag_missile_target");
+    }
     if(!isDefined(targetPoint)) {
       targetPoint = curTarget GetTagOrigin("tag_body");
     }

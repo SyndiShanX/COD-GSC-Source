@@ -23,15 +23,17 @@ main() {
 }
 
 add_song(song) {
-  if(!isDefined(level.radio_songs))
+  if(!isDefined(level.radio_songs)) {
     level.radio_songs = [];
+  }
   level.radio_songs[level.radio_songs.size] = song;
 }
 
 fade(id, time) {
   rate = 0;
-  if(time != 0)
+  if(time != 0) {
     rate = 1.0 / time;
+  }
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);
   while(SoundPlaying(id) && getSoundVolume(id) > .0001) {

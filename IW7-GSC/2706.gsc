@@ -48,10 +48,12 @@ getclasschoice(var_00) {
 getweaponchoice(var_00) {
   var_01 = strtok(var_00, ",");
 
-  if(var_1.size > 1)
+  if(var_1.size > 1) {
     return int(var_1[1]);
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 cac_getweapon(var_00, var_01) {
@@ -83,8 +85,9 @@ cac_getkillstreak(var_00) {
 }
 
 cac_getcharacterarchetype() {
-  if(isDefined(self.changedarchetypeinfo))
+  if(isDefined(self.changedarchetypeinfo)) {
     return self.changedarchetypeinfo.archetype;
+  }
 
   return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", "archetype");
 }
@@ -116,8 +119,9 @@ cac_getpower2id(var_00) {
 }
 
 cac_getsuper() {
-  if(isDefined(self.changedarchetypeinfo))
+  if(isDefined(self.changedarchetypeinfo)) {
     return self.changedarchetypeinfo.super;
+  }
 
   return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", "archetypeSuper");
 }
@@ -128,14 +132,17 @@ cac_getgesture() {
   if(isDefined(self.changedarchetypeinfo)) {
     var_01 = level.archetypeids[self.changedarchetypeinfo.archetype];
 
-    if(level.rankedmatch)
+    if(level.rankedmatch) {
       var_00 = self getrankedplayerdata("rankedloadouts", "squadMembers", "archetypePreferences", var_01, "gesture");
-    else
+    }
+    else {
       var_00 = self getrankedplayerdata("privateloadouts", "squadMembers", "archetypePreferences", var_01, "gesture");
+    }
   } else if(level.rankedmatch)
     var_00 = self getrankedplayerdata("rankedloadouts", "squadMembers", "gesture");
-  else
+  else {
     var_00 = self getrankedplayerdata("privateloadouts", "squadMembers", "gesture");
+  }
 
   return scripts\mp\gestures::getgesturedata(var_00);
 }
@@ -149,8 +156,9 @@ cac_getloadoutextraperk(var_00, var_01) {
 }
 
 cac_getloadoutarchetypeperk() {
-  if(isDefined(self.changedarchetypeinfo))
+  if(isDefined(self.changedarchetypeinfo)) {
     return self.changedarchetypeinfo.trait;
+  }
 
   return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", "archetypePerk");
 }
@@ -177,38 +185,48 @@ table_getarchetype(var_00, var_01) {
 }
 
 table_getweapon(var_00, var_01, var_02) {
-  if(var_02 == 0)
+  if(var_02 == 0) {
     return tablelookup(var_00, 0, "loadoutPrimary", var_01 + 1);
-  else
+  }
+  else {
     return tablelookup(var_00, 0, "loadoutSecondary", var_01 + 1);
+  }
 }
 
 table_getweaponattachment(var_00, var_01, var_02, var_03) {
   var_04 = "none";
 
-  if(var_02 == 0)
+  if(var_02 == 0) {
     var_04 = tablelookup(var_00, 0, "loadoutPrimaryAttachment" + (var_03 + 1), var_01 + 1);
-  else
+  }
+  else {
     var_04 = tablelookup(var_00, 0, "loadoutSecondaryAttachment" + (var_03 + 1), var_01 + 1);
+  }
 
-  if(var_04 == "" || var_04 == "none")
+  if(var_04 == "" || var_04 == "none") {
     return "none";
-  else
+  }
+  else {
     return var_04;
+  }
 }
 
 table_getweaponcamo(var_00, var_01, var_02) {
-  if(var_02 == 0)
+  if(var_02 == 0) {
     return tablelookup(var_00, 0, "loadoutPrimaryCamo", var_01 + 1);
-  else
+  }
+  else {
     return tablelookup(var_00, 0, "loadoutSecondaryCamo", var_01 + 1);
+  }
 }
 
 table_getweaponreticle(var_00, var_01, var_02) {
-  if(var_02 == 0)
+  if(var_02 == 0) {
     return tablelookup(var_00, 0, "loadoutPrimaryReticle", var_01 + 1);
-  else
+  }
+  else {
     return tablelookup(var_00, 0, "loadoutSecondaryReticle", var_01 + 1);
+  }
 }
 
 table_getperk(var_00, var_01, var_02) {
@@ -270,8 +288,9 @@ loadout_getplayerstreaktype(var_00) {
 }
 
 getloadoutstreaktypefromstreaktype(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return "streaktype_assault";
+  }
 
   switch (var_00) {
     case "support":
@@ -288,12 +307,15 @@ getloadoutstreaktypefromstreaktype(var_00) {
 loadout_getclassteam(var_00) {
   var_01 = undefined;
 
-  if(issubstr(var_00, "axis"))
+  if(issubstr(var_00, "axis")) {
     var_01 = "axis";
-  else if(issubstr(var_00, "allies"))
+  }
+  else if(issubstr(var_00, "allies")) {
     var_01 = "allies";
-  else
+  }
+  else {
     var_01 = "none";
+  }
 
   return var_01;
 }
@@ -317,8 +339,9 @@ loadout_clearweapons() {
   scripts\mp\powers::func_110C2();
   scripts\mp\powers::clearpowers();
 
-  if(isDefined(self.loadoutarchetype))
+  if(isDefined(self.loadoutarchetype)) {
     clearscriptable();
+  }
 
   scripts\mp\archetypes\archcommon::removearchetype(self.loadoutarchetype);
   scripts\mp\perks::_clearperks();
@@ -327,8 +350,9 @@ loadout_clearweapons() {
   resetactionslots();
   resetfunctionality();
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     scripts\mp\killstreaks\emp_common::func_E24E();
+  }
 }
 
 loadout_getclassstruct() {
@@ -337,8 +361,9 @@ loadout_getclassstruct() {
   var_0.loadoutprimary = "none";
   var_0.loadoutprimaryattachments = [];
 
-  for(var_01 = 0; var_01 < 6; var_1++)
+  for(var_01 = 0; var_01 < 6; var_1++) {
     var_0.loadoutprimaryattachments[var_01] = "none";
+  }
 
   var_0.loadoutprimarycamo = "none";
   var_0.loadoutprimaryreticle = "none";
@@ -348,8 +373,9 @@ loadout_getclassstruct() {
   var_0.loadoutsecondary = "none";
   var_0.loadoutsecondaryattachments = [];
 
-  for(var_01 = 0; var_01 < 5; var_1++)
+  for(var_01 = 0; var_01 < 5; var_1++) {
     var_0.loadoutsecondaryattachments[var_01] = "none";
+  }
 
   var_0.loadoutsecondarycamo = "none";
   var_0.loadoutsecondaryreticle = "none";
@@ -391,19 +417,22 @@ loadout_updateclassteam(var_00, var_01, var_02) {
   var_0.loadoutarchetype = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "archetype");
   var_0.loadoutprimary = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 0, "weapon");
 
-  if(var_0.loadoutprimary == "none")
+  if(var_0.loadoutprimary == "none") {
     var_0.loadoutprimary = "iw7_fists";
+  }
   else {
-    for(var_04 = 0; var_04 < 6; var_4++)
+    for(var_04 = 0; var_04 < 6; var_4++) {
       var_0.loadoutprimaryattachments[var_04] = ::scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 0, "attachment", var_04);
+    }
   }
 
   var_0.loadoutprimarycamo = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 0, "camo");
   var_0.loadoutprimaryreticle = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 0, "reticle");
   var_0.loadoutsecondary = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 1, "weapon");
 
-  for(var_04 = 0; var_04 < 5; var_4++)
+  for(var_04 = 0; var_04 < 5; var_4++) {
     var_0.loadoutsecondaryattachments[var_04] = ::scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 1, "attachment", var_04);
+  }
 
   var_0.loadoutsecondarycamo = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 1, "camo");
   var_0.loadoutsecondaryreticle = scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 1, "reticle");
@@ -426,10 +455,12 @@ loadout_updateclassteam(var_00, var_01, var_02) {
   var_0.loadoutkillstreak2variantid = -1;
   var_0.loadoutkillstreak3variantid = -1;
 
-  if(scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "juggernaut"))
+  if(scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "juggernaut")) {
     func_AE23();
-  else if(scripts\mp\utility\game::isjuggernaut())
+  }
+  else if(scripts\mp\utility\game::isjuggernaut()) {
     loadout_removejugg_MAYBE();
+  }
 }
 
 loadout_updateclasscustom(var_00, var_01) {
@@ -438,8 +469,9 @@ loadout_updateclasscustom(var_00, var_01) {
   var_0.loadoutarchetype = cac_getcharacterarchetype();
   var_0.loadoutprimary = cac_getweapon(var_02, 0);
 
-  for(var_03 = 0; var_03 < 6; var_3++)
+  for(var_03 = 0; var_03 < 6; var_3++) {
     var_0.loadoutprimaryattachments[var_03] = cac_getweaponattachment(var_02, 0, var_03);
+  }
 
   var_0.loadoutprimarycamo = cac_getweaponcamo(var_02, 0);
   var_0.loadoutprimaryreticle = cac_getweaponreticle(var_02, 0);
@@ -448,8 +480,9 @@ loadout_updateclasscustom(var_00, var_01) {
   var_0.loadoutprimarycosmeticattachment = cac_getweaponcosmeticattachment(var_02, 0);
   var_0.loadoutsecondary = cac_getweapon(var_02, 1);
 
-  for(var_03 = 0; var_03 < 5; var_3++)
+  for(var_03 = 0; var_03 < 5; var_3++) {
     var_0.loadoutsecondaryattachments[var_03] = cac_getweaponattachment(var_02, 1, var_03);
+  }
 
   var_0.loadoutsecondarycamo = cac_getweaponcamo(var_02, 1);
   var_0.loadoutsecondaryreticle = cac_getweaponreticle(var_02, 1);
@@ -484,80 +517,100 @@ loadout_updateclassgamemode(var_00, var_01) {
   if(isDefined(var_3["loadoutArchetype"])) {
     var_0.loadoutarchetype = var_3["loadoutArchetype"];
 
-    if(isbot(self))
+    if(isbot(self)) {
       self.botarchetype = var_3["loadoutArchetype"];
+    }
   } else if(isbot(self)) {
     var_04 = scripts\mp\bots\bots_loadout::bot_loadout_class_callback();
     var_0.loadoutarchetype = var_4["loadoutArchetype"];
   } else
     var_0.loadoutarchetype = cac_getcharacterarchetype();
 
-  if(isDefined(var_3["loadoutRigTrait"]))
+  if(isDefined(var_3["loadoutRigTrait"])) {
     var_0.loadoutrigtrait = var_3["loadoutRigTrait"];
+  }
 
-  if(isDefined(var_3["loadoutPrimary"]))
+  if(isDefined(var_3["loadoutPrimary"])) {
     var_0.loadoutprimary = var_3["loadoutPrimary"];
+  }
 
   for(var_05 = 0; var_05 < 6; var_5++) {
     var_06 = getattachmentloadoutstring(var_05, "primary");
 
-    if(isDefined(var_3[var_06]))
+    if(isDefined(var_3[var_06])) {
       var_0.loadoutprimaryattachments[var_05] = var_3[var_06];
+    }
   }
 
-  if(isDefined(var_3["loadoutPrimaryCamo"]))
+  if(isDefined(var_3["loadoutPrimaryCamo"])) {
     var_0.loadoutprimarycamo = var_3["loadoutPrimaryCamo"];
+  }
 
-  if(isDefined(var_3["loadoutPrimaryReticle"]))
+  if(isDefined(var_3["loadoutPrimaryReticle"])) {
     var_0.loadoutprimaryreticle = var_3["loadoutPrimaryReticle"];
+  }
 
-  if(isDefined(var_3["loadoutSecondary"]))
+  if(isDefined(var_3["loadoutSecondary"])) {
     var_0.loadoutsecondary = var_3["loadoutSecondary"];
+  }
 
   for(var_05 = 0; var_05 < 5; var_5++) {
     var_06 = getattachmentloadoutstring(var_05, "secondary");
 
-    if(isDefined(var_3[var_06]))
+    if(isDefined(var_3[var_06])) {
       var_0.loadoutsecondaryattachments[var_05] = var_3[var_06];
+    }
   }
 
-  if(isDefined(var_3["loadoutSecondaryCamo"]))
+  if(isDefined(var_3["loadoutSecondaryCamo"])) {
     var_0.loadoutsecondarycamo = var_3["loadoutSecondaryCamo"];
+  }
 
-  if(isDefined(var_3["loadoutSecondaryReticle"]))
+  if(isDefined(var_3["loadoutSecondaryReticle"])) {
     var_0.loadoutsecondaryreticle = var_3["loadoutSecondaryReticle"];
+  }
 
   var_0.loadoutperksfromgamemode = isDefined(var_3["loadoutPerks"]);
 
-  if(isDefined(var_3["loadoutPerks"]))
+  if(isDefined(var_3["loadoutPerks"])) {
     var_0.loadoutperks = var_3["loadoutPerks"];
+  }
 
-  if(isDefined(var_3["loadoutPowerPrimary"]))
+  if(isDefined(var_3["loadoutPowerPrimary"])) {
     var_0.func_AE7B = var_3["loadoutPowerPrimary"];
+  }
 
-  if(isDefined(var_3["loadoutExtraPowerPrimary"]))
+  if(isDefined(var_3["loadoutExtraPowerPrimary"])) {
     var_0.loadoutextrapowerprimary = var_3["loadoutExtraPowerPrimary"];
+  }
 
-  if(isDefined(var_3["loadoutPowerPrimaryPassives"]))
+  if(isDefined(var_3["loadoutPowerPrimaryPassives"])) {
     var_0.func_AE7C = var_3["loadoutPowerPrimaryPassives"];
+  }
 
-  if(isDefined(var_3["loadoutPowerSecondary"]))
+  if(isDefined(var_3["loadoutPowerSecondary"])) {
     var_0.func_AE7D = var_3["loadoutPowerSecondary"];
+  }
 
-  if(isDefined(var_3["loadoutExtraPowerSecondary"]))
+  if(isDefined(var_3["loadoutExtraPowerSecondary"])) {
     var_0.loadoutextrapowersecondary = var_3["loadoutExtraPowerSecondary"];
+  }
 
-  if(isDefined(var_3["loadoutPowerSecondaryPassives"]))
+  if(isDefined(var_3["loadoutPowerSecondaryPassives"])) {
     var_0.func_AE7E = var_3["loadoutPowerSecondaryPassives"];
+  }
 
-  if(isDefined(var_3["loadoutSuper"]))
+  if(isDefined(var_3["loadoutSuper"])) {
     var_0.loadoutsuper = var_3["loadoutSuper"];
+  }
 
   if(isDefined(var_3["loadoutGesture"]) && var_3["loadoutGesture"] == "playerData") {
-    if(isbot(self))
+    if(isbot(self)) {
       var_0.loadoutgesture = "none";
-    else
+    }
+    else {
       var_0.loadoutgesture = cac_getgesture();
+    }
   } else if(isDefined(var_3["loadoutGesture"]))
     var_0.loadoutgesture = var_3["loadoutGesture"];
 
@@ -567,20 +620,25 @@ loadout_updateclassgamemode(var_00, var_01) {
     var_0.loadoutkillstreak2 = var_3["loadoutKillstreak2"];
     var_0.loadoutkillstreak3 = var_3["loadoutKillstreak3"];
 
-    if(isDefined(var_3["loadoutKillstreak1Passives"]))
+    if(isDefined(var_3["loadoutKillstreak1Passives"])) {
       var_0.func_AE6F = var_3["loadoutKillstreak1Passives"];
+    }
 
-    if(isDefined(var_3["loadoutKillstreak2Passives"]))
+    if(isDefined(var_3["loadoutKillstreak2Passives"])) {
       var_0.func_AE71 = var_3["loadoutKillstreak2Passives"];
+    }
 
-    if(isDefined(var_3["loadoutKillstreak3Passives"]))
+    if(isDefined(var_3["loadoutKillstreak3Passives"])) {
       var_0.func_AE73 = var_3["loadoutKillstreak3Passives"];
+    }
   }
 
-  if(var_3["loadoutJuggernaut"])
+  if(var_3["loadoutJuggernaut"]) {
     func_AE23();
-  else if(scripts\mp\utility\game::isjuggernaut())
+  }
+  else if(scripts\mp\utility\game::isjuggernaut()) {
     loadout_removejugg_MAYBE();
+  }
 }
 
 func_AE50(var_00) {
@@ -589,95 +647,121 @@ func_AE50(var_00) {
 }
 
 loadout_updateclasscallback(var_00) {
-  if(!isDefined(self.classcallback))
+  if(!isDefined(self.classcallback)) {
     scripts\engine\utility::error("self.classCallback function reference required for class 'callback'");
+  }
 
   var_01 = self[[self.classcallback]]();
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     scripts\engine\utility::error("array required from self.classCallback for class 'callback'");
+  }
 
-  if(isDefined(var_1["loadoutArchetype"]))
+  if(isDefined(var_1["loadoutArchetype"])) {
     var_0.loadoutarchetype = var_1["loadoutArchetype"];
+  }
 
-  if(isDefined(var_1["loadoutPrimary"]))
+  if(isDefined(var_1["loadoutPrimary"])) {
     var_0.loadoutprimary = var_1["loadoutPrimary"];
+  }
 
   for(var_02 = 0; var_02 < 6; var_2++) {
     var_03 = getattachmentloadoutstring(var_02, "primary");
 
-    if(isDefined(var_1[var_03]))
+    if(isDefined(var_1[var_03])) {
       var_0.loadoutprimaryattachments[var_02] = var_1[var_03];
+    }
   }
 
-  if(isDefined(var_1["loadoutPrimaryCamo"]))
+  if(isDefined(var_1["loadoutPrimaryCamo"])) {
     var_0.loadoutprimarycamo = var_1["loadoutPrimaryCamo"];
+  }
 
-  if(isDefined(var_1["loadoutPrimaryReticle"]))
+  if(isDefined(var_1["loadoutPrimaryReticle"])) {
     var_0.loadoutprimaryreticle = var_1["loadoutPrimaryReticle"];
+  }
 
-  if(isDefined(var_1["loadoutSecondary"]))
+  if(isDefined(var_1["loadoutSecondary"])) {
     var_0.loadoutsecondary = var_1["loadoutSecondary"];
+  }
 
   for(var_02 = 0; var_02 < 5; var_2++) {
     var_03 = getattachmentloadoutstring(var_02, "secondary");
 
-    if(isDefined(var_1[var_03]))
+    if(isDefined(var_1[var_03])) {
       var_0.loadoutsecondaryattachments[var_02] = var_1[var_03];
+    }
   }
 
-  if(isDefined(var_1["loadoutSecondaryCamo"]))
+  if(isDefined(var_1["loadoutSecondaryCamo"])) {
     var_0.loadoutsecondarycamo = var_1["loadoutSecondaryCamo"];
+  }
 
-  if(isDefined(var_1["loadoutSecondaryReticle"]))
+  if(isDefined(var_1["loadoutSecondaryReticle"])) {
     var_0.loadoutsecondaryreticle = var_1["loadoutSecondaryReticle"];
+  }
 
-  if(isDefined(var_1["loadoutPowerPrimary"]))
+  if(isDefined(var_1["loadoutPowerPrimary"])) {
     var_0.func_AE7B = var_1["loadoutPowerPrimary"];
+  }
 
-  if(isDefined(var_1["loadoutPowerPrimaryPassives"]))
+  if(isDefined(var_1["loadoutPowerPrimaryPassives"])) {
     var_0.func_AE7C = var_1["loadoutPowerPrimaryPassives"];
+  }
 
-  if(isDefined(var_1["loadoutExtraPowerPrimary"]))
+  if(isDefined(var_1["loadoutExtraPowerPrimary"])) {
     var_0.loadoutextrapowerprimary = var_1["loadoutExtraPowerPrimary"];
+  }
 
-  if(isDefined(var_1["loadoutPowerSecondary"]))
+  if(isDefined(var_1["loadoutPowerSecondary"])) {
     var_0.func_AE7D = var_1["loadoutPowerSecondary"];
+  }
 
-  if(isDefined(var_1["loadoutPowerSecondaryPassives"]))
+  if(isDefined(var_1["loadoutPowerSecondaryPassives"])) {
     var_0.func_AE7E = var_1["loadoutPowerSecondaryPassives"];
+  }
 
-  if(isDefined(var_1["loadoutExtraPowerSecondary"]))
+  if(isDefined(var_1["loadoutExtraPowerSecondary"])) {
     var_0.loadoutextrapowersecondary = var_1["loadoutPowerExtraSecondary"];
+  }
 
-  if(isDefined(var_1["loadoutSuper"]))
+  if(isDefined(var_1["loadoutSuper"])) {
     var_0.loadoutsuper = var_1["loadoutSuper"];
+  }
 
-  if(isDefined(var_1["loadoutGesture"]))
+  if(isDefined(var_1["loadoutGesture"])) {
     var_0.loadoutgesture = var_1["loadoutGesture"];
+  }
 
   var_0.loadoutstreaksfilled = isDefined(var_1["loadoutStreak1"]) || isDefined(var_1["loadoutStreak2"]) || isDefined(var_1["loadoutStreak3"]);
 
-  if(isDefined(var_1["loadoutStreakType"]))
+  if(isDefined(var_1["loadoutStreakType"])) {
     var_0.loadoutstreaktype = var_1["loadoutStreakType"];
+  }
 
-  if(isDefined(var_1["loadoutStreak1"]))
+  if(isDefined(var_1["loadoutStreak1"])) {
     var_0.loadoutkillstreak1 = var_1["loadoutStreak1"];
+  }
 
-  if(isDefined(var_1["loadoutStreak2"]))
+  if(isDefined(var_1["loadoutStreak2"])) {
     var_0.loadoutkillstreak2 = var_1["loadoutStreak2"];
+  }
 
-  if(isDefined(var_1["loadoutStreak3"]))
+  if(isDefined(var_1["loadoutStreak3"])) {
     var_0.loadoutkillstreak3 = var_1["loadoutStreak3"];
+  }
 
-  if(isDefined(var_1["loadoutKillstreak1Passives"]))
+  if(isDefined(var_1["loadoutKillstreak1Passives"])) {
     var_0.func_AE6F = var_1["loadoutKillstreak1Passives"];
+  }
 
-  if(isDefined(var_1["loadoutKillstreak2Passives"]))
+  if(isDefined(var_1["loadoutKillstreak2Passives"])) {
     var_0.func_AE71 = var_1["loadoutKillstreak2Passives"];
+  }
 
-  if(isDefined(var_1["loadoutKillstreak3Passives"]))
+  if(isDefined(var_1["loadoutKillstreak3Passives"])) {
     var_0.func_AE73 = var_1["loadoutKillstreak3Passives"];
+  }
 }
 
 loadout_updateclassdefault(var_00, var_01) {
@@ -685,15 +769,17 @@ loadout_updateclassdefault(var_00, var_01) {
   self.class_num = var_02;
   var_0.loadoutprimary = table_getweapon(level.classtablename, var_02, 0);
 
-  for(var_03 = 0; var_03 < 6; var_3++)
+  for(var_03 = 0; var_03 < 6; var_3++) {
     var_0.loadoutprimaryattachments[var_03] = table_getweaponattachment(level.classtablename, var_02, 0, var_03);
+  }
 
   var_0.loadoutprimarycamo = table_getweaponcamo(level.classtablename, var_02, 0);
   var_0.loadoutprimaryreticle = table_getweaponreticle(level.classtablename, var_02, 0);
   var_0.loadoutsecondary = table_getweapon(level.classtablename, var_02, 1);
 
-  for(var_03 = 0; var_03 < 5; var_3++)
+  for(var_03 = 0; var_03 < 5; var_3++) {
     var_0.loadoutsecondaryattachments[var_03] = table_getweaponattachment(level.classtablename, var_02, 1, var_03);
+  }
 
   var_0.loadoutsecondarycamo = table_getweaponcamo(level.classtablename, var_02, 1);
   var_0.loadoutsecondaryreticle = table_getweaponreticle(level.classtablename, var_02, 1);
@@ -717,17 +803,21 @@ loadout_updatestreaktype(var_00) {
 }
 
 loadout_updateabilities(var_00, var_01) {
-  if(!isDefined(self.pers["loadoutPerks"]))
+  if(!isDefined(self.pers["loadoutPerks"])) {
     self.pers["loadoutPerks"] = [];
+  }
 
-  if(!isDefined(self.pers["loadoutStandardPerks"]))
+  if(!isDefined(self.pers["loadoutStandardPerks"])) {
     self.pers["loadoutStandardPerks"] = [];
+  }
 
-  if(!isDefined(self.pers["loadoutExtraPerks"]))
+  if(!isDefined(self.pers["loadoutExtraPerks"])) {
     self.pers["loadoutExtraPerks"] = [];
+  }
 
-  if(!isDefined(self.pers["loadoutRigTrait"]))
+  if(!isDefined(self.pers["loadoutRigTrait"])) {
     self.pers["loadoutRigTrait"] = [];
+  }
 
   if(scripts\mp\utility\game::isjuggernaut()) {
     return;
@@ -737,11 +827,13 @@ loadout_updateabilities(var_00, var_01) {
   if(var_0.loadoutperksfromgamemode) {
     return;
   }
-  if(!scripts\mp\utility\game::perksenabled())
+  if(!scripts\mp\utility\game::perksenabled()) {
     return;
+  }
   else if(isai(self)) {
-    if(isDefined(self.pers["loadoutPerks"]))
+    if(isDefined(self.pers["loadoutPerks"])) {
       var_0.loadoutperks = self.pers["loadoutPerks"];
+    }
   } else if(haschangedclass() || haschangedarchetype()) {
     var_03 = loadout_getclassteam(var_01);
 
@@ -807,18 +899,24 @@ loadout_updateabilities(var_00, var_01) {
 loadout_updateclass(var_00, var_01) {
   var_02 = loadout_getclassteam(var_01);
 
-  if(var_02 != "none")
+  if(var_02 != "none") {
     loadout_updateclassteam(var_00, var_01);
-  else if(issubstr(var_01, "custom"))
+  }
+  else if(issubstr(var_01, "custom")) {
     loadout_updateclasscustom(var_00, var_01);
-  else if(var_01 == "gamemode")
+  }
+  else if(var_01 == "gamemode") {
     loadout_updateclassgamemode(var_00, var_01);
-  else if(var_01 == "rc8Agent")
+  }
+  else if(var_01 == "rc8Agent") {
     func_AE50(var_00);
-  else if(var_01 == "callback")
+  }
+  else if(var_01 == "callback") {
     loadout_updateclasscallback(var_00);
-  else
+  }
+  else {
     loadout_updateclassdefault(var_00, var_01);
+  }
 
   loadout_updateclassfistweapons(var_00);
   loadout_updatestreaktype(var_00);
@@ -828,18 +926,22 @@ loadout_updateclass(var_00, var_01) {
 }
 
 loadout_updateclassfistweapons(var_00) {
-  if(var_0.loadoutprimary == "none")
+  if(var_0.loadoutprimary == "none") {
     var_0.loadoutprimary = "iw7_fists";
+  }
 
-  if(var_0.loadoutsecondary == "none" && var_0.loadoutprimary != "iw7_fists")
+  if(var_0.loadoutsecondary == "none" && var_0.loadoutprimary != "iw7_fists") {
     var_0.loadoutsecondary = "iw7_fists";
-  else if(var_0.loadoutprimary == "iw7_fists" && var_0.loadoutsecondary == "iw7_fists")
+  }
+  else if(var_0.loadoutprimary == "iw7_fists" && var_0.loadoutsecondary == "iw7_fists") {
     var_0.loadoutsecondary = "none";
+  }
 }
 
 loadout_validateclass(var_00, var_01) {
-  if(issubstr(var_01, "custom"))
+  if(issubstr(var_01, "custom")) {
     return scripts\mp\validation::validateloadout(var_00);
+  }
 
   return var_00;
 }
@@ -975,25 +1077,30 @@ loadout_updateplayerarchetype(var_00) {
   self goal_type(1, scripts\engine\utility::ter_op(scripts\mp\utility\game::isanymlgmatch(), 2500, 0));
 
   if(isDefined(level.supportdoublejump_MAYBE)) {
-    if(!level.supportdoublejump_MAYBE)
+    if(!level.supportdoublejump_MAYBE) {
       scripts\engine\utility::allow_doublejump(0);
+    }
   }
 
   if(isDefined(level.supportwallrun_MAYBE)) {
-    if(!level.supportwallrun_MAYBE)
+    if(!level.supportwallrun_MAYBE) {
       scripts\engine\utility::allow_wallrun(0);
+    }
   }
 
-  if(isDefined(var_07))
+  if(isDefined(var_07)) {
     self[[var_07]]();
+  }
 
   if(isDefined(var_08)) {
     self give_explosive_touch_on_revived(var_08);
 
-    if(var_08 == "c6servo")
+    if(var_08 == "c6servo") {
       self _meth_8460("clothtype", "c6servo");
-    else
+    }
+    else {
       self _meth_8460("clothtype", "");
+    }
 
     self.func_42B0 = var_08;
   }
@@ -1013,10 +1120,12 @@ loadout_updateclassfinalweapons(var_00) {
 
   var_0.loadoutprimaryfullname = buildweaponname(var_0.loadoutprimary, var_0.loadoutprimaryattachments, var_0.loadoutprimarycamo, var_0.loadoutprimaryreticle, var_0.loadoutprimaryvariantid, self getentitynumber(), self.clientid, var_0.func_AE8B, var_0.loadoutprimarycosmeticattachment);
 
-  if(var_0.loadoutsecondary == "none")
+  if(var_0.loadoutsecondary == "none") {
     var_0.loadoutsecondaryfullname = "none";
-  else
+  }
+  else {
     var_0.loadoutsecondaryfullname = buildweaponname(var_0.loadoutsecondary, var_0.loadoutsecondaryattachments, var_0.loadoutsecondarycamo, var_0.loadoutsecondaryreticle, var_0.func_AEA5, self getentitynumber(), self.clientid, var_0.func_AE9F, var_0.loadoutsecondarycosmeticattachment);
+  }
 }
 
 loadout_updateplayerweapons(var_00, var_01, var_02) {
@@ -1054,16 +1163,18 @@ loadout_updateplayerweapons(var_00, var_01, var_02) {
     scripts\mp\utility\game::_giveweapon(var_04, undefined, undefined, 1);
     scripts\mp\weapons::updatetogglescopestate(var_0.loadoutsecondaryfullname);
 
-    if(scripts\mp\utility\game::getweaponrootname(var_04) == "iw7_axe")
+    if(scripts\mp\utility\game::getweaponrootname(var_04) == "iw7_axe") {
       self setweaponammoclip(var_04, 1);
+    }
 
     scripts\mp\perks\weaponpassives::loadoutweapongiven(var_0.loadoutsecondaryfullname);
   }
 
   var_05 = var_03;
 
-  if(var_04 != "none" && getweaponbasename(var_05) == "iw7_fists_mp")
+  if(var_04 != "none" && getweaponbasename(var_05) == "iw7_fists_mp") {
     var_05 = var_04;
+  }
 
   if(!isai(self)) {
     self.saved_lastweaponhack = undefined;
@@ -1090,8 +1201,9 @@ loadout_updateplayerperks(var_00) {
   scripts\mp\utility\game::giveperk("specialty_sharp_focus");
   scripts\mp\utility\game::giveperk("specialty_silentdoublejump");
 
-  if(var_0.loadoutperks.size > 0)
+  if(var_0.loadoutperks.size > 0) {
     scripts\mp\perks::giveperks(var_0.loadoutperks, 0);
+  }
 
   self.pers["loadoutPerks"] = var_0.loadoutperks;
   self.pers["loadoutStandardPerks"] = var_0.loadoutstandardperks;
@@ -1099,8 +1211,9 @@ loadout_updateplayerperks(var_00) {
   self.pers["loadoutRigTrait"] = var_0.loadoutrigtrait;
   self setclientomnvar("ui_trait_ref", scripts\mp\perks::getequipmenttableinfo(self.pers["loadoutRigTrait"]));
 
-  if(!scripts\mp\utility\game::isjuggernaut() && isDefined(self.avoidkillstreakonspawntimer) && self.avoidkillstreakonspawntimer > 0)
+  if(!scripts\mp\utility\game::isjuggernaut() && isDefined(self.avoidkillstreakonspawntimer) && self.avoidkillstreakonspawntimer > 0) {
     thread scripts\mp\perks::giveperksafterspawn();
+  }
 }
 
 loadout_updateplayerpowers_MAYBE(var_00) {
@@ -1115,19 +1228,24 @@ loadout_updateplayersuper(var_00) {
   var_01 = var_0.loadoutsuper;
 
   if(isbot(self) && level.allowsupers) {
-    if(isDefined(self.loadoutsuper))
+    if(isDefined(self.loadoutsuper)) {
       var_01 = self.loadoutsuper;
-    else
+    }
+    else {
       var_01 = scripts\mp\bots\bots_supers::func_2EE9();
+    }
 
     var_0.loadoutsuper = var_01;
 
-    if(isDefined(self.loadoutrigtrait))
+    if(isDefined(self.loadoutrigtrait)) {
       var_02 = self.loadoutrigtrait;
-    else if(isDefined(var_0.loadoutrigtrait) && self.class == "gamemode")
+    }
+    else if(isDefined(var_0.loadoutrigtrait) && self.class == "gamemode") {
       var_02 = var_0.loadoutrigtrait;
-    else
+    }
+    else {
       var_02 = scripts\mp\bots\bots_supers::botpicktrait();
+    }
 
     var_0.loadoutrigtrait = var_02;
     self.pers["loadoutRigTrait"] = var_02;
@@ -1221,31 +1339,38 @@ loadout_updateplayerkillstreaks(var_00, var_01) {
   func_F775(var_0.loadoutkillstreak1, var_0.loadoutkillstreak2, var_0.loadoutkillstreak3);
   var_06 = 0;
 
-  if(!isagent(self))
+  if(!isagent(self)) {
     var_06 = scripts\mp\killstreaks\killstreaks::func_213F([var_0.loadoutkillstreak1, var_0.loadoutkillstreak2, var_0.loadoutkillstreak3]);
+  }
 
   if(!isagent(self) && !var_06) {
     self notify("givingLoadout");
     var_07 = scripts\mp\killstreaks\killstreaks::func_7ED6();
     var_08 = scripts\mp\killstreaks\killstreaks::func_7DE7();
 
-    if(!scripts\mp\utility\game::_hasperk("specialty_support_killstreaks") && !isDefined(self.func_5FBD))
+    if(!scripts\mp\utility\game::_hasperk("specialty_support_killstreaks") && !isDefined(self.func_5FBD)) {
       scripts\mp\killstreaks\killstreaks::func_41C0();
+    }
 
-    if(isDefined(var_0.loadoutkillstreak1) && var_0.loadoutkillstreak1 != "none" && var_0.loadoutkillstreak1 != "")
+    if(isDefined(var_0.loadoutkillstreak1) && var_0.loadoutkillstreak1 != "none" && var_0.loadoutkillstreak1 != "") {
       scripts\mp\killstreaks\killstreaks::func_66B9(var_0.loadoutkillstreak1, var_0.func_AE6F, var_0.loadoutkillstreak1variantid);
+    }
 
-    if(isDefined(var_0.loadoutkillstreak2) && var_0.loadoutkillstreak2 != "none" && var_0.loadoutkillstreak2 != "")
+    if(isDefined(var_0.loadoutkillstreak2) && var_0.loadoutkillstreak2 != "none" && var_0.loadoutkillstreak2 != "") {
       scripts\mp\killstreaks\killstreaks::func_66BB(var_0.loadoutkillstreak2, var_0.func_AE71, var_0.loadoutkillstreak2variantid);
+    }
 
-    if(isDefined(var_0.loadoutkillstreak3) && var_0.loadoutkillstreak3 != "none" && var_0.loadoutkillstreak3 != "")
+    if(isDefined(var_0.loadoutkillstreak3) && var_0.loadoutkillstreak3 != "none" && var_0.loadoutkillstreak3 != "") {
       scripts\mp\killstreaks\killstreaks::func_66BA(var_0.loadoutkillstreak3, var_0.func_AE73, var_0.loadoutkillstreak3variantid);
+    }
 
-    for(var_09 = var_7.size - 1; var_09 >= 0; var_9--)
+    for(var_09 = var_7.size - 1; var_09 >= 0; var_9--) {
       scripts\mp\killstreaks\killstreaks::func_26D5(var_7[var_09]);
+    }
 
-    for(var_09 = 0; var_09 < var_8.size; var_9++)
+    for(var_09 = 0; var_09 < var_8.size; var_9++) {
       scripts\mp\killstreaks\killstreaks::func_26D5(var_8[var_09]);
+    }
   }
 
   self notify("equipKillstreaksFinished");
@@ -1316,8 +1441,9 @@ setmlgspectatorclientloadoutdata(var_00, var_01) {
       var_00 getrandomindex(var_05 + 1 + "_perk", var_07);
     }
   } else {
-    if(var_1.loadoutperksfromgamemode)
+    if(var_1.loadoutperksfromgamemode) {
       var_1.loadoutstandardperks = var_1.loadoutperks;
+    }
 
     for(var_05 = 0; var_05 < var_1.loadoutstandardperks.size; var_5++) {
       var_06 = var_1.loadoutstandardperks[var_05];
@@ -1353,16 +1479,18 @@ giveloadoutswap() {
   scripts\mp\weapons::func_DDF6();
   giveloadout(self.pers["team"], self.pers["class"]);
 
-  if(!scripts\mp\utility\game::gameflag("prematch_done"))
+  if(!scripts\mp\utility\game::gameflag("prematch_done")) {
     scripts\mp\playerlogic::allowprematchlook(self);
+  }
 }
 
 giveloadout(var_00, var_01, var_02) {
   self notify("giveLoadout_start");
   self.gettingloadout = 1;
 
-  if(isDefined(self.perks))
+  if(isDefined(self.perks)) {
     self.oldperks = self.perks;
+  }
 
   loadout_clearweapons();
   var_03 = undefined;
@@ -1390,15 +1518,17 @@ func_AE38(var_00, var_01) {
   if(!isplayer(self) && !isalive(self)) {
     return;
   }
-  if(getdvarint("com_codcasterEnabled", 0) == 1)
+  if(getdvarint("com_codcasterEnabled", 0) == 1) {
     thread setmlgspectatorclientloadoutdata(self, var_00);
+  }
 
   var_02 = scripts\mp\utility\game::getclassindex(var_01);
   var_03 = var_02;
   var_04 = getsubstr(var_01, 0, 7) == "default";
 
-  if(var_04)
+  if(var_04) {
     var_03 = var_03 + 20;
+  }
 
   var_05 = 10;
   var_06 = -1;
@@ -1419,8 +1549,9 @@ func_AE38(var_00, var_01) {
       setmatchdata("players", self.clientid, "loadouts", var_07, "classIndex", var_03);
       setmatchdata("players", self.clientid, "loadouts", var_07, "primaryWeaponSetup", "weapon", var_0.loadoutprimary);
 
-      for(var_10 = 0; var_10 < 6; var_10++)
+      for(var_10 = 0; var_10 < 6; var_10++) {
         setmatchdata("players", self.clientid, "loadouts", var_07, "primaryWeaponSetup", "attachment", var_10, var_0.loadoutprimaryattachments[var_10]);
+      }
 
       setmatchdata("players", self.clientid, "loadouts", var_07, "primaryWeaponSetup", "camo", var_0.loadoutprimarycamo);
       setmatchdata("players", self.clientid, "loadouts", var_07, "primaryWeaponSetup", "reticle", var_0.loadoutprimaryreticle);
@@ -1430,8 +1561,9 @@ func_AE38(var_00, var_01) {
       setmatchdata("players", self.clientid, "loadouts", var_07, "primaryWeaponSetup", "cosmeticAttachment", var_0.loadoutprimarycosmeticattachment);
       setmatchdata("players", self.clientid, "loadouts", var_07, "secondaryWeaponSetup", "weapon", var_0.loadoutsecondary);
 
-      for(var_10 = 0; var_10 < 5; var_10++)
+      for(var_10 = 0; var_10 < 5; var_10++) {
         setmatchdata("players", self.clientid, "loadouts", var_07, "secondaryWeaponSetup", "attachment", var_10, var_0.loadoutsecondaryattachments[var_10]);
+      }
 
       setmatchdata("players", self.clientid, "loadouts", var_07, "secondaryWeaponSetup", "camo", var_0.loadoutsecondarycamo);
       setmatchdata("players", self.clientid, "loadouts", var_07, "secondaryWeaponSetup", "reticle", var_0.loadoutsecondaryreticle);
@@ -1445,19 +1577,23 @@ func_AE38(var_00, var_01) {
       setmatchdata("players", self.clientid, "loadouts", var_07, "powerSetups", 1, "extraCharge", cac_getextracharge2(var_02));
       var_11 = var_0.loadoutstandardperks.size;
 
-      if(var_11 > 3)
+      if(var_11 > 3) {
         var_11 = 3;
+      }
 
-      for(var_12 = 0; var_12 < var_11; var_12++)
+      for(var_12 = 0; var_12 < var_11; var_12++) {
         setmatchdata("players", self.clientid, "loadouts", var_07, "loadoutPerks", var_12, var_0.loadoutstandardperks[var_12]);
+      }
 
       var_13 = var_0.loadoutextraperks.size;
 
-      if(var_13 > 3)
+      if(var_13 > 3) {
         var_13 = 3;
+      }
 
-      for(var_12 = 0; var_12 < var_13; var_12++)
+      for(var_12 = 0; var_12 < var_13; var_12++) {
         setmatchdata("players", self.clientid, "loadouts", var_07, "extraPerks", var_12, var_0.loadoutextraperks[var_12]);
+      }
 
       setmatchdata("players", self.clientid, "killstreaks", 0, var_0.loadoutkillstreak1);
       setmatchdata("players", self.clientid, "killstreaks", 1, var_0.loadoutkillstreak2);
@@ -1466,8 +1602,9 @@ func_AE38(var_00, var_01) {
       if(var_06 == 0) {
         self _meth_859B(self.clientid, self.headmodel, self.model);
 
-        if(isDefined(self.loadoutgesture))
+        if(isDefined(self.loadoutgesture)) {
           self _meth_85AB(self.clientid, self.loadoutgesture);
+        }
       }
 
       break;
@@ -1475,8 +1612,9 @@ func_AE38(var_00, var_01) {
   }
 
   if(isDefined(self.matchdatalifeindex) && scripts\mp\matchdata::canloglife(self.matchdatalifeindex)) {
-    if(isDefined(var_0.loadoutarchetype))
+    if(isDefined(var_0.loadoutarchetype)) {
       setmatchdata("lives", self.matchdatalifeindex, "archetype", var_0.loadoutarchetype);
+    }
 
     if(isDefined(var_0.loadoutrigtrait) && var_0.loadoutrigtrait != "specialty_null") {
       setmatchdata("lives", self.matchdatalifeindex, "trait", var_0.loadoutrigtrait);
@@ -1484,8 +1622,9 @@ func_AE38(var_00, var_01) {
     } else if(isDefined(self.lastmatchdatarigtrait))
       setmatchdata("lives", self.matchdatalifeindex, "trait", self.lastmatchdatarigtrait);
 
-    if(isDefined(var_0.loadoutsuper))
+    if(isDefined(var_0.loadoutsuper)) {
       setmatchdata("lives", self.matchdatalifeindex, "super", var_0.loadoutsuper);
+    }
 
     setmatchdata("lives", self.matchdatalifeindex, "loadoutIndex", var_06);
   }
@@ -1498,18 +1637,21 @@ hasvalidationinfraction() {
 }
 
 recordvalidationinfraction() {
-  if(isDefined(self.pers) && isDefined(self.pers["validationInfractions"]))
+  if(isDefined(self.pers) && isDefined(self.pers["validationInfractions"])) {
     self.pers["validationInfractions"] = self.pers["validationInfractions"] + 1;
+  }
 }
 
 _detachall() {
   self.headmodel = undefined;
 
-  if(isDefined(self.riotshieldmodel))
+  if(isDefined(self.riotshieldmodel)) {
     scripts\mp\utility\game::riotshield_detach(1);
+  }
 
-  if(isDefined(self.riotshieldmodelstowed))
+  if(isDefined(self.riotshieldmodelstowed)) {
     scripts\mp\utility\game::riotshield_detach(0);
+  }
 
   self.hasriotshieldequipped = 0;
   self detachall();
@@ -1518,11 +1660,13 @@ _detachall() {
 func_9EE1(var_00) {
   var_01 = tablelookup("mp\perktable.csv", 1, var_00, 8);
 
-  if(var_01 == "" || var_01 == "specialty_null")
+  if(var_01 == "" || var_01 == "specialty_null") {
     return 0;
+  }
 
-  if(!self getteamdompoints(var_01, "perk"))
+  if(!self getteamdompoints(var_01, "perk")) {
     return 0;
+  }
 
   return 1;
 }
@@ -1530,11 +1674,13 @@ func_9EE1(var_00) {
 canplayerplacesentry(var_00) {
   var_01 = tablelookup("mp\perktable.csv", 1, var_00, 8);
 
-  if(var_01 == "" || var_01 == "specialty_null")
+  if(var_01 == "" || var_01 == "specialty_null") {
     return "specialty_null";
+  }
 
-  if(!self getteamdompoints(var_01, "perk"))
+  if(!self getteamdompoints(var_01, "perk")) {
     return "specialty_null";
+  }
 
   return var_01;
 }
@@ -1556,8 +1702,9 @@ trackriotshield_ontrophystow() {
     scripts\mp\utility\game::riotshield_move(1);
     self waittill("offhand_end");
 
-    if(scripts\mp\weapons::isriotshield(self getcurrentweapon()) && isDefined(self.riotshieldmodelstowed))
+    if(scripts\mp\weapons::isriotshield(self getcurrentweapon()) && isDefined(self.riotshieldmodelstowed)) {
       scripts\mp\utility\game::riotshield_move(0);
+    }
   }
 }
 
@@ -1569,10 +1716,12 @@ func_11B04() {
   self.hasriotshieldequipped = scripts\mp\weapons::isriotshield(self.currentweaponatspawn);
 
   if(self.hasriotshield) {
-    if(self.hasriotshieldequipped)
+    if(self.hasriotshieldequipped) {
       scripts\mp\utility\game::riotshield_attach(1, scripts\mp\utility\game::riotshield_getmodel());
-    else
+    }
+    else {
       scripts\mp\utility\game::riotshield_attach(0, scripts\mp\utility\game::riotshield_getmodel());
+    }
   }
 
   thread trackriotshield_ontrophystow();
@@ -1588,24 +1737,30 @@ func_11B04() {
 
     if(var_01) {
       if(!isDefined(self.riotshieldmodel)) {
-        if(isDefined(self.riotshieldmodelstowed))
+        if(isDefined(self.riotshieldmodelstowed)) {
           scripts\mp\utility\game::riotshield_move(0);
-        else
+        }
+        else {
           scripts\mp\utility\game::riotshield_attach(1, scripts\mp\utility\game::riotshield_getmodel());
+        }
       }
     } else if(var_02) {
       if(!isDefined(self.riotshieldmodelstowed)) {
-        if(isDefined(self.riotshieldmodel))
+        if(isDefined(self.riotshieldmodel)) {
           scripts\mp\utility\game::riotshield_move(1);
-        else
+        }
+        else {
           scripts\mp\utility\game::riotshield_attach(0, scripts\mp\utility\game::riotshield_getmodel());
+        }
       }
     } else {
-      if(isDefined(self.riotshieldmodel))
+      if(isDefined(self.riotshieldmodel)) {
         scripts\mp\utility\game::riotshield_detach(1);
+      }
 
-      if(isDefined(self.riotshieldmodelstowed))
+      if(isDefined(self.riotshieldmodelstowed)) {
         scripts\mp\utility\game::riotshield_detach(0);
+      }
     }
 
     self.hasriotshield = var_01 || var_02;
@@ -1619,10 +1774,12 @@ updateattachmentsformlg(var_00) {
   for(var_02 = 0; var_02 < var_0.size; var_2++) {
     var_03 = var_0[var_02];
 
-    if(var_03 == "ripperrscope_camo")
+    if(var_03 == "ripperrscope_camo") {
       var_03 = "ripperrscope_na_camo";
-    else if(var_03 == "m8scope_camo")
+    }
+    else if(var_03 == "m8scope_camo") {
       var_03 = "m8scope_na_camo";
+    }
     else if(var_03 == "arripper" || var_03 == "arm8" || var_03 == "akimbofmg" || var_03 == "glarclassic" || var_03 == "glmp28" || var_03 == "shotgunlongshot" || var_03 == "glsmoke" || var_03 == "glsmoke_slow" || var_03 == "gltacburst" || var_03 == "gltacburst_big") {
       continue;
     }
@@ -1633,15 +1790,17 @@ updateattachmentsformlg(var_00) {
 }
 
 ismark2weapon(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
   return var_00 >= 32;
 }
 
 isholidayweapon(var_00, var_01) {
-  if(!isDefined(var_01) || var_01 < 0)
+  if(!isDefined(var_01) || var_01 < 0) {
     return 0;
+  }
 
   var_02 = scripts\mp\loot::lookupvariantref(scripts\mp\utility\game::getweaponrootname(var_00), var_01);
   return var_02 == "weapon_iw7_ripper_common_3" || var_02 == "weapon_iw7_lmg03_rare_3" || var_02 == "weapon_iw7_ar57_legendary_3";
@@ -1653,16 +1812,18 @@ isholidayweaponusingdefaultscope(var_00, var_01) {
 }
 
 issummerholidayweapon(var_00, var_01) {
-  if(!isDefined(var_01) || var_01 < 0)
+  if(!isDefined(var_01) || var_01 < 0) {
     return 0;
+  }
 
   var_02 = scripts\mp\loot::lookupvariantref(scripts\mp\utility\game::getweaponrootname(var_00), var_01);
   return var_02 == "weapon_iw7_erad_legendary_4" || var_02 == "weapon_iw7_ake_epic_4" || var_02 == "weapon_iw7_sdflmg_legendary_4" || var_02 == "weapon_iw7_mod2187_legendary_3" || var_02 == "weapon_iw7_longshot_legendary_3";
 }
 
 ishalloweenholidayweapon(var_00, var_01) {
-  if(!isDefined(var_01) || var_01 < 0)
+  if(!isDefined(var_01) || var_01 < 0) {
     return 0;
+  }
 
   var_02 = scripts\mp\loot::lookupvariantref(scripts\mp\utility\game::getweaponrootname(var_00), var_01);
   return var_02 == "weapon_iw7_kbs_rare_3" || var_02 == "weapon_iw7_ripper_rare_3" || var_02 == "weapon_iw7_m4_rare_3" || var_02 == "weapon_iw7_mod2187_legendary_5" || var_02 == "weapon_iw7_mag_rare_3" || var_02 == "weapon_iw7_minilmg_epic_3";
@@ -1670,8 +1831,9 @@ ishalloweenholidayweapon(var_00, var_01) {
 
 hasscope(var_00) {
   foreach(var_02 in var_00) {
-    if(scripts\mp\utility\game::getattachmenttype(var_02) == "rail")
+    if(scripts\mp\utility\game::getattachmenttype(var_02) == "rail") {
       return 1;
+    }
   }
 
   return 0;
@@ -1689,69 +1851,84 @@ buildweaponname(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, 
     if(var_11.size > 0) {
       var_01 = scripts\engine\utility::array_combine_unique(var_01, var_11);
 
-      foreach(var_13 in var_11)
+      foreach(var_13 in var_11) {
       scripts\mp\perks\weaponpassives::checkpassivemessage("passive_random_attachments", "_" + scripts\mp\utility\game::attachmentmap_tounique(var_13, var_10));
+      }
     }
   }
 
-  for(var_15 = 0; var_15 < var_1.size; var_15++)
+  for(var_15 = 0; var_15 < var_1.size; var_15++) {
     var_1[var_15] = ::scripts\mp\utility\game::attachmentmap_tounique(var_1[var_15], var_10);
-
-  if(isDefined(var_09)) {
-    for(var_15 = 0; var_15 < var_9.size; var_15++)
-      var_9[var_15] = ::scripts\mp\utility\game::attachmentmap_tounique(var_9[var_15], var_10);
   }
 
-  if(isDefined(var_09))
+  if(isDefined(var_09)) {
+    for(var_15 = 0; var_15 < var_9.size; var_15++) {
+      var_9[var_15] = ::scripts\mp\utility\game::attachmentmap_tounique(var_9[var_15], var_10);
+    }
+  }
+
+  if(isDefined(var_09)) {
     var_01 = scripts\engine\utility::array_combine_unique(var_01, var_09);
+  }
 
   if(isDefined(var_04)) {
     var_16 = getweaponvariantattachments(var_10, var_04);
 
-    if(var_16.size > 0)
+    if(var_16.size > 0) {
       var_01 = scripts\engine\utility::array_combine_unique(var_01, var_16);
+    }
   }
 
-  if(isDefined(var_08) && var_08 != "none")
+  if(isDefined(var_08) && var_08 != "none") {
     var_1[var_1.size] = var_08;
+  }
 
-  if(var_1.size > 0)
+  if(var_1.size > 0) {
     var_01 = filterattachments(var_01);
+  }
 
   var_17 = [];
 
   foreach(var_19 in var_01) {
     var_20 = scripts\mp\utility\game::attachmentmap_toextra(var_19);
 
-    if(isDefined(var_20))
+    if(isDefined(var_20)) {
       var_17[var_17.size] = ::scripts\mp\utility\game::attachmentmap_tounique(var_20, var_10);
+    }
   }
 
-  if(var_17.size > 0)
+  if(var_17.size > 0) {
     var_01 = scripts\engine\utility::array_combine_unique(var_01, var_17);
+  }
 
-  if(scripts\mp\utility\game::isanymlgmatch())
+  if(scripts\mp\utility\game::isanymlgmatch()) {
     var_01 = updateattachmentsformlg(var_01);
+  }
 
-  if(var_1.size > 0)
+  if(var_1.size > 0) {
     var_01 = scripts\engine\utility::alphabetize(var_01);
+  }
 
-  foreach(var_23 in var_01)
+  foreach(var_23 in var_01) {
   var_10 = var_10 + ("+" + var_23);
+  }
 
   if(issubstr(var_10, "iw7")) {
     var_10 = buildweaponnamecamo(var_10, var_02, var_04);
     var_25 = 0;
 
-    if(isholidayweapon(var_10, var_04) || issummerholidayweapon(var_10, var_04) || ishalloweenholidayweapon(var_10, var_04))
+    if(isholidayweapon(var_10, var_04) || issummerholidayweapon(var_10, var_04) || ishalloweenholidayweapon(var_10, var_04)) {
       var_25 = isholidayweaponusingdefaultscope(var_10, var_01);
+    }
 
     if(hasscope(var_01)) {
       if(var_25 && !issubstr(var_10, "iw7_longshot")) {
-        if(ishalloweenholidayweapon(var_10, var_04))
+        if(ishalloweenholidayweapon(var_10, var_04)) {
           var_10 = var_10 + ("+scope" + gethalloweenscopenumber(var_10, var_04));
-        else
+        }
+        else {
           var_10 = var_10 + "+scope1";
+        }
       } else
         var_10 = buildweaponnamereticle(var_10, var_03);
     }
@@ -1763,8 +1940,9 @@ buildweaponname(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, 
 }
 
 gethalloweenscopenumber(var_00, var_01) {
-  if(!isDefined(var_01) || var_01 < 0)
+  if(!isDefined(var_01) || var_01 < 0) {
     return 0;
+  }
 
   var_02 = scripts\mp\loot::lookupvariantref(scripts\mp\utility\game::getweaponrootname(var_00), var_01);
   var_03 = 0;
@@ -1801,8 +1979,9 @@ getrandomweaponattachments(var_00, var_01, var_02) {
 func_11754(var_00, var_01) {
   var_02 = getavailableattachments(var_00, [], 0);
 
-  foreach(var_04 in var_02)
+  foreach(var_04 in var_02) {
   scripts\mp\perks\weaponpassives::testpassivemessage("passive_random_attachments", "_" + scripts\mp\utility\game::attachmentmap_tounique(var_04, var_00));
+  }
 }
 
 buildrandomattachmentarray(var_00, var_01, var_02) {
@@ -1833,8 +2012,9 @@ buildrandomattachmentarray(var_00, var_01, var_02) {
       }
 
       if(var_08 > 0) {
-        if(var_08 > var_7.size)
+        if(var_08 > var_7.size) {
           var_08 = var_7.size;
+        }
 
         var_01 = var_01 - var_08;
 
@@ -1859,8 +2039,9 @@ getattachmenttypeslist(var_00, var_01) {
     if(listhasattachment(var_01, var_05)) {
       continue;
     }
-    if(!isDefined(var_3[var_06]))
+    if(!isDefined(var_3[var_06])) {
       var_3[var_06] = [];
+    }
 
     var_07 = var_3[var_06];
     var_7[var_7.size] = var_05;
@@ -1871,8 +2052,9 @@ getattachmenttypeslist(var_00, var_01) {
 }
 
 getavailableattachments(var_00, var_01, var_02) {
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 1;
+  }
 
   var_03 = scripts\mp\utility\game::getweaponattachmentarrayfromstats(var_00);
   var_04 = [];
@@ -1894,8 +2076,9 @@ getavailableattachments(var_00, var_01, var_02) {
 
 listhasattachment(var_00, var_01) {
   foreach(var_03 in var_00) {
-    if(var_03 == var_01)
+    if(var_03 == var_01) {
       return 1;
+    }
   }
 
   return 0;
@@ -1915,16 +2098,18 @@ dontcastdistantshadows(var_00, var_01) {
   if(var_0.size > 0) {
     var_00 = scripts\engine\utility::array_randomize(var_00);
 
-    if(var_01 > var_0.size)
+    if(var_01 > var_0.size) {
       var_01 = var_0.size;
+    }
 
     for(var_02 = []; var_01 > 0 && var_0.size > 0; var_1--) {
       var_03 = var_0[var_0.size - var_01];
       var_2[var_2.size] = var_03;
     }
 
-    if(var_2.size > 0)
+    if(var_2.size > 0) {
       return var_02;
+    }
   }
 
   return var_00;
@@ -1952,8 +2137,9 @@ filterattachments(var_00) {
         }
       }
 
-      if(var_04)
+      if(var_04) {
         var_1[var_1.size] = var_03;
+      }
     }
   }
 
@@ -1961,8 +2147,9 @@ filterattachments(var_00) {
 }
 
 buildweaponassetname(var_00, var_01) {
-  if(!isDefined(var_01) || var_01 < 0)
+  if(!isDefined(var_01) || var_01 < 0) {
     return scripts\mp\utility\game::func_13C75(var_00);
+  }
   else {
     var_02 = scripts\mp\loot::getweaponassetfromrootweapon(var_00, var_01);
     return var_02;
@@ -2006,10 +2193,12 @@ buildweaponnamecamo(var_00, var_01, var_02) {
     return var_00 + "+camo" + var_03;
   }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_03 = 0;
-  else
+  }
+  else {
     var_03 = int(tablelookup("mp\camoTable.csv", 1, var_01, scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+  }
 
   if(var_03 <= 0) {
     var_04 = scripts\mp\loot::getweaponqualitybyid(var_00, var_02);
@@ -2029,31 +2218,36 @@ buildweaponnamecamo(var_00, var_01, var_02) {
         break;
     }
 
-    if(isDefined(var_05))
+    if(isDefined(var_05)) {
       var_03 = int(tablelookup("mp\camoTable.csv", 1, var_05, scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
-    else
+    }
+    else {
       return var_00;
+    }
   }
 
   return var_00 + "+camo" + var_03;
 }
 
 buildweaponnamereticle(var_00, var_01) {
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return var_00;
+  }
 
   var_02 = int(tablelookup("mp\reticleTable.csv", 1, var_01, 5));
 
-  if(!isDefined(var_02) || var_02 == 0)
+  if(!isDefined(var_02) || var_02 == 0) {
     return var_00;
+  }
 
   var_00 = var_00 + ("+scope" + var_02);
   return var_00;
 }
 
 buildweaponnamevariantid(var_00, var_01) {
-  if(!isDefined(var_01) || var_01 < 0)
+  if(!isDefined(var_01) || var_01 < 0) {
     return var_00;
+  }
 
   var_00 = var_00 + ("+loot" + var_01);
   return var_00;
@@ -2066,12 +2260,14 @@ getweaponpassives(var_00, var_01) {
 weaponhaspassive(var_00, var_01, var_02) {
   var_03 = getweaponpassives(var_00, var_01);
 
-  if(!isDefined(var_03) || var_3.size <= 0)
+  if(!isDefined(var_03) || var_3.size <= 0) {
     return 0;
+  }
 
   foreach(var_05 in var_03) {
-    if(var_02 == var_05)
+    if(var_02 == var_05) {
       return 1;
+    }
   }
 
   return 0;
@@ -2117,8 +2313,9 @@ func_F775(var_00, var_01, var_02) {
   var_05 = 0;
 
   foreach(var_04, var_07 in var_03) {
-    if(var_04 > var_05)
+    if(var_04 > var_05) {
       var_05 = var_04;
+    }
   }
 
   for(var_08 = 0; var_08 <= var_05; var_8++) {
@@ -2140,26 +2337,31 @@ func_E19F() {
     self givemaxammo(var_04);
     self setweaponammoclip(var_04, 9999);
 
-    if(var_04 == "claymore_mp" || var_04 == "claymore_detonator_mp")
+    if(var_04 == "claymore_mp" || var_04 == "claymore_detonator_mp") {
       self setweaponammostock(var_04, 2);
+    }
   }
 
-  if(self getammocount(level.classgrenades[var_01]["primary"]["type"]) < level.classgrenades[var_01]["primary"]["count"])
+  if(self getammocount(level.classgrenades[var_01]["primary"]["type"]) < level.classgrenades[var_01]["primary"]["count"]) {
     self setweaponammoclip(level.classgrenades[var_01]["primary"]["type"], level.classgrenades[var_01]["primary"]["count"]);
+  }
 
-  if(self getammocount(level.classgrenades[var_01]["secondary"]["type"]) < level.classgrenades[var_01]["secondary"]["count"])
+  if(self getammocount(level.classgrenades[var_01]["secondary"]["type"]) < level.classgrenades[var_01]["secondary"]["count"]) {
     self setweaponammoclip(level.classgrenades[var_01]["secondary"]["type"], level.classgrenades[var_01]["secondary"]["count"]);
+  }
 }
 
 onplayerconnecting() {
   for(;;) {
     level waittill("connected", var_00);
 
-    if(!isDefined(var_0.pers["class"]))
+    if(!isDefined(var_0.pers["class"])) {
       var_0.pers["class"] = "";
+    }
 
-    if(!isDefined(var_0.pers["lastClass"]))
+    if(!isDefined(var_0.pers["lastClass"])) {
       var_0.pers["lastClass"] = "";
+    }
 
     var_0.class = var_0.pers["class"];
     var_0.lastclass = var_0.pers["lastClass"];
@@ -2175,8 +2377,9 @@ onplayerconnecting() {
       var_00 setclientomnvar("ui_selected_trait", scripts\mp\perks::getequipmenttableinfo(var_00 cac_getloadoutarchetypeperk()));
     }
 
-    if(!isDefined(var_0.pers["validationInfractions"]))
+    if(!isDefined(var_0.pers["validationInfractions"])) {
       var_0.pers["validationInfractions"] = 0;
+    }
   }
 }
 
@@ -2195,22 +2398,26 @@ iskillstreak(var_00) {
 }
 
 haschangedclass() {
-  if(isDefined(self.lastclass) && self.lastclass != self.class || !isDefined(self.lastclass))
+  if(isDefined(self.lastclass) && self.lastclass != self.class || !isDefined(self.lastclass)) {
     return 1;
+  }
 
-  if(level.gametype == "infect" && (!isDefined(self.last_infected_class) || self.last_infected_class != self.infected_class))
+  if(level.gametype == "infect" && (!isDefined(self.last_infected_class) || self.last_infected_class != self.infected_class)) {
     return 1;
+  }
 
   return 0;
 }
 
 haschangedarchetype() {
   if(isDefined(self.changedarchetypeinfo)) {
-    if(!isDefined(self.lastarchetypeinfo))
+    if(!isDefined(self.lastarchetypeinfo)) {
       return 1;
+    }
 
-    if(self.changedarchetypeinfo != self.lastarchetypeinfo)
+    if(self.changedarchetypeinfo != self.lastarchetypeinfo) {
       return 1;
+    }
   }
 
   return 0;
@@ -2278,8 +2485,9 @@ changearchetype(var_00, var_01, var_02) {
   if(isDefined(self.changedarchetypeinfo)) {
     var_03 = self.changedarchetypeinfo;
 
-    if(var_3.archetype == var_00 && var_3.super == var_01 && var_3.trait == var_02)
+    if(var_3.archetype == var_00 && var_3.super == var_01 && var_3.trait == var_02) {
       return;
+    }
   }
 
   var_04 = spawnStruct();
@@ -2298,18 +2506,21 @@ changearchetype(var_00, var_01, var_02) {
   if(isDefined(self.pers["class"]) && self.pers["class"] != "") {
     scripts\mp\menus::preloadandqueueclass(self.pers["class"]);
 
-    if(shouldallowinstantclassswap())
+    if(shouldallowinstantclassswap()) {
       giveloadoutswap();
-    else if(isalive(self))
+    }
+    else if(isalive(self)) {
       self iprintlnbold(game["strings"]["change_rig"]);
+    }
   }
 }
 
 getattachmentloadoutstring(var_00, var_01) {
   var_02 = scripts\engine\utility::ter_op(var_01 == "primary", "loadoutPrimaryAttachment", "loadoutSecondaryAttachment");
 
-  if(var_00 == 0)
+  if(var_00 == 0) {
     return var_02;
+  }
 
   return var_02 + (var_00 + 1);
 }

@@ -18,8 +18,9 @@ main() {
   level._effect["ground_smoke_launch_a"] = loadfx("smoke/ground_smoke_launch_a");
 
   /#	
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_countdown_fx::main();
+  }
 }
 
 ambientFX() {

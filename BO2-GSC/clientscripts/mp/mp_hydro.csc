@@ -94,13 +94,15 @@ hydroplayerconnected(localclientnum) {
   level thread water_killstreak_fx(localclientnum);
   water_sheeting_triggers = getEntArray(0, "prone_water_fx", "targetname");
 
-  foreach(trigger in water_sheeting_triggers)
+  foreach(trigger in water_sheeting_triggers) {
   trigger thread water_prone_fx(localclientnum);
+  }
 
   security_camera_balls = getEntArray(localclientnum, "security_camera_ball", "targetname");
 
-  foreach(cameraball in security_camera_balls)
+  foreach(cameraball in security_camera_balls) {
   cameraball thread cameratrackplayer(localclientnum);
+  }
 }
 
 water_killstreak_fx(localclientnum) {
@@ -111,8 +113,9 @@ water_killstreak_fx(localclientnum) {
   assert(isDefined(ents));
 
   foreach(ent in ents) {
-    if(!isDefined(ent.loopfx))
+    if(!isDefined(ent.loopfx)) {
       ent.loopfx = [];
+    }
   }
 
   airborne = 2 | 4 | 8;
@@ -128,8 +131,9 @@ water_killstreak_fx(localclientnum) {
       }
       foreach(ent in ents) {
         if(player.eflags2 &airborne) {
-          if(!isDefined(ent.loopfx[localclientnum]))
+          if(!isDefined(ent.loopfx[localclientnum])) {
             ent.loopfx[localclientnum] = playFX(localclientnum, level._effect[ent.v["fxid"]], ent.v["origin"], ent.v["forward"], ent.v["up"]);
+          }
 
           continue;
         }
@@ -159,10 +163,12 @@ water_prone_fx(localclientnum) {
       continue;
     }
     while(player istouching(self)) {
-      if(player getstance(localclientnum) == "prone")
+      if(player getstance(localclientnum) == "prone") {
         startwatersheetingfx(localclientnum);
-      else
+      }
+      else {
         stopwatersheetingfx(localclientnum, 2);
+      }
 
       wait 0.1;
 
@@ -179,8 +185,9 @@ playprewave(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
   if(localclientnum != 0) {
     return;
   }
-  if(!isDefined(level.water_multiplier))
+  if(!isDefined(level.water_multiplier)) {
     level.water_multiplier = 1;
+  }
 
   if(newval) {
     multiplier = getdvarfloat(#"_id_EF33F5E5");

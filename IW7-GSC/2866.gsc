@@ -32,8 +32,9 @@ func_73B1(var_00) {
   if(!isDefined(var_00)) {
     return;
   }
-  if(!isDefined(var_0.team))
+  if(!isDefined(var_0.team)) {
     var_0.team = "allies";
+  }
 
   if(isDefined(level.func_BFED)) {
     return;
@@ -72,8 +73,9 @@ func_73B1(var_00) {
 
     var_08 = 0;
 
-    if(!isDefined(var_06))
+    if(!isDefined(var_06)) {
       var_06 = var_0.damageweapon;
+    }
 
     if(isDefined(level.func_740C)) {
       if(isDefined(var_2.damageowner)) {
@@ -83,26 +85,31 @@ func_73B1(var_00) {
     }
 
     if(isDefined(level.func_740D)) {
-      if(isDefined(var_02) && isDefined(var_2.owner) && var_2.owner == level.player)
+      if(isDefined(var_02) && isDefined(var_2.owner) && var_2.owner == level.player) {
         var_08 = 1;
+      }
     }
 
     if(isplayer(var_02)) {
       var_08 = 1;
 
-      if(isDefined(var_06) && var_06 == "none")
+      if(isDefined(var_06) && var_06 == "none") {
         var_08 = 0;
+      }
 
-      if(var_02 isusingturret())
+      if(var_02 isusingturret()) {
         var_08 = 1;
+      }
 
-      if(isDefined(var_07))
+      if(isDefined(var_07)) {
         var_08 = 1;
+      }
     } else if(isDefined(var_2.code_classname) && var_2.code_classname == "script_vehicle") {
       var_09 = var_02 _meth_816A();
 
-      if(isDefined(var_09) && isplayer(var_09))
+      if(isDefined(var_09) && isplayer(var_09)) {
         var_08 = 1;
+      }
     }
 
     if(!var_08) {
@@ -114,10 +121,12 @@ func_73B1(var_00) {
     var_10 = var_0.team == level.player.team;
     var_11 = undefined;
 
-    if(isDefined(var_0.type) && var_0.type == "civilian")
+    if(isDefined(var_0.type) && var_0.type == "civilian") {
       var_11 = 1;
-    else
+    }
+    else {
       var_11 = issubstr(var_0.classname, "civilian");
+    }
 
     var_12 = var_01 == -1;
 
@@ -138,20 +147,24 @@ func_73B1(var_00) {
         continue;
       }
       if(var_12) {
-        if(isDefined(var_0.func_738F))
+        if(isDefined(var_0.func_738F)) {
           level.player.func_C929 = level.player.func_C929 + var_0.func_738F;
-        else
+        }
+        else {
           level.player.func_C929 = level.player.func_C929 + level.friendlyfire["friend_kill_points"];
+        }
       } else
         level.player.func_C929 = level.player.func_C929 - var_01;
 
       func_C92A();
 
       if(func_3DA1(var_00, var_05) && func_EB68()) {
-        if(var_12)
+        if(var_12) {
           return;
-        else
+        }
+        else {
           continue;
+        }
       }
 
       if(isDefined(level.func_73B0)) {
@@ -174,8 +187,9 @@ func_73AE(var_00) {
 
   var_01 = level.func_7417;
 
-  if(isDefined(level.func_740C) && var_00)
+  if(isDefined(level.func_740C) && var_00) {
     var_01 = 0;
+  }
 
   if(var_01) {
     return;
@@ -183,21 +197,25 @@ func_73AE(var_00) {
   if(level.func_7416 == 1) {
     return;
   }
-  if(level.player.func_C929 <= level.friendlyfire["min_participation"])
+  if(level.player.func_C929 <= level.friendlyfire["min_participation"]) {
     level thread func_B8CF(var_00);
+  }
 }
 
 func_3DA1(var_00, var_01) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
   var_02 = 0;
 
-  if(isDefined(var_0.damageweapon) && var_0.damageweapon == "none")
+  if(isDefined(var_0.damageweapon) && var_0.damageweapon == "none") {
     var_02 = 1;
+  }
 
-  if(isDefined(var_01) && var_01 == "MOD_GRENADE_SPLASH")
+  if(isDefined(var_01) && var_01 == "MOD_GRENADE_SPLASH") {
     var_02 = 1;
+  }
 
   return var_02;
 }
@@ -205,30 +223,36 @@ func_3DA1(var_00, var_01) {
 func_EB68() {
   var_00 = gettime();
 
-  if(var_00 < 4500)
+  if(var_00 < 4500) {
     return 1;
-  else if(var_00 - level.func_2668.func_A943 < 4500)
+  }
+  else if(var_00 - level.func_2668.func_A943 < 4500) {
     return 1;
+  }
 
   return 0;
 }
 
 func_C92A() {
-  if(level.player.func_C929 > level.friendlyfire["max_participation"])
+  if(level.player.func_C929 > level.friendlyfire["max_participation"]) {
     level.player.func_C929 = level.friendlyfire["max_participation"];
+  }
 
-  if(level.player.func_C929 < level.friendlyfire["min_participation"])
+  if(level.player.func_C929 < level.friendlyfire["min_participation"]) {
     level.player.func_C929 = level.friendlyfire["min_participation"];
+  }
 }
 
 func_C92B() {
   level endon("mission failed");
 
   for(;;) {
-    if(level.player.func_C929 > 0)
+    if(level.player.func_C929 > 0) {
       level.player.func_C929--;
-    else if(level.player.func_C929 < 0)
+    }
+    else if(level.player.func_C929 < 0) {
       level.player.func_C929++;
+    }
 
     wait(level.friendlyfire["point_loss_interval"]);
   }
@@ -243,8 +267,9 @@ func_129A9() {
 }
 
 func_B8CF(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 0;
+  }
 
   if(getdvar("friendlyfire_dev_disabled") == "1") {
     return;
@@ -269,15 +294,19 @@ func_B8CF(var_00) {
   if(isDefined(level.player.func_6AD1)) {
     return;
   }
-  if(var_00)
+  if(var_00) {
     setomnvar("ui_death_hint", 9);
-  else if(isDefined(level.func_4C51))
+  }
+  else if(isDefined(level.func_4C51)) {
     func_0B60::func_F32D(level.func_4C51);
-  else
+  }
+  else {
     setomnvar("ui_death_hint", 12);
+  }
 
-  if(isDefined(level.func_4C52))
+  if(isDefined(level.func_4C52)) {
     thread func_0B60::func_F330(level.func_4C52, 64, 64, 0);
+  }
 
   scripts\sp\utility::func_B8D1();
 }

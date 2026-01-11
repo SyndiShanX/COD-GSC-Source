@@ -112,8 +112,9 @@ splash_trig_think_plr() {
     if(who isplayer()) {
       playSound(0, "fly_player_jump_into_water", who.origin);
 
-      while(who istouching(self))
+      while(who istouching(self)) {
         wait 0.1;
+      }
     }
 
     wait 0.1;
@@ -127,13 +128,15 @@ splash_trig_think_ai() {
   while(true) {
     self waittill("trigger", who);
 
-    if(who isplayer())
+    if(who isplayer()) {
       continue;
+    }
     else {
       playSound(0, "fly_npc_jump_into_water", who.origin);
 
-      while(who istouching(self))
+      while(who istouching(self)) {
         wait 0.1;
+      }
     }
 
     wait 0.1;

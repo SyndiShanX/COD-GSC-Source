@@ -87,10 +87,12 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
     instruct1.y -= 90;
     instruct1.color = (1.0, 0.84, 0.0);
     instruct1.alpha = 0;
-    if(isDefined(p1))
+    if(isDefined(p1)) {
       instruct1 SetText(instruction1, p1);
-    else
+    }
+    else {
       instruct1 SetText(instruction1);
+    }
     instruct1 FadeOverTime(1);
     instruct1.alpha = 1;
     instruct1.hidewheninmenu = true;
@@ -107,10 +109,12 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
     instruct2.y -= 60;
     instruct2.color = (1.0, 0.84, 0.0);
     instruct2.alpha = 0;
-    if(isDefined(p2))
+    if(isDefined(p2)) {
       instruct2 SetText(instruction2, p2);
-    else
+    }
+    else {
       instruct2 SetText(instruction2);
+    }
     instruct2 FadeOverTime(2);
     instruct2.alpha = 1;
     instruct2.hidewheninmenu = true;
@@ -127,10 +131,12 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
     instruct3.y -= 30;
     instruct3.color = (1.0, 0.84, 0.0);
     instruct3.alpha = 0;
-    if(isDefined(p3))
+    if(isDefined(p3)) {
       instruct3 SetText(instruction3, p3);
-    else
+    }
+    else {
       instruct3 SetText(instruction3);
+    }
     instruct3 FadeOverTime(3);
     instruct3.alpha = 1;
     instruct3.hidewheninmenu = true;

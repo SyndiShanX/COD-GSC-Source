@@ -15,8 +15,9 @@ main() {
   maps\mp\animscripts\zm_utility::initialize("zombie_combat");
   self animmode("zonly_physics", 0);
 
-  if(isDefined(self.combat_animmode))
+  if(isDefined(self.combat_animmode)) {
     self[[self.combat_animmode]]();
+  }
 
   self orientmode("face angle", self.angles[1]);
 
@@ -40,19 +41,23 @@ exposedwait() {
 }
 
 trymelee() {
-  if(isDefined(self.cant_melee) && self.cant_melee)
+  if(isDefined(self.cant_melee) && self.cant_melee) {
     return false;
+  }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
 
-  if(distancesquared(self.origin, self.enemy.origin) > 262144)
+  if(distancesquared(self.origin, self.enemy.origin) > 262144) {
     return false;
+  }
 
   canmelee = maps\mp\animscripts\zm_melee::canmeleedesperate();
 
-  if(!canmelee)
+  if(!canmelee) {
     return false;
+  }
 
   self thread maps\mp\animscripts\zm_melee::meleecombat();
   return true;

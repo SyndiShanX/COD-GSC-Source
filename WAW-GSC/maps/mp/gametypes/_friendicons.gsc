@@ -4,8 +4,9 @@
 *****************************************************/
 
 init() {
-  if(getdvar("scr_drawfriend") == "")
+  if(getdvar("scr_drawfriend") == "") {
     setdvar("scr_drawfriend", "0");
+  }
   level.drawfriend = getdvarInt("scr_drawfriend");
   switch (game["allies"]) {
     case "marines":
@@ -99,8 +100,9 @@ updateFriendIcons() {
         players = level.players;
         for(i = 0; i < players.size; i++) {
           player = players[i];
-          if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing")
+          if(isDefined(player.pers["team"]) && player.pers["team"] != "spectator" && player.sessionstate == "playing") {
             player.headicon = "";
+          }
         }
       }
     }

@@ -10,8 +10,9 @@ init_riotshield() {
   level.riotshield_initialized = 1;
   level._effect["riot_shield_dmg"] = loadfx("fx/misc/riot_shield_dmg");
 
-  if(!isDefined(level.subclass_spawn_functions))
+  if(!isDefined(level.subclass_spawn_functions)) {
     level.subclass_spawn_functions = [];
+  }
 
   level.subclass_spawn_functions["riotshield"] = ::subclass_riotshield;
   animscripts\riotshield\riotshield::init_riotshield_ai_anims();
@@ -46,8 +47,9 @@ riotshield_flee() {
   animscripts\riotshield\riotshield::riotshield_init_flee();
   var_0 = self findbestcovernode();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self usecovernode(var_0);
+  }
 }
 
 group_create(var_0, var_1, var_2) {
@@ -63,8 +65,9 @@ group_create(var_0, var_1, var_2) {
   var_7 = spawnStruct();
 
   foreach(var_5 in var_3) {
-    if(isDefined(var_5.group) && isDefined(var_5.group.ai_array))
+    if(isDefined(var_5.group) && isDefined(var_5.group.ai_array)) {
       var_5.group.ai_array = common_scripts\utility::array_remove(var_5.group.ai_array, var_5);
+    }
 
     var_5.group = var_7;
   }
@@ -80,8 +83,9 @@ group_initialize_formation(var_0, var_1) {
   self.ai_array = maps\_utility::array_removedead(self.ai_array);
   self.forward = var_0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self.spacing = var_1;
+  }
 
   foreach(var_3 in self.ai_array) {
     var_3.goalradius = 25;
@@ -102,8 +106,9 @@ group_resort_on_deaths() {
   while(self.ai_array.size) {
     maps\_utility::waittill_dead(self.ai_array, 1);
 
-    if(self.group_move_mode != "stopped")
+    if(self.group_move_mode != "stopped") {
       self waittill("goal");
+    }
 
     self.ai_array = maps\_utility::array_removedead(self.ai_array);
     group_sort_by_closest_match();
@@ -114,10 +119,12 @@ group_sort_by_closest_match(var_0) {
   if(self.ai_array.size == 0) {
     return;
   }
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.forward = var_0;
-  else
+  }
+  else {
     var_0 = self.forward;
+  }
 
   var_1 = group_center();
   var_2 = (self.forward[1], -1 * self.forward[0], 0);
@@ -158,8 +165,9 @@ group_check_deaths() {
       self.ai_array = maps\_utility::array_removedead(self.ai_array);
 
       if(self.ai_array.size <= self.fleethreshold) {
-        foreach(var_1 in self.ai_array)
+        foreach(var_1 in self.ai_array) {
         var_1 riotshield_flee();
+        }
 
         self notify("break_group");
         break;
@@ -178,10 +186,12 @@ group_move(var_0, var_1) {
   self notify("new_goal_set");
   self.group_move_mode = "moving";
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self.forward = var_1;
-  else
+  }
+  else {
     var_1 = self.forward;
+  }
 
   var_2 = (var_1[1], -1 * var_1[0], 0);
   var_3 = var_2 * self.spacing;
@@ -190,8 +200,9 @@ group_move(var_0, var_1) {
   for(var_5 = 0; var_5 < self.ai_array.size; var_5++) {
     var_6 = self.ai_array[var_5];
 
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_6 setgoalpos(var_4);
+    }
 
     var_4 = var_4 + var_3;
   }
@@ -207,8 +218,9 @@ check_group_at_goal() {
     var_0 = 0;
 
     foreach(var_2 in self.ai_array) {
-      if(isDefined(var_2) && isalive(var_2))
+      if(isDefined(var_2) && isalive(var_2)) {
         var_0++;
+      }
     }
 
     var_4 = 0;
@@ -219,8 +231,9 @@ check_group_at_goal() {
       if(isDefined(var_2)) {
         var_6 = max(45, var_2.goalradius);
 
-        if(distancesquared(var_2.origin, var_2.goalpos) < squared(var_6))
+        if(distancesquared(var_2.origin, var_2.goalpos) < squared(var_6)) {
           var_4++;
+        }
       }
     }
 
@@ -239,8 +252,9 @@ check_group_facing_forward() {
     var_0 = 0;
 
     foreach(var_2 in self.ai_array) {
-      if(isDefined(var_2) && isalive(var_2))
+      if(isDefined(var_2) && isalive(var_2)) {
         var_0++;
+      }
     }
 
     var_4 = 0;
@@ -250,41 +264,47 @@ check_group_facing_forward() {
       var_2 = self.ai_array[var_6];
 
       if(isDefined(var_2)) {
-        if(abs(var_2.angles[1] - var_5) < 45)
+        if(abs(var_2.angles[1] - var_5) < 45) {
           var_4++;
+        }
       }
     }
 
-    if(var_4 == var_0)
+    if(var_4 == var_0) {
       self notify("goal_yaw");
+    }
   }
 }
 
 group_sprint_on() {
   foreach(var_1 in self.ai_array) {
-    if(isalive(var_1))
+    if(isalive(var_1)) {
       var_1 riotshield_sprint_on();
+    }
   }
 }
 
 group_fastwalk_on() {
   foreach(var_1 in self.ai_array) {
-    if(isalive(var_1))
+    if(isalive(var_1)) {
       var_1 riotshield_fastwalk_on();
+    }
   }
 }
 
 group_sprint_off() {
   foreach(var_1 in self.ai_array) {
-    if(isalive(var_1))
+    if(isalive(var_1)) {
       var_1 riotshield_sprint_off();
+    }
   }
 }
 
 group_fastwalk_off() {
   foreach(var_1 in self.ai_array) {
-    if(isalive(var_1))
+    if(isalive(var_1)) {
       var_1 riotshield_fastwalk_off();
+    }
   }
 }
 
@@ -340,8 +360,9 @@ group_center() {
     }
   }
 
-  if(var_1)
+  if(var_1) {
     var_0 = 1 / var_1 * var_0;
+  }
 
   return var_0;
 }

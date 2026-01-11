@@ -92,8 +92,9 @@ func_F684(var_00, var_01, var_02) {
   for(;;) {
     var_03 = scripts\engine\utility::waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
 
-    if(!isDefined(var_03))
+    if(!isDefined(var_03)) {
       var_03 = "force_cancel_placement";
+    }
 
     if(var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart") {
       if(!var_01 && var_03 == "cancel_ims") {
@@ -101,10 +102,12 @@ func_F684(var_00, var_01, var_02) {
       }
       var_00 func_6D9F(var_03 == "force_cancel_placement" && !isDefined(var_0.firstplacement));
 
-      if(var_03 != "force_cancel_placement")
+      if(var_03 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_01)
+      }
+      else if(var_01) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -112,8 +115,9 @@ func_F684(var_00, var_01, var_02) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_01)
+    if(var_01) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_00 thread func_6DA2(var_02);
     self notify("IMS_placed");
@@ -160,10 +164,12 @@ func_48EA(var_00, var_01) {
   var_4.config = level.func_6DA3[var_03];
   var_04 thread func_6D9D();
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_04 thread scripts\cp\utility::item_timeout(var_01);
-  else
+  }
+  else {
     var_04 thread scripts\cp\utility::item_timeout(undefined, level.func_6DA3[self.func_6DA4].lifespan);
+  }
 
   return var_04;
 }
@@ -219,8 +225,9 @@ func_6D9D() {
     }
     func_6DA1();
 
-    if(isDefined(self getlinkedparent()))
+    if(isDefined(self getlinkedparent())) {
       self unlink();
+    }
 
     var_00 thread func_F684(var_01, 0, self.lifespan);
     self delete();
@@ -232,13 +239,15 @@ func_6DA2(var_00) {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(self.carriedby))
+  if(isDefined(self.carriedby)) {
     self.carriedby getrigindexfromarchetyperef();
+  }
 
   self.carriedby = undefined;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.firstplacement = undefined;
   var_01 = func_48EA(self, var_00);
@@ -249,8 +258,9 @@ func_6DA2(var_00) {
   var_01 thread func_6D9E();
   var_02 = spawnStruct();
 
-  if(isDefined(self.moving_platform))
+  if(isDefined(self.moving_platform)) {
     var_2.linkparent = self.moving_platform;
+  }
 
   var_2.endonstring = "carried";
   var_2.deathoverridecallback = ::func_936D;
@@ -268,8 +278,9 @@ func_6D9F(var_00) {
     var_01 scripts\engine\utility::allow_weapon(1);
   }
 
-  if(isDefined(var_00) && var_00)
+  if(isDefined(var_00) && var_00) {
     func_66A7();
+  }
 
   self.carried_fireworks_trap delete();
   self delete();
@@ -286,8 +297,9 @@ func_6DA0(var_00) {
   thread func_936F(var_00);
   thread func_9371(var_00);
 
-  if(isDefined(level.func_5CF2))
+  if(isDefined(level.func_5CF2)) {
     self thread[[level.func_5CF2]](var_00);
+  }
 
   self notify("carried");
 }
@@ -327,12 +339,15 @@ func_6D9E() {
   var_06 = var_05;
   self.func_2514 = var_6["position"] - (0, 0, 20) - self.origin;
 
-  if(self.func_2514[2] < 250)
+  if(self.func_2514[2] < 250) {
     self.func_AA7B = "launch_low";
-  else if(self.func_2514[2] < 450)
+  }
+  else if(self.func_2514[2] < 450) {
     self.func_AA7B = "launch_med";
-  else
+  }
+  else {
     self.func_AA7B = "launch_high";
+  }
 
   var_07 = spawn("trigger_radius", self.origin, 0, 256, 100);
   self.func_2536 = var_07;
@@ -348,8 +363,9 @@ func_6D9E() {
 func_6DA1() {
   self makeunusable();
 
-  if(isDefined(self.func_2536))
+  if(isDefined(self.func_2536)) {
     self.func_2536 delete();
+  }
 
   if(isDefined(self.func_69F6)) {
     self.func_69F6 delete();
@@ -419,10 +435,12 @@ func_AA75(var_00, var_01) {
   var_02 setscriptablepartstate("rocket", "explode");
   wait 0.1;
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     magicbullet(var_03, var_2.origin, var_0.origin, var_04);
-  else
+  }
+  else {
     magicbullet(var_03, var_2.origin, var_0.origin, level.players[0]);
+  }
 
   var_02 delete();
   self notify("firework_exploded");

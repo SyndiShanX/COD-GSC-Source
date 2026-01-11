@@ -7,10 +7,12 @@
 main() {
   level.tweakfile = 1;
 
-  if(isusinghdr())
+  if(isusinghdr()) {
     maps\createart\mp_farm_fog_hdr::setupfog();
-  else
+  }
+  else {
     maps\createart\mp_farm_fog::setupfog();
+  }
 
   visionsetnaked("mp_farm", 0);
 }

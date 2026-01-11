@@ -38,8 +38,9 @@ main() {
   level.zombiemode_using_sleightofhand_perk = 1;
   level.zombiemode_using_deadshot_perk = 1;
 
-  if(is_gametype_active("zclassic"))
+  if(is_gametype_active("zclassic")) {
     clientscripts\mp\zombies\_zm_perk_electric_cherry::enable_electric_cherry_perk_for_level();
+  }
   else if(is_gametype_active("zgrief")) {
     level.zombiemode_using_additionalprimaryweapon_perk = 1;
     level.zombiemode_using_divetonuke_perk = 1;
@@ -90,8 +91,9 @@ splitscreen_optimize() {
         if(isDefined(a_fxanim[i].script_noteworthy) && a_fxanim[i].script_noteworthy == "no_delete") {
           continue;
         }
-        if(a_fxanim[i].model == "fxanim_zom_al_chain_short_hook_mod")
+        if(a_fxanim[i].model == "fxanim_zom_al_chain_short_hook_mod") {
           a_fxanim[i] delete();
+        }
       }
     }
   }
@@ -289,8 +291,9 @@ entityspawned_alcatraz(localclientnum) {
     return;
   }
 
-  if(self.type == "player")
+  if(self.type == "player") {
     self thread playerspawned(localclientnum);
+  }
 
   if(self.type == "missile") {
     switch (self.weapon) {
@@ -441,19 +444,22 @@ setup_personality_character_exerts() {
 toggle_player_lightning(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self waittill_dobj(localclientnum);
 
-  if(!isDefined(self.b_lightning))
+  if(!isDefined(self.b_lightning)) {
     self.b_lightning = 0;
+  }
 
   if(newval == 1) {
-    if(isDefined(self.b_lightning) && !self.b_lightning)
+    if(isDefined(self.b_lightning) && !self.b_lightning) {
       self thread player_lightning(localclientnum);
+    }
   } else
     self.b_lightning = 0;
 }
 
 toggle_futz_on_world(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(!isDefined(level.sndsqfinalent))
+  if(!isDefined(level.sndsqfinalent)) {
     level.sndsqfinalent = spawn(0, (0, 0, 0), "script_origin");
+  }
 
   if(newval == 1) {
     setglobalfutz("dlc_res_1", 0.0);
@@ -472,14 +478,16 @@ dryer_stage_notifies(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
   for(i = 0; i < fxanim_props.size; i++) {
     if(isDefined(fxanim_props[i].fxanim_waittill_1)) {
-      if(fxanim_props[i].fxanim_scene_1 == "dryer_start")
+      if(fxanim_props[i].fxanim_scene_1 == "dryer_start") {
         m_dryer_prop = fxanim_props[i];
+      }
     }
   }
 
   if(isDefined(m_dryer_prop)) {
-    if(isDefined(level.dryer_light))
+    if(isDefined(level.dryer_light)) {
       stopfx(localclientnum, level.dryer_light);
+    }
 
     switch (newval) {
       case 1:
@@ -548,8 +556,9 @@ flicker_in_and_out(localclientnum) {
 toggle_perk_machine_power(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self mapshaderconstant(localclientnum, 1, "ScriptVector0");
 
-  if(newval == 2)
+  if(newval == 2) {
     self thread flicker_in_and_out(localclientnum);
+  }
   else if(newval == 1) {
     self notify("stop_flicker");
     self setshaderconstant(localclientnum, 0, 0, 1, 0, 0);
@@ -595,8 +604,9 @@ player_lightning(localclientnum) {
 }
 
 scripted_lightning_flash(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     level thread scripted_player_lightning(localclientnum);
+  }
 }
 
 scripted_player_lightning(localclientnum) {
@@ -649,10 +659,12 @@ scripted_player_lightning_strike() {
 }
 
 warden_fence_down(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 0)
+  if(newval == 0) {
     level notify("warden_fence_up");
-  else if(newval == 1)
+  }
+  else if(newval == 1) {
     level notify("warden_fence_down");
+  }
 }
 
 master_key_is_lowered(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -660,10 +672,12 @@ master_key_is_lowered(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 }
 
 fxanim_pulley_down_start(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     level notify("fxanim_west_pulley_down_start");
-  else if(newval == 2)
+  }
+  else if(newval == 2) {
     level notify("fxanim_east_pulley_down_start");
+  }
 }
 
 lerp_dvar(str_dvar, n_val, n_lerp_time, b_saved_dvar, localclientnum) {
@@ -778,6 +792,7 @@ rumble_door_open(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   self endon("death");
   self endon("disconnect");
 
-  if(newval == 1)
+  if(newval == 1) {
     self playrumbleonentity(localclientnum, "damage_light");
+  }
 }

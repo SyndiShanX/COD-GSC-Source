@@ -107,10 +107,12 @@ markerActivate(lifeId, boxType, usedCallback) {
 
     grandParent = data.linkParent GetLinkedParent();
 
-    if(isDefined(grandParent))
+    if(isDefined(grandParent)) {
       data.linkParent = grandParent;
-    else
+    }
+    else {
       data.linkParent = undefined;
+    }
   }
 
   data.deathOverrideCallback = ::override_box_moving_platform_death;
@@ -132,12 +134,15 @@ markerActivate(lifeId, boxType, usedCallback) {
 }
 
 DeployableExclusion(parentModel) {
-  if(parentModel == "mp_satcom")
+  if(parentModel == "mp_satcom") {
     return true;
-  else if(IsSubStr(parentModel, "paris_catacombs_iron"))
+  }
+  else if(IsSubStr(parentModel, "paris_catacombs_iron")) {
     return true;
-  else if(IsSubStr(parentModel, "mp_warhawk_iron_gate"))
+  }
+  else if(IsSubStr(parentModel, "mp_warhawk_iron_gate")) {
     return true;
+  }
 
   return false;
 }
@@ -146,8 +151,9 @@ isHoldingDeployableBox() {
   curWeap = self GetCurrentWeapon();
   if(isDefined(curWeap)) {
     foreach(deplBoxWeap in level.boxSettings) {
-      if(curWeap == deplBoxWeap.weaponInfo)
+      if(curWeap == deplBoxWeap.weaponInfo) {
         return true;
+      }
     }
   }
 
@@ -193,10 +199,12 @@ box_setActive(skipOwnerUse) {
   curObjID = maps\mp\gametypes\_gameobjects::getNextObjID();
   Objective_Add(curObjID, "invisible", (0, 0, 0));
 
-  if(!isDefined(self GetLinkedParent()))
+  if(!isDefined(self GetLinkedParent())) {
     Objective_Position(curObjID, self.origin);
-  else
+  }
+  else {
     Objective_OnEntity(curObjID, self);
+  }
 
   Objective_State(curObjID, "active");
   Objective_Icon(curObjID, boxConfig.shaderName);
@@ -231,8 +239,9 @@ box_setActive(skipOwnerUse) {
     self SetThreatBiasGroup("DogsDontAttack");
   }
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner notify("new_deployable_box", self);
+  }
 
   if(level.teamBased) {
     foreach(player in level.participants) {
@@ -330,15 +339,17 @@ box_SetIcon(player, streakName, vOffset) {
 }
 
 box_enablePlayerUse(player) {
-  if(IsPlayer(player))
+  if(IsPlayer(player)) {
     self EnablePlayerUse(player);
+  }
 
   self.disabled_use_for[player GetEntityNumber()] = false;
 }
 
 box_disablePlayerUse(player) {
-  if(IsPlayer(player))
+  if(IsPlayer(player)) {
     self DisablePlayerUse(player);
+  }
 
   self.disabled_use_for[player GetEntityNumber()] = true;
 }
@@ -347,8 +358,9 @@ box_setInactive() {
   self makeUnusable();
   self.isUsable = false;
   self maps\mp\_entityheadIcons::setHeadIcon("none", "", (0, 0, 0));
-  if(isDefined(self.objIdFriendly))
+  if(isDefined(self.objIdFriendly)) {
     _objective_delete(self.objIdFriendly);
+  }
 }
 
 box_handleDamage() {
@@ -400,8 +412,9 @@ box_handleDeath() {
 
   if(isDefined(boxConfig.deathDamageMax)) {
     owner = undefined;
-    if(isDefined(self.owner))
+    if(isDefined(self.owner)) {
       owner = self.owner;
+    }
 
     RadiusDamage(self.origin + (0, 0, boxConfig.headIconOffset),
       boxConfig.deathDamageRadius,
@@ -559,8 +572,9 @@ box_ModelTeamUpdater(showForTeam) {
   self hide();
 
   foreach(player in level.players) {
-    if(player.team == showForTeam)
+    if(player.team == showForTeam) {
       self showToPlayer(player);
+    }
   }
 
   for(;;) {
@@ -568,8 +582,9 @@ box_ModelTeamUpdater(showForTeam) {
 
     self hide();
     foreach(player in level.players) {
-      if(player.team == showForTeam)
+      if(player.team == showForTeam) {
         self showToPlayer(player);
+      }
     }
   }
 }
@@ -599,8 +614,9 @@ useHoldThink(player, useTime) {
     maps\mp\_movers::script_mover_unlink_from_use_object(player);
   }
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return false;
+  }
 
   player.boxParams.inUse = false;
   player.boxParams.curProgress = 0;
@@ -618,10 +634,12 @@ useHoldThinkLoop(player) {
 
     config.curProgress += (50 * config.useRate);
 
-    if(isDefined(player.objectiveScaler))
+    if(isDefined(player.objectiveScaler)) {
       config.useRate = 1 * player.objectiveScaler;
-    else
+    }
+    else {
       config.useRate = 1;
+    }
 
     player maps\mp\gametypes\_gameobjects::updateUIProgress(config, true);
 

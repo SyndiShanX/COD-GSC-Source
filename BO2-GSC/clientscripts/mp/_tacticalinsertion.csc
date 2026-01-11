@@ -60,10 +60,12 @@ playflarefx(localclientnum) {
   self endon("entityshutdown");
   level endon("player_switch");
 
-  if(friendnotfoe(localclientnum))
+  if(friendnotfoe(localclientnum)) {
     self.tacticalinsertionfx = playFXOnTag(localclientnum, level._effect["tacticalInsertionFriendly"], self, "tag_flash");
-  else
+  }
+  else {
     self.tacticalinsertionfx = playFXOnTag(localclientnum, level._effect["tacticalInsertionEnemy"], self, "tag_flash");
+  }
 
   self thread watchtacinsertshutdown(localclientnum, self.tacticalinsertionfx);
   looporigin = self.origin;

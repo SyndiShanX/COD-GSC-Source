@@ -118,8 +118,9 @@ f35_damage_off(localclientnum, set, newent) {
     while(level.localplayers[0].sam_hud_damage_intensity > 0) {
       level.localplayers[0].sam_hud_damage_intensity = level.localplayers[0].sam_hud_damage_intensity - 3.0303 * 0.0166667;
 
-      if(level.localplayers[0].sam_hud_damage_intensity < 0)
+      if(level.localplayers[0].sam_hud_damage_intensity < 0) {
         level.localplayers[0].sam_hud_damage_intensity = 0;
+      }
 
       set_filter_f35_damage_amount(level.localplayers[0], 4, level.localplayers[0].sam_hud_damage_intensity);
       wait 0.0166667;
@@ -136,8 +137,9 @@ f35_damage_light(localclientnum, set, newent) {
     while(level.localplayers[0].sam_hud_damage_intensity < 0.5) {
       level.localplayers[0].sam_hud_damage_intensity = level.localplayers[0].sam_hud_damage_intensity + 5.0 * 0.0166667;
 
-      if(level.localplayers[0].sam_hud_damage_intensity > 0.5)
+      if(level.localplayers[0].sam_hud_damage_intensity > 0.5) {
         level.localplayers[0].sam_hud_damage_intensity = 0.5;
+      }
 
       set_filter_f35_damage_amount(level.localplayers[0], 4, level.localplayers[0].sam_hud_damage_intensity);
       wait 0.0166667;
@@ -152,8 +154,9 @@ f35_damage_heavy(localclientnum, set, newent) {
     while(level.localplayers[0].sam_hud_damage_intensity < 1) {
       level.localplayers[0].sam_hud_damage_intensity = level.localplayers[0].sam_hud_damage_intensity + 5.0 * 0.0166667;
 
-      if(level.localplayers[0].sam_hud_damage_intensity > 1)
+      if(level.localplayers[0].sam_hud_damage_intensity > 1) {
         level.localplayers[0].sam_hud_damage_intensity = 1;
+      }
 
       set_filter_f35_damage_amount(level.localplayers[0], 4, level.localplayers[0].sam_hud_damage_intensity);
       wait 0.0166667;

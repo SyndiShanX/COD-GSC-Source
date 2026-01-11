@@ -12,76 +12,93 @@ gettargetangleoffset(var_0) {
 }
 
 getsniperburstdelaytime() {
-  if(isplayer(self.enemy))
+  if(isplayer(self.enemy)) {
     return randomfloatrange(self.enemy.gs.min_sniper_burst_delay_time, self.enemy.gs.max_sniper_burst_delay_time);
-  else
+  }
+  else {
     return randomfloatrange(anim.min_sniper_burst_delay_time, anim.max_sniper_burst_delay_time);
+  }
 }
 
 getremainingburstdelaytime() {
   var_0 = (gettime() - self.a.lastshoottime) / 1000;
   var_1 = getburstdelaytime();
 
-  if(var_1 > var_0)
+  if(var_1 > var_0) {
     return var_1 - var_0;
+  }
 
   return 0;
 }
 
 getburstdelaytime() {
-  if(animscripts\utility::usingsidearm())
+  if(animscripts\utility::usingsidearm()) {
     return randomfloatrange(0.15, 0.55);
-  else if(animscripts\utility::weapon_pump_action_shotgun())
+  }
+  else if(animscripts\utility::weapon_pump_action_shotgun()) {
     return randomfloatrange(1.0, 1.7);
-  else if(issniper())
+  }
+  else if(issniper()) {
     return getsniperburstdelaytime();
-  else if(self.fastburst)
+  }
+  else if(self.fastburst) {
     return randomfloatrange(0.1, 0.35);
-  else
+  }
+  else {
     return randomfloatrange(0.4, 0.9);
+  }
 }
 
 burstdelay() {
   if(self.bulletsinclip) {
     if(self.shootstyle == "full" && !self.fastburst) {
-      if(self.a.lastshoottime == gettime())
+      if(self.a.lastshoottime == gettime()) {
         wait 0.05;
+      }
 
       return;
     }
 
     var_0 = getremainingburstdelaytime();
 
-    if(var_0)
+    if(var_0) {
       wait(var_0);
+    }
   }
 }
 
 cheatammoifnecessary() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
-
-  if(self.team != "allies") {
-    if(!isplayer(self.enemy))
-      return 0;
-
-    if(self.enemy maps\_utility::ent_flag("player_is_invulnerable"))
-      return 0;
   }
 
-  if(animscripts\utility::usingsidearm() || animscripts\utility::usingrocketlauncher())
-    return 0;
+  if(self.team != "allies") {
+    if(!isplayer(self.enemy)) {
+      return 0;
+    }
 
-  if(gettime() - self.ammocheattime < self.ammocheatinterval)
-    return 0;
+    if(self.enemy maps\_utility::ent_flag("player_is_invulnerable")) {
+      return 0;
+    }
+  }
 
-  if(!self cansee(self.enemy) && distancesquared(self.origin, self.enemy.origin) > 65536)
+  if(animscripts\utility::usingsidearm() || animscripts\utility::usingrocketlauncher()) {
     return 0;
+  }
+
+  if(gettime() - self.ammocheattime < self.ammocheatinterval) {
+    return 0;
+  }
+
+  if(!self cansee(self.enemy) && distancesquared(self.origin, self.enemy.origin) > 65536) {
+    return 0;
+  }
 
   self.bulletsinclip = int(weaponclipsize(self.weapon) / 2);
 
-  if(self.bulletsinclip > weaponclipsize(self.weapon))
+  if(self.bulletsinclip > weaponclipsize(self.weapon)) {
     self.bulletsinclip = weaponclipsize(self.weapon);
+  }
 
   self.ammocheattime = gettime();
   return 1;
@@ -105,17 +122,21 @@ shootuntilshootbehaviorchange() {
   self endon("stopShooting");
 
   if(islongrangeai()) {
-    if(isDefined(self.enemy) && isai(self.enemy) && distancesquared(level.player.origin, self.enemy.origin) < 147456)
+    if(isDefined(self.enemy) && isai(self.enemy) && distancesquared(level.player.origin, self.enemy.origin) < 147456) {
       self.enemy animscripts\battlechatter_ai::addthreatevent("infantry", self, 1.0);
+    }
 
-    if(animscripts\utility::usingrocketlauncher() && issentient(self.enemy))
+    if(animscripts\utility::usingrocketlauncher() && issentient(self.enemy)) {
       wait(randomfloat(2.0));
+    }
   }
 
-  if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > 160000)
+  if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > 160000) {
     var_0 = randomintrange(1, 5);
-  else
+  }
+  else {
     var_0 = 10;
+  }
 
   for(;;) {
     burstdelay();
@@ -124,19 +145,23 @@ shootuntilshootbehaviorchange() {
       break;
     }
 
-    if(self.shootstyle == "full")
+    if(self.shootstyle == "full") {
       fireuntiloutofammo(animscripts\utility::animarray("fire"), 1, animscripts\shared::decidenumshotsforfull());
+    }
     else if(self.shootstyle == "burst" || self.shootstyle == "semi") {
       var_1 = animscripts\shared::decidenumshotsforburst();
 
-      if(var_1 == 1)
+      if(var_1 == 1) {
         fireuntiloutofammo(animscripts\utility::animarraypickrandom("single"), 1, var_1);
-      else
+      }
+      else {
         fireuntiloutofammo(animscripts\utility::animarray(self.shootstyle + var_1), 1, var_1);
+      }
     } else if(self.shootstyle == "single")
       fireuntiloutofammo(animscripts\utility::animarraypickrandom("single"), 1, 1);
-    else
+    else {
       self waittill("hell freezes over");
+    }
 
     if(!self.bulletsinclip) {
       break;
@@ -183,15 +208,17 @@ endfireandanimidlethread() {
 }
 
 showfirehideaimidle() {
-  if(isDefined(self.a.aimidlethread))
+  if(isDefined(self.a.aimidlethread)) {
     self setanim( % add_idle, 0, 0.2);
+  }
 
   self setanim( % add_fire, 1, 0.1);
 }
 
 hidefireshowaimidle() {
-  if(isDefined(self.a.aimidlethread))
+  if(isDefined(self.a.aimidlethread)) {
     self setanim( % add_idle, 1, 0.2);
+  }
 
   self setanim( % add_fire, 0, 0.1);
 }
@@ -212,19 +239,23 @@ aimidlethread(var_0) {
   for(;;) {
     var_3 = "idle" + var_2;
 
-    if(isDefined(self.a.leanaim))
+    if(isDefined(self.a.leanaim)) {
       var_4 = animscripts\utility::animarraypickrandom("lean_idle");
-    else if(animscripts\utility::animarrayanyexist("exposed_idle"))
+    }
+    else if(animscripts\utility::animarrayanyexist("exposed_idle")) {
       var_4 = animscripts\utility::animarraypickrandom("exposed_idle");
+    }
     else {
       wait 0.5;
 
     }
 
-    if(var_4 == var_1)
+    if(var_4 == var_1) {
       self setflaggedanimlimitedrestart(var_3, var_4, 1, 0.2);
-    else
+    }
+    else {
       self setflaggedanimknoblimitedrestart(var_3, var_4, 1, 0.2);
+    }
 
     var_1 = var_4;
     self waittillmatch(var_3, "end");
@@ -241,11 +272,13 @@ endaimidlethread() {
 }
 
 shotgunfirerate() {
-  if(animscripts\utility::weapon_pump_action_shotgun())
+  if(animscripts\utility::weapon_pump_action_shotgun()) {
     return 1.0;
+  }
 
-  if(animscripts\weaponlist::usingautomaticweapon())
+  if(animscripts\weaponlist::usingautomaticweapon()) {
     return animscripts\weaponlist::autoshootanimrate() * 0.7;
+  }
 
   return 0.4;
 }
@@ -254,22 +287,28 @@ fireuntiloutofammo(var_0, var_1, var_2) {
   var_3 = "fireAnim_" + getuniqueflagnameindex();
   maps\_gameskill::resetmisstime();
 
-  while(!aimedatshootentorpos())
+  while(!aimedatshootentorpos()) {
     wait 0.05;
+  }
 
   showfirehideaimidle();
   var_4 = 1.0;
 
-  if(isDefined(self.shootrateoverride))
+  if(isDefined(self.shootrateoverride)) {
     var_4 = self.shootrateoverride;
-  else if(self.shootstyle == "full")
+  }
+  else if(self.shootstyle == "full") {
     var_4 = animscripts\weaponlist::autoshootanimrate() * randomfloatrange(0.5, 1.0);
-  else if(self.shootstyle == "burst")
+  }
+  else if(self.shootstyle == "burst") {
     var_4 = animscripts\weaponlist::burstshootanimrate();
-  else if(animscripts\utility::usingsidearm())
+  }
+  else if(animscripts\utility::usingsidearm()) {
     var_4 = 3.0;
-  else if(animscripts\utility::usingshotgun())
+  }
+  else if(animscripts\utility::usingshotgun()) {
     var_4 = shotgunfirerate();
+  }
 
   self setflaggedanimknobrestart(var_3, var_0, 1, 0.2, var_4);
   self updateplayersightaccuracy();
@@ -297,16 +336,18 @@ fireuntiloutofammo_waittillended() {
 fireuntiloutofammointernal(var_0, var_1, var_2, var_3) {
   self endon("enemy");
 
-  if(isplayer(self.enemy) && (self.shootstyle == "full" || self.shootstyle == "semi"))
+  if(isplayer(self.enemy) && (self.shootstyle == "full" || self.shootstyle == "semi")) {
     level endon("player_becoming_invulnerable");
+  }
 
   if(var_2) {
     thread notifyonanimend(var_0, "fireAnimEnd");
     self endon("fireAnimEnd");
   }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = -1;
+  }
 
   var_4 = 0;
   var_5 = animhasnotetrack(var_1, "fire");
@@ -314,8 +355,9 @@ fireuntiloutofammointernal(var_0, var_1, var_2, var_3) {
   thread fireuntiloutofammo_waittillended();
 
   while(var_4 < var_3 && var_3 > 0) {
-    if(var_5)
+    if(var_5) {
       self waittillmatch(var_0, "fire");
+    }
 
     if(!self.bulletsinclip) {
       if(!cheatammoifnecessary()) {
@@ -330,8 +372,9 @@ fireuntiloutofammointernal(var_0, var_1, var_2, var_3) {
     shootatshootentorpos();
 
     if(isplayer(self.enemy) && self.enemy maps\_utility::ent_flag("player_is_invulnerable")) {
-      if(randomint(3) == 0)
+      if(randomint(3) == 0) {
         self.bulletsinclip--;
+      }
     } else
       self.bulletsinclip--;
 
@@ -351,19 +394,22 @@ fireuntiloutofammointernal(var_0, var_1, var_2, var_3) {
       break;
     }
 
-    if(!var_5 || var_3 == 1 && self.shootstyle == "single")
+    if(!var_5 || var_3 == 1 && self.shootstyle == "single") {
       self waittillmatch(var_0, "end");
+    }
   }
 
   self shootstopsound();
 
-  if(var_2)
+  if(var_2) {
     self notify("fireAnimEnd");
+  }
 }
 
 aimedatshootentorpos() {
-  if(!isDefined(self.shootpos))
+  if(!isDefined(self.shootpos)) {
     return 1;
+  }
 
   var_0 = self getmuzzleangle();
   var_1 = animscripts\shared::getshootfrompos();
@@ -371,8 +417,9 @@ aimedatshootentorpos() {
   var_3 = animscripts\utility::absangleclamp180(var_0[1] - var_2[1]);
 
   if(var_3 > anim.aimyawdifffartolerance) {
-    if(distancesquared(self getEye(), self.shootpos) > anim.aimyawdiffclosedistsq || var_3 > anim.aimyawdiffclosetolerance)
+    if(distancesquared(self getEye(), self.shootpos) > anim.aimyawdiffclosedistsq || var_3 > anim.aimyawdiffclosetolerance) {
       return 0;
+    }
   }
 
   return animscripts\utility::absangleclamp180(var_0[0] - var_2[0]) <= anim.aimpitchdifftolerance;
@@ -386,10 +433,12 @@ notifyonanimend(var_0, var_1) {
 }
 
 issingleshot() {
-  if(weaponburstcount(self.weapon) > 0)
+  if(weaponburstcount(self.weapon) > 0) {
     return 0;
-  else if(weaponisauto(self.weapon))
+  }
+  else if(weaponisauto(self.weapon)) {
     return 0;
+  }
 
   return 1;
 }
@@ -398,15 +447,17 @@ shootatshootentorpos() {
   var_0 = issingleshot();
 
   if(isDefined(self.shootent)) {
-    if(isDefined(self.enemy) && self.shootent == self.enemy)
+    if(isDefined(self.enemy) && self.shootent == self.enemy) {
       animscripts\utility::shootenemywrapper(var_0);
+    }
   } else
     self[[anim.shootposwrapper_func]](self.shootpos, var_0);
 }
 
 decrementbulletsinclip() {
-  if(self.bulletsinclip)
+  if(self.bulletsinclip) {
     self.bulletsinclip--;
+  }
 }
 
 shotgunpumpsound(var_0) {
@@ -430,23 +481,27 @@ stopshotgunpumpaftertime(var_0) {
 }
 
 needtoreload(var_0) {
-  if(self.weapon == "none")
+  if(self.weapon == "none") {
     return 0;
+  }
 
   if(isDefined(self.noreload)) {
-    if(self.bulletsinclip < weaponclipsize(self.weapon) * 0.5)
+    if(self.bulletsinclip < weaponclipsize(self.weapon) * 0.5) {
       self.bulletsinclip = int(weaponclipsize(self.weapon) * 0.5);
+    }
 
-    if(self.bulletsinclip <= 0)
+    if(self.bulletsinclip <= 0) {
       self.bulletsinclip = 0;
+    }
 
     return 0;
   }
 
   if(self.bulletsinclip <= weaponclipsize(self.weapon) * var_0) {
     if(var_0 == 0) {
-      if(cheatammoifnecessary())
+      if(cheatammoifnecessary()) {
         return 0;
+      }
     }
 
     return 1;
@@ -465,8 +520,9 @@ putgunbackinhandonkillanimscript() {
 reload(var_0, var_1) {
   self endon("killanimscript");
 
-  if(!needtoreload(var_0))
+  if(!needtoreload(var_0)) {
     return 0;
+  }
 
   animscripts\battlechatter_ai::evaluatereloadevent();
   animscripts\battlechatter::playbattlechatter();
@@ -593,23 +649,27 @@ getdesiredgrenadetimervalue() {
 }
 
 getgrenadetimertime(var_0) {
-  if(var_0.isplayertimer)
+  if(var_0.isplayertimer) {
     return var_0.player.grenadetimers[var_0.timername];
-  else
+  }
+  else {
     return anim.grenadetimers[var_0.timername];
+  }
 }
 
 considerchangingtarget(var_0) {
   if(!isplayer(var_0) && self isbadguy()) {
     if(gettime() < getgrenadetimertime(self.activegrenadetimer)) {
-      if(level.player.ignoreme)
+      if(level.player.ignoreme) {
         return var_0;
+      }
 
       var_1 = self getthreatbiasgroup();
       var_2 = level.player getthreatbiasgroup();
 
-      if(var_1 != "" && var_2 != "" && getthreatbias(var_2, var_1) < -10000)
+      if(var_1 != "" && var_2 != "" && getthreatbias(var_2, var_1) < -10000) {
         return var_0;
+      }
 
       if(self cansee(level.player) || isai(var_0) && var_0 cansee(level.player)) {
         if(isDefined(self.covernode)) {
@@ -630,22 +690,27 @@ considerchangingtarget(var_0) {
 }
 
 maythrowdoublegrenade(var_0) {
-  if(maps\_utility::player_died_recently())
+  if(maps\_utility::player_died_recently()) {
     return 0;
+  }
 
-  if(!var_0.gs.double_grenades_allowed)
+  if(!var_0.gs.double_grenades_allowed) {
     return 0;
+  }
 
   var_1 = gettime();
 
-  if(var_1 < var_0.grenadetimers["double_grenade"])
+  if(var_1 < var_0.grenadetimers["double_grenade"]) {
     return 0;
+  }
 
-  if(var_1 > var_0.lastfraggrenadetoplayerstart + 3000)
+  if(var_1 > var_0.lastfraggrenadetoplayerstart + 3000) {
     return 0;
+  }
 
-  if(var_1 < var_0.lastfraggrenadetoplayerstart + 500)
+  if(var_1 < var_0.lastfraggrenadetoplayerstart + 500) {
     return 0;
+  }
 
   return var_0.numgrenadesinprogresstowardsplayer < 2;
 }
@@ -655,68 +720,82 @@ mygrenadecooldownelapsed() {
 }
 
 grenadecooldownelapsed(var_0) {
-  if(maps\_utility::player_died_recently())
+  if(maps\_utility::player_died_recently()) {
     return 0;
+  }
 
-  if(self.script_forcegrenade == 1)
+  if(self.script_forcegrenade == 1) {
     return 1;
+  }
 
-  if(!mygrenadecooldownelapsed())
+  if(!mygrenadecooldownelapsed()) {
     return 0;
+  }
 
-  if(gettime() >= getgrenadetimertime(self.activegrenadetimer))
+  if(gettime() >= getgrenadetimertime(self.activegrenadetimer)) {
     return 1;
+  }
 
-  if(self.activegrenadetimer.isplayertimer && self.activegrenadetimer.timername == "fraggrenade")
+  if(self.activegrenadetimer.isplayertimer && self.activegrenadetimer.timername == "fraggrenade") {
     return maythrowdoublegrenade(var_0);
+  }
 
   return 0;
 }
 
 trygrenadeposproc(var_0, var_1, var_2, var_3) {
-  if(!self isgrenadepossafe(var_0, var_1))
+  if(!self isgrenadepossafe(var_0, var_1)) {
     return 0;
-  else if(distancesquared(self.origin, var_1) < 40000)
+  }
+  else if(distancesquared(self.origin, var_1) < 40000) {
     return 0;
+  }
 
   var_4 = physicstrace(var_1 + (0, 0, 1), var_1 + (0, 0, -500));
 
-  if(var_4 == var_1 + (0, 0, -500))
+  if(var_4 == var_1 + (0, 0, -500)) {
     return 0;
+  }
 
   var_4 = var_4 + (0, 0, 0.1);
   return trygrenadethrow(var_0, var_4, var_2, var_3);
 }
 
 trygrenade(var_0, var_1) {
-  if(self.weapon == "mg42" || self.grenadeammo <= 0)
+  if(self.weapon == "mg42" || self.grenadeammo <= 0) {
     return 0;
+  }
 
   setactivegrenadetimer(var_0);
   var_0 = considerchangingtarget(var_0);
 
-  if(!grenadecooldownelapsed(var_0))
+  if(!grenadecooldownelapsed(var_0)) {
     return 0;
+  }
 
   var_2 = getgrenadethrowoffset(var_1);
 
   if(isDefined(self.enemy) && var_0 == self.enemy) {
-    if(!checkgrenadethrowdist())
+    if(!checkgrenadethrowdist()) {
       return 0;
+    }
 
-    if(isplayer(self.enemy) && maps\_utility::is_player_down(self.enemy))
+    if(isplayer(self.enemy) && maps\_utility::is_player_down(self.enemy)) {
       return 0;
+    }
 
     if(animscripts\utility::canseeenemyfromexposed()) {
-      if(!self isgrenadepossafe(var_0, var_0.origin))
+      if(!self isgrenadepossafe(var_0, var_0.origin)) {
         return 0;
+      }
 
       return trygrenadethrow(var_0, undefined, var_1, var_2);
     } else if(animscripts\utility::cansuppressenemyfromexposed())
       return trygrenadeposproc(var_0, animscripts\utility::getenemysightpos(), var_1, var_2);
     else {
-      if(!self isgrenadepossafe(var_0, var_0.origin))
+      if(!self isgrenadepossafe(var_0, var_0.origin)) {
         return 0;
+      }
 
       return trygrenadethrow(var_0, undefined, var_1, var_2);
     }
@@ -727,11 +806,13 @@ trygrenade(var_0, var_1) {
 }
 
 trygrenadethrow(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(gettime() < 10000 && !isDefined(level.ignoregrenadesafetime))
+  if(gettime() < 10000 && !isDefined(level.ignoregrenadesafetime)) {
     return 0;
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1;
+  }
 
   if(isDefined(var_2)) {
     var_7 = var_2;
@@ -757,36 +838,44 @@ trygrenadethrow(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
   }
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     return 0;
+  }
 
   if(isDefined(var_1)) {
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_9 = self checkgrenadethrowpos(var_3, var_1, var_5, "min energy", "min time", "max time");
-    else
+    }
+    else {
       var_9 = self checkgrenadethrowpos(var_3, var_1, var_5, "min time", "min energy");
+    }
   } else {
     var_10 = self.randomgrenaderange;
     var_11 = distance(var_0.origin, self.origin);
 
     if(var_11 < 800) {
-      if(var_11 < 256)
+      if(var_11 < 256) {
         var_10 = 0;
-      else
+      }
+      else {
         var_10 = var_10 * ((var_11 - 256) / 544);
+      }
     }
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_9 = self checkgrenadethrow(var_3, var_10, "min energy", "min time", "max time");
-    else
+    }
+    else {
       var_9 = self checkgrenadethrow(var_3, var_10, "min time", "min energy");
+    }
   }
 
   self.a.nextgrenadetrytime = gettime() + randomintrange(1000, 2000);
 
   if(isDefined(var_9)) {
-    if(!isDefined(self.oldgrenawareness))
+    if(!isDefined(self.oldgrenawareness)) {
       self.oldgrenawareness = self.grenadeawareness;
+    }
 
     self.grenadeawareness = 0;
     var_12 = getdesiredgrenadetimervalue();
@@ -797,19 +886,23 @@ trygrenadethrow(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_0.numgrenadesinprogresstowardsplayer++;
       thread reducegiptponkillanimscript(var_0);
 
-      if(var_0.numgrenadesinprogresstowardsplayer > 1)
+      if(var_0.numgrenadesinprogresstowardsplayer > 1) {
         var_13 = 1;
+      }
 
       if(self.activegrenadetimer.timername == "fraggrenade") {
-        if(var_0.numgrenadesinprogresstowardsplayer <= 1)
+        if(var_0.numgrenadesinprogresstowardsplayer <= 1) {
           var_0.lastfraggrenadetoplayerstart = gettime();
+        }
       }
     }
 
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       thread dogrenadethrow(var_7, var_9, var_12, var_13);
-    else
+    }
+    else {
       dogrenadethrow(var_7, var_9, var_12, var_13);
+    }
 
     return 1;
   } else {}
@@ -826,8 +919,9 @@ reducegiptponkillanimscript(var_0) {
 dogrenadethrow(var_0, var_1, var_2, var_3) {
   self endon("killanimscript");
 
-  if(self.script == "combat" || self.script == "move")
+  if(self.script == "combat" || self.script == "move") {
     self orientmode("face direction", var_1);
+  }
 
   animscripts\battlechatter_ai::evaluateattackevent(self.grenadeweapon);
   self notify("stop_aiming_at_enemy");
@@ -857,25 +951,29 @@ dogrenadethrow(var_0, var_1, var_2, var_3) {
 
   self notify("dont_reduce_giptp_on_killanimscript");
 
-  if(usingplayergrenadetimer())
+  if(usingplayergrenadetimer()) {
     thread watchgrenadetowardsplayer(self.activegrenadetimer.player, var_2);
+  }
 
   self throwgrenade();
 
-  if(!usingplayergrenadetimer())
+  if(!usingplayergrenadetimer()) {
     setgrenadetimer(self.activegrenadetimer, var_2);
+  }
 
   if(var_3) {
     var_13 = self.activegrenadetimer.player;
 
-    if(var_13.numgrenadesinprogresstowardsplayer > 1 || gettime() - var_13.lastgrenadelandednearplayertime < 2000)
+    if(var_13.numgrenadesinprogresstowardsplayer > 1 || gettime() - var_13.lastgrenadelandednearplayertime < 2000) {
       var_13.grenadetimers["double_grenade"] = gettime() + min(5000, var_13.gs.playerdoublegrenadetime);
+    }
   }
 
   self notify("stop grenade check");
 
-  if(var_5 != "none")
+  if(var_5 != "none") {
     self detach(var_4, var_5);
+  }
   else {}
 
   self.isholdinggrenade = undefined;
@@ -937,8 +1035,9 @@ watchgrenadetowardsplayerinternal(var_0) {
           continue;
         }
 
-        if(var_12 < var_6)
+        if(var_12 < var_6) {
           var_9[var_9.size] = var_11;
+        }
       }
 
       var_7 = var_9;
@@ -956,8 +1055,9 @@ grenadelandednearplayer(var_0, var_1) {
   var_2 = self;
   anim.throwgrenadeatplayerasap = undefined;
 
-  if(gettime() - var_2.lastgrenadelandednearplayertime < 3000)
+  if(gettime() - var_2.lastgrenadelandednearplayertime < 3000) {
     var_2.grenadetimers["double_grenade"] = gettime() + var_2.gs.playerdoublegrenadetime;
+  }
 
   var_2.lastgrenadelandednearplayertime = gettime();
   var_3 = var_2.grenadetimers[var_0.timername];
@@ -1011,8 +1111,9 @@ grenadeline(var_0, var_1) {
   level endon("armoffset");
   var_0 = self.origin + offsettoorigin(var_0);
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 getgrenadedropvelocity() {
@@ -1034,16 +1135,19 @@ dropgrenade() {
 }
 
 lookforbettercover() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
-  if(self.fixednode || self.doingambush)
+  if(self.fixednode || self.doingambush) {
     return 0;
+  }
 
   var_0 = getbestcovernodeifavailable();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     return usecovernodeifpossible(var_0);
+  }
 
   return 0;
 }
@@ -1051,16 +1155,19 @@ lookforbettercover() {
 getbestcovernodeifavailable() {
   var_0 = self findbestcovernode();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   var_1 = animscripts\utility::getclaimednode();
 
-  if(isDefined(var_1) && var_0 == var_1)
+  if(isDefined(var_1) && var_0 == var_1) {
     return undefined;
+  }
 
-  if(isDefined(self.covernode) && var_0 == self.covernode)
+  if(isDefined(self.covernode) && var_0 == self.covernode) {
     return undefined;
+  }
 
   return var_0;
 }
@@ -1071,8 +1178,9 @@ usecovernodeifpossible(var_0) {
   self.keepclaimednodeifvalid = 0;
   self.keepclaimednode = 0;
 
-  if(self usecovernode(var_0))
+  if(self usecovernode(var_0)) {
     return 1;
+  }
   else {}
 
   self.keepclaimednodeifvalid = var_1;
@@ -1082,65 +1190,80 @@ usecovernodeifpossible(var_0) {
 
 shouldhelpadvancingteammate() {
   if(level.advancetoenemygroup[self.team] > 0 && level.advancetoenemygroup[self.team] < level.advancetoenemygroupmax) {
-    if(gettime() - level.lastadvancetoenemytime[self.team] > 4000)
+    if(gettime() - level.lastadvancetoenemytime[self.team] > 4000) {
       return 0;
+    }
 
     var_0 = level.lastadvancetoenemyattacker[self.team];
 
-    if(var_0 == self)
+    if(var_0 == self) {
       return 0;
+    }
 
     var_1 = isDefined(var_0) && distancesquared(self.origin, var_0.origin) < 65536;
 
-    if((var_1 || distancesquared(self.origin, level.lastadvancetoenemysrc[self.team]) < 65536) && (!isDefined(self.enemy) || distancesquared(self.enemy.origin, level.lastadvancetoenemydest[self.team]) < 262144))
+    if((var_1 || distancesquared(self.origin, level.lastadvancetoenemysrc[self.team]) < 65536) && (!isDefined(self.enemy) || distancesquared(self.enemy.origin, level.lastadvancetoenemydest[self.team]) < 262144)) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 checkadvanceonenemyconditions() {
-  if(!isDefined(level.lastadvancetoenemytime[self.team]))
+  if(!isDefined(level.lastadvancetoenemytime[self.team])) {
     return 0;
+  }
 
-  if(shouldhelpadvancingteammate())
+  if(shouldhelpadvancingteammate()) {
     return 1;
+  }
 
-  if(gettime() - level.lastadvancetoenemytime[self.team] < level.advancetoenemyinterval)
+  if(gettime() - level.lastadvancetoenemytime[self.team] < level.advancetoenemyinterval) {
     return 0;
+  }
 
-  if(!issentient(self.enemy))
+  if(!issentient(self.enemy)) {
     return 0;
+  }
 
-  if(level.advancetoenemygroup[self.team])
+  if(level.advancetoenemygroup[self.team]) {
     level.advancetoenemygroup[self.team] = 0;
+  }
 
   var_0 = isDefined(self.advance_regardless_of_numbers) && self.advance_regardless_of_numbers;
 
-  if(!var_0 && getaicount(self.team) < getaicount(self.enemy.team))
+  if(!var_0 && getaicount(self.team) < getaicount(self.enemy.team)) {
     return 0;
+  }
 
   return 1;
 }
 
 tryrunningtoenemy(var_0) {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
-  if(self.fixednode)
+  if(self.fixednode) {
     return 0;
+  }
 
-  if(self.combatmode == "ambush" || self.combatmode == "ambush_nodes_only")
+  if(self.combatmode == "ambush" || self.combatmode == "ambush_nodes_only") {
     return 0;
+  }
 
-  if(!self isingoal(self.enemy.origin))
+  if(!self isingoal(self.enemy.origin)) {
     return 0;
+  }
 
-  if(islongrangeai())
+  if(islongrangeai()) {
     return 0;
+  }
 
-  if(!checkadvanceonenemyconditions())
+  if(!checkadvanceonenemyconditions()) {
     return 0;
+  }
 
   self findreacquiredirectpath(var_0);
 
@@ -1173,8 +1296,9 @@ delayedbadplace(var_0) {
   if(anim.badplaces.size >= 10) {
     var_2 = [];
 
-    for(var_3 = 1; var_3 < anim.badplaces.size; var_3++)
+    for(var_3 = 1; var_3 < anim.badplaces.size; var_3++) {
       var_2[var_2.size] = anim.badplaces[var_3];
+    }
 
     badplace_delete(anim.badplaces[0]);
     anim.badplaces = var_2;
@@ -1182,20 +1306,23 @@ delayedbadplace(var_0) {
 
   anim.badplaceint++;
 
-  if(anim.badplaceint > 10)
+  if(anim.badplaceint > 10) {
     anim.badplaceint = anim.badplaceint - 20;
+  }
 }
 
 valueiswithin(var_0, var_1, var_2) {
-  if(var_0 > var_1 && var_0 < var_2)
+  if(var_0 > var_1 && var_0 < var_2) {
     return 1;
+  }
 
   return 0;
 }
 
 getgunyawtoshootentorpos() {
-  if(!isDefined(self.shootpos))
+  if(!isDefined(self.shootpos)) {
     return 0;
+  }
 
   var_0 = self getmuzzleangle()[1] - animscripts\utility::getyaw(self.shootpos);
   var_0 = angleclamp180(var_0);
@@ -1203,8 +1330,9 @@ getgunyawtoshootentorpos() {
 }
 
 getgunpitchtoshootentorpos() {
-  if(!isDefined(self.shootpos))
+  if(!isDefined(self.shootpos)) {
     return 0;
+  }
 
   var_0 = self getmuzzleangle()[0] - vectortoangles(self.shootpos - self getmuzzlepos())[0];
   var_0 = angleclamp180(var_0);
@@ -1212,8 +1340,9 @@ getgunpitchtoshootentorpos() {
 }
 
 getpitchtoenemy() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
   var_0 = self.enemy getshootatpos() - self getshootatpos();
   var_0 = vectornormalize(var_0);
@@ -1222,8 +1351,9 @@ getpitchtoenemy() {
 }
 
 getpitchtospot(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_1 = var_0 - self getshootatpos();
   var_1 = vectornormalize(var_1);
@@ -1232,8 +1362,9 @@ getpitchtospot(var_0) {
 }
 
 getpitchtoorgfromorg(var_0, var_1) {
-  if(!isDefined(var_0) || !isDefined(var_1))
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return 0;
+  }
 
   if(isDefined(self) && animscripts\utility::isspaceai()) {
     var_2 = anglesToForward(self.angles);
@@ -1291,8 +1422,9 @@ checkgrenadethrowdist() {
   var_0 = self.enemy.origin - self.origin;
   var_1 = lengthsquared((var_0[0], var_0[1], 0));
 
-  if(self.grenadeweapon == "flash_grenade")
+  if(self.grenadeweapon == "flash_grenade") {
     return var_1 < 589824;
+  }
 
   return var_1 >= 40000 && var_1 <= 1562500;
 }
@@ -1300,8 +1432,9 @@ checkgrenadethrowdist() {
 monitorflash() {
   self endon("death");
 
-  if(!isDefined(level.neverstopmonitoringflash))
+  if(!isDefined(level.neverstopmonitoringflash)) {
     self endon("stop_monitoring_flash");
+  }
 
   for(;;) {
     var_0 = undefined;
@@ -1323,16 +1456,19 @@ monitorflash() {
       if(var_0 < 0) {
         continue;
       }
-      if(isDefined(self.teamflashbangimmunity))
+      if(isDefined(self.teamflashbangimmunity)) {
         continue;
+      }
     }
 
     var_5 = 0.2;
 
-    if(var_0 > 1 - var_5)
+    if(var_0 > 1 - var_5) {
       var_0 = 1.0;
-    else
+    }
+    else {
       var_0 = var_0 / (1 - var_5);
+    }
 
     var_6 = 4.5 * var_0;
 
@@ -1366,17 +1502,20 @@ randomfasteranimspeed() {
 }
 
 getrandomcovermode(var_0) {
-  if(var_0.size == 0)
+  if(var_0.size == 0) {
     return undefined;
+  }
 
-  if(var_0.size == 1)
+  if(var_0.size == 1) {
     return var_0[0];
+  }
 
   if(isDefined(self.a.prevattack) && randomint(100) > 20) {
     foreach(var_3, var_2 in var_0) {
       if(var_2 == self.a.prevattack) {
-        if(var_3 < var_0.size - 1)
+        if(var_3 < var_0.size - 1) {
           var_0[var_3] = var_0[var_0.size - 1];
+        }
 
         var_0[var_0.size - 1] = undefined;
         break;

@@ -33,8 +33,9 @@ mortarTrigger() {
 }
 
 mortarSpawner(delayEnt) {
-  if(!isDefined(delayEnt))
+  if(!isDefined(delayEnt)) {
     delayEnt = self;
+  }
   spawners[0] = self;
   ents = getEntArray(self.target, "targetname");
   for(i = 0; i < ents.size; i++) {
@@ -48,10 +49,12 @@ mortarSpawner(delayEnt) {
   mortar_targets = getstructarray(node.target, "targetname");
   delay_base = 0;
   delay_range = 0;
-  if(isDefined(delayEnt.script_delay))
+  if(isDefined(delayEnt.script_delay)) {
     delay_base = delayEnt.script_delay;
-  else
+  }
+  else {
   if(isDefined(delayEnt.script_delay_min)) {
+  }
     delay_base = delayEnt.script_delay_min;
     delay_range = delayEnt.script_delay_max - delayEnt.script_delay_min;
   }
@@ -67,14 +70,16 @@ mortarTeamspawn(spawners, node, mortar_targets) {
   name[0] = "loadguy";
   name[1] = "aimguy";
   node endon("stop_mortar");
-  if(!isDefined(node.mortarSetup))
+  if(!isDefined(node.mortarSetup)) {
     node.mortarSetup = false;
+  }
   mortarThink[0] = ::loadGuy;
   mortarThink[1] = ::aimGuy;
   self.objectivePositionEntity = undefined;
   self.setup = false;
-  if(!isDefined(node.mortarTeamActive))
+  if(!isDefined(node.mortarTeamActive)) {
     node.mortarTeamActive = false;
+  }
   assertEx(!node.mortarTeamActive, "Mortarteam that runs to " + node.origin + " has multiple mortar teams active on it. Can only have 1 team at a time operating each unique mortar.");
   index = 0;
   for(;;) {
@@ -98,8 +103,9 @@ mortarTeamspawn(spawners, node, mortar_targets) {
     node.mortarTeamActive = true;
     self.guy[index] = spawn;
     spawn.animname = name[index];
-    if(spawn.health < 5000)
+    if(spawn.health < 5000) {
       spawn.health = 1;
+    }
     spawn thread[[mortarThink[index]]](self, node);
     index++;
     if(index >= spawners.size) {
@@ -117,19 +123,24 @@ mortarTeamspawn(spawners, node, mortar_targets) {
   node.mortarEnt endon("stop_mortar");
   self.node = node;
   node.mortar_targets = mortar_targets;
-  if(isalive(self.aimGuy))
+  if(isalive(self.aimGuy)) {
     self thread transferObjectivePositionEntity();
+  }
   for(;;) {
     if(isalive(self.loadGuy)) {
-      if(isalive(self.aimGuy) && self.aimGuy.ready)
+      if(isalive(self.aimGuy) && self.aimGuy.ready) {
         dualMortarUntilDeath(node);
-      else
+      }
+      else {
         singleMortarOneRep(node);
+      }
     } else
-    if(isalive(self.aimGuy))
+    if(isalive(self.aimGuy)) {
       aimGuyMortarsUntilDeath(node);
-    else
+    }
+    else {
       break;
+    }
   }
   node notify("stopIdle");
   waittillframeend;
@@ -142,16 +153,18 @@ mortarTeamspawn(spawners, node, mortar_targets) {
 
 transferObjectivePositionEntity() {
   self.loadGuy waittill("death");
-  if(isalive(self.aimGuy))
+  if(isalive(self.aimGuy)) {
     self.objectivePositionEntity = self.aimGuy;
+  }
 }
 
 singleMortarOneRep(node) {
   loadGuy = self.loadGuy;
   loadGuy endon("death");
   loadguy endon("stop_mortar");
-  if(loadGuy.health < 5000)
+  if(loadGuy.health < 5000) {
     loadGuy.health = 1;
+  }
   node notify("stopIdle");
   loadGuy animscripts\shared::placeWeaponOn(loadGuy.weapon, "none");
   node thread anim_loop_solo(loadGuy, "wait_idle", undefined, "stopIdle");
@@ -163,8 +176,9 @@ singleMortarOneRep(node) {
 
 aimGuyMortarsUntilDeath(node) {
   aimGuy = self.aimGuy;
-  if(aimGuy.health < 5000)
+  if(aimGuy.health < 5000) {
     aimGuy.health = 1;
+  }
   aimGuy endon("death");
   aimGuy endon("stop_mortar");
   node notify("stopIdle");
@@ -185,10 +199,12 @@ dualMortarUntilDeath(node) {
   loadGuy = self.loadGuy;
   aimGuy = self.aimGuy;
   guy = self.guy;
-  if(loadGuy.health < 5000)
+  if(loadGuy.health < 5000) {
     loadGuy.health = 1;
-  if(aimGuy.health < 5000)
+  }
+  if(aimGuy.health < 5000) {
     aimGuy.health = 1;
+  }
   loadGuy endon("death");
   aimGuy endon("death");
   loadGuy endon("stop_mortar");
@@ -215,10 +231,12 @@ aimGuy(ent, node) {
   self.ready = false;
   self.allowDeath = true;
   self setgoalnode(node);
-  if(node.radius > 0)
+  if(node.radius > 0) {
     self.goalradius = node.radius;
-  else
+  }
+  else {
     self.goalradius = 350;
+  }
   self waittill("goal");
   self.ready = true;
   thread detachMortarOnDeath();
@@ -256,13 +274,15 @@ loadGuy(ent, node) {
     animscripts\shared::placeWeaponOn(self.weapon, "none");
     self attach(level.prop_mortar, "TAG_WEAPON_LEFT");
     dist = undefined;
-    for(i = 0; i < setupAnim.size; i++)
+    for(i = 0; i < setupAnim.size; i++) {
       dist[i] = distance(self.origin, getstartorigin(node.origin, node.angles, setupAnim[i]));
+    }
     index = 0;
     current_dist = dist[0];
     for(i = 1; i < dist.size; i++) {
-      if(dist[i] >= current_dist)
+      if(dist[i] >= current_dist) {
         continue;
+      }
       index = i;
       current_dist = dist[i];
     }
@@ -273,8 +293,9 @@ loadGuy(ent, node) {
   ent notify("loadguy_starting");
   node thread anim_single_solo(self, setupString[index]);
   self waittillmatch("single anim", "open_mortar");
-  if(soundexists("weapon_setup"))
+  if(soundexists("weapon_setup")) {
     thread play_sound_in_space("weapon_setup");
+  }
   node waittill(setupString[index]);
   mortar = spawn("script_model", (0, 0, 0));
   mortar.origin = self gettagorigin("TAG_WEAPON_LEFT");
@@ -319,8 +340,9 @@ fire(guy) {
     mortar playSound(level.scr_sound["mortar_flash"]);
   }
   target = random(mortar_targets);
-  if(isDefined(mortarEnt))
+  if(isDefined(mortarEnt)) {
     mortarEnt notify("mortar_fired");
+  }
   if(isDefined(level.timetoimpact)) {
     wait level.timetoimpact;
   } else {
@@ -348,10 +370,12 @@ fire(guy) {
 }
 
 attachMortar(guy) {
-  if(!isDefined(guy.mortarAmmo))
+  if(!isDefined(guy.mortarAmmo)) {
     guy.mortarAmmo = false;
-  if(!guy.mortarAmmo)
+  }
+  if(!guy.mortarAmmo) {
     guy attach(level.prop_mortar_ammunition, "TAG_WEAPON_RIGHT");
+  }
   guy.mortarAmmo = true;
 }
 
@@ -365,8 +389,9 @@ detachMortar(guy) {
 
 detachMortarOnDeath() {
   self waittill("death");
-  if(!isDefined(self.mortarAmmo))
+  if(!isDefined(self.mortarAmmo)) {
     return;
+  }
   if(!self.mortarAmmo) {
     return;
   }

@@ -5,8 +5,9 @@
 ************************************************/
 
 damb_init() {
-  if(!isDefined(level._audio))
+  if(!isDefined(level._audio)) {
     level._audio = spawnStruct();
+  }
 
   if(!isDefined(level._audio.damb)) {
     level._audio.damb = spawnStruct();
@@ -46,17 +47,21 @@ damb_start_preset(var_0, var_1, var_2, var_3) {
 }
 
 damb_start_preset_at_point(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     thread dambx_monitor_damb_point_distance(var_0, var_1, var_2, var_3, var_4, var_5);
-  else
+  }
+  else {
     dambx_start_preset("free", var_0, var_2, undefined, var_1, undefined, undefined, var_5);
+  }
 }
 
 damb_stop_preset_at_point(var_0, var_1, var_2) {
-  if(isstring(var_1))
+  if(isstring(var_1)) {
     var_3 = var_1;
-  else
+  }
+  else {
     var_3 = var_0;
+  }
 
   level notify(var_3 + "dist_monitor_stop");
   damb_stop_preset(var_3, var_2);
@@ -73,15 +78,18 @@ damb_make_linked_damb(var_0, var_1, var_2, var_3, var_4) {
 }
 
 dambx_monitor_damb_point_distance(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isstring(var_2))
+  if(isstring(var_2)) {
     level endon(var_2 + "dist_monitor_stop");
-  else
+  }
+  else {
     level endon(var_0 + "dist_monitor_stop");
+  }
 
   var_6 = 1.0;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_6 = var_4;
+  }
 
   var_7 = 1;
 
@@ -96,10 +104,12 @@ dambx_monitor_damb_point_distance(var_0, var_1, var_2, var_3, var_4, var_5) {
     } else if(!var_7) {
       var_7 = 1;
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         dambx_stop_preset("free", var_2, var_6);
-      else
+      }
+      else {
         dambx_stop_preset("free", var_0, var_6);
+      }
     }
 
     wait 1;
@@ -109,8 +119,9 @@ dambx_monitor_damb_point_distance(var_0, var_1, var_2, var_3, var_4, var_5) {
 damb_start_preset_on_entity(var_0, var_1, var_2, var_3, var_4) {
   var_5 = "attach";
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5 = var_3;
+  }
 
   dambx_start_preset("free", var_0, var_2, var_4, undefined, var_1, var_5);
 }
@@ -118,22 +129,26 @@ damb_start_preset_on_entity(var_0, var_1, var_2, var_3, var_4) {
 damb_stop(var_0, var_1) {
   var_2 = 2.0;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = var_0;
+  }
 
   var_3 = "all";
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
+  }
 
   if(var_3 == "free" || var_3 == "all") {
-    foreach(var_6, var_5 in level._audio.damb.playing["free"])
+    foreach(var_6, var_5 in level._audio.damb.playing["free"]) {
     damb_stop_preset(var_6, var_2);
+    }
   }
 
   if(var_3 == "zone" || var_3 == "all") {
-    foreach(var_6, var_5 in level._audio.damb.playing["zone"])
+    foreach(var_6, var_5 in level._audio.damb.playing["zone"]) {
     damb_zone_stop_preset(var_6, var_2);
+    }
   }
 }
 
@@ -151,23 +166,28 @@ damb_stop_preset(var_0, var_1) {
 
 damb_prob_mix_damb_presets(var_0, var_1, var_2, var_3) {
   if(isDefined(var_0) && var_0 != "none") {
-    if(var_1 == 0)
+    if(var_1 == 0) {
       damb_zone_stop_preset(var_0, 2.0);
-    else
+    }
+    else {
       damb_zone_start_preset(var_0, var_1);
+    }
   }
 
   if(isDefined(var_2) && var_2 != "none") {
-    if(var_3 == 0)
+    if(var_3 == 0) {
       damb_zone_stop_preset(var_2, 2.0);
-    else
+    }
+    else {
       damb_zone_start_preset(var_2, var_3);
+    }
   }
 }
 
 damb_set_oneshot_callback_for_component(var_0, var_1) {
-  if(!isDefined(level._audio.damb.callback))
+  if(!isDefined(level._audio.damb.callback)) {
     level._audio.damb.callback = [];
+  }
 
   level._audio.damb.callback[var_0] = var_1;
 }
@@ -175,8 +195,9 @@ damb_set_oneshot_callback_for_component(var_0, var_1) {
 damb_set_oneshot_callback_for_dynamic_ambience(var_0, var_1) {
   var_2 = [];
 
-  if(isDefined(level._audio.damb.preset_cache[var_0]))
+  if(isDefined(level._audio.damb.preset_cache[var_0])) {
     var_2 = level._audio.damb.preset_cache[var_0];
+  }
   else if(level._audio.damb.use_string_table_presets) {
     var_2 = dambx_get_preset_from_string_table(var_0, 1);
     level._audio.damb.preset_cache[var_0] = var_2;
@@ -185,25 +206,29 @@ damb_set_oneshot_callback_for_dynamic_ambience(var_0, var_1) {
     level._audio.damb.preset_cache[var_0] = var_2;
   }
 
-  foreach(var_4 in var_2["components"])
+  foreach(var_4 in var_2["components"]) {
   damb_set_oneshot_callback_for_component(var_4, var_1);
+  }
 }
 
 damb_pause_damb(var_0, var_1) {
   var_2 = "free";
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
+  }
 
-  if(isDefined(level._audio.damb.playing[var_2][var_0]))
+  if(isDefined(level._audio.damb.playing[var_2][var_0])) {
     level._audio.damb.playing[var_2][var_0]["paused"] = 1;
+  }
 }
 
 damb_unpause_damb(var_0, var_1) {
   var_2 = "free";
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
+  }
 
   if(isDefined(level._audio.damb.playing[var_2][var_0])) {
     level._audio.damb.playing[var_2][var_0]["paused"] = 0;
@@ -214,11 +239,13 @@ damb_unpause_damb(var_0, var_1) {
 damb_manual_trigger(var_0, var_1) {
   var_2 = "free";
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
+  }
 
-  if(isDefined(level._audio.damb.playing[var_2][var_0]))
+  if(isDefined(level._audio.damb.playing[var_2][var_0])) {
     level notify(var_2 + "_" + var_0 + "_event");
+  }
 }
 
 damb_link_to_damb(var_0, var_1, var_2, var_3) {
@@ -228,8 +255,9 @@ damb_link_to_damb(var_0, var_1, var_2, var_3) {
     var_2 = min(var_2, var_3);
     var_3 = max(var_2, var_3);
 
-    if(!isDefined(level._audio.damb.playing[var_4][var_0]["linked_dambs"]))
+    if(!isDefined(level._audio.damb.playing[var_4][var_0]["linked_dambs"])) {
       level._audio.damb.playing[var_4][var_0]["linked_dambs"] = [];
+    }
 
     var_5 = level._audio.damb.playing[var_4][var_0]["linked_dambs"].size;
     level._audio.damb.playing[var_4][var_0]["linked_dambs"][var_5] = spawnStruct();
@@ -242,13 +270,15 @@ damb_link_to_damb(var_0, var_1, var_2, var_3) {
 dambx_start_preset(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = 1.0;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_8 = var_3;
+  }
 
   var_9 = var_1;
 
-  if(isstring(var_2))
+  if(isstring(var_2)) {
     var_9 = var_2;
+  }
 
   if(!isDefined(level._audio.damb.playing[var_0][var_9])) {
     var_10 = dambx_get_damb_preset(var_1);
@@ -260,8 +290,9 @@ dambx_start_preset(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     level._audio.damb.playing[var_0][var_9]["prob_scale"] = var_8;
     level._audio.damb.playing[var_0][var_9]["paused"] = 0;
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       dambx_start_linked_dambs(var_9, var_7);
+    }
 
     if(isDefined(var_5)) {
       level._audio.damb.playing[var_0][var_9]["entity"] = var_5;
@@ -290,8 +321,9 @@ dambx_start_linked_dambs(var_0, var_1) {
 dambx_stop_preset(var_0, var_1, var_2) {
   var_3 = 2.0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 = var_2;
+  }
 
   if(var_0 == "zone" && !isDefined(var_1)) {
     if(isDefined(level._audio.damb.playing[var_0])) {
@@ -322,17 +354,21 @@ dambx_update_serially(var_0, var_1, var_2) {
 
   var_8 = undefined;
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_8 = randomfloatrange(var_6, var_7);
-  else
+  }
+  else {
     var_8 = randomfloatrange(var_4, var_5);
+  }
 
   for(;;) {
-    if(!level._audio.damb.playing[var_0][var_1]["paused"])
+    if(!level._audio.damb.playing[var_0][var_1]["paused"]) {
       wait(var_8);
+    }
 
-    if(level._audio.damb.playing[var_0][var_1]["paused"])
+    if(level._audio.damb.playing[var_0][var_1]["paused"]) {
       level waittill(var_0 + "_" + var_1 + "_event");
+    }
 
     var_9 = dambx_pick_random_component(var_0, var_1);
 
@@ -350,10 +386,12 @@ dambx_update_serially(var_0, var_1, var_2) {
       var_11 = dambx_create_damb_event(var_10, var_1, var_9);
 
       if(var_11.success) {
-        if(level._audio.damb.serial_playback_lock)
+        if(level._audio.damb.serial_playback_lock) {
           dambx_perform_play_event(var_0, var_1, var_11);
-        else
+        }
+        else {
           thread dambx_perform_play_event(var_0, var_1, var_11);
+        }
       }
     } else
       soundscripts\_audio::aud_print_warning("Dynamic ambience is playing back serially and using components which do not define oneshots or loops");
@@ -367,18 +405,22 @@ dambx_play_component_loops(var_0, var_1, var_2, var_3, var_4) {
     foreach(var_6 in var_2["single_loops"]) {
       var_7 = undefined;
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         var_7 = spawn("script_origin", var_4.origin);
-      else if(isDefined(var_3))
+      }
+      else if(isDefined(var_3)) {
         var_7 = spawn("script_origin", var_3);
-      else
+      }
+      else {
         var_7 = spawn("script_origin", level.player.origin);
+      }
 
       level._audio.damb.loop_entity_ref_count++;
       var_7 playLoopSound(var_6);
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         var_7 linkto(var_4);
+      }
 
       var_8 = level._audio.damb.single_loop_handle_index;
       level._audio.damb.playing[var_0][var_1]["single_loops"][var_8] = var_7;
@@ -391,16 +433,19 @@ dambx_get_component_data(var_0, var_1, var_2, var_1) {
   var_3 = spawnStruct();
   var_3.using_oneshots_or_loops = 0;
 
-  if(!isDefined(var_2["single_loops"]))
+  if(!isDefined(var_2["single_loops"])) {
     var_3.single_loops = 0;
-  else
+  }
+  else {
     var_3.single_loops = 1;
+  }
 
   if(isDefined(var_2["oneshots"]) || isDefined(var_2["loops"])) {
     var_3.using_oneshots_or_loops = 1;
 
-    if(!isDefined(var_2["radius"]))
+    if(!isDefined(var_2["radius"])) {
       var_2["radius"] = [0.0, 0.01];
+    }
 
     var_3.min_radius = min(var_2["radius"][0], var_2["radius"][1]);
     var_3.max_radius = max(var_2["radius"][0], var_2["radius"][1]);
@@ -460,8 +505,9 @@ dambx_get_component_data(var_0, var_1, var_2, var_1) {
 
 dambx_monitor_single_loops_on_ent(var_0, var_1, var_2) {
   for(;;) {
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       level notify(var_0 + "_" + var_1 + "_stop");
+    }
 
     wait 1.0;
   }
@@ -473,8 +519,9 @@ dambx_create_damb_event(var_0, var_1, var_2, var_3) {
   if(randomfloat(1.0) < var_0.prob_scale) {
     var_4.success = 1;
 
-    if(isDefined(level._audio.damb.callbacks[var_1]))
+    if(isDefined(level._audio.damb.callbacks[var_1])) {
       thread[[level._audio.damb.callback[var_1]]]();
+    }
     else {
       var_4.alias = dambx_pick_random_alias(var_2);
       var_4.point = var_3;
@@ -483,10 +530,12 @@ dambx_create_damb_event(var_0, var_1, var_2, var_3) {
       var_5 = randomfloatrange(var_0.min_radius, var_0.max_radius);
       var_6 = undefined;
 
-      if(isDefined(var_0.min_start_angle))
+      if(isDefined(var_0.min_start_angle)) {
         var_6 = randomfloatrange(var_0.min_start_angle, var_0.max_start_angle);
-      else
+      }
+      else {
         var_6 = randomfloatrange(0, 360);
+      }
 
       var_7 = var_5 * cos(var_6);
       var_8 = var_5 * sin(var_6);
@@ -506,8 +555,9 @@ dambx_create_damb_event(var_0, var_1, var_2, var_3) {
           var_9 = var_9 * 0.5;
           var_10 = level.player.origin;
 
-          if(isDefined(var_3))
+          if(isDefined(var_3)) {
             var_10 = var_3;
+          }
 
           var_11 = var_4.start_position - var_10;
           var_7 = var_11[0] * cos(var_9) - var_11[1] * sin(var_9);
@@ -516,8 +566,9 @@ dambx_create_damb_event(var_0, var_1, var_2, var_3) {
         }
       }
 
-      if(isDefined(var_0.min_pitch))
+      if(isDefined(var_0.min_pitch)) {
         var_4.start_pitch = randomfloatrange(var_0.min_pitch, var_0.max_pitch);
+      }
 
       if(isDefined(var_0.min_pitch_time)) {
         var_4.end_pitch = randomfloatrange(var_0.min_pitch, var_0.max_pitch);
@@ -538,10 +589,12 @@ dambx_trigger_linked_damb(var_0, var_1) {
 dambx_make_first_wait(var_0) {
   var_1 = undefined;
 
-  if(isDefined(var_0.first_event))
+  if(isDefined(var_0.first_event)) {
     var_1 = randomfloatrange(var_0.first_event_min, var_0.first_event_max);
-  else
+  }
+  else {
     var_1 = randomfloatrange(var_0.min_time, var_0.max_time);
+  }
 
   return var_1;
 }
@@ -553,19 +606,22 @@ dambx_update(var_0, var_1, var_2, var_3) {
   if(var_4.single_loops) {
     dambx_play_component_loops(var_0, var_1, var_2, var_3, var_4.ent);
 
-    if(var_4.using_entity && !var_4.using_oneshots_or_loops)
+    if(var_4.using_entity && !var_4.using_oneshots_or_loops) {
       thread dambx_monitor_single_loops_on_ent(var_0, var_1, var_4.ent);
+    }
   }
 
   if(var_4.using_oneshots_or_loops) {
     var_5 = dambx_make_first_wait(var_4);
 
     for(;;) {
-      if(!level._audio.damb.playing[var_0][var_1]["paused"])
+      if(!level._audio.damb.playing[var_0][var_1]["paused"]) {
         wait(var_5);
+      }
 
-      if(level._audio.damb.playing[var_0][var_1]["paused"])
+      if(level._audio.damb.playing[var_0][var_1]["paused"]) {
         level waittill(var_0 + "_" + var_1 + "_event");
+      }
 
       if(var_4.using_entity && !isDefined(var_4.ent)) {
         level notify(var_0 + "_" + var_1 + "_stop");
@@ -582,8 +638,9 @@ dambx_update(var_0, var_1, var_2, var_3) {
       var_4.prob_scale = level._audio.damb.playing[var_0][var_1]["prob_scale"];
       var_10 = dambx_create_damb_event(var_4, var_1, var_2, var_3);
 
-      if(var_10.success)
+      if(var_10.success) {
         thread dambx_perform_play_event(var_0, var_1, var_10);
+      }
 
       var_5 = randomfloatrange(var_4.min_time, var_4.max_time);
     }
@@ -604,26 +661,31 @@ dambx_wait_till_sound_done_and_remove_handle(var_0, var_1, var_2, var_3) {
 dambx_perform_play_event(var_0, var_1, var_2) {
   level endon(var_0 + "_" + var_1 + "_stop");
 
-  if(var_2.alias["type"] == "loop")
+  if(var_2.alias["type"] == "loop") {
     dambx_perform_loop_event(var_0, var_1, var_2);
-  else
+  }
+  else {
     dambx_perform_oneshot_event(var_0, var_1, var_2);
+  }
 }
 
 dambx_perform_oneshot_event(var_0, var_1, var_2) {
   level endon(var_0 + "_" + var_1 + "_stop");
   var_3 = level.player.origin;
 
-  if(isDefined(var_2.ent))
+  if(isDefined(var_2.ent)) {
     var_3 = var_2.ent.origin;
-  else if(isDefined(var_2.point))
+  }
+  else if(isDefined(var_2.point)) {
     var_3 = var_2.point;
+  }
 
   if(level._audio.damb.entity_ref_count < level._audio.damb.max_entities) {
     var_4 = spawn("script_origin", var_3 + var_2.start_position);
 
-    if(isDefined(var_2.ent) && var_2.mode == "attach")
+    if(isDefined(var_2.ent) && var_2.mode == "attach") {
       var_4 linkto(var_2.ent);
+    }
 
     var_4 playSound(var_2.alias["name"], "sounddone");
     var_4 thread soundscripts\_audio::aud_check_sound_done();
@@ -639,14 +701,16 @@ dambx_perform_oneshot_event(var_0, var_1, var_2) {
         var_4 moveto(var_3 + var_2.end_position, var_2.travel_time, var_6, var_6);
       }
 
-      if(isDefined(var_2.start_pitch))
+      if(isDefined(var_2.start_pitch)) {
         var_4 scalepitch(var_2.start_pitch);
+      }
 
       if(isDefined(var_2.pitch_time)) {
         wait 0.05;
 
-        if(isDefined(var_4) && !var_4.sounddone)
+        if(isDefined(var_4) && !var_4.sounddone) {
           var_4 scalepitch(var_2.end_pitch, var_2.pitch_time);
+        }
       }
 
       thread dambx_wait_till_sound_done_and_remove_handle(var_0, var_1, var_5, var_4);
@@ -666,10 +730,12 @@ dambx_perform_loop_event(var_0, var_1, var_2) {
   if(level._audio.damb.entity_ref_count < level._audio.damb.max_entities) {
     var_3 = level.player.origin;
 
-    if(isDefined(var_2.ent))
+    if(isDefined(var_2.ent)) {
       var_3 = var_2.ent.origin;
-    else if(isDefined(var_2.point))
+    }
+    else if(isDefined(var_2.point)) {
       var_3 = var_2.point;
+    }
 
     var_4 = var_2.alias["name"];
     var_5 = dambx_get_loop_preset(var_4);
@@ -685,13 +751,15 @@ dambx_perform_loop_event(var_0, var_1, var_2) {
     var_11 = var_5["fade_out"];
     var_12 = undefined;
 
-    if(isDefined(var_5["end_alias"]))
+    if(isDefined(var_5["end_alias"])) {
       var_12 = var_5["end_alias"];
+    }
 
     var_13 = spawn("script_origin", var_3 + var_2.start_position);
 
-    if(isDefined(var_2.ent) && var_2.mode == "attach")
+    if(isDefined(var_2.ent) && var_2.mode == "attach") {
       var_13 linkto(var_2.ent);
+    }
 
     var_13 playLoopSound(var_9);
 
@@ -710,24 +778,28 @@ dambx_perform_loop_event(var_0, var_1, var_2) {
       level._audio.damb.loop_handle_index++;
       var_15 = 0;
 
-      if(isDefined(var_2.mode) && var_2.mode == "free" && isDefined(var_2.end_position))
+      if(isDefined(var_2.mode) && var_2.mode == "free" && isDefined(var_2.end_position)) {
         var_15 = 1;
-      else if(!isDefined(var_2.mode) && isDefined(var_2.end_position))
+      }
+      else if(!isDefined(var_2.mode) && isDefined(var_2.end_position)) {
         var_15 = 1;
+      }
 
       if(var_15) {
         var_16 = 0.1 * var_2.travel_time;
         var_13 moveto(var_3 + var_2.end_position, var_2.travel_time, var_16, var_16);
       }
 
-      if(isDefined(var_2.start_pitch))
+      if(isDefined(var_2.start_pitch)) {
         var_13 setpitch(var_2.start_pitch);
+      }
 
       if(isDefined(var_2.pitch_time)) {
         wait 0.05;
 
-        if(isDefined(var_13) && !var_13.sounddone)
+        if(isDefined(var_13) && !var_13.sounddone) {
           var_13 setpitch(var_2.end_pitch, var_2.pitch_time);
+        }
       }
 
       wait(var_8);
@@ -744,8 +816,9 @@ dambx_perform_loop_event(var_0, var_1, var_2) {
             thread dambx_wait_till_sound_done_and_remove_handle(var_0, var_1, var_18, var_17);
           }
 
-          if(isDefined(var_11))
+          if(isDefined(var_11)) {
             thread soundscripts\_audio::aud_fade_loop_out_and_delete(var_13, var_11);
+          }
           else {
             var_13 stoploopsound();
             wait 0.05;
@@ -815,20 +888,24 @@ dambx_pick_random_alias(var_0) {
     var_3 = 0;
 
     if(isDefined(var_1)) {
-      if(isstring(var_1[0]))
+      if(isstring(var_1[0])) {
         var_3 = var_3 + var_1[1];
+      }
       else {
-        foreach(var_5 in var_1)
+        foreach(var_5 in var_1) {
         var_3 = var_3 + var_5[1];
+        }
       }
     }
 
     if(isDefined(var_2)) {
-      if(isstring(var_2[0]))
+      if(isstring(var_2[0])) {
         var_3 = var_3 + var_2[1];
+      }
       else {
-        foreach(var_5 in var_2)
+        foreach(var_5 in var_2) {
         var_3 = var_3 + var_5[1];
+        }
       }
     }
 
@@ -896,10 +973,12 @@ dambx_pick_random_alias(var_0) {
 dambx_get_loop_preset(var_0) {
   var_1 = [];
 
-  if(isDefined(level._audio.damb.loop_cache[var_0]))
+  if(isDefined(level._audio.damb.loop_cache[var_0])) {
     var_1 = level._audio.damb.loop_cache[var_0];
-  else
+  }
+  else {
     var_1 = dambx_get_loop_def_from_string_table(var_0, 1);
+  }
 
   if(!isDefined(var_1) || var_1.size == 0) {
     return;
@@ -909,13 +988,15 @@ dambx_get_loop_preset(var_0) {
 }
 
 dambx_get_component_preset(var_0) {
-  if(!isDefined(level._audio.damb.component_cache))
+  if(!isDefined(level._audio.damb.component_cache)) {
     level._audio.damb.component_cache = [];
+  }
 
   var_1 = [];
 
-  if(isDefined(level._audio.damb.component_cache[var_0]))
+  if(isDefined(level._audio.damb.component_cache[var_0])) {
     var_1 = level._audio.damb.component_cache[var_0];
+  }
 
   var_1 = dambx_get_component_from_string_table(var_0, 1);
 
@@ -947,14 +1028,17 @@ dambx_play(var_0, var_1, var_2) {
   level waittill(var_0 + "_" + var_1 + "_stop");
   wait 0.1;
 
-  foreach(var_8 in level._audio.damb.playing[var_0][var_1]["loops"])
+  foreach(var_8 in level._audio.damb.playing[var_0][var_1]["loops"]) {
   thread dambx_fade_out_playing_loop(var_8, level._audio.damb.playing[var_0][var_1]["fade"], 0);
+  }
 
-  foreach(var_8 in level._audio.damb.playing[var_0][var_1]["single_loops"])
+  foreach(var_8 in level._audio.damb.playing[var_0][var_1]["single_loops"]) {
   thread dambx_fade_out_playing_loop(var_8, level._audio.damb.playing[var_0][var_1]["fade"], 1);
+  }
 
-  foreach(var_8 in level._audio.damb.playing[var_0][var_1]["oneshots"])
+  foreach(var_8 in level._audio.damb.playing[var_0][var_1]["oneshots"]) {
   thread dambx_fade_out_playing_sound(var_8, level._audio.damb.playing[var_0][var_1]["fade"]);
+  }
 
   level._audio.damb.playing[var_0][var_1] = undefined;
 }
@@ -980,17 +1064,20 @@ dambx_fade_out_playing_loop(var_0, var_1, var_2) {
     var_0 delete();
   }
 
-  if(var_2)
+  if(var_2) {
     level._audio.damb.loop_entity_ref_count--;
-  else
+  }
+  else {
     decrement_ref_count();
+  }
 }
 
 dambx_get_list_value_from_string_table(var_0, var_1, var_2, var_3) {
   var_4 = 0;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = var_3;
+  }
 
   var_5 = [];
   var_6 = 0;
@@ -1032,11 +1119,13 @@ dambx_get_loop_def_from_string_table(var_0, var_1) {
   var_3 = soundscripts\_audio::get_damb_loops_stringtable();
   var_4 = [];
 
-  if(var_1)
+  if(var_1) {
     var_4 = dambx_get_loop_def_from_string_table_internal(var_3, var_0);
+  }
 
-  if(!isDefined(var_4) || var_4.size == 0)
+  if(!isDefined(var_4) || var_4.size == 0) {
     var_4 = dambx_get_loop_def_from_string_table_internal(var_2, var_0);
+  }
 
   if(!isDefined(var_4) || var_4.size == 0) {
     return;
@@ -1069,28 +1158,33 @@ dambx_get_loop_def_from_string_table_internal(var_0, var_1) {
             var_4 = var_12;
             break;
           case "fade_in":
-            if(isDefined(var_12) && var_12 != "")
+            if(isDefined(var_12) && var_12 != "") {
               var_6 = max(float(var_12), 0.0);
+            }
 
             break;
           case "fade_out":
-            if(isDefined(var_12) && var_12 != "")
+            if(isDefined(var_12) && var_12 != "") {
               var_7 = max(float(var_12), 0.0);
+            }
 
             break;
           case "end_alias":
-            if(isDefined(var_12) && var_12 != "")
+            if(isDefined(var_12) && var_12 != "") {
               var_5 = var_12;
+            }
 
             break;
           case "duration_min":
-            if(isDefined(var_12) && var_12 != "")
+            if(isDefined(var_12) && var_12 != "") {
               var_8[0] = float(var_12);
+            }
 
             break;
           case "duration_max":
-            if(isDefined(var_12) && var_12 != "")
+            if(isDefined(var_12) && var_12 != "") {
               var_8[1] = float(var_12);
+            }
 
             break;
           default:
@@ -1101,17 +1195,21 @@ dambx_get_loop_def_from_string_table_internal(var_0, var_1) {
 
     var_2["loop_alias"] = var_4;
 
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_2["fade_in"] = var_6;
+    }
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_2["fade_out"] = var_7;
+    }
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_2["end_alias"] = var_5;
+    }
 
-    if(isDefined(var_8[0]))
+    if(isDefined(var_8[0])) {
       var_2["duration"] = dambx_get_two_value_float_array(var_8);
+    }
 
     return var_2;
   }
@@ -1220,44 +1318,56 @@ dambx_get_component_from_string_table_internal(var_0, var_1) {
 
     if(var_16 > 0) {
       if(isDefined(var_5[0])) {
-        if(isstring(var_5[0]))
+        if(isstring(var_5[0])) {
           var_5[1] = 1.0;
+        }
 
         var_2["oneshots"] = var_5;
       }
 
-      if(isDefined(var_6[0]))
+      if(isDefined(var_6[0])) {
         var_2["loops"] = var_6;
+      }
 
-      if(isDefined(var_7[0]))
+      if(isDefined(var_7[0])) {
         var_2["single_loops"] = var_7;
+      }
 
-      if(isDefined(var_8[0]))
+      if(isDefined(var_8[0])) {
         var_2["first_event"] = dambx_get_two_value_float_array(var_8);
+      }
 
-      if(isDefined(var_9[0]))
+      if(isDefined(var_9[0])) {
         var_2["event_time"] = dambx_get_two_value_float_array(var_9);
+      }
 
-      if(isDefined(var_10[0]))
+      if(isDefined(var_10[0])) {
         var_2["radius"] = dambx_get_two_value_float_array(var_10);
+      }
 
-      if(isDefined(var_11[0]))
+      if(isDefined(var_11[0])) {
         var_2["cone"] = dambx_get_two_value_float_array(var_11);
+      }
 
-      if(isDefined(var_12[0]))
+      if(isDefined(var_12[0])) {
         var_2["delta"] = dambx_get_two_value_float_array(var_12);
+      }
 
-      if(isDefined(var_13[0]))
+      if(isDefined(var_13[0])) {
         var_2["travel_time"] = dambx_get_two_value_float_array(var_13);
+      }
 
-      if(isDefined(var_14[0]))
+      if(isDefined(var_14[0])) {
         var_2["pitch"] = dambx_get_two_value_float_array(var_14);
+      }
 
-      if(isDefined(var_15[0]))
+      if(isDefined(var_15[0])) {
         var_2["pitch_time"] = dambx_get_two_value_float_array(var_15);
+      }
 
-      if(!isDefined(var_2["radius"]))
+      if(!isDefined(var_2["radius"])) {
         var_2["radius"] = [0.0, 0.01];
+      }
     }
 
     return var_2;
@@ -1269,11 +1379,13 @@ dambx_get_component_from_string_table(var_0, var_1) {
   var_3 = "soundtables\sp_defaults.csv";
   var_4 = [];
 
-  if(var_1)
+  if(var_1) {
     var_4 = dambx_get_component_from_string_table_internal(var_2, var_0);
+  }
 
-  if(!isDefined(var_4) || var_4.size == 0)
+  if(!isDefined(var_4) || var_4.size == 0) {
     var_4 = dambx_get_component_from_string_table_internal(var_3, var_0);
+  }
 
   if(!isDefined(var_4) || var_4.size == 0) {
     return;
@@ -1301,23 +1413,27 @@ dambx_get_preset_from_stringtable_internal(var_0, var_1) {
             var_4 = dambx_get_list_value_from_string_table(var_10, "preset definition", "components");
             break;
           case "first_event_min":
-            if(isDefined(var_10) && var_10 != "")
+            if(isDefined(var_10) && var_10 != "") {
               var_5[0] = float(var_10);
+            }
 
             break;
           case "first_event_max":
-            if(isDefined(var_10) && var_10 != "")
+            if(isDefined(var_10) && var_10 != "") {
               var_5[1] = float(var_10);
+            }
 
             break;
           case "event_time_min":
-            if(isDefined(var_10) && var_10 != "")
+            if(isDefined(var_10) && var_10 != "") {
               var_6[0] = float(var_10);
+            }
 
             break;
           case "event_time_max":
-            if(isDefined(var_10) && var_10 != "")
+            if(isDefined(var_10) && var_10 != "") {
               var_6[1] = float(var_10);
+            }
           case "comment":
             break;
           default:
@@ -1339,16 +1455,19 @@ dambx_get_preset_from_stringtable_internal(var_0, var_1) {
     }
 
     if(var_11) {
-      if(isDefined(var_4[0][1]))
+      if(isDefined(var_4[0][1])) {
         var_3["components"] = var_4;
+      }
       else {
         var_3["components"] = [];
 
-        for(var_8 = 0; var_8 < var_4.size; var_8++)
+        for(var_8 = 0; var_8 < var_4.size; var_8++) {
           var_3["components"][var_3["components"].size] = [var_4[0], 1.0];
+        }
 
-        if(var_3["components"].size == 0)
+        if(var_3["components"].size == 0) {
           var_3["components"] = undefined;
+        }
       }
     } else if(var_4.size != 0)
       var_3["components"] = var_4;
@@ -1362,11 +1481,13 @@ dambx_get_preset_from_string_table(var_0, var_1) {
   var_3 = "soundtables\sp_defaults.csv";
   var_4 = [];
 
-  if(var_1)
+  if(var_1) {
     var_4 = dambx_get_preset_from_stringtable_internal(var_2, var_0);
+  }
 
-  if(!isDefined(var_4) || var_4.size == 0)
+  if(!isDefined(var_4) || var_4.size == 0) {
     var_4 = dambx_get_preset_from_stringtable_internal(var_3, var_0);
+  }
 
   if(!isDefined(var_4) || var_4.size == 0) {
     return;
@@ -1377,10 +1498,12 @@ dambx_get_preset_from_string_table(var_0, var_1) {
 dambx_get_damb_preset(var_0) {
   var_1 = [];
 
-  if(isDefined(level._audio.damb.preset_cache[var_0]))
+  if(isDefined(level._audio.damb.preset_cache[var_0])) {
     var_1 = level._audio.damb.preset_cache[var_0];
-  else
+  }
+  else {
     var_1 = dambx_get_preset_from_string_table(var_0, 1);
+  }
 
   if(!isDefined(var_1) || var_1.size == 0) {
     return;

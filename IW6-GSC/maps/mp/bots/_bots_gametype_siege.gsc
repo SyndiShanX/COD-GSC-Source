@@ -24,8 +24,9 @@ setup_bot_siege() {
 }
 
 bot_siege_debug() {
-  while(!isDefined(level.bot_gametype_precaching_done))
+  while(!isDefined(level.bot_gametype_precaching_done)) {
     wait(0.05);
+  }
 
   while(1) {
     if(GetDvarInt("bot_debugSiege", 0) == 1) {
@@ -59,10 +60,12 @@ bot_siege_manager_think() {
     foreach(flag in level.flags) {
       team = flag.useObj maps\mp\gametypes\_gameobjects::getOwnerTeam();
       if(team != "neutral") {
-        if(!isDefined(flagCounts[team]))
+        if(!isDefined(flagCounts[team])) {
           flagCounts[team] = 1;
-        else
+        }
+        else {
           flagCounts[team]++;
+        }
       }
     }
 
@@ -85,10 +88,12 @@ bot_siege_think() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while(!isDefined(level.bot_gametype_precaching_done))
+  while(!isDefined(level.bot_gametype_precaching_done)) {
     wait(0.05);
-  while(!isDefined(level.siege_bot_team_need_flags))
+  }
+  while(!isDefined(level.siege_bot_team_need_flags)) {
     wait(0.05);
+  }
 
   self BotSetFlag("separation", 0);
   self BotSetFlag("use_obj_path_style", true);
@@ -98,8 +103,9 @@ bot_siege_think() {
       self bot_choose_flag();
     } else {
       if(isDefined(self.goalFlag)) {
-        if(self maps\mp\bots\_bots_util::bot_is_defending())
+        if(self maps\mp\bots\_bots_util::bot_is_defending()) {
           self bot_defend_stop();
+        }
         self.goalFlag = undefined;
       }
     }

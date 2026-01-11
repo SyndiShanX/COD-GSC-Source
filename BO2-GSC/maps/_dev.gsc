@@ -64,8 +64,9 @@ perk_dev_gui() {
     if(getdvar(#"scr_giveperk") != "") {
       players = get_players();
 
-      for(i = 0; i < players.size; i++)
+      for(i = 0; i < players.size; i++) {
         players[i] setperk(getdvar(#"scr_giveperk"));
+      }
 
       setdvar("scr_giveperk", "");
     }

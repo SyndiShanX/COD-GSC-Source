@@ -102,12 +102,14 @@ main() {
 
   setdvarifuninitialized("ui_char_museum_mode", "credits_1");
 
-  if(!isDefined(level.player))
+  if(!isDefined(level.player)) {
     level.player = getEntArray("player", "classname")[0];
+  }
 
   weapons = level.player GetWeaponsListAll();
-  if(isDefined(weapons) && weapons.size)
+  if(isDefined(weapons) && weapons.size) {
     setdvar("ui_char_museum_mode", "credits_1");
+  }
 
   level.level_mode = getdvar("ui_char_museum_mode");
   SetSavedDvar("ui_hidemap", "1");

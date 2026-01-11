@@ -31,13 +31,15 @@ func_12827(var_00) {
   var_00 give_player_tickets(1);
   var_02 = scripts\mp\utility\game::_hasperk("specialty_rugged_eqp");
 
-  if(var_02)
+  if(var_02) {
     var_0.hasruggedeqp = 1;
+  }
 
   var_0.func_1E2D = func_1281F();
 
-  if(!isDefined(var_0.func_1E2D))
+  if(!isDefined(var_0.func_1E2D)) {
     var_0.func_1E2D = 2;
+  }
 
   scripts\mp\weapons::ontacticalequipmentplanted(var_00, "power_trophy");
   thread scripts\mp\weapons::monitordisownedequipment(self, var_00);
@@ -94,14 +96,17 @@ func_1282B() {
   self endon("death");
   self.owner endon("disconnect");
 
-  if(!isDefined(level.grenades))
+  if(!isDefined(level.grenades)) {
     level.grenades = [];
+  }
 
-  if(!isDefined(level.missiles))
+  if(!isDefined(level.missiles)) {
     level.missiles = [];
+  }
 
-  if(!isDefined(level.mines))
+  if(!isDefined(level.mines)) {
     level.mines = [];
+  }
 
   var_00 = func_12804();
 
@@ -125,8 +130,9 @@ func_1282B() {
       }
       var_06 = var_5.owner;
 
-      if(!isDefined(var_06) && isDefined(var_5.weapon_name) && weaponclass(var_5.weapon_name) == "grenade")
+      if(!isDefined(var_06) && isDefined(var_5.weapon_name) && weaponclass(var_5.weapon_name) == "grenade") {
         var_06 = getmissileowner(var_05);
+      }
 
       if(isDefined(var_06) && !scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_06))) {
         continue;
@@ -159,12 +165,15 @@ func_1281E(var_00) {
   var_01 = var_0.origin;
   var_02 = var_0.angles;
 
-  if(scripts\mp\weapons::isplantedequipment(var_00))
+  if(scripts\mp\weapons::isplantedequipment(var_00)) {
     var_00 scripts\mp\weapons::deleteexplosive();
-  else if(var_00 scripts\mp\domeshield::isdomeshield())
+  }
+  else if(var_00 scripts\mp\domeshield::isdomeshield()) {
     var_00 thread scripts\mp\domeshield::domeshield_delete();
-  else
+  }
+  else {
     var_00 delete();
+  }
 
   var_03 = trophy_getbesttag(var_01);
   var_04 = trophy_getpartbytag(var_03);
@@ -172,8 +181,9 @@ func_1281E(var_00) {
   self.func_69DA thread trophy_explode(var_01, var_02);
   self.func_1E2D--;
 
-  if(self.func_1E2D <= 0)
+  if(self.func_1E2D <= 0) {
     thread trophy_destroy();
+  }
 }
 
 func_12811(var_00, var_01, var_02, var_03, var_04) {
@@ -206,8 +216,9 @@ trophy_destroyongameend() {
 }
 
 func_12818() {
-  if(self.owner scripts\mp\powers::hasequipment("power_trophy"))
+  if(self.owner scripts\mp\powers::hasequipment("power_trophy")) {
     self.owner func_12803(self.func_1E2D);
+  }
 }
 
 trophy_createexplosion(var_00) {
@@ -256,16 +267,18 @@ trophy_modifiedprotectiondistsqr(var_00, var_01) {
       case "switch_blade_child_mp":
       case "thorproj_zoomed_mp":
       case "drone_hive_projectile_mp":
-        if(147456 > var_01)
+        if(147456 > var_01) {
           var_01 = 147456;
+        }
 
         break;
       case "iw7_arclassic_mp":
       case "iw7_chargeshot_mp":
       case "iw7_lockon_mp":
       case "wristrocket_proj_mp":
-        if(65536 > var_01)
+        if(65536 > var_01) {
           var_01 = 65536;
+        }
 
         break;
     }
@@ -276,21 +289,25 @@ trophy_modifiedprotectiondistsqr(var_00, var_01) {
 
 trophy_checkignorelist(var_00) {
   if(isDefined(var_0.weapon_name)) {
-    if(scripts\mp\utility\game::iskillstreakweapon(var_0.weapon_name))
+    if(scripts\mp\utility\game::iskillstreakweapon(var_0.weapon_name)) {
       return 1;
+    }
 
-    if(scripts\mp\weapons::isaxeweapon(var_0.weapon_name))
+    if(scripts\mp\weapons::isaxeweapon(var_0.weapon_name)) {
       return 1;
+    }
 
     switch (var_0.weapon_name) {
       case "domeshield_mp":
-        if(scripts\mp\weapons::isplantedequipment(var_00))
+        if(scripts\mp\weapons::isplantedequipment(var_00)) {
           return 1;
+        }
 
         break;
       case "trophy_mp":
-        if(scripts\mp\weapons::isplantedequipment(var_00))
+        if(scripts\mp\weapons::isplantedequipment(var_00)) {
           return 1;
+        }
 
         break;
       case "uplinkball_tracking_mp":
@@ -313,8 +330,9 @@ trophy_checkignorelist(var_00) {
 }
 
 func_12821(var_00) {
-  if(getdvarint("showArchetypes", 0) > 0)
+  if(getdvarint("showArchetypes", 0) > 0) {
     var_00 scripts\mp\powers::func_C179();
+  }
 }
 
 func_12817(var_00, var_01, var_02) {
@@ -361,8 +379,9 @@ trophy_getpartbytag(var_00) {
   var_01 = level.func_12802.func_1141B;
 
   foreach(var_04, var_03 in var_01) {
-    if(var_03 == var_00)
+    if(var_03 == var_00) {
       return "protect" + (var_04 + 1);
+    }
   }
 
   return undefined;
@@ -378,20 +397,24 @@ trophy_givepointsfordeath(var_00) {
 trophy_givedamagefeedback(var_00) {
   var_01 = "";
 
-  if(scripts\mp\utility\game::istrue(self.hasruggedeqp))
+  if(scripts\mp\utility\game::istrue(self.hasruggedeqp)) {
     var_01 = "hitequip";
+  }
 
-  if(isplayer(var_00))
+  if(isplayer(var_00)) {
     var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_01);
+  }
 }
 
 func_12803(var_00) {
-  if(!isDefined(self.trophies))
+  if(!isDefined(self.trophies)) {
     self.trophies = [];
+  }
 
   if(self.trophies.size < func_12814()) {
-    if(!isDefined(var_00))
+    if(!isDefined(var_00)) {
       var_00 = 2;
+    }
 
     self.trophies[self.trophies.size] = var_00;
   }
@@ -414,8 +437,9 @@ func_12806() {
 func_1281A() {
   var_00 = scripts\mp\powers::func_D736("power_trophy");
 
-  for(var_01 = 0; var_01 < var_00; var_1++)
+  for(var_01 = 0; var_01 < var_00; var_1++) {
     func_12803();
+  }
 }
 
 func_12814() {
@@ -423,11 +447,13 @@ func_12814() {
 }
 
 trophy_modifieddamage(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     return [var_03, var_04];
+  }
 
-  if(var_03 == 0)
+  if(var_03 == 0) {
     return [var_03, var_04];
+  }
 
   var_05 = undefined;
 
@@ -443,8 +469,9 @@ trophy_modifieddamage(var_00, var_01, var_02, var_03, var_04) {
 
   var_06 = var_04;
 
-  if(isDefined(var_05))
+  if(isDefined(var_05)) {
     var_06 = var_05 - var_03;
+  }
 
   var_06 = min(var_06, var_04);
   return [var_03, var_04];

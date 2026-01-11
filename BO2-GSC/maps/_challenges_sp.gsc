@@ -25,14 +25,17 @@ get_challenge_complete(str_stat_name) {
 register_challenge(str_stat_name, logic_func) {
   assert(isplayer(self), "register_challenge() with stat name " + str_stat_name + " must be called on a player.");
 
-  if(!isDefined(level._challenges_complete))
+  if(!isDefined(level._challenges_complete)) {
     level._challenges_complete = [];
+  }
 
-  if(!isDefined(level._challenge_lookup))
+  if(!isDefined(level._challenge_lookup)) {
     level._challenge_lookup = [];
+  }
 
-  if(!isDefined(level._challenge_target))
+  if(!isDefined(level._challenge_target)) {
     level._challenge_target = [];
+  }
 
   levelalias = getlevelalias();
   challengenum = tablelookup("sp/challengeTable.csv", 1, levelalias, 2, str_stat_name, 0);
@@ -43,8 +46,9 @@ register_challenge(str_stat_name, logic_func) {
   maps\_utility::waitforstats();
   str_challenge_notify = "challenge_" + str_stat_name + "_increment";
 
-  if(isDefined(logic_func))
+  if(isDefined(logic_func)) {
     self thread[[logic_func]](str_challenge_notify);
+  }
 
   if(get_challenge_complete(str_stat_name)) {
     return;

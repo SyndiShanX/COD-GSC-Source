@@ -94,10 +94,12 @@ main() {
   level.dlc_get_current_player_volumes_override_func = maps\mp\mp_alien_last_progression::last_get_current_player_volumes_override_func;
   level.shell_shock_override = ::last_shellshock_override_func;
 
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.base_player_count_multiplier = 1;
-  else
+  }
+  else {
     level.base_player_count_multiplier = 0.49;
+  }
 
   level.additional_player_count_multiplier = 0.17;
   level.waypoint_dist_override = 2500;
@@ -253,21 +255,25 @@ activate_easter_egg() {
 killfxonplayerdeath(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level endon(var_1);
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level endon(var_2);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level endon(var_3);
+  }
 
   common_scripts\utility::waittill_any("killed_player", "disconnect");
 
   if(isDefined(var_0)) {
     if(isarray(var_0)) {
-      foreach(var_5 in var_0)
+      foreach(var_5 in var_0) {
       var_5 delete();
+      }
     } else
       var_0 delete();
   }
@@ -282,8 +288,9 @@ last_easter_egg_off() {
     var_1 thread maps\mp\alien\_alien_class_skills_main::remove_the_outline();
     stopFXOnTag(level.dig_fx["shrine"]["player"], var_1, "tag_origin");
 
-    if(isDefined(var_1.shrine_effect_ent))
+    if(isDefined(var_1.shrine_effect_ent)) {
       var_1.shrine_effect_ent delete();
+    }
   }
 }
 
@@ -320,8 +327,9 @@ carwash_intel_easter_egg() {
       if(gettime() < var_10 + 30000) {
         var_13 = "";
 
-        for(var_4 = 0; var_4 < var_11; var_4++)
+        for(var_4 = 0; var_4 < var_11; var_4++) {
           var_13 = var_13 + var_9[var_4];
+        }
 
         var_13 = var_13 + var_9[var_11];
         iprintlnbold(var_13);
@@ -342,15 +350,17 @@ unlock_last_secret_intel() {
   earthquake(0.35, 4, (0, 0, 0), 10000);
   wait 1;
 
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   thread maps\mp\alien\_pillage_intel::give_player_easter_egg_intel(var_1);
+  }
 }
 
 wait_for_letter_shot(var_0) {
   level endon("stop_waiting");
 
-  foreach(var_2 in level.easter_egg_trigs)
+  foreach(var_2 in level.easter_egg_trigs) {
   var_2 common_scripts\utility::trigger_off();
+  }
 
   foreach(var_6, var_5 in var_0) {
     level.easter_egg_trigs[var_6] common_scripts\utility::trigger_on();
@@ -459,8 +469,9 @@ last_melee_override_func(var_0) {
 }
 
 last_alien_idle_anim_state_override_func(var_0) {
-  if(!isDefined(self.alien_type))
+  if(!isDefined(self.alien_type)) {
     return undefined;
+  }
 
   switch (self.alien_type) {
     case "gargoyle":
@@ -529,8 +540,9 @@ last_alien_type_node_match_override_func(var_0) {
     case "bomber":
       return 0;
     case "gargoyle":
-      if(getdvarint("scr_gargoyle_disable_fly_intro") != 1)
+      if(getdvarint("scr_gargoyle_disable_fly_intro") != 1) {
         return 0;
+      }
 
       break;
     default:
@@ -541,8 +553,9 @@ last_alien_type_node_match_override_func(var_0) {
 last_alien_jump_override(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
-  if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy != "flyable")
+  if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy != "flyable") {
     var_4 = var_1.script_noteworthy;
+  }
 
   maps\mp\agents\alien\_alien_jump::jump(var_0.origin, var_0.angles, var_1.origin, var_1.angles, var_3, undefined, var_4);
 }
@@ -703,13 +716,15 @@ last_hint_precache() {
 }
 
 last_enter_area_func(var_0) {
-  if(!maps\mp\alien\_utility::is_chaos_mode())
+  if(!maps\mp\alien\_utility::is_chaos_mode()) {
     maps\mp\alien\_container_spawn::activate_container_spawners_in_area(var_0);
+  }
 }
 
 last_leave_area_func(var_0) {
-  if(!maps\mp\alien\_utility::is_chaos_mode())
+  if(!maps\mp\alien\_utility::is_chaos_mode()) {
     maps\mp\alien\_container_spawn::deactivate_container_spawners_in_area(var_0);
+  }
 }
 
 mp_alien_last_onspawnplayer_func() {
@@ -732,8 +747,9 @@ last_intro_music_play() {
   wait 0.01;
 
   if(common_scripts\utility::flag_exist("intro_sequence_complete") && !common_scripts\utility::flag("intro_sequence_complete")) {
-    if(!self issplitscreenplayer() || self issplitscreenplayerprimary())
+    if(!self issplitscreenplayer() || self issplitscreenplayerprimary()) {
       self playlocalsound("mus_alien_dlc4_last_intro");
+    }
   }
 }
 
@@ -819,8 +835,9 @@ last_get_hintstring_for_item_pickup_func(var_0) {
       return &"ALIEN_CRAFTING_PICKUP_CORTEXGRENADE";
   }
 
-  if(isDefined(level.level_locker_weapon_pickup_string_func))
+  if(isDefined(level.level_locker_weapon_pickup_string_func)) {
     return [[level.level_locker_weapon_pickup_string_func]](var_0);
+  }
 }
 
 last_build_pillageitem_array_func(var_0) {
@@ -856,8 +873,9 @@ init_weapon_stat_array() {
 }
 
 last_weapon_stats_override_func(var_0) {
-  if(isDefined(level.weaponstats_weaponlist[var_0]))
+  if(isDefined(level.weaponstats_weaponlist[var_0])) {
     return level.weaponstats_weaponlist[var_0];
+  }
 
   return var_0;
 }
@@ -903,11 +921,13 @@ last_locker_ark_check_func(var_0, var_1) {
 }
 
 dlc_4_offset_locker_trigger_model() {
-  if(isDefined(self.locker_origin))
+  if(isDefined(self.locker_origin)) {
     self.pillage_trigger.origin = self.locker_origin;
+  }
 
-  if(isDefined(self.locker_angles))
+  if(isDefined(self.locker_angles)) {
     self.pillage_trigger.angles = self.locker_angles;
+  }
 
   var_0 = (0, 0, 20);
   var_1 = (0, 0, 13);
@@ -978,8 +998,9 @@ playlastvo(var_0) {
   var_3 = var_2[0];
   var_4 = var_3.vo_prefix + var_0;
 
-  if(var_0 == "conduit_nag" || var_0 == "conduit_nag_aliens")
+  if(var_0 == "conduit_nag" || var_0 == "conduit_nag_aliens") {
     var_1 = 3;
+  }
 
   if(var_0 == "conduit_halfway" && isDefined(level.current_encounter_info) && level.current_encounter_info.type == "transition") {
     return;
@@ -988,8 +1009,9 @@ playlastvo(var_0) {
 }
 
 playconduitattackvo(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "conduit_attack";
+  }
 
   var_1 = 30000;
   var_2 = gettime();
@@ -1047,13 +1069,15 @@ playnxweaponvo(var_0) {
     return;
   }
   if(!isDefined(var_0.first_time_nx_weapon_vo)) {
-    while(vo_system_is_paused())
+    while(vo_system_is_paused()) {
       wait 0.1;
+    }
 
     maps\mp\alien\_music_and_dialog::pause_vo_system(level.players);
 
-    while(maps\mp\alien\_music_and_dialog_dlc::is_vo_system_playing())
+    while(maps\mp\alien\_music_and_dialog_dlc::is_vo_system_playing()) {
       wait 0.1;
+    }
 
     wait 0.25;
     var_1 = common_scripts\utility::spawn_tag_origin();
@@ -1073,13 +1097,15 @@ playnxgrenadevo(var_0) {
     return;
   }
   if(!isDefined(var_0.first_time_nx_grenade_vo)) {
-    while(vo_system_is_paused())
+    while(vo_system_is_paused()) {
       wait 0.1;
+    }
 
     maps\mp\alien\_music_and_dialog::pause_vo_system(level.players);
 
-    while(maps\mp\alien\_music_and_dialog_dlc::is_vo_system_playing())
+    while(maps\mp\alien\_music_and_dialog_dlc::is_vo_system_playing()) {
       wait 0.1;
+    }
 
     wait 0.25;
     var_1 = common_scripts\utility::spawn_tag_origin();
@@ -1157,10 +1183,12 @@ play_last_vignette_player_vo(var_0) {
       continue;
     }
     if(var_2 == self) {
-      if(maps\mp\alien\_music_and_dialog::alias_2d_version_exists(var_2, var_0))
+      if(maps\mp\alien\_music_and_dialog::alias_2d_version_exists(var_2, var_0)) {
         var_2 playlocalsound(maps\mp\alien\_music_and_dialog::get_alias_2d_version(var_2, var_0));
-      else
+      }
+      else {
         var_2 playlocalsound(var_0);
+      }
 
       continue;
     }
@@ -1174,13 +1202,15 @@ play_last_vignette_player_vo(var_0) {
 play_last_vignette_vo(var_0, var_1, var_2) {
   level endon("game_ended");
 
-  while(vo_system_is_paused())
+  while(vo_system_is_paused()) {
     wait 0.1;
+  }
 
   maps\mp\alien\_music_and_dialog::pause_vo_system(level.players);
 
-  while(maps\mp\alien\_music_and_dialog_dlc::is_vo_system_playing())
+  while(maps\mp\alien\_music_and_dialog_dlc::is_vo_system_playing()) {
     wait 0.1;
+  }
 
   wait 0.25;
   play_vignette_vo_array(var_0, var_1);
@@ -1212,13 +1242,15 @@ play_vignette_vo_array(var_0, var_1) {
 play_cross_vignette_vo(var_0) {
   level endon("game_ended");
 
-  while(vo_system_is_paused())
+  while(vo_system_is_paused()) {
     wait 0.1;
+  }
 
   maps\mp\alien\_music_and_dialog::pause_vo_system(level.players);
 
-  while(maps\mp\alien\_music_and_dialog_dlc::is_vo_system_playing())
+  while(maps\mp\alien\_music_and_dialog_dlc::is_vo_system_playing()) {
     wait 0.1;
+  }
 
   wait 0.25;
   play_cross_vo(var_0);
@@ -1255,8 +1287,9 @@ play_global_vo(var_0) {
 
 vo_system_is_paused() {
   foreach(var_1 in level.players) {
-    if(var_1 maps\mp\alien\_music_and_dialog::is_vo_system_paused())
+    if(var_1 maps\mp\alien\_music_and_dialog::is_vo_system_paused()) {
       return 1;
+    }
   }
 
   return 0;
@@ -1265,8 +1298,9 @@ vo_system_is_paused() {
 last_start_vo() {
   level endon("kill_start_vo");
 
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.1;
+  }
 
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     return;
@@ -1358,8 +1392,9 @@ play_transition_encounter_complete_vo() {
     }
   }
 
-  if(var_0 <= 15)
+  if(var_0 <= 15) {
     level notify("dlc_vo_notify", "last_vo", "area_cleared");
+  }
 
   wait 5;
   level thread play_conduit_nag_vo();
@@ -1396,20 +1431,23 @@ remove_conduit_vo_once_complete() {
 }
 
 remove_conduit_vo_on_player(var_0) {
-  foreach(var_3, var_2 in level.alien_vo_priority_level)
+  foreach(var_3, var_2 in level.alien_vo_priority_level) {
   maps\mp\alien\_music_and_dialog::remove_vo_data(var_0, var_2);
+  }
 }
 
 set_flag_when_players_leave_base() {
-  if(!common_scripts\utility::flag_exist("players_left_starting_area"))
+  if(!common_scripts\utility::flag_exist("players_left_starting_area")) {
     common_scripts\utility::flag_init("players_left_starting_area");
+  }
 
   var_0 = getent("main_base", "targetname");
 
   while(!common_scripts\utility::flag("players_left_starting_area")) {
     foreach(var_2 in level.players) {
-      if(!var_2 istouching(var_0))
+      if(!var_2 istouching(var_0)) {
         common_scripts\utility::flag_set("players_left_starting_area");
+      }
     }
 
     wait 0.25;
@@ -1431,8 +1469,9 @@ dlc4_drill_damage_adjust_function(var_0, var_1, var_2) {
 }
 
 set_spawn_table() {
-  if(maps\mp\alien\_utility::is_chaos_mode())
+  if(maps\mp\alien\_utility::is_chaos_mode()) {
     set_chaos_spawn_table();
+  }
   else {
     if(maps\mp\alien\_utility::is_hardcore_mode()) {
       set_hardcore_extinction_spawn_table();
@@ -1508,59 +1547,75 @@ set_chaos_spawn_table() {
 }
 
 set_hardcore_extinction_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_last_hardcore_sp.csv";
-  else
+  }
+  else {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_last_hardcore_mp.csv";
+  }
 }
 
 set_regular_extinction_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table = "mp/alien/cycle_spawn_last_sp.csv";
-  else
+  }
+  else {
     level.alien_cycle_table = "mp/alien/cycle_spawn_last_mp.csv";
+  }
 }
 
 set_container_spawn_table() {
-  if(maps\mp\alien\_utility::is_hardcore_mode())
+  if(maps\mp\alien\_utility::is_hardcore_mode()) {
     set_hardcore_container_spawn_table();
-  else
+  }
+  else {
     set_regular_container_spawn_table();
+  }
 }
 
 set_hardcore_container_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.container_spawn_table = "mp/alien/last_container_spawn_hardcore_sp.csv";
-  else
+  }
+  else {
     level.container_spawn_table = "mp/alien/last_container_spawn_hardcore.csv";
+  }
 }
 
 set_regular_container_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.container_spawn_table = "mp/alien/last_container_spawn_sp.csv";
-  else
+  }
+  else {
     level.container_spawn_table = "mp/alien/last_container_spawn.csv";
+  }
 }
 
 set_alien_definition_table() {
-  if(maps\mp\alien\_utility::is_hardcore_mode())
+  if(maps\mp\alien\_utility::is_hardcore_mode()) {
     set_hardcore_alien_definition_table();
-  else
+  }
+  else {
     set_regular_alien_definition_table();
+  }
 }
 
 set_regular_alien_definition_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.default_alien_definition = "mp/alien/last_alien_definition_sp.csv";
-  else
+  }
+  else {
     level.default_alien_definition = "mp/alien/last_alien_definition.csv";
+  }
 }
 
 set_hardcore_alien_definition_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.default_alien_definition = "mp/alien/last_alien_definition_hardcore_sp.csv";
-  else
+  }
+  else {
     level.default_alien_definition = "mp/alien/last_alien_definition_hardcore.csv";
+  }
 }
 
 chaos_init() {
@@ -1608,10 +1663,12 @@ register_egg_default_loc() {
 }
 
 last_player_initial_spawn_loc_override() {
-  if(maps\mp\alien\_utility::is_chaos_mode())
+  if(maps\mp\alien\_utility::is_chaos_mode()) {
     chaos_player_initial_spawn_loc_override();
-  else
+  }
+  else {
     regular_player_initial_spawn_loc_override();
+  }
 }
 
 regular_player_initial_spawn_loc_override() {
@@ -1674,8 +1731,9 @@ last_recipe_setup_func() {
 }
 
 setup_last_offhands() {
-  while(!isDefined(level.offhand_secondaries))
+  while(!isDefined(level.offhand_secondaries)) {
     wait 1;
+  }
 
   level.offhand_secondaries = common_scripts\utility::array_add(level.offhand_secondaries, "iw6_aliendlc21_mp");
   level.offhand_explosives = common_scripts\utility::array_add(level.offhand_explosives, "iw6_aliendlc43_mp");
@@ -1708,20 +1766,24 @@ last_alien_death_override_func(var_0) {
 last_cangive_weapon_handler_func(var_0, var_1, var_2, var_3) {
   var_4 = 0;
 
-  if(self hasweapon("aliensoflam_mp"))
+  if(self hasweapon("aliensoflam_mp")) {
     var_4++;
+  }
 
-  if(self.hasriotshield || self.hasriotshieldequipped)
+  if(self.hasriotshield || self.hasriotshieldequipped) {
     var_4++;
+  }
 
   var_5 = self getcurrentweapon();
   var_6 = 0;
 
-  if(var_5 == "iw6_aliendlc41_mp")
+  if(var_5 == "iw6_aliendlc41_mp") {
     var_6 = 1;
+  }
 
-  if(var_6 && var_0.size + 1 > var_3 + var_4)
+  if(var_6 && var_0.size + 1 > var_3 + var_4) {
     return 0;
+  }
 
   return 1;
 }
@@ -1729,8 +1791,9 @@ last_cangive_weapon_handler_func(var_0, var_1, var_2, var_3) {
 last_give_weapon_handler_func(var_0) {
   var_1 = self getcurrentweapon();
 
-  if(var_1 == "iw6_aliendlc41_mp")
+  if(var_1 == "iw6_aliendlc41_mp") {
     return 0;
+  }
 
   return undefined;
 }
@@ -1761,8 +1824,9 @@ last_custom_death(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(var_7 && isDefined(var_4) && maps\mp\alien\_utility::weapon_has_alien_attachment(var_4) && var_3 != "MOD_MELEE" && !maps\mp\alien\_utility::is_true(level.easter_egg_lodge_sign_active)) {
     playFX(level._effect["alien_ark_gib"], self.origin + (0, 0, 32));
 
-    if(maps\mp\alien\_utility::is_true(level.should_use_custom_death_func))
+    if(maps\mp\alien\_utility::is_true(level.should_use_custom_death_func)) {
       playFX(level._effect["soul_escape"], self.origin + (0, 0, 32));
+    }
 
     return 1;
   }

@@ -160,8 +160,9 @@ noriega_arrives_scene() {
   maps\_fxanim::fxanim_reconstruct("fxanim_bridge_drop");
   scene_wait("noriega_arrives");
 
-  if(isalive(ai_noriega))
+  if(isalive(ai_noriega)) {
     ai_noriega detach("p_anim_rus_key", "tag_weapon_left");
+  }
 
   autosave_by_name("noriega_arrives_done");
   level.player.ignoreme = 0;
@@ -205,8 +206,9 @@ menendez_title_card(m_player_body) {
 }
 
 menendez_intro_not_mature_black_screen(m_player_body) {
-  if(!is_mature())
+  if(!is_mature()) {
     screen_fade_out(0.05);
+  }
 }
 
 menendez_intro_part1_rage_notetrack(guy) {
@@ -231,8 +233,9 @@ menendez_intro_glass_stab(m_player_body) {
 }
 
 menendez_intro_bloody_viewbody(m_player_body) {
-  if(is_mature())
+  if(is_mature()) {
     m_player_body setModel("c_mul_menendez_nicaragua_b_viewbody");
+  }
 }
 
 menendez_intro_blur(m_player_body) {
@@ -241,8 +244,9 @@ menendez_intro_blur(m_player_body) {
 }
 
 menendez_intro_part1_fade_notetrack(guy) {
-  if(is_mature())
+  if(is_mature()) {
     screen_fade_out(0.5);
+  }
 
   level.player reset_dof();
   wait 9;
@@ -303,8 +307,9 @@ noriega_arrives_look_at_mission(m_player_body) {
 }
 
 noriega_arrives_pdf_blood(ai_noriega) {
-  if(!isDefined(ai_noriega.n_pdf_killed))
+  if(!isDefined(ai_noriega.n_pdf_killed)) {
     ai_noriega.n_pdf_killed = 0;
+  }
 
   if(ai_noriega.n_pdf_killed == 0) {
     ai_pdf = get_ais_from_scene("noriega_arrives_pdf_2", "noriega_arrives_pdf_2");

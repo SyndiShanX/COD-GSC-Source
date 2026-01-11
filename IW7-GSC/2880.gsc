@@ -8,8 +8,9 @@ func_DEB8(var_00, var_01) {
 }
 
 func_7A2D(var_00) {
-  if(!isDefined(level.func_1DBE) || !isDefined(level.func_1DBE[var_00]))
+  if(!isDefined(level.func_1DBE) || !isDefined(level.func_1DBE[var_00])) {
     return undefined;
+  }
 
   return level.func_1DBE[var_00];
 }
@@ -19,8 +20,9 @@ func_7A2D(var_00) {
 func_CC7F(var_00, var_01) {
   self.func_DC6F = 0;
 
-  if(isai(var_00) && !isDefined(var_0.func_9B89))
+  if(isai(var_00) && !isDefined(var_0.func_9B89)) {
     var_00 animmode("noclip");
+  }
 
   wait 0.1;
   var_00 clearanim( % root, 0.0);
@@ -45,14 +47,17 @@ func_CC7F(var_00, var_01) {
 }
 
 func_CC80(var_00, var_01, var_02) {
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 1;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 1;
+  }
 
-  if(isDefined(self.func_1DBC))
+  if(isDefined(self.func_1DBC)) {
     self.func_1DBC = scripts\engine\utility::spawn_script_origin();
+  }
 
   var_03 = [];
 
@@ -130,8 +135,9 @@ func_DC81(var_00) {
 
     var_09 = undefined;
 
-    if(isDefined(var_0.func_1ED4))
+    if(isDefined(var_0.func_1ED4)) {
       var_09 = [
+    }
         [var_0.func_1ED4]
       ]();
 
@@ -200,8 +206,9 @@ func_DC84(var_00) {
   self notify("ambient_idle_scene_start");
 
   foreach(var_07 in var_00) {
-    if(!isDefined(var_7.func_1FEC))
+    if(!isDefined(var_7.func_1FEC)) {
       var_07 scripts\sp\anim::func_F64A();
+    }
 
     thread scripts\sp\anim::func_10CBF(var_07, "single anim");
     thread scripts\sp\anim::func_1FCA(var_07, "single anim");
@@ -243,8 +250,9 @@ func_DC84(var_00) {
 
       var_14 = undefined;
 
-      if(isDefined(var_7.func_1ED4))
+      if(isDefined(var_7.func_1ED4)) {
         var_14 = [
+      }
           [var_7.func_1ED4]
         ]();
 
@@ -257,8 +265,9 @@ func_DC84(var_00) {
     wait(var_09);
     var_18 = [];
 
-    foreach(var_07 in var_00)
+    foreach(var_07 in var_00) {
     var_18 = scripts\engine\utility::array_add(var_18, level.func_EC85[var_7.func_1FBB]["idle_anims"][var_05][0]);
+    }
 
     func_13597(var_03, var_18, var_00);
 
@@ -284,8 +293,9 @@ func_DC84(var_00) {
     wait(var_09);
     var_18 = [];
 
-    foreach(var_07 in var_00)
+    foreach(var_07 in var_00) {
     var_18 = scripts\engine\utility::array_add(var_18, level.func_EC85[var_7.func_1FBB]["idle_anims"][var_05][2]);
+    }
 
     func_13597(var_10[1], var_18, var_00);
 
@@ -326,8 +336,9 @@ func_DC86(var_00) {
   self endon("death");
   self waittill("ambient_scene_end");
 
-  if(_isent(var_00))
+  if(_isent(var_00)) {
     var_00 func_4179();
+  }
 
   self notify("ambient_idle_scene_end");
 }
@@ -337,8 +348,9 @@ func_DC87(var_00) {
   self waittill("ambient_scene_end");
 
   foreach(var_02 in var_00) {
-    if(_isent(var_02))
+    if(_isent(var_02)) {
       var_02 givescorefortrophyblocks();
+    }
   }
 
   self notify("ambient_idle_scene_end");
@@ -386,8 +398,9 @@ func_DC82(var_00) {
 
     var_08 = undefined;
 
-    if(isDefined(var_0.func_1ED4))
+    if(isDefined(var_0.func_1ED4)) {
       var_08 = [
+    }
         [var_0.func_1ED4]
       ]();
 
@@ -424,8 +437,9 @@ func_DC83(var_00) {
     thread scripts\sp\anim::func_1FCA(var_06, "single anim");
     var_10 = undefined;
 
-    if(isDefined(var_6.func_1ED4))
+    if(isDefined(var_6.func_1ED4)) {
       var_10 = [
+    }
         [var_6.func_1ED4]
       ]();
 
@@ -463,8 +477,9 @@ func_DC83(var_00) {
       var_6.angles = var_09;
       var_10 = undefined;
 
-      if(isDefined(var_6.func_1ED4))
+      if(isDefined(var_6.func_1ED4)) {
         var_10 = [
+      }
           [var_6.func_1ED4]
         ]();
 
@@ -485,8 +500,9 @@ func_DC83(var_00) {
       var_6.angles = var_09;
       var_10 = undefined;
 
-      if(isDefined(var_6.func_1ED4))
+      if(isDefined(var_6.func_1ED4)) {
         var_10 = [
+      }
           [var_6.func_1ED4]
         ]();
 
@@ -503,8 +519,9 @@ func_9B63(var_00) {
 }
 
 func_9B62(var_00) {
-  if(isDefined(var_0.script_noteworthy) && func_9B63(var_0.script_noteworthy))
+  if(isDefined(var_0.script_noteworthy) && func_9B63(var_0.script_noteworthy)) {
     return 1;
+  }
 
   return 0;
 }
@@ -552,8 +569,9 @@ func_13597(var_00, var_01, var_02) {
       var_04 = length2d(level.player.origin - var_08 scripts\anim\utility::func_7DC6(var_1[var_07]));
       var_05 = float(getdvar("g_speed")) * 0.25;
 
-      if(var_03 / var_05 > getanimlength(var_1[var_07]) && var_04 / var_05 > getanimlength(var_1[var_07]))
+      if(var_03 / var_05 > getanimlength(var_1[var_07]) && var_04 / var_05 > getanimlength(var_1[var_07])) {
         var_6++;
+      }
     }
 
     if(var_06 >= var_2.size) {
@@ -576,8 +594,9 @@ func_CDD6(var_00, var_01, var_02) {
   for(;;) {
     scripts\sp\anim::func_1F35(var_00, var_01);
 
-    if(var_4.size < 1)
+    if(var_4.size < 1) {
       var_04 = var_03;
+    }
 
     var_05 = randomint(var_4.size);
     scripts\sp\anim::func_1F35(var_00, var_4[var_05]);

@@ -107,8 +107,9 @@ morals_disable_camo_suit() {
   assert(isplayer(self));
   self endon("death");
 
-  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on"))
+  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on")) {
     level.player ent_flag_clear("camo_suit_on");
+  }
 
   weapon_list = self getweaponslist();
   camo_weapon = "camo_suit_sp";
@@ -125,8 +126,9 @@ morals_disable_camo_suit() {
   if(has_camo == 1) {
     flag_wait("morals_scene_complete");
 
-    if(!level.is_farid_alive)
+    if(!level.is_farid_alive) {
       flag_wait("mason_intro_harper_lives_done");
+    }
 
     wait 0.1;
     self giveweapon(camo_weapon);
@@ -329,8 +331,9 @@ moral_vtol_crash_anim(guy) {
   level thread load_gump_in_two();
   running_terrorist = getEntArray("yemen_terrorist_running_moral", "targetname");
 
-  for(i = 0; i < running_terrorist.size; i++)
+  for(i = 0; i < running_terrorist.size; i++) {
     running_terrorist[i] delete();
+  }
 }
 
 fx_morals_vtol_crash() {
@@ -347,14 +350,16 @@ vtol_approach() {
   ai_menendez = get_ai("menendez_morals_ai", "targetname");
   ai_menendez gun_switchto("judge_sp", "right");
 
-  if(level.is_defalco_alive == 1)
+  if(level.is_defalco_alive == 1) {
     level thread run_scene_and_delete("morals_capture_approach_defalco");
+  }
 
   level thread morals_capture_approach_handle_player_anim();
   run_scene_and_delete("morals_capture_approach");
 
-  if(level.is_defalco_alive == 1)
+  if(level.is_defalco_alive == 1) {
     level thread run_scene_and_delete("morals_capture_defalco");
+  }
 
   level thread run_scene_and_delete("morals_capture");
   ai_menendez gun_switchto("judge_sp", "right");
@@ -364,16 +369,18 @@ vtol_approach() {
   ai_in_scene = get_ais_from_scene("morals_capture");
 
   if(isDefined(ai_in_scene)) {
-    foreach(ai_dude in ai_in_scene)
+    foreach(ai_dude in ai_in_scene) {
     ai_dude magic_bullet_shield();
+    }
   }
 
   if(level.is_defalco_alive == 1) {
     ai_in_scene1 = get_ais_from_scene("morals_capture_defalco");
 
     if(isDefined(ai_in_scene1)) {
-      foreach(ai_dude1 in ai_in_scene1)
+      foreach(ai_dude1 in ai_in_scene1) {
       ai_dude1 magic_bullet_shield();
+      }
     }
   }
 
@@ -381,8 +388,9 @@ vtol_approach() {
 }
 
 morals_streamer_hint_off(m_player_body) {
-  if(isDefined(level.e_streamer_hint))
+  if(isDefined(level.e_streamer_hint)) {
     level.e_streamer_hint delete();
+  }
 }
 
 morals_streamer_hint_on(m_player_body) {
@@ -443,8 +451,9 @@ qrotor_delete() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 morals_capture_punch(harper) {
@@ -466,11 +475,13 @@ watch_shoot_harper() {
   level endon("morals_rail_start");
   level endon("menendez_shot");
 
-  while(self usebuttonpressed())
+  while(self usebuttonpressed()) {
     wait 0.05;
+  }
 
-  while(!self usebuttonpressed())
+  while(!self usebuttonpressed()) {
     wait 0.05;
+  }
 
   flag_set("harper_shot");
   setmusicstate("YEMEN_HARPER_HARPER_DIED");
@@ -481,11 +492,13 @@ watch_shoot_menendez() {
   level endon("harper_shot");
   level endon("morals_rail_start");
 
-  while(self jumpbuttonpressed())
+  while(self jumpbuttonpressed()) {
     wait 0.05;
+  }
 
-  while(!self jumpbuttonpressed())
+  while(!self jumpbuttonpressed()) {
     wait 0.05;
+  }
 
   flag_set("menendez_shot");
   setmusicstate("YEMEN_HARPER_FARID_DIED");
@@ -493,8 +506,9 @@ watch_shoot_menendez() {
 }
 
 play_gun_shot_fx_rumble(b_farid_shot) {
-  if(!isDefined(b_farid_shot))
+  if(!isDefined(b_farid_shot)) {
     b_farid_shot = 0;
+  }
 
   level.player playrumbleonentity("damage_heavy");
   overlay = newclienthudelem(level.player);
@@ -502,10 +516,12 @@ play_gun_shot_fx_rumble(b_farid_shot) {
   overlay.y = 0;
 
   if(is_mature()) {
-    if(b_farid_shot)
+    if(b_farid_shot) {
       overlay setshader("overlay_low_health_splat", 640, 480);
-    else
+    }
+    else {
       overlay setshader("overlay_harper_blood", 640, 480);
+    }
 
     overlay.splatter = 1;
   }
@@ -528,8 +544,9 @@ morals_choice_outcome() {
     level.is_farid_alive = 1;
     level.player set_story_stat("HARPER_DEAD_IN_YEMEN", 1);
 
-    if(level.is_defalco_alive == 1)
+    if(level.is_defalco_alive == 1) {
       level thread run_scene_and_delete("morals_shoot_harper_defalco");
+    }
 
     level thread run_scene_and_delete("morals_shoot_harper");
     wait 1.2;
@@ -569,8 +586,9 @@ morals_choice_outcome() {
     level thread run_scene_and_delete("morals_shoot_menendez");
     morals_streamer_hint_off();
 
-    if(level.is_defalco_alive == 1)
+    if(level.is_defalco_alive == 1) {
       level thread run_scene_and_delete("morals_shoot_menendez_defalco");
+    }
 
     thread play_muzzle_flash_shoot_menendez();
     wait(getanimlength( % p_yemen_05_04_shoot_menendez_player) - 1);
@@ -607,8 +625,9 @@ morals_outcome_farid_shot(empty_param) {
   farid_shot = 1;
   level notify("notetrack_farid_shot");
 
-  if(is_mature())
+  if(is_mature()) {
     level thread play_gun_shot_fx_rumble(farid_shot);
+  }
 }
 
 morals_shoot_harper_slowmo(empty_param) {
@@ -673,16 +692,18 @@ morals_mason_intro() {
     ai_in_scene = get_ais_from_scene("morals_outcome_farid_lives");
 
     foreach(ai_dude in ai_in_scene) {
-      if(ai_dude.animname != "morals_salazar")
+      if(ai_dude.animname != "morals_salazar") {
         ai_dude stop_magic_bullet_shield();
+      }
     }
 
     flag_wait("morals_outcome_farid_lives_done");
     wait 0.05;
     player_weapons = level.player getweaponslist();
 
-    foreach(weapon in player_weapons)
+    foreach(weapon in player_weapons) {
     level.player givestartammo(weapon);
+    }
   }
 }
 
@@ -704,14 +725,16 @@ player_camera_restrain_smooth(body, n_right, n_left, n_top, n_bottom) {
     wait 0.05;
   }
 
-  if(array_equal_to_zero(n))
+  if(array_equal_to_zero(n)) {
     level.player playerlinktodelta(body, "tag_player", 1, n[0], n[1], n[2], n[3]);
+  }
 }
 
 array_greater_than_zero(array) {
   foreach(n in array) {
-    if(n > 0)
+    if(n > 0) {
       return true;
+    }
   }
 
   return false;
@@ -719,8 +742,9 @@ array_greater_than_zero(array) {
 
 array_equal_to_zero(array) {
   foreach(n in array) {
-    if(n < 0 || n > 0)
+    if(n < 0 || n > 0) {
       return false;
+    }
   }
 
   return true;
@@ -730,8 +754,9 @@ decrement_array_min_zero(array) {
   new_array = [];
 
   foreach(n in array) {
-    if(n > 0)
+    if(n > 0) {
       n--;
+    }
 
     new_array[new_array.size] = n;
   }

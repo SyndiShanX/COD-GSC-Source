@@ -8,8 +8,9 @@
 
 createLoopSound() {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     level.createFXent = [];
+  }
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
   ent.v["type"] = "soundfx";
@@ -22,8 +23,9 @@ createLoopSound() {
 }
 createEffect(type, fxid) {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     level.createFXent = [];
+  }
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
   ent.v["type"] = type;
@@ -65,65 +67,81 @@ loopfx(clientNum) {
   self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"], self.v["delay"]);
   while(1) {
     if(isDefined(self.v["delay"])) {
-      if(!serverwait(clientNum, self.v["delay"], 0.25))
+      if(!serverwait(clientNum, self.v["delay"], 0.25)) {
         continue;
+      }
     }
-    while(isfxplaying(clientNum, self.looperFX))
+    while(isfxplaying(clientNum, self.looperFX)) {
       wait 0.25;
+    }
     self.looperFX = playFX(clientNum, level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"]);
   }
 }
 loopfxStop(clientNum, timeout) {
   self endon("death");
   wait(timeout);
-  if(isDefined(self.looper))
+  if(isDefined(self.looper)) {
     deletefx(clientNum, self.looper);
+  }
   if(isDefined(self.loopFX)) {
     deletefakeent(clientNum, self.loopFX);
   }
 }
 loopfxthread(clientNum) {
-  if(isDefined(self.fxStart))
+  if(isDefined(self.fxStart)) {
     level waittill("start fx" + self.fxStart);
+  }
   while(1) {
     create_looper(clientNum);
-    if(isDefined(self.timeout))
+    if(isDefined(self.timeout)) {
       thread loopfxStop(clientNum, self.timeout);
-    if(isDefined(self.fxStop))
+    }
+    if(isDefined(self.fxStop)) {
       level waittill("stop fx" + self.fxStop);
-    else
+    }
+    else {
       return;
-    if(isDefined(self.looper))
+    }
+    if(isDefined(self.looper)) {
       deletefx(clientNum, self.looper);
-    if(isDefined(self.fxStart))
+    }
+    if(isDefined(self.fxStart)) {
       level waittill("start fx" + self.fxStart);
-    else
+    }
+    else {
       return;
+    }
   }
 }
 oneshotfxthread(clientNum) {
-  if(self.v["delay"] > 0)
+  if(self.v["delay"] > 0) {
     wait self.v["delay"];
+  }
   create_triggerfx(clientNum);
 }
 exploder(clientNum, num) {
   num = int(num);
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(!isDefined(ent))
+    if(!isDefined(ent)) {
       continue;
-    if(ent.v["type"] != "exploder")
+    }
+    if(ent.v["type"] != "exploder") {
       continue;
-    if(!isDefined(ent.v["exploder"]))
+    }
+    if(!isDefined(ent.v["exploder"])) {
       continue;
-    if(ent.v["exploder"] != num)
+    }
+    if(ent.v["exploder"] != num) {
       continue;
+    }
     playFX(clientNum, level._effect[ent.v["fxid"]], ent.v["origin"], ent.v["forward"], ent.v["up"]);
   }
 }
 create_loopsound(clientNum) {
-  if(clientNum != 0)
+  if(clientNum != 0) {
     return;
+  }
   self notify("stop_loop");
   if(isDefined(self.v["soundalias"]) && (self.v["soundalias"] != "nil")) {
     if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
@@ -140,19 +158,23 @@ fx_init(clientNum) {
     return;
   }
   fxanim_init(clientNum);
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     return;
+  }
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
     if(!isDefined(level._createfxforwardandupset)) {
       ent set_forward_and_up_vectors();
     }
-    if(ent.v["type"] == "loopfx")
+    if(ent.v["type"] == "loopfx") {
       ent thread loopfxthread(clientNum);
-    if(ent.v["type"] == "oneshotfx")
+    }
+    if(ent.v["type"] == "oneshotfx") {
       ent thread oneshotfxthread(clientNum);
-    if(ent.v["type"] == "soundfx")
+    }
+    if(ent.v["type"] == "soundfx") {
       ent thread create_loopsound(clientNum);
+    }
   }
   level._createfxforwardandupset = true;
 }
@@ -215,8 +237,9 @@ blinky_light(localClientNum, tagName, friendlyfx, enemyfx) {
 }
 stop_blinky_light(localClientNum) {
   self notify("stop_blinky_light");
-  if(!isDefined(self.blinkyLightFx))
+  if(!isDefined(self.blinkyLightFx)) {
     return;
+  }
   stopfx(localClientNum, self.blinkyLightFx);
   self.blinkyLightFx = undefined;
 }

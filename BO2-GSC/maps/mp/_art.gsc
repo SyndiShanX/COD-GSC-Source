@@ -7,26 +7,33 @@
 #include maps\mp\_utility;
 
 main() {
-  if(getdvar(#"scr_art_tweak") == "" || getdvar(#"scr_art_tweak") == "0")
+  if(getdvar(#"scr_art_tweak") == "" || getdvar(#"scr_art_tweak") == "0") {
     setdvar("scr_art_tweak", 0);
+  }
 
-  if(getdvar(#"scr_dof_enable") == "")
+  if(getdvar(#"scr_dof_enable") == "") {
     setdvar("scr_dof_enable", "1");
+  }
 
-  if(getdvar(#"scr_cinematic_autofocus") == "")
+  if(getdvar(#"scr_cinematic_autofocus") == "") {
     setdvar("scr_cinematic_autofocus", "1");
+  }
 
-  if(getdvar(#"scr_art_visionfile") == "" && isDefined(level.script))
+  if(getdvar(#"scr_art_visionfile") == "" && isDefined(level.script)) {
     setdvar("scr_art_visionfile", level.script);
+  }
 
-  if(getdvar(#"debug_reflection") == "")
+  if(getdvar(#"debug_reflection") == "") {
     setdvar("debug_reflection", "0");
+  }
 
-  if(getdvar(#"debug_reflection_matte") == "")
+  if(getdvar(#"debug_reflection_matte") == "") {
     setdvar("debug_reflection_matte", "0");
+  }
 
-  if(getdvar(#"debug_color_pallete") == "")
+  if(getdvar(#"debug_color_pallete") == "") {
     setdvar("debug_color_pallete", "0");
+  }
 
   precachemodel("test_sphere_lambert");
   precachemodel("test_macbeth_chart");
@@ -49,8 +56,9 @@ main() {
 
   thread tweakart();
 
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = tolower(getdvar(#"mapname"));
+  }
 }
 
 artfxprintln(file, string) {
@@ -74,8 +82,9 @@ strtok_loc(string, par1) {
     indexstring = indexstring + string[i];
   }
 
-  if(indexstring.size)
+  if(indexstring.size) {
     stringlist[stringlist.size] = indexstring;
+  }
 
   return stringlist;
 }
@@ -102,8 +111,9 @@ setfogsliders() {
 }
 
 tweakart() {
-  if(!isDefined(level.tweakfile))
+  if(!isDefined(level.tweakfile)) {
     level.tweakfile = 0;
+  }
 
   if(getdvar(#"scr_fog_baseheight") == "") {
     setdvar("scr_fog_exp_halfplane", "500");
@@ -290,15 +300,17 @@ debug_reflection() {
 
 remove_reflection_objects() {
   if((level.debug_reflection == 2 || level.debug_reflection == 3) && isDefined(level.debug_reflection_objects)) {
-    for(i = 0; i < level.debug_reflection_objects.size; i++)
+    for(i = 0; i < level.debug_reflection_objects.size; i++) {
       level.debug_reflection_objects[i] delete();
+    }
 
     level.debug_reflection_objects = undefined;
   }
 
   if(level.debug_reflection == 1 || level.debug_reflection == 3 || level.debug_reflection_matte == 1 || level.debug_color_pallete == 1 || level.debug_color_pallete == 2) {
-    if(isDefined(level.debug_reflectionobject))
+    if(isDefined(level.debug_reflectionobject)) {
       level.debug_reflectionobject delete();
+    }
   }
 
 }
@@ -314,11 +326,13 @@ create_reflection_objects() {
 }
 
 create_reflection_object(model) {
-  if(!isDefined(model))
+  if(!isDefined(model)) {
     model = "test_sphere_silver";
+  }
 
-  if(isDefined(level.debug_reflectionobject))
+  if(isDefined(level.debug_reflectionobject)) {
     level.debug_reflectionobject delete();
+  }
 
   players = get_players();
   player = players[0];
@@ -339,17 +353,21 @@ debug_reflection_buttons() {
   while(getdvar(#"debug_reflection") == "1" || getdvar(#"debug_reflection") == "3" || getdvar(#"debug_reflection_matte") == "1" || getdvar(#"debug_color_pallete") == "1" || getdvar(#"debug_color_pallete") == "2") {
     players = get_players();
 
-    if(players[0] buttonpressed("BUTTON_X"))
+    if(players[0] buttonpressed("BUTTON_X")) {
       offset = offset + 50;
+    }
 
-    if(players[0] buttonpressed("BUTTON_Y"))
+    if(players[0] buttonpressed("BUTTON_Y")) {
       offset = offset - 50;
+    }
 
-    if(offset > 1000)
+    if(offset > 1000) {
       offset = 1000;
+    }
 
-    if(offset < 64)
+    if(offset < 64) {
       offset = 64;
+    }
 
     level.debug_reflectionobject unlink();
     level.debug_reflectionobject.origin = players[0] getEye() + vectorscale(anglesToForward(players[0] getplayerangles()), offset);
@@ -359,8 +377,9 @@ debug_reflection_buttons() {
     line(level.debug_reflectionobject.origin, getreflectionorigin(level.debug_reflectionobject.origin), (1, 0, 0), 1, 1);
     wait 0.05;
 
-    if(isDefined(level.debug_reflectionobject))
+    if(isDefined(level.debug_reflectionobject)) {
       level.debug_reflectionobject linkto(players[0]);
+    }
   }
 
 }

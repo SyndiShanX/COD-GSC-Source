@@ -50,10 +50,10 @@ runTrain() {
   trainTime = (moveTime + (numOfCarts * 4 * originalRation));
   for(;;) {
     waitBetweenTrains = randomint(maxWaitBetweenTrains);
-    if(waitBetweenTrains > 0)
+    if(waitBetweenTrains > 0) {
       wait(waitBetweenTrains);
+    }
     level clientNotify("play_train");
     wait(trainTime);
   }
 }
-

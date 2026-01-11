@@ -1101,8 +1101,9 @@ maze_rumble_while_floor_shakes(int_client_num) {
 waterfall_triggers_init() {
   waitforallclients();
   trigs = getEntArray(0, "waterfall_fog_change", "targetname");
-  if(!isDefined(trigs))
+  if(!isDefined(trigs)) {
     return;
+  }
   for(i = 0; i < trigs.size; i++) {
     trigs[i] thread waterfall_fog_trigger();
   }

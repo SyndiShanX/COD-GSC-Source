@@ -1118,10 +1118,12 @@ set_reverb_priority(name, priority) {
 
 getFilter(name) {
   assert(isDefined(name));
-  if(!isDefined(level.eq_defs))
+  if(!isDefined(level.eq_defs)) {
     return undefined;
-  if(!isDefined(level.eq_defs[name]))
+  }
+  if(!isDefined(level.eq_defs[name])) {
     return undefined;
+  }
 
   return level.eq_defs[name];
 }
@@ -1140,8 +1142,9 @@ getFilter(name) {
 =============
 */
 add_channel_to_filter(track, channel) {
-  if(!isDefined(level.ambient_eq[track]))
+  if(!isDefined(level.ambient_eq[track])) {
     level.ambient_eq[track] = [];
+  }
 
   level.ambient_eq[track][channel] = true;
 }
@@ -1159,8 +1162,9 @@ add_channel_to_filter(track, channel) {
 =============
 */
 add_all_channels_to_filter(track) {
-  if(!isDefined(level.ambient_eq[track]))
+  if(!isDefined(level.ambient_eq[track])) {
     level.ambient_eq[track] = [];
+  }
 
   channels = get_all_channels();
 
@@ -1182,8 +1186,9 @@ add_all_channels_to_filter(track) {
 =============
 */
 add_all_channels_but_music_and_mission(track) {
-  if(!isDefined(level.ambient_eq[track]))
+  if(!isDefined(level.ambient_eq[track])) {
     level.ambient_eq[track] = [];
+  }
 
   channels = get_all_channels();
   channels["music"] = undefined;
@@ -1195,8 +1200,9 @@ add_all_channels_but_music_and_mission(track) {
 }
 
 add_all_channels_but_music(track) {
-  if(!isDefined(level.ambient_eq[track]))
+  if(!isDefined(level.ambient_eq[track])) {
     level.ambient_eq[track] = [];
+  }
 
   channels = get_all_channels();
   channels["music"] = undefined;

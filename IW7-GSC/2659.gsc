@@ -24,8 +24,9 @@ take_all_currency() {
 }
 
 get_starting_currency() {
-  if(isDefined(level.starting_currency))
+  if(isDefined(level.starting_currency)) {
     return level.starting_currency;
+  }
 
   return 500;
 }
@@ -51,16 +52,18 @@ give_player_currency(var_00, var_01, var_02, var_03, var_04) {
     var_00 = scripts\cp\cp_gamescore::round_up_to_nearest(var_00, 5);
   }
 
-  if(isDefined(level.currency_scale_func))
+  if(isDefined(level.currency_scale_func)) {
     var_00 = [[level.currency_scale_func]](self, var_00);
+  }
 
   var_05 = get_player_currency();
   var_06 = get_player_max_currency();
   var_07 = var_05 + var_00;
   var_07 = min(var_07, var_06);
 
-  if(!isDefined(self.total_currency_earned))
+  if(!isDefined(self.total_currency_earned)) {
     self.total_currency_earned = var_00;
+  }
 
   if(is_valid_give_type(var_04)) {
     self.total_currency_earned = self.total_currency_earned + (var_07 - var_05);
@@ -71,15 +74,17 @@ give_player_currency(var_00, var_01, var_02, var_03, var_04) {
   eog_player_update_stat("currencytotal", int(self.total_currency_earned), 1);
   set_player_currency(var_07);
 
-  if(isDefined(level.update_money_performance))
+  if(isDefined(level.update_money_performance)) {
     [[level.update_money_performance]](self, var_00);
+  }
 
   var_08 = 30000;
   var_09 = gettime();
 
   if(var_07 >= var_06) {
-    if(!isDefined(self.next_maxmoney_hint_time))
+    if(!isDefined(self.next_maxmoney_hint_time)) {
       self.next_maxmoney_hint_time = var_09 + var_08;
+    }
     else if(var_09 < self.next_maxmoney_hint_time) {
       return;
     }
@@ -89,8 +94,9 @@ give_player_currency(var_00, var_01, var_02, var_03, var_04) {
     }
   }
 
-  if(is_valid_give_type(var_04))
+  if(is_valid_give_type(var_04)) {
     thread scripts\cp\utility::add_to_notify_queue("player_earned_money", var_00);
+  }
 
   self notify("currency_earned", var_00);
   scripts\cp\utility::bufferednotify("currency_earned_buffered", var_00);
@@ -98,8 +104,9 @@ give_player_currency(var_00, var_01, var_02, var_03, var_04) {
 }
 
 is_valid_give_type(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 1;
+  }
 
   switch (var_00) {
     case "pillage":
@@ -122,19 +129,23 @@ take_player_currency(var_00, var_01, var_02, var_03) {
   var_05 = max(0, var_04 - var_00);
   var_06 = int(var_04 - var_05);
 
-  if(isDefined(level.chaos_update_spending_currency_event))
+  if(isDefined(level.chaos_update_spending_currency_event)) {
     [[level.chaos_update_spending_currency_event]](self, var_02, var_03);
+  }
 
-  if(scripts\cp\utility::is_consumable_active("next_purchase_free") && var_00 >= 1 && var_02 != "atm" && var_02 != "laststand" && var_02 != "bleedoutPenalty")
+  if(scripts\cp\utility::is_consumable_active("next_purchase_free") && var_00 >= 1 && var_02 != "atm" && var_02 != "laststand" && var_02 != "bleedoutPenalty") {
     scripts\cp\utility::notify_used_consumable("next_purchase_free");
-  else
+  }
+  else {
     set_player_currency(var_05);
+  }
 
   if(var_06 < 1) {
     return;
   }
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     scripts\cp\cp_analytics::update_spending_type(var_06, var_02);
+  }
 
   eog_player_update_stat("currencyspent", var_06);
 
@@ -145,20 +156,24 @@ take_player_currency(var_00, var_01, var_02, var_03) {
     }
   }
 
-  if(scripts\cp\cp_interaction::should_interaction_fill_consumable_meter(var_02))
+  if(scripts\cp\cp_interaction::should_interaction_fill_consumable_meter(var_02)) {
     self notify("consumable_charge", var_00 * 0.07);
+  }
 
-  if(var_02 != "atm" && var_02 != "laststand" && var_02 != "bleedoutPenalty")
+  if(var_02 != "atm" && var_02 != "laststand" && var_02 != "bleedoutPenalty") {
     scripts\cp\utility::bufferednotify("currency_spent_buffered", var_00);
+  }
 
-  if(isDefined(var_01) && var_01)
+  if(isDefined(var_01) && var_01) {
     return;
+  }
 }
 
 player_has_enough_currency(var_00, var_01) {
   if(!isDefined(var_01) || isDefined(var_01) && var_01 != "atm" && var_01 != "laststand" && var_01 != "bleedoutPenalty") {
-    if(scripts\cp\utility::is_consumable_active("next_purchase_free"))
+    if(scripts\cp\utility::is_consumable_active("next_purchase_free")) {
       var_00 = 0;
+    }
   }
 
   var_02 = get_player_currency();
@@ -224,21 +239,26 @@ eog_player_tracking_init() {
   wait 0.5;
   var_00 = self getentitynumber();
 
-  if(var_00 == 4)
+  if(var_00 == 4) {
     var_00 = 0;
+  }
 
   var_01 = "unknownPlayer";
 
-  if(isDefined(self.name))
+  if(isDefined(self.name)) {
     var_01 = self.name;
+  }
 
-  if(!level.console)
+  if(!level.console) {
     var_01 = getsubstr(var_01, 0, 19);
-  else if(have_clan_tag(var_01))
+  }
+  else if(have_clan_tag(var_01)) {
     var_01 = remove_clan_tag(var_01);
+  }
 
-  for(var_02 = 0; var_02 < 4; var_2++)
+  for(var_02 = 0; var_02 < 4; var_2++) {
     self setrankedplayerdata("cp", "EoGPlayer", var_02, "connected", 0);
+  }
 
   foreach(var_04 in level.players) {
     var_04 reset_eog_stats(var_00);
@@ -253,8 +273,9 @@ eog_player_tracking_init() {
   foreach(var_08 in level.players) {
     var_09 = var_08 getentitynumber();
 
-    if(var_09 == 4)
+    if(var_09 == 4) {
       var_09 = 0;
+    }
 
     var_6[int(var_09)] = 1;
 
@@ -263,8 +284,9 @@ eog_player_tracking_init() {
     }
     var_00 = var_08 getentitynumber();
 
-    if(var_00 == 4)
+    if(var_00 == 4) {
       var_00 = 0;
+    }
 
     var_10 = var_08 getrankedplayerdata("cp", "EoGPlayer", var_00, "name");
     var_11 = var_08 getrankedplayerdata("cp", "EoGPlayer", var_00, "kills");
@@ -313,14 +335,16 @@ eog_player_tracking_init() {
   }
 
   foreach(var_35, var_34 in var_06) {
-    if(!var_34)
+    if(!var_34) {
       reset_eog_stats(var_35);
+    }
   }
 }
 
 reset_eog_stats(var_00) {
-  if(var_00 == 4)
+  if(var_00 == 4) {
     var_00 = 0;
+  }
 
   self setrankedplayerdata("cp", "EoGPlayer", var_00, "name", "");
   self setrankedplayerdata("cp", "EoGPlayer", var_00, "kills", 0);
@@ -364,8 +388,9 @@ eog_player_update_stat(var_00, var_01, var_02) {
 
   try_update_lb_playerdata(var_00, var_04, 1);
 
-  if(var_03 == 4)
+  if(var_03 == 4) {
     var_03 = 0;
+  }
 
   setcoopplayerdata_for_everyone("EoGPlayer", var_03, var_00, var_04);
 }
@@ -380,8 +405,9 @@ try_update_lb_playerdata(var_00, var_01, var_02) {
 }
 
 lb_player_update_stat(var_00, var_01, var_02) {
-  if(scripts\engine\utility::is_true(var_02))
+  if(scripts\engine\utility::is_true(var_02)) {
     var_03 = var_01;
+  }
   else {
     var_04 = self getrankedplayerdata("cp", "alienSession", var_00);
     var_03 = var_04 + var_01;
@@ -427,8 +453,9 @@ get_base_weapon_name(var_00) {
     break;
   }
 
-  if(var_01 == "")
+  if(var_01 == "") {
     return "none";
+  }
 
   return var_01;
 }
@@ -446,21 +473,25 @@ update_weaponstats_hits(var_00, var_01, var_02) {
   update_weaponstats("weaponStats", var_00, "hits", var_01);
   var_03 = "personal";
 
-  if(isDefined(level.personal_score_component_name))
+  if(isDefined(level.personal_score_component_name)) {
     var_03 = level.personal_score_component_name;
+  }
 
   scripts\cp\cp_gamescore::update_personal_encounter_performance(var_03, "shots_hit", var_01);
 }
 
 is_valid_weapon_hit(var_00, var_01) {
-  if(var_00 == "none")
+  if(var_00 == "none") {
     return 0;
+  }
 
-  if(var_01 == "MOD_MELEE")
+  if(var_01 == "MOD_MELEE") {
     return 0;
+  }
 
-  if(no_weapon_fired_notify(var_00))
+  if(no_weapon_fired_notify(var_00)) {
     return 0;
+  }
 
   return 1;
 }
@@ -501,8 +532,9 @@ update_weaponstats_shots(var_00, var_01) {
   update_weaponstats("weaponStats", var_00, "shots", var_01);
   var_02 = "personal";
 
-  if(isDefined(level.personal_score_component_name))
+  if(isDefined(level.personal_score_component_name)) {
     var_02 = level.personal_score_component_name;
+  }
 
   scripts\cp\cp_gamescore::update_personal_encounter_performance(var_02, "shots_fired", var_01);
 }
@@ -520,8 +552,9 @@ update_weaponstats(var_00, var_01, var_02, var_03) {
   if(!isDefined(var_04) || !isDefined(self.persistence_weaponstats[var_04])) {
     return;
   }
-  if(isDefined(level.weapon_stats_override_name_func))
+  if(isDefined(level.weapon_stats_override_name_func)) {
     var_04 = [[level.weapon_stats_override_name_func]](var_04);
+  }
 
   if(issubstr(var_04, "dlc")) {
     var_05 = strtok(var_04, "d");
@@ -552,8 +585,9 @@ player_weaponstats_track_shots() {
 }
 
 rank_init() {
-  if(!isDefined(level.zombie_ranks_table))
+  if(!isDefined(level.zombie_ranks_table)) {
     level.zombie_ranks_table = "cp\zombies\rankTable.csv";
+  }
 
   level.zombie_ranks = [];
   level.zombie_max_rank = int(tablelookup(level.zombie_ranks_table, 0, "maxrank", 1));
@@ -677,8 +711,9 @@ get_player_session_rankup() {
 }
 
 update_player_session_rankup(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 1;
+  }
 
   var_01 = get_player_session_rankup();
   var_02 = var_00 + var_01;
@@ -692,8 +727,9 @@ set_player_rank(var_00) {
 set_player_xp(var_00) {
   self setrankedplayerdata("cp", "progression", "playerLevel", "xp", var_00);
 
-  if(isDefined(self.totalxpearned))
+  if(isDefined(self.totalxpearned)) {
     self setrankedplayerdata("common", "round", "totalXp", self.totalxpearned);
+  }
 }
 
 set_player_prestige(var_00) {
@@ -705,8 +741,9 @@ set_player_prestige(var_00) {
 get_rank_by_xp(var_00) {
   var_01 = 0;
 
-  if(var_00 >= level.zombie_ranks[level.zombie_max_rank].xp["max"])
+  if(var_00 >= level.zombie_ranks[level.zombie_max_rank].xp["max"]) {
     return level.zombie_max_rank;
+  }
 
   if(isDefined(level.zombie_ranks)) {
     for(var_02 = 0; var_02 < level.zombie_ranks.size; var_2++) {
@@ -727,10 +764,12 @@ get_scaled_xp(var_00, var_01) {
 }
 
 get_level_xp_scale(var_00) {
-  if(isDefined(var_0.xpscale))
+  if(isDefined(var_0.xpscale)) {
     return var_0.xpscale;
-  else
+  }
+  else {
     return 1;
+  }
 }
 
 wait_and_give_player_xp(var_00, var_01) {
@@ -774,8 +813,9 @@ give_player_xp(var_00, var_01) {
   var_06 = get_rank_by_xp(var_05);
 
   if(var_06 > var_03) {
-    if(var_06 == level.zombie_max_rank + 1)
+    if(var_06 == level.zombie_max_rank + 1) {
       var_02 = 1;
+    }
 
     set_player_rank(var_06);
 
@@ -795,32 +835,41 @@ give_player_xp(var_00, var_01) {
 process_rank_merits(var_00) {
   scripts\cp\cp_merits::processmerit("mt_prestige_1");
 
-  if(var_00 >= 40)
+  if(var_00 >= 40) {
     scripts\cp\cp_merits::processmerit("mt_prestige_2");
+  }
 
-  if(var_00 >= 60)
+  if(var_00 >= 60) {
     scripts\cp\cp_merits::processmerit("mt_prestige_3");
+  }
 
-  if(var_00 >= 80)
+  if(var_00 >= 80) {
     scripts\cp\cp_merits::processmerit("mt_prestige_4");
+  }
 
-  if(var_00 >= 100)
+  if(var_00 >= 100) {
     scripts\cp\cp_merits::processmerit("mt_prestige_5");
+  }
 
-  if(var_00 >= 120)
+  if(var_00 >= 120) {
     scripts\cp\cp_merits::processmerit("mt_prestige_6");
+  }
 
-  if(var_00 >= 140)
+  if(var_00 >= 140) {
     scripts\cp\cp_merits::processmerit("mt_prestige_7");
+  }
 
-  if(var_00 >= 160)
+  if(var_00 >= 160) {
     scripts\cp\cp_merits::processmerit("mt_prestige_8");
+  }
 
-  if(var_00 >= 180)
+  if(var_00 >= 180) {
     scripts\cp\cp_merits::processmerit("mt_prestige_9");
+  }
 
-  if(var_00 >= 200)
+  if(var_00 >= 200) {
     scripts\cp\cp_merits::processmerit("mt_prestige_10");
+  }
 }
 
 inc_stat(var_00, var_01, var_02) {
@@ -846,24 +895,28 @@ set_aliensession_stat(var_00, var_01) {
 }
 
 update_deployable_box_performance(var_00) {
-  if(isDefined(level.update_deployable_box_performance_func))
+  if(isDefined(level.update_deployable_box_performance_func)) {
     var_00[[level.update_deployable_box_performance_func]]();
-  else
+  }
+  else {
     var_00 scripts\cp\cp_gamescore::update_personal_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(), "team_support_deploy");
+  }
 }
 
 update_lb_aliensession_challenge(var_00) {
   foreach(var_02 in level.players) {
     var_02 lb_player_update_stat("challengesAttempted", 1);
 
-    if(var_00)
+    if(var_00) {
       var_02 lb_player_update_stat("challengesCompleted", 1);
+    }
   }
 }
 
 update_lb_aliensession_wave(var_00) {
-  foreach(var_02 in level.players)
+  foreach(var_02 in level.players) {
   var_02 lb_player_update_stat("waveNum", var_00, 1);
+  }
 }
 
 update_lb_aliensession_escape(var_00, var_01) {
@@ -879,8 +932,9 @@ update_alien_kill_sessionstats(var_00, var_01) {
   if(!isDefined(var_01) || !isplayer(var_01)) {
     return;
   }
-  if(scripts\cp\utility::is_trap(var_00))
+  if(scripts\cp\utility::is_trap(var_00)) {
     var_01 lb_player_update_stat("trapKills", 1);
+  }
 }
 
 register_lb_escape_rank(var_00) {
@@ -889,8 +943,9 @@ register_lb_escape_rank(var_00) {
 
 get_lb_escape_rank(var_00) {
   for(var_01 = 0; var_01 < level.escape_rank_array.size - 1; var_1++) {
-    if(var_00 >= level.escape_rank_array[var_01] && var_00 < level.escape_rank_array[var_01 + 1])
+    if(var_00 >= level.escape_rank_array[var_01] && var_00 < level.escape_rank_array[var_01 + 1]) {
       return var_01;
+    }
   }
 }
 
@@ -933,18 +988,21 @@ play_time_monitor() {
 }
 
 record_player_kills(var_00, var_01, var_02, var_03) {
-  if(scripts\cp\utility::isheadshot(var_00, var_01, var_02, var_03))
+  if(scripts\cp\utility::isheadshot(var_00, var_01, var_02, var_03)) {
     increment_player_career_headshot_kills(var_03);
+  }
 
   var_03 increment_player_career_kills(var_03);
   var_03 eog_player_update_stat("kills", 1);
 }
 
 increment_player_career_total_waves(var_00) {
-  if(isDefined(var_0.wave_num_when_joined))
+  if(isDefined(var_0.wave_num_when_joined)) {
     increment_zombiecareerstats(var_00, "Total_Waves", level.wave_num - var_0.wave_num_when_joined);
-  else
+  }
+  else {
     increment_zombiecareerstats(var_00, "Total_Waves", level.wave_num);
+  }
 }
 
 increment_player_career_total_score(var_00) {
@@ -992,8 +1050,9 @@ increment_player_career_downs(var_00) {
 }
 
 update_players_career_highest_wave(var_00, var_01) {
-  foreach(var_03 in level.players)
+  foreach(var_03 in level.players) {
   update_player_career_highest_wave(var_03, var_00, var_01, level.players.size);
+  }
 }
 
 update_player_career_highest_wave(var_00, var_01, var_02, var_03) {
@@ -1003,8 +1062,9 @@ update_player_career_highest_wave(var_00, var_01, var_02, var_03) {
 }
 
 increment_zombiecareerstats(var_00, var_01, var_02) {
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 1;
+  }
 
   var_03 = var_00 getrankedplayerdata("cp", "coopCareerStats", var_01);
   var_04 = var_03 + var_02;
@@ -1014,24 +1074,28 @@ increment_zombiecareerstats(var_00, var_01, var_02) {
 updateifgreaterthan_zombiecareerstats(var_00, var_01, var_02) {
   var_03 = var_00 getrankedplayerdata("cp", "coopCareerStats", var_01);
 
-  if(var_02 > var_03)
+  if(var_02 > var_03) {
     var_00 setrankedplayerdata("cp", "coopCareerStats", var_01, var_02);
+  }
 }
 
 update_highest_wave_lb(var_00, var_01, var_02, var_03, var_04) {
   var_05 = var_00 getrankedplayerdata("cp", "leaderboarddata", var_03, "leaderboardDataPerMap", var_04, var_02);
 
-  if(var_01 > var_05)
+  if(var_01 > var_05) {
     var_00 setrankedplayerdata("cp", "leaderboarddata", var_03, "leaderboardDataPerMap", var_04, var_02, var_01);
+  }
 }
 
 updateleaderboardstats(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     var_05 = 1;
+  }
 
   var_06 = var_00 getrankedplayerdata("cp", "leaderboarddata", var_03, "leaderboardDataPerMap", var_04, var_01);
   var_02 = var_06 + var_05;
 
-  if(var_02 > var_06)
+  if(var_02 > var_06) {
     var_00 setrankedplayerdata("cp", "leaderboarddata", var_03, "leaderboardDataPerMap", var_04, var_01, var_02);
+  }
 }

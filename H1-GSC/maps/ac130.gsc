@@ -23,8 +23,9 @@ main() {
     return;
   }
 
-  if(getdvar("ac130_gameplay_enabled") == "")
+  if(getdvar("ac130_gameplay_enabled") == "") {
     setdvar("ac130_gameplay_enabled", "1");
+  }
 
   setexpfog(1000, 17300, 0.0, 0.0, 0.0, 0, 0, 0);
   setsaveddvar("scr_dof_enable", "0");
@@ -197,11 +198,13 @@ gameplay_hijack() {
     var_1 = maps\_vehicle::create_vehicle_from_spawngroup_and_gopath(5);
 
     foreach(var_3 in var_1) {
-      if(var_3.vehicle_spawner.targetname == "getaway_vehicle_1")
+      if(var_3.vehicle_spawner.targetname == "getaway_vehicle_1") {
         level.getaway_vehicle_1 = var_3;
+      }
 
-      if(var_3.vehicle_spawner.targetname == "getaway_vehicle_2")
+      if(var_3.vehicle_spawner.targetname == "getaway_vehicle_2") {
         level.getaway_vehicle_2 = var_3;
+      }
     }
 
     level.getaway_vehicle_1 thread maps\ac130_code::friendly_fire_vehicle_thread();
@@ -288,10 +291,12 @@ gameplay_hijack() {
   }
 
   if(getdvar("ac130_gameplay_enabled") == "1") {
-    if(var_0[1].size > 0)
+    if(var_0[1].size > 0) {
       common_scripts\utility::waittill_multiple_ents(level.getaway_vehicle_1, "hijack_done", level.getaway_vehicle_2, "hijack_done");
-    else
+    }
+    else {
       common_scripts\utility::waittill_multiple_ents(level.getaway_vehicle_1, "hijack_done");
+    }
   }
 
   thread dialog_ambush();
@@ -403,8 +408,9 @@ friendly_health_init() {
 }
 
 clear_to_engage(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   common_scripts\utility::flag_set("clear_to_engage");
   common_scripts\utility::array_thread(getaiarray(), ::dontshoot, 0);
@@ -451,8 +457,9 @@ dialog_church_spotted() {
 }
 
 dialog_cleared_to_engage() {
-  if(getdvar("ac130_alternate_controls") == "1")
+  if(getdvar("ac130_alternate_controls") == "1") {
     maps\ac130_code::hintprint(&"SCRIPT_PLATFORM_AC130_HINT_ZOOM_AND_FIRE");
+  }
 
   maps\_ac130::playsoundoverradio(level.scr_sound["tvo"]["ac130_tvo_vehiclemovingnow"], 1);
   wait 1;

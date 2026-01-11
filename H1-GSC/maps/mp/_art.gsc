@@ -26,20 +26,24 @@ tweakart() {}
 fovslidercheck() {}
 
 construct_vision_ents() {
-  if(!isDefined(level.vision_set_fog))
+  if(!isDefined(level.vision_set_fog)) {
     level.vision_set_fog = [];
+  }
 
   var_0 = getEntArray("trigger_multiple_visionset", "classname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_visionset))
+    if(isDefined(var_2.script_visionset)) {
       construct_vision_set(var_2.script_visionset);
+    }
 
-    if(isDefined(var_2.script_visionset_start))
+    if(isDefined(var_2.script_visionset_start)) {
       construct_vision_set(var_2.script_visionset_start);
+    }
 
-    if(isDefined(var_2.script_visionset_end))
+    if(isDefined(var_2.script_visionset_end)) {
       construct_vision_set(var_2.script_visionset_end);
+    }
   }
 }
 
@@ -53,8 +57,9 @@ construct_vision_set(var_0) {
 }
 
 create_vision_set_vision(var_0) {
-  if(!isDefined(level.vision_set_vision))
+  if(!isDefined(level.vision_set_vision)) {
     level.vision_set_vision = [];
+  }
 
   var_1 = spawnStruct();
   var_1.name = var_0;
@@ -84,8 +89,9 @@ create_default_vision_set_fog(var_0) {
 }
 
 create_vision_set_fog(var_0) {
-  if(!isDefined(level.vision_set_fog))
+  if(!isDefined(level.vision_set_fog)) {
     level.vision_set_fog = [];
+  }
 
   var_1 = spawnStruct();
   var_1.name = var_0;
@@ -132,17 +138,20 @@ hud_init() {
     var_1[var_7].fontscale = 2;
     var_1[var_7].sort = 20;
 
-    if(var_7 == var_3)
+    if(var_7 == var_3) {
       var_1[var_7].alpha = 1;
-    else
+    }
+    else {
       var_1[var_7].alpha = var_6;
+    }
 
     var_1[var_7].x = 20;
     var_1[var_7].y = var_4;
     var_1[var_7] _settext(".");
 
-    if(var_7 == var_3)
+    if(var_7 == var_3) {
       var_5 = var_5 * -1;
+    }
 
     var_6 = var_6 + var_5;
     var_4 = var_4 - var_2;
@@ -152,8 +161,9 @@ hud_init() {
 }
 
 _newhudelem() {
-  if(!isDefined(level.scripted_elems))
+  if(!isDefined(level.scripted_elems)) {
     level.scripted_elems = [];
+  }
 
   var_0 = newhudelem();
   level.scripted_elems[level.scripted_elems.size] = var_0;
@@ -243,8 +253,9 @@ setcurrentgroup(var_0) {
     var_2 = var_0 + "_cg";
     var_3 = common_scripts\utility::array_find(var_1, var_2);
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_0 = var_2;
+    }
   }
 
   level.spam_model_current_group = var_0;
@@ -282,8 +293,9 @@ setcurrentgroup(var_0) {
 }
 
 get_fog(var_0) {
-  if(!isDefined(level.vision_set_fog))
+  if(!isDefined(level.vision_set_fog)) {
     level.vision_set_fog = [];
+  }
 
   var_1 = level.vision_set_fog[var_0];
   return var_1;
@@ -310,14 +322,17 @@ playerinit() {
 button_down(var_0, var_1) {
   var_2 = level.player buttonpressed(var_0);
 
-  if(!var_2)
+  if(!var_2) {
     var_2 = level.player buttonpressed(var_1);
+  }
 
-  if(!isDefined(level.buttons[var_0]))
+  if(!isDefined(level.buttons[var_0])) {
     level.buttons[var_0] = 0;
+  }
 
-  if(gettime() < level.buttons[var_0])
+  if(gettime() < level.buttons[var_0]) {
     return 0;
+  }
 
   level.buttons[var_0] = gettime() + 400;
   return var_2;
@@ -349,10 +364,12 @@ artfxprintlnfog() {
     common_scripts\utility::fileprint_launcher("");
     common_scripts\utility::fileprint_launcher("\t\$");
 
-    if(isusinghdr())
+    if(isusinghdr()) {
       common_scripts\utility::fileprint_launcher("\tlevel._art_fog_setup = maps\\createart\\" + level.script + "_fog_hdr::main;");
-    else
+    }
+    else {
       common_scripts\utility::fileprint_launcher("\tlevel._art_fog_setup = maps\\createart\\" + level.script + "_fog::main;");
+    }
 
     common_scripts\utility::fileprint_launcher("\t$\");
     }
@@ -360,8 +377,9 @@ artfxprintlnfog() {
     art_print_fog() {}
 
     create_light_set(var_0) {
-      if(!isDefined(level.light_set))
+      if(!isDefined(level.light_set)) {
         level.light_set = [];
+      }
 
       var_1 = spawnStruct();
       var_1.name = var_0;

@@ -25,10 +25,12 @@ main() {
 
   level._effect["leaves_spiral_runner"] = LoadFX("misc/leaves_spiral_runner");
 
-  if(getdvarint("r_arcadia_culldist") == 1)
+  if(getdvarint("r_arcadia_culldist") == 1) {
     level._effect["smoke_plume02"] = LoadFX("misc/no_effect");
-  else
+  }
+  else {
     level._effect["smoke_plume02"] = LoadFX("smoke/smoke_plume02");
+  }
 
   level._effect["horizon_smokefield_dark"] = LoadFX("smoke/horizon_smokefield_dark");
   level._effect["room_smoke_200"] = LoadFX("smoke/room_smoke_200");

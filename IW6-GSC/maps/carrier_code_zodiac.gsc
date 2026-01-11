@@ -73,8 +73,9 @@ get_furthest_zodiac() {
 
 spawn_zodiacs(var_0, var_1, var_2, var_3, var_4) {
   foreach(var_6 in level.zodiacs) {
-    if(isalive(var_6) && isDefined(var_6.saved_targetname) && var_6.saved_targetname == var_0)
+    if(isalive(var_6) && isDefined(var_6.saved_targetname) && var_6.saved_targetname == var_0) {
       return;
+    }
   }
 
   if(maps\carrier_code::eval(var_1) && !maps\carrier_code::eval(var_4)) {
@@ -82,8 +83,9 @@ spawn_zodiacs(var_0, var_1, var_2, var_3, var_4) {
     var_9 = cos(getdvarfloat("cg_fov"));
 
     foreach(var_11 in var_8) {
-      if(maps\_utility::within_fov_of_players(var_11.origin, var_9))
+      if(maps\_utility::within_fov_of_players(var_11.origin, var_9)) {
         return;
+      }
     }
   }
 
@@ -102,8 +104,9 @@ spawn_zodiacs(var_0, var_1, var_2, var_3, var_4) {
     level.zodiacs = common_scripts\utility::array_add(level.zodiacs, var_6);
   }
 
-  if(maps\carrier_code::eval(var_2))
+  if(maps\carrier_code::eval(var_2)) {
     thread loop_zodiacs(var_0, var_13, var_3);
+  }
 
   return var_13;
 }
@@ -126,8 +129,9 @@ loop_zodiacs(var_0, var_1, var_2) {
 }
 
 waittill_array_dead() {
-  for(var_0 = self; var_0.size > 0; var_0 = maps\_utility::array_removedead(var_0))
+  for(var_0 = self; var_0.size > 0; var_0 = maps\_utility::array_removedead(var_0)) {
     common_scripts\utility::waitframe();
+  }
 }
 
 zodiac_setup(var_0) {
@@ -145,17 +149,20 @@ zodiac_setup(var_0) {
   common_scripts\utility::array_thread(self.riders, ::zodiac_rider_logic, var_0);
   maps\_utility::ent_flag_init("safe_remove");
 
-  if(isDefined(self.script_parameters) && issubstr(self.script_parameters, "no_riders"))
+  if(isDefined(self.script_parameters) && issubstr(self.script_parameters, "no_riders")) {
     thread setup_fake_riders();
+  }
 
-  if(!maps\carrier_code::eval(var_0))
+  if(!maps\carrier_code::eval(var_0)) {
     thread zodiac_safe_remove();
+  }
 
   var_1 = getanimlength( % carrier_rappel_defend_zodiac_moving);
   wait(randomfloat(var_1 - var_1 / 4));
 
-  if(!maps\carrier_code::eval(self.is_rappelling))
+  if(!maps\carrier_code::eval(self.is_rappelling)) {
     thread maps\_vehicle_code::animate_drive_idle();
+  }
 }
 
 zodiac_safe_remove() {
@@ -168,11 +175,13 @@ zodiac_safe_remove() {
   var_0 = cos(65);
   var_1 = gettime() + randomintrange(2000, 4000);
 
-  while(maps\_utility::either_player_looking_at(self.origin, var_0, 1) && gettime() < var_1)
+  while(maps\_utility::either_player_looking_at(self.origin, var_0, 1) && gettime() < var_1) {
     wait 0.05;
+  }
 
-  if(!maps\_utility::either_player_looking_at(self.origin, var_0, 1))
+  if(!maps\_utility::either_player_looking_at(self.origin, var_0, 1)) {
     self delete();
+  }
   else {
     wait(randomfloatrange(0, 1));
     thread zodiac_death();
@@ -192,10 +201,12 @@ setup_fake_riders() {
 }
 
 convert_to_fake_riders() {
-  if(isDefined(self.script_parameters))
+  if(isDefined(self.script_parameters)) {
     self.script_parameters = self.script_parameters + " no_riders";
-  else
+  }
+  else {
     self.script_parameters = " no_riders";
+  }
 
   maps\_utility::array_delete(self.riders);
   thread setup_fake_riders();
@@ -204,16 +215,18 @@ convert_to_fake_riders() {
 zodiac_wait_for_attack() {
   self endon("death");
 
-  while(distance2dsquared(level.player.origin, self.origin) > 9000000)
+  while(distance2dsquared(level.player.origin, self.origin) > 9000000) {
     wait 0.5;
+  }
 
   maps\_vehicle::vehicle_ai_event("attack");
 }
 
 spawn_zodiac_rappel(var_0, var_1) {
   foreach(var_3 in level.zodiacs) {
-    if(isalive(var_3) && isDefined(var_3.saved_targetname) && var_3.saved_targetname == var_0)
+    if(isalive(var_3) && isDefined(var_3.saved_targetname) && var_3.saved_targetname == var_0) {
       return;
+    }
   }
 
   level.zodiacs = maps\_utility::array_removedead(level.zodiacs);
@@ -286,8 +299,9 @@ zodiac_rappel_logic(var_0, var_1) {
   var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
   self.ref_node = var_4;
 
-  if(!isDefined(self.script_noteworthy) || !issubstr(self.script_noteworthy, "zodiac_vista"))
+  if(!isDefined(self.script_noteworthy) || !issubstr(self.script_noteworthy, "zodiac_vista")) {
     level notify("zodiacs_rappelling");
+  }
 
   var_5 = setup_rope(var_4);
   thread cleanup_rope_on_zodiac_death(var_5);
@@ -326,8 +340,9 @@ zodiac_rappel_logic(var_0, var_1) {
 
 get_rider_by_position(var_0) {
   foreach(var_2 in self.riders) {
-    if(var_2.vehicle_position == var_0)
+    if(var_2.vehicle_position == var_0) {
       return var_2;
+    }
   }
 
   return undefined;
@@ -351,16 +366,18 @@ kill_zodiac_fx_idle() {
   stopFXOnTag(level._effect["vfx_zodiac_splash_idle"], var_0, "tag_origin");
   wait 2.0;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     maps\_utility::deleteent(var_0);
+  }
 }
 
 cleanup_rope_on_zodiac_death(var_0) {
   self waittill("death");
 
   if(isDefined(var_0)) {
-    if(isDefined(var_0.static))
+    if(isDefined(var_0.static)) {
       maps\_utility::deleteent(var_0.static);
+    }
 
     self.ref_node cut_rope_anim(var_0);
   }
@@ -413,8 +430,9 @@ fake_zodiac_move_anim() {
 delete_fake_zodiac(var_0) {
   wait(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 is_fake_zodiac() {
@@ -435,27 +453,32 @@ zodiac_rider_logic(var_0) {
     give_weaponsound();
     thread drone_init_zodiac();
 
-    if(randomint(100) > 80)
+    if(randomint(100) > 80) {
       self.use_ak12 = 1;
+    }
   }
 
   thread zodiac_rider_death();
 
-  if(isDefined(self.spawner) && isDefined(self.script_spawn_once))
+  if(isDefined(self.spawner) && isDefined(self.script_spawn_once)) {
     self.spawner delete();
+  }
 }
 
 give_weaponsound() {
   self.weaponsound = undefined;
   var_0 = randomintrange(1, 4);
 
-  if(var_0 == 1)
+  if(var_0 == 1) {
     self.weaponsound = "drone_ak12_fire_npc";
-  else if(var_0 == 2)
+  }
+  else if(var_0 == 2) {
     self.weaponsound = "drone_cz805_fire_npc";
+  }
 
-  if(var_0 == 3)
+  if(var_0 == 3) {
     self.weaponsound = "drone_cbjms_fire_npc";
+  }
 }
 
 rider_attack(var_0, var_1) {
@@ -475,13 +498,16 @@ rider_attack(var_0, var_1) {
   for(;;) {
     maps\_vehicle_aianim::animontag(var_0, var_2.sittag, var_2.enter);
 
-    if(issubstr(var_0.weapon, "panzerfaust"))
+    if(issubstr(var_0.weapon, "panzerfaust")) {
       var_0 thread zodiac_drone_fire_rpg();
-    else
+    }
+    else {
       var_0 thread zodiac_drone_fire();
+    }
 
-    for(var_3 = 0; var_3 < randomintrange(1, 3); var_3++)
+    for(var_3 = 0; var_3 < randomintrange(1, 3); var_3++) {
       maps\_vehicle_aianim::animontag(var_0, var_2.sittag, var_2.loop);
+    }
 
     var_0 notify("stop_firing");
     maps\_vehicle_aianim::animontag(var_0, var_2.sittag, var_2.exit);
@@ -531,8 +557,9 @@ drone_shoot() {
   var_0 = 0;
   var_1 = level.difficultysettings["zodiac_rider_playerHitRatio"][maps\_gameskill::get_skill_from_index(level.gameskill)];
 
-  if(isDefined(self.player_hit_ratio_override))
+  if(isDefined(self.player_hit_ratio_override)) {
     var_1 = self.player_hit_ratio_override;
+  }
 
   var_2 = 10 - var_1;
   var_3 = self gettagorigin("tag_flash");
@@ -552,10 +579,12 @@ drone_shoot() {
     var_4 = var_3 + anglesToForward(self gettagangles("tag_flash")) * 5000;
 
   if(var_0) {
-    if(!isDefined(self.weapon) || isDefined(self.use_ak12))
+    if(!isDefined(self.weapon) || isDefined(self.use_ak12)) {
       magicbullet("ak12", var_3, var_4);
-    else
+    }
+    else {
       magicbullet(self.weapon, var_3, var_4);
+    }
 
     drone_shoot_fx();
   } else
@@ -568,8 +597,9 @@ drone_shoot_fx(var_0) {
   if(maps\carrier_code::eval(var_0)) {
     var_2 = 10;
 
-    if(randomint(100) < var_2)
+    if(randomint(100) < var_2) {
       var_1 = common_scripts\utility::getfx("drone_tracer");
+    }
   }
 
   playFXOnTag(var_1, self, "tag_flash");
@@ -588,28 +618,32 @@ zodiac_rider_death() {
   if(!isDefined(self)) {
     return;
   }
-  if(isai(self))
+  if(isai(self)) {
     self.a.nodeath = 1;
+  }
 
   self.deathanim = undefined;
   self.skipdeathanim = 1;
   self.damageshield = 1;
 
-  for(var_0 = 0; isDefined(self) && self.actual_health > 0; self.actual_health = self.actual_health - var_1)
+  for(var_0 = 0; isDefined(self) && self.actual_health > 0; self.actual_health = self.actual_health - var_1) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5);
+  }
 
   if(!isDefined(self)) {
     return;
   }
-  if(self.vehicle_position != 0)
+  if(self.vehicle_position != 0) {
     self.ridingvehicle.corpses = common_scripts\utility::array_add(self.ridingvehicle.corpses, self);
+  }
 
   self notify("fully_stop_firing");
   var_6 = get_rider_death_anim();
   thread maps\_anim::anim_generic(self, var_6);
 
-  if(isDefined(self.ridingvehicle) && isDefined(self.ridingvehicle.riders))
+  if(isDefined(self.ridingvehicle) && isDefined(self.ridingvehicle.riders)) {
     self.ridingvehicle.riders = common_scripts\utility::array_remove(self.ridingvehicle.riders, self);
+  }
 
   if(var_6 == "carrier_rappel_defend_death_zodiac_b") {
     self.animname = "generic";
@@ -621,8 +655,9 @@ zodiac_rider_death() {
     self.dead = 1;
     self.ridingvehicle waittill("death");
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self delete();
+    }
 
     return;
   }
@@ -644,12 +679,14 @@ zodiac_rider_death() {
 get_rider_death_anim() {
   var_0 = ["carrier_rappel_defend_death_zodiac_a", "carrier_rappel_defend_death_zodiac_b"];
 
-  if(self.vehicle_position == 1 || self.vehicle_position == 3)
+  if(self.vehicle_position == 1 || self.vehicle_position == 3) {
     var_0 = common_scripts\utility::array_add(var_0, "carrier_rappel_defend_death_zodiac_c");
+  }
 
   if(isDefined(self.ridingvehicle) && isDefined(self.ridingvehicle.is_rappelling)) {
-    if(self.vehicle_position == 1 || self.vehicle_position == 3)
+    if(self.vehicle_position == 1 || self.vehicle_position == 3) {
       return "carrier_rappel_defend_death_zodiac_c";
+    }
 
     return "carrier_rappel_defend_death_zodiac_b";
   } else
@@ -678,8 +715,9 @@ zodiac_waittill_death() {
 }
 
 array_removedead_zodiac(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return [];
+  }
 
   var_1 = [];
 
@@ -723,8 +761,9 @@ zodiac_death() {
     self kill();
     common_scripts\utility::waitframe();
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self delete();
+    }
   }
 }
 
@@ -743,14 +782,16 @@ zodiac_flipdeath() {
     self kill();
     common_scripts\utility::waitframe();
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self delete();
+    }
   }
 }
 
 zodiac_dockeddeath() {
-  if(isDefined(self.rope))
+  if(isDefined(self.rope)) {
     self.rope notify("rappel_done");
+  }
 
   wait(randomfloatrange(0.5, 2));
 
@@ -758,8 +799,9 @@ zodiac_dockeddeath() {
     return;
   }
   foreach(var_1 in self.corpses) {
-    if(isDefined(var_1) && !var_1 isragdoll())
+    if(isDefined(var_1) && !var_1 isragdoll()) {
       var_1 linkto(self, "tag_body");
+    }
   }
 
   maps\_anim::anim_single_solo(self, "carrier_rappel_defend_zodiac_death_parked");
@@ -768,8 +810,9 @@ zodiac_dockeddeath() {
     self kill();
     common_scripts\utility::waitframe();
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self delete();
+    }
   }
 }
 
@@ -808,8 +851,9 @@ explode_single_zodiac(var_0, var_1) {
   }
   self.is_exploding = 1;
 
-  if(isDefined(level.player.using_depth_charge) && level.player.using_depth_charge)
+  if(isDefined(level.player.using_depth_charge) && level.player.using_depth_charge) {
     level.player thread maps\carrier_depth_charge::depth_charge_weapon_hit();
+  }
 
   self notify("zodiac_exploded");
   thread launch_ragdolls_zodiac(var_0);
@@ -819,8 +863,9 @@ explode_single_zodiac(var_0, var_1) {
   var_2 setModel("vehicle_zodiac_boat_fed_iw6");
   var_2.angles = self.angles;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 
   var_3 = 100;
   var_4 = 400;
@@ -841,8 +886,9 @@ cleanup_corpses_on_explode() {
     return;
   }
   foreach(var_1 in self.corpses) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
   }
 }
 
@@ -864,8 +910,9 @@ move_arc_zodiac(var_0, var_1, var_2, var_3) {
 }
 
 splash_on_hit_water_zodiac() {
-  while(isDefined(self) && self.origin[2] > level.water_level + 8)
+  while(isDefined(self) && self.origin[2] > level.water_level + 8) {
     wait 0.05;
+  }
 
   if(isDefined(self)) {
     var_0 = self.origin;
@@ -907,8 +954,9 @@ launch_ragdolls_zodiac(var_0) {
     var_15 = var_2[var_12];
     var_16 = var_15.count;
 
-    if(var_16 <= 0)
+    if(var_16 <= 0) {
       var_15.count = 1;
+    }
 
     var_17 = var_15 stalingradspawn();
 
@@ -917,10 +965,12 @@ launch_ragdolls_zodiac(var_0) {
     }
     var_15.count = var_16;
 
-    if(var_12 >= var_2.size - 1)
+    if(var_12 >= var_2.size - 1) {
       var_12 = 0;
-    else
+    }
+    else {
       var_12++;
+    }
 
     var_17 forceteleport(var_7);
     var_18 = (randomfloatrange(-10000, 10000), randomfloatrange(-10000, 10000), var_14);
@@ -936,10 +986,12 @@ zodiac_treadfx() {
   var_1 = 4;
 
   for(;;) {
-    if(maps\_vehicle::isvehicle())
+    if(maps\_vehicle::isvehicle()) {
       var_2 = self vehicle_getspeed();
-    else
+    }
+    else {
       var_2 = self.speed;
+    }
 
     if(var_2 < var_1 && var_0) {
       stopFXOnTag(common_scripts\utility::getfx("zodiac_wake_geotrail"), self, "tag_motor_fx");
@@ -985,8 +1037,9 @@ shoot_rope(var_0, var_1) {
   thread run_cut_rope(var_0);
   self waittill("rappel_done");
 
-  if(isDefined(self) && !self.iscutdown)
+  if(isDefined(self) && !self.iscutdown) {
     var_0 cut_rope_anim(self);
+  }
 }
 
 rope_sound() {
@@ -1048,8 +1101,9 @@ rappel(var_0, var_1, var_2, var_3) {
   var_4 = getanimlength(level.scr_anim["rope_prop"]["carrier_rappel_defend_ascend_prop"]);
   thread fire_from_rope_or_die(var_0, var_4);
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     return;
+  }
 }
 
 rappel_enter(var_0) {
@@ -1057,8 +1111,9 @@ rappel_enter(var_0) {
   var_2 = "carrier_rappel_defend_ascend_enter_2";
   self unlink();
 
-  if(isDefined(self.ridingvehicle.riders))
+  if(isDefined(self.ridingvehicle.riders)) {
     self.ridingvehicle.riders = common_scripts\utility::array_remove(self.ridingvehicle.riders, self);
+  }
 
   if(!self.rope.shot && self.vehicle_position == 2) {
     if(isDefined(self.ridingvehicle) && isalive(self.ridingvehicle.riders[1])) {
@@ -1072,8 +1127,9 @@ rappel_enter(var_0) {
     var_0 thread maps\_anim::anim_single_solo(self.launcher, "carrier_rappel_defend_ascend_enter_launcher");
     self waittillmatch("single anim", "delete_launcher");
 
-    if(isalive(self) && isDefined(self.launcher))
+    if(isalive(self) && isDefined(self.launcher)) {
       self.launcher delete();
+    }
   } else {
     var_3 = self.ridingvehicle;
     var_4 = var_3 vehicle_get_idle_pos(self.vehicle_position);
@@ -1084,8 +1140,9 @@ rappel_enter(var_0) {
 cleanup_launcher() {
   common_scripts\utility::waittill_any("death", "enter_death");
 
-  if(isDefined(self.launcher))
+  if(isDefined(self.launcher)) {
     self.launcher delete();
+  }
 }
 
 vehicle_get_idle_pos(var_0) {
@@ -1138,8 +1195,9 @@ debug_j_prop(var_0) {
     thread common_scripts\utility::draw_line_for_time(self gettagorigin("j_prop_2"), level.player.origin, 0, 0, 1, 0.05);
     thread common_scripts\utility::draw_line_for_time(var_0 gettagorigin("tag_origin"), level.player.origin, 1, 1, 0, 0.05);
 
-    if(isDefined(self.attach_point))
+    if(isDefined(self.attach_point)) {
       thread common_scripts\utility::draw_line_for_time(self.attach_point gettagorigin("tag_origin"), level.player.origin, 1, 0, 0, 0.05);
+    }
 
     wait 0.05;
   }
@@ -1212,8 +1270,9 @@ fire_from_rope_or_die(var_0, var_1) {
       maps\_anim::anim_generic(self, "carrier_rappel_defend_ascend_fire_exit");
     } else if(var_6 < var_2 + var_3 + var_4)
       maps\_anim::anim_generic(self, "carrier_rappel_defend_ascend_fire_a");
-    else if(var_6 < var_2 + var_3 + var_4 + var_5)
+    else if(var_6 < var_2 + var_3 + var_4 + var_5) {
       maps\_anim::anim_generic(self, "carrier_rappel_defend_ascend_fire_b");
+    }
 
     if(!isDefined(self.rope_prop)) {
       rappel_kill();
@@ -1250,8 +1309,9 @@ rappel_exit(var_0, var_1, var_2, var_3) {
   self unlink();
 
   if(isDefined(var_1) && var_1 > 0) {
-    if(isai(self))
+    if(isai(self)) {
       self animmode("nogravity");
+    }
 
     var_0 thread maps\_anim::anim_generic_first_frame(self, var_4[0]);
     wait(var_1);
@@ -1259,8 +1319,9 @@ rappel_exit(var_0, var_1, var_2, var_3) {
     if(!isalive(self)) {
       return;
     }
-    if(isai(self))
+    if(isai(self)) {
       self animmode("gravity");
+    }
   }
 
   var_0 thread maps\_anim::anim_generic(self, var_4[randomint(var_4.size)]);
@@ -1272,13 +1333,15 @@ rappel_exit(var_0, var_1, var_2, var_3) {
   if(maps\carrier_code::eval(var_3)) {
     return;
   }
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "enemy_defend_zodiac_vista")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "enemy_defend_zodiac_vista") {
     self kill();
+  }
   else if(isDefined(self)) {
     var_5 = self;
 
-    if(maps\carrier_code::eval(self.script_drone))
+    if(maps\carrier_code::eval(self.script_drone)) {
       var_5 = safe_makerealai(self);
+    }
 
     var_5.health = 25;
     var_5.dropweapon = 0;
@@ -1286,8 +1349,9 @@ rappel_exit(var_0, var_1, var_2, var_3) {
     var_5.grenadeammo = 0;
     var_5.deathanim = undefined;
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = 90;
+    }
 
     if(randomint(100) < var_2) {
       var_5 thread maps\ss_util::fake_death_bullet(0.1);
@@ -1299,8 +1363,9 @@ rappel_exit(var_0, var_1, var_2, var_3) {
 }
 
 safe_makerealai(var_0) {
-  while(maps\carrier_code::eval(level.is_makerealai_active))
+  while(maps\carrier_code::eval(level.is_makerealai_active)) {
     common_scripts\utility::waitframe();
+  }
 
   level.is_makerealai_active = 1;
   var_1 = undefined;
@@ -1309,13 +1374,15 @@ safe_makerealai(var_0) {
     var_2 = var_0.spawner;
     var_3 = var_0.spawner.count;
 
-    if(var_3 == 0)
+    if(var_3 == 0) {
       var_2.count = 1;
+    }
 
     var_1 = maps\_utility::makerealai(var_0);
 
-    if(var_3 == 0)
+    if(var_3 == 0) {
       var_2.count = 0;
+    }
   }
 
   level.is_makerealai_active = 0;
@@ -1333,8 +1400,9 @@ rope_cut_death(var_0, var_1) {
     self waittill("cut");
     wait(0.2 * var_1);
 
-    if(maps\carrier_code::eval(var_0.player_cut))
+    if(maps\carrier_code::eval(var_0.player_cut)) {
       level.player maps\_utility::player_giveachievement_wrapper("LEVEL_15A");
+    }
   }
 
   if(var_0 should_land_on_zodiac_death()) {
@@ -1343,8 +1411,9 @@ rope_cut_death(var_0, var_1) {
     return;
   }
 
-  if(isDefined(var_0.rope_prop))
+  if(isDefined(var_0.rope_prop)) {
     var_0.rope_prop delete();
+  }
 
   var_0 notify("stop_loop");
   var_0 thread maps\_anim::anim_generic(var_0, "carrier_rappel_defend_death_rope_cut");
@@ -1357,8 +1426,9 @@ finish_rope_cut_death(var_0) {
   var_0 splash_on_hit_water_ragdoll();
   wait 1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 rappel_enter_death(var_0) {
@@ -1367,21 +1437,25 @@ rappel_enter_death(var_0) {
   self endon("rappel_death");
   var_1 = self.rope;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 endon("cut");
+  }
 
-  while(self.vehicle_position == 2 && (isDefined(var_1) && !var_1.shot))
+  while(self.vehicle_position == 2 && (isDefined(var_1) && !var_1.shot)) {
     common_scripts\utility::waitframe();
+  }
 
-  if(isai(self))
+  if(isai(self)) {
     self.a.nodeath = 1;
+  }
 
   self.deathanim = undefined;
   self.skipdeathanim = 1;
   self.damageshield = 1;
 
-  for(var_2 = 0; isDefined(self) && self.actual_health > 0 && isalive(self.ridingvehicle); self.actual_health = self.actual_health - var_3)
+  for(var_2 = 0; isDefined(self) && self.actual_health > 0 && isalive(self.ridingvehicle); self.actual_health = self.actual_health - var_3) {
     self waittill("damage", var_3, var_4, var_5, var_6, var_7);
+  }
 
   if(!isDefined(self)) {
     return;
@@ -1394,8 +1468,9 @@ rappel_enter_death(var_0) {
   self notify("rappel_enter_death");
   self notify("stop_loop");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 notify("next_rappeller");
+  }
 
   self linkto(self.ridingvehicle, "tag_body");
   self.ridingvehicle.corpses = common_scripts\utility::array_add(self.ridingvehicle.corpses, self);
@@ -1415,8 +1490,9 @@ rappel_death() {
   var_1 = self.rope_prop;
   var_2 = self.ref_node;
 
-  if(isai(self))
+  if(isai(self)) {
     self.a.nodeath = 1;
+  }
 
   self.deathanim = undefined;
   self.skipdeathanim = 1;
@@ -1432,14 +1508,16 @@ rappel_death() {
       self.actual_health = self.actual_health + var_4;
     }
 
-    if(self.actual_health > 0)
+    if(self.actual_health > 0) {
       self notify("rappel_pain");
+    }
   }
 
   var_9 = ["carrier_rappel_defend_death_rope_a", "carrier_rappel_defend_death_rope_b"];
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 notify("next_rappeller");
+  }
 
   if(!isDefined(self)) {
     return;
@@ -1462,16 +1540,19 @@ rappel_death() {
   self waittillmatch("single anim", "end");
   self.dead = 1;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 should_pain_over_death() {
-  if(!isDefined(self.rope_prop) || !isDefined(self.ridingvehicle))
+  if(!isDefined(self.rope_prop) || !isDefined(self.ridingvehicle)) {
     return 0;
+  }
 
   var_0 = 0.12;
   var_1 = 0.27;
@@ -1480,8 +1561,9 @@ should_pain_over_death() {
 }
 
 should_land_on_zodiac_death() {
-  if(!isDefined(self.rope_prop) || !isDefined(self.ridingvehicle))
+  if(!isDefined(self.rope_prop) || !isDefined(self.ridingvehicle)) {
     return 0;
+  }
 
   var_0 = 0;
   var_1 = 0.12;
@@ -1493,15 +1575,17 @@ land_on_zodiac_death() {
   var_0 = self.rope;
   var_1 = self.rope_prop;
 
-  if(!isDefined(var_1) || !isDefined(var_0))
+  if(!isDefined(var_1) || !isDefined(var_0)) {
     return 0;
+  }
 
   var_0 endon("death");
   var_0 endon("cut");
   var_1 endon("death");
 
-  if(!should_land_on_zodiac_death())
+  if(!should_land_on_zodiac_death()) {
     return 0;
+  }
 
   self notify("land_on_zodiac_death");
   var_2 = common_scripts\utility::spawn_tag_origin();
@@ -1510,8 +1594,9 @@ land_on_zodiac_death() {
   var_2 linkto(self.ridingvehicle, "tag_body");
   var_3 = var_2.origin[2] + 32;
 
-  while(self.origin[2] > var_3)
+  while(self.origin[2] > var_3) {
     common_scripts\utility::waitframe();
+  }
 
   self stopanimscripted();
   self.ridingvehicle.corpses = common_scripts\utility::array_add(self.ridingvehicle.corpses, self);
@@ -1531,10 +1616,12 @@ link_to_moving_target(var_0) {
   self rotateto(var_0.angles, var_3);
 
   while(var_2 > 4 || self.origin[2] < var_0.origin[2]) {
-    if(var_2 > var_1)
+    if(var_2 > var_1) {
       var_4 = self.origin + vectornormalize(var_0.origin - self.origin) * var_1;
-    else
+    }
+    else {
       var_4 = var_0.origin;
+    }
 
     self moveto(var_4, 0.1);
     wait 0.1;
@@ -1547,8 +1634,9 @@ link_to_moving_target(var_0) {
 splash_on_hit_water() {
   self endon("land_on_zodiac_death");
 
-  while(isDefined(self) && self gettagorigin("j_mainroot")[2] > level.water_level + 8)
+  while(isDefined(self) && self gettagorigin("j_mainroot")[2] > level.water_level + 8) {
     wait 0.05;
+  }
 
   if(isDefined(self)) {
     var_0 = self gettagorigin("j_mainroot");
@@ -1558,8 +1646,9 @@ splash_on_hit_water() {
 }
 
 splash_on_hit_water_ragdoll(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
   else {
     self waittillmatch("single anim", "start_ragdoll");
     self unlink();
@@ -1601,10 +1690,12 @@ rappel_kill() {
 rappel_death_vo() {
   var_0 = randomint(100);
 
-  if(var_0 < 33)
+  if(var_0 < 33) {
     thread maps\_utility::play_sound_on_entity("generic_death_falling");
-  else if(var_0 < 66)
+  }
+  else if(var_0 < 66) {
     thread maps\_utility::play_sound_on_entity("generic_death_falling_scream");
+  }
   else {}
 }
 
@@ -1612,12 +1703,14 @@ cleanup_zodiac_bodies() {
   var_0 = self.corpses;
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     var_0 = self.corpses;
+  }
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 }
 
@@ -1668,8 +1761,9 @@ wait_for_cut_rope(var_0) {
   for(;;) {
     level.player waittill("cut");
 
-    if(self.can_cut)
+    if(self.can_cut) {
       return;
+    }
   }
 }
 
@@ -1686,8 +1780,9 @@ monitor_can_cut_rope(var_0) {
 }
 
 can_cut_rope(var_0) {
-  if(isDefined(level.player.active_rope) && self != level.player.active_rope)
+  if(isDefined(level.player.active_rope) && self != level.player.active_rope) {
     return 0;
+  }
 
   if(maps\carrier_code::eval(level.player.using_depth_charge)) {
     self.can_cut = 0;
@@ -1718,8 +1813,9 @@ enemy_too_close() {
   var_1 = 22500;
 
   foreach(var_3 in self.rappellers) {
-    if(distancesquared(var_3.origin, level.player.origin) <= var_1)
+    if(distancesquared(var_3.origin, level.player.origin) <= var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -1767,8 +1863,9 @@ cut_the_rope(var_0) {
   var_2 delete();
   var_1 delete();
 
-  if(common_scripts\utility::flag("defend_osprey_online") && !maps\carrier_code::eval(level.player.osprey_control))
+  if(common_scripts\utility::flag("defend_osprey_online") && !maps\carrier_code::eval(level.player.osprey_control)) {
     level.player thread maps\carrier_depth_charge::depth_charge_give_control();
+  }
 }
 
 cut_the_rope_notetrack(var_0) {
@@ -1782,8 +1879,9 @@ cut_rope_anim(var_0, var_1) {
   level.player allowmelee(1);
   level.cut_ropes = common_scripts\utility::array_add(level.cut_ropes, var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   foreach(var_3 in var_0.rappellers) {
     if(isalive(var_3) && !maps\carrier_code::eval(var_3.dead)) {
@@ -1794,13 +1892,15 @@ cut_rope_anim(var_0, var_1) {
 
   var_0 show();
 
-  if(isDefined(var_0.static))
+  if(isDefined(var_0.static)) {
     var_0.static delete();
+  }
 
   maps\_anim::anim_single_solo(var_0, "carrier_rappel_defend_rope_cut");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 moveto(var_0.origin - (0, 0, 500), 0.5, 0.5);
+  }
 
   var_0 thread cleanup_rope();
 }

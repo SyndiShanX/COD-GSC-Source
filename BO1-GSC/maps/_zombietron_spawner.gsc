@@ -159,8 +159,9 @@ zombie_death_func() {
   }
   if(explosiveDamage) {
     self.animTranslationScale = RandomFloatRange(1.5, 2.2);
-    if(animscripts\zombie_death::play_explosion_death())
+    if(animscripts\zombie_death::play_explosion_death()) {
       return;
+    }
   }
   refs = [];
   if(ok_to_gib()) {
@@ -416,10 +417,12 @@ find_flesh() {
     if(players.size > 1) {
       for(i = 0; i < self.ignore_player.size; i++) {
         if(isDefined(self.ignore_player[i])) {
-          if(!isDefined(self.ignore_player[i].ignore_counter))
+          if(!isDefined(self.ignore_player[i].ignore_counter)) {
             self.ignore_player[i].ignore_counter = 0;
-          else
+          }
+          else {
             self.ignore_player[i].ignore_counter += 1;
+          }
         }
       }
     }
@@ -1002,7 +1005,8 @@ vox_timer(type) {
 }
 zombie_death_audio(alias) {
   self waittill("death");
-  if(isDefined(self))
+  if(isDefined(self)) {
     self playSound(alias + "death");
+  }
 }
 �

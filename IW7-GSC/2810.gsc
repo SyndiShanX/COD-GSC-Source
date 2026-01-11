@@ -6,18 +6,21 @@
 validationerror(var_00, var_01, var_02) {
   var_03 = var_00;
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_03 = var_03 + "_" + var_01;
+  }
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_03 = var_03 + " - " + var_02;
+  }
 
   if(getdvarint("scr_validate_print", 0) == 1) {}
 
   if(getdvarint("scr_validate_assert", 0) == 1) {}
 
-  if(getdvarint("scr_validate_record", 0) == 1)
+  if(getdvarint("scr_validate_record", 0) == 1) {
     scripts\mp\class::recordvalidationinfraction();
+  }
 }
 
 validateloadout(var_00) {
@@ -139,8 +142,9 @@ validateattachments(var_00, var_01, var_02, var_03, var_04) {
         var_15 = scripts\mp\utility\game::attachmentmap_tounique(var_12, var_02);
 
         if(isDefined(var_15)) {
-          if(var_14 == "rail")
+          if(var_14 == "rail") {
             var_13 = 1;
+          }
         }
       }
 
@@ -162,8 +166,9 @@ validateattachments(var_00, var_01, var_02, var_03, var_04) {
       } else {
         var_9++;
 
-        if(var_09 <= var_10)
+        if(var_09 <= var_10) {
           var_0.func_D640++;
+        }
         else {
           var_0.func_13D1E[var_04 + "_attachment_" + (var_09 + 1)] = 1;
           var_0.func_D640 = var_0.func_D640 + 2;
@@ -245,8 +250,9 @@ func_13145(var_00, var_01, var_02) {
           var_0.invaliditems[9][var_0.invaliditems[9].size] = var_05;
         }
 
-        if(var_3[var_06] == 1)
+        if(var_3[var_06] == 1) {
           var_0.func_D640++;
+        }
         else {
           var_0.func_13D1E["extra_perk_" + var_06] = 1;
           var_0.func_D640 = var_0.func_D640 + 2;
@@ -350,8 +356,9 @@ fixweapon(var_00, var_01) {
     var_0.loadoutprimarylootitemid = 0;
     var_0.loadoutprimaryvariantid = -1;
 
-    for(var_02 = 0; var_02 < scripts\mp\class::getmaxprimaryattachments(); var_2++)
+    for(var_02 = 0; var_02 < scripts\mp\class::getmaxprimaryattachments(); var_2++) {
       var_0.loadoutprimaryattachments[var_02] = "none";
+    }
   } else {
     var_0.loadoutsecondary = "none";
     var_0.loadoutsecondarycamo = "none";
@@ -359,16 +366,19 @@ fixweapon(var_00, var_01) {
     var_0.func_AE9E = 0;
     var_0.func_AEA5 = -1;
 
-    for(var_02 = 0; var_02 < scripts\mp\class::getmaxsecondaryattachments(); var_2++)
+    for(var_02 = 0; var_02 < scripts\mp\class::getmaxsecondaryattachments(); var_2++) {
       var_0.loadoutsecondaryattachments[var_02] = "none";
+    }
   }
 }
 
 fixattachment(var_00, var_01, var_02) {
-  if(var_01 == "primary")
+  if(var_01 == "primary") {
     var_0.loadoutprimaryattachments[var_02] = "none";
-  else
+  }
+  else {
     var_0.loadoutsecondaryattachments[var_02] = "none";
+  }
 }
 
 fixpower(var_00, var_01) {
@@ -418,42 +428,54 @@ fixinvaliditems(var_00, var_01) {
     return var_00;
   }
 
-  if(isDefined(var_1[1]))
+  if(isDefined(var_1[1])) {
     fixweapon(var_00, "primary");
+  }
   else if(isDefined(var_1[3])) {
-    for(var_02 = 0; var_02 < scripts\mp\class::getmaxprimaryattachments(); var_2++)
+    for(var_02 = 0; var_02 < scripts\mp\class::getmaxprimaryattachments(); var_2++) {
       fixattachment(var_00, "primary", var_02);
+    }
   } else {
-    foreach(var_02 in var_1[2])
+    foreach(var_02 in var_1[2]) {
     fixattachment(var_00, "primary", var_02);
+    }
   }
 
-  if(isDefined(var_1[4]))
+  if(isDefined(var_1[4])) {
     fixweapon(var_00, "secondary");
+  }
   else if(isDefined(var_1[6])) {
-    for(var_02 = 0; var_02 < scripts\mp\class::getmaxsecondaryattachments(); var_2++)
+    for(var_02 = 0; var_02 < scripts\mp\class::getmaxsecondaryattachments(); var_2++) {
       fixattachment(var_00, "secondary", var_02);
+    }
   } else {
-    foreach(var_02 in var_1[5])
+    foreach(var_02 in var_1[5]) {
     fixattachment(var_00, "secondary", var_02);
+    }
   }
 
-  if(isDefined(var_1[7]))
+  if(isDefined(var_1[7])) {
     fixpower(var_00, "primary");
+  }
 
-  if(isDefined(var_1[8]))
+  if(isDefined(var_1[8])) {
     fixpower(var_00, "secondary");
+  }
 
-  foreach(var_08 in var_1[9])
+  foreach(var_08 in var_1[9]) {
   fixperk(var_00, var_08);
+  }
 
-  if(isDefined(var_1[10]))
+  if(isDefined(var_1[10])) {
     fixarchetype(var_00);
-  else if(isDefined(var_1[11]))
+  }
+  else if(isDefined(var_1[11])) {
     fixarchetype(var_00);
+  }
 
-  if(isDefined(var_1[12]))
+  if(isDefined(var_1[12])) {
     fixkillstreaks(var_00);
+  }
 
   return var_00;
 }
@@ -461,8 +483,9 @@ fixinvaliditems(var_00, var_01) {
 lookuppowerslot(var_00) {
   var_01 = tablelookup("mp\menuPowers.csv", 3, var_00, 2);
 
-  if(!isDefined(var_01) || var_01 != "1" && var_01 != "2")
+  if(!isDefined(var_01) || var_01 != "1" && var_01 != "2") {
     return undefined;
+  }
 
   return scripts\engine\utility::ter_op(var_01 == "1", "primary", "secondary");
 }

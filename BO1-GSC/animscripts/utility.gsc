@@ -567,8 +567,9 @@ WeaponAnims() {
   class = weaponClass(self.weapon);
   switch (class) {
     case "smg":
-      if(is_true(level.supportsPistolAnimations) && self holdingWeapon())
+      if(is_true(level.supportsPistolAnimations) && self holdingWeapon()) {
         return "pistol";
+      }
       return "rifle";
     case "mg":
     case "rifle":
@@ -1134,8 +1135,9 @@ canSuppressEnemy() {
     return false;
   }
   hasTagFlash = self GetTagOrigin("tag_flash");
-  if(!isDefined(hasTagFlash))
+  if(!isDefined(hasTagFlash)) {
     return false;
+  }
   if(!IsPlayer(self.enemy)) {
     return aiSuppressAI();
   }

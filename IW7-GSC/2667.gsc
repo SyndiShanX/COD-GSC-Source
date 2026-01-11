@@ -146,27 +146,32 @@ mpbuildweaponmap() {
         level.weaponmapdata[var_04] = spawnStruct();
         var_05 = tablelookup(var_02, 0, var_03, 0);
 
-        if(var_05 != "")
+        if(var_05 != "") {
           level.weaponmapdata[var_04].number = var_05;
+        }
 
         var_06 = tablelookup(var_02, 0, var_03, 1);
 
-        if(var_06 != "")
+        if(var_06 != "") {
           level.weaponmapdata[var_04].group = var_06;
+        }
 
         var_07 = tablelookup(var_02, 0, var_03, 5);
 
-        if(var_07 != "")
+        if(var_07 != "") {
           level.weaponmapdata[var_04].perk = var_07;
+        }
 
         var_08 = tablelookup(var_02, 0, var_03, 9);
 
         if(var_08 != "") {
           if(isDefined(level.weaponmapdata[var_04].attachdefaults)) {
-            if(level.weaponmapdata[var_04].attachdefaults == "none")
+            if(level.weaponmapdata[var_04].attachdefaults == "none") {
               level.weaponmapdata[var_04].attachdefaults = undefined;
-            else
+            }
+            else {
               level.weaponmapdata[var_04].attachdefaults = strtok(var_08, " ");
+            }
           } else
             level.weaponmapdata[var_04].attachdefaults = strtok(var_08, " ");
         }
@@ -205,22 +210,25 @@ buildweaponmaps() {
   var_03 = 1;
 
   for(var_04 = 1; var_03 || var_04; var_2++) {
-    if(tablelookup(var_00, 0, var_02, 0) == "")
+    if(tablelookup(var_00, 0, var_02, 0) == "") {
       var_03 = 0;
+    }
 
     var_05 = tablelookup(var_00, 0, var_02, 4);
     var_06 = tablelookup(var_00, 0, var_02, 5);
 
     if(var_06 != "") {
-      if(var_05 != "")
+      if(var_05 != "") {
         level.weaponmap_toperk[var_05] = var_06;
+      }
     }
 
     var_07 = tablelookup(var_00, 0, var_02, 9);
 
     if(var_07 != "") {
-      if(var_05 != "")
+      if(var_05 != "") {
         level.weaponmap_toattachdefaults[var_05] = strtok(var_07, " ");
+      }
     }
 
     var_08 = tablelookup(var_00, 0, var_02, 8);
@@ -233,22 +241,25 @@ buildweaponmaps() {
     }
 
     if(var_04) {
-      if(tablelookup(var_01, 0, var_02, 0) == "")
+      if(tablelookup(var_01, 0, var_02, 0) == "") {
         var_04 = 0;
+      }
 
       var_05 = tablelookup(var_01, 0, var_02, 4);
       var_06 = tablelookup(var_01, 0, var_02, 5);
 
       if(var_06 != "") {
-        if(var_05 != "")
+        if(var_05 != "") {
           level.weaponmap_toperk[var_05] = var_06;
+        }
       }
 
       var_07 = tablelookup(var_01, 0, var_02, 9);
 
       if(var_07 != "") {
-        if(var_05 != "")
+        if(var_05 != "") {
           level.weaponmap_toattachdefaults[var_05] = strtok(var_07, " ");
+        }
       }
 
       var_08 = tablelookup(var_01, 0, var_02, 8);
@@ -267,8 +278,9 @@ minesensorbounce() {
   self playSound(self.config.onlaunchsfx);
   playFX(self.config.launchvfx, self.origin);
 
-  if(isDefined(self.trigger))
+  if(isDefined(self.trigger)) {
     self.trigger delete();
+  }
 
   self hidepart("tag_sensor");
   stopblinkinglight();
@@ -308,8 +320,9 @@ minebounce() {
   self playSound(self.config.onlaunchsfx);
   playFX(level.mine_launch, self.origin);
 
-  if(isDefined(self.trigger))
+  if(isDefined(self.trigger)) {
     self.trigger delete();
+  }
 
   var_00 = self.origin + (0, 0, 64);
   self moveto(var_00, 0.7, 0, 0.65);
@@ -374,8 +387,9 @@ reapply_visionset_after_host_migration() {
   level waittill("host_migration_begin");
   level waittill("host_migration_end");
 
-  if(scripts\engine\utility::is_true(self.wearing_rat_king_eye))
+  if(scripts\engine\utility::is_true(self.wearing_rat_king_eye)) {
     self setscriptablepartstate("rat_king_eye_light", "active");
+  }
 }
 
 watch_for_eye_remove() {
@@ -383,8 +397,9 @@ watch_for_eye_remove() {
   self endon("watch_for_eye_remove");
   wait 5;
 
-  if(scripts\engine\utility::is_true(self.wearing_rat_king_eye))
+  if(scripts\engine\utility::is_true(self.wearing_rat_king_eye)) {
     remove_eye_effects();
+  }
 }
 
 remove_eye_effects() {
@@ -392,10 +407,12 @@ remove_eye_effects() {
   level notify("rat_king_eye_deactivated");
   self notify("remove_eye");
 
-  if(isDefined(level.vision_set_override))
+  if(isDefined(level.vision_set_override)) {
     self visionsetnakedforplayer(level.vision_set_override, 0.1);
-  else
+  }
+  else {
     self visionsetnakedforplayer("", 0.1);
+  }
 
   self setscriptablepartstate("rat_king_eye_light", "neutral");
 }
@@ -430,8 +447,9 @@ unset_scriptable_part_state_after_time(var_00, var_01) {
   self setscriptablepartstate("projectile", "inactive");
   var_01 notify("ranged_katana_missile_done");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 watchmissileusage() {
@@ -502,8 +520,9 @@ run_stun_logic(var_00, var_01, var_02, var_03) {
   self radiusdamage(var_00, 128, var_09, var_09, self, "MOD_GRENADE_SPLASH", "iw7_harpoon2_zm_stun");
   scripts\engine\utility::waitframe();
 
-  if(distance2dsquared(self.origin, var_00) <= 16384)
+  if(distance2dsquared(self.origin, var_00) <= 16384) {
     playfxontagforclients(level._effect[var_08], self, "tag_eye", self);
+  }
 
   wait 0.25;
   var_10 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
@@ -521,8 +540,9 @@ run_stun_logic(var_00, var_01, var_02, var_03) {
     }
   }
 
-  if(isDefined(level.played_acid_rain_effect))
+  if(isDefined(level.played_acid_rain_effect)) {
     level.played_ben_franklin_effect = undefined;
+  }
 }
 
 play_stun_fx(var_00, var_01, var_02, var_03, var_04) {
@@ -559,8 +579,9 @@ ben_franklin_harpoon_dud_explode(var_00) {
   self endon("death");
   var_00 waittill("death");
 
-  if(isDefined(var_0.origin))
+  if(isDefined(var_0.origin)) {
     thread ben_franklin_harpoon_activate(var_0.origin, undefined, 500000000);
+  }
 
   self notify("remove_this_function_since_you_missed_zomb");
 }
@@ -599,17 +620,20 @@ thundergun_harpoon_dud_explode(var_00) {
         var_06 = anglesToForward(self.angles);
         var_07 = vectornormalize(var_06) * -100;
 
-        if(isDefined(var_5.agent_type) && (var_5.agent_type != "slasher" && var_5.agent_type != "superslasher"))
+        if(isDefined(var_5.agent_type) && (var_5.agent_type != "slasher" && var_5.agent_type != "superslasher")) {
           var_05 giveflagcapturexp(vectornormalize(var_5.origin - (self.origin + var_07)) * 800 + (200, 0, 200));
+        }
 
         wait 0.2;
         var_5.nocorpse = 1;
         var_5.full_gib = 1;
 
-        if(isDefined(var_5.agent_type) && (var_5.agent_type == "slasher" || var_5.agent_type == "superslasher"))
+        if(isDefined(var_5.agent_type) && (var_5.agent_type == "slasher" || var_5.agent_type == "superslasher")) {
           var_05 getrandomarmkillstreak(var_5.health, var_5.origin, self, self, "MOD_UNKNOWN", "iw7_harpoon4_zm");
-        else
+        }
+        else {
           var_05 getrandomarmkillstreak(var_5.health + 1000, var_5.origin, self, self, "MOD_UNKNOWN", "iw7_harpoon4_zm");
+        }
       }
     }
   }
@@ -667,10 +691,12 @@ thundergun_harpoon(var_00, var_01) {
       }
       if(isDefined(var_01)) {
         if(distance2dsquared(var_1.origin, var_9.origin) < 16384) {
-          if(isDefined(var_9.agent_type) && (var_9.agent_type == "slasher" || var_9.agent_type == "superslasher"))
+          if(isDefined(var_9.agent_type) && (var_9.agent_type == "slasher" || var_9.agent_type == "superslasher")) {
             var_09 getrandomarmkillstreak(var_9.health, var_9.origin, self, self, "MOD_UNKNOWN", "iw7_harpoon4_zm");
-          else
+          }
+          else {
             var_09 thread fling_zombie_thundergun_harpoon(var_9.health + 1000, var_09, self, var_01);
+          }
 
           scripts\engine\utility::waitframe();
         }
@@ -723,11 +749,13 @@ delete_after_time(var_00, var_01) {
   var_00 endon("death");
   self endon("death");
 
-  while(gettime() <= var_01 + 3400)
+  while(gettime() <= var_01 + 3400) {
     scripts\engine\utility::waitframe();
+  }
 
-  if(isDefined(level.played_acid_rain_effect))
+  if(isDefined(level.played_acid_rain_effect)) {
     level.played_acid_rain_effect = undefined;
+  }
 
   self delete();
 }
@@ -746,8 +774,9 @@ deal_damage_to_enemies(var_00, var_01) {
       continue;
     }
     if(isDefined(var_00)) {
-      if(var_2.agent_type == "slasher" || var_2.agent_type == "superslasher")
+      if(var_2.agent_type == "slasher" || var_2.agent_type == "superslasher") {
         var_02 getrandomarmkillstreak(0.1 * var_2.maxhealth, var_2.origin, var_00, var_00, "MOD_RIFLE_BULLET", "iw7_harpoon1_zm");
+      }
       else {
         playFX(level._effect["acid_rain"], var_2.origin);
         var_02 getrandomarmkillstreak(var_2.maxhealth, var_2.origin, var_00, var_00, "MOD_RIFLE_BULLET", "iw7_harpoon1_zm");
@@ -808,17 +837,21 @@ waittill_missile_fire() {
     if(!isDefined(var_0.weapon_name)) {
       var_02 = getweaponbasename(var_01);
 
-      if(isDefined(var_02))
+      if(isDefined(var_02)) {
         var_0.weapon_name = var_02;
-      else
+      }
+      else {
         var_0.weapon_name = var_01;
+      }
     }
 
-    if(!isDefined(var_0.owner))
+    if(!isDefined(var_0.owner)) {
       var_0.owner = self;
+    }
 
-    if(!isDefined(var_0.team))
+    if(!isDefined(var_0.team)) {
       var_0.team = self.team;
+    }
   }
 
   return var_00;
@@ -853,8 +886,9 @@ runharpoontraplogic(var_00, var_01) {
   var_00 setscriptablepartstate("arrow_effects", "active");
   level.harpoon_projectiles[level.harpoon_projectiles.size] = var_00;
 
-  if(level.harpoon_projectiles.size >= 6)
+  if(level.harpoon_projectiles.size >= 6) {
     thread destroy_oldest_trap();
+  }
 
   var_0.linked_to_targets = [];
   var_0.linked_fx = [];
@@ -879,8 +913,9 @@ timeout_trap(var_00, var_01) {
 }
 
 clean_up_trap_ent(var_00, var_01) {
-  if(scripts\engine\utility::array_contains(level.harpoon_projectiles, var_00))
+  if(scripts\engine\utility::array_contains(level.harpoon_projectiles, var_00)) {
     level.harpoon_projectiles = scripts\engine\utility::array_remove(level.harpoon_projectiles, var_00);
+  }
 
   level.harpoon_projectiles = scripts\engine\utility::array_removeundefined(level.harpoon_projectiles);
   var_02 = spawnfx(scripts\engine\utility::getfx("placeEquipmentFailed"), var_01);
@@ -908,8 +943,9 @@ connect_to_nearby_harpoon_projectiles(var_00, var_01) {
       }
       var_07 = scripts\engine\trace::ray_trace(var_00 gettagorigin("TAG_FX"), var_06 gettagorigin("TAG_FX"), var_00, var_02);
 
-      if(var_7["fraction"] < 0.95)
+      if(var_7["fraction"] < 0.95) {
         continue;
+      }
       else {
         var_3[var_3.size] = var_06;
         var_0.linked_to_targets[var_0.linked_to_targets.size] = var_06;
@@ -945,13 +981,16 @@ kill_fx_on_death(var_00, var_01, var_02, var_03) {
   var_08 = max((var_0.death_time - gettime()) / 1000 - var_07 - 0.2, 0);
   thread play_sfx_on_harpoon_trap(var_00, var_01, var_02);
 
-  if(var_07 > 0 && isDefined(var_00) && isDefined(var_01))
+  if(var_07 > 0 && isDefined(var_00) && isDefined(var_01)) {
     scripts\cp\utility::waittill_any_ents_or_timeout_return(var_07, var_00, "death", var_01, "death", var_02, "death");
-  else if(isDefined(var_00) && isDefined(var_01))
+  }
+  else if(isDefined(var_00) && isDefined(var_01)) {
     scripts\engine\utility::waittill_any_ents(var_00, "death", var_01, "death", var_02, "death");
+  }
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_03 delete();
+  }
 
   playfxbetweenpoints(level._effect["trap_ww_beam_death"], var_05, vectortoangles(var_06 - var_05), var_06);
 }
@@ -969,10 +1008,12 @@ play_sfx_on_harpoon_trap(var_00, var_01, var_02) {
   wait 0.05;
   var_08 playLoopSound("weap_harpoon3_trap_lp");
 
-  if(var_06 > 0 && isDefined(var_00) && isDefined(var_01))
+  if(var_06 > 0 && isDefined(var_00) && isDefined(var_01)) {
     scripts\cp\utility::waittill_any_ents_or_timeout_return(var_06, var_00, "death", var_01, "death", var_02, "death");
-  else if(isDefined(var_00) && isDefined(var_01))
+  }
+  else if(isDefined(var_00) && isDefined(var_01)) {
     scripts\engine\utility::waittill_any_ents(var_00, "death", var_01, "death", var_02, "death");
+  }
 
   wait 1;
   var_08 stoploopsound("weap_harpoon3_trap_lp");
@@ -993,10 +1034,12 @@ damage_enemies_in_trigger(var_00, var_01, var_02, var_03) {
       continue;
     }
     if(var_4.agent_type == "slasher" || var_4.agent_type == "superslasher") {
-      if(scripts\engine\utility::is_true(var_4.got_hit_once))
+      if(scripts\engine\utility::is_true(var_4.got_hit_once)) {
         continue;
-      else
+      }
+      else {
         var_04 thread do_damage_on_slasher_once(var_04, var_03);
+      }
     }
 
     thread run_harpoon_laser_death(var_04, var_03);
@@ -1008,10 +1051,12 @@ do_damage_on_slasher_once(var_00, var_01) {
   level endon("game_ended");
   var_0.got_hit_once = 1;
 
-  if(var_0.agent_type == "superslasher")
+  if(var_0.agent_type == "superslasher") {
     wait 5.0;
-  else
+  }
+  else {
     wait 2.0;
+  }
 
   var_0.got_hit_once = undefined;
 }
@@ -1020,29 +1065,34 @@ run_harpoon_laser_death(var_00, var_01) {
   var_0.atomize_me = 1;
   var_0.not_killed_by_headshot = 1;
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_00 getrandomarmkillstreak(var_0.health, var_0.origin, var_01, var_01, "MOD_UNKNOWN", "iw7_harpoon3_zm");
-  else
+  }
+  else {
     var_00 getrandomarmkillstreak(var_0.health, var_0.origin, undefined, undefined, "MOD_UNKNOWN", "iw7_harpoon3_zm");
+  }
 }
 
 clean_up_trigger_on_death(var_00, var_01, var_02) {
   level endon("game_ended");
   scripts\engine\utility::waittill_any_ents(var_00, "death", var_01, "death");
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_02 delete();
+  }
 }
 
 clean_up_links(var_00, var_01) {
   var_0.linked_to_targets = scripts\engine\utility::array_removeundefined(var_0.linked_to_targets);
 
   foreach(var_03 in var_0.linked_to_targets) {
-    if(isDefined(var_0.linked_fx[var_3.birthtime]))
+    if(isDefined(var_0.linked_fx[var_3.birthtime])) {
       var_0.linked_fx[var_3.birthtime] = undefined;
+    }
 
-    if(!scripts\engine\utility::array_contains(var_01, var_03) && scripts\engine\utility::array_contains(var_0.linked_to_targets, var_03))
+    if(!scripts\engine\utility::array_contains(var_01, var_03) && scripts\engine\utility::array_contains(var_0.linked_to_targets, var_03)) {
       var_0.linked_to_targets = scripts\engine\utility::array_remove(var_0.linked_to_targets, var_03);
+    }
   }
 }
 
@@ -1089,8 +1139,9 @@ monitorlauncherspawnedgrenades() {
     var_00 = waittill_grenade_fire();
 
     if(isDefined(var_0.weapon_name)) {
-      if(glprox_trygetweaponname(var_0.weapon_name) == "stickglprox")
+      if(glprox_trygetweaponname(var_0.weapon_name) == "stickglprox") {
         semtexused(var_00);
+      }
     }
   }
 }
@@ -1143,8 +1194,9 @@ stancerecoilupdate(var_00) {
   var_01 = self getcurrentprimaryweapon();
   var_02 = 0;
 
-  if(isrecoilreducingweapon(var_01))
+  if(isrecoilreducingweapon(var_01)) {
     var_02 = getrecoilreductionvalue();
+  }
 
   if(var_00 == "prone") {
     var_03 = scripts\cp\utility::coop_getweaponclass(var_01);
@@ -1200,32 +1252,39 @@ stancerecoilupdate(var_00) {
     return;
   } else if(var_02 > 0)
     setrecoilscale(0, var_02);
-  else
+  else {
     setrecoilscale();
+  }
 }
 
 setrecoilscale(var_00, var_01) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 0;
+  }
 
-  if(!isDefined(self.recoilscale))
+  if(!isDefined(self.recoilscale)) {
     self.recoilscale = var_00;
-  else
+  }
+  else {
     self.recoilscale = self.recoilscale + var_00;
+  }
 
   if(isDefined(var_01)) {
-    if(isDefined(self.recoilscale) && var_01 < self.recoilscale)
+    if(isDefined(self.recoilscale) && var_01 < self.recoilscale) {
       var_01 = self.recoilscale;
+    }
 
     var_02 = 100 - var_01;
   } else
     var_02 = 100 - self.recoilscale;
 
-  if(var_02 < 0)
+  if(var_02 < 0) {
     var_02 = 0;
+  }
 
-  if(var_02 > 100)
+  if(var_02 > 100) {
     var_02 = 100;
+  }
 
   if(var_02 == 100) {
     self getweaponrankforxp();
@@ -1236,20 +1295,23 @@ setrecoilscale(var_00, var_01) {
 }
 
 isrecoilreducingweapon(var_00) {
-  if(!isDefined(var_00) || var_00 == "none")
+  if(!isDefined(var_00) || var_00 == "none") {
     return 0;
+  }
 
   var_01 = 0;
 
-  if(issubstr(var_00, "kbsscope") || issubstr(var_00, "m8scope_zm") || issubstr(var_00, "cheytacscope"))
+  if(issubstr(var_00, "kbsscope") || issubstr(var_00, "m8scope_zm") || issubstr(var_00, "cheytacscope")) {
     var_01 = 1;
+  }
 
   return var_01;
 }
 
 getrecoilreductionvalue() {
-  if(!isDefined(self.pers["recoilReduceKills"]))
+  if(!isDefined(self.pers["recoilReduceKills"])) {
     self.pers["recoilReduceKills"] = 0;
+  }
 
   return self.pers["recoilReduceKills"] * 40;
 }
@@ -1273,8 +1335,9 @@ slasher_killed_vo(var_00) {
   var_00 endon("death");
   var_00 endon("disconnect");
 
-  if(var_0.vo_prefix == "p5_")
+  if(var_0.vo_prefix == "p5_") {
     level thread scripts\cp\cp_vo::try_to_play_vo("ww_slasher_death_p5", "rave_announcer_vo", "highest", 5, 0, 0, 1);
+  }
 
   wait 5;
   var_00 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_slasher", "zmb_comment_vo", "highest", 20, 0, 0, 1);
@@ -1293,8 +1356,9 @@ watchforweaponchange() {
     }
     var_01 = getweaponbasename(var_00);
 
-    if(isvalidweapon(var_00))
+    if(isvalidweapon(var_00)) {
       self.last_valid_weapon = var_00;
+    }
 
     switch (var_01) {
       case "iw7_axe_zm_pap2":
@@ -1312,16 +1376,21 @@ watchforweaponchange() {
 isvalidweapon(var_00) {
   var_01 = level.additional_laststand_weapon_exclusion;
 
-  if(var_00 == "none")
+  if(var_00 == "none") {
     return 0;
-  else if(scripts\engine\utility::array_contains(var_01, var_00))
+  }
+  else if(scripts\engine\utility::array_contains(var_01, var_00)) {
     return 0;
-  else if(scripts\engine\utility::array_contains(var_01, getweaponbasename(var_00)))
+  }
+  else if(scripts\engine\utility::array_contains(var_01, getweaponbasename(var_00))) {
     return 0;
-  else if(scripts\cp\utility::is_melee_weapon(var_00, 1))
+  }
+  else if(scripts\cp\utility::is_melee_weapon(var_00, 1)) {
     return 0;
-  else
+  }
+  else {
     return 1;
+  }
 }
 
 updatesavedlastweapon() {
@@ -1330,8 +1399,9 @@ updatesavedlastweapon() {
   self endon("faux_spawn");
   var_00 = self.currentweaponatspawn;
 
-  if(isDefined(self.saved_lastweaponhack))
+  if(isDefined(self.saved_lastweaponhack)) {
     var_00 = self.saved_lastweaponhack;
+  }
 
   self.saved_lastweapon = var_00;
 
@@ -1377,14 +1447,16 @@ watchgrenadeusage() {
     if(var_01 != "none") {
       continue;
     }
-    if(isDefined(level.custom_grenade_pullback_func))
+    if(isDefined(level.custom_grenade_pullback_func)) {
       thread[[level.custom_grenade_pullback_func]](self, var_00);
+    }
 
     thread watchoffhandcancel();
     self.throwinggrenade = var_00;
 
-    if(var_00 == "c4_zm")
+    if(var_00 == "c4_zm") {
       thread beginc4tracking();
+    }
 
     begingrenadetracking();
     self.throwinggrenade = undefined;
@@ -1398,8 +1470,9 @@ watchoffhandcancel() {
   self endon("grenade_fire");
   self waittill("offhand_end");
 
-  if(isDefined(self.changingweapon) && self.changingweapon != self getcurrentweapon())
+  if(isDefined(self.changingweapon) && self.changingweapon != self getcurrentweapon()) {
     self.changingweapon = undefined;
+  }
 }
 
 beginc4tracking() {
@@ -1428,8 +1501,9 @@ begingrenadetracking() {
     case "thermobaric_grenade_mp":
     case "frag_grenade_mp":
     case "frag_grenade_zm":
-      if(gettime() - var_00 > 1000)
+      if(gettime() - var_00 > 1000) {
         var_1.iscooked = 1;
+      }
 
       var_01 thread grenade_earthquake();
       var_1.originalowner = self;
@@ -1437,8 +1511,9 @@ begingrenadetracking() {
     case "cluster_grenade_zm":
       var_1.clusterticks = var_1.ticks;
 
-      if(var_1.ticks >= 1)
+      if(var_1.ticks >= 1) {
         var_1.iscooked = 1;
+      }
 
       var_1.originalowner = self;
       var_01 thread clustergrenadeused();
@@ -1530,41 +1605,49 @@ isinvalidzone(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_05)) {
     if(isDefined(level.neil) && isDefined(level.neil.upper_body)) {
-      if(var_05 == level.neil || var_05 == level.neil.upper_body)
+      if(var_05 == level.neil || var_05 == level.neil.upper_body) {
         return 0;
+      }
     }
 
     if(isDefined(level.boat_vehicle)) {
-      if(var_05 == level.boat_vehicle)
+      if(var_05 == level.boat_vehicle) {
         return 0;
+      }
     }
 
-    if(isDefined(var_5.targetname) && var_5.targetname == "beginning_area_balloons")
+    if(isDefined(var_5.targetname) && var_5.targetname == "beginning_area_balloons") {
       return 0;
+    }
   }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_06 = scripts\engine\utility::array_combine(var_06, var_01);
+  }
 
   foreach(var_08 in var_06) {
-    if(ispointinvolume(var_00, var_08))
+    if(ispointinvolume(var_00, var_08)) {
       return 0;
+    }
   }
 
-  if(scripts\engine\utility::is_true(var_04) && !_ispointonnavmesh(var_00))
+  if(scripts\engine\utility::is_true(var_04) && !_ispointonnavmesh(var_00)) {
     return 0;
+  }
 
   if(scripts\engine\utility::is_true(var_03)) {
-    if(_navtrace(var_2.origin, var_00))
+    if(_navtrace(var_2.origin, var_00)) {
       return 0;
+    }
   }
 
   return 1;
 }
 
 placeequipmentfailed(var_00, var_01, var_02, var_03) {
-  if(isplayer(self))
+  if(isplayer(self)) {
     self playlocalsound("scavenger_pack_pickup");
+  }
 
   if(scripts\engine\utility::is_true(var_01)) {
     var_04 = undefined;
@@ -1572,10 +1655,12 @@ placeequipmentfailed(var_00, var_01, var_02, var_03) {
     if(isplayer(self)) {
       self playlocalsound("ww_magicbox_laughter");
 
-      if(isDefined(var_03))
+      if(isDefined(var_03)) {
         var_04 = spawnfxforclient(scripts\engine\utility::getfx("placeEquipmentFailed"), var_02, self, anglesToForward(var_03), anglestoup(var_03));
-      else
+      }
+      else {
         var_04 = spawnfxforclient(scripts\engine\utility::getfx("placeEquipmentFailed"), var_02, self);
+      }
     } else
       var_04 = spawnfx(scripts\engine\utility::getfx("placeEquipmentFailed"), var_02);
 
@@ -1590,8 +1675,9 @@ placeequipmentfailedcleanup(var_00) {
 }
 
 spawnmine(var_00, var_01, var_02, var_03) {
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = (0, randomfloat(360), 0);
+  }
 
   var_04 = level.weaponconfigs[var_02];
   var_05 = spawn("script_model", var_00);
@@ -1606,13 +1692,15 @@ spawnmine(var_00, var_01, var_02, var_03) {
   var_5.killcament setscriptmoverkillcam("explosive");
   var_01 onlethalequipmentplanted(var_05);
 
-  if(isDefined(var_4.mine_beacon))
+  if(isDefined(var_4.mine_beacon)) {
     var_05 thread doblinkinglight("tag_fx", var_4.mine_beacon["friendly"], var_4.mine_beacon["enemy"]);
+  }
 
   var_06 = undefined;
 
-  if(self != level)
+  if(self != level) {
     var_06 = self getlinkedparent();
+  }
 
   var_05 explosivehandlemovers(var_06);
   var_05 thread mineproximitytrigger(var_06);
@@ -1640,19 +1728,22 @@ mineexplodeonnotify() {
   if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = self.owner;
+  }
 
   var_01 = self.config;
   var_02 = var_1.vfxtag;
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = "tag_fx";
+  }
 
   var_03 = self gettagorigin(var_02);
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = self gettagorigin("tag_origin");
+  }
 
   self notify("explode", var_03);
   wait 0.05;
@@ -1662,11 +1753,13 @@ mineexplodeonnotify() {
   }
   self hide();
 
-  if(isDefined(var_1.onexplodefunc))
+  if(isDefined(var_1.onexplodefunc)) {
     self thread[[var_1.onexplodefunc]]();
+  }
 
-  if(isDefined(var_1.onexplodesfx))
+  if(isDefined(var_1.onexplodesfx)) {
     self playSound(var_1.onexplodesfx);
+  }
 
   var_04 = scripts\engine\utility::ter_op(isDefined(var_1.onexplodevfx), var_1.onexplodevfx, level.mine_explode);
   var_05 = scripts\engine\utility::ter_op(isDefined(var_1.minedamagemin), var_1.minedamagemin, level.minedamagemin);
@@ -1685,8 +1778,9 @@ mineproximitytrigger(var_00) {
   var_01 = self.config;
   wait(var_1.armtime);
 
-  if(isDefined(var_1.mine_beacon))
+  if(isDefined(var_1.mine_beacon)) {
     thread doblinkinglight("tag_fx", var_1.mine_beacon["friendly"], var_1.mine_beacon["enemy"]);
+  }
 
   var_02 = spawn("trigger_radius", self.origin, 0, level.minedetectionradius, level.minedetectionheight);
   var_2.owner = self;
@@ -1722,16 +1816,19 @@ mineproximitytrigger(var_00) {
 minedeletetrigger(var_00) {
   scripts\engine\utility::waittill_any("mine_triggered", "mine_destroyed", "mine_selfdestruct", "death");
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 delete();
+  }
 }
 
 doblinkinglight(var_00, var_01, var_02) {
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = scripts\engine\utility::getfx("weap_blink_friend");
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = scripts\engine\utility::getfx("weap_blink_enemy");
+  }
 
   self.blinkinglightfx["friendly"] = var_01;
   self.blinkinglightfx["enemy"] = var_02;
@@ -1747,8 +1844,9 @@ updateblinkinglight(var_00, var_01, var_02) {
   self endon("emp_damage");
   var_03 = ::checkteam;
 
-  if(!level.teambased)
+  if(!level.teambased) {
     var_03 = ::checkplayer;
+  }
 
   var_04 = randomfloatrange(0.05, 0.25);
   wait(var_04);
@@ -1756,10 +1854,12 @@ updateblinkinglight(var_00, var_01, var_02) {
 
   foreach(var_06 in level.players) {
     if(isDefined(var_06)) {
-      if(self.owner[[var_03]](var_06))
+      if(self.owner[[var_03]](var_06)) {
         playfxontagforclients(var_00, self, var_02, var_06);
-      else
+      }
+      else {
         playfxontagforclients(var_01, self, var_02, var_06);
+      }
 
       wait 0.05;
     }
@@ -1860,8 +1960,9 @@ deal_damage(var_00, var_01) {
   var_01 earthquakeforplayer(0.5, 1.5, var_02, 120);
   scripts\engine\utility::waitframe();
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 getrandomarmkillstreak(var_0.health + 100000, var_0.origin, var_01, var_01, "MOD_EXPLOSIVE", "heart_cp");
+  }
 }
 
 watchgasgrenadeexplode() {
@@ -1886,8 +1987,9 @@ ongasgrenadeimpact(var_00, var_01) {
       }
       var_08 = getdamagefromzombietype(var_07);
 
-      if(isalive(var_07))
+      if(isalive(var_07)) {
         var_07 applygaseffect(var_00, var_01, var_02, var_02, int(var_08));
+      }
     }
 
     wait 0.2;
@@ -1898,17 +2000,20 @@ ongasgrenadeimpact(var_00, var_01) {
   var_02 delete();
 
   foreach(var_07 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
-    if(isalive(var_07))
+    if(isalive(var_07)) {
       var_7.flame_damage_time = undefined;
+    }
   }
 }
 
 getdamagefromzombietype(var_00) {
   if(isalive(var_00)) {
-    if(scripts\engine\utility::is_true(var_0.is_suicide_bomber))
+    if(scripts\engine\utility::is_true(var_0.is_suicide_bomber)) {
       return int(min(1000, var_0.maxhealth * 0.25));
-    else
+    }
+    else {
       return int(min(1000, var_0.maxhealth * 0.1));
+    }
   } else
     return 150;
 }
@@ -1935,8 +2040,9 @@ throwingknifeused(var_00, var_01, var_02) {
   var_05 = isDefined(var_04) && var_04 == "tag_flicker";
   var_06 = isDefined(var_04) && var_04 == "tag_weapon";
 
-  if(isDefined(var_03) && (isplayer(var_03) || isagent(var_03)) && var_05)
+  if(isDefined(var_03) && (isplayer(var_03) || isagent(var_03)) && var_05) {
     var_03 notify("shield_hit", var_01);
+  }
 
   if(isDefined(var_03) && (isplayer(var_03) || isagent(var_03)) && !var_06 && !var_05) {
     if(!scripts\cp\powers\coop_phaseshift::areentitiesinphase(var_03, var_01)) {
@@ -1974,8 +2080,9 @@ throwingknifedamagedvictim(var_00, var_01) {
 watchgrenadedeath() {
   self waittill("death");
 
-  if(isDefined(self.knife_trigger))
+  if(isDefined(self.knife_trigger)) {
     self.knife_trigger delete();
+  }
 }
 
 throwingknifeused_trygiveknife(var_00, var_01, var_02) {
@@ -1983,8 +2090,9 @@ throwingknifeused_trygiveknife(var_00, var_01, var_02) {
   var_04 = 2;
   var_05 = undefined;
 
-  if(var_03 >= var_04)
+  if(var_03 >= var_04) {
     var_05 = 0;
+  }
   else {
     var_00 setweaponammoclip(var_02, var_03 + 1);
     var_00 thread hudicontype("throwingknife");
@@ -1997,8 +2105,9 @@ throwingknifeused_trygiveknife(var_00, var_01, var_02) {
 hudicontype(var_00) {
   var_01 = 0;
 
-  if(isDefined(level.damagefeedbacknosound) && level.damagefeedbacknosound)
+  if(isDefined(level.damagefeedbacknosound) && level.damagefeedbacknosound) {
     var_01 = 1;
+  }
 
   if(!isplayer(self)) {
     return;
@@ -2006,27 +2115,33 @@ hudicontype(var_00) {
   switch (var_00) {
     case "scavenger":
     case "throwingknife":
-      if(!var_01)
+      if(!var_01) {
         self playlocalsound("scavenger_pack_pickup");
+      }
 
-      if(!level.hardcoremode)
+      if(!level.hardcoremode) {
         self setclientomnvar("damage_feedback_other", var_00);
+      }
 
       break;
     case "boxofguns":
-      if(!var_01)
+      if(!var_01) {
         self playlocalsound("mp_box_guns_ammo");
+      }
 
-      if(!level.hardcoremode)
+      if(!level.hardcoremode) {
         self setclientomnvar("damage_feedback_other", var_00);
+      }
 
       break;
     case "oracle":
-      if(!var_01)
+      if(!var_01) {
         self playlocalsound("oracle_radar_pulse_plr");
+      }
 
-      if(!level.hardcoremode)
+      if(!level.hardcoremode) {
         self setclientomnvar("damage_feedback_other", var_00);
+      }
 
       break;
   }
@@ -2039,8 +2154,9 @@ throwingknifeteleport(var_00, var_01, var_02, var_03) {
   thread throwingknifeteleport_fxstartburst(var_02, var_01);
   var_04 = var_01 _meth_8113();
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     var_04 setcontents(0);
+  }
 
   var_05 = [];
 
@@ -2096,8 +2212,9 @@ throwingknifeteleport_fxstartburst(var_00, var_01) {
     var_10 hidefromplayer(var_00);
     scripts\engine\utility::waitframe();
 
-    foreach(var_12 in level.players)
+    foreach(var_12 in level.players) {
     var_10 hidefromplayer(var_12);
+    }
 
     playFXOnTag(scripts\engine\utility::getfx("vfx_tele_start_friendly"), var_10, "tag_origin");
     wait 3.0;
@@ -2157,8 +2274,9 @@ stunenemiesinrange(var_00, var_01) {
   var_03 = scripts\engine\utility::get_array_of_closest(var_00, var_02, undefined, 24, 256);
 
   foreach(var_05 in var_03) {
-    if(!var_05 scripts\cp\utility::agentisfnfimmune())
+    if(!var_05 scripts\cp\utility::agentisfnfimmune()) {
       var_05 thread fx_stun_damage(var_05, var_01);
+    }
   }
 }
 
@@ -2220,8 +2338,9 @@ minethrown(var_00, var_01, var_02, var_03) {
   }
   if(var_01 != "trip_mine_mp") {
     if(isDefined(var_04) && isDefined(var_4.owner)) {
-      if(isDefined(var_03))
+      if(isDefined(var_03)) {
         self.owner[[var_03]](self);
+      }
 
       self delete();
       return;
@@ -2285,26 +2404,31 @@ minedamagemonitor() {
 
   self notify("mine_destroyed");
 
-  if(isDefined(var_04) && (issubstr(var_04, "MOD_GRENADE") || issubstr(var_04, "MOD_EXPLOSIVE")))
+  if(isDefined(var_04) && (issubstr(var_04, "MOD_GRENADE") || issubstr(var_04, "MOD_EXPLOSIVE"))) {
     self.waschained = 1;
+  }
 
-  if(isDefined(var_08) && var_08 &level.idflags_penetration)
+  if(isDefined(var_08) && var_08 &level.idflags_penetration) {
     self.wasdamagedfrombulletpenetration = 1;
+  }
 
   self.wasdamaged = 1;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     self.damagedby = var_00;
+  }
 
-  if(isplayer(var_00))
+  if(isplayer(var_00)) {
     var_00 scripts\cp\cp_damage::updatedamagefeedback("bouncing_betty");
+  }
 
   self notify("detonateExplosive", var_00);
 }
 
 is_hive_explosion(var_00, var_01) {
-  if(!isDefined(var_00) || !isDefined(var_0.classname))
+  if(!isDefined(var_00) || !isDefined(var_0.classname)) {
     return 0;
+  }
 
   return var_0.classname == "scriptable" && var_01 == "MOD_EXPLOSIVE";
 }
@@ -2330,8 +2454,9 @@ claymoreused(var_00) {
   var_03 = var_03 + 600;
   var_05 = var_00 getlinkedparent();
 
-  if(isDefined(var_05))
+  if(isDefined(var_05)) {
     var_00 unlink();
+  }
 
   if(var_03 < var_04) {
     if(var_01 * var_01 < distancesquared(var_0.origin, self.origin)) {
@@ -2393,12 +2518,14 @@ claymoredetonation(var_00) {
         if(var_02 == self.owner) {
           continue;
         }
-        if(isDefined(var_2.owner) && var_2.owner == self.owner)
+        if(isDefined(var_2.owner) && var_2.owner == self.owner) {
           continue;
+        }
       }
 
-      if(!scripts\cp\cp_damage::friendlyfirecheck(self.owner, var_02, 0))
+      if(!scripts\cp\cp_damage::friendlyfirecheck(self.owner, var_02, 0)) {
         continue;
+      }
     }
 
     if(lengthsquared(var_02 getentityvelocity()) < 10) {
@@ -2432,16 +2559,18 @@ explosivetrigger(var_00, var_01, var_02) {
 }
 
 shouldaffectclaymore(var_00) {
-  if(isDefined(var_0.disabled))
+  if(isDefined(var_0.disabled)) {
     return 0;
+  }
 
   var_01 = self.origin + (0, 0, 32);
   var_02 = var_01 - var_0.origin;
   var_03 = anglesToForward(var_0.angles);
   var_04 = vectordot(var_02, var_03);
 
-  if(var_04 < level.claymoredetectionmindist)
+  if(var_04 < level.claymoredetectionmindist) {
     return 0;
+  }
 
   var_02 = vectornormalize(var_02);
   var_05 = vectordot(var_02, var_03);
@@ -2453,8 +2582,9 @@ deleteondeath(var_00) {
   wait 0.05;
 
   if(isDefined(var_00)) {
-    if(isDefined(var_0.trigger))
+    if(isDefined(var_0.trigger)) {
       var_0.trigger delete();
+    }
 
     var_00 delete();
   }
@@ -2486,8 +2616,9 @@ makeexplosiveunusable() {
 makeexplosivetargetablebyai(var_00) {
   scripts\cp\utility::make_entity_sentient_cp(self.owner.team);
 
-  if(!isDefined(var_00) || !var_00)
+  if(!isDefined(var_00) || !var_00) {
     self makeentitynomeleetarget();
+  }
 }
 
 watchsmokeexplode() {
@@ -2521,8 +2652,9 @@ watchsmokeexplode() {
       }
       var_08 = distance2dsquared(var_01, var_7.origin);
 
-      if(var_08 < 90000)
+      if(var_08 < 90000) {
         var_07 thread target_smoke(var_04, 22500);
+      }
     }
 
     foreach(var_11 in level.players) {
@@ -2557,8 +2689,9 @@ target_smoke(var_00, var_01) {
   self.smoked = 1;
   level waittill("smokeTimesUp");
 
-  if(!scripts\cp\cp_agent_utils::is_agent_scripted(self))
+  if(!scripts\cp\cp_agent_utils::is_agent_scripted(self)) {
     self botclearscriptenemy();
+  }
 
   scripts\cp\cp_agent_utils::agent_go_to_pos(self.origin, 8, "hunt");
   self.smoked = undefined;
@@ -2645,10 +2778,12 @@ onlethalequipmentplanted(var_00, var_01, var_02) {
     self.plantedlethalequip = scripts\engine\utility::array_removeundefined(self.plantedlethalequip);
 
     if(self.plantedlethalequip.size >= level.maxperplayerexplosives) {
-      if(scripts\engine\utility::is_true(var_02))
+      if(scripts\engine\utility::is_true(var_02)) {
         self.plantedlethalequip[0] notify("detonateExplosive");
-      else
+      }
+      else {
         self.plantedlethalequip[0] deleteexplosive();
+      }
     }
   }
 
@@ -2692,8 +2827,9 @@ watchc4altdetonate(var_00) {
       if(!self.plantedlethalequip.size) {
         return;
       }
-      if(!scripts\cp\powers\coop_phaseshift::isentityphaseshifted(self))
+      if(!scripts\cp\powers\coop_phaseshift::isentityphaseshifted(self)) {
         self notify("alt_detonate");
+      }
     }
 
     wait 0.05;
@@ -2710,8 +2846,9 @@ watchc4altdetonation() {
     self waittill("alt_detonate");
     var_00 = self getcurrentweapon();
 
-    if(var_00 != "c4_zm")
+    if(var_00 != "c4_zm") {
       c4detonateallcharges();
+    }
   }
 }
 
@@ -2760,13 +2897,15 @@ clustergrenadeused() {
   thread ownerdisconnectcleanup(var_00);
   var_01 = [];
 
-  for(var_02 = 0; var_02 < 4; var_2++)
+  for(var_02 = 0; var_02 < 4; var_2++) {
     var_1[var_02] = 0.2;
+  }
 
   var_03 = 0;
 
-  foreach(var_05 in var_01)
+  foreach(var_05 in var_01) {
   var_03 = var_03 + var_05;
+  }
 
   var_07 = spawn("script_model", self.origin);
   var_07 linkto(self);
@@ -2793,8 +2932,9 @@ clustergrenadeexplode(var_00, var_01, var_02, var_03) {
   var_07 = var_06 + (0, 0, -5);
   var_08 = physics_raycast(var_06, var_07, var_04, undefined, 0, "physicsquery_closest");
 
-  if(isDefined(var_08) && var_8.size > 0)
+  if(isDefined(var_08) && var_8.size > 0) {
     var_05 = 1;
+  }
 
   var_09 = scripts\engine\utility::ter_op(var_05, (0, 0, 32), (0, 0, 2));
   var_10 = var_00 + var_09;
@@ -2817,8 +2957,9 @@ clustergrenadeexplode(var_00, var_01, var_02, var_03) {
     var_07 = var_10 + var_21;
     var_08 = physics_raycast(var_06, var_07, var_04, undefined, 0, "physicsquery_closest");
 
-    if(isDefined(var_08) && var_8.size > 0)
+    if(isDefined(var_08) && var_8.size > 0) {
       var_07 = var_8[0]["position"];
+    }
 
     playFX(scripts\engine\utility::getfx("clusterGrenade_explode"), var_07);
 
@@ -2874,10 +3015,12 @@ remove_attachment(var_00, var_01, var_02) {
   var_04 = undefined;
   var_05 = undefined;
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_3[var_3.size] = var_02;
-  else
+  }
+  else {
     var_03 = var_01 getweaponslistall();
+  }
 
   foreach(var_07 in var_03) {
     if(var_01 has_attachment(var_07, var_00)) {
@@ -2893,8 +3036,9 @@ remove_attachment(var_00, var_01, var_02) {
         }
       }
 
-      if(isDefined(level.build_weapon_name_func))
+      if(isDefined(level.build_weapon_name_func)) {
         var_05 = var_01[[level.build_weapon_name_func]](var_09, undefined, var_10);
+      }
 
       if(isDefined(var_05)) {
         var_03 = self getweaponslistprimaries();
@@ -2923,11 +3067,13 @@ has_attachment(var_00, var_01) {
   var_02 = strtok(var_00, "+");
 
   for(var_03 = 0; var_03 < var_2.size; var_3++) {
-    if(var_2[var_03] == var_01)
+    if(var_2[var_03] == var_01) {
       return 1;
+    }
 
-    if(issubstr(var_2[var_03], var_01))
+    if(issubstr(var_2[var_03], var_01)) {
       return 1;
+    }
   }
 
   return 0;
@@ -2941,8 +3087,9 @@ getattachmentlist() {
     var_04 = 0;
 
     for(var_05 = tablelookup(var_03, 0, var_04, 5); var_05 != ""; var_05 = tablelookup(var_03, 0, var_04, 5)) {
-      if(!scripts\engine\utility::array_contains(var_00, var_05))
+      if(!scripts\engine\utility::array_contains(var_00, var_05)) {
         var_0[var_0.size] = var_05;
+      }
 
       var_4++;
     }
@@ -2956,8 +3103,9 @@ getarkattachmentlist() {
   var_01 = 0;
 
   for(var_02 = tablelookup("cp\zombies\zombie_attachmenttable.csv", 0, var_01, 5); var_02 != ""; var_02 = tablelookup("cp\zombies\zombie_attachmenttable.csv", 0, var_01, 5)) {
-    if(!scripts\engine\utility::array_contains(var_00, var_02))
+    if(!scripts\engine\utility::array_contains(var_00, var_02)) {
       var_0[var_0.size] = var_02;
+    }
 
     var_1++;
   }
@@ -2972,8 +3120,9 @@ has_weapon_variation(var_00) {
     var_04 = scripts\cp\utility::getrawbaseweaponname(var_00);
     var_05 = scripts\cp\utility::getrawbaseweaponname(var_03);
 
-    if(var_04 == var_05)
+    if(var_04 == var_05) {
       return 1;
+    }
   }
 
   return 0;
@@ -2987,8 +3136,9 @@ create_attachment_variant_list(var_00, var_01, var_02) {
     var_05 = tablelookup(var_01, 4, var_04, 5);
 
     if(var_02 == "zombie") {
-      if(!isDefined(var_05) || var_05 == "")
+      if(!isDefined(var_05) || var_05 == "") {
         var_05 = tablelookup("cp\zombies\zombie_attachmenttable.csv", 4, var_04, 5);
+      }
     }
 
     if(var_04 == var_05) {
@@ -3020,8 +3170,9 @@ buildattachmentmaps() {
     foreach(var_06 in var_04) {
       var_07 = tablelookup(var_03, 4, var_06, 5);
 
-      if(var_06 != var_07)
+      if(var_06 != var_07) {
         level.attachmentmap_uniquetobase[var_06] = var_07;
+      }
 
       var_08 = tablelookup(var_03, 4, var_06, 13);
 
@@ -3055,8 +3206,9 @@ buildattachmentmaps() {
           if(var_21 == "") {
             continue;
           }
-          if(!isDefined(level.attachmentmap_basetounique[var_14]))
+          if(!isDefined(level.attachmentmap_basetounique[var_14])) {
             level.attachmentmap_basetounique[var_14] = [];
+          }
 
           level.attachmentmap_basetounique[var_14][var_22] = var_21;
         }
@@ -3082,8 +3234,9 @@ buildattachmentmaps() {
             var_33 = scripts\engine\utility::alphabetize([var_29, var_31]);
             var_34 = var_33[0] + "_" + var_33[1];
 
-            if(var_32 == "no" && !isDefined(level.attachmentmap_conflicts[var_34]))
+            if(var_32 == "no" && !isDefined(level.attachmentmap_conflicts[var_34])) {
               level.attachmentmap_conflicts[var_34] = 1;
+            }
           }
 
           var_30++;
@@ -3104,8 +3257,9 @@ create_zombie_base_to_unique_map(var_00, var_01, var_02, var_03) {
         if(var_08 == "") {
           continue;
         }
-        if(!isDefined(level.attachmentmap_basetounique[var_05]))
+        if(!isDefined(level.attachmentmap_basetounique[var_05])) {
           level.attachmentmap_basetounique[var_05] = [];
+        }
 
         if(var_08 == "none") {
           level.attachmentmap_basetounique[var_05][var_09] = undefined;
@@ -3138,10 +3292,12 @@ grenade_earthquake(var_00) {
   self endon("end_explode");
   var_01 = undefined;
 
-  if(!isDefined(var_00) || var_00)
+  if(!isDefined(var_00) || var_00) {
     self waittill("explode", var_01);
-  else
+  }
+  else {
     var_01 = self.origin;
+  }
 
   playrumbleonentity("grenade_rumble", var_01);
   earthquake(0.5, 0.75, var_01, 800);
@@ -3153,8 +3309,9 @@ grenade_earthquake(var_00) {
     if(distancesquared(var_01, var_3.origin) > 360000) {
       continue;
     }
-    if(var_03 damageconetrace(var_01))
+    if(var_03 damageconetrace(var_01)) {
       var_03 thread dirteffect(var_01);
+    }
 
     var_03 setclientomnvar("ui_hud_shake", 1);
   }
@@ -3174,8 +3331,9 @@ c4_earthquake() {
     if(distance(var_00, var_2.origin) > 512) {
       continue;
     }
-    if(var_02 damageconetrace(var_00))
+    if(var_02 damageconetrace(var_00)) {
       var_02 thread dirteffect(var_00);
+    }
 
     var_02 setclientomnvar("ui_hud_shake", 1);
   }
@@ -3202,13 +3360,16 @@ dirteffect(var_00) {
   var_05 = vectordot(var_03, var_02);
   var_06 = ["death", "damage"];
 
-  if(var_04 > 0 && var_04 > 0.5 && self getcurrentweapon() != "iw6_riotshield_mp")
+  if(var_04 > 0 && var_04 > 0.5 && self getcurrentweapon() != "iw6_riotshield_mp") {
     scripts\engine\utility::waittill_any_in_array_or_timeout(var_06, 2.0);
+  }
   else if(abs(var_04) < 0.866) {
-    if(var_05 > 0)
+    if(var_05 > 0) {
       scripts\engine\utility::waittill_any_in_array_or_timeout(var_06, 2.0);
-    else
+    }
+    else {
       scripts\engine\utility::waittill_any_in_array_or_timeout(var_06, 2.0);
+    }
   }
 }
 
@@ -3218,10 +3379,12 @@ shellshockondamage(var_00, var_01) {
   }
   if(var_00 == "MOD_EXPLOSIVE" || var_00 == "MOD_GRENADE" || var_00 == "MOD_GRENADE_SPLASH" || var_00 == "MOD_PROJECTILE" || var_00 == "MOD_PROJECTILE_SPLASH") {
     if(var_01 > 10) {
-      if(isDefined(self.shellshockreduction) && self.shellshockreduction)
+      if(isDefined(self.shellshockreduction) && self.shellshockreduction) {
         self shellshock("frag_grenade_mp", self.shellshockreduction);
-      else
+      }
+      else {
         self shellshock("frag_grenade_mp", 0.5);
+      }
     }
   }
 }
@@ -3238,17 +3401,21 @@ waittill_grenade_fire() {
       continue;
     }
     if(isDefined(var_00)) {
-      if(!isDefined(var_0.weapon_name))
+      if(!isDefined(var_0.weapon_name)) {
         var_0.weapon_name = var_01;
+      }
 
-      if(!isDefined(var_0.owner))
+      if(!isDefined(var_0.owner)) {
         var_0.owner = self;
+      }
 
-      if(!isDefined(var_0.team))
+      if(!isDefined(var_0.team)) {
         var_0.team = self.team;
+      }
 
-      if(!isDefined(var_0.ticks) && isDefined(self.throwinggrenade))
+      if(!isDefined(var_0.ticks) && isDefined(self.throwinggrenade)) {
         var_0.ticks = scripts\cp\utility::roundup(4 * var_02);
+      }
     }
 
     if(!scripts\cp\utility::isreallyalive(self) && !isDefined(self.throwndyinggrenade)) {
@@ -3261,26 +3428,31 @@ waittill_grenade_fire() {
 }
 
 can_use_attachment(var_00, var_01) {
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_02 = var_01;
-  else
+  }
+  else {
     var_02 = self getcurrentweapon();
+  }
 
   var_03 = getweaponbasename(var_02);
   var_04 = scripts\cp\utility::coop_getweaponclass(var_03);
   var_05 = get_possible_attachments_by_weaponclass(var_04, var_03, var_00);
 
-  if(!var_05)
+  if(!var_05) {
     return 0;
+  }
 
   return 1;
 }
 
 add_attachment_to_weapon(var_00, var_01, var_02, var_03) {
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_04 = var_01;
-  else
+  }
+  else {
     var_04 = scripts\cp\utility::getvalidtakeweapon();
+  }
 
   var_05 = getweaponbasename(var_04);
   var_06 = 0;
@@ -3288,35 +3460,41 @@ add_attachment_to_weapon(var_00, var_01, var_02, var_03) {
   var_08 = scripts\cp\utility::getcurrentcamoname(var_04);
   var_09 = return_weapon_name_with_like_attachments(var_04, var_00, var_07, undefined, var_08);
 
-  if(!isDefined(var_09) || isDefined(var_09) && var_09 == "none")
+  if(!isDefined(var_09) || isDefined(var_09) && var_09 == "none") {
     return 0;
+  }
 
   var_10 = scripts\cp\utility::isaltmodeweapon(var_01);
 
-  if(scripts\cp\utility::weaponhasattachment(var_09, "xmags"))
+  if(scripts\cp\utility::weaponhasattachment(var_09, "xmags")) {
     var_06 = 1;
+  }
 
   if(isDefined(var_00)) {
     if(!issubstr(var_00, "pap")) {
       var_11 = self getweaponammoclip(var_04);
       var_12 = self getweaponammostock(var_04);
 
-      if(issubstr(var_09, "akimbo"))
+      if(issubstr(var_09, "akimbo")) {
         var_13 = self getweaponammoclip(var_04, "left");
-      else
+      }
+      else {
         var_13 = undefined;
+      }
 
       self giveuponsuppressiontime(var_04);
       scripts\cp\utility::_giveweapon(var_09, undefined, undefined, 1);
 
-      if(scripts\cp\utility::weaponhasattachment(var_09, "xmags") && !var_06)
+      if(scripts\cp\utility::weaponhasattachment(var_09, "xmags") && !var_06) {
         var_11 = weaponclipsize(var_09);
+      }
 
       self setweaponammoclip(var_09, var_11);
       self setweaponammostock(var_09, var_12);
 
-      if(isDefined(var_13))
+      if(isDefined(var_13)) {
         self setweaponammoclip(var_09, var_13, "left");
+      }
     } else {
       if(issubstr(var_09, "katana") || issubstr(var_09, "nunchucks")) {}
 
@@ -3342,29 +3520,35 @@ add_attachment_to_weapon(var_00, var_01, var_02, var_03) {
     }
   }
 
-  if(scripts\engine\utility::is_true(var_03))
+  if(scripts\engine\utility::is_true(var_03)) {
     return 1;
+  }
 
-  if(scripts\engine\utility::is_true(var_02))
+  if(scripts\engine\utility::is_true(var_02)) {
     self switchtoweaponimmediate(var_09);
-  else
+  }
+  else {
     self switchtoweapon(var_09);
+  }
 
   return 1;
 }
 
 isforgefreezeweapon(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
   var_01 = getweaponbasename(var_00);
 
   if(isDefined(var_01)) {
     if(var_01 == "iw7_forgefreeze_zm" || var_01 == "iw7_forgefreeze_zm_pap1" || var_01 == "iw7_forgefreeze_zm_pap2" || var_01 == "zfreeze_semtex_mp") {
-      if(scripts\cp\utility::isaltmodeweapon(var_00))
+      if(scripts\cp\utility::isaltmodeweapon(var_00)) {
         return 0;
-      else
+      }
+      else {
         return 1;
+      }
     }
   }
 
@@ -3372,17 +3556,20 @@ isforgefreezeweapon(var_00) {
 }
 
 isaltforgefreezeweapon(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
   var_01 = getweaponbasename(var_00);
 
   if(isDefined(var_01)) {
     if(var_01 == "iw7_forgefreeze_zm" || var_01 == "iw7_forgefreeze_zm_pap1" || var_01 == "iw7_forgefreeze_zm_pap2" || var_01 == "zfreeze_semtex_mp") {
-      if(scripts\cp\utility::isaltmodeweapon(var_00))
+      if(scripts\cp\utility::isaltmodeweapon(var_00)) {
         return 1;
-      else
+      }
+      else {
         return 0;
+      }
     }
   }
 
@@ -3392,41 +3579,49 @@ isaltforgefreezeweapon(var_00) {
 issteeldragon(var_00) {
   var_01 = getweaponbasename(var_00);
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return 0;
+  }
 
   return var_01 == "iw7_steeldragon_zm";
 }
 
 is_perk_attachment(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
-  if(var_00 == "doubletap")
+  if(var_00 == "doubletap") {
     return 1;
+  }
 
   return 0;
 }
 
 is_arcane_attachment(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
-  if(issubstr(var_00, "ark"))
+  if(issubstr(var_00, "ark")) {
     return 1;
+  }
 
-  if(issubstr(var_00, "arcane"))
+  if(issubstr(var_00, "arcane")) {
     return 1;
+  }
 
   return 0;
 }
 
 is_mod_attachment(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
-  if(issubstr(var_00, "mod"))
+  if(issubstr(var_00, "mod")) {
     return 1;
+  }
 
   return 0;
 }
@@ -3434,55 +3629,66 @@ is_mod_attachment(var_00) {
 is_default_attachment(var_00, var_01) {
   var_02 = scripts\cp\utility::weaponattachdefaultmap(var_01);
 
-  if(!isDefined(var_02) || var_2.size < 1)
+  if(!isDefined(var_02) || var_2.size < 1) {
     return 0;
+  }
 
   foreach(var_04 in var_02) {
-    if(var_00 == var_04)
+    if(var_00 == var_04) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 is_pap_attachment(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
-  if(issubstr(var_00, "pap"))
+  if(issubstr(var_00, "pap")) {
     return 1;
+  }
 
   return 0;
 }
 
 get_possible_attachments_by_weaponclass(var_00, var_01, var_02) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return 0;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     return 0;
+  }
 
   var_03 = [];
   var_04 = scripts\cp\utility::getbaseweaponname(var_01);
 
   if(isDefined(level.attachmentmap_basetounique[var_04])) {
     if(isDefined(level.attachmentmap_basetounique[var_04][var_02])) {
-      if(level.attachmentmap_basetounique[var_04][var_02] != "none")
+      if(level.attachmentmap_basetounique[var_04][var_02] != "none") {
         return 1;
-      else
+      }
+      else {
         return 0;
+      }
     }
   }
 
   if(isDefined(level.attachmentmap_basetounique[var_00])) {
     if(isDefined(level.attachmentmap_basetounique[var_00][var_02])) {
-      if(level.attachmentmap_basetounique[var_00][var_02] != "none")
+      if(level.attachmentmap_basetounique[var_00][var_02] != "none") {
         return 1;
-      else
+      }
+      else {
         return 0;
+      }
     }
   }
 
@@ -3491,10 +3697,12 @@ get_possible_attachments_by_weaponclass(var_00, var_01, var_02) {
 
     foreach(var_07 in var_05) {
       if(level.attachmentmap_basetounique[var_04][var_07] == var_02) {
-        if(level.attachmentmap_basetounique[var_04][var_07] != "none")
+        if(level.attachmentmap_basetounique[var_04][var_07] != "none") {
           return 1;
-        else
+        }
+        else {
           return 0;
+        }
       }
     }
   }
@@ -3504,10 +3712,12 @@ get_possible_attachments_by_weaponclass(var_00, var_01, var_02) {
 
     foreach(var_07 in var_05) {
       if(level.attachmentmap_basetounique[var_00][var_07] == var_02) {
-        if(level.attachmentmap_basetounique[var_00][var_07] != "none")
+        if(level.attachmentmap_basetounique[var_00][var_07] != "none") {
           return 1;
-        else
+        }
+        else {
           return 0;
+        }
       }
     }
   }
@@ -3516,10 +3726,12 @@ get_possible_attachments_by_weaponclass(var_00, var_01, var_02) {
 }
 
 return_weapon_name_with_like_attachments(var_00, var_01, var_02, var_03, var_04) {
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_05 = var_00;
-  else
+  }
+  else {
     var_05 = self getcurrentweapon();
+  }
 
   var_06 = getweaponbasename(var_05);
   var_07 = scripts\cp\utility::get_weapon_variant_id(self, var_05);
@@ -3544,32 +3756,37 @@ return_weapon_name_with_like_attachments(var_00, var_01, var_02, var_03, var_04)
   var_26 = 15;
   var_27 = scripts\cp\utility::coop_getweaponclass(var_06);
 
-  if(scripts\cp\utility::weaponhasattachment(var_05, "xmags"))
+  if(scripts\cp\utility::weaponhasattachment(var_05, "xmags")) {
     var_09 = 1;
+  }
 
   var_28 = get_possible_attachments_by_weaponclass(var_27, var_06, var_01);
 
   if(!var_28 && isDefined(var_01)) {
-    if(!scripts\engine\utility::is_true(var_03))
+    if(!scripts\engine\utility::is_true(var_03)) {
       scripts\cp\utility::setlowermessage("cant_attach", &"COOP_PILLAGE_CANT_USE", 3);
+    }
 
     return undefined;
   }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = getweaponattachments(var_05);
+  }
 
   if(scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat")) {
-    if(get_possible_attachments_by_weaponclass(var_27, var_06, "doubletap"))
+    if(get_possible_attachments_by_weaponclass(var_27, var_06, "doubletap")) {
       var_2[var_2.size] = "doubletap";
+    }
   }
 
   if(isDefined(var_01)) {
     if(weaponclass(var_00) == "spread") {
       if(issubstr(var_01, "arkyellow")) {
         foreach(var_30 in var_02) {
-          if(issubstr(var_30, "smart"))
+          if(issubstr(var_30, "smart")) {
             var_02 = scripts\engine\utility::array_remove(var_02, var_30);
+          }
         }
       }
     }
@@ -3722,8 +3939,9 @@ return_weapon_name_with_like_attachments(var_00, var_01, var_02, var_03, var_04)
             }
           }
 
-          if(!var_08)
+          if(!var_08) {
             return undefined;
+          }
         }
       } else if(is_perk_attachment(var_01)) {
         var_17[var_17.size] = var_01;
@@ -3758,10 +3976,12 @@ return_weapon_name_with_like_attachments(var_00, var_01, var_02, var_03, var_04)
   var_40 = scripts\cp\utility::getweaponrootname(var_06);
   var_41 = isDefined(self.weapon_build_models[scripts\cp\utility::getrawbaseweaponname(var_05)]);
 
-  if(!isDefined(var_04) && var_41)
+  if(!isDefined(var_04) && var_41) {
     var_10 = scripts\cp\utility::getweaponcamo(var_40);
-  else
+  }
+  else {
     var_10 = var_04;
+  }
 
   if(var_41) {
     var_42 = 0;
@@ -3774,8 +3994,9 @@ return_weapon_name_with_like_attachments(var_00, var_01, var_02, var_03, var_04)
       }
     }
 
-    if(!var_42)
+    if(!var_42) {
       var_12 = scripts\cp\utility::getweaponcosmeticattachment(var_40);
+    }
 
     var_11 = scripts\cp\utility::getweaponreticle(var_40);
     var_45 = scripts\cp\utility::getweaponpaintjobid(var_40);
@@ -3791,8 +4012,9 @@ return_weapon_name_with_like_attachments(var_00, var_01, var_02, var_03, var_04)
         if(var_30 == var_48) {
           continue;
         }
-        if(issubstr(var_48, "cos_"))
+        if(issubstr(var_48, "cos_")) {
           var_25 = scripts\engine\utility::array_remove(var_25, var_48);
+        }
       }
 
       var_12 = undefined;
@@ -3801,10 +4023,12 @@ return_weapon_name_with_like_attachments(var_00, var_01, var_02, var_03, var_04)
 
   var_51 = scripts\cp\utility::mpbuildweaponname(var_40, var_25, var_10, var_11, var_07, self getentitynumber(), self.clientid, var_45, var_12);
 
-  if(isDefined(var_51))
+  if(isDefined(var_51)) {
     return var_51;
-  else
+  }
+  else {
     return var_05;
+  }
 }
 
 getattachmenttypeslist(var_00, var_01) {
@@ -3817,8 +4041,9 @@ getattachmenttypeslist(var_00, var_01) {
     if(isDefined(var_01) && scripts\cp\utility::listhasattachment(var_01, var_05)) {
       continue;
     }
-    if(!isDefined(var_3[var_06]))
+    if(!isDefined(var_3[var_06])) {
       var_3[var_06] = [];
+    }
 
     var_07 = var_3[var_06];
     var_7[var_7.size] = var_05;
@@ -3838,8 +4063,9 @@ getattachmentlistbasenames() {
     for(var_05 = tablelookup(var_03, 0, var_04, 5); var_05 != ""; var_05 = tablelookup(var_03, 0, var_04, 5)) {
       var_06 = tablelookup(var_03, 0, var_04, 2);
 
-      if(var_06 != "none" && !scripts\engine\utility::array_contains(var_00, var_05))
+      if(var_06 != "none" && !scripts\engine\utility::array_contains(var_00, var_05)) {
         var_0[var_0.size] = var_05;
+      }
 
       var_4++;
     }
@@ -3853,11 +4079,13 @@ getweaponattachmentarray(var_00) {
   var_02 = scripts\cp\utility::getbaseweaponname(var_00);
   var_03 = scripts\cp\utility::coop_getweaponclass(var_00);
 
-  if(isDefined(level.attachmentmap_basetounique[var_02]))
+  if(isDefined(level.attachmentmap_basetounique[var_02])) {
     var_01 = scripts\engine\utility::array_combine(var_01, level.attachmentmap_basetounique[var_02]);
+  }
 
-  if(isDefined(level.attachmentmap_basetounique[var_03]))
+  if(isDefined(level.attachmentmap_basetounique[var_03])) {
     var_01 = scripts\engine\utility::array_combine(var_01, level.attachmentmap_basetounique[var_03]);
+  }
 
   return var_01;
 }
@@ -3866,12 +4094,14 @@ isvalidzombieweapon(var_00) {
   if(!isDefined(level.weaponrefs)) {
     level.weaponrefs = [];
 
-    foreach(var_02 in level.weaponlist)
+    foreach(var_02 in level.weaponlist) {
     level.weaponrefs[var_02] = 1;
+    }
   }
 
-  if(isDefined(level.weaponrefs[var_00]))
+  if(isDefined(level.weaponrefs[var_00])) {
     return 1;
+  }
 
   return 0;
 }
@@ -3963,8 +4193,9 @@ setweaponlaser_onweaponswitchstart(var_00) {
 }
 
 enableweaponlaser() {
-  if(!isDefined(self.weaponlasercalls))
+  if(!isDefined(self.weaponlasercalls)) {
     self.weaponlasercalls = 0;
+  }
 
   self.weaponlasercalls++;
   self laseron();
@@ -3985,10 +4216,12 @@ ondetonateexplosive(var_00) {
   thread cleanupexplosivesondeath();
   self waittill("detonateExplosive");
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     self.owner notify(var_00, 1);
-  else
+  }
+  else {
     self.owner notify("powers_c4_used", 1);
+  }
 
   self detonate(self.owner);
 }
@@ -4006,75 +4239,93 @@ cleanupexplosivesondeath() {
 
 cleanupequipment(var_00, var_01, var_02, var_03) {
   if(isDefined(self.weapon_name)) {
-    if(self.weapon_name == "c4_zm")
+    if(self.weapon_name == "c4_zm") {
       self.owner notify("c4_update", 0);
-    else if(self.weapon_name == "bouncingbetty_mp")
+    }
+    else if(self.weapon_name == "bouncingbetty_mp") {
       self.owner notify("bouncing_betty_update", 0);
-    else if(self.weapon_name == "sticky_mine_mp")
+    }
+    else if(self.weapon_name == "sticky_mine_mp") {
       self.owner notify("sticky_mine_update", 0);
-    else if(self.weapon_name == "trip_mine_mp")
+    }
+    else if(self.weapon_name == "trip_mine_mp") {
       self.owner notify("trip_mine_update", 0);
-    else if(self.weapon_name == "cryo_grenade_mp")
+    }
+    else if(self.weapon_name == "cryo_grenade_mp") {
       self.owner notify("restart_cryo_grenade_cooldown", 0);
+    }
   }
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     level.mines[var_00] = undefined;
+  }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_01 delete();
+  }
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_02 delete();
+  }
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_03 delete();
+  }
 }
 
 monitordamage(var_00, var_01, var_02, var_03, var_04, var_05) {
   self endon("death");
   level endon("game_ended");
 
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     var_05 = 0;
+  }
 
   self setCanDamage(1);
   self.health = 999999;
   self.maxhealth = var_00;
   self.damagetaken = 0;
 
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     var_04 = 0;
+  }
 
   for(var_06 = 1; var_06; var_06 = monitordamageoneshot(var_07, var_08, var_09, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_01, var_02, var_03, var_04)) {
     self waittill("damage", var_07, var_08, var_09, var_10, var_11, var_12, var_13, var_14, var_15, var_16);
 
-    if(var_05)
+    if(var_05) {
       self playrumbleonentity("damage_light");
+    }
 
     if(isDefined(self.helitype) && self.helitype == "littlebird") {
-      if(!isDefined(self.attackers))
+      if(!isDefined(self.attackers)) {
         self.attackers = [];
+      }
 
       var_17 = "";
 
-      if(isDefined(var_08) && isplayer(var_08))
+      if(isDefined(var_08) && isplayer(var_08)) {
         var_17 = var_08 scripts\cp\utility::getuniqueid();
+      }
 
-      if(isDefined(self.attackers[var_17]))
+      if(isDefined(self.attackers[var_17])) {
         self.attackers[var_17] = self.attackers[var_17] + var_07;
-      else
+      }
+      else {
         self.attackers[var_17] = var_07;
+      }
     }
   }
 }
 
 monitordamageoneshot(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12, var_13) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
-  if(isDefined(var_01) && !scripts\cp\utility::isgameparticipant(var_01) && !isDefined(var_1.allowmonitoreddamage))
+  if(isDefined(var_01) && !scripts\cp\utility::isgameparticipant(var_01) && !isDefined(var_1.allowmonitoreddamage)) {
     return 1;
+  }
 
   return 1;
 }
@@ -4085,15 +4336,17 @@ explosivehandlemovers(var_00, var_01) {
   var_2.deathoverridecallback = ::movingplatformdetonate;
   var_2.endonstring = "death";
 
-  if(!isDefined(var_01) || !var_01)
+  if(!isDefined(var_01) || !var_01) {
     var_2.invalidparentoverridecallback = scripts\cp\cp_movers::moving_platform_empty_func;
+  }
 
   thread scripts\cp\cp_movers::handle_moving_platforms(var_02);
 }
 
 movingplatformdetonate(var_00) {
-  if(!isDefined(var_0.lasttouchedplatform) || !isDefined(var_0.lasttouchedplatform.destroyexplosiveoncollision) || var_0.lasttouchedplatform.destroyexplosiveoncollision)
+  if(!isDefined(var_0.lasttouchedplatform) || !isDefined(var_0.lasttouchedplatform.destroyexplosiveoncollision) || var_0.lasttouchedplatform.destroyexplosiveoncollision) {
     self notify("detonateExplosive");
+  }
 }
 
 makeexplosiveusable() {
@@ -4159,8 +4412,9 @@ equipmentwatchuse(var_00, var_01) {
   self.trigger scripts\cp\utility::setselfusable(var_00);
   self.trigger thread scripts\cp\utility::notusableforjoiningplayers(var_00);
 
-  if(isDefined(var_01) && var_01)
+  if(isDefined(var_01) && var_01) {
     thread updatetriggerposition();
+  }
 
   for(;;) {
     self.trigger waittill("trigger", var_00);
@@ -4179,8 +4433,9 @@ updatetriggerposition() {
     if(isDefined(self) && isDefined(self.trigger)) {
       self.trigger.origin = self.origin + getexplosiveusableoffset();
 
-      if(isDefined(self.bombsquadmodel))
+      if(isDefined(self.bombsquadmodel)) {
         self.bombsquadmodel.origin = self.origin;
+      }
     } else
       return;
 
@@ -4204,8 +4459,9 @@ ontacticalequipmentplanted(var_00) {
   if(self.plantedtacticalequip.size) {
     self.plantedtacticalequip = scripts\engine\utility::array_removeundefined(self.plantedtacticalequip);
 
-    if(self.plantedtacticalequip.size >= level.maxperplayerexplosives)
+    if(self.plantedtacticalequip.size >= level.maxperplayerexplosives) {
       self.plantedtacticalequip[0] notify("detonateExplosive");
+    }
   }
 
   self.plantedtacticalequip[self.plantedtacticalequip.size] = var_00;
@@ -4218,8 +4474,9 @@ equipmentdeathvfx(var_00) {
   var_01 = spawnfx(scripts\engine\utility::getfx("equipment_sparks"), self.origin);
   triggerfx(var_01);
 
-  if(!isDefined(var_00) || var_00 == 0)
+  if(!isDefined(var_00) || var_00 == 0) {
     self playSound("sentry_explode");
+  }
 
   var_01 thread scripts\cp\utility::delayentdelete(1);
 }
@@ -4239,11 +4496,13 @@ monitordisownedequipment(var_00, var_01) {
 }
 
 isprimaryweapon(var_00) {
-  if(var_00 == "none")
+  if(var_00 == "none") {
     return 0;
+  }
 
-  if(weaponinventorytype(var_00) != "primary")
+  if(weaponinventorytype(var_00) != "primary") {
     return 0;
+  }
 
   switch (weaponclass(var_00)) {
     case "smg":
@@ -4270,16 +4529,18 @@ isknifeonly(var_00) {
 
 is_incompatible_weapon(var_00) {
   if(isDefined(level.ammoincompatibleweaponslist)) {
-    if(scripts\engine\utility::array_contains(level.ammoincompatibleweaponslist, var_00))
+    if(scripts\engine\utility::array_contains(level.ammoincompatibleweaponslist, var_00)) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 isbulletweapon(var_00) {
-  if(var_00 == "none" || scripts\cp\utility::isriotshield(var_00) || isknifeonly(var_00))
+  if(var_00 == "none" || scripts\cp\utility::isriotshield(var_00) || isknifeonly(var_00)) {
     return 0;
+  }
 
   switch (weaponclass(var_00)) {
     case "smg":
@@ -4319,94 +4580,118 @@ is_arc_death(var_00, var_01, var_02, var_03, var_04, var_05) {
 is_holding_pistol(var_00) {
   var_01 = var_00 getcurrentprimaryweapon();
 
-  if(scripts\cp\utility::coop_getweaponclass(var_01) == "weapon_pistol")
+  if(scripts\cp\utility::coop_getweaponclass(var_01) == "weapon_pistol") {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 get_weapon_level(var_00) {
-  if(!isplayer(self))
+  if(!isplayer(self)) {
     return int(1);
+  }
 
-  if(isDefined(self.pap[var_00]))
+  if(isDefined(self.pap[var_00])) {
     return self.pap[var_00].lvl;
+  }
 
   var_01 = scripts\cp\utility::getrawbaseweaponname(var_00);
 
-  if(isDefined(self.pap[var_01]))
+  if(isDefined(self.pap[var_01])) {
     return self.pap[var_01].lvl;
+  }
 
   return int(1);
 }
 
 can_upgrade(var_00, var_01) {
-  if(!isDefined(level.pap))
+  if(!isDefined(level.pap)) {
     return 0;
+  }
 
-  if(isDefined(level.max_pap_func))
+  if(isDefined(level.max_pap_func)) {
     return [[level.max_pap_func]](var_00, var_01);
+  }
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_02 = scripts\cp\utility::getrawbaseweaponname(var_00);
-  else
+  }
+  else {
     return 0;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     return 0;
+  }
 
   if(!isDefined(level.pap[var_02])) {
     var_03 = getsubstr(var_02, 0, var_2.size - 1);
 
-    if(!isDefined(level.pap[var_03]))
+    if(!isDefined(level.pap[var_03])) {
       return 0;
+    }
   }
 
-  if(isDefined(self.ephemeralweapon) && getweaponbasename(self.ephemeralweapon) == getweaponbasename(var_00))
+  if(isDefined(self.ephemeralweapon) && getweaponbasename(self.ephemeralweapon) == getweaponbasename(var_00)) {
     return 0;
+  }
 
-  if(isDefined(level.weapon_upgrade_path) && isDefined(level.weapon_upgrade_path[getweaponbasename(var_00)]))
+  if(isDefined(level.weapon_upgrade_path) && isDefined(level.weapon_upgrade_path[getweaponbasename(var_00)])) {
     return 1;
+  }
 
   if(var_02 == "dischord" || var_02 == "facemelter" || var_02 == "headcutter" || var_02 == "shredder") {
     if(!scripts\engine\utility::flag("fuses_inserted")) {
-      if(scripts\engine\utility::is_true(var_01))
+      if(scripts\engine\utility::is_true(var_01)) {
         return 1;
-      else
+      }
+      else {
         return 0;
+      }
     } else if(isDefined(self.pap[var_02]) && self.pap[var_02].lvl == 2)
       return 0;
   }
 
-  if(scripts\engine\utility::is_true(level.has_picked_up_fuses) && !isDefined(level.placed_alien_fuses))
+  if(scripts\engine\utility::is_true(level.has_picked_up_fuses) && !isDefined(level.placed_alien_fuses)) {
     return 1;
-
-  if(scripts\engine\utility::is_true(self.has_zis_soul_key) && !scripts\engine\utility::is_true(level.no_auto_pap_upgrade) || scripts\engine\utility::is_true(level.placed_alien_fuses)) {
-    if(isDefined(self.pap[var_02]) && self.pap[var_02].lvl >= 3)
-      return 0;
-    else
-      return 1;
   }
 
-  if(scripts\engine\utility::is_true(var_01) && isDefined(self.pap[var_02]) && self.pap[var_02].lvl <= min(level.pap_max + 1, 2))
-    return 1;
+  if(scripts\engine\utility::is_true(self.has_zis_soul_key) && !scripts\engine\utility::is_true(level.no_auto_pap_upgrade) || scripts\engine\utility::is_true(level.placed_alien_fuses)) {
+    if(isDefined(self.pap[var_02]) && self.pap[var_02].lvl >= 3) {
+      return 0;
+    }
+    else {
+      return 1;
+    }
+  }
 
-  if(isDefined(self.pap[var_02]) && self.pap[var_02].lvl >= level.pap_max)
-    return 0;
-  else
+  if(scripts\engine\utility::is_true(var_01) && isDefined(self.pap[var_02]) && self.pap[var_02].lvl <= min(level.pap_max + 1, 2)) {
     return 1;
+  }
+
+  if(isDefined(self.pap[var_02]) && self.pap[var_02].lvl >= level.pap_max) {
+    return 0;
+  }
+  else {
+    return 1;
+  }
 }
 
 get_pap_camo(var_00, var_01, var_02) {
   var_03 = undefined;
 
   if(isDefined(var_01)) {
-    if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_01))
+    if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_01)) {
       var_03 = undefined;
-    else if(isDefined(level.pap_1_camo) && isDefined(var_00) && var_00 == 2)
+    }
+    else if(isDefined(level.pap_1_camo) && isDefined(var_00) && var_00 == 2) {
       var_03 = level.pap_1_camo;
-    else if(isDefined(level.pap_2_camo) && isDefined(var_00) && var_00 == 3)
+    }
+    else if(isDefined(level.pap_2_camo) && isDefined(var_00) && var_00 == 3) {
       var_03 = level.pap_2_camo;
+    }
 
     switch (var_01) {
       case "dischord":
@@ -4422,18 +4707,22 @@ get_pap_camo(var_00, var_01, var_02) {
         var_03 = "camo21";
         break;
       case "forgefreeze":
-        if(var_00 == 2)
+        if(var_00 == 2) {
           var_02 = "iw7_forgefreeze_zm_pap1";
-        else if(var_00 == 3)
+        }
+        else if(var_00 == 3) {
           var_02 = "iw7_forgefreeze_zm_pap2";
+        }
 
         var_04 = 1;
         break;
       case "axe":
-        if(var_00 == 2)
+        if(var_00 == 2) {
           var_02 = "iw7_axe_zm_pap1";
-        else if(var_00 == 3)
+        }
+        else if(var_00 == 3) {
           var_02 = "iw7_axe_zm_pap2";
+        }
 
         var_04 = 1;
         break;
@@ -4448,57 +4737,72 @@ get_pap_camo(var_00, var_01, var_02) {
 }
 
 validate_current_weapon(var_00, var_01, var_02) {
-  if(isDefined(level.weapon_upgrade_path) && isDefined(level.weapon_upgrade_path[getweaponbasename(var_02)]))
+  if(isDefined(level.weapon_upgrade_path) && isDefined(level.weapon_upgrade_path[getweaponbasename(var_02)])) {
     var_02 = level.weapon_upgrade_path[getweaponbasename(var_02)];
+  }
   else if(isDefined(var_01)) {
     switch (var_01) {
       case "two":
-        if(var_00 == 2)
+        if(var_00 == 2) {
           var_02 = "iw7_two_headed_axe_mp";
-        else if(var_00 == 3)
+        }
+        else if(var_00 == 3) {
           var_02 = "iw7_two_headed_axe_mp";
+        }
 
         break;
       case "golf":
-        if(var_00 == 2)
+        if(var_00 == 2) {
           var_02 = "iw7_golf_club_mp";
-        else if(var_00 == 3)
+        }
+        else if(var_00 == 3) {
           var_02 = "iw7_golf_club_mp";
+        }
 
         break;
       case "machete":
-        if(var_00 == 2)
+        if(var_00 == 2) {
           var_02 = "iw7_machete_mp";
-        else if(var_00 == 3)
+        }
+        else if(var_00 == 3) {
           var_02 = "iw7_machete_mp";
+        }
 
         break;
       case "spiked":
-        if(var_00 == 2)
+        if(var_00 == 2) {
           var_02 = "iw7_spiked_bat_mp";
-        else if(var_00 == 3)
+        }
+        else if(var_00 == 3) {
           var_02 = "iw7_spiked_bat_mp";
+        }
 
         break;
       case "axe":
-        if(var_00 == 2)
+        if(var_00 == 2) {
           var_02 = "iw7_axe_zm_pap1";
-        else if(var_00 == 3)
+        }
+        else if(var_00 == 3) {
           var_02 = "iw7_axe_zm_pap2";
+        }
 
         break;
       case "katana":
-        if(var_00 == 2)
+        if(var_00 == 2) {
           var_02 = "iw7_katana_zm_pap1";
-        else if(var_00 == 3)
+        }
+        else if(var_00 == 3) {
           var_02 = "iw7_katana_zm_pap2";
+        }
 
         break;
       case "nunchucks":
-        if(var_00 == 2)
+        if(var_00 == 2) {
           var_02 = "iw7_nunchucks_zm_pap1";
-        else if(var_00 == 3)
+        }
+        else if(var_00 == 3) {
           var_02 = "iw7_nunchucks_zm_pap2";
+        }
 
         break;
       default:
@@ -4590,8 +4894,9 @@ watchweaponfired() {
       continue;
     }
 
-    if(var_01 == 0 && (var_00 != "iw7_cpbasketball_mp" && var_00 != "none"))
+    if(var_01 == 0 && (var_00 != "iw7_cpbasketball_mp" && var_00 != "none")) {
       scripts\cp\cp_vo::try_to_play_vo("nag_out_ammo", "zmb_comment_vo", "low", 3, 0, 0, 0, 20);
+    }
   }
 }
 
@@ -4611,13 +4916,15 @@ watchweaponusage(var_00) {
     if(!scripts\cp\utility::isinventoryprimaryweapon(var_01)) {
       continue;
     }
-    if(isDefined(level.updateonusepassivesfunc))
+    if(isDefined(level.updateonusepassivesfunc)) {
       thread[[level.updateonusepassivesfunc]](self, var_01);
+    }
 
     var_02 = gettime();
 
-    if(!isDefined(self.lastshotfiredtime))
+    if(!isDefined(self.lastshotfiredtime)) {
       self.lastshotfiredtime = 0;
+    }
 
     var_03 = gettime() - self.lastshotfiredtime;
     self.lastshotfiredtime = var_02;
@@ -4627,21 +4934,26 @@ watchweaponusage(var_00) {
     }
     var_04 = getweaponbasename(var_01);
 
-    if(!isDefined(self.shotsfiredwithweapon[var_04]))
+    if(!isDefined(self.shotsfiredwithweapon[var_04])) {
       self.shotsfiredwithweapon[var_04] = 1;
-    else
+    }
+    else {
       self.shotsfiredwithweapon[var_04]++;
+    }
 
-    if(!isDefined(self.accuracy_shots_fired))
+    if(!isDefined(self.accuracy_shots_fired)) {
       self.accuracy_shots_fired = 1;
-    else
+    }
+    else {
       self.accuracy_shots_fired++;
+    }
 
     scripts\cp\cp_persistence::increment_player_career_shots_fired(self);
 
     if(isDefined(var_04)) {
-      if(isDefined(self.hitsthismag[var_04]))
+      if(isDefined(self.hitsthismag[var_04])) {
         thread hitsthismag_update(var_04, var_01);
+      }
     }
   }
 }
@@ -4674,8 +4986,9 @@ watchweaponchange() {
 }
 
 harpoon_impale_additional_func(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
-  if(!issubstr(var_00, "harpoon"))
+  if(!issubstr(var_00, "harpoon")) {
     return;
+  }
   else {
     var_02 startragdoll();
     var_08 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_missileclip", "physicscontents_vehicle", "physicscontents_corpseclipshot"]);
@@ -4736,8 +5049,9 @@ harpoonv1_passive() {
   self endon("weapon_change");
   self.trigger_alt_mode = [];
 
-  for(var_00 = 1; var_00 <= 5; var_0++)
+  for(var_00 = 1; var_00 <= 5; var_0++) {
     self.trigger_alt_mode[var_00] = undefined;
+  }
 
   for(;;) {
     scripts\engine\utility::waittill_any("ads_in");
@@ -4752,8 +5066,9 @@ harpoonv1_passive() {
 
     if(isDefined(var_07)) {
       if(isDefined(self.zombie_charges)) {
-        if(self.zombie_charges <= 5)
+        if(self.zombie_charges <= 5) {
           thread create_trigger_based_on_charges(self.zombie_charges, self, var_07);
+        }
 
         self.zombie_charges++;
       } else {
@@ -4784,8 +5099,9 @@ charge_watcher(var_00) {
     if(isDefined(self.zombie_charges)) {
       if(self.zombie_charges > 5) {
         foreach(var_03 in self.trigger_alt_mode) {
-          if(isDefined(var_03))
+          if(isDefined(var_03)) {
             var_03 delete();
+          }
         }
 
         self radiusdamage(var_00, 100, 1000, 100, self, "MOD_EXPLOSIVE");
@@ -4817,8 +5133,9 @@ create_trigger_based_on_charges(var_00, var_01, var_02) {
     case 1:
       foreach(var_05 in self.trigger_alt_mode) {
         if(isDefined(var_05)) {
-          if(var_5.origin == var_02 || distance2dsquared(var_5.origin, var_02) <= 100)
+          if(var_5.origin == var_02 || distance2dsquared(var_5.origin, var_02) <= 100) {
             var_05 delete();
+          }
         }
       }
 
@@ -4832,13 +5149,15 @@ create_trigger_based_on_charges(var_00, var_01, var_02) {
             var_03 = 1;
           }
 
-          if(isDefined(var_1.trigger_alt_mode[var_00]) && var_05 != var_1.trigger_alt_mode[var_00])
+          if(isDefined(var_1.trigger_alt_mode[var_00]) && var_05 != var_1.trigger_alt_mode[var_00]) {
             var_05 delete();
+          }
         }
       }
 
-      if(!var_03)
+      if(!var_03) {
         var_1.trigger_alt_mode[var_00] = spawn("trigger_radius", var_02, 0, 50, 25);
+      }
 
       break;
     case 3:
@@ -4849,13 +5168,15 @@ create_trigger_based_on_charges(var_00, var_01, var_02) {
             var_03 = 1;
           }
 
-          if(isDefined(var_1.trigger_alt_mode[var_00]) && var_05 != var_1.trigger_alt_mode[var_00])
+          if(isDefined(var_1.trigger_alt_mode[var_00]) && var_05 != var_1.trigger_alt_mode[var_00]) {
             var_05 delete();
+          }
         }
       }
 
-      if(!var_03)
+      if(!var_03) {
         var_1.trigger_alt_mode[var_00] = spawn("trigger_radius", var_02, 0, 50, 25);
+      }
 
       break;
     case 4:
@@ -4866,13 +5187,15 @@ create_trigger_based_on_charges(var_00, var_01, var_02) {
             var_03 = 1;
           }
 
-          if(isDefined(var_1.trigger_alt_mode[var_00]) && var_05 != var_1.trigger_alt_mode[var_00])
+          if(isDefined(var_1.trigger_alt_mode[var_00]) && var_05 != var_1.trigger_alt_mode[var_00]) {
             var_05 delete();
+          }
         }
       }
 
-      if(!var_03)
+      if(!var_03) {
         var_1.trigger_alt_mode[var_00] = spawn("trigger_radius", var_02, 0, 50, 25);
+      }
 
       break;
     case 5:
@@ -4910,8 +5233,9 @@ do_damage_when_trigger(var_00, var_01) {
 
       if(var_02 >= 5) {
         foreach(var_05 in self.trigger_alt_mode) {
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_05 delete();
+          }
         }
 
         self.zombie_charges = 0;
@@ -4926,29 +5250,36 @@ weapontracking_init(var_00) {
   if(!isDefined(var_00) || var_00 == "none") {
     return;
   }
-  if(!isDefined(self.shotsfiredwithweapon[var_00]))
+  if(!isDefined(self.shotsfiredwithweapon[var_00])) {
     self.shotsfiredwithweapon[var_00] = 0;
+  }
 
-  if(!isDefined(self.shotsontargetwithweapon[var_00]))
+  if(!isDefined(self.shotsontargetwithweapon[var_00])) {
     self.shotsontargetwithweapon[var_00] = 0;
+  }
 
-  if(!isDefined(self.headshots[var_00]))
+  if(!isDefined(self.headshots[var_00])) {
     self.headshots[var_00] = 0;
+  }
 
-  if(!isDefined(self.wavesheldwithweapon[var_00]))
+  if(!isDefined(self.wavesheldwithweapon[var_00])) {
     self.wavesheldwithweapon[var_00] = 1;
+  }
 
-  if(!isDefined(self.downsperweaponlog[var_00]))
+  if(!isDefined(self.downsperweaponlog[var_00])) {
     self.downsperweaponlog[var_00] = 0;
+  }
 
-  if(!isDefined(self.killsperweaponlog[var_00]))
+  if(!isDefined(self.killsperweaponlog[var_00])) {
     self.killsperweaponlog[var_00] = 0;
+  }
 }
 
 hitsthismag_init(var_00) {
   if(!isDefined(var_00) || var_00 == "none") {
     return;
   }
-  if(scripts\cp\utility::isinventoryprimaryweapon(var_00) && !isDefined(self.hitsthismag[var_00]))
+  if(scripts\cp\utility::isinventoryprimaryweapon(var_00) && !isDefined(self.hitsthismag[var_00])) {
     self.hitsthismag[var_00] = weaponclipsize(var_00);
+  }
 }

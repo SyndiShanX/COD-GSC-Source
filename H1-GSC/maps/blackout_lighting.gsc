@@ -45,8 +45,9 @@ set_level_lighting_values() {
 setup_fade_angle_lights() {
   var_0 = getEntArray("fade_angle_light", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread update_fade_angle_lights();
+  }
 }
 
 update_fade_angle_lights() {
@@ -57,14 +58,17 @@ update_fade_angle_lights() {
   if(isDefined(self.script_noteworthy)) {
     var_3 = strtok(self.script_noteworthy, " ");
 
-    if(isDefined(var_3[0]))
+    if(isDefined(var_3[0])) {
       var_0 = float(var_3[0]);
+    }
 
-    if(isDefined(var_3[1]))
+    if(isDefined(var_3[1])) {
       var_1 = float(var_3[1]);
+    }
 
-    if(isDefined(var_3[2]))
+    if(isDefined(var_3[2])) {
       var_2 = float(var_3[2]);
+    }
   }
 
   var_4 = var_0 / 180.0;

@@ -113,15 +113,18 @@ func_6CAA(var_00, var_01) {
   var_2.targets = [];
   var_03 = undefined;
 
-  if(level.teambased)
+  if(level.teambased) {
     var_03 = scripts\mp\utility\game::func_9FE7;
-  else
+  }
+  else {
     var_03 = scripts\mp\utility\game::func_9FD8;
+  }
 
   var_04 = undefined;
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_04 = scripts\mp\utility\game::getotherteam(var_01);
+  }
 
   func_6CC8(var_00, var_04, var_03, level.heli_pilot, var_02);
 
@@ -144,8 +147,9 @@ fireattarget(var_00) {
   }
   var_01 = undefined;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     var_01 = self.owner;
+  }
 
   var_02 = 384 * anglesToForward(self.angles);
   var_03 = self gettagorigin("tag_missile_1") + var_02;
@@ -165,11 +169,13 @@ func_10DC4(var_00, var_01, var_02) {
   if(isDefined(var_00)) {
     var_03 = undefined;
 
-    if(var_0.model != "vehicle_av8b_harrier_jet_mp")
+    if(var_0.model != "vehicle_av8b_harrier_jet_mp") {
       var_03 = var_00 gettagorigin("tag_missile_target");
+    }
 
-    if(!isDefined(var_03))
+    if(!isDefined(var_03)) {
       var_03 = var_00 gettagorigin("tag_body");
+    }
 
     var_04 = var_03 - var_0.origin;
 

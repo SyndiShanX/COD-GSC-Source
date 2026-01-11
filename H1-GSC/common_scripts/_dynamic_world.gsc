@@ -33,8 +33,9 @@ init() {
   level thread onplayerconnect();
   var_5 = getent("civilian_jet_origin", "targetname");
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_5 thread civilian_jet_flyby();
+  }
 
   thread interactive_tv();
 }
@@ -94,11 +95,13 @@ jet_init() {
     var_2 hide();
   }
 
-  foreach(var_5 in self.engine_fxs)
+  foreach(var_5 in self.engine_fxs) {
   var_5.origin = var_5.origin + var_0;
+  }
 
-  foreach(var_8 in self.flash_fxs)
+  foreach(var_8 in self.flash_fxs) {
   var_8.origin = var_8.origin + var_0;
+  }
 
   var_10 = self.origin;
   var_11 = self.jet_flyto.origin;
@@ -121,15 +124,18 @@ jet_timer() {
   var_1 = max(10, var_0);
   var_1 = min(var_1, 100);
 
-  if(getdvar("jet_flyby_timer") != "")
+  if(getdvar("jet_flyby_timer") != "") {
     level.civilianjetflyby_timer = 5 + getdvarint("jet_flyby_timer");
-  else
+  }
+  else {
     level.civilianjetflyby_timer = (0.25 + randomfloatrange(0.3, 0.7)) * 60 * var_1;
+  }
 
   wait(level.civilianjetflyby_timer);
 
-  while(isDefined(level.airstrikeinprogress) || isDefined(level.ac130player) || isDefined(level.chopper) || isDefined(level.remotemissileinprogress))
+  while(isDefined(level.airstrikeinprogress) || isDefined(level.ac130player) || isDefined(level.chopper) || isDefined(level.remotemissileinprogress)) {
     wait 0.05;
+  }
 
   self notify("start_flyby");
   level.civilianjetflyby = 1;
@@ -138,27 +144,32 @@ jet_timer() {
 }
 
 gettimeinterval() {
-  if(common_scripts\utility::issp())
+  if(common_scripts\utility::issp()) {
     return 10.0;
+  }
 
-  if(isDefined(game["status"]) && game["status"] == "overtime")
+  if(isDefined(game["status"]) && game["status"] == "overtime") {
     return 1.0;
-  else
+  }
+  else {
     return getwatcheddvar("timelimit");
+  }
 }
 
 getwatcheddvar(var_0) {
   var_0 = "scr_" + level.gametype + "_" + var_0;
 
-  if(isDefined(level.overridewatchdvars) && isDefined(level.overridewatchdvars[var_0]))
+  if(isDefined(level.overridewatchdvars) && isDefined(level.overridewatchdvars[var_0])) {
     return level.overridewatchdvars[var_0];
+  }
 
   return level.watchdvars[var_0].value;
 }
 
 jet_flyby() {
-  foreach(var_1 in self.jet_parts)
+  foreach(var_1 in self.jet_parts) {
   var_1 show();
+  }
 
   var_3 = [];
   var_4 = [];
@@ -181,8 +192,9 @@ jet_flyby() {
   thread jet_planesound(self.jet_parts[0], level.mapcenter);
   wait 0.05;
 
-  foreach(var_7 in var_3)
+  foreach(var_7 in var_3) {
   playFXOnTag(self.jet_engine_fx, var_7, "tag_origin");
+  }
 
   foreach(var_11 in var_4) {
     if(isDefined(var_11.color) && var_11.color == "blink") {
@@ -198,22 +210,27 @@ jet_flyby() {
     playFXOnTag(self.jet_flash_fx_green, var_11, "tag_origin");
   }
 
-  foreach(var_1 in self.jet_parts)
+  foreach(var_1 in self.jet_parts) {
   var_1 moveto(var_1.origin + self.jet_fly_vec, self.jet_flight_time);
+  }
 
-  foreach(var_7 in var_3)
+  foreach(var_7 in var_3) {
   var_7 moveto(var_7.origin + self.jet_fly_vec, self.jet_flight_time);
+  }
 
-  foreach(var_11 in var_4)
+  foreach(var_11 in var_4) {
   var_11 moveto(var_11.origin + self.jet_fly_vec, self.jet_flight_time);
+  }
 
   wait(self.jet_flight_time + 1);
 
-  foreach(var_7 in var_3)
+  foreach(var_7 in var_3) {
   var_7 delete();
+  }
 
-  foreach(var_11 in var_4)
+  foreach(var_11 in var_4) {
   var_11 delete();
+  }
 
   self notify("flyby_done");
 }
@@ -221,19 +238,22 @@ jet_flyby() {
 jet_planesound(var_0, var_1) {
   var_0 thread playsound_loop_on_ent("veh_mig29_dist_loop");
 
-  while(!targetisclose(var_0, var_1))
+  while(!targetisclose(var_0, var_1)) {
     wait 0.05;
+  }
 
   var_0 thread playsound_loop_on_ent("veh_mig29_close_loop");
 
-  while(targetisinfront(var_0, var_1))
+  while(targetisinfront(var_0, var_1)) {
     wait 0.05;
+  }
 
   wait 0.5;
   var_0 thread playsound_float("veh_mig29_sonic_boom");
 
-  while(targetisclose(var_0, var_1))
+  while(targetisclose(var_0, var_1)) {
     wait 0.05;
+  }
 
   var_0 notify("stop soundveh_mig29_close_loop");
   self waittill("flyby_done");
@@ -244,15 +264,18 @@ playsound_float(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", (0, 0, 1));
   var_3 hide();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.origin;
+  }
 
   var_3.origin = var_1;
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     var_3 playsoundasmaster(var_0);
-  else
+  }
+  else {
     var_3 playSound(var_0);
+  }
 
   wait 10.0;
   var_3 delete();
@@ -285,29 +308,35 @@ targetisinfront(var_0, var_1) {
   var_3 = vectornormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
-  if(var_4 > 0)
+  if(var_4 > 0) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 targetisclose(var_0, var_1) {
   var_2 = targetisinfront(var_0, var_1);
 
-  if(var_2)
+  if(var_2) {
     var_3 = 1;
-  else
+  }
+  else {
     var_3 = -1;
+  }
 
   var_4 = common_scripts\utility::flat_origin(var_0.origin);
   var_5 = var_4 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_3 * 100000);
   var_6 = pointonsegmentnearesttopoint(var_4, var_5, var_1);
   var_7 = distance(var_4, var_6);
 
-  if(var_7 < 3000)
+  if(var_7 < 3000) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 vending_machine() {
@@ -322,8 +351,9 @@ vending_machine() {
   var_3 = getent(var_2.target, "targetname");
   self.vm_launch_to = var_3.origin;
 
-  if(isDefined(var_3.target))
+  if(isDefined(var_3.target)) {
     self.vm_fx_loc = getent(var_3.target, "targetname").origin;
+  }
 
   self.vm_normal setCanDamage(1);
   self.vm_normal_model = self.vm_normal.model;
@@ -352,8 +382,9 @@ vending_machine() {
     if(!self.soda_count) {
       continue;
     }
-    if(isDefined(self.soda_slot))
+    if(isDefined(self.soda_slot)) {
       soda_can_eject();
+    }
 
     soda_can_drop(spawn_soda());
     wait 0.05;
@@ -374,8 +405,9 @@ vending_machine_damage_monitor(var_0) {
     var_0 waittill("damage", var_3, var_4, var_5, var_6, var_7);
 
     if(isDefined(var_7)) {
-      if(issubstr(var_1, tolower(var_7)))
+      if(issubstr(var_1, tolower(var_7))) {
         var_3 = var_3 * 3;
+      }
 
       self.hp = self.hp - var_3;
 
@@ -385,17 +417,20 @@ vending_machine_damage_monitor(var_0) {
       self notify("death");
       self.origin = self.origin + (0, 0, 10000);
 
-      if(!isDefined(self.vm_fx_loc))
+      if(!isDefined(self.vm_fx_loc)) {
         var_8 = self.vm_normal.origin + (37, -31, 52);
-      else
+      }
+      else {
         var_8 = self.vm_fx_loc;
+      }
 
       playFX(var_2, var_8);
       self.vm_normal setModel(self.vm_damaged_model);
 
       while(self.soda_count > 0) {
-        if(isDefined(self.soda_slot))
+        if(isDefined(self.soda_slot)) {
           soda_can_eject();
+        }
 
         soda_can_drop(spawn_soda());
         wait 0.05;
@@ -481,10 +516,12 @@ metal_detector() {
   var_1 delete();
   var_2 delete();
 
-  if(!common_scripts\utility::issp())
+  if(!common_scripts\utility::issp()) {
     self.alarm_interval = 7;
-  else
+  }
+  else {
     self.alarm_interval = 2;
+  }
 
   self.alarm_playing = 0;
   self.alarm_annoyance = 0;
@@ -509,8 +546,9 @@ playsound_and_light(var_0, var_1, var_2, var_3) {
     self.alarm_playing = 1;
     thread annoyance_tracker();
 
-    if(!self.alarm_annoyance)
+    if(!self.alarm_annoyance) {
       self playSound(var_0);
+    }
 
     playFX(var_1, var_2);
     playFX(var_1, var_3);
@@ -527,16 +565,19 @@ annoyance_tracker() {
   }
   var_0 = self.alarm_interval + 0.15;
 
-  if(self.tolerance)
+  if(self.tolerance) {
     self.tolerance--;
-  else
+  }
+  else {
     self.alarm_annoyance = 1;
+  }
 
   var_1 = gettime();
   var_2 = 7;
 
-  if(common_scripts\utility::issp())
+  if(common_scripts\utility::issp()) {
     var_2 = 2;
+  }
 
   waittill_any_or_timeout("dmg_triggered", "touch_triggered", "weapon_triggered", var_2 + 2);
   var_3 = gettime() - var_1;
@@ -564,8 +605,9 @@ metal_detector_weapons(var_0, var_1, var_2) {
 
     foreach(var_5 in var_3) {
       if(isDefined(var_5.model) && (var_5.model == var_1 || var_5.model == var_2)) {
-        if(isinbound(var_5, var_0))
+        if(isinbound(var_5, var_0)) {
           thread weapon_notify_loop(var_5, var_0);
+        }
       }
     }
   }
@@ -599,8 +641,9 @@ isinbound(var_0, var_1) {
 
   if(isinbound_single(var_8, var_2, var_3)) {
     if(isinbound_single(var_9, var_4, var_5)) {
-      if(isinbound_single(var_10, var_6, var_7))
+      if(isinbound_single(var_10, var_6, var_7)) {
         return 1;
+      }
     }
   }
 
@@ -608,8 +651,9 @@ isinbound(var_0, var_1) {
 }
 
 isinbound_single(var_0, var_1, var_2) {
-  if(var_0 > var_1 && var_0 < var_2)
+  if(var_0 > var_1 && var_0 < var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -620,8 +664,9 @@ metal_detector_dmg_monitor(var_0) {
   for(;;) {
     var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5);
 
-    if(isDefined(var_5) && alarm_validate_damage(var_5))
+    if(isDefined(var_5) && alarm_validate_damage(var_5)) {
       self notify("dmg_triggered");
+    }
   }
 }
 
@@ -643,8 +688,9 @@ alarm_validate_damage(var_0) {
   var_2 = strtok(var_1, " ");
 
   foreach(var_4 in var_2) {
-    if(tolower(var_4) == tolower(var_0))
+    if(tolower(var_4) == tolower(var_0)) {
       return 1;
+    }
   }
 
   return 0;
@@ -699,8 +745,9 @@ motion_light() {
       var_5 = 0;
 
       foreach(var_7 in self.touchlist) {
-        if(isDefined(var_7.distmoved) && var_7.distmoved > 5.0)
+        if(isDefined(var_7.distmoved) && var_7.distmoved > 5.0) {
           var_5 = 1;
+        }
       }
 
       if(var_5) {
@@ -712,8 +759,9 @@ motion_light() {
             var_2 setlightintensity(1.0);
 
             if(isDefined(var_2.lightrigs)) {
-              foreach(var_11 in var_2.lightrigs)
+              foreach(var_11 in var_2.lightrigs) {
               var_11 setModel("com_two_light_fixture_on");
+              }
             }
           }
         }
@@ -735,8 +783,9 @@ motion_light_timeout(var_0, var_1) {
     var_3 setlightintensity(0);
 
     if(isDefined(var_3.lightrigs)) {
-      foreach(var_5 in var_3.lightrigs)
+      foreach(var_5 in var_3.lightrigs) {
       var_5 setModel("com_two_light_fixture_off");
+      }
     }
   }
 
@@ -745,8 +794,9 @@ motion_light_timeout(var_0, var_1) {
 }
 
 outdoor_motion_dlight() {
-  if(!isDefined(level.outdoor_motion_light))
+  if(!isDefined(level.outdoor_motion_light)) {
     level.outdoor_motion_light = loadfx("vfx\lights\outdoor_motion_light");
+  }
 
   level endon("game_ended");
   self.movetracker = 1;
@@ -762,8 +812,9 @@ outdoor_motion_dlight() {
       var_2 = 0;
 
       foreach(var_4 in self.touchlist) {
-        if(isDefined(var_4.distmoved) && var_4.distmoved > 5.0)
+        if(isDefined(var_4.distmoved) && var_4.distmoved > 5.0) {
           var_2 = 1;
+        }
       }
 
       if(var_2) {
@@ -792,8 +843,9 @@ outdoor_motion_dlight_timeout(var_0, var_1, var_2) {
   self endon("motion_light_timeout");
   wait(var_2);
 
-  foreach(var_4 in var_1)
+  foreach(var_4 in var_1) {
   var_4.lightent delete();
+  }
 
   var_0 playSound("switch_auto_lights_off");
   var_0 setModel("com_two_light_fixture_off");
@@ -812,8 +864,9 @@ dog_bark() {
       var_2 = 0;
 
       foreach(var_4 in self.touchlist) {
-        if(isDefined(var_4.distmoved) && var_4.distmoved > var_2)
+        if(isDefined(var_4.distmoved) && var_4.distmoved > var_2) {
           var_2 = var_4.distmoved;
+        }
       }
 
       if(var_2 > 6.0) {
@@ -838,23 +891,27 @@ trigger_door() {
     self waittill("trigger_enter", var_2);
     var_0 thread dooropen(var_1, getdoorside(var_2));
 
-    if(anythingtouchingtrigger(self))
+    if(anythingtouchingtrigger(self)) {
       self waittill("trigger_empty");
+    }
 
     wait 3.0;
 
-    if(anythingtouchingtrigger(self))
+    if(anythingtouchingtrigger(self)) {
       self waittill("trigger_empty");
+    }
 
     var_0 thread doorclose(var_1);
   }
 }
 
 dooropen(var_0, var_1) {
-  if(var_1)
+  if(var_1) {
     self rotateto((0, self.baseyaw + 90, 1), var_0, 0.1, 0.75);
-  else
+  }
+  else {
     self rotateto((0, self.baseyaw - 90, 1), var_0, 0.1, 0.75);
+  }
 
   self playSound("door_generic_house_open");
   wait(var_0 + 0.05);
@@ -881,23 +938,26 @@ use_toggle() {
   var_0 = getEntArray(self.target, "targetname");
   self.lightson = 1;
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 setlightintensity(1.5 * self.lightson);
+  }
 
   for(;;) {
     self waittill("trigger");
     self.lightson = !self.lightson;
 
     if(self.lightson) {
-      foreach(var_2 in var_0)
+      foreach(var_2 in var_0) {
       var_2 setlightintensity(1.5);
+      }
 
       self playSound("switch_auto_lights_on");
       continue;
     }
 
-    foreach(var_2 in var_0)
+    foreach(var_2 in var_0) {
     var_2 setlightintensity(0);
+    }
 
     self playSound("switch_auto_lights_off");
   }
@@ -935,15 +995,17 @@ get_photo_copier(var_0) {
 
     foreach(var_4 in var_1) {
       if(isDefined(var_4.destructible_type) && var_4.destructible_type == "toy_copier") {
-        if(distance(var_0.origin, var_2.origin) > distance(var_0.origin, var_4.origin))
+        if(distance(var_0.origin, var_2.origin) > distance(var_0.origin, var_4.origin)) {
           var_2 = var_4;
+        }
       }
     }
   } else {
     var_2 = getent(var_0.target, "targetname");
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 setCanDamage(1);
+    }
   }
 
   return var_2;
@@ -1028,8 +1090,9 @@ photo_copier_copy_bar_goes() {
     var_5 = var_5 / var_2;
     var_5 = 1 - var_5 * var_1.intensity;
 
-    if(var_5 > 0)
+    if(var_5 > 0) {
       var_1 setlightintensity(var_5);
+    }
 
     wait 0.05;
   }
@@ -1077,24 +1140,30 @@ fan_blade_rotate(var_0) {
   var_2 = 20000;
   var_3 = 1.0;
 
-  if(isDefined(self.speed))
+  if(isDefined(self.speed)) {
     var_3 = self.speed;
+  }
 
   if(var_0 == "slow") {
-    if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lockedspeed")
+    if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lockedspeed") {
       var_1 = 180;
-    else
+    }
+    else {
       var_1 = randomfloatrange(100 * var_3, 360 * var_3);
+    }
   } else if(var_0 == "fast")
     var_1 = randomfloatrange(720 * var_3, 1000 * var_3);
-  else if(var_0 == "veryslow")
+  else if(var_0 == "veryslow") {
     var_1 = randomfloatrange(1 * var_3, 2 * var_3);
+  }
   else {}
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lockedspeed")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lockedspeed") {
     wait 0;
-  else
+  }
+  else {
     wait(randomfloatrange(0, 1));
+  }
 
   if(!isDefined(self)) {
     return;
@@ -1108,14 +1177,18 @@ fan_blade_rotate(var_0) {
     var_7 = abs(vectordot(var_5, (0, 1, 0)));
     var_8 = abs(vectordot(var_5, (0, 0, 1)));
 
-    if(var_6 > 0.9)
+    if(var_6 > 0.9) {
       self rotatevelocity((var_1, 0, 0), var_2);
-    else if(var_7 > 0.9)
+    }
+    else if(var_7 > 0.9) {
       self rotatevelocity((var_1, 0, 0), var_2);
-    else if(var_8 > 0.9)
+    }
+    else if(var_8 > 0.9) {
       self rotatevelocity((0, var_1, 0), var_2);
-    else
+    }
+    else {
       self rotatevelocity((0, var_1, 0), var_2);
+    }
 
     wait(var_2);
   }
@@ -1135,48 +1208,57 @@ triggertouchthink(var_0, var_1) {
     if(!isalive(var_2)) {
       continue;
     }
-    if(!isDefined(var_2.touchtriggers[self.entnum]))
+    if(!isDefined(var_2.touchtriggers[self.entnum])) {
       var_2 thread playertouchtriggerthink(self, var_0, var_1);
+    }
   }
 }
 
 playertouchtriggerthink(var_0, var_1, var_2) {
   var_0 endon("deleted");
 
-  if(!isplayer(self))
+  if(!isplayer(self)) {
     self endon("death");
+  }
 
-  if(!common_scripts\utility::issp())
+  if(!common_scripts\utility::issp()) {
     var_3 = self.guid;
-  else
+  }
+  else {
     var_3 = "player" + gettime();
+  }
 
   var_0.touchlist[var_3] = self;
 
-  if(isDefined(var_0.movetracker))
+  if(isDefined(var_0.movetracker)) {
     self.movetrackers++;
+  }
 
   var_0 notify("trigger_enter", self);
   self notify("trigger_enter", var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self thread[[var_1]](var_0);
+  }
 
   self.touchtriggers[var_0.entnum] = var_0;
 
-  while(isalive(self) && self istouching(var_0) && (common_scripts\utility::issp() || !level.gameended))
+  while(isalive(self) && self istouching(var_0) && (common_scripts\utility::issp() || !level.gameended)) {
     wait 0.05;
+  }
 
   if(isDefined(self)) {
     self.touchtriggers[var_0.entnum] = undefined;
 
-    if(isDefined(var_0.movetracker))
+    if(isDefined(var_0.movetracker)) {
       self.movetrackers--;
+    }
 
     self notify("trigger_leave", var_0);
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       self thread[[var_2]](var_0);
+    }
   }
 
   if(!common_scripts\utility::issp() && level.gameended) {
@@ -1185,8 +1267,9 @@ playertouchtriggerthink(var_0, var_1, var_2) {
   var_0.touchlist[var_3] = undefined;
   var_0 notify("trigger_leave", self);
 
-  if(!anythingtouchingtrigger(var_0))
+  if(!anythingtouchingtrigger(var_0)) {
     var_0 notify("trigger_empty");
+  }
 }
 
 movementtracker() {
@@ -1195,8 +1278,9 @@ movementtracker() {
   }
   self endon("disconnect");
 
-  if(!isplayer(self))
+  if(!isplayer(self)) {
     self endon("death");
+  }
 
   self.movetrackers = 0;
   self.distmoved = 0;
@@ -1257,8 +1341,9 @@ tv_logic() {
     if(isDefined(level.disable_interactive_tv_use_triggers)) {
       var_0 = getent(self.target, "targetname");
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         var_0 delete();
+      }
     } else {
       self.usetrig = getent(self.target, "targetname");
       self.usetrig usetriggerrequirelookat();
@@ -1276,8 +1361,9 @@ tv_logic() {
 
   thread tv_damage();
 
-  if(isDefined(self.usetrig))
+  if(isDefined(self.usetrig)) {
     thread tv_off();
+  }
 }
 
 tv_off() {
@@ -1291,16 +1377,18 @@ tv_off() {
     if(self.model == self.offmodel) {
       self setModel(self.onmodel);
 
-      if(isDefined(self.lite))
+      if(isDefined(self.lite)) {
         self.lite setlightintensity(self.liteintensity);
+      }
 
       continue;
     }
 
     self setModel(self.offmodel);
 
-    if(isDefined(self.lite))
+    if(isDefined(self.lite)) {
       self.lite setlightintensity(0);
+    }
   }
 }
 
@@ -1308,24 +1396,28 @@ tv_damage() {
   self waittill("damage", var_0, var_1, var_2, var_3, var_4);
   self notify("off");
 
-  if(isDefined(self.usetrig))
+  if(isDefined(self.usetrig)) {
     self.usetrig notify("death");
+  }
 
   self setModel(self.damagemodel);
 
-  if(isDefined(self.lite))
+  if(isDefined(self.lite)) {
     self.lite setlightintensity(0);
+  }
 
   playFXOnTag(level.breakables_fx["tv_explode"], self, "tag_fx");
   self playSound("tv_shot_burst");
 
-  if(isDefined(self.usetrig))
+  if(isDefined(self.usetrig)) {
     self.usetrig delete();
+  }
 }
 
 sliding_door() {
-  if(!isDefined(self.open_time))
+  if(!isDefined(self.open_time)) {
     self.open_time = 1;
+  }
 
   var_0 = getEntArray(self.target, "script_linkname");
   var_1 = [];
@@ -1358,8 +1450,9 @@ sliding_door() {
       }
     }
 
-    if(var_7 > 0)
+    if(var_7 > 0) {
       open_all_doors(var_0);
+    }
     else {
       var_11 = 1;
       thread close_all_doors(var_0, var_11);
@@ -1390,8 +1483,9 @@ open_door() {
   self.sliding_door_state = "opening";
   var_0 = distance(self.origin, self.open_position) / self.open_velocity;
 
-  if(var_0 < 0.05)
+  if(var_0 < 0.05) {
     var_0 = 0.05;
+  }
 
   self moveto(self.open_position, var_0);
   self playSound("glass_door_open");

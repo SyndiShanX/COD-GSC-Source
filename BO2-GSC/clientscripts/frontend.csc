@@ -50,16 +50,21 @@ start_env_movie() {
 }
 
 world_clock_get_offset() {
-  if(issubstr(self.model, "chicago"))
+  if(issubstr(self.model, "chicago")) {
     return -6;
-  else if(issubstr(self.model, "los_angeles"))
+  }
+  else if(issubstr(self.model, "los_angeles")) {
     return -8;
-  else if(issubstr(self.model, "new_york"))
+  }
+  else if(issubstr(self.model, "new_york")) {
     return -5;
-  else if(issubstr(self.model, "tokyo"))
+  }
+  else if(issubstr(self.model, "tokyo")) {
     return 9;
-  else if(issubstr(self.model, "hong_kong"))
+  }
+  else if(issubstr(self.model, "hong_kong")) {
     return 8;
+  }
 
   return 0;
 }
@@ -68,8 +73,9 @@ world_clock_run(localclientnum, set, newent) {
   self mapshaderconstant(localclientnum, 0, "ScriptVector0");
   gmt_offset = self world_clock_get_offset();
 
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     println("Client: clock digit running: " + self.script_noteworthy);
+  }
 
   while(true) {
     curr_time = getsystemtime(1);
@@ -78,15 +84,18 @@ world_clock_run(localclientnum, set, newent) {
     seconds = int(curr_time[2]);
     hours = hours + gmt_offset;
 
-    if(hours < 0)
+    if(hours < 0) {
       hours = hours + 24;
-    else if(hours >= 24)
+    }
+    else if(hours >= 24) {
       hours = hours - 24;
+    }
 
     time = array(floor(hours / 10), hours % 10, floor(minutes / 10), minutes % 10);
 
-    for(i = 0; i < time.size; i++)
+    for(i = 0; i < time.size; i++) {
       time[i] = float(int(time[i] + 9) % 10);
+    }
 
     self setshaderconstant(localclientnum, 0, time[0], time[1], time[2], time[3]);
     wait 1.0;
@@ -103,8 +112,9 @@ refresh_map_shaders(localclientnum) {
 }
 
 refresh_all_map_shaders(localclientnum) {
-  foreach(map in level.m_map_monitors)
+  foreach(map in level.m_map_monitors) {
   map refresh_map_shaders(localclientnum);
+  }
 }
 
 map_monitor_run(localclientnum, set, newent) {
@@ -117,8 +127,9 @@ map_monitor_run(localclientnum, set, newent) {
       self mapshaderconstant(localclientnum, 4, "ScriptVector4");
       self mapshaderconstant(localclientnum, 5, "ScriptVector5");
 
-      if(!isDefined(level.m_map_monitors))
+      if(!isDefined(level.m_map_monitors)) {
         level.m_map_monitors = [];
+      }
 
       level.m_map_monitors[level.m_map_monitors.size] = self;
     }
@@ -171,10 +182,12 @@ world_map_translate_to(localclientnum, pos_x, pos_y, map_scale) {
 }
 
 set_speeding_osprey(localclientnum, set, newent) {
-  if(set)
+  if(set) {
     self.booster_speed_override = 1200.0;
-  else
+  }
+  else {
     self.booster_speed_override = undefined;
+  }
 }
 
 initialize_hologram(localclientnum) {
@@ -187,8 +200,9 @@ initialize_hologram(localclientnum) {
 }
 
 set_hologram_red(localclientnum, set, newent) {
-  if(!isDefined(self.shader_inited))
+  if(!isDefined(self.shader_inited)) {
     self initialize_hologram(localclientnum);
+  }
 
   if(set) {
     self setshaderconstant(localclientnum, 1, 1, 0, 0, 0);
@@ -202,8 +216,9 @@ set_hologram_red(localclientnum, set, newent) {
 set_hologram_shown(localclientnum, set, newent) {
   self endon("death");
 
-  if(!isDefined(self.shader_inited))
+  if(!isDefined(self.shader_inited)) {
     self initialize_hologram(localclientnum);
+  }
 
   start_val = 0.2;
   end_val = 1.0;
@@ -219,10 +234,12 @@ set_hologram_shown(localclientnum, set, newent) {
     wait 0.01;
   }
 
-  if(set)
+  if(set) {
     self setshaderconstant(localclientnum, 1, self.color_id, 0, 0, 0);
-  else
+  }
+  else {
     self setshaderconstant(localclientnum, 1, self.color_id, 1, 0, 0);
+  }
 }
 
 default_settings() {

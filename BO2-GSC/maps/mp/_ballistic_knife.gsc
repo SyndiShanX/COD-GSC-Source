@@ -30,16 +30,20 @@ onspawn(watcher, player) {
     retrievable_model.targetname = "sticky_weapon";
 
     if(isDefined(prey)) {
-      if(level.teambased && isplayer(prey) && player.team == prey.team)
+      if(level.teambased && isplayer(prey) && player.team == prey.team) {
         isfriendly = 1;
-      else if(level.teambased && isai(prey) && player.team == prey.aiteam)
+      }
+      else if(level.teambased && isai(prey) && player.team == prey.aiteam) {
         isfriendly = 1;
+      }
 
       if(!isfriendly) {
-        if(isalive(prey))
+        if(isalive(prey)) {
           retrievable_model droptoground(retrievable_model.origin, 80);
-        else
+        }
+        else {
           retrievable_model linkto(prey, bone);
+        }
       } else if(isfriendly) {
         retrievable_model physicslaunch(normal, (randomint(10), randomint(10), randomint(10)));
         normal = (0, 0, 1);
@@ -48,15 +52,18 @@ onspawn(watcher, player) {
 
     watcher.objectarray[watcher.objectarray.size] = retrievable_model;
 
-    if(isfriendly)
+    if(isfriendly) {
       retrievable_model waittill("stationary");
+    }
 
     retrievable_model thread dropknivestoground();
 
-    if(isfriendly)
+    if(isfriendly) {
       player notify("ballistic_knife_stationary", retrievable_model, normal);
-    else
+    }
+    else {
       player notify("ballistic_knife_stationary", retrievable_model, normal, prey);
+    }
 
     retrievable_model thread wait_to_show_glowing_model(prey);
   }
@@ -70,8 +77,9 @@ wait_to_show_glowing_model(prey) {
   glowing_retrievable_model.angles = self.angles;
   glowing_retrievable_model linkto(self);
 
-  if(isDefined(prey) && !isalive(prey))
+  if(isDefined(prey) && !isalive(prey)) {
     wait 2;
+  }
 
   glowing_retrievable_model setModel("t6_wpn_ballistic_knife_blade_retrieve");
 }
@@ -81,11 +89,13 @@ watch_shutdown() {
   glowing_model = self.glowing_model;
   self waittill("death");
 
-  if(isDefined(pickuptrigger))
+  if(isDefined(pickuptrigger)) {
     pickuptrigger delete();
+  }
 
-  if(isDefined(glowing_model))
+  if(isDefined(glowing_model)) {
     glowing_model delete();
+  }
 }
 
 onspawnretrievetrigger(watcher, player) {
@@ -116,10 +126,12 @@ onspawnretrievetrigger(watcher, player) {
   retrievable_model.pickuptrigger = pickup_trigger;
   pickup_trigger enablelinkto();
 
-  if(isDefined(prey))
+  if(isDefined(prey)) {
     pickup_trigger linkto(prey);
-  else
+  }
+  else {
     pickup_trigger linkto(retrievable_model);
+  }
 
   retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, ::pick_up, watcher.pickupsoundplayer, watcher.pickupsound);
   retrievable_model thread watch_shutdown();
@@ -155,17 +167,20 @@ watch_use_trigger(trigger, model, callback, playersoundonuse, npcsoundonuse) {
     total_ammo = ammo_stock + ammo_clip;
     hasreloaded = 1;
 
-    if(total_ammo > 0 && ammo_stock == total_ammo && current_weapon == "knife_ballistic_mp")
+    if(total_ammo > 0 && ammo_stock == total_ammo && current_weapon == "knife_ballistic_mp") {
       hasreloaded = 0;
+    }
 
     if(total_ammo >= max_ammo || !hasreloaded) {
       continue;
     }
-    if(isDefined(playersoundonuse))
+    if(isDefined(playersoundonuse)) {
       player playlocalsound(playersoundonuse);
+    }
 
-    if(isDefined(npcsoundonuse))
+    if(isDefined(npcsoundonuse)) {
       player playSound(npcsoundonuse);
+    }
 
     self thread[[callback]](player);
     break;
@@ -180,8 +195,9 @@ pick_up(player) {
   if(current_weapon != "knife_ballistic_mp") {
     clip_ammo = player getweaponammoclip("knife_ballistic_mp");
 
-    if(!clip_ammo)
+    if(!clip_ammo) {
       player setweaponammoclip("knife_ballistic_mp", 1);
+    }
     else {
       new_ammo_stock = player getweaponammostock("knife_ballistic_mp") + 1;
       player setweaponammostock("knife_ballistic_mp", new_ammo_stock);
@@ -196,11 +212,13 @@ destroy_ent() {
   if(isDefined(self)) {
     pickuptrigger = self.pickuptrigger;
 
-    if(isDefined(pickuptrigger))
+    if(isDefined(pickuptrigger)) {
       pickuptrigger delete();
+    }
 
-    if(isDefined(self.glowing_model))
+    if(isDefined(self.glowing_model)) {
       self.glowing_model delete();
+    }
 
     self delete();
   }

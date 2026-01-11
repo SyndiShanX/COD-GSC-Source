@@ -15,16 +15,19 @@ saveplayerweaponstatepersistent(var_0) {
   game["weaponstates"][var_0]["list"] = [];
   var_3 = level.player getweaponslistall();
 
-  for(var_4 = 0; var_4 < var_3.size; var_4++)
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
     game["weaponstates"][var_0]["list"][var_4]["name"] = var_3[var_4];
+  }
 }
 
 restoreplayerweaponstatepersistent(var_0) {
-  if(!isDefined(game["weaponstates"]))
+  if(!isDefined(game["weaponstates"])) {
     return 0;
+  }
 
-  if(!isDefined(game["weaponstates"][var_0]))
+  if(!isDefined(game["weaponstates"][var_0])) {
     return 0;
+  }
 
   level.player takeallweapons();
 
@@ -32,8 +35,9 @@ restoreplayerweaponstatepersistent(var_0) {
     var_2 = game["weaponstates"][var_0]["list"][var_1]["name"];
 
     if(isDefined(level.legit_weapons)) {
-      if(!isDefined(level.legit_weapons[var_2]))
+      if(!isDefined(level.legit_weapons[var_2])) {
         continue;
+      }
     }
 
     if(var_2 == "c4") {
@@ -49,13 +53,15 @@ restoreplayerweaponstatepersistent(var_0) {
   if(isDefined(level.legit_weapons)) {
     var_2 = game["weaponstates"][var_0]["offhand"];
 
-    if(isDefined(level.legit_weapons[var_2]))
+    if(isDefined(level.legit_weapons[var_2])) {
       level.player switchtooffhand(var_2);
+    }
 
     var_2 = game["weaponstates"][var_0]["current"];
 
-    if(isDefined(level.legit_weapons[var_2]))
+    if(isDefined(level.legit_weapons[var_2])) {
       level.player switchtoweapon(var_2);
+    }
   } else {
     level.player switchtooffhand(game["weaponstates"][var_0]["offhand"]);
     level.player switchtoweapon(game["weaponstates"][var_0]["current"]);
@@ -77,8 +83,9 @@ init_player() {
 }
 
 get_loadout() {
-  if(isDefined(level.loadout))
+  if(isDefined(level.loadout)) {
     return level.loadout;
+  }
 
   return level.script;
 }
@@ -104,8 +111,9 @@ loadout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(var_0)) {
     var_7 = get_loadout();
 
-    if(var_0 != var_7)
+    if(var_0 != var_7) {
       return;
+    }
   }
 
   if(!isDefined(level._lc_persists)) {
@@ -114,13 +122,16 @@ loadout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       level.player giveweapon(var_1);
     }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       level.player giveweapon(var_2);
+    }
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       level.player switchtoweapon(var_1);
-    else if(isDefined(var_2))
+    }
+    else if(isDefined(var_2)) {
       level.player switchtoweapon(var_2);
+    }
   }
 
   if(isDefined(var_3)) {
@@ -133,11 +144,13 @@ loadout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     level.player giveweapon(var_4);
   }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     level.player setviewmodel(var_5);
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     level.campaign = var_6;
+  }
 
   level.has_loadout = 1;
 }
@@ -278,17 +291,20 @@ loadout_launchfacility_b() {
       continue;
     }
 
-    if(issubstr(var_4, "m4m203_silencer_reflex"))
+    if(issubstr(var_4, "m4m203_silencer_reflex")) {
       var_1 = 1;
+    }
   }
 
   if(isDefined(var_0)) {
     level.player takeweapon(var_0);
 
-    if(var_1)
+    if(var_1) {
       level.player giveweapon("usp_silencer");
-    else
+    }
+    else {
       level.player giveweapon("m4m203_silencer_reflex");
+    }
 
     level.player switchtoweaponimmediate("m4m203_silencer_reflex");
   }

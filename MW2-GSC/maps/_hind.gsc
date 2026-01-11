@@ -75,8 +75,9 @@ init_local() {
 set_vehicle_anims(positions) {
   //	positions[ 0 ].vehicle_getinanim = %tigertank_hatch_open;
 
-  for(i = 0; i < positions.size; i++)
+  for(i = 0; i < positions.size; i++) {
     positions[i].vehicle_getoutanim = % bh_idle;
+  }
 
   return positions;
 }
@@ -99,8 +100,9 @@ setplayer_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 9; i++)
+  for(i = 0; i < 9; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].idle[0] = % helicopter_pilot1_idle;
   positions[0].idle[1] = % helicopter_pilot1_twitch_clickpannel;

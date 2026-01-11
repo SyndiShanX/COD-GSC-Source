@@ -78,19 +78,24 @@ wingsuit_breadcrumb_objective() {
     set_objective(level.obj_wingsuit_land, s_crumb_pos.origin, "breadcrumb");
     luinotifyevent(&"hud_update_distance_obj", 3, int(s_crumb_pos.origin[0]), int(s_crumb_pos.origin[1]), int(s_crumb_pos.origin[2]));
 
-    while(distance2d(level.player.origin, s_crumb_pos.origin) > n_radius)
+    while(distance2d(level.player.origin, s_crumb_pos.origin) > n_radius) {
       wait 0.05;
+    }
 
-    if(isDefined(s_crumb_pos.target))
+    if(isDefined(s_crumb_pos.target)) {
       s_crumb_pos = getstruct(s_crumb_pos.target, "targetname");
-    else
+    }
+    else {
       break;
+    }
   }
 
-  if(flag("chute_window_passed"))
+  if(flag("chute_window_passed")) {
     set_objective(level.obj_wingsuit_land, undefined, "remove");
-  else
+  }
+  else {
     set_objective(level.obj_wingsuit_land, undefined, "done");
+  }
 }
 
 trigger_water_sheeting_think() {
@@ -167,8 +172,9 @@ jet_stream_launch() {
   level.player.vh_wingsuit setspeed(150, 10, 10);
   level.player wingsuit_deploy_chute();
 
-  if(flag("chute_window_passed"))
+  if(flag("chute_window_passed")) {
     flag_waitopen("chute_window_passed");
+  }
 
   level.player.vh_wingsuit setspeed(50, 10, 10);
   trigger_wait("player_reached_cliff");
@@ -285,8 +291,9 @@ land_wingsuit(str_node) {
   self delete();
   a_m_grass = getEntArray("parachute_grass", "targetname");
 
-  foreach(m_grass in a_m_grass)
+  foreach(m_grass in a_m_grass) {
   m_grass delete();
+  }
 
   m_chute = getent("fxanim_parachute", "targetname");
   m_chute show();
@@ -301,14 +308,17 @@ player_wingsuit_tutorial() {
   if(level.wiiu) {
     controller_type = level.player getcontrollertype();
 
-    if(controller_type == "remote")
+    if(controller_type == "remote") {
       force_legacy_message = 1;
+    }
   }
 
-  if(stick_layout == 2 || stick_layout == 3 || force_legacy_message)
+  if(stick_layout == 2 || stick_layout == 3 || force_legacy_message) {
     screen_message_create(&"MONSOON_TUTORIAL_WINGSUIT_LEGACY");
-  else
+  }
+  else {
     screen_message_create(&"MONSOON_TUTORIAL_WINGSUIT");
+  }
 
   wait 5;
   screen_message_delete();
@@ -330,8 +340,9 @@ spawn_wingsuit_and_drive_on_path(str_node, n_ideal, n_min, v_offset) {
   self lookatentity();
   self.vh_wingsuit thread ai_wingsuit_think(v_offset, 500, 250, vectorscale((1, 1, 1), 35.0), randomfloatrange(1.5, 2));
 
-  if(self == level.harper)
+  if(self == level.harper) {
     self.vh_wingsuit thread _wingsuit_ally_direct_vo();
+  }
 }
 
 _wingsuit_ally_direct_vo() {
@@ -484,8 +495,9 @@ wait_for_player_falling() {
   self endon("death");
 
   while(true) {
-    if(self getvelocity()[2] < 0)
+    if(self getvelocity()[2] < 0) {
       return true;
+    }
 
     wait 0.05;
   }
@@ -557,8 +569,9 @@ do_flight_feedback() {
   while(true) {
     rumble = rumble + 0.0075;
 
-    if(rumble > 0.3)
+    if(rumble > 0.3) {
       rumble = 0.3;
+    }
 
     self playrumbleonentity("tank_rumble");
     earthquake(0.15, 0.05, self.origin, 1000, self);
@@ -575,8 +588,9 @@ do_fall_feedback() {
   while(true) {
     rumble = rumble + 0.0075;
 
-    if(rumble > 0.3)
+    if(rumble > 0.3) {
       rumble = 0.3;
+    }
 
     self playrumbleonentity("tank_rumble");
     earthquake(0.15, 0.05, self.origin, 1000, self);
@@ -594,8 +608,9 @@ do_chute_feedback() {
   while(true) {
     rumble = rumble + 0.0075;
 
-    if(rumble > 0.3)
+    if(rumble > 0.3) {
       rumble = 0.3;
+    }
 
     self playrumbleonentity("damage_heavy");
     earthquake(0.25, 0.05, self.origin, 1000, self);
@@ -653,33 +668,40 @@ ai_wingsuit_think(v_offset, n_speed, n_acceleration, v_variable_offset, n_variab
     b = curr_right_vel / 17.6;
     c = curr_up_vel / 17.6;
 
-    if(a > 207)
+    if(a > 207) {
       a = 207;
+    }
 
     curr_fwd_vel = curr_fwd_vel + 100.0;
 
-    if(curr_fwd_vel > a)
+    if(curr_fwd_vel > a) {
       curr_fwd_vel = a;
+    }
 
     x = curr_fwd_vel * 17.6;
     y = difftrack(desired_right_vel, curr_right_vel, 2, 0.05);
     z = difftrack(desired_up_vel, curr_up_vel, 25, 0.05);
 
-    if(y > 10)
+    if(y > 10) {
       self.next_flight_state = "turnleft_idle";
-    else if(y < -10)
+    }
+    else if(y < -10) {
       self.next_flight_state = "turnright_idle";
-    else
+    }
+    else {
       self.next_flight_state = "fwd_idle";
+    }
 
     v_desired_vel = x * v_fwd + y * v_right + z * v_up;
     v = vectornormalize(v_desired_vel);
     d = vectordot(v, (0, 0, 1));
 
-    if(d != 0 && abs(d) < 0.9)
+    if(d != 0 && abs(d) < 0.9) {
       n_yaw = vectoangles(v_desired_vel);
-    else
+    }
+    else {
       n_yaw = v_angles[1];
+    }
 
     n_yaw_vel = (n_yaw - self.angles[1]) / 0.05;
     n_roll = n_yaw_vel / 25 * 75;

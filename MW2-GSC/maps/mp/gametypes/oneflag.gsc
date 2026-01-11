@@ -48,17 +48,22 @@ main() {
 
   game["dialog"]["gametype"] = "oneflag";
 
-  if(getDvarInt("g_hardcore"))
+  if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  else if(getDvarInt("camera_thirdPerson"))
+  }
+  else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  else if(getDvarInt("scr_diehard"))
+  }
+  else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  else if(getDvarInt("scr_" + level.gameType + "_promode"))
+  }
+  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
+  }
 
-  if(getdvar("scr_oneflag_returntime") == "")
+  if(getdvar("scr_oneflag_returntime") == "") {
     setdvar("scr_oneflag_returntime", "15");
+  }
   level.flagReturnTime = getdvarint("scr_oneflag_returntime");
 }
 
@@ -77,11 +82,13 @@ onPrecacheGameType() {
 }
 
 onStartGameType() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = false;
+  }
 
-  if(!isDefined(game["original_defenders"]))
+  if(!isDefined(game["original_defenders"])) {
     game["original_defenders"] = game["defenders"];
+  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -141,8 +148,9 @@ onStartGameType() {
 
 getSpawnPoint() {
   spawnteam = self.pers["team"];
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     spawnteam = getOtherTeam(spawnteam);
+  }
 
   if(level.inGracePeriod) {
     spawnPoints = getEntArray("mp_ctf_spawn_" + spawnteam + "_start", "classname");
@@ -314,10 +322,12 @@ createCapZone(team) {
 onBeginUse(player) {
   team = player.pers["team"];
 
-  if(team == self maps\mp\gametypes\_gameobjects::getOwnerTeam())
+  if(team == self maps\mp\gametypes\_gameobjects::getOwnerTeam()) {
     self.trigger.radius = 1024;
-  else
+  }
+  else {
     self.trigger.radius = self.oldRadius;
+  }
 }
 
 onEndUse(player, team, success) {
@@ -327,10 +337,12 @@ onEndUse(player, team, success) {
 onPickup(player) {
   team = player.pers["team"];
 
-  if(team == "allies")
+  if(team == "allies") {
     otherTeam = "axis";
-  else
+  }
+  else {
     otherTeam = "allies";
+  }
 
   if(team == self maps\mp\gametypes\_gameobjects::getOwnerTeam()) {
     player thread maps\mp\gametypes\_hud_message::SplashNotify("flagreturn", maps\mp\gametypes\_rank::getScoreInfoValue("pickup"));
@@ -389,8 +401,9 @@ onDrop(player) {
   level.capZones[otherTeam] maps\mp\gametypes\_gameobjects::setVisibleTeam("none");
 
   if(isDefined(player)) {
-    if(isDefined(player.carryFlag))
+    if(isDefined(player.carryFlag)) {
       player detachFlag();
+    }
 
     printAndSoundOnEveryone(otherTeam, "none", &"MP_ENEMY_FLAG_DROPPED_BY", "", "mp_war_objective_lost", "", player);
   } else {
@@ -417,10 +430,12 @@ onReset() {
 
 onUse(player) {
   team = player.pers["team"];
-  if(team == "allies")
+  if(team == "allies") {
     otherTeam = "axis";
-  else
+  }
+  else {
     otherTeam = "allies";
+  }
 
   leaderDialog("enemy_flag_captured", team, "status");
   leaderDialog("flag_captured", otherteam, "status");
@@ -442,8 +457,9 @@ onUse(player) {
   level.teamFlags[otherTeam] maps\mp\gametypes\_gameobjects::disableObject();
   level.capZones[team] maps\mp\gametypes\_gameobjects::allowUse("none");
 
-  if(isDefined(player.carryFlag))
+  if(isDefined(player.carryFlag)) {
     player detachFlag();
+  }
 }
 
 flagCaptured(winningTeam, endReasonText) {
@@ -452,8 +468,9 @@ flagCaptured(winningTeam, endReasonText) {
 }
 
 onTimeLimit() {
-  if(level.flagCaptured)
+  if(level.flagCaptured) {
     return;
+  }
 
   // TODO: change to "Flag Defended" or some such
   maps\mp\gametypes\_gamelogic::endGame(game["defenders"], game["strings"]["time_limit_reached"]);
@@ -465,8 +482,9 @@ onCantUse(player) {
 
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, killId) {
   if(isDefined(attacker) && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
-    if(isDefined(attacker.carryFlag))
+    if(isDefined(attacker.carryFlag)) {
       attacker incPlayerStat("killsasflagcarrier", 1);
+    }
 
     if(isDefined(self.carryFlag)) {
       attacker thread[[level.onXPEvent]]("kill_carrier");

@@ -4,8 +4,9 @@
 ***************************************/
 
 remote_vehicle_setup() {
-  while(!isDefined(level.bot_variables_initialized))
+  while(!isDefined(level.bot_variables_initialized)) {
     wait 0.05;
+  }
 
   if(isDefined(level.bot_initialized_remote_vehicles)) {
     return;
@@ -38,8 +39,9 @@ remote_vehicle_setup() {
   level.bot_heli_nodes = [];
 
   foreach(var_02 in var_00) {
-    if(isDefined(var_2.script_linkname))
+    if(isDefined(var_2.script_linkname)) {
       level.bot_heli_nodes = scripts\engine\utility::array_add(level.bot_heli_nodes, var_02);
+    }
   }
 
   level.bot_heli_pilot_traceoffset = scripts\mp\utility\game::gethelipilottraceoffset();
@@ -49,8 +51,9 @@ remote_vehicle_setup() {
     var_06 = var_5.origin + (0, 0, 50);
     var_5.valid_for_vanguard = 1;
 
-    if(var_6[2] <= var_5.origin[2] - 1000)
+    if(var_6[2] <= var_5.origin[2] - 1000) {
       var_5.valid_for_vanguard = 0;
+    }
 
     var_06 = var_06 - (0, 0, 50);
     var_5.vanguard_origin = var_06;
@@ -58,8 +61,9 @@ remote_vehicle_setup() {
 
   var_08 = -99999999;
 
-  foreach(var_05 in level.bot_heli_nodes)
+  foreach(var_05 in level.bot_heli_nodes) {
   var_08 = max(var_08, var_5.origin[2]);
+  }
 
   level.bot_vanguard_height_trace_size = var_08 - level.bot_map_min_z + 100;
   level.odin_large_rod_radius = getweaponexplosionradius("odin_projectile_large_rod_mp");
@@ -67,24 +71,28 @@ remote_vehicle_setup() {
   level.vanguard_missile_radius = getweaponexplosionradius("remote_tank_projectile_mp");
   level.heli_pilot_missile_radius = getdvarfloat("bg_bulletExplRadius");
 
-  while(!isDefined(level.odin_marking_flash_radius_max) || !isDefined(level.odin_marking_flash_radius_min))
+  while(!isDefined(level.odin_marking_flash_radius_max) || !isDefined(level.odin_marking_flash_radius_min)) {
     wait 0.05;
+  }
 
   level.odin_flash_radius = (level.odin_marking_flash_radius_max + level.odin_marking_flash_radius_min) / 2;
   level.outside_zones = [];
 
-  if(isDefined(level.teleportgetactivepathnodezonesfunc))
+  if(isDefined(level.teleportgetactivepathnodezonesfunc)) {
     var_11 = [[level.teleportgetactivepathnodezonesfunc]]();
+  }
   else {
     var_11 = [];
 
-    for(var_12 = 0; var_12 < level.zonecount; var_12++)
+    for(var_12 = 0; var_12 < level.zonecount; var_12++) {
       var_11[var_11.size] = var_12;
+    }
   }
 
   foreach(var_14 in var_11) {
-    if(botzonegetindoorpercent(var_14) < 0.25)
+    if(botzonegetindoorpercent(var_14) < 0.25) {
       level.outside_zones = scripts\engine\utility::array_add(level.outside_zones, var_14);
+    }
   }
 
   level.func_2E35["recruit"] = 1.0;
@@ -95,8 +103,9 @@ remote_vehicle_setup() {
 }
 
 bot_killstreak_remote_control(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     return 0;
+  }
 
   var_05 = 1;
   var_06 = 1;
@@ -129,12 +138,14 @@ bot_killstreak_remote_control(var_00, var_01, var_02, var_03, var_04) {
             var_16 = 0;
 
             foreach(var_18 in var_15) {
-              if(nodeexposedtosky(var_18))
+              if(nodeexposedtosky(var_18)) {
                 var_16++;
+              }
             }
 
-            if(var_16 / var_15.size > 0.5)
+            if(var_16 / var_15.size > 0.5) {
               var_11 = scripts\engine\utility::array_add(var_11, var_14);
+            }
           }
         }
       }
@@ -153,8 +164,9 @@ bot_killstreak_remote_control(var_00, var_01, var_02, var_03, var_04) {
       } else if(var_11.size > 0)
         var_07 = self botnodepick(var_11, min(3, var_11.size), "node_hide");
 
-      if(!isDefined(var_07))
+      if(!isDefined(var_07)) {
         return 0;
+      }
 
       self botsetscriptgoalnode(var_07, "tactical");
     }
@@ -180,15 +192,19 @@ bot_killstreak_remote_control(var_00, var_01, var_02, var_03, var_04) {
   }
 
   if(!isDefined(var_07)) {
-    if(self getstance() == "prone")
+    if(self getstance() == "prone") {
       self botsetstance("prone");
-    else if(self getstance() == "crouch")
+    }
+    else if(self getstance() == "crouch") {
       self botsetstance("crouch");
+    }
   } else if(self botgetdifficultysetting("strategyLevel") > 0) {
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       self botsetstance("prone");
-    else
+    }
+    else {
       self botsetstance("crouch");
+    }
   }
 
   scripts\mp\bots\bots_killstreaks::bot_switch_to_killstreak_weapon(var_00, var_01, var_0.weapon);
@@ -220,8 +236,9 @@ bot_end_control_watcher(var_00) {
 }
 
 try_clear_hide_goal(var_00) {
-  if(isDefined(var_00) && self bothasscriptgoal() && isDefined(self botgetscriptgoalnode()) && self botgetscriptgoalnode() == var_00)
+  if(isDefined(var_00) && self bothasscriptgoal() && isDefined(self botgetscriptgoalnode()) && self botgetscriptgoalnode() == var_00) {
     self botclearscriptgoal();
+  }
 }
 
 bot_end_control_on_vehicle_death(var_00) {
@@ -235,8 +252,9 @@ bot_waittill_using_vehicle(var_00) {
   while(!self[[level.bot_ks_funcs["isUsing"][var_00]]]()) {
     wait 0.05;
 
-    if(gettime() - var_01 > 5000)
+    if(gettime() - var_01 > 5000) {
       return 0;
+    }
   }
 
   return 1;
@@ -250,8 +268,9 @@ bot_control_switchblade_cluster() {
   childthread handle_disable_rotation();
   var_00 = bot_waittill_using_vehicle("switchblade_cluster");
 
-  if(!var_00)
+  if(!var_00) {
     self notify("control_func_done");
+  }
 
   thread switchblade_handle_awareness();
   var_01 = find_cluster_rocket_for_bot(self);
@@ -277,8 +296,9 @@ bot_control_switchblade_cluster() {
         var_15 = 1;
 
         foreach(var_17 in var_05) {
-          if(var_17.rocket == var_14)
+          if(var_17.rocket == var_14) {
             var_15 = 0;
+          }
         }
 
         if(var_15) {
@@ -312,8 +332,9 @@ bot_control_switchblade_cluster() {
       var_22 = var_10;
 
       if(!isalive(var_10) || !self botcanseeentity(var_22)) {
-        if(!isalive(var_10))
+        if(!isalive(var_10)) {
           var_11 = 1;
+        }
 
         wait 0.05;
         continue;
@@ -327,8 +348,9 @@ bot_control_switchblade_cluster() {
       var_25 = [];
 
       foreach(var_17 in var_05) {
-        if(isDefined(var_17.target))
+        if(isDefined(var_17.target)) {
           var_25 = scripts\engine\utility::array_add(var_25, var_17.target);
+        }
       }
 
       var_24 = scripts\engine\utility::array_remove_array(var_24, var_25);
@@ -354,8 +376,9 @@ bot_control_switchblade_cluster() {
           var_33 = vectordot(var_30, var_32);
           var_34 = vectordot(var_31, var_32);
 
-          if(var_34 > var_33)
+          if(var_34 > var_33) {
             var_22 = var_29;
+          }
         }
       }
     }
@@ -365,18 +388,22 @@ bot_control_switchblade_cluster() {
       var_36 = var_1.origin[2] - var_22.origin[2];
       var_37 = self botgetdifficulty();
 
-      if(var_37 == "recruit")
+      if(var_37 == "recruit") {
         var_09 = var_22.origin;
-      else if(var_36 < 5000)
+      }
+      else if(var_36 < 5000) {
         var_09 = var_22.origin;
-      else if(length(var_22 getentityvelocity()) < 25)
+      }
+      else if(length(var_22 getentityvelocity()) < 25) {
         var_09 = var_22.origin;
+      }
       else if(gettime() - var_08 > 500) {
         var_08 = gettime();
         var_38 = 3.0;
 
-        if(var_37 == "regular")
+        if(var_37 == "regular") {
           var_38 = 1.0;
+        }
 
         var_09 = getpredictedentityposition(var_22, var_38);
       }
@@ -384,22 +411,29 @@ bot_control_switchblade_cluster() {
       var_39 = missile_get_desired_angles_to_target(var_01, var_09);
       var_40 = missile_get_distance_to_target(var_01, var_09);
 
-      if(var_40 < 30)
+      if(var_40 < 30) {
         var_41 = 0.0;
-      else if(var_40 < 100)
+      }
+      else if(var_40 < 100) {
         var_41 = 0.15;
-      else if(var_40 < 200)
+      }
+      else if(var_40 < 200) {
         var_41 = 0.3;
-      else if(var_40 < 400)
+      }
+      else if(var_40 < 400) {
         var_41 = 0.6;
-      else
+      }
+      else {
         var_41 = 1.0;
+      }
 
-      if(var_07)
+      if(var_07) {
         var_41 = min(var_41 * 3, 1.0);
+      }
 
-      if(var_41 > 0)
+      if(var_41 > 0) {
         self botsetscriptmove(var_39[1], 0.05, var_41, 1, 1);
+      }
       else if(gettime() > var_04) {
         if(var_03 < 2) {
           self botpressbutton("attack");
@@ -418,13 +452,15 @@ bot_control_switchblade_cluster() {
           var_07 = 1;
           self botpressbutton("attack");
 
-          if(var_37 == "recruit")
+          if(var_37 == "recruit") {
             var_10 = var_22;
+          }
         }
       }
     } else {
-      if(!isDefined(var_02))
+      if(!isDefined(var_02)) {
         var_02 = scripts\engine\utility::random(level.outside_zones);
+      }
 
       var_43 = getzonenodeforindex(var_02).origin;
 
@@ -485,8 +521,9 @@ watch_end_switchblade() {
 find_cluster_rocket_for_bot(var_00) {
   for(;;) {
     foreach(var_02 in level.rockets) {
-      if(isDefined(var_02) && var_2.owner == var_00)
+      if(isDefined(var_02) && var_2.owner == var_00) {
         return var_02;
+      }
     }
 
     wait 0.05;
@@ -494,11 +531,13 @@ find_cluster_rocket_for_bot(var_00) {
 }
 
 vanguard_allowed() {
-  if(!scripts\mp\bots\bots_killstreaks::aerial_vehicle_allowed())
+  if(!scripts\mp\bots\bots_killstreaks::aerial_vehicle_allowed()) {
     return 0;
+  }
 
-  if(scripts\mp\bots\bots_killstreaks::iskillstreakblockedforbots("vanguard"))
+  if(scripts\mp\bots\bots_killstreaks::iskillstreakblockedforbots("vanguard")) {
     return 0;
+  }
 
   return 1;
 }
@@ -518,8 +557,9 @@ bot_control_vanguard() {
   level endon("game_ended");
   var_00 = bot_waittill_using_vehicle("vanguard");
 
-  if(!var_00)
+  if(!var_00) {
     self notify("control_func_done");
+  }
 
   self.vehicle_controlling = self.remoteuav;
   childthread bot_end_control_on_vehicle_death(self.vehicle_controlling);
@@ -534,8 +574,9 @@ bot_control_vanguard() {
   while(var_02 && !var_05) {
     var_06 = getnodesinradiussorted(self.vehicle_controlling.origin, 1024, 64, 512, "path");
 
-    if(isDefined(var_03))
+    if(isDefined(var_03)) {
       var_06 = scripts\engine\utility::array_remove(var_06, var_03);
+    }
 
     foreach(var_08 in var_06) {
       if(node_is_valid_outside_for_vanguard(var_08)) {
@@ -547,8 +588,9 @@ bot_control_vanguard() {
       var_01 = var_01 + 0.05;
     }
 
-    if(var_01 < 1.0)
+    if(var_01 < 1.0) {
       wait(1.0 - var_01);
+    }
 
     if(!isDefined(var_03)) {
       self botpressbutton("use", 4.0);
@@ -576,8 +618,9 @@ bot_control_vanguard() {
       }
       var_13 = 32;
 
-      if(var_11 == var_10.size - 1)
+      if(var_11 == var_10.size - 1) {
         var_13 = 16;
+      }
 
       var_14 = self.vehicle_controlling.origin;
       var_15 = gettime() + 2500;
@@ -606,10 +649,12 @@ bot_control_vanguard() {
         var_18 = var_12.origin[2] + 64;
         var_19 = var_18 - self.vehicle_controlling.origin[2];
 
-        if(var_19 > 10)
+        if(var_19 > 10) {
           self botpressbutton("lethal");
-        else if(var_19 < -10)
+        }
+        else if(var_19 < -10) {
           self botpressbutton("tactical");
+        }
 
         wait 0.05;
       }
@@ -617,8 +662,9 @@ bot_control_vanguard() {
 
     var_02 = 0;
 
-    if(!self.vehicle_controlling vanguard_is_outside())
+    if(!self.vehicle_controlling vanguard_is_outside()) {
       var_02 = 1;
+    }
   }
 
   self botsetscriptmove(0, 0);
@@ -642,8 +688,9 @@ bot_control_vanguard() {
     if(gettime() > var_23) {
       var_23 = gettime() + 2000;
 
-      if(isDefined(var_22))
+      if(isDefined(var_22)) {
         var_22 = undefined;
+      }
       else {
         var_19 = self.vehicle_controlling.origin[2] - var_21;
 
@@ -672,8 +719,9 @@ bot_control_vanguard() {
     if(isDefined(var_22)) {
       self botsetscriptmove(vectortoangles(var_22)[1], 0.05);
 
-      if(scripts\engine\utility::cointoss())
+      if(scripts\engine\utility::cointoss()) {
         self botpressbutton("tactical");
+      }
     } else
       self botpressbutton("lethal");
 
@@ -690,15 +738,17 @@ bot_control_vanguard() {
 pos_is_valid_outside_for_vanguard(var_00) {
   var_01 = getclosestnodeinsight(var_00);
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     return node_is_valid_outside_for_vanguard(var_01);
+  }
 
   return 0;
 }
 
 node_is_valid_outside_for_vanguard(var_00) {
-  if(nodeexposedtosky(var_00))
+  if(nodeexposedtosky(var_00)) {
     return pos_passes_sky_trace(var_0.origin);
+  }
 
   return 0;
 }
@@ -707,8 +757,9 @@ pos_passes_sky_trace(var_00) {
   var_01 = var_00;
   var_02 = var_00 + (0, 0, level.bot_vanguard_height_trace_size);
 
-  if(var_2[2] <= var_1[2])
+  if(var_2[2] <= var_1[2]) {
     return 0;
+  }
 
   var_03 = bullettracepassed(var_01, var_02, 0, undefined);
   return var_03;
@@ -717,28 +768,33 @@ pos_passes_sky_trace(var_00) {
 vanguard_is_outside() {
   var_00 = getclosestnodeinsight(self.origin);
 
-  if(isDefined(var_00) && !nodeexposedtosky(var_00))
+  if(isDefined(var_00) && !nodeexposedtosky(var_00)) {
     return 0;
+  }
 
   wait 0.05;
 
-  if(!pos_passes_sky_trace(self.origin + (18, 0, 25)))
+  if(!pos_passes_sky_trace(self.origin + (18, 0, 25))) {
     return 0;
+  }
 
   wait 0.05;
 
-  if(!pos_passes_sky_trace(self.origin + (-18, 0, 25)))
+  if(!pos_passes_sky_trace(self.origin + (-18, 0, 25))) {
     return 0;
+  }
 
   wait 0.05;
 
-  if(!pos_passes_sky_trace(self.origin + (0, 18, 25)))
+  if(!pos_passes_sky_trace(self.origin + (0, 18, 25))) {
     return 0;
+  }
 
   wait 0.05;
 
-  if(!pos_passes_sky_trace(self.origin + (0, -18, 25)))
+  if(!pos_passes_sky_trace(self.origin + (0, -18, 25))) {
     return 0;
+  }
 
   return 1;
 }
@@ -782,8 +838,9 @@ vanguard_control_aiming() {
               var_13 = distancesquared(self.vehicle_controlling.origin, var_6.origin);
               var_14 = distancesquared(self.vehicle_controlling.origin, var_12.origin);
 
-              if(var_14 < var_13)
+              if(var_14 < var_13) {
                 var_06 = var_12;
+              }
 
               continue;
             }
@@ -795,11 +852,13 @@ vanguard_control_aiming() {
     }
 
     if(isDefined(var_06)) {
-      if((isai(var_06) || isplayer(var_06)) && length(var_06 getentityvelocity()) < 25)
+      if((isai(var_06) || isplayer(var_06)) && length(var_06 getentityvelocity()) < 25) {
         var_00 = var_6.origin;
+      }
       else if(gettime() - var_03 < 500) {
-        if(var_04 != var_06)
+        if(var_04 != var_06) {
           var_00 = var_6.origin;
+        }
       } else if(gettime() - var_03 > 500) {
         var_03 = gettime();
         var_00 = getpredictedentityposition(var_06, 3.0);
@@ -808,8 +867,9 @@ vanguard_control_aiming() {
 
       var_16 = 165;
 
-      if(gettime() - var_02 > 10000)
+      if(gettime() - var_02 > 10000) {
         var_16 = 200;
+      }
 
       if(distancesquared(self.vehicle_controlling.attackarrow.origin, var_00) < level.vanguard_missile_radius * level.vanguard_missile_radius) {
         if(bot_body_is_dead() || distancesquared(self.vehicle_controlling.attackarrow.origin, self.origin) > level.vanguard_missile_radius * level.vanguard_missile_radius) {
@@ -823,8 +883,9 @@ vanguard_control_aiming() {
       self.next_goal_time = gettime();
     }
 
-    if(length(var_00) == 0)
+    if(length(var_00) == 0) {
       var_00 = (0, 0, 10);
+    }
 
     self botlookatpoint(var_00, 0.2, "script_forced");
     wait 0.05;
@@ -848,8 +909,9 @@ vanguard_pick_node(var_00) {
         ](var_05);
         var_07 = playerphysicstrace(var_01, var_06);
 
-        if(distancesquared(var_07, var_06) < 1)
+        if(distancesquared(var_07, var_06) < 1) {
           var_02 = scripts\engine\utility::array_add(var_02, var_05);
+        }
 
         wait 0.05;
         continue;
@@ -860,8 +922,9 @@ vanguard_pick_node(var_00) {
   }
 
   if(var_2.size == 0 && var_3.size > 0) {
-    foreach(var_05 in var_03)
+    foreach(var_05 in var_03) {
     var_5.bot_visited_times[self.entity_number]++;
+    }
   }
 
   return heli_pick_node_furthest_from_center(var_02, "vanguard");
@@ -900,8 +963,9 @@ origin_is_valid_for_vanguard(var_00) {
 }
 
 heli_sniper_allowed() {
-  if(!scripts\mp\bots\bots_killstreaks::aerial_vehicle_allowed())
+  if(!scripts\mp\bots\bots_killstreaks::aerial_vehicle_allowed()) {
     return 0;
+  }
 
   return 1;
 }
@@ -930,8 +994,9 @@ heli_sniper_pick_node(var_00) {
 }
 
 heli_pilot_allowed() {
-  if(!scripts\mp\bots\bots_killstreaks::aerial_vehicle_allowed())
+  if(!scripts\mp\bots\bots_killstreaks::aerial_vehicle_allowed()) {
     return 0;
+  }
 
   return 1;
 }
@@ -961,15 +1026,17 @@ heli_pilot_monitor_flares() {
     var_02 = 1;
 
     foreach(var_04 in var_01) {
-      if(isDefined(var_04) && !scripts\engine\utility::array_contains(var_00, var_04))
+      if(isDefined(var_04) && !scripts\engine\utility::array_contains(var_00, var_04)) {
         var_02 = 0;
+      }
     }
 
     if(!var_02) {
       var_06 = clamp(0.34 * self botgetdifficultysetting("strategyLevel"), 0.0, 1.0);
 
-      if(randomfloat(1.0) < var_06)
+      if(randomfloat(1.0) < var_06) {
         self notify("manual_flare_popped");
+      }
 
       var_00 = scripts\engine\utility::array_combine(var_00, var_01);
       var_00 = scripts\engine\utility::array_removeundefined(var_00);
@@ -1009,16 +1076,18 @@ heli_pilot_control_heli_aiming() {
       } else {
         var_07 = var_07 + 0.05;
 
-        if(var_07 > 5.0)
+        if(var_07 > 5.0) {
           var_08 = 0;
+        }
       }
     }
 
     if(var_08) {
       var_02 = var_00 - (0, 0, 50);
 
-      if(var_09 && (bot_body_is_dead() || distancesquared(var_02, self.origin) > level.heli_pilot_missile_radius * level.heli_pilot_missile_radius))
+      if(var_09 && (bot_body_is_dead() || distancesquared(var_02, self.origin) > level.heli_pilot_missile_radius * level.heli_pilot_missile_radius)) {
         self botpressbutton("attack");
+      }
 
       if(gettime() > var_04 + 500) {
         var_11 = randomfloatrange(-1 * var_06 / 2, var_06 / 2);
@@ -1034,8 +1103,9 @@ heli_pilot_control_heli_aiming() {
       var_16 = anglesToForward(self getplayerangles());
       var_17 = vectordot(var_15, var_16);
 
-      if(var_17 > 0.5)
+      if(var_17 > 0.5) {
         self botpressbutton("ads", 0.1);
+      }
     } else if(gettime() > var_03) {
       var_03 = gettime() + randomintrange(1000, 2000);
       var_02 = get_random_outside_target();
@@ -1049,22 +1119,27 @@ heli_pilot_control_heli_aiming() {
     var_22 = angleclamp(var_20[0]);
     var_23 = int(var_21 - var_22) % 360;
 
-    if(var_23 > 180)
+    if(var_23 > 180) {
       var_23 = 360 - var_23;
-    else if(var_23 < -180)
+    }
+    else if(var_23 < -180) {
       var_23 = -360 + var_23;
+    }
 
-    if(var_23 > 15)
+    if(var_23 > 15) {
       var_22 = var_21 - 15;
-    else if(var_23 < -15)
+    }
+    else if(var_23 < -15) {
       var_22 = var_21 + 15;
+    }
 
     var_20 = (var_22, var_20[1], var_20[2]);
     var_18 = anglesToForward(var_20);
     var_02 = self.vehicle_controlling.origin + var_18 * var_19;
 
-    if(length(var_02) == 0)
+    if(length(var_02) == 0) {
       var_02 = (0, 0, 10);
+    }
 
     self botlookatpoint(var_02, 0.2, "script_forced");
     wait 0.05;
@@ -1076,14 +1151,17 @@ bot_control_odin_assault() {
 }
 
 odin_assault_perform_action() {
-  if(func_2E3A())
+  if(func_2E3A()) {
     return 1;
+  }
 
-  if(func_2E38())
+  if(func_2E38()) {
     return 1;
+  }
 
-  if(func_2E36())
+  if(func_2E36()) {
     return 1;
+  }
 
   return 0;
 }
@@ -1095,8 +1173,9 @@ odin_assault_get_target() {
 func_2E2B() {
   var_00 = undefined;
 
-  if(isDefined(self.last_large_rod_target) && gettime() - self.last_large_rod_time < 5000)
+  if(isDefined(self.last_large_rod_target) && gettime() - self.last_large_rod_time < 5000) {
     var_00 = self.last_large_rod_target;
+  }
 
   return func_2E2C("enemy", 1, var_00);
 }
@@ -1132,8 +1211,9 @@ func_2E34() {
     }
 
     if(var_00) {
-      if(!bot_body_is_dead() && var_04 < level.odin_large_rod_radius * level.odin_large_rod_radius)
+      if(!bot_body_is_dead() && var_04 < level.odin_large_rod_radius * level.odin_large_rod_radius) {
         return "none";
+      }
 
       for(var_05 = 0; var_05 < var_2.size; var_5++) {
         if(var_3[var_05] < squared(level.odin_large_rod_radius)) {
@@ -1145,8 +1225,9 @@ func_2E34() {
     }
 
     if(var_01) {
-      if(!bot_body_is_dead() && var_04 < level.odin_small_rod_radius * level.odin_small_rod_radius)
+      if(!bot_body_is_dead() && var_04 < level.odin_small_rod_radius * level.odin_small_rod_radius) {
         return "none";
+      }
 
       for(var_05 = 0; var_05 < var_2.size; var_5++) {
         if(var_3[var_05] < squared(level.odin_small_rod_radius)) {
@@ -1167,17 +1248,21 @@ bot_control_odin_support() {
 }
 
 odin_support_perform_action() {
-  if(func_2E3A())
+  if(func_2E3A()) {
     return 1;
+  }
 
-  if(func_2E36())
+  if(func_2E36()) {
     return 1;
+  }
 
-  if(func_2E39())
+  if(func_2E39()) {
     return 1;
+  }
 
-  if(func_2E37())
+  if(func_2E37()) {
     return 1;
+  }
 
   return 0;
 }
@@ -1192,8 +1277,9 @@ func_2E37() {
 }
 
 func_2E33() {
-  if(gettime() < self.odin.odin_markingusetime)
+  if(gettime() < self.odin.odin_markingusetime) {
     return 0;
+  }
 
   var_00 = func_2E30("enemy", 0);
   var_01 = [];
@@ -1202,8 +1288,9 @@ func_2E33() {
     var_03 = func_2E2F(var_0[var_02]);
     var_1[var_02] = distancesquared(self.odin.targeting_marker.origin, var_03);
 
-    if(var_1[var_02] < squared(level.odin_flash_radius / 2))
+    if(var_1[var_02] < squared(level.odin_flash_radius / 2)) {
       return 1;
+    }
   }
 
   return 0;
@@ -1219,29 +1306,34 @@ func_2E39() {
 }
 
 func_2E32() {
-  if(gettime() < self.odin.odin_smokeusetime)
+  if(gettime() < self.odin.odin_smokeusetime) {
     return 0;
+  }
 
   var_00 = func_2E2D();
 
   foreach(var_02 in var_00) {
-    if(distancesquared(var_02, self.odin.targeting_marker.origin) < 2500)
+    if(distancesquared(var_02, self.odin.targeting_marker.origin) < 2500) {
       return 1;
+    }
   }
 
   var_04 = undefined;
 
-  if(isDefined(self.odin.targeting_marker.nearest_node))
+  if(isDefined(self.odin.targeting_marker.nearest_node)) {
     var_04 = getnodezone(self.odin.targeting_marker.nearest_node);
+  }
 
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     return 0;
+  }
 
   var_05 = bot_killstreak_get_zone_enemies_outside(1);
   var_06 = var_5[var_04].size;
 
-  if(var_06 >= 2)
+  if(var_06 >= 2) {
     return 1;
+  }
 
   return 0;
 }
@@ -1249,24 +1341,27 @@ func_2E32() {
 func_2E2D() {
   var_00 = [];
 
-  if(gettime() < self.odin.odin_smokeusetime)
+  if(gettime() < self.odin.odin_smokeusetime) {
     return var_00;
+  }
 
   foreach(var_02 in level.carepackages) {
     if(scripts\mp\bots\bots::crate_landed_and_on_path_grid(var_02)) {
       var_3[0] = self;
       var_04 = scripts\engine\utility::get_array_of_closest(var_2.origin, level.players, var_03);
 
-      if(var_4.size > 0 && var_4[0].team == self.team)
+      if(var_4.size > 0 && var_4[0].team == self.team) {
         var_00 = scripts\engine\utility::array_add(var_00, var_2.origin);
+      }
     }
   }
 
   var_06 = func_2E30("ally", 0);
 
   foreach(var_08 in var_06) {
-    if(isai(var_08) && var_08 scripts\mp\bots\bots_util::bot_is_capturing())
+    if(isai(var_08) && var_08 scripts\mp\bots\bots_util::bot_is_capturing()) {
       var_00 = scripts\engine\utility::array_add(var_00, var_8.origin);
+    }
   }
 
   return var_00;
@@ -1275,8 +1370,9 @@ func_2E2D() {
 odin_support_get_target() {
   var_00 = func_2E2D();
 
-  if(var_0.size > 0)
+  if(var_0.size > 0) {
     return var_0[0];
+  }
 
   return func_2E2C("enemy", 1);
 }
@@ -1285,10 +1381,12 @@ monitor_odin_marker() {
   for(;;) {
     self.odin.targeting_marker.nearest_node = getclosestnodeinsight(self.odin.targeting_marker.origin);
 
-    if(scripts\mp\bots\bots_util::bot_point_is_on_pathgrid(self.odin.targeting_marker.origin, 200))
+    if(scripts\mp\bots\bots_util::bot_point_is_on_pathgrid(self.odin.targeting_marker.origin, 200)) {
       self.odin.targeting_marker.nearest_point_on_pathgrid = self.odin.targeting_marker.origin;
-    else
+    }
+    else {
       self.odin.targeting_marker.nearest_point_on_pathgrid = undefined;
+    }
 
     wait 0.25;
   }
@@ -1301,8 +1399,9 @@ bot_control_odin(var_00) {
   level endon("game_ended");
   var_01 = bot_waittill_using_vehicle(var_00);
 
-  if(!var_01)
+  if(!var_01) {
     self notify("control_func_done");
+  }
 
   self.vehicle_controlling = self.odin;
   childthread bot_end_control_on_vehicle_death(self.odin);
@@ -1342,13 +1441,16 @@ bot_control_odin(var_00) {
       if(isDefined(var_10)) {
         var_02 = undefined;
 
-        if(isplayer(var_10))
+        if(isplayer(var_10)) {
           var_04 = func_2E2F(var_10);
-        else
+        }
+        else {
           var_04 = var_10;
+        }
       } else {
-        if(!isDefined(var_02))
+        if(!isDefined(var_02)) {
           var_02 = scripts\engine\utility::random(level.outside_zones);
+        }
 
         var_11 = getzonenodeforindex(var_02).origin;
 
@@ -1387,16 +1489,19 @@ bot_end_odin_watcher(var_00) {
 }
 
 func_2E2F(var_00) {
-  if(level.teambased && self.team == var_0.team)
+  if(level.teambased && self.team == var_0.team) {
     return var_0.origin;
+  }
   else {
-    if(length(var_00 getentityvelocity()) < 25)
+    if(length(var_00 getentityvelocity()) < 25) {
       return var_0.origin;
+    }
 
     var_01 = var_00 getentitynumber();
 
-    if(!isDefined(self.odin_predicted_loc_time_for_player[var_01]))
+    if(!isDefined(self.odin_predicted_loc_time_for_player[var_01])) {
       self.odin_predicted_loc_time_for_player[var_01] = 0;
+    }
 
     var_02 = gettime();
     var_03 = var_02 - self.odin_predicted_loc_time_for_player[var_01];
@@ -1405,14 +1510,16 @@ func_2E2F(var_00) {
       var_04 = vectornormalize(var_00 getentityvelocity());
       var_05 = vectornormalize(self.odin_predicted_loc_for_player[var_01] - var_0.origin);
 
-      if(vectordot(var_04, var_05) < -0.5)
+      if(vectordot(var_04, var_05) < -0.5) {
         return var_0.origin;
+      }
     }
 
     if(var_03 > 400) {
       if(var_02 == self.odin_last_predict_position_time) {
-        if(var_03 > 1000)
+        if(var_03 > 1000) {
           return var_0.origin;
+        }
       } else {
         self.odin_predicted_loc_for_player[var_01] = getpredictedentityposition(var_00, 1.5);
         self.odin_predicted_loc_time_for_player[var_01] = var_02;
@@ -1427,8 +1534,9 @@ func_2E2F(var_00) {
 func_2E2C(var_00, var_01, var_02) {
   var_03 = func_2E30(var_00, var_01);
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_03 = scripts\engine\utility::array_remove(var_03, var_02);
+  }
 
   if(var_3.size > 0) {
     var_04 = scripts\engine\utility::get_array_of_closest(self.odin.targeting_marker.origin, var_03);
@@ -1440,8 +1548,9 @@ func_2E2C(var_00, var_01, var_02) {
 
 func_2E3A() {
   if(gettime() >= self.odin.odin_juggernautusetime) {
-    if(!isDefined(self.odin.targeting_marker.nearest_node))
+    if(!isDefined(self.odin.targeting_marker.nearest_node)) {
       return 0;
+    }
   }
 
   return 0;
@@ -1462,42 +1571,50 @@ func_2E36() {
 }
 
 func_2E31() {
-  if(gettime() < self.odin.odin_airdropusetime)
+  if(gettime() < self.odin.odin_airdropusetime) {
     return 0;
+  }
 
-  if(!isDefined(self.odin.targeting_marker.nearest_node))
+  if(!isDefined(self.odin.targeting_marker.nearest_node)) {
     return 0;
+  }
 
-  if(func_2E2E() > 2)
+  if(func_2E2E() > 2) {
     return 0;
+  }
 
-  if(!isDefined(self.odin.targeting_marker.nearest_point_on_pathgrid))
+  if(!isDefined(self.odin.targeting_marker.nearest_point_on_pathgrid)) {
     return 0;
+  }
 
   var_00 = getnodezone(self.odin.targeting_marker.nearest_node);
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
   var_01 = bot_killstreak_get_zone_allies_outside(1);
   var_02 = var_1[var_00].size;
   var_03 = bot_killstreak_get_zone_enemies_outside(1);
   var_04 = var_3[var_00].size;
 
-  if(var_02 == 0)
+  if(var_02 == 0) {
     return 0;
+  }
 
   if(var_04 == 0) {
     var_05 = 0;
     var_06 = func_2E30("enemy", 1);
 
     foreach(var_08 in var_06) {
-      if(distancesquared(var_8.origin, self.odin.targeting_marker.origin) < 14400)
+      if(distancesquared(var_8.origin, self.odin.targeting_marker.origin) < 14400) {
         var_05 = 1;
+      }
     }
 
-    if(!var_05)
+    if(!var_05) {
       return 1;
+    }
   }
 
   if(var_02 - var_04 >= 2) {
@@ -1506,8 +1623,9 @@ func_2E31() {
     var_12 = distance(self.odin.targeting_marker.origin, var_10[0].origin);
     var_13 = distance(self.odin.targeting_marker.origin, var_11[0].origin);
 
-    if(var_12 + 120 < var_13)
+    if(var_12 + 120 < var_13) {
       return 1;
+    }
   }
 
   return 0;
@@ -1517,8 +1635,9 @@ func_2E2E() {
   var_00 = 0;
 
   foreach(var_02 in level.carepackages) {
-    if(isDefined(var_02) && scripts\mp\bots\bots::crate_landed_and_on_path_grid(var_02))
+    if(isDefined(var_02) && scripts\mp\bots\bots::crate_landed_and_on_path_grid(var_02)) {
       var_0++;
+    }
   }
 
   return var_00;
@@ -1533,12 +1652,14 @@ func_2E30(var_00, var_01, var_02) {
     var_08 = 0;
     var_09 = var_04;
 
-    if(var_00 == "enemy")
+    if(var_00 == "enemy") {
       var_09 = var_09 * 0.9;
+    }
 
     if(scripts\engine\utility::within_fov(self.vehicle_controlling.origin, self getplayerangles(), var_7.origin, var_09)) {
-      if(!var_08 || self botcanseeentity(var_07))
+      if(!var_08 || self botcanseeentity(var_07)) {
         var_05 = scripts\engine\utility::array_add(var_05, var_07);
+      }
     }
   }
 
@@ -1566,10 +1687,12 @@ heli_pick_node_furthest_from_center(var_00, var_01) {
     }
   }
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     return var_02;
-  else
+  }
+  else {
     return scripts\engine\utility::random(var_00);
+  }
 }
 
 heli_get_node_origin(var_00) {
@@ -1596,15 +1719,17 @@ bot_killstreak_get_zone_allies_outside(var_00) {
   var_01 = bot_killstreak_get_all_outside_allies(var_00);
   var_02 = [];
 
-  for(var_03 = 0; var_03 < level.zonecount; var_3++)
+  for(var_03 = 0; var_03 < level.zonecount; var_3++) {
     var_2[var_03] = [];
+  }
 
   foreach(var_05 in var_01) {
     var_06 = var_05 getnearestnode();
     var_07 = getnodezone(var_06);
 
-    if(isDefined(var_07))
+    if(isDefined(var_07)) {
       var_2[var_07] = ::scripts\engine\utility::array_add(var_2[var_07], var_05);
+    }
   }
 
   return var_02;
@@ -1614,8 +1739,9 @@ bot_killstreak_get_zone_enemies_outside(var_00) {
   var_01 = bot_killstreak_get_all_outside_enemies(var_00);
   var_02 = [];
 
-  for(var_03 = 0; var_03 < level.zonecount; var_3++)
+  for(var_03 = 0; var_03 < level.zonecount; var_3++) {
     var_2[var_03] = [];
+  }
 
   foreach(var_05 in var_01) {
     var_06 = var_05 getnearestnode();
@@ -1638,8 +1764,9 @@ bot_killstreak_get_outside_players(var_00, var_01, var_02) {
   var_03 = [];
   var_04 = level.participants;
 
-  if(isDefined(var_02) && var_02)
+  if(isDefined(var_02) && var_02) {
     var_04 = level.players;
+  }
 
   foreach(var_06 in var_04) {
     if(var_06 == self || !isalive(var_06)) {
@@ -1647,16 +1774,19 @@ bot_killstreak_get_outside_players(var_00, var_01, var_02) {
     }
     var_07 = 0;
 
-    if(var_01 == "ally")
+    if(var_01 == "ally") {
       var_07 = level.teambased && var_00 == var_6.team;
-    else if(var_01 == "enemy")
+    }
+    else if(var_01 == "enemy") {
       var_07 = !level.teambased || var_00 != var_6.team;
+    }
 
     if(var_07) {
       var_08 = var_06 getnearestnode();
 
-      if(isDefined(var_08) && nodeexposedtosky(var_08))
+      if(isDefined(var_08) && nodeexposedtosky(var_08)) {
         var_03 = scripts\engine\utility::array_add(var_03, var_06);
+      }
     }
   }
 
@@ -1691,19 +1821,22 @@ bot_control_heli(var_00) {
   level endon("game_ended");
   var_01 = bot_waittill_using_vehicle(var_00);
 
-  if(!var_01)
+  if(!var_01) {
     self notify("control_func_done");
+  }
 
   foreach(var_03 in level.littlebirds) {
-    if(var_3.owner == self)
+    if(var_3.owner == self) {
       self.vehicle_controlling = var_03;
+    }
   }
 
   childthread bot_end_control_on_vehicle_death(self.vehicle_controlling);
   self.vehicle_controlling endon("death");
 
-  if(isDefined(level.bot_ks_funcs["control_other"][var_00]))
+  if(isDefined(level.bot_ks_funcs["control_other"][var_00])) {
     self childthread[[level.bot_ks_funcs["control_other"][var_00]]]();
+  }
 
   self[[level.bot_ks_funcs["waittill_initial_goal"][var_00]]]();
   self childthread[[level.bot_ks_funcs["control_aiming"][var_00]]]();
@@ -1712,22 +1845,27 @@ bot_control_heli(var_00) {
 }
 
 bot_get_heli_goal_dist_sq(var_00) {
-  if(var_00)
+  if(var_00) {
     return squared(100);
-  else
+  }
+  else {
     return squared(30);
+  }
 }
 
 bot_get_heli_slowdown_dist_sq(var_00) {
-  if(var_00)
+  if(var_00) {
     return squared(300);
-  else
+  }
+  else {
     return squared(90);
+  }
 }
 
 bot_control_heli_main_move_loop(var_00, var_01) {
-  foreach(var_03 in level.bot_heli_nodes)
+  foreach(var_03 in level.bot_heli_nodes) {
   var_3.bot_visited_times[self.entity_number] = 0;
+  }
 
   var_05 = find_closest_heli_node_2d(self.vehicle_controlling.origin, var_00);
   var_06 = undefined;
@@ -1773,27 +1911,33 @@ bot_control_heli_main_move_loop(var_00, var_01) {
       if(!var_01) {
         var_17 = var_6[2] - self.vehicle_controlling.origin[2];
 
-        if(var_17 > 10)
+        if(var_17 > 10) {
           self botpressbutton("lethal");
-        else if(var_17 < -10)
+        }
+        else if(var_17 < -10) {
           self botpressbutton("tactical");
+        }
       }
 
       var_18 = var_06 - self.vehicle_controlling.origin;
 
-      if(var_01)
+      if(var_01) {
         var_08 = length2dsquared(var_18);
-      else
+      }
+      else {
         var_08 = lengthsquared(var_18);
+      }
 
       if(var_08 < bot_get_heli_goal_dist_sq(var_01)) {
         self botsetscriptmove(0, 0);
         self botsetflag("disable_movement", 1);
 
-        if(self botgetdifficulty() == "recruit")
+        if(self botgetdifficulty() == "recruit") {
           self.next_goal_time = gettime() + randomintrange(5000, 7000);
-        else
+        }
+        else {
           self.next_goal_time = gettime() + randomintrange(3000, 5000);
+        }
 
         var_07 = "needs_new_goal";
       } else {
@@ -1825,8 +1969,9 @@ get_random_outside_target() {
   foreach(var_02 in level.outside_zones) {
     var_03 = botzonegetcount(var_02, self.team, "enemy_predict");
 
-    if(var_03 > 0)
+    if(var_03 > 0) {
       var_00 = scripts\engine\utility::array_add(var_00, var_02);
+    }
   }
 
   var_05 = undefined;
@@ -1836,12 +1981,14 @@ get_random_outside_target() {
     var_07 = scripts\engine\utility::random(getzonenodes(var_06));
     var_05 = var_7.origin;
   } else {
-    if(isDefined(level.teleportgetactivenodesfunc))
+    if(isDefined(level.teleportgetactivenodesfunc)) {
       var_08 = [
+    }
         [level.teleportgetactivenodesfunc]
       ]();
-    else
+    else {
       var_08 = getallnodes();
+    }
 
     var_09 = 0;
 

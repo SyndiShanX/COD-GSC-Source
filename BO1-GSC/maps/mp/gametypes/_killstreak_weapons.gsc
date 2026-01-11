@@ -60,8 +60,9 @@ watchKillstreakWeaponDelay() {
     if(level.killstreakRoundDelay >= (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000) &&
       maps\mp\gametypes\_hardpoints::isDelayableKillstreak(newWeapon) && isHeldKillstreakWeapon(newWeapon)) {
       timeLeft = Int(level.killstreakRoundDelay - (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000));
-      if(!timeLeft)
+      if(!timeLeft) {
         timeLeft = 1;
+      }
       self iPrintLnBold(&"MP_UNAVAILABLE_FOR_N", " " + timeLeft + " ", &"EXE_SECONDS");
       self switchToWeapon(currentWeapon);
       wait(0.5);
@@ -69,8 +70,9 @@ watchKillstreakWeaponDelay() {
   }
 }
 useKillstreakWeaponDrop(hardpointType) {
-  if(self maps\mp\gametypes\_supplydrop::isSupplyDropGrenadeAllowed(hardpointType) == false)
+  if(self maps\mp\gametypes\_supplydrop::isSupplyDropGrenadeAllowed(hardpointType) == false) {
     return false;
+  }
   self thread maps\mp\gametypes\_supplydrop::refCountDecChopperOnDisconnect();
   result = self maps\mp\gametypes\_supplydrop::useSupplyDropMarker();
   self notify("supply_drop_marker_done");
@@ -80,13 +82,16 @@ useKillstreakWeaponDrop(hardpointType) {
   return result;
 }
 useCarriedKillstreakWeapon(hardpointType) {
-  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false)
+  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) {
     return false;
-  if(!isDefined(hardpointType))
+  }
+  if(!isDefined(hardpointType)) {
     return false;
+  }
   currentWeapon = self GetCurrentWeapon();
-  if(hardpointType == "none")
+  if(hardpointType == "none") {
     return false;
+  }
   level maps\mp\gametypes\_weapons::addLimitedWeapon(hardpointType, self, 3);
   self.firedKillstreakWeapon = false;
   self setBlockWeaponPickup(hardpointType, true);
@@ -101,10 +106,12 @@ watchKillsteakWeaponSwitch(killstreakWeapon) {
   while(1) {
     currentWeapon = self GetCurrentWeapon();
     self waittill("weapon_change", newWeapon);
-    if(newWeapon == "none")
+    if(newWeapon == "none") {
       continue;
-    if(!self checkIfSwitchableWeapon(currentWeapon, newWeapon, killstreakWeapon, KillstreakId))
+    }
+    if(!self checkIfSwitchableWeapon(currentWeapon, newWeapon, killstreakWeapon, KillstreakId)) {
       continue;
+    }
     self TakeWeapon(killstreakWeapon);
     self.firedKillstreakWeapon = false;
     self.usingKillstreakHeldWeapon = undefined;
@@ -117,28 +124,39 @@ checkIfSwitchableWeapon(currentWeapon, newWeapon, killstreakWeapon, currentKills
   switchableWeapon = true;
   topKillstreak = maps\mp\gametypes\_hardpoints::getTopKillstreak();
   killstreakId = maps\mp\gametypes\_hardpoints::getTopKillstreakUniqueId();
-  if(!isDefined(killstreakId))
+  if(!isDefined(killstreakId)) {
     killstreakId = -1;
-  if(self HasWeapon(killstreakWeapon) && !self GetAmmoCount(killstreakWeapon))
+  }
+  if(self HasWeapon(killstreakWeapon) && !self GetAmmoCount(killstreakWeapon)) {
     switchableWeapon = true;
-  else if(self.firedKillstreakWeapon && newWeapon == killstreakWeapon && isHeldKillstreakWeapon(currentWeapon))
+  }
+  else if(self.firedKillstreakWeapon && newWeapon == killstreakWeapon && isHeldKillstreakWeapon(currentWeapon)) {
     switchableWeapon = true;
-  else if(IsWeaponEquipment(newWeapon))
+  }
+  else if(IsWeaponEquipment(newWeapon)) {
     switchableWeapon = true;
-  else if(isDefined(level.grenade_array[newWeapon]))
+  }
+  else if(isDefined(level.grenade_array[newWeapon])) {
     switchableWeapon = false;
-  else if(isHeldKillstreakWeapon(newWeapon) && isHeldKillstreakWeapon(currentWeapon) && currentKillstreakId != killstreakId)
+  }
+  else if(isHeldKillstreakWeapon(newWeapon) && isHeldKillstreakWeapon(currentWeapon) && currentKillstreakId != killstreakId) {
     switchableWeapon = true;
-  else if(maps\mp\gametypes\_hardpoints::isKillstreakWeapon(newWeapon))
+  }
+  else if(maps\mp\gametypes\_hardpoints::isKillstreakWeapon(newWeapon)) {
     switchableWeapon = false;
-  else if(isGameplayWeapon(newWeapon))
+  }
+  else if(isGameplayWeapon(newWeapon)) {
     switchableWeapon = false;
-  else if(self.firedKillstreakWeapon)
+  }
+  else if(self.firedKillstreakWeapon) {
     switchableWeapon = true;
-  else if(self.lastNonKillstreakWeapon == killstreakWeapon)
+  }
+  else if(self.lastNonKillstreakWeapon == killstreakWeapon) {
     switchableWeapon = false;
-  else if(isDefined(topKillstreak) && topKillstreak == killstreakWeapon && currentKillstreakId == killstreakId)
+  }
+  else if(isDefined(topKillstreak) && topKillstreak == killstreakWeapon && currentKillstreakId == killstreakId) {
     switchableWeapon = false;
+  }
   return switchableWeapon;
 }
 watchKillstreakWeaponUsage() {
@@ -150,8 +168,9 @@ watchKillstreakWeaponUsage() {
       wait(0.1);
       continue;
     }
-    if(self.firedKillstreakWeapon)
+    if(self.firedKillstreakWeapon) {
       continue;
+    }
     level thread maps\mp\_popups::DisplayTeamMessageToAll(level.killstreaks[killstreakWeapon].inboundText, self);
     self maps\mp\gametypes\_globallogic_score::setWeaponStat(killstreakWeapon, 1, "used");
     self maps\mp\gametypes\_hardpoints::playKillstreakStartDialog(killstreakWeapon, self.team);

@@ -46,15 +46,17 @@ fx_trigger_fx_ent_think(var_0) {
 
     if(level.fx_trigger_info[var_0].reverse) {
       foreach(var_2 in level.players) {
-        if(!isDefined(common_scripts\utility::array_find(level.fx_trigger_info[var_0].players, var_2)))
+        if(!isDefined(common_scripts\utility::array_find(level.fx_trigger_info[var_0].players, var_2))) {
           self showtoplayer(var_2);
+        }
       }
 
       continue;
     }
 
-    foreach(var_2 in level.fx_trigger_info[var_0].players)
+    foreach(var_2 in level.fx_trigger_info[var_0].players) {
     self showtoplayer(var_2);
+    }
   }
 }
 

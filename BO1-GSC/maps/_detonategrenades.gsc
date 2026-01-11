@@ -37,12 +37,15 @@ watchGrenadeUsage() {
 
 begin_smoke_grenade_tracking() {
   self waittill("grenade_fire", grenade, weaponName);
-  if(!isDefined(level.smokegrenades))
+  if(!isDefined(level.smokegrenades)) {
     level.smokegrenades = 0;
-  if(level.smokegrenades > 2 && getDvar(#"player_sustainAmmo") != "0")
+  }
+  if(level.smokegrenades > 2 && getDvar(#"player_sustainAmmo") != "0") {
     grenade delete();
-  else
+  }
+  else {
     grenade thread smoke_grenade_death();
+  }
 }
 
 begin_mortar_tracking() {
@@ -82,8 +85,9 @@ watch_for_throwbacks() {
       self.gotPullbackNotify = false;
       continue;
     }
-    if(!isSubStr(weapname, "frag"))
+    if(!isSubStr(weapname, "frag")) {
       continue;
+    }
     grenade.threwBack = true;
     self maps\_dds::dds_notify_grenade(weapname, (self.team == "allies"), true);
   }
@@ -132,24 +136,30 @@ claymore_detonation() {
   }
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateRadius), spawnFlag, detonateRadius, detonateRadius * 2);
   self thread delete_claymores_on_death(damagearea);
-  if(!isDefined(level.claymores))
+  if(!isDefined(level.claymores)) {
     level.claymores = [];
+  }
   level.claymores = array_add(level.claymores, self);
-  if(level.claymores.size > 15 && getDvar(#"player_sustainAmmo") != "0")
+  if(level.claymores.size > 15 && getDvar(#"player_sustainAmmo") != "0") {
     level.claymores[0] delete();
+  }
   while(1) {
     damagearea waittill("trigger", ent);
-    if(isDefined(self.owner) && ent == self.owner)
+    if(isDefined(self.owner) && ent == self.owner) {
       continue;
-    if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] != playerTeamToAllow)
+    }
+    if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] != playerTeamToAllow) {
       continue;
+    }
     if(ent damageConeTrace(self.origin, self) > 0) {
       self playSound("claymore_activated_SP");
       wait 0.4;
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self detonate(self.owner);
-      else
+      }
+      else {
         self detonate(undefined);
+      }
       return;
     }
   }
@@ -159,8 +169,9 @@ delete_claymores_on_death(ent) {
   self waittill("death");
   level.claymores = array_remove_nokeys(level.claymores, self);
   wait .05;
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 watch_satchel_detonation() {
@@ -172,8 +183,9 @@ watch_satchel_detonation() {
       note = weap + "_detonated";
       self notify(note);
       for(i = 0; i < self.satchelarray.size; i++) {
-        if(isDefined(self.satchelarray[i]))
+        if(isDefined(self.satchelarray[i])) {
           self.satchelarray[i] thread wait_and_detonate(0.1);
+        }
       }
       self.satchelarray = [];
     }
@@ -196,16 +208,20 @@ satchel_damage() {
   attacker = undefined;
   while(1) {
     self waittill("damage", amount, attacker);
-    if(!isplayer(attacker))
+    if(!isplayer(attacker)) {
       continue;
+    }
     break;
   }
-  if(level.satchelexplodethisframe)
+  if(level.satchelexplodethisframe) {
     wait .1 + randomfloat(.4);
-  else
+  }
+  else {
     wait .05;
-  if(!isDefined(self))
+  }
+  if(!isDefined(self)) {
     return;
+  }
   level.satchelexplodethisframe = true;
   thread reset_satchel_explode_this_frame();
   self detonate(attacker);
@@ -231,14 +247,17 @@ play_claymore_effects() {
 
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
-  if(!isDefined(doLOS))
+  if(!isDefined(doLOS)) {
     doLOS = false;
-  if(!isDefined(startRadius))
+  }
+  if(!isDefined(startRadius)) {
     startRadius = 0;
+  }
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    if(!isalive(players[i]) || players[i].sessionstate != "playing")
+    if(!isalive(players[i]) || players[i].sessionstate != "playing") {
       continue;
+    }
     playerpos = players[i].origin + (0, 0, 32);
     dist = distance(pos, playerpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, playerpos, startRadius, undefined))) {
@@ -282,8 +301,9 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
 weaponDamageTracePassed(from, to, startRadius, ignore) {
   midpos = undefined;
   diff = to - from;
-  if(lengthsquared(diff) < startRadius * startRadius)
+  if(lengthsquared(diff) < startRadius * startRadius) {
     midpos = to;
+  }
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
   trace = bulletTrace(midpos, to, false, ignore);
@@ -314,8 +334,9 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
       0
     );
   } else {
-    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp"))
+    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp")) {
       return;
+    }
     self.entity damage_notify_wrapper(iDamage, eAttacker);
   }
 }

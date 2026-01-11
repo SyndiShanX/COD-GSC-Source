@@ -10,25 +10,29 @@ bot_killstreak_sentry(var_00, var_01, var_02, var_03) {
   level endon("game_ended");
   wait(randomintrange(3, 5));
 
-  while(isDefined(self.sentry_place_delay) && gettime() < self.sentry_place_delay)
+  while(isDefined(self.sentry_place_delay) && gettime() < self.sentry_place_delay) {
     wait 1;
+  }
 
-  if(isDefined(self.enemy) && self.enemy.health > 0 && self botcanseeentity(self.enemy))
+  if(isDefined(self.enemy) && self.enemy.health > 0 && self botcanseeentity(self.enemy)) {
     return 1;
+  }
 
   var_04 = self.origin;
 
   if(var_03 != "hide_nonlethal") {
     var_04 = bot_sentry_choose_target(var_03);
 
-    if(!isDefined(var_04))
+    if(!isDefined(var_04)) {
       return 1;
+    }
   }
 
   bot_sentry_add_goal(var_00, var_04, var_03, var_01);
 
-  while(scripts\mp\bots\bots_strategy::bot_has_tactical_goal("sentry_placement"))
+  while(scripts\mp\bots\bots_strategy::bot_has_tactical_goal("sentry_placement")) {
     wait 0.5;
+  }
 
   return 1;
 }
@@ -56,8 +60,9 @@ bot_sentry_should_abort(var_00) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(isDefined(self.enemy) && self.enemy.health > 0 && self botcanseeentity(self.enemy))
+  if(isDefined(self.enemy) && self.enemy.health > 0 && self botcanseeentity(self.enemy)) {
     return 1;
+  }
 
   self.sentry_place_delay = gettime() + 1000;
   return 0;
@@ -71,8 +76,9 @@ bot_sentry_cancel_failsafe() {
   level endon("game_ended");
 
   for(;;) {
-    if(isDefined(self.enemy) && self.enemy.health > 0 && self botcanseeentity(self.enemy))
+    if(isDefined(self.enemy) && self.enemy.health > 0 && self botcanseeentity(self.enemy)) {
       thread bot_sentry_cancel();
+    }
 
     wait 0.05;
   }
@@ -106,29 +112,36 @@ bot_sentry_path_thread(var_00) {
 bot_sentry_choose_target(var_00) {
   var_01 = scripts\mp\bots\bots_util::defend_valid_center();
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     return var_01;
+  }
 
-  if(isDefined(self.node_ambushing_from))
+  if(isDefined(self.node_ambushing_from)) {
     return self.node_ambushing_from.origin;
+  }
 
   var_02 = getnodesinradius(self.origin, 1000, 0, 512);
   var_03 = 5;
 
   if(var_00 != "turret") {
-    if(self botgetdifficultysetting("strategyLevel") == 1)
+    if(self botgetdifficultysetting("strategyLevel") == 1) {
       var_03 = 10;
-    else if(self botgetdifficultysetting("strategyLevel") == 0)
+    }
+    else if(self botgetdifficultysetting("strategyLevel") == 0) {
       var_03 = 15;
+    }
   }
 
-  if(var_00 == "turret_air")
+  if(var_00 == "turret_air") {
     var_04 = self botnodepick(var_02, var_03, "node_traffic", "ignore_no_sky");
-  else
+  }
+  else {
     var_04 = self botnodepick(var_02, var_03, "node_traffic");
+  }
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     return var_4.origin;
+  }
 }
 
 bot_sentry_choose_placement(var_00, var_01, var_02, var_03) {
@@ -137,29 +150,37 @@ bot_sentry_choose_placement(var_00, var_01, var_02, var_03) {
   var_06 = 5;
 
   if(var_02 != "turret") {
-    if(self botgetdifficultysetting("strategyLevel") == 1)
+    if(self botgetdifficultysetting("strategyLevel") == 1) {
       var_06 = 10;
-    else if(self botgetdifficultysetting("strategyLevel") == 0)
+    }
+    else if(self botgetdifficultysetting("strategyLevel") == 0) {
       var_06 = 15;
+    }
   }
 
-  if(var_02 == "turret_air")
+  if(var_02 == "turret_air") {
     var_07 = self botnodepick(var_05, var_06, "node_sentry", var_01, "ignore_no_sky");
-  else if(var_02 == "trap")
+  }
+  else if(var_02 == "trap") {
     var_07 = self botnodepick(var_05, var_06, "node_traffic");
-  else if(var_02 == "hide_nonlethal")
+  }
+  else if(var_02 == "hide_nonlethal") {
     var_07 = self botnodepick(var_05, var_06, "node_hide");
-  else
+  }
+  else {
     var_07 = self botnodepick(var_05, var_06, "node_sentry", var_01);
+  }
 
   if(isDefined(var_07)) {
     var_04 = spawnStruct();
     var_4.node = var_07;
 
-    if(var_01 != var_7.origin && var_02 != "hide_nonlethal")
+    if(var_01 != var_7.origin && var_02 != "hide_nonlethal") {
       var_4.yaw = vectortoyaw(var_01 - var_7.origin);
-    else
+    }
+    else {
       var_4.yaw = undefined;
+    }
 
     var_4.weapon = var_0.weapon;
     var_4.killstreak_info = var_00;
@@ -170,14 +191,17 @@ bot_sentry_choose_placement(var_00, var_01, var_02, var_03) {
 }
 
 bot_sentry_carried_obj() {
-  if(isDefined(self.carriedsentry))
+  if(isDefined(self.carriedsentry)) {
     return self.carriedsentry;
+  }
 
-  if(isDefined(self.carriedims))
+  if(isDefined(self.carriedims)) {
     return self.carriedims;
+  }
 
-  if(isDefined(self.carrieditem))
+  if(isDefined(self.carrieditem)) {
     return self.carrieditem;
+  }
 }
 
 bot_sentry_activate(var_00) {
@@ -192,8 +216,9 @@ bot_sentry_activate(var_00) {
       var_05 = gettime();
       var_06 = self.angles[1];
 
-      if(isDefined(var_0.object.yaw))
+      if(isDefined(var_0.object.yaw)) {
         var_06 = var_0.object.yaw;
+      }
 
       var_07 = [];
       var_7[0] = var_06 + 180;
@@ -276,22 +301,26 @@ bot_sentry_ensure_exit() {
     bot_send_cancel_notify();
     wait 0.25;
 
-    if(var_00 > 2)
+    if(var_00 > 2) {
       bot_sentry_force_cancel();
+    }
   }
 
   self notify("bot_sentry_exited");
 }
 
 bot_sentry_force_cancel() {
-  if(isDefined(self.carriedsentry))
+  if(isDefined(self.carriedsentry)) {
     self.carriedsentry scripts\mp\killstreaks\autosentry::sentry_setcancelled();
+  }
 
-  if(isDefined(self.carriedims))
+  if(isDefined(self.carriedims)) {
     self.carriedims scripts\mp\killstreaks\ims::ims_setcancelled();
+  }
 
-  if(isDefined(self.carrieditem))
+  if(isDefined(self.carrieditem)) {
     self.carrieditem scripts\mp\killstreaks\placeable::oncancel(self.placingitemstreakname, 0);
+  }
 
   self.carriedsentry = undefined;
   self.carriedims = undefined;

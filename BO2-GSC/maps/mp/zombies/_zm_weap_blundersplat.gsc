@@ -12,8 +12,9 @@
 #include maps\mp\animscripts\zm_shared;
 
 init() {
-  if(!maps\mp\zombies\_zm_weapons::is_weapon_included("blundergat_zm"))
+  if(!maps\mp\zombies\_zm_weapons::is_weapon_included("blundergat_zm")) {
     return;
+  }
   else {
     precacheitem("blundersplat_bullet_zm");
     precacheitem("blundersplat_explosive_dart_zm");
@@ -50,10 +51,12 @@ zombie_wait_for_blundersplat_hit() {
           if(isDefined(e_grenade.model) && e_grenade.model == "t6_wpn_zmb_projectile_blundergat") {
             if(e_grenade islinkedto(self)) {
               while(true) {
-                if(!isDefined(e_grenade.fuse_time))
+                if(!isDefined(e_grenade.fuse_time)) {
                   wait_network_frame();
-                else
+                }
+                else {
                   break;
+                }
               }
 
               n_fuse_timer = e_grenade.fuse_time;
@@ -108,18 +111,21 @@ wait_for_blundersplat_upgraded_fired() {
 }
 
 _titus_locate_target(is_not_upgraded) {
-  if(!isDefined(is_not_upgraded))
+  if(!isDefined(is_not_upgraded)) {
     is_not_upgraded = 1;
+  }
 
   fire_angles = self getplayerangles();
   fire_origin = self getplayercamerapos();
   a_targets = arraycombine(getaiarray("axis"), getvehiclearray("axis"), 0, 0);
   a_targets = get_array_of_closest(self.origin, a_targets, undefined, undefined, 1500);
 
-  if(is_not_upgraded)
+  if(is_not_upgraded) {
     n_fuse_timer = randomfloatrange(1.0, 2.5);
-  else
+  }
+  else {
     n_fuse_timer = randomfloatrange(3.0, 4.0);
+  }
 
   foreach(target in a_targets) {
     if(within_fov(fire_origin, fire_angles, target.origin, cos(30))) {
@@ -192,8 +198,9 @@ _titus_target_check_for_grenade_hits() {
 
       foreach(e_grenade in a_grenades) {
         if(isDefined(e_grenade.model) && e_grenade.model == "t6_wpn_zmb_projectile_blundergat") {
-          if(e_grenade islinkedto(self))
+          if(e_grenade islinkedto(self)) {
             e_grenade thread _titus_grenade_detonate_on_target_death(self);
+          }
         }
       }
     }
@@ -221,11 +228,13 @@ _titus_grenade_detonate_on_target_death(target) {
 }
 
 _titus_reset_grenade_fuse(n_fuse_timer, is_not_upgraded) {
-  if(!isDefined(is_not_upgraded))
+  if(!isDefined(is_not_upgraded)) {
     is_not_upgraded = 1;
+  }
 
-  if(!isDefined(n_fuse_timer))
+  if(!isDefined(n_fuse_timer)) {
     n_fuse_timer = randomfloatrange(1, 1.5);
+  }
 
   self waittill("death");
   a_grenades = getEntArray("grenade", "classname");
@@ -236,10 +245,12 @@ _titus_reset_grenade_fuse(n_fuse_timer, is_not_upgraded) {
       e_grenade.fuse_time = n_fuse_timer;
       e_grenade resetmissiledetonationtime(n_fuse_timer);
 
-      if(is_not_upgraded)
+      if(is_not_upgraded) {
         e_grenade create_zombie_point_of_interest(250, 5, 10000);
-      else
+      }
+      else {
         e_grenade create_zombie_point_of_interest(500, 10, 10000);
+      }
 
       return;
     }
@@ -256,8 +267,9 @@ gib_on_blundergat_damage(refs, point, weaponname) {
       return new_gib_ref;
   }
 
-  if(self.health <= 0)
+  if(self.health <= 0) {
     return refs;
+  }
   else if(weaponname == "blundergat_zm" || weaponname == "blundergat_upgraded_zm") {
     new_gib_ref = self maps\mp\zombies\_zm_spawner::derive_damage_refs(point);
     return new_gib_ref;
@@ -272,13 +284,16 @@ _blundersplat_target_acid_stun_anim() {
   while(true) {
     ground_ent = self getgroundent();
 
-    if(isDefined(ground_ent) && !is_true(ground_ent.classname == "worldspawn"))
+    if(isDefined(ground_ent) && !is_true(ground_ent.classname == "worldspawn")) {
       self linkto(ground_ent);
+    }
 
-    if(is_true(self.has_legs))
+    if(is_true(self.has_legs)) {
       self animscripted(self.origin, self.angles, "zm_blundersplat_stun");
-    else
+    }
+    else {
       self animscripted(self.origin, self.angles, "zm_blundersplat_stun_crawl");
+    }
 
     self maps\mp\animscripts\zm_shared::donotetracks("blundersplat_stunned_anim");
   }

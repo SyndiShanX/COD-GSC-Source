@@ -83,41 +83,58 @@ zipline_trigger_func() {
   }
 }
 canZipline(player) {
-  if(!isDefined(player))
+  if(!isDefined(player)) {
     return false;
-  if(!IsPlayer(player))
+  }
+  if(!IsPlayer(player)) {
     return false;
-  if(!IsAlive(player))
+  }
+  if(!IsAlive(player)) {
     return false;
-  if((isDefined(player.isDefusing) && player.isDefusing))
+  }
+  if((isDefined(player.isDefusing) && player.isDefusing)) {
     return false;
-  if((isDefined(player.isPlanting) && player.isPlanting))
+  }
+  if((isDefined(player.isPlanting) && player.isPlanting)) {
     return false;
-  if(isDefined(player.proxBar) && !player.proxBar.hidden)
+  }
+  if(isDefined(player.proxBar) && !player.proxBar.hidden) {
     return false;
-  if(isDefined(player.revivingTeammate) && player.revivingTeammate == true)
+  }
+  if(isDefined(player.revivingTeammate) && player.revivingTeammate == true) {
     return false;
-  if(!player IsOnGround())
+  }
+  if(!player IsOnGround()) {
     return false;
-  if(player IsInVehicle())
+  }
+  if(player IsInVehicle()) {
     return false;
-  if(player IsThrowingGrenade())
+  }
+  if(player IsThrowingGrenade()) {
     return false;
-  if(player IsSwitchingWeapons())
+  }
+  if(player IsSwitchingWeapons()) {
     return false;
-  if(player IsMeleeing())
+  }
+  if(player IsMeleeing()) {
     return false;
-  if(isDefined(player.laststand) && player.laststand)
+  }
+  if(isDefined(player.laststand) && player.laststand) {
     return false;
+  }
   weapon = player GetCurrentWeapon();
-  if(!isDefined(weapon))
+  if(!isDefined(weapon)) {
     return false;
-  if(weapon == "none")
+  }
+  if(weapon == "none") {
     return false;
-  if(IsWeaponEquipment(weapon) && player IsFiring())
+  }
+  if(IsWeaponEquipment(weapon) && player IsFiring()) {
     return false;
-  if(IsWeaponSpecificUse(weapon))
+  }
+  if(IsWeaponSpecificUse(weapon)) {
     return false;
+  }
   return true;
 }
 zipline_player_func(start_point, end_point_origin, moving_ent, zipline_speed) {
@@ -237,10 +254,12 @@ glass_exploder_init() {
   single_exploders = [];
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(!isDefined(ent))
+    if(!isDefined(ent)) {
       continue;
-    if(ent.v["type"] != "exploder")
+    }
+    if(ent.v["type"] != "exploder") {
       continue;
+    }
     if(ent.v["exploder"] == 101) {
       single_exploders[single_exploders.size] = ent;
     }

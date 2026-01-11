@@ -136,19 +136,22 @@ drone_control_allied_quadrotor_spawnfunc() {
   self thread maps\_quadrotor::quadrotor_set_team("allies");
   self.takedamage = 1;
 
-  if(!flag("drone_control_lost"))
+  if(!flag("drone_control_lost")) {
     maps\_fire_direction::add_fire_direction_shooter(self);
+  }
 }
 
 quadrotor_reinforce(str_endon, str_spline_then_ai, str_goal_node_tn) {
   level notify("stop_ally_quadrotor_respawn");
   level endon("stop_ally_quadrotor_respawn");
 
-  if(isDefined(str_endon))
+  if(isDefined(str_endon)) {
     level endon(str_endon);
+  }
 
-  if(isDefined(str_goal_node_tn))
+  if(isDefined(str_goal_node_tn)) {
     goal_node = getnode(str_goal_node_tn, "targetname");
+  }
 
   while(true) {
     a_vh_quads = getEntArray("allied_quadrotor", "targetname");
@@ -158,8 +161,9 @@ quadrotor_reinforce(str_endon, str_spline_then_ai, str_goal_node_tn) {
       vh_quadrotor.origin = level.player.origin + vectorscale((0, 0, 1), 256.0);
       vh_quadrotor setthreatbiasgroup("quadrotors");
 
-      if(isDefined(str_spline_then_ai))
+      if(isDefined(str_spline_then_ai)) {
         vh_quadrotor thread quadrotors_go_spline_then_ai(str_spline_then_ai);
+      }
 
       if(isDefined(goal_node)) {
         vh_quadrotor.goalpos = goal_node.origin;
@@ -193,8 +197,9 @@ drone_control_threat_control_think() {
     flag_set("drone_control_player_override");
     e_turret thread drone_control_turret_fire_think();
 
-    while(level.player istouching(t_street_trig))
+    while(level.player istouching(t_street_trig)) {
       wait 0.25;
+    }
 
     e_turret notify("stop_dc_turret_fire");
     e_turret maps\_turret::clear_turret_target(0);
@@ -206,15 +211,17 @@ drone_control_turret_kill() {
   level.player endon("death");
   flag_wait("drone_control_farmhouse_started");
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     self notify("death");
+  }
 }
 
 drone_control_turret_death_cleanup() {
   self waittill("death");
 
-  if(flag("drone_control_player_override"))
+  if(flag("drone_control_player_override")) {
     flag_clear("drone_control_player_override");
+  }
 }
 
 drone_control_turret_fire_think() {
@@ -234,19 +241,22 @@ drone_control_turret_fire_think() {
 }
 
 drone_control_player_damage_callback(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
-  if(flag("drone_control_player_override"))
+  if(flag("drone_control_player_override")) {
     n_damage = int(n_damage * 2);
+  }
 
-  if(isDefined(e_attacker.script_noteworthy) && e_attacker.script_noteworthy == "allied_quadrotor")
+  if(isDefined(e_attacker.script_noteworthy) && e_attacker.script_noteworthy == "allied_quadrotor") {
     n_damage = int(n_damage / 2);
+  }
 
   return n_damage;
 }
 
 terrorist_shot_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
   if(isDefined(eattacker) && isplayer(eattacker)) {
-    if(!flag("player_shot_terrorist"))
+    if(!flag("player_shot_terrorist")) {
       flag_set("player_shot_terrorist");
+    }
   }
 
   return idamage;
@@ -281,8 +291,9 @@ drone_control_cleanup() {
   e_turret.delete_on_death = 1;
   e_turret notify("death");
 
-  if(!isalive(e_turret))
+  if(!isalive(e_turret)) {
     e_turret delete();
+  }
 
   wait 0.2;
   array_delete_ai_from_noteworthy("farmhouse_terrorist", 1);
@@ -299,8 +310,9 @@ array_delete_veh_from_targetname(targetname) {
     veh.delete_on_death = 1;
     veh notify("death");
 
-    if(!isalive(veh))
+    if(!isalive(veh)) {
       veh delete();
+    }
   }
 }
 
@@ -360,8 +372,9 @@ enable_drone_control() {
   assert(isplayer(self), "this must be called on the player");
   self endon("death");
 
-  while(isDefined(self.empgrenaded) && self.empgrenaded)
+  while(isDefined(self.empgrenaded) && self.empgrenaded) {
     wait 0.05;
+  }
 
   self maps\_fire_direction::init_fire_direction();
   self thread watch_for_emp_grenaded();
@@ -374,16 +387,19 @@ watch_for_emp_grenaded() {
   while(maps\_fire_direction::is_fire_direction_active()) {
     self waittill("emp_grenaded");
 
-    if(maps\_fire_direction::is_fire_direction_active())
+    if(maps\_fire_direction::is_fire_direction_active()) {
       self maps\_fire_direction::_fire_direction_disable();
+    }
 
     wait 0.05;
 
-    while(isDefined(self.empgrenaded) && self.empgrenaded)
+    while(isDefined(self.empgrenaded) && self.empgrenaded) {
       wait 0.05;
+    }
 
-    if(maps\_fire_direction::is_fire_direction_active())
+    if(maps\_fire_direction::is_fire_direction_active()) {
       self maps\_fire_direction::_fire_direction_enable();
+    }
   }
 }
 
@@ -398,8 +414,9 @@ drone_control_gauntlet_go() {
 setup_allied_quadrotors() {
   a_vh_quads = getEntArray("allied_quadrotor", "targetname");
 
-  foreach(vh_quad in a_vh_quads)
+  foreach(vh_quad in a_vh_quads) {
   vh_quad setthreatbiasgroup("quadrotors");
+  }
 }
 
 drone_control_morals_rail_vtol_go() {
@@ -461,8 +478,9 @@ allied_quadrotor_control() {
     a_qrotors = getEntArray("allied_quadrotor", "script_noteworthy");
 
     foreach(veh_qrotor in a_qrotors) {
-      if(!isDefined(veh_qrotor.quadrotor_doing_fire_direction))
+      if(!isDefined(veh_qrotor.quadrotor_doing_fire_direction)) {
         veh_qrotor.goalpos = v_movepoint;
+      }
     }
 
     wait 0.5;
@@ -616,8 +634,9 @@ drone_kill_challenge(str_notify) {
 challenge_qrkills_death_listener(str_notify) {
   self waittill("death", e_attacker, b_damage_from_underneath, str_weapon);
 
-  if(isDefined(e_attacker) && isDefined(e_attacker.model) && e_attacker.model == "veh_t6_drone_quad_rotor_sp")
+  if(isDefined(e_attacker) && isDefined(e_attacker.model) && e_attacker.model == "veh_t6_drone_quad_rotor_sp") {
     level.player notify(str_notify);
+  }
 }
 
 drone_control_quadrotor_sounds() {
@@ -637,8 +656,9 @@ drone_control_quadrotor_sounds() {
 
       level.player thread say_dialog("vtol_firing_0");
 
-      while(level.player attackbuttonpressed())
+      while(level.player attackbuttonpressed()) {
         wait 0.05;
+      }
     }
 
     wait 0.05;

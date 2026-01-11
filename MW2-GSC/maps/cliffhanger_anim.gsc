@@ -414,8 +414,9 @@ ignore_all(guy) {
 }
 
 ai_kill(guy) {
-  if(!isalive(guy))
+  if(!isalive(guy)) {
     return;
+  }
   guy.allowDeath = true;
   guy.a.nodeath = true;
   guy set_battlechatter(false);

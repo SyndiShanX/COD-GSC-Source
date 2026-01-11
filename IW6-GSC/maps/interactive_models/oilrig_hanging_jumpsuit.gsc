@@ -45,11 +45,13 @@ main() {
 
   var_1 = getarraykeys(var_0.anims);
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_0.animlengths[var_3] = getanimlength(var_0.anims[var_3]);
+  }
 
-  if(!isDefined(level._interactive))
+  if(!isDefined(level._interactive)) {
     level._interactive = [];
+  }
 
   level._interactive[var_0.name] = var_0;
   thread oilrig_jumpsuits(var_0);
@@ -62,8 +64,9 @@ oilrig_jumpsuits(var_0) {
     level._interactive[var_0.name + "_setup"] = 1;
     var_1 = getEntArray(var_0.targetname, "targetname");
 
-    foreach(var_3 in var_1)
+    foreach(var_3 in var_1) {
     var_3 thread oilrig_jumpsuit(var_0);
+    }
   }
 }
 
@@ -83,8 +86,9 @@ oilrig_jumpsuit(var_0) {
 
 oilrig_jumpsuit_precache(var_0) {
   if(!common_scripts\utility::issp()) {
-    foreach(var_2 in var_0)
+    foreach(var_2 in var_0) {
     call[[level.func["precacheMpAnim"]]](var_2);
+    }
   }
 }
 
@@ -92,8 +96,9 @@ oilrig_jumpsuit_ondamage(var_0, var_1) {
   level endon("game_ended");
   self endon("stop_scripts");
 
-  if(isDefined(level.func["useanimtree"]))
+  if(isDefined(level.func["useanimtree"])) {
     self call[[level.func["useanimtree"]]](#animtree);
+  }
 
   var_2 = common_scripts\utility::ter_op(common_scripts\utility::issp(), level.func["clearanim"], level.func["scriptModelClearAnim"]);
   var_3 = common_scripts\utility::ter_op(common_scripts\utility::issp(), level.func["setanim"], level.func["scriptModelPlayAnim"]);
@@ -113,19 +118,25 @@ oilrig_jumpsuit_ondamage(var_0, var_1) {
     var_17 = common_scripts\utility::ter_op(abs(var_17) > 180, -1 * var_16 * (360 - abs(var_17)), var_16 * abs(var_17));
 
     if(abs(var_17) > 90) {
-      if(var_17 > 0 && 180 - abs(var_17) > var_15)
+      if(var_17 > 0 && 180 - abs(var_17) > var_15) {
         var_5 = var_5 + "br";
-      else if(var_17 < 0 && 180 - abs(var_17) > var_15)
+      }
+      else if(var_17 < 0 && 180 - abs(var_17) > var_15) {
         var_5 = var_5 + "bl";
-      else
+      }
+      else {
         var_5 = var_5 + "b";
+      }
     } else if(abs(var_17) < 90) {
-      if(var_17 < 0 && abs(var_17) > var_15)
+      if(var_17 < 0 && abs(var_17) > var_15) {
         var_5 = var_5 + "fl";
-      else if(var_17 > 0 && abs(var_17) > var_15)
+      }
+      else if(var_17 > 0 && abs(var_17) > var_15) {
         var_5 = var_5 + "fr";
-      else
+      }
+      else {
         var_5 = var_5 + "f";
+      }
     }
 
     var_4 = "small";
@@ -141,11 +152,13 @@ oilrig_jumpsuit_ondamage(var_0, var_1) {
           var_6 = (var_7 - 50) / 400;
           var_6 = max(var_6, 0);
 
-          if(var_6 > 1)
+          if(var_6 > 1) {
             var_6 = 0;
+          }
 
-          if(var_8 > 85)
+          if(var_8 > 85) {
             var_4 = "large";
+          }
 
           break;
       }
@@ -154,8 +167,9 @@ oilrig_jumpsuit_ondamage(var_0, var_1) {
     var_5 = var_5 + ("_" + var_4);
 
     if(isDefined(self.script_parameters)) {
-      if(isDefined(var_0[var_5 + "_" + self.script_parameters]))
+      if(isDefined(var_0[var_5 + "_" + self.script_parameters])) {
         var_5 = var_5 + ("_" + self.script_parameters);
+      }
     }
 
     wait(var_6);
@@ -166,10 +180,12 @@ oilrig_jumpsuit_ondamage(var_0, var_1) {
     } else
       self call[[var_2]]();
 
-    if(common_scripts\utility::issp())
+    if(common_scripts\utility::issp()) {
       self call[[var_3]](var_0[var_5], 1, 0, 1);
-    else
+    }
+    else {
       self call[[var_3]](var_0[var_5]);
+    }
 
     var_13 = undefined;
     var_14 = undefined;
@@ -183,10 +199,12 @@ oilrig_jumpsuit_ondamage(var_0, var_1) {
     var_12 = undefined;
     wait(var_1[var_5]);
 
-    if(common_scripts\utility::issp())
+    if(common_scripts\utility::issp()) {
       self call[[var_2]](var_0[var_5], 0);
-    else
+    }
+    else {
       self call[[var_2]]();
+    }
 
     thread oilrig_jumpsuit_playidleanim(var_0, var_1);
   }
@@ -201,10 +219,12 @@ oilrig_jumpsuit_playidleanim(var_0, var_1) {
   var_4 = randomintrange(1, 3);
 
   for(var_5 = 0; var_5 < var_4; var_5++) {
-    if(common_scripts\utility::issp())
+    if(common_scripts\utility::issp()) {
       self call[[var_3]](var_0["idle1"], 1, 0, 1);
-    else
+    }
+    else {
       self call[[var_3]](var_0["idle1"]);
+    }
 
     wait(var_1["idle1"]);
 
@@ -216,18 +236,22 @@ oilrig_jumpsuit_playidleanim(var_0, var_1) {
     self call[[var_2]]();
   }
 
-  if(common_scripts\utility::issp())
+  if(common_scripts\utility::issp()) {
     self call[[var_3]](var_0["idle2"], 1, 0, 1);
-  else
+  }
+  else {
     self call[[var_3]](var_0["idle2"]);
+  }
 
   wait(var_1["idle2"]);
   wait(randomfloat(3));
 
-  if(common_scripts\utility::issp())
+  if(common_scripts\utility::issp()) {
     self call[[var_2]](var_0["idle2"], 0);
-  else
+  }
+  else {
     self call[[var_2]]();
+  }
 }
 
 oilrig_jumpsuit_hitbox_ondamage(var_0) {

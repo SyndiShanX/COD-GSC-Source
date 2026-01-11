@@ -117,4 +117,3 @@ debug_tracking() {
     waitframe(1);
   }
 }
-

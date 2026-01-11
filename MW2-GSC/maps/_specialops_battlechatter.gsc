@@ -488,12 +488,14 @@ get_player_team_prefix(player) {
   assertex(isDefined(level.so_campaign), "level.so_campaign must be set in order to play co-op team chatter.");
 
   stealth = "";
-  if(isDefined(level.so_stealth) && level.so_stealth)
+  if(isDefined(level.so_stealth) && level.so_stealth) {
     stealth = "STEALTH_";
+  }
 
   player_num = "1";
-  if(player == level.player2)
+  if(player == level.player2) {
     player_num = "2";
+  }
 
   switch (level.so_campaign) {
     case "ranger":
@@ -513,8 +515,9 @@ get_player_team_prefix(player) {
 close_enough_to_other_player(eventType) {
   if(isDefined(eventType)) {
     foreach(event in anim.so.skipDistanceCheck) {
-      if(event == eventType)
+      if(event == eventType) {
         return true;
+      }
     }
   }
 

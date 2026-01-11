@@ -70,8 +70,9 @@ main() {
 menendez_chickens_setup() {
   a_chickens = getEntArray("menendez_chicken", "targetname");
 
-  foreach(m_chicken in a_chickens)
+  foreach(m_chicken in a_chickens) {
   m_chicken thread chicken_anim_loop();
+  }
 }
 
 menendez_execution_vo() {
@@ -115,13 +116,15 @@ menendez_execution_after_rage_vo() {
   a_enemeies = getaiarray("axis");
   ai_enemy = get_closest_living(level.player.origin, a_enemeies);
 
-  if(isalive(ai_enemy))
+  if(isalive(ai_enemy)) {
     ai_enemy say_dialog("pdf2_drop_your_weapons_0");
+  }
 
   wait 1;
 
-  if(isalive(ai_enemy))
+  if(isalive(ai_enemy)) {
     ai_enemy say_dialog_and_waittill_death("pdf2_i_said_drop_your_wea_0");
+  }
 }
 
 menendez_execution_near_stables_vo() {
@@ -141,8 +144,9 @@ close_shed_door() {
   trigger_wait("trig_execution");
   s_door = getstruct("can_see_shed_door", "targetname");
 
-  while(is_player_looking_at(s_door.origin, 0) || self.origin[1] > 6272)
+  while(is_player_looking_at(s_door.origin, 0) || self.origin[1] > 6272) {
     wait 0.05;
+  }
 
   m_door = getent("shed_door", "targetname");
   m_door ignorecheapentityflag(1);
@@ -154,14 +158,16 @@ close_shed_door() {
   load_gump("nicaragua_gump_menendez");
   a_menendez_hill_ents = getEntArray("menendez_hill", "script_noteworthy");
 
-  foreach(e_menendez_hill in a_menendez_hill_ents)
+  foreach(e_menendez_hill in a_menendez_hill_ents) {
   e_menendez_hill delete();
+  }
 
   a_ai = getaiarray();
 
   foreach(ai_alive in a_ai) {
-    if(ai_alive.origin[1] > 6400)
+    if(ai_alive.origin[1] > 6400) {
       ai_alive delete();
+    }
   }
 
   model_delete_area("menendez_lower_village");
@@ -201,8 +207,9 @@ execution_scene() {
   level thread run_scene("execution_watchers_idle");
   flag_wait("execution_loop_started");
 
-  for(i = 1; i <= 5; i++)
+  for(i = 1; i <= 5; i++) {
     level thread execution_logic(i);
+  }
 
   level thread execution_start_timer();
   level thread execution_stop_by_spotted();
@@ -211,10 +218,12 @@ execution_scene() {
   level.player thread execution_rage();
   level clientnotify("off_frst_walla");
 
-  if(is_mature())
+  if(is_mature()) {
     level.player thread wait_axe_grab();
-  else
+  }
+  else {
     level thread execution_non_mature_objective();
+  }
 }
 
 execution_non_mature_objective() {
@@ -228,10 +237,12 @@ execution_non_mature_objective() {
 }
 
 execution_logic(n_index) {
-  if(n_index == 5)
+  if(n_index == 5) {
     ai_pdf = get_ais_from_scene("axe_attack_pdf_loop", "execution_pdf_" + n_index);
-  else
+  }
+  else {
     ai_pdf = get_ais_from_scene("execution_loop", "execution_pdf_" + n_index);
+  }
 
   flag_wait_either("execution_start", "end_execution");
   ai_civ = get_ais_from_scene("execution_loop", "execution_civ_" + n_index);
@@ -243,23 +254,27 @@ execution_logic(n_index) {
       ai_civ thread execution_escape();
     }
   } else {
-    if(isalive(ai_civ))
+    if(isalive(ai_civ)) {
       level thread run_scene("execution_civ_" + n_index);
+    }
 
-    if(isalive(ai_pdf))
+    if(isalive(ai_pdf)) {
       run_scene("execution_pdf_" + n_index);
+    }
   }
 
-  if(isalive(ai_pdf) && ai_pdf.animname == "execution_pdf_4")
+  if(isalive(ai_pdf) && ai_pdf.animname == "execution_pdf_4") {
     ai_pdf thread run_away("pd4_node");
+  }
 
   if(isalive(ai_pdf) && ai_pdf.animname == "execution_pdf_1") {
     ai_pdf.a.deathforceragdoll = 1;
     ai_pdf.b_not_part_of_rage = 1;
     run_scene("slide_to_cover");
 
-    if(isalive(ai_pdf))
+    if(isalive(ai_pdf)) {
       ai_pdf.b_not_part_of_rage = undefined;
+    }
   }
 }
 
@@ -307,15 +322,18 @@ execution_rage() {
   self rage_medium();
   flag_wait_either("execution_start", "end_execution");
 
-  if(!flag("axe_attack_player_started"))
+  if(!flag("axe_attack_player_started")) {
     level thread rage_mode_important_vo("mene_animals_0");
+  }
 
   self rage_high(1);
 
-  if(flag("axe_attack_player_started"))
+  if(flag("axe_attack_player_started")) {
     level thread rage_high_logic("execution_pdfs");
-  else
+  }
+  else {
     level thread rage_high_logic("execution_pdfs", 1);
+  }
 }
 
 wait_axe_grab() {
@@ -342,8 +360,9 @@ axe_scene() {
   level thread execution_stop_timer_for_axe_scene();
   ai_pdf = get_ais_from_scene("axe_attack_pdf_loop", "execution_pdf_5");
 
-  if(isalive(ai_pdf))
+  if(isalive(ai_pdf)) {
     ai_pdf thread axe_blood_splat();
+  }
 
   level thread run_scene("axe_attack_prop");
   level thread run_scene("axe_attack_pdf");
@@ -361,8 +380,9 @@ axe_vo() {
 axe_blood_splat() {
   wait 2;
 
-  if(is_mature())
+  if(is_mature()) {
     self maps\nicaragua_menendez_rage::blood_splat_logic(1);
+  }
 }
 
 execution_stop_timer_for_axe_scene() {
@@ -376,8 +396,9 @@ execution_end() {
   flag_set("end_execution");
 
   if(!flag("execution_start")) {
-    if(!flag("axe_attack_player_started"))
+    if(!flag("axe_attack_player_started")) {
       end_scene("axe_attack_pdf_loop");
+    }
 
     end_scene("execution_loop");
   }
@@ -388,8 +409,9 @@ execution_end() {
 run_execution_watcher_scenes() {
   ai_roof = get_ais_from_scene("execution_watchers_idle", "roof_pdf");
 
-  if(isalive(ai_roof) && !flag("execution_watcher_react_roof_started"))
+  if(isalive(ai_roof) && !flag("execution_watcher_react_roof_started")) {
     level thread run_scene("execution_watcher_react_roof");
+  }
 
   ai_molotov = get_ais_from_scene("execution_watchers_idle", "molotov_pdf");
 
@@ -411,8 +433,9 @@ allow_to_catch_on_fire() {
 delete_molotov_when_dead() {
   self waittill("death");
 
-  if(!flag("execution_molotov_fire_allow"))
+  if(!flag("execution_molotov_fire_allow")) {
     end_scene("execution_molotv_react");
+  }
 }
 
 nicaragua_execution_objectives() {

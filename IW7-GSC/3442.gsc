@@ -48,8 +48,9 @@ commander_aggregate_score_on_game_end() {
     var_00 = 0;
 
     foreach(var_02 in level.players) {
-      if(isbot(var_02) && var_2.team == "axis")
+      if(isbot(var_02) && var_2.team == "axis") {
         var_00 = var_00 + var_2.pers["score"];
+      }
     }
 
     level.fireteam_commander["axis"].pers["score"] = var_00;
@@ -62,8 +63,9 @@ commander_aggregate_score_on_game_end() {
     var_00 = 0;
 
     foreach(var_02 in level.players) {
-      if(isbot(var_02) && var_2.team == "allies")
+      if(isbot(var_02) && var_2.team == "allies") {
         var_00 = var_00 + var_2.pers["score"];
+      }
     }
 
     level.fireteam_commander["allies"].pers["score"] = var_00;
@@ -119,15 +121,19 @@ commander_monitor_tactics() {
 
     if(var_00 != "tactic_select") {
       if(var_00 == "bot_select") {
-        if(var_01 > 0)
+        if(var_01 > 0) {
           commander_handle_notify_quick("bot_next");
-        else if(var_01 < 0)
+        }
+        else if(var_01 < 0) {
           commander_handle_notify_quick("bot_prev");
+        }
       } else if(var_00 == "tactics_menu") {
-        if(var_01 > 0)
+        if(var_01 > 0) {
           commander_handle_notify_quick("tactics_menu");
-        else if(var_01 <= 0)
+        }
+        else if(var_01 <= 0) {
           commander_handle_notify_quick("tactics_close");
+        }
       }
 
       continue;
@@ -155,8 +161,9 @@ commander_handle_notify_quick(var_00, var_01) {
     case "tactics_menu":
       self notify("commander_mode");
 
-      if(isDefined(self.forcespectatorent))
+      if(isDefined(self.forcespectatorent)) {
         self.forcespectatorent notify("commander_mode");
+      }
 
       break;
     case "tactics_close":
@@ -227,8 +234,9 @@ commander_handle_notify_quick(var_00, var_01) {
       self.commander_last_tactic_applied = var_00;
       thread commander_order_ack();
 
-      if(isDefined(level.bot_funcs["commander_gametype_tactics"]))
+      if(isDefined(level.bot_funcs["commander_gametype_tactics"])) {
         self[[level.bot_funcs["commander_gametype_tactics"]]](var_00);
+      }
     }
   }
 }
@@ -248,15 +256,17 @@ commander_order_ack() {
     var_03 = self.origin;
     var_04 = self getspectatingplayer();
 
-    if(isDefined(var_04))
+    if(isDefined(var_04)) {
       var_03 = var_4.origin;
+    }
 
     foreach(var_06 in level.players) {
       if(isDefined(var_06) && isalive(var_06) && isbot(var_06) && isDefined(var_6.team) && var_6.team == self.team) {
         var_07 = distancesquared(var_03, var_6.origin);
 
-        if(var_07 < var_01)
+        if(var_07 < var_01) {
           var_02 = var_06;
+        }
       }
     }
 
@@ -358,33 +368,43 @@ hud_monitorplayerownership() {
 
       if(isDefined(var_07) && var_7.team == self.team) {
         if(isDefined(var_7.owner)) {
-          if(scripts\engine\utility::array_contains(var_02, var_07))
+          if(scripts\engine\utility::array_contains(var_02, var_07)) {
             self.ownershipstring[var_01].color = (1, 0, 0);
-          else
+          }
+          else {
             var_02 = scripts\engine\utility::array_add(var_02, var_07);
+          }
 
-          if(var_07 != var_7.owner && scripts\engine\utility::array_contains(var_02, var_7.owner))
+          if(var_07 != var_7.owner && scripts\engine\utility::array_contains(var_02, var_7.owner)) {
             self.ownershipstring[var_01].color = (1, 0, 0);
-          else
+          }
+          else {
             var_02 = scripts\engine\utility::array_add(var_02, var_7.owner);
+          }
 
-          if(var_07 == self)
+          if(var_07 == self) {
             self.ownershipstring[var_01].color = (1, 0, 0);
-          else if(var_7.owner == var_07)
+          }
+          else if(var_7.owner == var_07) {
             self.ownershipstring[var_01].color = (1, 0, 0);
-          else if(var_7.owner == self)
+          }
+          else if(var_7.owner == self) {
             self.ownershipstring[var_01].color = (0, 1, 0);
-          else
+          }
+          else {
             self.ownershipstring[var_01].color = (1, 1, 1);
+          }
         } else if(isDefined(var_7.bot_fireteam_follower))
           var_08 = 1;
-        else
+        else {
           self.ownershipstring[var_01].color = (1, 1, 0);
+        }
       } else
         var_08 = 1;
 
-      if(!var_08)
+      if(!var_08) {
         var_1++;
+      }
     }
 
     wait 0.1;
@@ -401,10 +421,12 @@ commander_wait_connect() {
         var_02 = "allies";
 
         if(!isDefined(var_1.team)) {
-          if(level.teamcount["axis"] < level.teamcount["allies"])
+          if(level.teamcount["axis"] < level.teamcount["allies"]) {
             var_02 = "axis";
-          else if(level.teamcount["allies"] < level.teamcount["axis"])
+          }
+          else if(level.teamcount["allies"] < level.teamcount["axis"]) {
             var_02 = "allies";
+          }
         }
 
         var_01 scripts\mp\menus::addtoteam(var_02);
@@ -483,38 +505,46 @@ monitor_enter_commander_mode() {
     }
   }
 
-  if(!var_01)
+  if(!var_01) {
     thread scripts\mp\playerlogic::spawnspectator();
+  }
 }
 
 commander_can_takeover_bot(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
-  if(!isbot(var_00))
+  if(!isbot(var_00)) {
     return 0;
+  }
 
-  if(!isalive(var_00))
+  if(!isalive(var_00)) {
     return 0;
+  }
 
-  if(!var_0.connected)
+  if(!var_0.connected) {
     return 0;
+  }
 
-  if(var_0.team != self.team)
+  if(var_0.team != self.team) {
     return 0;
+  }
 
   var_01 = scripts\mp\killstreaks\deployablebox::isholdingdeployablebox();
 
-  if(var_01)
+  if(var_01) {
     return 0;
+  }
 
   return 1;
 }
 
 player_get_player_index() {
   for(var_00 = 0; var_00 < level.players.size; var_0++) {
-    if(level.players[var_00] == self)
+    if(level.players[var_00] == self) {
       return var_00;
+    }
   }
 
   return -1;
@@ -526,21 +556,25 @@ commander_spectate_next_bot(var_00) {
   var_03 = 0;
   var_04 = 1;
 
-  if(isDefined(var_00) && var_00 == 1)
+  if(isDefined(var_00) && var_00 == 1) {
     var_04 = -1;
+  }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_03 = var_01 player_get_player_index();
+  }
 
   var_05 = 1;
 
   for(var_06 = var_03 + var_04; var_05 < level.players.size; var_06 = var_06 + var_04) {
     var_5++;
 
-    if(var_06 < 0)
+    if(var_06 < 0) {
       var_06 = level.players.size - 1;
-    else if(var_06 >= level.players.size)
+    }
+    else if(var_06 >= level.players.size) {
       var_06 = 0;
+    }
 
     if(!isDefined(level.players[var_06])) {
       continue;
@@ -561,8 +595,9 @@ commander_spectate_next_bot(var_00) {
     self playlocalsound("oldschool_return");
     var_02 thread takeover_flash();
 
-    if(isDefined(var_01))
+    if(isDefined(var_01)) {
       var_01 bot_free_to_move();
+    }
   } else
     self playlocalsound("counter_uav_deactivate");
 }
@@ -592,10 +627,12 @@ commander_spectate_bot(var_00) {
 get_spectated_player() {
   var_00 = undefined;
 
-  if(isDefined(self.forcespectatorent))
+  if(isDefined(self.forcespectatorent)) {
     var_00 = self.forcespectatorent;
-  else
+  }
+  else {
     var_00 = self getspectatingplayer();
+  }
 
   return var_00;
 }
@@ -660,8 +697,9 @@ spectator_takeover_other(var_00) {
     self.commanding_bot = var_00;
     self.last_commanded_bot = undefined;
 
-    if(!isDefined(self.commander_gave_hint))
+    if(!isDefined(self.commander_gave_hint)) {
       thread commander_hint();
+    }
   }
 }
 
@@ -744,8 +782,9 @@ bot_free_to_move() {
   }
   self botsetflag("disable_movement", 0);
 
-  if(isDefined(self.badplacename))
+  if(isDefined(self.badplacename)) {
     badplace_delete(self.badplacename);
+  }
 
   self notify("freed_to_move");
 }
@@ -774,15 +813,17 @@ store_weapons_status(var_00) {
 
 apply_weapons_status() {
   foreach(var_01 in self.copy_fullweaponlist) {
-    if(!self hasweapon(var_01))
+    if(!self hasweapon(var_01)) {
       self giveweapon(var_01);
+    }
   }
 
   var_03 = self getweaponslistall();
 
   foreach(var_01 in var_03) {
-    if(!scripts\engine\utility::array_contains(self.copy_fullweaponlist, var_01))
+    if(!scripts\engine\utility::array_contains(self.copy_fullweaponlist, var_01)) {
       scripts\mp\utility\game::_takeweapon(var_01);
+    }
   }
 
   foreach(var_01 in self.copy_fullweaponlist) {
@@ -793,6 +834,7 @@ apply_weapons_status() {
     }
   }
 
-  if(self getcurrentweapon() != self.copy_weapon_current)
+  if(self getcurrentweapon() != self.copy_weapon_current) {
     scripts\mp\utility\game::_switchtoweapon(self.copy_weapon_current);
+  }
 }

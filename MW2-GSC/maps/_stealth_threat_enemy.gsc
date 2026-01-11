@@ -25,14 +25,16 @@ enemy_Threat_Loop() {
   self endon("death");
   self endon("pain_death");
 
-  if(self.type == "dog")
+  if(self.type == "dog") {
     self thread enemy_threat_logic_dog();
+  }
 
   while(1) {
     self waittill("_stealth_enemy_alert_level_change", type);
 
-    if(!self ent_flag("_stealth_enabled"))
+    if(!self ent_flag("_stealth_enabled")) {
       continue;
+    }
 
     self enemy_alert_level_change_reponse(type);
   }
@@ -42,8 +44,9 @@ enemy_alert_level_change_reponse(type) {
   self ent_flag_set("_stealth_enemy_alert_level_action");
 
   _type = type;
-  if(issubstr(type, "warning"))
+  if(issubstr(type, "warning")) {
     _type = "warning";
+  }
 
   switch (_type) {
     case "warning":
@@ -66,8 +69,9 @@ enemy_threat_logic_dog() {
   self endon("death");
   self endon("pain_death");
 
-  if(!self ent_flag("_stealth_behavior_asleep"))
+  if(!self ent_flag("_stealth_behavior_asleep")) {
     return;
+  }
 
   self enemy_threat_logic_dog_wait();
   wait .5;
@@ -85,11 +89,13 @@ enemy_threat_logic_dog_wait() {
   while(1) {
     self waittill("event_awareness", type);
 
-    if(!self ent_flag("_stealth_enabled"))
+    if(!self ent_flag("_stealth_enabled")) {
       continue;
+    }
 
-    if(type == "heard_scream" || type == "bulletwhizby" || type == "projectile_impact" || type == "explode")
+    if(type == "heard_scream" || type == "bulletwhizby" || type == "projectile_impact" || type == "explode") {
       return;
+    }
   }
 }
 
@@ -97,14 +103,16 @@ enemy_threat_logic_dog_wakeup_dist(dog, dist) {
   dog endon("death");
   self endon("death");
 
-  if(!dog ent_flag("_stealth_behavior_asleep"))
+  if(!dog ent_flag("_stealth_behavior_asleep")) {
     return;
+  }
   dog endon("_stealth_behavior_asleep");
 
   distsqrd = dist * dist;
 
-  while(distancesquared(self.origin, dog.origin) > distsqrd && self ent_flag("_stealth_enabled"))
+  while(distancesquared(self.origin, dog.origin) > distsqrd && self ent_flag("_stealth_enabled")) {
     wait .1;
+  }
 
   dog.ignoreall = false;
   dog.favoriteenemy = self;
@@ -187,16 +195,18 @@ enemy_announce_alert() {
 }
 
 enemy_alert_level_warning1() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return;
+  }
 
   self thread enemy_announce_alert();
 
   if(isDefined(self.script_patroller)) {
     if(self.type != "dog") {
       type = "a";
-      if(cointoss())
+      if(cointoss()) {
         type = "b";
+      }
       self set_generic_run_anim("_stealth_patrol_search_" + type, true);
     } else {
       self set_dog_walk_anim();
@@ -224,8 +234,9 @@ enemy_alert_level_warning1() {
   end = spot + ((0, 0, -96));
 
   spot = physicstrace(spot, end);
-  if(spot == end)
+  if(spot == end) {
     return;
+  }
 
   self ent_flag_set("_stealth_override_goalpos");
   self setgoalpos(spot);
@@ -236,8 +247,9 @@ enemy_alert_level_warning1() {
   self waittill_notify_or_timeout("goal", 2);
 
   // if AI can't reach it's goal, at least face it.
-  if(!self isInGoal(self.origin))
+  if(!self isInGoal(self.origin)) {
     self.shootPosOverride = spot + (0, 0, 64);
+  }
 
   enemy_lookaround_for_time(10);
 
@@ -245,13 +257,15 @@ enemy_alert_level_warning1() {
 }
 
 enemy_alert_level_warning2() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return;
+  }
 
   self thread enemy_announce_alert();
 
-  if(self.type != "dog")
+  if(self.type != "dog") {
     self set_generic_run_anim("_stealth_patrol_cqb");
+  }
   else {
     self clear_run_anim();
     self.script_nobark = 1;
@@ -272,8 +286,9 @@ enemy_alert_level_warning2() {
 
   if(self.type != "dog") {
     type = "_stealth_patrol_search_a";
-    if(cointoss())
+    if(cointoss()) {
       type = "_stealth_patrol_search_b";
+    }
     self set_generic_run_anim(type, true);
   } else {
     self anim_generic_custom_animmode(self, "gravity", "_stealth_dog_stop");
@@ -293,8 +308,9 @@ enemy_alert_level_warning2() {
 
   if(self.type != "dog") {
     type = "a";
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       type = "b";
+    }
     self set_generic_run_anim("_stealth_patrol_search_" + type, true);
   } else {
     self set_dog_walk_anim();
@@ -323,18 +339,21 @@ enemy_alert_level_attack_wrapper() {
 enemy_alert_level_attack() {
   self thread enemy_announce_spotted(self.origin);
 
-  if(isDefined(self.script_goalvolume))
+  if(isDefined(self.script_goalvolume)) {
     self thread maps\_spawner::set_goal_volume();
-  else
+  }
+  else {
     self enemy_close_in_on_target();
+  }
 }
 
 enemy_close_in_on_target() {
   radius = 2048;
   self.goalradius = radius;
 
-  if(isDefined(self.script_stealth_dontseek) && self.script_stealth_dontseek == true)
+  if(isDefined(self.script_stealth_dontseek) && self.script_stealth_dontseek == true) {
     return;
+  }
 
   self endon("death");
 
@@ -344,10 +363,12 @@ enemy_close_in_on_target() {
     self setgoalpos(self.enemy.origin);
     self.goalradius = radius;
 
-    if(radius > 600)
+    if(radius > 600) {
       radius *= .75;
-    else
+    }
+    else {
       return;
+    }
 
     wait 15;
   }
@@ -358,14 +379,16 @@ enemy_alert_level_normal_wrapper() {
 
   self ent_flag_clear("_stealth_enemy_alert_level_action");
 
-  if(self ent_flag_exist("_stealth_saw_corpse"))
+  if(self ent_flag_exist("_stealth_saw_corpse")) {
     self ent_flag_waitopen("_stealth_saw_corpse");
+  }
 
   //to make sure found corpse is set
   wait .05;
 
-  if(self ent_flag_exist("_stealth_found_corpse"))
+  if(self ent_flag_exist("_stealth_found_corpse")) {
     self ent_flag_waitopen("_stealth_found_corpse");
+  }
 
   self ent_flag_set("_stealth_normal");
 
@@ -424,15 +447,19 @@ enemy_set_threat_behavior(array) {
   //clear the array
   self._stealth.behavior.ai_functions["threat"] = [];
 
-  if(!isDefined(array["reset"]))
+  if(!isDefined(array["reset"])) {
     array["reset"] = ::enemy_alert_level_normal;
-  if(!isDefined(array["attack"]))
+  }
+  if(!isDefined(array["attack"])) {
     array["attack"] = ::enemy_alert_level_attack;
-  if(!isDefined(array["normal"]))
+  }
+  if(!isDefined(array["normal"])) {
     array["normal"] = ::enemy_alert_level_normal;
+  }
 
-  foreach(key, function in array)
+  foreach(key, function in array) {
   self ai_create_behavior_function("threat", key, function);
+  }
 
   self._stealth.logic.alert_level.max_warnings = array.size - 3; // sub 2 for reset, normal, and attack
 }
@@ -446,8 +473,9 @@ enemy_alert_level_change(type) {
     return;
   }
 
-  if(issubstr(type, "warning"))
+  if(issubstr(type, "warning")) {
     type = "warning";
+  }
 
   enemy_set_alert_level(type);
 
@@ -459,10 +487,12 @@ enemy_threat_anim_defaults() {
   array["reset"] = ::enemy_animation_nothing;
   array["warning"] = ::enemy_animation_nothing;
 
-  if(self.type == "dog")
+  if(self.type == "dog") {
     array["attack"] = ::dog_animation_generic;
-  else
+  }
+  else {
     array["attack"] = ::enemy_animation_attack;
+  }
 
   return array;
 }
@@ -471,15 +501,19 @@ enemy_set_threat_anim_behavior(array) {
   def = enemy_threat_anim_defaults();
 
   //set defautls for reset and attack if they're not there
-  if(!isDefined(array["reset"]))
+  if(!isDefined(array["reset"])) {
     array["reset"] = def["reset"];
-  if(!isDefined(array["warning"]))
+  }
+  if(!isDefined(array["warning"])) {
     array["warning"] = def["warning"];
-  if(!isDefined(array["attack"]))
+  }
+  if(!isDefined(array["attack"])) {
     array["attack"] = def["attack"];
+  }
 
-  foreach(key, func in array)
+  foreach(key, func in array) {
   self ai_create_behavior_function("animation", key, func);
+  }
 }
 
 enemy_default_threat_anim_behavior() {

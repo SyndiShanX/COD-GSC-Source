@@ -99,16 +99,19 @@ gameplay_start() {
   maps\village_assault_code::friendly_stance("stand", "crouch", "prone");
   var_0 = getent("first_trigger_after_gas_station", "script_noteworthy");
 
-  if(!isDefined(var_0.trigger_off) || var_0.trigger_off == 0)
+  if(!isDefined(var_0.trigger_off) || var_0.trigger_off == 0) {
     var_0 notify("trigger");
+  }
 
-  for(var_1 = 0; var_1 < level.friendlies.size; var_1++)
+  for(var_1 = 0; var_1 < level.friendlies.size; var_1++) {
     level.friendlies[var_1] pushplayer(1);
+  }
 
   getent("pushplayer_off", "targetname") waittill("trigger");
 
-  for(var_1 = 0; var_1 < level.friendlies.size; var_1++)
+  for(var_1 = 0; var_1 < level.friendlies.size; var_1++) {
     level.friendlies[var_1] pushplayer(0);
+  }
 }
 
 battlechatter_trigger_on() {

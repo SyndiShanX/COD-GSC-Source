@@ -52,8 +52,9 @@ turned_face_override_func() {
 init() {
   var = getdvar(#"ui_gametype");
 
-  if(var == "zcleansed")
+  if(var == "zcleansed") {
     precache();
+  }
 }
 
 main() {
@@ -62,8 +63,9 @@ main() {
   }
   setup_zombie_exerts();
 
-  if(isdemoplaying())
+  if(isdemoplaying()) {
     thread zombie_turned_demo_ir();
+  }
 }
 
 zombie_turned_set_ir(lcn, newval) {
@@ -90,8 +92,9 @@ zombie_turned_ir(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   }
   self.is_player_zombie = newval;
 
-  if(isdemoplaying() && isspectating(localclientnum))
+  if(isdemoplaying() && isspectating(localclientnum)) {
     newval = 0;
+  }
 
   zombie_turned_set_ir(localclientnum, newval);
 }
@@ -102,8 +105,9 @@ zombie_turned_demo_ir() {
   while(true) {
     assert(isdemoplaying());
 
-    if(getlocalplayer(lcn).is_player_zombie)
+    if(getlocalplayer(lcn).is_player_zombie) {
       getlocalplayer(lcn) zombie_turned_set_ir(lcn, !isspectating(lcn));
+    }
 
     wait 0.05;
   }

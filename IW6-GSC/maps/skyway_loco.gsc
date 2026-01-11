@@ -72,8 +72,9 @@ main_loco() {
   common_scripts\utility::flag_clear("flag_killer_tracker");
   level._ally notify("stop_dist_flag");
 
-  if(!common_scripts\utility::flag("flag_rt3_ally_at_end"))
+  if(!common_scripts\utility::flag("flag_rt3_ally_at_end")) {
     common_scripts\utility::flag_set("flag_rt3_ally_at_end");
+  }
 
   thread maps\_utility::battlechatter_off("allies");
   thread maps\_utility::battlechatter_off("axis");
@@ -90,8 +91,9 @@ main_loco() {
 transient_load_outro() {
   common_scripts\utility::flag_wait_all("flag_loco_enter", "flag_rt3_ally_at_end");
 
-  if(!istransientqueued("skyway_outro_tr"))
+  if(!istransientqueued("skyway_outro_tr")) {
     maps\_utility::transient_unloadall_and_load("skyway_outro_tr");
+  }
 
   common_scripts\utility::flag_wait("flag_loco_end");
   synctransients();
@@ -103,19 +105,22 @@ loco_breach_autosave() {
   }
   common_scripts\utility::flag_wait_all("flag_loco_enter", "flag_rt3_ally_at_end");
 
-  while(!istransientloaded("skyway_outro_tr"))
+  while(!istransientloaded("skyway_outro_tr")) {
     wait(level.timestep);
+  }
 
-  for(var_0 = level.player maps\_utility::player_looking_at(level.loco_breach_org.origin, 0.5, 1); !var_0; var_0 = level.player maps\_utility::player_looking_at(level.loco_breach_org.origin, 0.5, 1))
+  for(var_0 = level.player maps\_utility::player_looking_at(level.loco_breach_org.origin, 0.5, 1); !var_0; var_0 = level.player maps\_utility::player_looking_at(level.loco_breach_org.origin, 0.5, 1)) {
     wait(level.timestep);
+  }
 
   level.dopickyautosavechecks = 0;
   maps\_utility::autosave_by_name("locomotive");
 }
 
 loco_breach_attain_moving_platform(var_0) {
-  if(var_0)
+  if(var_0) {
     common_scripts\utility::flag_wait("hint_breach_init");
+  }
 
   level.loco_moving_platform = level.player getmovingplatformparent();
 
@@ -173,19 +178,23 @@ hide_end_bridge_geo() {
   var_1 = getEntArray("bridge_end_1", "script_noteworthy");
   var_2 = getEntArray("bridge_end_2", "script_noteworthy");
 
-  foreach(var_4 in var_0)
+  foreach(var_4 in var_0) {
   var_4 hide();
+  }
 
   level waittill("notify_swap_bridge_geo");
 
-  foreach(var_4 in var_0)
+  foreach(var_4 in var_0) {
   var_4 show();
+  }
 
-  foreach(var_4 in var_1)
+  foreach(var_4 in var_1) {
   var_4 hide();
+  }
 
-  foreach(var_4 in var_2)
+  foreach(var_4 in var_2) {
   var_4 hide();
+  }
 }
 
 break_cockpit_glass() {
@@ -204,14 +213,17 @@ break_cockpit_glass() {
 }
 
 loco_standoff_init_vars() {
-  if(!isDefined(level.loco_breach_anim_node))
+  if(!isDefined(level.loco_breach_anim_node)) {
     level.loco_breach_anim_node = getent("vignette_vargasstandoff", "targetname");
+  }
 
-  if(!isDefined(level.slowmo_breach_player_speed))
+  if(!isDefined(level.slowmo_breach_player_speed)) {
     level.slowmo_breach_player_speed = 0.2;
+  }
 
-  if(!isDefined(level.loco_moving_platform))
+  if(!isDefined(level.loco_moving_platform)) {
     loco_breach_attain_moving_platform(0);
+  }
 }
 
 hint_loco_breach_init_func() {
@@ -260,8 +272,9 @@ loco_breach_logic() {
   var_0 = level.player getcurrentprimaryweapon();
   var_1 = weaponclipsize(var_0);
 
-  if(level.player getweaponammoclip(var_0) < var_1)
+  if(level.player getweaponammoclip(var_0) < var_1) {
     level.player setweaponammoclip(var_0, var_1);
+  }
 
   level._ally linkto(level.loco_breach_anim_node);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level._ally, "loco_breach");
@@ -326,8 +339,9 @@ end_breach_player_death_logic(var_0) {
   level endon("notify_end_breach_slide");
   thread end_breach_player_death_rpg();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level waittill(var_0);
+  }
 
   thread end_breach_player_death_via_notetrack();
 
@@ -459,8 +473,9 @@ end_breach_rpg_guy_death(var_0) {
     level waittill("notify_fire_rpg");
   }
 
-  while(!maps\skyway_util::check_anim_time(self.animname, "loco_breach_death", 1.0))
+  while(!maps\skyway_util::check_anim_time(self.animname, "loco_breach_death", 1.0)) {
     wait(level.timestep);
+  }
 
   level.loco_breach_anim_node thread maps\_anim::anim_last_frame_solo(self, "loco_breach_death");
 }
@@ -468,10 +483,12 @@ end_breach_rpg_guy_death(var_0) {
 end_breach_rpg_guy_fire(var_0, var_1, var_2, var_3, var_4) {
   level endon("notify_player_rambo_RPG");
 
-  if(common_scripts\utility::flag(var_4))
+  if(common_scripts\utility::flag(var_4)) {
     return;
-  else
+  }
+  else {
     level endon(var_4);
+  }
 
   level.rpg_fx_model = maps\_utility::spawn_anim_model("loco_breach_RPG_fx");
   level.loco_breach_anim_node maps\_anim::anim_first_frame_solo(level.rpg_fx_model, var_3);
@@ -609,8 +626,9 @@ push_player_impulse(var_0, var_1, var_2) {
     var_5 = maps\skyway_util::normalize_value(0, var_0, var_3);
     var_6 = maps\skyway_util::normalize_value(0, var_0, var_3);
 
-    if(var_1)
+    if(var_1) {
       var_5 = 1.0 - var_5;
+    }
 
     var_5 = maps\skyway_util::factor_value_min_max(var_2, 1, var_5);
     var_6 = maps\skyway_util::factor_value_min_max(var_2, 1, var_6);
@@ -652,8 +670,9 @@ loco_slide_logic(var_0) {
   var_1 linkto(level.loco_breach_anim_node);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(var_1, "loco_slide");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     level waittill("flag_player_slide");
+  }
 
   thread train_sync_end_stop_anim();
   thread maps\skyway_audio::skyway_checkmate_music();
@@ -696,10 +715,12 @@ train_sync_end_stop_anim() {
       break;
     }
 
-    if(var_2 > var_1)
+    if(var_2 > var_1) {
       level._train.cars["train_loco"].body setanim(level.scr_anim["train_loco_body"]["end_stop"], 1, var_2 / var_0, 0.8);
-    else if(var_2 < var_1)
+    }
+    else if(var_2 < var_1) {
       level._train.cars["train_loco"].body setanim(level.scr_anim["train_loco_body"]["end_stop"], 1, var_2 / var_0, 1.2);
+    }
 
     wait(level.timestep);
     var_1 = var_1 + level.timestep;
@@ -723,8 +744,9 @@ loco_slide_player_raise_weapon() {
   level.player enableslowaim(0.25, 0.25);
   level.player springcamenabled(0.5);
 
-  while(level.player getweaponammoclip(var_0) > 2)
+  while(level.player getweaponammoclip(var_0) > 2) {
     wait(level.timestep);
+  }
 
   level notify("notify_loco_breach_slowmo_end");
   level.player allowfire(0);
@@ -776,11 +798,13 @@ loco_bridge_rog_strike() {
   wait 1.0;
   common_scripts\utility::flag_set("flag_bridge_rog");
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 setanim(level.scr_anim["end_bridge"]["bridge_rog_1"]);
+  }
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 setanim(level.scr_anim["end_bridge"]["bridge_rog_2"]);
+  }
 
   level waittill("notify_shockwave_start");
   playFXOnTag(common_scripts\utility::getfx("bridge_shockwave"), var_1[0], "tag_shockwave");
@@ -795,11 +819,13 @@ loco_bridge_rog_strike() {
   playFXOnTag(common_scripts\utility::getfx("bridge_shockwave_oriented"), level._train.cars["train_loco"].body, "tag_shockwave_oriented");
   playFXOnTag(common_scripts\utility::getfx("bridge_shockwave_oriented"), level._train.cars["train_loco"].body, "tag_shockwave_oriented2");
 
-  foreach(var_12 in var_0)
+  foreach(var_12 in var_0) {
   var_12 hide();
+  }
 
-  foreach(var_12 in var_1)
+  foreach(var_12 in var_1) {
   var_12 hide();
+  }
 
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_rog_ent, 0.0, 0.0, 0.1, 0.0, 0.5);
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_ent, 0.0, 0.0, 0.1, 0.0, 0.05);
@@ -826,8 +852,9 @@ loco_standoff() {
 
   foreach(var_2 in level.end_control_enemies) {
     if(isalive(var_2)) {
-      if(var_2.animname == "opfor4")
+      if(var_2.animname == "opfor4") {
         level.loco_breach_anim_node thread maps\_anim::anim_single_solo(var_2, "loco_standoff");
+      }
     }
   }
 
@@ -860,8 +887,9 @@ loco_standoff() {
   level._train maps\skyway_util::train_queue_path_anim("loco_blasthit", "anim_track_ending", "anim_track_ending", "clear", 1, 0);
 
   foreach(var_2 in level.end_enemies) {
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       var_2 hide();
+    }
   }
 
   var_19 = common_scripts\utility::getstruct("anim_track_ending", "targetname");
@@ -884,16 +912,18 @@ loco_standoff() {
   level.player unlink();
   var_5 delete();
 
-  foreach(var_21 in var_15)
+  foreach(var_21 in var_15) {
   var_21 delete();
+  }
 
   var_16 delete();
   common_scripts\utility::flag_set("flag_loco_end");
 }
 
 player_setup(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 60;
+  }
 
   maps\skyway_util::setup_player_for_animated_sequence(var_1, var_2, var_3, var_4, 0, undefined, var_0);
 }
@@ -907,8 +937,9 @@ enemy_setup() {
   level.end_control_enemies = [];
   level.end_breach_enemies_killed = 0;
 
-  if(!isDefined(level._boss))
+  if(!isDefined(level._boss)) {
     maps\skyway_util::spawn_boss();
+  }
 
   level._boss prepare_enemy_for_breach();
   level.breach_spawners = getEntArray("loco_breach_enemy", "targetname");
@@ -1012,8 +1043,9 @@ breach_enemy_death_dmg(var_0, var_1) {
   level.end_breach_enemies_killed++;
 
   if(var_1) {
-    if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)
+    if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
       maps\_utility::stop_magic_bullet_shield();
+    }
 
     self.allowdeath = 1;
     self kill();
@@ -1068,10 +1100,12 @@ slowmo_difficulty_dvars() {
 }
 
 slowmo_player_cleanup() {
-  if(isDefined(level.playerspeed))
+  if(isDefined(level.playerspeed)) {
     self setmovespeedscale(level.playerspeed);
-  else
+  }
+  else {
     self setmovespeedscale(1);
+  }
 }
 
 blackscreen(var_0) {
@@ -1115,8 +1149,9 @@ loco_standoff_struggle_logic() {
   self setanim(level.scr_anim["player_rig_struggle"]["loco_bodyshield_right_parent"], 0, 0);
   self setanim(level.scr_anim["player_rig_struggle"]["loco_bodyshield_left_parent"], 0, 0);
 
-  if(var_0)
+  if(var_0) {
     var_1 = level._boss getanimtime(level.scr_anim["boss"]["loco_standoff"]);
+  }
 
   for(;;) {
     loco_standoff_struggle_lerp_anims();
@@ -1154,10 +1189,12 @@ loco_standoff_struggle_lerp_anims() {
     var_14 = length2d(var_0 - self.move_previous);
     var_15 = 0.4;
 
-    if(var_14 < var_15)
+    if(var_14 < var_15) {
       var_13 = 0;
-    else
+    }
+    else {
       self.jerk_check = 0;
+    }
   }
 
   if(var_1) {
@@ -1319,8 +1356,9 @@ tunnel_lights_engineroom() {
 hide_loco_exterior() {
   var_0 = getEntArray("loco_exterior", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 hide();
+  }
 }
 
 standoff_sunlight() {

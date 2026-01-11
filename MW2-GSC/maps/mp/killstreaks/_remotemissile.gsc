@@ -42,8 +42,9 @@ tryUsePredatorMissile(lifeId) {
   self setUsingRemote("remotemissile");
   result = self maps\mp\killstreaks\_killstreaks::initRideKillstreak();
   if(result != "success") {
-    if(result != "disconnect")
+    if(result != "disconnect") {
       self clearUsingRemote();
+    }
 
     return false;
   }
@@ -62,14 +63,17 @@ getBestSpawnPoint(remoteMissileSpawnPoints) {
   }
 
   foreach(player in level.players) {
-    if(!isReallyAlive(player))
+    if(!isReallyAlive(player)) {
       continue;
+    }
 
-    if(player.team == self.team)
+    if(player.team == self.team) {
       continue;
+    }
 
-    if(player.team == "spectator")
+    if(player.team == "spectator") {
       continue;
+    }
 
     bestDistance = 999999999;
     bestSpawnPoint = undefined;
@@ -95,15 +99,17 @@ getBestSpawnPoint(remoteMissileSpawnPoints) {
     foreach(player in spawnPoint.validPlayers) {
       spawnPoint.spawnScore += 1;
 
-      if(bulletTracePassed(player.origin + (0, 0, 32), spawnPoint.origin, false, player))
+      if(bulletTracePassed(player.origin + (0, 0, 32), spawnPoint.origin, false, player)) {
         spawnPoint.spawnScore += 3;
+      }
 
       if(spawnPoint.spawnScore > bestSpawn.spawnScore) {
         bestSpawn = spawnPoint;
       } else if(spawnPoint.spawnScore == bestSpawn.spawnScore) // equal spawn weights so we toss a coin.
       {
-        if(coinToss())
+        if(coinToss()) {
           bestSpawn = spawnPoint;
+        }
       }
     }
   }
@@ -123,14 +129,17 @@ _fire(lifeId, player) {
   //assertEX( remoteMissileSpawnArray.size > 0 && getMapCustom( "map" ) != "", "No remote missile spawn points found.Contact friendly neighborhood designer" );
 
   foreach(spawn in remoteMissileSpawnArray) {
-    if(isDefined(spawn.target))
+    if(isDefined(spawn.target)) {
       spawn.targetEnt = getEnt(spawn.target, "targetname");
+    }
   }
 
-  if(remoteMissileSpawnArray.size > 0)
+  if(remoteMissileSpawnArray.size > 0) {
     remoteMissileSpawn = player getBestSpawnPoint(remoteMissileSpawnArray);
-  else
+  }
+  else {
     remoteMissileSpawn = undefined;
+  }
 
   if(isDefined(remoteMissileSpawn)) {
     startPos = remoteMissileSpawn.origin;
@@ -181,8 +190,9 @@ _fire_noplayer(lifeId, player) {
 
   rocket = MagicBullet("remotemissile_projectile_mp", startpos, targetPos, player);
 
-  if(!isDefined(rocket))
+  if(!isDefined(rocket)) {
     return;
+  }
 
   rocket thread handleDamage();
 
@@ -232,22 +242,25 @@ MissileEyes(player, rocket) {
     player CameraLinkTo(rocket, "tag_origin");
     player ControlsLinkTo(rocket);
 
-    if(getDvarInt("camera_thirdPerson"))
+    if(getDvarInt("camera_thirdPerson")) {
       player setThirdPersonDOF(false);
+    }
 
     rocket waittill("death");
 
     // is defined check required because remote missile doesnt handle lifetime explosion gracefully
     // instantly deletes its self after an explode and death notify
-    if(isDefined(rocket))
+    if(isDefined(rocket)) {
       player maps\mp\_matchdata::logKillstreakEvent("predator_missile", rocket.origin);
+    }
 
     player ControlsUnlink();
     player freezeControlsWrapper(true);
 
     // If a player gets the final kill with a hellfire, level.gameEnded will already be true at this point
-    if(!level.gameEnded || isDefined(player.finalKill))
+    if(!level.gameEnded || isDefined(player.finalKill)) {
       player thread staticEffect(0.5);
+    }
 
     wait(0.5);
 
@@ -255,8 +268,9 @@ MissileEyes(player, rocket) {
 
     player CameraUnlink();
 
-    if(getDvarInt("camera_thirdPerson"))
+    if(getDvarInt("camera_thirdPerson")) {
       player setThirdPersonDOF(true);
+    }
 
   }
 
@@ -307,8 +321,9 @@ Player_CleanupOnTeamChange(rocket) {
     self ControlsUnlink();
     self CameraUnlink();
 
-    if(getDvarInt("camera_thirdPerson"))
+    if(getDvarInt("camera_thirdPerson")) {
       self setThirdPersonDOF(true);
+    }
   }
   self clearUsingRemote();
 
@@ -333,6 +348,7 @@ Player_CleanupOnGameEnded(rocket) {
   self ControlsUnlink();
   self CameraUnlink();
 
-  if(getDvarInt("camera_thirdPerson"))
+  if(getDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(true);
+  }
 }

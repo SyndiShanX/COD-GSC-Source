@@ -19,10 +19,12 @@ main() {
   speed = length(self getvelocity());
   pain_anim = getanimdirection(self.damageyaw);
 
-  if(speed > level.dogrunpainspeed)
+  if(speed > level.dogrunpainspeed) {
     pain_anim = "pain_run_" + pain_anim;
-  else
+  }
+  else {
     pain_anim = "pain_" + pain_anim;
+  }
 
   self setanimstate(pain_anim);
   self maps\mp\animscripts\shared::donotetracksfortime(0.2, "done");

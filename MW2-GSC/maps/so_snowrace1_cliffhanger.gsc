@@ -54,8 +54,9 @@ main() {
   level.race_times["normal"] = 120;
   level.race_times["hard"] = 90;
   level.race_times["veteran"] = 70;
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player thread star_challenge(level.race_times["veteran"], level.race_times["hard"], level.race_times["normal"]);
+  }
 
   thread enable_challenge_timer("race_started", "finish_line");
 
@@ -68,8 +69,9 @@ freeze_snowmobile(player) {
   player.ignoreme = true;
   player setBlurForPlayer(6, 1);
 
-  if(!isDefined(player.vehicle))
+  if(!isDefined(player.vehicle)) {
     return;
+  }
 
   player.vehicle thread stop_vehicle();
 }
@@ -87,8 +89,9 @@ finishline() {
     assert(isplayer(player));
 
     // a player crossed the finish line
-    if(isDefined(player.crossed_finish_line))
+    if(isDefined(player.crossed_finish_line)) {
       continue;
+    }
     player.crossed_finish_line = true;
 
     player.finish_time = getTime();
@@ -112,8 +115,9 @@ finishline() {
     }
 
     playersRequired--;
-    if(playersRequired <= 0)
+    if(playersRequired <= 0) {
       break;
+    }
 
     // print message on screen that we're waiting for other players
     player thread finishline_waiting_for_players_message();
@@ -125,8 +129,9 @@ finishline() {
 }
 
 race_finished(was_success) {
-  if(isDefined(level.race_finished_thread_running))
+  if(isDefined(level.race_finished_thread_running)) {
     return;
+  }
   level.race_finished_thread_running = true;
 
   stop_enemies();
@@ -139,8 +144,9 @@ race_finished(was_success) {
   } else {
     // make sure both player times exist because some might not have finished the race
     foreach(player in level.players) {
-      if(!isDefined(player))
+      if(!isDefined(player)) {
         continue;
+      }
       if(!isDefined(player.finish_time)) {
         player.dnf = true;
         player.finish_time = getTime();
@@ -149,10 +155,12 @@ race_finished(was_success) {
 
     flag_set("finish_line");
     waittillframeend;
-    if(is_coop())
+    if(is_coop()) {
       flag_set("so_snowrace_complete");
-    else
+    }
+    else {
       missionfailedwrapper();
+    }
   }
 }
 
@@ -165,10 +173,12 @@ print_winners() {
     player.winnertext.pulse_scale_normal = 3.0;
     player.winnertext.pulse_scale_big = 5.0;
 
-    if(player == level.raceWinner)
+    if(player == level.raceWinner) {
       player.winnertext thread so_hud_pulse_success(&"SO_SNOWRACE1_CLIFFHANGER_YOUWIN");
-    else
+    }
+    else {
       player.winnertext thread so_hud_pulse_failure(&"SO_SNOWRACE1_CLIFFHANGER_YOULOSE");
+    }
 
     player.winnertext delayThread(4.0, ::destroyElem);
   }
@@ -184,14 +194,16 @@ stop_vehicle() {
   speed = int(self vehicle_GetSpeed());
   while(isDefined(self)) {
     speed -= 2;
-    if(speed < 0)
+    if(speed < 0) {
       break;
+    }
 
     self VehPhys_SetSpeed(speed);
     wait 0.05;
   }
-  if(isDefined(self))
+  if(isDefined(self)) {
     self VehPhys_SetSpeed(0);
+  }
 }
 
 enemies() {
@@ -216,8 +228,9 @@ enemies() {
   level.POS_LOOKAHEAD_DIST = 200;
 
   level.moto_drive = false;
-  if(getdvar("moto_drive") == "")
+  if(getdvar("moto_drive") == "") {
     setdvar("moto_drive", "0");
+  }
 
   thread maps\cliffhanger_code::enemy_init();
   init_vehicle_splines();
@@ -237,8 +250,9 @@ enemies() {
 }
 
 stop_enemies_on_player_death() {
-  if(is_coop())
+  if(is_coop()) {
     return;
+  }
   level.player waittill("death");
   stop_enemies();
 }
@@ -251,8 +265,9 @@ stop_enemies() {
 }
 
 safe_stop_magic_bullet_shield() {
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     self thread stop_magic_bullet_shield();
+  }
 }
 
 enemy_snowmobiles_spawn_and_attack() {
@@ -266,16 +281,18 @@ enemy_snowmobiles_spawn_and_attack() {
     thread spawn_enemy_bike_snowrace();
     wait(wait_time);
     wait_time -= 0.5;
-    if(wait_time < 0.5)
+    if(wait_time < 0.5) {
       wait_time = 0.5;
+    }
   }
 }
 
 within_fov_allplayers(pos) {
   in_fov = false;
   foreach(player in level.players) {
-    if(within_fov(player.origin, player.angles, pos, 0))
+    if(within_fov(player.origin, player.angles, pos, 0)) {
       return true;
+    }
   }
   return false;
 }
@@ -285,8 +302,9 @@ spawn_enemy_bike_snowrace() {
 
   debug_enemy_vehicles();
 
-    if(level.enemy_snowmobiles.size >= level.enemy_snowmobiles_max)
+    if(level.enemy_snowmobiles.size >= level.enemy_snowmobiles_max) {
       return;
+    }
 
   player_targ = get_player_targ();
   player_progress = get_player_progress();
@@ -320,8 +338,9 @@ spawn_enemy_bike_snowrace() {
   //snowmobile_spawner.angles = vectortoangles( snowmobile_path_node.next_node.midpoint - snowmobile_path_node.midpoint );
   snowmobile_spawner.angles = vectortoangles(targ.next_node.midpoint - targ.midpoint);
   /*
-  if( isalive( level.player ) && isDefined( level.player.vehicle ) )
+  if( isalive( level.player ) && isDefined( level.player.vehicle ) ) {
   	snowmobile_spawner.angles = level.player.vehicle.angles;
+  }
   */
 
   ai_spawners = snowmobile_spawner get_vehicle_ai_spawners();
@@ -336,8 +355,9 @@ spawn_enemy_bike_snowrace() {
   bike thread crash_detection();
   bike.left_spline_path_time = gettime() - 3000;
   waittillframeend; // for bike.riders to get defined
-  if(!isalive(bike))
+  if(!isalive(bike)) {
     return;
+  }
 
   targ bike_drives_path(bike);
 }
@@ -362,12 +382,15 @@ star_challenge(three_star_time, two_star_time, one_star_time) {
   self ent_flag_wait("finish_line");
 
   elapsedTime = gettime() - start_time;
-  if(elapsedTime <= three_star_time)
+  if(elapsedTime <= three_star_time) {
     self.forcedGameSkill = 3;
-  else if(elapsedTime <= two_star_time)
+  }
+  else if(elapsedTime <= two_star_time) {
     self.forcedGameSkill = 2;
-  else
+  }
+  else {
     self.forcedGameSkill = 1;
+  }
 }
 
 time_expires(time) {
@@ -398,8 +421,9 @@ star_challenge_hud(x_pos_offset, removeTimer) {
   star.x = -10 - (x_pos_offset * star_width);
   star setShader("difficulty_star", 25, 25);
 
-  if(!isDefined(removeTimer))
+  if(!isDefined(removeTimer)) {
     return;
+  }
 
   flag_wait("race_started");
 
@@ -407,8 +431,9 @@ star_challenge_hud(x_pos_offset, removeTimer) {
   self thread star_challenge_force_alpha_at_finish(star);
   level waittill_any_timeout(removeTimer);
 
-  if(isDefined(level.raceWinner) && self == level.raceWinner)
+  if(isDefined(level.raceWinner) && self == level.raceWinner) {
     return;
+  }
 
   wait 0.05;
 

@@ -106,20 +106,27 @@ busVolumeAll(value) {
 
 argsAsDict(a, b, c, d, e, f, g) {
   names = [];
-  if(isDefined(a))
+  if(isDefined(a)) {
     names[0] = a;
-  if(isDefined(b))
+  }
+  if(isDefined(b)) {
     names[1] = b;
-  if(isDefined(c))
+  }
+  if(isDefined(c)) {
     names[2] = c;
-  if(isDefined(d))
+  }
+  if(isDefined(d)) {
     names[3] = d;
-  if(isDefined(e))
+  }
+  if(isDefined(e)) {
     names[4] = e;
-  if(isDefined(f))
+  }
+  if(isDefined(f)) {
     names[5] = f;
-  if(isDefined(g))
+  }
+  if(isDefined(g)) {
     names[6] = g;
+  }
   return names;
 }
 
@@ -127,8 +134,9 @@ busVolumesExcept(a, b, c, d, e, f, g) {
   args = argsAsDict(a, b, c, d, e, f, g);
   value = args[args.size - 1];
   names = [];
-  for(i = 0; i < args.size - 1; i++)
+  for(i = 0; i < args.size - 1; i++) {
     names[i] = args[i];
+  }
   for(i = 0; i < GetBusCount(); i++) {
     name = GetBusName(i);
     if(!busIsIn(GetBusName(i), names)) {

@@ -61,17 +61,20 @@ tesla_discharge_mechanic() {
   }
 }
 tesla_ok_to_discharge(player) {
-  if(!isDefined(player.tesla_discharge))
+  if(!isDefined(player.tesla_discharge)) {
     return true;
-  if(player.tesla_discharge == 0)
+  }
+  if(player.tesla_discharge == 0) {
     return false;
+  }
   return true;
 }
 tesla_damage_init(player) {
   player endon("disconnect");
   player endon("death");
-  if(!tesla_ok_to_discharge(player))
+  if(!tesla_ok_to_discharge(player)) {
     return;
+  }
   if(isDefined(self.zombie_tesla_hit) && self.zombie_tesla_hit) {
     return;
   }

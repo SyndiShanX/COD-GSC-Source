@@ -57,8 +57,9 @@ func_618B(var_00) {
   scripts\mp\utility\game::incrementfauxvehiclecount();
   var_05 = func_49DE(self, var_02, var_03, var_04, "air_patrol", var_0.streakname, var_0.lifeid);
 
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     return 0;
+  }
 
   thread func_376F(var_05);
   return 1;
@@ -130,8 +131,9 @@ func_376F(var_00) {
     var_00 setvehgoalpos(var_0.func_C96C, var_01);
     var_00 waittill("near_goal");
 
-    if(func_9DD5(var_0.func_4BF7) && !var_0.func_A435)
+    if(func_9DD5(var_0.func_4BF7) && !var_0.func_A435) {
       var_00 waittill("goal");
+    }
 
     if(!isDefined(var_0.func_DD1C)) {
       var_00 vehicle_setspeed(10, 5, 500);
@@ -183,11 +185,13 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if(!scripts\mp\weapons::friendlyfirecheck(var_12.owner, var_01)) {
     return;
   }
-  if(isDefined(var_03) && var_03 &level.idflags_penetration)
+  if(isDefined(var_03) && var_03 &level.idflags_penetration) {
     var_12.wasdamagedfrombulletpenetration = 1;
+  }
 
-  if(isDefined(var_03) && var_03 &level.idflags_no_team_protection)
+  if(isDefined(var_03) && var_03 &level.idflags_no_team_protection) {
     self.wasdamagedfrombulletricochet = 1;
+  }
 
   var_12.wasdamaged = 1;
 
@@ -199,8 +203,9 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
     }
   }
 
-  if(var_04 == "MOD_MELEE")
+  if(var_04 == "MOD_MELEE") {
     var_02 = var_12.maxhealth * 0.5;
+  }
 
   var_13 = var_02;
 
@@ -208,19 +213,23 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
     var_01 scripts\mp\damagefeedback::updatedamagefeedback("");
 
     if(var_04 == "MOD_RIFLE_BULLET" || var_04 == "MOD_PISTOL_BULLET") {
-      if(var_01 scripts\mp\utility\game::_hasperk("specialty_armorpiercing"))
+      if(var_01 scripts\mp\utility\game::_hasperk("specialty_armorpiercing")) {
         var_13 = var_13 + var_02 * level.armorpiercingmod;
+      }
     }
 
-    if(isexplosivedamagemod(var_04))
+    if(isexplosivedamagemod(var_04)) {
       var_13 = var_13 + var_02;
+    }
   }
 
-  if(isexplosivedamagemod(var_04) && (isDefined(var_05) && var_05 == "destructible_car"))
+  if(isexplosivedamagemod(var_04) && (isDefined(var_05) && var_05 == "destructible_car")) {
     var_13 = var_12.maxhealth;
+  }
 
-  if(isDefined(var_1.owner) && isplayer(var_1.owner))
+  if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
     var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("");
+  }
 
   if(isDefined(var_05)) {
     switch (var_05) {
@@ -298,8 +307,9 @@ func_5C27() {
   for(;;) {
     self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
 
-    if(isDefined(self.func_10955))
+    if(isDefined(self.func_10955)) {
       self[[self.func_10955]](undefined, var_01, var_00, var_08, var_04, var_09, var_03, var_02, undefined, undefined, var_05, var_07);
+    }
   }
 }
 
@@ -373,8 +383,9 @@ func_6165(var_00, var_01) {
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(60);
   level.teamemped[var_00] = 0;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.func_A435 = 0;
+  }
 
   level notify("emp_update");
 }
@@ -403,8 +414,9 @@ func_6164(var_00) {
   level func_52C5(var_00);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(60);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.func_A435 = 0;
+  }
 
   level notify("emp_update");
   level notify("emp_ended");
@@ -415,8 +427,9 @@ func_A577() {
   level endon("keepEMPTimeRemaining");
   level endon("emp_ended");
 
-  for(level.emptriggerholdonuse = int(level.empstuntime); level.emptriggerholdonuse; level.emptriggerholdonuse--)
+  for(level.emptriggerholdonuse = int(level.empstuntime); level.emptriggerholdonuse; level.emptriggerholdonuse--) {
     wait 1.0;
+  }
 }
 
 empradarwatcher() {
@@ -429,8 +442,9 @@ empradarwatcher() {
 func_531D(var_00, var_01, var_02) {
   var_03 = "killstreak_jammer_mp";
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_03 = var_02;
+  }
 
   scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, var_03, level.turrets);
   scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, var_03, level.placedims);
@@ -441,8 +455,9 @@ func_531D(var_00, var_01, var_02) {
 func_52CA(var_00, var_01, var_02) {
   var_03 = "aamissile_projectile_mp";
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_03 = var_02;
+  }
 
   scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, var_03, level.helis);
   scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, var_03, level.littlebirds);
@@ -450,8 +465,9 @@ func_52CA(var_00, var_01, var_02) {
   scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, var_03, level.planes);
   scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, var_03, level.func_105EA);
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, var_03, level.uavmodels[var_01]);
+  }
   else {
     var_04 = [];
 
@@ -472,8 +488,9 @@ func_52CA(var_00, var_01, var_02) {
       if(var_10.team == var_0.team) {
         continue;
       }
-      if(scripts\mp\utility\game::func_9EF0(var_10))
+      if(scripts\mp\utility\game::func_9EF0(var_10)) {
         var_8[var_8.size] = var_10;
+      }
     }
 
     scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, var_03, var_08);

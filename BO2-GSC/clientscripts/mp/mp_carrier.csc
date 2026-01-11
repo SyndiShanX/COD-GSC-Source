@@ -39,17 +39,20 @@ vista_ships_init(clientnum) {
   if(level.isdemoplaying) {
     return;
   }
-  for(boatcount = 0; boatcount < farboats.size; boatcount++)
+  for(boatcount = 0; boatcount < farboats.size; boatcount++) {
     farboats[boatcount] thread floatmyboat(clientnum, 0, 1);
+  }
 }
 
 floatmyboat(clientnum, startleft, randomize) {
   originalangles = self.angles;
 
-  if(startleft)
+  if(startleft) {
     rollsign = -1;
-  else
+  }
+  else {
     rollsign = 1;
+  }
 
   roll = getdvarfloatdefault("cscr_boatroll", level.boatroll) * rollsign;
   time = getdvarfloatdefault("cscr_boatswaytime", level.boatswaytime);
@@ -60,8 +63,9 @@ floatmyboat(clientnum, startleft, randomize) {
     time = getdvarfloatdefault("cscr_boatswaytime", level.boatswaytime);
     slowdowntime = getdvarfloatdefault("cscr_boatswayslowdowntime", level.boatswayslowdowntime);
 
-    if(randomize)
+    if(randomize) {
       time = time + randomfloat(3);
+    }
 
     newangles = (originalangles[0] - roll, originalangles[1], originalangles[0]);
     self servertimedrotateto(clientnum, newangles, level.servertime, time, slowdowntime, slowdowntime);

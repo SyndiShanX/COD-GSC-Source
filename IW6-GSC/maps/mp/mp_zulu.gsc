@@ -164,8 +164,9 @@ tryUse3DPing(lifeId, streakName) {
 }
 
 watch3DPing_spiritVision(uavType, uavEnt) {
-  if(isDefined(uavEnt))
+  if(isDefined(uavEnt)) {
     uavEnt endon("death");
+  }
 
   self endon("leave");
   self endon("killstreak_disowned");
@@ -205,16 +206,18 @@ watch3DPing_spiritVision(uavType, uavEnt) {
 }
 
 watchHighlightFadeTime(id, ent, time, uavEnt) {
-  if(isDefined(uavEnt))
+  if(isDefined(uavEnt)) {
     uavEnt endon("death");
+  }
 
   self endon("disconnect");
   level endon("game_ended");
 
   self waittill_any_timeout_no_endon_death(time, "leave");
 
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     outlineDisable(id, ent);
+  }
 }
 
 createResurrectedSquadmate() {
@@ -226,8 +229,9 @@ createResurrectedSquadmate() {
     if(sWeapon != "agent_support_mp" && sWeapon == DEATH_MARIACHI_WEAPON) {
       agent = useSquadmate(victim);
 
-      if(IsAgent(agent))
+      if(IsAgent(agent)) {
         agent customizeSquadmate(victim);
+      }
     }
   }
 }
@@ -453,11 +457,13 @@ visionset_watcher_for_game_end() {
   self VisionSetNakedForPlayer("mp_zulu", 0.1);
 
   if(issplitscreen()) {
-    if(isDefined(level.scrnfxss))
+    if(isDefined(level.scrnfxss)) {
       level.scrnfxss delete();
+    }
   } else {
-    if(isDefined(level.scrnfx))
+    if(isDefined(level.scrnfx)) {
       level.scrnfx delete();
+    }
   }
 }
 
@@ -477,8 +483,9 @@ disable_level_killstreak() {
 }
 
 mariachiCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
@@ -546,17 +553,20 @@ wait_for_killstreak_availability() {
 killstreak_lottery() {
   level endon("game_ended");
 
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.05;
+  }
 
-  while(level.players.size < 1)
+  while(level.players.size < 1) {
     wait 0.05;
+  }
 
   while(1) {
     wait 10;
 
-    if(!isDefined(game["player_holding_level_killstrek"]))
+    if(!isDefined(game["player_holding_level_killstrek"])) {
       game["player_holding_level_killstrek"] = false;
+    }
 
     winning_player = Random(level.players);
 
@@ -641,11 +651,13 @@ onJuggDeathMariachiDeath() {
     playFX(level._effect["vfx_mariachi_player_death"], self.origin);
 
     if(issplitscreen()) {
-      if(isDefined(level.scrnfxss))
+      if(isDefined(level.scrnfxss)) {
         level.scrnfxss delete();
+      }
     } else {
-      if(isDefined(level.scrnfx))
+      if(isDefined(level.scrnfx)) {
         level.scrnfx delete();
+      }
     }
 
     playPlayerAndNpcSounds(self, "zulu_mariachi_death_plr", "zulu_mariachi_death");
@@ -714,17 +726,20 @@ zulu_breach_init() {
 
   foreach(breach in breaches) {
     pathnodes = GetNodeArray(breach.target, "targetname");
-    foreach(p in pathnodes)
+    foreach(p in pathnodes) {
     p DisconnectNode();
+    }
   }
 
   proxy = getstructarray("breach_proxy", "targetname");
   foreach(p in proxy) {
-    if(!isDefined(p.target))
+    if(!isDefined(p.target)) {
       continue;
+    }
     breach = getstruct(p.target, "targetname");
-    if(!isDefined(breach))
+    if(!isDefined(breach)) {
       continue;
+    }
     breaches[breaches.size] = breach;
   }
   array_thread(breaches, ::zulu_breach_update);
@@ -738,19 +753,23 @@ zulu_breach_update() {
     eq_duration = .5;
     eq_radius = 200;
 
-    if(isDefined(self.script_dot))
+    if(isDefined(self.script_dot)) {
       eq_scale = self.script_dot;
-    if(isDefined(self.script_wait))
+    }
+    if(isDefined(self.script_wait)) {
       eq_duration = self.script_wait;
-    if(isDefined(self.radius))
+    }
+    if(isDefined(self.radius)) {
       eq_radius = self.radius;
+    }
 
     Earthquake(eq_scale, eq_duration, self.origin, eq_radius);
   }
 
   pathnodes = GetNodeArray(self.target, "targetname");
-  foreach(p in pathnodes)
+  foreach(p in pathnodes) {
   p ConnectNode();
+  }
 }
 
 nuke_custom_visionset() {

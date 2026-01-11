@@ -123,8 +123,9 @@ achievement_making_the_rounds() {
   level endon("end_game");
   self endon("disconnect");
 
-  for(n_completed_trips = 0; n_completed_trips < 3; n_completed_trips++)
+  for(n_completed_trips = 0; n_completed_trips < 3; n_completed_trips++) {
     self waittill("player_completed_cycle");
+  }
 
   self giveachievement_wrapper("ZM_DLC2_MAKING_THE_ROUNDS");
 }

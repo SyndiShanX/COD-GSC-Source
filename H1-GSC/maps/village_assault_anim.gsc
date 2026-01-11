@@ -136,15 +136,18 @@ price_interrogation_voiceover_genericfacial(var_0) {
 }
 
 price_interrogation_punch_fx(var_0) {
-  if(!isDefined(level.price.interrogation_punch_counter))
+  if(!isDefined(level.price.interrogation_punch_counter)) {
     level.price.interrogation_punch_counter = 0;
+  }
 
   var_1 = "va_";
 
-  if(level.price.interrogation_punch_counter == 0)
+  if(level.price.interrogation_punch_counter == 0) {
     var_1 = var_1 + "pistol_whip";
-  else
+  }
+  else {
     var_1 = var_1 + ("punch_0" + level.price.interrogation_punch_counter);
+  }
 
   var_2 = level.alasad gettagorigin("j_head");
   var_3 = level.alasad gettagangles("j_head");

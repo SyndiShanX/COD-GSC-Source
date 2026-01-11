@@ -60,8 +60,9 @@ main() {
 hallwayPlunger() {
   plunger = getEnt("plunger", "targetname");
 
-  if(!isDefined(plunger))
+  if(!isDefined(plunger)) {
     return;
+  }
 
   plunger waittill("trigger");
 

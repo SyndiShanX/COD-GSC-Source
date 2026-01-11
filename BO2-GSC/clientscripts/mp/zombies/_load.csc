@@ -16,15 +16,17 @@
 #include clientscripts\mp\_ambient;
 
 levelnotifyhandler(clientnum, state, oldstate) {
-  if(state != "")
+  if(state != "") {
     level notify(state, clientnum);
+  }
 }
 
 default_flag_change_handler(localclientnum, flag, set, newent) {
   action = "SET";
 
-  if(!set)
+  if(!set) {
     action = "CLEAR";
+  }
 
   clientscripts\mp\zombies\_callbacks::client_flag_debug("*** DEFAULT client_flag_callback to " + action + "flag " + flag + " - for ent " + self getentitynumber() + "[" + self.type + "]");
 }
@@ -69,8 +71,9 @@ main() {
   level thread clientscripts\mp\_music::music_init();
   level thread clientscripts\mp\_footsteps::init();
 
-  if(!is_false(level._uses_sticky_grenades))
+  if(!is_false(level._uses_sticky_grenades)) {
     level thread clientscripts\mp\_sticky_grenade::main();
+  }
 
   level thread clientscripts\mp\zombies\_clientfaceanim_zm::init_clientfaceanim();
 
@@ -81,8 +84,9 @@ main() {
   if(getdvar(#"r_reflectionProbeGenerate") == "1") {
     return;
   }
-  if(!isps3())
+  if(!isps3()) {
     setdvar("cg_enableHelicopterNoCullLodOut", 1);
+  }
 }
 
 parse_structs() {

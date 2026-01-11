@@ -649,10 +649,12 @@ play_explosion_death() {
 }
 
 play_flame_death_anim() {
-  if(self.damagemod == "MOD_MELEE")
+  if(self.damagemod == "MOD_MELEE") {
     return false;
-  if(is_german_build())
+  }
+  if(is_german_build()) {
     return false;
+  }
   if(self.team == "axis") {
     level.bcOnFireTime = gettime();
     level.bcOnFireOrg = self.origin;

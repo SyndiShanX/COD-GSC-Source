@@ -12,11 +12,13 @@ main_start() {
   mapname = tolower(getdvar(#"mapname"));
   gametype = getdvar(#"ui_gametype");
 
-  if("zm_transit" == tolower(getdvar(#"mapname")) && "zclassic" == getdvar(#"ui_gametype"))
+  if("zm_transit" == tolower(getdvar(#"mapname")) && "zclassic" == getdvar(#"ui_gametype")) {
     level thread transit_navcomputer_remove_card_on_success();
+  }
 
-  if("zm_prison" == tolower(getdvar(#"mapname")) && "zgrief" == getdvar(#"ui_gametype"))
+  if("zm_prison" == tolower(getdvar(#"mapname")) && "zgrief" == getdvar(#"ui_gametype")) {
     level.zbarrier_script_string_sets_collision = 1;
+  }
 
   if(("zm_transit" == mapname || "zm_highrise" == mapname) && "zclassic" == gametype) {
     level.pers_upgrade_sniper = 1;
@@ -59,8 +61,9 @@ transit_navcomputer_remove_card_on_success() {
   nav_trig = undefined;
 
   foreach(trig in trigs) {
-    if(trig.origin == trig_pos.origin)
+    if(trig.origin == trig_pos.origin) {
       nav_trig = trig;
+    }
   }
 
   if(isDefined(nav_trig)) {
@@ -74,8 +77,9 @@ transit_navcomputer_remove_card_on_success() {
 
     players = get_players();
 
-    foreach(player in players)
+    foreach(player in players) {
     player maps\mp\zombies\_zm_stats::set_global_stat(level.navcard_needed, 0);
+    }
 
     level thread sq_refresh_player_navcard_hud();
   }
@@ -93,11 +97,13 @@ sq_refresh_player_navcard_hud() {
     for(i = 0; i < level.navcards.size; i++) {
       hasit = player maps\mp\zombies\_zm_stats::get_global_stat(level.navcards[i]);
 
-      if(isDefined(player.navcard_grabbed) && player.navcard_grabbed == level.navcards[i])
+      if(isDefined(player.navcard_grabbed) && player.navcard_grabbed == level.navcards[i]) {
         hasit = 1;
+      }
 
-      if(hasit)
+      if(hasit) {
         navcard_bits = navcard_bits + (1 << i);
+      }
     }
 
     wait_network_frame();
@@ -130,8 +136,9 @@ path_exploit_fix(zombie_trigger_origin, zombie_trigger_radius, zombie_trigger_he
   while(true) {
     zombie_trigger waittill("trigger", who);
 
-    if(!is_true(who.reroute))
+    if(!is_true(who.reroute)) {
       who thread exploit_reroute(zombie_trigger, player_trigger_origin, player_trigger_radius, zombie_goto_point);
+    }
   }
 }
 
@@ -143,10 +150,12 @@ exploit_reroute(zombie_trigger, player_trigger_origin, player_trigger_radius, zo
     if(self istouching(zombie_trigger)) {
       player = self.favoriteenemy;
 
-      if(isDefined(player) && player player_in_exploit_area(player_trigger_origin, player_trigger_radius))
+      if(isDefined(player) && player player_in_exploit_area(player_trigger_origin, player_trigger_radius)) {
         self.reroute_origin = zombie_goto_point;
-      else
+      }
+      else {
         break;
+      }
     } else
       break;
 
@@ -180,6 +189,7 @@ ffotd_melee_miss_func() {
     }
   }
 
-  if(isDefined(level.original_melee_miss_func))
+  if(isDefined(level.original_melee_miss_func)) {
     self[[level.original_melee_miss_func]]();
+  }
 }

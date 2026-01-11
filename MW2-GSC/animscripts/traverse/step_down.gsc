@@ -11,10 +11,12 @@
 #using_animtree("generic_human");
 
 main() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     dog_jump_down(40, 3);
-  else
+  }
+  else {
     step_down_human();
+  }
 }
 
 step_down_human() {

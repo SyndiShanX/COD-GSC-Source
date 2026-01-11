@@ -94,10 +94,12 @@ debug_enemyposreplay() {
     }
 
     if(isDefined(var_1.goodshootpos)) {
-      if(var_1 isbadguy())
+      if(var_1 isbadguy()) {
         var_3 = (1, 0, 0);
-      else
+      }
+      else {
         var_3 = (0, 0, 1);
+      }
 
       var_4 = var_1.origin + (0, 0, 54);
 
@@ -138,8 +140,9 @@ debug_enemyposreplay() {
   }
   var_6 = var_1 animscripts\utility::getenemysightpos();
 
-  if(isDefined(var_1.goodshootpos))
+  if(isDefined(var_1.goodshootpos)) {
     return;
+  }
 }
 
 drawenttag(var_0) {}
@@ -200,16 +203,19 @@ drawarrow(var_0, var_1, var_2, var_3) {
     var_14 = var_2;
   }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 }
 
 drawforwardforever(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 100;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 1, 0);
+  }
 
   for(;;) {
     if(!isDefined(self)) {
@@ -269,8 +275,9 @@ viewtag(var_0, var_1) {
   if(var_0 == "ai") {
     var_2 = getaiarray();
 
-    for(var_3 = 0; var_3 < var_2.size; var_3++)
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
       var_2[var_3] drawtag(var_1);
+    }
   }
 }
 
@@ -280,24 +287,28 @@ debug_corner() {
   var_1 = [];
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(var_0[var_2].type == "Cover Left")
+    if(var_0[var_2].type == "Cover Left") {
       var_1[var_1.size] = var_0[var_2];
+    }
 
-    if(var_0[var_2].type == "Cover Right")
+    if(var_0[var_2].type == "Cover Right") {
       var_1[var_1.size] = var_0[var_2];
+    }
   }
 
   var_3 = getaiarray();
 
-  for(var_2 = 0; var_2 < var_3.size; var_2++)
+  for(var_2 = 0; var_2 < var_3.size; var_2++) {
     var_3[var_2] delete();
+  }
 
   level.debugspawners = getspawnerarray();
   level.activenodes = [];
   level.completednodes = [];
 
-  for(var_2 = 0; var_2 < level.debugspawners.size; var_2++)
+  for(var_2 = 0; var_2 < level.debugspawners.size; var_2++) {
     level.debugspawners[var_2].targetname = "blah";
+  }
 
   var_4 = 0;
 
@@ -316,8 +327,9 @@ debug_corner() {
   for(;;) {
     level waittill("debug_next_corner");
 
-    if(var_4 >= var_1.size)
+    if(var_4 >= var_1.size) {
       var_4 = 0;
+    }
 
     var_1[var_4] thread covertest();
     var_4++;
@@ -411,8 +423,9 @@ removeactivespawner(var_0) {
 }
 
 createline(var_0) {
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 createlineconstantly(var_0) {
@@ -423,8 +436,9 @@ createlineconstantly(var_0) {
     wait 0.05;
   }
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 debugmisstime() {
@@ -463,24 +477,30 @@ get_direction() {
   var_0 = anglesToForward(self.angles);
   var_1 = maps\_shg_utility::get_differentiated_velocity();
 
-  if(!isDefined(var_1) || !isDefined(var_0))
+  if(!isDefined(var_1) || !isDefined(var_0)) {
     return "none";
+  }
 
-  if(length(var_1) == 0)
+  if(length(var_1) == 0) {
     var_1 = self.velocity;
+  }
 
   var_2 = vectordot(vectornormalize(var_0), vectornormalize(var_1));
   var_2 = clamp(var_2, -1, 1);
   var_3 = acos(var_2);
 
-  if(var_3 > 135)
+  if(var_3 > 135) {
     return "back";
-  else if(var_3 < 45)
+  }
+  else if(var_3 < 45) {
     return "forward";
-  else if(var_3 > 45 && var_3 < 135)
+  }
+  else if(var_3 > 45 && var_3 < 135) {
     return "left";
-  else
+  }
+  else {
     return "right";
+  }
 }
 
 init_state_list() {
@@ -501,8 +521,9 @@ init_state_list() {
 }
 
 state_print_priority(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 99;
+  }
 
   switch (var_0) {
     case "death":
@@ -570,14 +591,17 @@ script_to_state(var_0) {
     return var_1;
   }
 
-  if(isDefined(self.script_patroller) && self.script_patroller == 1)
+  if(isDefined(self.script_patroller) && self.script_patroller == 1) {
     var_1 = common_scripts\utility::array_add(var_1, "patrol");
+  }
 
-  if(isDefined(self.istraversing) && self.istraversing)
+  if(isDefined(self.istraversing) && self.istraversing) {
     var_1 = common_scripts\utility::array_add(var_1, "traverse");
+  }
 
-  if(isDefined(self._cloak_enemy_state) && self._cloak_enemy_state != "default_stealth_state")
+  if(isDefined(self._cloak_enemy_state) && self._cloak_enemy_state != "default_stealth_state") {
     var_1 = common_scripts\utility::array_add(var_1, "stealth");
+  }
 
   switch (var_0.script) {
     case "<custom>":
@@ -616,8 +640,9 @@ script_to_state(var_0) {
       break;
   }
 
-  if(var_1.size > 1)
+  if(var_1.size > 1) {
     var_1 = common_scripts\utility::array_sort_with_func(var_1, ::script_state_compare);
+  }
 
   return var_1;
 }
@@ -678,11 +703,13 @@ showdebugtrace() {
     var_2 = var_0;
     var_3 = var_1;
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       var_2 = level.tracestart;
+    }
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_3 = level.player getEye();
+    }
 
     var_4 = bulletTrace(var_2, var_3, 0, undefined);
   }
@@ -763,8 +790,9 @@ debug_character_count() {
 }
 
 nuke() {
-  if(!self.damageshield)
+  if(!self.damageshield) {
     self kill((0, 0, -500), level.player, level.player);
+  }
 }
 
 debug_nuke() {}
@@ -858,8 +886,9 @@ setplayertocamera(var_0) {
 
 anglescheck() {
   for(;;) {
-    if(getdvar("angles", "0") == "1")
+    if(getdvar("angles", "0") == "1") {
       setdvar("angles", "0");
+    }
 
     wait 1;
   }
@@ -877,8 +906,9 @@ deathspawnerpreview() {
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_3 = var_1[var_2];
 
-      if(isDefined(var_3.truecount))
+      if(isDefined(var_3.truecount)) {
         continue;
+      }
     }
   }
 }
@@ -929,15 +959,19 @@ updateminimapsetting() {
         var_6 = (var_4[0].origin[0], var_4[0].origin[1], var_5[2]);
         var_7 = (var_4[0].origin[0], var_4[0].origin[1], var_5[2]);
 
-        if(var_4[1].origin[0] > var_4[0].origin[0])
+        if(var_4[1].origin[0] > var_4[0].origin[0]) {
           var_6 = (var_4[1].origin[0], var_6[1], var_6[2]);
-        else
+        }
+        else {
           var_7 = (var_4[1].origin[0], var_7[1], var_7[2]);
+        }
 
-        if(var_4[1].origin[1] > var_4[0].origin[1])
+        if(var_4[1].origin[1] > var_4[0].origin[1]) {
           var_6 = (var_6[0], var_4[1].origin[1], var_6[2]);
-        else
+        }
+        else {
           var_7 = (var_7[0], var_4[1].origin[1], var_7[2]);
+        }
 
         var_8 = var_6 - var_5;
         var_5 = (var_5[0], var_5[1], var_5[2] + var_1);
@@ -946,13 +980,15 @@ updateminimapsetting() {
         var_11 = (var_10[1], 0 - var_10[0], 0);
         var_12 = vectordot(var_10, var_8);
 
-        if(var_12 < 0)
+        if(var_12 < 0) {
           var_12 = 0 - var_12;
+        }
 
         var_13 = vectordot(var_11, var_8);
 
-        if(var_13 < 0)
+        if(var_13 < 0) {
           var_13 = 0 - var_13;
+        }
 
         if(var_0 > 0) {
           var_14 = var_13 / var_12;
@@ -982,18 +1018,22 @@ updateminimapsetting() {
           var_19 = 2 * atan(var_12 * var_17 * 1.05 / var_1);
         }
 
-        if(var_18 > var_19)
+        if(var_18 > var_19) {
           var_20 = var_18;
-        else
+        }
+        else {
           var_20 = var_19;
+        }
 
         var_21 = var_1 - 1000;
 
-        if(var_21 < 16)
+        if(var_21 < 16) {
           var_21 = 16;
+        }
 
-        if(var_21 > 10000)
+        if(var_21 > 10000) {
           var_21 = 10000;
+        }
 
         var_3 playerlinktoabsolute(var_9);
         var_9.origin = var_5 + (0, 0, -62);
@@ -1014,8 +1054,9 @@ getchains() {
   var_0 = getEntArray("minimap_line", "script_noteworthy");
   var_1 = [];
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1[var_2] = var_0[var_2] getchain();
+  }
 
   return var_1;
 }
@@ -1041,8 +1082,9 @@ getchain() {
 
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_0.size; var_3++)
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_2[var_3] = var_0[var_3].origin;
+  }
 
   return var_2;
 }
@@ -1087,10 +1129,12 @@ islookingatorigin(var_0) {
   var_4 = anglesToForward(self getplayerangles());
   var_5 = vectordot(var_4, var_1);
 
-  if(var_5 > var_3)
+  if(var_5 > var_3) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 debug_colornodes() {
@@ -1110,13 +1154,15 @@ debug_colornodes() {
     var_1[var_3.team][var_3.currentcolorcode] = 1;
     var_4 = (1, 1, 1);
 
-    if(isDefined(var_3.script_forcecolor))
+    if(isDefined(var_3.script_forcecolor)) {
       var_4 = level.color_debug[var_3.script_forcecolor];
+    }
 
     var_5 = var_3.currentcolorcode;
 
-    if(isDefined(var_3.being_careful) && var_3.being_careful == 1)
+    if(isDefined(var_3.being_careful) && var_3.being_careful == 1) {
       var_5 = var_5 + " (c)";
+    }
 
     var_3 try_to_draw_line_to_node();
   }
@@ -1138,13 +1184,16 @@ draw_colornodes(var_0, var_1) {
       for(var_6 = 0; var_6 < var_5.size; var_6++) {
         var_7 = "";
 
-        if(isDefined(var_5[var_6].classname) && var_5[var_6].classname == "info_volume")
+        if(isDefined(var_5[var_6].classname) && var_5[var_6].classname == "info_volume") {
           var_7 = "V-" + var_2[var_3];
-        else
+        }
+        else {
           var_7 = "N-" + var_2[var_3];
+        }
 
-        if(isDefined(var_5[var_6].color_user) && var_5[var_6].color_user == level.player)
+        if(isDefined(var_5[var_6].color_user) && var_5[var_6].color_user == level.player) {
           var_7 = var_7 + " (p)";
+        }
       }
     }
   }
@@ -1152,31 +1201,36 @@ draw_colornodes(var_0, var_1) {
 
 get_team_substr() {
   if(self.team == "allies") {
-    if(isDefined(self.node) && isDefined(self.node.script_color_allies))
+    if(isDefined(self.node) && isDefined(self.node.script_color_allies)) {
       return self.node.script_color_allies;
+    }
 
     var_0 = self getgoalvolume();
 
-    if(isDefined(var_0) && isDefined(var_0.script_color_allies))
+    if(isDefined(var_0) && isDefined(var_0.script_color_allies)) {
       return var_0.script_color_allies;
+    }
   }
 
   if(self.team == "axis") {
-    if(isDefined(self.node) && isDefined(self.node.script_color_axis))
+    if(isDefined(self.node) && isDefined(self.node.script_color_axis)) {
       return self.node.script_color_axis;
+    }
 
     var_0 = self getgoalvolume();
 
-    if(isDefined(var_0) && isDefined(var_0.script_color_axis))
+    if(isDefined(var_0) && isDefined(var_0.script_color_axis)) {
       return var_0.script_color_axis;
+    }
   }
 }
 
 try_to_draw_line_to_node() {
   var_0 = (0, 0, 0);
 
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     var_0 = self.node.origin;
+  }
   else if(isDefined(self getgoalvolume())) {
     var_1 = self getgoalvolume();
     var_0 = var_1.origin;
@@ -1191,16 +1245,19 @@ try_to_draw_line_to_node() {
   if(!isDefined(var_2)) {
     return;
   }
-  if(!issubstr(var_2, self.script_forcecolor))
+  if(!issubstr(var_2, self.script_forcecolor)) {
     return;
+  }
 }
 
 fogcheck() {
-  if(getdvar("depth_close") == "")
+  if(getdvar("depth_close") == "") {
     setdvar("depth_close", "0");
+  }
 
-  if(getdvar("depth_far") == "")
+  if(getdvar("depth_far") == "") {
     setdvar("depth_far", "1500");
+  }
 
   var_0 = getdvarint("depth_close");
   var_1 = getdvarint("depth_far");
@@ -1233,11 +1290,13 @@ displaythreat(var_0, var_1) {
     }
   }
 
-  if(var_0.ignoreme || var_3 < -900000)
+  if(var_0.ignoreme || var_3 < -900000) {
     var_3 = "Ignore";
+  }
 
-  if(self.ignoreme || var_2 < -900000)
+  if(self.ignoreme || var_2 < -900000) {
     var_2 = "Ignore";
+  }
 
   var_5 = 20;
   var_6 = (1, 0.5, 0.2);
@@ -1285,16 +1344,18 @@ draw_color_friendlies() {
   var_2[var_2.size] = "l";
   var_3 = maps\_utility::get_script_palette();
 
-  for(var_4 = 0; var_4 < var_2.size; var_4++)
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_1[var_2[var_4]] = 0;
+  }
 
   for(var_4 = 0; var_4 < var_0.size; var_4++) {
     var_5 = level.debug_color_friendlies[var_0[var_4]];
     var_1[var_5]++;
   }
 
-  for(var_4 = 0; var_4 < level.debug_color_huds.size; var_4++)
+  for(var_4 = 0; var_4 < level.debug_color_huds.size; var_4++) {
     level.debug_color_huds[var_4] destroy();
+  }
 
   level.debug_color_huds = [];
   var_6 = 15;
@@ -1332,8 +1393,9 @@ playernode() {
 }
 
 drawusers() {
-  if(isalive(self.color_user))
+  if(isalive(self.color_user)) {
     return;
+  }
 }
 
 debuggoalpos() {
@@ -1345,8 +1407,9 @@ debuggoalpos() {
 }
 
 view_goal_pos() {
-  if(!isDefined(self.goalpos))
+  if(!isDefined(self.goalpos)) {
     return;
+  }
 }
 
 colordebug() {
@@ -1367,8 +1430,9 @@ colordebug() {
     for(var_1 = 0; var_1 < var_0.size; var_1++) {
       var_2 = level.currentcolorforced["allies"][var_0[var_1]];
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         draw_colored_nodes(var_2);
+      }
     }
 
     wait 0.05;
@@ -1455,31 +1519,37 @@ tostr(var_0) {
 }
 
 linedraw(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = (1, 1, 1);
+  }
 
   if(isDefined(var_5)) {
     var_5 = var_5 * 20;
 
-    for(var_6 = 0; var_6 < var_5; var_6++)
+    for(var_6 = 0; var_6 < var_5; var_6++) {
       wait 0.05;
+    }
   } else {
-    for(;;)
+    for(;;) {
       wait 0.05;
+    }
   }
 }
 
 print3ddraw(var_0, var_1, var_2, var_3, var_4) {
   self endon("stop_print3ddraw");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1;
+  }
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 complete_me() {
@@ -1497,8 +1567,9 @@ complete_me() {
 find_new_chase_target(var_0) {}
 
 chasecam(var_0) {
-  if(!isDefined(level.chase_cam_last_num))
+  if(!isDefined(level.chase_cam_last_num)) {
     level.chase_cam_last_num = -1;
+  }
 
   if(level.chase_cam_last_num == var_0) {
     return;
@@ -1510,8 +1581,9 @@ chasecam(var_0) {
   }
   level.chase_cam_last_num = var_0;
 
-  if(!isDefined(level.chase_cam_ent))
+  if(!isDefined(level.chase_cam_ent)) {
     level.chase_cam_ent = level.chase_cam_target common_scripts\utility::spawn_tag_origin();
+  }
 
   thread chasecam_onent(level.chase_cam_target);
 }
@@ -1553,8 +1625,9 @@ viewfx() {
 add_key(var_0, var_1) {}
 
 print_vehicle_info(var_0) {
-  if(!isDefined(level.vnum))
+  if(!isDefined(level.vnum)) {
     level.vnum = 9500;
+  }
 
   level.vnum++;
   var_1 = "bridge_helpers";
@@ -1566,8 +1639,9 @@ print_vehicle_info(var_0) {
   add_key("spawnflags", "4");
   add_key("_color", "0.443137 0.443137 1.000000");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     add_key("script_noteworthy", var_0);
+  }
 }
 
 draw_dot_for_ent(var_0) {}
@@ -1598,8 +1672,9 @@ interactive_warnings() {
     if(isDefined(var_2.target)) {
       var_4 = getent(var_2.target, "targetname");
 
-      if(isDefined(var_4))
+      if(isDefined(var_4)) {
         var_4.script_destruct_collision = "pre";
+      }
 
       var_2.targetname = "destructible_toy";
     }

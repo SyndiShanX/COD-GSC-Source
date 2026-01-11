@@ -42,11 +42,13 @@ setup_bot_koth() {
 
     var_2.nodes = maps\mp\bots\_bots_gametype_common::bot_get_valid_nodes_in_trigger(var_2.trig);
 
-    if(var_3)
+    if(var_3) {
       var_2.trig common_scripts\utility::trigger_off();
+    }
 
-    if(var_4)
+    if(var_4) {
       var_2 maps\mp\gametypes\koth::makeradioinvisible();
+    }
   }
 
   level.bot_set_zone_nodes = 1;
@@ -54,8 +56,9 @@ setup_bot_koth() {
   if(!var_0) {
     var_5 = find_current_radio();
 
-    if(!isDefined(var_5))
+    if(!isDefined(var_5)) {
       var_5 = common_scripts\utility::random(level.radios);
+    }
 
     maps\mp\bots\_bots_gametype_common::bot_cache_entrances_to_zones([var_5]);
     level.bot_gametype_radios_precached[var_5 getentitynumber()] = 1;
@@ -69,10 +72,12 @@ bot_cache_entrances_to_other_radios(var_0) {
     var_2 = undefined;
     var_3 = find_current_radio();
 
-    if(isDefined(var_3) && common_scripts\utility::array_contains(var_1, var_3))
+    if(isDefined(var_3) && common_scripts\utility::array_contains(var_1, var_3)) {
       var_2 = var_3;
-    else
+    }
+    else {
       var_2 = common_scripts\utility::random(var_1);
+    }
 
     maps\mp\bots\_bots_gametype_common::bot_cache_entrances_to_zones([var_2]);
     level.bot_gametype_radios_precached[var_2 getentitynumber()] = 1;
@@ -86,8 +91,9 @@ bot_koth_think() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while(!isDefined(level.bot_gametype_precaching_done))
+  while(!isDefined(level.bot_gametype_precaching_done)) {
     wait 0.05;
+  }
 
   self botsetflag("separation", 0);
   self botsetflag("grenade_objectives", 1);
@@ -109,8 +115,9 @@ bot_koth_think() {
     var_1 = level.radioobject maps\mp\gametypes\_gameobjects::getownerteam();
 
     if(self.team != var_1) {
-      if(!bot_is_capturing_koth_zone(var_0))
+      if(!bot_is_capturing_koth_zone(var_0)) {
         bot_capture_koth_zone(var_0);
+      }
 
       continue;
     }
@@ -119,8 +126,9 @@ bot_koth_think() {
     var_3 = level.radioobject.touchlist[var_2].size > 0;
 
     if(var_3) {
-      if(!bot_is_capturing_koth_zone(var_0))
+      if(!bot_is_capturing_koth_zone(var_0)) {
         bot_capture_koth_zone(var_0);
+      }
 
       continue;
     }
@@ -139,21 +147,24 @@ bot_koth_think() {
 
 find_current_radio() {
   foreach(var_1 in level.radios) {
-    if(isDefined(level.radioobject) && var_1.trig == level.radioobject.trigger)
+    if(isDefined(level.radioobject) && var_1.trig == level.radioobject.trigger) {
       return var_1;
+    }
   }
 }
 
 bot_is_capturing_koth_zone(var_0) {
-  if(!maps\mp\bots\_bots_util::bot_is_capturing())
+  if(!maps\mp\bots\_bots_util::bot_is_capturing()) {
     return 0;
+  }
 
   return isDefined(self.current_zone) && self.current_zone == var_0;
 }
 
 bot_is_protecting_koth_zone(var_0) {
-  if(!maps\mp\bots\_bots_util::bot_is_protecting())
+  if(!maps\mp\bots\_bots_util::bot_is_protecting()) {
     return 0;
+  }
 
   return isDefined(self.current_zone) && self.current_zone == var_0;
 }
@@ -173,8 +184,9 @@ bot_protect_koth_zone(var_0) {
 }
 
 bot_clear_koth_zone() {
-  if(maps\mp\bots\_bots_util::bot_is_defending())
+  if(maps\mp\bots\_bots_util::bot_is_defending()) {
     maps\mp\bots\_bots_strategy::bot_defend_stop();
+  }
 
   self.current_zone = undefined;
 }
@@ -183,8 +195,9 @@ should_start_cautious_approach_koth(var_0) {
   if(var_0) {
     var_1 = level.radioobject maps\mp\gametypes\_gameobjects::getownerteam();
 
-    if(var_1 == "neutral" || var_1 == self.team)
+    if(var_1 == "neutral" || var_1 == self.team) {
       return 0;
+    }
   }
 
   return maps\mp\bots\_bots_strategy::should_start_cautious_approach_default(var_0);

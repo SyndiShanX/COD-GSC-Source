@@ -95,8 +95,9 @@ updateDevSettings() {
   }
   if(getDvar("scr_x_kills_y") != "") {
     nameTokens = strTok(getDvar("scr_x_kills_y"), " ");
-    if(nameTokens.size > 1)
+    if(nameTokens.size > 1) {
       thread xKillsY(nameTokens[0], nameTokens[1]);
+    }
     setDvar("scr_x_kills_y", "");
   }
   if(getDvar("scr_usedogs") != "") {
@@ -104,11 +105,13 @@ updateDevSettings() {
     setDvar("scr_usedogs", "");
     owner = undefined;
     for(index = 0; index < level.players.size; index++) {
-      if(level.players[index].name == ownerName)
+      if(level.players[index].name == ownerName) {
         owner = level.players[index];
+      }
     }
-    if(isDefined(owner))
+    if(isDefined(owner)) {
       owner maps\mp\gametypes\_hardpoints::triggerHardpoint("dogs_mp");
+    }
   }
   if(getDvar("scr_set_level") != "") {
     level.players[0].pers["rank"] = 0;
@@ -142,8 +145,9 @@ updateDevSettings() {
     setDvar("scr_unlock_attachment", "");
   }
   if(getDvar("scr_do_notify") != "") {
-    for(i = 0; i < level.players.size; i++)
+    for(i = 0; i < level.players.size; i++) {
       level.players[i] maps\mp\gametypes\_hud_message::oldNotifyMessage(getDvar("scr_do_notify"), getDvar("scr_do_notify"), game["icons"]["allies"]);
+    }
     announcement(getDvar("scr_do_notify"));
     setDvar("scr_do_notify", "");
   }
@@ -157,11 +161,13 @@ updateDevSettings() {
       if(!isSubStr(classname, "_spawn")) {
         curEnt = ents[index];
         level.entArray[level.entArray.size] = curEnt;
-        if(!isDefined(level.entCounts[classname]))
+        if(!isDefined(level.entCounts[classname])) {
           level.entCounts[classname] = 0;
+        }
         level.entCounts[classname]++;
-        if(!isDefined(level.entGroups[classname]))
+        if(!isDefined(level.entGroups[classname])) {
           level.entGroups[classname] = [];
+        }
         level.entGroups[classname][level.entGroups[classname].size] = curEnt;
       }
     }
@@ -178,18 +184,21 @@ giveExtraPerks() {
     return;
   }
   perks = getArrayKeys(self.extraPerks);
-  for(i = 0; i < perks.size; i++)
+  for(i = 0; i < perks.size; i++) {
     self setPerk(perks[i]);
+  }
 }
 
 xKillsY(attackerName, victimName) {
   attacker = undefined;
   victim = undefined;
   for(index = 0; index < level.players.size; index++) {
-    if(level.players[index].name == attackerName)
+    if(level.players[index].name == attackerName) {
       attacker = level.players[index];
-    else if(level.players[index].name == victimName)
+    }
+    else if(level.players[index].name == victimName) {
       victim = level.players[index];
+    }
   }
   if(!isAlive(attacker) || !isAlive(victim)) {
     return;
@@ -232,25 +241,31 @@ updateMinimapSetting() {
           viewpos = (viewpos[0] * .5, viewpos[1] * .5, viewpos[2] * .5);
           maxcorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
           mincorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
-          if(corners[1].origin[0] > corners[0].origin[0])
+          if(corners[1].origin[0] > corners[0].origin[0]) {
             maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-          else
+          }
+          else {
             mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
-          if(corners[1].origin[1] > corners[0].origin[1])
+          }
+          if(corners[1].origin[1] > corners[0].origin[1]) {
             maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-          else
+          }
+          else {
             mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
+          }
           viewpostocorner = maxcorner - viewpos;
           viewpos = (viewpos[0], viewpos[1], viewpos[2] + minimapheight);
           origin = spawn("script_origin", player.origin);
           northvector = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
           eastvector = (northvector[1], 0 - northvector[0], 0);
           disttotop = vectordot(northvector, viewpostocorner);
-          if(disttotop < 0)
+          if(disttotop < 0) {
             disttotop = 0 - disttotop;
+          }
           disttoside = vectordot(eastvector, viewpostocorner);
-          if(disttoside < 0)
+          if(disttoside < 0) {
             disttoside = 0 - disttoside;
+          }
           if(requiredMapAspectRatio > 0) {
             mapAspectRatio = disttoside / disttotop;
             if(mapAspectRatio < requiredMapAspectRatio) {
@@ -276,10 +291,12 @@ updateMinimapSetting() {
             angleside = 2 * atan(disttoside / minimapheight);
             angletop = 2 * atan(disttotop * aspectratioguess / minimapheight);
           }
-          if(angleside > angletop)
+          if(angleside > angletop) {
             angle = angleside;
-          else
+          }
+          else {
             angle = angletop;
+          }
           znear = minimapheight - 1000;
           if(znear < 16) znear = 16;
           if(znear > 10000) znear = 10000;
@@ -304,8 +321,9 @@ updateMinimapSetting() {
           player setclientdvar("cg_fovmin", "1");
           if(isDefined(level.objPoints)) {
             for(i = 0; i < level.objPointNames.size; i++) {
-              if(isDefined(level.objPoints[level.objPointNames[i]]))
+              if(isDefined(level.objPoints[level.objPointNames[i]])) {
                 level.objPoints[level.objPointNames[i]] destroy();
+              }
             }
             level.objPoints = [];
             level.objPointNames = [];
@@ -383,21 +401,24 @@ addTestClients() {
 
 TestClient(team) {
   self endon("disconnect");
-  while(!isDefined(self.pers["team"]))
+  while(!isDefined(self.pers["team"])) {
     wait .05;
+  }
   self notify("menuresponse", game["menu_team"], team);
   wait 0.5;
   classes = getArrayKeys(level.classMap);
   okclasses = [];
   for(i = 0; i < classes.size; i++) {
-    if(!issubstr(classes[i], "offline_class11_mp") && !issubstr(classes[i], "custom") && isDefined(level.default_perk[level.classMap[classes[i]]]))
+    if(!issubstr(classes[i], "offline_class11_mp") && !issubstr(classes[i], "custom") && isDefined(level.default_perk[level.classMap[classes[i]]])) {
       okclasses[okclasses.size] = classes[i];
+    }
   }
   assert(okclasses.size);
   while(1) {
     class = okclasses[randomint(okclasses.size)];
-    if(!level.oldschool)
+    if(!level.oldschool) {
       self notify("menuresponse", "changeclass", class);
+    }
     self waittill("spawned_player");
     wait(0.10);
   }
@@ -508,8 +529,9 @@ get_playerone() {
 
 engagement_distance_debug_toggle() {
   level endon("kill_engage_dist_debug_toggle_watcher");
-  if(!isDefined(getdvarint("debug_engage_dists")))
+  if(!isDefined(getdvarint("debug_engage_dists"))) {
     setdvar("debug_engage_dists", "0");
+  }
   lastState = getdvarint("debug_engage_dists");
   while(1) {
     currentState = getdvarint("debug_engage_dists");
@@ -816,8 +838,9 @@ engagedist_hud_changetext(engageDistType, units) {
 }
 
 plot_circle_fortime(radius1, radius2, time, color, origin, normal) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (0, 1, 0);
+  }
   hangtime = .05;
   circleres = 6;
   hemires = circleres / 2;
@@ -845,8 +868,9 @@ larry_thread() {
   level.players[0] thread larry_init(level.larry);
   level waittill("kill_larry");
   larry_hud_destroy(level.larry);
-  if(isDefined(level.larry.model))
+  if(isDefined(level.larry.model)) {
     level.larry.model delete();
+  }
   if(isDefined(level.larry.ai)) {
     for(i = 0; i < level.larry.ai.size; i++) {
       kick(level.larry.ai[i] GetEntityNumber());
@@ -878,8 +902,9 @@ larry_init(larry) {
     larry.model.angles = self.angles + (0, 180, 0);
     if(self UseButtonPressed()) {
       self larry_ai(larry);
-      while(self UseButtonPressed())
+      while(self UseButtonPressed()) {
         wait(0.05);
+      }
     }
   }
 }

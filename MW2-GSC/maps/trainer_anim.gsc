@@ -1263,8 +1263,9 @@ bounce_fx(basketball) {
 }
 
 trainee_fire_weapon(guy) {
-  if(!flag("player_near_range"))
+  if(!flag("player_near_range")) {
     return;
+  }
   guy playSound("drone_m4carbine_fire_npc");
   playFXOnTag(getfx("m16_muzzleflash"), guy, "tag_flash");
 }

@@ -469,4 +469,3 @@ derriesezombiespawnnavmeshtest(params, inrat) {
     ratreportcommandresult(params._id, 1);
   }
 }
-

@@ -22,8 +22,9 @@ init() {
   level._effect["huey_light"]["enemy"] = loadfx("vehicle/light/fx_huey_exterior_lights_red_mp");
 }
 rotor(localClientNum, set) {
-  if(!set)
+  if(!set) {
     return;
+  }
   player = GetLocalPlayer(localClientNum);
   if(isDefined(self.rotorTailRunningFx)) {
     self.rotorTailfxHandle = playFXOnTag(localClientNum, self.rotorTailRunningFx, self, "tail_rotor_jnt");
@@ -32,8 +33,9 @@ rotor(localClientNum, set) {
   }
 }
 rotordamaged(localClientNum, set) {
-  if(!set)
+  if(!set) {
     return;
+  }
   player = GetLocalPlayer(localClientNum);
   playFXOnTag(localClientNum, level.coptertailrotordamaged_fx, self, "tag_origin");
 }
@@ -81,8 +83,9 @@ startfx(localClientNum) {
   }
   if(isDefined(self.exhaustFx)) {
     self.exhaustLeftFxHandle = playFXOnTag(localClientNum, self.exhaustFx, self, "tag_engine_left");
-    if(!self.oneexhaust)
+    if(!self.oneexhaust) {
       self.exhaustRightFxHandle = playFXOnTag(localClientNum, self.exhaustFx, self, "tag_engine_right");
+    }
   } else {
     PrintLn("Client: _helicopter.csc - startfx() - exhaust rotor fx is not loaded");
   }
@@ -136,16 +139,19 @@ damage_fx_stages(localClientNum) {
   for(;;) {
     if(last_damage_state != self GetHeliDamageState()) {
       if(self GetHeliDamageState() == 2) {
-        if(isDefined(fx))
+        if(isDefined(fx)) {
           stopfx(localClientNum, fx);
+        }
         fx = trail_fx(localClientNum, level.chopper_fx["damage"]["light_smoke"], "tag_engine_left");
       } else if(self GetHeliDamageState() == 1) {
-        if(isDefined(fx))
+        if(isDefined(fx)) {
           stopfx(localClientNum, fx);
+        }
         fx = trail_fx(localClientNum, level.chopper_fx["damage"]["heavy_smoke"], "tag_engine_left");
       } else {
-        if(isDefined(fx))
+        if(isDefined(fx)) {
           stopfx(localClientNum, fx);
+        }
         self notify("stop trail");
       }
       last_damage_state = self GetHeliDamageState();

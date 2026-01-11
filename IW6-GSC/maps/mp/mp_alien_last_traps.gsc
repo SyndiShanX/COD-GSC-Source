@@ -54,10 +54,12 @@ wait_for_tesla_switch_activation(var_0) {
     self.owner = var_1;
     level thread maps\mp\alien\_music_and_dialog::playvofortrapactivation(var_1, "tesla_trap");
 
-    if(!isDefined(self.script_noteworthy) || self.script_noteworthy != "tesla_generator")
+    if(!isDefined(self.script_noteworthy) || self.script_noteworthy != "tesla_generator") {
       self setModel("mp_zeb_garage_switch_on");
-    else
+    }
+    else {
       self playLoopSound("alien_fence_gen_lp");
+    }
 
     self makeunusable();
     maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self);
@@ -69,13 +71,16 @@ wait_for_tesla_switch_activation(var_0) {
 
     wait 150;
 
-    if(!isDefined(self.script_noteworthy) || self.script_noteworthy != "tesla_generator")
+    if(!isDefined(self.script_noteworthy) || self.script_noteworthy != "tesla_generator") {
       self setModel("mp_zeb_garage_switch_off");
-    else
+    }
+    else {
       self stoploopsound("alien_fence_gen_lp");
+    }
 
-    if(isDefined(var_0[0].owner) && isalive(var_0[0].owner) && var_0[0].owner.sessionstate == "playing")
+    if(isDefined(var_0[0].owner) && isalive(var_0[0].owner) && var_0[0].owner.sessionstate == "playing") {
       var_0[0].owner maps\mp\_utility::setlowermessage("electric_fence_offline", &"ALIENS_PATCH_ELECTRIC_TRAP_OFFLINE", 3);
+    }
 
     foreach(var_3 in var_0) {
       var_3 notify("trap_done");
@@ -84,8 +89,9 @@ wait_for_tesla_switch_activation(var_0) {
       var_3.owner = undefined;
       stopFXOnTag(level._effect["tesla_idle3"], var_3, "tag_fx_01");
 
-      if(isDefined(var_3.attack_bolt))
+      if(isDefined(var_3.attack_bolt)) {
         var_3.attack_bolt delete();
+      }
     }
 
     maps\mp\alien\_outline_proto::add_to_outline_watch_list(self, 750);
@@ -138,23 +144,29 @@ run_tesla_trap() {
       }
       var_8 = var_7.origin + (0, 0, 30);
 
-      if(var_7.alien_type == "ancestor")
+      if(var_7.alien_type == "ancestor") {
         var_8 = var_7 gettagorigin("tag_weapon_chest");
-      else if(var_7.alien_type == "elite")
+      }
+      else if(var_7.alien_type == "elite") {
         var_8 = var_7 gettagorigin("tag_eye");
+      }
 
       var_9 = var_8[2] - var_4[2];
       var_10 = distance2d(var_8, var_4);
       var_11 = 0;
 
-      if(var_9 >= 100 && var_9 <= var_0 && var_10 <= var_1 * 2)
+      if(var_9 >= 100 && var_9 <= var_0 && var_10 <= var_1 * 2) {
         var_11 = 1;
-      else if(var_9 >= 40 && var_9 <= var_0 && var_10 <= var_1)
+      }
+      else if(var_9 >= 40 && var_9 <= var_0 && var_10 <= var_1) {
         var_11 = 1;
-      else if(var_9 > 0 && var_9 <= 40 && var_10 <= var_1)
+      }
+      else if(var_9 > 0 && var_9 <= 40 && var_10 <= var_1) {
         var_11 = 1;
-      else if(var_9 <= 0 && var_9 > var_2 && var_10 <= var_1)
+      }
+      else if(var_9 <= 0 && var_9 > var_2 && var_10 <= var_1) {
         var_11 = 1;
+      }
 
       if(var_11 && bullettracepassed(var_8, var_4 + (0, 0, 50), 0, self)) {
         var_7.is_electrified = 1;
@@ -176,8 +188,9 @@ tesla_trap_attack(var_0, var_1) {
   playFXOnTag(level._effect["tesla_shock"], var_0.attack_bolt, "tag_origin");
   self playSound("tesla_shock");
 
-  if(isDefined(var_0.owner) && isalive(var_0.owner))
+  if(isDefined(var_0.owner) && isalive(var_0.owner)) {
     self dodamage(var_0.damage_amount, self.origin, var_0.owner, var_0, "MOD_UNKNOWN");
+  }
   else {
     var_2 = undefined;
     var_3 = undefined;
@@ -186,8 +199,9 @@ tesla_trap_attack(var_0, var_1) {
 
   wait 0.05;
 
-  if(isDefined(var_0.attack_bolt))
+  if(isDefined(var_0.attack_bolt)) {
     var_0.attack_bolt delete();
+  }
 
   wait 2;
   self.is_electrified = undefined;
@@ -198,8 +212,9 @@ reset_attack_bolt(var_0) {
   self endon("carried");
   var_1 = self.origin + (0, 0, 40);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0;
+  }
 
   var_2 = 0;
 
@@ -212,8 +227,9 @@ reset_attack_bolt(var_0) {
     }
   }
 
-  if(isDefined(self.attack_bolt))
+  if(isDefined(self.attack_bolt)) {
     self.attack_bolt delete();
+  }
 
   self.attack_bolt = spawn("script_model", var_1);
   self.attack_bolt setModel("tag_origin");
@@ -252,10 +268,12 @@ disable_traps_when_ancestor_attacks() {
   }
 
   foreach(var_7 in level.tesla_traps) {
-    if(!isDefined(var_7.script_noteworthy) || var_7.script_noteworthy != "tesla_generator")
+    if(!isDefined(var_7.script_noteworthy) || var_7.script_noteworthy != "tesla_generator") {
       var_7 setModel("mp_zeb_garage_switch_off");
-    else
+    }
+    else {
       var_7 stoploopsound("alien_fence_gen_lp");
+    }
 
     var_7 sethintstring(&"MP_ALIEN_LAST_TRAPS_OFFLINE");
     var_7 notify("stop_tesla_trap");
@@ -263,14 +281,16 @@ disable_traps_when_ancestor_attacks() {
     maps\mp\alien\_outline_proto::remove_from_outline_watch_list(var_7);
     maps\mp\alien\_outline_proto::enable_outline(var_7, 4, 1);
 
-    foreach(var_9 in var_7.teslas)
+    foreach(var_9 in var_7.teslas) {
     level thread disable_tesla(var_9);
+    }
   }
 
   common_scripts\utility::array_thread(getEntArray("misc_turret", "classname"), ::disable_turrets);
 
-  while(common_scripts\utility::flag("disable_all_traps") && !common_scripts\utility::flag("engineer_repaired_generator"))
+  while(common_scripts\utility::flag("disable_all_traps") && !common_scripts\utility::flag("engineer_repaired_generator")) {
     wait 0.25;
+  }
 
   if(isDefined(level.ancestor_generator)) {
     maps\mp\alien\_outline_proto::disable_outline_for_players(level.ancestor_generator, level.players);
@@ -309,8 +329,9 @@ disable_tesla(var_0) {
   var_0.owner = undefined;
   stopFXOnTag(level._effect["tesla_idle3"], var_0, "tag_fx_01");
 
-  if(isDefined(var_0.attack_bolt))
+  if(isDefined(var_0.attack_bolt)) {
     var_0.attack_bolt delete();
+  }
 }
 
 enable_tesla() {
@@ -329,8 +350,9 @@ play_disabled_fx(var_0, var_1, var_2) {
       wait 0.05;
       playFXOnTag(common_scripts\utility::getfx("ims_sensor_explode"), var_0, "tag_aim");
     } else {
-      if(!isDefined(var_1))
+      if(!isDefined(var_1)) {
         playFX(common_scripts\utility::getfx("ims_sensor_explode"), var_0.origin);
+      }
 
       wait 0.05;
       playFX(common_scripts\utility::getfx("sentry_smoke_mp"), var_0.origin);
@@ -350,8 +372,9 @@ disable_turrets() {
   self notify("disable_turret");
   var_0 = self getturretowner();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     disable_when_owner_exits_turret();
+  }
 
   level thread play_disabled_fx(self, undefined, 1);
   maps\mp\alien\_trap::disable_turret();
@@ -364,8 +387,9 @@ disable_turrets() {
 disable_when_owner_exits_turret() {
   level endon("traps_reenabled");
 
-  while(isDefined(self getturretowner()))
+  while(isDefined(self getturretowner())) {
     wait 0.1;
+  }
 }
 
 reenable_turrets() {
@@ -412,8 +436,9 @@ watch_to_repair() {
     var_2.isrepairing = 1;
     var_4 = int(var_0 * var_2 maps\mp\alien\_perk_utility::perk_getdrilltimescalar() * var_2.drillspeedmodifier);
 
-    if(var_3 > 1)
+    if(var_3 > 1) {
       var_4 = int((var_0 + (var_3 - 1) * var_1) * var_2 maps\mp\alien\_perk_utility::perk_getdrilltimescalar() * var_2.drillspeedmodifier);
+    }
 
     var_5 = useholdthink(var_2, var_4);
 
@@ -437,13 +462,16 @@ useholdthink(var_0, var_1) {
   self.inuse = 1;
   self.userate = 1;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self.usetime = var_1;
-  else
+  }
+  else {
     self.usetime = 3000;
+  }
 
-  if(!var_0 maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4]))
+  if(!var_0 maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4])) {
     var_0 maps\mp\alien\_utility::disable_weapon_timeout(var_1 + 0.05, "drill_repair_weapon_management");
+  }
 
   var_0 thread maps\mp\alien\_drill::personalusebar(self);
   var_0.hasprogressbar = 1;
@@ -452,12 +480,14 @@ useholdthink(var_0, var_1) {
   if(isalive(var_0)) {
     var_0.hasprogressbar = 0;
 
-    if(!var_0 maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4]))
+    if(!var_0 maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4])) {
       var_0 maps\mp\alien\_utility::enable_weapon_wrapper("drill_repair_weapon_management");
+    }
   }
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
   self.inuse = 0;
   self.curprogress = 0;
@@ -469,15 +499,17 @@ useholdthinkloop(var_0, var_1, var_2) {
 
   while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 usebuttonpressed() && (!isDefined(var_0.laststand) || !var_0.laststand) && self.curprogress < self.usetime) {
     if(isDefined(var_1) && isDefined(var_2)) {
-      if(distancesquared(var_0.origin, var_1.origin) > var_2)
+      if(distancesquared(var_0.origin, var_1.origin) > var_2) {
         return 0;
+      }
     }
 
     self.curprogress = self.curprogress + 50 * self.userate;
     self.userate = 1;
 
-    if(self.curprogress >= self.usetime)
+    if(self.curprogress >= self.usetime) {
       return maps\mp\_utility::isreallyalive(var_0);
+    }
 
     wait 0.05;
   }
@@ -495,11 +527,13 @@ cancel_repair_on_traps_renabled(var_0) {
   if(isalive(var_0)) {
     var_0 notify("drill_repair_weapon_management");
 
-    if(var_0.disabledweapon > 0)
+    if(var_0.disabledweapon > 0) {
       var_0 common_scripts\utility::_enableweapon();
+    }
 
-    if(maps\mp\alien\_utility::is_true(var_0.hasprogressbar))
+    if(maps\mp\alien\_utility::is_true(var_0.hasprogressbar)) {
       var_0.hasprogressbar = 0;
+    }
 
     var_0.isrepairing = 0;
   }

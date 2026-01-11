@@ -16,8 +16,9 @@ setup_cqb_anim_array() {
   }
   self animscripts\anims::clearanimcache();
 
-  if(!isDefined(self.anim_array))
+  if(!isDefined(self.anim_array)) {
     self.anim_array = [];
+  }
 
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["exposed_idle"] = array( % cqb_stand_exposed_idle);
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["straight_level"] = % cqb_stand_aim5;
@@ -51,17 +52,21 @@ set_cqb_run_anim(runanim, walkanim, sprintanim) {
   }
   self animscripts\anims::clearanimcache();
 
-  if(!isDefined(self.anim_array))
+  if(!isDefined(self.anim_array)) {
     self.anim_array = [];
+  }
 
-  if(isDefined(runanim))
+  if(isDefined(runanim)) {
     self.anim_array[self.animtype]["move"]["stand"]["rifle"]["cqb_run_f"] = array(runanim);
+  }
 
-  if(isDefined(walkanim))
+  if(isDefined(walkanim)) {
     self.anim_array[self.animtype]["move"]["stand"]["rifle"]["cqb_walk_f"] = array(walkanim);
+  }
 
-  if(isDefined(sprintanim))
+  if(isDefined(sprintanim)) {
     self.anim_array[self.animtype]["move"]["stand"]["rifle"]["cqb_sprint_f"] = array(sprintanim);
+  }
 }
 
 clear_cqb_run_anim() {

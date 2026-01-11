@@ -119,13 +119,15 @@ on_agent_dog_killed(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir
   self.isActive = false;
   self.hasDied = false;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.hasDog = false;
+  }
 
   eAttacker.lastKillDogTime = GetTime();
 
-  if(isDefined(self.animCBs.OnExit[self.aiState]))
+  if(isDefined(self.animCBs.OnExit[self.aiState])) {
     self[[self.animCBs.OnExit[self.aiState]]]();
+  }
 
   if(isPlayer(eAttacker) && isDefined(self.owner) && (eAttacker != self.owner)) {
     self maps\mp\gametypes\_damage::onKillstreakKilled(eAttacker, sWeapon, sMeansOfDeath, iDamage, "destroyed_ks_wolf");
@@ -158,8 +160,9 @@ spawn_dog(optional_spawnOrigin, optional_spawnAngles, optional_owner) {
     wolf_type = 0;
   }
 
-  if(IsHairRunning())
+  if(IsHairRunning()) {
     dog_model = dog_model + "_fur";
+  }
 
   self setModel(dog_model);
 
@@ -249,8 +252,9 @@ think() {
     if(self maps\mp\agents\dog\_dog_think::ProcessDebugMode()) {
       continue;
     }
-    if(self.aiState != "melee" && !self.stateLocked && self maps\mp\agents\dog\_dog_think::readyToMeleeTarget() && !self maps\mp\agents\dog\_dog_think::DidPastMeleeFail())
+    if(self.aiState != "melee" && !self.stateLocked && self maps\mp\agents\dog\_dog_think::readyToMeleeTarget() && !self maps\mp\agents\dog\_dog_think::DidPastMeleeFail()) {
       self ScrAgentBeginMelee(self.curMeleeTarget);
+    }
 
     switch (self.aiState) {
       case "idle":
@@ -293,10 +297,12 @@ UpdateMoveState() {
     attackPoint = self maps\mp\agents\dog\_dog_think::GetAttackPoint(self.enemy);
     bLastBadMeleeTarget = false;
     if(isDefined(self.lastBadPathTime) && (GetTime() - self.lastBadPathTime < 3000)) {
-      if(Distance2DSquared(attackPoint, self.lastBadPathGoal) < 16)
+      if(Distance2DSquared(attackPoint, self.lastBadPathGoal) < 16) {
         bLastBadMeleeTarget = true;
-      else if(isDefined(self.lastBadPathMoveState) && self.lastBadPathMoveState == "pursuit" && Distance2DSquared(self.lastBadPathUltimateGoal, self.enemy.origin) < 16)
+      }
+      else if(isDefined(self.lastBadPathMoveState) && self.lastBadPathMoveState == "pursuit" && Distance2DSquared(self.lastBadPathUltimateGoal, self.enemy.origin) < 16) {
         bLastBadMeleeTarget = true;
+      }
     }
     if(!isReallyAlive(self.enemy) ||
       bLastBadMeleeTarget ||
@@ -316,11 +322,13 @@ UpdateMoveState() {
     self.bArrivalsEnabled = true;
 
     myPos = self GetPathGoalPos();
-    if(!isDefined(myPos))
+    if(!isDefined(myPos)) {
       myPos = self.origin;
+    }
 
-    if(GetTime() - self.timeOfLastDamage < 5000)
+    if(GetTime() - self.timeOfLastDamage < 5000) {
       bRefreshGoal = true;
+    }
 
     distFromGoalPos = Distance2DSquared(self.origin, self.wolfGoalPos.origin);
 
@@ -362,8 +370,9 @@ get_closest(origin, points, maxDist) {
     closestPoint = points[index];
   }
 
-  if(!isDefined(maxDist) || dist <= maxDist)
+  if(!isDefined(maxDist) || dist <= maxDist) {
     return closestPoint;
+  }
 
   return undefined;
 }
@@ -453,8 +462,9 @@ playGrowl(state) {
   level endon("game_ended");
   self endon("end_dog_sound");
 
-  if(isDefined(self.lastGrowlPlayedTime) && GetTime() - self.lastGrowlPlayedTime < 3000)
+  if(isDefined(self.lastGrowlPlayedTime) && GetTime() - self.lastGrowlPlayedTime < 3000) {
     wait(3);
+  }
 
   while(true) {
     self.lastGrowlPlayedTime = GetTime();

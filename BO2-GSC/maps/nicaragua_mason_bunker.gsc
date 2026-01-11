@@ -156,8 +156,9 @@ bunker_setup() {
   a_sp_spawners2 = getEntArray("bunker_civilian_runner", "script_noteworthy");
   a_sp_spawners = arraycombine(a_sp_spawners1, a_sp_spawners2, 0, 0);
 
-  foreach(spawner in a_sp_spawners)
+  foreach(spawner in a_sp_spawners) {
   spawner add_spawn_function(::ai_set_allow_friendly_fire);
+  }
 
   level thread bunker_cocaine_fog();
   level thread run_scene("bunker_tables_idle");
@@ -168,23 +169,27 @@ bunker_setup() {
   level thread fake_destructible_blue_bowl();
   a_e_lights = getEntArray("firelight_bunker", "targetname");
 
-  foreach(light in a_e_lights)
+  foreach(light in a_e_lights) {
   light setlightintensity(5.0);
+  }
 
   a_nd_table1 = getnodearray("post_table1_kick", "script_noteworthy");
 
-  foreach(node in a_nd_table1)
+  foreach(node in a_nd_table1) {
   setenablenode(node, 0);
+  }
 
   a_nd_table3 = getnodearray("post_table3_kick", "script_noteworthy");
 
-  foreach(node in a_nd_table3)
+  foreach(node in a_nd_table3) {
   setenablenode(node, 0);
+  }
 
   e_trigger = getent("mason_bunker_firetrigger", "targetname");
 
-  if(isDefined(e_trigger))
+  if(isDefined(e_trigger)) {
     e_trigger trigger_off();
+  }
 
   add_cleanup_ent("mason_bunker_cleanup", undefined);
   clientnotify("bunker_lightflares_on");
@@ -235,11 +240,13 @@ bunker_splitup_anims() {
   ai_redshirt = get_ai("redshirt_pdf", "script_noteworthy");
   level thread splitup_start_objective();
 
-  if(!flag("woods_split_up_enter_started"))
+  if(!flag("woods_split_up_enter_started")) {
     level.woods thread run_split_up_woods_enter_scene();
+  }
 
-  if(!flag("pdf_split_up_enter_started"))
+  if(!flag("pdf_split_up_enter_started")) {
     ai_redshirt thread run_split_up_pdf_enter_scene();
+  }
 
   scene_wait("split_up_enter_woods");
   scene_wait("split_up_enter_pdf");
@@ -254,8 +261,9 @@ bunker_splitup_anims() {
   ai_redshirt thread ai_buddies_enter_bunker();
   level.woods thread ai_buddies_enter_bunker();
 
-  for(n_count = 0; n_count < 2; n_count++)
+  for(n_count = 0; n_count < 2; n_count++) {
     level waittill("buddy_down_hatch");
+  }
 
   e_clip = getent("bunker_entrance_clip", "targetname");
   e_clip delete();
@@ -266,8 +274,9 @@ bunker_splitup_anims() {
   run_scene("bunker_enter");
   level notify("mason_entered_bunker");
 
-  if(!flag("player_got_mortars"))
+  if(!flag("player_got_mortars")) {
     remove_objective_perk(level.obj_mason_bruteforce_perk);
+  }
 
   level thread run_scene("close_hatch");
   level thread mason_bunker_point_of_no_return_cleanup();
@@ -283,8 +292,9 @@ run_split_up_woods_enter_scene() {
   scene_wait("split_up_start_idle_woods");
   flag_set("split_up_enter_woods_complete");
 
-  while(!flag("nicaragua_gump_bunker"))
+  while(!flag("nicaragua_gump_bunker")) {
     run_scene("split_up_start_idle_woods");
+  }
 }
 
 run_split_up_pdf_enter_scene() {
@@ -294,8 +304,9 @@ run_split_up_pdf_enter_scene() {
   scene_wait("split_up_start_idle_pdf");
   flag_set("split_up_enter_pdf_complete");
 
-  while(!flag("nicaragua_gump_bunker"))
+  while(!flag("nicaragua_gump_bunker")) {
     run_scene("split_up_start_idle_pdf");
+  }
 }
 
 splitup_start_objective() {
@@ -439,26 +450,30 @@ bunker_civilian_run_drops_cocaine() {
 bunker_table_watchers() {
   ai_cartel_frantic = simple_spawn_single("bunker_cartel_frantic");
 
-  while(!isDefined(ai_cartel_frantic))
+  while(!isDefined(ai_cartel_frantic)) {
     wait 0.05;
+  }
 
   ai_cartel_frantic thread bunker_cartel_frantic();
   ai_table_watch_01 = simple_spawn_single("bunker_cartel_table_watch01");
 
-  while(!isDefined(ai_table_watch_01))
+  while(!isDefined(ai_table_watch_01)) {
     wait 0.05;
+  }
 
   ai_table_watch_01 thread bunker_cartel_table_watch01();
   ai_table_watch_02 = simple_spawn_single("bunker_cartel_table_watch02");
 
-  while(!isDefined(ai_table_watch_02))
+  while(!isDefined(ai_table_watch_02)) {
     wait 0.05;
+  }
 
   ai_table_watch_02 thread bunker_cartel_table_watch02();
   ai_table_watch_03 = simple_spawn_single("bunker_cartel_table_watch03");
 
-  while(!isDefined(ai_table_watch_03))
+  while(!isDefined(ai_table_watch_03)) {
     wait 0.05;
+  }
 
   ai_table_watch_03 thread bunker_cartel_table_watch03();
 }
@@ -544,8 +559,9 @@ bunker_waittill_enemy_alerted() {
     level notify("bunker_1stroom_alerted");
     a_ai_cartel = getaiarray("axis", "neutral");
 
-    foreach(guy in a_ai_cartel)
+    foreach(guy in a_ai_cartel) {
     guy notify("bunker_alerted");
+    }
 
     level.woods thread woods_kicks_off_coke_fog();
   }
@@ -561,10 +577,12 @@ bunker_enemy_alerted() {
   }
   self set_ignoreme(0);
 
-  if(self.script_noteworthy == "bunker_1st_room_coke_worker")
+  if(self.script_noteworthy == "bunker_1st_room_coke_worker") {
     self thread coke_worker_run_away_and_die();
-  else if(self.script_noteworthy == "cartel_table_watcher")
+  }
+  else if(self.script_noteworthy == "cartel_table_watcher") {
     self thread bunker_patroller_play_table_kick();
+  }
 }
 
 coke_worker_run_away_and_die() {
@@ -632,12 +650,15 @@ pick_new_ai_table_kick_1() {
   while(true) {
     a_ai = array_removedead(a_ai);
 
-    if(a_ai.size > 1)
+    if(a_ai.size > 1) {
       n_index = randomintrange(0, a_ai.size - 1);
-    else if(a_ai.size == 1)
+    }
+    else if(a_ai.size == 1) {
       n_index = 0;
-    else
+    }
+    else {
       return;
+    }
 
     ai_guy = a_ai[n_index];
 
@@ -660,12 +681,15 @@ pick_new_ai_table_kick_2() {
   while(true) {
     a_ai = array_removedead(a_ai);
 
-    if(a_ai.size > 1)
+    if(a_ai.size > 1) {
       n_index = randomintrange(0, a_ai.size - 1);
-    else if(a_ai.size == 1)
+    }
+    else if(a_ai.size == 1) {
       n_index = 0;
-    else
+    }
+    else {
       return;
+    }
 
     ai_guy = a_ai[n_index];
 
@@ -686,8 +710,9 @@ bunker_table_flipped_01(e_table) {
   physicsjolt(s_org.origin, 40, 8, (-1, 0.01, 1));
   a_nd_table1 = getnodearray("post_table1_kick", "script_noteworthy");
 
-  foreach(node in a_nd_table1)
+  foreach(node in a_nd_table1) {
   setenablenode(node, 1);
+  }
 
   nd_old = getnode("bunker_table_node_1", "targetname");
   setenablenode(nd_old, 0);
@@ -704,8 +729,9 @@ bunker_table_flipped_03(e_table) {
   e_coke delete();
   a_nd_table3 = getnodearray("post_table3_kick", "script_noteworthy");
 
-  foreach(node in a_nd_table3)
+  foreach(node in a_nd_table3) {
   setenablenode(node, 1);
+  }
 
   nd_old = getnode("bunker_table_node_3", "targetname");
   setenablenode(nd_old, 0);
@@ -769,15 +795,17 @@ bunker_1stroom_sidepassage() {
 bunker_1stroom_retreat() {
   trigger_wait("mason_bunker_first_room_retreat_trigger");
 
-  if(!flag("bunker_midpoint"))
+  if(!flag("bunker_midpoint")) {
     trigger_use("mason_bunker_colortrigger2");
+  }
 
   e_goalvolume = getent("bunker_1stroom_back_goalvolume", "targetname");
   a_ai_enemies = getaiarray("axis");
 
   foreach(guy in a_ai_enemies) {
-    if(isDefined(guy.script_aigroup) && issubstr(guy.script_aigroup, "1st_room"))
+    if(isDefined(guy.script_aigroup) && issubstr(guy.script_aigroup, "1st_room")) {
       guy setgoalvolumeauto(e_goalvolume);
+    }
   }
 }
 
@@ -790,8 +818,9 @@ mason_bunker_make_shotgunners_agressive() {
   a_ai_enemies = getaiarray("axis");
 
   foreach(guy in a_ai_enemies) {
-    if(issubstr(guy.classname, "Shotgun"))
+    if(issubstr(guy.classname, "Shotgun")) {
       self make_ai_aggressive();
+    }
   }
 }
 
@@ -811,8 +840,9 @@ clear_bunker_1st_room_enemies() {
   a_ai_cartel = getaiarray("axis");
 
   foreach(guy in a_ai_cartel) {
-    if(isDefined(guy.script_aigroup) && !issubstr(guy.script_aigroup, "2nd_room"))
+    if(isDefined(guy.script_aigroup) && !issubstr(guy.script_aigroup, "2nd_room")) {
       guy thread timebomb(0.25, 3.0);
+    }
   }
 }
 
@@ -841,8 +871,9 @@ bunker_2ndroom_alert_paper_burners() {
   for(i = 1; i < 3; i++) {
     ai_guy = get_ais_from_scene("bunker_paper_burner_" + i, "bunker_paper_burner_" + i);
 
-    if(isDefined(ai_guy) && isalive(ai_guy))
+    if(isDefined(ai_guy) && isalive(ai_guy)) {
       ai_guy thread end_bunker_paper_burner_scenes(i);
+    }
   }
 
   level notify("paper_burners_react");
@@ -928,8 +959,9 @@ match_flame(e_guy) {
     level thread bunker_fire_timer();
     e_trigger = getent("mason_bunker_firetrigger", "targetname");
 
-    if(isDefined(e_trigger))
+    if(isDefined(e_trigger)) {
       e_trigger trigger_on();
+    }
   }
 }
 
@@ -949,10 +981,12 @@ check_bunker_near_clear(a_ai_rearbunker) {
   a_ai_rearbunker = array_removedead(a_ai_rearbunker);
 
   foreach(guy in a_ai_rearbunker) {
-    if(isDefined(guy.script_noteworthy) && guy.script_noteworthy == "bunker_2nd_room_end")
+    if(isDefined(guy.script_noteworthy) && guy.script_noteworthy == "bunker_2nd_room_end") {
       continue;
-    else
+    }
+    else {
       return;
+    }
   }
 
   trigger_use("mason_bunker_colortrigger5");
@@ -1024,10 +1058,12 @@ bunker_2ndroom_vo() {
 }
 
 cia_easter_egg_vo() {
-  if(is_mature())
+  if(is_mature()) {
     self queue_dialog("maso_what_the_fuck_ci_0");
-  else
+  }
+  else {
     self queue_dialog("maso_what_the_cia_0");
+  }
 }
 
 mason_bunker_point_of_no_return_cleanup() {
@@ -1123,16 +1159,19 @@ bunker_mortar_dust_fx(t_room1, t_room2) {
   while(true) {
     level waittill("mason_bunker_fake_mortar");
 
-    if(self istouching(t_room1))
+    if(self istouching(t_room1)) {
       exploder(665);
-    else if(self istouching(t_room2))
+    }
+    else if(self istouching(t_room2)) {
       exploder(666);
+    }
   }
 }
 
 setup_bunker_lookat_physics_pulses() {
-  for(i = 1; i < 18; i++)
+  for(i = 1; i < 18; i++) {
     level thread bunker_lookat_physics_pulse("mason_bunker_physics_lookat_" + i);
+  }
 }
 
 bunker_lookat_physics_pulse(str_flag) {
@@ -1155,8 +1194,9 @@ cocaine_vision_setup() {
   a_destructibles = getEntArray("destructible", "targetname");
 
   foreach(object in a_destructibles) {
-    if(object.destructibledef == "fxdest_accessories_cocaine")
+    if(object.destructibledef == "fxdest_accessories_cocaine") {
       object thread coke_bundle_destroyed();
+    }
   }
 
   level.player thread cocaine_vision_think();
@@ -1184,8 +1224,9 @@ cocaine_vision_think() {
     if(n_dist > 384) {
       continue;
     }
-    if(!flag("cocaine_overlay_active"))
+    if(!flag("cocaine_overlay_active")) {
       flag_set("cocaine_overlay_active");
+    }
     else if(n_alpha > level.fade_hud.alpha) {
       level.fade_hud notify("coke_vision_retrigger");
       n_partial_fadein_time = (n_alpha - level.fade_hud.alpha) * n_full_fadein_time;
@@ -1221,8 +1262,9 @@ coke_vision_fade_in_and_out(n_fadein_time, n_fadeout_time, n_wait_time, n_alpha)
     wait(n_fadeout_time);
   }
 
-  if(isDefined(level.fade_hud))
+  if(isDefined(level.fade_hud)) {
     self destroy();
+  }
 
   flag_clear("cocaine_overlay_active");
 }

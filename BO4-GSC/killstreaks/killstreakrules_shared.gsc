@@ -339,4 +339,3 @@ killstreak_debug_text(text) {
     }
   }
 }
-

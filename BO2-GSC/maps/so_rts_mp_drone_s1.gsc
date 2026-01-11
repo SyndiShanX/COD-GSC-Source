@@ -144,8 +144,9 @@ drone_level_scenario_one() {
   mainframe_poi.block_intruder = 1;
 
   foreach(intruder in level.rts.networkintruders["axis"]) {
-    if(isDefined(intruder))
+    if(isDefined(intruder)) {
       intruder dodamage(intruder.health + 999, intruder.origin);
+    }
   }
 
   level notify("end_enemy_player");
@@ -156,8 +157,9 @@ drone_intruderwatch() {
   while(!flag("rts_game_over")) {
     level waittill("intruder_planted", device);
 
-    if(device.team == "axis")
+    if(device.team == "axis") {
       maps\_so_rts_event::trigger_event("dlg_emp_placed" + flag("fps_mode") ? "_fps" : "");
+    }
   }
 }
 
@@ -185,8 +187,9 @@ kill_transport() {
   self setvehgoalpos(locs[0].origin);
   self waittill("goal");
 
-  if(isDefined(self.cargo))
+  if(isDefined(self.cargo)) {
     self.cargo delete();
+  }
 
   self delete();
 }
@@ -196,8 +199,9 @@ kill_transports() {
   retreatlocs = getstructarray("retreat_loc", "targetname");
 
   foreach(transport in transports) {
-    if(!(isDefined(transport.unloading_cargo) && transport.unloading_cargo))
+    if(!(isDefined(transport.unloading_cargo) && transport.unloading_cargo)) {
       transport thread kill_transport();
+    }
   }
 
   while(transports.size > 0) {
@@ -205,8 +209,9 @@ kill_transports() {
     level waittill("unloaded");
     squad = getsquadbypkg("quadrotor_pkg", "axis");
 
-    foreach(dude in squad.members)
+    foreach(dude in squad.members) {
     dude thread emp_and_die();
+    }
 
     squad = getsquadbypkg("bigdog_pkg", "axis");
 
@@ -217,8 +222,9 @@ kill_transports() {
 
     squad = getsquadbypkg("metalstorm_pkg", "axis");
 
-    foreach(dude in squad.members)
+    foreach(dude in squad.members) {
     dude thread emp_and_die();
+    }
   }
 }
 
@@ -239,8 +245,9 @@ outofenemy_watch() {
   maps\_so_rts_catalog::setpkgqty("infantry_enemy_reg2_pkg", "axis", 0);
   squad = getsquadbypkg("quadrotor_pkg", "axis");
 
-  foreach(dude in squad.members)
+  foreach(dude in squad.members) {
   dude thread emp_and_die();
+  }
 
   squad = getsquadbypkg("bigdog_pkg", "axis");
 
@@ -254,8 +261,9 @@ outofenemy_watch() {
   squad = getsquadbypkg("metalstorm_pkg", "axis");
 
   if(isDefined(squad)) {
-    foreach(dude in squad.members)
+    foreach(dude in squad.members) {
     dude thread emp_and_die();
+    }
   }
 
   enemies = [];
@@ -267,8 +275,9 @@ outofenemy_watch() {
   enemies = arraycombine(enemies, squad.members, 0, 0);
 
   foreach(guy in enemies) {
-    if(isDefined(guy))
+    if(isDefined(guy)) {
       guy thread dieinnseconds(60);
+    }
   }
 
   failsafetimer = gettime() + 62000;
@@ -291,8 +300,9 @@ floor_watch() {
     level.rts_floor hide();
     level waittill("rts_ON");
 
-    if(isDefined(level.rts_floor))
+    if(isDefined(level.rts_floor)) {
       level.rts_floor show();
+    }
 
     level waittill("rts_OFF");
   }
@@ -429,8 +439,9 @@ setup_objectives() {
         set_objective(level.obj_defend_computer, undefined, "failed");
         set_objective(level.obj_defend, undefined, "failed");
 
-        while(isDefined(level.rts.switch_trans))
+        while(isDefined(level.rts.switch_trans)) {
           wait 0.05;
+        }
 
         maps\_so_rts_rules::mission_complete(0);
         break;
@@ -444,8 +455,9 @@ setup_objectives() {
       maps\_so_rts_event::trigger_event("dlg_doors_down");
       turrets = getEntArray("turret_loc_friendly_inside", "targetname");
 
-      foreach(turret in turrets)
+      foreach(turret in turrets) {
       turret.targetname = "turret_loc_friendly";
+      }
 
       thread maps\_so_rts_support::level_create_turrets(1);
       pkg_ref = package_getpackagebytype("turret_pkg");
@@ -496,8 +508,9 @@ setup_objectives() {
         radius = isDefined(spot.radius) ? spot.radius : spot.script_parameters;
         nodes = getnodesinradius(spot.origin, spot.radius, 0);
 
-        foreach(node in nodes)
+        foreach(node in nodes) {
         deletepathnode(node);
+        }
       }
 
       array_thread(spots, ::spot_delete);
@@ -537,52 +550,63 @@ setup_poi_fx() {
 run_dish_fx() {
   poi = getpoibyref("rts_poi_dish");
 
-  while(poi get_poi_taken_pct() < 0.3)
+  while(poi get_poi_taken_pct() < 0.3) {
     poi.entity waittill("damage");
+  }
 
   poi.entity play_fx("rts_poi_dish_smk_dmg", poi.entity.origin, poi.entity.angles, "kill_dish_fx");
 
-  while(poi get_poi_taken_pct() < 1.0)
+  while(poi get_poi_taken_pct() < 1.0) {
     poi.entity waittill("damage");
+  }
 
   poi.entity play_fx("rts_poi_dish_dmg", poi.entity.origin, poi.entity.angles, "kill_dish_fx");
 }
 
 get_poi_taken_pct(do_wait) {
-  if(!isDefined(do_wait))
+  if(!isDefined(do_wait)) {
     do_wait = 0;
+  }
 
   taken_pct = 1.0;
 
-  if(self.capture_time > 0 && isDefined(self.dominate_weight))
+  if(self.capture_time > 0 && isDefined(self.dominate_weight)) {
     taken_pct = 1.0 - self.dominate_weight / self.capture_time;
-  else
+  }
+  else {
     taken_pct = 1.0 - self.entity.health / self.entity.maxhealth;
+  }
 
   taken_pct = clamp(taken_pct, 0.0, 1.0);
   return taken_pct;
 }
 
 watch_poi_exploder(poi_name, exploder_num, fire_at_pct, chain_delay, exploder2, exploder3) {
-  if(!isDefined(fire_at_pct))
+  if(!isDefined(fire_at_pct)) {
     fire_at_pct = 1.0;
+  }
 
-  if(!isDefined(chain_delay))
+  if(!isDefined(chain_delay)) {
     chain_delay = 2.0;
+  }
 
-  if(!isDefined(exploder2))
+  if(!isDefined(exploder2)) {
     exploder2 = undefined;
+  }
 
-  if(!isDefined(exploder3))
+  if(!isDefined(exploder3)) {
     exploder3 = undefined;
+  }
 
   poi = getpoibyref(poi_name);
 
   while(poi get_poi_taken_pct() < fire_at_pct) {
-    if(poi.capture_time > 0 && isDefined(poi.dominate_weight))
+    if(poi.capture_time > 0 && isDefined(poi.dominate_weight)) {
       wait 0.05;
-    else
+    }
+    else {
       poi.entity waittill("damage");
+    }
   }
 
   exploder(exploder_num);
@@ -720,8 +744,9 @@ drone_level_player_startfps() {
 }
 
 order_new_allysquad(squadid) {
-  foreach(guy in level.rts.squads[squadid].members)
+  foreach(guy in level.rts.squads[squadid].members) {
   guy thread friendly_ai_think();
+  }
 }
 
 friendly_ai_think() {
@@ -759,16 +784,18 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
 
   if(team == "allies") {
     if(pkg_ref.ref == "infantry_ally_reg_pkg") {
-      if(isDefined(pkg_ref.incodespawn) && pkg_ref.incodespawn)
+      if(isDefined(pkg_ref.incodespawn) && pkg_ref.incodespawn) {
         return -1;
+      }
 
       pkg_ref.incodespawn = 1;
       squad = issquadalreadycreated("allies", pkg_ref);
 
       if(isDefined(squad)) {
         foreach(guy in squad.members) {
-          if(isDefined(guy))
+          if(isDefined(guy)) {
             guy.alreadyinsquad = 1;
+          }
         }
       }
 
@@ -779,14 +806,16 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
       if(isDefined(squad)) {
         foreach(guy in squad.members) {
           if(isDefined(guy)) {
-            if(!(isDefined(guy.alreadyinsquad) && guy.alreadyinsquad) && isalive(guy))
+            if(!(isDefined(guy.alreadyinsquad) && guy.alreadyinsquad) && isalive(guy)) {
               newguys[newguys.size] = guy;
+            }
           }
         }
       }
 
-      for(i = 0; i < newguys.size; i++)
+      for(i = 0; i < newguys.size; i++) {
         newguys[i] thread intro_jetpack_wait(i);
+      }
 
       maps\_so_rts_squad::reissuesquadlastorders(squadid);
       pkg_ref.incodespawn = undefined;
@@ -822,11 +851,13 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
       unit = maps\_so_rts_catalog::allocatetransport(team, "helo", pkg_ref, maps\_so_rts_ai::spawn_ai_package_helo, callback);
 
       if(isDefined(unit)) {
-        if(pkg_ref.qty[team] > 0)
+        if(pkg_ref.qty[team] > 0) {
           pkg_ref.qty[team]--;
+        }
 
-        if(team == level.rts.player.team && pkg_ref.qty[team] >= 0)
+        if(team == level.rts.player.team && pkg_ref.qty[team] >= 0) {
           luinotifyevent(&"rts_update_remaining_count", 2, unit.squadid, pkg_ref.qty[team] > 0 ? pkg_ref.qty[team] : -1);
+        }
 
         return unit.squadid;
       }
@@ -839,8 +870,9 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
       foreach(loc in spawnlocs) {
         distsq = distancesquared(loc.origin, level.rts.player.origin);
 
-        if(distsq > 640000)
+        if(distsq > 640000) {
           valid[valid.size] = loc;
+        }
       }
 
       spot = valid[randomint(valid.size)];
@@ -848,15 +880,17 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
       maps\_so_rts_squad::reissuesquadlastorders(squadid);
 
       if(isDefined(spot.script_noteworthy) && spot.script_noteworthy == "oob_on") {
-        foreach(guy in level.rts.squads[squadid].members)
+        foreach(guy in level.rts.squads[squadid].members) {
         guy.allow_oob = 1;
+        }
       }
     }
   } else
     assert(0, "unhandled code spawn");
 
-  if(isDefined(callback))
+  if(isDefined(callback)) {
     thread[[callback]](squadid);
+  }
 
   return squadid;
 }
@@ -879,15 +913,17 @@ drone_startintro() {
   exploder(100);
   drone_intro_ais = get_ais_from_scene("drone_intro");
 
-  foreach(drone_intro_ai in drone_intro_ais)
+  foreach(drone_intro_ai in drone_intro_ais) {
   drone_intro_ai.a.pose = "crouch";
+  }
 
   ai_jetpacks = [];
   ai_jetpacks[0] = get_model_or_models_from_scene("drone_intro", "jetpack_guy0");
   ai_jetpacks[1] = get_model_or_models_from_scene("drone_intro", "jetpack_guy1");
 
-  foreach(ai_jetpack in ai_jetpacks)
+  foreach(ai_jetpack in ai_jetpacks) {
   playFXOnTag(level._effect["jetwing_exhaust"], ai_jetpack, "tag_engine_fx");
+  }
 
   scene_wait("drone_intro");
   flag_set("intro_done");
@@ -945,8 +981,9 @@ drone_mission_complete_s1(success, basejustlost) {
   level.rts.player freezecontrols(1);
   level.rts.game_success = success;
 
-  while(isDefined(level.rts.switch_trans))
+  while(isDefined(level.rts.switch_trans)) {
     wait 0.05;
+  }
 
   screen_fade_out(0.5);
   level.rts_floor delete();
@@ -994,14 +1031,16 @@ drone_outro_succeed() {
   level thread maps\createart\so_rts_mp_drone_art::success_igc();
   sentry_turrets = getEntArray("sentry_turret_friendly", "targetname");
 
-  foreach(sentry_turret in sentry_turrets)
+  foreach(sentry_turret in sentry_turrets) {
   sentry_turret.ignoreall = 1;
+  }
 
   array_func(getaiarray(), ::set_ignoreall, 1);
   array_func(getaiarray(), ::set_ignoreme, 1);
 
-  foreach(door in level.laser_doors)
+  foreach(door in level.laser_doors) {
   door delete();
+  }
 
   level.laser_doors = [];
   scene = "drone_outro_success";
@@ -1079,11 +1118,13 @@ mission_complete_clear_entity() {
 }
 
 level_fade_in(player, delay) {
-  if(!isDefined(player))
+  if(!isDefined(player)) {
     player = level.rts.player;
+  }
 
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0.5;
+  }
 
   thread screen_fade_in(delay);
 }
@@ -1091,40 +1132,46 @@ level_fade_in(player, delay) {
 drone_geo_changes() {
   ents = getEntArray("rts_poi_LZ", "targetname");
 
-  foreach(ent in ents)
+  foreach(ent in ents) {
   ent delete();
+  }
 
   ents = getEntArray("rts_remove", "targetname");
 
-  foreach(ent in ents)
+  foreach(ent in ents) {
   ent delete();
+  }
 
   ents = getEntArray("script_model", "classname");
 
   foreach(ent in ents) {
     if(isDefined(ent.script_index)) {
-      if(ent.script_index == 999)
+      if(ent.script_index == 999) {
         ent delete();
+      }
     }
   }
 
   ents = getEntArray("delivery_van", "targetname");
 
-  foreach(ent in ents)
+  foreach(ent in ents) {
   ent delete();
+  }
 
   level.laser_doors = getEntArray("laser_door", "targetname");
 
-  foreach(ent in level.laser_doors)
+  foreach(ent in level.laser_doors) {
   ent disconnectpaths();
+  }
 
   roof = getent("rts_factory_roof", "targetname");
 
   if(isDefined(roof)) {
     targetloc = getstruct("rts_factory_roof_pos", "targetname");
 
-    if(isDefined(targetloc))
+    if(isDefined(targetloc)) {
       roof moveto(targetloc.origin, 0.1);
+    }
   }
 
   flag_wait("start_rts");
@@ -1153,8 +1200,9 @@ drone_create_badplace_ontrig() {
 drone_badplace_auto() {
   trigs = getEntArray("bad_place_auto_trig", "targetname");
 
-  foreach(trig in trigs)
+  foreach(trig in trigs) {
   trig thread drone_create_badplace_ontrig();
+  }
 }
 
 drone_ai_takeover_trigger(oob) {
@@ -1222,15 +1270,17 @@ setup_challenges() {
 watch_asd_death() {
   self waittill("death", attacker, param2, weapon, v_loc, v_dir, dmg_type, param7, param8, param9);
 
-  if(isplayer(attacker))
+  if(isplayer(attacker)) {
     level notify("player_killed_asd", level.player maps\_so_rts_support::get_player_rts_mode(), dmg_type, weapon);
+  }
 }
 
 watch_quad_death() {
   self waittill("death", attacker, param2, weapon, v_loc, v_dir, dmg_type, param7, param8, param9);
 
-  if(isplayer(attacker))
+  if(isplayer(attacker)) {
     level notify("player_killed_quad", level.player maps\_so_rts_support::get_player_rts_mode(), dmg_type, weapon);
+  }
 }
 
 watch_sentry_death() {
@@ -1242,13 +1292,15 @@ watch_sentry_death() {
 setupmissileboundary() {
   ulxy = getstruct("rts_ulxy_missile", "targetname");
 
-  if(!isDefined(ulxy))
+  if(!isDefined(ulxy)) {
     ulxy = getstruct("rts_ulxy", "targetname");
+  }
 
   lrxy = getstruct("rts_lrxy_missile", "targetname");
 
-  if(!isDefined(lrxy))
+  if(!isDefined(lrxy)) {
     lrxy = getstruct("rts_lrxy", "targetname");
+  }
 
   ux = ulxy.origin[0] < lrxy.origin[0] ? ulxy.origin[0] : lrxy.origin[0];
   lx = ulxy.origin[0] < lrxy.origin[0] ? lrxy.origin[0] : ulxy.origin[0];
@@ -1265,18 +1317,23 @@ drone_missile_oob_check(rocketorigin) {
   y = rocketorigin[1];
   z = rocketorigin[2];
 
-  if(x <= level.rts.bounds.missile_ulx)
+  if(x <= level.rts.bounds.missile_ulx) {
     return false;
-  else if(x >= level.rts.bounds.missile_lrx)
+  }
+  else if(x >= level.rts.bounds.missile_lrx) {
     return false;
+  }
 
-  if(y <= level.rts.bounds.missile_uly)
+  if(y <= level.rts.bounds.missile_uly) {
     return false;
-  else if(y >= level.rts.bounds.missile_lry)
+  }
+  else if(y >= level.rts.bounds.missile_lry) {
     return false;
+  }
 
-  if(z <= level.rts.bounds.minz)
+  if(z <= level.rts.bounds.minz) {
     return false;
+  }
 
   return true;
 }
@@ -1287,16 +1344,18 @@ challenge_field_up(str_notify) {
   if(!success) {
     return;
   }
-  if(level.m_lost_objectives < 2)
+  if(level.m_lost_objectives < 2) {
     self notify(str_notify);
+  }
 }
 
 challenge_sentry_vs_asd(str_notify) {
   while(true) {
     level waittill("player_killed_asd", rts_mode, dmg_type, weapon);
 
-    if(weapon == "auto_gun_turret_sp_minigun_rts")
+    if(weapon == "auto_gun_turret_sp_minigun_rts") {
       self notify(str_notify);
+    }
   }
 }
 
@@ -1338,8 +1397,9 @@ challenge_sentry_lost(str_notify) {
   if(!success) {
     return;
   }
-  if(level.m_turret_deaths <= 1)
+  if(level.m_turret_deaths <= 1) {
     self notify(str_notify);
+  }
 }
 
 drone_setup_devgui() {

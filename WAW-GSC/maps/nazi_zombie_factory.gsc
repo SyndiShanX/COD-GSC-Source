@@ -244,15 +244,17 @@ bridge_init() {
   flag_wait("electricity_on");
   wnuen_bridge rotatepitch(-90, 4, .5, 1.5);
   warehouse_bridge rotatepitch(90, 4, .5, 1.5);
-  if(isDefined(bridge_audio))
+  if(isDefined(bridge_audio)) {
     playsoundatposition("bridge_lower", bridge_audio.origin);
+  }
   wnuen_bridge connectpaths();
   warehouse_bridge connectpaths();
   exploder(500);
   wnuen_bridge waittill("rotatedone");
   flag_set("bridge_down");
-  if(isDefined(bridge_audio))
+  if(isDefined(bridge_audio)) {
     playsoundatposition("bridge_hit", bridge_audio.origin);
+  }
   wnuen_bridge_clip = getent("wnuen_bridge_clip", "targetname");
   wnuen_bridge_clip delete();
   warehouse_bridge_clip = getent("warehouse_bridge_clip", "targetname");

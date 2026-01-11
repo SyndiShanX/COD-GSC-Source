@@ -7,8 +7,9 @@
 #include maps\_utility;
 
 main() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _introscreen.gsc. Function: main()\n");
+  }
   flag_init("pullup_weapon");
   flag_init("starting final intro screen fadeout");
   flag_init("introscreen_complete");
@@ -185,8 +186,9 @@ main() {
       flag_set("introscreen_complete");
       break;
   }
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _introscreen.gsc. Function: main() - COMPLETE\n");
+  }
 }
 
 introscreen_create_line(string, type, scale, font) {
@@ -218,10 +220,12 @@ introscreen_create_line(string, type, scale, font) {
     }
   }
   if(!isDefined(scale)) {
-    if(level.splitscreen && !level.hidef)
+    if(level.splitscreen && !level.hidef) {
       fontScale = 2.75;
-    else
+    }
+    else {
       fontScale = 1.75;
+    }
   } else
     fontScale = scale;
   level.introstring[index] = NewHudElem();
@@ -261,8 +265,9 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   }
   waittillframeend;
   waittillframeend;
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _introscreen.gsc. Function: introscreen_delay() - STOP WAIT waittillframeend x2\n");
+  }
   skipIntro = false;
   if(isDefined(level.start)) {
     skipIntro = level.start_point != "default";
@@ -270,8 +275,9 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   if(GetDvar("introscreen") == "0") {
     skipIntro = true;
   }
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _introscreen.gsc. Function: introscreen_delay() - BEFORE VARIOUS WAITS\n");
+  }
   if(skipIntro) {
     flag_wait("all_players_connected");
     if(isDefined(level.custom_introscreen)) {
@@ -355,8 +361,9 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   level notify("controls_active");
   introscreen_fadeOutText();
   flag_set("introscreen_complete");
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _introscreen.gsc. Function: introscreen_delay() - COMPLETE\n");
+  }
 }
 
 introscreen_player_connect() {

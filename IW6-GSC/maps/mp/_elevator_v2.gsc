@@ -32,34 +32,42 @@ init_elevator(config) {
       elevator.doors[floorname] = list;
     }
 
-    if(isDefined(config.doorOpenTime))
+    if(isDefined(config.doorOpenTime)) {
       elevator.doorOpenTime = config.doorOpenTime;
-    else
+    }
+    else {
       elevator.doorOpenTime = ELEVATOR_DOOR_TIME;
+    }
 
     elevator.doorSpeed = config.doorMoveDist / elevator.doorOpenTime;
 
-    if(isDefined(config.autoCloseTimeout))
+    if(isDefined(config.autoCloseTimeout)) {
       elevator.autoCloseTimeout = config.autoCloseTimeout;
-    else
+    }
+    else {
       elevator.autoCloseTimeout = ELEVATOR_AUTOCLOSE_TIMEOUT;
+    }
 
     elevator.trigBlock = GetEnt(config.trigBlockName, "targetname");
     AssertEx(isDefined(elevator.trigBlock), "Could not find an elevator trigger named " + config.trigBlockName);
 
-    if(isDefined(config.autoCloseTimeout))
+    if(isDefined(config.autoCloseTimeout)) {
       elevator.autoCloseTimeout = config.autoCloseTimeout;
-    else
+    }
+    else {
       elevator.autoCloseTimeout = ELEVATOR_AUTOCLOSE_TIMEOUT;
+    }
 
     elevator.doorOpenSfx = config.doorOpenSfx;
     elevator.doorCloseSfx = config.doorCloseSfx;
   }
 
-  if(isDefined(config.moveTime))
+  if(isDefined(config.moveTime)) {
     elevator.moveTime = config.moveTime;
-  else
+  }
+  else {
     elevator.moveTime = ELEVATOR_FLOOR_MOVE_TIME;
+  }
 
   elevator.destinations = [];
   elevator.pathBlockers = [];
@@ -233,8 +241,9 @@ elevatorMoveToFloor(targetFloor) {
 
   wait(self.moveTime);
 
-  if(isDefined(self.beepSfx))
+  if(isDefined(self.beepSfx)) {
     self playSound(self.beepSfx);
+  }
 
   self.curFloor = self.requestedFloor;
 

@@ -37,8 +37,9 @@ main() {
 
   thread maps\mp\gametypes\_tweakables::init();
 
-  if(!isDefined(level.func))
+  if(!isDefined(level.func)) {
     level.func = [];
+  }
   level.func["precacheMpAnim"] = ::precacheMpAnim;
   level.func["scriptModelPlayAnim"] = ::scriptModelPlayAnim;
   level.func["scriptModelClearAnim"] = ::scriptModelClearAnim;
@@ -64,8 +65,9 @@ main() {
   VisionSetPain("", 0);
 
   lanterns = getEntArray("lantern_glowFX_origin", "targetname");
-  for(i = 0; i < lanterns.size; i++)
+  for(i = 0; i < lanterns.size; i++) {
     lanterns[i] thread lanterns();
+  }
 
   maps\mp\_audio::init_audio();
   maps\mp\_art::main();
@@ -119,11 +121,13 @@ main() {
     triggers = getEntArray(triggertype, "classname");
 
     for(i = 0; i < triggers.size; i++) {
-      if(isDefined(triggers[i].script_prefab_exploder))
+      if(isDefined(triggers[i].script_prefab_exploder)) {
         triggers[i].script_exploder = triggers[i].script_prefab_exploder;
+      }
 
-      if(isDefined(triggers[i].script_exploder))
+      if(isDefined(triggers[i].script_exploder)) {
         level thread maps\mp\_load::exploder_load(triggers[i]);
+      }
     }
   }
 
@@ -169,10 +173,12 @@ exploder_load(trigger) {
   level endon("killexplodertridgers" + trigger.script_exploder);
   trigger waittill("trigger");
   if(isDefined(trigger.script_chance) && randomfloat(1) > trigger.script_chance) {
-    if(isDefined(trigger.script_delay))
+    if(isDefined(trigger.script_delay)) {
       wait trigger.script_delay;
-    else
+    }
+    else {
       wait 4;
+    }
     level thread exploder_load(trigger);
     return;
   }
@@ -183,16 +189,19 @@ exploder_load(trigger) {
 setupExploders() {
   ents = getEntArray("script_brushmodel", "classname");
   smodels = getEntArray("script_model", "classname");
-  for(i = 0; i < smodels.size; i++)
+  for(i = 0; i < smodels.size; i++) {
     ents[ents.size] = smodels[i];
+  }
 
   for(i = 0; i < ents.size; i++) {
-    if(isDefined(ents[i].script_prefab_exploder))
+    if(isDefined(ents[i].script_prefab_exploder)) {
       ents[i].script_exploder = ents[i].script_prefab_exploder;
+    }
 
     if(isDefined(ents[i].script_exploder)) {
-      if((ents[i].model == "fx") && ((!isDefined(ents[i].targetname)) || (ents[i].targetname != "exploderchunk")))
+      if((ents[i].model == "fx") && ((!isDefined(ents[i].targetname)) || (ents[i].targetname != "exploderchunk"))) {
         ents[i] hide();
+      }
       else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
         ents[i] hide();
         ents[i] notsolid();
@@ -209,33 +218,40 @@ setupExploders() {
 
   potentialExploders = getEntArray("script_brushmodel", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder))
+    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
+    }
 
-    if(isDefined(potentialExploders[i].script_exploder))
+    if(isDefined(potentialExploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialExploders[i];
+    }
   }
 
   potentialExploders = getEntArray("script_model", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder))
+    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
+    }
 
-    if(isDefined(potentialExploders[i].script_exploder))
+    if(isDefined(potentialExploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialExploders[i];
+    }
   }
 
   potentialExploders = getEntArray("item_health", "classname");
   for(i = 0; i < potentialExploders.size; i++) {
-    if(isDefined(potentialExploders[i].script_prefab_exploder))
+    if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
+    }
 
-    if(isDefined(potentialExploders[i].script_exploder))
+    if(isDefined(potentialExploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialExploders[i];
+    }
   }
 
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     level.createFXent = [];
+  }
 
   acceptableTargetnames = [];
   acceptableTargetnames["exploderchunk visible"] = true;
@@ -264,15 +280,18 @@ setupExploders() {
     ent.v["ender"] = exploder.script_ender;
     ent.v["type"] = "exploder";
 
-    if(!isDefined(exploder.script_fxid))
+    if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
-    else
+    }
+    else {
       ent.v["fxid"] = exploder.script_fxid;
+    }
     ent.v["exploder"] = exploder.script_exploder;
     assertEx(isDefined(exploder.script_exploder), "Exploder at origin " + exploder.origin + " has no script_exploder");
 
-    if(!isDefined(ent.v["delay"]))
+    if(!isDefined(ent.v["delay"])) {
       ent.v["delay"] = 0;
+    }
 
     if(isDefined(exploder.target)) {
       org = getent(ent.v["target"], "targetname").origin;
@@ -285,18 +304,21 @@ setupExploders() {
       ent.model.disconnect_paths = exploder.script_disconnectpaths;
     }
 
-    if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname]))
+    if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname])) {
       ent.v["exploder_type"] = exploder.targetname;
-    else
+    }
+    else {
       ent.v["exploder_type"] = "normal";
+    }
 
     ent common_scripts\_createfx::post_entity_creation_function();
   }
 }
 
 lanterns() {
-  if(!isDefined(level._effect["lantern_light"]))
+  if(!isDefined(level._effect["lantern_light"])) {
     level._effect["lantern_light"] = loadfx("fx/props/glow_latern");
+  }
 
   loopfx("lantern_light", self.origin, 0.3, self.origin + (0, 0, 1));
 }
@@ -335,6 +357,7 @@ deleteDestructibleKillCamEnt() {
   self waittill("death");
 
   wait(10);
-  if(isDefined(killCamEnt))
+  if(isDefined(killCamEnt)) {
     killCamEnt delete();
+  }
 }

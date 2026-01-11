@@ -12,10 +12,12 @@ parse_music_genre_table() {
   level.next_perk_jingle_time = 0;
   level.songs_played = 0;
 
-  if(isDefined(level.jukebox_table))
+  if(isDefined(level.jukebox_table)) {
     var_00 = level.jukebox_table;
-  else
+  }
+  else {
     var_00 = "cp\zombies\cp_zmb_music_genre.csv";
+  }
 
   var_01 = 0;
 
@@ -54,28 +56,34 @@ jukebox_start(var_00, var_01, var_02) {
   if(!isDefined(var_01)) {
     level waittill("jukebox_start");
 
-    if(scripts\cp\utility::map_check(0))
+    if(scripts\cp\utility::map_check(0)) {
       var_03 = lookupsoundlength("dj_jingle_intro") / 1000;
-    else
+    }
+    else {
       var_03 = 0.005;
+    }
 
     wait(var_03);
   }
 
-  if(isDefined(level.jukebox_table))
+  if(isDefined(level.jukebox_table)) {
     var_04 = level.jukebox_table;
-  else
+  }
+  else {
     var_04 = "cp\zombies\cp_zmb_music_genre.csv";
+  }
 
   if(!scripts\engine\utility::is_true(var_02)) {
     var_05 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
 
     if(isDefined(level.current_dj_song)) {
       for(;;) {
-        if(var_5[0].songname == level.current_dj_song)
+        if(var_5[0].songname == level.current_dj_song) {
           var_05 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
-        else
+        }
+        else {
           break;
+        }
 
         wait 0.05;
       }
@@ -88,8 +96,9 @@ jukebox_start(var_00, var_01, var_02) {
   var_07 = get_song_struct(var_05, 1, var_06);
 
   for(;;) {
-    if(scripts\engine\utility::flag("jukebox_paused"))
+    if(scripts\engine\utility::flag("jukebox_paused")) {
       scripts\engine\utility::flag_waitopen("jukebox_paused");
+    }
 
     var_08 = var_7.songname;
     level.current_dj_song = var_08;
@@ -101,10 +110,12 @@ jukebox_start(var_00, var_01, var_02) {
 
       if(isDefined(level.current_dj_song)) {
         for(;;) {
-          if(var_5[0].songname == level.current_dj_song)
+          if(var_5[0].songname == level.current_dj_song) {
             var_05 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
-          else
+          }
+          else {
             break;
+          }
 
           wait 0.05;
         }
@@ -140,8 +151,9 @@ earlyendon(var_00) {
   var_00 stoploopsound();
   wait 2.0;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 delete();
+  }
 }
 
 force_song(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
@@ -151,8 +163,9 @@ force_song(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   level notify("force_new_song");
   level endon("force_new_song");
 
-  if(isDefined(var_05))
+  if(isDefined(var_05)) {
     level.forced_songs[var_05] = var_05;
+  }
 
   var_07 = spawnStruct();
   var_7.songname = var_01;
@@ -162,17 +175,20 @@ force_song(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   var_7.genre = "music";
   level.jukebox_songs[level.jukebox_songs.size] = var_07;
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = (649, 683, 254);
+  }
 
   wait 2.5;
 
   if(isDefined(var_03)) {}
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     scripts\engine\utility::play_sound_in_space(var_02, var_00);
-  else
+  }
+  else {
     scripts\engine\utility::play_sound_in_space("zmb_jukebox_on", var_00);
+  }
 
   var_08 = spawn("script_origin", var_00);
   var_08 playLoopSound(var_01);
@@ -188,15 +204,17 @@ force_song(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
     wait(var_10);
   }
 
-  if(scripts\engine\utility::is_true(var_06))
+  if(scripts\engine\utility::is_true(var_06)) {
     parse_music_genre_table();
+  }
 
   level thread jukebox_start((649, 683, 254), 1);
 }
 
 get_song_struct(var_00, var_01, var_02) {
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0;
+  }
 
   foreach(var_09, var_04 in var_00) {
     var_05 = var_0[var_09].djintro;
@@ -207,8 +225,9 @@ get_song_struct(var_00, var_01, var_02) {
       }
       var_06 = gettime();
 
-      if(var_06 < level.next_perk_jingle_time && var_09 + 1 < var_0.size)
+      if(var_06 < level.next_perk_jingle_time && var_09 + 1 < var_0.size) {
         continue;
+      }
       else {
         if(isDefined(var_05) && var_05 != "") {
           level thread scripts\cp\cp_vo::try_to_play_vo(var_05, "zmb_dj_vo");
@@ -225,16 +244,19 @@ get_song_struct(var_00, var_01, var_02) {
           var_05 = cp_disco_pam_radio_vo();
 
           if(var_05 != "nil") {
-            while(scripts\engine\utility::is_true(level.pam_playing) || scripts\engine\utility::is_true(level.announcer_vo_playing))
+            while(scripts\engine\utility::is_true(level.pam_playing) || scripts\engine\utility::is_true(level.announcer_vo_playing)) {
               wait 0.1;
+            }
 
             var_02 playLoopSound(var_05);
 
-            if(!isDefined(level.jukebox_playing))
+            if(!isDefined(level.jukebox_playing)) {
               level.jukebox_playing = [];
+            }
 
-            if(!isDefined(level.jukebox_playing))
+            if(!isDefined(level.jukebox_playing)) {
               level.jukebox_playing[var_05] = [];
+            }
 
             level.jukebox_playing[var_05] = 1;
             var_02 thread earlyendon(var_02);

@@ -149,4 +149,3 @@ function_2d706436(e_player) {
     debug2dtext((800, 768, 0), "<dev string:x1a0>" + n_height, (1, 1, 1), 1, (0, 0, 0), 1, 1.2);
   }
 }
-

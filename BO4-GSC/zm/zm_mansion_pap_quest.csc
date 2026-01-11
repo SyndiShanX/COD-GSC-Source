@@ -677,4 +677,3 @@ debug_arrow(org, ang, opcolor) {
   line(org, org + right, blue, 0.9);
   line(org, org + up, green, 0.9);
 }
-

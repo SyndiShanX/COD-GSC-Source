@@ -34,8 +34,9 @@ feelgoodapachegundeath() {
   while(var_0 < level.apache_difficulty.zpu_magic_bullets) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(var_5 == "MOD_EXPLOSIVE_BULLET")
+    if(var_5 == "MOD_EXPLOSIVE_BULLET") {
       var_0++;
+    }
 
     if(var_2 == level.player) {
       break;
@@ -70,8 +71,9 @@ vehicle_zpu_think() {
 vehicle_zpu_get_target() {
   var_0 = maps\oilrocks_apache_code::get_apache_player();
 
-  if(vehicle_zpu_can_target(var_0, 3))
+  if(vehicle_zpu_can_target(var_0, 3)) {
     var_1 = var_0;
+  }
   else {
     var_2 = maps\oilrocks_apache_code::get_apaches_ally_and_player();
     var_2 = sortbydistance(var_2, self.origin);
@@ -91,26 +93,32 @@ vehicle_zpu_get_target() {
 }
 
 vehicle_zpu_can_target(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(isDefined(var_0.zpus_targeting) && var_0.zpus_targeting >= var_1)
+  if(isDefined(var_0.zpus_targeting) && var_0.zpus_targeting >= var_1) {
     return 0;
+  }
 
-  if(distancesquared(self.origin, var_0.origin) > level.apache_difficulty.zpu_range_squared)
+  if(distancesquared(self.origin, var_0.origin) > level.apache_difficulty.zpu_range_squared) {
     return 0;
+  }
 
-  if(!sighttracepassed(self.origin, var_0.origin, 0, self, var_0))
+  if(!sighttracepassed(self.origin, var_0.origin, 0, self, var_0)) {
     return 0;
+  }
 
   return 1;
 }
 
 vehicle_zpu_register_target(var_0) {
-  if(!isDefined(var_0.zpus_targeting))
+  if(!isDefined(var_0.zpus_targeting)) {
     var_0.zpus_targeting = 1;
-  else
+  }
+  else {
     var_0.zpus_targeting++;
+  }
 
   common_scripts\utility::waittill_either("death", "LISTEN_zpu_finished_targeting");
 
@@ -119,8 +127,9 @@ vehicle_zpu_register_target(var_0) {
   }
   var_0.zpus_targeting--;
 
-  if(var_0.zpus_targeting <= 0)
+  if(var_0.zpus_targeting <= 0) {
     var_0.zpus_targeting = undefined;
+  }
 }
 
 vehicle_zpu_shoot_target(var_0) {
@@ -132,8 +141,9 @@ vehicle_zpu_shoot_target(var_0) {
   var_2 = 0.05;
   var_3 = maps\oilrocks_apache_code::get_apache_player();
 
-  if(isDefined(var_3) && var_3 != var_0)
+  if(isDefined(var_3) && var_3 != var_0) {
     var_1 = 1;
+  }
 
   if(var_1) {
     var_4 = randomintrange(25, 35);
@@ -145,11 +155,13 @@ vehicle_zpu_shoot_target(var_0) {
     var_0.request_move = 1;
     var_0 notify("request_move_update");
 
-    if(var_5 % 3 == 0)
+    if(var_5 % 3 == 0) {
       playFXOnTag(self.flakfxid, self, "tag_flash");
+    }
 
-    if(var_1)
+    if(var_1) {
       playFXOnTag(self.fxid, self, "tag_flash");
+    }
 
     self fireweapon();
     wait(var_2);

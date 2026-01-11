@@ -32,12 +32,15 @@ init() {
 }
 
 play_artillery_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(issubstr(fieldname, 0))
+  if(issubstr(fieldname, 0)) {
     ai_robot = level.a_giant_robots[localclientnum][0];
-  else if(issubstr(fieldname, 1))
+  }
+  else if(issubstr(fieldname, 1)) {
     ai_robot = level.a_giant_robots[localclientnum][1];
-  else
+  }
+  else {
     ai_robot = level.a_giant_robots[localclientnum][2];
+  }
 
   if(newval == 1) {
     playFX(localclientnum, level._effect["beacon_launch_fx"], ai_robot gettagorigin("tag_rocketpod"));
@@ -69,38 +72,48 @@ play_artillery_barrage(localclientnum, oldval, newval, bnewent, binitialsnap, fi
     return;
   }
   if(newval == 1) {
-    if(!isDefined(self.a_v_land_offsets))
+    if(!isDefined(self.a_v_land_offsets)) {
       self.a_v_land_offsets = [];
+    }
 
-    if(!isDefined(self.a_v_land_offsets[localclientnum]))
+    if(!isDefined(self.a_v_land_offsets[localclientnum])) {
       self.a_v_land_offsets[localclientnum] = self build_weap_beacon_landing_offsets();
+    }
 
-    if(!isDefined(self.a_v_start_offsets))
+    if(!isDefined(self.a_v_start_offsets)) {
       self.a_v_start_offsets = [];
+    }
 
-    if(!isDefined(self.a_v_start_offsets[localclientnum]))
+    if(!isDefined(self.a_v_start_offsets[localclientnum])) {
       self.a_v_start_offsets[localclientnum] = self build_weap_beacon_start_offsets();
+    }
   }
 
   if(newval == 2) {
-    if(!isDefined(self.a_v_land_offsets))
+    if(!isDefined(self.a_v_land_offsets)) {
       self.a_v_land_offsets = [];
+    }
 
-    if(!isDefined(self.a_v_land_offsets[localclientnum]))
+    if(!isDefined(self.a_v_land_offsets[localclientnum])) {
       self.a_v_land_offsets[localclientnum] = self build_weap_beacon_landing_offsets_ee();
+    }
 
-    if(!isDefined(self.a_v_start_offsets))
+    if(!isDefined(self.a_v_start_offsets)) {
       self.a_v_start_offsets = [];
+    }
 
-    if(!isDefined(self.a_v_start_offsets[localclientnum]))
+    if(!isDefined(self.a_v_start_offsets[localclientnum])) {
       self.a_v_start_offsets[localclientnum] = self build_weap_beacon_start_offsets_ee();
+    }
   }
 
-  if(!isDefined(self.num_rockets_fired))
+  if(!isDefined(self.num_rockets_fired)) {
     self.num_rockets_fired = [];
+  }
 
-  if(!isDefined(self.num_rockets_fired[localclientnum]))
+  if(!isDefined(self.num_rockets_fired[localclientnum])) {
     self.num_rockets_fired[localclientnum] = 0;
+  }
 
   n_index = self.num_rockets_fired[localclientnum];
   v_start = self.origin + self.a_v_start_offsets[localclientnum][n_index];
@@ -182,8 +195,9 @@ shell_logic(model, index, v_start, localclientnum) {
   self thread sndplayincoming(v_land);
   self waittill("movedone");
 
-  if(index == 1)
+  if(index == 1) {
     model notify("weapon_beacon_destroyed");
+  }
 
   playFX(localclientnum, level._effect["beacon_shell_explosion"], self.origin);
   playSound(0, "zmb_homingbeacon_missile_impact", self.origin);

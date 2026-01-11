@@ -168,8 +168,9 @@ prefetch_next() {
       nextlevel_name = level.missionSettings get_level_name(nextlevel_index);
       if(issubstr(nextlevel_name, "so_narrative")) {
         nextlevel_index++;
-        if(nextlevel_index < level.missionSettings.levels.size)
+        if(nextlevel_index < level.missionSettings.levels.size) {
           prefetchLevel(level.missionSettings get_level_name(nextlevel_index));
+        }
       } else {
         prefetchLevel(nextlevel_name);
       }

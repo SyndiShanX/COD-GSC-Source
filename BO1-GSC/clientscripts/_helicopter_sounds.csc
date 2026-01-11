@@ -432,8 +432,9 @@ heli_idle_run_transition(heli_type, heli_part) {
       self waittill("play_heli_sounds");
       continue;
     }
-    if(!isDefined(run_id))
+    if(!isDefined(run_id)) {
       run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
+    }
     max_speed_vol = level.heliSoundValues[heli_type][heli_part].speedVolumeMax;
     min_vol = level.heliSoundValues[heli_type][heli_part].volumeMin;
     max_vol = level.heliSoundValues[heli_type][heli_part].volumeMax;
@@ -473,10 +474,12 @@ terrain_trace() {
   while(isDefined(self)) {
     wait(1 + RandomFloatRange(0.0, 0.2));
     if(isDefined(self.should_not_play_sounds) && self.should_not_play_sounds) {
-      if(isDefined(pre_trace_real_ent))
+      if(isDefined(pre_trace_real_ent)) {
         pre_trace_real_ent stopLoopSound();
-      if(isDefined(trace_real_ent))
+      }
+      if(isDefined(trace_real_ent)) {
         trace_real_ent stopLoopSound();
+      }
       self waittill("play_heli_sounds");
       continue;
     }
@@ -486,8 +489,9 @@ terrain_trace() {
     pre_origin = trace_ent.origin;
     trace = tracepoint(trace_ent.origin, trace_ent.origin - (0, 0, 100000));
     trace_surface_type = trace["surfacetype"];
-    if(!isDefined(trace))
+    if(!isDefined(trace)) {
       continue;
+    }
     pre_terrain = next_terrain;
     next_terrain = trace_surface_type;
     if(!isDefined(pre_terrain) || !isDefined(next_terrain)) {
@@ -509,8 +513,9 @@ terrain_trace() {
     trace_real_ent.origin = trace["position"];
     pre_trace_real_ent.origin = trace["position"];
     if(isDefined(surf_type)) {
-      if((surf_type == pre_surf_type) && (pre_trace_real_ent IsPlayingLoopSound()))
+      if((surf_type == pre_surf_type) && (pre_trace_real_ent IsPlayingLoopSound())) {
         continue;
+      }
       pre_trace_real_ent stopLoopSound(0.5);
       trace_real_ent playLoopSound(trace_real_ent.alias, 0.5);
     }

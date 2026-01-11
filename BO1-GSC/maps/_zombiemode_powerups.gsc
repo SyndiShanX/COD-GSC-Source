@@ -657,8 +657,9 @@ get_closest_window_repair(windows, origin) {
   current_window = undefined;
   shortest_distance = undefined;
   for(i = 0; i < windows.size; i++) {
-    if(all_chunks_intact(windows[i].barrier_chunks))
+    if(all_chunks_intact(windows[i].barrier_chunks)) {
       continue;
+    }
     if(!isDefined(current_window)) {
       current_window = windows[i];
       shortest_distance = distanceSquared(current_window.origin, origin);

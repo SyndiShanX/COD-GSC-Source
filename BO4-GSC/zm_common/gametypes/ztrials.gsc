@@ -344,4 +344,3 @@ private function_9a6b2309() {
     waitframe(1);
   }
 }
-

@@ -22,8 +22,9 @@ init_stage() {
 stage_logic() {
   iprintlnbold("LL Started");
 
-  if(!isDefined(level.generator_power_states_color))
+  if(!isDefined(level.generator_power_states_color)) {
     level.generator_power_states_color = 0;
+  }
 
   sq_ll_show_code();
   wait_network_frame();
@@ -37,19 +38,22 @@ sq_ll_show_code() {
 
   foreach(m_sign in a_signs) {
     if(flag("sq_is_max_tower_built")) {
-      if(isDefined(m_sign.is_max_sign))
+      if(isDefined(m_sign.is_max_sign)) {
         a_codes[a_codes.size] = m_sign.model + "_code";
+      }
 
       continue;
     }
 
-    if(isDefined(m_sign.is_ric_sign))
+    if(isDefined(m_sign.is_ric_sign)) {
       a_codes[a_codes.size] = m_sign.model + "_code";
+    }
   }
 
   for(i = 0; i < a_codes.size; i++) {
-    if(a_codes[i] == "p6_zm_bu_sign_tunnel_consumption_code")
+    if(a_codes[i] == "p6_zm_bu_sign_tunnel_consumption_code") {
       a_codes[i] = "p6_zm_bu_sign_tunnel_consump_code";
+    }
   }
 
   for(i = 0; i < a_codes.size; i++) {
@@ -58,10 +62,12 @@ sq_ll_show_code() {
     m_code setModel(a_codes[i]);
   }
 
-  if(flag("sq_is_max_tower_built"))
+  if(flag("sq_is_max_tower_built")) {
     level thread sq_ll_show_code_vo_max();
-  else
+  }
+  else {
     level thread sq_ll_show_code_vo_ric();
+  }
 }
 
 exit_stage(success) {

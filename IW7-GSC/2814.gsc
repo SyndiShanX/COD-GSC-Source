@@ -64,13 +64,15 @@ func_13EFA(var_00) {
     var_04 = distance(var_1.origin, var_2[var_03].origin) / 600;
     var_05 = 0.0;
 
-    if(var_03 == 0)
+    if(var_03 == 0) {
       var_05 = var_04 * 0.2;
+    }
 
     var_01 moveto(var_2[var_03].origin, var_04, var_05);
 
-    if(var_1.angles != var_2[var_03].angles)
+    if(var_1.angles != var_2[var_03].angles) {
       var_01 rotateto(var_2[var_03].angles, var_04 * 0.8);
+    }
 
     wait(var_04);
   }

@@ -90,8 +90,9 @@ aud_init_animation_sounds() {
 aud_gear_sounds() {
   var_0 = getaiarray("allies");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 setclothtype("cloth type");
+  }
 }
 
 checkpoint_start_ambush() {
@@ -930,8 +931,9 @@ pa_announcements_interior_combat_thread(var_0, var_1) {
   while(!common_scripts\utility::flag("aud_stop_interior_combat_pa")) {
     var_8 = get_closest_speaker_nodes(var_2);
 
-    foreach(var_6, var_10 in var_4)
+    foreach(var_6, var_10 in var_4) {
     var_10.origin = var_8[var_6].origin;
+    }
 
     if(gettime() > var_5.delay && !var_5.waiting_for_sound) {
       if(distancesquared(level.player.origin, var_8[0].origin) > var_3) {
@@ -942,8 +944,9 @@ pa_announcements_interior_combat_thread(var_0, var_1) {
       var_11 = var_7 % var_1.size;
       var_7++;
 
-      if(var_11 == 0)
+      if(var_11 == 0) {
         var_1 = common_scripts\utility::array_randomize(var_1);
+      }
 
       var_5 thread speaker_playSound(var_4, var_1[var_11]);
     }
@@ -971,8 +974,9 @@ pa_announcements_cqb_thread(var_0, var_1) {
   while(!common_scripts\utility::flag("aud_defend_started")) {
     var_8 = get_closest_speaker_nodes(var_2);
 
-    foreach(var_6, var_10 in var_4)
+    foreach(var_6, var_10 in var_4) {
     var_10.origin = var_8[var_6].origin;
+    }
 
     if(gettime() > var_5.delay && !var_5.waiting_for_sound) {
       if(distancesquared(level.player.origin, var_8[0].origin) > var_3) {
@@ -983,8 +987,9 @@ pa_announcements_cqb_thread(var_0, var_1) {
       var_11 = var_7 % var_1.size;
       var_7++;
 
-      if(var_11 == 0)
+      if(var_11 == 0) {
         var_1 = common_scripts\utility::array_randomize(var_1);
+      }
 
       var_5 thread speaker_playSound(var_4, var_1[var_11]);
     }
@@ -1012,8 +1017,9 @@ pa_announcements_chaos_thread(var_0, var_1) {
   while(!common_scripts\utility::flag("aud_kill_idle")) {
     var_8 = get_closest_speaker_nodes(var_2);
 
-    foreach(var_6, var_10 in var_4)
+    foreach(var_6, var_10 in var_4) {
     var_10.origin = var_8[var_6].origin;
+    }
 
     if(gettime() > var_5.delay && !var_5.waiting_for_sound) {
       if(distancesquared(level.player.origin, var_8[0].origin) > var_3) {
@@ -1024,8 +1030,9 @@ pa_announcements_chaos_thread(var_0, var_1) {
       var_11 = var_7 % var_1.size;
       var_7++;
 
-      if(var_11 == 0)
+      if(var_11 == 0) {
         var_1 = common_scripts\utility::array_randomize(var_1);
+      }
 
       var_5 thread speaker_playSound(var_4, var_1[var_11]);
     }
@@ -1037,8 +1044,9 @@ pa_announcements_chaos_thread(var_0, var_1) {
 speaker_playSound(var_0, var_1) {
   self.waiting_for_sound = 1;
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 playSound(var_1, "sounddone");
+  }
 
   var_0[0] waittill("sounddone");
   self.waiting_for_sound = 0;
@@ -1063,19 +1071,22 @@ get_closest_speaker_nodes(var_0) {
   var_4 = common_scripts\utility::getstruct(var_2.targetname, "target");
   var_5 = undefined;
 
-  if(isDefined(var_2.target))
+  if(isDefined(var_2.target)) {
     var_5 = common_scripts\utility::getstruct(var_2.target, "targetname");
+  }
 
   var_1 = 64000000;
   var_6 = [var_2];
   var_7 = undefined;
   var_8 = [];
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_8[var_8.size] = var_4;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_8[var_8.size] = var_5;
+  }
 
   if(var_8.size > 0) {
     var_1 = distancesquared(level.player.origin, var_8[0].origin);
@@ -1091,8 +1102,9 @@ get_closest_speaker_nodes(var_0) {
     }
   }
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_6[var_6.size] = var_7;
+  }
 
   return var_6;
 }
@@ -1522,8 +1534,9 @@ chase_land_roof(var_0) {
   thread chase_pileup_counter();
   thread chase_pileup_counter();
 
-  if(level.pileupcounter > 4)
+  if(level.pileupcounter > 4) {
     thread pileup(var_0);
+  }
 
   if(!common_scripts\utility::flag("aud_land_roof_playing")) {
     thread common_scripts\utility::play_sound_in_space("clkw_scn_chase_land_roof", var_0);
@@ -1537,15 +1550,17 @@ chase_leftground(var_0) {
   thread chase_pileup_counter();
   thread chase_pileup_counter();
 
-  if(level.pileupcounter > 8)
+  if(level.pileupcounter > 8) {
     thread pileup(var_0);
+  }
 
   if(!common_scripts\utility::flag("aud_leftground_playing")) {
     thread common_scripts\utility::play_sound_in_space("clkw_scn_chase_leftground", var_0);
     var_1 = randomint(2);
 
-    if(var_1 == 1)
+    if(var_1 == 1) {
       thread common_scripts\utility::play_sound_in_space("clockwork_chase_scream", var_0);
+    }
 
     common_scripts\utility::flag_set("aud_leftground_playing");
     wait 1;
@@ -1556,8 +1571,9 @@ chase_leftground(var_0) {
 chase_collision(var_0) {
   thread chase_pileup_counter();
 
-  if(level.pileupcounter > 15)
+  if(level.pileupcounter > 15) {
     thread pileup(var_0);
+  }
 
   if(!common_scripts\utility::flag("aud_collision_playing")) {
     thread common_scripts\utility::play_sound_in_space("clkw_scn_chase_collision", var_0);
@@ -1572,8 +1588,9 @@ chase_sm_leftground(var_0) {
     thread common_scripts\utility::play_sound_in_space("clkw_scn_chase_leftground", var_0);
     var_1 = randomint(2);
 
-    if(var_1 == 1)
+    if(var_1 == 1) {
       thread common_scripts\utility::play_sound_in_space("clockwork_chase_scream", var_0);
+    }
 
     common_scripts\utility::flag_set("aud_leftground_playing");
     wait 1;
@@ -1582,8 +1599,9 @@ chase_sm_leftground(var_0) {
 }
 
 chase_sm_collision(var_0) {
-  if(!common_scripts\utility::flag("aud_collision_playing"))
+  if(!common_scripts\utility::flag("aud_collision_playing")) {
     thread common_scripts\utility::play_sound_in_space("clkw_scn_chase_sm_collision", var_0);
+  }
 }
 
 pileup(var_0) {
@@ -1592,8 +1610,9 @@ pileup(var_0) {
       thread common_scripts\utility::play_sound_in_space("clkw_scn_chase_pileup_04", var_0);
       var_1 = randomint(2);
 
-      if(var_1 == 1)
+      if(var_1 == 1) {
         thread common_scripts\utility::play_sound_in_space("clockwork_chase_scream", var_0);
+      }
 
       common_scripts\utility::flag_set("aud_pileup_playing");
       wait 6;
@@ -1603,8 +1622,9 @@ pileup(var_0) {
       thread common_scripts\utility::play_sound_in_space("clkw_scn_chase_pileup_02", var_0);
       var_1 = randomint(2);
 
-      if(var_1 == 1)
+      if(var_1 == 1) {
         thread common_scripts\utility::play_sound_in_space("clockwork_chase_scream", var_0);
+      }
 
       common_scripts\utility::flag_set("aud_pileup_playing");
       wait 6;
@@ -1614,8 +1634,9 @@ pileup(var_0) {
       thread common_scripts\utility::play_sound_in_space("clkw_scn_chase_pileup_03", var_0);
       var_1 = randomint(2);
 
-      if(var_1 == 1)
+      if(var_1 == 1) {
         thread common_scripts\utility::play_sound_in_space("clockwork_chase_scream", var_0);
+      }
 
       common_scripts\utility::flag_set("aud_pileup_playing");
       wait 6;
@@ -1625,8 +1646,9 @@ pileup(var_0) {
       thread common_scripts\utility::play_sound_in_space("clkw_scn_chase_pileup_01", var_0);
       var_1 = randomint(2);
 
-      if(var_1 == 1)
+      if(var_1 == 1) {
         thread common_scripts\utility::play_sound_in_space("clockwork_chase_scream", var_0);
+      }
 
       common_scripts\utility::flag_set("aud_pileup_playing");
       wait 6;

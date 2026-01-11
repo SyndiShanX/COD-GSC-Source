@@ -97,8 +97,9 @@ func_1080D(var_00) {
 func_1080F(var_00) {
   var_01 = func_1080E(var_00);
 
-  foreach(var_03 in var_01)
+  foreach(var_03 in var_01) {
   thread scripts\sp\vehicle_paths::setsuit(var_03);
+  }
 
   return var_01;
 }
@@ -120,8 +121,9 @@ func_9BC7() {
 }
 
 func_1320F(var_00, var_01, var_02) {
-  if(!isarray(var_00))
+  if(!isarray(var_00)) {
     var_00 = [var_00];
+  }
 
   scripts\sp\vehicle_aianim::func_ADA7(var_00, undefined, var_02);
 }
@@ -130,8 +132,9 @@ func_1080B() {
   var_00 = scripts\sp\utility::func_10808();
 
   if(isDefined(self.script_speed)) {
-    if(!func_9E2C())
+    if(!func_9E2C()) {
       var_00 _meth_83F4(self.script_speed);
+    }
   }
 
   thread scripts\sp\vehicle_paths::setsuit(var_00);
@@ -153,8 +156,9 @@ func_2471(var_00) {
   self vehicle_teleport(var_0.origin, var_0.angles);
   scripts\engine\utility::waitframe();
 
-  if(!func_9E2C())
+  if(!func_9E2C()) {
     self attachpath(var_00);
+  }
 
   thread func_1321A(var_00);
   scripts\sp\vehicle_paths::setsuit(self);
@@ -164,18 +168,21 @@ func_131DF(var_00) {
   var_01 = [];
   var_02 = self.classname;
 
-  if(!isDefined(level.vehicle.func_116CE.func_12BCF[var_02]))
+  if(!isDefined(level.vehicle.func_116CE.func_12BCF[var_02])) {
     return var_01;
+  }
 
   var_03 = level.vehicle.func_116CE.func_12BCF[var_02];
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return var_01;
+  }
 
   foreach(var_05 in self.func_E4FB) {
     foreach(var_07 in var_3[var_00]) {
-      if(var_5.func_1321D == var_07)
+      if(var_5.func_1321D == var_07) {
         var_1[var_1.size] = var_05;
+      }
     }
   }
 
@@ -195,8 +202,9 @@ func_131DD() {
   var_00 = [];
   var_01 = self.func_247E;
 
-  if(!isDefined(self.func_247E))
+  if(!isDefined(self.func_247E)) {
     return var_00;
+  }
 
   var_02 = var_01;
   var_2.func_46B3 = 0;
@@ -223,8 +231,9 @@ func_131DD() {
 }
 
 func_1320C(var_00, var_01) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = "all";
+  }
 
   scripts\sp\vehicle_lights::lights_on(var_00, var_01);
 }
@@ -256,8 +265,9 @@ func_9D34() {
 }
 
 func_3182(var_00) {
-  if(!isDefined(level.vehicle.func_116CE.func_4E12))
+  if(!isDefined(level.vehicle.func_116CE.func_4E12)) {
     level.vehicle.func_116CE.func_4E12 = [];
+  }
 
   var_01 = spawnStruct();
   var_1.delay = var_00;

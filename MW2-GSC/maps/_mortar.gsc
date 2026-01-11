@@ -9,11 +9,13 @@
 main() {
   /*
   mortars = getentarray ("mortar","targetname");
-  for(i=0;i<mortars.size;i++)
+  for(i=0;i<mortars.size;i++) {
   	mortars[i] thread burnville_style_mortar();
+  }
 
-  if( !(isdefined (level.mortar) ) )
+  if( !(isdefined (level.mortar) ) ) {
   	error ("level.mortar not defined. define in level script");
+  }
 	
   thread generic_style_init();
   */
@@ -28,8 +30,9 @@ hurtgen_style() {
   for(i = 0; i < mortars.size; i++) {
     mortars[i] setup_mortar_terrain();
   }
-  if(!(isDefined(level.mortar)))
+  if(!(isDefined(level.mortar))) {
     error("level.mortar not defined. define in level script");
+  }
 
   level waittill("start_mortars");
 
@@ -44,15 +47,18 @@ hurtgen_style() {
       //println ("current number: ", c);
       d = distance(level.player getorigin(), mortars[c].origin);
       d2 = undefined;
-      if(isDefined(level.foley))
+      if(isDefined(level.foley)) {
         d2 = distance(level.foley.origin, mortars[c].origin);
-      else
+      }
+      else {
         d2 = 360;
+      }
       if((d < 1600) && (d > 400) && (d2 > 350) && (c != lastmortar)) {
         mortars[c] activate_mortar(400, 300, 25, undefined, undefined, undefined, false);
         lastmortar = c;
-        if(d < 500)
+        if(d < 500) {
           maps\_shellshock::main(4);
+        }
         //					level.player shellshock("default", 4);
         break;
       }
@@ -66,15 +72,19 @@ railyard_style(fRandomtime, iMaxRange, iMinRange, iBlastRadius, iDamageMax, iDam
   // Pass optional custom radius damage settings to activate_mortar()
   // Also pass optional custom earthquake settings to mortar_boom() via activate_mortar() if you want more shaking
 
-  if(!isDefined(fRandomtime))
+  if(!isDefined(fRandomtime)) {
     fRandomtime = 7;
-  if(!isDefined(iMaxRange))
+  }
+  if(!isDefined(iMaxRange)) {
     iMaxRange = 2200;
-  if(!isDefined(iMinRange))
+  }
+  if(!isDefined(iMinRange)) {
     iMinRange = 300;
+  }
 
-  if(!isDefined(level.iStopBarrage))
+  if(!isDefined(level.iStopBarrage)) {
     level.iStopBarrage = 0;
+  }
 
   if(!isDefined(targetsUsed)) // this allows railyard_style to get called again and not setup any terrain related stuff
     targetsUsed = 0;
@@ -88,15 +98,18 @@ railyard_style(fRandomtime, iMaxRange, iMinRange, iBlastRadius, iDamageMax, iDam
       mortars[i] setup_mortar_terrain();
     }
   }
-  if(!(isDefined(level.mortar)))
+  if(!(isDefined(level.mortar))) {
     error("level.mortar not defined. define in level script");
+  }
 
-  if(isDefined(level.mortar_notify))
+  if(isDefined(level.mortar_notify)) {
     level waittill(level.mortar_notify);
+  }
 
   for(;;) {
-    if(level.iStopBarrage != 0)
+    if(level.iStopBarrage != 0) {
       wait 1;
+    }
     while(level.iStopBarrage == 0) {
       if(isDefined(seedtime)) {
         wait(seedtime + (randomfloat(fRandomtime) + randomfloat(fRandomtime)));
@@ -128,18 +141,22 @@ script_mortargroup_style() {
   mortartrigs = [];
   level.mortars = [];
   models = getEntArray("script_model", "classname");
-  for(i = 0; i < models.size; i++)
+  for(i = 0; i < models.size; i++) {
     if(isDefined(models[i].script_mortargroup)) {
-      if(!isDefined(level.mortars[models[i].script_mortargroup]))
+  }
+      if(!isDefined(level.mortars[models[i].script_mortargroup])) {
         level.mortars[models[i].script_mortargroup] = [];
+      }
 
       mortar = spawnStruct();
       mortar.origin = models[i].origin;
       mortar.angles = models[i].angles;
-      if(isDefined(models[i].targetname))
+      if(isDefined(models[i].targetname)) {
         mortar.targetname = models[i].targetname;
-      if(isDefined(models[i].target))
+      }
+      if(isDefined(models[i].target)) {
         mortar.target = models[i].target;
+      }
       level.mortars[models[i].script_mortargroup]
         [level.mortars[models[i].script_mortargroup].size] = mortar;
       models[i] delete();
@@ -152,14 +169,17 @@ script_mortargroup_style() {
     //		mortars[i] setup_mortar_terrain(); 		// this was commented out going to run it and find out just why
     mortars[i].has_terrain = false;
   }
-  if(!(isDefined(level.mortar)))
+  if(!(isDefined(level.mortar))) {
     level.mortar = loadfx("explosions/artilleryExp_dirt_brown");
+  }
 
   triggers = array_combine(getEntArray("trigger_multiple", "classname"), getEntArray("trigger_radius", "classname"));
-  for(i = 0; i < triggers.size; i++)
+  for(i = 0; i < triggers.size; i++) {
     if(isDefined(triggers[i].script_mortargroup)) {
-      if(!isDefined(level.mortars[triggers[i].script_mortargroup]))
+  }
+      if(!isDefined(level.mortars[triggers[i].script_mortargroup])) {
         level.mortars[triggers[i].script_mortargroup] = [];
+      }
       mortartrigs[mortartrigs.size] = triggers[i];
 
     }
@@ -171,8 +191,9 @@ script_mortargroup_style() {
   lasttrig = undefined;
   while(1) {
     level waittill("mortarzone", mortartrig);
-    if(isDefined(lasttrig))
+    if(isDefined(lasttrig)) {
       lasttrig notify("wait again");
+    }
     level.mortarzone = mortartrig.script_mortargroup;
     mortartrig thread script_mortargroup_mortarzone();
     lasttrig = mortartrig;
@@ -189,15 +210,19 @@ script_mortargroup_mortarzone() {
     timer = gettime() + self.script_timer * 1000;
     timed = true;
   }
-  if(isDefined(self.script_radius))
+  if(isDefined(self.script_radius)) {
     mortar_radius = self.script_radius;
-  else
+  }
+  else {
     mortar_radius = 0;
+  }
 
-  if(isDefined(self.script_delay_min) && isDefined(self.script_delay_max))
+  if(isDefined(self.script_delay_min) && isDefined(self.script_delay_max)) {
     customdelay = true;
-  else
+  }
+  else {
     customdelay = false;
+  }
 
   count = 0;
   nonbarragesize = 2;
@@ -237,20 +262,25 @@ script_mortargroup_mortarzone() {
       playerforward = anglesToForward(level.player.angles);
       points = [];
       for(i = 0; i < level.mortars[self.script_mortargroup].size; i++) {
-        if(mortar_radius > 0 && distance(level.player.origin, level.mortars[self.script_mortargroup][i].origin) > mortar_radius)
+        if(mortar_radius > 0 && distance(level.player.origin, level.mortars[self.script_mortargroup][i].origin) > mortar_radius) {
           continue;
-        if(is_lastblast(level.mortars[self.script_mortargroup][i], lastblast))
+        }
+        if(is_lastblast(level.mortars[self.script_mortargroup][i], lastblast)) {
           continue;
+        }
         normalvec = vectornormalize(level.mortars[self.script_mortargroup][i].origin - level.player.origin);
-        if(vectordot(playerforward, normalvec) > 0.3)
+        if(vectordot(playerforward, normalvec) > 0.3) {
           points[points.size] = i;
+        }
 
       }
-      if(points.size > 0)
+      if(points.size > 0) {
         pick = points[randomint(points.size)];
+      }
     }
-    if(lastblast.size > 3)
+    if(lastblast.size > 3) {
       lastblast = [];
+    }
     lastblast[lastblast.size] = level.mortars[self.script_mortargroup][pick];
     level.mortars[self.script_mortargroup][pick] thread script_mortargroup_domortar();
     //		self.groupedmortars = array_remove(self.groupedmortars,self.groupedmortars[pick]);
@@ -270,30 +300,35 @@ script_mortargroup_mortarzone() {
 }
 
 is_lastblast(mortar, lastblast) {
-  for(i = 0; i < lastblast.size; i++)
+  for(i = 0; i < lastblast.size; i++) {
     if(mortar == lastblast[i])
+  }
       return true;
   return false;
 }
 
 script_mortargroup_domortar() {
-  if(isDefined(self.targetname) && isDefined(level.mortarthread[self.targetname]))
+  if(isDefined(self.targetname) && isDefined(level.mortarthread[self.targetname])) {
     level thread[[level.mortarthread[self.targetname]]](self);
-  else
+  }
+  else {
     self thread activate_mortar(undefined, undefined, undefined, undefined, undefined, undefined, true);
+  }
   self waittill("mortar");
   if(isDefined(self.target)) {
     targ = getent(self.target, "targetname");
-    if(isDefined(targ))
+    if(isDefined(targ)) {
       targ notify("trigger");
+    }
   }
 }
 
 script_mortargroup_mortar_group() {
   while(1) {
     self waittill("trigger");
-    if(isDefined(level.mortarzone) && level.mortarzone == self.script_mortargroup)
+    if(isDefined(level.mortarzone) && level.mortarzone == self.script_mortargroup) {
       continue;
+    }
     level notify("mortarzone", self);
     self waittill("wait again");
 
@@ -315,8 +350,9 @@ trigger_targeted() {
 
   level.lastmortar = -1;
 
-  if(!(isDefined(level.mortar)))
+  if(!(isDefined(level.mortar))) {
     error("level.mortar not defined. define in level script");
+  }
 
   for(i = 0; i < level.mortartrigger.size; i++) {
     thread trigger_targeted_mortars(i);
@@ -352,21 +388,25 @@ bunker_style_mortar() {
   groupNum = [];
   structs = getstructarray("mortar_bunker", "targetname");
   trigs = getEntArray("mortar_bunker", "targetname");
-  if((isDefined(trigs)) && (trigs.size > 0))
+  if((isDefined(trigs)) && (trigs.size > 0)) {
     ents = array_merge(structs, trigs);
-  else
+  }
+  else {
     ents = structs;
+  }
   assert(isDefined(ents));
   assert(ents.size > 0);
   for(i = 0; i < ents.size; i++) {
-    if(!isDefined(ents[i].script_mortargroup))
+    if(!isDefined(ents[i].script_mortargroup)) {
       continue;
+    }
 
     index = -1;
     groupNumber = int(ents[i].script_mortargroup);
     for(p = 0; p < mortar_bunker_array.size; p++) {
-      if(groupNumber != groupNum[p])
+      if(groupNumber != groupNum[p]) {
         continue;
+      }
 
       index = p;
       break;
@@ -382,8 +422,9 @@ bunker_style_mortar() {
     mortar_bunker_array[index][mortar_bunker_array[index].size] = ents[i];
   }
 
-  for(i = 0; i < mortar_bunker_array.size; i++)
+  for(i = 0; i < mortar_bunker_array.size; i++) {
     thread bunker_style_mortar_think(mortar_bunker_array[i], structs);
+  }
 
   wait 0.05;
 
@@ -394,14 +435,18 @@ bunker_style_mortar() {
 bunker_style_mortar_think(mortar_bunker_array, structs) {
   min = undefined;
   max = undefined;
-  if(isDefined(level.mortarMinInterval))
+  if(isDefined(level.mortarMinInterval)) {
     min = level.mortarMinInterval;
-  else
+  }
+  else {
     min = 4;
-  if(isDefined(level.mortarMaxInterval))
+  }
+  if(isDefined(level.mortarMaxInterval)) {
     max = level.mortarMaxInterval;
-  else
+  }
+  else {
     max = 6;
+  }
   groupNum = int(mortar_bunker_array[0].script_mortargroup);
 
   for(;;) {
@@ -424,10 +469,12 @@ bunker_style_mortar_activate(mortar_bunker_array, min, max, groupNum, structs) {
     thread play_sound_in_space("exp_artillery_underground", sound_org.origin);
     array_thread(mortar_bunker_array, ::bunker_style_mortar_explode);
     if(!isDefined(level.mortarNoQuake)) {
-      if(cointoss())
+      if(cointoss()) {
         earthquake(0.20, 1.5, sound_org.origin, 1250);
-      else
+      }
+      else {
         earthquake(0.35, 2.75, sound_org.origin, 1250);
+      }
     }
     level notify("mortar_hit");
     wait(randomfloatrange(min, max));
@@ -436,27 +483,32 @@ bunker_style_mortar_activate(mortar_bunker_array, min, max, groupNum, structs) {
 }
 
 bunker_style_mortar_explode(min, max) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   /*-----------------------
   ONLY PLAY EFFECT/ACTIVATE TRIGGER IF WITHIN PLAYER FOV
   -------------------------*/
-  if((isDefined(level.mortarWithinFOV)) && (self mortar_within_player_fov(level.mortarWithinFOV) == false))
+  if((isDefined(level.mortarWithinFOV)) && (self mortar_within_player_fov(level.mortarWithinFOV) == false)) {
     return;
+  }
 
   /*-----------------------
   ONLY PLAY EFFECT/ACTIVATE TRIGGER IF WITHIN RADIUS
   -------------------------*/
-  if(isDefined(level.mortar_min_dist))
+  if(isDefined(level.mortar_min_dist)) {
     min_dist = level.mortar_min_dist;
-  else
+  }
+  else {
     min_dist = 1024;
+  }
 
   min_dist_squared = min_dist * min_dist;
   distSquared = distancesquared(level.player.origin, self.origin);
-  if(distSquared > min_dist_squared)
+  if(distSquared > min_dist_squared) {
     return;
+  }
 
   /*-----------------------
   IF IT'S A TRIGGER RADIUS, DO DAMAGE TO BUST UP DESTRUCTIBLES
@@ -494,14 +546,16 @@ bog_style_mortar() {
   assert(isDefined(structs));
   assert(structs.size > 0);
   for(i = 0; i < structs.size; i++) {
-    if(!isDefined(structs[i].script_mortargroup))
+    if(!isDefined(structs[i].script_mortargroup)) {
       continue;
+    }
 
     index = -1;
     groupNumber = int(structs[i].script_mortargroup);
     for(p = 0; p < groups.size; p++) {
-      if(groupNumber != groupNum[p])
+      if(groupNumber != groupNum[p]) {
         continue;
+      }
 
       index = p;
       break;
@@ -517,8 +571,9 @@ bog_style_mortar() {
     groups[index][groups[index].size] = structs[i];
   }
 
-  for(i = 0; i < groups.size; i++)
+  for(i = 0; i < groups.size; i++) {
     thread bog_style_mortar_think(groups[i]);
+  }
 
   wait 0.05;
 
@@ -529,14 +584,18 @@ bog_style_mortar() {
 bog_style_mortar_think(mortars, groupNum) {
   min = undefined;
   max = undefined;
-  if(isDefined(level.mortarMinInterval))
+  if(isDefined(level.mortarMinInterval)) {
     min = level.mortarMinInterval;
-  else
+  }
+  else {
     min = 0.5;
-  if(isDefined(level.mortarMaxInterval))
+  }
+  if(isDefined(level.mortarMaxInterval)) {
     max = level.mortarMaxInterval;
-  else
+  }
+  else {
     max = 3;
+  }
   groupNum = int(mortars[0].script_mortargroup);
   for(;;) {
     level waittill("start_mortars " + groupNum);
@@ -548,10 +607,12 @@ bog_style_mortar_activate(mortars, groupNum, min, max) {
   level endon("start_mortars " + groupNum);
   level endon("stop_mortars " + groupNum);
 
-  if(isDefined(level.mortar_min_dist))
+  if(isDefined(level.mortar_min_dist)) {
     min_dist = level.mortar_min_dist;
-  else
+  }
+  else {
     min_dist = 300;
+  }
 
   //trigger used to check if friendlies is too close (if level.mortarExcluders is defined)
   mortarDistanceTrigger = spawn("trigger_radius", (0, 0, 0), 0, min_dist, 256);
@@ -561,32 +622,39 @@ bog_style_mortar_activate(mortars, groupNum, min, max) {
     for(;;) {
       wait 0.05;
       rand = randomint(mortars.size);
-      if(isDefined(mortars[rand].cooldown))
+      if(isDefined(mortars[rand].cooldown)) {
         continue;
+      }
       //don't trigger mortar if player too close
       d = distance(level.player.origin, mortars[rand].origin);
-      if(d < min_dist)
+      if(d < min_dist) {
         continue;
+      }
 
       //don't trigger mortar in case we have friendlies we do not want to be hit by mortars
       if((isDefined(level.mortarExcluders)) && (level.mortarExcluders.size > 0)) {
         mortarDistanceTrigger.origin = mortars[rand].origin; //trigger_radius used to determine if level.mortarExcluders are too close to detonate
-        if(mortars_too_close(level.mortarExcluders, mortarDistanceTrigger))
+        if(mortars_too_close(level.mortarExcluders, mortarDistanceTrigger)) {
           continue;
+        }
       }
 
       // in case we need to see mortars in the distance
-      if(!isDefined(level.noMaxMortarDist) && (d > 1000))
+      if(!isDefined(level.noMaxMortarDist) && (d > 1000)) {
         continue;
-      if((isDefined(level.mortar_max_dist)) && (d > level.mortar_max_dist))
+      }
+      if((isDefined(level.mortar_max_dist)) && (d > level.mortar_max_dist)) {
         continue;
+      }
       //if we need to check player FOV
-      if((isDefined(level.mortarWithinFOV)) && (mortars[rand] mortar_within_player_fov(level.mortarWithinFOV) == false))
+      if((isDefined(level.mortarWithinFOV)) && (mortars[rand] mortar_within_player_fov(level.mortarWithinFOV) == false)) {
         continue;
+      }
       break;
     }
-    if((isDefined(level.noMortars)) && (level.noMortars == true))
+    if((isDefined(level.noMortars)) && (level.noMortars == true)) {
       return;
+    }
     mortars[rand] thread bog_style_mortar_explode();
 
     wait(min + randomfloat(max - min));
@@ -600,12 +668,15 @@ bog_style_mortar_cleanup(mortarDistanceTrigger, groupNum) {
 
 mortars_too_close(mortarExcluders, mortarDistanceTrigger) {
   foreach(guy in level.mortarExcluders) {
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
-    if(!isDefined(guy))
+    }
+    if(!isDefined(guy)) {
       continue;
-    if(guy istouching(mortarDistanceTrigger))
+    }
+    if(guy istouching(mortarDistanceTrigger)) {
       return true;
+    }
   }
 
   return false;
@@ -614,26 +685,32 @@ mortars_too_close(mortarExcluders, mortarDistanceTrigger) {
 mortar_within_player_fov(fov) {
   playerEye = level.player getEye();
   playerMortarFovOffset = (0, 0, 0);
-  if(isDefined(level.playerMortarFovOffset))
+  if(isDefined(level.playerMortarFovOffset)) {
     playerMortarFovOffset = level.playerMortarFovOffset;
+  }
 
   bInFOV = within_fov(playerEye, level.player getPlayerAngles() + playerMortarFovOffset, self.origin, fov);
   return bInFOV;
 }
 
 bog_style_mortar_explode(instant, customExploSound) {
-  if(!isDefined(level.mortarDamageRadius))
+  if(!isDefined(level.mortarDamageRadius)) {
     level.mortarDamageRadius = 250;
-  if(!isDefined(instant))
+  }
+  if(!isDefined(instant)) {
     instant = false;
+  }
 
   self thread bog_style_mortar_cooldown();
-  if(!instant)
+  if(!instant) {
     self play_sound_in_space(level.scr_sound["mortar"]["incomming"]);
-  if(isDefined(customExploSound))
+  }
+  if(isDefined(customExploSound)) {
     self thread play_sound_in_space(customExploSound);
-  else
+  }
+  else {
     self thread play_sound_in_space(level.scr_sound["mortar"][self.script_fxid]);
+  }
 
   //dont play an effect if it's behind the player - trying to save on particle effects
   setplayerignoreradiusdamage(true);
@@ -647,8 +724,9 @@ bog_style_mortar_explode(instant, customExploSound) {
 
   if(getdvarint("bog_camerashake") > 0) {
     //if player is trying to snipe dont do view shake
-    if((level.player getCurrentWeapon() == "dragunov") && (level.player playerADS() > 0.8))
+    if((level.player getCurrentWeapon() == "dragunov") && (level.player playerADS() > 0.8)) {
       return;
+    }
     earthquake(0.25, 0.75, self.origin, 1250);
   }
 }
@@ -664,10 +742,12 @@ bog_style_mortar_trigger(value) {
 
   self waittill("trigger");
 
-  if(value == "on")
+  if(value == "on") {
     bog_style_mortar_on(self.script_mortargroup);
-  else if(value == "off")
+  }
+  else if(value == "off") {
     bog_style_mortar_off(self.script_mortargroup);
+  }
 }
 
 bog_style_mortar_on(groupNum) {
@@ -679,10 +759,12 @@ bog_style_mortar_off(groupNum) {
 }
 
 bunker_style_mortar_on(groupNum) {
-  if(!isDefined(level.mortarDamageTriggerDist))
+  if(!isDefined(level.mortarDamageTriggerDist)) {
     level.mortarDamageTriggerDist = 512;
-  if(!isDefined(level.mortarWithinFOV))
+  }
+  if(!isDefined(level.mortarWithinFOV)) {
     level.mortarWithinFOV = cos(35);
+  }
 
   level notify("start_mortars " + groupNum);
 }
@@ -701,10 +783,12 @@ bunker_style_mortar_trigger(value) {
 
   self waittill("trigger");
 
-  if(value == "on")
+  if(value == "on") {
     bunker_style_mortar_on(self.script_mortargroup);
-  else if(value == "off")
+  }
+  else if(value == "off") {
     bunker_style_mortar_off(self.script_mortargroup);
+  }
 }
 
 burnville_style_mortar() {
@@ -745,23 +829,29 @@ setup_mortar_terrain() {
     println("z:mortar entity has no target: ", self.origin);
   }
 
-  if(!isDefined(self.terrain))
+  if(!isDefined(self.terrain)) {
     println("z:mortar entity has target, but target doesnt exist: ", self.origin);
+  }
 
   if(isDefined(self.script_hidden)) {
-    if(isDefined(self.script_hidden))
+    if(isDefined(self.script_hidden)) {
       self.hidden_terrain = getent(self.script_hidden, "targetname");
-    else if((isDefined(self.terrain)) && (isDefined(self.terrain[0].target)))
+    }
+    else if((isDefined(self.terrain)) && (isDefined(self.terrain[0].target))) {
       self.hidden_terrain = getent(self.terrain[0].target, "targetname");
+    }
 
-    if(isDefined(self.hidden_terrain))
+    if(isDefined(self.hidden_terrain)) {
       self.hidden_terrain hide();
+    }
   } else if(isDefined(self.has_terrain)) {
-    if((isDefined(self.terrain)) && (isDefined(self.terrain[0].target)))
+    if((isDefined(self.terrain)) && (isDefined(self.terrain[0].target))) {
       self.hidden_terrain = getent(self.terrain[0].target, "targetname");
+    }
 
-    if(isDefined(self.hidden_terrain))
+    if(isDefined(self.hidden_terrain)) {
       self.hidden_terrain hide();
+    }
   }
 
 }
@@ -778,55 +868,69 @@ activate_mortar(range, max_damage, min_damage, fQuakepower, iQuaketime, iQuakera
   level notify("mortar");
   self notify("mortar");
 
-  if(!isDefined(range))
+  if(!isDefined(range)) {
     range = 256;
-  if(!isDefined(max_damage))
+  }
+  if(!isDefined(max_damage)) {
     max_damage = 400;
-  if(!isDefined(min_damage))
+  }
+  if(!isDefined(min_damage)) {
     min_damage = 25;
+  }
 
   radiusDamage(self.origin, range, max_damage, min_damage);
 
   if((isDefined(self.has_terrain) && self.has_terrain == true) && (isDefined(self.terrain))) {
     for(i = 0; i < self.terrain.size; i++) {
-      if(isDefined(self.terrain[i]))
+      if(isDefined(self.terrain[i])) {
         self.terrain[i] delete();
+      }
     }
   }
 
-  if(isDefined(self.hidden_terrain))
+  if(isDefined(self.hidden_terrain)) {
     self.hidden_terrain show();
+  }
   self.has_terrain = false;
 
   mortar_boom(self.origin, fQuakepower, iQuaketime, iQuakeradius, undefined, bIsstruct);
 }
 
 mortar_boom(origin, fPower, iTime, iRadius, effect, bIsstruct) {
-  if(!isDefined(fPower))
+  if(!isDefined(fPower)) {
     fPower = 0.15;
-  if(!isDefined(iTime))
+  }
+  if(!isDefined(iTime)) {
     iTime = 2;
-  if(!isDefined(iRadius))
+  }
+  if(!isDefined(iRadius)) {
     iRadius = 850;
+  }
 
   thread mortar_sound(bIsstruct);
 
-  if(isDefined(effect))
+  if(isDefined(effect)) {
     playFX(effect, origin);
-  else
+  }
+  else {
     playFX(level.mortar, origin);
+  }
 
   earthquake(fPower, iTime, origin, iRadius);
 
   // Special Burnville Shell shocking
-  if(level.script != "burnville")
+  if(level.script != "burnville") {
     return;
-  if(isDefined(level.playerMortar))
+  }
+  if(isDefined(level.playerMortar)) {
     return;
-  if(distance(level.player.origin, origin) > 300)
+  }
+  if(distance(level.player.origin, origin) > 300) {
     return;
-  if(level.script == "carchase" || level.script == "breakout")
+  }
+  if(level.script == "carchase" || level.script == "breakout") {
     return;
+  }
 
   level.playerMortar = true;
   level notify("shell shock player", iTime * 4);
@@ -848,19 +952,23 @@ mortar_boom(origin, fPower, iTime, iRadius, effect, bIsstruct) {
 }
 
 mortar_sound(bIsstruct) {
-  if(!isDefined(level.mortar_last_sound))
+  if(!isDefined(level.mortar_last_sound)) {
     level.mortar_last_sound = -1;
+  }
 
   soundnum = randomint(3) + 1;
-  while(soundnum == level.mortar_last_sound)
+  while(soundnum == level.mortar_last_sound) {
     soundnum = randomint(3) + 1;
+  }
 
   level.mortar_last_sound = soundnum;
 
-  if(!bIsstruct)
+  if(!bIsstruct) {
     self playSound("mortar_explosion" + soundnum);
-  else
+  }
+  else {
     play_sound_in_space("mortar_explosion" + soundnum, self.origin);
+  }
 }
 
 incoming_sound(soundnum, bIsstruct) {
@@ -874,27 +982,34 @@ incoming_sound(soundnum, bIsstruct) {
     level.lastmortarincomingtime = currenttime;
   }
 
-  if(!isDefined(soundnum))
+  if(!isDefined(soundnum)) {
     soundnum = randomint(3) + 1;
+  }
 
   if(soundnum == 1) {
-    if(bIsstruct)
+    if(bIsstruct) {
       thread play_sound_in_space("mortar_incoming1", self.origin);
-    else
+    }
+    else {
       self playSound("mortar_incoming1");
+    }
     wait(1.07 - 0.25);
   } else
   if(soundnum == 2) {
-    if(bIsstruct)
+    if(bIsstruct) {
       thread play_sound_in_space("mortar_incoming2", self.origin);
-    else
+    }
+    else {
       self playSound("mortar_incoming2");
+    }
     wait(0.67 - 0.25);
   } else {
-    if(bIsstruct)
+    if(bIsstruct) {
       thread play_sound_in_space("mortar_incoming3", self.origin);
-    else
+    }
+    else {
       self playSound("mortar_incoming3");
+    }
     wait(1.55 - 0.25);
   }
 }
@@ -947,24 +1062,29 @@ generic_style(strExplosion, fDelay, iBarrageSize, fBarrageDelay, iMinRange, iMax
 
   generic_style_setradius(strExplosion, 300, 2200);
 
-  if(!isDefined(fDelay))
+  if(!isDefined(fDelay)) {
     fDelay = 7;
+  }
 
-  if(!isDefined(iBarrageSize))
+  if(!isDefined(iBarrageSize)) {
     iBarrageSize = 1;
+  }
 
-  if(!isDefined(fBarrageDelay))
+  if(!isDefined(fBarrageDelay)) {
     fBarrageDelay = 0;
+  }
 
   if(!isDefined(bTargetsUsed)) // this allows generic_style to get called again and not setup any terrain related stuff
     bTargetsUsed = false;
 
-  if(isDefined(level.explosion_stopNotify) && isDefined(level.explosion_stopNotify[strExplosion]))
+  if(isDefined(level.explosion_stopNotify) && isDefined(level.explosion_stopNotify[strExplosion])) {
     level endon(level.explosion_stopNotify[strExplosion]);
+  }
 
   // for backwards compatibility
-  if(!isDefined(level.bStopBarrage) || !isDefined(level.bStopBarrage[strExplosion]))
+  if(!isDefined(level.bStopBarrage) || !isDefined(level.bStopBarrage[strExplosion])) {
     level.bStopBarrage[strExplosion] = false;
+  }
 
   //// Explosion Points
   aeExplosions = getEntArray(strExplosion, "targetname");
@@ -976,25 +1096,29 @@ generic_style(strExplosion, fDelay, iBarrageSize, fBarrageDelay, iMinRange, iMax
   }
 
   //// Start Wait
-  if(isDefined(level.explosion_startNotify) && isDefined(level.explosion_startNotify[strExplosion]))
+  if(isDefined(level.explosion_startNotify) && isDefined(level.explosion_startNotify[strExplosion])) {
     level waittill(level.explosion_startNotify[strExplosion]);
+  }
 
   //// Main Loop
   while(true) {
     while(!level.bStopBarrage[strExplosion]) {
       for(j = 0; j < iBarrageSize; j++) {
         // putting this here allows for updates during barrage
-        if(!isDefined(iMaxRange))
+        if(!isDefined(iMaxRange)) {
           iMaxRangeLocal = level._explosion_iMaxRange[strExplosion];
-        if(!isDefined(iMinRange))
+        }
+        if(!isDefined(iMinRange)) {
           iMinRangeLocal = level._explosion_iMinRange[strExplosion];
+        }
 
         iRand = randomint(aeExplosions.size);
         for(i = 0; i < aeExplosions.size; i++) {
           iCur = (i + iRand) % aeExplosions.size;
           fDist = distance(level.player getorigin(), aeExplosions[iCur].origin);
-          if((fDist < iMaxRangeLocal) && (fDist > iMinRangeLocal) && (iCur != iLastExplosion))
+          if((fDist < iMaxRangeLocal) && (fDist > iMinRangeLocal) && (iCur != iLastExplosion)) {
           //				if( (fDist < iMaxRangeLocal) && (fDist > iMinRangeLocal))
+          }
           {
             aeExplosions[iCur].iMinRange = iMinRangeLocal;
             aeExplosions[iCur] explosion_activate(strExplosion);
@@ -1003,15 +1127,19 @@ generic_style(strExplosion, fDelay, iBarrageSize, fBarrageDelay, iMinRange, iMax
           }
         }
         iLastExplosion = -1;
-        if(isDefined(level.explosion_delay) && isDefined(level.explosion_delay[strExplosion]))
+        if(isDefined(level.explosion_delay) && isDefined(level.explosion_delay[strExplosion])) {
           wait(level.explosion_delay[strExplosion]);
-        else
+        }
+        else {
           wait(randomfloat(fDelay) + randomFloat(fDelay));
+        }
       }
-      if(isDefined(level.explosion_barrage_delay) && isDefined(level.explosion_barrage_delay[strExplosion]))
+      if(isDefined(level.explosion_barrage_delay) && isDefined(level.explosion_barrage_delay[strExplosion])) {
         wait(level.explosion_barrage_delay[strExplosion]);
-      else
+      }
+      else {
         wait(randomfloat(fBarrageDelay) + randomFloat(fBarrageDelay));
+      }
     }
     wait(0.05);
   }
@@ -1022,19 +1150,25 @@ explosion_activate(strExplosion, iBlastRadius, iDamageMin, iDamageMax, fQuakePow
   generic_style_setdamage(strExplosion, 256, 25, 400);
   generic_style_setquake(strExplosion, 0.15, 2, 850);
 
-  if(!isDefined(iBlastRadius))
+  if(!isDefined(iBlastRadius)) {
     iBlastRadius = level._explosion_iBlastRadius[strExplosion];
-  if(!isDefined(iDamageMin))
+  }
+  if(!isDefined(iDamageMin)) {
     iDamageMin = level._explosion_iDamageMin[strExplosion];
-  if(!isDefined(iDamageMax))
+  }
+  if(!isDefined(iDamageMax)) {
     iDamageMax = level._explosion_iDamageMax[strExplosion];
+  }
 
-  if(!isDefined(fQuakePower))
+  if(!isDefined(fQuakePower)) {
     fQuakePower = level._explosion_fQuakePower[strExplosion];
-  if(!isDefined(iQuakeTime))
+  }
+  if(!isDefined(iQuakeTime)) {
     iQuakeTime = level._explosion_iQuakeTime[strExplosion];
-  if(!isDefined(iQuakeRadius))
+  }
+  if(!isDefined(iQuakeRadius)) {
     iQuakeRadius = level._explosion_iQuakeRadius[strExplosion];
+  }
 
   //// Incoming Sound
   explosion_incoming(strExplosion);
@@ -1061,19 +1195,22 @@ explosion_activate(strExplosion, iBlastRadius, iDamageMin, iDamageMax, fQuakePow
     }
   }
 
-  if(bDoDamage)
+  if(bDoDamage) {
     radiusDamage(eLocation.origin, iBlastRadius, iDamageMax, iDamageMin);
+  }
 
   //// Process Terrain
   if((isDefined(eLocation.has_terrain) && eLocation.has_terrain == true) && (isDefined(eLocation.terrain))) {
     for(i = 0; i < eLocation.terrain.size; i++) {
-      if(isDefined(eLocation.terrain[i]))
+      if(isDefined(eLocation.terrain[i])) {
         eLocation.terrain[i] delete();
+      }
     }
   }
 
-  if(isDefined(eLocation.hidden_terrain))
+  if(isDefined(eLocation.hidden_terrain)) {
     eLocation.hidden_terrain show();
+  }
   eLocation.has_terrain = false;
 
   //// Explosion Effects
@@ -1081,12 +1218,15 @@ explosion_activate(strExplosion, iBlastRadius, iDamageMin, iDamageMax, fQuakePow
 }
 
 explosion_boom(strExplosion, fPower, iTime, iRadius) {
-  if(!isDefined(fPower))
+  if(!isDefined(fPower)) {
     fPower = 0.15;
-  if(!isDefined(iTime))
+  }
+  if(!isDefined(iTime)) {
     iTime = 2;
-  if(!isDefined(iRadius))
+  }
+  if(!isDefined(iRadius)) {
     iRadius = 850;
+  }
 
   explosion_sound(strExplosion);
 
@@ -1095,10 +1235,12 @@ explosion_boom(strExplosion, fPower, iTime, iRadius) {
   playFX(level._effect[strExplosion], explosion_origin);
   earthquake(fPower, iTime, explosion_origin, iRadius);
 
-  if(distance(level.player.origin, explosion_origin) > 300)
+  if(distance(level.player.origin, explosion_origin) > 300) {
     return;
-  if(level.script == "carchase" || level.script == "breakout")
+  }
+  if(level.script == "carchase" || level.script == "breakout") {
     return;
+  }
 
   level.playerMortar = true;
   level notify("shell shock player", iTime * 4);
@@ -1106,12 +1248,14 @@ explosion_boom(strExplosion, fPower, iTime, iRadius) {
 }
 
 explosion_sound(strExplosion) {
-  if(!isDefined(level._explosion_last_sound))
+  if(!isDefined(level._explosion_last_sound)) {
     level._explosion_last_sound = 0;
+  }
 
   soundnum = randomint(3) + 1;
-  while(soundnum == level._explosion_last_sound)
+  while(soundnum == level._explosion_last_sound) {
     soundnum = randomint(3) + 1;
+  }
 
   level._explosion_last_sound = soundnum;
 
@@ -1155,12 +1299,14 @@ explosion_sound(strExplosion) {
 }
 
 explosion_incoming(strExplosion, soundnum) {
-  if(!isDefined(level._explosion_last_incoming))
+  if(!isDefined(level._explosion_last_incoming)) {
     level._explosion_last_incoming = -1;
+  }
 
   soundnum = randomint(4) + 1;
-  while(soundnum == level._explosion_last_incoming)
+  while(soundnum == level._explosion_last_incoming) {
     soundnum = randomint(4) + 1;
+  }
 
   level._explosion_last_incoming = soundnum;
 

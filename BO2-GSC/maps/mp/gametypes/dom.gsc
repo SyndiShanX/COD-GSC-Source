@@ -53,10 +53,12 @@ main() {
   game["dialog"]["defense_obj"] = "cap_start";
   level.lastdialogtime = 0;
 
-  if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen())
+  if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen()) {
     setscoreboardcolumns("score", "kills", "captures", "defends", "deaths");
-  else
+  }
+  else {
     setscoreboardcolumns("score", "kills", "deaths", "captures", "defends");
+  }
 
   maps\mp\gametypes\_globallogic_audio::registerdialoggroup("gamemode_objective", 0);
   maps\mp\gametypes\_globallogic_audio::registerdialoggroup("gamemode_objective_a", 0);
@@ -74,8 +76,9 @@ onstartgametype() {
   setobjectivetext("allies", &"OBJECTIVES_DOM");
   setobjectivetext("axis", &"OBJECTIVES_DOM");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     oldattackers = game["attackers"];
@@ -112,15 +115,17 @@ onstartgametype() {
   level.spawn_all = maps\mp\gametypes\_spawnlogic::getspawnpointarray("mp_dom_spawn");
   level.spawn_start = [];
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   level.spawn_start[team] = maps\mp\gametypes\_spawnlogic::getspawnpointarray("mp_dom_spawn_" + team + "_start");
+  }
 
   flagspawns = maps\mp\gametypes\_spawnlogic::getspawnpointarray("mp_dom_spawn_flag_a");
   level.startpos["allies"] = level.spawn_start["allies"][0].origin;
   level.startpos["axis"] = level.spawn_start["axis"][0].origin;
 
-  if(!isoneround() && isscoreroundbased())
+  if(!isoneround() && isscoreroundbased()) {
     maps\mp\gametypes\_globallogic_score::resetteamscores();
+  }
 
   level.spawnsystem.unifiedsideswitching = 0;
   level thread watchforbflagcap();
@@ -138,8 +143,9 @@ onspawnplayer(predictedspawn) {
   spawnpoint = undefined;
   spawnteam = self.pers["team"];
 
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     spawnteam = getotherteam(spawnteam);
+  }
 
   if(!level.usestartspawns) {
     flagsowned = 0;
@@ -154,8 +160,9 @@ onspawnplayer(predictedspawn) {
         continue;
       }
 
-      if(team == enemyteam)
+      if(team == enemyteam) {
         enemyflagsowned++;
+      }
     }
 
     enemyteam = getotherteam(spawnteam);
@@ -168,26 +175,31 @@ onspawnplayer(predictedspawn) {
     else {
       bestflag = undefined;
 
-      if(enemyflagsowned > 0 && enemyflagsowned < level.flags.size)
+      if(enemyflagsowned > 0 && enemyflagsowned < level.flags.size) {
         bestflag = getunownedflagneareststart(spawnteam);
+      }
 
-      if(!isDefined(bestflag))
+      if(!isDefined(bestflag)) {
         bestflag = level.bestspawnflag[spawnteam];
+      }
 
       level.bestspawnflag[spawnteam] = bestflag;
       spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_nearteam(level.spawn_all, bestflag.nearbyspawns);
     }
   }
 
-  if(!isDefined(spawnpoint))
+  if(!isDefined(spawnpoint)) {
     spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_random(level.spawn_start[spawnteam]);
+  }
 
   assert(isDefined(spawnpoint));
 
-  if(predictedspawn)
+  if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  else
+  }
+  else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "dom");
+  }
 }
 
 onendgame(winningteam) {
@@ -256,19 +268,22 @@ domflags() {
 
   level.flags = [];
 
-  for(index = 0; index < primaryflags.size; index++)
+  for(index = 0; index < primaryflags.size; index++) {
     level.flags[level.flags.size] = primaryflags[index];
+  }
 
-  for(index = 0; index < secondaryflags.size; index++)
+  for(index = 0; index < secondaryflags.size; index++) {
     level.flags[level.flags.size] = secondaryflags[index];
+  }
 
   level.domflags = [];
 
   for(index = 0; index < level.flags.size; index++) {
     trigger = level.flags[index];
 
-    if(isDefined(trigger.target))
+    if(isDefined(trigger.target)) {
       visuals[0] = getent(trigger.target, "targetname");
+    }
     else {
       visuals[0] = spawn("script_model", trigger.origin);
       visuals[0].angles = trigger.angles;
@@ -308,8 +323,9 @@ domflags() {
   level.bestspawnflag["allies"] = getunownedflagneareststart("allies", undefined);
   level.bestspawnflag["axis"] = getunownedflagneareststart("axis", level.bestspawnflag["allies"]);
 
-  for(index = 0; index < level.domflags.size; index++)
+  for(index = 0; index < level.domflags.size; index++) {
     level.domflags[index] createflagspawninfluencers();
+  }
 
   flagsetup();
 
@@ -350,17 +366,21 @@ domdebug() {
       }
 
       for(i = 0; i < level.flags.size; i++) {
-        for(j = 0; j < level.flags[i].adjflags.size; j++)
+        for(j = 0; j < level.flags[i].adjflags.size; j++) {
           line(level.flags[i].origin, level.flags[i].adjflags[j].origin, (1, 1, 1));
+        }
 
-        for(j = 0; j < level.flags[i].nearbyspawns.size; j++)
+        for(j = 0; j < level.flags[i].nearbyspawns.size; j++) {
           line(level.flags[i].origin, level.flags[i].nearbyspawns[j].origin, (0.2, 0.2, 0.6));
+        }
 
-        if(level.flags[i] == level.bestspawnflag["allies"])
+        if(level.flags[i] == level.bestspawnflag["allies"]) {
           print3d(level.flags[i].origin, "allies best spawn flag");
+        }
 
-        if(level.flags[i] == level.bestspawnflag["axis"])
+        if(level.flags[i] == level.bestspawnflag["axis"]) {
           print3d(level.flags[i].origin, "axis best spawn flag");
+        }
       }
 
       wait 0.05;
@@ -373,10 +393,12 @@ onbeginuse(player) {
   ownerteam = self maps\mp\gametypes\_gameobjects::getownerteam();
   self.didstatusnotify = 0;
 
-  if(ownerteam == "allies")
+  if(ownerteam == "allies") {
     otherteam = "axis";
-  else
+  }
+  else {
     otherteam = "allies";
+  }
 
   if(ownerteam == "neutral") {
     otherteam = getotherteam(player.pers["team"]);
@@ -411,20 +433,23 @@ flushalldialog() {
 }
 
 statusdialog(dialog, team, group, flushgroup) {
-  if(isDefined(flushgroup))
+  if(isDefined(flushgroup)) {
     maps\mp\gametypes\_globallogic_audio::flushgroupdialog(flushgroup);
+  }
 
   maps\mp\gametypes\_globallogic_audio::leaderdialog(dialog, team, group);
 }
 
 onenduse(team, player, success) {
-  if(!success)
+  if(!success) {
     maps\mp\gametypes\_globallogic_audio::flushgroupdialog("gamemode_changing" + self.label);
+  }
 }
 
 resetflagbaseeffect() {
-  if(isDefined(self.baseeffect))
+  if(isDefined(self.baseeffect)) {
     self.baseeffect delete();
+  }
 
   team = self maps\mp\gametypes\_gameobjects::getownerteam();
 
@@ -476,8 +501,9 @@ onuse(player) {
   touchlist = [];
   touchkeys = getarraykeys(self.touchlist[team]);
 
-  for(i = 0; i < touchkeys.size; i++)
+  for(i = 0; i < touchkeys.size; i++) {
     touchlist[touchkeys[i]] = self.touchlist[team][touchkeys[i]];
+  }
 
   thread give_capture_credit(touchlist, string, oldteam, isbflag);
   bbprint("mpobjective", "gametime %d objtype %s label %s team %s", gettime(), "dom_capture", label, team);
@@ -509,10 +535,12 @@ onuse(player) {
     } else {
       statusdialog("secured" + self.label, team, "gamemode_objective" + self.label, "gamemode_changing" + self.label);
 
-      if(randomint(2))
+      if(randomint(2)) {
         statusdialog("lost" + self.label, oldteam, "gamemode_objective" + self.label, "gamemode_changing" + self.label);
-      else
+      }
+      else {
         statusdialog("enemy" + self.label, oldteam, "gamemode_objective" + self.label, "gamemode_changing" + self.label);
+      }
 
       maps\mp\gametypes\_globallogic_audio::play_2d_on_team("mpl_flagcapture_sting_enemy", oldteam);
       maps\mp\gametypes\_globallogic_audio::play_2d_on_team("mpl_flagcapture_sting_friend", team);
@@ -521,8 +549,9 @@ onuse(player) {
     level.bestspawnflag[oldteam] = self.levelflag;
   }
 
-  if(dominated_challenge_check())
+  if(dominated_challenge_check()) {
     level thread totaldomination(team);
+  }
 
   self update_spawn_influencers(team);
   level change_dom_spawns();
@@ -567,17 +596,20 @@ give_capture_credit(touchlist, string, lastownerteam, isbflag) {
       player_from_touchlist maps\mp\_challenges::capturedobjective(time);
 
       if(lastownerteam == "neutral") {
-        if(isbflag)
+        if(isbflag) {
           maps\mp\_scoreevents::processscoreevent("dom_point_neutral_b_secured", player_from_touchlist);
-        else
+        }
+        else {
           maps\mp\_scoreevents::processscoreevent("dom_point_neutral_secured", player_from_touchlist);
+        }
       } else
         maps\mp\_scoreevents::processscoreevent("dom_point_secured", player_from_touchlist);
 
       player_from_touchlist recordgameevent("capture");
 
-      if(isbflag)
+      if(isbflag) {
         level notify("b_flag_captured", player_from_touchlist);
+      }
 
       if(isDefined(player_from_touchlist.pers["captures"])) {
         player_from_touchlist.pers["captures"]++;
@@ -599,8 +631,9 @@ delayedleaderdialog(sound, team, label) {
   wait 0.1;
   maps\mp\gametypes\_globallogic_utils::waittillslowprocessallowed();
 
-  if(!isDefined(label))
+  if(!isDefined(label)) {
     label = "";
+  }
 
   maps\mp\gametypes\_globallogic_audio::leaderdialog(sound, team, "gamemode_objective" + label);
 }
@@ -625,8 +658,9 @@ updatedomscores() {
       maps\mp\gametypes\_globallogic_score::giveteamscoreforobjective_delaypostprocessing("axis", numflags);
     }
 
-    if(numownedflags)
+    if(numownedflags) {
       maps\mp\gametypes\_globallogic_score::postprocessteamscores(scoring_teams);
+    }
 
     onscoreclosemusic();
     timepassed = maps\mp\gametypes\_globallogic_utils::gettimepassed();
@@ -650,13 +684,16 @@ onscoreclosemusic() {
   scorethresholdstart = abs(scorelimit - scorethreshold);
   scorelimitcheck = scorelimit - 10;
 
-  if(!isDefined(level.playingactionmusic))
+  if(!isDefined(level.playingactionmusic)) {
     level.playingactionmusic = 0;
+  }
 
-  if(alliedscore > axisscore)
+  if(alliedscore > axisscore) {
     currentscore = alliedscore;
-  else
+  }
+  else {
     currentscore = axisscore;
+  }
 
   if(getdvarint(#"_id_0BC4784C") > 0) {
     println("Music System Domination - scoreDif " + scoredif);
@@ -677,8 +714,9 @@ onscoreclosemusic() {
 }
 
 onroundswitch() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   game["switchedsides"] = !game["switchedsides"];
 
@@ -715,10 +753,12 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
       if(dist < level.defaultoffenseradius) {
         inflagzone = 1;
 
-        if(level.flags[index] getflagteam() == attacker.pers["team"] || level.flags[index] getflagteam() == "neutral")
+        if(level.flags[index] getflagteam() == attacker.pers["team"] || level.flags[index] getflagteam() == "neutral") {
           defendedflag = 1;
-        else
+        }
+        else {
           offendedflag = 1;
+        }
       }
 
       dist = distance2d(attacker.origin, flagorigin);
@@ -726,24 +766,28 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
       if(dist < level.defaultoffenseradius) {
         inflagzone = 1;
 
-        if(level.flags[index] getflagteam() == attacker.pers["team"] || level.flags[index] getflagteam() == "neutral")
+        if(level.flags[index] getflagteam() == attacker.pers["team"] || level.flags[index] getflagteam() == "neutral") {
           defendedflag = 1;
-        else
+        }
+        else {
           offendedflag = 1;
+        }
       }
 
       if(inflagzone && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
         if(offendedflag) {
-          if(!isDefined(attacker.dom_defends))
+          if(!isDefined(attacker.dom_defends)) {
             attacker.dom_defends = 0;
+          }
 
           attacker.dom_defends++;
 
           if(level.playerdefensivemax >= attacker.dom_defends) {
             attacker addplayerstatwithgametype("OFFENDS", 1);
 
-            if(!scoreeventprocessed)
+            if(!scoreeventprocessed) {
               maps\mp\_scoreevents::processscoreevent("killed_defender", attacker, undefined, sweapon);
+            }
 
             self recordkillmodifier("defending");
             break;
@@ -754,8 +798,9 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
         }
 
         if(defendedflag) {
-          if(!isDefined(attacker.dom_offends))
+          if(!isDefined(attacker.dom_offends)) {
             attacker.dom_offends = 0;
+          }
 
           attacker thread updateattackermultikills();
           attacker.dom_offends++;
@@ -767,8 +812,9 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
             attacker recordgameevent("return");
             attacker maps\mp\_challenges::killedzoneattacker(sweapon);
 
-            if(!scoreeventprocessed)
+            if(!scoreeventprocessed) {
               maps\mp\_scoreevents::processscoreevent("killed_attacker", attacker, undefined, sweapon);
+            }
 
             self recordkillmodifier("assaulting");
             break;
@@ -788,8 +834,9 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
       if(team != ownerteam) {
         flag = self.touchtriggers[triggerids[0]].useobj;
 
-        if(isDefined(flag.contested) && flag.contested == 1)
+        if(isDefined(flag.contested) && flag.contested == 1) {
           attacker killwhilecontesting(flag);
+        }
       }
     }
   }
@@ -802,8 +849,9 @@ killwhilecontesting(flag) {
   killtime = gettime();
   playerteam = self.pers["team"];
 
-  if(!isDefined(self.clearenemycount))
+  if(!isDefined(self.clearenemycount)) {
     self.clearenemycount = 0;
+  }
 
   self.clearenemycount++;
   flag waittill("contest_over");
@@ -818,8 +866,9 @@ killwhilecontesting(flag) {
     return;
   }
 
-  if(self.clearenemycount >= 2 && killtime + 200 > gettime())
+  if(self.clearenemycount >= 2 && killtime + 200 > gettime()) {
     maps\mp\_scoreevents::processscoreevent("clear_2_attackers", self);
+  }
 
   self.clearenemycount = 0;
 }
@@ -830,14 +879,16 @@ updateattackermultikills() {
   self notify("updateDomRecentKills");
   self endon("updateDomRecentKills");
 
-  if(!isDefined(self.recentdomattackerkillcount))
+  if(!isDefined(self.recentdomattackerkillcount)) {
     self.recentdomattackerkillcount = 0;
+  }
 
   self.recentdomattackerkillcount++;
   wait 4.0;
 
-  if(self.recentdomattackerkillcount > 1)
+  if(self.recentdomattackerkillcount > 1) {
     self maps\mp\_challenges::domattackermultikill(self.recentdomattackerkillcount);
+  }
 
   self.recentdomattackerkillcount = 0;
 }
@@ -846,8 +897,9 @@ getteamflagcount(team) {
   score = 0;
 
   for(i = 0; i < level.flags.size; i++) {
-    if(level.domflags[i] maps\mp\gametypes\_gameobjects::getownerteam() == team)
+    if(level.domflags[i] maps\mp\gametypes\_gameobjects::getownerteam() == team) {
       score++;
+    }
   }
 
   return score;
@@ -880,8 +932,9 @@ getboundaryflagspawns(team) {
     if(isDefined(team) && bflags[i] getflagteam() != team) {
       continue;
     }
-    for(j = 0; j < bflags[i].nearbyspawns.size; j++)
+    for(j = 0; j < bflags[i].nearbyspawns.size; j++) {
       spawns[spawns.size] = bflags[i].nearbyspawns[j];
+    }
   }
 
   return spawns;
@@ -908,8 +961,9 @@ getspawnsboundingflag(avoidflag) {
     if(!isbounding) {
       continue;
     }
-    for(j = 0; j < flag.nearbyspawns.size; j++)
+    for(j = 0; j < flag.nearbyspawns.size; j++) {
       spawns[spawns.size] = flag.nearbyspawns[j];
+    }
   }
 
   return spawns;
@@ -920,16 +974,18 @@ getownedandboundingflagspawns(team) {
 
   for(i = 0; i < level.flags.size; i++) {
     if(level.flags[i] getflagteam() == team) {
-      for(s = 0; s < level.flags[i].nearbyspawns.size; s++)
+      for(s = 0; s < level.flags[i].nearbyspawns.size; s++) {
         spawns[spawns.size] = level.flags[i].nearbyspawns[s];
+      }
 
       continue;
     }
 
     for(j = 0; j < level.flags[i].adjflags.size; j++) {
       if(level.flags[i].adjflags[j] getflagteam() == team) {
-        for(s = 0; s < level.flags[i].nearbyspawns.size; s++)
+        for(s = 0; s < level.flags[i].nearbyspawns.size; s++) {
           spawns[spawns.size] = level.flags[i].nearbyspawns[s];
+        }
 
         break;
       }
@@ -944,8 +1000,9 @@ getownedflagspawns(team) {
 
   for(i = 0; i < level.flags.size; i++) {
     if(level.flags[i] getflagteam() == team) {
-      for(s = 0; s < level.flags[i].nearbyspawns.size; s++)
+      for(s = 0; s < level.flags[i].nearbyspawns.size; s++) {
         spawns[spawns.size] = level.flags[i].nearbyspawns[s];
+      }
     }
   }
 
@@ -988,10 +1045,12 @@ flagsetup() {
 
   if(maperrors.size == 0) {
     for(i = 0; i < flags.size; i++) {
-      if(isDefined(flags[i].descriptor.script_linkto))
+      if(isDefined(flags[i].descriptor.script_linkto)) {
         adjdescs = strtok(flags[i].descriptor.script_linkto, " ");
-      else
+      }
+      else {
         adjdescs = [];
+      }
 
       for(j = 0; j < adjdescs.size; j++) {
         otherdesc = descriptorsbylinkname[adjdescs[j]];
@@ -1045,8 +1104,9 @@ flagsetup() {
   if(maperrors.size > 0) {
     println("^1------------ Map Errors ------------");
 
-    for(i = 0; i < maperrors.size; i++)
+    for(i = 0; i < maperrors.size; i++) {
       println(maperrors[i]);
+    }
 
     println("^1------------------------------------");
     maps\mp\_utility::error("Map errors. See above");
@@ -1119,13 +1179,15 @@ dom_gamemodespawndvars(reset_dvars) {
 }
 
 addspawnpointsforflag(team, flag_team, flagspawnname) {
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     team = getotherteam(team);
+  }
 
   otherteam = getotherteam(team);
 
-  if(flag_team != otherteam)
+  if(flag_team != otherteam) {
     maps\mp\gametypes\_spawnlogic::addspawnpoints(team, flagspawnname);
+  }
 }
 
 change_dom_spawns() {
@@ -1162,15 +1224,19 @@ dominated_challenge_check() {
   for(i = 0; i < num_flags; i++) {
     flag_team = level.flags[i] getflagteam();
 
-    if(flag_team == "allies")
+    if(flag_team == "allies") {
       allied_flags++;
-    else if(flag_team == "axis")
+    }
+    else if(flag_team == "axis") {
       axis_flags++;
-    else
+    }
+    else {
       return false;
+    }
 
-    if(allied_flags > 0 && axis_flags > 0)
+    if(allied_flags > 0 && axis_flags > 0) {
       return false;
+    }
   }
 
   return true;
@@ -1184,13 +1250,16 @@ dominated_check() {
   for(i = 0; i < num_flags; i++) {
     flag_team = level.flags[i] getflagteam();
 
-    if(flag_team == "allies")
+    if(flag_team == "allies") {
       allied_flags++;
-    else if(flag_team == "axis")
+    }
+    else if(flag_team == "axis") {
       axis_flags++;
+    }
 
-    if(allied_flags > 0 && axis_flags > 0)
+    if(allied_flags > 0 && axis_flags > 0) {
       return false;
+    }
   }
 
   return true;
@@ -1208,41 +1277,49 @@ updatecapsperminute(lastownerteam) {
   self.numcaps++;
   minutespassed = maps\mp\gametypes\_globallogic_utils::gettimepassed() / 60000;
 
-  if(isplayer(self) && isDefined(self.timeplayed["total"]))
+  if(isplayer(self) && isDefined(self.timeplayed["total"])) {
     minutespassed = self.timeplayed["total"] / 60;
+  }
 
   self.capsperminute = self.numcaps / minutespassed;
 
-  if(self.capsperminute > self.numcaps)
+  if(self.capsperminute > self.numcaps) {
     self.capsperminute = self.numcaps;
+  }
 }
 
 isscoreboosting(player, flag) {
-  if(!level.rankedmatch)
+  if(!level.rankedmatch) {
     return false;
+  }
 
-  if(player.capsperminute > level.playercapturelpm)
+  if(player.capsperminute > level.playercapturelpm) {
     return true;
+  }
 
-  if(flag.capsperminute > level.flagcapturelpm)
+  if(flag.capsperminute > level.flagcapturelpm) {
     return true;
+  }
 
   return false;
 }
 
 onupdateuserate() {
-  if(!isDefined(self.contested))
+  if(!isDefined(self.contested)) {
     self.contested = 0;
+  }
 
   numother = getnumtouchingexceptteam(self.ownerteam);
   numowners = self.numtouching[self.claimteam];
   previousstate = self.contested;
 
-  if(numother > 0 && numowners > 0)
+  if(numother > 0 && numowners > 0) {
     self.contested = 1;
+  }
   else {
-    if(previousstate == 1)
+    if(previousstate == 1) {
       self notify("contest_over");
+    }
 
     self.contested = 0;
   }

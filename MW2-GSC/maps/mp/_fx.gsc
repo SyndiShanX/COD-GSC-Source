@@ -58,35 +58,44 @@ script_print_fx() {
     return;
   }
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     org = getent(self.target).origin;
-  else
+  }
+  else {
     org = "undefined";
+  }
 
   //	println ("^a Command:", self.script_fxcommand, " Effect:", self.script_fxID, " Delay:", self.script_delay, " ", self.origin);
-  if(self.script_fxcommand == "OneShotfx")
+  if(self.script_fxcommand == "OneShotfx") {
     println("maps\mp\_fx::OneShotfx(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
+  }
 
-  if(self.script_fxcommand == "loopfx")
+  if(self.script_fxcommand == "loopfx") {
     println("maps\mp\_fx::LoopFx(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
+  }
 
-  if(self.script_fxcommand == "loopsound")
+  if(self.script_fxcommand == "loopsound") {
     println("maps\mp\_fx::LoopSound(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
+  }
 }
 
 script_playFX(id, pos, pos2) {
-  if(!id)
+  if(!id) {
     return;
+  }
 
-  if(isDefined(pos2))
+  if(isDefined(pos2)) {
     playFX(id, pos, pos2);
-  else
+  }
+  else {
     playFX(id, pos);
+  }
 }
 
 script_playFXOnTag(id, ent, tag) {
-  if(!id)
+  if(!id) {
     return;
+  }
 
   playFXOnTag(id, ent, tag);
 }
@@ -102,8 +111,9 @@ soundfx(fxId, fxPos, endonNotify) {
   org = spawn("script_origin", (0, 0, 0));
   org.origin = fxPos;
   org playLoopSound(fxId);
-  if(isDefined(endonNotify))
+  if(isDefined(endonNotify)) {
     org thread soundfxDelete(endonNotify);
+  }
 
   /*
   ent = level thread createfx_showOrigin ( fxId, fxPos, undefined, undefined, "soundfx" );

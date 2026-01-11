@@ -5,8 +5,9 @@
 ********************************/
 
 main(var_0, var_1) {
-  if(!isDefined(level._effect))
+  if(!isDefined(level._effect)) {
     level._effect = [];
+  }
 
   level._effect["flare_runner_intro"] = loadfx("fx\misc\flare_start");
   level._effect["flare_runner"] = loadfx("fx\misc\flare");
@@ -28,8 +29,9 @@ merge_suncolor(var_0, var_1, var_2, var_3) {
     level.thedif = var_6;
     var_7 = [];
 
-    for(var_8 = 0; var_8 < 3; var_8++)
+    for(var_8 = 0; var_8 < 3; var_8++) {
       var_7[var_8] = var_3[var_8] * var_6 + var_2[var_8] * (1 - var_6);
+    }
 
     level.sun_color = (var_7[0], var_7[1], var_7[2]);
     wait 0.05;
@@ -73,17 +75,21 @@ normalized_color(var_0) {
   var_1 = 1.0;
 
   if(var_0[0] > var_0[1]) {
-    if(var_0[0] > var_0[2])
+    if(var_0[0] > var_0[2]) {
       var_1 = var_0[0];
-    else
+    }
+    else {
       var_1 = var_0[2];
+    }
   } else if(var_0[1] > var_0[2])
     var_1 = var_0[1];
-  else
+  else {
     var_1 = var_0[2];
+  }
 
-  if(var_1 < 0.01)
+  if(var_1 < 0.01) {
     return var_0;
+  }
 
   var_0[0] = var_0[0] / var_1;
   var_0[1] = var_0[1] / var_1;
@@ -98,8 +104,9 @@ combine_sunlight_and_brightness() {
   for(;;) {
     var_0 = level.sun_brightness;
 
-    if(var_0 > 0.01)
+    if(var_0 > 0.01) {
       var_0 = var_0 * (0.8 + randomfloat(0.4));
+    }
 
     var_1 = level.sun_color * var_0;
     setsunlight(var_1[0], var_1[1], var_1[2]);
@@ -140,8 +147,9 @@ flare_explodes() {
   thread merge_suncolor(0, 1.0, normalized_color(level.original_suncolor), level.red_suncolor);
   thread merge_sunbrightness(0, 1.0, level.original_brightness, level.red_sunbrightness);
 
-  if(isDefined(level.flare_fog))
+  if(isDefined(level.flare_fog)) {
     maps\_utility::vision_set_fog_changes(level.flare_fog, 1.0);
+  }
 
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
@@ -161,8 +169,9 @@ flare_burns_out() {
   thread merge_sunbrightness(0, 1, level.red_sunbrightness, level.original_brightness);
   thread merge_suncolor(0, 0.01, level.red_suncolor, normalized_color(level.original_suncolor));
 
-  if(isDefined(level.flare_fog_return))
+  if(isDefined(level.flare_fog_return)) {
     maps\_utility::vision_set_fog_changes(level.flare_fog_return, 1);
+  }
 
   thread maps\_vehicle::volume_down(1);
   wait 1.0;

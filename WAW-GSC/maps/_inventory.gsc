@@ -8,11 +8,13 @@ main() {
 }
 
 inventory_create(shader, show_icon) {
-  if(true)
+  if(true) {
     return spawnStruct();
+  }
   assert(isDefined(shader));
-  if(!isDefined(show_icon))
+  if(!isDefined(show_icon)) {
     show_icon = false;
+  }
   ent = newHudElem();
   ent.alignX = "right";
   ent.alignY = "top";
@@ -56,8 +58,9 @@ inventroy_update() {
       new_y = y + (gap * position);
       if(new_y != level.inventory[i].y) {
         level.inventory[i].x = x;
-        if(level.inventory[i].alpha != 0)
+        if(level.inventory[i].alpha != 0) {
           level.inventory[i] moveovertime(.3);
+        }
         level.inventory[i].y = new_y;
       }
       if(level.inventory[i].alpha != 1) {
@@ -81,8 +84,9 @@ inventory_destroy() {
   old_inventory = level.inventory;
   level.inventory = [];
   for(i = 0; i < old_inventory.size; i++) {
-    if(isDefined(old_inventory[i]))
+    if(isDefined(old_inventory[i])) {
       level.inventory[level.inventory.size] = old_inventory[i];
+    }
   }
   inventroy_update();
 }

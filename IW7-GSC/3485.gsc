@@ -98,10 +98,12 @@ func_5D35(var_00, var_01) {
   var_07 = var_6.origin;
   var_08 = var_6.angles;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     playFXOnTag(level.airstrikessfx, var_06, "tag_origin");
-  else
+  }
+  else {
     playFXOnTag(level.airstrikefx, var_06, "tag_origin");
+  }
 
   wait 1.0;
   var_09 = bulletTrace(var_6.origin, var_6.origin + (0, 0, -1000000.0), 0, undefined);
@@ -111,8 +113,9 @@ func_5D35(var_00, var_01) {
   var_05 delete();
   level.func_C22F--;
 
-  if(level.func_C22F == 0)
+  if(level.func_C22F == 0) {
     level.func_C22F = undefined;
+  }
 }
 
 spawnbomb(var_00, var_01, var_02) {
@@ -135,8 +138,9 @@ func_C4CD(var_00, var_01, var_02) {
   var_08 linkto(var_04);
 
   for(self.killcament = var_08; var_07 > 0.0; var_07 = var_07 - var_3.func_5FE7) {
-    foreach(var_10 in level.characters)
+    foreach(var_10 in level.characters) {
     var_10 applygaseffect(var_00, var_01, var_04, self, var_3.func_5FE8);
+    }
 
     wait(var_3.func_5FE7);
   }

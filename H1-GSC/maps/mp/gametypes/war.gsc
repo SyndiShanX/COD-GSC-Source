@@ -34,8 +34,9 @@ main() {
   level.getspawnpoint = ::getspawnpoint;
   level.onnormaldeath = ::onnormaldeath;
 
-  if(level.matchrules_damagemultiplier || level.matchrules_vampirism)
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
     level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
+  }
 
   game["dialog"]["gametype"] = "team_deathmtch";
   game["strings"]["overtime_hint"] = &"MP_FIRST_BLOOD";
@@ -56,8 +57,9 @@ initializematchrules() {
 onstartgametype() {
   setclientnamemode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     var_0 = game["attackers"];
@@ -98,11 +100,13 @@ initspawns() {
 getspawnpoint() {
   var_0 = self.pers["team"];
 
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     var_0 = maps\mp\_utility::getotherteam(var_0);
+  }
 
-  if(level.usestartspawns && level.ingraceperiod)
+  if(level.usestartspawns && level.ingraceperiod) {
     var_1 = maps\mp\gametypes\_spawnlogic::getbeststartspawn("mp_tdm_spawn_" + var_0 + "_start");
+  }
   else {
     var_2 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(var_0);
     var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_awayfromenemies(var_2, var_0);
@@ -115,6 +119,7 @@ getspawnpoint() {
 onnormaldeath(var_0, var_1, var_2) {
   level maps\mp\gametypes\_gamescore::giveteamscoreforobjective(var_1.pers["team"], 1);
 
-  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level.otherteam[var_1.team]])
+  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level.otherteam[var_1.team]]) {
     var_1.finalkill = 1;
+  }
 }

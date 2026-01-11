@@ -113,8 +113,9 @@ setallvehiclefx(var_0, var_1) {
   var_2 = get_trace_types();
   setvehiclefx(var_0, "none");
 
-  foreach(var_4 in var_2)
+  foreach(var_4 in var_2) {
   setvehiclefx(var_0, var_4, var_1);
+  }
 }
 
 get_trace_types() {

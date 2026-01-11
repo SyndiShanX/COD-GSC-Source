@@ -232,12 +232,15 @@ zombiePenDamage(parent, time) {
         y = randomintrange(-35, 35);
         z = randomintrange(95, 120);
       }
-      if(level.my_time < 6)
+      if(level.my_time < 6) {
         adjustment = level.my_time / 6;
-      else if(level.my_time > 24)
+      }
+      else if(level.my_time > 24) {
         adjustment = (30 - level.my_time) / 6;
-      else
+      }
+      else {
         adjustment = 1;
+      }
       x = x * adjustment;
       y = y * adjustment;
       z = z * adjustment;

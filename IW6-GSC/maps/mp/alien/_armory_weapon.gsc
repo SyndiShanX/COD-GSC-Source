@@ -49,8 +49,9 @@ special_gun_detonate_hint_watcher() {
     self waittill("grenade_fire", var_1, var_2);
 
     if(var_2 == "iw6_aliendlc11_mp") {
-      if(!isDefined(self.projectile_time_out_num))
+      if(!isDefined(self.projectile_time_out_num)) {
         self.projectile_time_out_num = 1;
+      }
       else if(self.projectile_time_out_num > var_0) {
         var_0 = 3;
         self.projectile_time_out_num = 0;
@@ -75,8 +76,9 @@ wait_for_detonation(var_0, var_1) {
   var_3 = 0;
   var_4 = (0, 0, 0);
 
-  for(var_5 = var_4; self adsbuttonpressed() && var_3 < var_2; var_3 = var_3 + 1)
+  for(var_5 = var_4; self adsbuttonpressed() && var_3 < var_2; var_3 = var_3 + 1) {
     wait 0.05;
+  }
 
   while(var_3 < var_2) {
     if(isDefined(var_0) && self.adspressed) {
@@ -166,8 +168,9 @@ cloudmonitor(var_0, var_1, var_2) {
   playrumbleonposition("grenade_rumble", var_1);
   triggerfx(var_3);
 
-  if(var_2 == "iw6_aliendlc11_mp")
+  if(var_2 == "iw6_aliendlc11_mp") {
     var_16 = missile_createattractorent(var_15, 20000, 8000);
+  }
 
   var_17 = 0.0;
   var_18 = 0.25;
@@ -179,8 +182,9 @@ cloudmonitor(var_0, var_1, var_2) {
     var_21 = [];
 
     foreach(var_23 in level.agentarray) {
-      if(isDefined(var_23) && isalive(var_23) && var_23 istouching(var_15) && !isDefined(var_23.melting))
+      if(isDefined(var_23) && isalive(var_23) && var_23 istouching(var_15) && !isDefined(var_23.melting)) {
         var_21[var_21.size] = var_23;
+      }
     }
 
     foreach(var_23 in var_21) {
@@ -198,13 +202,15 @@ cloudmonitor(var_0, var_1, var_2) {
 }
 
 alien_corrosive_on() {
-  if(!isDefined(self.is_corrosive))
+  if(!isDefined(self.is_corrosive)) {
     self.is_corrosive = 0;
+  }
 
   self.is_corrosive++;
 
-  if(self.is_corrosive == 1)
+  if(self.is_corrosive == 1) {
     self setscriptablepartstate("body", "corrosive");
+  }
 }
 
 alien_corrosive_off() {
@@ -223,28 +229,33 @@ cloud_melt_alien(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("stasis_cloud_burning");
   self endon("death");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 6;
+  }
 
   self.melting = 1;
 
-  if(!isDefined(level.spider) || isDefined(level.spider) && self != level.spider)
+  if(!isDefined(level.spider) || isDefined(level.spider) && self != level.spider) {
     alien_corrosive_on();
+  }
 
   var_6 = 0;
 
   while(var_6 < var_2) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       self dodamage(var_0, self.origin, var_1, var_1, "MOD_UNKNOWN");
-    else
+    }
+    else {
       self dodamage(var_0, self.origin, var_1);
+    }
 
     var_6 = var_6 + var_4;
     wait(var_4);
   }
 
-  if(!isDefined(level.spider) || isDefined(level.spider) && self != level.spider)
+  if(!isDefined(level.spider) || isDefined(level.spider) && self != level.spider) {
     alien_corrosive_off();
+  }
 
   self.melting = undefined;
 }
@@ -271,8 +282,9 @@ give_special_gun() {
       var_0 giveweapon("iw6_aliendlc11_mp");
       var_1 = 2;
 
-      if(var_0 maps\mp\alien\_prestige::prestige_getminammo() != 1)
+      if(var_0 maps\mp\alien\_prestige::prestige_getminammo() != 1) {
         var_1 = 1;
+      }
 
       var_0 setweaponammoclip("iw6_aliendlc11_mp", var_1);
       var_0 setweaponammostock("iw6_aliendlc11_mp", var_1);
@@ -289,8 +301,9 @@ give_special_gun() {
 disable_special_gun_purchase() {
   var_0 = getEntArray("anti_alien_gun", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 disableplayeruse(self);
+  }
 }
 
 show_specialweapon_hint() {
@@ -325,8 +338,9 @@ spitter_ammo_drop_logic() {
 
     if(var_5 > var_2 && level.spitter_ammo_active < 4) {
       if(gettime() < var_3) {
-        if(randomintrange(0, 100) > 92)
+        if(randomintrange(0, 100) > 92) {
           var_6 = 1;
+        }
       } else
         var_6 = 1;
     }
@@ -374,8 +388,9 @@ spitter_ammo_think() {
 
       var_4 = 2;
 
-      if(var_1 maps\mp\alien\_prestige::prestige_getminammo() != 1)
+      if(var_1 maps\mp\alien\_prestige::prestige_getminammo() != 1) {
         var_4 = 1;
+      }
 
       var_1 setweaponammoclip("iw6_aliendlc11_mp", var_2 + var_4);
       var_1 setweaponammostock("iw6_aliendlc11_mp", var_3 + var_4);
@@ -405,8 +420,9 @@ spitter_ammo_delete(var_0) {
 }
 
 armory_special_gun_outline_func(var_0) {
-  if(isDefined(var_0.targetname) && var_0.targetname == "anti_alien_gun")
+  if(isDefined(var_0.targetname) && var_0.targetname == "anti_alien_gun") {
     return isDefined(self._has_armory_weapon);
+  }
 
   return 0;
 }

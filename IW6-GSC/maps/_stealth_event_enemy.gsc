@@ -64,8 +64,9 @@ enemy_event_reaction_flashbang(var_0) {
 
   wait 0.05;
 
-  if(self.script == "flashed")
+  if(self.script == "flashed") {
     self waittill("stop_flashbang_effect");
+  }
 
   var_2 = maps\_stealth_shared_utilities::enemy_find_free_pathnode_near(var_1, 300, 40);
 
@@ -94,8 +95,9 @@ enemy_investigate_position(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     wait(randomfloat(1));
 
-    if(isDefined(var_2) && var_2)
+    if(isDefined(var_2) && var_2) {
       thread maps\_stealth_shared_utilities::enemy_react_and_displace_to(var_0, var_1);
+    }
 
     thread maps\_stealth_shared_utilities::enemy_runto_and_lookaround(var_0, var_1);
     self.disablearrivals = 0;
@@ -116,21 +118,25 @@ stealth_event_mod(var_0, var_1, var_2, var_3) {
   var_4 = stealth_event_defaults();
   var_5 = stealth_event_anim_defaults();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_4[var_0];
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = var_5[var_0];
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = stealth_event_listener_defaults(var_0);
+  }
 
   maps\_stealth_shared_utilities::ai_create_behavior_function("event", var_0, var_1);
   maps\_stealth_shared_utilities::ai_create_behavior_function("animation", var_0, var_2);
   thread maps\_stealth_visibility_enemy::enemy_event_awareness(var_0);
 
-  if(var_3)
+  if(var_3) {
     self addaieventlistener(var_0);
+  }
 
   switch (var_0) {
     case "explode":

@@ -688,22 +688,28 @@ tryAddFiringDeathAnim(animName) {
 }
 
 firingDeathAllowed() {
-  if(!isDefined(self.weapon) || !self animscripts\weaponList::usingAutomaticWeapon())
+  if(!isDefined(self.weapon) || !self animscripts\weaponList::usingAutomaticWeapon()) {
     return false;
-  if(self.a.weaponPos["right"] == "none")
+  }
+  if(self.a.weaponPos["right"] == "none") {
     return false;
-  if(is_true(self.dieQuietly))
+  }
+  if(is_true(self.dieQuietly)) {
     return false;
-  if(is_false(self.dofiringdeath))
+  }
+  if(is_false(self.dofiringdeath)) {
     return false;
+  }
   return true;
 }
 
 longDeathAllowed() {
-  if(is_true(level.disableLongDeaths))
+  if(is_true(level.disableLongDeaths)) {
     return false;
-  if(is_true(self.a.disableLongDeath))
+  }
+  if(is_true(self.a.disableLongDeath)) {
     return false;
+  }
   return true;
 }
 
@@ -1086,8 +1092,9 @@ isValidGibRef(gib_ref) {
   refs[refs.size] = "left_leg";
   refs[refs.size] = "no_legs";
   refs[refs.size] = "head";
-  if(is_in_array(refs, gib_ref))
+  if(is_in_array(refs, gib_ref)) {
     return true;
+  }
   return false;
 }
 

@@ -78,8 +78,9 @@ killminemoveronpickup() {
 
 killminemover() {
   if(isDefined(self.minemover)) {
-    if(isDefined(self.minemover.killcament))
+    if(isDefined(self.minemover.killcament)) {
       self.minemover.killcament delete();
+    }
 
     self.minemover delete();
   }
@@ -107,12 +108,14 @@ bouncingbettydestroyed() {
   playFX(level.bettydestroyedfx, self.origin);
   playsoundatposition("dst_equipment_destroy", self.origin);
 
-  if(isDefined(self.trigger))
+  if(isDefined(self.trigger)) {
     self.trigger delete();
+  }
 
   if(isDefined(self.minemover)) {
-    if(isDefined(self.minemover.killcament))
+    if(isDefined(self.minemover.killcament)) {
       self.minemover.killcament delete();
+    }
 
     self.minemover delete();
   }
@@ -150,8 +153,9 @@ mineexplode() {
   if(!isDefined(self) || !isDefined(self.owner)) {
     return;
   }
-  if(isDefined(self.trigger))
+  if(isDefined(self.trigger)) {
     self.trigger delete();
+  }
 
   self.killcament delete();
   self delete();

@@ -36,8 +36,9 @@ init_riotshield_ai_anims() {
       if(var_4 == 5) {
         continue;
       }
-      if(isDefined(var_0["cover_trans"][var_3][var_4]))
+      if(isDefined(var_0["cover_trans"][var_3][var_4])) {
         var_0["cover_trans_dist"][var_3][var_4] = getmovedelta(var_0["cover_trans"][var_3][var_4], 0, 1);
+      }
     }
   }
 
@@ -63,13 +64,15 @@ notetrackdetachshield(var_0, var_1) {
   animscripts\shared::dropaiweapon(self.secondaryweapon);
   self.secondaryweapon = "none";
 
-  if(isalive(self))
+  if(isalive(self)) {
     riotshield_turn_into_regular_ai();
+  }
 }
 
 riotshield_approach_type() {
-  if(self.a.pose == "crouch")
+  if(self.a.pose == "crouch") {
     return "riotshield_crouch";
+  }
 
   return "riotshield";
 }
@@ -105,10 +108,12 @@ init_riotshield_ai() {
   self.meleeplayerwhilemoving = 1;
   self.usemuzzlesideoffset = 1;
 
-  if(level.gameskill < 1)
+  if(level.gameskill < 1) {
     self.shieldbulletblocklimit = randomintrange(4, 8);
-  else
+  }
+  else {
     self.shieldbulletblocklimit = randomintrange(8, 12);
+  }
 
   self.shieldbulletblockcount = 0;
   self.shieldbulletblocktime = 0;
@@ -127,32 +132,37 @@ init_riotshield_ai() {
   maps\_utility::disable_cqbwalk();
   init_riotshield_animsets();
 
-  if(level.gameskill < 1)
+  if(level.gameskill < 1) {
     self.bullet_resistance = 30;
-  else
+  }
+  else {
     self.bullet_resistance = 40;
+  }
 
   maps\_utility::add_damage_function(maps\_spawner::bullet_resistance);
   maps\_utility::add_damage_function(animscripts\pain::additive_pain);
 }
 
 riotshield_charge() {
-  if(!animscripts\melee::melee_standard_updateandvalidatetarget())
+  if(!animscripts\melee::melee_standard_updateandvalidatetarget()) {
     return 0;
+  }
 
   var_0 = getmovedelta( % riotshield_basha_attack, 0, 1);
   var_1 = lengthsquared(var_0);
 
-  if(distancesquared(self.origin, self.melee.target.origin) < var_1)
+  if(distancesquared(self.origin, self.melee.target.origin) < var_1) {
     return 1;
+  }
 
   animscripts\melee::melee_playchargesound();
   var_2 = 0.1;
   var_3 = 1;
 
   for(;;) {
-    if(!animscripts\melee::melee_standard_updateandvalidatetarget())
+    if(!animscripts\melee::melee_standard_updateandvalidatetarget()) {
       return 0;
+    }
 
     if(var_3) {
       self.a.pose = "stand";
@@ -168,8 +178,9 @@ riotshield_charge() {
       break;
     }
 
-    if(gettime() >= self.melee.giveuptime)
+    if(gettime() >= self.melee.giveuptime) {
       return 0;
+    }
   }
 
   return 1;
@@ -205,8 +216,9 @@ riotshield_melee_standard() {
 riotshield_melee_aivsai() {
   var_0 = self.melee.target;
 
-  if(self.subclass == "riotshield" && var_0.subclass == "riotshield")
+  if(self.subclass == "riotshield" && var_0.subclass == "riotshield") {
     return 0;
+  }
 
   animscripts\melee::melee_decide_winner();
   var_1 = vectortoangles(var_0.origin - self.origin);
@@ -247,15 +259,18 @@ riotshield_startmovetransition() {
   self animmode("zonly_physics", 0);
 
   if(self.a.pose == "crouch") {
-    if(isDefined(self.sprint) || isDefined(self.fastwalk))
+    if(isDefined(self.sprint) || isDefined(self.fastwalk)) {
       var_0 = % riotshield_crouch2stand;
-    else
+    }
+    else {
       var_0 = % riotshield_crouch2walk;
+    }
 
     var_1 = randomfloatrange(0.9, 1.1);
 
-    if(isDefined(self.copgroup))
+    if(isDefined(self.copgroup)) {
       var_1 = 2.5;
+    }
 
     self setflaggedanimknoballrestart("startmove", var_0, % body, 1, 0.1, var_1);
     animscripts\shared::donotetracks("startmove");
@@ -277,8 +292,9 @@ riotshield_endmovetransition() {
     self clearanim( % root, 0.2);
     var_0 = randomfloatrange(0.9, 1.1);
 
-    if(isDefined(self.copgroup))
+    if(isDefined(self.copgroup)) {
       var_0 = 2.5;
+    }
 
     self animmode("zonly_physics");
     self setflaggedanimknoballrestart("endmove", % riotshield_walk2crouch_8, % body, 1, 0.2, var_0);
@@ -302,20 +318,25 @@ riotshield_bullet_hit_shield() {
     self waittill("bullet_hitshield");
     var_0 = gettime();
 
-    if(var_0 - self.shieldbulletblocktime > 500)
+    if(var_0 - self.shieldbulletblocktime > 500) {
       self.shieldbulletblockcount = 0;
-    else
+    }
+    else {
       self.shieldbulletblockcount++;
+    }
 
     self.shieldbulletblocktime = var_0;
 
-    if(self.shieldbulletblockcount > self.shieldbulletblocklimit)
+    if(self.shieldbulletblockcount > self.shieldbulletblocklimit) {
       self dodamage(1, (0, 0, 0));
+    }
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_1 = % riotshield_reacta;
-    else
+    }
+    else {
       var_1 = % riotshield_reactb;
+    }
 
     self notify("new_hit_react");
     self setflaggedanimrestart("hitreact", var_1, 1, 0.1, 1);
@@ -344,19 +365,22 @@ riotshield_grenadecower() {
     if(isDefined(self.enemy)) {
       var_2 = self.enemy.origin - self.origin;
 
-      if(vectordot(var_1, var_2) < 0)
+      if(vectordot(var_1, var_2) < 0) {
         var_0 = 0;
+      }
     }
 
     if(var_0) {
       var_3 = angleclamp180(self.angles[1] - vectortoyaw(var_1));
 
-      if(!isDefined(self.turnthreshold))
+      if(!isDefined(self.turnthreshold)) {
         self.turnthreshold = 55;
+      }
 
       while(abs(var_3) > self.turnthreshold) {
-        if(!isDefined(self.a.array))
+        if(!isDefined(self.a.array)) {
           animscripts\combat::setup_anim_array();
+        }
 
         if(!animscripts\combat::turntofacerelativeyaw(var_3)) {
           break;
@@ -392,15 +416,17 @@ riotshield_flashbang() {
 
   self.minpaindamage = 0;
 
-  if(isDefined(self.subclass) && self.subclass == "riotshield")
+  if(isDefined(self.subclass) && self.subclass == "riotshield") {
     self.frontshieldanglecos = 0.5;
+  }
 }
 
 riotshield_pain() {
   self.a.pose = "crouch";
 
-  if(animscripts\utility::usingsidearm())
+  if(animscripts\utility::usingsidearm()) {
     maps\_utility::forceuseweapon(self.primaryweapon, "primary");
+  }
 
   if(!isDefined(self.a.onback)) {
     var_0 = randomfloatrange(0.8, 1.15);
@@ -423,8 +449,9 @@ riotshield_pain() {
 
   self.minpaindamage = 0;
 
-  if(isDefined(self.subclass) && self.subclass == "riotshield")
+  if(isDefined(self.subclass) && self.subclass == "riotshield") {
     self.frontshieldanglecos = 0.5;
+  }
 }
 
 riotshield_death() {
@@ -438,16 +465,20 @@ riotshield_death() {
     return 1;
   }
 
-  if(self.prevscript == "pain" || self.prevscript == "flashed")
+  if(self.prevscript == "pain" || self.prevscript == "flashed") {
     var_2 = randomint(2) == 0;
-  else
+  }
+  else {
     var_2 = 1;
+  }
 
   if(var_2) {
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_1 = % riotshield_crouch_death;
-    else
+    }
+    else {
       var_1 = % riotshield_crouch_death_fallback;
+    }
 
     animscripts\death::playdeathanim(var_1);
     return 1;
@@ -525,8 +556,9 @@ init_riotshield_animsets() {
 }
 
 riotshield_choose_pose(var_0) {
-  if(isDefined(self.grenade))
+  if(isDefined(self.grenade)) {
     return "stand";
+  }
 
   return animscripts\utility::choosepose(var_0);
 }
@@ -564,8 +596,9 @@ riotshield_fastwalk_off() {
 }
 
 riotshield_init_flee() {
-  if(self.script == "move")
+  if(self.script == "move") {
     self animcustom(::null_func);
+  }
 
   self.custommovetransition = ::riotshield_flee_and_drop_shield;
 }
@@ -575,10 +608,12 @@ riotshield_flee_and_drop_shield() {
   self animmode("zonly_physics", 0);
   self orientmode("face current");
 
-  if(!isDefined(self.dropshieldinplace) && isDefined(self.enemy) && vectordot(self.lookaheaddir, anglesToForward(self.angles)) < 0)
+  if(!isDefined(self.dropshieldinplace) && isDefined(self.enemy) && vectordot(self.lookaheaddir, anglesToForward(self.angles)) < 0) {
     var_0 = % riotshield_crouch2walk_2flee;
-  else
+  }
+  else {
     var_0 = % riotshield_crouch2stand_shield_drop;
+  }
 
   var_1 = randomfloatrange(0.85, 1.1);
   self setflaggedanimknoball("fleeanim", var_0, % root, 1, 0.1, var_1);

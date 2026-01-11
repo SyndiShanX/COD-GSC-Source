@@ -167,8 +167,9 @@ jeep_intro_ride() {
   level.noriega.ignoreall = 1;
   enemies = getaiarray("axis");
 
-  for(i = 0; i < enemies.size; i++)
+  for(i = 0; i < enemies.size; i++) {
     enemies[i] delete();
+  }
 
   autosave_by_name("finish_driveby");
   colt_victim = simple_spawn("docks_colt_victims");
@@ -349,8 +350,9 @@ challenge_docks_guards_speed_kill(str_notify) {
   flag_wait("docks_cleared");
   n_total_time = n_total_time + (gettime() - n_timer_start);
 
-  if(n_total_time < 15000)
+  if(n_total_time < 15000) {
     self notify(str_notify);
+  }
 }
 
 docks_elevator_wait_vo() {
@@ -386,8 +388,9 @@ elevator_ride() {
   level.player setlowready(1);
   a_end_scene_vehicles = spawn_vehicles_from_targetname("end_scene_vehicles");
 
-  foreach(vh_vehicle in a_end_scene_vehicles)
+  foreach(vh_vehicle in a_end_scene_vehicles) {
   vh_vehicle godon();
+  }
 
   setmusicstate("PANAMA_ELEVATOR");
   top_roll_door = getent("dock_top_roll_door", "targetname");
@@ -549,8 +552,9 @@ mason_damage_events(e_sniper_turret) {
 
   if(self is_fatal_shot()) {
     if(is_mature()) {
-      if(self.damagelocation == "helmet" || self.damagelocation == "neck")
+      if(self.damagelocation == "helmet" || self.damagelocation == "neck") {
         playFXOnTag(getfx("mason_fatal_blood"), self, "j_head");
+      }
     }
 
     self detach("c_usa_captured_mason_sack_clean", "j_helmet");
@@ -568,8 +572,9 @@ mason_damage_events(e_sniper_turret) {
 
     if(self is_fatal_shot()) {
       if(is_mature()) {
-        if(self.damagelocation == "helmet" || self.damagelocation == "neck")
+        if(self.damagelocation == "helmet" || self.damagelocation == "neck") {
           playFXOnTag(getfx("mason_fatal_blood"), self, "j_head");
+        }
       }
 
       self detach("c_usa_captured_mason_sack_clean", "j_helmet");
@@ -595,8 +600,9 @@ mason_damage_events(e_sniper_turret) {
 
 mason_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
   if(!(str_hit_loc == "helmet" || str_hit_loc == "neck" || str_hit_loc == "torso_upper")) {
-    if(is_mature())
+    if(is_mature()) {
       self play_fx("mason_non_fatal_blood", v_point);
+    }
   }
 
   return n_damage;
@@ -621,8 +627,9 @@ sniper_guard_damage_fail() {
 }
 
 is_fatal_shot() {
-  if(self.damagelocation == "helmet" || self.damagelocation == "neck" || self.damagelocation == "head")
+  if(self.damagelocation == "helmet" || self.damagelocation == "neck" || self.damagelocation == "head") {
     return true;
+  }
 
   return false;
 }
@@ -638,14 +645,16 @@ betrayed_event() {
   end_scene("noriega_idle_woods_snipe");
   soldier = getEntArray("sniper_guards_ai", "targetname");
 
-  for(i = 0; i < soldier.size; i++)
+  for(i = 0; i < soldier.size; i++) {
     soldier[i] delete();
+  }
 
   level.menendez = init_hero("menendez");
   level thread run_scene_and_delete("betrayed_weapon_1");
 
-  if(is_mature())
+  if(is_mature()) {
     exploder(1001);
+  }
 
   run_scene_and_delete("betrayed");
   level thread run_scene_and_delete("betrayed_weapon_2");
@@ -721,8 +730,9 @@ swap_player_body_dmg3(e_player_body) {
   a_sniper_guards = getEntArray("sniper_guards_ai", "targetname");
 
   foreach(e_guard in a_sniper_guards) {
-    if(e_guard.script_animname == "sniper_guard1_ai")
+    if(e_guard.script_animname == "sniper_guard1_ai") {
       e_sniper_guard = e_guard;
+    }
   }
 
   assert(isDefined(e_sniper_guard), "No 'sniper_guard1_ai' for shot 3.");
@@ -752,8 +762,9 @@ sniper_dialog() {
   level.player say_dialog("huds_confirm_visual_0", 0.3);
   set_objective(level.obj_docks_kill_menendez, level.mason, "Kill");
 
-  if(level.player get_story_stat("KRAVCHENKO_INTERROGATED"))
+  if(level.player get_story_stat("KRAVCHENKO_INTERROGATED")) {
     level.player thread say_dialog("krav_he_even_has_people_i_1", 0.5);
+  }
 
   flag_wait("docks_kill_menendez");
   level.player say_dialog("huds_end_this_now_woods_0");
@@ -782,8 +793,9 @@ start_fire_work() {
   rotator = getent("the_great_rotator", "targetname");
   spawners = getEntArray("firework_spawner", "script_noteworthy");
 
-  for(i = 0; i < spawners.size; i++)
+  for(i = 0; i < spawners.size; i++) {
     spawners[i] linkto(rotator);
+  }
 
   while(true) {
     firework_forward_launch();

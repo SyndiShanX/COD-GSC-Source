@@ -43,14 +43,16 @@ func_113B2(var_00, var_01) {
   var_02 = tablelookuprownum("sp\names.csv", var_01, "__END__");
   var_03 = [];
 
-  for(var_04 = 0; var_04 < var_02; var_4++)
+  for(var_04 = 0; var_04 < var_02; var_4++) {
     var_3[var_04] = var_04;
+  }
 
   var_03 = scripts\engine\utility::array_randomize(var_03);
   var_05 = min(50, var_02);
 
-  for(var_04 = 0; var_04 < var_05; var_4++)
+  for(var_04 = 0; var_04 < var_05; var_4++) {
     func_1719(var_00, var_3[var_04], var_01);
+  }
 
   var_03 = undefined;
 }
@@ -69,8 +71,9 @@ func_1718(var_00, var_01) {
 }
 
 func_171A(var_00, var_01) {
-  foreach(var_03 in var_01)
+  foreach(var_03 in var_01) {
   level.func_BE4D[var_00][level.func_BE4D[var_00].size] = var_03;
+  }
 }
 
 func_E05B(var_00, var_01) {
@@ -102,8 +105,9 @@ func_9725() {
 func_C096(var_00) {
   var_01 = strtok(var_00, " ");
 
-  if(var_1.size > 1)
+  if(var_1.size > 1) {
     var_00 = var_1[1];
+  }
 
   return var_00;
 }
@@ -111,8 +115,9 @@ func_C096(var_00) {
 func_E081(var_00) {
   foreach(var_02 in level.func_EDB9) {
     foreach(var_04 in level.func_BE4D[var_00]) {
-      if(var_02 == var_04)
+      if(var_02 == var_04) {
         func_E05B(var_00, var_04);
+      }
     }
   }
 }
@@ -133,10 +138,12 @@ func_7B05(var_00) {
     return;
   }
   if(isDefined(self.func_29B8) && self.func_29B8) {
-    if(self.script_team == "axis")
+    if(self.script_team == "axis") {
       return;
-    else
+    }
+    else {
       self.voice = "unitednationsjackal";
+    }
   }
 
   if(isDefined(self.func_EDB8)) {
@@ -184,20 +191,24 @@ func_7B07(var_00) {
     self.func_1A70 = "sergeant";
   }
 
-  if(isai(self) && self isbadguy())
+  if(isai(self) && self isbadguy()) {
     self.func_1A53 = var_04;
-  else
+  }
+  else {
     self.name = var_04;
+  }
 }
 
 func_7E38(var_00) {
   if(var_00 > 5) {
     self.func_1A70 = "private";
 
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       return "SN ";
-    else
+    }
+    else {
       return "AN ";
+    }
   } else if(var_00 == 5) {
     self.func_1A70 = "private";
     return "PO3 ";
@@ -230,8 +241,9 @@ canshoot(var_00) {
 }
 
 getrankfromname(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     self.func_1A70 = "private";
+  }
 
   var_01 = strtok(var_00, " ");
   var_02 = var_1[0];

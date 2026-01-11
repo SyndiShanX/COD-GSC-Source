@@ -5,8 +5,9 @@
 
 createLoopSound() {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     level.createFXent = [];
+  }
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
   ent.v["type"] = "soundfx";
@@ -20,8 +21,9 @@ createLoopSound() {
 
 createEffect(type, fxid) {
   ent = spawnStruct();
-  if(!isDefined(level.createFXent))
+  if(!isDefined(level.createFXent)) {
     level.createFXent = [];
+  }
   level.createFXent[level.createFXent.size] = ent;
   ent.v = [];
   ent.v["type"] = type;
@@ -63,36 +65,45 @@ create_looper(clientNum) {
 loopfxStop(clientNum, timeout) {
   self endon("death");
   wait(timeout);
-  if(isDefined(self.looper))
+  if(isDefined(self.looper)) {
     deletefx(clientNum, self.looper);
+  }
   if(isDefined(self.loopFX)) {
     deletefakeent(clientNum, self.loopFX);
   }
 }
 
 loopfxthread(clientNum) {
-  if(isDefined(self.fxStart))
+  if(isDefined(self.fxStart)) {
     level waittill("start fx" + self.fxStart);
+  }
   while(1) {
     create_looper(clientNum);
-    if(isDefined(self.timeout))
+    if(isDefined(self.timeout)) {
       thread loopfxStop(clientNum, self.timeout);
-    if(isDefined(self.fxStop))
+    }
+    if(isDefined(self.fxStop)) {
       level waittill("stop fx" + self.fxStop);
-    else
+    }
+    else {
       return;
-    if(isDefined(self.looper))
+    }
+    if(isDefined(self.looper)) {
       deletefx(clientNum, self.looper);
-    if(isDefined(self.fxStart))
+    }
+    if(isDefined(self.fxStart)) {
       level waittill("start fx" + self.fxStart);
-    else
+    }
+    else {
       return;
+    }
   }
 }
 
 oneshotfxthread(clientNum) {
-  if(self.v["delay"] > 0)
+  if(self.v["delay"] > 0) {
     wait self.v["delay"];
+  }
   create_triggerfx(clientNum);
 }
 
@@ -124,12 +135,15 @@ fx_init(clientNum) {
     if(!isDefined(level._createfxforwardandupset)) {
       ent set_forward_and_up_vectors();
     }
-    if(ent.v["type"] == "loopfx")
+    if(ent.v["type"] == "loopfx") {
       ent thread loopfxthread(clientNum);
-    if(ent.v["type"] == "oneshotfx")
+    }
+    if(ent.v["type"] == "oneshotfx") {
       ent thread oneshotfxthread(clientNum);
-    if(ent.v["type"] == "soundfx")
+    }
+    if(ent.v["type"] == "soundfx") {
       ent thread create_loopsound(clientNum);
+    }
   }
   level._createfxforwardandupset = true;
 }

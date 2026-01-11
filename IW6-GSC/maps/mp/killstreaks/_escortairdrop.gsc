@@ -87,8 +87,9 @@ tryUseEscortAirdrop(lifeId, streakName) {
   heightEnt = GetEnt("airstrikeheight", "targetname");
   assertEx(isDefined(heightEnt), "NO HEIGHT ENT IN LEVEL:Don't know what this means, ask Ned or Jordan");
 
-  if(!isDefined(heightEnt))
+  if(!isDefined(heightEnt)) {
     return false;
+  }
 
   if(self isKillStreakDenied()) {
     return false;
@@ -96,8 +97,9 @@ tryUseEscortAirdrop(lifeId, streakName) {
 
   incrementFauxVehicleCount();
 
-  if(isDefined(self.pers["isBot"]) && self.pers["isBot"])
+  if(isDefined(self.pers["isBot"]) && self.pers["isBot"]) {
     return true;
+  }
 
   result = self maps\mp\killstreaks\_airdrop::beginAirdropViaMarker(lifeId, "escort_airdrop");
   if(!isDefined(result) || !result) {
@@ -127,8 +129,9 @@ tryUseOspreyGunner(lifeId, streakName) {
   heightEnt = GetEnt("airstrikeheight", "targetname");
   assertEx(isDefined(heightEnt), "NO HEIGHT ENT IN LEVEL:Don't know what this means, ask Ned or Jordan");
 
-  if(!isDefined(heightEnt))
+  if(!isDefined(heightEnt)) {
     return false;
+  }
 
   incrementFauxVehicleCount();
 
@@ -217,8 +220,9 @@ selectDropLocation(lifeId, ospreyType, icon_friendly, icon_enemy, instruction_te
   locIndex = undefined;
   targetSize = level.mapSize / 6.46875;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     targetSize *= 1.5;
+  }
 
   self _beginLocationSelection(ospreyType, "map_artillery_selector", false, 500);
 
@@ -230,8 +234,9 @@ selectDropLocation(lifeId, ospreyType, icon_friendly, icon_enemy, instruction_te
   result = self maps\mp\killstreaks\_killstreaks::initRideKillstreak(ospreyType);
 
   if(result != "success") {
-    if(result != "disconnect")
+    if(result != "disconnect") {
       self clearUsingRemote();
+    }
 
     return false;
   }
@@ -264,10 +269,12 @@ showIcons(icon_friendly, icon_enemy, instruction_text, num_icons) {
     objective_position(self.locationObjectives[i], level.air_support_locs[level.script][i]["origin"]);
     objective_state(self.locationObjectives[i], "active");
     objective_player(self.locationObjectives[i], self getEntityNumber());
-    if(level.air_support_locs[level.script][i]["in_use"] == true)
+    if(level.air_support_locs[level.script][i]["in_use"] == true) {
       objective_icon(self.locationObjectives[i], icon_enemy);
-    else
+    }
+    else {
       objective_icon(self.locationObjectives[i], icon_friendly);
+    }
   }
 
   self waittill_any("cancel_location", "picked_location", "stop_location_selection");
@@ -280,8 +287,9 @@ showIcons(icon_friendly, icon_enemy, instruction_text, num_icons) {
 
 createAirship(owner, lifeId, pathStart, forward, locIndex, ospreyType) {
   airShip = spawnHelicopter(owner, pathStart, forward, level.ospreySettings[ospreyType].vehicle, level.ospreySettings[ospreyType].modelBase);
-  if(!isDefined(airShip))
+  if(!isDefined(airShip)) {
     return undefined;
+  }
 
   airShip.ospreyType = ospreyType;
 
@@ -419,8 +427,9 @@ rideGunner(lifeId, airShip) {
   thread teamPlayerCardSplash("used_osprey_gunner", self);
   self _giveWeapon("heli_remote_mp");
   self SwitchToWeapon("heli_remote_mp");
-  if(getDvarInt("camera_thirdPerson"))
+  if(getDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(false);
+  }
 
   airShip VehicleTurretControlOn(self);
 
@@ -468,8 +477,9 @@ showDefendPrompt(airShip) {
 
   wait(6);
 
-  if(isDefined(self.escort_prompt))
+  if(isDefined(self.escort_prompt)) {
     self.escort_prompt destroyElem();
+  }
 }
 
 airShipPitchPropsUp() {
@@ -537,12 +547,15 @@ getBestHeight(centerPoint) {
 
   heightEnt = GetEnt("airstrikeheight", "targetname");
 
-  if(isDefined(heightEnt))
+  if(isDefined(heightEnt)) {
     trueHeight = heightEnt.origin[2];
-  else if(isDefined(level.airstrikeHeightScale))
+  }
+  else if(isDefined(level.airstrikeHeightScale)) {
     trueHeight = 850 * level.airstrikeHeightScale;
-  else
+  }
+  else {
     trueHeight = 850;
+  }
 
   self.bestHeight = trueHeight;
 
@@ -616,10 +629,12 @@ getBestHeight(centerPoint) {
       highestSpawn = spawns[0];
 
       foreach(spawn in spawns) {
-        if(spawn.origin[2] < lowestSpawn.origin[2])
+        if(spawn.origin[2] < lowestSpawn.origin[2]) {
           lowestSpawn = spawn;
-        if(spawn.origin[2] > highestSpawn.origin[2])
+        }
+        if(spawn.origin[2] > highestSpawn.origin[2]) {
           highestSpawn = spawn;
+        }
       }
 
       if(bestHeight < lowestSpawn.origin[2] - 100) {
@@ -677,8 +692,9 @@ airshipFlyDefense(owner, pathStart, pathGoal, pathEnd, flyHeight, guardPosition)
 
   self thread killGuysNearCrates(guardPosition);
 
-  if(isDefined(owner))
+  if(isDefined(owner)) {
     owner waittill_any_timeout(self.timeOut, "disconnect");
+  }
 
   self waittill("leaving");
 
@@ -831,8 +847,9 @@ airshipFlyGunner(owner, pathStart, pathGoal, pathEnd, flyHeight) {
   self ospreyDropCrates(1, level.ospreySettings[self.ospreyType].tagDropCrates, dropPos);
 
   waitTime = 1.0;
-  if(isDefined(owner))
+  if(isDefined(owner)) {
     owner waittill_any_timeout(waitTime, "disconnect");
+  }
   self.timeOut -= waitTime;
 
   self setVehGoalPos(pathGoal, 1);
@@ -843,10 +860,12 @@ airshipFlyGunner(owner, pathStart, pathGoal, pathEnd, flyHeight) {
 
   attackAreas = getEntArray("heli_attack_area", "targetname");
   loopNode = level.heli_loop_nodes[randomInt(level.heli_loop_nodes.size)];
-  if(attackAreas.size)
+  if(attackAreas.size) {
     self thread maps\mp\killstreaks\_helicopter::heli_fly_well(attackAreas);
-  else
+  }
+  else {
     self thread maps\mp\killstreaks\_helicopter::heli_fly_loop_path(loopNode);
+  }
 
   self waittill("leaving");
 
@@ -921,20 +940,23 @@ ospreyDropCrates(timeBetween, dropFromTag, dropPos) {
 }
 
 endRide(airShip) {
-  if(isDefined(self.escort_prompt))
+  if(isDefined(self.escort_prompt)) {
     self.escort_prompt destroyElem();
+  }
 
   self RemoteCameraSoundscapeOff();
   self ThermalVisionOff();
   self ThermalVisionFOFOverlayOff();
   self unlink();
   self clearUsingRemote();
-  if(getDvarInt("camera_thirdPerson"))
+  if(getDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(true);
+  }
   self VisionSetThermalForPlayer(game["thermal_vision"], 0);
 
-  if(isDefined(airShip))
+  if(isDefined(airShip)) {
     airShip VehicleTurretControlOff(self);
+  }
 
   self notify("heliPlayer_removed");
 

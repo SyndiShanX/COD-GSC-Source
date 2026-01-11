@@ -65,10 +65,12 @@ watchTabunGrenadeDetonation(owner) {
       return;
     }
   }
-  if(weapons_get_dvar_int("scr_enable_new_tabun", 1))
+  if(weapons_get_dvar_int("scr_enable_new_tabun", 1)) {
     generateLocations(position, owner);
-  else
+  }
+  else {
     singleLocation(position, owner);
+  }
 }
 damageEffectArea(owner, position, radius, height, killCamEnt) {
   shockEffectArea = spawn("trigger_radius", position, 0, radius, height);
@@ -82,10 +84,12 @@ damageEffectArea(owner, position, radius, height, killCamEnt) {
     for(i = 0; i < players.size; i++) {
       if(level.friendlyfire == 0) {
         if(players[i] != owner) {
-          if(!isDefined(owner) || !isDefined(owner.team))
+          if(!isDefined(owner) || !isDefined(owner.team)) {
             continue;
-          if(level.teambased && players[i].team == owner.team)
+          }
+          if(level.teambased && players[i].team == owner.team) {
             continue;
+          }
         }
       }
       if((!isDefined(players[i].inPoisonArea)) || (players[i].inPoisonArea == false)) {
@@ -104,8 +108,9 @@ damageEffectArea(owner, position, radius, height, killCamEnt) {
     wait(loopWaitTime);
     durationOfTabun -= loopWaitTime;
   }
-  if(level.tabunGasDuration < level.poisonDuration)
+  if(level.tabunGasDuration < level.poisonDuration) {
     wait(level.poisonDuration - level.tabunGasDuration);
+  }
   shockEffectArea delete();
   gasEffectArea delete();
 }
@@ -325,11 +330,13 @@ playTabunSound(position) {
 setUpTabunFx(owner, locations, count) {
   fxToPlay = undefined;
   previous = count - 1;
-  if(previous < 0)
+  if(previous < 0) {
     previous = previous + locations["loc"].size;
+  }
   next = count + 1;
-  if(next >= locations["loc"].size)
+  if(next >= locations["loc"].size) {
     next = next - locations["loc"].size;
+  }
   effect0Dist = level.fx_tabun_radius0 * level.fx_tabun_radius0;
   effect1Dist = level.fx_tabun_radius1 * level.fx_tabun_radius1;
   effect2Dist = level.fx_tabun_radius2 * level.fx_tabun_radius2;
@@ -365,18 +372,21 @@ getcenter(locations) {
   for(i = 1; i < locations["tracePos"].size; i++) {
     curX = locations["tracePos"][i][0];
     curY = locations["tracePos"][i][1];
-    if(curX > maxX)
+    if(curX > maxX) {
       maxX = curX;
-    else if(curX < minX)
+    }
+    else if(curX < minX) {
       minX = curX;
-    if(curY > maxY)
+    }
+    if(curY > maxY) {
       maxY = curY;
-    else if(curY < minY)
+    }
+    else if(curY < minY) {
       minY = curY;
+    }
   }
   avgX = (maxX + minX) / 2;
   avgY = (maxY + minY) / 2;
   center = (avgX, avgY, locations["tracePos"][0][2]);
   return center;
 }
-

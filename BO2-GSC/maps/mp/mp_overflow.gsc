@@ -128,8 +128,9 @@ water_trigger_think() {
 }
 
 leveloverridetime(defaulttime) {
-  if(self isinwater())
+  if(self isinwater()) {
     return 0.4;
+  }
 
   return defaulttime;
 }
@@ -145,8 +146,9 @@ isinwater() {
     if(trigger.origin[2] > level.mapcenter[2]) {
       continue;
     }
-    if(self istouching(trigger))
+    if(self istouching(trigger)) {
       return true;
+    }
   }
 
   return false;

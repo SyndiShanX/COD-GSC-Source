@@ -5,18 +5,21 @@
 ********************************/
 
 move_player_to_start(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level.start_point + "_playerstart";
+  }
 
   var_1 = common_scripts\utility::getstruct(var_0, "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     maps\_utility::teleport_player(var_1);
+  }
 }
 
 spawn_friendlies(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_4 = getEntArray(var_1, "script_noteworthy");
   var_5 = [];
@@ -24,8 +27,9 @@ spawn_friendlies(var_0, var_1, var_2, var_3) {
   var_7 = [];
 
   foreach(var_9 in var_4) {
-    if(isspawner(var_9))
+    if(isspawner(var_9)) {
       var_5[var_5.size] = var_9;
+    }
   }
 
   var_11 = common_scripts\utility::getstruct(var_0, "targetname");
@@ -34,16 +38,18 @@ spawn_friendlies(var_0, var_1, var_2, var_3) {
   foreach(var_14 in var_5) {
     var_15 = var_14 maps\_utility::spawn_ai(1);
 
-    if(var_2)
+    if(var_2) {
       var_15 thread maps\_utility::replace_on_death();
+    }
 
     var_15 forceteleport(var_11.origin, var_11.angles);
     var_15 setgoalpos(var_15.origin);
     var_7 = common_scripts\utility::array_add(var_7, var_15);
     var_12++;
 
-    if(isDefined(var_3) && var_12 >= var_3)
+    if(isDefined(var_3) && var_12 >= var_3) {
       return var_7;
+    }
   }
 
   return var_7;
@@ -72,8 +78,9 @@ setup_player_for_scene(var_0, var_1) {
       var_3 = var_3 + 0.05;
     }
 
-    if(isDefined(var_1) && var_1 > var_3)
+    if(isDefined(var_1) && var_1 > var_3) {
       wait(var_1 - var_3);
+    }
   }
 }
 
@@ -110,16 +117,18 @@ monitorscopechange() {
   var_3 = 0;
   level.players[0].sniper_dvar = "cg_playerFovScale0";
 
-  if(level.players.size == 2)
+  if(level.players.size == 2) {
     level.players[1].sniper_dvar = "cg_playerFovScale1";
+  }
 
   foreach(var_1 in level.players) {
     var_1 thread monitormagcycle();
     var_1 thread disablevariablescopehudondeath();
   }
 
-  if(!isDefined(level.variable_scope_weapons))
+  if(!isDefined(level.variable_scope_weapons)) {
     level.variable_scope_weapons = [];
+  }
 
   var_6 = undefined;
   var_7 = undefined;
@@ -164,22 +173,25 @@ monitorscopechange() {
             }
           }
 
-          if(isDefined(var_14))
+          if(isDefined(var_14)) {
             setsaveddvar("sm_sunShadowCenter", var_14);
+          }
         }
       } else if(var_3) {
         var_3 = 0;
 
-        if(isDefined(var_6))
+        if(isDefined(var_6)) {
           var_6 turnoffvariablescopehud();
+        }
 
         setsaveddvar("sm_sunShadowCenter", "0 0 0");
       }
     } else if(var_3) {
       var_3 = 0;
 
-      if(isDefined(var_7))
+      if(isDefined(var_7)) {
         var_7 turnoffvariablescopehud();
+      }
 
       setsaveddvar("sm_sunShadowCenter", "0 0 0");
     }
@@ -193,8 +205,9 @@ turnonvariablescopehud(var_0) {
   setsaveddvar(self.sniper_dvar, self.fov_snipe);
   self.sniper_zoom_hint_hud.alpha = 1;
 
-  if(!var_0)
+  if(!var_0) {
     level notify("variable_sniper_hud_enter");
+  }
 }
 
 turnoffvariablescopehud() {
@@ -232,18 +245,21 @@ dialogue_reminder(var_0, var_1, var_2, var_3, var_4) {
   level endon("missionfailed");
   var_5 = undefined;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 10;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 20;
+  }
 
   while(!common_scripts\utility::flag(var_1)) {
     var_6 = randomfloatrange(var_3, var_4);
     var_7 = common_scripts\utility::random(var_2);
 
-    if(isDefined(var_5) && var_7 == var_5)
+    if(isDefined(var_5) && var_7 == var_5) {
       continue;
+    }
     else {
       var_5 = var_7;
       wait(var_6);
@@ -265,8 +281,9 @@ dialogue_reminder(var_0, var_1, var_2, var_3, var_4) {
 }
 
 conversation_start() {
-  if(!common_scripts\utility::flag_exist("flag_conversation_in_progress"))
+  if(!common_scripts\utility::flag_exist("flag_conversation_in_progress")) {
     common_scripts\utility::flag_init("flag_conversation_in_progress");
+  }
 
   common_scripts\utility::flag_waitopen("flag_conversation_in_progress");
   common_scripts\utility::flag_set("flag_conversation_in_progress");
@@ -280,13 +297,15 @@ array_combine_unique(var_0, var_1) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(!isDefined(common_scripts\utility::array_find(var_2, var_4)))
+    if(!isDefined(common_scripts\utility::array_find(var_2, var_4))) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   foreach(var_4 in var_1) {
-    if(!isDefined(common_scripts\utility::array_find(var_2, var_4)))
+    if(!isDefined(common_scripts\utility::array_find(var_2, var_4))) {
       var_2[var_2.size] = var_4;
+    }
   }
 
   return var_2;
@@ -329,24 +348,29 @@ laser_targeting_device(var_0) {
 shouldforcedisablelaser() {
   var_0 = self getcurrentweapon();
 
-  if(var_0 == "rpg")
+  if(var_0 == "rpg") {
     return 1;
+  }
 
-  if(common_scripts\utility::string_starts_with(var_0, "gl"))
+  if(common_scripts\utility::string_starts_with(var_0, "gl")) {
     return 1;
+  }
 
   if(isDefined(level.laser_designator_disable_list) && isarray(level.laser_designator_disable_list)) {
     foreach(var_2 in level.laser_designator_disable_list) {
-      if(var_0 == var_2)
+      if(var_0 == var_2) {
         return 1;
+      }
     }
   }
 
-  if(self isreloading())
+  if(self isreloading()) {
     return 1;
+  }
 
-  if(self isthrowinggrenade())
+  if(self isthrowinggrenade()) {
     return 1;
+  }
 
   return 0;
 }
@@ -399,8 +423,9 @@ laser_designate_target() {
 }
 
 gettargettriggerhit(var_0) {
-  if(!isDefined(level.laser_triggers) || level.laser_triggers.size == 0)
+  if(!isDefined(level.laser_triggers) || level.laser_triggers.size == 0) {
     return undefined;
+  }
 
   foreach(var_2 in level.laser_triggers) {
     var_3 = distance2d(var_0, var_2.origin);
@@ -429,8 +454,9 @@ get_laser_designated_trace() {
   var_4 = bulletTrace(var_0, var_3, 1, self);
   var_5 = var_4["entity"];
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_4["position"] = var_5.origin;
+  }
 
   return var_4;
 }
@@ -443,21 +469,24 @@ laser_artillery(var_0) {
   var_1 = level.player;
   wait 2.5;
 
-  if(!isDefined(var_0.script_index))
+  if(!isDefined(var_0.script_index)) {
     var_0.script_index = 99;
+  }
 
   wait 1;
 
   if(isDefined(var_0.script_group)) {
     var_2 = get_geo_group("geo_before", var_0.script_group);
 
-    if(var_2.size > 0)
+    if(var_2.size > 0) {
       common_scripts\utility::array_call(var_2, ::hide);
+    }
 
     var_3 = get_geo_group("geo_after", var_0.script_group);
 
-    if(var_3.size > 0)
+    if(var_3.size > 0) {
       common_scripts\utility::array_call(var_3, ::show);
+    }
   }
 
   wait(level.player.lasercooldownafterhit);
@@ -470,8 +499,9 @@ get_geo_group(var_0, var_1) {
   var_3 = [];
 
   foreach(var_5 in var_2) {
-    if(isDefined(var_5.script_group) && var_5.script_group == var_1)
+    if(isDefined(var_5.script_group) && var_5.script_group == var_1) {
       var_3[var_3.size] = var_5;
+    }
   }
 
   return var_3;
@@ -531,57 +561,77 @@ get_differentiated_jerk() {
 }
 
 show_player_hud(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     setsaveddvar("g_friendlyNameDist", var_0);
-  else
+  }
+  else {
     setsaveddvar("g_friendlyNameDist", 15000);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     setsaveddvar("compass", var_1);
-  else
+  }
+  else {
     setsaveddvar("compass", "1");
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     setsaveddvar("ammoCounterHide", var_2);
-  else
+  }
+  else {
     setsaveddvar("ammoCounterHide", "0");
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     setsaveddvar("actionSlotsHide", var_3);
-  else
+  }
+  else {
     setsaveddvar("actionSlotsHide", "0");
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     setsaveddvar("hud_showStance", var_4);
-  else
+  }
+  else {
     setsaveddvar("hud_showStance", "1");
+  }
 }
 
 hide_player_hud(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     setsaveddvar("g_friendlyNameDist", var_0);
-  else
+  }
+  else {
     setsaveddvar("g_friendlyNameDist", 0);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     setsaveddvar("compass", var_1);
-  else
+  }
+  else {
     setsaveddvar("compass", "0");
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     setsaveddvar("ammoCounterHide", var_2);
-  else
+  }
+  else {
     setsaveddvar("ammoCounterHide", "1");
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     setsaveddvar("actionSlotsHide", var_3);
-  else
+  }
+  else {
     setsaveddvar("actionSlotsHide", "1");
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     setsaveddvar("hud_showStance", var_4);
-  else
+  }
+  else {
     setsaveddvar("hud_showStance", "0");
+  }
 }
 
 disable_features_entering_cinema(var_0) {
@@ -596,8 +646,9 @@ handle_portal_group(var_0, var_1, var_2) {
   level.player endon("death");
   level endon("missionfailed");
 
-  if(isDefined(var_2) && isstring(var_2))
+  if(isDefined(var_2) && isstring(var_2)) {
     level endon(var_2);
+  }
 
   if(!isDefined(var_0) || !isstring(var_0)) {
     return;
@@ -607,8 +658,9 @@ handle_portal_group(var_0, var_1, var_2) {
   }
   var_3 = getent(var_1, "targetname");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = getent(var_1, "script_noteworthy");
+  }
 
   if(!isDefined(var_3)) {
     return;
@@ -636,8 +688,9 @@ portal_group_on(var_0, var_1) {
   }
   var_2 = getent(var_1, "targetname");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = getent(var_1, "script_noteworthy");
+  }
 
   if(!isDefined(var_2)) {
     return;
@@ -659,8 +712,9 @@ portal_group_off(var_0, var_1) {
   }
   var_2 = getent(var_1, "targetname");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = getent(var_1, "script_noteworthy");
+  }
 
   if(!isDefined(var_2)) {
     return;
@@ -670,8 +724,9 @@ portal_group_off(var_0, var_1) {
 }
 
 make_emp_vulnerable() {
-  if(!isDefined(level.emp_vulnerable_list))
+  if(!isDefined(level.emp_vulnerable_list)) {
     level.emp_vulnerable_list = [];
+  }
 
   level.emp_vulnerable_list = common_scripts\utility::array_add(level.emp_vulnerable_list, self);
   self waittill("death");
@@ -717,8 +772,9 @@ kill_fx_with_handle(var_0) {
 }
 
 hint_button_trigger(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 200;
+  }
 
   return hint_button_position(var_0, self.origin, undefined, var_1, undefined, self);
 }
@@ -731,10 +787,12 @@ hint_button_position(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = common_scripts\utility::spawn_tag_origin();
 
   if(!isDefined(var_1)) {
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_1 = var_5.origin;
-    else
+    }
+    else {
       var_1 = self.origin;
+    }
   }
 
   var_6.origin = var_1;
@@ -750,10 +808,12 @@ hint_button_create(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.positioninworld = 1;
 
   if(isDefined(self)) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_7 settargetent(self, var_1);
-    else
+    }
+    else {
       var_7 settargetent(self);
+    }
   }
 
   var_8 = hint_button_string_lookup(var_0);
@@ -762,13 +822,15 @@ hint_button_create(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.sort = -1;
   var_7.alpha = 1;
 
-  if(!isDefined(var_5) || !var_5)
+  if(!isDefined(var_5) || !var_5) {
     var_7 thread scale_3d_hint_button(self, var_1, level.player, var_2, var_3, var_6);
+  }
 
   var_7.object = self;
 
-  if(isDefined(var_4) && var_4)
+  if(isDefined(var_4) && var_4) {
     var_7.deleteobjectwhendone = 1;
+  }
 
   return var_7;
 }
@@ -777,36 +839,45 @@ scale_3d_hint_button(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("death");
   var_0 endon("death");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = getdvarint("player_useradius");
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
   var_6 = 0;
   self.fontscale = 2;
   self.font = "buttonprompt";
 
   for(;;) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_6 = distance(var_0 gettagorigin(var_1), var_2 getEye());
-    else
+    }
+    else {
       var_6 = distance(var_0, var_2 getEye());
+    }
 
-    if(var_4 != 0 && var_6 > var_4)
+    if(var_4 != 0 && var_6 > var_4) {
       self.alpha = 0;
+    }
     else if(var_3 != 0 && var_6 > var_3) {
-      if(var_4 - var_3 > 0)
+      if(var_4 - var_3 > 0) {
         self.alpha = (1 - (var_6 - var_3) / (var_4 - var_3)) * 0.3;
-      else
+      }
+      else {
         self.alpha = 0.3;
+      }
     } else if(isDefined(var_5) && isDefined(var_5.classname) && issubstr(var_5.classname, "trigger")) {
       var_7 = var_2 getusableentity();
 
-      if(isDefined(var_7) && var_7 == var_5)
+      if(isDefined(var_7) && var_7 == var_5) {
         self.alpha = 1;
-      else
+      }
+      else {
         self.alpha = 0.3;
+      }
     } else
       self.alpha = 1;
 
@@ -852,12 +923,15 @@ hint_button_string_lookup(var_0) {
     case "ads":
     case "l1":
     case "lt":
-      if(level.pc)
+      if(level.pc) {
         return "^3[{+ads}]^7";
-      else if(level.player usinggamepad())
+      }
+      else if(level.player usinggamepad()) {
         return "^3[{+speed_throw}]^7";
-      else
+      }
+      else {
         return "^3[{+toggleads_throw}]^7";
+      }
     case "flash":
     case "smoke":
     case "l2":
@@ -881,11 +955,13 @@ hint_button_string_lookup(var_0) {
 }
 
 hint_button_clear() {
-  if(isDefined(self.deleteobjectwhendone) && self.deleteobjectwhendone)
+  if(isDefined(self.deleteobjectwhendone) && self.deleteobjectwhendone) {
     self.object delete();
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self destroy();
+  }
 }
 
 hint_button_flash(var_0, var_1) {
@@ -913,8 +989,9 @@ button_mash_dynamic_hint(var_0, var_1, var_2, var_3) {
   thread buttonmash_hint_cleanup(var_2, var_4, var_1, var_3);
   level.player notifyonplayercommand(var_4, var_1);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level.player notifyonplayercommand(var_4, var_3);
+  }
 
   for(;;) {
     self waittill(var_4);
@@ -931,13 +1008,15 @@ buttonmash_hint_cleanup(var_0, var_1, var_2, var_3) {
   thread maps\_utility::hint_fade();
   level.player notifyonplayercommandremove(var_1, var_2);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level.player notifyonplayercommandremove(var_1, var_3);
+  }
 }
 
 hint_button_create_flashing(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = (0, 0, 0);
+  }
 
   self endon("death");
   var_7 = common_scripts\utility::spawn_tag_origin();
@@ -946,8 +1025,9 @@ hint_button_create_flashing(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 linkto(self, var_0);
   var_1 = var_7 hint_button_create(var_1, "TAG_ORIGIN", var_4, var_5, 1, 1);
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_1.fontscale = var_6;
+  }
 
   var_1 thread hint_button_flash(0.15, 0.1);
   common_scripts\utility::waittill_any_ents(self, var_2, level.player, var_2);
@@ -955,8 +1035,9 @@ hint_button_create_flashing(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 play_videolog(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 1;
+  }
 
   var_8 = undefined;
 
@@ -976,8 +1057,9 @@ play_videolog(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_9["multiply"] = 4;
   var_9["replace"] = 5;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_10 = var_9[var_1];
   var_11 = getdvarint("cg_cinematicfullscreen");
@@ -1000,16 +1082,19 @@ play_videolog(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   setomnvar("ui_videolog_blendfunc", var_10);
   setomnvar("ui_videolog_blur_bkgrnd", var_6);
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = level._snd.default_vid_log_vol;
+  }
 
   cinematicingame(var_0, 0, var_7, 1);
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     waitframe();
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     waitframe();
+  }
 
   setomnvar("ui_videolog", 0);
   setomnvar("ui_videolog_blendfunc", var_13);
@@ -1024,8 +1109,9 @@ play_videolog(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 }
 
 stop_videolog() {
-  if(iscinematicplaying())
+  if(iscinematicplaying()) {
     stopcinematicingame();
+  }
 }
 
 play_chyron_video(var_0, var_1, var_2) {
@@ -1040,16 +1126,19 @@ play_chyron_video(var_0, var_1, var_2) {
   var_4 = getdvarint("cg_cinematicCanPause", 0);
   setsaveddvar("cg_cinematicCanPause", 1);
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     waitframe();
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     waitframe();
+  }
 
   common_scripts\utility::flag_set("chyron_video_done");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   if(isDefined(var_2)) {
     var_3 fadeovertime(var_2);
@@ -1062,8 +1151,9 @@ play_chyron_video(var_0, var_1, var_2) {
 }
 
 point_in_angle_of_crosshairs(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level.player;
+  }
 
   return vectordot(vectornormalize(var_0 - var_2 getEye()), anglesToForward(var_2 getplayerangles())) > cos(var_1);
 }

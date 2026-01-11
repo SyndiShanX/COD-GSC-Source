@@ -105,8 +105,9 @@ spawn_vtols_at_structs(str_struct_name, str_nd_name) {
     v_vtol = spawn_vehicle_from_targetname("yemen_drone_control_vtol_spawner");
 
     if(isDefined(str_nd_name) || isDefined(s_spot.target)) {
-      if(isDefined(s_spot.target))
+      if(isDefined(s_spot.target)) {
         str_nd_name = s_spot.target;
+      }
 
       v_vtol veh_magic_bullet_shield(1);
       v_vtol thread go_path(getvehiclenode(str_nd_name, "targetname"));
@@ -127,8 +128,9 @@ morals_rail_terrorist_spawnfunc() {
 }
 
 morals_rail_count_terrorist_deaths() {
-  if(self.attacker == level.player)
+  if(self.attacker == level.player) {
     level.n_rail_terrorist_kills++;
+  }
 
   return false;
 }
@@ -147,8 +149,9 @@ morals_rail_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, s
     level thread wait_clear_took_damage_flag();
     n_damage = 10;
 
-    if(self.health < 50)
+    if(self.health < 50) {
       n_damage = 0;
+    }
   }
 
   return n_damage;
@@ -200,8 +203,9 @@ player_vtol_go_on_rail() {
   old_vtol vehicle_toggle_sounds(0);
   m_lamp = getent("fxanim_vtol2_crash_lamp", "targetname");
 
-  if(isDefined(m_lamp))
+  if(isDefined(m_lamp)) {
     m_lamp delete();
+  }
 
   wait_network_frame();
   level.player unlink();
@@ -242,8 +246,9 @@ set_head_look(time, accel, decel, n_right_arc, n_left_arc, n_top_arc, n_bottom_a
 }
 
 setup_menedez_escape_extracam() {
-  if(!isDefined(level.salazar))
+  if(!isDefined(level.salazar)) {
     wait 0.05;
+  }
 
   level.salazar delete();
   level.player.ignoreme = 1;
@@ -350,8 +355,9 @@ player_vtol_exit_scene(nd_goal) {
 }
 
 mr_get_magic_target_position(e_shooter, n_dist) {
-  if(!isDefined(n_dist))
+  if(!isDefined(n_dist)) {
     n_dist = 5000;
+  }
 
   v_aim_spot = e_shooter.origin + vectornormalize(anglesToForward(e_shooter.angles)) * n_dist;
   a_trace = bulletTrace(e_shooter.origin, v_aim_spot, 1, e_shooter);
@@ -363,10 +369,12 @@ fire_rpgs_from_structs(str_struct, v_target, n_min, n_max) {
   a_rpgs = getstructarray(str_struct, "targetname");
 
   foreach(s_rpg in a_rpgs) {
-    if(!isDefined(s_rpg.script_noteworthy))
+    if(!isDefined(s_rpg.script_noteworthy)) {
       v_target = _get_target_position();
-    else if(s_rpg.script_noteworthy == "player")
+    }
+    else if(s_rpg.script_noteworthy == "player") {
       v_target = _get_target_position();
+    }
     else {
       e_target_ent = getstruct(s_rpg.script_notewothy, "targetname");
       v_target = e_target_ent.origin;
@@ -378,17 +386,21 @@ fire_rpgs_from_structs(str_struct, v_target, n_min, n_max) {
 }
 
 _get_custom_wait(n_min, n_max) {
-  if(isDefined(n_min) && isDefined(n_max))
+  if(isDefined(n_min) && isDefined(n_max)) {
     n_wait = randomfloatrange(n_min, n_max);
+  }
   else {
-    if(isDefined(n_min))
+    if(isDefined(n_min)) {
       n_wait = n_min;
+    }
 
-    if(isDefined(n_max))
+    if(isDefined(n_max)) {
       n_wait = n_max;
+    }
 
-    if(!isDefined(n_max) && !isDefined(n_min))
+    if(!isDefined(n_max) && !isDefined(n_min)) {
       n_wait = 0.05;
+    }
   }
 
   return n_wait;
@@ -446,8 +458,9 @@ set_fadein_flag(delay) {
 killwithdrones_challenge(str_notify) {
   level waittill("morals_rail_done");
 
-  if(isDefined(level.n_rail_terrorist_kills) && level.n_rail_terrorist_kills >= 10)
+  if(isDefined(level.n_rail_terrorist_kills) && level.n_rail_terrorist_kills >= 10) {
     self notify(str_notify);
+  }
 }
 
 do_vtol_sounds(plr_vtol) {

@@ -8,10 +8,12 @@ init() {
   level.objpointnames = [];
   level.objpoints = [];
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     level.objpointsize = 15;
-  else
+  }
+  else {
     level.objpointsize = 8;
+  }
 
   level.objpoint_alpha_default = 0.75;
   level.objpointscale = 1.0;
@@ -20,19 +22,24 @@ init() {
 func_4A23(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 = getobjpointbyname(var_00);
 
-  if(isDefined(var_06))
+  if(isDefined(var_06)) {
     deleteobjpoint(var_06);
+  }
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = "objpoint_default";
+  }
 
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     var_05 = 1.0;
+  }
 
-  if(var_02 != "all")
+  if(var_02 != "all") {
     var_06 = newteamhudelem(var_02);
-  else
+  }
+  else {
     var_06 = newhudelem();
+  }
 
   var_6.name = var_00;
   var_6.x = var_1[0];
@@ -44,10 +51,12 @@ func_4A23(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 setshader(var_03, level.objpointsize, level.objpointsize);
   var_06 setwaypoint(1, 0);
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     var_6.alpha = var_04;
-  else
+  }
+  else {
     var_6.alpha = level.objpoint_alpha_default;
+  }
 
   var_6.basealpha = var_6.alpha;
   var_6.index = level.objpointnames.size;
@@ -75,14 +84,17 @@ deleteobjpoint(var_00) {
 }
 
 updateorigin(var_00) {
-  if(self.x != var_0[0])
+  if(self.x != var_0[0]) {
     self.x = var_0[0];
+  }
 
-  if(self.y != var_0[1])
+  if(self.y != var_0[1]) {
     self.y = var_0[1];
+  }
 
-  if(self.z != var_0[2])
+  if(self.z != var_0[2]) {
     self.z = var_0[2];
+  }
 }
 
 setoriginbyname(var_00, var_01) {
@@ -91,17 +103,21 @@ setoriginbyname(var_00, var_01) {
 }
 
 getobjpointbyname(var_00) {
-  if(isDefined(level.objpoints[var_00]))
+  if(isDefined(level.objpoints[var_00])) {
     return level.objpoints[var_00];
-  else
+  }
+  else {
     return undefined;
+  }
 }
 
 getobjpointbyindex(var_00) {
-  if(isDefined(level.objpointnames[var_00]))
+  if(isDefined(level.objpointnames[var_00])) {
     return level.objpoints[level.objpointnames[var_00]];
-  else
+  }
+  else {
     return undefined;
+  }
 }
 
 startflashing() {

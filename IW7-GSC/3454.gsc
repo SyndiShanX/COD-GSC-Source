@@ -56,8 +56,9 @@ onuse(var_00, var_01) {
     return 0;
   } else if(scripts\mp\utility\game::isusingremote() || scripts\mp\utility\game::iskillstreakdenied())
     return 0;
-  else if(getcsplinecount() < 2)
+  else if(getcsplinecount() < 2) {
     return 0;
+  }
   else {
     thread dostrike(var_00, "a10_strafe");
     return 1;
@@ -92,26 +93,30 @@ dostrike(var_00, var_01) {
 startstrafesequence(var_00, var_01) {
   scripts\mp\utility\game::setusingremote("a10_strafe");
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(0);
+  }
 
   self.restoreangles = self.angles;
   scripts\mp\utility\game::freezecontrolswrapper(1);
   var_02 = scripts\mp\killstreaks\killstreaks::initridekillstreak("a10_strafe");
 
   if(var_02 != "success") {
-    if(var_02 != "disconnect")
+    if(var_02 != "disconnect") {
       scripts\mp\utility\game::clearusingremote();
+    }
 
-    if(isDefined(self.disabledweapon) && self.disabledweapon)
+    if(isDefined(self.disabledweapon) && self.disabledweapon) {
       scripts\engine\utility::allow_weapon(1);
+    }
 
     self notify("death");
     return 0;
   }
 
-  if(scripts\mp\utility\game::isjuggernaut() && isDefined(self.juggernautoverlay))
+  if(scripts\mp\utility\game::isjuggernaut() && isDefined(self.juggernautoverlay)) {
     self.juggernautoverlay.alpha = 0;
+  }
 
   scripts\mp\utility\game::freezecontrolswrapper(0);
   level.a10strafeactive = 1;
@@ -123,11 +128,13 @@ startstrafesequence(var_00, var_01) {
 endstrafesequence(var_00) {
   scripts\mp\utility\game::clearusingremote();
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(1);
+  }
 
-  if(scripts\mp\utility\game::isjuggernaut() && isDefined(self.juggernautoverlay))
+  if(scripts\mp\utility\game::isjuggernaut() && isDefined(self.juggernautoverlay)) {
     self.juggernautoverlay.alpha = 1;
+  }
 
   self setplayerangles(self.restoreangles);
   self.restoreangles = undefined;
@@ -142,15 +149,17 @@ switchaircraft(var_00, var_01) {
   thread scripts\mp\utility\game::set_visionset_for_watching_players("black_bw", 0.75, 0.75);
   wait 0.75;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 thread endflyby(var_01);
+  }
 }
 
 spawnaircraft(var_00, var_01, var_02) {
   var_03 = createplaneasheli(var_00, var_01, var_02);
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     return undefined;
+  }
 
   var_3.streakname = var_00;
   self remotecontrolvehicle(var_03);
@@ -181,8 +190,9 @@ attachturret(var_00) {
 }
 
 cleanupaircraft() {
-  if(isDefined(self.turret))
+  if(isDefined(self.turret)) {
     self.turret delete();
+  }
 
   foreach(var_01 in self.targetlist) {
     if(isDefined(var_1["icon"])) {
@@ -218,8 +228,9 @@ endflyby(var_00) {
   }
   self.owner remotecontrolvehicleoff(self);
 
-  if(isDefined(self.turret))
+  if(isDefined(self.turret)) {
     self.owner remotecontrolturretoff(self.turret);
+  }
 
   self notify("end_remote");
   self.owner thermalvisionfofoverlayoff();
@@ -241,8 +252,9 @@ createplaneasheli(var_00, var_01, var_02) {
   var_06 = vectortoangles(var_05);
   var_07 = spawnhelicopter(self, var_04, var_06, var_3.vehicle, var_3.func_B923[self.team]);
 
-  if(!isDefined(var_07))
+  if(!isDefined(var_07)) {
     return undefined;
+  }
 
   var_07 makevehiclesolidcapsule(18, -9, 18);
   var_7.owner = self;
@@ -280,8 +292,9 @@ monitorrocketfire(var_00, var_01) {
   self notifyonplayercommand("rocket_fire_pressed", "+speed_throw");
   self notifyonplayercommand("rocket_fire_pressed", "+ads_akimbo_accessible");
 
-  if(!level.console)
+  if(!level.console) {
     self notifyonplayercommand("rocket_fire_pressed", "+toggleads_throw");
+  }
 
   while(var_1.numrocketsleft > 0) {
     self waittill("rocket_fire_pressed");
@@ -300,19 +313,22 @@ monitorrocketfire2(var_00, var_01) {
   self notifyonplayercommand("rocket_fire_pressed", "+speed_throw");
   self notifyonplayercommand("rocket_fire_pressed", "+ads_akimbo_accessible");
 
-  if(!level.console)
+  if(!level.console) {
     self notifyonplayercommand("rocket_fire_pressed", "+toggleads_throw");
+  }
 
   var_1.targetlist = [];
 
   while(var_1.numrocketsleft > 0) {
-    if(!self adsbuttonpressed())
+    if(!self adsbuttonpressed()) {
       self waittill("rocket_fire_pressed");
+    }
 
     var_01 missileacquiretargets();
 
-    if(var_1.targetlist.size > 0)
+    if(var_1.targetlist.size > 0) {
       var_01 thread firemissiles();
+    }
   }
 }
 
@@ -320,13 +336,15 @@ missilegetbesttarget() {
   var_00 = [];
 
   foreach(var_02 in level.players) {
-    if(missileisgoodtarget(var_02))
+    if(missileisgoodtarget(var_02)) {
       var_0[var_0.size] = var_02;
+    }
   }
 
   foreach(var_05 in level.uplinks) {
-    if(missileisgoodtarget(var_05))
+    if(missileisgoodtarget(var_05)) {
       var_0[var_0.size] = var_05;
+    }
   }
 
   if(var_0.size > 0) {
@@ -385,8 +403,9 @@ missilewaitfortriggerrelease() {
   var_00 notifyonplayercommand("rocket_fire_released", "-speed_throw");
   var_00 notifyonplayercommand("rocket_fire_released", "-ads_akimbo_accessible");
 
-  if(!level.console)
+  if(!level.console) {
     var_00 notifyonplayercommand("rocket_fire_released", "-toggleads_throw");
+  }
 
   self.owner waittill("rocket_fire_released");
   var_00 setclientomnvar("ui_a10_rocket_lock", 0);
@@ -476,8 +495,9 @@ a10_missile_set_target(var_00, var_01) {
 a10_missile_cleanup() {
   self waittill("death");
 
-  if(isDefined(self.icon))
+  if(isDefined(self.icon)) {
     self.icon destroy();
+  }
 }
 
 monitorweaponfire(var_00, var_01) {
@@ -493,8 +513,9 @@ monitorweaponfire(var_00, var_01) {
   self notifyonplayercommand("a10_cannon_stop", "-attack_akimbo_accessible");
 
   while(var_1.ammocount > 0) {
-    if(!self attackbuttonpressed())
+    if(!self attackbuttonpressed()) {
       self waittill("a10_cannon_start");
+    }
 
     var_03 = gettime() + var_2.sfxcannonfireburptime;
     var_01 playLoopSound(var_2.sfxcannonfireloop_1p);
@@ -607,8 +628,9 @@ buildallflightpaths(var_00, var_01) {
 a10_cockpit_breathing() {
   level endon("remove_player_control");
 
-  for(;;)
+  for(;;) {
     wait(randomfloatrange(3.0, 7.0));
+  }
 }
 
 watchearlyexit(var_00) {

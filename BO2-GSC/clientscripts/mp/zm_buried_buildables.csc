@@ -44,15 +44,17 @@ init_buildables(buildablesenabledlist) {
     level.buildable_piece_counts[2] = 13;
   }
 
-  foreach(buildable in buildablesenabledlist)
+  foreach(buildable in buildablesenabledlist) {
   add_zombie_buildable(buildable);
+  }
 
   level thread set_clientfield_buildables_code_callbacks();
 }
 
 include_buildables(buildablesenabledlist) {
-  foreach(buildable in buildablesenabledlist)
+  foreach(buildable in buildablesenabledlist) {
   include_buildable(buildable);
+  }
 }
 
 buildable_setup_glint(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -67,10 +69,12 @@ buildable_setup_glint_offset() {
   offset = (0, 0, 0);
 
   if(isDefined(self.model)) {
-    if(issubstr(self.model, "booze"))
+    if(issubstr(self.model, "booze")) {
       offset = vectorscale((0, 0, 1), 14.5);
-    else if(issubstr(self.model, "candy"))
+    }
+    else if(issubstr(self.model, "candy")) {
       offset = vectorscale((0, 0, 1), 11.0);
+    }
   }
 
   return offset;

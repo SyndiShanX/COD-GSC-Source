@@ -12,8 +12,9 @@ main() {
 
   level.hunted_weather = GetDvarInt("hunted_weather");
 
-  if(level.hunted_weather < 0 || level.hunted_weather > 2)
+  if(level.hunted_weather < 0 || level.hunted_weather > 2) {
     level.hunted_weather = (randomint(65534) % 3);
+  }
 
   maps\mp\_load::main();
   maps\createart\co_hunted_art::main();
@@ -26,11 +27,13 @@ main() {
   maps\mp\_compass::setupMiniMap("compass_map_hunted");
   setdvar("compassmaxrange", "3000");
 
-  if(level.hunted_weather == 0)
+  if(level.hunted_weather == 0) {
     ambientPlay("ambient_mp_rural", 0);
+  }
 
-  else if(level.hunted_weather == 1)
+  else if(level.hunted_weather == 1) {
     ambientPlay("ambient_mp_rain", 0);
+  }
 
   level notify("village_start_weather");
 }

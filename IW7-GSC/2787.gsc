@@ -13,8 +13,9 @@ onplayerconnect() {
 playerenterarea(var_00) {
   self.numareas++;
 
-  if(self.numareas == 1)
+  if(self.numareas == 1) {
     radiationeffect();
+  }
 }
 
 playerleavearea(var_00) {
@@ -26,8 +27,9 @@ playerleavearea(var_00) {
   self.poison = 0;
   self notify("leftTrigger");
 
-  if(isDefined(self.radiationoverlay))
+  if(isDefined(self.radiationoverlay)) {
     self.radiationoverlay fadeoutblackout(0.1, 0);
+  }
 }
 
 soundwatcher(var_00) {
@@ -124,10 +126,12 @@ func_2B48() {
       var_07 = var_05 - var_04;
       var_06 = (self.poison - var_04) / var_07;
 
-      if(var_06 < 0)
+      if(var_06 < 0) {
         var_06 = 0;
-      else if(var_06 > 1)
+      }
+      else if(var_06 > 1) {
         var_06 = 1;
+      }
 
       var_08 = var_01 - var_00;
       var_09 = var_00 + var_08 * (1 - var_06);
@@ -147,8 +151,9 @@ func_2B48() {
     if(var_06 == 1) {
       break;
     }
-    if(self.radiationoverlay.alpha != 0)
+    if(self.radiationoverlay.alpha != 0) {
       self.radiationoverlay fadeoutblackout(1, 0);
+    }
 
     wait 0.05;
   }

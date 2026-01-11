@@ -3473,4 +3473,3 @@ private function_ef4bd1a6() {
   adddebugcommand("<dev string:x7a>");
   adddebugcommand("<dev string:x97>" + mapname + "<dev string:xa7>");
 }
-

@@ -105,12 +105,15 @@ enemyWatcher(localClientNum) {
 }
 
 getOtherTeam(team) {
-  if(team == "allies")
+  if(team == "allies") {
     return "axis";
-  else if(team == "axis")
+  }
+  else if(team == "axis") {
     return "allies";
-  else if(team == "free")
+  }
+  else if(team == "free") {
     return "free";
+  }
   assertMsg("getOtherTeam: invalid team " + team);
 }
 
@@ -121,8 +124,9 @@ isLocalPlayerEnemy(enemy) {
   players = getlocalplayers();
   if(isDefined(players)) {
     for(i = 0; i < players.size; i++) {
-      if(players[i] == enemy)
+      if(players[i] == enemy) {
         return true;
+      }
     }
   }
   return false;
@@ -138,12 +142,15 @@ isLocalPlayerEnemyTeam(team) {
 }
 
 hasEnemyChanged(last_enemy) {
-  if(!isDefined(last_enemy) && isDefined(self.enemy))
+  if(!isDefined(last_enemy) && isDefined(self.enemy)) {
     return true;
-  if(isDefined(last_enemy) && !isDefined(self.enemy))
+  }
+  if(isDefined(last_enemy) && !isDefined(self.enemy)) {
     return true;
-  if(last_enemy != self.enemy)
+  }
+  if(last_enemy != self.enemy) {
     return true;
+  }
   return false;
 }
 
@@ -268,8 +275,9 @@ soundNotify(client_num, entity, note) {
     return true;
   }
   prefix = getsubstr(note, 0, 5);
-  if(prefix != "sound")
+  if(prefix != "sound") {
     return false;
+  }
   alias = "anml" + getsubstr(note, 5);
   entity play_dog_sound(client_num, alias);
 }
@@ -279,8 +287,9 @@ dog_get_dvar_int(dvar, def) {
 }
 
 dog_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "")
+  if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
+  }
   else {
     return def;
   }

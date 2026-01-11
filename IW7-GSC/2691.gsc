@@ -80,8 +80,9 @@ func_1896() {
   var_00 = (self.func_115B - 5.0) / (func_7D9E() - 5.0) * 0.5;
   var_00 = var_00 + 0.5;
 
-  if(var_00 > 1.0)
+  if(var_00 > 1.0) {
     var_00 = 1.0;
+  }
 
   return var_00;
 }
@@ -101,8 +102,9 @@ func_1891() {
 func_18A9() {
   var_00 = 0;
 
-  foreach(var_02 in self.func_115D)
+  foreach(var_02 in self.func_115D) {
   var_00 = var_00 + var_02;
+  }
 
   return var_00 / (func_7D9C() * 1.0);
 }
@@ -111,13 +113,16 @@ func_181E() {
   var_00 = scripts\mp\persistence::statget("score");
   var_01 = scripts\mp\persistence::statgetbuffered("timePlayedTotal");
 
-  if(var_01 > 0)
+  if(var_01 > 0) {
     var_02 = var_00 / (var_01 / 60) + 34;
-  else
+  }
+  else {
     var_02 = func_7D9D();
+  }
 
-  if(var_02 < func_7D9D())
+  if(var_02 < func_7D9D()) {
     var_02 = func_7D9D();
+  }
 
   if(func_1892()) {}
 
@@ -136,8 +141,9 @@ func_1890(var_00) {
 func_1897() {
   var_00 = 0;
 
-  if(isDefined(self.func_115A) && self.func_115A)
+  if(isDefined(self.func_115A) && self.func_115A) {
     var_00 = func_7D9F();
+  }
 
   return var_00;
 }
@@ -158,8 +164,9 @@ func_18AA() {
 func_1893() {
   var_00 = 0;
 
-  if(getdvarint("prototype_adrenaline_enabled") == 1)
+  if(getdvarint("prototype_adrenaline_enabled") == 1) {
     var_00 = self.func_115C;
+  }
 
   return var_00;
 }
@@ -167,18 +174,21 @@ func_1893() {
 func_1898() {
   var_00 = 0;
 
-  if(getdvarint("prototype_adrenaline_enabled") == 1 && isDefined(self.func_115A))
+  if(getdvarint("prototype_adrenaline_enabled") == 1 && isDefined(self.func_115A)) {
     var_00 = self.func_115A;
+  }
 
   return var_00;
 }
 
 func_18AE(var_00) {
   if(var_00 func_1898()) {
-    if(var_00 func_1893())
+    if(var_00 func_1893()) {
       thread scripts\mp\hud_message::showsplash("adrenaline_mood_killer", 0);
-    else
+    }
+    else {
       thread scripts\mp\hud_message::showsplash("adrenaline_iced", 0);
+    }
   }
 }
 

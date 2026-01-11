@@ -7,8 +7,10 @@
 #include maps\mp\animscripts\traverse\zm_shared;
 
 main() {
-  if(isDefined(self.isdog) && self.isdog)
+  if(isDefined(self.isdog) && self.isdog) {
     dog_jump_down(72, 7);
-  else
+  }
+  else {
     dosimpletraverse("jump_down_72");
+  }
 }

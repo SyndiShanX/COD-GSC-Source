@@ -27,19 +27,23 @@ power_clangs() {
 }
 
 play_cosmo_announcer_vox(alias, alarm_override, wait_override) {
-  if(!isDefined(alias))
+  if(!isDefined(alias)) {
     return;
+  }
   if(!isDefined(level.cosmann_is_speaking)) {
     level.cosmann_is_speaking = 0;
   }
-  if(!isDefined(alarm_override))
+  if(!isDefined(alarm_override)) {
     alarm_override = false;
-  if(!isDefined(wait_override))
+  }
+  if(!isDefined(wait_override)) {
     wait_override = false;
+  }
   if((level.cosmann_is_speaking == 0) && (wait_override == false)) {
     level.cosmann_is_speaking = 1;
-    if(!alarm_override)
+    if(!alarm_override) {
       level play_initial_alarm();
+    }
     level really_play_2D_sound(alias);
     level.cosmann_is_speaking = 0;
   } else if(wait_override == true) {
@@ -48,8 +52,9 @@ play_cosmo_announcer_vox(alias, alarm_override, wait_override) {
 }
 
 play_gersh_vox(alias) {
-  if(!isDefined(alias))
+  if(!isDefined(alias)) {
     return;
+  }
   if(!isDefined(level.gersh_is_speaking)) {
     level.gersh_is_speaking = 0;
   }
@@ -82,8 +87,9 @@ monkey_round_announcer() {
 radio_easter_eggs() {
   wait(3);
   testent = getEnt("radio_egg_1", "targetname");
-  if(!isDefined(testent))
+  if(!isDefined(testent)) {
     return;
+  }
   for(i = 1; i < 7; i++) {
     ent[i] = getEnt("radio_egg_" + i, "targetname");
     ent[i] hide();
@@ -169,8 +175,9 @@ play_music_easter_egg(player) {
   }
   wait(367);
   level.music_override = false;
-  if(level.monkey_intermission == false && level.music_round_override == false)
+  if(level.monkey_intermission == false && level.music_round_override == false) {
     level thread maps\_zombiemode_audio::change_zombie_music("wave_loop");
+  }
 }
 
 dancing_teddy_bear() {
@@ -254,8 +261,9 @@ init_doll_eggs() {
   wait(10);
   for(i = 0; i < 4; i++) {
     ent = getEnt("doll_egg_" + i, "targetname");
-    if(!isDefined(ent))
+    if(!isDefined(ent)) {
       return;
+    }
     ent thread doll_egg(i);
   }
 }

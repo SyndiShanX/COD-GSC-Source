@@ -142,10 +142,12 @@ aliens_lab_scene() {
 play_sound_alien(var_0, var_1, var_2, var_3) {
   wait(var_0);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     playsoundatpos(var_2, var_1);
-  else
+  }
+  else {
     var_3 playsoundonmovingent(var_1);
+  }
 }
 
 animate_alien(var_0) {
@@ -243,8 +245,9 @@ boss_introduction() {
   thread knockback_players(var_2);
 
   foreach(var_6 in var_0) {
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_6 delete();
+    }
   }
 
   wait 2.93;
@@ -311,8 +314,9 @@ sfx_intro() {
   level.sfx_intro_guard playSound("scn_intro_guard");
   wait 3.3;
 
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 playSound("scn_intro_spider");
+  }
 
   wait 15;
   level.sfx_intro_guard delete();
@@ -419,8 +423,9 @@ intro_music_play() {
       common_scripts\utility::flag_clear("alien_music_playing");
     }
 
-    if(!common_scripts\utility::flag("exfil_music_playing"))
+    if(!common_scripts\utility::flag("exfil_music_playing")) {
       wait 0.01;
+    }
 
     level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_dlc1_armory_intro");
     wait 0.1;
@@ -569,8 +574,9 @@ play_third_spider_music() {
       common_scripts\utility::flag_clear("alien_music_playing");
     }
 
-    if(!common_scripts\utility::flag("exfil_music_playing"))
+    if(!common_scripts\utility::flag("exfil_music_playing")) {
       level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_dlc1_archer_exfil");
+    }
   }
 }
 
@@ -600,8 +606,9 @@ spider_intro_screen_shake(var_0) {
     playrumbleonposition("grenade_rumble", var_0.origin);
     var_1 = var_1 + 0.05;
 
-    if(var_2 > 1)
+    if(var_2 > 1) {
       common_scripts\utility::exploder(120);
+    }
 
     wait 0.6;
   }
@@ -615,8 +622,9 @@ spider_intro_screen_shake_exit(var_0) {
     playrumbleonposition("grenade_rumble", var_0.origin);
     var_1 = var_1 - 0.05;
 
-    if(var_2 < 3)
+    if(var_2 < 3) {
       common_scripts\utility::exploder(120);
+    }
 
     wait 0.6;
   }
@@ -665,8 +673,9 @@ security_room_vo() {
 }
 
 delay_vo_until_all_clear(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 30;
+  }
 
   var_1 = gettime();
   var_2 = var_1 - var_0 * 1000;
@@ -694,17 +703,21 @@ delay_vo_until_all_clear(var_0) {
 }
 
 play_vignette_vo(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "high";
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 30;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0.25;
+  }
 
   foreach(var_6 in level.players) {
     var_6 maps\mp\alien\_music_and_dialog::play_vo_on_player(var_0, var_1, var_2, var_3, var_4);

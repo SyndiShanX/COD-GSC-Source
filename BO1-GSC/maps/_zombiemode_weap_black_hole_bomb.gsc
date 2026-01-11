@@ -670,20 +670,25 @@ black_hole_teleport_add_trigger_to_ent(ent) {
 }
 
 black_hole_teleport_remove_trigger_from_ent(ent) {
-  if(!isDefined(ent._triggers))
+  if(!isDefined(ent._triggers)) {
     return;
-  if(!isDefined(ent._triggers[self getEntityNumber()]))
+  }
+  if(!isDefined(ent._triggers[self getEntityNumber()])) {
     return;
+  }
   ent._triggers[self getEntityNumber()] = 0;
 }
 
 black_hole_teleport_ent_already_in_trigger(trig) {
-  if(!isDefined(self._triggers))
+  if(!isDefined(self._triggers)) {
     return false;
-  if(!isDefined(self._triggers[trig getEntityNumber()]))
+  }
+  if(!isDefined(self._triggers[trig getEntityNumber()])) {
     return false;
-  if(!self._triggers[trig getEntityNumber()])
+  }
+  if(!self._triggers[trig getEntityNumber()]) {
     return false;
+  }
   return true;
 }
 

@@ -678,4 +678,3 @@ function_9c1092f6() {
 
   setgametypesetting(#"zmshowtimer", 1);
 }
-

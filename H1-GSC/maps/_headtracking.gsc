@@ -28,8 +28,10 @@ head_tracking_end(var_0, var_1) {
   self.player_head_tracking = 0;
   var_2 = isDefined(var_1) && var_1;
 
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     self setlookatentity();
-  else
+  }
+  else {
     self setlookatyawlimits(1, var_2);
+  }
 }

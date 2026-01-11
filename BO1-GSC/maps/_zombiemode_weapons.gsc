@@ -1020,8 +1020,9 @@ fire_sale_fix() {
 }
 
 check_for_desirable_chest_location() {
-  if(!isDefined(level.desirable_chest_location))
+  if(!isDefined(level.desirable_chest_location)) {
     return level.chest_index;
+  }
   if(level.chests[level.chest_index].script_noteworthy == level.desirable_chest_location) {
     level.desirable_chest_location = undefined;
     return level.chest_index;
@@ -1792,38 +1793,49 @@ play_weapon_vo(weapon) {
 }
 
 weapon_type_check(weapon) {
-  if(!isDefined(self.entity_num))
+  if(!isDefined(self.entity_num)) {
     return "crappy";
+  }
   switch (self.entity_num) {
     case 0:
-      if(weapon == "m16_zm")
+      if(weapon == "m16_zm") {
         return "favorite";
-      else if(weapon == "rottweil72_upgraded_zm")
+      }
+      else if(weapon == "rottweil72_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 1:
-      if(weapon == "fnfal_zm")
+      if(weapon == "fnfal_zm") {
         return "favorite";
-      else if(weapon == "hk21_upgraded_zm")
+      }
+      else if(weapon == "hk21_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 2:
-      if(weapon == "china_lake_zm")
+      if(weapon == "china_lake_zm") {
         return "favorite";
-      else if(weapon == "thundergun_upgraded_zm")
+      }
+      else if(weapon == "thundergun_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 3:
-      if(weapon == "mp40_zm")
+      if(weapon == "mp40_zm") {
         return "favorite";
-      else if(weapon == "crossbow_explosive_upgraded_zm")
+      }
+      else if(weapon == "crossbow_explosive_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
   }
-  if(IsSubStr(weapon, "upgraded"))
+  if(IsSubStr(weapon, "upgraded")) {
     return "upgrade";
-  else
+  }
+  else {
     return level.zombie_weapons[weapon].vox;
+  }
 }
 
 get_player_index(player) {

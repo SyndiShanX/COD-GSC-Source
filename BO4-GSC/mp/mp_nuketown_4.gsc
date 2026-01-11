@@ -604,4 +604,3 @@ mannequindamage(inflictor, attacker, damage, dflags, mod, weapon, point, dir, hi
 
   return damage;
 }
-

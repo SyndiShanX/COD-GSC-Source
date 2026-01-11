@@ -35,10 +35,12 @@ garage() {
   thread maps\flood_coverwater::register_coverwater_area("coverwater_garage", "garage");
   level.cw_player_in_rising_water = 0;
 
-  if(maps\_utility::getdifficulty() == "fu")
+  if(maps\_utility::getdifficulty() == "fu") {
     level.cw_player_allowed_underwater_time = 10;
-  else
+  }
+  else {
     level.cw_player_allowed_underwater_time = 15;
+  }
 
   var_0 = getEntArray("garage_wave1_ai", "targetname");
   common_scripts\utility::array_thread(var_0, maps\_utility::add_spawn_function, ::enemy_garage);
@@ -65,8 +67,9 @@ garage() {
 block_for_trigger_release(var_0) {
   var_0 endon("death");
 
-  while(level.player istouching(var_0))
+  while(level.player istouching(var_0)) {
     common_scripts\utility::waitframe();
+  }
 }
 
 ally_garage(var_0) {
@@ -78,15 +81,17 @@ ally_garage_sneak(var_0, var_1, var_2) {
   self endon("death");
   maps\flood_util::jkuprint(self.animname + " in garage scripts!");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     block_ally_sneak_to_node(var_1);
+  }
 
   maps\_utility::set_force_color(var_0);
   maps\_utility::enable_cqbwalk();
   var_3 = getnode(var_2, "targetname");
 
-  while(distance2d(self.origin, var_3.origin) > 12)
+  while(distance2d(self.origin, var_3.origin) > 12) {
     common_scripts\utility::waitframe();
+  }
 
   common_scripts\utility::flag_set("garage_" + self.animname + "_door_ready");
 }
@@ -154,20 +159,23 @@ enemy_garage_jumper(var_0) {
 }
 
 track_ai() {
-  while(maps\_utility::get_ai_group_count("garage_wave1_ai") + maps\_utility::get_ai_group_count("garage_wave1above_ai") > 5)
+  while(maps\_utility::get_ai_group_count("garage_wave1_ai") + maps\_utility::get_ai_group_count("garage_wave1above_ai") > 5) {
     wait 0.05;
+  }
 
   maps\_utility::activate_trigger("garage_wave2_trig", "targetname");
   maps\flood_util::jkuprint("g: 2 via tracker");
 
-  while(maps\_utility::get_ai_group_count("garage_wave1_ai") + maps\_utility::get_ai_group_count("garage_wave1above_ai") + maps\_utility::get_ai_group_count("garage_wave2_ai") + maps\_utility::get_ai_group_count("garage_wave2_ai_jumper") > 8)
+  while(maps\_utility::get_ai_group_count("garage_wave1_ai") + maps\_utility::get_ai_group_count("garage_wave1above_ai") + maps\_utility::get_ai_group_count("garage_wave2_ai") + maps\_utility::get_ai_group_count("garage_wave2_ai_jumper") > 8) {
     wait 0.05;
+  }
 
   maps\_utility::activate_trigger("garage_wave3_trig", "targetname");
   maps\flood_util::jkuprint("g: 2above(3) via tracker");
 
-  while(maps\_utility::get_ai_group_count("garage_wave2above_ai") > 2)
+  while(maps\_utility::get_ai_group_count("garage_wave2above_ai") > 2) {
     wait 0.05;
+  }
 
   maps\_utility::activate_trigger("garage_wave4_trig", "targetname");
   maps\flood_util::jkuprint("g: 4 via tracker");
@@ -246,8 +254,9 @@ garage_ally_move476() {
     var_4 = maps\_utility::array_merge(var_4, var_3);
 
     foreach(var_6 in var_4) {
-      if(var_6 getgoalvolume().targetname != "garage_wave1_below")
+      if(var_6 getgoalvolume().targetname != "garage_wave1_below") {
         thread maps\flood_util::reassign_goal_volume(var_6, "garage_wave1_below");
+      }
     }
 
     block_for_trigger_release(var_0);
@@ -291,8 +300,9 @@ garage_ally_move478() {
     var_5 = maps\_utility::array_merge(var_5, var_4);
 
     foreach(var_7 in var_5) {
-      if(var_7 getgoalvolume().targetname != "garage_wave2_below_retreat")
+      if(var_7 getgoalvolume().targetname != "garage_wave2_below_retreat") {
         thread maps\flood_util::reassign_goal_volume(var_7, "garage_wave2_below_retreat");
+      }
     }
 
     block_for_trigger_release(var_0);
@@ -314,8 +324,9 @@ garage_ally_move479() {
     var_5 = maps\_utility::array_merge(var_5, var_4);
 
     foreach(var_7 in var_5) {
-      if(var_7 getgoalvolume().targetname != "garage_wave2_above")
+      if(var_7 getgoalvolume().targetname != "garage_wave2_above") {
         thread maps\flood_util::reassign_goal_volume(var_7, "garage_wave2_above");
+      }
     }
 
     block_for_trigger_release(var_0);
@@ -344,13 +355,15 @@ garage_ally_move480() {
 float_cars() {
   var_0 = getEntArray("floating_car", "script_linkname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread floater_logic("car_bob");
+  }
 
   var_4 = getEntArray("floating_container", "script_noteworthy");
 
-  foreach(var_6 in var_4)
+  foreach(var_6 in var_4) {
   var_6 thread floater_logic("bob");
+  }
 }
 
 floater_logic(var_0) {
@@ -359,8 +372,9 @@ floater_logic(var_0) {
 
   switch (var_0) {
     case "spin":
-      if(isDefined(self.targetname) && self.targetname == "floating_ball")
+      if(isDefined(self.targetname) && self.targetname == "floating_ball") {
         thread check_for_ball_pop();
+      }
 
       for(;;) {
         self moveto(self.origin - (0, 0, 1), 1, 0.2, 0.2);
@@ -416,8 +430,9 @@ car_sink_logic() {
     var_1 connectpaths();
   }
 
-  while(common_scripts\utility::isdestructible())
+  while(common_scripts\utility::isdestructible()) {
     wait 0.05;
+  }
 
   maps\_utility::ent_flag_set("destroyed");
   var_2 = common_scripts\utility::drop_to_ground(self.origin, self.origin[2]);
@@ -454,15 +469,17 @@ door_open() {
   foreach(var_4 in var_0) {
     var_4 rotateyaw(130, var_2, 0, 0.2);
 
-    if(var_4.classname == "script_brushmodel")
+    if(var_4.classname == "script_brushmodel") {
       var_4 connectpaths();
+    }
   }
 
   foreach(var_4 in var_1) {
     var_4 rotateyaw(-130, var_2, 0, 0.2);
 
-    if(var_4.classname == "script_brushmodel")
+    if(var_4.classname == "script_brushmodel") {
       var_4 connectpaths();
+    }
   }
 
   wait(var_2);

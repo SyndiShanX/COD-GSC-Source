@@ -82,10 +82,12 @@ claw_animating() {
       anim_rate = turning_speed;
       anim_rate = clamp(anim_rate, 0.0, 3);
 
-      if(angular_velocity[2] > 0)
+      if(angular_velocity[2] > 0) {
         self setanimknoball( % int_claw_turn_l, % root, 1, 0.2, anim_rate);
-      else
+      }
+      else {
         self setanimknoball( % int_claw_turn_r, % root, 1, 0.2, anim_rate);
+      }
 
       self.current_anim_speed = level.idle;
       self.idle_end_time = 0;
@@ -102,13 +104,16 @@ claw_animating() {
       prev_anim_delta = level.claw_speeds[self.current_anim_speed] - level.claw_speeds[self.current_anim_speed - 1];
       prev_anim_speed = level.claw_speeds[self.current_anim_speed] - prev_anim_delta * 0.6;
 
-      if(speed > next_anim_speed)
+      if(speed > next_anim_speed) {
         self.current_anim_speed++;
-      else if(speed < prev_anim_speed)
+      }
+      else if(speed < prev_anim_speed) {
         self.current_anim_speed--;
+      }
 
-      if(self.current_anim_speed <= level.idle)
+      if(self.current_anim_speed <= level.idle) {
         self.current_anim_speed = level.walk;
+      }
 
       anim_rate = speed / level.claw_speeds[self.current_anim_speed];
       anim_rate = clamp(anim_rate, 0.0, 1.5);
@@ -186,8 +191,9 @@ claw_update_hud() {
       old_overheat_2 = overheat_2;
       overheat_2 = self.viewlockedentity isvehicleturretoverheating(1);
 
-      if(old_heat_1 != heat_1 || old_heat_2 != heat_2 || old_overheat_1 != overheat_1 || old_overheat_2 != overheat_2)
+      if(old_heat_1 != heat_1 || old_heat_2 != heat_2 || old_overheat_1 != overheat_1 || old_overheat_2 != overheat_2) {
         luinotifyevent(&"hud_weapon_heat", 4, int(heat_1), int(heat_2), overheat_1, overheat_2);
+      }
     }
 
     wait 0.05;

@@ -29,8 +29,9 @@ system_message_loop() {
 
     flag_wait(flag);
 
-    if(!flag("_stealth_enabled"))
+    if(!flag("_stealth_enabled")) {
       continue;
+    }
 
     system_event_change("spotted");
 
@@ -38,8 +39,9 @@ system_message_loop() {
 
     flag_waitopen(flag);
 
-    if(!flag("_stealth_enabled"))
+    if(!flag("_stealth_enabled")) {
       continue;
+    }
 
     system_event_change("hidden");
 
@@ -72,8 +74,9 @@ system_state_spotted() {
     foreach(group_name, group in array) {
       //is this group spotted?
       _flag = group_get_flagname_from_group("_stealth_spotted", group_name);
-      if(!flag(_flag))
+      if(!flag(_flag)) {
         continue;
+      }
 
       thread system_state_try_clear_flag(group_name);
     }
@@ -85,16 +88,18 @@ system_state_spotted() {
 system_state_try_clear_flag(group_name) {
   clear = system_state_check_no_enemy(group_name);
 
-  if(!clear)
+  if(!clear) {
     return;
+  }
   //basically if everyone lost their enemy...then we're back to hidden
   //there might be guys still looking so give them 1 second and check again
   wait 1;
 
   clear = system_state_check_no_enemy(group_name);
 
-  if(!clear)
+  if(!clear) {
     return;
+  }
   //so if we got here, then we passed the second test, if that's the case, then clear the flag
   group_flag_clear("_stealth_spotted", group_name);
 }
@@ -103,8 +108,9 @@ system_state_check_no_enemy(group_name) {
   group = group_get_ai_in_group(group_name);
 
   foreach(key, ai in group) {
-    if(!isalive(ai.enemy))
+    if(!isalive(ai.enemy)) {
       continue;
+    }
 
     return false;
   }
@@ -146,8 +152,9 @@ player_grenade_check_dieout(grenade) {
   //so that the system checking for saving the game can verify those notifies first
   waittillframeend;
 
-  if(!level._stealth.logic.player_nades)
+  if(!level._stealth.logic.player_nades) {
     flag_clear("_stealth_player_nade");
+  }
 }
 
 system_init_shadows() {
@@ -161,11 +168,13 @@ stealth_shadow_volumes() {
   while(1) {
     self waittill("trigger", other);
 
-    if(!isalive(other))
+    if(!isalive(other)) {
       continue;
+    }
 
-    if(other ent_flag("_stealth_in_shadow"))
+    if(other ent_flag("_stealth_in_shadow")) {
       continue;
+    }
 
     other thread stealth_shadow_ai_in_volume(self);
   }
@@ -176,8 +185,9 @@ stealth_shadow_ai_in_volume(volume) {
 
   self ent_flag_set("_stealth_in_shadow");
 
-  while(self istouching(volume))
+  while(self istouching(volume)) {
     wait .05;
+  }
 
   self ent_flag_clear("_stealth_in_shadow");
 }
@@ -190,8 +200,9 @@ stealth_shadow_ai_in_volume(volume) {
 system_handle_clipbrush() {
   self endon("death");
 
-  if(isDefined(self.script_flag_wait))
+  if(isDefined(self.script_flag_wait)) {
     flag_wait(self.script_flag_wait);
+  }
 
   waittillframeend;
 
@@ -215,8 +226,9 @@ system_handle_clipbrush() {
   level add_wait(::flag_wait, event_flag);
   do_wait_any();
 
-  if(self.spawnflags & 1)
+  if(self.spawnflags & 1) {
     self connectpaths();
+  }
 
   self delete();
 }

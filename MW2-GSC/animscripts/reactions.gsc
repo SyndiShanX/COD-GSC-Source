@@ -83,12 +83,15 @@ DoDeathReactionAnim( deathAnim )
 
 getDeathReactionAnim()
 {
-if( self.deathTeamateReaction == "back" )
+if( self.deathTeamateReaction == "back" ) {
 return %run_reaction_180;
-else if( self.deathTeamateReaction == "left" )
+}
+else if( self.deathTeamateReaction == "left" ) {
 return %run_reaction_L_quick;
-else if( self.deathTeamateReaction == "right" )
+}
+else if( self.deathTeamateReaction == "right" ) {
 return %run_reaction_R_quick;
+}
 }
 
 deathCheck()
@@ -109,8 +112,9 @@ self AddAIEventListener( "death" );
 	for( ;; )
 	{
 	self waittill( "ai_event", event, originator, position );
-	if( event != "death" )
+	if( event != "death" ) {
 			continue;
+	}
 			
 	deathDirection = position - self.origin;
 	deathDistance = Length( deathDirection );
@@ -124,12 +128,15 @@ self AddAIEventListener( "death" );
 	deltaAngles = Abs( self.angles[1] - goalAngles[1] );
 	if( deltaAngles > minTurnAngle )
 	{
-	if( deltaAngles > maxTurnAngle )
+	if( deltaAngles > maxTurnAngle ) {
 	self.deathTeamateReaction = "back";
-	else if( self.angles[1] > goalAngles[1] )
+	}
+	else if( self.angles[1] > goalAngles[1] ) {
 	self.deathTeamateReaction = "left";
-	else
+	}
+	else {
 	self.deathTeamateReaction = "right";
+	}
 	
 	self.deathTeamate = true;
 	}
@@ -171,10 +178,12 @@ bulletWhizbyReaction() {
 
     reaction = reactAnim[randomint(reactAnim.size)];
 
-    if(enemyNear)
+    if(enemyNear) {
       waitTime = 1 + randomfloat(0.5);
-    else
+    }
+    else {
       waitTime = 0.2 + randomfloat(0.5);
+    }
 
     self setFlaggedAnimKnobRestart("reactanim", reaction, 1, 0.1, 1);
     self animscripts\shared::DoNoteTracksForTime(waitTime, "reactanim");
@@ -203,10 +212,12 @@ bulletWhizbyReaction() {
 
     forward = anglesToForward(self.angles);
 
-    if(isDefined(self.whizbyEnemy))
+    if(isDefined(self.whizbyEnemy)) {
       dirToEnemy = vectorNormalize(self.whizbyEnemy.origin - self.origin);
-    else
+    }
+    else {
       dirToEnemy = forward;
+    }
 
     if(vectordot(dirToEnemy, forward) > 0) {
       twitchAnim = randomAnimOfTwo( % exposed_crouch_idle_twitch_v2, % exposed_crouch_idle_twitch_v3);
@@ -235,23 +246,28 @@ bulletWhizbyReaction() {
 bulletWhizbyCheckLoop() {
   self endon("killanimscript");
 
-  if(isDefined(self.disableBulletWhizbyReaction))
+  if(isDefined(self.disableBulletWhizbyReaction)) {
     return;
+  }
 
   while(1) {
     self waittill("bulletwhizby", shooter);
 
-    if(!isDefined(shooter.team) || self.team == shooter.team)
+    if(!isDefined(shooter.team) || self.team == shooter.team) {
       continue;
+    }
 
-    if(isDefined(self.coverNode) || isDefined(self.ambushNode))
+    if(isDefined(self.coverNode) || isDefined(self.ambushNode)) {
       continue;
+    }
 
-    if(self.a.pose != "stand")
+    if(self.a.pose != "stand") {
       continue;
+    }
 
-    if(!canReactAgain())
+    if(!canReactAgain()) {
       continue;
+    }
 
     self.whizbyEnemy = shooter;
     self animcustom(::bulletWhizbyReaction);
@@ -288,10 +304,12 @@ getNewEnemyReactionAnim() {
     reactAnimArray[0] = % exposed_backpedal;
     reactAnimArray[1] = % exposed_idle_reactB;
 
-    if(isDefined(self.enemy) && distanceSquared(self.enemy.origin, self.reactionTargetPos) < 256 * 256)
+    if(isDefined(self.enemy) && distanceSquared(self.enemy.origin, self.reactionTargetPos) < 256 * 256) {
       self orientmode("face enemy");
-    else
+    }
+    else {
       self orientmode("face point", self.reactionTargetPos);
+    }
 
     if(self.a.pose == "crouch") {
       dirToReactionTarget = vectorNormalize(self.reactionTargetPos - self.origin);
@@ -356,17 +374,21 @@ newEnemyReactionAnim() {
 newEnemySurprisedReaction() {
   self endon("death");
 
-  if(isDefined(self.disableReactionAnims))
+  if(isDefined(self.disableReactionAnims)) {
     return;
+  }
 
-  if(!canReactAgain())
+  if(!canReactAgain()) {
     return;
+  }
 
-  if(self.a.pose == "prone" || isDefined(self.a.onback))
+  if(self.a.pose == "prone" || isDefined(self.a.onback)) {
     return;
+  }
 
   self animmode("gravity");
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     newEnemyReactionAnim();
+  }
 }

@@ -36,4 +36,3 @@ set_gadget_other_status(weapon, status, time) {
     self iprintlnbold("<dev string:x4b>" + weapon.name + "<dev string:x5b>" + status + timestr);
   }
 }
-

@@ -59,4 +59,3 @@ function_230ff6dc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     wait 0.2;
   }
 }
-

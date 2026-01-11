@@ -19,8 +19,9 @@ func_13C17(var_00) {
   var_01 = 0;
 
   if(isDefined(level.venoms) && level.venoms > 0) {
-    if(level.venoms >= 6)
+    if(level.venoms >= 6) {
       var_01 = 1;
+    }
   }
 
   if(scripts\mp\utility\game::istrue(var_01)) {
@@ -34,8 +35,9 @@ func_13C17(var_00) {
 func_1288B(var_00) {
   var_01 = scripts\mp\killstreaks\killstreaks::func_D507(var_00);
 
-  if(!var_01)
+  if(!var_01) {
     return 0;
+  }
 
   var_02 = func_6C9B(80, 20, 10);
 
@@ -59,14 +61,17 @@ func_1288B(var_00) {
     var_07 = var_07 + "_" + var_08;
   }
 
-  if(scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_increased_frost"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_increased_frost")) {
     var_04 = var_04 - 10;
+  }
 
-  if(scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_speed_heavy"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_speed_heavy")) {
     var_06 = "veh_venom_mp_fast";
+  }
 
-  if(scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_stealth_speed"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_stealth_speed")) {
     var_06 = "veh_venom_mp_slow";
+  }
 
   var_09 = spawnvehicle(var_03, var_0.streakname, var_06, var_02, self.angles, self);
   var_9.team = self.team;
@@ -119,8 +124,9 @@ func_1288B(var_00) {
   var_09 thread func_1327A();
   var_10 = var_9.func_AC75;
 
-  if(scripts\mp\utility\game::isanymlgmatch())
+  if(scripts\mp\utility\game::isanymlgmatch()) {
     var_10 = int(var_10 / 2);
+  }
 
   var_09 thread func_13281(var_10);
   var_09 thread func_13283();
@@ -128,8 +134,9 @@ func_1288B(var_00) {
   var_09 thread venom_watchempdamage();
   scripts\mp\matchdata::logkillstreakevent(var_0.streakname, var_9.origin);
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(0);
+  }
 
   self.restoreangles = self.angles;
   thread func_5130(var_09, var_10);
@@ -251,8 +258,9 @@ func_1327B() {
     if(var_00 attackbuttonpressed()) {
       var_01 = distancesquared(self.spawnpos, self.origin);
 
-      if(var_01 >= 5760000)
+      if(var_01 >= 5760000) {
         var_00 scripts\mp\missions::func_D991("ch_venom_distance");
+      }
 
       self notify("venom_end", self.origin);
     }
@@ -279,23 +287,27 @@ func_13279() {
     var_10 = scripts\mp\utility\game::func_13CA1(var_10, var_14);
 
     if(isDefined(var_02) && var_2.classname != "trigger_hurt") {
-      if(isDefined(var_2.owner))
+      if(isDefined(var_2.owner)) {
         var_02 = var_2.owner;
+      }
 
-      if(isDefined(var_2.team) && var_2.team == self.team && var_02 != self.owner)
+      if(isDefined(var_2.team) && var_2.team == self.team && var_02 != self.owner) {
         continue;
+      }
     }
 
     if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_02)) {
       continue;
     }
-    if(isDefined(var_10))
+    if(isDefined(var_10)) {
       var_01 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_02, var_10, var_05, var_01, self.maxhealth, 1, 1, 1);
+    }
 
     self.func_EDD7 = self.func_EDD7 - var_01;
 
-    if(self.func_EDD7 < 0)
+    if(self.func_EDD7 < 0) {
       self.func_EDD7 = 0;
+    }
 
     var_00 setclientomnvar("ui_killstreak_health", self.func_EDD7 / 10);
 
@@ -303,8 +315,9 @@ func_13279() {
       scripts\mp\killstreaks\killstreaks::killstreakhit(var_02, var_10, self, var_05);
 
       if(isDefined(var_10) && var_10 == "concussion_grenade_mp") {
-        if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_02)))
+        if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_02))) {
           var_02 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
+        }
       }
 
       var_02 scripts\mp\damagefeedback::updatedamagefeedback("");
@@ -314,8 +327,9 @@ func_13279() {
         var_15 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
         var_16 = "callout_destroyed_" + self.streakname;
 
-        if(var_15 != "")
+        if(var_15 != "") {
           var_16 = var_16 + "_" + var_15;
+        }
 
         scripts\mp\damage::onkillstreakkilled(self.streakname, var_02, var_10, var_05, var_01, "destroyed_" + self.streakname, "venom_destroyed", var_16, 1);
         self notify("venom_end", self.origin);
@@ -324,8 +338,9 @@ func_13279() {
       continue;
     }
 
-    if(self.func_EDD7 <= 0)
+    if(self.func_EDD7 <= 0) {
       self notify("venom_end", self.origin, 1);
+    }
   }
 }
 
@@ -335,8 +350,9 @@ func_1327A() {
   self waittill("venom_end", var_01, var_02);
   scripts\mp\utility\game::printgameaction("killstreak ended - venom", var_00);
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(1);
+  }
 
   self setscriptablepartstate("body", "hide", 0);
   self setscriptablepartstate("center_disc", "hide_fx", 0);
@@ -347,8 +363,9 @@ func_1327A() {
   thread func_0118(var_00, var_01);
   level.venoms--;
 
-  if(level.venoms < 0)
+  if(level.venoms < 0) {
     level.venoms = 0;
+  }
 
   if(isDefined(var_00)) {
     if(!scripts\mp\utility\game::istrue(var_02)) {
@@ -462,49 +479,58 @@ func_6C9B(var_00, var_01, var_02) {
   var_06 = var_05 + (0, 0, var_01);
   var_07 = var_06 + var_00 * var_03;
 
-  if(func_3DCF(var_05, var_07, var_02))
+  if(func_3DCF(var_05, var_07, var_02)) {
     return var_07;
+  }
 
   var_07 = var_06 - var_00 * var_03;
 
-  if(func_3DCF(var_05, var_07, var_02))
+  if(func_3DCF(var_05, var_07, var_02)) {
     return var_07;
+  }
 
   var_07 = var_07 + var_00 * var_04;
 
-  if(func_3DCF(var_05, var_07, var_02))
+  if(func_3DCF(var_05, var_07, var_02)) {
     return var_07;
+  }
 
   var_07 = var_06 - var_00 * var_04;
 
-  if(func_3DCF(var_05, var_07, var_02))
+  if(func_3DCF(var_05, var_07, var_02)) {
     return var_07;
+  }
 
   var_07 = var_06;
 
-  if(func_3DCF(var_05, var_07, var_02))
+  if(func_3DCF(var_05, var_07, var_02)) {
     return var_07;
+  }
 
   scripts\engine\utility::waitframe();
   var_07 = var_06 + 0.707 * var_00 * (var_03 + var_04);
 
-  if(func_3DCF(var_05, var_07, var_02))
+  if(func_3DCF(var_05, var_07, var_02)) {
     return var_07;
+  }
 
   var_07 = var_06 + 0.707 * var_00 * (var_03 - var_04);
 
-  if(func_3DCF(var_05, var_07, var_02))
+  if(func_3DCF(var_05, var_07, var_02)) {
     return var_07;
+  }
 
   var_07 = var_06 + 0.707 * var_00 * (var_04 - var_03);
 
-  if(func_3DCF(var_05, var_07, var_02))
+  if(func_3DCF(var_05, var_07, var_02)) {
     return var_07;
+  }
 
   var_07 = var_06 + 0.707 * var_00 * (-1 * var_03 - var_04);
 
-  if(func_3DCF(var_05, var_07, var_02))
+  if(func_3DCF(var_05, var_07, var_02)) {
     return var_07;
+  }
 
   return undefined;
 }
@@ -517,8 +543,9 @@ func_3DCF(var_00, var_01, var_02) {
     var_05 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
     var_06 = physics_raycast(var_00, var_01, var_05, var_04, 0, "physicsquery_closest");
 
-    if(var_6.size == 0)
+    if(var_6.size == 0) {
       var_03 = 1;
+    }
   }
 
   return var_03;
@@ -529,18 +556,21 @@ isvenom() {
 }
 
 makedamageimmune(var_00) {
-  if(!isDefined(self.entsimmune))
+  if(!isDefined(self.entsimmune)) {
     self.entsimmune = [];
+  }
 
   self.entsimmune[var_00 getentitynumber()] = var_00;
 }
 
 isdamageimmune(var_00) {
-  if(!isvenom())
+  if(!isvenom()) {
     return 0;
+  }
 
-  if(!isDefined(self.entsimmune))
+  if(!isDefined(self.entsimmune)) {
     return 0;
+  }
 
   return isDefined(self.entsimmune[var_00 getentitynumber()]);
 }
@@ -550,12 +580,14 @@ venommodifieddamage(var_00, var_01, var_02, var_03, var_04) {
     if(var_03 isvenom() && scripts\mp\killstreaks\utility::func_A69F(var_3.streakinfo, "passive_decreased_damage")) {
       var_05 = distance2dsquared(var_1.origin, var_3.origin);
 
-      if(var_05 >= 22500 && var_04 > 10)
+      if(var_05 >= 22500 && var_04 > 10) {
         var_04 = 0;
+      }
     }
 
-    if(var_03 isdamageimmune(var_01))
+    if(var_03 isdamageimmune(var_01)) {
       var_04 = 0;
+    }
   }
 
   return var_04;

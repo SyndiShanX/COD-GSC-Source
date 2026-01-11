@@ -36,13 +36,16 @@ monitorflash_internal(amount_distance, amount_angle, attacker, direct_on_player)
   hurtattacker = 0;
   hurtvictim = 1;
 
-  if(amount_angle < 0.5)
+  if(amount_angle < 0.5) {
     amount_angle = 0.5;
-  else if(amount_angle > 0.8)
+  }
+  else if(amount_angle > 0.8) {
     amount_angle = 1;
+  }
 
-  if(isDefined(attacker) && attacker == self)
+  if(isDefined(attacker) && attacker == self) {
     amount_distance = amount_distance * 0.5;
+  }
 
   duration = amount_distance * amount_angle * 6;
 
@@ -51,16 +54,19 @@ monitorflash_internal(amount_distance, amount_angle, attacker, direct_on_player)
   }
   rumbleduration = undefined;
 
-  if(duration > 2)
+  if(duration > 2) {
     rumbleduration = 0.75;
-  else
+  }
+  else {
     rumbleduration = 0.25;
+  }
 
   assert(isDefined(self.team));
 
   if(level.teambased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team && attacker != self) {
-    if(level.friendlyfire == 0)
+    if(level.friendlyfire == 0) {
       return;
+    }
     else if(level.friendlyfire == 1) {
     } else if(level.friendlyfire == 2) {
       duration = duration * 0.5;
@@ -91,8 +97,9 @@ monitorflash_internal(amount_distance, amount_angle, attacker, direct_on_player)
   }
 
   if(hurtattacker) {
-    if(attacker mayapplyscreeneffect())
+    if(attacker mayapplyscreeneffect()) {
       attacker thread applyflash(duration, rumbleduration, attacker);
+    }
   }
 }
 
@@ -126,11 +133,13 @@ monitorrcbombflash() {
 }
 
 applyflash(duration, rumbleduration, attacker) {
-  if(!isDefined(self.flashduration) || duration > self.flashduration)
+  if(!isDefined(self.flashduration) || duration > self.flashduration) {
     self.flashduration = duration;
+  }
 
-  if(!isDefined(self.flashrumbleduration) || rumbleduration > self.flashrumbleduration)
+  if(!isDefined(self.flashrumbleduration) || rumbleduration > self.flashrumbleduration) {
     self.flashrumbleduration = rumbleduration;
+  }
 
   self thread playflashsound(duration);
   wait 0.05;
@@ -141,8 +150,9 @@ applyflash(duration, rumbleduration, attacker) {
     self.lastflashedby = attacker;
   }
 
-  if(isDefined(self.flashrumbleduration))
+  if(isDefined(self.flashrumbleduration)) {
     self thread flashrumbleloop(self.flashrumbleduration);
+  }
 
   self.flashduration = undefined;
   self.flashrumbleduration = undefined;
@@ -158,8 +168,9 @@ playflashsound(duration) {
   flashsound playSound(level.sound_flash_start);
   flashsound playLoopSound(level.sound_flash_loop);
 
-  if(duration > 0.5)
+  if(duration > 0.5) {
     wait(duration - 0.5);
+  }
 
   flashsound playSound(level.sound_flash_start);
   flashsound stoploopsound(0.5);

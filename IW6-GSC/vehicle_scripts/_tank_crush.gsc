@@ -8,8 +8,9 @@ init_tank_crush() {
 }
 
 tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 1;
+  }
 
   var_7 = self;
   self vehicle_setspeed(7 * var_6, 5, 5);
@@ -46,8 +47,9 @@ tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_29 = var_29 + var_23 * var_27;
   var_28.angles = vectortoangles(var_29);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     level thread common_scripts\utility::play_sound_in_space(var_5, var_11);
+  }
 
   var_0 useanimtree(var_4);
   var_7 useanimtree(var_4);
@@ -105,11 +107,13 @@ tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 tank_crush_fx_on_tag(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     wait(var_3);
+  }
 
   playFXOnTag(var_1, self, var_0);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     thread maps\_utility::play_sound_on_tag(var_2, var_0);
+  }
 }

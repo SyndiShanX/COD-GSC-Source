@@ -17,42 +17,53 @@ init() {
 }
 
 perks_register_clientfield() {
-  if(is_true(level.zombiemode_using_additionalprimaryweapon_perk))
+  if(is_true(level.zombiemode_using_additionalprimaryweapon_perk)) {
     registerclientfield("toplayer", "perk_additional_primary_weapon", 1, 2, "int", level.zombies_global_perk_client_callback, 0, 1);
+  }
 
-  if(is_true(level.zombiemode_using_deadshot_perk))
+  if(is_true(level.zombiemode_using_deadshot_perk)) {
     registerclientfield("toplayer", "perk_dead_shot", 1, 2, "int", level.zombies_global_perk_client_callback, 0, 1);
+  }
 
-  if(is_true(level.zombiemode_using_doubletap_perk))
+  if(is_true(level.zombiemode_using_doubletap_perk)) {
     registerclientfield("toplayer", "perk_double_tap", 1, 2, "int", level.zombies_global_perk_client_callback, 0, 1);
+  }
 
-  if(is_true(level.zombiemode_using_juggernaut_perk))
+  if(is_true(level.zombiemode_using_juggernaut_perk)) {
     registerclientfield("toplayer", "perk_juggernaut", 1, 2, "int", level.zombies_global_perk_client_callback, 0, 1);
+  }
 
-  if(is_true(level.zombiemode_using_marathon_perk))
+  if(is_true(level.zombiemode_using_marathon_perk)) {
     registerclientfield("toplayer", "perk_marathon", 1, 2, "int", level.zombies_global_perk_client_callback, 0, 1);
+  }
 
-  if(is_true(level.zombiemode_using_revive_perk))
+  if(is_true(level.zombiemode_using_revive_perk)) {
     registerclientfield("toplayer", "perk_quick_revive", 1, 2, "int", level.zombies_global_perk_client_callback, 0, 1);
+  }
 
-  if(is_true(level.zombiemode_using_sleightofhand_perk))
+  if(is_true(level.zombiemode_using_sleightofhand_perk)) {
     registerclientfield("toplayer", "perk_sleight_of_hand", 1, 2, "int", level.zombies_global_perk_client_callback, 0, 1);
+  }
 
-  if(is_true(level.zombiemode_using_tombstone_perk))
+  if(is_true(level.zombiemode_using_tombstone_perk)) {
     registerclientfield("toplayer", "perk_tombstone", 1, 2, "int", level.zombies_global_perk_client_callback, 0, 1);
+  }
 
-  if(is_true(level.zombiemode_using_perk_intro_fx))
+  if(is_true(level.zombiemode_using_perk_intro_fx)) {
     registerclientfield("scriptmover", "clientfield_perk_intro_fx", 1000, 1, "int", ::perk_meteor_fx, 0);
+  }
 
-  if(is_true(level.zombiemode_using_chugabud_perk))
+  if(is_true(level.zombiemode_using_chugabud_perk)) {
     registerclientfield("toplayer", "perk_chugabud", 1000, 1, "int", level.zombies_global_perk_client_callback, 0, 1);
+  }
 
   if(level._custom_perks.size > 0) {
     a_keys = getarraykeys(level._custom_perks);
 
     for(i = 0; i < a_keys.size; i++) {
-      if(isDefined(level._custom_perks[a_keys[i]].clientfield_register))
+      if(isDefined(level._custom_perks[a_keys[i]].clientfield_register)) {
         level[[level._custom_perks[a_keys[i]].clientfield_register]]();
+      }
     }
   }
 
@@ -62,63 +73,77 @@ perks_register_clientfield() {
 perk_init_code_callbacks() {
   wait 0.1;
 
-  if(is_true(level.zombiemode_using_additionalprimaryweapon_perk))
+  if(is_true(level.zombiemode_using_additionalprimaryweapon_perk)) {
     setupclientfieldcodecallbacks("toplayer", 1, "perk_additional_primary_weapon");
+  }
 
-  if(is_true(level.zombiemode_using_deadshot_perk))
+  if(is_true(level.zombiemode_using_deadshot_perk)) {
     setupclientfieldcodecallbacks("toplayer", 1, "perk_dead_shot");
+  }
 
-  if(is_true(level.zombiemode_using_doubletap_perk))
+  if(is_true(level.zombiemode_using_doubletap_perk)) {
     setupclientfieldcodecallbacks("toplayer", 1, "perk_double_tap");
+  }
 
-  if(is_true(level.zombiemode_using_juggernaut_perk))
+  if(is_true(level.zombiemode_using_juggernaut_perk)) {
     setupclientfieldcodecallbacks("toplayer", 1, "perk_juggernaut");
+  }
 
-  if(is_true(level.zombiemode_using_marathon_perk))
+  if(is_true(level.zombiemode_using_marathon_perk)) {
     setupclientfieldcodecallbacks("toplayer", 1, "perk_marathon");
+  }
 
-  if(is_true(level.zombiemode_using_revive_perk))
+  if(is_true(level.zombiemode_using_revive_perk)) {
     setupclientfieldcodecallbacks("toplayer", 1, "perk_quick_revive");
+  }
 
-  if(is_true(level.zombiemode_using_sleightofhand_perk))
+  if(is_true(level.zombiemode_using_sleightofhand_perk)) {
     setupclientfieldcodecallbacks("toplayer", 1, "perk_sleight_of_hand");
+  }
 
-  if(is_true(level.zombiemode_using_tombstone_perk))
+  if(is_true(level.zombiemode_using_tombstone_perk)) {
     setupclientfieldcodecallbacks("toplayer", 1, "perk_tombstone");
+  }
 
-  if(is_true(level.zombiemode_using_chugabud_perk))
+  if(is_true(level.zombiemode_using_chugabud_perk)) {
     setupclientfieldcodecallbacks("toplayer", 1, "perk_chugabud");
+  }
 
   if(level._custom_perks.size > 0) {
     a_keys = getarraykeys(level._custom_perks);
 
     for(i = 0; i < a_keys.size; i++) {
-      if(isDefined(level._custom_perks[a_keys[i]].clientfield_code_callback))
+      if(isDefined(level._custom_perks[a_keys[i]].clientfield_code_callback)) {
         level[[level._custom_perks[a_keys[i]].clientfield_code_callback]]();
+      }
     }
   }
 }
 
 init_custom_perks() {
-  if(!isDefined(level._custom_perks))
+  if(!isDefined(level._custom_perks)) {
     level._custom_perks = [];
+  }
 }
 
 register_perk_clientfields(str_perk, func_clientfield_register, func_code_callback) {
   _register_undefined_perk(str_perk);
 
-  if(!isDefined(level._custom_perks[str_perk].clientfield_register))
+  if(!isDefined(level._custom_perks[str_perk].clientfield_register)) {
     level._custom_perks[str_perk].clientfield_register = func_clientfield_register;
+  }
 
-  if(!isDefined(level._custom_perks[str_perk].clientfield_code_callback))
+  if(!isDefined(level._custom_perks[str_perk].clientfield_code_callback)) {
     level._custom_perks[str_perk].clientfield_code_callback = func_code_callback;
+  }
 }
 
 register_perk_init_thread(str_perk, func_init_thread) {
   _register_undefined_perk(str_perk);
 
-  if(!isDefined(level._custom_perks[str_perk].init_thread))
+  if(!isDefined(level._custom_perks[str_perk].init_thread)) {
     level._custom_perks[str_perk].init_thread = func_init_thread;
+  }
 }
 
 init_perk_custom_threads() {
@@ -126,34 +151,41 @@ init_perk_custom_threads() {
     a_keys = getarraykeys(level._custom_perks);
 
     for(i = 0; i < a_keys.size; i++) {
-      if(isDefined(level._custom_perks[a_keys[i]].init_thread))
+      if(isDefined(level._custom_perks[a_keys[i]].init_thread)) {
         level thread[[level._custom_perks[a_keys[i]].init_thread]]();
+      }
     }
   }
 }
 
 _register_undefined_perk(str_perk) {
-  if(!isDefined(level._custom_perks))
+  if(!isDefined(level._custom_perks)) {
     level._custom_perks = [];
+  }
 
-  if(!isDefined(level._custom_perks[str_perk]))
+  if(!isDefined(level._custom_perks[str_perk])) {
     level._custom_perks[str_perk] = spawnStruct();
+  }
 }
 
 perk_meteor_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     self.meteor_fx = playFXOnTag(localclientnum, level._effect["perk_meteor"], self, "tag_origin");
-  else if(isDefined(self.meteor_fx))
+  }
+  else if(isDefined(self.meteor_fx)) {
     stopfx(localclientnum, self.meteor_fx);
+  }
 }
 
 chugabud_whos_who_shader(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self mapshaderconstant(localclientnum, 0, "scriptVector3");
 
-  if(newval == 1)
+  if(newval == 1) {
     n_value = 1.0;
-  else
+  }
+  else {
     n_value = 0;
+  }
 
   self setshaderconstant(localclientnum, 0, n_value, 0, 0, 0);
 }
@@ -163,8 +195,9 @@ chugabud_setup_afterlife_filters() {
   wait 1.0;
   players = getlocalplayers();
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     init_filter_afterlife(players[i]);
+  }
 }
 
 init_filter_afterlife(player) {

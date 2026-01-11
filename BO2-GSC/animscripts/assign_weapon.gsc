@@ -35,8 +35,9 @@ assign_random_weapon() {
         }
       }
 
-      if(isDefined(str_faction) && isDefined(str_class))
+      if(isDefined(str_faction) && isDefined(str_class)) {
         str_final_weapon = get_random_weapon_with_attachments_by_class(str_faction, str_class);
+      }
     }
   }
 
@@ -328,20 +329,25 @@ assign_weapon_init() {
 }
 
 add_weapons_to_class_and_faction(str_faction, str_class, a_weapon_list, attach_forced, attach_banned, zero_attachment_perc, one_attachment_perc, two_attachment_perc, three_attachment_perc) {
-  if(!isDefined(zero_attachment_perc))
+  if(!isDefined(zero_attachment_perc)) {
     zero_attachment_perc = 10;
+  }
 
-  if(!isDefined(one_attachment_perc))
+  if(!isDefined(one_attachment_perc)) {
     one_attachment_perc = 40;
+  }
 
-  if(!isDefined(two_attachment_perc))
+  if(!isDefined(two_attachment_perc)) {
     two_attachment_perc = 40;
+  }
 
-  if(!isDefined(three_attachment_perc))
+  if(!isDefined(three_attachment_perc)) {
     three_attachment_perc = 10;
+  }
 
-  foreach(str_weapon in a_weapon_list)
+  foreach(str_weapon in a_weapon_list) {
   add_weapon_to_class_and_faction(str_faction, str_class, str_weapon, attach_forced, attach_banned, zero_attachment_perc, one_attachment_perc, two_attachment_perc, three_attachment_perc);
+  }
 }
 
 add_weapon_to_class_and_faction(str_faction, str_class, str_weapon, attach_forced, attach_banned, zero_attachment_perc, one_attachment_perc, two_attachment_perc, three_attachment_perc) {
@@ -353,13 +359,15 @@ add_weapon_to_class_and_faction(str_faction, str_class, str_weapon, attach_force
 }
 
 add_faction_to_weapon_array(str_faction) {
-  if(!isDefined(anim._assignable_weapons[str_faction]))
+  if(!isDefined(anim._assignable_weapons[str_faction])) {
     anim._assignable_weapons[str_faction] = [];
+  }
 }
 
 add_weapon_class_to_weapon_array(str_class, str_faction, str_weapon) {
-  if(!isDefined(anim._assignable_weapons[str_faction][str_class]))
+  if(!isDefined(anim._assignable_weapons[str_faction][str_class])) {
     anim._assignable_weapons[str_faction][str_class] = [];
+  }
 
   if(isassetloaded("weapon", str_weapon + "_sp", 0)) {
     anim._assignable_weapons[str_faction][str_class][str_weapon] = str_weapon;
@@ -368,8 +376,9 @@ add_weapon_class_to_weapon_array(str_class, str_faction, str_weapon) {
 }
 
 add_weapon_attachment_percentages_to_weapon_array(str_class, str_faction, zero_attachment_perc, one_attachment_perc, two_attachment_perc, three_attachment_perc) {
-  if(!isDefined(anim._attachment_percentage[str_faction]))
+  if(!isDefined(anim._attachment_percentage[str_faction])) {
     anim._attachment_percentage[str_faction] = [];
+  }
 
   if(!isDefined(anim._attachment_percentage[str_faction][str_class])) {
     anim._attachment_percentage[str_faction][str_class] = [];
@@ -397,8 +406,9 @@ add_weapon_assignable_attachments_weapon_array(str_class, str_faction, str_weapo
 
     if(isDefined(anim._level_attach_banned)) {
       foreach(attach_banned in anim._level_attach_banned) {
-        if(isDefined(attach_forced))
+        if(isDefined(attach_forced)) {
           assert(attach_forced != attach_banned, "forced and attachement for " + str_weapon + " cant be the same as the banned attachment for the level");
+        }
       }
 
       anim._assignable_attachments[str_weapon] = array_exclude(anim._assignable_attachments[str_weapon], anim._level_attach_banned);
@@ -417,19 +427,23 @@ add_forced_banned_attachement_to_class_and_faction(str_faction, str_class, attac
   anim._attachment_forced_banned[str_faction][str_class]["forced"] = attach_forced;
   anim._attachment_forced_banned[str_faction][str_class]["banned"] = attach_banned;
 
-  if(isDefined(attach_forced))
+  if(isDefined(attach_forced)) {
     assert(isinarray(anim._total_attachments, attach_forced), "Invalid forced attachement, " + attach_forced);
+  }
 
-  if(isDefined(attach_banned))
+  if(isDefined(attach_banned)) {
     assert(isinarray(anim._total_attachments, attach_banned), "Invalid banned attachement, " + attach_banned);
+  }
 
-  if(isDefined(attach_forced) && isDefined(attach_banned))
+  if(isDefined(attach_forced) && isDefined(attach_banned)) {
     assert(attach_forced != attach_banned, "forced and banned attachments can not be the same attachments");
+  }
 }
 
 add_level_banned_attachments(attach_banned) {
-  if(isDefined(attach_banned))
+  if(isDefined(attach_banned)) {
     anim._level_attach_banned = attach_banned;
+  }
 }
 
 attachment_compatibility_init() {
@@ -450,8 +464,9 @@ get_random_weapon_with_attachments_by_class(str_faction, str_class) {
   str_weapon_with_attachment = self.primaryweapon;
   str_weapon = self get_random_weapon_by_class(str_faction, str_class);
 
-  if(isDefined(str_weapon))
+  if(isDefined(str_weapon)) {
     str_weapon_with_attachment = self get_weapon_with_attachments(str_weapon, str_faction, str_class);
+  }
 
   return str_weapon_with_attachment;
 }
@@ -469,8 +484,9 @@ get_random_weapon_by_class(str_faction, str_class) {
 }
 
 get_weapon_with_attachments(str_weapon, str_faction, str_class) {
-  if(!isDefined(str_faction))
+  if(!isDefined(str_faction)) {
     return str_weapon + "_sp";
+  }
 
   str_weapon_with_attachments = str_weapon + "_sp";
   num_attachments = select_number_of_attachments(str_faction, str_class);
@@ -478,13 +494,15 @@ get_weapon_with_attachments(str_weapon, str_faction, str_class) {
 
   forced_attachment = get_forced_attachment(str_weapon, str_faction, str_class);
 
-  if(isDefined(forced_attachment))
+  if(isDefined(forced_attachment)) {
     assert(issubstr(str_weapon_with_attachments, forced_attachment));
+  }
 
   banned_attachment = get_banned_attachment(str_weapon, str_faction, str_class);
 
-  if(isDefined(banned_attachment))
+  if(isDefined(banned_attachment)) {
     assert(!issubstr(str_weapon_with_attachments, banned_attachment));
+  }
 
   return str_weapon_with_attachments;
 }
@@ -493,21 +511,26 @@ select_number_of_attachments(str_faction, str_class) {
   perc = randomint(100);
 
   if(isDefined(anim._attachment_percentage[str_faction][str_class])) {
-    if(perc <= anim._attachment_percentage[str_faction][str_class][0])
+    if(perc <= anim._attachment_percentage[str_faction][str_class][0]) {
       num_attachments = 0;
+    }
 
-    if(perc > anim._attachment_percentage[str_faction][str_class][0] && perc <= anim._attachment_percentage[str_faction][str_class][1])
+    if(perc > anim._attachment_percentage[str_faction][str_class][0] && perc <= anim._attachment_percentage[str_faction][str_class][1]) {
       num_attachments = 1;
+    }
 
-    if(perc > anim._attachment_percentage[str_faction][str_class][1] && perc <= anim._attachment_percentage[str_faction][str_class][2])
+    if(perc > anim._attachment_percentage[str_faction][str_class][1] && perc <= anim._attachment_percentage[str_faction][str_class][2]) {
       num_attachments = 2;
+    }
 
-    if(perc > anim._attachment_percentage[str_faction][str_class][2] && perc <= anim._attachment_percentage[str_faction][str_class][3])
+    if(perc > anim._attachment_percentage[str_faction][str_class][2] && perc <= anim._attachment_percentage[str_faction][str_class][3]) {
       num_attachments = 3;
+    }
 
     if(num_attachments < 1) {
-      if(isDefined(get_forced_attachment(undefined, str_faction, str_class)))
+      if(isDefined(get_forced_attachment(undefined, str_faction, str_class))) {
         num_attachments = 1;
+      }
     }
 
     return num_attachments;
@@ -523,50 +546,61 @@ assemble_attachments_for_weapon(str_weapon, str_faction, str_class, num_attachme
   total_attachments = [];
   str_weapon_with_attachments = str_weapon + "_sp";
 
-  if(num_attachments == 0)
+  if(num_attachments == 0) {
     return str_weapon_with_attachments;
+  }
 
-  if(!isDefined(anim._assignable_attachments[str_weapon]))
+  if(!isDefined(anim._assignable_attachments[str_weapon])) {
     return str_weapon_with_attachments;
+  }
 
-  if(anim._assignable_attachments[str_weapon].size <= 0)
+  if(anim._assignable_attachments[str_weapon].size <= 0) {
     return str_weapon_with_attachments;
+  }
 
   weapon_attachments = arraycopy(anim._assignable_attachments[str_weapon]);
   banned_attachment = get_banned_attachment(str_weapon, str_faction, str_class);
 
-  if(isDefined(banned_attachment))
+  if(isDefined(banned_attachment)) {
     weapon_attachments = array_exclude(weapon_attachments, banned_attachment);
+  }
 
   forced_attachment = get_forced_attachment(str_weapon, str_faction, str_class);
 
-  if(isDefined(forced_attachment))
+  if(isDefined(forced_attachment)) {
     attachment1 = forced_attachment;
-  else
+  }
+  else {
     attachment1 = random(weapon_attachments);
+  }
 
   weapon_attachments = array_exclude(weapon_attachments, attachment1);
 
-  if(attachment1 == "")
+  if(attachment1 == "") {
     return str_weapon_with_attachments;
+  }
 
   str_weapon_with_attachments = str_weapon + "_sp+" + attachment1;
 
-  if(num_attachments == 1)
+  if(num_attachments == 1) {
     return str_weapon_with_attachments;
+  }
 
   total_attachments[0] = attachment1;
   attachment2 = get_next_compatible_attachment(weapon_attachments, attachment1, total_attachments);
   weapon_attachments = array_exclude(weapon_attachments, attachment2);
 
   if(isDefined(attachment2)) {
-    if(is_later_in_alphabet(attachment2, attachment1))
+    if(is_later_in_alphabet(attachment2, attachment1)) {
       str_weapon_with_attachments = str_weapon + "_sp+" + attachment1 + "+" + attachment2;
-    else
+    }
+    else {
       str_weapon_with_attachments = str_weapon + "_sp+" + attachment2 + "+" + attachment1;
+    }
 
-    if(num_attachments == 2)
+    if(num_attachments == 2) {
       return str_weapon_with_attachments;
+    }
   } else
     return str_weapon_with_attachments;
 
@@ -586,11 +620,13 @@ assemble_attachments_for_weapon(str_weapon, str_faction, str_class, num_attachme
 get_forced_attachment(str_weapon, str_faction, str_class) {
   forced_attachment = anim._attachment_forced_banned[str_faction][str_class]["forced"];
 
-  if(!isDefined(str_weapon))
+  if(!isDefined(str_weapon)) {
     return forced_attachment;
+  }
 
-  if(isDefined(forced_attachment) && isinarray(anim._assignable_attachments[str_weapon], forced_attachment))
+  if(isDefined(forced_attachment) && isinarray(anim._assignable_attachments[str_weapon], forced_attachment)) {
     return forced_attachment;
+  }
 
   return undefined;
 }
@@ -598,8 +634,9 @@ get_forced_attachment(str_weapon, str_faction, str_class) {
 get_banned_attachment(str_weapon, str_faction, str_class) {
   banned_attachment = anim._attachment_forced_banned[str_faction][str_class]["banned"];
 
-  if(isDefined(banned_attachment) && isinarray(anim._assignable_attachments[str_weapon], banned_attachment))
+  if(isDefined(banned_attachment) && isinarray(anim._assignable_attachments[str_weapon], banned_attachment)) {
     return banned_attachment;
+  }
 
   return undefined;
 }
@@ -623,8 +660,9 @@ get_next_compatible_attachment(weapon_attachments, attachment, total_attachments
         compatibility_score++;
 
         for(i = 0; i < total_attachments.size; i++) {
-          if(isinarray(anim._attachments_compatible[total_attachments[i]], temp_attachment))
+          if(isinarray(anim._attachments_compatible[total_attachments[i]], temp_attachment)) {
             compatibility_score++;
+          }
         }
 
         assert(compatibility_score <= compatibility_score_needed);
@@ -651,8 +689,9 @@ add_assignable_camo(assignable_camos) {
 
 get_camo_index_for_camo(camo_name) {
   for(i = 0; i < anim._assignable_camos.size; i++) {
-    if(anim._assignable_camos[i] == camo_name)
+    if(anim._assignable_camos[i] == camo_name) {
       return anim._assignable_camos_index[i];
+    }
   }
 
   assertmsg("Unsupported camo type " + camo_name);
@@ -660,8 +699,9 @@ get_camo_index_for_camo(camo_name) {
 
 get_camo_name_for_index(camo_index) {
   for(i = 0; i < anim._assignable_camos_index.size; i++) {
-    if(anim._assignable_camos_index[i] == camo_index)
+    if(anim._assignable_camos_index[i] == camo_index) {
       return anim._assignable_camos[i];
+    }
   }
 }
 

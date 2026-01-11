@@ -358,8 +358,9 @@ animation_kills_ai(var_0) {
   if(!isalive(var_0)) {
     return;
   }
-  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)
+  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     maps\_utility::stop_magic_bullet_shield();
+  }
 
   var_0 notify("animation_killed_me");
   wait 0.05;
@@ -377,8 +378,9 @@ drop_geiger_counter(var_0) {
   var_4 = spawn("script_model", var_2);
   var_4.angles = var_3;
 
-  if(isDefined(var_0.geiger_sound_source))
+  if(isDefined(var_0.geiger_sound_source)) {
     var_0.geiger_sound_source stopsounds();
+  }
 
   var_4 setModel("nml_geiger_counter");
   var_4 physicslaunchclient(var_4.origin, (0, 0, 0));
@@ -387,11 +389,13 @@ drop_geiger_counter(var_0) {
 }
 
 hesh_show_dsm(var_0) {
-  if(isDefined(var_0.dsm))
+  if(isDefined(var_0.dsm)) {
     var_0.dsm show();
+  }
 }
 
 hesh_hide_dsm(var_0) {
-  if(isDefined(var_0.dsm))
+  if(isDefined(var_0.dsm)) {
     var_0.dsm delete();
+  }
 }

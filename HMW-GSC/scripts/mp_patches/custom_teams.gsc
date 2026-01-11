@@ -368,11 +368,13 @@ playercostume_stub(weapon, team, environment) {
     return 1;
   }
 
-  if(isDefined(weapon))
+  if(isDefined(weapon)) {
     weapon = maps\mp\_utility::getbaseweaponname(weapon);
+  }
 
-  if(isDefined(weapon))
+  if(isDefined(weapon)) {
     weapon = weapon + "_mp";
+  }
 
   self setcostumemodels(self.costume, weapon, team, environment);
 
@@ -399,8 +401,9 @@ apply_iw4_costumes() {
 
   weapon = self.primaryweapon;
 
-  if(isDefined(weapon))
+  if(isDefined(weapon)) {
     weapon = maps\mp\_utility::getbaseweaponname(weapon);
+  }
 
   weaponClass = tablelookup("mp/statstable.csv", 4, weapon, 2);
 
@@ -413,10 +416,12 @@ apply_iw4_costumes() {
         rangers_assault_main();
         break;
       case "weapon_sniper":
-        if(self.team == "allies")
+        if(self.team == "allies") {
           allies_ghillie_setviewmodel();
-        else
+        }
+        else {
           axis_ghillie_setviewmodel();
+        }
         break;
       case "weapon_lmg":
       case "weapon_heavy":
@@ -440,10 +445,12 @@ apply_iw4_costumes() {
       ]();
       break;
     case "weapon_sniper":
-      if(self.team == "allies")
+      if(self.team == "allies") {
         allies_ghillie_setviewmodel();
-      else
+      }
+      else {
         axis_ghillie_setviewmodel();
+      }
       break;
     case "weapon_lmg":
     case "weapon_heavy":
@@ -480,10 +487,12 @@ randomBotCostume() {
       ]();
       break;
     case "weapon_sniper":
-      if(self.team == "allies")
+      if(self.team == "allies") {
         allies_ghillie_setviewmodel();
-      else
+      }
+      else {
         axis_ghillie_setviewmodel();
+      }
       break;
     case "weapon_lmg":
     case "weapon_heavy":

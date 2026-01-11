@@ -63,4 +63,3 @@ function_aa9bfd9d(path_points, point_color, line_color, var_80bf7c44) {
 
   function_a760f3bf(path_points, &function_bb43c529, point_color, line_color, var_80bf7c44);
 }
-

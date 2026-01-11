@@ -14,11 +14,13 @@ init() {
   level thread populateIntelChallenges();
   level.intelActive = false;
 
-  if(!isDefined(level.supportIntel) || level.supportIntel)
+  if(!isDefined(level.supportIntel) || level.supportIntel) {
     level thread onPlayerConnect();
+  }
 
-  if(isDefined(level.enableTeamIntel) && isDefined(level.enableTeamIntel))
+  if(isDefined(level.enableTeamIntel) && isDefined(level.enableTeamIntel)) {
     level thread runTeamIntel();
+  }
 
   SetDevDvarIfUninitialized("scr_devIntelChallengeName", "temp");
   SetDevDvarIfUninitialized("scr_devIntelChallengeNum", -1);
@@ -130,8 +132,9 @@ CONST_INTEL_TRIG_HEIGHT = 60;
 
 onDropIntel(first_drop) {
   self.hasIntel = false;
-  if(!isDefined(first_drop))
+  if(!isDefined(first_drop)) {
     first_drop = false;
+  }
 
   pos = self.origin;
 
@@ -237,8 +240,9 @@ intelTriggerWatcher() {
       }
       result = intelTrigger proximityThink(player);
 
-      if(result)
+      if(result) {
         player onPickupIntel();
+      }
     }
   }
 }
@@ -336,8 +340,9 @@ onPickupIntel() {
   challengeNameIndex = randChallenge.challengeName;
 
   devChallengeName = GetDvar("scr_devIntelChallengeName");
-  if(devChallengeName != "temp")
+  if(devChallengeName != "temp") {
     challengeNameIndex = devChallengeName;
+  }
 
   if(self isJuggernaut()) {
     self maps\mp\gametypes\_intelchallenges::giveJuggernautChallenge(challengeNameIndex);
@@ -512,8 +517,9 @@ replenishAmmo() {
 }
 
 proximityThink(player) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return false;
+  }
 
   self.inUse = true;
 
@@ -521,8 +527,9 @@ proximityThink(player) {
 
   assert(isDefined(result));
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return false;
+  }
 
   level.intelEnt["useProgress"] = 0;
 

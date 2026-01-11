@@ -29,8 +29,9 @@ main() {
 on_player_connect_crypt() {
   discs = getEntArray("crypt_puzzle_disc", "script_noteworthy");
 
-  foreach(disc in discs)
+  foreach(disc in discs) {
   disc delay_thread(0.5, ::bryce_cake_light_update, 0);
+  }
 }
 
 chamber_disc_puzzle_init() {
@@ -207,16 +208,19 @@ chamber_disc_move_to_position() {
 }
 
 chamber_discs_move_all_to_position(discs) {
-  if(!isDefined(discs))
+  if(!isDefined(discs)) {
     discs = undefined;
+  }
 
   flag_set("disc_rotation_active");
 
-  if(!isDefined(discs))
+  if(!isDefined(discs)) {
     discs = getEntArray("chamber_puzzle_disc", "script_noteworthy");
+  }
 
-  foreach(e_disc in discs)
+  foreach(e_disc in discs) {
   e_disc chamber_disc_move_to_position();
+  }
 
   flag_clear("disc_rotation_active");
 }
@@ -234,33 +238,40 @@ chamber_disc_gem_has_clearance(gem_name) {
     if(!isDefined(disc.targetname) && !isDefined("crypt_puzzle_disc_main") || isDefined(disc.targetname) && isDefined("crypt_puzzle_disc_main") && disc.targetname == "crypt_puzzle_disc_main") {
       continue;
     }
-    if(disc.position != gem_position)
+    if(disc.position != gem_position) {
       return false;
+    }
   }
 
   return true;
 }
 
 chamber_disc_rotate(b_clockwise) {
-  if(b_clockwise)
+  if(b_clockwise) {
     self.position = (self.position + 1) % 4;
-  else
+  }
+  else {
     self.position = (self.position + 3) % 4;
+  }
 
   self chamber_disc_move_to_position();
 }
 
 bryce_cake_light_update(b_on) {
-  if(!isDefined(b_on))
+  if(!isDefined(b_on)) {
     b_on = 1;
+  }
 
-  if(!isDefined(self.n_bryce_cake))
+  if(!isDefined(self.n_bryce_cake)) {
     self.n_bryce_cake = 0;
+  }
 
-  if(!b_on)
+  if(!b_on) {
     self.n_bryce_cake = (self.n_bryce_cake + 1) % 2;
-  else
+  }
+  else {
     self.n_bryce_cake = 2;
+  }
 
   self setclientfield("bryce_cake", self.n_bryce_cake);
 }

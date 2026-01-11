@@ -231,18 +231,21 @@ tank_defense_victory_check() {
     if(!isDefined(var_3.script_noteworthy)) {
       continue;
     }
-    if(var_3.script_noteworthy == "tank_attack_enemy")
+    if(var_3.script_noteworthy == "tank_attack_enemy") {
       var_0[var_0.size] = var_3;
+    }
   }
 
   var_4 = 0;
   var_5 = 0;
 
   for(var_6 = 0; var_6 < var_0.size; var_6++) {
-    if(!isDefined(var_0[var_6].count))
+    if(!isDefined(var_0[var_6].count)) {
       var_7 = 1;
-    else
+    }
+    else {
       var_7 = var_0[var_6].count;
+    }
 
     level.totalcount = level.totalcount + var_7;
   }
@@ -265,8 +268,9 @@ tank_defense_killspawner_check() {
   var_0 = [];
   var_1 = getEntArray("tank_attack_killspawner", "targetname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_1[var_2] thread tank_defense_killspawner_monitor();
+  }
 }
 
 tank_defense_killspawner_monitor() {
@@ -279,15 +283,18 @@ tank_defense_killspawner_monitor() {
     if(!isDefined(var_2[var_3].script_killspawner)) {
       continue;
     }
-    if(var_2[var_3].script_killspawner == self.script_killspawner)
+    if(var_2[var_3].script_killspawner == self.script_killspawner) {
       var_0[var_0.size] = var_2[var_3];
+    }
   }
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
-    if(!isDefined(var_0[var_3].count))
+    if(!isDefined(var_0[var_3].count)) {
       var_4 = 1;
-    else
+    }
+    else {
       var_4 = var_0[var_3].count;
+    }
 
     var_1 = var_1 + var_4;
   }
@@ -295,8 +302,9 @@ tank_defense_killspawner_monitor() {
   self waittill("trigger");
   level.totalcount = level.totalcount - var_1;
 
-  if(level.totalcount <= 0)
+  if(level.totalcount <= 0) {
     level.totalcount = 1;
+  }
 }
 
 bog_a_backhalf_autosaves() {
@@ -425,8 +433,9 @@ cobra_bldg_activate() {
   var_0 = getEntArray("trigger_multiple", "classname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_linkname) && issubstr(var_2.script_linkname, "post_zpu_final_bldg_spawn"))
+    if(isDefined(var_2.script_linkname) && issubstr(var_2.script_linkname, "post_zpu_final_bldg_spawn")) {
       var_2 notify("trigger");
+    }
   }
 }
 
@@ -529,14 +538,18 @@ cobra_sequence_reminder() {
   for(;;) {
     wait 40;
 
-    if(var_0 == 0)
+    if(var_0 == 0) {
       maps\_utility::radio_dialogue_queue("buttonedup");
-    else if(var_0 == 1)
+    }
+    else if(var_0 == 1) {
       maps\_utility::radio_dialogue_queue("whereistheairsupport");
-    else if(var_0 == 2)
+    }
+    else if(var_0 == 2) {
       maps\_utility::radio_dialogue_queue("canttakebuilding");
-    else if(var_0 == 3)
+    }
+    else if(var_0 == 3) {
       maps\_utility::radio_dialogue_queue("rippingusapart");
+    }
     else if(var_0 == 4) {
       maps\_utility::radio_dialogue_queue("plantbeacon");
       var_0 = 0;
@@ -555,8 +568,9 @@ cobra_flightplan(var_0) {
   self sethoverparams(128);
   var_3 = undefined;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_3 = getent(self.target, "targetname");
+  }
   else {}
 
   var_4 = [];
@@ -583,44 +597,56 @@ cobra_flightplan(var_0) {
     var_11 = 0;
     var_12 = var_4[var_10];
 
-    if(isDefined(var_12.radius))
+    if(isDefined(var_12.radius)) {
       var_7 = var_12.radius;
+    }
 
     self setneargoalnotifydist(var_7);
 
-    if(isDefined(var_12.script_engagedelay))
+    if(isDefined(var_12.script_engagedelay)) {
       var_11 = var_12.script_engagedelay;
+    }
 
-    if(isDefined(var_12.script_attackpattern))
+    if(isDefined(var_12.script_attackpattern)) {
       var_6 = var_12.script_attackpattern;
+    }
 
-    if(isDefined(var_12.script_engage))
+    if(isDefined(var_12.script_engage)) {
       thread cobra_fire(var_11, var_6);
+    }
 
-    if(isDefined(var_12.script_airspeed))
+    if(isDefined(var_12.script_airspeed)) {
       var_1 = var_12.script_airspeed;
+    }
 
-    if(isDefined(var_12.script_accel))
+    if(isDefined(var_12.script_accel)) {
       var_8 = var_12.script_accel;
+    }
 
-    if(isDefined(var_12.script_decel))
+    if(isDefined(var_12.script_decel)) {
       self vehicle_setspeed(var_1, var_8, var_12.script_decel);
-    else
+    }
+    else {
       self vehicle_setspeed(var_1, var_8);
+    }
 
-    if(isDefined(var_12.script_yawspeed))
+    if(isDefined(var_12.script_yawspeed)) {
       self setyawspeed(var_12.script_yawspeed, var_2);
+    }
 
-    if(isDefined(var_12.script_forceyaw))
+    if(isDefined(var_12.script_forceyaw)) {
       self settargetyaw(var_12.angles[1]);
+    }
 
-    if(isDefined(var_12.script_cleartargetyaw))
+    if(isDefined(var_12.script_cleartargetyaw)) {
       self cleartargetyaw();
+    }
 
     var_13 = 0;
 
-    if(isDefined(var_4[var_10].script_stopnode))
+    if(isDefined(var_4[var_10].script_stopnode)) {
       var_13 = var_4[var_10].script_stopnode;
+    }
 
     maps\bog_a_aud::handle_cobra_waypoint_audio(var_12);
     self setvehgoalpos(var_4[var_10].origin, var_13);
@@ -640,8 +666,9 @@ cobra_flightplan(var_0) {
       level common_scripts\utility::flag_set("pilot_final_dialogue");
       wait 7.35;
 
-      if(isDefined(var_0) && var_0)
+      if(isDefined(var_0) && var_0) {
         wait 1.25;
+      }
     }
   }
 
@@ -685,8 +712,9 @@ cobra_fire(var_0, var_1) {
       thread cobra_missile_fired_earthquake(1);
       thread cobra_building_damage_fx(1003);
 
-      if(!common_scripts\utility::flag("clipped_off_dest"))
+      if(!common_scripts\utility::flag("clipped_off_dest")) {
         common_scripts\utility::flag_set("clipped_off_dest");
+      }
 
       break;
     case "gamma":
@@ -734,10 +762,12 @@ cobra_building_damage_fx(var_0) {
 cobra_missile_fired_earthquake(var_0) {
   earthquake(0.3, 1.0, self.origin, 4000);
 
-  if(isDefined(var_0) && var_0 == 1)
+  if(isDefined(var_0) && var_0 == 1) {
     level.player playrumbleonentity("generic_attack_heavy_500");
-  else
+  }
+  else {
     level.player playrumbleonentity("generic_attack_medium_500");
+  }
 }
 
 tank_defense_enforcement() {
@@ -777,8 +807,9 @@ tank_defense_warning() {
       var_1++;
     }
 
-    if(var_1 == 2)
+    if(var_1 == 2) {
       thread tank_destruction();
+    }
   }
 }
 
@@ -858,8 +889,9 @@ zpu_battle_init() {
 zpu_battle_friendly_advance() {
   var_0 = getEntArray("zpu_friendly_advance_trigger", "script_noteworthy");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] thread zpu_battle_trigger_control();
+  }
 }
 
 zpu_battle_trigger_control() {
@@ -868,8 +900,9 @@ zpu_battle_trigger_control() {
   var_0 = [];
   var_1 = undefined;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_1 = getent(self.target, "targetname");
+  }
 
   while(isDefined(var_1)) {
     var_0[var_0.size] = var_1;
@@ -926,15 +959,17 @@ zpu_dialogue() {
     wait 0.05;
   }
 
-  if(!common_scripts\utility::flag("zpus_destroyed"))
+  if(!common_scripts\utility::flag("zpus_destroyed")) {
     var_3 maps\_anim::anim_single_queue(var_3, "jacksondoit");
+  }
 
   var_3 maps\_utility::stop_magic_bullet_shield();
 }
 
 dont_show_c4_hint() {
-  if(common_scripts\utility::flag("zpus_destroyed"))
+  if(common_scripts\utility::flag("zpus_destroyed")) {
     return 0;
+  }
 
   var_0 = self getcurrentweapon();
   return var_0 == "c4";
@@ -968,8 +1003,9 @@ dialogue() {
     maps\_utility::radio_dialogue_queue("negativebravo");
     common_scripts\utility::flag_set("zpu_orders_given");
 
-    if(!common_scripts\utility::flag("zpus_destroyed"))
+    if(!common_scripts\utility::flag("zpus_destroyed")) {
       level.price maps\_anim::anim_single_queue(level.price, "jacksonfindzpu");
+    }
 
     level.price maps\_anim::anim_single_queue(level.price, "securewest");
     wait 2;
@@ -1026,8 +1062,9 @@ ending_sequence() {
   level.mark.animname = "left_guy";
   var_1 = [];
 
-  for(var_2 = 1; var_2 < var_0.size; var_2++)
+  for(var_2 = 1; var_2 < var_0.size; var_2++) {
     var_1[var_1.size] = var_0[var_2];
+  }
 
   thread schoolcircle("schoolcircle", var_1);
   var_3 = [];
@@ -1040,13 +1077,16 @@ ending_sequence() {
   var_4 maps\_anim::anim_teleport(var_3, "tank_talk");
   var_4 maps\_anim::anim_reach_and_idle(var_3, "tank_talk", "tank_talk_idle", "stop_loop");
 
-  if(getdvarint("use_old_tank_dialogue") == 1)
+  if(getdvarint("use_old_tank_dialogue") == 1) {
     var_5 = 220;
-  else
+  }
+  else {
     var_5 = 300;
+  }
 
-  while(distance(level.player.origin, var_4.origin) > var_5)
+  while(distance(level.player.origin, var_4.origin) > var_5) {
     wait 0.05;
+  }
 
   common_scripts\utility::flag_set("reached_ending_area");
   soundscripts\_snd::snd_message("start_ending_area_mix");
@@ -1087,8 +1127,9 @@ dialogue_south_tank_attack() {
     }
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 waittill("trigger");
+  }
 
   wait 4;
   maps\_utility::radio_dialogue_queue("contactseast");
@@ -1107,8 +1148,9 @@ hero() {
 schoolcircle(var_0, var_1) {
   var_2 = getnodearray(var_0, "targetname");
 
-  for(var_3 = 0; var_3 < var_1.size; var_3++)
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_1[var_3] thread schoolcircle_nav(var_2, var_3);
+  }
 }
 
 schoolcircle_nav(var_0, var_1) {
@@ -1122,8 +1164,9 @@ schoolcircle_nav(var_0, var_1) {
   if(!isDefined(var_0[var_1].script_noteworthy)) {
     return;
   }
-  if(var_0[var_1].script_noteworthy == "kneel")
+  if(var_0[var_1].script_noteworthy == "kneel") {
     thread schoolcircle_crouch(self);
+  }
 }
 
 schoolcircle_crouch(var_0) {

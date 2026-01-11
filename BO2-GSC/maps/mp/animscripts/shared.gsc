@@ -8,13 +8,15 @@
 #include maps\mp\_utility;
 
 handledogsoundnotetracks(note) {
-  if(note == "sound_dogstep_run_default")
+  if(note == "sound_dogstep_run_default") {
     return true;
+  }
 
   prefix = getsubstr(note, 0, 5);
 
-  if(prefix != "sound")
+  if(prefix != "sound") {
     return false;
+  }
 
   return true;
 }
@@ -24,12 +26,14 @@ growling() {
 }
 
 handlenotetrack(note, flagname, customfunction, var1) {
-  if(getdvarint(#"_id_6EBEB982"))
+  if(getdvarint(#"_id_6EBEB982")) {
     println("dog notetrack: " + flagname + " " + note + " " + gettime());
+  }
 
   if(isai(self) && self.type == "dog") {
-    if(handledogsoundnotetracks(note))
+    if(handledogsoundnotetracks(note)) {
       return;
+    }
   }
 
   switch (note) {
@@ -39,12 +43,14 @@ handlenotetrack(note, flagname, customfunction, var1) {
       return note;
     default:
       if(isDefined(customfunction)) {
-        if(!isDefined(var1))
+        if(!isDefined(var1)) {
           return [
+        }
             [customfunction]
           ](note);
-        else
+        else {
           return [
+        }
             [customfunction]
           ](note, var1);
       }
@@ -57,19 +63,22 @@ donotetracks(flagname, customfunction, var1) {
   for(;;) {
     self waittill(flagname, note);
 
-    if(!isDefined(note))
+    if(!isDefined(note)) {
       note = "undefined";
+    }
 
     val = self handlenotetrack(note, flagname, customfunction, var1);
 
-    if(isDefined(val))
+    if(isDefined(val)) {
       return val;
+    }
   }
 }
 
 donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, var1) {
-  if(isDefined(killstring))
+  if(isDefined(killstring)) {
     self endon(killstring);
+  }
 
   self endon("killanimscript");
 
@@ -131,11 +140,13 @@ trackloop() {
   } else {
     domaxanglecheck = 1;
 
-    if(self.a.script == "cover_crouch" && isDefined(self.a.covermode) && self.a.covermode == "lean")
+    if(self.a.script == "cover_crouch" && isDefined(self.a.covermode) && self.a.covermode == "lean") {
       pitchadd = -1 * anim.covercrouchleanpitch;
+    }
 
-    if((self.a.script == "cover_left" || self.a.script == "cover_right") && isDefined(self.a.cornermode) && self.a.cornermode == "lean")
+    if((self.a.script == "cover_left" || self.a.script == "cover_right") && isDefined(self.a.cornermode) && self.a.cornermode == "lean") {
       yawadd = self.covernode.angles[1] - self.angles[1];
+    }
   }
 
   yawdelta = 0;
@@ -147,8 +158,9 @@ trackloop() {
     selfshootatpos = (self.origin[0], self.origin[1], self getEye()[2]);
     shootpos = undefined;
 
-    if(isDefined(self.enemy))
+    if(isDefined(self.enemy)) {
       shootpos = self.enemy getshootatpos();
+    }
 
     if(!isDefined(shootpos)) {
       yawdelta = 0;
@@ -166,29 +178,36 @@ trackloop() {
       yawdelta = 0;
       pitchdelta = 0;
     } else {
-      if(yawdelta > self.rightaimlimit)
+      if(yawdelta > self.rightaimlimit) {
         yawdelta = self.rightaimlimit;
-      else if(yawdelta < self.leftaimlimit)
+      }
+      else if(yawdelta < self.leftaimlimit) {
         yawdelta = self.leftaimlimit;
+      }
 
-      if(pitchdelta > self.upaimlimit)
+      if(pitchdelta > self.upaimlimit) {
         pitchdelta = self.upaimlimit;
-      else if(pitchdelta < self.downaimlimit)
+      }
+      else if(pitchdelta < self.downaimlimit) {
         pitchdelta = self.downaimlimit;
+      }
     }
 
-    if(firstframe)
+    if(firstframe) {
       firstframe = 0;
+    }
     else {
       yawdeltachange = yawdelta - prevyawdelta;
 
-      if(abs(yawdeltachange) > maxyawdeltachange)
+      if(abs(yawdeltachange) > maxyawdeltachange) {
         yawdelta = prevyawdelta + maxyawdeltachange * sign(yawdeltachange);
+      }
 
       pitchdeltachange = pitchdelta - prevpitchdelta;
 
-      if(abs(pitchdeltachange) > maxpitchdeltachange)
+      if(abs(pitchdeltachange) > maxpitchdeltachange) {
         pitchdelta = prevpitchdelta + maxpitchdeltachange * sign(pitchdeltachange);
+      }
     }
 
     prevyawdelta = yawdelta;

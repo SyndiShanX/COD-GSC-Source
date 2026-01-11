@@ -159,8 +159,9 @@ tryUseMobileMortar(lifeId, streakName) {
     self thread stopLocationSelection(false);
 
   mobileMortar = createMobileMortar(self, locIndex);
-  if(!isDefined(mobileMortar))
+  if(!isDefined(mobileMortar)) {
     return false;
+  }
 
   mobileMortar thread moveToPosition("entrance");
   return true;
@@ -185,10 +186,12 @@ selectEntranceLocation() {
     }
     if(isDefined(locIndex)) {
       for(i = 0; i < 3; i++) {
-        if(i == locIndex)
+        if(i == locIndex) {
           Objective_Icon(self.locationObjectives[i], "compass_objpoint_mortar_target");
-        else
+        }
+        else {
           Objective_state(self.locationObjectives[i], "invisible");
+        }
       }
     } else {
       for(i = 0; i < 3; i++) {
@@ -236,8 +239,9 @@ createMobileMortar(owner, locIndex) {
   spawnPos = primaryTrace["position"] + anglesToForward(level.ground_support_locs[level.script][locIndex]["angles"]) * -1000;
 
   mobileMortar = spawn("script_model", spawnPos);
-  if(!isDefined(mobileMortar))
+  if(!isDefined(mobileMortar)) {
     return undefined;
+  }
 
   mobileMortar.angles = level.ground_support_locs[level.script][locIndex]["angles"];
   mobileMortar setModel("vehicle_bradley");
@@ -247,8 +251,9 @@ createMobileMortar(owner, locIndex) {
   mobileMortar.owner = owner;
   mobileMortar.playersAttacked = [];
   mobileMortar.lastTarget = mobileMortar.origin;
-  if(level.teamBased)
+  if(level.teamBased) {
     mobileMortar.team = owner.team;
+  }
 
   mobileMortar.lowX = level.spawnpoints[0].origin[0];
   mobileMortar.highX = level.spawnpoints[0].origin[0];
@@ -257,15 +262,19 @@ createMobileMortar(owner, locIndex) {
   increment = 200;
   if(level.spawnpoints.size > 1) {
     for(i = 1; i < level.spawnpoints.size; i++) {
-      if(level.spawnpoints[i].origin[0] < mobileMortar.lowX)
+      if(level.spawnpoints[i].origin[0] < mobileMortar.lowX) {
         mobileMortar.lowX = level.spawnpoints[i].origin[0];
-      else if(level.spawnpoints[i].origin[0] > mobileMortar.highX)
+      }
+      else if(level.spawnpoints[i].origin[0] > mobileMortar.highX) {
         mobileMortar.highX = level.spawnpoints[i].origin[0];
+      }
 
-      if(level.spawnpoints[i].origin[1] < mobileMortar.lowY)
+      if(level.spawnpoints[i].origin[1] < mobileMortar.lowY) {
         mobileMortar.lowY = level.spawnpoints[i].origin[1];
-      else if(level.spawnpoints[i].origin[1] > mobileMortar.highY)
+      }
+      else if(level.spawnpoints[i].origin[1] > mobileMortar.highY) {
         mobileMortar.highY = level.spawnpoints[i].origin[1];
+      }
     }
   } else
     increment = -2000;
@@ -307,8 +316,9 @@ moveToPosition(position) {
   level endon("game_ended");
   self endon("death");
 
-  if(position == "entrance")
+  if(position == "entrance") {
     pos = self.origin + anglesToForward(self.angles) * 1000;
+  }
   else {
     self notify("leaving");
     pos = self.origin + anglesToForward(self.angles) * -1000;
@@ -318,8 +328,9 @@ moveToPosition(position) {
   self MoveTo(pos, movetime, movetime * 0.6, movetime * 0.4);
   wait(movetime);
 
-  if(position == "entrance")
+  if(position == "entrance") {
     self thread mortarAttack();
+  }
   else {
     stopFXOnTag(level.tankDust1, self.fxEnt, "tag_origin");
     stopFXOnTag(level.tankDust2, self.fxEnt, "tag_origin");
@@ -336,20 +347,26 @@ moveToPosition(position) {
 findTarget() {
   bestTarget = undefined;
   foreach(player in level.players) {
-    if(player == self.owner)
+    if(player == self.owner) {
       continue;
-    if(player _hasPerk("specialty_blindeye"))
-      continue;
-    if(level.teamBased && player.team == self.owner.team)
-      continue;
-    if(distanceSquared(self.origin, player.origin) < 1000000)
-      continue;
-    for(i = 0; i < self.playersAttacked.size; i++) {
-      if(player == self.playersAttacked[i])
-        continue;
     }
-    if(distanceSquared(player.origin, self.lastTarget) < 500000)
+    if(player _hasPerk("specialty_blindeye")) {
       continue;
+    }
+    if(level.teamBased && player.team == self.owner.team) {
+      continue;
+    }
+    if(distanceSquared(self.origin, player.origin) < 1000000) {
+      continue;
+    }
+    for(i = 0; i < self.playersAttacked.size; i++) {
+      if(player == self.playersAttacked[i]) {
+        continue;
+      }
+    }
+    if(distanceSquared(player.origin, self.lastTarget) < 500000) {
+      continue;
+    }
     if(level.teamBased) {
       friendlyClose = false;
       for(i = 0; i < level.players.size; i++) {
@@ -358,8 +375,9 @@ findTarget() {
           break;
         }
       }
-      if(friendlyClose == true)
+      if(friendlyClose == true) {
         continue;
+      }
     }
 
     wait(0.05);
@@ -379,10 +397,12 @@ findRandomTarget() {
   randomTarget = undefined;
   for(i = 0; i < 20; i++) {
     testTarget = (RandomFloatRange(self.lowX, self.highX), RandomFloatRange(self.lowY, self.highY), 0);
-    if(distanceSquared(self.origin * (1, 1, 0), testTarget) < 1000000)
+    if(distanceSquared(self.origin * (1, 1, 0), testTarget) < 1000000) {
       continue;
-    if(distanceSquared(self.owner.origin * (1, 1, 0), testTarget) < 250000)
+    }
+    if(distanceSquared(self.owner.origin * (1, 1, 0), testTarget) < 250000) {
       continue;
+    }
     if(distanceSquared(self.origin * (1, 1, 0), self.lastTarget) < 500000) {
       continue;
     }
@@ -403,8 +423,9 @@ findRandomTarget() {
     }
   }
 
-  if(!isDefined(randomTarget))
+  if(!isDefined(randomTarget)) {
     randomTarget = (RandomFloatRange(self.lowX, self.highX), RandomFloatRange(self.lowY, self.highY), 0);
+  }
 
   return randomTarget;
 }
@@ -422,8 +443,9 @@ mortarAttack() {
 
   for(;;) {
     flatPos = self findTarget();
-    if(!isDefined(flatPos))
+    if(!isDefined(flatPos)) {
       flatPos = self findRandomTarget();
+    }
     flyHeight = self.origin[2] + 3500;
     primaryTrace = bulletTrace(flatPos + (0, 0, flyHeight), flatPos - (0, 0, flyHeight), false);
     assert(primaryTrace["surfacetype"] != "none");
@@ -478,13 +500,16 @@ fireMortar(mobileMortar, startPos, targetPos) {
     flyCount++;
   }
 
-  if(isDefined(projectile))
+  if(isDefined(projectile)) {
     projectile delete();
+  }
 
-  if(isDefined(owner))
+  if(isDefined(owner)) {
     projectile2 = magicBullet("javelin_mp", startPos + (0, 0, 200), targetPos, owner);
-  else
+  }
+  else {
     projectile2 = magicBullet("javelin_mp", startPos + (0, 0, 200), targetPos);
+  }
   projectile2.objIdFriendly = curObjID1;
   projectile2.objIdEnemy = curObjID2;
   projectile2 thread watchProjectileOnMiniMap(mobileMortar);
@@ -498,8 +523,9 @@ watchProjectileOnMiniMap(mobileMortar) {
   _objective_delete(self.objIdFriendly);
   _objective_delete(self.objIdEnemy);
 
-  if(isDefined(mobileMortar))
+  if(isDefined(mobileMortar)) {
     mobileMortar notify("mortar_fire_done");
+  }
 }
 
 mortarRecoil() {

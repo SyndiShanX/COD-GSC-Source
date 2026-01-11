@@ -12,8 +12,9 @@
 #using_animtree("generic_human");
 
 main() {
-  if(isDefined(self.no_ai))
+  if(isDefined(self.no_ai)) {
     return;
+  }
 
   if(isDefined(self.onSnowMobile)) {
     animscripts\snowmobile::main();
@@ -23,8 +24,9 @@ main() {
   self notify("stopScript");
   self endon("killanimscript");
 
-  if(getdebugdvar("anim_preview") != "")
+  if(getdebugdvar("anim_preview") != "") {
     return;
+  }
 
     [[self.exception["stop_immediate"]]]();
   // We do the exception_stop script a little late so that the AI has some animation they're playing
@@ -42,10 +44,12 @@ main() {
 
   transitionedToIdle = isDefined(self.customIdleAnimSet);
   if(!transitionedToIdle) {
-    if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none")
+    if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none") {
       transitionedToIdle = true;
-    else if(AngleClamp180(self getMuzzleAngle()[0]) > 20)
+    }
+    else if(AngleClamp180(self getMuzzleAngle()[0]) > 20) {
       transitionedToIdle = true;
+    }
   }
 
   for(;;) {
@@ -129,8 +133,9 @@ getDesiredIdlePose() {
 }
 
 transitionToIdle(pose, idleSet) {
-  if(self isCQBWalking() && self.a.pose == "stand")
+  if(self isCQBWalking() && self.a.pose == "stand") {
     pose = "stand_cqb";
+  }
 
   if(isDefined(anim.idleAnimTransition[pose])) {
     assert(isDefined(anim.idleAnimTransition[pose]["in"]));
@@ -145,8 +150,9 @@ transitionToIdle(pose, idleSet) {
 }
 
 playIdle(pose, idleSet) {
-  if(self isCQBWalking() && self.a.pose == "stand")
+  if(self isCQBWalking() && self.a.pose == "stand") {
     pose = "stand_cqb";
+  }
 
   idleAddAnim = undefined;
 
@@ -154,8 +160,9 @@ playIdle(pose, idleSet) {
     idleAnim = self.customIdleAnimSet[pose];
 
     additive = pose + "_add";
-    if(isDefined(self.customIdleAnimSet[additive]))
+    if(isDefined(self.customIdleAnimSet[additive])) {
       idleAddAnim = self.customIdleAnimSet[additive];
+    }
   } else {
     idleSet = idleSet % anim.idleAnimArray[pose].size;
 
@@ -163,8 +170,9 @@ playIdle(pose, idleSet) {
   }
 
   transTime = 0.2;
-  if(gettime() == self.a.scriptStartTime)
+  if(gettime() == self.a.scriptStartTime) {
     transTime = 0.5;
+  }
 
   if(isDefined(idleAddAnim)) {
     self setAnimKnobAll(idleAnim, % body, 1, transTime, 1);

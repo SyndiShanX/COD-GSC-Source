@@ -35,10 +35,12 @@ init_jail() {
 jail_open_door(jumpback) {
   level.cell_door playSound("zmb_jail_door_open");
 
-  if(is_true(jumpback))
+  if(is_true(jumpback)) {
     level.cell_door setanim(level.jail_open_jumpback, 1, 1, 1);
-  else
+  }
+  else {
     level.cell_door setanim(level.jail_open, 1, 1, 1);
+  }
 
   if(isDefined(level.cell_door.clip)) {
     level.cell_door.clip notsolid();

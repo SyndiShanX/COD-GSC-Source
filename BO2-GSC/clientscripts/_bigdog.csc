@@ -37,8 +37,9 @@ bigdog_feet(localclientnum, note, ground_type) {
     speed = abs(speed) / 9.0;
     intensity = 0.065 + 0.065 * speed;
 
-    if(intensity > 0.001)
+    if(intensity > 0.001) {
       player earthquake(intensity, 0.3, self.origin, 200);
+    }
   }
 }
 
@@ -47,8 +48,9 @@ bigdog_mount(localclientnum) {
   self endon("entityshutdown");
 
   while(true) {
-    if(self islocalclientdriver(localclientnum))
+    if(self islocalclientdriver(localclientnum)) {
       user = getlocalplayer(localclientnum);
+    }
     else {
       self waittill("enter_vehicle", user);
       playSound(0, "veh_claw_plr_enter");

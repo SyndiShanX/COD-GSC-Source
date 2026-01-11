@@ -69,8 +69,9 @@ initializestattracking() {
   level.globalbarrelsdestroyed = 0;
   level.globalbombsdestroyedbyteam = [];
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   level.globalbombsdestroyedbyteam[team] = 0;
+  }
 }
 
 uploadglobalstatcounters() {
@@ -94,8 +95,9 @@ uploadglobalstatcounters() {
   totalhumiliations = 0;
   totalsabdestroyedbyteam = [];
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   totalsabdestroyedbyteam[team] = 0;
+  }
 
   switch (level.gametype) {
     case "dem":
@@ -112,8 +114,9 @@ uploadglobalstatcounters() {
 
       break;
     case "sab":
-      foreach(team in level.teams)
+      foreach(team in level.teams) {
       totalsabdestroyedbyteam[team] = level.globalbombsdestroyedbyteam[team];
+      }
 
       break;
   }
@@ -185,15 +188,17 @@ uploadglobalstatcounters() {
         totalsdplants = totalsdplants + player.plants;
         break;
       case "sab":
-        if(isDefined(player.team) && isDefined(level.teams[player.team]))
+        if(isDefined(player.team) && isDefined(level.teams[player.team])) {
           totalsabdestroyedbyteam[player.team] = totalsabdestroyedbyteam[player.team] + player.destructions;
+        }
 
         break;
     }
   }
 
-  if(maps\mp\bots\_bot::is_bot_ranked_match())
+  if(maps\mp\bots\_bot::is_bot_ranked_match()) {
     incrementcounter("global_combattraining_gamesplayed", 1);
+  }
 
   incrementcounter("global_kills", totalkills);
   incrementcounter("global_deaths", totaldeaths);
@@ -211,26 +216,31 @@ uploadglobalstatcounters() {
   incrementcounter("global_sab_destroyedbycommunists", totalsabdestroyedbyteam["axis"]);
   incrementcounter("global_humiliations", totalhumiliations);
 
-  if(isDefined(game["wager_pot"]))
+  if(isDefined(game["wager_pot"])) {
     incrementcounter("global_wageredcp", game["wager_pot"]);
+  }
 }
 
 statgetwithgametype(dataname) {
-  if(isDefined(level.nopersistence) && level.nopersistence)
+  if(isDefined(level.nopersistence) && level.nopersistence) {
     return 0;
+  }
 
-  if(!level.onlinegame)
+  if(!level.onlinegame) {
     return 0;
+  }
 
   return self getdstat("PlayerStatsByGameType", getgametypename(), dataname, "StatValue");
 }
 
 getgametypename() {
   if(!isDefined(level.fullgametypename)) {
-    if(isDefined(level.hardcoremode) && level.hardcoremode && ispartygamemode() == 0)
+    if(isDefined(level.hardcoremode) && level.hardcoremode && ispartygamemode() == 0) {
       prefix = "HC";
-    else
+    }
+    else {
       prefix = "";
+    }
 
     level.fullgametypename = tolower(prefix + level.gametype);
   }
@@ -256,8 +266,9 @@ isstatmodifiable(dataname) {
 }
 
 statsetwithgametype(dataname, value, incvalue) {
-  if(isDefined(level.nopersistence) && level.nopersistence)
+  if(isDefined(level.nopersistence) && level.nopersistence) {
     return 0;
+  }
 
   if(!isstatmodifiable(dataname)) {
     return;
@@ -276,8 +287,9 @@ adjustrecentstats() {
 }
 
 getrecentstat(isglobal, index, statname) {
-  if(level.wagermatch)
+  if(level.wagermatch) {
     return self getdstat("RecentEarnings", index, statname);
+  }
   else if(isglobal) {
     modename = maps\mp\gametypes\_globallogic::getcurrentgamemode();
     return self getdstat("gameHistory", modename, "matchHistory", index, statname);
@@ -298,8 +310,9 @@ setrecentstat(isglobal, index, statname, value) {
   if(index < 0 || index > 9) {
     return;
   }
-  if(level.wagermatch)
+  if(level.wagermatch) {
     self setdstat("RecentEarnings", index, statname, value);
+  }
   else if(isglobal) {
     modename = maps\mp\gametypes\_globallogic::getcurrentgamemode();
     self setdstat("gameHistory", modename, "matchHistory", "" + index, statname, value);
@@ -359,10 +372,12 @@ setafteractionreportstat(statname, value, index) {
     return;
   }
   if(level.rankedmatch || level.wagermatch || level.leaguematch) {
-    if(isDefined(index))
+    if(isDefined(index)) {
       self setdstat("AfterActionReportStats", statname, index, value);
-    else
+    }
+    else {
       self setdstat("AfterActionReportStats", statname, value);
+    }
   }
 }
 

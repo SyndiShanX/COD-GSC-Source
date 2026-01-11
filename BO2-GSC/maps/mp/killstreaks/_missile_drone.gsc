@@ -41,49 +41,57 @@ missile_drone_killstreak(weaponname) {
   hardpointtype = "missile_drone_mp";
   result = usemissiledrone(hardpointtype);
 
-  if(!isDefined(result) || !result)
+  if(!isDefined(result) || !result) {
     return 0;
+  }
 
   return result;
 }
 
 usemissiledrone(hardpointtype) {
-  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
+  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
     return false;
+  }
 
   self thread missiledronewatcher(hardpointtype);
   missileweapon = self getcurrentweapon();
   missileweapon = undefined;
   currentweapon = self getcurrentweapon();
 
-  if(ismissiledroneweapon(currentweapon))
+  if(ismissiledroneweapon(currentweapon)) {
     missileweapon = currentweapon;
+  }
 
   assert(isDefined(missileweapon));
   notifystring = self waittill_any_return("weapon_change", "grenade_fire", "death");
 
-  if(notifystring == "weapon_change" || notifystring == "death")
+  if(notifystring == "weapon_change" || notifystring == "death") {
     return false;
+  }
 
   notifystring = self waittill_any_return("weapon_change", "death");
 
-  if(notifystring == "death")
+  if(notifystring == "death") {
     return true;
+  }
 
-  if(!isDefined(missileweapon))
+  if(!isDefined(missileweapon)) {
     return false;
+  }
 
   self takeweapon(missileweapon);
 
-  if(self hasweapon(missileweapon) || self getammocount(missileweapon))
+  if(self hasweapon(missileweapon) || self getammocount(missileweapon)) {
     return false;
+  }
 
   return true;
 }
 
 ismissiledroneweapon(weapon) {
-  if(weapon == "missile_drone_mp" || weapon == "inventory_missile_drone_mp")
+  if(weapon == "missile_drone_mp" || weapon == "inventory_missile_drone_mp") {
     return true;
+  }
 
   return false;
 }
@@ -176,13 +184,15 @@ drone_target_search(hardpointtype) {
   searchcounter = 0;
 
   for(;;) {
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       self notify("death");
+    }
 
     target = self projectile_find_target(self.owner, searchdotprodminimums[searchcounter]);
 
-    if(searchcounter < searchdotprodminimums.size - 1)
+    if(searchcounter < searchdotprodminimums.size - 1) {
       searchcounter++;
+    }
     else if(level.missile_drone_origin[2] != self.goal.origin[2]) {
       currentangles = self.angles;
       direction = vectornormalize(anglesToForward(self.angles));
@@ -223,8 +233,9 @@ set_drone_target(hardpointtype, target) {
   self missile_settarget(target["entity"], target["offset"]);
   self playSound("veh_harpy_drone_swarm_incomming");
 
-  if(!isDefined(target["entity"].swarmsound) || target["entity"].swarmsound == 0)
+  if(!isDefined(target["entity"].swarmsound) || target["entity"].swarmsound == 0) {
     self thread target_sounds(target["entity"]);
+  }
 
   target["entity"] notify("stinger_fired_at_me", self, hardpointtype, self.owner);
   self setclientfield("missile_drone_projectile_active", 1);
@@ -266,13 +277,16 @@ projectile_find_target(owner, mincos) {
   ks = self projectile_find_target_killstreak(owner, mincos);
   player = self projectile_find_target_player(owner, mincos);
 
-  if(isDefined(ks) && !isDefined(player))
+  if(isDefined(ks) && !isDefined(player)) {
     return ks;
-  else if(!isDefined(ks) && isDefined(player))
+  }
+  else if(!isDefined(ks) && isDefined(player)) {
     return player;
+  }
   else if(isDefined(ks) && isDefined(player)) {
-    if(player["dotprod"] < ks["dotprod"])
+    if(player["dotprod"] < ks["dotprod"]) {
       return ks;
+    }
 
     return player;
   }
@@ -289,8 +303,9 @@ projectile_find_target_killstreak(owner, mincos) {
   targets = arraycombine(targets, rcbombs, 1, 0);
   targets = arraycombine(targets, dogs, 1, 0);
 
-  if(targets.size <= 0)
+  if(targets.size <= 0) {
     return undefined;
+  }
 
   targets = get_array_sorted_dot_prod(targets, mincos);
 
@@ -302,13 +317,15 @@ projectile_find_target_killstreak(owner, mincos) {
       continue;
     }
     if(level.teambased && isDefined(target.team)) {
-      if(target.team == self.team)
+      if(target.team == self.team) {
         continue;
+      }
     }
 
     if(level.teambased && isDefined(target.aiteam)) {
-      if(target.aiteam == self.team)
+      if(target.aiteam == self.team) {
         continue;
+      }
     }
 
     if(isDefined(target.vehicletype) && target.vehicletype == "heli_supplydrop_mp") {
@@ -317,10 +334,12 @@ projectile_find_target_killstreak(owner, mincos) {
     if(bullettracepassed(self.origin, target.origin, 0, target)) {
       ks["entity"] = target;
 
-      if(isDefined(target.sorteddotprod))
+      if(isDefined(target.sorteddotprod)) {
         ks["dotprod"] = target.sorteddotprod;
-      else
+      }
+      else {
         ks["dotprod"] = -1;
+      }
 
       return ks;
     }
@@ -360,8 +379,9 @@ projectile_find_target_player(owner, mincos) {
     if(bullettracepassed(startorigin, player.origin, 0, player)) {
       debug_line(startorigin, player.origin, (1, 1, 1), 1000);
 
-      if(!isDefined(currentplayeroffset))
+      if(!isDefined(currentplayeroffset)) {
         currentplayeroffset = (0, 0, 0);
+      }
 
       currentplayerrating = currentplayerrating + 4;
     }
@@ -374,8 +394,9 @@ projectile_find_target_player(owner, mincos) {
     if(bullettracepassed(startorigin, player.origin + playerheadoffset, 0, player)) {
       debug_line(startorigin, player.origin + playerheadoffset, (1, 0, 0), 1000);
 
-      if(!isDefined(currentplayeroffset))
+      if(!isDefined(currentplayeroffset)) {
         currentplayeroffset = playerheadoffset;
+      }
 
       currentplayerrating = currentplayerrating + 3;
     }
@@ -387,8 +408,9 @@ projectile_find_target_player(owner, mincos) {
     if(bullettracepassed(player.origin + playerheadoffset, end, 0, player)) {
       debug_line(player.origin + playerheadoffset, end, (1, 1, 0), 1000);
 
-      if(!isDefined(currentplayeroffset))
+      if(!isDefined(currentplayeroffset)) {
         currentplayeroffset = vectorscale((0, 0, 1), 30.0);
+      }
 
       currentplayerrating = currentplayerrating + 2;
     }
@@ -398,18 +420,22 @@ projectile_find_target_player(owner, mincos) {
       target["entity"] = player;
       target["offset"] = currentplayeroffset;
 
-      if(isDefined(player.sorteddotprod))
+      if(isDefined(player.sorteddotprod)) {
         target["dotprod"] = player.sorteddotprod;
-      else
+      }
+      else {
         target["dotprod"] = -1;
+      }
 
-      if(bestplayerrating >= 9)
+      if(bestplayerrating >= 9) {
         return target;
+      }
     }
   }
 
-  if(bestplayerrating >= 3)
+  if(bestplayerrating >= 3) {
     return target;
+  }
 
   return undefined;
 }
@@ -528,8 +554,9 @@ get_array_sorted_dot_prod(array, mincos) {
 
   newarray = [];
 
-  for(i = 0; i < dotprod.size; i++)
+  for(i = 0; i < dotprod.size; i++) {
     newarray[i] = array[index[i]];
+  }
 
   return newarray;
 }

@@ -118,13 +118,16 @@ onPlayerConnect() {
     level waittill("connected", player);
     player.infect_firstSpawn = true;
 
-    if(gameFlag("prematch_done"))
+    if(gameFlag("prematch_done")) {
       player.infect_joinedatstart = false;
-    else
+    }
+    else {
       player.infect_joinedatstart = true;
+    }
 
-    if(isDefined(level.infect_players[player.name]))
+    if(isDefined(level.infect_players[player.name])) {
       player.infect_rejoined = true;
+    }
   }
 }
 
@@ -137,10 +140,12 @@ getSpawnPoint() {
     self.class = self.pers["class"];
     self.lastClass = self.pers["lastClass"];
 
-    if(isDefined(self.infect_rejoined))
+    if(isDefined(self.infect_rejoined)) {
       maps\mp\gametypes\_menus::addToTeam("axis", true);
-    else
+    }
+    else {
       maps\mp\gametypes\_menus::addToTeam("allies", true);
+    }
 
     thread onPlayerDisconnect();
 
@@ -176,24 +181,29 @@ onSpawnPlayer() {
       level.infect_allowsuicide = 1;
 
       foreach(player in level.players) {
-        if(isDefined(player.infect_isBeingChosen))
+        if(isDefined(player.infect_isBeingChosen)) {
           player.infect_isBeingChosen = undefined;
+        }
       }
     }
 
     foreach(player in level.players) {
-      if(isDefined(player.isInitialInfected))
+      if(isDefined(player.isInitialInfected)) {
         player thread setInitialToNormalInfected();
+      }
     }
 
-    if(level.infect_teamscores["axis"] == 1)
+    if(level.infect_teamscores["axis"] == 1) {
       self.isInitialInfected = 1;
+    }
   }
 
-  if(isDefined(self.isInitialInfected))
+  if(isDefined(self.isInitialInfected)) {
     self.pers["gamemodeLoadout"] = level.infect_loadouts["axis_initial"];
-  else
+  }
+  else {
     self.pers["gamemodeLoadout"] = level.infect_loadouts[self.pers["team"]];
+  }
 
   thread onSpawnFinished();
   level notify("spawned_player");
@@ -204,21 +214,24 @@ onSpawnFinished() {
   self endon("disconnect");
   self waittill("spawned_player");
 
-  if(self.pers["team"] == "axis")
+  if(self.pers["team"] == "axis") {
     thread setInfectedMsg();
+  }
 
   wait 0.05;
 
-  if(self.pers["team"] == "axis")
+  if(self.pers["team"] == "axis") {
     maps\mp\killstreaks\_killstreaks::clearKillstreaks();
+  }
 
   if(matchMakingGame()) {
     foreach(player in level.infect_perks) {
       if(_hasPerk(player)) {
         var_2 = tablelookup("mp/perktable.csv", 1, player, 8);
 
-        if(!_hasPerk(var_2))
+        if(!_hasPerk(var_2)) {
           _setPerk(var_2, 0);
+        }
       }
     }
 
@@ -228,8 +241,9 @@ onSpawnFinished() {
         _setPerk("specialty_scavenger", 0);
         var_2 = tablelookup("mp/perktable.csv", 1, "specialty_scavenger", 8);
 
-        if(!_hasPerk(var_2))
+        if(!_hasPerk(var_2)) {
           _setPerk(var_2, 0);
+        }
       }
     } else if(self.pers["team"] == "axis")
     {
@@ -237,12 +251,14 @@ onSpawnFinished() {
         _setPerk("specialty_marathon", 0);
         var_2 = tablelookup("mp/perktable.csv", 1, "specialty_marathon", 8);
 
-        if(!_hasPerk(var_2))
+        if(!_hasPerk(var_2)) {
           _setPerk(var_2, 0);
+        }
       }
 
-      if(!_hasPerk("specialty_falldamage"))
+      if(!_hasPerk("specialty_falldamage")) {
         _setPerk("specialty_falldamage", 0);
+      }
 
       if(_hasPerk("specialty_marathon")) {
         _setPerk("specialty_lightweight", 0);
@@ -290,25 +306,30 @@ chooseFirstInfected() {
 setFirstInfected(wasChosen) {
   self endon("disconnect");
 
-  if(wasChosen)
+  if(wasChosen) {
     self.infect_isBeingChosen = true;
+  }
 
-  while(!isReallyAlive(self) || isUsingRemote())
+  while(!isReallyAlive(self) || isUsingRemote()) {
     wait 0.05;
+  }
 
   if(isDefined(self.isCarrying) && self.isCarrying == 1) {
     self notify("force_cancel_placement");
     wait 0.05;
   }
 
-  while(self IsMantling())
+  while(self IsMantling()) {
     wait(0.05);
+  }
 
-  while(!self isOnGround() && !self IsOnLadder())
+  while(!self isOnGround() && !self IsOnLadder()) {
     wait(0.05);
+  }
 
-  while(!isAlive(self))
+  while(!isAlive(self)) {
     waitframe();
+  }
 
   if(wasChosen) {
     self maps\mp\gametypes\_menus::addToTeam("axis");
@@ -324,8 +345,9 @@ setFirstInfected(wasChosen) {
 
   self.pers["gamemodeLoadout"] = level.infect_loadouts["axis_initial"];
 
-  if(isDefined(self.setSpawnpoint))
+  if(isDefined(self.setSpawnpoint)) {
     maps\mp\perks\_perkfunctions::deleteTI(self.setSpawnpoint);
+  }
 
   spawnPoint = spawn("script_model", self.origin);
   spawnPoint.angles = self.angles;
@@ -337,8 +359,9 @@ setFirstInfected(wasChosen) {
   self.faux_spawn_stance = self getStance();
   self thread maps\mp\gametypes\_playerlogic::spawnPlayer(true);
 
-  if(wasChosen)
+  if(wasChosen) {
     level.infect_players[self.name] = true;
+  }
 
   thread teamPlayerCardSplash("callout_first_mercenary", self);
   playSoundOnPlayers("mp_enemy_obj_captured");
@@ -349,30 +372,36 @@ setInitialToNormalInfected(gotKill) {
 
   self.isInitialInfected = undefined;
   self.changingToRegularInfected = true;
-  if(isDefined(gotKill))
+  if(isDefined(gotKill)) {
     self.changingToRegularInfectedByKill = true;
+  }
 
-  while(!isReallyAlive(self))
+  while(!isReallyAlive(self)) {
     wait(0.05);
+  }
 
   if(isDefined(self.isCarrying) && self.isCarrying == true) {
     self notify("force_cancel_placement");
     wait(0.05);
   }
 
-  while(self IsMantling())
+  while(self IsMantling()) {
     wait(0.05);
+  }
 
-  while(!self isOnGround())
+  while(!self isOnGround()) {
     wait(0.05);
+  }
 
-  while(!isReallyAlive(self))
+  while(!isReallyAlive(self)) {
     wait(0.05);
+  }
 
   self.pers["gamemodeLoadout"] = level.infect_loadouts["axis"];
 
-  if(isDefined(self.setSpawnpoint))
+  if(isDefined(self.setSpawnpoint)) {
     self maps\mp\perks\_perkfunctions::deleteTI(self.setSpawnpoint);
+  }
 
   spawnPoint = spawn("script_model", self.origin);
   spawnPoint.angles = self.angles;
@@ -390,8 +419,9 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   wasSuicide = false;
 
   if(self.team == "allies" && isDefined(attacker)) {
-    if(isPlayer(attacker) && attacker != self)
+    if(isPlayer(attacker) && attacker != self) {
       processKill = true;
+    }
     else if(level.infect_allowSuicide && (attacker == self || !isPlayer(attacker))) {
       processKill = true;
       wasSuicide = true;
@@ -410,8 +440,9 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     if(wasSuicide) {
       if(level.infect_teamScores["axis"] > 1) {
         foreach(player in level.players) {
-          if(isDefined(player.isInitialInfected))
+          if(isDefined(player.isInitialInfected)) {
             player thread setInitialToNormalInfected();
+          }
         }
       }
     } else if(isDefined(attacker.isInitialInfected))
@@ -441,11 +472,13 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
       }
     }
 
-    else if(level.infect_teamScores["allies"] == 1)
+    else if(level.infect_teamScores["allies"] == 1) {
       onFinalSurvivor();
+    }
 
-    else if(level.infect_teamScores["allies"] == 0)
+    else if(level.infect_teamScores["allies"] == 0) {
       onSurvivorsEliminated();
+    }
   }
 }
 
@@ -468,8 +501,9 @@ onFinalSurvivor() {
 
       thread maps\mp\_utility::teamPlayerCardSplash("callout_final_rogue", player);
 
-      if(matchMakingGame())
+      if(matchMakingGame()) {
         level thread finalSurvivorUAV(player);
+      }
       break;
     }
   }
@@ -486,8 +520,9 @@ finalSurvivorUAV(finalPlayer) {
   level.radarmode["axis"] = "normal_radar";
 
   foreach(player in level.players) {
-    if(player.team == "axis")
+    if(player.team == "axis") {
       player.radarmode = "normal_radar";
+    }
   }
 
   for(;;) {
@@ -538,8 +573,9 @@ onPlayerDisconnect() {
         onFinalSurvivor();
       } else if(self.team == "axis" && level.infect_teamScores["axis"] == 1) {
         foreach(player in level.players) {
-          if(player != self && player.team == "axis")
+          if(player != self && player.team == "axis") {
             player setFirstInfected(false);
+          }
         }
       }
     } else if(level.infect_teamScores["allies"] == 0) {
@@ -563,8 +599,9 @@ watchInfectForfeit() {
   level.forfeitInProgress = true;
 
   for(;;) {
-    if(!isDefined(level.forfeitInProgress))
+    if(!isDefined(level.forfeitInProgress)) {
       level.forfeitInProgress = true;
+    }
 
     wait 0.05;
   }
@@ -587,8 +624,9 @@ onSurvivorsEliminated() {
 getNumInfected() {
   numInfected = 0;
   foreach(player in level.players) {
-    if(isDefined(player.team) && player.team == "axis")
+    if(isDefined(player.team) && player.team == "axis") {
       numInfected++;
+    }
   }
   return numInfected;
 }
@@ -596,8 +634,9 @@ getNumInfected() {
 getNumSurvivors() {
   numSurvivors = 0;
   foreach(player in level.players) {
-    if(isDefined(player.team) && player.team == "allies")
+    if(isDefined(player.team) && player.team == "allies") {
       numSurvivors++;
+    }
   }
   return numSurvivors;
 }

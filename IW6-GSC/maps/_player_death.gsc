@@ -28,13 +28,15 @@ player_throwgrenade_timer() {
   self.lastgrenadetime = 0;
 
   for(;;) {
-    while(!self isthrowinggrenade())
+    while(!self isthrowinggrenade()) {
       wait 0.05;
+    }
 
     self.lastgrenadetime = gettime();
 
-    while(self isthrowinggrenade())
+    while(self isthrowinggrenade()) {
       wait 0.05;
+    }
   }
 }
 
@@ -51,8 +53,9 @@ special_death_hint(var_0, var_1, var_2) {
     return;
   }
   if(level.gameskill >= 2) {
-    if(!maps\_load::map_is_early_in_the_game())
+    if(!maps\_load::map_is_early_in_the_game()) {
       return;
+    }
   }
 
   switch (var_1) {
@@ -87,11 +90,13 @@ special_death_hint(var_0, var_1, var_2) {
 }
 
 vehicle_death(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(var_0.code_classname != "script_vehicle")
+  if(var_0.code_classname != "script_vehicle") {
     return 0;
+  }
 
   level notify("new_quote_string");
   set_deadquote("@SCRIPT_EXPLODING_VEHICLE_DEATH");
@@ -100,11 +105,13 @@ vehicle_death(var_0) {
 }
 
 destructible_death(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isDefined(var_0.destructible_type))
+  if(!isDefined(var_0.destructible_type)) {
     return 0;
+  }
 
   level notify("new_quote_string");
 
@@ -121,13 +128,15 @@ destructible_death(var_0) {
 
 exploding_barrel_death(var_0) {
   if(isDefined(level.lastexplodingbarrel)) {
-    if(gettime() != level.lastexplodingbarrel["time"])
+    if(gettime() != level.lastexplodingbarrel["time"]) {
       return 0;
+    }
 
     var_1 = distance(self.origin, level.lastexplodingbarrel["origin"]);
 
-    if(var_1 > level.lastexplodingbarrel["radius"])
+    if(var_1 > level.lastexplodingbarrel["radius"]) {
       return 0;
+    }
 
     level notify("new_quote_string");
     set_deadquote("@SCRIPT_EXPLODING_BARREL_DEATH");
@@ -143,14 +152,17 @@ set_deadquote(var_0) {
 }
 
 deadquote_recently_used(var_0) {
-  if(var_0 == getdvar("ui_deadquote_v1"))
+  if(var_0 == getdvar("ui_deadquote_v1")) {
     return 1;
+  }
 
-  if(var_0 == getdvar("ui_deadquote_v2"))
+  if(var_0 == getdvar("ui_deadquote_v2")) {
     return 1;
+  }
 
-  if(var_0 == getdvar("ui_deadquote_v3"))
+  if(var_0 == getdvar("ui_deadquote_v3")) {
     return 1;
+  }
 
   return 0;
 }
@@ -158,8 +170,9 @@ deadquote_recently_used(var_0) {
 lookupdeathquote(var_0) {
   var_1 = tablelookup("sp/deathQuoteTable.csv", 0, var_0, 1);
 
-  if(tolower(var_1[0]) != tolower("@"))
+  if(tolower(var_1[0]) != tolower("@")) {
     var_1 = "@" + var_1;
+  }
 
   return var_1;
 }
@@ -232,8 +245,9 @@ grenade_death_indicator_hud() {
 }
 
 set_death_icon(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1.5;
+  }
 
   wait(var_3);
   var_4 = newhudelem();

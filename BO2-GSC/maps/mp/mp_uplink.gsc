@@ -54,8 +54,9 @@ main() {
   level thread gondola_sway();
   glasses = getstructarray("glass_shatter_on_spawn", "targetname");
 
-  for(i = 0; i < glasses.size; i++)
+  for(i = 0; i < glasses.size; i++) {
     radiusdamage(glasses[i].origin, 64, 101, 100);
+  }
 }
 
 levelspawndvars(reset_dvars) {
@@ -87,8 +88,9 @@ destroy_corpses() {
 
   for(i = 0; i < corpses.size; i++) {
     if(corpses[i].birthtime + 3000 < time) {
-      if(distance2dsquared(corpses[i].origin, self.origin) < 10000)
+      if(distance2dsquared(corpses[i].origin, self.origin) < 10000) {
         corpses[i] delete();
+      }
     }
   }
 }

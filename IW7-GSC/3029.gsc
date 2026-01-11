@@ -27,11 +27,13 @@ func_D186() {
 }
 
 func_D188() {
-  if(isDefined(self.func_4B23))
+  if(isDefined(self.func_4B23)) {
     self stoploopsound(self.func_4B23);
+  }
 
-  if(isDefined(self.func_4B22))
+  if(isDefined(self.func_4B22)) {
     self stoploopsound(self.func_4B22);
+  }
 
   level.player _meth_80A1();
 }
@@ -51,8 +53,9 @@ func_D13C() {
     }
     if(isDefined(var_1.classname) && var_1.classname == "misc_turret") {
       if(isDefined(var_1.type) && var_1.type != "cap_turret_missile_barrage") {
-        if(isDefined(var_1.func_4D1E) && isDefined(var_1.func_4D1E.func_B428))
+        if(isDefined(var_1.func_4D1E) && isDefined(var_1.func_4D1E.func_B428)) {
           var_00 = var_1.func_4D1E.func_B428;
+        }
       }
     }
 
@@ -152,8 +155,9 @@ func_D136() {
     var_22 = var_19 * var_20 * var_20 * var_21;
     var_22 = var_22 * level.func_A48E.func_D3BC;
 
-    if(scripts\sp\utility::func_D15B("hull"))
+    if(scripts\sp\utility::func_D15B("hull")) {
       var_22 = var_22 * 0.33;
+    }
 
     var_22 = clamp(var_22, 0, 1);
     var_04 thread func_D135(var_22);
@@ -170,13 +174,15 @@ func_D136() {
           var_24 = scripts\sp\math::func_6A8E(2, 1, var_24);
           var_22 = var_24;
 
-          if(var_22 > 0.99)
+          if(var_22 > 0.99) {
             var_22 = 0.99;
+          }
 
           var_25 = scripts\sp\math::func_6A8E(0, var_23, var_22);
 
-          if(isDefined(var_12.script_team) && var_12.script_team == "axis")
+          if(isDefined(var_12.script_team) && var_12.script_team == "axis") {
             var_12 getrandomarmkillstreak(var_25, level.func_D127.origin, level.func_D127, undefined, "MOD_IMPACT", "spaceship_cannon_projectile");
+          }
         }
       }
 
@@ -209,30 +215,38 @@ func_D135(var_00, var_01) {
   var_14 = scripts\sp\math::func_6A8E(var_08, var_09, var_10);
   earthquake(var_11, var_12, level.func_D127.origin, 5000);
 
-  if(var_00 > 0.5)
+  if(var_00 > 0.5) {
     level.player playrumbleonentity("grenade_rumbe");
-  else if(var_00 > 0.25)
+  }
+  else if(var_00 > 0.25) {
     level.player playrumbleonentity("damage_heavy");
-  else
+  }
+  else {
     level.player playrumbleonentity("damage_light");
+  }
 }
 
 func_D07A(var_00, var_01, var_02, var_03) {
-  if(!isDefined(var_02) || var_02 == "spaceship_scripted_locked_enemy_bullets" || var_02 == "spaceship_homing_missile")
+  if(!isDefined(var_02) || var_02 == "spaceship_scripted_locked_enemy_bullets" || var_02 == "spaceship_homing_missile") {
     return 0;
+  }
 
-  if(func_0BDC::func_7B9E() < 25)
+  if(func_0BDC::func_7B9E() < 25) {
     return 0;
+  }
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
   var_04 = vectordot(anglesToForward(self.angles), var_00 * -1);
 
-  if(var_04 > 0.83)
+  if(var_04 > 0.83) {
     return 0;
-  else
+  }
+  else {
     return 1;
+  }
 }
 
 func_4CF3() {
@@ -248,8 +262,9 @@ func_D142() {
   self waittill("script_death", var_00);
   self.func_5F6F = 1;
 
-  if(isDefined(level.func_D127.func_432D))
+  if(isDefined(level.func_D127.func_432D)) {
     level.func_D127.func_432D ghostattack(0, 0.5);
+  }
 
   if(!isDefined(self.func_A56F) || !self.func_A56F) {
     func_0BDC::func_D16C(level.func_D127.origin, 0, 0, 0);
@@ -358,13 +373,16 @@ func_D140() {
 }
 
 func_D13F(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = scripts\engine\utility::random([6, 8, 9, 3, 4]);
+  }
 
-  if(var_00 < 10)
+  if(var_00 < 10) {
     var_01 = "0";
-  else
+  }
+  else {
     var_01 = "";
+  }
 
   var_00 = "tag_cockpit_damage_fx_" + var_01 + var_00;
   earthquake(randomfloatrange(0.25, 0.3), 0.6, level.func_D127.origin, 15000);
@@ -376,19 +394,24 @@ func_D13A() {
   var_00 = randomint(100) < 20;
   var_01 = randomint(100) < 40;
 
-  if(var_00)
+  if(var_00) {
     var_02 = "_lrg";
-  else if(var_01)
+  }
+  else if(var_01) {
     var_02 = "_med";
-  else
+  }
+  else {
     var_02 = "";
+  }
 
   var_03 = randomintrange(1, 10);
 
-  if(var_03 < 10)
+  if(var_03 < 10) {
     var_04 = "0";
-  else
+  }
+  else {
     var_04 = "";
+  }
 
   var_03 = "tag_cockpit_damage_fx_" + var_04 + var_03;
   scripts\sp\utility::func_75C4("cockpit_damage_sparks" + var_02, var_03);
@@ -471,8 +494,9 @@ func_12864() {
     return 1;
   }
 
-  if(self.func_9C28)
+  if(self.func_9C28) {
     return 1;
+  }
 
   return 0;
 }
@@ -505,18 +529,21 @@ func_D13E() {
   self endon("damage_recover");
   self endon("script_death");
 
-  if(isDefined(self.func_5763) && self.func_5763)
+  if(isDefined(self.func_5763) && self.func_5763) {
     var_00 = level.func_A48E.func_D3BF / 1000;
-  else
+  }
+  else {
     var_00 = level.func_A48E.func_D3C0 / 1000;
+  }
 
   wait(var_00);
 
   while(self.func_B154 < scripts\sp\gameskill::func_7A59()) {
     self.func_B154 = self.func_B154 + level.func_A48E.func_D3BB;
 
-    if(self.func_B154 > scripts\sp\gameskill::func_7A59())
+    if(self.func_B154 > scripts\sp\gameskill::func_7A59()) {
       self.func_B154 = scripts\sp\gameskill::func_7A59();
+    }
 
     scripts\engine\utility::waitframe();
   }
@@ -617,10 +644,12 @@ func_11AB3() {
       self.func_5763 = 0;
     }
 
-    if(isDefined(self.func_728F))
+    if(isDefined(self.func_728F)) {
       var_06 = self.func_728F;
-    else
+    }
+    else {
       var_06 = min(var_07, var_06);
+    }
 
     if(var_06 < var_05) {
       var_09 = scripts\sp\math::func_C097(0, var_05, var_06);
@@ -676,8 +705,9 @@ func_11AB3() {
 }
 
 func_A2B3(var_00) {
-  if(!var_00)
+  if(!var_00) {
     level.func_D127.func_728F = undefined;
+  }
   else {
     var_00 = clamp(var_00, 0, 1);
     level.func_D127.func_728F = 1 - var_00;
@@ -696,14 +726,17 @@ func_DAEA(var_00, var_01, var_02) {
   self endon("script_death");
   var_03 = func_79FF();
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 0.1;
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 1.0;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0.5;
+  }
 
   var_04 = var_00 * 2.0;
   var_05 = var_00;
@@ -739,17 +772,20 @@ func_79FF() {
 }
 
 func_D12F(var_00, var_01, var_02) {
-  if(self.func_9C28)
+  if(self.func_9C28) {
     var_00 = var_00 * 1.5;
+  }
 
   var_03 = scripts\sp\math::func_C097(0, 300, var_00);
   var_04 = scripts\sp\math::func_6A8E(0.15, 0.39, var_03);
   earthquake(var_04, 0.4, level.func_D127.origin, 50000);
 
-  if(var_03 > 0.6)
+  if(var_03 > 0.6) {
     level.player playrumbleonentity("damage_heavy");
-  else if(var_03 > 0.3)
+  }
+  else if(var_03 > 0.3) {
     level.player playrumbleonentity("damage_light");
+  }
 
   var_05 = scripts\sp\math::func_6A8E(1.3, 2.0, var_03);
   thread func_0BDC::func_D527("jackal_bullet_impact_player", var_02, undefined, var_05, self);
@@ -784,27 +820,32 @@ func_D14E(var_00, var_01, var_02) {
   var_04 = scripts\sp\math::func_6A8E(0.01, 0.4, var_03);
   earthquake(var_04, 0.75, level.func_D127.origin, 50000);
 
-  if(var_03 > 0.6)
+  if(var_03 > 0.6) {
     level.player playrumbleonentity("damage_heavy");
-  else if(var_03 > 0.3)
+  }
+  else if(var_03 > 0.3) {
     level.player playrumbleonentity("damage_light");
+  }
 
   var_05 = scripts\sp\math::func_6A8E(0.3, 1.5, var_03);
   thread func_0BDC::func_D527("explosive_impact_player_jackal", var_02, undefined, var_05);
   var_01 = vectornormalize(level.func_D127.origin - var_02);
 
-  if(scripts\sp\utility::func_93A6())
+  if(scripts\sp\utility::func_93A6()) {
     thread func_4D00(var_03, var_01, var_02, 2);
-  else
+  }
+  else {
     func_4CFF(var_03, var_01, var_02, 2);
+  }
 }
 
 func_88DB() {
   if(!isDefined(level.func_10147)) {
     return;
   }
-  while(!isDefined(level.func_D127))
+  while(!isDefined(level.func_D127)) {
     wait 0.05;
+  }
 
   var_00 = 0;
   var_01 = 0;
@@ -846,8 +887,9 @@ func_88DB() {
     var_05 = level.func_D127;
     var_06 = 0;
 
-    if(isDefined(var_5.func_B154))
+    if(isDefined(var_5.func_B154)) {
       var_06 = var_5.func_B154 / scripts\sp\gameskill::func_7A59();
+    }
 
     var_04 setshader("black", int(var_06 * 100), 8);
   }
@@ -859,10 +901,12 @@ func_B81C(var_00) {
   var_03 = scripts\sp\math::func_6A8E(0.01, 0.4, var_02);
   earthquake(var_03, 0.75, level.func_D127.origin, 50000);
 
-  if(var_02 > 0.6)
+  if(var_02 > 0.6) {
     level.player playrumbleonentity("damage_heavy");
-  else if(var_02 > 0.3)
+  }
+  else if(var_02 > 0.3) {
     level.player playrumbleonentity("damage_light");
+  }
 
   var_04 = vectornormalize(level.func_D127.origin - var_00);
   var_02 = 1 - scripts\sp\math::func_C097(300, 10000, var_01);
@@ -879,8 +923,9 @@ func_4D00(var_00, var_01, var_02, var_03, var_04) {
   var_05 = 120;
   var_06 = (70, 40, 200);
 
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     var_06 = var_06 * -1;
+  }
 
   earthquake(var_00, 0.75, level.func_D127.origin, 50000);
   func_0BDC::func_A079(var_02, var_05 * var_00, 0.05 * var_03, var_03, var_04);

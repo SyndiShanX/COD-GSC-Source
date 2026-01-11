@@ -26,8 +26,9 @@ main() {
   arrivalAnim = anim.coverTrans[self.approachtype][approachnumber];
   assert(isDefined(arrivalAnim));
 
-  if(!isDefined(self.heat))
+  if(!isDefined(self.heat)) {
     self thread abortApproachIfThreatened();
+  }
 
   self clearanim( % body, 0.2);
   self setFlaggedAnimRestart("coverArrival", arrivalAnim, 1, 0.2, self.moveTransitionRate);
@@ -36,8 +37,9 @@ main() {
   newstance = anim.arrivalEndStance[self.approachType];
   assertex(isDefined(newstance), "bad node approach type: " + self.approachtype);
 
-  if(isDefined(newstance))
+  if(isDefined(newstance)) {
     self.a.pose = newstance;
+  }
 
   self.a.movement = "stop";
 
@@ -71,11 +73,13 @@ handleStartAim(note) {
 }
 
 isThreatenedByEnemy() {
-  if(!isDefined(self.node))
+  if(!isDefined(self.node)) {
     return false;
+  }
 
-  if(isDefined(self.enemy) && self seeRecently(self.enemy, 1.5) && distanceSquared(self.origin, self.enemy.origin) < 250000)
+  if(isDefined(self.enemy) && self seeRecently(self.enemy, 1.5) && distanceSquared(self.origin, self.enemy.origin) < 250000) {
     return !(self isCoverValidAgainstEnemy());
+  }
 
   return false;
 }
@@ -84,8 +88,9 @@ abortApproachIfThreatened() {
   self endon("killanimscript");
 
   while(1) {
-    if(!isDefined(self.node))
+    if(!isDefined(self.node)) {
       return;
+    }
 
     if(isThreatenedByEnemy()) {
       self clearanim( % root, .3);
@@ -100,64 +105,80 @@ abortApproachIfThreatened() {
 
 getNodeStanceYawOffset(approachtype) {
   // returns the base stance's yaw offset when hiding at a node, based off the approach type
-  if(isDefined(self.heat))
+  if(isDefined(self.heat)) {
     return 0;
+  }
 
-  if(approachtype == "left" || approachtype == "left_crouch")
+  if(approachtype == "left" || approachtype == "left_crouch") {
     return 90.0;
-  else if(approachtype == "right" || approachtype == "right_crouch")
+  }
+  else if(approachtype == "right" || approachtype == "right_crouch") {
     return -90.0;
+  }
 
   return 0;
 }
 
 canUseSawApproach(node) {
-  if(!usingMG())
+  if(!usingMG()) {
     return false;
+  }
 
-  if(!isDefined(node.turretInfo))
+  if(!isDefined(node.turretInfo)) {
     return false;
+  }
 
-  if(node.type != "Cover Stand" && node.type != "Cover Prone" && node.type != "Cover Crouch")
+  if(node.type != "Cover Stand" && node.type != "Cover Prone" && node.type != "Cover Crouch") {
     return false;
+  }
 
-  if(isDefined(self.enemy) && distanceSquared(self.enemy.origin, node.origin) < 256 * 256)
+  if(isDefined(self.enemy) && distanceSquared(self.enemy.origin, node.origin) < 256 * 256) {
     return false;
+  }
 
-  if(GetNodeYawToEnemy() > 40 || GetNodeYawToEnemy() < -40)
+  if(GetNodeYawToEnemy() > 40 || GetNodeYawToEnemy() < -40) {
     return false;
+  }
 
   return true;
 }
 
 determineNodeApproachType(node) {
   if(canUseSawApproach(node)) {
-    if(node.type == "Cover Stand")
+    if(node.type == "Cover Stand") {
       return "stand_saw";
-    if(node.type == "Cover Crouch")
+    }
+    if(node.type == "Cover Crouch") {
       return "crouch_saw";
-    else if(node.type == "Cover Prone")
+    }
+    else if(node.type == "Cover Prone") {
       return "prone_saw";
+    }
   }
 
-  if(!isDefined(anim.approach_types[node.type]))
+  if(!isDefined(anim.approach_types[node.type])) {
     return;
+  }
 
-  if(isDefined(node.arrivalStance))
+  if(isDefined(node.arrivalStance)) {
     stance = node.arrivalStance;
-  else
+  }
+  else {
     stance = node getHighestNodeStance();
+  }
 
   // no approach to prone
-  if(stance == "prone")
+  if(stance == "prone") {
     stance = "crouch";
+  }
 
   type = anim.approach_types[node.type][stance];
 
   if(self shouldCQB()) {
     cqbType = type + "_cqb";
-    if(isDefined(anim.coverTrans[cqbType]))
+    if(isDefined(anim.coverTrans[cqbType])) {
       type = cqbType;
+    }
   }
 
   return type;
@@ -165,32 +186,39 @@ determineNodeApproachType(node) {
 
 determineNodeExitType(node) {
   if(canUseSawApproach(node)) {
-    if(node.type == "Cover Stand")
+    if(node.type == "Cover Stand") {
       return "stand_saw";
-    if(node.type == "Cover Crouch")
+    }
+    if(node.type == "Cover Crouch") {
       return "crouch_saw";
-    else if(node.type == "Cover Prone")
+    }
+    else if(node.type == "Cover Prone") {
       return "prone_saw";
+    }
   }
 
-  if(!isDefined(anim.approach_types[node.type]))
+  if(!isDefined(anim.approach_types[node.type])) {
     return;
+  }
 
-  if(isDefined(anim.requiredExitStance[node.type]) && anim.requiredExitStance[node.type] != self.a.pose)
+  if(isDefined(anim.requiredExitStance[node.type]) && anim.requiredExitStance[node.type] != self.a.pose) {
     return;
+  }
 
   stance = self.a.pose;
 
   // no exit from prone
-  if(stance == "prone")
+  if(stance == "prone") {
     stance = "crouch";
+  }
 
   type = anim.approach_types[node.type][stance];
 
   if(self shouldCQB()) {
     cqbType = type + "_cqb";
-    if(isDefined(anim.coverExit[cqbType]))
+    if(isDefined(anim.coverExit[cqbType])) {
       type = cqbType;
+    }
   }
 
   return type;
@@ -201,22 +229,28 @@ determineExposedApproachType(node) {
     return "heat";
   }
 
-  if(isDefined(node.arrivalStance))
+  if(isDefined(node.arrivalStance)) {
     stance = node.arrivalStance;
-  else
+  }
+  else {
     stance = node getHighestNodeStance();
+  }
 
   // no approach to prone
-  if(stance == "prone")
+  if(stance == "prone") {
     stance = "crouch";
+  }
 
-  if(stance == "crouch")
+  if(stance == "crouch") {
     type = "exposed_crouch";
-  else
+  }
+  else {
     type = "exposed";
+  }
 
-  if(shouldCQB())
+  if(shouldCQB()) {
     return type + "_cqb";
+  }
 
   return type;
 }
@@ -238,22 +272,27 @@ getMaxDirectionsAndExcludeDirFromApproachType(node) {
 shouldApproachToExposed(approachType) {
   // decide whether it's a good idea to go directly into the exposed position as we approach this node.
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false; // nothing to shoot!
+  }
 
-  if(self NeedToReload(0.5))
+  if(self NeedToReload(0.5)) {
     return false;
+  }
 
-  if(self isSuppressedWrapper())
+  if(self isSuppressedWrapper()) {
     return false; // too dangerous, we need cover
+  }
 
   // path nodes have no special "exposed" position
-  if(isDefined(anim.exposedTransition[approachtype]))
+  if(isDefined(anim.exposedTransition[approachtype])) {
     return false;
+  }
 
   // no arrival animations into exposed for left/right crouch
-  if(approachtype == "left_crouch" || approachtype == "right_crouch")
+  if(approachtype == "left_crouch" || approachtype == "right_crouch") {
     return false;
+  }
 
   return canSeePointFromExposedAtNode(self.enemy getShootAtPos(), self.node);
 }
@@ -267,11 +306,13 @@ calculateNodeOffsetFromAnimationDelta(nodeAngles, delta) {
 }
 
 getApproachEnt() {
-  if(isDefined(self.scriptedArrivalEnt))
+  if(isDefined(self.scriptedArrivalEnt)) {
     return self.scriptedArrivalEnt;
+  }
 
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     return self.node;
+  }
 
   return undefined;
 }
@@ -329,8 +370,9 @@ checkApproachPreConditions() {
 
 checkApproachConditions(approachType, approach_dir, node) {
   // we're doing default exposed approaches in doLastMinuteExposedApproach now
-  if(isDefined(anim.exposedTransition[approachtype]))
+  if(isDefined(anim.exposedTransition[approachtype])) {
     return false;
+  }
 
   if(approachType == "stand" || approachType == "crouch") {
     assert(isDefined(node));
@@ -353,17 +395,21 @@ setupApproachNode_debugInfo(actor, approachType, approach_dir, approachNodeYaw, 
     println("^5approaching cover (ent " + actor getentnum() + ", type \"" + approachType + "\"):");
     println(" approach_dir = (" + approach_dir[0] + ", " + approach_dir[1] + ", " + approach_dir[2] + ")");
     angle = AngleClamp180(vectortoyaw(approach_dir) - approachNodeYaw + 180);
-    if(angle < 0)
+    if(angle < 0) {
       println(" (Angle of " + (0 - angle) + " right from node forward.)");
-    else
+    }
+    else {
       println(" (Angle of " + angle + " left from node forward.)");
+    }
 
     if(approachType == "exposed") {
       if(isDefined(node)) {
-        if(isDefined(approachtype))
+        if(isDefined(approachtype)) {
           debug_arrival("Aborting cover approach: node approach type was " + approachtype);
-        else
+        }
+        else {
           debug_arrival("Aborting cover approach: node approach type was undefined");
+        }
       } else {
         debug_arrival("Aborting cover approach: node is undefined");
       }
@@ -383,16 +429,18 @@ setupApproachNode_debugInfo(actor, approachType, approach_dir, approachNodeYaw, 
     }
 
     // this lets code know that script is expecting the "cover_approach" notify
-    if(firstTime)
+    if(firstTime) {
       self.requestArrivalNotify = true;
+    }
 
     self.a.arrivalType = undefined;
     self thread doLastMinuteExposedApproachWrapper();
 
     self waittill("cover_approach", approach_dir);
 
-    if(!self checkApproachPreConditions())
+    if(!self checkApproachPreConditions()) {
       return;
+    }
 
     self thread setupApproachNode(false); // wait again incase path goal changes
 
@@ -414,8 +462,9 @@ setupApproachNode_debugInfo(actor, approachType, approach_dir, approachNodeYaw, 
 
     /# setupApproachNode_debugInfo( self, approachType, approach_dir, approachNodeYaw, node );
 
-    if(!checkApproachConditions(approachType, approach_dir, node))
+    if(!checkApproachConditions(approachType, approach_dir, node)) {
       return;
+    }
 
     startCoverApproach(approachType, approachPoint, approachNodeYaw, approachFinalYaw, approach_dir);
   }
@@ -458,23 +507,27 @@ coverApproachLastMinuteCheck(approachPoint, approachFinalYaw, approachType, appr
 }
 
 approachWaitTillClose(node, checkDist) {
-  if(!isDefined(node))
+  if(!isDefined(node)) {
     return;
+  }
 
   // wait until we get to the point where we have to decide what approach animation to play
   while(1) {
-    if(!isDefined(self.pathGoalPos))
+    if(!isDefined(self.pathGoalPos)) {
       self waitForPathGoalPos();
+    }
 
     dist = distance(self.origin, self.pathGoalPos);
 
-    if(dist <= checkDist + allowedError)
+    if(dist <= checkDist + allowedError) {
       break;
+    }
 
     // underestimate how long to wait so we don't miss the crucial point
     waittime = (dist - checkDist) / maxSpeed - .1;
-    if(waittime < .05)
+    if(waittime < .05) {
       waittime = .05;
+    }
 
     wait waittime;
   }
@@ -541,8 +594,9 @@ startCoverApproach(approachType, approachPoint, approachNodeYaw, approachFinalYa
 
     requiredYaw = approachFinalYaw - anim.coverTransAngles[approachType][approachNumber];
 
-    if(!self coverApproachLastMinuteCheck(approachPoint, approachFinalYaw, approachType, approachNumber, requiredYaw))
+    if(!self coverApproachLastMinuteCheck(approachPoint, approachFinalYaw, approachType, approachNumber, requiredYaw)) {
       return;
+    }
   }
 
   self.approachNumber = approachNumber; // used in cover_arrival::main()
@@ -612,8 +666,9 @@ CheckArrivalEnterPositions(approachpoint, approachYaw, approachtype, approach_di
     }
   }
 
-  for(i = 0; i < resultobj.data.size; i++)
+  for(i = 0; i < resultobj.data.size; i++) {
     debug_arrival(resultobj.data[i]);
+  }
 
     return resultobj;
 }
@@ -635,8 +690,9 @@ doLastMinuteExposedApproachWrapper() {
       self waittill_any("goal_changed", "goal_changed_previous_frame");
 
       // our goal didn't *really* change if it only changed because we called setRunToPos
-      if(isDefined(self.coverEnterPos) && isDefined(self.pathGoalPos) && distance2D(self.coverEnterPos, self.pathGoalPos) < 1)
+      if(isDefined(self.coverEnterPos) && isDefined(self.pathGoalPos) && distance2D(self.coverEnterPos, self.pathGoalPos) < 1) {
         continue;
+      }
       break;
     }
   }
@@ -665,8 +721,9 @@ exposedApproachConditionCheck(node, goalMatchesNode) {
   }
 
   if(isDefined(self.approachConditionCheckFunc)) {
-    if(!self[[self.approachConditionCheckFunc]](node))
+    if(!self[[self.approachConditionCheckFunc]](node)) {
       return false;
+    }
   } else {
     if(!self.faceMotion && (!isDefined(node) || node.type == "Path")) {
       /# debug_arrival( "Aborting exposed approach because not facing motion and not going to a node" );
@@ -696,28 +753,34 @@ exposedApproachConditionCheck(node, goalMatchesNode) {
 exposedApproachWaitTillClose() {
   // wait until we get to the point where we have to decide what approach animation to play
   while(1) {
-    if(!isDefined(self.pathGoalPos))
+    if(!isDefined(self.pathGoalPos)) {
       self waitForPathGoalPos();
+    }
 
     node = getApproachEnt();
-    if(isDefined(node) && !isDefined(self.heat))
+    if(isDefined(node) && !isDefined(self.heat)) {
       arrivalPos = node.origin;
-    else
+    }
+    else {
       arrivalPos = self.pathGoalPos;
+    }
 
     dist = distance(self.origin, arrivalPos);
     checkDist = anim.longestExposedApproachDist;
 
-    if(dist <= checkDist + allowedError)
+    if(dist <= checkDist + allowedError) {
       break;
+    }
 
     // underestimate how long to wait so we don't miss the crucial point
     waittime = (dist - anim.longestExposedApproachDist) / maxSpeed - .1;
-    if(waittime < 0)
+    if(waittime < 0) {
       break;
+    }
 
-    if(waittime < .05)
+    if(waittime < .05) {
       waittime = .05;
+    }
 
     // /#self thread animscripts\shared::showNoteTrack("wait " + waittime);
     wait waittime;
@@ -725,14 +788,17 @@ exposedApproachWaitTillClose() {
 }
 
 faceEnemyAtEndOfApproach(node) {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
 
-  if(isDefined(self.heat) && isDefined(node))
+  if(isDefined(self.heat) && isDefined(node)) {
     return false;
+  }
 
-  if(self.combatmode == "cover" && isSentient(self.enemy) && gettime() - self lastKnownTime(self.enemy) > 15000)
+  if(self.combatmode == "cover" && isSentient(self.enemy) && gettime() - self lastKnownTime(self.enemy) > 15000) {
     return false;
+  }
 
   return sightTracePassed(self.enemy getShootAtPos(), self.pathGoalPos + (0, 0, 60), false, undefined);
 }
@@ -741,13 +807,15 @@ doLastMinuteExposedApproach() {
   self endon("goal_changed");
   self endon("move_interrupt");
 
-  if(isDefined(self getnegotiationstartnode()))
+  if(isDefined(self getnegotiationstartnode())) {
     return;
+  }
 
   self exposedApproachWaitTillClose();
 
-  if(isDefined(self.grenade) && isDefined(self.grenade.activator) && self.grenade.activator == self)
+  if(isDefined(self.grenade) && isDefined(self.grenade.activator) && self.grenade.activator == self) {
     return;
+  }
 
   approachType = "exposed";
   maxDistToNodeSq = 1;
@@ -763,13 +831,16 @@ doLastMinuteExposedApproach() {
 
   node = getApproachEnt();
 
-  if(isDefined(node) && isDefined(self.pathGoalPos) && !isDefined(self.disableCoverArrivalsOnly))
+  if(isDefined(node) && isDefined(self.pathGoalPos) && !isDefined(self.disableCoverArrivalsOnly)) {
     goalMatchesNode = distanceSquared(self.pathGoalPos, node.origin) < maxDistToNodeSq;
-  else
+  }
+  else {
     goalMatchesNode = false;
+  }
 
-  if(goalMatchesNode)
+  if(goalMatchesNode) {
     approachtype = determineExposedApproachType(node);
+  }
 
   approachDir = VectorNormalize(self.pathGoalPos - self.origin);
 
@@ -788,8 +859,9 @@ doLastMinuteExposedApproach() {
       desiredFacingYaw = getNodeForwardYaw(node);
     } else {
       likelyEnemyDir = self getAnglesToLikelyEnemyPath();
-      if(isDefined(likelyEnemyDir))
+      if(isDefined(likelyEnemyDir)) {
         desiredFacingYaw = likelyEnemyDir[1];
+      }
     }
   }
 
@@ -799,8 +871,9 @@ doLastMinuteExposedApproach() {
   // take best animation
   best = 1;
   for(i = 2; i <= 9; i++) {
-    if(angleDataObj.transitions[i] > angleDataObj.transitions[best])
+    if(angleDataObj.transitions[i] > angleDataObj.transitions[best]) {
       best = i;
+    }
   }
   self.approachNumber = angleDataObj.transIndex[best];
   self.approachType = approachType;
@@ -815,16 +888,18 @@ doLastMinuteExposedApproach() {
   requiredDistSq = requiredDistSq * requiredDistSq;
 
   // we should already be close
-  while(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) > requiredDistSq)
+  while(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) > requiredDistSq) {
     wait .05;
+  }
 
   if(isDefined(self.arrivalStartDist) && self.arrivalStartDist < animDist + allowedError) {
     /# debug_arrival( "Aborting exposed approach because cover arrival dist is shorter" );
     return;
   }
 
-  if(!self exposedApproachConditionCheck(node, goalMatchesNode))
+  if(!self exposedApproachConditionCheck(node, goalMatchesNode)) {
     return;
+  }
 
   dist = distance(self.origin, self.pathGoalPos);
   if(abs(dist - animDist) > allowedError) {
@@ -864,8 +939,9 @@ doLastMinuteExposedApproach() {
 
 waitForPathGoalPos() {
   while(1) {
-    if(isDefined(self.pathgoalpos))
+    if(isDefined(self.pathgoalpos)) {
       return;
+    }
 
     wait 0.1;
   }
@@ -947,35 +1023,43 @@ startMoveTransition_debugInfo(exittype, exityaw) {
     println("^3exiting cover (ent " + self getentnum() + ", type \"" + exittype + "\"):");
     println(" lookaheaddir = (" + self.lookaheaddir[0] + ", " + self.lookaheaddir[1] + ", " + self.lookaheaddir[2] + ")");
     angle = AngleClamp180(vectortoyaw(self.lookaheaddir) - exityaw);
-    if(angle < 0)
+    if(angle < 0) {
       println(" (Angle of " + (0 - angle) + " right from node forward.)");
-    else
+    }
+    else {
       println(" (Angle of " + angle + " left from node forward.)");
+    }
   }
 }
 
   getExitNode() {
     exitNode = undefined;
 
-    if(!isDefined(self.heat))
+    if(!isDefined(self.heat)) {
       limit = 400; // 20 * 20
-    else
+    }
+    else {
       limit = 4096; // 64 * 64
+    }
 
-    if(isDefined(self.node) && (distanceSquared(self.origin, self.node.origin) < limit))
+    if(isDefined(self.node) && (distanceSquared(self.origin, self.node.origin) < limit)) {
       exitNode = self.node;
-    else if(isDefined(self.prevNode) && (distanceSquared(self.origin, self.prevNode.origin) < limit))
+    }
+    else if(isDefined(self.prevNode) && (distanceSquared(self.origin, self.prevNode.origin) < limit)) {
       exitNode = self.prevNode;
+    }
 
-    if(isDefined(exitNode) && isDefined(self.heat) && AbsAngleClamp180(self.angles[1] - exitNode.angles[1]) > 30)
+    if(isDefined(exitNode) && isDefined(self.heat) && AbsAngleClamp180(self.angles[1] - exitNode.angles[1]) > 30) {
       return undefined;
+    }
 
     return exitNode;
   }
 
 customMoveTransitionFunc() {
-  if(!isDefined(self.startMoveTransitionAnim))
+  if(!isDefined(self.startMoveTransitionAnim)) {
     return;
+  }
 
   self animmode("zonly_physics", false);
   self orientmode("face current");
@@ -992,24 +1076,30 @@ customMoveTransitionFunc() {
 }
 
 determineNonNodeExitType(exittype) {
-  if(self.a.pose == "stand")
+  if(self.a.pose == "stand") {
     exittype = "exposed";
-  else
+  }
+  else {
     exittype = "exposed_crouch";
+  }
 
-  if(shouldCQB())
+  if(shouldCQB()) {
     exittype = exittype + "_cqb";
-  else if(isDefined(self.heat))
+  }
+  else if(isDefined(self.heat)) {
     exittype = "heat";
+  }
 
   return exittype;
 }
 
 determineHeatCoverExitType(exitNode, exittype) {
-  if(exitNode.type == "Cover Right")
+  if(exitNode.type == "Cover Right") {
     exittype = "heat_right";
-  else if(exitNode.type == "Cover Left")
+  }
+  else if(exitNode.type == "Cover Left") {
     exittype = "heat_left";
+  }
 
   return exittype;
 }
@@ -1017,13 +1107,15 @@ determineHeatCoverExitType(exitNode, exittype) {
 startMoveTransition() {
   if(isDefined(self.customMoveTransition)) {
     customTransition = self.customMoveTransition;
-    if(!isDefined(self.permanentCustomMoveTransition))
+    if(!isDefined(self.permanentCustomMoveTransition)) {
       self.customMoveTransition = undefined;
+    }
 
     [[customTransition]]();
 
-    if(!isDefined(self.permanentCustomMoveTransition))
+    if(!isDefined(self.permanentCustomMoveTransition)) {
       self.startMoveTransitionAnim = undefined;
+    }
 
     self clearanim( % root, 0.2);
     self orientmode("face default");
@@ -1034,8 +1126,9 @@ startMoveTransition() {
 
   self endon("killanimscript");
 
-  if(!self startMoveTransitionPreConditions())
+  if(!self startMoveTransitionPreConditions()) {
     return;
+  }
 
   // assume an exit from exposed.
   exitpos = self.origin;
@@ -1053,8 +1146,9 @@ startMoveTransition() {
       exitType = nodeExitType;
       exitTypeFromNode = true;
 
-      if(isDefined(self.heat))
+      if(isDefined(self.heat)) {
         exitType = determineHeatCoverExitType(exitNode, exittype);
+      }
 
       if(!isDefined(anim.exposedTransition[exitType]) && exittype != "stand_saw" && exittype != "crouch_saw") {
         // if angle is wrong, don't do exit behavior for the node. Distance check already done in getExitNode
@@ -1062,8 +1156,9 @@ startMoveTransition() {
         anglediff = AbsAngleClamp180(self.angles[1] - GetNodeForwardYaw(exitNode));
         if(anglediff < 5) {
           // do exit behavior for the node.
-          if(!isDefined(self.heat))
+          if(!isDefined(self.heat)) {
             exitpos = exitNode.origin;
+          }
           exityaw = GetNodeForwardYaw(exitNode);
         }
       }
@@ -1072,12 +1167,14 @@ startMoveTransition() {
 
   /# self startMoveTransition_debugInfo( exittype, exityaw );
 
-  if(!self startMoveTransitionConditions(exittype, exitNode))
+  if(!self startMoveTransitionConditions(exittype, exitNode)) {
     return;
+  }
 
   isExposedExit = isDefined(anim.exposedTransition[exittype]);
-  if(!exitTypeFromNode)
+  if(!exitTypeFromNode) {
     exittype = determineNonNodeExitType();
+  }
 
   // since we're leaving, take the opposite direction of lookahead
   leaveDir = (-1 * self.lookaheaddir[0], -1 * self.lookaheaddir[1], 0);
@@ -1093,15 +1190,17 @@ startMoveTransition() {
 
   approachnumber = -1;
   numAttempts = 3;
-  if(isExposedExit)
+  if(isExposedExit) {
     numAttempts = 1;
+  }
 
   for(i = 1; i <= numAttempts; i++) {
     assert(angleDataObj.transIndex[i] != excludeDir); // shouldn't hit excludeDir unless numAttempts is too big
 
     approachNumber = angleDataObj.transIndex[i];
-    if(self checkCoverExitPos(exitpos, exityaw, exittype, isExposedExit, approachNumber))
+    if(self checkCoverExitPos(exitpos, exityaw, exittype, isExposedExit, approachNumber)) {
       break;
+    }
 
     /# debug_arrival( "exit blocked: dir " + approachNumber );
   }
@@ -1123,8 +1222,9 @@ startMoveTransition() {
 }
 
 str(val) {
-  if(!isDefined(val))
+  if(!isDefined(val)) {
     return "{undefined}";
+  }
   return val;
 }
 
@@ -1145,8 +1245,9 @@ doCoverExitAnimation(exittype, approachNumber) {
     thread debugLine(self.origin, endpos, (1, 0, 0), 1.5);
   }
 
-    if(self.a.pose == "prone")
+    if(self.a.pose == "prone") {
       return;
+    }
 
   transTime = 0.2;
 
@@ -1189,8 +1290,9 @@ finishCoverExitNotetracks(flagname) {
 	wait 1.0;
 
 	// don't want to spin around if we're almost where we're going anyway
-	while( isDefined( self.pathGoalPos ) && distanceSquared( self.origin, self.pathGoalPos ) < 200 * 200 )
+	while( isDefined( self.pathGoalPos ) && distanceSquared( self.origin, self.pathGoalPos ) < 200 * 200 ) {
 		wait .25;
+	}
 
 	self OrientMode( "face default" );
 }*/
@@ -1205,8 +1307,9 @@ drawVec(start, end, duration, color) {
 drawApproachVec(approach_dir) {
   self endon("killanimscript");
   for(;;) {
-    if(!isDefined(self.node))
+    if(!isDefined(self.node)) {
       break;
+    }
     line(self.node.origin + (0, 0, 20), (self.node.origin - vector_multiply(approach_dir, 64)) + (0, 0, 20));
     wait(0.05);
   }
@@ -1258,8 +1361,9 @@ printdebug(pos, offset, text, color, linecolor) {
       currentIndex = angleDataObj.transIndex[i];
 
       for(j = i - 1; j >= 1; j--) {
-        if(currentValue < angleDataObj.transitions[angleDataObj.transIndex[j]])
+        if(currentValue < angleDataObj.transitions[angleDataObj.transIndex[j]]) {
           break;
+        }
 
         angleDataObj.transIndex[j + 1] = angleDataObj.transIndex[j];
       }
@@ -1280,8 +1384,9 @@ checkCoverExitPos(exitpoint, exityaw, exittype, isExposedExit, approachNumber) {
   exitPos = exitpoint + forward - right;
   self.coverExitPos = exitPos;
 
-  if(debug_arrivals_on_actor())
+  if(debug_arrivals_on_actor()) {
     thread debugLine(self.origin, exitpos, (1, .5, .5), 1.5);
+  }
 
     if(!isExposedExit && !(self checkCoverExitPosWithPath(exitPos))) {
       debug_arrival("cover exit " + approachNumber + " path check failed");
@@ -1289,11 +1394,13 @@ checkCoverExitPos(exitpoint, exityaw, exittype, isExposedExit, approachNumber) {
         return false;
     }
 
-  if(!(self maymovefrompointtopoint(self.origin, exitPos)))
+  if(!(self maymovefrompointtopoint(self.origin, exitPos))) {
     return false;
+  }
 
-  if(approachNumber <= 6 || isExposedExit)
+  if(approachNumber <= 6 || isExposedExit) {
     return true;
+  }
 
   // if 7, 8, 9 direction, split up check into two parts of the 90 degree turn around corner
   // (already did the first part, from node to corner, now doing from corner to end of exit anim)
@@ -1303,8 +1410,9 @@ checkCoverExitPos(exitpoint, exityaw, exittype, isExposedExit, approachNumber) {
   finalExitPos = exitPos + forward - right;
   self.coverExitPos = finalExitPos;
 
-  if(debug_arrivals_on_actor())
+  if(debug_arrivals_on_actor()) {
     thread debugLine(exitpos, finalExitPos, (1, .5, .5), 1.5);
+  }
 
     return (self maymovefrompointtopoint(exitPos, finalExitPos));
 }
@@ -1338,17 +1446,21 @@ checkCoverEnterPos(arrivalpoint, arrivalYaw, approachtype, approachNumber, arriv
   enterPos = getArrivalStartPos(arrivalPoint, arrivalYaw, approachType, approachNumber);
   self.coverEnterPos = enterPos;
 
-  if(debug_arrivals_on_actor())
+  if(debug_arrivals_on_actor()) {
     thread debugLine(enterPos, arrivalpoint, (1, .5, .5), 1.5);
+  }
 
-    if(level.newArrivals && approachNumber <= 6 && arrivalFromFront)
+    if(level.newArrivals && approachNumber <= 6 && arrivalFromFront) {
       return true;
+    }
 
-  if(!(self maymovefrompointtopoint(enterPos, arrivalpoint)))
+  if(!(self maymovefrompointtopoint(enterPos, arrivalpoint))) {
     return false;
+  }
 
-  if(approachNumber <= 6 || isDefined(anim.exposedTransition[approachtype]))
+  if(approachNumber <= 6 || isDefined(anim.exposedTransition[approachtype])) {
     return true;
+  }
 
   // if 7, 8, 9 direction, split up check into two parts of the 90 degree turn around corner
   // (already did the second part, from corner to node, now doing from start of enter anim to corner)
@@ -1356,28 +1468,33 @@ checkCoverEnterPos(arrivalpoint, arrivalYaw, approachtype, approachNumber, arriv
   originalEnterPos = getArrivalPreStartPos(enterPos, arrivalYaw, approachType, approachNumber);
   self.coverEnterPos = originalEnterPos;
 
-  if(debug_arrivals_on_actor())
+  if(debug_arrivals_on_actor()) {
     thread debugLine(originalEnterPos, enterPos, (1, .5, .5), 1.5);
+  }
 
     return (self maymovefrompointtopoint(originalEnterPos, enterPos));
 }
 
 debug_arrivals_on_actor() {
   dvar = getdebugdvar("debug_arrivals");
-  if(dvar == "off")
+  if(dvar == "off") {
     return false;
+  }
 
-  if(dvar == "on")
+  if(dvar == "on") {
     return true;
+  }
 
-  if(int(dvar) == self getentnum())
+  if(int(dvar) == self getentnum()) {
     return true;
+  }
 
     return false;
 }
 
 debug_arrival(msg) {
-  if(!debug_arrivals_on_actor())
+  if(!debug_arrivals_on_actor()) {
     return;
+  }
   println(msg);
 }

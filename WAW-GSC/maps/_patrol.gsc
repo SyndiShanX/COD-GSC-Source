@@ -26,8 +26,9 @@ patrol(start_target) {
   self.allowdeath = true;
   self.script_patroller = 1;
   walkanim = "patrol_walk";
-  if(isDefined(self.patrol_walk_anim))
+  if(isDefined(self.patrol_walk_anim)) {
     walkanim = self.patrol_walk_anim;
+  }
   waittillframeend;
   self set_generic_run_anim(walkanim, true);
   self thread patrol_walk_twitch_loop();
@@ -37,8 +38,9 @@ patrol(start_target) {
   get_goal_func[false][false] = ::get_linked_nodes;
   set_goal_func[true] = ::set_goal_ent;
   set_goal_func[false] = ::set_goal_node;
-  if(isDefined(start_target))
+  if(isDefined(start_target)) {
     self.target = start_target;
+  }
   assertEx(isDefined(self.target) || isDefined(self.script_linkto), "Patroller with no target or script_linkto defined.");
   if(isDefined(self.target)) {
     link_type = true;
@@ -76,10 +78,12 @@ patrol(start_target) {
     currentgoal.patrol_claimed = true;
     self.last_patrol_goal = currentgoal;
     [[set_goal_func[goal_type]]](currentgoal);
-    if(isDefined(currentgoal.radius) && currentgoal.radius > 0)
+    if(isDefined(currentgoal.radius) && currentgoal.radius > 0) {
       self.goalradius = currentgoal.radius;
-    else
+    }
+    else {
       self.goalradius = 32;
+    }
     self waittill("goal");
     currentgoal notify("trigger", self);
     if(isDefined(currentgoal.script_animation)) {
@@ -145,14 +149,16 @@ patrol_walk_twitch_loop() {
   while(1) {
     wait randomfloatrange(8, 20);
     walkanim = "patrol_walk_twitch";
-    if(isDefined(self.patrol_walk_twitch))
+    if(isDefined(self.patrol_walk_twitch)) {
       walkanim = self.patrol_walk_twitch;
+    }
     self set_generic_run_anim(walkanim, true);
     length = getanimlength(getanim_generic(walkanim));
     wait length;
     walkanim = "patrol_walk";
-    if(isDefined(self.patrol_walk_anim))
+    if(isDefined(self.patrol_walk_anim)) {
       walkanim = self.patrol_walk_anim;
+    }
     self set_generic_run_anim(walkanim, true);
   }
 }
@@ -201,15 +207,17 @@ waittill_combat() {
 
 get_target_ents() {
   array = [];
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     array = getEntArray(self.target, "targetname");
+  }
   return array;
 }
 
 get_target_nodes() {
   array = [];
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     array = getnodearray(self.target, "targetname");
+  }
   return array;
 }
 
@@ -219,8 +227,9 @@ get_linked_nodes() {
     linknames = strtok(self.script_linkto, " ");
     for(i = 0; i < linknames.size; i++) {
       ent = getnode(linknames[i], "script_linkname");
-      if(isDefined(ent))
+      if(isDefined(ent)) {
         array[array.size] = ent;
+      }
     }
   }
   return array;

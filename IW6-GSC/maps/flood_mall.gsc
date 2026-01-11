@@ -102,8 +102,9 @@ mall() {
   thread maps\flood_audio::sfx_stop_mall_water();
   var_0 = level.player getweaponslistprimaries();
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   level.player takeweapon(var_2);
+  }
 
   maps\_utility::battlechatter_off("allies");
   maps\_utility::battlechatter_off("axis");
@@ -114,8 +115,9 @@ block_until_ground_collapse(var_0) {
   level endon("swept_away");
   var_1 = getent("mall_floor", "targetname");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 8;
+  }
 
   var_2 = undefined;
   var_3 = undefined;
@@ -125,18 +127,22 @@ block_until_ground_collapse(var_0) {
     var_5 = bulletTrace(self.origin + (0, 6, 12), self.origin - (0, 6, 1024), 0, var_1);
 
     if(isDefined(var_4["entity"]) && isDefined(var_4["entity"].targetname)) {
-      if(var_4["entity"].targetname == "flood_mallroof_center" || var_4["entity"].targetname == "flood_mallroof_back" || var_4["entity"].targetname == "acbox_obj")
+      if(var_4["entity"].targetname == "flood_mallroof_center" || var_4["entity"].targetname == "flood_mallroof_back" || var_4["entity"].targetname == "acbox_obj") {
         var_2 = 1;
-      else
+      }
+      else {
         var_2 = 0;
+      }
     } else
       var_2 = 0;
 
     if(isDefined(var_5["entity"]) && isDefined(var_5["entity"].targetname)) {
-      if(var_5["entity"].targetname == "flood_mallroof_center" || var_5["entity"].targetname == "flood_mallroof_back" || var_5["entity"].targetname == "acbox_obj")
+      if(var_5["entity"].targetname == "flood_mallroof_center" || var_5["entity"].targetname == "flood_mallroof_back" || var_5["entity"].targetname == "acbox_obj") {
         var_3 = 1;
-      else
+      }
+      else {
         var_3 = 0;
+      }
     } else
       var_3 = 0;
 
@@ -200,8 +206,9 @@ watch_player() {
     }
 
     if(isDefined(var_2) && var_2) {
-      if(var_3 == "projectile_m67fraggrenade" || var_3 == "projectile_m84_flashbang_grenade")
+      if(var_3 == "projectile_m67fraggrenade" || var_3 == "projectile_m84_flashbang_grenade") {
         wait 0.75;
+      }
 
       break;
     } else if(level.player attackbuttonpressed()) {
@@ -223,8 +230,9 @@ watch_glass() {
 
   while(!var_1) {
     foreach(var_3 in var_0) {
-      if(isglassdestroyed(var_3))
+      if(isglassdestroyed(var_3)) {
         var_1 = 1;
+      }
     }
 
     common_scripts\utility::waitframe();
@@ -317,10 +325,12 @@ flood_spawner(var_0, var_1, var_2) {
     var_4 = maps\_utility::get_living_ai_array("mall_ai", "script_noteworthy");
 
     if(var_4.size <= var_1) {
-      if(common_scripts\utility::flag("enemies_use_main"))
+      if(common_scripts\utility::flag("enemies_use_main")) {
         var_5 = var_3[randomint(var_3.size)];
-      else
+      }
+      else {
         var_5 = var_3[randomint(var_3.size - 2)];
+      }
 
       var_5 maps\_utility::remove_spawn_function(::mall_enemy_spawn_func);
       var_5 maps\_utility::add_spawn_function(::mall_enemy_spawn_func, var_2);
@@ -394,8 +404,9 @@ mall_rootop_event() {
   common_scripts\utility::exploder("mr_dust_slight");
   var_1 = getEntArray("mall_ware_brush_show", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 show();
+  }
 
   common_scripts\utility::flag_wait("mall_attack_player");
   var_5 = getent("flood_mall_roof_opfor", "targetname");
@@ -435,8 +446,9 @@ mall_rootop_event() {
 
   maps\flood_util::reassign_goal_volume(var_9, "mall_goalvolume_roofcollapse");
 
-  foreach(var_11 in var_9)
+  foreach(var_11 in var_9) {
   var_11 thread roofcollapse_retreat();
+  }
 
   thread flood_spawner("swept_away", 4, "mall_goalvolume_roofcollapse");
   common_scripts\utility::exploder("mr_updust");
@@ -480,27 +492,31 @@ mall_rootop_event() {
       foreach(var_29 in var_23) {
         var_30 = maps\flood_util::bullet_trace_debug(var_25 gettagorigin(var_29) + (0, 0, 12), var_25 gettagorigin(var_29) - (0, 0, 60), 0, "white", 200, 0);
 
-        if(isDefined(var_30["entity"]) && isDefined(var_30["entity"].targetname) && var_30["entity"].targetname == "flood_mallroof_far")
+        if(isDefined(var_30["entity"]) && isDefined(var_30["entity"].targetname) && var_30["entity"].targetname == "flood_mallroof_far") {
           var_27[var_27.size] = var_30["position"];
+        }
       }
 
       if(var_27.size > 0) {
         var_32 = [];
 
-        foreach(var_34 in var_27)
+        foreach(var_34 in var_27) {
         var_32[var_32.size] = maps\_utility::get_closest_point(var_34, var_15);
+        }
 
         var_36 = [];
 
-        foreach(var_34 in var_27)
+        foreach(var_34 in var_27) {
         var_36[var_36.size] = distance2d(var_34, var_32[var_36.size]);
+        }
 
         var_39 = var_36[0];
         var_40 = 0;
 
         for(var_18 = 0; var_18 < var_36.size; var_18++) {
-          if(var_36[var_18] < var_39)
+          if(var_36[var_18] < var_39) {
             var_40 = var_18;
+          }
         }
 
         var_25 linkto(level.mallroof_far, getpartname(var_16, common_scripts\utility::array_find(var_15, var_32[var_40])));
@@ -519,8 +535,9 @@ mall_rootop_event() {
   var_43 = maps\_utility::getallweapons();
 
   foreach(var_45 in var_43) {
-    if(var_45 istouching(var_42))
+    if(var_45 istouching(var_42)) {
       var_45 thread weapon_make_fall();
+    }
   }
 
   maps\_utility::stop_exploder("mall_floating_debri_med");
@@ -528,8 +545,9 @@ mall_rootop_event() {
   level.player block_until_ground_collapse();
   var_47 = getEntArray("grenade", "classname");
 
-  foreach(var_49 in var_47)
+  foreach(var_49 in var_47) {
   var_49 delete();
+  }
 
   level.player enableinvulnerability();
   level.player freezecontrols(1);
@@ -640,8 +658,9 @@ mall_rooftop_flyby_heli1() {
   var_0 vehicle_setspeed(30, 10, 10);
   var_1 = common_scripts\utility::getstruct("mall_rooftop_heli_flyby1_hover", "targetname");
 
-  while(distancesquared(var_1.origin, var_0.origin) > 400000)
+  while(distancesquared(var_1.origin, var_0.origin) > 400000) {
     wait 0.05;
+  }
 
   var_0 thread maps\_utility::vehicle_detachfrompath();
   var_2 = common_scripts\utility::getstruct("mall_rooftop_heli_flyby1_flyaway", "targetname");
@@ -651,8 +670,9 @@ mall_rooftop_flyby_heli1() {
   var_0 thread maps\_vehicle::vehicle_paths(var_2);
   level waittill("swept_away");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 mall_rooftop_flyby_heli2() {
@@ -664,8 +684,9 @@ mall_rooftop_flyby_heli2() {
   var_0 setmaxpitchroll(30, 30);
   level waittill("swept_away");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 mall_rooftop_flyby_heli3() {
@@ -674,8 +695,9 @@ mall_rooftop_flyby_heli3() {
   var_0 setmaxpitchroll(30, 30);
   level waittill("swept_away");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 mall_rooftop_pickup_heli() {
@@ -693,8 +715,9 @@ mall_rooftop_pickup_heli() {
   var_0 endon("death");
   var_2 = common_scripts\utility::getstruct("mall_rooftop_heli_hover", "targetname");
 
-  while(distancesquared(var_2.origin, var_0.origin) > 4000)
+  while(distancesquared(var_2.origin, var_0.origin) > 4000) {
     wait 0.05;
+  }
 
   var_3 = spawn("script_model", (2176, -6784, 672));
   var_0 setlookatent(var_3);
@@ -719,8 +742,9 @@ mall_rooftop_heli_damage_watcher() {
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
-    if(var_2 == level.player)
+    if(var_2 == level.player) {
       var_0++;
+    }
 
     if(var_0 > 15) {
       if(!common_scripts\utility::flag("mall_rooftop_heli_flyaway")) {
@@ -817,10 +841,12 @@ event_rumble_collapse() {
   while(!common_scripts\utility::flag("mall_player_falling")) {
     var_1 = distance(var_0.origin, level.player.origin);
 
-    if(var_1 > 666)
+    if(var_1 > 666) {
       var_0.origin = var_0.origin + (0, 0, -2);
-    else
+    }
+    else {
       var_0.origin = var_0.origin + (0, 0, -8);
+    }
 
     var_0 linkto(level.player);
     common_scripts\utility::waitframe();
@@ -859,10 +885,12 @@ mall_enemy_spawn_func(var_0, var_1) {
   self endon("death");
 
   if(!common_scripts\utility::flag("player_on_mall_roof")) {
-    if(randomint(2) == 0)
+    if(randomint(2) == 0) {
       var_2 = getent("mall_goalvolume_camper1", "targetname");
-    else
+    }
+    else {
       var_2 = getent("mall_goalvolume_camper2", "targetname");
+    }
   } else
     var_2 = getent(var_0, "targetname");
 
@@ -961,8 +989,9 @@ kill_help_hanging_guy() {
   self endon("death");
   var_0 = self.origin;
 
-  if(isalive(self))
+  if(isalive(self)) {
     thread maps\_anim::anim_loop_solo(self, "flood_mall_roof_opfor_shot", "stop_loop");
+  }
 
   while(isalive(self)) {
     wait(randomfloatrange(1.0, 1.5));
@@ -1159,8 +1188,9 @@ rooftop_door_outdoor(var_0) {
   thread mall_door_temp_collision();
   var_1 = getEntArray("mall_roof_door", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 solid();
+  }
 }
 
 ally2_mall() {
@@ -1328,8 +1358,9 @@ mall_breach_enemy_ragdoll_on_death() {
   self.ragdoll_immediate = 1;
   var_0 = common_scripts\utility::waittill_any_return("death", "finished_breach_start_anim");
 
-  if(var_0 == "finished_breach_start_anim")
+  if(var_0 == "finished_breach_start_anim") {
     self.ragdoll_immediate = undefined;
+  }
 }
 
 mall_breach_enemy_setup() {
@@ -1372,8 +1403,9 @@ mall_roof_door_firstframe() {
   var_0 thread maps\_anim::anim_first_frame_solo(level.flood_mall_roof_door_model, "flood_mall_roof_door");
   var_1 = getEntArray("mall_roof_door", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 linkto(level.flood_mall_roof_door_model);
+  }
 }
 
 remove_hall_clip() {
@@ -1425,8 +1457,9 @@ mallroof_firstframe(var_0) {
   level.mallroof_array["mallroof_cables"] = level.mallroof_cables;
 
   if(isDefined(var_0) && var_0 == "hide") {
-    foreach(var_2 in level.mallroof_array)
+    foreach(var_2 in level.mallroof_array) {
     var_2 hide();
+    }
 
     var_4 = getent("roof_collapse_faling_floor_vign1", "targetname");
     var_4 hide();
@@ -1437,8 +1470,9 @@ mallroof_firstframe(var_0) {
 }
 
 mallroof_firstframe_show_objects() {
-  foreach(var_1 in level.mallroof_array)
+  foreach(var_1 in level.mallroof_array) {
   var_1 show();
+  }
 }
 
 mall_door_temp_collision(var_0) {

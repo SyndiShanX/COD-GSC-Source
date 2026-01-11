@@ -38,15 +38,18 @@ main() {
   // just playing ragdoll isn't sufficient because sometimes ragdoll fails, and then
   // you'll just have a corpse standing around in limbo.
 
-  if(self.a.nodeath == true)
+  if(self.a.nodeath == true) {
     return;
+  }
 
   if(isDefined(self.deathFunction)) {
     result = self[[self.deathFunction]]();
-    if(!isDefined(result))
+    if(!isDefined(result)) {
       result = true;
-    if(result)
+    }
+    if(result) {
       return;
+    }
   }
 
   animscripts\utility::initialize("death");
@@ -66,17 +69,20 @@ main() {
     playDeathAnim(self.deathAnim);
 
     // Added so that I can do special stuff in Level scripts on an ai
-    if(isDefined(self.deathanimscript))
+    if(isDefined(self.deathanimscript)) {
       self[[self.deathanimscript]]();
+    }
     return;
   }
 
   explosiveDamage = self animscripts\pain::wasDamagedByExplosive();
 
-  if(self.damageLocation == "helmet" || self.damageLocation == "head")
+  if(self.damageLocation == "helmet" || self.damageLocation == "head") {
     self helmetPop();
-  else if(explosiveDamage && randomint(3) == 0)
+  }
+  else if(explosiveDamage && randomint(3) == 0) {
     self helmetPop();
+  }
 
   self clearanim( % root, 0.3);
 
@@ -90,8 +96,9 @@ main() {
     }
   }
 
-  if(explosiveDamage && playExplodeDeathAnim())
+  if(explosiveDamage && playExplodeDeathAnim()) {
     return;
+  }
 
   // different from deathFunction above, doesn't skip explosion deaths, immediate ragdoll, sounds, etc
   if(isDefined(self.specialDeathFunc)) {
@@ -102,13 +109,15 @@ main() {
   }
 
   // TODO: replace these with the above specialDeathFunc
-  if(specialDeath())
+  if(specialDeath()) {
     return;
+  }
 
   deathAnim = getDeathAnim();
 
-  if(getdvarint("scr_paindebug") == 1)
+  if(getdvarint("scr_paindebug") == 1) {
     println("^2Playing pain: ", deathAnim, " ; pose is ", self.a.pose);
+  }
 
     playDeathAnim(deathAnim);
 }
@@ -125,16 +134,18 @@ doImmediateRagdollDeath() {
   }
 
   damageTaken = self.damagetaken;
-  if(damageType == "bullet")
+  if(damageType == "bullet") {
     damageTaken = max(damageTaken, 300);
+  }
 
   directionScale = initialImpulse * damageTaken;
   directionUp = max(0.3, self.damagedir[2]);
   direction = (self.damagedir[0], self.damagedir[1], directionUp);
   direction *= directionScale;
 
-  if(self.forceRagdollImmediate)
+  if(self.forceRagdollImmediate) {
     direction += self.prevAnimDelta * 20 * 10; // 20 frames/sec
+  }
 
   self startragdollfromimpact(self.damagelocation, direction);
 
@@ -144,8 +155,9 @@ doImmediateRagdollDeath() {
 }
 
 playDeathAnim(deathAnim) {
-  if(!animHasNoteTrack(deathAnim, "dropgun") && !animHasNoteTrack(deathAnim, "fire_spray")) // && !animHasNotetrack( deathAnim, "gun keep" )
+  if(!animHasNoteTrack(deathAnim, "dropgun") && !animHasNoteTrack(deathAnim, "fire_spray")) // && !animHasNotetrack( deathAnim, "gun keep" ) {
     self animscripts\shared::DropAllAIWeapons();
+  }
 
   //if( isDefined( self.faceDamageDir ) )
   //	self orientmode( "face angle", self.damageYaw );
@@ -155,8 +167,9 @@ playDeathAnim(deathAnim) {
   if(isDefined(self.skipDeathAnim)) {
     ASSERTEX(self.skipDeathAnim, "self.skipDeathAnim must be either true or undefined.");
 
-    if(!isDefined(self.noragdoll))
+    if(!isDefined(self.noragdoll)) {
       self startRagDoll();
+    }
 
     wait(0.05);
     // failsafe in case ragdoll fails: he'll still be playing a deathanim,
@@ -169,10 +182,12 @@ playDeathAnim(deathAnim) {
   // do we really need this anymore?
 
   if(getdebugdvar("debug_grenadehand") == "on") {
-    if(animhasnotetrack(deathAnim, "bodyfall large"))
+    if(animhasnotetrack(deathAnim, "bodyfall large")) {
       return;
-    if(animhasnotetrack(deathAnim, "bodyfall small"))
+    }
+    if(animhasnotetrack(deathAnim, "bodyfall small")) {
       return;
+    }
 
     println("Death animation ", deathAnim, " does not have a bodyfall notetrack");
     iprintlnbold("Death animation needs fixing (check console and report bug in the animation to Boon)");
@@ -190,18 +205,21 @@ playDeathAnim(deathAnim) {
 
 waitForRagdoll(time) {
   wait(time);
-  if(isDefined(self))
+  if(isDefined(self)) {
     self animscripts\shared::DropAllAIWeapons();
-  if(isDefined(self) && !isDefined(self.noragdoll))
+  }
+  if(isDefined(self) && !isDefined(self.noragdoll)) {
     self startragdoll();
+  }
 }
 
 playDeathFX() {
   self endon("killanimscript");
   //iprintlnbold("bleed'n");
 
-  if(self.stairsState != "none")
+  if(self.stairsState != "none") {
     return;
+  }
 
   wait 2;
 
@@ -209,8 +227,9 @@ playDeathFX() {
 }
 
 play_blood_pool(note, flagName) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   if(isDefined(self.skipBloodPool)) {
     assertex(self.skipBloodPool, "Setting must be either true or undefined");
@@ -227,8 +246,9 @@ play_blood_pool(note, flagName) {
 
   trace = bulletTrace(tagPos + (0, 0, 30), tagPos - (0, 0, 100), false, undefined);
 
-  if(trace["normal"][2] > 0.9)
+  if(trace["normal"][2] > 0.9) {
     playFX(level._effect["deathfx_bloodpool_generic"], tagPos);
+  }
 }
 
 // TODO: replace these with specialDeathFunc
@@ -236,8 +256,9 @@ play_blood_pool(note, flagName) {
 // It returns true if it handles the death for the special animation state, or false if it wants the regular
 // death function to handle it.
 specialDeath() {
-  if(self.a.special == "none")
+  if(self.a.special == "none") {
     return false;
+  }
 
   switch (self.a.special) {
     case "cover_right":
@@ -294,12 +315,15 @@ specialDeath() {
       return true;
 
     case "saw":
-      if(self.a.pose == "stand")
+      if(self.a.pose == "stand") {
         DoDeathFromArray(array( % saw_gunner_death));
-      else if(self.a.pose == "crouch")
+      }
+      else if(self.a.pose == "crouch") {
         DoDeathFromArray(array( % saw_gunner_lowwall_death));
-      else
+      }
+      else {
         DoDeathFromArray(array( % saw_gunner_prone_death));
+      }
       return true;
 
     case "dying_crawl":
@@ -321,8 +345,9 @@ DoDeathFromArray(deathArray) {
 
   playDeathAnim(deathAnim);
   //nate - adding my own special death flag on top of special death.
-  if(isDefined(self.deathanimscript))
+  if(isDefined(self.deathanimscript)) {
     self[[self.deathanimscript]]();
+  }
 }
 
 PlayDeathSound() {
@@ -342,10 +367,12 @@ print3dfortime(place, text, time) {
 }
 
 helmetPop() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if(!isDefined(self.hatModel))
+  }
+  if(!isDefined(self.hatModel)) {
     return;
+  }
   // used to check self removableHat() in cod2... probably not necessary though
 
   partName = GetPartName(self.hatModel, 0);
@@ -360,8 +387,9 @@ helmetPop() {
 
   wait 0.05;
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self detach(hatModel, "");
 }
 
@@ -380,11 +408,13 @@ helmetLaunch(damageDir) {
   wait 60;
 
   while(1) {
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return;
+    }
 
-    if(distanceSquared(self.origin, level.player.origin) > 512 * 512)
+    if(distanceSquared(self.origin, level.player.origin) > 512 * 512) {
       break;
+    }
 
     wait 30;
   }
@@ -393,13 +423,15 @@ helmetLaunch(damageDir) {
 }
 
 removeSelfFrom_SquadLastSeenEnemyPos(org) {
-  for(i = 0; i < anim.squadIndex.size; i++)
+  for(i = 0; i < anim.squadIndex.size; i++) {
     anim.squadIndex[i] clearSightPosNear(org);
+  }
 }
 
 clearSightPosNear(org) {
-  if(!isDefined(self.sightPos))
+  if(!isDefined(self.sightPos)) {
     return;
+  }
 
   if(distance(org, self.sightPos) < 80) {
     self.sightPos = undefined;
@@ -408,11 +440,13 @@ clearSightPosNear(org) {
 }
 
 shouldDoRunningForwardDeath() {
-  if(self.a.movement != "run")
+  if(self.a.movement != "run") {
     return false;
+  }
 
-  if(self getMotionAngle() > 60 || self getMotionAngle() < -60)
+  if(self getMotionAngle() > 60 || self getMotionAngle() < -60) {
     return false;
+  }
 
   /*
   	if( ( self.damageyaw >= 120 ) || ( self.damageyaw <= -120 ) )// Front quadrant
@@ -503,10 +537,12 @@ getDeathAnim() {
   }
 
   if(isDefined(self.a.onback)) {
-    if(self.a.pose == "crouch")
+    if(self.a.pose == "crouch") {
       return getBackDeathAnim();
-    else
+    }
+    else {
       animscripts\shared::stopOnBack();
+    }
   }
 
   if(self.a.pose == "stand") {
@@ -527,8 +563,9 @@ getDeathAnim() {
 getStrongBulletDamageDeathAnim() {
   damageYaw = abs(self.damageYaw);
 
-  if(damageYaw < 45)
+  if(damageYaw < 45) {
     return;
+  }
 
   if(damageYaw > 150) {
     if(damageLocationIsAny("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot")) {
@@ -567,8 +604,9 @@ getRunningForwardDeathAnim() {
 
   deathArray = animscripts\pain::removeBlockedAnims(deathArray);
 
-  if(!deathArray.size)
+  if(!deathArray.size) {
     return getStandDeathAnim();
+  }
 
   return deathArray[randomint(deathArray.size)];
 }
@@ -577,8 +615,9 @@ getRunningForwardDeathAnim() {
 removeUndefined(array) {
   newArray = [];
   for(index = 0; index < array.size; index++) {
-    if(!isDefined(array[index]))
+    if(!isDefined(array[index])) {
       continue;
+    }
 
     newArray[newArray.size] = array[index];
   }
@@ -591,20 +630,24 @@ getStandPistolDeathAnim() {
   if(abs(self.damageYaw) < 50) {
     deathArray[deathArray.size] = % pistol_death_2; // falls forwards
   } else {
-    if(abs(self.damageYaw) < 110)
+    if(abs(self.damageYaw) < 110) {
       deathArray[deathArray.size] = % pistol_death_2; // falls forwards
+    }
 
     if(damageLocationIsAny("torso_lower", "torso_upper", "left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower")) {
       deathArray[deathArray.size] = % pistol_death_3; // hit in groin from front
-      if(!damageLocationIsAny("torso_upper"))
+      if(!damageLocationIsAny("torso_upper")) {
         deathArray[deathArray.size] = % pistol_death_3; // ( twice as likely )
+      }
     }
 
-    if(!damageLocationIsAny("head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun") && randomint(2) == 0)
+    if(!damageLocationIsAny("head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun") && randomint(2) == 0) {
       deathArray[deathArray.size] = % pistol_death_4; // hit at top and falls backwards, but more dragged out
+    }
 
-    if(deathArray.size == 0 || damageLocationIsAny("torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper"))
+    if(deathArray.size == 0 || damageLocationIsAny("torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper")) {
       deathArray[deathArray.size] = % pistol_death_1; // falls backwards
+    }
   }
 
   return deathArray;
@@ -688,15 +731,18 @@ getStandDeathAnim() {
   }
 
   assertex(deathArray.size > 0, deathArray.size);
-  if(deathArray.size == 0)
+  if(deathArray.size == 0) {
     deathArray[deathArray.size] = % exposed_death;
+  }
 
   if(!self.a.disableLongDeath && self.stairsState == "none" && !isDefined(self.a.painOnStairs)) {
     index = randomint(deathArray.size + extendedDeathArray.size);
-    if(index < deathArray.size)
+    if(index < deathArray.size) {
       return deathArray[index];
-    else
+    }
+    else {
       return extendedDeathArray[index - deathArray.size];
+    }
   }
 
   assertex(deathArray.size > 0, deathArray.size);
@@ -709,23 +755,28 @@ getCrouchDeathAnim() {
   if(damageLocationIsAny("head", "neck")) // Front / Left quadrant
     deathArray[deathArray.size] = tryAddDeathAnim( % exposed_crouch_death_fetal);
 
-  if(damageLocationIsAny("torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck"))
+  if(damageLocationIsAny("torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck")) {
     deathArray[deathArray.size] = tryAddDeathAnim( % exposed_crouch_death_flip);
+  }
 
-  if(deathArray.size < 2)
+  if(deathArray.size < 2) {
     deathArray[deathArray.size] = tryAddDeathAnim( % exposed_crouch_death_twist);
-  if(deathArray.size < 2)
+  }
+  if(deathArray.size < 2) {
     deathArray[deathArray.size] = tryAddDeathAnim( % exposed_crouch_death_flip);
+  }
 
   assertex(deathArray.size > 0, deathArray.size);
   return deathArray[randomint(deathArray.size)];
 }
 
 getProneDeathAnim() {
-  if(isDefined(self.a.proneAiming))
+  if(isDefined(self.a.proneAiming)) {
     return % prone_death_quickdeath;
-  else
+  }
+  else {
     return % dying_crawl_death_v1;
+  }
 }
 
 getBackDeathAnim() {
@@ -734,11 +785,13 @@ getBackDeathAnim() {
 }
 
 firingDeathAllowed() {
-  if(!isDefined(self.weapon) || !usingRifleLikeWeapon() || !weaponIsAuto(self.weapon) || self.dieQuietly)
+  if(!isDefined(self.weapon) || !usingRifleLikeWeapon() || !weaponIsAuto(self.weapon) || self.dieQuietly) {
     return false;
+  }
 
-  if(self.a.weaponPos["right"] == "none")
+  if(self.a.weaponPos["right"] == "none") {
     return false;
+  }
 
   return true;
 }
@@ -754,11 +807,13 @@ tryAddFiringDeathAnim(animName) {
 }
 
 playExplodeDeathAnim() {
-  if(isDefined(self.juggernaut))
+  if(isDefined(self.juggernaut)) {
     return false;
+  }
 
-  if(self.damageLocation != "none")
+  if(self.damageLocation != "none") {
     return false;
+  }
 
   deathArray = [];
 
@@ -811,8 +866,9 @@ playExplodeDeathAnim() {
     localDeltaVector = getMoveDelta(deathAnim, 0, 1);
     endPoint = self localToWorldCoords(localDeltaVector);
 
-    if(!self mayMoveToPoint(endPoint, false))
+    if(!self mayMoveToPoint(endPoint, false)) {
       return false;
+    }
   }
 
   // this should really be in the notetracks

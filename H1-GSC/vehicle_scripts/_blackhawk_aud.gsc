@@ -153,8 +153,9 @@ blackhawk_condition_callback_to_hover(var_0, var_1) {
   var_3 = var_0["distance2d"];
   var_4 = soundscripts\_audio_vehicle_manager::dist2yards(var_3);
 
-  if(var_2 < 1.1 && var_4 < 3000)
+  if(var_2 < 1.1 && var_4 < 3000) {
     return 1;
+  }
 
   return 0;
 }
@@ -164,8 +165,9 @@ blackhawk_condition_callback_to_fly(var_0, var_1) {
   var_3 = var_0["distance2d"];
   var_4 = soundscripts\_audio_vehicle_manager::dist2yards(var_3);
 
-  if(var_2 >= 1.1 && var_4 < 3000)
+  if(var_2 >= 1.1 && var_4 < 3000) {
     return 1;
+  }
 
   return 0;
 }
@@ -184,8 +186,9 @@ blackhawk_condition_callback_to_flyby(var_0, var_1) {
   } else {
     var_7 = var_3 - var_1.flyby.prev_dist;
 
-    if(var_7 < 0 && var_5 >= 15.1 && var_4 < 2100 && var_6 >= 1.02)
+    if(var_7 < 0 && var_5 >= 15.1 && var_4 < 2100 && var_6 >= 1.02) {
       var_2 = 1;
+    }
 
     var_1.flyby.prev_dist = var_3;
     var_1.flyby.prev_dx = var_7;
@@ -198,8 +201,9 @@ blackhawk_condition_callback_to_distant(var_0, var_1) {
   var_2 = var_0["distance2d"];
   var_3 = soundscripts\_audio_vehicle_manager::dist2yards(var_2);
 
-  if(var_3 >= 3000)
+  if(var_3 >= 3000) {
     return 1;
+  }
 
   return 0;
 }

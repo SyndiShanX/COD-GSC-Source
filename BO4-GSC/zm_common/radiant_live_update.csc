@@ -37,4 +37,3 @@ render_struct(selected_struct) {
     wait 0.01;
   }
 }
-

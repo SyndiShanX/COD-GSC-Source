@@ -8,8 +8,9 @@
 #using_animtree("vehicles");
 
 main(model, type) {
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = "player_aircraft";
+  }
   build_template("technical", model, type);
   build_localinit(::init_local);
   switch (model) {

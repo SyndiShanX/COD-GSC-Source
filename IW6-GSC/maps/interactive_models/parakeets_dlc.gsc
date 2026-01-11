@@ -54,8 +54,9 @@ main() {
     PreCacheModel(model);
   }
 
-  if(!isDefined(level._interactive))
+  if(!isDefined(level._interactive)) {
     level._interactive = [];
+  }
   level._interactive[info.interactive_type] = info;
   thread maps\interactive_models\_birds_dlc::birds(info);
 }

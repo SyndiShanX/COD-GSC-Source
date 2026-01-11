@@ -91,8 +91,9 @@ evasive_startManeuvers(vehicle, points) {
 
   thread evasive_endManeuvers(vehicle);
 
-  if(getdvar("cobrapilot_debug") == "1")
+  if(getdvar("cobrapilot_debug") == "1") {
     vehicle evasive_drawPoints(points);
+  }
 
   vehicle setNearGoalNotifyDist(1500);
   vehicle Vehicle_SetSpeed(100, 30, 30);
@@ -102,23 +103,28 @@ evasive_startManeuvers(vehicle, points) {
   for(i = 1; i < points.size; i++) {
     //prof_begin( "cobrapilot_ai" );
 
-    if(isDefined(points[i + 1]))
+    if(isDefined(points[i + 1])) {
       evadeDirectionYaw = vectorToAngles(points[i + 1]["pos"] - points[i]["pos"]);
-    else
+    }
+    else {
       evadeDirectionYaw = (0, forwardYaw, 0);
+    }
 
     // determine goal yaw angle
     goalYawAngle = evadeDirectionYaw[1];
-    if(points[i]["goalYawMethod"] == "average")
+    if(points[i]["goalYawMethod"] == "average") {
       goalYawAngle = ((evadeDirectionYaw[1] + forwardYaw) / 2);
-    else if(points[i]["goalYawMethod"] == "forward")
+    }
+    else if(points[i]["goalYawMethod"] == "forward") {
       goalYawAngle = vehicle.angles[1];
+    }
 
     //prof_end( "cobrapilot_ai" );
 
     //draw line to represent target yaw
-    if(getdvar("cobrapilot_debug") == "1")
+    if(getdvar("cobrapilot_debug") == "1") {
       thread draw_line_until_notify(points[i]["pos"], points[i]["pos"] + (vector_multiply(anglesToForward((0, goalYawAngle, 0)), 250)), 1.0, 1.0, 0.2, vehicle, "evasive_action_done");
+    }
 
     vehicle setTargetYaw(goalYawAngle);
 
@@ -150,11 +156,13 @@ evasive_addPoint(forward, side, up, goalYawMethod) {
 
   index = self.evasive_points.size;
 
-  if(!isDefined(goalYawMethod))
+  if(!isDefined(goalYawMethod)) {
     goalYawMethod = "none";
+  }
 
-  if(!isDefined(up))
+  if(!isDefined(up)) {
     up = 0;
+  }
 
   self.evasive_points[index]["forward"] = forward;
   self.evasive_points[index]["side"] = side;
@@ -178,8 +186,9 @@ evasive_getAllPoints(vehicle) {
 }
 
 evasive_drawPoints(points) {
-  for(i = 1; i < points.size; i++)
+  for(i = 1; i < points.size; i++) {
     thread draw_line_until_notify(points[i - 1]["pos"], points[i]["pos"], 1.0, 0.2, 0.2, self, "evasive_action_done");
+  }
 }
 
 wingman_think(vehicle) {
@@ -255,21 +264,25 @@ wingman_think(vehicle) {
       wingmanSpeed *= wingmanSpeedScale;
       accel = wingmanBaseAcceleration;
       decel = wingmanBaseDeceleration;
-      if(accel >= wingmanSpeed / 2)
+      if(accel >= wingmanSpeed / 2) {
         accel = (wingmanSpeed / 2);
-      if(decel >= wingmanSpeed / 2)
+      }
+      if(decel >= wingmanSpeed / 2) {
         decel = (wingmanSpeed / 2);
+      }
 
       vehicle Vehicle_SetSpeed(wingmanSpeed, accel, decel);
 
       vehicle setTargetYaw(level.playervehicle.angles[1]);
 
       bStop = false;
-      if(getPlayerHeliSpeed() <= 30)
+      if(getPlayerHeliSpeed() <= 30) {
         bStop = true;
+      }
 
-      if(getdvar("cobrapilot_debug") == "1")
+      if(getdvar("cobrapilot_debug") == "1") {
         iprintln("wingman speed: " + wingmanSpeed + " : " + bStop);
+      }
 
       vehicle setVehGoalPos(goalPos, bStop);
     }

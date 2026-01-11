@@ -33,8 +33,9 @@ main_af_caves_backhalf_preload() {
   level.gettingflankednaggiven = false;
   trigs = getEntArray("trigger_multiple", "classname");
   foreach(trigger in trigs) {
-    if((isDefined(trigger.script_noteworthy)) && (GetSubStr(trigger.script_noteworthy, 0, 19) == "colornodes_backhalf"))
+    if((isDefined(trigger.script_noteworthy)) && (GetSubStr(trigger.script_noteworthy, 0, 19) == "colornodes_backhalf")) {
       level.aColornodeTriggersBackhalf = array_add(level.aColornodeTriggersBackhalf, trigger);
+    }
   }
 
   setDvarIfUninitialized("caves_fire", "1");
@@ -111,8 +112,9 @@ main_af_caves_backhalf_postload() {
   rock_rubble1 ConnectPaths();
 
   netting_destroyed = getEntArray("netting_destroyed", "targetname");
-  foreach(destroyed_piece in netting_destroyed)
+  foreach(destroyed_piece in netting_destroyed) {
   destroyed_piece Hide();
+  }
 
   //
   generic_damage_triggers = getEntArray("generic_damage", "targetname");
@@ -281,12 +283,15 @@ price_hasnt_killed_a_fool_in_the_last_few_seconds(iSeconds) {
   //only give Price awesome accuracy if it's been at lease XX seconds since his last kill
   currentTime = GetTime();
   timeElapsed = currentTime - level.lasttimePriceKilledEnemy;
-  if(currentTime == level.lasttimePriceKilledEnemy)
+  if(currentTime == level.lasttimePriceKilledEnemy) {
     return false;
-  else if(timeElapsed > (iSeconds * 1000))
+  }
+  else if(timeElapsed > (iSeconds * 1000)) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 AI_ledge_prone_guy_think() {
@@ -347,8 +352,9 @@ AI_ledge_hostiles_think() {
         //Got 'em
         //Got one.
         flag_clear("can_talk");
-        if(level.ledgeKillfirm == 3)
+        if(level.ledgeKillfirm == 3) {
           level.ledgeKillfirm = 0;
+        }
         radio_dialogue("riot_killfirm_0" + level.ledgeKillfirm);
         level.ledgeKillfirm++;
         flag_set("can_talk");
@@ -418,15 +424,17 @@ dialogue_nag_riotshield(sFlagToEndOn1, sFlagToEndOn2) {
   iRiotShieldMoveUpNumber = 0;
   iCatWalkChatterNumber = 0;
   while(true) {
-    if((flag(sFlagToEndOn1)) || (flag(sFlagToEndOn2)))
+    if((flag(sFlagToEndOn1)) || (flag(sFlagToEndOn2))) {
       return;
+    }
 
     //No riot shield, but near a pickup
     if((!player_has_riot_shield()) && (player_is_near_a_riot_shield_pickup())) {
       if(flag("can_talk")) {
         flag_clear("can_talk");
-        if(iRiotShieldPickupHintNumber == 3)
+        if(iRiotShieldPickupHintNumber == 3) {
           iRiotShieldPickupHintNumber = 0;
+        }
         //Captain Price	Soap, grab a riot shield and lead the way. I'll take care of any shooters!
         //Captain Price	11	5	Soap, grab a riot shield. We'll need all the cover we can get.
         //Grab a riot shield. We're completely exposed out here.
@@ -453,8 +461,9 @@ dialogue_nag_riotshield(sFlagToEndOn1, sFlagToEndOn2) {
       else if(!player_is_using_riot_shield()) {
         if(flag("can_talk")) {
           flag_clear("can_talk");
-          if(iRiotShieldSwitchHintNumber == 2)
+          if(iRiotShieldSwitchHintNumber == 2) {
             iRiotShieldSwitchHintNumber = 0;
+          }
           //Switch to the shield, we're exposed out here!
           //Bring up the riot shield, Soap!
           //Give us some cover with that riot shield, Soap!
@@ -467,8 +476,9 @@ dialogue_nag_riotshield(sFlagToEndOn1, sFlagToEndOn2) {
       else if(!player_is_crouched()) {
         if(flag("can_talk")) {
           flag_clear("can_talk");
-          if(iRiotShieldCrouchHintNumber == 2)
+          if(iRiotShieldCrouchHintNumber == 2) {
             iRiotShieldCrouchHintNumber = 0;
+          }
           //Captain Price	11	3	Stay low with that shield so I can get a clean shot
           //Captain Price	11	3	Keep low with that shield.
           //Crouch down with that shield, Soap! I'll take care of the shooters.
@@ -492,8 +502,9 @@ dialogue_nag_riotshield(sFlagToEndOn1, sFlagToEndOn2) {
         } else {
           if(flag("can_talk")) {
             flag_clear("can_talk");
-            if(iRiotShieldMoveUpNumber == 1)
+            if(iRiotShieldMoveUpNumber == 1) {
               iRiotShieldMoveUpNumber = 0;
+            }
             //Captain Price	Move up.
             //Captain Price	Take point with the shield and draw their fire. I'll cover you.
             radio_dialogue("riotsheildmove_0" + iRiotShieldMoveUpNumber);
@@ -509,37 +520,45 @@ dialogue_nag_riotshield(sFlagToEndOn1, sFlagToEndOn2) {
 }
 
 uav_bridge_01_think() {
-  while(isDefined(self))
+  while(isDefined(self)) {
     wait(2);
+  }
   uav_bridge_02 = spawn_vehicle_from_targetname_and_drive("uav_bridge_02");
 }
 
 player_is_crouched() {
-  if(level.player GetStance() == "crouch")
+  if(level.player GetStance() == "crouch") {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 player_is_using_riot_shield() {
-  if(!player_has_riot_shield())
+  if(!player_has_riot_shield()) {
     return false;
+  }
   else {
     currentWeapon = level.player GetCurrentWeapon();
-    if(currentWeapon == "riotshield")
+    if(currentWeapon == "riotshield") {
       return true;
-    else
+    }
+    else {
       return false;
+    }
   }
 }
 
 player_has_riot_shield() {
   weapons = level.player GetWeaponsListAll();
-  if(!isDefined(weapons))
+  if(!isDefined(weapons)) {
     return false;
+  }
   foreach(weapon in weapons) {
-    if(IsSubStr(weapon, "riotshield"))
+    if(IsSubStr(weapon, "riotshield")) {
       return true;
+    }
   }
   return false;
 }
@@ -547,10 +566,12 @@ player_has_riot_shield() {
 player_is_near_a_riot_shield_pickup() {
   playerDistSquared = 1024 * 1024;
   foreach(weapon in level.riotshields) {
-    if(!isDefined(weapon))
+    if(!isDefined(weapon)) {
       continue;
-    if(DistanceSquared(weapon.origin, level.player.origin) < playerDistSquared)
+    }
+    if(DistanceSquared(weapon.origin, level.player.origin) < playerDistSquared) {
       return true;
+    }
   }
 
   return false;
@@ -669,8 +690,9 @@ overlook_to_skylight_autosaves_every_3_dudes() {
 }
 
 vehicle_paths_then_delete(node) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self endon("death");
   self thread vehicle_paths(node);
   self waittill("reached_dynamic_path_end");
@@ -689,49 +711,58 @@ dialogue_overlook_to_breach() {
   flag_wait("player_inside_overlook");
 
   //Strategy nags
-  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
+  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
     return;
+  }
 
   wait(10);
-  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
+  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
     return;
+  }
 
   if(player_has_frags()) {
     //Captain Price	They're using shields! Throw some frags!	
     level.price dialogue_execute("afcaves_pri_sheildsthrowfrags");
 
-    if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
+    if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
       return;
+    }
     wait(10);
   } else if(player_has_flash()) {
     //Captain Price	They're using shields! Use flash grenades!	
     level.price dialogue_execute("afcaves_pri_sheildsuseflash");
 
-    if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
+    if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
       return;
+    }
     wait(10);
   }
 
-  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
+  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
     return;
+  }
 
   //Captain Price	Try to flank them!	
   level.price dialogue_execute("afcaves_pri_trytoflank");
 
-  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
+  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
     return;
+  }
   wait(10);
-  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
+  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
     return;
+  }
 
   //Captain Price	Soap! Hit them from the sides!	
   level.price dialogue_execute("afcaves_pri_hitfromsides");
 
-  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
+  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
     return;
+  }
   wait(10);
-  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated")))
+  if((flag("player_in_skylight_area")) || (flag("overlook_dudes_decimated"))) {
     return;
+  }
 
   //Captain Price	Try to flank and hit them from the sides!	
   level.price dialogue_execute("afcaves_pri_flankandhitsides");
@@ -745,22 +776,27 @@ dialogue_overlook_to_breach() {
 }
 
 player_has_frags() {
-  if(level.player GetWeaponAmmoStock("fraggrenade") > 0)
+  if(level.player GetWeaponAmmoStock("fraggrenade") > 0) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 player_has_flash() {
-  if(level.player GetWeaponAmmoStock("flash_grenade") > 0)
+  if(level.player GetWeaponAmmoStock("flash_grenade") > 0) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 dialougue_nag_smokefight() {
-  while(!flag("player_in_skylight_area"))
+  while(!flag("player_in_skylight_area")) {
     wait(3);
+  }
 
   thread autosave_by_name("skylight");
   //Captain Price	The're using thermal through the smoke!	
@@ -812,14 +848,16 @@ AI_overlook_heli_fastropers_think() {
 }
 
 AI_think(guy) {
-  if(guy.team == "axis")
+  if(guy.team == "axis") {
     guy thread AI_axis_death_think();
+  }
 }
 
 AI_axis_death_think() {
   self waittill("death", attacker);
-  if((isDefined(attacker)) && (isplayer(attacker)))
+  if((isDefined(attacker)) && (isplayer(attacker))) {
     level notify("player_killed_an_enemy");
+  }
 
   if((isDefined(self.script_deathflag)) && (self.script_deathflag == "overlook_dudes_dead")) {
     level.overlookDudesDead++;
@@ -1065,8 +1103,9 @@ breach_enemies_think() {
   }
   while(true) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
-    if((isDefined(attacker)) && (isplayer(attacker)))
+    if((isDefined(attacker)) && (isplayer(attacker))) {
       self kill();
+    }
   }
 
 }
@@ -1177,8 +1216,9 @@ pre_self_destruct_explosions() {
     thread play_sound_in_space("af_caves_selfdestruct", level.player.origin);
     level.player PlayRumbleOnEntity("damage_heavy");
 
-    if(flag("player_touching_cave_exit"))
+    if(flag("player_touching_cave_exit")) {
       break;
+    }
 
     timesLooped++;
     if(timesLooped > 6) {
@@ -1217,8 +1257,9 @@ keyboard_think() {
   self MakeUnusable();
   self stopGlow();
 
-  if(!flag("keyboard_activated"))
+  if(!flag("keyboard_activated")) {
     flag_set("keyboard_activated");
+  }
 }
 
 dialogue_breach_to_airstrip() {
@@ -1291,8 +1332,9 @@ breach_nags() {
   while(true) {
     level.price dialogue_execute("breach_nag_0" + iNagNumber);
     iNagNumber++;
-    if(iNagNumber > 3)
+    if(iNagNumber > 3) {
       iNagNumber = 0;
+    }
     wait(randomfloatrange(10, 15));
   }
 }
@@ -1303,8 +1345,9 @@ control_door_open(side, sFlagToSet) {
   self RotateTo(self.angles + (0, angles, 0), 4, 1.5, 1.5);
   self thread play_sound_on_entity("af_caves_escape_door_open");
   wait(time);
-  if(isDefined(sFlagToSet))
+  if(isDefined(sFlagToSet)) {
     flag_set(sFlagToSet);
+  }
 }
 
 control_door_close(side, sFlagToSet) {
@@ -1312,10 +1355,12 @@ control_door_close(side, sFlagToSet) {
   time = 7;
   self RotateTo(self.angles + (0, angles, 0), time, .5, .5);
   wait(time - 1);
-  if(side == "left")
+  if(side == "left") {
     self thread play_sound_on_entity("af_caves_escape_door_close");
-  if(isDefined(sFlagToSet))
+  }
+  if(isDefined(sFlagToSet)) {
     flag_set(sFlagToSet);
+  }
 }
 
 dialogue_nag_control_room_door() {
@@ -1323,32 +1368,36 @@ dialogue_nag_control_room_door() {
   level.player endon("death");
   while(true) {
     wait(6);
-    if(flag("control_room_door_opened"))
+    if(flag("control_room_door_opened")) {
       break;
+    }
 
     //Captain Price Override the door controls! Use the keyboard!	
     level.price dialogue_execute("afcaves_pri_usekeyboard");
     level.price notify("nag_anim");
 
     wait(6);
-    if(flag("control_room_door_opened"))
+    if(flag("control_room_door_opened")) {
       break;
+    }
 
     level.price notify("nag_anim");
     //Price Open the door! We're running out of time!
     level.price dialogue_execute("afcaves_pri_openthedoor");
 
     wait(6);
-    if(flag("control_room_door_opened"))
+    if(flag("control_room_door_opened")) {
       break;
+    }
 
     level.price notify("nag_anim");
     //Price Come onnn...come onnn...
     level.price dialogue_execute("afcaves_pri_comeoncomeon");
 
     wait(6);
-    if(flag("control_room_door_opened"))
+    if(flag("control_room_door_opened")) {
       break;
+    }
 
     level.price notify("nag_anim");
     //Captain Price	Soap! Get that door open!
@@ -1858,8 +1907,9 @@ danger_close_firestorm() {
     targetOrg = GetEnt(missileOrg.target, "targetname");
     missile = MagicBullet("hellfire_missile_af_caves_end", missileOrg.origin, targetOrg.origin);
     missile thread play_sound_on_entity("scn_afcaves_incoming");
-    if(i == missileOrgs.size)
+    if(i == missileOrgs.size) {
       lastMissile = true;
+    }
     missile thread missile_impact_think(lastMissile);
     wait(.2);
   }
@@ -2005,8 +2055,9 @@ airstrip_tower_destruction() {
 
   mg = GetEnt("tower_mg", "script_noteworthy");
   owner = mg GetTurretOwner();
-  if(IsAlive(owner))
+  if(IsAlive(owner)) {
     owner notify("stop_using_built_in_burst_fire");
+  }
 
   mg Hide();
 
@@ -2113,8 +2164,9 @@ obj_overlook_to_skylight() {
 
   Objective_State(objective_number, "done");
 
-  if(!flag("obj_overlook_to_skylight_complete"))
+  if(!flag("obj_overlook_to_skylight_complete")) {
     flag_set("obj_overlook_to_skylight_complete");
+  }
 }
 
 obj_breach() {
@@ -2590,10 +2642,12 @@ triggersEnable(triggerName, noteworthyOrTargetname, bool) {
   AssertEx(isDefined(bool), "Must specify true/false parameter for triggersEnable() function");
   aTriggers = getEntArray(triggername, noteworthyOrTargetname);
   AssertEx(isDefined(aTriggers), triggerName + " does not exist");
-  if(bool == true)
+  if(bool == true) {
     array_thread(aTriggers, ::trigger_on);
-  else
+  }
+  else {
     array_thread(aTriggers, ::trigger_off);
+  }
 }
 
 dialogue_execute(sLineToExecute) {
@@ -2614,8 +2668,9 @@ hint_temp(string, timeOut) {
 
   level endon("clearing_hints");
 
-  if(isDefined(level.tempHint))
+  if(isDefined(level.tempHint)) {
     level.tempHint destroyElem();
+  }
 
   level.tempHint = createFontString("default", 1.5);
   level.tempHint setPoint("BOTTOM", undefined, 0, -60);
@@ -2628,10 +2683,12 @@ hint_temp(string, timeOut) {
   wait(0.5);
   level.tempHint endon("death");
 
-  if(isDefined(timeOut))
+  if(isDefined(timeOut)) {
     wait(timeOut);
-  else
+  }
+  else {
     return;
+  }
 
   level.tempHint FadeOverTime(hintfade);
   level.tempHint.alpha = 0;
@@ -2641,13 +2698,15 @@ hint_temp(string, timeOut) {
 }
 
 AI_player_seek() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self endon("death");
   self ClearGoalVolume();
   self endon("stop_seeking");
-  if(self.code_classname == "actor_enemy_riotshield")
+  if(self.code_classname == "actor_enemy_riotshield") {
     self thread riot_shield_quick_sprint();
+  }
   //self enable_danger_react( 3 );
   //self.fixednode = false;
   //self.ignoreSuppression = true;
@@ -2685,8 +2744,9 @@ smoke_throw(aSmokeOrgs, sFlagToStop) {
       wait(RandomFloatRange(.1, .3));
     }
     wait(28);
-    if(flag(sFlagToStop))
+    if(flag(sFlagToStop)) {
       break;
+    }
   }
 
 }
@@ -2699,8 +2759,9 @@ make_door_from_prefab(sTargetname) {
   foreach(ent in ents) {
     if(ent.code_classname == "script_brushmodel") {
       door_brushes[door_brushes.size] = ent;
-      if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "blocker"))
+      if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "blocker")) {
         door_blocker = ent;
+      }
       continue;
     }
     if(ent.code_classname == "script_model") {
@@ -2713,10 +2774,12 @@ make_door_from_prefab(sTargetname) {
   door_org.origin = door_brushes[0].origin;
   door_org.angles = door_brushes[0].angles;
 
-  foreach(model in door_models)
+  foreach(model in door_models) {
   model LinkTo(door_org);
-  foreach(brush in door_brushes)
+  }
+  foreach(brush in door_brushes) {
   brush LinkTo(door_org);
+  }
 
   door = door_org;
 
@@ -2850,22 +2913,26 @@ AI_ambient_airstrip_think() {
       break;
   }
 
-  if(self.fxSmokeTag.size)
+  if(self.fxSmokeTag.size) {
     self thread play_looping_fx_on_tags(self.fxSmokeTag, "smoke");
-  if(self.fxFireTag.size)
+  }
+  if(self.fxFireTag.size) {
     self thread play_looping_fx_on_tags(self.fxFireTag, "fire");
+  }
   if(isDefined(slowDownRate)) {
     reference thread anim_generic_custom_animmode(self, "gravity", animation);
     wait(.1);
     self SetAnim(level.scr_anim["generic"][animation], 1, 0.2, slowDownRate);
     time = GetAnimLength(level.scr_anim["generic"][animation]);
-    if(!isDefined(timesLooped))
+    if(!isDefined(timesLooped)) {
       timesLooped = 3;
+    }
     wait(time * timesLooped);
   } else {
     reference anim_generic_custom_animmode(self, "gravity", animation);
-    if(isDefined(timesLooped))
+    if(isDefined(timesLooped)) {
       anim_generic_custom_animmode(self, "gravity", animation);
+    }
   }
 
   /*-----------------------
@@ -2884,8 +2951,9 @@ AI_ambient_airstrip_think() {
 }
 
 play_looping_fx_on_tags(aTags, sType) {
-  if(getdvar("caves_fire") == "0")
+  if(getdvar("caves_fire") == "0") {
     return;
+  }
 
   self endon("death");
   fx = undefined;
@@ -2901,8 +2969,9 @@ play_looping_fx_on_tags(aTags, sType) {
 
 play_fx_on_tag_till_dead(fx, tag, sType) {
   additionalDelay = 0;
-  if(sType == "smoke")
+  if(sType == "smoke") {
     additionalDelay = 3; // if somoke, wait an additional X time before playing fx again
+  }
 
   self endon("death");
   while(true) {
@@ -2985,17 +3054,21 @@ c4_barrels_think() {
       if(idFlags & 8) // bullet penetration occurred
         continue;
       //dont explode if you shot through an enemy...unless on veteran
-      if((isDefined(level.last_player_damage)) && (level.last_player_damage == GetTime()) && (level.gameskill != 3))
+      if((isDefined(level.last_player_damage)) && (level.last_player_damage == GetTime()) && (level.gameskill != 3)) {
         continue;
+      }
       //knock hitpoints down one
-      if(eDamageTrigger.hitpoints > 0)
+      if(eDamageTrigger.hitpoints > 0) {
         eDamageTrigger.hitpoints -= 1;
+      }
       //remove all hitpoints if it was a grenade, etc
-      if(isDefined(type) && (IsSubStr(type, "MOD_GRENADE") || IsSubStr(type, "MOD_EXPLOSIVE") || IsSubStr(type, "MOD_PROJECTILE")))
+      if(isDefined(type) && (IsSubStr(type, "MOD_GRENADE") || IsSubStr(type, "MOD_EXPLOSIVE") || IsSubStr(type, "MOD_PROJECTILE"))) {
         break;
+      }
       //blow up the barrel if hitpoints is zero
-      if(eDamageTrigger.hitpoints == 0)
+      if(eDamageTrigger.hitpoints == 0) {
         break;
+      }
     }
   }
 

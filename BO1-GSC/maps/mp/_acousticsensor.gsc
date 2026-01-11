@@ -42,8 +42,9 @@ destroyEnt() {
 }
 watchShutdown(player, origin) {
   self waittill_any("death", "hacked");
-  if(isDefined(player))
+  if(isDefined(player)) {
     player.acousticSensor = undefined;
+  }
 }
 watchAcousticSensorDamage(watcher) {
   self endon("death");
@@ -57,10 +58,12 @@ watchAcousticSensorDamage(watcher) {
     self.maxhealth = 100000;
     self.health = self.maxhealth;
     self waittill("damage", damage, attacker, direction, point, type, tagName, modelName, partname, weaponName, iDFlags);
-    if(!isDefined(attacker) || !isplayer(attacker))
+    if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
-    if(level.teamBased && attacker.team == self.owner.team && attacker != self.owner)
+    }
+    if(level.teamBased && attacker.team == self.owner.team && attacker != self.owner) {
       continue;
+    }
     if(isDefined(weaponName)) {
       switch (weaponName) {
         case "concussion_grenade_mp":
@@ -69,21 +72,25 @@ watchAcousticSensorDamage(watcher) {
             self thread maps\mp\gametypes\_weaponobjects::stunStart(watcher, watcher.stunTime);
           }
           if(level.teambased && self.owner.team != attacker.team) {
-            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
+            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
               attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
+            }
           } else if(!level.teambased && self.owner != attacker) {
-            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
+            if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
               attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
+            }
           }
           continue;
         default:
-          if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker))
+          if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(weaponName, attacker)) {
             attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback(false);
+          }
           break;
       }
     }
-    if(isPlayer(attacker) && level.teambased && isDefined(attacker.team) && self.owner.team == attacker.team && attacker != self.owner)
+    if(isPlayer(attacker) && level.teambased && isDefined(attacker.team) && self.owner.team == attacker.team && attacker != self.owner) {
       continue;
+    }
     if((type == "MOD_MELEE")) {
       self.damageTaken = damageMax;
     } else {

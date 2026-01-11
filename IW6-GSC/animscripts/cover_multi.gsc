@@ -4,8 +4,9 @@
 ***************************************/
 
 main() {
-  if(!isDefined(self.cover))
+  if(!isDefined(self.cover)) {
     self.cover = spawnStruct();
+  }
 
   self.cover.state = "none";
   self.cover.laststatechangetime = 0;
@@ -51,10 +52,12 @@ covermulti_think() {
   var_6 = angleclamp180(var_5[1] - self.covernode.angles[1]);
   var_7 = undefined;
 
-  if(var_6 > 12)
+  if(var_6 > 12) {
     var_8 = ["left", "over", "right"];
-  else if(var_6 < -12)
+  }
+  else if(var_6 < -12) {
     var_8 = ["right", "over", "left"];
+  }
   else if(var_6 > 5) {
     var_8 = [["left", "over"], "right"
     ];
@@ -73,20 +76,23 @@ covermulti_think() {
 }
 
 covermulti_isvaliddir(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.node getvalidcoverpeekouts();
+  }
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2] == var_0)
+    if(var_1[var_2] == var_0) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 covermulti_getbestvaliddir(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.node getvalidcoverpeekouts();
+  }
 
   var_2 = [];
 
@@ -100,33 +106,39 @@ covermulti_getbestvaliddir(var_0, var_1) {
 
     var_4 = common_scripts\utility::array_randomize(var_4);
 
-    for(var_5 = 0; var_5 < var_4.size; var_5++)
+    for(var_5 = 0; var_5 < var_4.size; var_5++) {
       var_2[var_2.size] = var_4[var_5];
+    }
   }
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(covermulti_isvaliddir(var_2[var_3], var_1))
+    if(covermulti_isvaliddir(var_2[var_3], var_1)) {
       return var_2[var_3];
+    }
   }
 }
 
 covermulti_getrandomvaliddir(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self.node getvalidcoverpeekouts();
+  }
 
   var_1 = randomint(var_0.size);
   return var_0[var_1];
 }
 
 covermulti_getnonrandomvaliddir(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self getvalidcoverpeekouts();
+  }
 
   if(var_0[0] == "over") {
-    if(self doesnodeallowstance("stand"))
+    if(self doesnodeallowstance("stand")) {
       return "stand";
-    else
+    }
+    else {
       return "crouch";
+    }
   }
 
   return var_0[0];
@@ -138,13 +150,15 @@ covermulti_setdir(var_0, var_1) {
     var_3 = self.node doesnodeallowstance("crouch");
 
     if(var_2) {
-      if(self.cover.state != "crouch" || !var_3)
+      if(self.cover.state != "crouch" || !var_3) {
         covermulti_setstate("stand", var_1);
+      }
 
       return 1;
     } else if(var_3) {
-      if(self.cover.state != "stand" || !var_2)
+      if(self.cover.state != "stand" || !var_2) {
         covermulti_setstate("crouch", var_1);
+      }
 
       return 1;
     } else {}
@@ -157,16 +171,19 @@ covermulti_setdir(var_0, var_1) {
 }
 
 covermulti_setstate(var_0, var_1) {
-  if(self.cover.state == var_0)
+  if(self.cover.state == var_0) {
     return 0;
+  }
 
-  if(!isDefined(var_1) || var_1 < 0)
+  if(!isDefined(var_1) || var_1 < 0) {
     var_1 = 5000;
+  }
 
   var_2 = gettime();
 
-  if(self.cover.laststatechangetime > 0 && var_2 - self.cover.laststatechangetime < var_1)
+  if(self.cover.laststatechangetime > 0 && var_2 - self.cover.laststatechangetime < var_1) {
     return 0;
+  }
 
   self.cover.laststatechangetime = var_2;
   thread covermulti_setstateinternal(var_0);
@@ -184,14 +201,18 @@ covermulti_setstateinternal(var_0) {
 }
 
 covermulti_enterstate(var_0) {
-  if(var_0 == "left")
+  if(var_0 == "left") {
     animscripts\cover_left::main();
-  else if(var_0 == "right")
+  }
+  else if(var_0 == "right") {
     animscripts\cover_right::main();
-  else if(var_0 == "stand")
+  }
+  else if(var_0 == "stand") {
     animscripts\cover_stand::main();
-  else if(var_0 == "crouch")
+  }
+  else if(var_0 == "crouch") {
     animscripts\cover_crouch::main();
+  }
   else {}
 }
 
@@ -230,46 +251,58 @@ covermulti_dotransition(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 covermulti_choosehidestate() {
-  if(!isDefined(self.a.array) || !isDefined(self.a.array["alert_idle_back"]))
+  if(!isDefined(self.a.array) || !isDefined(self.a.array["alert_idle_back"])) {
     return "forward";
+  }
 
-  if(common_scripts\utility::cointoss())
+  if(common_scripts\utility::cointoss()) {
     return "forward";
-  else
+  }
+  else {
     return "back";
+  }
 }
 
 covermulti_getstatefromdir(var_0, var_1) {
-  if(var_1 == "left" || var_1 == "right")
+  if(var_1 == "left" || var_1 == "right") {
     return var_1;
+  }
 
-  if(var_0 doesnodeallowstance("stand"))
+  if(var_0 doesnodeallowstance("stand")) {
     return "stand";
+  }
 
   return "crouch";
 }
 
 covermulti_getanimtransition(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(var_2 == "back")
+  if(var_2 == "back") {
     var_6 = var_1 + "_back";
-  else if(var_0 == "stand" || var_0 == "crouch")
+  }
+  else if(var_0 == "stand" || var_0 == "crouch") {
     var_6 = var_0 + "_forward";
-  else
+  }
+  else {
     var_6 = var_0 + "_" + var_1;
+  }
 
   var_6 = var_6 + "_to_";
 
-  if(var_5 == "back")
+  if(var_5 == "back") {
     var_6 = var_6 + (var_4 + "_back");
-  else if(var_3 == "stand" || var_3 == "crouch")
+  }
+  else if(var_3 == "stand" || var_3 == "crouch") {
     var_6 = var_6 + (var_3 + "_forward");
-  else
+  }
+  else {
     var_6 = var_6 + (var_3 + "_" + var_4);
+  }
 
   var_7 = self.animarchetype;
 
-  if(!isDefined(var_7) || !isDefined(anim.archetypes[var_7]["cover_multi"]))
+  if(!isDefined(var_7) || !isDefined(anim.archetypes[var_7]["cover_multi"])) {
     var_7 = "soldier";
+  }
 
   return anim.archetypes[var_7]["cover_multi"][var_6];
 }

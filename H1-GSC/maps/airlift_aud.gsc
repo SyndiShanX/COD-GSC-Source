@@ -219,8 +219,9 @@ aud_convoy_passby_manager(var_0, var_1, var_2, var_3) {
   wait(var_3);
   var_4 = getEntArray(var_0, var_1);
 
-  foreach(var_6 in var_4)
+  foreach(var_6 in var_4) {
   var_6 playSound(var_2);
+  }
 }
 
 aud_cobra_passby_manager(var_0, var_1, var_2) {

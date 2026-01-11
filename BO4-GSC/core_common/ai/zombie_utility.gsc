@@ -2578,4 +2578,3 @@ updateanimationrate() {
     var_fd8e23d9 = animation_rate;
   }
 }
-

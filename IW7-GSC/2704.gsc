@@ -78,14 +78,17 @@ func_498C(var_00) {
   var_02 hide();
   var_2.attachmentrollcount = [];
 
-  if(isDefined(self.func_3255))
+  if(isDefined(self.func_3255)) {
     var_2.func_AC75 = self.func_3255;
+  }
 
-  if(isDefined(self.func_3254))
+  if(isDefined(self.func_3254)) {
     var_2.health = self.func_3254;
+  }
 
-  if(isDefined(self.func_3256))
+  if(isDefined(self.func_3256)) {
     var_2.func_E749 = self.func_3256;
+  }
 
   var_03 = spawn("script_model", var_2.origin + (0, 0, 10));
   var_03 setModel("tag_origin");
@@ -133,8 +136,9 @@ func_BD2E(var_00) {
   for(;;) {
     scripts\engine\utility::waitframe();
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self.origin = var_0.origin;
+    }
   }
 }
 
@@ -162,18 +166,21 @@ func_10112(var_00, var_01, var_02) {
     if(!isDefined(var_04)) {
       continue;
     }
-    if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(var_04))
+    if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(var_04)) {
       var_04 func_12E6B(var_0.team, var_01, var_02);
+    }
   }
 }
 
 func_12E6B(var_00, var_01, var_02) {
   var_03 = undefined;
 
-  if(self.team == var_00)
+  if(self.team == var_00) {
     var_03 = var_01;
-  else
+  }
+  else {
     var_03 = var_02;
+  }
 
   if(isDefined(var_03)) {
     var_03 giveperkequipment(self);
@@ -214,8 +221,9 @@ func_13B61(var_00) {
     var_0.powers["power_bulletstorm"].active = 0;
     var_03 = -1;
 
-    if(var_01)
+    if(var_01) {
       var_03 = 0;
+    }
 
     var_00 notify("powers_bulletstorm_update", var_03);
     var_00 scripts\engine\utility::allow_weapon_switch(1);
@@ -241,8 +249,9 @@ func_139BE(var_00) {
   for(;;) {
     var_00 waittill("multi_use_activated", var_01);
 
-    if(var_01 == "power_bulletstorm")
+    if(var_01 == "power_bulletstorm") {
       self notify("stop_bulletstorm", 1);
+    }
   }
 }
 
@@ -251,10 +260,12 @@ func_139BA(var_00) {
   var_01 = 0.25;
 
   for(;;) {
-    if(self.func_AC75 >= 1)
+    if(self.func_AC75 >= 1) {
       var_00 setclientomnvar("ui_bulletstorm_update", int(self.func_AC75));
-    else
+    }
+    else {
       break;
+    }
 
     wait 0.05;
 
@@ -297,8 +308,9 @@ func_10D75(var_00, var_01, var_02, var_03) {
 
       if(var_7.func_38BF) {
         if(var_04 == 1) {
-          if(var_7.func_4D70 >= var_6.health)
+          if(var_7.func_4D70 >= var_6.health) {
             var_6.customdeath = 1;
+          }
 
           var_06 getrandomarmkillstreak(var_7.func_4D70, var_02, var_00, self, "MOD_EXPLOSIVE");
           var_06 thread func_139B9(var_02, var_03, 1.0);
@@ -319,15 +331,17 @@ func_13B3A(var_00) {
   level endon("game_ended");
   var_00 waittill("stop_bulletstorm");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 func_10A10(var_00, var_01, var_02, var_03, var_04) {
   self endon("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self rotateyaw(var_00, var_01, var_02, var_03);
+  }
 
   wait(var_01);
   thread func_10A10(var_00, var_01, var_02, var_03, var_04);
@@ -350,8 +364,9 @@ func_5105(var_00, var_01) {
   level endon("game_ended");
   wait(var_00);
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_01 delete();
+  }
 }
 
 getcustomizationhead(var_00, var_01, var_02, var_03, var_04, var_05) {
@@ -362,8 +377,9 @@ getcustomizationhead(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_07 = distance(var_01, var_4.origin);
 
   if(var_07 <= var_02) {
-    if(var_07 <= 50)
+    if(var_07 <= 50) {
       var_6.func_38BF = 1;
+    }
     else {
       var_08 = [];
       var_8[var_8.size] = "physicscontents_solid";
@@ -373,18 +389,21 @@ getcustomizationhead(var_00, var_01, var_02, var_03, var_04, var_05) {
       var_10 = [];
       var_11 = physics_raycast(var_01, var_4.origin, var_09, var_10, 0, "physicsquery_any");
 
-      if(!var_11)
+      if(!var_11) {
         var_6.func_38BF = 1;
+      }
     }
 
     if(var_6.func_38BF) {
-      if(var_00 == 1)
+      if(var_00 == 1) {
         var_6.func_4D70 = var_05 - var_05 / (var_02 / var_07);
+      }
       else {
         var_12 = 1 - var_07 / var_02;
 
-        if(var_12 < 0)
+        if(var_12 < 0) {
           var_12 = 0;
+        }
 
         var_13 = 2 + 4 * var_12;
         var_6.func_5FE9 = scripts\mp\perks\perkfunctions::applystunresistence(var_03, var_04, var_13);

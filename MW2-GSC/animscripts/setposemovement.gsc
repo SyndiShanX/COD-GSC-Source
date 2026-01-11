@@ -17,10 +17,12 @@
 SetPoseMovement(desiredPose, desiredMovement) {
   // Scripts can pass empty strings, meaning they don't want to change that aspect of the state.
   if(desiredPose == "") {
-    if((self.a.pose == "prone") && ((desiredMovement == "walk") || (desiredMovement == "run")))
+    if((self.a.pose == "prone") && ((desiredMovement == "walk") || (desiredMovement == "run"))) {
       desiredPose = "crouch";
-    else
+    }
+    else {
       desiredPose = self.a.pose;
+    }
   }
   if(!isDefined(desiredMovement) || desiredMovement == "") {
     desiredMovement = self.a.movement;
@@ -468,8 +470,9 @@ BeginProneRun() {
 PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement) {
   endTime = gettime() + crossblendTime * 1000;
 
-  if(isarray(transAnim))
+  if(isarray(transAnim)) {
     transAnim = transAnim[randomint(transAnim.size)];
+  }
 
   self setflaggedanimknoball("blendTransition", transAnim, % body, 1, crossblendTime, 1);
 
@@ -479,8 +482,9 @@ PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement) {
   self.a.movement = endMovement;
 
   waittime = (endTime - gettime()) / 1000;
-  if(waittime < 0.05)
+  if(waittime < 0.05) {
     waittime = 0.05;
+  }
 
   self animscripts\shared::DoNoteTracksForTime(waittime, "blendTransition");
 }
@@ -545,13 +549,16 @@ BlendIntoStandRun() {
   // Set the specific forward animation we are using to weight 1 immediately
   // we will make sure it is blended smoothly by blending in its parent, combatrun_forward
   runAnimTransTime = 0.1;
-  if(self.a.movement != "stop" && self.stairsState == "none")
+  if(self.a.movement != "stop" && self.stairsState == "none") {
     runAnimTransTime = 0.5;
+  }
 
-  if(isDefined(self.sprint))
+  if(isDefined(self.sprint)) {
     self setAnimKnobLimited(moveAnim("sprint"), 1, runAnimTransTime, 1);
-  else
+  }
+  else {
     self setAnimKnobLimited(animscripts\run::GetRunAnim(), 1, runAnimTransTime, 1);
+  }
 
   self animscripts\run::SetMoveNonForwardAnims(moveAnim("move_b"), moveAnim("move_l"), moveAnim("move_r"), self.sideStepRate);
   self thread animscripts\run::SetCombatStandMoveAnimWeights("run");
@@ -562,11 +569,13 @@ BlendIntoStandRun() {
 }
 
 BlendIntoStandWalk() {
-  if(self.a.movement != "stop")
+  if(self.a.movement != "stop") {
     self endon("movemode");
+  }
 
-  if(!isDefined(self.alwaysRunForward) && self.a.pose != "prone")
+  if(!isDefined(self.alwaysRunForward) && self.a.pose != "prone") {
     self animscripts\run::SetMoveNonForwardAnims(moveAnim("move_b"), moveAnim("move_l"), moveAnim("move_r"));
+  }
 
   self.a.pose = "stand";
   self.a.movement = "walk";
@@ -911,8 +920,9 @@ PlayTransitionAnimation(transAnim, endPose, endMovement, finalAnim, rate) {
 }
 
 PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, waitSetStatesEnabled) {
-  if(!isDefined(rate))
+  if(!isDefined(rate)) {
     rate = 1;
+  }
 
   if(getdebugdvar("debug_grenadehand") == "on") {
     if(endPose != self.a.pose) {
@@ -930,16 +940,19 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, wa
   }
 
     // Use a second thread to set the anim state halfway through the animation
-    if(waitSetStatesEnabled)
+    if(waitSetStatesEnabled) {
       self thread waitSetStates(getanimlength(transAnim) / 2.0, "killtimerscript", endPose);
+    }
 
   // Play the anim
   // setflaggedanimknoball(notifyName, anim, rootAnim, goalWeight, goalTime, rate)
   self setflaggedanimknoballrestart("transAnimDone2", transAnim, % body, 1, .2, rate);
-  if(!isDefined(self.a.pose))
+  if(!isDefined(self.a.pose)) {
     self.pose = "undefined";
-  if(!isDefined(self.a.movement))
+  }
+  if(!isDefined(self.a.movement)) {
     self.movement = "undefined";
+  }
   debugIdentifier = "";
   /#debugIdentifier = self.script + ", " + self.a.pose + " to " + endPose + ", " + self.a.movement + " to " + endMovement;
   self animscripts\shared::DoNoteTracks("transAnimDone2", undefined, debugIdentifier);

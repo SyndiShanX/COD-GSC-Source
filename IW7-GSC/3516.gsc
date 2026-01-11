@@ -128,19 +128,23 @@ restoreweapons() {
 
     scripts\mp\utility\game::_giveweapon(var_02);
 
-    if(isDefined(self.restoreweaponclipammo[var_02]))
+    if(isDefined(self.restoreweaponclipammo[var_02])) {
       self setweaponammoclip(var_02, self.restoreweaponclipammo[var_02]);
+    }
 
-    if(isDefined(self.func_E2E9[var_02]))
+    if(isDefined(self.func_E2E9[var_02])) {
       self setweaponammostock(var_02, self.func_E2E9[var_02]);
+    }
   }
 
   foreach(var_06 in var_00) {
-    if(isDefined(self.restoreweaponclipammo[var_06]))
+    if(isDefined(self.restoreweaponclipammo[var_06])) {
       self setweaponammoclip(var_06, self.restoreweaponclipammo[var_06]);
+    }
 
-    if(isDefined(self.func_E2E9[var_06]))
+    if(isDefined(self.func_E2E9[var_06])) {
       self setweaponammostock(var_06, self.func_E2E9[var_06]);
+    }
   }
 
   self.restoreweaponclipammo = undefined;
@@ -164,8 +168,9 @@ _meth_83AC(var_00, var_01) {
   thread restoreperks();
   thread restoreweapons();
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0;
+  }
 
   return var_03;
 }
@@ -262,13 +267,15 @@ func_12F34(var_00) {
       if(var_0.canbeplaced) {
         var_00 setModel(level.tanksettings[var_0.tanktype].modelplacement);
 
-        if(self.team != "spectator")
+        if(self.team != "spectator") {
           self forceusehinton(level.tanksettings[var_0.tanktype].func_1114D);
+        }
       } else {
         var_00 setModel(level.tanksettings[var_0.tanktype].modelplacementfailed);
 
-        if(self.team != "spectator")
+        if(self.team != "spectator") {
           self forceusehinton(level.tanksettings[var_0.tanktype].func_1114C);
+        }
       }
     }
 
@@ -299,14 +306,17 @@ func_114C8(var_00) {
 }
 
 func_114CD() {
-  if(isDefined(self.carriedby))
+  if(isDefined(self.carriedby)) {
     self.carriedby getrigindexfromarchetyperef();
+  }
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 func_114D0() {
@@ -316,15 +326,17 @@ func_114D0() {
   self.carriedby getrigindexfromarchetyperef();
   self.carriedby = undefined;
 
-  if(!isDefined(self.owner))
+  if(!isDefined(self.owner)) {
     return 0;
+  }
 
   var_00 = self.owner;
   var_0.iscarrying = 0;
   var_01 = func_4A1F(self);
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return 0;
+  }
 
   var_01 playSound("sentry_gun_plant");
   var_01 notify("placed");
@@ -353,8 +365,9 @@ func_4A1F(var_00) {
   var_03 = var_0.lifeid;
   var_04 = spawnvehicle(level.tanksettings[var_02].modelbase, var_02, level.tanksettings[var_02].vehicleinfo, var_0.origin, var_0.angles, var_01);
 
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     return undefined;
+  }
 
   var_05 = var_04 gettagorigin("tag_turret_attach");
   var_06 = spawnturret("misc_turret", var_05, level.tanksettings[var_02].mgturretinfo, 0);
@@ -416,8 +429,9 @@ func_114CC() {
       if(var_03 != var_00 && var_3.team == var_0.team) {
         var_04 = self.mgturret scripts\mp\entityheadicons::setheadicon(var_03, scripts\mp\teams::_meth_81B0(self.team), var_01, 10, 10, 0, 0.05, 0, 1, 0, 1);
 
-        if(isDefined(var_04))
+        if(isDefined(var_04)) {
           var_04 settargetent(self);
+        }
       }
     }
   }
@@ -436,19 +450,22 @@ func_10E09() {
   var_00 = self.owner;
   var_00 scripts\mp\utility\game::setusingremote(self.tanktype);
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     var_00 scripts\mp\utility\game::setthirdpersondof(0);
+  }
 
   var_0.restoreangles = var_0.angles;
   var_00 scripts\mp\utility\game::freezecontrolswrapper(1);
   var_01 = var_00 scripts\mp\killstreaks\killstreaks::initridekillstreak("remote_tank");
 
   if(var_01 != "success") {
-    if(var_01 != "disconnect")
+    if(var_01 != "disconnect") {
       var_00 scripts\mp\utility\game::clearusingremote();
+    }
 
-    if(isDefined(var_0.disabledweapon) && var_0.disabledweapon)
+    if(isDefined(var_0.disabledweapon) && var_0.disabledweapon) {
       var_00 scripts\engine\utility::allow_weapon(1);
+    }
 
     self notify("death");
     return 0;
@@ -497,10 +514,12 @@ func_114B3() {
 func_114CF() {
   self.mgturret give_player_session_tokens(level.tanksettings[self.tanktype].sentrymodeoff);
 
-  if(level.teambased)
+  if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
-  else if(isDefined(self.owner))
+  }
+  else if(isDefined(self.owner)) {
     scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
+  }
 
   if(!isDefined(self.owner)) {
     return;
@@ -515,11 +534,13 @@ func_114CF() {
     var_00 scripts\mp\utility\game::clearusingremote();
     var_00 setplayerangles(var_0.restoreangles);
 
-    if(getdvarint("camera_thirdPerson"))
+    if(getdvarint("camera_thirdPerson")) {
       var_00 scripts\mp\utility\game::setthirdpersondof(1);
+    }
 
-    if(isDefined(var_0.disabledusability) && var_0.disabledusability)
+    if(isDefined(var_0.disabledusability) && var_0.disabledusability) {
       var_00 scripts\engine\utility::allow_usability(1);
+    }
 
     var_00 func_1146D(level.tanksettings[self.tanktype].streakname);
     var_0.using_remote_tank = 0;
@@ -540,8 +561,9 @@ func_114BF() {
   self endon("death");
   self.owner waittill("disconnect");
 
-  if(isDefined(self.mgturret))
+  if(isDefined(self.mgturret)) {
     self.mgturret notify("death");
+  }
 
   self notify("death");
 }
@@ -597,8 +619,9 @@ func_114BE() {
 func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
   var_12 = self;
 
-  if(isDefined(self.func_114B1))
+  if(isDefined(self.func_114B1)) {
     var_12 = self.func_114B1;
+  }
 
   if(isDefined(var_12.func_1D41) && var_12.func_1D41) {
     return;
@@ -606,11 +629,13 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if(!scripts\mp\weapons::friendlyfirecheck(var_12.owner, var_01)) {
     return;
   }
-  if(isDefined(var_03) && var_03 &level.idflags_penetration)
+  if(isDefined(var_03) && var_03 &level.idflags_penetration) {
     var_12.wasdamagedfrombulletpenetration = 1;
+  }
 
-  if(isDefined(var_03) && var_03 &level.idflags_no_team_protection)
+  if(isDefined(var_03) && var_03 &level.idflags_no_team_protection) {
     var_12.wasdamagedfrombulletricochet = 1;
+  }
 
   var_12.wasdamaged = 1;
   var_12.func_4D49 = 0.0;
@@ -625,8 +650,9 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
     }
   }
 
-  if(var_04 == "MOD_MELEE")
+  if(var_04 == "MOD_MELEE") {
     var_02 = var_12.maxhealth * 0.5;
+  }
 
   var_13 = var_02;
 
@@ -634,19 +660,23 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
     var_01 scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
 
     if(var_04 == "MOD_RIFLE_BULLET" || var_04 == "MOD_PISTOL_BULLET") {
-      if(var_01 scripts\mp\utility\game::_hasperk("specialty_armorpiercing"))
+      if(var_01 scripts\mp\utility\game::_hasperk("specialty_armorpiercing")) {
         var_13 = var_13 + var_02 * level.armorpiercingmod;
+      }
     }
 
-    if(isexplosivedamagemod(var_04))
+    if(isexplosivedamagemod(var_04)) {
       var_13 = var_13 + var_02;
+    }
   }
 
-  if(isexplosivedamagemod(var_04) && (isDefined(var_05) && var_05 == "destructible_car"))
+  if(isexplosivedamagemod(var_04) && (isDefined(var_05) && var_05 == "destructible_car")) {
     var_13 = var_12.maxhealth;
+  }
 
-  if(isDefined(var_1.owner) && isplayer(var_1.owner))
+  if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
     var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
+  }
 
   if(isDefined(var_05)) {
     switch (var_05) {
@@ -756,8 +786,9 @@ func_114BD() {
   for(;;) {
     self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
 
-    if(isDefined(self.func_10955))
+    if(isDefined(self.func_10955)) {
       self[[self.func_10955]](undefined, var_01, var_00, var_08, var_04, var_09, var_03, var_02, undefined, undefined, var_05, var_07);
+    }
   }
 }
 
@@ -768,8 +799,9 @@ func_114D5() {
   for(;;) {
     self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
 
-    if(isDefined(self.func_10955) && isDefined(self.func_114B1) && (!isexplosivedamagemod(var_04) || isDefined(var_09) && isexplosivedamagemod(var_04) && (var_09 == "stealth_bomb_mp" || var_09 == "artillery_mp")))
+    if(isDefined(self.func_10955) && isDefined(self.func_114B1) && (!isexplosivedamagemod(var_04) || isDefined(var_09) && isexplosivedamagemod(var_04) && (var_09 == "stealth_bomb_mp" || var_09 == "artillery_mp"))) {
       self.func_114B1[[self.func_10955]](undefined, var_01, var_00, var_08, var_04, var_09, var_03, var_02, undefined, undefined, var_05, var_07);
+    }
   }
 }
 

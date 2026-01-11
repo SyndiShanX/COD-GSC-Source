@@ -70,8 +70,9 @@ set_level_lighting_values() {
 setup_fade_angle_lights() {
   var_0 = getEntArray("fade_angle_light", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread update_fade_angle_lights();
+  }
 }
 
 update_fade_angle_lights() {
@@ -82,14 +83,17 @@ update_fade_angle_lights() {
   if(isDefined(self.script_noteworthy)) {
     var_3 = strtok(self.script_noteworthy, " ");
 
-    if(isDefined(var_3[0]))
+    if(isDefined(var_3[0])) {
       var_0 = float(var_3[0]);
+    }
 
-    if(isDefined(var_3[1]))
+    if(isDefined(var_3[1])) {
       var_1 = float(var_3[1]);
+    }
 
-    if(isDefined(var_3[2]))
+    if(isDefined(var_3[2])) {
       var_2 = float(var_3[2]);
+    }
   }
 
   var_4 = var_0 / 180.0;
@@ -111,8 +115,9 @@ update_fade_angle_lights() {
 setup_fade_distance_lights() {
   var_0 = getEntArray("fade_distance_light", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread update_fade_distance_lights();
+  }
 }
 
 update_fade_distance_lights() {
@@ -123,14 +128,17 @@ update_fade_distance_lights() {
   if(isDefined(self.script_noteworthy)) {
     var_3 = strtok(self.script_noteworthy, " ");
 
-    if(isDefined(var_3[0]))
+    if(isDefined(var_3[0])) {
       var_0 = float(var_3[0]);
+    }
 
-    if(isDefined(var_3[1]))
+    if(isDefined(var_3[1])) {
       var_1 = float(var_3[1]);
+    }
 
-    if(isDefined(var_3[2]))
+    if(isDefined(var_3[2])) {
       var_2 = float(var_3[2]);
+    }
   }
 
   for(;;) {
@@ -162,8 +170,9 @@ setup_lighting_pass_interior() {
 }
 
 apply_lighting_pass_bog_outside(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 5.0;
+  }
 
   maps\_utility::vision_set_fog_changes("bog_b", 2);
   level.player maps\_utility::set_light_set_player("bog_b");

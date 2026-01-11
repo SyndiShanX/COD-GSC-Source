@@ -56,10 +56,12 @@ statadd(var_0, var_1, var_2) {
 }
 
 statgetchild(var_0, var_1) {
-  if(var_0 == "round")
+  if(var_0 == "round") {
     return self getplayerdata(common_scripts\utility::getstatsgroup_common(), var_0, var_1);
-  else
+  }
+  else {
     return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), var_0, var_1);
+  }
 }
 
 statsetchild(var_0, var_1, var_2) {
@@ -69,8 +71,9 @@ statsetchild(var_0, var_1, var_2) {
   if(maps\mp\_utility::invirtuallobby()) {
     return;
   }
-  if(var_0 == "round")
+  if(var_0 == "round") {
     self setplayerdata(common_scripts\utility::getstatsgroup_common(), var_0, var_1, var_2);
+  }
   else {
     if(!maps\mp\_utility::rankingenabled()) {
       return;
@@ -88,8 +91,9 @@ stataddchild(var_0, var_1, var_2) {
 }
 
 statgetchildbuffered(var_0, var_1) {
-  if(!maps\mp\_utility::rankingenabled())
+  if(!maps\mp\_utility::rankingenabled()) {
     return 0;
+  }
 
   return self.bufferedchildstats[var_0][var_1];
 }
@@ -115,11 +119,13 @@ stataddbufferedwithmax(var_0, var_1, var_2) {
   }
   var_3 = statgetbuffered(var_0) + var_1;
 
-  if(var_3 > var_2)
+  if(var_3 > var_2) {
     var_3 = var_2;
+  }
 
-  if(var_3 < statgetbuffered(var_0))
+  if(var_3 < statgetbuffered(var_0)) {
     var_3 = var_2;
+  }
 
   statsetbuffered(var_0, var_3);
 }
@@ -130,18 +136,21 @@ stataddchildbufferedwithmax(var_0, var_1, var_2, var_3) {
   }
   var_4 = statgetchildbuffered(var_0, var_1) + var_2;
 
-  if(var_4 > var_3)
+  if(var_4 > var_3) {
     var_4 = var_3;
+  }
 
-  if(var_4 < statgetchildbuffered(var_0, var_1))
+  if(var_4 < statgetchildbuffered(var_0, var_1)) {
     var_4 = var_3;
+  }
 
   statsetchildbuffered(var_0, var_1, var_4);
 }
 
 statgetbuffered(var_0) {
-  if(!maps\mp\_utility::rankingenabled())
+  if(!maps\mp\_utility::rankingenabled()) {
     return 0;
+  }
 
   return self.bufferedstats[var_0];
 }
@@ -169,8 +178,9 @@ updatebufferedstats() {
     maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
     var_0++;
 
-    if(var_0 >= level.players.size)
+    if(var_0 >= level.players.size) {
       var_0 = 0;
+    }
 
     if(isDefined(level.players[var_0])) {
       level.players[var_0] writebufferedstats();
@@ -190,8 +200,9 @@ writebufferedstats() {
   var_0 = maps\mp\_utility::rankingenabled();
 
   if(var_0) {
-    foreach(var_3, var_2 in self.bufferedstats)
+    foreach(var_3, var_2 in self.bufferedstats) {
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), var_3, var_2);
+    }
   }
 
   foreach(var_3, var_2 in self.bufferedchildstats) {
@@ -201,8 +212,9 @@ writebufferedstats() {
         continue;
       }
 
-      if(var_0)
+      if(var_0) {
         self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), var_3, var_7, var_6);
+      }
     }
   }
 }
@@ -232,8 +244,9 @@ incrementattachmentstat(var_0, var_1, var_2) {
 
 incrementmeleestat(var_0) {
   if(maps\mp\_utility::rankingenabled()) {
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       var_0 = 1;
+    }
 
     var_1 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "meleeKills");
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "meleeKills", var_1 + var_0);
@@ -242,8 +255,9 @@ incrementmeleestat(var_0) {
 
 incrementdestructiblestat(var_0) {
   if(maps\mp\_utility::rankingenabled()) {
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       var_0 = 1;
+    }
 
     var_1 = self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "destructibleKills");
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "destructibleKills", var_1 + var_0);
@@ -257,17 +271,20 @@ doesattachkitincludebaseattachment(var_0, var_1) {
   var_5 = 5;
   var_6 = tablelookuprownum(var_2, var_3, var_0);
 
-  if(var_6 < 0)
+  if(var_6 < 0) {
     return 0;
+  }
 
   for(var_7 = var_4; var_7 <= var_5; var_7++) {
     var_8 = tablelookupbyrow(var_2, var_6, var_7);
 
-    if(var_8 == var_1)
+    if(var_8 == var_1) {
       return 1;
+    }
 
-    if(var_8 == "")
+    if(var_8 == "") {
       return 0;
+    }
   }
 
   return 0;
@@ -287,8 +304,9 @@ updateweaponbufferedstats() {
   }
   var_1 = maps\mp\_utility::getweaponnametokens(var_0);
 
-  if(var_1[0] == "iw5" || var_1[0] == "h1" || var_1[0] == "h2")
+  if(var_1[0] == "iw5" || var_1[0] == "h1" || var_1[0] == "h2") {
     var_1[0] = var_1[0] + "_" + var_1[1];
+  }
 
   if(var_1[0] == "alt") {
     foreach(var_3 in var_1) {
@@ -323,31 +341,39 @@ updateweaponbufferedstats() {
       }
     }
 
-    if(var_1[0] == "alt")
+    if(var_1[0] == "alt") {
       var_1[0] = var_1[1] + "_" + var_1[2];
+    }
   }
 
   if(var_1[0] == "glmwr" || var_1[0] == "masterkeymwr" || var_1[0] == "gl" || var_1[0] == "sho") {
-    if(self.trackingweaponshots > 0)
+    if(self.trackingweaponshots > 0) {
       incrementattachmentstat(var_1[0], "shots", self.trackingweaponshots);
+    }
 
-    if(self.trackingweaponkills > 0)
+    if(self.trackingweaponkills > 0) {
       incrementattachmentstat(var_1[0], "kills", self.trackingweaponkills);
+    }
 
-    if(self.trackingweaponhits > 0)
+    if(self.trackingweaponhits > 0) {
       incrementattachmentstat(var_1[0], "hits", self.trackingweaponhits);
+    }
 
-    if(self.trackingweaponheadshots > 0)
+    if(self.trackingweaponheadshots > 0) {
       incrementattachmentstat(var_1[0], "headShots", self.trackingweaponheadshots);
+    }
 
-    if(self.trackingweapondeaths > 0)
+    if(self.trackingweapondeaths > 0) {
       incrementattachmentstat(var_1[0], "deaths", self.trackingweapondeaths);
+    }
 
-    if(self.trackingweaponhipfirekills > 0)
+    if(self.trackingweaponhipfirekills > 0) {
       incrementattachmentstat(var_1[0], "hipfirekills", self.trackingweaponhipfirekills);
+    }
 
-    if(self.trackingweaponusetime > 0)
+    if(self.trackingweaponusetime > 0) {
       incrementattachmentstat(var_1[0], "timeInUse", self.trackingweaponusetime);
+    }
 
     self.trackingweaponname = "none";
     self.trackingweaponshots = 0;
@@ -413,37 +439,44 @@ updateweaponbufferedstats() {
       continue;
     }
     if(self.trackingweaponshots > 0) {
-      if(var_9 != "tacknifemwr")
+      if(var_9 != "tacknifemwr") {
         incrementattachmentstat(var_9, "shots", self.trackingweaponshots);
+      }
     }
 
     if(self.trackingweaponkills > 0) {
-      if(var_9 != "tacknifemwr")
+      if(var_9 != "tacknifemwr") {
         incrementattachmentstat(var_9, "kills", self.trackingweaponkills);
+      }
     }
 
     if(self.trackingweaponhits > 0) {
-      if(var_9 != "tacknifemwr")
+      if(var_9 != "tacknifemwr") {
         incrementattachmentstat(var_9, "hits", self.trackingweaponhits);
+      }
     }
 
     if(self.trackingweaponheadshots > 0) {
-      if(var_9 != "tacknifemwr")
+      if(var_9 != "tacknifemwr") {
         incrementattachmentstat(var_9, "headShots", self.trackingweaponheadshots);
+      }
     }
 
     if(self.trackingweaponhipfirekills > 0) {
-      if(var_9 != "tacknifemwr")
+      if(var_9 != "tacknifemwr") {
         incrementattachmentstat(var_9, "hipfirekills", self.trackingweaponhipfirekills);
+      }
     }
 
     if(self.trackingweaponusetime > 0) {
-      if(var_9 != "tacknifemwr")
+      if(var_9 != "tacknifemwr") {
         incrementattachmentstat(var_9, "timeInUse", self.trackingweaponusetime);
+      }
     }
 
-    if(self.trackingweapondeaths > 0)
+    if(self.trackingweapondeaths > 0) {
       incrementattachmentstat(var_9, "deaths", self.trackingweapondeaths);
+    }
   }
 
   self.trackingweaponname = "none";
@@ -469,8 +502,9 @@ uploadglobalstatcounters() {
   var_4 = 0;
   var_5 = 0;
 
-  foreach(var_7 in level.players)
+  foreach(var_7 in level.players) {
   var_5 += var_7.timeplayed["total"];
+  }
 
   incrementcounter("global_minutes", int(var_5 / 60));
 

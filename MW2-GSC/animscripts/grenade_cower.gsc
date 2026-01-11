@@ -29,12 +29,14 @@ main() {
 
   if(isDefined(self.grenade)) // failsafe
     grenadeAngle = AngleClamp180(vectorToAngles(self.grenade.origin - self.origin)[1] - self.angles[1]);
-  else
+  else {
     grenadeAngle = self.angles[1];
+  }
 
   if(self.a.pose == "stand") {
-    if(isDefined(self.grenade) && TryDive(grenadeAngle))
+    if(isDefined(self.grenade) && TryDive(grenadeAngle)) {
       return;
+    }
 
     self setFlaggedAnimKnobAllRestart("cowerstart", % exposed_squat_down_grenade_F, % body, 1, 0.2);
     self animscripts\shared::DoNoteTracks("cowerstart");
@@ -53,11 +55,13 @@ end_script() {
 }
 
 TryDive(grenadeAngle) {
-  if(randomint(2) == 0)
+  if(randomint(2) == 0) {
     return false;
+  }
 
-  if(self.stairsState != "none")
+  if(self.stairsState != "none") {
     return false;
+  }
 
   diveAnim = undefined;
   if(abs(grenadeAngle) > 90) {
@@ -73,8 +77,9 @@ TryDive(grenadeAngle) {
   moveBy = getMoveDelta(diveAnim, 0, 0.5);
   diveToPos = self localToWorldCoords(moveBy);
 
-  if(!self MayMoveToPoint(diveToPos))
+  if(!self MayMoveToPoint(diveToPos)) {
     return false;
+  }
 
   self.safeToChangeScript = false;
 

@@ -17,8 +17,9 @@ main() {
 delete_and_sink_fx() {
   self notify("nodeath_thread");
 
-  if(!isDefined(self.weapon_last_damage))
+  if(!isDefined(self.weapon_last_damage)) {
     self.weapon_last_damage = "hind_rockets";
+  }
 
   if(self.weapon_last_damage == "hind_rockets") {
     playFX(level._effect["explo_fx" + self.vehicletype], self.origin, anglesToForward(self.angles));

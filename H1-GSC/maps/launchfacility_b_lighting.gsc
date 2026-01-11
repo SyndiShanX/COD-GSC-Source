@@ -57,11 +57,13 @@ emissive_pulsing() {
   if(isDefined(self.script_noteworthy)) {
     var_4 = strtok(self.script_noteworthy, " ");
 
-    if(isDefined(var_4[0]))
+    if(isDefined(var_4[0])) {
       var_2 = float(var_4[0]);
+    }
 
-    if(isDefined(var_4[1]))
+    if(isDefined(var_4[1])) {
       var_3 = float(var_4[1]);
+    }
   }
 
   var_5 = 0.05;

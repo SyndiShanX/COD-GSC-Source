@@ -18,8 +18,9 @@ blackholemineexplode() {}
 blackholegrenadeused(var_00, var_01) {
   var_00 endon("death");
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0;
+  }
 
   scripts\mp\utility\game::printgameaction("black hole grenade spawned", self);
   thread bhg_deleteondisowned(var_00);
@@ -29,8 +30,9 @@ blackholegrenadeused(var_00, var_01) {
   if(!var_01) {
     var_00 waittill("blackhole_grenade_stuck");
 
-    if(!isDefined(var_00))
+    if(!isDefined(var_00)) {
       return;
+    }
   }
 
   var_0.state = 1;
@@ -44,8 +46,9 @@ blackholegrenadeused(var_00, var_01) {
   thread func_12E56(var_00);
   var_00 waittill("blackhole_grenade_finished");
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return;
+  }
 }
 
 func_2B3E(var_00) {
@@ -74,8 +77,9 @@ func_12EB1(var_00, var_01) {
   self endon("disconnect");
   var_00 endon("death");
 
-  if(!var_01)
+  if(!var_01) {
     var_00 waittill("missile_stuck", var_02);
+  }
 
   self notify("powers_blackholeGrenade_used", 1);
   playLoopSound(var_0.origin, "blackhole_plant");
@@ -86,8 +90,9 @@ func_12EB1(var_00, var_01) {
   var_00 give_player_tickets(1);
   var_03 = scripts\mp\utility\game::_hasperk("specialty_rugged_eqp");
 
-  if(var_03)
+  if(var_03) {
     var_0.hasruggedeqp = 1;
+  }
 
   var_04 = scripts\engine\utility::ter_op(scripts\mp\utility\game::istrue(var_03), 30, 15);
   var_05 = scripts\engine\utility::ter_op(scripts\mp\utility\game::istrue(var_03), "hitequip", "");
@@ -176,8 +181,9 @@ func_13A58(var_00, var_01) {
       var_08 = var_05 gettagorigin(var_06);
       var_09 = physics_raycast(var_07, var_08, var_04, [var_00, var_05], 0, "physicsquery_closest", 1);
 
-      if(isDefined(var_09) && var_9.size > 0)
+      if(isDefined(var_09) && var_9.size > 0) {
         continue;
+      }
     }
 
     var_05 thread func_11AD5(var_00);
@@ -229,19 +235,23 @@ bhg_handlefataldamage(var_00, var_01, var_02, var_03, var_04) {
 }
 
 bhg_handledamage(var_00, var_01, var_02, var_03, var_04) {
-  if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_00, self))
+  if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_00, self)) {
     return 0;
+  }
 
-  if(var_02 == "MOD_MELEE")
+  if(var_02 == "MOD_MELEE") {
     return self.maxhealth + 1;
+  }
 
   var_05 = 15;
   var_06 = 1;
 
-  if(scripts\mp\utility\game::isfmjdamage(var_01, var_02))
+  if(scripts\mp\utility\game::isfmjdamage(var_01, var_02)) {
     var_06 = 2;
-  else if(var_03 >= scripts\mp\weapons::minegettwohitthreshold())
+  }
+  else if(var_03 >= scripts\mp\weapons::minegettwohitthreshold()) {
     var_06 = 2;
+  }
 
   scripts\mp\powers::equipmenthit(self.owner, var_00, var_01, var_02);
   return var_06 * var_05;
@@ -281,8 +291,9 @@ spawnblackholephysicsvolume(var_00, var_01, var_02, var_03) {
     }
   }
 
-  if(isDefined(var_05))
+  if(isDefined(var_05)) {
     var_05 delete();
+  }
 
   level.func_2ABC[var_06] = var_04;
   var_04 thread func_139AD();
@@ -339,18 +350,21 @@ bhg_destroyonemp() {
   self waittill("emp_damage", var_00, var_01, var_02, var_03, var_04);
 
   if(isDefined(var_03) && var_03 == "emp_grenade_mp") {
-    if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00)))
+    if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00))) {
       var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
+    }
   }
 
   bhg_awardpoints(var_00);
   var_05 = "";
 
-  if(scripts\mp\utility\game::istrue(self.hasruggedeqp))
+  if(scripts\mp\utility\game::istrue(self.hasruggedeqp)) {
     var_05 = "hitequip";
+  }
 
-  if(isplayer(var_00))
+  if(isplayer(var_00)) {
     var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_05);
+  }
 
   thread bhg_destroy();
 }
@@ -366,11 +380,13 @@ cleanuponparentdeath(var_00, var_01) {
   self notify("cleanupOnParentDeath");
   self endon("cleanupOnParentDeath");
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 waittill("death");
+  }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     wait(var_01);
+  }
 
   self delete();
 }
@@ -406,8 +422,9 @@ bhg_addtoglobalarr() {
 bhg_removefromglobalarr(var_00) {
   self notify("blackHoleGrenade_removeFromGlobalArr");
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = self getentitynumber();
+  }
 
   level.func_2ABD[var_00] = undefined;
 }
@@ -426,8 +443,9 @@ bhg_trackimpulsefielddebuff(var_00, var_01) {
 
   if(isDefined(var_01)) {
     foreach(var_04 in var_2.players) {
-      if(isDefined(var_04) && scripts\mp\utility\game::isreallyalive(var_04))
+      if(isDefined(var_04) && scripts\mp\utility\game::isreallyalive(var_04)) {
         scripts\mp\gamescore::untrackdebuffassist(var_01, var_04, "blackhole_grenade_mp");
+      }
     }
   }
 }
@@ -440,10 +458,12 @@ bhg_trackimpulsefielddebuffend(var_00, var_01, var_02) {
     var_03 = [];
     var_04 = undefined;
 
-    if(level.teambased)
+    if(level.teambased) {
       var_04 = scripts\mp\utility\game::clearscrambler(var_0.origin, 256, scripts\mp\utility\game::getotherteam(var_1.team), var_01);
-    else
+    }
+    else {
       var_04 = scripts\mp\utility\game::clearscrambler(var_0.origin, 256, undefined, var_01);
+    }
 
     foreach(var_06 in var_04) {
       var_07 = var_06 getentitynumber();
@@ -464,8 +484,9 @@ bhg_trackimpulsefielddebuffend(var_00, var_01, var_02) {
     }
 
     foreach(var_06 in var_2.players) {
-      if(isDefined(var_06) && scripts\mp\utility\game::isreallyalive(var_06))
+      if(isDefined(var_06) && scripts\mp\utility\game::isreallyalive(var_06)) {
         scripts\mp\gamescore::untrackdebuffassist(var_01, var_06, "blackhole_grenade_mp");
+      }
     }
 
     var_2.players = var_03;
@@ -495,8 +516,9 @@ bhg_awardpoints(var_00) {
 }
 
 getblackholecenter(var_00) {
-  if(scripts\mp\utility\game::istrue(var_0.func_9935))
+  if(scripts\mp\utility\game::istrue(var_0.func_9935)) {
     return var_0.origin;
+  }
 
   if(!isDefined(var_0.centeroffset)) {
     var_01 = anglestoup(var_0.angles);

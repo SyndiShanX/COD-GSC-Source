@@ -16,8 +16,9 @@ bot_hack_tank_get_goal_origin(tank) {
     dir = vectorscale(dir, 32);
     goal = tank.origin + dir;
 
-    if(findpath(self.origin, goal, 0))
+    if(findpath(self.origin, goal, 0)) {
       return goal;
+    }
   }
 
   return undefined;
@@ -27,16 +28,18 @@ bot_hack_has_goal(tank) {
   goal = self getgoal("hack");
 
   if(isDefined(goal)) {
-    if(distancesquared(goal, tank.origin) < 16384)
+    if(distancesquared(goal, tank.origin) < 16384) {
       return true;
+    }
   }
 
   return false;
 }
 
 bot_hack_at_goal() {
-  if(self atgoal("hack"))
+  if(self atgoal("hack")) {
     return true;
+  }
 
   goal = self getgoal("hack");
 
@@ -46,8 +49,9 @@ bot_hack_at_goal() {
 
     foreach(tank in tanks) {
       if(distancesquared(goal, tank.origin) < 16384) {
-        if(isDefined(tank.trigger) && self istouching(tank.trigger))
+        if(isDefined(tank.trigger) && self istouching(tank.trigger)) {
           return true;
+        }
       }
     }
   }
@@ -88,8 +92,9 @@ bot_hack_think() {
   tanks = getEntArray("talon", "targetname");
   tanks = arraysort(tanks, self.origin);
 
-  if(!is_true(level.drones_spawned))
+  if(!is_true(level.drones_spawned)) {
     self bot_hack_goal_pregame(tanks);
+  }
   else {
     foreach(tank in tanks) {
       if(isDefined(tank.owner) && tank.owner == self) {

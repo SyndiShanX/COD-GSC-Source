@@ -42,8 +42,9 @@ watch_alien_soflam_weaponswitch() {
   while(1) {
     self waittill("weapon_change", newWeapon);
 
-    if(newWeapon == "aliensoflam_mp")
+    if(newWeapon == "aliensoflam_mp") {
       self SetWeaponAmmoClip("aliensoflam_mp", CONST_SOFLAM_AMMO - self.soflamAmmoUsed);
+    }
   }
 }
 
@@ -54,8 +55,9 @@ watch_alien_soflam_usage() {
   level endon("game_ended");
   self endon("disconnect");
 
-  while(self isChangingWeapon())
+  while(self isChangingWeapon()) {
     wait(0.05);
+  }
 
   for(;;) {
     if(self AttackButtonPressed() && self GetCurrentWeapon() == "aliensoflam_mp" && self AdsButtonPressed() && !self IsUsingTurret()) {
@@ -274,10 +276,12 @@ getTargetPoint() {
 
   res = bulletTrace(origin, endpoint, false, undefined);
 
-  if(res["surfacetype"] == "none")
+  if(res["surfacetype"] == "none") {
     return undefined;
-  if(res["surfacetype"] == "default")
+  }
+  if(res["surfacetype"] == "default") {
     return undefined;
+  }
 
   results = [];
   results[0] = res["position"];
@@ -292,8 +296,9 @@ update_soflam_ammocount() {
   if(self.soflamAmmoUsed >= CONST_SOFLAM_AMMO) {
     self.soflamAmmoUsed = 0;
     self takeweapon("aliensoflam_mp");
-    if(!maps\mp\alien\_utility::is_true(self.has_special_weapon) && !maps\mp\alien\_utility::is_true(self.is_holding_deployable))
+    if(!maps\mp\alien\_utility::is_true(self.has_special_weapon) && !maps\mp\alien\_utility::is_true(self.is_holding_deployable)) {
       self SwitchToWeapon(self GetWeaponsListPrimaries()[0]);
+    }
   }
 
 }

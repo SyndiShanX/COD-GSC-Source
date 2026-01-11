@@ -90,36 +90,44 @@ createRule(rule, maxAllowable, maxAllowablePerTeam) {
   level.killstreakrules[rule].maxPerTeam = maxAllowablePerTeam;
 }
 addKillstreakToRule(hardpointType, rule, countTowards, checkAgainst) {
-  if(!isDefined(level.killstreaktype[hardpointType]))
+  if(!isDefined(level.killstreaktype[hardpointType])) {
     level.killstreaktype[hardpointType] = [];
+  }
   keys = GetArrayKeys(level.killstreaktype[hardpointType]);
   assert(isDefined(level.killstreakrules[rule]));
-  if(!isDefined(level.killstreaktype[hardpointType][rule]))
+  if(!isDefined(level.killstreaktype[hardpointType][rule])) {
     level.killstreaktype[hardpointType][rule] = spawnStruct();
+  }
   level.killstreaktype[hardpointType][rule].counts = countTowards;
   level.killstreaktype[hardpointType][rule].checks = checkAgainst;
 }
 killstreakStart(hardpointType, team, hacked, displayTeamMessage) {
-  if(self isKillstreakAllowed(hardpointType, team) == false)
+  if(self isKillstreakAllowed(hardpointType, team) == false) {
     return false;
+  }
   assert(isDefined(hardpointType));
-  if(!isDefined(hacked))
+  if(!isDefined(hacked)) {
     hacked = false;
-  if(!isDefined(displayTeamMessage))
+  }
+  if(!isDefined(displayTeamMessage)) {
     displayTeamMessage = true;
+  }
   if(displayTeamMessage == true) {
-    if(isDefined(level.killstreaks[hardpointType]) && isDefined(level.killstreaks[hardpointType].inboundtext) && !hacked)
+    if(isDefined(level.killstreaks[hardpointType]) && isDefined(level.killstreaks[hardpointType].inboundtext) && !hacked) {
       level thread maps\mp\_popups::DisplayKillstreakTeamMessageToAll(hardpointType, self);
+    }
   }
   keys = GetArrayKeys(level.killstreaktype[hardpointType]);
   for(i = 0; i < keys.size; i++) {
-    if(!level.killstreaktype[hardpointType][keys[i]].counts)
+    if(!level.killstreaktype[hardpointType][keys[i]].counts) {
       continue;
+    }
     assert(isDefined(level.killstreakrules[keys[i]]));
     level.killstreakrules[keys[i]].cur++;
     if(level.teambased) {
-      if(!isDefined(level.killstreakrules[keys[i]].curTeam[team]))
+      if(!isDefined(level.killstreakrules[keys[i]].curTeam[team])) {
         level.killstreakrules[keys[i]].curTeam[team] = 0;
+      }
       level.killstreakrules[keys[i]].curTeam[team]++;
     }
   }
@@ -129,8 +137,9 @@ killstreakStop(hardpointType, team) {
   assert(isDefined(hardpointType));
   keys = GetArrayKeys(level.killstreaktype[hardpointType]);
   for(i = 0; i < keys.size; i++) {
-    if(!level.killstreaktype[hardpointType][keys[i]].counts)
+    if(!level.killstreaktype[hardpointType][keys[i]].counts) {
       continue;
+    }
     assert(isDefined(level.killstreakrules[keys[i]]));
     level.killstreakrules[keys[i]].cur--;
     assert(level.killstreakrules[keys[i]].cur >= 0);
@@ -147,24 +156,30 @@ isKillstreakAllowed(hardpointType, team) {
   isAllowed = true;
   keys = GetArrayKeys(level.killstreaktype[hardpointType]);
   for(i = 0; i < keys.size; i++) {
-    if(!level.killstreaktype[hardpointType][keys[i]].checks)
+    if(!level.killstreaktype[hardpointType][keys[i]].checks) {
       continue;
+    }
     if(level.killstreakrules[keys[i]].max != 0) {
-      if(level.killstreakrules[keys[i]].cur >= level.killstreakrules[keys[i]].max)
+      if(level.killstreakrules[keys[i]].cur >= level.killstreakrules[keys[i]].max) {
         isAllowed = false;
+      }
     }
     if(level.teambased && level.killstreakrules[keys[i]].maxPerTeam != 0) {
-      if(!isDefined(level.killstreakrules[keys[i]].curTeam[team]))
+      if(!isDefined(level.killstreakrules[keys[i]].curTeam[team])) {
         level.killstreakrules[keys[i]].curTeam[team] = 0;
-      if(level.killstreakrules[keys[i]].curTeam[team] >= level.killstreakrules[keys[i]].maxPerTeam)
+      }
+      if(level.killstreakrules[keys[i]].curTeam[team] >= level.killstreakrules[keys[i]].maxPerTeam) {
         isAllowed = false;
+      }
     }
   }
-  if(isDefined(self.lastStand) && self.lastStand)
+  if(isDefined(self.lastStand) && self.lastStand) {
     isAllowed = false;
+  }
   if(isAllowed == false) {
-    if(isDefined(level.killstreaks[hardpointType]) && isDefined(level.killstreaks[hardpointType].notAvailableText))
+    if(isDefined(level.killstreaks[hardpointType]) && isDefined(level.killstreaks[hardpointType].notAvailableText)) {
       self iprintlnbold(level.killstreaks[hardpointType].notAvailableText);
+    }
   }
   return isAllowed;
 }

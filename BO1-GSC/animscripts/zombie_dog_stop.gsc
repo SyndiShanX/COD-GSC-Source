@@ -203,11 +203,13 @@ trackLoop(look2, look4, look6, look8) {
       firstFrame = false;
     } else {
       yawDeltaChange = yawDelta - prevYawDelta;
-      if(abs(yawDeltaChange) > maxYawDeltaChange)
+      if(abs(yawDeltaChange) > maxYawDeltaChange) {
         yawDelta = prevYawDelta + maxYawDeltaChange * sign(yawDeltaChange);
+      }
       pitchDeltaChange = pitchDelta - prevPitchDelta;
-      if(abs(pitchDeltaChange) > maxPitchDeltaChange)
+      if(abs(pitchDeltaChange) > maxPitchDeltaChange) {
         pitchDelta = prevPitchDelta + maxPitchDeltaChange * sign(pitchDeltaChange);
+      }
     }
     prevYawDelta = yawDelta;
     prevPitchDelta = pitchDelta;

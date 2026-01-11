@@ -25,8 +25,9 @@ init_animtree() {
 }
 
 turn_on_location_indicator(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     self thread fx_location_indicator(localclientnum);
+  }
   else {
     self notify("ball_departed");
     self thread fx_departure_steam(localclientnum);
@@ -78,10 +79,12 @@ turn_on_active_ball_light(localclientnum, oldval, newval, bnewent, binitialsnap,
 }
 
 start_bottle_cycling(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     self thread start_vortex_fx(localclientnum);
-  else
+  }
+  else {
     self thread stop_vortex_fx(localclientnum);
+  }
 }
 
 start_vortex_fx(localclientnum) {
@@ -114,8 +117,9 @@ stop_vortex_fx(localclientnum) {
   }
   self notify("activation_electricity_finished");
 
-  if(isDefined(self.glow_location))
+  if(isDefined(self.glow_location)) {
     self.glow_location delete();
+  }
 
   self.artifact_glow_setting = 1;
   self.machinery_glow_setting = 0.7;
@@ -129,8 +133,9 @@ fx_artifact_pulse_thread(localclientnum) {
   while(isDefined(self)) {
     shader_amount = sin(getrealtime() * 0.2);
 
-    if(shader_amount < 0)
+    if(shader_amount < 0) {
       shader_amount = shader_amount * -1;
+    }
 
     shader_amount = 0.75 - shader_amount * 0.75;
     self.artifact_glow_setting = shader_amount;
@@ -145,8 +150,9 @@ fx_activation_electric_loop(localclientnum) {
   self endon("entityshutdown");
 
   while(true) {
-    if(isDefined(self.glow_location))
+    if(isDefined(self.glow_location)) {
       playFXOnTag(localclientnum, level._effect["perk_machine_activation_electric_loop"], self.glow_location, "tag_origin");
+    }
 
     wait 0.1;
   }
@@ -156,8 +162,9 @@ fx_bottle_cycling(localclientnum) {
   self endon("bottle_cycling_finished");
 
   while(true) {
-    if(isDefined(self.glow_location))
+    if(isDefined(self.glow_location)) {
       playFXOnTag(localclientnum, level._effect["bottle_glow"], self.glow_location, "tag_origin");
+    }
 
     wait 0.1;
   }
@@ -179,8 +186,9 @@ fx_location_indicator(localclientnum) {
   level endon("demo_jump");
 
   while(isDefined(self)) {
-    if(isDefined(self))
+    if(isDefined(self)) {
       self._location_indicator = playFX(localclientnum, level._effect["perk_machine_location"], self.origin);
+    }
 
     wait(randomfloatrange(3.0, 4.0));
   }

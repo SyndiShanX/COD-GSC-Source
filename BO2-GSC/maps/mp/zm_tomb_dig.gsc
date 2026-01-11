@@ -29,8 +29,9 @@ init_shovel() {
   a_shovel_zone = [];
 
   foreach(s_shovel_pos in a_shovel_pos) {
-    if(!isDefined(a_shovel_zone[s_shovel_pos.script_noteworthy]))
+    if(!isDefined(a_shovel_zone[s_shovel_pos.script_noteworthy])) {
       a_shovel_zone[s_shovel_pos.script_noteworthy] = [];
+    }
 
     a_shovel_zone[s_shovel_pos.script_noteworthy][a_shovel_zone[s_shovel_pos.script_noteworthy].size] = s_shovel_pos;
   }
@@ -93,13 +94,15 @@ shovel_trigger_prompt_and_visiblity(e_player) {
 }
 
 shovel_prompt_update(e_player) {
-  if(!self unitrigger_stub_show_hint_prompt_valid(e_player))
+  if(!self unitrigger_stub_show_hint_prompt_valid(e_player)) {
     return false;
+  }
 
   self.hint_string = &"ZM_TOMB_SHPU";
 
-  if(isDefined(e_player.dig_vars["has_shovel"]) && e_player.dig_vars["has_shovel"])
+  if(isDefined(e_player.dig_vars["has_shovel"]) && e_player.dig_vars["has_shovel"]) {
     self.hint_string = &"ZM_TOMB_SHAG";
+  }
 
   return true;
 }
@@ -130,8 +133,9 @@ dig_reward_dialog(str_category) {
   if(!(isDefined(self.dig_vo_cooldown) && self.dig_vo_cooldown)) {
     self do_player_general_vox("digging", str_category);
 
-    if(str_category != "pickup_shovel")
+    if(str_category != "pickup_shovel") {
       self thread dig_reward_vo_cooldown();
+    }
   }
 }
 
@@ -168,13 +172,16 @@ dig_spots_init() {
   level.a_dig_spots = getstructarray("dig_spot", "targetname");
 
   foreach(s_dig_spot in level.a_dig_spots) {
-    if(!isDefined(s_dig_spot.angles))
+    if(!isDefined(s_dig_spot.angles)) {
       s_dig_spot.angles = (0, 0, 0);
+    }
 
-    if(isDefined(s_dig_spot.script_noteworthy) && s_dig_spot.script_noteworthy == "initial_spot")
+    if(isDefined(s_dig_spot.script_noteworthy) && s_dig_spot.script_noteworthy == "initial_spot") {
       s_dig_spot thread dig_spot_spawn();
-    else
+    }
+    else {
       s_dig_spot.dug = 1;
+    }
 
     s_dig_spot.str_zone = maps\mp\zombies\_zm_zonemgr::get_zone_from_position(s_dig_spot.origin + vectorscale((0, 0, 1), 32.0), 1);
 
@@ -199,13 +206,16 @@ dig_spots_respawn(a_dig_spots) {
     n_respawned = 0;
     n_respawned_max = 3;
 
-    if(level.weather_snow > 0)
+    if(level.weather_snow > 0) {
       n_respawned_max = 0;
-    else if(level.weather_rain > 0)
+    }
+    else if(level.weather_rain > 0) {
       n_respawned_max = 5;
+    }
 
-    if(level.weather_snow == 0)
+    if(level.weather_snow == 0) {
       n_respawned_max = n_respawned_max + randomint(get_players().size);
+    }
 
     for(i = 0; i < a_dig_spots.size; i++) {
       if(isDefined(a_dig_spots[i].dug) && a_dig_spots[i].dug && n_respawned < n_respawned_max && level.n_dig_spots_cur <= level.n_dig_spots_max) {
@@ -263,10 +273,12 @@ dig_spot_spawn() {
 }
 
 dig_spot_trigger_visibility(player) {
-  if(isDefined(player.dig_vars["has_shovel"]) && player.dig_vars["has_shovel"])
+  if(isDefined(player.dig_vars["has_shovel"]) && player.dig_vars["has_shovel"]) {
     self sethintstring(&"ZM_TOMB_X2D");
-  else
+  }
+  else {
     self sethintstring(&"ZM_TOMB_NS");
+  }
 
   return true;
 }
@@ -411,15 +423,18 @@ dig_get_rare_powerups(player) {
   a_rare_powerups = [];
   a_possible_powerups = array("nuke", "double_points");
 
-  if(level.dig_magic_box_moved && !dig_has_powerup_spawned("fire_sale"))
+  if(level.dig_magic_box_moved && !dig_has_powerup_spawned("fire_sale")) {
     a_possible_powerups[a_possible_powerups.size] = "fire_sale";
+  }
 
-  if(player.dig_vars["has_upgraded_shovel"])
+  if(player.dig_vars["has_upgraded_shovel"]) {
     a_possible_powerups = combinearrays(a_possible_powerups, array("insta_kill", "full_ammo"));
+  }
 
   foreach(powerup in a_possible_powerups) {
-    if(!dig_has_powerup_spawned(powerup))
+    if(!dig_has_powerup_spawned(powerup)) {
       a_rare_powerups[a_rare_powerups.size] = powerup;
+    }
   }
 
   return a_rare_powerups;
@@ -436,8 +451,9 @@ dig_up_grenade(player) {
   if(n_rand) {
     wait 0.3;
 
-    if(cointoss())
+    if(cointoss()) {
       player magicgrenadetype(grenade, v_spawnpt, (50, 50, 300), 3.0);
+    }
   }
 }
 
@@ -445,15 +461,18 @@ dig_up_weapon(digger) {
   a_common_weapons = array("ballista_zm", "c96_zm", "870mcs_zm");
   a_rare_weapons = array("dsr50_zm", "srm1216_zm");
 
-  if(digger.dig_vars["has_upgraded_shovel"])
+  if(digger.dig_vars["has_upgraded_shovel"]) {
     a_rare_weapons = combinearrays(a_rare_weapons, array("claymore_zm", "ak74u_zm", "ksg_zm", "mp40_zm", "mp44_zm"));
+  }
 
   str_weapon = undefined;
 
-  if(randomint(100) < 90)
+  if(randomint(100) < 90) {
     str_weapon = a_common_weapons[getarraykeys(a_common_weapons)[randomint(getarraykeys(a_common_weapons).size)]];
-  else
+  }
+  else {
     str_weapon = a_rare_weapons[getarraykeys(a_rare_weapons)[randomint(getarraykeys(a_rare_weapons).size)]];
+  }
 
   v_spawnpt = self.origin + (0, 0, 40);
   v_spawnang = (0, 0, 0);
@@ -490,11 +509,13 @@ dig_up_weapon(digger) {
     m_weapon.trigger = undefined;
   }
 
-  if(isDefined(m_weapon))
+  if(isDefined(m_weapon)) {
     m_weapon delete();
+  }
 
-  if(player != digger)
+  if(player != digger) {
     digger notify("dig_up_weapon_shared");
+  }
 }
 
 swap_weapon(str_weapon, e_player) {
@@ -512,18 +533,21 @@ swap_weapon(str_weapon, e_player) {
   }
 
   if(is_player_valid(e_player) && !e_player.is_drinking && !is_placeable_mine(str_current_weapon) && !is_equipment(str_current_weapon) && level.revive_tool != str_current_weapon && "none" != str_current_weapon && !e_player hacker_active()) {
-    if(!e_player hasweapon(str_weapon))
+    if(!e_player hasweapon(str_weapon)) {
       e_player take_old_weapon_and_give_new(str_current_weapon, str_weapon);
-    else
+    }
+    else {
       e_player givemaxammo(str_weapon);
+    }
   }
 }
 
 take_old_weapon_and_give_new(current_weapon, weapon) {
   a_weapons = self getweaponslistprimaries();
 
-  if(isDefined(a_weapons) && a_weapons.size >= get_player_weapon_limit(self))
+  if(isDefined(a_weapons) && a_weapons.size >= get_player_weapon_limit(self)) {
     self takeweapon(current_weapon);
+  }
 
   self giveweapon(weapon);
   self switchtoweapon(weapon);
@@ -541,23 +565,27 @@ timer_til_despawn(v_float, n_dist) {
     self.trigger = undefined;
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 get_player_perk_purchase_limit() {
-  if(isDefined(self.player_perk_purchase_limit))
+  if(isDefined(self.player_perk_purchase_limit)) {
     return self.player_perk_purchase_limit;
+  }
 
   return level.perk_purchase_limit;
 }
 
 increment_player_perk_purchase_limit() {
-  if(!isDefined(self.player_perk_purchase_limit))
+  if(!isDefined(self.player_perk_purchase_limit)) {
     self.player_perk_purchase_limit = level.perk_purchase_limit;
+  }
 
-  if(self.player_perk_purchase_limit < 8)
+  if(self.player_perk_purchase_limit < 8) {
     self.player_perk_purchase_limit++;
+  }
 }
 
 ee_zombie_blood_dig() {
@@ -596,17 +624,20 @@ ee_zombie_blood_dig() {
 ee_zombie_blood_dig_disconnect_watch() {
   self waittill("disconnect");
 
-  if(isDefined(self.t_zombie_blood_dig))
+  if(isDefined(self.t_zombie_blood_dig)) {
     self.t_zombie_blood_dig delete();
+  }
 
   a_z_spots = getstructarray("zombie_blood_dig_spot", "targetname");
 
   foreach(s_pos in a_z_spots) {
-    if(isDefined(s_pos.n_player) && s_pos.n_player == self getentitynumber())
+    if(isDefined(s_pos.n_player) && s_pos.n_player == self getentitynumber()) {
       s_pos.n_player = undefined;
+    }
 
-    if(isDefined(s_pos.m_dig))
+    if(isDefined(s_pos.m_dig)) {
       s_pos delete();
+    }
   }
 }
 
@@ -658,8 +689,9 @@ spawn_perk_upgrade_bottle(v_origin, e_player) {
   m_bottle linkto(m_fx);
   m_fx thread rotate_perk_upgrade_bottle();
 
-  while(isDefined(e_player) && !e_player istouching(m_bottle))
+  while(isDefined(e_player) && !e_player istouching(m_bottle)) {
     wait 0.05;
+  }
 
   m_bottle delete();
   m_fx delete();
@@ -697,8 +729,9 @@ dig_powerups_tracking() {
   while(true) {
     level waittill("end_of_round");
 
-    foreach(str_powerup, value in level.dig_powerups_tracking)
+    foreach(str_powerup, value in level.dig_powerups_tracking) {
     level.dig_powerups_tracking[str_powerup] = 0;
+    }
 
     level.dig_n_zombie_bloods_spawned = 0;
     level.dig_n_powerups_spawned = 0;
@@ -706,8 +739,9 @@ dig_powerups_tracking() {
 }
 
 dig_has_powerup_spawned(str_powerup) {
-  if(!isDefined(level.dig_powerups_tracking[str_powerup]))
+  if(!isDefined(level.dig_powerups_tracking[str_powerup])) {
     level.dig_powerups_tracking[str_powerup] = 0;
+  }
 
   return level.dig_powerups_tracking[str_powerup];
 }
@@ -821,8 +855,9 @@ watch_devgui_dig() {
       wait 1;
 
       foreach(player in getplayers()) {
-        if(is_player_valid(player, 0, 1))
+        if(is_player_valid(player, 0, 1)) {
           player set_weather_to_player();
+        }
       }
     }
 
@@ -836,8 +871,9 @@ watch_devgui_dig() {
       wait 1;
 
       foreach(player in getplayers()) {
-        if(is_player_valid(player, 0, 1))
+        if(is_player_valid(player, 0, 1)) {
           player set_weather_to_player();
+        }
       }
     }
 
@@ -851,8 +887,9 @@ watch_devgui_dig() {
       wait 1;
 
       foreach(player in getplayers()) {
-        if(is_player_valid(player, 0, 1))
+        if(is_player_valid(player, 0, 1)) {
           player set_weather_to_player();
+        }
       }
     }
 

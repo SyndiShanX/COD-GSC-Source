@@ -21,61 +21,74 @@
 #include maps\mp\gametypes_zm\_spawnlogic;
 
 timeuntilspawn(includeteamkilldelay) {
-  if(level.ingraceperiod && !self.hasspawned)
+  if(level.ingraceperiod && !self.hasspawned) {
     return 0;
+  }
 
   respawndelay = 0;
 
   if(self.hasspawned) {
     result = self[[level.onrespawndelay]]();
 
-    if(isDefined(result))
+    if(isDefined(result)) {
       respawndelay = result;
-    else
+    }
+    else {
       respawndelay = level.playerrespawndelay;
+    }
 
-    if(includeteamkilldelay && (isDefined(self.teamkillpunish) && self.teamkillpunish))
+    if(includeteamkilldelay && (isDefined(self.teamkillpunish) && self.teamkillpunish)) {
       respawndelay = respawndelay + maps\mp\gametypes_zm\_globallogic_player::teamkilldelay();
+    }
   }
 
   wavebased = level.waverespawndelay > 0;
 
-  if(wavebased)
+  if(wavebased) {
     return self timeuntilwavespawn(respawndelay);
+  }
 
   return respawndelay;
 }
 
 allteamshaveexisted() {
   foreach(team in level.teams) {
-    if(!level.everexisted[team])
+    if(!level.everexisted[team]) {
       return false;
+    }
   }
 
   return true;
 }
 
 mayspawn() {
-  if(isDefined(level.mayspawn) && !self[[level.mayspawn]]())
+  if(isDefined(level.mayspawn) && !self[[level.mayspawn]]()) {
     return false;
+  }
 
-  if(level.inovertime)
+  if(level.inovertime) {
     return false;
+  }
 
-  if(level.playerqueuedrespawn && !isDefined(self.allowqueuespawn) && !level.ingraceperiod && !level.usestartspawns)
+  if(level.playerqueuedrespawn && !isDefined(self.allowqueuespawn) && !level.ingraceperiod && !level.usestartspawns) {
     return false;
+  }
 
   if(level.numlives) {
-    if(level.teambased)
+    if(level.teambased) {
       gamehasstarted = allteamshaveexisted();
-    else
+    }
+    else {
       gamehasstarted = level.maxplayercount > 1 || !isoneround() && !isfirstround();
+    }
 
-    if(!self.pers["lives"] && gamehasstarted)
+    if(!self.pers["lives"] && gamehasstarted) {
       return false;
+    }
     else if(gamehasstarted) {
-      if(!level.ingraceperiod && !self.hasspawned && !level.wagermatch)
+      if(!level.ingraceperiod && !self.hasspawned && !level.wagermatch) {
         return false;
+      }
     }
   }
 
@@ -87,15 +100,17 @@ timeuntilwavespawn(minimumwait) {
   lastwavetime = level.lastwave[self.pers["team"]];
   wavedelay = level.wavedelay[self.pers["team"]] * 1000;
 
-  if(wavedelay == 0)
+  if(wavedelay == 0) {
     return 0;
+  }
 
   numwavespassedearliestspawntime = (earliestspawntime - lastwavetime) / wavedelay;
   numwaves = ceil(numwavespassedearliestspawntime);
   timeofspawn = lastwavetime + numwaves * wavedelay;
 
-  if(isDefined(self.wavespawnindex))
+  if(isDefined(self.wavespawnindex)) {
     timeofspawn = timeofspawn + 50 * self.wavespawnindex;
+  }
 
   return (timeofspawn - gettime()) / 1000;
 }
@@ -118,21 +133,25 @@ spawnplayerprediction() {
   while(true) {
     wait 0.5;
 
-    if(isDefined(level.onspawnplayerunified) && getdvarint(#"_id_CF6EEB8B") == 0)
+    if(isDefined(level.onspawnplayerunified) && getdvarint(#"_id_CF6EEB8B") == 0) {
       maps\mp\gametypes_zm\_spawning::onspawnplayer_unified(1);
-    else
+    }
+    else {
       self[[level.onspawnplayer]](1);
+    }
   }
 }
 
 giveloadoutlevelspecific(team, class) {
   pixbeginevent("giveLoadoutLevelSpecific");
 
-  if(isDefined(level.givecustomcharacters))
+  if(isDefined(level.givecustomcharacters)) {
     self[[level.givecustomcharacters]]();
+  }
 
-  if(isDefined(level.givecustomloadout))
+  if(isDefined(level.givecustomloadout)) {
     self[[level.givecustomloadout]]();
+  }
 
   pixendevent();
 }
@@ -151,8 +170,9 @@ spawnplayer() {
     self thread maps\mp\gametypes_zm\_globallogic_audio::sndstartmusicsystem();
   }
 
-  if(level.teambased)
+  if(level.teambased) {
     self.sessionteam = self.team;
+  }
   else {
     self.sessionteam = "none";
     self.ffateam = self.team;
@@ -167,10 +187,12 @@ spawnplayer() {
   self.statusicon = "";
   self.damagedplayers = [];
 
-  if(getdvarint(#"scr_csmode") > 0)
+  if(getdvarint(#"scr_csmode") > 0) {
     self.maxhealth = getdvarint(#"scr_csmode");
-  else
+  }
+  else {
     self.maxhealth = level.playermaxhealth;
+  }
 
   self.health = self.maxhealth;
   self.friendlydamage = undefined;
@@ -201,21 +223,25 @@ spawnplayer() {
   self.diedonvehicle = undefined;
 
   if(!self.wasaliveatmatchstart) {
-    if(level.ingraceperiod || maps\mp\gametypes_zm\_globallogic_utils::gettimepassed() < 20000)
+    if(level.ingraceperiod || maps\mp\gametypes_zm\_globallogic_utils::gettimepassed() < 20000) {
       self.wasaliveatmatchstart = 1;
+    }
   }
 
   self setdepthoffield(0, 0, 512, 512, 4, 0);
   self resetfov();
   pixbeginevent("onSpawnPlayer");
 
-  if(isDefined(level.onspawnplayerunified) && getdvarint(#"_id_CF6EEB8B") == 0)
+  if(isDefined(level.onspawnplayerunified) && getdvarint(#"_id_CF6EEB8B") == 0) {
     self[[level.onspawnplayerunified]]();
-  else
+  }
+  else {
     self[[level.onspawnplayer]](0);
+  }
 
-  if(isDefined(level.playerspawnedcb))
+  if(isDefined(level.playerspawnedcb)) {
     self[[level.playerspawnedcb]]();
+  }
 
   pixendevent();
   pixendevent();
@@ -231,42 +257,51 @@ spawnplayer() {
     team = self.pers["team"];
 
     if(isDefined(self.pers["music"].spawn) && self.pers["music"].spawn == 0) {
-      if(level.wagermatch)
+      if(level.wagermatch) {
         music = "SPAWN_WAGER";
-      else
+      }
+      else {
         music = game["music"]["spawn_" + team];
+      }
 
       self thread maps\mp\gametypes_zm\_globallogic_audio::set_music_on_player(music, 0, 0);
       self.pers["music"].spawn = 1;
     }
 
     if(level.splitscreen) {
-      if(isDefined(level.playedstartingmusic))
+      if(isDefined(level.playedstartingmusic)) {
         music = undefined;
-      else
+      }
+      else {
         level.playedstartingmusic = 1;
+      }
     }
 
     if(!isDefined(level.disableprematchmessages) || level.disableprematchmessages == 0) {
       thread maps\mp\gametypes_zm\_hud_message::showinitialfactionpopup(team);
       hintmessage = getobjectivehinttext(self.pers["team"]);
 
-      if(isDefined(hintmessage))
+      if(isDefined(hintmessage)) {
         self thread maps\mp\gametypes_zm\_hud_message::hintmessage(hintmessage);
+      }
 
       if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
         if(!isDefined(level.infinalfight) || !level.infinalfight) {
-          if(level.hardcoremode)
+          if(level.hardcoremode) {
             self maps\mp\gametypes_zm\_globallogic_audio::leaderdialogonplayer("gametype_hardcore");
-          else
+          }
+          else {
             self maps\mp\gametypes_zm\_globallogic_audio::leaderdialogonplayer("gametype");
+          }
         }
       }
 
-      if(team == game["attackers"])
+      if(team == game["attackers"]) {
         self maps\mp\gametypes_zm\_globallogic_audio::leaderdialogonplayer("offense_obj", "introboost");
-      else
+      }
+      else {
         self maps\mp\gametypes_zm\_globallogic_audio::leaderdialogonplayer("defense_obj", "introboost");
+      }
     }
   } else {
     self freeze_player_controls(0);
@@ -282,57 +317,68 @@ spawnplayer() {
       }
 
       if(level.splitscreen) {
-        if(isDefined(level.playedstartingmusic))
+        if(isDefined(level.playedstartingmusic)) {
           music = undefined;
-        else
+        }
+        else {
           level.playedstartingmusic = 1;
+        }
       }
 
       if(!isDefined(level.disableprematchmessages) || level.disableprematchmessages == 0) {
         thread maps\mp\gametypes_zm\_hud_message::showinitialfactionpopup(team);
         hintmessage = getobjectivehinttext(self.pers["team"]);
 
-        if(isDefined(hintmessage))
+        if(isDefined(hintmessage)) {
           self thread maps\mp\gametypes_zm\_hud_message::hintmessage(hintmessage);
+        }
 
         if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
           if(!isDefined(level.infinalfight) || !level.infinalfight) {
-            if(level.hardcoremode)
+            if(level.hardcoremode) {
               self maps\mp\gametypes_zm\_globallogic_audio::leaderdialogonplayer("gametype_hardcore");
-            else
+            }
+            else {
               self maps\mp\gametypes_zm\_globallogic_audio::leaderdialogonplayer("gametype");
+            }
           }
         }
 
-        if(team == game["attackers"])
+        if(team == game["attackers"]) {
           self maps\mp\gametypes_zm\_globallogic_audio::leaderdialogonplayer("offense_obj", "introboost");
-        else
+        }
+        else {
           self maps\mp\gametypes_zm\_globallogic_audio::leaderdialogonplayer("defense_obj", "introboost");
+        }
       }
 
       pixendevent();
     }
   }
 
-  if(getdvar(#"scr_showperksonspawn") == "")
+  if(getdvar(#"scr_showperksonspawn") == "") {
     setdvar("scr_showperksonspawn", "0");
+  }
 
-  if(level.hardcoremode)
+  if(level.hardcoremode) {
     setdvar("scr_showperksonspawn", "0");
+  }
 
   if(!level.splitscreen && getdvarint(#"scr_showperksonspawn") == 1 && game["state"] != "postgame") {
     pixbeginevent("showperksonspawn");
 
-    if(level.perksenabled == 1)
+    if(level.perksenabled == 1) {
       self maps\mp\gametypes_zm\_hud_util::showperks();
+    }
 
     self thread maps\mp\gametypes_zm\_globallogic_ui::hideloadoutaftertime(3.0);
     self thread maps\mp\gametypes_zm\_globallogic_ui::hideloadoutondeath();
     pixendevent();
   }
 
-  if(isDefined(self.pers["momentum"]))
+  if(isDefined(self.pers["momentum"])) {
     self.momentum = self.pers["momentum"];
+  }
 
   pixendevent();
   waittillframeend;
@@ -340,8 +386,9 @@ spawnplayer() {
   self logstring("S " + self.origin[0] + " " + self.origin[1] + " " + self.origin[2]);
   setdvar("scr_selecting_location", "");
 
-  if(getdvarint(#"_id_F8D00F60") > 0)
+  if(getdvarint(#"_id_F8D00F60") > 0) {
     self thread maps\mp\gametypes_zm\_globallogic_score::xpratethread();
+  }
 
   self maps\mp\zombies\_zm_perks::perk_set_max_health_if_jugg("health_reboot", 1, 0);
 
@@ -365,8 +412,9 @@ in_spawnspectator(origin, angles) {
   pixmarker("BEGIN: in_spawnSpectator");
   self setspawnvariables();
 
-  if(self.pers["team"] == "spectator")
+  if(self.pers["team"] == "spectator") {
     self clearlowermessage();
+  }
 
   self.sessionstate = "spectator";
   self.spectatorclient = -1;
@@ -375,16 +423,19 @@ in_spawnspectator(origin, angles) {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
 
-  if(self.pers["team"] == "spectator")
+  if(self.pers["team"] == "spectator") {
     self.statusicon = "";
-  else
+  }
+  else {
     self.statusicon = "hud_status_dead";
+  }
 
   maps\mp\gametypes_zm\_spectating::setspectatepermissionsformachine();
   [[level.onspawnspectator]](origin, angles);
 
-  if(level.teambased && !level.splitscreen)
+  if(level.teambased && !level.splitscreen) {
     self thread spectatorthirdpersonness();
+  }
 
   level thread maps\mp\gametypes_zm\_globallogic::updateteamstatus();
   pixmarker("END: in_spawnSpectator");
@@ -403,8 +454,9 @@ forcespawn(time) {
   self endon("disconnect");
   self endon("spawned");
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 60;
+  }
 
   wait(time);
 
@@ -439,13 +491,15 @@ kickifidontspawninternal() {
   self endon("spawned");
   waittime = 90;
 
-  if(getdvar(#"_id_4257CF5C") != "")
+  if(getdvar(#"_id_4257CF5C") != "") {
     waittime = getdvarfloat(#"_id_4257CF5C");
+  }
 
   mintime = 45;
 
-  if(getdvar(#"_id_0DF057E0") != "")
+  if(getdvar(#"_id_0DF057E0") != "") {
     mintime = getdvarfloat(#"_id_0DF057E0");
+  }
 
   starttime = gettime();
   kickwait(waittime);
@@ -499,12 +553,15 @@ spawnintermission(usedefaultcallback) {
 
   if(level.rankedmatch && waslastround()) {
     if(self.postgamemilestones || self.postgamecontracts || self.postgamepromotion) {
-      if(self.postgamepromotion)
+      if(self.postgamepromotion) {
         self playlocalsound("mus_level_up");
-      else if(self.postgamecontracts)
+      }
+      else if(self.postgamecontracts) {
         self playlocalsound("mus_challenge_complete");
-      else if(self.postgamemilestones)
+      }
+      else if(self.postgamemilestones) {
         self playlocalsound("mus_contract_complete");
+      }
 
       self closeingamemenu();
       self openmenu(game["menu_endgameupdate"]);
@@ -527,10 +584,12 @@ spawnintermission(usedefaultcallback) {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
 
-  if(isDefined(usedefaultcallback) && usedefaultcallback)
+  if(isDefined(usedefaultcallback) && usedefaultcallback) {
     maps\mp\gametypes_zm\_globallogic_defaults::default_onspawnintermission();
-  else
+  }
+  else {
     [[level.onspawnintermission]]();
+  }
 
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 }
@@ -562,8 +621,9 @@ spawnqueuedclient(dead_player_team, killer) {
   maps\mp\gametypes_zm\_globallogic_utils::waittillslowprocessallowed();
   spawn_team = undefined;
 
-  if(isDefined(killer) && isDefined(killer.team) && isDefined(level.teams[killer.team]))
+  if(isDefined(killer) && isDefined(killer.team) && isDefined(level.teams[killer.team])) {
     spawn_team = killer.team;
+  }
 
   if(isDefined(spawn_team)) {
     spawnqueuedclientonteam(spawn_team);
@@ -579,32 +639,39 @@ spawnqueuedclient(dead_player_team, killer) {
 }
 
 allteamsnearscorelimit() {
-  if(!level.teambased)
+  if(!level.teambased) {
     return false;
+  }
 
-  if(level.scorelimit <= 1)
+  if(level.scorelimit <= 1) {
     return false;
+  }
 
   foreach(team in level.teams) {
-    if(!(game["teamScores"][team] >= level.scorelimit - 1))
+    if(!(game["teamScores"][team] >= level.scorelimit - 1)) {
       return false;
+    }
   }
 
   return true;
 }
 
 shouldshowrespawnmessage() {
-  if(waslastround())
+  if(waslastround()) {
     return false;
+  }
 
-  if(isoneround())
+  if(isoneround()) {
     return false;
+  }
 
-  if(isDefined(level.livesdonotreset) && level.livesdonotreset)
+  if(isDefined(level.livesdonotreset) && level.livesdonotreset) {
     return false;
+  }
 
-  if(allteamsnearscorelimit())
+  if(allteamsnearscorelimit()) {
     return false;
+  }
 
   return true;
 }
@@ -615,8 +682,9 @@ default_spawnmessage() {
 }
 
 showspawnmessage() {
-  if(shouldshowrespawnmessage())
+  if(shouldshowrespawnmessage()) {
     self thread[[level.spawnmessage]]();
+  }
 }
 
 spawnclient(timealreadypassed) {
@@ -642,8 +710,9 @@ spawnclient(timealreadypassed) {
   self.allowqueuespawn = undefined;
   self waitandspawnclient(timealreadypassed);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.waitingtospawn = 0;
+  }
 
   pixendevent();
 }
@@ -653,8 +722,9 @@ waitandspawnclient(timealreadypassed) {
   self endon("end_respawn");
   level endon("game_ended");
 
-  if(!isDefined(timealreadypassed))
+  if(!isDefined(timealreadypassed)) {
     timealreadypassed = 0;
+  }
 
   spawnedasspectator = 0;
 
@@ -695,12 +765,15 @@ waitandspawnclient(timealreadypassed) {
   }
 
   if(timeuntilspawn > 0) {
-    if(level.playerqueuedrespawn)
+    if(level.playerqueuedrespawn) {
       setlowermessage(game["strings"]["you_will_spawn"], timeuntilspawn);
-    else if(self issplitscreen())
+    }
+    else if(self issplitscreen()) {
       setlowermessage(game["strings"]["waiting_to_spawn_ss"], timeuntilspawn, 1);
-    else
+    }
+    else {
       setlowermessage(game["strings"]["waiting_to_spawn"], timeuntilspawn);
+    }
 
     if(!spawnedasspectator) {
       spawnorigin = self.origin + vectorscale((0, 0, 1), 60.0);
@@ -730,8 +803,9 @@ waitandspawnclient(timealreadypassed) {
   if(!level.playerforcerespawn && self.hasspawned && !wavebased && !self.wantsafespawn && !level.playerqueuedrespawn) {
     setlowermessage(game["strings"]["press_to_spawn"]);
 
-    if(!spawnedasspectator)
+    if(!spawnedasspectator) {
       self thread respawn_asspectator(self.origin + vectorscale((0, 0, 1), 60.0), self.angles);
+    }
 
     spawnedasspectator = 1;
     self waitrespawnorsafespawnbutton();

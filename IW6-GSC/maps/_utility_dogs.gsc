@@ -24,16 +24,19 @@ init_dog_pc(var_0) {
   }
   precachemodel("fullbody_dog_" + var_0 + "_fur");
 
-  if(!isDefined(level.furfx))
+  if(!isDefined(level.furfx)) {
     level.furfx = [];
+  }
 
-  if(!isDefined(level.furfx["dog"]))
+  if(!isDefined(level.furfx["dog"])) {
     level.furfx["dog"] = [];
+  }
 
   var_1 = get_dog_model_letter_type(var_0);
 
-  if(!isDefined(level.furfx["dog"][var_1]))
+  if(!isDefined(level.furfx["dog"][var_1])) {
     level.furfx["dog"][var_1] = loadfx("vfx/apex/nv_dog_" + var_1);
+  }
 }
 
 init_wolf_pc() {
@@ -44,14 +47,17 @@ init_wolf_pc() {
   }
   precachemodel("fullbody_wolf_a_fur");
 
-  if(!isDefined(level.furfx))
+  if(!isDefined(level.furfx)) {
     level.furfx = [];
+  }
 
-  if(!isDefined(level.furfx["wolf"]))
+  if(!isDefined(level.furfx["wolf"])) {
     level.furfx["wolf"] = [];
+  }
 
-  if(!isDefined(level.furfx["wolf"]["a"]))
+  if(!isDefined(level.furfx["wolf"]["a"])) {
     level.furfx["wolf"]["a"] = loadfx("vfx/apex/nv_wolf_a");
+  }
 }
 
 kill_dog_fur_effect() {
@@ -65,8 +71,9 @@ kill_dog_fur_effect() {
 }
 
 kill_dog_fur_effect_and_delete() {
-  if(kill_dog_fur_effect())
+  if(kill_dog_fur_effect()) {
     common_scripts\utility::waitframe();
+  }
 
   self delete();
 }
@@ -75,8 +82,9 @@ get_dog_model_letter_type(var_0) {
   var_1 = strtok(var_0, "_");
 
   foreach(var_3 in var_1) {
-    if(var_3 == "a" || var_3 == "b" || var_3 == "c")
+    if(var_3 == "a" || var_3 == "b" || var_3 == "c") {
       return var_3;
+    }
   }
 
   return undefined;
@@ -157,8 +165,9 @@ enable_dog_sniff() {
 }
 
 disable_dog_sniff() {
-  if(isDefined(self.old_moveplaybackrate))
+  if(isDefined(self.old_moveplaybackrate)) {
     self.moveplaybackrate = self.old_moveplaybackrate;
+  }
 
   self.movementtype = "run";
   maps\_utility::enable_arrivals();
@@ -179,8 +188,9 @@ enable_dog_sneak() {
 }
 
 disable_dog_sneak() {
-  if(isDefined(self.old_moveplaybackrate))
+  if(isDefined(self.old_moveplaybackrate)) {
     self.moveplaybackrate = self.old_moveplaybackrate;
+  }
 
   self.run_overridesound = undefined;
   self.customidlesound = undefined;
@@ -193,16 +203,18 @@ disable_dog_sneak() {
 }
 
 dog_lower_camera(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.75;
+  }
 
   self setanim( % camera, 1, var_0, 1);
   self setanimknob( % iw6_dog_camera_down_add, 1, var_0, 1);
 }
 
 dog_raise_camera(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.75;
+  }
 
   self setanim( % camera, 1, var_0, 1);
   self setanimknob( % iw6_dog_camera_up_add, 1, var_0, 1);
@@ -217,11 +229,13 @@ dyn_sniff_enable(var_0, var_1) {
   }
   self.dyn_sniff = 1;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 400;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 200;
+  }
 
   self.old_moveplaybackrate = self.moveplaybackrate;
 
@@ -233,8 +247,9 @@ dyn_sniff_enable(var_0, var_1) {
       enable_dog_sniff();
       wait 4;
 
-      while(player_is_behind_me() && distance(self.origin, level.player.origin) > var_1)
+      while(player_is_behind_me() && distance(self.origin, level.player.origin) > var_1) {
         wait 0.1;
+      }
 
       disable_dog_sniff();
       wait 6;
@@ -261,8 +276,9 @@ player_is_behind_me() {
 }
 
 dog_bark(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "anml_dog_bark_attention_npc";
+  }
 
   self setanimrestart( % iw6_dog_attackidle_bark_add, 1, 0.1, 1);
   maps\_utility::play_sound_on_entity(var_0);
@@ -274,8 +290,9 @@ dog_pant_think() {
   self endon("death");
 
   for(;;) {
-    if(!isDefined(self.run_overridesound) && !isDefined(self.customidlesound) && self.script != "dog_combat")
+    if(!isDefined(self.run_overridesound) && !isDefined(self.customidlesound) && self.script != "dog_combat") {
       dog_pant();
+    }
 
     wait(randomfloatrange(15, 25));
   }
@@ -289,18 +306,23 @@ dog_pant(var_0) {
   var_2 = undefined;
 
   if(self.script == "dog_stop") {
-    if(var_1)
+    if(var_1) {
       var_2 = "anml_dog_pants_med_plr";
-    else
+    }
+    else {
       var_2 = "anml_dog_pants_med";
+    }
   } else {
-    if(self.movemode == "walk" || isDefined(self.movementtype) && (self.movementtype == "walk_fast" || self.movementtype == "sniff" || self.movementtype == "sneak"))
+    if(self.movemode == "walk" || isDefined(self.movementtype) && (self.movementtype == "walk_fast" || self.movementtype == "sniff" || self.movementtype == "sneak")) {
       var_2 = "anml_dog_pants_med";
-    else
+    }
+    else {
       var_2 = "anml_dog_pants_fast";
+    }
 
-    if(var_1)
+    if(var_1) {
       var_2 = var_2 + "_plr";
+    }
   }
 
   maps\_utility::play_sound_on_entity(var_2);
@@ -309,10 +331,12 @@ dog_pant(var_0) {
 enable_dog_walk(var_0) {
   self.old_movementtype = self.movementtype;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.movementtype = "walk_fast";
-  else
+  }
+  else {
     self.movementtype = "walk";
+  }
 }
 
 disable_dog_walk() {

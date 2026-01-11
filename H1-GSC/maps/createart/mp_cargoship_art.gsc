@@ -7,10 +7,12 @@
 main() {
   level.tweakfile = 1;
 
-  if(isusinghdr())
+  if(isusinghdr()) {
     maps\createart\mp_cargoship_fog_hdr::main();
-  else
+  }
+  else {
     maps\createart\mp_cargoship_fog::main();
+  }
 
   visionsetnaked("mp_cargoship", 0);
 }

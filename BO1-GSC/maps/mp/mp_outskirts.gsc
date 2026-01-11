@@ -173,12 +173,15 @@ door_crush_prone_players() {
   trace = PlayerbulletTrace(start, end, undefined);
   if(isDefined(trace["entity"]) && IsPlayer(trace["entity"]) && IsAlive(trace["entity"])) {
     player = trace["entity"];
-    if(player.sessionstate != "playing")
+    if(player.sessionstate != "playing") {
       return;
-    if(player.team == "spectator")
+    }
+    if(player.team == "spectator") {
       return;
-    if(player GetStance() != "prone")
+    }
+    if(player GetStance() != "prone") {
       return;
+    }
     self.kill_trigger notify("trigger", player);
   }
 }
@@ -344,4 +347,3 @@ trigger_prox_think() {
     }
   }
 }
-

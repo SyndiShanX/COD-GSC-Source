@@ -114,8 +114,9 @@ allies() {
   thread dialogue_ally_pulling_back();
   common_scripts\utility::flag_wait("flag_refinery_end");
 
-  while(level._enemies["refinery_main"].size > 0)
+  while(level._enemies["refinery_main"].size > 0) {
     wait 0.05;
+  }
 
   common_scripts\utility::array_thread(level._allies, maps\_utility::enable_pain);
 }
@@ -167,14 +168,16 @@ enemies() {
   common_scripts\utility::flag_wait("flag_refinery_end");
   var_0 = maps\_utility::remove_dead_from_array(level._enemies["refinery_main"]);
 
-  if(var_0.size > 3)
+  if(var_0.size > 3) {
     maps\_utility::array_spawn_targetname("enemies_refinery_plan_b");
+  }
 
   maps\_utility::trigger_wait_targetname("trig_refinery_cleanup");
 
   if(isDefined(level._refinery.foreman) && isalive(level._refinery.foreman)) {
-    if(isDefined(level._refinery.foreman.magic_bullet_shield) && level._refinery.foreman.magic_bullet_shield)
+    if(isDefined(level._refinery.foreman.magic_bullet_shield) && level._refinery.foreman.magic_bullet_shield) {
       level._refinery.foreman maps\_utility::stop_magic_bullet_shield();
+    }
   }
 
   maps\_utility::kill_deathflag("deathflag_refinery", 3);
@@ -190,8 +193,9 @@ enemies_setup_explosion_scene_guys() {
   var_1 maps\_utility::add_spawn_function(::spawnfunc_enemy_scene_anim_controller);
   var_2 = ["refinery_guy1", "refinery_guy2", "refinery_guy3", "refinery_guy5", "refinery_guy6"];
 
-  for(var_3 = 0; var_3 < var_0.size; var_3++)
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_0[var_3] maps\_utility::add_spawn_function(::spawnfunc_enemy_scene_anim, "refinery_initial", var_2[var_3]);
+  }
 }
 
 spawnfunc_enemy_scene_anim(var_0, var_1) {
@@ -202,19 +206,22 @@ spawnfunc_enemy_scene_anim(var_0, var_1) {
   self.doing_reaction_anim = 0;
   self.v.interrupt_all_notifies = 1;
 
-  if(issubstr(self.animname, "1") || issubstr(self.animname, "2"))
+  if(issubstr(self.animname, "1") || issubstr(self.animname, "2")) {
     self forcedeathfall(1);
+  }
 
-  if(issubstr(self.animname, "4"))
+  if(issubstr(self.animname, "4")) {
     thread spawnfunc_enemy_scene_solo_auto_kill();
+  }
 
   if(issubstr(self.animname, "5")) {
     self.maxfaceenemydist = 384;
     thread spawnfunc_enemy_scene_solo_crate_guy();
   }
 
-  if(issubstr(self.animname, "6"))
+  if(issubstr(self.animname, "6")) {
     thread spawnfunc_enemy_scene_solo_foreman_smash_end();
+  }
 
   thread spawnfunc_enemy_scene_solo();
 }
@@ -366,8 +373,9 @@ encounter_start() {
   common_scripts\utility::array_call(level._enemies["refinery_initial"], ::setthreatbiasgroup, "axis");
   level notify("notify_enemy_retreat_logic_start");
 
-  if(!common_scripts\utility::flag("flag_refinery_player_started_encounter"))
+  if(!common_scripts\utility::flag("flag_refinery_player_started_encounter")) {
     wait 3;
+  }
 
   level.player.ignoreme = 0;
 }
@@ -379,8 +387,9 @@ player_interrupt_watcher() {
 }
 
 enemies_flood(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 maps\_utility::activate_trigger();
+  }
 }
 
 enemies_left_side() {
@@ -391,8 +400,9 @@ enemies_left_side() {
 enemies_right_door() {
   level common_scripts\utility::waittill_either("flag_refinery_engagement_start", "flag_refinery_player_started_encounter");
 
-  if(!common_scripts\utility::flag("flag_refinery_player_started_encounter"))
+  if(!common_scripts\utility::flag("flag_refinery_player_started_encounter")) {
     wait 3;
+  }
 
   var_0 = maps\black_ice_util::setup_door("model_refinery_right_door");
   var_0 thread maps\black_ice_util::open_door(90, 0.6, 0.05);
@@ -407,8 +417,9 @@ event_derrick_explode() {
   common_scripts\utility::flag_wait("flag_refinery_explosion");
   level waittill("notify_refinery_explosion_start");
 
-  if(isDefined(level._pipe_deck.boats_struct))
+  if(isDefined(level._pipe_deck.boats_struct)) {
     thread event_derrick_explode_stack_setup();
+  }
 
   thread maps\black_ice_fx::turn_off_refinery_buildup_fx_01();
   common_scripts\utility::flag_set("flag_fx_screen_bokehdots_rain");
@@ -426,8 +437,9 @@ event_derrick_explode_stack_setup() {
     var_5 = getent("refinery_stack_anim_node_" + var_3, "script_noteworthy");
     var_6 = var_5 common_scripts\utility::spawn_tag_origin();
 
-    foreach(var_8 in var_4)
+    foreach(var_8 in var_4) {
     var_8 linkto(var_6);
+    }
 
     thread event_derrick_explode_stack_motion(var_6, var_1[var_3], var_2[var_3]);
   }
@@ -468,17 +480,20 @@ event_derrick_explode_debris_bomb() {
   var_0 = getEntArray("model_refinery_container", "targetname");
   var_1 = getEntArray("model_refinery_container_destroyed", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 hide();
+  }
 
   var_5 = getent("origin_refinery_debris_explosion", "targetname");
   level waittill("notify_traveling_block_impact");
 
-  foreach(var_7 in var_0)
+  foreach(var_7 in var_0) {
   var_7 hide();
+  }
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 show();
+  }
 
   setsaveddvar("phys_gravity_ragdoll", -400);
 
@@ -537,8 +552,9 @@ event_elevator_door_open() {
 }
 
 util_derrick_destroy_quick() {
-  if(isDefined(level.derrick_model))
+  if(isDefined(level.derrick_model)) {
     level.derrick_model delete();
+  }
 
   util_show_destroyed_derrick();
 }
@@ -546,15 +562,17 @@ util_derrick_destroy_quick() {
 util_show_destroyed_derrick() {
   level notify("notify_remove_derrick_model");
 
-  if(isDefined(level._refinery.derrick_model))
+  if(isDefined(level._refinery.derrick_model)) {
     level._refinery.derrick_model delete();
+  }
 
   var_0 = level._refinery.destroyed_derrick_models;
   maps\_utility::stop_exploder("oil_geyser_01");
   common_scripts\utility::exploder("oil_geyser_02");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 show();
+  }
 }
 
 event_derrick_explode_setup() {
@@ -623,8 +641,9 @@ event_derrick_explode_debris_oiltank(var_0) {
     var_2 = common_scripts\utility::array_add(var_2, var_5);
   }
 
-  foreach(var_8 in level._refinery.scripted)
+  foreach(var_8 in level._refinery.scripted) {
   var_8 show();
+  }
 
   level waittill("notify_refinery_explosion_start");
   var_10 = common_scripts\utility::array_combine(level._refinery.scripted, var_2);
@@ -634,14 +653,16 @@ event_derrick_explode_debris_oiltank(var_0) {
   level waittill("notify_notetrack_debris_end");
 
   foreach(var_8 in level._refinery.scripted) {
-    foreach(var_13 in var_8._col)
+    foreach(var_13 in var_8._col) {
     var_13 disconnectpaths();
+    }
   }
 
   level waittill("notify_remove_derrick_model");
 
-  foreach(var_5 in var_2)
+  foreach(var_5 in var_2) {
   var_5 delete();
+  }
 }
 
 event_derrick_explode_catwalk_break(var_0) {
@@ -683,8 +704,9 @@ event_derrick_explode_debris_main(var_0) {
   thread maps\black_ice_fx::refinery_travelling_block_impact_fx();
   var_15 = [var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14];
 
-  foreach(var_17 in var_15)
+  foreach(var_17 in var_15) {
   var_17 thread event_derrick_explode_debris_main_fx_runner(var_17, "refinery_debris_trail_small", "refinery_debris_smolder_small");
+  }
 
   var_0 thread maps\_anim::anim_single_solo(var_1, "derrick_explosion");
   var_0 thread maps\_anim::anim_single_solo(var_2, "derrick_explosion");
@@ -755,8 +777,9 @@ event_derrick_explode_debris_setup_collision(var_0) {
       }
     }
   } else {
-    foreach(var_2 in self._col)
+    foreach(var_2 in self._col) {
     var_2 linkto(self);
+    }
   }
 }
 
@@ -764,8 +787,9 @@ event_derrick_explode_debris_show_and_damage() {
   level waittill("notify_derrick_large_explosion");
 
   foreach(var_1 in level._refinery.scripted) {
-    foreach(var_3 in var_1._col)
+    foreach(var_3 in var_1._col) {
     var_3 thread event_derrick_explode_debris_damage();
+    }
   }
 }
 
@@ -783,10 +807,12 @@ event_derrick_explode_debris_damage() {
     foreach(var_2 in var_0) {
       if(self istouching(var_2)) {
         if(common_scripts\utility::flag("flag_refinery_player_started_encounter")) {
-          if(var_2.v.active)
+          if(var_2.v.active) {
             var_2 maps\black_ice_vignette::vignette_kill();
-          else
+          }
+          else {
             var_2 kill();
+          }
 
           continue;
         }
@@ -839,8 +865,9 @@ util_debris_remove() {
   if(isDefined(level._refinery.scripted)) {
     foreach(var_1 in level._refinery.scripted) {
       if(isDefined(var_1)) {
-        foreach(var_3 in var_1._col)
+        foreach(var_3 in var_1._col) {
         var_3 delete();
+        }
 
         var_1 delete();
       }
@@ -863,10 +890,12 @@ util_player_rubber_banding_solo(var_0) {
   for(;;) {
     var_4 = distance(self.origin, var_0.origin);
 
-    if(var_4 > var_3)
+    if(var_4 > var_3) {
       var_4 = var_3;
-    else if(var_4 < 0)
+    }
+    else if(var_4 < 0) {
       var_4 = 0;
+    }
 
     var_5 = var_4 / var_3;
     var_6 = var_2 - (var_2 - var_1) * var_5;
@@ -878,8 +907,9 @@ util_player_rubber_banding_solo(var_0) {
 }
 
 trigger_wait_flag_set(var_0, var_1) {
-  if(!common_scripts\utility::flag_exist(var_1))
+  if(!common_scripts\utility::flag_exist(var_1)) {
     common_scripts\utility::flag_init(var_1);
+  }
 
   maps\_utility::trigger_wait_targetname(var_0);
   common_scripts\utility::flag_set(var_1);

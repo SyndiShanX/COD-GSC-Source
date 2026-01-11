@@ -119,10 +119,12 @@ deployables_init() {
   boxConfig.maxUses = 3;
   maps\mp\alien\_deployablebox::init_deployable("deployable_ammo", boxConfig);
 
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     level.randombox_table = "mp/alien/chaos_deployable_randombox.csv";
-  if(!isDefined(level.randombox_table))
+  }
+  if(!isDefined(level.randombox_table)) {
     level.randombox_table = RANDOMBOX_TABLE;
+  }
 
   boxConfig = spawnStruct();
   boxConfig.weaponInfo = "aliendeployable_crate_marker_mp";
@@ -269,8 +271,9 @@ specialammo_init() {
   boxConfig.allowMeleeDamage = false;
   boxConfig.allowGrenadeDamage = false;
   boxConfig.maxUses = 3;
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     boxConfig.maxUses = 1;
+  }
   maps\mp\alien\_deployablebox::init_deployable("deployable_specialammo_in", boxConfig);
 
   boxConfig = spawnStruct();
@@ -299,8 +302,9 @@ specialammo_init() {
   boxConfig.allowMeleeDamage = false;
   boxConfig.allowGrenadeDamage = false;
   boxConfig.maxUses = 3;
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     boxConfig.maxUses = 1;
+  }
 
   maps\mp\alien\_deployablebox::init_deployable("deployable_specialammo_explo", boxConfig);
 
@@ -330,8 +334,9 @@ specialammo_init() {
   boxConfig.allowMeleeDamage = false;
   boxConfig.allowGrenadeDamage = false;
   boxConfig.maxUses = 3;
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     boxConfig.maxUses = 1;
+  }
 
   maps\mp\alien\_deployablebox::init_deployable("deployable_specialammo", boxConfig);
 
@@ -361,8 +366,9 @@ specialammo_init() {
   boxConfig.allowMeleeDamage = false;
   boxConfig.allowGrenadeDamage = false;
   boxConfig.maxUses = 3;
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     boxConfig.maxUses = 1;
+  }
 
   maps\mp\alien\_deployablebox::init_deployable("deployable_specialammo_ap", boxConfig);
 
@@ -406,8 +412,9 @@ default_specialammo_onUseDeployable(boxent, track_usage, pillage, ammo_type) {
     maps\mp\alien\_utility::deployable_box_onuse_message(boxent);
   }
 
-  while(self isChangingWeapon())
+  while(self isChangingWeapon()) {
     wait(0.05);
+  }
 
   if(!isDefined(ammo_type)) {
     assert(isDefined(boxent), "No boxent or special ammo type specified");
@@ -420,34 +427,39 @@ default_specialammo_onUseDeployable(boxent, track_usage, pillage, ammo_type) {
 
   switch (ammo_type) {
     case "deployable_specialammo_ap":
-      if(!isDefined(self.special_ammocount_ap))
+      if(!isDefined(self.special_ammocount_ap)) {
         self.special_ammocount_ap = [];
+      }
       special_ammotype = "piercing";
       break;
 
     case "deployable_specialammo_in":
-      if(!isDefined(self.special_ammocount_in))
+      if(!isDefined(self.special_ammocount_in)) {
         self.special_ammocount_in = [];
+      }
 
       special_ammotype = "incendiary";
       break;
 
     case "deployable_specialammo":
-      if(!isDefined(self.special_ammocount))
+      if(!isDefined(self.special_ammocount)) {
         self.special_ammocount = [];
+      }
 
       special_ammotype = "stun";
       break;
 
     case "deployable_specialammo_explo":
-      if(!isDefined(self.special_ammocount_explo))
+      if(!isDefined(self.special_ammocount_explo)) {
         self.special_ammocount_explo = [];
+      }
 
       special_ammotype = "explosive";
       break;
     case "deployable_specialammo_comb":
-      if(!isDefined(self.special_ammocount_comb))
+      if(!isDefined(self.special_ammocount_comb)) {
         self.special_ammocount_comb = [];
+      }
 
       special_ammotype = "combined";
       break;
@@ -542,8 +554,9 @@ default_specialammo_onUseDeployable(boxent, track_usage, pillage, ammo_type) {
         self SetWeaponAmmoStock(weapon, self.special_ammocount_comb[special_ammo_weapon]);
     }
 
-    if(!has_special_ammo && !is_chaos_mode())
+    if(!has_special_ammo && !is_chaos_mode()) {
       self zero_out_specialammo_clip(weapon);
+    }
   }
 
   cur_weapon = self GetCurrentPrimaryWeapon();
@@ -555,32 +568,38 @@ default_specialammo_onUseDeployable(boxent, track_usage, pillage, ammo_type) {
         break;
 
       case "explosive":
-        if(!self _hasPerk("specialty_explosivebullets"))
+        if(!self _hasPerk("specialty_explosivebullets")) {
           self givePerk("specialty_explosivebullets", false);
+        }
 
         self SetClientOmnvar("ui_alien_specialammo", 3);
         break;
 
       case "stun":
-        if(!self _hasPerk("specialty_bulletdamage"))
+        if(!self _hasPerk("specialty_bulletdamage")) {
           self givePerk("specialty_bulletdamage", false);
+        }
 
         self SetClientOmnvar("ui_alien_specialammo", 1);
         break;
 
       case "piercing":
-        if(!self _hasPerk("specialty_armorpiercing"))
+        if(!self _hasPerk("specialty_armorpiercing")) {
           self givePerk("specialty_armorpiercing", false);
+        }
 
         self SetClientOmnvar("ui_alien_specialammo", 4);
         break;
       case "combined":
-        if(!self _hasPerk("specialty_explosivebullets"))
+        if(!self _hasPerk("specialty_explosivebullets")) {
           self givePerk("specialty_explosivebullets", false);
-        if(!self _hasPerk("specialty_bulletdamage"))
+        }
+        if(!self _hasPerk("specialty_bulletdamage")) {
           self givePerk("specialty_bulletdamage", false);
-        if(!self _hasPerk("specialty_armorpiercing"))
+        }
+        if(!self _hasPerk("specialty_armorpiercing")) {
           self givePerk("specialty_armorpiercing", false);
+        }
         self.has_incendiary_ammo = true;
 
         self SetClientOmnvar("ui_alien_specialammo", 5);
@@ -590,18 +609,23 @@ default_specialammo_onUseDeployable(boxent, track_usage, pillage, ammo_type) {
 
   if(is_chaos_mode()) {
     perk = undefined;
-    if(special_ammotype != "incendiary")
+    if(special_ammotype != "incendiary") {
       self.has_incendiary_ammo = undefined;
-    else if(special_ammotype != "stun")
+    }
+    else if(special_ammotype != "stun") {
       perk = "specialty_bulletdamage";
-    else if(special_ammotype != "piercing")
+    }
+    else if(special_ammotype != "piercing") {
       perk = "specialty_armorpiercing";
-    else if(special_ammotype != "explosive")
+    }
+    else if(special_ammotype != "explosive") {
       perk = "specialty_explosivebullets";
+    }
 
     if(isDefined(perk)) {
-      if(self _hasPerk(perk))
+      if(self _hasPerk(perk)) {
         self _unsetPerk(perk);
+      }
     }
   } else {
     self thread special_ammo_weapon_change_monitor(special_ammotype);
@@ -662,8 +686,9 @@ addFullCombinedClipToAllWeapons() {
 }
 
 weapon_can_use_specialammo(weapon_ref) {
-  if(maps\mp\gametypes\_weapons::isBulletWeapon(weapon_ref) && !is_incompatible_weapon(weapon_ref))
+  if(maps\mp\gametypes\_weapons::isBulletWeapon(weapon_ref) && !is_incompatible_weapon(weapon_ref)) {
     return true;
+  }
 
   return false;
 }
@@ -684,19 +709,25 @@ choose_item_inside_randombox(boxent) {
   rank = boxEnt.upgrade_rank;
 
   foreach(item, data in level.randombox_items) {
-    if(rank == 0)
+    if(rank == 0) {
       item_weight = data.level_0_weight;
-    else if(rank == 1)
+    }
+    else if(rank == 1) {
       item_weight = data.level_1_weight;
-    else if(rank == 2)
+    }
+    else if(rank == 2) {
       item_weight = data.level_2_weight;
-    else if(rank == 3)
+    }
+    else if(rank == 3) {
       item_weight = data.level_3_weight;
-    else if(rank == 4)
+    }
+    else if(rank == 4) {
       item_weight = data.level_4_weight;
+    }
 
-    for(j = 0; j < item_weight; j++)
+    for(j = 0; j < item_weight; j++) {
       dice[dice.size] = data;
+    }
   }
 
   random_item = dice[RandomIntRange(0, dice.size)];
@@ -750,14 +781,17 @@ give_soflam_item(boxent) {
 }
 
 give_flare_item(boxent) {
-  if(self hasweapon("alienthrowingknife_mp"))
+  if(self hasweapon("alienthrowingknife_mp")) {
     self TakeWeapon("alienthrowingknife_mp");
+  }
 
-  if(self hasweapon("alientrophy_mp"))
+  if(self hasweapon("alientrophy_mp")) {
     self takeweapon("alientrophy_mp");
+  }
 
-  if(isDefined(level.give_randombox_item_check))
+  if(isDefined(level.give_randombox_item_check)) {
     self[[level.give_randombox_item_check]]("flare");
+  }
 
   self setOffhandSecondaryClass("flash");
   self _giveweapon("alienflare_mp");
@@ -796,14 +830,17 @@ give_feral_item(boxent) {
 }
 
 give_trophy_item(boxent) {
-  if(self hasweapon("alienthrowingknife_mp"))
+  if(self hasweapon("alienthrowingknife_mp")) {
     self TakeWeapon("alienthrowingknife_mp");
+  }
 
-  if(self hasweapon("alienflare_mp"))
+  if(self hasweapon("alienflare_mp")) {
     self takeweapon("alienflare_mp");
+  }
 
-  if(isDefined(level.give_randombox_item_check))
+  if(isDefined(level.give_randombox_item_check)) {
     self[[level.give_randombox_item_check]]("trophy");
+  }
 
   self setOffhandSecondaryClass("flash");
   self giveWeapon("alientrophy_mp", false);
@@ -992,21 +1029,24 @@ custom_unset_adrenaline(death) {
 
   if(self has_perk("perk_medic")) {
     self.moveSpeedScaler = self perk_GetMoveSpeedScalar();
-    if(self has_perk("perk_medic", [2, 3, 4]))
+    if(self has_perk("perk_medic", [2, 3, 4])) {
       self givePerk("specialty_longersprint", false);
+    }
   } else {
     self.moveSpeedScaler = self maps\mp\alien\_prestige::prestige_getMoveSlowScalar();
   }
 
   self maps\mp\gametypes\_weapons::updateMoveSpeedScale();
 
-  if(!is_true(level.easter_egg_lodge_sign_active))
+  if(!is_true(level.easter_egg_lodge_sign_active)) {
     self thread maps\mp\alien\_outline_proto::unset_alien_outline();
+  }
 
   self maps\mp\alien\_utility::restore_client_fog(0);
   self.isFeral = undefined;
-  if(!is_true(level.easter_egg_lodge_sign_active))
+  if(!is_true(level.easter_egg_lodge_sign_active)) {
     self notify("unset_adrenaline");
+  }
 }
 
 onUseDeployable_juicebox(boxEnt) {
@@ -1062,10 +1102,12 @@ custom_juicebox_logic(juicetime, rank, isEasterEgg) {
 
   self givePerk("specialty_fastermelee", false);
 
-  if(rank == 2 || rank == 3 || rank == 4)
+  if(rank == 2 || rank == 3 || rank == 4) {
     self.drillSpeedModifier = 0.75;
-  else
+  }
+  else {
     self.drillSpeedModifier = 1.0;
+  }
 
   self thread unsetJuiceBoxOnDeath();
 
@@ -1106,14 +1148,17 @@ custom_unset_juicebox(death) {
 
   if(self isJuggernaut()) {
     Assert(isDefined(self.juggMoveSpeedScaler));
-    if(isDefined(self.juggMoveSpeedScaler))
+    if(isDefined(self.juggMoveSpeedScaler)) {
       self.moveSpeedScaler = self.juggMoveSpeedScaler;
-    else
+    }
+    else {
       self.moveSpeedScaler = 0.7;
+    }
   }
 
-  if(self has_perk("perk_medic", [2, 3, 4]))
+  if(self has_perk("perk_medic", [2, 3, 4])) {
     self givePerk("specialty_longersprint", false);
+  }
 
   self _unsetPerk("specialty_fastreload");
 
@@ -1213,12 +1258,14 @@ addFullClipToAllWeapons(ammo_scalar) {
         weapon != "iw6_alienminigun4_mp" &&
         WeaponType(weapon) != "riotshield") {
         base_weapon = getRawBaseWeaponName(weapon);
-        if(self player_has_specialized_ammo(base_weapon))
+        if(self player_has_specialized_ammo(base_weapon)) {
           continue;
+        }
         else {
           clip_size = WeaponClipSize(weapon);
-          if(isDefined(ammo_scalar))
+          if(isDefined(ammo_scalar)) {
             clip_size = int(self GetWeaponAmmoClip(weapon) + (clip_size * ammo_scalar));
+          }
 
           if(is_akimbo_weapon(weapon)) {
             left_clip = clip_size;
@@ -1382,8 +1429,9 @@ fillLaunchers(boxent, extra_ammo) {
             curStock = self GetWeaponAmmoStock(weaponName);
             newStock = curStock + extra_ammo;
             maxAmmo = WeaponMaxAmmo(weaponName);
-            if(newStock > maxAmmo)
+            if(newStock > maxAmmo) {
               newStock = maxAmmo;
+            }
             self SetWeaponAmmoStock(weaponName, newStock);
           }
         }

@@ -2129,4 +2129,3 @@ function_e4b04738(var_5630d868, e_player, str_hint_text, var_2597a9f0) {
   self function_2ae8eabe(var_5630d868, var_5630d868);
   self notify(var_2597a9f0);
 }
-

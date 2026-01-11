@@ -106,10 +106,12 @@ markerActivate(lifeId, boxType, usedCallback) {
 
     grandParent = data.linkParent GetLinkedParent();
 
-    if(isDefined(grandParent))
+    if(isDefined(grandParent)) {
       data.linkParent = grandParent;
-    else
+    }
+    else {
       data.linkParent = undefined;
+    }
   }
 
   data.deathOverrideCallback = ::override_box_moving_platform_death;
@@ -131,12 +133,15 @@ markerActivate(lifeId, boxType, usedCallback) {
 }
 
 DeployableExclusion(parentModel) {
-  if(parentModel == "weapon_alien_laser_drill")
+  if(parentModel == "weapon_alien_laser_drill") {
     return true;
-  else if(IsSubStr(parentModel, "crafting"))
+  }
+  else if(IsSubStr(parentModel, "crafting")) {
     return true;
-  else if(IsSubStr(parentModel, "scorpion_body"))
+  }
+  else if(IsSubStr(parentModel, "scorpion_body")) {
     return true;
+  }
 
   return false;
 }
@@ -145,8 +150,9 @@ isHoldingDeployableBox() {
   curWeap = self GetCurrentWeapon();
   if(isDefined(curWeap)) {
     foreach(deplBoxWeap in level.boxSettings) {
-      if(curWeap == deplBoxWeap.weaponInfo)
+      if(curWeap == deplBoxWeap.weaponInfo) {
         return true;
+      }
     }
   }
 
@@ -158,8 +164,9 @@ get_box_icon(resourceType, dpadName, upgrade_rank) {
 }
 
 get_resource_type(dpadName) {
-  if(!isDefined(dpadName))
+  if(!isDefined(dpadName)) {
     return undefined;
+  }
 
   foreach(resource_type_name, resource_type in level.alien_combat_resources) {
     if(isDefined(resource_type[dpadName])) {
@@ -229,16 +236,18 @@ box_setActive(skipOwnerUse) {
   Objective_Position(curObjID, self.origin);
   Objective_State(curObjID, "active");
 
-  if(isDefined(boxConfig.shaderName))
+  if(isDefined(boxConfig.shaderName)) {
     Objective_Icon(curObjID, boxConfig.shaderName);
+  }
 
   self.objIdFriendly = curObjID;
 
   if((!isDefined(skipOwnerUse) || !skipOwnerUse) && isDefined(boxConfig.onuseCallback) &&
     (!isDefined(boxconfig.canUseCallback) || (self.owner[[boxConfig.canUseCallback]]()))
   ) {
-    if(isReallyAlive(self.owner))
+    if(isReallyAlive(self.owner)) {
       self.owner[[boxConfig.onUseCallback]](self);
+    }
   }
 
   if(level.teamBased) {
@@ -267,8 +276,9 @@ box_setActive(skipOwnerUse) {
 
   self make_entity_sentient_mp(self.team, true);
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner notify("new_deployable_box", self);
+  }
 
   if(level.teamBased) {
     foreach(player in level.participants) {
@@ -280,8 +290,9 @@ box_setActive(skipOwnerUse) {
     }
   }
 
-  if((!isDefined(self.air_dropped) || !self.air_dropped) && !isPlayingSolo())
+  if((!isDefined(self.air_dropped) || !self.air_dropped) && !isPlayingSolo()) {
     level thread teamPlayerCardSplash(boxConfig.splashName, self.owner, self.team);
+  }
 
   self thread box_playerConnected();
   self thread box_agentConnected();
@@ -355,15 +366,17 @@ box_SetIcon(player, streakName, vOffset) {
 }
 
 box_enablePlayerUse(player) {
-  if(IsPlayer(player))
+  if(IsPlayer(player)) {
     self EnablePlayerUse(player);
+  }
 
   self.disabled_use_for[player GetEntityNumber()] = false;
 }
 
 box_disablePlayerUse(player) {
-  if(IsPlayer(player))
+  if(IsPlayer(player)) {
     self DisablePlayerUse(player);
+  }
 
   self.disabled_use_for[player GetEntityNumber()] = true;
 }
@@ -372,8 +385,9 @@ box_setInactive() {
   self makeUnusable();
   self.isUsable = false;
   self maps\mp\_entityheadIcons::setHeadIcon("none", "", (0, 0, 0));
-  if(isDefined(self.objIdFriendly))
+  if(isDefined(self.objIdFriendly)) {
     _objective_delete(self.objIdFriendly);
+  }
 }
 
 box_handleDamage() {
@@ -419,8 +433,9 @@ box_handleDeath() {
 
   if(isDefined(boxConfig.deathDamageMax)) {
     owner = undefined;
-    if(isDefined(self.owner))
+    if(isDefined(self.owner)) {
       owner = self.owner;
+    }
 
     RadiusDamage(self.origin + (0, 0, boxConfig.headIconOffset),
       boxConfig.deathDamageRadius,
@@ -484,8 +499,9 @@ boxThink(player) {
       if(isDefined(boxConfig.onuseCallback)) {
         player[[boxConfig.onUseCallback]](self);
 
-        if(maps\mp\alien\_utility::is_chaos_mode())
+        if(maps\mp\alien\_utility::is_chaos_mode()) {
           maps\mp\alien\_chaos::update_pickup_deployable_box_event();
+        }
       }
 
       if(isDefined(self.owner) && player != self.owner) {
@@ -592,11 +608,13 @@ box_timeOut() {
 }
 
 box_should_leave_immediately() {
-  if((self.boxtype == "deployable_ammo" && self.upgrade_rank == 4) || (self.boxtype == "deployable_specialammo_comb" && self.upgrade_rank == 4))
+  if((self.boxtype == "deployable_ammo" && self.upgrade_rank == 4) || (self.boxtype == "deployable_specialammo_comb" && self.upgrade_rank == 4)) {
     return false;
+  }
 
-  if(maps\mp\alien\_utility::isPlayingSolo() && (!isDefined(self.air_dropped) || !self.air_dropped))
+  if(maps\mp\alien\_utility::isPlayingSolo() && (!isDefined(self.air_dropped) || !self.air_dropped)) {
     return true;
+  }
 
   return false;
 }
@@ -624,8 +642,9 @@ box_ModelTeamUpdater(showForTeam) {
   self hide();
 
   foreach(player in level.players) {
-    if(player.team == showForTeam)
+    if(player.team == showForTeam) {
       self showToPlayer(player);
+    }
   }
 
   for(;;) {
@@ -633,17 +652,20 @@ box_ModelTeamUpdater(showForTeam) {
 
     self hide();
     foreach(player in level.players) {
-      if(player.team == showForTeam)
+      if(player.team == showForTeam) {
         self showToPlayer(player);
+      }
     }
   }
 }
 
 useHoldThink(player, useTime) {
-  if(IsPlayer(player))
+  if(IsPlayer(player)) {
     player playerLinkTo(self);
-  else
+  }
+  else {
     player LinkTo(self);
+  }
   player playerLinkedOffsetEnable();
 
   player.boxParams = spawnStruct();
@@ -659,8 +681,9 @@ useHoldThink(player, useTime) {
 
   player disable_weapon_timeout((useTime + 0.05), "deployable_weapon_management");
 
-  if(IsPlayer(player))
+  if(IsPlayer(player)) {
     player thread personalUseBar(self);
+  }
 
   result = useHoldThinkLoop(player);
   assert(isDefined(result));
@@ -670,8 +693,9 @@ useHoldThink(player, useTime) {
     player unlink();
   }
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return false;
+  }
 
   player.boxParams.inUse = false;
   player.boxParams.curProgress = 0;
@@ -689,8 +713,9 @@ personalUseBar(object) {
   lastRate = -1;
   while(isReallyAlive(self) && isDefined(object) && self.boxParams.inUse && object.isUsable && !level.gameEnded) {
     if(lastRate != self.boxParams.useRate) {
-      if(self.boxParams.curProgress > self.boxParams.useTime)
+      if(self.boxParams.curProgress > self.boxParams.useTime) {
         self.boxParams.curProgress = self.boxParams.useTime;
+      }
 
       useBar updateBar(self.boxParams.curProgress / self.boxParams.useTime, (1000 / self.boxParams.useTime) * self.boxParams.useRate);
 
@@ -714,13 +739,16 @@ useHoldThinkLoop(player) {
   while(!level.gameEnded && isDefined(self) && isReallyAlive(player) && player useButtonPressed() && player.boxParams.curProgress < player.boxParams.useTime) {
     player.boxParams.curProgress += (50 * player.boxParams.useRate);
 
-    if(isDefined(player.objectiveScaler))
+    if(isDefined(player.objectiveScaler)) {
       player.boxParams.useRate = 1 * player.objectiveScaler;
-    else
+    }
+    else {
       player.boxParams.useRate = 1;
+    }
 
-    if(player.boxParams.curProgress >= player.boxParams.useTime)
+    if(player.boxParams.curProgress >= player.boxParams.useTime) {
       return (isReallyAlive(player));
+    }
 
     wait 0.05;
   }

@@ -77,10 +77,12 @@ section_hint_string_init() {
 }
 
 odin_struggle_fail_hint() {
-  if(common_scripts\utility::flag("saved_ally") || common_scripts\utility::flag("switched_sticks"))
+  if(common_scripts\utility::flag("saved_ally") || common_scripts\utility::flag("switched_sticks")) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 ally_main() {
@@ -123,11 +125,13 @@ ally_dialogue() {
   common_scripts\utility::flag_set("invasion_clear");
   maps\_utility::smart_radio_dialogue("odin_cub_atlasmainrepeatthey");
 
-  if(!common_scripts\utility::flag("first_encounter_dialogue"))
+  if(!common_scripts\utility::flag("first_encounter_dialogue")) {
     maps\_utility::smart_radio_dialogue("odin_kyr_weneedtomove");
+  }
 
-  if(!common_scripts\utility::flag("first_encounter_dialogue"))
+  if(!common_scripts\utility::flag("first_encounter_dialogue")) {
     thread maps\_utility::smart_radio_dialogue("odin_red_galleytoodincontrol");
+  }
 
   common_scripts\utility::flag_wait("first_encounter_dialogue");
   maps\_utility::smart_radio_dialogue("odin_kyr_argh");
@@ -148,8 +152,9 @@ ally_dialogue() {
 
 squad_kill(var_0) {
   foreach(var_2 in var_0) {
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       var_2 kill();
+    }
   }
 }
 
@@ -224,19 +229,22 @@ odin_invasion_scene() {
   var_10 notify("stop_infil_idle");
   var_10 notify("stop_infil_extra_idle");
 
-  foreach(var_14 in var_12)
+  foreach(var_14 in var_12) {
   thread victim_anim_and_death(var_10, var_14);
+  }
 
   var_10 maps\_anim::anim_single(var_11, "odin_infiltrate");
 
-  foreach(var_4 in var_0)
+  foreach(var_4 in var_0) {
   var_4 delete();
+  }
 
   common_scripts\utility::flag_wait("player_second_z_turn");
 
   foreach(var_8 in var_6) {
-    if(isalive(var_8))
+    if(isalive(var_8)) {
       var_8 kill();
+    }
   }
 }
 
@@ -293,11 +301,13 @@ ramp_down_push(var_0) {
     var_1 = var_1 - 60;
     var_2 = var_2 - 60;
 
-    if(var_1 < 0)
+    if(var_1 < 0) {
       var_1 = 0;
+    }
 
-    if(var_2 < 0)
+    if(var_2 < 0) {
       var_2 = 0;
+    }
 
     setsaveddvar("player_swimSpeed", (var_1, var_2, 0));
 
@@ -325,8 +335,9 @@ post_invasion_push_back() {
   while(var_2 == 0) {
     var_5 = level.player.origin[1];
 
-    if(var_5 - var_1 >= -32)
+    if(var_5 - var_1 >= -32) {
       var_2 = 1;
+    }
 
     wait 0.05;
   }
@@ -335,11 +346,13 @@ post_invasion_push_back() {
     var_4 = var_4 - 50;
     var_3 = var_3 - 50;
 
-    if(var_4 < 0)
+    if(var_4 < 0) {
       var_4 = 0;
+    }
 
-    if(var_3 < 0)
+    if(var_3 < 0) {
       var_3 = 0;
+    }
 
     if(var_4 <= 0 && var_3 <= 0) {
       setsaveddvar("player_swimWaterCurrent", (0, 0, 0));
@@ -382,10 +395,12 @@ ally_invasion_scene_approach() {
   var_0 maps\_anim::anim_single_solo(self, "odin_infiltrate_kyra_start");
   thread player_invasion_anims();
 
-  if(common_scripts\utility::flag("invasion_ok_to_anim_player"))
+  if(common_scripts\utility::flag("invasion_ok_to_anim_player")) {
     var_0 maps\_anim::anim_single_solo(self, "odin_infiltrate_kyra");
-  else
+  }
+  else {
     var_0 maps\_anim::anim_single_solo(self, "odin_infiltrate_kyra_no_push");
+  }
 
   var_0 thread maps\_anim::anim_loop_solo(self, "odin_infiltrate_kyra_escape_idle", "stop_loop");
   thread maps\odin_util::finale_anim_loop_killer(var_0, "stop_loop");
@@ -601,8 +616,9 @@ struggle_logic(var_0, var_1, var_2) {
     if((var_21[1] > 0.15 || var_21[1] < -0.15) && var_20 == 1) {
       var_20 = 0;
 
-      if(level.sfx_plr_grapple_playing == 0)
+      if(level.sfx_plr_grapple_playing == 0) {
         level.player thread maps\odin_audio::sfx_ally_plr_grapple_ss();
+      }
 
       level.player thread maps\odin_audio::sfx_ally_plr_grapple_loop();
     } else if(var_21[1] < 0.15 && var_21[1] > -0.15) {
@@ -613,14 +629,17 @@ struggle_logic(var_0, var_1, var_2) {
     if(var_18 == 1) {
       var_21 = var_21 * -1;
 
-      if(var_21[1] >= 0.15 || var_21[1] <= -0.15)
+      if(var_21[1] >= 0.15 || var_21[1] <= -0.15) {
         var_19 = var_21;
-      else
+      }
+      else {
         var_21 = var_19;
+      }
     }
 
-    if(level.struggle_anim_time <= 0.2 || level.struggle_anim_time >= 0.7)
+    if(level.struggle_anim_time <= 0.2 || level.struggle_anim_time >= 0.7) {
       var_8 = 2.6;
+    }
 
     if(level.struggle_anim_time > 0.2 && level.struggle_anim_time < 0.398 && var_21[1] > 0.15) {
       var_14 = 1;
@@ -637,46 +656,55 @@ struggle_logic(var_0, var_1, var_2) {
     }
 
     if(level.struggle_anim_time > 0.4 && level.struggle_anim_time < 0.55 && var_14 == 1) {
-      if(maps\_utility::getdifficulty() == "easy" || maps\_utility::getdifficulty() == "medium")
+      if(maps\_utility::getdifficulty() == "easy" || maps\_utility::getdifficulty() == "medium") {
         var_8 = 1 - var_16;
-      else
+      }
+      else {
         var_8 = 3 - var_16;
+      }
 
       level.player playrumbleonentity("heavy_1s");
       common_scripts\utility::flag_set("struggle_grunt");
     }
 
     if(level.struggle_anim_time > 0.4 && level.struggle_anim_time < 0.55 && var_15 == 1) {
-      if(maps\_utility::getdifficulty() == "easy" || maps\_utility::getdifficulty() == "medium")
+      if(maps\_utility::getdifficulty() == "easy" || maps\_utility::getdifficulty() == "medium") {
         var_8 = 1 - var_16;
-      else
+      }
+      else {
         var_8 = 3 - var_16;
+      }
 
       level.player playrumbleonentity("heavy_1s");
     }
 
     if(level.struggle_anim_time > 0.4 && level.struggle_anim_time < 0.55) {
-      if(level.struggle_anim_time > 0.47)
+      if(level.struggle_anim_time > 0.47) {
         level.struggle_anim_time = level.struggle_anim_time + (0.3 - var_16 * 0.1);
-      else
+      }
+      else {
         level.struggle_anim_time = level.struggle_anim_time - (0.3 - var_16 * 0.1);
+      }
 
       if(var_17 == 0) {
         var_17 = 1;
 
-        if(var_16 <= 0.7)
+        if(var_16 <= 0.7) {
           var_16 = var_16 + 0.3;
+        }
       }
     } else
       var_17 = 0;
 
     var_11 = var_21[1] * var_8;
 
-    if(level.struggle_anim_time <= 0.4 && var_21[1] < 0.15)
+    if(level.struggle_anim_time <= 0.4 && var_21[1] < 0.15) {
       var_11 = -1.8;
+    }
 
-    if(level.struggle_anim_time >= 0.55 && var_21[1] > -0.15)
+    if(level.struggle_anim_time >= 0.55 && var_21[1] > -0.15) {
       var_11 = 1.8;
+    }
 
     var_12 = var_12 + (var_11 - var_12) * var_13;
     thread enemy_struggle_anim(var_1, var_6, var_12);
@@ -837,10 +865,12 @@ space_shotgun_firing(var_0, var_1) {
       thread struggle_shot_grunt();
     }
 
-    if(level.player attackbuttonpressed(1))
+    if(level.player attackbuttonpressed(1)) {
       var_10 = 0;
-    else
+    }
+    else {
       var_10 = 1;
+    }
 
     if(var_7 >= var_8 || level.struggle_bullets <= 0) {
       thread player_failed_struggle(var_0, var_1);
@@ -875,8 +905,9 @@ player_failed_struggle(var_0, var_1) {
   var_3["odin_opfor"] = var_0;
   var_3["player_rig"] = var_1;
 
-  foreach(var_5 in var_3)
+  foreach(var_5 in var_3) {
   var_5 maps\_utility::anim_stopanimscripted();
+  }
 
   wait 0.01;
   thread fire_enemy_gun();
@@ -893,10 +924,12 @@ give_player_struggle_hint() {
   var_0 = getsticksconfig();
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-    if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacy")
+    if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacy") {
       level.player thread maps\_utility::display_hint("ally_struggle_fail_alt");
-    else
+    }
+    else {
       level.player thread maps\_utility::display_hint("ally_struggle_fail");
+    }
   } else
     level.player thread maps\_utility::display_hint("ally_struggle_fail_PC");
 
@@ -914,10 +947,12 @@ check_for_layout_change_mid_hint(var_0) {
       common_scripts\utility::flag_clear("switched_sticks");
 
       if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-        if(var_1 == "thumbstick_southpaw" || var_1 == "thumbstick_legacy")
+        if(var_1 == "thumbstick_southpaw" || var_1 == "thumbstick_legacy") {
           level.player thread maps\_utility::display_hint("ally_struggle_fail_alt");
-        else
+        }
+        else {
           level.player thread maps\_utility::display_hint("ally_struggle_fail");
+        }
       } else
         level.player thread maps\_utility::display_hint("ally_struggle_fail_PC");
     }
@@ -1023,10 +1058,12 @@ push_enemy_down(var_0) {
   var_8 = vectordot(var_6, var_7);
 
   if(var_8 >= 0) {
-    if(var_0.origin[2] <= level.player.origin[2] + 10)
+    if(var_0.origin[2] <= level.player.origin[2] + 10) {
       var_3 rotatepitch(180, 7, 7, 0);
-    else
+    }
+    else {
       var_3 rotatepitch(-180, 4, 4, 0);
+    }
   }
 
   common_scripts\utility::flag_wait("teleport_player_to_z_trans");
@@ -1169,8 +1206,9 @@ z_trans(var_0, var_1, var_2) {
   level.ally setgoalpos(level.ally.origin);
   level.ally maps\_utility::enable_ai_color();
 
-  foreach(var_14 in var_8)
+  foreach(var_14 in var_8) {
   var_14 delete();
+  }
 
   common_scripts\utility::flag_set("ally_clear");
   var_12 = common_scripts\utility::getstruct("ally_kyra_move_node01", "targetname");
@@ -1244,11 +1282,13 @@ z_trans_player(var_0) {
       level.player playerlinktodelta(var_6, "tag_player", 1, var_12, var_12, var_12, var_12, 1);
     }
 
-    if(var_15 >= 0.7)
+    if(var_15 >= 0.7) {
       common_scripts\utility::flag_set("lock_z_hall_close_door");
+    }
 
-    if(var_15 == 1)
+    if(var_15 == 1) {
       var_13 = 1;
+    }
 
     wait 0.01;
   }
@@ -1293,8 +1333,9 @@ post_z_push_cancel() {
   for(;;) {
     var_0 = level.player getnormalizedmovement();
 
-    if(var_0[0] < -0.9)
+    if(var_0[0] < -0.9) {
       setsaveddvar("player_swimWaterCurrent", (0, 0, 0));
+    }
 
     wait 0.1;
   }
@@ -1328,8 +1369,9 @@ ally_cleanup(var_0) {
 
     if(isDefined(level.ally_ent_del)) {
       foreach(var_2 in level.ally_ent_del) {
-        if(isDefined(var_2))
+        if(isDefined(var_2)) {
           var_2 delete();
+        }
       }
     }
   }
@@ -1340,8 +1382,9 @@ ally_cleanup(var_0) {
   var_4 = getEntArray("ally_tar_to_clean", "targetname");
 
   foreach(var_6 in var_4) {
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_6 delete();
+    }
   }
 }
 
@@ -1367,6 +1410,7 @@ make_swimmer() {
   if(self.type == "dog") {
     return;
   }
-  if(!isDefined(self.swimmer) || self.swimmer == 0)
+  if(!isDefined(self.swimmer) || self.swimmer == 0) {
     thread maps\_space_ai::enable_space();
+  }
 }

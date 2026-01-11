@@ -8,8 +8,9 @@ load_gargoyle_fx() {
 }
 
 gargoyle_level_init() {
-  if(!isDefined(level.alien_funcs))
+  if(!isDefined(level.alien_funcs)) {
     level.agent_funcs = [];
+  }
 
   level.alien_funcs["gargoyle"]["approach"] = ::gargoyle_approach;
   level.alien_funcs["gargoyle"]["combat"] = maps\mp\agents\alien\_alien_think::default_alien_combat;
@@ -31,8 +32,9 @@ gargoyle_init() {
   self.fly_end_position = undefined;
   setup_hover_turret();
 
-  if(getdvarint("scr_gargoyle_disable_fly_intro") != 1)
+  if(getdvarint("scr_gargoyle_disable_fly_intro") != 1) {
     fly_intro_attack(undefined);
+  }
 }
 
 fly_intro(var_0) {
@@ -63,16 +65,19 @@ handle_badpath(var_0) {
 }
 
 gargoyle_approach(var_0, var_1) {
-  if(is_enemy_vanguard(var_0))
+  if(is_enemy_vanguard(var_0)) {
     return approach_vanguard(var_0);
-  else
+  }
+  else {
     return approach_enemy(var_0);
+  }
 }
 
 approach_enemy(var_0) {
   if(should_stun()) {
-    if(distancesquared(self.close_proximity_enemy.origin, self.origin) > 22500)
+    if(distancesquared(self.close_proximity_enemy.origin, self.origin) > 22500) {
       move_towards_enemy(self.close_proximity_enemy);
+    }
 
     return "stun";
   }
@@ -80,24 +85,28 @@ approach_enemy(var_0) {
   if(should_begin_air_attacks(var_0)) {
     var_1 = proceed_to_air_node(var_0);
 
-    if(var_1)
+    if(var_1) {
       return "takeoff";
+    }
   }
 
-  if(should_end_air_attacks(var_0))
+  if(should_end_air_attacks(var_0)) {
     return "land";
+  }
 
   while(self.in_air) {
-    if(should_strafe_run(var_0))
+    if(should_strafe_run(var_0)) {
       return "strafe_run";
+    }
 
     if(should_fly_to_node(var_0, 800, 1, 350)) {
       self.fly_type = "move";
       return "fly";
     }
 
-    if(should_hover_attack(var_0))
+    if(should_hover_attack(var_0)) {
       return "hover_attack";
+    }
 
     wait 0.05;
   }
@@ -109,8 +118,9 @@ approach_vanguard(var_0) {
   if(should_begin_air_attacks(var_0)) {
     var_1 = proceed_to_air_node(var_0);
 
-    if(var_1)
+    if(var_1) {
       return "takeoff";
+    }
   }
 
   while(self.in_air) {
@@ -119,8 +129,9 @@ approach_vanguard(var_0) {
       return "fly";
     }
 
-    if(should_hover_attack(var_0))
+    if(should_hover_attack(var_0)) {
       return "hover_attack";
+    }
 
     wait 0.05;
   }
@@ -133,8 +144,9 @@ find_air_attack_node(var_0) {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "flyable")
+    if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "flyable") {
       var_2[var_2.size] = var_4;
+    }
   }
 
   var_6 = get_air_node_rated(var_0, var_2);
@@ -190,22 +202,25 @@ get_pain_anim_state(var_0) {
 }
 
 get_idle_pain_anim_state() {
-  if(!self.in_air)
+  if(!self.in_air) {
     return undefined;
+  }
 
   return "idle_fly_pain";
 }
 
 should_immediate_ragdoll_on_death() {
-  if(self.in_air)
+  if(self.in_air) {
     return 1;
+  }
 
   return undefined;
 }
 
 get_turn_in_place_anim_state() {
-  if(!self.in_air)
+  if(!self.in_air) {
     return undefined;
+  }
 
   return "air_turn_in_place";
 }
@@ -215,31 +230,36 @@ can_retreat(var_0) {
 }
 
 should_begin_air_attacks(var_0) {
-  if(self.in_air)
+  if(self.in_air) {
     return 0;
+  }
 
   var_1 = find_air_attack_node(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   self.air_jump_node = var_1;
   return 1;
 }
 
 should_end_air_attacks(var_0) {
-  if(!self.in_air)
+  if(!self.in_air) {
     return 0;
+  }
 
   return self.air_complete;
 }
 
 should_hover_attack(var_0) {
-  if(!isalive(var_0))
+  if(!isalive(var_0)) {
     return 0;
+  }
 
-  if(gettime() < self.last_hover_attack_time + 3000)
+  if(gettime() < self.last_hover_attack_time + 3000) {
     return 0;
+  }
 
   var_1 = self gettagorigin("TAG_tail");
   var_2 = get_enemy_target_position(var_0);
@@ -279,8 +299,9 @@ should_fly_to_node(var_0, var_1, var_2, var_3) {
   var_6 = -300;
   var_7 = 90000;
 
-  if(gettime() <= self.last_fly_time + 6000)
+  if(gettime() <= self.last_fly_time + 6000) {
     return 0;
+  }
 
   var_8 = (0, 0, max(var_6, var_0.origin[2] - self.origin[2]) + var_3);
   var_9 = get_possible_fly_node_points(var_8, var_1);
@@ -307,29 +328,34 @@ should_fly_to_node(var_0, var_1, var_2, var_3) {
 }
 
 should_strafe_run(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.origin;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_3 = 1000000;
   var_4 = 90000;
   var_5 = distance2dsquared(var_0.origin, self.origin);
 
-  if(var_5 > var_3 || var_5 < var_4)
+  if(var_5 > var_3 || var_5 < var_4) {
     return 0;
+  }
 
   var_6 = 1150;
 
-  if(!var_2 && gettime() <= self.last_strafe_attack_time + 12000)
+  if(!var_2 && gettime() <= self.last_strafe_attack_time + 12000) {
     return 0;
+  }
 
   var_7 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
   var_8 = var_1 + var_7 * var_6;
 
-  if(!self aiphysicstracepassed(var_1, var_8, self.radius, self.height, 1))
+  if(!self aiphysicstracepassed(var_1, var_8, self.radius, self.height, 1)) {
     return 0;
+  }
 
   return has_valid_ground_nodes(var_8);
 }
@@ -368,8 +394,9 @@ air_damage_monitor() {
     var_0[var_5]["damage"] = var_1;
     var_6 = 0;
 
-    for(var_4 = 0; var_4 < var_0.size; var_4++)
+    for(var_4 = 0; var_4 < var_0.size; var_4++) {
       var_6 = var_6 + var_0[var_4]["damage"];
+    }
 
     if(var_6 > 100) {
       try_damage_air_dodge();
@@ -385,8 +412,9 @@ proceed_to_air_node(var_0) {
   thread check_player_proximity();
   var_1 = common_scripts\utility::waittill_any_return("goal_reached", "close_range_attack");
 
-  if(var_1 == "close_range_attack")
+  if(var_1 == "close_range_attack") {
     return 0;
+  }
 
   self notify("at_air_node");
 
@@ -504,8 +532,9 @@ do_landing_lerp(var_0, var_1) {
 }
 
 gargoyle_idle_state(var_0) {
-  if(self.in_air)
+  if(self.in_air) {
     return "idle_fly";
+  }
 
   return undefined;
 }
@@ -553,8 +582,9 @@ perform_melee(var_0, var_1) {
   if(!isDefined(var_0)) {
     var_0 = findanenemy();
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       return;
+    }
   }
 
   if(maps\mp\agents\alien\_alien_think::melee_okay()) {
@@ -567,12 +597,14 @@ perform_melee(var_0, var_1) {
 }
 
 findanenemy() {
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return self.enemy;
+  }
 
   foreach(var_1 in level.players) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       return var_1;
+    }
   }
 
   return undefined;
@@ -601,8 +633,9 @@ handlestunnotetracks(var_0, var_1, var_2, var_3) {
 stun_enemy(var_0) {
   var_1 = 3.0;
 
-  if(isplayer(var_0) && isalive(var_0))
+  if(isplayer(var_0) && isalive(var_0)) {
     maps\mp\agents\alien\_alien_melee::melee_dodamage(var_0, "swipe");
+  }
 }
 
 wing_swipe(var_0) {
@@ -621,10 +654,12 @@ hover(var_0) {
   maps\mp\agents\alien\_alien_anim_utils::turntowardsentity(var_0);
   self scragentsetorientmode("face enemy");
 
-  if(gettime() > self.last_air_dodge_time + 1500)
+  if(gettime() > self.last_air_dodge_time + 1500) {
     var_1 = 0;
-  else
+  }
+  else {
     var_1 = 1;
+  }
 
   var_2 = get_hover_start_anim_mode("attack_air_hover_spit_start", var_1);
   self scragentsetanimmode(var_2);
@@ -642,8 +677,9 @@ hover(var_0) {
   self.last_hover_attack_time = gettime();
   register_air_attack_end(var_0);
 
-  if(!self.air_complete && isDefined(var_0))
+  if(!self.air_complete && isDefined(var_0)) {
     try_air_dodge(var_0);
+  }
 }
 
 get_hover_start_anim_mode(var_0, var_1) {
@@ -651,8 +687,9 @@ get_hover_start_anim_mode(var_0, var_1) {
   var_3 = getmovedelta(var_2);
   var_4 = self localtoworldcoords(var_3);
 
-  if(self aiphysicstracepassed(self.origin, var_4, self.radius, self.height, 1))
+  if(self aiphysicstracepassed(self.origin, var_4, self.radius, self.height, 1)) {
     return "anim deltas";
+  }
 
   return "code_move";
 }
@@ -675,11 +712,13 @@ do_dodge(var_0, var_1) {
   var_6 = vectornormalize(var_4) * (var_5 + 50);
   var_7 = self localtoworldcoords(var_6);
 
-  if(!self aiphysicstracepassed(self.origin, var_7, self.radius, self.height, 1))
+  if(!self aiphysicstracepassed(self.origin, var_7, self.radius, self.height, 1)) {
     return 0;
+  }
 
-  if(!bullettracepassed(var_7, get_enemy_target_position(var_0), 0, undefined))
+  if(!bullettracepassed(var_7, get_enemy_target_position(var_0), 0, undefined)) {
     return 0;
+  }
 
   self scragentsetanimmode("anim deltas");
   maps\mp\agents\_scriptedagents::playanimnuntilnotetrack(var_2, var_1, var_2);
@@ -709,8 +748,9 @@ try_damage_air_dodge() {
         register_air_attack_end(self.enemy, 1);
         self notify("damage_dodge_interrupt");
 
-        if(self.statelocked)
+        if(self.statelocked) {
           self.statelocked = 0;
+        }
 
         break;
       }
@@ -722,10 +762,12 @@ try_damage_air_dodge() {
 
 get_enemy_target_position(var_0) {
   if(issentient(var_0)) {
-    if(!isDefined(var_0.usingremote))
+    if(!isDefined(var_0.usingremote)) {
       return var_0 getEye();
-    else
+    }
+    else {
       return var_0.origin + (0, 0, 32);
+    }
   }
 
   return var_0.origin;
@@ -741,8 +783,9 @@ hover_spit(var_0, var_1) {
   var_3 = "hover_spit_complete";
 
   for(;;) {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_2 = get_enemy_target_position(var_0);
+    }
 
     fire_weapon(var_2, 0.2, var_1);
   }
@@ -768,8 +811,9 @@ fly(var_0) {
   self scragentsetanimmode("anim deltas");
   maps\mp\agents\_scriptedagents::playanimnuntilnotetrack("attack_fly_start", 0, "attack_melee");
 
-  if(self.fly_type == "attack")
+  if(self.fly_type == "attack") {
     fly_loop();
+  }
 
   var_2 = get_fly_end_anim(var_0);
   maps\mp\agents\_scriptedagents::playanimnuntilnotetrack(var_2, 0, "attack_melee");
@@ -804,8 +848,9 @@ get_fly_end_anim(var_0) {
   var_1 = vectornormalize(var_0.origin - self.origin);
   var_2 = anglesToForward(self.angles);
 
-  if(vectordot(var_1, var_2) > 0.0)
+  if(vectordot(var_1, var_2) > 0.0) {
     return "attack_fly_stop";
+  }
 
   return "attack_strafe_run_stop";
 }
@@ -817,8 +862,9 @@ strafing_shoot(var_0, var_1) {
   self endon("killanimscript");
   self endon("damage_dodge_interrupt");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.hover_turret settargetentity(var_0);
+  }
 
   var_2 = 0.2;
   var_3 = 300;
@@ -834,8 +880,9 @@ strafing_shoot(var_0, var_1) {
       var_9 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
       var_10 = vectortoangles(var_9);
 
-      if(anglesdelta(var_10, var_7) > var_5)
+      if(anglesdelta(var_10, var_7) > var_5) {
         var_9 = var_8;
+      }
     } else
       var_9 = var_8;
 
@@ -848,8 +895,9 @@ strafing_shoot(var_0, var_1) {
 strafe_run_loop() {
   var_0 = randomint(3);
 
-  if(var_0 == 0)
+  if(var_0 == 0) {
     maps\mp\agents\_scriptedagents::playanimnuntilnotetrack("attack_strafe_run_loop_single", var_0, "attack_melee");
+  }
   else {
     var_1 = var_0 - 1;
     maps\mp\agents\_scriptedagents::playanimnuntilnotetrack("attack_strafe_run_loop_multi_start", var_1, "attack_melee");
@@ -859,8 +907,9 @@ strafe_run_loop() {
 }
 
 register_air_attack_end(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = getdvarint("scr_gargoyle_disable_fly_intro") != 1 && self.in_intro;
   var_3 = !var_1 && randomfloat(1.0) < 0.85 || var_2;
@@ -868,18 +917,21 @@ register_air_attack_end(var_0, var_1) {
   if(var_3 && isDefined(var_0)) {
     var_4 = self.origin[2] - var_0.origin[2];
 
-    if(var_4 > 800)
+    if(var_4 > 800) {
       var_3 = 0;
-    else if(var_4 < 100)
+    }
+    else if(var_4 < 100) {
       var_3 = try_air_dodge_up(var_0);
+    }
   }
 
   if(var_3) {
     var_5 = 100;
     var_6 = self.origin - (0, 0, var_5);
 
-    if(!self aiphysicstracepassed(self.origin, var_6, self.radius, self.height, 1))
+    if(!self aiphysicstracepassed(self.origin, var_6, self.radius, self.height, 1)) {
       var_3 = try_air_dodge_up(var_0);
+    }
   }
 
   self.air_complete = !var_3;
@@ -910,6 +962,7 @@ clean_up_turret() {
   var_0 = self.hover_turret;
   self waittill("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }

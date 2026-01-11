@@ -70,10 +70,12 @@ init_minigun_ring() {
   level._minigun_ring setModel(ring_pos.script_parameters);
   level._minigun_ring_clip = getent(level._meat_location + "_meat_minigun_clip", "script_noteworthy");
 
-  if(isDefined(level._minigun_ring_clip))
+  if(isDefined(level._minigun_ring_clip)) {
     level._minigun_ring_clip linkto(level._minigun_ring);
-  else
+  }
+  else {
     iprintlnbold("BUG: no level._minigun_ring_clip");
+  }
 
   level._minigun_ring_trig = getent(level._meat_location + "_meat_minigun_trig", "targetname");
 
@@ -108,10 +110,12 @@ init_ammo_ring() {
   name = level._meat_location + "_meat_ammo_clip";
   level._ammo_ring_clip = getent(name, "script_noteworthy");
 
-  if(isDefined(level._ammo_ring_clip))
+  if(isDefined(level._ammo_ring_clip)) {
     level._ammo_ring_clip linkto(level._ammo_ring);
-  else
+  }
+  else {
     iprintlnbold("BUG: no level._ammo_ring_clip");
+  }
 
   name = level._meat_location + "_meat_ammo_trig";
   level._ammo_ring_trig = getent(name, "targetname");
@@ -212,17 +216,20 @@ meat_splitter(trig) {
   level endon("meat_grabbed");
   level endon("meat_kicked");
 
-  while(isDefined(level.item_meat) && level.item_meat istouching(trig))
+  while(isDefined(level.item_meat) && level.item_meat istouching(trig)) {
     wait 0.05;
+  }
 
   exit_trig = getent(trig.target, "targetname");
   exit_struct = getstruct(trig.target, "targetname");
 
-  while(isDefined(level.item_meat) && !level.item_meat istouching(exit_trig))
+  while(isDefined(level.item_meat) && !level.item_meat istouching(exit_trig)) {
     wait 0.05;
+  }
 
-  while(isDefined(level.item_meat) && level.item_meat istouching(exit_trig))
+  while(isDefined(level.item_meat) && level.item_meat istouching(exit_trig)) {
     wait 0.05;
+  }
 
   if(!isDefined(level.item_meat)) {
     return;
@@ -243,8 +250,9 @@ meat_splitter(trig) {
   level thread maps\mp\zombies\_zm_audio_announcer::leaderdialog("meat_ring_splitter", undefined, undefined, 1);
   wait 0.1;
 
-  while(isDefined(level.splitting_meat) && level.splitting_meat)
+  while(isDefined(level.splitting_meat) && level.splitting_meat) {
     wait 0.05;
+  }
 
   player._spawning_meat = 0;
 }
@@ -275,8 +283,9 @@ split_meat(player, org, vel1, vel2, vel3) {
 }
 
 minigun_prize(trig) {
-  while(isDefined(level.item_meat) && level.item_meat istouching(trig))
+  while(isDefined(level.item_meat) && level.item_meat istouching(trig)) {
     wait 0.05;
+  }
 
   if(!isDefined(level.item_meat)) {
     return;
@@ -295,8 +304,9 @@ minigun_prize(trig) {
 }
 
 ammo_prize(trig) {
-  while(isDefined(level.item_meat) && level.item_meat istouching(trig))
+  while(isDefined(level.item_meat) && level.item_meat istouching(trig)) {
     wait 0.05;
+  }
 
   if(!isDefined(level.item_meat)) {
     return;
@@ -314,8 +324,9 @@ ammo_prize(trig) {
 minigun_toss_cooldown() {
   level._minigun_toss_cooldown = 1;
 
-  if(isDefined(level._minigun_icon))
+  if(isDefined(level._minigun_icon)) {
     level._minigun_icon delete();
+  }
 
   waittill_any_or_timeout(120, "meat_end");
   playFX(level._effect["poltergeist"], level._minigun_ring_trig.origin);
@@ -329,8 +340,9 @@ minigun_toss_cooldown() {
 ammo_toss_cooldown() {
   level._ammo_toss_cooldown = 1;
 
-  if(isDefined(level._ammo_icon))
+  if(isDefined(level._ammo_icon)) {
     level._ammo_icon delete();
+  }
 
   waittill_any_or_timeout(60, "meat_end");
   playFX(level._effect["poltergeist"], level._ammo_ring_trig.origin);
@@ -348,8 +360,9 @@ wait_for_team_death(team) {
   while(true) {
     wait 1;
 
-    while(isDefined(level._checking_for_save) && level._checking_for_save)
+    while(isDefined(level._checking_for_save) && level._checking_for_save) {
       wait 0.1;
+    }
 
     alive_team_players = get_alive_players_on_meat_team(team);
 
@@ -366,15 +379,17 @@ wait_for_team_death(team) {
   }
   winning_team = "A";
 
-  if(encounters_team == "A")
+  if(encounters_team == "A") {
     winning_team = "B";
+  }
 
   level notify("meat_end", winning_team);
 }
 
 check_should_save_player(team) {
-  if(!isDefined(level._meat_on_team))
+  if(!isDefined(level._meat_on_team)) {
     return false;
+  }
 
   level._checking_for_save = 1;
   players = get_players_on_meat_team(team);
@@ -419,11 +434,13 @@ check_should_save_player(team) {
 }
 
 watch_save_player() {
-  if(!isDefined(level._meat_on_team))
+  if(!isDefined(level._meat_on_team)) {
     return false;
+  }
 
-  if(!isDefined(level._last_person_to_throw_meat) || level._last_person_to_throw_meat != self)
+  if(!isDefined(level._last_person_to_throw_meat) || level._last_person_to_throw_meat != self) {
     return false;
+  }
 
   level._checking_for_save = 1;
 
@@ -551,8 +568,9 @@ multi_launch(launch_spot) {
 
       wait(randomfloatrange(0.25, 0.75));
 
-      if(x > 1)
+      if(x > 1) {
         level notify("launch_meat");
+      }
     }
   } else {
     wait(randomfloatrange(0.25, 0.75));

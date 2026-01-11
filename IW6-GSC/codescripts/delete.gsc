@@ -6,6 +6,7 @@
 main() {
   assert(isDefined(self));
   wait 0;
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }

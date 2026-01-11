@@ -10,20 +10,24 @@
 build_traverse_data(traversedata, stair_anims, transition_stair_count_in, transition_stair_count_out, stair_aim) {
   stair_count = self get_stair_count() - transition_stair_count_in - transition_stair_count_out;
 
-  if(stair_count < 0)
+  if(stair_count < 0) {
     traversedata["traverseAnimTransOut"] = undefined;
-  else
+  }
+  else {
     traversedata["traverseAnim"] = build_anim_array(stair_anims, stair_count);
+  }
 
   traversedata["traverseAnimType"] = "sequence";
   traversedata["traverseStance"] = "stand";
   traversedata["traverseAlertness"] = "casual";
   traversedata["traverseMovement"] = "run";
 
-  if(animscripts\utility::aihasonlypistol())
+  if(animscripts\utility::aihasonlypistol()) {
     traversedata["traverseAllowAiming"] = 0;
-  else
+  }
+  else {
     traversedata["traverseAllowAiming"] = 1;
+  }
 
   traversedata["traverseAimUp"] = animarray(stair_aim + "_aim_up", "move");
   traversedata["traverseAimDown"] = animarray(stair_aim + "_aim_down", "move");
@@ -41,8 +45,9 @@ build_anim_array(stair_anims, stair_count) {
     sizes = [];
 
     for(i = 0; i < potential_sizes.size; i++) {
-      if(potential_sizes[i] <= stair_count)
+      if(potential_sizes[i] <= stair_count) {
         sizes[sizes.size] = potential_sizes[i];
+      }
     }
 
     assert(sizes.size, "No potential animation for stair count.");

@@ -9,17 +9,20 @@ script_print_fx() {
     return;
   }
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_00 = getent(self.target).origin;
-  else
+  }
+  else {
     var_00 = "undefined";
+  }
 
   if(self.script_fxcommand == "OneShotfx") {}
 
   if(self.script_fxcommand == "loopfx") {}
 
-  if(self.script_fxcommand == "loopsound")
+  if(self.script_fxcommand == "loopsound") {
     return;
+  }
 }
 
 grenadeexplosionfx(var_00) {
@@ -32,8 +35,9 @@ soundfx(var_00, var_01, var_02) {
   var_3.origin = var_01;
   var_03 playLoopSound(var_00);
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_03 thread soundfxdelete(var_02);
+  }
 }
 
 soundfxdelete(var_00) {
@@ -65,11 +69,13 @@ func_glass_handler() {
   while(var_07 != 0) {
     var_11 = var_10 + var_09 - 1;
 
-    if(var_11 > var_08)
+    if(var_11 > var_08) {
       var_11 = var_08;
+    }
 
-    if(var_10 == var_08)
+    if(var_10 == var_08) {
       var_10 = 0;
+    }
 
     while(var_10 < var_11) {
       var_12 = var_0[var_10];

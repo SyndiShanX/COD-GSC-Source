@@ -22,8 +22,9 @@
 =============
 */
 enable_casual_killer() {
-  if(isDefined(self.casual_killer))
+  if(isDefined(self.casual_killer)) {
     return;
+  }
 
   self disable_turnAnims();
   self disable_surprise();
@@ -66,8 +67,9 @@ enable_casual_killer() {
 =============
 */
 disable_casual_killer() {
-  if(!isDefined(self.casual_killer))
+  if(!isDefined(self.casual_killer)) {
     return;
+  }
 
   self enable_turnAnims();
 
@@ -198,8 +200,9 @@ init_casual_killer_animsets() {
     trans = casual_killerTransTypes[j];
 
     for(i = 1; i <= 9; i++) {
-      if(i == 5)
+      if(i == 5) {
         continue;
+      }
 
       if(isDefined(anim.coverTrans[trans][i])) {
         anim.coverTransDist[trans][i] = getMoveDelta(anim.coverTrans[trans][i], 0, 1);
@@ -234,25 +237,29 @@ casual_killer_approach_conditions(node) {
 }
 
 casual_killer_approach_type() {
-  if(self casual_killer_is_jogging())
+  if(self casual_killer_is_jogging()) {
     return "casual_killer_sprint";
+  }
 
   return "casual_killer";
 }
 
 casual_killer_startMoveTransition() {
-  if(isDefined(self.disableExits))
+  if(isDefined(self.disableExits)) {
     return;
+  }
 
   self orientmode("face angle", self.angles[1]);
   self animmode("zonly_physics", false);
 
   rate = randomfloatrange(0.9, 1.1);
 
-  if(self casual_killer_is_jogging())
+  if(self casual_killer_is_jogging()) {
     startAnim = % casual_killer_jog_start;
-  else
+  }
+  else {
     startAnim = % casual_killer_walk_start;
+  }
 
   self setFlaggedAnimKnobAllRestart("startmove", startAnim, % body, 1, .1, rate);
   self animscripts\shared::DoNoteTracks("startmove");
@@ -260,23 +267,28 @@ casual_killer_startMoveTransition() {
   self OrientMode("face default");
   self animmode("none", false);
 
-  if(animHasNotetrack(startAnim, "code_move"))
+  if(animHasNotetrack(startAnim, "code_move")) {
     self animscripts\shared::DoNoteTracks("startmove"); // return on code_move
+  }
 }
 
 casual_killer_is_jogging() {
-  if(!isDefined(self.run_overrideanim))
+  if(!isDefined(self.run_overrideanim)) {
     return false;
-
-  if(isarray(self.run_overrideanim)) {
-    if(self.run_overrideanim[0] == % casual_killer_jog_A || self.run_overrideanim[0] == % casual_killer_jog_B)
-      return true;
-    else
-      return false;
   }
 
-  if(self.run_overrideanim == % casual_killer_jog_A || self.run_overrideanim == % casual_killer_jog_B)
+  if(isarray(self.run_overrideanim)) {
+    if(self.run_overrideanim[0] == % casual_killer_jog_A || self.run_overrideanim[0] == % casual_killer_jog_B) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  if(self.run_overrideanim == % casual_killer_jog_A || self.run_overrideanim == % casual_killer_jog_B) {
     return true;
+  }
 
   return false;
 }
@@ -286,8 +298,9 @@ set_casual_killer_run_n_gun(type) {
   self.runNGunTransitionPoint = 1;
   self.runNGunIncrement = 0.2;
 
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = "straight";
+  }
 
   self clearanim( % run_n_gun, 0.2);
 

@@ -535,8 +535,9 @@ create_and_play_dialog(category, type, response, force_variant, override) {
     return;
   }
   alias_suffix = level.plr_vox[category][type];
-  if(isDefined(response))
+  if(isDefined(response)) {
     alias_suffix = response + alias_suffix;
+  }
   index = maps\_zombiemode_weapons::get_player_index(self);
   if(is_true(level.player_4_vox_override) && index == 3) {
     index = 4;
@@ -580,8 +581,9 @@ do_player_playvox(prefix, index, sound_to_play, waittime, category, type, overri
   if(!isDefined(level.player_is_speaking)) {
     level.player_is_speaking = 0;
   }
-  if(is_true(level.skit_vox_override) && !override)
+  if(is_true(level.skit_vox_override) && !override) {
     return;
+  }
   if(level.player_is_speaking != 1) {
     level.player_is_speaking = 1;
     self playSound(prefix + sound_to_play, "sound_done" + sound_to_play);
@@ -658,8 +660,9 @@ setup_hero_rival(player, hero, rival, category, type) {
 }
 
 do_announcer_playvox(category) {
-  if(!isDefined(category))
+  if(!isDefined(category)) {
     return;
+  }
   if(!isDefined(level.devil_is_speaking)) {
     level.devil_is_speaking = 0;
   }
@@ -705,13 +708,15 @@ player_killstreak_timer() {
 player_zombie_kill_vox(hit_location, player, mod, zombie) {
   weapon = player GetCurrentWeapon();
   dist = distanceSquared(player.origin, zombie.origin);
-  if(!isDefined(level.zombie_vars["zombie_insta_kill"]))
+  if(!isDefined(level.zombie_vars["zombie_insta_kill"])) {
     level.zombie_vars["zombie_insta_kill"] = 0;
+  }
   instakill = level.zombie_vars["zombie_insta_kill"];
   death = get_mod_type(hit_location, mod, weapon, zombie, instakill, dist, player);
   chance = get_mod_chance(death);
-  if(!isDefined(player.force_wait_on_kill_line))
+  if(!isDefined(player.force_wait_on_kill_line)) {
     player.force_wait_on_kill_line = false;
+  }
   if((chance > RandomIntRange(1, 100)) && player.force_wait_on_kill_line == false) {
     player.force_wait_on_kill_line = true;
     player create_and_play_dialog("kill", death);
@@ -782,38 +787,46 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
     return "default";
   }
   if(is_placeable_mine(weapon)) {
-    if(!instakill)
+    if(!instakill) {
       return "claymore";
-    else
+    }
+    else {
       return "weapon_instakill";
+    }
   }
   if((mod == "MOD_MELEE" ||
       mod == "MOD_BAYONET" ||
       mod == "MOD_UNKNOWN") &&
     dist < close_dist) {
     if(!instakill) {
-      if(player hasWeapon("sickle_knife_zm"))
+      if(player hasWeapon("sickle_knife_zm")) {
         return "sickle";
-      else
+      }
+      else {
         return "melee";
+      }
     } else
       return "melee_instakill";
   }
   if(isDefined(zombie.damageweapon) && zombie.damageweapon == "zombie_nesting_doll_single") {
-    if(!instakill)
+    if(!instakill) {
       return "dolls";
-    else
+    }
+    else {
       return "weapon_instakill";
+    }
   }
   if((mod == "MOD_GRENADE" ||
       mod == "MOD_GRENADE_SPLASH" ||
       mod == "MOD_PROJECTILE_SPLASH" ||
       mod == "MOD_EXPLOSIVE") &&
     weapon != "ray_gun_zm") {
-    if(!instakill)
+    if(!instakill) {
       return "explosive";
-    else
+    }
+    else {
       return "weapon_instakill";
+    }
   }
   if((IsSubStr(weapon, "flame") ||
       IsSubStr(weapon, "molotov_") ||
@@ -821,17 +834,21 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
     (mod == "MOD_BURNED" ||
       mod == "MOD_GRENADE" ||
       mod == "MOD_GRENADE_SPLASH")) {
-    if(!instakill)
+    if(!instakill) {
       return "flame";
-    else
+    }
+    else {
       return "weapon_instakill";
+    }
   }
   if(weapon == "ray_gun_zm" &&
     dist > far_dist) {
-    if(!instakill)
+    if(!instakill) {
       return "raygun";
-    else
+    }
+    else {
       return "weapon_instakill";
+    }
   }
   if((mod == "MOD_RIFLE_BULLET" ||
       mod == "MOD_PISTOL_BULLET") &&
@@ -865,10 +882,12 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
   }
   if(mod == "MOD_RIFLE_BULLET" ||
     mod == "MOD_PISTOL_BULLET") {
-    if(!instakill)
+    if(!instakill) {
       return "bullet";
-    else
+    }
+    else {
       return "weapon_instakill";
+    }
   }
   return "default";
 }
@@ -1016,15 +1035,19 @@ change_zombie_music(state) {
       return;
     }
   }
-  if(!isDefined(m.round_override))
+  if(!isDefined(m.round_override)) {
     m.round_override = false;
-  if(m.override == true && level.music_override == true)
+  }
+  if(m.override == true && level.music_override == true) {
     return;
-  if(m.round_override == true && level.music_round_override == true)
+  }
+  if(m.round_override == true && level.music_round_override == true) {
     return;
+  }
   if(m.is_alias) {
-    if(isDefined(m.musicstate))
+    if(isDefined(m.musicstate)) {
       setmusicstate(m.musicstate);
+    }
     play_sound_2d(m.music);
   } else {
     setmusicstate(m.music);

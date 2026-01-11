@@ -22,6 +22,7 @@ main() {
   level._effect["ash_spiral_runner"] = loadfx("dust/ash_spiral_runner");
 
   /#		
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_pipeline_fx::main();
+  }
 }

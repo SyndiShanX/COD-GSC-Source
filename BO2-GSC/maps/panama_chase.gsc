@@ -174,8 +174,9 @@ ac130_target_player() {
   level endon("player_moved");
   wait 5;
 
-  while(true)
+  while(true) {
     ac130_shoot(level.player.origin, 1);
+  }
 }
 
 check_for_friendly_fire() {
@@ -265,10 +266,12 @@ prevent_player_damage_if_the_player_is_sprinting() {
   level endon("chase_jump_cleared");
 
   while(true) {
-    if(level.player sprintbuttonpressed())
+    if(level.player sprintbuttonpressed()) {
       level.player.overrideplayerdamage = ::player_damage_override_for_apache;
-    else
+    }
+    else {
       level.player.overrideplayerdamage = undefined;
+    }
 
     wait 0.05;
   }
@@ -332,8 +335,9 @@ little_bird_investigate_water_tower() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 move_little_bird_to_checkpoint() {
@@ -423,8 +427,9 @@ apache_player_damage_callback(einflictor, eattacker, idamage, idflags, type, swe
     showdamage = 1;
   }
 
-  if(showdamage == 0)
+  if(showdamage == 0) {
     self cleardamageindicator();
+  }
 
   return idamage;
 }
@@ -466,10 +471,12 @@ checkpoint_event() {
   flag_set("checkpoint_reached");
   end_scene("mason_noreiga_wall_hug");
 
-  if(flag("player_not_looking"))
+  if(flag("player_not_looking")) {
     level thread run_scene("checkpoint_ally_walkout_noreach");
-  else
+  }
+  else {
     level thread run_scene("checkpoint_ally_walkout", 1);
+  }
 
   level.mason attach("p6_anim_military_id_card", "tag_weapon_left");
   flag_wait("checkpoint_fade_now");
@@ -614,18 +621,22 @@ heli_go_struct_path(s_start) {
   self sethoverparams(10);
 
   while(self.is_pathing) {
-    if(isDefined(s_current.target))
+    if(isDefined(s_current.target)) {
       self setvehgoalpos(s_current.origin, 0, 0);
-    else
+    }
+    else {
       self setvehgoalpos(s_current.origin, 1, 0);
+    }
 
-    if(isDefined(s_current.radius))
+    if(isDefined(s_current.radius)) {
       self setneargoalnotifydist(s_current.radius);
+    }
 
     self waittill("near_goal");
 
-    if(isDefined(s_current.speed))
+    if(isDefined(s_current.speed)) {
       self setspeed(s_current.speed);
+    }
 
     self waittill("goal");
 
@@ -645,18 +656,21 @@ set_pitch(n_start_pitch, n_end_pitch, n_time) {
   n_pitch_range = n_end_pitch - n_start_pitch;
   n_pitch_step = 0;
 
-  if(n_steps > 0)
+  if(n_steps > 0) {
     n_pitch_step = abs(n_pitch_range) / n_steps;
+  }
 
   n_current_pitch = n_start_pitch;
 
   while(n_current_pitch != n_end_pitch) {
     wait(n_step_time);
 
-    if(n_pitch_range > 0)
+    if(n_pitch_range > 0) {
       n_current_pitch = min(n_current_pitch + n_pitch_step, n_end_pitch);
-    else if(n_pitch_range < 0)
+    }
+    else if(n_pitch_range < 0) {
       n_current_pitch = max(n_current_pitch - n_pitch_step, n_end_pitch);
+    }
 
     self setdefaultpitch(n_current_pitch);
   }

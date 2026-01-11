@@ -8,8 +8,9 @@
 #include maps\_anim;
 #using_animtree("generic_human");
 setup() {
-  if(isDefined(level.contextualMeleeFeature) && !level.contextualMeleeFeature)
+  if(isDefined(level.contextualMeleeFeature) && !level.contextualMeleeFeature) {
     return;
+  }
   level._melee = spawnStruct();
   level._CONTEXTUAL_MELEE_DIST = 70;
   level._CONTEXTUAL_MELEE_DIST_SQ = level._CONTEXTUAL_MELEE_DIST *

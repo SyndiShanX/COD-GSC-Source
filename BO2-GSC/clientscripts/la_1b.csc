@@ -85,8 +85,9 @@ get_time_delta() {
   if(isDefined(self.n_last_get_time)) {
     t_delta = t_now - self.n_last_get_time;
 
-    if(t_delta >= 500)
+    if(t_delta >= 500) {
       t_delta = 0;
+    }
   }
 
   self.n_last_get_time = t_now;

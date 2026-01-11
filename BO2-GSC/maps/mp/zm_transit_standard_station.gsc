@@ -36,8 +36,9 @@ main() {
   zombie_doors = getEntArray("zombie_door", "targetname");
 
   foreach(door in zombie_doors) {
-    if(isDefined(door.script_noteworthy) && door.script_noteworthy == "local_electric_door")
+    if(isDefined(door.script_noteworthy) && door.script_noteworthy == "local_electric_door") {
       door trigger_off();
+    }
   }
 }
 
@@ -45,8 +46,9 @@ enemy_location_override(zombie, enemy) {
   location = enemy.origin;
 
   if(is_true(self.reroute)) {
-    if(isDefined(self.reroute_origin))
+    if(isDefined(self.reroute_origin)) {
       location = self.reroute_origin;
+    }
   }
 
   return location;

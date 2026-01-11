@@ -20,8 +20,9 @@ door_struct_debug() {
       passed = bullettracepassed(point, origin, 0, undefined);
       color = vectorscale((0, 1, 0), 255.0);
 
-      if(!passed)
+      if(!passed) {
         color = vectorscale((1, 0, 0), 255.0);
+      }
 
       print3d(point, "+", color, 1, 1);
 
@@ -30,13 +31,15 @@ door_struct_debug() {
 }
 
 hack_doors(targetname, door_activate_func) {
-  if(!isDefined(targetname))
+  if(!isDefined(targetname)) {
     targetname = "zombie_door";
+  }
 
   doors = getEntArray(targetname, "targetname");
 
-  if(!isDefined(door_activate_func))
+  if(!isDefined(door_activate_func)) {
     door_activate_func = maps\mp\zombies\_zm_blockers::door_opened;
+  }
 
   for(i = 0; i < doors.size; i++) {
     door = doors[i];
@@ -83,10 +86,12 @@ remove_all_door_hackables_that_target_door(door) {
   for(i = 0; i < level._hackable_objects.size; i++) {
     obj = level._hackable_objects[i];
 
-    if(isDefined(obj.door) && obj.door.target == door.target)
+    if(isDefined(obj.door) && obj.door.target == door.target) {
       candidates[candidates.size] = obj;
+    }
   }
 
-  for(i = 0; i < candidates.size; i++)
+  for(i = 0; i < candidates.size; i++) {
     maps\mp\zombies\_zm_equip_hacker::deregister_hackable_struct(candidates[i]);
+  }
 }

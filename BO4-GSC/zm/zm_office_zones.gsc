@@ -159,4 +159,3 @@ function_2fb4c999() {
   level waittill(#"open_sesame");
   level flag::set("<dev string:x38>");
 }
-

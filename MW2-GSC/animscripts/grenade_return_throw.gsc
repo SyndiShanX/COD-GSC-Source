@@ -28,8 +28,9 @@ main() {
   throwAnim = undefined;
 
   throwDist = 1000;
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     throwDist = distance(self.origin, self.enemy.origin);
+  }
 
   // unused: grenade_return_running_kick_forward_1; kicks don't read well to player
   // unused: grenade_return_running_kick_forward_2
@@ -63,14 +64,17 @@ main() {
     //else if( val == "kick2")
     //	throwAnim = %grenade_return_running_kick_forward_2;
     //else
-    if(val == "throw1")
+    if(val == "throw1") {
       throwAnim = % grenade_return_running_throw_forward;
-    else if(val == "throw2")
+    }
+    else if(val == "throw2") {
       throwAnim = % grenade_return_standing_throw_forward_1;
+    }
     //else if( val == "throw3")
     //	throwAnim = %grenade_return_standing_throw_forward_2;
-    else if(val == "throw4")
+    else if(val == "throw4") {
       throwAnim = % grenade_return_standing_throw_overhand_forward;
+    }
   }
 
     assert(isDefined(throwAnim));

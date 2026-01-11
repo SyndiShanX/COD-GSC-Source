@@ -57,11 +57,14 @@ scale_juggernaut_enemies() {
   for(;;) {
     level waittill("update_enemies_remaining_count");
 
-    if(level.pmc.enemies_remaining >= 9)
+    if(level.pmc.enemies_remaining >= 9) {
       level.pmc.max_ai_alive = 1;
-    else if(level.pmc.enemies_remaining >= 7)
+    }
+    else if(level.pmc.enemies_remaining >= 7) {
       level.pmc.max_ai_alive = 2;
-    else
+    }
+    else {
       level.pmc.max_ai_alive = 3;
+    }
   }
 }

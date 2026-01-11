@@ -222,8 +222,9 @@ rocket_barrage_fire_watch(fire_point) {
 rocket_barrage_switch_back() {
   primaryWeapons = self GetWeaponsListPrimaries();
   if(isDefined(primaryWeapons)) {
-    if(maps\_collectibles::has_collectible("collectible_sticksstones") || maps\_collectibles::has_collectible("collectible_berserker"))
+    if(maps\_collectibles::has_collectible("collectible_sticksstones") || maps\_collectibles::has_collectible("collectible_berserker")) {
       self SwitchToWeapon(primaryWeapons[0]);
+    }
   }
   self.rocket_targeting_on = false;
 }

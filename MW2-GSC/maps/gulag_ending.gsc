@@ -23,8 +23,9 @@ endlog_common() {
   waittillframeend; // for _load
 
   if(isDefined(level.stop_load)) {
-    if(GetDvar("createfx") == "")
+    if(GetDvar("createfx") == "") {
       maps\_global_fx::main();
+    }
     return;
   }
 
@@ -47,8 +48,9 @@ endlog_common() {
   level._pipe_fx_time = 2.5;
 
   hookup_rope_ent = GetEnt("hookup_rope_ent", "targetname");
-  if(isDefined(hookup_rope_ent))
+  if(isDefined(hookup_rope_ent)) {
     hookup_rope_ent Delete();
+  }
 
   flag_init("player_approaches_rescue_breach");
   flag_init("intro_helis_go");
@@ -223,8 +225,9 @@ start_run() {
 }
 
 gulag_run_for_it() {
-  if(level.script == "endlog" || level.start_point == "run")
+  if(level.script == "endlog" || level.start_point == "run") {
     wait(0.05);
+  }
 
   set_cafeteria_spotlight_dvars();
 
@@ -346,8 +349,9 @@ gulag_run_for_it() {
   	}
 
   	time = waits[ index ];
-  	if( isDefined( time ) )
+  	if( isDefined( time ) ) {
   		wait( time );
+  	}
   	index++;
   }
   */
@@ -487,8 +491,9 @@ gulag_cafeteria() {
   foreach(ai in guys) {
     ai.grenadeawareness = 0;
 
-    if(!isDefined(ai.magic_bullet_shield))
+    if(!isDefined(ai.magic_bullet_shield)) {
       ai thread magic_bullet_shield();
+    }
 
     ai.IgnoreRandomBulletDamage = true;
     ai.attackeraccuracy = 0;
@@ -513,8 +518,9 @@ gulag_cafeteria() {
 
   flag_wait("match_up_for_final_room");
 
-  if(level.start_point != "cafe")
+  if(level.start_point != "cafe") {
     ent anim_reach_together(guys, "cafe_entrance");
+  }
 
   level notify("cafeteria_sequence_begins");
 
@@ -601,15 +607,17 @@ gulag_evac() {
   level notify("stop_cavein");
   SetSavedDvar("r_spotlightbrightness", 0.6);
   SetSavedDvar("g_friendlyNameDist", 0);
-  if(level.start_point == "evac")
+  if(level.start_point == "evac") {
     wait(0.05); // for bug in doing animscripted on first frame of ai
+  }
 
   level.fx_fall_time = 0.1;
   black_overlay = create_client_overlay("black", 0, level.player);
   black_overlay.alpha = 1;
 
-  if(isDefined(level.black_overlay))
+  if(isDefined(level.black_overlay)) {
     level.black_overlay.alpha = 0;
+  }
 
   level.player AllowCrouch(false);
   level.player AllowProne(false);
@@ -742,8 +750,9 @@ gulag_evac() {
   // player gets close enough
   for( ;; )
   {
-  	if( Distance( level.player.origin, level.soap.origin ) < 64 )
+  	if( Distance( level.player.origin, level.soap.origin ) < 64 ) {
   		break;
+  	}
   	wait( 0.05 );
   }
   */
@@ -853,8 +862,9 @@ player_gets_groundref(tag_origin, player_rig) {
 }
 
 player_hooks_up(ent, player_rigs) {
-  if(flag("player_gets_pulled"))
+  if(flag("player_gets_pulled")) {
     return;
+  }
 
   level endon("player_gets_pulled");
   wait(0.3);
@@ -877,13 +887,15 @@ gulag_ending_startpoint_catchup_thread() {
   waittillframeend; // let the actual start functions run before this one
   start = level.start_point;
 
-  if(is_default_start())
+  if(is_default_start()) {
     return;
+  }
 
   remove_global_spawn_function("allies", ::enable_cqbwalk);
 
-  if(start == "rescue")
+  if(start == "rescue") {
     return;
+  }
 
   flag_clear("enable_interior_fx");
   flag_set("rescue_begins");
@@ -900,8 +912,9 @@ gulag_ending_startpoint_catchup_thread() {
     volume activate_interactives_in_volume();
   }
 
-  if(start == "run")
+  if(start == "run") {
     return;
+  }
 
   thread minor_earthquakes();
   thread cafe_fx();
@@ -917,15 +930,17 @@ gulag_ending_startpoint_catchup_thread() {
 
   level notify("skip_stumble_trigger_think");
 
-  if(start == "cafe")
+  if(start == "cafe") {
     return;
+  }
 
   level notify("stop_minor_earthquakes");
 
   level.player TakeAllWeapons();
   flag_set("player_falls_down");
-  if(start == "evac")
+  if(start == "evac") {
     return;
+  }
 
   AssertMsg("Didn't handle start point " + start);
 }

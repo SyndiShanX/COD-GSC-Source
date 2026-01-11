@@ -231,16 +231,18 @@ disable_lookat(guy) {
 }
 
 detach_binoc(guy) {
-  if(!isDefined(guy.binoc))
+  if(!isDefined(guy.binoc)) {
     return;
+  }
 
   guy Detach("weapon_binocular", "tag_inhand");
   guy.binoc = undefined;
 }
 
 attach_binoc(guy) {
-  if(isDefined(guy.binoc))
+  if(isDefined(guy.binoc)) {
     return;
+  }
 
   guy Attach("weapon_binocular", "tag_inhand");
   guy.binoc = true;
@@ -288,16 +290,18 @@ shepherd_points_at_player() {
 
     weight = 0;
     if(right_dot > 0) {
-      if(degrees > range)
+      if(degrees > range) {
         degrees = range;
+      }
 
       weight = degrees / range;
       self SetAnim(left_anim, 0, 0.2, 1);
       self SetAnim(right_anim, 1, 0.2, 1);
     } else {
       degrees += 10;
-      if(degrees > range)
+      if(degrees > range) {
         degrees = range;
+      }
 
       weight = degrees / range;
       self SetAnim(left_anim, 1, 0.2, 1);

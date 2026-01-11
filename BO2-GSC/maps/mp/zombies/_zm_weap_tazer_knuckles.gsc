@@ -16,10 +16,12 @@ init() {
   registerclientfield("toplayer", "tazer_flourish", 1, 1, "int");
   register_melee_weapon_for_level("tazer_knuckles_zm");
 
-  if(isDefined(level.tazer_cost))
+  if(isDefined(level.tazer_cost)) {
     cost = level.tazer_cost;
-  else
+  }
+  else {
     cost = 6000;
+  }
 
   level.use_tazer_impact_fx = 0;
   maps\mp\zombies\_zm_melee_weapon::init("tazer_knuckles_zm", "zombie_tazer_flourish", "knife_ballistic_no_melee_zm", "knife_ballistic_no_melee_upgraded_zm", cost, "tazer_upgrade", &"ZOMBIE_WEAPON_TAZER_BUY", "tazerknuckles", ::tazer_flourish_fx);
@@ -58,8 +60,9 @@ watch_bodily_functions() {
     }
     ch = randomint(100);
 
-    if(ch < 4)
+    if(ch < 4) {
       playFXOnTag(level._effect["fx_zmb_taser_vomit"], self, "j_neck");
+    }
 
     if(level.use_tazer_impact_fx) {
       tags = [];
@@ -89,8 +92,9 @@ watchtazerknucklemelee() {
   for(;;) {
     self waittill("weapon_melee", weapon);
 
-    if(weapon == "tazer_knuckles_zm")
+    if(weapon == "tazer_knuckles_zm") {
       self tazerknuckle_melee();
+    }
   }
 }
 

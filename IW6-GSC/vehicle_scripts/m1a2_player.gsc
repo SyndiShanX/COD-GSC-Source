@@ -15,8 +15,9 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deckdust("fx/dust/abrams_deck_dust");
   maps\_vehicle::build_team("allies");
 
-  if(issubstr(var_2, "_minigunonly"))
+  if(issubstr(var_2, "_minigunonly")) {
     maps\_vehicle::build_turret("minigun_m1a1", "tag_turret_mg_r", "weapon_m1a1_minigun", undefined, "sentry", undefined, 0, 0);
+  }
   else {
     if(issubstr(var_2, "_turret")) {
       maps\_vehicle::build_turret("m1a1_coaxial_mg", "tag_barrel", "vehicle_m1a1_abrams_PKT_Coaxial_MG", undefined, undefined, undefined, 0, 0, (6, -13.5, 8));
@@ -30,10 +31,12 @@ main(var_0, var_1, var_2) {
     }
   }
 
-  if(!issubstr(var_2, "_viewmodel"))
+  if(!issubstr(var_2, "_viewmodel")) {
     maps\_vehicle::build_treadfx(var_2, "default", "fx/treadfx/tread_sand_satfarm");
-  else
+  }
+  else {
     maps\_vehicle::build_treadfx();
+  }
 
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_aianims(::setanims, ::set_vehicle_anims);
@@ -43,8 +46,9 @@ main(var_0, var_1, var_2) {
 init_local() {
   waittillframeend;
 
-  foreach(var_1 in self.riders)
+  foreach(var_1 in self.riders) {
   var_1 thread maps\_utility::magic_bullet_shield(1);
+  }
 }
 
 set_vehicle_anims(var_0) {

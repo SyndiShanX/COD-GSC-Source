@@ -38,8 +38,9 @@ main() {
   level maps\_utility::delaythread(1.0, maps\_utility::set_team_bcvoice, "axis", "shadowcompany");
   setdvar("music_enable", 1);
 
-  if(level.start_point == "infil")
+  if(level.start_point == "infil") {
     level thread flood_intro_screen();
+  }
 }
 
 checkpoint_setup() {
@@ -128,8 +129,9 @@ mission_objectives() {
       objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
     case "streets":
     case "streets_to_dam":
-      if(level.start_point == "streets_to_dam")
+      if(level.start_point == "streets_to_dam") {
         objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
+      }
 
       common_scripts\utility::flag_wait_either("player_out_of_garage", "launcher_objective_given");
       objective_add(maps\_utility::obj("obj_disable_launcher"), "current", &"FLOOD_OBJ_DISABLE_LAUNCHER");
@@ -155,11 +157,13 @@ mission_objectives() {
       wait 3.0;
       objective_add(maps\_utility::obj("obj_higher_ground"), "current", &"FLOOD_OBJ_HIGHER_GROUND");
     case "flooding_ext":
-      if(level.start_point == "flooding_ext")
+      if(level.start_point == "flooding_ext") {
         objective_add(maps\_utility::obj("obj_higher_ground"), "current", &"FLOOD_OBJ_HIGHER_GROUND");
+      }
     case "flooding_int":
-      if(level.start_point == "flooding_int")
+      if(level.start_point == "flooding_int") {
         objective_add(maps\_utility::obj("obj_higher_ground"), "current", &"FLOOD_OBJ_HIGHER_GROUND");
+      }
 
       common_scripts\utility::flag_wait("player_at_stairs");
       objective_delete(maps\_utility::obj("obj_higher_ground"));
@@ -167,17 +171,21 @@ mission_objectives() {
       common_scripts\utility::flag_wait("stair_post_quake_vo_done");
       objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
     case "swept":
-      if(level.start_point == "swept")
+      if(level.start_point == "swept") {
         objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
+      }
     case "roof_stealth":
-      if(level.start_point == "roof_stealth")
+      if(level.start_point == "roof_stealth") {
         objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
+      }
     case "skybridge":
-      if(level.start_point == "skybridge")
+      if(level.start_point == "skybridge") {
         objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
+      }
     case "rooftops":
-      if(level.start_point == "rooftops")
+      if(level.start_point == "rooftops") {
         objective_add(maps\_utility::obj("obj_find_boss"), "current", &"FLOOD_OBJ_FIND_BOSS");
+      }
 
       common_scripts\utility::flag_wait("rooftops_vo_check_drop");
       wait 1.0;
@@ -201,8 +209,9 @@ mission_objectives() {
       wait 1.0;
       objective_add(maps\_utility::obj("obj_get_to_hotel"), "current", &"FLOOD_OBJ_GET_TO_HOTEL");
     case "garage":
-      if(level.start_point == "garage")
+      if(level.start_point == "garage") {
         objective_add(maps\_utility::obj("obj_get_to_hotel"), "current", &"FLOOD_OBJ_GET_TO_HOTEL");
+      }
 
       maps\_utility::wait_for_targetname_trigger("ending_heli_path");
       wait 4.0;
@@ -528,8 +537,9 @@ mission_object_control() {
       common_scripts\utility::flag_wait("ending_transient_trigger");
       var_3 = getEntArray("script_model_garage_post_stuff_01", "targetname");
 
-      foreach(var_5 in var_3)
+      foreach(var_5 in var_3) {
       var_5 hide();
+      }
 
       maps\_utility::flavorbursts_off("allies");
 
@@ -640,13 +650,15 @@ planter_hide_and_show(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     foreach(var_4 in var_2) {
-      if(!isDefined(var_4.targetname))
+      if(!isDefined(var_4.targetname)) {
         var_4 hide();
+      }
     }
   } else {
     foreach(var_4 in var_2) {
-      if(!isDefined(var_4.targetname))
+      if(!isDefined(var_4.targetname)) {
         var_4 show();
+      }
     }
   }
 }
@@ -655,11 +667,13 @@ script_noteworthy_hide_and_show(var_0, var_1) {
   var_2 = getEntArray(var_0, "script_noteworthy");
 
   if(!isDefined(var_1)) {
-    foreach(var_4 in var_2)
+    foreach(var_4 in var_2) {
     var_4 hide();
+    }
   } else {
-    foreach(var_4 in var_2)
+    foreach(var_4 in var_2) {
     var_4 show();
+    }
   }
 }
 
@@ -673,11 +687,13 @@ streets_vehicle_hide_at_start() {
   var_0 = common_scripts\utility::add_to_array(var_0, getent("flood_ally_car", "script_noteworthy"));
   var_1 = getEntArray("flood_street_car_1", "script_noteworthy");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_0 = common_scripts\utility::add_to_array(var_0, var_3);
+  }
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 hide();
+  }
 }
 
 streets_vehicle_show_after_knife_kill() {
@@ -690,11 +706,13 @@ streets_vehicle_show_after_knife_kill() {
   var_0 = common_scripts\utility::add_to_array(var_0, getent("flood_ally_car", "script_noteworthy"));
   var_1 = getEntArray("flood_street_car_1", "script_noteworthy");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_0 = common_scripts\utility::add_to_array(var_0, var_3);
+  }
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 show();
+  }
 }
 
 streets_script_vehicle_cleanup() {
@@ -707,8 +725,9 @@ streets_script_vehicle_cleanup() {
 swept_cleanup() {
   var_0 = getEntArray("swept_underwater_cleanup", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 palm_tree_control(var_0) {
@@ -727,31 +746,36 @@ palm_tree_control(var_0) {
   var_3[var_3.size] = "flood_shake_tree_right_5";
   var_3[var_3.size] = "flood_shake_tree_right_6";
 
-  foreach(var_5 in var_1)
+  foreach(var_5 in var_1) {
   var_5 hide();
+  }
 
   if(isDefined(var_0)) {
     foreach(var_5 in var_3) {
       var_5 = getent(var_5, "script_noteworthy");
 
-      if(isDefined(var_5))
+      if(isDefined(var_5)) {
         var_5 hide();
+      }
     }
 
-    foreach(var_5 in var_2)
+    foreach(var_5 in var_2) {
     var_5 hide();
+    }
 
     level waittill("end_streets");
 
     foreach(var_5 in var_3) {
       var_5 = getent(var_5, "script_noteworthy");
 
-      if(isDefined(var_5))
+      if(isDefined(var_5)) {
         var_5 show();
+      }
     }
 
-    foreach(var_5 in var_2)
+    foreach(var_5 in var_2) {
     var_5 show();
+    }
   }
 
   common_scripts\utility::flag_wait("player_warehouse_mantle");
@@ -764,33 +788,38 @@ show_rushing_water_trees_infil_trees_cleanup(var_0) {
   if(isDefined(var_0)) {
     var_1 = getEntArray("infil_optimize_delay_delete", "script_noteworthy");
 
-    foreach(var_3 in var_1)
+    foreach(var_3 in var_1) {
     var_3 delete();
+    }
   }
 
   var_5 = getEntArray("palm_tree_in_rushing_water", "script_noteworthy");
 
-  foreach(var_3 in var_5)
+  foreach(var_3 in var_5) {
   var_3 show();
+  }
 }
 
 infil_optimize_tree_cleanup() {
   var_0 = getEntArray("infil_optimize", "script_noteworthy");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 embassy_palms_cleanup() {
   var_0 = getEntArray("embassy_palms", "script_noteworthy");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 hotel_parking_car_hide() {
-  for(var_0 = 0; var_0 < 5; var_0++)
+  for(var_0 = 0; var_0 < 5; var_0++) {
     thread maps\flood_util::hide_models_by_targetname("debris_bridge_car_" + var_0);
+  }
 }
 
 hotel_parking_facade() {
@@ -798,15 +827,17 @@ hotel_parking_facade() {
   var_0 waittill("trigger");
   thread maps\flood_util::hide_models_by_targetname("garage_facade");
 
-  for(var_1 = 0; var_1 < 5; var_1++)
+  for(var_1 = 0; var_1 < 5; var_1++) {
     thread maps\flood_util::show_models_by_targetname("debris_bridge_car_" + var_1);
+  }
 }
 
 flood_createfx_cleanup() {
   level endon("load_finished");
 
-  while(!isDefined(level.stop_load))
+  while(!isDefined(level.stop_load)) {
     wait 0.05;
+  }
 
   if(level.createfx_enabled) {
     common_scripts\utility::array_call(getaiarray(), ::delete);
@@ -892,8 +923,9 @@ e3_section() {
   level.e3_demo = undefined;
   maps\_utility::nextmission();
 
-  for(;;)
+  for(;;) {
     wait 1.0;
+  }
 }
 
 e3_fadein(var_0) {
@@ -1058,15 +1090,17 @@ fly_around() {
     thread maps\flood_swept::swept_water_toggle("debri_bridge", "hide");
     thread maps\flood_util::hide_scriptmodel_by_targetname_array("embassy_hide");
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonpressed("BUTTON_X")) {
       wait 0.05;
+    }
 
     iprintln("flood_intro_tr transient fastfile dam");
     thread maps\flood_util::show_models_by_targetname("embassy_hide");
     wait 1.0;
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonpressed("BUTTON_X")) {
       wait 0.05;
+    }
 
     thread maps\_utility::transient_unloadall_and_load("flood_mid_tr");
     common_scripts\utility::flag_wait("flood_mid_tr_loaded");
@@ -1076,8 +1110,9 @@ fly_around() {
     thread maps\flood_util::hide_scriptmodel_by_targetname_array("embassy_hide");
     thread maps\flood_mall::mallroof_firstframe();
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonpressed("BUTTON_X")) {
       wait 0.05;
+    }
 
     wait 1.0;
     thread maps\flood_swept::swept_water_toggle("swim", "show");
@@ -1085,8 +1120,9 @@ fly_around() {
     thread maps\flood_util::show_models_by_targetname("garage_facade");
     iprintln("flood_mid_tr transient fastfile loaded swept");
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonpressed("BUTTON_X")) {
       wait 0.05;
+    }
 
     wait 1.0;
     iprintln("flood_mid_tr transient fastfile loaded rooftops");
@@ -1095,8 +1131,9 @@ fly_around() {
     thread maps\flood_util::hide_models_by_targetname("swept_underwater_cleanup");
     thread maps\flood_util::hide_models_by_targetname("garage_facade");
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonpressed("BUTTON_X")) {
       wait 0.05;
+    }
 
     thread maps\_utility::transient_unloadall_and_load("flood_end_tr");
     common_scripts\utility::flag_wait("flood_end_tr_loaded");
@@ -1104,8 +1141,9 @@ fly_around() {
     wait 1.0;
     iprintln("flood_end_tr transient fastfile loaded");
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonpressed("BUTTON_X")) {
       wait 0.05;
+    }
 
     thread maps\_utility::transient_unloadall_and_load("flood_intro_tr");
     common_scripts\utility::flag_wait("flood_intro_tr_loaded");

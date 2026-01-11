@@ -255,8 +255,9 @@ screecherstart() {
   while(true) {
     level waittill("scrStrt");
 
-    if(!isDefined(level.screecherent))
+    if(!isDefined(level.screecherent)) {
       level.screecherent = spawn(0, (0, 0, 0), "script_origin");
+    }
 
     level.screecherent playLoopSound("zmb_screecher_arm_loop", 1);
   }

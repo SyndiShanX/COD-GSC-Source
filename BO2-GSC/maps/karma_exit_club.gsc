@@ -354,8 +354,9 @@ intruder_perk() {
   run_scene_first_frame("intruder_knuckles");
   a_weapons = getEntArray("intruder_weapons", "targetname");
 
-  foreach(weapon in a_weapons)
+  foreach(weapon in a_weapons) {
   weapon makeunusable();
+  }
 
   if(level.player hasperk("specialty_intruder")) {
     s_intruder = getstruct("intruder_use_pos", "targetname");
@@ -366,8 +367,9 @@ intruder_perk() {
     intruder_blocker_clip = getent("intruder_blocker_clip", "targetname");
     intruder_blocker_clip delete();
 
-    foreach(weapon in a_weapons)
+    foreach(weapon in a_weapons) {
     weapon makeusable();
+    }
 
     set_objective(level.obj_intruder, s_intruder, "remove");
     delay_thread(7.0, ::intruder_glow_hide);

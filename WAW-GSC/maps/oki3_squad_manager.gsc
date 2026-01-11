@@ -55,8 +55,9 @@ manage_spawners(strSquadName, mincount, maxcount, ender, spawntime, spawnfunctio
     maps\_utility::error("SQUAD MANAGER:Could not find target nodes for squad " + strSquadName);
     return;
   }
-  if(!isDefined(spawntime))
+  if(!isDefined(spawntime)) {
     spawntime = 0.05;
+  }
   while(1) {
     aSquad = alive_array(strSquadName);
     if(aSquad.size < mincount) {
@@ -76,8 +77,9 @@ manage_spawners(strSquadName, mincount, maxcount, ender, spawntime, spawnfunctio
           spawned setgoalnode(squad_targets[goal_index]);
           spawned.sm_goalnode = squad_targets[goal_index];
           goal_index = goal_index + 1;
-          if(goal_index >= squad_targets.size)
+          if(goal_index >= squad_targets.size) {
             goal_index = 0;
+          }
           wait(0.01);
           aSquad[aSquad.size] = spawned;
           if(isDefined(spawnfunction)) {
@@ -87,8 +89,9 @@ manage_spawners(strSquadName, mincount, maxcount, ender, spawntime, spawnfunctio
           }
         }
         spawn_index = spawn_index + 1;
-        if(spawn_index >= squad_spawn.size)
+        if(spawn_index >= squad_spawn.size) {
           spawn_index = 0;
+        }
         wait(spawntime);
       }
       wave_delay = .05;
@@ -115,10 +118,12 @@ advance() {
   if(!isDefined(self.sm_goalnode.target)) {
     return;
   }
-  if(!isDefined(self.sm_advance_wait_min))
+  if(!isDefined(self.sm_advance_wait_min)) {
     self.sm_advance_wait_min = 5;
-  if(!isDefined(self.sm_advance_wait_max))
+  }
+  if(!isDefined(self.sm_advance_wait_max)) {
     self.sm_advance_wait_max = 15;
+  }
   self waittill("goal");
   wait(randomint(self.sm_advance_wait_min, self.sm_advance_wait_max));
   self pick_random_goal_node();

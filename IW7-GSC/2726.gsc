@@ -27,31 +27,39 @@ setheadicon(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_
   if(scripts\mp\utility\game::isgameparticipant(var_00) && !isplayer(var_00)) {
     return;
   }
-  if(!isDefined(self.entityheadicons))
+  if(!isDefined(self.entityheadicons)) {
     self.entityheadicons = [];
+  }
 
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     var_05 = 1;
+  }
 
-  if(!isDefined(var_06))
+  if(!isDefined(var_06)) {
     var_06 = 0.05;
+  }
 
-  if(!isDefined(var_07))
+  if(!isDefined(var_07)) {
     var_07 = 1;
+  }
 
-  if(!isDefined(var_08))
+  if(!isDefined(var_08)) {
     var_08 = 1;
+  }
 
-  if(!isDefined(var_09))
+  if(!isDefined(var_09)) {
     var_09 = 0;
+  }
 
-  if(!isDefined(var_10))
+  if(!isDefined(var_10)) {
     var_10 = 1;
+  }
 
   if(!isplayer(var_00) && var_00 == "none") {
     foreach(var_13, var_12 in self.entityheadicons) {
-      if(isDefined(var_12))
+      if(isDefined(var_12)) {
         var_12 destroy();
+      }
 
       self.entityheadicons[var_13] = undefined;
     }
@@ -114,11 +122,13 @@ setheadicon(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_
     var_12 thread keeppositioned(self, var_02, var_06);
     thread destroyiconsondeath();
 
-    if(isplayer(var_00))
+    if(isplayer(var_00)) {
       var_12 thread destroyonownerdisconnect(var_00);
+    }
 
-    if(isplayer(self))
+    if(isplayer(self)) {
       var_12 thread destroyonownerdisconnect(self);
+    }
   }
 }
 
@@ -150,8 +160,9 @@ keeppositioned(var_00, var_01, var_02) {
   var_00 endon("disconnect");
   var_03 = isDefined(var_0.classname) && !isownercarepakage(var_00);
 
-  if(var_03)
+  if(var_03) {
     self gettweakabledvarvalue(var_00, var_01);
+  }
 
   for(;;) {
     if(!isDefined(var_00)) {
@@ -183,10 +194,12 @@ setheadicon_factionimage(var_00, var_01, var_02) {
   var_00 endon("disconnect");
   wait(var_02);
 
-  if(level.teambased)
+  if(level.teambased) {
     setteamheadicon(var_0.team, var_01);
-  else
+  }
+  else {
     setplayerheadicon(var_00, var_01);
+  }
 }
 
 setteamheadicon(var_00, var_01) {
@@ -201,16 +214,19 @@ setteamheadicon(var_00, var_01) {
   var_02 = game["entity_headicon_" + var_00];
   self.entityheadiconteam = var_00;
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     self.entityheadiconoffset = var_01;
-  else
+  }
+  else {
     self.entityheadiconoffset = (0, 0, 0);
+  }
 
   self notify("kill_entity_headicon_thread");
 
   if(var_00 == "none") {
-    if(isDefined(self.entityheadicon))
+    if(isDefined(self.entityheadicon)) {
       self.entityheadicon destroy();
+    }
 
     return;
   }
@@ -241,8 +257,9 @@ setplayerheadicon(var_00, var_01) {
   self notify("kill_entity_headicon_thread");
 
   if(!isDefined(var_00)) {
-    if(isDefined(self.entityheadicon))
+    if(isDefined(self.entityheadicon)) {
       self.entityheadicon destroy();
+    }
 
     return;
   }
@@ -250,10 +267,12 @@ setplayerheadicon(var_00, var_01) {
   var_02 = var_0.team;
   self.entityheadiconteam = var_02;
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     self.entityheadiconoffset = var_01;
-  else
+  }
+  else {
     self.entityheadiconoffset = (0, 0, 0);
+  }
 
   var_03 = game["entity_headicon_" + var_02];
   var_04 = newclienthudelem(var_00);

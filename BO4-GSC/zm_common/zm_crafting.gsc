@@ -1575,4 +1575,3 @@ function_fe738a08(table_id) {
   self setorigin(plorigin);
   self setplayerangles(var_21f5823e);
 }
-

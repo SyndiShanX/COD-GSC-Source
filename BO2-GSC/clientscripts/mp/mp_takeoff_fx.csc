@@ -97,8 +97,9 @@ fxanim_init(localclientnum) {
     if(!isDefined(level.radar_waits)) {
       level.radar_waits = [];
 
-      for(i = 1; i < 6; i++)
+      for(i = 1; i < 6; i++) {
         level.radar_waits[i] = randomfloatrange(5, 10);
+      }
     }
 
     radar thread fxanim_radar_think(localclientnum);
@@ -106,15 +107,17 @@ fxanim_init(localclientnum) {
 
   decont_blasters = getent(localclientnum, "fxanim_dlc4_blasters", "targetname");
 
-  if(isDefined(decont_blasters))
+  if(isDefined(decont_blasters)) {
     decont_blasters thread fxanim_decontamination_think(localclientnum);
+  }
 
   planets_candidates = getEntArray(localclientnum, "fxanim_dlc4", "targetname");
 
   if(isDefined(planets_candidates) && planets_candidates.size > 0) {
     foreach(planets_candidate in planets_candidates) {
-      if(planets_candidate.model == "fxanim_mp_takeoff_planets_mod")
+      if(planets_candidate.model == "fxanim_mp_takeoff_planets_mod") {
         planets_candidate thread fxanim_planets_think(localclientnum);
+      }
     }
   }
 
@@ -157,8 +160,9 @@ fxanim_radar_think(localclientnum) {
     self clearanim(level.scr_anim["fxanim_props_dlc4"]["radar0" + anim_index], 0);
     anim_index++;
 
-    if(anim_index > 5)
+    if(anim_index > 5) {
       anim_index = 1;
+    }
   }
 }
 
@@ -216,8 +220,9 @@ main() {
   precache_fxanim_props_dlc4();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0)
+  if(!isDefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
+  }
 }
 
 playexploderonstart() {

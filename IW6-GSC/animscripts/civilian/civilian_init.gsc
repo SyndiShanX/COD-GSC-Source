@@ -111,11 +111,13 @@ startnoncombat() {
     var_0 = % civilian_briefcase_walk_dodge_l;
     var_1 = % civilian_briefcase_walk_dodge_r;
 
-    if(isDefined(level.scr_anim[self.animname]["dodge_left"]))
+    if(isDefined(level.scr_anim[self.animname]["dodge_left"])) {
       var_0 = level.scr_anim[self.animname]["dodge_left"];
+    }
 
-    if(isDefined(level.scr_anim[self.animname]["dodge_right"]))
+    if(isDefined(level.scr_anim[self.animname]["dodge_right"])) {
       var_1 = level.scr_anim[self.animname]["dodge_right"];
+    }
 
     animscripts\move::setdodgeanims(var_0, var_1);
   }
@@ -145,10 +147,12 @@ startcombat() {
   self.turnrate = 0.3;
   var_0 = randomint(3) < 1;
 
-  if(isDefined(self.force_civilian_stand_run))
+  if(isDefined(self.force_civilian_stand_run)) {
     var_0 = 1;
-  else if(isDefined(self.force_civilian_hunched_run))
+  }
+  else if(isDefined(self.force_civilian_hunched_run)) {
     var_0 = 0;
+  }
 
   if(var_0) {
     self.pathturnanimoverridefunc = animscripts\civilian\civilian_move::civilian_combatmoveturn;
@@ -175,10 +179,12 @@ checkcombatstate() {
   for(;;) {
     var_1 = self.alertlevelint > 1;
 
-    if(var_0 && !var_1)
+    if(var_0 && !var_1) {
       startnoncombat();
-    else if(!var_0 && var_1)
+    }
+    else if(!var_0 && var_1) {
       startcombat();
+    }
 
     var_0 = var_1;
     wait 0.05;

@@ -32,14 +32,18 @@ main() {
 
   game["dialog"]["gametype"] = "gtw";
 
-  if(getDvarInt("g_hardcore"))
+  if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  else if(getDvarInt("camera_thirdPerson"))
+  }
+  else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  else if(getDvarInt("scr_diehard"))
+  }
+  else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  else if(getDvarInt("scr_" + level.gameType + "_promode"))
+  }
+  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
+  }
 
   game["dialog"]["offense_obj"] = "obj_destroy";
   game["dialog"]["defense_obj"] = "obj_defend";
@@ -67,11 +71,13 @@ onPlayerConnect() {
 }
 
 onStartGameType() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = false;
+  }
 
-  if(!isDefined(game["original_defenders"]))
+  if(!isDefined(game["original_defenders"])) {
     game["original_defenders"] = game["defenders"];
+  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -158,10 +164,12 @@ setupNukeSite() {
 }
 
 getSpawnPoint() {
-  if(self.team == "axis")
+  if(self.team == "axis") {
     spawnTeam = game["attackers"];
-  else
+  }
+  else {
     spawnTeam = game["defenders"];
+  }
 
   if(level.inGracePeriod) {
     if(getDvar("mapname") == "mp_shipment_long") {
@@ -227,8 +235,9 @@ overtimeThread(time) {
 
   time = level.endGameTime;
 
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player thread maps\mp\gametypes\_hud_message::SplashNotify("gtnw_overtime");
+  }
 
   maps\mp\gametypes\_gamelogic::pauseTimer();
   level.timeLimitOverride = true;
@@ -288,8 +297,9 @@ scoreCounter() {
     self maps\mp\gametypes\_gameobjects::set3DIcon("enemy", "waypoint_capture");
 
     if(self.touchList["axis"].size > self.touchList["allies"].size) {
-      if(maps\mp\gametypes\_gamescore::_getTeamScore("axis") < 100)
+      if(maps\mp\gametypes\_gamescore::_getTeamScore("axis") < 100) {
         maps\mp\gametypes\_gamescore::giveTeamScoreForObjective("axis", 1);
+      }
 
       self thread setUseBarScore("axis");
       setDvar("ui_danger_team", "allies");
@@ -301,8 +311,9 @@ scoreCounter() {
         self notify("stop_counting");
       }
     } else if(self.touchList["axis"].size < self.touchList["allies"].size) {
-      if(maps\mp\gametypes\_gamescore::_getTeamScore("allies") < 100)
+      if(maps\mp\gametypes\_gamescore::_getTeamScore("allies") < 100) {
         maps\mp\gametypes\_gamescore::giveTeamScoreForObjective("allies", 1);
+      }
 
       self thread setUseBarScore("allies");
       setDvar("ui_danger_team", "axis");
@@ -414,6 +425,7 @@ onNormalDeath(victim, attacker, lifeId) {
   }
   team = victim.team;
 
-  if(game["state"] == "postgame")
+  if(game["state"] == "postgame") {
     attacker.finalKill = true;
+  }
 }

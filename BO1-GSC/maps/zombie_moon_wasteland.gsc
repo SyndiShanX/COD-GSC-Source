@@ -692,12 +692,15 @@ nml_shouldSideStep() {
 }
 
 nml_canSideStep() {
-  if(GetTime() - self.a.lastSideStepTime < level.NML_REACTION_INTERVAL)
+  if(GetTime() - self.a.lastSideStepTime < level.NML_REACTION_INTERVAL) {
     return false;
-  if(!isDefined(self.enemy))
+  }
+  if(!isDefined(self.enemy)) {
     return false;
-  if(self.a.pose != "stand")
+  }
+  if(self.a.pose != "stand") {
     return false;
+  }
   distSqFromEnemy = distanceSquared(self.origin, self.enemy.origin);
   if(distSqFromEnemy < level.NML_MIN_REACTION_DIST_SQ) {
     return false;

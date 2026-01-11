@@ -7,8 +7,9 @@ init() {
   SetAIFootstepPrepend("fly_step_run_npc_");
 }
 playerFootstep(client_num, player, movementtype, ground_type, firstperson, quiet) {
-  if(player underwater())
+  if(player underwater()) {
     return;
+  }
   if(isDefined(level.footstep_vol_override)) {
     movementtype = "run";
   }
@@ -63,8 +64,9 @@ playAIFootstep(client_num, ent, pos, ground_type, on_fire, is_dog) {
   if(is_dog) {
     sound_alias = "fly_dog_step_run_default";
   }
-  if(isDefined(sound_alias))
+  if(isDefined(sound_alias)) {
     playSound(client_num, sound_alias, pos);
+  }
   if(isDefined(ent.step_sound) && (ent.step_sound) != "null") {
     volume = clientscripts\_audio::get_vol_from_speed(ent);
     ent playSound(client_num, ent.step_sound, ent.origin, volume);

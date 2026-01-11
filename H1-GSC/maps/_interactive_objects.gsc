@@ -9,13 +9,15 @@ main() {
   var_0 = 0;
   var_1 = getEntArray("explodable_barrel", "targetname");
 
-  if(isDefined(var_1) && var_1.size > 0)
+  if(isDefined(var_1) && var_1.size > 0) {
     var_0 = 1;
+  }
 
   var_1 = getEntArray("explodable_barrel", "script_noteworthy");
 
-  if(isDefined(var_1) && var_1.size > 0)
+  if(isDefined(var_1) && var_1.size > 0) {
     var_0 = 1;
+  }
 
   if(var_0) {
     setbreakablesfx("barrel", "explode", "fx\props\barrelExp", "explo_metal_barrel");
@@ -32,29 +34,34 @@ main() {
 
   var_3 = getEntArray("tincan", "targetname");
 
-  if(isDefined(var_3) && var_3.size > 0)
+  if(isDefined(var_3) && var_3.size > 0) {
     setbreakablesfx("tincan", undefined, "fx\props\tincan_bounce");
+  }
 
   var_4 = 0;
   var_5 = getEntArray("breakable", "targetname");
 
-  if(isDefined(var_5) && var_5.size > 0)
+  if(isDefined(var_5) && var_5.size > 0) {
     var_4 = 1;
+  }
 
   var_5 = getEntArray("breakable_vase", "targetname");
 
-  if(isDefined(var_5) && var_5.size > 0)
+  if(isDefined(var_5) && var_5.size > 0) {
     var_4 = 1;
+  }
 
   var_5 = getEntArray("breakable box", "targetname");
 
-  if(isDefined(var_1) && var_1.size > 0)
+  if(isDefined(var_1) && var_1.size > 0) {
     var_4 = 1;
+  }
 
   var_5 = getEntArray("breakable box", "script_noteworthy");
 
-  if(isDefined(var_1) && var_1.size > 0)
+  if(isDefined(var_1) && var_1.size > 0) {
     var_4 = 1;
+  }
 
   if(var_4) {
     setbreakablesfx("vase", undefined, "fx\props\vase_water", "bullet_large_vase");
@@ -112,11 +119,13 @@ main() {
   level.console_auto_aim = getEntArray("xenon_auto_aim", "targetname");
   level.console_auto_aim_2nd = getEntArray("xenon_auto_aim_secondary", "targetname");
 
-  for(var_10 = 0; var_10 < level.console_auto_aim.size; var_10++)
+  for(var_10 = 0; var_10 < level.console_auto_aim.size; var_10++) {
     level.console_auto_aim[var_10] notsolid();
+  }
 
-  for(var_10 = 0; var_10 < level.console_auto_aim_2nd.size; var_10++)
+  for(var_10 = 0; var_10 < level.console_auto_aim_2nd.size; var_10++) {
     level.console_auto_aim_2nd[var_10] notsolid();
+  }
 
   maps\_utility::set_console_status();
 
@@ -127,8 +136,9 @@ main() {
 
   var_11 = getEntArray("breakable clip", "targetname");
 
-  for(var_10 = 0; var_10 < var_11.size; var_10++)
+  for(var_10 = 0; var_10 < var_11.size; var_10++) {
     level.breakables_clip[level.breakables_clip.size] = var_11[var_10];
+  }
 
   level._breakable_utility_modelarray = [];
   level._breakable_utility_modelindex = 0;
@@ -165,8 +175,9 @@ security_camera_logic() {
   self setModel(var_0);
   playFXOnTag(level.breakables_fx["security_camera_explode"], self, "tag_deathfx");
 
-  if(isDefined(level.breakables_sfx["security_camera_explode"]))
+  if(isDefined(level.breakables_sfx["security_camera_explode"])) {
     thread maps\_utility::play_sound_on_tag_endon_death(level.breakables_sfx["security_camera_explode"]);
+  }
 }
 
 tv_logic() {
@@ -203,8 +214,9 @@ tv_logic() {
 
   thread tv_damage();
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     thread tv_off();
+  }
 }
 
 tv_off() {
@@ -219,16 +231,18 @@ tv_off() {
     if(is_tv_off()) {
       self setModel(self.onmodel);
 
-      if(isDefined(self.lite))
+      if(isDefined(self.lite)) {
         self.lite setlightintensity(self.liteintensity);
+      }
 
       continue;
     }
 
     self setModel(self.offmodel);
 
-    if(isDefined(self.lite))
+    if(isDefined(self.lite)) {
       self.lite setlightintensity(0);
+    }
   }
 }
 
@@ -240,33 +254,39 @@ tv_damage() {
       if(!isalive(var_1)) {
         continue;
       }
-      if(var_1 != level.player)
+      if(var_1 != level.player) {
         continue;
+      }
     }
 
     break;
   }
 
-  if(isDefined(level.tvhook))
+  if(isDefined(level.tvhook)) {
     [[level.tvhook]]();
+  }
 
   self notify("off");
 
-  if(isDefined(self.usetrig))
+  if(isDefined(self.usetrig)) {
     self.usetrig notify("death");
+  }
 
   self setModel(self.damagemodel);
 
-  if(isDefined(self.lite))
+  if(isDefined(self.lite)) {
     self.lite setlightintensity(0);
+  }
 
   playFXOnTag(level.breakables_fx["tv_explode"], self, "tag_fx");
 
-  if(isDefined(level.breakables_sfx["tv_explode"]))
+  if(isDefined(level.breakables_sfx["tv_explode"])) {
     thread maps\_utility::play_sound_on_tag(level.breakables_sfx["tv_explode"], "tag_fx");
+  }
 
-  if(isDefined(self.usetrig))
+  if(isDefined(self.usetrig)) {
     self.usetrig delete();
+  }
 }
 
 is_tv_on() {
@@ -296,8 +316,9 @@ destroy_platestack() {
     if(var_5 != "MOD_MELEE" && var_5 != "MOD_IMPACT") {
       playFX(level.breakables_fx["platestack_shatter"], self.origin);
 
-      foreach(var_7 in var_0)
+      foreach(var_7 in var_0) {
       var_7 delete();
+      }
 
       self delete();
     }
@@ -327,8 +348,9 @@ glass_logic() {
   var_2 = undefined;
   var_3 = 0;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_2 = getent(self.target, "targetname");
+  }
 
   if(isDefined(self.script_linkto)) {
     var_4 = common_scripts\utility::get_links();
@@ -354,27 +376,34 @@ glass_logic() {
     var_1 = var_2 setcontents(0);
   }
 
-  if(isDefined(self.script_health))
+  if(isDefined(self.script_health)) {
     var_3 = self.script_health;
-  else if(isDefined(var_2))
+  }
+  else if(isDefined(var_2)) {
     var_3 = 99;
-  else
+  }
+  else {
     var_3 = 250;
+  }
 
   self setCanDamage(1);
 
   while(var_3 > 0) {
     self waittill("damage", var_6, var_7, var_0, var_8, var_9);
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       var_0 = (0, 0, 1);
+    }
 
-    if(!isDefined(var_9))
+    if(!isDefined(var_9)) {
       var_6 = 100000;
-    else if(var_9 == "MOD_GRENADE_SPLASH")
+    }
+    else if(var_9 == "MOD_GRENADE_SPLASH") {
       var_6 = var_6 * 1.75;
-    else if(var_9 == "MOD_IMPACT")
+    }
+    else if(var_9 == "MOD_IMPACT") {
       var_6 = 100000;
+    }
 
     var_3 = var_3 - var_6;
   }
@@ -392,13 +421,16 @@ glass_logic() {
     while(var_3 > 0) {
       var_2 waittill("damage", var_6, var_11, var_0, var_8, var_9);
 
-      if(!isDefined(var_0))
+      if(!isDefined(var_0)) {
         var_0 = (0, 0, 1);
+      }
 
-      if(!isDefined(var_9))
+      if(!isDefined(var_9)) {
         var_6 = 100000;
-      else if(var_9 == "MOD_GRENADE_SPLASH")
+      }
+      else if(var_9 == "MOD_GRENADE_SPLASH") {
         var_6 = var_6 * 1.75;
+      }
       else if(var_9 == "MOD_IMPACT") {
         break;
       }
@@ -443,8 +475,9 @@ oil_spill_think() {
     playFX(level.breakables_fx["oilspill"]["spark"], var_4, var_3);
     var_0 = spawn("script_origin", var_4);
 
-    if(isDefined(level.breakables_sfx["oilspill"]["spark"]))
+    if(isDefined(level.breakables_sfx["oilspill"]["spark"])) {
       var_0 thread maps\_utility::play_sound_on_tag_endon_death(level.breakables_sfx["oilspill"]["spark"]);
+    }
 
     var_4 = pointonsegmentnearesttopoint(self.start.origin, self.end.origin, var_4);
     thread oil_spill_burn_section(var_4);
@@ -453,11 +486,13 @@ oil_spill_think() {
     break;
   }
 
-  if(isDefined(self.barrel))
+  if(isDefined(self.barrel)) {
     self.barrel waittill("exploding");
+  }
 
-  if(isDefined(level.breakables_sfx["oilspill"]["spark"]))
+  if(isDefined(level.breakables_sfx["oilspill"]["spark"])) {
     var_0 stopsound(level.breakables_sfx["oilspill"]["spark"]);
+  }
 
   self.extra delete();
   self hide();
@@ -523,8 +558,9 @@ oil_spill_burn(var_0, var_1) {
       }
     }
 
-    for(var_13 = 0; var_13 < var_12.size; var_13++)
+    for(var_13 = 0; var_13 < var_12.size; var_13++) {
       var_8 = common_scripts\utility::array_remove(var_8, var_12[var_13]);
+    }
 
     wait 0.1;
   }
@@ -532,8 +568,9 @@ oil_spill_burn(var_0, var_1) {
   if(!isDefined(self.barrel)) {
     return;
   }
-  if(distance(var_0, self.start.origin) < 32)
+  if(distance(var_0, self.start.origin) < 32) {
     self.barrel dodamage(80 + randomfloat(10), var_0);
+  }
 }
 
 oil_spill_burn_section(var_0) {
@@ -541,8 +578,9 @@ oil_spill_burn_section(var_0) {
   var_2 = 0;
   playFX(level.breakables_fx["oilspill"]["burn"], var_0);
 
-  if(isDefined(level.breakables_sfx["oilspill"]["burn"]))
+  if(isDefined(level.breakables_sfx["oilspill"]["burn"])) {
     thread maps\_utility::play_loop_sound_on_tag(level.breakables_sfx["oilspill"]["burn"], undefined, 1, 1);
+  }
 }
 
 explodable_barrel_think() {
@@ -569,13 +607,15 @@ explodable_barrel_think() {
     }
     self.damageowner = var_1;
 
-    if(level.barrelexplodingthisframe)
+    if(level.barrelexplodingthisframe) {
       wait(randomfloat(1));
+    }
 
     self.damagetaken = self.damagetaken + var_0;
 
-    if(self.damagetaken == var_0)
+    if(self.damagetaken == var_0) {
       thread explodable_barrel_burn();
+    }
   }
 }
 
@@ -599,19 +639,22 @@ explodable_barrel_burn() {
     if(!var_1) {
       playFX(level.breakables_fx["barrel"]["burn_start"], self.origin + var_5);
 
-      if(isDefined(level.breakables_sfx["barrel"]["burn_start"]))
+      if(isDefined(level.breakables_sfx["barrel"]["burn_start"])) {
         thread maps\_utility::play_sound_on_tag_endon_death(level.breakables_sfx["barrel"]["burn_start"]);
+      }
 
       var_1 = 1;
     }
 
-    if(var_0 > 20)
+    if(var_0 > 20) {
       var_0 = 0;
+    }
 
     playFX(level.breakables_fx["barrel"]["burn"], self.origin + var_6);
 
-    if(isDefined(level.breakables_sfx["barrel"]["burn"]))
+    if(isDefined(level.breakables_sfx["barrel"]["burn"])) {
       var_7 thread maps\_utility::play_loop_sound_on_tag(level.breakables_sfx["barrel"]["burn"], undefined, 1, 1);
+    }
 
     if(var_0 == 0) {
       self.damagetaken = self.damagetaken + (10 + randomfloat(10));
@@ -646,8 +689,9 @@ explodable_barrel_explode() {
   var_3 = var_3 + (0, 0, 4);
   playFX(level.breakables_fx["barrel"]["explode"], self.origin + var_3);
 
-  if(isDefined(level.breakables_sfx["barrel"]["explode"]))
+  if(isDefined(level.breakables_sfx["barrel"]["explode"])) {
     thread maps\_utility::play_sound_on_tag_endon_death(level.breakables_sfx["barrel"]["explode"]);
+  }
 
   physicsexplosionsphere(self.origin + var_3, 100, 80, 1);
   level.barrelexplodingthisframe = 1;
@@ -661,16 +705,18 @@ explodable_barrel_explode() {
   var_7 = 250;
   var_8 = 250;
 
-  if(isDefined(self.radius))
+  if(isDefined(self.radius)) {
     var_8 = self.radius;
+  }
 
   var_9 = undefined;
 
   if(isDefined(self.damageowner)) {
     var_9 = self.damageowner;
 
-    if(isplayer(var_9))
+    if(isplayer(var_9)) {
       maps\_utility::arcademode_kill(self.origin, "rifle", 150);
+    }
   }
 
   level.lastexplodingbarrel["time"] = gettime();
@@ -678,10 +724,12 @@ explodable_barrel_explode() {
   level.lastexplodingbarrel["radius"] = 350;
   self radiusdamage(self.origin + (0, 0, 30), var_8, var_7, var_6, var_9);
 
-  if(randomint(2) == 0)
+  if(randomint(2) == 0) {
     self setModel("com_barrel_piece");
-  else
+  }
+  else {
     self setModel("com_barrel_piece2");
+  }
 
   if(var_2 < 0.5) {
     var_4 = self.origin + maps\_utility::vector_multiply(var_0, 22);
@@ -697,18 +745,21 @@ explodable_barrel_explode() {
 shuddering_entity_think() {
   var_0 = 0;
 
-  if(self.model == "prop_helmet_german_normandy")
+  if(self.model == "prop_helmet_german_normandy") {
     var_0 = 1;
+  }
 
   self setCanDamage(1);
 
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4);
 
-    if(var_0)
+    if(var_0) {
       self vibrate(var_3, 20, 0.6, 0.75);
-    else
+    }
+    else {
       self vibrate(var_3, 0.4, 0.4, 0.4);
+    }
 
     self waittill("rotatedone");
   }
@@ -721,18 +772,21 @@ tincan_think() {
   self setCanDamage(1);
   self waittill("damage", var_0, var_1);
 
-  if(issentient(var_1))
+  if(issentient(var_1)) {
     var_2 = var_1 getEye() - (0, 0, randomint(50) + 50);
-  else
+  }
+  else {
     var_2 = var_1.origin;
+  }
 
   var_3 = vectornormalize(self.origin - var_2);
   var_3 = common_scripts\utility::vectorscale(var_3, 0.5 + randomfloat(1));
   self notify("death");
   playFX(level.breakables_fx["tincan"], self.origin, var_3);
 
-  if(isDefined(level.breakables_sfx["tincan"]))
+  if(isDefined(level.breakables_sfx["tincan"])) {
     thread common_scripts\utility::play_sound_in_space(level.breakables_sfx["tincan"], self.origin);
+  }
 
   self delete();
 }
@@ -749,10 +803,12 @@ helmet_pop() {
 helmet_logic() {
   self waittill("damage", var_0, var_1);
 
-  if(issentient(var_1))
+  if(issentient(var_1)) {
     var_2 = var_1 getEye();
-  else
+  }
+  else {
     var_2 = var_1.origin;
+  }
 
   var_3 = vectornormalize(self.origin - var_2);
 
@@ -772,15 +828,18 @@ helmet_logic() {
 }
 
 allowbreak(var_0) {
-  if(!isDefined(level.breakingents))
+  if(!isDefined(level.breakingents)) {
     return 1;
+  }
 
-  if(level.breakingents.size == 0)
+  if(level.breakingents.size == 0) {
     return 0;
+  }
   else {
     for(var_1 = 0; var_1 < level.breakingents.size; var_1++) {
-      if(var_0 == level.breakingents[var_1])
+      if(var_0 == level.breakingents[var_1]) {
         return 1;
+      }
     }
 
     return 0;
@@ -942,8 +1001,9 @@ breakable_think() {
   if(isDefined(self.target)) {
     var_1 = getent(self.target, "targetname");
 
-    if(isDefined(var_1) && var_1.classname == "trigger_multiple")
+    if(isDefined(var_1) && var_1.classname == "trigger_multiple") {
       var_1 thread breakable_think_triggered(self);
+    }
   }
 
   self setCanDamage(1);
@@ -956,8 +1016,9 @@ breakable_logic(var_0) {
   for(;;) {
     self waittill("damage", var_2, var_1);
 
-    if(isDefined(var_1) && var_1.code_classname == "script_vehicle")
+    if(isDefined(var_1) && var_1.code_classname == "script_vehicle") {
       var_1 joltbody(self.origin + (0, 0, -90), 0.2);
+    }
 
     if(var_0 == "wood box") {
       if(!allowbreak(var_1)) {
@@ -982,37 +1043,45 @@ breakable_logic(var_0) {
   switch (var_0) {
     case "green vase":
     case "orange vase":
-      if(isDefined(level.breakables_sfx["vase"]))
+      if(isDefined(level.breakables_sfx["vase"])) {
         var_3 = level.breakables_sfx["vase"];
-      else
+      }
+      else {
         var_3 = "bullet_large_vase";
+      }
 
       var_4 = level.breakables_fx["vase"];
       break;
     case "wood box":
       var_6 = randomint(level.breakables_fx["box"].size);
 
-      if(isDefined(level.breakables_sfx["box"][var_6]))
+      if(isDefined(level.breakables_sfx["box"][var_6])) {
         var_3 = level.breakables_sfx["box"][var_6];
-      else
+      }
+      else {
         var_3 = "bullet_large_crate";
+      }
 
       var_4 = level.breakables_fx["box"][var_6];
       var_5 = 1;
       break;
     case "bottle":
-      if(isDefined(level.breakables_sfx["bottle"]))
+      if(isDefined(level.breakables_sfx["bottle"])) {
         var_3 = level.breakables_sfx["bottle"];
-      else
+      }
+      else {
         var_3 = "bullet_small_bottle";
+      }
 
       var_4 = level.breakables_fx["bottle"];
       break;
     case "plate":
-      if(isDefined(level.breakables_sfx["plate"]))
+      if(isDefined(level.breakables_sfx["plate"])) {
         var_3 = level.breakables_sfx["plate"];
-      else
+      }
+      else {
         var_3 = "bullet_small_plate";
+      }
 
       break;
   }
@@ -1020,8 +1089,9 @@ breakable_logic(var_0) {
   thread common_scripts\utility::play_sound_in_space(var_3, self.origin);
   thread make_broken_peices(self, var_0);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     playFX(var_4, self.origin);
+  }
 
   if(var_5) {
     var_7 = getEntArray("breakable", "targetname");
@@ -1034,8 +1104,9 @@ breakable_logic(var_0) {
       if(var_10 <= 20 && var_11 <= 20) {
         var_12 = self.origin[2] - var_9.origin[2];
 
-        if(var_12 <= 0)
+        if(var_12 <= 0) {
           var_9 notify("damage", var_2, var_1);
+        }
       }
     }
   }
@@ -1045,17 +1116,20 @@ breakable_logic(var_0) {
     self.remove delete();
   }
 
-  if(!isDefined(self.dontremove))
+  if(!isDefined(self.dontremove)) {
     self delete();
-  else
+  }
+  else {
     self.dontremove = 0;
+  }
 
   self notify("ok_remove");
 }
 
 xenon_auto_aim() {
-  if(isDefined(level.console_auto_aim) && level.console_auto_aim.size > 0)
+  if(isDefined(level.console_auto_aim) && level.console_auto_aim.size > 0) {
     self.autoaim = getclosestaccurantent(self.origin, level.console_auto_aim);
+  }
 
   if(isDefined(self.autoaim)) {
     level.console_auto_aim = common_scripts\utility::array_remove(level.console_auto_aim, self.autoaim);
@@ -1081,8 +1155,9 @@ xenon_remove_auto_aim(var_0) {
   self.autoaim disableaimassist();
   self.autoaim delete();
 
-  if(self.dontremove)
+  if(self.dontremove) {
     self waittill("ok_remove");
+  }
 
   self delete();
 }
@@ -1091,8 +1166,9 @@ xenon_enable_auto_aim(var_0) {
   self endon("xenon_auto_aim_stop_logic");
   self endon("death");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   if(isDefined(self.script_noteworthy) && var_0) {
     var_1 = "enable_xenon_autoaim_" + self.script_noteworthy;
@@ -1101,8 +1177,9 @@ xenon_enable_auto_aim(var_0) {
 
   self.wait_message = 0;
 
-  if(isDefined(self.recreate) && self.recreate == 1)
+  if(isDefined(self.recreate) && self.recreate == 1) {
     self waittill("recreate");
+  }
 
   self enableaimassist();
 }
@@ -1117,11 +1194,13 @@ breakable_clip() {
     }
   }
 
-  if(isDefined(level.breakables_clip) && level.breakables_clip.size > 0)
+  if(isDefined(level.breakables_clip) && level.breakables_clip.size > 0) {
     self.remove = getclosestent(self.origin, level.breakables_clip);
+  }
 
-  if(isDefined(self.remove))
+  if(isDefined(self.remove)) {
     level.breakables_clip = common_scripts\utility::array_remove(level.breakables_clip, self.remove);
+  }
 }
 
 make_broken_peices(var_0, var_1) {
@@ -1266,8 +1345,9 @@ make_broken_peices(var_0, var_1) {
     var_6 = var_5[0].origin[2];
 
     for(var_7 = 0; var_7 < var_5.size; var_7++) {
-      if(var_6 > var_5[var_7].origin[2])
+      if(var_6 > var_5[var_7].origin[2]) {
         var_6 = var_5[var_7].origin[2];
+      }
     }
 
     common_scripts\utility::array_thread(var_5, ::pieces_collision, var_6);
@@ -1275,21 +1355,24 @@ make_broken_peices(var_0, var_1) {
     wait 2;
 
     for(var_7 = 0; var_7 < var_5.size; var_7++) {
-      if(isDefined(var_5[var_7]))
+      if(isDefined(var_5[var_7])) {
         var_5[var_7] delete();
+      }
     }
   }
 }
 
 list_add(var_0) {
-  if(isDefined(level._breakable_utility_modelarray[level._breakable_utility_modelindex]))
+  if(isDefined(level._breakable_utility_modelarray[level._breakable_utility_modelindex])) {
     level._breakable_utility_modelarray[level._breakable_utility_modelindex] delete();
+  }
 
   level._breakable_utility_modelarray[level._breakable_utility_modelindex] = var_0;
   level._breakable_utility_modelindex++;
 
-  if(!(level._breakable_utility_modelindex < level._breakable_utility_maxnum))
+  if(!(level._breakable_utility_modelindex < level._breakable_utility_maxnum)) {
     level._breakable_utility_modelindex = 0;
+  }
 }
 
 pieces_move(var_0) {
@@ -1309,39 +1392,47 @@ pieces_move(var_0) {
     var_5 = 1;
     var_6 = 1;
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_4 = -1;
+    }
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_5 = -1;
+    }
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_6 = -1;
+    }
 
     var_1 rotatevelocity((250 * var_4, 250 * var_5, randomfloat(100) * var_6), 2, 0, 0.5);
   } else if(isDefined(self.type) && self.type == "plate") {
     var_3 = vectornormalize(var_2 - var_0);
     var_3 = common_scripts\utility::vectorscale(var_3, 125 + randomfloat(25));
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_1 rotateroll((800 + randomfloat(4000)) * -1, 5, 0, 0);
-    else
+    }
+    else {
       var_1 rotateroll(800 + randomfloat(4000), 5, 0, 0);
+    }
   } else {
     var_3 = vectornormalize(var_2 - var_0);
     var_3 = common_scripts\utility::vectorscale(var_3, 60 + randomfloat(50));
 
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       var_1 rotateroll((800 + randomfloat(1000)) * -1, 5, 0, 0);
-    else
+    }
+    else {
       var_1 rotateroll(800 + randomfloat(1000), 5, 0, 0);
+    }
   }
 
   var_1 movegravity(var_3, 5);
   wait 5;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self unlink();
+  }
 
   var_1 delete();
 }
@@ -1352,8 +1443,9 @@ pieces_collision(var_0) {
   var_1 = bulletTrace(self.origin, self.origin - (0, 0, 50000), 0, undefined);
   var_2 = var_1["position"];
 
-  while(self.origin[2] > var_2[2])
+  while(self.origin[2] > var_2[2]) {
     wait 0.05;
+  }
 
   self unlink();
   self.origin = (self.origin[0], self.origin[1], var_2[2]);
@@ -1459,11 +1551,13 @@ getclosestaiment(var_0, var_1) {
 }
 
 setbreakablesfx(var_0, var_1, var_2, var_3) {
-  if(isDefined(level.breakables_fx_override) && isDefined(level.breakables_fx_override[var_2]))
+  if(isDefined(level.breakables_fx_override) && isDefined(level.breakables_fx_override[var_2])) {
     var_2 = level.breakables_fx_override[var_2];
+  }
 
-  if(isDefined(level.breakables_sfx_override) && isDefined(level.breakables_sfx_override[var_0]))
+  if(isDefined(level.breakables_sfx_override) && isDefined(level.breakables_sfx_override[var_0])) {
     var_3 = level.breakables_sfx_override[var_0];
+  }
 
   if(isDefined(var_1)) {
     level.breakables_fx[var_0][var_1] = loadfx(var_2);
@@ -1489,43 +1583,53 @@ fan_blade_rotate(var_0) {
   var_2 = 20000;
   var_3 = 1.0;
 
-  if(isDefined(self.speed))
+  if(isDefined(self.speed)) {
     var_3 = self.speed;
+  }
 
   if(var_0 == "slow") {
-    if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lockedspeed")
+    if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lockedspeed") {
       var_1 = 180;
-    else
+    }
+    else {
       var_1 = randomfloatrange(100 * var_3, 360 * var_3);
+    }
   } else if(var_0 == "fast")
     var_1 = randomfloatrange(720 * var_3, 1000 * var_3);
-  else if(var_0 == "veryslow")
+  else if(var_0 == "veryslow") {
     var_1 = randomfloatrange(1 * var_3, 2 * var_3);
+  }
   else {}
 
-  if(!isDefined(self.script_noteworthy) || self.script_noteworthy == "lockedspeed")
+  if(!isDefined(self.script_noteworthy) || self.script_noteworthy == "lockedspeed") {
     wait(randomfloatrange(0, 1));
+  }
 
   var_4 = self.angles;
   var_5 = anglestoright(self.angles) * 100;
   var_5 = vectornormalize(var_5);
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "reverse")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "reverse") {
     var_1 = var_1 * -1;
+  }
 
   for(;;) {
     var_6 = abs(vectordot(var_5, (1, 0, 0)));
     var_7 = abs(vectordot(var_5, (0, 1, 0)));
     var_8 = abs(vectordot(var_5, (0, 0, 1)));
 
-    if(var_6 > 0.9)
+    if(var_6 > 0.9) {
       self rotatevelocity((var_1, 0, 0), var_2);
-    else if(var_7 > 0.9)
+    }
+    else if(var_7 > 0.9) {
       self rotatevelocity((var_1, 0, 0), var_2);
-    else if(var_8 > 0.9)
+    }
+    else if(var_8 > 0.9) {
       self rotatevelocity((0, var_1, 0), var_2);
-    else
+    }
+    else {
       self rotatevelocity((0, var_1, 0), var_2);
+    }
 
     wait(var_2);
   }

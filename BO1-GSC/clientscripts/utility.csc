@@ -11,8 +11,9 @@ error(message) {
   wait 0.05;
 }
 getstruct(name, type) {
-  if(!isDefined(level.struct_class_names))
+  if(!isDefined(level.struct_class_names)) {
     return undefined;
+  }
   array = level.struct_class_names[type][name];
   if(!isDefined(array)) {
     println("**** Getstruct returns undefined on " + name + " : " + " type.");
@@ -324,8 +325,9 @@ array_exclude(array, arrayExclude) {
   return newarray;
 }
 array_notify(ents, notifier) {
-  for(i = 0; i < ents.size; i++)
+  for(i = 0; i < ents.size; i++) {
     ents[i] notify(notifier);
+  }
 }
 array_wait(array, msg, timeout) {
   keys = getarraykeys(array);
@@ -424,8 +426,9 @@ waitforclient(client) {
   }
 }
 waittill_string(msg, ent) {
-  if(msg != "death")
+  if(msg != "death") {
     self endon("death");
+  }
   ent endon("die");
   self waittill(msg);
   ent notify("returned", msg);
@@ -439,32 +442,42 @@ waittill_any_return(string1, string2, string3, string4, string5, string6) {
     (!isDefined(string6) || string6 != "death"))
     self endon("death");
   ent = spawnStruct();
-  if(isDefined(string1))
+  if(isDefined(string1)) {
     self thread waittill_string(string1, ent);
-  if(isDefined(string2))
+  }
+  if(isDefined(string2)) {
     self thread waittill_string(string2, ent);
-  if(isDefined(string3))
+  }
+  if(isDefined(string3)) {
     self thread waittill_string(string3, ent);
-  if(isDefined(string4))
+  }
+  if(isDefined(string4)) {
     self thread waittill_string(string4, ent);
-  if(isDefined(string5))
+  }
+  if(isDefined(string5)) {
     self thread waittill_string(string5, ent);
-  if(isDefined(string6))
+  }
+  if(isDefined(string6)) {
     self thread waittill_string(string6, ent);
+  }
   ent waittill("returned", msg);
   ent notify("die");
   return msg;
 }
 waittill_any(string1, string2, string3, string4, string5) {
   assert(isDefined(string1));
-  if(isDefined(string2))
+  if(isDefined(string2)) {
     self endon(string2);
-  if(isDefined(string3))
+  }
+  if(isDefined(string3)) {
     self endon(string3);
-  if(isDefined(string4))
+  }
+  if(isDefined(string4)) {
     self endon(string4);
-  if(isDefined(string5))
+  }
+  if(isDefined(string5)) {
     self endon(string5);
+  }
   self waittill(string1);
 }
 waittill_multiple(string1, string2, string3, string4, string5) {
@@ -506,8 +519,9 @@ within_fov(start_origin, start_angles, end_origin, fov) {
 setFootstepEffect(name, fx) {
   assertEx(isDefined(name), "Need to define the footstep surface type.");
   assertEx(isDefined(fx), "Need to define the footstep effect.");
-  if(!isDefined(level._optionalStepEffects))
+  if(!isDefined(level._optionalStepEffects)) {
     level._optionalStepEffects = [];
+  }
   level._optionalStepEffects[level._optionalStepEffects.size] = name;
   level._effect["step_" + name] = fx;
 }
@@ -523,8 +537,9 @@ getExploderId(ent) {
   return level._exploder_ids[ent.v["exploder"]];
 }
 reportExploderIds() {
-  if(!isDefined(level._exploder_ids))
+  if(!isDefined(level._exploder_ids)) {
     return;
+  }
   keys = GetArrayKeys(level._exploder_ids);
   println("Client Exploder dictionary : ");
   for(i = 0; i < keys.size; i++) {
@@ -666,8 +681,9 @@ init_exploders() {
   }
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(ent.v["type"] != "exploder")
+    if(ent.v["type"] != "exploder") {
       continue;
+    }
     ent.v["exploder_id"] = getExploderId(ent);
   }
   reportExploderIds();
@@ -780,26 +796,32 @@ add_trigger_to_ent(ent, trig) {
   ent._triggers[trig getentitynumber()] = 1;
 }
 remove_trigger_from_ent(ent, trig) {
-  if(!isDefined(ent._triggers))
+  if(!isDefined(ent._triggers)) {
     return;
-  if(!isDefined(ent._triggers[trig getentitynumber()]))
+  }
+  if(!isDefined(ent._triggers[trig getentitynumber()])) {
     return;
+  }
   ent._triggers[trig getentitynumber()] = 0;
 }
 ent_already_in_trigger(trig) {
-  if(!isDefined(self._triggers))
+  if(!isDefined(self._triggers)) {
     return false;
-  if(!isDefined(self._triggers[trig getentitynumber()]))
+  }
+  if(!isDefined(self._triggers[trig getentitynumber()])) {
     return false;
-  if(!self._triggers[trig getentitynumber()])
+  }
+  if(!self._triggers[trig getentitynumber()]) {
     return false;
+  }
   return true;
 }
 trigger_thread(ent, on_enter_payload, on_exit_payload) {
   ent endon("entityshutdown");
   ent endon("death");
-  if(ent ent_already_in_trigger(self))
+  if(ent ent_already_in_trigger(self)) {
     return;
+  }
   add_trigger_to_ent(ent, self);
   if(isDefined(on_enter_payload)) {
     [[on_enter_payload]](ent);
@@ -914,8 +936,9 @@ register_clientflag_callback(type, flag, function) {
   level._client_flag_callbacks[type][flag] = function;
 }
 is_mature() {
-  if(level.onlineGame)
+  if(level.onlineGame) {
     return true;
+  }
   return GetDvarInt(#"cg_mature");
 }
 is_german_build() {

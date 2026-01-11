@@ -54,8 +54,9 @@ update_bot_maxsightdistsqrd() {
   halon_maxsightdists = 1200;
   halon_maxsightdistssqrd = halon_maxsightdists * halon_maxsightdists;
 
-  while(!isDefined(level.participants))
+  while(!isDefined(level.participants)) {
     waitframe();
+  }
 
   while(1) {
     players_in_fog = [];
@@ -69,8 +70,9 @@ update_bot_maxsightdistsqrd() {
       }
 
       if(isBot(participant)) {
-        if(!isDefined(participant.default_maxsightdistsqrd))
+        if(!isDefined(participant.default_maxsightdistsqrd)) {
           participant.default_maxsightdistsqrd = participant.maxsightdistsqrd;
+        }
 
         if(in_fog) {
           participant.maxsightdistsqrd = halon_maxsightdistssqrd;
@@ -173,8 +175,9 @@ walkway_collapse() {
     noself_delayCall(4.13, ::playSoundAtPos, (242, -326, 322), "scn_catwalk_steam_burst1");
     noself_delayCall(4.46, ::playSoundAtPos, (277, -283, 256), "scn_catwalk_steam_burst2");
     animated_walkway_tank ScriptModelPlayAnimDeltaMotion("mp_sovereign_walkway_collapse_top");
-    foreach(fx_set in walkway_tank_fx)
+    foreach(fx_set in walkway_tank_fx) {
     thread walkway_play_fx(fx_set[2], animated_walkway_tank, fx_set[1], fx_set[0]);
+    }
 
     level delayThread(swap_time, ::exploder, 3);
     animated_walkway delayCall(swap_time, ::Show);
@@ -241,8 +244,9 @@ walkway_collapse_hurt_trigger(activate_player) {
 
 walkway_wait(trigger) {
   level thread walkway_wait_dvar();
-  if(isDefined(trigger))
+  if(isDefined(trigger)) {
     level thread walkway_wait_trigger(trigger);
+  }
 
   level waittill("activate_walkway", player);
   return player;
@@ -257,8 +261,9 @@ walkway_wait_trigger(trigger) {
 walkway_wait_dvar() {
   level endon("activate_walkway");
   SetDevDvarIfUninitialized("trigger_walkway", "0");
-  while(GetDvarInt("trigger_walkway") == 0)
+  while(GetDvarInt("trigger_walkway") == 0) {
     wait .05;
+  }
   SetDevDvar("trigger_walkway", "0");
 
   level notify("activate_walkway");
@@ -287,11 +292,13 @@ walkway_collapse_hide() {
 }
 
 walkway_collapse_clip_hide() {
-  if(self is_dynamic_path())
+  if(self is_dynamic_path()) {
     self ConnectPaths();
+  }
 
-  if(self is_ai_sight_line())
+  if(self is_ai_sight_line()) {
     self SetAISightLineVisible(false);
+  }
 
   self.old_contents = self SetContents(0);
   self NotSolid();
@@ -324,17 +331,20 @@ walkway_collapse_clip_show() {
   self SetContents(self.old_contents);
   self Show();
 
-  if(self is_dynamic_path())
+  if(self is_dynamic_path()) {
     self DisconnectPaths();
+  }
 
-  if(self is_ai_sight_line())
+  if(self is_ai_sight_line()) {
     self SetAISightLineVisible(true);
+  }
 }
 
 walkway_collapse_group(targetname) {
   struct = GetStruct(targetname, "targetname");
-  if(!isDefined(struct))
+  if(!isDefined(struct)) {
     return undefined;
+  }
 
   parent = spawn("script_model", struct.origin);
   parent setModel("tag_origin");
@@ -493,8 +503,9 @@ robot_arm_get_scaled_position(robot_mins, robot_maxs, map_mins, map_maxs, pos) {
 
 SOVEREIGN_GAS_WEIGHT = 55;
 sovereignCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   allow_level_killstreak = level.gametype != "sotf" && level.gametype != "infect" && level.gametype != "horde";
   if(!allow_level_killstreak || game["player_holding_level_killstrek"]) {

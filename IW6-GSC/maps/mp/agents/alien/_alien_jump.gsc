@@ -34,8 +34,9 @@ JumpInternal(startPos, startAngles, endPos, endAngles, nextPos, jumpCBs, scripta
 
   self maps\mp\agents\alien\_alien_anim_utils::turnTowardsVector(endPos - startPos);
 
-  if(isDefined(scriptableName))
+  if(isDefined(scriptableName)) {
     maps\mp\agents\alien\_alien_anim_utils::resetScriptable(scriptableName, endPos);
+  }
 
   self.trajectoryActive = false;
 
@@ -45,8 +46,9 @@ JumpInternal(startPos, startAngles, endPos, endAngles, nextPos, jumpCBs, scripta
 
   self GetJumpAnimStates(jumpInfo, jumpAnimStates);
 
-  if(isDefined(jumpCBs) && isDefined(jumpCBs.fnSetAnimStates))
+  if(isDefined(jumpCBs) && isDefined(jumpCBs.fnSetAnimStates)) {
     self[[jumpCBs.fnSetAnimStates]](jumpInfo, jumpAnimStates);
+  }
 
   anglesToEnd = GetJumpStartAngles(startPos, startAngles, endPos);
 
@@ -130,15 +132,17 @@ JumpInternal(startPos, startAngles, endPos, endAngles, nextPos, jumpCBs, scripta
       loopTime);
   }
 
-  if(isDefined(jumpCBs) && isDefined(jumpCBs.fnLandAnimStateChoice))
+  if(isDefined(jumpCBs) && isDefined(jumpCBs.fnLandAnimStateChoice)) {
     self[[jumpCBs.fnLandAnimStateChoice]](jumpInfo, jumpAnimStates);
+  }
 
   self SetAnimState(jumpAnimStates.landAnimState, jumpAnimStates.landAnimEntry, jumpAnimStates.playbackRate);
   self waittill("traverse_complete");
   self.trajectoryActive = false;
 
-  if(isDefined(scriptableName))
+  if(isDefined(scriptableName)) {
     maps\mp\agents\alien\_alien_anim_utils::playAnimOnScriptable(scriptableName, endPos);
+  }
 
   self ScrAgentSetAnimScale(1.0, 0.0);
 
@@ -226,12 +230,15 @@ GetJumpInfo(startPos, startAngles, endPos, endAngles, nextPos) {
 
   jumpInfo.jumpDirection2D = jumpInfo.jumpVector2D / jumpInfo.jumpDistance2D;
 
-  if(isDefined(nextPos))
+  if(isDefined(nextPos)) {
     jumpInfo.landVector = nextPos - endPos;
-  else if(isDefined(self.enemy))
+  }
+  else if(isDefined(self.enemy)) {
     jumpInfo.landVector = self.enemy.origin - endPos;
-  else
+  }
+  else {
     jumpInfo.landVector = anglesToForward(self.angles);
+  }
 
   jumpInfo.startAngles = GetJumpAngles(jumpInfo.jumpVector, AnglesToUp(startAngles));
   jumpInfo.endAngles = GetJumpAngles(jumpInfo.jumpVector, AnglesToUp(endAngles));
@@ -309,16 +316,18 @@ GetJumpPlaybackRate(jumpInfo, animStates) {
   launchAnimInAirTime = launchAnimLength * 0.5;
 
   launchAnimTakeoff = GetNotetrackTimes(launchAnim, "start_teleport");
-  if(isDefined(launchAnimTakeoff) && launchAnimTakeoff.size > 0)
+  if(isDefined(launchAnimTakeoff) && launchAnimTakeoff.size > 0) {
     launchAnimInAirTime = launchAnimLength - launchAnimTakeoff[0] * launchAnimLength;
+  }
   Assert(launchAnimInAirTime < launchAnimLength);
 
   landAnimLength = GetAnimLength(landAnim);
   landAnimInAirTime = landAnimLength * 0.5;
 
   landAnimArrive = GetNotetrackTimes(landAnim, "stop_teleport");
-  if(isDefined(landAnimArrive) && landAnimArrive.size > 0)
+  if(isDefined(landAnimArrive) && landAnimArrive.size > 0) {
     landAnimInAirTime = landAnimArrive[0] * landAnimLength;
+  }
   Assert(landAnimInAirTime < landAnimLength);
 
   inAirAnimLength = GetAnimLength(inAirAnim);
@@ -352,8 +361,9 @@ GetJumpAnimStates(jumpInfo, animStates) {
 GetJumpStartAngles(startPos, startAngles, endPos) {
   startUp = AnglesToUp(startAngles);
   startForward = VectorNormalize(endPos - startPos);
-  if(VectorDot(startUp, startForward) > 0.98)
+  if(VectorDot(startUp, startForward) > 0.98) {
     startForward = (0, 0, 1);
+  }
   startLeft = VectorCross(startUp, startForward);
   startForward = VectorCross(startLeft, startUp);
   return AxisToAngles(startForward, -1 * startLeft, startUp);
@@ -423,8 +433,9 @@ GetInAirAnimEntry(jumpInfo, launchAnimState, landAnimState) {
 GetJumpEndAngles(startPos, endPos, endAngles) {
   endUp = AnglesToUp(endAngles);
   endForward = VectorNormalize(endPos - startPos);
-  if(VectorDot(endUp, endForward) > 0.98)
+  if(VectorDot(endUp, endForward) > 0.98) {
     endForward = (0, 0, 1);
+  }
   endLeft = VectorCross(endUp, endForward);
   endForward = VectorCross(endLeft, endUp);
   return AxisToAngles(endForward, -1 * endLeft, endUp);

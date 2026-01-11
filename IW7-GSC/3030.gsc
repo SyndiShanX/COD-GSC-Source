@@ -4,37 +4,45 @@
 ***************************************/
 
 func_621A() {
-  if(!func_0BDC::func_A1AC("missile_drone"))
+  if(!func_0BDC::func_A1AC("missile_drone")) {
     func_0BDC::func_A1AA("missile_drone", ::func_B7ED, ::func_B7EF, ::func_B7EE);
+  }
 }
 
 disable_missile_drone_event() {
-  if(func_0BDC::func_A1AC("missile_drone"))
+  if(func_0BDC::func_A1AC("missile_drone")) {
     func_0BDC::func_A1AD("missile_drone");
+  }
 
-  if(scripts\engine\utility::flag("jackal_supply_drop_hint"))
+  if(scripts\engine\utility::flag("jackal_supply_drop_hint")) {
     scripts\engine\utility::flag_clear("jackal_supply_drop_hint");
+  }
 
-  if(scripts\engine\utility::flag("jackal_missile_drone_primed"))
+  if(scripts\engine\utility::flag("jackal_missile_drone_primed")) {
     scripts\engine\utility::flag_clear("jackal_missile_drone_primed");
+  }
 
   level notify("disable_missiledrone");
 }
 
 func_B7ED(var_00) {
-  if(level.func_D127.missiles.count > 0)
+  if(level.func_D127.missiles.count > 0) {
     return 0;
+  }
 
-  if(scripts\engine\utility::flag("jackal_missile_drone_primed"))
+  if(scripts\engine\utility::flag("jackal_missile_drone_primed")) {
     return 0;
+  }
 
   var_01 = 7;
 
-  if(gettime() - level.func_D127.missiles.func_A8E8 < var_01 * 1000)
+  if(gettime() - level.func_D127.missiles.func_A8E8 < var_01 * 1000) {
     return 0;
+  }
 
-  if(scripts\engine\utility::flag("jackal_runway_landing_active"))
+  if(scripts\engine\utility::flag("jackal_runway_landing_active")) {
     return 0;
+  }
 
   return 1;
 }
@@ -70,10 +78,12 @@ func_B35F() {
   level endon("disable_missiledrone");
   scripts\engine\utility::flag_set("jackal_supply_drop_hint");
 
-  if(isDefined(level.func_B833))
+  if(isDefined(level.func_B833)) {
     thread scripts\sp\utility::func_56BA("jackal_supply_drop");
-  else
+  }
+  else {
     thread scripts\sp\utility::func_56BE("jackal_supply_drop", 4);
+  }
 
   func_0BDC::func_A112("jackal_hud_missile_supply_available", 20);
   level.player notifyonplayercommand("callin_supply_drone", "+actionslot 2");
@@ -250,8 +260,9 @@ func_5BFD(var_00, var_01) {
   while(var_11 > 0) {
     level.player waittill("on_player_update");
 
-    if(var_03)
+    if(var_03) {
       var_01 show();
+    }
 
     var_03 = 1;
     var_02 = level.player _meth_8473();
@@ -280,11 +291,13 @@ func_5BFD(var_00, var_01) {
     var_34 = var_33 - var_32;
     var_04 = var_04 - var_34;
 
-    if(var_13 > 0)
+    if(var_13 > 0) {
       var_35 = 1;
+    }
     else {
-      if(!isDefined(var_15))
+      if(!isDefined(var_15)) {
         var_15 = var_11;
+      }
 
       var_35 = scripts\sp\math::func_C097(0, var_15, var_11);
       var_35 = scripts\sp\math::func_C09B(var_35);
@@ -317,10 +330,12 @@ func_5BFC(var_00) {
   var_01 endon("notify_drone_reset");
   var_1.active = 1;
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_02 = level.player _meth_8473();
-  else
+  }
+  else {
     var_02 = level.func_D127;
+  }
 
   var_01 unlink();
   var_01 func_0BDC::func_F2FF();
@@ -365,10 +380,12 @@ func_5BFC(var_00) {
     }
     level.player waittill("on_player_update");
 
-    if(!isDefined(var_00))
+    if(!isDefined(var_00)) {
       var_02 = level.player _meth_8473();
-    else
+    }
+    else {
       var_02 = level.func_D127;
+    }
 
     if(!isDefined(var_02)) {
       continue;
@@ -390,10 +407,12 @@ func_5BFC(var_00) {
     var_36 = scripts\sp\math::func_C097(var_32, var_34, var_30);
     var_37 = scripts\sp\math::func_6A8E(var_33, var_35, var_36);
 
-    if(!isDefined(var_00))
+    if(!isDefined(var_00)) {
       var_05 = var_05 - rotatevectorinverted(var_2.spaceship_vel, var_2.angles) * var_25;
-    else
+    }
+    else {
       var_05 = var_05 - rotatevectorinverted(var_2.angles * 100, var_2.angles) * var_25;
+    }
 
     var_38 = var_2.spaceship_rotvel * 0.05;
     var_39 = rotatevectorinverted(var_1.origin - var_2.origin, var_2.angles);
@@ -405,8 +424,9 @@ func_5BFC(var_00) {
       var_19 = var_19 + var_20;
       var_19 = clamp(var_19, 0, 1);
     } else {
-      if(!isDefined(var_15))
+      if(!isDefined(var_15)) {
         var_15 = var_21;
+      }
 
       var_19 = scripts\sp\math::func_C097(0, var_15, var_21);
       var_19 = scripts\sp\math::func_C09B(var_19);
@@ -485,8 +505,9 @@ func_9319(var_00, var_01) {
 }
 
 func_68A0(var_00, var_01) {
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     level endon(var_01);
+  }
 
   wait(var_00);
   earthquake(0.3, 0.8, level.func_D127.origin, 5000);
@@ -559,8 +580,9 @@ func_685D() {
 }
 
 func_E095(var_00, var_01, var_02) {
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     level endon(var_02);
+  }
 
   wait(var_00);
   var_03 = var_01 - var_00;
@@ -571,8 +593,9 @@ func_E095(var_00, var_01, var_02) {
 }
 
 func_E04D(var_00, var_01, var_02) {
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     level endon(var_02);
+  }
 
   wait(var_00);
   var_03 = var_01 - var_00;
@@ -878,10 +901,12 @@ func_5C9F(var_00) {
   wait 0.1;
   self givegrabscore(0);
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     func_0BDC::func_A387();
-  else
+  }
+  else {
     self unlink();
+  }
 
   scripts\engine\utility::flag_set("jackal_landing_drone_detached");
 }

@@ -11,8 +11,9 @@ main() {
   setsaveddvar("hud_drawhud", 0);
 
   level.script = tolower(getdvar("mapname"));
-  if(!isDefined(level.tmpmsg))
+  if(!isDefined(level.tmpmsg)) {
     level.tmpmsg = [];
+  }
 
   player = getEntArray("player", "classname")[0];
   setsaveddvar("g_speed", 0);
@@ -35,8 +36,9 @@ main() {
   } else {
     // Press &&BUTTON_SELECTCHOICE" to Skip."
     precacheString(&"SCRIPT_PLATFORM_FIRE_TO_SKIP");
-    for(i = 0; i < level.slide.size; i++)
+    for(i = 0; i < level.slide.size; i++) {
       if(isDefined(level.slide[i]["image"]))
+    }
         precacheshader(level.slide[i]["image"]);
 
     player thread skipthebriefing();
@@ -52,14 +54,18 @@ start(fFadeTime) {
   level.briefing_ending = false;
   level.PlaceNextImage = "A";
 
-  if(isDefined(level.imageA))
+  if(isDefined(level.imageA)) {
     level.imageA destroy();
-  if(isDefined(level.imageB))
+  }
+  if(isDefined(level.imageB)) {
     level.imageB destroy();
-  if(isDefined(level.blackscreen))
+  }
+  if(isDefined(level.blackscreen)) {
     level.blackscreen destroy();
-  if(isDefined(level.FiretoSkip))
+  }
+  if(isDefined(level.FiretoSkip)) {
     level.FiretoSkip destroy();
+  }
 
   if(!isDefined(fFadeTime) || !fFadeTime) {
     level.briefing_fadeInTime = 0.5;
@@ -236,10 +242,12 @@ imageFadeOut(elem) {
 
 endThread() {
   // Check for the briefing already being ended
-  if(!level.briefing_running)
+  if(!level.briefing_running) {
     return;
-  if(level.briefing_ending)
+  }
+  if(level.briefing_ending) {
     return;
+  }
 
   self notify("briefingend");
   level.briefing_ending = true;
@@ -264,8 +272,9 @@ end() {
 }
 
 soundplay(dialog, msg) {
-  if(isDefined(level.tmpmsg[dialog]))
+  if(isDefined(level.tmpmsg[dialog])) {
     iprintlnbold(level.tmpmsg[dialog]);
+  }
   if(isDefined(msg)) {
     thread soundplay_flag(dialog, msg);
     self playSound(dialog, msg);
@@ -295,8 +304,9 @@ skipthebriefing() {
 gotothelevel(skipMovie) {
   if(!skipMovie) {
     for(i = 0; i < level.slide.size; i++) {
-      if(isDefined(level.slide[i]["movie"]))
+      if(isDefined(level.slide[i]["movie"])) {
         cinematic(level.slide[i]["movie"]);
+      }
     }
   }
 

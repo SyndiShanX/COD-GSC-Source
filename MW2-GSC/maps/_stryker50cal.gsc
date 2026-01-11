@@ -28,8 +28,9 @@ init_local() {
 #using_animtree("generic_human");
 setanims() {
   positions = [];
-  for(i = 0; i < 11; i++)
+  for(i = 0; i < 11; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].getout_delete = true;
   return positions;

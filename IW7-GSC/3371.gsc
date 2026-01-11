@@ -4,8 +4,9 @@
 ***************************************/
 
 update_player_tickets_earned(var_00) {
-  if(var_0.tickets_earned > 0)
+  if(var_0.tickets_earned > 0) {
     level thread player_ticket_queue(var_00);
+  }
 }
 
 player_ticket_queue(var_00) {
@@ -16,22 +17,25 @@ player_ticket_queue(var_00) {
   if(gettime() > var_0.time_to_give_next_tickets) {
     var_01 = var_0.tickets_earned;
 
-    if(var_01 > 10)
+    if(var_01 > 10) {
       var_01 = 10;
+    }
 
     var_0.time_to_give_next_tickets = gettime() + var_01 / 1.5 * 1000 + 500;
     var_02 = var_0.tickets_earned;
     var_0.tickets_earned = 0;
     give_player_tickets(var_00, var_02);
   } else {
-    while(gettime() < var_0.time_to_give_next_tickets && var_0.tickets_earned > 0)
+    while(gettime() < var_0.time_to_give_next_tickets && var_0.tickets_earned > 0) {
       wait 0.1;
+    }
 
     if(var_0.tickets_earned > 0) {
       var_01 = var_0.tickets_earned;
 
-      if(var_01 > 10)
+      if(var_01 > 10) {
         var_01 = 10;
+      }
 
       var_0.time_to_give_next_tickets = gettime() + var_01 / 1.5 * 1000 + 500;
       var_02 = var_0.tickets_earned;
@@ -45,43 +49,51 @@ give_player_tickets(var_00, var_01, var_02, var_03) {
   if(isDefined(level.no_ticket_machine)) {
     return;
   }
-  if(scripts\engine\utility::is_true(var_0.double_money))
+  if(scripts\engine\utility::is_true(var_0.double_money)) {
     var_01 = var_01 * 2;
+  }
 
-  if(!isDefined(var_0.num_tickets))
+  if(!isDefined(var_0.num_tickets)) {
     var_0.num_tickets = 0;
+  }
 
-  if(var_01 < 0)
+  if(var_01 < 0) {
     var_01 = max(var_0.num_tickets * -1, var_01);
+  }
 
   var_0.num_tickets = var_0.num_tickets + var_01;
 
-  if(var_0.num_tickets < 0)
+  if(var_0.num_tickets < 0) {
     var_0.num_tickets = 0;
+  }
 
   var_01 = int(var_01);
 
   if(var_01 == 0) {
     return;
   }
-  if(var_01 > 0 && !scripts\engine\utility::is_true(var_03))
+  if(var_01 > 0 && !scripts\engine\utility::is_true(var_03)) {
     var_00 playlocalsound("zmb_ui_earn_tickets");
+  }
 
   var_00 setclientomnvar("zombie_number_of_ticket", int(var_0.num_tickets));
 
-  if(!scripts\engine\utility::is_true(var_03))
+  if(!scripts\engine\utility::is_true(var_03)) {
     var_00 thread show_ticket_machine(var_01);
+  }
 
   var_00 scripts\cp\cp_persistence::eog_player_update_stat("tickettotal", int(var_0.num_tickets), 1);
   scripts\cp\zombies\zombies_gamescore::update_tickets_earned_performance(var_00, var_01);
 }
 
 arcade_game_hint_func(var_00, var_01) {
-  if(var_0.requires_power && !var_0.powered_on)
+  if(var_0.requires_power && !var_0.powered_on) {
     return &"COOP_INTERACTIONS_REQUIRES_POWER";
+  }
 
-  if(scripts\engine\utility::is_true(var_0.out_of_order))
+  if(scripts\engine\utility::is_true(var_0.out_of_order)) {
     return &"CP_ZMB_INTERACTIONS_MACHINE_OUT_OF_ORDER";
+  }
 
   return level.interaction_hintstrings[var_0.script_noteworthy];
 }
@@ -94,8 +106,9 @@ show_ticket_machine(var_00) {
   }
   self setclientomnvar("zm_tickets_dispersed", var_00);
 
-  if(var_00 > 10)
+  if(var_00 > 10) {
     var_00 = 10;
+  }
 
   wait 2.5;
   self setclientomnvar("zm_tickets_dispersed", -1);
@@ -105,15 +118,17 @@ arcade_game_player_disconnect_or_death(var_00, var_01, var_02, var_03) {
   var_00 endon("arcade_game_over_for_player");
   var_04 = var_00 scripts\engine\utility::waittill_any_return_no_endon_death("disconnect", "last_stand", "spawned");
 
-  if(var_04 == "disconnect")
+  if(var_04 == "disconnect") {
     var_1.active_player = undefined;
+  }
   else {
     [[var_03]](var_01, var_00);
     var_00 giveuponsuppressiontime(var_02);
     var_00 scripts\engine\utility::allow_weapon_switch(1);
 
-    if(!var_00 scripts\engine\utility::isusabilityallowed())
+    if(!var_00 scripts\engine\utility::isusabilityallowed()) {
       var_00 scripts\engine\utility::allow_usability(1);
+    }
   }
 
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_01);
@@ -128,8 +143,9 @@ arcade_game_player_gets_too_far_away(var_00, var_01, var_02, var_03, var_04, var
   var_00 endon("spawned");
   var_07 = 10000;
 
-  if(isDefined(var_05))
+  if(isDefined(var_05)) {
     var_07 = var_05;
+  }
 
   for(;;) {
     wait 0.1;
@@ -140,14 +156,16 @@ arcade_game_player_gets_too_far_away(var_00, var_01, var_02, var_03, var_04, var
 
       if(distancesquared(self.origin, var_1.origin) > var_07 || var_00 getstance() == "prone") {
         if(isDefined(var_1.basketball_game_music)) {
-          if(isDefined(var_04))
+          if(isDefined(var_04)) {
             var_1.basketball_game_music scripts\engine\utility::delaycall(1.0, ::playsound, var_04);
+          }
 
           var_1.basketball_game_music scripts\engine\utility::delaycall(1.0, ::stoploopsound);
         }
 
-        if(isDefined(var_02))
+        if(isDefined(var_02)) {
           var_00 giveuponsuppressiontime(var_02);
+        }
 
         [
           [var_03]
@@ -156,8 +174,9 @@ arcade_game_player_gets_too_far_away(var_00, var_01, var_02, var_03, var_04, var
         scripts\cp\cp_interaction::add_to_current_interaction_list(var_01);
         var_00 scripts\engine\utility::allow_weapon_switch(1);
 
-        if(!var_00 scripts\engine\utility::isusabilityallowed())
+        if(!var_00 scripts\engine\utility::isusabilityallowed()) {
           var_00 scripts\engine\utility::allow_usability(1);
+        }
 
         var_00 give_player_back_weapon(var_00);
         var_00 restore_player_grenades_post_game();
@@ -193,11 +212,13 @@ arcade_game_player_gets_too_far_away(var_00, var_01, var_02, var_03, var_04, var
 }
 
 turn_off_machine_after_uses(var_00, var_01) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 4;
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 7;
+  }
 
   for(;;) {
     var_02 = 1;
@@ -216,8 +237,9 @@ turn_off_machine_after_uses(var_00, var_01) {
       }
 
       foreach(var_06 in level.players) {
-        if(isDefined(var_6.last_interaction_point) && var_6.last_interaction_point == self)
+        if(isDefined(var_6.last_interaction_point) && var_6.last_interaction_point == self) {
           var_06 thread scripts\cp\cp_interaction::refresh_interaction();
+        }
       }
     }
   }
@@ -230,14 +252,18 @@ saveplayerpregameweapon(var_00) {
   var_01 = var_00 getcurrentweapon();
   var_02 = 0;
 
-  if(var_01 == "none")
+  if(var_01 == "none") {
     var_02 = 1;
-  else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, var_01))
+  }
+  else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, var_01)) {
     var_02 = 1;
-  else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, getweaponbasename(var_01)))
+  }
+  else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, getweaponbasename(var_01))) {
     var_02 = 1;
-  else if(scripts\cp\utility::is_melee_weapon(var_01, 1))
+  }
+  else if(scripts\cp\utility::is_melee_weapon(var_01, 1)) {
     var_02 = 1;
+  }
 
   if(var_02) {
     var_0.copy_fullweaponlist = var_00 getweaponslistall();
@@ -246,10 +272,12 @@ saveplayerpregameweapon(var_00) {
 
   var_0.copy_fullweaponlist = undefined;
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     return var_01;
-  else
+  }
+  else {
     return var_00 getcurrentweapon();
+  }
 }
 
 give_player_back_weapon(var_00) {
@@ -257,13 +285,15 @@ give_player_back_weapon(var_00) {
     return;
   }
   if(isDefined(var_0.pre_arcade_game_weapon)) {
-    if(var_00 hasweapon(var_0.pre_arcade_game_weapon))
+    if(var_00 hasweapon(var_0.pre_arcade_game_weapon)) {
       var_00 switchtoweapon(var_0.pre_arcade_game_weapon);
+    }
   } else {
     var_01 = var_00 getweaponslistprimaries();
 
-    if(isDefined(var_1[1]))
+    if(isDefined(var_1[1])) {
       var_00 switchtoweapon(var_1[1]);
+    }
   }
 
   var_0.pre_arcade_game_weapon_clip = undefined;
@@ -326,10 +356,12 @@ restore_player_grenades_post_game() {
 }
 
 set_arcade_game_award_type(var_00) {
-  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade))
+  if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade)) {
     var_0.arcade_game_award_type = "soul_power";
-  else
+  }
+  else {
     var_0.arcade_game_award_type = "tickets";
+  }
 }
 
 update_song_playing(var_00, var_01) {

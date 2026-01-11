@@ -219,8 +219,9 @@ main() {
   clientscripts\_utility::registerSystem("lsm", ::last_stand_monitor);
   level.createFX_enabled = (getdvar(#"createfx") != "");
   level.zombiemode = (GetDvar(#"zombiemode") == "1");
-  if(!isDefined(level.scr_anim))
+  if(!isDefined(level.scr_anim)) {
     level.scr_anim[0][0] = 0;
+  }
   setup_default_client_flag_callbacks();
   clientscripts\_global_fx::main();
   clientscripts\_busing::busInit();
@@ -247,4 +248,3 @@ main() {
 zombie_intermission() {
   level.zombie_intermission = true;
 }
-

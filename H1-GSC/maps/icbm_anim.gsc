@@ -319,10 +319,12 @@ tower_explode_anims() {
   maps\_anim::addnotetrack_customfunction("tower", "powertower_crash", maps\icbm_code::tower_impact_fx, "explosion");
   level.scr_animtree["fence"] = #animtree;
 
-  if(getdvarint("use_old_fence_cutting") == 1)
+  if(getdvarint("use_old_fence_cutting") == 1) {
     level.scr_anim["fence"]["model_cut"] = % icbm_fence_cutting_guy1_fence;
-  else
+  }
+  else {
     level.scr_anim["fence"]["model_cut"] = % h1_icbm_fence_cutting_guy1_fence;
+  }
 }
 
 #using_animtree("generic_human");

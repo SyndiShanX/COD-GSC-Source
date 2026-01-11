@@ -22,8 +22,9 @@ init() {
   level.showingfinalkillcam = 0;
   level.tispawndelay = getdvarint("scr_tispawndelay");
 
-  if(!isDefined(level.func_12AC9))
+  if(!isDefined(level.func_12AC9)) {
     scripts\mp\tweakables::init();
+  }
 
   level.func_8865 = "halftime";
   level.func_AA1E = 0;
@@ -43,8 +44,9 @@ init() {
     var_02 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
     var_01 = " LB_GM_" + level.gametype;
 
-    if(getdvarint("g_hardcore"))
+    if(getdvarint("g_hardcore")) {
       var_01 = var_01 + "_HC";
+    }
 
     precacheleaderboards(var_02 + var_01 + var_00);
   }
@@ -94,8 +96,9 @@ func_9694(var_00) {
 func_DEEC() {
   setomnvar("ui_bomb_timer", 0);
 
-  if(getdvar("r_reflectionProbeGenerate") != "1")
+  if(getdvar("r_reflectionProbeGenerate") != "1") {
     setomnvar("ui_nuke_end_milliseconds", 0);
+  }
 
   setdvar("ui_danger_team", "");
   setdvar("ui_inhostmigration", 0);
@@ -162,6 +165,7 @@ func_11757() {
 }
 
 debugline(var_00, var_01) {
-  for(var_02 = 0; var_02 < 50; var_2++)
+  for(var_02 = 0; var_02 < 50; var_2++) {
     wait 0.05;
+  }
 }

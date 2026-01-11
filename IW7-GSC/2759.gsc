@@ -37,22 +37,26 @@ getrandomvariantfrombaseref(var_00) {
   var_01 = [];
 
   foreach(var_04, var_03 in level.func_110EC.baseref) {
-    if(var_03 == var_00)
+    if(var_03 == var_00) {
       var_1[var_1.size] = var_04;
+    }
   }
 
-  if(var_1.size == 0)
+  if(var_1.size == 0) {
     return undefined;
-  else
+  }
+  else {
     return var_1[randomint(var_1.size)];
+  }
 }
 
 modifycostforlootitem(var_00, var_01) {
   if(isDefined(var_00) && var_00 >= 0) {
     var_02 = scripts\engine\utility::ter_op(scripts\mp\utility\game::_hasperk("specialty_support_killstreaks"), level.func_110EC.costoverridepersist[var_00], level.func_110EC.costoverride[var_00]);
 
-    if(isDefined(var_02))
+    if(isDefined(var_02)) {
       return var_02;
+    }
   }
 
   return var_01;
@@ -62,27 +66,34 @@ getrarityforlootitem(var_00) {
   var_01 = "";
   var_02 = undefined;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_02 = level.func_110EC.rarity[var_00];
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     return var_01;
+  }
 
-  if(var_02 == 1)
+  if(var_02 == 1) {
     var_01 = "";
-  else if(var_02 == 2)
+  }
+  else if(var_02 == 2) {
     var_01 = "rare";
-  else if(var_02 == 3)
+  }
+  else if(var_02 == 3) {
     var_01 = "legend";
-  else
+  }
+  else {
     var_01 = "epic";
+  }
 
   return var_01;
 }
 
 getpassiveperk(var_00) {
-  if(var_00 <= 0)
+  if(var_00 <= 0) {
     return [];
+  }
 
   var_01 = level.func_110EC.passivestringref[var_00];
 
@@ -119,8 +130,9 @@ func_DF07(var_00, var_01) {
   var_02 = level.func_110EC;
 
   foreach(var_04 in var_01) {
-    if(!isDefined(var_2.streaktable[var_04]))
+    if(!isDefined(var_2.streaktable[var_04])) {
       var_2.streaktable[var_04] = [];
+    }
 
     var_2.streaktable[var_04][var_00] = 1;
   }
@@ -129,8 +141,9 @@ func_DF07(var_00, var_01) {
 func_DF05(var_00) {
   var_01 = level.func_110EC;
 
-  if(!isDefined(var_1.streaktable[var_00]))
+  if(!isDefined(var_1.streaktable[var_00])) {
     var_1.streaktable[var_00] = [];
+  }
 
   var_1.streaktable[var_00]["all"] = 1;
 }
@@ -138,18 +151,21 @@ func_DF05(var_00) {
 func_9ED5(var_00, var_01) {
   var_02 = level.func_110EC;
 
-  if(!isDefined(var_2.streaktable[var_01]))
+  if(!isDefined(var_2.streaktable[var_01])) {
     return 0;
+  }
 
-  if(scripts\mp\utility\game::istrue(var_2.streaktable[var_01]["all"]))
+  if(scripts\mp\utility\game::istrue(var_2.streaktable[var_01]["all"])) {
     return 1;
+  }
 
   return scripts\mp\utility\game::istrue(var_2.streaktable[var_01][var_00]);
 }
 
 func_89BC(var_00) {
-  if(scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_extra_points"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_extra_points")) {
     thread func_2A66(self, var_00);
+  }
 }
 
 func_2A66(var_00, var_01) {

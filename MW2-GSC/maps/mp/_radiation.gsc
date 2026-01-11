@@ -15,8 +15,9 @@ radiation() {
     precacheshellshock("mp_radiation_med");
     precacheshellshock("mp_radiation_high");
 
-    foreach(trigger in radiationFields)
+    foreach(trigger in radiationFields) {
     trigger thread common_scripts\_dynamic_world::triggerTouchThink(::playerEnterArea, ::playerLeaveArea);
+    }
 
     thread onPlayerConnect();
   }
@@ -33,22 +34,25 @@ onPlayerConnect() {
 playerEnterArea(trigger) {
   self.numAreas++;
 
-  if(self.numAreas == 1)
+  if(self.numAreas == 1) {
     self radiationEffect();
+  }
 }
 
 playerLeaveArea(trigger) {
   self.numAreas--;
   assert(self.numAreas >= 0);
 
-  if(self.numAreas != 0)
+  if(self.numAreas != 0) {
     return;
+  }
 
   self.poison = 0;
   self notify("leftTrigger");
 
-  if(isDefined(self.radiationOverlay))
+  if(isDefined(self.radiationOverlay)) {
     self.radiationOverlay fadeoutBlackOut(.10, 0);
+  }
 }
 
 soundWatcher(soundOrg) {
@@ -147,10 +151,12 @@ blackout() {
       percent_range = max_percent - min_percent;
       fraction = (self.poison - min_percent) / percent_range;
 
-      if(fraction < 0)
+      if(fraction < 0) {
         fraction = 0;
-      else if(fraction > 1)
+      }
+      else if(fraction > 1) {
         fraction = 1;
+      }
 
       length_range = max_length - min_length;
       length = min_length + (length_range * (1 - fraction));
@@ -160,8 +166,9 @@ blackout() {
 
       end_alpha = fraction * 0.5;
 
-      if(fraction == 1)
+      if(fraction == 1) {
         break;
+      }
 
       duration = length / 2;
 
@@ -173,11 +180,13 @@ blackout() {
       wait(fraction * 0.5);
     }
 
-    if(fraction == 1)
+    if(fraction == 1) {
       break;
+    }
 
-    if(self.radiationOverlay.alpha != 0)
+    if(self.radiationOverlay.alpha != 0) {
       self.radiationOverlay fadeoutBlackOut(1, 0);
+    }
 
     wait 0.05;
   }

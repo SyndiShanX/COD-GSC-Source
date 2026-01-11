@@ -138,10 +138,12 @@ spawnNewGenerator(generatorType, origin) {
 
   generator setModel(config.placedModel);
 
-  if(level.teamBased)
+  if(level.teamBased) {
     generator maps\mp\_entityheadIcons::setTeamHeadIcon(self.team, (0, 0, config.headIconHeight));
-  else
+  }
+  else {
     generator maps\mp\_entityheadicons::setPlayerHeadIcon(self, (0, 0, config.headIconHeight));
+  }
 
   generator thread watchOwner(self, generatorType);
   generator thread watchDamage(self, generatorType);

@@ -127,8 +127,9 @@ fx_for_power_path() {
 }
 centrifuge_jumpup_fix() {
   jumpblocker = GetEnt("centrifuge_jumpup", "targetname");
-  if(!isDefined(jumpblocker))
+  if(!isDefined(jumpblocker)) {
     return;
+  }
   jump_pos = jumpblocker.origin;
   centrifuge_occupied = false;
   while(true) {
@@ -146,8 +147,9 @@ centrifuge_jumpup_fix() {
 }
 centrifuge_jumpdown_fix() {
   jumpblocker = GetEnt("centrifuge_jumpdown", "targetname");
-  if(!isDefined(jumpblocker))
+  if(!isDefined(jumpblocker)) {
     return;
+  }
   jump_pos = jumpblocker.origin;
   centrifuge2_occupied = true;
   while(true) {

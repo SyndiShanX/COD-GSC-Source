@@ -20,14 +20,18 @@ shellshockOnDamage(cause, damage) {
     cause == "MOD_PROJECTILE" ||
     cause == "MOD_PROJECTILE_SPLASH") {
     time = 0;
-    if(damage >= 90)
+    if(damage >= 90) {
       time = 4;
-    else if(damage >= 50)
+    }
+    else if(damage >= 50) {
       time = 3;
-    else if(damage >= 25)
+    }
+    else if(damage >= 25) {
       time = 2;
-    else if(damage > 10)
+    }
+    else if(damage > 10) {
       time = 2;
+    }
     if(time) {
       self shellshock("frag_grenade_mp", 0.5);
     }

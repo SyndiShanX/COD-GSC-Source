@@ -41,11 +41,13 @@ usesquadmate(var_00) {
 
   var_01 = scripts\mp\agents\agent_utility::getvalidspawnpathnodenearplayer(0, 1);
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return 0;
+  }
 
-  if(!scripts\mp\utility\game::isreallyalive(self))
+  if(!scripts\mp\utility\game::isreallyalive(self)) {
     return 0;
+  }
 
   var_02 = var_1.origin;
   var_03 = vectortoangles(self.origin - var_1.origin);
@@ -94,8 +96,9 @@ sendagentweaponnotify(var_00) {
   level endon("game_ended");
   self waittill("giveLoadout");
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = "iw6_riotshield_mp";
+  }
 
   self notify("weapon_change", var_00);
 }
@@ -111,8 +114,9 @@ squadmate_agent_think() {
     var_00 = self[[scripts\mp\agents\agent_utility::agentfunc("gametype_update")]]();
 
     if(!var_00) {
-      if(!scripts\mp\bots\bots_util::bot_is_guarding_player(self.owner))
+      if(!scripts\mp\bots\bots_util::bot_is_guarding_player(self.owner)) {
         scripts\mp\bots\bots_strategy::bot_guard_player(self.owner, 350);
+      }
     }
 
     wait 0.05;

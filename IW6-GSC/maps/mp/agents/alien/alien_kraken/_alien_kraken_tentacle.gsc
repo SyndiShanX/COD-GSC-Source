@@ -146,10 +146,12 @@ smash(var_0) {
 }
 
 getsmashanimlength() {
-  if(level.kraken.phase == "heat")
+  if(level.kraken.phase == "heat") {
     var_0 = "heat_smash";
-  else
+  }
+  else {
     var_0 = "smash";
+  }
 
   return maps\mp\agents\alien\alien_kraken\_alien_tentacle_melee::getsmashanimlength(var_0);
 }
@@ -207,8 +209,9 @@ performmeleeattack(var_0) {
   if(!isDefined(var_0)) {
     var_0 = maps\mp\agents\alien\alien_kraken\_alien_kraken::findanenemy();
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       return;
+    }
   }
 
   self scragentsetgoalpos(self.origin);
@@ -244,13 +247,16 @@ onexitanimstate(var_0, var_1) {
 alienkrakententacledamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_2 = int(var_2 * level.alien_types["kraken"].attributes["tentacle_damage_multiplier"]);
 
-  if(isDefined(level.kraken))
+  if(isDefined(level.kraken)) {
     level.kraken maps\mp\agents\alien\alien_kraken\_alien_kraken::alienkrakendamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+  }
   else {
-    if(isDefined(var_1.owner) && isplayer(var_1.owner))
+    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
       var_1.owner thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("hitaliensoft");
-    else
+    }
+    else {
       var_1 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("hitaliensoft");
+    }
 
     if(isDefined(level.miniboss.hp) && !common_scripts\utility::flag("boss_in_pain")) {
       level.miniboss.hp = level.miniboss.hp - var_2;

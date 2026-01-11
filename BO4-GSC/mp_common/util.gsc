@@ -750,4 +750,3 @@ enable_art_fps() {
   setdvar(#"cg_drawfps", 0);
   setdvar(#"cg_drawartfps", 1);
 }
-

@@ -77,8 +77,9 @@ main() {
     thread enable_mb_scripted_ents();
   }
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     thread level_motionblur_changes();
+  }
 
   maps\skyway_audio::main();
   thread maps\skyway_util::player_sway();
@@ -89,8 +90,9 @@ main() {
   level._train = maps\skyway_util::train_build(var_0, "player_train_new_anim");
   level._train thread train_pathing();
 
-  if(!level.credits_only)
+  if(!level.credits_only) {
     thread objectives();
+  }
 
   level.player maps\skyway_util::create_view_particle_source();
   maps\_utility::add_extra_autosave_check("fallen_cant_get_up", maps\skyway_util::fall_check, "player not on train -- possibly falling off");
@@ -102,10 +104,12 @@ main() {
   maps\skyway_ambient_a10::a10_spawn_funcs();
   maps\skyway_util::spawn_allies("spawner_allies");
 
-  if(maps\skyway_util::start_point_is_after("end_swim"))
+  if(maps\skyway_util::start_point_is_after("end_swim")) {
     maps\skyway_util::spawn_boss("actor_boss_injured");
-  else
+  }
+  else {
     maps\skyway_util::spawn_boss();
+  }
 
   mission_post_inits();
   thread vision_sets();
@@ -186,8 +190,9 @@ mission_global_inits() {
 vision_sets() {}
 
 start_hangar() {
-  if(!level.credits_only)
+  if(!level.credits_only) {
     thread maps\skyway_audio::level_start_amb();
+  }
 
   maps\skyway_hangar_intro::start();
 }
@@ -351,10 +356,12 @@ objectives() {
       objective_add(maps\_utility::obj("obj_take_out_helos"), "current", &"SKYWAY_OBJ_TAKEOUTHELOS");
       common_scripts\utility::flag_wait("flag_helo_end");
 
-      if(!common_scripts\utility::flag("flag_helo_fail"))
+      if(!common_scripts\utility::flag("flag_helo_fail")) {
         maps\_utility::objective_complete(maps\_utility::obj("obj_take_out_helos"));
-      else
+      }
+      else {
         objective_state(maps\_utility::obj("obj_take_out_helos"), "failed");
+      }
     case "locomotive":
     case "rooftop_combat":
     case "locomotive_nomove":
@@ -421,8 +428,9 @@ track_show_hide() {
   var_0["canyon_to_tunnel"] = getEntArray("model_hide_canyon_to_tunnel", "targetname");
   var_0["end"] = getEntArray("model_hide_end", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   common_scripts\utility::array_call(var_2, ::hide);
+  }
 
   thread fake_teleport_notify();
 
@@ -530,6 +538,7 @@ level_scripted_visionsets() {
 enable_mb_scripted_ents() {
   var_0 = getEntArray("has_mblur", "script_noteworthy");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 motionblurhqenable();
+  }
 }

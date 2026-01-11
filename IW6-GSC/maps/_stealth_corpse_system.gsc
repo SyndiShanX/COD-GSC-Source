@@ -30,8 +30,9 @@ stealth_corpse_default_distances() {
 }
 
 stealth_corpse_set_distances(var_0) {
-  foreach(var_3, var_2 in var_0)
+  foreach(var_3, var_2 in var_0) {
   level._stealth.logic.corpse.distances[var_3] = var_2;
+  }
 
   level._stealth.logic.corpse.player_distsqrd = squared(level._stealth.logic.corpse.distances["player_dist"]);
   level._stealth.logic.corpse.sight_distsqrd = squared(level._stealth.logic.corpse.distances["sight_dist"]);

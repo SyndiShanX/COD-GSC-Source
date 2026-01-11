@@ -7,8 +7,9 @@
 #include maps\mp\gametypes\_hud_util;
 
 main() {
-  if(GetDvar(#"mapname") == "mp_background")
+  if(GetDvar(#"mapname") == "mp_background") {
     return;
+  }
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
   maps\mp\gametypes\_globallogic::SetupCallbacks();
@@ -37,26 +38,33 @@ main() {
   precacheShader("waypoint_capture");
   precacheShader("waypoint_defend");
   precacheString(&"MP_WAITING_FOR_HQ");
-  if(GetDvar(#"koth_autodestroytime") == "")
+  if(GetDvar(#"koth_autodestroytime") == "") {
     setdvar("koth_autodestroytime", "60");
+  }
   level.hqAutoDestroyTime = GetDvarInt(#"koth_autodestroytime");
-  if(GetDvar(#"koth_spawntime") == "")
+  if(GetDvar(#"koth_spawntime") == "") {
     setdvar("koth_spawntime", "45");
+  }
   level.hqSpawnTime = GetDvarInt(#"koth_spawntime");
-  if(GetDvar(#"koth_kothmode") == "")
+  if(GetDvar(#"koth_kothmode") == "") {
     setdvar("koth_kothmode", "1");
+  }
   level.kothMode = GetDvarInt(#"koth_kothmode");
-  if(GetDvar(#"koth_captureTime") == "")
+  if(GetDvar(#"koth_captureTime") == "") {
     setdvar("koth_captureTime", "20");
+  }
   level.captureTime = GetDvarInt(#"koth_captureTime");
-  if(GetDvar(#"koth_destroyTime") == "")
+  if(GetDvar(#"koth_destroyTime") == "") {
     setdvar("koth_destroyTime", "10");
+  }
   level.destroyTime = GetDvarInt(#"koth_destroyTime");
-  if(GetDvar(#"koth_delayPlayer") == "")
+  if(GetDvar(#"koth_delayPlayer") == "") {
     setdvar("koth_delayPlayer", 1);
+  }
   level.delayPlayer = GetDvarInt(#"koth_delayPlayer");
-  if(GetDvar(#"koth_spawnDelay") == "")
+  if(GetDvar(#"koth_spawnDelay") == "") {
     setdvar("koth_spawnDelay", 0);
+  }
   level.spawnDelay = GetDvarInt(#"koth_spawnDelay");
   level.iconoffset = (0, 0, 32);
   level.onRespawnDelay = ::getRespawnDelay;
@@ -80,17 +88,21 @@ updateObjectiveHintMessages(alliesObjective, axisObjective) {
 }
 getRespawnDelay() {
   self.lowerMessageOverride = undefined;
-  if(!isDefined(level.radio.gameobject))
+  if(!isDefined(level.radio.gameobject)) {
     return undefined;
+  }
   hqOwningTeam = level.radio.gameobject maps\mp\gametypes\_gameobjects::getOwnerTeam();
   if(self.pers["team"] == hqOwningTeam) {
-    if(!isDefined(level.hqDestroyTime))
+    if(!isDefined(level.hqDestroyTime)) {
       return undefined;
+    }
     timeRemaining = (level.hqDestroyTime - gettime()) / 1000;
-    if(!level.spawnDelay)
+    if(!level.spawnDelay) {
       return undefined;
-    if(level.spawnDelay >= level.hqAutoDestroyTime)
+    }
+    if(level.spawnDelay >= level.hqAutoDestroyTime) {
       self.lowerMessageOverride = &"MP_WAITING_FOR_HQ";
+    }
     if(level.delayPlayer) {
       return min(level.spawnDelay, timeRemaining);
     } else {
@@ -116,12 +128,15 @@ onStartGameType() {
   precacheString(level.objectiveHintCaptureHQ);
   precacheString(level.objectiveHintDestroyHQ);
   precacheString(level.objectiveHintDefendHQ);
-  if(level.kothmode)
+  if(level.kothmode) {
     level.objectiveHintDestroyHQ = level.objectiveHintCaptureHQ;
-  if(level.hqSpawnTime)
+  }
+  if(level.hqSpawnTime) {
     updateObjectiveHintMessages(level.objectiveHintPrepareHQ, level.objectiveHintPrepareHQ);
-  else
+  }
+  else {
     updateObjectiveHintMessages(level.objectiveHintCaptureHQ, level.objectiveHintCaptureHQ);
+  }
   setClientNameMode("auto_change");
   level.spawnMins = (0, 0, 0);
   level.spawnMaxs = (0, 0, 0);
@@ -186,8 +201,9 @@ HQMainLoop() {
   precacheString(&"MP_CAPTURING_HQ");
   precacheString(&"MP_DESTROYING_HQ");
   spawn_first_radio();
-  while(level.inPrematchPeriod)
+  while(level.inPrematchPeriod) {
     wait(0.05);
+  }
   wait 5;
   timerDisplay = [];
   timerDisplay["allies"] = createServerTimer("objective", 1.4, "allies");
@@ -272,16 +288,19 @@ HQMainLoop() {
       level.radio.gameobject maps\mp\gametypes\_gameobjects::set3DIcon("friendly", "waypoint_defend");
       level.radio.gameobject maps\mp\gametypes\_gameobjects::set2DIcon("enemy", "compass_waypoint_capture");
       level.radio.gameobject maps\mp\gametypes\_gameobjects::set3DIcon("enemy", "waypoint_capture");
-      if(!level.kothMode)
+      if(!level.kothMode) {
         level.radio.gameobject maps\mp\gametypes\_gameobjects::setUseText(&"MP_DESTROYING_HQ");
+      }
       level.radio.gameobject.onUse = ::onRadioDestroy;
       if(level.hqAutoDestroyTime) {
         timerDisplay[ownerTeam].label = hqDestroyedInFriendlyStr;
-        if(!level.splitscreen)
+        if(!level.splitscreen) {
           timerDisplay[ownerTeam].alpha = 1;
+        }
         timerDisplay[otherTeam].label = hqDestroyedInEnemyStr;
-        if(!level.splitscreen)
+        if(!level.splitscreen) {
           timerDisplay[otherTeam].alpha = 1;
+        }
       }
       level thread dropAllAroundHQ();
       level waittill("hq_destroyed");
@@ -313,8 +332,9 @@ forceSpawnTeam(team) {
   players = level.players;
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    if(!isDefined(player))
+    if(!isDefined(player)) {
       continue;
+    }
     if(player.pers["team"] == team) {
       player notify("force_spawn");
       wait .1;
@@ -344,11 +364,13 @@ onRadioCapture(player) {
   thread give_capture_credit(self.touchList[team], string);
   oldTeam = maps\mp\gametypes\_gameobjects::getOwnerTeam();
   self maps\mp\gametypes\_gameobjects::setOwnerTeam(team);
-  if(!level.kothMode)
+  if(!level.kothMode) {
     self maps\mp\gametypes\_gameobjects::setUseTime(level.destroyTime);
+  }
   otherTeam = "axis";
-  if(team == "axis")
+  if(team == "axis") {
     otherTeam = "allies";
+  }
   thread printOnTeamArg(&"MP_HQ_CAPTURED_BY", team, player);
   thread printOnTeam(&"MP_HQ_CAPTURED_BY_ENEMY", otherTeam);
   maps\mp\gametypes\_globallogic_audio::leaderDialog("hq_secured", team);
@@ -373,8 +395,9 @@ give_capture_credit(touchList, string) {
     }
     player_from_touchlist maps\mp\_medals::positionSecure();
     player_from_touchlist maps\mp\gametypes\_persistence::statAddWithGameType("CAPTURES", 1);
-    if(isDefined(player_from_touchlist.thisPlayerIsInLastStand) && player_from_touchlist.thisPlayerIsInLastStand == true)
+    if(isDefined(player_from_touchlist.thisPlayerIsInLastStand) && player_from_touchlist.thisPlayerIsInLastStand == true) {
       player_from_touchlist maps\mp\_medals::heroic();
+    }
   }
 }
 dropAllAroundHQ(radio) {
@@ -385,8 +408,9 @@ dropAllAroundHQ(radio) {
 onRadioDestroy(player) {
   team = player.pers["team"];
   otherTeam = "axis";
-  if(team == "axis")
+  if(team == "axis") {
     otherTeam = "allies";
+  }
   player logString("radio destroyed");
   player thread[[level.onXPEvent]]("capture");
   maps\mp\gametypes\_globallogic_score::givePlayerScore("capture", player);
@@ -408,8 +432,9 @@ onRadioDestroy(player) {
     maps\mp\gametypes\_globallogic_audio::leaderDialog("hq_enemy_destroyed", otherTeam);
   }
   level notify("hq_destroyed");
-  if(level.kothmode)
+  if(level.kothmode) {
     level thread awardHQPoints(team);
+  }
   player notify("event_ended");
 }
 DestroyHQAfterTime(time) {
@@ -448,16 +473,20 @@ onSpawnPlayer() {
   if(isDefined(level.radio)) {
     if(isDefined(level.radio.gameobject)) {
       hqOwningTeam = level.radio.gameobject maps\mp\gametypes\_gameobjects::getOwnerTeam();
-      if(self.pers["team"] == hqOwningTeam)
+      if(self.pers["team"] == hqOwningTeam) {
         spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, level.radio.gameobject.nearSpawns);
-      else if(level.spawnDelay >= level.hqAutoDestroyTime && gettime() > level.hqRevealTime + 10000)
+      }
+      else if(level.spawnDelay >= level.hqAutoDestroyTime && gettime() > level.hqRevealTime + 10000) {
         spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all);
-      else
+      }
+      else {
         spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, level.radio.gameobject.outerSpawns);
+      }
     }
   }
-  if(!isDefined(spawnpoint))
+  if(!isDefined(spawnpoint)) {
     spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all);
+  }
   assert(isDefined(spawnpoint));
   self spawn(spawnpoint.origin, spawnpoint.angles, "koth");
 }
@@ -509,8 +538,9 @@ SetupRadios() {
   }
   if(maperrors.size > 0) {
     println("^1------------ Map Errors ------------");
-    for(i = 0; i < maperrors.size; i++)
+    for(i = 0; i < maperrors.size; i++) {
       println(maperrors[i]);
+    }
     println("^1------------------------------------");
     maps\mp\_utility::error("Map errors. See above");
     maps\mp\gametypes\_callbacksetup::AbortLevel();
@@ -528,8 +558,9 @@ setUpNearbySpawns() {
   }
   for(i = 1; i < spawns.size; i++) {
     thespawn = spawns[i];
-    for(j = i - 1; j >= 0 && thespawn.distsq < spawns[j].distsq; j--)
+    for(j = i - 1; j >= 0 && thespawn.distsq < spawns[j].distsq; j--) {
       spawns[j + 1] = spawns[j];
+    }
     spawns[j + 1] = thespawn;
   }
   first = [];
@@ -542,10 +573,12 @@ setUpNearbySpawns() {
   }
   for(; i < spawns.size; i++) {
     outer[outer.size] = spawns[i];
-    if(i <= (thirdSize * 2))
+    if(i <= (thirdSize * 2)) {
       second[second.size] = spawns[i];
-    else
+    }
+    else {
       third[third.size] = spawns[i];
+    }
   }
   self.gameObject.nearSpawns = first;
   self.gameObject.midSpawns = second;
@@ -572,8 +605,9 @@ PickRadioTospawn() {
   }
   if(num["allies"] == 0 || num["axis"] == 0) {
     radio = level.radios[randomint(level.radios.size)];
-    while(isDefined(level.prevradio) && radio == level.prevradio)
+    while(isDefined(level.prevradio) && radio == level.prevradio) {
       radio = level.radios[randomint(level.radios.size)];
+    }
     level.prevradio2 = level.prevradio;
     level.prevradio = radio;
     return radio;
@@ -589,10 +623,12 @@ PickRadioTospawn() {
       continue;
     }
     if(isDefined(level.prevradio2) && radio == level.prevradio2) {
-      if(level.radios.size > 2)
+      if(level.radios.size > 2) {
         continue;
-      else
+      }
+      else {
         cost += 512;
+      }
     }
     if(!isDefined(lowestcost) || cost < lowestcost) {
       lowestcost = cost;
@@ -605,8 +641,9 @@ PickRadioTospawn() {
   return bestradio;
 }
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration) {
-  if(!isPlayer(attacker) || (!self.touchTriggers.size && !attacker.touchTriggers.size) || attacker.pers["team"] == self.pers["team"])
+  if(!isPlayer(attacker) || (!self.touchTriggers.size && !attacker.touchTriggers.size) || attacker.pers["team"] == self.pers["team"]) {
     return;
+  }
   medalGiven = false;
   if(self.touchTriggers.size) {
     triggerIds = getArrayKeys(self.touchTriggers);
@@ -690,8 +727,9 @@ enable_radio_spawn_influencer(enabled) {
 }
 enable_initial_spawn_influencers(duration) {
   initial_spawn_influencer_ents = getEntArray(self.target, "targetname");
-  if(initial_spawn_influencer_ents.size == 0)
+  if(initial_spawn_influencer_ents.size == 0) {
     return;
+  }
   assert(initial_spawn_influencer_ents.size == 2);
   ss = level.spawnsystem;
   mask1 = ss.iSPAWN_TEAMMASK_AXIS;

@@ -76,8 +76,9 @@ fxanim_init(localclientnum) {
     if(!isDefined(level.radar_waits)) {
       level.radar_waits = [];
 
-      for(i = 1; i < 6; i++)
+      for(i = 1; i < 6; i++) {
         level.radar_waits[i] = randomfloatrange(5, 10);
+      }
     }
 
     radar thread fxanim_radar_think(localclientnum);
@@ -117,8 +118,9 @@ fxanim_radar_think(localclientnum) {
     self clearanim(level.scr_anim["fxanim_props_dlc4"]["crane0" + anim_index], 0);
     anim_index++;
 
-    if(anim_index > 5)
+    if(anim_index > 5) {
       anim_index = 1;
+    }
   }
 }
 
@@ -130,6 +132,7 @@ main() {
   precache_fxanim_props_dlc4();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0)
+  if(!isDefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
+  }
 }

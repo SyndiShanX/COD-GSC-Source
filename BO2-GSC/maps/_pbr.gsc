@@ -165,12 +165,15 @@ update_wake_fx(str_size) {
     angles = (0, angles[1], angles[2]);
     angles = (angles[0], angles[1], 0);
 
-    if(speed_pct > 0.0 && speed_pct <= level.boat_wake_speed[0])
+    if(speed_pct > 0.0 && speed_pct <= level.boat_wake_speed[0]) {
       playFX(level._effect["pbr_wake_" + str_size + "_churn_1"], origin, anglesToForward(angles) * -1);
-    else if(level.boat_wake_speed[0] > 0.0 && speed_pct <= level.boat_wake_speed[1])
+    }
+    else if(level.boat_wake_speed[0] > 0.0 && speed_pct <= level.boat_wake_speed[1]) {
       playFX(level._effect["pbr_wake_" + str_size + "_churn_2"], origin, anglesToForward(angles) * -1);
-    else if(level.boat_wake_speed[1] > 0.0 && speed_pct <= level.boat_wake_speed[2])
+    }
+    else if(level.boat_wake_speed[1] > 0.0 && speed_pct <= level.boat_wake_speed[2]) {
       playFX(level._effect["pbr_wake_" + str_size + "_churn_3"], origin, anglesToForward(angles) * -1);
+    }
 
     wait 0.1;
   }

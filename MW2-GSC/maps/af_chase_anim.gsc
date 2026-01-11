@@ -363,16 +363,18 @@ shepherd_slowmo_ends(guy) {
 }
 
 blend_to_ending_dof_fov(blend_out_time) {
-  if(!isDefined(blend_out_time))
+  if(!isDefined(blend_out_time)) {
     blend_out_time = 14;
+  }
 
   maps\af_chase_knife_fight_code::blend_to_ending_dof(blend_out_time);
   level.fov_ent moveto((65, 0, 0), blend_out_time, blend_out_time * 0.5, blend_out_time * 0.5);
 }
 
 delete_glock(guy) {
-  if(isDefined(level.glock))
+  if(isDefined(level.glock)) {
     level.glock Delete();
+  }
 
   origin = guy GetTagOrigin("tag_weapon_right");
   angles = guy GetTagAngles("tag_weapon_right");
@@ -418,16 +420,18 @@ impaled_aims_at_player() {
 
     weight = 0;
     if(right_dot > 0) {
-      if(degrees > range)
+      if(degrees > range) {
         degrees = range;
+      }
 
       weight = degrees / range;
       self SetAnim(left_anim, weight, 0.2, 1);
       self SetAnim(right_anim, 1 - weight, 0.2, 1);
     } else {
       degrees += 10;
-      if(degrees > range)
+      if(degrees > range) {
         degrees = range;
+      }
 
       weight = degrees / range;
       self SetAnim(right_anim, weight, 0.2, 1);
@@ -475,16 +479,18 @@ price_aims_at_end_heli() {
 
     weight = 0;
     if(right_dot > 0) {
-      if(degrees > range)
+      if(degrees > range) {
         degrees = range;
+      }
 
       weight = degrees / range;
       self SetAnim(left_anim, weight, 0.2, 1);
       self SetAnim(right_anim, 1 - weight, 0.2, 1);
     } else {
       degrees += 10;
-      if(degrees > range)
+      if(degrees > range) {
         degrees = range;
+      }
 
       weight = degrees / range;
       self SetAnim(right_anim, weight, 0.2, 1);
@@ -508,8 +514,9 @@ stop_aim(guy) {
 click(guy) {
   guy.clicks++;
   if(guy.clicks >= 6) {
-    if(randomint(100) > 50)
+    if(randomint(100) > 50) {
       return;
+    }
   }
 
   org = guy GetTagOrigin("tag_inhand");

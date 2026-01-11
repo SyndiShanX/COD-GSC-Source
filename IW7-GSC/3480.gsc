@@ -18,16 +18,18 @@ onplayerspawned() {
   for(;;) {
     self waittill("spawned_player");
 
-    if(level.teambased && level.teamemped[self.team] || !level.teambased && isDefined(level.empplayer) && level.empplayer != self)
+    if(level.teambased && level.teamemped[self.team] || !level.teambased && isDefined(level.empplayer) && level.empplayer != self) {
       self give_infinite_grenade(1);
+    }
   }
 }
 
 func_618B(var_00, var_01) {
   var_02 = self.pers["team"];
 
-  if(level.multiteambased)
+  if(level.multiteambased) {
     thread func_6166(var_02);
+  }
   else if(level.teambased) {
     var_03 = level.otherteam[var_02];
     thread func_6165(var_03);
@@ -51,8 +53,9 @@ func_6166(var_00) {
     if(var_2.team == var_00) {
       continue;
     }
-    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer"))
+    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer")) {
       var_02 clearscrambler();
+    }
   }
 
   visionsetnaked("coup_sunblind", 0.1);
@@ -62,31 +65,35 @@ func_6166(var_00) {
   visionsetnaked("", 3.0);
 
   for(var_04 = 0; var_04 < level.teamnamelist.size; var_4++) {
-    if(var_00 != level.teamnamelist[var_04])
+    if(var_00 != level.teamnamelist[var_04]) {
       level.teamemped[level.teamnamelist[var_04]] = 1;
+    }
   }
 
   level notify("emp_update");
 
   for(var_04 = 0; var_04 < level.teamnamelist.size; var_4++) {
-    if(var_00 != level.teamnamelist[var_04])
+    if(var_00 != level.teamnamelist[var_04]) {
       level func_52CA(self, level.teamnamelist[var_04]);
+    }
   }
 
   level thread func_A577();
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(level.empstuntime);
 
   for(var_04 = 0; var_04 < level.teamnamelist.size; var_4++) {
-    if(var_00 != level.teamnamelist[var_04])
+    if(var_00 != level.teamnamelist[var_04]) {
       level.teamemped[level.teamnamelist[var_04]] = 0;
+    }
   }
 
   foreach(var_02 in level.players) {
     if(var_2.team == var_00) {
       continue;
     }
-    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer"))
+    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer")) {
       var_02 makescrambler();
+    }
   }
 
   level notify("emp_update");
@@ -104,8 +111,9 @@ func_6165(var_00) {
     if(var_2.team != var_00) {
       continue;
     }
-    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer"))
+    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer")) {
       var_02 clearscrambler();
+    }
 
     var_02 visionsetnakedforplayer("coup_sunblind", 0.1);
   }
@@ -125,8 +133,9 @@ func_6165(var_00) {
     if(var_2.team != var_00) {
       continue;
     }
-    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer"))
+    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer")) {
       var_02 makescrambler();
+    }
   }
 
   level notify("emp_update");
@@ -142,8 +151,9 @@ func_6164(var_00) {
     if(var_02 == var_00) {
       continue;
     }
-    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer"))
+    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer")) {
       var_02 clearscrambler();
+    }
   }
 
   visionsetnaked("coup_sunblind", 0.1);
@@ -163,8 +173,9 @@ func_6164(var_00) {
     if(var_02 == var_00) {
       continue;
     }
-    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer"))
+    if(var_02 scripts\mp\utility\game::_hasperk("specialty_localjammer")) {
       var_02 makescrambler();
+    }
   }
 
   level.empplayer = undefined;
@@ -177,8 +188,9 @@ func_A577() {
   level endon("keepEMPTimeRemaining");
   level endon("emp_ended");
 
-  for(level.emptriggerholdonuse = int(level.empstuntime); level.emptriggerholdonuse; level.emptriggerholdonuse--)
+  for(level.emptriggerholdonuse = int(level.empstuntime); level.emptriggerholdonuse; level.emptriggerholdonuse--) {
     wait 1.0;
+  }
 }
 
 empradarwatcher() {
@@ -242,8 +254,9 @@ func_617C() {
         continue;
       }
 
-      if(!var_01 scripts\mp\killstreaks\emp_common::isemped())
+      if(!var_01 scripts\mp\killstreaks\emp_common::isemped()) {
         var_01 func_626B(0);
+      }
     }
   }
 }
@@ -275,8 +288,9 @@ func_532B(var_00, var_01, var_02) {
 
   foreach(var_13 in var_02) {
     if(level.teambased && isDefined(var_01)) {
-      if(isDefined(var_13.team) && var_13.team != var_01)
+      if(isDefined(var_13.team) && var_13.team != var_01) {
         continue;
+      }
     } else if(isDefined(var_13.owner) && var_13.owner == var_00) {
       continue;
     }
@@ -310,8 +324,9 @@ func_52C6(var_00, var_01) {
 
   foreach(var_12 in level.rockets) {
     if(level.teambased && isDefined(var_01)) {
-      if(isDefined(var_12.team) && var_12.team != var_01)
+      if(isDefined(var_12.team) && var_12.team != var_01) {
         continue;
+      }
     } else if(isDefined(var_12.owner) && var_12.owner == var_00) {
       continue;
     }
@@ -324,8 +339,9 @@ func_52C6(var_00, var_01) {
 func_52C8(var_00, var_01) {
   var_02 = level.uavmodels;
 
-  if(level.teambased && isDefined(var_01))
+  if(level.teambased && isDefined(var_01)) {
     var_02 = level.uavmodels[var_01];
+  }
 
   func_532B(var_00, var_01, var_02);
 }
@@ -350,11 +366,13 @@ func_52C0(var_00, var_01) {
   var_10 = undefined;
 
   if(level.teambased && isDefined(var_01)) {
-    if(isDefined(level.ac130player) && isDefined(level.ac130player.team) && level.ac130player.team == var_01)
+    if(isDefined(level.ac130player) && isDefined(level.ac130player.team) && level.ac130player.team == var_01) {
       level.ac130.planemodel notify("damage", var_04, var_00, var_05, var_06, var_02, var_07, var_08, var_09, var_10, var_03);
+    }
   } else if(isDefined(level.ac130player)) {
-    if(!isDefined(level.ac130.owner) || isDefined(level.ac130.owner) && level.ac130.owner != var_00)
+    if(!isDefined(level.ac130.owner) || isDefined(level.ac130.owner) && level.ac130.owner != var_00) {
       level.ac130.planemodel notify("damage", var_04, var_00, var_05, var_06, var_02, var_07, var_08, var_09, var_10, var_03);
+    }
   }
 }
 
@@ -366,8 +384,9 @@ func_626B(var_00) {
   self give_infinite_grenade(var_00);
   var_01 = 0;
 
-  if(var_00)
+  if(var_00) {
     var_01 = 1;
+  }
 
   thread scripts\mp\killstreaks\emp_common::func_10D95();
 }

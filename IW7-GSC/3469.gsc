@@ -16,8 +16,9 @@ init() {
 func_128DD(var_00, var_01) {
   var_02 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_00, "deployable_adrenaline_mist");
 
-  if(!isDefined(var_02) || !var_02)
+  if(!isDefined(var_02) || !var_02) {
     return 0;
+  }
 
   scripts\mp\matchdata::logkillstreakevent("deployable_adrenaline_mist", self.origin);
   return 1;

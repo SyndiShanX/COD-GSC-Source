@@ -42,8 +42,9 @@ init() {
   level.teamProgressBarWidth = 192;
   level.teamProgressBarTextY = 8;
   level.teamProgressBarFontSize = 1.65;
-  if(getDvar("ui_score_bar") == "")
+  if(getDvar("ui_score_bar") == "") {
     setDvar("ui_score_bar", 0);
+  }
   setDvar("ui_generic_status_bar", 0);
   if(level.splitscreen) {
     level.lowerTextYAlign = "BOTTOM";

@@ -42,8 +42,9 @@ init(pickupstring, howtostring) {
 }
 
 wait_init_damage() {
-  while(!isDefined(level.zombie_vars) || !isDefined(level.zombie_vars["zombie_health_start"]))
+  while(!isDefined(level.zombie_vars) || !isDefined(level.zombie_vars["zombie_health_start"])) {
     wait 1;
+  }
 
   level.subwoofer_damage = maps\mp\zombies\_zm::ai_zombie_health(50);
 }
@@ -116,8 +117,9 @@ watchforcleanup() {
   self endon("subwoofer_cleanup");
   evt = self waittill_any_return("death_or_disconnect", "equip_subwoofer_zm_taken", "equip_subwoofer_zm_pickup");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self cleanupoldsubwoofer(evt == "equip_subwoofer_zm_pickup");
+  }
 }
 
 placesubwoofer(origin, angles) {
@@ -166,14 +168,16 @@ transfersubwoofer(fromplayer, toplayer) {
   buildablesubwoofer = toplayer.buildablesubwoofer;
   toarmed = 0;
 
-  if(isDefined(buildablesubwoofer))
+  if(isDefined(buildablesubwoofer)) {
     toarmed = isDefined(buildablesubwoofer.is_armed) && buildablesubwoofer.is_armed;
+  }
 
   subwoofer_kills = toplayer.subwoofer_kills;
   fromarmed = 0;
 
-  if(isDefined(fromplayer.buildablesubwoofer))
+  if(isDefined(fromplayer.buildablesubwoofer)) {
     fromarmed = isDefined(fromplayer.buildablesubwoofer.is_armed) && fromplayer.buildablesubwoofer.is_armed;
+  }
 
   toplayer.buildablesubwoofer = fromplayer.buildablesubwoofer;
   subwoofer_power_on = toplayer.subwoofer_power_on;
@@ -215,8 +219,9 @@ transfersubwoofer(fromplayer, toplayer) {
 }
 
 subwoofer_in_range(delta, origin, radius) {
-  if(distancesquared(self.target.origin, origin) < radius * radius)
+  if(distancesquared(self.target.origin, origin) < radius * radius) {
     return true;
+  }
 
   return false;
 }
@@ -256,8 +261,9 @@ startsubwooferdeploy(weapon, armed) {
     self.subwoofer_kills = undefined;
   }
 
-  if(!isDefined(weapon.subwoofer_kills))
+  if(!isDefined(weapon.subwoofer_kills)) {
     weapon.subwoofer_kills = 0;
+  }
 
   if(!isDefined(self.subwoofer_health)) {
     self.subwoofer_health = 60;
@@ -273,13 +279,16 @@ startsubwooferdeploy(weapon, armed) {
     } else
       weapon.power_on = 1;
 
-    if(weapon.power_on)
+    if(weapon.power_on) {
       self thread subwooferthink(weapon, armed);
-    else
+    }
+    else {
       self iprintlnbold(&"ZOMBIE_NEED_LOCAL_POWER");
+    }
 
-    if(!(isDefined(level.equipment_subwoofer_needs_power) && level.equipment_subwoofer_needs_power))
+    if(!(isDefined(level.equipment_subwoofer_needs_power) && level.equipment_subwoofer_needs_power)) {
       self thread startsubwooferdecay(weapon);
+    }
 
     self thread maps\mp\zombies\_zm_buildables::delete_on_disconnect(weapon);
     weapon waittill("death");
@@ -303,8 +312,9 @@ startsubwooferdecay(weapon) {
   weapon endon("death");
   roundlives = 4;
 
-  if(!isDefined(self.subwoofer_power_level))
+  if(!isDefined(self.subwoofer_power_level)) {
     self.subwoofer_power_level = roundlives;
+  }
 
   while(weapon.subwoofer_kills < 45) {
     old_power_level = self.subwoofer_power_level;
@@ -321,8 +331,9 @@ startsubwooferdecay(weapon) {
       }
     }
 
-    if(isDefined(self.subwoofer_emped) && self.subwoofer_emped)
+    if(isDefined(self.subwoofer_emped) && self.subwoofer_emped) {
       self.subwoofer_power_level = 0;
+    }
 
     cost = 1;
 
@@ -335,11 +346,13 @@ startsubwooferdecay(weapon) {
       }
     } else if(weapon.subwoofer_kills > 15)
       self.subwoofer_power_level = 2;
-    else
+    else {
       self.subwoofer_power_level = 4;
+    }
 
-    if(old_power_level != self.subwoofer_power_level)
+    if(old_power_level != self.subwoofer_power_level) {
       self notify("subwoofer_power_change");
+    }
 
     wait 1;
   }
@@ -362,14 +375,16 @@ startsubwooferdecay(weapon) {
 destroy_placed_subwoofer() {
   if(isDefined(self.buildablesubwoofer)) {
     if(isDefined(self.buildablesubwoofer.dying) && self.buildablesubwoofer.dying) {
-      while(isDefined(self.buildablesubwoofer))
+      while(isDefined(self.buildablesubwoofer)) {
         wait 0.05;
+      }
 
       return;
     }
 
-    if(isDefined(self.buildablesubwoofer.stub))
+    if(isDefined(self.buildablesubwoofer.stub)) {
       thread maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(self.buildablesubwoofer.stub);
+    }
 
     thread subwoofer_disappear_fx(self.buildablesubwoofer, 0.75);
     self.buildablesubwoofer.dying = 1;
@@ -388,16 +403,19 @@ subwoofer_fx(weapon) {
   weapon endon("death");
   self endon("equip_subwoofer_zm_taken");
 
-  while(isDefined(weapon))
+  while(isDefined(weapon)) {
     wait 1;
+  }
 }
 
 subwoofer_disappear_fx(weapon, waittime) {
-  if(isDefined(waittime) && waittime > 0)
+  if(isDefined(waittime) && waittime > 0) {
     wait(waittime);
+  }
 
-  if(isDefined(weapon))
+  if(isDefined(weapon)) {
     playFX(level._effect["subwoofer_disappear"], weapon.origin);
+  }
 }
 
 subwoofer_choke() {
@@ -433,24 +451,29 @@ subwooferthink(weapon, armed) {
     if(!(isDefined(weapon.power_on) && weapon.power_on)) {
       continue;
     }
-    if(!isDefined(level._subwoofer_choke))
+    if(!isDefined(level._subwoofer_choke)) {
       level thread subwoofer_choke();
+    }
 
-    while(level._subwoofer_choke)
+    while(level._subwoofer_choke) {
       wait 0.05;
+    }
 
     level._subwoofer_choke++;
     weapon.subwoofer_network_choke_count = 0;
     weapon thread maps\mp\zombies\_zm_equipment::signal_equipment_activated(1);
     vibrateamplitude = 4;
 
-    if(self.subwoofer_power_level == 3)
+    if(self.subwoofer_power_level == 3) {
       vibrateamplitude = 8;
-    else if(self.subwoofer_power_level == 2)
+    }
+    else if(self.subwoofer_power_level == 2) {
       vibrateamplitude = 13;
+    }
 
-    if(self.subwoofer_power_level == 1)
+    if(self.subwoofer_power_level == 1) {
       vibrateamplitude = 17;
+    }
 
     weapon vibrate(vectorscale((0, -1, 0), 100.0), vibrateamplitude, 0.2, 0.3);
     zombies = get_array_of_closest(weapon.origin, get_round_enemy_array(), undefined, undefined, 1200);
@@ -470,18 +493,23 @@ subwooferthink(weapon, armed) {
       onlydamage = 0;
       action = undefined;
 
-      if(distanceentityandsubwoofer <= 32400)
+      if(distanceentityandsubwoofer <= 32400) {
         action = "burst";
-      else if(distanceentityandsubwoofer <= 230400)
+      }
+      else if(distanceentityandsubwoofer <= 230400) {
         action = "fling";
-      else if(distanceentityandsubwoofer <= 1440000)
+      }
+      else if(distanceentityandsubwoofer <= 1440000) {
         action = "stumble";
-      else
+      }
+      else {
         continue;
+      }
 
       if(!within_fov(original_origin, original_angles, ent.origin, cos(45))) {
-        if(isplayer(ent))
+        if(isplayer(ent)) {
           ent hit_player(action, 0);
+        }
 
         continue;
       }
@@ -489,11 +517,13 @@ subwooferthink(weapon, armed) {
       weapon subwoofer_network_choke();
       ent_trace_origin = ent.origin;
 
-      if(isai(ent) || isplayer(ent))
+      if(isai(ent) || isplayer(ent)) {
         ent_trace_origin = ent getEye();
+      }
 
-      if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "subwoofer_target")
+      if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "subwoofer_target") {
         ent_trace_origin = ent_trace_origin + vectorscale((0, 0, 1), 48.0);
+      }
 
       if(!sighttracepassed(tag_spin_origin, ent_trace_origin, 1, weapon)) {
         continue;
@@ -503,8 +533,9 @@ subwooferthink(weapon, armed) {
         continue;
       }
 
-      if(isDefined(ent.in_the_ground) && ent.in_the_ground || isDefined(ent.in_the_ceiling) && ent.in_the_ceiling || isDefined(ent.ai_state) && ent.ai_state == "zombie_goto_entrance" || !(isDefined(ent.completed_emerging_into_playable_area) && ent.completed_emerging_into_playable_area))
+      if(isDefined(ent.in_the_ground) && ent.in_the_ground || isDefined(ent.in_the_ceiling) && ent.in_the_ceiling || isDefined(ent.ai_state) && ent.ai_state == "zombie_goto_entrance" || !(isDefined(ent.completed_emerging_into_playable_area) && ent.completed_emerging_into_playable_area)) {
         onlydamage = 1;
+      }
 
       if(isplayer(ent)) {
         ent notify("player_" + action);
@@ -533,13 +564,15 @@ subwooferthink(weapon, armed) {
           continue;
         }
 
-        if(action == "stumble")
+        if(action == "stumble") {
           ent thread knockdown_zombie(weapon, shouldgib, onlydamage);
+        }
       }
     }
 
-    if(weapon.subwoofer_kills >= 45)
+    if(weapon.subwoofer_kills >= 45) {
       self thread subwoofer_expired(weapon);
+    }
   }
 }
 
@@ -553,13 +586,15 @@ hit_player(action, doshellshock) {
   if(action == "burst") {
     self playrumbleonentity("subwoofer_heavy");
 
-    if(isDefined(doshellshock) && doshellshock)
+    if(isDefined(doshellshock) && doshellshock) {
       self shellshock("frag_grenade_mp", 1.5);
+    }
   } else if(action == "fling") {
     self playrumbleonentity("subwoofer_medium");
 
-    if(isDefined(doshellshock) && doshellshock)
+    if(isDefined(doshellshock) && doshellshock) {
       self shellshock("frag_grenade_mp", 0.5);
+    }
   } else if(action == "stumble") {
     if(isDefined(doshellshock) && doshellshock) {
       self playrumbleonentity("subwoofer_light");
@@ -584,8 +619,9 @@ burst_zombie(weapon, player) {
     self.guts_explosion = 1;
     self setclientfield("zombie_gut_explosion", 1);
 
-    if(!(isDefined(self.isdog) && self.isdog))
+    if(!(isDefined(self.isdog) && self.isdog)) {
       wait 0.1;
+    }
 
     self ghost();
   }
@@ -654,8 +690,9 @@ knockdown_zombie_damage(weapon) {
 }
 
 handle_subwoofer_pain_notetracks(note) {
-  if(note == "zombie_knockdown_ground_impact")
+  if(note == "zombie_knockdown_ground_impact") {
     playFX(level._effect["subwoofer_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+  }
 }
 
 knockdown_zombie_animate() {
@@ -706,10 +743,12 @@ knockdown_zombie_animate() {
     return;
   }
   if(isDefined(self.a.gib_ref)) {
-    if(self.a.gib_ref == "no_legs" || self.a.gib_ref == "no_arms" || (self.a.gib_ref == "left_leg" || self.a.gib_ref == "right_leg") && randomint(100) > 25 || (self.a.gib_ref == "left_arm" || self.a.gib_ref == "right_arm") && randomint(100) > 75)
+    if(self.a.gib_ref == "no_legs" || self.a.gib_ref == "no_arms" || (self.a.gib_ref == "left_leg" || self.a.gib_ref == "right_leg") && randomint(100) > 25 || (self.a.gib_ref == "left_arm" || self.a.gib_ref == "right_arm") && randomint(100) > 75) {
       animation_duration = "_late";
-    else if(randomint(100) > 75)
+    }
+    else if(randomint(100) > 75) {
       animation_duration = "_early";
+    }
   } else if(randomint(100) > 25)
     animation_duration = "_early";
 
@@ -728,8 +767,9 @@ knockdown_zombie_animate_state() {
 subwoofer_network_choke() {
   self.subwoofer_network_choke_count++;
 
-  if(!(self.subwoofer_network_choke_count % 10))
+  if(!(self.subwoofer_network_choke_count % 10)) {
     wait_network_frame();
+  }
 }
 
 enemy_killed_by_subwoofer() {
@@ -751,21 +791,26 @@ debugsubwoofer() {
       row = 1;
       health_color = green;
 
-      if(self.subwoofer_power_level <= 1)
+      if(self.subwoofer_power_level <= 1) {
         health_color = red;
-      else if(self.subwoofer_power_level <= 3)
+      }
+      else if(self.subwoofer_power_level <= 3) {
         health_color = yellow;
+      }
 
       row = self debugsubwooferprint3d(row, "Kills: " + (isDefined(self.buildablesubwoofer.subwoofer_kills) && self.buildablesubwoofer.subwoofer_kills), health_color);
 
-      if(isDefined(self.subwoofer_health))
+      if(isDefined(self.subwoofer_health)) {
         row = self debugsubwooferprint3d(row, "Use Time: " + self.subwoofer_health, health_color);
+      }
 
-      if(isDefined(self.buildablesubwoofer.original_owner))
+      if(isDefined(self.buildablesubwoofer.original_owner)) {
         row = self debugsubwooferprint3d(row, "Original Owner: " + self.buildablesubwoofer.original_owner.name, green);
+      }
 
-      if(isDefined(self.buildablesubwoofer.owner))
+      if(isDefined(self.buildablesubwoofer.owner)) {
         row = self debugsubwooferprint3d(row, "Current Owner: " + self.buildablesubwoofer.owner.name, green);
+      }
     }
 
     wait 0.05;
@@ -788,11 +833,13 @@ subwoofer_debug_print(msg, color, offset) {
   if(!getdvarint(#"_id_EB512CB7")) {
     return;
   }
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 1, 1);
+  }
 
-  if(!isDefined(offset))
+  if(!isDefined(offset)) {
     offset = (0, 0, 0);
+  }
 
   print3d(self.origin + vectorscale((0, 0, 1), 60.0) + offset, msg, color, 1, 1, 40);
 }

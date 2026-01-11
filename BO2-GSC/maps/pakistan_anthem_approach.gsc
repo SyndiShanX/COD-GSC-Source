@@ -176,11 +176,13 @@ alley_cleanup() {
 monitor_drone_stealth_section() {
   flag_wait("tandem_kill_vo");
 
-  if(!flag("drone_intro_attack") && !flag("drone_searcher_attack") && !flag("drone_bank_attack"))
+  if(!flag("drone_intro_attack") && !flag("drone_searcher_attack") && !flag("drone_bank_attack")) {
     flag_set("drones_gone");
+  }
   else {
-    while(isalive(getent("drone_helicopter", "targetname")) || isalive(getent("drone_searcher", "targetname")) || isalive(getent("drone_bank", "targetname")))
+    while(isalive(getent("drone_helicopter", "targetname")) || isalive(getent("drone_searcher", "targetname")) || isalive(getent("drone_bank", "targetname"))) {
       wait 1;
+    }
 
     flag_set("drones_gone");
   }
@@ -196,8 +198,9 @@ floating_bodies() {
   clearallcorpses();
 
   if(is_mature()) {
-    foreach(m_body in a_m_bodies)
+    foreach(m_body in a_m_bodies) {
     m_body startragdoll();
+    }
 
     level.harper thread corpse_push_think();
     maps\pakistan_util::ragdoll_corpse_control();
@@ -237,8 +240,9 @@ static_bodies() {
 
   a_s_align_spots = getstructarray("death_pose_align", "script_noteworthy");
 
-  foreach(s_align in a_s_align_spots)
+  foreach(s_align in a_s_align_spots) {
   s_align structdelete();
+  }
 }
 
 spawn_drones() {
@@ -350,8 +354,9 @@ drone_searcher_logic() {
   self setvehgoalpos(s_goal1.origin, 0);
   self waittill("goal");
 
-  if(!flag("dept_store_entered"))
+  if(!flag("dept_store_entered")) {
     self.spotlight_target thread drone_searcher_target_movement();
+  }
 
   self setspeed(20, 15, 12);
   self setvehgoalpos(s_goal2.origin, 1);
@@ -386,8 +391,9 @@ drone_searcher_logic() {
     self.delete_on_death = 1;
     self notify("death");
 
-    if(!isalive(self))
+    if(!isalive(self)) {
       self delete();
+    }
   } else {
     self thread drone_searcher_alt_logic();
     self.spotlight_target thread drone_searcher_spotlight_alt_movement();
@@ -554,8 +560,9 @@ drone_bank_search_logic() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 drone_bank_searchlight_on() {
@@ -627,8 +634,9 @@ mantle_disabler() {
     trigger_wait("transition_to_anthem_approach");
     level.player allowjump(0);
 
-    while(level.player istouching(t_anim))
+    while(level.player istouching(t_anim)) {
       wait 0.05;
+    }
 
     level.player allowjump(1);
   }
@@ -659,8 +667,9 @@ drone_spotlight_control() {
     if(isDefined(nd_path.target)) {
       s_target = getstruct(nd_path.target, "targetname");
 
-      if(isDefined(s_target))
+      if(isDefined(s_target)) {
         self thread follow_spotlight_path(s_target);
+      }
     }
   }
 }
@@ -675,10 +684,12 @@ follow_spotlight_path(s_target) {
   while(isDefined(s_target)) {
     a_spotlight_path[a_spotlight_path.size] = s_target;
 
-    if(isDefined(s_target.target))
+    if(isDefined(s_target.target)) {
       s_target = getstruct(s_target.target, "targetname");
-    else
+    }
+    else {
       s_target = undefined;
+    }
   }
 
   s_current_spot = undefined;
@@ -692,17 +703,20 @@ follow_spotlight_path(s_target) {
 
       if(!isDefined(s_current_spot) || s_current_spot != s_target) {
         if(isDefined(s_current_spot) && isDefined(s_current_spot.script_notify)) {
-          if(self.spotlight_path_reverse)
+          if(self.spotlight_path_reverse) {
             level notify(s_current_spot.script_notify + "_reverse");
-          else
+          }
+          else {
             level notify(s_current_spot.script_notify);
+          }
         }
 
         s_current_spot = s_target;
         _aim_spotlight(s_target, s_current_spot.script_float);
 
-        if(isDefined(s_current_spot.script_wait))
+        if(isDefined(s_current_spot.script_wait)) {
           s_current_spot script_wait();
+        }
       }
     }
 
@@ -720,24 +734,29 @@ aim_spotlight(target, n_speed_scale, b_face, n_time) {
 }
 
 _aim_spotlight(target, n_speed_scale, b_face) {
-  if(!isDefined(n_speed_scale))
+  if(!isDefined(n_speed_scale)) {
     n_speed_scale = 1;
+  }
 
-  if(!isDefined(b_face))
+  if(!isDefined(b_face)) {
     b_face = 0;
+  }
 
   self endon("death");
   self.spotlight_target unlink();
   self.turretrotscale = n_speed_scale;
   self.spotlight_target.origin = target.origin;
 
-  if(!isvec(target) && isDefined(target.classname))
+  if(!isvec(target) && isDefined(target.classname)) {
     self.spotlight_target linkto(target);
+  }
 
-  if(b_face)
+  if(b_face) {
     self setlookatent(self.spotlight_target);
-  else
+  }
+  else {
     self clearlookatent();
+  }
 
   self waittill("turret_on_target");
   self.turretrotscale = 1;
@@ -755,63 +774,80 @@ vo_avoid_spotlight() {
   n_distance = 250;
   flag_wait("hand_signals_a_started");
 
-  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance)
+  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance) {
     level.harper say_dialog("harp_stay_left_brother_0", 1);
-  else
+  }
+  else {
     level.harper say_dialog("harp_careful_man_stick_1", 1);
+  }
 
   flag_wait("move3");
 
-  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance)
+  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance) {
     level.harper say_dialog("harp_move_section_1", 3);
-  else
+  }
+  else {
     level.harper say_dialog("harp_move_before_it_sees_0", 3);
+  }
 
   flag_wait("moveto_cafe_side");
 
-  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance)
+  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance) {
     level.harper say_dialog("harp_it_s_comin_around_0", 2);
-  else if(!flag("spawn_drone_searcher"))
+  }
+  else if(!flag("spawn_drone_searcher")) {
     level.harper say_dialog("harp_get_down_fucking_d_0", 2);
+  }
 
   flag_wait("drone_turned_around");
 
-  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance)
+  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance) {
     level.harper say_dialog("harp_that_s_right_you_dum_0", 1);
-  else if(!flag("spawn_drone_searcher"))
+  }
+  else if(!flag("spawn_drone_searcher")) {
     level.harper say_dialog("harp_spotlight_s_getting_1", 0);
-  else
+  }
+  else {
     level.harper say_dialog("harp_that_s_right_you_du_0", 1);
+  }
 
   flag_wait("spawn_drone_searcher");
 
-  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance)
+  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance) {
     level.harper say_dialog("harp_we_got_another_drone_0", 1);
-  else
+  }
+  else {
     level.harper say_dialog("harp_we_got_another_drone_1", 1);
+  }
 
   flag_wait("drone_searcher_look_left");
 
-  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance)
+  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance) {
     level.harper say_dialog("harp_go_0", 2);
-  else if(!flag("spawn_drone_searcher"))
+  }
+  else if(!flag("spawn_drone_searcher")) {
     level.harper say_dialog("harp_move_before_it_see_0", 3);
+  }
 
   flag_wait("pickup_hide");
 
-  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance)
+  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance) {
     level.harper say_dialog("harp_entry_point_s_beyond_0", 0);
-  else
+  }
+  else {
     level.harper say_dialog("harp_entry_point_s_beyond_1", 0);
+  }
 
   level.player say_dialog("sect_ready_when_you_are_0", 0.5);
   level.harper say_dialog("harp_move_before_it_see_0", 1);
   flag_wait("drone_searcher_done");
 
-  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance)
+  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance) {
     level.harper say_dialog("harp_fuck_it_we_gotta_go_0", 0.5);
-  else
+  }
+  else {
     level.harper say_dialog("harp_fuck_it_we_gotta_go_1", 0.5);
+  }
 
   flag_wait("drone_searcher_look_away");
 
@@ -829,8 +865,9 @@ _can_spotlight_see_position(v_target_position, n_dot_tolerance) {
 
   str_dvar = getdvar(#"_id_D8E6D53A");
 
-  if(str_dvar != "")
+  if(str_dvar != "") {
     self thread draw_line_for_time(v_target_position, v_spotlight_origin, 0, 0, 1, 0.25);
+  }
 
   b_within_dot = n_dot > n_dot_tolerance;
   return b_within_dot;
@@ -1129,8 +1166,9 @@ drone_flyaway_logic() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 player_detection_logic() {
@@ -1149,8 +1187,9 @@ drone_proximity_check() {
   level endon("sewer_move_up");
 
   while(true) {
-    if(distance2dsquared(self.origin, level.player.origin) <= 62500)
+    if(distance2dsquared(self.origin, level.player.origin) <= 62500) {
       level.player notify("too_close");
+    }
 
     wait 0.5;
   }
@@ -1174,10 +1213,12 @@ drone_detects_damage_for_alert() {
   n_distance = 250;
   self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weaponname);
 
-  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance)
+  if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance) {
     level.harper thread say_dialog("harp_what_are_you_doing_1", 1);
-  else
+  }
+  else {
     level.harper thread say_dialog("harp_what_are_you_doing_2", 1);
+  }
 
   level notify("drone_detects_player", &"PAKISTAN_SHARED_DRONE_FAIL_SOUND");
   self notify("player_shotme");
@@ -1213,10 +1254,12 @@ drone_spotlight_detection() {
       if(n_frames_detected > n_frames_before_detection) {
         n_distance = 250;
 
-        if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance)
+        if(distance2dsquared(level.player.origin, level.harper.origin) <= n_distance * n_distance) {
           level.harper say_dialog("harp_dammit_its_seen_you_0", 1);
-        else
+        }
+        else {
           level.harper say_dialog("harp_dammit_it_s_seen_y_0", 1);
+        }
 
         level notify("drone_detects_player", &"PAKISTAN_SHARED_DRONE_FAIL_SIGHT");
       }
@@ -1254,8 +1297,9 @@ drone_lens_flare() {
 }
 
 get_drone_spotlight_frames_before_detection(str_difficulty) {
-  if(!isDefined(self.drone_spotlight_detection_parameters))
+  if(!isDefined(self.drone_spotlight_detection_parameters)) {
     self _init_drone_spotlight_detection_parameters();
+  }
 
   n_frames_to_detection = self.drone_spotlight_detection_parameters[str_difficulty]["time_to_detect"] * 20;
   return n_frames_to_detection;
@@ -1266,15 +1310,18 @@ get_drone_spotlight_detection_dot_tolerance(str_difficulty) {
   b_player_is_sprinting = self issprinting();
   b_player_is_jumping = !self isonground();
 
-  if(!isDefined(self.drone_spotlight_detection_parameters))
+  if(!isDefined(self.drone_spotlight_detection_parameters)) {
     self _init_drone_spotlight_detection_parameters();
+  }
 
   n_dot = self.drone_spotlight_detection_parameters[str_difficulty]["dot_crouch"];
 
-  if(str_stance == "stand" || b_player_is_sprinting || b_player_is_jumping)
+  if(str_stance == "stand" || b_player_is_sprinting || b_player_is_jumping) {
     n_dot = self.drone_spotlight_detection_parameters[str_difficulty]["dot_exposed"];
-  else if(str_stance == "prone")
+  }
+  else if(str_stance == "prone") {
     n_dot = self.drone_spotlight_detection_parameters[str_difficulty]["dot_prone"];
+  }
 
   return n_dot;
 }
@@ -1397,8 +1444,9 @@ harper_enter_bank() {
   flag_wait("hand_signals_a_done");
   level.harper clear_cqb_run_anim();
 
-  if(!flag("corpse_alley_exit_harper_started"))
+  if(!flag("corpse_alley_exit_harper_started")) {
     run_scene("corpse_alley_exit_harper");
+  }
 
   wait 0.5;
   flag_set("move3");
@@ -1407,8 +1455,9 @@ harper_enter_bank() {
   flag_set("drone_searcher_look_left");
   flag_set("drone_searcher_look_away");
 
-  if(flag("drone_attacks_player"))
+  if(flag("drone_attacks_player")) {
     flag_set("drone_searcher_done");
+  }
 
   level.harper notify("stop_follow_path");
   wait 0.3;
@@ -1430,8 +1479,9 @@ harper_attack_drone() {
   level.harper thread follow_path(getnode("harper_node_enter_bank", "targetname"));
   flag_wait("tandem_kill_vo");
 
-  if(!flag("drones_gone"))
+  if(!flag("drones_gone")) {
     level.harper thread harper_shoot_at_drone();
+  }
 }
 
 harper_beeline_to_bank() {
@@ -1450,8 +1500,9 @@ harper_beeline_to_bank() {
 }
 
 monitor_drone_attack() {
-  while(isalive(getent("drone_helicopter", "targetname")) || isalive(getent("drone_searcher", "targetname")) || isalive(getent("drone_bank", "targetname")))
+  while(isalive(getent("drone_helicopter", "targetname")) || isalive(getent("drone_searcher", "targetname")) || isalive(getent("drone_bank", "targetname"))) {
     wait 1;
+  }
 
   flag_set("drones_gone");
 }
@@ -1522,8 +1573,9 @@ sewer_exterior() {
   waittill_ai_group_cleared("sewer_guards");
   flag_set("sewer_guards_cleared");
 
-  if(level.harper_kill > 1)
+  if(level.harper_kill > 1) {
     flag_set("harper_kills_two");
+  }
 
   setmusicstate("PAK_POST_CHOPPER");
   flag_wait("drones_gone");
@@ -1620,8 +1672,9 @@ death_function_sewer_guard() {
   self waittill("death", attacker);
   flag_set("sewer_guards_alerted");
 
-  if(attacker == level.harper)
+  if(attacker == level.harper) {
     level.harper_kill++;
+  }
 }
 
 sewer_guard_shotat() {
@@ -1774,11 +1827,13 @@ anthem_approach_saves() {
   flag_wait_any("player_at_cafe", "dept_store_entered");
 
   if(flag("player_at_cafe")) {
-    if(!flag("drone_detected_player"))
+    if(!flag("drone_detected_player")) {
       autosave_now("drone_stealth_midpoint");
+    }
   } else if(flag("dept_store_entered")) {
-    if(!flag("drone_detected_player"))
+    if(!flag("drone_detected_player")) {
       autosave_now("drone_stealth_midpoint");
+    }
   }
 
   flag_wait("sewer_entry_done");
@@ -1801,8 +1856,9 @@ skipto_sewer_exterior_bodies() {
 
   a_s_align_spots = getstructarray("death_pose_align", "script_noteworthy");
 
-  foreach(s_align in a_s_align_spots)
+  foreach(s_align in a_s_align_spots) {
   s_align structdelete();
+  }
 }
 
 drone_crash_when_sewer_entered() {
@@ -1822,8 +1878,9 @@ drone_crash_when_sewer_entered() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }
 
 drone_death_hud(player) {
@@ -1864,6 +1921,7 @@ drone_crash() {
   self.delete_on_death = 1;
   self notify("death");
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self delete();
+  }
 }

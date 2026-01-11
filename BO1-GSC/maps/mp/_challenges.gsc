@@ -45,44 +45,54 @@ monitorFallDistance() {
     if(!self isOnGround()) {
       highestPoint = self.origin[2];
       while(!self isOnGround()) {
-        if(self.origin[2] > highestPoint)
+        if(self.origin[2] > highestPoint) {
           highestPoint = self.origin[2];
+        }
         wait .05;
       }
       falldist = highestPoint - self.origin[2];
-      if(falldist < 0)
+      if(falldist < 0) {
         falldist = 0;
+      }
       self maps\mp\gametypes\_persistence::statAdd("TOTAL_FALL_DISTANCE_FEET", int(falldist / 12), false);
       level.globalFeetFallen += falldist / 12;
-      if(falldist / 12.0 > 15 && isAlive(self))
+      if(falldist / 12.0 > 15 && isAlive(self)) {
         self maps\mp\gametypes\_persistence::statAdd("BASIC_FALL_LIVE", 1, false);
-      if(falldist / 12.0 > 30 && !isAlive(self))
+      }
+      if(falldist / 12.0 > 30 && !isAlive(self)) {
         self maps\mp\gametypes\_persistence::statAdd("BASIC_FALL_DIE", 1, false);
+      }
     }
     wait .05;
   }
 }
 fellOffTheMap() {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   self maps\mp\gametypes\_persistence::statAdd("BASIC_FALL_DIE", 1, false);
 }
 registerChallengesCallback(callback, func) {
-  if(!isDefined(level.ChallengesCallbacks[callback]))
+  if(!isDefined(level.ChallengesCallbacks[callback])) {
     level.ChallengesCallbacks[callback] = [];
+  }
   level.ChallengesCallbacks[callback][level.ChallengesCallbacks[callback].size] = func;
 }
 doChallengeCallback(callback, data) {
-  if(!isDefined(level.ChallengesCallbacks))
+  if(!isDefined(level.ChallengesCallbacks)) {
     return;
-  if(!isDefined(level.ChallengesCallbacks[callback]))
+  }
+  if(!isDefined(level.ChallengesCallbacks[callback])) {
     return;
+  }
   if(isDefined(data)) {
-    for(i = 0; i < level.ChallengesCallbacks[callback].size; i++)
+    for(i = 0; i < level.ChallengesCallbacks[callback].size; i++) {
       thread[[level.ChallengesCallbacks[callback][i]]](data);
+    }
   } else {
-    for(i = 0; i < level.ChallengesCallbacks[callback].size; i++)
+    for(i = 0; i < level.ChallengesCallbacks[callback].size; i++) {
       thread[[level.ChallengesCallbacks[callback][i]]]();
+    }
   }
 }
 onPlayerConnect() {
@@ -110,22 +120,28 @@ challengeKills(data, time) {
   meansOfDeath = data.sMeansOfDeath;
   wasPlanting = data.wasPlanting;
   wasDefusing = data.wasDefusing;
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
-  if(!isDefined(data.sWeapon))
+  }
+  if(!isDefined(data.sWeapon)) {
     return;
-  if(!isDefined(player) || !isplayer(player))
+  }
+  if(!isDefined(player) || !isplayer(player)) {
     return;
+  }
   player thread checkFinalKillcamKill(weapon, victim, meansOfDeath);
-  if(maps\mp\gametypes\_hardpoints::isKillstreakWeapon(data.sWeapon))
+  if(maps\mp\gametypes\_hardpoints::isKillstreakWeapon(data.sWeapon)) {
     return;
+  }
   game["challenge"][victim.team]["allAlive"] = false;
   if(level.teambased) {
-    if(player.team == victim.team)
+    if(player.team == victim.team) {
       return;
+    }
   } else {
-    if(player == victim)
+    if(player == victim) {
       return;
+    }
   }
   if(isDefined(victim.lastTacticalSpawnTime) && (victim.lastTacticalSpawnTime + 5000) > time) {
     player maps\mp\gametypes\_persistence::statAdd("KILLS_VICTIM_TACTICAL_INSERTED", 1, false, weapon);
@@ -256,20 +272,25 @@ challengeKills(data, time) {
   }
 }
 genericBulletKill(data, victim, weapon) {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   player = self;
   time = data.time;
-  if(player.pers["lastBulletKillTime"] == time)
+  if(player.pers["lastBulletKillTime"] == time) {
     player.pers["bulletStreak"]++;
-  else
+  }
+  else {
     player.pers["bulletStreak"] = 1;
+  }
   player.pers["lastBulletKillTime"] = time;
-  if(player.pers["bulletStreak"] == 2)
+  if(player.pers["bulletStreak"] == 2) {
     player maps\mp\gametypes\_persistence::statAdd("KILLS_BULLET_MULTI", 1, false, weapon);
+  }
   if(data.victim.iDFlagsTime == time) {
-    if(data.victim.iDFlags &level.iDFLAGS_PENETRATION)
+    if(data.victim.iDFlags &level.iDFLAGS_PENETRATION) {
       player maps\mp\gametypes\_persistence::statAdd("BASIC_PENETRATION_KILLS", 1, false, weapon);
+    }
   }
 }
 dtpThroughGlassWatcher() {
@@ -295,14 +316,17 @@ dtpKills(mutex) {
   self thread DtpKillTimeout(5, mutex);
   while(1) {
     self waittill("challenge_killed", victim);
-    if(!isDefined(victim))
+    if(!isDefined(victim)) {
       continue;
+    }
     if(level.teambased) {
-      if(victim.team == self.team)
+      if(victim.team == self.team) {
         continue;
+      }
     } else {
-      if(victim == self)
+      if(victim == self) {
         continue;
+      }
     }
     self maps\mp\gametypes\_persistence::statAdd("BASIC_DTP_KILLS", 1, false);
   }
@@ -318,14 +342,17 @@ dtpGlassKills(mutex) {
   self thread DtpGlassKillTimeout(5, mutex);
   while(1) {
     self waittill("challenge_killed", victim);
-    if(!isDefined(victim))
+    if(!isDefined(victim)) {
       continue;
+    }
     if(level.teambased) {
-      if(victim.team == self.team)
+      if(victim.team == self.team) {
         continue;
+      }
     } else {
-      if(victim == self)
+      if(victim == self) {
         continue;
+      }
     }
     self maps\mp\gametypes\_persistence::statAdd("KILLS_DTP_GLASS", 1, false);
   }
@@ -336,25 +363,33 @@ DtpGlassKillTimeout(time, mutex) {
   self notify("dtpGlassTimeOut" + mutex);
 }
 isHighestScoringPlayer(player) {
-  if(!isDefined(player.score) || player.score < 1)
+  if(!isDefined(player.score) || player.score < 1) {
     return false;
+  }
   players = level.players;
-  if(level.teamBased)
+  if(level.teamBased) {
     team = player.pers["team"];
-  else
+  }
+  else {
     team = "all";
+  }
   highScore = player.score;
   for(i = 0; i < players.size; i++) {
-    if(!isDefined(players[i].score))
+    if(!isDefined(players[i].score)) {
       continue;
-    if(players[i] == player)
+    }
+    if(players[i] == player) {
       continue;
-    if(players[i].score < 1)
+    }
+    if(players[i].score < 1) {
       continue;
-    if(team != "all" && players[i].pers["team"] != team)
+    }
+    if(team != "all" && players[i].pers["team"] != team) {
       continue;
-    if(players[i].score >= highScore)
+    }
+    if(players[i].score >= highScore) {
       return false;
+    }
   }
   return true;
 }
@@ -387,23 +422,28 @@ watchForBallisticKnifeKills() {
   self maps\mp\gametypes\_persistence::statAdd("KILLS_BALLISTIC_KNIFE", 1, false);
 }
 destroyed_car() {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
-  if(!isDefined(self) || !isplayer(self))
+  }
+  if(!isDefined(self) || !isplayer(self)) {
     return;
+  }
   self maps\mp\gametypes\_persistence::statAdd("BASIC_VANDALISM", 1, false);
 }
 challengeRoundEnd(data) {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   player = data.player;
   winner = data.winner;
-  if(endedEarly(winner))
+  if(endedEarly(winner)) {
     return;
+  }
   loser = "allies";
   if(level.teambased) {
-    if(winner == "allies")
+    if(winner == "allies") {
       loser = "axis";
+    }
   }
   switch (level.gameType) {
     case "tdm": {
@@ -458,10 +498,12 @@ challengeRoundEnd(data) {
     break;
     case "sab": {
       if(player.team == winner) {
-        if(data.time <= level.startTime + (5 * 60))
+        if(data.time <= level.startTime + (5 * 60)) {
           player maps\mp\gametypes\_persistence::statAdd("GM_SAB_CRUSH", 1, false);
-        if(data.time <= level.startTime + (2 * 60))
+        }
+        if(data.time <= level.startTime + (2 * 60)) {
           player maps\mp\gametypes\_persistence::statAdd("GM_SAB_ANNIHILATE", 1, false);
+        }
       }
     }
     break;
@@ -542,8 +584,9 @@ challengeRoundEnd(data) {
   }
 }
 roundEnd(winner) {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   wait(0.05);
   data = spawnStruct();
   data.time = getTime();
@@ -563,8 +606,9 @@ roundEnd(winner) {
   }
 }
 gameEnd(winner) {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   wait(0.05);
   data = spawnStruct();
   data.time = getTime();
@@ -584,13 +628,15 @@ gameEnd(winner) {
   }
 }
 killedFlagCarrier() {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   self maps\mp\gametypes\_persistence::statAdd("GM_CTF_FLAG_CARRIER_KILLS", 1, false);
 }
 killedBombCarrier() {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   switch (level.gameType) {
     case "sab":
       self maps\mp\gametypes\_persistence::statAdd("GM_SAB_BOMB_CARRIER_KILLS", 1, false);
@@ -606,13 +652,15 @@ killedBombCarrier() {
   }
 }
 dominated(team) {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   teamCompletedChallenge(team, "GM_DOM_DOMINATE");
 }
 teamCompletedChallenge(team, challenge) {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].team) && players[i].team == team) {
@@ -621,32 +669,40 @@ teamCompletedChallenge(team, challenge) {
   }
 }
 endedEarly(winner) {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
-  if(level.hostForcedEnd)
+  }
+  if(level.hostForcedEnd) {
     return true;
-  if(!isDefined(winner))
+  }
+  if(!isDefined(winner)) {
     return true;
+  }
   if(level.teambased) {
-    if(winner == "tie")
+    if(winner == "tie") {
       return true;
+    }
   }
   return false;
 }
 challengeGameEnd(data) {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   player = data.player;
   winner = data.winner;
-  if(endedEarly(winner))
+  if(endedEarly(winner)) {
     return;
+  }
   player maps\mp\gametypes\_persistence::statAdd("BASIC_COMPLETE_MATCHES_PLAYED", 1, false);
-  if(!level.teambased)
+  if(!level.teambased) {
     return;
+  }
   loser = "allies";
   if(level.teambased) {
-    if(winner == "allies")
+    if(winner == "allies") {
       loser = "axis";
+    }
   }
   gameLength = game["timepassed"] / 1000;
   roundsWon = maps\mp\_utility::getRoundsWon(winner);
@@ -722,21 +778,24 @@ getGameLength() {
   if(!level.timeLimit || level.forcedEnd) {
     gameLength = maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000;
     gameLength = min(gameLength, 1200);
-    if(level.gameType == "twar" && game["roundsplayed"] > 0)
+    if(level.gameType == "twar" && game["roundsplayed"] > 0) {
       gameLength += level.timeLimit * 60;
+    }
   } else {
     gameLength = level.timeLimit * 60;
   }
   return gameLength;
 }
 multiKill(weapon) {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   self maps\mp\gametypes\_persistence::statAdd("BASIC_MULTI_KILLS", 1, false, weapon);
 }
 fullClipNoMisses(weaponClass, weapon) {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   player = self;
   switch (weaponClass) {
     case "weapon_pistol": {
@@ -769,8 +828,9 @@ fullClipNoMisses(weaponClass, weapon) {
   }
 }
 checkFinalKillcamKill(weapon, victim, meansOfDeath) {
-  if(!canProcessChallenges())
+  if(!canProcessChallenges()) {
     return;
+  }
   player = self;
   player endon("disconnect");
   player notify("finalKillCamWaiter");

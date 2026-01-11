@@ -17,11 +17,13 @@ wait_timeout2(var_0, var_1) {
 }
 
 get_ai(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "allies";
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "targetname";
+  }
 
   var_3 = getaiarray(var_1);
   var_4 = [];
@@ -29,18 +31,21 @@ get_ai(var_0, var_1, var_2) {
   for(var_5 = 0; var_5 < var_3.size; var_5++) {
     switch (var_2) {
       case "targetname":
-        if(isDefined(var_3[var_5].targetname) && var_3[var_5].targetname == var_0)
+        if(isDefined(var_3[var_5].targetname) && var_3[var_5].targetname == var_0) {
           var_4[var_4.size] = var_3[var_5];
+        }
 
         break;
       case "script_noteworthy":
-        if(isDefined(var_3[var_5].script_noteworthy) && var_3[var_5].script_noteworthy == var_0)
+        if(isDefined(var_3[var_5].script_noteworthy) && var_3[var_5].script_noteworthy == var_0) {
           var_4[var_4.size] = var_3[var_5];
+        }
 
         break;
       case "script_forcecolor":
-        if(var_3[var_5] maps\_utility::check_force_color(var_0))
+        if(var_3[var_5] maps\_utility::check_force_color(var_0)) {
           var_4[var_4.size] = var_3[var_5];
+        }
 
         break;
     }
@@ -66,8 +71,9 @@ get_closest(var_0, var_1, var_2) {
     var_4 = var_1[var_5];
   }
 
-  if(isDefined(var_2) && distance(var_0, var_4.origin) > var_2)
+  if(isDefined(var_2) && distance(var_0, var_4.origin) > var_2) {
     var_4 = undefined;
+  }
 
   return var_4;
 }
@@ -91,8 +97,9 @@ get_closest_ent(var_0, var_1, var_2) {
     var_4 = var_1[var_5];
   }
 
-  if(isDefined(var_2) && distance(var_0, var_4 getorigin()) > var_2)
+  if(isDefined(var_2) && distance(var_0, var_4 getorigin()) > var_2) {
     var_4 = undefined;
+  }
 
   return var_4;
 }
@@ -122,17 +129,21 @@ door_breach(var_0, var_1, var_2, var_3) {
   var_4 = 0;
   var_5 = 0;
 
-  if(isDefined(var_1.set_forcedgoal))
+  if(isDefined(var_1.set_forcedgoal)) {
     var_4 = 1;
+  }
 
-  if(isDefined(var_1.magic_bullet_shield))
+  if(isDefined(var_1.magic_bullet_shield)) {
     var_5 = 1;
+  }
 
-  if(!var_4)
+  if(!var_4) {
     var_1 maps\_utility::set_forcegoal();
+  }
 
-  if(!var_5)
+  if(!var_5) {
     var_1 thread maps\_utility::magic_bullet_shield();
+  }
 
   if(var_3 == "kick") {
     var_6 = anglesToForward(var_0.angles);
@@ -145,8 +156,9 @@ door_breach(var_0, var_1, var_2, var_3) {
   var_1.oldanimname = var_1.animname;
   var_1.animname = "guy";
 
-  if(var_3 == "kick")
+  if(var_3 == "kick") {
     var_0 maps\_anim::anim_reach_solo(var_1, var_3);
+  }
   else {
     var_1 setgoalnode(var_0);
     var_1 waittill("goal");
@@ -166,18 +178,21 @@ door_breach(var_0, var_1, var_2, var_3) {
   var_1.goalradius = var_1.oldradius;
   var_1.ignoreme = 0;
 
-  if(!var_4)
+  if(!var_4) {
     var_1 maps\_utility::unset_forcegoal();
+  }
 
-  if(!var_5)
+  if(!var_5) {
     var_1 maps\_utility::stop_magic_bullet_shield();
+  }
 }
 
 door_breach_door() {
   self notsolid();
 
-  if(self.spawnflags & 1)
+  if(self.spawnflags & 1) {
     self connectpaths();
+  }
 
   var_0 = 0;
   var_1 = 0;
@@ -215,15 +230,18 @@ door_breach_door() {
 floodspawner_switch(var_0, var_1) {
   var_2 = var_0.size;
 
-  if(var_0.size > var_1.size)
+  if(var_0.size > var_1.size) {
     var_2 = var_1.size;
+  }
 
-  for(var_3 = 0; var_3 < var_2; var_3++)
+  for(var_3 = 0; var_3 < var_2; var_3++) {
     var_0[var_3] thread spawner_switch_think(var_1[var_3]);
+  }
 
   if(var_3 < var_1.size) {
-    for(var_4 = var_3; var_4 < var_1.size; var_4++)
+    for(var_4 = var_3; var_4 < var_1.size; var_4++) {
       var_1[var_4] thread spawner_switch_think2();
+    }
   }
 }
 
@@ -238,8 +256,9 @@ spawner_switch_think2() {
   self endon("death");
   self.count = 1;
 
-  if(!maps\_utility::script_wait())
+  if(!maps\_utility::script_wait()) {
     wait(randomfloatrange(2, 4));
+  }
 
   for(;;) {
     var_0 = self dospawn();
@@ -282,8 +301,9 @@ player_fastrope_go(var_0) {
 }
 
 ai_clear_dialog(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(level.ai_clear_dialog_last))
+  if(!isDefined(level.ai_clear_dialog_last)) {
     level.ai_clear_dialog_last = 0;
+  }
 
   var_5 = getaiarray("axis");
   ai_clear_dialog_logic(var_5, var_0, var_1, var_2, var_3, var_4);
@@ -299,16 +319,18 @@ ai_clear_dialog_logic_check() {
   self endon("death");
   self.ready = 0;
 
-  while(self.count)
+  while(self.count) {
     self waittill("ai_death");
+  }
 
   self.ready = 1;
   self notify("ready");
 }
 
 ai_clear_dialog_logic(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 endon(var_3);
+  }
 
   var_6 = spawnStruct();
   var_6.ready = 1;
@@ -321,18 +343,21 @@ ai_clear_dialog_logic(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   maps\_utility::waittill_dead(var_0);
 
-  if(!var_6.ready)
+  if(!var_6.ready) {
     var_6 waittill("ready");
+  }
 
   var_6 notify("death");
 
   if(isDefined(var_4)) {
     wait 0.5;
 
-    if(var_4 == level.player)
+    if(var_4 == level.player) {
       thread radio_msg_stack(var_5);
-    else
+    }
+    else {
       var_4 thread maps\_utility::play_sound_on_entity(var_5);
+    }
   } else {
     var_7 = getaiarray("allies");
     var_8 = [];
@@ -390,14 +415,16 @@ anim_single_stack(var_0, var_1) {
 }
 
 anim_single_stack_proc(var_0, var_1) {
-  if(!isDefined(level.anim_stack))
+  if(!isDefined(level.anim_stack)) {
     level.anim_stack = [];
+  }
 
   var_2 = "" + var_0.ai_number + var_1;
   level.anim_stack[level.anim_stack.size] = var_2;
 
-  while(level.anim_stack[0] != var_2)
+  while(level.anim_stack[0] != var_2) {
     level waittill("level_anim_stack_ready");
+  }
 
   maps\_anim::anim_single_solo(var_0, var_1);
   level.anim_stack = common_scripts\utility::array_remove(level.anim_stack, var_2);
@@ -412,13 +439,15 @@ radio_msg_stack(var_0) {
 }
 
 radio_msg_stack_proc(var_0) {
-  if(!isDefined(level.radio_stack))
+  if(!isDefined(level.radio_stack)) {
     level.radio_stack = [];
+  }
 
   level.radio_stack[level.radio_stack.size] = var_0;
 
-  while(level.radio_stack[0] != var_0)
+  while(level.radio_stack[0] != var_0) {
     level waittill("level_radio_stack_ready");
+  }
 
   maps\_utility::radio_dialogue(var_0);
   level.radio_stack = common_scripts\utility::array_remove(level.radio_stack, var_0);
@@ -429,13 +458,15 @@ radio_msg_stack_proc(var_0) {
 disable_cqbwalk_ign_demo_wrapper() {
   maps\_utility::disable_cqbwalk();
 
-  if(!isDefined(self.a.cqbchangedontmodifyinterval) || !self.a.cqbchangedontmodifyinterval)
+  if(!isDefined(self.a.cqbchangedontmodifyinterval) || !self.a.cqbchangedontmodifyinterval) {
     self.interval = 96;
+  }
 }
 
 enable_cqbwalk_ign_demo_wrapper() {
   maps\_utility::enable_cqbwalk();
 
-  if(!isDefined(self.a.cqbchangedontmodifyinterval) || !self.a.cqbchangedontmodifyinterval)
+  if(!isDefined(self.a.cqbchangedontmodifyinterval) || !self.a.cqbchangedontmodifyinterval) {
     self.interval = 50;
+  }
 }

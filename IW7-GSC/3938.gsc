@@ -8,8 +8,9 @@ registerscriptedagent() {
   func_03A9::func_DEE8();
   func_0F37::func_2371();
 
-  if(level.gametype != "zombie")
+  if(level.gametype != "zombie") {
     func_09FD::func_3353();
+  }
 
   func_9812();
   thread func_FAB0();
@@ -18,11 +19,13 @@ registerscriptedagent() {
 func_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
-  if(!isDefined(level.species_funcs))
+  if(!isDefined(level.species_funcs)) {
     level.species_funcs = [];
+  }
 
   level.species_funcs["c6"] = [];
   level.agent_definition["c6"]["setup_func"] = ::setupagent;
@@ -75,8 +78,9 @@ func_899D() {
     self waittill("enemy");
 
     for(;;) {
-      if(isDefined(self.enemy))
+      if(isDefined(self.enemy)) {
         self.func_6571 = gettime() + 1000;
+      }
       else if(isDefined(self.func_6571)) {
         if(gettime() > self.func_6571) {
           self.func_6571 = undefined;
@@ -225,26 +229,32 @@ scriptedgoalwaitforarrival() {
   for(;;) {
     self waittill("goal_reached");
 
-    if(isDefined(self.func_EF7D))
+    if(isDefined(self.func_EF7D)) {
       var_00 = self.func_EF7D;
-    else if(isDefined(self.func_EF7A))
+    }
+    else if(isDefined(self.func_EF7A)) {
       var_00 = self.func_EF7A.origin;
-    else if(isDefined(self.func_EF7C))
+    }
+    else if(isDefined(self.func_EF7C)) {
       var_00 = self.func_EF7C.origin;
-    else
+    }
+    else {
       continue;
+    }
 
     var_01 = 16;
 
-    if(isDefined(self.func_EF7E))
+    if(isDefined(self.func_EF7E)) {
       var_01 = self.func_EF7E * self.func_EF7E;
+    }
 
     if(distance2dsquared(self.origin, var_00) <= var_01) {
       self.func_EF7D = undefined;
       self.func_EF7C = undefined;
 
-      if(!isDefined(self.func_EF7B))
+      if(!isDefined(self.func_EF7B)) {
         self.func_EF7A = undefined;
+      }
 
       self notify("scriptedGoal_reached");
     }
@@ -252,8 +262,9 @@ scriptedgoalwaitforarrival() {
 }
 
 func_F834(var_00, var_01) {
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0;
+  }
 
   self.func_EF79 = var_01;
   self.func_EF73 = var_00;
@@ -281,10 +292,12 @@ func_F832(var_00, var_01, var_02) {
   self.func_EF7A = var_00;
   self.func_EF7E = var_01;
 
-  if(isDefined(var_02) && var_02)
+  if(isDefined(var_02) && var_02) {
     self.func_EF7B = var_02;
-  else
+  }
+  else {
     self.func_EF7B = undefined;
+  }
 }
 
 func_41D9() {

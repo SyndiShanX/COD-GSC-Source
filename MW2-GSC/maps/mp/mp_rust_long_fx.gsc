@@ -14,6 +14,7 @@ main() {
   level._effect["field_fire_distant_01"] = loadfx("fire/field_fire_distant_01");
   level._effect["oil_rig_fire_mp"] = loadfx("fire/oil_rig_fire_mp");
 
-  if(!getdvarint("clientSideEffects"))
+  if(!getdvarint("clientSideEffects")) {
     maps\createfx\mp_rust_long_fx::main();
+  }
 }

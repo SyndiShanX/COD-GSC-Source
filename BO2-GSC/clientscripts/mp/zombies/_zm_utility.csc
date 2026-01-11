@@ -40,12 +40,14 @@ register_clientflag_callback(type, flag, function) {
     free = "";
 
     for(i = 0; i < 16; i++) {
-      if(!isDefined(level._client_flag_callbacks[type][i]))
+      if(!isDefined(level._client_flag_callbacks[type][i])) {
         free = free + (i + " ");
+      }
     }
 
-    if(free == "")
+    if(free == "") {
       free = "No free flags.";
+    }
 
     println("*** " + free);
 
@@ -61,26 +63,31 @@ ignore_triggers(timer) {
   self endon("death");
   self.ignoretriggers = 1;
 
-  if(isDefined(timer))
+  if(isDefined(timer)) {
     wait(timer);
-  else
+  }
+  else {
     wait 0.5;
+  }
 
   self.ignoretriggers = 0;
 }
 
 clamp(val, val_min, val_max) {
-  if(val < val_min)
+  if(val < val_min) {
     val = val_min;
-  else if(val > val_max)
+  }
+  else if(val > val_max) {
     val = val_max;
+  }
 
   return val;
 }
 
 is_mature() {
-  if(level.onlinegame)
+  if(level.onlinegame) {
     return 1;
+  }
 
   return ismaturecontentenabled();
 }
@@ -108,8 +115,9 @@ fog_vol_to_visionset_set_suffix(suffix) {
 }
 
 fog_vol_to_visionset_set_info(id, visionset, trans_in) {
-  if(!isDefined(trans_in))
+  if(!isDefined(trans_in)) {
     trans_in = level._fv2vs_default_trans_in;
+  }
 
   level._fv2vs_infos[id] = spawnStruct();
   level._fv2vs_infos[id].visionset = visionset;
@@ -189,8 +197,9 @@ callback(event, clientnum) {
     for(i = 0; i < level._callbacks[event].size; i++) {
       callback = level._callbacks[event][i];
 
-      if(isDefined(callback))
+      if(isDefined(callback)) {
         self thread[[callback]](clientnum);
+      }
     }
   }
 }
@@ -209,8 +218,9 @@ include_powerup(powerup_name) {
 }
 
 is_encounter() {
-  if(is_true(level._is_encounter))
+  if(is_true(level._is_encounter)) {
     return true;
+  }
 
   var = getdvar(#"ui_zm_gamemodegroup");
 
@@ -223,8 +233,9 @@ is_encounter() {
 }
 
 is_createfx_active() {
-  if(!isDefined(level.createfx_enabled))
+  if(!isDefined(level.createfx_enabled)) {
     level.createfx_enabled = getdvar(#"createfx") != "";
+  }
 
   return level.createfx_enabled;
 }
@@ -242,20 +253,24 @@ set_clientfield_buildables_code_callbacks() {
 }
 
 spawn_weapon_model(localclientnum, weapon, model, origin, angles, options) {
-  if(!isDefined(model))
+  if(!isDefined(model)) {
     model = getweaponmodel(weapon);
+  }
 
   weapon_model = spawn(localclientnum, origin, "script_model");
 
-  if(isDefined(angles))
+  if(isDefined(angles)) {
     weapon_model.angles = angles;
+  }
 
   weapon_model useweaponmodel(weapon, model, options);
 
-  if(isDefined(options))
+  if(isDefined(options)) {
     weapon_model useweaponmodel(weapon, model, options);
-  else
+  }
+  else {
     weapon_model useweaponmodel(weapon, model);
+  }
 
   return weapon_model;
 }
@@ -268,22 +283,26 @@ reset_player_fv2vs_infos_on_respawn() {
     level waittill("respawn");
     players = getlocalplayers();
 
-    for(localclientnum = 0; localclientnum < players.size; localclientnum++)
+    for(localclientnum = 0; localclientnum < players.size; localclientnum++) {
       level._fv2vs_prev_visionsets[localclientnum] = level._fv2vs_unset_visionset;
+    }
   }
 }
 
 get_array_of_closest(org, array, excluders, max, maxdist) {
-  if(!isDefined(max))
+  if(!isDefined(max)) {
     max = array.size;
+  }
 
-  if(!isDefined(excluders))
+  if(!isDefined(excluders)) {
     excluders = [];
+  }
 
   maxdists2rd = undefined;
 
-  if(isDefined(maxdist))
+  if(isDefined(maxdist)) {
     maxdists2rd = maxdist * maxdist;
+  }
 
   dist = [];
   index = [];
@@ -337,11 +356,13 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
 
   newarray = [];
 
-  if(max > dist.size)
+  if(max > dist.size) {
     max = dist.size;
+  }
 
-  for(i = 0; i < max; i++)
+  for(i = 0; i < max; i++) {
     newarray[i] = array[index[i]];
+  }
 
   return newarray;
 }
@@ -349,8 +370,9 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
 is_classic() {
   var = getdvar(#"ui_zm_gamemodegroup");
 
-  if(var == "zclassic")
+  if(var == "zclassic") {
     return true;
+  }
 
   return false;
 }
@@ -358,12 +380,14 @@ is_classic() {
 is_gametype_active(a_gametypes) {
   b_is_gametype_active = 0;
 
-  if(!isarray(a_gametypes))
+  if(!isarray(a_gametypes)) {
     a_gametypes = array(a_gametypes);
+  }
 
   for(i = 0; i < a_gametypes.size; i++) {
-    if(getdvar(#"g_gametype") == a_gametypes[i])
+    if(getdvar(#"g_gametype") == a_gametypes[i]) {
       b_is_gametype_active = 1;
+    }
   }
 
   return b_is_gametype_active;

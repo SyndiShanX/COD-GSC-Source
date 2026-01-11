@@ -15,13 +15,15 @@ init() {
     return;
   }
 
-  if(getdvar("scr_os_pickupweaponrespawntime") == "")
+  if(getdvar("scr_os_pickupweaponrespawntime") == "") {
     setdvar("scr_os_pickupweaponrespawntime", "15");
+  }
 
   level.pickupweaponrespawntime = getdvarfloat("scr_os_pickupweaponrespawntime");
 
-  if(getdvar("scr_os_pickupperkrespawntime") == "")
+  if(getdvar("scr_os_pickupperkrespawntime") == "") {
     setdvar("scr_os_pickupperkrespawntime", "25");
+  }
 
   level.pickupperkrespawntime = getdvarfloat("scr_os_pickupperkrespawntime");
   oldschoolloadout();
@@ -77,8 +79,9 @@ deletepickups() {
   var_0 = getEntArray("oldschool_pickup", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isDefined(var_0[var_1].target))
+    if(isDefined(var_0[var_1].target)) {
       getent(var_0[var_1].target, "targetname") delete();
+    }
 
     var_0[var_1] delete();
   }
@@ -106,8 +109,9 @@ converttoh1weaponclassname(var_0, var_1) {
   if(var_2[1] == "h1") {
     var_3 = var_2[2];
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_4 = var_1;
+    }
   } else {
     var_3 = var_2[1];
 
@@ -130,10 +134,12 @@ converttoh1weaponclassname(var_0, var_1) {
 
   var_3 = "h1_" + var_3 + "_mp";
 
-  if(weaponinventorytype(var_3) == "item")
+  if(weaponinventorytype(var_3) == "item") {
     return "weapon_" + var_3;
-  else
+  }
+  else {
     return "weapon_" + var_3 + "_a#" + var_4 + "_f#base";
+  }
 }
 
 converttoh1pickup(var_0) {
@@ -170,8 +176,9 @@ useunlitfx() {
 }
 
 initpickups() {
-  if(!isDefined(level.oldschoolfxtype))
+  if(!isDefined(level.oldschoolfxtype)) {
     level.oldschoolfxtype = "normal";
+  }
 
   switch (level.oldschoolfxtype) {
     case "unlit":
@@ -188,15 +195,17 @@ initpickups() {
   var_0 = getEntArray("oldschool_pickup", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isweaponpickup(var_0[var_1]))
+    if(isweaponpickup(var_0[var_1])) {
       converttoh1pickup(var_0[var_1]);
+    }
   }
 
   wait 0.5;
   var_0 = getEntArray("oldschool_pickup", "targetname");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     thread trackpickup(var_0[var_1], var_1);
+  }
 
   level.allpickupstracked = 1;
 }
@@ -228,8 +237,9 @@ getpickupgroundpoint(var_0) {
       var_2 = bulletTrace(var_9, var_9 + (0, 0, -128), 0, var_0);
       var_10 = var_2["position"];
 
-      if(var_10[2] > var_4 && var_10[2] < var_3[2] + 15)
+      if(var_10[2] > var_4 && var_10[2] < var_3[2] + 15) {
         var_4 = var_10[2];
+      }
     }
   }
 
@@ -277,15 +287,17 @@ trackpickup(var_0, var_1) {
       return;
     }
 
-    if(isDefined(level.perkpickuphints[var_14]))
+    if(isDefined(level.perkpickuphints[var_14])) {
       var_15 sethintstring(level.perkpickuphints[var_14]);
+    }
   } else {
     common_scripts\utility::error("oldschool_pickup with classname " + var_4 + " is not supported (at location " + var_0.origin + ")");
     return;
   }
 
-  if(isDefined(var_0.script_delay))
+  if(isDefined(var_0.script_delay)) {
     var_16 = var_0.script_delay;
+  }
 
   var_0.respawntime = var_16;
 
@@ -307,8 +319,9 @@ trackpickup(var_0, var_1) {
       if(isDefined(var_18)) {
         var_19 = 5;
 
-        if(var_19 > var_16)
+        if(var_19 > var_16) {
           var_19 = var_16;
+        }
 
         var_18 thread delayeddeletion(var_19);
       }
@@ -359,10 +372,12 @@ setpickupstartammo(var_0) {
     var_4 = weaponclipsize(var_1);
     var_5 = 0;
 
-    if(var_4 >= var_3)
+    if(var_4 >= var_3) {
       var_4 = var_3;
-    else
+    }
+    else {
       var_5 = var_3 - var_4;
+    }
 
     self itemweaponsetammo(var_4, var_5, var_4, var_2);
     var_1 = weaponaltweaponname(var_1);
@@ -384,8 +399,9 @@ changesecondarygrenadetype(var_0) {
   for(;;) {
     var_4 waittill("trigger", var_5);
 
-    if(var_5 getweaponammototal(var_1) == 0 && var_5 getweaponammototal(var_2) == 0 && var_5 getweaponammototal(var_3) == 0)
+    if(var_5 getweaponammototal(var_1) == 0 && var_5 getweaponammototal(var_2) == 0 && var_5 getweaponammototal(var_3) == 0) {
       var_5 settacticalweapon(var_0);
+    }
   }
 }
 
@@ -419,8 +435,9 @@ getweaponammototal(var_0) {
 }
 
 removeinventoryweapon() {
-  if(isDefined(self.inventoryweapon))
+  if(isDefined(self.inventoryweapon)) {
     self takeweapon(self.inventoryweapon);
+  }
 
   self.inventoryweapon = undefined;
 }
@@ -496,8 +513,9 @@ updateweaponslist(var_0) {
 
 hadweaponbeforepickingup(var_0) {
   for(var_1 = 0; var_1 < self.weapons.size; var_1++) {
-    if(self.weapons[var_1] == var_0)
+    if(self.weapons[var_1] == var_0) {
       return 1;
+    }
   }
 
   return 0;

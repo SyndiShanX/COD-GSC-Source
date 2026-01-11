@@ -1965,4 +1965,3 @@ function_d74a7e31() {
   level notify(#"tut_stop");
   ct_bots::deactivate_bots();
 }
-

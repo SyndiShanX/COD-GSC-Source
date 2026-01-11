@@ -27,12 +27,15 @@ h2_randomHarrierMovement() {
 beginHarrier(lifeId, startPoint, pos) {
   heightEnt = GetEnt("airstrikeheight", "targetname");
 
-  if(isDefined(heightEnt))
+  if(isDefined(heightEnt)) {
     trueHeight = heightEnt.origin[2];
-  else if(isDefined(level.airstrikeHeightScale))
+  }
+  else if(isDefined(level.airstrikeHeightScale)) {
     trueHeight = 850 * level.airstrikeHeightScale;
-  else
+  }
+  else {
     trueHeight = 850;
+  }
 
   pos *= (1, 1, 0);
   pathGoal = pos + (0, 0, trueHeight);
@@ -48,8 +51,9 @@ getCorrectHeight(x, y, rand) {
   groundHeight = self traceGroundPoint(x, y);
   trueHeight = groundHeight + offGroundHeight;
 
-  if(isDefined(level.airstrikeHeightScale) && trueHeight < (850 * level.airstrikeHeightScale))
+  if(isDefined(level.airstrikeHeightScale) && trueHeight < (850 * level.airstrikeHeightScale)) {
     trueHeight = (950 * level.airstrikeHeightScale);
+  }
 
   trueHeight += RandomInt(rand);
 
@@ -61,8 +65,9 @@ spawnDefensiveHarrier(lifeId, owner, pathStart, pathGoal) {
 
   harrier = spawnHelicopter(owner, pathStart, forward, "harrier_mp", "vehicle_av8b_harrier_jet_mp");
 
-  if(!isDefined(harrier))
+  if(!isDefined(harrier)) {
     return;
+  }
 
   harrier addToHeliList();
   harrier thread removeFromHeliListOnDeath();
@@ -157,8 +162,9 @@ harrierLeave() {
     pathGoal += (0, 0, 900);
 
     leaveTrace = bulletTrace(self.origin, self.origin + (0, 0, 900), false, self);
-    if(leaveTrace["surfacetype"] == "none")
+    if(leaveTrace["surfacetype"] == "none") {
       break;
+    }
 
     wait(0.10);
   }
@@ -207,11 +213,13 @@ getNewPoint(pos, targ) {
     enemyPoints = [];
 
     foreach(player in level.players) {
-      if(player == self)
+      if(player == self) {
         continue;
+      }
 
-      if(!level.teambased || player.team != self.team)
+      if(!level.teambased || player.team != self.team) {
         enemyPoints[enemyPoints.size] = player.origin;
+      }
     }
 
     if(enemyPoints.size > 0) {
@@ -242,8 +250,9 @@ getNewPoint(pos, targ) {
         perpendicularVector = (pointY, pointX, newHeight);
       }
     } else {
-      if(distance2D(self.origin, self.bestTarget.origin) < 200)
+      if(distance2D(self.origin, self.bestTarget.origin) < 200) {
         return;
+      }
 
       yaw = self.angles[1];
       direction = (0, yaw, 0);
@@ -257,8 +266,9 @@ getNewPoint(pos, targ) {
   for(;;) {
     point = traceNewPoint(pointX, PointY, newHeight);
 
-    if(point != 0)
+    if(point != 0) {
       return point;
+    }
 
     pointX = RandomFloatRange(pos[0] - 1200, pos[0] + 1200);
     pointY = RandomFloatRange(pos[1] - 1200, pos[1] + 1200);
@@ -419,8 +429,9 @@ stopHarrierWingFx() {
 startHarrierWingFx() {
   wait(3.0);
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   playFXOnTag(level.fx_airstrike_contrail, self, "tag_right_wingtip");
   playFXOnTag(level.fx_airstrike_contrail, self, "tag_left_wingtip");
@@ -466,22 +477,26 @@ fireOnTarget(facingTolerance, zOffset) {
 
   self setVehWeapon("harrier_20mm_mp");
 
-  if(!isDefined(zOffset))
+  if(!isDefined(zOffset)) {
     zOffset = 50;
+  }
 
   for(;;) {
-    if(self isReadyToFire(facingTolerance))
+    if(self isReadyToFire(facingTolerance)) {
       break;
-    else
+    }
+    else {
       wait(.25);
+    }
   }
   self SetTurretTargetEnt(self.bestTarget, (0, 0, 50));
 
   numShots = 25;
 
   for(;;) {
-    if(numShots == 25)
+    if(numShots == 25) {
       self playLoopSound("h2_harrier_fire");
+    }
 
     numShots--;
     self FireWeapon("tag_flash", self.bestTarget, (0, 0, 0), .05);
@@ -499,8 +514,9 @@ isReadyToFire(tolerance) {
   self endon("death");
   self endon("leaving");
 
-  if(!isDefined(tolerance))
+  if(!isDefined(tolerance)) {
     tolerance = 10;
+  }
 
   harrierForwardVector = anglesToForward(self.angles);
   harrierToTarget = self.bestTarget.origin - self.origin;
@@ -513,20 +529,24 @@ isReadyToFire(tolerance) {
   targetCosine = VectorDot(harrierToTarget, harrierForwardVector);
   facingCosine = Cos(tolerance);
 
-  if(targetCosine >= facingCosine)
+  if(targetCosine >= facingCosine) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 acquireGroundTarget(targets) {
   self endon("death");
   self endon("leaving");
 
-  if(targets.size == 1)
+  if(targets.size == 1) {
     self.bestTarget = targets[0];
-  else
+  }
+  else {
     self.bestTarget = self getBestTarget(targets);
+  }
 
   self backToDefendLocation(false);
 
@@ -548,17 +568,20 @@ acquireGroundTarget(targets) {
 backToDefendLocation(forced) {
   self setVehGoalPos(self.defendloc, 1);
 
-  if(isDefined(forced) && forced)
+  if(isDefined(forced) && forced) {
     self waittill("goal");
+  }
 }
 
 wouldCollide(destination) {
   trace = bulletTrace(self.origin, destination, true, self);
 
-  if(trace["position"] == destination)
+  if(trace["position"] == destination) {
     return false;
-  else
+  }
+  else {
     return true;
+  }
 }
 
 watchTargetDeath() {
@@ -583,8 +606,9 @@ watchTargetLOS(tolerance) {
 
   lostTime = undefined;
 
-  if(!isDefined(tolerance))
+  if(!isDefined(tolerance)) {
     tolerance = 1000;
+  }
 
   for(;;) {
     if(!isTarget(self.bestTarget)) {
@@ -599,8 +623,9 @@ watchTargetLOS(tolerance) {
     }
 
     if(self.bestTarget sightConeTrace(self.origin, self) < 1) {
-      if(!isDefined(lostTime))
+      if(!isDefined(lostTime)) {
         lostTime = getTime();
+      }
 
       if(getTime() - lostTime > tolerance) {
         self thread breakTarget();
@@ -621,8 +646,9 @@ breakTarget(noNewTarget) {
   self stopLoopSound();
   self notify("stopfiring");
 
-  if(isDefined(noNewTarget) && noNewTarget)
+  if(isDefined(noNewTarget) && noNewTarget) {
     return;
+  }
 
   self thread h2_randomHarrierMovement();
   self notify("newTarget");
@@ -655,8 +681,9 @@ harrierGetTargets() {
     for(i = 0; i < players.size; i++) {
       potentialTarget = players[i];
       if(isTarget(potentialTarget)) {
-        if(isDefined(players[i]))
+        if(isDefined(players[i])) {
           targets[targets.size] = players[i];
+        }
       } else
         continue;
 
@@ -673,40 +700,50 @@ harrierGetTargets() {
 isTarget(potentialTarget) {
   self endon("death");
 
-  if(!isalive(potentialTarget) || potentialTarget.sessionstate != "playing")
+  if(!isalive(potentialTarget) || potentialTarget.sessionstate != "playing") {
     return false;
+  }
 
-  if(isDefined(self.owner) && potentialTarget == self.owner)
+  if(isDefined(self.owner) && potentialTarget == self.owner) {
     return false;
+  }
 
-  if(distance(potentialTarget.origin, self.origin) > 8192)
+  if(distance(potentialTarget.origin, self.origin) > 8192) {
     return false;
+  }
 
-  if(Distance2D(potentialTarget.origin, self.origin) < 768)
+  if(Distance2D(potentialTarget.origin, self.origin) < 768) {
     return false;
+  }
 
-  if(!isDefined(potentialTarget.pers["team"]))
+  if(!isDefined(potentialTarget.pers["team"])) {
     return false;
+  }
 
-  if(level.teamBased && potentialTarget.pers["team"] == self.team)
+  if(level.teamBased && potentialTarget.pers["team"] == self.team) {
     return false;
+  }
 
-  if(potentialTarget.pers["team"] == "spectator")
+  if(potentialTarget.pers["team"] == "spectator") {
     return false;
+  }
 
-  if(isDefined(potentialTarget.spawntime) && (gettime() - potentialTarget.spawntime) / 1000 <= 5)
+  if(isDefined(potentialTarget.spawntime) && (gettime() - potentialTarget.spawntime) / 1000 <= 5) {
     return false;
+  }
 
-  if(potentialTarget _hasPerk("specialty_radarimmune"))
+  if(potentialTarget _hasPerk("specialty_radarimmune")) {
     return false;
+  }
 
   harrier_centroid = self.origin + (0, 0, -160);
   harrier_forward_norm = anglesToForward(self.angles);
   harrier_turret_point = harrier_centroid + 144 * harrier_forward_norm;
   harrier_canSeeTarget = potentialTarget sightConeTrace(self.origin, self);
 
-  if(harrier_canSeeTarget < 1)
+  if(harrier_canSeeTarget < 1) {
     return false;
+  }
 
   return true;
 }
@@ -730,12 +767,14 @@ getBestTarget(targets) {
     // to prioritize targeting dangerous targets.
     weaponsArray = targ GetWeaponsListItems();
     foreach(weapon in weaponsArray) {
-      if(isSubStr(weapon, "at4") || isSubStr(weapon, "stinger") || isSubStr(weapon, "jav"))
+      if(isSubStr(weapon, "at4") || isSubStr(weapon, "stinger") || isSubStr(weapon, "jav")) {
         angle -= 40;
+      }
     }
 
-    if(Distance(self.origin, targ.origin) > 2000)
+    if(Distance(self.origin, targ.origin) > 2000) {
       angle += 40;
+    }
 
     if(!isDefined(bestYaw)) {
       bestYaw = angle;
@@ -755,27 +794,33 @@ fireMissile(missileTarget) {
 
   assert(self.health > 0);
 
-  if(self.missiles <= 0)
+  if(self.missiles <= 0) {
     return;
+  }
 
   friendlyInRadius = self checkForFriendlies(missileTarget, 256);
 
-  if(!isDefined(missileTarget))
+  if(!isDefined(missileTarget)) {
     return;
+  }
 
-  if(Distance2D(self.origin, missileTarget.origin) < 512)
+  if(Distance2D(self.origin, missileTarget.origin) < 512) {
     return;
+  }
 
-  if(isDefined(friendlyInRadius) && friendlyInRadius)
+  if(isDefined(friendlyInRadius) && friendlyInRadius) {
     return;
+  }
 
   self.missiles--;
   self setVehWeapon("harrier_FFAR_mp");
 
-  if(isDefined(missileTarget.targetEnt))
+  if(isDefined(missileTarget.targetEnt)) {
     missile = self fireWeapon("tag_flash", missileTarget.targetEnt, (0, 0, -250));
-  else
+  }
+  else {
     missile = self fireWeapon("tag_flash", missileTarget, (0, 0, -250));
+  }
 
   missile Missile_SetFlightmodeDirect();
   missile Missile_SetTargetEnt(missileTarget);
@@ -792,13 +837,15 @@ checkForFriendlies(missileTarget, radiusSize) {
   for(i = 0; i < players.size; i++) {
     potentialCollateral = players[i];
 
-    if(potentialCollateral.team != self.team)
+    if(potentialCollateral.team != self.team) {
       continue;
+    }
 
     potentialPosition = potentialCollateral.origin;
 
-    if(distance2D(potentialPosition, strikePosition) < 512)
+    if(distance2D(potentialPosition, strikePosition) < 512) {
       return true;
+    }
   }
   return false;
 }
@@ -810,11 +857,13 @@ checkForFriendlies(missileTarget, radiusSize) {
 ///------------------------------------------------------
 
 Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
-  if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team) && level.teamBased) && (attacker != self.owner))
+  if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team) && level.teamBased) && (attacker != self.owner)) {
     return;
+  }
 
-  if(self.health <= 0)
+  if(self.health <= 0) {
     return;
+  }
 
   switch (weapon) {
     case "ac130_105mm_mp":
@@ -831,8 +880,9 @@ Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon
       damage = self.maxhealth - 900;
       break;
     default:
-      if(weapon != "none")
+      if(weapon != "none") {
         damage = Int(damage / 2);
+      }
       self.largeProjectileDamage = false;
       break;
   }
@@ -886,8 +936,9 @@ harrierDestroyed() {
 
   self waittill("death");
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   if(!isDefined(self.largeProjectileDamage)) {
     self Vehicle_SetSpeed(25, 5);
@@ -1001,8 +1052,9 @@ watchVehTargetDeath() {
 breakVehTarget() {
   self ClearLookAtEnt();
 
-  if(isDefined(self.bestTarget) && !isDefined(self.bestTarget.nonTarget))
+  if(isDefined(self.bestTarget) && !isDefined(self.bestTarget.nonTarget)) {
     self.bestTarget.nonTarget = true;
+  }
 
   self notify("stopfiring");
   self notify("newTarget");
@@ -1018,10 +1070,12 @@ evasiveManuverOne() {
   curOrg = self.origin;
 
   yaw = self.angles[1];
-  if(cointoss())
+  if(cointoss()) {
     direction = (0, yaw + 90, 0);
-  else
+  }
+  else {
     direction = (0, yaw - 90, 0);
+  }
 
   moveToPoint = self.origin + vector_multiply(anglesToForward(direction), 500);
 
@@ -1031,8 +1085,9 @@ evasiveManuverOne() {
 }
 
 drawLine(start, end, timeSlice, color) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 1, 1);
+  }
 
   drawTime = int(timeSlice * 20);
   for(time = 0; time < drawTime; time++) {

@@ -45,8 +45,9 @@ createfx() {
   level.callbackPlayerDamage = ::void;
   level.callbackPlayerKilled = ::void;
   level.callbackPlayerConnect = ::Callback_PlayerConnect;
-  while(!isDefined(level.player))
+  while(!isDefined(level.player)) {
     wait .05;
+  }
   thread createFxLogic();
   level waittill("eternity");
 }
@@ -1551,14 +1552,16 @@ print_ambient_fx_inventory() {
   print("\n");
 }
 vector_changed(old, new) {
-  if(DistanceSquared(old, new) >= 1)
+  if(DistanceSquared(old, new) >= 1) {
     return true;
+  }
   return false;
 }
 dot_changed(old, new) {
   dot = vectordot(old, new);
-  if(dot < 1)
+  if(dot < 1) {
     return true;
+  }
   return false;
 }
 void() {}
@@ -1570,8 +1573,9 @@ Callback_PlayerConnect() {
     spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(spawnpoints);
     self.sessionteam = "none";
     self.sessionstate = "playing";
-    if(!level.teamBased)
+    if(!level.teamBased) {
       self.ffateam = "none";
+    }
     self spawn(spawnpoint.origin, spawnpoint.angles);
     level.player = self;
     level.hasSpawned = true;

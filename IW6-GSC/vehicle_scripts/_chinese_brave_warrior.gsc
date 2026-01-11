@@ -9,8 +9,9 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("humvee", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
 
-  if(issubstr(var_2, "turret"))
+  if(issubstr(var_2, "turret")) {
     maps\_vehicle::build_turret("minigun_m1a1_fast", "tag_turret", "weapon_chinese_brave_warrior_turret", undefined, "sentry", undefined, 0, 0, (0, 0, -16));
+  }
 
   maps\_vehicle::build_deathmodel("vehicle_chinese_brave_warrior_anim", "vehicle_chinese_brave_warrior_destroyed");
   maps\_vehicle::build_unload_groups(::unload_groups);
@@ -70,8 +71,9 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 4; var_1++)
+  for(var_1 = 0; var_1 < 4; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   var_0[0].sittag = "tag_driver";
   var_0[0].getin = % bravewarr_mount_driver;

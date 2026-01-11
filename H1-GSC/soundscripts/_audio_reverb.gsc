@@ -5,8 +5,9 @@
 ******************************************/
 
 rvb_init(var_0) {
-  if(!isDefined(level._audio))
+  if(!isDefined(level._audio)) {
     level._audio = spawnStruct();
+  }
 
   level._audio.reverb = spawnStruct();
   level._audio.reverb.use_string_table_presets = 0;
@@ -32,10 +33,12 @@ rvb_apply_reverb(var_0, var_1) {
     level._audio.reverb.applied_reverb = var_0;
     var_2 = undefined;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_2 = var_1;
-    else
+    }
+    else {
       var_2 = var_0.fadetime;
+    }
 
     level.player setreverb(var_0.priority, var_0.roomtype, var_0.drylevel, var_0.wetlevel, var_2);
   }
@@ -80,8 +83,9 @@ rvb_start_preset(var_0, var_1) {
 
   level._audio.current_reverb = var_0;
 
-  if(var_0 != "deathsdoor")
+  if(var_0 != "deathsdoor") {
     rvbx_store_current_reverb_track(var_0, var_2);
+  }
 
   if(level._audio.reverb.current_reverb != var_0) {
     level._audio.reverb.current_reverb = var_0;
@@ -93,8 +97,9 @@ rvbx_store_current_reverb_track(var_0, var_1) {
   if(var_0 != "deathsdoor") {
     level.reverb_track = var_0;
 
-    if(var_0 == "none" && !isDefined(level.ambient_reverb["none"]))
+    if(var_0 == "none" && !isDefined(level.ambient_reverb["none"])) {
       level.ambient_reverb["none"] = 1;
+    }
     else if(!isDefined(level.ambient_reverb[var_0])) {
       level.ambient_reverb[var_0] = [];
       level.ambient_reverb[var_0]["priority"] = "snd_enveffectsprio_level";
@@ -116,8 +121,9 @@ rvb_deactive_reverb() {
 rvb_get_applied_reverb() {
   var_0 = undefined;
 
-  if(isDefined(level._audio.reverb.applied_reverb))
+  if(isDefined(level._audio.reverb.applied_reverb)) {
     var_0 = level._audio.reverb.applied_reverb;
+  }
 
   return var_0;
 }
@@ -127,11 +133,13 @@ rvbx_get_preset_from_string_table(var_0, var_1) {
   var_3 = "soundtables\sp_defaults.csv";
   var_4 = [];
 
-  if(var_1)
+  if(var_1) {
     var_4 = rvbx_get_reverb_preset_from_stringtable_internal(var_2, var_0);
+  }
 
-  if(!isDefined(var_4) || var_4.size == 0)
+  if(!isDefined(var_4) || var_4.size == 0) {
     var_4 = rvbx_get_reverb_preset_from_stringtable_internal(var_3, var_0);
+  }
 
   if(!isDefined(var_4) || var_4.size == 0) {
     return;
@@ -167,23 +175,27 @@ rvbx_get_reverb_preset_from_stringtable_internal(var_0, var_1) {
 }
 
 rvbx_apply_inital_reverb() {
-  while(!isDefined(level.player))
+  while(!isDefined(level.player)) {
     wait 0.5;
+  }
 
   rvb_apply_reverb(level._audio.reverb.default_reverb);
 }
 
 rvbx_get_reverb_preset(var_0) {
-  if(!isDefined(level._audio.reverb.preset_cache))
+  if(!isDefined(level._audio.reverb.preset_cache)) {
     level._audio.reverb.preset_cache = [];
+  }
 
   var_1 = rvbx_create();
   var_2 = [];
 
-  if(isDefined(level._audio.level_audio_reverb_function))
+  if(isDefined(level._audio.level_audio_reverb_function)) {
     var_2 = [[level._audio.level_audio_reverb_function]](var_0, var_2);
-  else if(isDefined(level._audio.reverb.preset_cache[var_0]))
+  }
+  else if(isDefined(level._audio.reverb.preset_cache[var_0])) {
     var_2 = level._audio.reverb.preset_cache[var_0];
+  }
   else if(level._audio.reverb.use_string_table_presets) {
     var_2 = rvbx_get_preset_from_string_table(var_0, 1);
 

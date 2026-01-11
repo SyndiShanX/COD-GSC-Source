@@ -29,8 +29,9 @@ register_time_bomb_enemy(str_type, func_conditions_for_round, func_save_enemy_da
   assert(isDefined(func_save_enemy_data), "func_save_enemy_data is a required parameter for register_time_bomb_enemy! This should store all relevant data about an individual enemy, and requires one input argument.");
   assert(isDefined(func_respawn_enemies), "func_respawn is a required parameter for register_time_bomb_enemy! This will run a function to respawn the new creature type.");
 
-  if(!isDefined(level._time_bomb.enemy_type[str_type]))
+  if(!isDefined(level._time_bomb.enemy_type[str_type])) {
     level._time_bomb.enemy_type[str_type] = spawnStruct();
+  }
 
   level._time_bomb.enemy_type[str_type].conditions_for_round = func_conditions_for_round;
   level._time_bomb.enemy_type[str_type].enemy_data_save_func = func_save_enemy_data;
@@ -49,24 +50,28 @@ register_time_bomb_enemy_default(str_type) {
 }
 
 time_bomb_add_custom_func_global_save(func_save) {
-  if(!isDefined(level._time_bomb.custom_funcs_save))
+  if(!isDefined(level._time_bomb.custom_funcs_save)) {
     level._time_bomb.custom_funcs_save = [];
+  }
 
   level._time_bomb.custom_funcs_save[level._time_bomb.custom_funcs_save.size] = func_save;
 }
 
 time_bomb_add_custom_func_global_restore(func_restore) {
-  if(!isDefined(level._time_bomb.custom_funcs_restore))
+  if(!isDefined(level._time_bomb.custom_funcs_restore)) {
     level._time_bomb.custom_funcs_restore = [];
+  }
 
   level._time_bomb.custom_funcs_restore[level._time_bomb.custom_funcs_restore.size] = func_restore;
 }
 
 get_time_bomb_saved_round_type() {
-  if(!isDefined(level.time_bomb_save_data) || !isDefined(level.time_bomb_save_data.round_type))
+  if(!isDefined(level.time_bomb_save_data) || !isDefined(level.time_bomb_save_data.round_type)) {
     str_type = "none";
-  else
+  }
+  else {
     str_type = level.time_bomb_save_data.round_type;
+  }
 
   return str_type;
 }
@@ -95,8 +100,9 @@ init_time_bomb() {
   register_equipment_for_level("time_bomb_zm");
   register_equipment_for_level("time_bomb_detonator_zm");
 
-  if(!isDefined(level.round_wait_func))
+  if(!isDefined(level.round_wait_func)) {
     level.round_wait_func = ::time_bomb_round_wait;
+  }
 
   level.zombie_round_change_custom = ::time_bomb_custom_round_change;
   level._effect["time_bomb_set"] = loadfx("weapon/time_bomb/fx_time_bomb_detonate");
@@ -199,8 +205,9 @@ time_bomb_model_init() {
 }
 
 delete_existing_time_bomb_model() {
-  if(isDefined(level.time_bomb_save_data) && isDefined(level.time_bomb_save_data.time_bomb_model) && isDefined(level.time_bomb_save_data.time_bomb_model.origin))
+  if(isDefined(level.time_bomb_save_data) && isDefined(level.time_bomb_save_data.time_bomb_model) && isDefined(level.time_bomb_save_data.time_bomb_model.origin)) {
     level.time_bomb_save_data.time_bomb_model delete_time_bomb_model();
+  }
 }
 
 setup_time_bomb_detonation_model() {
@@ -208,13 +215,15 @@ setup_time_bomb_detonation_model() {
 }
 
 detonate_time_bomb() {
-  if(isDefined(level.time_bomb_save_data.time_bomb_model) && isDefined(level.time_bomb_save_data.time_bomb_model.origin))
+  if(isDefined(level.time_bomb_save_data.time_bomb_model) && isDefined(level.time_bomb_save_data.time_bomb_model.origin)) {
     playsoundatposition("zmb_timebomb_3d_timer_end", level.time_bomb_save_data.time_bomb_model.origin);
+  }
 
   delete_time_bomb_model();
 
-  if(time_bomb_save_exists())
+  if(time_bomb_save_exists()) {
     level thread time_bomb_restores_saved_data();
+  }
 }
 
 delete_time_bomb_model() {
@@ -230,11 +239,13 @@ watch_for_tactical_grenade_change() {
   self endon("death");
   self endon("disconnect");
 
-  while(self hasweapon("time_bomb_zm"))
+  while(self hasweapon("time_bomb_zm")) {
     self waittill("new_tactical_grenade");
+  }
 
-  if(self hasweapon("time_bomb_detonator_zm"))
+  if(self hasweapon("time_bomb_detonator_zm")) {
     self takeweapon("time_bomb_detonator_zm");
+  }
 
   self notify("player_lost_time_bomb");
   destroy_time_bomb_save();
@@ -260,31 +271,38 @@ time_bomb_saves_data(b_show_icon, save_struct) {
 }
 
 _time_bomb_saves_data(b_show_icon, save_struct) {
-  if(!isDefined(b_show_icon))
+  if(!isDefined(b_show_icon)) {
     b_show_icon = 1;
+  }
 
   debug_time_bomb_print("TIME BOMB SET! Saving...");
 
-  if(!isDefined(save_struct) && !time_bomb_save_exists())
+  if(!isDefined(save_struct) && !time_bomb_save_exists()) {
     level.time_bomb_save_data = spawnStruct();
+  }
 
   time_bomb_saves_global_data(save_struct);
   time_bomb_saves_player_data(save_struct);
 
-  if(isDefined(save_struct))
+  if(isDefined(save_struct)) {
     save_struct.save_ready = 1;
-  else
+  }
+  else {
     level.time_bomb_save_data.save_ready = 1;
+  }
 
-  if(b_show_icon)
+  if(b_show_icon) {
     time_bomb_hud_icon_show();
+  }
 }
 
 time_bomb_saves_global_data(save_struct) {
-  if(!isDefined(save_struct))
+  if(!isDefined(save_struct)) {
     s_temp = level.time_bomb_save_data;
-  else
+  }
+  else {
     s_temp = save_struct;
+  }
 
   s_temp.n_time_id = gettime();
   s_temp.round_number = level.round_number;
@@ -292,26 +310,30 @@ time_bomb_saves_global_data(save_struct) {
   s_temp.round_type = _get_time_bomb_round_type();
   s_temp = _time_bomb_saves_enemy_info(s_temp);
 
-  if(flag("time_bomb_stores_door_state"))
+  if(flag("time_bomb_stores_door_state")) {
     _time_bomb_saves_door_states(s_temp);
+  }
 
   s_temp.custom_data = spawnStruct();
 
   if(isDefined(level._time_bomb.custom_funcs_save)) {
-    for(i = 0; i < level._time_bomb.custom_funcs_save.size; i++)
+    for(i = 0; i < level._time_bomb.custom_funcs_save.size; i++) {
       s_temp.custom_data[[level._time_bomb.custom_funcs_save[i]]]();
+    }
   }
 
-  if(!isDefined(save_struct))
+  if(!isDefined(save_struct)) {
     level.time_bomb_save_data = s_temp;
+  }
 }
 
 _time_bomb_saves_door_states(s_temp) {
   a_doors = getEntArray("zombie_door", "targetname");
   s_temp.door_states = [];
 
-  foreach(door in a_doors)
+  foreach(door in a_doors) {
   door thread store_door_state(s_temp);
+  }
 }
 
 store_door_state(s_temp) {
@@ -319,8 +341,9 @@ store_door_state(s_temp) {
   s_door_struct.doors = [];
 
   if(isDefined(self._door_open) && self._door_open || isDefined(self.has_been_opened) && self.has_been_opened) {
-    if(isDefined(self.is_moving) && self.is_moving)
+    if(isDefined(self.is_moving) && self.is_moving) {
       self waittill_either("movedone", "rotatedone");
+    }
 
     foreach(door in self.doors) {
       s = spawnStruct();
@@ -353,8 +376,9 @@ _time_bomb_restores_door_states(s_temp) {
 
   a_doors = getEntArray("zombie_door", "targetname");
 
-  foreach(door in a_doors)
+  foreach(door in a_doors) {
   door thread restore_door_state(s_temp);
+  }
 }
 
 restore_door_state(s_temp) {
@@ -390,8 +414,9 @@ restore_door_state(s_temp) {
       return;
     }
     for(i = 0; i < s_door_struct.doors.size; i++) {
-      if(isDefined(self.doors[i].script_string) && self.doors[i].script_string == "rotate")
+      if(isDefined(self.doors[i].script_string) && self.doors[i].script_string == "rotate") {
         self.doors[i] rotateto(s_door_struct.doors[i].script_angles, 0.05, 0, 0);
+      }
 
       self.doors[i] notsolid();
       self.doors[i] disconnectpaths();
@@ -429,8 +454,9 @@ _time_bomb_saves_enemy_info(s_temp) {
 time_bomb_saves_player_data(save_struct) {
   a_players = get_players();
 
-  if(isDefined(save_struct))
+  if(isDefined(save_struct)) {
     save_struct.player_saves = [];
+  }
 
   foreach(player in a_players) {
     player_save_struct = undefined;
@@ -445,20 +471,24 @@ time_bomb_saves_player_data(save_struct) {
 }
 
 _time_bomb_save_internal(save_struct) {
-  if(!isDefined(save_struct) && !isDefined(self.time_bomb_save_data))
+  if(!isDefined(save_struct) && !isDefined(self.time_bomb_save_data)) {
     self.time_bomb_save_data = spawnStruct();
+  }
 
-  if(!self ent_flag_exist("time_bomb_restore_thread_done"))
+  if(!self ent_flag_exist("time_bomb_restore_thread_done")) {
     self ent_flag_init("time_bomb_restore_thread_done");
+  }
 
   self ent_flag_clear("time_bomb_restore_thread_done");
   s_temp = spawnStruct();
   s_temp.weapons = spawnStruct();
 
-  if(isDefined(save_struct))
+  if(isDefined(save_struct)) {
     s_temp.n_time_id = save_struct.n_time_id;
-  else
+  }
+  else {
     s_temp.n_time_id = level.time_bomb_save_data.n_time_id;
+  }
 
   s_temp.player_origin = self.origin;
   s_temp.player_angles = self getplayerangles();
@@ -472,8 +502,9 @@ _time_bomb_save_internal(save_struct) {
   s_temp.weapons.type = [];
   s_temp.weapons.primary = self getcurrentweapon();
 
-  if(s_temp.weapons.primary == "none" || s_temp.weapons.primary == "time_bomb_zm")
+  if(s_temp.weapons.primary == "none" || s_temp.weapons.primary == "time_bomb_zm") {
     self thread _save_time_bomb_weapon_after_switch(save_struct);
+  }
 
   for(i = 0; i < s_temp.weapons.array.size; i++) {
     str_weapon_temp = s_temp.weapons.array[i];
@@ -500,21 +531,25 @@ _time_bomb_save_internal(save_struct) {
   s_temp.perk_count = self.num_perks;
   s_temp.lives_remaining = self.lives;
 
-  if(isDefined(self.perks_active))
+  if(isDefined(self.perks_active)) {
     s_temp.perks_active = arraycopy(self.perks_active);
+  }
 
   s_temp.points_current = self.score;
 
-  if(is_weapon_locker_available_in_game())
+  if(is_weapon_locker_available_in_game()) {
     s_temp.weapon_locker_data = self maps\mp\zombies\_zm_weapon_locker::wl_get_stored_weapondata();
+  }
 
   s_temp.account_value = self.account_value;
   s_temp.save_ready = 1;
 
-  if(isDefined(save_struct))
+  if(isDefined(save_struct)) {
     save_struct.player_saves[self getentitynumber()] = s_temp;
-  else
+  }
+  else {
     self.time_bomb_save_data = s_temp;
+  }
 }
 
 is_weapon_locker_available_in_game() {
@@ -541,10 +576,12 @@ _save_time_bomb_weapon_after_switch(save_struct) {
     }
     while(!b_valid_weapon);
 
-    if(isDefined(save_struct))
+    if(isDefined(save_struct)) {
       save_struct.player_saves[self getentitynumber()].weapons.primary = str_weapon;
-    else
+    }
+    else {
       self.time_bomb_save_data.weapons.primary = str_weapon;
+    }
   }
 }
 
@@ -591,8 +628,9 @@ _watch_for_detonation() {
   while(true) {
     self waittill("detonate");
 
-    if(time_bomb_save_exists())
+    if(time_bomb_save_exists()) {
       level thread time_bomb_restores_saved_data();
+    }
   }
 }
 
@@ -606,16 +644,18 @@ time_bomb_inventory_slot_think() {
   while(true) {
     self waittill("zmb_max_ammo");
 
-    if(self.time_bomb_detonator_only)
+    if(self.time_bomb_detonator_only) {
       self.time_bomb_detonator_only = 0;
+    }
 
     self swap_weapon_to_time_bomb();
   }
 }
 
 time_bomb_restores_saved_data(b_show_fx, save_struct) {
-  if(!isDefined(b_show_fx))
+  if(!isDefined(b_show_fx)) {
     b_show_fx = 1;
+  }
 
   level setclientfield("time_bomb_lua_override", 1);
   debug_time_bomb_print("GO BACK IN TIME!");
@@ -647,8 +687,9 @@ time_bomb_restores_saved_data(b_show_fx, save_struct) {
   timebomb_wait_for_hostmigration();
   flag_wait("time_bomb_global_restore_done");
 
-  if(b_show_fx)
+  if(b_show_fx) {
     _time_bomb_hide_overlay(n_time_start);
+  }
 
   time_bomb_destroy_hud_elem();
   flag_clear("time_bomb_restore_active");
@@ -658,18 +699,21 @@ time_bomb_restores_saved_data(b_show_fx, save_struct) {
 }
 
 timebomb_wait_for_hostmigration() {
-  while(isDefined(level.hostmigrationtimer))
+  while(isDefined(level.hostmigrationtimer)) {
     wait 0.05;
+  }
 }
 
 time_bomb_restores_global_data(save_struct, n_time_start) {
   timebomb_wait_for_hostmigration();
   debug_time_bomb_print("TIME BOMB RESTORE GLOBAL DATA");
 
-  if(isDefined(save_struct))
+  if(isDefined(save_struct)) {
     s_temp = save_struct;
-  else
+  }
+  else {
     s_temp = level.time_bomb_save_data;
+  }
 
   flag_clear("time_bomb_global_restore_done");
   s_temp.current_round = level.round_number;
@@ -677,16 +721,18 @@ time_bomb_restores_global_data(save_struct, n_time_start) {
   level._time_bomb.last_round_restored = s_temp.round_number;
   timebomb_wait_for_hostmigration();
 
-  if(level._time_bomb.changing_round)
+  if(level._time_bomb.changing_round) {
     level timebomb_change_to_round(s_temp.round_number);
+  }
 
   timebomb_wait_for_hostmigration();
   level _time_bomb_kill_all_active_enemies();
   timebomb_wait_for_hostmigration();
   level _time_bomb_restores_enemies(s_temp, n_time_start);
 
-  if(flag("time_bomb_stores_door_state"))
+  if(flag("time_bomb_stores_door_state")) {
     _time_bomb_restores_door_states(s_temp);
+  }
 
   timebomb_wait_for_hostmigration();
   _pack_a_punch_sequence_ends();
@@ -695,8 +741,9 @@ time_bomb_restores_global_data(save_struct, n_time_start) {
   timebomb_wait_for_hostmigration();
 
   if(isDefined(level._time_bomb.custom_funcs_restore)) {
-    for(i = 0; i < level._time_bomb.custom_funcs_restore.size; i++)
+    for(i = 0; i < level._time_bomb.custom_funcs_restore.size; i++) {
       s_temp.custom_data[[level._time_bomb.custom_funcs_restore[i]]]();
+    }
   }
 
   timebomb_wait_for_hostmigration();
@@ -705,31 +752,36 @@ time_bomb_restores_global_data(save_struct, n_time_start) {
 
 _pack_a_punch_sequence_ends() {
   if(flag("pack_machine_in_use")) {
-    foreach(player in get_players())
+    foreach(player in get_players()) {
     player notify("pap_player_disconnected");
+    }
 
     foreach(trigger in level.pap_triggers) {
       trigger notify("pap_player_disconnected");
 
-      if(isDefined(trigger.current_weapon) && !isDefined(trigger.upgrade_name))
+      if(isDefined(trigger.current_weapon) && !isDefined(trigger.upgrade_name)) {
         trigger.upgrade_name = maps\mp\zombies\_zm_weapons::get_upgrade_weapon(trigger.current_weapon, trigger will_upgrade_weapon_as_attachment(self.current_weapon));
+      }
     }
 
     waittillframeend;
 
-    foreach(trigger in level.pap_triggers)
+    foreach(trigger in level.pap_triggers) {
     trigger notify("pap_timeout");
+    }
   }
 }
 
 close_magic_boxes() {
-  if(isDefined(level.chest_index) && isDefined(level.chests) && level.chests.size > 0)
+  if(isDefined(level.chest_index) && isDefined(level.chests) && level.chests.size > 0) {
     level.chests[level.chest_index] _close_magic_box();
+  }
 
   if(isDefined(level.zombie_vars["zombie_powerup_fire_sale_on"]) && level.zombie_vars["zombie_powerup_fire_sale_on"]) {
     for(i = 0; i < level.chests.size; i++) {
-      if(isDefined(level.chest_index) && i != level.chest_index && (isDefined(level.chests[i]._box_opened_by_fire_sale) && level.chests[i]._box_opened_by_fire_sale))
+      if(isDefined(level.chest_index) && i != level.chest_index && (isDefined(level.chests[i]._box_opened_by_fire_sale) && level.chests[i]._box_opened_by_fire_sale)) {
         level.chests[i] _close_magic_box();
+      }
     }
   }
 }
@@ -762,8 +814,9 @@ _get_wait_time(n_time_start) {
   n_time_elapsed = (n_time_end - n_time_start) * 0.001;
   n_delay = 2 - n_time_elapsed;
 
-  if(n_delay > 0)
+  if(n_delay > 0) {
     wait(n_delay);
+  }
 }
 
 _get_time_bomb_zombie_spawn_location() {
@@ -773,8 +826,9 @@ _get_time_bomb_zombie_spawn_location() {
   for(i = 0; i < a_spawn_locations.size; i++) {
     b_is_standard_spawn = isDefined(a_spawn_locations[i].script_noteworthy) && a_spawn_locations[i].script_noteworthy == "spawn_location";
 
-    if(b_is_standard_spawn)
+    if(b_is_standard_spawn) {
       a_valid_spawners[a_valid_spawners.size] = a_spawn_locations[i];
+    }
   }
 
   assert(a_valid_spawners.size > 0, "_get_time_bomb_zombie_spawn_location found no valid spawn locations!");
@@ -787,8 +841,9 @@ time_bomb_restores_player_data(n_time_start, save_struct) {
   white_screen_flash();
   a_players = get_players();
 
-  foreach(player in a_players)
+  foreach(player in a_players) {
   player _time_bomb_restores_player_data_internal(save_struct);
+  }
 
   remove_white_screen_flash();
 }
@@ -796,8 +851,9 @@ time_bomb_restores_player_data(n_time_start, save_struct) {
 has_packapunch_weapon() {
   b_player_has_packapunch_weapon = 0;
 
-  if(isDefined(level.machine_assets) && isDefined(level.machine_assets["packapunch"]) && isDefined(level.machine_assets["packapunch"].weapon))
+  if(isDefined(level.machine_assets) && isDefined(level.machine_assets["packapunch"]) && isDefined(level.machine_assets["packapunch"].weapon)) {
     b_player_has_packapunch_weapon = self hasweapon(level.machine_assets["packapunch"].weapon);
+  }
 
   return b_player_has_packapunch_weapon;
 }
@@ -815,8 +871,9 @@ _time_bomb_restores_player_data_internal(save_struct) {
   }
 
   if(isDefined(self.is_drinking) && self.is_drinking) {
-    if(self has_packapunch_weapon())
+    if(self has_packapunch_weapon()) {
       self.is_drinking++;
+    }
 
     self thread maps\mp\zombies\_zm_perks::perk_abort_drinking(0.1);
   }
@@ -824,13 +881,16 @@ _time_bomb_restores_player_data_internal(save_struct) {
   if(self can_time_bomb_restore_data_on_player(save_struct)) {
     debug_time_bomb_print("TIMEBOMB >> restoring player " + self.name);
 
-    if(!isDefined(self.time_bomb_save_data) && !isDefined(save_struct))
+    if(!isDefined(self.time_bomb_save_data) && !isDefined(save_struct)) {
       self.time_bomb_save_data = spawnStruct();
+    }
 
-    if(!isDefined(save_struct))
+    if(!isDefined(save_struct)) {
       s_temp = self.time_bomb_save_data;
-    else
+    }
+    else {
       s_temp = save_struct.player_saves[self getentitynumber()];
+    }
 
     self setorigin(s_temp.player_origin);
     self setplayerangles(s_temp.player_angles);
@@ -838,16 +898,20 @@ _time_bomb_restores_player_data_internal(save_struct) {
     self thread _restore_player_perks_and_weapons(s_temp);
     n_difference_in_score = s_temp.points_current - self.score;
 
-    if(n_difference_in_score > 0)
+    if(n_difference_in_score > 0) {
       self maps\mp\zombies\_zm_score::add_to_player_score(n_difference_in_score);
-    else
+    }
+    else {
       self maps\mp\zombies\_zm_score::minus_to_player_score(abs(n_difference_in_score));
+    }
 
     if(is_weapon_locker_available_in_game()) {
-      if(isDefined(s_temp.weapon_locker_data))
+      if(isDefined(s_temp.weapon_locker_data)) {
         self maps\mp\zombies\_zm_weapon_locker::wl_set_stored_weapondata(s_temp.weapon_locker_data);
-      else
+      }
+      else {
         self maps\mp\zombies\_zm_weapon_locker::wl_clear_stored_weapondata();
+      }
     }
 
     if(isDefined(s_temp.account_value) && isDefined(level.banking_map)) {
@@ -857,8 +921,9 @@ _time_bomb_restores_player_data_internal(save_struct) {
 
     s_temp.save_ready = 1;
 
-    if(!isDefined(save_struct))
+    if(!isDefined(save_struct)) {
       self.time_bomb_save_data = s_temp;
+    }
 
     self ent_flag_wait("time_bomb_restore_thread_done");
   } else {
@@ -870,8 +935,9 @@ _time_bomb_restores_player_data_internal(save_struct) {
 }
 
 _restore_player_perks_and_weapons(s_temp) {
-  if(isDefined(s_temp.is_spectator) && s_temp.is_spectator)
+  if(isDefined(s_temp.is_spectator) && s_temp.is_spectator) {
     self restore_player_to_initial_loadout(s_temp);
+  }
   else if(isDefined(s_temp.is_last_stand) && s_temp.is_last_stand) {
     self.stored_weapon_info = s_temp.stored_weapon_info;
     assert(isDefined(level.zombie_last_stand_ammo_return), "time bomb attempting to give player back weapons taken by last stand, but level.zombie_last_stand_ammo_return is undefined!");
@@ -879,21 +945,24 @@ _restore_player_perks_and_weapons(s_temp) {
   } else {
     a_current_perks = self get_player_perk_list();
 
-    foreach(perk in a_current_perks)
+    foreach(perk in a_current_perks) {
     self notify(perk + "_stop");
+    }
 
     wait_network_frame();
 
     if(get_players().size == 1) {
-      if(isinarray(s_temp.perks_all, "specialty_quickrevive") && isDefined(level.solo_lives_given) && level.solo_lives_given > 0 && level.solo_lives_given < 3 && isDefined(self.lives) && self.lives == 1)
+      if(isinarray(s_temp.perks_all, "specialty_quickrevive") && isDefined(level.solo_lives_given) && level.solo_lives_given > 0 && level.solo_lives_given < 3 && isDefined(self.lives) && self.lives == 1) {
         level.solo_lives_given--;
+      }
     }
 
     if(isDefined(s_temp.perks_active)) {
       for(i = 0; i < s_temp.perks_active.size; i++) {
         if(get_players().size == 1 && s_temp.perks_active[i] == "specialty_quickrevive") {
-          if(isDefined(level.solo_lives_given) && level.solo_lives_given == 3 && isDefined(self.lives) && self.lives == 0)
+          if(isDefined(level.solo_lives_given) && level.solo_lives_given == 3 && isDefined(self.lives) && self.lives == 0) {
             continue;
+          }
         }
 
         self maps\mp\zombies\_zm_perks::give_perk(s_temp.perks_active[i]);
@@ -919,17 +988,22 @@ _restore_player_perks_and_weapons(s_temp) {
       n_type = s_temp.weapons.type[i];
 
       if(!is_temporary_zombie_weapon(str_weapon_temp) && str_weapon_temp != "time_bomb_zm") {
-        if(isDefined(level.zombie_weapons[str_weapon_temp]) && isDefined(level.zombie_weapons[str_weapon_temp].vox))
+        if(isDefined(level.zombie_weapons[str_weapon_temp]) && isDefined(level.zombie_weapons[str_weapon_temp].vox)) {
           self maps\mp\zombies\_zm_weapons::weapon_give(str_weapon_temp, issubstr(str_weapon_temp, "upgrade"));
-        else
+        }
+        else {
           self giveweapon(str_weapon_temp, 0, self maps\mp\zombies\_zm_weapons::get_pack_a_punch_weapon_options(str_weapon_temp));
+        }
 
-        if(n_type == 1)
+        if(n_type == 1) {
           self setweaponammofuel(str_weapon_temp, n_ammo_clip);
-        else if(n_type == 2)
+        }
+        else if(n_type == 2) {
           self setweaponoverheating(0, n_ammo_clip, str_weapon_temp);
-        else if(isDefined(n_ammo_clip))
+        }
+        else if(isDefined(n_ammo_clip)) {
           self setweaponammoclip(str_weapon_temp, n_ammo_clip);
+        }
 
         self setweaponammostock(str_weapon_temp, n_ammo_reserve);
       }
@@ -951,8 +1025,9 @@ _restore_player_perks_and_weapons(s_temp) {
 
     self maps\mp\zombies\_zm_equipment::equipment_take(self.current_equipment);
 
-    if(isDefined(self.deployed_equipment) && isinarray(self.deployed_equipment, s_temp.current_equipment))
+    if(isDefined(self.deployed_equipment) && isinarray(self.deployed_equipment, s_temp.current_equipment)) {
       self maps\mp\zombies\_zm_equipment::equipment_take(s_temp.current_equipment);
+    }
 
     if(isDefined(s_temp.current_equipment)) {
       self.do_not_display_equipment_pickup_hint = 1;
@@ -977,13 +1052,15 @@ get_player_perk_list() {
     a_keys = getarraykeys(self.disabled_perks);
 
     for(i = 0; i < a_keys.size; i++) {
-      if(self.disabled_perks[a_keys[i]])
+      if(self.disabled_perks[a_keys[i]]) {
         a_perks[a_perks.size] = a_keys[i];
+      }
     }
   }
 
-  if(isDefined(self.perks_active) && isarray(self.perks_active))
+  if(isDefined(self.perks_active) && isarray(self.perks_active)) {
     a_perks = arraycombine(self.perks_active, a_perks, 0, 0);
+  }
 
   return a_perks;
 }
@@ -1000,18 +1077,21 @@ restore_player_to_initial_loadout(s_temp) {
   self giveweapon(level.zombie_melee_weapon_player_init);
   a_current_perks = self get_player_perk_list();
 
-  foreach(perk in a_current_perks)
+  foreach(perk in a_current_perks) {
   self notify(perk + "_stop");
+  }
 
-  if(isDefined(s_temp) && s_temp.points_current < 1500 && self.score < 1500 && level.round_number > 6 || self.score < 1500 && level.round_number > 6)
+  if(isDefined(s_temp) && s_temp.points_current < 1500 && self.score < 1500 && level.round_number > 6 || self.score < 1500 && level.round_number > 6) {
     self.score = 1500;
+  }
 }
 
 _give_revive_points(save_struct) {
   if(isDefined(save_struct) && isDefined(save_struct.player_used) && save_struct.player_used == self) {
     foreach(player in get_players()) {
-      if(isDefined(player.score_lost_when_downed))
+      if(isDefined(player.score_lost_when_downed)) {
         self maps\mp\zombies\_zm_score::player_add_points("reviver", player.score_lost_when_downed);
+      }
     }
   }
 }
@@ -1019,15 +1099,17 @@ _give_revive_points(save_struct) {
 can_time_bomb_restore_data_on_player(save_struct) {
   b_can_restore_data_on_player = 0;
 
-  if(isDefined(save_struct))
+  if(isDefined(save_struct)) {
     b_can_restore_data_on_player = isDefined(save_struct.player_saves) && isDefined(save_struct.player_saves[self getentitynumber()]);
+  }
   else {
     b_global_save_exists = isDefined(level.time_bomb_save_data.n_time_id);
     b_player_save_exists = isDefined(self.time_bomb_save_data) && isDefined(self.time_bomb_save_data.n_time_id);
 
     if(b_global_save_exists && b_player_save_exists) {
-      if(level.time_bomb_save_data.n_time_id == self.time_bomb_save_data.n_time_id)
+      if(level.time_bomb_save_data.n_time_id == self.time_bomb_save_data.n_time_id) {
         b_can_restore_data_on_player = 1;
+      }
     }
   }
 
@@ -1047,16 +1129,18 @@ time_bomb_clears_player_data() {
   a_players = get_players();
 
   foreach(player in a_players) {
-    if(isDefined(player.time_bomb_save_data))
+    if(isDefined(player.time_bomb_save_data)) {
       player.time_bomb_save_data = undefined;
+    }
   }
 }
 
 timebomb_change_to_round(n_target_round) {
   debug_time_bomb_print("TIMEBOMB >> changing from round " + level.round_number + " to round " + n_target_round);
 
-  if(n_target_round < 1)
+  if(n_target_round < 1) {
     n_target_round = 1;
+  }
 
   level.time_bomb_round_change = 1;
   level.zombie_round_start_delay = 0;
@@ -1089,11 +1173,13 @@ _time_bomb_kill_all_active_enemies() {
     for(i = 0; i < zombies.size; i++) {
       timebomb_wait_for_hostmigration();
 
-      if(isDefined(zombies[i]))
+      if(isDefined(zombies[i])) {
         zombies[i] thread _kill_time_bomb_enemy();
+      }
 
-      if(i % 3 == 0)
+      if(i % 3 == 0) {
         wait_network_frame();
+      }
     }
   }
 
@@ -1105,24 +1191,28 @@ _kill_time_bomb_enemy() {
   self ghost();
   playFX(level._effect["time_bomb_kills_enemy"], self.origin);
 
-  if(isDefined(self) && isDefined(self.anchor))
+  if(isDefined(self) && isDefined(self.anchor)) {
     self.anchor delete();
+  }
 
   wait_network_frame();
 
   if(isDefined(self)) {
-    if(isDefined(self.script_mover))
+    if(isDefined(self.script_mover)) {
       self.script_mover delete();
+    }
 
     self delete();
   }
 }
 
 time_bomb_get_enemy_array() {
-  if(isDefined(level._time_bomb.custom_funcs_get_enemies))
+  if(isDefined(level._time_bomb.custom_funcs_get_enemies)) {
     a_enemies = [[level._time_bomb.custom_funcs_get_enemies]]();
-  else
+  }
+  else {
     a_enemies = get_round_enemy_array();
+  }
 
   return a_enemies;
 }
@@ -1170,8 +1260,9 @@ kill_overlay_at_match_end() {
   level endon("time_bomb_overlay_deactivated");
   level waittill("end_game");
 
-  if(flag("time_bomb_restore_active"))
+  if(flag("time_bomb_restore_active")) {
     wait 5;
+  }
 
   level thread _deactivate_lerp_thread();
 }
@@ -1191,19 +1282,22 @@ _disable_invulnerability() {
 }
 
 debug_time_bomb_print(str_text) {
-  if(getdvarint(#"_id_6F8A0CF1"))
+  if(getdvarint(#"_id_6F8A0CF1")) {
     iprintln(str_text);
+  }
 }
 
 time_bomb_spawn_func() {
   self endon("death");
   s_temp = level.time_bomb_save_data;
 
-  if(isDefined(level.timebomb_override_struct))
+  if(isDefined(level.timebomb_override_struct)) {
     s_temp = level.timebomb_override_struct;
+  }
 
-  if(!isDefined(s_temp.respawn_count))
+  if(!isDefined(s_temp.respawn_count)) {
     s_temp.respawn_count = 0;
+  }
 
   b_can_respawn_zombie = s_temp.enemies.size > s_temp.respawn_count;
 
@@ -1214,40 +1308,45 @@ time_bomb_spawn_func() {
     self thread _time_bomb_spawns_zombie();
   }
 
-  if(s_temp.enemies.size == s_temp.respawn_count)
+  if(s_temp.enemies.size == s_temp.respawn_count) {
     flag_set("time_bomb_zombie_respawning_done");
+  }
 
   return true;
 }
 
 time_bomb_enemy_respawn_failsafe() {
   while(!flag("time_bomb_zombie_respawning_done")) {
-    if(get_current_zombie_count() >= level.zombie_ai_limit || level.zombie_total == 0)
+    if(get_current_zombie_count() >= level.zombie_ai_limit || level.zombie_total == 0) {
       flag_set("time_bomb_zombie_respawning_done");
+    }
 
     wait 0.5;
   }
 }
 
 _time_bomb_spawns_zombie() {
-  if(isDefined(self.anchor))
+  if(isDefined(self.anchor)) {
     self.anchor delete();
+  }
 
   self maps\mp\zombies\_zm_spawner::do_zombie_spawn();
   self thread _zombies_go_back_into_ai_when_time_bomb_is_done();
 }
 
 _restore_zombie_data(s_info) {
-  if(isDefined(s_info.zombie_move_speed))
+  if(isDefined(s_info.zombie_move_speed)) {
     self.zombie_move_speed = s_info.zombie_move_speed;
+  }
 
   self.targetname = s_info.targetname;
   self.script_noteworthy = s_info.script_noteworthy;
   self.script_string = s_info.script_string;
   self.target = s_info.target;
 
-  if(isDefined(s_info.is_traversing) && s_info.is_traversing || isDefined(self.is_traversing) && self.is_traversing)
+  if(isDefined(s_info.is_traversing) && s_info.is_traversing || isDefined(self.is_traversing) && self.is_traversing) {
     self notify("killanimscript");
+  }
 
   self.is_traversing = 0;
   self.attacking_node = s_info.attacking_node;
@@ -1258,8 +1357,9 @@ _restore_zombie_data(s_info) {
   self.entrance_nodes = s_info.entrance_nodes;
   self.attacking_spot_string = s_info.attacking_spot_string;
 
-  if(!isDefined(s_info.completed_emerging_into_playable_area))
+  if(!isDefined(s_info.completed_emerging_into_playable_area)) {
     s_info.completed_emerging_into_playable_area = 0;
+  }
 
   self.completed_emerging_into_playable_area = s_info.completed_emerging_into_playable_area;
 
@@ -1269,27 +1369,31 @@ _restore_zombie_data(s_info) {
   if(isDefined(s_info.has_legs)) {
     self.has_legs = s_info.has_legs;
 
-    if(!(isDefined(self.has_legs) && self.has_legs))
+    if(!(isDefined(self.has_legs) && self.has_legs)) {
       self setphysparams(15, 0, 24);
+    }
   }
 
   self.a.gib_ref = s_info.gib_ref;
 
-  if(isDefined(self.has_legs) && !self.has_legs && isDefined(self.a.gib_ref))
+  if(isDefined(self.has_legs) && !self.has_legs && isDefined(self.a.gib_ref)) {
     self thread maps\mp\animscripts\zm_death::do_gib();
+  }
 
   if(isDefined(s_info.in_the_ground) && s_info.in_the_ground) {
     self maps\mp\zombies\_zm_spawner::zombie_eye_glow();
     self._rise_spot = s_info;
   }
 
-  if(isDefined(s_info.zombie_faller_location) && isDefined(s_info.spawn_point) && isDefined(s_info.spawn_point.script_noteworthy))
+  if(isDefined(s_info.zombie_faller_location) && isDefined(s_info.spawn_point) && isDefined(s_info.spawn_point.script_noteworthy)) {
     s_info.script_noteworthy = s_info.spawn_point.script_noteworthy;
+  }
 
   self.doing_equipment_attack = s_info.doing_equipment_attack;
 
-  if(isDefined(self.doing_equipment_attack) && self.doing_equipment_attack)
+  if(isDefined(self.doing_equipment_attack) && self.doing_equipment_attack) {
     self stopanimscripted();
+  }
 
   self.is_traversing = s_info.is_traversing;
   self.spawn_point = s_info.spawn_point;
@@ -1307,12 +1411,15 @@ _restore_zombie_data(s_info) {
 time_bomb_round_wait() {
   maps\mp\zombies\_zm::round_wait();
 
-  if(isDefined(level._time_bomb.restoring_initialized_round) && level._time_bomb.restoring_initialized_round && isDefined(level.time_bomb_save_data) && isDefined(level.time_bomb_save_data.round_initialized) && !level.time_bomb_save_data.round_initialized)
+  if(isDefined(level._time_bomb.restoring_initialized_round) && level._time_bomb.restoring_initialized_round && isDefined(level.time_bomb_save_data) && isDefined(level.time_bomb_save_data.round_initialized) && !level.time_bomb_save_data.round_initialized) {
     level.round_number--;
-  else if(isDefined(level._time_bomb.changing_round) && !level._time_bomb.changing_round && !level.time_bomb_save_data.round_initialized && level._time_bomb.round_initialized)
+  }
+  else if(isDefined(level._time_bomb.changing_round) && !level._time_bomb.changing_round && !level.time_bomb_save_data.round_initialized && level._time_bomb.round_initialized) {
     level.round_number--;
-  else if(isDefined(level._time_bomb.changing_round) && level._time_bomb.changing_round && !level._time_bomb.round_initialized)
+  }
+  else if(isDefined(level._time_bomb.changing_round) && level._time_bomb.changing_round && !level._time_bomb.round_initialized) {
     level.round_number--;
+  }
 
   level._time_bomb.changing_round = undefined;
   level._time_bomb.restoring_initialized_round = undefined;
@@ -1347,27 +1454,32 @@ _zombies_go_back_into_ai_when_time_bomb_is_done() {
     str_notify_message = undefined;
 
     if(isDefined(str_restore_state)) {
-      if(str_restore_state == "find_flesh")
+      if(str_restore_state == "find_flesh") {
         str_notify_message = self _handle_find_flesh(s_temp);
-      else if(str_restore_state == "zombie_goto_entrance")
+      }
+      else if(str_restore_state == "zombie_goto_entrance") {
         str_notify_message = self _send_zombie_to_barricade();
+      }
       else if(str_restore_state == "zombie_think" || str_restore_state == "idle") {
         if(isDefined(self.in_the_ground) && self.in_the_ground) {
           self waittill("risen");
           str_notify_message = self _handle_find_flesh(s_temp);
         } else if(isDefined(self.completed_emerging_into_playable_area)) {
-          if(self.completed_emerging_into_playable_area)
+          if(self.completed_emerging_into_playable_area) {
             str_notify_message = self _handle_find_flesh(s_temp);
-          else
+          }
+          else {
             str_notify_message = self _send_zombie_to_barricade();
+          }
         }
       }
     }
 
     self notify("zombie_custom_think_done", str_notify_message);
 
-    if(!isDefined(str_notify_message))
+    if(!isDefined(str_notify_message)) {
       str_notify_message = "<undefined>";
+    }
 
     self zombie_history("time bomb -> zombie restored with string = " + str_notify_message);
   }
@@ -1384,16 +1496,19 @@ _handle_find_flesh(s_temp) {
 }
 
 _send_zombie_to_barricade() {
-  if(isDefined(self.time_bomb_restored_data.entrance_nodes) && self.time_bomb_restored_data.entrance_nodes.size > 0)
+  if(isDefined(self.time_bomb_restored_data.entrance_nodes) && self.time_bomb_restored_data.entrance_nodes.size > 0) {
     a_entrance_nodes = self.time_bomb_restored_data.entrance_nodes;
-  else
+  }
+  else {
     a_entrance_nodes = level.exterior_goals;
+  }
 
   nd_closest = getclosest(self.origin, a_entrance_nodes);
   str_notify_message = nd_closest.script_string;
 
-  if(isDefined(self.time_bomb_restored_data.traversing_over_barrier_into_playspace) && self.time_bomb_restored_data.traversing_over_barrier_into_playspace)
+  if(isDefined(self.time_bomb_restored_data.traversing_over_barrier_into_playspace) && self.time_bomb_restored_data.traversing_over_barrier_into_playspace) {
     self thread _barrier_jump_failsafe();
+  }
 
   return str_notify_message;
 }
@@ -1412,8 +1527,9 @@ _barrier_jump_failsafe() {
 time_bomb_custom_round_change() {
   level thread _monitor_zombie_total_init();
 
-  if(is_time_bomb_round_change())
+  if(is_time_bomb_round_change()) {
     level.time_bomb_restored_into_current_round = 1;
+  }
   else {
     level thread maps\mp\zombies\_zm_audio::change_zombie_music("round_start");
     round_one_up();
@@ -1441,8 +1557,9 @@ time_bomb_overlay_lerp_thread() {
   for(i = 0; i < n_frames; i++) {
     a_players = get_players();
 
-    for(j = 0; j < a_players.size; j++)
+    for(j = 0; j < a_players.size; j++) {
       self maps\mp\_visionset_mgr::vsmgr_set_state_active(a_players[j], clamp(i * n_change_per_frame, 0, 1));
+    }
 
     wait 0.05;
   }
@@ -1452,8 +1569,9 @@ time_bomb_overlay_lerp_thread() {
   for(i = 0; i < n_frames; i++) {
     a_players = get_players();
 
-    for(j = 0; j < a_players.size; j++)
+    for(j = 0; j < a_players.size; j++) {
       self maps\mp\_visionset_mgr::vsmgr_set_state_active(a_players[j], clamp(1 - i * n_change_per_frame, 0, 1));
+    }
 
     wait 0.05;
   }
@@ -1464,8 +1582,9 @@ time_bomb_overlay_lerp_thread() {
 _deactivate_lerp_thread() {
   a_players = get_players();
 
-  for(i = 0; i < a_players.size; i++)
+  for(i = 0; i < a_players.size; i++) {
     maps\mp\_visionset_mgr::deactivate_per_player("overlay", "zombie_time_bomb_overlay", a_players[i]);
+  }
 
   level notify("time_bomb_overlay_deactivated");
 }
@@ -1486,8 +1605,9 @@ is_zombie_round() {
 time_bomb_respawns_zombies(save_struct) {
   s_temp = save_struct;
 
-  if(save_struct.round_number != level.round_number)
+  if(save_struct.round_number != level.round_number) {
     flag_wait("time_bomb_round_killed");
+  }
 
   flag_clear("time_bomb_zombie_respawning_done");
   n_time_start = gettime();
@@ -1497,8 +1617,9 @@ time_bomb_respawns_zombies(save_struct) {
   level.zombie_custom_think_logic = ::time_bomb_spawn_func;
   level thread time_bomb_enemy_respawn_failsafe();
 
-  if(level.zombie_total == 0)
+  if(level.zombie_total == 0) {
     flag_set("time_bomb_zombie_respawning_done");
+  }
 
   flag_set("spawn_zombies");
   flag_wait("time_bomb_zombie_respawning_done");
@@ -1516,16 +1637,18 @@ time_bomb_saves_zombie_data(s_data) {
   s_data.targetname = self.targetname;
   s_data.script_noteworthy = self.script_noteworthy;
 
-  if(!isDefined(s_data.script_noteworthy))
+  if(!isDefined(s_data.script_noteworthy)) {
     s_data.script_noteworthy = "spawn_location";
+  }
 
   s_data.spawn_point = self.spawn_point;
   s_data.is_traversing = self.is_traversing;
   s_data.traversestartnode = self.traversestartnode;
 
   if(isDefined(s_data.is_traversing) && s_data.is_traversing) {
-    if(isDefined(self.traversestartnode) && isDefined(self.traversestartnode.origin))
+    if(isDefined(self.traversestartnode) && isDefined(self.traversestartnode.origin)) {
       s_data.origin = self.traversestartnode.origin;
+    }
   }
 
   if(self _is_traversing_over_barrier_from_outside_playable_space()) {
@@ -1540,8 +1663,9 @@ time_bomb_saves_zombie_data(s_data) {
   s_data.attacking_spot = self.attacking_spot;
   s_data.attacking_spot_index = self.attacking_spot_index;
 
-  if(isDefined(s_data.attacking_node))
+  if(isDefined(s_data.attacking_node)) {
     s_data.attacking_spot_string = self.attacking_node.script_string;
+  }
 
   s_data.entrance_nodes = self.entrance_nodes;
   s_data.completed_emerging_into_playable_area = self.completed_emerging_into_playable_area;
@@ -1573,14 +1697,16 @@ _get_time_bomb_round_type() {
       a_round_type[a_round_type.size] = a_keys[i];
   }
 
-  if(a_round_type.size == 0)
+  if(a_round_type.size == 0) {
     a_round_type[0] = level._time_bomb.enemy_type_default;
+  }
 
   if(a_round_type.size > 1) {
     str_types = "";
 
-    for(i = 0; i < a_round_type.size; i++)
+    for(i = 0; i < a_round_type.size; i++) {
       str_types = str_types + " " + a_round_type;
+    }
 
     assertmsg("_get_time_bomb_round_type conditions passed multiple times for the following types: " + str_types);
 
@@ -1596,8 +1722,9 @@ is_spectator() {
 
 _time_bomb_resets_all_barrier_attack_spots_taken() {
   foreach(barrier in level.exterior_goals) {
-    for(i = 0; i < barrier.attack_spots_taken.size; i++)
+    for(i = 0; i < barrier.attack_spots_taken.size; i++) {
       barrier.attack_spots_taken[i] = 0;
+    }
   }
 }
 
@@ -1611,8 +1738,9 @@ show_time_bomb_hints() {
   self endon("death_or_disconnect");
   self endon("player_lost_time_bomb");
 
-  if(!isDefined(self.time_bomb_hints_shown))
+  if(!isDefined(self.time_bomb_hints_shown)) {
     self.time_bomb_hints_shown = 0;
+  }
 
   if(!self.time_bomb_hints_shown) {
     self.time_bomb_hints_shown = 1;
@@ -1622,8 +1750,9 @@ show_time_bomb_hints() {
     self waittill_notify_or_timeout("player_holding_time_bomb", 3.5);
     self clean_up_time_bomb_notifications();
 
-    if(!isDefined(self.time_bomb_held))
+    if(!isDefined(self.time_bomb_held)) {
       self waittill("player_holding_time_bomb");
+    }
 
     wait 0.5;
     self show_time_bomb_notification(&"ZOMBIE_TIMEBOMB_HOWTO");
@@ -1702,8 +1831,9 @@ set_actor_traverse_callbacks() {
       actors[i] setentityanimrate(qrate);
     }
 
-    if(isDefined(level.time_bomb_custom_actor_speedup_func))
+    if(isDefined(level.time_bomb_custom_actor_speedup_func)) {
       actors[i][
+    }
         [level.time_bomb_custom_actor_speedup_func]
       ]();
   }
@@ -1716,11 +1846,13 @@ restore_actor_traverse_callbacks() {
     actors[i].pre_traverse = undefined;
     actors[i].post_traverse = undefined;
 
-    if(isDefined(actors[i].pre_traverse_old))
+    if(isDefined(actors[i].pre_traverse_old)) {
       actors[i].pre_traverse = actors[i].pre_traverse_old;
+    }
 
-    if(isDefined(actors[i].post_traverse_old))
+    if(isDefined(actors[i].post_traverse_old)) {
       actors[i].post_traverse = actors[i].post_traverse_old;
+    }
   }
 }
 
@@ -1733,8 +1865,9 @@ time_bomb_post_traverse() {
 }
 
 set_actor_anim_rate(rate, b_force_update) {
-  if(!isDefined(b_force_update))
+  if(!isDefined(b_force_update)) {
     b_force_update = 0;
+  }
 
   self endon("death");
   level endon("time_bomb_stop_slow_all_actors");
@@ -1743,8 +1876,9 @@ set_actor_anim_rate(rate, b_force_update) {
     if(isDefined(self.in_the_ground) && self.in_the_ground || self isinscriptedstate() || isDefined(self.do_not_set_anim_rate) && self.do_not_set_anim_rate) {
       return;
     }
-    if(isDefined(self.is_about_to_traverse) || isDefined(self.ignore_timebomb_slowdown) && self.ignore_timebomb_slowdown)
+    if(isDefined(self.is_about_to_traverse) || isDefined(self.ignore_timebomb_slowdown) && self.ignore_timebomb_slowdown) {
       rate = 1.0;
+    }
   }
 
   self setclientfield("anim_rate", rate);
@@ -1759,15 +1893,17 @@ set_actor_anim_rate(rate, b_force_update) {
 set_all_actor_anim_rate(rate, b_force) {
   actors = getaispeciesarray("all", "all");
 
-  for(i = 0; i < actors.size; i++)
+  for(i = 0; i < actors.size; i++) {
     actors[i] thread set_actor_anim_rate(rate, b_force);
+  }
 }
 
 cleanup_actor_anim_flags() {
   actors = getaispeciesarray("all", "all");
 
-  for(i = 0; i < actors.size; i++)
+  for(i = 0; i < actors.size; i++) {
     actors[i].preserve_asd_substates = 0;
+  }
 }
 
 white_screen_flash() {
@@ -1813,8 +1949,9 @@ swap_weapon_to_detonator(e_grenade) {
   self setweaponammostock("time_bomb_detonator_zm", 0);
   self setactionslot(2, "weapon", "time_bomb_detonator_zm");
 
-  if(b_switch_to_weapon)
+  if(b_switch_to_weapon) {
     self switchtoweapon("time_bomb_detonator_zm");
+  }
 
   self giveweapon("time_bomb_zm");
 }
@@ -1838,8 +1975,9 @@ _test_mode_loop() {
   level endon("time_bomb_test_mode_end");
   player = get_players()[0];
 
-  if(!player hasweapon("time_bomb_zm"))
+  if(!player hasweapon("time_bomb_zm")) {
     player player_give_time_bomb();
+  }
 
   while(true) {
     time_bomb_saves_data();

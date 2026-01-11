@@ -133,16 +133,18 @@ disable_friendly_deadlyness() {
   var_0 = getaiarray("allies");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isDefined(var_0[var_1].normal_baseaccuracy))
+    if(isDefined(var_0[var_1].normal_baseaccuracy)) {
       var_0[var_1].baseaccuracy = var_0[var_1].normal_baseaccuracy;
+    }
   }
 }
 
 stop_make_friendies_ignored() {
   var_0 = getaiarray("allies");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1].ignoreme = 0;
+  }
 }
 
 friendlies_fighting_nodes() {
@@ -164,8 +166,9 @@ truck_setup() {
   common_scripts\utility::flag_set("truck arived");
   common_scripts\utility::flag_wait("price_basement_door_anim_complete");
 
-  if(var_0.health > 0)
+  if(var_0.health > 0) {
     var_0 maps\_vehicle::vehicle_lights_off("all");
+  }
 }
 
 truck_guys_think() {
@@ -185,8 +188,9 @@ ignore_truck_guys_till_truck_stopped() {
 music_tension_loop(var_0, var_1, var_2, var_3) {
   level endon(var_0);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   musicstop(3);
   wait 3.1;
@@ -226,8 +230,9 @@ attach_flashlight(var_0, var_1) {
   if(isDefined(self.have_flashlight)) {
     return;
   }
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(randomfloatrange(0, 5));
+  }
 
   self attach("com_flashlight_on", "tag_inhand", 1);
   self.have_flashlight = 1;
@@ -238,8 +243,9 @@ attach_flashlight(var_0, var_1) {
 dropflashlightondeath() {
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     detach_flashlight();
+  }
 }
 
 detach_flashlight_onspotted() {
@@ -287,8 +293,9 @@ min_spec_kill_fx() {
   var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("cloud_bank_a"));
   var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("cloud_bank_far"));
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] common_scripts\utility::pauseeffect();
+  }
 }
 
 whitein() {
@@ -317,22 +324,25 @@ fadewhiteout(var_0, var_1, var_2) {
 make_friendies_cqb() {
   var_0 = getaiarray("allies");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] maps\_utility::enable_cqbwalk();
+  }
 }
 
 make_friendies_not_cqb() {
   var_0 = getaiarray("allies");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] maps\_utility::disable_cqbwalk();
+  }
 }
 
 make_friendies_pushplayer(var_0) {
   var_1 = getaiarray("allies");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_1[var_2] pushplayer(var_0);
+  }
 }
 
 make_friendies_deadly() {
@@ -351,8 +361,9 @@ opforce_more_accurate() {
 all_friendlies_turn_blue() {
   var_0 = getaiarray("allies");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] maps\_utility::set_force_color("b");
+  }
 }
 
 clip_nosight_logic() {
@@ -439,8 +450,9 @@ prone_till_flag(var_0) {
 make_friendies_ignored() {
   var_0 = getaiarray("allies");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1].ignoreme = 1;
+  }
 }
 
 turn_off_flashlights() {
@@ -471,8 +483,9 @@ notify_at_range(var_0, var_1, var_2) {
   self endon("death");
   var_0 endon("death");
 
-  while(distance(var_0.origin, self.origin) > var_1)
+  while(distance(var_0.origin, self.origin) > var_1) {
     wait 1;
+  }
 
   level notify(var_2);
 }
@@ -557,8 +570,9 @@ friendly_think() {
   thread maps\_utility::replace_on_death();
   level.friendlies[level.friendlies.size] = self;
 
-  if(self.spawner.targetname == "chute_start_spawners")
+  if(self.spawner.targetname == "chute_start_spawners") {
     level.soldier = self;
+  }
 }
 
 respawned_friendly_think() {
@@ -571,8 +585,9 @@ kill_during_breach1(var_0, var_1) {
   var_2 = getaiarray("axis");
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(var_2[var_3].script_noteworthy == "interogation_buddy")
+    if(var_2[var_3].script_noteworthy == "interogation_buddy") {
       var_2[var_3] kill();
+    }
   }
 }
 
@@ -583,8 +598,9 @@ kill_during_breach2(var_0, var_1) {
     if(var_2[var_3].script_noteworthy == "interogation_speaker") {
       var_4 = level.price;
 
-      if(distancesquared(level.price.origin, var_2[var_3].origin) > distancesquared(level.gaz.origin, var_2[var_3].origin))
+      if(distancesquared(level.price.origin, var_2[var_3].origin) > distancesquared(level.gaz.origin, var_2[var_3].origin)) {
         var_4 = level.gaz;
+      }
 
       magicbullet(var_4.weapon, var_4 gettagorigin("tag_flash"), var_2[var_3] gettagorigin("tag_eye"));
       var_2[var_3] kill();
@@ -622,8 +638,9 @@ sound_fade_then_delete() {
   var_0 maps\_vehicle::volume_down(2);
   wait 2;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 start_interogation() {
@@ -659,15 +676,17 @@ knife_kill_setup() {
   createthreatbiasgroup("victims");
   setignoremegroup("icbm_friendlies", "victims");
 
-  if(!common_scripts\utility::flag("_stealth_spotted"))
+  if(!common_scripts\utility::flag("_stealth_spotted")) {
     var_1 maps\_utility::add_spawn_function(::ai_hostile_think);
+  }
 
   var_1 maps\_utility::add_spawn_function(maps\_stealth_logic::stealth_ai);
   var_1 maps\_utility::add_spawn_function(::set_threatbias_group, "victims");
   var_2 = var_1 maps\_utility::spawn_ai();
 
-  if(!common_scripts\utility::flag("knife_sequence_done"))
+  if(!common_scripts\utility::flag("knife_sequence_done")) {
     var_2 thread ai_hostile_knife_kill_think();
+  }
 
   var_2 waittill("death");
   level.price maps\_utility::enable_ai_color();
@@ -780,11 +799,13 @@ beehive_attack() {
 }
 
 open_door(var_0, var_1, var_2) {
-  while(distance(level.player.origin, var_0.origin) < 160)
+  while(distance(level.player.origin, var_0.origin) < 160) {
     wait 0.1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     common_scripts\utility::array_thread(var_2, maps\_utility::spawn_ai);
+  }
 
   var_0 rotateto(var_0.angles + (0, var_1, 0), 0.5, 0, 0);
   var_0 connectpaths();
@@ -857,19 +878,22 @@ price_opens_door(var_0, var_1, var_2) {
   var_0 notify("stop_idle");
   var_0 thread maps\_anim::anim_single_solo(level.price, "hunted_open_barndoor");
 
-  if(var_1.targetname == "house01_front_door")
+  if(var_1.targetname == "house01_front_door") {
     soundscripts\_snd::snd_message("aud_open_fisrt_door");
+  }
 
   var_3 = getEntArray(var_1.target, "targetname");
 
-  for(var_4 = 0; var_4 < var_3.size; var_4++)
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
     var_3[var_4] linkto(var_1);
+  }
 
   var_1 maps\_utility::hunted_style_door_open();
   common_scripts\utility::flag_clear("price_ready");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     common_scripts\utility::flag_set(var_2);
+  }
 }
 
 base_lights() {
@@ -886,13 +910,15 @@ base_fx_on() {
   var_1 = 0.05;
   var_2 = 1.5;
 
-  for(var_3 = 0; var_3 < var_0.size; var_3++)
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_0[var_3] thread base_fx_light(randomfloatrange(var_1, var_2));
+  }
 
   common_scripts\utility::flag_wait("lights_on");
 
-  for(var_3 = 0; var_3 < var_0.size; var_3++)
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_0[var_3] thread base_fx_light(randomfloatrange(var_1, var_2));
+  }
 }
 
 base_fx_light(var_0) {
@@ -988,16 +1014,18 @@ tower_collapse() {
   var_6.origin = var_0.origin;
   var_6.angles = var_0.angles + (0, -90, 0);
 
-  for(var_4 = 0; var_4 < var_1; var_4++)
+  for(var_4 = 0; var_4 < var_1; var_4++) {
     var_6 thread maps\_anim::anim_loop_solo(var_3[var_4], "idle" + var_4, undefined, "stop_idle");
+  }
 
   common_scripts\utility::flag_wait("tower_destroyed");
   var_6 notify("stop_idle");
   var_0 setModel("com_powerline_tower_destroyed");
   var_6 thread maps\_anim::anim_single_solo(var_0, "explosion");
 
-  for(var_4 = 0; var_4 < var_1; var_4++)
+  for(var_4 = 0; var_4 < var_1; var_4++) {
     var_6 thread maps\_anim::anim_single_solo(var_3[var_4], "explosion" + var_4);
+  }
 
   radiusdamage(var_0.origin + (0, 0, 96), level.towerblastradius, 1000, 50);
 }
@@ -1035,15 +1063,18 @@ spraycan_fx_stop(var_0) {
 playsoundinspace(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", (0, 0, 1));
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.origin;
+  }
 
   var_3.origin = var_1;
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     var_3 playsoundasmaster(var_0);
-  else
+  }
+  else {
     var_3 playSound(var_0);
+  }
 
   wait 10.0;
   var_3 delete();
@@ -1055,8 +1086,9 @@ tower_interface() {
   while(!common_scripts\utility::flag("tower_destroyed")) {
     var_0 = level.player getcurrentweapon();
 
-    if(var_0 != "c4")
+    if(var_0 != "c4") {
       level.player switchtoweapon("c4");
+    }
 
     wait 0.5;
   }
@@ -1069,8 +1101,9 @@ set_threatbias_group(var_0) {
 kill_enemies() {
   var_0 = getaiarray("axis");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] kill();
+  }
 }
 
 anim_reach_and_approach_solo_set_flag(var_0, var_1, var_2) {
@@ -1131,10 +1164,12 @@ woods_animation_wrapper(var_0) {
   self endon("death");
   self endon("pain_death");
 
-  if(!isDefined(level.woods_pause))
+  if(!isDefined(level.woods_pause)) {
     level.woods_pause = 0;
-  else
+  }
+  else {
     level.woods_pause = level.woods_pause + 0.2;
+  }
 
   wait(level.woods_pause);
   self notify("drop_light");
@@ -1168,7 +1203,8 @@ remove_vehicle_delete_trigger(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2].classname == "trigger_multiple")
+    if(var_1[var_2].classname == "trigger_multiple") {
       var_1[var_2] delete();
+    }
   }
 }

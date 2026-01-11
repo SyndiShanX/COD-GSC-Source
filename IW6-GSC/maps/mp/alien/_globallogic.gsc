@@ -39,8 +39,9 @@ init() {
 
   level.tiSpawnDelay = getDvarInt("scr_tispawndelay");
 
-  if(!isDefined(level.tweakablesInitialized))
+  if(!isDefined(level.tweakablesInitialized)) {
     maps\mp\gametypes\_tweakables::init();
+  }
 
   level.halftimeType = "halftime";
   level.halftimeSubCaption = &"MP_SWITCHING_SIDES";
@@ -61,24 +62,30 @@ init() {
   registerDvars();
 
   mapLeaderboard = " LB_" + getdvar("ui_mapname");
-  if(GetDvarInt("scr_chaos_mode") == 1)
+  if(GetDvarInt("scr_chaos_mode") == 1) {
     mapLeaderboard += "_CHAOS";
-  if(getDvarInt("sv_maxclients") == 1)
+  }
+  if(getDvarInt("sv_maxclients") == 1) {
     mapLeaderboard += "_SOLO";
-  else
+  }
+  else {
     mapLeaderboard += "_COOP";
+  }
 
   mapEscapesLeaderboard = " LB_" + getdvar("ui_mapname") + "_ESCAPES";
 
-  if(getDvarInt("scr_aliens_hardcore"))
+  if(getDvarInt("scr_aliens_hardcore")) {
     mapLeaderboard += "_HC";
+  }
 
   if(GetDvarInt("scr_chaos_mode") == 1) {
     globalLeaderboard = "LB_GB_ALIEN_CHAOS";
-    if(getDvarInt("sv_maxclients") == 1)
+    if(getDvarInt("sv_maxclients") == 1) {
       globalLeaderboard += "_SOLO";
-    else
+    }
+    else {
       globalLeaderboard += "_COOP";
+    }
     precacheLeaderboards(globalLeaderboard + mapLeaderboard);
   } else
     precacheLeaderboards("LB_GB_ALIEN_HIVES LB_GB_ALIEN_KILLS LB_GB_ALIEN_REVIVES LB_GB_ALIEN_DOWNED LB_GB_ALIEN_XP LB_GB_ALIEN_SCORE LB_GB_ALIEN_CHALLENGES LB_GB_ALIEN_CASHFLOW" + mapLeaderboard + mapEscapesLeaderboard);
@@ -177,8 +184,9 @@ xpRateThread() {
 
   for(;;) {
     wait(5.0);
-    if(level.players[0].pers["team"] == "allies" || level.players[0].pers["team"] == "axis")
+    if(level.players[0].pers["team"] == "allies" || level.players[0].pers["team"] == "axis") {
       self maps\mp\gametypes\_rank::giveRankXP("kill", int(min(getDvarInt("scr_xprate"), 50)));
+    }
   }
 }
 

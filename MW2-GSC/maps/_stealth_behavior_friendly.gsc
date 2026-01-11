@@ -46,10 +46,12 @@ friendly_state_spotted() {
 
   self thread set_battlechatter(true);
 
-  if(isDefined(self._stealth.behavior.oldgrenadeammo))
+  if(isDefined(self._stealth.behavior.oldgrenadeammo)) {
     self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
-  else
+  }
+  else {
     self.grenadeammo = 3;
+  }
   //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also
   //after stealth groups were created we want to differentiate between who should be shot at and who shouldn't
   //so we don't all of a sudden alert another stealth group by shooting at them	
@@ -71,14 +73,16 @@ friendly_state_spotted() {
 friendly_spotted_getup_from_prone(angles) {
   self endon("death");
 
-  if(self._stealth.logic.stance != "prone")
+  if(self._stealth.logic.stance != "prone") {
     return;
+  }
 
   self ent_flag_set("_stealth_custom_anim");
   anime = "_stealth_prone_2_run_roll";
 
-  if(isDefined(angles))
+  if(isDefined(angles)) {
     self orientMode("face angle", angles[1] + 20);
+  }
   // self thread friendly_spotted_getup_from_prone_rotate( angles, anime );
 
   self thread anim_generic_custom_animmode(self, "gravity", anime);
@@ -112,8 +116,9 @@ friendly_init() {
 }
 
 friendly_custom_state_behavior(array) {
-  foreach(key, func in array)
+  foreach(key, func in array) {
   self ai_create_behavior_function("state", key, func);
+  }
 
   function = self._stealth.behavior.ai_functions["state"]["hidden"];
   self thread ai_message_handler_hidden(function, "friendly_behavior");

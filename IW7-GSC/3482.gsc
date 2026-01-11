@@ -69,8 +69,9 @@ tryuseescortairdrop(var_00, var_01) {
     return 0;
   }
 
-  if(scripts\mp\utility\game::iskillstreakdenied())
+  if(scripts\mp\utility\game::iskillstreakdenied()) {
     return 0;
+  }
 
   scripts\mp\utility\game::incrementfauxvehiclecount();
   return 1;
@@ -155,8 +156,9 @@ func_F1AD(var_00, var_01, var_02, var_03, var_04) {
   var_05 = undefined;
   var_06 = level.mapsize / 6.46875;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     var_06 = var_06 * 1.5;
+  }
 
   scripts\mp\utility\game::_beginlocationselection(var_01, "map_artillery_selector", 0, 500);
   thread func_11089();
@@ -166,8 +168,9 @@ func_F1AD(var_00, var_01, var_02, var_03, var_04) {
   var_09 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_01);
 
   if(var_09 != "success") {
-    if(var_09 != "disconnect")
+    if(var_09 != "disconnect") {
       scripts\mp\utility\game::clearusingremote();
+    }
 
     return 0;
   }
@@ -213,15 +216,17 @@ func_1012E(var_00, var_01, var_02, var_03) {
   scripts\engine\utility::waittill_any("cancel_location", "picked_location", "stop_location_selection");
   var_04 scripts\mp\hud_util::destroyelem();
 
-  for(var_05 = 0; var_05 < var_03; var_5++)
+  for(var_05 = 0; var_05 < var_03; var_5++) {
     scripts\mp\objidpoolmanager::returnminimapid(self.locationobjectives[var_05]);
+  }
 }
 
 func_4983(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 = spawnhelicopter(var_00, var_02, var_03, level.func_C73F[var_05].vehicle, level.func_C73F[var_05].modelbase);
 
-  if(!isDefined(var_06))
+  if(!isDefined(var_06)) {
     return undefined;
+  }
 
   var_6.func_C740 = var_05;
   var_6.func_8DA0 = level.func_C73F[var_05].modelbase;
@@ -347,8 +352,9 @@ func_E4F8(var_00, var_01) {
   scripts\mp\utility\game::_giveweapon("heli_remote_mp");
   scripts\mp\utility\game::_switchtoweapon("heli_remote_mp");
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(0);
+  }
 
   var_01 _meth_83ED(self);
   self getwholescenedurationmax(var_01, "tag_player", 1.0, 0, 0, 0, 0, 1);
@@ -388,8 +394,9 @@ func_1011E(var_00) {
   self.func_6741 give_zap_perk(level.func_C73F[var_0.func_C740].func_DA71);
   wait 6;
 
-  if(isDefined(self.func_6741))
+  if(isDefined(self.func_6741)) {
     self.func_6741 scripts\mp\hud_util::destroyelem();
+  }
 }
 
 func_1AEE() {
@@ -457,12 +464,15 @@ func_7DFC(var_00) {
   self endon("heightReturned");
   var_01 = getent("airstrikeheight", "targetname");
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_02 = var_1.origin[2];
-  else if(isDefined(level.airstrikeheightscale))
+  }
+  else if(isDefined(level.airstrikeheightscale)) {
     var_02 = 850 * level.airstrikeheightscale;
-  else
+  }
+  else {
     var_02 = 850;
+  }
 
   self.func_2A95 = var_02;
   var_03 = 200;
@@ -513,8 +523,9 @@ func_7DFC(var_00) {
 
     var_09 = bulletTrace(var_00 + (var_04, var_05, 1000), var_00 + (var_04, var_05, -10000), 1, self);
 
-    if(var_9["position"][2] > var_03)
+    if(var_9["position"][2] > var_03) {
       var_03 = var_9["position"][2];
+    }
   }
 
   self.func_2A95 = var_03 + 300;
@@ -529,15 +540,18 @@ func_7DFC(var_00) {
       var_12 = var_10[0];
 
       foreach(var_14 in var_10) {
-        if(var_14.origin[2] < var_11.origin[2])
+        if(var_14.origin[2] < var_11.origin[2]) {
           var_11 = var_14;
+        }
 
-        if(var_14.origin[2] > var_12.origin[2])
+        if(var_14.origin[2] > var_12.origin[2]) {
           var_12 = var_14;
+        }
       }
 
-      if(var_03 < var_11.origin[2] - 100)
+      if(var_03 < var_11.origin[2] - 100) {
         self.func_2A95 = var_12.origin[2] + 900;
+      }
 
       break;
   }
@@ -577,8 +591,9 @@ func_1AE6(var_00, var_01, var_02, var_03, var_04, var_05) {
   func_C73E(1, level.func_C73F[self.func_C740].func_113F0, var_12);
   thread func_A663(var_05);
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 scripts\engine\utility::waittill_any_timeout(self.timeout, "disconnect");
+  }
 
   self waittill("leaving");
   self notify("osprey_leaving");
@@ -671,8 +686,9 @@ func_136B2() {
   self endon("target_killed");
   self endon("abandon_target");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 func_1AE7(var_00, var_01, var_02, var_03, var_04) {
@@ -708,8 +724,9 @@ func_1AE7(var_00, var_01, var_02, var_03, var_04) {
   func_C73D(1, level.func_C73F[self.func_C740].func_113F0, var_11);
   var_12 = 1.0;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 scripts\engine\utility::waittill_any_timeout(var_12, "disconnect");
+  }
 
   self.timeout = self.timeout - var_12;
   self setvehgoalpos(var_02, 1);
@@ -720,10 +737,12 @@ func_1AE7(var_00, var_01, var_02, var_03, var_04) {
   var_13 = getEntArray("heli_attack_area", "targetname");
   var_14 = level.heli_loop_nodes[randomint(level.heli_loop_nodes.size)];
 
-  if(var_13.size)
+  if(var_13.size) {
     thread scripts\mp\killstreaks\helicopter::func_8D55(var_13);
-  else
+  }
+  else {
     thread scripts\mp\killstreaks\helicopter::heli_fly_loop_path(var_14);
+  }
 
   self waittill("leaving");
   thread func_1AED();
@@ -780,8 +799,9 @@ func_C73D(var_00, var_01, var_02) {
 }
 
 func_6380(var_00) {
-  if(isDefined(self.func_6741))
+  if(isDefined(self.func_6741)) {
     self.func_6741 scripts\mp\hud_util::destroyelem();
+  }
 
   self _meth_8258();
   self thermalvisionoff();
@@ -789,13 +809,15 @@ func_6380(var_00) {
   self unlink();
   scripts\mp\utility\game::clearusingremote();
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(1);
+  }
 
   self visionsetthermalforplayer(game["thermal_vision"], 0);
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 _meth_83EC(self);
+  }
 
   self notify("heliPlayer_removed");
   scripts\mp\utility\game::_switchtoweapon(scripts\engine\utility::getlastweapon());

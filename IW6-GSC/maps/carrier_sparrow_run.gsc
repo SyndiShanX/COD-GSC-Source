@@ -201,8 +201,9 @@ knockback_player() {
   level.player enableweapons();
   common_scripts\utility::waitframe();
 
-  if(level.player getcurrentweaponclipammo() < 10)
+  if(level.player getcurrentweaponclipammo() < 10) {
     level.player setweaponammoclip(level.player getcurrentweapon(), weaponclipsize(level.player getcurrentweapon()));
+  }
 
   var_2 waittillmatch("single anim", "slowmo");
   level.player lerpviewangleclamp(0.5, 0.5, 0, 35, 35, 30, 10);
@@ -306,8 +307,9 @@ sparrow_run_enemies() {
   common_scripts\utility::flag_wait("sparrow_run_slowmo_end");
 
   foreach(var_4 in level.sparrow_run_enemies) {
-    if(isalive(var_4))
+    if(isalive(var_4)) {
       var_4 stopanimscripted();
+    }
   }
 
   wait 5;
@@ -365,8 +367,9 @@ execute_save(var_0) {
     level.slowmo_ally pushplayer(1);
     common_scripts\utility::flag_wait("sparrow_hud_black");
 
-    if(isalive(level.slowmo_ally))
+    if(isalive(level.slowmo_ally)) {
       level.slowmo_ally delete();
+    }
   }
 }
 
@@ -388,11 +391,13 @@ sparrow_run_enemy_logic(var_0, var_1, var_2, var_3) {
   self.allowdeath = 1;
   self.accuracy = 0.1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.health = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4 = common_scripts\utility::getstruct(var_1, "targetname");
+  }
   else {
     var_4 = spawnStruct();
     var_4.origin = self.origin;
@@ -403,8 +408,9 @@ sparrow_run_enemy_logic(var_0, var_1, var_2, var_3) {
   var_4 maps\_anim::anim_generic_first_frame(self, var_2);
   common_scripts\utility::flag_wait("sparrow_run_slowmo");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     wait(var_3);
+  }
 
   self animmode("gravity");
   var_4 thread maps\_anim::anim_generic(self, var_2);
@@ -417,11 +423,13 @@ sparrow_run_enemy_03_logic(var_0, var_1, var_2) {
   self.allowdeath = 1;
   self.accuracy = 0.0001;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.health = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+  }
   else {
     var_3 = spawnStruct();
     var_3.origin = self.origin;
@@ -526,8 +534,9 @@ run_background_sparrow_vehicles() {
 monitor_sparrow_lookat() {
   var_0 = getent("sparrow_background_look", "targetname");
 
-  while(!level.player worldpointinreticle_circle(var_0.origin, 65, 250))
+  while(!level.player worldpointinreticle_circle(var_0.origin, 65, 250)) {
     common_scripts\utility::waitframe();
+  }
 
   self notify("looking_away");
 }
@@ -535,8 +544,9 @@ monitor_sparrow_lookat() {
 swap_destroyed_deck() {
   common_scripts\utility::array_thread(level.stern_corner_clean, maps\_utility::hide_entity);
 
-  foreach(var_1 in level.stern_corner_dmg)
+  foreach(var_1 in level.stern_corner_dmg) {
   var_1.origin = var_1.origin - (0, 0, 1024);
+  }
 
   common_scripts\utility::array_thread(level.stern_corner_dmg, maps\_utility::show_entity);
   level.rear_elevator maps\_utility::hide_entity();
@@ -554,8 +564,9 @@ fx_fires() {
 cleanup_zodiacs() {
   level.zodiacs = maps\_utility::array_removedead(level.zodiacs);
 
-  foreach(var_1 in level.zodiacs)
+  foreach(var_1 in level.zodiacs) {
   maps\_utility::deleteent(var_1);
+  }
 
   level.zodiacs = [];
 }

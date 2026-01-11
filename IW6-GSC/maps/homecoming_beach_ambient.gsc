@@ -35,19 +35,22 @@ beach_wave1_hind_flybys() {
 }
 
 beach_nh90_flybys(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level endon(var_2);
+  }
 
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_0 = getEntArray(var_0, "targetname");
+  }
 
   var_3 = [];
 
   foreach(var_5 in var_0) {
     var_6 = var_5.script_noteworthy;
 
-    if(!isDefined(var_3[var_6]))
+    if(!isDefined(var_3[var_6])) {
       var_3[var_6] = [];
+    }
 
     var_3[var_6] = common_scripts\utility::array_add(var_3[var_6], var_5);
   }
@@ -62,16 +65,18 @@ beach_nh90_flybys(var_0, var_1, var_2) {
 
     foreach(var_12 in var_9) {
       if(isDefined(var_1)) {
-        if(level.player maps\_utility::player_looking_at(var_12.origin))
+        if(level.player maps\_utility::player_looking_at(var_12.origin)) {
           continue;
+        }
       }
 
       var_10 = var_12 maps\_vehicle::spawn_vehicle_and_gopath();
       wait(randomfloatrange(0.1, 0.5));
     }
 
-    if(isDefined(var_10))
+    if(isDefined(var_10)) {
       var_10 waittill("deleted");
+    }
   }
 }
 
@@ -88,8 +93,9 @@ ambient_nh90_landers(var_0, var_1) {
   var_2 = self;
   var_3 = 10;
 
-  if(isDefined(var_2.script_index))
+  if(isDefined(var_2.script_index)) {
     var_3 = var_2.script_index;
+  }
 
   var_4 = [];
 
@@ -126,8 +132,9 @@ beach_ship_ambient_artillery() {
       var_3 = [];
       var_4 = strtok(var_2.script_parameters, " ");
 
-      foreach(var_6 in var_4)
+      foreach(var_6 in var_4) {
       var_3 = common_scripts\utility::array_add(var_3, int(var_6));
+      }
 
       var_8 = var_3[randomint(var_3.size)];
       var_9 = level.shipartilleryspots[var_8];
@@ -195,8 +202,9 @@ phalanx_incoming_hit(var_0) {
 beach_ship_phalanx_system_complex() {
   var_0 = common_scripts\utility::getstructarray("ship_phalanx_system", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2.used = 0;
+  }
 
   var_4 = getent("anti_battleship_missiles", "targetname");
   var_5 = getvehiclenodearray("anti_battleship_missile_starts", "targetname");
@@ -229,8 +237,9 @@ phalanx_missile_think(var_0) {
   var_1 = self;
   var_2 = randomintrange(-9000, -8000);
 
-  while(var_1.origin[0] > var_2)
+  while(var_1.origin[0] > var_2) {
     wait 0.1;
+  }
 
   var_3 = var_0;
 
@@ -238,10 +247,12 @@ phalanx_missile_think(var_0) {
     var_4 = sortbydistance(var_3, var_1.origin);
     var_4 = var_4[0];
 
-    if(var_4.used)
+    if(var_4.used) {
       var_3 = common_scripts\utility::array_remove(var_3, var_4);
-    else
+    }
+    else {
       break;
+    }
 
     wait 0.05;
   }

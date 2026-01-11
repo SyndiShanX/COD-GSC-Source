@@ -21,13 +21,15 @@ set_up_remote_turrets() {
   wait 1.0;
   var_0 = getEntArray("turret_use_trigger", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread remote_turret_monitoruse();
+  }
 
   var_4 = getEntArray("crr_phalanx_03", "targetname");
 
-  foreach(var_6 in var_4)
+  foreach(var_6 in var_4) {
   var_6 delete();
+  }
 
   level thread listen_for_kraken_emp();
   level thread set_up_kraken_zap_logic();
@@ -69,16 +71,18 @@ remote_turret_monitoruse() {
   if(maps\mp\alien\_utility::alien_mode_has("outline")) {
     self.outline_model = getent(self.script_noteworthy, "targetname");
 
-    if(!is_port_side_boss_turret())
+    if(!is_port_side_boss_turret()) {
       maps\mp\alien\_outline_proto::add_to_outline_watch_list(self.outline_model, 750);
+    }
   }
 
   var_0 thread watch_for_turret_reloading();
   var_0 thread watch_for_turret_overloading();
   level.kraken_turrets[level.kraken_turrets.size] = var_0;
 
-  if(!var_0.off)
+  if(!var_0.off) {
     var_0 maps\mp\_utility::delaythread(2, ::play_turret_fx, 0);
+  }
   else {
     var_0 maps\mp\_utility::delaythread(2, ::play_turret_fx, 1);
     self sethintstring("");
@@ -117,8 +121,9 @@ remote_turret_monitoruse() {
       continue;
     }
 
-    while(!var_2 isonground())
+    while(!var_2 isonground()) {
       wait 0.1;
+    }
 
     var_3 = int(750 * var_2 maps\mp\alien\_perk_utility::perk_gettrapcostscalar());
 
@@ -171,8 +176,9 @@ build_turret_func() {
   var_7 = getEntArray("turret_trigger_use_touch", "targetname");
 
   if(var_7.size > 0) {
-    if(var_7.size > 1)
+    if(var_7.size > 1) {
       var_7 = common_scripts\utility::get_array_of_closest(self.origin, var_7);
+    }
 
     var_6.actual_use_trigger = var_7[0];
   }
@@ -184,8 +190,9 @@ turret_monitoruse(var_0) {
   level endon("game_ended");
   level notify("beacon_turret_used");
 
-  while(!isDefined(self.turret_ammo))
+  while(!isDefined(self.turret_ammo)) {
     wait 0.05;
+  }
 
   self.use_trigger hide();
   self.owner = var_0;
@@ -206,8 +213,9 @@ move_player_camera_to_turret(var_0) {
   var_0 maps\mp\_utility::_giveweapon("killstreak_remote_turret_remote_mp");
   var_0 switchtoweapon("killstreak_remote_turret_remote_mp");
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     var_0 maps\mp\_utility::setthirdpersondof(0);
+  }
 
   var_0 maps\mp\_utility::setusingremote(self.turrettype);
   var_0 playerlinkweaponviewtodelta(self, "tag_player", 1, 80, 80, 25, 25, 0);
@@ -232,8 +240,9 @@ wait_for_disable_turret() {
 listen_for_player_use_button() {
   self endon("stop_watching");
 
-  while(self.owner usebuttonpressed())
+  while(self.owner usebuttonpressed()) {
     wait 0.05;
+  }
 
   for(;;) {
     var_0 = 0;
@@ -277,8 +286,9 @@ watch_bullet_fired(var_0) {
     self.owner maps\mp\alien\_utility::set_turret_ammocount(self.turret_ammo);
   }
 
-  if(isDefined(self.owner) && isalive(self.owner))
+  if(isDefined(self.owner) && isalive(self.owner)) {
     self.owner thread maps\mp\alien\_utility::wait_for_player_to_dismount_turret();
+  }
 
   self.reloading = 1;
   self.owner setclientomnvar("ui_alien_turret_overheat", -1);
@@ -292,10 +302,12 @@ wait_for_turret_to_spin_up() {
   for(;;) {
     var_0 = self getbarrelspinrate();
 
-    if(var_0 == 1 && !self.overheated)
+    if(var_0 == 1 && !self.overheated) {
       self turretfireenable();
-    else
+    }
+    else {
       self turretfiredisable();
+    }
 
     wait 0.1;
   }
@@ -306,17 +318,20 @@ wait_for_player_to_dismount_remote_turret() {
   self endon("disconnect");
   maps\mp\_utility::setlowermessage("disengage_turret", &"ALIEN_COLLECTIBLES_DISENGAGE_TURRET", 0);
 
-  while(maps\mp\_utility::isusingremote())
+  while(maps\mp\_utility::isusingremote()) {
     wait 0.5;
+  }
 
   maps\mp\_utility::clearlowermessage("disengage_turret");
 }
 
 watch_for_turret_reloading() {
-  if(isDefined(level.shock_turret_reload_time_override))
+  if(isDefined(level.shock_turret_reload_time_override)) {
     var_0 = level.shock_turret_reload_time_override;
-  else
+  }
+  else {
     var_0 = 25;
+  }
 
   while(!isDefined(self.broken)) {
     if(self.reloading && !self.overloaded) {
@@ -358,10 +373,12 @@ watch_for_turret_overloading() {
       maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self.use_trigger.outline_model);
 
       if(!isDefined(self.broken)) {
-        if(!self.off)
+        if(!self.off) {
           self.off = 1;
-        else
+        }
+        else {
           self.off = 0;
+        }
 
         wait 25;
         thread play_turret_fx(0);
@@ -385,8 +402,9 @@ watch_for_turret_overloading() {
 listen_for_kraken_emp() {
   common_scripts\utility::flag_wait("boss_turrets_on");
 
-  while(!isDefined(level.kraken))
+  while(!isDefined(level.kraken)) {
     wait 0.1;
+  }
 
   var_0 = undefined;
 
@@ -397,13 +415,15 @@ listen_for_kraken_emp() {
       var_3.overloaded = 1;
 
       if(var_1 == "kraken_emp_stage_2") {
-        if(isDefined(var_3.use_trigger.script_noteworthy) && var_3.use_trigger.script_noteworthy == "turret_console_lower_right")
+        if(isDefined(var_3.use_trigger.script_noteworthy) && var_3.use_trigger.script_noteworthy == "turret_console_lower_right") {
           var_0 = var_3;
+        }
       }
 
       if(var_1 == "kraken_emp_stage_3") {
-        if(isDefined(var_3.use_trigger.script_noteworthy) && var_3.use_trigger.script_noteworthy == "turret_console_lower_left")
+        if(isDefined(var_3.use_trigger.script_noteworthy) && var_3.use_trigger.script_noteworthy == "turret_console_lower_left") {
           var_0 = var_3;
+        }
       }
     }
 
@@ -437,17 +457,21 @@ play_turret_fx(var_0) {
     return;
   }
   if(var_0) {
-    if(self.off)
+    if(self.off) {
       killfxontag(level._effect["glow_red_light_100_nolight"], self, "tag_light_fx");
-    else
+    }
+    else {
       killfxontag(level._effect["green_light"], self, "tag_light_fx");
+    }
 
     wait 0.5;
 
-    if(self.overloaded)
+    if(self.overloaded) {
       playFXOnTag(level._effect["boss_turret_smoke"], self, "TAG_PLAYER");
-    else
+    }
+    else {
       playFXOnTag(level._effect["glow_red_light_100_nolight"], self, "tag_light_fx");
+    }
   } else {
     if(self.overloaded) {
       stopFXOnTag(level._effect["boss_turret_smoke"], self, "TAG_PLAYER");
@@ -457,10 +481,12 @@ play_turret_fx(var_0) {
       wait 0.5;
     }
 
-    if(!self.off)
+    if(!self.off) {
       playFXOnTag(level._effect["green_light"], self, "tag_light_fx");
-    else
+    }
+    else {
       playFXOnTag(level._effect["glow_red_light_100_nolight"], self, "tag_light_fx");
+    }
   }
 }
 
@@ -503,10 +529,12 @@ turret_cooldown_monitor() {
 
   for(;;) {
     if(self.heatlevel > 0) {
-      if(self.cooldownwaittime <= 0)
+      if(self.cooldownwaittime <= 0) {
         self.heatlevel = max(0, self.heatlevel - 0.05);
-      else
+      }
+      else {
         self.cooldownwaittime = max(0, self.cooldownwaittime - 0.05);
+      }
     }
 
     wait 0.05;
@@ -521,10 +549,12 @@ turret_overheat_monitor(var_0) {
   self endon("exit");
   self.heatlevel = 0;
 
-  if(isDefined(level.shock_turret_heat_override))
+  if(isDefined(level.shock_turret_heat_override)) {
     var_1 = level.shock_turret_heat_override;
-  else
+  }
+  else {
     var_1 = 2.5;
+  }
 
   self.cooldownwaittime = 1;
   var_2 = 0;
@@ -564,8 +594,9 @@ turret_overheat_disable() {
   self endon("exit");
   self.overheated = 1;
 
-  while(self.heatlevel > 0)
+  while(self.heatlevel > 0) {
     wait 0.1;
+  }
 
   self.overheated = 0;
 }
@@ -586,8 +617,9 @@ clear_turret_ammo_counter_on_dismount(var_0) {
   var_0 maps\mp\alien\_utility::hide_turret_icon();
   var_0 maps\mp\_utility::clearlowermessage("disengage_turret");
 
-  if(var_0 getcurrentweapon() == "none")
+  if(var_0 getcurrentweapon() == "none") {
     var_0 thread restore_last_valid_weapon();
+  }
 }
 
 restore_last_valid_weapon() {
@@ -616,10 +648,12 @@ zap_periodically_when_firing(var_0) {
       if(isDefined(var_4["position"])) {
         var_5 = var_4["position"];
 
-        if(isDefined(var_4["entity"]) && isDefined(var_4["entity"].agent_type) && (var_4["entity"].agent_type == "kraken_tentacle" || var_4["entity"].agent_type == "kraken"))
+        if(isDefined(var_4["entity"]) && isDefined(var_4["entity"].agent_type) && (var_4["entity"].agent_type == "kraken_tentacle" || var_4["entity"].agent_type == "kraken")) {
           zap_aliens(var_5, var_4["entity"].agent_type);
-        else
+        }
+        else {
           zap_aliens(var_5);
+        }
       }
 
       wait 0.5;
@@ -632,22 +666,26 @@ zap_periodically_when_firing(var_0) {
 zap_aliens(var_0, var_1) {
   var_2 = 62500;
 
-  if(self.heatlevel > 0.5)
+  if(self.heatlevel > 0.5) {
     var_2 = 122500;
+  }
 
-  if(self.heatlevel > 0.75)
+  if(self.heatlevel > 0.75) {
     var_2 = 250000;
+  }
 
   var_3 = maps\mp\alien\_spawnlogic::get_alive_agents();
 
-  if(isDefined(level.seeder_active_turrets))
+  if(isDefined(level.seeder_active_turrets)) {
     var_3 = common_scripts\utility::array_combine(var_3, level.seeder_active_turrets);
+  }
 
   var_4 = [];
 
   foreach(var_6 in var_3) {
-    if(distancesquared(var_0, var_6.origin) < var_2)
+    if(distancesquared(var_0, var_6.origin) < var_2) {
       var_4[var_4.size] = var_6;
+    }
   }
 
   var_8 = 0;
@@ -658,10 +696,12 @@ zap_aliens(var_0, var_1) {
     self.death_struct.attack_bolt = spawn("script_model", var_0);
     self.death_struct.attack_bolt setModel("tag_origin");
 
-    if(isDefined(level.shock_turret_arc_damage_override))
+    if(isDefined(level.shock_turret_arc_damage_override)) {
       self.death_struct.damage_amount = level.shock_turret_arc_damage_override;
-    else
+    }
+    else {
       self.death_struct.damage_amount = 200;
+    }
 
     common_scripts\utility::waitframe();
     self.death_struct.attack_bolt.origin = var_0;
@@ -710,31 +750,37 @@ turret_tesla_bolt_death(var_0) {
   playFXOnTag(level._effect["beacon_turret_hit_fx"], var_0.death_struct.attack_bolt, "tag_origin");
   var_1 = undefined;
 
-  if(isDefined(self.alien_type) && self.alien_type == "seeder_spore")
+  if(isDefined(self.alien_type) && self.alien_type == "seeder_spore") {
     var_1 = self gettagorigin("J_Spore_46");
-  else if(isDefined(self) && isalive(self) && maps\mp\alien\_utility::has_tag(self.model, "J_SpineUpper"))
+  }
+  else if(isDefined(self) && isalive(self) && maps\mp\alien\_utility::has_tag(self.model, "J_SpineUpper")) {
     var_1 = self gettagorigin("J_SpineUpper");
+  }
 
   if(isDefined(var_1)) {
     var_0.death_struct.attack_bolt moveto(var_1, 0.05);
     wait 0.05;
 
-    if(isDefined(self) && distancesquared(self.origin, var_0.death_struct.attack_bolt.origin) > 40000)
+    if(isDefined(self) && distancesquared(self.origin, var_0.death_struct.attack_bolt.origin) > 40000) {
       playFXOnTag(level._effect["beacon_turret_hit_fx"], var_0.death_struct.attack_bolt, "tag_origin");
+    }
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self playSound("turret_shock");
+    }
 
     wait 0.05;
 
     if(isDefined(self)) {
       var_2 = self;
 
-      if(isDefined(self.alien_type) && self.alien_type == "seeder_spore")
+      if(isDefined(self.alien_type) && self.alien_type == "seeder_spore") {
         var_2 = self.coll_model;
+      }
 
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_2 dodamage(var_0.death_struct.damage_amount, self.origin, var_0.owner, var_0);
+      }
     }
   }
 
@@ -746,26 +792,31 @@ turret_tesla_bolt_no_target(var_0, var_1) {
   common_scripts\utility::waitframe();
   playFXOnTag(level._effect["tesla_attack"], var_2.death_struct.attack_bolt, "TAG_ORIGIN");
 
-  if(isDefined(var_1) && var_1 == "kraken")
+  if(isDefined(var_1) && var_1 == "kraken") {
     playFXOnTag(level._effect["beacon_turret_kraken_hit_fx"], var_2.death_struct.attack_bolt, "tag_origin");
-  else
+  }
+  else {
     playFXOnTag(level._effect["tesla_shock"], var_2.death_struct.attack_bolt, "tag_origin");
+  }
 
   var_3 = 4;
   var_4 = self gettagorigin("tag_player");
 
   for(var_5 = 0; var_5 < var_3; var_5++) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_6 = var_0 + (randomintrange(-300, 300), randomintrange(-300, 300), randomintrange(-300, 300));
-    else
+    }
+    else {
       var_6 = var_0 + (randomintrange(-150, 150), randomintrange(-150, 150), 0);
+    }
 
     if(isDefined(var_1)) {
       var_4 = self gettagorigin("tag_player");
       var_7 = bulletTrace(var_4, var_6, 1, undefined, 1, 1);
 
-      if(!isDefined(var_7["entity"]) || !isDefined(var_7["entity"].agent_type))
+      if(!isDefined(var_7["entity"]) || !isDefined(var_7["entity"].agent_type)) {
         continue;
+      }
     } else
       var_7 = bulletTrace(var_4, var_6, 1);
 
@@ -808,8 +859,9 @@ zap_the_kraken() {
 
   for(;;) {
     while(level.zap_the_kraken_time > 0) {
-      if(!level.zap_multiplier_active)
+      if(!level.zap_multiplier_active) {
         level.zap_multiplier_active = 1;
+      }
 
       level.zap_the_kraken_time = level.zap_the_kraken_time - var_0;
       wait(var_0);
@@ -833,13 +885,15 @@ stop_using_turret(var_0, var_1) {
     self notify("exit_turret");
     var_0 notify("stop_watching");
 
-    if(getdvarint("camera_thirdPerson"))
+    if(getdvarint("camera_thirdPerson")) {
       maps\mp\_utility::setthirdpersondof(1);
+    }
 
     var_2 = self getweaponslistexclusives();
 
-    foreach(var_4 in var_2)
+    foreach(var_4 in var_2) {
     self takeweapon(var_4);
+    }
 
     maps\mp\alien\_utility::hide_turret_icon();
     maps\mp\alien\_utility::enable_special_ammo();
@@ -928,8 +982,9 @@ clear_turret_reticle() {
 turret_is_broken(var_0) {
   var_0.broken = 1;
 
-  while(!(isDefined(var_0.reloading_func_done) && isDefined(var_0.overloading_func_done)))
+  while(!(isDefined(var_0.reloading_func_done) && isDefined(var_0.overloading_func_done))) {
     wait 0.1;
+  }
 
   var_0 disable_turret();
   self makeunusable();
@@ -940,8 +995,9 @@ turret_is_broken(var_0) {
 }
 
 is_port_side_boss_turret() {
-  if(self.origin[1] > 6500 && self.origin[0] < -300)
+  if(self.origin[1] > 6500 && self.origin[0] < -300) {
     return 1;
+  }
 
   return 0;
 }
@@ -949,8 +1005,9 @@ is_port_side_boss_turret() {
 test_hud_on_player() {
   wait 10;
 
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 add_reticle_to_player_view();
+  }
 }
 
 debug_print_posrot(var_0) {
@@ -967,8 +1024,9 @@ debug_print_posrot(var_0) {
 }
 
 sfx_kraken_shock(var_0) {
-  if(!isDefined(level.kraken_shock_sfx))
+  if(!isDefined(level.kraken_shock_sfx)) {
     level.kraken_shock_sfx = 0;
+  }
 
   if(level.kraken_shock_sfx == 0) {
     level.kraken_shock_sfx = 1;

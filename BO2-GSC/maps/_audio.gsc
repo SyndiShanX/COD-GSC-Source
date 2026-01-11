@@ -22,8 +22,9 @@ fadeinsound() {
 wait_until_first_player() {
   players = get_players();
 
-  if(!isDefined(players[0]))
+  if(!isDefined(players[0])) {
     level waittill("first_player_ready");
+  }
 }
 
 thread_sound_trigger() {
@@ -54,15 +55,17 @@ thread_sound_trigger() {
       }
 
       if(isDefined(ent_targs[i].script_label) && ent_targs[i].script_label == "random") {
-        if(!level.clientscripts)
+        if(!level.clientscripts) {
           ent_targs[i] thread static_sound_random_play(ent_targs[i]);
+        }
 
         continue;
       }
 
       if(isDefined(ent_targs[i].script_label) && ent_targs[i].script_label == "looper") {
-        if(!level.clientscripts)
+        if(!level.clientscripts) {
           ent_targs[i] thread static_sound_loop_play(ent_targs[i]);
+        }
       }
     }
   }
@@ -87,8 +90,9 @@ spawn_line_sound(sound) {
     soundmover.script_sound = sound;
     self.soundmover = soundmover;
 
-    if(isDefined(self.script_looping))
+    if(isDefined(self.script_looping)) {
       soundmover.script_looping = self.script_looping;
+    }
 
     if(isDefined(soundmover)) {
       soundmover.start = start;
@@ -108,10 +112,12 @@ spawn_line_sound(sound) {
 line_sound_player() {
   self endon("end line sound");
 
-  if(isDefined(self.script_looping))
+  if(isDefined(self.script_looping)) {
     self playLoopSound(self.script_sound);
-  else
+  }
+  else {
     self playSound(self.script_sound);
+  }
 }
 
 move_sound_along_line() {
@@ -131,12 +137,15 @@ move_sound_along_line() {
 
     closest_dist = distancesquared(get_players()[0].origin, self.origin);
 
-    if(closest_dist > 1048576)
+    if(closest_dist > 1048576) {
       wait 2;
-    else if(closest_dist > 262144)
+    }
+    else if(closest_dist > 262144) {
       wait 0.2;
-    else
+    }
+    else {
       wait 0.05;
+    }
   }
 }
 
@@ -145,10 +154,12 @@ closest_point_on_line_to_point(point, linestart, lineend) {
   linemagsqrd = lengthsquared(lineend - linestart);
   t = ((point[0] - linestart[0]) * (lineend[0] - linestart[0]) + (point[1] - linestart[1]) * (lineend[1] - linestart[1]) + (point[2] - linestart[2]) * (lineend[2] - linestart[2])) / linemagsqrd;
 
-  if(t < 0.0)
+  if(t < 0.0) {
     self.origin = linestart;
-  else if(t > 1.0)
+  }
+  else if(t > 1.0) {
     self.origin = lineend;
+  }
   else {
     start_x = linestart[0] + t * (lineend[0] - linestart[0]);
     start_y = linestart[1] + t * (lineend[1] - linestart[1]);
@@ -160,18 +171,21 @@ closest_point_on_line_to_point(point, linestart, lineend) {
 static_sound_random_play(soundpoint) {
   wait(randomintrange(1, 5));
 
-  if(!isDefined(self.script_wait_min))
+  if(!isDefined(self.script_wait_min)) {
     self.script_wait_min = 1;
+  }
 
-  if(!isDefined(self.script_wait_max))
+  if(!isDefined(self.script_wait_max)) {
     self.script_wait_max = 3;
+  }
 
   while(true) {
     wait(randomfloatrange(self.script_wait_min, self.script_wait_max));
     soundpoint playSound(self.script_sound);
 
-    if(getdvarint(#"_id_0AEB127D") > 0)
+    if(getdvarint(#"_id_0AEB127D") > 0) {
       print3d(soundpoint.origin, self.script_sound, (1.0, 0.8, 0.5), 1, 3, 5);
+    }
 
   }
 }
@@ -190,8 +204,9 @@ static_sound_loop_play(soundpoint) {
 
 get_number_variants(aliasprefix) {
   for(i = 0; i < 100; i++) {
-    if(!soundexists(aliasprefix + "_" + i))
+    if(!soundexists(aliasprefix + "_" + i)) {
       return i;
+    }
   }
 }
 
@@ -210,12 +225,14 @@ create_2d_sound_list(sound_alias) {
     num_variants = get_number_variants(sound_alias);
     assert(num_variants > 0, "No variants found for category: " + sound_alias);
 
-    for(i = 0; i < num_variants; i++)
+    for(i = 0; i < num_variants; i++) {
       level.sound_alias[i] = sound_alias + "_" + i;
+    }
   }
 
-  if(level.sound_alias_available.size <= 0)
+  if(level.sound_alias_available.size <= 0) {
     level.sound_alias_available = level.sound_alias;
+  }
 
   variation = random(level.sound_alias_available);
   arrayremovevalue(level.sound_alias_available, variation);
@@ -232,8 +249,9 @@ switch_music_wait(music_state, waittime) {
 missionfailwatcher() {
   level waittill("missionfailed");
 
-  if(isDefined(level.missionfailsndspecial))
+  if(isDefined(level.missionfailsndspecial)) {
     [[level.missionfailsndspecial]]();
+  }
 
   self playSound("chr_death");
 }

@@ -29,8 +29,9 @@ func_13C8B(var_00) {
 func_128DC(var_00) {
   var_01 = func_F1AC(var_0.lifeid, var_0.streakname, var_00);
 
-  if(!isDefined(var_01) || !var_01)
+  if(!isDefined(var_01) || !var_01) {
     return 0;
+  }
 
   return 1;
 }
@@ -43,11 +44,13 @@ func_F1AC(var_00, var_01, var_02) {
   var_05 = "used_bombardment";
   var_06 = scripts\mp\killstreak_loot::getrarityforlootitem(var_2.variantid);
 
-  if(var_06 != "")
+  if(var_06 != "") {
     var_05 = var_05 + "_" + var_06;
+  }
 
-  if(scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_extra_selection"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_extra_selection")) {
     var_03 = 4;
+  }
 
   if(scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_impulse_explosion")) {
     var_04 = "Single-Strike";
@@ -62,8 +65,9 @@ func_F1AC(var_00, var_01, var_02) {
     self clearsoundsubmix();
     var_08 stoploopsound("");
 
-    if(isDefined(var_08))
+    if(isDefined(var_08)) {
       var_08 delete();
+    }
 
     if(!isDefined(var_07)) {
       scripts\engine\utility::allow_usability(1);
@@ -91,11 +95,13 @@ func_6CD4(var_00, var_01, var_02, var_03) {
   var_04 = getent("airstrikeheight", "targetname");
   var_05 = var_4.origin[2] + 10000;
 
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     var_05 = 20000;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = "Multi-Strike";
+  }
 
   level.func_2C48 = 1;
   thread func_139B2();
@@ -155,10 +161,12 @@ func_6CD4(var_00, var_01, var_02, var_03) {
         var_22 = func_7DBB(var_21.location, var_05, 500, var_03);
         thread func_6D7D(var_22, var_05, var_01, var_6[var_19], var_03);
 
-        if(scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_fast_launch"))
+        if(scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_fast_launch")) {
           wait 0.1;
-        else
+        }
+        else {
           wait 0.2;
+        }
       }
     }
   }
@@ -169,8 +177,9 @@ func_6CD4(var_00, var_01, var_02, var_03) {
   thread func_D910();
 
   if(isDefined(var_06) && var_6.size > 0) {
-    foreach(var_24 in var_06)
+    foreach(var_24 in var_06) {
     var_24 delete();
+    }
   }
 }
 
@@ -212,8 +221,9 @@ func_139B2() {
   level endon("game_ended");
   scripts\engine\utility::waittill_any("disconnect", "joined_team");
 
-  if(scripts\mp\utility\game::istrue(level.func_2C48))
+  if(scripts\mp\utility\game::istrue(level.func_2C48)) {
     level.func_2C48 = undefined;
+  }
 }
 
 func_D910() {
@@ -276,8 +286,9 @@ func_7DBB(var_00, var_01, var_02, var_03) {
   var_04 = [];
   var_05 = 7;
 
-  if(scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_fast_launch"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_fast_launch")) {
     var_05 = 4;
+  }
 
   for(var_06 = 0; var_06 < var_05; var_6++) {
     var_07 = randomint(var_02);
@@ -308,8 +319,9 @@ func_6D7D(var_00, var_01, var_02, var_03, var_04) {
     var_08 = var_06;
     var_09 = randomfloatrange(0.3, 0.5);
 
-    if(scripts\mp\killstreaks\utility::func_A69F(var_04, "passive_fast_launch"))
+    if(scripts\mp\killstreaks\utility::func_A69F(var_04, "passive_fast_launch")) {
       var_09 = randomfloatrange(0.1, 0.3);
+    }
 
     var_10 = spawnStruct();
     var_10.origin = var_08;
@@ -332,15 +344,18 @@ func_6D84(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   var_8.streakinfo = var_07;
   var_8.killcament = var_05;
 
-  if(scripts\mp\killstreaks\utility::func_A69F(var_07, "passive_fast_launch"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_07, "passive_fast_launch")) {
     var_08 setscriptablepartstate("target", "active_fast");
-  else
+  }
+  else {
     var_08 setscriptablepartstate("target", "active");
+  }
 
   var_09 = 2;
 
-  if(scripts\mp\killstreaks\utility::func_A69F(var_07, "passive_fast_launch"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_07, "passive_fast_launch")) {
     var_09 = 1.5;
+  }
 
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_09);
   var_08 setscriptablepartstate("fire", "active");
@@ -353,8 +368,9 @@ func_6D84(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   } else {
     level.artillerydangercenters = scripts\engine\utility::array_remove(level.artillerydangercenters, var_04);
 
-    if(isDefined(var_05))
+    if(isDefined(var_05)) {
       var_05 delete();
+    }
   }
 }
 

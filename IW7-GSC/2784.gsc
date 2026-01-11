@@ -33,8 +33,9 @@ portalgeneratorused(var_00) {
   scripts\mp\weapons::ontacticalequipmentplanted(var_03, "power_portalGenerator");
   scripts\engine\utility::waitframe();
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 delete();
+  }
 }
 
 func_D684(var_00) {
@@ -68,8 +69,9 @@ func_D68C() {
   wait 3;
 
   if(isDefined(self)) {
-    if(isDefined(self.killcament))
+    if(isDefined(self.killcament)) {
       self.killcament delete();
+    }
 
     scripts\mp\weapons::equipmentdeletevfx();
     scripts\mp\weapons::deleteexplosive();
@@ -126,10 +128,12 @@ func_13B15(var_00) {
     if(isDefined(var_3.func_DDCA) && var_3.func_DDCA) {
       continue;
     }
-    if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(var_03))
+    if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(var_03)) {
       var_03 thread func_10DDD(var_01);
-    else
+    }
+    else {
       var_03 scripts\mp\equipment\phase_shift::exitphaseshift(1);
+    }
 
     var_03 thread func_10DDE(var_02);
   }

@@ -10,8 +10,9 @@ init_container_spawn() {
   if(!isDefined(level.container_spawn_table)) {
     return;
   }
-  if(!isDefined(level.max_damage_based_container))
+  if(!isDefined(level.max_damage_based_container)) {
     level.max_damage_based_container = 3;
+  }
 
   level.num_damage_based_container = 0;
   init_warning_sounds();
@@ -26,8 +27,9 @@ activate_container_spawners_in_area(var_0) {
   foreach(var_3 in var_1) {
     var_4 = var_3.script_noteworthy;
 
-    if(should_activate_container_in_area(var_3, var_4))
+    if(should_activate_container_in_area(var_3, var_4)) {
       var_3 thread activate_container(var_3, var_4);
+    }
   }
 }
 
@@ -43,8 +45,9 @@ activate_container_spawner_by_id(var_0) {
     }
     var_4 = var_3.script_noteworthy;
 
-    if(var_4 == var_0)
+    if(var_4 == var_0) {
       var_3 thread activate_container(var_3, var_4);
+    }
   }
 }
 
@@ -83,8 +86,9 @@ spawn_alien_from_container(var_0, var_1) {
   var_7 = var_5.size;
 
   if(var_6) {
-    for(var_7 = maps\mp\alien\_spawn_director::reserve_custom_spawn_space(var_7, 0); var_7 <= 0; var_7 = maps\mp\alien\_spawn_director::reserve_custom_spawn_space(var_7, 0))
+    for(var_7 = maps\mp\alien\_spawn_director::reserve_custom_spawn_space(var_7, 0); var_7 <= 0; var_7 = maps\mp\alien\_spawn_director::reserve_custom_spawn_space(var_7, 0)) {
       common_scripts\utility::waitframe();
+    }
   } else
     var_7 = maps\mp\alien\_spawn_director::reserve_custom_spawn_space(var_7, 1);
 
@@ -100,8 +104,9 @@ spawn_alien_from_container(var_0, var_1) {
     var_12 = level.cycle_data.spawn_node_info[var_9.script_noteworthy].vignetteinfo[var_11];
     var_13 = maps\mp\alien\_spawn_director::process_custom_spawn(var_10, var_9, var_12);
 
-    if(isDefined(var_13))
+    if(isDefined(var_13)) {
       mark_spawn_clips_on(var_13, var_0);
+    }
 
     wait(var_2);
   }
@@ -155,10 +160,12 @@ wait_trigger_activate(var_0, var_1) {
       continue;
     }
 
-    if(randomintrange(0, 100) <= var_4)
+    if(randomintrange(0, 100) <= var_4) {
       return;
-    else
+    }
+    else {
       wait(var_2);
+    }
   }
 }
 
@@ -211,8 +218,9 @@ deactivate_container_spawners_in_area(var_0) {
   }
   var_1 = select_container_structs_in_area(var_0);
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   deactivate_container(var_3);
+  }
 }
 
 deactivate_container(var_0) {
@@ -242,10 +250,12 @@ get_activation_method(var_0) {
   var_2 = get_proximity_weight(var_0);
   var_3 = get_notify_weight(var_0);
 
-  if(at_max_damage_based_container())
+  if(at_max_damage_based_container()) {
     var_4 = 0;
-  else
+  }
+  else {
     var_4 = get_damage_weight(var_0);
+  }
 
   var_5 = [var_4, var_2, var_3];
   var_6 = maps\mp\alien\_utility::getrandomindex(var_5);
@@ -258,8 +268,9 @@ select_container_structs_in_area(var_0) {
   var_3 = common_scripts\utility::getstructarray("container_spawn", "targetname");
 
   foreach(var_5 in var_3) {
-    if(ispointinvolume(var_5.origin, var_1))
+    if(ispointinvolume(var_5.origin, var_1)) {
       var_2[var_2.size] = var_5;
+    }
   }
 
   return var_2;
@@ -269,21 +280,24 @@ get_activation_trigger(var_0) {
   var_1 = getEntArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
-    if(var_3.classname == "trigger_multiple")
+    if(var_3.classname == "trigger_multiple") {
       return var_3;
+    }
   }
 }
 
 should_activate_container_in_area(var_0, var_1) {
-  if(should_skip_area_activation(var_1) || already_activated(var_0))
+  if(should_skip_area_activation(var_1) || already_activated(var_0)) {
     return 0;
+  }
 
   return should_activated_by_chance(var_1);
 }
 
 should_skip_area_activation(var_0) {
-  if(!isDefined(level.should_skip_area_activation_func))
+  if(!isDefined(level.should_skip_area_activation_func)) {
     return 0;
+  }
 
   return [[level.should_skip_area_activation_func]](var_0);
 }
@@ -310,11 +324,13 @@ get_spawn_info(var_0, var_1) {
   for(var_7 = 0; var_7 < var_2.size; var_7++) {
     var_8 = int(var_4[var_7]);
 
-    if(var_8 > 1)
+    if(var_8 > 1) {
       var_8 = 1 + randomintrange(0, var_8);
+    }
 
-    for(var_9 = 0; var_9 < var_8; var_9++)
+    for(var_9 = 0; var_9 < var_8; var_9++) {
       var_6[var_6.size] = var_2[var_7];
+    }
   }
 
   return var_6;
@@ -333,16 +349,18 @@ is_higher_priority(var_0, var_1) {
 }
 
 assign_spawn_priority(var_0, var_1, var_2) {
-  foreach(var_4 in var_0)
+  foreach(var_4 in var_0) {
   var_4.priority = get_spawn_priority(var_4, var_1, var_2);
+  }
 
   return var_0;
 }
 
 get_spawn_priority(var_0, var_1, var_2) {
   foreach(var_5, var_4 in var_1) {
-    if(var_0.script_noteworthy == var_4)
+    if(var_0.script_noteworthy == var_4) {
       return var_2[var_5];
+    }
   }
 }
 
@@ -421,8 +439,9 @@ get_time_before_auto_trigger_array(var_0) {
 get_container_info(var_0, var_1, var_2) {
   var_3 = tablelookup(level.container_spawn_table, 0, var_0, var_1);
 
-  if(var_2)
+  if(var_2) {
     var_3 = int(var_3);
+  }
 
   return var_3;
 }
@@ -432,8 +451,9 @@ get_container_info_array(var_0, var_1, var_2) {
   var_3 = strtok(var_3, " ");
 
   if(var_2) {
-    foreach(var_6, var_5 in var_3)
+    foreach(var_6, var_5 in var_3) {
     var_3[var_6] = int(var_5);
+    }
   }
 
   return var_3;
@@ -444,8 +464,9 @@ mark_spawn_clips_on(var_0, var_1) {
   var_3 = [];
 
   foreach(var_5 in var_2) {
-    if(is_clip(var_5))
+    if(is_clip(var_5)) {
       var_3[var_3.size] = var_5;
+    }
   }
 
   var_0.intro_clips = var_3;
@@ -467,16 +488,18 @@ container_spawn_hive_monitor(var_0) {
 activate_container_spawn_for_hive(var_0, var_1) {
   var_2 = get_container_id_list_for_hive(var_0, var_1);
 
-  foreach(var_4 in var_2)
+  foreach(var_4 in var_2) {
   activate_container_spawner_by_id(var_4);
+  }
 }
 
 get_container_id_list_for_hive(var_0, var_1) {
   var_2 = [];
 
   foreach(var_5, var_4 in var_1) {
-    if(common_scripts\utility::array_contains(var_4, var_0))
+    if(common_scripts\utility::array_contains(var_4, var_0)) {
       var_2[var_2.size] = var_5;
+    }
   }
 
   return var_2;

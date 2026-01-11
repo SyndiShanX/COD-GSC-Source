@@ -97,8 +97,9 @@ cornered_intro_pre_load() {
   level.large_outside_lights_on = getEntArray("large_outside_lights_on", "targetname");
   level.large_outside_lights_off = getEntArray("large_outside_lights_off", "targetname");
 
-  foreach(var_1 in level.large_outside_lights_off)
+  foreach(var_1 in level.large_outside_lights_off) {
   var_1 hide();
+  }
 }
 
 setup_intro() {
@@ -154,10 +155,12 @@ begin_zipline() {
   thread zipline();
   common_scripts\utility::flag_wait("zipline_finished");
 
-  if(maps\cornered_code::is_e3())
+  if(maps\cornered_code::is_e3()) {
     thread maps\_utility::autosave_by_name_silent("zipline");
-  else
+  }
+  else {
     thread maps\_utility::autosave_tactical();
+  }
 }
 
 intro() {
@@ -187,8 +190,9 @@ intro_handler() {
   level endon("player_falling");
   level thread intro_chopper_fx();
 
-  if(!maps\cornered_code::is_e3())
+  if(!maps\cornered_code::is_e3()) {
     thread intro_enemy_scene();
+  }
 
   var_0 = getent("start_building_fall_volume", "targetname");
   var_0 thread maps\cornered_code::cornered_falling_death();
@@ -205,10 +209,12 @@ intro_handler() {
   thread intro_rorke_gun();
   thread intro_baker();
 
-  if(getdvar("intro_mask") == "0")
+  if(getdvar("intro_mask") == "0") {
     wait 8.5;
-  else
+  }
+  else {
     wait 11.5;
+  }
 
   if(!maps\cornered_code::is_e3()) {
     level.vip_heli thread maps\_vehicle_code::animate_drive_idle();
@@ -228,8 +234,9 @@ intro_handler() {
 
   common_scripts\utility::array_thread(var_3, maps\_vehicle::vehicle_lights_on, "running");
 
-  if(!maps\cornered_code::is_e3())
+  if(!maps\cornered_code::is_e3()) {
     level.vip_heli thread intro_heli_land();
+  }
 
   wait 1.2;
   common_scripts\utility::flag_set("intro_vo_begin");
@@ -342,8 +349,9 @@ adjust_player_view(var_0, var_1) {
 intro_player_stand() {
   common_scripts\utility::flag_wait("player_stand");
 
-  if(level.player getstance() == "crouch" || level.player getstance() == "prone")
+  if(level.player getstance() == "crouch" || level.player getstance() == "prone") {
     level.player setstance("stand");
+  }
 }
 
 rorke_jump_vision_change() {
@@ -361,10 +369,12 @@ merrick_handle_name_when_scanning() {
     var_0 = isDefined(level.player.binoculars_active) && level.player.binoculars_active;
     var_1 = isDefined(level.player.current_binocular_zoom_level) && level.player.current_binocular_zoom_level > 0;
 
-    if(var_0 && var_1)
+    if(var_0 && var_1) {
       self.name = "";
-    else
+    }
+    else {
       self.name = "Keegan";
+    }
 
     common_scripts\utility::waitframe();
   }
@@ -375,8 +385,9 @@ merrick_handle_name_when_scanning() {
 intro_rorke() {
   var_0 = getent("rorke_fake_collision", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   level.intro_hidetaglist = getweaponhidetags(self.weapon);
   wait 0.2;
@@ -384,8 +395,9 @@ intro_rorke() {
   common_scripts\utility::waitframe();
   var_1 = undefined;
 
-  if(getdvar("intro_mask") != "0")
+  if(getdvar("intro_mask") != "0") {
     self setanim( % cornered_level_intro_merrick_start_mask, 1, 0.1);
+  }
 
   thread maps\cornered_audio::aud_intro("r_jump");
   thread rorke_jump_vision_change();
@@ -408,10 +420,12 @@ intro_rorke() {
   }
 
   if(!maps\cornered_code::is_e3()) {
-    if(getdvar("intro_mask") == "0")
+    if(getdvar("intro_mask") == "0") {
       level.intro_struct maps\_anim::anim_first_frame_solo(self, "cornered_intro_rorke_2_end");
-    else
+    }
+    else {
       level.intro_struct thread maps\_anim::anim_loop_solo(self, "cornered_level_intro_merrick_loop", "stop_loop");
+    }
 
     thread keegan_swap_head_to_goggles();
     thread merrick_handle_name_when_scanning();
@@ -420,8 +434,9 @@ intro_rorke() {
     if(isDefined(level.player.binoculars_active) && level.player.binoculars_active) {
       level.player waittill("stop_using_binoculars");
 
-      if(!isDefined(level.goggle_head_keegan))
+      if(!isDefined(level.goggle_head_keegan)) {
         thread maps\cornered_code::head_swap("head_keegan_cornered_xx");
+      }
     }
 
     level notify("done_with_binoculars");
@@ -430,8 +445,9 @@ intro_rorke() {
   level.intro_struct notify("stop_loop");
   level.intro_struct thread maps\_anim::anim_single_solo(self, "cornered_intro_rorke_2_end");
 
-  if(!maps\cornered_code::is_e3())
+  if(!maps\cornered_code::is_e3()) {
     level.allies[level.const_rorke] thread maps\cornered_code::char_dialog_add_and_go("cornered_rke_hardcopyoracleblack");
+  }
 
   common_scripts\utility::waitframe();
   self.name = "Keegan";
@@ -566,11 +582,13 @@ intro_heli_land() {
   self sethoverparams(0, 0, 0);
   self setvehgoalpos(self.origin, 1);
 
-  if(!common_scripts\utility::flag("looking_at_roof"))
+  if(!common_scripts\utility::flag("looking_at_roof")) {
     var_0 thread maps\_anim::anim_loop_solo(self, "cornered_roof_arrival_wait_nh90", "stop_loop");
+  }
 
-  if(!maps\cornered_code::is_e3())
+  if(!maps\cornered_code::is_e3()) {
     common_scripts\utility::flag_wait("looking_at_roof");
+  }
 
   var_0 notify("stop_loop");
   var_0 maps\_anim::anim_single_solo(self, "cornered_roof_arrival");
@@ -691,8 +709,9 @@ random_talk() {
     wait 11;
   }
 
-  if(self.script_noteworthy == "intro_enemy5")
+  if(self.script_noteworthy == "intro_enemy5") {
     thread stop_random_talk();
+  }
 
   if(self.script_noteworthy == "intro_enemy12") {
     return;
@@ -735,11 +754,13 @@ intro_enemy_scene() {
   var_5[0] = level.intro_enemy7;
   var_5[1] = level.intro_enemy8;
 
-  foreach(var_7 in var_4)
+  foreach(var_7 in var_4) {
   level.intro_roof_node thread maps\_anim::anim_loop_solo(var_7, "cornered_roof_arrival_wait", "stop_loop");
+  }
 
-  foreach(var_7 in var_5)
+  foreach(var_7 in var_5) {
   level.intro_roof_node thread maps\_anim::anim_loop_solo(var_7, "cornered_roof_arrival_wait", "stop_loop_guys_loop");
+  }
 
   common_scripts\utility::flag_wait_all("intro_heli_landed", "looking_at_roof");
   level.intro_roof_node notify("stop_loop");
@@ -770,8 +791,9 @@ intro_enemy_scene() {
   level.intro_roof_node thread maps\_anim::anim_single(var_13, "cornered_roof_arrival_late");
   level.intro_hvt waittillmatch("single anim", "end");
 
-  if(!common_scripts\utility::flag("hvt_confirmed"))
+  if(!common_scripts\utility::flag("hvt_confirmed")) {
     level notify("scanning_failed");
+  }
 
   common_scripts\utility::waitframe();
   level.briefcase delete();
@@ -861,15 +883,19 @@ player_looking_at_hvt() {
   var_0 = level.binoc_target.origin;
   var_1 = 300;
 
-  if(level.binoc_target == level.vip_heli)
+  if(level.binoc_target == level.vip_heli) {
     var_0 = var_0 + (0, 0, -50);
-  else
+  }
+  else {
     var_1 = 1000;
+  }
 
-  if(self.current_binocular_zoom_level == 1)
+  if(self.current_binocular_zoom_level == 1) {
     return self worldpointinreticle_circle(var_0, 2, var_1);
-  else
+  }
+  else {
     return self worldpointinreticle_circle(var_0, 65, 100);
+  }
 }
 
 intro_binocs_check_look_target() {
@@ -878,13 +904,15 @@ intro_binocs_check_look_target() {
   var_0 = common_scripts\utility::getstruct("intro_hvt_roof_animnode", "targetname");
   level.binoc_target = level.vip_heli;
 
-  while(!isDefined(self.current_binocular_zoom_level))
+  while(!isDefined(self.current_binocular_zoom_level)) {
     common_scripts\utility::waitframe();
+  }
 
   thread intro_check_binocular_zoom();
 
-  while(level.player.current_binocular_zoom_level == 0 || !level.player player_looking_at_hvt())
+  while(level.player.current_binocular_zoom_level == 0 || !level.player player_looking_at_hvt()) {
     common_scripts\utility::waitframe();
+  }
 
   common_scripts\utility::flag_set("looking_at_roof");
   thread set_binoc_target_to_hvt();
@@ -894,8 +922,9 @@ intro_binocs_check_look_target() {
 }
 
 set_binoc_target_to_hvt() {
-  while(!isDefined(level.intro_hvt))
+  while(!isDefined(level.intro_hvt)) {
     common_scripts\utility::waitframe();
+  }
 
   level.binoc_target = level.intro_hvt;
 }
@@ -905,22 +934,25 @@ intro_binocs_check_look_target_for_render() {
   var_0 = common_scripts\utility::getstruct("intro_hvt_roof_animnode", "targetname");
   var_1 = common_scripts\utility::getstruct("intro_binoc_target", "targetname");
 
-  while(!isDefined(self.current_binocular_zoom_level))
+  while(!isDefined(self.current_binocular_zoom_level)) {
     wait 0.05;
+  }
 
   for(;;) {
     if(level.player worldpointinreticle_circle(var_1.origin, 2, 3500) && self.current_binocular_zoom_level != 0) {
       level.player playersetstreamorigin(var_0.origin + (0, 256, 64));
       setsaveddvar("sm_sunShadowCenter", var_0.origin);
 
-      if(isDefined(level.ps3) && level.ps3)
+      if(isDefined(level.ps3) && level.ps3) {
         setsaveddvar("r_znear", 40.0);
+      }
     } else {
       level.player playerclearstreamorigin();
       setsaveddvar("sm_sunShadowCenter", (0, 0, 0));
 
-      if(isDefined(level.ps3) && level.ps3)
+      if(isDefined(level.ps3) && level.ps3) {
         setsaveddvar("r_znear", 4.0);
+      }
     }
 
     wait 0.05;
@@ -949,24 +981,29 @@ intro_check_binocular_zoom() {
 }
 
 binoculars_hide_hint() {
-  if(!level.player.binoculars_active)
+  if(!level.player.binoculars_active) {
     return 1;
+  }
 
-  if(level.player.current_binocular_zoom_level > 0)
+  if(level.player.current_binocular_zoom_level > 0) {
     return 1;
+  }
 
-  if(!isDefined(level.binoc_target) || !level.player player_looking_at_hvt())
+  if(!isDefined(level.binoc_target) || !level.player player_looking_at_hvt()) {
     return 1;
+  }
 
   return 0;
 }
 
 binoculars_hide_deactive_hint() {
-  if(isDefined(level.player.binoculars_linked_to_target) && level.player.binoculars_linked_to_target)
+  if(isDefined(level.player.binoculars_linked_to_target) && level.player.binoculars_linked_to_target) {
     return 1;
+  }
 
-  if(!isDefined(level.player.has_binoculars) || !level.player.has_binoculars)
+  if(!isDefined(level.player.has_binoculars) || !level.player.has_binoculars) {
     return 1;
+  }
 
   return 0;
 }
@@ -980,23 +1017,29 @@ intro_check_binocular_scan() {
 }
 
 scan_hide_hint() {
-  if(!level.player.binoculars_active)
+  if(!level.player.binoculars_active) {
     return 1;
+  }
 
-  if(level.player.current_binocular_zoom_level == 0)
+  if(level.player.current_binocular_zoom_level == 0) {
     return 1;
+  }
 
-  if(!isDefined(level.binoc_target) || !level.player player_looking_at_hvt())
+  if(!isDefined(level.binoc_target) || !level.player player_looking_at_hvt()) {
     return 1;
+  }
 
-  if(!isDefined(level.player.binoculars_scan_target))
+  if(!isDefined(level.player.binoculars_scan_target)) {
     return 1;
+  }
 
-  if(!isDefined(level.player.show_binoc_scan_hint) || !level.player.show_binoc_scan_hint)
+  if(!isDefined(level.player.show_binoc_scan_hint) || !level.player.show_binoc_scan_hint) {
     return 1;
+  }
 
-  if(level.missionfailed)
+  if(level.missionfailed) {
     return 1;
+  }
 
   return 0;
 }
@@ -1007,8 +1050,9 @@ intro_check_binocular_range() {
   level endon("player_falling");
 
   for(;;) {
-    while(level.player.binoculars_active == 0)
+    while(level.player.binoculars_active == 0) {
       common_scripts\utility::waitframe();
+    }
 
     level.player waittill("scanning_complete");
 
@@ -1025,29 +1069,33 @@ intro_check_binocular_deactivate() {
   level endon("intro_fail");
   level endon("player_falling");
 
-  if(level.player.binoculars_active)
+  if(level.player.binoculars_active) {
     thread intro_binoculars_deactiveate_hint();
+  }
 
   level.player waittill("stop_using_binoculars");
   level notify("binoculars_deactivated");
   level.player playerclearstreamorigin();
   setsaveddvar("sm_sunShadowCenter", (0, 0, 0));
 
-  if(isDefined(level.ps3) && level.ps3)
+  if(isDefined(level.ps3) && level.ps3) {
     setsaveddvar("r_znear", 4.0);
+  }
 
   level.player maps\cornered_binoculars::take_binoculars();
   common_scripts\utility::waitframe();
 
-  if(!common_scripts\utility::flag("zipline_launcher_setup"))
+  if(!common_scripts\utility::flag("zipline_launcher_setup")) {
     level.player switchtoweapon("imbel+acog_sp+silencer_sp");
+  }
 }
 
 intro_binoculars_deactiveate_hint() {
   level endon("binoculars_deactivated");
 
-  while(isDefined(level.player.binoculars_linked_to_target) && level.player.binoculars_linked_to_target)
+  while(isDefined(level.player.binoculars_linked_to_target) && level.player.binoculars_linked_to_target) {
     common_scripts\utility::waitframe();
+  }
 
   wait 2;
 
@@ -1062,8 +1110,9 @@ intro_binoculars_use_hint(var_0, var_1, var_2, var_3) {
   level endon("player_falling");
   level endon(var_3);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     common_scripts\utility::flag_wait(var_2);
+  }
 
   wait(var_0);
 
@@ -1080,8 +1129,9 @@ intro_binoculars_hint(var_0, var_1, var_2, var_3) {
   if(!isDefined(level.player) || !isalive(level.player)) {
     return;
   }
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     common_scripts\utility::flag_wait(var_2);
+  }
 
   wait(var_0);
   waittill_binoculars_active();
@@ -1095,8 +1145,9 @@ intro_binoculars_hint(var_0, var_1, var_2, var_3) {
 }
 
 waittill_binoculars_active() {
-  while(!level.player.binoculars_active)
+  while(!level.player.binoculars_active) {
     common_scripts\utility::waitframe();
+  }
 }
 
 intro_roof_door2() {
@@ -1123,8 +1174,9 @@ intro_building_check() {
   var_0 = getent("off_building_vol", "targetname");
 
   for(;;) {
-    if(!level.player istouching(var_0))
+    if(!level.player istouching(var_0)) {
       common_scripts\utility::flag_clear("off_start_building");
+    }
 
     wait 0.05;
   }
@@ -1136,10 +1188,12 @@ intro_save_check(var_0, var_1) {
 
   for(var_2 = 0; var_2 < 10; var_2++) {
     if(!common_scripts\utility::flag("off_start_building")) {
-      if(maps\cornered_code::is_e3())
+      if(maps\cornered_code::is_e3()) {
         thread maps\_utility::autosave_by_name_silent(var_0);
-      else
+      }
+      else {
         thread maps\_utility::autosave_by_name(var_0);
+      }
 
       level notify("stop_save_attempt");
     }
@@ -1154,8 +1208,9 @@ intro_allies_vo() {
   thread intro_save_check("intro_scanning_seq", "intro_id_scan");
   common_scripts\utility::flag_wait("intro_vo_begin");
 
-  if(getdvar("intro_mask") == "0")
+  if(getdvar("intro_mask") == "0") {
     level.allies[level.const_rorke] maps\cornered_code::char_dialog_add_and_go("cornered_rke_heretheycomestay");
+  }
 
   common_scripts\utility::flag_wait("vip_heli_approach");
   wait 0.5;
@@ -1166,8 +1221,9 @@ intro_allies_vo() {
     common_scripts\utility::flag_set("give_binocular_hint_if_needed");
   }
 
-  if(maps\cornered_code::is_e3())
+  if(maps\cornered_code::is_e3()) {
     wait 3;
+  }
 
   level.allies[level.const_baker] maps\cornered_code::char_dialog_add_and_go("cornered_bkr_ourtarget");
 
@@ -1181,8 +1237,9 @@ intro_allies_vo() {
   level.allies[level.const_rorke] maps\cornered_code::char_dialog_add_and_go("cornered_rke_preparetoreceive");
   maps\cornered_code::radio_dialog_add_and_go("cornered_orc_copyblackknight");
 
-  while(level.player.binoculars_active == 0)
+  while(level.player.binoculars_active == 0) {
     common_scripts\utility::waitframe();
+  }
 
   wait 0.5;
   maps\cornered_code::radio_dialog_add_and_go("cornered_orc_receivingtransmissionup");
@@ -1205,8 +1262,9 @@ intro_binocs_inactive_nag_vo() {
     if(var_2 == var_1) {
       var_2++;
 
-      if(var_2 >= var_0.size)
+      if(var_2 >= var_0.size) {
         var_2 = 0;
+      }
     }
 
     var_3 = var_0[var_2];
@@ -1228,8 +1286,9 @@ intro_binocs_not_target_vo() {
   var_1 = -1;
 
   for(;;) {
-    while(!isDefined(level.player.current_binocular_zoom_level) && !isDefined(level.player.binocular_zoom_levels))
+    while(!isDefined(level.player.current_binocular_zoom_level) && !isDefined(level.player.binocular_zoom_levels)) {
       wait 0.05;
+    }
 
     if(level.player.current_binocular_zoom_level == level.player.binocular_zoom_levels - 1) {
       level.player waittill("scanning_upload_verified");
@@ -1238,15 +1297,17 @@ intro_binocs_not_target_vo() {
       if(var_2 == var_1) {
         var_2++;
 
-        if(var_2 >= var_0.size)
+        if(var_2 >= var_0.size) {
           var_2 = 0;
+        }
       }
 
       var_3 = var_0[var_2];
       wait 0.55;
 
-      if(!common_scripts\utility::flag("hvt_confirmed"))
+      if(!common_scripts\utility::flag("hvt_confirmed")) {
         maps\cornered_code::radio_dialog_add_and_go_interrupt(var_3);
+      }
 
       var_1 = var_2;
     }
@@ -1271,11 +1332,13 @@ intro_binocs_oracle_scanning_vo() {
   var_3 = -1;
 
   for(;;) {
-    while(!isDefined(level.player.current_binocular_zoom_level) && !isDefined(level.player.binocular_zoom_levels))
+    while(!isDefined(level.player.current_binocular_zoom_level) && !isDefined(level.player.binocular_zoom_levels)) {
       wait 0.05;
+    }
 
-    if(!level.player attackbuttonpressed())
+    if(!level.player attackbuttonpressed()) {
       level.player waittill("scanning_target");
+    }
 
     if(level.player.current_binocular_zoom_level == level.player.binocular_zoom_levels - 1) {
       wait 0.05;
@@ -1286,8 +1349,9 @@ intro_binocs_oracle_scanning_vo() {
         if(var_4 == var_3) {
           var_4++;
 
-          if(var_4 >= var_2.size)
+          if(var_4 >= var_2.size) {
             var_4 = 0;
+          }
         }
 
         var_5 = var_2[var_4];
@@ -1299,8 +1363,9 @@ intro_binocs_oracle_scanning_vo() {
         if(var_6 == var_1) {
           var_6++;
 
-          if(var_6 >= var_0.size)
+          if(var_6 >= var_0.size) {
             var_6 = 0;
+          }
         }
 
         var_7 = var_0[var_6];
@@ -1308,8 +1373,9 @@ intro_binocs_oracle_scanning_vo() {
         var_1 = var_6;
       }
 
-      while(level.player attackbuttonpressed())
+      while(level.player attackbuttonpressed()) {
         wait 0.05;
+      }
     }
 
     common_scripts\utility::waitframe();
@@ -1390,8 +1456,9 @@ ally_zipline_nag(var_0, var_1, var_2, var_3, var_4) {
     if(var_7 == var_5) {
       var_7++;
 
-      if(var_7 >= var_0.size)
+      if(var_7 >= var_0.size) {
         var_7 = 0;
+      }
     }
 
     var_8 = var_0[var_7];
@@ -1415,8 +1482,9 @@ zipline_allies_vo() {
     if(!maps\cornered_code::is_e3()) {
       wait 1.5;
 
-      if(isDefined(level.player.binoculars_active) && level.player.binoculars_active)
+      if(isDefined(level.player.binoculars_active) && level.player.binoculars_active) {
         level.player waittill("stop_using_binoculars");
+      }
 
       wait 0.5;
     }
@@ -1454,8 +1522,9 @@ zipline_allies_anims() {
 
 zipline_rorke_anims() {
   if(!isDefined(level.zipline_startpoint)) {
-    if(isDefined(level.player.binoculars_active) && level.player.binoculars_active)
+    if(isDefined(level.player.binoculars_active) && level.player.binoculars_active) {
       level.player waittill("stop_using_binoculars");
+    }
 
     common_scripts\utility::flag_wait("rorke_ready_to_setup_zipline");
     waittillframeend;
@@ -1471,8 +1540,9 @@ zipline_rorke_anims() {
     self stopanimscripted();
     level.zipline_launcher_rorke_count++;
 
-    while(level.zipline_launcher_rorke_count < 2)
+    while(level.zipline_launcher_rorke_count < 2) {
       wait 0.05;
+    }
 
     level.zipline_launcher_rorke_count = 0;
   }
@@ -1483,8 +1553,9 @@ zipline_rorke_anims() {
   zipline_launcher_fire_anims(var_0);
 
   if(common_scripts\utility::flag("player_is_starting_zipline")) {
-    foreach(var_2 in var_0)
+    foreach(var_2 in var_0) {
     var_2 stopanimscripted();
+    }
 
     if(isDefined(level.zipline_trolley_rorke.is_out)) {} else
       level.zipline_trolley_rorke show();
@@ -1504,10 +1575,12 @@ zipline_rorke_anims() {
 }
 
 zipline_rope_swap_ally(var_0) {
-  if(var_0.animname == "rorke")
+  if(var_0.animname == "rorke") {
     level.detach_rope_rorke delete();
-  else
+  }
+  else {
     level.detach_rope_baker delete();
+  }
 
   var_0 maps\cornered_code_rappel_allies::ally_rappel_start_rope("stealth");
 }
@@ -1525,8 +1598,9 @@ setup_launcher_rorke(var_0) {
 zipline_baker_anims() {
   if(!isDefined(level.zipline_startpoint)) {
     if(isDefined(level.player.binoculars_active) && level.player.binoculars_active) {
-      if(!maps\cornered_code::is_e3())
+      if(!maps\cornered_code::is_e3()) {
         level.player waittill("stop_using_binoculars");
+      }
     }
 
     common_scripts\utility::flag_wait("baker_ready_to_setup_zipline");
@@ -1544,8 +1618,9 @@ zipline_baker_anims() {
     self stopanimscripted();
     level.zipline_launcher_baker_count++;
 
-    while(level.zipline_launcher_baker_count < 2)
+    while(level.zipline_launcher_baker_count < 2) {
       wait 0.05;
+    }
 
     level.zipline_launcher_baker_count = 0;
   }
@@ -1556,8 +1631,9 @@ zipline_baker_anims() {
   zipline_launcher_fire_anims(var_0);
 
   if(common_scripts\utility::flag("player_is_starting_zipline")) {
-    foreach(var_2 in var_0)
+    foreach(var_2 in var_0) {
     var_2 stopanimscripted();
+    }
 
     if(isDefined(level.zipline_trolley_baker.is_out)) {} else
       level.zipline_trolley_baker show();
@@ -1586,48 +1662,63 @@ setup_launcher_baker() {
 }
 
 front_left_anchor_impact(var_0) {
-  if(var_0.targetname == "zipline_launcher_rorke")
+  if(var_0.targetname == "zipline_launcher_rorke") {
     common_scripts\utility::exploder("launcher_foot_R1");
-  else if(var_0.targetname == "zipline_launcher_baker")
+  }
+  else if(var_0.targetname == "zipline_launcher_baker") {
     common_scripts\utility::exploder("launcher_foot_L1");
-  else if(var_0.targetname == "zipline_launcher_player")
+  }
+  else if(var_0.targetname == "zipline_launcher_player") {
     common_scripts\utility::exploder("launcher_foot_C1");
+  }
 }
 
 front_right_anchor_impact(var_0) {
-  if(var_0.targetname == "zipline_launcher_rorke")
+  if(var_0.targetname == "zipline_launcher_rorke") {
     common_scripts\utility::exploder("launcher_foot_R2");
-  else if(var_0.targetname == "zipline_launcher_baker")
+  }
+  else if(var_0.targetname == "zipline_launcher_baker") {
     common_scripts\utility::exploder("launcher_foot_L2");
-  else if(self.targetname == "zipline_launcher_player")
+  }
+  else if(self.targetname == "zipline_launcher_player") {
     common_scripts\utility::exploder("launcher_foot_C2");
+  }
 }
 
 rear_left_anchor_impact(var_0) {
-  if(var_0.targetname == "zipline_launcher_rorke")
+  if(var_0.targetname == "zipline_launcher_rorke") {
     common_scripts\utility::exploder("launcher_foot_R3");
-  else if(var_0.targetname == "zipline_launcher_baker")
+  }
+  else if(var_0.targetname == "zipline_launcher_baker") {
     common_scripts\utility::exploder("launcher_foot_L3");
-  else if(self.targetname == "zipline_launcher_player")
+  }
+  else if(self.targetname == "zipline_launcher_player") {
     common_scripts\utility::exploder("launcher_foot_C3");
+  }
 }
 
 rear_right_anchor_impact(var_0) {
-  if(var_0.targetname == "zipline_launcher_rorke")
+  if(var_0.targetname == "zipline_launcher_rorke") {
     common_scripts\utility::exploder("launcher_foot_R4");
-  else if(var_0.targetname == "zipline_launcher_baker")
+  }
+  else if(var_0.targetname == "zipline_launcher_baker") {
     common_scripts\utility::exploder("launcher_foot_L4");
-  else if(var_0.targetname == "zipline_launcher_player")
+  }
+  else if(var_0.targetname == "zipline_launcher_player") {
     common_scripts\utility::exploder("launcher_foot_C4");
+  }
 }
 
 anchor_line_impact(var_0) {
-  if(var_0.targetname == "zipline_launcher_rorke")
+  if(var_0.targetname == "zipline_launcher_rorke") {
     common_scripts\utility::exploder("launcher_anchor_R");
-  else if(var_0.targetname == "zipline_launcher_baker")
+  }
+  else if(var_0.targetname == "zipline_launcher_baker") {
     common_scripts\utility::exploder("launcher_anchor_L");
-  else if(var_0.targetname == "zipline_launcher_player")
+  }
+  else if(var_0.targetname == "zipline_launcher_player") {
     common_scripts\utility::exploder("launcher_anchor_C");
+  }
 }
 
 zipline_launcher_setup_anims(var_0) {
@@ -1674,29 +1765,35 @@ spawn_trolley_ally(var_0) {
     level.zipline_trolley_rorke.is_out = 1;
     level.zipline_trolley_rorke show();
 
-    if(!common_scripts\utility::flag("player_is_starting_zipline"))
+    if(!common_scripts\utility::flag("player_is_starting_zipline")) {
       level.zipline_trolley_rorke zipline_launcher_fire_anims(undefined, "zipline_trolley_fire_rorke");
+    }
   } else {
     level.zipline_trolley_baker.is_out = 1;
     level.zipline_trolley_baker show();
 
-    if(!common_scripts\utility::flag("player_is_starting_zipline"))
+    if(!common_scripts\utility::flag("player_is_starting_zipline")) {
       level.zipline_trolley_baker zipline_launcher_fire_anims(undefined, "zipline_trolley_fire_baker");
+    }
   }
 }
 
 delete_trolley_ally(var_0) {
-  if(var_0.animname == "rorke")
+  if(var_0.animname == "rorke") {
     level.zipline_trolley_rorke delete();
-  else
+  }
+  else {
     level.zipline_trolley_baker delete();
+  }
 }
 
 detach_rope_ally(var_0) {
-  if(var_0.animname == "rorke")
+  if(var_0.animname == "rorke") {
     level.detach_rope_rorke show();
-  else
+  }
+  else {
     level.detach_rope_baker show();
+  }
 }
 
 zipline_player_anims() {
@@ -1706,10 +1803,12 @@ zipline_player_anims() {
   var_0 = getent("zipline_trigger", "targetname");
 
   if(!maps\cornered_code::is_e3()) {
-    if(level.player common_scripts\utility::is_player_gamepad_enabled())
+    if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
       var_0 sethintstring(&"CORNERED_START_ZIPLINE_CONSOLE");
-    else
+    }
+    else {
       var_0 sethintstring(&"CORNERED_START_ZIPLINE");
+    }
   }
 
   var_1 = common_scripts\utility::getstruct("zipline_lookat", "targetname");
@@ -1718,8 +1817,9 @@ zipline_player_anims() {
   level.zipline_trolley_obj delete();
   thread maps\cornered_audio::aud_zipline("start");
 
-  if(level.player getstance() != "stand")
+  if(level.player getstance() != "stand") {
     level.player setstance("stand");
+  }
 
   level.player allowcrouch(0);
   level.player allowprone(0);
@@ -1729,8 +1829,9 @@ zipline_player_anims() {
   level.constrict_view_count = 1;
   level.release_view_count = 1;
 
-  if(isDefined(level.player.binoculars_active) && level.player.binoculars_active)
+  if(isDefined(level.player.binoculars_active) && level.player.binoculars_active) {
     level.player notify("use_binoculars");
+  }
 
   level.zipline_anim_struct thread maps\_anim::anim_first_frame(level.arms_and_legs, "cornered_zipline_player");
   level.player playerlinktoblend(level.cornered_player_arms, "tag_player", 0.5);

@@ -63,10 +63,12 @@ section_hint_string_init() {
 }
 
 hints_ads_escape() {
-  if(common_scripts\utility::flag("esc_combat_done") || level.player adsbuttonpressed())
+  if(common_scripts\utility::flag("esc_combat_done") || level.player adsbuttonpressed()) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 escape_main() {
@@ -82,8 +84,9 @@ escape_main() {
   ally_console_scene();
   maps\_utility::autosave_by_name("escape_window_done");
 
-  if(!common_scripts\utility::flag("absolute_fire_decompression"))
+  if(!common_scripts\utility::flag("absolute_fire_decompression")) {
     destruction_sequence();
+  }
 
   common_scripts\utility::flag_wait_all("escape_clear", "player_exited_escape_hallway");
   escape_cleanup();
@@ -119,10 +122,12 @@ escape_no_push_zone() {
   wait 1;
 
   while(!common_scripts\utility::flag("player_open_escape_door")) {
-    if(common_scripts\utility::flag("player_at_escape_door"))
+    if(common_scripts\utility::flag("player_at_escape_door")) {
       common_scripts\utility::flag_set("no_push_zone");
-    else
+    }
+    else {
       common_scripts\utility::flag_clear("no_push_zone");
+    }
 
     wait 0.05;
   }
@@ -356,11 +361,13 @@ crew_quarters_crew_killed() {
     var_1.favoriteenemy = level.player;
   }
 
-  while(isalive(var_1))
+  while(isalive(var_1)) {
     wait 0.01;
+  }
 
-  if(isalive(var_3))
+  if(isalive(var_3)) {
     var_3 kill();
+  }
 
   wait 1.5;
 
@@ -376,8 +383,9 @@ redshirt_cq_enc_handles(var_0, var_1) {
   var_1 maps\_anim::anim_single_solo(var_0, "odin_escape_first_encounter_redshirt");
   wait 0.1;
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 kill();
+  }
 }
 
 escape_destruct_boxes(var_0) {
@@ -421,8 +429,9 @@ cq_room_destruction() {
   var_0 waittill("damage");
   var_1 = getEntArray("cq_dyn_cargo_01_static", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 delete();
+  }
 }
 
 escape_enemy_setup() {
@@ -440,8 +449,9 @@ cq_combat_movement() {
   for(;;) {
     wait(randomfloatrange(0.5, 2.5));
 
-    if(common_scripts\utility::flag("enc_movement_token_taken"))
+    if(common_scripts\utility::flag("enc_movement_token_taken")) {
       common_scripts\utility::flag_waitopen_or_timeout("enc_movement_token_taken", 4);
+    }
 
     if(getaicount("axis") == 1) {
       self endon("death");
@@ -559,8 +569,9 @@ redshirt_cq_enc_handles2(var_0, var_1) {
   var_0.forceragdollimmediate = 1;
   wait 0.1;
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 kill();
+  }
 }
 
 escape_enemy_03_think() {
@@ -608,10 +619,12 @@ third_enemy_shooting() {
     var_3 = randomfloatrange(0.1, 0.5);
 
     for(var_4 = 0; var_4 < 3; var_4++) {
-      if(isalive(self))
+      if(isalive(self)) {
         self shoot(1, var_2.origin, 1);
-      else
+      }
+      else {
         break;
+      }
 
       wait 0.05;
     }
@@ -659,35 +672,43 @@ crew_quarters_aftermath() {
 escape_dialogue() {
   maps\_utility::smart_radio_dialogue("odin_shq_odinpayload1uploading");
 
-  if(!common_scripts\utility::flag("start_odin_firing_scene"))
+  if(!common_scripts\utility::flag("start_odin_firing_scene")) {
     maps\_utility::smart_radio_dialogue("odin_atl_targetinglosangeles");
+  }
 
   wait 0.9;
 
-  if(!common_scripts\utility::flag("start_odin_firing_scene"))
+  if(!common_scripts\utility::flag("start_odin_firing_scene")) {
     maps\_utility::smart_radio_dialogue("odin_atl_sandiegolocked");
+  }
 
   wait 1.2;
 
-  if(!common_scripts\utility::flag("start_odin_firing_scene"))
+  if(!common_scripts\utility::flag("start_odin_firing_scene")) {
     maps\_utility::smart_radio_dialogue("odin_atl_phoenixlocked");
+  }
 
   wait 0.4;
 
-  if(!common_scripts\utility::flag("start_odin_firing_scene"))
+  if(!common_scripts\utility::flag("start_odin_firing_scene")) {
     maps\_utility::smart_radio_dialogue("odin_atl_targetinghouston");
+  }
 
-  if(!common_scripts\utility::flag("start_odin_firing_scene"))
+  if(!common_scripts\utility::flag("start_odin_firing_scene")) {
     maps\_utility::smart_radio_dialogue("odin_atl_targetingmiami");
+  }
 
-  if(!common_scripts\utility::flag("start_odin_firing_scene"))
+  if(!common_scripts\utility::flag("start_odin_firing_scene")) {
     maps\_utility::smart_radio_dialogue("odin_shq_odintargetingsolutionsare");
+  }
 
-  if(!common_scripts\utility::flag("start_odin_firing_scene"))
+  if(!common_scripts\utility::flag("start_odin_firing_scene")) {
     maps\_utility::smart_radio_dialogue("odin_shq_rodfeedengaging");
+  }
 
-  if(!common_scripts\utility::flag("start_odin_firing_scene"))
+  if(!common_scripts\utility::flag("start_odin_firing_scene")) {
     maps\_utility::smart_radio_dialogue("odin_kyr_budfollowmewe");
+  }
 }
 
 check_for_escape_dialogue_overlap(var_0) {
@@ -717,10 +738,12 @@ play_console_scene() {
 }
 
 ally_dialogue_overlap_check(var_0) {
-  if(common_scripts\utility::flag("escape_overlap_dialogue"))
+  if(common_scripts\utility::flag("escape_overlap_dialogue")) {
     maps\_utility::smart_radio_dialogue_overlap(var_0);
-  else
+  }
+  else {
     maps\_utility::smart_radio_dialogue(var_0);
+  }
 }
 
 window_vo_01(var_0) {
@@ -789,8 +812,9 @@ post_window_nag() {
     maps\_utility::smart_radio_dialogue("odin_kyr_budweneedto_2");
     var_0 = var_0 + 2;
 
-    if(var_0 > 20)
+    if(var_0 > 20) {
       var_0 = 20;
+    }
   }
 }
 
@@ -849,8 +873,9 @@ ramping_explosions() {
   thread maps\odin_audio::sfx_escape_destruction_fire_puffs();
   common_scripts\utility::exploder("escape_destruction");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     common_scripts\utility::exploder("escape_destruction_ng");
+  }
 
   thread maps\odin_audio::sfx_scuttle_alarm();
 
@@ -858,21 +883,25 @@ ramping_explosions() {
     thread maps\odin_audio::sfx_shaking_logic();
     earthquake(randomfloatrange(var_0, var_1), 1.0, level.player.origin, 500);
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       level.player playrumbleonentity("light_3s");
-    else
+    }
+    else {
       level.player playrumbleonentity("heavy_1s");
+    }
 
     common_scripts\utility::exploder("escape_destruction_random");
     wait(randomfloatrange(0.8, 2.4));
     var_0 = var_0 + 0.05;
     var_1 = var_1 + 0.08;
 
-    if(var_0 > 0.15)
+    if(var_0 > 0.15) {
       var_0 = 0.15;
+    }
 
-    if(var_1 > 0.35)
+    if(var_1 > 0.35) {
       var_1 = 0.35;
+    }
   }
 }
 
@@ -901,8 +930,9 @@ escape_explosion_player_timeout() {
   level.player playSound("scn_odin_decompression_explode2_ss");
   wait 0.5;
 
-  foreach(var_5 in var_0)
+  foreach(var_5 in var_0) {
   playFX(common_scripts\utility::getfx("spc_explosion_1200"), var_5.origin);
+  }
 
   wait 0.5;
   level.player kill();
@@ -925,13 +955,15 @@ early_decomp_checker() {
 escape_cleanup(var_0) {
   var_1 = getEntArray("space_cover_test", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 delete();
+  }
 
   var_5 = getEntArray("cq_dynamic_objects", "script_noteworthy");
 
-  foreach(var_7 in var_5)
+  foreach(var_7 in var_5) {
   var_7 delete();
+  }
 }
 
 manage_earth(var_0) {

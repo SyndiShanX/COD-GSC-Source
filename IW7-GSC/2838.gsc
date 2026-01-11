@@ -48,8 +48,9 @@ func_475F(var_00) {
   if(isDefined(level.func_93A9) && level.player.func_4759.active.size > 3) {
     var_03 = level.player.func_4759.active.size - 3;
 
-    for(var_04 = 0; var_04 < var_03; var_4++)
+    for(var_04 = 0; var_04 < var_03; var_4++) {
       level.player.func_4759.active[var_04] notify("expired");
+    }
   }
 
   var_05 = (0, level.player.angles[1] - 90, 0);
@@ -86,8 +87,9 @@ func_DFDF(var_00) {
   if(!scripts\engine\utility::array_contains(level.player.func_4759.func_11168, self)) {
     return;
   }
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 0;
+  }
 
   if(isDefined(self.grenade)) {
     self.origin = self.grenade.origin;
@@ -96,8 +98,9 @@ func_DFDF(var_00) {
     self.grenade delete();
   }
 
-  if(var_00)
+  if(var_00) {
     level.player.func_4759.func_11168 = scripts\engine\utility::array_remove(level.player.func_4759.func_11168, self);
+  }
 }
 
 func_DFBD() {
@@ -109,8 +112,9 @@ func_DFBD() {
   foreach(var_02 in var_00) {
     var_02 func_DFDF(1);
 
-    if(isDefined(var_2.func_BE07))
+    if(isDefined(var_2.func_BE07)) {
       var_2.func_BE07 notify("death");
+    }
   }
 
   for(;;) {
@@ -132,8 +136,9 @@ func_4763(var_00, var_01, var_02, var_03) {
   var_04 = _spawncoverwall(var_00, var_01, var_02);
 
   if(!isDefined(var_04)) {
-    if(isDefined(var_3.origin))
+    if(isDefined(var_3.origin)) {
       playFX(level.func_7649["coverwall_dud"], var_3.origin);
+    }
 
     level.player.func_4759.func_11168 = scripts\engine\utility::array_remove(level.player.func_4759.func_11168, var_03);
     return;
@@ -155,14 +160,17 @@ func_4763(var_00, var_01, var_02, var_03) {
   var_03 thread func_475E(35);
   var_04 thread func_475A();
 
-  if(1)
+  if(1) {
     var_04 thread func_475D();
+  }
 
-  if(isDefined(level.player.func_4759) && level.player.func_4759.func_389C)
+  if(isDefined(level.player.func_4759) && level.player.func_4759.func_389C) {
     thread func_B9C4();
+  }
 
-  if(getdvarint("debug_coverwall"))
+  if(getdvarint("debug_coverwall")) {
     var_04 thread draw_cool_circle_til_notify();
+  }
 
   thread func_10696(var_04);
   func_0F18::func_10E8A("broadcast", "attack", var_00, 1000);
@@ -183,8 +191,9 @@ func_475A() {
     self waittill("coverwall_expand_hit_actor", var_00);
 
     if(var_0.team == "axis") {
-      if(var_00 func_3870())
+      if(var_00 func_3870()) {
         var_00 _meth_81D0();
+      }
     }
   }
 }
@@ -193,8 +202,9 @@ func_3870() {
   var_0["c8"] = 1;
   var_0["c12"] = 1;
 
-  if(isDefined(self.unittype) && isDefined(var_0[self.unittype]))
+  if(isDefined(self.unittype) && isDefined(var_0[self.unittype])) {
     return 0;
+  }
 
   return 1;
 }
@@ -233,16 +243,19 @@ func_10696(var_00) {
     var_15 = anglestoright(var_0.angles) * var_11;
     var_16 = var_01 + var_10 + var_15;
 
-    if(var_00 func_3913(var_16, var_12))
+    if(var_00 func_3913(var_16, var_12)) {
       var_0.func_473D[var_07 + "_" + var_08] = _spawncovernode(var_16, var_12, "cover stand", 512, var_14);
-    else
+    }
+    else {
       var_13 = var_02;
+    }
 
     var_08 = scripts\engine\utility::ter_op(var_08 == "a", "b", "a");
     var_07 = scripts\engine\utility::ter_op(var_09 >= 2, "left", "right");
 
-    if(var_09 == 2)
+    if(var_09 == 2) {
       wait 0.05;
+    }
   }
 
   var_00 thread func_B9FB();
@@ -263,8 +276,9 @@ func_3913(var_00, var_01) {
   var_04 = scripts\engine\trace::capsule_trace(var_00 + (0, 0, 20), var_00, 18, 72, var_01, self, scripts\engine\trace::create_solid_ai_contents(1));
 
   if(isDefined(var_4["fraction"]) && var_4["fraction"] < 0.5) {
-    if(getdvarint("debug_coverwall"))
+    if(getdvarint("debug_coverwall")) {
       scripts\engine\trace::draw_trace(var_04, (1, 0, 0), 0, 200);
+    }
 
     return 0;
   }
@@ -274,14 +288,16 @@ func_3913(var_00, var_01) {
   var_04 = scripts\engine\trace::ray_trace(var_05, var_06);
 
   if(isDefined(var_4["fraction"]) && var_4["fraction"] < 1) {
-    if(getdvarint("debug_coverwall"))
+    if(getdvarint("debug_coverwall")) {
       scripts\engine\trace::draw_trace(var_04, (1, 0, 0), 1, 200);
+    }
 
     return 0;
   }
 
-  if(getdvarint("debug_coverwall"))
+  if(getdvarint("debug_coverwall")) {
     scripts\engine\trace::draw_trace(var_04, (0, 1, 0), 1, 200);
+  }
 
   return 1;
 }
@@ -298,21 +314,27 @@ func_B9FB() {
   var_01 = undefined;
   var_02 = [];
 
-  if(isDefined(self.func_473D["right_a"]))
+  if(isDefined(self.func_473D["right_a"])) {
     var_00 = self.func_473D["right_a"];
-  else if(isDefined(self.func_473D["left_a"]))
+  }
+  else if(isDefined(self.func_473D["left_a"])) {
     var_00 = self.func_473D["left_a"];
+  }
 
-  if(isDefined(self.func_473D["right_b"]))
+  if(isDefined(self.func_473D["right_b"])) {
     var_01 = self.func_473D["right_b"];
-  else if(isDefined(self.func_473D["left_b"]))
+  }
+  else if(isDefined(self.func_473D["left_b"])) {
     var_01 = self.func_473D["left_b"];
+  }
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_2[var_2.size] = var_00;
+  }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_2[var_2.size] = var_01;
+  }
 
   for(;;) {
     var_02 = scripts\engine\utility::array_removeundefined(var_02);
@@ -361,8 +383,9 @@ func_E16A(var_00) {
 func_E0E1(var_00) {
   foreach(var_04, var_02 in self.func_473D) {
     if(var_00 == self.func_473D[var_04]) {
-      if(getdvarint("debug_coverwall"))
+      if(getdvarint("debug_coverwall")) {
         var_03 = var_0.origin;
+      }
 
       _despawncovernode(var_00);
       self.func_473D = scripts\sp\utility::func_22B2(self.func_473D, var_04);
@@ -393,8 +416,9 @@ func_C049() {
         continue;
       }
 
-      if(getdvarint("debug_coverwall"))
+      if(getdvarint("debug_coverwall")) {
         scripts\engine\trace::draw_trace(var_07, (0, 1, 0), 0, 20);
+      }
     }
   }
 
@@ -417,25 +441,30 @@ func_475E(var_00) {
   var_03 = self.func_BE07.origin;
   var_04 = self.func_BE07.owner;
 
-  if(scripts\engine\utility::flag("coverwall_force_delete"))
+  if(scripts\engine\utility::flag("coverwall_force_delete")) {
     scripts\engine\utility::waitframe();
+  }
 
   if(isDefined(self.func_BE07) && isDefined(self.func_BE07.func_473D)) {
     foreach(var_06 in self.func_BE07.func_473D) {
-      if(isDefined(var_06))
+      if(isDefined(var_06)) {
         _despawncovernode(var_06);
+      }
     }
   }
 
-  if(isDefined(self.func_BE07.func_BE64))
+  if(isDefined(self.func_BE07.func_BE64)) {
     _destroynavobstacle(self.func_BE07.func_BE64);
+  }
 
-  if(isDefined(self.func_BE07))
+  if(isDefined(self.func_BE07)) {
     self.func_BE07 _meth_8514(var_02);
+  }
 
   if(isDefined(self.func_BE07.func_132AA)) {
-    foreach(var_09 in self.func_BE07.func_132AA)
+    foreach(var_09 in self.func_BE07.func_132AA) {
     var_09 delete();
+    }
   }
 
   if(!var_02) {
@@ -518,10 +547,12 @@ func_475C(var_00, var_01) {
   var_02 = var_0.origin;
   var_03 = var_02 + (0, 0, 32);
 
-  if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode"))
+  if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
     playFX(level.func_7649["coverwall_explosion_vr"], var_02);
-  else
+  }
+  else {
     playFX(level.func_7649["coverwall_explosion"], var_02);
+  }
 
   _playworldsound("deployable_cover_explode", var_02);
   earthquake(0.4, 0.6, var_0.owner.origin, 450);
@@ -529,8 +560,9 @@ func_475C(var_00, var_01) {
   var_00 notify("death");
   scripts\engine\utility::flag_wait_or_timeout("coverwall_force_delete", 0.1);
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     radiusdamage(var_03, 150, 250, 120, var_0.owner, "MOD_EXPLOSIVE", "coverwall");
+  }
 }
 
 func_596D() {
@@ -545,13 +577,15 @@ func_596D() {
     var_00 = getEntArray("script_coverwall", "classname");
 
     foreach(var_02 in var_00) {
-      if(isDefined(var_2.func_BE64))
+      if(isDefined(var_2.func_BE64)) {
         _destroynavobstacle(var_2.func_BE64);
+      }
 
       var_03 = distancesquared(self.origin, var_2.origin);
 
-      if(var_03 < squared(200))
+      if(var_03 < squared(200)) {
         var_02 notify("expired");
+      }
     }
 
     wait 0.75;

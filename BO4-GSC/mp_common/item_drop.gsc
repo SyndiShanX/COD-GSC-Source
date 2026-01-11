@@ -1170,4 +1170,3 @@ debug_line(start, end, color) {
   line(start, end, color, 1, 0, framespersec * sec);
   recordline(start, end, color, "<dev string:xa3>");
 }
-

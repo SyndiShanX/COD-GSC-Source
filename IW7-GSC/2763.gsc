@@ -6,11 +6,13 @@
 init() {}
 
 func_1768(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
-  if(var_04 == 0)
+  if(var_04 == 0) {
     var_04 = undefined;
+  }
 
   if(!isDefined(self.lightbarstructs) || self.lightbarstructs.size == 0) {
     var_06 = [];
@@ -30,16 +32,20 @@ func_1768(var_00, var_01, var_02, var_03, var_04, var_05) {
   self.lightbarstructs[self.lightbarstructs.size - 1].executing = 0;
   self.lightbarstructs[self.lightbarstructs.size - 1].func_636F = var_05;
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     self.lightbarstructs[self.lightbarstructs.size - 1].time = var_04 * 1000;
-  else
+  }
+  else {
     self.lightbarstructs[self.lightbarstructs.size - 1].time = undefined;
+  }
 
-  if(isDefined(var_03) && var_03)
+  if(isDefined(var_03) && var_03) {
     thread endinactiveinstructionondeath(self.lightbarstructs[self.lightbarstructs.size - 1]);
+  }
 
-  if(isDefined(var_05))
+  if(isDefined(var_05)) {
     thread endinstructiononnotification(var_05, self.lightbarstructs[self.lightbarstructs.size - 1]);
+  }
 
   thread managelightbarstack();
 }
@@ -123,8 +129,9 @@ removetimedoutinstructions(var_00) {
     var_05 = var_3.time - var_04;
     var_05 = var_05 / 1000;
 
-    if(var_05 > 0)
+    if(var_05 > 0) {
       var_1[var_1.size] = var_03;
+    }
   }
 
   return var_01;
@@ -218,18 +225,21 @@ endinactiveinstructionondeath(var_00) {
 endinstructiononnotification(var_00, var_01) {
   var_01 endon("removed");
 
-  if(isarray(var_00))
+  if(isarray(var_00)) {
     var_02 = scripts\engine\utility::waittill_any_in_array_return(var_00);
-  else
+  }
+  else {
     self waittill(var_00);
+  }
 
   if(!isDefined(self)) {
     return;
   }
   for(var_03 = 0; var_03 < self.lightbarstructs.size; var_3++) {
     if(var_01 == self.lightbarstructs[var_03]) {
-      if(var_1.executing)
+      if(var_1.executing) {
         set_lightbar_off();
+      }
 
       self.lightbarstructs[var_03] = undefined;
       cleanlbarray();

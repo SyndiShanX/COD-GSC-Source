@@ -11,8 +11,9 @@ near_tv() {
     self waittill("trigger");
     common_scripts\utility::flag_set("near_tv");
 
-    while(level.player istouching(self))
+    while(level.player istouching(self)) {
       wait 1;
+    }
 
     stopcinematicingame();
     level notify("away_from_tv");
@@ -39,8 +40,9 @@ start_movie_loop() {
     cinematicingameloopresident("asad_speech_180");
     wait 5;
 
-    while(iscinematicplaying())
+    while(iscinematicplaying()) {
       wait 1;
+    }
   }
 }
 
@@ -50,14 +52,16 @@ flashbang_hint() {
   level.price maps\_anim::anim_single_queue(level.price, "throwflash");
   wait 2;
 
-  if(!common_scripts\utility::flag("player_has_flashed"))
+  if(!common_scripts\utility::flag("player_has_flashed")) {
     thread maps\armada::keyhint(&"ARMADA_HINT_FLASH", "flash", "+smoke", 10);
+  }
 
   var_1 = getEntArray("hq_breachers", "script_noteworthy");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(isalive(var_1[var_2]))
+    if(isalive(var_1[var_2])) {
       var_1[var_2] dodamage(var_1[var_2].health + 100, var_1[var_2].origin);
+    }
   }
 }
 
@@ -70,8 +74,9 @@ flag_on_flash() {
 quiet_circling_helicopters() {
   var_0 = get_vehiclearray("circling_heli", "script_noteworthy");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] vehicle_turnengineoff();
+  }
 }
 
 add_damage_recorder() {
@@ -88,8 +93,9 @@ init_pickup_technical() {
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.classname)) {
-      if(var_2.classname == "script_vehicle_pickup_technical")
+      if(var_2.classname == "script_vehicle_pickup_technical") {
         var_2 thread pickup_technical_think();
+      }
     }
   }
 }
@@ -99,8 +105,9 @@ init_pickup_technical_badplace() {
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.classname)) {
-      if(var_2.classname == "script_vehicle_pickup_technical")
+      if(var_2.classname == "script_vehicle_pickup_technical") {
         var_2.custombadplacethread = ::pickup_technical_custombadplace;
+      }
     }
   }
 }
@@ -109,8 +116,9 @@ pickup_technical_custombadplace() {
   var_0 = 300;
   self endon("kill_badplace_forever");
 
-  if(!self vehicle_isphysveh())
+  if(!self vehicle_isphysveh()) {
     self endon("death");
+  }
 
   self endon("delete");
   var_1 = getent("PickupTechnicalBadBlaceVolume", "targetname");
@@ -130,20 +138,26 @@ pickup_technical_custombadplace() {
       continue;
     }
 
-    if(var_6 < 5)
+    if(var_6 < 5) {
       var_7 = 200;
-    else if(var_6 > 5 && var_6 < 8)
+    }
+    else if(var_6 > 5 && var_6 < 8) {
       var_7 = 350;
-    else
+    }
+    else {
       var_7 = 500;
+    }
 
-    if(isDefined(self.badplacemodifier))
+    if(isDefined(self.badplacemodifier)) {
       var_7 = var_7 * self.badplacemodifier;
+    }
 
-    if(var_2)
+    if(var_2) {
       var_8 = anglesToForward(self gettagangles("tag_turret"));
-    else
+    }
+    else {
       var_8 = anglesToForward(self.angles);
+    }
 
     var_1.origin = self.origin;
     var_1.angles = (0.0, self.angles[1], 0.0);
@@ -157,8 +171,9 @@ pickup_arcade_setup() {
   add_damage_recorder();
   pickup_check_damage();
 
-  if(player_did_most_damage())
+  if(player_did_most_damage()) {
     thread maps\_arcademode::arcademode_add_points(self.origin, 1, "explosive", 200);
+  }
 }
 
 pickup_check_damage() {
@@ -172,14 +187,16 @@ pickup_check_damage() {
       continue;
     }
 
-    if(var_1 != self && isDefined(var_1.team) && var_1.team != "axis")
+    if(var_1 != self && isDefined(var_1.team) && var_1.team != "axis") {
       self.non_player_damage_done = self.non_player_damage_done + var_0;
+    }
   }
 }
 
 pickup_check_death() {
-  while(isDefined(self.model) && self.model != "vehicle_pickup_technical_destroyed")
+  while(isDefined(self.model) && self.model != "vehicle_pickup_technical_destroyed") {
     waitframe();
+  }
 
   self notify("pickup_death");
 }
@@ -189,8 +206,9 @@ pickup_technical_think() {
   var_0.attachedguys[0].a.disablepain = 1;
   var_0.attachedguys[0].disablebulletwhizbyreaction = 1;
 
-  if(maps\_utility::arcademode())
+  if(maps\_utility::arcademode()) {
     var_0 thread pickup_arcade_setup();
+  }
 
   var_0.tail_gate = spawn("script_model", var_0 gettagorigin("tag_rear_tailgate"));
   var_0.tail_gate setModel("vehicle_pickup_rear_tailgate");
@@ -215,8 +233,9 @@ pickup_technical_think() {
     var_4 = var_2 || var_3 || var_0.attachedguys[0].health <= 0;
 
     if(var_4) {
-      if(var_2)
+      if(var_2) {
         level.player kill();
+      }
 
       var_1 delete();
       break;
@@ -235,8 +254,9 @@ init_heli_turrets() {
 }
 
 circling_helis_fire() {
-  while(level.heli_turrets.size == 0)
+  while(level.heli_turrets.size == 0) {
     wait 1;
+  }
 
   common_scripts\utility::array_thread(level.heli_turrets, ::circling_heli_minigun_firethread);
   common_scripts\utility::array_thread(level.heli_turrets, ::heli_minigun_targetthread, 10);
@@ -294,8 +314,9 @@ circling_heli_minigun_firethread() {
       }
     }
 
-    if(randomint(3) == 0)
+    if(randomint(3) == 0) {
       wait(randomintrange(5, 8));
+    }
 
     wait(randomfloatrange(0.5, 2));
   }
@@ -327,8 +348,9 @@ remove_technical_enemies_from_array(var_0) {
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
     if(isDefined(var_0[var_3].script_noteworthy)) {
-      if(var_0[var_3].script_noteworthy == "technical_enemies")
+      if(var_0[var_3].script_noteworthy == "technical_enemies") {
         continue;
+      }
     }
 
     if(distancesquared(var_0[var_3].origin, self.origin) > var_2 * var_2) {
@@ -353,8 +375,9 @@ get_vehiclearray(var_0, var_1) {
 
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
     if(!isspawner(var_2[var_4])) {
-      if(var_2[var_4].code_classname == "script_vehicle")
+      if(var_2[var_4].code_classname == "script_vehicle") {
         var_3[var_3.size] = var_2[var_4];
+      }
     }
   }
 

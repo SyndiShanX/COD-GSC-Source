@@ -38,8 +38,9 @@ directHitWithMolotov(attacker, inflictor, mod) {
     tagArray[tagArray.size] = "J_Knee_LE";
     tagArray[tagArray.size] = "J_Ankle_RI";
     tagArray[tagArray.size] = "J_Ankle_LE";
-    if(isplayer(self))
+    if(isplayer(self)) {
       self setburn(3.0);
+    }
   }
   self startTanning();
   if(isDefined(level._effect["character_fire_death_torso"])) {
@@ -114,8 +115,9 @@ burnedWithFlameThrower() {
     tagArray[2] = "J_Head";
     tagArray[3] = "j_knee_ri";
     tagArray[4] = "j_knee_le";
-    if(isplayer(self))
+    if(isplayer(self)) {
       self setburn(3.0);
+    }
   }
   self startTanning();
   if(isDefined(level._effect["character_fire_player_sm"])) {
@@ -151,8 +153,9 @@ burnedToDeath() {
     tagArray[tagArray.size] = "J_Knee_LE";
     tagArray[tagArray.size] = "J_Ankle_RI";
     tagArray[tagArray.size] = "J_Ankle_LE";
-    if(isplayer(self))
+    if(isplayer(self)) {
       self setburn(3.0);
+    }
   }
   self startTanning();
   if(isDefined(level._effect["character_fire_death_torso"])) {
@@ -168,8 +171,9 @@ watchForDeath() {
   self notify("watching for death while on fire");
   self endon("watching for death while on fire");
   self waittill("death");
-  if(isplayer(self))
+  if(isplayer(self)) {
     self StopBurning();
+  }
   self.burning = undefined;
 }
 

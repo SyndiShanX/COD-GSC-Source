@@ -10,8 +10,9 @@
 main() {
   precacheFX();
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_carentan_fx::main();
+  }
 }
 
 precacheFX() {
@@ -37,26 +38,31 @@ placeGlows() {
 
 lightGlows(targetname, fxName, fxFile, delay, soundalias) {
   lev = level;
-  if(!isDefined(level._effect))
+  if(!isDefined(level._effect)) {
     lev._effect = [];
-  if(!isDefined(level._effect[fxName]))
+  }
+  if(!isDefined(level._effect[fxName])) {
     lev._effect[fxName] = loadfx(fxFile);
+  }
 
   waittillframeend;
 
   ents = getstructarray(targetname, "targetname");
-  if(!isDefined(ents))
+  if(!isDefined(ents)) {
     return;
+  }
   if(ents.size <= 0) {
     return;
   }
-  for(i = 0; i < ents.size; i++)
+  for(i = 0; i < ents.size; i++) {
     ents[i] lightGlows_create(fxName, fxFile, delay, soundalias);
+  }
 }
 
 lightGlows_create(fxName, fxFile, delay, soundalias) {
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   ent = createOneshotEffect(fxName);
   ent.v["origin"] = (self.origin);

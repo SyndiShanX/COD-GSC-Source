@@ -69,8 +69,9 @@ onstartgametype() {
   level.displayroundendtext = 0;
   level thread onscoreclosemusic();
 
-  if(!isoneround())
+  if(!isoneround()) {
     level.displayroundendtext = 1;
+  }
 }
 
 onspawnplayerunified() {
@@ -81,15 +82,18 @@ onspawnplayer(predictedspawn) {
   spawnpoints = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(self.pers["team"]);
   spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_dm(spawnpoints);
 
-  if(predictedspawn)
+  if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  else
+  }
+  else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "dm");
+  }
 }
 
 onendgame(winningplayer) {
-  if(isDefined(winningplayer) && isplayer(winningplayer))
+  if(isDefined(winningplayer) && isplayer(winningplayer)) {
     [[level._setplayerscore]](winningplayer, winningplayer[[level._getplayerscore]]() + 1);
+  }
 }
 
 onscoreclosemusic() {
@@ -120,6 +124,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
   attacker maps\mp\gametypes\_globallogic_score::givepointstowin(level.teamscoreperkill);
   self maps\mp\gametypes\_globallogic_score::givepointstowin(level.teamscoreperdeath * -1);
 
-  if(smeansofdeath == "MOD_HEAD_SHOT")
+  if(smeansofdeath == "MOD_HEAD_SHOT") {
     attacker maps\mp\gametypes\_globallogic_score::givepointstowin(level.teamscoreperheadshot);
+  }
 }

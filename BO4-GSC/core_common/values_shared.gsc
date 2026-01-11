@@ -489,4 +489,3 @@ display_value(index, str_name, str_id, value, b_valid, on_hud) {
 
   print3d(self.origin - (0, 0, index * 8), str_value, color, 1, 0.3, 1);
 }
-

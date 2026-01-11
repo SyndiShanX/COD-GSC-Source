@@ -251,8 +251,9 @@ ZPO_listener() {
   }
 }
 player_deadshot_perk_handler(localClientNum, set, newEnt) {
-  if(!self IsLocalPlayer() || self IsSpectating() || self GetEntityNumber() != GetLocalPlayers()[localClientNum] GetEntityNumber())
+  if(!self IsLocalPlayer() || self IsSpectating() || self GetEntityNumber() != GetLocalPlayers()[localClientNum] GetEntityNumber()) {
     return;
+  }
   if(set) {
     self UseAlternateAimParams();
   } else {

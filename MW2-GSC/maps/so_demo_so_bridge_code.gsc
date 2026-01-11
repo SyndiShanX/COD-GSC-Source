@@ -20,10 +20,12 @@ track_infinite_ammo_time() {
 
   while(!flag("special_op_terminated")) {
     wait 0.05;
-    if(!isDefined(level.infinite_ammo) || !level.infinite_ammo)
+    if(!isDefined(level.infinite_ammo) || !level.infinite_ammo) {
       level.normal_time += 0.05;
-    else
+    }
+    else {
       level.infinite_time += 0.05;
+    }
   }
 }
 
@@ -38,15 +40,17 @@ register_bridge_enemy() {
   level.bridge_enemies++;
   level.enemy_list = array_add(level.enemy_list, self);
 
-  if(!flag("so_demoman_start"))
+  if(!flag("so_demoman_start")) {
     flag_set("so_demoman_start");
+  }
 
   self waittill("death");
 
   level.bridge_enemies--;
   level.enemy_list = array_remove(level.enemy_list, self);
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player.target_reminder_time = gettime();
+  }
 }
 
 // ---------------------------------------------------------------------------------
@@ -57,23 +61,28 @@ player_refill_ammo() {
   while(true) {
     wait 0.05;
     if(!player_can_refill()) {
-      if(isDefined(self.maintain_stock))
+      if(isDefined(self.maintain_stock)) {
         self.maintain_stock = [];
+      }
       continue;
     }
 
-    if(!isDefined(self.maintain_stock))
+    if(!isDefined(self.maintain_stock)) {
       self.maintain_stock = [];
+    }
 
     weapons = self getweaponslistall();
     foreach(weapon in weapons) {
-      if(weapon == "claymore")
+      if(weapon == "claymore") {
         continue;
-      if(weapon == "c4")
+      }
+      if(weapon == "c4") {
         continue;
+      }
 
-      if(!isDefined(self.maintain_stock[weapon]))
+      if(!isDefined(self.maintain_stock[weapon])) {
         self.maintain_stock[weapon] = self getweaponammostock(weapon);
+      }
 
       self setweaponammostock(weapon, self.maintain_stock[weapon]);
     }
@@ -81,8 +90,9 @@ player_refill_ammo() {
 }
 
 player_can_refill() {
-  if(!isDefined(level.infinite_ammo) || !level.infinite_ammo)
+  if(!isDefined(level.infinite_ammo) || !level.infinite_ammo) {
     return false;
+  }
 
   return true;
 }
@@ -97,25 +107,29 @@ player_wait_for_fire() {
     self waittill("player_fired");
 
     // Placing sentry is ok.
-    if(isDefined(self.placingSentry))
+    if(isDefined(self.placingSentry)) {
       continue;
+    }
 
     // Certain weapons are allowed...
     weapon = self getcurrentweapon();
-    if(weapon == "claymore")
+    if(weapon == "claymore") {
       continue;
+    }
 
     if(weapon == "c4") {
-      if(!isDefined(self.c4array) || (self.c4array.size <= 0))
+      if(!isDefined(self.c4array) || (self.c4array.size <= 0)) {
         continue;
+      }
     }
 
     // Start the challenge!
     break;
   }
 
-  if(!flag("so_demoman_start"))
+  if(!flag("so_demoman_start")) {
     flag_set("so_demoman_start");
+  }
 
   foreach(player in level.players) {
     player.target_reminder_time = gettime();
@@ -128,8 +142,9 @@ player_wait_for_fire() {
 vehicle_alive_think() {
   level endon("special_op_terminated");
 
-  if(!isDefined(level.vehicles_alive))
+  if(!isDefined(level.vehicles_alive)) {
     level.vehicles_alive = 0;
+  }
 
   level.vehicles_alive++;
   self thread vehicle_track_damage();
@@ -137,8 +152,9 @@ vehicle_alive_think() {
   self waittill("exploded", attacker);
 
   // In case pesky players find a way to explode a car before doing anything else the normal script catches.
-  if(!flag("so_demoman_start"))
+  if(!flag("so_demoman_start")) {
     flag_set("so_demoman_start");
+  }
 
   level.vehicles_alive--;
   level.vehicle_list = array_remove(level.vehicle_list, self);
@@ -146,14 +162,16 @@ vehicle_alive_think() {
   if(isDefined(attacker) && IsPlayer(attacker)) {
     attacker.target_reminder_time = gettime();
   } else {
-    foreach(player in level.players)
+    foreach(player in level.players) {
     player.target_reminder_time = gettime();
+    }
   }
 
   level notify("vehicle_destroyed");
   thread so_dialog_counter_update(level.vehicles_alive, level.vehicles_max);
-  if(level.vehicles_alive <= 0)
+  if(level.vehicles_alive <= 0) {
     flag_set("so_demoman_complete");
+  }
 }
 
 vehicle_track_damage() {
@@ -164,36 +182,45 @@ vehicle_track_damage() {
     self waittill("damage", damage, attacker);
 
     if(!vehicle_attacker_is_player(attacker)) {
-      if(isai(attacker))
+      if(isai(attacker)) {
         level.vehicle_damage += damage;
+      }
       continue;
     }
 
-    if(isplayer(attacker))
+    if(isplayer(attacker)) {
       attacker.vehicle_damage += damage;
-    else
+    }
+    else {
       attacker.owner.vehicle_damage += damage;
+    }
   }
 }
 
 vehicle_attacker_is_player(attacker) {
   // No attacker...
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
   // Player attacker...
-  if(isplayer(attacker))
+  if(isplayer(attacker)) {
     return true;
+  }
 
   // Player's turret attacker
-  if(!isDefined(attacker.targetname))
+  if(!isDefined(attacker.targetname)) {
     return false;
-  if(attacker.targetname != "sentry_minigun")
+  }
+  if(attacker.targetname != "sentry_minigun") {
     return false;
-  if(!isDefined(attacker.owner))
+  }
+  if(!isDefined(attacker.owner)) {
     return false;
-  if(!isplayer(attacker.owner))
+  }
+  if(!isplayer(attacker.owner)) {
     return false;
+  }
 
   return true;
 }
@@ -201,8 +228,9 @@ vehicle_attacker_is_player(attacker) {
 vehicle_get_slide_car(car_id) {
   slide_cars = getEntArray(car_id, "script_noteworthy");
   foreach(ent in slide_cars) {
-    if(ent.classname == "script_model")
+    if(ent.classname == "script_model") {
       return ent;
+    }
   }
 }
 
@@ -236,13 +264,15 @@ hud_display_cars_hint() {
 }
 
 hud_disable_cars_hint() {
-  if(!flag("so_demoman_start"))
+  if(!flag("so_demoman_start")) {
     return true;
+  }
 
   if(isDefined(level.bridge_enemies) && (level.bridge_enemies > 0)) {
     close_enemies = get_array_of_closest(self.origin, level.enemy_list, undefined, undefined, 4096, 0);
-    if(close_enemies.size > 0)
+    if(close_enemies.size > 0) {
       return true;
+    }
   }
 
   player_time_test = gettime() - self.target_help_time;
@@ -270,8 +300,9 @@ hud_refresh_car_locations() {
   while(1) {
     self notify("refresh_vehicle_locs");
     close_vehicles = get_array_of_closest(self.origin, level.vehicle_list, undefined, 3);
-    foreach(vehicle in close_vehicles)
+    foreach(vehicle in close_vehicles) {
     thread hud_show_target_icon(vehicle);
+    }
     wait 1;
   }
 }
@@ -332,18 +363,22 @@ hud_refresh_car_objectives() {
 hud_show_target_objective(vehicle, index) {
   assertex(isDefined(vehicle), "hud_show_target_icon() requires a valid vehicle entity to place an icon over.");
 
-  if(index == 0)
+  if(index == 0) {
     Objective_Position(1, vehicle.origin + (0, 0, 48));
-  else
+  }
+  else {
     Objective_AdditionalPosition(1, index, vehicle.origin + (0, 0, 48));
+  }
 }
 
 hud_hide_car_objectives() {
   for(i = 0; i < 3; i++) {
-    if(i == 0)
+    if(i == 0) {
       Objective_Position(1, (0, 0, 0));
-    else
+    }
+    else {
       Objective_AdditionalPosition(1, i, (0, 0, 0));
+    }
   }
 }
 
@@ -358,8 +393,9 @@ hud_display_cars_remaining() {
 
   while(true) {
     level waittill("vehicle_destroyed");
-    if(level.vehicles_alive <= 0)
+    if(level.vehicles_alive <= 0) {
       break;
+    }
 
     self.car_count SetValue(level.vehicles_alive);
     if(level.vehicles_alive <= 5) {
@@ -389,8 +425,9 @@ hud_display_wreckage_count() {
     level waittill("vehicle_destroyed");
     self.bonus_count_current--;
     if(self.bonus_count_current <= 0) {
-      if(level.vehicles_alive < level.bonus_count_goal)
+      if(level.vehicles_alive < level.bonus_count_goal) {
         break;
+      }
 
       self.bonus_count_current = level.bonus_count_goal;
       thread hud_rebuild_time_bonus(level.bonus_time_amount);
@@ -416,8 +453,9 @@ hud_display_wreckage_count() {
 }
 
 hud_create_bonus_count(label) {
-  if(isDefined(self.bonus_count))
+  if(isDefined(self.bonus_count)) {
     self.bonus_count so_remove_hud_item(true);
+  }
 
   self.bonus_count = so_create_hud_item(4, so_hud_ypos(), label, self);
   self.bonus_count.alignx = "left";
@@ -430,15 +468,17 @@ hud_rebuild_time_bonus(timer) {
   self notify("rebuild_time_bonus");
   self endon("rebuild_time_bonus");
 
-  if(level.vehicles_alive <= 0)
+  if(level.vehicles_alive <= 0) {
     return;
+  }
 
   // Otherwise build, and wait for the timer to expire then rebuild.
   if(self == level.player) {
     if(!isDefined(level.infinite_ammo) || !level.infinite_ammo) {
       level.infinite_ammo = true;
-      foreach(player in level.players)
+      foreach(player in level.players) {
       player.infinite_ammo_time = 0;
+      }
     }
   }
 
@@ -489,13 +529,15 @@ hud_rebuild_time_bonus(timer) {
 hud_time_splash(timer) {
   level endon("special_op_terminated");
 
-  if(!isDefined(self.splash_count))
+  if(!isDefined(self.splash_count)) {
     self.splash_count = 0;
+  }
 
   // Only allow one splash active at a time.	
   self.splash_count++;
-  if(self.splash_count > 1)
+  if(self.splash_count > 1) {
     return;
+  }
 
   if(!isDefined(self.time_splash)) {
     self.time_msg = hud_create_splash(0, &"SO_DEMO_SO_BRIDGE_WRECKAGE_ACTIVE");
@@ -509,8 +551,9 @@ hud_time_splash(timer) {
   }
 
   while(self.splash_count > 0) {
-    if(self == level.player)
+    if(self == level.player) {
       level.player playSound("arcademode_kill_streak_won");
+    }
 
     self.time_msg hud_boom_in_splash(self.time_msg_x, self.time_msg_y);
     self.time_splash hud_boom_in_splash(self.time_splash_x, self.time_splash_y);
@@ -522,8 +565,9 @@ hud_time_splash(timer) {
 
     wait 0.5;
 
-    if(self.infinite_ammo_time < 1)
+    if(self.infinite_ammo_time < 1) {
       self.infinite_ammo_time = 0;
+    }
     self.infinite_ammo_time += timer;
     self.time_bonus settenthstimer(self.infinite_ammo_time);
 

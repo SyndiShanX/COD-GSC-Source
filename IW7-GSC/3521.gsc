@@ -11,8 +11,9 @@ init() {
 func_1288A(var_00) {
   var_01 = 0;
 
-  if(!var_01)
+  if(!var_01) {
     return 0;
+  }
 
   func_10DF3(var_0.streakname);
   thread func_13B56();
@@ -125,8 +126,9 @@ func_13AD8(var_00, var_01) {
   var_01 endon("detonate_spiderbot");
   var_01 endon("web_cut");
 
-  while(self.origin != var_00)
+  while(self.origin != var_00) {
     scripts\engine\utility::waitframe();
+  }
 
   var_01 notify("detonate_spiderbot");
 }
@@ -147,8 +149,9 @@ func_13B55() {
   var_02 = 500;
   var_03 = 200;
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     radiusdamage(var_01, 256, var_02, var_03, self, "MOD_EXPLOSIVE", "killstreak_spiderbot_mp");
+  }
 
   playFX(scripts\engine\utility::getfx("spider_explode"), var_01);
   playLoopSound(var_01, "frag_grenade_explode");
@@ -209,11 +212,13 @@ func_7F05(var_00, var_01, var_02, var_03) {
   var_04 = [];
   var_05 = undefined;
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0;
+  }
 
   var_06 = var_01 * var_01;
 

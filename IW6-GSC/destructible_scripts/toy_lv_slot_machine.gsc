@@ -61,8 +61,9 @@ toy_lv_slot_machine(var_0) {
   level._interactive["lv_slot_machine_flashing_tags"][1] = "tag_lit_buttons";
   level._interactive["lv_slot_machine_flashing_tags"][2] = "tag_lit_light";
 
-  if(var_0)
+  if(var_0) {
     thread toy_lv_slot_machine_lightstimer();
+  }
 }
 
 toy_lv_slot_machine_lightstimer() {
@@ -70,15 +71,19 @@ toy_lv_slot_machine_lightstimer() {
   var_0 = 1;
 
   for(;;) {
-    if(var_0)
+    if(var_0) {
       var_0 = randomint(100) < 50;
-    else
+    }
+    else {
       var_0 = randomint(100) < 20;
+    }
 
-    if(var_0)
+    if(var_0) {
       wait(randomfloatrange(1, 4));
-    else
+    }
+    else {
       wait(randomfloatrange(0.4, 1));
+    }
 
     level notify("toy_lv_slot_machine_LightsOn");
     wait(randomfloatrange(0.05, 1));
@@ -109,45 +114,57 @@ toy_lv_slot_machine_flashlights() {
 toy_lv_slot_machine_stopflashing(var_0) {
   self waittill("stop flashing");
 
-  foreach(var_2 in level._interactive["lv_slot_machine_flashing_tags"])
+  foreach(var_2 in level._interactive["lv_slot_machine_flashing_tags"]) {
   self hidepart(var_2);
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 setlightintensity(0);
+  }
 }
 
 toy_lv_slot_machine_switchlightson(var_0, var_1) {
   level endon("toy_lv_slot_machine_LightsOff");
 
-  if(randomint(100) > var_0)
+  if(randomint(100) > var_0) {
     wait(randomfloat(0.3));
+  }
 
-  foreach(var_3 in level._interactive["lv_slot_machine_flashing_tags"])
+  foreach(var_3 in level._interactive["lv_slot_machine_flashing_tags"]) {
   self showpart(var_3);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 setlightintensity(1);
+  }
 
-  if(common_scripts\utility::issp())
+  if(common_scripts\utility::issp()) {
     self playSound("dst_slot_machine_light_flkr_on", "lightsSound", 1);
-  else
+  }
+  else {
     self playSound("dst_slot_machine_light_flkr_on");
+  }
 }
 
 toy_lv_slot_machine_switchlightsoff(var_0, var_1) {
   level endon("toy_lv_slot_machine_LightsOn");
 
-  if(isDefined(var_0) && randomint(100) > var_0)
+  if(isDefined(var_0) && randomint(100) > var_0) {
     wait(randomfloat(0.1));
+  }
 
-  foreach(var_3 in level._interactive["lv_slot_machine_flashing_tags"])
+  foreach(var_3 in level._interactive["lv_slot_machine_flashing_tags"]) {
   self hidepart(var_3);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 setlightintensity(0);
+  }
 
-  if(common_scripts\utility::issp())
+  if(common_scripts\utility::issp()) {
     self playSound("dst_slot_machine_light_flkr_off", "lightsSound", 1);
-  else
+  }
+  else {
     self playSound("dst_slot_machine_light_flkr_off");
+  }
 }

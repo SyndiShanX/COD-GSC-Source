@@ -15,6 +15,7 @@ main() {
   level._effect["leaves_fall_gentlewind"] = loadfx("misc/leaves_fall_gentlewind");
   level._effect["leaves_ground_gentlewind"] = loadfx("misc/leaves_ground_gentlewind");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_trailerpark_fx::main();
+  }
 }

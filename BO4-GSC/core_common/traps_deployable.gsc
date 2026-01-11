@@ -1207,4 +1207,3 @@ debug_init() {
 
   thread debug_init();
 }
-

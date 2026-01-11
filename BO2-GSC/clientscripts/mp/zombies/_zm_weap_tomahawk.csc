@@ -20,10 +20,12 @@ init() {
 }
 
 tomahawk_in_use(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     println("tomahawk - IN USE");
-  else
+  }
+  else {
     println("tomahawk - AVAILABLE");
+  }
 }
 
 play_tomahawk_pickup_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -59,8 +61,9 @@ play_tomahawk_pickup_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
       e_pickup_fx setModel("tag_origin");
     }
 
-    if(isDefined(e_pickup_fx.fx_id))
+    if(isDefined(e_pickup_fx.fx_id)) {
       stopfx(localclientnum, e_pickup_fx.fx_id);
+    }
 
     e_pickup_fx.fx_id = playFXOnTag(localclientnum, level._effect["tomahawk_pickup"], e_pickup_fx, "tag_origin");
   } else if(newval == 2) {
@@ -74,8 +77,9 @@ play_tomahawk_pickup_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
       e_pickup_fx delete();
     }
 
-    if(isDefined(e_pickup_upgrade_fx.fx_id))
+    if(isDefined(e_pickup_upgrade_fx.fx_id)) {
       stopfx(localclientnum, e_pickup_upgrade_fx.fx_id);
+    }
 
     e_pickup_upgrade_fx.fx_id = playFXOnTag(localclientnum, level._effect["tomahawk_pickup_upgrade"], e_pickup_upgrade_fx, "tag_origin");
   }

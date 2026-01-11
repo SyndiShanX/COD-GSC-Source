@@ -90,10 +90,12 @@ zone_handler(var_0, var_1) {
   var_2 = "";
   var_3 = "";
 
-  if(getsubstr(var_0, 0, 6) == "enter_")
+  if(getsubstr(var_0, 0, 6) == "enter_") {
     var_2 = var_1;
-  else if(getsubstr(var_0, 0, 5) == "exit_")
+  }
+  else if(getsubstr(var_0, 0, 5) == "exit_") {
     var_3 = var_1;
+  }
 }
 
 music_handler(var_0, var_1) {}
@@ -199,10 +201,12 @@ handle_single_mi17_sequence_mix() {
   var_0 = common_scripts\utility::waittill_any_return("unloaded", "death");
   wait 4;
 
-  if(!common_scripts\utility::flag("first_mi17_gone"))
+  if(!common_scripts\utility::flag("first_mi17_gone")) {
     common_scripts\utility::flag_set("first_mi17_gone");
-  else
+  }
+  else {
     soundscripts\_audio_mix_manager::mm_clear_submix("mix_mi17_reinforcement");
+  }
 }
 
 abrams_audio_node() {

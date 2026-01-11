@@ -46,13 +46,16 @@ init() {
   level.fx_u2_explode = loadfx("vehicle/vexplosion/fx_vexplode_u2_exp_mp");
   minimaporigins = getEntArray("minimap_corner", "targetname");
 
-  if(minimaporigins.size)
+  if(minimaporigins.size) {
     uavorigin = maps\mp\gametypes\_spawnlogic::findboxcenter(minimaporigins[0].origin, minimaporigins[1].origin);
-  else
+  }
+  else {
     uavorigin = (0, 0, 0);
+  }
 
-  if(level.script == "mp_hydro")
+  if(level.script == "mp_hydro") {
     uavorigin = uavorigin + vectorscale((0, 1, 0), 1200.0);
+  }
 
   if(level.teambased) {
     foreach(team in level.teams) {
@@ -90,8 +93,9 @@ onplayerconnect() {
     level.activecounteruavs[player.entnum] = 0;
     level.activesatellites[player.entnum] = 0;
 
-    if(level.teambased == 0 || level.multiteam == 1)
+    if(level.teambased == 0 || level.multiteam == 1) {
       player thread watchffaandmultiteamspawn();
+    }
   }
 }
 
@@ -107,8 +111,9 @@ watchffaandmultiteamspawn() {
 rotateuavrig(clockwise) {
   turn = 360;
 
-  if(clockwise)
+  if(clockwise) {
     turn = -360;
+  }
 
   for(;;) {
     if(!clockwise) {
@@ -142,8 +147,9 @@ callcounteruav(type, displaymessage, killstreak_id) {
   iscounter = 1;
   counteruavplane = generateplane(self, timeinair, iscounter);
 
-  if(!isDefined(counteruavplane))
+  if(!isDefined(counteruavplane)) {
     return false;
+  }
 
   counteruavplane thread counteruav_watchfor_gamerules_destruction(self);
   counteruavplane setclientflag(11);
@@ -165,8 +171,9 @@ callspyplane(type, displaymessage, killstreak_id) {
   iscounter = 0;
   spyplane = generateplane(self, timeinair, iscounter);
 
-  if(!isDefined(spyplane))
+  if(!isDefined(spyplane)) {
     return false;
+  }
 
   spyplane thread spyplane_watchfor_gamerules_destruction(self);
   spyplane addactiveuav();
@@ -199,8 +206,9 @@ callsatellite(type, displaymessage, killstreak_id) {
   satellite thread satellite_watchfor_gamerules_destruction(self);
   satellite.iscounter = 0;
 
-  if(level.teambased)
+  if(level.teambased) {
     satellite thread updatevisibility();
+  }
 
   satellite.killstreak_id = killstreak_id;
   return true;
@@ -241,14 +249,16 @@ addactivecounteruav() {
       if(team == self.team) {
         continue;
       }
-      if(level.activesatellites[team] > 0)
+      if(level.activesatellites[team] > 0) {
         self.owner maps\mp\_challenges::blockedsatellite();
+      }
     }
   } else {
     assert(isDefined(self.owner.entnum));
 
-    if(!isDefined(self.owner.entnum))
+    if(!isDefined(self.owner.entnum)) {
       self.owner.entnum = self.owner getentitynumber();
+    }
 
     level.activecounteruavs[self.owner.entnum]++;
     keys = getarraykeys(level.activecounteruavs);
@@ -274,8 +284,9 @@ addactiveuav() {
   } else {
     assert(isDefined(self.owner.entnum));
 
-    if(!isDefined(self.owner.entnum))
+    if(!isDefined(self.owner.entnum)) {
       self.owner.entnum = self.owner getentitynumber();
+    }
 
     level.activeuavs[self.owner.entnum]++;
   }
@@ -290,8 +301,9 @@ addactivesatellite() {
   } else {
     assert(isDefined(self.owner.entnum));
 
-    if(!isDefined(self.owner.entnum))
+    if(!isDefined(self.owner.entnum)) {
       self.owner.entnum = self.owner getentitynumber();
+    }
 
     level.activesatellites[self.owner.entnum]++;
   }
@@ -305,26 +317,30 @@ removeactiveuav() {
       self.owner.activeuavs--;
       assert(self.owner.activeuavs >= 0);
 
-      if(self.owner.activeuavs < 0)
+      if(self.owner.activeuavs < 0) {
         self.owner.activeuavs = 0;
+      }
     }
 
     level.activeuavs[self.team]--;
     assert(level.activeuavs[self.team] >= 0);
 
-    if(level.activeuavs[self.team] < 0)
+    if(level.activeuavs[self.team] < 0) {
       level.activeuavs[self.team] = 0;
+    }
   } else if(isDefined(self.owner)) {
     assert(isDefined(self.owner.entnum));
 
-    if(!isDefined(self.owner.entnum))
+    if(!isDefined(self.owner.entnum)) {
       self.owner.entnum = self.owner getentitynumber();
+    }
 
     level.activeuavs[self.owner.entnum]--;
     assert(level.activeuavs[self.owner.entnum] >= 0);
 
-    if(level.activeuavs[self.owner.entnum] < 0)
+    if(level.activeuavs[self.owner.entnum] < 0) {
       level.activeuavs[self.owner.entnum] = 0;
+    }
   }
 
   maps\mp\killstreaks\_killstreakrules::killstreakstop("radar_mp", self.team, self.killstreak_id);
@@ -337,26 +353,30 @@ removeactivecounteruav() {
       self.owner.activecounteruavs--;
       assert(self.owner.activecounteruavs >= 0);
 
-      if(self.owner.activecounteruavs < 0)
+      if(self.owner.activecounteruavs < 0) {
         self.owner.activecounteruavs = 0;
+      }
     }
 
     level.activecounteruavs[self.team]--;
     assert(level.activecounteruavs[self.team] >= 0);
 
-    if(level.activecounteruavs[self.team] < 0)
+    if(level.activecounteruavs[self.team] < 0) {
       level.activecounteruavs[self.team] = 0;
+    }
   } else if(isDefined(self.owner)) {
     assert(isDefined(self.owner.entnum));
 
-    if(!isDefined(self.owner.entnum))
+    if(!isDefined(self.owner.entnum)) {
       self.owner.entnum = self.owner getentitynumber();
+    }
 
     level.activecounteruavs[self.owner.entnum]--;
     assert(level.activecounteruavs[self.owner.entnum] >= 0);
 
-    if(level.activecounteruavs[self.owner.entnum] < 0)
+    if(level.activecounteruavs[self.owner.entnum] < 0) {
       level.activecounteruavs[self.owner.entnum] = 0;
+    }
   }
 
   maps\mp\killstreaks\_killstreakrules::killstreakstop("counteruav_mp", self.team, self.killstreak_id);
@@ -369,26 +389,30 @@ removeactivesatellite() {
       self.owner.activesatellites--;
       assert(self.owner.activesatellites >= 0);
 
-      if(self.owner.activesatellites < 0)
+      if(self.owner.activesatellites < 0) {
         self.owner.activesatellites = 0;
+      }
     }
 
     level.activesatellites[self.team]--;
     assert(level.activesatellites[self.team] >= 0);
 
-    if(level.activesatellites[self.team] < 0)
+    if(level.activesatellites[self.team] < 0) {
       level.activesatellites[self.team] = 0;
+    }
   } else if(isDefined(self.owner)) {
     assert(isDefined(self.owner.entnum));
 
-    if(!isDefined(self.owner.entnum))
+    if(!isDefined(self.owner.entnum)) {
       self.owner.entnum = self.owner getentitynumber();
+    }
 
     level.activesatellites[self.owner.entnum]--;
     assert(level.activesatellites[self.owner.entnum] >= 0);
 
-    if(level.activesatellites[self.owner.entnum] < 0)
+    if(level.activesatellites[self.owner.entnum] < 0) {
       level.activesatellites[self.owner.entnum] = 0;
+    }
   }
 
   maps\mp\killstreaks\_killstreakrules::killstreakstop("radardirection_mp", self.team, self.killstreak_id);
@@ -409,8 +433,9 @@ playspyplaneafterburnerfx() {
 playcounterspyplanefx() {
   wait 0.1;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     playFXOnTag(level.fx_cuav_burner, self, "tag_origin");
+  }
 }
 
 playcounterspyplaneafterburnerfx() {
@@ -420,16 +445,18 @@ playcounterspyplaneafterburnerfx() {
 }
 
 playuavpilotdialog(dialog, owner, delaytime) {
-  if(isDefined(delaytime))
+  if(isDefined(delaytime)) {
     wait(delaytime);
+  }
 
   self.pilotvoicenumber = owner.bcvoicenumber + 1;
   soundalias = level.teamprefix[owner.team] + self.pilotvoicenumber + "_" + dialog;
 
   if(isDefined(owner.pilotisspeaking)) {
     if(owner.pilotisspeaking) {
-      while(owner.pilotisspeaking)
+      while(owner.pilotisspeaking) {
         wait 0.2;
+      }
     }
   }
 
@@ -479,20 +506,24 @@ generateplane(owner, timeinair, iscounter) {
   zoffset = randomintrange(4000, 5000);
   angle = randomint(360);
 
-  if(iscounter)
+  if(iscounter) {
     radiusoffset = randomint(1000) + 3000;
-  else
+  }
+  else {
     radiusoffset = randomint(1000) + 4000;
+  }
 
   xoffset = cos(angle) * radiusoffset;
   yoffset = sin(angle) * radiusoffset;
   anglevector = vectornormalize((xoffset, yoffset, zoffset));
   anglevector = anglevector * randomintrange(4000, 5000);
 
-  if(iscounter)
+  if(iscounter) {
     plane linkto(uavrig, "tag_origin", anglevector, (0, angle + attach_angle, -10));
-  else
+  }
+  else {
     plane linkto(uavrig, "tag_origin", anglevector, (0, angle + attach_angle, 0));
+  }
 
   return plane;
 }
@@ -501,18 +532,21 @@ play_light_fx(iscounter) {
   self endon("death");
   wait 0.1;
 
-  if(iscounter)
+  if(iscounter) {
     playFXOnTag(level.counteruavlight, self, "tag_origin");
-  else
+  }
+  else {
     playFXOnTag(level.uavlight, self, "tag_origin");
+  }
 }
 
 updatevisibility() {
   self endon("death");
 
   for(;;) {
-    if(level.teambased)
+    if(level.teambased) {
       self setvisibletoallexceptteam(self.team);
+    }
     else {
       self setvisibletoall();
       self setinvisibletoplayer(self.owner);
@@ -553,24 +587,28 @@ plane_damage_monitor(isspyplane) {
     }
     isvalidattacker = 1;
 
-    if(level.teambased)
+    if(level.teambased) {
       isvalidattacker = isDefined(attacker.team) && attacker.team != self.team;
+    }
 
     if(!isvalidattacker) {
       continue;
     }
-    if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weapon, attacker))
+    if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weapon, attacker)) {
       attacker thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(type);
+    }
 
     self.attacker = attacker;
 
     switch (type) {
       case "MOD_PISTOL_BULLET":
       case "MOD_RIFLE_BULLET":
-        if(attacker hasperk("specialty_armorpiercing"))
+        if(attacker hasperk("specialty_armorpiercing")) {
           self.damagetaken = self.damagetaken + int(damage * level.cac_armorpiercing_data);
-        else
+        }
+        else {
           self.damagetaken = self.damagetaken + damage;
+        }
 
         break;
       case "MOD_PROJECTILE":
@@ -586,8 +624,9 @@ plane_damage_monitor(isspyplane) {
     if(self.damagetaken > self.maxhealth) {
       killstreakreference = "radar_mp";
 
-      if(!isspyplane)
+      if(!isspyplane) {
         killstreakreference = "counteruav_mp";
+      }
 
       attacker notify("destroyed_spyplane");
       weaponstatname = "destroyed";
@@ -608,8 +647,9 @@ plane_damage_monitor(isspyplane) {
       if(isspyplane) {
         level thread maps\mp\_popups::displayteammessagetoall(&"KILLSTREAK_DESTROYED_UAV", attacker);
 
-        if(isDefined(self.owner))
+        if(isDefined(self.owner)) {
           self.owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("uav_destroyed", "item_destroyed");
+        }
 
         if(!isDefined(self.owner) || self.owner isenemyplayer(attacker)) {
           thread maps\mp\_scoreevents::processscoreevent("destroyed_uav", attacker, self.owner, weapon);
@@ -621,8 +661,9 @@ plane_damage_monitor(isspyplane) {
       } else {
         level thread maps\mp\_popups::displayteammessagetoall(&"KILLSTREAK_DESTROYED_COUNTERUAV", attacker);
 
-        if(isDefined(self.owner))
+        if(isDefined(self.owner)) {
           self.owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("cuav_destroyed", "item_destroyed");
+        }
 
         if(!isDefined(self.owner) || self.owner isenemyplayer(attacker)) {
           thread maps\mp\_scoreevents::processscoreevent("destroyed_counter_uav", attacker, self.owner, weapon);
@@ -645,8 +686,9 @@ plane_health() {
   self.laststate = "ok";
 
   while(self.currentstate != "leaving") {
-    if(self.damagetaken >= self.health_low)
+    if(self.damagetaken >= self.health_low) {
       self.currentstate = "damaged";
+    }
 
     if(self.currentstate == "damaged" && self.laststate != "damaged") {
       self.laststate = self.currentstate;
@@ -700,8 +742,9 @@ counteruavplane_death() {
 spyplane_death() {
   self playSound("evt_helicopter_midair_exp");
 
-  if(!self.leaving)
+  if(!self.leaving) {
     self removeactiveuav();
+  }
 
   target_remove(self);
   self thread u2_crash();
@@ -802,8 +845,9 @@ plane_leave() {
 
   self.currentstate = "leaving";
 
-  if(self.laststate == "damaged")
+  if(self.laststate == "damaged") {
     playFXOnTag(level.fx_u2_damage_trail, self, "tag_body");
+  }
 
   mult = getdvarintdefault("scr_spymult", 20000);
   tries = 10;
@@ -823,8 +867,9 @@ plane_leave() {
 
     if(isDefined(nfz)) {
       if(tries != 1) {
-        if(tries % 2 == 1)
+        if(tries % 2 == 1) {
           yaw = yaw * -1;
+        }
         else {
           yaw = yaw + 10;
           yaw = yaw * -1;
@@ -838,8 +883,9 @@ plane_leave() {
 
   self thread flattenyaw(self.angles[1] + yaw);
 
-  if(self.angles[2] != 0)
+  if(self.angles[2] != 0) {
     self thread flattenroll();
+  }
 
   self moveto(exitpoint, level.spyplaneexittime, 0, 0);
   self notify("leaving");
@@ -858,8 +904,9 @@ flattenyaw(goal) {
   self endon("death");
   increment = 3;
 
-  if(self.angles[1] > goal)
+  if(self.angles[1] > goal) {
     increment = increment * -1;
+  }
 
   while(abs(self.angles[1] - goal) > 3) {
     self.angles = (self.angles[0], self.angles[1] + increment, self.angles[2]);
@@ -874,8 +921,9 @@ uavtracker() {
     level waittill("uav_update");
 
     if(level.teambased) {
-      foreach(team in level.teams)
+      foreach(team in level.teams) {
       updateteamuavstatus(team);
+      }
 
       continue;
     }
@@ -902,8 +950,9 @@ updateteamuavstatus(team) {
     return;
   }
 
-  if(activeuavs > 1)
+  if(activeuavs > 1) {
     radarmode = 2;
+  }
 
   maps\mp\killstreaks\_radar::setteamspyplanewrapper(team, radarmode);
 }
@@ -913,8 +962,9 @@ updateplayersuavstatus() {
     player = level.players[i];
     assert(isDefined(player.entnum));
 
-    if(!isDefined(player.entnum))
+    if(!isDefined(player.entnum)) {
       player.entnum = player getentitynumber();
+    }
 
     activeuavs = level.activeuavs[player.entnum];
     activesatellites = level.activesatellites[player.entnum];
@@ -934,10 +984,12 @@ updateplayersuavstatus() {
       continue;
     }
 
-    if(activeuavs > 1)
+    if(activeuavs > 1) {
       spyplaneupdatespeed = 2;
-    else
+    }
+    else {
       spyplaneupdatespeed = 1;
+    }
 
     player setclientuivisibilityflag("radar_client", 1);
     player.hasspyplane = spyplaneupdatespeed;

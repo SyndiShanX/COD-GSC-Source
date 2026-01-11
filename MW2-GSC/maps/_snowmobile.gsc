@@ -21,8 +21,9 @@ main(model, type) {
   build_team("allies");
   build_unload_groups(::Unload_Groups);
 
-  if(!isDefined(anim._effect))
+  if(!isDefined(anim._effect)) {
     anim._effect = [];
+  }
 
   anim._effect["snowmobile_leftground"] = loadfx("treadfx/bigair_snow_snowmobile_emitter");
   anim._effect["snowmobile_bumpbig"] = loadfx("treadfx/bigjump_land_snow_snowmobile");
@@ -41,8 +42,9 @@ init_local() {
   self.steering = 0;
   self.update_time = -1;
 
-  if(!is_specialop())
+  if(!is_specialop()) {
     self thread do_steering();
+  }
 
   self.bigjump_timedelta = 500;
   self.event_time = -1;
@@ -100,8 +102,9 @@ setRiderShooting() {
 }
 
 snowmobile_fx(fxName) {
-  if(isDefined(anim._effect[fxName]))
+  if(isDefined(anim._effect[fxName])) {
     playFXOnTag(anim._effect[fxName], self, "tag_deathfx");
+  }
   //println( fxName );
 }
 
@@ -315,8 +318,9 @@ setanims() {
   init_snowmobile_mount_anims();
 
   positions = [];
-  for(i = 0; i < 2; i++)
+  for(i = 0; i < 2; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

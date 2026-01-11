@@ -44,10 +44,12 @@ main() {
   self orientmode("face angle", self.covernode.angles[1]);
   self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
 
-  if(self.a.pose != "prone")
+  if(self.a.pose != "prone") {
     self transitionto("prone");
-  else
+  }
+  else {
     self enterpronewrapper(0);
+  }
 
   self setanimknoball(animarray("straight_level"), % body, 1, 0.1, 1);
   self orientmode("face angle", self.covernode.angles[1]);
@@ -131,8 +133,9 @@ pronecombatmainloop() {
 
 pronereload() {
   if(needtoreload(0)) {
-    if(weaponisgasweapon(self.weapon))
+    if(weaponisgasweapon(self.weapon)) {
       return flamethrower_reload();
+    }
 
     self maps\_dds::dds_notify_reload(undefined, self.team == "allies");
     reloadanim = self animarraypickrandom("reload");
@@ -157,10 +160,12 @@ setup_cover_prone() {
 trythrowinggrenade(throwat, safe) {
   theanim = undefined;
 
-  if(isDefined(safe) && safe)
+  if(isDefined(safe) && safe) {
     theanim = animarraypickrandom("grenade_safe");
-  else
+  }
+  else {
     theanim = animarraypickrandom("grenade_exposed");
+  }
 
   self animmode("zonly_physics");
   self.keepclaimednodeifvalid = 1;
@@ -171,18 +176,21 @@ trythrowinggrenade(throwat, safe) {
 }
 
 considerthrowgrenade() {
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return trythrowinggrenade(self.enemy, 850);
+  }
 
   return 0;
 }
 
 shouldfirewhilechangingpose() {
-  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 256)
+  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 256) {
     return 0;
+  }
 
-  if(isDefined(self.enemy) && self cansee(self.enemy) && !isDefined(self.grenade) && self getaimyawtoshootentorpos() < 20)
+  if(isDefined(self.enemy) && self cansee(self.enemy) && !isDefined(self.grenade) && self getaimyawtoshootentorpos() < 20) {
     return animscripts\move::mayshootwhilemoving();
+  }
 
   return 0;
 }
@@ -194,13 +202,16 @@ transitionto(newpose) {
   self clearanim( % root, 0.3);
   self notify("kill_idle_thread");
 
-  if(shouldfirewhilechangingpose())
+  if(shouldfirewhilechangingpose()) {
     transanim = animarray(self.a.pose + "_2_" + newpose + "_firing", "cover_prone");
-  else
+  }
+  else {
     transanim = animarray(self.a.pose + "_2_" + newpose, "cover_prone");
+  }
 
-  if(newpose == "prone")
+  if(newpose == "prone") {
     assert(animhasnotetrack(transanim, "anim_pose = \"prone\""));
+  }
 
   self setflaggedanimknoballrestart("trans", transanim, % body, 1, 0.2, 1.0);
   animscripts\shared::donotetracks("trans");
@@ -228,19 +239,23 @@ proneto(newpose, rate) {
   transanim = undefined;
 
   if(shouldfirewhilechangingpose()) {
-    if(newpose == "crouch")
+    if(newpose == "crouch") {
       transanim = animarray("prone_2_crouch_firing", "cover_prone");
-    else if(newpose == "stand")
+    }
+    else if(newpose == "stand") {
       transanim = animarray("prone_2_stand_firing", "cover_prone");
+    }
   } else if(newpose == "crouch")
     transanim = animarray("prone_2_crouch", "cover_prone");
-  else if(newpose == "stand")
+  else if(newpose == "stand") {
     transanim = animarray("prone_2_stand", "cover_prone");
+  }
 
   assert(isDefined(transanim));
 
-  if(!isDefined(rate))
+  if(!isDefined(rate)) {
     rate = 1;
+  }
 
   self exitpronewrapper(getanimlength(transanim) / 2);
   self setflaggedanimknoballrestart("trans", transanim, % body, 1, 0.2, rate);

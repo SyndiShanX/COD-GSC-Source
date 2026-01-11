@@ -23,8 +23,9 @@ main() {
   precache_fxanim_props_dlc();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0)
+  if(!isDefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
+  }
 
   level._effect["fx_mp_express_train_blow_dust"] = loadfx("maps/mp_maps/fx_mp_express_train_blow_dust");
   level._effect["fx_mp_village_grass"] = loadfx("maps/mp_maps/fx_mp_village_grass");

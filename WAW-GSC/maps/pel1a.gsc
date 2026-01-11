@@ -1435,8 +1435,9 @@ solo_set_pacifist(pacifist_state) {
 }
 
 smoke_hint_and_reset() {
-  if(flag("event1_smoke_popped"))
+  if(flag("event1_smoke_popped")) {
     return;
+  }
   level thread player_tries_toskip_mg();
   wait 2;
   smoke_hint();
@@ -1447,8 +1448,9 @@ smoke_hint_and_reset() {
 }
 
 smoke_hint() {
-  if(flag("event1_smoke_popped"))
+  if(flag("event1_smoke_popped")) {
     return;
+  }
   level thread smoke_vo();
   level endon("smoke_grenade_done");
   level endon("smoke_popped");
@@ -1464,8 +1466,9 @@ smoke_hint() {
 }
 
 smoke_vo() {
-  if(flag("event1_smoke_popped"))
+  if(flag("event1_smoke_popped")) {
     return;
+  }
   level endon("smoke_grenade_done");
   level endon("smoke_popped");
   level endon("stop_pop_smoke");

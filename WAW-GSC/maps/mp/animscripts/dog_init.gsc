@@ -41,8 +41,9 @@ main() {
   self setTalkToSpecies("dog");
   level.lastDogMeleePlayerTime = 0;
   level.dogMeleePlayerCounter = 0;
-  if(!isDefined(level.dog_hits_before_kill))
+  if(!isDefined(level.dog_hits_before_kill)) {
     level.dog_hits_before_kill = 1;
+  }
 }
 
 firstInit() {

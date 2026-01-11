@@ -34,8 +34,9 @@ main() {
 air_puzzle_1_init() {
   level.a_ceiling_rings = getEntArray("ceiling_ring", "script_noteworthy");
 
-  foreach(e_ring in level.a_ceiling_rings)
+  foreach(e_ring in level.a_ceiling_rings) {
   e_ring ceiling_ring_init();
+  }
 }
 
 air_puzzle_1_cleanup() {
@@ -58,8 +59,9 @@ check_puzzle_solved() {
   num_solved = 0;
 
   foreach(e_ring in level.a_ceiling_rings) {
-    if(e_ring.script_int != e_ring.position)
+    if(e_ring.script_int != e_ring.position) {
       return false;
+    }
   }
 
   return true;
@@ -82,8 +84,9 @@ ceiling_ring_update_position() {
 ceiling_ring_rotate() {
   self.position = (self.position + 1) % 4;
 
-  if(self.position == self.script_int)
+  if(self.position == self.script_int) {
     iprintlnbold("Ring is in place.");
+  }
 
   self ceiling_ring_update_position();
   solved = check_puzzle_solved();
@@ -114,8 +117,9 @@ ceiling_ring_run() {
       rumble_nearby_players(self.origin, 1500, 2);
       n_rotations++;
 
-      if(n_rotations % 4 == 0)
+      if(n_rotations % 4 == 0) {
         level notify("vo_puzzle_bad", attacker);
+      }
     } else
       level notify("vo_puzzle_confused", attacker);
   }
@@ -133,16 +137,18 @@ air_puzzle_2_init() {
 air_puzzle_2_run() {
   a_smoke_pos = getstructarray("puzzle_smoke_origin", "targetname");
 
-  foreach(s_smoke_pos in a_smoke_pos)
+  foreach(s_smoke_pos in a_smoke_pos) {
   s_smoke_pos thread air_puzzle_smoke();
+  }
 
   while(true) {
     level waittill("air_puzzle_smoke_solved");
     all_smoke_solved = 1;
 
     foreach(s_smoke_pos in a_smoke_pos) {
-      if(!s_smoke_pos.solved)
+      if(!s_smoke_pos.solved) {
         all_smoke_solved = 0;
+      }
     }
 
     if(all_smoke_solved) {
@@ -203,8 +209,9 @@ air_puzzle_run_smoke_direction() {
       if(!self.solved) {
         direction_failures++;
 
-        if(direction_failures > 4)
+        if(direction_failures > 4) {
           level notify("vo_puzzle_confused", attacker);
+        }
       } else if(randomint(100) < 10)
         level notify("vo_puzzle_good", attacker);
 

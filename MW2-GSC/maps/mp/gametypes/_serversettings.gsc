@@ -5,8 +5,9 @@
 
 init() {
   level.hostname = getdvar("sv_hostname");
-  if(level.hostname == "")
+  if(level.hostname == "") {
     level.hostname = "CoDHost";
+  }
   setdvar("sv_hostname", level.hostname);
 
   level.allowvote = getdvarint("g_allowvote", 1);

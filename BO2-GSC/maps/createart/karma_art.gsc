@@ -18,8 +18,9 @@ vision_set_trigger_think() {
   while(true) {
     self waittill("trigger");
 
-    if(level.karma_vision != self.script_string)
+    if(level.karma_vision != self.script_string) {
       level.player vision_set_change(self.script_string);
+    }
 
     wait 0.1;
   }
@@ -119,10 +120,12 @@ vision_set_change(str_vision_set) {
   visionsetnaked(str_vision_set, n_vs_time);
   level.karma_vision = str_vision_set;
 
-  if(isDefined(n_near_start) && isDefined(n_time))
+  if(isDefined(n_near_start) && isDefined(n_time)) {
     self thread depth_of_field_tween(n_near_start, n_near_end, n_far_start, n_far_end, n_near_blur, n_far_blur, n_time);
-  else
+  }
+  else {
     self depth_of_field_off(0.05);
+  }
 }
 
 karma_fog_sunset() {

@@ -179,15 +179,19 @@ doQuickMessage(soundalias, saytext) {
     return;
   }
   if(self.pers["team"] == "allies") {
-    if(game["allies"] == "russian")
+    if(game["allies"] == "russian") {
       prefix = "RU_";
-    else
+    }
+    else {
       prefix = "US_";
+    }
   } else {
-    if(game["axis"] == "japanese")
+    if(game["axis"] == "japanese") {
       prefix = "JP_";
-    else
+    }
+    else {
       prefix = "GE_";
+    }
   }
   if(isDefined(level.QuickMessageToAll) && level.QuickMessageToAll) {
     self.headiconteam = "none";
@@ -195,10 +199,12 @@ doQuickMessage(soundalias, saytext) {
     self playSound(prefix + soundalias);
     self sayAll(saytext);
   } else {
-    if(self.sessionteam == "allies")
+    if(self.sessionteam == "allies") {
       self.headiconteam = "allies";
-    else if(self.sessionteam == "axis")
+    }
+    else if(self.sessionteam == "axis") {
       self.headiconteam = "axis";
+    }
     self.headicon = "talkingicon";
     self playSound(prefix + soundalias);
     self sayTeam(saytext);
@@ -207,15 +213,19 @@ doQuickMessage(soundalias, saytext) {
 }
 
 saveHeadIcon() {
-  if(isDefined(self.headicon))
+  if(isDefined(self.headicon)) {
     self.oldheadicon = self.headicon;
-  if(isDefined(self.headiconteam))
+  }
+  if(isDefined(self.headiconteam)) {
     self.oldheadiconteam = self.headiconteam;
+  }
 }
 
 restoreHeadIcon() {
-  if(isDefined(self.oldheadicon))
+  if(isDefined(self.oldheadicon)) {
     self.headicon = self.oldheadicon;
-  if(isDefined(self.oldheadiconteam))
+  }
+  if(isDefined(self.oldheadiconteam)) {
     self.headiconteam = self.oldheadiconteam;
+  }
 }

@@ -44,12 +44,15 @@ useAlien(spawn_point, number_of_aliens) {
 
     agent set_agent_team(self.team, self);
 
-    if(i == 0)
+    if(i == 0) {
       PathNodeArray = getstructarray("seeker_path_01", "script_noteworthy");
-    else if(i == 1)
+    }
+    else if(i == 1) {
       PathNodeArray = getstructarray("seeker_path_02", "script_noteworthy");
-    else
+    }
+    else {
       PathNodeArray = getstructarray("seeker_path_03", "script_noteworthy");
+    }
 
     agent thread spawn_alien(spawn_point.origin, spawn_point.angles, self, PathNodeArray);
 
@@ -73,8 +76,9 @@ on_agent_alien_killed(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vD
   self.isActive = false;
   self.hasDied = false;
 
-  if(isDefined(self.animCBs.OnExit[self.aiState]))
+  if(isDefined(self.animCBs.OnExit[self.aiState])) {
     self[[self.animCBs.OnExit[self.aiState]]]();
+  }
 
   if(isPlayer(eAttacker) && isDefined(self.owner) && (eAttacker != self.owner)) {
     self SetAnimState("explode", 0, 1);
@@ -93,14 +97,16 @@ on_agent_alien_killed(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vD
 }
 
 on_damaged_finished(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
-  if(!isDefined(self.playing_pain_sound))
+  if(!isDefined(self.playing_pain_sound)) {
     self thread play_pain_sound(2.5);
+  }
 
   damageModified = iDamage;
   if(isDefined(sHitLoc) && sHitLoc == "head" && level.gametype != "horde") {
     damageModified = int(damageModified * 0.6);
-    if(iDamage > 0 && damageModified <= 0)
+    if(iDamage > 0 && damageModified <= 0) {
       damageModified = 1;
+    }
   }
 
   if(self.health - damageModified > 0) {

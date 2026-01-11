@@ -50,11 +50,13 @@ registerarchetype(var_0, var_1, var_2) {
   init_anim_sets();
   anim.archetypes[var_0] = var_1;
 
-  if(isDefined(var_1["flashed"]))
+  if(isDefined(var_1["flashed"])) {
     anim.flashanimindex[var_0] = 0;
+  }
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     animscripts\init_move_transitions::getsplittimes(var_0);
+  }
 }
 
 archetypeexists(var_0) {
@@ -355,8 +357,9 @@ init_animset_complete_custom_stand(var_0) {
 init_animset_custom_stand(var_0, var_1, var_2, var_3) {
   anim.initanimset = animscripts\utility::lookupanimarray("default_stand");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     anim.initanimset["straight_level"] = var_1;
+  }
 
   if(isDefined(var_0)) {
     anim.initanimset["fire"] = var_0;
@@ -364,8 +367,9 @@ init_animset_custom_stand(var_0, var_1, var_2, var_3) {
     set_animarray_custom_burst_and_semi_fire_stand(var_0);
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     anim.initanimset["exposed_idle"] = animscripts\utility::array(var_2);
+  }
 
   if(isDefined(var_3)) {
     anim.initanimset["reload"] = animscripts\utility::array(var_3);
@@ -388,11 +392,13 @@ init_animset_custom_crouch(var_0, var_1, var_2) {
     set_animarray_custom_burst_and_semi_fire_crouch(var_0);
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     anim.initanimset["exposed_idle"] = animscripts\utility::array(var_1);
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     anim.initanimset["reload"] = animscripts\utility::array(var_2);
+  }
 
   self.combatcrouchanims = anim.initanimset;
 }
@@ -509,39 +515,52 @@ set_animarray_add_turn_aims_crouch() {
 }
 
 set_animarray_standing() {
-  if(animscripts\utility::usingsidearm())
+  if(animscripts\utility::usingsidearm()) {
     self.a.array = animscripts\utility::lookupanimarray("pistol_stand");
-  else if(isDefined(self.combatstandanims))
+  }
+  else if(isDefined(self.combatstandanims)) {
     self.a.array = self.combatstandanims;
-  else if(isDefined(self.heat))
+  }
+  else if(isDefined(self.heat)) {
     self.a.array = animscripts\utility::lookupanimarray("heat_stand");
-  else if(animscripts\utility::usingrocketlauncher())
+  }
+  else if(animscripts\utility::usingrocketlauncher()) {
     self.a.array = animscripts\utility::lookupanimarray("rpg_stand");
-  else if(isDefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun())
+  }
+  else if(isDefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun()) {
     self.a.array = animscripts\utility::lookupanimarray("shotgun_stand");
-  else if(animscripts\utility::iscqbwalking())
+  }
+  else if(animscripts\utility::iscqbwalking()) {
     self.a.array = animscripts\utility::lookupanimarray("cqb_stand");
-  else
+  }
+  else {
     self.a.array = animscripts\utility::lookupanimarray("default_stand");
+  }
 }
 
 set_animarray_crouching() {
-  if(animscripts\utility::usingsidearm())
+  if(animscripts\utility::usingsidearm()) {
     animscripts\shared::placeweaponon(self.primaryweapon, "right");
+  }
 
-  if(isDefined(self.combatcrouchanims))
+  if(isDefined(self.combatcrouchanims)) {
     self.a.array = self.combatcrouchanims;
-  else if(animscripts\utility::usingrocketlauncher())
+  }
+  else if(animscripts\utility::usingrocketlauncher()) {
     self.a.array = animscripts\utility::lookupanimarray("rpg_crouch");
-  else if(isDefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun())
+  }
+  else if(isDefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun()) {
     self.a.array = animscripts\utility::lookupanimarray("shotgun_crouch");
-  else
+  }
+  else {
     self.a.array = animscripts\utility::lookupanimarray("default_crouch");
+  }
 }
 
 set_animarray_prone() {
-  if(animscripts\utility::usingsidearm())
+  if(animscripts\utility::usingsidearm()) {
     animscripts\shared::placeweaponon(self.primaryweapon, "right");
+  }
 
   self.a.array = animscripts\utility::lookupanimarray("default_prone");
 }
@@ -646,20 +665,24 @@ set_ambush_sidestep_anims() {
 }
 
 heat_reload_anim() {
-  if(self.weapon != self.primaryweapon)
+  if(self.weapon != self.primaryweapon) {
     return animscripts\utility::animarraypickrandom("reload");
+  }
 
   if(isDefined(self.node)) {
     if(self nearclaimnodeandangle()) {
       var_0 = undefined;
 
-      if(self.node.type == "Cover Left")
+      if(self.node.type == "Cover Left") {
         var_0 = animscripts\utility::lookupanim("heat_reload", "reload_cover_left");
-      else if(self.node.type == "Cover Right")
+      }
+      else if(self.node.type == "Cover Right") {
         var_0 = animscripts\utility::lookupanim("heat_reload", "reload_cover_right");
+      }
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         return var_0;
+      }
     }
   }
 

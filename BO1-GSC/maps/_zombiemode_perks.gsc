@@ -1137,8 +1137,9 @@ perk_flash_audio(perk) {
       alias = "zmb_hud_flash_additionalprimaryweapon";
       break;
   }
-  if(isDefined(alias))
+  if(isDefined(alias)) {
     self PlayLocalSound(alias);
+  }
 }
 
 perk_hud_start_flash(perk) {

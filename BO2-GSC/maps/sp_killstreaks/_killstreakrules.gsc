@@ -89,14 +89,16 @@ createrule(rule, maxallowable, maxallowableperteam) {
 }
 
 addkillstreaktorule(hardpointtype, rule, counttowards, checkagainst) {
-  if(!isDefined(level.killstreaktype[hardpointtype]))
+  if(!isDefined(level.killstreaktype[hardpointtype])) {
     level.killstreaktype[hardpointtype] = [];
+  }
 
   keys = getarraykeys(level.killstreaktype[hardpointtype]);
   assert(isDefined(level.killstreakrules[rule]));
 
-  if(!isDefined(level.killstreaktype[hardpointtype][rule]))
+  if(!isDefined(level.killstreaktype[hardpointtype][rule])) {
     level.killstreaktype[hardpointtype][rule] = spawnStruct();
+  }
 
   level.killstreaktype[hardpointtype][rule].counts = counttowards;
   level.killstreaktype[hardpointtype][rule].checks = checkagainst;
@@ -105,18 +107,21 @@ addkillstreaktorule(hardpointtype, rule, counttowards, checkagainst) {
 killstreakstart(hardpointtype, team, hacked, displayteammessage) {
   assert(isDefined(team), "team needs to be defined");
 
-  if(self iskillstreakallowed(hardpointtype, team) == 0)
+  if(self iskillstreakallowed(hardpointtype, team) == 0) {
     return false;
+  }
 
   assert(isDefined(hardpointtype));
 
   killstreak_debug_text("Started killstreak: " + hardpointtype);
 
-  if(!isDefined(hacked))
+  if(!isDefined(hacked)) {
     hacked = 0;
+  }
 
-  if(!isDefined(displayteammessage))
+  if(!isDefined(displayteammessage)) {
     displayteammessage = 1;
+  }
 
   keys = getarraykeys(level.killstreaktype[hardpointtype]);
 
@@ -160,17 +165,20 @@ iskillstreakallowed(hardpointtype, team) {
       continue;
     }
     if(level.killstreakrules[keys[i]].max != 0) {
-      if(level.killstreakrules[keys[i]].cur >= level.killstreakrules[keys[i]].max)
+      if(level.killstreakrules[keys[i]].cur >= level.killstreakrules[keys[i]].max) {
         isallowed = 0;
+      }
     }
   }
 
-  if(isDefined(self.laststand) && self.laststand)
+  if(isDefined(self.laststand) && self.laststand) {
     isallowed = 0;
+  }
 
   if(isallowed == 0) {
-    if(isDefined(level.killstreaks[hardpointtype]) && isDefined(level.killstreaks[hardpointtype].notavailabletext))
+    if(isDefined(level.killstreaks[hardpointtype]) && isDefined(level.killstreaks[hardpointtype].notavailabletext)) {
       self iprintlnbold(level.killstreaks[hardpointtype].notavailabletext);
+    }
   }
 
   return isallowed;
@@ -180,10 +188,12 @@ killstreak_debug_text(text) {
   level.killstreak_rule_debug = getdvarintdefault("scr_killstreak_rule_debug", 0);
 
   if(isDefined(level.killstreak_rule_debug)) {
-    if(level.killstreak_rule_debug == 1.0)
+    if(level.killstreak_rule_debug == 1.0) {
       iprintln(text);
-    else if(level.killstreak_rule_debug == 2.0)
+    }
+    else if(level.killstreak_rule_debug == 2.0) {
       iprintlnbold(text);
+    }
   }
 
 }

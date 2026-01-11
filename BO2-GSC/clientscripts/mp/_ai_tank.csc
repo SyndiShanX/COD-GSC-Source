@@ -31,14 +31,18 @@ spawned(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasde
 missile_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self useanimtree(#animtree);
 
-  if(newval == 2)
+  if(newval == 2) {
     self setanimrestart( % o_drone_tank_missile1_fire, 1.0, 0.0, 0.5);
-  else if(newval == 1)
+  }
+  else if(newval == 1) {
     self setanimrestart( % o_drone_tank_missile2_fire, 1.0, 0.0, 0.5);
-  else if(newval == 0)
+  }
+  else if(newval == 0) {
     self setanimrestart( % o_drone_tank_missile3_fire, 1.0, 0.0, 0.5);
-  else if(newval == 4)
+  }
+  else if(newval == 4) {
     self setanimrestart( % o_drone_tank_missile_full_reload, 1.0, 0.0, 1.0);
+  }
 }
 
 play_light_fx(localclientnum) {
@@ -66,13 +70,16 @@ play_light_fx(localclientnum) {
       continue;
     } else if(isinvehicle(localclientnum, self))
       self stop_light_fx(localclientnum);
-    else if(player getinkillcam(localclientnum))
+    else if(player getinkillcam(localclientnum)) {
       continue;
-    else if(self.friend != self friendnotfoe(localclientnum))
+    }
+    else if(self.friend != self friendnotfoe(localclientnum)) {
       self stop_light_fx(localclientnum);
+    }
 
-    if(!isinvehicle(localclientnum, self) && !isDefined(self.fx))
+    if(!isinvehicle(localclientnum, self) && !isDefined(self.fx)) {
       self start_light_fx(localclientnum);
+    }
   }
 }
 
@@ -174,8 +181,9 @@ play_driving_rumble(localclientnum) {
       if(speed >= 40 || speed <= -40) {
         player = getlocalplayer(localclientnum);
 
-        if(isDefined(player))
+        if(isDefined(player)) {
           player earthquake(0.1, 0.1, self.origin, 200);
+        }
       }
     }
 
@@ -192,8 +200,9 @@ rebooting(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
   if(player getinkillcam(localclientnum)) {
     return;
   }
-  if(newval)
+  if(newval) {
     self thread start_reboot_fx(localclientnum);
+  }
   else {
     self notify("reboot_disable");
     self stop_light_fx(localclientnum);

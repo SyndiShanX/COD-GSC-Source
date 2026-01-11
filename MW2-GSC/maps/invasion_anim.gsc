@@ -281,8 +281,9 @@ tangled_parachute_guy() {
 
   node thread anim_generic_loop(self, "invasion_parachute_ground_detach_idle", "stop_tangled_guy_idle");
 
-  while(!players_looking_at(self getEye()))
+  while(!players_looking_at(self getEye())) {
     wait .05;
+  }
 
   self.allowdeath = true;
   self thread stop_magic_bullet_shield();
@@ -391,8 +392,9 @@ setup_roof_parachute_guy(humvee_guy) {
   */
   self.allowdeath = false;
   self.noragdoll = true;
-  if(isDefined(humvee_guy))
+  if(isDefined(humvee_guy)) {
     self.humvee_guy = true;
+  }
   //self.deathanim = %invasion_paratrooper_roof_landing_rolldeath;
 
   self.health = 1;
@@ -408,8 +410,9 @@ setup_roof_parachute_guy(humvee_guy) {
 }
 
 notetrack_roll_death(guy) {
-  if(isDefined(guy.humvee_guy))
+  if(isDefined(guy.humvee_guy)) {
     return;
+  }
 
   //level notify( "roll_death" );
   //if( guy.delayedDeath ) //he has been shot
@@ -424,8 +427,9 @@ notetrack_roll_death(guy) {
 }
 
 notetrack_crawl_death_start(guy) {
-  if(isDefined(guy.humvee_guy))
+  if(isDefined(guy.humvee_guy)) {
     return;
+  }
 
   //guy.deathanim = %invasion_paratrooper_roof_landing_crawldeath;
 

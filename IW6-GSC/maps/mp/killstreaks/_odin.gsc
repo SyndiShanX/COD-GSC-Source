@@ -132,10 +132,12 @@ init() {
 
   if(!isDefined(level.heli_pilot_mesh)) {
     level.heli_pilot_mesh = GetEnt("heli_pilot_mesh", "targetname");
-    if(!isDefined(level.heli_pilot_mesh))
+    if(!isDefined(level.heli_pilot_mesh)) {
       PrintLn("heli_pilot_mesh doesn't exist in this level: " + level.script);
-    else
+    }
+    else {
       level.heli_pilot_mesh.origin += getHeliPilotMeshOffset();
+    }
   }
 
   maps\mp\agents\_agents::wait_till_agent_funcs_defined();
@@ -182,8 +184,9 @@ tryUseOdin(lifeId, streakName) {
 
   result = self startOdin(odin);
 
-  if(!isDefined(result))
+  if(!isDefined(result)) {
     result = false;
+  }
 
   return result;
 }
@@ -247,8 +250,9 @@ startOdin(odin) {
 
   self odin_set_using(odin);
 
-  if(GetDvarInt("camera_thirdPerson"))
+  if(GetDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(false);
+  }
 
   self thread watchIntroCleared(odin);
 
@@ -259,8 +263,9 @@ startOdin(odin) {
 
   result = self maps\mp\killstreaks\_killstreaks::initRideKillstreak(odin.odinType);
   if(result != "success") {
-    if(isDefined(self.disabledWeapon) && self.disabledWeapon)
+    if(isDefined(self.disabledWeapon) && self.disabledWeapon) {
       self _enableWeapon();
+    }
     odin notify("death");
 
     return false;
@@ -382,8 +387,9 @@ odin_watchDeath() {
 
   self waittill("death");
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner odin_EndRide(self);
+  }
 
   cleanup_ents();
 
@@ -455,8 +461,9 @@ odin_leave() {
   config = level.odinSettings[self.odinType];
   leaderDialog(config.voTimedOut);
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner odin_EndRide(self);
+  }
 
   self notify("gone");
 
@@ -480,8 +487,9 @@ odin_EndRide(odin) {
 
     self odin_clear_using(odin);
 
-    if(GetDvarInt("camera_thirdPerson"))
+    if(GetDvarInt("camera_thirdPerson")) {
       self setThirdPersonDOF(true);
+    }
 
     self ThermalVisionFOFOverlayOff();
     self RemoteControlVehicleOff(odin);
@@ -493,14 +501,17 @@ odin_EndRide(odin) {
     self StopLocalSound("odin_negative_action");
     self StopLocalSound("odin_positive_action");
     foreach(odin_weapon in level.odinSettings[odin.odinType].weapon) {
-      if(isDefined(odin_weapon.plr_ready_sound))
+      if(isDefined(odin_weapon.plr_ready_sound)) {
         self StopLocalSound(odin_weapon.plr_ready_sound);
-      if(isDefined(odin_weapon.plr_fire_sound))
+      }
+      if(isDefined(odin_weapon.plr_fire_sound)) {
         self StopLocalSound(odin_weapon.plr_fire_sound);
+      }
     }
 
-    if(isDefined(odin.juggernaut))
+    if(isDefined(odin.juggernaut)) {
       odin.juggernaut maps\mp\bots\_bots_strategy::bot_guard_player(self, 350);
+    }
   }
 }
 
@@ -598,8 +609,9 @@ watchAirdropUse() {
   self.odin_airdropUseTime = 0;
   owner SetClientOmnvar(weaponStruct.ammoOmnvar, level.odinSettings[self.odinType].ui_num);
 
-  if(!IsAI(owner))
+  if(!IsAI(owner)) {
     owner NotifyOnPlayerCommand("airdrop_action", "+smoke");
+  }
 
   while(true) {
     owner waittill("airdrop_action");
@@ -610,10 +622,12 @@ watchAirdropUse() {
       return;
     }
     if(GetTime() >= self.odin_airdropUseTime) {
-      if(level.teamBased)
+      if(level.teamBased) {
         leaderDialog(weaponStruct.voAirdrop, self.team);
-      else
+      }
+      else {
         owner leaderDialogOnPlayer(weaponStruct.voAirdrop);
+      }
 
       self.odin_airdropUseTime = self odin_fireWeapon("airdrop");
       weaponStruct = level.odinSettings[self.odinType].weapon["airdrop"];
@@ -654,10 +668,12 @@ watchSmokeUse() {
       return;
     }
     if(GetTime() >= self.odin_smokeUseTime) {
-      if(level.teamBased)
+      if(level.teamBased) {
         leaderDialog(weaponStruct.voSmoke, self.team);
-      else
+      }
+      else {
         owner leaderDialogOnPlayer(weaponStruct.voSmoke);
+      }
 
       self.odin_smokeUseTime = self odin_fireWeapon("smoke");
     } else
@@ -715,8 +731,9 @@ watchJuggernautUse() {
   self.odin_juggernautUseTime = 0;
   owner SetClientOmnvar(weaponStruct.ammoOmnvar, level.odinSettings[self.odinType].ui_num);
 
-  if(!IsAI(owner))
+  if(!IsAI(owner)) {
     owner NotifyOnPlayerCommand("juggernaut_action", "+frag");
+  }
 
   while(true) {
     owner waittill("juggernaut_action");
@@ -747,8 +764,9 @@ watchJuggernautUse() {
 
     wait(1.1);
 
-    if(isDefined(self.juggernaut))
+    if(isDefined(self.juggernaut)) {
       owner SetClientOmnvar(weaponStruct.ammoOmnvar, weaponStruct.ui_num_move);
+    }
   }
 }
 
@@ -851,10 +869,12 @@ odin_fireWeapon(weaponType) {
     playSoundAtPos(self.origin, weaponStruct.npc_fire_sound);
     wait(0.3);
   } else {
-    if(isDefined(weaponStruct.plr_fire_sound))
+    if(isDefined(weaponStruct.plr_fire_sound)) {
       owner PlaySoundToPlayer(weaponStruct.plr_fire_sound, owner);
-    if(isDefined(weaponStruct.npc_fire_sound))
+    }
+    if(isDefined(weaponStruct.npc_fire_sound)) {
       playSoundAtPos(self.origin, weaponStruct.npc_fire_sound);
+    }
     owner PlayRumbleOnEntity(weaponStruct.rumble);
   }
 
@@ -862,8 +882,9 @@ odin_fireWeapon(weaponType) {
   projectile.type = "odin";
   projectile thread watchExplosion(weaponType);
 
-  if(weaponType == "smoke" || weaponType == "juggernaut" || weaponType == "large_rod")
+  if(weaponType == "smoke" || weaponType == "juggernaut" || weaponType == "large_rod") {
     level notify("smoke", projectile, weaponStruct.projectile);
+  }
 
   self.is_firing = undefined;
 
@@ -971,10 +992,12 @@ watchReload(weaponStruct) {
 
   wait(time);
 
-  if(!isDefined(owner.odin))
+  if(!isDefined(owner.odin)) {
     return;
-  if(isDefined(plr_ready_sound))
+  }
+  if(isDefined(plr_ready_sound)) {
     owner _playLocalSound(plr_ready_sound);
+  }
   owner SetClientOmnvar(dvar, ui_num);
 }
 
@@ -992,8 +1015,9 @@ doMarkingFlash(pos) {
 
   num_marked = 0;
   foreach(player in level.participants) {
-    if(!isReallyAlive(player) || player.sessionstate != "playing")
+    if(!isReallyAlive(player) || player.sessionstate != "playing") {
       continue;
+    }
     if(level.teamBased && player.team == self.team) {
       continue;
     }
@@ -1018,10 +1042,12 @@ doMarkingFlash(pos) {
     if(!BulletTracePassed(pos, viewOrigin, false, player)) {
       continue;
     }
-    if(dist <= radius_min_sq)
+    if(dist <= radius_min_sq) {
       percent_distance = 1.0;
-    else
+    }
+    else {
       percent_distance = 1.0 - (dist - radius_min_sq) / (radius_max_sq - radius_min_sq);
+    }
 
     forward = anglesToForward(player GetPlayerAngles());
 
@@ -1035,25 +1061,31 @@ doMarkingFlash(pos) {
     num_marked++;
 
     if(!enemyNotAffectedByOdinOutline(player)) {
-      if(level.teamBased)
+      if(level.teamBased) {
         id = outlineEnableForTeam(player, "orange", self.team, false, "killstreak");
-      else
+      }
+      else {
         id = outlineEnableForPlayer(player, "orange", self.owner, false, "killstreak");
+      }
       self thread removeOutline(id, player, 3.0);
     }
   }
 
   weaponStruct = level.odinSettings[self.odinType].weapon["marking"];
   if(num_marked == 1) {
-    if(level.teamBased)
+    if(level.teamBased) {
       leaderDialog(weaponStruct.voMarkedSingle, self.team);
-    else
+    }
+    else {
       attacker leaderDialogOnPlayer(weaponStruct.voMarkedSingle);
+    }
   } else if(num_marked > 1) {
-    if(level.teamBased)
+    if(level.teamBased) {
       leaderDialog(weaponStruct.voMarkedMulti, self.team);
-    else
+    }
+    else {
       attacker leaderDialogOnPlayer(weaponStruct.voMarkedMulti);
+    }
   }
 
   ents = maps\mp\gametypes\_weapons::getEMPDamageEnts(pos, 512, false);
@@ -1067,10 +1099,12 @@ doMarkingFlash(pos) {
 }
 
 applyOutline(player) {
-  if(level.teamBased && player.team == self.team)
+  if(level.teamBased && player.team == self.team) {
     return;
-  else if(!level.teamBased && player == self.owner)
+  }
+  else if(!level.teamBased && player == self.owner) {
     return;
+  }
   if(enemyNotAffectedByOdinOutline(player)) {
     return;
   }
@@ -1083,18 +1117,22 @@ enemyNotAffectedByOdinOutline(enemy) {
 }
 
 removeOutline(id, ent, time_out) {
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent endon("disconnect");
+  }
   level endon("game_ended");
 
   wait_array = ["leave", "death"];
-  if(isDefined(time_out))
+  if(isDefined(time_out)) {
     self waittill_any_in_array_or_timeout_no_endon_death(wait_array, time_out);
-  else
+  }
+  else {
     self waittill_any_in_array_return_no_endon_death(wait_array);
+  }
 
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     outlineDisable(id, ent);
+  }
 }
 
 odin_watchOutlines() {
@@ -1131,10 +1169,12 @@ odin_dialog_killed_player(victim) {
     self waittill("odin_enemy_killed");
     wait(time_window);
 
-    if(self.enemiesKilledInTimeWindow > 1)
+    if(self.enemiesKilledInTimeWindow > 1) {
       self.owner leaderDialogOnPlayer(config.voKillMulti);
-    else
+    }
+    else {
       self.owner leaderDialogOnPlayer(config.voKillSingle);
+    }
 
     self.enemiesKilledInTimeWindow = 0;
   }
@@ -1159,10 +1199,12 @@ odin_onPlayerSpawned(odin) {
 }
 
 cleanup_ents() {
-  if(isDefined(self.targeting_marker))
+  if(isDefined(self.targeting_marker)) {
     self.targeting_marker delete();
-  if(isDefined(self.odin_overlay_ent))
+  }
+  if(isDefined(self.odin_overlay_ent)) {
     self.odin_overlay_ent delete();
+  }
 }
 
 watchEarlyExit(odin) {

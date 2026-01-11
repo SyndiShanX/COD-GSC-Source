@@ -21,10 +21,12 @@ main() {
   //later on - hopefully this flag will be set through some real time method
   //so that the 2nd player can jump in and out of a game at any moment...right
   //now this check only happens at the load of each level and doesn't get checked again
-  if(is_coop())
+  if(is_coop()) {
     flag_set("coop_game");
-  if(getdvar("coop_revive", 1) == "1")
+  }
+  if(getdvar("coop_revive", 1) == "1") {
     flag_set("coop_revive");
+  }
 
   flag_set("coop_show_constant_icon");
 
@@ -59,11 +61,13 @@ main() {
 
   level.revive_hud_base_offset = 75;
   level.revive_bar_base_offset = 15;
-  if(!issplitscreen())
+  if(!issplitscreen()) {
     level.revive_hud_base_offset = 120;
+  }
 
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player.reviving_buddy = false;
+  }
 
   // Used to keep one player alive for a few seconds when the other player goes down
   level.coop_last_player_downed_time = 0;
@@ -74,18 +78,22 @@ main() {
 
 player_coop_proc() {
   //this checks to see if we're already running the process
-  if(!flag("coop_game"))
+  if(!flag("coop_game")) {
     return;
+  }
   level endon("coop_game");
 
-  if(self ent_flag("coop_proc_running"))
+  if(self ent_flag("coop_proc_running")) {
     return;
+  }
 
-  if(!isDefined(self.original_maxhealth))
+  if(!isDefined(self.original_maxhealth)) {
     self.original_maxhealth = self.maxhealth;
+  }
 
-  if(!flag("coop_revive"))
+  if(!flag("coop_revive")) {
     return;
+  }
   level endon("coop_revive");
 
   self thread player_coop_proc_ended();
@@ -126,8 +134,9 @@ player_coop_proc() {
     self waittill("deathshield", damage, attacker, direction, point, type, modelName, tagName, partName, dflags, weaponName);
 
     // we're already downed
-    if(self ent_flag("coop_downed"))
+    if(self ent_flag("coop_downed")) {
       continue;
+    }
 
     death_array = [];
     death_array["damage"] = damage;
@@ -221,8 +230,9 @@ downed_player_manager() {
 }
 
 create_fresh_friendly_icon(material) {
-  if(isDefined(self.friendlyIcon))
+  if(isDefined(self.friendlyIcon)) {
     self.friendlyIcon Destroy();
+  }
 
   self.friendlyIcon = NewClientHudElem(self);
   self.friendlyIcon SetShader(material, 1, 1);
@@ -232,15 +242,18 @@ create_fresh_friendly_icon(material) {
   self.friendlyIcon.material = material;
   self.friendlyIcon.hidewheninmenu = true;
 
-  if(flag("coop_show_constant_icon"))
+  if(flag("coop_show_constant_icon")) {
     self.friendlyIcon.alpha = 1.0;
-  else
+  }
+  else {
     self.friendlyIcon.alpha = 0.0;
+  }
 }
 
 rebuild_friendly_icon(color, material, non_rotating) {
-  if(isDefined(self.noFriendlyHudIcon))
+  if(isDefined(self.noFriendlyHudIcon)) {
     return;
+  }
 
   assertex(isDefined(color), "rebuild_friendly_icon requires a valid color to be passed in.");
   assertex(isDefined(material), "rebuild_friendly_icon requires a valid material to be passed in.");
@@ -251,8 +264,9 @@ rebuild_friendly_icon(color, material, non_rotating) {
   }
 
   self.friendlyIcon.color = color;
-  if(!isDefined(non_rotating))
+  if(!isDefined(non_rotating)) {
     self.friendlyIcon SetWaypointEdgeStyle_RotatingIcon();
+  }
 }
 
 CreateFriendlyHudIcon_Normal() {
@@ -284,16 +298,18 @@ FriendlyHudIcon_BlinkWhenDamaged() {
 }
 
 FriendlyHudIcon_FlashIcon(color, material) {
-  if(isDefined(self.noFriendlyHudIcon))
+  if(isDefined(self.noFriendlyHudIcon)) {
     return;
+  }
 
   self endon("death");
   self notify("flash_color_thread");
   self endon("flash_color_thread");
 
   other_player = get_other_player(self);
-  if(other_player ent_flag("coop_downed"))
+  if(other_player ent_flag("coop_downed")) {
     return;
+  }
 
   self rebuild_friendly_icon(color, material);
   wait .5;
@@ -302,16 +318,18 @@ FriendlyHudIcon_FlashIcon(color, material) {
 }
 
 player_setup_icon() {
-  if(!flag("coop_game"))
+  if(!flag("coop_game")) {
     return;
+  }
   level endon("coop_game");
 
   self CreateFriendlyHudIcon_Normal();
   self thread FriendlyHudIcon_BlinkWhenFire();
   self thread FriendlyHudIcon_BlinkWhenDamaged();
 
-  if(isDefined(self.noFriendlyHudIcon))
+  if(isDefined(self.noFriendlyHudIcon)) {
     return;
+  }
 
   while(1) {
     flag_wait("coop_show_constant_icon");
@@ -332,11 +350,13 @@ player_coop_create_use_target() {
 }
 
 player_coop_destroy_use_target() {
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player.reviving_buddy = false;
+  }
 
-  if(isDefined(level.revive_ent))
+  if(isDefined(level.revive_ent)) {
     level.revive_ent Delete();
+  }
 }
 
 player_coop_downed() {
@@ -346,8 +366,9 @@ player_coop_downed() {
 
   player_coop_check_alldowned();
 
-  if(flag("coop_alldowned"))
+  if(flag("coop_alldowned")) {
     self player_coop_kill();
+  }
 
   self player_coop_create_use_target();
 
@@ -366,8 +387,9 @@ player_coop_downed() {
   waittillframeend;
   self notify("end_func_player_coop_downed_icon");
 
-  if(flag("coop_alldowned") || self ent_flag("coop_downed"))
+  if(flag("coop_alldowned") || self ent_flag("coop_downed")) {
     self player_coop_kill();
+  }
 
   self player_coop_set_original_attributes();
 }
@@ -583,10 +605,12 @@ player_coop_downed_hud() {
   self thread player_coop_downed_hud_destroy();
 
   foreach(player in level.players) {
-    if(player == self)
+    if(player == self) {
       player.revive_text settext(&"SCRIPT_COOP_BLEEDING_OUT");
-    else
+    }
+    else {
       player.revive_text settext(&"SCRIPT_COOP_BLEEDING_OUT_PARTNER");
+    }
     player.revive_timer setTimer(self.coop.bleedout_time_default - 1);
   }
 
@@ -630,10 +654,12 @@ player_coop_downed_hud_destroy() {
 
   self waittill_any("end_func_player_coop_downed_icon", "death");
   foreach(player in level.players) {
-    if(isDefined(player.revive_text))
+    if(isDefined(player.revive_text)) {
       player.revive_text destroy();
-    if(isDefined(player.revive_timer))
+    }
+    if(isDefined(player.revive_timer)) {
       player.revive_timer destroy();
+    }
   }
 }
 
@@ -641,17 +667,21 @@ player_coop_downed_hud_destroy_mission_end() {
   level waittill("special_op_terminated");
 
   foreach(player in level.players) {
-    if(isDefined(player.revive_text))
+    if(isDefined(player.revive_text)) {
       player.revive_text destroy();
-    if(isDefined(player.revive_timer))
+    }
+    if(isDefined(player.revive_timer)) {
       player.revive_timer destroy();
+    }
   }
 
-  if(isDefined(self.friendlyIcon))
+  if(isDefined(self.friendlyIcon)) {
     self.friendlyIcon Destroy();
+  }
   other_player = get_other_player(self);
-  if(isDefined(other_player.friendlyIcon))
+  if(isDefined(other_player.friendlyIcon)) {
     other_player.friendlyIcon Destroy();
+  }
 }
 
 player_coop_countdown_timer(time) {
@@ -664,18 +694,21 @@ player_coop_countdown_timer(time) {
 
   while(self.coop.bleedout_time > 0) {
     if(self ent_flag("coop_pause_bleedout_timer")) {
-      foreach(player in level.players)
+      foreach(player in level.players) {
       player.revive_timer.alpha = 0;
+      }
       self ent_flag_waitopen("coop_pause_bleedout_timer");
 
       //need this check because was setting a time that wasn't greater than 0 which would give an error
       if(self.coop.bleedout_time >= 1) {
-        foreach(player in level.players)
+        foreach(player in level.players) {
         player.revive_timer settimer(self.coop.bleedout_time - 1);
+        }
       }
     } else {
-      foreach(player in level.players)
+      foreach(player in level.players) {
       player.revive_timer.alpha = 1;
+      }
     }
 
     wait .05;
@@ -770,8 +803,9 @@ player_coop_freeze_players(frozen) {
     self enableweaponswitch();
 
     downed_buddy freezecontrols(false);
-    if(!is_player_down_and_out(downed_buddy))
+    if(!is_player_down_and_out(downed_buddy)) {
       downed_buddy enableweapons();
+    }
   }
 }
 
@@ -787,8 +821,9 @@ player_coop_revive_buddy() {
     level.revive_ent waittill("trigger", player);
     //		wait 0.05;
 
-    if(player != self)
+    if(player != self) {
       continue;
+    }
 
     player.reviving_buddy = true;
     if(player_coop_is_reviving()) {
@@ -809,22 +844,26 @@ player_coop_revive_buddy() {
       level.bars["p2"] = createClientProgressBar(level.player2, level.revive_hud_base_offset + level.revive_bar_base_offset);
 
       foreach(player in level.players) {
-        if(player == downed_buddy)
+        if(player == downed_buddy) {
           player.revive_text settext(&"SCRIPT_COOP_REVIVING");
-        else
+        }
+        else {
           player.revive_text settext(&"SCRIPT_COOP_REVIVING_PARTNER");
+        }
       }
 
       speak_first = randomfloat(1) > 0.33;
-      if(speak_first)
+      if(speak_first) {
         self notify("so_reviving");
+      }
 
       buttonTime = 0;
       totalTime = 1.5;
       while(player_coop_is_reviving()) {
         downed_buddy ent_flag_set("coop_pause_bleedout_timer");
-        foreach(bar in level.bars)
+        foreach(bar in level.bars) {
         bar updateBar(buttonTime / totalTime);
+        }
 
         wait(0.05);
         buttonTime += 0.05;
@@ -833,8 +872,9 @@ player_coop_revive_buddy() {
 
           //if we get to here - we double tapped	
           downed_buddy player_coop_revive_self();
-          if(!speak_first)
+          if(!speak_first) {
             self notify("so_revived");
+          }
           return;
         }
       }
@@ -873,10 +913,12 @@ player_coop_revive_buddy_cleanup(downed_buddy) {
   revive_hud_cleanup_bars();
 
   foreach(player in level.players) {
-    if(player == downed_buddy)
+    if(player == downed_buddy) {
       player.revive_text settext(&"SCRIPT_COOP_BLEEDING_OUT");
-    else
+    }
+    else {
       player.revive_text settext(&"SCRIPT_COOP_BLEEDING_OUT_PARTNER");
+    }
   }
 
   if(isDefined(downed_buddy) && isalive(downed_buddy)) {
@@ -1016,8 +1058,9 @@ check_for_pistol() {
   weapon_list = self GetWeaponsListPrimaries();
   foreach(weapon in weapon_list) {
     // Need to account for Akimbo weapons?
-    if(WeaponClass(weapon) == "pistol")
+    if(WeaponClass(weapon) == "pistol") {
       return weapon;
+    }
   }
 
   return undefined;
@@ -1042,14 +1085,17 @@ remove_pistol_if_extra() {
 }
 
 player_can_restore_weapon(weapon) {
-  if(!isDefined(weapon))
+  if(!isDefined(weapon)) {
     return false;
+  }
 
-  if(weapon == "none")
+  if(weapon == "none") {
     return false;
+  }
 
-  if(!self HasWeapon(weapon))
+  if(!self HasWeapon(weapon)) {
     return false;
+  }
 
   return true;
 }
@@ -1061,8 +1107,9 @@ player_coop_force_switch_to_pistol() {
 
   if(!isDefined(weapon_pistol)) {
     weapon_pistol = "Beretta";
-    if(isDefined(level.coop_incap_weapon))
+    if(isDefined(level.coop_incap_weapon)) {
       weapon_pistol = level.coop_incap_weapon;
+    }
 
     self.forced_pistol = weapon_pistol;
     self giveWeapon(weapon_pistol);
@@ -1109,10 +1156,12 @@ player_dying_effect() {
   self endon("revived");
 
   //allow this thread to only be run once
-  if(!ent_flag_exist("coop_dying_effect"))
+  if(!ent_flag_exist("coop_dying_effect")) {
     ent_flag_init("coop_dying_effect");
-  else if(ent_flag("coop_dying_effect"))
+  }
+  else if(ent_flag("coop_dying_effect")) {
     return;
+  }
   ent_flag_set("coop_dying_effect");
 
   for(;;) {
@@ -1122,8 +1171,9 @@ player_dying_effect() {
 }
 
 player_dying_effect_remove() {
-  if(ent_flag_exist("coop_dying_effect"))
+  if(ent_flag_exist("coop_dying_effect")) {
     ent_flag_clear("coop_dying_effect");
+  }
 
   self stopShellShock();
 }
@@ -1155,8 +1205,9 @@ player_coop_kill() {
   self ent_flag_set("coop_is_dead");
   self thread player_dying_effect_remove();
 
-  if(flag("coop_fail_when_all_dead"))
+  if(flag("coop_fail_when_all_dead")) {
     flag_wait("coop_alldowned");
+  }
 
   self EnableDeathShield(false);
   self DisableInvulnerability();
@@ -1170,8 +1221,9 @@ player_coop_kill() {
 player_coop_check_alldowned() {
   foreach(player in level.players) {
     downed = player ent_flag("coop_downed");
-    if(!downed)
+    if(!downed) {
       return;
+    }
   }
 
   flag_set("coop_alldowned");

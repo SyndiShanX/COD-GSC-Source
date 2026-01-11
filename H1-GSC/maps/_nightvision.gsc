@@ -5,11 +5,13 @@
 ********************************/
 
 main(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level.players;
+  }
 
-  if(!isDefined(level.nightvisionlightset))
+  if(!isDefined(level.nightvisionlightset)) {
     level.nightvisionlightset = "nightvision";
+  }
 
   thread init_and_run(var_0, var_1);
 }
@@ -65,8 +67,9 @@ nightvision_toggle() {
 }
 
 nightvision_check(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level.player;
+  }
 
   return isDefined(var_0.nightvision_enabled);
 }
@@ -87,8 +90,9 @@ nightvision_on() {
   var_0 = getaiarray("allies");
   common_scripts\utility::array_thread(var_0, ::enable_ir_beacon);
 
-  if(!maps\_utility::exists_global_spawn_function("allies", ::enable_ir_beacon))
+  if(!maps\_utility::exists_global_spawn_function("allies", ::enable_ir_beacon)) {
     maps\_utility::add_global_spawn_function("allies", ::enable_ir_beacon);
+  }
 }
 
 has_laser_sight_nightvision(var_0) {
@@ -105,10 +109,12 @@ h1_view_weapon_laser_update() {
       continue;
     }
 
-    if(has_laser_sight_nightvision(self getcurrentweapon()))
+    if(has_laser_sight_nightvision(self getcurrentweapon())) {
       self laseron();
-    else
+    }
+    else {
       self laseroff();
+    }
 
     common_scripts\utility::waittill_any("weapon_switch_started", "weapon_taken");
     self laseroff();
@@ -132,11 +138,13 @@ loopreflectoreffect() {
   self endon("death");
 
   for(;;) {
-    if(self gettagindex("tag_reflector_arm_le") != -1)
+    if(self gettagindex("tag_reflector_arm_le") != -1) {
       playFXOnTag(level.nightvision_reflector_effect, self, "tag_reflector_arm_le");
+    }
 
-    if(self gettagindex("tag_reflector_arm_ri") != -1)
+    if(self gettagindex("tag_reflector_arm_ri") != -1) {
       playFXOnTag(level.nightvision_reflector_effect, self, "tag_reflector_arm_ri");
+    }
 
     wait 0.1;
   }
@@ -155,8 +163,9 @@ nightvision_off() {
   self laseroff();
   level notify("night_vision_off");
 
-  if(isDefined(level.nightvision_dlight))
+  if(isDefined(level.nightvision_dlight)) {
     level.nightvision_dlight delete();
+  }
 
   self notify("nightvision_shellshock_off");
   maps\_utility::ent_flag_clear("nightvision_on");
@@ -166,12 +175,14 @@ nightvision_off() {
   var_0 = 0;
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
-    if(nightvision_check(level.players[var_1]))
+    if(nightvision_check(level.players[var_1])) {
       var_0 = 1;
+    }
   }
 
-  if(!var_0)
+  if(!var_0) {
     maps\_utility::remove_global_spawn_function("allies", ::enable_ir_beacon);
+  }
 
   thread nightvision_effectsoff();
 }
@@ -187,15 +198,17 @@ nightvision_effectsoff() {
 }
 
 shouldbreaknvghintprint() {
-  if(isDefined(self.nightvision_started))
+  if(isDefined(self.nightvision_started)) {
     return 1;
+  }
 
   return isDefined(self.end_nightvision_hint);
 }
 
 should_break_disable_nvg_print() {
-  if(!isDefined(self.nightvision_started))
+  if(!isDefined(self.nightvision_started)) {
     return 1;
+  }
 
   return isDefined(self.end_nightvision_disable_hint);
 }

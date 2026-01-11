@@ -84,8 +84,9 @@ monitor_death_stop_sounds() {
 }
 
 set_vehicle_anims(var_0) {
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1].vehicle_getoutanim = % bh_idle;
+  }
 
   return var_0;
 }
@@ -111,8 +112,9 @@ setplayer_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 8; var_1++)
+  for(var_1 = 0; var_1 < 8; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   var_0[0].idle = % bh_pilot_idle;
   var_0[1].idle = % bh_copilot_idle;
@@ -210,8 +212,9 @@ set_attached_models() {
   var_0["TAG_FastRope_RI"].dropanim = % bh_rope_drop_ri;
   var_1 = getarraykeys(var_0);
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     precachemodel(var_0[var_1[var_2]].model);
+  }
 
   return var_0;
 }

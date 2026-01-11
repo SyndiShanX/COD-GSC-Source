@@ -75,17 +75,20 @@ delete_timer() {
 }
 
 animate_at_node(node) {
-  if(!node_has_animations(node) || !isDefined(level.nodedrone))
+  if(!node_has_animations(node) || !isDefined(level.nodedrone)) {
     return;
+  }
   level.nodedrone thread animate_nodedrone_at_node(node);
 }
 
 spawn_johnny_node_chaser(node) {
   if(!isDefined(level.johnny_node_chaser)) {
-    if(!isDefined(level.enemy_spawner))
+    if(!isDefined(level.enemy_spawner)) {
       maps\_debug::dynamic_ai_spawner_init();
-    if(!isDefined(level.enemy_spawner))
+    }
+    if(!isDefined(level.enemy_spawner)) {
       return;
+    }
     spawner = level.enemy_spawner;
     old_origin = spawner.origin;
     old_angles = spawner.angles;
@@ -128,8 +131,9 @@ keepupwithnode(node) {
 
 animate_nodedrone_at_node(node) {
   angles = node.angles;
-  if(isDefined(level.node_offset[node.type]))
+  if(isDefined(level.node_offset[node.type])) {
     angles = angles + level.node_offset[node.type];
+  }
   self.origin = node.origin;
   self.angles = angles;
   self dontinterpolate();
@@ -146,22 +150,26 @@ stay_animated_at_node(node) {
       prev_org = node.origin;
       prev_ang = node.angles;
       angles = node.angles;
-      if(isDefined(level.node_offset[self.currentnode.type]))
+      if(isDefined(level.node_offset[self.currentnode.type])) {
         angles = angles + level.node_offset[self.currentnode.type];
+      }
       self.origin = node.origin;
       self.angles = angles;
       self notify("stop_loop");
-      if(node_has_animations(node))
+      if(node_has_animations(node)) {
         self anim_generic_loop(self, node.type, "stop_loop");
-      else
+      }
+      else {
         prev_org = (0, 0, 0);
+      }
     }
     wait 0.05;
   }
 }
 
 node_has_animations(node) {
-  if(isDefined(level.scr_anim["generic"][node.type]))
+  if(isDefined(level.scr_anim["generic"][node.type])) {
     return true;
+  }
   return false;
 }

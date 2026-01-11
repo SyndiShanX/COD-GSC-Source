@@ -4,8 +4,9 @@
 **************************************************/
 
 bomber_level_init() {
-  if(!isDefined(level.alien_funcs))
+  if(!isDefined(level.alien_funcs)) {
     level.alien_funcs = [];
+  }
 
   level.alien_funcs["bomber"]["approach"] = ::blank_script;
   level.alien_funcs["bomber"]["combat"] = ::blank_script;
@@ -45,8 +46,9 @@ bomber_think() {
   self.divebomborigin = get_divebomb_origin(var_0);
   bomber_attack("divebomb", var_0);
 
-  if(!maps\mp\_utility::isreallyalive(var_0))
+  if(!maps\mp\_utility::isreallyalive(var_0)) {
     var_0 = acquire_enemy_before_charge();
+  }
 
   bomber_attack("kamikaze", var_0);
 }
@@ -61,8 +63,9 @@ get_divebomb_origin(var_0) {
   var_1 = get_flyable_nodes(var_1);
   var_2 = get_divebomb_node_rated(var_0, var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return var_2.origin + (0, 0, 256);
+  }
 
   return level.players[0].origin + (0, 0, 256);
 }
@@ -71,8 +74,9 @@ get_flyable_nodes(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "flyable")
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "flyable") {
       var_1[var_1.size] = var_3;
+    }
   }
 
   return var_1;
@@ -107,33 +111,38 @@ wait_for_enemy_before_attack() {
     var_1 = maps\mp\alien\_utility::get_closest_living_player();
     var_2 = get_closest_living_vanguard();
 
-    if(isDefined(var_1) && !player_controlling_vanguard(var_1, var_2))
+    if(isDefined(var_1) && !player_controlling_vanguard(var_1, var_2)) {
       return var_1;
+    }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       return var_2;
+    }
 
     wait 0.05;
   }
 }
 
 player_controlling_vanguard(var_0, var_1) {
-  if(!isDefined(var_1) || !isDefined(var_1.owner))
+  if(!isDefined(var_1) || !isDefined(var_1.owner)) {
     return 0;
+  }
 
   return var_1.owner == var_0;
 }
 
 get_closest_living_vanguard() {
-  if(isDefined(level.alien_vanguard))
+  if(isDefined(level.alien_vanguard)) {
     return level.alien_vanguard;
+  }
 
   return undefined;
 }
 
 acquire_enemy_before_charge() {
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return self.enemy;
+  }
 
   return wait_for_enemy_before_attack();
 }
@@ -184,8 +193,9 @@ divebomb(var_0) {
     var_17 = var_11 + var_12;
     var_17 = var_17 * var_17;
 
-    while(distancesquared(self.origin, var_2) > var_17)
+    while(distancesquared(self.origin, var_2) > var_17) {
       wait 0.05;
+    }
 
     var_3 = var_11 + var_12;
   }

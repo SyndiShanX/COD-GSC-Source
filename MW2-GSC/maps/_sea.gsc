@@ -65,10 +65,12 @@ sea_logic() {
 
 sea_objectbob_precalc(org, type) {
   self.waittime = randomfloatrange(.5, 1);
-  if(isDefined(self.setscale))
+  if(isDefined(self.setscale)) {
     self.scale = self.setscale;
-  else
+  }
+  else {
     self.scale = randomfloatrange(2, 3);
+  }
 
   swaymax = 0;
   swaynum = 0;
@@ -88,10 +90,12 @@ sea_objectbob_precalc(org, type) {
     swaycalc = (org.rotation[0] * self.pratio * self.scale) + (org.rotation[2] * self.rratio * self.scale);
 
     if(swaymax < abs(swaycalc)) {
-      if(swaycalc < 1)
+      if(swaycalc < 1) {
         swaynum = swaymax * -1;
-      else
+      }
+      else {
         swaynum = swaymax;
+      }
     } else
       swaynum = swaycalc;
 
@@ -103,8 +107,9 @@ sea_objectbob_precalc(org, type) {
 sea_objectbob(org) {
   if(isDefined(self.targetname)) {
     dependants = getEntArray(self.targetname, "target");
-    for(i = 0; i < dependants.size; i++)
+    for(i = 0; i < dependants.size; i++) {
       dependants[i] linkto(self);
+    }
   }
 
   nodes = getstructarray(self.target, "targetname");
@@ -168,10 +173,12 @@ sea_objectbob(org) {
     ang = undefined;
     world = (0, 360, 0);
 
-    if(!isDefined(nodes[1]))
+    if(!isDefined(nodes[1])) {
       ang = nodes[0].angles;
-    else
+    }
+    else {
       ang = vectortoangles(B - A);
+    }
 
     ent.rratio = vectordot(anglestoright(ang), anglestoright(world));
     ent.pratio = vectordot(anglestoright(ang), anglesToForward(world));
@@ -180,8 +187,9 @@ sea_objectbob(org) {
   self.link = ent;
   self notify("got_link");
 
-  for(i = 0; i < nodes.size; i++)
+  for(i = 0; i < nodes.size; i++) {
     nodes[i] thread sea_objectbob_findparent(ent, org);
+  }
 
   wait .05;
 
@@ -209,23 +217,27 @@ sea_objectbob(org) {
 
 sea_objectbob_logic(org, ent) {
   while(1) {
-    if(org.sway == "sway2")
+    if(org.sway == "sway2") {
       org waittill("sway1");
+    }
 
     ent sea_objectbob_precalc(org, "sway1");
     ent notify("precalcdone1");
-    if(!isDefined(ent.parent))
+    if(!isDefined(ent.parent)) {
       wait ent.waittime;
+    }
 
     ent rotateto(ent.ang, org.time, org.time * .5, org.time * .5);
 
-    if(org.sway == "sway1")
+    if(org.sway == "sway1") {
       org waittill("sway2");
+    }
 
     ent sea_objectbob_precalc(org, "sway2");
     ent notify("precalcdone2");
-    if(!isDefined(ent.parent))
+    if(!isDefined(ent.parent)) {
       wait ent.waittime;
+    }
 
     ent rotateto(ent.ang, org.time, org.time * .5, org.time * .5);
   }
@@ -239,12 +251,14 @@ sea_objectbob_follow(ref) {
 }
 
 sea_objectbob_findparent(ent, org) {
-  if(!isDefined(self.target))
+  if(!isDefined(self.target)) {
     return;
+  }
 
   ent.parent = getent(self.target, "targetname");
-  if(!isDefined(ent.parent.link))
+  if(!isDefined(ent.parent.link)) {
     ent.parent waittill("got_link");
+  }
 
   link = ent.parent.link;
   origin = ent.origin;
@@ -286,8 +300,9 @@ sea_bob() {
 
     self.sway = "sway1";
     self notify("sway1");
-    if(flag("_sea_bob"))
+    if(flag("_sea_bob")) {
       level._sea_link rotateto(self.rotation, self.time, self.time * .5, self.time * .5);
+    }
     self rotateto(self.rotation, self.time, self.time * .5, self.time * .5);
     wait self.time;
 
@@ -295,8 +310,9 @@ sea_bob() {
 
     self.sway = "sway2";
     self notify("sway2");
-    if(flag("_sea_bob"))
+    if(flag("_sea_bob")) {
       level._sea_link rotateto(self.rotation, self.time, self.time * .5, self.time * .5);
+    }
     self rotateto(self.rotation, self.time, self.time * .5, self.time * .5);
     wait self.time;
   }
@@ -329,8 +345,9 @@ sea_bob_reset() {
 
 sea_waves() {
   waves = sea_waves_setup();
-  if(!isDefined(waves))
+  if(!isDefined(waves)) {
     return;
+  }
 
   self.oldwaves = [];
 
@@ -350,8 +367,9 @@ sea_waves_fx(waves, name) {
   range = 2;
 
   wave = random(sea_closestWaveArray(waves[name], range));
-  if(!isDefined(self.oldwaves[name]))
+  if(!isDefined(self.oldwaves[name])) {
     self.oldwaves[name] = wave;
+  }
 
   while(self.oldwaves[name] == wave) {
     wait .05;
@@ -371,15 +389,18 @@ sea_waves_fx2() {
 
 sea_closestWaveArray(array, arraysize) {
   temp = [];
-  for(i = 0; i < array.size; i++)
+  for(i = 0; i < array.size; i++) {
     array[i]._sea_dist = distancesquared(array[i].origin, level.player.origin);
+  }
 
-  for(i = 0; i < array.size; i++)
+  for(i = 0; i < array.size; i++) {
     temp = sea_closestWaveLogic(temp, array[i]);
+  }
 
   temp2 = [];
-  for(i = 0; i < arraysize; i++)
+  for(i = 0; i < arraysize; i++) {
     temp2[i] = temp[i];
+  }
 
   return temp2;
 }
@@ -395,8 +416,9 @@ sea_closestWaveLogic(array, object) {
       break;
     }
   }
-  if(i == array.size)
+  if(i == array.size) {
     array = array_add(array, object);
+  }
 
   return array;
 }
@@ -405,8 +427,9 @@ sea_waves_setup() {
   nodes = getstructarray("wave_fx", "targetname");
   center = getstruct("wave_fx_center", "targetname");
 
-  if(!nodes.size)
+  if(!nodes.size) {
     return undefined;
+  }
 
   forward = anglesToForward(center.angles);
   right = anglestoright(center.angles);
@@ -422,29 +445,34 @@ sea_waves_setup() {
   }
 
   for(i = 0; i < nodes.size; i++) {
-    if(vectordot(nodes[i].forward, right) > 0)
+    if(vectordot(nodes[i].forward, right) > 0) {
       waves["right"][waves["right"].size] = nodes[i];
-    else
+    }
+    else {
       waves["left"][waves["left"].size] = nodes[i];
+    }
   }
 
   //now that we have our positions...lets grab our actual exploders
   array = level._waves_exploders;
-  for(i = 0; i < array.size; i++)
+  for(i = 0; i < array.size; i++) {
     array[i].origin = array[i].v["origin"];
+  }
 
   for(i = 0; i < waves["right"].size; i++) {
     exp = getClosest(waves["right"][i].origin, array, 64);
     array = array_remove(array, exp);
-    if(isDefined(waves["right"][i].angles))
+    if(isDefined(waves["right"][i].angles)) {
       exp.v["forward"] = anglestoup(waves["right"][i].angles);
+    }
     waves["right"][i].exploder = exp;
   }
   for(i = 0; i < waves["left"].size; i++) {
     exp = getClosest(waves["left"][i].origin, array, 64);
     array = array_remove(array, exp);
-    if(isDefined(waves["left"][i].angles))
+    if(isDefined(waves["left"][i].angles)) {
       exp.v["forward"] = anglestoup(waves["left"][i].angles);
+    }
     waves["left"][i].exploder = exp;
   }
   return waves;
@@ -464,8 +492,9 @@ sea_litebob() {
     old = anglesToForward(oldang);
     new = anglesToForward(newang);
 
-    if(flag("cargoship_lighting_off"))
+    if(flag("cargoship_lighting_off")) {
       LerpSunDirection(old, new, .2);
+    }
   }
 }
 
@@ -474,8 +503,9 @@ sea_viewbob() {
     flag_wait("_sea_viewbob");
     level.player playerSetGroundReferenceEnt(self);
 
-    if(flag("_sea_viewbob"))
+    if(flag("_sea_viewbob")) {
       level waittill("_sea_viewbob");
+    }
 
     level.player playerSetGroundReferenceEnt(undefined);
   }

@@ -8,8 +8,9 @@ init_battlechatter() {
   if(isDefined(anim.chatinitialized) && anim.chatinitialized) {
     return;
   }
-  if(getdvar("bcs_enable") == "")
+  if(getdvar("bcs_enable") == "") {
     setdvar("bcs_enable", "on");
+  }
 
   if(getdvar("bcs_enable") == "off") {
     anim.chatinitialized = 0;
@@ -20,50 +21,65 @@ init_battlechatter() {
   anim.chatinitialized = 1;
   anim.player.chatinitialized = 0;
 
-  if(getdvar("bcs_filterThreat") == "")
+  if(getdvar("bcs_filterThreat") == "") {
     setdvar("bcs_filterThreat", "off");
+  }
 
-  if(getdvar("bcs_filterInform") == "")
+  if(getdvar("bcs_filterInform") == "") {
     setdvar("bcs_filterInform", "off");
+  }
 
-  if(getdvar("bcs_filterOrder") == "")
+  if(getdvar("bcs_filterOrder") == "") {
     setdvar("bcs_filterOrder", "off");
+  }
 
-  if(getdvar("bcs_filterReaction") == "")
+  if(getdvar("bcs_filterReaction") == "") {
     setdvar("bcs_filterReaction", "off");
+  }
 
-  if(getdvar("bcs_filterResponse") == "")
+  if(getdvar("bcs_filterResponse") == "") {
     setdvar("bcs_filterResponse", "off");
+  }
 
-  if(getdvar("bcs_threatLimitTargettedBySelf") == "")
+  if(getdvar("bcs_threatLimitTargettedBySelf") == "") {
     setdvar("bcs_threatLimitTargettedBySelf", "off");
+  }
 
-  if(getdvar("bcs_threatLimitTargetingPlayer") == "")
+  if(getdvar("bcs_threatLimitTargetingPlayer") == "") {
     setdvar("bcs_threatLimitTargetingPlayer", "off");
+  }
 
-  if(getdvar("bcs_threatLimitInPlayerFOV") == "")
+  if(getdvar("bcs_threatLimitInPlayerFOV") == "") {
     setdvar("bcs_threatLimitInPlayerFOV", "on");
+  }
 
-  if(getdvar("bcs_threatLimitInLocation") == "")
+  if(getdvar("bcs_threatLimitInLocation") == "") {
     setdvar("bcs_threatLimitInLocation", "on");
+  }
 
-  if(getdvar("bcs_threatLimitSpeakerDist") == "")
+  if(getdvar("bcs_threatLimitSpeakerDist") == "") {
     setdvar("bcs_threatLimitSpeakerDist", "512");
+  }
 
-  if(getdvar("bcs_threatLimitThreatDist") == "")
+  if(getdvar("bcs_threatLimitThreatDist") == "") {
     setdvar("bcs_threatLimitThreatDist", "2048");
+  }
 
-  if(getdvar("bcs_threatPlayerRelative") == "")
+  if(getdvar("bcs_threatPlayerRelative") == "") {
     setdvar("bcs_threatPlayerRelative", "off");
+  }
 
-  if(getdvar("debug_bcprint") == "")
+  if(getdvar("debug_bcprint") == "") {
     setdvar("debug_bcprint", "off");
+  }
 
-  if(getdvar("debug_bcshowqueue") == "")
+  if(getdvar("debug_bcshowqueue") == "") {
     setdvar("debug_bcshowqueue", "off");
+  }
 
-  if(getdvar("debug_bcprintdump") == "")
+  if(getdvar("debug_bcprintdump") == "") {
     setdvar("debug_bcprintdump", "off");
+  }
 
   anim.countryids["british"] = "UK";
   anim.countryids["american"] = "US";
@@ -294,8 +310,9 @@ init_squadbattlechatter() {
   var_0.squadupdatefuncs[var_0.squadupdatefuncs.size] = ::initcontact;
   var_0.squadupdatestrings[var_0.squadupdatestrings.size] = "::initContact";
 
-  for(var_1 = 0; var_1 < anim.squadindex.size; var_1++)
+  for(var_1 = 0; var_1 < anim.squadindex.size; var_1++) {
     var_0 thread initcontact(anim.squadindex[var_1].squadname);
+  }
 
   var_0 thread animscripts\battlechatter_ai::squadthreatwaiter();
   var_0 thread animscripts\battlechatter_ai::squadofficerwaiter();
@@ -351,8 +368,9 @@ shutdown_squadbattlechatter() {
     var_0.squadupdatestrings[var_0.squadupdatestrings.size - 1] = undefined;
   }
 
-  for(var_1 = 0; var_1 < anim.squadindex.size; var_1++)
+  for(var_1 = 0; var_1 < anim.squadindex.size; var_1++) {
     var_0 shutdowncontact(anim.squadindex[var_1].squadname);
+  }
 
   var_0.chatinitialized = 0;
 }
@@ -370,13 +388,15 @@ bcsdebugwaiter() {
     if(var_1 != var_0) {
       switch (var_1) {
         case "on":
-          if(!anim.chatinitialized)
+          if(!anim.chatinitialized) {
             enablebattlechatter();
+          }
 
           break;
         case "off":
-          if(anim.chatinitialized)
+          if(anim.chatinitialized) {
             disablebattlechatter();
+          }
 
           break;
       }
@@ -393,8 +413,9 @@ enablebattlechatter() {
   anim.player thread animscripts\battlechatter_ai::addtosystem();
   var_0 = getaiarray();
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] animscripts\battlechatter_ai::addtosystem();
+  }
 }
 
 disablebattlechatter() {
@@ -402,8 +423,9 @@ disablebattlechatter() {
   var_0 = getaiarray();
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isDefined(var_0[var_1].squad) && var_0[var_1].squad.chatinitialized)
+    if(isDefined(var_0[var_1].squad) && var_0[var_1].squad.chatinitialized) {
       var_0[var_1].squad shutdown_squadbattlechatter();
+    }
 
     var_0[var_1] animscripts\battlechatter_ai::removefromsystem();
   }
@@ -473,8 +495,9 @@ playthreatevent() {
 
   switch (self.chatqueue["threat"].eventtype) {
     case "infantry":
-      if(var_0 == level.player || !isDefined(var_0 getturret()))
+      if(var_0 == level.player || !isDefined(var_0 getturret())) {
         threatinfantry(var_0);
+      }
 
       break;
     case "dog":
@@ -494,8 +517,9 @@ playthreatevent() {
   var_0.calledout[self.squad.squadname].threattype = self.chatqueue["threat"].eventtype;
   var_0.calledout[self.squad.squadname].expiretime = gettime() + 3000;
 
-  if(isDefined(var_0.squad))
+  if(isDefined(var_0.squad)) {
     self.squad.squadlist[var_0.squad.squadname].calledout = 1;
+  }
 }
 
 threatinfantry(var_0, var_1) {
@@ -503,16 +527,19 @@ threatinfantry(var_0, var_1) {
   var_2 = createchatphrase();
   var_2.master = 1;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_2.forcedetail = 0;
-  else
+  }
+  else {
     var_2.forcedetail = var_1;
+  }
 
   var_2.threatent = var_0;
 
   if(self.voice == "british") {
-    if(var_0 animscripts\pain::weaponanims() == "rocketlauncher")
+    if(var_0 animscripts\pain::weaponanims() == "rocketlauncher") {
       var_2 threatinfantryrpg(var_0);
+    }
     else {
       var_3 = getdirectioncompass(self.origin, var_0.origin);
 
@@ -520,29 +547,33 @@ threatinfantry(var_0, var_1) {
         case "northwest":
           var_3 = "nthwest";
 
-          if(var_3 == self.squad.lastdirection)
+          if(var_3 == self.squad.lastdirection) {
             var_3 = "generic";
+          }
 
           break;
         case "northeast":
           var_3 = "ntheast";
 
-          if(var_3 == self.squad.lastdirection)
+          if(var_3 == self.squad.lastdirection) {
             var_3 = "generic";
+          }
 
           break;
         case "southwest":
           var_3 = "sthwest";
 
-          if(var_3 == self.squad.lastdirection)
+          if(var_3 == self.squad.lastdirection) {
             var_3 = "generic";
+          }
 
           break;
         case "southeast":
           var_3 = "stheast";
 
-          if(var_3 == self.squad.lastdirection)
+          if(var_3 == self.squad.lastdirection) {
             var_3 = "generic";
+          }
 
           break;
         case "impossible":
@@ -554,10 +585,12 @@ threatinfantry(var_0, var_1) {
     }
   } else if(var_0 animscripts\pain::weaponanims() == "rocketlauncher")
     var_2 threatinfantryrpg(var_0);
-  else if(var_0 animscripts\pain::weaponanims() == "mg")
+  else if(var_0 animscripts\pain::weaponanims() == "mg") {
     var_2 threatinfantrymg(var_0);
-  else if(var_0 isexposed() && !isDefined(var_0 getlandmark()))
+  }
+  else if(var_0 isexposed() && !isDefined(var_0 getlandmark())) {
     var_2 threatinfantryexposed(var_0);
+  }
   else if(!isDefined(var_0 getlocation()) && !isDefined(var_0 getlandmark())) {
     var_2 addthreatalias(1.0, "infantry", "generic");
     var_2 adddirectionalias(1.0, "relative", var_0);
@@ -579,10 +612,12 @@ threatinfantry(var_0, var_1) {
 
         var_2 addorderalias(1.0, "attack", "infantry");
 
-        if(isofficer())
+        if(isofficer()) {
           var_4 animscripts\battlechatter_ai::addresponseevent("ack", "yes", self, 0.9);
-        else
+        }
+        else {
           var_4 animscripts\battlechatter_ai::addresponseevent("ack", "norankyes", self, 0.9);
+        }
       } else if(randomfloat(1) > 0.3)
         var_2 adddirectionalias(1.0, "side", var_0, var_2.locationent getorigin());
       else {
@@ -603,10 +638,12 @@ threatinfantry(var_0, var_1) {
 
         var_2 addorderalias(1.0, "attack", "infantry");
 
-        if(isofficer())
+        if(isofficer()) {
           var_4 animscripts\battlechatter_ai::addresponseevent("ack", "yes", self, 0.9);
-        else
+        }
+        else {
           var_4 animscripts\battlechatter_ai::addresponseevent("ack", "norankyes", self, 0.9);
+        }
       } else if(randomfloat(1) > 0.3)
         var_2 adddirectionalias(1.0, "relative", var_0);
       else {
@@ -624,10 +661,12 @@ threatdog(var_0, var_1) {
   var_2 = createchatphrase();
   var_2.master = 1;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_2.forcedetail = 0;
-  else
+  }
+  else {
     var_2.forcedetail = var_1;
+  }
 
   var_2.threatent = var_0;
 
@@ -661,15 +700,19 @@ threatdog(var_0, var_1) {
 }
 
 threatinfantryexposed(var_0) {
-  if(!isDefined(var_0 getlandmark()))
+  if(!isDefined(var_0 getlandmark())) {
     addthreatalias(1.0, "infantry", "exposed");
-  else
+  }
+  else {
     addthreatalias(1.0, "infantry", "generic");
+  }
 
-  if(addlandmarkalias(1.0, var_0))
+  if(addlandmarkalias(1.0, var_0)) {
     adddirectionalias(0.5, "relative", var_0);
-  else
+  }
+  else {
     adddirectionalias(1.0, "relative", var_0);
+  }
 }
 
 threatinfantryrpg(var_0) {
@@ -678,10 +721,12 @@ threatinfantryrpg(var_0) {
   if(addareaalias(0.5, var_0) && self.areadetail) {
     return;
   }
-  if(addlocationalias(0.5, var_0))
+  if(addlocationalias(0.5, var_0)) {
     adddirectionalias(0.5, "side", var_0, self.locationent getorigin());
-  else if(addlandmarkalias(0.5, var_0))
+  }
+  else if(addlandmarkalias(0.5, var_0)) {
     adddirectionalias(0.5, "relative", var_0);
+  }
 }
 
 threatinfantrymg(var_0) {
@@ -690,10 +735,12 @@ threatinfantrymg(var_0) {
   if(addareaalias(0.5, var_0) && self.areadetail) {
     return;
   }
-  if(addlocationalias(0.5, var_0))
+  if(addlocationalias(0.5, var_0)) {
     adddirectionalias(0.5, "side", var_0, self.locationent getorigin());
-  else if(addlandmarkalias(0.5, var_0))
+  }
+  else if(addlandmarkalias(0.5, var_0)) {
     adddirectionalias(0.5, "relative", var_0);
+  }
 }
 
 playreactionevent() {
@@ -816,8 +863,9 @@ ordermove(var_0, var_1) {
       if(var_3[var_4] == self) {
         continue;
       }
-      if(distance(self.origin, var_3[var_4].origin) > 500 && var_3[var_4].a.state == "move" && var_3[var_4] cansay("response"))
+      if(distance(self.origin, var_3[var_4].origin) > 500 && var_3[var_4].a.state == "move" && var_3[var_4] cansay("response")) {
         var_1 = var_3[var_4];
+      }
     }
 
     if(isDefined(var_1) && isDefined(var_1.bcname) && cansayname(var_1.bcname)) {
@@ -909,8 +957,9 @@ informreloading(var_0, var_1) {
   var_2 = createchatphrase();
 
   if(var_1 == "coverme" && isalive(var_0) && isDefined(var_0.bcname) && cansayname(var_0.bcname)) {
-    if(var_0 == level.player || self.countryid != "US")
+    if(var_0 == level.player || self.countryid != "US") {
       var_1 = "generic";
+    }
     else {
       var_1 = var_0.bcname;
       var_0 animscripts\battlechatter_ai::addresponseevent("ack", "covering", self, 0.9);
@@ -936,8 +985,9 @@ informincoming(var_0) {
   self endon("removed from battleChatter");
   var_1 = createchatphrase();
 
-  if(var_0 == "grenade")
+  if(var_0 == "grenade") {
     var_1.master = 1;
+  }
 
   var_1 addinformalias(1.0, "incoming", var_0);
   playphrase(var_1);
@@ -978,13 +1028,15 @@ playphrase(var_0, var_1) {
     return;
   }
   if(isDefined(level._stealth) && self.voice == "british") {
-    for(var_2 = 0; var_2 < var_0.soundaliases.size; var_2++)
+    for(var_2 = 0; var_2 < var_0.soundaliases.size; var_2++) {
       var_0.soundaliases[var_2] = var_0.soundaliases[var_2] + "_s";
+    }
   }
 
   if(battlechatter_canprint()) {
-    for(var_2 = 0; var_2 < var_0.soundaliases.size; var_2++)
+    for(var_2 = 0; var_2 < var_0.soundaliases.size; var_2++) {
       battlechatter_print(var_0.soundaliases[var_2]);
+    }
 
     battlechatter_println("");
   }
@@ -1008,8 +1060,9 @@ playphrase(var_0, var_1) {
     if(var_0.master && self.team == "allies") {
       if(getdvar("bcs_threatPlayerRelative") == "on") {
         if(strfind(var_0.soundaliases[var_2], "_direction_")) {
-          if(isDefined(var_0.threatent))
+          if(isDefined(var_0.threatent)) {
             var_0.soundaliases[var_2] = var_0 getdirectionaliasplayerrelative(var_0.threatent);
+          }
         }
       }
 
@@ -1060,8 +1113,9 @@ lockaction(var_0, var_1, var_2) {
   if(var_5 == "cancel speaking") {
     return;
   }
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 clearisspeaking(var_1);
+  }
 
   var_3.nextsaytimes[var_1] = gettime() + anim.eventactionminwait[var_1]["squad"];
 }
@@ -1071,8 +1125,9 @@ updatecontact(var_0, var_1) {
     var_2 = 0;
 
     for(var_3 = 0; var_3 < self.members.size; var_3++) {
-      if(self.members[var_3] != var_1 && isalive(self.members[var_3].enemy) && isDefined(self.members[var_3].enemy.squad) && self.members[var_3].enemy.squad.squadname == var_0)
+      if(self.members[var_3] != var_1 && isalive(self.members[var_3].enemy) && isDefined(self.members[var_3].enemy.squad) && self.members[var_3].enemy.squad.squadname == var_0) {
         var_2 = 1;
+      }
     }
 
     if(!var_2) {
@@ -1088,65 +1143,82 @@ cansay(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(self == level.player)
+  if(self == level.player) {
     return 0;
+  }
 
-  if(!isDefined(self.battlechatter) || !self.battlechatter)
+  if(!isDefined(self.battlechatter) || !self.battlechatter) {
     return 0;
+  }
 
-  if(isDefined(var_2) && var_2 >= 1)
+  if(isDefined(var_2) && var_2 >= 1) {
     return 1;
+  }
 
-  if(gettime() + anim.eventactionminwait[var_0]["self"] < self.nextsaytimes[var_0])
+  if(gettime() + anim.eventactionminwait[var_0]["self"] < self.nextsaytimes[var_0]) {
     return 0;
+  }
 
-  if(gettime() + anim.eventactionminwait[var_0]["squad"] < self.squad.nextsaytimes[var_0])
+  if(gettime() + anim.eventactionminwait[var_0]["squad"] < self.squad.nextsaytimes[var_0]) {
     return 0;
+  }
 
-  if(isDefined(var_1) && typelimited(var_0, var_1))
+  if(isDefined(var_1) && typelimited(var_0, var_1)) {
     return 0;
+  }
 
-  if(isDefined(var_1) && anim.eventpriority[var_0][var_1] < self.bcs_minpriority)
+  if(isDefined(var_1) && anim.eventpriority[var_0][var_1] < self.bcs_minpriority) {
     return 0;
+  }
 
-  if(self.voice == "british")
+  if(self.voice == "british") {
     return britfilter(var_0, var_1, var_3);
+  }
 
   return 1;
 }
 
 britfilter(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "";
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   switch (var_0) {
     case "order":
-      if(var_1 == "action" && var_2 == "coverme")
+      if(var_1 == "action" && var_2 == "coverme") {
         return 1;
+      }
 
       break;
     case "threat":
-      if(var_1 == "infantry" || var_1 == "dog" || var_1 == "rpg")
+      if(var_1 == "infantry" || var_1 == "dog" || var_1 == "rpg") {
         return 1;
+      }
 
       break;
     case "inform":
-      if(var_1 == "attack" && var_2 == "grenade")
+      if(var_1 == "attack" && var_2 == "grenade") {
         return 1;
-      else if(var_1 == "incoming" && var_2 == "grenade")
+      }
+      else if(var_1 == "incoming" && var_2 == "grenade") {
         return 1;
-      else if(var_1 == "killfirm" && var_2 == "infantry")
+      }
+      else if(var_1 == "killfirm" && var_2 == "infantry") {
         return 1;
-      else if(var_1 == "reloading" && var_2 == "generic")
+      }
+      else if(var_1 == "reloading" && var_2 == "generic") {
         return 1;
+      }
 
       break;
     case "reaction":
-      if(var_1 == "casualty" && var_2 == "generic")
+      if(var_1 == "casualty" && var_2 == "generic") {
         return 1;
+      }
 
       break;
     default:
@@ -1208,18 +1280,21 @@ gettargettingai(var_0) {
   var_2 = [];
 
   for(var_3 = 0; var_3 < var_1.members.size; var_3++) {
-    if(isDefined(var_1.members[var_3].enemy) && var_1.members[var_3].enemy == var_0)
+    if(isDefined(var_1.members[var_3].enemy) && var_1.members[var_3].enemy == var_0) {
       var_2[var_2.size] = var_1.members[var_3];
+    }
   }
 
-  if(!isDefined(var_2[0]))
+  if(!isDefined(var_2[0])) {
     return undefined;
+  }
 
   var_4 = undefined;
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(var_2[var_3] cansay("response"))
+    if(var_2[var_3] cansay("response")) {
       return var_4;
+    }
   }
 
   return common_scripts\utility::getclosest(self.origin, var_2);
@@ -1274,46 +1349,55 @@ getqueueevents() {
 geteventstate(var_0) {
   var_1 = "";
 
-  if(self.squad.ismembersaying[var_0])
+  if(self.squad.ismembersaying[var_0]) {
     var_1 = var_1 + " playing";
+  }
 
-  if(gettime() > self.chatqueue[var_0].expiretime)
+  if(gettime() > self.chatqueue[var_0].expiretime) {
     var_1 = var_1 + " expired";
+  }
 
-  if(gettime() < self.squad.nextsaytimes[var_0])
+  if(gettime() < self.squad.nextsaytimes[var_0]) {
     var_1 = var_1 + " cantspeak";
+  }
 
-  if(var_1 == "")
+  if(var_1 == "") {
     var_1 = " valid";
+  }
 
   return var_1;
 }
 
 isfiltered(var_0) {
-  if(getdvar("bcs_filter" + var_0) == "on" || getdvar("bcs_filter" + var_0) == "1")
+  if(getdvar("bcs_filter" + var_0) == "on" || getdvar("bcs_filter" + var_0) == "1") {
     return 1;
+  }
 
   return 0;
 }
 
 isvalidevent(var_0) {
   if(!self.squad.ismembersaying[var_0] && !anim.isteamsaying[self.team][var_0] && gettime() < self.chatqueue[var_0].expiretime && gettime() > self.squad.nextsaytimes[var_0]) {
-    if(!typelimited(var_0, self.chatqueue[var_0].eventtype))
+    if(!typelimited(var_0, self.chatqueue[var_0].eventtype)) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 typelimited(var_0, var_1) {
-  if(!isDefined(anim.eventtypeminwait[var_0][var_1]))
+  if(!isDefined(anim.eventtypeminwait[var_0][var_1])) {
     return 0;
+  }
 
-  if(!isDefined(self.squad.nexttypesaytimes[var_0][var_1]))
+  if(!isDefined(self.squad.nexttypesaytimes[var_0][var_1])) {
     return 0;
+  }
 
-  if(gettime() > self.squad.nexttypesaytimes[var_0][var_1])
+  if(gettime() > self.squad.nexttypesaytimes[var_0][var_1]) {
     return 0;
+  }
 
   return 1;
 }
@@ -1326,26 +1410,31 @@ dotypelimit(var_0, var_1) {
 }
 
 bcissniper() {
-  if(isplayer(self))
+  if(isplayer(self)) {
     return 0;
+  }
 
-  if(isexposed())
+  if(isexposed()) {
     return 0;
+  }
 
   return animscripts\utility::issniperrifle(self.weapon);
 }
 
 isexposed() {
-  if(isDefined(getlocation()))
+  if(isDefined(getlocation())) {
     return 0;
+  }
 
   var_0 = bcgetclaimednode();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 1;
+  }
 
-  if(var_0.type[0] == "C" && var_0.type[1] == "o" && var_0.type[2] == "v")
+  if(var_0.type[0] == "C" && var_0.type[1] == "o" && var_0.type[2] == "v") {
     return 0;
+  }
 
   return 1;
 }
@@ -1353,11 +1442,13 @@ isexposed() {
 isclaimednodecover() {
   var_0 = bcgetclaimednode();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(var_0.type[0] == "C" && var_0.type[1] == "o" && var_0.type[2] == "v")
+  if(var_0.type[0] == "C" && var_0.type[1] == "o" && var_0.type[2] == "v") {
     return 1;
+  }
 
   return 0;
 }
@@ -1365,14 +1456,17 @@ isclaimednodecover() {
 isclaimednodewindow() {
   var_0 = bcgetclaimednode();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isDefined(var_0.script_location))
+  if(!isDefined(var_0.script_location)) {
     return 0;
+  }
 
-  if(var_0.script_location == "window")
+  if(var_0.script_location == "window") {
     return 1;
+  }
 
   return 0;
 }
@@ -1380,11 +1474,13 @@ isclaimednodewindow() {
 isnodecover() {
   var_0 = self.node;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(var_0.type[0] == "C" && var_0.type[1] == "o" && var_0.type[2] == "v")
+  if(var_0.type[0] == "C" && var_0.type[1] == "o" && var_0.type[2] == "v") {
     return 1;
+  }
 
   return 0;
 }
@@ -1392,34 +1488,42 @@ isnodecover() {
 isofficer() {
   var_0 = getrank();
 
-  if(var_0 == "sergeant" || var_0 == "lieutenant" || var_0 == "captain" || var_0 == "sergeant")
+  if(var_0 == "sergeant" || var_0 == "lieutenant" || var_0 == "captain" || var_0 == "sergeant") {
     return 1;
+  }
 
   return 0;
 }
 
 bcgetclaimednode() {
-  if(isplayer(self))
+  if(isplayer(self)) {
     var_0 = self.node;
-  else
+  }
+  else {
     var_0 = animscripts\utility::getclaimednode();
+  }
 }
 
 getname() {
-  if(self.team == "axis")
+  if(self.team == "axis") {
     var_0 = self.ainame;
-  else if(self.team == "allies")
+  }
+  else if(self.team == "allies") {
     var_0 = self.name;
-  else
+  }
+  else {
     var_0 = undefined;
+  }
 
-  if(!isDefined(var_0) || self.voice == "british")
+  if(!isDefined(var_0) || self.voice == "british") {
     return undefined;
+  }
 
   var_1 = strtok(var_0, " ");
 
-  if(var_1.size < 2)
+  if(var_1.size < 2) {
     return undefined;
+  }
 
   return var_1[1];
 }
@@ -1442,8 +1546,9 @@ getspeakers(var_0, var_1) {
     var_4 = [];
 
     for(var_5 = 0; var_5 < var_3.size; var_5++) {
-      if(var_3[var_5] isofficer())
+      if(var_3[var_5] isofficer()) {
         var_4[var_4.size] = var_3[var_5];
+      }
     }
 
     var_3 = var_4;
@@ -1466,8 +1571,9 @@ getarea() {
   var_0 = anim.areas;
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(self istouching(var_0[var_1]) && isDefined(var_0[var_1].script_area))
+    if(self istouching(var_0[var_1]) && isDefined(var_0[var_1].script_area)) {
       return var_0[var_1];
+    }
   }
 
   return undefined;
@@ -1477,8 +1583,9 @@ getlocation() {
   var_0 = anim.locations;
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(self istouching(var_0[var_1]) && isDefined(var_0[var_1].script_location))
+    if(self istouching(var_0[var_1]) && isDefined(var_0[var_1].script_location)) {
       return var_0[var_1];
+    }
   }
 
   return undefined;
@@ -1488,8 +1595,9 @@ getlandmark() {
   var_0 = anim.landmarks;
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(self istouching(var_0[var_1]) && isDefined(var_0[var_1].script_landmark))
+    if(self istouching(var_0[var_1]) && isDefined(var_0[var_1].script_landmark)) {
       return var_0[var_1];
+    }
   }
 
   return undefined;
@@ -1501,29 +1609,40 @@ getdirectioncompass(var_0, var_1) {
   var_4 = getnorthyaw();
   var_3 = var_3 - var_4;
 
-  if(var_3 < 0)
+  if(var_3 < 0) {
     var_3 = var_3 + 360;
-  else if(var_3 > 360)
+  }
+  else if(var_3 > 360) {
     var_3 = var_3 - 360;
+  }
 
-  if(var_3 < 22.5 || var_3 > 337.5)
+  if(var_3 < 22.5 || var_3 > 337.5) {
     var_5 = "north";
-  else if(var_3 < 67.5)
+  }
+  else if(var_3 < 67.5) {
     var_5 = "northwest";
-  else if(var_3 < 112.5)
+  }
+  else if(var_3 < 112.5) {
     var_5 = "west";
-  else if(var_3 < 157.5)
+  }
+  else if(var_3 < 157.5) {
     var_5 = "southwest";
-  else if(var_3 < 202.5)
+  }
+  else if(var_3 < 202.5) {
     var_5 = "south";
-  else if(var_3 < 247.5)
+  }
+  else if(var_3 < 247.5) {
     var_5 = "southeast";
-  else if(var_3 < 292.5)
+  }
+  else if(var_3 < 292.5) {
     var_5 = "east";
-  else if(var_3 < 337.5)
+  }
+  else if(var_3 < 337.5) {
     var_5 = "northeast";
-  else
+  }
+  else {
     var_5 = "impossible";
+  }
 
   return var_5;
 }
@@ -1535,17 +1654,22 @@ getdirectionreferenceside(var_0, var_1, var_2) {
   var_5 = var_5 + 360;
   var_5 = int(var_5) % 360;
 
-  if(var_5 > 180)
+  if(var_5 > 180) {
     var_5 = var_5 - 360;
+  }
 
-  if(var_5 > 2 && var_5 < 45)
+  if(var_5 > 2 && var_5 < 45) {
     var_6 = "right";
-  else if(var_5 < -2 && var_5 > -45)
+  }
+  else if(var_5 < -2 && var_5 > -45) {
     var_6 = "left";
-  else if(distance(var_0, var_1) < distance(var_0, var_2))
+  }
+  else if(distance(var_0, var_1) < distance(var_0, var_2)) {
     var_6 = "front";
-  else
+  }
+  else {
     var_6 = "rear";
+  }
 
   return var_6;
 }
@@ -1557,14 +1681,18 @@ getdirectionfacingflank(var_0, var_1, var_2) {
   var_5 = var_5 + 360;
   var_5 = int(var_5) % 360;
 
-  if(var_5 > 315 || var_5 < 45)
+  if(var_5 > 315 || var_5 < 45) {
     var_6 = "front";
-  else if(var_5 < 135)
+  }
+  else if(var_5 < 135) {
     var_6 = "right";
-  else if(var_5 < 225)
+  }
+  else if(var_5 < 225) {
     var_6 = "rear";
-  else
+  }
+  else {
     var_6 = "left";
+  }
 
   return var_6;
 }
@@ -1576,8 +1704,9 @@ getvectorrightangle(var_0) {
 getvectorarrayaverage(var_0) {
   var_1 = (0, 0, 0);
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1 = var_1 + var_0[var_2];
+  }
 
   return (var_1[0] / var_0.size, var_1[1] / var_0.size, var_1[2] / var_0.size);
 }
@@ -1593,20 +1722,24 @@ addrankalias(var_0) {
 cansayname(var_0) {
   var_1 = self.countryid + "_" + self.npcid + "_name_" + var_0;
 
-  if(soundexists(var_1))
+  if(soundexists(var_1)) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 addareaalias(var_0, var_1) {
-  if(randomfloat(1) > var_0)
+  if(randomfloat(1) > var_0) {
     return 0;
+  }
 
   self.areaent = var_1 getarea();
 
-  if(!isDefined(self.areaent))
+  if(!isDefined(self.areaent)) {
     return 0;
+  }
 
   if(self.areaent.script_area == "window" || self.areaent.script_area == "doorway") {}
 
@@ -1627,21 +1760,25 @@ addareaalias(var_0, var_1) {
 }
 
 addlocationalias(var_0, var_1) {
-  if(randomfloat(1) > var_0)
+  if(randomfloat(1) > var_0) {
     return 0;
+  }
 
   self.locationent = var_1 getlocation();
 
-  if(!isDefined(self.locationent))
+  if(!isDefined(self.locationent)) {
     return 0;
+  }
 
   var_2 = self.locationent.script_location;
   var_3 = var_1 bcgetclaimednode();
 
-  if(isDefined(var_3) && isDefined(var_3.script_location))
+  if(isDefined(var_3) && isDefined(var_3.script_location)) {
     var_2 = var_2 + ("_" + var_3.script_location);
-  else
+  }
+  else {
     var_2 = var_2 + "_generic";
+  }
 
   self.location = self.owner.countryid + "_" + self.owner.npcid + "_location_" + var_2;
   self.soundaliases[self.soundaliases.size] = self.location;
@@ -1649,23 +1786,28 @@ addlocationalias(var_0, var_1) {
 }
 
 addlandmarkalias(var_0, var_1) {
-  if(randomfloat(1) > var_0)
+  if(randomfloat(1) > var_0) {
     return 0;
+  }
 
   self.landmarkent = var_1 getlandmark();
 
-  if(!isDefined(self.landmarkent))
+  if(!isDefined(self.landmarkent)) {
     return 0;
+  }
 
   var_2 = self.landmarkent.script_landmark;
   var_3 = getdirectionreferenceside(self.owner.origin, var_1.origin, self.landmarkent.origin);
 
-  if(var_3 == "rear" && soundexists(self.owner.countryid + "_" + self.owner.npcid + "_landmark_behind_" + var_2))
+  if(var_3 == "rear" && soundexists(self.owner.countryid + "_" + self.owner.npcid + "_landmark_behind_" + var_2)) {
     var_2 = "behind_" + var_2;
-  else if(soundexists(self.owner.countryid + "_" + self.owner.npcid + "_landmark_near_" + var_2))
+  }
+  else if(soundexists(self.owner.countryid + "_" + self.owner.npcid + "_landmark_near_" + var_2)) {
     var_2 = "near_" + var_2;
-  else
+  }
+  else {
     return 0;
+  }
 
   self.landmark = self.owner.countryid + "_" + self.owner.npcid + "_landmark_" + var_2;
   self.soundaliases[self.soundaliases.size] = self.landmark;
@@ -1678,41 +1820,52 @@ addgenericalias(var_0, var_1, var_2, var_3) {
 }
 
 adddirectionalias(var_0, var_1, var_2, var_3, var_4) {
-  if(randomfloat(1) > var_0)
+  if(randomfloat(1) > var_0) {
     return 0;
+  }
 
   switch (var_1) {
     case "side":
       var_5 = getdirectionreferenceside(self.owner.origin, var_2.origin, var_3);
 
-      if(1)
+      if(1) {
         return 0;
+      }
 
       var_5 = var_1 + "_" + var_5;
       break;
     case "relative":
       if(isDefined(var_4)) {
-        if(var_4 == "clock")
+        if(var_4 == "clock") {
           var_6 = 0;
-        else if(var_4 == "flank")
+        }
+        else if(var_4 == "flank") {
           var_6 = 1;
-        else if(var_4 == "compass")
+        }
+        else if(var_4 == "compass") {
           var_6 = 2;
-        else
+        }
+        else {
           var_6 = randomintrange(0, 3) - 1;
+        }
       } else if(distance(self.owner.origin, var_2.origin) > 2048)
         var_6 = 2;
-      else if(distance(self.owner.origin, var_2.origin) > 800)
+      else if(distance(self.owner.origin, var_2.origin) > 800) {
         var_6 = 0;
-      else
+      }
+      else {
         var_6 = 1;
+      }
 
-      if(var_6 == 0)
+      if(var_6 == 0) {
         var_5 = getdirectioncompass(self.owner.origin, var_2.origin);
-      else if(var_6 == 1)
+      }
+      else if(var_6 == 1) {
         return 0;
-      else
+      }
+      else {
         var_5 = getdirectioncompass(self.owner.origin, var_2.origin);
+      }
 
       var_5 = var_1 + "_" + var_5;
       break;
@@ -1769,14 +1922,17 @@ addorderalias(var_0, var_1, var_2) {
 }
 
 initcontact(var_0) {
-  if(!isDefined(self.squadlist[var_0].calledout))
+  if(!isDefined(self.squadlist[var_0].calledout)) {
     self.squadlist[var_0].calledout = 0;
+  }
 
-  if(!isDefined(self.squadlist[var_0].firstcontact))
+  if(!isDefined(self.squadlist[var_0].firstcontact)) {
     self.squadlist[var_0].firstcontact = 2000000000;
+  }
 
-  if(!isDefined(self.squadlist[var_0].lastcontact))
+  if(!isDefined(self.squadlist[var_0].lastcontact)) {
     self.squadlist[var_0].lastcontact = 0;
+  }
 }
 
 shutdowncontact(var_0) {
@@ -1791,10 +1947,12 @@ createchatevent(var_0, var_1, var_2) {
   var_3.eventtype = var_1;
   var_3.eventaction = var_0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3.priority = var_2;
-  else
+  }
+  else {
     var_3.priority = anim.eventpriority[var_0][var_1];
+  }
 
   var_3.expiretime = gettime() + anim.eventduration[var_0][var_1];
   return var_3;
@@ -1819,8 +1977,9 @@ pointinfov(var_0) {
 }
 
 battlechatter_canprint() {
-  if(getdvar("debug_bcprint") == self.team || getdvar("debug_bcprint") == "all")
+  if(getdvar("debug_bcprint") == self.team || getdvar("debug_bcprint") == "all") {
     return 1;
+  }
 
   return 0;
 }
@@ -1835,8 +1994,9 @@ battlechatter_print_internal(var_0, var_1) {
   }
   var_2 = "";
 
-  if(var_0 != "")
+  if(var_0 != "") {
     var_2 = common_scripts\utility::ter_op(self.team == "allies", "^5", "^6") + "BC: ";
+  }
 
   [[var_1]](var_2 + var_0);
 }
@@ -1854,16 +2014,18 @@ strfind(var_0, var_1) {
     if(var_0[var_2] != var_1[0]) {
       continue;
     }
-    if(var_1.size > var_0.size - var_2)
+    if(var_1.size > var_0.size - var_2) {
       return 0;
+    }
 
     for(var_3 = 0; var_3 < var_1.size; var_3++) {
       if(var_0[var_2 + var_3] != var_1[var_3]) {
         break;
       }
 
-      if(var_3 == var_1.size - 1)
+      if(var_3 == var_1.size - 1) {
         return 1;
+      }
     }
   }
 }
@@ -1897,8 +2059,9 @@ threattracker() {
       var_6 = 0;
 
       for(var_7 = 0; var_7 < var_1.size; var_7++) {
-        if(isDefined(var_1[var_7].enemy) && var_1[var_7].enemy == var_0[var_3])
+        if(isDefined(var_1[var_7].enemy) && var_1[var_7].enemy == var_0[var_3]) {
           var_6 = 1;
+        }
       }
 
       if(var_6) {
@@ -2003,30 +2166,42 @@ resetnextsaytimes(var_0, var_1) {
 getdirectionfacingclockgivenangle(var_0) {
   var_1 = undefined;
 
-  if(var_0 > 345 || var_0 < 15)
+  if(var_0 > 345 || var_0 < 15) {
     var_1 = "12";
-  else if(var_0 < 45)
+  }
+  else if(var_0 < 45) {
     var_1 = "1";
-  else if(var_0 < 75)
+  }
+  else if(var_0 < 75) {
     var_1 = "2";
-  else if(var_0 < 105)
+  }
+  else if(var_0 < 105) {
     var_1 = "3";
-  else if(var_0 < 135)
+  }
+  else if(var_0 < 135) {
     var_1 = "4";
-  else if(var_0 < 165)
+  }
+  else if(var_0 < 165) {
     var_1 = "5";
-  else if(var_0 < 195)
+  }
+  else if(var_0 < 195) {
     var_1 = "6";
-  else if(var_0 < 225)
+  }
+  else if(var_0 < 225) {
     var_1 = "7";
-  else if(var_0 < 255)
+  }
+  else if(var_0 < 255) {
     var_1 = "8";
-  else if(var_0 < 285)
+  }
+  else if(var_0 < 285) {
     var_1 = "9";
-  else if(var_0 < 315)
+  }
+  else if(var_0 < 315) {
     var_1 = "10";
-  else
+  }
+  else {
     var_1 = "11";
+  }
 
   return var_1;
 }
@@ -2048,8 +2223,9 @@ getrelativeangles(var_0) {
   if(!isplayer(var_0)) {
     var_2 = var_0 bcgetclaimednode();
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_1 = var_2.angles;
+    }
   }
 
   return var_1;
@@ -2058,18 +2234,21 @@ getrelativeangles(var_0) {
 get_all_my_locations() {
   var_0 = [];
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return var_0;
+  }
 
   var_1 = anim.bcs_locations;
   var_2 = self getistouchingentities(var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return var_0;
+  }
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4.locationaliases))
+    if(isDefined(var_4.locationaliases)) {
       var_0[var_0.size] = var_4;
+    }
   }
 
   return var_0;

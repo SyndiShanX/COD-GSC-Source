@@ -6,12 +6,15 @@
 func_2A6A(var_00, var_01, var_02) {
   var_03 = getent("airstrikeheight", "targetname");
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_04 = var_3.origin[2];
-  else if(isDefined(level.airstrikeheightscale))
+  }
+  else if(isDefined(level.airstrikeheightscale)) {
     var_04 = 850 * level.airstrikeheightscale;
-  else
+  }
+  else {
     var_04 = 850;
+  }
 
   var_02 = var_02 * (1, 1, 0);
   var_05 = var_02 + (0, 0, var_04);
@@ -25,8 +28,9 @@ getcorrectheight(var_00, var_01, var_02) {
   var_04 = tracegroundpoint(var_00, var_01);
   var_05 = var_04 + var_03;
 
-  if(isDefined(level.airstrikeheightscale) && var_05 < 850 * level.airstrikeheightscale)
+  if(isDefined(level.airstrikeheightscale) && var_05 < 850 * level.airstrikeheightscale) {
     var_05 = 950 * level.airstrikeheightscale;
+  }
 
   var_05 = var_05 + randomint(var_02);
   return var_05;
@@ -181,8 +185,9 @@ getnewpoint(var_00, var_01) {
       if(var_04 == self) {
         continue;
       }
-      if(!level.teambased || var_4.team != self.team)
+      if(!level.teambased || var_4.team != self.team) {
         var_2[var_2.size] = var_4.origin;
+      }
     }
 
     if(var_2.size > 0) {
@@ -224,8 +229,9 @@ getnewpoint(var_00, var_01) {
   for(;;) {
     var_17 = tracenewpoint(var_07, var_08, var_11);
 
-    if(var_17 != 0)
+    if(var_17 != 0) {
       return var_17;
+    }
 
     var_07 = randomfloatrange(var_0[0] - 1200, var_0[0] + 1200);
     var_08 = randomfloatrange(var_0[1] - 1200, var_0[1] + 1200);
@@ -276,8 +282,9 @@ tracenewpoint(var_00, var_01, var_02) {
         var_04 = bulletTrace(self.origin, (var_00, var_01, var_02), 0, self);
     }
 
-    if(var_4["surfacetype"] != "none")
+    if(var_4["surfacetype"] != "none") {
       return 0;
+    }
 
     wait 0.05;
   }
@@ -401,8 +408,9 @@ fireontarget(var_00, var_01) {
   var_04 = 0;
   self giveflagassistedcapturepoints("harrier_20mm_mp");
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 50;
+  }
 
   for(;;) {
     if(isreadytofire(var_00)) {
@@ -415,8 +423,9 @@ fireontarget(var_00, var_01) {
   var_05 = 25;
 
   for(;;) {
-    if(var_05 == 25)
+    if(var_05 == 25) {
       self playLoopSound("weap_hind_20mm_fire_npc");
+    }
 
     var_5--;
     self fireweapon("tag_flash", self.besttarget, (0, 0, 0), 0.05);
@@ -434,8 +443,9 @@ isreadytofire(var_00) {
   self endon("death");
   self endon("leaving");
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 10;
+  }
 
   var_01 = anglesToForward(self.angles);
   var_02 = self.besttarget.origin - self.origin;
@@ -446,20 +456,24 @@ isreadytofire(var_00) {
   var_03 = vectordot(var_02, var_01);
   var_04 = cos(var_00);
 
-  if(var_03 >= var_04)
+  if(var_03 >= var_04) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 func_1570(var_00) {
   self endon("death");
   self endon("leaving");
 
-  if(var_0.size == 1)
+  if(var_0.size == 1) {
     self.besttarget = var_0[0];
-  else
+  }
+  else {
     self.besttarget = getbesttarget(var_00);
+  }
 
   func_2737(0);
   self notify("acquiringTarget");
@@ -467,8 +481,9 @@ func_1570(var_00) {
   self setlookatent(self.besttarget);
   var_01 = getnewpoint(self.origin, 1);
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = self.origin;
+  }
 
   self setvehgoalpos(var_01, 1);
   thread func_13B74();
@@ -480,17 +495,20 @@ func_1570(var_00) {
 func_2737(var_00) {
   self setvehgoalpos(self.defendloc, 1);
 
-  if(isDefined(var_00) && var_00)
+  if(isDefined(var_00) && var_00) {
     self waittill("goal");
+  }
 }
 
 func_13DCF(var_00) {
   var_01 = bulletTrace(self.origin, var_00, 1, self);
 
-  if(var_1["position"] == var_00)
+  if(var_1["position"] == var_00) {
     return 0;
-  else
+  }
+  else {
     return 1;
+  }
 }
 
 func_13B74() {
@@ -511,8 +529,9 @@ func_13B77(var_00) {
   self endon("newTarget");
   var_01 = undefined;
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 1000;
+  }
 
   for(;;) {
     if(!istarget(self.besttarget)) {
@@ -526,8 +545,9 @@ func_13B77(var_00) {
     }
 
     if(self.besttarget sightconetrace(self.origin, self) < 1) {
-      if(!isDefined(var_01))
+      if(!isDefined(var_01)) {
         var_01 = gettime();
+      }
 
       if(gettime() - var_01 > var_00) {
         thread func_2FC0();
@@ -586,8 +606,9 @@ func_8B5D() {
       var_06 = var_1[var_05];
 
       if(istarget(var_06)) {
-        if(isDefined(var_1[var_05]))
+        if(isDefined(var_1[var_05])) {
           var_0[var_0.size] = var_1[var_05];
+        }
       } else
         continue;
 
@@ -606,40 +627,50 @@ func_8B5D() {
 istarget(var_00) {
   self endon("death");
 
-  if(!isalive(var_00) || var_0.sessionstate != "playing")
+  if(!isalive(var_00) || var_0.sessionstate != "playing") {
     return 0;
+  }
 
-  if(isDefined(self.owner) && var_00 == self.owner)
+  if(isDefined(self.owner) && var_00 == self.owner) {
     return 0;
+  }
 
-  if(distance(var_0.origin, self.origin) > 8192)
+  if(distance(var_0.origin, self.origin) > 8192) {
     return 0;
+  }
 
-  if(distance2d(var_0.origin, self.origin) < 150)
+  if(distance2d(var_0.origin, self.origin) < 150) {
     return 0;
+  }
 
-  if(!isDefined(var_0.pers["team"]))
+  if(!isDefined(var_0.pers["team"])) {
     return 0;
+  }
 
-  if(level.teambased && var_0.pers["team"] == self.team)
+  if(level.teambased && var_0.pers["team"] == self.team) {
     return 0;
+  }
 
-  if(var_0.pers["team"] == "spectator")
+  if(var_0.pers["team"] == "spectator") {
     return 0;
+  }
 
-  if(isDefined(var_0.spawntime) && (gettime() - var_0.spawntime) / 1000 <= 5)
+  if(isDefined(var_0.spawntime) && (gettime() - var_0.spawntime) / 1000 <= 5) {
     return 0;
+  }
 
-  if(var_00 scripts\mp\utility\game::_hasperk("specialty_blindeye"))
+  if(var_00 scripts\mp\utility\game::_hasperk("specialty_blindeye")) {
     return 0;
+  }
 
   var_01 = self.origin + (0, 0, -160);
   var_02 = anglesToForward(self.angles);
   var_03 = var_01 + 144 * var_02;
   var_04 = var_00 sightconetrace(self.origin, self);
 
-  if(var_04 < 1)
+  if(var_04 < 1) {
     return 0;
+  }
 
   return 1;
 }
@@ -660,12 +691,14 @@ getbesttarget(var_00) {
     var_11 = var_08 getweaponlistitems();
 
     foreach(var_13 in var_11) {
-      if(issubstr(var_13, "at4") || issubstr(var_13, "stinger") || issubstr(var_13, "jav"))
+      if(issubstr(var_13, "at4") || issubstr(var_13, "stinger") || issubstr(var_13, "jav")) {
         var_09 = var_09 - 40;
+      }
     }
 
-    if(distance(self.origin, var_8.origin) > 2000)
+    if(distance(self.origin, var_8.origin) > 2000) {
       var_09 = var_09 + 40;
+    }
 
     if(!isDefined(var_04)) {
       var_04 = var_09;
@@ -703,10 +736,12 @@ firemissile(var_00) {
   self.missiles--;
   self giveflagassistedcapturepoints("aamissile_projectile_mp");
 
-  if(isDefined(var_0.func_1155F))
+  if(isDefined(var_0.func_1155F)) {
     var_02 = self fireweapon("tag_flash", var_0.func_1155F, (0, 0, -250));
-  else
+  }
+  else {
     var_02 = self fireweapon("tag_flash", var_00, (0, 0, -250));
+  }
 
   var_02 missile_setflightmodedirect();
   var_02 missile_settargetent(var_00);
@@ -727,8 +762,9 @@ func_3E13(var_00, var_01) {
     }
     var_07 = var_6.origin;
 
-    if(distance2d(var_07, var_04) < 512)
+    if(distance2d(var_07, var_04) < 512) {
       return 1;
+    }
   }
 
   return 0;
@@ -737,8 +773,9 @@ func_3E13(var_00, var_01) {
 func_8992() {
   self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
 
-  if(var_09 == "aamissile_projectile_mp" && var_04 == "MOD_EXPLOSIVE" && var_00 >= self.health)
+  if(var_09 == "aamissile_projectile_mp" && var_04 == "MOD_EXPLOSIVE" && var_00 >= self.health) {
     func_3758(var_01, var_01, 9001, 0, var_04, var_09, var_03, var_02, var_03, 0, 0, var_07);
+  }
 }
 
 func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
@@ -779,8 +816,9 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
       self.largeprojectiledamage = 1;
       break;
     default:
-      if(var_05 != "none")
+      if(var_05 != "none") {
         var_02 = int(var_02 / 2);
+      }
 
       self.largeprojectiledamage = 0;
       break;
@@ -801,8 +839,9 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
       var_01 notify("destroyed_killstreak");
     }
 
-    if(var_05 == "heli_pilot_turret_mp")
+    if(var_05 == "heli_pilot_turret_mp") {
       var_01 scripts\mp\missions::processchallenge("ch_enemy_down");
+    }
 
     scripts\mp\missions::func_3DE3(var_01, self, var_05);
     self notify("death");
@@ -934,8 +973,9 @@ func_13B9E() {
 func_2FC1() {
   self getplayerkillstreakcombatmode();
 
-  if(isDefined(self.besttarget) && !isDefined(self.besttarget.func_C084))
+  if(isDefined(self.besttarget) && !isDefined(self.besttarget.func_C084)) {
     self.besttarget.func_C084 = 1;
+  }
 
   self notify("stopfiring");
   self notify("newTarget");
@@ -950,10 +990,12 @@ func_67E4() {
   var_00 = self.origin;
   var_01 = self.angles[1];
 
-  if(scripts\engine\utility::cointoss())
+  if(scripts\engine\utility::cointoss()) {
     var_02 = (0, var_01 + 90, 0);
-  else
+  }
+  else {
     var_02 = (0, var_01 - 90, 0);
+  }
 
   var_03 = self.origin + anglesToForward(var_02) * 500;
   self setvehgoalpos(var_03, 1);

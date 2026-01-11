@@ -94,8 +94,9 @@ disable_elevator_internal() {
 start_so_escape() {
   so_escape_airport_init();
 
-  foreach(enemy_group, delete_num in level.enemy_remove_trigs)
+  foreach(enemy_group, delete_num in level.enemy_remove_trigs) {
   thread past_enemy_remove(enemy_group, delete_num);
+  }
 
   music_loop("so_escape_airport_music", 148);
 

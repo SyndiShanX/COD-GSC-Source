@@ -1956,10 +1956,12 @@ find_flesh() {
     if(players.size > 1) {
       for(i = 0; i < self.ignore_player.size; i++) {
         if(isDefined(self.ignore_player[i])) {
-          if(!isDefined(self.ignore_player[i].ignore_counter))
+          if(!isDefined(self.ignore_player[i].ignore_counter)) {
             self.ignore_player[i].ignore_counter = 0;
-          else
+          }
+          else {
             self.ignore_player[i].ignore_counter += 1;
+          }
         }
       }
     }

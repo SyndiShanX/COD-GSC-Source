@@ -511,8 +511,9 @@ vision_set_init() {
 moon_round_think_func() {
   for(;;) {
     maxreward = 50 * level.round_number;
-    if(maxreward > 500)
+    if(maxreward > 500) {
       maxreward = 500;
+    }
     level.zombie_vars["rebuild_barrier_cap_per_round"] = maxreward;
     level.pro_tips_start_time = GetTime();
     level.zombie_last_run_time = GetTime();

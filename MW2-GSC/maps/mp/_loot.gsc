@@ -124,8 +124,9 @@ moMoney() {
 }
 
 giveMoney(type, amount) {
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return;
+  }
 
   self endon("disconnect");
   self notify("giveMoney");
@@ -170,23 +171,28 @@ giveMoney(type, amount) {
 }
 
 updateLootDvars() {
-  if(getDvar("scr_loot_epicMin") == "")
+  if(getDvar("scr_loot_epicMin") == "") {
     setDvar("scr_loot_epicMin", level.lootMins["epic"]);
+  }
 
-  if(getDvar("scr_loot_rareMin") == "")
+  if(getDvar("scr_loot_rareMin") == "") {
     setDvar("scr_loot_rareMin", level.lootMins["rare"]);
+  }
 
   //if( getDvar( "scr_loot_commonMin" ) == "" )
   //	setDvar( "scr_loot_commonMin", level.lootMins["common"] );
 
-  if(getDvar("scr_loot_baseChance") == "")
+  if(getDvar("scr_loot_baseChance") == "") {
     setDvar("scr_loot_baseChance", level.lootBaseChance);
+  }
 
-  if(getDvar("scr_loot_idealTime") == "")
+  if(getDvar("scr_loot_idealTime") == "") {
     setDvar("scr_loot_idealTime", level.lootIdealTime);
+  }
 
-  if(getDvar("scr_forceloot") == "")
+  if(getDvar("scr_forceloot") == "") {
     setDvar("scr_forceloot", "0");
+  }
 
     for(;;) {
       if(getDvar("scr_forceloot") != "" && getDvar("scr_forceloot") != "0") {
@@ -209,17 +215,20 @@ unlockedCaC() {
 }
 
 gotLoot() {
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return false;
+  }
 
   if(!self unlockedCaC()) {
     returnfalse = true;
 
-    if(getDvar("scr_forceloot") != "" && getDvar("scr_forceloot") != "0")
+    if(getDvar("scr_forceloot") != "" && getDvar("scr_forceloot") != "0") {
       returnfalse = false;
+    }
 
-      if(returnfalse)
+      if(returnfalse) {
         return false;
+      }
   }
 
   baseChance = level.lootBaseChance;
@@ -235,32 +244,39 @@ gotLoot() {
 }
 
 getLootTier(lootRoll) {
-  if(lootRoll >= level.lootMins["epic"])
+  if(lootRoll >= level.lootMins["epic"]) {
     return "epic";
-  else if(lootRoll >= level.lootMins["rare"])
+  }
+  else if(lootRoll >= level.lootMins["rare"]) {
     return "rare";
-  else
+  }
+  else {
     return "common";
+  }
 }
 
 getLootName(tier) {
-  if(!isDefined(self.droppedLootNames))
+  if(!isDefined(self.droppedLootNames)) {
     self.droppedLootNames = [];
+  }
 
   for(
     try = 0;
     try < 10;
     try ++) {
     lootName = self GetRandomLoot(tier);
-    if(!isDefined(lootName))
+    if(!isDefined(lootName)) {
       return undefined;
+    }
 
     for(i = 0; i < self.droppedLootNames.size; i++) {
-      if(lootName == self.droppedLootNames[i])
+      if(lootName == self.droppedLootNames[i]) {
         break;
+      }
     }
-    if(i < self.droppedLootNames.size)
+    if(i < self.droppedLootNames.size) {
       continue;
+    }
 
     return lootName;
   }
@@ -269,16 +285,18 @@ getLootName(tier) {
 }
 
 giveLoot(victim) {
-  if(!gotLoot())
+  if(!gotLoot()) {
     return false;
+  }
 
   lootTier = getLootTier(randomFloat(100.0));
 
   tierInt = level.lootIndices[lootTier];
   lootName = self getLootName(tierInt);
 
-  if(!isDefined(lootName))
+  if(!isDefined(lootName)) {
     return false;
+  }
 
   self maps\mp\gametypes\_persistence::statSet("timeSinceLastLoot", 0);
   self.timeSinceLastLoot = 0;
@@ -334,8 +352,9 @@ dropLoot(lootTier, lootName, dropEnt) {
   trace = playerPhysicsTrace(dropEnt.origin + (0, 0, 20), dropEnt.origin - (0, 0, 2000), false, dropEnt);
   angleTrace = bulletTrace(dropEnt.origin + (0, 0, 20), dropEnt.origin - (0, 0, 2000), false, dropEnt);
 
-  if(!isDefined(trace))
+  if(!isDefined(trace)) {
     return;
+  }
 
   println("dropping loot");
 
@@ -349,8 +368,9 @@ dropLoot(lootTier, lootName, dropEnt) {
     assert(droppedLootName != lootName);
   }
 
-    if(lootName[0] != "$")
+    if(lootName[0] != "$") {
       self.droppedLootNames[self.droppedLootNames.size] = lootName;
+    }
 
   fxEnt = spawn("script_model", dropOrigin);
   //fxEnt.angles = (-90,0,0);
@@ -370,8 +390,9 @@ dropLoot(lootTier, lootName, dropEnt) {
   lootTrigger thread lootPickupWaiter(lootTier, lootName);
   lootTrigger thread lootDeleteOnDisconnect();
 
-  if(getdvarint("scr_lootdebug"))
+  if(getdvarint("scr_lootdebug")) {
     lootTrigger thread lootDebugPrint(lootTier, lootName);
+  }
 
     lootTrigger endon("death");
 
@@ -406,8 +427,9 @@ lootPickupWaiter(lootTier, lootName) {
 
   for(;;) {
     self waittill("trigger", player);
-    if(player != self.owner)
+    if(player != self.owner) {
       continue;
+    }
 
     //self.owner playLocalSound( "loot_pickup_" + lootTier ); // need better sound
     self.owner playLocalSound("mp_last_stand");
@@ -472,8 +494,9 @@ getRandomKillstreak(minKillCount) {
   killStreakNames = getArrayKeys(level.killstreakFuncs);
   killStreaks = [];
   foreach(streakName in killStreakNames) {
-    if(maps\mp\killstreaks\_killstreaks::getStreakCost(streakName) < minKillCount)
+    if(maps\mp\killstreaks\_killstreaks::getStreakCost(streakName) < minKillCount) {
       continue;
+    }
 
     killStreaks[killStreaks.size] = streakName;
   }

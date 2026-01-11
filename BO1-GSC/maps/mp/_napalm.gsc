@@ -40,11 +40,13 @@ init() {
   level.napalmFlameMaxAngle = 40;
 }
 useKillstreakNapalm(hardpointType) {
-  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false)
+  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) {
     return false;
+  }
   result = self maps\mp\_napalm::selectNapalmLocation(hardpointType);
-  if(!isDefined(result) || !result)
+  if(!isDefined(result) || !result) {
     return false;
+  }
   return true;
 }
 selectNapalmLocation(hardpointType) {
@@ -63,8 +65,9 @@ selectNapalmLocation(hardpointType) {
   return self finishDualHardpointLocationUsage(location, int(yaw), ::useNapalm);
 }
 useNapalm(origin, yaw) {
-  if(self maps\mp\_killstreakrules::killstreakStart("napalm_mp", self.team) == false)
+  if(self maps\mp\_killstreakrules::killstreakStart("napalm_mp", self.team) == false) {
     return false;
+  }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("team", "allowHardpointStreakAfterDeath")) {
     ownerDeathCount = self.deathCount;
   } else {
@@ -174,25 +177,29 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   bombSpeedScale = 1 / 2;
   planeflyspeed = 7000;
   bombWait = calculateReleaseTime(flyTime, heightAboveGround, planeflyspeed, bombSpeedScale);
-  if(bombWait < 0.0)
+  if(bombWait < 0.0) {
     bombWait = 0.0;
+  }
   wait(bombWait);
   planedir = anglesToForward(plane.angles);
   velocity = vector_scale(anglesToForward(plane.angles), planeflyspeed * bombSpeedScale);
   bomb = owner launchbomb("napalm_mp", plane.origin, velocity);
   assert(isDefined(bomb));
-  if(!isDefined(bomb))
+  if(!isDefined(bomb)) {
     return;
+  }
   bomb.killCamEntities = killcamEntities;
   thread doBombKillcams(killcamEntities, killcamIndex, velocity, heightAboveGround);
   fallTime = calculateFallTime(heightAboveGround);
   fxTimer = fallTime - 0.5;
-  if(fxTimer < 0.1)
+  if(fxTimer < 0.1) {
     fxTimer = 0.1;
+  }
   bomb.ownerRequiredDeathCount = requiredDeathCount;
   wait(fxTimer);
-  if(!isDefined(bomb))
+  if(!isDefined(bomb)) {
     return;
+  }
   originalBombAngles = bomb.angles;
   originalBombOrigin = bomb.origin;
   fakeBomb = spawn("script_model", originalBombOrigin);
@@ -207,10 +214,12 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   wait(0.10);
   playFXOnTag(level.fx_napalm_bomb, fakeBomb, "tag_origin");
   wait 0.05;
-  if(!isDefined(bomb) || !isDefined(bomb.origin))
+  if(!isDefined(bomb) || !isDefined(bomb.origin)) {
     bombOrigin = originalBombOrigin;
-  else
+  }
+  else {
     bombOrigin = bomb.origin;
+  }
   bombAngles = fakeBomb.angles;
   repeat = 7;
   minAngles = getDvarIntDefault(#"scr_napalm_minAngles", 5);
@@ -230,8 +239,9 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
     traceEnd = traceStart + vector_scale(traceDir, 10000);
     trace = bulletTrace(traceStart, traceEnd, false, undefined);
     traceHit = trace["position"];
-    if(!isDefined(traceHit))
+    if(!isDefined(traceHit)) {
       continue;
+    }
     hitpos += traceHit;
     hitNormal = trace["normal"];
     currentHeight = traceHit[2];
@@ -257,8 +267,9 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
 }
 unlinkKillcam(timer) {
   self.angles = (0, 0, 0);
-  if(timer > 0.0)
+  if(timer > 0.0) {
     wait(timer);
+  }
   self unlink();
 }
 callStrike_flareEffect(plane, pathEnd, flyTime, owner, heightAboveGround) {
@@ -278,8 +289,9 @@ callStrike_flareEffect(plane, pathEnd, flyTime, owner, heightAboveGround) {
   snd_flare_ent delete();
 }
 releaseNapalm(owner, plane, requiredDeathCount, bombsite, startPoint, endPoint, bombTime, flyTime, direction, yaw, heightAboveGround, killcamEntities, killcamIndex, debugColor) {
-  if(!isDefined(owner))
+  if(!isDefined(owner)) {
     return;
+  }
   startPathRandomness = 100;
   endPathRandomness = 150;
   pathStart = startPoint;
@@ -291,10 +303,12 @@ releaseNapalm(owner, plane, requiredDeathCount, bombsite, startPoint, endPoint, 
 anyCloseGroundFlameEnts(pos) {
   radiusSqr = 150 * 150;
   for(index = 0; index < level.napalmGroundFlameCount; index++) {
-    if(!isDefined(level.napalmGroundFlameEnts[index]))
+    if(!isDefined(level.napalmGroundFlameEnts[index])) {
       continue;
-    if(DistanceSquared(pos, level.napalmGroundFlameEnts[index].origin) < radiusSqr)
+    }
+    if(DistanceSquared(pos, level.napalmGroundFlameEnts[index].origin) < radiusSqr) {
       return true;
+    }
   }
   return false;
 }
@@ -322,18 +336,22 @@ napalmDamageEntsThread() {
   self notify("napalmDamageEntsThread");
   self endon("napalmDamageEntsThread");
   for(; level.napalmDamagedEntsIndex < level.napalmDamagedEntsCount; level.napalmDamagedEntsIndex++) {
-    if(!isDefined(level.napalmDamagedEnts[level.napalmDamagedEntsIndex]))
+    if(!isDefined(level.napalmDamagedEnts[level.napalmDamagedEntsIndex])) {
       continue;
+    }
     ent = level.napalmDamagedEnts[level.napalmDamagedEntsIndex];
-    if(!isDefined(ent.entity))
+    if(!isDefined(ent.entity)) {
       continue;
+    }
     if((!ent.isPlayer && !ent.isActor) || isAlive(ent.entity)) {
-      if(ent.isPlayer && isDefined(ent.spawntime) && (gettime() - ent.spawntime) / 1000 <= level.napalm_spawnprotection)
+      if(ent.isPlayer && isDefined(ent.spawntime) && (gettime() - ent.spawntime) / 1000 <= level.napalm_spawnprotection) {
         continue;
+      }
       ent thread doFlameDamage();
       level.napalmDamagedEnts[level.napalmDamagedEntsIndex] = undefined;
-      if(ent.isPlayer || ent.isActor)
+      if(ent.isPlayer || ent.isActor) {
         wait(0.05);
+      }
     } else {
       level.napalmDamagedEnts[level.napalmDamagedEntsIndex] = undefined;
     }
@@ -354,8 +372,9 @@ spawnGroundFlame(pos, fxToPlay, fxAngles, killCamEntities) {
 napalmLosRadiusDamage(pos, radius, max, min, owner, eInflictor, normal, waitframes, fxToPlay, yaw, burnNapalmEffectRadius, groundFlameEnt, killCamEntities, debugColor) {
   maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
   waittime = 0.5 - (waitframes * 0.1);
-  if(waittime > 0)
+  if(waittime > 0) {
     wait(waittime);
+  }
   fxAngles = (270, yaw - 180, 0);
   groundFlameEnt spawnGroundFlame(pos, fxToPlay, fxAngles, killCamEntities);
   wait(0.25);
@@ -363,8 +382,9 @@ napalmLosRadiusDamage(pos, radius, max, min, owner, eInflictor, normal, waitfram
   pixbeginevent("napalm losRadiusDamage");
   ents = maps\mp\gametypes\_weapons::getDamageableEnts(pos, radius, true);
   for(i = 0; i < ents.size; i++) {
-    if(ents[i].entity == self)
+    if(ents[i].entity == self) {
       continue;
+    }
     if(entLOSRadiusDamage(ents[i], pos, radius, max, min, owner, eInflictor)) {
       ents[i].fxToPlay = fxToPlay;
       ents[i].fxAngles = fxAngles;
@@ -389,17 +409,20 @@ watchNapalmBurn(owner, eInflictor, pos, burnNapalmEffectRadius, debugColor) {
       if(!isDefined(players[i].item)) {
         players[i].item = 0;
       }
-      if(isDefined(players[i].spawntime) && (gettime() - players[i].spawntime) / 1000 <= level.napalm_spawnprotection)
+      if(isDefined(players[i].spawntime) && (gettime() - players[i].spawntime) / 1000 <= level.napalm_spawnprotection) {
         continue;
+      }
       if((!isDefined(players[i].inGroundNapalm)) || (players[i].inGroundNapalm == false)) {
         if(players[i].sessionstate == "playing") {
           debug_star(pos, debugColor, 400);
           dist2 = DistanceSquared(players[i].origin, pos);
           if(dist2 < napalmBurnDist2) {
-            if((pos[2] - players[i].origin[2]) > 80)
+            if((pos[2] - players[i].origin[2]) > 80) {
               continue;
-            if((players[i].origin[2] - pos[2]) > 100)
+            }
+            if((players[i].origin[2] - pos[2]) > 100) {
               continue;
+            }
             players[i].napalmlastburntby = owner;
             players[i] thread maps\mp\_burnplayer::doNapalmGroundDamage(owner, eInflictor, "MOD_BURNED");
           }
@@ -444,10 +467,12 @@ doNapalm(origin, yaw, owner, team) {
   }
   owner notify("begin_napalm");
   ownerEntNum = owner GetEntityNumber();
-  if(level.teambased)
+  if(level.teambased) {
     teamType = owner.team;
-  else
+  }
+  else {
     teamType = "free";
+  }
   burnNapalmDuration = getDvarFloatDefault("scr_burnNapalmDuration", level.burnNapalmDuration);
   influencer_org = targetpos + vector_scale(anglesToForward(direction), 0);
   maps\mp\gametypes\_spawning::create_napalm_fire_influencers(influencer_org, direction, team, level.burnNapalmDuration + 5.5);
@@ -456,27 +481,33 @@ doNapalm(origin, yaw, owner, team) {
 }
 targetisclose(other, target) {
   infront = targetisinfront(other, target);
-  if(infront)
+  if(infront) {
     dir = 1;
-  else
+  }
+  else {
     dir = -1;
+  }
   a = flat_origin(other.origin);
   b = a + vector_scale(anglesToForward(flat_angle(other.angles)), (dir * 100000));
   point = pointOnSegmentNearestToPoint(a, b, target);
   dist = distance(a, point);
-  if(dist < 3000)
+  if(dist < 3000) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 targetisinfront(other, target) {
   forwardvec = anglesToForward(flat_angle(other.angles));
   normalvec = vectorNormalize(flat_origin(target) - other.origin);
   dot = vectordot(forwardvec, normalvec);
-  if(dot > 0)
+  if(dot > 0) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 flat_origin(org) {
   rorg = (org[0], org[1], 0);
@@ -497,8 +528,9 @@ getPlaneExitType() {
 getScoreRank() {
   players = get_players();
   rank = players.size;
-  if(!isDefined(self.score) || self.score < 1)
+  if(!isDefined(self.score) || self.score < 1) {
     return undefined;
+  }
   for(i = 0; i < players.size; i++) {
     if(!isDefined(players[i].score) || players[i].score < 1) {
       rank--;
@@ -542,10 +574,12 @@ planeTurnSimple(plane, startPoint, endPoint, moveTime, isTurningRight) {
   level endon("demo_jump");
   leftTurn = -1;
   rightTurn = 1;
-  if(isTurningRight)
+  if(isTurningRight) {
     turnDirection = rightTurn;
-  else
+  }
+  else {
     turnDirection = leftTurn;
+  }
   radius = 25000;
   angles = VectorToAngles(endPoint - startPoint);
   right = anglestoright(angles);

@@ -2411,4 +2411,3 @@ function_99f0123d() {
     waitframe(2);
   }
 }
-

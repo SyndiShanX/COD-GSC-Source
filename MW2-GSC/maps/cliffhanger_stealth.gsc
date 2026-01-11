@@ -84,8 +84,9 @@ set_cliffhanger_alert_cold_patrol_anims() {
 stealth_cliffhanger_clifftop() {
   self stealth_plugin_basic();
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     return;
+  }
 
   threat_array["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
 
@@ -219,18 +220,21 @@ cliffhanger_enemy_goback_startfunc() {
 //can do the "report back to base" anim
 can_report_to_base() {
   // don't do it if someone is already doing it
-  if(isDefined(level.reportingToBase))
+  if(isDefined(level.reportingToBase)) {
     return false;
+  }
 
   // don't do it if we're not standing
-  if(!isDefined(self.a.stance) || self.a.stance != "stand")
+  if(!isDefined(self.a.stance) || self.a.stance != "stand") {
     return false;
+  }
 
   // don't do it if we don't have enough room in front of us
   delta = GetMoveDelta(level.scr_anim["generic"]["patrol_radio_in_clear"], 0, 1);
   endPoint = self LocalToWorldCoords(delta);
-  if(!self MayMoveToPoint(endPoint))
+  if(!self MayMoveToPoint(endPoint)) {
     return false;
+  }
 
   return true;
 }
@@ -301,8 +305,9 @@ cliffhanger_friendly_state_hidden() {
 }
 
 cliffhanger_friendly_state_spotted() {
-  if(flag("price_go_to_climb_ridge"))
+  if(flag("price_go_to_climb_ridge")) {
     self.dontEverShoot = true;
+  }
   //self thread set_battlechatter( true );
 
   self.grenadeammo = 0;
@@ -310,8 +315,9 @@ cliffhanger_friendly_state_spotted() {
   //after stealth groups were created we want to differentiate between who should be shot at and who shouldn't
   //so we don't all of a sudden alert another stealth group by shooting at them	
   //self.dontEverShoot 	= false;//self.ignoreall 	 = false;
-  if(!flag("said_lets_split_up"))
+  if(!flag("said_lets_split_up")) {
     self.ignoreme = false;
+  }
 
   //self.disablearrivals 	 = true;
   //self.disableexits 	 = true;
@@ -337,10 +343,12 @@ check_near_enemy() {
   waittillframeend;
 
   while(1) {
-    if(!isDefined(self.enemy))
+    if(!isDefined(self.enemy)) {
       return;
-    if(distanceSquared(self.origin, self.enemy.origin) < distanceSq)
+    }
+    if(distanceSquared(self.origin, self.enemy.origin) < distanceSq) {
       break;
+    }
     wait 0.1;
   }
 
@@ -374,8 +382,9 @@ cliffhanger_enemy_attack_behavior(enemy) {
   self set_cliffhanger_alert_cold_patrol_anims();
 
   //que up the yell
-  if(!self ent_flag("not_first_attack"))
+  if(!self ent_flag("not_first_attack")) {
     self thread maps\_stealth_shared_utilities::enemy_announce_spotted(self.origin);
+  }
 
   self endon("death");
 
@@ -499,18 +508,21 @@ cliffhanger_enemy_attack_behavior_sees_player() {
   while(!flag("script_attack_override")) {
     player = get_closest_player(self.origin);
 
-    if(animscripts\utility::isShotgun(self.weapon))
+    if(animscripts\utility::isShotgun(self.weapon)) {
       radius = 250;
-    else
+    }
+    else {
       radius = max(500, player.maxVisibleDist);
+    }
 
     self.goalradius = radius;
 
     last_known_pos = self lastKnownPos(player);
     player_pos = (player.origin * 0.25) + (last_known_pos * 0.75);
 
-    if(self set_goal_near_pos(player_pos, prev_pos))
+    if(self set_goal_near_pos(player_pos, prev_pos)) {
       prev_pos = player_pos;
+    }
 
     wait 5;
   }
@@ -674,13 +686,16 @@ debug_timer() {
 
 cliffhanger_prespotted_func_with_flag_wait() {
   self.battlechatter = false;
-  if(level.gameskill < 3)
+  if(level.gameskill < 3) {
     self ent_flag_wait("player_found");
+  }
 
-  if(level.gameskill < 2)
+  if(level.gameskill < 2) {
     wait 3;
-  else
+  }
+  else {
     wait .25;
+  }
 
   self.battlechatter = true;
 }
@@ -717,8 +732,9 @@ price_stealth_kills_guy(targetguy2) {
 }
 
 wait_for_player_interupt(msg) {
-  if(flag(msg))
+  if(flag(msg)) {
     return;
+  }
   level endon("_stealth_spotted");
   level endon(msg);
   level.player waittill("weapon_fired");
@@ -765,8 +781,9 @@ truck_headlights() {
 
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     delete_truck_headlights();
+  }
 }
 
 delete_truck_headlights() {
@@ -838,10 +855,12 @@ unload_and_attack_if_stealth_broken_and_close() {
   while(1) {
     flag_wait("_stealth_spotted");
     level.player waittill_entity_in_range(self, 800);
-    if(!flag("_stealth_spotted"))
+    if(!flag("_stealth_spotted")) {
       continue;
-    else
+    }
+    else {
       break;
+    }
   }
   flag_set("truck_guys_alerted");
 }
@@ -908,8 +927,9 @@ base_truck_guys_think() {
   self maps\_stealth_shared_utilities::ai_create_behavior_function("animation", "wrapper", ::truck_animation_wrapper);
   self stealth_threat_behavior_custom(alert_array);
   self stealth_corpse_behavior_custom(corpse_array);
-  foreach(key, value in awareness_array)
+  foreach(key, value in awareness_array) {
   self maps\_stealth_event_enemy::stealth_event_mod(key, value);
+  }
 
   self ent_flag_set("_stealth_behavior_reaction_anim");
 }
@@ -980,24 +1000,29 @@ truck_guys_reaction_behavior(type) {
 
   self ent_flag_wait("jumped_out");
 
-  if(!flag("truck_guys_alerted"))
+  if(!flag("truck_guys_alerted")) {
     return;
-  if(flag_exist("truck_guys_not_going_back") && flag("truck_guys_not_going_back"))
+  }
+  if(flag_exist("truck_guys_not_going_back") && flag("truck_guys_not_going_back")) {
     return;
+  }
 
   if(!flag("_stealth_spotted") && !self ent_flag("_stealth_attack")) {
     player = get_closest_player(self.origin);
     node = maps\_stealth_shared_utilities::enemy_find_free_pathnode_near(player.origin, 1500, 128);
 
-    if(isDefined(node))
+    if(isDefined(node)) {
       self thread truck_guys_base_search_behavior(node);
+    }
   }
 
   spotted_flag = self group_get_flagname("_stealth_spotted");
-  if(flag(spotted_flag))
+  if(flag(spotted_flag)) {
     self flag_waitopen(spotted_flag);
-  else
+  }
+  else {
     self waittill("normal");
+  }
 }
 
 truck_guys_no_enemy_reaction_behavior(type) {
@@ -1010,10 +1035,12 @@ truck_guys_no_enemy_reaction_behavior(type) {
 
   self ent_flag_wait("jumped_out");
 
-  if(!flag("truck_guys_alerted"))
+  if(!flag("truck_guys_alerted")) {
     return;
-  if(flag_exist("truck_guys_not_going_back") && flag("truck_guys_not_going_back"))
+  }
+  if(flag_exist("truck_guys_not_going_back") && flag("truck_guys_not_going_back")) {
     return;
+  }
 
   if(!flag("_stealth_spotted") && !self ent_flag("_stealth_attack")) {
     origin = self._stealth.logic.event.awareness_param[type];
@@ -1022,15 +1049,18 @@ truck_guys_no_enemy_reaction_behavior(type) {
 
     self thread maps\_stealth_shared_utilities::enemy_announce_wtf();
 
-    if(isDefined(node))
+    if(isDefined(node)) {
       self thread truck_guys_base_search_behavior(node);
+    }
   }
 
   spotted_flag = self group_get_flagname("_stealth_spotted");
-  if(flag(spotted_flag))
+  if(flag(spotted_flag)) {
     self flag_waitopen(spotted_flag);
-  else
+  }
+  else {
     self waittill("normal");
+  }
 }
 
 truck_alert_level_attack(enemy) {
@@ -1059,14 +1089,18 @@ spawn_beehive() {
 
     num = alert_enemies_count();
     hives = 0;
-    if(num <= 3)
+    if(num <= 3) {
       hives = 2;
-    if(num > 3)
+    }
+    if(num > 3) {
       hives = 1;
-    if(num > 5)
+    }
+    if(num > 5) {
       hives = 0;
-    if(!is_group77_alert())
+    }
+    if(!is_group77_alert()) {
       hives = 0;
+    }
 
     println(" beehives : " + hives);
     //sort from closest to furtherest
@@ -1084,8 +1118,9 @@ spawn_beehive() {
 is_group77_alert() {
   alerted_groups = stealth_group_return_groups_with_spotted_flag();
   foreach(group in alerted_groups) {
-    if(group == "77")
+    if(group == "77") {
       return true;
+    }
   }
   return false;
 }
@@ -1094,8 +1129,9 @@ alert_enemies_count() {
   enemies = getaiarray("axis");
   count = 0;
   foreach(guy in enemies) {
-    if(guy ent_flag_exist("_stealth_normal"))
+    if(guy ent_flag_exist("_stealth_normal")) {
       if(!guy ent_flag("_stealth_normal"))
+    }
         count++;
   }
   return count;
@@ -1106,8 +1142,9 @@ beehive_enemies() {
   self.baseaccuracy = 1;
   self.aggressivemode = true;
   g_radius = 700;
-  if(self.weapon == "m1014")
+  if(self.weapon == "m1014") {
     g_radius = 250;
+  }
 
   while(1) {
     if(isDefined(self.enemy)) {
@@ -1127,16 +1164,20 @@ MIN_ALERT_TEAMMATE_DIST_SQ = 1000 * 1000;
 price_should_snipe_me() {
   teammates = getAIArray(self.team);
   foreach(ai in teammates) {
-    if(self == ai)
+    if(self == ai) {
       continue;
+    }
 
-    if(ai.alertLevel == "alert")
+    if(ai.alertLevel == "alert") {
       checkDistSq = MIN_ALERT_TEAMMATE_DIST_SQ;
-    else
+    }
+    else {
       checkDistSq = MIN_NON_ALERT_TEAMMATE_DIST_SQ;
+    }
 
-    if(distanceSquared(self.origin, ai.origin) < checkDistSq)
+    if(distanceSquared(self.origin, ai.origin) < checkDistSq) {
       return false;
+    }
   }
 
   return true;

@@ -84,8 +84,9 @@ levelspawndvars(reset_dvars) {
 }
 
 leveloverridetime(defaulttime) {
-  if(isDefined(self.lastattacker) && isDefined(self.lastattacker.targetname) && self.lastattacker.targetname == "water_kill_trigger")
+  if(isDefined(self.lastattacker) && isDefined(self.lastattacker.targetname) && self.lastattacker.targetname == "water_kill_trigger") {
     return 0.4;
+  }
 
   return defaulttime;
 }
@@ -309,8 +310,9 @@ waterkilltriggerthink(triggers) {
         triggertouched = 1;
 
         if(!entity istouching(triggers[1])) {
-          if(!entity istouching(triggers[2]))
+          if(!entity istouching(triggers[2])) {
             continue;
+          }
         }
       }
 
@@ -367,29 +369,35 @@ waterkilltriggerthink(triggers) {
       }
 
       if(entity.classname == "auto_turret") {
-        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath)
+        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
           entity domaxdamage(triggers[triggertouched].origin + (0, 0, 1), triggers[triggertouched], triggers[triggertouched], 0, "MOD_CRUSH");
+        }
 
         continue;
       }
 
-      if(isplayer(entity))
+      if(isplayer(entity)) {
         entity dodamage(entity.health * 2, triggers[triggertouched].origin + (0, 0, 1), triggers[triggertouched], triggers[triggertouched], 0, "MOD_HIT_BY_OBJECT", 0, "hydro_water_mp");
-      else
+      }
+      else {
         entity dodamage(entity.health * 2, triggers[triggertouched].origin + (0, 0, 1), triggers[triggertouched], triggers[triggertouched], 0, "MOD_CRUSH");
+      }
 
-      if(isplayer(entity))
+      if(isplayer(entity)) {
         entity playlocalsound("mpl_splash_death");
+      }
     }
   }
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return undefined;
+  }
 
-  if(!isplayer(self))
+  if(!isplayer(self)) {
     return undefined;
+  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {
@@ -407,8 +415,9 @@ removeobjectsondemovertime() {
       objects = getEntArray("delete_dem_overtime", "script_noteworthy");
 
       if(isDefined(objects)) {
-        for(i = 0; i < objects.size; i++)
+        for(i = 0; i < objects.size; i++) {
           objects[i] delete();
+        }
       }
     }
   }

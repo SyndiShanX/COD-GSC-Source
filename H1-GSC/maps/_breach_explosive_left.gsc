@@ -32,8 +32,9 @@ main() {
     maps\_anim::addnotetrack_customfunction("generic", "audio_custom_fire", ::audio_custom_fire, "detcord_stack_leftbreach_02");
   }
 
-  if(isDefined(level.breach_play_door_animation) && level.breach_play_door_animation)
+  if(isDefined(level.breach_play_door_animation) && level.breach_play_door_animation) {
     setup_door_animation();
+  }
 }
 
 audio_custom_fire(var_0) {

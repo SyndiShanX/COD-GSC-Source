@@ -54,8 +54,9 @@ func_1E3C(var_00) {
 func_128D7(var_00, var_01, var_02) {
   var_03 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_00, "deployable_ammo", var_01, var_02);
 
-  if(!isDefined(var_03) || !var_03)
+  if(!isDefined(var_03) || !var_03) {
     return 0;
+  }
 
   return 1;
 }
@@ -63,8 +64,9 @@ func_128D7(var_00, var_01, var_02) {
 func_128DD(var_00, var_01) {
   var_02 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_0.lifeid, "deployable_ammo", var_01, var_0.weapon);
 
-  if(!isDefined(var_02) || !var_02)
+  if(!isDefined(var_02) || !var_02) {
     return 0;
+  }
 
   scripts\mp\matchdata::logkillstreakevent("deployable_ammo", self.origin);
   return 1;
@@ -76,10 +78,12 @@ onusedeployable(var_00) {
   if(level.func_5226 == 0) {
     var_01 = level.boxsettings[var_0.boxtype];
 
-    if(isDefined(level.func_5222))
+    if(isDefined(level.func_5222)) {
       [[level.func_5222]](1);
-    else
+    }
+    else {
       setviewmodeldepthoffield(self, var_1.minigunweapon);
+    }
 
     scripts\mp\missions::processchallenge("ch_guninabox");
     level.func_5226 = randomintrange(var_1.func_B7A5, var_1.func_B7A5 + 1);
@@ -94,8 +98,9 @@ func_C4CF(var_00) {
 startpath(var_00) {
   var_01 = [];
 
-  foreach(var_03 in var_00 getweaponslistprimaries())
+  foreach(var_03 in var_00 getweaponslistprimaries()) {
   var_1[var_1.size] = getweaponbasename(var_03);
+  }
 
   var_05 = undefined;
 
@@ -117,15 +122,17 @@ setviewmodeldepthoffield(var_00, var_01) {
   var_03 = 0;
 
   foreach(var_05 in var_02) {
-    if(!scripts\mp\weapons::isaltmodeweapon(var_05))
+    if(!scripts\mp\weapons::isaltmodeweapon(var_05)) {
       var_3++;
+    }
   }
 
   if(var_03 > 1) {
     var_07 = var_0.lastdroppableweaponobj;
 
-    if(isDefined(var_07) && var_07 != "none")
+    if(isDefined(var_07) && var_07 != "none") {
       var_00 dropitem(var_07);
+    }
   }
 
   var_00 scripts\mp\utility\game::_giveweapon(var_01);
@@ -153,11 +160,13 @@ func_E2B7(var_00) {
 
     foreach(var_03 in var_04) {
       if(isDefined(var_03) && !self.owner scripts\mp\utility\game::isenemy(var_03)) {
-        if(!isDefined(var_3.func_116D0) || !var_3.func_116D0)
+        if(!isDefined(var_3.func_116D0) || !var_3.func_116D0) {
           var_03 thread func_93EF();
+        }
 
-        if(func_FFB8(var_03))
+        if(func_FFB8(var_03)) {
           func_17A8(var_03, var_0.func_1E4C);
+        }
       }
     }
 

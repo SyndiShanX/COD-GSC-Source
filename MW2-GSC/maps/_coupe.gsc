@@ -42,8 +42,9 @@ set_vehicle_anims(positions) {
 setanims() {
   positions = [];
 
-  for(i = 0; i < 2; i++)
+  for(i = 0; i < 2; i++) {
     positions[i] = spawnStruct();
+  }
   positions[0].sittag = "tag_driver";
   positions[0].idle = % luxurysedan_driver_idle;
   positions[0].death = % luxurysedan_driver_idle;

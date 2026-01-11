@@ -17,8 +17,9 @@ music_init() {
 musicSaveWait() {
   for(;;) {
     level waittill("save_restore");
-    if(level.nextMusicState == "")
+    if(level.nextMusicState == "") {
       level.nextMusicState = level.activeMusicState;
+    }
     level.activeMusicState = "";
     println("resetting music state to " + level.nextMusicState);
     states = getArrayKeys(level.musicStates);
@@ -48,8 +49,9 @@ musicCmdHandler(clientNum, state, oldState) {
 updateMusic() {
   level endon("save_restore");
   while(1) {
-    if(level.activeMusicState == level.nextMusicState)
+    if(level.activeMusicState == level.nextMusicState) {
       level waittill("new_music");
+    }
     if(level.activeMusicState == level.nextMusicState) {
       continue;
     }
@@ -60,18 +62,21 @@ updateMusic() {
       level.nextMusicState = level.activeMusicState;
       continue;
     }
-    if(active != "")
+    if(active != "") {
       transitionOut(active, next);
-    if(next != "")
+    }
+    if(next != "") {
       transitionIn(active, next);
+    }
     level.activeMusicState = next;
   }
 }
 
 fadeOutAndStopSound(id, time) {
   rate = 0;
-  if(time != 0)
+  if(time != 0) {
     rate = 1.0 / time;
+  }
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);
   while(getSoundVolume(id) > .0001) {
@@ -128,14 +133,17 @@ transitionOut(previous, next) {
       thread fadeOutAndStopSound(id, fadeout);
     }
   }
-  while(startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000)
+  while(startDelay > 0 && SoundPlaying(stingerid) && GetPlaybackTime(stingerid) < startDelay * 1000) {
     wait(.01);
-  if(waittillstingerdone) {
-    while(SoundPlaying(stingerid))
-      wait(.01);
   }
-  if(loopalias != nextloopalias)
+  if(waittillstingerdone) {
+    while(SoundPlaying(stingerid)) {
+      wait(.01);
+    }
+  }
+  if(loopalias != nextloopalias) {
     level.musicStates[previous].id = -1;
+  }
 }
 
 transitionIn(previous, next) {
@@ -216,8 +224,9 @@ musicWaitTillStingerDone() {
 
 musicStinger(stinger, delay, force) {
   assert(isDefined(level.musicDeclareName));
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0;
+  }
   name = level.musicDeclareName;
   level.musicStates[name].stinger = stinger;
   level.musicStates[name].startDelay = delay;
@@ -229,10 +238,12 @@ musicStinger(stinger, delay, force) {
 _musicAlias(alias, fadein, fadeout, loop) {
   assert(isDefined(level.musicDeclareName));
   name = level.musicDeclareName;
-  if(loop)
+  if(loop) {
     level.musicStates[name].loopalias = alias;
-  else
+  }
+  else {
     level.musicStates[name].oneshotalias = alias;
+  }
   level.musicStates[name].fadein = fadein;
   level.musicStates[name].fadeout = fadeout;
 }

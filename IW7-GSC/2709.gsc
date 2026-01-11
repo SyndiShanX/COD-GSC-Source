@@ -8,8 +8,9 @@ shouldlogcodcasterclientmatchdata() {
 }
 
 canlogclient(var_00) {
-  if(isagent(var_00))
+  if(isagent(var_00)) {
     return 0;
+  }
 
   return var_0.clientid < level.maxlogclients;
 }
@@ -17,8 +18,9 @@ canlogclient(var_00) {
 createcodcastermatchdataforplayer(var_00) {
   var_01 = [];
 
-  foreach(var_03 in level.codcastermatchdata.playerfields)
+  foreach(var_03 in level.codcastermatchdata.playerfields) {
   var_1[var_3[0]] = var_3[1];
+  }
 
   return var_01;
 }
@@ -55,8 +57,9 @@ init() {
 }
 
 setddlfieldsforplayer(var_00) {
-  foreach(var_02 in level.codcastermatchdata.playerfields)
+  foreach(var_02 in level.codcastermatchdata.playerfields) {
   setcodcasterclientmatchdata("players", var_0.codcastermatchdataid, var_2[0], level.codcastermatchdata.players[var_0.clientid][var_2[0]]);
+  }
 
   setcodcasterclientmatchdata("players", var_0.codcastermatchdataid, "username", var_0.name);
 }

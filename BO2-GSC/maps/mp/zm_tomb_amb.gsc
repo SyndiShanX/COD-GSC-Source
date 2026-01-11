@@ -123,8 +123,9 @@ locationstingerwait(zone_name, type) {
     if(!sndlocationshouldplay(array, activezone)) {
       continue;
     }
-    if(is_true(level.sndroundwait))
+    if(is_true(level.sndroundwait)) {
       continue;
+    }
     else if(is_true(level.sndstinger.isplaying)) {
       level thread sndlocationqueue(activezone);
       continue;
@@ -135,15 +136,18 @@ locationstingerwait(zone_name, type) {
     array = sndcurrentlocationarray(array, activezone, numcut, sndnorepeats);
     level.sndlastzone = activezone;
 
-    if(numcut >= sndnorepeats)
+    if(numcut >= sndnorepeats) {
       numcut = 0;
-    else
+    }
+    else {
       numcut++;
+    }
 
     level waittill("between_round_over");
 
-    while(is_true(level.sndroundwait))
+    while(is_true(level.sndroundwait)) {
       wait 0.1;
+    }
 
     level.sndlocationplayed = 0;
   }
@@ -164,41 +168,49 @@ sndlocationsarray() {
 sndlocationshouldplay(array, activezone) {
   shouldplay = 0;
 
-  if(activezone == "zone_start_lower" && !flag("fountain_transport_active"))
+  if(activezone == "zone_start_lower" && !flag("fountain_transport_active")) {
     return shouldplay;
-
-  if(is_true(level.music_override))
-    return shouldplay;
-
-  foreach(place in array) {
-    if(place == activezone)
-      shouldplay = 1;
   }
 
-  if(shouldplay == 0)
+  if(is_true(level.music_override)) {
     return shouldplay;
+  }
+
+  foreach(place in array) {
+    if(place == activezone) {
+      shouldplay = 1;
+    }
+  }
+
+  if(shouldplay == 0) {
+    return shouldplay;
+  }
 
   playersinlocal = 0;
   players = getplayers();
 
   foreach(player in players) {
     if(player maps\mp\zombies\_zm_zonemgr::is_player_in_zone(activezone)) {
-      if(!is_true(player.afterlife))
+      if(!is_true(player.afterlife)) {
         playersinlocal++;
+      }
     }
   }
 
-  if(playersinlocal >= 1)
+  if(playersinlocal >= 1) {
     shouldplay = 1;
-  else
+  }
+  else {
     shouldplay = 0;
+  }
 
   return shouldplay;
 }
 
 sndcurrentlocationarray(current_array, activezone, numcut, max_num_removed) {
-  if(numcut >= max_num_removed)
+  if(numcut >= max_num_removed) {
     current_array = sndlocationsarray();
+  }
 
   foreach(place in current_array) {
     if(place == activezone) {
@@ -234,23 +246,26 @@ sndlocationbetweenrounds() {
 }
 
 sndlocationbetweenroundswait() {
-  while(is_true(level.sndroundwait))
+  while(is_true(level.sndroundwait)) {
     wait 0.1;
+  }
 
   while(true) {
     level thread sndlocationbetweenrounds();
     level waittill("between_round_over");
 
-    while(is_true(level.sndroundwait))
+    while(is_true(level.sndroundwait)) {
       wait 0.1;
+    }
   }
 }
 
 sndlocationqueue(zone) {
   level endon("newzoneActive");
 
-  while(is_true(level.sndstinger.isplaying))
+  while(is_true(level.sndstinger.isplaying)) {
     wait 0.5;
+  }
 
   level notify("newzoneActive", zone);
 }
@@ -279,8 +294,9 @@ sndplaystinger(state, player) {
     return;
   }
 
-  if(s.states[state].interrupt == "queue")
+  if(s.states[state].interrupt == "queue") {
     level thread sndqueuestinger(state, player);
+  }
 }
 
 playstinger(state, player, ignore) {
@@ -293,8 +309,9 @@ playstinger(state, player, ignore) {
     return;
   }
   if(is_true(ignore)) {
-    if(isDefined(player))
+    if(isDefined(player)) {
       player playsoundtoplayer(s.states[state].alias, player);
+    }
     else {
       s.ent playSound(s.states[state].alias);
       s.ent thread playstingerstop();
@@ -313,8 +330,9 @@ sndqueuestinger(state, player) {
   s = level.sndstinger;
   count = 0;
 
-  if(is_true(s.queue))
+  if(is_true(s.queue)) {
     return;
+  }
   else {
     s.queue = 1;
 
@@ -323,8 +341,9 @@ sndqueuestinger(state, player) {
         wait 0.5;
         count++;
 
-        if(count >= 120)
+        if(count >= 120) {
           return;
+        }
       } else
         break;
     }
@@ -373,8 +392,9 @@ sndmusicegg() {
   level.meteor_counter = 0;
   level.music_override = 0;
 
-  for(i = 0; i < origins.size; i++)
+  for(i = 0; i < origins.size; i++) {
     level thread sndmusicegg_wait(origins[i]);
+  }
 }
 
 sndmusicegg_wait(bottle_origin) {
@@ -386,8 +406,9 @@ sndmusicegg_wait(bottle_origin) {
   player playSound("zmb_meteor_activate");
   level.meteor_counter = level.meteor_counter + 1;
 
-  if(level.meteor_counter == 3)
+  if(level.meteor_counter == 3) {
     level thread sndmuseggplay(temp_ent, "mus_zmb_secret_song", 310);
+  }
   else {
     wait 1.5;
     temp_ent delete();
@@ -395,8 +416,9 @@ sndmusicegg_wait(bottle_origin) {
 }
 
 sndmusicegg_override() {
-  if(is_true(level.music_override))
+  if(is_true(level.music_override)) {
     return false;
+  }
 
   return true;
 }
@@ -447,8 +469,9 @@ sndwait() {
     wait 1;
     counter++;
 
-    if(counter >= 60)
+    if(counter >= 60) {
       return false;
+    }
   }
 
   return true;
@@ -457,8 +480,9 @@ sndwait() {
 snddoormusictrigs() {
   trigs = getEntArray("sndMusicDoor", "script_noteworthy");
 
-  foreach(trig in trigs)
+  foreach(trig in trigs) {
   trig thread snddoormusic();
+  }
 }
 
 snddoormusic() {
@@ -518,11 +542,13 @@ snd115egg() {
   fiveorigin[0] = (-2459, 176, 243);
   fiveorigin[1] = (-2792, 175, 243);
 
-  foreach(origin in oneorigin)
+  foreach(origin in oneorigin) {
   level thread snd115egg_wait(origin, 0);
+  }
 
-  foreach(origin in fiveorigin)
+  foreach(origin in fiveorigin) {
   level thread snd115egg_wait(origin, 1);
+  }
 }
 
 snd115egg_wait(origin, shouldwait) {
@@ -530,10 +556,12 @@ snd115egg_wait(origin, shouldwait) {
   temp_ent = spawn("script_origin", origin);
   temp_ent thread snddelete115ent();
 
-  if(shouldwait)
+  if(shouldwait) {
     temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::snd115egg_5_override);
-  else
+  }
+  else {
     temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::snd115egg_1_override);
+  }
 
   temp_ent waittill("main_music_egg_hit", player);
   player playSound("zmb_meteor_activate");
@@ -552,8 +580,9 @@ snd115egg_wait(origin, shouldwait) {
 snd115egg_1_override() {
   stance = self getstance();
 
-  if(is_true(level.music_override) || stance != "prone")
+  if(is_true(level.music_override) || stance != "prone") {
     return false;
+  }
 
   return true;
 }
@@ -561,8 +590,9 @@ snd115egg_1_override() {
 snd115egg_5_override() {
   stance = self getstance();
 
-  if(is_true(level.music_override) || stance != "prone" || level.snd115count < 2)
+  if(is_true(level.music_override) || stance != "prone" || level.snd115count < 2) {
     return false;
+  }
 
   return true;
 }

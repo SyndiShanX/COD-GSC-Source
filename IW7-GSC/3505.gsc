@@ -131,8 +131,9 @@ init() {
 }
 
 func_128F1(var_00, var_01) {
-  if(isDefined(self.underwater) && self.underwater)
+  if(isDefined(self.underwater) && self.underwater) {
     return 0;
+  }
 
   var_02 = var_01;
   var_03 = 1;
@@ -157,8 +158,9 @@ func_128F1(var_00, var_01) {
 
   var_05 = func_10DD2(var_04);
 
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     var_05 = 0;
+  }
 
   return var_05;
 }
@@ -214,8 +216,9 @@ func_10DD2(var_00) {
   self.restoreangles = vectortoangles(anglesToForward(self.angles));
   func_C30E(var_00);
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(0);
+  }
 
   thread watchintrocleared(var_00);
   scripts\mp\utility\game::freezecontrolswrapper(1);
@@ -224,8 +227,9 @@ func_10DD2(var_00) {
   var_01 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_0.odintype);
 
   if(var_01 != "success") {
-    if(isDefined(self.disabledweapon) && self.disabledweapon)
+    if(isDefined(self.disabledweapon) && self.disabledweapon) {
       scripts\engine\utility::allow_weapon(1);
+    }
 
     var_00 notify("death");
     return 0;
@@ -336,8 +340,9 @@ func_C318() {
   self endon("gone");
   self waittill("death");
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner func_C2E3(self);
+  }
 
   func_4074();
   func_C317(3.0);
@@ -393,8 +398,9 @@ odin_leave() {
   var_00 = level.func_C321[self.odintype];
   scripts\mp\utility\game::leaderdialog(var_0.votimedout);
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner func_C2E3(self);
+  }
 
   self notify("gone");
   func_4074();
@@ -411,8 +417,9 @@ func_C2E3(var_00) {
     self notify("odin_ride_ended");
     func_C2DA(var_00);
 
-    if(getdvarint("camera_thirdPerson"))
+    if(getdvarint("camera_thirdPerson")) {
       scripts\mp\utility\game::setthirdpersondof(1);
+    }
 
     self thermalvisionfofoverlayoff();
     self remotecontrolvehicleoff(var_00);
@@ -422,15 +429,18 @@ func_C2E3(var_00) {
     self stopolcalsound("odin_positive_action");
 
     foreach(var_02 in level.func_C321[var_0.odintype].weapon) {
-      if(isDefined(var_2.func_D5E4))
+      if(isDefined(var_2.func_D5E4)) {
         self stopolcalsound(var_2.func_D5E4);
+      }
 
-      if(isDefined(var_2.func_D5DD))
+      if(isDefined(var_2.func_D5DD)) {
         self stopolcalsound(var_2.func_D5DD);
+      }
     }
 
-    if(isDefined(var_0.func_A4A3))
+    if(isDefined(var_0.func_A4A3)) {
       var_0.func_A4A3 scripts\mp\bots\bots_strategy::bot_guard_player(self, 350);
+    }
   }
 }
 
@@ -518,8 +528,9 @@ func_1399C() {
   self.odin_airdropusetime = 0;
   var_00 setclientomnvar(var_1.func_1E44, level.func_C321[self.odintype].func_12B20);
 
-  if(!isai(var_00))
+  if(!isai(var_00)) {
     var_00 notifyonplayercommand("airdrop_action", "+smoke");
+  }
 
   for(;;) {
     var_00 waittill("airdrop_action");
@@ -531,10 +542,12 @@ func_1399C() {
       return;
     }
     if(gettime() >= self.odin_airdropusetime) {
-      if(level.teambased)
+      if(level.teambased) {
         scripts\mp\utility\game::leaderdialog(var_1.func_13521, self.team);
-      else
+      }
+      else {
         var_00 scripts\mp\utility\game::leaderdialogonplayer(var_1.func_13521);
+      }
 
       self.odin_airdropusetime = func_C2E6("airdrop");
       var_01 = level.func_C321[self.odintype].weapon["airdrop"];
@@ -559,8 +572,9 @@ func_13B49() {
     var_00 notifyonplayercommand("smoke_action", "+speed_throw");
     var_00 notifyonplayercommand("smoke_action", "+ads_akimbo_accessible");
 
-    if(!level.console)
+    if(!level.console) {
       var_00 notifyonplayercommand("smoke_action", "+toggleads_throw");
+    }
   }
 
   for(;;) {
@@ -573,10 +587,12 @@ func_13B49() {
       return;
     }
     if(gettime() >= self.odin_smokeusetime) {
-      if(level.teambased)
+      if(level.teambased) {
         scripts\mp\utility\game::leaderdialog(var_1.func_13551, self.team);
-      else
+      }
+      else {
         var_00 scripts\mp\utility\game::leaderdialogonplayer(var_1.func_13551);
+      }
 
       self.odin_smokeusetime = func_C2E6("smoke");
     } else
@@ -629,8 +645,9 @@ func_13AAF() {
   self.odin_juggernautusetime = 0;
   var_00 setclientomnvar(var_1.func_1E44, level.func_C321[self.odintype].func_12B20);
 
-  if(!isai(var_00))
+  if(!isai(var_00)) {
     var_00 notifyonplayercommand("juggernaut_action", "+frag");
+  }
 
   for(;;) {
     var_00 waittill("juggernaut_action");
@@ -664,8 +681,9 @@ func_13AAF() {
 
     wait 1.1;
 
-    if(isDefined(self.func_A4A3))
+    if(isDefined(self.func_A4A3)) {
       var_00 setclientomnvar(var_1.func_1E44, var_1.func_12B23);
+    }
   }
 }
 
@@ -692,10 +710,12 @@ func_13AB1() {
     if(!isDefined(var_0.odin)) {
       return;
     }
-    if(gettime() >= self.odin_largerodusetime)
+    if(gettime() >= self.odin_largerodusetime) {
       self.odin_largerodusetime = func_C2E6("large_rod");
-    else
+    }
+    else {
       var_00 scripts\mp\utility\game::func_13A7("odin_negative_action");
+    }
 
     wait 1.0;
   }
@@ -714,8 +734,9 @@ func_13B47() {
     var_00 notifyonplayercommand("small_rod_action", "+speed_throw");
     var_00 notifyonplayercommand("small_rod_action", "+ads_akimbo_accessible");
 
-    if(!level.console)
+    if(!level.console) {
       var_00 notifyonplayercommand("small_rod_action", "+toggleads_throw");
+    }
   }
 
   for(;;) {
@@ -727,10 +748,12 @@ func_13B47() {
     if(!isDefined(var_0.odin)) {
       return;
     }
-    if(gettime() >= self.odin_smallrodusetime)
+    if(gettime() >= self.odin_smallrodusetime) {
       self.odin_smallrodusetime = func_C2E6("small_rod");
-    else
+    }
+    else {
       var_00 scripts\mp\utility\game::func_13A7("odin_negative_action");
+    }
 
     wait 1.0;
   }
@@ -762,11 +785,13 @@ func_C2E6(var_00) {
     playLoopSound(self.origin, var_2.func_C195);
     wait 0.3;
   } else {
-    if(isDefined(var_2.func_D5DD))
+    if(isDefined(var_2.func_D5DD)) {
       var_01 playsoundtoplayer(var_2.func_D5DD, var_01);
+    }
 
-    if(isDefined(var_2.func_C195))
+    if(isDefined(var_2.func_C195)) {
       playLoopSound(self.origin, var_2.func_C195);
+    }
 
     var_01 playrumbleonentity(var_2.func_E7BA);
   }
@@ -775,8 +800,9 @@ func_C2E6(var_00) {
   var_7.type = "odin";
   var_07 thread func_13A22(var_00);
 
-  if(var_00 == "smoke" || var_00 == "juggernaut" || var_00 == "large_rod")
+  if(var_00 == "smoke" || var_00 == "juggernaut" || var_00 == "large_rod") {
     level notify("smoke", var_07, var_2.projectile);
+  }
 
   self.func_9BE2 = undefined;
   return var_06;
@@ -873,8 +899,9 @@ func_13B21(var_00) {
   if(!isDefined(var_1.odin)) {
     return;
   }
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     var_01 scripts\mp\utility\game::func_13A7(var_04);
+  }
 
   var_01 setclientomnvar(var_02, var_05);
 }
@@ -919,10 +946,12 @@ func_58EE(var_00) {
     if(!bullettracepassed(var_00, var_12, 0, var_09)) {
       continue;
     }
-    if(var_10 <= var_03)
+    if(var_10 <= var_03) {
       var_13 = 1.0;
-    else
+    }
+    else {
       var_13 = 1.0 - (var_10 - var_03) / (var_02 - var_03);
+    }
 
     var_14 = anglesToForward(var_09 getplayerangles());
     var_15 = var_00 - var_12;
@@ -933,10 +962,12 @@ func_58EE(var_00) {
     var_7++;
 
     if(!func_6565(var_09)) {
-      if(level.teambased)
+      if(level.teambased) {
         var_18 = scripts\mp\utility\game::outlineenableforteam(var_09, "orange", self.team, 0, 0, "killstreak");
-      else
+      }
+      else {
         var_18 = scripts\mp\utility\game::outlineenableforplayer(var_09, "orange", self.owner, 0, 0, "killstreak");
+      }
 
       thread removeoutline(var_18, var_09, 3.0);
     }
@@ -945,15 +976,19 @@ func_58EE(var_00) {
   var_20 = level.func_C321[self.odintype].weapon["marking"];
 
   if(var_07 == 1) {
-    if(level.teambased)
+    if(level.teambased) {
       scripts\mp\utility\game::leaderdialog(var_20.func_1354B, self.team);
-    else
+    }
+    else {
       var_01 scripts\mp\utility\game::leaderdialogonplayer(var_20.func_1354B);
+    }
   } else if(var_07 > 1) {
-    if(level.teambased)
+    if(level.teambased) {
       scripts\mp\utility\game::leaderdialog(var_20.func_1354A, self.team);
-    else
+    }
+    else {
       var_01 scripts\mp\utility\game::leaderdialogonplayer(var_20.func_1354A);
+    }
   }
 
   var_21 = scripts\mp\weapons::getempdamageents(var_00, 512, 0);
@@ -967,8 +1002,9 @@ func_58EE(var_00) {
 }
 
 func_20D2(var_00) {
-  if(level.teambased && var_0.team == self.team)
+  if(level.teambased && var_0.team == self.team) {
     return;
+  }
   else if(!level.teambased && var_00 == self.owner) {
     return;
   }
@@ -984,27 +1020,32 @@ func_6565(var_00) {
 }
 
 removeoutline(var_00, var_01, var_02) {
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_01 endon("disconnect");
+  }
 
   level endon("game_ended");
   var_03 = ["leave", "death"];
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     scripts\engine\utility::waittill_any_in_array_or_timeout_no_endon_death(var_03, var_02);
-  else
+  }
+  else {
     scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_03);
+  }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     scripts\mp\utility\game::outlinedisable(var_00, var_01);
+  }
 }
 
 func_C31A() {
   self endon("death");
   level endon("game_ended");
 
-  foreach(var_01 in level.participants)
+  foreach(var_01 in level.participants) {
   func_20D2(var_01);
+  }
 }
 
 func_C31C() {
@@ -1029,10 +1070,12 @@ func_C2DD(var_00) {
     self waittill("odin_enemy_killed");
     wait(var_02);
 
-    if(self.enemieskilledintimewindow > 1)
+    if(self.enemieskilledintimewindow > 1) {
       self.owner scripts\mp\utility\game::leaderdialogonplayer(var_1.func_1352C);
-    else
+    }
+    else {
       self.owner scripts\mp\utility\game::leaderdialogonplayer(var_1.func_1352D);
+    }
 
     self.enemieskilledintimewindow = 0;
   }
@@ -1055,11 +1098,13 @@ odin_onplayerspawned(var_00) {
 }
 
 func_4074() {
-  if(isDefined(self.targeting_marker))
+  if(isDefined(self.targeting_marker)) {
     self.targeting_marker delete();
+  }
 
-  if(isDefined(self.odin_overlay_ent))
+  if(isDefined(self.odin_overlay_ent)) {
     self.odin_overlay_ent delete();
+  }
 }
 
 watchearlyexit(var_00) {

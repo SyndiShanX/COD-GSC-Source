@@ -72,8 +72,9 @@ atv_loop_driver() {
       var_2 = 0.5 * (1 + maps\_vehicle_code::update_steering(self.ridingvehicle));
       var_3 = self getanimtime(animscripts\utility::animarray(var_0));
 
-      if(var_0 == "right2left")
+      if(var_0 == "right2left") {
         var_3 = 1 - var_3;
+      }
 
       var_4 = 20 * abs(var_3 - var_2);
 
@@ -124,8 +125,9 @@ atv_loop_driver_shooting() {
       var_1 = gettime() + 3000;
     }
 
-    if(var_1 <= gettime())
+    if(var_1 <= gettime()) {
       atv_start_shooting();
+    }
 
     self setanimknoblimited(animscripts\utility::animarray("add_aim_left_center"), var_3, var_0);
     self setanimlimited(animscripts\utility::animarray("add_aim_left_left"), var_4, var_0);
@@ -167,8 +169,9 @@ atv_handle_events(var_0) {
       var_1.event["bump"][var_0] = 0;
       self notify("atv_event_occurred");
 
-      if(self.current_event != "bump_big")
+      if(self.current_event != "bump_big") {
         thread atv_do_event(animscripts\utility::animarray("event_bump"));
+      }
     }
 
     if(var_1.event["bump_big"][var_0]) {
@@ -182,16 +185,18 @@ atv_handle_events(var_0) {
       var_1.event["sway_left"][var_0] = 0;
       self notify("atv_event_occurred");
 
-      if(self.current_event != "bump_big")
+      if(self.current_event != "bump_big") {
         thread atv_do_event(animscripts\utility::animarray("event_sway")["left"]);
+      }
     }
 
     if(var_1.event["sway_right"][var_0]) {
       var_1.event["sway_right"][var_0] = 0;
       self notify("atv_event_occurred");
 
-      if(self.current_event != "bump_big")
+      if(self.current_event != "bump_big") {
         thread atv_do_event(animscripts\utility::animarray("event_sway")["right"]);
+      }
     }
 
     wait 0.05;
@@ -244,12 +249,15 @@ atvshootbehavior() {
   self.shootpos = self.enemy getshootatpos();
   var_0 = distancesquared(self.origin, self.enemy.origin);
 
-  if(var_0 < 1000000)
+  if(var_0 < 1000000) {
     self.shootstyle = "full";
-  else if(var_0 < 4000000)
+  }
+  else if(var_0 < 4000000) {
     self.shootstyle = "burst";
-  else
+  }
+  else {
     self.shootstyle = "single";
+  }
 
   if(isDefined(self.enemy.vehicle)) {
     var_1 = 0.5;
@@ -268,15 +276,19 @@ atvshootbehavior() {
         var_9 = vectordot(var_4, var_6);
         var_9 = var_9 / 3;
 
-        if(var_9 > 128)
+        if(var_9 > 128) {
           var_9 = 128;
-        else if(var_9 < -128)
+        }
+        else if(var_9 < -128) {
           var_9 = -128;
+        }
 
-        if(var_9 > 0)
+        if(var_9 > 0) {
           var_9 = 128 - var_9;
-        else
+        }
+        else {
           var_9 = -128 - var_9;
+        }
 
         self.shootent = undefined;
         self.shootpos = var_2.origin + var_8 * var_5 + var_9 * var_6;
@@ -303,14 +315,17 @@ atv_shoot() {
 }
 
 atv_reload() {
-  if(!self.ridingvehicle.steering_enable)
+  if(!self.ridingvehicle.steering_enable) {
     return 0;
+  }
 
-  if(!animscripts\combat_utility::needtoreload(0))
+  if(!animscripts\combat_utility::needtoreload(0)) {
     return 0;
+  }
 
-  if(!animscripts\utility::usingriflelikeweapon())
+  if(!animscripts\utility::usingriflelikeweapon()) {
     return 0;
+  }
 
   atv_reload_internal();
   self notify("abort_reload");
@@ -343,18 +358,21 @@ atv_reload_internal() {
 }
 
 atv_waitfor_start_aim(var_0) {
-  if(var_0 == "start_aim")
+  if(var_0 == "start_aim") {
     return 1;
+  }
 }
 
 atv_waitfor_end(var_0) {
-  if(var_0 == "end")
+  if(var_0 == "end") {
     return 1;
+  }
 }
 
 atv_waitfor_start_lean(var_0) {
-  if(var_0 == "start_lean")
+  if(var_0 == "start_lean") {
     return 1;
+  }
 }
 
 atv_trackshootentorpos_driver() {
@@ -371,15 +389,17 @@ atv_trackshootentorpos_driver() {
     var_5 = (self.origin[0], self.origin[1], self getEye()[2]);
     var_6 = self.shootpos;
 
-    if(isDefined(self.shootent))
+    if(isDefined(self.shootent)) {
       var_6 = self.shootent getshootatpos();
+    }
 
     if(!isDefined(var_6)) {
       var_3 = 0;
       var_7 = self getanglestolikelyenemypath();
 
-      if(isDefined(var_7))
+      if(isDefined(var_7)) {
         var_3 = angleclamp180(self.angles[1] - var_7[1]);
+      }
     } else {
       var_8 = var_6 - var_5;
       var_9 = vectortoangles(var_8);
@@ -387,16 +407,19 @@ atv_trackshootentorpos_driver() {
       var_3 = angleclamp180(var_3);
     }
 
-    if(var_3 > self.rightaimlimit || var_3 < self.leftaimlimit)
+    if(var_3 > self.rightaimlimit || var_3 < self.leftaimlimit) {
       var_3 = 0;
+    }
 
-    if(var_4)
+    if(var_4) {
       var_4 = 0;
+    }
     else {
       var_10 = var_3 - var_2;
 
-      if(abs(var_10) > var_1)
+      if(abs(var_10) > var_1) {
         var_3 = var_2 + var_1 * common_scripts\utility::sign(var_10);
+      }
     }
 
     var_2 = var_3;
@@ -423,14 +446,16 @@ atv_get_death_anim(var_0, var_1, var_2) {
       continue;
     }
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = var_0[var_6];
+    }
   }
 
   var_8 = var_3;
 
-  if(isDefined(anim.prevatvdeath) && var_8 == anim.prevatvdeath && gettime() - anim.prevatvdeathtime < 500)
+  if(isDefined(anim.prevatvdeath) && var_8 == anim.prevatvdeath && gettime() - anim.prevatvdeathtime < 500) {
     var_8 = var_4;
+  }
 
   anim.prevatvdeath = var_8;
   anim.prevatvdeathtime = gettime();
@@ -442,8 +467,9 @@ atv_death_launchslide() {
   var_1 = var_0.prevframevelocity;
   var_1 = (var_1[0], var_1[1], randomfloatrange(200, 400)) * 0.75;
 
-  if(lengthsquared(var_1) > 1000000)
+  if(lengthsquared(var_1) > 1000000) {
     var_1 = vectornormalize(var_1) * 1000;
+  }
 
   var_2 = spawn("script_origin", self.origin);
   var_2 moveslide((0, 0, 40), 15, var_1);
@@ -468,8 +494,9 @@ atv_normal_death() {
 atv_collide_death() {
   var_0 = self.ridingvehicle;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return atv_normal_death();
+  }
 
   var_1 = var_0.prevframevelocity;
   atv_death_launchslide();
@@ -500,8 +527,9 @@ deleteshortly() {
 
   wait 3;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 atv_setanim_common(var_0) {

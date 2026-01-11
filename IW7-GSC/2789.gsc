@@ -47,11 +47,13 @@ func_E4E9(var_00) {
 }
 
 func_E4E8() {
-  if(isDefined(self.grenade))
+  if(isDefined(self.grenade)) {
     self.grenade delete();
+  }
 
-  if(isDefined(self.fx))
+  if(isDefined(self.fx)) {
     self.fx delete();
+  }
 
   self delete();
   self notify("death");
@@ -60,8 +62,9 @@ func_E4E8() {
 func_E4E7() {
   self endon("death");
 
-  while(getdvarint("scr_ric_debug", 0) == 1)
+  while(getdvarint("scr_ric_debug", 0) == 1) {
     wait 1;
+  }
 
   wait 6.0;
   func_E4E8();
@@ -76,8 +79,9 @@ func_E4E4(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_E4E2(var_00, var_01, var_02, var_03) {
-  if(isDefined(self.owner) && var_00 != self.owner)
+  if(isDefined(self.owner) && var_00 != self.owner) {
     var_00 notify("destroyed_equipment");
+  }
 
   self notify("detonateExplosive");
 }
@@ -96,8 +100,9 @@ func_E4E5(var_00) {
 
       if(getdvarint("scr_ric_debug", 0) == 1) {}
 
-      if(getdvarint("scr_ric_debug", 0) != 1)
+      if(getdvarint("scr_ric_debug", 0) != 1) {
         scripts\mp\utility\game::_magicbullet(var_10, var_04, var_12, var_00);
+      }
 
       var_13 = scripts\engine\utility::getfx("proto_ricochet_shot_temp");
       playFX(var_13, var_04, var_11 * -1, (0, 0, 1));

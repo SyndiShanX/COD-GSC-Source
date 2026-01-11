@@ -883,14 +883,17 @@ initactivisioncredits() {
   maps\_credits::addcentertriple(undefined, &"CREDITS_USES_UMBRA_3__2013_BY_UMBRA_SO", undefined);
   maps\_credits::addspacesmall();
 
-  if(!level.console || level.ps3 || level.ps4 || level.xenon)
+  if(!level.console || level.ps3 || level.ps4 || level.xenon) {
     maps\_credits::addcentertriple(undefined, &"CREDITS_DOLBY_PRO_LOGIC_AND_THE_DOUBLE", undefined);
+  }
 
-  if(!level.console)
+  if(!level.console) {
     maps\_credits::addcentertriple(undefined, &"CREDITS_PC_AUDIO_SOLUTION_CONTAINING_D", undefined);
+  }
 
-  if(!level.console)
+  if(!level.console) {
     maps\_credits::addcentertriple(undefined, &"CREDITS_REQUIRED_FOR_DOLBY_DIGITAL_AUD", undefined);
+  }
 
   maps\_credits::addspacesmall();
   maps\_credits::addcentertriple(undefined, &"CREDITS_HOLLYWOOD__DESIGN__2013_HOLLYW", undefined);

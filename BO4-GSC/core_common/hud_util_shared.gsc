@@ -493,4 +493,3 @@ updatechildren() {
 showperks() {
   self luinotifyevent(#"show_perk_notification", 0);
 }
-

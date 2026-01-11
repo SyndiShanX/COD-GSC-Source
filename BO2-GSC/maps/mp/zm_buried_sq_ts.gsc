@@ -50,10 +50,12 @@ ts_sign_damage_watch() {
     }
 
     if(ts_is_bowie_knife(str_weapon) || ts_is_galvaknuckles(str_weapon)) {
-      if(self.ts_sign_activated)
+      if(self.ts_sign_activated) {
         self thread ts_sign_deactivate();
-      else
+      }
+      else {
         self thread ts_sign_activate();
+      }
 
       ts_sign_check_all_activated(e_attacker, self);
     }
@@ -98,11 +100,13 @@ ts_sign_check_all_activated(e_attacker, m_last_touched) {
     if(m_sign.ts_sign_activated) {
       a_signs_active[a_signs_active.size] = m_sign;
 
-      if(!is_true(m_sign.is_max_sign))
+      if(!is_true(m_sign.is_max_sign)) {
         is_max_complete = 0;
+      }
 
-      if(!is_true(m_sign.is_ric_sign))
+      if(!is_true(m_sign.is_ric_sign)) {
         is_ric_complete = 0;
+      }
     }
   }
 
@@ -116,15 +120,17 @@ ts_sign_check_all_activated(e_attacker, m_last_touched) {
 }
 
 ts_is_bowie_knife(str_weapon) {
-  if(str_weapon == "knife_ballistic_bowie_zm" || str_weapon == "knife_ballistic_bowie_upgraded_zm" || str_weapon == "bowie_knife_zm")
+  if(str_weapon == "knife_ballistic_bowie_zm" || str_weapon == "knife_ballistic_bowie_upgraded_zm" || str_weapon == "bowie_knife_zm") {
     return true;
+  }
 
   return false;
 }
 
 ts_is_galvaknuckles(str_weapon) {
-  if(str_weapon == "tazer_knuckles_zm")
+  if(str_weapon == "tazer_knuckles_zm") {
     return true;
+  }
 
   return false;
 }

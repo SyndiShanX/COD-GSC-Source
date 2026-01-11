@@ -111,15 +111,19 @@ watchhackertoolfired() {
         hackertooltarget notify("captured", self, 1);
       }
 
-      if(isentityhackableweaponobject(hackertooltarget) || isDefined(hackertooltarget.hackertrigger))
+      if(isentityhackableweaponobject(hackertooltarget) || isDefined(hackertooltarget.hackertrigger)) {
         hackertooltarget.hackertrigger notify("trigger", self, 1);
+      }
       else {
-        if(isDefined(hackertooltarget.classname) && hackertooltarget.classname == "grenade")
+        if(isDefined(hackertooltarget.classname) && hackertooltarget.classname == "grenade") {
           damage = 1;
-        else if(isDefined(hackertooltarget.maxhealth))
+        }
+        else if(isDefined(hackertooltarget.maxhealth)) {
           damage = hackertooltarget.maxhealth + 1;
-        else
+        }
+        else {
           damage = 999999;
+        }
 
         if(isDefined(hackertooltarget.numflares) && hackertooltarget.numflares > 0) {
           damage = 1;
@@ -174,8 +178,9 @@ watchhackertoolinterrupt() {
   while(true) {
     level waittill("use_interrupt", interrupttarget);
 
-    if(self.hackertooltarget == interrupttarget)
+    if(self.hackertooltarget == interrupttarget) {
       clearhackertarget();
+    }
 
     wait 0.05;
   }
@@ -204,8 +209,9 @@ watchforgrenadefire() {
     clip_ammo = self getweaponammoclip("pda_hack_mp");
     clip_max_ammo = weaponclipsize("pda_hack_mp");
 
-    if(clip_ammo < clip_max_ammo)
+    if(clip_ammo < clip_max_ammo) {
       clip_ammo++;
+    }
 
     self setweaponammoclip("pda_hack_mp", clip_ammo);
     break;
@@ -252,8 +258,9 @@ hackertooltargetloop() {
         continue;
       }
 
-      if(self.hackertoollocktimeelapsed == 0.0)
+      if(self.hackertoollocktimeelapsed == 0.0) {
         self playlocalsound("evt_hacker_hacking");
+      }
 
       lockingon(self.hackertooltarget, 1);
       lockedon(self.hackertooltarget, 0);
@@ -319,25 +326,29 @@ getbesthackertooltarget() {
       continue;
     }
     if(getdvar(#"scr_freelock") == "1") {
-      if(self iswithinhackertoolreticle(targetsall[idx]))
+      if(self iswithinhackertoolreticle(targetsall[idx])) {
         targetsvalid[targetsvalid.size] = targetsall[idx];
+      }
 
       continue;
     }
 
     if(level.teambased) {
       if(isentityhackablecarepackage(target_ent)) {
-        if(self iswithinhackertoolreticle(target_ent))
+        if(self iswithinhackertoolreticle(target_ent)) {
           targetsvalid[targetsvalid.size] = target_ent;
+        }
       } else if(isDefined(target_ent.team)) {
         if(target_ent.team != self.team) {
-          if(self iswithinhackertoolreticle(target_ent))
+          if(self iswithinhackertoolreticle(target_ent)) {
             targetsvalid[targetsvalid.size] = target_ent;
+          }
         }
       } else if(isDefined(target_ent.owner.team)) {
         if(target_ent.owner.team != self.team) {
-          if(self iswithinhackertoolreticle(target_ent))
+          if(self iswithinhackertoolreticle(target_ent)) {
             targetsvalid[targetsvalid.size] = target_ent;
+          }
         }
       }
 
@@ -350,15 +361,17 @@ getbesthackertooltarget() {
         continue;
       }
 
-      if(isDefined(target_ent.owner) && self != target_ent.owner)
+      if(isDefined(target_ent.owner) && self != target_ent.owner) {
         targetsvalid[targetsvalid.size] = target_ent;
+      }
     }
   }
 
   chosenent = undefined;
 
-  if(targetsvalid.size != 0)
+  if(targetsvalid.size != 0) {
     chosenent = targetsvalid[0];
+  }
 
   return chosenent;
 }
@@ -412,28 +425,35 @@ getweaponobjecthacktimems(entity) {
 }
 
 isentityhackablecarepackage(entity) {
-  if(isDefined(entity.model))
+  if(isDefined(entity.model)) {
     return entity.model == "t6_wpn_supply_drop_ally";
-  else
+  }
+  else {
     return false;
+  }
 }
 
 isvalidhackertooltarget(ent) {
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return false;
+  }
 
-  if(self isusingremote())
+  if(self isusingremote()) {
     return false;
+  }
 
-  if(self isempjammed())
+  if(self isempjammed()) {
     return false;
+  }
 
-  if(!target_istarget(ent) && !isentityhackableweaponobject(ent) && !isinarray(level.hackertooltargets, ent))
+  if(!target_istarget(ent) && !isentityhackableweaponobject(ent) && !isinarray(level.hackertooltargets, ent)) {
     return false;
+  }
 
   if(isentityhackableweaponobject(ent)) {
-    if(distancesquared(self.origin, ent.origin) > level.hackertoolmaxequipmentdistancesq)
+    if(distancesquared(self.origin, ent.origin) > level.hackertoolmaxequipmentdistancesq) {
       return false;
+    }
   }
 
   return true;
@@ -443,8 +463,9 @@ hackersoftsighttest() {
   passed = 1;
   locklengthms = 0;
 
-  if(isDefined(self.hackertooltarget))
+  if(isDefined(self.hackertooltarget)) {
     locklengthms = self gethacktime(self.hackertooltarget);
+  }
 
   if(self isempjammed() || locklengthms == 0) {
     self clearhackertarget();
@@ -452,8 +473,9 @@ hackersoftsighttest() {
   } else if(iswithinhackertoolreticle(self.hackertooltarget))
     self.hackertoollostsightlinetime = 0;
   else {
-    if(self.hackertoollostsightlinetime == 0)
+    if(self.hackertoollostsightlinetime == 0) {
       self.hackertoollostsightlinetime = gettime();
+    }
 
     timepassed = gettime() - self.hackertoollostsightlinetime;
 
@@ -469,15 +491,19 @@ hackersoftsighttest() {
 registerwithhackertool(radius, hacktimems) {
   self endon("death");
 
-  if(isDefined(radius))
+  if(isDefined(radius)) {
     self.hackertoolradius = radius;
-  else
+  }
+  else {
     self.hackertoolradius = level.hackertoollockonradius;
+  }
 
-  if(isDefined(hacktimems))
+  if(isDefined(hacktimems)) {
     self.hackertooltimems = hacktimems;
-  else
+  }
+  else {
     self.hackertooltimems = level.hackertoolhacktimems;
+  }
 
   self thread watchhackableentitydeath();
   level.hackertooltargets[level.hackertooltargets.size] = self;
@@ -496,8 +522,9 @@ gethackertoolradius(target) {
     radius = target.hackertoolradius;
   } else if(isentityhackableweaponobject(target))
     radius = getweaponobjecthackerradius(target);
-  else if(isDefined(target.hackertoolradius))
+  else if(isDefined(target.hackertoolradius)) {
     radius = target.hackertoolradius;
+  }
   else {
     radius = level.vehiclehackertoolradius;
 
@@ -552,16 +579,20 @@ gethacktime(target) {
   if(isentityhackablecarepackage(target)) {
     assert(isDefined(target.hackertooltimems));
 
-    if(isDefined(target.owner) && target.owner == self)
+    if(isDefined(target.owner) && target.owner == self) {
       time = level.carepackageownerhackertooltimems;
-    else if(isDefined(target.owner) && target.owner.team == self.team)
+    }
+    else if(isDefined(target.owner) && target.owner.team == self.team) {
       time = level.carepackagefriendlyhackertooltimems;
-    else
+    }
+    else {
       time = level.carepackagehackertooltimems;
+    }
   } else if(isentityhackableweaponobject(target))
     time = getweaponobjecthacktimems(target);
-  else if(isDefined(target.hackertooltimems))
+  else if(isDefined(target.hackertooltimems)) {
     time = target.hackertooltimems;
+  }
   else {
     time = level.vehiclehackertooltimems;
 

@@ -34,8 +34,9 @@ func_D2FA() {
     } else {
       self waittill("luinotifyserver", var_01, var_00);
 
-      if(var_01 != "select_ability")
+      if(var_01 != "select_ability") {
         continue;
+      }
     }
 
     if(!scripts\mp\killstreaks\ball_drone::tryuseballdrone(0, "ball_drone_ability_pet")) {
@@ -63,11 +64,13 @@ func_10611() {
 func_10612() {
   var_00 = self getcurrentprimaryweapon();
 
-  if(var_00 == "none")
+  if(var_00 == "none") {
     var_00 = scripts\engine\utility::getlastweapon();
+  }
 
-  if(!self hasweapon(var_00))
+  if(!self hasweapon(var_00)) {
     var_00 = scripts\mp\killstreaks\utility::getfirstprimaryweapon();
+  }
 
   scripts\mp\utility\game::_takeweapon(var_00);
   scripts\mp\utility\game::_giveweapon("iw7_knife_mp", 0);
@@ -78,11 +81,13 @@ func_10612() {
 func_10613() {
   var_00 = self getcurrentprimaryweapon();
 
-  if(var_00 == "none")
+  if(var_00 == "none") {
     var_00 = scripts\engine\utility::getlastweapon();
+  }
 
-  if(!self hasweapon(var_00))
+  if(!self hasweapon(var_00)) {
     var_00 = scripts\mp\killstreaks\utility::getfirstprimaryweapon();
+  }
 
   scripts\mp\utility\game::_takeweapon(var_00);
   scripts\mp\utility\game::_giveweapon("iw7_knife_mp", 0);

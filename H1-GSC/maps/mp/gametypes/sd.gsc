@@ -44,8 +44,9 @@ main() {
   level.gamemodemaydropweapon = maps\mp\gametypes\common_sd_sr::isplayeroutsideofanybombsite;
   level.allowlatecomers = 0;
 
-  if(level.matchrules_damagemultiplier || level.matchrules_vampirism)
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
     level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
+  }
 
   game["dialog"]["gametype"] = "searchdestroy";
   game["dialog"]["offense_obj"] = "obj_destroy";
@@ -79,8 +80,9 @@ initializematchrules() {
 }
 
 onstartgametype() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     var_0 = game["attackers"];
@@ -127,8 +129,9 @@ initspawns() {
 getspawnpoint() {
   var_0 = "mp_sd_spawn_defender";
 
-  if(self.pers["team"] == game["attackers"])
+  if(self.pers["team"] == game["attackers"]) {
     var_0 = "mp_sd_spawn_attacker";
+  }
 
   var_1 = maps\mp\gametypes\_spawnlogic::getbeststartspawn(var_0);
   maps\mp\gametypes\_spawnlogic::recon_set_spawnpoint(var_1);
@@ -149,21 +152,25 @@ onspawnplayer() {
   }
 
   if(isplayer(self) && !var_0) {
-    if(level.multibomb && self.pers["team"] == game["attackers"])
+    if(level.multibomb && self.pers["team"] == game["attackers"]) {
       self setclientomnvar("ui_carrying_bomb", 1);
-    else
+    }
+    else {
       self setclientomnvar("ui_carrying_bomb", 0);
+    }
   }
 
   maps\mp\_utility::setextrascore0(0);
 
-  if(isDefined(self.pers["plants"]))
+  if(isDefined(self.pers["plants"])) {
     maps\mp\_utility::setextrascore0(self.pers["plants"]);
+  }
 
   maps\mp\_utility::setextrascore1(0);
 
-  if(isDefined(self.pers["defuses"]))
+  if(isDefined(self.pers["defuses"])) {
     maps\mp\_utility::setextrascore1(self.pers["defuses"]);
+  }
 
   self.isrespawningwithbombcarrierclass = undefined;
   level notify("spawned_player");
@@ -171,8 +178,9 @@ onspawnplayer() {
 }
 
 onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isplayer(self))
+  if(isplayer(self)) {
     self setclientomnvar("ui_carrying_bomb", 0);
+  }
 
   thread maps\mp\gametypes\common_sd_sr::checkallowspectating();
 }

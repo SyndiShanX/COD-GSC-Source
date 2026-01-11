@@ -155,10 +155,12 @@ setDoubleLoad() {
         } else {
           self setWeaponAmmoClip(weapon, ammoInClip + ammoReserves);
 
-          if(ammoReserves - difference > 0)
+          if(ammoReserves - difference > 0) {
             self setWeaponAmmoStock(weapon, (ammoReserves - difference));
-          else
+          }
+          else {
             self setWeaponAmmoStock(weapon, 0);
+          }
         }
       }
     }
@@ -171,10 +173,12 @@ unsetDoubleLoad() {
 }
 
 setMarksman(power) {
-  if(!isDefined(power))
+  if(!isDefined(power)) {
     power = 10;
-  else
+  }
+  else {
     power = Int(power) * 2;
+  }
 
   self setRecoilScale(power);
   self.recoilScale = power;
@@ -230,15 +234,18 @@ unsetRShieldScrambler() {
 }
 
 setStunResistance(power) {
-  if(!isDefined(power))
+  if(!isDefined(power)) {
     power = 10;
+  }
 
   power = Int(power);
 
-  if(power == 10)
+  if(power == 10) {
     self.stunScaler = 0;
-  else
+  }
+  else {
     self.stunScaler = power / 10;
+  }
 }
 
 unsetStunResistance() {
@@ -502,12 +509,15 @@ setCombatSpeedScalar() {
   if(isDefined(self.isJuggernaut) && self.isJuggernaut) {
     return;
   }
-  if(self.weaponSpeed <= .8)
+  if(self.weaponSpeed <= .8) {
     self.combatSpeedScalar = 1.4;
-  else if(self.weaponSpeed <= .9)
+  }
+  else if(self.weaponSpeed <= .9) {
     self.combatSpeedScalar = 1.3;
-  else
+  }
+  else {
     self.combatSpeedScalar = 1.2;
+  }
 
   self maps\mp\gametypes\_weapons::updateMoveSpeedScale();
 }
@@ -557,8 +567,9 @@ setDelayMine() {}
 unsetDelayMine() {}
 
 setLocalJammer() {
-  if(!self isEMPed())
+  if(!self isEMPed()) {
     self MakeScrambler();
+  }
 }
 
 unsetLocalJammer() {
@@ -664,14 +675,17 @@ oneManArmyWeaponChangeTracker() {
 }
 
 isOneManArmyMenu(menu) {
-  if(menu == game["menu_onemanarmy"])
+  if(menu == game["menu_onemanarmy"]) {
     return true;
+  }
 
-  if(isDefined(game["menu_onemanarmy_defaults_splitscreen"]) && menu == game["menu_onemanarmy_defaults_splitscreen"])
+  if(isDefined(game["menu_onemanarmy_defaults_splitscreen"]) && menu == game["menu_onemanarmy_defaults_splitscreen"]) {
     return true;
+  }
 
-  if(isDefined(game["menu_onemanarmy_custom_splitscreen"]) && menu == game["menu_onemanarmy_custom_splitscreen"])
+  if(isDefined(game["menu_onemanarmy_custom_splitscreen"]) && menu == game["menu_onemanarmy_custom_splitscreen"]) {
     return true;
+  }
 
   return false;
 }
@@ -753,8 +767,9 @@ giveOneManArmyClass(className) {
 
   self maps\mp\gametypes\_class::giveLoadout(self.pers["team"], className);
 
-  if(isDefined(self.carryFlag))
+  if(isDefined(self.carryFlag)) {
     self attach(self.carryFlag, "J_spine4", true);
+  }
 
   self notify("changed_kit");
   level notify("changed_kit");
@@ -768,8 +783,9 @@ omaUseBar(duration) {
   useBarText setText(&"MPUI_CHANGING_KIT");
 
   useBar updateBar(0, 1 / duration);
-  for(waitedTime = 0; waitedTime < duration && isAlive(self) && !level.gameEnded; waitedTime += 0.05)
+  for(waitedTime = 0; waitedTime < duration && isAlive(self) && !level.gameEnded; waitedTime += 0.05) {
     wait(0.05);
+  }
 
   useBar destroyElem();
   useBarText destroyElem();
@@ -802,8 +818,9 @@ unsetTacticalInsertion() {
 clearPreviousTISpawnpoint() {
   self waittill_any("disconnect", "joined_team", "joined_spectators");
 
-  if(isDefined(self.setSpawnpoint))
+  if(isDefined(self.setSpawnpoint)) {
     self deleteTI(self.setSpawnpoint);
+  }
 }
 
 updateTISpawnPosition() {
@@ -813,23 +830,27 @@ updateTISpawnPosition() {
   self endon("end_monitorTIUse");
 
   while(isReallyAlive(self)) {
-    if(self isValidTISpawnPosition())
+    if(self isValidTISpawnPosition()) {
       self.TISpawnPosition = self.origin;
+    }
 
     wait(0.05);
   }
 }
 
 isValidTISpawnPosition() {
-  if(Canspawn(self.origin) && self IsOnGround())
+  if(Canspawn(self.origin) && self IsOnGround()) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 TI_overrideMovingPlatformDeath(data) {
-  if(IsReallyAlive(data.owner))
+  if(IsReallyAlive(data.owner)) {
     data.owner deleteTI(self);
+  }
 }
 
 monitorTIUse() {
@@ -847,8 +868,9 @@ monitorTIUse() {
     if(weapName != "flare_mp") {
       continue;
     }
-    if(isDefined(self.setSpawnPoint))
+    if(isDefined(self.setSpawnPoint)) {
       self deleteTI(self.setSpawnPoint);
+    }
 
     if(!isDefined(self.TISpawnPosition)) {
       continue;
@@ -884,10 +906,12 @@ monitorTIUse() {
 CONST_TI_FX_TAG = "tag_fire_fx";
 GlowStickSetupAndWaitForDeath(owner) {
   self setModel(level.spawnGlowModel["enemy"]);
-  if(level.teamBased)
+  if(level.teamBased) {
     self maps\mp\_entityheadIcons::setTeamHeadIcon(self.team, (0, 0, 20));
-  else
+  }
+  else {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(owner, (0, 0, 20));
+  }
 
   self thread GlowStickDamageListener(owner);
   self thread GlowStickEnemyUseListener(owner);
@@ -948,8 +972,9 @@ GlowStickTeamUpdater(enemyStick, friendlyStick, owner) {
 
 deleteOnDeath(ent) {
   self waittill("death");
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 GlowStickDamageListener(owner) {
@@ -989,8 +1014,9 @@ GlowStickUseListener(owner) {
 
     player playSound("tactical_insert_flare_pu");
 
-    if(!player isJuggernaut())
+    if(!player isJuggernaut()) {
       player thread setTacticalInsertion();
+    }
 
     player thread deleteTI(self);
   }
@@ -1013,8 +1039,9 @@ glowStickWaitForOwnerDisconnect(owner) {
 }
 
 deleteTI(TI) {
-  if(isDefined(TI.enemyTrigger))
+  if(isDefined(TI.enemyTrigger)) {
     TI.enemyTrigger Delete();
+  }
 
   spot = TI.origin;
   spotAngles = TI.angles;
@@ -1027,8 +1054,9 @@ deleteTI(TI) {
   dummyGlowStick setModel(level.spawnGlowModel["friendly"]);
 
   dummyGlowStick setContents(0);
-  if(isDefined(parent))
+  if(isDefined(parent)) {
     dummyGlowStick LinkTo(parent);
+  }
 
   thread dummyGlowStickDelete(dummyGlowStick);
 }
@@ -1053,8 +1081,9 @@ GlowStickEnemyUseListener(owner) {
     player notify("destroyed_insertion", owner);
     player notify("destroyed_equipment");
 
-    if(isDefined(owner) && player != owner)
+    if(isDefined(owner) && player != owner) {
       owner thread leaderDialogOnPlayer("ti_destroyed", undefined, undefined, self.origin);
+    }
 
     player thread deleteTI(self);
   }
@@ -1291,8 +1320,9 @@ setGamblerInternal() {
   abilityWeight = 0;
   loadoutPerks = undefined;
 
-  if(isAI(self))
+  if(isAI(self)) {
     loadoutPerks = self.pers["loadoutPerks"];
+  }
 
   if(!isDefined(level.perkNamesForGambler)) {
     level.perkNamesForGambler = [];
@@ -1319,8 +1349,9 @@ setGamblerInternal() {
   isGamblerCommonLoadout = self gamblerCommonChecker();
   isGamblerDefaultLoadout = false;
 
-  if(level.gameType == "infect")
+  if(level.gameType == "infect") {
     isGamblerCommonLoadout = false;
+  }
 
   if(isDefined(self.teamName)) {
     isGamblerDefaultLoadout = getMatchRulesData("defaultClasses", self.teamName, self.class_num, "class", "abilitiesPicked", 6, 0);
@@ -1345,13 +1376,15 @@ setGamblerInternal() {
         continue;
       }
       if(isDefined(isGamblerCommonLoadout) && !isGamblerCommonLoadout && !isGamblerDefaultLoadout) {
-        if(abilityRef == "specialty_extraammo" || abilityRef == "specialty_extra_equipment" || abilityRef == "specialty_extra_deadly")
+        if(abilityRef == "specialty_extraammo" || abilityRef == "specialty_extra_equipment" || abilityRef == "specialty_extra_deadly") {
           continue;
+        }
       }
 
       if(self.streakType == "support") {
-        if(abilityRef == "specialty_hardline")
+        if(abilityRef == "specialty_hardline") {
           continue;
+        }
       }
 
       if(isAI(self) && isDefined(loadoutPerks) && array_contains(loadoutPerks, abilityRef)) {
@@ -1406,12 +1439,14 @@ gamblerCommonChecker() {
   } else {
     itemsToCheck = [];
 
-    if(isDefined(self.pers["loadoutPerks"]))
+    if(isDefined(self.pers["loadoutPerks"])) {
       itemsToCheck = array_combine(itemsToCheck, self.pers["loadoutPerks"]);
+    }
 
     foreach(item in itemsToCheck) {
-      if(getBasePerkName(item) == "specialty_gambler")
+      if(getBasePerkName(item) == "specialty_gambler") {
         return true;
+      }
     }
   }
 
@@ -1421,18 +1456,21 @@ gamblerCommonChecker() {
 perkPickedChecker(perkName, abilityCategoryIndex, abilityIndex) {
   self.perkPickedSpecialist = false;
 
-  if(!isDefined(perkName))
+  if(!isDefined(perkName)) {
     return false;
+  }
 
-  if(perkName == "")
+  if(perkName == "") {
     return false;
+  }
 
   if(!isAI(self)) {
     abilityCategories = maps\mp\gametypes\_class::getNumAbilityCategories();
     abilityPerCategory = maps\mp\gametypes\_class::getNumSubAbility();
 
-    if(self GetCaCPlayerData("loadouts", self.class_num, "abilitiesPicked", abilityCategoryIndex, abilityIndex))
+    if(self GetCaCPlayerData("loadouts", self.class_num, "abilitiesPicked", abilityCategoryIndex, abilityIndex)) {
       return true;
+    }
 
     for(index = 0; index < 3; index++) {
       killstreak = self getCaCPlayerData("loadouts", self.class_num, "specialistStreaks", index);
@@ -1460,20 +1498,24 @@ perkPickedChecker(perkName, abilityCategoryIndex, abilityIndex) {
   } else {
     itemsToCheck = [];
 
-    if(isDefined(self.pers["loadoutPerks"]))
+    if(isDefined(self.pers["loadoutPerks"])) {
       itemsToCheck = array_combine(itemsToCheck, self.pers["loadoutPerks"]);
+    }
 
     foreach(item in itemsToCheck) {
-      if(getBasePerkName(item) == perkName)
+      if(getBasePerkName(item) == perkName) {
         return true;
+      }
     }
 
     itemsToCheck = [];
-    if(isDefined(self.pers["specialistStreaks"]))
+    if(isDefined(self.pers["specialistStreaks"])) {
       itemsToCheck = array_combine(itemsToCheck, self.pers["specialistStreaks"]);
+    }
 
-    if(isDefined(self.pers["specialistBonusStreaks"]))
+    if(isDefined(self.pers["specialistBonusStreaks"])) {
       itemsToCheck = array_combine(itemsToCheck, self.pers["specialistBonusStreaks"]);
+    }
 
     foreach(item in itemsToCheck) {
       if(getBasePerkName(item) == perkName) {
@@ -1492,13 +1534,16 @@ giveGamblerChoice(abilityArray) {
   self endon("unsetGambler");
   level endon("game_ended");
 
-  if(!gameFlag("prematch_done"))
+  if(!gameFlag("prematch_done")) {
     gameFlagWait("prematch_done");
-  else if(gameFlag("prematch_done") && self.streakType != "specialist")
+  }
+  else if(gameFlag("prematch_done") && self.streakType != "specialist") {
     self waittill("giveLoadout");
+  }
 
-  if(!isDefined(self.abilityChosen))
+  if(!isDefined(self.abilityChosen)) {
     self.abilityChosen = false;
+  }
 
   if(!self.abilityChosen) {
     randomAbility = getRandomAbility(abilityArray);
@@ -1508,8 +1553,9 @@ giveGamblerChoice(abilityArray) {
 
   self givePerk(randomAbility.id, false);
 
-  if(randomAbility.id == "specialty_hardline")
+  if(randomAbility.id == "specialty_hardline") {
     self maps\mp\killstreaks\_killstreaks::setStreakCountToNext();
+  }
 
   if(showGambler()) {
     self PlayLocalSound("mp_suitcase_pickup");
@@ -1517,18 +1563,21 @@ giveGamblerChoice(abilityArray) {
     self thread gamblerAnimWatcher();
   }
 
-  if(level.gameType != "infect")
+  if(level.gameType != "infect") {
     self.abilityChosen = true;
+  }
 }
 
 showGambler() {
   showGambler = true;
 
-  if(!level.inGracePeriod && self.abilityChosen)
+  if(!level.inGracePeriod && self.abilityChosen) {
     showGambler = false;
+  }
 
-  if(!allowClassChoice() && level.gameType != "infect")
+  if(!allowClassChoice() && level.gameType != "infect") {
     showGambler = false;
+  }
 
   return showGambler;
 }
@@ -1541,8 +1590,9 @@ gamblerAnimWatcher() {
 
   self waittill("luinotifyserver", channel, value);
 
-  if(channel == "gambler_anim_complete")
+  if(channel == "gambler_anim_complete") {
     self SetClientOmnvar("ui_gambler_show", -1);
+  }
 }
 
 getRandomAbility(abilityArray) {
@@ -1556,8 +1606,9 @@ getRandomAbility(abilityArray) {
   newAbility = undefined;
 
   foreach(ability in weightArray) {
-    if(!ability.weight || ability.id == "specialty_gambler")
+    if(!ability.weight || ability.id == "specialty_gambler") {
       continue;
+    }
     if(ability.weight > randValue) {
       newAbility = ability;
       break;
@@ -1643,8 +1694,9 @@ setTaggerInternal() {
         continue;
       }
       if(isAlive(otherPlayer) && otherplayer.sessionstate == "playing") {
-        if(!isDefined(otherplayer.perkOutlined))
+        if(!isDefined(otherplayer.perkOutlined)) {
           otherplayer.perkOutlined = false;
+        }
 
         if(!otherplayer.perkOutlined) {
           otherplayer.perkOutlined = true;
@@ -1704,8 +1756,9 @@ setPitcherInternal() {
 
     self waittill("grenade_pullback", grenadeName);
 
-    if(grenadeName == "airdrop_marker_mp" || grenadeName == "killstreak_uplink_mp" || grenadeName == "deployable_vest_marker_mp" || grenadeName == "deployable_weapon_crate_marker_mp" || grenadeName == "airdrop_juggernaut_mp")
+    if(grenadeName == "airdrop_marker_mp" || grenadeName == "killstreak_uplink_mp" || grenadeName == "deployable_vest_marker_mp" || grenadeName == "deployable_weapon_crate_marker_mp" || grenadeName == "airdrop_juggernaut_mp") {
       self SetGrenadeThrowScale(1);
+    }
 
     self waittill("grenade_fire", grenade, weaponName);
   }
@@ -1822,14 +1875,17 @@ unsetCustomJuiced(death) {
   if(!isDefined(death)) {
     if(self isJuggernaut()) {
       Assert(isDefined(self.juggMoveSpeedScaler));
-      if(isDefined(self.juggMoveSpeedScaler))
+      if(isDefined(self.juggMoveSpeedScaler)) {
         self.moveSpeedScaler = self.juggMoveSpeedScaler;
-      else
+      }
+      else {
         self.moveSpeedScaler = 0.7;
+      }
     } else {
       self.moveSpeedScaler = 1;
-      if(self _hasPerk("specialty_lightweight"))
+      if(self _hasPerk("specialty_lightweight")) {
         self.moveSpeedScaler = lightWeightScalar();
+      }
     }
     Assert(isDefined(self.moveSpeedScaler));
     self maps\mp\gametypes\_weapons::updateMoveSpeedScale();
@@ -1958,20 +2014,24 @@ setDeadeye() {
 }
 
 setDeadeyeInternal() {
-  if(self.critChance < 50)
+  if(self.critChance < 50) {
     self.critChance = (self.deadeyekillCount + 1) * 10;
-  else
+  }
+  else {
     self.critChance = 50;
+  }
 
   chance = randomint(100);
 
-  if(chance <= self.critChance)
+  if(chance <= self.critChance) {
     self givePerk("specialty_moredamage", false);
+  }
 }
 
 unsetDeadeye() {
-  if(self _hasPerk("specialty_moredamage"))
+  if(self _hasPerk("specialty_moredamage")) {
     self _unsetPerk("specialty_moredamage");
+  }
 }
 
 setIncog() {}
@@ -1997,14 +2057,16 @@ setExtraAmmo() {
   self endon("unset_extraammo");
   level endon("game_ended");
 
-  if(self.gettingLoadout)
+  if(self.gettingLoadout) {
     self waittill("giveLoadout");
+  }
 
   playerPrimaries = self getValidExtraAmmoWeapons();
 
   foreach(primary in playerPrimaries) {
-    if(isDefined(primary) && primary != "none")
+    if(isDefined(primary) && primary != "none") {
       self GiveMaxAmmo(primary);
+    }
   }
 }
 
@@ -2018,14 +2080,16 @@ setExtraEquipment() {
   self endon("unset_extraequipment");
   level endon("game_ended");
 
-  if(self.gettingLoadout)
+  if(self.gettingLoadout) {
     self waittill("giveLoadout");
+  }
 
   playerTactical = self.loadoutPerkOffhand;
 
   if(isDefined(playerTactical) && playerTactical != "specialty_null") {
-    if(playerTactical != "specialty_tacticalinsertion")
+    if(playerTactical != "specialty_tacticalinsertion") {
       self SetWeaponAmmoClip(playerTactical, 2);
+    }
   }
 }
 
@@ -2039,13 +2103,15 @@ setExtraDeadly() {
   self endon("unset_extradeadly");
   level endon("game_ended");
 
-  if(self.gettingLoadout)
+  if(self.gettingLoadout) {
     self waittill("giveLoadout");
+  }
 
   playerLethal = self.loadoutPerkEquipment;
 
-  if(isDefined(playerLethal) && playerLethal != "specialty_null")
+  if(isDefined(playerLethal) && playerLethal != "specialty_null") {
     self SetWeaponAmmoClip(playerLethal, 2);
+  }
 }
 
 unsetExtraDeadly() {
@@ -2094,13 +2160,15 @@ unsetStoppingPower() {
 }
 
 setC4Death() {
-  if(!self _hasperk("specialty_pistoldeath"))
+  if(!self _hasperk("specialty_pistoldeath")) {
     self givePerk("specialty_pistoldeath", false);
+  }
 }
 
 unsetC4Death() {
-  if(self _hasperk("specialty_pistoldeath"))
+  if(self _hasperk("specialty_pistoldeath")) {
     self _unsetperk("specialty_pistoldeath");
+  }
 }
 
 setJuiced(waitTime) {
@@ -2143,19 +2211,23 @@ setJuiced(waitTime) {
 
 unsetJuiced(death) {
   if(!isDefined(death)) {
-    if(!is_aliens())
+    if(!is_aliens()) {
       Assert(IsAlive(self));
+    }
 
     if(self isJuggernaut()) {
       Assert(isDefined(self.juggMoveSpeedScaler));
-      if(isDefined(self.juggMoveSpeedScaler))
+      if(isDefined(self.juggMoveSpeedScaler)) {
         self.moveSpeedScaler = self.juggMoveSpeedScaler;
-      else
+      }
+      else {
         self.moveSpeedScaler = 0.7;
+      }
     } else {
       self.moveSpeedScaler = 1;
-      if(self _hasPerk("specialty_lightweight"))
+      if(self _hasPerk("specialty_lightweight")) {
         self.moveSpeedScaler = lightWeightScalar();
+      }
     }
     Assert(isDefined(self.moveSpeedScaler));
     self maps\mp\gametypes\_weapons::updateMoveSpeedScale();
@@ -2238,10 +2310,12 @@ setCombatHigh() {
     iconSize = 32;
   }
 
-  if(isDefined(self.juicedTimer))
+  if(isDefined(self.juicedTimer)) {
     self.juicedTimer Destroy();
-  if(isDefined(self.juicedIcon))
+  }
+  if(isDefined(self.juicedIcon)) {
     self.juicedIcon Destroy();
+  }
 
   self.combatHighOverlay = newClientHudElem(self);
   self.combatHighOverlay.x = 0;
@@ -2328,16 +2402,18 @@ unsetCombatHigh() {
 setLightArmor(optionalArmorValue) {
   self notify("give_light_armor");
 
-  if(isDefined(self.lightArmorHP))
+  if(isDefined(self.lightArmorHP)) {
     unsetLightArmor();
+  }
 
   self thread removeLightArmorOnDeath();
   self thread removeLightArmorOnMatchEnd();
 
   self.lightArmorHP = 150;
 
-  if(isDefined(optionalArmorValue))
+  if(isDefined(optionalArmorValue)) {
     self.lightArmorHP = optionalArmorValue;
+  }
 
   if(IsPlayer(self)) {
     self SetClientOmnvar("ui_light_armor", true);

@@ -90,10 +90,12 @@ springpadbuildable() {
 slipgunbuildable() {
   level thread wait_for_slipgun();
 
-  if(!(isDefined(level.slipgun_as_equipment) && level.slipgun_as_equipment))
+  if(!(isDefined(level.slipgun_as_equipment) && level.slipgun_as_equipment)) {
     persist = 2;
-  else
+  }
+  else {
     persist = 1;
+  }
 
   maps\mp\zombies\_zm_buildables::buildable_trigger_think("slipgun_zm_buildable_trigger", "slipgun_zm", "slipgun_zm", &"ZM_HIGHRISE_GRAB_SLIPGUN", 1, persist);
 }
@@ -148,8 +150,9 @@ wait_for_slipgun() {
 }
 
 keyscreateglint() {
-  if(!isDefined(self.model.glint_fx))
+  if(!isDefined(self.model.glint_fx)) {
     playFXOnTag(level._effect["elevator_glint"], self.model, "tag_origin");
+  }
 }
 
 onspawn_keys() {
@@ -208,18 +211,21 @@ elevator_key_prompt(player) {
   }
 
   if(!isDefined(self.stub.elevator)) {
-    if(isDefined(self.stub.script_noteworthy))
+    if(isDefined(self.stub.script_noteworthy)) {
       error("Cannot locate elevator " + self.stub.script_noteworthy);
-    else
+    }
+    else {
       error("Cannot locate elevator ");
+    }
   } else {
     color = vectorscale((0, 0, 1), 0.7);
     stop = self.stub.floor;
     floor = self.stub.elevator.floors["" + stop].script_location;
     text = "call " + self.stub.script_noteworthy + " to stop " + stop + " floor " + floor + "";
 
-    if(getdvarint(#"_id_B67910B4"))
+    if(getdvarint(#"_id_B67910B4")) {
       print3d(self.stub.origin, text, color, 1, 0.5, 300);
+    }
   }
 
   if(isDefined(self.stub.elevator)) {
@@ -238,8 +244,9 @@ elevator_key_prompt(player) {
 
   can_use = self buildabletrigger_update_prompt(player);
 
-  if(can_use)
+  if(can_use) {
     thread watch_elevator_prompt(player, self);
+  }
 
   return can_use;
 }
@@ -269,14 +276,16 @@ droponelevator(player) {
 
 pickupfromelevator() {
   if(isDefined(self.linked_to_elevator) && self.linked_to_elevator) {
-    if(isDefined(self.model))
+    if(isDefined(self.model)) {
       self.model unlink();
+    }
 
     self.linked_to_elevator = undefined;
   }
 
-  if(isDefined(self.unitrigger))
+  if(isDefined(self.unitrigger)) {
     self.unitrigger.link_parent = undefined;
+  }
 }
 
 onuseplantobject_slipgun(player) {

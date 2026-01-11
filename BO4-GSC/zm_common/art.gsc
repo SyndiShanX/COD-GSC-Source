@@ -239,4 +239,3 @@ dumpsettings() {
     setdvar(#"scr_art_dump", 0);
   }
 }
-

@@ -52,10 +52,12 @@ escalator_move(first_step) {
 
     step show();
 
-    if(next_step != first_step)
+    if(next_step != first_step) {
       step moveto(next_step.true_origin, movespeed);
-    else
+    }
+    else {
       step.origin = first_origin;
+    }
 
     if(next_step == first_step) {
       step hide();
@@ -86,8 +88,9 @@ escalator_move(first_step) {
 
     step.true_origin = next_step.true_origin;
     step = next_step;
-    if(step == first_step)
+    if(step == first_step) {
       return;
+    }
   }
 }
 

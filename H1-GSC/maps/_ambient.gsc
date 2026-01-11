@@ -30,14 +30,17 @@ init() {
   add_zone("tunnel");
   add_zone("underpass");
 
-  if(!isDefined(level.ambient_reverb))
+  if(!isDefined(level.ambient_reverb)) {
     level.ambient_reverb = [];
+  }
 
-  if(!isDefined(level.ambient_eq))
+  if(!isDefined(level.ambient_eq)) {
     level.ambient_eq = [];
+  }
 
-  if(!isDefined(level.fxfireloopmod))
+  if(!isDefined(level.fxfireloopmod)) {
     level.fxfireloopmod = 1;
+  }
 
   level.eq_main_track = 0;
   level.eq_mix_track = 1;
@@ -52,11 +55,13 @@ init() {
 activateambient(var_0) {
   level.ambient = var_0;
 
-  if(level.ambient == "exterior")
+  if(level.ambient == "exterior") {
     var_0 = var_0 + level.ambient_modifier["exterior"];
+  }
 
-  if(level.ambient == "interior")
+  if(level.ambient == "interior") {
     var_0 = var_0 + level.ambient_modifier["interior"];
+  }
 
   ambientplay(level.ambient_track[var_0 + level.ambient_modifier["rain"]], 1);
   thread ambienteventstart(var_0 + level.ambient_modifier["rain"]);
@@ -67,28 +72,33 @@ ambientvolume() {
     self waittill("trigger");
     activateambient("interior");
 
-    while(level.player istouching(self))
+    while(level.player istouching(self)) {
       wait 0.1;
+    }
 
     activateambient("exterior");
   }
 }
 
 ambientdelay(var_0, var_1, var_2) {
-  if(!isDefined(level.ambienteventent))
+  if(!isDefined(level.ambienteventent)) {
     level.ambienteventent[var_0] = spawnStruct();
-  else if(!isDefined(level.ambienteventent[var_0]))
+  }
+  else if(!isDefined(level.ambienteventent[var_0])) {
     level.ambienteventent[var_0] = spawnStruct();
+  }
 
   level.ambienteventent[var_0].min = var_1;
   level.ambienteventent[var_0].range = var_2 - var_1;
 }
 
 ambientevent(var_0, var_1, var_2) {
-  if(!isDefined(level.ambienteventent[var_0].event_alias))
+  if(!isDefined(level.ambienteventent[var_0].event_alias)) {
     var_3 = 0;
-  else
+  }
+  else {
     var_3 = level.ambienteventent[var_0].event_alias.size;
+  }
 
   level.ambienteventent[var_0].event_alias[var_3] = var_1;
   level.ambienteventent[var_0].event_weight[var_3] = var_2;
@@ -101,8 +111,9 @@ ambientreverb(var_0) {
 }
 
 setupeq(var_0, var_1, var_2) {
-  if(!isDefined(level.ambient_eq[var_0]))
+  if(!isDefined(level.ambient_eq[var_0])) {
     level.ambient_eq[var_0] = [];
+  }
 
   level.ambient_eq[var_0][var_1] = var_2;
 }
@@ -160,14 +171,16 @@ start_ambient_event(var_0) {
   var_4 = 0;
   var_5 = 0;
 
-  if(isDefined(level.ambient_reverb[var_0]))
+  if(isDefined(level.ambient_reverb[var_0])) {
     thread ambientreverb(var_0);
+  }
 
   for(;;) {
     wait(var_2 + randomfloat(var_3));
 
-    while(var_5 == var_4)
+    while(var_5 == var_4) {
       var_5 = ambientweight(var_0);
+    }
 
     var_4 = var_5;
     var_1.origin = level.player.origin;
@@ -243,8 +256,9 @@ ambient_trigger() {
   var_9 = var_0[1];
   var_10 = 0.5;
 
-  if(isDefined(self.targetname) && self.targetname == "ambient_exit")
+  if(isDefined(self.targetname) && self.targetname == "ambient_exit") {
     var_10 = 0;
+  }
 
   for(;;) {
     self waittill("trigger", var_2);
@@ -253,20 +267,24 @@ ambient_trigger() {
     while(level.player istouching(self)) {
       var_11 = maps\_utility::get_progress(var_4, var_5, level.player.origin, var_7);
 
-      if(var_11 < 0)
+      if(var_11 < 0) {
         var_11 = 0;
+      }
 
-      if(var_11 > 1)
+      if(var_11 > 1) {
         var_11 = 1;
+      }
 
       set_ambience_blend(var_11, var_8, var_9);
       wait 0.05;
     }
 
-    if(var_11 > var_10)
+    if(var_11 > var_10) {
       var_11 = 1;
-    else
+    }
+    else {
       var_11 = 0;
+    }
 
     set_ambience_blend(var_11, var_8, var_9);
   }
@@ -305,19 +323,23 @@ ambient_trigger_sets_ambience_levels(var_0, var_1, var_2, var_3, var_4) {
 }
 
 set_ambience_blend(var_0, var_1, var_2) {
-  if(level.eq_track[level.eq_main_track] != var_2)
+  if(level.eq_track[level.eq_main_track] != var_2) {
     setup_eq_channels(var_2, level.eq_main_track);
+  }
 
-  if(level.eq_track[level.eq_mix_track] != var_1)
+  if(level.eq_track[level.eq_mix_track] != var_1) {
     setup_eq_channels(var_1, level.eq_mix_track);
+  }
 
   level.player seteqlerp(var_0, level.eq_main_track);
 
-  if(var_0 == 1 || var_0 == 0)
+  if(var_0 == 1 || var_0 == 0) {
     level.nextmsg = 0;
+  }
 
-  if(!isDefined(level.nextmsg))
+  if(!isDefined(level.nextmsg)) {
     level.nextmsg = 0;
+  }
 
   if(gettime() < level.nextmsg) {
     return;
@@ -326,11 +348,13 @@ set_ambience_blend(var_0, var_1, var_2) {
 }
 
 set_ambience_single(var_0) {
-  if(isDefined(level.ambienteventent[var_0]))
+  if(isDefined(level.ambienteventent[var_0])) {
     thread start_ambient_event(var_0);
+  }
 
-  if(level.eq_track[level.eq_main_track] != var_0)
+  if(level.eq_track[level.eq_main_track] != var_0) {
     setup_eq_channels(var_0, level.eq_main_track);
+  }
 
   level.player seteqlerp(1, level.eq_main_track);
 }

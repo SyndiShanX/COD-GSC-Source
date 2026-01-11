@@ -24,8 +24,9 @@ matchstarttimerwaitforplayers_stub() {
     level.prematchperiodend > 0 &&
     !isDefined(level.hostmigrationtimer))
     maps\mp\gametypes\_gamelogic::matchstarttimer(level.prematchperiodend);
-  else
+  else {
     setomnvar("ui_match_countdown_title", 0);
+  }
 
   // after match start timer, unblock changes to speed scale
   foreach(player in level.players) {
@@ -163,6 +164,7 @@ prematchperiod_stub() {
     }
   }
 
-  if(game["state"] != "playing")
+  if(game["state"] != "playing") {
     return;
+  }
 }

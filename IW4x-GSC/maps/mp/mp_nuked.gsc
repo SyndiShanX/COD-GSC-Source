@@ -40,10 +40,12 @@ createSpawnpoint(classname, origin, yaw) {
   spawnpoint = spawn("script_origin", origin);
   spawnpoint.angles = (0, yaw, 0);
 
-  if(!isDefined(level.extraspawnpoints))
+  if(!isDefined(level.extraspawnpoints)) {
     level.extraspawnpoints = [];
-  if(!isDefined(level.extraspawnpoints[classname]))
+  }
+  if(!isDefined(level.extraspawnpoints[classname])) {
     level.extraspawnpoints[classname] = [];
+  }
   level.extraspawnpoints[classname][level.extraspawnpoints[classname].size] = spawnpoint;
 }
 

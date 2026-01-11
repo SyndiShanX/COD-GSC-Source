@@ -30,8 +30,9 @@ init() {
 logKillstreakEvent(event, position) {
   assertEx(isPlayer(self), "self is not a player: " + self.code_classname);
 
-  if(!matchMakingGame() || !canLogClient(self) || !canLogKillstreak())
+  if(!matchMakingGame() || !canLogClient(self) || !canLogKillstreak()) {
     return;
+  }
 
   eventId = getMatchData("killstreakCount");
   setMatchData("killstreakCount", eventId + 1);
@@ -47,8 +48,9 @@ logKillstreakEvent(event, position) {
 logGameEvent(event, position) {
   assertEx(isPlayer(self), "self is not a player: " + self.code_classname);
 
-  if(!matchMakingGame() || !canLogClient(self) || !canLogEvent())
+  if(!matchMakingGame() || !canLogClient(self) || !canLogEvent()) {
     return;
+  }
 
   eventId = getMatchData("eventCount");
   setMatchData("eventCount", eventId + 1);
@@ -62,22 +64,25 @@ logGameEvent(event, position) {
 }
 
 logKillEvent(lifeId, eventRef) {
-  if(!matchMakingGame() || !canLogLife(lifeId))
+  if(!matchMakingGame() || !canLogLife(lifeId)) {
     return;
+  }
 
   setMatchData("lives", lifeId, "modifiers", eventRef, true);
 }
 
 logMultiKill(lifeId, multikillCount) {
-  if(!matchMakingGame() || !canLogLife(lifeId))
+  if(!matchMakingGame() || !canLogLife(lifeId)) {
     return;
+  }
 
   setMatchData("lives", lifeId, "multikill", multikillCount);
 }
 
 logPlayerLife(lifeId) {
-  if(!matchMakingGame() || !canLogClient(self) || !canLogLife(lifeId))
+  if(!matchMakingGame() || !canLogClient(self) || !canLogLife(lifeId)) {
     return;
+  }
 
   setMatchData("lives", lifeId, "player", self.clientid);
   setMatchData("lives", lifeId, "spawnPos", 0, int(self.spawnPos[0]));
@@ -92,8 +97,9 @@ logPlayerLife(lifeId) {
 }
 
 logLoadout(lifeId) {
-  if(!matchMakingGame() || !canLogClient(self) || !canLogLife(lifeId))
+  if(!matchMakingGame() || !canLogClient(self) || !canLogLife(lifeId)) {
     return;
+  }
 
   class = self.curClass;
 
@@ -167,11 +173,13 @@ logLoadout(lifeId) {
 }
 
 logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon, sHitLoc) {
-  if(!matchMakingGame() || !canLogClient(self) || (isPlayer(attacker) && !canLogClient(attacker)) || !canLogLife(lifeId))
+  if(!matchMakingGame() || !canLogClient(self) || (isPlayer(attacker) && !canLogClient(attacker)) || !canLogLife(lifeId)) {
     return;
+  }
 
-  if(lifeId >= level.MaxLives)
+  if(lifeId >= level.MaxLives) {
     return;
+  }
 
   if(sWeapon == "none") {
     sWeaponType = "none";
@@ -198,8 +206,9 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
       PrintLn("iDamage: ", iDamage);
       PrintLn("sMeansOfDeath: ", sMeansOfDeath);
 
-      if(isDefined(sWeaponOriginal))
+      if(isDefined(sWeaponOriginal)) {
         PrintLn("sWeaponOriginal: ", sWeaponOriginal);
+      }
 
       PrintLn("sWeapon: ", sWeapon);
       PrintLn("sPrimaryWeapon: ", sPrimaryWeapon);
@@ -223,11 +232,13 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
 
     setMatchData("lives", lifeId, "weapon", weaponTokens[0]);
 
-    if(isDefined(weaponTokens[1]))
+    if(isDefined(weaponTokens[1])) {
       setMatchData("lives", lifeId, "attachments", 0, weaponTokens[1]);
+    }
 
-    if(isDefined(weaponTokens[2]))
+    if(isDefined(weaponTokens[2])) {
       setMatchData("lives", lifeId, "attachments", 1, weaponTokens[2]);
+    }
   } else if(sWeaponType == "item" || sWeaponType == "offhand") {
     weaponName = strip_suffix(sWeapon, "_mp");
     setMatchData("lives", lifeId, "weapon", weaponName);
@@ -235,8 +246,9 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
     setMatchData("lives", lifeId, "weapon", sWeapon);
   }
 
-  if(isKillstreakWeapon(sWeapon))
+  if(isKillstreakWeapon(sWeapon)) {
     setMatchData("lives", lifeId, "modifiers", "killstreak", true);
+  }
 
   setMatchData("lives", lifeId, "mod", sMeansOfDeath);
   if(isPlayer(attacker)) {
@@ -268,8 +280,9 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
 }
 
 logPlayerData() {
-  if(!matchMakingGame() || !canLogClient(self))
+  if(!matchMakingGame() || !canLogClient(self)) {
     return;
+  }
 
   setMatchData("players", self.clientid, "score", self getPersStat("score"));
   setMatchData("players", self.clientid, "assists", self getPersStat("assists"));
@@ -278,21 +291,24 @@ logPlayerData() {
 
 // log the lives of players who are still alive at match end.
 gameEndListener() {
-  if(!matchMakingGame())
+  if(!matchMakingGame()) {
     return;
+  }
 
   level waittill("game_ended");
 
   setMatchData("gameLength", int(getTimePassed()));
 
   foreach(player in level.players) {
-    if(player.team != "allies" && player.team != "axis")
+    if(player.team != "allies" && player.team != "axis") {
       continue;
+    }
 
     player logPlayerData();
 
-    if(!isAlive(player))
+    if(!isAlive(player)) {
       continue;
+    }
 
     lifeId = getNextLifeId();
     player logPlayerLife(lifeId);

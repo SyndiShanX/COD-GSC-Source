@@ -13,10 +13,12 @@ init() {
   precacheString(&"MP_INTERMISSION");
   precacheString(&"MP_SWITCHING_SIDES_CAPS");
   precacheString(&"MP_FRIENDLY_FIRE_WILL_NOT");
-  if(level.splitScreen)
+  if(level.splitScreen) {
     precacheString(&"MP_ENDED_GAME");
-  else
+  }
+  else {
     precacheString(&"MP_HOST_ENDED_GAME");
+  }
 }
 SetupCallbacks() {
   level.autoassign = ::menuAutoAssign;
@@ -92,16 +94,21 @@ freeGameplayHudElems() {
     }
   }
   self notify("perks_hidden");
-  if(isDefined(self.lowerMessage))
+  if(isDefined(self.lowerMessage)) {
     self.lowerMessage destroyElem();
-  if(isDefined(self.lowerTimer))
+  }
+  if(isDefined(self.lowerTimer)) {
     self.lowerTimer destroyElem();
-  if(isDefined(self.proxBar))
+  }
+  if(isDefined(self.proxBar)) {
     self.proxBar destroyElem();
-  if(isDefined(self.proxBarText))
+  }
+  if(isDefined(self.proxBarText)) {
     self.proxBarText destroyElem();
-  if(isDefined(self.carryIcon))
+  }
+  if(isDefined(self.carryIcon)) {
     self.carryIcon destroyElem();
+  }
 }
 menuAutoAssign() {
   teams[0] = "allies";
@@ -131,8 +138,9 @@ menuAutoAssign() {
       if(playerCounts["allies"] == playerCounts["axis"]) {
         if(!level.splitscreen && self IsSplitScreen()) {
           assignment = self getSplitscreenTeam();
-          if(assignment == "")
+          if(assignment == "") {
             assignment = pickTeamFromScores(teams);
+          }
         } else {
           assignment = pickTeamFromScores(teams);
         }
@@ -160,14 +168,16 @@ menuAutoAssign() {
   self.pers["weapon"] = undefined;
   self.pers["savedmodel"] = undefined;
   self updateObjectiveText();
-  if(level.teamBased)
+  if(level.teamBased) {
     self.sessionteam = assignment;
+  }
   else {
     self.sessionteam = "none";
     self.ffateam = assignment;
   }
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     self.statusicon = "hud_status_dead";
+  }
   self notify("joined_team");
   level notify("joined_team");
   self notify("end_respawn");
@@ -197,25 +207,32 @@ menuAutoAssign() {
 }
 pickTeamFromScores(teams) {
   assignment = "allies";
-  if(getTeamScore("allies") == getTeamScore("axis"))
+  if(getTeamScore("allies") == getTeamScore("axis")) {
     assignment = teams[randomInt(2)];
-  else if(getTeamScore("allies") < getTeamScore("axis"))
+  }
+  else if(getTeamScore("allies") < getTeamScore("axis")) {
     assignment = "allies";
-  else
+  }
+  else {
     assignment = "axis";
+  }
   return assignment;
 }
 getSplitscreenTeam() {
   for(index = 0; index < level.players.size; index++) {
-    if(!isDefined(level.players[index]))
+    if(!isDefined(level.players[index])) {
       continue;
-    if(level.players[index] == self)
+    }
+    if(level.players[index] == self) {
       continue;
-    if(!(self IsPlayerOnSameMachine(level.players[index])))
+    }
+    if(!(self IsPlayerOnSameMachine(level.players[index]))) {
       continue;
+    }
     team = level.players[index].sessionteam;
-    if(team != "spectator")
+    if(team != "spectator") {
       return team;
+    }
   }
   return "";
 }
@@ -225,10 +242,12 @@ updateObjectiveText() {
     return;
   }
   if(level.scorelimit > 0) {
-    if(level.splitScreen)
+    if(level.splitScreen) {
       self setclientdvar("cg_objectiveText", getObjectiveScoreText(self.pers["team"]));
-    else
+    }
+    else {
       self setclientdvar("cg_objectiveText", getObjectiveScoreText(self.pers["team"]), level.scorelimit);
+    }
   } else {
     self setclientdvar("cg_objectiveText", getObjectiveText(self.pers["team"]));
   }
@@ -243,8 +262,9 @@ beginClassChoice(forceNewChoice) {
   if(level.oldschool || (GetDvarInt(#"scr_disable_cac") == 1)) {
     self.pers["class"] = level.defaultClass;
     self.class = level.defaultClass;
-    if(self.sessionstate != "playing" && game["state"] == "playing")
+    if(self.sessionstate != "playing" && game["state"] == "playing") {
       self thread[[level.spawnClient]]();
+    }
     level thread maps\mp\gametypes\_globallogic::updateTeamStatus();
     self thread maps\mp\gametypes\_spectating::setSpectatePermissionsForMachine();
     return;
@@ -276,8 +296,9 @@ menuAllies() {
     return;
   }
   if(self.pers["team"] != "allies") {
-    if(level.inGracePeriod && (!isDefined(self.hasDoneCombat) || !self.hasDoneCombat))
+    if(level.inGracePeriod && (!isDefined(self.hasDoneCombat) || !self.hasDoneCombat)) {
       self.hasSpawned = false;
+    }
     if(self.sessionstate == "playing") {
       self.switching_teams = true;
       self.joining_team = "allies";
@@ -291,8 +312,9 @@ menuAllies() {
     self.pers["weapon"] = undefined;
     self.pers["savedmodel"] = undefined;
     self updateObjectiveText();
-    if(level.teamBased)
+    if(level.teamBased) {
       self.sessionteam = "allies";
+    }
     else {
       self.sessionteam = "none";
       self.ffateam = "allies";
@@ -310,8 +332,9 @@ menuAxis() {
     return;
   }
   if(self.pers["team"] != "axis") {
-    if(level.inGracePeriod && (!isDefined(self.hasDoneCombat) || !self.hasDoneCombat))
+    if(level.inGracePeriod && (!isDefined(self.hasDoneCombat) || !self.hasDoneCombat)) {
       self.hasSpawned = false;
+    }
     if(self.sessionstate == "playing") {
       self.switching_teams = true;
       self.joining_team = "axis";
@@ -325,8 +348,9 @@ menuAxis() {
     self.pers["weapon"] = undefined;
     self.pers["savedmodel"] = undefined;
     self updateObjectiveText();
-    if(level.teamBased)
+    if(level.teamBased) {
       self.sessionteam = "axis";
+    }
     else {
       self.sessionteam = "none";
       self.ffateam = "axis";
@@ -355,8 +379,9 @@ menuSpectator() {
     self.pers["savedmodel"] = undefined;
     self updateObjectiveText();
     self.sessionteam = "spectator";
-    if(!level.teamBased)
+    if(!level.teamBased) {
       self.ffateam = "spectator";
+    }
     [[level.spawnSpectator]]();
     self setclientdvar("g_scriptMainMenu", game["menu_team"]);
     self notify("joined_spectators");
@@ -365,8 +390,9 @@ menuSpectator() {
 menuClass(response) {
   self closeMenus();
   assert(!level.oldschool);
-  if(!isDefined(self.pers["team"]) || (self.pers["team"] != "allies" && self.pers["team"] != "axis"))
+  if(!isDefined(self.pers["team"]) || (self.pers["team"] != "allies" && self.pers["team"] != "axis")) {
     return;
+  }
   class = self maps\mp\gametypes\_class::getClassChoice(response);
   primary = self maps\mp\gametypes\_class::getWeaponChoice(response);
   if(class == "restricted") {
@@ -378,15 +404,17 @@ menuClass(response) {
     return;
   self notify("changed_class");
   self maps\mp\gametypes\_gametype_variants::OnPlayerClassChange();
-  if(isPregame())
+  if(isPregame()) {
     self maps\mp\gametypes\_pregame::OnPlayerClassChange(response);
+  }
   if(self.sessionstate == "playing") {
     self.pers["class"] = class;
     self.class = class;
     self.pers["primary"] = primary;
     self.pers["weapon"] = undefined;
-    if(game["state"] == "postgame")
+    if(game["state"] == "postgame") {
       return;
+    }
     supplyStationClassChange = isDefined(self.usingSupplyStation) && self.usingSupplyStation;
     self.usingSupplyStation = false;
     if((level.inGracePeriod && !self.hasDoneCombat) || supplyStationClassChange) {
@@ -404,16 +432,20 @@ menuClass(response) {
     self.class = class;
     self.pers["primary"] = primary;
     self.pers["weapon"] = undefined;
-    if(game["state"] == "postgame")
+    if(game["state"] == "postgame") {
       return;
-    if(self.sessionstate != "spectator") {
-      if(self IsInVehicle())
-        return;
-      if(self IsRemoteControlling())
-        return;
     }
-    if(game["state"] == "playing")
+    if(self.sessionstate != "spectator") {
+      if(self IsInVehicle()) {
+        return;
+      }
+      if(self IsRemoteControlling()) {
+        return;
+      }
+    }
+    if(game["state"] == "playing") {
       self thread[[level.spawnClient]]();
+    }
   }
   level thread maps\mp\gametypes\_globallogic::updateTeamStatus();
   self thread maps\mp\gametypes\_spectating::setSpectatePermissionsForMachine();
@@ -446,4 +478,3 @@ getObjectiveScoreText(team) {
 getObjectiveHintText(team) {
   return game["strings"]["objective_hint_" + team];
 }
-

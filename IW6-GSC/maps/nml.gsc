@@ -136,11 +136,13 @@ main() {
   maps\_load::main();
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 6);
 
-  if(level.xenon)
+  if(level.xenon) {
     setsaveddvar("r_texFilterProbeBilinear", 1);
+  }
 
-  if(!maps\_utility::is_gen4())
+  if(!maps\_utility::is_gen4()) {
     setsaveddvar("sm_sunshadowscale", 0.65);
+  }
 
   if(maps\_utility::is_gen4()) {}
 
@@ -220,8 +222,9 @@ main() {
   if(isDefined(var_0)) {
     for(var_1 = var_0; isDefined(var_1.target); var_1 = var_1 common_scripts\utility::get_target_ent()) {}
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1.origin = (4028.6, -170.6, -191.7);
+    }
   }
 
   setdvar("jimmy", 0);
@@ -247,8 +250,9 @@ main() {
   animscripts\utility::setnotetrackeffect(var_2, var_3, "rock", loadfx("fx/impacts/bodyfall_default_large_runner"), var_4, var_5);
   var_6 = ["brick", "carpet", "foliage", "grass", "gravel", "ice", "metal", "painted metal", "mud", "plaster", "sand", "snow", "slush", "water", "wood", "ceramic"];
 
-  foreach(var_8 in var_6)
+  foreach(var_8 in var_6) {
   animscripts\utility::setnotetracksound(var_2, var_8, var_4, var_5);
+  }
 
   var_2 = "dog bodyfall small";
   var_3 = "J_Spine4";
@@ -259,8 +263,9 @@ main() {
   animscripts\utility::setnotetrackeffect(var_2, var_3, "asphalt", loadfx("fx/impacts/bodyfall_default_large_runner"), var_4, var_5);
   animscripts\utility::setnotetrackeffect(var_2, var_3, "rock", loadfx("fx/impacts/bodyfall_default_large_runner"), var_4, var_5);
 
-  foreach(var_8 in var_6)
+  foreach(var_8 in var_6) {
   animscripts\utility::setnotetracksound(var_2, var_8, var_4, var_5);
+  }
 
   thread track_riley_kills();
 }
@@ -512,8 +517,9 @@ dog_hunt2_delete() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(distance(var_2.origin, level.dog.origin) < 300)
+    if(distance(var_2.origin, level.dog.origin) < 300) {
       var_2 delete();
+    }
   }
 
   level.dog.ignoreme = 0;

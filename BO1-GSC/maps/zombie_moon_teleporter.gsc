@@ -80,8 +80,9 @@ valid_players_teleport() {
   players = get_players();
   valid_players = 0;
   for(i = 0; i < players.size; i++) {
-    if(is_player_teleport_valid(players[i]))
+    if(is_player_teleport_valid(players[i])) {
       valid_players += 1;
+    }
   }
   return valid_players;
 }

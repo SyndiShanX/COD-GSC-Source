@@ -13,8 +13,9 @@ main() {
 
   for(;;) {
     if(isDefined(level.ignore_stop_func)) {
-      if(self[[level.ignore_stop_func]]())
+      if(self[[level.ignore_stop_func]]()) {
         return;
+      }
     }
 
     if(!self hasanimstatefromasd("zm_idle")) {

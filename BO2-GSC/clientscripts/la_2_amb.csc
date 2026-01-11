@@ -176,15 +176,17 @@ cleanup_ground_emitters() {
   ground_battles = getstructarray("amb_fadeup_disaster_sirens", "targetname");
 
   if(isDefined(ground_battles)) {
-    for(i = 0; i < ground_battles.size; i++)
+    for(i = 0; i < ground_battles.size; i++) {
       soundstoploopemitter(ground_battles[i].script_sound, ground_battles[i].origin);
+    }
   }
 
   amb_ground_battle_loopers = getstructarray("amb_fadeup_battle", "targetname");
 
   if(isDefined(amb_ground_battle_loopers)) {
-    for(i = 0; i < amb_ground_battle_loopers.size; i++)
+    for(i = 0; i < amb_ground_battle_loopers.size; i++) {
       soundstoploopemitter(amb_ground_battle_loopers[i].script_sound, amb_ground_battle_loopers[i].origin);
+    }
   }
 }
 

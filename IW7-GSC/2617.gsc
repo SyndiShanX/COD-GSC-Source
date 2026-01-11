@@ -50,10 +50,12 @@ elevator_update_global_dvars() {
     level.elevator_aggressive_call = elevator_get_dvar_int("scr_elevator_aggressive_call", "0");
     level.elevator_debug = elevator_get_dvar_int("debug_elevator", "0");
 
-    if(scripts\engine\utility::issp())
+    if(scripts\engine\utility::issp()) {
       level.elevator_motion_detection = elevator_get_dvar_int("scr_elevator_motion_detection", "0");
-    else
+    }
+    else {
       level.elevator_motion_detection = elevator_get_dvar_int("scr_elevator_motion_detection", "1");
+    }
 
     wait 1;
   }
@@ -64,8 +66,9 @@ elevator_think() {
 }
 
 elevator_call() {
-  foreach(var_01 in level.elevator_callbuttons)
+  foreach(var_01 in level.elevator_callbuttons) {
   var_01 thread monitor_callbutton();
+  }
 }
 
 floor_override(var_00) {
@@ -95,18 +98,21 @@ elevator_fsm(var_00) {
         thread floor_override(var_02);
         waittill_or_timeout("floor_override", level.elevator_waittime);
 
-        if(self.floor_override && isDefined(self.overrider) && isplayer(self.overrider))
+        if(self.floor_override && isDefined(self.overrider) && isplayer(self.overrider)) {
           get_floor(self.overrider);
+        }
 
         self.estate = "[B]";
         continue;
       }
 
       for(;;) {
-        if(self.moveto_floor == get_curfloor())
+        if(self.moveto_floor == get_curfloor()) {
           var_03 = var_02 discrete_waittill("trigger");
-        else
+        }
+        else {
           var_03 = "elevator_called";
+        }
 
         if(isstring(var_03) && var_03 == "elevator_called" && self.moveto_floor != get_curfloor()) {
           self.estate = "[B]";
@@ -211,8 +217,9 @@ monitor_callbutton() {
       }
     }
 
-    if(var_06)
+    if(var_06) {
       self playSound("elev_bell_ding");
+    }
   }
 }
 
@@ -221,8 +228,9 @@ call_elevator(var_00) {
   var_01 = get_housing_inside_trigger();
   var_01 notify("trigger", "elevator_called");
 
-  if(level.elevator_motion_detection)
+  if(level.elevator_motion_detection) {
     var_1.motion_trigger notify("trigger", "elevator_called");
+  }
 }
 
 get_floor(var_00) {
@@ -240,8 +248,9 @@ get_floor(var_00) {
     var_00 waittill("menuresponse", var_03, var_04);
 
     if(var_03 == "elevator_floor_selector") {
-      if(var_04 != "none")
+      if(var_04 != "none") {
         self.moveto_floor = int(var_04);
+      }
 
       break;
     }
@@ -280,8 +289,9 @@ elevator_floor_update() {
 elevator_sound_think() {
   var_00 = get_housing_musak_model();
 
-  if(level.elevator_music && isDefined(var_00))
+  if(level.elevator_music && isDefined(var_00)) {
     var_00 playLoopSound("elev_musak_loop");
+  }
 
   thread listen_for("closing_inner_doors");
   thread listen_for("opening_inner_doors");
@@ -305,19 +315,22 @@ listen_for(var_00) {
     self waittill(var_00);
     var_01 = get_housing_mainframe();
 
-    if(issubstr(var_00, "closing_"))
+    if(issubstr(var_00, "closing_")) {
       var_01 playSound("elev_door_close");
+    }
 
-    if(issubstr(var_00, "opening_"))
+    if(issubstr(var_00, "opening_")) {
       var_01 playSound("elev_door_open");
+    }
 
     if(var_00 == "elevator_moving") {
       var_01 playSound("elev_run_start");
       var_01 playLoopSound("elev_run_loop");
     }
 
-    if(var_00 == "interrupted")
+    if(var_00 == "interrupted") {
       var_01 playSound("elev_door_interupt");
+    }
 
     if(var_00 == "elevator_moved") {
       var_01 stoploopsound("elev_run_loop");
@@ -332,8 +345,9 @@ position_elevators() {
     var_1.moveto_floor = var_01 get_curfloor();
 
     foreach(var_04, var_03 in var_01 get_outer_doorsets()) {
-      if(var_01 get_curfloor() != var_04)
+      if(var_01 get_curfloor() != var_04) {
         var_01 thread close_outer_doors(var_04);
+      }
     }
   }
 }
@@ -546,20 +560,23 @@ build_elevators() {
     var_05 delete();
   }
 
-  foreach(var_17 in var_02)
+  foreach(var_17 in var_02) {
   var_17 delete();
+  }
 
   build_call_buttons();
 
-  if(!level.elevator_motion_detection)
+  if(!level.elevator_motion_detection) {
     setup_hints();
+  }
 
   foreach(var_39 in level.elevators) {
     var_40 = var_39 get_housing_primarylight();
 
     if(isDefined(var_40) && var_40.size) {
-      foreach(var_42 in var_40)
+      foreach(var_42 in var_40) {
       var_42 setlightintensity(0.75);
+      }
     }
   }
 }
@@ -621,10 +638,12 @@ make_discrete_trigger() {
 discrete_waittill(var_00) {
   enable_trigger();
 
-  if(level.elevator_motion_detection)
+  if(level.elevator_motion_detection) {
     self.motion_trigger waittill(var_00, var_01);
-  else
+  }
+  else {
     self waittill(var_00, var_01);
+  }
 
   disable_trigger();
   return var_01;
@@ -635,16 +654,18 @@ enable_trigger() {
     self.enabled = 1;
     self.origin = self.origin + (0, 0, 10000);
 
-    if(isDefined(self.motion_trigger))
+    if(isDefined(self.motion_trigger)) {
       self.motion_trigger.origin = self.motion_trigger.origin + (0, 0, 10000);
+    }
   }
 }
 
 disable_trigger() {
   self notify("disable_trigger");
 
-  if(self.enabled)
+  if(self.enabled) {
     thread disable_trigger_helper();
+  }
 }
 
 disable_trigger_helper() {
@@ -653,8 +674,9 @@ disable_trigger_helper() {
   wait 1.5;
   self.origin = self.origin + (0, 0, -10000);
 
-  if(isDefined(self.motion_trigger))
+  if(isDefined(self.motion_trigger)) {
     self.motion_trigger.origin = self.motion_trigger.origin + (0, 0, -10000);
+  }
 }
 
 get_outer_doorset(var_00) {
@@ -697,18 +719,21 @@ get_housing_children() {
   var_0[var_0.size] = var_04;
   var_0[var_0.size] = var_05;
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_0[var_0.size] = var_03;
+  }
 
   var_06 = get_housing_models();
 
-  foreach(var_08 in var_06)
+  foreach(var_08 in var_06) {
   var_0[var_0.size] = var_08;
+  }
 
   var_10 = get_housing_primarylight();
 
-  foreach(var_12 in var_10)
+  foreach(var_12 in var_10) {
   var_0[var_0.size] = var_12;
+  }
 
   return var_00;
 }
@@ -718,8 +743,9 @@ get_housing_mainframe() {
   var_01 = undefined;
 
   foreach(var_03 in var_00) {
-    if(var_3.classname != "script_model" && var_3.code_classname != "light")
+    if(var_3.classname != "script_model" && var_3.code_classname != "light") {
       var_01 = var_03;
+    }
   }
 
   return var_01;
@@ -730,8 +756,9 @@ get_housing_models() {
   var_01 = [];
 
   foreach(var_03 in var_00) {
-    if(var_3.classname == "script_model")
+    if(var_3.classname == "script_model") {
       var_1[var_1.size] = var_03;
+    }
   }
 
   return var_01;
@@ -742,8 +769,9 @@ get_housing_primarylight() {
   var_01 = [];
 
   foreach(var_03 in var_00) {
-    if(var_3.code_classname == "light")
+    if(var_3.code_classname == "light") {
       var_1[var_1.size] = var_03;
+    }
   }
 
   return var_01;
@@ -754,8 +782,9 @@ get_housing_musak_model() {
   var_01 = undefined;
 
   foreach(var_03 in var_00) {
-    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "play_musak")
+    if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "play_musak") {
       var_01 = var_03;
+    }
   }
 
   return var_01;
@@ -848,8 +877,9 @@ elevator_get_dvar_int(var_00, var_01) {
 }
 
 elevator_get_dvar(var_00, var_01) {
-  if(getdvar(var_00) != "")
+  if(getdvar(var_00) != "") {
     return getdvarfloat(var_00);
+  }
   else {
     setdvar(var_00, var_01);
     return var_01;

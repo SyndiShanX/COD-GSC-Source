@@ -21,8 +21,9 @@ main() {
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
   level.debris = ["shpg_machinery_baggage_container_dmg"];
 
-  foreach(var_1 in level.debris)
+  foreach(var_1 in level.debris) {
   precachemodel(var_1);
+  }
 
   precacheitem("remote_torpedo_tablet");
   precacheitem("underwater_torpedo");
@@ -175,11 +176,13 @@ main() {
   thread maps\ship_graveyard_fx::mask_interactives();
   maps\_load::main();
 
-  if(level.xenon)
+  if(level.xenon) {
     setsaveddvar("r_texFilterProbeBilinear", 1);
+  }
 
-  if(!maps\_utility::is_gen4())
+  if(!maps\_utility::is_gen4()) {
     setsaveddvar("sm_sunshadowscale", 0.55);
+  }
 
   if(maps\_utility::is_gen4()) {
     maps\_art::disable_ssao_over_time(40);
@@ -479,8 +482,9 @@ start_wreck_approach() {
   thread maps\ship_graveyard_code::wreck_zodiac_event();
   wait 1;
 
-  while(distance2d(level.player.origin, level.baker.origin) < 300)
+  while(distance2d(level.player.origin, level.baker.origin) < 300) {
     wait 0.05;
+  }
 
   common_scripts\utility::flag_set("baker_at_wreck");
 }
@@ -621,8 +625,9 @@ tutorial_setup() {
   level.baker maps\_utility::anim_stopanimscripted();
   level.baker notify("kill surface unlink");
 
-  if(isDefined(level.player_rig))
+  if(isDefined(level.player_rig)) {
     level.player_rig delete();
+  }
 
   setsaveddvar("player_swimSpeed", 75);
   level.player disableweapons();
@@ -688,8 +693,9 @@ wreck_approach_setup() {
   level endon("stop_for_e3");
   common_scripts\utility::flag_wait("start_small_wreck");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     thread maps\_utility::lerp_saveddvar("r_tessellationFactor", 60, 8);
+  }
 
   common_scripts\utility::flag_clear("allow_killfirms");
   thread maps\ship_graveyard_util::delete_fish_in_volume("fish_start_area");
@@ -747,8 +753,9 @@ cave_setup() {
   if(common_scripts\utility::flag("cave_sonar")) {
     var_0 = getaiarray("axis");
 
-    foreach(var_2 in var_0)
+    foreach(var_2 in var_0) {
     var_2 kill();
+    }
   }
 
   level.baker.moveplaybackrate = 1;
@@ -768,14 +775,16 @@ setup_lcs_audio() {
 sonar_setup() {
   common_scripts\utility::flag_wait("start_sonar");
 
-  foreach(var_1 in level.deadly_sharks)
+  foreach(var_1 in level.deadly_sharks) {
   var_1 delete();
+  }
 
   var_3 = maps\_utility::getvehiclearray();
 
   foreach(var_5 in var_3) {
-    if(var_5.vehicletype != "lcs")
+    if(var_5.vehicletype != "lcs") {
       var_5 delete();
+    }
   }
 
   level.baker.pathrandompercent = 0;
@@ -827,8 +836,9 @@ depth_charges_setup() {
 big_wreck_setup() {
   common_scripts\utility::flag_wait("start_big_wreck");
 
-  foreach(var_1 in level.deadly_sharks)
+  foreach(var_1 in level.deadly_sharks) {
   var_1 delete();
+  }
 
   level.deadly_sharks = [];
   setsaveddvar("glass_linear_vel", "20 40");

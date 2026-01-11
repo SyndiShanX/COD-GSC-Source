@@ -157,8 +157,9 @@ player_teleporting(index) {
   self notify("fx_done");
   self thread teleport_pad_end_exploder(0);
   players_in_proj_room = self teleport_players(players_in_proj_room, "projroom");
-  if(!isDefined(players_in_proj_room) || (isDefined(players_in_proj_room) && players_in_proj_room.size < 1))
+  if(!isDefined(players_in_proj_room) || (isDefined(players_in_proj_room) && players_in_proj_room.size < 1)) {
     return;
+  }
   wait(30);
   level.extracam_screen hide();
   clientnotify("camera_stop");
@@ -226,10 +227,12 @@ player_is_near_pad(player) {
 teleport_pad_player_fx(players) {
   self endon("fx_done");
   inprojroom = false;
-  if(!isDefined(players))
+  if(!isDefined(players)) {
     players = getplayers();
-  else
+  }
+  else {
     inprojroom = true;
+  }
   while(1) {
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i])) {
@@ -250,10 +253,12 @@ teleport_players(players_in_proj_room, loc) {
   all_players = get_players();
   slot = undefined;
   start = undefined;
-  if(loc == "projroom")
+  if(loc == "projroom") {
     players = all_players;
-  else
+  }
+  else {
     players = players_in_proj_room;
+  }
   dest_room = get_array_spots("teleport_room_", dest_room);
   initialize_occupied_flag(dest_room);
   check_for_occupied_spots(dest_room, all_players, player_radius);
@@ -262,10 +267,12 @@ teleport_players(players_in_proj_room, loc) {
   stand_offset = (0, 0, 0);
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {
-      if(loc == "projroom" && (self player_is_near_pad(players[i]) == false))
+      if(loc == "projroom" && (self player_is_near_pad(players[i]) == false)) {
         continue;
-      else if(loc == "projroom" && self player_is_near_pad(players[i]))
+      }
+      else if(loc == "projroom" && self player_is_near_pad(players[i])) {
         players_in_proj_room = array_add(players_in_proj_room, players[i]);
+      }
       slot = i;
       start = 0;
       while(dest_room[slot].occupied && start < 4) {
@@ -296,8 +303,9 @@ teleport_players(players_in_proj_room, loc) {
       players[i].teleport_origin.angles = dest_room[i].angles;
     }
   }
-  if(!isDefined(players_in_proj_room) || (isDefined(players_in_proj_room) && players_in_proj_room.size < 1))
+  if(!isDefined(players_in_proj_room) || (isDefined(players_in_proj_room) && players_in_proj_room.size < 1)) {
     return;
+  }
   wait(2);
   array_removeUndefined(players_in_proj_room);
   dest_room = [];
@@ -509,10 +517,12 @@ zombieTheaterTeleporterSeekLogic() {
   poi2 = getEnt("teleporter_poi2", "targetname");
   players = getplayers();
   for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i].inteleportation) && players[i].inteleportation == true)
+    if(isDefined(players[i].inteleportation) && players[i].inteleportation == true) {
       inteleportcount++;
-    if(!is_player_valid(players[i]) && (!isDefined(players[i].inteleportation) || players[i].inteleportation == false))
+    }
+    if(!is_player_valid(players[i]) && (!isDefined(players[i].inteleportation) || players[i].inteleportation == false)) {
       nonteleportinvalidcount++;
+    }
   }
   if(inteleportcount > 0 && (inteleportcount == players.size || (inteleportcount + nonteleportinvalidcount == players.size))) {
     if(!poi1.poi_active && !poi2.poi_active) {
@@ -530,8 +540,9 @@ zombieTheaterTeleporterSeekLogic() {
     }
     if(inteleportcount > 0) {
       for(i = 0; i < players.size; i++) {
-        if((isDefined(players[i].inteleportation) && players[i].inteleportation == true))
+        if((isDefined(players[i].inteleportation) && players[i].inteleportation == true)) {
           self.ignore_player = array_add(self.ignore_player, players[i]);
+        }
       }
     }
   }

@@ -330,4 +330,3 @@ clear_dvar(dvar_name) {
 get_schedule_start_time() {
   return getdvarint(#"contracts_start_time", 1463418000);
 }
-

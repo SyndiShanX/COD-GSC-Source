@@ -62,8 +62,9 @@ spear_trap_damage_all_characters(audio_counter, player) {
     if(self spear_trap_is_character_touching(char)) {
       self thread spear_damage_character(char);
     } else if(isPlayer(char) && (audio_counter == 0) && (randomintrange(0, 101) <= 10)) {
-      if(isDefined(player) && player == char)
+      if(isDefined(player) && player == char) {
         char thread delayed_spikes_close_vox();
+      }
     }
   }
 }

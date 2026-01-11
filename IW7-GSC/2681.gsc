@@ -31,8 +31,9 @@ powershud_assignpower(var_00, var_01, var_02, var_03) {
   var_04 = scripts\engine\utility::ter_op(var_02, 1000, 0);
   self setclientomnvar(powershud_getslotomnvar(var_00, 2), var_04);
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0;
+  }
 
   self setclientomnvar(powershud_getslotomnvar(var_00, 0), var_03);
   self setclientomnvar(powershud_getslotomnvar(var_00, 4), 0);
@@ -88,8 +89,9 @@ powershud_endpowerdrain(var_00) {
 powershud_beginpowercooldown(var_00, var_01) {
   powershud_updatepowermeter(var_00, 0);
 
-  if(isDefined(var_01) && var_01)
+  if(isDefined(var_01) && var_01) {
     powershud_updatepowerdisabled(var_00, 1);
+  }
 
   powershud_updatepowerstate(var_00, 1);
 }
@@ -97,13 +99,16 @@ powershud_beginpowercooldown(var_00, var_01) {
 powershud_finishpowercooldown(var_00, var_01) {
   powershud_updatepowermeter(var_00, 1000);
 
-  if(isDefined(var_01) && var_01)
+  if(isDefined(var_01) && var_01) {
     powershud_updatepowerdisabled(var_00, 0);
+  }
 
-  if(var_00 == "primary")
+  if(var_00 == "primary") {
     self playlocalsound("mp_ability_ready_L1");
-  else
+  }
+  else {
     self playlocalsound("mp_ability_ready_R1");
+  }
 
   powershud_updatepowerstate(var_00, 0);
 }

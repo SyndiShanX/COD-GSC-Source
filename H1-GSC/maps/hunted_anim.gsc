@@ -96,10 +96,12 @@ anims() {
   level.scr_anim["price"]["hunted_basement_door_block"] = % hunted_basement_door_block;
   level.scr_anim["price"]["hunted_open_creek_gate_stop"] = % hunted_open_barndoor_stop;
 
-  if(getdvarint("use_old_door_openings") == 1)
+  if(getdvarint("use_old_door_openings") == 1) {
     level.scr_anim["price"]["hunted_open_creek_gate"] = % hunted_open_barndoor;
-  else
+  }
+  else {
     level.scr_anim["price"]["hunted_open_creek_gate"] = % h1_hunted_open_grilldoor;
+  }
 
   level.scr_anim["guard1"]["roadblock_sequence"] = % hunted_roadblock_guy1_sequence;
   level.scr_anim["guard1"]["roadblock_startidle"][0] = % hunted_roadblock_guy1_startidle;
@@ -107,10 +109,12 @@ anims() {
   level.scr_anim["guard2"]["roadblock_startidle"][0] = % hunted_roadblock_guy2_startidle;
   level.scr_anim["price"]["hunted_open_big_barn_gate_stop"] = % hunted_open_barndoor_stop;
 
-  if(getdvarint("use_old_door_openings") == 1)
+  if(getdvarint("use_old_door_openings") == 1) {
     level.scr_anim["price"]["hunted_open_big_barn_gate"] = % hunted_open_barndoor;
-  else
+  }
+  else {
     level.scr_anim["price"]["hunted_open_big_barn_gate"] = % h1_hunted_open_barndoor_02;
+  }
 
   level.scr_anim["mark"]["hunted_celebrate"] = % hunted_celebrate;
   level.scr_sound["mark"]["hunted_celebrate"] = "hunted_uk2_outrageous";

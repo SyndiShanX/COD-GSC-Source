@@ -941,4 +941,3 @@ function_bb9f3842() {
     waitframe(1);
   }
 }
-

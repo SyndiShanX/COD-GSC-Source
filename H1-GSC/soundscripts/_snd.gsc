@@ -44,24 +44,31 @@ snd_music_message(var_0, var_1, var_2) {
   level notify("stop_other_music");
   level endon("stop_other_music");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     childthread snd_message("snd_music_handler", var_0, var_1, var_2);
-  else if(isDefined(var_1))
+  }
+  else if(isDefined(var_1)) {
     childthread snd_message("snd_music_handler", var_0, var_1);
-  else
+  }
+  else {
     childthread snd_message("snd_music_handler", var_0);
+  }
 }
 
 snd_message(var_0, var_1, var_2, var_3) {
   if(isDefined(level._snd.messages[var_0])) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       thread[[level._snd.messages[var_0]]](var_1, var_2, var_3);
-    else if(isDefined(var_2))
+    }
+    else if(isDefined(var_2)) {
       thread[[level._snd.messages[var_0]]](var_1, var_2);
-    else if(isDefined(var_1))
+    }
+    else if(isDefined(var_1)) {
       thread[[level._snd.messages[var_0]]](var_1);
-    else
+    }
+    else {
       thread[[level._snd.messages[var_0]]]();
+    }
   }
 }
 
@@ -72,8 +79,9 @@ snd_printlnbold(var_0) {}
 snd_get_tagarg(var_0, var_1) {
   var_2 = undefined;
 
-  if(isarray(var_1))
+  if(isarray(var_1)) {
     var_2 = var_1[var_0];
+  }
 
   return var_2;
 }
@@ -110,13 +118,16 @@ snd_flash_white() {
 snd_slate(var_0) {}
 
 snd_throttle_wait() {
-  if(self.count >= self.max_calls_per_frame)
+  if(self.count >= self.max_calls_per_frame) {
     wait 0.05;
-  else
+  }
+  else {
     self.count++;
+  }
 
-  if(!self.reset_thread_sent)
+  if(!self.reset_thread_sent) {
     thread snd_throttler_reset();
+  }
 }
 
 snd_throttler_reset() {
@@ -133,8 +144,9 @@ snd_get_throttler(var_0) {
   var_1.reset_thread_sent = 0;
   var_2 = 10;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = max(var_0, 1);
+  }
 
   var_1.max_calls_per_frame = var_2;
   return var_1;
@@ -185,8 +197,9 @@ snd_parse_soundtables(var_0, var_1, var_2, var_3, var_4) {
           } else {
             var_16 = 0;
 
-            if(!isDefined(var_12))
+            if(!isDefined(var_12)) {
               var_16 = 1;
+            }
             else if(var_15 != var_13) {
               var_5[var_13] = var_12;
               var_16 = 1;

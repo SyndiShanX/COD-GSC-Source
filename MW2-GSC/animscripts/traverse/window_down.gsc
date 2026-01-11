@@ -40,8 +40,9 @@ main() {
   finaldif = startnode.origin[2] - endheight;
   heightChange = 0;
   for(i = 0; i < level.window_down_height.size; i++) {
-    if(finaldif < level.window_down_height[i])
+    if(finaldif < level.window_down_height[i]) {
       continue;
+    }
     heightChange = finaldif - level.window_down_height[i];
   }
   assertEx(heightChange > 0, "window_jump at " + startnode.origin + " is too high off the ground");
@@ -67,8 +68,9 @@ main() {
     oldheight = self.origin[2];
     wait(0.05);
   }
-  if(isDefined(self.groundtype))
+  if(isDefined(self.groundtype)) {
     self playSound("Land_" + self.groundtype);
+  }
 
   self notify("stop_traverse_notetracks");
   self setFlaggedAnimKnoballRestart("traverse", landAnim, % body, 1, 0.15, 1);
@@ -109,18 +111,21 @@ dif = startNode.origin[2] - self.origin[2];
 included = false;
 for(i=0;i<level.traverseFall.size;i++)
 {
-	if(level.traverseFall[i] != dif)
+	if(level.traverseFall[i] != dif) {
 		continue;
+	}
 	included = true;
 	break;
 }
-if(!includeD)
+if(!includeD) {
 	level.traverseFall[level.traverseFall.size] = dif;
+}
 if(getdebugdvar("debug_traversefall") != "")
 {
 	setdvar("debug_traversefall", "");
-	for(i=0;i<level.traverseFall.size;i++)
+	for(i=0;i<level.traverseFall.size;i++) {
 		println ("	level.window_down_height[", i, "] = ", level.traverseFall[i], ";");
+	}
 }
 
 */

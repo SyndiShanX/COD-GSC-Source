@@ -8,8 +8,9 @@ monitor_cortex_fired() {
   self endon("death");
   self endon("disconnect");
 
-  while(!common_scripts\utility::flag_exist("start_ark_encounter") || !common_scripts\utility::flag("start_ark_encounter"))
+  while(!common_scripts\utility::flag_exist("start_ark_encounter") || !common_scripts\utility::flag("start_ark_encounter")) {
     wait 1;
+  }
 
   if(self hasweapon("aliencortex_mp")) {
     self takeweapon("aliencortex_mp");
@@ -59,8 +60,9 @@ wait_for_player_to_place_cortex() {
   level endon("cortex_dropped");
   level endon("cortex_planted");
 
-  while(self usebuttonpressed())
+  while(self usebuttonpressed()) {
     wait 1;
+  }
 
   var_0 = 6400;
 
@@ -73,8 +75,9 @@ wait_for_player_to_place_cortex() {
         earthquake(0.15, 0.15, self.origin, 128);
         self setclientomnvar("ui_alien_unlimited_ammo", 0);
 
-        if(!maps\mp\alien\_utility::has_special_weapon())
+        if(!maps\mp\alien\_utility::has_special_weapon()) {
           self enableweaponswitch();
+        }
 
         restore_last_weapon();
         common_scripts\utility::_enableoffhandweapons();
@@ -113,12 +116,15 @@ cortex_blast(var_0) {
   }
   var_3 = undefined;
 
-  if(isDefined(level.cortex_carrier))
+  if(isDefined(level.cortex_carrier)) {
     var_3 = level.cortex_carrier;
-  else if(isDefined(level.cortex))
+  }
+  else if(isDefined(level.cortex)) {
     var_3 = level.cortex;
-  else if(isDefined(var_0))
+  }
+  else if(isDefined(var_0)) {
     var_3 = var_0;
+  }
 
   var_1 = common_scripts\utility::get_array_of_closest(var_3.origin, var_1);
 
@@ -149,13 +155,16 @@ place_cortex(var_0) {
   var_1 = undefined;
   var_2 = var_0 aiphysicstrace(var_0.origin + (0, 0, 8), var_0.origin - (0, 0, 12), undefined, undefined, 1, 1);
 
-  if(var_2["fraction"] == 1)
+  if(var_2["fraction"] == 1) {
     return;
-  else
+  }
+  else {
     var_1 = var_2["position"];
+  }
 
-  if(!var_0 maps\mp\alien\_utility::has_special_weapon())
+  if(!var_0 maps\mp\alien\_utility::has_special_weapon()) {
     var_0 enableweaponswitch();
+  }
 
   var_0.is_holding_deployable = 0;
   var_0 restore_last_weapon();
@@ -170,26 +179,31 @@ place_cortex(var_0) {
 }
 
 restore_last_weapon() {
-  if(self.lastweapon != "aliendeployable_crate_marker_mp")
+  if(self.lastweapon != "aliendeployable_crate_marker_mp") {
     self switchtoweapon(self.lastweapon);
-  else
+  }
+  else {
     self switchtoweapon(self getweaponslistprimaries()[0]);
+  }
 }
 
 create_cortex(var_0, var_1) {
   var_2 = 1;
   level.cortex_carrier = undefined;
 
-  if(isDefined(level.cortex))
+  if(isDefined(level.cortex)) {
     level.cortex delete();
+  }
 
   level.cortex = spawn("script_model", var_0 + (0, 0, 5));
   level.cortex setModel("dct_alien_container");
 
-  if(var_2)
+  if(var_2) {
     level.cortex thread maps\mp\alien\_drill::angles_to_ground(var_0, var_1, (0, 0, 0));
-  else
+  }
+  else {
     level.cortex.angles = var_1;
+  }
 
   level notify("cortex_spawned");
 }
@@ -197,8 +211,9 @@ create_cortex(var_0, var_1) {
 drop_cortex(var_0, var_1) {
   create_cortex(var_0, var_1);
 
-  if(!isDefined(level.cortex_icon))
+  if(!isDefined(level.cortex_icon)) {
     create_cortex_icon();
+  }
 
   level.cortex_icon.x = level.cortex.origin[0];
   level.cortex_icon.y = level.cortex.origin[1];
@@ -214,8 +229,9 @@ drop_cortex(var_0, var_1) {
 create_cortex_use_trigger() {
   wait 0.5;
 
-  while(!isDefined(level.cortex))
+  while(!isDefined(level.cortex)) {
     wait 0.1;
+  }
 
   if(!isDefined(level.cortex_use_trigger)) {
     level.cortex_use_trigger = spawn("script_model", level.cortex.origin + (0, 0, 40));
@@ -254,8 +270,9 @@ remove_cortex_player_icon() {
 }
 
 destroy_cortex_icon() {
-  if(isDefined(level.cortex_icon))
+  if(isDefined(level.cortex_icon)) {
     level.cortex_icon destroy();
+  }
 
   level thread remove_cortex_player_icon();
 }
@@ -263,13 +280,16 @@ destroy_cortex_icon() {
 turn_off_cortex() {
   maps\mp\alien\_outline_proto::remove_from_drill_preplant_watch_list(level.cortex);
 
-  if(isDefined(level.cortex_use_trigger))
+  if(isDefined(level.cortex_use_trigger)) {
     level.cortex_use_trigger makeunusable();
-  else
+  }
+  else {
     level.cortex makeunusable();
+  }
 
-  if(isDefined(level.cortex_icon))
+  if(isDefined(level.cortex_icon)) {
     level.cortex_icon.alpha = 0.0;
+  }
 
   level thread remove_cortex_player_icon();
 }
@@ -277,13 +297,16 @@ turn_off_cortex() {
 turn_on_cortex() {
   maps\mp\alien\_outline_proto::add_to_drill_preplant_watch_list(level.cortex);
 
-  if(isDefined(level.cortex_use_trigger))
+  if(isDefined(level.cortex_use_trigger)) {
     level.cortex_use_trigger makeusable();
-  else
+  }
+  else {
     level.cortex makeusable();
+  }
 
-  if(isDefined(level.cortex_icon))
+  if(isDefined(level.cortex_icon)) {
     level.cortex_icon.alpha = 0.75;
+  }
 }
 
 cortex_pickup_listener(var_0) {
@@ -326,13 +349,15 @@ cortex_pickup_listener(var_0) {
     }
   }
 
-  if(maps\mp\alien\_utility::alien_mode_has("outline"))
+  if(maps\mp\alien\_utility::alien_mode_has("outline")) {
     maps\mp\alien\_outline_proto::remove_from_drill_preplant_watch_list(level.cortex);
+  }
 
   level.cortex_use_trigger makeunusable();
 
-  if(isDefined(level.cortex_icon))
+  if(isDefined(level.cortex_icon)) {
     level.cortex_icon.alpha = 0;
+  }
 
   var_2 setclientomnvar("ui_alien_unlimited_ammo", 1);
   level.cortex = undefined;
@@ -369,8 +394,9 @@ drop_cortex_on_death() {
   self switchtoweapon(self.lastweapon);
   self.is_holding_deployable = 0;
 
-  if(isDefined(self.disabledoffhandweapons) && self.disabledoffhandweapons > 0)
+  if(isDefined(self.disabledoffhandweapons) && self.disabledoffhandweapons > 0) {
     common_scripts\utility::_enableoffhandweapons();
+  }
 
   self forceusehintoff();
   level.cortex_carrier = undefined;
@@ -380,8 +406,9 @@ drop_cortex_on_death() {
   if(maps\mp\alien\_utility::is_true(self.kill_trigger_event_processed)) {
     var_0 = common_scripts\utility::getclosest(self.origin, common_scripts\utility::getstructarray("respawn_cortex", "targetname"));
 
-    if(!isDefined(var_0.angles))
+    if(!isDefined(var_0.angles)) {
       var_0.angles = (0, 0, 0);
+    }
 
     drop_cortex(var_0.origin, var_0.angles);
   } else
@@ -404,8 +431,9 @@ drop_cortex_on_disconnect() {
   var_0 = level.last_cortex_pickup_origin;
   var_1 = common_scripts\utility::getclosest(var_0, common_scripts\utility::getstructarray("respawn_cortex", "targetname"));
 
-  if(!isDefined(var_1.angles))
+  if(!isDefined(var_1.angles)) {
     var_1.angles = (0, 0, 0);
+  }
 
   playFX(level._effect["alien_teleport"], var_1.origin);
   playFX(level._effect["alien_teleport_dist"], var_1.origin);

@@ -74,8 +74,9 @@ begin_vip() {
   setsaveddvar("ammoCounterHide", 0);
   level.player enableweaponpickup();
 
-  if(!common_scripts\utility::flag("start_rpg_ambush"))
+  if(!common_scripts\utility::flag("start_rpg_ambush")) {
     maps\enemyhq_code::safe_activate_trigger_with_targetname("traversal_allies1");
+  }
 
   common_scripts\utility::flag_wait_any("interrogation_done", "start_rpg_ambush");
 
@@ -95,8 +96,9 @@ begin_vip() {
     level.dog maps\_utility_dogs::disable_dog_sniff();
   }
 
-  if(isDefined(level.knife))
+  if(isDefined(level.knife)) {
     hide_knife(level.allies[1]);
+  }
 
   common_scripts\utility::array_thread(level.allies, maps\_utility::enable_surprise);
   common_scripts\utility::array_thread(level.allies, maps\_utility::enable_pain);
@@ -132,10 +134,12 @@ animate_vip_enemies() {
     var_7.struct = var_6;
     var_7.allowdeath = 1;
 
-    if(isDefined(level.scr_anim[var_5]["new_vip_enemy_intro"]))
+    if(isDefined(level.scr_anim[var_5]["new_vip_enemy_intro"])) {
       var_6 thread vip_enemy_animate_intro(var_7);
-    else
+    }
+    else {
       var_6 thread maps\_anim::anim_loop_solo(var_7, "new_vip_enemy", "stop_loop");
+    }
 
     var_7 thread vip_enemy_interrupt(var_0);
     var_2 = common_scripts\utility::array_add(var_2, var_7);
@@ -146,8 +150,9 @@ animate_vip_enemies() {
   wait 0.25;
 
   foreach(var_7 in var_2) {
-    if(isalive(var_7))
+    if(isalive(var_7)) {
       var_7 notify("go_time");
+    }
   }
 }
 
@@ -185,8 +190,9 @@ vip_enemy_interrupt(var_0) {
   common_scripts\utility::waittill_any("death", "damage", "go_time");
   self notify("go_time");
 
-  if(isDefined(self.struct))
+  if(isDefined(self.struct)) {
     self.struct notify("stop_loop");
+  }
 
   maps\_utility::anim_stopanimscripted();
   self.allowdeath = 1;
@@ -226,8 +232,9 @@ vip_dog_attack() {
 
 pickai(var_0) {
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && isai(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isai(var_2) && isalive(var_2)) {
       return var_2;
+    }
   }
 
   return undefined;
@@ -243,8 +250,9 @@ animate_ally_breach() {
   foreach(var_3 in level.allies) {
     var_3.animname = "ally" + maps\_utility::string(var_1);
 
-    if(var_1 > 1)
+    if(var_1 > 1) {
       var_0 = common_scripts\utility::getstruct("vip_breach1", "targetname");
+    }
 
     var_0 thread maps\_anim::anim_single_solo(var_3, "vip_breach");
     var_1++;
@@ -311,13 +319,15 @@ player_back_from_sniping() {
 }
 
 keegan_vip_line1(var_0) {
-  if(!common_scripts\utility::flag("start_pre_rpg_ambush"))
+  if(!common_scripts\utility::flag("start_pre_rpg_ambush")) {
     level.allies[1] maps\enemyhq_code::char_dialog_add_and_go("enemyhq_kgn_whereishe");
+  }
 }
 
 keegan_vip_line2(var_0) {
-  if(!common_scripts\utility::flag("start_pre_rpg_ambush"))
+  if(!common_scripts\utility::flag("start_pre_rpg_ambush")) {
     level.allies[1] maps\enemyhq_code::char_dialog_add_and_go("enemyhq_kgn_whereishe_4");
+  }
 }
 
 badguyline1(var_0) {
@@ -351,8 +361,9 @@ hide_knife(var_0) {
 }
 
 set_search_walk(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   self.disablearrivals = var_0;
   self.disableexits = var_0;
@@ -387,8 +398,9 @@ handle_vip_drone() {
   thread nag_if_shot();
   common_scripts\utility::waittill_any("goal", "death");
 
-  if(!common_scripts\utility::flag("traverse_done"))
+  if(!common_scripts\utility::flag("traverse_done")) {
     self.spawner spawn_vip_drone();
+  }
 
   self delete();
 }
@@ -417,8 +429,9 @@ handle_drone_nags() {
     wait 2;
     var_1++;
 
-    if(var_1 >= var_0.size)
+    if(var_1 >= var_0.size) {
       var_1 = 0;
+    }
   }
 }
 
@@ -462,8 +475,9 @@ delete_corpses_around_origin(var_0, var_1) {
   var_2 = getcorpsearray();
 
   foreach(var_4 in var_2) {
-    if(distance(var_4.origin, var_0) < var_1)
+    if(distance(var_4.origin, var_0) < var_1) {
       var_4 delete();
+    }
   }
 }
 

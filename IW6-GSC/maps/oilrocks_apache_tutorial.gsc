@@ -66,10 +66,12 @@ apache_tutorial_fly_allies() {
   foreach(var_2 in var_0) {
     var_3 = undefined;
 
-    if(issubstr(var_2.targetname, "apache"))
+    if(issubstr(var_2.targetname, "apache")) {
       var_3 = common_scripts\utility::getstruct("apache_ally_fly_in_path_0" + var_2 maps\oilrocks_apache_code::get_apache_ally_id(), "targetname");
-    else
+    }
+    else {
       var_3 = common_scripts\utility::getstruct("blackhaw_fly_in_path", "targetname");
+    }
 
     var_2 thread maps\oilrocks_code::chopper_boss_path_override(var_3);
   }
@@ -104,14 +106,16 @@ apache_tutorial_fly_allies_govern_speed(var_0) {
 
       var_11 = distance2dsquared(var_1.origin, var_10.origin);
 
-      if(var_11 < var_8)
+      if(var_11 < var_8) {
         var_8 = var_11;
+      }
     }
 
     var_13 = undefined;
 
-    if(var_8 >= var_2)
+    if(var_8 >= var_2) {
       var_13 = 0;
+    }
     else {
       var_14 = clamp(var_8, var_4, var_3);
       var_15 = 1 - (var_14 - var_4) / var_5;
@@ -155,13 +159,15 @@ apache_tutorial_fly_move_until_input(var_0) {
 }
 
 apache_move_until_notify(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level endon(var_3);
+  }
 
   var_4 = var_0.heli.owner;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 endon(var_2);
+  }
 
   var_4 endon("death");
 

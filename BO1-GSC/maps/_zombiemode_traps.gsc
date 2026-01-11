@@ -363,8 +363,9 @@ trap_audio_fx(trap) {
   }
   trap waittill_any_or_timeout(trap._trap_duration, "trap_done");
   if(isDefined(sound_origin)) {
-    if(trap.script_noteworthy == "fire")
+    if(trap.script_noteworthy == "fire") {
       playsoundatposition("zmb_firetrap_end", sound_origin.origin);
+    }
     sound_origin stopLoopSound();
     wait(.05);
     sound_origin delete();

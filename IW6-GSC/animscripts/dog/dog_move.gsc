@@ -17,8 +17,9 @@ main() {
   self endon("killanimscript");
   thread handlefootstepnotetracks();
 
-  if(self isdogbeingdriven())
+  if(self isdogbeingdriven()) {
     continuedrivenmovement();
+  }
   else {
     startmove();
     continuemovement();
@@ -79,10 +80,12 @@ startmove() {
   self.bfirstmoveanim = 1;
   var_0 = self getnegotiationstartnode();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0.origin;
-  else
+  }
+  else {
     var_1 = self.pathgoalpos;
+  }
 
   if(!isDefined(var_1)) {
     return;
@@ -97,8 +100,9 @@ startmove() {
   var_3 = angleclamp180(var_2[1] - self.angles[1]);
 
   if(isDefined(self.bdoturnandmove) && self.bdoturnandmove || isDefined(self.movementtype) && (self.movementtype == "walk" || self.movementtype == "walk_fast" || self.movementtype == "sniff")) {
-    if(abs(var_3) > 25)
+    if(abs(var_3) > 25) {
       startturntoangle(var_2[1], 1);
+    }
 
     return;
   }
@@ -106,13 +110,15 @@ startmove() {
   if(length2dsquared(self.velocity) > 16) {
     var_4 = vectortoangles(self.velocity);
 
-    if(abs(angleclamp180(var_4[1] - var_2[1])) < 45)
+    if(abs(angleclamp180(var_4[1] - var_2[1])) < 45) {
       return;
+    }
   }
 
   if(distancesquared(var_1, self.origin) < 22500) {
-    if(abs(var_3) > 25)
+    if(abs(var_3) > 25) {
       startturntoangle(var_2[1], 1);
+    }
 
     return;
   }
@@ -133,8 +139,9 @@ startmove() {
   }
 
   if(var_8 == var_6.size) {
-    if(abs(var_3) > 25)
+    if(abs(var_3) > 25) {
       startturntoangle(var_2[1], 1);
+    }
 
     return;
   }
@@ -143,8 +150,9 @@ startmove() {
   var_12 = getnotetracktimes(var_7, "code_move");
   var_13 = 1;
 
-  if(var_12.size > 0)
+  if(var_12.size > 0) {
     var_13 = var_12[0];
+  }
 
   var_14 = getangledelta3d(var_7, 0, var_13);
   self animmode("zonly_physics", 0);
@@ -152,15 +160,17 @@ startmove() {
   var_15 = getanimlength(var_7) * var_13;
   var_16 = 0.01 + abs(angleclamp180(var_3 - var_14[1])) / var_15 / 1000;
 
-  if(var_16 < 0.01)
+  if(var_16 < 0.01) {
     var_16 = 0.01;
+  }
 
   self.prevturnrate = self.turnrate;
   self.turnrate = var_16;
   var_17 = 0.1;
 
-  if(animscripts\dog\dog_stop::getdefaultidlestate() != "attackidle")
+  if(animscripts\dog\dog_stop::getdefaultidlestate() != "attackidle") {
     var_17 = 0.4;
+  }
 
   self setflaggedanimknoballrestart("dog_start_move", var_7, % body, 1, var_17, self.moveplaybackrate);
   thread startmove_updateangle(var_7, var_13, var_15);
@@ -185,8 +195,9 @@ startmove_updateangle(var_0, var_1, var_2) {
     self orientmode("face angle", angleclamp180(var_4[1] - var_5[1]));
     self.turnrate = 0.01 + abs(angleclamp180(var_6 - var_5[1])) / var_2 / 1000;
 
-    if(self.turnrate < 0.01)
+    if(self.turnrate < 0.01) {
       self.turnrate = 0.01;
+    }
 
     wait 0.05;
   }
@@ -210,10 +221,12 @@ waitfordrivenchange() {
     if(var_0 != var_1) {
       cancelallbut("drivenchange");
 
-      if(var_1)
+      if(var_1) {
         continuedrivenmovement();
-      else
+      }
+      else {
         continuemovement();
+      }
 
       break;
     }
@@ -235,10 +248,12 @@ waitforrunwalkslopechange() {
     if(var_0 != self.movemode || var_1 != self.stairsstate || hasmovementtypechanged(var_4) || hasoverrideanimchanged(var_2, var_3)) {
       self clearanim( % dog_move, 0.2);
 
-      if(isDefined(self.script_nostairs))
+      if(isDefined(self.script_nostairs)) {
         setmoveanim(self.movemode, "none", 1);
-      else
+      }
+      else {
         setmoveanim(self.movemode, self.stairsstate, 1);
+      }
 
       var_0 = self.movemode;
       var_1 = self.stairsstate;
@@ -274,38 +289,45 @@ waitforsharpturn() {
   self waittill("path_changed", var_0, var_1, var_2);
   var_3 = dosharpturn(var_1, var_2);
 
-  if(!var_3)
+  if(!var_3) {
     thread waitforsharpturn();
+  }
 }
 
 shoulddosharpturns() {
-  if(isDefined(self.script_noturnanim) || self isdogbeingdriven())
+  if(isDefined(self.script_noturnanim) || self isdogbeingdriven()) {
     return 0;
+  }
 
-  if(isDefined(self.movementtype) && (self.movementtype == "walk" || self.movementtype == "walk_fast"))
+  if(isDefined(self.movementtype) && (self.movementtype == "walk" || self.movementtype == "walk_fast")) {
     return 0;
+  }
 
-  if(self.stairsstate == "down")
+  if(self.stairsstate == "down") {
     return 0;
+  }
 
   return 1;
 }
 
 dosharpturn(var_0, var_1) {
-  if(!shoulddosharpturns())
+  if(!shoulddosharpturns()) {
     return 0;
+  }
 
   var_2 = 10;
 
-  if(var_1)
+  if(var_1) {
     var_2 = 30;
+  }
 
   var_3 = vectortoangles(var_0);
   var_4 = angleclamp180(var_3[1] - self.angles[1]);
   var_5 = getangleindex(var_4, var_2);
 
-  if(var_5 == 4)
+  if(var_5 == 4) {
     return 0;
+  }
 
   cancelallbut("sharpturn");
   thread waitforsharpturnduringsharpturn();
@@ -313,25 +335,29 @@ dosharpturn(var_0, var_1) {
   if(shouldsniff()) {
     var_6 = getdogmoveanim("sniff_turn");
 
-    if(var_5 < 4)
+    if(var_5 < 4) {
       var_7 = var_6[2];
-    else
+    }
+    else {
       var_7 = var_6[6];
+    }
   } else
     var_7 = getdogturnanim("quick_sharp_turn", var_5);
 
   var_8 = getnotetracktimes(var_7, "code_move");
   var_9 = 1;
 
-  if(var_8.size > 0)
+  if(var_8.size > 0) {
     var_9 = var_8[0];
+  }
 
   var_10 = getangledelta(var_7, 0, var_9);
   var_11 = getanimlength(var_7) * var_9;
   var_12 = abs(var_4 - var_10) / var_11 / 1000;
 
-  if(var_12 < 0.01)
+  if(var_12 < 0.01) {
     var_12 = 0.01;
+  }
 
   self.prevturnrate = self.turnrate;
   self.turnrate = var_12;
@@ -348,8 +374,9 @@ dosharpturn(var_0, var_1) {
   if(isDefined(self.bsharpturnduringsharpturn)) {
     self.bsharpturnduringsharpturn = undefined;
 
-    if(!dosharpturn(self.lookaheaddir, 1))
+    if(!dosharpturn(self.lookaheaddir, 1)) {
       continuemovement();
+    }
   } else
     continuemovement();
 
@@ -363,20 +390,24 @@ waitforsharpturnduringsharpturn() {
   for(;;) {
     self waittill("path_changed", var_0, var_1, var_2);
 
-    if(var_2)
+    if(var_2) {
       self.bsharpturnduringsharpturn = 1;
+    }
   }
 }
 
 shoulddoarrivals() {
-  if(isDefined(self.disablearrivals) && self.disablearrivals)
+  if(isDefined(self.disablearrivals) && self.disablearrivals) {
     return 0;
+  }
 
-  if(self isdogbeingdriven())
+  if(self isdogbeingdriven()) {
     return 0;
+  }
 
-  if(isDefined(self.movementtype) && (self.movementtype == "walk" || self.movementtype == "walk_fast"))
+  if(isDefined(self.movementtype) && (self.movementtype == "walk" || self.movementtype == "walk_fast")) {
     return 0;
+  }
 
   return 1;
 }
@@ -412,14 +443,18 @@ waitforstop() {
   var_6 = getdogmoveanim("run_stop");
   var_7 = animscripts\dog\dog_stop::getdefaultidlestate(0);
 
-  if(var_7 == "attackidle")
+  if(var_7 == "attackidle") {
     var_8 = "attack";
-  else if(var_7 == "sneakidle" && var_3 == 4)
+  }
+  else if(var_7 == "sneakidle" && var_3 == 4) {
     var_8 = "sneak";
-  else if(var_7 == "alertidle" || var_7 == "sneakidle")
+  }
+  else if(var_7 == "alertidle" || var_7 == "sneakidle") {
     var_8 = "alert";
-  else
+  }
+  else {
     var_8 = "casual";
+  }
 
   var_9 = var_6[var_8][var_3];
 
@@ -467,17 +502,20 @@ waitforstop() {
 
   stopmovesound();
 
-  if(isDefined(var_1) && var_1.type != "Path")
+  if(isDefined(var_1) && var_1.type != "Path") {
     var_16 = var_1.angles;
+  }
   else {
     var_17 = var_0 - self.origin;
     var_16 = vectortoangles(var_17);
   }
 
-  if(var_3 == 0 || var_3 == 1 || var_3 == 7 || var_3 == 8)
+  if(var_3 == 0 || var_3 == 1 || var_3 == 7 || var_3 == 8) {
     var_18 = (0, var_13.angles[1] - var_11, 0);
-  else
+  }
+  else {
     var_18 = (0, var_16[1] - var_11, 0);
+  }
 
   self.dogarrivalanim = var_9;
   self startcoverarrival(var_14, var_18[1], 0);
@@ -506,8 +544,9 @@ waitforbark() {
   var_1 = var_0;
 
   for(;;) {
-    if(isDefined(self.script_nobark) && self.script_nobark)
+    if(isDefined(self.script_nobark) && self.script_nobark) {
       var_1 = var_0;
+    }
     else if(isDefined(self.enemy)) {
       self playSound("anml_dog_bark");
       var_1 = 2 + randomint(1);
@@ -539,12 +578,15 @@ waitforfollowspeed() {
         if(var_6 < var_0 * var_0) {
           var_7 = vectordot(self.doghandler.lookaheaddir, var_5);
 
-          if(var_7 > var_3)
+          if(var_7 > var_3) {
             self.moveratemultiplier = lerp(var_1, 1, lerpfraction(var_3, var_0, var_7));
-          else if(var_7 > var_2)
+          }
+          else if(var_7 > var_2) {
             self.moveratemultiplier = var_1;
-          else
+          }
+          else {
             self.moveratemultiplier = lerp(var_1, 1, lerpfraction(var_2, -1 * var_0, var_7));
+          }
         }
       }
     } else {
@@ -557,23 +599,28 @@ waitforfollowspeed() {
         var_12 = vectordot(var_11, var_10);
 
         if(var_12 > 0) {
-          if(isplayer(var_9))
+          if(isplayer(var_9)) {
             var_13 = lengthsquared(var_9 getentityvelocity());
-          else
+          }
+          else {
             var_13 = lengthsquared(var_9.velocity);
+          }
 
           var_14 = anglesToForward(var_9.angles);
           var_15 = 0.5;
 
-          if(var_13 < 1 || vectordot(var_14, var_11) > var_15)
+          if(var_13 < 1 || vectordot(var_14, var_11) > var_15) {
             var_8 = 0.65;
+          }
         }
       }
 
-      if(var_4 < var_8)
+      if(var_4 < var_8) {
         self.moveratemultiplier = min(var_4 + 0.05, var_8);
-      else if(var_4 > var_8)
+      }
+      else if(var_4 > var_8) {
         self.moveratemultiplier = max(var_4 - 0.05, var_8);
+      }
     }
 
     wait 0.1;
@@ -614,27 +661,33 @@ getstopdata() {
   } else {
     var_0.pos = self.pathgoalpos;
 
-    if(lengthsquared(self.velocity) > 1)
+    if(lengthsquared(self.velocity) > 1) {
       var_0.angles = self.angles;
-    else
+    }
+    else {
       var_0.angles = vectortoangles(self.lookaheaddir);
+    }
   }
 
   return var_0;
 }
 
 playmoveanim(var_0, var_1, var_2, var_3) {
-  if(var_1)
+  if(var_1) {
     self setflaggedanimknoballrestart("dog_move", var_0, % dog_move, 1, var_2, var_3);
-  else
+  }
+  else {
     self setflaggedanimknoball("dog_move", var_0, % dog_move, 1, var_2, var_3);
+  }
 }
 
 playmoveanimknob(var_0, var_1, var_2, var_3) {
-  if(var_1)
+  if(var_1) {
     self setflaggedanimknoballrestart("dog_move", var_0, % dog_move, 1, var_2, var_3);
-  else
+  }
+  else {
     self setflaggedanimknoball("dog_move", var_0, % dog_move, 1, var_2, var_3);
+  }
 }
 
 setmoveanim(var_0, var_1, var_2) {
@@ -646,12 +699,15 @@ setmoveanim(var_0, var_1, var_2) {
   if(var_0 == "walk") {
     self setanimknob( % dog_walk, 1);
 
-    if(isDefined(self.walk_overrideanim))
+    if(isDefined(self.walk_overrideanim)) {
       var_6 = self.walk_overrideanim;
-    else if(shouldsniff())
+    }
+    else if(shouldsniff()) {
       var_6 = getdogmoveanim("sniff");
-    else
+    }
+    else {
       var_6 = getdogmoveanim("walk");
+    }
 
     playmoveanim(var_6, var_3, 0.3, self.moveplaybackrate * self.moveratemultiplier);
     self.moveanimtype = "walk";
@@ -680,27 +736,31 @@ setmoveanim(var_0, var_1, var_2) {
       if(isDefined(self.run_overrideanim)) {
         var_6 = self.run_overrideanim;
 
-        if(isDefined(self.run_overridesound))
+        if(isDefined(self.run_overridesound)) {
           var_4 = self.run_overridesound;
+        }
       } else if(var_7 && self.movementtype == "walk") {
         var_6 = getdogmoveanim("walk");
         self.moveanimtype = "walk";
 
-        if(var_5)
+        if(var_5) {
           var_8 = 0.5;
+        }
       } else if(var_7 && self.movementtype == "walk_fast") {
         var_6 = getdogmoveanim("walk_fast");
         self.moveanimtype = "walk";
 
-        if(var_5)
+        if(var_5) {
           var_8 = 0.5;
+        }
       } else if(shouldsniff()) {
         var_6 = getdogmoveanim("sniff");
         var_4 = "anml_dog_sniff_walk";
         self.moveanimtype = "walk";
 
-        if(var_5)
+        if(var_5) {
           var_8 = 0.5;
+        }
       } else
         var_6 = getdogmoveanim("run");
 
@@ -715,15 +775,17 @@ playmovesound(var_0) {
   var_1 = isDefined(self.moveoverridesound);
   var_2 = isDefined(var_0);
 
-  if(!var_1 && !var_2)
+  if(!var_1 && !var_2) {
     return;
+  }
   else if(var_1 && var_2 && self.moveoverridesound == var_0) {
     return;
   }
   stopmovesound();
 
-  if(var_2)
+  if(var_2) {
     thread loopmovesound(var_0);
+  }
 }
 
 loopmovesound(var_0) {
@@ -758,8 +820,9 @@ stopmovesound() {
       wait 0.05;
     }
 
-    if(isDefined(self.movesoundorigin))
+    if(isDefined(self.movesoundorigin)) {
       self.movesoundorigin delete();
+    }
 
     self.movesoundorigin = undefined;
     self.moveoverridesound = undefined;
@@ -772,11 +835,13 @@ getdesireddrivenmovemode(var_0) {
   var_3 = length2dsquared(self.velocity);
 
   if(var_0 == "walk") {
-    if(var_3 > var_1)
+    if(var_3 > var_1) {
       return "run";
+    }
   } else if(var_0 == "run") {
-    if(var_3 < var_2)
+    if(var_3 < var_2) {
       return "walk";
+    }
   }
 
   return var_0;
@@ -787,13 +852,16 @@ setdrivenanim(var_0, var_1, var_2) {
   var_3 = 0.5;
   self clearanim( % dog_move, var_3);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(var_0 == "walk")
+  if(var_0 == "walk") {
     playmoveanimknob(getdogmoveanim("sneak"), var_1, var_3, var_2);
-  else if(var_0 == "run")
+  }
+  else if(var_0 == "run") {
     playmoveanimknob(getdogmoveanim("run"), var_1, var_3, var_2);
+  }
 }
 
 drivenanimupdate() {
@@ -814,8 +882,9 @@ drivenanimupdate() {
       var_3 = 1;
       var_4 = length2dsquared(self.velocity);
 
-      if(var_4 < var_1)
+      if(var_4 < var_1) {
         var_3 = max(sqrt(var_4) / var_0, 0.15);
+      }
 
       setdrivenanim(var_2, 0, var_3);
     }
@@ -841,13 +910,16 @@ dog_addlean() {
 }
 
 getangleindex(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 10;
+  }
 
-  if(var_0 < 0)
+  if(var_0 < 0) {
     return int(ceil((180 + var_0 - var_1) / 45));
-  else
+  }
+  else {
     return int(floor((180 + var_0 + var_1) / 45));
+  }
 }
 
 getangleindices(var_0, var_1) {
@@ -860,13 +932,15 @@ getangleindices(var_0, var_1) {
       var_4[var_4.size] = var_3 + 1;
 
       if(var_0 > (var_2[var_3] + var_2[var_3 + 1]) * 0.5) {
-        if(var_3 + 2 < var_2.size)
+        if(var_3 + 2 < var_2.size) {
           var_4[var_4.size] = var_3 + 2;
+        }
       } else if(var_3 - 1 >= 0)
         var_4[var_4.size] = var_3 - 1;
     } else {
-      if(var_3 - 1 >= 0)
+      if(var_3 - 1 >= 0) {
         var_4[var_4.size] = var_3 - 1;
+      }
 
       var_4[var_4.size] = 1;
     }
@@ -874,13 +948,15 @@ getangleindices(var_0, var_1) {
     var_4[var_4.size] = var_3 - 1;
 
     if(var_0 < (var_2[var_3] + var_2[var_3 - 1]) * 0.5) {
-      if(var_3 - 2 >= 0)
+      if(var_3 - 2 >= 0) {
         var_4[var_4.size] = var_3 - 2;
+      }
     } else if(var_3 + 1 < var_2.size)
       var_4[var_4.size] = var_3 + 1;
   } else {
-    if(var_3 + 1 < var_2.size)
+    if(var_3 + 1 < var_2.size) {
       var_4[var_4.size] = var_3 + 1;
+    }
 
     var_4[var_4.size] = var_2.size - 1;
   }
@@ -895,11 +971,13 @@ droppostoground(var_0) {
   var_4 = 45;
   var_5 = self aiphysicstrace(var_1, var_2, var_3, var_4, 1);
 
-  if(abs(var_5[2] - var_1[2]) < 0.5)
+  if(abs(var_5[2] - var_1[2]) < 0.5) {
     return undefined;
+  }
 
-  if(abs(var_5[2] - var_2[2]) < 0.5)
+  if(abs(var_5[2] - var_2[2]) < 0.5) {
     return undefined;
+  }
 
   return var_5;
 }
@@ -908,11 +986,13 @@ aredifferent(var_0, var_1) {
   var_2 = isDefined(var_0);
   var_3 = isDefined(var_1);
 
-  if(!var_2 && !var_3)
+  if(!var_2 && !var_3) {
     return 0;
+  }
 
-  if(var_2 && var_3 && var_0 == var_1)
+  if(var_2 && var_3 && var_0 == var_1) {
     return 0;
+  }
 
   return 1;
 }
@@ -926,14 +1006,17 @@ hasoverrideanimchanged(var_0, var_1) {
 }
 
 getarrivalnode() {
-  if(isDefined(self.scriptedarrivalent))
+  if(isDefined(self.scriptedarrivalent)) {
     return self.scriptedarrivalent;
+  }
 
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     return self.node;
+  }
 
-  if(isDefined(self.prevnode) && isDefined(self.pathgoalpos) && distance2dsquared(self.prevnode.origin, self.pathgoalpos) < 36)
+  if(isDefined(self.prevnode) && isDefined(self.pathgoalpos) && distance2dsquared(self.prevnode.origin, self.pathgoalpos) < 36) {
     return self.prevnode;
+  }
 
   return undefined;
 }
@@ -950,8 +1033,9 @@ getdogmoveanim(var_0) {
 getdogturnanim(var_0, var_1, var_2) {
   var_3 = getdogmoveanim(var_0);
 
-  if(isDefined(var_3[var_1]))
+  if(isDefined(var_3[var_1])) {
     return var_3[var_1];
+  }
 
   if(isDefined(var_2)) {
     var_3 = getdogmoveanim(var_2);

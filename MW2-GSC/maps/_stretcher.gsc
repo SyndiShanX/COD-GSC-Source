@@ -105,8 +105,9 @@ move_stretcher(front_point, front_angles, rear_point, rear_angles) {
   rear_angle_dif = adjust_angle(rear_angles[1] - guy_angles[1]);
 
   direction = 0;
-  if(front_angle_dif > 0)
+  if(front_angle_dif > 0) {
     direction = 1;
+  }
 
   //	self.drone[0] drone_anim_weight( front_angle_dif, level.front_max_turn, direction, step_time);
   //	self.drone[1] drone_anim_weight( rear_angle_dif, level.rear_max_turn, direction, step_time);
@@ -122,8 +123,9 @@ drone_anim_weight(angle, max_angle, direction, step_time) {
   angle = adjust_angle(angle);
 
   turn = abs(int((angle / max_angle) * 100) / 100);
-  if(turn > 1)
+  if(turn > 1) {
     turn = 1;
+  }
 
   if(!direction) {
     right_weight = turn;
@@ -146,15 +148,18 @@ draw_guy(guy_origin, guy_angles, show_time) {
 }
 
 follow_path(start_struct) {
-  if(isDefined(start_struct.angles))
+  if(isDefined(start_struct.angles)) {
     current_angles = start_struct.angles;
-  else
+  }
+  else {
     current_angles = self.angles;
+  }
 
   current_point = start_struct.origin;
 
-  if(!isDefined(self.last_point))
+  if(!isDefined(self.last_point)) {
     self.last_point = current_point;
+  }
 
   next_struct = getstruct(start_struct.target, "targetname");
   start_struct notify("trigger");
@@ -189,8 +194,9 @@ follow_path(start_struct) {
       }
       dist += rear_data[index].dist;
     }
-    if(index)
+    if(index) {
       rear_data = array_remove_first(rear_data);
+    }
 
     // move the stretcher to the next location
     self move_stretcher(current_point, current_angles, rear_point, rear_angles);
@@ -199,8 +205,9 @@ follow_path(start_struct) {
       // notify when reached.
       next_struct notify("trigger");
 
-      if(!isDefined(next_struct.target))
+      if(!isDefined(next_struct.target)) {
         break;
+      }
       original_origin = next_struct.origin;
       next_struct = getstruct(next_struct.target, "targetname");
       step = 0;
@@ -214,10 +221,12 @@ draw_path(start_struct, line_color, knot_color) {
   	ONLY IT DRAWS THE PATH INSTEAD OF MOVING THE STRETCHER DOWN IT.
   */
 
-  if(isDefined(start_struct.angles))
+  if(isDefined(start_struct.angles)) {
     current_angles = start_struct.angles;
-  else
+  }
+  else {
     current_angles = self.angles;
+  }
 
   current_point = start_struct.origin;
 
@@ -251,8 +260,9 @@ draw_path(start_struct, line_color, knot_color) {
       }
       dist += rear_data[index].dist;
     }
-    if(index)
+    if(index) {
       rear_data = array_remove_first(rear_data);
+    }
 
     level thread drawline(current_point, data_struct.next_point, line_color);
     //		level thread drawline(data_struct.next_point, data_struct.next_point + (0,0,32), knot_color );
@@ -265,8 +275,9 @@ draw_path(start_struct, line_color, knot_color) {
     current_angles = data_struct.next_angles;
 
     if(!data_struct.goal) {
-      if(!isDefined(next_struct.target))
+      if(!isDefined(next_struct.target)) {
         break;
+      }
       original_origin = next_struct.origin;
       next_struct = getstruct(next_struct.target, "targetname");
       step = 0;
@@ -285,10 +296,12 @@ path_math(current_angles, current_point, next_point, main_dist) {
   // adjust the speed of the curve depending on the distance.
   /*	curve_speed = 1 - ( 256/main_dist );
 
-  	if( curve_speed < .45 )
+  	if( curve_speed < .45 ) {
   		curve_speed = .45;
-  	if( curve_speed > .65 )
+  	}
+  	if( curve_speed > .65 ) {
   		curve_speed = .65;
+  	}
   */
   curve_speed = .65;
 
@@ -305,8 +318,9 @@ path_math(current_angles, current_point, next_point, main_dist) {
   angle = level.max_angle;
 
   fraction = 1;
-  if(abs(angle_dif))
+  if(abs(angle_dif)) {
     fraction = angle / abs(angle_dif);
+  }
 
   if(fraction < 1) {
     data_struct.goal = true;
@@ -317,8 +331,9 @@ path_math(current_angles, current_point, next_point, main_dist) {
     dist = distance(current_point, next_point) * fraction;
     dist = dist * curve_speed;
 
-    if(dist > level.step_dist)
+    if(dist > level.step_dist) {
       dist = level.step_dist;
+    }
 
     next_point = current_point + vector_multiply(vector, dist);
     height_dif = height_dif * (1 - fraction);
@@ -371,10 +386,12 @@ vector_divide(vec, n) {
 }
 
 adjust_angle(angle) {
-  if(angle > 180)
+  if(angle > 180) {
     return angle - 360;
-  if(angle < -180)
+  }
+  if(angle < -180) {
     return angle + 360;
+  }
   return angle;
 }
 
@@ -500,10 +517,12 @@ drop_stretcher() {
   self.stretcher_ai[0] stop_magic_bullet_shield();
   self.stretcher_ai[1] stop_magic_bullet_shield();
 
-  if(self.stretcher_ai[0].script_noteworthy == "stretcher")
+  if(self.stretcher_ai[0].script_noteworthy == "stretcher") {
     self.stretcher_ai[0].script_noteworthy = undefined;
-  if(self.stretcher_ai[1].script_noteworthy == "stretcher")
+  }
+  if(self.stretcher_ai[1].script_noteworthy == "stretcher") {
     self.stretcher_ai[1].script_noteworthy = undefined;
+  }
 
   self notify("stop_badplace");
 
@@ -516,10 +535,12 @@ pickup_stretcher(ai, reach) {
   self.stretcher_ai[0] thread magic_bullet_shield();
   self.stretcher_ai[1] thread magic_bullet_shield();
 
-  if(!isDefined(self.stretcher_ai[0].script_noteworthy))
+  if(!isDefined(self.stretcher_ai[0].script_noteworthy)) {
     self.stretcher_ai[0].script_noteworthy = "stretcher";
-  if(!isDefined(self.stretcher_ai[1].script_noteworthy))
+  }
+  if(!isDefined(self.stretcher_ai[1].script_noteworthy)) {
     self.stretcher_ai[1].script_noteworthy = "stretcher";
+  }
 
   self.stretcher_ai[0].animname = "front_ai";
   self.stretcher_ai[1].animname = "rear_ai";
@@ -571,15 +592,17 @@ draw_structs(struct) {
   while(true) {
     level thread drawline(struct.origin, struct.origin + (0, 0, -32), (1, 0, 0));
 
-    if(!isDefined(struct.target))
+    if(!isDefined(struct.target)) {
       break;
+    }
     struct = getstruct(struct.target, "targetname");
   }
 }
 
 drawline(p1, p2, color, show_time) {
-  if(!isDefined(show_time))
+  if(!isDefined(show_time)) {
     show_time = 100;
+  }
 
   show_time = gettime() + (show_time * 1000);
   while(gettime() < show_time) {
@@ -589,14 +612,17 @@ drawline(p1, p2, color, show_time) {
 }
 
 print3Dmessage(info_origin, message, show_time, color, offset, scale) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (0.5, 1, 0.5);
+  }
 
-  if(!isDefined(offset))
+  if(!isDefined(offset)) {
     offset = (0, 0, 56);
+  }
 
-  if(!isDefined(scale))
+  if(!isDefined(scale)) {
     scale = 6;
+  }
 
   show_time = gettime() + (show_time * 1000);
   while(gettime() < show_time) {

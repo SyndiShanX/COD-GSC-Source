@@ -32,8 +32,9 @@ vo_see_map_trigger() {
       arrayremovevalue(players, e_triggerer);
       closest_other_player = getclosest(e_triggerer.origin, players);
 
-      if(isDefined(closest_other_player))
+      if(isDefined(closest_other_player)) {
         closest_other_player do_player_general_vox("quest", "response_map", undefined, 100);
+      }
 
       b_has_line_played = 1;
       wait 5;
@@ -50,10 +51,12 @@ opening_vo() {
   vo_play_four_part_conversation(level.four_part_convos["start_1_oh_shit_" + randomintrange(1, 3)]);
   wait 1;
 
-  if(players.size == 1)
+  if(players.size == 1) {
     players[0] vo_play_soliloquy(level.soliloquy_convos["solo_intro_" + players[0].character_name]);
-  else if(is_player_character_present("Arlington"))
+  }
+  else if(is_player_character_present("Arlington")) {
     vo_play_four_part_conversation(level.four_part_convos["intro_plr_3"]);
+  }
 
   level thread vo_see_map_trigger();
   wait 10;
@@ -66,8 +69,9 @@ opening_vo() {
   level waittill("end_of_round");
   wait 3;
 
-  if(get_players_touching("zone_library") + get_players_touching("zone_start") == 4)
+  if(get_players_touching("zone_library") + get_players_touching("zone_start") == 4) {
     vo_play_four_part_conversation(level.four_part_convos["start_2_oh_shit"]);
+  }
 
   wait 1;
 }
@@ -301,8 +305,9 @@ vo_bridge_soliloquy() {
   if(level.n_quest_iteration_count < 3) {
     convo = level.soliloquy_convos["purgatory_" + self.character_name + "_visit" + level.n_quest_iteration_count + "_alt" + randomintrange(1, 3)];
 
-    if(isDefined(convo))
+    if(isDefined(convo)) {
       self vo_play_soliloquy(convo);
+    }
   }
 }
 
@@ -310,8 +315,9 @@ vo_bridge_four_part_convo() {
   if(level.n_quest_iteration_count < 3) {
     convo = level.four_part_convos["bridge_visit" + level.n_quest_iteration_count + "_alt" + randomintrange(1, 5)];
 
-    if(isDefined(convo))
+    if(isDefined(convo)) {
       vo_play_four_part_conversation(convo);
+    }
   }
 }
 
@@ -391,8 +397,9 @@ vo_play_four_part_conversation(convo) {
       }
     }
 
-    if(!isDefined(e_arlington) || !isDefined(e_sal) || !isDefined(e_billy) || !isDefined(e_finn))
+    if(!isDefined(e_arlington) || !isDefined(e_sal) || !isDefined(e_billy) || !isDefined(e_finn)) {
       return;
+    }
     else {
       foreach(player in players) {
         if(isDefined(player)) {
@@ -417,17 +424,22 @@ vo_play_four_part_conversation(convo) {
         return;
       }
 
-      if(issubstr(convo[i], "plr_0"))
+      if(issubstr(convo[i], "plr_0")) {
         speaking_player = e_finn;
-      else if(issubstr(convo[i], "plr_1"))
+      }
+      else if(issubstr(convo[i], "plr_1")) {
         speaking_player = e_sal;
-      else if(issubstr(convo[i], "plr_2"))
+      }
+      else if(issubstr(convo[i], "plr_2")) {
         speaking_player = e_billy;
-      else if(issubstr(convo[i], "plr_3"))
+      }
+      else if(issubstr(convo[i], "plr_3")) {
         speaking_player = e_arlington;
+      }
 
-      if(isDefined(old_speaking_player))
+      if(isDefined(old_speaking_player)) {
         n_dist = distance(old_speaking_player.origin, speaking_player.origin);
+      }
 
       if(speaking_player.afterlife || n_dist > n_max_reply_dist) {
         foreach(player in players) {
@@ -466,10 +478,12 @@ electric_chair_vo() {
     players = getplayers();
 
     if(players.size == 4 && n_players_on_bridge_count == 4) {
-      if(count_zombies_in_zone("zone_golden_gate_bridge") > 0)
+      if(count_zombies_in_zone("zone_golden_gate_bridge") > 0) {
         vo_play_four_part_conversation(level.four_part_convos["chair_combat_" + randomintrange(1, 3)]);
-      else
+      }
+      else {
         vo_play_four_part_conversation(level.four_part_convos["chair" + randomintrange(1, 3)]);
+      }
     } else if(isDefined(players[0]) && players[0] istouching(e_nml_zone)) {
       character_name = players[0].character_name;
       players[0] vo_play_soliloquy(level.soliloquy_convos["electric_chair_" + character_name]);
@@ -482,16 +496,18 @@ escape_flight_vo() {
   players = getplayers();
   player = players[randomintrange(0, players.size)];
 
-  if(isDefined(player) && player istouching(e_roof_zone))
+  if(isDefined(player) && player istouching(e_roof_zone)) {
     player thread do_player_general_vox("quest", "build_plane", undefined, 100);
+  }
 
   flag_wait("plane_boarded");
 
   if(level.final_flight_activated) {
     return;
   }
-  while(level.characters_in_nml.size == 0)
+  while(level.characters_in_nml.size == 0) {
     wait 0.1;
+  }
 
   wait 1;
 
@@ -500,8 +516,9 @@ escape_flight_vo() {
     players = getplayers();
 
     foreach(player in players) {
-      if(isDefined(player) && player.character_name == character_name)
+      if(isDefined(player) && player.character_name == character_name) {
         player thread do_player_general_vox("quest", "plane_takeoff");
+      }
     }
   }
 
@@ -513,8 +530,9 @@ escape_flight_vo() {
     players = getplayers();
 
     foreach(player in players) {
-      if(isDefined(player) && player.character_name == character_name)
+      if(isDefined(player) && player.character_name == character_name) {
         player playSound("vox_plr_" + player.characterindex + "_plane_flight_0");
+      }
     }
   }
 
@@ -526,8 +544,9 @@ escape_flight_vo() {
     players = getplayers();
 
     foreach(player in players) {
-      if(isDefined(player) && player.character_name == character_name)
+      if(isDefined(player) && player.character_name == character_name) {
         player playSound("vox_plr_" + player.characterindex + "_plane_crash_0");
+      }
     }
   }
 
@@ -535,8 +554,9 @@ escape_flight_vo() {
   players = getplayers();
 
   foreach(player in players) {
-    if(isDefined(player) && isinarray(level.characters_in_nml, player.character_name))
+    if(isDefined(player) && isinarray(level.characters_in_nml, player.character_name)) {
       player thread player_scream_thread();
+    }
   }
 }
 
@@ -546,8 +566,9 @@ player_scream_thread() {
   players = getplayers();
 
   foreach(player in players) {
-    if(isDefined(player) && isinarray(level.characters_in_nml, player.character_name))
+    if(isDefined(player) && isinarray(level.characters_in_nml, player.character_name)) {
       player playsoundtoplayer("vox_plr_" + player.characterindex + "_free_fall_0", self);
+    }
   }
 
   level flag_wait("plane_crashed");
@@ -567,14 +588,16 @@ sndhitelectrifiedpulley(str_master_key_location) {
 }
 
 is_player_character_present(character_name) {
-  if(!isDefined(character_name))
+  if(!isDefined(character_name)) {
     return false;
+  }
 
   players = getplayers();
 
   foreach(player in players) {
-    if(isDefined(player.character_name) && player.character_name == character_name)
+    if(isDefined(player.character_name) && player.character_name == character_name) {
       return true;
+    }
   }
 
   return false;
@@ -587,8 +610,9 @@ get_players_touching(scr_touched_name) {
   a_players = getplayers();
 
   foreach(player in a_players) {
-    if(isDefined(player) && player istouching(e_touched))
+    if(isDefined(player) && player istouching(e_touched)) {
       n_touching_count++;
+    }
   }
 
   return n_touching_count;
@@ -604,8 +628,9 @@ count_zombies_in_zone(volume) {
   zombies = getaispeciesarray("axis", "all");
 
   for(i = 0; i < zombies.size; i++) {
-    if(zombies[i] istouching(e_zone))
+    if(zombies[i] istouching(e_zone)) {
       n_zombie_count++;
+    }
   }
 
   return n_zombie_count;

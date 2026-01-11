@@ -246,8 +246,9 @@ walla_vignettes() {
   location[11] = (1415, 1560, -352);
   location = array_randomize(location);
 
-  for(i = 0; i < location.size; i++)
+  for(i = 0; i < location.size; i++) {
     level thread play_walla_vignettes(location[i], undefined);
+  }
 
   oneshot = [];
   oneshot[0] = spawnStruct();
@@ -257,25 +258,29 @@ walla_vignettes() {
   oneshot[1].location = (1744, 2602, -475);
   oneshot[1].alias = "amb_walla_crying";
 
-  for(i = 0; i < oneshot.size; i++)
+  for(i = 0; i < oneshot.size; i++) {
     level thread play_walla_vignettes(oneshot[i], 1);
+  }
 }
 
 play_walla_vignettes(array_value, oneshot) {
   if(isDefined(oneshot)) {
     player = getlocalplayers()[0];
 
-    while(distance(player.origin, array_value.location) > 200)
+    while(distance(player.origin, array_value.location) > 200) {
       wait 0.5;
+    }
 
     playSound(0, array_value.alias, array_value.location);
     return;
   }
 
-  if(randomintrange(0, 100) <= 75)
+  if(randomintrange(0, 100) <= 75) {
     playloopat("amb_walla_fighting_" + randomintrange(0, 2), array_value);
-  else
+  }
+  else {
     playloopat("amb_walla_stuck", array_value);
+  }
 }
 
 random_alarms() {
@@ -300,8 +305,9 @@ random_alarms() {
   location[15] = (376, -237, 118);
   location[16] = (376, -237, 377);
 
-  for(i = 0; i < location.size; i++)
+  for(i = 0; i < location.size; i++) {
     playloopat("amb_alarm_looper", location[i]);
+  }
 }
 
 snd_start_autofx_audio() {

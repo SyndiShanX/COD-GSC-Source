@@ -4,10 +4,12 @@
 **************************************************/
 
 main() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     animscripts\traverse\shared::dog_jump_up(72.0, 5);
-  else
+  }
+  else {
     low_wall_human();
+  }
 }
 
 #using_animtree("generic_human");
@@ -34,8 +36,9 @@ dotraversegravity(var_0) {
   self traversemode("gravity");
   self.traversestartz = self.origin[2];
 
-  if(!animhasnotetrack(var_3, "traverse_align"))
+  if(!animhasnotetrack(var_3, "traverse_align")) {
     animscripts\traverse\shared::handletraversealignment();
+  }
 
   var_5 = 0;
 
@@ -47,8 +50,9 @@ dotraversegravity(var_0) {
   }
 
   if(var_5) {
-    if(isDefined(var_0["traverseToCoverSound"]))
+    if(isDefined(var_0["traverseToCoverSound"])) {
       thread maps\_utility::play_sound_on_entity(var_0["traverseToCoverSound"]);
+    }
   } else if(isDefined(var_0["traverseSound"]))
     thread maps\_utility::play_sound_on_entity(var_0["traverseSound"]);
 
@@ -81,8 +85,9 @@ dotraversegravity(var_0) {
 }
 
 handletraversenotetracksgravity(var_0) {
-  if(var_0 == "traverse_death")
+  if(var_0 == "traverse_death") {
     return animscripts\traverse\shared::handletraversedeathnotetrack();
+  }
   else if(var_0 == "traverse_align") {
     self.traversestartz = self.origin[2];
     return animscripts\traverse\shared::handletraversealignment();

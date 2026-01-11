@@ -147,8 +147,9 @@ main(var_0) {
 
   var_1 = getEntArray("spinning_object", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 thread rotateobject();
+  }
 }
 
 precache_create_fx() {

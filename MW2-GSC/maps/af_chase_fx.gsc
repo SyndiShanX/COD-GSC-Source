@@ -8,8 +8,9 @@
 #include maps\_sandstorm;
 
 main() {
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = ToLower(GetDvar("mapname"));
+  }
 
   PreCacheModel("fog_blackout");
 
@@ -158,10 +159,12 @@ main() {
   level._effect["light_shaft_ground_dust_large_yel"] = LoadFX("dust/light_shaft_ground_dust_large_yel");
   level._effect["light_shaft_motes_afchase"] = LoadFX("dust/light_shaft_motes_afchase");
 
-  if(level.script == "ending")
+  if(level.script == "ending") {
     level._effect["light_glow_white_bulb"] = LoadFX("dust/light_shaft_motes_afchase");
-  else
+  }
+  else {
     level._effect["light_glow_white_bulb"] = LoadFX("misc/light_glow_white_bulb");
+  }
 
   level._effect["splash_underwater_afchase"] = loadfx("water/splash_underwater_afchase");
   level._effect["rapids_splash_0x1000"] = LoadFX("water/rapids_splash_0x1000");
@@ -181,8 +184,9 @@ main() {
 
   level._effect["bloodpool_ending"] = Loadfx("impacts/deathfx_bloodpool_ending");
 
-  if(GetDvarInt("r_reflectionProbeGenerate"))
+  if(GetDvarInt("r_reflectionProbeGenerate")) {
     return;
+  }
 
   //fake blizzard in createfx
   //thread createfx_stuff();
@@ -244,8 +248,9 @@ sand_storm_effect() {
     timer = randomfloatrange(level.sandstorm_time.min, level.sandstorm_time.max);
     timer *= 0.5;
 
-    if(timer < 0.5)
+    if(timer < 0.5) {
       timer = 0.5;
+    }
     wait(timer);
 
     playFX(level._effect["sand_storm_player"], player.origin + (0, 0, 100));
@@ -272,14 +277,16 @@ stop_sandstorm_effect() {
 
   for(;;) {
     if(level.sandstorm_time.min >= 1.5 && near_fx.size) {
-      foreach(fx in near_fx)
+      foreach(fx in near_fx) {
       fx pauseeffect();
+      }
 
       near_fx = [];
     }
 
-    if(level.sandstorm_time.min >= 2.0)
+    if(level.sandstorm_time.min >= 2.0) {
       break;
+    }
 
     level.sandstorm_time.min += 0.1;
     level.sandstorm_time.max += 0.15;
@@ -347,8 +354,9 @@ sandstorm_fog_management() {
       }
     }
 
-    if(player_dist < level.sandstorm_min_dist)
+    if(player_dist < level.sandstorm_min_dist) {
       player_dist = level.sandstorm_min_dist;
+    }
 
     ent.startDist = player_dist * 0.75;
     ent.halfwayDist = player_dist;

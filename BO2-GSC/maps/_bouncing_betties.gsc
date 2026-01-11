@@ -9,8 +9,9 @@
 init_bouncing_betties() {
   level.betty_trigs = getEntArray("trip_betty", "targetname");
 
-  for(i = 0; i < level.betty_trigs.size; i++)
+  for(i = 0; i < level.betty_trigs.size; i++) {
     level thread betty_think(level.betty_trigs[i]);
+  }
 }
 
 betty_think(trigger) {
@@ -44,8 +45,9 @@ betty_think(trigger) {
       continue;
     }
 
-    if(distance(player.origin, betty.origin) < 90 + 90 * 1)
+    if(distance(player.origin, betty.origin) < 90 + 90 * 1) {
       player dodamage(player.health * 2, betty.origin);
+    }
   }
 
   for(i = 0; i < level.betty_trigs.size; i++) {
@@ -54,8 +56,9 @@ betty_think(trigger) {
     if(!isDefined(otherbetty) || trigger == otherbetty) {
       continue;
     }
-    if(distance2d(betty.origin, otherbetty.origin) <= 90 + 90 * 1)
+    if(distance2d(betty.origin, otherbetty.origin) <= 90 + 90 * 1) {
       otherbetty thread betty_pop(randomfloatrange(0.15, 0.25));
+    }
   }
 
   betty delete();
@@ -84,8 +87,9 @@ betty_rotate_fx() {
 }
 
 betty_pop(waittime) {
-  if(isDefined(waittime) && waittime > 0)
+  if(isDefined(waittime) && waittime > 0) {
     wait(waittime);
+  }
 
   self notify("trigger");
 }

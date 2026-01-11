@@ -29,10 +29,12 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathfx(var_3[var_0], "tag_deathfx", "h1_exp_armor_vehicle", undefined, undefined, undefined, 0);
   maps\_vehicle::build_drive( % bmp_movement, % bmp_movement_backwards, 10);
 
-  if(issubstr(var_0, "_low"))
+  if(issubstr(var_0, "_low")) {
     maps\_vehicle::build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun_low");
-  else
+  }
+  else {
     maps\_vehicle::build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun");
+  }
 
   maps\_vehicle::build_radiusdamage((0, 0, 53), 512, 300, 20, 0);
   maps\_vehicle::build_treadfx();
@@ -55,8 +57,9 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 4; var_1++)
+  for(var_1 = 0; var_1 < 4; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   var_0[0].sittag = "tag_guy1";
   var_0[1].sittag = "tag_guy2";

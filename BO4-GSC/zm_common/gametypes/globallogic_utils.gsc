@@ -348,4 +348,3 @@ logteamwinstring(wintype, winner) {
 
   print(log_string);
 }
-

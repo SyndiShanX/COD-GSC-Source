@@ -10,8 +10,9 @@ init() {
   createcalloutareaidmap();
   level.calloutglobals.areatriggers = getEntArray("callout_area", "targetname");
 
-  foreach(var_01 in level.calloutglobals.areatriggers)
+  foreach(var_01 in level.calloutglobals.areatriggers) {
   var_01 thread calloutareathink();
+  }
 
   thread monitorplayers();
 }
@@ -71,8 +72,9 @@ setplayercalloutarea(var_00, var_01) {
   }
   self.calloutarea = var_00;
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     thread watchplayerleavingcalloutarea(var_01, var_1.script_noteworthy);
+  }
 
   var_02 = level.calloutglobals.areaidmap[var_00];
 
@@ -81,8 +83,9 @@ setplayercalloutarea(var_00, var_01) {
     var_03 = scripts\mp\utility\game::get_players_watching(1, 0);
 
     foreach(var_05 in var_03) {
-      if(var_05 ismlgspectator())
+      if(var_05 ismlgspectator()) {
         var_05 setclientomnvar("ui_callout_area_id", var_02);
+      }
     }
   } else if(var_00 != "none")
     return;

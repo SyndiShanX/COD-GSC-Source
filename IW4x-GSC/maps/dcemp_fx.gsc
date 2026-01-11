@@ -37,10 +37,12 @@ main() {
   level._effect["headshot3"] = loadfx("impacts/flesh_hit_body_fatal_exit");
   level._effect["ground_smoke_dcburning1200x1200"] = loadfx("smoke/ground_smoke1200x1200_dcburning");
 
-  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0")
+  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
     level._effect["_attack_heli_spotlight"] = loadfx("misc/hunted_spotlight_model_dim");
-  else
+  }
+  else {
     level._effect["_attack_heli_spotlight"] = loadfx("misc/spotlight_large");
+  }
 
   level._effect["planecrash_spotlight"] = loadfx("misc/dcemp_planecrash_spotlight_model");
   level._effect["dcemp_nuke_spotlight_fade"] = loadfx("misc/dcemp_nuke_spotlight_fade");

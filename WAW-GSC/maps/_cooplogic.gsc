@@ -7,12 +7,15 @@
 
 init() {
   level.splitscreen = isSplitScreen();
-  if(level.splitScreen)
+  if(level.splitScreen) {
     precacheString(&"GAME_ENDED_GAME");
-  else
+  }
+  else {
     precacheString(&"GAME_HOST_ENDED_GAME");
-  if(!isDefined(game["state"]))
+  }
+  if(!isDefined(game["state"])) {
     game["state"] = "playing";
+  }
   level.gameEnded = false;
   level.postRoundTime = 2.0;
   level.forcedEnd = false;
@@ -26,10 +29,12 @@ forceEnd() {
   forcelevelend();
   level.forcedEnd = true;
   level.hostForcedEnd = true;
-  if(level.splitscreen)
+  if(level.splitscreen) {
     endString = "";
-  else
+  }
+  else {
     endString = &"GAME_HOST_ENDED_GAME";
+  }
   makeDvarServerInfo("ui_text_endreason", endString);
   setDvar("ui_text_endreason", endString);
   thread endGame(endString);
@@ -55,8 +60,9 @@ endGame(endReasonText) {
   if(isDefined(endReasonText)) {
     iprintln(endReasonText);
   }
-  if(!level.hostForcedEnd && !level.forcedEnd)
+  if(!level.hostForcedEnd && !level.forcedEnd) {
     roundEndWait(level.postRoundTime, true);
+  }
   level.intermission = true;
   players = get_players();
   for(index = 0; index < players.size; index++) {

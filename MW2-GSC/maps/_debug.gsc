@@ -10,17 +10,21 @@ mainDebug() {
   level.animsound_hudlimit = 14;
   thread lastSightPosWatch();
 
-  if(level.script != "background")
+  if(level.script != "background") {
     thread camera();
+  }
 
-  if(GetDebugDvar("debug_corner") == "")
+  if(GetDebugDvar("debug_corner") == "") {
     SetDvar("debug_corner", "off");
-  else
+  }
+  else {
   if(GetDebugDvar("debug_corner") == "on")
+  }
     debug_corner();
 
-  if(GetDvar("chain") == "1")
+  if(GetDvar("chain") == "1") {
     thread debugchains();
+  }
 
   thread debugDvars();
   PreCacheShader("white");
@@ -28,14 +32,17 @@ mainDebug() {
 
   thread watchMinimap();
 
-  if(GetDvar("level_transition_test") != "off")
+  if(GetDvar("level_transition_test") != "off") {
     thread complete_me();
+  }
 
-  if(GetDvar("level_completeall") != "off")
+  if(GetDvar("level_completeall") != "off") {
     maps\_endmission::force_all_complete();
+  }
 
-  if(GetDvar("level_clear_all") != "off")
+  if(GetDvar("level_clear_all") != "off") {
     maps\_endmission::clearall();
+  }
 
   //	thread playerNode();
   //	thread colordebug();
@@ -80,8 +87,9 @@ mainDebug() {
         friends = GetAIArray("allies");
         for(i = 0; i < friends.size; i++) {
           node = friends[i] animscripts\utility::GetClaimedNode();
-          if(isDefined(node))
+          if(isDefined(node)) {
             Line(friends[i].origin + (0, 0, 35), node.origin, (0.2, 0.5, 0.8), 0.5);
+          }
         }
 
       }
@@ -93,8 +101,9 @@ debug_enemyPos(num) {
   ai = GetAIArray();
 
   for(i = 0; i < ai.size; i++) {
-    if(ai[i] GetEntityNumber() != num)
+    if(ai[i] GetEntityNumber() != num) {
       continue;
+    }
 
     ai[i] thread debug_enemyPosProc();
     break;
@@ -105,8 +114,9 @@ debug_stopEnemyPos(num) {
   ai = GetAIArray();
 
   for(i = 0; i < ai.size; i++) {
-    if(ai[i] GetEntityNumber() != num)
+    if(ai[i] GetEntityNumber() != num) {
       continue;
+    }
 
     ai[i] notify("stop_drawing_enemy_pos");
     break;
@@ -119,11 +129,13 @@ debug_enemyPosProc() {
   for(;;) {
     wait(0.05);
 
-    if(IsAlive(self.enemy))
+    if(IsAlive(self.enemy)) {
       Line(self.origin + (0, 0, 70), self.enemy.origin + (0, 0, 70), (0.8, 0.2, 0.0), 0.5);
+    }
 
-    if(!self animscripts\utility::hasEnemySightPos())
+    if(!self animscripts\utility::hasEnemySightPos()) {
       continue;
+    }
 
     pos = animscripts\utility::getEnemySightPos();
     Line(self.origin + (0, 0, 70), pos, (0.9, 0.5, 0.3), 0.5);
@@ -139,17 +151,21 @@ debug_enemyPosReplay() {
     //			continue;
 
     guy = ai[i];
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
+    }
 
-    if(isDefined(guy.lastEnemySightPos))
+    if(isDefined(guy.lastEnemySightPos)) {
       Line(guy.origin + (0, 0, 65), guy.lastEnemySightPos, (1, 0, 1), 0.5);
+    }
 
     if(isDefined(guy.goodShootPos)) {
-      if(guy IsBadGuy())
+      if(guy IsBadGuy()) {
         color = (1, 0, 0);
-      else
+      }
+      else {
         color = (0, 0, 1);
+      }
 
       //			nodeOffset = guy getEye();
       nodeOffset = guy.origin + (0, 0, 54);
@@ -175,33 +191,40 @@ debug_enemyPosReplay() {
   }
   if(1) return;
 
-  if(!isalive(guy))
+  if(!isalive(guy)) {
     return;
+  }
 
-  if(IsAlive(guy.enemy))
+  if(IsAlive(guy.enemy)) {
     Line(guy.origin + (0, 0, 70), guy.enemy.origin + (0, 0, 70), (0.6, 0.2, 0.2), 0.5);
+  }
 
-  if(isDefined(guy.lastEnemySightPos))
+  if(isDefined(guy.lastEnemySightPos)) {
     Line(guy.origin + (0, 0, 65), guy.lastEnemySightPos, (0, 0, 1), 0.5);
+  }
 
-  if(IsAlive(guy.goodEnemy))
+  if(IsAlive(guy.goodEnemy)) {
     Line(guy.origin + (0, 0, 50), guy.goodEnemy.origin, (1, 0, 0), 0.5);
+  }
 
-  if(!guy animscripts\utility::hasEnemySightPos())
+  if(!guy animscripts\utility::hasEnemySightPos()) {
     return;
+  }
 
   pos = guy animscripts\utility::getEnemySightPos();
   Line(guy.origin + (0, 0, 55), pos, (0.2, 0.2, 0.6), 0.5);
 
-  if(isDefined(guy.goodShootPos))
+  if(isDefined(guy.goodShootPos)) {
     Line(guy.origin + (0, 0, 45), guy.goodShootPos, (0.2, 0.6, 0.2), 0.5);
+  }
 }
 
 drawEntTag(num) {
   ai = GetAIArray();
   for(i = 0; i < ai.size; i++) {
-    if(ai[i] GetEntNum() != num)
+    if(ai[i] GetEntNum() != num) {
       continue;
+    }
     ai[i] thread dragTagUntilDeath(GetDebugDvar("debug_tag"));
   }
   SetDvar("debug_enttag", "");
@@ -290,8 +313,9 @@ drawArrow(org, ang, opcolor, drawtime) {
     blue = opcolor;
   }
 
-  if(!isDefined(drawtime))
+  if(!isDefined(drawtime)) {
     drawtime = 1;
+  }
 
   Line(org, org + forwardFar, red, 0.9, 0, drawtime);
   Line(org + forwardFar, org + forwardClose + rightdraw, red, 0.9, 0, drawtime);
@@ -316,13 +340,16 @@ drawArrow(org, ang, opcolor, drawtime) {
 =============
 */
 drawForwardForever(scale, color) {
-  if(!isDefined(scale))
+  if(!isDefined(scale)) {
     scale = 100;
-  if(!isDefined(color))
+  }
+  if(!isDefined(color)) {
     color = (0, 1, 0);
+  }
   for(;;) {
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return;
+    }
     forward = anglesToForward(self.angles);
     Line(self.origin, self.origin + forward * scale, color);
     wait(0.05);
@@ -352,8 +379,9 @@ drawPlayerViewForever() {
 */
 drawTagForever(tag, opcolor) {
   for(;;) {
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return;
+    }
     drawTag(tag, opcolor);
     wait(0.05);
   }
@@ -361,8 +389,9 @@ drawTagForever(tag, opcolor) {
 
 drawTagTrails(tag, opcolor) {
   for(;;) {
-    if(!isDefined(self.origin))
+    if(!isDefined(self.origin)) {
       break;
+    }
     drawTag(tag, opcolor, 1000);
     wait(0.05);
   }
@@ -371,10 +400,12 @@ drawTagTrails(tag, opcolor) {
 dragTagUntilDeath(tag, opcolor) {
   self endon("death");
   for(;;) {
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       break;
-    if(!isDefined(self.origin))
+    }
+    if(!isDefined(self.origin)) {
       break;
+    }
     drawTag(tag, opcolor);
     wait(0.05);
   }
@@ -383,8 +414,9 @@ dragTagUntilDeath(tag, opcolor) {
 viewTag(type, tag) {
   if(type == "ai") {
     ai = GetAIArray();
-    for(i = 0; i < ai.size; i++)
+    for(i = 0; i < ai.size; i++) {
       ai[i] drawTag(tag);
+    }
   }
 }
 
@@ -393,38 +425,45 @@ debug_corner() {
   nodes = GetAllNodes();
   corners = [];
   for(i = 0; i < nodes.size; i++) {
-    if(nodes[i].type == "Cover Left")
+    if(nodes[i].type == "Cover Left") {
       corners[corners.size] = nodes[i];
-    if(nodes[i].type == "Cover Right")
+    }
+    if(nodes[i].type == "Cover Right") {
       corners[corners.size] = nodes[i];
+    }
   }
 
   ai = GetAIArray();
-  for(i = 0; i < ai.size; i++)
+  for(i = 0; i < ai.size; i++) {
     ai[i] Delete();
+  }
 
   level.debugspawners = GetSpawnerArray();
   level.activeNodes = [];
   level.completedNodes = [];
-  for(i = 0; i < level.debugspawners.size; i++)
+  for(i = 0; i < level.debugspawners.size; i++) {
     level.debugspawners[i].targetname = "blah";
+  }
 
   covered = 0;
   for(i = 0; i < 30; i++) {
-    if(i >= corners.size)
+    if(i >= corners.size) {
       break;
+    }
 
     corners[i] thread coverTest();
     covered++;
   }
 
-  if(corners.size <= 30)
+  if(corners.size <= 30) {
     return;
+  }
 
   for(;;) {
     level waittill("debug_next_corner");
-    if(covered >= corners.size)
+    if(covered >= corners.size) {
       covered = 0;
+    }
     corners[covered] thread coverTest();
     covered++;
   }
@@ -444,23 +483,27 @@ coverSetupAnim() {
       spawner = level.debugspawners[i];
       nearActive = false;
       for(p = 0; p < level.activeNodes.size; p++) {
-        if(Distance(level.activeNodes[p].origin, self.origin) > 250)
+        if(Distance(level.activeNodes[p].origin, self.origin) > 250) {
           continue;
+        }
         nearActive = true;
         break;
       }
-      if(nearActive)
+      if(nearActive) {
         continue;
+      }
 
       completed = false;
       for(p = 0; p < level.completedNodes.size; p++) {
-        if(level.completedNodes[p] != self)
+        if(level.completedNodes[p] != self) {
           continue;
+        }
         completed = true;
         break;
       }
-      if(completed)
+      if(completed) {
         continue;
+      }
 
       level.activeNodes[level.activeNodes.size] = self;
       spawner.origin = self.origin;
@@ -474,8 +517,9 @@ coverSetupAnim() {
 
       break;
     }
-    if(IsAlive(spawn))
+    if(IsAlive(spawn)) {
       break;
+    }
   }
 
   wait(1);
@@ -495,8 +539,9 @@ coverSetupAnim() {
 removeActiveSpawner(spawner) {
   newSpawners = [];
   for(p = 0; p < level.activeNodes.size; p++) {
-    if(level.activeNodes[p] == spawner)
+    if(level.activeNodes[p] == spawner) {
       continue;
+    }
     newSpawners[newSpawners.size] = level.activeNodes[p];
   }
   level.activeNodes = newSpawners;
@@ -527,10 +572,12 @@ debugMisstime() {
   self endon("stopdebugmisstime");
   self endon("death");
   for(;;) {
-    if(self.a.misstime <= 0)
+    if(self.a.misstime <= 0) {
       Print3d(self GetTagOrigin("TAG_EYE") + (0, 0, 15), "hit", (0.3, 1, 1), 1);
-    else
+    }
+    else {
       Print3d(self GetTagOrigin("TAG_EYE") + (0, 0, 15), self.a.misstime / 20, (0.3, 1, 1), 1);
+    }
     wait(0.05);
   }
 }
@@ -540,15 +587,17 @@ debugMisstimeOff() {
 }
 
 setEmptyDvar(dvar, setting) {
-  if(GetDebugDvar(dvar) == "")
+  if(GetDebugDvar(dvar) == "") {
     SetDvar(dvar, setting);
+  }
 }
 
 debugJump(num) {
   ai = GetAIArray();
   for(i = 0; i < ai.size; i++) {
-    if(ai[i] GetEntNum() != num)
+    if(ai[i] GetEntNum() != num) {
       continue;
+    }
 
     Line(level.player.origin, ai[i].origin, (0.2, 0.3, 1.0));
     return;
@@ -565,110 +614,143 @@ debugDvars() {
   create_dvar("vehicle_info", 0);
   create_dvar("getdot", 0);
 
-  if(GetDvar("level_transition_test") == "")
+  if(GetDvar("level_transition_test") == "") {
     SetDvar("level_transition_test", "off");
+  }
 
-  if(GetDvar("level_completeall") == "")
+  if(GetDvar("level_completeall") == "") {
     SetDvar("level_completeall", "off");
+  }
 
-  if(GetDvar("level_clear_all") == "")
+  if(GetDvar("level_clear_all") == "") {
     SetDvar("level_clear_all", "off");
+  }
 
   waittillframeend; // for vars to get init'd elsewhere
   setEmptyDvar("debug_accuracypreview", "off");
 
-  if(GetDebugDvar("debug_lookangle") == "")
+  if(GetDebugDvar("debug_lookangle") == "") {
     SetDvar("debug_lookangle", "off");
-
-  if(GetDebugDvar("debug_grenademiss") == "")
-    SetDvar("debug_grenademiss", "off");
-
-  if(GetDebugDvar("debug_enemypos") == "")
-    SetDvar("debug_enemypos", "-1");
-
-  if(GetDebugDvar("debug_dotshow") == "")
-    SetDvar("debug_dotshow", "-1");
-
-  if(GetDebugDvar("debug_stopenemypos") == "")
-    SetDvar("debug_stopenemypos", "-1");
-
-  if(GetDebugDvar("debug_replayenemypos") == "")
-    SetDvar("debug_replayenemypos", "-1");
-
-  if(GetDebugDvar("debug_tag") == "")
-    SetDvar("debug_tag", "");
-
-  if(GetDebugDvar("debug_arrivals") == "")
-    SetDvar("debug_arrivals", "");
-
-  if(GetDebugDvar("debug_chatlook") == "")
-    SetDvar("debug_chatlook", "");
-
-  if(GetDebugDvar("debug_vehicletag") == "")
-    SetDvar("debug_vehicletag", "");
-
-  if(GetDebugDvar("debug_colorfriendlies") == "")
-    SetDvar("debug_colorfriendlies", "off");
-
-  if(GetDebugDvar("debug_animreach") == "")
-    SetDvar("debug_animreach", "off");
-
-  if(GetDebugDvar("debug_hatmodel") == "")
-    SetDvar("debug_hatmodel", "on");
-
-  if(GetDebugDvar("debug_trace") == "")
-    SetDvar("debug_trace", "off");
-
-  level.debug_badpath = false;
-  if(GetDebugDvar("debug_badpath") == "")
-    SetDvar("debug_badpath", "off");
-
-  if(GetDebugDvar("anim_lastsightpos") == "")
-    SetDvar("debug_lastsightpos", "off");
-
-  if(GetDebugDvar("debug_dog_sound") == "")
-    SetDvar("debug_dog_sound", "");
-
-  if(GetDvar("debug_nuke") == "")
-    SetDvar("debug_nuke", "off");
-
-  if(GetDebugDvar("debug_deathents") == "on")
-    SetDvar("debug_deathents", "off");
-
-  if(GetDvar("debug_jump") == "")
-    SetDvar("debug_jump", "");
-
-  if(GetDvar("debug_hurt") == "")
-    SetDvar("debug_hurt", "");
-
-  if(GetDebugDvar("animsound") == "")
-    SetDvar("animsound", "off");
-  if(GetDvar("tag") == "")
-    SetDvar("tag", "");
-
-  for(i = 1; i <= level.animsound_hudlimit; i++) {
-    if(GetDvar("tag" + i) == "")
-      SetDvar("tag" + i, "");
   }
 
-  if(GetDebugDvar("animsound_save") == "")
+  if(GetDebugDvar("debug_grenademiss") == "") {
+    SetDvar("debug_grenademiss", "off");
+  }
+
+  if(GetDebugDvar("debug_enemypos") == "") {
+    SetDvar("debug_enemypos", "-1");
+  }
+
+  if(GetDebugDvar("debug_dotshow") == "") {
+    SetDvar("debug_dotshow", "-1");
+  }
+
+  if(GetDebugDvar("debug_stopenemypos") == "") {
+    SetDvar("debug_stopenemypos", "-1");
+  }
+
+  if(GetDebugDvar("debug_replayenemypos") == "") {
+    SetDvar("debug_replayenemypos", "-1");
+  }
+
+  if(GetDebugDvar("debug_tag") == "") {
+    SetDvar("debug_tag", "");
+  }
+
+  if(GetDebugDvar("debug_arrivals") == "") {
+    SetDvar("debug_arrivals", "");
+  }
+
+  if(GetDebugDvar("debug_chatlook") == "") {
+    SetDvar("debug_chatlook", "");
+  }
+
+  if(GetDebugDvar("debug_vehicletag") == "") {
+    SetDvar("debug_vehicletag", "");
+  }
+
+  if(GetDebugDvar("debug_colorfriendlies") == "") {
+    SetDvar("debug_colorfriendlies", "off");
+  }
+
+  if(GetDebugDvar("debug_animreach") == "") {
+    SetDvar("debug_animreach", "off");
+  }
+
+  if(GetDebugDvar("debug_hatmodel") == "") {
+    SetDvar("debug_hatmodel", "on");
+  }
+
+  if(GetDebugDvar("debug_trace") == "") {
+    SetDvar("debug_trace", "off");
+  }
+
+  level.debug_badpath = false;
+  if(GetDebugDvar("debug_badpath") == "") {
+    SetDvar("debug_badpath", "off");
+  }
+
+  if(GetDebugDvar("anim_lastsightpos") == "") {
+    SetDvar("debug_lastsightpos", "off");
+  }
+
+  if(GetDebugDvar("debug_dog_sound") == "") {
+    SetDvar("debug_dog_sound", "");
+  }
+
+  if(GetDvar("debug_nuke") == "") {
+    SetDvar("debug_nuke", "off");
+  }
+
+  if(GetDebugDvar("debug_deathents") == "on") {
+    SetDvar("debug_deathents", "off");
+  }
+
+  if(GetDvar("debug_jump") == "") {
+    SetDvar("debug_jump", "");
+  }
+
+  if(GetDvar("debug_hurt") == "") {
+    SetDvar("debug_hurt", "");
+  }
+
+  if(GetDebugDvar("animsound") == "") {
+    SetDvar("animsound", "off");
+  }
+  if(GetDvar("tag") == "") {
+    SetDvar("tag", "");
+  }
+
+  for(i = 1; i <= level.animsound_hudlimit; i++) {
+    if(GetDvar("tag" + i) == "") {
+      SetDvar("tag" + i, "");
+    }
+  }
+
+  if(GetDebugDvar("animsound_save") == "") {
     SetDvar("animsound_save", "");
+  }
 
-  if(GetDebugDvar("debug_depth") == "")
+  if(GetDebugDvar("debug_depth") == "") {
     SetDvar("debug_depth", "");
+  }
 
-  if(GetDebugDvar("debug_colornodes") == "")
+  if(GetDebugDvar("debug_colornodes") == "") {
     SetDvar("debug_colornodes", "");
+  }
 
-  if(GetDebugDvar("debug_reflection") == "")
+  if(GetDebugDvar("debug_reflection") == "") {
     SetDvar("debug_reflection", "0");
+  }
 
-  if(GetDebugDvar("debug_fxlighting") == "")
+  if(GetDebugDvar("debug_fxlighting") == "") {
     SetDvar("debug_fxlighting", "0");
+  }
 
   level.last_threat_debug = -23430;
-  if(GetDebugDvar("debug_threat") == "")
+  if(GetDebugDvar("debug_threat") == "") {
     SetDvar("debug_threat", "-1");
+  }
 
   PreCacheModel("test_sphere_silver");
 
@@ -727,36 +809,44 @@ debugDvars() {
       }
     }
 
-    if(GetDebugDvar("debug_jump") != "")
+    if(GetDebugDvar("debug_jump") != "") {
       debugJump(GetDebugDvarInt("debug_jump"));
+    }
 
-    if(GetDvarInt("chasecam"))
+    if(GetDvarInt("chasecam")) {
       chaseCam(GetDvarInt("chasecam"));
+    }
 
     if(GetDebugDvar("debug_tag") != "") {
       thread viewTag("ai", GetDebugDvar("debug_tag"));
-      if(GetDebugDvarInt("debug_enttag") > 0)
+      if(GetDebugDvarInt("debug_enttag") > 0) {
         thread drawEntTag(GetDebugDvarInt("debug_enttag"));
+      }
     }
 
-    if(GetDebugDvar("debug_colornodes") == "on")
+    if(GetDebugDvar("debug_colornodes") == "on") {
       thread debug_colornodes();
+    }
 
-    if(GetDebugDvar("debug_replayenemypos") == "on")
+    if(GetDebugDvar("debug_replayenemypos") == "on") {
       thread debug_enemyPosReplay();
+    }
 
     thread debug_animSound();
 
-    if(GetDvar("tag") != "")
+    if(GetDvar("tag") != "") {
       thread debug_animSoundTagSelected();
-
-    for(i = 1; i <= level.animsound_hudlimit; i++) {
-      if(GetDvar("tag" + i) != "")
-        thread debug_animSoundTag(i);
     }
 
-    if(GetDebugDvar("animsound_save") != "")
+    for(i = 1; i <= level.animsound_hudlimit; i++) {
+      if(GetDvar("tag" + i) != "") {
+        thread debug_animSoundTag(i);
+      }
+    }
+
+    if(GetDebugDvar("animsound_save") != "") {
       thread debug_animSoundSave();
+    }
 
     if(GetDvar("debug_nuke") != "off") {
       thread debug_nuke();
@@ -771,8 +861,9 @@ debugDvars() {
       array_thread(GetAIArray(), ::debugMisstimeOff);
     }
 
-    if(GetDebugDvar("debug_deathents") == "on")
+    if(GetDebugDvar("debug_deathents") == "on") {
       thread deathspawnerPreview();
+    }
 
     if(GetDvar("debug_hurt") == "on") {
       SetDvar("debug_hurt", "off");
@@ -793,10 +884,12 @@ debugDvars() {
       SetDvar("vehicle_info", 0);
       vehicles = getEntArray("script_vehicle", "code_classname");
       foreach(vehicle in vehicles) {
-        if(!isDefined(vehicle))
+        if(!isDefined(vehicle)) {
           continue;
-        if(IsSpawner(vehicle))
+        }
+        if(IsSpawner(vehicle)) {
           continue;
+        }
 
         vehicle print_vehicle_info(random_noteworthy);
       }
@@ -829,8 +922,9 @@ debugDvars() {
     }
 
     if(GetDebugDvar("debug_trace") == "on") {
-      if(!isDefined(level.traceStart))
+      if(!isDefined(level.traceStart)) {
         thread showDebugTrace();
+      }
       level.traceStart = level.player getEye();
       SetDvar("debug_trace", "off");
     }
@@ -902,14 +996,18 @@ debug_reflection_buttons() {
   lastoffset = offset;
   offsetinc = 50;
   while(GetDebugDvar("debug_reflection") == "1" || GetDebugDvar("debug_reflection") == "3") {
-    if(level.player ButtonPressed("BUTTON_X"))
+    if(level.player ButtonPressed("BUTTON_X")) {
       offset += offsetinc;
-    if(level.player ButtonPressed("BUTTON_Y"))
+    }
+    if(level.player ButtonPressed("BUTTON_Y")) {
       offset -= offsetinc;
-    if(offset > 1000)
+    }
+    if(offset > 1000) {
       offset = 1000;
-    if(offset < 64)
+    }
+    if(offset < 64) {
       offset = 64;
+    }
     //		if( offset!=lastoffset )
     //		{
     level.debug_reflectionobject Unlink();
@@ -963,14 +1061,18 @@ debug_fxlighting_buttons() {
   lastoffset = offset;
   offsetinc = 50;
   while(GetDebugDvar("debug_fxlighting") == "1" || GetDebugDvar("debug_fxlighting") == "3") {
-    if(level.player ButtonPressed("BUTTON_X"))
+    if(level.player ButtonPressed("BUTTON_X")) {
       offset += offsetinc;
-    if(level.player ButtonPressed("BUTTON_Y"))
+    }
+    if(level.player ButtonPressed("BUTTON_Y")) {
       offset -= offsetinc;
-    if(offset > 1000)
+    }
+    if(offset > 1000) {
       offset = 1000;
-    if(offset < 64)
+    }
+    if(offset < 64) {
       offset = 64;
+    }
 
     level.debug_fxlightingobject Unlink();
     level.debug_fxlightingobject.origin = level.player getEye() + (vector_multiply(anglesToForward(level.player GetPlayerAngles()), offset));
@@ -992,10 +1094,12 @@ showDebugTrace() {
     wait(0.05);
     start = startOverride;
     end = endOverride;
-    if(!isDefined(startOverride))
+    if(!isDefined(startOverride)) {
       start = level.traceStart;
-    if(!isDefined(endOverride))
+    }
+    if(!isDefined(endOverride)) {
       end = level.player getEye();
+    }
 
     trace = bulletTrace(start, end, false, undefined);
     Line(start, trace["position"], (0.9, 0.5, 0.8), 0.5);
@@ -1004,31 +1108,36 @@ showDebugTrace() {
 
 hatmodel() {
   for(;;) {
-    if(GetDebugDvar("debug_hatmodel") == "off")
+    if(GetDebugDvar("debug_hatmodel") == "off") {
       return;
+    }
     noHat = [];
     ai = GetAIArray();
 
     for(i = 0; i < ai.size; i++) {
-      if(isDefined(ai[i].hatmodel))
+      if(isDefined(ai[i].hatmodel)) {
         continue;
+      }
 
       alreadyKnown = false;
       for(p = 0; p < noHat.size; p++) {
-        if(noHat[p] != ai[i].classname)
+        if(noHat[p] != ai[i].classname) {
           continue;
+        }
         alreadyKnown = true;
         break;
       }
-      if(!alreadyKnown)
+      if(!alreadyKnown) {
         noHat[noHat.size] = ai[i].classname;
+      }
     }
 
     if(noHat.size) {
       PrintLn(" ");
       PrintLn("The following AI have no Hatmodel, so helmets can not pop off on head-shot death:");
-      for(i = 0; i < noHat.size; i++)
+      for(i = 0; i < noHat.size; i++) {
         PrintLn("Classname: ", noHat[i]);
+      }
       PrintLn("To disable hatModel spam, type debug_hatmodel off");
     }
     wait(15);
@@ -1134,26 +1243,30 @@ debug_character_count() {
 }
 
 nuke() {
-  if(!self.damageshield)
+  if(!self.damageshield) {
     self Kill((0, 0, -500), level.player, level.player);
+  }
 }
 
 debug_nuke() {
   dvar = GetDvar("debug_nuke");
   if(dvar == "on") {
     ai = GetAISpeciesArray("bad_guys", "all");
-    for(i = 0; i < ai.size; i++)
+    for(i = 0; i < ai.size; i++) {
       ai[i] nuke();
+    }
   } else
   if(dvar == "ai") {
     ai = GetAIArray("bad_guys");
-    for(i = 0; i < ai.size; i++)
+    for(i = 0; i < ai.size; i++) {
       ai[i] nuke();
+    }
   } else
   if(dvar == "dogs") {
     ai = GetAISpeciesArray("bad_guys", "dog");
-    for(i = 0; i < ai.size; i++)
+    for(i = 0; i < ai.size; i++) {
       ai[i] nuke();
+    }
   }
   SetDvar("debug_nuke", "off");
 }
@@ -1171,8 +1284,9 @@ camera() {
   }
   for(;;) {
     if(GetDebugDvar("camera") != "on") {
-      if(GetDebugDvar("camera") != "off")
+      if(GetDebugDvar("camera") != "off") {
         SetDvar("camera", "off");
+      }
       wait(1);
       continue;
     }
@@ -1186,8 +1300,9 @@ camera() {
     cameraWithEnemy = [];
     for(i = 0; i < cameras.size; i++) {
       for(p = 0; p < ai.size; p++) {
-        if(Distance(cameras[i].origin, ai[p].origin) > 256)
+        if(Distance(cameras[i].origin, ai[p].origin) > 256) {
           continue;
+        }
         cameraWithEnemy[cameraWithEnemy.size] = cameras[i];
         break;
       }
@@ -1210,8 +1325,9 @@ camera() {
 
       difference = VectorNormalize(end - level.player.origin);
       dot = VectorDot(forward, difference);
-      if(dot < 0.85)
+      if(dot < 0.85) {
         continue;
+      }
 
       cameraWithPlayer[cameraWithPlayer.size] = camera;
     }
@@ -1226,8 +1342,9 @@ camera() {
     newcam = cameraWithPlayer[0];
     for(i = 1; i < cameraWithPlayer.size; i++) {
       newdist = Distance(level.player.origin, cameraWithPlayer[i].origin);
-      if(newdist > dist)
+      if(newdist > dist) {
         continue;
+      }
 
       newcam = cameraWithPlayer[i];
       dist = newdist;
@@ -1251,8 +1368,9 @@ setPlayerToCamera(camera) {
 	waitframe();
 	thread anglescheck();
 
-	if( !isDefined( level.camera ) )
+	if( !isDefined( level.camera ) ) {
 		return;
+	}
 
 //	wait( 1 );
 	mintime = 0;
@@ -1261,8 +1379,9 @@ setPlayerToCamera(camera) {
 	{
 		for( i=0;i<level.camera.size;i++ )
 		{
-			if( GetDvar( "camera" ) != "on" )
+			if( GetDvar( "camera" ) != "on" ) {
 				break;
+			}
 
 			SetDvar( "nextcamera", "on" );
 			SetDvar( "lastcamera", "on" );
@@ -1273,43 +1392,50 @@ setPlayerToCamera(camera) {
 			level.player SetPlayerAngles( level.camera[ i ].angles );
 
 			timer = GetTime() + 10000;
-			if( timer < mintime )
+			if( timer < mintime ) {
 				timer = mintime;
+			}
 
 			oldorigin = level.player GetOrigin();
 			while( GetTime() < timer )
 			{
-				if( GetTime() > timer - 8000 )
+				if( GetTime() > timer - 8000 ) {
 				if(( GetTime() > mintime ) &&( Distance( level.player GetOrigin(), oldorigin ) > 128 ) )
+				}
 				{
 					mintime = GetTime() + 500000;
 					timer = mintime;
 				}
 
-				if( GetDvar( "camera" ) != "on" )
+				if( GetDvar( "camera" ) != "on" ) {
 					break;
+				}
 
-				if( GetDvar( "nextcamera" ) == "1" )
+				if( GetDvar( "nextcamera" ) == "1" ) {
 					break;
+				}
 
 				if( GetDvar( "lastcamera" ) == "1" )
 				{
 					i-=2;
-					if( i < 0 )
+					if( i < 0 ) {
 						i+=level.camera.size;
+					}
 					break;
 				}
 
 				waitframe();
 			}
 
-			if(( GetDvar( "nextcamera" ) == "1" ) ||( GetDvar( "lastcamera" ) == "1" ) )
+			if(( GetDvar( "nextcamera" ) == "1" ) ||( GetDvar( "lastcamera" ) == "1" ) ) {
 				mintime = GetTime() + 500000;
+			}
 		}
 	}
 
-	if( linker )
+	if( linker ) {
 		level.player Unlink();
+	}
 }
 */
 
@@ -1325,8 +1451,9 @@ anglescheck() {
 }
 
 dolly() {
-  if(!isDefined(level.dollyTime))
+  if(!isDefined(level.dollyTime)) {
     level.dollyTime = 5;
+  }
   SetDvar("dolly", "");
   thread dollyStart();
   thread dollyEnd();
@@ -1382,15 +1509,18 @@ dollyGo() {
 deathspawnerPreview() {
   waittillframeend;
   for(i = 0; i < 50; i++) {
-    if(!isDefined(level.deathspawnerents[i]))
+    if(!isDefined(level.deathspawnerents[i])) {
       continue;
+    }
     array = level.deathspawnerents[i];
     for(p = 0; p < array.size; p++) {
       ent = array[p];
-      if(isDefined(ent.truecount))
+      if(isDefined(ent.truecount)) {
         Print3d(ent.origin, i + ": " + ent.truecount, (0, 0.8, 0.6), 5);
-      else
+      }
+      else {
         Print3d(ent.origin, i + ": " + ".", (0, 0.8, 0.6), 5);
+      }
     }
   }
 }
@@ -1399,34 +1529,41 @@ lastSightPosWatch() {
   for(;;) {
     wait(0.05);
     num = GetDvarInt("lastsightpos");
-    if(!num)
+    if(!num) {
       continue;
+    }
 
     guy = undefined;
     ai = GetAIArray();
     for(i = 0; i < ai.size; i++) {
-      if(ai[i] GetEntNum() != num)
+      if(ai[i] GetEntNum() != num) {
         continue;
+      }
 
       guy = ai[i];
       break;
     }
 
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
+    }
 
-    if(guy animscripts\utility::hasEnemySightPos())
+    if(guy animscripts\utility::hasEnemySightPos()) {
       org = guy animscripts\utility::getEnemySightPos();
-    else
+    }
+    else {
       org = undefined;
+    }
 
     for(;;) {
       newnum = GetDvarInt("lastsightpos");
-      if(num != newnum)
+      if(num != newnum) {
         break;
+      }
 
-      if((IsAlive(guy)) && (guy animscripts\utility::hasEnemySightPos()))
+      if((IsAlive(guy)) && (guy animscripts\utility::hasEnemySightPos())) {
         org = guy animscripts\utility::getEnemySightPos();
+      }
 
       if(!isDefined(org)) {
         wait(0.05);
@@ -1480,14 +1617,18 @@ updateMinimapSetting() {
 
         maxcorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
         mincorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
-        if(corners[1].origin[0] > corners[0].origin[0])
+        if(corners[1].origin[0] > corners[0].origin[0]) {
           maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-        else
+        }
+        else {
           mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
-        if(corners[1].origin[1] > corners[0].origin[1])
+        }
+        if(corners[1].origin[1] > corners[0].origin[1]) {
           maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-        else
+        }
+        else {
           mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
+        }
 
         viewpostocorner = maxcorner - viewpos;
         viewpos = (viewpos[0], viewpos[1], viewpos[2] + minimapheight);
@@ -1497,11 +1638,13 @@ updateMinimapSetting() {
         northvector = (Cos(GetNorthYaw()), Sin(GetNorthYaw()), 0);
         eastvector = (northvector[1], 0 - northvector[0], 0);
         disttotop = VectorDot(northvector, viewpostocorner);
-        if(disttotop < 0)
+        if(disttotop < 0) {
           disttotop = 0 - disttotop;
+        }
         disttoside = VectorDot(eastvector, viewpostocorner);
-        if(disttoside < 0)
+        if(disttoside < 0) {
           disttoside = 0 - disttoside;
+        }
 
         // extend map bounds to meet the required aspect ratio
         if(requiredMapAspectRatio > 0) {
@@ -1532,10 +1675,12 @@ updateMinimapSetting() {
           angleside = 2 * ATan(disttoside * 1.05 / minimapheight);
           angletop = 2 * ATan(disttotop * aspectratioguess * 1.05 / minimapheight);
         }
-        if(angleside > angletop)
+        if(angleside > angletop) {
           angle = angleside;
-        else
+        }
+        else {
           angle = angletop;
+        }
 
         znear = minimapheight - 1000;
         if(znear < 16) znear = 16;
@@ -1578,8 +1723,9 @@ getchain() {
   ent = self;
   while(isDefined(ent)) {
     array[array.size] = ent;
-    if(!isDefined(ent) || !isDefined(ent.target))
+    if(!isDefined(ent) || !isDefined(ent.target)) {
       break;
+    }
     ent = GetEnt(ent.target, "targetname");
     if(isDefined(ent) && ent == array[0]) {
       array[array.size] = ent;
@@ -1587,8 +1733,9 @@ getchain() {
     }
   }
   originarray = [];
-  for(i = 0; i < array.size; i++)
+  for(i = 0; i < array.size; i++) {
     originarray[i] = array[i].origin;
+  }
   return originarray;
 }
 
@@ -1647,10 +1794,12 @@ islookingatorigin(origin) {
 
   anglevec = anglesToForward(self GetPlayerAngles());
   vectordot = VectorDot(anglevec, normalvec);
-  if(vectordot > insidedot)
+  if(vectordot > insidedot) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 debug_colornodes() {
@@ -1664,20 +1813,23 @@ debug_colornodes() {
   for(i = 0; i < ai.size; i++) {
     guy = ai[i];
 
-    if(!isDefined(guy.currentColorCode))
+    if(!isDefined(guy.currentColorCode)) {
       continue;
+    }
 
     array[guy.team][guy.currentColorCode] = true;
 
     color = (1, 1, 1);
-    if(isDefined(guy.script_forcecolor))
+    if(isDefined(guy.script_forcecolor)) {
       color = level.color_debug[guy.script_forcecolor];
+    }
 
     Print3d(guy.origin + (0, 0, 50), guy.currentColorCode, color, 1, 1);
 
     // axis dont do forcecolor behavior, they do follow the leader for force color
-    if(guy.team == "axis")
+    if(guy.team == "axis") {
       continue;
+    }
 
     guy try_to_draw_line_to_node();
   }
@@ -1704,43 +1856,51 @@ draw_colorNodes(array, team) {
 
 get_team_substr() {
   if(self.team == "allies") {
-    if(!isDefined(self.node.script_color_allies))
+    if(!isDefined(self.node.script_color_allies)) {
       return;
+    }
 
     return self.node.script_color_allies;
   }
 
   if(self.team == "axis") {
-    if(!isDefined(self.node.script_color_axis))
+    if(!isDefined(self.node.script_color_axis)) {
       return;
+    }
 
     return self.node.script_color_axis;
   }
 }
 
 try_to_draw_line_to_node() {
-  if(!isDefined(self.node))
+  if(!isDefined(self.node)) {
     return;
+  }
 
-  if(!isDefined(self.script_forcecolor))
+  if(!isDefined(self.script_forcecolor)) {
     return;
+  }
 
   substr = get_team_substr();
-  if(!isDefined(substr))
+  if(!isDefined(substr)) {
     return;
+  }
 
-  if(!issubstr(substr, self.script_forcecolor))
+  if(!issubstr(substr, self.script_forcecolor)) {
     return;
+  }
 
   Line(self.origin + (0, 0, 64), self.node.origin, level.color_debug[self.script_forcecolor]);
 }
 
 fogcheck() {
-  if(GetDvar("depth_close") == "")
+  if(GetDvar("depth_close") == "") {
     SetDvar("depth_close", "0");
+  }
 
-  if(GetDvar("depth_far") == "")
+  if(GetDvar("depth_far") == "") {
     SetDvar("depth_far", "1500");
+  }
 
   close = GetDvarInt("depth_close");
   far = GetDvarInt("depth_far");
@@ -1765,15 +1925,17 @@ debugThreatCalc() {
     entity = level.player;
   } else {
     for(i = 0; i < ai.size; i++) {
-      if(entnum != ai[i] GetEntNum())
+      if(entnum != ai[i] GetEntNum()) {
         continue;
+      }
       entity = ai[i];
       break;
     }
   }
 
-  if(!isalive(entity))
+  if(!isalive(entity)) {
     return;
+  }
 
   entityGroup = entity GetThreatBiasGroup();
   array_thread(ai, ::displayThreat, entity, entityGroup);
@@ -1781,8 +1943,9 @@ debugThreatCalc() {
 }
 
 displayThreat(entity, entityGroup) {
-  if(self.team == entity.team)
+  if(self.team == entity.team) {
     return;
+  }
 
   selfthreat = 0;
   selfthreat += self.threatBias;
@@ -1799,11 +1962,13 @@ displayThreat(entity, entityGroup) {
     }
   }
 
-  if(entity.ignoreme || threat < -900000)
+  if(entity.ignoreme || threat < -900000) {
     threat = "Ignore";
+  }
 
-  if(self.ignoreme || selfthreat < -900000)
+  if(self.ignoreme || selfthreat < -900000) {
     selfthreat = "Ignore";
+  }
 
   timer = 1 * 20;
   col = (1, 0.5, 0.2);
@@ -1870,16 +2035,18 @@ draw_color_friendlies() {
   }
   level.debug_color_huds = [];
 
-  if(GetDebugDvar("debug_colorfriendlies") != "on")
+  if(GetDebugDvar("debug_colorfriendlies") != "on") {
     return;
+  }
 
     x = 15;
   y = 365;
   offset_x = 25;
   offset_y = 25;
   for(i = 0; i < colors.size; i++) {
-    if(colored_friendlies[colors[i]] <= 0)
+    if(colored_friendlies[colors[i]] <= 0) {
       continue;
+    }
     for(p = 0; p < colored_friendlies[colors[i]]; p++) {
       overlay = NewHudElem();
       overlay.x = x + 25 * p;
@@ -1898,8 +2065,9 @@ draw_color_friendlies() {
 
 playerNode() {
   for(;;) {
-    if(isDefined(level.player.node))
+    if(isDefined(level.player.node)) {
       Print3d(level.player.node.origin + (0, 0, 25), "P-Node", (0.3, 1, 1), 1);
+    }
 
     wait(0.05);
   }
@@ -1922,8 +2090,9 @@ debuggoalpos() {
 }
 
 view_goal_pos() {
-  if(!isDefined(self.goalpos))
+  if(!isDefined(self.goalpos)) {
     return;
+  }
 
   Line(self.origin + (0, 0, 35), self.goalpos + (0, 0, 35), (1, 1, 1), 1.0);
 }
@@ -1942,8 +2111,9 @@ colordebug() {
   for(;;) {
     for(i = 0; i < col.size; i++) {
       color = level.currentColorForced["allies"][col[i]];
-      if(isDefined(color))
+      if(isDefined(color)) {
         draw_colored_nodes(color);
+      }
     }
     wait(0.05);
   }
@@ -1978,8 +2148,9 @@ init_notetracks_for_animname(animname) {
     foreach(notetrack, notetrack_array in anime_array) {
       foreach(scr_notetrack in notetrack_array) {
         soundAlias = scr_notetrack["sound"];
-        if(!isDefined(soundAlias))
+        if(!isDefined(soundAlias)) {
           continue;
+        }
 
         level.animSound_aliases[animname][anime][notetrack]["soundalias"] = soundalias;
         if(isDefined(scr_notetrack["created_by_animSound"])) {
@@ -2018,8 +2189,9 @@ add_hud_line(x, y, msg) {
 debug_animSound() {
   enabled = GetDebugDvar("animsound") == "on";
   if(!isDefined(level.animsound_hud)) {
-    if(!enabled)
+    if(!enabled) {
       return;
+    }
 
     // init the related variables
     level.animsound_selected = 0;
@@ -2100,16 +2272,20 @@ debug_animSound() {
     return;
   }
 
-  if(!isDefined(level.animsound_tagged))
+  if(!isDefined(level.animsound_tagged)) {
     level.animsound_locked = false;
+  }
 
-  if(level.animsound_locked)
+  if(level.animsound_locked) {
     level.animsound_hud_locked.alpha = 1;
-  else
+  }
+  else {
     level.animsound_hud_locked.alpha = 0;
+  }
 
-  if(!isDefined(level.animSounds))
+  if(!isDefined(level.animSounds)) {
     init_animSounds();
+  }
 
   /*
   if( !isDefined( level.anim_sound_was_opened ) )
@@ -2136,8 +2312,9 @@ debug_animSound() {
 
       difference = VectorNormalize((animSound.origin + (0, 0, 40)) - (level.player.origin + (0, 0, 55)));
       newdot = VectorDot(forward, difference);
-      if(newdot < dot)
+      if(newdot < dot) {
         continue;
+      }
 
       dot = newdot;
       level.animsound_tagged = animSound;
@@ -2156,8 +2333,9 @@ debug_animSound() {
     soundalias = get_alias_from_stored( animSound );
     scale = 0.9;
 		
-    if( is_tagged && level.animsound_tagged == animSound )
+    if( is_tagged && level.animsound_tagged == animSound ) {
     	scale = 1;
+    }
     	
     if( isDefined( soundalias ) )
     {
@@ -2177,8 +2355,9 @@ debug_animSound() {
     }
     */
     msg = "*";
-    if(level.animsound_locked)
+    if(level.animsound_locked) {
       msg = "*LOCK";
+    }
     Print3d(animSound.origin + (0, 0, 40), msg + animSound.animsounds.size, animSound.animsound_color, 1, scale);
   }
 
@@ -2193,8 +2372,9 @@ draw_animsounds_in_hud() {
   animsounds = guy.animSounds;
 
   animname = "generic";
-  if(isDefined(guy.animname))
+  if(isDefined(guy.animname)) {
     animname = guy.animname;
+  }
   level.animsound_hud_animname.label = "Actor: " + animname;
 
   if(level.player ButtonPressed("f12")) {
@@ -2239,25 +2419,31 @@ draw_animsounds_in_hud() {
   keys = GetArrayKeys(animsounds);
   highest = -1;
   for(i = 0; i < keys.size; i++) {
-    if(keys[i] > highest)
+    if(keys[i] > highest) {
       highest = keys[i];
+    }
   }
-  if(highest == -1)
+  if(highest == -1) {
     return;
+  }
 
-  if(level.animsound_selected > highest)
+  if(level.animsound_selected > highest) {
     level.animsound_selected = highest;
-  if(level.animsound_selected < 0)
+  }
+  if(level.animsound_selected < 0) {
     level.animsound_selected = 0;
+  }
 
   // make sure the selected one exists
   for(;;) {
-    if(isDefined(animsounds[level.animsound_selected]))
+    if(isDefined(animsounds[level.animsound_selected])) {
       break;
+    }
 
     level.animsound_selected--;
-    if(level.animsound_selected < 0)
+    if(level.animsound_selected < 0) {
       level.animsound_selected = highest;
+    }
   }
 
   level.animsound_hud_anime.label = "Anim: " + animsounds[level.animsound_selected].anime;
@@ -2290,11 +2476,13 @@ draw_animsounds_in_hud() {
     // delete a sound on a guy
     animsound = animsounds[level.animsound_selected];
     soundalias = get_alias_from_stored(animsound);
-    if(!isDefined(soundalias))
+    if(!isDefined(soundalias)) {
       return;
+    }
 
-    if(!is_from_animsound(animSound.animname, animSound.anime, animSound.notetrack))
+    if(!is_from_animsound(animSound.animname, animSound.anime, animSound.notetrack)) {
       return;
+    }
 
     level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack] = undefined;
     debug_animSoundSave();
@@ -2302,14 +2490,17 @@ draw_animsounds_in_hud() {
 }
 
 get_alias_from_stored(animSound) {
-  if(!isDefined(level.animSound_aliases[animSound.animname]))
+  if(!isDefined(level.animSound_aliases[animSound.animname])) {
     return;
+  }
 
-  if(!isDefined(level.animSound_aliases[animSound.animname][animSound.anime]))
+  if(!isDefined(level.animSound_aliases[animSound.animname][animSound.anime])) {
     return;
+  }
 
-  if(!isDefined(level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack]))
+  if(!isDefined(level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack])) {
     return;
+  }
   return level.animSound_aliases[animSound.animname][animSound.anime][animSound.notetrack]["soundalias"];
 }
 
@@ -2338,8 +2529,9 @@ test_animsound_file()
 		for( ;; )
 		{
 			file = OpenFile( filename, "write" );
-			if( file != -1 )
+			if( file != -1 ) {
 				break;
+			}
 			wait( 5 );
 		}
 	
@@ -2353,8 +2545,9 @@ test_animsound_file()
 */
 
 display_animSound() {
-  if(Distance(level.player.origin, self.origin) > 1500)
+  if(Distance(level.player.origin, self.origin) > 1500) {
     return;
+  }
 
   level.animSounds_thisframe[level.animSounds_thisframe.size] = self;
 
@@ -2365,8 +2558,9 @@ display_animSound() {
   {
   	key = keys[ i ];
   	animSound = self.animSounds[ key ];
-  	if( !isDefined( animSound ) )
+  	if( !isDefined( animSound ) ) {
   		continue;
+  	}
   	
   	if( timer > animSound.end_time )
   	{
@@ -2405,10 +2599,12 @@ debug_animSoundTagSelected() {
 }
 
 tag_sound(tag, tagnum) {
-  if(!isDefined(level.animsound_tagged))
+  if(!isDefined(level.animsound_tagged)) {
     return;
-  if(!isDefined(level.animsound_tagged.animsounds[tagnum]))
+  }
+  if(!isDefined(level.animsound_tagged.animsounds[tagnum])) {
     return;
+  }
 
   animSound = level.animsound_tagged.animsounds[tagnum];
   // store the alias to the array of aliases
@@ -2465,8 +2661,9 @@ print_aliases_to_file(file) {
       notetracks = GetArrayKeys(level.animSound_aliases[animnames[i]][anime]);
       for(z = 0; z < notetracks.size; z++) {
         notetrack = notetracks[z];
-        if(!is_from_animsound(animnames[i], anime, notetrack))
+        if(!is_from_animsound(animnames[i], anime, notetrack)) {
           continue;
+        }
 
         alias = level.animSound_aliases[animnames[i]][anime][notetrack]["soundalias"];
 
@@ -2500,8 +2697,9 @@ tostr(str) {
 }
 
 linedraw(start, end, color, alpha, depth, timer) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 1, 1);
+  }
 
   if(isDefined(timer)) {
     timer *= 20;
@@ -2559,13 +2757,15 @@ chaseCam(ent_num) {
     level.chase_cam_last_num = -1;
   }
 
-  if(level.chase_cam_last_num == ent_num)
+  if(level.chase_cam_last_num == ent_num) {
     return;
+  }
 
   find_new_chase_target(ent_num);
 
-  if(!isDefined(level.chase_cam_target))
+  if(!isDefined(level.chase_cam_target)) {
     return;
+  }
 
   level.chase_cam_last_num = ent_num;
 
@@ -2588,8 +2788,9 @@ chaseCam_onEnt(ent) {
   for(;;) {
     wait(0.2);
 
-    if(!isDefined(level.chase_cam_target))
+    if(!isDefined(level.chase_cam_target)) {
       return;
+    }
 
     start = level.chase_cam_target.origin;
     angles = level.chase_cam_target.angles;
@@ -2606,8 +2807,9 @@ chaseCam_onEnt(ent) {
 
 viewfx() {
   foreach(fx in level.createfxent) {
-    if(isDefined(fx.looper))
+    if(isDefined(fx.looper)) {
       Print3d(fx.v["origin"], ".", (1, 1, 0), 1, 1.5, 200);
+    }
   }
 }
 
@@ -2616,8 +2818,9 @@ add_key(key, val) {
 }
 
 print_vehicle_info(noteworthy) {
-  if(!isDefined(level.vnum))
+  if(!isDefined(level.vnum)) {
     level.vnum = 9500;
+  }
 
   level.vnum++;
 
@@ -2633,8 +2836,9 @@ print_vehicle_info(noteworthy) {
   add_key("_color", "0.443137 0.443137 1.000000");
   PrintLn("	layer \"" + layer + "\"");
 
-  if(isDefined(noteworthy))
+  if(isDefined(noteworthy)) {
     add_key("script_noteworthy", noteworthy);
+  }
 
   PrintLn("}");
 }
@@ -2642,8 +2846,9 @@ print_vehicle_info(noteworthy) {
 draw_dot_for_ent(entnum) {
   ai = GetAIArray();
   foreach(guy in ai) {
-    if(guy GetEntNum() != entnum)
+    if(guy GetEntNum() != entnum) {
       continue;
+    }
     guy draw_dot_for_guy();
   }
 

@@ -34,8 +34,9 @@ onplayerspawned() {
 }
 
 func_7F8A() {
-  if(isDefined(level.mapcenter))
+  if(isDefined(level.mapcenter)) {
     return level.mapcenter;
+  }
 
   var_00 = getspawnarray("mp_tdm_spawn_allies_start");
   var_01 = getspawnarray("mp_tdm_spawn_axis_start");
@@ -73,8 +74,9 @@ func_BBF2(var_00) {
     var_05 = var_02 gettagorigin(var_04);
     var_00 setorigin(var_05);
 
-    if(var_03 < 3)
+    if(var_03 < 3) {
       var_00 setstance("crouch");
+    }
 
     var_00 setplayerangles(var_02 gettagangles(var_04));
     var_00 getweightedchanceroll(var_02, var_04, 1.0, 90, 90, 30, 60, 0);
@@ -119,8 +121,9 @@ func_FAC7(var_00, var_01, var_02) {
   } else
     var_10 = var_09 - var_02;
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = "veh_mil_air_ca_dropship_mp";
+  }
 
   var_14 = spawnhelicopter(var_03, var_02, vectortoangles(var_10), "veh_jackal_mp", var_01);
 
@@ -138,8 +141,9 @@ func_FAC7(var_00, var_01, var_02) {
   var_14 waittill("goal");
   var_14.func_5D3C = 1;
 
-  foreach(var_04 in var_14.func_AD31)
+  foreach(var_04 in var_14.func_AD31) {
   func_56A7(var_04);
+  }
 
   wait 2;
   var_14 setyawspeed(60, 40, 40, 0.3);
@@ -260,10 +264,12 @@ func_5A5C() {
   var_01 = bulletTrace(var_00 + (0, 0, 500), var_00 - (0, 0, 500), 0);
 
   if(isDefined(var_1["position"])) {
-    if(scripts\engine\utility::cointoss())
+    if(scripts\engine\utility::cointoss()) {
       var_02 = "vehicle_pavelow";
-    else
+    }
+    else {
       var_02 = "vehicle_pavelow_opfor";
+    }
 
     var_03 = spawnhelicopter(self, var_1["position"] + (0, 0, 1000), (0, 0, 0), "pavelow_mp", var_02);
 

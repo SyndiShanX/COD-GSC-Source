@@ -40,8 +40,9 @@ play_impact_fx_clientfield_cb(localclientnum, oldval, newval, bnewent, binitials
   if(!isDefined(newval)) {
     return;
   }
-  if(newval > 0)
+  if(newval > 0) {
     self thread play_impact_fx_internal(localclientnum, newval);
+  }
 }
 
 play_impact_fx_internal(localclientnum, newval) {
@@ -49,18 +50,21 @@ play_impact_fx_internal(localclientnum, newval) {
   self waittill_dobj(localclientnum);
   effect = level.ghost_impact_effects[newval];
 
-  if(isDefined(effect))
+  if(isDefined(effect)) {
     playFX(localclientnum, effect, self.origin + vectorscale((0, 0, 1), 36.0));
+  }
 }
 
 play_fx_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(!isDefined(newval)) {
     return;
   }
-  if(newval > 0)
+  if(newval > 0) {
     self play_fx(localclientnum, newval);
-  else if(isDefined(self._fx_array) && isDefined(self._fx_array[localclientnum]))
+  }
+  else if(isDefined(self._fx_array) && isDefined(self._fx_array[localclientnum])) {
     deletefx(localclientnum, self._fx_array[localclientnum], 0);
+  }
 }
 
 play_fx(localclientnum, newval) {
@@ -71,25 +75,31 @@ play_fx_internal(localclientnum, newval) {
   self endon("entityshutdown");
   self waittill_dobj(localclientnum);
 
-  if(!isDefined(self._fx_array))
+  if(!isDefined(self._fx_array)) {
     self._fx_array = [];
+  }
 
   linktag = "tag_origin";
   effect = level.ghost_effects[newval];
 
-  if(isDefined(self._fx_tag_override))
+  if(isDefined(self._fx_tag_override)) {
     linktag = self._fx_tag_override;
+  }
 
-  if(isDefined(self._fx_array[localclientnum]))
+  if(isDefined(self._fx_array[localclientnum])) {
     deletefx(localclientnum, self._fx_array[localclientnum], 0);
+  }
 
-  if(newval == 1)
+  if(newval == 1) {
     self notify("sndDeath");
+  }
 
-  if(newval == 1 || newval == 5)
+  if(newval == 1 || newval == 5) {
     self._fx_array[localclientnum] = playFX(localclientnum, effect, self.origin);
-  else
+  }
+  else {
     self._fx_array[localclientnum] = playFXOnTag(localclientnum, effect, self, linktag);
+  }
 }
 
 ghost_round_presentation_light_state_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

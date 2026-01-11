@@ -11,8 +11,9 @@
 planeSounds(localClientNum, spawnSound, flybySound, flybySoundLoop) {
   self endon("delete");
   fake_ent_plane = spawnfakeent(0);
-  if(!isDefined(fake_ent_plane))
+  if(!isDefined(fake_ent_plane)) {
     return;
+  }
   playSound(0, spawnSound, (0, 0, 0));
   thread plane_position_updater(localClientNum, fake_ent_plane, self, flybySound, flybySoundLoop);
 }
@@ -38,10 +39,12 @@ plane_position_updater(localClientNum, fake_ent, plane, flybySound, flybySoundLo
         assert(isDefined(dist));
         time = dist / length(velocity);
         assert(isDefined(time));
-        if(isDefined(flybysoundloop) && isDefined(fake_ent))
+        if(isDefined(flybysoundloop) && isDefined(fake_ent)) {
           soundid = playLoopSound(0, fake_ent, flybySoundLoop, 0);
-        if(isDefined(flybySound))
+        }
+        if(isDefined(flybySound)) {
           plane playSound(0, flybySound);
+        }
         startTime = getRealTime();
       }
     }
@@ -85,10 +88,12 @@ planeTurn(localClientNum, plane, yaw, halfLife, startTime, isTurningRight) {
   level endon("demo_jump" + localClientNum);
   leftTurn = -1;
   rightTurn = 1;
-  if(isTurningRight)
+  if(isTurningRight) {
     turnDirection = rightTurn;
-  else
+  }
+  else {
     turnDirection = leftTurn;
+  }
   yawY = getDvarFloatDefault(#"scr_planeyaw", -1.5 * turnDirection);
   rollZ = getDvarFloatDefault(#"scr_planeroll", 1.5 * turnDirection);
   maxYaw = getDvarFloatDefault(#"scr_max_planeyaw", -45.0 * turnDirection);
@@ -97,8 +102,9 @@ planeTurn(localClientNum, plane, yaw, halfLife, startTime, isTurningRight) {
   oy = getDvarFloatDefault(#"scr_planeoy", -30000.0 * turnDirection);
   maxoX = getDvarFloatDefault(#"scr_maxo_planex", -1.0);
   maxoY = getDvarFloatDefault(#"scr_maxo_planey", -1.0);
-  if(plane.angles[1] == 360)
+  if(plane.angles[1] == 360) {
     plane.angles = (plane.angles[0], 0, plane.angles[2]);
+  }
   origX = plane.origin[0];
   origY = plane.origin[1];
   accumTurn = 0;
@@ -106,10 +112,12 @@ planeTurn(localClientNum, plane, yaw, halfLife, startTime, isTurningRight) {
   waitAmount = 0.1;
   waitForMoveDone = false;
   while(loopTime <= halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
-    if(minRoll != -1 && plane.angles[2] >= minRoll * turnDirection)
+    }
+    if(minRoll != -1 && plane.angles[2] >= minRoll * turnDirection) {
       rollZ = 0.0;
+    }
     accumTurn += yawY;
     if(accumTurn <= maxYaw * turnDirection) {
       yawY = 0.0;
@@ -122,8 +130,9 @@ planeTurn(localClientNum, plane, yaw, halfLife, startTime, isTurningRight) {
     rotatedX = Cos(yaw) * oldX - Sin(yaw) * oldY;
     rotatedY = Sin(yaw) * oldX + Cos(yaw) * oldY;
     endPoint = (origX + rotatedX, origY + rotatedY, plane.origin[2]);
-    if(waitForMoveDone)
+    if(waitForMoveDone) {
       plane waittill("movedone");
+    }
     waitForMoveDone = plane serverTimedMoveTo(localClientNum, plane.origin, endPoint, startTime, waitAmount);
     plane serverTimedRotateTo(localClientNum, angles, startTime, waitAmount);
     loopTime += waitAmount;
@@ -140,10 +149,12 @@ planeTurn(localClientNum, plane, yaw, halfLife, startTime, isTurningRight) {
   maxy = getDvarFloatDefault(#"scr_max_planey2", 90);
   accumTurn = 0;
   while(loopTime < halflife + halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
-    if(minRoll != -1 && plane.angles[2] >= 0)
+    }
+    if(minRoll != -1 && plane.angles[2] >= 0) {
       rollZ = 0.0;
+    }
     accumTurn += yawY;
     if(accumTurn >= maxYaw) {
       yawY = 0.0;
@@ -156,8 +167,9 @@ planeTurn(localClientNum, plane, yaw, halfLife, startTime, isTurningRight) {
     rotatedX = Cos(yaw) * oldX - Sin(yaw) * oldY;
     rotatedY = Sin(yaw) * oldX + Cos(yaw) * oldY;
     endPoint = (origX + rotatedX, origY + rotatedY, plane.origin[2]);
-    if(waitForMoveDone)
+    if(waitForMoveDone) {
       plane waittill("movedone");
+    }
     waitForMoveDone = plane serverTimedMoveTo(localClientNum, plane.origin, endPoint, startTime, waitAmount);
     plane serverTimedRotateTo(localClientNum, angles, startTime, waitAmount);
     loopTime += waitAmount;
@@ -187,12 +199,14 @@ doABarrelRoll(localClientNum, plane, endPoint, flytime, startTime) {
     timeElapsed += waitAmount;
     if((timeElapsed > loopWaitTime) && (degreesRolled < degreesToRoll)) {
       pitch = degreesRolled / 8;
-      if(pitch > 22.5)
+      if(pitch > 22.5) {
         pitch = 45 - pitch;
+      }
       originalAngle = plane.angles[2];
       scr_degreesToRoll = getDvarIntDefault(#"scr_degreesToRoll", 0);
-      if(scr_degreesToRoll)
+      if(scr_degreesToRoll) {
         plane.angles[1] = 0;
+      }
       angles = (0 - pitch, plane.angles[1], originalRoll + degreesRolled);
       degreesRolled += rollZ;
     }
@@ -200,8 +214,9 @@ doABarrelRoll(localClientNum, plane, endPoint, flytime, startTime) {
     nextPoint = getPointOnLine(origin, endPoint, ratio);
     nextHeight = originalHeight + (loopHeight - (cos(degreesRolled / 2) * loopHeight));
     nextPoint = (nextPoint[0], nextPoint[1], nextHeight);
-    if(waitForMoveDone)
+    if(waitForMoveDone) {
       plane waittill("movedone");
+    }
     waitForMoveDone = plane serverTimedMoveTo(localClientNum, plane.origin, nextPoint, startTime, waitAmount);
     plane serverTimedRotateTo(localClientNum, angles, startTime, waitAmount);
     startTime += waitAmount * 1000;
@@ -212,6 +227,7 @@ planeGoStraight(localClientNum, plane, startPoint, endPoint, moveTime, startTime
   level endon("demo_jump");
   distanceIncreaseRatio = 2;
   destPoint = getPointOnLine(startPoint, endPoint, distanceIncreaseRatio);
-  if(plane serverTimedMoveTo(localClientNum, startPoint, destPoint, startTime, moveTime))
+  if(plane serverTimedMoveTo(localClientNum, startPoint, destPoint, startTime, moveTime)) {
     plane waittill("movedone");
+  }
 }

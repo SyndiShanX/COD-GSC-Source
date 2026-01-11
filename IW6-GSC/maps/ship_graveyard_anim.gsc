@@ -379,10 +379,12 @@ radio() {
 }
 
 weld_fx_on(var_0) {
-  if(!isDefined(var_0.welding) || var_0.welding == 0)
+  if(!isDefined(var_0.welding) || var_0.welding == 0) {
     var_0.welding = 1;
-  else
+  }
+  else {
     return;
+  }
 
   playFXOnTag(common_scripts\utility::getfx("weld_sparks"), var_0, "tag_fx");
   var_0 playLoopSound("scn_shipg_sm_wreck_npc_torch_lp");

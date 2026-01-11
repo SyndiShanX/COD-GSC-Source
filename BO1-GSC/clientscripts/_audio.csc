@@ -312,10 +312,12 @@ start_player_health_snapshot() {
 }
 
 scale_speed(x1, x2, y1, y2, z) {
-  if(z < x1)
+  if(z < x1) {
     z = x1;
-  if(z > x2)
+  }
+  if(z > x2) {
     z = x2;
+  }
   dx = x2 - x1;
   n = (z - x1) / dx;
   dy = y2 - y1;
@@ -341,10 +343,12 @@ get_vol_from_speed(player) {
 }
 
 absolute_value(fowd) {
-  if(fowd < 0)
+  if(fowd < 0) {
     return (fowd * -1);
-  else
+  }
+  else {
     return fowd;
+  }
 }
 
 closest_point_on_line_to_point(Point, LineStart, LineEnd) {
@@ -367,8 +371,9 @@ closest_point_on_line_to_point(Point, LineStart, LineEnd) {
 }
 
 playloopat(localClientNum, aliasname, origin, fade) {
-  if(!isDefined(fade))
+  if(!isDefined(fade)) {
     fade = 0;
+  }
   fake_ent = spawnfakeent(localClientNum);
   setfakeentorg(localClientNum, fake_ent, origin);
   playLoopSound(localClientNum, fake_ent, aliasname, fade);

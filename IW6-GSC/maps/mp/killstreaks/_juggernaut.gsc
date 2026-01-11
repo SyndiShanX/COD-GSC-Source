@@ -32,13 +32,15 @@ giveJuggernaut(juggType) {
 
   wait(0.05);
 
-  if(isDefined(self.lightArmorHP))
+  if(isDefined(self.lightArmorHP)) {
     self maps\mp\perks\_perkfunctions::unsetLightArmor();
+  }
 
   self maps\mp\gametypes\_weapons::disablePlantedEquipmentUse();
 
-  if(self _hasPerk("specialty_explosivebullets"))
+  if(self _hasPerk("specialty_explosivebullets")) {
     self _unsetPerk("specialty_explosivebullets");
+  }
 
   self.health = self.maxHealth;
 
@@ -96,8 +98,9 @@ giveJuggernaut(juggType) {
       break;
   }
 
-  if(self perkCheck("specialty_hardline"))
+  if(self perkCheck("specialty_hardline")) {
     self givePerk("specialty_hardline", false);
+  }
 
   self maps\mp\gametypes\_weapons::updateMoveSpeedScale();
   self disableWeaponPickup();
@@ -134,8 +137,9 @@ perkCheck(perkToCheck) {
   loadoutPerks = self.pers["loadoutPerks"];
 
   foreach(perk in loadoutPerks) {
-    if(perk == perkToCheck)
+    if(perk == perkToCheck) {
       return true;
+    }
   }
 
   return false;
@@ -160,12 +164,15 @@ watchJuggHostMigrationFinishedInit() {
     level waittill("host_migration_end");
 
     foreach(player in level.players) {
-      if(isAI(player))
+      if(isAI(player)) {
         continue;
-      else if(player isJuggernaut() && !(isDefined(player.isJuggernautLevelCustom) && player.isJuggernautLevelCustom))
+      }
+      else if(player isJuggernaut() && !(isDefined(player.isJuggernautLevelCustom) && player.isJuggernautLevelCustom)) {
         player SetClientOmnvar("ui_juggernaut", 1);
-      else
+      }
+      else {
         player SetClientOmnvar("ui_juggernaut", 0);
+      }
     }
   }
 }
@@ -185,8 +192,9 @@ juggRemover() {
   self.isJuggernautRecon = false;
   self.isJuggernautManiac = false;
   self.isJuggernautLevelCustom = false;
-  if(IsPlayer(self))
+  if(IsPlayer(self)) {
     self SetClientOmnvar("ui_juggernaut", 0);
+  }
 
   self unsetPerk("specialty_radarjuggernaut", true);
 
@@ -199,8 +207,9 @@ juggRemoveOnGameEnded() {
 
   level waittill("game_ended");
 
-  if(IsPlayer(self))
+  if(IsPlayer(self)) {
     self SetClientOmnvar("ui_juggernaut", 0);
+  }
 }
 
 setJugg() {
@@ -261,8 +270,9 @@ watchEnableJuggernaut() {
   level endon("game_ended");
 
   while(true) {
-    if(isDefined(self.juggernaut_disabled) && !self isUsingRemote())
+    if(isDefined(self.juggernaut_disabled) && !self isUsingRemote()) {
       enableJuggernaut();
+    }
     wait(0.05);
   }
 }

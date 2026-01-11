@@ -37,8 +37,9 @@ init() {
 func_128FC(var_00, var_01) {
   var_02 = func_128FF(var_00, "mg_turret");
 
-  if(var_02)
+  if(var_02) {
     scripts\mp\matchdata::logkillstreakevent(level.func_12A8D["mg_turret"].streakname, self.origin);
+  }
 
   self.iscarrying = 0;
   return var_02;
@@ -50,18 +51,21 @@ func_1146D(var_00) {
 }
 
 func_128FF(var_00, var_01) {
-  if(scripts\mp\utility\game::isusingremote())
+  if(scripts\mp\utility\game::isusingremote()) {
     return 0;
+  }
 
   var_02 = func_4A2C(var_01, self);
   removeperks();
   func_F68B(var_02, 1);
   thread restoreperks();
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 func_F68B(var_00, var_01) {
@@ -174,19 +178,23 @@ restoreweapons() {
 
     scripts\mp\utility\game::_giveweapon(var_02);
 
-    if(isDefined(self.restoreweaponclipammo[var_02]))
+    if(isDefined(self.restoreweaponclipammo[var_02])) {
       self setweaponammoclip(var_02, self.restoreweaponclipammo[var_02]);
+    }
 
-    if(isDefined(self.func_E2E9[var_02]))
+    if(isDefined(self.func_E2E9[var_02])) {
       self setweaponammostock(var_02, self.func_E2E9[var_02]);
+    }
   }
 
   foreach(var_06 in var_00) {
-    if(isDefined(self.restoreweaponclipammo[var_06]))
+    if(isDefined(self.restoreweaponclipammo[var_06])) {
       self setweaponammoclip(var_06, self.restoreweaponclipammo[var_06]);
+    }
 
-    if(isDefined(self.func_E2E9[var_06]))
+    if(isDefined(self.func_E2E9[var_06])) {
       self setweaponammostock(var_06, self.func_E2E9[var_06]);
+    }
   }
 
   self.restoreweaponclipammo = undefined;
@@ -221,8 +229,9 @@ func_12A2E() {
 func_12A2B() {
   self.carriedby getrigindexfromarchetyperef();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self delete();
 }
@@ -279,10 +288,12 @@ func_12A16(var_00) {
   self endon("death");
   var_00 waittill("death");
 
-  if(self.canbeplaced)
+  if(self.canbeplaced) {
     func_12A2E();
-  else
+  }
+  else {
     self delete();
+  }
 }
 
 func_12A17(var_00) {
@@ -342,8 +353,9 @@ func_12A2A() {
   var_00 = self.owner;
 
   if(isDefined(var_0.func_DF89)) {
-    foreach(var_02 in var_0.func_DF89)
+    foreach(var_02 in var_0.func_DF89) {
     var_02 notify("death");
+    }
   }
 
   var_0.func_DF89 = [];
@@ -352,8 +364,9 @@ func_12A2A() {
   var_0.func_CB39 = 0;
   var_0.func_6617 = 1;
 
-  if(isalive(var_00))
+  if(isalive(var_00)) {
     var_00 scripts\mp\utility\game::setlowermessage("pickup_remote_turret", level.func_12A8D[self.func_12A9A].func_901F, undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  }
 
   var_00 thread func_13AE5(self);
 
@@ -382,8 +395,9 @@ func_10E08() {
   var_01 = var_00 scripts\mp\killstreaks\killstreaks::initridekillstreak();
 
   if(var_01 != "success") {
-    if(var_01 != "disconnect")
+    if(var_01 != "disconnect") {
       var_00 scripts\mp\utility\game::clearusingremote();
+    }
 
     return 0;
   }
@@ -393,11 +407,13 @@ func_10E08() {
   var_00 scripts\mp\utility\game::freezecontrolswrapper(0);
   var_00 thread waitsetthermal(1.0, self);
 
-  if(isDefined(level.func_9181["thermal_mode"]))
+  if(isDefined(level.func_9181["thermal_mode"])) {
     level.func_9181["thermal_mode"] give_zap_perk("");
+  }
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     var_00 scripts\mp\utility\game::setthirdpersondof(0);
+  }
 
   var_00 getwholescenedurationmax(self, "tag_player", 0, 180, 180, 50, 25, 0);
   var_00 _meth_8236(0);
@@ -428,21 +444,24 @@ func_1109C() {
     var_00 scripts\mp\utility\game::_switchtoweapon(var_00 scripts\engine\utility::getlastweapon());
     var_00 scripts\mp\utility\game::clearusingremote();
 
-    if(getdvarint("camera_thirdPerson"))
+    if(getdvarint("camera_thirdPerson")) {
       var_00 scripts\mp\utility\game::setthirdpersondof(1);
+    }
 
     var_00 visionsetthermalforplayer(game["thermal_vision"], 0);
     var_01 = scripts\mp\utility\game::getkillstreakweapon(level.func_12A8D[self.func_12A9A].streakname);
     var_00 scripts\mp\killstreaks\killstreaks::func_1146C(var_01);
   }
 
-  if(self.stunned)
+  if(self.stunned) {
     var_00 stopshellshock();
+  }
 
   var_00 scripts\mp\utility\game::clearlowermessage("early_exit");
 
-  if(!isDefined(var_0.func_13108) || !var_0.func_13108)
+  if(!isDefined(var_0.func_13108) || !var_0.func_13108) {
     var_00 scripts\mp\utility\game::setlowermessage("enter_remote_turret", level.func_12A8D[self.func_12A9A].func_901A, undefined, undefined, undefined, 1, 0.25, 1.5, 1);
+  }
 
   self notify("exit");
 }
@@ -453,16 +472,19 @@ func_13AE5(var_00) {
   self.func_13108 = 0;
 
   for(;;) {
-    if(isalive(self))
+    if(isalive(self)) {
       self waittill("death");
+    }
 
     scripts\mp\utility\game::clearlowermessage("enter_remote_turret");
     scripts\mp\utility\game::clearlowermessage("pickup_remote_turret");
 
-    if(self.using_remote_turret)
+    if(self.using_remote_turret) {
       self.func_13108 = 1;
-    else
+    }
+    else {
       self.func_13108 = 0;
+    }
 
     self waittill("spawned_player");
 
@@ -674,10 +696,12 @@ func_129CD() {
 func_12A2D() {
   self give_player_session_tokens(level.func_12A8D[self.func_12A9A].sentrymodeoff);
 
-  if(level.teambased)
+  if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
-  else if(isDefined(self.owner))
+  }
+  else if(isDefined(self.owner)) {
     scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
+  }
 
   if(!isDefined(self.owner)) {
     return;
@@ -692,14 +716,16 @@ func_12A2D() {
     var_00 scripts\mp\utility\game::_switchtoweapon(var_00 scripts\engine\utility::getlastweapon());
     var_00 scripts\mp\utility\game::clearusingremote();
 
-    if(getdvarint("camera_thirdPerson"))
+    if(getdvarint("camera_thirdPerson")) {
       var_00 scripts\mp\utility\game::setthirdpersondof(1);
+    }
 
     var_00 scripts\mp\killstreaks\killstreaks::clearrideintro();
     var_00 visionsetthermalforplayer(game["thermal_vision"], 0);
 
-    if(isDefined(var_0.disabledusability) && var_0.disabledusability)
+    if(isDefined(var_0.disabledusability) && var_0.disabledusability) {
       var_00 scripts\engine\utility::allow_usability(1);
+    }
 
     var_00 func_1146D(self.func_12A9A);
   }
@@ -723,12 +749,14 @@ func_12A44() {
     wait 1.0;
     scripts\mp\hostmigration::waittillhostmigrationdone();
 
-    if(!isDefined(self.carriedby))
+    if(!isDefined(self.carriedby)) {
       var_00 = max(0, var_00 - 1.0);
+    }
   }
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner thread scripts\mp\utility\game::leaderdialogonplayer("sentry_gone");
+  }
 
   self notify("death");
 }
@@ -747,8 +775,9 @@ func_129FB() {
   self setsentryowner(undefined);
   self setturretminimapvisible(0);
 
-  if(isDefined(self.ownertrigger))
+  if(isDefined(self.ownertrigger)) {
     self.ownertrigger delete();
+  }
 
   var_01 = self.owner;
 
@@ -760,11 +789,13 @@ func_129FB() {
     var_01 restoreperks();
     var_01 restoreweapons();
 
-    if(var_01 getcurrentweapon() == "none")
+    if(var_01 getcurrentweapon() == "none") {
       var_01 scripts\mp\utility\game::_switchtoweapon(var_01 scripts\engine\utility::getlastweapon());
+    }
 
-    if(self.stunned)
+    if(self.stunned) {
       var_01 stopshellshock();
+    }
   }
 
   self playSound("sentry_explode");
@@ -779,8 +810,9 @@ func_129FB() {
 
   self notify("deleting");
 
-  if(isDefined(self.func_11512))
+  if(isDefined(self.func_11512)) {
     self.func_11512 delete();
+  }
 
   self delete();
 }
@@ -814,14 +846,17 @@ func_129FA() {
     if(!isDefined(self)) {
       return;
     }
-    if(var_04 == "MOD_MELEE")
+    if(var_04 == "MOD_MELEE") {
       self.damagetaken = self.damagetaken + self.maxhealth;
+    }
 
-    if(isDefined(var_08) && var_08 &level.idflags_penetration)
+    if(isDefined(var_08) && var_08 &level.idflags_penetration) {
       self.wasdamagedfrombulletpenetration = 1;
+    }
 
-    if(isDefined(var_08) && var_08 &level.idflags_no_team_protection)
+    if(isDefined(var_08) && var_08 &level.idflags_no_team_protection) {
       self.wasdamagedfrombulletricochet = 1;
+    }
 
     self.wasdamaged = 1;
     self.func_4D49 = 0.0;
@@ -830,12 +865,14 @@ func_129FA() {
     if(isplayer(var_01)) {
       var_01 scripts\mp\damagefeedback::updatedamagefeedback("remote_turret");
 
-      if(var_01 scripts\mp\utility\game::_hasperk("specialty_armorpiercing"))
+      if(var_01 scripts\mp\utility\game::_hasperk("specialty_armorpiercing")) {
         var_10 = var_00 * level.armorpiercingmod;
+      }
     }
 
-    if(isDefined(var_1.owner) && isplayer(var_1.owner))
+    if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
       var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("remote_turret");
+    }
 
     if(isDefined(var_09)) {
       switch (var_09) {
@@ -871,8 +908,9 @@ func_129FA() {
         var_01 notify("destroyed_killstreak");
       }
 
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self.owner thread scripts\mp\utility\game::leaderdialogonplayer(level.func_12A8D[self.func_12A9A].vodestroyed, undefined, undefined, self.origin);
+      }
 
       self notify("death");
       return;

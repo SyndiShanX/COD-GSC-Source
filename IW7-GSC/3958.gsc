@@ -14,8 +14,9 @@ registerscriptedagent() {
 func_FAB0() {
   level endon("game_ended");
 
-  if(!isDefined(level.agent_definition))
+  if(!isDefined(level.agent_definition)) {
     level waittill("scripted_agents_initialized");
+  }
 
   level.agent_definition["zombie_brute"]["setup_func"] = ::setupagent;
   level.agent_definition["zombie_brute"]["setup_model_func"] = ::func_FACE;
@@ -98,8 +99,9 @@ setupagent() {
   self.footstepdetectdistsprint = 600;
   self.allowpain = 1;
 
-  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1)
+  if(getdvarint("scr_zombie_left_foot_sharp_turn_only", 0) == 1) {
     self.func_AB3F = 1;
+  }
 
   self.func_1009D = ::func_3121;
   thread func_B9B9();
@@ -107,8 +109,9 @@ setupagent() {
   thread func_899C();
   var_00 = getdvarint("scr_zombie_traversal_push", 1);
 
-  if(var_00 == 1)
+  if(var_00 == 1) {
     thread func_311D();
+  }
 
   thread func_89C9();
   func_108D6();
@@ -166,21 +169,25 @@ func_3110(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   var_14 = self gettagorigin("tag_eye");
   var_15 = (var_08 == "head" || var_08 == "helmet" || var_08 == "neck") && var_04 != "MOD_MELEE" && var_04 != "MOD_IMPACT" && var_04 != "MOD_CRUSH";
 
-  if(!var_15 && var_08 == "torso_upper" && self.helmetlocation == "hand" && distancesquared(var_06, var_14) < var_13)
+  if(!var_15 && var_08 == "torso_upper" && self.helmetlocation == "hand" && distancesquared(var_06, var_14) < var_13) {
     var_15 = 1;
+  }
 
   if(var_15) {
     var_02 = scale_ww_damage(var_02, var_05);
     var_16 = var_02 / 3;
 
-    if(isDefined(var_05) && (var_05 == "zmb_imsprojectile_mp" || var_05 == "zmb_fireworksprojectile_mp"))
+    if(isDefined(var_05) && (var_05 == "zmb_imsprojectile_mp" || var_05 == "zmb_fireworksprojectile_mp")) {
       var_02 = 0;
-    else
+    }
+    else {
       var_02 = max(10, var_16);
+    }
 
     if(self.helmetlocation == "head") {
-      if(!isDefined(self.func_8DDE))
+      if(!isDefined(self.func_8DDE)) {
         self.func_8DDE = 0;
+      }
 
       self.func_8DDE = self.func_8DDE + var_02;
       var_02 = 1;
@@ -239,18 +246,21 @@ func_DB25(var_00) {
   self endon("reset_helmet_timer");
   wait(var_00);
 
-  if(self.helmetlocation == "hand")
+  if(self.helmetlocation == "hand") {
     self.desiredhelmetlocation = "head";
+  }
 }
 
 func_3112() {
   self endon("death");
 
-  if(!isDefined(self.func_8DDE))
+  if(!isDefined(self.func_8DDE)) {
     self.func_8DDE = 0;
+  }
 
-  while(!isDefined(self.maxhealth))
+  while(!isDefined(self.maxhealth)) {
     wait 0.1;
+  }
 
   self.func_8E09 = 0;
 
@@ -258,8 +268,9 @@ func_3112() {
     var_00 = self.health / self.maxhealth;
     var_01 = max(self.func_8DF0 * var_00, 1000);
 
-    if(self.func_8E09 == 1)
+    if(self.func_8E09 == 1) {
       var_01 = var_01 * 0.5;
+    }
 
     self waittill("helmet_damage");
 
@@ -268,47 +279,55 @@ func_3112() {
       self.desiredhelmetlocation = "hand";
       self.func_8DDE = 0;
 
-      if(self.func_8E09 < 2)
+      if(self.func_8E09 < 2) {
         thread func_DB25(20);
+      }
     }
   }
 }
 
 func_C4D0(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12) {
-  if(!isDefined(self.func_8E09))
+  if(!isDefined(self.func_8E09)) {
     self.func_8E09 = 0;
+  }
 
-  if(self.croc_chomp)
+  if(self.croc_chomp) {
     var_02 = 1;
+  }
   else if(var_08 == "head" || var_02 > 1) {
     var_13 = "standard";
 
     if(self.helmetlocation == "head") {
-      if(!isDefined(self.func_8DDE))
+      if(!isDefined(self.func_8DDE)) {
         self.func_8DDE = 0;
+      }
 
       self notify("helmet_damage");
       var_02 = 0;
     } else {
       var_13 = "hitcritical";
 
-      if(self.func_8E09 < 2)
+      if(self.func_8E09 < 2) {
         thread func_DB25(5);
+      }
     }
 
-    if(isplayer(var_01))
+    if(isplayer(var_01)) {
       var_01 thread scripts\cp\cp_damage::updatedamagefeedback(var_13, undefined, var_02);
+    }
   } else if(var_08 == "helmet") {
     var_13 = "standard";
 
     if(self.helmetlocation == "head") {
-      if(!isDefined(self.func_8DDE))
+      if(!isDefined(self.func_8DDE)) {
         self.func_8DDE = 0;
+      }
 
       self notify("helmet_damage");
 
-      if(isplayer(var_01))
+      if(isplayer(var_01)) {
         var_01 thread scripts\cp\cp_damage::updatedamagefeedback(var_13, undefined, var_02);
+      }
 
       var_02 = 0;
     } else
@@ -320,8 +339,9 @@ func_C4D0(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 }
 
 brute_killed_vo(var_00) {
-  if(isplayer(var_00))
+  if(isplayer(var_00)) {
     var_00 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_brute", "zmb_comment_vo", "medium", 10, 0, 0, 0, 20);
+  }
 
   wait 4;
   level thread scripts\cp\cp_vo::try_to_play_vo("ww_brute_death", "zmb_ww_vo", "highest", 60, 0, 0, 1);
@@ -366,8 +386,9 @@ func_BA27() {
 }
 
 func_A012() {
-  if(!isDefined(level.func_13F60))
+  if(!isDefined(level.func_13F60)) {
     return 0;
+  }
 
   return level.func_13F60;
 }
@@ -394,8 +415,9 @@ func_311E(var_00, var_01) {
         var_08 = (var_8[0], var_8[1], 0);
         var_09 = vectornormalize(var_08);
 
-        if(var_07 < 60)
+        if(var_07 < 60) {
           var_07 = 60;
+        }
 
         var_10 = var_03 getvelocity();
         var_10 = (var_10[0], var_10[1], 0);
@@ -421,8 +443,9 @@ func_311E(var_00, var_01) {
             var_13 = var_10 + var_12;
             var_07 = length2d(var_13);
           } else {
-            if(var_11 > var_07)
+            if(var_11 > var_07) {
               var_07 = var_11;
+            }
 
             var_09 = vectornormalize(var_13);
           }
@@ -456,11 +479,13 @@ func_311D() {
 }
 
 func_3121() {
-  if(!isDefined(self.desiredhelmetlocation) || !isDefined(self.helmetlocation))
+  if(!isDefined(self.desiredhelmetlocation) || !isDefined(self.helmetlocation)) {
     return 0;
+  }
 
-  if(self.helmetlocation != self.desiredhelmetlocation)
+  if(self.helmetlocation != self.desiredhelmetlocation) {
     return 1;
+  }
 
   return 0;
 }
@@ -531,10 +556,12 @@ func_3116() {
           }
         }
 
-        if(!var_07)
+        if(!var_07) {
           var_0++;
-        else
+        }
+        else {
           var_00 = 0;
+        }
       } else
         var_00 = 0;
 

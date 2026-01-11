@@ -106,8 +106,9 @@ init() {
   init_heli_sound_values("jetwing", "steady", 40, 0.7, 1, 50, 0.95, 1.05);
   thread stupiddelayfix();
 
-  if(getdvar(#"_id_21D60E03") == "")
+  if(getdvar(#"_id_21D60E03") == "") {
     setdvar("helisounds", "");
+  }
 
   level thread command_parser();
   level thread command_parserpitch();
@@ -123,11 +124,13 @@ updatestatus(localclientnum, flag, set, newent) {
 }
 
 init_heli_sound_values(heli_type, part_type, max_speed_vol, min_vol, max_vol, max_speed_pitch, min_pitch, max_pitch) {
-  if(!isDefined(level.helisoundvalues[heli_type]))
+  if(!isDefined(level.helisoundvalues[heli_type])) {
     level.helisoundvalues[heli_type] = [];
+  }
 
-  if(!isDefined(level.helisoundvalues[heli_type][part_type]))
+  if(!isDefined(level.helisoundvalues[heli_type][part_type])) {
     level.helisoundvalues[heli_type][part_type] = spawnStruct();
+  }
 
   level.helisoundvalues[heli_type][part_type].speedvolumemax = max_speed_vol;
   level.helisoundvalues[heli_type][part_type].speedpitchmax = max_speed_pitch;
@@ -158,18 +161,22 @@ command_parser() {
       tokens = strtok(command, " ");
 
       if(!isDefined(tokens[0]) || !isDefined(level.helisoundvalues[tokens[0]])) {
-        if(isDefined(tokens[0]))
+        if(isDefined(tokens[0])) {
           println("helisounds Did not recognize helicopter type:" + tokens[0]);
-        else
+        }
+        else {
           println("helisounds Did not recognize helicopter type");
+        }
 
         println("helisounds usage: helisounds <heli name> <part name> <value name> <value>");
         success = 0;
       } else if(!isDefined(tokens[1])) {
-        if(isDefined(tokens[1]))
+        if(isDefined(tokens[1])) {
           println("helisounds Did not recognize helicopter part:" + tokens[0] + " for heli: " + tokens[1]);
-        else
+        }
+        else {
           println("helisounds Did not recognize helicopter part for heli: " + tokens[0]);
+        }
 
         println("helisounds usage: helisounds <heli name> <part name> <value name> <value>");
         success = 0;
@@ -467,8 +474,9 @@ setup_heli_sounds(bone_location, type, tag, run, dmg1, dmg2, dmg3, distancecheck
   self.heli[bone_location].run.alias = run;
   self.sound_ents[self.sound_ents.size] = self.heli[bone_location].run;
 
-  if(isDefined(distancecheck))
+  if(isDefined(distancecheck)) {
     self thread delete_loop_distance(self.heli[bone_location].run);
+  }
 
   if(isDefined(dmg1)) {
     self.heli[bone_location].dmg1 = spawn(0, self.origin, "script_origin");
@@ -763,8 +771,9 @@ start_helicopter_sounds(localclientnum) {
       default:
         play_terrain_sounds = 0;
 
-        if(getdvarint(#"_id_55AD9BED") > 0)
+        if(getdvarint(#"_id_55AD9BED") > 0) {
           println("^5helicopter type: " + self.vehicletype + " NOT FOUND; playing NO helicopter sounds");
+        }
 
         break;
     }
@@ -822,8 +831,9 @@ heli_delete_sound_loops() {
 drone_delete_sound_loops() {
   println("heli_script: deleting linkto ents");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 play_f35_sounds() {
@@ -1014,8 +1024,9 @@ heli_sound_play(heli_bone) {
   self endon("heli_entityshutdown");
   self endon("entityshutdown");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.05;
+  }
 
   if(!isDefined(heli_bone)) {
     println("AUDIO ERROR: Undefined call toheli_sound_play( heli_bone ); ");
@@ -1053,18 +1064,21 @@ init_heli_sounds_player_drone() {
 quad_idle_run_transition(heli_type, heli_part1, heli_part2, heli_part3, heli_part4, updown, delay, distancecheck) {
   self endon("entityshutdown");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.05;
+  }
 
   wait(randomfloat(0.5));
   self init_heli_sounds_player_drone();
   self.deletedfakeents = 0;
 
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0.05;
+  }
 
-  if(!isDefined(updown))
+  if(!isDefined(updown)) {
     updown = 0;
+  }
 
   heli_bone1 = self.heli[heli_part1];
   heli_bone2 = self.heli[heli_part2];
@@ -1126,8 +1140,9 @@ quad_idle_run_transition(heli_type, heli_part1, heli_part2, heli_part3, heli_par
     playerdistance = distancesquared(self.origin, player.origin);
 
     if(playerdistance > 1000000) {
-      if(!self.deletedfakeents)
+      if(!self.deletedfakeents) {
         wait 0.5;
+      }
     } else {
       if(self.deletedfakeents) {
         self init_heli_sounds_player_drone();
@@ -1158,8 +1173,9 @@ quad_idle_run_transition(heli_type, heli_part1, heli_part2, heli_part3, heli_par
         if(updown) {
           self.qrdrone_z_difference = last_pos - self.origin[2];
 
-          if(!isDefined(self.qrdrone_z_difference))
+          if(!isDefined(self.qrdrone_z_difference)) {
             self.qrdrone_z_difference = 0;
+          }
 
           run_volume_vertical = scale_speed(0, 15, 0, 1, abs(self.qrdrone_z_difference));
           run_volume_vertical_smooth = run_volume_vertical * run_volume_vertical * run_volume_vertical;
@@ -1187,16 +1203,19 @@ quad_idle_run_transition(heli_type, heli_part1, heli_part2, heli_part3, heli_par
 heli_idle_run_transition(heli_type, heli_part, updown, delay) {
   self endon("entityshutdown");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.05;
+  }
 
   wait(randomfloat(0.5));
 
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0.05;
+  }
 
-  if(!isDefined(updown))
+  if(!isDefined(updown)) {
     updown = 0;
+  }
 
   heli_bone = self.heli[heli_part];
   run_id = undefined;
@@ -1230,10 +1249,12 @@ heli_idle_run_transition(heli_type, heli_part, updown, delay) {
     }
 
     if(!isDefined(run_id)) {
-      if(isDefined(heli_bone.run))
+      if(isDefined(heli_bone.run)) {
         run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
-      else
+      }
+      else {
         continue;
+      }
     }
 
     max_speed_vol = level.helisoundvalues[heli_type][heli_part].speedvolumemax;
@@ -1251,15 +1272,17 @@ heli_idle_run_transition(heli_type, heli_part, updown, delay) {
       run_pitch = scale_speed(self.idle_run_trans_speed, max_speed_pitch, min_pitch, max_pitch, self.cur_speed);
 
       if(updown) {
-        if(!isDefined(self.qrdrone_z_difference))
+        if(!isDefined(self.qrdrone_z_difference)) {
           self.qrdrone_z_difference = 0;
+        }
 
         run_volume_vertical = scale_speed(5, 50, 0, 1, abs(self.qrdrone_z_difference));
         run_volume = run_volume - run_volume_vertical;
       }
 
-      if(isDefined(run_volume) && isDefined(run_pitch) && isDefined(heli_bone.run))
+      if(isDefined(run_volume) && isDefined(run_pitch) && isDefined(heli_bone.run)) {
         heli_bone.run setloopstate(heli_bone.run.alias, run_volume, run_pitch, 1, level.pitch_run_rate);
+      }
     }
 
     if(isDefined(self.isdamaged) && heli_damage == "none") {
@@ -1278,8 +1301,9 @@ heli_idle_run_transition(heli_type, heli_part, updown, delay) {
 jet_afterburn(heli_type, heli_part) {
   self endon("entityshutdown");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.05;
+  }
 
   level.sndvtolmode = 1;
   heli_bone = self.heli[heli_part];
@@ -1311,8 +1335,9 @@ jet_afterburn(heli_type, heli_part) {
       continue;
     }
 
-    if(!isDefined(run_id) && isDefined(heli_bone.run))
+    if(!isDefined(run_id) && isDefined(heli_bone.run)) {
       run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
+    }
 
     max_speed_vol = level.helisoundvalues[heli_type][heli_part].speedvolumemax;
     min_vol = level.helisoundvalues[heli_type][heli_part].volumemin;
@@ -1324,16 +1349,18 @@ jet_afterburn(heli_type, heli_part) {
     run_volume = scale_speed(self.idle_run_trans_speed, max_speed_vol, min_vol, max_vol, self.cur_speed);
     run_pitch = scale_speed(self.idle_run_trans_speed, max_speed_pitch, min_pitch, max_pitch, self.cur_speed);
 
-    if(isDefined(run_id))
+    if(isDefined(run_id)) {
       setsoundvolume(run_id, run_volume);
+    }
   }
 }
 
 jet_idle_run_transition(heli_type, heli_part) {
   self endon("entityshutdown");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.05;
+  }
 
   heli_bone = self.heli[heli_part];
   run_id = undefined;
@@ -1364,8 +1391,9 @@ jet_idle_run_transition(heli_type, heli_part) {
       continue;
     }
 
-    if(!isDefined(run_id) && isDefined(heli_bone.run))
+    if(!isDefined(run_id) && isDefined(heli_bone.run)) {
       run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
+    }
 
     max_speed_vol = level.helisoundvalues[heli_type][heli_part].speedvolumemax;
     min_vol = level.helisoundvalues[heli_type][heli_part].volumemin;
@@ -1379,20 +1407,23 @@ jet_idle_run_transition(heli_type, heli_part) {
     movement = self getnormalizedcameramovement();
     jet_stick_turn = movement[1];
 
-    if(jet_stick_turn <= 0)
+    if(jet_stick_turn <= 0) {
       jet_stick_turn = jet_stick_turn * -1;
+    }
 
     jet_stick_pitch = movement[0];
 
-    if(jet_stick_pitch <= 0)
+    if(jet_stick_pitch <= 0) {
       jet_stick_pitch = jet_stick_pitch * -1;
+    }
 
     jet_stick_movement = jet_stick_turn + jet_stick_pitch;
     jet_stick_move_pitch = scale_speed(0, 1.6, 0.5, 1.5, jet_stick_movement);
 
     if(isDefined(run_volume) && isDefined(run_pitch) && isDefined(run_id)) {
-      if(isDefined(heli_bone.run))
+      if(isDefined(heli_bone.run)) {
         heli_bone.run setloopstate(heli_bone.run.alias, run_volume, run_pitch, 1, level.pitch_run_rate);
+      }
 
       if(isDefined(self.isdamaged) && heli_damage == "none") {
         return;
@@ -1411,8 +1442,9 @@ jet_idle_run_transition(heli_type, heli_part) {
 jet_turn_transition(heli_type, heli_part) {
   self endon("entityshutdown");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.05;
+  }
 
   heli_bone = self.heli[heli_part];
   run_id = undefined;
@@ -1449,24 +1481,27 @@ jet_turn_transition(heli_type, heli_part) {
       continue;
     }
 
-    if(!isDefined(run_id) && isDefined(heli_bone.run))
+    if(!isDefined(run_id) && isDefined(heli_bone.run)) {
       run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
+    }
 
     angular_velocity = self.angles;
     turning_speed = abs(angular_velocity[2] / 90);
     jet_stick_vol = scale_speed(0, 0.7, 0, 1, turning_speed);
     jet_stick_pitch = scale_speed(0, 0.7, 1, 1.2, turning_speed);
 
-    if(isDefined(run_id) && isDefined(jet_stick_vol) && isDefined(jet_stick_pitch) && isDefined(heli_bone.run))
+    if(isDefined(run_id) && isDefined(jet_stick_vol) && isDefined(jet_stick_pitch) && isDefined(heli_bone.run)) {
       heli_bone.run setloopstate(heli_bone.run.alias, jet_stick_vol, jet_stick_pitch, 0.5, level.jet_stick_pitch_turn_rate);
+    }
   }
 }
 
 jet_turn_rattle_transition(heli_type, heli_part) {
   self endon("entityshutdown");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.05;
+  }
 
   heli_bone = self.heli[heli_part];
   run_id = undefined;
@@ -1506,24 +1541,27 @@ jet_turn_rattle_transition(heli_type, heli_part) {
       continue;
     }
 
-    if(!isDefined(run_id) && isDefined(heli_bone.run))
+    if(!isDefined(run_id) && isDefined(heli_bone.run)) {
       run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
+    }
 
     angular_velocity = self.angles;
     turning_speed = abs(angular_velocity[2] / 90);
     jet_stick_vol = scale_speed(0, 0.7, 0, 1, turning_speed);
     jet_stick_pitch = scale_speed(0, 0.7, 1, 1.2, turning_speed);
 
-    if(isDefined(run_id) && isDefined(jet_stick_vol) && isDefined(jet_stick_pitch) && isDefined(heli_bone.run))
+    if(isDefined(run_id) && isDefined(jet_stick_vol) && isDefined(jet_stick_pitch) && isDefined(heli_bone.run)) {
       heli_bone.run setloopstate(heli_bone.run.alias, jet_stick_vol, jet_stick_pitch, 0.5, level.jet_stick_pitch_turn_rate);
+    }
   }
 }
 
 jet_down_transition(heli_type, heli_part) {
   self endon("entityshutdown");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.05;
+  }
 
   heli_bone = self.heli[heli_part];
   run_id = undefined;
@@ -1563,30 +1601,35 @@ jet_down_transition(heli_type, heli_part) {
       continue;
     }
 
-    if(!isDefined(run_id) && isDefined(heli_bone.run))
+    if(!isDefined(run_id) && isDefined(heli_bone.run)) {
       run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
+    }
 
     movement = self getnormalizedcameramovement();
     jet_stick_down = movement[0];
 
-    if(jet_stick_down <= 0)
+    if(jet_stick_down <= 0) {
       jet_stick_down = jet_stick_down * -1;
-    else
+    }
+    else {
       jet_stick_down = 0;
+    }
 
     jet_stick_down = scale_speed(0, 1, 0.1, 1, jet_stick_down);
     jet_stick_down_rate = level.jet_stick_down_rate;
 
-    if(isDefined(run_id) && isDefined(jet_stick_down) && isDefined(heli_bone.run))
+    if(isDefined(run_id) && isDefined(jet_stick_down) && isDefined(heli_bone.run)) {
       heli_bone.run setloopstate(heli_bone.run.alias, jet_stick_down, run_pitch, jet_stick_down_rate, level.jet_stick_pitch_down_rate);
+    }
   }
 }
 
 jet_up_transition(heli_type, heli_part) {
   self endon("entityshutdown");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.05;
+  }
 
   heli_bone = self.heli[heli_part];
   run_id = undefined;
@@ -1626,28 +1669,32 @@ jet_up_transition(heli_type, heli_part) {
       continue;
     }
 
-    if(!isDefined(run_id) && isDefined(heli_bone.run))
+    if(!isDefined(run_id) && isDefined(heli_bone.run)) {
       run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
+    }
 
     movement = self getnormalizedcameramovement();
     jet_stick_up = movement[0];
 
-    if(jet_stick_up <= 0)
+    if(jet_stick_up <= 0) {
       jet_stick_up = 0;
+    }
 
     jet_stick_up = scale_speed(0, 1, 0.1, 1, jet_stick_up);
     jet_stick_up_rate = level.jet_stick_up_rate;
 
-    if(isDefined(run_id) && isDefined(jet_stick_up) && isDefined(heli_bone.run))
+    if(isDefined(run_id) && isDefined(jet_stick_up) && isDefined(heli_bone.run)) {
       heli_bone.run setloopstate(heli_bone.run.alias, jet_stick_up, run_pitch, jet_stick_up_rate, level.jet_stick_pitch_up_rate);
+    }
   }
 }
 
 jet_up_rattle_transition(heli_type, heli_part) {
   self endon("entityshutdown");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.05;
+  }
 
   heli_bone = self.heli[heli_part];
   run_id = undefined;
@@ -1687,28 +1734,32 @@ jet_up_rattle_transition(heli_type, heli_part) {
       continue;
     }
 
-    if(!isDefined(run_id) && isDefined(heli_bone.run))
+    if(!isDefined(run_id) && isDefined(heli_bone.run)) {
       run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
+    }
 
     movement = self getnormalizedcameramovement();
     jet_stick_up = movement[0];
 
-    if(jet_stick_up <= 0)
+    if(jet_stick_up <= 0) {
       jet_stick_up = 0;
+    }
 
     jet_stick_up = scale_speed(0, 1, 0.1, 1, jet_stick_up);
     jet_stick_up_rate = level.jet_stick_up_rate;
 
-    if(isDefined(run_id) && isDefined(jet_stick_up) && isDefined(heli_bone.run))
+    if(isDefined(run_id) && isDefined(jet_stick_up) && isDefined(heli_bone.run)) {
       heli_bone.run setloopstate(heli_bone.run.alias, jet_stick_up, run_pitch, jet_stick_up_rate, level.jet_stick_pitch_up_rate);
+    }
   }
 }
 
 jet_turn_whine(heli_type, heli_part) {
   self endon("entityshutdown");
 
-  while(!clienthassnapshot(0))
+  while(!clienthassnapshot(0)) {
     wait 0.05;
+  }
 
   heli_bone = self.heli[heli_part];
   run_id = undefined;
@@ -1736,16 +1787,18 @@ jet_turn_whine(heli_type, heli_part) {
       continue;
     }
 
-    if(!isDefined(run_id) && isDefined(heli_bone.run))
+    if(!isDefined(run_id) && isDefined(heli_bone.run)) {
       run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
+    }
 
     angular_velocity = self.angles;
     turning_speed = abs(angular_velocity[2] / 90);
     jet_stick_vol = scale_speed(0, 1, 0, 1, turning_speed);
     jet_stick_pitch = scale_speed(0, 1, 0.9, 1, turning_speed);
 
-    if(isDefined(run_id) && isDefined(jet_stick_vol) && isDefined(heli_bone.run))
+    if(isDefined(run_id) && isDefined(jet_stick_vol) && isDefined(heli_bone.run)) {
       heli_bone.run setloopstate(heli_bone.run.alias, jet_stick_vol, jet_stick_pitch, 0.9);
+    }
   }
 }
 
@@ -1763,11 +1816,13 @@ terrain_trace() {
     wait(1 + randomfloatrange(0.0, 0.2));
 
     if(isDefined(self.should_not_play_sounds) && self.should_not_play_sounds) {
-      if(isDefined(pre_trace_real_ent))
+      if(isDefined(pre_trace_real_ent)) {
         pre_trace_real_ent stoploopsound();
+      }
 
-      if(isDefined(trace_real_ent))
+      if(isDefined(trace_real_ent)) {
         trace_real_ent stoploopsound();
+      }
 
       self waittill("play_heli_sounds");
       continue;
@@ -1799,8 +1854,9 @@ terrain_trace() {
     pre_trace_real_ent = self.terrain_ent_array[pre_surf_type];
 
     if(!isDefined(trace["position"])) {
-      if(isDefined(pre_trace_real_ent))
+      if(isDefined(pre_trace_real_ent)) {
         pre_trace_real_ent stoploopsound(0.5);
+      }
 
       continue;
     }
@@ -1822,8 +1878,9 @@ update_helicopter_sounds() {
   if(isDefined(self.engine_damage_low) && self.engine_damage_low) {
     switch (self.vehicletype) {
       case "heli_hind_player":
-        if(!isDefined(self.low_dmg))
+        if(!isDefined(self.low_dmg)) {
           self thread heli_idle_run_transition("hind", "eng_dmg");
+        }
 
         self.low_dmg = 1;
         playSound(0, "veh_hind_alarm_damage_high", (0, 0, 0));
@@ -2018,8 +2075,9 @@ playdrivesounds(sound, fadeinstart, startfullthreshold, endfullthreshold, fadeou
     loadfilter = loadfilter * (1 - loadsmoothing) + (throttle - previousthrottle) * loadsmoothing;
     load = 10 * loadfilter + 0.5;
 
-    if(throttle < 0.14)
+    if(throttle < 0.14) {
       throttle = 0.14;
+    }
 
     sound_pitch = throttle / throttlepitchref;
     crossfadein = scale_speed(fadeinstart, startfullthreshold, 0, 1, throttle);
@@ -2038,12 +2096,15 @@ playdrivesounds(sound, fadeinstart, startfullthreshold, endfullthreshold, fadeou
 
     fadevolume = 0.0;
 
-    if(throttle >= fadeinstart && throttle <= startfullthreshold)
+    if(throttle >= fadeinstart && throttle <= startfullthreshold) {
       fadevolume = sin(crossfadein * 90);
-    else if(throttle >= startfullthreshold && throttle <= endfullthreshold)
+    }
+    else if(throttle >= startfullthreshold && throttle <= endfullthreshold) {
       fadevolume = 1.0;
-    else if(throttle >= endfullthreshold && throttle <= fadeoutend)
+    }
+    else if(throttle >= endfullthreshold && throttle <= fadeoutend) {
       fadevolume = sin(crossfadeout * 90);
+    }
 
     setsoundpitch(sound, sound_pitch);
     setsoundvolume(sound, fadevolume * (globalvolume * globalvolume * globalvolume));
@@ -2171,15 +2232,18 @@ flying_booster_rotate_update() {
   while(true) {
     speed = self getspeed();
 
-    if(isDefined(self.booster_speed_override))
+    if(isDefined(self.booster_speed_override)) {
       speed = self.booster_speed_override;
+    }
 
     anim_time = 0.5;
 
-    if(speed > 0)
+    if(speed > 0) {
       anim_time = anim_time - speed / 1200 * 0.5;
-    else
+    }
+    else {
       anim_time = anim_time + speed * -1 / 1200 * 0.5;
+    }
 
     frame_delta_yaw = angleclamp180(self.angles[1] - prev_yaw) / 3;
     frame_delta_yaw = frame_delta_yaw < 0.1 ? 0 : frame_delta_yaw;

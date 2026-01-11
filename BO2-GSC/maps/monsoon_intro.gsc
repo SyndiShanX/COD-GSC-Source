@@ -96,16 +96,18 @@ eagle_eye_setup() {
 wingsuit_ai_setup(str_model, str_orig_model) {
   self gun_switchto("none", "right");
 
-  if(self != level.crosby)
+  if(self != level.crosby) {
     self attach("c_usa_seal6_helmet_prop", "J_Head");
+  }
 
   self setModel(str_model);
   flag_wait("wingsuit_landing_started");
   wait 5;
   self setModel(str_orig_model);
 
-  if(self != level.crosby)
+  if(self != level.crosby) {
     self detach("c_usa_seal6_helmet_prop", "J_Head");
+  }
 
   self gun_switchto(self.primaryweapon, "right");
 }
@@ -330,8 +332,9 @@ goggles_controls() {
 }
 
 goggles_zoom(b_zoom) {
-  if(!isDefined(b_zoom))
+  if(!isDefined(b_zoom)) {
     b_zoom = 1;
+  }
 
   if(b_zoom == 0) {
     level thread goggles_zoom_sound("out");
@@ -358,10 +361,12 @@ goggles_zoom(b_zoom) {
 goggles_zoom_sound(str_direction) {
   e_binoc = spawn("script_origin", level.player.origin);
 
-  if(str_direction == "in")
+  if(str_direction == "in") {
     e_binoc playSound("evt_binocs_hud_zoom_out");
-  else
+  }
+  else {
     e_binoc playSound("evt_binocs_hud_zoom_in");
+  }
 
   e_binoc delete();
 }
@@ -400,8 +405,9 @@ ambient_guards() {
   sp_intro add_spawn_function(::ambient_guard_think);
   add_spawn_function_veh("intro_turret", ::ambient_turret_think);
 
-  for(i = 1; i < 5; i++)
+  for(i = 1; i < 5; i++) {
     level thread run_scene_and_delete("intro_vig_" + i);
+  }
 
   wait 0.3;
   s_align = getstruct("camo_battle_intro", "targetname");
@@ -454,8 +460,9 @@ ambient_heli() {
   vh_heli.delete_on_death = 1;
   vh_heli notify("death");
 
-  if(!isalive(vh_heli))
+  if(!isalive(vh_heli)) {
     vh_heli delete();
+  }
 }
 
 lift_control() {
@@ -499,8 +506,9 @@ ambient_poi_zoom() {
     wait 0.05;
   }
 
-  if(isDefined(level.cin_id))
+  if(isDefined(level.cin_id)) {
     stop3dcinematic(level.cin_id);
+  }
 
   if(isDefined(str_poi)) {
     remove_visor_text("MONSOON_POI_SCANNING");
@@ -512,8 +520,9 @@ ambient_poi_zoom() {
 
 looking_at_poi() {
   foreach(poi in level.intro_poi) {
-    if(level.player is_looking_at(poi.origin, 0.995))
+    if(level.player is_looking_at(poi.origin, 0.995)) {
       return poi.script_noteworthy;
+    }
   }
 
   return undefined;
@@ -581,10 +590,12 @@ cliff_swing_fail(str_flag, str_scene) {
   level thread timescale_tween(1.8, 1.0, 0.5);
 
   if(!flag(str_flag)) {
-    if(str_flag == "input_lstick_detected")
+    if(str_flag == "input_lstick_detected") {
       delay_thread(0.75, ::missionfailedwrapper);
-    else if(str_flag == "cliff_hands_up")
+    }
+    else if(str_flag == "cliff_hands_up") {
       delay_thread(0.75, ::missionfailedwrapper);
+    }
 
     run_scene(str_scene);
   }
@@ -619,11 +630,13 @@ cliff_swing(str_prompt, str_button, str_idle_anim, str_swing_anim, str_flag, str
     level thread cliff_swing_crosby();
   }
 
-  if(str_button == "jump_button")
+  if(str_button == "jump_button") {
     level.player thread cliff_swing_player_fx();
+  }
 
-  if(str_swing_anim == "cliff_swing_2")
+  if(str_swing_anim == "cliff_swing_2") {
     level.harper thread say_dialog("harp_surface_is_a_little_0", 0.5);
+  }
 
   level thread cliff_swing_rope(str_swing_anim);
   run_scene(str_swing_anim);
@@ -673,8 +686,9 @@ cliff_swing_nag_vo() {
     level.a_cliff_nag[i] = "played";
     n_nag++;
 
-    if(n_nag >= 3)
+    if(n_nag >= 3) {
       return;
+    }
   }
 }
 
@@ -693,8 +707,9 @@ cliff_swing_crosby() {
 scene_idle_waittill_input(str_prompt, str_button, str_scenename) {
   level thread run_scene(str_scenename);
 
-  if(str_button == "ltrig")
+  if(str_button == "ltrig") {
     autosave_now();
+  }
 
   level.player waittill_input(str_prompt, str_button);
 }
@@ -716,13 +731,15 @@ cliff_swing_success_window_player(n_time_scale, n_scale_timer, str_rumble, str_p
     flag_set("cliff_hands_up");
     run_scene("cliff_impact_raise");
 
-    if(!flag("cliff_swing_fail_checked"))
+    if(!flag("cliff_swing_fail_checked")) {
       level thread run_scene("cliff_impact_ready");
+    }
     else {
       m_body_double = get_model_or_models_from_scene("cliff_impact_raise", "player_body_double");
 
-      if(isDefined(m_body_double))
+      if(isDefined(m_body_double)) {
         m_body_double delete();
+      }
     }
   }
 }
@@ -734,8 +751,9 @@ real_body_hide(player_body) {
 real_body_show(player_body) {
   fake_player_body = getent("player_body_double", "targetname");
 
-  if(isDefined(fake_player_body))
+  if(isDefined(fake_player_body)) {
     fake_player_body delete();
+  }
 
   player_body show();
   flag_clear("cliff_hands_up");

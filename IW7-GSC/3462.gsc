@@ -51,8 +51,9 @@ func_13C8A(var_00) {
       return 0;
     }
 
-    if(scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_precision_strike") || scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_split_strike"))
+    if(scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_precision_strike") || scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_split_strike")) {
       var_01 = 1;
+    }
 
     scripts\mp\killstreaks\mapselect::func_10DC2(0, 1, var_01);
   }
@@ -65,8 +66,9 @@ func_128D4(var_00) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 
     if(scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_support_drop")) {
-      if(isDefined(var_0.weapon) && var_0.weapon != "none")
+      if(isDefined(var_0.weapon) && var_0.weapon != "none") {
         self notify("killstreak_finished_with_weapon_" + var_0.weapon);
+      }
     }
 
     return 0;
@@ -74,8 +76,9 @@ func_128D4(var_00) {
 
   var_01 = selectairstrikelocation(var_0.lifeid, var_0.streakname, var_00);
 
-  if(!isDefined(var_01) || !var_01)
+  if(!isDefined(var_01) || !var_01) {
     return 0;
+  }
 
   return 1;
 }
@@ -98,13 +101,15 @@ func_57DD(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   var_11 = 0;
   var_12 = [];
 
-  if(var_05 == "precision_airstrike")
+  if(var_05 == "precision_airstrike") {
     level.func_1AF9 = undefined;
+  }
 
   self notify("airstrike_finished");
 
-  if(var_05 == "precision_airstrike")
+  if(var_05 == "precision_airstrike") {
     scripts\mp\utility\game::printgameaction("killstreak ended - precision_airstrike", var_03);
+  }
 }
 
 func_1399E() {
@@ -112,8 +117,9 @@ func_1399E() {
   level endon("game_ended");
   scripts\engine\utility::waittill_any("disconnect", "joined_team");
 
-  if(scripts\mp\utility\game::istrue(level.func_1AF9))
+  if(scripts\mp\utility\game::istrue(level.func_1AF9)) {
     level.func_1AF9 = undefined;
+  }
 }
 
 clearprogress(var_00) {
@@ -136,10 +142,12 @@ getairstrikedanger(var_00) {
 
 getsingleairstrikedanger(var_00, var_01, var_02, var_03) {
   if(scripts\mp\utility\game::func_9F0F(var_03)) {
-    if(distancesquared(var_00, var_01) < level.dangermaxradius[var_03])
+    if(distancesquared(var_00, var_01) < level.dangermaxradius[var_03]) {
       return 1;
-    else
+    }
+    else {
       return 0;
+    }
   }
 
   var_04 = var_01 + level.dangerforwardpush[var_03] * level.dangermaxradius[var_03] * var_02;
@@ -150,11 +158,13 @@ getsingleairstrikedanger(var_00, var_01, var_02, var_03) {
   var_08 = var_07 + var_06 / level.dangerovalscale[var_03];
   var_09 = lengthsquared(var_08);
 
-  if(var_09 > level.dangermaxradius[var_03] * level.dangermaxradius[var_03])
+  if(var_09 > level.dangermaxradius[var_03] * level.dangermaxradius[var_03]) {
     return 0;
+  }
 
-  if(var_09 < level.dangerminradius[var_03] * level.dangerminradius[var_03])
+  if(var_09 < level.dangerminradius[var_03] * level.dangerminradius[var_03]) {
     return 1;
+  }
 
   var_10 = sqrt(var_09);
   var_11 = (var_10 - level.dangerminradius[var_03]) / (level.dangermaxradius[var_03] - level.dangerminradius[var_03]);
@@ -184,8 +194,9 @@ losradiusdamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
         if(var_10) {
           var_09 = var_09 * 4;
 
-          if(var_09 > var_01)
+          if(var_09 > var_01) {
             continue;
+          }
         }
       }
     }
@@ -213,8 +224,9 @@ airstrikedamageentsthread(var_00) {
         var_01 scripts\mp\weapons::damageent(var_1.einflictor, var_1.damageowner, var_1.damage, "MOD_PROJECTILE_SPLASH", var_00, var_1.pos, vectornormalize(var_1.damagecenter - var_1.pos));
         level.airstrikedamagedents[level.airstrikedamagedentsindex] = undefined;
 
-        if(var_1.isplayer)
+        if(var_1.isplayer) {
           wait 0.05;
+        }
       } else
         level.airstrikedamagedents[level.airstrikedamagedentsindex] = undefined;
     }
@@ -300,8 +312,9 @@ func_5A60(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   var_16 = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
   var_17 = scripts\mp\killstreak_loot::getrarityforlootitem(var_11.variantid);
 
-  if(var_17 != "")
+  if(var_17 != "") {
     var_16 = var_16 + "_" + var_17;
+  }
 
   var_18 = spawn("script_model", var_14);
   var_18 setModel(var_16);
@@ -324,8 +337,9 @@ func_5A60(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
     var_21 = "tag_bottom_light";
     var_22 = "icon_minimap_scorcher_friendly";
 
-    if(scripts\mp\killstreaks\utility::func_A69F(var_11, "passive_speed_cost"))
+    if(scripts\mp\killstreaks\utility::func_A69F(var_11, "passive_speed_cost")) {
       var_07 = var_07 - 1;
+    }
 
     var_18.minimapid = var_18 scripts\mp\killstreaks\airdrop::createobjective(var_22, undefined, undefined, 1, 1);
     var_18.turret = spawnturret("misc_turret", var_18 gettagorigin(var_21), var_19);
@@ -358,34 +372,40 @@ func_5A60(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
     wait(var_06 - 0.75);
   }
 
-  if(var_09 != "jackal")
+  if(var_09 != "jackal") {
     var_18 scriptmodelplayanimdeltamotion("airstrike_mp_roll", 1);
+  }
 
   var_18 thread func_5115(2.5, "kill_outline");
   var_18 endon("death");
   wait(var_07 - var_06);
   var_18 setscriptablepartstate("thrusters", "neutral", 0);
 
-  if(isDefined(var_18.minimapid))
+  if(isDefined(var_18.minimapid)) {
     scripts\mp\objidpoolmanager::returnminimapid(var_18.minimapid);
+  }
 
   var_18 notify("delete");
 
-  if(isDefined(var_18.turret))
+  if(isDefined(var_18.turret)) {
     var_18.turret delete();
+  }
 
-  if(isDefined(var_18.turrettarget))
+  if(isDefined(var_18.turrettarget)) {
     var_18.turrettarget delete();
+  }
 
   if(isDefined(var_18.func_A87B)) {
     var_18.func_A87B delete();
 
-    if(isDefined(var_18.func_A87B.killcament))
+    if(isDefined(var_18.func_A87B.killcament)) {
       var_18.func_A87B.killcament delete();
+    }
   }
 
-  if(isDefined(var_18))
+  if(isDefined(var_18)) {
     var_18 delete();
+  }
 }
 
 func_5115(var_00, var_01) {
@@ -409,8 +429,9 @@ addplanetolist(var_00) {
 
 removeplanefromlist(var_00) {
   for(var_01 = 0; var_01 < level.planes.size; var_1++) {
-    if(isDefined(level.planes[var_01]) && level.planes[var_01] == var_00)
+    if(isDefined(level.planes[var_01]) && level.planes[var_01] == var_00) {
       level.planes[var_01] = undefined;
+    }
   }
 }
 
@@ -447,10 +468,12 @@ callstrike_bombeffect(var_00, var_01, var_02, var_03, var_04, var_05, var_06, va
   var_12 = var_11.origin;
   var_13 = var_11.angles;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     playFXOnTag(level.airstrikessfx, var_11, "tag_origin");
-  else
+  }
+  else {
     playFXOnTag(level.airstrikefx, var_11, "tag_origin");
+  }
 
   wait 0.05;
   var_10 moveto(var_10.origin + (var_08 + (0, 0, -0.25)) * 2500, 2, 0, 0);
@@ -460,8 +483,9 @@ callstrike_bombeffect(var_00, var_01, var_02, var_03, var_04, var_05, var_06, va
   var_10 moveto(var_10.origin + (var_08 + (0, 0, -0.45)) * 1500, 2, 0, 0);
   wait 0.5;
 
-  if(isDefined(var_07))
+  if(isDefined(var_07)) {
     var_07 delete();
+  }
 
   var_14 = 12;
   var_15 = 5;
@@ -531,10 +555,12 @@ func_3788(var_00, var_01, var_02, var_03, var_04) {
     var_0.turret shootturret();
     var_09 = var_08;
 
-    if(var_11 < 4)
+    if(var_11 < 4) {
       var_11++;
-    else
+    }
+    else {
       var_11 = 0;
+    }
 
     wait 0.05;
   }
@@ -617,10 +643,12 @@ callstrike_explosivebullets(var_00, var_01, var_02, var_03, var_04) {
     var_0.turret shootturret();
     var_09 = var_08;
 
-    if(var_11 < 4)
+    if(var_11 < 4) {
       var_11++;
-    else
+    }
+    else {
       var_11 = 0;
+    }
 
     wait 0.1;
   }
@@ -640,16 +668,19 @@ callstrike(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
       var_12 = 950;
       var_08 = 1500;
 
-      if(isDefined(level.airstrikeheightscale))
+      if(isDefined(level.airstrikeheightscale)) {
         var_12 = var_12 * level.airstrikeheightscale;
+      }
     } else {
       var_12 = var_7.origin[2];
 
-      if(getdvar("mapname") == "mp_exchange")
+      if(getdvar("mapname") == "mp_exchange") {
         var_12 = var_12 + 1024;
+      }
 
-      if(getdvar("mapname") == "mp_rally")
+      if(getdvar("mapname") == "mp_rally") {
         var_12 = var_12 + 2500;
+      }
 
       var_08 = getexplodedistance(var_12);
     }
@@ -661,13 +692,15 @@ callstrike(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
       var_12 = 850;
       var_08 = 1500;
 
-      if(isDefined(level.airstrikeheightscale))
+      if(isDefined(level.airstrikeheightscale)) {
         var_12 = var_12 * level.airstrikeheightscale;
+      }
     } else {
       var_12 = var_7.origin[2];
 
-      if(getdvar("mapname") == "mp_rally")
+      if(getdvar("mapname") == "mp_rally") {
         var_12 = var_12 + 2500;
+      }
 
       var_08 = getexplodedistance(var_12);
     }
@@ -736,14 +769,16 @@ callstrike(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 getflightpath(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   var_08 = var_00 + anglesToForward(var_01) * (-1 * var_02);
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_08 = var_08 * (1, 1, 0);
+  }
 
   var_08 = var_08 + (0, 0, var_04);
   var_09 = var_00 + anglesToForward(var_01) * var_02;
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_09 = var_09 * (1, 1, 0);
+  }
 
   var_09 = var_09 + (0, 0, var_04);
   var_10 = length(var_08 - var_09);
@@ -768,10 +803,12 @@ getexplodedistance(var_00) {
 targetgetdist(var_00, var_01) {
   var_02 = targetisinfront(var_00, var_01);
 
-  if(var_02)
+  if(var_02) {
     var_03 = 1;
-  else
+  }
+  else {
     var_03 = -1;
+  }
 
   var_04 = scripts\engine\utility::flat_origin(var_0.origin);
   var_05 = var_04 + anglesToForward(scripts\engine\utility::flat_angle(var_0.angles)) * (var_03 * 100000);
@@ -781,25 +818,30 @@ targetgetdist(var_00, var_01) {
 }
 
 targetisclose(var_00, var_01, var_02) {
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 3000;
+  }
 
   var_03 = targetisinfront(var_00, var_01);
 
-  if(var_03)
+  if(var_03) {
     var_04 = 1;
-  else
+  }
+  else {
     var_04 = -1;
+  }
 
   var_05 = scripts\engine\utility::flat_origin(var_0.origin);
   var_06 = var_05 + anglesToForward(scripts\engine\utility::flat_angle(var_0.angles)) * (var_04 * 100000);
   var_07 = pointonsegmentnearesttopoint(var_05, var_06, var_01);
   var_08 = distance(var_05, var_07);
 
-  if(var_08 < var_02)
+  if(var_08 < var_02) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 targetisinfront(var_00, var_01) {
@@ -807,10 +849,12 @@ targetisinfront(var_00, var_01) {
   var_03 = vectornormalize(scripts\engine\utility::flat_origin(var_01) - var_0.origin);
   var_04 = vectordot(var_02, var_03);
 
-  if(var_04 > 0)
+  if(var_04 > 0) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 waitforairstrikecancel() {
@@ -830,29 +874,34 @@ selectairstrikelocation(var_00, var_01, var_02) {
   }
   var_08 = level.mapsize / 6.46875;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     var_08 = var_08 * 1.5;
+  }
 
   var_09 = spawn("script_origin", self.origin);
   var_10 = "used_" + var_01;
   var_11 = scripts\mp\killstreak_loot::getrarityforlootitem(var_2.variantid);
 
-  if(var_11 != "")
+  if(var_11 != "") {
     var_10 = var_10 + "_" + var_11;
+  }
 
   if(var_01 == "precision_airstrike") {
     var_12 = 1;
     var_07 = 1;
 
-    if(scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_split_strike"))
+    if(scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_split_strike")) {
       var_12 = 3;
+    }
 
     scripts\engine\utility::allow_weapon_switch(0);
 
-    if(self.team == "allies")
+    if(self.team == "allies") {
       var_13 = "UN_";
-    else
+    }
+    else {
       var_13 = "PD_";
+    }
 
     self playlocalsound("bombardment_killstreak_bootup");
     var_09 playLoopSound("bombardment_killstreak_hud_loop");
@@ -910,8 +959,9 @@ selectairstrikelocation(var_00, var_01, var_02) {
     if(var_01 == "jackal" && scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_support_drop")) {
       var_14 = scripts\engine\utility::waittill_any_return("called_in_jackal", "cancel_jackal");
 
-      if(!isDefined(var_14) || var_14 == "cancel_jackal")
+      if(!isDefined(var_14) || var_14 == "cancel_jackal") {
         return 0;
+      }
     }
   }
 
@@ -931,13 +981,15 @@ func_6CDD(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   foreach(var_10, var_09 in var_00) {
     var_03 = var_9.location;
 
-    if(scripts\mp\utility\game::istrue(var_01))
+    if(scripts\mp\utility\game::istrue(var_01)) {
       var_04 = var_9.angles;
+    }
 
     finishairstrikeusage(var_02, var_03, var_04, var_05, var_06, var_07);
 
-    if(var_0.size > 1 && var_10 < var_0.size - 1)
+    if(var_0.size > 1 && var_10 < var_0.size - 1) {
       wait(randomfloatrange(0.8, 1.0));
+    }
   }
 }
 
@@ -982,8 +1034,9 @@ airstrikemadeselectionvo(var_00) {
 func_1AFA(var_00, var_01, var_02, var_03) {
   var_04 = var_03 * 20;
 
-  for(var_05 = 0; var_05 < var_04; var_5++)
+  for(var_05 = 0; var_05 < var_04; var_5++) {
     wait 0.05;
+  }
 }
 
 func_11A82() {

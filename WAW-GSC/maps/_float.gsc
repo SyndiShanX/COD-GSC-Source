@@ -15,18 +15,24 @@ main(range, freq, wavelength, rotation, origin) {
   _wavelength = 50;
   _origin = (0, 0, 0);
   _rotation = 10;
-  if(isDefined(range))
+  if(isDefined(range)) {
     _range = range;
-  if(isDefined(freq))
+  }
+  if(isDefined(freq)) {
     _freq = freq;
-  if(isDefined(wavelength))
+  }
+  if(isDefined(wavelength)) {
     _wavelength = wavelength;
-  if(isDefined(origin))
+  }
+  if(isDefined(origin)) {
     _origin = origin;
-  if(isDefined(rotation))
+  }
+  if(isDefined(rotation)) {
     _rotation = rotation;
-  for(i = 0; i < floaters.size; i++)
+  }
+  for(i = 0; i < floaters.size; i++) {
     floaters[i] thread floater_think(_range, _freq, _wavelength, _rotation, _origin);
+  }
 }
 
 floater_think(range, freq, wavelength, rotation, origin) {
@@ -38,8 +44,9 @@ floater_think(range, freq, wavelength, rotation, origin) {
   dist = distance(center, origin);
   degrees = dist * conv_fac;
   frac = sin(degrees);
-  if(cos(degrees) < 0)
+  if(cos(degrees) < 0) {
     self.range = -1 * self.range;
+  }
   org = spawn("script_origin", center);
   self linkto(org);
   angles = vectortoangles(center - origin);
@@ -74,8 +81,10 @@ floater_move(frac, org) {
 }
 
 abval(num) {
-  if(num < 0)
+  if(num < 0) {
     return (-1 * num);
-  else
+  }
+  else {
     return num;
+  }
 }

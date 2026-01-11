@@ -7,17 +7,21 @@ moveswim() {
   self endon("movemode");
   self orientmode("face enemy or motion");
 
-  if(animscripts\utility::isspaceai())
+  if(animscripts\utility::isspaceai()) {
     self.turnrate = 0.16;
-  else
+  }
+  else {
     self.turnrate = 0.03;
+  }
 
   animscripts\utility::updateisincombattimer();
 
-  if(animscripts\utility::isincombat(0))
+  if(animscripts\utility::isincombat(0)) {
     moveswim_combat();
-  else
+  }
+  else {
     moveswim_noncombat();
+  }
 }
 
 swim_begin() {
@@ -48,10 +52,12 @@ swim_begin() {
 swim_end() {
   self.swim = undefined;
 
-  if(animscripts\utility::isspaceai())
+  if(animscripts\utility::isspaceai()) {
     self.turnrate = 0.16;
-  else
+  }
+  else {
     self.turnrate = 0.3;
+  }
 }
 
 swim_moveend() {
@@ -65,14 +71,16 @@ swim_moveend() {
 }
 
 moveswim_noncombat() {
-  if(self.swim.combatstate != "noncombat")
+  if(self.swim.combatstate != "noncombat") {
     moveswim_set("noncombat");
+  }
 
   var_0 = self.swim.move_noncombat_anim;
   var_1 = 0.4;
 
-  if(animscripts\utility::isspaceai())
+  if(animscripts\utility::isspaceai()) {
     var_1 = 0.2;
+  }
 
   self setflaggedanimknob("swimanim", var_0, 1, var_1, self.moveplaybackrate);
   swim_updateleananim();
@@ -80,8 +88,9 @@ moveswim_noncombat() {
 }
 
 moveswim_combat() {
-  if(self.swim.combatstate != "combat")
+  if(self.swim.combatstate != "combat") {
     moveswim_set("combat");
+  }
 
   if(isDefined(self.enemy)) {
     animscripts\run::setshootwhilemoving(1);
@@ -90,8 +99,9 @@ moveswim_combat() {
       swim_dostrafe();
       return;
     } else {
-      if(self.swim.movestate != "combat_forward")
+      if(self.swim.movestate != "combat_forward") {
         moveswim_combat_move_set("combat_forward");
+      }
 
       if(isDefined(self.bclearstrafeturnrate) && self.bclearstrafeturnrate && lengthsquared(self.velocity)) {
         var_0 = vectortoangles(self.velocity);
@@ -99,13 +109,16 @@ moveswim_combat() {
         if(abs(angleclamp180(var_0[1] - self.angles[1])) > 35) {
           self.turnrate = 0.18;
 
-          if(animscripts\utility::isspaceai())
+          if(animscripts\utility::isspaceai()) {
             self.turnrate = 0.2;
+          }
         } else {
-          if(animscripts\utility::isspaceai())
+          if(animscripts\utility::isspaceai()) {
             self.turnrate = 0.16;
-          else
+          }
+          else {
             self.turnrate = 0.03;
+          }
 
           self.bclearstrafeturnrate = undefined;
         }
@@ -115,8 +128,9 @@ moveswim_combat() {
       var_1 = getswimanim("forward_aim");
     }
   } else {
-    if(self.swim.movestate != "combat_forward")
+    if(self.swim.movestate != "combat_forward") {
       moveswim_combat_move_set("combat_forward");
+    }
 
     animscripts\run::setshootwhilemoving(0);
     var_1 = getswimanim("forward_aim");
@@ -124,8 +138,9 @@ moveswim_combat() {
 
   var_2 = 0.4;
 
-  if(animscripts\utility::isspaceai())
+  if(animscripts\utility::isspaceai()) {
     var_2 = 0.2;
+  }
 
   swim_updateleananim();
   self setflaggedanimknob("swimanim", var_1, 1, var_2, self.moveplaybackrate);
@@ -142,8 +157,9 @@ moveswim_set(var_0) {
 }
 
 moveswim_noncombat_enter() {
-  if(self.swim.trackstate != "track_none")
+  if(self.swim.trackstate != "track_none") {
     swim_track_set("track_none");
+  }
 
   swim_setleananims();
   thread moveswim_noncombat_twitchupdate();
@@ -158,8 +174,9 @@ moveswim_noncombat_exit() {
 moveswim_combat_enter() {
   self setanimknob( % combatrun, 1.0, 0.5, self.moveplaybackrate);
 
-  if(self.swim.movestate != "combat_forward")
+  if(self.swim.movestate != "combat_forward") {
     moveswim_combat_move_set("combat_forward");
+  }
 }
 
 moveswim_combat_exit() {
@@ -176,8 +193,9 @@ moveswim_combat_move_set(var_0) {
 }
 
 moveswim_combat_forward_enter() {
-  if(self.swim.trackstate != "track_forward")
+  if(self.swim.trackstate != "track_forward") {
     swim_track_set("track_forward");
+  }
 
   swim_setleananims();
 }
@@ -187,13 +205,15 @@ moveswim_combat_strafe_enter() {
   self setanimknoblimited(getswimanim("strafe_L"), 1, 0.1, self.sidesteprate, 1);
   self setanimknoblimited(getswimanim("strafe_R"), 1, 0.1, self.sidesteprate, 1);
 
-  if(self.swim.trackstate != "track_strafe")
+  if(self.swim.trackstate != "track_strafe") {
     swim_track_set("track_strafe");
+  }
 
   swim_clearleananims();
 
-  if(animscripts\utility::isspaceai())
+  if(animscripts\utility::isspaceai()) {
     self.turnrate = 0.25;
+  }
   else {
     self.turnrate = 0.18;
     self.jumping = 1;
@@ -206,8 +226,9 @@ moveswim_combat_strafe_exit() {
   self clearanim( % combatrun_left, 0.2);
   self clearanim( % combatrun_right, 0.2);
 
-  if(animscripts\utility::isspaceai())
+  if(animscripts\utility::isspaceai()) {
     self.turnrate = 0.16;
+  }
   else {
     self.turnrate = 0.03;
     self.jumping = 0;
@@ -267,10 +288,12 @@ moveswim_track_combat() {
 getswimanim(var_0, var_1) {
   var_2 = animscripts\utility::lookupanim("swim", var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return var_2[var_1];
-  else
+  }
+  else {
     return var_2;
+  }
 }
 
 moveswim_noncombat_twitchupdate() {
@@ -279,11 +302,13 @@ moveswim_noncombat_twitchupdate() {
 }
 
 swim_shoulddonodeexit() {
-  if(isDefined(self.disableexits))
+  if(isDefined(self.disableexits)) {
     return 0;
+  }
 
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return 0;
+  }
 
   var_0 = self.maxfaceenemydist;
   self.maxfaceenemydist = 128;
@@ -296,14 +321,17 @@ swim_shoulddonodeexit() {
   self.maxfaceenemydist = var_0;
   var_1 = 10000;
 
-  if(animscripts\utility::isspaceai())
+  if(animscripts\utility::isspaceai()) {
     var_1 = 32400;
+  }
 
-  if(distancesquared(self.origin, self.pathgoalpos) < var_1)
+  if(distancesquared(self.origin, self.pathgoalpos) < var_1) {
     return 0;
+  }
 
-  if(self.a.movement != "stop")
+  if(self.a.movement != "stop") {
     return 0;
+  }
 
   if(lengthsquared(self.prevanimdelta) > 1) {
     var_2 = vectortoangles(self.prevanimdelta);
@@ -311,8 +339,9 @@ swim_shoulddonodeexit() {
     if(abs(angleclamp180(var_2[1] - self.angles[1])) < 90) {
       var_3 = vectortoangles(self.lookaheaddir);
 
-      if(abs(angleclamp180(var_3[1] - self.angles[1])) < 90)
+      if(abs(angleclamp180(var_3[1] - self.angles[1])) < 90) {
         return 0;
+      }
     }
   }
 
@@ -358,8 +387,9 @@ swim_movebegin() {
     animscripts\shared::donotetracks("startturn");
     var_11 = 0.5;
   } else if(isDefined(var_1) && animscripts\utility::isspaceai()) {
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       self orientmode("face direction", var_6);
+    }
 
     self.prevturnrate = 0.16;
     self.turnrate = 5.0;
@@ -390,8 +420,9 @@ swim_movebegin() {
   var_16 = 0.001 * abs(angleclamp180(var_13[0] - var_3[0])) / var_14;
   var_17 = max(var_15, var_16);
 
-  if(var_17 < 0.01)
+  if(var_17 < 0.01) {
     var_17 = 0.01;
+  }
 
   if(animscripts\utility::isspaceai()) {
     var_11 = 0.05;
@@ -410,23 +441,28 @@ swim_movebegin() {
   self animmode("none", 0);
 
   if(animscripts\utility::isspaceai()) {
-    if(animhasnotetrack(var_2, "finish"))
+    if(animhasnotetrack(var_2, "finish")) {
       animscripts\shared::donotetracks("startmove");
+    }
 
     var_18 = 65536;
     var_19 = self.goalpos;
 
-    if(isDefined(self.node))
+    if(isDefined(self.node)) {
       var_19 = self.node.origin;
+    }
 
-    if(distance2dsquared(self.origin, var_19) > var_18)
+    if(distance2dsquared(self.origin, var_19) > var_18) {
       self notify("force_space_rotation_update", 0, 0, undefined, 1);
+    }
   }
 
-  if(animscripts\utility::isspaceai())
+  if(animscripts\utility::isspaceai()) {
     return 0.2;
-  else
+  }
+  else {
     return 0.4;
+  }
 }
 
 swim_setleananims() {
@@ -462,8 +498,9 @@ swim_choosestart() {
       var_8 = anglesToForward(var_7);
       var_9 = self.goalpos;
 
-      if(isDefined(self.node))
+      if(isDefined(self.node)) {
         var_9 = self.node.origin;
+      }
 
       var_10 = rotatepointaroundvector(var_8, var_9 - self.origin, var_7[2] * -1);
       var_11 = var_10 + self.origin;
@@ -487,8 +524,9 @@ swim_choosestart() {
       if(animscripts\utility::isspaceai()) {
         var_2 = animscripts\utility::gettruenodeangles(var_1);
 
-        if(var_5 == 1)
+        if(var_5 == 1) {
           var_2 = (var_2[0], var_2[1], 0);
+        }
       } else
         var_2 = var_1.angles;
 
@@ -497,8 +535,9 @@ swim_choosestart() {
   }
 
   if(!isDefined(var_13)) {
-    if(var_0)
+    if(var_0) {
       var_13 = "idle_ready_to_forward";
+    }
     else {
       var_13 = "idle_to_forward";
       var_4 = 1;
@@ -511,23 +550,27 @@ swim_choosestart() {
   var_17 = angleclamp180(var_6[0] - var_2[0]);
   var_18 = undefined;
 
-  if(animscripts\utility::isspaceai())
+  if(animscripts\utility::isspaceai()) {
     var_18 = 3;
+  }
 
   var_19 = swim_getangleindex(var_16, var_18);
   var_20 = swim_getangleindex(var_17, var_18);
   var_21 = var_14;
 
-  if(!isDefined(var_21) && isDefined(self.prevnode) && distance2dsquared(self.prevnode.origin, self.origin) < 36)
+  if(!isDefined(var_21) && isDefined(self.prevnode) && distance2dsquared(self.prevnode.origin, self.origin) < 36) {
     var_21 = swim_getapproachtype(self.prevnode);
+  }
 
   if(var_19 == 4 && isDefined(var_21)) {
     var_22 = isDefined(var_14);
 
-    if(var_21 == "cover_corner_l" && var_16 < -10 && (!var_22 || isDefined(var_15[2])))
+    if(var_21 == "cover_corner_l" && var_16 < -10 && (!var_22 || isDefined(var_15[2]))) {
       var_19 = 2;
-    else if(var_21 == "cover_corner_r" && var_16 > 10 && (!var_22 || isDefined(var_15[6])))
+    }
+    else if(var_21 == "cover_corner_r" && var_16 > 10 && (!var_22 || isDefined(var_15[6]))) {
       var_19 = 6;
+    }
   }
 
   if(!isDefined(var_15[var_19])) {
@@ -546,13 +589,16 @@ swim_choosestart() {
 
       for(var_26 = 8; !isDefined(var_15[var_25]) && var_25 < 8; var_25++) {}
 
-      while(!isDefined(var_15[var_26]) && var_26 > 0)
+      while(!isDefined(var_15[var_26]) && var_26 > 0) {
         var_26--;
+      }
 
-      if(var_19 < var_25)
+      if(var_19 < var_25) {
         var_19 = var_25;
-      else if(var_19 > var_26)
+      }
+      else if(var_19 > var_26) {
         var_19 = var_26;
+      }
     }
 
     var_23.m_turnanim = var_24[var_19];
@@ -590,10 +636,12 @@ swim_setupapproach() {
   }
   var_0 = animscripts\cover_arrival::getapproachent();
 
-  if(isDefined(var_0) && swim_isapproachablenode(var_0))
+  if(isDefined(var_0) && swim_isapproachablenode(var_0)) {
     thread swim_approachnode();
-  else
+  }
+  else {
     thread swim_approachpos();
+  }
 }
 
 swim_restartapproachlistener() {
@@ -655,10 +703,12 @@ swim_approachnode() {
   var_2 = swim_getapproachtype(var_0);
 
   if(var_2 == "exposed") {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_3 = var_0.origin;
-    else
+    }
+    else {
       var_3 = self.pathgoalpos;
+    }
 
     var_4 = var_3 - self.origin;
     var_5 = vectortoangles(var_4);
@@ -668,10 +718,12 @@ swim_approachnode() {
     var_3 = var_0.origin;
     var_6 = getnodeforwardangles(var_0);
 
-    if(animscripts\utility::isspaceai())
+    if(animscripts\utility::isspaceai()) {
       var_7 = animscripts\utility::gettruenodeangles(var_0);
-    else
+    }
+    else {
       var_7 = var_0.angles;
+    }
   }
 
   thread swim_dofinalarrival(var_2, var_3, var_1, var_7, var_6);
@@ -682,10 +734,12 @@ swim_doposarrival() {
   var_1 = self.pathgoalpos;
   var_2 = (0, self.angles[1], self.angles[2]);
 
-  if(isDefined(var_0) && var_0.type != "Path" && var_0.type != "Path 3D")
+  if(isDefined(var_0) && var_0.type != "Path" && var_0.type != "Path 3D") {
     var_2 = getnodeforwardangles(var_0);
-  else if(animscripts\cover_arrival::faceenemyatendofapproach())
+  }
+  else if(animscripts\cover_arrival::faceenemyatendofapproach()) {
     var_2 = vectortoangles(self.enemy.origin - var_1);
+  }
 
   var_3 = vectornormalize(var_1 - self.origin);
 
@@ -694,8 +748,9 @@ swim_doposarrival() {
     var_5 = getnodeforwardangles(var_0);
     var_2 = var_0.angles;
 
-    if(animscripts\utility::isspaceai())
+    if(animscripts\utility::isspaceai()) {
       var_2 = animscripts\utility::gettruenodeangles(var_0);
+    }
 
     thread swim_dofinalarrival(var_4, var_0.origin, var_3, var_2, var_5);
     return;
@@ -712,8 +767,9 @@ swim_determineapproachanim3d(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_9 = rotatevectorinverted(vectornormalize(self.origin - var_2), var_4) * -1.0;
     var_10 = swim_determineapproachanim(var_0, var_1, var_6, var_9, var_7, var_8, 1, var_2, var_4);
 
-    if(var_10)
+    if(var_10) {
       var_0.m_worldstartpos = rotatevector(var_0.m_worldstartpos, var_4) + var_2;
+    }
 
     return var_10;
   } else
@@ -779,10 +835,12 @@ swim_dofinalarrival(var_0, var_1, var_2, var_3, var_4) {
   }
   self.swim.arrivalanim = var_5.m_anim;
 
-  if(animscripts\utility::isspaceai())
+  if(animscripts\utility::isspaceai()) {
     var_15 = self startcoverarrival(var_5.m_worldstartpos, var_4[1] - var_5.m_angledelta[1], var_4[0] - var_5.m_angledelta[0], var_4, var_5.m_angledelta);
-  else
+  }
+  else {
     self startcoverarrival(var_5.m_worldstartpos, var_4[1] - var_5.m_angledelta[1], var_4[0] - var_5.m_angledelta[0]);
+  }
 }
 
 swim_coverarrival_main() {
@@ -791,8 +849,9 @@ swim_coverarrival_main() {
   var_0 = "arrival_" + self.approachtype;
   var_1 = self.swim.arrivalanim;
 
-  if(!self.fixednode)
+  if(!self.fixednode) {
     thread animscripts\cover_arrival::abortapproachifthreatened();
+  }
 
   var_2 = 0.4;
 
@@ -805,8 +864,9 @@ swim_coverarrival_main() {
   self setflaggedanimrestart("coverArrival", var_1, 1, var_2, self.movetransitionrate);
   animscripts\shared::donotetracks("coverArrival", ::swim_handlestartcoveraim);
 
-  if(!animhasnotetrack(var_1, "start_aim"))
+  if(!animhasnotetrack(var_1, "start_aim")) {
     swim_startcoveraim();
+  }
 
   self.a.pose = "stand";
   self.a.movement = "stop";
@@ -821,8 +881,9 @@ swim_coverarrival_main() {
   self.lastapproachaborttime = undefined;
   self.swim.arrivalanim = undefined;
 
-  if(animscripts\utility::isspaceai() && self.approachtype == "exposed")
+  if(animscripts\utility::isspaceai() && self.approachtype == "exposed") {
     self notify("force_space_rotation_update", 0, 0, undefined, 1);
+  }
 }
 
 space_arrival_turnrate_delay() {
@@ -859,8 +920,9 @@ swim_maymovefrompointtopoint(var_0, var_1, var_2, var_3, var_4) {
 }
 
 swim_determineapproachanim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(lengthsquared(var_3) < 0.003)
+  if(lengthsquared(var_3) < 0.003) {
     return 0;
+  }
 
   var_9 = vectortoangles(var_3);
 
@@ -878,13 +940,15 @@ swim_determineapproachanim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
   var_15 = swim_getangleindex(var_13, 25);
   var_16 = "arrival_" + var_1;
 
-  if(var_1 == "exposed" && !animscripts\utility::isincombat(0))
+  if(var_1 == "exposed" && !animscripts\utility::isincombat(0)) {
     var_16 = var_16 + "_noncombat";
+  }
 
   var_17 = getswimanim(var_16);
 
-  if(!isDefined(var_17[var_10]) || !isDefined(var_17[var_10][var_14]))
+  if(!isDefined(var_17[var_10]) || !isDefined(var_17[var_10][var_14])) {
     return 0;
+  }
 
   var_18 = (var_10 != var_11 || var_14 != var_15) && isDefined(var_17[var_11]) && isDefined(var_17[var_11][var_15]);
   var_19 = 0;
@@ -892,22 +956,25 @@ swim_determineapproachanim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
   var_21 = undefined;
   var_22 = var_17[var_10][var_14];
 
-  if(var_18)
+  if(var_18) {
     var_21 = var_17[var_11][var_15];
+  }
 
   var_23 = var_16 + "_delta";
   var_17 = getswimanim(var_23);
   var_24 = var_17[var_10][var_14];
 
-  if(var_18)
+  if(var_18) {
     var_19 = var_17[var_11][var_15];
+  }
 
   var_25 = var_16 + "_angleDelta";
   var_17 = getswimanim(var_25);
   var_26 = var_17[var_10][var_14];
 
-  if(var_18)
+  if(var_18) {
     var_20 = var_17[var_11][var_15];
+  }
 
   var_27 = swim_getanimstartpos(var_2, var_5, var_24, var_26, var_6);
 
@@ -917,8 +984,9 @@ swim_determineapproachanim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
     var_26 = var_20;
     var_27 = swim_getanimstartpos(var_2, var_5, var_24, var_26, var_6);
 
-    if(!swim_maymovefrompointtopoint(var_2, var_27, var_6, var_7, var_8))
+    if(!swim_maymovefrompointtopoint(var_2, var_27, var_6, var_7, var_8)) {
       return 0;
+    }
   }
 
   var_0.m_anim = var_22;
@@ -929,13 +997,16 @@ swim_determineapproachanim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
 }
 
 swim_getangleindex(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 10;
+  }
 
-  if(var_0 < 0)
+  if(var_0 < 0) {
     return int(ceil((180 + var_0 - var_1) / 45));
-  else
+  }
+  else {
     return int(floor((180 + var_0 + var_1) / 45));
+  }
 }
 
 swim_getmaxanimdist(var_0) {
@@ -945,8 +1016,9 @@ swim_getmaxanimdist(var_0) {
     if(isDefined(anim.archetypes[self.animarchetype]["swim"]) && isDefined(anim.archetypes[self.animarchetype]["swim"][var_0])) {
       var_2 = anim.archetypes[self.animarchetype]["swim"][var_0]["maxDelta"];
 
-      if(var_2 > var_1)
+      if(var_2 > var_1) {
         var_1 = var_2;
+      }
     }
   }
 
@@ -969,13 +1041,15 @@ swim_handlestartcoveraim(var_0) {
 }
 
 swim_getapproachtype(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return "exposed";
+  }
 
   var_1 = var_0.type;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return "exposed";
+  }
 
   switch (var_1) {
     case "Cover Right 3D":
@@ -1024,8 +1098,9 @@ getnodeforwardangles(var_0) {
 }
 
 swim_dostrafe() {
-  if(self.swim.movestate != "combat_strafe")
+  if(self.swim.movestate != "combat_strafe") {
     moveswim_combat_move_set("combat_strafe");
+  }
 
   var_0 = getswimanim("forward_aim");
   self setflaggedanimknoblimited("swimanim", var_0, 1, 0.1, 1, 1);
@@ -1061,8 +1136,9 @@ swim_updatestrafeanim() {
       if(isDefined(self.update_move_front_bias)) {
         var_1["back"] = 0.0;
 
-        if(var_1["front"] < 0.2)
+        if(var_1["front"] < 0.2) {
           var_1["front"] = 0.2;
+        }
       }
 
       var_2 = swim_setstrafeweights(var_1["front"], var_1["back"], var_1["left"], var_1["right"]);
@@ -1077,10 +1153,12 @@ swim_updatestrafeanim() {
 }
 
 swim_getstrafeblendtime() {
-  if(animscripts\utility::isspaceai())
+  if(animscripts\utility::isspaceai()) {
     return 0.5;
-  else
+  }
+  else {
     return 0.5;
+  }
 }
 
 swim_setstrafeweights(var_0, var_1, var_2, var_3) {
@@ -1090,14 +1168,18 @@ swim_setstrafeweights(var_0, var_1, var_2, var_3) {
   self setanim( % combatrun_left, var_2, var_4, 1, 1);
   self setanim( % combatrun_right, var_3, var_4, 1, 1);
 
-  if(var_0 > 0)
+  if(var_0 > 0) {
     return "front";
-  else if(var_1 > 0)
+  }
+  else if(var_1 > 0) {
     return "back";
-  else if(var_2 > 0)
+  }
+  else if(var_2 > 0) {
     return "left";
-  else if(var_3 > 0)
+  }
+  else if(var_3 > 0) {
     return "right";
+  }
 }
 
 swim_setstrafeaimset(var_0) {
@@ -1146,15 +1228,19 @@ swim_updatestrafeaimanim() {
     var_10 = angleclamp180(var_9[1] - var_0);
     var_11 = angleclamp180(var_9[0] - var_1);
 
-    if(var_10 > 0)
+    if(var_10 > 0) {
       var_4 = clamp(1 - (var_6 - var_10) / var_6, 0, 1);
-    else
+    }
+    else {
       var_5 = clamp(1 - (var_6 + var_10) / var_6, 0, 1);
+    }
 
-    if(var_11 > 0)
+    if(var_11 > 0) {
       var_3 = clamp(1 - (var_7 - var_11) / var_7, 0, 1);
-    else
+    }
+    else {
       var_2 = clamp(1 - (var_7 + var_11) / var_7, 0, 1);
+    }
   }
 
   swim_setstrafeaimweights(var_2, var_3, var_4, var_5);
@@ -1174,22 +1260,27 @@ swim_pathchange_getturnanim(var_0, var_1) {
   var_5 = swim_getangleindex(var_0);
   var_6 = swim_getangleindex(var_1);
 
-  if(isDefined(var_4[var_5]))
+  if(isDefined(var_4[var_5])) {
     var_2 = var_4[var_5][var_6];
-
-  if(var_5 == 4) {
-    if(var_6 > 4 && isDefined(var_4[4][var_6 + 1]))
-      var_2 = var_4[4][var_6 + 1];
-    else if(var_6 < 4 && var_6 > 0 && isDefined(var_4[4][var_6 - 1]))
-      var_2 = var_4[4][var_6 - 1];
   }
 
-  if(!isDefined(var_2))
+  if(var_5 == 4) {
+    if(var_6 > 4 && isDefined(var_4[4][var_6 + 1])) {
+      var_2 = var_4[4][var_6 + 1];
+    }
+    else if(var_6 < 4 && var_6 > 0 && isDefined(var_4[4][var_6 - 1])) {
+      var_2 = var_4[4][var_6 - 1];
+    }
+  }
+
+  if(!isDefined(var_2)) {
     var_2 = var_4[var_5][4];
+  }
 
   if(isDefined(var_2)) {
-    if(animscripts\move::pathchange_candoturnanim(var_2))
+    if(animscripts\move::pathchange_candoturnanim(var_2)) {
       return var_2;
+    }
   }
 
   return undefined;
@@ -1203,14 +1294,16 @@ swim_updateleananim() {
   var_0 = clamp(self.leanamount / 20.0, -1, 1);
 
   if(var_0 > 0) {
-    if(self.prevleanfracyaw <= 0 && var_0 < 0.075)
+    if(self.prevleanfracyaw <= 0 && var_0 < 0.075) {
       var_0 = 0;
+    }
 
     self setanim( % add_turn_l, var_0, 0.2, 1, 1);
     self setanim( % add_turn_r, 0.0, 0.2, 1, 1);
   } else {
-    if(self.prevleanfracyaw >= 0 && var_0 > -0.075)
+    if(self.prevleanfracyaw >= 0 && var_0 > -0.075) {
       var_0 = 0;
+    }
 
     self setanim( % add_turn_l, 0, 0.2, 1, 1);
     self setanim( % add_turn_r, 0 - var_0, 0.2, 1, 1);
@@ -1220,14 +1313,16 @@ swim_updateleananim() {
   var_0 = clamp(self.pitchamount / 25.0, -1, 1);
 
   if(var_0 > 0) {
-    if(self.prevleanfracpitch <= 0 && var_0 < 0.075)
+    if(self.prevleanfracpitch <= 0 && var_0 < 0.075) {
       var_0 = 0;
+    }
 
     self setanim( % add_turn_d, var_0, 0.2, 1, 1);
     self setanim( % add_turn_u, 0.0, 0.2, 1, 1);
   } else {
-    if(self.prevleanfracpitch >= 0 && var_0 > -0.075)
+    if(self.prevleanfracpitch >= 0 && var_0 > -0.075) {
       var_0 = 0;
+    }
 
     self setanim( % add_turn_d, 0, 0.2, 1, 1);
     self setanim( % add_turn_u, 0 - var_0, 0.2, 1, 1);

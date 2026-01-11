@@ -9,10 +9,12 @@ precache() {
   precachemodel("c_mul_mp_pmc_smg_snw_fb");
   precachemodel("c_mul_mp_pmc_shortsleeve_snw_viewhands");
 
-  if(level.multiteam)
+  if(level.multiteam) {
     game["set_player_model"]["team4"]["smg"] = ::set_player_model;
-  else
+  }
+  else {
     game["set_player_model"]["axis"]["smg"] = ::set_player_model;
+  }
 }
 
 set_player_model() {

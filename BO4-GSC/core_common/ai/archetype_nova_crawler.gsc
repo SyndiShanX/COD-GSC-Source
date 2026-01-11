@@ -41,4 +41,3 @@ private function_3d50e4d0(message) {
     println("<dev string:x38>" + message);
   }
 }
-

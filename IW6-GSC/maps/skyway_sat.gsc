@@ -51,10 +51,12 @@ section_post_inits() {
         if(issubstr(var_2, "crane")) {
           var_5.animname = "crane_" + var_5.script_noteworthy;
 
-          if(issubstr(var_5.model, "crane_1"))
+          if(issubstr(var_5.model, "crane_1")) {
             common_scripts\utility::array_call(getEntArray(var_5.target, "targetname"), ::linkto, var_5, "j_spine4");
-          else
+          }
+          else {
             common_scripts\utility::array_call(getEntArray(var_5.target, "targetname"), ::linkto, var_5, "j_spine");
+          }
 
           var_6 = common_scripts\utility::array_add(var_6, var_5);
         } else if(issubstr(var_2, "cargo_cage")) {
@@ -87,22 +89,26 @@ section_post_inits() {
 
                   foreach(var_13 in var_5._traverses) {
                     foreach(var_15 in var_13) {
-                      if(isDefined(var_15.script_parameters) && var_15.script_parameters == "linkto_cargo")
+                      if(isDefined(var_15.script_parameters) && var_15.script_parameters == "linkto_cargo") {
                         var_15 linkto(var_10);
+                      }
                     }
                   }
 
-                  if(isDefined(var_10.target))
+                  if(isDefined(var_10.target)) {
                     common_scripts\utility::array_call(getEntArray(var_10.target, "targetname"), ::linkto, var_10);
+                  }
 
                   var_10 linkto(var_5, "tag_sat1", (0, 0, 0), (0, resolve_link_yaw(var_5, var_10), 0));
                 } else
                   var_10 linkto(var_5, "j_spine4");
               } else if(issubstr(var_10.script_parameters, "lower")) {
-                if(var_10.classname == "script_model")
+                if(var_10.classname == "script_model") {
                   var_10 linkto(var_5, "tag_sat2", (0, 0, 0), (0, resolve_link_yaw(var_5, var_10), 0));
-                else
+                }
+                else {
                   var_10 linkto(var_5, "j_elbow_le");
+                }
               } else if(issubstr(var_10.script_parameters, "weapon")) {
                 var_18 = spawn(var_10.script_parameters, var_10.origin);
                 var_18.angles = var_10.angles;
@@ -133,8 +139,9 @@ section_post_inits() {
         } else
           var_5.link_point = var_5;
 
-        if(!isDefined(level._train.cars[var_5.link_point.script_noteworthy].accessory))
+        if(!isDefined(level._train.cars[var_5.link_point.script_noteworthy].accessory)) {
           level._train.cars[var_5.link_point.script_noteworthy].accessory = [];
+        }
 
         level._train.cars[var_5.link_point.script_noteworthy].accessory = common_scripts\utility::array_combine(level._train.cars[var_5.link_point.script_noteworthy].accessory, var_6);
       }
@@ -161,12 +168,15 @@ section_post_inits() {
       var_25 = getEntArray(var_24.col_brush.target, "targetname");
 
       foreach(var_27 in var_25) {
-        if(var_27.script_parameters == "ai")
+        if(var_27.script_parameters == "ai") {
           var_24._ai_col = var_27;
-        else if(var_27.script_parameters == "player")
+        }
+        else if(var_27.script_parameters == "player") {
           var_24._player_col = var_27;
-        else if(var_27.script_parameters == "main_col")
+        }
+        else if(var_27.script_parameters == "main_col") {
           var_24._main_col = var_27;
+        }
 
         var_27 linkto(var_24);
       }
@@ -192,10 +202,12 @@ enableforcemantle() {
 }
 
 resolve_link_yaw(var_0, var_1) {
-  if(var_0.angles[1] != var_1.angles[1])
+  if(var_0.angles[1] != var_1.angles[1]) {
     return 0;
-  else
+  }
+  else {
     return 180;
+  }
 }
 
 start() {
@@ -255,8 +267,9 @@ dialogue_sat1() {
   if(!issubstr(level.start_point, "sat")) {
     common_scripts\utility::flag_wait("flag_hangar_intro_done");
 
-    for(var_1 = var_0 maps\skyway_util::getcurrenttraincar(); !isDefined(var_1) || !issubstr(var_1, "sat"); var_1 = var_0 maps\skyway_util::getcurrenttraincar())
+    for(var_1 = var_0 maps\skyway_util::getcurrenttraincar(); !isDefined(var_1) || !issubstr(var_1, "sat"); var_1 = var_0 maps\skyway_util::getcurrenttraincar()) {
       wait 2;
+    }
   }
 
   var_0 maps\_utility::smart_dialogue("skyway_hsh_rorkemustbeat");
@@ -287,8 +300,9 @@ dialogue_mantle() {
   var_0 maps\_utility::smart_dialogue("skyway_hsh_wellgettorourke");
   var_1 = ["skyway_hsh_jumptotheroof", "skyway_hsh_dammitadamtakethe"];
 
-  if(!common_scripts\utility::flag("flag_rooftops_start"))
+  if(!common_scripts\utility::flag("flag_rooftops_start")) {
     var_0 thread maps\skyway_util::dialogue_nag(var_1, "flag_rooftops_start");
+  }
 }
 
 allies_sat1() {
@@ -308,8 +322,9 @@ allies_sat1() {
   var_0 maps\_utility::disable_pain();
   var_0 pushplayer(1);
 
-  if(!common_scripts\utility::flag("trig_sat_1_allies_1"))
+  if(!common_scripts\utility::flag("trig_sat_1_allies_1")) {
     maps\_utility::activate_trigger_with_targetname("trig_sat1_ally_jump");
+  }
 
   var_0 thread event_noticket();
   common_scripts\utility::flag_wait("flag_sat1_enemy_spawn");
@@ -329,8 +344,9 @@ allies_sat2() {
   level._ally_dist = 512;
   var_0 thread maps\skyway_util_ai::ally_advance_watcher("trig_sat_2_allies_1", "sat2", "flag_rooftops_jump", common_scripts\utility::flag_set, "flag_sat2_end");
 
-  if(issubstr(level.start_point, "sat2"))
+  if(issubstr(level.start_point, "sat2")) {
     maps\_utility::activate_trigger_with_targetname("trig_sat_2_allies_1");
+  }
 
   common_scripts\utility::flag_wait_either("flag_sat2_retreat_2", "flag_sat2_end");
   level._ally_dist = undefined;
@@ -347,12 +363,14 @@ allies_sat2() {
       var_0.goalradius = var_0.oldgoalradius;
     }
 
-    if(var_2._up && !common_scripts\utility::flag("flag_sat2_end"))
+    if(var_2._up && !common_scripts\utility::flag("flag_sat2_end")) {
       var_0 event_ally_bridge_push(var_2);
+    }
   }
 
-  if(common_scripts\utility::flag("flag_sat2_end"))
+  if(common_scripts\utility::flag("flag_sat2_end")) {
     var_0 forceteleport(getnode("node_sat2_hesh_warp", "targetname").origin, var_0.angles);
+  }
 
   var_0 maps\_utility::enable_ai_color();
 }
@@ -361,8 +379,9 @@ autosave_sat(var_0) {
   level endon("flag_kill_plane");
   level endon("flag_death_crush");
 
-  for(var_1 = level.player getmovingplatformparent(); !isDefined(var_1) || issubstr(var_1.targetname, "cargo"); var_1 = level.player getmovingplatformparent())
+  for(var_1 = level.player getmovingplatformparent(); !isDefined(var_1) || issubstr(var_1.targetname, "cargo"); var_1 = level.player getmovingplatformparent()) {
     wait 0.2;
+  }
 
   maps\_utility::autosave_by_name(var_0);
 }
@@ -399,12 +418,14 @@ enemies_sat2() {
 cleanup_sat_enemies(var_0) {
   if(isDefined(var_0)) {
     foreach(var_2 in var_0) {
-      if(isDefined(level._enemies[var_2]))
+      if(isDefined(level._enemies[var_2])) {
         cleanup_sat_enemies_solo(level._enemies[var_2]);
+      }
     }
   } else {
-    foreach(var_5 in level._enemies)
+    foreach(var_5 in level._enemies) {
     cleanup_sat_enemies_solo(var_5);
+    }
   }
 }
 
@@ -438,8 +459,9 @@ spawnfunc_enemies_rog(var_0) {
     maps\skyway_util_ai::ignore_everything();
   }
 
-  if(isDefined(self.script_index))
+  if(isDefined(self.script_index)) {
     thread murderzone();
+  }
 
   wait 0.05;
 
@@ -465,8 +487,9 @@ spawnfunc_enemies_rog(var_0) {
       var_3 maps\skyway_vignette::vignette_single_solo(self, var_1, undefined, undefined, undefined, 0.3);
       self unlink();
 
-      if(issubstr(self.script_parameters, "run"))
+      if(issubstr(self.script_parameters, "run")) {
         maps\_utility::kill_deathflag("deathflag_sat2_rog_run");
+      }
     }
   }
 }
@@ -477,8 +500,9 @@ rail_fall_forcedeathfall() {
   self.v.invincible = 1;
   level waittill("notify_sat1_rog_run_delete");
 
-  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)
+  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     maps\_utility::stop_magic_bullet_shield();
+  }
 
   self delete();
 }
@@ -489,14 +513,16 @@ spawnfunc_enemies_ignore(var_0) {
   self.maxfaceenemydist = 256;
   self.a.disablelongdeath = 1;
 
-  if(isDefined(self.script_parameters) && issubstr(self.script_parameters, "death_override"))
+  if(isDefined(self.script_parameters) && issubstr(self.script_parameters, "death_override")) {
     thread maps\skyway_util::spawnfunc_death_override();
+  }
 
   maps\skyway_util_ai::ignore_until_goal(2);
   thread proximity_player_seek();
 
-  if(isDefined(self.script_index))
+  if(isDefined(self.script_index)) {
     thread murderzone();
+  }
 }
 
 spawnfunc_enemies_noticket() {
@@ -543,8 +569,9 @@ event_player_bridge_push() {
   self._anim_node maps\_anim::anim_first_frame_solo(level.player_rig, "bridge_push_player");
   level.player_rig linkto(self._anim_node);
 
-  if(issubstr(level.player getcurrentweapon(), "svu"))
+  if(issubstr(level.player getcurrentweapon(), "svu")) {
     wait 1;
+  }
 
   self._main_col connectpaths();
   self._main_col delete();
@@ -638,8 +665,9 @@ proximity_player_seek(var_0) {
   self endon("death");
   self endon("stop_player_seek");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 128;
+  }
 
   var_1 = var_0 * var_0;
 
@@ -705,8 +733,9 @@ base_array_ambient_dogfight_1() {
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_1");
   var_0 thread maps\skyway_ambient_a10::mig29_afterburners_node_wait();
 
-  if(common_scripts\utility::cointoss())
+  if(common_scripts\utility::cointoss()) {
     var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_1_buddy");
+  }
 
   wait(randomfloatrange(4.0, 5.0));
 }
@@ -719,15 +748,17 @@ base_array_ambient_dogfight_2() {
     level.base_array_ambient_a10_gun_dive_2 = undefined;
     level.base_array_ambient_a10_gun_dive_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_2");
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_2_buddy");
+    }
 
     wait 0.5;
     var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_2");
     var_1 thread maps\skyway_ambient_a10::mig29_afterburners_node_wait();
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_2_buddy");
+    }
 
     wait(randomfloatrange(5.0, 10.0));
   }
@@ -744,8 +775,9 @@ base_array_ambient_dogfight_3() {
     var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_3");
     var_0 thread maps\skyway_ambient_a10::mig29_afterburners_node_wait();
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_3_buddy");
+    }
 
     wait(randomfloatrange(5.0, 10.0));
   }
@@ -759,15 +791,17 @@ base_array_ambient_dogfight_1b() {
     level.base_array_ambient_a10_gun_dive_1b = undefined;
     level.base_array_ambient_a10_gun_dive_1b = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_1b");
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_1b_buddy");
+    }
 
     wait 0.5;
     var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_1b");
     var_1 thread maps\skyway_ambient_a10::mig29_afterburners_node_wait();
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_1b_buddy");
+    }
 
     wait(randomfloatrange(4.0, 8.0));
   }
@@ -796,15 +830,17 @@ base_array_ambient_dogfight_3b() {
     level.base_array_ambient_a10_gun_dive_3b = undefined;
     level.base_array_ambient_a10_gun_dive_3b = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_3b");
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_a10_gun_dive_3b_buddy");
+    }
 
     wait 0.5;
     var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_3b");
     var_1 thread maps\skyway_ambient_a10::mig29_afterburners_node_wait();
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("base_array_ambient_mig29_missile_dive_3b_buddy");
+    }
 
     wait(randomfloatrange(5.0, 10.0));
   }
@@ -878,8 +914,9 @@ ai_kill_when_out_of_sight(var_0, var_1) {
   }
   var_2 = 0.75;
 
-  if(issplitscreen())
+  if(issplitscreen()) {
     var_2 = 0.65;
+  }
 
   while(var_0.size > 0) {
     wait 1;
@@ -896,8 +933,9 @@ ai_kill_when_out_of_sight(var_0, var_1) {
       if(maps\_utility::either_player_looking_at(var_0[var_3].origin + (0, 0, 48), var_2, 1)) {
         continue;
       }
-      if(isDefined(var_0[var_3].magic_bullet_shield))
+      if(isDefined(var_0[var_3].magic_bullet_shield)) {
         var_0[var_3] maps\_utility::stop_magic_bullet_shield();
+      }
 
       var_0[var_3] maps\_utility_code::kill_deathflag_proc();
       var_0 = common_scripts\utility::array_remove(var_0, var_0[var_3]);

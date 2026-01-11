@@ -77,10 +77,12 @@ func_70B7(var_00, var_01, var_02, var_03) {
           var_4.id = var_00;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_704C;
@@ -91,10 +93,12 @@ func_70B7(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 1;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_70CE;
@@ -105,10 +109,12 @@ func_70B7(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 2;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_70D1;
@@ -119,10 +125,12 @@ func_70B7(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 3;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_70D0;
@@ -133,10 +141,12 @@ func_70B7(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 4;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_70CD;
@@ -147,10 +157,12 @@ func_70B7(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 5;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 3;
           var_4.func_71D4 = ::func_70CC;
@@ -161,10 +173,12 @@ func_70B7(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 6;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_70D3;
@@ -173,15 +187,17 @@ func_70B7(var_00, var_01, var_02, var_03) {
           var_06 = var_00 + 7;
           var_03 = func_0A0D::func_593B(var_06);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_06] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_03 != anim.failure)
+    if(var_03 != anim.failure) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -232,23 +248,26 @@ func_704C(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_9D44(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_593B(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -265,8 +284,9 @@ func_70CE(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_10015(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
@@ -275,10 +295,12 @@ func_70CE(var_00, var_01, var_02, var_03) {
           var_5.id = var_00 + 1;
           var_06 = var_1.func_D8BE[var_5.id];
 
-          if(isDefined(var_06))
+          if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          else
+          }
+          else {
             var_5.func_4B1B = 0;
+          }
 
           var_5.func_C21E = 4;
           var_5.func_71D4 = ::func_7083;
@@ -286,8 +308,9 @@ func_70CE(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -320,10 +343,12 @@ func_7083(var_00, var_01, var_02, var_03) {
           var_4.id = var_00;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_7086;
@@ -334,10 +359,12 @@ func_7083(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 1;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 3;
           var_4.func_71D4 = ::func_7084;
@@ -348,10 +375,12 @@ func_7083(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 2;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 3;
           var_4.func_71D4 = ::func_7085;
@@ -359,22 +388,26 @@ func_7083(var_00, var_01, var_02, var_03) {
         case 3:
           var_06 = var_00 + 3;
 
-          if(!isDefined(var_1.func_D8BE[var_06]))
+          if(!isDefined(var_1.func_D8BE[var_06])) {
             func_0A0D::func_7221(var_06);
+          }
 
           var_03 = func_0A0D::follow(var_06);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_06] = -1;
-          else
+          }
+          else {
             func_0A0D::func_7231(var_06);
+          }
 
           break;
       }
     }
 
-    if(var_03 != anim.failure)
+    if(var_03 != anim.failure) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -410,23 +443,26 @@ func_7086(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_9E00(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_61C4(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -443,33 +479,38 @@ func_7084(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_10016(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_F711(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 2:
           var_04 = var_00 + 2;
           var_03 = func_0A0D::func_7232(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          else
+          }
+          else {
             func_0A0D::func_7234(var_04);
+          }
 
           break;
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -482,8 +523,9 @@ func_710F(var_00, var_01, var_02) {
   var_03 = var_0.func_D8BE[var_01];
 
   if(isDefined(var_03) && var_03 != -1) {
-    if(var_03 == 2)
+    if(var_03 == 2) {
       func_0A0D::func_7234(scripts\aitypes\bt_util::bt_getchildtaskid(var_01, var_03));
+    }
   }
 
   var_2.func_71D2 = undefined;
@@ -497,37 +539,43 @@ func_7085(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_9E77(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_F711(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 2:
           var_04 = var_00 + 2;
 
-          if(!isDefined(var_1.func_D8BE[var_04]))
+          if(!isDefined(var_1.func_D8BE[var_04])) {
             func_0A0D::func_7221(var_04);
+          }
 
           var_03 = func_0A0D::follow(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          else
+          }
+          else {
             func_0A0D::func_7231(var_04);
+          }
 
           break;
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -540,8 +588,9 @@ func_7110(var_00, var_01, var_02) {
   var_03 = var_0.func_D8BE[var_01];
 
   if(isDefined(var_03) && var_03 != -1) {
-    if(var_03 == 2)
+    if(var_03 == 2) {
       func_0A0D::func_7231(scripts\aitypes\bt_util::bt_getchildtaskid(var_01, var_03));
+    }
   }
 
   var_2.func_71D2 = undefined;
@@ -555,8 +604,9 @@ func_70D1(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_10027(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
@@ -565,10 +615,12 @@ func_70D1(var_00, var_01, var_02, var_03) {
           var_5.id = var_00 + 1;
           var_06 = var_1.func_D8BE[var_5.id];
 
-          if(isDefined(var_06))
+          if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          else
+          }
+          else {
             var_5.func_4B1B = 0;
+          }
 
           var_5.func_C21E = 2;
           var_5.func_71D4 = ::func_7092;
@@ -576,8 +628,9 @@ func_70D1(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -618,10 +671,12 @@ func_7092(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 1;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 4;
           var_4.func_71D4 = ::func_7093;
@@ -629,8 +684,9 @@ func_7092(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.failure)
+    if(var_03 != anim.failure) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -661,8 +717,9 @@ func_70D2(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_10028(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
@@ -677,8 +734,9 @@ func_70D2(var_00, var_01, var_02, var_03) {
           var_04 = var_00 + 2;
           var_03 = func_0A0D::func_41B6(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
       }
@@ -718,30 +776,35 @@ func_7094(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_10075(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_F748(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 2:
           var_04 = var_00 + 2;
 
-          if(!isDefined(var_1.func_D8BE[var_04]))
+          if(!isDefined(var_1.func_D8BE[var_04])) {
             func_0A0D::func_98E0(var_04);
+          }
 
           var_03 = func_0A0D::func_136C0(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          else
+          }
+          else {
             func_0A0D::func_11704(var_04);
+          }
 
           break;
       }
@@ -763,8 +826,9 @@ func_711A(var_00, var_01, var_02) {
   var_03 = var_0.func_D8BE[var_01];
 
   if(isDefined(var_03) && var_03 != -1) {
-    if(var_03 == 2)
+    if(var_03 == 2) {
       func_0A0D::func_11704(scripts\aitypes\bt_util::bt_getchildtaskid(var_01, var_03));
+    }
   }
 
   var_2.func_71D2 = undefined;
@@ -778,24 +842,27 @@ func_7093(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_F711(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_F706(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 2:
           var_04 = var_00 + 2;
           var_03 = func_0A0D::func_F7C9(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 3:
@@ -804,10 +871,12 @@ func_7093(var_00, var_01, var_02, var_03) {
           var_5.id = var_00 + 3;
           var_06 = var_1.func_D8BE[var_5.id];
 
-          if(isDefined(var_06))
+          if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          else
+          }
+          else {
             var_5.func_4B1B = 0;
+          }
 
           var_5.func_C21E = 2;
           var_5.func_71D4 = ::func_7095;
@@ -815,8 +884,9 @@ func_7093(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -835,10 +905,12 @@ func_7095(var_00, var_01, var_02, var_03) {
           var_4.id = var_00;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_7096;
@@ -849,10 +921,12 @@ func_7095(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 1;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 3;
           var_4.func_71D4 = ::func_7097;
@@ -860,8 +934,9 @@ func_7095(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.failure)
+    if(var_03 != anim.failure) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -878,23 +953,26 @@ func_7096(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_1002B(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_90F2(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -911,35 +989,40 @@ func_7097(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_F706(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_F7C9(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 2:
           var_04 = var_00 + 2;
 
-          if(!isDefined(var_1.func_D8BE[var_04]))
+          if(!isDefined(var_1.func_D8BE[var_04])) {
             func_0A09::func_FAF6(var_04);
+          }
 
           var_03 = func_0A09::func_5AEA(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -956,8 +1039,9 @@ func_70D0(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_8C2C(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
@@ -966,10 +1050,12 @@ func_70D0(var_00, var_01, var_02, var_03) {
           var_5.id = var_00 + 1;
           var_06 = var_1.func_D8BE[var_5.id];
 
-          if(isDefined(var_06))
+          if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          else
+          }
+          else {
             var_5.func_4B1B = 0;
+          }
 
           var_5.func_C21E = 2;
           var_5.func_71D4 = ::func_708A;
@@ -977,8 +1063,9 @@ func_70D0(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1011,10 +1098,12 @@ func_708A(var_00, var_01, var_02, var_03) {
           var_4.id = var_00;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_70CF;
@@ -1025,10 +1114,12 @@ func_708A(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 1;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_708B;
@@ -1036,8 +1127,9 @@ func_708A(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.failure)
+    if(var_03 != anim.failure) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1072,8 +1164,9 @@ func_70CF(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_10017(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
@@ -1087,8 +1180,9 @@ func_70CF(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1119,22 +1213,26 @@ func_7087(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_B4DB(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
 
-          if(!isDefined(var_1.func_D8BE[var_04]))
+          if(!isDefined(var_1.func_D8BE[var_04])) {
             func_0A0D::func_724A(var_04);
+          }
 
           var_03 = func_0A0D::func_7248(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          else
+          }
+          else {
             func_0A0D::func_724B(var_04);
+          }
 
           break;
       }
@@ -1156,8 +1254,9 @@ func_7111(var_00, var_01, var_02) {
   var_03 = var_0.func_D8BE[var_01];
 
   if(isDefined(var_03) && var_03 != -1) {
-    if(var_03 == 1)
+    if(var_03 == 1) {
       func_0A0D::func_724B(scripts\aitypes\bt_util::bt_getchildtaskid(var_01, var_03));
+    }
   }
 
   var_2.func_71D2 = undefined;
@@ -1171,29 +1270,34 @@ func_708B(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_6CAB(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
 
-          if(!isDefined(var_1.func_D8BE[var_04]))
+          if(!isDefined(var_1.func_D8BE[var_04])) {
             func_0A0D::func_98E0(var_04);
+          }
 
           var_03 = func_0A0D::func_136C0(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          else
+          }
+          else {
             func_0A0D::func_11704(var_04);
+          }
 
           break;
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1206,8 +1310,9 @@ func_7113(var_00, var_01, var_02) {
   var_03 = var_0.func_D8BE[var_01];
 
   if(isDefined(var_03) && var_03 != -1) {
-    if(var_03 == 1)
+    if(var_03 == 1) {
       func_0A0D::func_11704(scripts\aitypes\bt_util::bt_getchildtaskid(var_01, var_03));
+    }
   }
 
   var_2.func_71D2 = undefined;
@@ -1221,8 +1326,9 @@ func_70CD(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_9D6A(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
@@ -1231,10 +1337,12 @@ func_70CD(var_00, var_01, var_02, var_03) {
           var_5.id = var_00 + 1;
           var_06 = var_1.func_D8BE[var_5.id];
 
-          if(isDefined(var_06))
+          if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          else
+          }
+          else {
             var_5.func_4B1B = 0;
+          }
 
           var_5.func_C21E = 7;
           var_5.func_71D4 = func_0C1D::func_707F;
@@ -1242,8 +1350,9 @@ func_70CD(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1274,16 +1383,18 @@ func_70CC(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_8C3A(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_8C2C(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 2:
@@ -1292,10 +1403,12 @@ func_70CC(var_00, var_01, var_02, var_03) {
           var_5.id = var_00 + 2;
           var_06 = var_1.func_D8BE[var_5.id];
 
-          if(isDefined(var_06))
+          if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          else
+          }
+          else {
             var_5.func_4B1B = 0;
+          }
 
           var_5.func_C21E = 3;
           var_5.func_71D4 = ::func_7062;
@@ -1303,11 +1416,13 @@ func_70CC(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_2.func_4B1B == 1)
+    if(var_2.func_4B1B == 1) {
       var_03 = scripts\aitypes\bt_util::bt_negateresult(var_03);
+    }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1340,10 +1455,12 @@ func_7062(var_00, var_01, var_02, var_03) {
           var_4.id = var_00;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_704D;
@@ -1354,10 +1471,12 @@ func_7062(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 1;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 4;
           var_4.func_71D4 = ::func_70A6;
@@ -1368,10 +1487,12 @@ func_7062(var_00, var_01, var_02, var_03) {
           var_4.id = var_00 + 2;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 2;
           var_4.func_71D4 = ::func_70B5;
@@ -1379,8 +1500,9 @@ func_7062(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.failure)
+    if(var_03 != anim.failure) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1419,8 +1541,9 @@ func_704D(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_FFBE(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
@@ -1429,10 +1552,12 @@ func_704D(var_00, var_01, var_02, var_03) {
           var_5.id = var_00 + 1;
           var_06 = var_1.func_D8BE[var_5.id];
 
-          if(isDefined(var_06))
+          if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          else
+          }
+          else {
             var_5.func_4B1B = 0;
+          }
 
           var_5.func_C21E = 2;
           var_5.func_71D4 = ::func_716F;
@@ -1440,8 +1565,9 @@ func_704D(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1474,10 +1600,12 @@ func_716F(var_00, var_01, var_02, var_03) {
           var_4.id = var_00;
           var_05 = var_1.func_D8BE[var_4.id];
 
-          if(isDefined(var_05))
+          if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          else
+          }
+          else {
             var_4.func_4B1B = 0;
+          }
 
           var_4.func_C21E = 6;
           var_4.func_71D4 = ::func_704E;
@@ -1493,8 +1621,9 @@ func_716F(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.failure)
+    if(var_03 != anim.failure) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1525,59 +1654,67 @@ func_704E(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_10029(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_F748(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 2:
           var_04 = var_00 + 2;
           var_03 = func_0A0D::func_C936(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 3:
           var_04 = var_00 + 3;
           var_03 = func_0A0D::func_F7C9(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 4:
           var_04 = var_00 + 4;
           var_03 = func_0A0D::func_F706(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 5:
           var_04 = var_00 + 5;
 
-          if(!isDefined(var_1.func_D8BE[var_04]))
+          if(!isDefined(var_1.func_D8BE[var_04])) {
             func_0A09::func_FAF6(var_04);
+          }
 
           var_03 = func_0A09::func_5AEA(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1594,62 +1731,71 @@ func_704F(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_FFD6(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_10E66(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 2:
           var_04 = var_00 + 2;
           var_03 = func_0A0D::func_6CAB(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 3:
           var_04 = var_00 + 3;
           var_03 = func_0A0D::func_F672(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 4:
           var_04 = var_00 + 4;
           var_03 = func_0A0D::func_F72A(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 5:
           var_04 = var_00 + 5;
           var_03 = func_0A0D::func_F706(var_04, scripts\aitypes\bt_util::func_0076(var_04));
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 6:
           var_04 = var_00 + 6;
 
-          if(!isDefined(var_1.func_D8BE[var_04]))
+          if(!isDefined(var_1.func_D8BE[var_04])) {
             func_0A0D::func_98E0(var_04);
+          }
 
           var_03 = func_0A0D::func_136C0(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          else
+          }
+          else {
             func_0A0D::func_11704(var_04);
+          }
 
           break;
       }
@@ -1671,8 +1817,9 @@ func_70E3(var_00, var_01, var_02) {
   var_03 = var_0.func_D8BE[var_01];
 
   if(isDefined(var_03) && var_03 != -1) {
-    if(var_03 == 6)
+    if(var_03 == 6) {
       func_0A0D::func_11704(scripts\aitypes\bt_util::bt_getchildtaskid(var_01, var_03));
+    }
   }
 
   var_2.func_71D2 = undefined;
@@ -1686,45 +1833,52 @@ func_70A6(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_1003E(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
           var_04 = var_00 + 1;
           var_03 = func_0A0D::func_F748(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 2:
           var_04 = var_00 + 2;
           var_03 = func_0A0D::func_C936(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 3:
           var_04 = var_00 + 3;
 
-          if(!isDefined(var_1.func_D8BE[var_04]))
+          if(!isDefined(var_1.func_D8BE[var_04])) {
             func_0A0D::func_98E0(var_04);
+          }
 
           var_03 = func_0A0D::func_136C0(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          else
+          }
+          else {
             func_0A0D::func_11704(var_04);
+          }
 
           break;
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1737,8 +1891,9 @@ func_7126(var_00, var_01, var_02) {
   var_03 = var_0.func_D8BE[var_01];
 
   if(isDefined(var_03) && var_03 != -1) {
-    if(var_03 == 3)
+    if(var_03 == 3) {
       func_0A0D::func_11704(scripts\aitypes\bt_util::bt_getchildtaskid(var_01, var_03));
+    }
   }
 
   var_2.func_71D2 = undefined;
@@ -1752,8 +1907,9 @@ func_70B5(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_1006C(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
@@ -1762,10 +1918,12 @@ func_70B5(var_00, var_01, var_02, var_03) {
           var_5.id = var_00 + 1;
           var_06 = var_1.func_D8BE[var_5.id];
 
-          if(isDefined(var_06))
+          if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          else
+          }
+          else {
             var_5.func_4B1B = 0;
+          }
 
           var_5.func_C21E = 7;
           var_5.func_71D4 = func_0C1D::func_707F;
@@ -1773,8 +1931,9 @@ func_70B5(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;
@@ -1805,8 +1964,9 @@ func_70D3(var_00, var_01, var_02, var_03) {
           var_04 = var_00;
           var_03 = func_0A0D::func_1003F(var_04);
 
-          if(var_03 == anim.running)
+          if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
+          }
 
           break;
         case 1:
@@ -1815,10 +1975,12 @@ func_70D3(var_00, var_01, var_02, var_03) {
           var_5.id = var_00 + 1;
           var_06 = var_1.func_D8BE[var_5.id];
 
-          if(isDefined(var_06))
+          if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          else
+          }
+          else {
             var_5.func_4B1B = 0;
+          }
 
           var_5.func_C21E = 7;
           var_5.func_71D4 = func_0C1D::func_707F;
@@ -1826,8 +1988,9 @@ func_70D3(var_00, var_01, var_02, var_03) {
       }
     }
 
-    if(var_03 != anim.success)
+    if(var_03 != anim.success) {
       return var_03;
+    }
 
     var_2.func_4B1B++;
     var_03 = undefined;

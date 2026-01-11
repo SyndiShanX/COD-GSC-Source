@@ -100,8 +100,9 @@ SetupRappel() {
   }
   foreach(trig in trigs) {
     org = getent(trig.target, "targetname");
-    if(isDefined(org))
+    if(isDefined(org)) {
       org delete();
+    }
   }
 }
 
@@ -111,14 +112,17 @@ RappelThink() {
 
   while(1) {
     self waittill("trigger", player);
-    if(!isPlayer(player))
+    if(!isPlayer(player)) {
       continue;
+    }
 
-    if(!player isOnGround())
+    if(!player isOnGround()) {
       continue;
+    }
 
-    if(isDefined(player.rapelling))
+    if(isDefined(player.rapelling)) {
       continue;
+    }
 
     player thread Rappel(self);
   }

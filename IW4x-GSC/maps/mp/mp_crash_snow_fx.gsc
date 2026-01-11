@@ -18,8 +18,9 @@ main() {
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
   level._effect["snow_light"] = loadfx("weather/snow_light_mp_crash");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_crash_snow_fx::main();
+  }
 
   thread swapAirstrikeFX();
 }

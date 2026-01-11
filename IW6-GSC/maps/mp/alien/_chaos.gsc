@@ -114,8 +114,9 @@ update_alien_killed_event(alien_type, death_pos, attacker) {
     return;
   }
   attacker_as_player = get_attacker_as_player(attacker);
-  if(maps\mp\alien\_chaos_laststand::should_instant_revive(attacker_as_player))
+  if(maps\mp\alien\_chaos_laststand::should_instant_revive(attacker_as_player)) {
     maps\mp\alien\_laststand::instant_revive(attacker_as_player);
+  }
 
   process_chaos_event("kill_" + alien_type);
   drop_alien_egg(death_pos);
@@ -136,10 +137,12 @@ update_spending_currency_event(player, spending_type, weapon_ref) {
   if(!isDefined(spending_type)) {
     return;
   }
-  if(spending_type == "weapon" && is_new_weapon_pick_up(player, weapon_ref))
+  if(spending_type == "weapon" && is_new_weapon_pick_up(player, weapon_ref)) {
     process_chaos_event("new_weapon_pick_up");
-  else
+  }
+  else {
     process_chaos_event("inc_combo_counter_only");
+  }
 }
 
 update_pickup_deployable_box_event() {
@@ -178,8 +181,9 @@ chaos_onSpawnPlayer(player) {
 chaos_custom_giveloadout(player) {
   player give_activated_perks(player);
 
-  if(!common_scripts\utility::flag(CONST_PRE_GAME_IS_OVER_FLAG))
+  if(!common_scripts\utility::flag(CONST_PRE_GAME_IS_OVER_FLAG)) {
     player give_start_up_semtex(player);
+  }
 }
 
 give_start_up_semtex(player) {
@@ -192,8 +196,9 @@ create_alien_eggs() {
   level.alien_egg_list = [];
   level.alien_egg_list_index = 0;
 
-  for(i = 0; i < EGG_LIST_SIZE; i++)
+  for(i = 0; i < EGG_LIST_SIZE; i++) {
     level.alien_egg_list[i] = create_alien_egg();
+  }
 }
 
 set_egg_default_loc(loc) {
@@ -220,8 +225,9 @@ combo_meter_monitor() {
         keep_running_score();
         drop_combo();
 
-        if(common_scripts\utility::flag(CONST_GRACE_PERIOD_OVER_FLAG))
+        if(common_scripts\utility::flag(CONST_GRACE_PERIOD_OVER_FLAG)) {
           chaos_end_game();
+        }
 
         break;
       }
@@ -341,22 +347,25 @@ process_chaos_event_internal(event_info) {
   should_inc_combo_counter = should_inc_combo_counter(event_info["combo_inc"]);
   should_inc_score_streak = should_inc_score_streak(event_info["score_inc"]);
 
-  if(should_inc_combo_counter)
+  if(should_inc_combo_counter) {
     inc_combo_counter(event_info["combo_inc"]);
+  }
 
   if(should_update_LUA_event(event_info["LUA_event_ID"])) {
     inc_event_count(event_info["LUA_event_ID"]);
     add_to_omnvar_value_queue(level, CONST_OMNVAR_NAME_EVENT, event_info["LUA_event_ID"]);
   }
 
-  if(should_inc_score_streak)
+  if(should_inc_score_streak) {
     inc_score_streak(event_info["score_inc"]);
+  }
 
   if(should_inc_combo_counter || should_inc_score_streak) {
     total_score = calculate_total_score();
 
-    foreach(player in level.players)
+    foreach(player in level.players) {
     player maps\mp\alien\_persistence::eog_player_update_stat("score", total_score, true);
+    }
   }
 }
 
@@ -391,8 +400,9 @@ pop_first_item_out_of_queue(ent, omnvar_name) {
 
   if(isDefined(first_item)) {
     new_queue = [];
-    for(i = 1; i < ent.omnvar_value_queue[omnvar_name].size; i++)
+    for(i = 1; i < ent.omnvar_value_queue[omnvar_name].size; i++) {
       new_queue[new_queue.size] = ent.omnvar_value_queue[omnvar_name][i];
+    }
     ent.omnvar_value_queue[omnvar_name] = new_queue;
   }
 
@@ -402,8 +412,9 @@ pop_first_item_out_of_queue(ent, omnvar_name) {
 LUA_omnvar_update_monitor(ent, omnvar_name, additional_endon) {
   level endon("game_ended");
 
-  if(isDefined(additional_endon))
+  if(isDefined(additional_endon)) {
     ent endon(additional_endon);
+  }
 
   ent.omnvar_value_queue[omnvar_name] = [];
 
@@ -412,10 +423,12 @@ LUA_omnvar_update_monitor(ent, omnvar_name, additional_endon) {
 
     if(isDefined(value)) {
       chaos_event_notify(omnvar_name, value, ent);
-      if(isPlayer(ent))
+      if(isPlayer(ent)) {
         ent setClientOmnvar(omnvar_name, value);
-      else
+      }
+      else {
         setOmnvar(omnvar_name, value);
+      }
 
       common_scripts\utility::waitframe();
     } else {
@@ -506,10 +519,12 @@ process_event_notify_queue() {
       if(gettime() - event.time_added > 5000) {
         continue;
       }
-      if(isPlayer(event.ent))
+      if(isPlayer(event.ent)) {
         event.ent IPrintLnBold(event.event_string);
-      else
+      }
+      else {
         IPrintLnBold(event.event_string);
+      }
       wait 2;
     }
     wait .1;
@@ -545,16 +560,19 @@ alien_egg_think(alien_egg) {
   result = "none";
 
   while(true) {
-    if(result != "activate")
+    if(result != "activate") {
       alien_egg waittill("activate");
+    }
 
     result = alien_egg common_scripts\utility::waittill_any_timeout(EGG_TIME_OUT, "picked_up", "activate");
 
-    if(result == "picked_up")
+    if(result == "picked_up") {
       process_chaos_event(CONST_INC_COMBO_COUNTER_ONLY);
+    }
 
-    if(result != "activate")
+    if(result != "activate") {
       move_alien_egg(alien_egg, level.eggs_default_loc);
+    }
   }
 }
 
@@ -614,8 +632,9 @@ perk_progression(combo_counter) {
 }
 
 unset_players_perks() {
-  foreach(player in level.players)
+  foreach(player in level.players) {
   unset_player_perks(player);
+  }
 
   set_all_perks_inactivated();
   add_to_omnvar_value_queue(level, CONST_OMNVAR_NAME_PERK, 0);
@@ -652,8 +671,9 @@ add_to_recent_weapon_list(player, weapon_ref) {
   if(player.recent_weapon_list.size < NUM_RECENT_WEAPON) {
     player.recent_weapon_list[player.recent_weapon_list.size] = weapon_ref;
   } else {
-    for(index = 0; index < NUM_RECENT_WEAPON - 1; index++)
+    for(index = 0; index < NUM_RECENT_WEAPON - 1; index++) {
       player.recent_weapon_list[index] = player.recent_weapon_list[index + 1];
+    }
 
     player.recent_weapon_list[NUM_RECENT_WEAPON - 1] = weapon_ref;
   }
@@ -915,13 +935,15 @@ drop_bonus_package(boxType, loc) {
 }
 
 give_tesla_trap(boxent) {
-  if(isDefined(level.tesla_trap_func))
+  if(isDefined(level.tesla_trap_func)) {
     self thread[[level.tesla_trap_func]]("amolecular_nucleicbattery_wire");
+  }
 }
 
 give_hypno_trap(boxent) {
-  if(isDefined(level.hypno_trap_func))
+  if(isDefined(level.hypno_trap_func)) {
     self thread[[level.hypno_trap_func]]("biolum_cellbattery_pressureplate");
+  }
 }
 
 give_venom_x(boxent) {
@@ -1089,8 +1111,9 @@ activate_specialist_class_skill() {
   self specialist_boost(variables);
 
   self.skill_in_use = undefined;
-  if(isDefined(self.camFX))
+  if(isDefined(self.camFX)) {
     self.camFX delete();
+  }
   self.chaosClassSkillInUse = undefined;
 }
 
@@ -1129,15 +1152,17 @@ activate_combo_freeze() {
 upgrade_all_skills(boxEnt) {
   inc_num_skill_upgrade_earned();
 
-  foreach(player in level.players)
+  foreach(player in level.players) {
   upgrade_player_all_skills(player);
+  }
 }
 
 upgrade_player_all_skills(player) {
   resource_type_list = ["defense", "offense"];
 
-  foreach(resource_type in resource_type_list)
+  foreach(resource_type in resource_type_list) {
   player notify("luinotifyserver", resource_type + "_try_upgrade");
+  }
 }
 
 init_num_skill_upgrade_earned() {
@@ -1172,17 +1197,20 @@ start_grace_period(duration) {
   common_scripts\utility::flag_set(CONST_GRACE_PERIOD_OVER_FLAG);
   maps\mp\alien\_hud::unset_grace_period_clock();
 
-  if(!common_scripts\utility::flag(CONST_COMBO_IS_ALIVE_FLAG))
+  if(!common_scripts\utility::flag(CONST_COMBO_IS_ALIVE_FLAG)) {
     chaos_end_game();
+  }
 }
 
 get_grace_period_end_time(current_time, duration) {
   duration *= 1000;
 
-  if(level.grace_period_end_time <= current_time)
+  if(level.grace_period_end_time <= current_time) {
     level.grace_period_end_time = current_time + duration;
-  else
+  }
+  else {
     level.grace_period_end_time += duration;
+  }
 
   return level.grace_period_end_time;
 }
@@ -1196,8 +1224,9 @@ give_bonus_score(boxEnt) {
 }
 
 give_bonus_cash(boxEnt) {
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player maps\mp\alien\_persistence::give_player_currency(BONUS_CASH);
+  }
 }
 
 give_trophy(boxEnt) {
@@ -1223,8 +1252,9 @@ give_chaos_offhand_item(player, weapon_ref, offhand_class) {
 remove_other_chaos_offhand_item(player) {
   chaos_offhand_item_list = ["alienflare_mp", "alienthrowingknife_mp", "alientrophy_mp"];
 
-  foreach(item in chaos_offhand_item_list)
+  foreach(item in chaos_offhand_item_list) {
   player takeWeapon(item);
+  }
 }
 
 give_soflam(boxEnt) {

@@ -133,17 +133,21 @@ is_radio_defined(alias) {
 }
 
 should_break_available() {
-  if(isDefined(level.uav_is_not_available))
+  if(isDefined(level.uav_is_not_available)) {
     return false;
-  else
+  }
+  else {
     return true;
+  }
 }
 
 should_break_destroyed() {
-  if(isDefined(level.uav_is_destroyed))
+  if(isDefined(level.uav_is_destroyed)) {
     return false;
-  else
+  }
+  else {
     return true;
+  }
 }
 
 enable_uav(do_radio, restore) {
@@ -459,8 +463,9 @@ remotemissile_radio_reminder() {
 }
 
 play_kills_dialogue() {
-  if(isDefined(level.dont_use_global_uav_kill_dialog))
+  if(isDefined(level.dont_use_global_uav_kill_dialog)) {
     return;
+  }
 
   if(!isDefined(level.uav_radio_initialized)) {
     return;
@@ -618,8 +623,9 @@ text_TitleFadeout() {
 }
 
 text_TitleDestroy() {
-  if(!isDefined(level.text1))
+  if(!isDefined(level.text1)) {
     return;
+  }
   level.text1 Destroy();
   level.text1 = undefined;
 }
@@ -650,15 +656,17 @@ text_NoticeCreate(text) {
 }
 
 text_NoticeFadeout() {
-  if(!isDefined(level.text2))
+  if(!isDefined(level.text2)) {
     return;
+  }
   level.text2 FadeOverTime(0.25);
   level.text2.alpha = 0;
 }
 
 text_NoticeDestroy() {
-  if(!isDefined(level.text2))
+  if(!isDefined(level.text2)) {
     return;
+  }
   level.text2 Destroy();
   level.text2 = undefined;
 }
@@ -749,8 +757,9 @@ UAVRemoteLauncherSequence(player, weap) {
   HudItemsHide();
   if(isDefined(level.remote_missile_targets) && (level.remote_missile_targets.size > 0)) {
     foreach(thing in level.remote_missile_targets) {
-      if(!isalive(thing))
+      if(!isalive(thing)) {
         level.remote_missile_targets = array_remove(level.remote_missile_targets, thing);
+      }
     }
   }
 
@@ -948,8 +957,9 @@ missile_kill_ai(attacker) {
   if(isDefined(attacker) && isDefined(level.uav_user)) {
     if(attacker == level.uav_user || (isDefined(attacker.attacker) && attacker.attacker == level.uav_user)) {
       level.uav_killstats["ai"]++;
-      if(isplayer(level.uav_user) && level.uav_killstats["ai"] == 10)
+      if(isplayer(level.uav_user) && level.uav_killstats["ai"] == 10) {
         level.uav_user player_giveachievement_wrapper("TEN_PLUS_FOOT_MOBILES");
+      }
     }
   }
 }
@@ -1011,8 +1021,9 @@ ExitFromCamera_Missile(player, reasonIsPain) {
   text_TitleDestroy();
   DrawTargetsEnd();
 
-  if(isDefined(level.uav_is_destroyed))
+  if(isDefined(level.uav_is_destroyed)) {
     thread staticEffect(.5);
+  }
 
   player ControlsUnlink();
   player CameraUnlink();
@@ -1068,8 +1079,9 @@ ExitFromCamera_UAV(player, reasonIsPain) {
   text_NoticeFadeout();
   player VisionSetNakedForPlayer(level.VISION_BLACK, 0.25);
   player VisionSetThermalForPlayer(level.VISION_BLACK, 0.25);
-  if(isDefined(level.uav_is_destroyed))
+  if(isDefined(level.uav_is_destroyed)) {
     player thread staticEffect(.5);
+  }
   wait 0.15;
 
   wait 0.35;
@@ -1082,8 +1094,9 @@ ExitFromCamera_UAV(player, reasonIsPain) {
   maps\_load::thermal_EffectsOff();
   player ThermalVisionOff();
 
-  if(isDefined(player.fov_is_altered))
+  if(isDefined(player.fov_is_altered)) {
     SetSavedDvar("cg_fov", 65);
+  }
 
   if(isDefined(level.uav)) {
     if(is_specialop()) {
@@ -1184,8 +1197,9 @@ wait_for_other() {
 HudItemsHide() {
   if(level.players.size > 0) {
     for(i = 0; i < level.players.size; i++) {
-      if(isDefined(level.players[i].using_uav) && level.players[i].using_uav)
+      if(isDefined(level.players[i].using_uav) && level.players[i].using_uav) {
         setdvar("ui_remotemissile_playernum", (i + 1)); // 0 = no uav, 1 = player1, 2 = player2
+      }
     }
   } else {
     SetSavedDvar("compass", "0");
@@ -1217,10 +1231,12 @@ FireMissileFromUAVPlayer(player) {
   if(isDefined(level.remote_missile_snow)) {
     missile = MagicBullet("remote_missile_snow", start, end, player);
   } else {
-    if(isDefined(level.remote_missile_invasion))
+    if(isDefined(level.remote_missile_invasion)) {
       missile = MagicBullet("remote_missile_invasion", start, end, player);
-    else
+    }
+    else {
       missile = MagicBullet("remote_missile", start, end, player);
+    }
   }
 
   thread NotifyOnMissileDeath(missile);
@@ -1228,18 +1244,21 @@ FireMissileFromUAVPlayer(player) {
 }
 
 setup_remote_missile_target() {
-  if(!isDefined(level.remote_missile_targets))
+  if(!isDefined(level.remote_missile_targets)) {
     level.remote_missile_targets = [];
+  }
 
   level.remote_missile_targets[level.remote_missile_targets.size] = self;
 
-  if(isDefined(level.player.draw_red_boxes) && !isDefined(level.uav_is_destroyed))
+  if(isDefined(level.player.draw_red_boxes) && !isDefined(level.uav_is_destroyed)) {
     self draw_target();
+  }
 
   self waittill("death");
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   if(isDefined(self.has_target_shader)) {
     self.has_target_shader = undefined;
@@ -1257,8 +1276,9 @@ DrawTargetsStart() {
   targets_drawn = 0;
   time_between_updates = .05;
 
-  if(!isDefined(level.remote_missile_targets))
+  if(!isDefined(level.remote_missile_targets)) {
     return;
+  }
 
   foreach(tgt in level.remote_missile_targets) {
     if(IsAlive(tgt)) {
@@ -1373,8 +1393,9 @@ SwitchBackToMainWeapon_internal(func) {
     }
   }
 
-  if(weapons.size > 0)
+  if(weapons.size > 0) {
     self[[func]](weapons[0]);
+  }
 }
 
 staticEffect(duration) {

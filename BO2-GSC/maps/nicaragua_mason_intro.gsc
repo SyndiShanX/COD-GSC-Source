@@ -169,8 +169,9 @@ spawn_mason_intro_snipers() {
   e_target = getent("mason_intro_pdf_snipers_target", "targetname");
   e_target.health = 100;
 
-  foreach(guy in a_ai_pdf)
+  foreach(guy in a_ai_pdf) {
   guy thread wait_and_shoot_at(e_target);
+  }
 }
 
 wait_and_shoot_at(e_target) {
@@ -183,14 +184,16 @@ give_pdf_forcecolor() {
   level waittill("mason_intro_move_pdf_down_hill");
   a_ai_pdf = get_ai_array("mason_intro_hill_runners", "script_noteworthy");
 
-  foreach(guy in a_ai_pdf)
+  foreach(guy in a_ai_pdf) {
   guy set_force_color("p");
+  }
 
   level waittill("mason_intro_move_pdf_down_hill");
   a_ai_pdf = get_ai_array("mason_intro_hill_runners2", "script_noteworthy");
 
-  foreach(guy in a_ai_pdf)
+  foreach(guy in a_ai_pdf) {
   guy set_force_color("p");
+  }
 }
 
 noriega_moves_up_to_ledge() {
@@ -203,10 +206,12 @@ noriega_moves_up_to_ledge() {
 mason_intro_end_vo() {
   wait 1.0;
 
-  if(is_mature())
+  if(is_mature()) {
     level.woods queue_dialog("wood_alright_about_fuck_0");
-  else
+  }
+  else {
     level.woods queue_dialog("wood_alright_about_time_0");
+  }
 }
 
 mason_intro_rundown_vo() {
@@ -215,10 +220,12 @@ mason_intro_rundown_vo() {
   level.player queue_dialog("maso_heavy_fighting_up_ah_0");
   level.hudson queue_dialog("huds_noriega_s_men_are_pu_0", 2.0);
 
-  if(is_mature())
+  if(is_mature()) {
     level.woods queue_dialog("wood_i_ain_t_keen_on_figh_0", 2.0);
-  else
+  }
+  else {
     level.woods queue_dialog("wood_i_ain_t_keen_on_figh_1", 2.0);
+  }
 
   level.hudson queue_dialog("huds_trust_me_woods_th_0", 2.0);
 }
@@ -244,8 +251,9 @@ mason_intro_rain_overlay(e_trigger) {
     e_trigger waittill("trigger");
 
     while(true) {
-      if(self istouching(e_trigger))
+      if(self istouching(e_trigger)) {
         self setclientflag(14);
+      }
       else {
         self clearclientflag(14);
         break;

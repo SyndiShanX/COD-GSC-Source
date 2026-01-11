@@ -8,29 +8,33 @@ apache_hints_move() {
 }
 
 apache_hints_break_ads() {
-  if(apache_player_dead())
+  if(apache_player_dead()) {
     return 1;
+  }
 
   return self adsbuttonpressed();
 }
 
 apache_hints_break_mg() {
-  if(apache_player_dead())
+  if(apache_player_dead()) {
     return 1;
+  }
 
   return self attackbuttonpressed();
 }
 
 apache_hints_break_flares() {
-  if(apache_player_dead())
+  if(apache_player_dead()) {
     return 1;
+  }
 
   return self secondaryoffhandbuttonpressed();
 }
 
 apache_hints_break_missile_straight() {
-  if(apache_player_dead())
+  if(apache_player_dead()) {
     return 1;
+  }
 
   return self fragbuttonpressed();
 }
@@ -38,8 +42,9 @@ apache_hints_break_missile_straight() {
 apache_hints_break_missile_lockon() {
   var_0 = get_players_apache_weapon();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 1;
+  }
 
   return isDefined(var_0.targets_tracking) && var_0.targets_tracking.size;
 }
@@ -74,11 +79,13 @@ apache_hints_released_homing() {
 }
 
 apache_player_dead() {
-  if(!isDefined(level.player.riding_heli))
+  if(!isDefined(level.player.riding_heli)) {
     return 0;
+  }
 
   var_0 = level.player.riding_heli;
 
-  if(var_0 maps\_utility::ent_flag_exist("ENT_FLAG_heli_destroyed"))
+  if(var_0 maps\_utility::ent_flag_exist("ENT_FLAG_heli_destroyed")) {
     return var_0 maps\_utility::ent_flag("ENT_FLAG_heli_destroyed");
+  }
 }

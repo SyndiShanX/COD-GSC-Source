@@ -15,10 +15,12 @@ meleecombat() {
   assert(canmeleeanyrange());
   self orientmode("face enemy");
 
-  if(is_true(self.sliding_on_goo))
+  if(is_true(self.sliding_on_goo)) {
     self animmode("slide");
-  else
+  }
+  else {
     self animmode("zonly_physics");
+  }
 
   for(;;) {
     if(isDefined(self.marked_for_death)) {
@@ -29,19 +31,22 @@ meleecombat() {
       self orientmode("face angle", angles[1]);
     }
 
-    if(isDefined(self.zmb_vocals_attack))
+    if(isDefined(self.zmb_vocals_attack)) {
       self playSound(self.zmb_vocals_attack);
+    }
 
-    if(isDefined(self.nochangeduringmelee) && self.nochangeduringmelee)
+    if(isDefined(self.nochangeduringmelee) && self.nochangeduringmelee) {
       self.safetochangescript = 0;
+    }
 
     if(isDefined(self.is_inert) && self.is_inert) {
       return;
     }
     set_zombie_melee_anim_state(self);
 
-    if(isDefined(self.melee_anim_func))
+    if(isDefined(self.melee_anim_func)) {
       self thread[[self.melee_anim_func]]();
+    }
 
     while(true) {
       self waittill("melee_anim", note);
@@ -66,10 +71,12 @@ meleecombat() {
         }
 
         if(self.enemy.health >= oldhealth) {
-          if(isDefined(self.melee_miss_func))
+          if(isDefined(self.melee_miss_func)) {
             self[[self.melee_miss_func]]();
-          else if(isDefined(level.melee_miss_func))
+          }
+          else if(isDefined(level.melee_miss_func)) {
             self[[level.melee_miss_func]]();
+          }
         }
 
         if(getdvarint(#"_id_7F11F572")) {
@@ -90,10 +97,12 @@ meleecombat() {
       }
     }
 
-    if(is_true(self.sliding_on_goo))
+    if(is_true(self.sliding_on_goo)) {
       self orientmode("face enemy");
-    else
+    }
+    else {
       self orientmode("face default");
+    }
 
     if(isDefined(self.nochangeduringmelee) && self.nochangeduringmelee || is_true(self.sliding_on_goo)) {
       if(isDefined(self.enemy)) {
@@ -112,10 +121,12 @@ meleecombat() {
     }
   }
 
-  if(is_true(self.sliding_on_goo))
+  if(is_true(self.sliding_on_goo)) {
     self animmode("slide");
-  else
+  }
+  else {
     self animmode("none");
+  }
 
   self thread maps\mp\animscripts\zm_combat::main();
 }
@@ -137,11 +148,13 @@ canmelee() {
 }
 
 canmeleeinternal(state) {
-  if(!issentient(self.enemy))
+  if(!issentient(self.enemy)) {
     return false;
+  }
 
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return false;
+  }
 
   if(isDefined(self.disablemelee)) {
     assert(self.disablemelee);
@@ -150,16 +163,18 @@ canmeleeinternal(state) {
 
   yaw = abs(getyawtoenemy());
 
-  if(yaw > 60 && state != "already started" || yaw > 110)
+  if(yaw > 60 && state != "already started" || yaw > 110) {
     return false;
+  }
 
   enemypoint = self.enemy getorigin();
   vectoenemy = enemypoint - self.origin;
   self.enemydistancesq = lengthsquared(vectoenemy);
 
   if(self.enemydistancesq <= anim.meleerangesq) {
-    if(!ismeleepathclear(vectoenemy, enemypoint))
+    if(!ismeleepathclear(vectoenemy, enemypoint)) {
       return false;
+    }
 
     return true;
   }
@@ -167,15 +182,18 @@ canmeleeinternal(state) {
   if(state != "any range") {
     chargerangesq = anim.chargerangesq;
 
-    if(state == "long range")
+    if(state == "long range") {
       chargerangesq = anim.chargelongrangesq;
+    }
 
-    if(self.enemydistancesq > chargerangesq)
+    if(self.enemydistancesq > chargerangesq) {
       return false;
+    }
   }
 
-  if(state == "already started")
+  if(state == "already started") {
     return false;
+  }
 
   if(isDefined(self.check_melee_path) && self.check_melee_path) {
     if(!ismeleepathclear(vectoenemy, enemypoint)) {
@@ -185,8 +203,9 @@ canmeleeinternal(state) {
   }
 
   if(isDefined(level.can_melee)) {
-    if(!self[[level.can_melee]]())
+    if(!self[[level.can_melee]]()) {
       return false;
+    }
   }
 
   return true;
@@ -196,36 +215,43 @@ ismeleepathclear(vectoenemy, enemypoint) {
   dirtoenemy = vectornormalize((vectoenemy[0], vectoenemy[1], 0));
   meleepoint = enemypoint - (dirtoenemy[0] * 28, dirtoenemy[1] * 28, 0);
 
-  if(!self isingoal(meleepoint))
+  if(!self isingoal(meleepoint)) {
     return false;
+  }
 
-  if(self maymovetopoint(meleepoint))
+  if(self maymovetopoint(meleepoint)) {
     return true;
+  }
 
   trace1 = bulletTrace(self.origin + vectorscale((0, 0, 1), 20.0), meleepoint + vectorscale((0, 0, 1), 20.0), 1, self);
   trace2 = bulletTrace(self.origin + vectorscale((0, 0, 1), 72.0), meleepoint + vectorscale((0, 0, 1), 72.0), 1, self);
 
-  if(isDefined(trace1["fraction"]) && trace1["fraction"] == 1 && isDefined(trace2["fraction"]) && trace2["fraction"] == 1)
+  if(isDefined(trace1["fraction"]) && trace1["fraction"] == 1 && isDefined(trace2["fraction"]) && trace2["fraction"] == 1) {
     return true;
+  }
 
-  if(isDefined(trace1["entity"]) && trace1["entity"] == self.enemy && isDefined(trace2["entity"]) && trace2["entity"] == self.enemy)
+  if(isDefined(trace1["entity"]) && trace1["entity"] == self.enemy && isDefined(trace2["entity"]) && trace2["entity"] == self.enemy) {
     return true;
+  }
 
   if(isDefined(level.zombie_melee_in_water) && level.zombie_melee_in_water) {
-    if(isDefined(trace1["surfacetype"]) && trace1["surfacetype"] == "water" && isDefined(trace2["fraction"]) && trace2["fraction"] == 1)
+    if(isDefined(trace1["surfacetype"]) && trace1["surfacetype"] == "water" && isDefined(trace2["fraction"]) && trace2["fraction"] == 1) {
       return true;
+    }
   }
 
   return false;
 }
 
 set_zombie_melee_anim_state(zombie) {
-  if(isDefined(level.melee_anim_state))
+  if(isDefined(level.melee_anim_state)) {
     melee_anim_state = self[[level.melee_anim_state]]();
+  }
 
   if(!isDefined(melee_anim_state)) {
-    if(!zombie.has_legs && zombie.a.gib_ref == "no_legs")
+    if(!zombie.has_legs && zombie.a.gib_ref == "no_legs") {
       melee_anim_state = "zm_stumpy_melee";
+    }
     else {
       switch (zombie.zombie_move_speed) {
         case "walk":

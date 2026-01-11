@@ -23,8 +23,9 @@ main() {
 }
 
 intro() {
-  if(!common_scripts\utility::flag("las_vegas_transient_hotel_tr_loaded"))
+  if(!common_scripts\utility::flag("las_vegas_transient_hotel_tr_loaded")) {
     common_scripts\utility::flag_wait("las_vegas_transient_hotel_tr_loaded");
+  }
 
   intro_ambush();
   drag();
@@ -43,8 +44,9 @@ after_transient() {
 creepwalk() {
   var_0 = ["keegan", "hesh", "merrick", "elias"];
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   creepwalk_anims(var_2);
+  }
 }
 
 #using_animtree("generic_human");
@@ -176,21 +178,26 @@ elias_death_fail(var_0) {
 }
 
 rorke_scripted_fire(var_0) {
-  if(!isDefined(var_0.scripted_fire_count))
+  if(!isDefined(var_0.scripted_fire_count)) {
     var_0.scripted_fire_count = 0;
+  }
 
-  if(common_scripts\utility::flag("elias_death_end") && var_0.scripted_fire_count < 3)
+  if(common_scripts\utility::flag("elias_death_end") && var_0.scripted_fire_count < 3) {
     var_0.scripted_fire_count = 3;
+  }
 
   var_0.scripted_fire_count++;
   var_1 = var_0 gettagorigin("tag_flash");
 
-  if(var_0.scripted_fire_count == 7)
+  if(var_0.scripted_fire_count == 7) {
     thread common_scripts\utility::play_sound_in_space("scn_weap_mp443_finale_rorke", var_1);
-  else if(var_0.scripted_fire_count == 1)
+  }
+  else if(var_0.scripted_fire_count == 1) {
     thread common_scripts\utility::play_sound_in_space("scn_weap_mp443_shoot_logan", var_1);
-  else
+  }
+  else {
     thread common_scripts\utility::play_sound_in_space("scn_weap_mp443_fire_rorke", var_1);
+  }
 
   var_2 = [];
   var_2[var_2.size] = [common_scripts\utility::getfx("close_muzzleflash"), "tag_flash"];
@@ -204,8 +211,9 @@ rorke_scripted_fire(var_0) {
     playFX(var_4[0], var_1, var_6, var_7);
   }
 
-  if(var_0.scripted_fire_count == 1)
+  if(var_0.scripted_fire_count == 1) {
     thread rorke_shoots_player();
+  }
   else if(var_0.scripted_fire_count == 2) {
     level.player.smash_use_count = 25;
     level.elias thread maps\_utility::play_sound_on_tag("vegas_els_death_efforts_2_1", "j_head");
@@ -221,10 +229,12 @@ rorke_scripted_fire(var_0) {
     var_9 = level.rorke gettagorigin("tag_flash");
     var_10 = distance(var_1, var_9);
 
-    if(var_0.scripted_fire_count < 4)
+    if(var_0.scripted_fire_count < 4) {
       var_5 = vectortoangles(var_1 - var_9);
-    else
+    }
+    else {
       var_5 = level.rorke gettagangles("tag_flash");
+    }
 
     var_6 = anglesToForward(var_5);
     var_1 = var_9 + var_6 * var_10;
@@ -292,8 +302,9 @@ rorke_shoots_player() {
   playFX(common_scripts\utility::getfx("blood_impact"), var_5, var_7);
   common_scripts\utility::flag_wait("elias_death_done");
 
-  foreach(var_3 in level.player.hudstuff)
+  foreach(var_3 in level.player.hudstuff) {
   var_3 destroy();
+  }
 }
 
 blood_overlay_thread(var_0) {
@@ -331,8 +342,9 @@ player_hurt_overlay(var_0) {
 }
 
 rescue() {
-  if(!common_scripts\utility::flag("las_vegas_transient_hotel_tr_loaded"))
+  if(!common_scripts\utility::flag("las_vegas_transient_hotel_tr_loaded")) {
     common_scripts\utility::flag_wait("las_vegas_transient_hotel_tr_loaded");
+  }
 
   level.scr_anim["merrick"]["rescue"] = % vegas_rescue_merrick_start;
   level.scr_anim["merrick"]["rescue_end"] = % vegas_rescue_merrick_end;
@@ -369,10 +381,12 @@ leave_gun(var_0) {
 }
 
 get_rescue_gun(var_0) {
-  if(isDefined(level.rescue_gun))
+  if(isDefined(level.rescue_gun)) {
     var_1 = level.rescue_gun.model;
-  else
+  }
+  else {
     var_1 = getweaponmodel(var_0.sidearm);
+  }
 
   return var_1;
 }
@@ -393,10 +407,12 @@ rescue_drop_gun(var_0) {
 
   level.rescue_gun.ent = var_4;
 
-  if(var_0.weapon == var_0.sidearm)
+  if(var_0.weapon == var_0.sidearm) {
     var_0 animscripts\shared::placeweaponon(level.rescue_gun.weapon, "none");
-  else
+  }
+  else {
     var_0 detach(var_3, "tag_weapon_right");
+  }
 }
 
 rescue_pickup_gun(var_0) {
@@ -506,8 +522,9 @@ radio_holster(var_0) {
 kitchen_entry_doors_open(var_0) {
   var_1 = getEntArray("kitchen_entry_doors", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3.og_angles = var_3.angles;
+  }
 
   thread maps\las_vegas_code::doors_open(var_1, 1.4, "double_door_wood_creeky", -110, 0, 0.5);
   common_scripts\utility::flag_set("kitchen_doors_open");
@@ -751,14 +768,16 @@ entrance_getup_hand_fx(var_0, var_1) {
   var_2 = ["thumb", "index", "mid", "ring", "pinky"];
 
   foreach(var_4 in var_2) {
-    for(var_5 = 0; var_5 < 3; var_5++)
+    for(var_5 = 0; var_5 < 3; var_5++) {
       level thread fx_on_hand_thread("J_" + var_4 + "_LE_" + var_5, "fx_on_hand_" + var_5);
+    }
   }
 
   var_7 = ["j_sleave_reshape_top_le_1", "j_pinkypalm_le", "j_ringpalm_le", "j_webbing_le", "j_sleave_reshape_bottom_le_1", "j_sleave_reshape_bottom_le_2"];
 
-  foreach(var_9 in var_7)
+  foreach(var_9 in var_7) {
   level thread fx_on_hand_thread(var_9, "fx_on_wrist");
+  }
 
   thread fx_forearm_thread("fx_on_wrist", "le");
   common_scripts\utility::flag_set("fx_on_wrist");
@@ -788,11 +807,13 @@ fx_right_hand_getup(var_0) {
 fx_forearm_thread(var_0, var_1, var_2) {
   var_3 = undefined;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 = gettime() + var_2 * 1000;
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     common_scripts\utility::flag_wait(var_0);
+  }
 
   for(;;) {
     if(isDefined(var_0) && !common_scripts\utility::flag(var_0)) {
@@ -817,8 +838,9 @@ fx_forearm_thread(var_0, var_1, var_2) {
 
 fx_on_hand_thread(var_0, var_1, var_2) {
   if(isDefined(var_1)) {
-    if(!common_scripts\utility::flag_exist(var_1))
+    if(!common_scripts\utility::flag_exist(var_1)) {
       common_scripts\utility::flag_init(var_1);
+    }
 
     common_scripts\utility::flag_wait(var_1);
   }
@@ -856,15 +878,17 @@ ai_kill(var_0) {
   if(!isalive(var_0)) {
     return;
   }
-  if(isDefined(var_0.magic_bullet_shield) && var_0.magic_bullet_shield == 1)
+  if(isDefined(var_0.magic_bullet_shield) && var_0.magic_bullet_shield == 1) {
     var_0 maps\_utility::stop_magic_bullet_shield();
+  }
 
   var_0.allowdeath = 1;
   var_0.a.nodeath = 1;
   var_0 maps\_utility::set_battlechatter(0);
 
-  if(isDefined(var_0.headshotfx))
+  if(isDefined(var_0.headshotfx)) {
     playFX(common_scripts\utility::getfx("headshot_blood"), var_0 gettagorigin("j_head") + (0, 0, 5));
+  }
 
   var_0 kill();
 }
@@ -886,15 +910,17 @@ bar_sacrifice_kill(var_0) {
   var_0 startragdoll();
   common_scripts\utility::waitframe();
 
-  if(isDefined(var_0.magic_bullet_shield) && var_0.magic_bullet_shield == 1)
+  if(isDefined(var_0.magic_bullet_shield) && var_0.magic_bullet_shield == 1) {
     var_0 maps\_utility::stop_magic_bullet_shield();
+  }
 
   var_0.allowdeath = 1;
   var_0.a.nodeath = 1;
   var_0 maps\_utility::set_battlechatter(0);
 
-  if(isDefined(var_0.headshotfx))
+  if(isDefined(var_0.headshotfx)) {
     playFX(common_scripts\utility::getfx("headshot_blood"), var_0 gettagorigin("j_head") + (0, 0, 5));
+  }
 
   var_0 kill();
 }
@@ -924,8 +950,9 @@ hallway_roll_flash(var_0) {
   var_6 = var_5 * 2000;
   var_7 = 1.5;
 
-  foreach(var_9 in level.heroes)
+  foreach(var_9 in level.heroes) {
   var_9 maps\_utility::setflashbangimmunity(1);
+  }
 
   var_11 = magicgrenademanual("flash_grenade", var_1, var_6, var_7);
   wait 0.5;
@@ -940,8 +967,9 @@ hallway_roll_flash(var_0) {
   var_11 delete();
   wait 1;
 
-  foreach(var_9 in level.heroes)
+  foreach(var_9 in level.heroes) {
   var_9 maps\_utility::setflashbangimmunity(0);
+  }
 }
 
 stop_music(var_0) {}
@@ -1024,8 +1052,9 @@ outside_animated_props() {
     var_16 = var_7 / (var_15 * 10);
     var_17 = gettime() + var_16 * 1000;
 
-    if(var_17 < var_12)
+    if(var_17 < var_12) {
       wait((var_12 - var_17 + 100) * 0.001);
+    }
 
     var_18 = randomfloatrange(0.5, 1);
 
@@ -1088,8 +1117,9 @@ print_rate(var_0) {
   self notify("print_rate");
   self endon("print_rate");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 get_x() {
@@ -1103,8 +1133,9 @@ structs_to_animated_models(var_0) {
     var_4 = spawn("script_model", var_3.origin);
     var_4.angles = (0, 0, 0);
 
-    if(isDefined(var_3.angles))
+    if(isDefined(var_3.angles)) {
       var_4.angles = var_3.angles;
+    }
 
     var_4 setModel(var_3.script_modelname);
     var_4.animation = var_3.animation;
@@ -1185,8 +1216,9 @@ init_wounded_archetype() {
     if(var_6 == 5) {
       continue;
     }
-    foreach(var_9, var_8 in var_5)
+    foreach(var_9, var_8 in var_5) {
     set_trans_dist_angles("wounded", var_9, var_6);
+    }
   }
 }
 
@@ -1198,17 +1230,20 @@ set_trans_dist_angles(var_0, var_1, var_2) {
       anim.covertranslongestdist[var_1] = 0;
       var_3 = lengthsquared(anim.archetypes[var_0]["cover_trans_dist"][var_1][var_2]);
 
-      if(anim.covertranslongestdist[var_1] < var_3)
+      if(anim.covertranslongestdist[var_1] < var_3) {
         anim.covertranslongestdist[var_1] = sqrt(var_3);
+      }
     }
   }
 
   if(isDefined(anim.archetypes[var_0]["cover_exit"][var_1])) {
     if(isDefined(anim.archetypes[var_0]["cover_exit"][var_1][var_2])) {
-      if(animhasnotetrack(anim.archetypes[var_0]["cover_exit"][var_1][var_2], "code_move"))
+      if(animhasnotetrack(anim.archetypes[var_0]["cover_exit"][var_1][var_2], "code_move")) {
         var_4 = getnotetracktimes(anim.archetypes[var_0]["cover_exit"][var_1][var_2], "code_move")[0];
-      else
+      }
+      else {
         var_4 = 1;
+      }
 
       anim.archetypes[var_0]["cover_exit_dist"][var_1][var_2] = getmovedelta(anim.archetypes[var_0]["cover_exit"][var_1][var_2], 0, var_4);
       anim.archetypes[var_0]["cover_exit_angles"][var_1][var_2] = getangledelta(anim.archetypes[var_0]["cover_exit"][var_1][var_2], 0, 1);
@@ -1223,11 +1258,13 @@ detach_gun_custom(var_0) {
   var_4 = spawn("script_model", var_2);
   var_4.angles = var_3;
 
-  if(isDefined(var_0.detach_gun_angles))
+  if(isDefined(var_0.detach_gun_angles)) {
     var_4.angles = var_0.detach_gun_angles;
+  }
 
-  if(isDefined(var_0.detach_gun_origin))
+  if(isDefined(var_0.detach_gun_origin)) {
     var_4.origin = var_0.detach_gun_origin;
+  }
 
   var_5 = getweaponmodel(var_0.weapon);
   var_4 setModel(var_5);
@@ -1244,9 +1281,11 @@ attach_gun_custom(var_0) {
   var_0.dropweapon = 1;
   var_0 animscripts\shared::placeweaponon(var_0.weapon, "right");
 
-  if(isDefined(var_0.detach_gun_angles))
+  if(isDefined(var_0.detach_gun_angles)) {
     var_0.detach_gun_angles = undefined;
+  }
 
-  if(isDefined(var_0.detach_gun_origin))
+  if(isDefined(var_0.detach_gun_origin)) {
     var_0.detach_gun_origin = undefined;
+  }
 }

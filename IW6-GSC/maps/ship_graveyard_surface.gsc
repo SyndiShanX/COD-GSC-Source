@@ -82,10 +82,12 @@ main() {
   var_5 linkto(level.player);
   var_5 makeusable();
 
-  if(!level.console)
+  if(!level.console) {
     var_5 sethintstring(&"SHIP_GRAVEYARD_HINT_DIVE");
-  else
+  }
+  else {
     var_5 sethintstring(&"SHIP_GRAVEYARD_HINT_DIVE_CONSOLE");
+  }
 
   var_5 common_scripts\utility::trigger_on();
   var_5 waittill("trigger");
@@ -124,8 +126,9 @@ main() {
   level.player freezecontrols(0);
   level.player allowjump(1);
 
-  foreach(var_8 in var_4)
+  foreach(var_8 in var_4) {
   var_8 delete();
+  }
 
   level.heli delete();
   level.baker maps\_utility::enable_pain();
@@ -253,8 +256,9 @@ spotlight_think() {
   thread spotlight_loop(var_6);
   self waittill("death");
 
-  foreach(var_8 in var_6)
+  foreach(var_8 in var_6) {
   var_8 delete();
+  }
 }
 
 spotlight_loop(var_0) {
@@ -277,8 +281,9 @@ bobbing_jitter_cleanup(var_0) {
 bobbing_updown(var_0) {
   var_1 = var_0.bob_ref;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = common_scripts\utility::spawn_tag_origin();
+  }
 
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
@@ -351,14 +356,16 @@ pitch_and_roll() {
   var_1 = (0, var_0.angles[1], 0);
   var_2 = 20;
 
-  if(isDefined(var_0.script_max_left_angle))
+  if(isDefined(var_0.script_max_left_angle)) {
     var_2 = var_0.script_max_left_angle;
+  }
 
   var_3 = var_2 * 0.5;
   var_4 = 4;
 
-  if(isDefined(var_0.script_duration))
+  if(isDefined(var_0.script_duration)) {
     var_4 = var_0.script_duration;
+  }
 
   var_5 = var_4 * 0.5;
   var_0 = undefined;
@@ -397,8 +404,9 @@ bobbing_player_brush(var_0, var_1) {
   var_0.start_origin = var_0.origin;
   var_0.ref_origin = var_0.origin;
 
-  if(var_1 <= 0)
+  if(var_1 <= 0) {
     level.player thread bobbing_ripple(var_0);
+  }
 
   for(;;) {
     var_2 = level.player.origin;
@@ -415,8 +423,9 @@ bobbing_ally(var_0) {
   var_1.angles = var_0.angles;
   var_0 show();
 
-  if(isai(var_0))
+  if(isai(var_0)) {
     var_0 forceteleport(var_1.origin, var_1.angles);
+  }
 
   var_0 linkto(var_1, "tag_origin");
   var_0 thread bobbing_actor(var_1, 0.5);
@@ -431,8 +440,9 @@ lightning_flash(var_0) {
   }
   var_1 = randomintrange(1, 4);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = (-20, 60, 0);
+  }
 
   common_scripts\utility::flag_set("lightning_flashing");
 
@@ -499,17 +509,22 @@ fx_screen_raindrops() {
       }
 
       if(common_scripts\utility::flag("fx_screen_raindrops")) {
-        if(!var_0 && var_1[0] < -55 && randomint(100) < 20)
+        if(!var_0 && var_1[0] < -55 && randomint(100) < 20) {
           level.player setwatersheeting(1, 1.0);
+        }
 
-        if(var_1[0] < -40)
+        if(var_1[0] < -40) {
           playFXOnTag(level._effect["abv_raindrops_screen_20"], level.screenrain, "tag_origin");
-        else if(var_1[0] < -25)
+        }
+        else if(var_1[0] < -25) {
           playFXOnTag(level._effect["abv_raindrops_screen_10"], level.screenrain, "tag_origin");
-        else if(var_1[0] < 25)
+        }
+        else if(var_1[0] < 25) {
           playFXOnTag(level._effect["abv_raindrops_screen_5"], level.screenrain, "tag_origin");
-        else if(var_1[0] < 40)
+        }
+        else if(var_1[0] < 40) {
           playFXOnTag(level._effect["abv_raindrops_screen_3"], level.screenrain, "tag_origin");
+        }
       }
     }
 

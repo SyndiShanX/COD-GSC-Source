@@ -8,8 +8,9 @@
 #include common_scripts\utility;
 
 main() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _spawner.gsc. Function: main()\n");
+  }
   precachemodel("grenade_bag");
   / /
   level.ai_classname_in_level = [];
@@ -21,15 +22,17 @@ main() {
   array_thread(ai, ::spawn_think);
   level.ai_classname_in_level_keys = getarraykeys(level.ai_classname_in_level);
   for(i = 0; i < level.ai_classname_in_level_keys.size; i++) {
-    if(!issubstr(tolower(level.ai_classname_in_level_keys[i]), "rpg"))
+    if(!issubstr(tolower(level.ai_classname_in_level_keys[i]), "rpg")) {
       continue;
+    }
     precacheItem("rpg_player");
     break;
   }
   level.ai_classname_in_level_keys = undefined;
   run_thread_on_noteworthy("hiding_door_spawner", ::hiding_door_spawner);
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _spawner.gsc. Function: main() - COMPLETE\n");
+  }
   level thread trigger_spawner_monitor();
 }
 
@@ -53,8 +56,9 @@ check_script_char_group_ratio(spawners) {
 }
 
 has_char_group() {
-  if(isDefined(self.script_char_group))
+  if(isDefined(self.script_char_group)) {
     return true;
+  }
   return isDefined(self.script_char_index);
 }
 
@@ -255,14 +259,18 @@ trigger_spawner_spawns_guys() {
   if(!issubstr(self.classname, "actor")) {
     return;
   }
-  if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn))
+  if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn)) {
     spawned = self stalingradspawn(true);
-  else if(isDefined(self.script_noenemyinfo))
+  }
+  else if(isDefined(self.script_noenemyinfo)) {
     spawned = self dospawn(true);
-  else if(isDefined(self.script_forcespawn))
+  }
+  else if(isDefined(self.script_forcespawn)) {
     spawned = self stalingradspawn();
-  else
+  }
+  else {
     spawned = self dospawn();
+  }
   level._numTriggerSpawned++;
 }
 
@@ -446,14 +454,16 @@ dronespawn_setstruct(spawner) {
 }
 
 dronespawn_check() {
-  if(isDefined(level.dronestruct[self.classname]))
+  if(isDefined(level.dronestruct[self.classname])) {
     return true;
+  }
   return false;
 }
 
 dronespawn_setstruct_from_guy(guy) {
-  if(dronespawn_check())
+  if(dronespawn_check()) {
     return;
+  }
   struct = spawnStruct();
   size = guy getattachsize();
   struct.attachedmodels = [];
@@ -552,8 +562,9 @@ spawn_think(targetname) {
   self.finished_spawning = true;
   self notify("finished spawning");
   assert(isDefined(self.team));
-  if(self.team == "allies" && !isDefined(self.script_nofriendlywave))
+  if(self.team == "allies" && !isDefined(self.script_nofriendlywave)) {
     self thread friendlydeath_thread();
+  }
 }
 
 run_spawn_functions() {
@@ -563,35 +574,45 @@ run_spawn_functions() {
   }
   for(i = 0; i < self.spawn_funcs.size; i++) {
     func = self.spawn_funcs[i];
-    if(isDefined(func["param4"]))
+    if(isDefined(func["param4"])) {
       thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
-    else
+    }
+    else {
     if(isDefined(func["param3"]))
+    }
       thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
-    else
+    else {
     if(isDefined(func["param2"]))
+    }
       thread[[func["function"]]](func["param1"], func["param2"]);
-    else
+    else {
     if(isDefined(func["param1"]))
+    }
       thread[[func["function"]]](func["param1"]);
-    else
+    else {
       thread[[func["function"]]]();
+    }
   }
   for(i = 0; i < level.spawn_funcs[self.team].size; i++) {
     func = level.spawn_funcs[self.team][i];
-    if(isDefined(func["param4"]))
+    if(isDefined(func["param4"])) {
       thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
-    else
+    }
+    else {
     if(isDefined(func["param3"]))
+    }
       thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
-    else
+    else {
     if(isDefined(func["param2"]))
+    }
       thread[[func["function"]]](func["param1"], func["param2"]);
-    else
+    else {
     if(isDefined(func["param1"]))
+    }
       thread[[func["function"]]](func["param1"]);
-    else
+    else {
       thread[[func["function"]]]();
+    }
   }
   self.saved_spawn_functions = self.spawn_funcs;
   self.spawn_funcs = undefined;
@@ -705,8 +726,9 @@ spawn_think_action(targetname) {
   } else {
     self SetThreatBiasGroup("axis");
   }
-  if(self.type == "human")
+  if(self.type == "human") {
     assertEx(self.pathEnemyLookAhead == 0 && self.pathEnemyFightDist == 0, "Tried to change pathenemyFightDist or pathenemyLookAhead on an AI before running spawn_failed on guy with export " + self.export);
+  }
   set_default_pathenemy_settings();
   self.heavy_machine_gunner = IsSubStr(self.classname, "mgportable") ||
     IsSubStr(self.classname, "30cal") ||
@@ -967,8 +989,9 @@ go_to_node(node, goal_type, optional_arrived_at_node_func) {
 empty_arrived_func(node) {}
 get_least_used_from_array(array) {
   assertex(array.size > 0, "Somehow array had zero entrees");
-  if(array.size == 1)
+  if(array.size == 1) {
     return array[0];
+  }
   targetname = array[0].targetname;
   if(!isDefined(level.go_to_node_arrays[targetname])) {
     level.go_to_node_arrays[targetname] = array;
@@ -989,22 +1012,27 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
   self endon("death");
   for(;;) {
     node = get_least_used_from_array(node);
-    if(node_has_radius(node))
+    if(node_has_radius(node)) {
       self.goalradius = node.radius;
-    else
+    }
+    else {
       self.goalradius = level.default_goalradius;
-    if(isDefined(node.height))
+    }
+    if(isDefined(node.height)) {
       self.goalheight = node.height;
-    else
+    }
+    else {
       self.goalheight = level.default_goalheight;
+    }
     [[set_goal_func_quits]](node);
     self waittill("goal");
     [[optional_arrived_at_node_func]](node);
     if(isDefined(node.script_flag_set)) {
       flag_set(node.script_flag_set);
     }
-    if(targets_and_uses_turret(node))
+    if(targets_and_uses_turret(node)) {
       return true;
+    }
     node script_delay();
     if(isDefined(node.script_flag_wait)) {
       flag_wait(node.script_flag_wait);
@@ -1031,22 +1059,26 @@ go_to_node_set_goal_node(node) {
 }
 
 targets_and_uses_turret(node) {
-  if(!isDefined(node.target))
+  if(!isDefined(node.target)) {
     return false;
+  }
   turrets = getEntArray(node.target, "targetname");
-  if(!turrets.size)
+  if(!turrets.size) {
     return false;
+  }
   turret = turrets[0];
-  if(turret.classname != "misc_turret")
+  if(turret.classname != "misc_turret") {
     return false;
+  }
   thread use_a_turret(turret);
   return true;
 }
 
 remove_crawled(ent) {
   waittillframeend;
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent.crawled = undefined;
+  }
 }
 
 crawl_target_and_init_flags(ent, get_func) {
@@ -1089,8 +1121,9 @@ get_node_funcs_based_on_target(node, goal_type) {
   set_goal_func_quits["origin"] = ::go_to_node_set_goal_pos;
   set_goal_func_quits["struct"] = ::go_to_node_set_goal_pos;
   set_goal_func_quits["node"] = ::go_to_node_set_goal_node;
-  if(!isDefined(goal_type))
+  if(!isDefined(goal_type)) {
     goal_type = "node";
+  }
   array = [];
   if(isDefined(node)) {
     array["node"][0] = node;
@@ -1602,8 +1635,9 @@ set_spawncount(count) {
 }
 
 friendlydeath_thread() {
-  if(!isDefined(level.totalfriends))
+  if(!isDefined(level.totalfriends)) {
     level.totalfriends = 0;
+  }
   level.totalfriends++;
   self waittill("death");
   level notify("friendly_died");
@@ -1642,10 +1676,12 @@ friendly_wave_masterthread() {
           num = 0;
         }
         spawn[num].count = 1;
-        if(isDefined(spawn[num].script_noenemyinfo) && isDefined(spawn[num].script_forcespawn))
+        if(isDefined(spawn[num].script_noenemyinfo) && isDefined(spawn[num].script_forcespawn)) {
           spawned = spawn[num] stalingradspawn(true);
-        else if(isDefined(spawn[num].script_noenemyinfo))
+        }
+        else if(isDefined(spawn[num].script_noenemyinfo)) {
           spawned = spawn[num] dospawn(true);
+        }
         else if(isDefined(spawn[num].script_forcespawn)) {
           spawned = spawn[num] Stalingradspawn();
         } else {
@@ -1960,16 +1996,21 @@ showStart(origin, angles, anime) {
 
 spawnWaypointFriendlies() {
   self.count = 1;
-  if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn))
+  if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn)) {
     spawn = self stalingradspawn(true);
-  else if(isDefined(self.script_noenemyinfo))
+  }
+  else if(isDefined(self.script_noenemyinfo)) {
     spawn = self dospawn(true);
-  else if(isDefined(self.script_forcespawn))
+  }
+  else if(isDefined(self.script_forcespawn)) {
     spawn = self stalingradspawn();
-  else
+  }
+  else {
     spawn = self dospawn();
-  if(spawn_failed(spawn))
+  }
+  if(spawn_failed(spawn)) {
     return;
+  }
   spawn.friendlyWaypoint = true;
 }
 
@@ -2056,8 +2097,9 @@ select_random_spawn(spawners) {
   keys = getarraykeys(groups);
   num_that_lives = random(keys);
   for(i = 0; i < spawners.size; i++) {
-    if(spawners[i].script_randomspawn != num_that_lives)
+    if(spawners[i].script_randomspawn != num_that_lives) {
       spawners[i] delete();
+    }
   }
 }
 
@@ -2078,16 +2120,18 @@ flood_and_secure_spawner(instantRespawn) {
   if(isDefined(target)) {
     possibleSpawners = getEntArray(target, "targetname");
     for(i = 0; i < possibleSpawners.size; i++) {
-      if(!issubstr(possibleSpawners[i].classname, "actor"))
+      if(!issubstr(possibleSpawners[i].classname, "actor")) {
         continue;
+      }
       spawners[spawners.size] = possibleSpawners[i];
     }
   }
   ent = spawnStruct();
   org = self.origin;
   flood_and_secure_spawner_think(ent, spawners.size > 0, instantRespawn);
-  if(isalive(ent.ai))
+  if(isalive(ent.ai)) {
     ent.ai waittill("death");
+  }
   if(!isDefined(target)) {
     return;
   }
@@ -2103,8 +2147,9 @@ flood_and_secure_spawner(instantRespawn) {
     newTarget = target;
     if(isDefined(possibleSpawners[i].target)) {
       targetEnt = getent(possibleSpawners[i].target, "targetname");
-      if(!isDefined(targetEnt) || !issubstr(targetEnt.classname, "actor"))
+      if(!isDefined(targetEnt) || !issubstr(targetEnt.classname, "actor")) {
         newTarget = possibleSpawners[i].target;
+      }
     }
     possibleSpawners[i].target = newTarget;
     possibleSpawners[i] thread flood_and_secure_spawner(instantRespawn);
@@ -2117,20 +2162,24 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
   assert(isDefined(instantRespawn));
   self endon("death");
   count = self.count;
-  if(!oneShot)
+  if(!oneShot) {
     oneshot = (isDefined(self.script_noteworthy) && self.script_noteworthy == "delete");
+  }
   self.count = 2;
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     delay = self.script_delay;
-  else
+  }
+  else {
     delay = 0;
+  }
   for(;;) {
     self waittill("flood_begin");
     if(self.playerTriggered) {
       break;
     }
-    if(delay)
+    if(delay) {
       continue;
+    }
     break;
   }
   closest_player = get_closest_player(self.origin);
@@ -2140,39 +2189,49 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
     self.trueCount = count;
     self.count = 2;
     wait(delay);
-    if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn))
+    if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn)) {
       spawn = self stalingradspawn(true);
-    else if(isDefined(self.script_noenemyinfo))
+    }
+    else if(isDefined(self.script_noenemyinfo)) {
       spawn = self dospawn(true);
-    else if(isDefined(self.script_forcespawn))
+    }
+    else if(isDefined(self.script_forcespawn)) {
       spawn = self stalingradspawn();
-    else
+    }
+    else {
       spawn = self dospawn();
+    }
     if(spawn_failed(spawn)) {
       playerKill = false;
-      if(delay < 2)
+      if(delay < 2) {
         wait(2);
+      }
       continue;
     } else {
       thread addToWaveSpawner(spawn);
       spawn thread flood_and_secure_spawn(self);
-      if(isDefined(self.script_accuracy))
+      if(isDefined(self.script_accuracy)) {
         spawn.baseAccuracy = self.script_accuracy;
+      }
       ent.ai = spawn;
       ent notify("got_ai");
       self waittill("spawn_died", deleted, playerKill);
-      if(delay > 2)
+      if(delay > 2) {
         delay = randomint(4) + 2;
-      else
+      }
+      else {
         delay = 0.5 + randomfloat(0.5);
+      }
     }
     if(deleted) {
       waittillRestartOrDistance(dist);
     } else {
-      if(playerWasNearby(playerKill || oneShot, ent.ai))
+      if(playerWasNearby(playerKill || oneShot, ent.ai)) {
         count--;
-      if(!instantRespawn)
+      }
+      if(!instantRespawn) {
         waitUntilWaveRelease();
+      }
     }
   }
   prof_end("flood_and_secure_spawner_think");
@@ -2698,8 +2757,9 @@ camper_trigger_think(trigger) {
   assertEX(nodes.size >= spawners.size, "camper_spawner with less nodes than spawners");
   trigger waittill("trigger");
   nodes = array_randomize(nodes);
-  for(i = 0; i < nodes.size; i++)
+  for(i = 0; i < nodes.size; i++) {
     nodes[i].claimed = false;
+  }
   j = 0;
   for(i = 0; i < spawners.size; i++) {
     spawner = spawners[i];
@@ -2709,8 +2769,9 @@ camper_trigger_think(trigger) {
     if(isDefined(spawner.script_spawn_here)) {
       continue;
     }
-    while(isDefined(nodes[j].script_noteworthy) && nodes[j].script_noteworthy == "dont_spawn")
+    while(isDefined(nodes[j].script_noteworthy) && nodes[j].script_noteworthy == "dont_spawn") {
       j++;
+    }
     spawner.origin = nodes[j].origin;
     spawner.angles = nodes[j].angles;
     spawner add_spawn_function(::claim_a_node, nodes[j]);
@@ -2774,16 +2835,19 @@ claim_a_node(claimed_node, old_claimed_node) {
   self setgoalnode(claimed_node);
   self.claimed_node = claimed_node;
   claimed_node.claimed = true;
-  if(isDefined(old_claimed_node))
+  if(isDefined(old_claimed_node)) {
     old_claimed_node.claimed = false;
+  }
 }
 
 find_unclaimed_node(nodes) {
   for(i = 0; i < nodes.size; i++) {
-    if(nodes[i].claimed)
+    if(nodes[i].claimed) {
       continue;
-    else
+    }
+    else {
       return nodes[i];
+    }
   }
   return undefined;
 }
@@ -2857,14 +2921,18 @@ flood_spawner_think(trigger) {
     while(!(self ok_to_trigger_spawn())) {
       wait_network_frame();
     }
-    if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn))
+    if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn)) {
       soldier = self stalingradspawn(true);
-    else if(isDefined(self.script_noenemyinfo))
+    }
+    else if(isDefined(self.script_noenemyinfo)) {
       soldier = self dospawn(true);
-    else if(isDefined(self.script_forcespawn))
+    }
+    else if(isDefined(self.script_forcespawn)) {
       soldier = self stalingradspawn();
-    else
+    }
+    else {
       soldier = self dospawn();
+    }
     if(spawn_failed(soldier)) {
       wait(2);
       continue;
@@ -2895,8 +2963,9 @@ flood_spawner_think(trigger) {
 }
 
 player_saw_kill(guy, attacker) {
-  if(isDefined(self.script_force_count))
+  if(isDefined(self.script_force_count)) {
     if(self.script_force_count)
+  }
       return true;
   if(!isDefined(guy)) {
     return false;
@@ -3087,8 +3156,9 @@ traceShow(org) {
 }
 
 show_bad_path() {
-  if(getdebugdvar("debug_badpath") == "")
+  if(getdebugdvar("debug_badpath") == "") {
     setdvar("debug_badpath", "");
+  }
   self endon("death");
   last_bad_path_time = -5000;
   bad_path_count = 0;
@@ -3250,32 +3320,44 @@ spawner_dronespawn(spawner) {
   drone makefakeai();
   attachedmodels = struct.attachedmodels;
   attachedtags = struct.attachedtags;
-  for(i = 0; i < attachedmodels.size; i++)
+  for(i = 0; i < attachedmodels.size; i++) {
     drone attach(attachedmodels[i], attachedtags[i]);
-  if(isDefined(spawner.script_startingposition))
+  }
+  if(isDefined(spawner.script_startingposition)) {
     drone.script_startingposition = spawner.script_startingposition;
-  if(isDefined(spawner.script_noteworthy))
+  }
+  if(isDefined(spawner.script_noteworthy)) {
     drone.script_noteworthy = spawner.script_noteworthy;
-  if(isDefined(spawner.script_deleteai))
+  }
+  if(isDefined(spawner.script_deleteai)) {
     drone.script_deleteai = spawner.script_deleteai;
-  if(isDefined(spawner.script_linkto))
+  }
+  if(isDefined(spawner.script_linkto)) {
     drone.script_linkto = spawner.script_linkto;
-  if(isDefined(spawner.script_moveoverride))
+  }
+  if(isDefined(spawner.script_moveoverride)) {
     drone.script_moveoverride = spawner.script_moveoverride;
-  if(issubstr(spawner.classname, "ally"))
+  }
+  if(issubstr(spawner.classname, "ally")) {
     drone.team = "allies";
-  else if(issubstr(spawner.classname, "enemy"))
+  }
+  else if(issubstr(spawner.classname, "enemy")) {
     drone.team = "axis";
-  else
+  }
+  else {
     drone.team = "neutral";
-  if(isDefined(spawner.target))
+  }
+  if(isDefined(spawner.target)) {
     drone.target = spawner.target;
+  }
   drone.spawner = spawner;
   assert(isDefined(drone));
-  if(isDefined(spawner.script_noteworthy) && spawner.script_noteworthy == "drone_delete_on_unload")
+  if(isDefined(spawner.script_noteworthy) && spawner.script_noteworthy == "drone_delete_on_unload") {
     drone.drone_delete_on_unload = true;
-  else
+  }
+  else {
     drone.drone_delete_on_unload = false;
+  }
   spawner notify("drone_spawned", drone);
   return drone;
 }
@@ -3317,10 +3399,12 @@ hiding_door_spawner() {
   door_clip = getent(door_model.target, "targetname");
   assert(isDefined(door_model.target));
   pushPlayerClip = undefined;
-  if(isDefined(door_clip.target))
+  if(isDefined(door_clip.target)) {
     pushPlayerClip = getent(door_clip.target, "targetname");
-  if(isDefined(pushPlayerClip))
+  }
+  if(isDefined(pushPlayerClip)) {
     door_org thread hiding_door_guy_pushplayer(pushPlayerClip);
+  }
   door_model delete();
   door = spawn_anim_model("hiding_door");
   door_org thread anim_first_frame_solo(door, "fire_3");
@@ -3331,13 +3415,15 @@ hiding_door_spawner() {
   trigger = undefined;
   if(isDefined(self.target)) {
     trigger = getent(self.target, "targetname");
-    if(!issubstr(trigger.classname, "trigger"))
+    if(!issubstr(trigger.classname, "trigger")) {
       trigger = undefined;
+    }
   }
   if(!isDefined(self.script_flag_wait) && !isDefined(trigger)) {
     radius = 200;
-    if(isDefined(self.radius))
+    if(isDefined(self.radius)) {
       radius = self.radius;
+    }
     trigger = spawn("trigger_radius", door_org.origin, 0, radius, 48);
   }
   self add_spawn_function(::hiding_door_guy, door_org, trigger, door, door_clip);
@@ -3405,10 +3491,12 @@ hiding_door_guy_grenade_throw(guy) {
   startOrigin = guy getTagOrigin("J_Wrist_RI");
   player = get_closest_player(guy.origin);
   strength = (distance(player.origin, guy.origin) * 2.0);
-  if(strength < 300)
+  if(strength < 300) {
     strength = 300;
-  if(strength > 1000)
+  }
+  if(strength > 1000) {
     strength = 1000;
+  }
   vector = vectorNormalize(player.origin - guy.origin);
   velocity = vectorScale(vector, strength);
   guy magicGrenadeManual(startOrigin, velocity, randomfloatrange(3.0, 5.0));
@@ -3416,8 +3504,9 @@ hiding_door_guy_grenade_throw(guy) {
 
 hiding_door_death(door, door_org, guy, door_clip) {
   guy waittill("damage");
-  if(!isalive(guy))
+  if(!isalive(guy)) {
     return;
+  }
   guys = [];
   guys[guys.size] = door;
   guys[guys.size] = guy;

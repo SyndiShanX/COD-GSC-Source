@@ -15,8 +15,9 @@ main() {
   self.a.script = "scripted";
   self.codescripted = undefined;
 
-  if(isDefined(self.deathstring_passed))
+  if(isDefined(self.deathstring_passed)) {
     self.deathstring = self.deathstring_passed;
+  }
 
   self waittill("killanimscript");
 }
@@ -27,8 +28,10 @@ init(origin, angles, animstate, animsubstate, animmode) {
   self.codescripted["animState"] = animstate;
   self.codescripted["animSubState"] = animsubstate;
 
-  if(isDefined(animmode))
+  if(isDefined(animmode)) {
     self.codescripted["AnimMode"] = animmode;
-  else
+  }
+  else {
     self.codescripted["AnimMode"] = "normal";
+  }
 }

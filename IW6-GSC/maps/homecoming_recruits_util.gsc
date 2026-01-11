@@ -4,48 +4,58 @@
 *********************************************/
 
 setup_player_for_animated_sequence(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
-
-  if(var_0) {
-    if(!isDefined(var_1))
-      var_1 = 60;
   }
 
-  if(!isDefined(var_2))
+  if(var_0) {
+    if(!isDefined(var_1)) {
+      var_1 = 60;
+    }
+  }
+
+  if(!isDefined(var_2)) {
     var_2 = level.player.origin;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = level.player.angles;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1;
+  }
 
   var_7 = maps\_utility::spawn_anim_model("player_rig", var_2);
   level.player_rig = var_7;
   var_7.angles = var_3;
   var_7.animname = "player_rig";
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_8 = maps\_utility::spawn_anim_model(var_6);
-  else
+  }
+  else {
     var_8 = common_scripts\utility::spawn_tag_origin();
+  }
 
   level.player_mover = var_8;
   var_8.origin = var_2;
   var_8.angles = var_3;
   var_7 linkto(var_8);
 
-  if(var_0)
+  if(var_0) {
     level.player playerlinktodelta(var_7, "tag_player", 1, var_1, var_1, var_1, var_1, 1);
+  }
 
-  if(var_4)
+  if(var_4) {
     thread player_animated_sequence_restrictions(var_5);
+  }
 }
 
 player_animated_sequence_restrictions(var_0) {
-  if(isDefined(var_0) && var_0)
+  if(isDefined(var_0) && var_0) {
     level.player waittill("notify_player_animated_sequence_restrictions");
+  }
 
   level.player.disablereload = 1;
   level.player disableweapons();
@@ -59,8 +69,9 @@ player_animated_sequence_restrictions(var_0) {
 }
 
 player_animated_sequence_cleanup(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   if(var_0 && (!isDefined(level.player.early_weapon_enabled) || !level.player.early_weapon_enabled)) {
     level.player.early_weapon_enabled = undefined;
@@ -77,11 +88,13 @@ player_animated_sequence_cleanup(var_0) {
   level.player allowsprint(1);
   level.player unlink();
 
-  if(isDefined(level.player_mover))
+  if(isDefined(level.player_mover)) {
     level.player_mover delete();
+  }
 
-  if(isDefined(level.player_rig))
+  if(isDefined(level.player_rig)) {
     level.player_rig delete();
+  }
 }
 
 hc_hide_hud() {
@@ -140,8 +153,9 @@ player_sway_loop(var_0) {
     var_0 setanim(level.scr_anim["player_rig"]["player_wind_static"], level.player_wind_weight);
     var_1 = level.player_sway_weight + level.player_wind_weight;
 
-    if(var_1 > 1)
+    if(var_1 > 1) {
       var_1 = 1;
+    }
 
     var_0 setanim(level.scr_anim["player_rig"]["player_nosway_static"], 1 - var_1);
     wait(level.timestep);
@@ -151,8 +165,9 @@ player_sway_loop(var_0) {
 player_sway_blendto(var_0, var_1) {
   level endon("notify_change_player_sway");
 
-  if(!isDefined(var_0) || var_0 == 0)
+  if(!isDefined(var_0) || var_0 == 0) {
     var_0 = level.timestep;
+  }
 
   var_2 = level.player_sway_weight;
   var_3 = var_1 - level.player_sway_weight;
@@ -160,11 +175,13 @@ player_sway_blendto(var_0, var_1) {
   for(var_4 = var_3 * (level.timestep / var_0); var_0 > 0; var_0 = var_0 - level.timestep) {
     var_2 = var_2 + var_4;
 
-    if(var_2 > 1)
+    if(var_2 > 1) {
       var_2 = 1;
+    }
 
-    if(var_2 < 0)
+    if(var_2 < 0) {
       var_2 = 0;
+    }
 
     level.player_sway_weight = var_2;
     wait(level.timestep);
@@ -177,8 +194,9 @@ player_sway_blendto(var_0, var_1) {
 player_wind_blendto(var_0, var_1) {
   level endon("notify_change_player_wind");
 
-  if(!isDefined(var_0) || var_0 == 0)
+  if(!isDefined(var_0) || var_0 == 0) {
     var_0 = level.timestep;
+  }
 
   var_2 = level.player_wind_weight;
   var_3 = var_1 - level.player_wind_weight;
@@ -186,11 +204,13 @@ player_wind_blendto(var_0, var_1) {
   for(var_4 = var_3 * (level.timestep / var_0); var_0 > 0; var_0 = var_0 - level.timestep) {
     var_2 = var_2 + var_4;
 
-    if(var_2 > 1)
+    if(var_2 > 1) {
       var_2 = 1;
+    }
 
-    if(var_2 < 0)
+    if(var_2 < 0) {
       var_2 = 0;
+    }
 
     level.player_wind_weight = var_2;
     wait(level.timestep);

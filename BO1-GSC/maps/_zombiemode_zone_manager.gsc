@@ -33,8 +33,9 @@ get_players_in_zone(zone_name) {
   players = get_players();
   for(i = 0; i < zone.volumes.size; i++) {
     for(j = 0; j < players.size; j++) {
-      if(players[j] IsTouching(zone.volumes[i]))
+      if(players[j] IsTouching(zone.volumes[i])) {
         num_in_zone++;
+      }
     }
   }
   return num_in_zone;
@@ -48,8 +49,9 @@ player_in_zone(zone_name) {
   players = get_players();
   for(i = 0; i < zone.volumes.size; i++) {
     for(j = 0; j < players.size; j++) {
-      if(players[j] IsTouching(zone.volumes[i]) && !(players[j].sessionstate == "spectator"))
+      if(players[j] IsTouching(zone.volumes[i]) && !(players[j].sessionstate == "spectator")) {
         return true;
+      }
     }
   }
   return false;

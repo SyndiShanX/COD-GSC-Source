@@ -23,8 +23,9 @@ mechz_claw_detach() {
   if(isDefined(self.m_claw)) {
     self.m_claw setanim( % ai_zombie_mech_grapple_arm_open_idle, 1, 0.2, 1);
 
-    if(isDefined(self.m_claw.fx_ent))
+    if(isDefined(self.m_claw.fx_ent)) {
       self.m_claw.fx_ent delete();
+    }
 
     self.m_claw unlink();
     self.m_claw physicslaunch(self.m_claw.origin, (0, 0, -1));
@@ -59,8 +60,9 @@ mechz_claw_release(bopenclaw) {
 
     self.e_grabbed = undefined;
 
-    if(isDefined(bopenclaw) && bopenclaw)
+    if(isDefined(bopenclaw) && bopenclaw) {
       self.m_claw setanim( % ai_zombie_mech_grapple_arm_open_idle, 1, 0.2, 1);
+    }
   }
 }
 
@@ -72,10 +74,12 @@ mechz_claw_shot_pain_reaction() {
 
 ent_released_from_claw_grab_achievement(e_releaser, e_held_by_mechz) {
   if(isDefined(e_releaser) && isDefined(e_held_by_mechz) && isplayer(e_releaser) && isplayer(e_held_by_mechz)) {
-    if(e_releaser == e_held_by_mechz)
+    if(e_releaser == e_held_by_mechz) {
       e_releaser notify("mechz_grab_released_self");
-    else
+    }
+    else {
       e_releaser notify("mechz_grab_released_friendly");
+    }
   }
 }
 
@@ -103,18 +107,21 @@ mechz_claw_aim(target_pos) {
 }
 
 player_can_be_grabbed() {
-  if(self getstance() == "prone" && (isDefined(self.is_dtp) && self.is_dtp))
+  if(self getstance() == "prone" && (isDefined(self.is_dtp) && self.is_dtp)) {
     return false;
+  }
 
-  if(!is_player_valid(self, 1, 1))
+  if(!is_player_valid(self, 1, 1)) {
     return false;
+  }
 
   return true;
 }
 
 mechz_claw_explosive_watcher() {
-  if(!isDefined(self.explosive_dmg_taken))
+  if(!isDefined(self.explosive_dmg_taken)) {
     self.explosive_dmg_taken = 0;
+  }
 
   self.explosive_dmg_taken_on_grab_start = self.explosive_dmg_taken;
 }
@@ -189,8 +196,9 @@ claw_grapple() {
           self.e_grabbed allowprone(0);
           self.e_grabbed thread mechz_grabbed_played_vo(self);
 
-          if(!flag("mechz_claw_move_complete"))
+          if(!flag("mechz_claw_move_complete")) {
             self.m_claw moveto(self.m_claw.origin, 0.05);
+          }
         }
 
         break;
@@ -224,10 +232,12 @@ claw_grapple() {
   self.m_claw setanim( % ai_zombie_mech_grapple_arm_closed_idle, 1, 0.2, 1);
   wait 0.5;
 
-  if(isDefined(self.e_grabbed))
+  if(isDefined(self.e_grabbed)) {
     n_time = n_dist / 200;
-  else
+  }
+  else {
     n_time = n_dist / 1000;
+  }
 
   self mechz_claw_explosive_watcher();
   v_claw_origin = self gettagorigin("tag_claw");
@@ -240,8 +250,9 @@ claw_grapple() {
   self.m_claw playSound("zmb_ai_mechz_claw_back");
   self.m_claw stoploopsound(1);
 
-  if(maps\mp\zombies\_zm_ai_mechz::sndmechzisnetworksafe("angry"))
+  if(maps\mp\zombies\_zm_ai_mechz::sndmechzisnetworksafe("angry")) {
     self playSound("zmb_ai_mechz_vox_angry");
+  }
 
   self.m_claw.origin = v_claw_origin;
   self.m_claw.angles = v_claw_angles;
@@ -255,13 +266,16 @@ claw_grapple() {
   flag_clear("mechz_launching_claw");
 
   if(isDefined(self.e_grabbed)) {
-    if(!isDefined(self.flamethrower_trigger))
+    if(!isDefined(self.flamethrower_trigger)) {
       self mechz_flamethrower_initial_setup();
+    }
 
-    if(isplayer(self.e_grabbed) && is_player_valid(self.e_grabbed))
+    if(isplayer(self.e_grabbed) && is_player_valid(self.e_grabbed)) {
       self.e_grabbed thread mechz_unlink_on_laststand(self);
-    else if(isai(self.e_grabbed))
+    }
+    else if(isai(self.e_grabbed)) {
       self.e_grabbed thread mechz_zombie_flamethrower_gib(self);
+    }
 
     self thread check_for_claw_damaged(self.e_grabbed);
     self animscripted(self.origin, self.angles, "zm_flamethrower_claw_victim");
@@ -305,8 +319,9 @@ claw_damaged_mechz_endon_watcher(player) {
   player endon("disconnect");
   self waittill_any("death", "claw_complete", "kill_claw");
 
-  if(isDefined(self) && isDefined(self.m_claw))
+  if(isDefined(self) && isDefined(self.m_claw)) {
     self.m_claw setCanDamage(0);
+  }
 }
 
 claw_damaged_player_endon_watcher(mechz) {
@@ -316,8 +331,9 @@ claw_damaged_player_endon_watcher(mechz) {
   mechz endon("kill_claw");
   self waittill_any("death", "disconnect");
 
-  if(isDefined(mechz) && isDefined(mechz.m_claw))
+  if(isDefined(mechz) && isDefined(mechz.m_claw)) {
     mechz.m_claw setCanDamage(0);
+  }
 }
 
 check_for_players_mid_grapple() {
@@ -361,40 +377,46 @@ mechz_zombie_flamethrower_gib(mechz) {
 should_do_claw_attack() {
   assert(isDefined(self.favoriteenemy));
 
-  if(getdvarint(#"_id_E7121222") > 1)
+  if(getdvarint(#"_id_E7121222") > 1) {
     println("\\n\\tMZ: Checking should claw\\n");
+  }
 
   if(!(isDefined(self.has_powerplant) && self.has_powerplant)) {
-    if(getdvarint(#"_id_E7121222") > 1)
+    if(getdvarint(#"_id_E7121222") > 1) {
       println("\\n\\t\\tMZ: Not doing claw because powerplant has been destroyed\\n");
+    }
 
     return false;
   }
 
   if(isDefined(self.disable_complex_behaviors) && self.disable_complex_behaviors) {
-    if(getdvarint(#"_id_E7121222") > 1)
+    if(getdvarint(#"_id_E7121222") > 1) {
       println("\\n\\t\\tMZ: Not doing claw because doing force aggro\\n");
+    }
 
     return false;
   }
 
   if(isDefined(self.not_interruptable) && self.not_interruptable) {
-    if(getdvarint(#"_id_E7121222") > 1)
+    if(getdvarint(#"_id_E7121222") > 1) {
       println("\\n\\t\\tMZ: Not doing claw because another behavior has set not_interruptable\\n");
+    }
 
     return false;
   }
 
   if(isDefined(self.last_claw_time) && gettime() - self.last_claw_time < level.mechz_claw_cooldown_time) {
-    if(getdvarint(#"_id_E7121222") > 1)
+    if(getdvarint(#"_id_E7121222") > 1) {
       println("\\n\\t\\tMZ: Not doing claw because claw is on cooldown\\n");
+    }
 
     return false;
   }
 
   if(!self mechz_check_in_arc()) {
-    if(getdvarint(#"_id_E7121222") > 1)
+    if(getdvarint(#"_id_E7121222") > 1) {
       println("\\n\\t\\tMZ: Not doing claw because target is not in front arc\\n");
+    }
 
     return false;
   }
@@ -402,15 +424,17 @@ should_do_claw_attack() {
   n_dist_sq = distancesquared(self.origin, self.favoriteenemy.origin);
 
   if(n_dist_sq < 90000 || n_dist_sq > 1000000) {
-    if(getdvarint(#"_id_E7121222") > 1)
+    if(getdvarint(#"_id_E7121222") > 1) {
       println("\\n\\t\\tMZ: Not doing claw because target is not in range\\n");
+    }
 
     return false;
   }
 
   if(!self.favoriteenemy player_can_be_grabbed()) {
-    if(getdvarint(#"_id_E7121222") > 1)
+    if(getdvarint(#"_id_E7121222") > 1) {
       println("\\n\\t\\tMZ: Not doing claw because player is prone or dtp\\n");
+    }
 
     return false;
   }
@@ -418,8 +442,9 @@ should_do_claw_attack() {
   curr_zone = get_zone_from_position(self.origin + vectorscale((0, 0, 1), 36.0));
 
   if(isDefined(curr_zone) && "ug_bottom_zone" == curr_zone) {
-    if(getdvarint(#"_id_E7121222") > 1)
+    if(getdvarint(#"_id_E7121222") > 1) {
       println("\\n\\t\\tMZ: Not doing claw because mech is in main chamber\\n");
+    }
 
     return false;
   }
@@ -430,8 +455,9 @@ should_do_claw_attack() {
   b_cansee = trace["fraction"] == 1.0 || isDefined(trace["entity"]) && trace["entity"] == self.favoriteenemy;
 
   if(!b_cansee) {
-    if(getdvarint(#"_id_E7121222") > 1)
+    if(getdvarint(#"_id_E7121222") > 1) {
       println("\\n\\t\\tMZ: Not doing claw because capsule trace failed\\n");
+    }
 
     return false;
   }
@@ -443,8 +469,9 @@ mechz_do_claw_grab() {
   self endon("death");
   self endon("kill_claw");
 
-  if(getdvarint(#"_id_E7121222") > 0)
+  if(getdvarint(#"_id_E7121222") > 0) {
     println("\\n\\tMZ: Doing Claw Attack\\n");
+  }
 
   assert(isDefined(self.favoriteenemy));
   self thread mechz_kill_claw_watcher();

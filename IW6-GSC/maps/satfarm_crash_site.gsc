@@ -46,10 +46,12 @@ crash_site_begin() {
 
 intro_and_crash_site_ally_setup() {
   if(!isDefined(level.intro_and_crash_site_ally_tanks)) {
-    if(level.start_point == "intro")
+    if(level.start_point == "intro") {
       level.intro_and_crash_site_ally_tanks = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("intro_allies");
-    else if(level.start_point == "crash_site")
+    }
+    else if(level.start_point == "crash_site") {
       level.intro_and_crash_site_ally_tanks = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("crash_site_allies");
+    }
 
     level.allytanks = common_scripts\utility::array_combine(level.allytanks, level.intro_and_crash_site_ally_tanks);
     common_scripts\utility::array_thread(level.intro_and_crash_site_ally_tanks, maps\satfarm_code::npc_tank_combat_init);
@@ -83,8 +85,9 @@ a10_and_mig_scene() {
   common_scripts\utility::flag_wait("spawn_crash_site_background_enemies");
   level.crash_site_background_enemies = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("crash_site_background_enemies");
 
-  foreach(var_1 in level.crash_site_background_enemies)
+  foreach(var_1 in level.crash_site_background_enemies) {
   var_1 thread maps\satfarm_code::npc_tank_combat_init(undefined, 1);
+  }
 
   level.crash_site_a10_missile_dive_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("crash_site_a10_missile_dive_1");
   wait 1.75;
@@ -139,8 +142,9 @@ solar_panel_player_sound_trigger_wait() {
   var_0 thread maps\satfarm_code::flag_wait_delete("crash_site_end");
   var_0 waittill("trigger", var_1);
 
-  if(isDefined(var_1) && (var_1 == level.playertank || var_1 == level.player))
+  if(isDefined(var_1) && (var_1 == level.playertank || var_1 == level.player)) {
     thread common_scripts\utility::play_sound_in_space("satf_debris_crush_plr", level.player.origin);
+  }
 
   var_0 delete();
 }

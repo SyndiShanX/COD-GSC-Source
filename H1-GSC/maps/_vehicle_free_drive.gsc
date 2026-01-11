@@ -15,47 +15,61 @@ init_vehicle_free_path(var_0) {
 }
 
 setup_default_level_vars() {
-  if(!isDefined(level.freedrive_playermatch_farbehind_delete_dist))
+  if(!isDefined(level.freedrive_playermatch_farbehind_delete_dist)) {
     level.freedrive_playermatch_farbehind_delete_dist = -4000;
+  }
 
-  if(!isDefined(level.freedrive_playermatch_catchup_ramp_start_dist))
+  if(!isDefined(level.freedrive_playermatch_catchup_ramp_start_dist)) {
     level.freedrive_playermatch_catchup_ramp_start_dist = -2000;
+  }
 
-  if(!isDefined(level.freedrive_playermatch_catchup_ramp_end_dist))
+  if(!isDefined(level.freedrive_playermatch_catchup_ramp_end_dist)) {
     level.freedrive_playermatch_catchup_ramp_end_dist = 100;
+  }
 
-  if(!isDefined(level.freedrive_playermatch_slowdown_ramp_start_dist))
+  if(!isDefined(level.freedrive_playermatch_slowdown_ramp_start_dist)) {
     level.freedrive_playermatch_slowdown_ramp_start_dist = 650;
+  }
 
-  if(!isDefined(level.freedrive_playermatch_slowdown_ramp_end_dist))
+  if(!isDefined(level.freedrive_playermatch_slowdown_ramp_end_dist)) {
     level.freedrive_playermatch_slowdown_ramp_end_dist = 2000;
+  }
 
-  if(!isDefined(level.freedrive_playermatch_farahead_delete_dist))
+  if(!isDefined(level.freedrive_playermatch_farahead_delete_dist)) {
     level.freedrive_playermatch_farahead_delete_dist = 4000;
+  }
 
-  if(!isDefined(level.freedrive_playermatch_matched_multiplier))
+  if(!isDefined(level.freedrive_playermatch_matched_multiplier)) {
     level.freedrive_playermatch_matched_multiplier = 1.0;
+  }
 
-  if(!isDefined(level.freedrive_playermatch_slowdown_multiplier))
+  if(!isDefined(level.freedrive_playermatch_slowdown_multiplier)) {
     level.freedrive_playermatch_slowdown_multiplier = 0.6;
+  }
 
-  if(!isDefined(level.freedrive_playermatch_catchup_multiplier))
+  if(!isDefined(level.freedrive_playermatch_catchup_multiplier)) {
     level.freedrive_playermatch_catchup_multiplier = 1.6;
+  }
 
-  if(!isDefined(level.freedrive_progress_mod_default))
+  if(!isDefined(level.freedrive_progress_mod_default)) {
     level.freedrive_progress_mod_default = 200;
+  }
 
-  if(!isDefined(level.freedrive_progress_mod_step))
+  if(!isDefined(level.freedrive_progress_mod_step)) {
     level.freedrive_progress_mod_step = 200;
+  }
 
-  if(!isDefined(level.freedrive_vehicle_min_allowed_speed))
+  if(!isDefined(level.freedrive_vehicle_min_allowed_speed)) {
     level.freedrive_vehicle_min_allowed_speed = 25.0;
+  }
 
-  if(!isDefined(level.freedrive_dodge_static_early_distance))
+  if(!isDefined(level.freedrive_dodge_static_early_distance)) {
     level.freedrive_dodge_static_early_distance = 200;
+  }
 
-  if(!isDefined(level.freedrive_stay_within_percent_of_edge))
+  if(!isDefined(level.freedrive_stay_within_percent_of_edge)) {
     level.freedrive_stay_within_percent_of_edge = 0.9;
+  }
 }
 
 enable_free_path_think() {
@@ -74,32 +88,39 @@ clean_up_vehicle_free_path(var_0) {
 
   if(var_0 && isDefined(level.enemy_free_vehicles)) {
     foreach(var_2 in level.enemy_free_vehicles) {
-      if(!isremovedentity(var_2))
+      if(!isremovedentity(var_2)) {
         var_2 delete();
+      }
     }
   }
 
   level.enemy_free_vehicles = undefined;
 
-  if(isDefined(level.player.drivingvehicle) && isDefined(level.player.drivingvehicle.progress_node))
+  if(isDefined(level.player.drivingvehicle) && isDefined(level.player.drivingvehicle.progress_node)) {
     level.player.drivingvehicle.progress_node = undefined;
+  }
 }
 
 spawn_vehicle_and_attach_to_free_path(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
-  if(!isDefined(level.enemy_free_vehicles))
+  if(!isDefined(level.enemy_free_vehicles)) {
     level.enemy_free_vehicles = [];
+  }
 
-  if(level.enemy_free_vehicles.size >= 8)
+  if(level.enemy_free_vehicles.size >= 8) {
     return undefined;
+  }
 
   if(var_2 && var_3) {
     var_4 = getEntArray(self.target, "targetname");
@@ -114,15 +135,17 @@ spawn_vehicle_and_attach_to_free_path(var_0, var_1, var_2, var_3) {
 
     var_5 = common_scripts\utility::get_array_of_closest(self.origin, var_5);
 
-    foreach(var_11, var_10 in var_5)
+    foreach(var_11, var_10 in var_5) {
     var_10 thread maps\_utility::add_spawn_function(::guy_spawns_and_gets_in_vehicle, self, var_11);
+    }
 
     var_12 = maps\_utility::spawn_vehicle();
     var_12 waittill("guy_entered");
     wait 3;
 
-    if(!self.riders.size)
+    if(!self.riders.size) {
       return undefined;
+    }
   } else
     var_12 = maps\_utility::spawn_vehicle();
 
@@ -130,8 +153,9 @@ spawn_vehicle_and_attach_to_free_path(var_0, var_1, var_2, var_3) {
   var_12.has_riders = var_2;
   var_12 thread maps\_vehicle_code::vehicle_becomes_crashable();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_12 vehphys_setspeed(var_0);
+  }
 
   if(var_1) {
     wait 0.15;
@@ -155,8 +179,9 @@ leave_path_for_free_path(var_0, var_1) {
 
   var_2 = get_my_free_path_node(self.origin);
 
-  if(isDefined(level.drive_free_path_func))
+  if(isDefined(level.drive_free_path_func)) {
     var_2 thread[[level.drive_free_path_func]](self, var_1);
+  }
 
   thread vehicle_crash_detection();
 }
@@ -172,8 +197,9 @@ get_my_free_path_node(var_0) {
     var_3 = var_2.index;
   }
 
-  if(var_1[2].index < var_3)
+  if(var_1[2].index < var_3) {
     var_2 = var_1[2];
+  }
 
   return var_2;
 }
@@ -197,8 +223,9 @@ create_path(var_0) {
   for(;;) {
     var_5 = var_1;
 
-    if(isDefined(var_1.target))
+    if(isDefined(var_1.target)) {
       var_5 = common_scripts\utility::getstruct(var_1.target, "targetname");
+    }
 
     var_1.origin = drop_point_to_ground(var_1.origin);
     var_2[var_2.size] = var_1;
@@ -240,8 +267,9 @@ create_path(var_0) {
     var_8.origins["right_warning"] = var_8.midpoint + var_12 * var_13 * -1 * level.freedrive_stay_within_percent_of_edge;
   }
 
-  foreach(var_8 in var_2)
+  foreach(var_8 in var_2) {
   var_8.dist_to_next_node = distance(var_8.midpoint, var_8.next_node.midpoint);
+  }
 
   return var_2;
 }
@@ -259,8 +287,9 @@ add_collision_to_path(var_0) {
 
   foreach(var_7 in var_0) {
     foreach(var_3 in var_1) {
-      if(!isDefined(var_3.line_claimed))
+      if(!isDefined(var_3.line_claimed)) {
         add_collision_to_path_node(var_7, var_3);
+      }
     }
   }
 }
@@ -304,14 +333,16 @@ test_col_points_in_segment(var_0, var_1) {
     var_6 = 0;
 
     for(var_7 = var_2.size - 1; var_6 < var_2.size; var_6++) {
-      if(var_2[var_6][1] > var_3[var_4][1] != var_2[var_7][1] > var_3[var_4][1] && var_3[var_4][0] < (var_2[var_7][0] - var_2[var_6][0]) * (var_3[var_4][1] - var_2[var_6][1]) / (var_2[var_7][1] - var_2[var_6][1]) + var_2[var_6][0])
+      if(var_2[var_6][1] > var_3[var_4][1] != var_2[var_7][1] > var_3[var_4][1] && var_3[var_4][0] < (var_2[var_7][0] - var_2[var_6][0]) * (var_3[var_4][1] - var_2[var_6][1]) / (var_2[var_7][1] - var_2[var_6][1]) + var_2[var_6][0]) {
         var_5 = !var_5;
+      }
 
       var_7 = var_6;
     }
 
-    if(var_5)
+    if(var_5) {
       return 1;
+    }
   }
 
   return 0;
@@ -398,8 +429,9 @@ add_vol_to_node(var_0, var_1, var_2, var_3, var_4) {
   var_5.colvol["max"] = var_1;
   var_5.colvol["min"] = var_2;
 
-  if(var_5.colvol["min"] < 0)
+  if(var_5.colvol["min"] < 0) {
     var_5.colvol["min"] = 0;
+  }
 
   if(isDefined(var_0.next_node) && var_0 != var_0.next_node) {}
 
@@ -414,8 +446,9 @@ add_moving_obstacle(var_0, var_1) {
   var_2.ent = self;
   var_2.bounds = var_0;
 
-  if(isDefined(var_1) && var_1 == 1)
+  if(isDefined(var_1) && var_1 == 1) {
     var_2 thread remove_moving_obstacle_on_death();
+  }
 
   var_2 thread update_moving_object_volume();
 }
@@ -445,8 +478,9 @@ update_moving_object_volume() {
     var_0 = self.ent get_progression_between_points(self.ent.origin, self.node.midpoint, self.node.next_node.midpoint);
     var_1 = self.ent move_to_correct_node(self.node, var_0["progress"], var_0["offset"]);
 
-    if(self.node != var_1.node)
+    if(self.node != var_1.node) {
       self.node = var_1.node;
+    }
 
     update_moving_collision_on_node();
     wait 0.1;
@@ -472,17 +506,21 @@ update_moving_collision_on_node() {
   var_6 = var_5;
 
   for(var_7 = 1; var_7 < var_2.size; var_7++) {
-    if(var_2[var_7]["offset"] < var_3)
+    if(var_2[var_7]["offset"] < var_3) {
       var_3 = var_2[var_7]["offset"];
+    }
 
-    if(var_2[var_7]["offset"] > var_4)
+    if(var_2[var_7]["offset"] > var_4) {
       var_4 = var_2[var_7]["offset"];
+    }
 
-    if(var_2[var_7]["progress"] < var_5)
+    if(var_2[var_7]["progress"] < var_5) {
       var_5 = var_2[var_7]["progress"];
+    }
 
-    if(var_2[var_7]["progress"] > var_6)
+    if(var_2[var_7]["progress"] > var_6) {
       var_6 = var_2[var_7]["progress"];
+    }
   }
 
   var_6 = var_6 + 200;
@@ -567,8 +605,9 @@ register_moving_collision_on_nodes(var_0, var_1, var_2, var_3) {
 unregister_moving_collision_on_nodes() {
   foreach(var_1 in level.vehicle_free_path) {
     foreach(var_3 in var_1.col_moving_volumes) {
-      if(var_3.owner == self)
+      if(var_3.owner == self) {
         var_1.col_moving_volumes = common_scripts\utility::array_remove(var_1.col_moving_volumes, var_3);
+      }
     }
   }
 }
@@ -580,8 +619,9 @@ add_moving_vol_to_node(var_0, var_1, var_2, var_3, var_4) {
   var_5.colvol["max"] = var_1;
   var_5.colvol["min"] = var_2;
 
-  if(var_5.colvol["min"] < 0)
+  if(var_5.colvol["min"] < 0) {
     var_5.colvol["min"] = 0;
+  }
 
   if(var_0.index != 0) {} else if(var_5.colvol["min"] < var_5.colvol["max"]) {
     return;
@@ -604,10 +644,12 @@ vehicle_drives_free_path(var_0, var_1) {
 
   var_2 = self;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_0.starting_speed = var_1;
-  else
+  }
+  else {
     var_0.starting_speed = var_0 vehicle_getspeed();
+  }
 
   var_0.wipeout = 0;
   var_0.progress_node = var_2;
@@ -629,15 +671,17 @@ vehicle_drives_free_path(var_0, var_1) {
       var_0 vehphys_crash();
 
       foreach(var_4 in var_0.riders) {
-        if(isalive(var_4))
+        if(isalive(var_4)) {
           var_4 kill();
+        }
       }
 
       var_0 kill();
       wait 5;
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         var_0 delete();
+      }
 
       update_vehicle_status();
       return;
@@ -646,8 +690,9 @@ vehicle_drives_free_path(var_0, var_1) {
     if(!var_0.wipeout && var_0 vehicle_getspeed() < 2) {
       var_0.move_fails++;
 
-      if(var_0.move_fails > 5)
+      if(var_0.move_fails > 5) {
         var_0 wipeout("move fail!");
+      }
     } else
       var_0.move_fails = 0;
 
@@ -688,11 +733,13 @@ set_vehicle_goal_position() {
     var_10 = var_13["dodge1"];
     var_14 = 1;
 
-    if(isDefined(var_12["right"]) && var_10 > var_12["right"])
+    if(isDefined(var_12["right"]) && var_10 > var_12["right"]) {
       var_10 = var_13["dodge2"];
+    }
 
-    if(isDefined(var_12["left"]) && var_10 < var_12["left"])
+    if(isDefined(var_12["left"]) && var_10 < var_12["left"]) {
       var_10 = var_13["dodge2"];
+    }
   }
 
   if(isDefined(var_12["right"]) && var_10 > var_12["right"]) {
@@ -710,31 +757,39 @@ set_vehicle_goal_position() {
   var_16 = maps\_utility::get_dot(var_0.origin, var_0.angles, var_0.endpos);
   var_17 = 1.0;
 
-  if(var_16 > 0.9659)
+  if(var_16 > 0.9659) {
     var_17 = 1.0;
-  else if(var_16 > 0.866)
+  }
+  else if(var_16 > 0.866) {
     var_17 = 0.85;
-  else if(var_16 > 0.7071)
+  }
+  else if(var_16 > 0.7071) {
     var_17 = 0.65;
-  else if(var_16 > 0.5)
+  }
+  else if(var_16 > 0.5) {
     var_17 = 0.4;
-  else
+  }
+  else {
     var_17 = 0.1;
+  }
 
   var_18 = max(var_0.starting_speed * var_17, level.freedrive_vehicle_min_allowed_speed);
   var_0 vehicledriveto(var_0.endpos, var_18);
 
-  if(isDefined(level.player.drivingvehicle))
+  if(isDefined(level.player.drivingvehicle)) {
     var_0 match_player_speed(var_17);
+  }
 }
 
 get_obstacle_dodge_amount(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3) && var_3 == 1) {
-    foreach(var_5 in var_0.col_volumes)
+    foreach(var_5 in var_0.col_volumes) {
     var_5.has_veh_collision = 0;
+    }
 
-    foreach(var_5 in var_0.col_moving_volumes)
+    foreach(var_5 in var_0.col_moving_volumes) {
     var_5.has_veh_collision = 0;
+    }
   }
 
   var_9 = [];
@@ -766,31 +821,39 @@ get_obstacle_dodge_amount(var_0, var_1, var_2, var_3) {
     var_15 = get_obstacle_dodge_amount(var_0, var_1, var_13);
 
     if(var_14.size > 0) {
-      if(var_14["dodge1"] > var_12)
+      if(var_14["dodge1"] > var_12) {
         var_12 = var_14["dodge1"];
+      }
 
-      if(var_14["dodge2"] > var_12)
+      if(var_14["dodge2"] > var_12) {
         var_12 = var_14["dodge2"];
+      }
 
-      if(var_14["dodge1"] < var_13)
+      if(var_14["dodge1"] < var_13) {
         var_13 = var_14["dodge1"];
+      }
 
-      if(var_14["dodge2"] < var_13)
+      if(var_14["dodge2"] < var_13) {
         var_13 = var_14["dodge2"];
+      }
     }
 
     if(var_15.size > 0) {
-      if(var_15["dodge1"] > var_12)
+      if(var_15["dodge1"] > var_12) {
         var_12 = var_15["dodge1"];
+      }
 
-      if(var_15["dodge2"] > var_12)
+      if(var_15["dodge2"] > var_12) {
         var_12 = var_15["dodge2"];
+      }
 
-      if(var_15["dodge1"] < var_13)
+      if(var_15["dodge1"] < var_13) {
         var_13 = var_15["dodge1"];
+      }
 
-      if(var_15["dodge2"] < var_13)
+      if(var_15["dodge2"] < var_13) {
         var_13 = var_15["dodge2"];
+      }
     }
 
     var_16 = (var_12 + var_13) * 0.5;
@@ -828,8 +891,9 @@ update_vehicle_status(var_0) {
     if(!common_scripts\utility::array_contains(level.enemy_free_vehicles, var_0)) {
       level.enemy_free_vehicles[level.enemy_free_vehicles.size] = var_0;
 
-      if(1)
+      if(1) {
         level.enemy_free_vehicles = common_scripts\utility::array_sort_by_handler(level.enemy_free_vehicles, ::get_total_distance2d_on_path);
+      }
     }
   }
 
@@ -849,8 +913,9 @@ get_total_distance2d_on_path() {
   var_1 = 0;
   var_2 = self.progress_node;
 
-  if(!isDefined(var_2) || !isDefined(self.progress))
+  if(!isDefined(var_2) || !isDefined(self.progress)) {
     return 0;
+  }
 
   var_3 = maps\_utility::getent_or_struct(var_2.target, "targetname");
   var_0 = self.progress;
@@ -887,8 +952,9 @@ vehicle_death_watcher() {
 rider_death_detection(var_0) {
   self waittill("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 wipeout("driver died!");
+  }
 }
 
 vehicle_crash_detection() {
@@ -901,8 +967,9 @@ vehicle_crash_detection() {
     if(isDefined(var_3)) {
       var_5 = length(var_3) / 63360.0 * 60.0 * 60.0;
 
-      if(var_5 > 20.0)
+      if(var_5 > 20.0) {
         wipeout("crash");
+      }
     }
   }
 }
@@ -912,8 +979,9 @@ wipeout(var_0) {
 }
 
 match_player_speed(var_0) {
-  if(!isDefined(level.player.drivingvehicle.progress_node))
+  if(!isDefined(level.player.drivingvehicle.progress_node)) {
     level.player.drivingvehicle.progress_node = get_my_free_path_node(level.player.drivingvehicle.origin);
+  }
 
   var_1 = get_progression_between_points(level.player.drivingvehicle.origin, level.player.drivingvehicle.progress_node.midpoint, level.player.drivingvehicle.progress_node.next_node.midpoint);
   var_2 = move_to_correct_node(level.player.drivingvehicle.progress_node, var_1["progress"], var_1["offset"]);
@@ -942,19 +1010,23 @@ match_player_speed(var_0) {
   var_6 = get_multiplier(var_5);
   var_7 = max(level.player.drivingvehicle vehicle_getspeed() * var_6, level.freedrive_vehicle_min_allowed_speed);
 
-  if(self vehicle_isphysveh())
+  if(self vehicle_isphysveh()) {
     self vehphys_setspeed(var_7);
-  else
+  }
+  else {
     self vehicle_setspeed(var_7);
+  }
 }
 
 get_multiplier(var_0) {
   var_1 = level.freedrive_playermatch_matched_multiplier;
 
-  if(var_0 < level.freedrive_playermatch_catchup_ramp_start_dist)
+  if(var_0 < level.freedrive_playermatch_catchup_ramp_start_dist) {
     var_1 = level.freedrive_playermatch_catchup_multiplier;
-  else if(var_0 > level.freedrive_playermatch_slowdown_ramp_end_dist)
+  }
+  else if(var_0 > level.freedrive_playermatch_slowdown_ramp_end_dist) {
     var_1 = level.freedrive_playermatch_slowdown_multiplier;
+  }
   else if(var_0 < level.freedrive_playermatch_catchup_ramp_end_dist) {
     var_2 = level.freedrive_playermatch_catchup_ramp_end_dist - level.freedrive_playermatch_catchup_ramp_start_dist;
     var_3 = (level.freedrive_playermatch_catchup_ramp_end_dist - var_0) / var_2;
@@ -1010,10 +1082,12 @@ get_segment_max_progress_at_offset(var_0, var_1) {
   var_2 = var_0.dist_to_next_node;
   var_3 = undefined;
 
-  if(var_1 > 0)
+  if(var_1 > 0) {
     var_3 = get_progression_between_points(var_0.next_node.origins["right"], var_0.midpoint, var_0.next_node.midpoint);
-  else
+  }
+  else {
     var_3 = get_progression_between_points(var_0.next_node.origins["left"], var_0.midpoint, var_0.next_node.midpoint);
+  }
 
   var_4 = var_1 / var_3["offset"];
   var_5 = (var_3["progress"] - var_2) * var_4;
@@ -1041,8 +1115,9 @@ get_edge_offset_bounds_at_progress(var_0, var_1) {
 }
 
 get_position_from_spline(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   var_4 = vectortoangles(var_0.next_node.midpoint - var_0.midpoint);
   var_5 = anglesToForward(var_4);
@@ -1061,11 +1136,13 @@ drop_point_to_ground(var_0) {
   if(var_1 == var_0 + (0, 0, -100)) {
     var_2 = bulletTrace(var_0 + (0, 0, 100), var_0 + (0, 0, -100), 0, undefined, 0, 0, 1, 0, 0);
 
-    if(var_2["position"] == var_1)
+    if(var_2["position"] == var_1) {
       return var_0;
+    }
 
-    if(isDefined(var_2["surfacetype"]) && issubstr(var_2["surfacetype"], "water"))
+    if(isDefined(var_2["surfacetype"]) && issubstr(var_2["surfacetype"], "water")) {
       var_1 = var_2["position"];
+    }
 
     return var_0;
   }
@@ -1079,8 +1156,9 @@ move_to_correct_node(var_0, var_1, var_2) {
   for(;;) {
     var_4 = var_0.dist_to_next_node;
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_4 = get_segment_max_progress_at_offset(var_0, var_2);
+    }
 
     if(var_1 > var_4) {
       if(var_0 == var_0.next_node) {
@@ -1142,11 +1220,13 @@ debug_draw_path() {
       if(isDefined(var_4.next_node.origins["right_warning"])) {
       }
 
-      foreach(var_6 in var_4.col_volumes)
+      foreach(var_6 in var_4.col_volumes) {
       var_4 draw_col_vol(var_6.colvol, (0.5, 0, 1));
+      }
 
-      foreach(var_6 in var_4.col_moving_volumes)
+      foreach(var_6 in var_4.col_moving_volumes) {
       var_4 draw_col_vol(var_6.colvol, (1, 0, 0.5));
+      }
 
       foreach(var_11 in var_4.col_lines) {
         var_12 = var_11.origin;

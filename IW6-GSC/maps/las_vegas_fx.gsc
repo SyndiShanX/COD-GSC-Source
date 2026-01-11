@@ -133,8 +133,9 @@ mask_gamb_room_birds() {
   var_1 = getent("trigger_birds_gamblingroom", "targetname");
   var_1 waittill("trigger");
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 maps\_utility::activate_interactives_in_volume();
+  }
 }
 
 exterior_tumbleweed() {

@@ -52,8 +52,9 @@ friendly_climb_anims() {
 }
 
 price_catches_player(price) {
-  if(isDefined(level.rumble_ent))
+  if(isDefined(level.rumble_ent)) {
     level.rumble_ent delete();
+  }
 
   level.player PlayRumbleOnEntity("damage_light");
   flag_set("player_was_caught");
@@ -65,24 +66,27 @@ big_jump_grab_fx(price) {
 }
 
 ledge_scoot_fx_left(price) {
-  if(flag("reached_top"))
+  if(flag("reached_top")) {
     return;
+  }
 
   //price traceFX_on_tag( "footstep_ice_climbing", "J_Ankle_LE", 5 );
   playFXOnTag(getfx("footstep_ice_climbing"), price, "J_Ankle_LE");
 }
 
 ledge_scoot_fx_right(price) {
-  if(flag("reached_top"))
+  if(flag("reached_top")) {
     return;
+  }
 
   //price traceFX_on_tag( "footstep_ice_climbing", "J_Ankle_RI", 5 );
   playFXOnTag(getfx("footstep_ice_climbing"), price, "J_Ankle_RI");
 }
 
 pick_warning(warning) {
-  if(!getdvarint("debug_pickwarning"))
+  if(!getdvarint("debug_pickwarning")) {
     return;
+  }
 
   if(level.price_last_climb_hit == warning) {
     iprintlnbold("Called same hit twice in a row (" + warning + ")");
@@ -134,8 +138,9 @@ pick_right_out(price) {
 }
 
 attach_pick(price) {
-  if(isDefined(price.picks))
+  if(isDefined(price.picks)) {
     return;
+  }
   price.picks = true;
   price anim_spawn_tag_model("weapon_ice_picker", "tag_weapon_left");
   price anim_spawn_tag_model("weapon_ice_picker", "tag_inhand");
@@ -162,8 +167,9 @@ price_gun_recall(price) {
 }
 
 detach_picks() {
-  if(!isDefined(self.picks))
+  if(!isDefined(self.picks)) {
     return;
+  }
   self.picks = undefined;
   self Detach("weapon_ice_picker", "tag_weapon_left");
   self Detach("weapon_ice_picker", "tag_inhand");
@@ -357,8 +363,9 @@ climb_preview_anim() {
   self anim_spawn_tag_model("weapon_ice_picker", "tag_inhand");
 
   for(;;) {
-    if(distance(level.player.origin, self.origin) < 150)
+    if(distance(level.player.origin, self.origin) < 150) {
       break;
+    }
     wait(0.05);
   }
   self delete();

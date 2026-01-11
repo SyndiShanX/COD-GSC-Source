@@ -137,24 +137,27 @@ water_trigger_init() {
 
   triggers = getEntArray("water_killbrush", "targetname");
 
-  foreach(trigger in triggers)
+  foreach(trigger in triggers) {
   trigger thread player_splash_think();
+  }
 }
 
 player_splash_think() {
   for(;;) {
     self waittill("trigger", entity);
 
-    if(isplayer(entity) && isalive(entity))
+    if(isplayer(entity) && isalive(entity)) {
       self thread trigger_thread(entity, ::player_water_fx);
+    }
   }
 }
 
 player_water_fx(player, endon_condition) {
   maxs = self.origin + self getmaxs();
 
-  if(maxs[2] > 60)
+  if(maxs[2] > 60) {
     maxs = maxs + vectorscale((0, 0, 1), 10.0);
+  }
 
   origin = (player.origin[0], player.origin[1], maxs[2]);
   playFX(level._effect["water_splash_sm"], origin);
@@ -172,8 +175,9 @@ water_trigger_think() {
 }
 
 leveloverridetime(defaulttime) {
-  if(self isinwater())
+  if(self isinwater()) {
     return 0.4;
+  }
 
   return defaulttime;
 }
@@ -189,8 +193,9 @@ isinwater() {
     if(trigger.origin[2] > level.mapcenter[2]) {
       continue;
     }
-    if(self istouching(trigger))
+    if(self istouching(trigger)) {
       return true;
+    }
   }
 
   return false;

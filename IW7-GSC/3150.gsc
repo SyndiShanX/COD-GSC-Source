@@ -30,8 +30,9 @@ func_A18B(var_00, var_01, var_02) {
     case "end":
       return var_00;
     default:
-      if(isDefined(var_02))
+      if(isDefined(var_02)) {
         return [
+      }
           [var_02]
         ](var_00);
 
@@ -237,8 +238,9 @@ func_9EAA(var_00, var_01, var_02, var_03) {
 }
 
 func_A41C(var_00, var_01, var_02, var_03) {
-  if(self.func_117C == 0)
+  if(self.func_117C == 0) {
     return func_9EAA(var_00, var_01, var_02, var_03);
+  }
 
   return 0;
 }
@@ -262,8 +264,9 @@ func_C17B(var_00, var_01, var_02, var_03) {
 func_67C5(var_00) {
   self endon("death");
 
-  while(!isDefined(self.var_1198) || !isDefined(self.var_1198.func_1000D))
+  while(!isDefined(self.var_1198) || !isDefined(self.var_1198.func_1000D)) {
     wait 0.05;
+  }
 
   for(;;) {
     if(self.var_1198.func_1000D) {
@@ -273,10 +276,12 @@ func_67C5(var_00) {
       self.var_1198.func_9DE4 = 1;
       self _meth_82AB(var_03, 1.0, 0.0);
 
-      if(var_02 == 0 || var_02 == 1 || var_02 == 6)
+      if(var_02 == 0 || var_02 == 1 || var_02 == 6) {
         self playSound("jackal_evade_long");
-      else
+      }
+      else {
         self playSound("jackal_evade_short");
+      }
 
       wait(getanimlength(var_03) * 0.8);
       self.var_1198.func_9DE4 = 0;
@@ -290,8 +295,9 @@ func_67C6() {
   self endon("evade_debug_stop");
   self endon("death");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 func_1EA6(var_00) {
@@ -314,8 +320,9 @@ func_1EA6(var_00) {
       self.var_1198.func_38DC = self.var_1198.func_E1AB;
       var_03 = var_02;
 
-      if(self.var_1198.func_38DC == "up")
+      if(self.var_1198.func_38DC == "up") {
         var_03 = var_01;
+      }
 
       self give_left_powers("cannon", var_3.anims, 1.0, 0.0, 1.0);
       func_0A1E::func_231F(var_00, "cannon");

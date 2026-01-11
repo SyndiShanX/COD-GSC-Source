@@ -142,8 +142,9 @@ destructible_car_explosion(attacker, physics_explosion) {
   if(physics_explosion) {
     PhysicsExplosionSphere(self.origin, 255, 254, 0.3, 400, 25);
   }
-  if(isDefined(attacker))
+  if(isDefined(attacker)) {
     attacker thread maps\mp\_challenges::destroyed_car();
+  }
   level.globalCarsDestroyed++;
   if(isDefined(attacker)) {
     self DoDamage(self.health + 10000, self.origin + (0, 0, 1), attacker);

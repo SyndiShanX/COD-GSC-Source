@@ -111,8 +111,9 @@ cache_ambient(var_0) {
   var_3 = spawnStruct();
   var_3.data = var_2;
 
-  if(var_2["time"][0] > 0 && var_2["time"][1] > 0)
+  if(var_2["time"][0] > 0 && var_2["time"][1] > 0) {
     var_3.serialized = 1;
+  }
 
   level._audio.ambient.cached_ambients[var_0] = var_3;
   cache_ambient_event(var_0);
@@ -125,8 +126,9 @@ cache_ambient_event(var_0) {
   if(var_2.size == 0) {
     return;
   }
-  foreach(var_5, var_4 in var_2)
+  foreach(var_5, var_4 in var_2) {
   var_2[var_5]["weight"] = string_to_float(var_4["weight"]);
+  }
 
   var_6 = [];
 
@@ -230,27 +232,33 @@ get_zone_blend_args(var_0, var_1) {
 }
 
 is_dyn_ambience_valid(var_0, var_1) {
-  if(!isDefined(var_0) && !isDefined(var_1))
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 0;
+  }
 
-  if(isDefined(var_0) || isDefined(var_1))
+  if(isDefined(var_0) || isDefined(var_1)) {
     return 1;
+  }
 
-  if(var_0 == var_1)
+  if(var_0 == var_1) {
     return 0;
+  }
 
   return 1;
 }
 
 is_ambience_blend_valid(var_0, var_1) {
-  if(!isDefined(var_0) && !isDefined(var_1))
+  if(!isDefined(var_0) && !isDefined(var_1)) {
     return 0;
+  }
 
-  if(var_0 == var_1)
+  if(var_0 == var_1) {
     return 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   return 1;
 }
@@ -259,8 +267,9 @@ blend_zones(var_0, var_1, var_2, var_3) {
   var_4 = [var_0, var_1];
   var_5 = var_4;
 
-  if(var_3)
+  if(var_3) {
     var_5 = common_scripts\utility::array_reverse(var_5);
+  }
 
   if(is_ambience_blend_valid(var_2["ambience1"], var_2["ambience2"])) {
     var_6 = [];
@@ -278,12 +287,14 @@ blend_zones(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if(var_6.size > 0)
+    if(var_6.size > 0) {
       maps\_audio::mix_ambient_tracks(var_6);
+    }
   }
 
-  if(is_dyn_ambience_valid(var_2["ambient_name1"], var_2["ambient_name2"]))
+  if(is_dyn_ambience_valid(var_2["ambient_name1"], var_2["ambient_name2"])) {
     maps\_audio_ambient::swap_ambient_event_zones(var_2["ambient_name1"], var_0, var_2["ambient_name2"], var_1);
+  }
 
   var_11 = 0;
 
@@ -304,8 +315,9 @@ blend_zones(var_0, var_1, var_2, var_3) {
     maps\_audio::set_filter(var_12, var_7);
   }
 
-  if(var_11 == 2)
+  if(var_11 == 2) {
     level.player seteqlerp(var_5[0], 0);
+  }
 
   if(var_0 >= 0.75) {
     if(isDefined(var_2["reverb1"])) {
@@ -314,17 +326,21 @@ blend_zones(var_0, var_1, var_2, var_3) {
     }
 
     if(isDefined(var_2["mix1"])) {
-      if(var_2["mix1"] == "")
+      if(var_2["mix1"] == "") {
         maps\_audio::clear_mix(2);
-      else
+      }
+      else {
         maps\_audio::set_mix(var_2["mix1"]);
+      }
     }
 
     if(isDefined(var_2["occlusion1"])) {
-      if(var_2["occlusion1"] == "")
+      if(var_2["occlusion1"] == "") {
         maps\_audio::deactivate_occlusion();
-      else
+      }
+      else {
         maps\_audio::set_occlusion(var_2["occlusion1"]);
+      }
     }
   } else if(var_1 >= 0.75) {
     if(isDefined(var_2["reverb2"])) {
@@ -333,17 +349,21 @@ blend_zones(var_0, var_1, var_2, var_3) {
     }
 
     if(isDefined(var_2["mix2"])) {
-      if(var_2["mix2"] == "")
+      if(var_2["mix2"] == "") {
         maps\_audio::clear_mix(2);
-      else
+      }
+      else {
         maps\_audio::set_mix(var_2["mix2"]);
+      }
     }
 
     if(isDefined(var_2["occlusion2"])) {
-      if(var_2["occlusion2"] == "")
+      if(var_2["occlusion2"] == "") {
         maps\_audio::deactivate_occlusion();
-      else
+      }
+      else {
         maps\_audio::set_occlusion(var_2["occlusion2"]);
+      }
     }
   }
 }
@@ -455,8 +475,9 @@ cache_whizby(var_0) {
   if(var_2.size == 0) {
     return;
   }
-  foreach(var_5, var_4 in var_2)
+  foreach(var_5, var_4 in var_2) {
   var_2[var_5] = string_to_float(var_2[var_5]);
+  }
 
   level._audio.whizby.cached[var_0] = var_2;
 }
@@ -471,8 +492,9 @@ cache_timescale(var_0) {
   if(var_2.size == 0) {
     return;
   }
-  foreach(var_5, var_4 in var_2)
+  foreach(var_5, var_4 in var_2) {
   var_2[var_5]["scale"] = string_to_float(var_4["scale"]);
+  }
 
   level._audio.timescale.cached[var_0] = var_2;
 }
@@ -480,8 +502,9 @@ cache_timescale(var_0) {
 get_table_data(var_0, var_1, var_2) {
   var_3 = [];
 
-  if(tableexists(get_map_soundtable()))
+  if(tableexists(get_map_soundtable())) {
     var_3 = get_table_data_array_internal(get_map_soundtable(), var_1, var_2, 1);
+  }
 
   if(var_3.size == 0) {
     debug_println("^2Looking in common soundtable for " + var_1);
@@ -494,8 +517,9 @@ get_table_data(var_0, var_1, var_2) {
 get_table_data_array(var_0, var_1, var_2) {
   var_3 = [];
 
-  if(tableexists(get_map_soundtable()))
+  if(tableexists(get_map_soundtable())) {
     var_3 = get_table_data_array_internal(get_map_soundtable(), var_1, var_2);
+  }
 
   if(var_3.size == 0) {
     debug_println("^2Looking in common soundtable for " + var_1);
@@ -511,8 +535,9 @@ get_table_data_array_internal(var_0, var_1, var_2, var_3) {
   var_6 = 0;
   var_7 = [];
 
-  if(var_5 < 0)
+  if(var_5 < 0) {
     return var_7;
+  }
 
   var_8 = undefined;
 
@@ -548,12 +573,14 @@ get_table_data_array_internal(var_0, var_1, var_2, var_3) {
         var_13 = tablelookupbyrow(var_0, var_5, var_12);
         var_10[var_2[var_12]] = var_13;
 
-        if(var_12 == 1)
+        if(var_12 == 1) {
           var_11 = var_13;
+        }
       }
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         return var_10;
+      }
 
       var_7[var_11] = var_10;
     }
@@ -567,8 +594,9 @@ in_new_section(var_0, var_1) {
   var_2 = common_scripts\utility::array_remove(var_2, var_0);
 
   foreach(var_4 in var_2) {
-    if(var_4 == var_1)
+    if(var_4 == var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -615,15 +643,17 @@ get_common_soundtable() {
 }
 
 string_to_float(var_0) {
-  if(var_0 == "")
+  if(var_0 == "") {
     return 0;
+  }
 
   return float(var_0);
 }
 
 string_to_int(var_0) {
-  if(var_0 == "")
+  if(var_0 == "") {
     return 0;
+  }
 
   return int(var_0);
 }

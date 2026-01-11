@@ -50,8 +50,9 @@ main() {
   level.scr_anim["casualcrouch"]["new_react"] = % h1_bog_b_cheers_soldier_right;
   maps\_anim::addnotetrack_dialogue("casualcrouch", "dialog", "new_react", "bog_gm4_talkinabout");
 
-  if(!isDefined(level.scr_animtree))
+  if(!isDefined(level.scr_animtree)) {
     level.scr_animtree = [];
+  }
 
   dumpster_anims();
   tank_crush_anims();

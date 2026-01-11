@@ -27,10 +27,12 @@ crouchmovementsetspeed() {
   self.stancecrouchmovement = self getstance();
   var_0 = 0;
 
-  if(self.stancecrouchmovement == "crouch")
+  if(self.stancecrouchmovement == "crouch") {
     var_0 = self.crouch_speed_scalar;
-  else if(maps\mp\_utility::_hasperk("specialty_lightweight"))
+  }
+  else if(maps\mp\_utility::_hasperk("specialty_lightweight")) {
     var_0 = maps\mp\_utility::lightweightscalar();
+  }
 
   self.movespeedscaler = var_0;
   maps\mp\gametypes\_weapons::updatemovespeedscale();
@@ -40,8 +42,9 @@ unsetcrouchmovement() {
   self notify("unsetCrouchMovement");
   var_0 = 1;
 
-  if(maps\mp\_utility::_hasperk("specialty_lightweight"))
+  if(maps\mp\_utility::_hasperk("specialty_lightweight")) {
     var_0 = maps\mp\_utility::lightweightscalar();
+  }
 
   self.movespeedscaler = var_0;
   maps\mp\gametypes\_weapons::updatemovespeedscale();
@@ -190,10 +193,12 @@ setmarksman(var_0) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 10;
-  else
+  }
+  else {
     var_0 = int(var_0) * 2;
+  }
 
   maps\mp\_utility::setrecoilscale(var_0);
   self.recoilscale = var_0;
@@ -209,10 +214,12 @@ setstunresistance(var_0) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     self.stunscaler = 0.5;
-  else
+  }
+  else {
     self.stunscaler = int(var_0) / 10;
+  }
 }
 
 unsetstunresistance() {
@@ -341,8 +348,9 @@ unsetsaboteur() {
 }
 
 setlightweight(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 10;
+  }
 
   self.movespeedscaler = maps\mp\_utility::lightweightscalar(var_0);
   maps\mp\gametypes\_weapons::updatemovespeedscale();
@@ -376,8 +384,9 @@ setdelaymine() {}
 unsetdelaymine() {}
 
 setlocaljammer() {
-  if(!maps\mp\_utility::isemped())
+  if(!maps\mp\_utility::isemped()) {
     self setmotiontrackervisible(0);
+  }
 }
 
 unsetlocaljammer() {
@@ -417,14 +426,17 @@ onemanarmyweaponchangetracker() {
 }
 
 isonemanarmymenu(var_0) {
-  if(var_0 == game["menu_onemanarmy"])
+  if(var_0 == game["menu_onemanarmy"]) {
     return 1;
+  }
 
-  if(isDefined(game["menu_onemanarmy_defaults_splitscreen"]) && var_0 == game["menu_onemanarmy_defaults_splitscreen"])
+  if(isDefined(game["menu_onemanarmy_defaults_splitscreen"]) && var_0 == game["menu_onemanarmy_defaults_splitscreen"]) {
     return 1;
+  }
 
-  if(isDefined(game["menu_onemanarmy_custom_splitscreen"]) && var_0 == game["menu_onemanarmy_custom_splitscreen"])
+  if(isDefined(game["menu_onemanarmy_custom_splitscreen"]) && var_0 == game["menu_onemanarmy_custom_splitscreen"]) {
     return 1;
+  }
 
   return 0;
 }
@@ -500,8 +512,9 @@ giveonemanarmyclass(var_0) {
   self.omaclasschanged = 1;
   maps\mp\gametypes\_class::giveandapplyloadout(self.pers["team"], var_0, 0);
 
-  if(isDefined(self.carryflag))
+  if(isDefined(self.carryflag)) {
     self attach(self.carryflag, "J_spine4", 1);
+  }
 
   self notify("changed_kit");
   level notify("changed_kit");
@@ -514,8 +527,9 @@ omausebar(var_0) {
   var_2 settext(&"MPUI_CHANGING_KIT");
   var_1 maps\mp\gametypes\_hud_util::updatebar(0, 1 / var_0);
 
-  for(var_3 = 0; var_3 < var_0 && isalive(self) && !level.gameended; var_3 = var_3 + 0.05)
+  for(var_3 = 0; var_3 < var_0 && isalive(self) && !level.gameended; var_3 = var_3 + 0.05) {
     wait 0.05;
+  }
 
   var_1 maps\mp\gametypes\_hud_util::destroyelem();
   var_2 maps\mp\gametypes\_hud_util::destroyelem();
@@ -569,11 +583,13 @@ ispainted() {
 }
 
 setrefillgrenades() {
-  if(isDefined(self.primarygrenade))
+  if(isDefined(self.primarygrenade)) {
     self givemaxammo(self.primarygrenade);
+  }
 
-  if(isDefined(self.secondarygrenade))
+  if(isDefined(self.secondarygrenade)) {
     self givemaxammo(self.secondarygrenade);
+  }
 }
 
 setfinalstand() {
@@ -615,8 +631,9 @@ setjuiced(var_0, var_1, var_2) {
   level endon("end_game");
   self.isjuiced = 1;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1.25;
+  }
 
   self.movespeedscaler = var_0;
   maps\mp\gametypes\_weapons::updatemovespeedscale();
@@ -629,8 +646,9 @@ setjuiced(var_0, var_1, var_2) {
     var_4 = 32;
   }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 7;
+  }
 
   if(!isDefined(var_2) || var_2 == 1) {
     self.juicedtimer = maps\mp\gametypes\_hud_util::createtimer("hudsmall", 1.0);
@@ -671,25 +689,30 @@ setjuiced(var_0, var_1, var_2) {
 unsetjuiced(var_0) {
   if(!isDefined(var_0)) {
     if(maps\mp\_utility::isjuggernaut()) {
-      if(isDefined(self.juggmovespeedscaler))
+      if(isDefined(self.juggmovespeedscaler)) {
         self.movespeedscaler = self.juggmovespeedscaler;
-      else
+      }
+      else {
         self.movespeedscaler = 0.7;
+      }
     } else {
       self.movespeedscaler = level.baseplayermovescale;
 
-      if(maps\mp\_utility::_hasperk("specialty_lightweight"))
+      if(maps\mp\_utility::_hasperk("specialty_lightweight")) {
         self.movespeedscaler = maps\mp\_utility::lightweightscalar();
+      }
     }
 
     maps\mp\gametypes\_weapons::updatemovespeedscale();
   }
 
-  if(isDefined(self.juicedicon))
+  if(isDefined(self.juicedicon)) {
     self.juicedicon destroy();
+  }
 
-  if(isDefined(self.juicedtimer))
+  if(isDefined(self.juicedtimer)) {
     self.juicedtimer destroy();
+  }
 
   self.isjuiced = undefined;
   self notify("unset_juiced");
@@ -734,16 +757,19 @@ setlightarmorhp(var_0) {
 setlightarmor(var_0) {
   self notify("give_light_armor");
 
-  if(isDefined(self.lightarmorhp))
+  if(isDefined(self.lightarmorhp)) {
     unsetlightarmor();
+  }
 
   thread removelightarmorondeath();
   thread removelightarmoronmatchend();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.maxlightarmorhp = var_0;
-  else
+  }
+  else {
     self.maxlightarmorhp = 150;
+  }
 
   setlightarmorhp(self.maxlightarmorhp);
 }

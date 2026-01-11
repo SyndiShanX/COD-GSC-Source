@@ -112,8 +112,9 @@ slide_land_deep(guy) {
 get_my_index() {
   allies = getaiarray("allies");
   foreach(index, ai in allies) {
-    if(ai == self)
+    if(ai == self) {
       break;
+    }
   }
 
   index %= 3;

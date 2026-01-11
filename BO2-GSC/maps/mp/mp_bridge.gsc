@@ -109,14 +109,16 @@ ragdoll_override(idamage, smeansofdeath, sweapon, shitloc, vdir, vattackerorigin
     if(animhasnotetrack(deathanim, "start_ragdoll")) {
       times = getnotetracktimes(deathanim, "start_ragdoll");
 
-      if(isDefined(times))
+      if(isDefined(times)) {
         startfrac = times[0];
+      }
     }
 
     self.body = body;
 
-    if(!isDefined(self.switching_teams))
+    if(!isDefined(self.switching_teams)) {
       thread maps\mp\gametypes\_deathicons::adddeathicon(body, self, self.team, 5.0);
+    }
 
     self thread water_spash();
     return true;
@@ -133,8 +135,9 @@ water_spash() {
   trace = groundtrace(self.origin, self.origin - vectorscale((0, 0, 1), 2048.0), 0, self.body);
 
   if(trace["surfacetype"] == "water") {
-    while(self.origin[2] > trace["position"][2] + 5)
+    while(self.origin[2] > trace["position"][2] + 5) {
       wait 0.05;
+    }
 
     bone = self gettagorigin("j_spinelower");
     origin = (bone[0], bone[1], trace["position"][2] + 2.5);
@@ -144,8 +147,9 @@ water_spash() {
 }
 
 leveloverridetime(defaulttime) {
-  if(self isinwater())
+  if(self isinwater()) {
     return 1;
+  }
 
   return defaulttime;
 }
@@ -161,8 +165,9 @@ isinwater() {
     if(trigger.origin[2] > level.mapcenter[2]) {
       continue;
     }
-    if(self istouching(trigger))
+    if(self istouching(trigger)) {
       return true;
+    }
   }
 
   return false;

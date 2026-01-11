@@ -1146,8 +1146,9 @@ loco_slide_player_view_lerp_up(var_0) {
 }
 
 breach_enemy_death_anim_override() {
-  if(!isDefined(self.nodeathsound))
+  if(!isDefined(self.nodeathsound)) {
     animscripts\death::playdeathsound();
+  }
 
   if(isDefined(self.deathanim)) {
     self stopanimscripted();
@@ -1168,10 +1169,12 @@ loco_gunhold_player_drop_weapon(var_0) {
   level.player disableweaponswitch();
   level.player springcamdisabled(0.5);
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     thread maps\_art::dof_enable_script(0, 2, 1.8, 20, 61, 6, 0.1);
-  else
+  }
+  else {
     thread maps\_art::dof_enable_script(0, 2, 1.8, 20, 61, 2.2, 0.16);
+  }
 
   thread maps\skyway_loco::handle_revolver_bullet_fiction();
 }
@@ -1194,8 +1197,9 @@ notetrack_headbutt(var_0) {
   wait 0.1;
   level.player maps\_hud_util::fade_in(0.5, "white");
 
-  if(isDefined(level.end_control_enemies[2].magic_bullet_shield) && level.end_control_enemies[2].magic_bullet_shield)
+  if(isDefined(level.end_control_enemies[2].magic_bullet_shield) && level.end_control_enemies[2].magic_bullet_shield) {
     level.end_control_enemies[2] maps\_utility::stop_magic_bullet_shield();
+  }
 
   level.end_control_enemies[2] hide();
   level.end_control_enemies[2] delete();

@@ -20,8 +20,9 @@ onPlayerConnect() {
 }
 
 statGet(dataName) {
-  if(!level.onlineGame)
+  if(!level.onlineGame) {
     return 0;
+  }
   return self getStat(int(tableLookup("mp/playerStatsTable.csv", 1, dataName, 0)));
 }
 

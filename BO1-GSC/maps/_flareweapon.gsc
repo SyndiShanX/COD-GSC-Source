@@ -62,10 +62,12 @@ flareVision(player, flareEffectArea, position) {
     }
     count++;
   }
-  if(!isDefined(flareEffectArea))
+  if(!isDefined(flareEffectArea)) {
     wait(flare_get_dvar("flareBurnOutFadeWait", level.flareBurnOutFadeWait));
-  else if(distance(position, player.origin) < level.flareVisionEffectRadius)
+  }
+  else if(distance(position, player.origin) < level.flareVisionEffectRadius) {
     wait(flare_get_dvar("flareLookAwayFadeWait", level.flareLookAwayFadeWait));
+  }
   player.inFlareVisionArea = false;
   player VisionSetLerpRatio(0);
 }
@@ -85,13 +87,15 @@ flare_get_dvar(dvar, def) {
 
 player_is_driver() {
   if(isMP()) {
-    if(!isalive(self))
+    if(!isalive(self)) {
       return false;
+    }
     vehicle = self GetVehicleOccupied();
     if(isDefined(vehicle)) {
       seat = vehicle GetOccupantSeat(self);
-      if(isDefined(seat) && seat == 0)
+      if(isDefined(seat) && seat == 0) {
         return true;
+      }
     }
   }
   return false;

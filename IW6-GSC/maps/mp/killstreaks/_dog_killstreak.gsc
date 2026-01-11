@@ -37,10 +37,12 @@ tryUseDog(lifeId, streakName) {
 useDog() {
   if(isDefined(self.hasDog) && self.hasDog) {
     dog_type = self GetCommonPlayerDataReservedInt("mp_dog_type");
-    if(dog_type == 1)
+    if(dog_type == 1) {
       self iPrintLnBold(&"KILLSTREAKS_ALREADY_HAVE_WOLF");
-    else
+    }
+    else {
       self iPrintLnBold(&"KILLSTREAKS_ALREADY_HAVE_DOG");
+    }
     return false;
   }
 
@@ -98,13 +100,15 @@ on_agent_dog_killed(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir
   self.isActive = false;
   self.hasDied = false;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.hasDog = false;
+  }
 
   eAttacker.lastKillDogTime = GetTime();
 
-  if(isDefined(self.animCBs.OnExit[self.aiState]))
+  if(isDefined(self.animCBs.OnExit[self.aiState])) {
     self[[self.animCBs.OnExit[self.aiState]]]();
+  }
 
   if(isPlayer(eAttacker) && isDefined(self.owner) && (eAttacker != self.owner)) {
     self.owner leaderDialogOnPlayer("dog_killed");
@@ -135,14 +139,16 @@ on_agent_dog_killed(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir
 }
 
 on_damaged_finished(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
-  if(!isDefined(self.playing_pain_sound))
+  if(!isDefined(self.playing_pain_sound)) {
     self thread play_pain_sound(2.5);
+  }
 
   damageModified = iDamage;
   if(isDefined(sHitLoc) && sHitLoc == "head" && level.gametype != "horde") {
     damageModified = int(damageModified * 0.6);
-    if(iDamage > 0 && damageModified <= 0)
+    if(iDamage > 0 && damageModified <= 0) {
       damageModified = 1;
+    }
   }
 
   if(self.health - damageModified > 0) {
@@ -189,14 +195,17 @@ spawn_dog(optional_spawnOrigin, optional_spawnAngles, optional_owner) {
 
   dog_model = "mp_fullbody_dog_a";
   if(dog_type == 1) {
-    if(wolf_type == 0)
+    if(wolf_type == 0) {
       dog_model = "mp_fullbody_wolf_b";
-    else
+    }
+    else {
       dog_model = "mp_fullbody_wolf_c";
+    }
   }
 
-  if(IsHairRunning())
+  if(IsHairRunning()) {
     dog_model = dog_model + "_fur";
+  }
 
   self setModel(dog_model);
 
@@ -220,10 +229,12 @@ spawn_dog(optional_spawnOrigin, optional_spawnAngles, optional_owner) {
 
   self maps\mp\agents\dog\_dog_think::init();
 
-  if(dog_type == 1)
+  if(dog_type == 1) {
     animclass = "wolf_animclass";
-  else
+  }
+  else {
     animclass = "dog_animclass";
+  }
 
   self SpawnAgent(spawnOrigin, spawnAngles, animclass, 15, 40, optional_owner);
   level notify("spawned_agent", self);
@@ -253,10 +264,12 @@ spawn_dog(optional_spawnOrigin, optional_spawnAngles, optional_owner) {
   wait(0.1);
 
   if(IsHairRunning()) {
-    if(dog_type == 1)
+    if(dog_type == 1) {
       furFX = level.wolfFurFX[wolf_type];
-    else
+    }
+    else {
       furFX = level.furFX;
+    }
 
     assert(isDefined(furFX));
     playFXOnTag(furFX, self, "tag_origin");

@@ -39,26 +39,32 @@ init_hero_startstruct(str_hero_name, str_struct_targetname) {
   s_start_pos = getstruct(str_struct_targetname, "targetname");
   assert(isDefined(s_start_pos), "Bad Hero setup struct: " + str_struct_targetname);
 
-  if(isDefined(s_start_pos.angles))
+  if(isDefined(s_start_pos.angles)) {
     v_angles = s_start_pos.angles;
-  else
+  }
+  else {
     v_angles = (0, 0, 0);
+  }
 
   ai_hero forceteleport(s_start_pos.origin, v_angles);
   return ai_hero;
 }
 
 add_cleanup_ent(str_category) {
-  if(!isDefined(level.a_e_cleanup))
+  if(!isDefined(level.a_e_cleanup)) {
     level.a_e_cleanup = [];
+  }
 
-  if(!isDefined(level.a_e_cleanup[str_category]))
+  if(!isDefined(level.a_e_cleanup[str_category])) {
     level.a_e_cleanup[str_category] = [];
+  }
 
-  if(isarray(self))
+  if(isarray(self)) {
     level.a_e_cleanup[str_category] = arraycombine(level.a_e_cleanup[str_category], self, 1, 0);
-  else
+  }
+  else {
     level.a_e_cleanup[str_category][level.a_e_cleanup[str_category].size] = self;
+  }
 }
 
 cleanup_ents(str_category) {
@@ -67,8 +73,9 @@ cleanup_ents(str_category) {
 
   if(isDefined(level.a_e_cleanup) && isDefined(level.a_e_cleanup[str_category])) {
     foreach(ent in level.a_e_cleanup[str_category]) {
-      if(isDefined(ent))
+      if(isDefined(ent)) {
         ent delete();
+      }
     }
 
     level.a_e_cleanup[str_category] = undefined;
@@ -76,18 +83,21 @@ cleanup_ents(str_category) {
 
   a_ents = getEntArray(str_category, "script_noteworthy");
 
-  foreach(ent in a_ents)
+  foreach(ent in a_ents) {
   ent delete();
+  }
 
   if(str_category == "cleanup_outersolar") {
-    foreach(e_solarsystem in getEntArray("solar_systems", "script_noteworthy"))
+    foreach(e_solarsystem in getEntArray("solar_systems", "script_noteworthy")) {
     e_solarsystem delete();
+    }
   }
 }
 
 cleanup(ent) {
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 cleanup_kvp(str_value, str_key) {
@@ -98,22 +108,25 @@ cleanup_structs(str_category) {
   level thread delete_structs(str_category, "script_noteworthy");
 
   if(str_category == "cleanup_outersolar") {
-    foreach(s_dancer in getstructarray("dancers", "script_noteworthy"))
+    foreach(s_dancer in getstructarray("dancers", "script_noteworthy")) {
     s_dancer structdelete();
+    }
   }
 }
 
 delete_structs(str_value, str_key) {
-  foreach(s_struct in getstructarray(str_value, str_key))
+  foreach(s_struct in getstructarray(str_value, str_key)) {
   s_struct structdelete();
+  }
 }
 
 setup_elevator(str_brushmodelname, str_modelname, str_cleanup) {
   bm_lift = getent(str_brushmodelname, "targetname");
   a_bm_door_clips = getEntArray(bm_lift.target, "targetname");
 
-  foreach(bm_door_clip in a_bm_door_clips)
+  foreach(bm_door_clip in a_bm_door_clips) {
   bm_door_clip linkto(bm_lift);
+  }
 
   m_lift = getent(str_modelname, "targetname");
   m_lift thread play_fx("elevator_light", undefined, undefined, "elevator_flashlight_off", 1, "tag_flashlight");
@@ -127,26 +140,31 @@ setup_elevator(str_brushmodelname, str_modelname, str_cleanup) {
 }
 
 elevator_move_doors(b_open, n_time, n_accel, n_decel, b_connect_paths) {
-  if(!isDefined(n_time))
+  if(!isDefined(n_time)) {
     n_time = 2.0;
+  }
 
-  if(!isDefined(n_accel))
+  if(!isDefined(n_accel)) {
     n_accel = 0.0;
+  }
 
-  if(!isDefined(n_decel))
+  if(!isDefined(n_decel)) {
     n_decel = 0.0;
+  }
 
   a_doors = getEntArray(self.target, "targetname");
 
   foreach(m_door in a_doors) {
-    if(b_open)
+    if(b_open) {
       m_door unlink();
+    }
 
     if(isDefined(m_door.script_float)) {
       n_rotate = m_door.script_float;
 
-      if(!b_open)
+      if(!b_open) {
         n_rotate = n_rotate * -1;
+      }
 
       m_door rotateyaw(n_rotate, n_time, n_accel, n_decel);
       continue;
@@ -155,8 +173,9 @@ elevator_move_doors(b_open, n_time, n_accel, n_decel, b_connect_paths) {
     if(isDefined(m_door.script_vector)) {
       v_move = m_door.script_vector;
 
-      if(!b_open)
+      if(!b_open) {
         v_move = v_move * -1;
+      }
 
       m_door moveto(m_door.origin + v_move, n_time, n_accel, n_decel);
     }
@@ -165,8 +184,9 @@ elevator_move_doors(b_open, n_time, n_accel, n_decel, b_connect_paths) {
   wait(n_time);
 
   if(!b_open) {
-    foreach(m_door in a_doors)
+    foreach(m_door in a_doors) {
     m_door linkto(self);
+    }
   }
 
   if(isDefined(b_connect_paths)) {
@@ -184,8 +204,9 @@ elevator_move_doors(b_open, n_time, n_accel, n_decel, b_connect_paths) {
 entity_death_in_pose_after_time(delay, str_pose) {
   self endon("death");
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   while(true) {
     if(self.a.pose == str_pose) {
@@ -204,14 +225,17 @@ spawn_fn_ai_run_to_target(player_favourate_enemy, str_cleanup_category, ignore_s
 }
 
 entity_common_spawn_setup(player_favourate_enemy, str_cleanup_category, ignore_surpression, disable_grenades) {
-  if(isDefined(player_favourate_enemy) && player_favourate_enemy != 0)
+  if(isDefined(player_favourate_enemy) && player_favourate_enemy != 0) {
     self.favoriteenemy = level.player;
+  }
 
-  if(isDefined(str_cleanup_category))
+  if(isDefined(str_cleanup_category)) {
     self add_cleanup_ent(str_cleanup_category);
+  }
 
-  if(isDefined(ignore_surpression) && ignore_surpression != 0)
+  if(isDefined(ignore_surpression) && ignore_surpression != 0) {
     self.script_ignore_suppression = 1;
+  }
 
   if(isDefined(disable_grenades) && disable_grenades != 0) {
     self.grenadeammo = 0;
@@ -239,8 +263,9 @@ spawn_fn_ai_run_to_jumper_node(player_favourate_enemy, str_cleanup_category, ign
 }
 
 run_to_jumper_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
-  if(isDefined(self.npc_damage_scale))
+  if(isDefined(self.npc_damage_scale)) {
     n_damage = int(n_damage * self.npc_damage_scale);
+  }
 
   return n_damage;
 }
@@ -249,61 +274,73 @@ spawn_ai_battle(str_friendly_sp, str_enemy_sp, friendly_health, enemy_health, fr
   sp_friendly = getent(str_friendly_sp, "targetname");
   ai_friendly = simple_spawn_single(sp_friendly, ::spawn_fn_ai_run_to_holding_node);
 
-  if(isDefined(friendly_health))
+  if(isDefined(friendly_health)) {
     ai_friendly.health = friendly_health;
+  }
 
   sp_enemy = getent(str_enemy_sp, "targetname");
   ai_enemy = simple_spawn_single(sp_enemy, ::spawn_fn_ai_run_to_holding_node);
 
-  if(isDefined(enemy_health))
+  if(isDefined(enemy_health)) {
     ai_enemy.health = enemy_health;
+  }
 
   ai_friendly.favouriteenemy = ai_enemy;
   ai_enemy.favouriteenemy = ai_friendly;
 
-  if(!isDefined(friendly_grenades))
+  if(!isDefined(friendly_grenades)) {
     ai_friendly.grenadeammo = 0;
+  }
 
-  if(!isDefined(enemy_grenades))
+  if(!isDefined(enemy_grenades)) {
     ai_enemy.grenadeammo = 0;
+  }
 
-  if(!isDefined(friendly_accuracy))
+  if(!isDefined(friendly_accuracy)) {
     ai_friendly.script_accuracy = friendly_accuracy;
+  }
 
-  if(!isDefined(enemy_accuracy))
+  if(!isDefined(enemy_accuracy)) {
     ai_enemy.script_accuracy = enemy_accuracy;
+  }
 }
 
 add_category_to_ai_in_scene(str_scene_name, str_category) {
   a_ai = get_ais_from_scene(str_scene_name);
 
   if(isDefined(a_ai)) {
-    for(i = 0; i < a_ai.size; i++)
+    for(i = 0; i < a_ai.size; i++) {
       a_ai[i] add_cleanup_ent(str_category);
+    }
   }
 }
 
 print3d_ent(str_msg, v_offset, n_time, msg_endon) {
-  if(!isDefined(n_time))
+  if(!isDefined(n_time)) {
     n_time = 99999;
+  }
 
   self endon("death");
 
-  if(isDefined(msg_endon))
+  if(isDefined(msg_endon)) {
     level endon(msg_endon);
+  }
 
   n_time = gettime() + n_time * 1000;
 
-  if(!isDefined(v_offset))
+  if(!isDefined(v_offset)) {
     v_offset = vectorscale((0, 0, 1), 32.0);
+  }
 
   v_offset = v_offset + vectorscale((0, 0, 1), 1.5);
 
   if(str_msg == "animname") {
-    if(isDefined(self.animname))
+    if(isDefined(self.animname)) {
       str_msg = self.animname;
-    else
+    }
+    else {
       str_msg = "NA";
+    }
   }
 
   while(gettime() < n_time) {
@@ -314,8 +351,9 @@ print3d_ent(str_msg, v_offset, n_time, msg_endon) {
 }
 
 delete_hero(ai_hero) {
-  if(isalive(ai_hero))
+  if(isalive(ai_hero)) {
     ai_hero delete();
+  }
 
   level.heroes = array_removedead(level.heroes);
 }
@@ -331,8 +369,9 @@ simple_spawn_script_delay(a_ents, spawn_fn, param1, param2, param3, param4, para
 
     e_ai = simple_spawn_single(e_ent, spawn_fn, param1, param2, param3, param4, param5, 0);
 
-    if(isDefined(e_ent.script_health))
+    if(isDefined(e_ent.script_health)) {
       e_ai.health = e_ent.script_health;
+    }
   }
 }
 
@@ -353,11 +392,13 @@ run_to_node_and_die(n_node) {
 aggressive_runner(str_category, n_delay) {
   self endon("death");
 
-  if(isDefined(n_delay))
+  if(isDefined(n_delay)) {
     wait(n_delay);
+  }
 
-  if(isDefined(str_category))
+  if(isDefined(str_category)) {
     self add_cleanup_ent(str_category);
+  }
 
   self.ignoresuppression = 1;
   self change_movemode("sprint");
@@ -371,17 +412,20 @@ player_rusher(str_category, delay, breakoff_distance, npc_damage_scale, npc_dama
 helicopter_fly_down_attack_path(teleport_to_start_node, use_start_node_angles, initial_delay, accel, str_start_struct, reached_node_dist, delete_at_path_end) {
   self endon("death");
 
-  if(isDefined(initial_delay))
+  if(isDefined(initial_delay)) {
     wait(initial_delay);
+  }
 
   speed = 30;
   s_node = getstruct(str_start_struct, "targetname");
 
-  if(teleport_to_start_node)
+  if(teleport_to_start_node) {
     self.origin = s_node.origin;
+  }
 
-  if(use_start_node_angles)
+  if(use_start_node_angles) {
     self.angles = s_node.angles;
+  }
 
   wait 0.01;
   e_look_at_ent = spawn("script_origin", (0, 0, 0));
@@ -390,8 +434,9 @@ helicopter_fly_down_attack_path(teleport_to_start_node, use_start_node_angles, i
     s_prev_node = s_node;
     s_node = getstruct(s_prev_node.target, "targetname");
 
-    if(isDefined(s_node.speed))
+    if(isDefined(s_node.speed)) {
       speed = s_node.speed;
+    }
 
     self setspeed(speed, accel, accel);
     self setvehgoalpos(s_node.origin);
@@ -414,10 +459,12 @@ helicopter_fly_down_attack_path(teleport_to_start_node, use_start_node_angles, i
   self notify("heli_path_complete");
   wait 0.1;
 
-  if(isDefined(delete_at_path_end) && delete_at_path_end == 1)
+  if(isDefined(delete_at_path_end) && delete_at_path_end == 1) {
     self delete();
-  else
+  }
+  else {
     self setspeed(0, accel, accel);
+  }
 }
 
 pip_karma_event(str_scene_name) {
@@ -425,22 +472,26 @@ pip_karma_event(str_scene_name) {
 }
 
 earthquake_delay(delay, scale, duration, origin, radius) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   earthquake(scale, duration, origin, radius);
 }
 
 civ_run_from_node_to_node(delay, str_civ_targetname, str_node_start, str_node_end) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   n_node1_start = getnode(str_node_start, "targetname");
 
-  if(isDefined(n_node1_start.target))
+  if(isDefined(n_node1_start.target)) {
     n_node1_end = getnode(n_node1_start.target, "targetname");
-  else
+  }
+  else {
     n_node1_end = getnode(str_node_end, "targetname");
+  }
 
   ai_civ = simple_spawn_single(str_civ_targetname);
 
@@ -475,11 +526,13 @@ override_actor_killed(einflictor, eattacker, idamage, smeansofdeath, sweapon, vd
   if(isDefined(eattacker)) {
     if(isplayer(eattacker)) {
       if(self.team == "axis") {
-        if(isDefined(self.on_sundeck) && self.on_sundeck)
+        if(isDefined(self.on_sundeck) && self.on_sundeck) {
           level notify("killed_with_trespasser");
+        }
 
-        if(isDefined(self.b_rappelling) && self.b_rappelling)
+        if(isDefined(self.b_rappelling) && self.b_rappelling) {
           level notify("killed_while_rappelling");
+        }
       }
     }
   }
@@ -489,8 +542,9 @@ callback_actorkilled_headshotcheck(einflictor, eattacker, idamage, smeansofdeath
   if(isDefined(eattacker) && isplayer(eattacker) && self.team == "axis") {
     level.player notify("player_killed_enemy");
 
-    if(shitloc == "helmet")
+    if(shitloc == "helmet") {
       level notify("bar_fight_headshot");
+    }
   }
 }
 
@@ -544,8 +598,9 @@ fast_complete_spider_bot(str_notify) {
   flag_wait("spiderbot_entered_crc");
   scene_wait("it_mgr_surprise");
 
-  if(flag("it_mgr_disabled"))
+  if(flag("it_mgr_disabled")) {
     self notify(str_notify);
+  }
 }
 
 club_speed_kill_challenge(str_notify) {
@@ -568,8 +623,9 @@ karma_no_death_challenge(str_notify) {
   level waittill("nextmission");
   n_deaths = get_player_stat("deaths");
 
-  if(n_deaths == 0)
+  if(n_deaths == 0) {
     self notify(str_notify);
+  }
 }
 
 timednotify(time, msg) {
@@ -581,10 +637,12 @@ timednotify(time, msg) {
 screen_message(str_msg, n_timeout, str_notify) {
   screen_message_create(str_msg);
 
-  if(isDefined(str_notify))
+  if(isDefined(str_notify)) {
     waittill_notify_or_timeout(n_timeout, str_notify);
-  else
+  }
+  else {
     wait(n_timeout);
+  }
 
   screen_message_delete();
 }
@@ -625,27 +683,31 @@ react_scene(str_triggername, str_start_idle, str_react, str_end_idle, str_end_fl
     level thread react_scene_end(str_start_idle, str_react, str_end_idle, str_end_flag);
   }
 
-  if(isDefined(str_start_idle))
+  if(isDefined(str_start_idle)) {
     thread run_scene(str_start_idle);
+  }
 
   trigger_wait(str_triggername);
   end_scene(str_start_idle);
   run_scene(str_react, 1);
 
-  if(isDefined(str_end_idle))
+  if(isDefined(str_end_idle)) {
     thread run_scene(str_end_idle);
+  }
 }
 
 react_scene_end(str_start_idle, str_react, str_end_idle, str_end_flag) {
   flag_wait(str_end_flag);
 
-  if(isDefined(str_start_idle))
+  if(isDefined(str_start_idle)) {
     delete_scene_all(str_start_idle, 1, 0);
+  }
 
   delete_scene_all(str_react, 1, 0);
 
-  if(isDefined(str_end_idle))
+  if(isDefined(str_end_idle)) {
     delete_scene_all(str_end_idle, 1, 0);
+  }
 }
 
 turn_on_enemy_highlight(guy) {
@@ -653,8 +715,9 @@ turn_on_enemy_highlight(guy) {
     self setclientflag(4);
     self waittill("death");
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self clearclientflag(4);
+    }
   }
 }
 
@@ -663,20 +726,23 @@ autoexec init_node_flags() {
 
   foreach(node in a_nodes) {
     if(isDefined(node.script_flag_wait)) {
-      if(!level flag_exists(node.script_flag_wait))
+      if(!level flag_exists(node.script_flag_wait)) {
         level flag_init(node.script_flag_wait);
+      }
     }
 
     if(isDefined(node.script_flag_set)) {
-      if(!level flag_exists(node.script_flag_set))
+      if(!level flag_exists(node.script_flag_set)) {
         level flag_init(node.script_flag_set);
+      }
     }
   }
 }
 
 follow_path(nd_path, b_teleport) {
-  if(!isDefined(b_teleport))
+  if(!isDefined(b_teleport)) {
     b_teleport = 0;
+  }
 
   self endon("death");
   self endon("follow_path_end");
@@ -685,17 +751,21 @@ follow_path(nd_path, b_teleport) {
   assert(isDefined(self.targetname), "Must have a targetname to follow a path.");
   str_dont_stop_flag = self.targetname + "_dont_stop";
 
-  if(!level flag_exists(str_dont_stop_flag))
+  if(!level flag_exists(str_dont_stop_flag)) {
     level flag_init(str_dont_stop_flag);
+  }
 
-  if(!self flag_exists("walk_path_pause"))
+  if(!self flag_exists("walk_path_pause")) {
     self ent_flag_init("walk_path_pause");
+  }
 
   if(isstring(nd_path)) {
-    if(isai(self))
+    if(isai(self)) {
       nd_path = getnode(nd_path, "targetname");
-    else if(isDefined(self.classname) && self.classname == "script_vehicle")
+    }
+    else if(isDefined(self.classname) && self.classname == "script_vehicle") {
       nd_path = getvehiclenode(nd_path, "targetname");
+    }
   }
 
   a_path = [];
@@ -704,15 +774,18 @@ follow_path(nd_path, b_teleport) {
     a_path[a_path.size] = nd_path;
 
     if(isDefined(nd_path.target)) {
-      if(isai(self))
+      if(isai(self)) {
         nd_path = getnode(nd_path.target, "targetname");
-      else if(isDefined(self.classname) && self.classname == "script_vehicle")
+      }
+      else if(isDefined(self.classname) && self.classname == "script_vehicle") {
         nd_path = getvehiclenode(nd_path.target, "targetname");
+      }
 
       e_trig = getent(nd_path.targetname, "target");
 
-      if(isDefined(e_trig))
+      if(isDefined(e_trig)) {
         nd_path thread follow_path_node_trigger_wait(e_trig);
+      }
     } else
       break;
   }
@@ -727,8 +800,9 @@ follow_path(nd_path, b_teleport) {
   sprint_dist_sq = 40000;
 
   if(a_path.size > 0 && b_teleport) {
-    if(isai(self))
+    if(isai(self)) {
       self forceteleport(a_path[0].origin, a_path[0].angles);
+    }
     else {
       self.origin = a_path[0].origin;
       self.angles = a_path[0].angles;
@@ -739,16 +813,19 @@ follow_path(nd_path, b_teleport) {
     self ent_flag_waitopen("walk_path_pause");
 
     if(isDefined(self.follow_path_skipto)) {
-      if(!isDefined(nd_path.script_noteworthy) || nd_path.script_noteworthy != self.follow_path_skipto)
+      if(!isDefined(nd_path.script_noteworthy) || nd_path.script_noteworthy != self.follow_path_skipto) {
         continue;
+      }
     }
 
     self.follow_path_skipto = undefined;
 
-    if(isDefined(nd_path.radius) && nd_path.radius != 0)
+    if(isDefined(nd_path.radius) && nd_path.radius != 0) {
       self.goalradius = nd_path.radius;
-    else
+    }
+    else {
       self.goalradius = goal_radius;
+    }
 
     self notify("new_follow_node", nd_path);
     b_stop = nd_path should_stop_at_goal();
@@ -765,23 +842,30 @@ follow_path(nd_path, b_teleport) {
 
       self.disablearrivals = 0;
     } else if(isDefined(self.classname) && self.classname == "script_vehicle") {
-      if(isDefined(nd_path.script_unload) && self.vehicleclass == "helicopter")
+      if(isDefined(nd_path.script_unload) && self.vehicleclass == "helicopter") {
         self thread helicopter_unload(nd_path);
-      else
+      }
+      else {
         self setvehgoalpos(nd_path.origin, b_stop);
+      }
 
-      if(nd_path has_spawnflag(65536) && isDefined(nd_path.angles))
+      if(nd_path has_spawnflag(65536) && isDefined(nd_path.angles)) {
         self settargetyaw(nd_path.angles[1]);
-      else
+      }
+      else {
         self cleartargetyaw();
+      }
 
-      if(isDefined(nd_path.speed))
+      if(isDefined(nd_path.speed)) {
         self setspeed(nd_path.speed * 0.0568182);
+      }
 
-      if(isDefined(nd_path.radius) && nd_path.radius != 0)
+      if(isDefined(nd_path.radius) && nd_path.radius != 0) {
         self setneargoalnotifydist(nd_path.radius);
-      else
+      }
+      else {
         self setneargoalnotifydist(50);
+      }
 
       self waittill("near_goal");
     }
@@ -789,40 +873,50 @@ follow_path(nd_path, b_teleport) {
     self notify("reached_follow_node", nd_path);
     nd_path thread script_delete(self);
 
-    if(isDefined(nd_path.script_notify))
+    if(isDefined(nd_path.script_notify)) {
       self notify(nd_path.script_notify);
+    }
 
-    if(isDefined(nd_path.script_ignoreall))
+    if(isDefined(nd_path.script_ignoreall)) {
       self set_ignoreall(nd_path.script_ignoreall);
+    }
 
-    if(isDefined(nd_path.script_flag_set))
+    if(isDefined(nd_path.script_flag_set)) {
       flag_set(nd_path.script_flag_set);
+    }
 
-    if(isDefined(nd_path.script_unload))
+    if(isDefined(nd_path.script_unload)) {
       self waittill("unloaded");
+    }
 
-    if(nd_path flag_exists("trigger_wait") && !isgodmode(level.player))
+    if(nd_path flag_exists("trigger_wait") && !isgodmode(level.player)) {
       nd_path ent_flag_waitopen("trigger_wait");
+    }
 
-    if(isDefined(nd_path.script_aigroup))
+    if(isDefined(nd_path.script_aigroup)) {
       flag_wait_either(nd_path.script_aigroup + "_cleared", str_dont_stop_flag);
+    }
 
-    if(isDefined(nd_path.script_flag_wait))
+    if(isDefined(nd_path.script_flag_wait)) {
       flag_wait_either(nd_path.script_flag_wait, str_dont_stop_flag);
+    }
 
     if(!flag(str_dont_stop_flag)) {
-      if(isDefined(nd_path.script_waittill) && nd_path.script_waittill != "look_at")
+      if(isDefined(nd_path.script_waittill) && nd_path.script_waittill != "look_at") {
         level waittill_either(nd_path.script_waittill, str_dont_stop_flag);
+      }
     }
 
     if(!flag(str_dont_stop_flag)) {
-      if(isDefined(nd_path.script_wait))
+      if(isDefined(nd_path.script_wait)) {
         nd_path script_wait();
+      }
     }
 
     if(!flag(str_dont_stop_flag)) {
-      if(isDefined(nd_path.script_run_scene))
+      if(isDefined(nd_path.script_run_scene)) {
         level run_scene(nd_path.script_run_scene);
+      }
     }
   }
 
@@ -830,23 +924,29 @@ follow_path(nd_path, b_teleport) {
 }
 
 should_stop_at_goal() {
-  if(flag_exists("trigger_wait") && !ent_flag("trigger_wait"))
+  if(flag_exists("trigger_wait") && !ent_flag("trigger_wait")) {
     return true;
+  }
 
-  if(isDefined(self.script_aigroup) && !flag(self.script_aigroup + "_cleared"))
+  if(isDefined(self.script_aigroup) && !flag(self.script_aigroup + "_cleared")) {
     return true;
+  }
 
-  if(isDefined(self.script_flag_wait) && !flag(self.script_flag_wait))
+  if(isDefined(self.script_flag_wait) && !flag(self.script_flag_wait)) {
     return true;
+  }
 
-  if(isDefined(self.script_waittill))
+  if(isDefined(self.script_waittill)) {
     return true;
+  }
 
-  if(isDefined(self.script_wait))
+  if(isDefined(self.script_wait)) {
     return true;
+  }
 
-  if(isDefined(self.script_unload))
+  if(isDefined(self.script_unload)) {
     return true;
+  }
 
   return false;
 }
@@ -856,13 +956,15 @@ helicopter_unload(nd_path) {
   goal = nd_path.origin;
   trace = bulletTrace(nd_path.origin, nd_path.origin - vectorscale((0, 0, 1), 10000.0), 0, undefined, 1);
 
-  if(trace["fraction"] <= 1)
+  if(trace["fraction"] <= 1) {
     goal = (trace["position"][0], trace["position"][1], trace["position"][2] + self.fastropeoffset);
+  }
 
   drop_offset_tag = "tag_fastrope_ri";
 
-  if(isDefined(self.drop_offset_tag))
+  if(isDefined(self.drop_offset_tag)) {
     drop_offset_tag = self.drop_offset_tag;
+  }
 
   drop_offset = self gettagorigin("tag_origin") - self gettagorigin(drop_offset_tag);
   goal = goal + (drop_offset[0], drop_offset[1], 0);
@@ -875,12 +977,14 @@ stop_follow_path(str_waittill) {
   self endon("death");
   self endon("follow_path_end");
 
-  if(isDefined(str_waittill))
+  if(isDefined(str_waittill)) {
     self waittill(str_waittill);
+  }
 
   if(isai(self)) {
-    if(isDefined(self.follow_path_old_forcecolor))
+    if(isDefined(self.follow_path_old_forcecolor)) {
       enable_ai_color();
+    }
   }
 
   self notify("follow_path_end");
@@ -893,8 +997,9 @@ follow_path_node_trigger_wait(e_trig) {
 }
 
 take_player_damage_only(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
-  if(!isplayer(eattacker))
+  if(!isplayer(eattacker)) {
     idamage = 0;
+  }
 
   return idamage;
 }
@@ -906,8 +1011,9 @@ take_player_damage_only_anim_func(ent) {
 spawn_func_helicopter() {
   target_set(self);
 
-  if(!isDefined(self.script_string) && !isDefined("follow_path") || isDefined(self.script_string) && isDefined("follow_path") && self.script_string == "follow_path")
+  if(!isDefined(self.script_string) && !isDefined("follow_path") || isDefined(self.script_string) && isDefined("follow_path") && self.script_string == "follow_path") {
     self follow_path(self.target, 1);
+  }
 }
 
 can_see_position(v_pos, req_dot) {
@@ -925,16 +1031,18 @@ can_see_position(v_pos, req_dot) {
 }
 
 set_level_goal(level_goal, str_key) {
-  if(!isDefined(str_key))
+  if(!isDefined(str_key)) {
     str_key = "targetname";
+  }
 
   e_goal = undefined;
 
   if(isstring(level_goal)) {
     e_goal = getent(level_goal, str_key);
 
-    if(!isDefined(e_goal))
+    if(!isDefined(e_goal)) {
       e_goal = getstruct(level_goal, str_key);
+    }
   } else
     e_goal = level_goal;
 
@@ -960,8 +1068,9 @@ script_delete(ent) {
         ent.delete_on_death = 1;
         ent notify("death");
 
-        if(!isalive(ent))
+        if(!isalive(ent)) {
           ent delete();
+        }
       } else
         ent delete();
     } else if(self.script_delete == 2)
@@ -977,8 +1086,9 @@ add_effect_to_ent_when_stops_falling(delay, str_ent_targetname, effect, min_wait
   e_ai = getent(str_ent_targetname, "targetname");
   e_ai endon("death");
 
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   wait(min_wait);
   last_height = -1000000;
@@ -998,8 +1108,9 @@ add_effect_to_ent_when_stops_falling(delay, str_ent_targetname, effect, min_wait
 }
 
 die_behind_player(s_exit) {
-  if(!isDefined(level.auto_kill_ai))
+  if(!isDefined(level.auto_kill_ai)) {
     level.auto_kill_ai = [];
+  }
 
   self.auto_kill_position = distance2dsquared(self.origin, s_exit.origin);
   n_index = 0;
@@ -1015,8 +1126,9 @@ die_behind_player(s_exit) {
   arrayinsert(level.auto_kill_ai, self, n_index);
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     arrayremovevalue(level.auto_kill_ai, self);
+  }
   else {
     __new = [];
 
@@ -1038,8 +1150,9 @@ die_behind_player(s_exit) {
 kill_behind_player() {
   max_ai = 20;
 
-  if(!isDefined(level.auto_kill_ai))
+  if(!isDefined(level.auto_kill_ai)) {
     level.auto_kill_ai = [];
+  }
 
   while(true) {
     wait 0.05;
@@ -1054,10 +1167,12 @@ kill_behind_player() {
         ai = level.auto_kill_ai[i];
 
         if(isalive(ai) && ai.takedamage && !isDefined(ai.overrideactordamage)) {
-          if(ai sightconetrace(v_eye, level.player) < 0.1)
+          if(ai sightconetrace(v_eye, level.player) < 0.1) {
             ai delete();
-          else
+          }
+          else {
             ai thread bloody_death();
+          }
 
           n_kill--;
           arrayremoveindex(level.auto_kill_ai, i);
@@ -1070,8 +1185,9 @@ kill_behind_player() {
 
 auto_ai_cleanup() {
   foreach(ai in getaiarray()) {
-    if(!(isDefined(ai.magic_bullet_shield) && ai.magic_bullet_shield))
+    if(!(isDefined(ai.magic_bullet_shield) && ai.magic_bullet_shield)) {
       ai thread auto_delete_with_ref();
+    }
   }
 }
 
@@ -1094,8 +1210,9 @@ wipe_volume(str_volume) {
 
   foreach(ent in a_touching_ents) {
     if(isDefined(ent)) {
-      if(!(isDefined(ent.script_convert) && !ent.script_convert) && !(!isDefined(ent.script_noteworthy) && !isDefined("fxanim") || isDefined(ent.script_noteworthy) && isDefined("fxanim") && ent.script_noteworthy == "fxanim") && ent istouching(e_cleanup_volume))
+      if(!(isDefined(ent.script_convert) && !ent.script_convert) && !(!isDefined(ent.script_noteworthy) && !isDefined("fxanim") || isDefined(ent.script_noteworthy) && isDefined("fxanim") && ent.script_noteworthy == "fxanim") && ent istouching(e_cleanup_volume)) {
         ent delete();
+      }
 
       n_count++;
 
@@ -1110,8 +1227,9 @@ wipe_volume(str_volume) {
 
   foreach(ent in a_other_ents) {
     if(isDefined(ent)) {
-      if(!(isDefined(ent.script_convert) && !ent.script_convert) && !(!isDefined(ent.script_noteworthy) && !isDefined("fxanim") || isDefined(ent.script_noteworthy) && isDefined("fxanim") && ent.script_noteworthy == "fxanim") && is_point_inside_volume(ent.origin, e_cleanup_volume))
+      if(!(isDefined(ent.script_convert) && !ent.script_convert) && !(!isDefined(ent.script_noteworthy) && !isDefined("fxanim") || isDefined(ent.script_noteworthy) && isDefined("fxanim") && ent.script_noteworthy == "fxanim") && is_point_inside_volume(ent.origin, e_cleanup_volume)) {
         ent delete();
+      }
 
       n_count++;
 
@@ -1126,8 +1244,9 @@ wipe_volume(str_volume) {
 defalco_marker_think() {
   s_start_position = getstruct("defalco_marker_start", "targetname");
 
-  if(level.skipto_point == "Sundeck")
+  if(level.skipto_point == "Sundeck") {
     s_start_position = getstruct("defalco_marker_start2", "script_noteworthy");
+  }
 
   s_target_position = getstruct(s_start_position.target, "targetname");
   level.fake_defalco = spawn_model("tag_origin", s_start_position.origin);
@@ -1144,10 +1263,12 @@ defalco_marker_think() {
     level.fake_defalco moveto(v_target_position, 0.05, 0, 0);
 
     if(distancesquared(level.fake_defalco.origin, s_target_position.origin) <= 64) {
-      if(isDefined(s_target_position.target))
+      if(isDefined(s_target_position.target)) {
         s_target_position = getstruct(s_target_position.target, "targetname");
-      else
+      }
+      else {
         s_target_position = undefined;
+      }
     }
 
     wait 0.05;

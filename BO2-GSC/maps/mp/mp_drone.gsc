@@ -68,8 +68,9 @@ main() {
   spawncollision("collision_physics_wall_512x512x10", "collider", (-1091.83, 3083.21, 503), (360, 136.6, -180));
   spawncollision("collision_physics_wall_512x512x10", "collider", (-1504.82, 1671.75, 503), (1.0, 174.2, -180));
 
-  if(getgametypesetting("allowMapScripting"))
+  if(getgametypesetting("allowMapScripting")) {
     level maps\mp\mp_drone_doors::init();
+  }
 
   level.remotemotarviewleft = 35;
   level.remotemotarviewright = 35;
@@ -91,11 +92,13 @@ levelspawndvars(reset_dvars) {
 geo_changes() {
   rts_floor = getent("overwatch_floor", "targetname");
 
-  if(isDefined(rts_floor))
+  if(isDefined(rts_floor)) {
     rts_floor delete();
+  }
 
   removes = getEntArray("rts_only", "targetname");
 
-  foreach(removal in removes)
+  foreach(removal in removes) {
   removal delete();
+  }
 }

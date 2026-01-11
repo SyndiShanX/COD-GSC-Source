@@ -66,10 +66,12 @@ init() {
 
   game["dialog"]["boost"] = "boost";
 
-  if(!isDefined(game["dialog"]["offense_obj"]))
+  if(!isDefined(game["dialog"]["offense_obj"])) {
     game["dialog"]["offense_obj"] = "boost";
-  if(!isDefined(game["dialog"]["defense_obj"]))
+  }
+  if(!isDefined(game["dialog"]["defense_obj"])) {
     game["dialog"]["defense_obj"] = "boost";
+  }
 
   game["dialog"]["hardcore"] = "hardcore";
   game["dialog"]["highspeed"] = "highspeed";
@@ -250,20 +252,25 @@ doIntro() {
   level endon("host_migration_begin");
 
   if(!level.splitscreen || level.splitscreen && !isDefined(level.playedStartingMusic)) {
-    if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary())
+    if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary()) {
       self playLocalSound(game["music"]["spawn_" + self.team]);
+    }
 
-    if(level.splitscreen)
+    if(level.splitscreen) {
       level.playedStartingMusic = true;
+    }
   }
 
   if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
-    if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies")
+    if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies") {
       self leaderDialogOnPlayer("allies_gametype");
-    else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis")
+    }
+    else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
       self leaderDialogOnPlayer("axis_gametype");
-    else if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary())
+    }
+    else if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary()) {
       self leaderDialogOnPlayer("gametype");
+    }
   }
 
   gameFlagWait("prematch_done");
@@ -272,11 +279,13 @@ doIntro() {
     return;
   }
   if(self.team == game["attackers"]) {
-    if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary())
+    if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary()) {
       self leaderDialogOnPlayer("offense_obj", "introboost");
+    }
   } else {
-    if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary())
+    if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary()) {
       self leaderDialogOnPlayer("defense_obj", "introboost");
+    }
   }
 }
 
@@ -288,8 +297,9 @@ watchHostMigration() {
     level waittill("host_migration_begin");
     was_in_grace_period = level.inGracePeriod;
     level waittill("host_migration_end");
-    if(was_in_grace_period)
+    if(was_in_grace_period) {
       self thread doIntro();
+    }
   }
 }
 
@@ -343,12 +353,15 @@ onGameEnded() {
 
   if(level.teamBased) {
     if(level.splitscreen) {
-      if(winner == "allies")
+      if(winner == "allies") {
         playSoundOnPlayers(game["music"]["victory_allies"], "allies");
-      else if(winner == "axis")
+      }
+      else if(winner == "axis") {
         playSoundOnPlayers(game["music"]["victory_axis"], "axis");
-      else
+      }
+      else {
         playSoundOnPlayers(game["music"]["nuke_music"]);
+      }
     } else {
       if(winner == "allies") {
         playSoundOnPlayers(game["music"]["victory_allies"], "allies");
@@ -366,12 +379,15 @@ onGameEnded() {
       if(player isSplitscreenPlayer() && !player isSplitscreenPlayerPrimary()) {
         continue;
       }
-      if(player.pers["team"] != "allies" && player.pers["team"] != "axis")
+      if(player.pers["team"] != "allies" && player.pers["team"] != "axis") {
         player playLocalSound(game["music"]["nuke_music"]);
-      else if(isDefined(winner) && isPlayer(winner) && player == winner)
+      }
+      else if(isDefined(winner) && isPlayer(winner) && player == winner) {
         player playLocalSound(game["music"]["victory_" + player.pers["team"]]);
-      else if(!level.splitScreen)
+      }
+      else if(!level.splitScreen) {
         player playLocalSound(game["music"]["defeat_" + player.pers["team"]]);
+      }
     }
   }
 }
@@ -380,8 +396,9 @@ roundWinnerDialog() {
   level waittill("round_win", winner);
 
   delay = level.roundEndDelay / 4;
-  if(delay > 0)
+  if(delay > 0) {
     wait(delay);
+  }
 
   if(!isDefined(winner) || isPlayer(winner)) {
     return;
@@ -399,8 +416,9 @@ gameWinnerDialog() {
   level waittill("game_win", winner);
 
   delay = level.postRoundTime / 2;
-  if(delay > 0)
+  if(delay > 0) {
     wait(delay);
+  }
 
   if(!isDefined(winner) || isPlayer(winner)) {
     return;
@@ -448,8 +466,9 @@ musicController() {
             leaderDialog("losing_time", "allies");
           }
         } else {
-          if(isMusicEnabled())
+          if(isMusicEnabled()) {
             playSoundOnPlayers(game["music"]["losing_time"]);
+          }
 
           leaderDialog("timesup");
         }
@@ -497,8 +516,9 @@ musicController() {
       leaderDialog("timesup");
     }
   } else {
-    if(!level.hardcoreMode)
+    if(!level.hardcoreMode) {
       playSoundOnPlayers(game["music"]["losing_allies"]);
+    }
 
     leaderDialog("timesup");
   }
@@ -519,8 +539,9 @@ suspenseMusic(skipInitialDelay) {
   axis_numTracks = game["music"]["axis_suspense"].size;
   level.curSuspsenseTrack = [];
 
-  if(isDefined(skipInitialDelay) && skipInitialDelay)
+  if(isDefined(skipInitialDelay) && skipInitialDelay) {
     wait(120);
+  }
 
   for(;;) {
     wait(randomFloatRange(60, 120));

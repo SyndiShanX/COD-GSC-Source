@@ -25,24 +25,30 @@ init() {
   level thread checkForPlayerSwitch();
 }
 spawnedScrambler(localClientNum, set) {
-  if(!set)
+  if(!set) {
     return;
-  if(localClientNum != 0)
+  }
+  if(localClientNum != 0) {
     return;
+  }
   self spawned(localClientNum, set, true);
 }
 spawnedGlobalScramber(localClientNum, set) {
-  if(!set)
+  if(!set) {
     return;
-  if(localClientNum != 0)
+  }
+  if(localClientNum != 0) {
     return;
+  }
   self spawned(localClientNum, set, false);
 }
 spawned(localClientNum, set, isLocalized) {
-  if(!set)
+  if(!set) {
     return;
-  if(localClientNum != 0)
+  }
+  if(localClientNum != 0) {
     return;
+  }
   scramblerHandle = level.scramblerHandle;
   level.scramblerHandle++;
   size = level.scramblers.size;
@@ -71,8 +77,9 @@ spawnedPerClient(localClientNum, isLocalized, scramblerHandle) {
       break;
     }
   }
-  if(!isDefined(scramblerIndex))
+  if(!isDefined(scramblerIndex)) {
     return;
+  }
   if(!isEnemy) {
     if(isLocalized) {
       if(owner == player && !IsSpectating(localClientNum, false)) {
@@ -82,12 +89,14 @@ spawnedPerClient(localClientNum, isLocalized, scramblerHandle) {
         level.scramblers[scramblerIndex].sndId = level.scramblers[scramblerIndex].sndEnt playLoopSound(level.scramblesoundalert);
         playSound(0, level.scramblesoundburst, level.scramblers[scramblerIndex].sndEnt.origin);
       }
-      if(isDefined(level.scramblers[scramblerIndex].sndPingEnt))
+      if(isDefined(level.scramblers[scramblerIndex].sndPingEnt)) {
         level.scramblers[scramblerIndex].sndPingId = level.scramblers[scramblerIndex].sndPingEnt playLoopSound(level.scramblesoundping);
+      }
     }
   } else {
-    if(isDefined(level.scramblers[scramblerIndex].sndEnt))
+    if(isDefined(level.scramblers[scramblerIndex].sndEnt)) {
       level.scramblers[scramblerIndex].sndId = level.scramblers[scramblerIndex].sndEnt playLoopSound(level.scramblesound);
+    }
   }
   self thread clientscripts\mp\_fx::blinky_light(localClientNum, "tag_light", level._effect["scrambler_friendly_light"], level._effect["scrambler_enemy_light"]);
 }
@@ -116,8 +125,9 @@ scramblerUpdate() {
       distToScrambler = level.scramblerVOOuterRadius;
       nearestEnemyScramblerCent = undefined;
       for(i = 0; i < level.scramblers.size; i++) {
-        if(!isDefined(level.scramblers[i].cent))
+        if(!isDefined(level.scramblers[i].cent)) {
           continue;
+        }
         if(isDefined(level.scramblers[i].cent.stunned) && level.scramblers[i].cent.stunned) {
           level.scramblers[i].cent.reenable = true;
           player RemoveFriendlyScrambler(level.scramblers[i].scramblerHandle);
@@ -139,18 +149,21 @@ scramblerUpdate() {
         } else {
           scramblerTeamChanged = false;
         }
-        if(teamChanged || scramblerTeamChanged)
+        if(teamChanged || scramblerTeamChanged) {
           level.scramblers[i] restartSound(isEnemy);
+        }
         if(isEnemy) {
           if(nearestEnemy > distToScrambler) {
             nearestEnemyScramblerCent = level.scramblers[i].cent;
             nearestEnemy = distToScrambler;
           }
-          if((level.scramblers[i].isLocalized) && (teamChanged || scramblerTeamChanged))
+          if((level.scramblers[i].isLocalized) && (teamChanged || scramblerTeamChanged)) {
             player RemoveFriendlyScrambler(level.scramblers[i].scramblerHandle);
+          }
         } else if(level.scramblers[i].isLocalized) {
-          if(nearestFriendly > distToScrambler)
+          if(nearestFriendly > distToScrambler) {
             nearestFriendly = distToScrambler;
+          }
           owner = level.scramblers[i].cent GetOwner(localClientNum);
           if(owner == player && !IsSpectating(localClientNum, false)) {
             if(teamChanged || scramblerTeamChanged) {
@@ -159,28 +172,36 @@ scramblerUpdate() {
           }
         }
       }
-      if(nearestEnemy < level.scramblerVOOuterRadius)
+      if(nearestEnemy < level.scramblerVOOuterRadius) {
         enemyVOScramblerAmount = 1 - ((nearestEnemy - level.scramblerInnerRadius) / (level.scramblerVOOuterRadius - level.scramblerInnerRadius));
-      else
+      }
+      else {
         enemyVOScramblerAmount = 0;
-      if(nearestFriendly < level.scramblerInnerRadius)
+      }
+      if(nearestFriendly < level.scramblerInnerRadius) {
         friendlyScramblerAmount = 1.0;
-      else if(nearestFriendly < level.scramblerVOOuterRadius)
+      }
+      else if(nearestFriendly < level.scramblerVOOuterRadius) {
         friendlyScramblerAmount = 1 - ((nearestFriendly - level.scramblerInnerRadius) / (level.scramblerVOOuterRadius - level.scramblerInnerRadius));
+      }
       player SetFriendlyScramblerAmount(friendlyScramblerAmount);
       if(level.scramblers.size > 0 && isDefined(nearestEnemyScramblerCent)) {
         player SetNearestEnemyScrambler(nearestEnemyScramblerCent);
       } else {
         player ClearNearestEnemyScrambler();
       }
-      if(isGlobalScrambler)
+      if(isGlobalScrambler) {
         player SetEnemyGlobalScrambler(1);
-      else
+      }
+      else {
         player SetEnemyGlobalScrambler(0);
-      if(enemyVOScramblerAmount > 1)
+      }
+      if(enemyVOScramblerAmount > 1) {
         enemyVOScramblerAmount = 1;
-      if(getdvarfloat("snd_futz") != enemyVOScramblerAmount)
+      }
+      if(getdvarfloat("snd_futz") != enemyVOScramblerAmount) {
         setdvarfloat("snd_futz", enemyVOScramblerAmount);
+      }
     }
     wait(0.25);
     waitforallclients();

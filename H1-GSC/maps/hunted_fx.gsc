@@ -115,10 +115,12 @@ main() {
   level._effect["truck_smoke"] = loadfx("vfx\dust\veh_dust_kick_up_night");
   level._effect["flashlight"] = loadfx("fx\misc\flashlight_night_maps");
 
-  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0")
+  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
     level._effect["spotlight"] = loadfx("fx\misc\hunted_spotlight_model_night_no_noise");
-  else
+  }
+  else {
     level._effect["spotlight"] = loadfx("fx\misc\spotlight_large_night");
+  }
 
   level.flare_fx["mi17"] = loadfx("fx\misc\flares_cobra");
   level._effect["gasstation_explosion"] = loadfx("vfx\map\hunted\ca_hunted_gasstation_explosion");

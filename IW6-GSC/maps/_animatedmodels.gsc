@@ -11,11 +11,13 @@ main() {
   level.init_animatedmodels_dump = [];
   level.anim_prop_models_animtree = #animtree;
 
-  if(!isDefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
+  }
 
-  if(!isDefined(level.anim_prop_init_threads))
+  if(!isDefined(level.anim_prop_init_threads)) {
     level.anim_prop_init_threads = [];
+  }
 
   var_0 = getEntArray("animated_model", "targetname");
   common_scripts\utility::array_thread(var_0, ::model_init);
@@ -23,8 +25,9 @@ main() {
   if(isDefined(level.init_animatedmodels_dump) && level.init_animatedmodels_dump.size) {
     var_1 = " ";
 
-    foreach(var_3 in level.init_animatedmodels_dump)
+    foreach(var_3 in level.init_animatedmodels_dump) {
     var_1 = var_1 + (var_3 + " ");
+    }
   }
 
   foreach(var_6 in var_0) {
@@ -43,10 +46,12 @@ main() {
       }
     }
 
-    if(var_8)
+    if(var_8) {
       var_6 thread animatetreewind();
-    else
+    }
+    else {
       var_6 thread animatemodel();
+    }
   }
 }
 
@@ -62,18 +67,21 @@ init_wind_if_uninitialized() {
 
 model_init() {
   if(!isDefined(level.anim_prop_models[self.model])) {
-    if(!already_dumpped(level.init_animatedmodels_dump, self.model))
+    if(!already_dumpped(level.init_animatedmodels_dump, self.model)) {
       level.init_animatedmodels_dump[level.init_animatedmodels_dump.size] = self.model;
+    }
   }
 }
 
 already_dumpped(var_0, var_1) {
-  if(var_0.size <= 0)
+  if(var_0.size <= 0) {
     return 0;
+  }
 
   foreach(var_3 in var_0) {
-    if(var_3 == var_1)
+    if(var_3 == var_1) {
       return 1;
+    }
   }
 
   return 0;

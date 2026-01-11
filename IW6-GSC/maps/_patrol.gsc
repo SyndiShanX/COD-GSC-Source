@@ -14,8 +14,9 @@ patrol(var_0) {
   self endon("dog_attacks_ai");
   waittillframeend;
 
-  if(isDefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup)) {
     [[level.global_callbacks["_patrol_endon_spotted_flag"]]]();
+  }
 
   thread waittill_combat();
   thread waittill_death();
@@ -46,8 +47,9 @@ patrol(var_0) {
   var_2["node"] = maps\_utility::set_goal_node;
   var_2["struct"] = maps\_utility::set_goal_ent;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.target = var_0;
+  }
 
   if(isDefined(self.target)) {
     var_3 = 1;
@@ -93,8 +95,9 @@ patrol(var_0) {
   var_10 = var_7;
 
   for(;;) {
-    while(isDefined(var_10.patrol_claimed))
+    while(isDefined(var_10.patrol_claimed)) {
       wait 0.05;
+    }
 
     var_7.patrol_claimed = undefined;
     var_7 = var_10;
@@ -103,22 +106,27 @@ patrol(var_0) {
     self.last_patrol_goal = var_7;
     [[var_2[var_8]]](var_7);
 
-    if(isDefined(var_7.radius) && var_7.radius > 0)
+    if(isDefined(var_7.radius) && var_7.radius > 0) {
       self.goalradius = var_7.radius;
-    else
+    }
+    else {
       self.goalradius = 32;
+    }
 
     self waittill("goal");
     var_7 notify("trigger", self);
 
-    if(isDefined(var_7.script_flag_set))
+    if(isDefined(var_7.script_flag_set)) {
       common_scripts\utility::flag_set(var_7.script_flag_set);
+    }
 
-    if(isDefined(var_7.script_ent_flag_set))
+    if(isDefined(var_7.script_ent_flag_set)) {
       maps\_utility::ent_flag_set(var_7.script_ent_flag_set);
+    }
 
-    if(isDefined(var_7.script_flag_clear))
+    if(isDefined(var_7.script_flag_clear)) {
       common_scripts\utility::flag_clear(var_7.script_flag_clear);
+    }
 
     var_11 = var_7[[var_1[var_8][var_3]]]();
 
@@ -126,8 +134,9 @@ patrol(var_0) {
       self notify("reached_path_end");
       self notify("_patrol_reached_path_end");
 
-      if(isalive(self.patrol_pet))
+      if(isalive(self.patrol_pet)) {
         self.patrol_pet notify("master_reached_patrol_end");
+      }
     }
 
     var_12 = animscripts\reactions::reactionscheckloop;
@@ -162,36 +171,43 @@ patrol(var_0) {
       }
     }
 
-    if(isDefined(var_7.script_moveplaybackrate))
+    if(isDefined(var_7.script_moveplaybackrate)) {
       self.moveplaybackrate = var_7.script_moveplaybackrate;
+    }
 
     if(isDefined(var_7.script_delay) && var_7.script_delay > 0.5 || isDefined(var_13) || isDefined(var_7.script_flag_wait) && !common_scripts\utility::flag(var_7.script_flag_wait)) {
-      if(!isDefined(self.patrol_no_stop_transition) && var_14)
+      if(!isDefined(self.patrol_no_stop_transition) && var_14) {
         patrol_do_stop_transition_anim(var_13, var_12, var_7);
+      }
 
-      if(isDefined(var_7.script_flag_wait) && !common_scripts\utility::flag(var_7.script_flag_wait))
+      if(isDefined(var_7.script_flag_wait) && !common_scripts\utility::flag(var_7.script_flag_wait)) {
         common_scripts\utility::flag_wait(var_7.script_flag_wait);
+      }
 
       var_7 maps\_utility::script_delay();
 
       if(isDefined(var_13)) {
-        if(isDefined(var_7.script_faceangles))
+        if(isDefined(var_7.script_faceangles)) {
           self orientmode("face angle", var_7.angles[1]);
+        }
 
         self.patrol_script_animation = 1;
         var_18 = var_9[var_13];
 
         if(!isDefined(var_18)) {
-          if(isDefined(level.patrol_scriptedanims))
+          if(isDefined(level.patrol_scriptedanims)) {
             var_18 = level.patrol_scriptedanims[var_13];
+          }
         }
 
         if(isDefined(var_18)) {
           if(var_13 == "pause") {
-            if(isDefined(self.patrol_scriptedanim) && isDefined(self.patrol_scriptedanim[var_13]))
+            if(isDefined(self.patrol_scriptedanim) && isDefined(self.patrol_scriptedanim[var_13])) {
               var_18 = self.patrol_scriptedanim[var_13][randomint(self.patrol_scriptedanim[var_13].size)];
-            else
+            }
+            else {
               var_18 = var_18 + randomintrange(1, 6);
+            }
           }
 
           if(var_15) {
@@ -204,8 +220,9 @@ patrol(var_0) {
         self.patrol_script_animation = undefined;
       }
 
-      if(var_11.size && (!isDefined(var_13) || var_13 != "turn180") && var_14 && (!isDefined(self.skip_start_transition) || !self.skip_start_transition))
+      if(var_11.size && (!isDefined(var_13) || var_13 != "turn180") && var_14 && (!isDefined(self.skip_start_transition) || !self.skip_start_transition)) {
         patrol_do_start_transition_anim(var_13, var_12);
+      }
     }
 
     if(!var_11.size) {
@@ -235,21 +252,27 @@ patrol_do_stop_transition_anim(var_0, var_1, var_2) {
     var_4 = 1;
   }
 
-  if(isDefined(self.patrol_stop) && isDefined(self.patrol_stop[var_0]))
+  if(isDefined(self.patrol_stop) && isDefined(self.patrol_stop[var_0])) {
     var_3 maps\_anim::anim_generic_custom_animmode(self, "gravity", self.patrol_stop[var_0], undefined, var_1, var_4);
-  else if(isDefined(self.script_animation) && isDefined(level.scr_anim["generic"]["patrol_stop_" + self.script_animation]))
+  }
+  else if(isDefined(self.script_animation) && isDefined(level.scr_anim["generic"]["patrol_stop_" + self.script_animation])) {
     maps\_anim::anim_generic_custom_animmode(self, "gravity", "patrol_stop_" + self.script_animation, undefined, var_1);
-  else
+  }
+  else {
     var_3 maps\_anim::anim_generic_custom_animmode(self, "gravity", "patrol_stop", undefined, var_1, var_4);
+  }
 }
 
 patrol_do_start_transition_anim(var_0, var_1) {
-  if(isDefined(self.patrol_start) && isDefined(self.patrol_start[var_0]))
+  if(isDefined(self.patrol_start) && isDefined(self.patrol_start[var_0])) {
     maps\_anim::anim_generic_custom_animmode(self, "gravity", self.patrol_start[var_0], undefined, var_1);
-  else if(isDefined(self.script_animation) && isDefined(level.scr_anim["generic"]["patrol_start_" + self.script_animation]))
+  }
+  else if(isDefined(self.script_animation) && isDefined(level.scr_anim["generic"]["patrol_start_" + self.script_animation])) {
     maps\_anim::anim_generic_custom_animmode(self, "gravity", "patrol_start_" + self.script_animation, undefined, var_1);
-  else
+  }
+  else {
     maps\_anim::anim_generic_custom_animmode(self, "gravity", "patrol_start", undefined, var_1);
+  }
 }
 
 #using_animtree("generic_human");
@@ -310,29 +333,35 @@ turn_180_move_start_func() {
 
 set_patrol_run_anim_array() {
   if(isDefined(self.script_animation)) {
-    if(isDefined(level.scr_anim["generic"]["patrol_walk_" + self.script_animation]))
+    if(isDefined(level.scr_anim["generic"]["patrol_walk_" + self.script_animation])) {
       self.patrol_walk_anim = "patrol_walk_" + self.script_animation;
+    }
 
-    if(isDefined(level.scr_anim["generic"]["patrol_walk_weights_" + self.script_animation]))
+    if(isDefined(level.scr_anim["generic"]["patrol_walk_weights_" + self.script_animation])) {
       self.patrol_walk_twitch = "patrol_walk_weights_" + self.script_animation;
+    }
 
-    if(isDefined(level.scr_anim["generic"]["patrol_idle_" + self.script_animation]))
+    if(isDefined(level.scr_anim["generic"]["patrol_idle_" + self.script_animation])) {
       self.patrol_idle_anim = "patrol_idle_" + self.script_animation;
+    }
   }
 
   var_0 = "patrol_walk";
 
-  if(isDefined(self.patrol_walk_anim))
+  if(isDefined(self.patrol_walk_anim)) {
     var_0 = self.patrol_walk_anim;
+  }
 
   var_1 = undefined;
 
-  if(isDefined(self.patrol_walk_twitch))
+  if(isDefined(self.patrol_walk_twitch)) {
     var_1 = self.patrol_walk_twitch;
+  }
 
   if(isDefined(self.script_animation)) {
-    if(isDefined(level.scr_anim["generic"]["patrol_idle_" + self.script_animation]))
+    if(isDefined(level.scr_anim["generic"]["patrol_idle_" + self.script_animation])) {
       maps\_utility::set_generic_idle_anim("patrol_idle_" + self.script_animation);
+    }
   }
 
   maps\_utility::set_generic_run_anim_array(var_0, var_1);
@@ -341,8 +370,9 @@ set_patrol_run_anim_array() {
 waittill_combat_wait() {
   self endon("end_patrol");
 
-  if(isDefined(self.patrol_master))
+  if(isDefined(self.patrol_master)) {
     self.patrol_master endon("death");
+  }
 
   self waittill("enemy");
 }
@@ -380,8 +410,9 @@ waittill_combat() {
     self.goalradius = level.default_goalradius;
   }
 
-  if(isDefined(self.old_interval))
+  if(isDefined(self.old_interval)) {
     self.interval = self.old_interval;
+  }
 
   self.moveplaybackrate = 1;
 
@@ -399,8 +430,9 @@ waittill_combat() {
 get_target_ents() {
   var_0 = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_0 = getEntArray(self.target, "targetname");
+  }
 
   return var_0;
 }
@@ -408,8 +440,9 @@ get_target_ents() {
 get_target_nodes() {
   var_0 = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_0 = getnodearray(self.target, "targetname");
+  }
 
   return var_0;
 }
@@ -417,8 +450,9 @@ get_target_nodes() {
 get_target_structs() {
   var_0 = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+  }
 
   return var_0;
 }
@@ -432,8 +466,9 @@ get_linked_nodes() {
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_3 = getnode(var_1[var_2], "script_linkname");
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_0[var_0.size] = var_3;
+      }
     }
   }
 
@@ -486,8 +521,9 @@ pet_patrol() {
   self endon("death");
   self endon("end_patrol");
 
-  if(isDefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup)) {
     [[level.global_callbacks["_patrol_endon_spotted_flag"]]]();
+  }
 
   self.patrol_master endon("death");
   thread waittill_combat();
@@ -498,8 +534,9 @@ pet_patrol() {
   var_2 = anglestoright(self.patrol_master.angles);
   var_3 = "left";
 
-  if(vectordot(var_1, var_2) > 0)
+  if(vectordot(var_1, var_2) > 0) {
     var_3 = "right";
+  }
 
   wait 1;
   thread pet_patrol_handle_move_state();
@@ -511,8 +548,9 @@ pet_patrol() {
     if(isDefined(self.patrol_master) && !isDefined(self.patrol_master.patrol_script_animation)) {
       var_0 = pet_patrol_init_positions(var_0);
 
-      if(var_3 == "null")
+      if(var_3 == "null") {
         var_3 = "back";
+      }
 
       var_3 = pet_patrol_get_available_origin(var_0, var_3);
       self.patrol_goal_pos = var_0[var_3].origin;
@@ -587,8 +625,9 @@ pet_debug_positions(var_0) {
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
 
-    if(var_3 == "null")
+    if(var_3 == "null") {
       continue;
+    }
   }
 }
 
@@ -601,8 +640,9 @@ pet_patrol_get_available_origin(var_0, var_1) {
     if(var_0[var_3].checked) {
       continue;
     }
-    if(self maymovetopoint(var_0[var_3].origin))
+    if(self maymovetopoint(var_0[var_3].origin)) {
       return var_3;
+    }
 
     var_0[var_3].checked = 1;
   }
@@ -634,8 +674,9 @@ pet_patrol_handle_move_state(var_0) {
     return;
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 200;
+  }
 
   maps\_utility::set_dog_walk_anim();
 
@@ -678,15 +719,17 @@ pet_patrol_handle_movespeed(var_0, var_1) {
       var_3 = distancesquared(self.origin, self.patrol_goal_pos);
 
       if(var_3 < squared(16)) {
-        if(self.moveplaybackrate > 0.4)
+        if(self.moveplaybackrate > 0.4) {
           self.moveplaybackrate = self.moveplaybackrate - 0.05;
+        }
 
         continue;
       }
 
       if(var_3 > squared(48)) {
-        if(self.moveplaybackrate < 1.8)
+        if(self.moveplaybackrate < 1.8) {
           self.moveplaybackrate = self.moveplaybackrate + 0.05;
+        }
 
         continue;
       }
@@ -695,11 +738,13 @@ pet_patrol_handle_movespeed(var_0, var_1) {
     }
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 16;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 48;
+  }
 
   var_4 = var_0 * var_0;
   var_5 = var_1 * var_1;
@@ -715,15 +760,17 @@ pet_patrol_handle_movespeed(var_0, var_1) {
     }
 
     if(var_3 < var_4) {
-      if(self.moveplaybackrate > 0.4)
+      if(self.moveplaybackrate > 0.4) {
         self.moveplaybackrate = self.moveplaybackrate - 0.05;
+      }
 
       continue;
     }
 
     if(var_3 > var_5) {
-      if(self.moveplaybackrate < 0.75)
+      if(self.moveplaybackrate < 0.75) {
         self.moveplaybackrate = self.moveplaybackrate + 0.05;
+      }
 
       continue;
     }

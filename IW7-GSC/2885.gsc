@@ -18,8 +18,9 @@ func_B23E() {
   scripts\engine\utility::flag_wait("start_is_set");
   var_00 = 0;
 
-  if(!isDefined(level.func_9AF3) || !scripts\sp\utility::func_9BB5() || var_00)
+  if(!isDefined(level.func_9AF3) || !scripts\sp\utility::func_9BB5() || var_00) {
     scripts\engine\utility::delaythread(0.05, scripts\engine\utility::flag_set, "introscreen_complete");
+  }
   else {
     if(isDefined(level.func_9AF3.func_4C88)) {
       [
@@ -33,8 +34,9 @@ func_B23E() {
 }
 
 func_9AF7() {
-  if(!isDefined(level.func_9AF3))
+  if(!isDefined(level.func_9AF3)) {
     return 0;
+  }
 
   var_00 = level.func_9AF3.func_ACF2;
   var_01 = getarraykeys(var_00);
@@ -54,13 +56,16 @@ func_9AF8(var_00, var_01, var_02) {
 }
 
 func_9AF9(var_00, var_01, var_02, var_03) {
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 1.5;
+  }
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     scripts\sp\hud_util::func_10CCC();
-  else
+  }
+  else {
     scripts\sp\hud_util::func_6AA3(var_03);
+  }
 
   wait(var_01);
   scripts\sp\hud_util::func_6A99(var_02);
@@ -71,10 +76,12 @@ func_9AF9(var_00, var_01, var_02, var_03) {
 introscreen_corner_line(var_00, var_01, var_02, var_03) {
   level notify("new_introscreen_element");
 
-  if(!isDefined(level.intro_offset))
+  if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  else
+  }
+  else {
     level.intro_offset++;
+  }
 
   var_04 = cornerline_height();
   var_05 = newhudelem();
@@ -121,8 +128,9 @@ func_C3C4() {
   level.player getroundswon(1);
   thread func_9AF8(level.func_9AF3.func_4480, level.func_9AF3.func_6AAA, level.func_9AF3.func_6A9F);
 
-  if(!func_9AF7())
+  if(!func_9AF7()) {
     wait 0.05;
+  }
 
   wait(level.func_9AF3.func_4480);
   scripts\engine\utility::flag_set("introscreen_complete");
@@ -186,8 +194,9 @@ func_9AF3(var_00, var_01) {
   wait 2;
   level.func_3F69.func_11152 = 0;
 
-  if(isDefined(var_05))
+  if(isDefined(var_05)) {
     var_05 thread func_BE48();
+  }
 
   wait 1;
   func_6BAF(0, var_00);
@@ -247,10 +256,12 @@ func_6A98(var_00, var_01, var_02) {
 }
 
 func_3F6A(var_00, var_01) {
-  if(var_00 == 0)
+  if(var_00 == 0) {
     level.func_3F69.func_10466 playSound(var_01);
-  else
+  }
+  else {
     level.func_7661.func_10466 playSound(var_01);
+  }
 }
 
 func_913E(var_00) {
@@ -292,10 +303,12 @@ func_DB9A(var_00, var_01) {
 }
 
 func_22FD(var_00) {
-  if(var_00 == 0)
+  if(var_00 == 0) {
     level endon("chyron_faze_out_text_intro");
-  else
+  }
+  else {
     level endon("chyron_faze_out_text_gamenotify");
+  }
 
   var_01 = [".", "-", "_", "|", "+"];
   var_02 = 0.7;
@@ -323,8 +336,9 @@ func_22FD(var_00) {
       func_3F6A(var_00, "ui_chyron_plusminus");
       var_4.fontscale = var_02;
 
-      if(var_1[var_07] == "+")
+      if(var_1[var_07] == "+") {
         var_4.fontscale = 0.55;
+      }
 
       var_04 give_zap_perk(var_1[var_07]);
       var_4.x = var_05 + randomint(200);
@@ -341,20 +355,24 @@ func_22FD(var_00) {
 }
 
 func_22FC(var_00) {
-  if(var_00 == 0)
+  if(var_00 == 0) {
     level endon("chyron_faze_out_text_intro");
-  else
+  }
+  else {
     level endon("chyron_faze_out_text_gamenotify");
+  }
 
   var_01 = 0.6;
   var_02 = 1;
 
   for(;;) {
-    if(level.func_3F69.func_22FE)
+    if(level.func_3F69.func_22FE) {
       var_01 = var_01 - 0.07;
+    }
     else {
-      if(var_01 < 0.15 || var_01 > 0.6)
+      if(var_01 < 0.15 || var_01 > 0.6) {
         var_02 = var_02 * -1;
+      }
 
       var_01 = var_01 + (0.02 + randomfloat(0.04)) * var_02;
     }
@@ -377,8 +395,9 @@ func_22FC(var_00) {
       var_01 = 0.8;
       level.func_3F69.func_22FE = 0;
 
-      foreach(var_04 in level.func_3F69.func_22FD)
+      foreach(var_04 in level.func_3F69.func_22FD) {
       var_4.func_DAE6 = 0;
+      }
     }
 
     wait 0.05;
@@ -386,10 +405,12 @@ func_22FC(var_00) {
 }
 
 func_11151(var_00) {
-  if(var_00 == 0)
+  if(var_00 == 0) {
     level endon("chyron_faze_out_text_intro");
-  else
+  }
+  else {
     level endon("chyron_faze_out_text_gamenotify");
+  }
 
   var_01 = 5;
   var_02 = 0;
@@ -443,8 +464,9 @@ func_119A5(var_00, var_01) {
   var_02 thread func_DB9D(0);
   wait(var_06);
 
-  if(randomint(100) > 10)
+  if(randomint(100) > 10) {
     var_02 thread func_C369(-30, 30, 20, -8, 8, 4);
+  }
 }
 
 func_C369(var_00, var_01, var_02, var_03, var_04, var_05) {
@@ -524,8 +546,9 @@ func_6AA9(var_00, var_01) {
       var_03 thread func_913E(var_01);
     }
 
-    foreach(var_03 in level.func_3F69.func_11151)
+    foreach(var_03 in level.func_3F69.func_11151) {
     var_03 thread func_913E(var_01);
+    }
   } else {
     level notify("chyron_faze_out_text_gamenotify");
 
@@ -536,8 +559,9 @@ func_6AA9(var_00, var_01) {
       var_03 thread func_913E(var_01);
     }
 
-    foreach(var_03 in level.func_7661.func_11151)
+    foreach(var_03 in level.func_7661.func_11151) {
     var_03 thread func_913E(var_01);
+    }
   }
 }
 
@@ -545,13 +569,15 @@ func_111A1(var_00, var_01, var_02, var_03, var_04) {
   var_05 = func_48B3(var_00);
   var_5.y = var_5.y + (20 + var_01 * 15);
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_5.font = var_02;
+  }
 
   var_5.fontscale = 1;
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_5.fontscale = var_03;
+  }
 
   level.func_3F69.func_1175E = var_5.x;
   level.func_3F69.func_1175F = var_5.y;
@@ -562,13 +588,15 @@ func_111A1(var_00, var_01, var_02, var_03, var_04) {
   var_05 thread func_DB9D(0, var_04);
   var_5.alpha = 1;
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     var_5.alpha = var_04;
+  }
 
   var_05 setpulsefx(30, 50000, 700);
 
-  if(randomint(100) > 70)
+  if(randomint(100) > 70) {
     var_05 scripts\engine\utility::delaythread(2, ::func_C369, -7, 7, 3, -5, 5, 3);
+  }
 
   level.func_3F69.func_1175D = 0;
   return var_05;
@@ -577,8 +605,9 @@ func_111A1(var_00, var_01, var_02, var_03, var_04) {
 vehicle_setspeed() {
   var_00 = 1;
 
-  if(isDefined(level.func_3F69) && level.func_3F69.func_BFE0)
+  if(isDefined(level.func_3F69) && level.func_3F69.func_BFE0) {
     var_00 = 0.3;
+  }
 
   return var_00;
 }
@@ -601,13 +630,16 @@ func_DB9D(var_00, var_01) {
   self endon("death");
   self endon("stop_quick_pulse");
 
-  if(var_00 == 0)
+  if(var_00 == 0) {
     level endon("chyron_faze_out_text_intro");
-  else
+  }
+  else {
     level endon("chyron_faze_out_text_gamenotify");
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 1;
+  }
 
   for(;;) {
     wait 0.05;
@@ -616,8 +648,9 @@ func_DB9D(var_00, var_01) {
 }
 
 location_dupes_thread(var_00, var_01) {
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0;
+  }
 
   self endon("death");
   var_02 = self.x;
@@ -652,19 +685,22 @@ func_DCB1(var_00, var_01, var_02) {
   var_03 = randomintrange(var_00, var_01);
   var_04 = 1;
 
-  if(var_03 < 0)
+  if(var_03 < 0) {
     var_04 = -1;
+  }
 
   var_03 = max(abs(var_03), var_02);
   return var_03 * var_04;
 }
 
 func_48B3(var_00, var_01, var_02) {
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = level.func_3F69.func_11761;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = level.func_3F69.func_11762;
+  }
 
   var_03 = newhudelem();
   var_3.x = var_01;
@@ -680,14 +716,16 @@ func_48B3(var_00, var_01, var_02) {
   var_3.hidewheninmenu = 1;
   var_3.fontscale = 1.4;
 
-  if(level.console)
+  if(level.console) {
     var_3.fontscale = 1.2;
+  }
 
   var_3.color = (0.85, 0.93, 0.92);
   var_3.font = "default";
 
-  if(isDefined(level.func_3F69))
+  if(isDefined(level.func_3F69)) {
     level.func_3F69.func_91AF[level.func_3F69.func_91AF.size] = var_03;
+  }
 
   return var_03;
 }
@@ -771,8 +809,9 @@ func_495C(var_00) {
         var_6.x = var_7.x;
         var_6.y = var_7.y + var_7.height;
 
-        if(scripts\engine\utility::cointoss())
+        if(scripts\engine\utility::cointoss()) {
           var_6.y = var_7.y - var_6.height;
+        }
       } else
         level.func_3F69.func_A917 = [];
 
@@ -807,8 +846,9 @@ func_495C(var_00) {
         var_6.x = var_7.x;
         var_6.y = var_7.y + var_7.height;
 
-        if(scripts\engine\utility::cointoss())
+        if(scripts\engine\utility::cointoss()) {
           var_6.y = var_7.y - var_6.height;
+        }
       } else
         level.func_7661.func_A917 = [];
 
@@ -824,14 +864,16 @@ func_495C(var_00) {
   var_2.alpha = var_6.alpha;
   var_2.color = var_6.color;
 
-  if(var_2.alpha > 0.6)
+  if(var_2.alpha > 0.6) {
     func_3F6A(var_00, "ui_chyron_line_static");
+  }
 
   var_2.horzalign = "left";
   var_2.vertalign = "bottom";
 
-  if(var_00 == 1)
+  if(var_00 == 1) {
     var_2.vertalign = "top";
+  }
 
   var_2.sort = 1;
   var_2.foreground = 1;
@@ -845,8 +887,9 @@ func_495C(var_00) {
 func_5F31(var_00, var_01) {
   var_02 = [];
 
-  for(var_03 = 0; var_03 < var_01; var_3++)
+  for(var_03 = 0; var_03 < var_01; var_3++) {
     var_2[var_2.size] = func_48B3(var_0.text);
+  }
 
   return var_02;
 }
@@ -873,8 +916,9 @@ func_7660(var_00) {
 func_765E(var_00) {
   level.func_7661.func_11760[level.func_7661.func_11760.size] = var_00;
 
-  if(!level.func_7661.active)
+  if(!level.func_7661.active) {
     level thread func_7662();
+  }
 }
 
 func_7664() {
@@ -939,8 +983,9 @@ func_765F(var_00, var_01) {
   var_2.alpha = 1;
   var_02 setpulsefx(30, 50000, 700);
 
-  if(randomint(100) < 10)
+  if(randomint(100) < 10) {
     var_02 scripts\engine\utility::delaythread(2, ::func_C369, -7, 7, 3, -5, 5, 3);
+  }
 }
 
 func_48F3(var_00, var_01) {
@@ -958,8 +1003,9 @@ func_48F3(var_00, var_01) {
   var_2.font = "default";
   var_2.fontscale = 1.25;
 
-  if(level.console)
+  if(level.console) {
     var_2.fontscale = 1;
+  }
 
   var_2.color = (0.85, 0.93, 0.92);
   var_2.glowalpha = 0;
@@ -977,11 +1023,13 @@ func_111A0(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   var_7.alpha = 1;
   var_7.sort = 3;
 
-  if(isDefined(var_05))
+  if(isDefined(var_05)) {
     var_7.glowcolor = var_05;
+  }
 
-  if(!isDefined(var_06))
+  if(!isDefined(var_06)) {
     var_06 = 20;
+  }
 
   var_07 setpulsefx(var_06, 50000, 700);
   var_08 = [var_07];
@@ -1079,8 +1127,9 @@ func_A03D(var_00) {
   var_06 = spawnStruct();
   var_6.count = var_4.size;
 
-  foreach(var_08 in var_04)
+  foreach(var_08 in var_04) {
   var_06 thread func_6AB6(var_08);
+  }
 
   var_06 waittill("fadein_letter_done");
   wait 0.3;
@@ -1115,23 +1164,27 @@ func_6AB6(var_00) {
   var_02 = randomfloatrange(0.45, 0.8);
   var_00 func_2B9E(2, 0.2, 0.5, 0.8);
 
-  if(randomint(100) < 30)
+  if(randomint(100) < 30) {
     var_00 func_2B9E(2, 0.05, 0.1, 0.8);
+  }
 
   self.count--;
 
-  if(self.count == 0)
+  if(self.count == 0) {
     self notify("fadein_letter_done");
+  }
 }
 
 func_2BA0(var_00, var_01, var_02, var_03) {
   func_2B9E(var_00, var_01, var_02, var_03);
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0.05;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0.1;
+  }
 
   var_04 = randomfloatrange(var_01, var_02);
   self fadeovertime(var_04);
@@ -1141,14 +1194,17 @@ func_2BA0(var_00, var_01, var_02, var_03) {
 func_2BA1(var_00, var_01, var_02, var_03) {
   func_2B9E(var_00, var_01, var_02, var_03);
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0.05;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0.1;
+  }
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0.8;
+  }
 
   var_04 = randomfloatrange(var_01, var_02);
   self fadeovertime(var_04);
@@ -1156,23 +1212,28 @@ func_2BA1(var_00, var_01, var_02, var_03) {
 }
 
 func_2B9E(var_00, var_01, var_02, var_03) {
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0.05;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0.1;
+  }
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0.8;
+  }
 
   for(var_04 = 0; var_04 < var_00; var_4++) {
     var_05 = randomfloatrange(var_01, var_02);
     self fadeovertime(var_05);
 
-    if(var_04 % 2)
+    if(var_04 % 2) {
       var_06 = var_03;
-    else
+    }
+    else {
       var_06 = randomfloatrange(0.05, 0.2);
+    }
 
     self.alpha = var_06;
     wait(var_05);
@@ -1194,20 +1255,26 @@ func_490F(var_00) {
     var_06 = 20;
 
     if(isDefined(var_02)) {
-      if(var_2.text == "'")
+      if(var_2.text == "'") {
         var_06 = 10;
-      else if(var_2.text == "M")
+      }
+      else if(var_2.text == "M") {
         var_06 = 24;
-      else if(var_2.text == "E")
+      }
+      else if(var_2.text == "E") {
         var_06 = 18;
-      else if(var_2.text == "T")
+      }
+      else if(var_2.text == "T") {
         var_06 = 18;
-      else if(var_2.text == " ")
+      }
+      else if(var_2.text == " ") {
         var_06 = 14;
+      }
     }
 
-    if(isDefined(var_02))
+    if(isDefined(var_02)) {
       var_5.x = var_2.x + var_06;
+    }
 
     var_1[var_1.size] = var_05;
     var_02 = var_05;

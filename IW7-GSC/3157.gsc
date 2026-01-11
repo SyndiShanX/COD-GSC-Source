@@ -7,8 +7,9 @@ chooseanimshoot(var_00, var_01, var_02) {
   var_03 = var_02;
   var_04 = self.var_1198.shootstate + "_" + var_03;
 
-  if(isDefined(self.var_1198.shootstate) && scripts\asm\asm::asm_hasalias(var_01, var_04))
+  if(isDefined(self.var_1198.shootstate) && scripts\asm\asm::asm_hasalias(var_01, var_04)) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_01, var_04);
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_01, var_02);
 }
@@ -19,14 +20,16 @@ choosedemeanoranimwithoverride(var_00, var_01, var_02) {
   if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_03, var_02)) {
     var_04 = scripts\asm\asm::asm_getdemeanoranimoverride(var_03, var_02);
 
-    if(isarray(var_04))
+    if(isarray(var_04)) {
       return var_4[randomint(var_4.size)];
+    }
 
     return var_04;
   }
 
-  if(!scripts\asm\asm::asm_hasalias(var_01, var_03))
+  if(!scripts\asm\asm::asm_hasalias(var_01, var_03)) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_01, "default");
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_01, var_03);
 }
@@ -37,8 +40,9 @@ choosedemeanoranimwithoverridevariants(var_00, var_01, var_02) {
   if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_03, var_02)) {
     var_04 = scripts\asm\asm::asm_getdemeanoranimoverride(var_03, var_02);
 
-    if(isarray(var_04))
+    if(isarray(var_04)) {
       return var_4[randomint(var_4.size)];
+    }
 
     return var_04;
   }
@@ -58,8 +62,9 @@ choosedemeanoranimwithoverridevariants(var_00, var_01, var_02) {
 func_3EAA(var_00, var_01, var_02) {
   var_03 = weaponclass(self.weapon);
 
-  if(!scripts\asm\asm::asm_hasalias(var_01, var_03))
+  if(!scripts\asm\asm::asm_hasalias(var_01, var_03)) {
     var_03 = "rifle";
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_01, var_03);
 }
@@ -67,27 +72,33 @@ func_3EAA(var_00, var_01, var_02) {
 func_3E9A(var_00, var_01, var_02) {
   var_03 = var_02;
 
-  if(self.asm.shootparams.func_FF0B == 1)
+  if(self.asm.shootparams.func_FF0B == 1) {
     var_04 = "single";
-  else
+  }
+  else {
     var_04 = var_03 + self.asm.shootparams.func_FF0B;
+  }
 
-  if(scripts\asm\asm::asm_hasalias(var_01, var_04))
+  if(scripts\asm\asm::asm_hasalias(var_01, var_04)) {
     var_05 = scripts\asm\asm::asm_lookupanimfromalias(var_01, var_04);
-  else
+  }
+  else {
     var_05 = scripts\asm\asm::asm_lookupanimfromalias(var_01, "fire");
+  }
 
   return var_05;
 }
 
 chooseanim_weaponswitch(var_00, var_01, var_02) {
-  if(weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm::asm_hasalias(var_01, "drop_rpg"))
+  if(weaponclass(self.weapon) == "rocketlauncher" && scripts\asm\asm::asm_hasalias(var_01, "drop_rpg")) {
     return scripts\asm\asm::asm_lookupanimfromalias(var_01, "drop_rpg");
+  }
 
   var_03 = scripts\asm\asm_bb::bb_getrequestedweapon();
 
-  if(!scripts\asm\asm::asm_hasalias(var_01, var_03))
+  if(!scripts\asm\asm::asm_hasalias(var_01, var_03)) {
     var_03 = "rifle";
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_01, var_03);
 }
@@ -128,13 +139,15 @@ getnodeforwardyawnodetypelookupoverride(var_00, var_01) {
 
   switch (var_00) {
     case "Cover Left":
-      if(var_01 == "crouch")
+      if(var_01 == "crouch") {
         return "Cover Left Crouch";
+      }
 
       break;
     case "Cover Right":
-      if(var_01 == "crouch")
+      if(var_01 == "crouch") {
         return "Cover Right Crouch";
+      }
 
       break;
     case "Conceal Crouch":
@@ -150,18 +163,22 @@ getnodeforwardyawnodetypelookupoverride(var_00, var_01) {
 getnodeyawfromoffsettable(var_00, var_01, var_02) {
   var_03 = self.a.pose;
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_03 = var_02;
-  else if(isnode(var_01) && !var_01 doesnodeallowstance(var_03))
+  }
+  else if(isnode(var_01) && !var_01 doesnodeallowstance(var_03)) {
     var_03 = var_01 gethighestnodestance();
+  }
 
   var_04 = getnodeforwardyawnodetypelookupoverride(var_1.type, var_03);
 
-  if(isDefined(var_04) && isDefined(var_0[var_04]))
+  if(isDefined(var_04) && isDefined(var_0[var_04])) {
     return var_0[var_04];
+  }
 
-  if(isDefined(var_0[var_1.type]))
+  if(isDefined(var_0[var_1.type])) {
     return var_0[var_1.type];
+  }
 
   return undefined;
 }
@@ -172,43 +189,50 @@ func_1C9C() {
 }
 
 getnodeyawoffset(var_00, var_01) {
-  if(_isstruct(var_00) || !isDefined(var_0.type))
+  if(_isstruct(var_00) || !isDefined(var_0.type)) {
     return 0;
+  }
 
   if(getdvarint("ai_iw7", 0) == 1) {
-    if(isDefined(self.var_1198.func_98F4) && self.var_1198.func_98F4 || isDefined(self.asm.func_1310E) && self.asm.func_1310E)
+    if(isDefined(self.var_1198.func_98F4) && self.var_1198.func_98F4 || isDefined(self.asm.func_1310E) && self.asm.func_1310E) {
       return 0;
+    }
 
     if(self.asm.func_7360 && isDefined(anim.func_7365) && isDefined(anim.func_7365[self.asmname])) {
       var_02 = getnodeyawfromoffsettable(anim.func_7365[self.asmname], var_00, var_01);
 
-      if(isDefined(var_02))
+      if(isDefined(var_02)) {
         return var_02;
+      }
 
       return 0;
     } else if(isDefined(anim.func_C05A) && isDefined(anim.func_C05A[self.asmname])) {
       var_02 = getnodeyawfromoffsettable(anim.func_C05A[self.asmname], var_00, var_01);
 
-      if(isDefined(var_02))
+      if(isDefined(var_02)) {
         return var_02;
+      }
 
       return 0;
     }
   }
 
   if(!isDefined(self.heat)) {
-    if(scripts\engine\utility::isnodecoverleft(var_00))
+    if(scripts\engine\utility::isnodecoverleft(var_00)) {
       return 90;
-    else if(scripts\engine\utility::isnodecoverright(var_00))
+    }
+    else if(scripts\engine\utility::isnodecoverright(var_00)) {
       return -90;
+    }
   }
 
   return 0;
 }
 
 _meth_812E(var_00, var_01) {
-  if(!isDefined(var_0.angles))
+  if(!isDefined(var_0.angles)) {
     return 0;
+  }
 
   var_02 = var_0.type;
 
@@ -226,8 +250,9 @@ _meth_812E(var_00, var_01) {
   var_03 = getnodeyawoffset(var_00, var_01);
 
   if(var_0.type == "Cover Left") {
-    if(self.asmname == "soldier")
+    if(self.asmname == "soldier") {
       var_03 = var_03 + 45;
+    }
   }
 
   return var_03;
@@ -251,16 +276,19 @@ getnodeforwardangles(var_00, var_01) {
 func_7FF1(var_00, var_01, var_02) {
   var_03 = undefined;
 
-  if(var_02 == "exposed")
+  if(var_02 == "exposed") {
     var_03 = anim.func_C046[var_00];
-  else if(var_02 == "lean" || var_02 == "leanover")
+  }
+  else if(var_02 == "lean" || var_02 == "leanover") {
     var_03 = anim.func_C04D[var_00];
+  }
 
   if(isDefined(var_03)) {
     var_04 = getnodeyawfromoffsettable(var_03, var_01, undefined);
 
-    if(isDefined(var_04))
+    if(isDefined(var_04)) {
       return var_04;
+    }
   }
 
   return 0;
@@ -270,34 +298,39 @@ func_7FF2(var_00, var_01, var_02) {
   var_03 = undefined;
 
   if(self.asm.func_7360) {
-    if(var_02 == "lean")
+    if(var_02 == "lean") {
       var_03 = anim.func_7364[var_00];
-    else if(var_02 == "A" || var_02 == "full" || var_02 == "right" || var_02 == "left")
+    }
+    else if(var_02 == "A" || var_02 == "full" || var_02 == "right" || var_02 == "left") {
       var_03 = anim.func_7363[var_00];
+    }
   } else if(var_02 == "lean")
     var_03 = anim.func_C04E[var_00];
 
   if(isDefined(var_03)) {
     var_04 = getnodeyawfromoffsettable(var_03, var_01, undefined);
 
-    if(isDefined(var_04))
+    if(isDefined(var_04)) {
       return var_04;
+    }
   }
 
   return 0;
 }
 
 func_C04B(var_00) {
-  if(var_0.type == "Cover Stand 3D")
+  if(var_0.type == "Cover Stand 3D") {
     return !func_C04A(var_00);
+  }
 
   return 0;
 }
 
 func_C04A(var_00) {
   if(var_0.type == "Cover Stand 3D") {
-    if(isDefined(var_0.script_parameters) && var_0.script_parameters == "exposed")
+    if(isDefined(var_0.script_parameters) && var_0.script_parameters == "exposed") {
       return 1;
+    }
   }
 
   return 0;
@@ -305,10 +338,12 @@ func_C04A(var_00) {
 
 getnodetypename(var_00) {
   if(isDefined(var_00)) {
-    if(func_C04A(var_00))
+    if(func_C04A(var_00)) {
       return "Cover Exposed 3D";
-    else
+    }
+    else {
       return var_0.type;
+    }
   }
 
   return "undefined";
@@ -318,16 +353,20 @@ choosestrongdamagedeath(var_00, var_01, var_02) {
   var_03 = undefined;
 
   if(abs(self.damageyaw) > 150) {
-    if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot"))
+    if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot")) {
       var_03 = "legs";
-    else if(self.damagelocation == "torso_lower")
+    }
+    else if(self.damagelocation == "torso_lower") {
       var_03 = "torso_lower";
-    else
+    }
+    else {
       var_03 = "default";
+    }
   } else if(self.damageyaw < 0)
     var_03 = "right";
-  else
+  else {
     var_03 = "left";
+  }
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_01, var_03);
 }
@@ -349,8 +388,9 @@ setuseanimgoalweight(var_00, var_01) {
   self.useanimgoalweight = 1;
   thread setuseanimgoalweight_wait(var_00);
 
-  if(var_01 > 0)
+  if(var_01 > 0) {
     wait(var_01);
+  }
 
   self.useanimgoalweight = 0;
   self notify("StopUseAnimGoalWeight");

@@ -74,10 +74,12 @@ fix_c4_barrels() {
 
   barrels = getEntArray("c4_barrel", "script_noteworthy");
   foreach(barrel in barrels) {
-    if(cointoss())
+    if(cointoss()) {
       barrel setModel("com_barrel_white_rust");
-    else
+    }
+    else {
       barrel setModel("com_barrel_blue_rust");
+    }
   }
 }
 
@@ -105,11 +107,14 @@ scale_juggernaut_enemies() {
   for(;;) {
     level waittill("update_enemies_remaining_count");
 
-    if(level.pmc.enemies_remaining >= 12)
+    if(level.pmc.enemies_remaining >= 12) {
       level.pmc.max_ai_alive = 1;
-    else if(level.pmc.enemies_remaining >= 8)
+    }
+    else if(level.pmc.enemies_remaining >= 8) {
       level.pmc.max_ai_alive = 2;
-    else
+    }
+    else {
       level.pmc.max_ai_alive = 3;
+    }
   }
 }

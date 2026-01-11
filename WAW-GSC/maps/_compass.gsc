@@ -4,8 +4,9 @@
 *****************************************************/
 
 setupMiniMap(material) {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _compass.gsc. Function: setupMiniMap()\n");
+  }
   requiredMapAspectRatio = getdvarfloat("scr_requiredMapAspectRatio");
   corners = getEntArray("minimap_corner", "targetname");
   if(corners.size != 2) {
@@ -51,8 +52,9 @@ setupMiniMap(material) {
     southeast -= addvec;
   }
   setMiniMap(material, northwest[0], northwest[1], southeast[0], southeast[1]);
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _compass.gsc. Function: setupMiniMap() - COMPLETE\n");
+  }
 }
 
 vecscale(vec, scalar) {

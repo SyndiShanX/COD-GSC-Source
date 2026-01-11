@@ -12,11 +12,13 @@ CONST_CHAOS_INITIAL_LASTSTANDS = 3;
 chaos_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, bleedOutSpawnEntity) {
   gameShouldEnd = chaos_gameShouldEnd(self);
 
-  if(gameShouldEnd)
+  if(gameShouldEnd) {
     maps\mp\alien\_chaos_utility::chaos_end_game();
+  }
 
-  if(is_killed_by_kill_trigger(bleedOutSpawnEntity))
+  if(is_killed_by_kill_trigger(bleedOutSpawnEntity)) {
     return process_killed_by_kill_trigger(bleedOutSpawnEntity);
+  }
 
   chaos_dropIntoLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, bleedOutSpawnEntity, gameShouldEnd);
 }
@@ -25,8 +27,9 @@ process_killed_by_kill_trigger(bleedOutSpawnEntity) {
   self setOrigin(bleedOutSpawnEntity.origin);
   maps\mp\alien\_death::set_kill_trigger_event_processed(self, false);
 
-  if(!self.inLastStand)
+  if(!self.inLastStand) {
     self DoDamage(1000, self.origin);
+  }
 
   return;
 }
@@ -41,10 +44,12 @@ chaos_dropIntoLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, v
 
   enter_laststand();
 
-  if(get_last_stand_count() > 0)
+  if(get_last_stand_count() > 0) {
     chaos_self_revive(gameShouldEnd);
-  else
+  }
+  else {
     wait_to_be_revived(self, self.origin, undefined, undefined, true, CONST_CHAOS_REVIVE_TIME, (0.33, 0.75, 0.24), undefined, false, gameShouldEnd, true);
+  }
 
   self notify("revive");
 
@@ -58,8 +63,9 @@ chaos_self_revive(gameShouldEnd) {
   self endon("revive");
   level endon("game_ended");
 
-  if(self maps\mp\alien\_debug::shouldSelfRevive())
+  if(self maps\mp\alien\_debug::shouldSelfRevive()) {
     return debug_self_revive();
+  }
 
   self set_in_chaos_self_revive(self, true);
   self take_lastStand(self, 1);
@@ -89,8 +95,9 @@ no_one_else_in_chaos_self_revive(player_just_down) {
     if(player == player_just_down) {
       continue;
     }
-    if(is_in_chaos_self_revive(player))
+    if(is_in_chaos_self_revive(player)) {
       return false;
+    }
   }
   return true;
 }
@@ -98,8 +105,9 @@ no_one_else_in_chaos_self_revive(player_just_down) {
 get_team_self_revive_count() {
   total_self_revive_count = 0;
 
-  foreach(player in level.players)
+  foreach(player in level.players) {
   total_self_revive_count += player get_last_stand_count();
+  }
 
   return total_self_revive_count;
 }

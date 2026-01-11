@@ -13,15 +13,18 @@
 #include maps\mp\_compass;
 
 playercanafford(player, cost) {
-  if(!player usebuttonpressed())
+  if(!player usebuttonpressed()) {
     return false;
+  }
 
-  if(player in_revive_trigger())
+  if(player in_revive_trigger()) {
     return false;
+  }
 
   if(isDefined(cost)) {
-    if(player.score < cost)
+    if(player.score < cost) {
       return false;
+    }
 
     player maps\mp\zombies\_zm_score::minus_to_player_score(cost);
   }
@@ -32,8 +35,9 @@ playercanafford(player, cost) {
 setinvisibletoall() {
   players = get_players();
 
-  for(playerindex = 0; playerindex < players.size; playerindex++)
+  for(playerindex = 0; playerindex < players.size; playerindex++) {
     self setinvisibletoplayer(players[playerindex]);
+  }
 }
 
 spawnandlinkfxtotag(effect, ent, tag) {
@@ -73,16 +77,18 @@ custom_weapon_wall_prices() {
 }
 
 pause_zombie_spawning() {
-  if(!isDefined(level.spawnpausecount))
+  if(!isDefined(level.spawnpausecount)) {
     level.spawnpausecount = 0;
+  }
 
   level.spawnpausecount++;
   flag_clear("spawn_zombies");
 }
 
 try_resume_zombie_spawning() {
-  if(!isDefined(level.spawnpausecount))
+  if(!isDefined(level.spawnpausecount)) {
     level.spawnpausecount = 0;
+  }
 
   level.spawnpausecount--;
 
@@ -94,8 +100,9 @@ try_resume_zombie_spawning() {
 
 automatonspeak(category, type, response, force_variant, override) {
   if(isDefined(level.automaton) && !is_true(level.automaton.disabled_by_emp)) {
-    if(getdvar(#"_id_6DF184E8") == "")
+    if(getdvar(#"_id_6DF184E8") == "") {
       iprintlnbold("Automaton VO: " + type);
+    }
 
     if(type != "leaving" && type != "leaving_warning") {
       level.automaton notify("want_to_be_speaking", type);
@@ -159,8 +166,9 @@ transit_breakable_glass() {
 }
 
 glass_gets_destroyed() {
-  if(isDefined(level._effect["glass_impact"]))
+  if(isDefined(level._effect["glass_impact"])) {
     playFX(level._effect["glass_impact"], self.origin, anglesToForward(self.angles));
+  }
 
   wait 0.1;
 

@@ -37,8 +37,9 @@ main(var_00, var_01, var_02) {
 #using_animtree("vehicles");
 
 func_317C(var_00) {
-  if(!isDefined(level.func_3979))
+  if(!isDefined(level.func_3979)) {
     level.func_3979 = [];
+  }
 
   level._effect["capship_death_linger_sparks_bg"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_sparks_bg.vfx");
   level._effect["capship_death_linger_sparks_md"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_sparks_md.vfx");
@@ -65,8 +66,9 @@ func_317C(var_00) {
   var_1.func_1FAF = % ph_mil_air_ca_destroyer_space_explosion;
   var_1.func_7570 = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_death_debris.vfx");
 
-  if(getdvarint("e3", 0))
+  if(getdvarint("e3", 0)) {
     var_1.func_7571 = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_death_debris_e3.vfx");
+  }
 
   var_1.func_7582 = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_death_explosion.vfx");
   var_1.func_FB8C = "capital_ship_explo";
@@ -149,14 +151,17 @@ func_1EDC() {
 }
 
 func_F030(var_00, var_01, var_02) {
-  while(isDefined(self.func_74A6))
+  while(isDefined(self.func_74A6)) {
     wait 0.05;
+  }
 
-  if(!isDefined(level.func_F033))
+  if(!isDefined(level.func_F033)) {
     level.func_F033 = [];
+  }
 
-  if(!isDefined(level.func_F02D))
+  if(!isDefined(level.func_F02D)) {
     level.func_F02D = [];
+  }
 
   level.func_F033 = scripts\engine\utility::array_add(level.func_F033, self);
   level.func_F02D = scripts\engine\utility::array_add(level.func_F02D, self);
@@ -168,23 +173,27 @@ func_F030(var_00, var_01, var_02) {
   self.func_10250 = 1;
   self.func_D436 = 0;
 
-  if(scripts\sp\utility::func_B324())
+  if(scripts\sp\utility::func_B324()) {
     self[[level.func_A056.func_11543]]("capitalship", "JACKAL_SDF_DESTROYER", "none", "none", 0, 1, 1);
+  }
 
   self.team = "axis";
   func_0BB6::func_39E1();
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     self.func_EEF9 = var_02;
-  else
+  }
+  else {
     self.func_EEF9 = "cannon_missile_ca_hardpoint cannon_small_ca,3,1,amb_turret_sml_l_ts_1,amb_turret_sml_l_ts_5,amb_turret_sml_r_ts_1,amb_turret_sml_r_ts_5,amb_turret_sml_r_ts_6,amb_turret_sml_r_ts_7,amb_turret_sml_l_ts_6,amb_turret_sml_l_ts_7 cannon_flak_ca,3,1 cannon_phalanx";
+  }
 
   func_0BB6::func_39E8();
   self solid();
   self setCanDamage(1);
 
-  if(scripts\engine\utility::is_true(var_00))
+  if(scripts\engine\utility::is_true(var_00)) {
     thread func_0BA9::func_39C9();
+  }
 
   func_0BB8::func_39CE("high");
   thread func_0BB8::func_39D0("idle");
@@ -202,8 +211,9 @@ func_F030(var_00, var_01, var_02) {
   thread func_52FB();
   func_0BA9::func_52FD();
 
-  if(!isDefined(var_01) || !var_01)
+  if(!isDefined(var_01) || !var_01) {
     self.func_12FBA = 1;
+  }
 
   thread func_0BA9::func_396F(var_01);
 }
@@ -235,14 +245,17 @@ func_52FB() {
 func_52FA() {
   var_00 = 0;
 
-  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_med_flak"]))
+  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_med_flak"])) {
     var_00 = scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_med_flak"]).size;
+  }
 
-  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_phalanx"]))
+  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_phalanx"])) {
     var_00 = var_00 + scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_phalanx"]).size;
+  }
 
-  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_small_constant"]))
+  if(isDefined(self.turrets) && isDefined(self.turrets["cap_turret_small_constant"])) {
     var_00 = var_00 + scripts\engine\utility::array_removeundefined(self.turrets["cap_turret_small_constant"]).size;
+  }
 
   return var_00;
 }
@@ -250,8 +263,9 @@ func_52FA() {
 func_52F9() {
   var_00 = 0;
 
-  if(isDefined(self.func_8B4F) && isDefined(self.func_8B4F["cap_hardpoint_missile_barrage"]))
+  if(isDefined(self.func_8B4F) && isDefined(self.func_8B4F["cap_hardpoint_missile_barrage"])) {
     var_00 = scripts\engine\utility::array_removeundefined(self.func_8B4F["cap_hardpoint_missile_barrage"]).size;
+  }
 
   return var_00;
 }

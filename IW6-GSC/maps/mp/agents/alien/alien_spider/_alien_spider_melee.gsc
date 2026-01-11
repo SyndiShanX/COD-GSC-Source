@@ -51,11 +51,13 @@ main() {
       break;
   }
 
-  if(var_0 == gettime())
+  if(var_0 == gettime()) {
     wait 0.05;
+  }
 
-  while(self.vulnerable)
+  while(self.vulnerable) {
     wait 0.05;
+  }
 
   self notify("melee_complete");
 }
@@ -63,8 +65,9 @@ main() {
 spawnregenpod(var_0) {
   self.spawned = 1;
 
-  if(isDefined(self.pod_coll_model))
+  if(isDefined(self.pod_coll_model)) {
     self.pod_coll_model delete();
+  }
 
   self.pod_coll_model = spawn("script_model", self.origin);
   self.pod_coll_model setModel("armory_alien_hive_spore_coll");
@@ -98,13 +101,15 @@ spawnregenpod(var_0) {
   } else
     var_3 = "killed";
 
-  if(var_3 == "drained")
+  if(var_3 == "drained") {
     self setscriptablepartstate(0, "not_killed");
+  }
   else if(var_3 == "killed") {
     self setscriptablepartstate(0, "killed");
 
-    if(!isDefined(var_2) && isDefined(self.final_attacker))
+    if(!isDefined(var_2) && isDefined(self.final_attacker)) {
       var_2 = self.final_attacker;
+    }
 
     if(isDefined(var_2) && isplayer(var_2)) {
       var_4 = int(level.alien_types["brute"].attributes["reward"] * 2);
@@ -137,8 +142,9 @@ regenpoddamagehandler() {
       var_0 = var_2;
     }
 
-    if(var_1 > 2000)
+    if(var_1 > 2000) {
       self.pod_coll_model.health = self.pod_coll_model.health + int((var_1 - 2000) * 1.1);
+    }
   }
 
   self.pod_coll_model setCanDamage(0);
@@ -156,8 +162,9 @@ getregenpods() {
     if(distance(var_2.origin, self.origin) > 2000) {
       continue;
     }
-    if(isDefined(var_2) && isDefined(var_2.spawned) && var_2.spawned)
+    if(isDefined(var_2) && isDefined(var_2.spawned) && var_2.spawned) {
       var_0[var_0.size] = var_2;
+    }
   }
 
   return var_0;
@@ -168,8 +175,9 @@ getavailableregenpods() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3) && isDefined(var_3.drainable) && var_3.drainable == 1)
+    if(isDefined(var_3) && isDefined(var_3.drainable) && var_3.drainable == 1) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   return var_1;
@@ -201,26 +209,31 @@ getregenpodscaledspawncount() {
 spawnregenpodsraw() {
   var_0 = maps\mp\agents\alien\alien_spider\_alien_spider::gethealthratio();
 
-  if(var_0 <= 1 && var_0 > 0.66)
+  if(var_0 <= 1 && var_0 > 0.66) {
     var_1 = 18;
-  else if(var_0 <= 0.66 && var_0 > 0.33)
+  }
+  else if(var_0 <= 0.66 && var_0 > 0.33) {
     var_1 = 15;
-  else
+  }
+  else {
     var_1 = 12;
+  }
 
   var_2 = 0;
   var_3 = getavailableregenpods();
 
-  if(var_3.size < 3)
+  if(var_3.size < 3) {
     var_2 = 3 - var_3.size;
+  }
 
   var_4 = getregenpodscaledspawncount();
   var_2 = min(var_4, var_2);
   level notify("dlc_vo_notify", "spider_vo", "spider_pods");
   var_5 = common_scripts\utility::array_randomize(level.spider_regen_pods);
 
-  for(var_6 = 0; var_6 < var_2; var_6++)
+  for(var_6 = 0; var_6 < var_2; var_6++) {
     var_5[var_6] thread spawnregenpod(var_1);
+  }
 }
 
 regeneration() {
@@ -267,8 +280,9 @@ regenpoddrain(var_0) {
   for(var_8 = 0; var_8 < var_7; var_8++) {
     self.health = self.health + int(var_6 / var_7);
 
-    if(self.health > self.maxhealth)
+    if(self.health > self.maxhealth) {
       self.health = self.maxhealth;
+    }
 
     self notify("hp_update");
     maps\mp\agents\_scriptedagents::playanimnuntilnotetrack("attack_regen", 2, "attack_regen", "end", maps\mp\agents\alien\alien_spider\_alien_spider::handlespidernotetracks);
@@ -301,8 +315,9 @@ regen_sfx(var_0, var_1) {
   if(level.spider_regen_sfx == 0) {
     self playLoopSound("spdr_rchrg_lp");
 
-    for(level.spider_regen_sfx = 1; var_0 > 0; var_0 = var_0 - var_1)
+    for(level.spider_regen_sfx = 1; var_0 > 0; var_0 = var_0 - var_1) {
       wait(var_1);
+    }
 
     self stoploopsound("spdr_rchrg_lp");
     self playsoundonmovingent("spdr_rchrg_end");
@@ -346,13 +361,15 @@ beamsweepattack() {
   var_1 = var_0[2] + -64;
   var_2 = beam_find_new_target();
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = sortbydistance(level.players, self.origin)[0];
+  }
 
   var_3 = 1;
 
-  if(common_scripts\utility::cointoss())
+  if(common_scripts\utility::cointoss()) {
     var_3 = -1;
+  }
 
   var_4 = (var_2.origin[0], var_2.origin[1], var_1);
   var_5 = var_4 - var_0;
@@ -361,17 +378,20 @@ beamsweepattack() {
   var_8 = var_6 + var_3 * (0, 100, 0);
   var_9 = anglesToForward(var_8) * max(distance2d(var_0, var_2.origin), 1250) + var_0;
 
-  if(!isDefined(self.sweep_dummy))
+  if(!isDefined(self.sweep_dummy)) {
     self.sweep_dummy = spawn("script_origin", var_7);
+  }
   else {
     self.sweep_dummy unlink();
     self.sweep_dummy.origin = var_7;
   }
 
-  if(!isDefined(self.beam_origin_dummy))
+  if(!isDefined(self.beam_origin_dummy)) {
     self.beam_origin_dummy = spawn("script_origin", self.origin);
-  else
+  }
+  else {
     self.beam_origin_dummy.origin = self.origin;
+  }
 
   self.beam_origin_dummy.angles = self.angles;
   self.sweep_dummy linkto(self.beam_origin_dummy);
@@ -419,8 +439,9 @@ beam_cone_damage(var_0) {
       }
       var_6 = vectordot(var_2, vectornormalize(var_5.origin - var_3));
 
-      if(var_6 >= 0.995)
+      if(var_6 >= 0.995) {
         var_5 dodamage(3, var_5.origin, self, var_0);
+      }
     }
 
     wait 0.05;
@@ -450,12 +471,15 @@ beamattack() {
   playsoundatpos(self.origin, "alien_fence_shock");
   level notify("dlc_vo_notify", "spider_vo", "spider_lasers");
 
-  if(!maps\mp\alien\_utility::isplayingsolo())
+  if(!maps\mp\alien\_utility::isplayingsolo()) {
     var_1 = 4.5;
-  else if(isDefined(self.has_fired_beam))
+  }
+  else if(isDefined(self.has_fired_beam)) {
     var_1 = 3.5;
-  else
+  }
+  else {
     var_1 = 1.75;
+  }
 
   var_2 = 0;
 
@@ -482,19 +506,22 @@ beamattack() {
     }
   }
 
-  if(isDefined(var_0) && isDefined(var_0.target_dummy))
+  if(isDefined(var_0) && isDefined(var_0.target_dummy)) {
     var_0.target_dummy delete();
+  }
 
   self notify("beam_stop");
   maps\mp\agents\_scriptedagents::playanimnatrateuntilnotetrack("attack_satellite", 1, 1.0, "attack_satellite", "end", maps\mp\agents\alien\alien_spider\_alien_spider::handlespidernotetracks);
 }
 
 beam_setup_new_target(var_0, var_1) {
-  if(isDefined(self) && isDefined(self.target_dummy))
+  if(isDefined(self) && isDefined(self.target_dummy)) {
     self.target_dummy delete();
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.origin;
+  }
 
   self.target_dummy = spawn("script_origin", var_1);
 }
@@ -533,13 +560,16 @@ beam_anim_turn_monitor(var_0, var_1, var_2) {
   self endon("beam_stop");
   self endon("beam_interrupted");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return;
-  else
+  }
+  else {
     var_0 endon("death");
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 35;
+  }
 
   if(isDefined(var_1)) {
     var_1 endon("death");
@@ -551,10 +581,12 @@ beam_anim_turn_monitor(var_0, var_1, var_2) {
     var_4 = maps\mp\agents\alien\_alien_anim_utils::getprojectiondata(anglesToForward(self.angles), var_3, anglestoup(self.angles));
 
     if(var_4.rotatedyaw > var_2) {
-      if(var_4.projintooutright > 0)
+      if(var_4.projintooutright > 0) {
         var_5 = 1;
-      else
+      }
+      else {
         var_5 = 0;
+      }
 
       self.sweepturning = 1;
       maps\mp\agents\_scriptedagents::playanimnatrateuntilnotetrack("attack_satellite_turn", var_5, 1.0, "attack_satellite_turn", "end", maps\mp\agents\alien\alien_spider\_alien_spider::handlespidernotetracks);
@@ -585,8 +617,9 @@ update_target_dummy(var_0, var_1, var_2) {
   if(isDefined(var_2) && var_2) {
     var_4 = self.origin;
 
-    if(!is_target_in_attack_cone(var_0, var_4, 0.85))
+    if(!is_target_in_attack_cone(var_0, var_4, 0.85)) {
       var_4 = get_edge_of_cone(var_0, var_4, 0.85);
+    }
 
     self.target_dummy moveto(var_4, var_3);
     wait(var_3);
@@ -597,13 +630,15 @@ update_target_dummy(var_0, var_1, var_2) {
   for(;;) {
     var_6 = get_mid_point(var_1["left"].origin, var_1["right"].origin);
 
-    if(self.origin[2] <= var_6[2])
+    if(self.origin[2] <= var_6[2]) {
       var_7 = (0, 0, 0);
+    }
     else {
       var_8 = distance(var_6, self.origin);
 
-      if(var_8 <= 0.001 && var_8 >= -0.001)
+      if(var_8 <= 0.001 && var_8 >= -0.001) {
         var_8 = 0.001;
+      }
 
       var_9 = self.origin[2] - var_6[2];
       var_10 = min(15, asin(var_9 / var_8));
@@ -612,8 +647,9 @@ update_target_dummy(var_0, var_1, var_2) {
 
     var_4 = self.origin + var_7;
 
-    if(!is_target_in_attack_cone(var_0, var_4, 0.85))
+    if(!is_target_in_attack_cone(var_0, var_4, 0.85)) {
       var_4 = get_edge_of_cone(var_0, var_4, 0.85);
+    }
 
     var_11 = anglesToForward(var_0.angles);
     var_12 = self.origin - var_0.origin;
@@ -637,10 +673,12 @@ get_edge_of_cone(var_0, var_1, var_2) {
   var_7 = (var_7[0], var_7[1], var_4);
   var_8 = (var_8[0], var_8[1], var_4);
 
-  if(distance(var_7, var_1) <= distance(var_8, var_1))
+  if(distance(var_7, var_1) <= distance(var_8, var_1)) {
     return var_7;
-  else
+  }
+  else {
     return var_8;
+  }
 }
 
 is_target_in_attack_cone(var_0, var_1, var_2) {
@@ -649,8 +687,9 @@ is_target_in_attack_cone(var_0, var_1, var_2) {
   var_4 = (anglesToForward(var_0.angles)[0], anglesToForward(var_0.angles)[1], 0);
   var_5 = vectordot(var_3, var_4);
 
-  if(var_5 > var_2)
+  if(var_5 > var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -662,18 +701,21 @@ remove_dummy_on_target_death(var_0) {
   var_0 endon("spider_stage_end");
   common_scripts\utility::waittill_any("death", "last_stand");
 
-  if(isDefined(self) && isDefined(self.target_dummy))
+  if(isDefined(self) && isDefined(self.target_dummy)) {
     self.target_dummy delete();
+  }
 }
 
 isvalidtarget(var_0) {
-  if(!isalive(var_0) || isDefined(var_0.laststand) && var_0.laststand)
+  if(!isalive(var_0) || isDefined(var_0.laststand) && var_0.laststand) {
     return 0;
+  }
 
   var_1 = distance(self.origin, var_0.origin);
 
-  if(var_1 < 4000 && var_1 > 10 && self agentcanseesentient(var_0))
+  if(var_1 < 4000 && var_1 > 10 && self agentcanseesentient(var_0)) {
     return 1;
+  }
 
   return 0;
 }
@@ -725,8 +767,9 @@ beamattacktarget(var_0, var_1, var_2, var_3) {
   var_5 = weaponfiretime("spider_beam_mp");
   var_6 = 10;
 
-  if(isDefined(var_2) && var_2 < var_6)
+  if(isDefined(var_2) && var_2 < var_6) {
     var_6 = var_2;
+  }
 
   thread beamattackfx(var_4, var_6, var_3);
   thread beamattackanim(var_0);
@@ -737,8 +780,9 @@ beamattacktarget(var_0, var_1, var_2, var_3) {
     var_9 = vectornormalize(var_0.origin - var_4.origin);
     var_10 = vectordot(var_8, var_9);
 
-    if(var_10 > 0.95)
+    if(var_10 > 0.95) {
       var_4 shootturret();
+    }
 
     var_6 = var_6 - var_5;
     wait(var_5);
@@ -756,8 +800,9 @@ beamattackanim(var_0) {
   var_1 = self getanimentry("attack_satellite", 2);
   var_2 = getanimlength(var_1);
 
-  if(!isDefined(self.sweepturning))
+  if(!isDefined(self.sweepturning)) {
     self.sweepturning = 0;
+  }
 
   while(isDefined(var_0)) {
     if(!self.sweepturning) {
@@ -770,8 +815,9 @@ beamattackanim(var_0) {
 }
 
 beamattackfx(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     wait(var_2);
+  }
 
   if(!isDefined(self) || !isDefined(var_0)) {
     return;
@@ -798,8 +844,9 @@ setupbeamweapons() {
 }
 
 setupbeamweapon(var_0, var_1, var_2) {
-  if(!isDefined(self.beam_turret))
+  if(!isDefined(self.beam_turret)) {
     self.beam_turret = [];
+  }
 
   if(isDefined(self.beam_turret[var_1])) {
     return;
@@ -826,21 +873,24 @@ projectilespit() {
   var_1 = getchokespittargets(3);
   var_2 = [];
 
-  if(var_0.size == 0)
+  if(var_0.size == 0) {
     var_2 = var_1;
+  }
   else {
     var_2[0] = var_0[0];
 
-    for(var_3 = 0; var_3 < 2; var_3++)
+    for(var_3 = 0; var_3 < 2; var_3++) {
       var_2[var_2.size] = var_1[var_3];
+    }
   }
 
   foreach(var_5 in var_2) {
     var_6 = var_5.origin;
     maps\mp\agents\_scriptedagents::playanimnatrateuntilnotetrack("attack_bomb", 2, 1.0, "attack_bomb", "start_attack");
 
-    if(isDefined(var_5.lastspittime))
+    if(isDefined(var_5.lastspittime)) {
       var_5.lastspittime = gettime();
+    }
 
     thread spitattack(var_6);
     maps\mp\agents\_scriptedagents::waituntilnotetrack("attack_bomb", "end");
@@ -864,15 +914,17 @@ getchokespittargets(var_0) {
 
   var_4 = common_scripts\utility::array_randomize(var_4);
 
-  if(var_4.size == 0)
+  if(var_4.size == 0) {
     return var_1;
+  }
 
   var_8 = max(0, var_0 - var_4.size);
   var_9 = [];
 
   foreach(var_6 in var_4) {
-    for(var_11 = 0; var_11 < var_8 + 1; var_11++)
+    for(var_11 = 0; var_11 < var_8 + 1; var_11++) {
       var_9[var_9.size] = sortbydistance(var_2, var_6.origin)[var_11];
+    }
 
     var_8 = 0;
   }
@@ -891,8 +943,9 @@ getavailablespitchokes(var_0) {
     if(var_5 > 2500 && var_5 < 256) {
       continue;
     }
-    if(var_2 - var_4.lastspittime > var_0 * 1000)
+    if(var_2 - var_4.lastspittime > var_0 * 1000) {
       var_1[var_1.size] = var_4;
+    }
   }
 
   return var_1;
@@ -913,8 +966,9 @@ getplayerspittargets(var_0) {
     }
     var_5 = distance2d(self.origin, var_4.origin);
 
-    if(var_5 < 2500 && var_5 > 256 && var_1.size < var_0)
+    if(var_5 < 2500 && var_5 > 256 && var_1.size < var_0) {
       var_1[var_1.size] = var_4;
+    }
   }
 
   return var_1;
@@ -923,8 +977,9 @@ getplayerspittargets(var_0) {
 player_in_spit_exclusion_volume(var_0) {
   var_1 = getent("spit_exclusion", "targetname");
 
-  if(var_0 istouching(var_1))
+  if(var_0 istouching(var_1)) {
     return 1;
+  }
 
   return 0;
 }
@@ -942,20 +997,24 @@ spitattack(var_0) {
   var_4.owner = self;
   common_scripts\utility::waitframe();
 
-  if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active))
+  if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active)) {
     playFXOnTag(level._effect["easter_egg_spitter_trail"], var_4, "tag_origin");
-  else
+  }
+  else {
     playFXOnTag(level._effect["projectile_spit_trail"], var_4, "tag_origin");
+  }
 
   var_4 physicslaunchserver((5, 0, 0), var_3 * 22, 1500);
   wait 2.25;
   var_5 = var_4.origin;
   playFX(level._effect["bomb_airburst"], var_5);
 
-  if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active))
+  if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active)) {
     stopFXOnTag(level._effect["easter_egg_spitter_trail"], var_4, "tag_origin");
-  else
+  }
+  else {
     stopFXOnTag(level._effect["projectile_spit_trail"], var_4, "tag_origin");
+  }
 
   var_4 delete();
   var_6 = 175;
@@ -966,8 +1025,9 @@ spitattack(var_0) {
     var_8 = magicbullet("spider_gas_mp", var_5, var_0, self);
     var_8.owner = self;
 
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       var_8 thread gascloudimpact();
+    }
   }
 }
 
@@ -1014,20 +1074,26 @@ damage_player(var_0, var_1) {
   var_4 = 9.0;
   var_5 = gettime();
 
-  if(!isDefined(var_0.last_spitter_gas_damage_time))
+  if(!isDefined(var_0.last_spitter_gas_damage_time)) {
     var_6 = var_2;
-  else if(var_0.last_spitter_gas_damage_time + var_2 * 1000.0 > var_5)
+  }
+  else if(var_0.last_spitter_gas_damage_time + var_2 * 1000.0 > var_5) {
     return;
-  else
+  }
+  else {
     var_6 = min(var_2, (var_5 - var_0.last_spitter_gas_damage_time) * 0.001);
+  }
 
-  if(!maps\mp\alien\_utility::isplayingsolo())
+  if(!maps\mp\alien\_utility::isplayingsolo()) {
     var_7 = int(var_3 * var_6);
-  else
+  }
+  else {
     var_7 = int(var_4 * var_6);
+  }
 
-  if(var_7 > 0)
+  if(var_7 > 0) {
     var_0 thread[[level.callbackplayerdamage]](var_1, var_1, var_7, 0, "MOD_SUICIDE", "spider_gas_mp", var_1.origin, (0, 0, 0), "none", 0);
+  }
 
   var_0.last_spitter_gas_damage_time = var_5;
 }
@@ -1069,8 +1135,9 @@ player_impulse(var_0, var_1) {
   var_5 = (var_3 + var_4) * (1, 1, 0);
   var_6 = length(var_5);
 
-  if(var_6 >= 400.0)
+  if(var_6 >= 400.0) {
     var_5 = vectornormalize(var_5) * 400.0;
+  }
 
   self setvelocity(var_5);
 }
@@ -1086,8 +1153,9 @@ portalspawn() {
       break;
     }
 
-    if(gettime() >= var_1)
+    if(gettime() >= var_1) {
       self notify("portal_spawn_failed");
+    }
 
     wait 0.05;
   }
@@ -1096,8 +1164,9 @@ portalspawn() {
   var_3 = get_mid_point(self gettagorigin("tag_back_laser_l"), self gettagorigin("tag_back_laser_r"));
   var_3 = var_3 + (0, 0, -50);
 
-  if(isDefined(self.portal_ent))
+  if(isDefined(self.portal_ent)) {
     self.portal_ent delete();
+  }
 
   self.portal_ent = spawn("script_model", var_3);
   self.portal_ent setModel("tag_origin");
@@ -1124,8 +1193,9 @@ getportalspawncount() {
   var_1 = maps\mp\alien\_spawn_director::get_current_spawn_count_multiplier();
   var_0 = var_0 * var_1;
 
-  if(var_0 > 0 && var_0 < 1.0)
+  if(var_0 > 0 && var_0 < 1.0) {
     var_0 = 1;
+  }
 
   return int(var_0);
 }
@@ -1152,8 +1222,9 @@ spawnthroughportal(var_0) {
   var_4 = 1;
   var_5 = "ground_slam";
 
-  if(var_1 != "elite")
+  if(var_1 != "elite") {
     var_5 = "posture";
+  }
 
   var_2 thread doportalanimation(var_5, var_4, var_3);
 }
@@ -1226,8 +1297,9 @@ eggspawn(var_0) {
       common_scripts\utility::waitframe();
       playeggspawnsequence(var_5[var_7 + 1], var_7 + 1);
 
-      if(isevenint(var_7) || var_7 == var_3 - 1)
+      if(isevenint(var_7) || var_7 == var_3 - 1) {
         playeggattackanim("egg_spawn_fire", var_6);
+      }
     }
   } else
     playeggattackanim("egg_spawn_fire", var_6);
@@ -1246,8 +1318,9 @@ release_custom_spawn_space_on_interrupt() {
 }
 
 isevenint(var_0) {
-  if(common_scripts\utility::mod(var_0, 2) == 0)
+  if(common_scripts\utility::mod(var_0, 2) == 0) {
     return 1;
+  }
 
   return 0;
 }
@@ -1255,10 +1328,12 @@ isevenint(var_0) {
 geteggattackindex(var_0) {
   var_1 = level.alien_types[self.alien_type].attributes["egg_attack_far_distance"] * level.alien_types[self.alien_type].attributes["egg_attack_far_distance"];
 
-  if(distancesquared(var_0, self.origin) < var_1)
+  if(distancesquared(var_0, self.origin) < var_1) {
     return 0;
-  else
+  }
+  else {
     return 1;
+  }
 }
 
 playeggspawnsequence(var_0, var_1) {
@@ -1267,8 +1342,9 @@ playeggspawnsequence(var_0, var_1) {
 }
 
 playeggattackanim(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "end";
+  }
 
   maps\mp\agents\_scriptedagents::playanimnatrateuntilnotetrack(var_0, var_1, 1.0, var_0, var_2, maps\mp\agents\alien\alien_spider\_alien_spider::handlespidernotetracks);
 }
@@ -1314,8 +1390,9 @@ throwegg(var_0, var_1) {
   var_3 = self gettagorigin("tag_tail_laser_r") + (self gettagorigin("tag_tail_laser_l") - self gettagorigin("tag_tail_laser_r")) * 0.5;
   var_4 = 2;
 
-  if(abs(self gettagorigin("tag_tail_laser_r")[2] - var_0.origin[2]) >= 128)
+  if(abs(self gettagorigin("tag_tail_laser_r")[2] - var_0.origin[2]) >= 128) {
     var_4 = 2.5;
+  }
 
   var_5 = trajectorycalculateinitialvelocity(var_3, var_0.origin, (0, 0, -1500), var_4);
   var_6 = spawn("script_model", var_3);
@@ -1324,20 +1401,24 @@ throwegg(var_0, var_1) {
   var_6.owner = self;
   var_6.targetname = "alien_spider_egg";
 
-  if(isevenint(var_1))
+  if(isevenint(var_1)) {
     var_6 linkto(self, "tag_tail_laser_r");
-  else
+  }
+  else {
     var_6 linkto(self, "tag_tail_laser_l");
+  }
 
   wait 0.45;
   thread fx_throw_egg_effect();
   var_6 unlink();
   common_scripts\utility::waitframe();
 
-  if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active))
+  if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active)) {
     playFXOnTag(level._effect["easter_egg_trl"], var_6, "tag_origin");
-  else
+  }
+  else {
     playFXOnTag(level._effect["egg_launch_trail"], var_6, "tag_origin");
+  }
 
   var_6 thread nonphysicslaunch(var_6, var_5, var_4);
   thread waitforegghatch(var_6, var_0, var_2);
@@ -1352,8 +1433,9 @@ throwegg(var_0, var_1) {
   if(isDefined(var_7)) {
     level notify("egg_" + var_7 + "_hatched");
 
-    if(!var_9)
+    if(!var_9) {
       var_0 = spawn("script_origin", var_8.origin);
+    }
 
     var_12 = maps\mp\alien\_spawn_director::process_custom_spawn(var_7, var_0, undefined);
 
@@ -1412,22 +1494,26 @@ burst_out(var_0, var_1, var_2, var_3) {
   var_4 = 1.5;
   var_3 = var_3 / var_4;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self setanimstate(var_2, 0, var_4);
+  }
 
   var_5 = var_0.origin;
   var_6 = 0.4;
   wait(var_3 * var_6);
 
-  if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active))
+  if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active)) {
     playFX(level._effect["easter_egg_explode"], common_scripts\utility::drop_to_ground(var_5, 32, -500));
-  else
+  }
+  else {
     playFX(level._effect["egg_explosion"], common_scripts\utility::drop_to_ground(var_5, 32, -500));
+  }
 
   wait 0.1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   wait(var_3 * (1.0 - var_6));
   self scragentsetphysicsmode("gravity");
@@ -1435,18 +1521,21 @@ burst_out(var_0, var_1, var_2, var_3) {
 }
 
 egg_cleanup(var_0, var_1) {
-  if(!var_0)
+  if(!var_0) {
     var_1 common_scripts\utility::waittill_any_timeout(10, "death", "destroyed");
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 clear_ignore_enemy() {
   maps\mp\alien\_utility::disable_alien_scripted();
 
-  foreach(var_1 in maps\mp\alien\_utility::get_players())
+  foreach(var_1 in maps\mp\alien\_utility::get_players()) {
   self getenemyinfo(var_1);
+  }
 }
 
 movetoendonground(var_0, var_1, var_2, var_3) {
@@ -1473,8 +1562,9 @@ monitoroutofbound(var_0, var_1, var_2) {
     var_5 = var_0.origin;
     var_6 = "unknown";
 
-    if(isDefined(var_0.model))
+    if(isDefined(var_0.model)) {
       var_6 = var_0.model;
+    }
 
     var_7 = "(" + var_6 + ")(" + var_4 + ")(origin:" + var_5 + ")(initialVelocity:" + var_1 + ")(startPos:" + var_2 + ")";
 
@@ -1509,15 +1599,17 @@ waitforegghatch(var_0, var_1, var_2) {
   thread processeggdamage(var_3, var_2, 1);
   var_4 = 4;
 
-  if(level.players.size == 1 || maps\mp\alien\_utility::isplayingsolo())
+  if(level.players.size == 1 || maps\mp\alien\_utility::isplayingsolo()) {
     var_4 = 6;
+  }
 
   wait(var_4);
   var_5 = "brute";
 
   if(maps\mp\alien\_utility::isplayingsolo()) {
-    if(!isDefined(self.gooncount))
+    if(!isDefined(self.gooncount)) {
       self.gooncount = 0;
+    }
 
     if(self.gooncount < 2) {
       var_5 = "goon";
@@ -1575,10 +1667,12 @@ processeggdamage(var_0, var_1, var_2) {
   var_0.health = var_0.maxhealth;
   var_0 waittill("death", var_3);
 
-  if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active))
+  if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active)) {
     playFX(level._effect["easter_egg_explode"], common_scripts\utility::drop_to_ground(var_0.origin, 32, -500));
-  else
+  }
+  else {
     playFX(level._effect["egg_explosion"], common_scripts\utility::drop_to_ground(var_0.origin, 32, -500));
+  }
 
   level notify("egg_destroyed");
   var_0 playSound("egg_destroy");
@@ -1591,8 +1685,9 @@ process_damage_feedback() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
-    if(isDefined(var_1) && isplayer(var_1))
+    if(isDefined(var_1) && isplayer(var_1)) {
       var_1 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("standard");
+    }
   }
 }
 
@@ -1617,8 +1712,9 @@ findeggspawnpoint(var_0) {
   var_8 = 1.0;
 
   for(var_9 = 0; var_9 < var_3.size; var_9++) {
-    for(var_4 = 0; var_4 < int(var_8); var_4++)
+    for(var_4 = 0; var_4 < int(var_8); var_4++) {
       var_7[var_7.size] = var_9;
+    }
 
     var_8 = var_8 + var_6;
   }
@@ -1631,8 +1727,9 @@ findeggspawnpoint(var_0) {
 posture() {
   self endon("vulnerable");
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     maps\mp\agents\alien\_alien_anim_utils::turntowardsentity(self.enemy);
+  }
 
   self.posture = 1;
   thread posture_spawn();
@@ -1678,10 +1775,12 @@ get_posture_spawn_event() {
   var_1 = level.alien_types[self.alien_type].attributes[self.stage]["event_id_start"];
   var_2 = level.alien_types[self.alien_type].attributes[self.stage]["event_id_end"];
 
-  if(var_2 > var_1)
+  if(var_2 > var_1) {
     var_0 = var_0 % (var_2 - var_1);
-  else
+  }
+  else {
     var_0 = 0;
+  }
 
   return "posture_" + (var_0 + var_1);
 }
@@ -1699,8 +1798,9 @@ watch_for_vulnerability() {
   self endon("end_posture");
   var_0 = 0;
 
-  for(var_1 = 1000; var_0 < var_1 && self.health > level.spider_health_padding; var_0 = var_0 + var_2)
+  for(var_1 = 1000; var_0 < var_1 && self.health > level.spider_health_padding; var_0 = var_0 + var_2) {
     self waittill("damage", var_2, var_3);
+  }
 
   self notify("end_posture", 1);
 }
@@ -1785,10 +1885,12 @@ downed_state() {
   maps\mp\agents\alien\alien_spider\_alien_spider::disable_weakpoints();
   maps\mp\alien\_utility::set_alien_emissive_default(2.0);
 
-  if(!var_3)
+  if(!var_3) {
     maps\mp\agents\_scriptedagents::playanimuntilnotetrack("pain_exit", "pain_exit", "end");
-  else
+  }
+  else {
     maps\mp\agents\_scriptedagents::playanimuntilnotetrack("pain_wounded", "pain_wounded", "end");
+  }
 
   self.vulnerable = 0;
   self notify("downed_state_over");

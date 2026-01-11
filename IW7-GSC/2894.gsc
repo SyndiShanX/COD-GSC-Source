@@ -4,8 +4,9 @@
 ***************************************/
 
 func_8715(var_00) {
-  if(!isDefined(level.func_FC5D))
+  if(!isDefined(level.func_FC5D)) {
     level.func_FC5D = [];
+  }
 
   self endon("death");
   self notify("end_mg_behavior");
@@ -25,8 +26,9 @@ func_8715(var_00) {
   thread func_11513(var_02);
   var_2.origin = var_0.origin + var_01 * 500;
 
-  if(isDefined(self.func_A8BB))
+  if(isDefined(self.func_A8BB)) {
     var_2.origin = self.func_A8BB;
+  }
 
   var_00 settargetentity(var_02);
   var_03 = undefined;
@@ -84,8 +86,9 @@ func_FE5E(var_00) {
     var_06 = var_0.origin + var_02 * 180;
     var_07 = func_7CC5(self getEye(), var_0.origin, var_06);
 
-    if(!isDefined(var_07))
+    if(!isDefined(var_07)) {
       var_07 = var_0.origin;
+    }
 
     var_00 moveto(var_0.origin + var_02 * 80 + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
     wait 3.5;
@@ -100,8 +103,9 @@ func_F39D(var_00) {
   if(var_00) {
     self.func_381C = 1;
 
-    if(self.func_138DC)
+    if(self.func_138DC) {
       self.turret notify("startfiring");
+    }
   } else {
     self.func_381C = 0;
     self.turret notify("stopfiring");
@@ -116,8 +120,9 @@ stop_firing_turret() {
 func_10C4E() {
   self.func_138DC = 1;
 
-  if(self.func_381C)
+  if(self.func_381C) {
     self.turret notify("startfiring");
+  }
 }
 
 func_491C() {
@@ -160,8 +165,9 @@ func_103FE(var_00) {
     break;
   }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return;
+  }
 }
 
 func_103FD() {
@@ -176,18 +182,21 @@ func_103FD() {
 }
 
 func_5F0C(var_00) {
-  for(var_01 = 0; var_01 < var_0.size; var_1++)
+  for(var_01 = 0; var_01 < var_0.size; var_1++) {
     var_0[var_01] endon("death");
+  }
 
   var_02 = 0;
   var_03 = 1;
 
   for(;;) {
-    if(isalive(var_0[var_02]))
+    if(isalive(var_0[var_02])) {
       var_0[var_02] func_F39D(1);
+    }
 
-    if(isalive(var_0[var_03]))
+    if(isalive(var_0[var_03])) {
       var_0[var_03] func_F39D(0);
+    }
 
     var_04 = var_02;
     var_02 = var_03;
@@ -199,11 +208,13 @@ func_5F0C(var_00) {
 func_7CC5(var_00, var_01, var_02) {
   var_03 = distance(var_01, var_02) * 0.05;
 
-  if(var_03 < 5)
+  if(var_03 < 5) {
     var_03 = 5;
+  }
 
-  if(var_03 > 20)
+  if(var_03 > 20) {
     var_03 = 20;
+  }
 
   var_04 = var_02 - var_01;
   var_04 = (var_4[0] / var_03, var_4[1] / var_03, var_4[2] / var_03);

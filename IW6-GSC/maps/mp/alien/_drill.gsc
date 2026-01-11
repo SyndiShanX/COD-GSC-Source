@@ -37,8 +37,9 @@ init_drill() {
   flag_init("drill_drilling");
 
   level.drill_use_trig = getent("drill_pickup_trig", "targetname");
-  if(isDefined(level.drill_use_trig))
+  if(isDefined(level.drill_use_trig)) {
     level.drill_use_trig.original_origin = level.drill_use_trig.origin;
+  }
 
   level.drill_id = 0;
   level.drill_marker_id = 1;
@@ -105,24 +106,28 @@ init_fx() {
 drill_think() {
   level endon("game_ended");
 
-  while(!isDefined(level.players) || level.players.size < 1)
+  while(!isDefined(level.players) || level.players.size < 1) {
     wait 0.05;
+  }
 
   level.drill_health_hardcore = CONST_DRILL_HEALTH_HARDCORE;
-  if(isPlayingSolo())
+  if(isPlayingSolo()) {
     level.drill_health_hardcore = CONST_DRILL_HEALTH_HARDCORE_SOLO;
+  }
 
   level thread drill_threat_think();
 
   drop_loc = (2822.27, -196, 524.068);
   drop_loc_struct = getstruct("drill_loc", "targetname");
 
-  if(isDefined(drop_loc_struct))
+  if(isDefined(drop_loc_struct)) {
     drop_loc = drop_loc_struct.origin;
+  }
 
   drop_angles = (1.287, 0.995, -103.877);
-  if(isDefined(drop_loc_struct) && isDefined(drop_loc_struct.angles))
+  if(isDefined(drop_loc_struct) && isDefined(drop_loc_struct.angles)) {
     drop_angles = drop_loc_struct.angles;
+  }
 
   drop_loc = maps\mp\alien\_debug::adjust_drill_loc(drop_loc);
 
@@ -158,8 +163,9 @@ drop_drill(pos, angles, marker) {
 }
 
 spawn_drill_raw(model, pos, angles, marker, drop_to_ground) {
-  if(!isDefined(drop_to_ground))
+  if(!isDefined(drop_to_ground)) {
     drop_to_ground = true;
+  }
 
   level.drill_carrier = undefined;
 
@@ -172,19 +178,24 @@ spawn_drill_raw(model, pos, angles, marker, drop_to_ground) {
   level.drill setModel(model);
   level.drill set_drill_icon();
   level.drill.state = "idle";
-  if(drop_to_ground)
+  if(drop_to_ground) {
     level.drill thread angles_to_ground(pos, angles, (0, 0, -4));
-  else
+  }
+  else {
     level.drill.angles = angles;
+  }
 
-  if(flag_exist("intro_sequence_complete") && !flag("intro_sequence_complete"))
+  if(flag_exist("intro_sequence_complete") && !flag("intro_sequence_complete")) {
     flag_wait("intro_sequence_complete");
+  }
 
-  if(alien_mode_has("outline"))
+  if(alien_mode_has("outline")) {
     maps\mp\alien\_outline_proto::add_to_drill_preplant_watch_list(level.drill);
+  }
 
-  if(!is_true(level.automatic_drill))
+  if(!is_true(level.automatic_drill)) {
     level.drill thread drill_pickup_listener(marker);
+  }
 
   level notify("drill_spawned");
 }
@@ -205,10 +216,12 @@ drill_pickup_listener(marker) {
   level endon("game_ended");
   level endon("new_drill");
 
-  if(isDefined(level.drill_use_trig))
+  if(isDefined(level.drill_use_trig)) {
     use_trig = level.drill_use_trig;
-  else
+  }
+  else {
     use_trig = self;
+  }
 
   if(!is_true(level.prevent_drill_pickup)) {
     if(isDefined(level.drill_use_trig)) {
@@ -249,11 +262,13 @@ drill_pickup_listener(marker) {
     }
   }
 
-  if(alien_mode_has("outline"))
+  if(alien_mode_has("outline")) {
     maps\mp\alien\_outline_proto::remove_from_drill_preplant_watch_list(level.drill);
+  }
 
-  if(isDefined(level.drill_use_trig))
+  if(isDefined(level.drill_use_trig)) {
     level.drill_use_trig disable_alt_drill_pickup();
+  }
 
   level notify("drill_pickedup", owner);
   self playSound("extinction_item_pickup");
@@ -274,8 +289,9 @@ drill_pickup_listener(marker) {
   owner DisableWeaponSwitch();
   owner _disableOffhandWeapons();
 
-  if(isDefined(marker))
+  if(isDefined(marker)) {
     marker delete();
+  }
 
   owner notify("kill_spendhint");
   owner notify("dpad_cancel");
@@ -315,8 +331,9 @@ drop_drill_on_death() {
   if(is_true(self.kill_trigger_event_processed)) {
     drill_spot = getClosest(self.origin, level.killTriggerSpawnLocs);
     groundpos = GetGroundPosition(drill_spot.origin + (0, 0, 4), 8);
-    if(!isDefined(drill_spot.angles))
+    if(!isDefined(drill_spot.angles)) {
       drill_spot.angles = (0, 0, 0);
+    }
     angles = drill_spot.angles;
   }
   drop_drill(groundpos, angles);
@@ -464,10 +481,12 @@ watch_to_repair(hive_struct) {
 
     self MakeUsable();
 
-    if(isDefined(level.drill_repair))
+    if(isDefined(level.drill_repair)) {
       self SetHintString(level.drill_repair);
-    else
+    }
+    else {
       self SetHintString(&"ALIEN_COLLECTIBLES_DRILL_REPAIR");
+    }
     self waittill("trigger", player);
 
     if(is_true(player.iscarrying)) {
@@ -480,8 +499,9 @@ watch_to_repair(hive_struct) {
     level notify("dlc_vo_notify", "drill_repair", player);
     use_time = int(CONST_DRILL_REPAIR_BASE_TIME * player perk_GetDrillTimeScalar() * player.drillSpeedModifier);
 
-    if(player_count > 1)
+    if(player_count > 1) {
       use_time = int((CONST_DRILL_REPAIR_BASE_TIME + ((player_count - 1) * CONST_DRILL_PER_PLAYER_ADDITIONAL_TIME)) * player perk_GetDrillTimeScalar() * player.drillSpeedModifier);
+    }
 
     result = self useHoldThink(player, use_time);
 
@@ -491,14 +511,17 @@ watch_to_repair(hive_struct) {
     }
 
     if(isDefined(level.drill_sfx_lp)) {
-      if(isDefined(level.drill_overheat_lp_02))
+      if(isDefined(level.drill_overheat_lp_02)) {
         level.drill_overheat_lp_02 StopLoopSound();
+      }
 
       if(!hive_struct is_door() && !hive_struct is_door_hive() && level.script != "mp_alien_dlc3") {
-        if(level.script == "mp_alien_last")
+        if(level.script == "mp_alien_last") {
           level.drill_sfx_lp playLoopSound("alien_conduit_on_lp");
-        else
+        }
+        else {
           level.drill_sfx_lp playLoopSound("alien_laser_drill_lp");
+        }
       }
     }
 
@@ -534,11 +557,13 @@ set_drill_state_plant(pos, owner) {
   level.drill.state = "planted";
   level.drill.angles = self.angles;
 
-  if(!is_door())
+  if(!is_door()) {
     level.drill set_drill_attack_setup();
+  }
 
-  if(isDefined(level.drill_attack_setup_override))
+  if(isDefined(level.drill_attack_setup_override)) {
     level.drill[[level.drill_attack_setup_override]]();
+  }
 
   health = CONST_DRILL_HEALTH;
   if(use_alternate_drill()) {
@@ -549,8 +574,9 @@ set_drill_state_plant(pos, owner) {
   level.drill.health = int(CONST_HEALTH_INVULNERABLE + (health * owner perk_GetDrillHealthScalar()));
   level.drill thread watch_drill_health_for_challenge();
 
-  if(alien_mode_has("outline"))
+  if(alien_mode_has("outline")) {
     maps\mp\alien\_outline_proto::add_to_outline_drill_watch_list(level.drill, 0);
+  }
 
   thread sfx_drill_plant();
 
@@ -663,8 +689,9 @@ set_drill_state_run(owner) {
   update_drill_health_HUD();
 
   foreach(agent in level.agentArray) {
-    if(isDefined(agent.wave_spawned) && agent.wave_spawned)
+    if(isDefined(agent.wave_spawned) && agent.wave_spawned) {
       agent GetEnemyInfo(level.drill);
+    }
   }
 
   laser_fx_tag_angles = level.drill GetTagAngles("tag_laser");
@@ -727,8 +754,9 @@ monitor_drill_complete(depth) {
 
     remaining_depth_to_layer = depth - layer_depth;
 
-    if(is_last_layer)
+    if(is_last_layer) {
       self childthread maps\mp\alien\_music_and_dialog::playMusicBeforeReachLayer(remaining_depth_to_layer);
+    }
 
     msg = "remaining_depth_to_layer is negative, ";
     msg = msg + "[depth=" + depth + "][layer_depth=" + layer_depth + "][layer index=" + (self.layers.size - 1) + "]";
@@ -783,8 +811,9 @@ reach_layer_spawn_event(is_last_layer) {
 
   maps\mp\alien\_spawn_director::activate_spawn_event(notify_msg);
 
-  if(GetDvarInt("alien_debug_director") > 0)
+  if(GetDvarInt("alien_debug_director") > 0) {
     IPrintLnBold("activate_spawn_event: " + notify_msg);
+  }
 }
 
 init_drilling_parameters() {
@@ -804,8 +833,9 @@ init_drilling_parameters() {
     self.layer_completed = 0;
 
     self.layers[0] = 0;
-    for(i = 0; i <= layers_info.size - 2; i++)
+    for(i = 0; i <= layers_info.size - 2; i++) {
       self.layers[self.layers.size] = layers_info[i];
+    }
 
     SetOmnvar("ui_alien_drill_layers_table_line", (599 + level.current_cycle_num + 1));
     SetOmnvar("ui_alien_drill_layer_completed", self.layer_completed);
@@ -818,11 +848,13 @@ set_drill_state_offline() {
 
   level.drill.state = "offline";
 
-  if(isDefined(level.drill.fxEnt))
+  if(isDefined(level.drill.fxEnt)) {
     level.drill.fxEnt Delete();
+  }
 
-  if(isDefined(level.drill.fxLaserEnt))
+  if(isDefined(level.drill.fxLaserEnt)) {
     level.drill.fxLaserEnt Delete();
+  }
 
   if(is_door()) {
     level notify("drill_stop_door_fx");
@@ -879,24 +911,30 @@ handle_bomb_damage() {
       continue;
     }
 
-    if(isDefined(level.level_drill_damage_adjust_function))
+    if(isDefined(level.level_drill_damage_adjust_function)) {
       [[level.level_drill_damage_adjust_function]](amount, attacker, weapon);
+    }
 
     level.drill.health = level.drill_last_health;
 
     if(GetDvarInt("scr_debugdrilldamage", 0) == 1) {
-      if(!isDefined(meansOfDeath))
+      if(!isDefined(meansOfDeath)) {
         meansOfDeath = "MOD_NONE";
+      }
 
-      if(!isDefined(weapon))
+      if(!isDefined(weapon)) {
         weapon = "weapon_none";
+      }
 
-      if(!isDefined(attacker))
+      if(!isDefined(attacker)) {
         atkr = "no_atkr";
-      else if(isDefined(attacker) && isDefined(attacker.model))
+      }
+      else if(isDefined(attacker) && isDefined(attacker.model)) {
         atkr = attacker.model;
-      else
+      }
+      else {
         atkr = "no_model";
+      }
 
       println("Drill damaged. MOD: " + meansOfDeath + " Wpn: " + weapon + " atkr: " + atkr + " dmg: " + amount + " remain: " + level.drill.health);
     }
@@ -932,35 +970,44 @@ handle_bomb_damage() {
         update_drill_health_HUD();
 
         if(hardcore_ratio <= 0.75 && !repair_hint1_given) {
-          if(isDefined(level.drill_repair_hint))
+          if(isDefined(level.drill_repair_hint)) {
             IPrintLnBold(level.drill_repair_hint);
-          else
+          }
+          else {
             iprintlnbold(&"ALIEN_COLLECTIBLES_DRILL_REPAIR_HINT");
+          }
 
           repair_hint1_given = true;
         } else if(hardcore_ratio <= 0.5 && !repair_hint2_given) {
-          if(isDefined(level.drill_repair_hint))
+          if(isDefined(level.drill_repair_hint)) {
             IPrintLnBold(level.drill_repair_hint);
-          else
+          }
+          else {
             iprintlnbold(&"ALIEN_COLLECTIBLES_DRILL_REPAIR_HINT");
+          }
 
           repair_hint2_given = true;
         } else if(hardcore_ratio <= 0.25 && !repair_hint3_given) {
-          if(isDefined(level.drill_repair_hint_urgent))
+          if(isDefined(level.drill_repair_hint_urgent)) {
             IPrintLnBold(level.drill_repair_hint_urgent);
-          else
+          }
+          else {
             IPrintLnbold(&"ALIEN_COLLECTIBLES_REACT_DRILL");
+          }
 
           repair_hint3_given = true;
         }
 
-        if(hardcore_ratio <= 0.25)
+        if(hardcore_ratio <= 0.25) {
           self thread sfx_overheat();
+        }
 
-        if(hardcore_ratio < 0.5 && (GetTime() - last_damage_time > DRILL_HEALTH_VO_SPAM_DELAY))
+        if(hardcore_ratio < 0.5 && (GetTime() - last_damage_time > DRILL_HEALTH_VO_SPAM_DELAY)) {
           level thread maps\mp\alien\_music_and_dialog::playVOforDrillHot();
-        else if(GetTime() - last_damage_time > DRILL_HEALTH_VO_SPAM_DELAY)
+        }
+        else if(GetTime() - last_damage_time > DRILL_HEALTH_VO_SPAM_DELAY) {
           level thread maps\mp\alien\_music_and_dialog::playVOForDrillDamaged();
+        }
 
         last_damage_time = GetTime();
 
@@ -970,8 +1017,9 @@ handle_bomb_damage() {
 }
 
 sfx_overheat() {
-  if(!is_door() && !is_door_hive() && level.script != "mp_alien_dlc3")
+  if(!is_door() && !is_door_hive() && level.script != "mp_alien_dlc3") {
     level.drill_sfx_lp StopLoopSound("alien_laser_drill_lp");
+  }
 
   if(!isDefined(level.drill_overheat_lp_02)) {
     level.drill_overheat_lp_02 = spawn("script_origin", level.drill.origin);
@@ -984,10 +1032,12 @@ sfx_overheat() {
     }
   }
 
-  if(level.script == "mp_alien_dlc3")
+  if(level.script == "mp_alien_dlc3") {
     level.drill_overheat_lp_02 playLoopSound("alien_drill_scanner_overheat_lp");
-  else
+  }
+  else {
     level.drill_overheat_lp_02 playLoopSound("alien_laser_drill_overheat_lp");
+  }
 }
 
 drill_detonate() {
@@ -1001,8 +1051,9 @@ drill_detonate() {
   self MakeUnusable();
   self SetHintString("");
 
-  if(alien_mode_has("outline"))
+  if(alien_mode_has("outline")) {
     maps\mp\alien\_outline_proto::remove_from_outline_drill_watch_list(level.drill);
+  }
 
   if(!is_door() && !is_door_hive()) {
     thread sfx_drill_off(false);
@@ -1010,11 +1061,13 @@ drill_detonate() {
     self thread kill_sequence();
   }
 
-  if(isDefined(level.drill.fxEnt))
+  if(isDefined(level.drill.fxEnt)) {
     level.drill.fxEnt Delete();
+  }
 
-  if(isDefined(level.drill.fxLaserEnt))
+  if(isDefined(level.drill.fxLaserEnt)) {
     level.drill.fxLaserEnt Delete();
+  }
 
   if(is_door()) {
     level notify("drill_stop_door_fx");
@@ -1075,8 +1128,9 @@ detonate_drill_when_nuke_goes_off(hive) {
 
   destroyed_fx = level._effect["stronghold_explode_med"];
   fx_loc = hive.origin;
-  if(isDefined(level.drill))
+  if(isDefined(level.drill)) {
     fx_loc = level.drill.origin;
+  }
 
   playFX(destroyed_fx, fx_loc);
 
@@ -1128,11 +1182,13 @@ cancel_repair_on_hive_death(player) {
   if(isAlive(player)) {
     player notify("drill_repair_weapon_management");
 
-    if(player.disabledWeapon > 0)
+    if(player.disabledWeapon > 0) {
       player _enableWeapon();
+    }
 
-    if(is_true(player.hasprogressbar))
+    if(is_true(player.hasprogressbar)) {
       player.hasprogressbar = false;
+    }
 
     player.isRepairing = false;
   }
@@ -1147,13 +1203,16 @@ useHoldThink(player, useTime) {
   self.inUse = true;
   self.useRate = 1;
 
-  if(isDefined(useTime))
+  if(isDefined(useTime)) {
     self.useTime = useTime;
-  else
+  }
+  else {
     self.useTime = 3000;
+  }
 
-  if(!player maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4]))
+  if(!player maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4])) {
     player disable_weapon_timeout((useTime + 0.05), "drill_repair_weapon_management");
+  }
 
   player thread personalUseBar(self);
 
@@ -1165,12 +1224,14 @@ useHoldThink(player, useTime) {
 
   if(isAlive(player)) {
     player.hasprogressbar = false;
-    if(!player maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4]))
+    if(!player maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4])) {
       player enable_weapon_wrapper("drill_repair_weapon_management");
+    }
   }
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return false;
+  }
 
   self.inUse = false;
   self.curProgress = 0;
@@ -1180,8 +1241,9 @@ useHoldThink(player, useTime) {
 
 personalUseBar(object) {
   UI_DRILL_REPAIR = 2;
-  if(level.script == "mp_alien_last")
+  if(level.script == "mp_alien_last") {
     UI_DRILL_REPAIR = 7;
+  }
 
   self endon("disconnect");
   self SetClientOmnvar("ui_securing", UI_DRILL_REPAIR);
@@ -1189,8 +1251,9 @@ personalUseBar(object) {
   lastRate = -1;
   while(isReallyAlive(self) && isDefined(object) && object.inUse && !level.gameEnded) {
     if(lastRate != object.useRate) {
-      if(object.curProgress > object.useTime)
+      if(object.curProgress > object.useTime) {
         object.curProgress = object.useTime;
+      }
     }
 
     lastRate = object.useRate;
@@ -1205,8 +1268,9 @@ personalUseBar(object) {
 useHoldThinkLoop(player, ent, dist_check) {
   while(!level.gameEnded && isDefined(self) && isReallyAlive(player) && player useButtonPressed() && (!isDefined(player.lastStand) || !player.lastStand) && self.curProgress < self.useTime) {
     drill_health = (self.health - CONST_HEALTH_INVULNERABLE) / level.drill_health_hardcore;
-    if(drill_health <= 0)
+    if(drill_health <= 0) {
       return false;
+    }
 
     if(isDefined(ent) && isDefined(dist_check)) {
       if(distancesquared(player.origin, ent.origin) > dist_check) {
@@ -1216,8 +1280,9 @@ useHoldThinkLoop(player, ent, dist_check) {
     self.curProgress += (50 * self.useRate);
     self.useRate = 1;
 
-    if(self.curProgress >= self.useTime)
+    if(self.curProgress >= self.useTime) {
       return (isReallyAlive(player));
+    }
 
     wait 0.05;
   }
@@ -1326,8 +1391,9 @@ watchBombStuck(owner) {
       destroy_loc notify("trigger", owner);
       Earthquake(.25, .5, self.origin, 128);
       owner TakeWeapon("alienbomb_mp");
-      if(!owner has_special_weapon())
+      if(!owner has_special_weapon()) {
         owner EnableWeaponSwitch();
+      }
 
       owner restore_last_weapon();
       owner _enableOffhandWeapons();
@@ -1348,8 +1414,9 @@ watchBombStuck(owner) {
   Earthquake(.25, .5, self.origin, 128);
 
   owner TakeWeapon("alienbomb_mp");
-  if(!owner has_special_weapon())
+  if(!owner has_special_weapon()) {
     owner EnableWeaponSwitch();
+  }
 
   owner restore_last_weapon();
   owner _enableOffhandWeapons();
@@ -1360,10 +1427,12 @@ watchBombStuck(owner) {
 }
 
 restore_last_weapon() {
-  if(self.lastweapon != "aliendeployable_crate_marker_mp")
+  if(self.lastweapon != "aliendeployable_crate_marker_mp") {
     self SwitchToWeapon(self.lastweapon);
-  else
+  }
+  else {
     self SwitchToWeapon(self GetWeaponsListPrimaries()[0]);
+  }
 }
 
 player_carry_bomb_init() {
@@ -1388,8 +1457,9 @@ hideCarryIconOnGameEnd() {
 
   level waittill("game_ended");
 
-  if(isDefined(self.carryIcon))
+  if(isDefined(self.carryIcon)) {
     self.carryIcon.alpha = 0;
+  }
 }
 
 set_drill_icon(link) {
@@ -1414,8 +1484,9 @@ set_drill_icon(link) {
 }
 
 destroy_drill_icon(ent) {
-  if(isDefined(level.drill_icon))
+  if(isDefined(level.drill_icon)) {
     level.drill_icon Destroy();
+  }
 
   if(!isDefined(ent)) {
     return;
@@ -1438,8 +1509,9 @@ remove_headicons_from_players() {
 }
 
 remove_spawner() {
-  if(isDefined(self.script_linkto))
+  if(isDefined(self.script_linkto)) {
     maps\mp\alien\_spawn_director::remove_spawn_location(self.script_linkto);
+  }
 }
 
 fx_ents_playFX() {
@@ -1477,17 +1549,21 @@ sfx_drill_on(door) {
   if(door) {
     wait 3.76;
 
-    if(isDefined(level.drill_sfx_lp))
+    if(isDefined(level.drill_sfx_lp)) {
       level.drill_sfx_lp playLoopSound("alien_laser_drill_door_lp");
+    }
 
-    if(isDefined(level.drill_sfx_dist_lp))
+    if(isDefined(level.drill_sfx_dist_lp)) {
       level.drill_sfx_dist_lp playLoopSound("alien_laser_drill_door_dist_lp");
+    }
   } else {
-    if(isDefined(level.drill_sfx_lp))
+    if(isDefined(level.drill_sfx_lp)) {
       level.drill_sfx_lp playLoopSound("alien_laser_drill_lp");
+    }
 
-    if(isDefined(level.drill_sfx_dist_lp))
+    if(isDefined(level.drill_sfx_dist_lp)) {
       level.drill_sfx_dist_lp playLoopSound("alien_laser_drill_dist_lp");
+    }
   }
 }
 
@@ -1495,22 +1571,28 @@ sfx_drill_off(door) {
   drill = get_drill_entity();
   coord = drill.origin;
 
-  if(!door)
+  if(!door) {
     drill playSound("alien_laser_drill_stop");
-  else
+  }
+  else {
     playSoundAtPos(coord, "alien_laser_drill_stop");
+  }
 
-  if(isDefined(level.drill_sfx_lp))
+  if(isDefined(level.drill_sfx_lp)) {
     level.drill_sfx_lp delete();
+  }
 
-  if(isDefined(level.drill_sfx_dist_lp))
+  if(isDefined(level.drill_sfx_dist_lp)) {
     level.drill_sfx_dist_lp delete();
+  }
 
-  if(isDefined(level.drill_overheat_lp))
+  if(isDefined(level.drill_overheat_lp)) {
     level.drill_overheat_lp delete();
+  }
 
-  if(isDefined(level.drill_overheat_lp_02))
+  if(isDefined(level.drill_overheat_lp_02)) {
     level.drill_overheat_lp_02 delete();
+  }
 
   if(door) {
     wait 2.7;
@@ -1521,19 +1603,24 @@ sfx_drill_off(door) {
 sfx_drill_offline() {
   drill = get_drill_entity();
 
-  if(level.script == "mp_alien_dlc3")
+  if(level.script == "mp_alien_dlc3") {
     level.drill playSound("alien_drill_scanner_shutdown");
-  else
+  }
+  else {
     drill playSound("alien_laser_drill_shutdown");
+  }
 
-  if(isDefined(level.drill_sfx_lp))
+  if(isDefined(level.drill_sfx_lp)) {
     level.drill_sfx_lp delete();
+  }
 
-  if(isDefined(level.drill_sfx_dist_lp))
+  if(isDefined(level.drill_sfx_dist_lp)) {
     level.drill_sfx_dist_lp delete();
+  }
 
-  if(isDefined(level.drill_overheat_lp_02))
+  if(isDefined(level.drill_overheat_lp_02)) {
     level.drill_overheat_lp_02 delete();
+  }
 }
 
 drill_plant_BBprint(player) {
@@ -1548,14 +1635,16 @@ drill_generic_BBPrint(BBprint_string, player) {
   cyclenum = level.current_cycle_num;
 
   hivename = "unknown hive";
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     hivename = self.target;
+  }
 
   playtime = gettime() - level.startTime;
 
   planter = "unknown player";
-  if(isDefined(player.name))
+  if(isDefined(player.name)) {
     planter = player.name;
+  }
 
   playernum = level.players.size;
 
@@ -1566,8 +1655,9 @@ drill_generic_BBPrint(BBprint_string, player) {
   planterperk1level = player maps\mp\alien\_persistence::get_perk_1_level();
 
   healthratio = -1;
-  if(isDefined(level.drill) && isDefined(level.drill.health) && isDefined(level.drill_health_hardcore))
+  if(isDefined(level.drill) && isDefined(level.drill.health) && isDefined(level.drill_health_hardcore)) {
     healthratio = (level.drill.health - CONST_HEALTH_INVULNERABLE) / level.drill_health_hardcore;
+  }
 
   if(GetDvarInt("alien_bbprint_debug") > 0) {
     IPrintLnBold("^8bbprint: " + BBprint_string + "\n" +
@@ -1644,31 +1734,39 @@ check_for_player_near_hive_with_drill() {
 }
 
 player_should_see_drill_hint(destroy_loc, check_distance, ignore_carrying_check) {
-  if(distancesquared(destroy_loc.origin, self.origin) > check_distance)
+  if(distancesquared(destroy_loc.origin, self.origin) > check_distance) {
     return false;
+  }
 
-  if(flag("drill_drilling"))
+  if(flag("drill_drilling")) {
     return false;
+  }
 
-  if(self.inlaststand)
+  if(self.inlaststand) {
     return false;
+  }
 
-  if(isDefined(self.usingRemote))
+  if(isDefined(self.usingRemote)) {
     return false;
+  }
 
-  if(is_true(ignore_carrying_check))
+  if(is_true(ignore_carrying_check)) {
     return true;
-  else if(is_true(self.isCarrying))
+  }
+  else if(is_true(self.isCarrying)) {
     return false;
+  }
 
   return true;
 }
 
 get_drill_entity() {
-  if(isDefined(level.drill.vehicle))
+  if(isDefined(level.drill.vehicle)) {
     return level.drill.vehicle;
-  else
+  }
+  else {
     return level.drill;
+  }
 }
 
 open_door() {
@@ -1688,10 +1786,12 @@ open_door() {
 }
 
 slide_open() {
-  if(!isDefined(self.script_angles))
+  if(!isDefined(self.script_angles)) {
     self delete();
-  else
+  }
+  else {
     self moveto(self.origin + self.script_angles, 1);
+  }
 }
 
 wait_for_drill_plant() {

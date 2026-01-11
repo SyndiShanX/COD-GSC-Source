@@ -194,8 +194,9 @@ pushMenu(menuDef) {
   oldMenu = level.curMenu;
   level.curMenu = menuDef;
   if(menuDef.menuType == "fullScreen") {
-    if(isDefined(oldMenu))
+    if(isDefined(oldMenu)) {
       oldMenu thread hideMenu(0.2, true);
+    }
     menuDef thread showMenu(0.2, true);
     level notify("open_menu", level.curMenu.name);
   } else {
@@ -205,8 +206,9 @@ pushMenu(menuDef) {
 }
 
 popMenu() {
-  if(level.menuStack.size == 1)
+  if(level.menuStack.size == 1) {
     return;
+  }
   level.menuStack[level.menuStack.size - 1] = undefined;
   oldMenu = level.curMenu;
   level.curMenu = level.menuStack[level.menuStack.size - 1];
@@ -346,12 +348,15 @@ createItemElems() {
 }
 
 destroyItemElems() {
-  if(self.itemType == "subMenu")
+  if(self.itemType == "subMenu") {
     self.caretIcon destroyElem();
-  if(self.itemType == "settingMenu")
+  }
+  if(self.itemType == "settingMenu") {
     self.settingValue destroyElem();
-  if(isDefined(self.descriptionValue))
+  }
+  if(isDefined(self.descriptionValue)) {
     self.descriptionValue destroyElem();
+  }
   self.bgIcon destroyElem();
   self.fontString destroyElem();
 }
@@ -389,8 +394,9 @@ showMenu(transTime, isNew) {
       yOffset += itemDef getMenuHeight();
     }
   }
-  if(self.menuType == "subMenu")
+  if(self.menuType == "subMenu") {
     self.parentDef showMenu(transTime, isNew);
+  }
   self updateMenu(transTime, true);
 }
 
@@ -435,8 +441,9 @@ hideMenu(transTime, isNew) {
       yOffset += itemDef getMenuHeight();
     }
   }
-  if(self.menuType == "subMenu")
+  if(self.menuType == "subMenu") {
     self.parentDef thread hideMenu(transTime, isNew);
+  }
   wait transTime;
   for(index = 0; index < self.itemDefs.size; index++) {
     itemDef = self.itemDefs[index];
@@ -467,8 +474,9 @@ collapseMenu(transTime) {
     itemDef = self.itemDefs[index];
     itemDef.bgIcon destroyElem();
     itemDef.fontString destroyElem();
-    if(itemDef.itemType == "subMenu")
+    if(itemDef.itemType == "subMenu") {
       itemDef.caretIcon destroyElem();
+    }
   }
 }
 
@@ -504,41 +512,52 @@ updateMenu(transTime, forceRedraw) {
       yOffset += itemDef getMenuHeight();
     }
   }
-  if(isDefined(self.parentDef))
+  if(isDefined(self.parentDef)) {
     self.parentDef thread updateMenu(transTime, forceRedraw);
+  }
 }
 
 setSelected(transTime, isSelected) {
   self.bgIcon fadeOverTime(transTime);
   self.fontString fadeOverTime(transTime);
-  if(isDefined(self.settingValue))
+  if(isDefined(self.settingValue)) {
     self.settingValue fadeOverTime(transTime);
-  if(isDefined(self.descriptionValue))
+  }
+  if(isDefined(self.descriptionValue)) {
     self.descriptionValue fadeOverTime(transTime);
+  }
   if(isSelected) {
-    if(self.parentDef == level.curMenu)
+    if(self.parentDef == level.curMenu) {
       self setElemAlpha(1);
-    else
+    }
+    else {
       self setElemAlpha(0.5);
-    if(isDefined(self.descriptionValue))
+    }
+    if(isDefined(self.descriptionValue)) {
       self.descriptionValue.alpha = 1;
+    }
   } else {
-    if(self.parentDef == level.curMenu)
+    if(self.parentDef == level.curMenu) {
       self setElemAlpha(0.5);
-    else
+    }
+    else {
       self setElemAlpha(0.25);
-    if(isDefined(self.descriptionValue))
+    }
+    if(isDefined(self.descriptionValue)) {
       self.descriptionValue.alpha = 0;
+    }
   }
 }
 
 setElemAlpha(alpha) {
   self.bgIcon.alpha = alpha;
   self.fontString.alpha = alpha;
-  if(self.itemType == "settingMenu")
+  if(self.itemType == "settingMenu") {
     self.settingValue.alpha = alpha;
-  if(self.itemType == "subMenu")
+  }
+  if(self.itemType == "subMenu") {
     self.caretIcon.alpha = alpha;
+  }
 }
 
 setElemColor(color) {
@@ -550,24 +569,27 @@ getMenuHeight() {
   for(index = 0; index < self.itemDefs.size; index++) {
     itemDef = self.itemDefs[index];
     menuHeight += (self.itemHeight + self.itemPadding);
-    if(itemDef.itemType == "subMenu" && itemDef.isExpanded)
+    if(itemDef.itemType == "subMenu" && itemDef.isExpanded) {
       menuHeight += itemDef getMenuHeight();
+    }
   }
   return menuHeight;
 }
 
 onDPadUp() {
   self.selectedIndex--;
-  if(self.selectedIndex < 0)
+  if(self.selectedIndex < 0) {
     self.selectedIndex = self.itemDefs.size - 1;
+  }
   self updateMenu(0.1, false);
   level.player playSound("mouse_over");
 }
 
 onDPadDown() {
   self.selectedIndex++;
-  if(self.selectedIndex >= self.itemDefs.size)
+  if(self.selectedIndex >= self.itemDefs.size) {
     self.selectedIndex = 0;
+  }
   self updateMenu(0.1, false);
   level.player playSound("mouse_over");
 }
@@ -578,8 +600,9 @@ onButtonB() {
 
 onButtonA() {
   focusedItem = self.itemDefs[self.selectedIndex];
-  if(focusedItem.itemType == "subMenu")
+  if(focusedItem.itemType == "subMenu") {
     pushMenu(focusedItem);
+  }
   else if(focusedItem.itemType == "item") {
     focusedItem thread runAction();
   }
@@ -593,8 +616,9 @@ onDPadLeft() {
     indexNew = 0;
     for(i = 0; i < dvarValues.size; i++) {
       dvarValue = dvarValues[i];
-      if(dvarValue != dvarCurrent)
+      if(dvarValue != dvarCurrent) {
         continue;
+      }
       indexNew = i - 1;
       if(indexNew >= 0) {
         focusedItem.setting.index = indexNew;
@@ -616,8 +640,9 @@ onDPadRight() {
     indexNew = 0;
     for(i = 0; i < dvarValues.size; i++) {
       dvarValue = dvarValues[i];
-      if(dvarValue != dvarCurrent)
+      if(dvarValue != dvarCurrent) {
         continue;
+      }
       indexNew = i + 1;
       if(indexNew <= focusedItem.setting.value.size - 1) {
         focusedItem.setting.index = indexNew;
@@ -662,22 +687,27 @@ updateDisplayValue() {
 setupAction(name, arg1, arg2) {
   action = spawnStruct();
   action.name = name;
-  if(isDefined(arg1))
+  if(isDefined(arg1)) {
     action.arg1 = arg1;
-  if(isDefined(arg2))
+  }
+  if(isDefined(arg2)) {
     action.arg2 = arg2;
+  }
   return action;
 }
 
 runAction() {
   if(isDefined(self.action)) {
-    if(isDefined(self.action.arg1))
+    if(isDefined(self.action.arg1)) {
       thread[[self.action.name]](self.action.arg1);
-    else
+    }
+    else {
       thread[[self.action.name]]();
+    }
   }
-  if(isDefined(self.event))
+  if(isDefined(self.event)) {
     level notify(self.event);
+  }
 }
 
 testAction() {

@@ -7,29 +7,35 @@ func_5C21() {
   func_23C7();
   self _meth_839E();
 
-  if(isDefined(self.func_EE2C))
+  if(isDefined(self.func_EE2C)) {
     self.moveplaybackrate = self.func_EE2C;
-  else
+  }
+  else {
     self.moveplaybackrate = 1;
+  }
 
   if(self.team == "allies") {
     scripts\sp\names::func_7B05();
     self _meth_8307(self.name, &"");
   }
 
-  if(isDefined(level.func_5CA7))
+  if(isDefined(level.func_5CA7)) {
     self thread[[level.func_5CA7]]();
+  }
 
-  if(!isDefined(self.func_EDB7))
+  if(!isDefined(self.func_EDB7)) {
     level thread scripts\sp\friendlyfire::func_73B1(self);
+  }
 
-  if(!isDefined(level.func_193D))
+  if(!isDefined(level.func_193D)) {
     func_1177B();
+  }
 }
 
 func_1177B() {
-  if(!isDefined(level.func_5CCB))
+  if(!isDefined(level.func_5CCB)) {
     level.func_5CCB = "all";
+  }
 
   var_00 = 0;
 
@@ -44,8 +50,9 @@ func_1177B() {
       break;
   }
 
-  if(var_00)
+  if(var_00) {
     self thermaldrawenable();
+  }
 }
 
 func_5C3A() {
@@ -158,10 +165,12 @@ func_5C3A() {
 
 func_23C7() {
   if(isDefined(self.type)) {
-    if(self.type == "dog")
+    if(self.type == "dog") {
       func_23B5();
-    else
+    }
+    else {
       func_23C9();
+    }
   }
 }
 

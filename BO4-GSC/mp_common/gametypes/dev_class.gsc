@@ -489,4 +489,3 @@ dev_cac_set_model_range(sort_function, attribute) {
   player.cac_hat_type = [[sort_function]]("<dev string:x30b>", attribute);
   player dev_cac_set_player_model();
 }
-

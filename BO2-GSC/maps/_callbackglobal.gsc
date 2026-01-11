@@ -31,8 +31,9 @@ init() {
   level.rankedmatch = level.onlinegame;
   level.profileloggedin = getdvar(#"xblive_loggedin") == "1";
 
-  if(getdvarint(#"scr_forcerankedmatch") == 1)
+  if(getdvarint(#"scr_forcerankedmatch") == 1) {
     level.rankedmatch = 1;
+  }
 }
 
 setupcallbacks() {
@@ -81,8 +82,9 @@ callback(event) {
   for(i = 0; i < level._callbacks[event].size; i++) {
     callback = level._callbacks[event][i];
 
-    if(isDefined(callback))
+    if(isDefined(callback)) {
       self thread[[callback]]();
+    }
   }
 }
 
@@ -118,8 +120,9 @@ callback_saverestored() {
     if(isDefined(player)) {
       player thread checkpoint_invulnerability();
 
-      if(isDefined(player.savedvisionset))
+      if(isDefined(player.savedvisionset)) {
         player visionsetnaked(player.savedvisionset, 0.1);
+      }
 
       dvarname = "player" + player getentitynumber() + "downs";
       player.downs = getdvarint(dvarname);
@@ -132,8 +135,9 @@ callback_saverestored() {
 }
 
 player_breadcrumb_reset(position, angles) {
-  if(!isDefined(angles))
+  if(!isDefined(angles)) {
     angles = (0, 0, 0);
+  }
 
   level.playerprevorigin0 = position;
   level.playerprevorigin1 = position;
@@ -144,8 +148,9 @@ player_breadcrumb_reset(position, angles) {
     for(i = 0; i < 4; i++) {
       level._player_breadcrumbs[i] = [];
 
-      for(j = 0; j < 4; j++)
+      for(j = 0; j < 4; j++) {
         level._player_breadcrumbs[i][j] = spawnStruct();
+      }
     }
   }
 
@@ -163,8 +168,9 @@ player_breadcrumb_update() {
   level.playerprevorigin0 = self.origin + right;
   level.playerprevorigin1 = self.origin - right;
 
-  if(!isDefined(level._player_breadcrumbs))
+  if(!isDefined(level._player_breadcrumbs)) {
     player_breadcrumb_reset(self.origin, self.angles);
+  }
 
   num = self getentitynumber();
 
@@ -185,8 +191,9 @@ player_breadcrumb_update() {
     dropbreadcrumbs = 1;
 
     if(isDefined(level.flag) && isDefined(level.flag["drop_breadcrumbs"])) {
-      if(!flag("drop_breadcrumbs"))
+      if(!flag("drop_breadcrumbs")) {
         dropbreadcrumbs = 0;
+      }
     }
 
     if(dropbreadcrumbs && dist_squared > 70 * 70) {
@@ -208,18 +215,21 @@ setplayerspawnpos() {
   if(!isDefined(level._player_breadcrumbs)) {
     spawnpoints = getEntArray("info_player_deathmatch", "classname");
 
-    if(player.origin == (0, 0, 0) && isDefined(spawnpoints) && spawnpoints.size > 0)
+    if(player.origin == (0, 0, 0) && isDefined(spawnpoints) && spawnpoints.size > 0) {
       player_breadcrumb_reset(spawnpoints[0].origin, spawnpoints[0].angles);
-    else
+    }
+    else {
       player_breadcrumb_reset(player.origin, player.angles);
+    }
   }
 
   spawn_pos = level._player_breadcrumbs[0][0].pos;
   dist_squared = distancesquared(player.origin, spawn_pos);
 
   if(dist_squared > 250000) {
-    if(player.origin != (0, 0, 0))
+    if(player.origin != (0, 0, 0)) {
       spawn_pos = player.origin + vectorscale((0, 1, 0), 30.0);
+    }
   } else if(dist_squared < 30 * 30)
     spawn_pos = level._player_breadcrumbs[0][1].pos;
 
@@ -282,8 +292,9 @@ callback_playerconnect() {
     self player_flag_init("player_is_invulnerable");
   }
 
-  if(!isDefined(self.flag["loadout_given"]))
+  if(!isDefined(self.flag["loadout_given"])) {
     self player_flag_init("loadout_given");
+  }
 
   self player_flag_clear("loadout_given");
 
@@ -335,21 +346,25 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
     assert(isDefined(level.cac_armorvest_data), "level.cac_armorvest_data value is missing. this is required for specialty_armorvest");
     idamage = int(idamage * (level.cac_armorvest_data * 0.01));
 
-    if(getdvarint(#"_id_5ABA6445"))
+    if(getdvarint(#"_id_5ABA6445")) {
       println("Perk--> Player took less bullet damage due to armorvest");
+    }
 
   }
 
-  if(isDefined(self.overrideplayerdamage))
+  if(isDefined(self.overrideplayerdamage)) {
     idamage = self[[self.overrideplayerdamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime);
-  else if(isDefined(level.overrideplayerdamage))
+  }
+  else if(isDefined(level.overrideplayerdamage)) {
     idamage = self[[level.overrideplayerdamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime);
+  }
 
   assert(isDefined(idamage), "You must return a value from a damage override function.");
   self callback("on_player_damage");
 
-  if(sweapon == "emp_grenade_sp")
+  if(sweapon == "emp_grenade_sp") {
     self notify("emp_grenaded", eattacker);
+  }
 
   switch (sweapon) {
     case "concussion_grenade_80s_sp":
@@ -377,8 +392,9 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
       if(dist > 32) {
         dot_product = vectordot(anglesToForward(self.angles), vdir);
 
-        if(dot_product > 0)
+        if(dot_product > 0) {
           idamage = int(idamage * 0.5);
+        }
       }
     }
   }
@@ -403,24 +419,28 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
     return;
   }
   if(isDefined(level.prevent_player_damage)) {
-    if(self[[level.prevent_player_damage]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime))
+    if(self[[level.prevent_player_damage]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime)) {
       return;
+    }
   }
 
   if(isDefined(eattacker) && eattacker != self) {
-    if(idamage > 0 && self.health > 0)
+    if(idamage > 0 && self.health > 0) {
       eattacker thread maps\_damagefeedback::updatedamagefeedback();
+    }
   }
 
   self maps\_dds::update_player_damage(eattacker);
 
   if(idamage >= self.health) {
-    if(smeansofdeath == "MOD_CRUSH" && isDefined(eattacker) && isDefined(eattacker.classname) && eattacker.classname == "script_vehicle")
+    if(smeansofdeath == "MOD_CRUSH" && isDefined(eattacker) && isDefined(eattacker.classname) && eattacker.classname == "script_vehicle") {
       setdvar("ui_deadquote", "@SCRIPT_MOVING_VEHICLE_DEATH");
+    }
   }
 
-  if(isDefined(level.disable_player_damage_knockback) && level.disable_player_damage_knockback)
+  if(isDefined(level.disable_player_damage_knockback) && level.disable_player_damage_knockback) {
     idflags = idflags | level.idflags_no_knockback;
+  }
 
   self finishplayerdamagewrapper(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime);
 }
@@ -433,13 +453,15 @@ incrgrenadekillcount() {
   if(!isplayer(self)) {
     return;
   }
-  if(!isDefined(self.grenadekillcounter))
+  if(!isDefined(self.grenadekillcounter)) {
     self.grenadekillcounter = 0;
+  }
 
   self.grenadekillcounter++;
 
-  if(self.grenadekillcounter >= 5)
+  if(self.grenadekillcounter >= 5) {
     self giveachievement_wrapper("SP_GEN_FRAGMASTER");
+  }
 
   wait 0.25;
   self.grenadekillcounter--;
@@ -453,22 +475,26 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
       assert(isDefined(level.cac_bulletdamage_data), "this var must have value");
       idamage = int(idamage * (100 + level.cac_bulletdamage_data) / 100);
 
-      if(getdvarint(#"_id_5ABA6445"))
+      if(getdvarint(#"_id_5ABA6445")) {
         println("Perk--> Player bullet did extra damage");
+      }
 
     }
   }
 
-  if(isDefined(self.overrideactordamage))
+  if(isDefined(self.overrideactordamage)) {
     idamage = self[[self.overrideactordamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename);
-  else if(isDefined(level.overrideactordamage))
+  }
+  else if(isDefined(level.overrideactordamage)) {
     idamage = self[[level.overrideactordamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename);
+  }
 
   if(isDefined(eattacker) && isplayer(eattacker)) {
     level thread maps\_friendlyfire::friendly_fire_callback(self, idamage, eattacker, smeansofdeath);
 
-    if(isDefined(self.playercausedactordamage))
+    if(isDefined(self.playercausedactordamage)) {
       self thread[[self.playercausedactordamage]]();
+    }
   }
 
   assert(isDefined(idamage), "You must return a value from a damage override function.");
@@ -478,8 +504,9 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
     t = gettime();
 
     if(t - self._mbs.last_pain_time > 500 || smeansofdeath == "MOD_EXPLOSIVE") {
-      if(self.allowpain || isDefined(self._mbs.allow_pain_old) && self._mbs.allow_pain_old)
+      if(self.allowpain || isDefined(self._mbs.allow_pain_old) && self._mbs.allow_pain_old) {
         enable_pain();
+      }
 
       self._mbs.last_pain_time = t;
       self thread turret_ignore_me_timer(self._mbs.turret_ignore_time);
@@ -496,20 +523,23 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
     self animscripts\balcony::balconydamage(idamage, smeansofdeath);
 
   if(isDefined(eattacker) && eattacker != self) {
-    if(idamage > 0 && self.health > 0)
+    if(idamage > 0 && self.health > 0) {
       eattacker thread maps\_damagefeedback::updatedamagefeedback();
+    }
   }
 
   self maps\_dds::update_actor_damage(eattacker, smeansofdeath);
 
-  if(self.health - idamage <= 0 && (sweapon == "crossbow_sp" || sweapon == "crossbow_80s_sp"))
+  if(self.health - idamage <= 0 && (sweapon == "crossbow_sp" || sweapon == "crossbow_80s_sp")) {
     self.dofiringdeath = 0;
+  }
 
   if(self.health > 0 && self.health - idamage <= 0) {
     println("LDS: Dropped scavenger item for entity " + self getentitynumber());
 
-    if(isDefined(eattacker) && isplayer(eattacker.driver))
+    if(isDefined(eattacker) && isplayer(eattacker.driver)) {
       eattacker = eattacker.driver;
+    }
 
     if(isplayer(eattacker)) {
       level thread maps\_friendlyfire::friendly_fire_callback(self, -1, eattacker, smeansofdeath);
@@ -523,38 +553,47 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
         if(sweapon == "explosive_bolt_sp" || sweapon == "crossbow_explosive_alt_sp") {
           killedsofar = 1 + getpersistentprofilevar(0, 0);
 
-          if(killedsofar >= 30)
+          if(killedsofar >= 30) {
             eattacker giveachievement_wrapper("SP_GEN_CROSSBOW");
+          }
 
           setpersistentprofilevar(0, killedsofar);
         }
 
-        if(self.isbigdog)
+        if(self.isbigdog) {
           eattacker inc_general_stat("mechanicalkills");
-        else
+        }
+        else {
           eattacker inc_general_stat("kills");
+        }
 
-        if((smeansofdeath == "MOD_GRENADE" || smeansofdeath == "MOD_GRENADE_SPLASH") && (sweapon == "frag_grenade_sp" || sweapon == "frag_grenade_80s_sp"))
+        if((smeansofdeath == "MOD_GRENADE" || smeansofdeath == "MOD_GRENADE_SPLASH") && (sweapon == "frag_grenade_sp" || sweapon == "frag_grenade_80s_sp")) {
           eattacker thread incrgrenadekillcount();
+        }
 
-        if(smeansofdeath == "MOD_EXPLOSIVE" || smeansofdeath == "MOD_GRENADE" || smeansofdeath == "MOD_GRENADE_SPLASH" || smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_PROJECTILE")
+        if(smeansofdeath == "MOD_EXPLOSIVE" || smeansofdeath == "MOD_GRENADE" || smeansofdeath == "MOD_GRENADE_SPLASH" || smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_PROJECTILE") {
           eattacker inc_general_stat("explosivekills");
+        }
 
         if(smeansofdeath == "MOD_MELEE") {
           eattacker inc_general_stat("meleekills");
           eattacker notify("melee_kill");
 
-          if(sweapon == "pulwar_sword_sp")
+          if(sweapon == "pulwar_sword_sp") {
             eattacker notify("sword_kill");
-          else if(sweapon == "tazer_knuckles_sp")
+          }
+          else if(sweapon == "tazer_knuckles_sp") {
             eattacker notify("tazer_kill");
+          }
         }
 
-        if(shitloc == "head" || shitloc == "helmet")
+        if(shitloc == "head" || shitloc == "helmet") {
           eattacker inc_general_stat("headshots");
+        }
 
-        if(self isflashed() || self isstunned())
+        if(self isflashed() || self isstunned()) {
           eattacker inc_general_stat("stunkills");
+        }
       }
     }
   }
@@ -586,10 +625,12 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
   dvarname = "player" + self getentitynumber() + "downs";
   setdvar(dvarname, self.downs);
 
-  if(isDefined(level.player_killed_shellshock))
+  if(isDefined(level.player_killed_shellshock)) {
     self shellshock(level.player_killed_shellshock, 3);
-  else
+  }
+  else {
     self shellshock("death", 3);
+  }
 
   self playlocalsound("evt_player_death");
   self setmovespeedscale(1.0);
@@ -598,8 +639,9 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
   self callback("on_player_killed");
   wait 1;
 
-  if(isDefined(level.overrideplayerkilled))
+  if(isDefined(level.overrideplayerkilled)) {
     self[[level.overrideplayerkilled]]();
+  }
 
   if(get_players().size > 1) {
     players = get_players();
@@ -635,21 +677,25 @@ debug_player_death(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, 
   if(isDefined(einflictor)) {
     println("--eInflictor--");
 
-    if(isDefined(einflictor.classname))
+    if(isDefined(einflictor.classname)) {
       println("^6classname: " + einflictor.classname);
+    }
 
-    if(isDefined(einflictor.targetname))
+    if(isDefined(einflictor.targetname)) {
       println("^6targetname: " + einflictor.targetname);
+    }
   }
 
   if(isDefined(attacker)) {
     println("--attacker--");
 
-    if(isDefined(attacker.classname))
+    if(isDefined(attacker.classname)) {
       println("^6classname: " + attacker.classname);
+    }
 
-    if(isDefined(attacker.targetname))
+    if(isDefined(attacker.targetname)) {
       println("^6targetname: " + attacker.targetname);
+    }
   }
 
   if(isDefined(idamage)) {
@@ -671,37 +717,45 @@ debug_player_death(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, 
 }
 
 callback_actorkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime) {
-  if(isDefined(self.overrideactorkilled))
+  if(isDefined(self.overrideactorkilled)) {
     self[[self.overrideactorkilled]](einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime);
-  else if(isDefined(level.overrideactorkilled))
+  }
+  else if(isDefined(level.overrideactorkilled)) {
     self[[level.overrideactorkilled]](einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime);
+  }
 
   self callback("on_actor_killed");
 }
 
 should_take_hatchet_damage() {
-  if(issentient(self))
+  if(issentient(self)) {
     return true;
-  else if(isDefined(self.is_horse))
+  }
+  else if(isDefined(self.is_horse)) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   self endon("death");
 
-  if(isDefined(self.overridevehicledamage))
+  if(isDefined(self.overridevehicledamage)) {
     idamage = self[[self.overridevehicledamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname);
-  else if(isDefined(level.overridevehicledamage))
+  }
+  else if(isDefined(level.overridevehicledamage)) {
     idamage = self[[level.overridevehicledamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname);
+  }
 
   assert(isDefined(idamage), "You must return a value from a damage override function.");
   self callback("on_vehicle_damage");
 
   if(self isvehicleimmunetodamage(idflags, smeansofdeath, sweapon)) {
-    if(isplayer(eattacker) && isDefined(level.vehicle_immune_notify_func))
+    if(isplayer(eattacker) && isDefined(level.vehicle_immune_notify_func)) {
       self thread[[level.vehicle_immune_notify_func]](smeansofdeath, sweapon);
+    }
 
     return;
   }
@@ -710,26 +764,32 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
     return;
   }
   if(sweapon == "hatchet_sp" || sweapon == "hatchet_80s_sp") {
-    if(!self should_take_hatchet_damage())
+    if(!self should_take_hatchet_damage()) {
       return;
+    }
   }
 
-  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)
+  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     self.health = self.health + idamage;
+  }
 
   if(isDefined(eattacker) && isplayer(eattacker)) {
-    if(idamage > 0 && self.health > 0)
+    if(idamage > 0 && self.health > 0) {
       eattacker thread maps\_damagefeedback::updatevechicledamagefeedback(sweapon);
+    }
 
-    if(self.health > 0 && self.health - idamage <= 0)
+    if(self.health > 0 && self.health - idamage <= 0) {
       eattacker inc_general_stat("mechanicalkills");
+    }
   }
 
   if(idamage >= self.health) {
-    if(isDefined(self.callbackvehiclekilled))
+    if(isDefined(self.callbackvehiclekilled)) {
       self[[self.callbackvehiclekilled]](einflictor, eattacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime);
-    else if(isDefined(level.callbackvehiclekilled))
+    }
+    else if(isDefined(level.callbackvehiclekilled)) {
       self[[level.callbackvehiclekilled]](einflictor, eattacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime);
+    }
   }
 
   self.last_damage_mod = smeansofdeath;
@@ -744,13 +804,16 @@ spawnclient() {
 
   self unlink();
 
-  if(isDefined(self.spectate_cam))
+  if(isDefined(self.spectate_cam)) {
     self.spectate_cam delete();
+  }
 
-  if(level.otherplayersspectate)
+  if(level.otherplayersspectate) {
     self thread[[level.spawnspectator]]();
-  else
+  }
+  else {
     self thread[[level.spawnplayer]]();
+  }
 }
 
 spawnplayer(spawnonhost) {
@@ -782,8 +845,9 @@ spawnplayer(spawnonhost) {
     return;
   }
 
-  if(isDefined(level.onspawnplayer))
+  if(isDefined(level.onspawnplayer)) {
     self[[level.onspawnplayer]]();
+  }
 
   wait_for_first_player();
 
@@ -793,17 +857,20 @@ spawnplayer(spawnonhost) {
   } else
     self spawn(self.origin, self.angles);
 
-  if(isDefined(level.onpostspawnplayer))
+  if(isDefined(level.onpostspawnplayer)) {
     self[[level.onpostspawnplayer]]();
+  }
 
-  if(isDefined(level.onplayerweaponswap))
+  if(isDefined(level.onplayerweaponswap)) {
     self thread[[level.onplayerweaponswap]]();
+  }
 
   self maps\_introscreen::introscreen_player_connect();
   waittillframeend;
 
-  if(self != get_players("all")[0])
+  if(self != get_players("all")[0]) {
     wait 0.5;
+  }
 
   self notify("spawned_player");
 }
@@ -825,8 +892,9 @@ synchronize_players() {
   }
   background = undefined;
 
-  if(level.onlinegame || level.systemlink)
+  if(level.onlinegame || level.systemlink) {
     self openmenu("briefing");
+  }
   else {
     background = newhudelem();
     background.x = 0;
@@ -842,8 +910,9 @@ synchronize_players() {
   if(level.onlinegame || level.systemlink) {
     players = get_players("all");
 
-    for(i = 0; i < players.size; i++)
+    for(i = 0; i < players.size; i++) {
       players[i] closemenu();
+    }
   } else {
     assert(isDefined(background));
     background destroy();
@@ -859,8 +928,9 @@ spawnspectator() {
   self.sessionstate = "spectator";
   self.spectatorclient = -1;
 
-  if(isDefined(level.otherplayersspectateclient))
+  if(isDefined(level.otherplayersspectateclient)) {
     self.spectatorclient = level.otherplayersspectateclient getentitynumber();
+  }
 
   self setclientdvars("cg_thirdPerson", 0);
   self setspectatepermissions();
@@ -879,8 +949,9 @@ spawnspectator() {
 
   self detachall();
 
-  if(isDefined(level.onspawnspectator))
+  if(isDefined(level.onspawnspectator)) {
     self[[level.onspawnspectator]]();
+  }
 
   self spawn(self.origin, self.angles);
   waittillframeend;
@@ -932,8 +1003,9 @@ default_onspawnintermission() {
 
   spawnpoint = spawnpoints[randomint(spawnpoints.size)];
 
-  if(isDefined(spawnpoint))
+  if(isDefined(spawnpoint)) {
     self spawn(spawnpoint.origin, spawnpoint.angles);
+  }
 }
 
 player_connect() {
@@ -943,8 +1015,9 @@ player_connect() {
     level notify("connecting", self);
     b_first_player = is_first_player();
 
-    if(b_first_player)
+    if(b_first_player) {
       level notify("connecting_first_player", self);
+    }
 
     self waittill("spawned_player");
     waittillframeend;
@@ -963,8 +1036,9 @@ player_connect() {
 is_first_player() {
   players = get_players();
 
-  if(isDefined(players) && (players.size == 0 || players[0] == self))
+  if(isDefined(players) && (players.size == 0 || players[0] == self)) {
     return true;
+  }
 
   return false;
 }

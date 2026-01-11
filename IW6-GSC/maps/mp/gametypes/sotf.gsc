@@ -64,13 +64,15 @@ main() {
 
   level.firstCrateDrop = true;
 
-  if(level.matchRules_damageMultiplier || level.matchRules_vampirism)
+  if(level.matchRules_damageMultiplier || level.matchRules_vampirism) {
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
+  }
 
   game["dialog"]["gametype"] = "hunted";
 
-  if(getDvarInt("g_hardcore"))
+  if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
+  }
 
   game["dialog"]["offense_obj"] = "sotf_hint";
   game["dialog"]["defense_obj"] = "sotf_hint";
@@ -103,8 +105,9 @@ onPrecacheGameType() {
 onStartGameType() {
   SetClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = false;
+  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -190,8 +193,9 @@ setPlayerLoadout() {
 
 getSpawnPoint() {
   spawnteam = self.pers["team"];
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     spawnteam = getOtherTeam(spawnteam);
+  }
 
   if(maps\mp\gametypes\_spawnlogic::shouldUseTeamStartspawn()) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + spawnteam + "_start");
@@ -252,8 +256,9 @@ onNormalDeath(victim, attacker, lifeId) {
 
   level maps\mp\gametypes\_gamescore::giveTeamScoreForObjective(attacker.pers["team"], score);
 
-  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]])
+  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]]) {
     attacker.finalKill = true;
+  }
 }
 
 sotf() {
@@ -273,8 +278,9 @@ startSpawnChest() {
     if(!IsAlive(player)) {
       player = findNewOwner(level.players);
 
-      if(!isDefined(player))
+      if(!isDefined(player)) {
         continue;
+      }
     } else {
       while(IsAlive(player)) {
         if(level.emptyLocations) {
@@ -301,8 +307,9 @@ showCrateSplash(splashRef) {
 
 findNewOwner(playerPool) {
   foreach(player in playerPool) {
-    if(IsAlive(player))
+    if(IsAlive(player)) {
       return player;
+    }
   }
 
   level waittill("sotf_player_spawned", newPlayer);
@@ -497,11 +504,12 @@ sotfCrateThink(dropType) {
   self endon("restarting_physics");
   level endon("game_ended");
 
-  if(isDefined(game["strings"][self.crateType + "_hint"]))
+  if(isDefined(game["strings"][self.crateType + "_hint"])) {
     crateHint = game["strings"][self.crateType + "_hint"];
-  else
-
+  }
+  else {
     crateHint = &"PLATFORM_GET_KILLSTREAK";
+  }
 
   weaponOverheadIcon = "icon_hunted";
 
@@ -543,8 +551,9 @@ sotfCrateThink(dropType) {
       player SetWeaponAmmoStock(newWeapon, 0);
       player SwitchToWeaponImmediate(newWeapon);
 
-      if(player GetWeaponAmmoClip(newWeapon) == 1)
+      if(player GetWeaponAmmoClip(newWeapon) == 1) {
         player SetWeaponAmmoStock(newWeapon, 1);
+      }
 
       player.oldPrimaryGun = newWeapon;
     }
@@ -560,8 +569,9 @@ sotfCrateThink(dropType) {
       }
     }
 
-    if(self.crateType == "sotf_weapon" && crateUseCount == GetDvarInt("scr_sotf_crategunamount", 6))
+    if(self.crateType == "sotf_weapon" && crateUseCount == GetDvarInt("scr_sotf_crategunamount", 6)) {
       self maps\mp\killstreaks\_airdrop::deleteCrate();
+    }
   }
 }
 
@@ -601,8 +611,9 @@ isSelectableWeapon(weaponName) {
   selectableWeapon = TableLookup("mp/sotfWeapons.csv", CONST_WEAPON_NAME_COL, weaponName, CONST_WEAPON_SELECTABLE_COL);
   requiredPack = TableLookup("mp/sotfWeapons.csv", CONST_WEAPON_NAME_COL, weaponName, CONST_DLC_MAPPACK_COL);
 
-  if(selectableWeapon == "TRUE" && (requiredPack == "" || GetDvarInt(requiredPack, 0) == 1))
+  if(selectableWeapon == "TRUE" && (requiredPack == "" || GetDvarInt(requiredPack, 0) == 1)) {
     return true;
+  }
 
   return false;
 }
@@ -615,8 +626,9 @@ getRandomWeapon(weaponArray) {
   newWeapon = undefined;
 
   for(i = 0; i < newWeaponArray.size; i++) {
-    if(!newWeaponArray[i]["weight"])
+    if(!newWeaponArray[i]["weight"]) {
       continue;
+    }
     if(newWeaponArray[i]["weight"] > randValue) {
       newWeapon = newWeaponArray[i];
       break;
@@ -702,8 +714,9 @@ getValidAttachments(newWeapon, usedAttachments, attachmentArray) {
 
 attachmentCheck(attachment, usedAttachments) {
   for(i = 0; i < usedAttachments.size; i++) {
-    if(attachment == usedAttachments[i] || !attachmentsCompatible(attachment, usedAttachments[i]))
+    if(attachment == usedAttachments[i] || !attachmentsCompatible(attachment, usedAttachments[i])) {
       return false;
+    }
   }
 
   return true;
@@ -711,8 +724,9 @@ attachmentCheck(attachment, usedAttachments) {
 
 checkScopes(usedAttachments) {
   foreach(attachment in usedAttachments) {
-    if(attachment == "thermal" || attachment == "vzscope" || attachment == "acog" || attachment == "ironsight")
+    if(attachment == "thermal" || attachment == "vzscope" || attachment == "acog" || attachment == "ironsight") {
       return true;
+    }
   }
 
   return false;

@@ -402,8 +402,9 @@ do_ss_start_vox(stage) {
     if(isDefined(player)) {
       playon playSound("vox_mcomp_quest_step1_0", "mcomp_done0");
       playon waittill("mcomp_done0");
-      if(isDefined(player))
+      if(isDefined(player)) {
         player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest1", undefined, 0);
+      }
     }
   } else {
     if(level.ss_comp_vox_count == 0) {
@@ -419,8 +420,9 @@ do_ss_failure_vox(stage) {
     if(isDefined(player)) {
       playon playSound("vox_mcomp_quest_step1_1", "mcomp_done2");
       playon waittill("mcomp_done2");
-      if(isDefined(player))
+      if(isDefined(player)) {
         player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest1", undefined, 1);
+      }
     }
   } else {
     player = is_player_close_enough(playon);
@@ -447,8 +449,9 @@ do_ss_success_vox(stage) {
     if(isDefined(player)) {
       playon playSound("vox_mcomp_quest_step1_2", "mcomp_done3");
       playon waittill("mcomp_done3");
-      if(isDefined(player))
+      if(isDefined(player)) {
         player thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest1", undefined, 2);
+      }
     }
   } else {
     switch (level.ss_comp_vox_count) {

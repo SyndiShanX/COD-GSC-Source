@@ -4,8 +4,9 @@
 ***************************************/
 
 main() {
-  if(!isDefined(level.func_ABE6))
+  if(!isDefined(level.func_ABE6)) {
     level.func_ABE6 = 0;
+  }
 
   level.func_4BC4 = "default";
   level.func_11A9 = 0;
@@ -20,11 +21,13 @@ main() {
   _setsaveddvar("r_mbVelocityScale", 0);
   _setsaveddvar("r_mbVelocityScaleViewModel", 0.2);
 
-  if(!isDefined(level.func_11220))
+  if(!isDefined(level.func_11220)) {
     level.func_11220 = [];
+  }
 
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = tolower(getdvar("mapname"));
+  }
 }
 
 func_5849(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
@@ -76,8 +79,9 @@ func_583A(var_00, var_01) {
 }
 
 func_5843() {
-  if(getdvar("scr_dof_enable") == "")
+  if(getdvar("scr_dof_enable") == "") {
     _setsaveddvar("scr_dof_enable", "1");
+  }
 
   setdvar("ads_dof_tracedist", 8192);
   setdvar("ads_dof_maxEnemyDist", 10000);
@@ -111,34 +115,39 @@ func_5843() {
   level.func_5832["results"]["current"] = [];
   func_583A("results", "current");
 
-  foreach(var_01 in level.players)
+  foreach(var_01 in level.players) {
   var_01 thread func_584E();
+  }
 }
 
 func_5848(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   func_5849("base", "goal", var_00, var_01, var_02, var_03, var_04, var_05, 1.0);
   level.func_5832["base"]["timeRemaining"] = var_06;
 
-  if(var_06 <= 0.0)
+  if(var_06 <= 0.0) {
     func_5849("base", "current", var_00, var_01, var_02, var_03, var_04, var_05, 1.0);
+  }
 }
 
 func_583F(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   func_5849("script", "goal", var_00, var_01, var_02, var_03, var_04, var_05, 1.0);
   level.func_5832["script"]["timeRemaining"] = var_06;
 
-  if(var_06 <= 0.0)
+  if(var_06 <= 0.0) {
     func_5849("script", "current", var_00, var_01, var_02, var_03, var_04, var_05, 1.0);
-  else if(level.func_5832["script"]["current"]["weight"] <= 0.0)
+  }
+  else if(level.func_5832["script"]["current"]["weight"] <= 0.0) {
     func_5849("script", "current", var_00, var_01, var_02, var_03, var_04, var_05, 0.0);
+  }
 }
 
 func_583D(var_00) {
   level.func_5832["script"]["goal"]["weight"] = 0.0;
   level.func_5832["script"]["timeRemaining"] = var_00;
 
-  if(var_00 <= 0.0)
+  if(var_00 <= 0.0) {
     level.func_5832["script"]["current"]["weight"] = 0.0;
+  }
 }
 
 is_dof_script_enabled() {
@@ -148,35 +157,44 @@ is_dof_script_enabled() {
 func_583E(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   func_5849("ads", "goal", var_00, var_01, var_02, var_03, var_04, var_05, var_06);
 
-  if(level.func_5832["ads"]["current"]["weight"] <= 0.0)
+  if(level.func_5832["ads"]["current"]["weight"] <= 0.0) {
     func_5849("ads", "current", var_00, var_01, var_02, var_03, var_04, var_05, 0.0);
+  }
 }
 
 func_5836(var_00, var_01, var_02, var_03) {
   if(var_00 > var_01) {
     var_04 = (var_00 - var_01) * var_03;
 
-    if(var_04 > var_02)
+    if(var_04 > var_02) {
       var_04 = var_02;
-    else if(var_04 < 1)
+    }
+    else if(var_04 < 1) {
       var_04 = 1;
+    }
 
-    if(var_00 - var_04 <= var_01)
+    if(var_00 - var_04 <= var_01) {
       return var_01;
-    else
+    }
+    else {
       return var_00 - var_04;
+    }
   } else if(var_00 < var_01) {
     var_04 = (var_01 - var_00) * var_03;
 
-    if(var_04 > var_02)
+    if(var_04 > var_02) {
       var_04 = var_02;
-    else if(var_04 < 1)
+    }
+    else if(var_04 < 1) {
       var_04 = 1;
+    }
 
-    if(var_00 + var_04 >= var_01)
+    if(var_00 + var_04 >= var_01) {
       return var_01;
-    else
+    }
+    else {
       return var_00 + var_04;
+    }
   }
 
   return var_00;
@@ -186,10 +204,12 @@ func_5835() {
   var_00 = level.func_5832["ads"]["goal"]["weight"];
 
   if(var_00 < 1.0) {
-    if(self adsbuttonpressed() && self playerads() > 0.0)
+    if(self adsbuttonpressed() && self playerads() > 0.0) {
       var_00 = min(1, var_00 + 0.7);
-    else
+    }
+    else {
       var_00 = 0;
+    }
 
     level.func_5832["ads"]["current"]["nearStart"] = level.func_5832["ads"]["goal"]["nearStart"];
     level.func_5832["ads"]["current"]["nearEnd"] = level.func_5832["ads"]["goal"]["nearEnd"];
@@ -201,10 +221,12 @@ func_5835() {
     return;
   }
 
-  if(isDefined(level.func_5837))
+  if(isDefined(level.func_5837)) {
     var_01 = level.func_5837;
-  else
+  }
+  else {
     var_01 = 0.1;
+  }
 
   var_02 = 10;
   var_03 = max(var_02, abs(level.func_5832["ads"]["current"]["nearStart"] - level.func_5832["ads"]["goal"]["nearStart"]) * var_01);
@@ -259,8 +281,9 @@ func_5839() {
   var_05 = max(0, var_05);
   var_05 = min(var_02, var_05);
 
-  if(var_05 > 0.0)
+  if(var_05 > 0.0) {
     var_03 = max(var_01, var_03);
+  }
 
   level.func_5832["results"]["current"]["nearStart"] = var_00;
   level.func_5832["results"]["current"]["nearEnd"] = var_01;
@@ -295,10 +318,12 @@ func_5845() {
   var_10 = self getEye();
   var_11 = self getplayerangles();
 
-  if(isDefined(self.func_5847))
+  if(isDefined(self.func_5847)) {
     var_12 = _combineangles(self.func_5847.angles, var_11);
-  else
+  }
+  else {
     var_12 = var_11;
+  }
 
   var_13 = vectornormalize(anglesToForward(var_12));
   var_14 = bulletTrace(var_10, var_10 + var_13 * var_01, 1, self, 1, 0, 0, 0, 0);
@@ -335,26 +360,32 @@ func_5845() {
     }
     var_25 = distance(var_10, var_20.origin);
 
-    if(var_25 - 30 < var_17)
+    if(var_25 - 30 < var_17) {
       var_17 = var_25 - 30;
+    }
 
     var_26 = min(var_25, var_02);
 
-    if(var_26 + 30 > var_18)
+    if(var_26 + 30 > var_18) {
       var_18 = var_26 + 30;
+    }
   }
 
-  if(var_17 > var_18)
+  if(var_17 > var_18) {
     var_17 = var_18 - 256;
+  }
 
-  if(var_17 > var_01)
+  if(var_17 > var_01) {
     var_17 = var_01 - 30;
+  }
 
-  if(var_17 < 1)
+  if(var_17 < 1) {
     var_17 = 1;
+  }
 
-  if(var_18 < var_01)
+  if(var_18 < var_01) {
     var_18 = var_01;
+  }
 
   var_28 = var_17 * var_04;
   var_29 = var_18 * var_07;
@@ -381,45 +412,56 @@ func_A43D(var_00, var_01, var_02, var_03, var_04) {
     }
     var_11 = distance(var_02, var_1[var_08].origin);
 
-    if(var_11 < 2500)
+    if(var_11 < 2500) {
       var_11 = 2500;
+    }
 
-    if(var_11 - 30 < var_05)
+    if(var_11 - 30 < var_05) {
       var_05 = var_11 - 30;
+    }
 
-    if(var_11 + 30 > var_06)
+    if(var_11 + 30 > var_06) {
       var_06 = var_11 + 30;
+    }
   }
 
   if(var_05 > var_06) {
     var_05 = 2400;
     var_06 = 3000;
   } else {
-    if(var_05 < 50)
+    if(var_05 < 50) {
       var_05 = 50;
+    }
 
-    if(var_06 > 2500)
+    if(var_06 > 2500) {
       var_06 = 2500;
-    else if(var_06 < 1000)
+    }
+    else if(var_06 < 1000) {
       var_06 = 1000;
+    }
   }
 
   var_12 = distance(var_02, var_0["position"]);
 
-  if(var_12 < 2500)
+  if(var_12 < 2500) {
     var_12 = 2500;
+  }
 
-  if(var_05 > var_12)
+  if(var_05 > var_12) {
     var_05 = var_12 - 30;
+  }
 
-  if(var_05 < 1)
+  if(var_05 < 1) {
     var_05 = 1;
+  }
 
-  if(var_06 < var_12)
+  if(var_06 < var_12) {
     var_06 = var_12;
+  }
 
-  if(var_07 >= var_05)
+  if(var_07 >= var_05) {
     var_07 = var_05 - 1;
+  }
 
   var_13 = var_06 * 4;
   var_14 = 4;
@@ -440,8 +482,9 @@ func_584E() {
     func_5845();
     func_5839();
 
-    if(isDefined(self _meth_8473()))
+    if(isDefined(self _meth_8473())) {
       func_583A("results", "current");
+    }
 
     var_00 = level.func_5832["results"]["current"]["nearStart"];
     var_01 = level.func_5832["results"]["current"]["nearEnd"];
@@ -468,8 +511,9 @@ func_11715() {
   _setsaveddvar("r_tessellationCutoffDistance", level.func_11714.func_4CA5);
   _setsaveddvar("r_tessellationCutoffFalloff", level.func_11714.func_4CA7);
 
-  foreach(var_02 in level.players)
+  foreach(var_02 in level.players) {
   var_02 thread func_11717();
+  }
 }
 
 func_11716(var_00, var_01, var_02) {
@@ -496,11 +540,13 @@ func_11717() {
       level.func_11714.func_4CA7 = level.func_11714.func_4CA8;
     }
 
-    if(var_00 != level.func_11714.func_4CA5)
+    if(var_00 != level.func_11714.func_4CA5) {
       _setsaveddvar("r_tessellationCutoffDistance", level.func_11714.func_4CA5);
+    }
 
-    if(var_01 != level.func_11714.func_4CA7)
+    if(var_01 != level.func_11714.func_4CA7) {
       _setsaveddvar("r_tessellationCutoffFalloff", level.func_11714.func_4CA7);
+    }
   }
 }
 

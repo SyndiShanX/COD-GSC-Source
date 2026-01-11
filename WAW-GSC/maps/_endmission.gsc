@@ -26,8 +26,9 @@ main() {
   missionSettings add_level("oki3", false, "", true, "OKI3_VETERAN_ACHIEVEMENT", "OKINAWA_ACHIEVEMENT", true);
   missionSettings add_level("ber3", false, "", true, "BER3_VETERAN_ACHIEVEMENT", "BERLIN_ACHIEVEMENT", true);
   missionSettings add_level("ber3b", false, "", true, "BER3B_VETERAN_ACHIEVEMENT", "BERLIN_ACHIEVEMENT", true);
-  if(!is_german_build())
+  if(!is_german_build()) {
     missionSettings add_level("outro", false);
+  }
   missionSettings add_level("credits", false);
   level.missionSettings = missionSettings;
 }
@@ -135,10 +136,12 @@ _nextmission() {
       assert(nextlevel_index >= 0);
       assert(nextlevel_index < level.missionSettings.levels.size);
       if(IsSplitScreen()) {
-        if(!arcadeMode())
+        if(!arcadeMode()) {
           maps\_cooplogic::endGame();
-        else
+        }
+        else {
           exitLevel(false);
+        }
         SetUINextLevel(level.missionSettings get_level_name(nextlevel_index));
         wait 1;
         return;
@@ -173,10 +176,12 @@ _nextmission() {
     award = true;
     hardcore_award = true;
     for(i = 0; i < level.missionSettings.levels.size; i++) {
-      if(level.missionSettings get_level_name(i) == "credits")
+      if(level.missionSettings get_level_name(i) == "credits") {
         continue;
-      if(level.missionSettings get_level_name(i) == "outro")
+      }
+      if(level.missionSettings get_level_name(i) == "outro") {
         continue;
+      }
       if(level.missionSettings get_level_name(i) == "nazi_zombie_prototype") {
         continue;
       }
@@ -345,17 +350,20 @@ get_campaign(level_index) {
 }
 
 get_coop(level_index) {
-  if(self get_level_name(level_index) == "credits")
+  if(self get_level_name(level_index) == "credits") {
     return false;
-  if(self get_level_name(level_index) == "outro")
+  }
+  if(self get_level_name(level_index) == "outro") {
     return false;
+  }
   return self.levels[level_index].coop;
 }
 
 get_first_coop_index() {
   for(i = 0; i < level.missionSettings.levels.size; i++) {
-    if(self get_coop(i))
+    if(self get_coop(i)) {
       return i;
+    }
   }
   return -1;
 }

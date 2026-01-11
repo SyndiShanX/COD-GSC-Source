@@ -11,8 +11,9 @@ callback_hostmigration() {
   }
   level thread hostmigrationconnectwatcher();
 
-  foreach(var_01 in level.characters)
+  foreach(var_01 in level.characters) {
   var_1.hostmigrationcontrolsfrozen = 0;
+  }
 
   level.hostmigrationtimer = 1;
   setdvar("ui_inhostmigration", 1);
@@ -26,8 +27,9 @@ callback_hostmigration() {
     }
     var_01 thread hostmigrationtimerthink();
 
-    if(isplayer(var_01))
+    if(isplayer(var_01)) {
       var_01 setclientomnvar("ui_session_state", var_1.sessionstate);
+    }
   }
 
   level endon("host_migration_begin");
@@ -48,8 +50,9 @@ hostmigrationconnectwatcher() {
   level waittill("connected", var_00);
   var_00 thread hostmigrationtimerthink();
 
-  if(isplayer(var_00))
+  if(isplayer(var_00)) {
     var_00 setclientomnvar("ui_session_state", var_0.sessionstate);
+  }
 }
 
 hostmigrationwait() {
@@ -62,8 +65,9 @@ hostmigrationwait() {
   wait 5;
   level.ingraceperiod = 0;
 
-  if(scripts\mp\utility\game::istrue(level.func_72F2) && !scripts\mp\utility\game::istrue(level.func_72F1))
+  if(scripts\mp\utility\game::istrue(level.func_72F2) && !scripts\mp\utility\game::istrue(level.func_72F1)) {
     setomnvar("ui_match_start_text", "opponent_forfeiting_in");
+  }
 }
 
 hostmigrationwaitforplayers() {
@@ -72,26 +76,32 @@ hostmigrationwaitforplayers() {
 }
 
 hostmigrationname(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return "<removed_ent>";
+  }
 
   var_01 = -1;
   var_02 = "?";
 
-  if(isDefined(var_0.entity_number))
+  if(isDefined(var_0.entity_number)) {
     var_01 = var_0.entity_number;
+  }
 
-  if(isplayer(var_00) && isDefined(var_0.name))
+  if(isplayer(var_00) && isDefined(var_0.name)) {
     var_02 = var_0.name;
+  }
 
-  if(isplayer(var_00))
+  if(isplayer(var_00)) {
     return "player <" + var_02 + ">";
+  }
 
-  if(isagent(var_00) && scripts\mp\utility\game::isgameparticipant(var_00))
+  if(isagent(var_00) && scripts\mp\utility\game::isgameparticipant(var_00)) {
     return "participant agent <" + var_01 + ">";
+  }
 
-  if(isagent(var_00))
+  if(isagent(var_00)) {
     return "non-participant agent <" + var_01 + ">";
+  }
 
   return "unknown entity <" + var_01 + ">";
 }
@@ -100,8 +110,9 @@ hostmigrationtimerthink_internal() {
   level endon("host_migration_begin");
   level endon("host_migration_end");
 
-  while(!scripts\mp\utility\game::isreallyalive(self))
+  while(!scripts\mp\utility\game::isreallyalive(self)) {
     self waittill("spawned");
+  }
 
   self.hostmigrationcontrolsfrozen = 1;
   scripts\mp\utility\game::freezecontrolswrapper(1);
@@ -119,8 +130,9 @@ hostmigrationtimerthink() {
 }
 
 waittillhostmigrationdone() {
-  if(!isDefined(level.hostmigrationtimer))
+  if(!isDefined(level.hostmigrationtimer)) {
     return 0;
+  }
 
   var_00 = gettime();
   level waittill("host_migration_end");

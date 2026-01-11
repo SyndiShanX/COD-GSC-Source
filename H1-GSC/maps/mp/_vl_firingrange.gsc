@@ -43,8 +43,9 @@ init_firingrange() {
     var_0.lanelights[var_2] setlightintensity(0);
     var_0.lanelightsgreen[var_2] = getEntArray("green_light_0" + (var_2 + 1), "targetname");
 
-    foreach(var_4 in var_0.lanelightsgreen[var_2])
+    foreach(var_4 in var_0.lanelightsgreen[var_2]) {
     var_4 setlightintensity(0);
+    }
 
     var_0.lanelamps[var_2] = getent("lane_lamp_" + (var_2 + 1), "targetname");
     var_0.lanelamps[var_2] setModel("h1_fng_industrial_lamp_off_sml");
@@ -95,8 +96,9 @@ gettargetarray(var_0, var_1, var_2, var_3) {
     var_7.pers["team"] = "axis";
     var_7.team = "axis";
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_7.angles = var_1;
+    }
 
     var_5[var_8] = var_7;
   }
@@ -117,8 +119,9 @@ enter_firingrange(var_0) {
 wait_start_firingrange(var_0) {
   var_0 endon("enter_lobby");
 
-  while(isDefined(var_0.loadout))
+  while(isDefined(var_0.loadout)) {
     waitframe();
+  }
 
   var_0 setclientomnvar("ui_vlobby_round_state", 0);
   var_0 setclientomnvar("ui_vlobby_round_timer", 0);
@@ -178,8 +181,9 @@ playergetspawnposbylane() {
   var_1 = weaponclass(self.primaryweapon);
 
   for(var_2 = 0; var_2 < var_0; var_2++) {
-    if(level.firingrange.laneclass[var_2] == var_1)
+    if(level.firingrange.laneclass[var_2] == var_1) {
       return level.firingrange.lanespawns[var_2];
+    }
   }
 }
 
@@ -189,8 +193,9 @@ playergetprimarynotpistol() {
   foreach(var_2 in var_0) {
     var_3 = weaponclass(var_2);
 
-    if(var_3 != "pistol")
+    if(var_3 != "pistol") {
       return var_2;
+    }
   }
 }
 
@@ -211,8 +216,9 @@ playermonitorweaponforlane() {
     if(var_3 != "grenade" && var_2 != var_1) {
       for(var_4 = 0; var_4 < var_0; var_4++) {
         if(level.firingrange.laneclass[var_4] == var_3) {
-          if(isDefined(level.firingrange.roundnumber))
+          if(isDefined(level.firingrange.roundnumber)) {
             thread shutdownround(level.firingrange.roundnumber, self);
+          }
 
           turnonlightsforlane(var_4);
           break;
@@ -240,8 +246,9 @@ turnonlightsforlane(var_0) {
         var_5 setModel("h1_fng_industrial_lamp_off_sml_on");
         var_3 setlightintensity(10000);
 
-        foreach(var_8 in var_4)
+        foreach(var_8 in var_4) {
         var_8 setlightintensity(200);
+        }
 
         activateclientexploder(var_6);
         var_10 = level.firingrange.lanelightshellpositions[var_2];
@@ -259,8 +266,9 @@ turnonlightsforlane(var_0) {
       var_5 setModel("h1_fng_industrial_lamp_off_sml");
       var_3 setlightintensity(0);
 
-      foreach(var_8 in var_4)
+      foreach(var_8 in var_4) {
       var_8 setlightintensity(0);
+      }
 
       stopclientexploder(var_6);
     }
@@ -490,8 +498,9 @@ doalltargets(var_0) {
 }
 
 waittilltargetsdown() {
-  while(self.targetsup > 0)
+  while(self.targetsup > 0) {
     waitframe();
+  }
 }
 
 popupaimtarget(var_0, var_1) {
@@ -562,8 +571,9 @@ targetpopup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   self.perks = [];
 
-  if(maps\mp\_utility::is_true(var_4))
+  if(maps\mp\_utility::is_true(var_4)) {
     self.perks["specialty_armorvest"] = 1;
+  }
 
   self setCanDamage(1);
   self setdamagecallbackon(1);
@@ -573,10 +583,12 @@ targetpopup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self rotateto(var_0, 0.4);
   self playSound("killhouse_target_up");
 
-  if(maps\mp\_utility::is_true(var_5))
+  if(maps\mp\_utility::is_true(var_5)) {
     thread targetattachedmoveonce();
-  else if(maps\mp\_utility::is_true(var_6))
+  }
+  else if(maps\mp\_utility::is_true(var_6)) {
     thread targetmoveloop();
+  }
 
   thread targethandlestop();
 
@@ -597,10 +609,12 @@ targetpopup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self rotateto(var_1, 0.2);
   self playSound("killhouse_target_up");
 
-  if(maps\mp\_utility::is_true(var_5))
+  if(maps\mp\_utility::is_true(var_5)) {
     thread targetattachedmoveback();
-  else if(maps\mp\_utility::is_true(var_6))
+  }
+  else if(maps\mp\_utility::is_true(var_6)) {
     thread targetmoveback();
+  }
 
   if(isDefined(self.aimassist_target)) {
     self.aimassist_target disableaimassist();
@@ -657,8 +671,9 @@ targetattachedmoveback() {
   var_0 = distance(self.mover.startpos, self.mover.origin);
   var_1 = var_0 / 300;
 
-  if(var_1 <= 0)
+  if(var_1 <= 0) {
     var_1 = 0.1;
+  }
 
   var_2 = 0.5;
   var_3 = 0.5;
@@ -701,8 +716,9 @@ targetmoveback() {
   var_0 = distance(self.origin, self.startpos);
   var_1 = var_0 / 300;
 
-  if(var_1 <= 0)
+  if(var_1 <= 0) {
     var_1 = 0.1;
+  }
 
   var_2 = 0.3;
   var_3 = 0.3;
@@ -730,39 +746,49 @@ targetdamagecallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 
   if(isDefined(var_1)) {
     if(var_14 <= 0) {
-      if(isDefined(var_11))
+      if(isDefined(var_11)) {
         var_1 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("mp_hit_kill");
+      }
 
       targetdamageoff();
     } else if(maps\mp\_utility::_hasperk("specialty_armorvest"))
       var_1 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("hitmorehealth");
-    else
+    else {
       var_1 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("standard");
+    }
   }
 
-  if(var_13 > 999)
+  if(var_13 > 999) {
     level.firingrange.damagedone = 999;
-  else if(var_13 < 0)
+  }
+  else if(var_13 < 0) {
     level.firingrange.damagedone = 0;
-  else
+  }
+  else {
     level.firingrange.damagedone = var_13;
+  }
 
   if(!isDefined(self.lastshottime) || self.lastshottime != gettime()) {
     var_15 = level.firingrange.shotshit + 1;
 
-    if(var_15 > 9999)
+    if(var_15 > 9999) {
       level.firingrange.shotshit = 0;
-    else if(var_15 < 0)
+    }
+    else if(var_15 < 0) {
       level.firingrange.shotshit = 0;
-    else
+    }
+    else {
       level.firingrange.shotshit = var_15;
+    }
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 setclientomnvar("ui_vlobby_round_hits", level.firingrange.shotshit);
+    }
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 setclientomnvar("ui_vlobby_round_damage", level.firingrange.damagedone);
+  }
 
   self.lastshottime = gettime();
   self finishentitydamage(var_0, var_1, var_13, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
@@ -801,8 +827,9 @@ trigger_setup() {
 player_enter_round_trigger(var_0) {
   level endon("shutdown_targets");
 
-  while(level.firingrange.isshuttingdown)
+  while(level.firingrange.isshuttingdown) {
     wait 0.1;
+  }
 
   var_1 = self;
 
@@ -852,16 +879,21 @@ getmodifier(var_0, var_1, var_2) {
 
   if(var_0 != "specialty_null" && var_0 != "none" && var_0 != "iw5_combatknife_mp") {
     if(maps\mp\gametypes\_class::isvalidprimary(var_6) || maps\mp\gametypes\_class::isvalidsecondary(var_6)) {
-      if(var_1 == "j_head")
+      if(var_1 == "j_head") {
         var_3 = "head";
-      else if(var_1 == "tag_chest")
+      }
+      else if(var_1 == "tag_chest") {
         var_3 = "torso_upper";
-      else if(var_1 == "tag_arms")
+      }
+      else if(var_1 == "tag_arms") {
         var_3 = "right_arm_upper";
-      else if(var_1 == "tag_legs")
+      }
+      else if(var_1 == "tag_legs") {
         var_3 = "torso_lower";
-      else
+      }
+      else {
         var_3 = "none";
+      }
 
       var_4 = var_2 getweapondamagelocationmultiplier(var_6 + "_mp", var_3);
       return var_4;
@@ -914,10 +946,12 @@ monitorhitpercent(var_0) {
       var_1 = maps\mp\_utility::rounddecimalplaces(var_1, 0);
 
       if(var_1 != level.firingrange.percent) {
-        if(var_1 > 999)
+        if(var_1 > 999) {
           var_1 = 999;
-        else if(var_1 < 0)
+        }
+        else if(var_1 < 0) {
           var_1 = 0;
+        }
 
         level.firingrange.percent = int(var_1);
         var_0 setclientomnvar("ui_vlobby_round_accuracy", level.firingrange.percent);
@@ -982,13 +1016,15 @@ scalesoundsonexit() {
     for(;;) {
       wait 0.05;
 
-      if(level.in_firingrange == 1 || getdvarint("virtualLobbyInFiringRange", 0) == 1)
+      if(level.in_firingrange == 1 || getdvarint("virtualLobbyInFiringRange", 0) == 1) {
         continue;
+      }
       else {
         level.firingrange.soundents = common_scripts\utility::array_remove_duplicates(level.firingrange.soundents);
 
-        foreach(var_1 in level.firingrange.soundents)
+        foreach(var_1 in level.firingrange.soundents) {
         var_1 scalevolume(0, 0.5);
+        }
       }
     }
   }
@@ -1060,8 +1096,9 @@ grenadecleanup(var_0) {
     foreach(var_2 in level.grenades) {
       if(isDefined(var_2) && !isremovedentity(var_2)) {
         if(!isDefined(self) || !isDefined(var_2.owner) || isremovedentity(var_2.owner)) {
-          if(!isDefined(var_2.weaponname))
+          if(!isDefined(var_2.weaponname)) {
             continue;
+          }
           else {
             var_2 notify("death");
             var_2 thread delaydelete();
@@ -1071,8 +1108,9 @@ grenadecleanup(var_0) {
         }
 
         if(var_2.owner == self) {
-          if(!isDefined(var_2.weaponname))
+          if(!isDefined(var_2.weaponname)) {
             continue;
+          }
           else {
             var_2 notify("death");
             var_2 thread delaydelete();
@@ -1086,8 +1124,9 @@ grenadecleanup(var_0) {
 delaydelete() {
   wait 0.05;
 
-  if(isDefined(self) && !isremovedentity(self))
+  if(isDefined(self) && !isremovedentity(self)) {
     self delete();
+  }
 }
 
 monitor_grenade_count(var_0) {
@@ -1113,8 +1152,9 @@ firingrangecleanup() {
   var_0 grenadecleanup();
   var_1 = var_0 getweaponslistoffhands();
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_0 maps\mp\gametypes\_class::takeoffhand(var_3);
+  }
 }
 
 watermelonthink() {
@@ -1131,10 +1171,12 @@ watermelonthink() {
   var_2 = getent(var_1.target, "targetname");
   var_2 enableaimassist();
 
-  if(!isDefined(var_2.startorigin))
+  if(!isDefined(var_2.startorigin)) {
     var_2.startorigin = var_2.origin;
-  else
+  }
+  else {
     var_2.origin = var_2.startorigin;
+  }
 
   var_0 waittill("trigger");
   var_0 playSound("melee_knife_hit_watermelon");

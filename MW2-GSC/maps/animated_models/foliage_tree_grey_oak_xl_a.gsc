@@ -6,8 +6,9 @@
 #include common_scripts\utility;
 
 main() {
-  if(!isDefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
+  }
 
   model = "foliage_tree_grey_oak_xl_a_animated";
   level.anim_prop_models[model]["sway"] = "foliage_tree_grey_oak_xl_a_sway";

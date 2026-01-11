@@ -55,12 +55,14 @@ init_standard_farm() {
       remove = 0;
 
       foreach(token in tokens) {
-        if(token == "standard_remove")
+        if(token == "standard_remove") {
           remove = 1;
+        }
       }
 
-      if(remove)
+      if(remove) {
         ent delete();
+      }
     }
   }
 }
@@ -69,8 +71,9 @@ enemy_location_override(zombie, enemy) {
   location = enemy.origin;
 
   if(is_true(self.reroute)) {
-    if(isDefined(self.reroute_origin))
+    if(isDefined(self.reroute_origin)) {
       location = self.reroute_origin;
+    }
   }
 
   return location;

@@ -79,8 +79,9 @@ gate_think() {
 
   flag_time = FLAG_TIME_VALUE;
   skill = getDifficulty();
-  if(skill == "fu")
+  if(skill == "fu") {
     flag_time = FLAG_TIME_VALUE_VETERAN;
+  }
 
   level endon("special_op_terminated");
   self waittill("trigger", ent);
@@ -113,10 +114,12 @@ gate_splash() {
     level.time_splash.horzAlign = "center";
     level.time_splash set_hud_yellow();
 
-    if(level.gameskill >= 3)
+    if(level.gameskill >= 3) {
       level.time_splash SetValue(FLAG_TIME_VALUE_VETERAN);
-    else
+    }
+    else {
       level.time_splash SetValue(FLAG_TIME_VALUE);
+    }
   }
 
   level.time_splash.alpha = 1;
@@ -134,8 +137,9 @@ finishline() {
 
   trigger waittill("trigger", player);
 
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player.finish_time = getTime();
+  }
 
   assert(isplayer(player));
   assert(isDefined(player.playername));
@@ -147,8 +151,9 @@ finishline() {
 }
 
 special_coop_fail_quotes() {
-  if(!is_coop())
+  if(!is_coop()) {
     return;
+  }
 
   level endon("so_snowrace_complete");
   level waittill("challenge_timer_failed");

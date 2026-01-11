@@ -52,8 +52,9 @@ lightning_arc_play_fx_thread(localclientnum) {
   self endon("entityshutdown");
   self endon("stop_arc_fx");
 
-  if(!isDefined(level.lightning_ball_fx[localclientnum]))
+  if(!isDefined(level.lightning_ball_fx[localclientnum])) {
     level waittill("lightning_ball_created");
+  }
 
   e_ball = level.lightning_ball_fx[localclientnum];
   e_ball endon("entityshutdown");
@@ -72,8 +73,9 @@ lightning_arc_play_fx_thread(localclientnum) {
 }
 
 lightning_arc_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     self thread lightning_arc_play_fx_thread(localclientnum);
+  }
   else {
     self notify("stop_arc_fx");
 

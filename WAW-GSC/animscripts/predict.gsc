@@ -91,16 +91,18 @@ tumbleWall(notifyName) {
       self notify(notifyName);
       self waittill("predictGetNotetrack", notetrack);
       if(isDefined(notetrack)) {
-        if(notetrack == "end")
+        if(notetrack == "end") {
           return true;
+        }
       }
       if(!bPredictMore) {
         break;
       }
     }
     self PredictOriginAndAngles();
-    if(self isDeflected())
+    if(self isDeflected()) {
       return false;
+    }
     entry["handler"] = ::moveH;
     entry["origin"] = self.origin;
     entry["angles"] = self.angles;

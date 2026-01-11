@@ -20,8 +20,9 @@ dev_cac_init() {
     }
     host = gethostplayer();
 
-    if(!isDefined(level.dev_cac_player))
+    if(!isDefined(level.dev_cac_player)) {
       level.dev_cac_player = host;
+    }
 
     switch (getdvar(#"devgui_dev_cac")) {
       case "":
@@ -45,8 +46,9 @@ dev_cac_init() {
       case "cac_overlay":
         level notify("dev_cac_overlay_think");
 
-        if(!dev_cac_overlay)
+        if(!dev_cac_overlay) {
           level thread dev_cac_overlay_think();
+        }
 
         dev_cac_overlay = !dev_cac_overlay;
         break;
@@ -104,8 +106,9 @@ dev_cac_init() {
         break;
     }
 
-    if(reset)
+    if(reset) {
       setdvar("devgui_dev_cac", "");
+    }
   }
 
 }
@@ -159,15 +162,18 @@ dev_cac_dpad_think(part_name, cycle_function, tag) {
 }
 
 next_in_list(value, list) {
-  if(!isDefined(value))
+  if(!isDefined(value)) {
     return list[0];
+  }
 
   for(i = 0; i < list.size; i++) {
     if(value == list[i]) {
-      if(isDefined(list[i + 1]))
+      if(isDefined(list[i + 1])) {
         value = list[i + 1];
-      else
+      }
+      else {
         value = list[0];
+      }
 
       break;
     }
@@ -177,15 +183,18 @@ next_in_list(value, list) {
 }
 
 prev_in_list(value, list) {
-  if(!isDefined(value))
+  if(!isDefined(value)) {
     return list[0];
+  }
 
   for(i = 0; i < list.size; i++) {
     if(value == list[i]) {
-      if(isDefined(list[i - 1]))
+      if(isDefined(list[i - 1])) {
         value = list[i - 1];
-      else
+      }
+      else {
         value = list[list.size - 1];
+      }
 
       break;
     }
@@ -206,10 +215,12 @@ dev_cac_cycle_body(forward, tag) {
   player = level.dev_cac_player;
   keys = getarraykeys(level.cac_functions["set_body_model"]);
 
-  if(forward)
+  if(forward) {
     player.cac_body_type = next_in_list(player.cac_body_type, keys);
-  else
+  }
+  else {
     player.cac_body_type = prev_in_list(player.cac_body_type, keys);
+  }
 
   player dev_cac_set_player_model();
 }
@@ -221,10 +232,12 @@ dev_cac_cycle_head(forward, tag) {
   player = level.dev_cac_player;
   keys = getarraykeys(level.cac_functions["set_head_model"]);
 
-  if(forward)
+  if(forward) {
     player.cac_head_type = next_in_list(player.cac_head_type, keys);
-  else
+  }
+  else {
     player.cac_head_type = prev_in_list(player.cac_head_type, keys);
+  }
 
   player.cac_hat_type = "none";
   player dev_cac_set_player_model();
@@ -237,10 +250,12 @@ dev_cac_cycle_character(forward, tag) {
   player = level.dev_cac_player;
   keys = getarraykeys(level.cac_functions["set_body_model"]);
 
-  if(forward)
+  if(forward) {
     player.cac_body_type = next_in_list(player.cac_body_type, keys);
-  else
+  }
+  else {
     player.cac_body_type = prev_in_list(player.cac_body_type, keys);
+  }
 
   player.cac_hat_type = "none";
   player dev_cac_set_player_model();
@@ -261,10 +276,12 @@ dev_cac_cycle_player(forward) {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    if(forward)
+    if(forward) {
       level.dev_cac_player = next_in_list(level.dev_cac_player, players);
-    else
+    }
+    else {
       level.dev_cac_player = prev_in_list(level.dev_cac_player, players);
+    }
 
     if(dev_cac_player_valid()) {
       level.dev_cac_player thread highlight_player();
@@ -292,8 +309,9 @@ dev_cac_overlay_update(hud) {
 }
 
 dev_cac_overlay_destroy(hud) {
-  for(i = 0; i < hud.menu.size; i++)
+  for(i = 0; i < hud.menu.size; i++) {
     hud.menu[i] destroy();
+  }
 
   hud destroy();
   setdvar("player_debugSprint", "0");
@@ -367,10 +385,12 @@ color(value) {
   b = 0;
   color = (0, 0, 0);
 
-  if(value > 0)
+  if(value > 0) {
     r = r - value;
-  else
+  }
+  else {
     g = g + value;
+  }
 
   c = (r, g, b);
   return c;
@@ -421,8 +441,9 @@ sort_greatest(function, attribute, greatest) {
   greatest = keys[0];
 
   for(i = 0; i < keys.size; i++) {
-    if(level.cac_attributes[attribute][keys[i]] > level.cac_attributes[attribute][greatest])
+    if(level.cac_attributes[attribute][keys[i]] > level.cac_attributes[attribute][greatest]) {
       greatest = keys[i];
+    }
   }
 
   return greatest;
@@ -433,8 +454,9 @@ sort_least(function, attribute, least) {
   least = keys[0];
 
   for(i = 0; i < keys.size; i++) {
-    if(level.cac_attributes[attribute][keys[i]] < level.cac_attributes[attribute][least])
+    if(level.cac_attributes[attribute][keys[i]] < level.cac_attributes[attribute][least]) {
       least = keys[i];
+    }
   }
 
   return least;

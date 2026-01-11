@@ -2930,8 +2930,9 @@ oki3_grass_guy_achievement() {
   while(1) {
     self waittill("damage", damage_amount, attacker, direction_vec, point, type);
     if(self.health <= 0 && !self.surprisedplayer) {
-      if(isDefined(attacker) && isplayer(attacker))
+      if(isDefined(attacker) && isplayer(attacker)) {
         attacker maps\_utility::giveachievement_wrapper("ANY_ACHIEVEMENT_GRASSJAP");
+      }
     }
   }
 }

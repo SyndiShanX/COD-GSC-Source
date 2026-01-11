@@ -210,4 +210,3 @@ status_effects_give_grenade(pid) {
     player giveweapon(weapon);
   }
 }
-

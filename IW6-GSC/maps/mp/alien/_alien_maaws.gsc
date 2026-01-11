@@ -36,10 +36,12 @@ tryuse_dpad_maaws_internal(var_0, var_1) {
   self switchtoweapon(var_2);
   self disableweaponswitch();
 
-  if(var_1 > 3)
+  if(var_1 > 3) {
     self setweaponammoclip(var_2, 3);
-  else if(var_1 > 0)
+  }
+  else if(var_1 > 0) {
     self setweaponammoclip(var_2, 2);
+  }
 
   thread handle_missile_logic(var_2, var_1);
 }
@@ -79,13 +81,15 @@ watch_rank_for_fof(var_0, var_1) {
   self endon("fof_cancel");
 
   if(var_1 > 0) {
-    while(self getcurrentweapon() != var_0)
+    while(self getcurrentweapon() != var_0) {
       wait 0.05;
+    }
 
     self thermalvisionfofoverlayon();
 
-    while(self getcurrentweapon() == var_0)
+    while(self getcurrentweapon() == var_0) {
       wait 0.05;
+    }
 
     self thermalvisionfofoverlayoff();
   }
@@ -94,15 +98,18 @@ watch_rank_for_fof(var_0, var_1) {
 within_fov_set_dot(var_0, var_1, var_2, var_3, var_4) {
   var_5 = get_alien_origin(var_2);
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     return 0;
+  }
 
   var_6 = vectornormalize(var_5 - var_0);
 
-  if(!isDefined(var_4) || var_4 == "forward")
+  if(!isDefined(var_4) || var_4 == "forward") {
     var_7 = anglesToForward(var_1);
-  else
+  }
+  else {
     var_7 = anglestoright(var_1);
+  }
 
   var_8 = vectordot(var_7, var_6);
   var_2.dot = var_8;
@@ -112,13 +119,16 @@ within_fov_set_dot(var_0, var_1, var_2, var_3, var_4) {
 missile_bullet_trace(var_0, var_1, var_2, var_3) {
   var_4 = bulletTrace(var_0, var_1, 1, level.player, 1, 0, 1);
 
-  if(!isDefined(var_4["entity"]))
+  if(!isDefined(var_4["entity"])) {
     return 0;
+  }
 
-  if(var_4["entity"] != var_2)
+  if(var_4["entity"] != var_2) {
     return 0;
-  else
+  }
+  else {
     return 1;
+  }
 }
 
 get_forward_point(var_0, var_1) {
@@ -136,15 +146,17 @@ handle_missile_logic(var_0, var_1) {
   var_2 = "iw6_alienmaawschild_mp";
   self.maaws_done = 0;
 
-  if(!isDefined(self.trace_available))
+  if(!isDefined(self.trace_available)) {
     thread manage_bullet_trace_queue(var_0);
+  }
 
   while(self getammocount(var_0)) {
     level.alien_on_drill = undefined;
     self waittill("missile_fire", var_3, var_4);
 
-    if(!isDefined(level.outlined_aliens))
+    if(!isDefined(level.outlined_aliens)) {
       level.outlined_aliens = [];
+    }
 
     level.outlined_aliens common_scripts\utility::array_removeundefined(level.outlined_aliens);
     var_5 = 10000;
@@ -166,35 +178,40 @@ handle_missile_logic(var_0, var_1) {
       common_scripts\utility::waitframe();
       var_12 = (var_10[0] - var_11 / 10, var_10[1] - var_11 / 4, var_10[2]);
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         thread fire_missile_at_angles(var_9, var_12, var_2, var_1, (0, 1, 0));
+      }
 
       common_scripts\utility::waitframe();
       var_13 = (var_10[0] - var_11 / 10, var_10[1] + var_11 / 4, var_10[2]);
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         thread fire_missile_at_angles(var_9, var_13, var_2, var_1, (0, 0, 1));
+      }
 
       common_scripts\utility::waitframe();
 
       if(var_1 > 2) {
         var_13 = (var_10[0], var_10[1] + var_11 / 2, var_10[2]);
 
-        if(isDefined(var_3))
+        if(isDefined(var_3)) {
           thread fire_missile_at_angles(var_9, var_13, var_2, var_1, (1, 1, 0));
+        }
 
         common_scripts\utility::waitframe();
         var_14 = (var_10[0], var_10[1] - var_11 / 2, var_10[2]);
 
-        if(isDefined(var_3))
+        if(isDefined(var_3)) {
           thread fire_missile_at_angles(var_9, var_14, var_2, var_1, (1, 0, 1));
+        }
 
         common_scripts\utility::waitframe();
       }
     }
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3 delete();
+    }
   }
 
   self.maaws_done = 1;
@@ -212,11 +229,13 @@ fire_missile_at_angles(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_3) && var_3 > 1) {
     var_7 = maps\mp\alien\_spawnlogic::get_alive_agents();
 
-    if(level.script == "mp_alien_last" && isDefined(level.active_ancestors))
+    if(level.script == "mp_alien_last" && isDefined(level.active_ancestors)) {
       var_7 = common_scripts\utility::array_combine(var_7, level.active_ancestors);
+    }
 
-    if(isDefined(level.seeder_active_turrets))
+    if(isDefined(level.seeder_active_turrets)) {
       var_7 = common_scripts\utility::array_combine(var_7, level.seeder_active_turrets);
+    }
 
     var_7 = get_alien_targets_in_fov(self.origin, self.angles, "10");
     var_8 = get_missile_target(var_6, var_7, var_4);
@@ -225,8 +244,9 @@ fire_missile_at_angles(var_0, var_1, var_2, var_3, var_4) {
       var_6.target_ent = var_8;
       var_9 = (0, 0, 10);
 
-      if(isalive(var_6.target_ent) && isDefined(var_6.target_ent.alien_type) && var_6.target_ent.alien_type == "ancestor")
+      if(isalive(var_6.target_ent) && isDefined(var_6.target_ent.alien_type) && var_6.target_ent.alien_type == "ancestor") {
         var_9 = (0, 0, 110);
+      }
 
       var_6 missile_settargetent(var_8, var_9);
     } else {
@@ -244,10 +264,12 @@ damage_alien_on_drill(var_0) {
   var_1 = var_0.origin;
 
   if(isDefined(var_1) && isDefined(level.alien_on_drill) && isalive(level.alien_on_drill)) {
-    if(distancesquared(level.alien_on_drill.origin, var_1) < 10000)
+    if(distancesquared(level.alien_on_drill.origin, var_1) < 10000) {
       level.alien_on_drill dodamage(275, var_1, self, var_0, "MOD_PROJECTILE");
-    else if(distancesquared(level.alien_on_drill.origin, var_1) < 62500)
+    }
+    else if(distancesquared(level.alien_on_drill.origin, var_1) < 62500) {
       level.alien_on_drill dodamage(125, var_1, self, var_0, "MOD_PROJECTILE");
+    }
   }
 }
 
@@ -264,8 +286,9 @@ scan_for_targets(var_0, var_1) {
       var_0.target_ent = var_2;
       var_3 = (0, 0, 10);
 
-      if(isalive(var_0.target_ent) && isDefined(var_0.target_ent.alien_type) && var_0.target_ent.alien_type == "ancestor")
+      if(isalive(var_0.target_ent) && isDefined(var_0.target_ent.alien_type) && var_0.target_ent.alien_type == "ancestor") {
         var_3 = (0, 0, 110);
+      }
 
       var_0 missile_settargetent(var_2, var_3);
       break;
@@ -279,16 +302,18 @@ get_missile_target(var_0, var_1, var_2) {
   self endon("death");
   self endon("disconnect");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   var_3 = get_array_of_targets(var_0, "5", var_1, var_2);
 
   if(var_3.size == 0) {
     var_3 = get_array_of_targets(var_0, "45", var_1, var_2);
 
-    if(var_3.size == 0)
+    if(var_3.size == 0) {
       var_3 = get_array_of_targets(var_0, "89", var_1, var_2);
+    }
   }
 
   if(var_3.size > 0) {
@@ -301,8 +326,9 @@ get_missile_target(var_0, var_1, var_2) {
       }
     }
 
-    if(!is_in_array(level.outlined_aliens, var_4))
+    if(!is_in_array(level.outlined_aliens, var_4)) {
       level.outlined_aliens[level.outlined_aliens.size] = var_4;
+    }
 
     return var_4;
   }
@@ -315,17 +341,20 @@ get_array_of_targets(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("disconnect");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   var_4 = 0;
   var_5 = [];
   var_6 = [];
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_6 = get_alien_targets_in_fov(self.origin, self.angles, var_1, var_2);
-  else
+  }
+  else {
     var_6 = get_alien_targets_in_fov(var_0.origin, var_0.angles, var_1);
+  }
 
   if(var_6.size > 0) {
     var_6 = common_scripts\utility::get_array_of_closest(var_0.origin, var_6);
@@ -364,8 +393,9 @@ get_array_of_targets(var_0, var_1, var_2, var_3) {
       if(!isDefined(var_9)) {
         continue;
       }
-      if(isDefined(var_8.coll_model))
+      if(isDefined(var_8.coll_model)) {
         var_8 = var_8.coll_model;
+      }
 
       if(missile_bullet_trace(var_0.origin, var_9, var_8, var_3)) {
         var_5[var_5.size] = var_8;
@@ -385,11 +415,13 @@ get_alien_targets_in_fov(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_5 = maps\mp\alien\_spawnlogic::get_alive_agents();
 
-    if(level.script == "mp_alien_last" && isDefined(level.active_ancestors))
+    if(level.script == "mp_alien_last" && isDefined(level.active_ancestors)) {
       var_5 = common_scripts\utility::array_combine(var_5, level.active_ancestors);
+    }
 
-    if(isDefined(level.seeder_active_turrets))
+    if(isDefined(level.seeder_active_turrets)) {
       var_5 = common_scripts\utility::array_combine(var_5, level.seeder_active_turrets);
+    }
   } else
     var_5 = var_3;
 
@@ -400,8 +432,9 @@ get_alien_targets_in_fov(var_0, var_1, var_2, var_3) {
     if(isDefined(var_7.agent_type) && (var_7.agent_type == "kraken" || var_7.agent_type == "kraken_tentacle")) {
       continue;
     }
-    if(within_fov_set_dot(var_0, var_1, var_7, level.cosine[var_2]))
+    if(within_fov_set_dot(var_0, var_1, var_7, level.cosine[var_2])) {
       var_4[var_4.size] = var_7;
+    }
   }
 
   return var_4;
@@ -421,8 +454,9 @@ manage_bullet_trace_queue(var_0) {
     }
 
     if(self.trace_available.size > 0) {
-      while(!isDefined(self.trace_available[0]))
+      while(!isDefined(self.trace_available[0])) {
         self.trace_available = common_scripts\utility::array_remove(self.trace_available, self.trace_available[0]);
+      }
 
       self.trace_available[0] notify("my_turn_to_trace");
       self.trace_available = common_scripts\utility::array_remove(self.trace_available, self.trace_available[0]);
@@ -435,27 +469,32 @@ manage_bullet_trace_queue(var_0) {
 }
 
 get_alien_origin(var_0) {
-  if(isalive(var_0) && isDefined(var_0.alien_type) && (var_0.alien_type == "seeder" || var_0.alien_type == "elite"))
+  if(isalive(var_0) && isDefined(var_0.alien_type) && (var_0.alien_type == "seeder" || var_0.alien_type == "elite")) {
     var_1 = var_0 gettagorigin("TAG_ORIGIN");
+  }
   else if(isDefined(var_0.alien_type) && var_0.alien_type == "seeder_spore") {
-    if(!isDefined(var_0.coll_model))
+    if(!isDefined(var_0.coll_model)) {
       return undefined;
+    }
 
     var_1 = var_0 gettagorigin("J_Spore_46");
     var_0 = var_0.coll_model;
   } else if(isalive(var_0) && isDefined(var_0.alien_type) && var_0.alien_type == "ancestor")
     var_1 = var_0.origin + (0, 0, 110);
-  else if(isalive(var_0) && isDefined(var_0.model) && maps\mp\alien\_utility::has_tag(var_0.model, "J_SpineUpper"))
+  else if(isalive(var_0) && isDefined(var_0.model) && maps\mp\alien\_utility::has_tag(var_0.model, "J_SpineUpper")) {
     var_1 = var_0 gettagorigin("J_SpineUpper");
-  else
+  }
+  else {
     var_1 = var_0.origin + (0, 0, 10);
+  }
 
   return var_1;
 }
 
 alien_is_on_drill() {
-  if(isDefined(self.melee_type) && self.melee_type == "synch" && (isDefined(self.synch_anim_state) && issubstr(self.synch_anim_state, "attack_drill")))
+  if(isDefined(self.melee_type) && self.melee_type == "synch" && (isDefined(self.synch_anim_state) && issubstr(self.synch_anim_state, "attack_drill"))) {
     return 1;
+  }
 
   return 0;
 }
@@ -466,8 +505,9 @@ alien_maaws_initial_projectile_death_fx() {
 
 is_in_array(var_0, var_1) {
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(var_0[var_2] == var_1)
+    if(var_0[var_2] == var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -489,10 +529,12 @@ canceluse_dpad_maaws(var_0, var_1) {
 }
 
 player_not_carrying_drill_or_cortex() {
-  if(!isDefined(level.drill_carrier) || isDefined(level.drill_carrier) && self != level.drill_carrier)
+  if(!isDefined(level.drill_carrier) || isDefined(level.drill_carrier) && self != level.drill_carrier) {
     return 1;
-  else if(!isDefined(level.cortex_carrier) || isDefined(level.cortex_carrier) && self != level.cortex_carrier)
+  }
+  else if(!isDefined(level.cortex_carrier) || isDefined(level.cortex_carrier) && self != level.cortex_carrier) {
     return 1;
+  }
 
   return 0;
 }

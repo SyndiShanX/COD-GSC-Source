@@ -44,8 +44,9 @@ monitorempgrenade() {
     assert(isDefined(self.team));
 
     if(level.teambased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team && attacker != self) {
-      if(level.friendlyfire == 0)
+      if(level.friendlyfire == 0) {
         continue;
+      }
       else if(level.friendlyfire == 1) {
         hurtattacker = 0;
         hurtvictim = 1;
@@ -58,11 +59,13 @@ monitorempgrenade() {
       }
     }
 
-    if(hurtvictim && isDefined(self))
+    if(hurtvictim && isDefined(self)) {
       self thread applyemp(attacker);
+    }
 
-    if(hurtattacker && isDefined(attacker))
+    if(hurtattacker && isDefined(attacker)) {
       attacker thread applyemp(attacker);
+    }
   }
 }
 
@@ -77,10 +80,12 @@ applyemp(attacker) {
     if(isDefined(self.empendtime)) {
       emp_time_left_ms = self.empendtime - gettime();
 
-      if(emp_time_left_ms > 1000)
+      if(emp_time_left_ms > 1000) {
         self.empduration = emp_time_left_ms / 1000;
-      else
+      }
+      else {
         self.empduration = 1;
+      }
     } else
       self.empduration = 1;
   } else
@@ -134,8 +139,9 @@ watchempexplosion(owner, weaponname) {
   self waittill("explode", origin, surface);
   ents = getdamageableentarray(origin, 512);
 
-  foreach(ent in ents)
+  foreach(ent in ents) {
   ent dodamage(1, origin, owner, owner, "none", "MOD_GRENADE_SPLASH", 0, weaponname);
+  }
 }
 
 watchempgrenadeshutdown() {

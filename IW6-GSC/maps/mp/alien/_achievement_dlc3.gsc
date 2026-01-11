@@ -29,8 +29,9 @@ init_achievement_weapon_list() {
       var_7 = maps\mp\alien\_pillage::get_possible_attachments_by_weaponclass(var_6, var_5);
 
       foreach(var_9 in var_7) {
-        if(var_9 == "alienmuzzlebrake" || var_9 == "alienmuzzlebrakesg" || var_9 == "alienmuzzlebrakesn")
+        if(var_9 == "alienmuzzlebrake" || var_9 == "alienmuzzlebrakesg" || var_9 == "alienmuzzlebrakesn") {
           var_0[var_5] = 0;
+        }
       }
     }
   }
@@ -46,13 +47,15 @@ update_alien_kill_achievements_dlc3(var_0, var_1, var_2, var_3, var_4, var_5, va
   var_10 = isDefined(var_1) && isplayer(var_1);
 
   if(var_10 && isDefined(self.alien_type) && self.alien_type == "gargoyle") {
-    if(isDefined(var_4) && (var_4 == "alienvanguard_projectile_mp" || var_4 == "alienvanguard_projectile_mini_mp"))
+    if(isDefined(var_4) && (var_4 == "alienvanguard_projectile_mp" || var_4 == "alienvanguard_projectile_mini_mp")) {
       var_1 maps\mp\alien\_achievement::update_achievement("KILL_GARG_WITH_VANGUARD", 1);
+    }
   }
 
   if(var_10) {
-    if(!isDefined(var_1.pers["kill_tracker"]))
+    if(!isDefined(var_1.pers["kill_tracker"])) {
       var_1 init_achievement_weapon_list();
+    }
 
     if(isDefined(var_4) && maps\mp\alien\_utility::weapon_has_alien_attachment(var_4, var_9, var_1) && var_3 != "MOD_MELEE") {
       var_11 = getweaponbasename(var_4);
@@ -66,8 +69,9 @@ update_alien_kill_achievements_dlc3(var_0, var_1, var_2, var_3, var_4, var_5, va
         }
       }
 
-      if(var_12)
+      if(var_12) {
         var_1 maps\mp\alien\_achievement::update_achievement("LIKE_A_GLOVE", 1);
+      }
     }
   }
 }
@@ -105,8 +109,9 @@ check_escape_all_classes() {
 
   self setcoopplayerdatareservedint("dlc_3_escape_flags", var_1);
 
-  if(var_1 == 15)
+  if(var_1 == 15) {
     maps\mp\alien\_achievement::update_achievement("AWAKENING_4_CLASS_ESCAPE", 1);
+  }
 }
 
 update_progression_achievements(var_0, var_1) {

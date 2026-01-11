@@ -79,24 +79,27 @@ space_sprinting_adjustments() {
   for(;;) {
     maps\loki_util::jkuprint("not sprinting");
 
-    while(!self issprinting())
+    while(!self issprinting()) {
       common_scripts\utility::waitframe();
+    }
 
     maps\loki_util::jkuprint("sprinting");
     earthquake(0.05, 1, level.player.origin, 200);
     var_4 = maps\loki_util::create_rumble_ent(925, "blaa", 1.5);
     var_4 playrumbleonentity("light_2s");
 
-    while(self issprinting())
+    while(self issprinting()) {
       common_scripts\utility::waitframe();
+    }
 
     if(!self adsbuttonpressed()) {
       maps\loki_util::jkuprint("lerp out no ads");
       continue;
     }
 
-    while(self adsbuttonpressed())
+    while(self adsbuttonpressed()) {
       common_scripts\utility::waitframe();
+    }
 
     maps\loki_util::jkuprint("fov post ads");
     setsaveddvar("cg_fov", var_0);
@@ -112,8 +115,9 @@ player_helmet(var_0, var_1) {
   }
   var_2 = "halo_overlay_scuba";
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
+  }
 
   self.hud_scubamask = maps\_hud_util::create_client_overlay(var_2, 1, self);
   self.hud_scubamask.foreground = 0;
@@ -122,8 +126,9 @@ player_helmet(var_0, var_1) {
   self.hud_scubamask_model setModel("viewmodel_us_space_helmet");
   self.hud_scubamask_model linktoplayerview(self, "tag_origin", (0, 0, 0), (0, 90, -4), 1);
 
-  if(getdvarint("demo_mode"))
+  if(getdvarint("demo_mode")) {
     self.hud_scubamask_model delete();
+  }
 }
 
 player_helmet_disable(var_0) {
@@ -229,8 +234,9 @@ mission_objectives() {
       common_scripts\utility::flag_wait("infil_done");
       wait 6.0;
     case "combat_one":
-      if(level.start_point == "combat_one")
+      if(level.start_point == "combat_one") {
         objective_add(maps\_utility::obj("obj_land"), "current", &"LOKI_OBJ_LAND");
+      }
 
       objective_add(maps\_utility::obj("obj_locate_entrance"), "current", &"LOKI_OBJ_LOCATE_ENTRANCE");
       var_0 = getent("combat_one_trig_wave3", "targetname");
@@ -394,15 +400,17 @@ loki_intro_lod_hide() {
 loki_control_room_boundaries() {
   var_0 = getEntArray("control_room_boundary_collision", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 notsolid();
+  }
 }
 
 loki_earth_control(var_0) {
   var_1 = getent("earth_model", "targetname");
 
-  if(!isDefined(level.earth_origin_start))
+  if(!isDefined(level.earth_origin_start)) {
     level.earth_origin_start = var_1.origin;
+  }
 
   switch (var_0) {
     case "hidden":

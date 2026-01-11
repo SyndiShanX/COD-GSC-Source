@@ -23,10 +23,12 @@ opticsthermal_think() {
     var_1 = var_1 | self isusingturret();
     var_1 = var_1 | self.orbitalthermalmode;
 
-    if(var_1)
+    if(var_1) {
       opticsthermal_blur_off(self);
-    else
+    }
+    else {
       opticsthermal_blur(self, 0.05);
+    }
 
     wait 0.05;
   }

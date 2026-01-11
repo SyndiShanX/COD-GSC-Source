@@ -68,8 +68,9 @@ enable_limp(var_0, var_1) {
     maps\_utility::ent_flag_init("collapse");
   }
 
-  if(!isDefined(level.player_limp))
+  if(!isDefined(level.player_limp)) {
     init_default_limp();
+  }
 
   self.limp = 1;
   self.sprinting = undefined;
@@ -79,15 +80,17 @@ enable_limp(var_0, var_1) {
   create_ground_ref_ent();
   level.originalvisionset = self.vision_set_transition_ent.vision_set;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 75;
+  }
 
   maps\_utility::player_speed_percent(var_0, 0.05);
   self.player_speed = var_0;
   thread limp();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     thread fade_limp(var_1);
+  }
 }
 
 disable_limp(var_0, var_1) {
@@ -95,8 +98,9 @@ disable_limp(var_0, var_1) {
   self notify("stop_random_blur");
   self fadeoutshellshock();
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   if(isDefined(var_0)) {
     self playersetgroundreferenceent(undefined);
@@ -159,8 +163,9 @@ limp(var_0) {
     var_6 = var_5 / self.player_speed;
     var_7 = randomfloatrange(level.player_limp["pitch"]["min"], level.player_limp["pitch"]["max"]);
 
-    if(randomint(100) < 20)
+    if(randomint(100) < 20) {
       var_7 = var_7 * 1.5;
+    }
 
     var_8 = randomfloatrange(level.player_limp["roll"]["min"], level.player_limp["roll"]["max"]);
     var_9 = randomfloatrange(level.player_limp["yaw"]["min"], level.player_limp["yaw"]["max"]);
@@ -170,8 +175,9 @@ limp(var_0) {
     var_11 = randomfloatrange(0.15, 0.45);
     var_12 = randomfloatrange(0.65, 1.25);
 
-    if(self.vision_set_transition_ent.vision_set != "aftermath_pain")
+    if(self.vision_set_transition_ent.vision_set != "aftermath_pain") {
       var_2 = self.vision_set_transition_ent.vision_set;
+    }
 
     thread maps\_utility::vision_set_fog_changes("aftermath_pain", 3);
     thread stumble(var_10, var_11, var_12);
@@ -198,8 +204,9 @@ stumble(var_0, var_1, var_2, var_3) {
   self.ground_ref_ent rotateto(var_4, var_2, 0, var_2 / 2);
   self.ground_ref_ent waittill("rotatedone");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     self notify("recovered");
+  }
 }
 
 player_random_sway() {
@@ -267,17 +274,21 @@ player_heartbeat() {
 }
 
 set_player_hearbeat_rate(var_0) {
-  if(!isDefined(var_0) || isstring(var_0))
+  if(!isDefined(var_0) || isstring(var_0)) {
     level.player_heartbeat_rate = 0.75;
-  else
+  }
+  else {
     level.player_heartbeat_rate = var_0;
+  }
 }
 
 player_playing_hurt_sounds() {
-  if(level.player.health < 50)
+  if(level.player.health < 50) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 player_jump_punishment() {

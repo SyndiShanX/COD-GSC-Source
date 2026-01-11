@@ -35,8 +35,9 @@ checkforlevelprogressionchallenges() {
       var_4 = "ch_" + var_3 + "_paragon";
       var_5 = self.challengedata[var_4];
 
-      if(isDefined(var_5) && var_5 == 1)
+      if(isDefined(var_5) && var_5 == 1) {
         maps\mp\gametypes\_missions::processchallenge(var_4);
+      }
     }
   }
 }
@@ -45,22 +46,25 @@ onplayerconnect() {
   for(;;) {
     level waittill("connected", var_0);
 
-    if(!isDefined(var_0.pers["stats"]))
+    if(!isDefined(var_0.pers["stats"])) {
       var_0.pers["stats"] = [];
+    }
 
     var_0.stats = var_0.pers["stats"];
 
     if(!var_0.stats.size) {
-      foreach(var_3, var_2 in level.awards)
+      foreach(var_3, var_2 in level.awards) {
       var_0 maps\mp\_utility::initplayerstat(var_3, level.awards[var_3].defaultvalue);
+      }
     }
 
     var_0.recentawards[0] = "none";
     var_0.recentawards[1] = "none";
     var_0.recentawards[2] = "none";
 
-    if(!maps\mp\_utility::invirtuallobby())
+    if(!maps\mp\_utility::invirtuallobby()) {
       var_0 thread checkforlevelprogressionchallenges();
+    }
   }
 }
 
@@ -156,14 +160,17 @@ initstataward(var_0, var_1, var_2, var_3, var_4) {
   level.awards[var_0] = spawnStruct();
   level.awards[var_0].defaultvalue = var_1;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.awards[var_0].process = var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level.awards[var_0].var1 = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level.awards[var_0].var2 = var_4;
+  }
 }
 
 setpersonalbestifgreater(var_0) {
@@ -171,8 +178,9 @@ setpersonalbestifgreater(var_0) {
   var_2 = maps\mp\_utility::getplayerstat(var_0);
   var_2 = getformattedvalue(var_0, var_2);
 
-  if(var_1 == 0 || var_2 > var_1)
+  if(var_1 == 0 || var_2 > var_1) {
     self setplayerdata(common_scripts\utility::getstatsgroup_common(), "bests", var_0, var_2);
+  }
 }
 
 setpersonalbestiflower(var_0) {
@@ -180,16 +188,18 @@ setpersonalbestiflower(var_0) {
   var_2 = maps\mp\_utility::getplayerstat(var_0);
   var_2 = getformattedvalue(var_0, var_2);
 
-  if(var_1 == 0 || var_2 < var_1)
+  if(var_1 == 0 || var_2 < var_1) {
     self setplayerdata(common_scripts\utility::getstatsgroup_common(), "bests", var_0, var_2);
+  }
 }
 
 calculatekd(var_0) {
   var_1 = var_0 maps\mp\_utility::getplayerstat("kills");
   var_2 = var_0 maps\mp\_utility::getplayerstat("deaths");
 
-  if(var_2 == 0)
+  if(var_2 == 0) {
     var_2 = 1;
+  }
 
   var_0 maps\mp\_utility::setplayerstat("kdratio", var_1 / var_2);
 }
@@ -197,8 +207,9 @@ calculatekd(var_0) {
 gettotalscore(var_0) {
   var_1 = var_0.score;
 
-  if(!level.teambased)
+  if(!level.teambased) {
     var_1 = var_0.extrascore0;
+  }
 
   return var_1;
 }
@@ -269,8 +280,9 @@ giveaward(var_0) {
   var_7 = 0;
 
   for(var_8 = 0; var_8 < 3; var_8++) {
-    if(self.recentawards[var_8] == var_0)
+    if(self.recentawards[var_8] == var_0) {
       var_7 = 1;
+    }
   }
 
   var_9 = int(tablelookup("mp\awardTable.csv", 1, var_0, 0));
@@ -351,8 +363,10 @@ statvaluechanged(var_0) {
   var_1 = maps\mp\_utility::getplayerstat(var_0);
   var_2 = level.awards[var_0].defaultvalue;
 
-  if(var_1 == var_2)
+  if(var_1 == var_2) {
     return 0;
-  else
+  }
+  else {
     return 1;
+  }
 }

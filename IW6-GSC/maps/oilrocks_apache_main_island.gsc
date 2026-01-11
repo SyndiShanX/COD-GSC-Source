@@ -6,8 +6,9 @@
 catchup_function() {
   var_0 = ["apache_main_island_zpu"];
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   maps\_utility::array_delete(getEntArray(var_2, "targetname"));
+  }
 }
 
 start() {

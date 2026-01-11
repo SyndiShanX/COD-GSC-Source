@@ -44,8 +44,9 @@ skyway_train_ambience() {
   var_0[5] = "skyway_amb_08";
 
   if(isDefined(var_0)) {
-    foreach(var_2 in var_0)
+    foreach(var_2 in var_0) {
     maps\_utility::delaythread(0.1, maps\skyway_util::trig_watcher, var_2, ::play_ambient_sfx_int, ::play_ambient_sfx_ext);
+    }
   }
 }
 
@@ -68,8 +69,9 @@ sfx_setup_land_triggers() {
   sfx_skyway_land_sweetener_init("audio_train_sat_2_pt2", "audio_train_sat_2_reset");
   sfx_skyway_land_sweetener_init("audio_train_loco", "audio_train_loco_reset");
 
-  for(var_0 = 0; var_0 < level.sfx_land_sweetener_array.size; var_0++)
+  for(var_0 = 0; var_0 < level.sfx_land_sweetener_array.size; var_0++) {
     thread sfx_land_triggers_spawn(level.sfx_land_sweetener_array[var_0].trigger_land, level.sfx_land_sweetener_array[var_0].trigger_reset);
+  }
 }
 
 sfx_skyway_land_sweetener_init(var_0, var_1) {
@@ -99,32 +101,37 @@ play_rail_sfx() {
   level.train_rail_sfx_ents = [];
   var_0 = getEntArray("train_rail_sfx", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 playLoopSound("emt_skyway_train_rail");
+  }
 }
 
 play_wind_sfx() {
   level.train_wind01_sfx_ents = [];
   var_0 = getEntArray("sfx_wind_01", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 playLoopSound("emt_skyway_wind_01");
+  }
 
   level.train_wind02_sfx_ents = [];
   var_4 = getEntArray("sfx_wind_02", "targetname");
 
-  foreach(var_6 in var_4)
+  foreach(var_6 in var_4) {
   var_6 playLoopSound("emt_skyway_wind_02");
+  }
 }
 
 play_ambient_sfx_int() {
-  if(level.skyway_end_sequence == 0)
+  if(level.skyway_end_sequence == 0) {
     level.player setclienttriggeraudiozone(level.ambient_int, 2);
+  }
 }
 
 play_ambient_sfx_ext() {
-  if(level.skyway_end_sequence == 0)
+  if(level.skyway_end_sequence == 0) {
     level.player setclienttriggeraudiozone(level.ambient_ext, 0.5);
+  }
 }
 
 sfx_impact_train(var_0, var_1, var_2, var_3) {
@@ -133,26 +140,35 @@ sfx_impact_train(var_0, var_1, var_2, var_3) {
   wait(var_0);
 
   if(isDefined(var_3)) {
-    if(level.player.car == "train_sat_1" || level.player.car == "train_sat_2")
+    if(level.player.car == "train_sat_1" || level.player.car == "train_sat_2") {
       level.player playSound("scn_skyway_train_shake_lg");
-    else if(level.player.car == "train_hangar")
+    }
+    else if(level.player.car == "train_hangar") {
       level.player playSound("scn_skyway_train_shake_hanger_lg");
-    else
+    }
+    else {
       level.player playSound("scn_skyway_train_shake_roof_lg");
+    }
   } else if(var_1 > 0.66) {
-    if(level.player.car == "train_sat_1" || level.player.car == "train_sat_2")
+    if(level.player.car == "train_sat_1" || level.player.car == "train_sat_2") {
       level.player playSound("scn_skyway_train_shake_lg");
-    else if(level.player.car == "train_hangar")
+    }
+    else if(level.player.car == "train_hangar") {
       level.player playSound("scn_skyway_train_shake_hanger_lg");
-    else
+    }
+    else {
       level.player playSound("scn_skyway_train_shake_roof_lg");
+    }
   } else if(var_1 > 0.13) {
-    if(level.player.car == "train_sat_1" || level.player.car == "train_sat_2")
+    if(level.player.car == "train_sat_1" || level.player.car == "train_sat_2") {
       level.player playSound("scn_skyway_train_shake_med");
-    else if(level.player.car == "train_hangar")
+    }
+    else if(level.player.car == "train_hangar") {
       level.player playSound("scn_skyway_train_shake_hanger_med");
-    else
+    }
+    else {
       level.player playSound("scn_skyway_train_shake_roof_med");
+    }
   } else {}
 }
 

@@ -112,13 +112,15 @@ playerHealthRegen() {
       }
       if(veryHurt) {
         newHealth = ratio;
-        if(gettime() > hurtTime + 3000)
+        if(gettime() > hurtTime + 3000) {
           newHealth += regenRate;
+        }
       } else
         newHealth = 1;
       if(newHealth >= 1.0) {
-        if(veryHurt)
+        if(veryHurt) {
           self maps\mp\gametypes\_missions::healthRegenerated();
+        }
         newHealth = 1.0;
       }
       if(newHealth <= 0) {
@@ -148,8 +150,9 @@ decayPlayerDamages(decay) {
       continue;
     }
     self.attackerDamage[i] -= decay;
-    if(self.attackerDamage[i] < 0)
+    if(self.attackerDamage[i] < 0) {
       self.attackerDamage[i] = 0;
+    }
   }
 }
 

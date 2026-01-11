@@ -634,8 +634,9 @@ set_path_wait_points(lineOrLoop, identifier, groupNum, partNum) {
 }
 
 wait_for_signals(signalArray, identifier, loop) {
-  if(!isDefined(loop))
+  if(!isDefined(loop)) {
     loop = false;
+  }
   check_array = [];
   if(isDefined(signalArray)) {
     for(i = 0; i < signalArray.size; i++) {

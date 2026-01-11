@@ -57,13 +57,15 @@ friendly_outline(localclientnum, set, newent) {
 
 set_drone_damage_low(localclientnum, set, newent) {
   if(set) {
-    if(isDefined(self.drone_damage_fx_low))
+    if(isDefined(self.drone_damage_fx_low)) {
       stopfx(localclientnum, self.drone_damage_fx_low);
+    }
 
     self.drone_damage_fx_low = playFXOnTag(localclientnum, level._effect["fx_drone_damage_low"], self, "origin_animate_jnt");
   } else {
-    if(isDefined(self.drone_damage_fx_low))
+    if(isDefined(self.drone_damage_fx_low)) {
       stopfx(localclientnum, self.drone_damage_fx_low);
+    }
 
     self.drone_damage_fx_low = undefined;
   }

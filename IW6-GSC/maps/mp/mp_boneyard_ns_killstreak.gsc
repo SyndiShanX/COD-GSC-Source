@@ -103,15 +103,17 @@ watch_for_air_drop_death(dropCrate) {
 }
 
 boneyard_killstreak_bot_use() {
-  if(isDefined(level.ks_vertical.player) && level.ks_vertical.player IsTouching(level.ks_vertical.dam))
+  if(isDefined(level.ks_vertical.player) && level.ks_vertical.player IsTouching(level.ks_vertical.dam)) {
     return false;
+  }
 
   return flag("boneyard_killstreak_can_kill");
 }
 
 boneyard_killstreak_enable(WEIGHT) {
-  if(isDefined(game["player_holding_level_killstreak"]) && IsAlive(game["player_holding_level_killstreak"]))
+  if(isDefined(game["player_holding_level_killstreak"]) && IsAlive(game["player_holding_level_killstreak"])) {
     return false;
+  }
 
   maps\mp\killstreaks\_airdrop::changeCrateWeight("airdrop_assault", "f1_engine_fire", WEIGHT);
 }
@@ -214,10 +216,12 @@ boneyard_killstreak_ui_watcher(rocket, loop_time) {
       rocket.ui_state = my_state;
       Objective_Icon(rocket.ui_elem, rocket.ui_icon[my_state]);
 
-      if(my_state > 0)
+      if(my_state > 0) {
         flag_set("boneyard_killstreak_can_kill");
-      else
+      }
+      else {
         flag_clear("boneyard_killstreak_can_kill");
+      }
     }
 
     wait(loop_time);
@@ -249,8 +253,9 @@ ks_vertical_fire() {
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
     attacker = level.ks_vertical.player;
-    if(!isDefined(level.ks_vertical.player) || !IsPlayer(level.ks_vertical.player))
+    if(!isDefined(level.ks_vertical.player) || !IsPlayer(level.ks_vertical.player)) {
       attacker = undefined;
+    }
 
     thread damage_characters(level.ks_vertical, attacker, 90);
     thread damage_targets(level.ks_vertical, attacker, level.remote_uav, 150);
@@ -262,8 +267,9 @@ ks_vertical_fire() {
     thread damage_targets(level.ks_vertical, attacker, level.deployable_box["deployable_vest"], 150);
     thread damage_targets(level.ks_vertical, attacker, level.deployable_box["deployable_ammo"], 150);
 
-    foreach(org in level.ks_vertical.destructibles)
+    foreach(org in level.ks_vertical.destructibles) {
     RadiusDamage(org, 1, 45, 45, attacker);
+    }
   }
 
   if(!isDefined(level.exploder_queue) || !isDefined(level.exploder_queue[108]) || (GetTime() - level.exploder_queue[108].time) > 25000) {
@@ -309,21 +315,26 @@ damage_characters(rocket, attacker, damage) {
 
   foreach(victim in victims) {
     if(can_kill_character(rocket, victim)) {
-      if(IsPlayer(victim))
+      if(IsPlayer(victim)) {
         if(isDefined(rocket.player) && victim == rocket.player)
+      }
           victim maps\mp\gametypes\_damage::finishPlayerDamageWrapper(rocket.inflictor, attacker, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0, 0);
-        else
-
+        else {
           victim DoDamage(damage, rocket.inflictor.origin, attacker, rocket.inflictor, "MOD_EXPLOSIVE");
-      else if(isDefined(victim.owner) && victim.owner == rocket.player)
+        }
+      else if(isDefined(victim.owner) && victim.owner == rocket.player) {
         victim maps\mp\agents\_agents::on_agent_player_damaged(undefined, undefined, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
-      else
+      }
+      else {
         victim maps\mp\agents\_agents::on_agent_player_damaged(rocket.inflictor, attacker, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
+      }
     } else if(isDefined(victim) && isReallyAlive(victim)) {
-      if(IsPlayer(victim))
+      if(IsPlayer(victim)) {
         victim maps\mp\gametypes\_damage::Callback_PlayerDamage(undefined, undefined, 1, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
-      else
+      }
+      else {
         victim maps\mp\agents\_agents::on_agent_player_damaged(undefined, undefined, 1, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
+      }
     }
 
     wait(0.05);
@@ -332,18 +343,22 @@ damage_characters(rocket, attacker, damage) {
 }
 
 can_kill_character(rocket, victim) {
-  if(!isDefined(victim) || !isReallyAlive(victim))
+  if(!isDefined(victim) || !isReallyAlive(victim)) {
     return false;
+  }
 
   if(level.teambased) {
-    if(isDefined(rocket.player) && victim == rocket.player)
+    if(isDefined(rocket.player) && victim == rocket.player) {
       return true;
+    }
 
-    else if(isDefined(rocket.player) && isDefined(victim.owner) && victim.owner == rocket.player)
+    else if(isDefined(rocket.player) && isDefined(victim.owner) && victim.owner == rocket.player) {
       return true;
+    }
 
-    else if(isDefined(rocket.team) && victim.team == rocket.team)
+    else if(isDefined(rocket.team) && victim.team == rocket.team) {
       return false;
+    }
   }
 
   return true;
@@ -365,8 +380,9 @@ damage_targets(rocket, attacker, array_targets, damage) {
     if(!isDefined(target)) {
       continue;
     }
-    if(isDefined(target.owner) && target.owner == attacker)
+    if(isDefined(target.owner) && target.owner == attacker) {
       target notify("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
+    }
 
     else if(level.teamBased && isDefined(rocket.team) && isDefined(target.team) && target.team == rocket.team) {
       continue;
@@ -397,10 +413,12 @@ ks_vertical_warning_lights() {
   while(flag("boneyard_killstreak_active") || flag("boneyard_killstreak_endgame")) {
     if(level.teamBased && isDefined(level.ks_vertical.team)) {
       foreach(player in level.players) {
-        if(player.pers["team"] == level.ks_vertical.team)
+        if(player.pers["team"] == level.ks_vertical.team) {
           ActivateClientExploder(19, player);
-        else
+        }
+        else {
           ActivateClientExploder(18, player);
+        }
       }
     } else {
       maps\mp\mp_boneyard_ns::mp_exploder(18);

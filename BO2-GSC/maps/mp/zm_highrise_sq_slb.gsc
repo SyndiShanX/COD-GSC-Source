@@ -43,8 +43,9 @@ snipe_balls_wait() {
     is_complete = 1;
 
     foreach(m_ball in a_balls) {
-      if(isDefined(m_ball))
+      if(isDefined(m_ball)) {
         is_complete = 0;
+      }
     }
   }
 
@@ -69,8 +70,9 @@ snipe_balls_watch_ball() {
       clientnotify(str_noteworthy);
       m_ball = getent("sq_sliquify_r", "script_noteworthy");
 
-      if(str_noteworthy == "m_drg_tail")
+      if(str_noteworthy == "m_drg_tail") {
         m_ball = getent("sq_sliquify_m", "script_noteworthy");
+      }
 
       playFX(level._effect["sidequest_flash"], m_ball.origin);
       m_ball show();

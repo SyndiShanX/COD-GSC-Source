@@ -40,17 +40,20 @@ chugabud_laststand() {
   self maps\mp\zombies\_zm_chugabud::chugabud_fake_death();
   wait 3;
 
-  if(isDefined(self.insta_killed) && self.insta_killed || isDefined(self.disable_chugabud_corpse))
+  if(isDefined(self.insta_killed) && self.insta_killed || isDefined(self.disable_chugabud_corpse)) {
     create_corpse = 0;
-  else
+  }
+  else {
     create_corpse = 1;
+  }
 
   if(create_corpse == 1) {
     if(isDefined(level._chugabug_reject_corpse_override_func)) {
       reject_corpse = self[[level._chugabug_reject_corpse_override_func]](self.origin);
 
-      if(reject_corpse)
+      if(reject_corpse) {
         create_corpse = 0;
+      }
     }
   }
 
@@ -61,8 +64,9 @@ chugabud_laststand() {
     self.e_chugabud_corpse = corpse;
     corpse thread chugabud_corpse_cleanup_on_spectator(self);
 
-    if(isDefined(level.whos_who_client_setup))
+    if(isDefined(level.whos_who_client_setup)) {
       corpse setclientfield("clientfield_whos_who_clone_glow_shader", 1);
+    }
   }
 
   self chugabud_fake_revive();
@@ -80,8 +84,9 @@ chugabud_laststand() {
   self thread chugabud_handle_multiple_instances(corpse);
   corpse waittill("player_revived", e_reviver);
 
-  if(isDefined(e_reviver) && e_reviver == self)
+  if(isDefined(e_reviver) && e_reviver == self) {
     self notify("whos_who_self_revive");
+  }
 
   self perk_abort_drinking(0.1);
   self maps\mp\zombies\_zm_perks::perk_set_max_health_if_jugg("health_reboot", 1, 0);
@@ -100,8 +105,9 @@ chugabud_laststand() {
 }
 
 chugabud_laststand_cleanup(corpse, str_notify) {
-  if(isDefined(str_notify))
+  if(isDefined(str_notify)) {
     self waittill(str_notify);
+  }
 
   self chugabud_give_loadout();
   self chugabud_corpse_cleanup(corpse, 1);
@@ -114,8 +120,9 @@ chugabud_bleed_timeout(delay, corpse) {
   wait(delay);
 
   if(isDefined(corpse.revivetrigger)) {
-    while(corpse.revivetrigger.beingrevived)
+    while(corpse.revivetrigger.beingrevived) {
       wait 0.01;
+    }
   }
 
   if(isDefined(self.loadout.perks) && flag("solo_game")) {
@@ -206,14 +213,16 @@ chugabud_save_loadout() {
   foreach(index, weapon in primaries) {
     self.loadout.weapons[index] = maps\mp\zombies\_zm_weapons::get_player_weapondata(self, weapon);
 
-    if(weapon == currentweapon || self.loadout.weapons[index]["alt_name"] == currentweapon)
+    if(weapon == currentweapon || self.loadout.weapons[index]["alt_name"] == currentweapon) {
       self.loadout.current_weapon = index;
+    }
   }
 
   self.loadout.equipment = self get_player_equipment();
 
-  if(isDefined(self.loadout.equipment))
+  if(isDefined(self.loadout.equipment)) {
     self equipment_take(self.loadout.equipment);
+  }
 
   self.loadout save_weapons_for_chugabud(self);
 
@@ -225,8 +234,9 @@ chugabud_save_loadout() {
   self.loadout.perks = chugabud_save_perks(self);
   self chugabud_save_grenades();
 
-  if(maps\mp\zombies\_zm_weap_cymbal_monkey::cymbal_monkey_exists())
+  if(maps\mp\zombies\_zm_weap_cymbal_monkey::cymbal_monkey_exists()) {
     self.loadout.zombie_cymbal_monkey_count = self getweaponammoclip("cymbal_monkey_zm");
+  }
 }
 
 chugabud_save_grenades() {
@@ -250,8 +260,9 @@ chugabud_give_loadout() {
   primaries = self getweaponslistprimaries();
 
   if(loadout.weapons.size > 1 || primaries.size > 1) {
-    foreach(weapon in primaries)
+    foreach(weapon in primaries) {
     self takeweapon(weapon);
+    }
   }
 
   for(i = 0; i < loadout.weapons.size; i++) {
@@ -264,8 +275,9 @@ chugabud_give_loadout() {
     self maps\mp\zombies\_zm_weapons::weapondata_give(loadout.weapons[i]);
   }
 
-  if(loadout.current_weapon >= 0 && isDefined(loadout.weapons[loadout.current_weapon]["name"]))
+  if(loadout.current_weapon >= 0 && isDefined(loadout.weapons[loadout.current_weapon]["name"])) {
     self switchtoweapon(loadout.weapons[loadout.current_weapon]["name"]);
+  }
 
   self giveweapon("knife_zm");
   self maps\mp\zombies\_zm_equipment::equipment_give(self.loadout.equipment);
@@ -287,8 +299,9 @@ chugabud_give_loadout() {
       if(self hasperk(loadout.perks[i])) {
         continue;
       }
-      if(loadout.perks[i] == "specialty_quickrevive" && flag("solo_game"))
+      if(loadout.perks[i] == "specialty_quickrevive" && flag("solo_game")) {
         level.solo_game_free_player_quickrevive = 1;
+      }
 
       if(loadout.perks[i] == "specialty_finalstand") {
         continue;
@@ -349,12 +362,14 @@ chugabud_fake_revive() {
   playFX(level._effect["chugabud_revive_fx"], self.origin);
   spawnpoint = chugabud_get_spawnpoint();
 
-  if(isDefined(level._chugabud_post_respawn_override_func))
+  if(isDefined(level._chugabud_post_respawn_override_func)) {
     self[[level._chugabud_post_respawn_override_func]](spawnpoint.origin);
+  }
 
   if(isDefined(level.chugabud_force_corpse_position)) {
-    if(isDefined(self.e_chugabud_corpse))
+    if(isDefined(self.e_chugabud_corpse)) {
       self.e_chugabud_corpse forceteleport(level.chugabud_force_corpse_position);
+    }
 
     level.chugabud_force_corpse_position = undefined;
   }
@@ -388,28 +403,33 @@ chugabud_fake_revive() {
 chugabud_get_spawnpoint() {
   spawnpoint = undefined;
 
-  if(get_chugabug_spawn_point_from_nodes(self.origin, 500, 700, 64, 1))
+  if(get_chugabug_spawn_point_from_nodes(self.origin, 500, 700, 64, 1)) {
     spawnpoint = level.chugabud_spawn_struct;
-
-  if(!isDefined(spawnpoint)) {
-    if(get_chugabug_spawn_point_from_nodes(self.origin, 100, 400, 64, 1))
-      spawnpoint = level.chugabud_spawn_struct;
   }
 
   if(!isDefined(spawnpoint)) {
-    if(get_chugabug_spawn_point_from_nodes(self.origin, 50, 400, 256, 0))
+    if(get_chugabug_spawn_point_from_nodes(self.origin, 100, 400, 64, 1)) {
       spawnpoint = level.chugabud_spawn_struct;
+    }
   }
 
-  if(!isDefined(spawnpoint))
+  if(!isDefined(spawnpoint)) {
+    if(get_chugabug_spawn_point_from_nodes(self.origin, 50, 400, 256, 0)) {
+      spawnpoint = level.chugabud_spawn_struct;
+    }
+  }
+
+  if(!isDefined(spawnpoint)) {
     spawnpoint = maps\mp\zombies\_zm::check_for_valid_spawn_near_team(self, 1);
+  }
 
   if(!isDefined(spawnpoint)) {
     match_string = "";
     location = level.scr_zm_map_start_location;
 
-    if((location == "default" || location == "") && isDefined(level.default_start_location))
+    if((location == "default" || location == "") && isDefined(level.default_start_location)) {
       location = level.default_start_location;
+    }
 
     match_string = level.scr_zm_ui_gametype + "_" + location;
     spawnpoints = [];
@@ -421,15 +441,17 @@ chugabud_get_spawnpoint() {
           tokens = strtok(struct.script_string, " ");
 
           foreach(token in tokens) {
-            if(token == match_string)
+            if(token == match_string) {
               spawnpoints[spawnpoints.size] = struct;
+            }
           }
         }
       }
     }
 
-    if(!isDefined(spawnpoints) || spawnpoints.size == 0)
+    if(!isDefined(spawnpoints) || spawnpoints.size == 0) {
       spawnpoints = getstructarray("initial_spawn_points", "targetname");
+    }
 
     assert(isDefined(spawnpoints), "Could not find initial spawn points!");
     spawnpoint = maps\mp\zombies\_zm::getfreespawnpoint(spawnpoints, self);
@@ -439,8 +461,9 @@ chugabud_get_spawnpoint() {
 }
 
 get_chugabug_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_height, ignore_targetted_nodes) {
-  if(!isDefined(level.chugabud_spawn_struct))
+  if(!isDefined(level.chugabud_spawn_struct)) {
     level.chugabud_spawn_struct = spawnStruct();
+  }
 
   found_node = undefined;
   a_nodes = getnodesinradiussorted(v_origin, max_radius, min_radius, max_height, "pathnodes");
@@ -453,8 +476,9 @@ get_chugabug_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_height
       n_node = a_nodes[i];
 
       if(ignore_targetted_nodes == 1) {
-        if(isDefined(n_node.target))
+        if(isDefined(n_node.target)) {
           continue;
+        }
       }
 
       if(!positionwouldtelefrag(n_node.origin)) {
@@ -466,8 +490,9 @@ get_chugabug_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_height
           if(trace["fraction"] < 1) {
             override_abort = 0;
 
-            if(isDefined(level._chugabud_reject_node_override_func))
+            if(isDefined(level._chugabud_reject_node_override_func)) {
               override_abort = [
+            }
                 [level._chugabud_reject_node_override_func]
               ](v_origin, n_node);
 
@@ -502,18 +527,21 @@ force_player_respawn_position(forced_player_position) {
 save_weapons_for_chugabud(player) {
   self.chugabud_melee_weapons = [];
 
-  for(i = 0; i < level._melee_weapons.size; i++)
+  for(i = 0; i < level._melee_weapons.size; i++) {
     self save_weapon_for_chugabud(player, level._melee_weapons[i].weapon_name);
+  }
 }
 
 save_weapon_for_chugabud(player, weapon_name) {
-  if(player hasweapon(weapon_name))
+  if(player hasweapon(weapon_name)) {
     self.chugabud_melee_weapons[weapon_name] = 1;
+  }
 }
 
 restore_weapons_for_chugabud(player) {
-  for(i = 0; i < level._melee_weapons.size; i++)
+  for(i = 0; i < level._melee_weapons.size; i++) {
     self restore_weapon_for_chugabud(player, level._melee_weapons[i].weapon_name);
+  }
 
   self.chugabud_melee_weapons = undefined;
 }
@@ -532,8 +560,9 @@ restore_weapon_for_chugabud(player, weapon_name) {
 chugabud_save_perks(ent) {
   perk_array = ent get_perk_array(1);
 
-  foreach(perk in perk_array)
+  foreach(perk in perk_array) {
   ent unsetperk(perk);
+  }
 
   return perk_array;
 }
@@ -565,8 +594,9 @@ chugabud_hostmigration() {
     level waittill("host_migration_end");
     chugabuds = getEntArray("player_chugabud_model", "script_noteworthy");
 
-    foreach(model in chugabuds)
+    foreach(model in chugabuds) {
     playFXOnTag(level._effect["powerup_on"], model, "tag_origin");
+    }
   }
 }
 
@@ -574,8 +604,9 @@ player_revived_cleanup_chugabud_corpse() {
 }
 
 player_has_chugabud_corpse() {
-  if(isDefined(self.e_chugabud_corpse))
+  if(isDefined(self.e_chugabud_corpse)) {
     return true;
+  }
 
   return false;
 }
@@ -584,8 +615,9 @@ is_weapon_available_in_chugabud_corpse(weapon, player_to_check) {
   count = 0;
   upgradedweapon = weapon;
 
-  if(isDefined(level.zombie_weapons[weapon]) && isDefined(level.zombie_weapons[weapon].upgrade_name))
+  if(isDefined(level.zombie_weapons[weapon]) && isDefined(level.zombie_weapons[weapon].upgrade_name)) {
     upgradedweapon = level.zombie_weapons[weapon].upgrade_name;
+  }
 
   players = getplayers();
 
@@ -601,8 +633,9 @@ is_weapon_available_in_chugabud_corpse(weapon, player_to_check) {
           for(i = 0; i < player.loadout.weapons.size; i++) {
             chugabud_weapon = player.loadout.weapons[i];
 
-            if(isDefined(chugabud_weapon) && (chugabud_weapon["name"] == weapon || chugabud_weapon["name"] == upgradedweapon))
+            if(isDefined(chugabud_weapon) && (chugabud_weapon["name"] == weapon || chugabud_weapon["name"] == upgradedweapon)) {
               count++;
+            }
           }
         }
       }
@@ -658,11 +691,13 @@ chugabud_corpse_revive_icon(player) {
 activate_chugabud_effects_and_audio() {
   if(isDefined(level.whos_who_client_setup)) {
     if(!isDefined(self.whos_who_effects_active)) {
-      if(isDefined(level.chugabud_shellshock))
+      if(isDefined(level.chugabud_shellshock)) {
         self shellshock("whoswho", 60);
+      }
 
-      if(isDefined(level.vsmgr_prio_visionset_zm_whos_who))
+      if(isDefined(level.vsmgr_prio_visionset_zm_whos_who)) {
         maps\mp\_visionset_mgr::vsmgr_activate("visionset", "zm_whos_who", self);
+      }
 
       self setclientfieldtoplayer("clientfield_whos_who_audio", 1);
       self setclientfieldtoplayer("clientfield_whos_who_filter", 1);
@@ -677,11 +712,13 @@ deactivate_chugabud_effects_and_audio() {
 
   if(isDefined(level.whos_who_client_setup)) {
     if(isDefined(self.whos_who_effects_active) && self.whos_who_effects_active == 1) {
-      if(isDefined(level.chugabud_shellshock))
+      if(isDefined(level.chugabud_shellshock)) {
         self stopshellshock();
+      }
 
-      if(isDefined(level.vsmgr_prio_visionset_zm_whos_who))
+      if(isDefined(level.vsmgr_prio_visionset_zm_whos_who)) {
         maps\mp\_visionset_mgr::vsmgr_deactivate("visionset", "zm_whos_who", self);
+      }
 
       self setclientfieldtoplayer("clientfield_whos_who_audio", 0);
       self setclientfieldtoplayer("clientfield_whos_who_filter", 0);

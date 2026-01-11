@@ -7,8 +7,9 @@ init() {
   if(!isDefined(level.func_5056) || level.func_5056 == 0) {
     return;
   }
-  if(!isDefined(game["defcon"]))
+  if(!isDefined(game["defcon"])) {
     game["defcon"] = 4;
+  }
 
   setdvar("scr_defcon", game["defcon"]);
   level.func_5059[5] = 0;
@@ -84,8 +85,9 @@ func_12E87(var_00, var_01, var_02) {
   level.func_C2A7 = level.func_5057[var_00];
   setdvar("scr_defcon", game["defcon"]);
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_01 notify("changed_defcon");
+  }
 
   if(var_00 == var_03) {
     return;
@@ -97,8 +99,9 @@ func_12E87(var_00, var_01, var_02) {
 
   foreach(var_05 in level.players) {
     if(isalive(var_05)) {
-      if(isDefined(var_01))
+      if(isDefined(var_01)) {
         var_05 thread scripts\mp\hud_message::showsplash("changed_defcon", undefined, var_01);
+      }
     }
   }
 }

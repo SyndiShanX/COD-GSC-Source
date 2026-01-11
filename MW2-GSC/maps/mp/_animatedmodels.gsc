@@ -8,15 +8,17 @@
 main() {
   level.init_animatedmodels_dump = false;
 
-  if(!isDefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = []; // this is what the LD puts in their map
+  }
 
   // Do special MP anim precaching
   model_keys = GetArrayKeys(level.anim_prop_models);
   foreach(model_key in model_keys) {
     anim_keys = GetArrayKeys(level.anim_prop_models[model_key]);
-    foreach(anim_key in anim_keys)
+    foreach(anim_key in anim_keys) {
     PrecacheMpAnim(level.anim_prop_models[model_key][anim_key]);
+    }
     //PrecacheMpAnim( level.anim_prop_models[ "foliage_tree_palm_bushy_1" ][ "strong" ] );
   }
 
@@ -31,8 +33,9 @@ main() {
 
   // one or more of the models initialized by model_init() was not setup by the map
   // so print this helpful note so the designer can see how to add it ot their level
-  if(level.init_animatedmodels_dump)
+  if(level.init_animatedmodels_dump) {
     assertmsg("anims not cached for animated prop model, Repackage Zones and Rebuild Precache Script in Launcher:");
+  }
 
   array_thread(animated_models, ::animateModel);
 
@@ -40,8 +43,9 @@ main() {
 }
 
 model_init() {
-  if(!isDefined(level.anim_prop_models[self.model]))
+  if(!isDefined(level.anim_prop_models[self.model])) {
     level.init_animatedmodels_dump = true;
+  }
 }
 
 // TODO: When we have multiple animations, instead of choosing randomly, do round-robin to get an even spread

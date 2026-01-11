@@ -8,8 +8,10 @@ main() {
   level.tweakfile = 1;
   level.player = getEntArray("player", "classname")[0];
 
-  if(isusinghdr())
+  if(isusinghdr()) {
     maps\createart\village_assault_fog_hdr::main();
-  else
+  }
+  else {
     maps\createart\village_assault_fog::main();
+  }
 }

@@ -71,8 +71,9 @@ intro_setup() {
   level.laser_count = 0;
   common_scripts\utility::flag_wait("jungle_entrance");
 
-  if(!common_scripts\utility::flag("_stealth_spotted"))
+  if(!common_scripts\utility::flag("_stealth_spotted")) {
     maps\_utility::autosave_stealth();
+  }
 
   thread maps\jungle_ghosts_util::battle_chatter_controller_friendlies();
 }
@@ -80,8 +81,9 @@ intro_setup() {
 sunflare_toggle() {
   common_scripts\utility::exploder("sunflare");
 
-  while(level.player.origin[1] < 9330)
+  while(level.player.origin[1] < 9330) {
     wait 1;
+  }
 
   maps\_utility::stop_exploder("sunflare");
 }
@@ -151,8 +153,9 @@ dead_pilot_hang() {
 tree_delete() {
   var_0 = getEntArray("intro_trees", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 hill_fx() {
@@ -163,10 +166,12 @@ hill_fx() {
   maps\_utility::stop_exploder("wind");
   common_scripts\utility::exploder("nonwind");
 
-  if(level.ps3)
+  if(level.ps3) {
     common_scripts\utility::exploder("crash_site_fire_nonwind_ps3");
-  else
+  }
+  else {
     common_scripts\utility::exploder("crash_site_fire_nonwind");
+  }
 }
 
 jungle_moving_foliage_settings() {
@@ -233,8 +238,9 @@ parachute_waittill_player_cuts() {
 destroy_hint(var_0) {
   wait(var_0);
 
-  foreach(var_2 in level.cut_hint)
+  foreach(var_2 in level.cut_hint) {
   var_2 destroy();
+  }
 }
 
 draw_cut_hint() {
@@ -251,10 +257,12 @@ draw_cut_hint() {
   var_3 set_default_hud_stuff();
   var_3 settext(&"JUNGLE_GHOSTS_MELEE_HINT");
 
-  if(!level.console && !level.player usinggamepad())
+  if(!level.console && !level.player usinggamepad()) {
     var_3.fontscale = 2;
-  else
+  }
+  else {
     var_3.fontscale = 2 * var_2;
+  }
 
   var_4 = [];
   var_4["text"] = var_3;
@@ -287,8 +295,9 @@ pulse_cut_hint() {
 fade_in_cut_hint(var_0) {
   level.player endon("cut");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1.5;
+  }
 
   foreach(var_2 in level.cut_hint) {
     var_2 fadeovertime(var_0);
@@ -299,8 +308,9 @@ fade_in_cut_hint(var_0) {
 }
 
 fade_out_cut_hint(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1.5;
+  }
 
   foreach(var_2 in level.cut_hint) {
     var_2 fadeovertime(var_0);
@@ -422,8 +432,9 @@ stand_player_up() {
   level.player setbobrate(2.25);
   level.player disableinvulnerability();
 
-  while(level.player.origin[0] < -7900)
+  while(level.player.origin[0] < -7900) {
     common_scripts\utility::waitframe();
+  }
 
   level.player thread transition_stance_cover(6, 3, 2, 75);
   wait 1.5;
@@ -432,8 +443,9 @@ stand_player_up() {
   level.player setstance("crouch");
   level.player maps\_utility::play_sound_on_entity("scn_player_get_up_to_crouch");
 
-  while(level.player.origin[0] < -7510)
+  while(level.player.origin[0] < -7510) {
     common_scripts\utility::waitframe();
+  }
 
   level.player thread transition_stance_cover(6, 3, 2, 75);
   wait 1.5;
@@ -443,15 +455,17 @@ stand_player_up() {
   level.player setstance("stand");
   level.player maps\_utility::play_sound_on_entity("scn_player_get_up_to_stand");
 
-  while(level.player.origin[0] < -7346)
+  while(level.player.origin[0] < -7346) {
     common_scripts\utility::waitframe();
+  }
 
   level.player allowstand(1);
   level.player allowcrouch(1);
   level.player allowprone(1);
 
-  while(level.player.origin[0] < -7346)
+  while(level.player.origin[0] < -7346) {
     common_scripts\utility::waitframe();
+  }
 
   var_0 = ["p226_tactical+silencerpistol_sp+tactical_sp"];
   wait 0.25;
@@ -460,15 +474,17 @@ stand_player_up() {
   maps\jungle_ghosts_util::hud_on(1);
   wait 1;
 
-  while(level.player.origin[0] < -6877)
+  while(level.player.origin[0] < -6877) {
     common_scripts\utility::waitframe();
+  }
 
   common_scripts\utility::flag_set("intro_lines");
   level.player thread disable_tired(1);
   setsaveddvar("cg_footsteps", 1);
 
-  if(level.start_point == "parachute")
+  if(level.start_point == "parachute") {
     maps\_introscreen::introscreen(1);
+  }
 
   wait 3;
   level thread player_spotted_logic();
@@ -511,8 +527,9 @@ disable_tired(var_0, var_1) {
   self notify("stop_limp");
   self notify("stop_random_blur");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   if(isDefined(var_0)) {
     self playersetgroundreferenceent(undefined);
@@ -558,8 +575,9 @@ tired(var_0) {
     var_3 = var_2 / self.player_speed;
     var_4 = randomfloatrange(level.player_tired["pitch"]["min"], level.player_tired["pitch"]["max"]);
 
-    if(randomint(100) < 20)
+    if(randomint(100) < 20) {
       var_4 = var_4 * 1.5;
+    }
 
     var_5 = randomfloatrange(level.player_tired["roll"]["min"], level.player_tired["roll"]["max"]);
     var_6 = randomfloatrange(level.player_tired["yaw"]["min"], level.player_tired["yaw"]["max"]);
@@ -586,8 +604,9 @@ stumble(var_0, var_1, var_2, var_3) {
   self.ground_ref_ent rotateto(var_4, var_2, 0, var_2 / 2);
   self.ground_ref_ent waittill("rotatedone");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     self notify("recovered");
+  }
 }
 
 player_random_blur() {
@@ -630,10 +649,12 @@ player_hurt_sounds() {
 }
 
 player_playing_hurt_sounds() {
-  if(level.player.health < 50)
+  if(level.player.health < 50) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 adjust_angles_to_player(var_0) {
@@ -649,8 +670,9 @@ adjust_angles_to_player(var_0) {
 }
 
 assign_archetypes() {
-  foreach(var_1 in level.alpha)
+  foreach(var_1 in level.alpha) {
   var_1.animarchetype = "jungle_soldier";
+  }
 }
 
 setup_jungle_enemies() {
@@ -702,8 +724,9 @@ player_spotted_count() {
 
   thread delay_notify_alive();
 
-  if(!maps\_utility::is_in_array(level.stealth_player_aware_enemies, self))
+  if(!maps\_utility::is_in_array(level.stealth_player_aware_enemies, self)) {
     level.stealth_player_aware_enemies = common_scripts\utility::add_to_array(level.stealth_player_aware_enemies, self);
+  }
 
   self waittill("death");
   level.laser_count--;
@@ -713,8 +736,9 @@ player_spotted_count() {
 delay_notify_alive() {
   self endon("death");
 
-  if(maps\jungle_ghosts_util::isdefined_and_alive(self))
+  if(maps\jungle_ghosts_util::isdefined_and_alive(self)) {
     level notify("enemy_stealth_reaction");
+  }
 }
 
 player_spotted_logic() {
@@ -727,8 +751,9 @@ player_spotted_logic() {
     setsaveddvar("player_sprintSpeedScale", 1.4);
     common_scripts\utility::flag_waitopen("_stealth_spotted");
 
-    if(common_scripts\utility::flag("waterfall_approach"))
+    if(common_scripts\utility::flag("waterfall_approach")) {
       thread maps\jungle_ghosts_util::stop_music_jg(1);
+    }
   }
 }
 
@@ -749,13 +774,16 @@ jungle_enemy_logic(var_0, var_1) {
   maps\jungle_ghosts_util::enemy_weapons_force_use_silencer();
   self endon("death");
 
-  if(!common_scripts\utility::flag("second_distant_sat_launch"))
+  if(!common_scripts\utility::flag("second_distant_sat_launch")) {
     maps\_utility::set_moveplaybackrate(0.7);
-  else
+  }
+  else {
     maps\_utility::set_moveplaybackrate(1);
+  }
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     thread maps\_patrol::patrol();
+  }
 
   thread set_nearest_stealth_group();
   maps\_utility::disable_long_death();
@@ -768,14 +796,17 @@ jungle_enemy_logic(var_0, var_1) {
   thread maps\_utility::set_battlechatter(0);
   maps\_utility::ent_flag_init("stealth_kill");
 
-  if(!common_scripts\utility::flag("second_distant_sat_launch"))
+  if(!common_scripts\utility::flag("second_distant_sat_launch")) {
     thread maps\_patrol_anims_creepwalk::enable_creepwalk();
+  }
 
   if(isDefined(var_0)) {
-    if(var_0 == "zero")
+    if(var_0 == "zero") {
       self.grenadeammo = 0;
-    else
+    }
+    else {
       self.grenadeammo = var_0;
+    }
   }
 
   if(isDefined(var_1)) {
@@ -788,15 +819,17 @@ jungle_enemy_sfx() {
   self endon("death");
   var_0 = 1000000;
 
-  while(!isDefined(level.meeting_guys))
+  while(!isDefined(level.meeting_guys)) {
     wait 0.1;
+  }
 
   if(maps\_utility::is_in_array(level.meeting_guys, self)) {
     return;
   }
   if(isDefined(self.script_noteworthy)) {
-    if(self.script_noteworthy == "tall_grass_patroller" || self.script_noteworthy == "no_chatter")
+    if(self.script_noteworthy == "tall_grass_patroller" || self.script_noteworthy == "no_chatter") {
       return;
+    }
   }
 
   var_1 = ["jungleg_safr_salvageteametato", "jungleg_safr_lookslikeuhhzerosurvivors", "jungleg_safr_maintainsweepchutes", "jungleg_safr_standbyforrules", "jungleg_safr_team2reportingzero", "jungleg_safr_team3hasrecovered", "jungleg_safr_primarytargetrecoveredall"];
@@ -807,15 +840,17 @@ jungle_enemy_sfx() {
     var_3 = distancesquared(self.origin, level.player.origin);
 
     if(var_3 <= var_0) {
-      if(maps\jungle_ghosts_util::is_moving())
+      if(maps\jungle_ghosts_util::is_moving()) {
         play_foilage_sound_custom();
+      }
 
       var_4 = var_1[var_2];
       maps\_utility::play_sound_on_tag(var_4, undefined, 1);
       var_2++;
 
-      if(var_2 > var_1.size - 1)
+      if(var_2 > var_1.size - 1) {
         var_2 = 0;
+      }
 
       wait(randomintrange(5, 8));
     }
@@ -900,18 +935,21 @@ meeting_guys_vo(var_0) {
   var_3 = ["jungleg_saf1_noimsayinghe", "jungleg_saf4_howdoyoueven", "jungleg_saf1_itdoesntmatterwhat", "jungleg_saf4_weregonnaneedmore", "jungleg_saf2_lesscomplainingmore", "jungleg_saf4_myteamsonit"];
   var_4 = [var_1, var_2, var_3];
 
-  foreach(var_6 in var_0)
+  foreach(var_6 in var_0) {
   var_6 endon("stop_meeting_vo");
+  }
 
   for(;;) {
     foreach(var_13, var_9 in var_4) {
       foreach(var_11 in var_9) {
         var_6 = common_scripts\utility::random(var_0);
 
-        if(!maps\jungle_ghosts_util::isdefined_and_alive(var_6))
+        if(!maps\jungle_ghosts_util::isdefined_and_alive(var_6)) {
           return;
-        else
+        }
+        else {
           var_6 maps\_utility::play_sound_on_tag(var_11, undefined, 1);
+        }
       }
     }
 
@@ -950,12 +988,15 @@ stealth_anim_interupt_detection(var_0) {
 }
 
 get_my_meeting_group() {
-  if(maps\_utility::is_in_array(level.left_meeting_guys, self))
+  if(maps\_utility::is_in_array(level.left_meeting_guys, self)) {
     return level.left_meeting_guys;
-  else if(maps\_utility::is_in_array(level.right_meeting_guys, self))
+  }
+  else if(maps\_utility::is_in_array(level.right_meeting_guys, self)) {
     return level.right_meeting_guys;
-  else
+  }
+  else {
     return undefined;
+  }
 }
 
 hill_enemy_stealth_logic() {
@@ -994,8 +1035,9 @@ set_nearest_stealth_group() {
 
     if(isDefined(var_1)) {
       if(distance(var_1.origin, self.origin) < 600) {
-        if(isDefined(var_1.script_stealthgroup) && var_1.script_stealthgroup != self.script_stealthgroup)
+        if(isDefined(var_1.script_stealthgroup) && var_1.script_stealthgroup != self.script_stealthgroup) {
           self.script_stealthgroup = var_1.script_stealthgroup;
+        }
       } else if(self.script_stealthgroup != self.og_script_stealthgroup)
         self.script_stealthgroup = self.og_script_stealthgroup;
     }
@@ -1060,8 +1102,9 @@ setup_hill_enemies() {
   thread hill_chopper();
   common_scripts\utility::flag_wait("hill_pos_1");
 
-  if(!common_scripts\utility::flag("_stealth_spotted"))
+  if(!common_scripts\utility::flag("_stealth_spotted")) {
     maps\_utility::autosave_stealth();
+  }
 
   if(common_scripts\utility::flag("_stealth_spotted")) {
     level.hill_patrollers = maps\_utility::array_spawn_targetname("hill_patrollers", 1);
@@ -1122,16 +1165,18 @@ handle_enemies_behind_player() {
   var_0 = undefined;
 
   if(isDefined(level.jungle_enemies)) {
-    if(common_scripts\utility::flag("hill_pos_4"))
+    if(common_scripts\utility::flag("hill_pos_4")) {
       common_scripts\utility::array_thread(level.jungle_enemies, maps\jungle_ghosts_util::delete_if_player_cant_see_me);
+    }
     else {
       level.jungle_enemies = maps\_utility::array_removedead_or_dying(level.jungle_enemies);
 
       if(level.jungle_enemies.size > 2) {
         var_0 = common_scripts\utility::get_array_of_closest(level.player.origin, level.jungle_enemies);
 
-        for(var_1 = 2; var_1 < var_0.size; var_1++)
+        for(var_1 = 2; var_1 < var_0.size; var_1++) {
           var_0[var_1] maps\jungle_ghosts_util::delete_if_player_cant_see_me();
+        }
 
         var_0 = common_scripts\utility::array_removeundefined(var_0);
       } else if(level.jungle_enemies.size != 0)
@@ -1175,8 +1220,9 @@ hill_reenforcements() {
   send_hill_reenforcements_if_hot();
   common_scripts\utility::flag_wait("hill_pos_5");
 
-  if(level.spawned_reenforcements == 0)
+  if(level.spawned_reenforcements == 0) {
     send_hill_reenforcements_if_hot();
+  }
 }
 
 send_hill_reenforcements_if_hot() {
@@ -1244,8 +1290,9 @@ battlechatter_setup() {
   common_scripts\utility::waitframe();
   var_0 = getaiarray();
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread maps\_utility::set_battlechatter(0);
+  }
 }
 
 friendly_navigation() {
@@ -1267,17 +1314,20 @@ bravo_friendly_logic() {
   thread maps\_stealth_utility::stealth_default();
   thread maps\jungle_ghosts_util::friendly_jungle_stealth_color_behavior();
 
-  if(self.script_friendname == "Merrick")
+  if(self.script_friendname == "Merrick") {
     level.merrick = self;
-  else
+  }
+  else {
     level.hesh = self;
+  }
 }
 
 delete_bloomdome() {
   var_0 = getEntArray("bloomdome", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 close_to_waterfall_enemy_logic() {
@@ -1315,8 +1365,9 @@ final_jungle_ai_cleanup() {
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.script_noteworthy)) {
-      if(var_2.script_noteworthy != "guard1" && var_2.script_noteworthy != "guard2" && var_2.script_noteworthy != "execution_guards")
+      if(var_2.script_noteworthy != "guard1" && var_2.script_noteworthy != "guard2" && var_2.script_noteworthy != "execution_guards") {
         var_2 delete();
+      }
 
       continue;
     }
@@ -1488,8 +1539,9 @@ friendlies_execute_enemies(var_0) {
     thread execution_slowmo(var_0);
     wait 0.4;
 
-    if(isalive(self.guard_a_1))
+    if(isalive(self.guard_a_1)) {
       magicbullet(level.alpha[0].weapon, level.alpha[0] gettagorigin("tag_flash"), self.guard_a_1 getEye());
+    }
 
     common_scripts\utility::array_thread(level.alpha, maps\_utility::set_baseaccuracy, 1000);
     common_scripts\utility::array_thread(self.a_bad_guys, maps\_utility::set_ignoreall, 0);
@@ -1590,14 +1642,18 @@ motion_tracker_setup() {
       var_3 = sortbydistance(var_3, level.player.origin);
       var_4 = distancesquared(var_3[0].origin, level.player.origin);
 
-      if(var_4 < 160000)
+      if(var_4 < 160000) {
         var_0 = 0.5;
-      else if(var_4 < 360000)
+      }
+      else if(var_4 < 360000) {
         var_0 = 1;
-      else if(var_4 < 640000)
+      }
+      else if(var_4 < 640000) {
         var_0 = 1.5;
-      else
+      }
+      else {
         var_0 = var_1;
+      }
 
       if(var_0 != var_2) {
         update_motion_tracker_speed(var_0);
@@ -1699,8 +1755,9 @@ jungle_vo(var_0) {
         level.alpha1 maps\_utility::smart_dialogue("jungleg_els_heshweseeyou");
         wait 0.25;
 
-        if(!common_scripts\utility::flag("hostage_flag_set") && !common_scripts\utility::flag("got_close_enough_to_rescue"))
+        if(!common_scripts\utility::flag("hostage_flag_set") && !common_scripts\utility::flag("got_close_enough_to_rescue")) {
           level.alpha1 maps\_utility::smart_dialogue("jungleg_els_adamdoit");
+        }
       }
 
       common_scripts\utility::flag_wait("player_rescued_hostage");

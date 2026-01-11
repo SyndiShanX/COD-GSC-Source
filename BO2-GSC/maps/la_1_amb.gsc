@@ -48,10 +48,12 @@ play_sam_creaking_sounds() {
   wait_max = undefined;
 
   while(true) {
-    if(!isDefined(level.num_planes_shot))
+    if(!isDefined(level.num_planes_shot)) {
       wait_max = 15;
-    else
+    }
+    else {
       wait_max = get_wait_max();
+    }
 
     level.player playSound("evt_cougar_creak");
     wait(randomintrange(2, wait_max));
@@ -59,14 +61,18 @@ play_sam_creaking_sounds() {
 }
 
 get_wait_max() {
-  if(level.num_planes_shot < 2)
+  if(level.num_planes_shot < 2) {
     return 12;
-  else if(level.num_planes_shot < 6)
+  }
+  else if(level.num_planes_shot < 6) {
     return 8;
-  else if(level.num_planes_shot < 9)
+  }
+  else if(level.num_planes_shot < 9) {
     return 6;
-  else
+  }
+  else {
     return 4;
+  }
 }
 
 play_post_cougar_blend() {

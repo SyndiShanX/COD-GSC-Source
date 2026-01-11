@@ -128,10 +128,12 @@ crc_exit_event() {
 }
 
 bloody_tarp_init() {
-  if(is_mature())
+  if(is_mature()) {
     fxanim_delete("fxanim_bloody_tarp_clean");
-  else
+  }
+  else {
     fxanim_delete("fxanim_bloody_tarp_bloody");
+  }
 }
 
 clear_exit_victims_spawn_funcs() {
@@ -140,8 +142,9 @@ clear_exit_victims_spawn_funcs() {
 }
 
 remove_tarp_blockers() {
-  foreach(blocker in getEntArray("tarp_blocker", "targetname"))
+  foreach(blocker in getEntArray("tarp_blocker", "targetname")) {
   blocker delete();
+  }
 
   bloody_tarp_blocker = getent("tarp_collision_bloody", "targetname");
   bloody_tarp_blocker notsolid();
@@ -156,8 +159,9 @@ escalator_doors_open() {
   s_right_door_open = getstruct("escalator_door_right_open", "targetname");
   trigger_wait("escalator_door_proximity_trigger");
 
-  foreach(e_trigger in getEntArray("construction_battle_color_triggers", "script_noteworthy"))
+  foreach(e_trigger in getEntArray("construction_battle_color_triggers", "script_noteworthy")) {
   e_trigger delete();
+  }
 
   autosave_by_name("crc_exit_cleared");
   getent("crc_door", "targetname") movey(-63, 0.5);
@@ -205,8 +209,9 @@ rearguard_advance(str_side) {
   self waittill("death");
   ai_back = getent("construction_rearguard_back_" + str_side + "_ai", "targetname");
 
-  if(isalive(ai_back))
+  if(isalive(ai_back)) {
     ai_back setgoalnode(nd_target);
+  }
 }
 
 sal_think() {
@@ -334,14 +339,16 @@ elevator_spawn() {
   wait 2.0;
   ai_guard = simple_spawn_single("construction_elevator_wave2_1");
 
-  if(isalive(ai_guard))
+  if(isalive(ai_guard)) {
     ai_guard thread force_goal(getnode(ai_guard.target, "targetname"));
+  }
 
   wait 1.0;
   ai_guard = simple_spawn_single("construction_elevator_wave2_2");
 
-  if(isalive(ai_guard))
+  if(isalive(ai_guard)) {
     ai_guard thread force_goal(getnode(ai_guard.target, "targetname"));
+  }
 
   waittill_ai_group_ai_count("construction_elevator_group", 0);
   flag_set("construction_elevator_group_clear");
@@ -425,8 +432,9 @@ play_elevator_03_anim() {
   getent("club_elevator_model", "targetname") notify("elevator_flashlight_off");
   wait 8;
 
-  if(isDefined(level.sound_elevator_ent_1))
+  if(isDefined(level.sound_elevator_ent_1)) {
     level.sound_elevator2_ent_1 delete();
+  }
 }
 
 exit_breach_pmcs_dialog() {
@@ -482,8 +490,9 @@ ai_rush_spawn_func() {
   self endon("death");
   self thread ai_rush_stop();
 
-  if(!isDefined(level.n_ai_rushing))
+  if(!isDefined(level.n_ai_rushing)) {
     level.n_ai_rushing = 0;
+  }
 
   self.canflank = 1;
   self.aggressivemode = 1;
@@ -509,8 +518,9 @@ ai_rush_cooldown() {
   level endon("stop_rushers");
   wait(randomintrange(15, 20));
 
-  if(level.n_ai_rushing > 0)
+  if(level.n_ai_rushing > 0) {
     level.n_ai_rushing--;
+  }
 }
 
 ai_rush_stop() {
@@ -526,8 +536,9 @@ ai_rush_stop() {
   nd_fallback = a_fallbacks[0];
 
   foreach(nd_node in a_fallbacks) {
-    if(distance2dsquared(self.origin, nd_node.origin) < distance2dsquared(self.origin, nd_fallback.origin))
+    if(distance2dsquared(self.origin, nd_node.origin) < distance2dsquared(self.origin, nd_fallback.origin)) {
       nd_fallback = nd_node;
+    }
   }
 
   self set_goalradius(128);

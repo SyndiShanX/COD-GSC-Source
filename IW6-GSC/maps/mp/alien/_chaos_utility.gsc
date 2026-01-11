@@ -180,8 +180,9 @@ register_bonus_progression() {
     bonus_info["item_chance"] = strTok(table_look_up(level.alien_cycle_table, index, ITEM_CHANCE_COLUMN), " ");
     AssertEx(bonus_info["num_of_drops"] <= bonus_info["package_group_type"].size, "For wait duration: " + wait_duration + ", there is not enough bonus packages to support " + bonus_info["num_of_drops"] + " drops.");
 
-    if(bonus_info["num_of_drops"] > max_num_of_drops)
+    if(bonus_info["num_of_drops"] > max_num_of_drops) {
       max_num_of_drops = bonus_info["num_of_drops"];
+    }
 
     level.chaos_bonus_progression[level.chaos_bonus_progression.size] = bonus_info;
   }
@@ -192,8 +193,9 @@ register_bonus_progression() {
 convert_array_to_int(string_array) {
   int_array = [];
 
-  foreach(string in string_array)
+  foreach(string in string_array) {
   int_array[int_array.size] = int(string);
+  }
 
   return int_array;
 }
@@ -252,11 +254,13 @@ get_drop_location_rated(desired_dir, base_pos) {
     foreach(player in level.players) {
       player_to_location_distanceSquared = DistanceSquared(player.origin, location);
 
-      if(player_to_location_distanceSquared > MIN_DIST_SQD_FROM_ALL_PLAYER)
+      if(player_to_location_distanceSquared > MIN_DIST_SQD_FROM_ALL_PLAYER) {
         rating += DIST_FROM_ALL_PLAYER_WEIGHT;
+      }
 
-      if(player_to_location_distanceSquared < MAX_DIST_SQD_FROM_ALL_PLAYER)
+      if(player_to_location_distanceSquared < MAX_DIST_SQD_FROM_ALL_PLAYER) {
         rating += DIST_FROM_ALL_PLAYER_WEIGHT;
+      }
     }
 
     base_pos_to_location = vectorNormalize((0, vectorToYaw(location - base_pos), 0));
@@ -276,8 +280,9 @@ get_drop_location_rated(desired_dir, base_pos) {
 
 register_location(location) {
   if(level.chaos_bonus_loc_used.size == level.chaos_max_used_loc_stored) {
-    for(i = 0; i < level.chaos_max_used_loc_stored - 1; i++)
+    for(i = 0; i < level.chaos_max_used_loc_stored - 1; i++) {
       level.chaos_bonus_loc_used[i] = level.chaos_bonus_loc_used[i + 1];
+    }
 
     level.chaos_bonus_loc_used[level.chaos_max_used_loc_stored - 1] = location;
   } else {
@@ -326,8 +331,9 @@ record_highest_combo(combo_counter) {
     return;
   }
   level.highest_combo = combo_counter;
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player maps\mp\alien\_persistence::LB_player_update_stat("hits", combo_counter, true);
+  }
 }
 
 CYCLE_PARAMETER_START_INDEX = 500;
@@ -381,8 +387,9 @@ add_extra_spawn_locations() {
 DEFAULT_INIT_COMBO_DURATION = 4.0;
 
 init_combo_duration() {
-  if(!isDefined(level.combo_duration))
+  if(!isDefined(level.combo_duration)) {
     level.combo_duration = DEFAULT_INIT_COMBO_DURATION;
+  }
 }
 
 get_combo_duration() {
@@ -418,8 +425,9 @@ register_combo_duration_schedule() {
 DEFAULT_BONUS_PACKAGE_CAP = 3;
 
 init_bonus_package_cap() {
-  if(!isDefined(level.chaos_bonus_package_cap))
+  if(!isDefined(level.chaos_bonus_package_cap)) {
     level.chaos_bonus_package_cap = DEFAULT_BONUS_PACKAGE_CAP;
+  }
 }
 
 get_bonus_package_cap() {
@@ -435,25 +443,29 @@ add_to_chaos_bonus_package_type(package_type) {
 get_current_num_bonus_package() {
   result = 0;
 
-  foreach(package_type in level.chaos_bonus_package_type)
+  foreach(package_type in level.chaos_bonus_package_type) {
   result += level.deployable_box[package_type].size;
+  }
 
   return result;
 }
 
 chaos_end_game() {
-  if(chaos_should_end())
+  if(chaos_should_end()) {
     level thread maps\mp\gametypes\aliens::AlienEndGame("axis", maps\mp\alien\_hud::get_end_game_string_index("kia"));
+  }
 }
 
 CONST_IN_HOST_MIGRATION_FLAG = "in_host_migration";
 
 chaos_should_end() {
-  if(getDvarInt("chaos_no_fail", 0) == 1)
+  if(getDvarInt("chaos_no_fail", 0) == 1) {
     return false;
+  }
 
-  if(common_scripts\utility::flag(CONST_IN_HOST_MIGRATION_FLAG))
+  if(common_scripts\utility::flag(CONST_IN_HOST_MIGRATION_FLAG)) {
     return false;
+  }
 
   return true;
 }
@@ -467,38 +479,44 @@ should_process_alien_killed_event(attacker) {
 }
 
 should_process_alien_damaged_event(sWeapon) {
-  if(isDefined(sWeapon) && sWeapon == "alien_minion_explosion")
+  if(isDefined(sWeapon) && sWeapon == "alien_minion_explosion") {
     return false;
+  }
 
   return true;
 }
 
 unset_player_perks(player) {
   foreach(perk_info in level.perk_progression) {
-    if(perk_info["is_activated"])
+    if(perk_info["is_activated"]) {
       [[perk_info["deactivate_func"]]](player, perk_info["perk_ref"]);
+    }
   }
   player PlayLocalSound("mp_splash_screen_default");
 }
 
 give_activated_perks(player) {
   foreach(perk_info in level.perk_progression) {
-    if(perk_info["is_activated"])
+    if(perk_info["is_activated"]) {
       [[perk_info["activate_func"]]](player, perk_info["perk_ref"]);
+    }
   }
 }
 
 set_all_perks_inactivated() {
-  foreach(perk_info in level.perk_progression)
+  foreach(perk_info in level.perk_progression) {
   perk_info["is_activated"] = false;
+  }
 }
 
 get_attacker_as_player(attacker) {
-  if(isPlayer(attacker))
+  if(isPlayer(attacker)) {
     return attacker;
+  }
 
-  if(isDefined(attacker.owner) && isPlayer(attacker.owner))
+  if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
     return attacker.owner;
+  }
 
   return undefined;
 }
@@ -508,13 +526,15 @@ MAX_EVENT_COUNT = 18;
 init_event_counts() {
   level.chaos_event_counts = [];
 
-  for(i = 1; i <= MAX_EVENT_COUNT; i++)
+  for(i = 1; i <= MAX_EVENT_COUNT; i++) {
     level.chaos_event_counts[i] = 0;
+  }
 }
 
 update_HUD_event_counts() {
-  for(i = 1; i <= MAX_EVENT_COUNT; i++)
+  for(i = 1; i <= MAX_EVENT_COUNT; i++) {
     maps\mp\alien\_hud::set_event_count(i, level.chaos_event_counts[i]);
+  }
 }
 
 inc_event_count(event_ID) {
@@ -530,8 +550,9 @@ translate_to_actual_zone_name(zone_name_list) {
   zone_name_list = StrTok(zone_name_list, " ");
   foreach(zone_name in zone_name_list) {
     foreach(actual_zone_name, spawn_data in level.cycle_data.spawn_zones) {
-      if(IsSubStr(actual_zone_name, zone_name))
+      if(IsSubStr(actual_zone_name, zone_name)) {
         actual_zone_name_list[actual_zone_name_list.size] = actual_zone_name;
+      }
     }
   }
 
@@ -542,8 +563,9 @@ translate_to_actual_zone_name(zone_name_list) {
   } else {
     result_actual_name_string = actual_zone_name_list[0];
 
-    for(i = 1; i < actual_zone_name_list.size; i++)
+    for(i = 1; i < actual_zone_name_list.size; i++) {
       result_actual_name_string = result_actual_name_string + " " + actual_zone_name_list[i];
+    }
   }
 
   return result_actual_name_string;

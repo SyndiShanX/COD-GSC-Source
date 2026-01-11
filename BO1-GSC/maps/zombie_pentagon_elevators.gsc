@@ -111,8 +111,9 @@ is_elevator_clear(elevator) {
   if(isDefined(elevator_door_safety)) {
     for(i = 0; i < elevator_door_safety.size; i++) {
       for(j = 0; j < players.size; j++) {
-        if(players[j] IsTouching(elevator_door_safety[i]))
+        if(players[j] IsTouching(elevator_door_safety[i])) {
           return false;
+        }
       }
     }
   }
@@ -765,8 +766,9 @@ redirect_zombies(destination) {
   players = get_players();
   num_players = 0;
   for(i = 0; i < players.size; i++) {
-    if(players[i] IsTouching(self))
+    if(players[i] IsTouching(self)) {
       num_players++;
+    }
   }
   if(!num_players == players.size) {
     return;

@@ -45,8 +45,9 @@ main(model, type, no_death) {
 
 init_local() {
   self.clear_anims_on_death = true; // hackery workaround for strange anim differences in the variety of uaz models. clears driving and possibly door openning animations upon death.
-  if(!isDefined(self.script_allow_rider_deaths))
+  if(!isDefined(self.script_allow_rider_deaths)) {
     self.script_allow_rider_deaths = false; // this added at the end of the project some people wanted deathanims and some scripts assumed death would never happen.
+  }
 }
 
 set_vehicle_anims(positions) {
@@ -100,8 +101,9 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 6; i++)
+  for(i = 0; i < 6; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

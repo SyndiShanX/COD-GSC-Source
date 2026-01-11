@@ -96,7 +96,8 @@ include_weapons() {
 swamp_german_safe() {
   if(is_german_build()) {
     dead_guy = GetDynEnt("hanging_dead_guy");
-    if(isDefined(dead_guy))
+    if(isDefined(dead_guy)) {
       dead_guy hide();
+    }
   }
 }

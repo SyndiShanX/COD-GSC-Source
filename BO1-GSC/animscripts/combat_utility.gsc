@@ -154,10 +154,12 @@ shootUntilShootBehaviorChange() {
       wait(RandomFloat(2.0));
     }
   }
-  if(isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) > 400 * 400)
+  if(isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) > 400 * 400) {
     burstCount = RandomIntRange(1, 5);
-  else
+  }
+  else {
     burstCount = 10;
+  }
   while(1) {
     burstDelay();
     animPrefix = getShootAnimPrefix();

@@ -32,8 +32,9 @@ init_light_generic_iw7(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
   self.func_ACA5 = func_95A8([self.script_type, "generic"]);
   self.func_50D3 = issubstr(self.func_ACA5, "delaystart");
 
-  if(!scripts\sp\utility::func_65DF("light_on"))
+  if(!scripts\sp\utility::func_65DF("light_on")) {
     scripts\sp\utility::func_65E0("light_on");
+  }
 
   self.func_AD83 = [];
   self.func_12BB6 = [];
@@ -57,8 +58,9 @@ init_light_generic_iw7(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
       continue;
     }
 
-    if(issubstr(var_10.classname, "trigger"))
+    if(issubstr(var_10.classname, "trigger")) {
       self.func_127C9[self.func_127C9.size] = var_10;
+    }
   }
 
   if(getdvar("r_reflectionProbeGenerate") == "1") {
@@ -68,8 +70,9 @@ init_light_generic_iw7(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
 
   scripts\engine\utility::flag_wait("scriptables_ready");
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     self.func_EF3C = getentitylessscriptablearrayinradius(self.target, "targetname");
+  }
 
   if(self.func_AD83.size != 0 || self.func_12BB6.size != 0) {}
 
@@ -85,8 +88,9 @@ init_light_generic_iw7(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
         var_16 = strtok(var_13.script_parameters, ", ");
         var_14 = (float(var_16[0]), float(var_16[1]), float(var_16[2]));
 
-        if(var_16.size >= 6)
+        if(var_16.size >= 6) {
           var_15 = (float(var_16[3]), float(var_16[4]), float(var_16[5]));
+        }
       }
 
       var_13.effect scripts\common\createfx::set_origin_and_angles(var_13.origin + var_14, var_13.angles + var_15);
@@ -99,8 +103,9 @@ init_light_generic_iw7(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
   if(isDefined(var_07) && var_07) {
     return;
   }
-  if(isDefined(self.func_C14B) || isDefined(self.func_C14C) || self.func_127C9.size > 0)
+  if(isDefined(self.func_C14B) || isDefined(self.func_C14C) || self.func_127C9.size > 0) {
     thread func_ACA2();
+  }
 }
 
 func_ACA2() {
@@ -108,10 +113,12 @@ func_ACA2() {
   self notify("stop_script_light_loop");
   self endon("stop_script_light_loop");
 
-  if(isDefined(self.func_10D0C) && self.func_10D0C)
+  if(isDefined(self.func_10D0C) && self.func_10D0C) {
     func_ACA4();
-  else if(isDefined(self.func_C14B) || isDefined(self.func_12711))
+  }
+  else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
     func_ACA3();
+  }
 
   for(;;) {
     if(!scripts\sp\utility::func_65DB("light_on")) {
@@ -119,14 +126,17 @@ func_ACA2() {
       scripts\sp\utility::script_delay();
 
       if(isDefined(self.func_50D3)) {
-        if(isDefined(self.script_delay))
+        if(isDefined(self.script_delay)) {
           self.func_C3D6 = self.script_delay;
+        }
 
-        if(isDefined(self.script_delay_max))
+        if(isDefined(self.script_delay_max)) {
           self.func_C3D7 = self.script_delay_max;
+        }
 
-        if(isDefined(self.script_delay_min))
+        if(isDefined(self.script_delay_min)) {
           self.func_C3D8 = self.script_delay_min;
+        }
 
         self.script_delay = undefined;
         self.script_delay_max = undefined;
@@ -140,14 +150,17 @@ func_ACA2() {
     scripts\sp\utility::script_delay();
 
     if(isDefined(self.func_50D3)) {
-      if(isDefined(self.script_delay))
+      if(isDefined(self.script_delay)) {
         self.func_C3D6 = self.script_delay;
+      }
 
-      if(isDefined(self.script_delay_max))
+      if(isDefined(self.script_delay_max)) {
         self.func_C3D7 = self.script_delay_max;
+      }
 
-      if(isDefined(self.script_delay_min))
+      if(isDefined(self.script_delay_min)) {
         self.func_C3D8 = self.script_delay_min;
+      }
 
       self.script_delay = undefined;
       self.script_delay_max = undefined;
@@ -156,14 +169,17 @@ func_ACA2() {
 
     func_ACA3();
 
-    if(isDefined(self.func_C3D6))
+    if(isDefined(self.func_C3D6)) {
       self.script_delay = self.func_C3D6;
+    }
 
-    if(isDefined(self.func_C3D7))
+    if(isDefined(self.func_C3D7)) {
       self.script_delay_max = self.func_C3D7;
+    }
 
-    if(isDefined(self.func_C3D8))
+    if(isDefined(self.func_C3D8)) {
       self.script_delay_min = self.func_C3D8;
+    }
 
     wait 0.05;
   }
@@ -188,8 +204,9 @@ func_B27A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   self.func_1098E = func_95A8([self.func_EEBF, var_04, 1]);
   self.func_C4B5 = max(func_95A8([self.func_ED75, var_06, 3]) / self.func_1098E, 0.25);
 
-  if(isDefined(self.func_EF17) && !isDefined(self.func_EF16) || !isDefined(self.func_EF17) && isDefined(self.func_EF16))
+  if(isDefined(self.func_EF17) && !isDefined(self.func_EF16) || !isDefined(self.func_EF17) && isDefined(self.func_EF16)) {
     self.func_8E57 = max(func_95A8([self.func_EF17, self.func_EF16]) / self.func_1098E, 0.05);
+  }
   else {
     self.func_13585 = max(func_95A8([self.func_EF17, var_00, 0.05]) / self.func_1098E, 0.05);
     self.func_13584 = max(func_95A8([self.func_EF16, var_01, 0.1]) / self.func_1098E, 0.1);
@@ -201,8 +218,9 @@ func_B27A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
     }
   }
 
-  if(isDefined(self.func_EF19) && !isDefined(self.func_EF18) || !isDefined(self.func_EF19) && isDefined(self.func_EF18))
+  if(isDefined(self.func_EF19) && !isDefined(self.func_EF18) || !isDefined(self.func_EF19) && isDefined(self.func_EF18)) {
     self.func_ADA3 = max(func_95A8([self.func_EF19, self.func_EF18]) / self.func_1098E, 0.05);
+  }
   else {
     self.func_13587 = max(func_95A8([self.func_EF19, var_02, 0.05]) / self.func_1098E, 0.05);
     self.func_13586 = max(func_95A8([self.func_EF18, var_03, 0.75]) / self.func_1098E, 0.1);
@@ -216,10 +234,12 @@ func_B27A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 }
 
 func_10C9A() {
-  if(self.func_12AE2 || self.func_12AE1)
+  if(self.func_12AE2 || self.func_12AE1) {
     thread func_AC89();
-  else
+  }
+  else {
     thread func_AC88();
+  }
 }
 
 func_AC88() {
@@ -227,24 +247,29 @@ func_AC88() {
   self notify("stop_script_light_loop");
   self endon("stop_script_light_loop");
 
-  if(isDefined(self.func_10D0C) && self.func_10D0C)
+  if(isDefined(self.func_10D0C) && self.func_10D0C) {
     func_ACA4();
-  else if(isDefined(self.func_C14B) || isDefined(self.func_12711))
+  }
+  else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
     func_ACA3(undefined, self.func_12ACF);
+  }
 
   if(isDefined(self.func_C14B) && isDefined(self.func_C14C)) {
     for(;;) {
       scripts\sp\utility::script_delay();
 
       if(isDefined(self.func_50D3)) {
-        if(isDefined(self.script_delay))
+        if(isDefined(self.script_delay)) {
           self.func_C3D6 = self.script_delay;
+        }
 
-        if(isDefined(self.script_delay_max))
+        if(isDefined(self.script_delay_max)) {
           self.func_C3D7 = self.script_delay_max;
+        }
 
-        if(isDefined(self.script_delay_min))
+        if(isDefined(self.script_delay_min)) {
           self.func_C3D8 = self.script_delay_min;
+        }
 
         self.script_delay = undefined;
         self.script_delay_max = undefined;
@@ -253,19 +278,24 @@ func_AC88() {
 
       func_AC8A();
 
-      if(isDefined(self.func_10D0C) && self.func_10D0C)
+      if(isDefined(self.func_10D0C) && self.func_10D0C) {
         func_ACA4();
-      else
+      }
+      else {
         func_ACA3(undefined, self.func_12ACF);
+      }
 
-      if(isDefined(self.func_C3D6))
+      if(isDefined(self.func_C3D6)) {
         self.script_delay = self.func_C3D6;
+      }
 
-      if(isDefined(self.func_C3D7))
+      if(isDefined(self.func_C3D7)) {
         self.script_delay_max = self.func_C3D7;
+      }
 
-      if(isDefined(self.func_C3D8))
+      if(isDefined(self.func_C3D8)) {
         self.script_delay_min = self.func_C3D8;
+      }
 
       wait 0.05;
     }
@@ -286,26 +316,32 @@ func_AC89() {
   self notify("stop_script_light_loop");
   self endon("stop_script_light_loop");
 
-  if(isDefined(self.func_10D0C) && self.func_10D0C)
+  if(isDefined(self.func_10D0C) && self.func_10D0C) {
     func_ACA4();
-  else if(isDefined(self.func_C14B) || isDefined(self.func_12711))
+  }
+  else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
     func_ACA3(undefined, self.func_12ACF);
+  }
 
   for(;;) {
-    if(!scripts\sp\utility::func_65DB("light_on") && (isDefined(self.func_12711) || isDefined(self.func_C14B)))
+    if(!scripts\sp\utility::func_65DB("light_on") && (isDefined(self.func_12711) || isDefined(self.func_C14B))) {
       level scripts\engine\utility::waittill_any("bemani_573", self.func_12711, self.func_C14B);
+    }
 
     scripts\sp\utility::script_delay();
 
     if(isDefined(self.func_50D3)) {
-      if(isDefined(self.script_delay))
+      if(isDefined(self.script_delay)) {
         self.func_C3D6 = self.script_delay;
+      }
 
-      if(isDefined(self.script_delay_max))
+      if(isDefined(self.script_delay_max)) {
         self.func_C3D7 = self.script_delay_max;
+      }
 
-      if(isDefined(self.script_delay_min))
+      if(isDefined(self.script_delay_min)) {
         self.func_C3D8 = self.script_delay_min;
+      }
 
       self.script_delay = undefined;
       self.script_delay_max = undefined;
@@ -315,10 +351,12 @@ func_AC89() {
     if(self.func_12AE2 && !scripts\sp\utility::func_65DB("light_on")) {
       childthread func_AC8A(1, self.func_DC8B);
 
-      if(self.func_10E46)
+      if(self.func_10E46) {
         wait(self.func_C4B5);
-      else
+      }
+      else {
         wait(randomfloat(self.func_C4B5));
+      }
 
       self notify("stop_flicker");
     }
@@ -328,37 +366,45 @@ func_AC89() {
     if(!isDefined(self.func_C14B) && !isDefined(self.func_12711)) {
       return;
     }
-    if(!self.func_12AE3)
+    if(!self.func_12AE3) {
       level scripts\engine\utility::waittill_any("bemani_573", self.func_12712, self.func_C14C);
-    else
+    }
+    else {
       func_AC8A(1);
+    }
 
     if(self.func_12AE1) {
       childthread func_AC8A(1, self.func_DC8A);
 
-      if(self.func_10E46)
+      if(self.func_10E46) {
         wait(self.func_C4B5);
-      else
+      }
+      else {
         wait(randomfloat(self.func_C4B5));
+      }
 
       self notify("stop_flicker");
     }
 
     func_ACA3(undefined, self.func_12ACF);
 
-    if(isDefined(self.func_C3D6))
+    if(isDefined(self.func_C3D6)) {
       self.script_delay = self.func_C3D6;
+    }
 
-    if(isDefined(self.func_C3D7))
+    if(isDefined(self.func_C3D7)) {
       self.script_delay_max = self.func_C3D7;
+    }
 
-    if(isDefined(self.func_C3D8))
+    if(isDefined(self.func_C3D8)) {
       self.script_delay_min = self.func_C3D8;
+    }
 
     wait 0.05;
 
-    if(!isDefined(self.func_C14B) && !isDefined(self.func_C14C))
+    if(!isDefined(self.func_C14B) && !isDefined(self.func_C14C)) {
       return;
+    }
   }
 }
 
@@ -366,22 +412,27 @@ func_AC8A(var_00, var_01) {
   self notify("stop_flicker");
   self endon("stop_flicker");
 
-  if(isDefined(self.func_12712))
+  if(isDefined(self.func_12712)) {
     level endon(self.func_12712);
+  }
 
-  if(isDefined(self.func_C14C))
+  if(isDefined(self.func_C14C)) {
     level endon(self.func_C14C);
+  }
 
-  if(!isDefined(var_00) && (isDefined(self.func_12711) || isDefined(self.func_C14B)))
+  if(!isDefined(var_00) && (isDefined(self.func_12711) || isDefined(self.func_C14B))) {
     level scripts\engine\utility::waittill_any("bemani_573", self.func_12711, self.func_C14B);
+  }
 
   for(;;) {
     func_ACA4(var_01);
 
-    if(isDefined(self.func_8E57))
+    if(isDefined(self.func_8E57)) {
       wait(self.func_8E57);
-    else
+    }
+    else {
       wait(randomfloatrange(self.func_13585, self.func_13584));
+    }
 
     func_ACA3(var_01);
 
@@ -414,8 +465,9 @@ func_B27B(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   self.func_1098E = func_95A8([self.func_EEBF, var_04, 1]);
   self.func_C4B5 = max(func_95A8([self.func_ED75, var_06, 3]) / self.func_1098E, 3);
 
-  if(isDefined(self.func_EF17) && !isDefined(self.func_EF16) || !isDefined(self.func_EF17) && isDefined(self.func_EF16))
+  if(isDefined(self.func_EF17) && !isDefined(self.func_EF16) || !isDefined(self.func_EF17) && isDefined(self.func_EF16)) {
     self.func_8E57 = max(func_95A8([self.func_EF17, self.func_EF16]) / self.func_1098E, 0.05);
+  }
   else {
     self.func_13585 = max(func_95A8([self.func_EF17, var_00, 0.05]) / self.func_1098E, 0.05);
     self.func_13584 = max(func_95A8([self.func_EF16, var_01, 0.5]) / self.func_1098E, 0.1);
@@ -449,10 +501,12 @@ func_B27B(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 }
 
 func_10C9B() {
-  if(self.func_12AE2 || self.func_12AE1)
+  if(self.func_12AE2 || self.func_12AE1) {
     thread func_AC9D();
-  else
+  }
+  else {
     thread func_AC9C();
+  }
 }
 
 func_AC9C() {
@@ -460,19 +514,23 @@ func_AC9C() {
   self notify("stop_script_light_loop");
   self endon("stop_script_light_loop");
 
-  if(isDefined(self.func_10D0C) && self.func_10D0C)
+  if(isDefined(self.func_10D0C) && self.func_10D0C) {
     func_ACA4();
-  else if(isDefined(self.func_C14B) || isDefined(self.func_12711))
+  }
+  else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
     func_ACA3(undefined, self.func_12ACF);
+  }
 
   if(isDefined(self.func_C14B) && isDefined(self.func_C14C)) {
     for(;;) {
       func_AC9E();
 
-      if(isDefined(self.func_10D0C) && self.func_10D0C)
+      if(isDefined(self.func_10D0C) && self.func_10D0C) {
         func_ACA4();
-      else
+      }
+      else {
         func_ACA3(undefined, self.func_12ACF);
+      }
 
       wait 0.05;
     }
@@ -493,26 +551,32 @@ func_AC9D() {
   self notify("stop_script_light_loop");
   self endon("stop_script_light_loop");
 
-  if(isDefined(self.func_10D0C) && self.func_10D0C)
+  if(isDefined(self.func_10D0C) && self.func_10D0C) {
     func_ACA4();
-  else if(isDefined(self.func_C14B) || isDefined(self.func_12711))
+  }
+  else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
     func_ACA3(undefined, self.func_12ACF);
+  }
 
   for(;;) {
-    if(!scripts\sp\utility::func_65DB("light_on") && (isDefined(self.func_12711) || isDefined(self.func_C14B)))
+    if(!scripts\sp\utility::func_65DB("light_on") && (isDefined(self.func_12711) || isDefined(self.func_C14B))) {
       level scripts\engine\utility::waittill_any("bemani_573", self.func_12711, self.func_C14B);
+    }
 
     scripts\sp\utility::script_delay();
 
     if(isDefined(self.func_50D3)) {
-      if(isDefined(self.script_delay))
+      if(isDefined(self.script_delay)) {
         self.func_C3D6 = self.script_delay;
+      }
 
-      if(isDefined(self.script_delay_max))
+      if(isDefined(self.script_delay_max)) {
         self.func_C3D7 = self.script_delay_max;
+      }
 
-      if(isDefined(self.script_delay_min))
+      if(isDefined(self.script_delay_min)) {
         self.func_C3D8 = self.script_delay_min;
+      }
 
       self.script_delay = undefined;
       self.script_delay_max = undefined;
@@ -522,10 +586,12 @@ func_AC9D() {
     if(self.func_12AE2 && !scripts\sp\utility::func_65DB("light_on")) {
       childthread func_AC9E(1);
 
-      if(self.func_10E46)
+      if(self.func_10E46) {
         wait(self.func_C4B5);
-      else
+      }
+      else {
         wait(randomfloat(self.func_C4B5));
+      }
 
       self notify("stop_pulse");
     }
@@ -535,37 +601,45 @@ func_AC9D() {
     if(!isDefined(self.func_C14B) && !isDefined(self.func_12711)) {
       return;
     }
-    if(!self.func_12AE3)
+    if(!self.func_12AE3) {
       level scripts\engine\utility::waittill_any("bemani_573", self.func_12712, self.func_C14C);
-    else
+    }
+    else {
       func_AC9E(1);
+    }
 
     if(self.func_12AE1) {
       childthread func_AC9E(1);
 
-      if(self.func_10E46)
+      if(self.func_10E46) {
         wait(self.func_C4B5);
-      else
+      }
+      else {
         wait(randomfloat(self.func_C4B5));
+      }
 
       self notify("stop_flicker");
     }
 
     func_ACA3(undefined, self.func_12ACF);
 
-    if(isDefined(self.func_C3D6))
+    if(isDefined(self.func_C3D6)) {
       self.script_delay = self.func_C3D6;
+    }
 
-    if(isDefined(self.func_C3D7))
+    if(isDefined(self.func_C3D7)) {
       self.script_delay_max = self.func_C3D7;
+    }
 
-    if(isDefined(self.func_C3D8))
+    if(isDefined(self.func_C3D8)) {
       self.script_delay_min = self.func_C3D8;
+    }
 
     wait 0.05;
 
-    if(!isDefined(self.func_C14B) && !isDefined(self.func_C14C))
+    if(!isDefined(self.func_C14B) && !isDefined(self.func_C14C)) {
       return;
+    }
   }
 }
 
@@ -573,22 +647,27 @@ func_AC9E(var_00) {
   self notify("stop_pulse");
   self endon("stop_pulse");
 
-  if(isDefined(self.func_12712))
+  if(isDefined(self.func_12712)) {
     level endon(self.func_12712);
+  }
 
-  if(isDefined(self.func_C14C))
+  if(isDefined(self.func_C14C)) {
     level endon(self.func_C14C);
+  }
 
-  if(!isDefined(var_00) && (isDefined(self.func_12711) || isDefined(self.func_C14B)))
+  if(!isDefined(var_00) && (isDefined(self.func_12711) || isDefined(self.func_C14B))) {
     level scripts\engine\utility::waittill_any("bemani_573", self.func_12711, self.func_C14B);
+  }
 
   for(;;) {
     func_ACA4();
 
-    if(isDefined(self.func_8E57))
+    if(isDefined(self.func_8E57)) {
       wait(self.func_8E57);
-    else
+    }
+    else {
       wait(randomfloatrange(self.func_13585, self.func_13584));
+    }
 
     if(isDefined(self.func_ADA3)) {
       func_AC9B(self.func_ADA3);
@@ -618,48 +697,59 @@ init_light_trig(var_00) {
 func_ACA4(var_00) {
   scripts\sp\utility::func_65E1("light_on");
 
-  if(isDefined(var_00) && var_00 && self.func_99E6 > 0)
+  if(isDefined(var_00) && var_00 && self.func_99E6 > 0) {
     func_F466(randomfloatrange(self.func_99E6 * 0.25, self.func_99E6), self.func_438F);
-  else
+  }
+  else {
     func_F466(self.func_99E6, self.func_438F);
+  }
 
-  if(isDefined(self.script_prefab_exploder))
+  if(isDefined(self.script_prefab_exploder)) {
     scripts\engine\utility::exploder(self.script_prefab_exploder);
+  }
 
-  foreach(var_02 in self.func_EF3C)
+  foreach(var_02 in self.func_EF3C) {
   var_02 setscriptablepartstate("onoff", "on");
+  }
 
   scripts\engine\utility::array_call(self.func_12BB6, ::hide);
 
   foreach(var_05 in self.func_AD83) {
     var_05 show();
 
-    if(isDefined(var_5.effect))
+    if(isDefined(var_5.effect)) {
       var_5.effect scripts\sp\utility::func_E2B0();
+    }
   }
 }
 
 func_ACA3(var_00, var_01) {
   scripts\sp\utility::func_65DD("light_on");
 
-  if(isDefined(var_01) && var_01)
+  if(isDefined(var_01) && var_01) {
     func_F466(0, (0, 0, 0));
-  else if(isDefined(var_00) && var_00 && self.func_99E7 > 0)
+  }
+  else if(isDefined(var_00) && var_00 && self.func_99E7 > 0) {
     func_F466(randomfloatrange(self.func_99E7 * 0.25, self.func_99E7), self.func_4390);
-  else
+  }
+  else {
     func_F466(self.func_99E7, self.func_4390);
+  }
 
-  if(isDefined(self.script_prefab_exploder))
+  if(isDefined(self.script_prefab_exploder)) {
     scripts\sp\utility::func_10FEC(self.script_prefab_exploder);
+  }
 
-  foreach(var_03 in self.func_EF3C)
+  foreach(var_03 in self.func_EF3C) {
   var_03 setscriptablepartstate("onoff", "off");
+  }
 
   foreach(var_06 in self.func_AD83) {
     var_06 hide();
 
-    if(isDefined(var_6.effect))
+    if(isDefined(var_6.effect)) {
       var_6.effect scripts\engine\utility::pauseeffect();
+    }
   }
 
   scripts\engine\utility::array_call(self.func_12BB6, ::show);
@@ -690,34 +780,40 @@ func_ACD1(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_1298C(var_00, var_01, var_02) {
-  if(!isDefined(self.func_9586))
+  if(!isDefined(self.func_9586)) {
     self waittill("script_light_init_complete");
+  }
 
-  if(isDefined(var_02) && var_02)
+  if(isDefined(var_02) && var_02) {
     self notify("stop_script_light_loop");
+  }
 
   var_03 = self.func_99E6;
   var_04 = self.func_438F;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_03 = var_00;
+  }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_04 = var_01;
+  }
 
   scripts\sp\utility::func_65E1("light_on");
   func_F466(var_03, var_04);
 
-  foreach(var_06 in self.func_EF3C)
+  foreach(var_06 in self.func_EF3C) {
   var_06 setscriptablepartstate("onoff", "on");
+  }
 
   scripts\engine\utility::array_call(self.func_12BB6, ::hide);
 
   foreach(var_09 in self.func_AD83) {
     var_09 show();
 
-    if(isDefined(var_9.effect))
+    if(isDefined(var_9.effect)) {
       var_9.effect scripts\sp\utility::func_E2B0();
+    }
   }
 }
 
@@ -727,56 +823,66 @@ func_ACD0(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_12968(var_00, var_01, var_02) {
-  if(!isDefined(self.func_9586))
+  if(!isDefined(self.func_9586)) {
     self waittill("script_light_init_complete");
+  }
 
-  if(isDefined(var_02) && var_02)
+  if(isDefined(var_02) && var_02) {
     self notify("stop_script_light_loop");
+  }
 
   var_03 = self.func_99E7;
   var_04 = self.func_4390;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_03 = var_00;
+  }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_04 = var_01;
+  }
 
   scripts\sp\utility::func_65DD("light_on");
   func_F466(var_03, var_04);
 
-  foreach(var_06 in self.func_EF3C)
+  foreach(var_06 in self.func_EF3C) {
   var_06 setscriptablepartstate("onoff", "off");
+  }
 
   foreach(var_09 in self.func_AD83) {
     var_09 hide();
 
-    if(isDefined(var_9.effect))
+    if(isDefined(var_9.effect)) {
       var_9.effect scripts\engine\utility::pauseeffect();
+    }
   }
 
   scripts\engine\utility::array_call(self.func_12BB6, ::show);
 }
 
 func_F466(var_00, var_01) {
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 = max(0, var_00);
+  }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_01 = (max(0, var_1[0]), max(0, var_1[1]), max(0, var_1[2]));
+  }
 
   if(isDefined(var_00)) {
     self setlightintensity(var_00);
 
-    if(isDefined(self.func_AD22))
+    if(isDefined(self.func_AD22)) {
       scripts\engine\utility::array_call(self.func_AD22, ::setlightintensity, var_00);
+    }
   }
 
   if(isDefined(var_01)) {
     self _meth_82FC(var_01);
 
-    if(isDefined(self.func_AD22))
+    if(isDefined(self.func_AD22)) {
       scripts\engine\utility::array_call(self.func_AD22, ::_meth_82FC, var_01);
+    }
   }
 }
 
@@ -786,8 +892,9 @@ func_9C37(var_00) {
 
 func_95A8(var_00) {
   foreach(var_02 in var_00) {
-    if(isDefined(var_02))
+    if(isDefined(var_02)) {
       return var_02;
+    }
   }
 
   return undefined;
@@ -913,8 +1020,9 @@ func_774A() {
 }
 
 func_776F() {
-  for(;;)
+  for(;;) {
     level scripts\engine\utility::waitframe();
+  }
 }
 
 func_3299() {
@@ -951,22 +1059,26 @@ func_11155(var_00, var_01, var_02, var_03) {
     wait 0.05;
     var_05 = var_05 + 0.05;
 
-    if(var_05 > var_02)
+    if(var_05 > var_02) {
       var_05 = var_05 - var_02;
+    }
 
     if(isDefined(var_03)) {
-      if(scripts\engine\utility::flag(var_03))
+      if(scripts\engine\utility::flag(var_03)) {
         return;
+      }
     }
   }
 }
 
 func_3C57(var_00, var_01, var_02, var_03) {
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0;
+  }
 
   thread func_3C58(var_00, var_01, var_02, var_03);
 }
@@ -1014,10 +1126,12 @@ func_6F19(var_00, var_01) {
     for(var_05 = randomintrange(1, 10); var_05; var_5--) {
       wait(randomfloatrange(0.05, 0.1));
 
-      if(var_04 > 0.2)
+      if(var_04 > 0.2) {
         var_04 = randomfloatrange(0, 0.3);
-      else
+      }
+      else {
         var_04 = var_02;
+      }
 
       self setlightintensity(var_04);
     }
@@ -1030,8 +1144,9 @@ func_6F19(var_00, var_01) {
 func_11203(var_00) {
   var_01 = 1;
 
-  if(isDefined(var_0.func_ED75))
+  if(isDefined(var_0.func_ED75)) {
     var_01 = var_0.func_ED75;
+  }
 
   for(;;) {
     var_00 waittill("trigger", var_02);
@@ -1045,19 +1160,23 @@ func_F5B8(var_00) {
   var_03 = getdvarfloat("sm_sunsamplesizenear", 0.25);
   var_04 = getdvarfloat("sm_qualityspotshadow", 1.0);
 
-  if(isDefined(self.func_EED5))
+  if(isDefined(self.func_EED5)) {
     var_01 = self.func_EED5;
+  }
 
-  if(isDefined(self.func_EED7))
+  if(isDefined(self.func_EED7)) {
     var_02 = self.func_EED7;
+  }
 
-  if(isDefined(self.func_EED6))
+  if(isDefined(self.func_EED6)) {
     var_03 = self.func_EED6;
+  }
 
   var_03 = min(max(0.016, var_03), 32);
 
-  if(isDefined(self.func_EE8E))
+  if(isDefined(self.func_EE8E)) {
     var_04 = self.func_EE8E;
+  }
 
   var_05 = getdvarint("sm_sunenable", 1);
   var_06 = getdvarfloat("sm_sunshadowscale", 1.0);
@@ -1106,8 +1225,9 @@ func_AB83(var_00, var_01) {
 
   var_6[0] = self;
 
-  if(isDefined(self.func_AD22))
+  if(isDefined(self.func_AD22)) {
     var_06 = scripts\engine\utility::array_combine(var_06, self.func_AD22);
+  }
 
   foreach(var_08 in var_06) {
     var_08 thread func_8924(var_00);
@@ -1124,8 +1244,9 @@ func_8924(var_00) {
         var_3.func_13438 = var_01;
         var_03 show();
 
-        if(isDefined(var_3.effect))
+        if(isDefined(var_3.effect)) {
           var_3.effect thread scripts\sp\utility::func_E2B0();
+        }
 
         continue;
       }
@@ -1134,8 +1255,9 @@ func_8924(var_00) {
         var_3.func_13438 = var_01;
         var_03 hide();
 
-        if(isDefined(var_3.effect))
+        if(isDefined(var_3.effect)) {
           var_3.effect thread scripts\engine\utility::pauseeffect();
+        }
       }
     }
 

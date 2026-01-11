@@ -52,8 +52,9 @@ create_fx_menu() {
     menu_fx_creation();
   } else
   if(menu("none")) {
-    if(button_is_clicked("m"))
+    if(button_is_clicked("m")) {
       increment_list_offset();
+    }
     menu_change_selected_fx();
     if(entities_are_selected()) {
       display_fx_info(get_last_selected_entity());
@@ -94,8 +95,9 @@ menu_fx_creation() {
   for(i = level.effect_list_offset; i < keys.size; i++) {
     count = count + 1;
     button_to_check = count;
-    if(button_to_check == 10)
+    if(button_to_check == 10) {
       button_to_check = 0;
+    }
     if(button_is_clicked(button_to_check + "")) {
       picked_fx = keys[i];
       break;
@@ -115,10 +117,12 @@ menu_fx_creation() {
     return;
   }
   ent = undefined;
-  if(menu("create_loopfx"))
+  if(menu("create_loopfx")) {
     ent = createLoopEffect(picked_fx);
-  if(menu("create_oneshot"))
+  }
+  if(menu("create_oneshot")) {
     ent = createOneshotEffect(picked_fx);
+  }
   finish_creating_entity(ent);
 }
 
@@ -192,16 +196,18 @@ menu_change_selected_fx() {
   ent = get_last_selected_ent();
   for(i = 0; i < level.createFX_options.size; i++) {
     option = level.createFX_options[i];
-    if(!isDefined(ent.v[option["name"]]))
+    if(!isDefined(ent.v[option["name"]])) {
       continue;
+    }
     count++;
     if(count < level.effect_list_offset) {
       continue;
     }
     drawnCount++;
     button_to_check = drawnCount;
-    if(button_to_check == 10)
+    if(button_to_check == 10) {
       button_to_check = 0;
+    }
     if(button_is_clicked(button_to_check + "")) {
       prepare_option_for_change(option, drawnCount);
       break;
@@ -232,20 +238,24 @@ menu_fx_option_set() {
   }
   option = get_selected_option();
   setting = undefined;
-  if(option["type"] == "string")
+  if(option["type"] == "string") {
     setting = getdvar("fx");
-  if(option["type"] == "int")
+  }
+  if(option["type"] == "int") {
     setting = getdvarint("fx");
-  if(option["type"] == "float")
+  }
+  if(option["type"] == "float") {
     setting = getdvarfloat("fx");
+  }
   apply_option_to_selected_fx(option, setting);
 }
 
 apply_option_to_selected_fx(option, setting) {
   for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    if(mask(option["mask"], ent.v["type"]))
+    if(mask(option["mask"], ent.v["type"])) {
       ent.v[option["name"]] = setting;
+    }
   }
   update_selected_entities();
   clear_settable_fx();
@@ -281,8 +291,9 @@ addOption(type, name, description, defaultSetting, mask) {
 
 get_option(name) {
   for(i = 0; i < level.createFX_options.size; i++) {
-    if(level.createFX_options[i]["name"] == name)
+    if(level.createFX_options[i]["name"] == name) {
       return level.createFX_options[i];
+    }
   }
 }
 
@@ -301,8 +312,9 @@ display_fx_info(ent) {
     more = false;
     for(i = 0; i < level.createFX_options.size; i++) {
       option = level.createFX_options[i];
-      if(!isDefined(ent.v[option["name"]]))
+      if(!isDefined(ent.v[option["name"]])) {
         continue;
+      }
       count++;
       if(count < level.effect_list_offset) {
         continue;
@@ -314,8 +326,9 @@ display_fx_info(ent) {
         break;
       }
     }
-    if(count > level.effect_list_offset_max)
+    if(count > level.effect_list_offset_max) {
       set_fx_hudElement("(m) More >");
+    }
     set_fx_hudElement("(a) Add >");
     set_fx_hudElement("(x) Exit >");
   } else {
@@ -323,8 +336,9 @@ display_fx_info(ent) {
     more = false;
     for(i = 0; i < level.createFX_options.size; i++) {
       option = level.createFX_options[i];
-      if(!isDefined(ent.v[option["name"]]))
+      if(!isDefined(ent.v[option["name"]])) {
         continue;
+      }
       count++;
       set_fx_hudElement(option["description"] + ": " + ent.v[option["name"]]);
       if(count > level.createFx_hudElements) {
@@ -345,8 +359,9 @@ display_fx_add_options(ent) {
   count = 0;
   drawnCount = 0;
   more = false;
-  if(level.effect_list_offset >= level.createFX_options.size)
+  if(level.effect_list_offset >= level.createFX_options.size) {
     level.effect_list_offset = 0;
+  }
   for(i = 0; i < level.createFX_options.size; i++) {
     option = level.createFX_options[i];
     if(isDefined(ent.v[option["name"]])) {
@@ -356,15 +371,17 @@ display_fx_add_options(ent) {
       continue;
     }
     count++;
-    if(count < level.effect_list_offset)
+    if(count < level.effect_list_offset) {
       continue;
+    }
     if(drawnCount >= level.effect_list_offset_max) {
       continue;
     }
     drawnCount++;
     button_to_check = drawnCount;
-    if(button_to_check == 10)
+    if(button_to_check == 10) {
       button_to_check = 0;
+    }
     if(button_is_clicked(button_to_check + "")) {
       add_option_to_selected_entities(option);
       menuNone();
@@ -372,8 +389,9 @@ display_fx_add_options(ent) {
     }
     set_fx_hudElement(button_to_check + ". " + option["description"]);
   }
-  if(count > level.effect_list_offset_max)
+  if(count > level.effect_list_offset_max) {
     set_fx_hudElement("(m) More >");
+  }
   set_fx_hudElement("(x) Exit >");
 }
 
@@ -381,8 +399,9 @@ add_option_to_selected_entities(option) {
   setting = undefined;
   for(i = 0; i < level.selected_fx_ents.size; i++) {
     ent = level.selected_fx_ents[i];
-    if(mask(option["mask"], ent.v["type"]))
+    if(mask(option["mask"], ent.v["type"])) {
       ent.v[option["name"]] = option["default"];
+    }
   }
 }
 
@@ -398,8 +417,9 @@ draw_effects_list() {
   count = 0;
   more = false;
   keys = get_level_fx();
-  if(level.effect_list_offset >= keys.size)
+  if(level.effect_list_offset >= keys.size) {
     level.effect_list_offset = 0;
+  }
   for(i = level.effect_list_offset; i < keys.size; i++) {
     count = count + 1;
     set_fx_hudElement(count + ". " + keys[i]);
@@ -408,8 +428,9 @@ draw_effects_list() {
       break;
     }
   }
-  if(keys.size > level.effect_list_offset_max)
+  if(keys.size > level.effect_list_offset_max) {
     set_fx_hudElement("(m) More >");
+  }
 }
 
 increment_list_offset() {

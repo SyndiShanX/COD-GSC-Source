@@ -4,8 +4,9 @@
 ***************************************/
 
 func_B8CB() {
-  if(!isDefined(level.func_FD6E))
+  if(!isDefined(level.func_FD6E)) {
     level.func_FD6E = spawnStruct();
+  }
 
   return level.func_FD6E;
 }
@@ -14,13 +15,16 @@ func_E3C6(var_00, var_01, var_02, var_03, var_04) {
   level notify("stop jackal landing");
   level endon("stop jackal landing");
 
-  if(getdvarint("skip_nextmission", 0))
+  if(getdvarint("skip_nextmission", 0)) {
     var_00 = 0;
-  else if(!isDefined(var_00))
+  }
+  else if(!isDefined(var_00)) {
     var_00 = 1;
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 1;
+  }
 
   func_0BDC::func_137CF();
   level.func_FD6E.func_E35D thread func_0BDB::func_A2F2(undefined, var_04);
@@ -57,8 +61,9 @@ func_E3C7(var_00) {
   level.player endon("death");
   var_01 = level.func_FD6E.func_E35D.unique_id;
 
-  if(!isDefined(level.func_FD6E.func_E35D.unique_id))
+  if(!isDefined(level.func_FD6E.func_E35D.unique_id)) {
     var_01 = "_ignore_last_sparam";
+  }
 
   var_02 = func_0EFB::func_7994("ret_jackal_spawner_1", "targetname", var_01);
 
@@ -93,8 +98,9 @@ func_B8CA(var_00) {
 }
 
 func_ACE8() {
-  while(!isDefined(level.func_D127))
+  while(!isDefined(level.func_D127)) {
     wait 0.05;
+  }
 }
 
 #using_animtree("script_model");
@@ -102,10 +108,12 @@ func_ACE8() {
 func_973A(var_00, var_01) {
   var_02 = getEntArray(var_00 + "_shipcrib", "script_noteworthy");
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_02 = func_0EFB::func_7994(var_00 + "_shipcrib", "script_noteworthy", var_01);
-  else
+  }
+  else {
     var_01 = "_ignore_last_sparam";
+  }
 
   var_03 = var_02;
   var_04 = undefined;
@@ -171,8 +179,9 @@ func_973A(var_00, var_01) {
           var_4.func_E8AD.func_12713 = var_06;
           break;
         case "runway_light":
-          if(!scripts\engine\utility::fxexists("vfx_glow_red_light_400_strobe"))
+          if(!scripts\engine\utility::fxexists("vfx_glow_red_light_400_strobe")) {
             scripts\engine\utility::add_fx("vfx_glow_red_light_400_strobe", "vfx\misc\lights\vfx_glow_red_light_400_strobe.vfx");
+          }
 
           playFXOnTag(scripts\engine\utility::getfx("vfx_glow_red_light_400_strobe"), var_06, "light_on_LOD0");
           break;
@@ -311,8 +320,9 @@ func_FDCB(var_00) {
   var_02 = ["trigger_multiple", "reflection_probe", "locator_volume"];
 
   foreach(var_04 in self.partnerheli) {
-    if(!scripts\engine\utility::array_contains(var_02, var_4.code_classname))
+    if(!scripts\engine\utility::array_contains(var_02, var_4.code_classname)) {
       var_01 = scripts\engine\utility::array_add(var_01, var_04);
+    }
   }
 
   switch (var_00) {
@@ -334,18 +344,21 @@ func_FDCB(var_00) {
 }
 
 func_10635() {
-  if(isDefined(level.func_E3FB))
+  if(isDefined(level.func_E3FB)) {
     scripts\engine\utility::flag_wait(level.func_E3FB);
+  }
 
   self.func_74A1 = scripts\engine\utility::spawn_tag_origin();
   self.func_74A1.origin = self.func_74A1.origin + anglesToForward(self.angles) * 13000;
   self.func_74A1.origin = self.func_74A1.origin + anglestoup(self.angles) * 1500;
   self.func_74A1 linkto(self);
 
-  if(isDefined(self.func_E505))
+  if(isDefined(self.func_E505)) {
     var_00 = self.func_E505;
-  else
+  }
+  else {
     var_00 = self.model;
+  }
 
   var_01 = _getnumparts(var_00);
 
@@ -399,19 +412,23 @@ func_10635() {
     var_13 = getarraykeys(self.func_747E);
 
     if(isDefined(scripts\engine\utility::array_find(var_13, var_12))) {
-      if(getsubstr(var_12, 0, 1) == "a")
+      if(getsubstr(var_12, 0, 1) == "a") {
         self.func_747F[var_11].func_EB9C = "_small";
-      else
+      }
+      else {
         self.func_747F[var_11].func_EB9C = "_large";
+      }
 
       self.func_747E[var_12] = ::scripts\engine\utility::array_add(self.func_747E[var_12], self.func_747F[var_11]);
       continue;
     }
 
-    if(getsubstr(var_12, 0, 1) == "a")
+    if(getsubstr(var_12, 0, 1) == "a") {
       self.func_747F[var_11].func_EB9C = "_small";
-    else
+    }
+    else {
       self.func_747F[var_11].func_EB9C = "_large";
+    }
 
     self.func_747E[var_12] = [self.func_747F[var_11]];
   }
@@ -420,8 +437,9 @@ func_10635() {
 func_E403() {
   self endon("death");
 
-  for(;;)
+  for(;;) {
     scripts\engine\utility::flag_waitopen(level.script + "_prime_tr");
+  }
 }
 
 func_C5FE(var_00) {
@@ -465,8 +483,9 @@ func_747A(var_00) {
 }
 
 func_C5FC(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 1;
+  }
 
   thread func_C5FE("b_a");
   wait(var_00);
@@ -517,13 +536,15 @@ func_C5FD() {
 func_10C56() {
   var_00 = getarraykeys(self.func_747E);
 
-  foreach(var_02 in var_00)
+  foreach(var_02 in var_00) {
   thread func_747B(var_02);
+  }
 }
 
 func_4268(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 1;
+  }
 
   thread func_4269("a_d");
   wait(var_00);
@@ -557,27 +578,31 @@ func_4268(var_00) {
 stop_func() {
   var_00 = getarraykeys(self.func_747E);
 
-  foreach(var_02 in var_00)
+  foreach(var_02 in var_00) {
   thread func_747A(var_02);
+  }
 }
 
 func_8E84() {
-  while(!isDefined(self.func_747F))
+  while(!isDefined(self.func_747F)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::array_call(self.func_747F, ::hide);
 }
 
 func_100DD() {
-  while(!isDefined(self.func_747F))
+  while(!isDefined(self.func_747F)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::array_call(self.func_747F, ::show);
 }
 
 func_5155() {
-  while(!isDefined(self.func_747F))
+  while(!isDefined(self.func_747F)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\engine\utility::array_call(self.func_747F, ::delete);
 }

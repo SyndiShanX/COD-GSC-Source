@@ -227,8 +227,9 @@ spawn_manager_spawn_group(manager, spawner, spawnGroupSize) {
       }
       ai thread spawn_accounting(spawner, self);
     }
-    if(spawn_count == spawnGroupSize)
+    if(spawn_count == spawnGroupSize) {
       wait(.05);
+    }
   }
 }
 

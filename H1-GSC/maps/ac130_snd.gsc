@@ -179,18 +179,22 @@ add_context_sensative_dialog(var_0, var_1, var_2, var_3) {
 }
 
 add_context_sensative_timeout(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.context_sensative_dialog_timeouts))
+  if(!isDefined(level.context_sensative_dialog_timeouts)) {
     level.context_sensative_dialog_timeouts = [];
+  }
 
   var_4 = 0;
 
-  if(!isDefined(level.context_sensative_dialog_timeouts[var_0]))
+  if(!isDefined(level.context_sensative_dialog_timeouts[var_0])) {
     var_4 = 1;
-  else if(!isDefined(level.context_sensative_dialog_timeouts[var_0][var_1]))
+  }
+  else if(!isDefined(level.context_sensative_dialog_timeouts[var_0][var_1])) {
     var_4 = 1;
+  }
 
-  if(var_4)
+  if(var_4) {
     level.context_sensative_dialog_timeouts[var_0][var_1] = spawnStruct();
+  }
 
   if(isDefined(var_2)) {
     level.context_sensative_dialog_timeouts[var_0][var_1].groups = [];

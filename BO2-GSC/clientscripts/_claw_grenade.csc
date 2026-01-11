@@ -25,10 +25,12 @@ loop_local_sound(localclientnum, alias, interval, fx, fx2) {
     fusetime = fusetime - interval;
     interval = interval / 1.1;
 
-    if(interval < 0.1)
+    if(interval < 0.1) {
       interval = 0.1;
+    }
 
-    if(fusetime < 1.0 && fxtoplay == fx)
+    if(fusetime < 1.0 && fxtoplay == fx) {
       fxtoplay = fx2;
+    }
   }
 }

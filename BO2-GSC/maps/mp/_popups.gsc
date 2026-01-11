@@ -64,8 +64,9 @@ popupsfromconsole() {
   while(true) {
     timeout = getdvarintdefault("scr_popuptime", 1.0);
 
-    if(timeout == 0)
+    if(timeout == 0) {
       timeout = 1;
+    }
 
     wait(timeout);
     medal = getdvarintdefault("scr_popupmedal", 0);
@@ -78,31 +79,37 @@ popupsfromconsole() {
     teammsg = getdvarintdefault("scr_teamslideout", 0);
     challengeindex = getdvarintdefault("scr_challengeIndex", 1);
 
-    for(i = 0; i < medal; i++)
+    for(i = 0; i < medal; i++) {
       level.players[0] maps\mp\_medals::codecallback_medal(4);
+    }
 
     for(i = 0; i < challenge; i++) {
       level.players[0] maps\mp\gametypes\_persistence::codecallback_challengecomplete(2500, 1, 84, 3, 0, 0, 851);
       level.players[0] maps\mp\gametypes\_persistence::codecallback_challengecomplete(500, 1, 22, 2, 0, 0, 533);
     }
 
-    for(i = 0; i < rank; i++)
+    for(i = 0; i < rank; i++) {
       level.players[0] maps\mp\gametypes\_rank::codecallback_rankup(4, 0, 0);
+    }
 
-    for(i = 0; i < gun; i++)
+    for(i = 0; i < gun; i++) {
       level.players[0] maps\mp\gametypes\_persistence::codecallback_gunchallengecomplete(0, 20, 25, 0);
+    }
 
-    for(i = 0; i < contractpass; i++)
+    for(i = 0; i < contractpass; i++) {
       level.players[0] maps\mp\gametypes\_persistence::addcontracttoqueue(12, 1);
+    }
 
-    for(i = 0; i < contractfail; i++)
+    for(i = 0; i < contractfail; i++) {
       level.players[0] maps\mp\gametypes\_persistence::addcontracttoqueue(12, 0);
+    }
 
     for(i = 0; i < teammsg; i++) {
       player = level.players[0];
 
-      if(isDefined(level.players[1]))
+      if(isDefined(level.players[1])) {
         player = level.players[1];
+      }
 
       level.players[0] displayteammessagetoall(&"KILLSTREAK_DESTROYED_HELICOPTER", player);
     }
@@ -110,29 +117,37 @@ popupsfromconsole() {
     reset = getdvarintdefault("scr_popupreset", 1);
 
     if(reset) {
-      if(medal)
+      if(medal) {
         setdvar("scr_popupmedal", 0);
+      }
 
-      if(challenge)
+      if(challenge) {
         setdvar("scr_popupchallenge", 0);
+      }
 
-      if(gun)
+      if(gun) {
         setdvar("scr_popupgun", 0);
+      }
 
-      if(rank)
+      if(rank) {
         setdvar("scr_popuprank", 0);
+      }
 
-      if(contractpass)
+      if(contractpass) {
         setdvar("scr_popupcontractpass", 0);
+      }
 
-      if(contractfail)
+      if(contractfail) {
         setdvar("scr_popupcontractfail", 0);
+      }
 
-      if(gamemodemsg)
+      if(gamemodemsg) {
         setdvar("scr_gamemodeslideout", 0);
+      }
 
-      if(teammsg)
+      if(teammsg) {
         setdvar("scr_teamslideout", 0);
+      }
     }
   }
 
@@ -150,8 +165,9 @@ displaykillstreakteammessagetoall(killstreak, player) {
 }
 
 shoulddisplayteammessages() {
-  if(level.hardcoremode == 1 || level.splitscreen == 1)
+  if(level.hardcoremode == 1 || level.splitscreen == 1) {
     return false;
+  }
 
   return true;
 }
@@ -212,8 +228,9 @@ displayteammessagewaiter() {
   self.teammessagequeue = [];
 
   for(;;) {
-    if(self.teammessagequeue.size == 0)
+    if(self.teammessagequeue.size == 0) {
       self waittill("received teammessage");
+    }
 
     if(self.teammessagequeue.size > 0) {
       nextnotifydata = self.teammessagequeue[0];
@@ -236,19 +253,22 @@ displaypopupswaiter() {
   self endon("disconnect");
   self.ranknotifyqueue = [];
 
-  if(!isDefined(self.pers["challengeNotifyQueue"]))
+  if(!isDefined(self.pers["challengeNotifyQueue"])) {
     self.pers["challengeNotifyQueue"] = [];
+  }
 
-  if(!isDefined(self.pers["contractNotifyQueue"]))
+  if(!isDefined(self.pers["contractNotifyQueue"])) {
     self.pers["contractNotifyQueue"] = [];
+  }
 
   self.messagenotifyqueue = [];
   self.startmessagenotifyqueue = [];
   self.wagernotifyqueue = [];
 
   while(!level.gameended) {
-    if(self.startmessagenotifyqueue.size == 0 && self.messagenotifyqueue.size == 0)
+    if(self.startmessagenotifyqueue.size == 0 && self.messagenotifyqueue.size == 0) {
       self waittill("received award");
+    }
 
     waittillframeend;
 
@@ -260,10 +280,12 @@ displaypopupswaiter() {
       nextnotifydata = self.startmessagenotifyqueue[0];
       arrayremoveindex(self.startmessagenotifyqueue, 0, 0);
 
-      if(isDefined(nextnotifydata.duration))
+      if(isDefined(nextnotifydata.duration)) {
         duration = nextnotifydata.duration;
-      else
+      }
+      else {
         duration = level.startmessagedefaultduration;
+      }
 
       self maps\mp\gametypes\_hud_message::shownotifymessage(nextnotifydata, duration);
       wait(duration);
@@ -271,10 +293,12 @@ displaypopupswaiter() {
       nextnotifydata = self.messagenotifyqueue[0];
       arrayremoveindex(self.messagenotifyqueue, 0, 0);
 
-      if(isDefined(nextnotifydata.duration))
+      if(isDefined(nextnotifydata.duration)) {
         duration = nextnotifydata.duration;
-      else
+      }
+      else {
         duration = level.regulargamemessages.waittime;
+      }
 
       self maps\mp\gametypes\_hud_message::shownotifymessage(nextnotifydata, duration);
     } else
@@ -288,16 +312,18 @@ onplayerconnect() {
     player.resetgameoverhudrequired = 0;
     player thread displaypopupswaiter();
 
-    if(!level.hardcoremode)
+    if(!level.hardcoremode) {
       player thread displayteammessagewaiter();
+    }
   }
 }
 
 milestonenotify(index, itemindex, type, tier) {
   level.globalchallenges++;
 
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = "global";
+  }
 
   size = self.pers["challengeNotifyQueue"].size;
   self.pers["challengeNotifyQueue"][size] = [];

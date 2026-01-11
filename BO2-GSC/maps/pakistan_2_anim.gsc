@@ -425,8 +425,9 @@ stat_vo_check_1(isi_leader) {
     if(level.str_hud_current_state != "recording") {
       wait 1;
 
-      if(level.str_hud_current_state != "recording")
+      if(level.str_hud_current_state != "recording") {
         level notify("stat_vo_check_1_failed");
+      }
     }
 
     wait 0.05;
@@ -444,8 +445,9 @@ stat_vo_check_2a(menendez) {
   wait 0.5;
 
   while(isDefined(menendez.is_talking)) {
-    if(level.str_hud_current_state != "recording")
+    if(level.str_hud_current_state != "recording") {
       level notify("stat_vo_check_2a_failed");
+    }
 
     wait 0.05;
   }
@@ -458,8 +460,9 @@ stat_vo_check_2b(defalco) {
   wait 0.5;
 
   while(isDefined(defalco.is_talking)) {
-    if(level.str_hud_current_state != "recording")
+    if(level.str_hud_current_state != "recording") {
       level notify("stat_vo_check_2b_failed");
+    }
 
     wait 0.05;
   }
@@ -479,8 +482,9 @@ stat_vo_check_3(menendez) {
   wait 0.5;
 
   while(isDefined(menendez.is_talking)) {
-    if(level.str_hud_current_state != "recording")
+    if(level.str_hud_current_state != "recording") {
       level notify("stat_vo_check_3_failed");
+    }
 
     wait 0.05;
   }

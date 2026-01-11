@@ -17,20 +17,25 @@ main(var_0, var_1, var_2) {
   if(issubstr(var_2, "turret")) {
     maps\_vehicle::build_aianims(::setanims_turret, ::set_vehicle_anims);
 
-    if(issubstr(var_2, "_paris") || issubstr(var_2, "_hijack"))
+    if(issubstr(var_2, "_paris") || issubstr(var_2, "_hijack")) {
       maps\_vehicle::build_turret("dshk_gaz_damage_player", "tag_turret", "weapon_dshk_turret", undefined, "auto_ai", 0.2, -20, -14);
+    }
 
-    if(issubstr(var_2, "_factory"))
+    if(issubstr(var_2, "_factory")) {
       maps\_vehicle::build_turret("dshk_gaz_factory", "tag_turret", "weapon_dshk_turret", undefined, "auto_ai", 0.2, -20, -14);
-    else
+    }
+    else {
       maps\_vehicle::build_turret("dshk_gaz", "tag_turret", "weapon_dshk_turret", undefined, "auto_ai", 0.2, -20, -14);
+    }
   } else
     maps\_vehicle::build_aianims(::setanims, ::set_vehicle_anims);
 
-  if(var_2 == "script_vehicle_gaz_tigr_turret_physics_paris")
+  if(var_2 == "script_vehicle_gaz_tigr_turret_physics_paris") {
     maps\_vehicle::build_destructible(var_0, "vehicle_gaz_harbor");
-  else
+  }
+  else {
     build_gaz_death(var_2, var_0);
+  }
 
   maps\_vehicle::build_light(var_2, "headlight_L", "TAG_HEADLIGHT_LEFT", "fx/misc/spotlight_btr80_daytime", "running", 0.0);
   maps\_vehicle::build_light(var_2, "headlight_R", "TAG_HEADLIGHT_RIGHT", "fx/misc/spotlight_btr80_daytime", "running", 0.0);
@@ -95,8 +100,9 @@ build_gaz_death(var_0, var_1) {
 
   maps\_vehicle::build_deathquake(1, 1.6, 500);
 
-  if(var_0 != "script_vehicle_gaz_tigr_turret_physics_factory")
+  if(var_0 != "script_vehicle_gaz_tigr_turret_physics_factory") {
     maps\_vehicle::build_radiusdamage((0, 0, 32), 300, 200, 0, 0);
+  }
 }
 
 set_vehicle_anims(var_0) {
@@ -124,8 +130,9 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 4; var_1++)
+  for(var_1 = 0; var_1 < 4; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   var_0[0].sittag = "tag_driver";
   var_0[1].sittag = "tag_passenger";

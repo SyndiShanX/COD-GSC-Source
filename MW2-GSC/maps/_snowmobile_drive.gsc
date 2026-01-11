@@ -39,20 +39,25 @@ snowmobile_preLoad(playerHandModel, playerSnowmobileModel) {
   flag_set("player_can_die_on_snowmobile");
 
   // set player hand model
-  if(!isDefined(playerHandModel))
+  if(!isDefined(playerHandModel)) {
     level.snowmobile_playerHandModel = "viewhands_player_arctic_wind";
-  else
+  }
+  else {
     level.snowmobile_playerHandModel = playerHandModel;
+  }
 
   // set player snowmobile model
-  if(!isDefined(playerSnowmobileModel))
+  if(!isDefined(playerSnowmobileModel)) {
     level.snowmobile_playerSnowmobileModel = "vehicle_snowmobile_player";
-  else
+  }
+  else {
     level.snowmobile_playerSnowmobileModel = playerSnowmobileModel;
+  }
 
   // set gun
-  if(!isDefined(level.snowmobile_gunModel))
+  if(!isDefined(level.snowmobile_gunModel)) {
     level.snowmobile_gunModel = "viewmodel_glock";
+  }
   level.snowmobile_gun = "snowmobile_glock";
 
   // precahe models and itmes
@@ -88,8 +93,9 @@ drive_vehicle() {
   Assert(isDefined(player));
   Assert(player.classname == "player");
 
-  if(!player ent_flag_exist("player_shot_on_snowmobile"))
+  if(!player ent_flag_exist("player_shot_on_snowmobile")) {
     player ent_flag_init("player_shot_on_snowmobile");
+  }
 
   attack_hint_string = "snowmobile_attack_player1";
   drive_hint_string = "snowmobile_drive_player1";
@@ -128,10 +134,12 @@ drive_vehicle() {
   player thread drive_notetrack_sounds(vehicle, "reload_anim");
   player thread drive_notetrack_sounds(vehicle, "putaway_anim");
 
-  if(is_coop())
+  if(is_coop()) {
     player thread make_coop_vehicle(vehicle);
-  if(is_specialop())
+  }
+  if(is_specialop()) {
     vehicle thread handle_riders(player);
+  }
 
   player drive_switch_to_1st_person(vehicle);
   vehicle waittill_either("vehicle_dismount", "death");
@@ -154,10 +162,12 @@ add_rumble_for_notify(message, rumble, player) {
 
 handle_riders(player) {
   wait 0.05;
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if(!isalive(player))
+  }
+  if(!isalive(player)) {
     return;
+  }
 
   array_call(self.riders, ::hideOnClient, player);
 
@@ -177,8 +187,9 @@ handle_riders(player) {
 
 add_snowmobile_autosave_checks() {
   add_extra_autosave_check("snowmobile_speed", ::snowmobile_autosave_check, "^3Player was riding too slow");
-  if(isDefined(level.snowmobile_path))
+  if(isDefined(level.snowmobile_path)) {
     add_extra_autosave_check("snowmobile_fov", ::snowmobile_fov_check, "Player was pointed the wrong way");
+  }
 }
 
 reverse_hint(vehicle) {
@@ -217,35 +228,42 @@ should_stop_snowmobile_reverse_hint_player2() {
 }
 
 should_stop_snowmobile_reverse_hint() {
-  if(!isDefined(self.vehicle))
+  if(!isDefined(self.vehicle)) {
     retVal = true;
-  else
+  }
+  else {
   if(!isDefined(self.vehicle.hint_brake_count))
+  }
     retVal = true;
-  else
+  else {
   if(self ent_flag_exist("finish_line") && self ent_flag("finish_line"))
+  }
     retVal = true;
-  else
+  else {
     retVal = self.vehicle.hint_brake_count < 3;
+  }
 
-  if(retVal)
+  if(retVal) {
     self.reverse_hint_string = undefined;
+  }
 
   return retVal;
 }
 
 wait_for_vehicle_to_move() {
   for(;;) {
-    if(self.veh_speed > 10)
+    if(self.veh_speed > 10) {
       return;
+    }
     wait(1);
   }
 }
 
 make_coop_vehicle(vehicle) {
   clientOther = level.player2;
-  if(self != level.player)
+  if(self != level.player) {
     clientOther = level.player;
+  }
 
   // hide arms and player model from other players
   self hideOnClient(clientOther);
@@ -288,8 +306,9 @@ drive_target_enemy(vehicle) {
 
     foreach(guy in ai) {
       his_org = set_z(guy.origin, 0);
-      if(Distance(his_org, my_org) > 750)
+      if(Distance(his_org, my_org) > 750) {
         continue;
+      }
 
       fov = get_dot(my_org, self.angles, his_org);
       if(fov > highest_fov) {
@@ -314,18 +333,21 @@ drive_crash_detection(vehicle) {
   yaw_velocity *= CONST_MPHCONVERSION;
   velocity = (0, yaw_velocity, 64);
 
-  if(isDefined(level.vehicle_crash_func))
+  if(isDefined(level.vehicle_crash_func)) {
     self thread[[level.vehicle_crash_func]](vehicle);
+  }
 
   self thread drive_crash_slide(vehicle, velocity);
   self player_dismount_vehicle();
 }
 
 waittill_vehicle_crashes() {
-  if(!is_specialop())
+  if(!is_specialop()) {
     level endon("player_crashes"); // from triggers in the map
-  else
+  }
+  else {
     thread waittill_vehicle_falling_so();
+  }
 
   self waittill_any("veh_collision", "veh_falling");
 }
@@ -335,8 +357,9 @@ waittill_vehicle_falling_so() {
   trigger_ent = GetEnt("player_crashes_trigger", "script_noteworthy");
   while(1) {
     trigger_ent waittill("trigger", player);
-    if(!isDefined(player) || !isplayer(player))
+    if(!isDefined(player) || !isplayer(player)) {
       continue;
+    }
     if(player.snowmobile == self) {
       self notify("veh_falling");
       return;
@@ -350,8 +373,9 @@ drive_crash_slide(vehicle, velocity) {
   self BeginSliding(velocity);
 
   if(flag("player_can_die_on_snowmobile")) {
-    if(isalive(self))
+    if(isalive(self)) {
       self kill_wrapper();
+    }
   }
 
   wait(1.0);
@@ -390,8 +414,9 @@ drive_notetrack_sounds(vehicle, animflag) {
 }
 
 drive_switch_to_1st_person(vehicle) {
-  if(isDefined(vehicle.firstPerson))
+  if(isDefined(vehicle.firstPerson)) {
     return;
+  }
 
   vehicle setModel(level.snowmobile_playerSnowmobileModel);
   vehicle Attach(level.snowmobile_playerHandModel, "tag_player");
@@ -403,8 +428,9 @@ drive_switch_to_1st_person(vehicle) {
 }
 
 drive_switch_to_3rd_person(vehicle) {
-  if(!isDefined(vehicle.firstPerson))
+  if(!isDefined(vehicle.firstPerson)) {
     return;
+  }
 
   if(isDefined(vehicle.gun_attached)) {
     vehicle Detach(level.snowmobile_gunModel, "tag_weapon_left");
@@ -474,8 +500,9 @@ drive_turning_anims(vehicle) {
 
     if(movementChange < 0) {
       // change to turn left anims
-      if(lastDirection != -1)
+      if(lastDirection != -1) {
         newDirection = true;
+      }
       lastDirection = -1;
 
       oldAnim = "turn_left2right_";
@@ -483,8 +510,9 @@ drive_turning_anims(vehicle) {
     }
     if(movementChange > 0) {
       // change to turn right anims
-      if(lastDirection != 1)
+      if(lastDirection != 1) {
         newDirection = true;
+      }
       lastDirection = 1;
 
       oldAnim = "turn_right2left_";
@@ -506,8 +534,9 @@ drive_turning_anims(vehicle) {
 
     // See what the new animation needs to be to match the player's input
     animTimeGoal = abs((steerValue - STEER_MIN) / (STEER_MIN - STEER_MAX));
-    if(newAnim == "turn_right2left_")
+    if(newAnim == "turn_right2left_") {
       animTimeGoal = 1.0 - animTimeGoal;
+    }
     animTimeGoal = cap_value(animTimeGoal, 0.0, 1.0);
 
     if(animTimeGoal < newAnimStartTime["L"]) {
@@ -642,8 +671,9 @@ drive_shooting_update_anims(vehicle) {
   vehicle.snowmobileShootTimer = SHOOT_ARM_UP_DELAY;
 
   for(;;) {
-    if(vehicle.snowmobileShootTimer <= 0.0)
+    if(vehicle.snowmobileShootTimer <= 0.0) {
       break;
+    }
 
     shootButtonPressed = is_shoot_button_pressed();
 
@@ -653,10 +683,12 @@ drive_shooting_update_anims(vehicle) {
       // play gun fire anims
       vehicle SetFlaggedAnimKnobLimitedRestart("fire_anim", vehicle getanim("gun_fire"), 1.0, 0.0, 1.0);
 
-      if(vehicle.snowmobileAmmoCount == 1)
+      if(vehicle.snowmobileAmmoCount == 1) {
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("glock_last_fire"), 1.0, 0.0, 1.0);
-      else
+      }
+      else {
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("glock_fire"), 1.0, 0.0, 1.0);
+      }
 
       // fire bullet
       self drive_magic_bullet(vehicle);
@@ -726,8 +758,9 @@ drive_sleeve_anims(vehicle) {
 
     // Animate sleeve flapping based on speed
     speedLerp = speed / SLEEVE_FLAP_SPEED;
-    if(speedLerp > 1.0)
+    if(speedLerp > 1.0) {
       speedLerp = 1.0;
+    }
 
     rate = (SLEEVE_FLAP_MAX_RATE - SLEEVE_FLAP_MIN_RATE) * speedLerp + SLEEVE_FLAP_MIN_RATE;
     weight = (SLEEVE_FLAP_MAX_WEIGHT - SLEEVE_FLAP_MIN_WEIGHT) * speedLerp + SLEEVE_FLAP_MIN_WEIGHT;
@@ -744,8 +777,9 @@ drive_speedometer_anims(vehicle) {
     speed = vehicle Vehicle_GetSpeed();
     speedLerp = speed / SPEEDOMETER_MAX_SPEED;
 
-    if(speedLerp > 1.0)
+    if(speedLerp > 1.0) {
       speedLerp = 1.0;
+    }
 
     if(speedLerp < 0.5) {
       weight = speedLerp / 0.5;
@@ -778,10 +812,12 @@ drive_tachometer_anims(vehicle) {
       weight = (throttle - TACH_RAND_DOWN) + RandomFloat(TACH_RAND_DOWN * 2.0);
     }
 
-    if(weight < 0.0)
+    if(weight < 0.0) {
       weight = 0.0;
-    else if(weight > 1.0)
+    }
+    else if(weight > 1.0) {
       weight = 1.0;
+    }
 
     vehicle SetAnim(vehicle getanim("rpm_min"), (1.0 - weight), blend, 1.0);
     vehicle SetAnim(vehicle getanim("rpm_max"), weight, blend, 1.0);
@@ -880,17 +916,21 @@ should_stop_snowmobile_attack_hint_player2() {
 }
 
 should_stop_snowmobile_attack_hint() {
-  if(isDefined(self.reverse_hint_string))
+  if(isDefined(self.reverse_hint_string)) {
     return true;
+  }
 
-  if(isDefined(level.no_snowmobile_attack_hint))
+  if(isDefined(level.no_snowmobile_attack_hint)) {
     return true;
+  }
 
-  if(!isDefined(self.vehicle))
+  if(!isDefined(self.vehicle)) {
     return true;
+  }
 
-  if(self ent_flag_exist("finish_line") && self ent_flag("finish_line"))
+  if(self ent_flag_exist("finish_line") && self ent_flag("finish_line")) {
     return true;
+  }
 
   return self ent_flag("player_shot_on_snowmobile");
 }
@@ -904,8 +944,9 @@ should_stop_snowmobile_drive_hint_player2() {
 }
 
 should_stop_snowmobile_drive_hint() {
-  if(!isDefined(self.vehicle))
+  if(!isDefined(self.vehicle)) {
     return true;
+  }
 
   return self.vehicle.veh_speed > 10;
 }

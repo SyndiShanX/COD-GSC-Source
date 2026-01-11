@@ -27,8 +27,9 @@ initLastStand() {
 }
 
 LastStandTime() {
-  if(allowRevive())
+  if(allowRevive()) {
     return level.howLongToDoLastStandForWithRevive;
+  }
   return level.howLongToDoLastStandForWithoutRevive;
 }
 
@@ -43,8 +44,9 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
   self.lastStandParams.sHitLoc = sHitLoc;
   self.lastStandParams.lastStandStartTime = gettime();
   mayDoLastStand = mayDoLastStand(sWeapon, sMeansOfDeath, sHitLoc);
-  if(getdvar("scr_forcelaststand") == "1")
+  if(getdvar("scr_forcelaststand") == "1") {
     mayDoLastStand = true;
+  }
   if(!mayDoLastStand) {
     self.useLastStandParams = true;
     self ensureLastStandParamsValidity();
@@ -81,8 +83,9 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
     self.previousAmmoClip[i] = self GetWeaponAmmoClip(weapon);
     self.previousAmmoStock[i] = self GetWeaponAmmoStock(weapon);
   }
-  if(!level.hardcoreMode || self.team != attacker.team)
+  if(!level.hardcoreMode || self.team != attacker.team) {
     revive_trigger_spawn();
+  }
   self takeallweapons();
   self giveWeapon(self.laststandpistol);
   self switchToWeapon(self.laststandpistol);
@@ -93,8 +96,9 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
     self SetWeaponAmmoStock(self.laststandpistol, level.amountOfLastStandPistolAmmoInStock);
   }
   self thread watchForInvalidWeaponSwitch();
-  if(self isThrowingGrenade())
+  if(self isThrowingGrenade()) {
     self thread waittillGrenadeThrown();
+  }
   else {
     grenadeTypePrimary = "frag_grenade_mp";
     self GiveWeapon(grenadeTypePrimary);
@@ -286,8 +290,9 @@ revive_trigger_think() {
               players[i] SwitchToWeapon("syrette_mp");
               players[i] SetWeaponAmmoStock("syrette_mp", 1);
               players[i] player_being_revived(self);
-              if(isDefined(self))
+              if(isDefined(self)) {
                 self.currentlyBeingRevived = false;
+              }
               players[i] TakeWeapon("syrette_mp");
               if(isDefined(players[i].previousPrimary) && players[i].previousPrimary != "none") {
                 players[i] SwitchToWeapon(players[i].previousprimary);
@@ -317,8 +322,9 @@ player_being_revived(playerBeingRevived) {
   self endon("death");
   self endon("disconnect");
   reviveTime = GetDvarInt("revive_time_taken");
-  if(!isDefined(playerBeingRevived.currentlyBeingRevived))
+  if(!isDefined(playerBeingRevived.currentlyBeingRevived)) {
     playerBeingRevived.currentlyBeingRevived = false;
+  }
   if(reviveTime > 0) {
     timer = 0;
     revivetrigger = playerBeingRevived.revivetrigger;
@@ -458,10 +464,12 @@ clearUpOnDisconnect(player) {
 }
 
 allowRevive() {
-  if(!level.teambased)
+  if(!level.teambased) {
     return false;
-  if(maps\mp\gametypes\_tweakables::getTweakableValue("player", "allowrevive") == 0)
+  }
+  if(maps\mp\gametypes\_tweakables::getTweakableValue("player", "allowrevive") == 0) {
     return false;
+  }
   return true;
 }
 
@@ -471,8 +479,9 @@ setupRevive() {
   }
   self.aboutToBleedOut = undefined;
   for(index = 0; index < 4; index++) {
-    if(!isDefined(self.reviveIcons[index]))
+    if(!isDefined(self.reviveIcons[index])) {
       self.reviveIcons[index] = newClientHudElem(self);
+    }
     self.reviveIcons[index].x = 0;
     self.reviveIcons[index].y = 0;
     self.reviveIcons[index].z = 0;
@@ -484,8 +493,9 @@ setupRevive() {
   }
   players = get_players();
   for(i = 0; i < players.size && i < 4; i++) {
-    if(self.team != players[i].team)
+    if(self.team != players[i].team) {
       continue;
+    }
     if(!isDefined(players[i].lastStand) || !players[i].lastStand) {
       continue;
     }
@@ -507,8 +517,9 @@ lastStandHealthOverlay() {
 }
 
 ensureLastStandParamsValidity() {
-  if(!isDefined(self.lastStandParams.attacker))
+  if(!isDefined(self.lastStandParams.attacker)) {
     self.lastStandParams.attacker = self;
+  }
 }
 
 detectReviveIconWaiter() {
@@ -589,7 +600,8 @@ showReviveIcon(lastStandPlayer) {
 }
 
 can_revive(reviver) {
-  if(isDefined(reviver) && reviver hasPerk("specialty_pistoldeath"))
+  if(isDefined(reviver) && reviver hasPerk("specialty_pistoldeath")) {
     return true;
+  }
   return false;
 }

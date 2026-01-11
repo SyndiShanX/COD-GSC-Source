@@ -52,8 +52,9 @@ enable_swim() {
   thread maps\_underwater::friendly_bubbles();
   thread underwater_blood();
 
-  if(!isDefined(anim.archetypes["soldier"]["swim"]))
+  if(!isDefined(anim.archetypes["soldier"]["swim"])) {
     init_swim_anims();
+  }
 
   animscripts\swim::swim_begin();
 }
@@ -388,8 +389,9 @@ init_swim_anim_deltas(var_0, var_1, var_2) {
   var_4 = var_1 + "_angleDelta";
   var_5 = 1;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_5 = var_2;
+  }
 
   anim.archetypes[var_0]["swim"][var_3] = [];
 
@@ -409,13 +411,15 @@ init_swim_anim_deltas(var_0, var_1, var_2) {
       if(var_5) {
         var_12 = lengthsquared(var_11);
 
-        if(var_12 > var_8)
+        if(var_12 > var_8) {
           var_8 = var_12;
+        }
       }
     }
 
-    if(var_5)
+    if(var_5) {
       anim.archetypes[var_0]["swim"][var_1]["maxDelta"] = sqrt(var_8);
+    }
   }
 }
 
@@ -448,24 +452,28 @@ init_ai_swim_animsets() {
 }
 
 ai_swim_pain() {
-  if(self.a.movement == "run")
+  if(self.a.movement == "run") {
     var_0 = % swimming_pain_1;
-  else
+  }
+  else {
     var_0 = common_scripts\utility::random([ % swimming_firing_pain_1, % swimming_firing_pain_2]);
+  }
 
   var_1 = 1;
   self setflaggedanimknoballrestart("painanim", var_0, % body, 1, 0.1, var_1);
 
-  if(self.a.pose == "prone")
+  if(self.a.pose == "prone") {
     self updateprone( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+  }
 
   if(animhasnotetrack(var_0, "start_aim")) {
     thread animscripts\pain::notifystartaim("painanim");
     self endon("start_aim");
   }
 
-  if(animhasnotetrack(var_0, "code_move"))
+  if(animhasnotetrack(var_0, "code_move")) {
     animscripts\shared::donotetracks("painanim");
+  }
 
   animscripts\shared::donotetracks("painanim");
 }
@@ -483,20 +491,26 @@ ai_swim_death() {
   playFXOnTag(common_scripts\utility::getfx("swim_ai_death_blood"), self, "j_spineupper");
 
   if(!isDefined(self.deathanim)) {
-    if(self.damageyaw > -60 && self.damageyaw <= 60)
+    if(self.damageyaw > -60 && self.damageyaw <= 60) {
       self.deathanim = % swimming_idle_death_behind;
-    else if(self.a.movement == "run")
+    }
+    else if(self.a.movement == "run") {
       self.deathanim = % swimming_death_1;
-    else if(animscripts\utility::damagelocationisany("left_arm_upper"))
+    }
+    else if(animscripts\utility::damagelocationisany("left_arm_upper")) {
       self.deathanim = % swimming_firing_death_1;
-    else if(animscripts\utility::damagelocationisany("head", "helmet"))
+    }
+    else if(animscripts\utility::damagelocationisany("head", "helmet")) {
       self.deathanim = % swimming_firing_death_2;
-    else
+    }
+    else {
       self.deathanim = common_scripts\utility::random([ % swimming_firing_death_1, % swimming_firing_death_2, % swimming_firing_death_3]);
+    }
   }
 
-  if(!isDefined(self.nodeathsound))
+  if(!isDefined(self.nodeathsound)) {
     animscripts\death::playdeathsound();
+  }
 
   return 0;
 }
@@ -508,8 +522,9 @@ underwater_blood() {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
     if(var_4 != "MOD_EXPLOSIVE") {
-      if(var_2 != (0, 0, 0))
+      if(var_2 != (0, 0, 0)) {
         playFX(common_scripts\utility::getfx("swim_ai_blood_impact"), var_3, var_2);
+      }
     }
   }
 }
@@ -556,8 +571,9 @@ jumpintowater(var_0) {
   if(isalive(self)) {
     self unlink();
 
-    if(!self.swimmer)
+    if(!self.swimmer) {
       thread enable_swim();
+    }
   }
 
   self notify("done_jumping_in");
@@ -598,8 +614,9 @@ glint_behavior() {
 
   for(;;) {
     if(self.weapon == self.primaryweapon && animscripts\combat_utility::player_sees_my_scope() && isDefined(self.enemy)) {
-      if(distancesquared(self.origin, self.enemy.origin) > 65536)
+      if(distancesquared(self.origin, self.enemy.origin) > 65536) {
         playFXOnTag(var_0, self, "tag_eye");
+      }
 
       var_1 = randomfloatrange(3, 5);
       wait(var_1);

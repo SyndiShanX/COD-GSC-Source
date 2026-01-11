@@ -39,8 +39,9 @@ snd_mp_mix_post_event() {
 snd_mp_player_join() {
   self clientaddsoundsubmix("mp_init_mix");
 
-  if(!isDefined(level._snd.dynamic_event_happened) || !level._snd.dynamic_event_happened)
+  if(!isDefined(level._snd.dynamic_event_happened) || !level._snd.dynamic_event_happened) {
     self clientaddsoundsubmix("mp_pre_event_mix");
+  }
   else {
     self clientclearsoundsubmix("mp_pre_event_mix");
     self clientaddsoundsubmix("mp_post_event_mix");
@@ -48,11 +49,13 @@ snd_mp_player_join() {
 }
 
 snd_message_init() {
-  if(!isDefined(level._snd))
+  if(!isDefined(level._snd)) {
     level._snd = spawnStruct();
+  }
 
-  if(!isDefined(level._snd.messages))
+  if(!isDefined(level._snd.messages)) {
     level._snd.messages = [];
+  }
 }
 
 snd_register_message(var_0, var_1) {
@@ -63,24 +66,31 @@ snd_music_message(var_0, var_1, var_2) {
   level notify("stop_other_music");
   level endon("stop_other_music");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     childthread snd_message("snd_music_handler", var_0, var_1, var_2);
-  else if(isDefined(var_1))
+  }
+  else if(isDefined(var_1)) {
     childthread snd_message("snd_music_handler", var_0, var_1);
-  else
+  }
+  else {
     childthread snd_message("snd_music_handler", var_0);
+  }
 }
 
 snd_message(var_0, var_1, var_2, var_3) {
   if(isDefined(level._snd.messages[var_0])) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       thread[[level._snd.messages[var_0]]](var_1, var_2, var_3);
-    else if(isDefined(var_2))
+    }
+    else if(isDefined(var_2)) {
       thread[[level._snd.messages[var_0]]](var_1, var_2);
-    else if(isDefined(var_1))
+    }
+    else if(isDefined(var_1)) {
       thread[[level._snd.messages[var_0]]](var_1);
-    else
+    }
+    else {
       thread[[level._snd.messages[var_0]]]();
+    }
   }
 }
 

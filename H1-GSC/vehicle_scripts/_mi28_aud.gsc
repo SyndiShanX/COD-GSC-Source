@@ -165,8 +165,9 @@ mi28_condition_callback_to_hover(var_0, var_1) {
   var_3 = var_0["distance2d"];
   var_4 = soundscripts\_audio_vehicle_manager::dist2yards(var_3);
 
-  if(var_2 < 1.1 && var_4 < 3000)
+  if(var_2 < 1.1 && var_4 < 3000) {
     return 1;
+  }
 
   return 0;
 }
@@ -176,8 +177,9 @@ mi28_condition_callback_to_fly(var_0, var_1) {
   var_3 = var_0["distance2d"];
   var_4 = soundscripts\_audio_vehicle_manager::dist2yards(var_3);
 
-  if(var_2 >= 1.1 && var_4 < 3000)
+  if(var_2 >= 1.1 && var_4 < 3000) {
     return 1;
+  }
 
   return 0;
 }
@@ -195,8 +197,9 @@ mi28_condition_callback_to_flyby(var_0, var_1) {
   } else {
     var_6 = var_3 - var_1.flyby.prev_dist;
 
-    if(var_6 < 0 && var_4 < 2500 && var_5 >= 20.1)
+    if(var_6 < 0 && var_4 < 2500 && var_5 >= 20.1) {
       var_2 = 1;
+    }
 
     var_1.flyby.prev_dist = var_3;
     var_1.flyby.prev_dx = var_6;
@@ -209,8 +212,9 @@ mi28_condition_callback_to_distant(var_0, var_1) {
   var_2 = var_0["distance2d"];
   var_3 = soundscripts\_audio_vehicle_manager::dist2yards(var_2);
 
-  if(var_3 >= 3000)
+  if(var_3 >= 3000) {
     return 1;
+  }
 
   return 0;
 }

@@ -28,8 +28,9 @@ set_kill_trigger_event_processed(player, value) {
 }
 
 onNormalDeath(victim, attacker, lifeId) {
-  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]])
+  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]]) {
     attacker.finalKill = true;
+  }
 }
 
 CONST_DANGEROUS_RADIUS = 256;
@@ -47,8 +48,9 @@ onAlienAgentKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir,
   type = self.alien_type;
   pet_spawned = false;
 
-  if(!isDefined(vDir))
+  if(!isDefined(vDir)) {
     vDir = anglesToForward(self.angles);
+  }
 
   self maps\mp\alien\_alien_fx::disable_fx_on_death();
 
@@ -67,17 +69,20 @@ onAlienAgentKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir,
     if(self maps\mp\alien\_utility::can_hypno(eAttacker, isPetTrapKill)) {
       thread maps\mp\gametypes\aliens::spawnAllyPet(type, 1, self.origin, eAttacker, self.angles, isPetTrapKill);
       pet_spawned = true;
-      if(type == "elite" && isPetTrapKill && isDefined(level.update_achievement_hypno_trap_func))
+      if(type == "elite" && isPetTrapKill && isDefined(level.update_achievement_hypno_trap_func)) {
         eAttacker[[level.update_achievement_hypno_trap_func]]();
+      }
     }
 
-    if(!isPetTrapKill)
+    if(!isPetTrapKill) {
       eInflictor delete();
+    }
   }
 
   should_do_custom_death = false;
-  if(isDefined(level.custom_alien_death_func))
+  if(isDefined(level.custom_alien_death_func)) {
     should_do_custom_death = self[[level.custom_alien_death_func]](eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc);
+  }
 
   if(should_do_pipebomb_death(sWeapon)) {
     self thread do_pipebomb_death();
@@ -115,18 +120,21 @@ onAlienAgentKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir,
     reward_unit = reward_point / eAttacker.reward_pool.size;
 
     foreach(player in eAttacker.reward_pool) {
-      if(isDefined(player))
+      if(isDefined(player)) {
         player.chopper_reward = 0;
+      }
     }
 
     foreach(player in eAttacker.reward_pool) {
-      if(isDefined(player))
+      if(isDefined(player)) {
         player.chopper_reward += reward_unit;
+      }
     }
 
     foreach(player in level.players) {
-      if(isDefined(player) && isDefined(player.chopper_reward))
+      if(isDefined(player) && isDefined(player.chopper_reward)) {
         maps\mp\alien\_gamescore::giveKillReward(player, int(player.chopper_reward), "large");
+      }
     }
   } else {
     if(isDefined(eAttacker.pet) && (eAttacker.pet == 1)) {
@@ -144,8 +152,9 @@ onAlienAgentKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 
   maps\mp\alien\_persistence::update_alien_kill_sessionStats(eInflictor, eAttacker);
 
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     maps\mp\alien\_chaos::update_alien_killed_event(get_alien_type(), self.origin, eAttacker);
+  }
 
   blackBox_alienKilled(eAttacker);
 
@@ -160,11 +169,13 @@ onAlienAgentKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir,
 }
 
 get_attacker_as_player(eAttacker) {
-  if(IsPlayer(eAttacker))
+  if(IsPlayer(eAttacker)) {
     return eAttacker;
+  }
 
-  if(isDefined(eAttacker.owner) && IsPlayer(eAttacker.owner))
+  if(isDefined(eAttacker.owner) && IsPlayer(eAttacker.owner)) {
     return eAttacker.owner;
+  }
 
   return undefined;
 }
@@ -194,8 +205,9 @@ on_alien_type_killed(pet_spawned) {
 
     default:
 
-      if(isDefined(level.dlc_alien_death_override_func))
+      if(isDefined(level.dlc_alien_death_override_func)) {
         self[[level.dlc_alien_death_override_func]](pet_spawned);
+      }
       break;
   }
 }
@@ -221,11 +233,13 @@ play_death_anim_and_ragdoll(eInflictor, iDamage, sMeansOfDeath, sWeapon, vDir, s
   } else {
     primary_animState = get_primary_death_anim_state();
 
-    if(!is_normal_upright(AnglesToUp(self.angles)))
+    if(!is_normal_upright(AnglesToUp(self.angles))) {
       move_away_from_surface(AnglesToUp(self.angles), ORIENTED_DEATH_OFFSET);
+    }
 
-    if(isDefined(self.apexTraversalDeathVector))
+    if(isDefined(self.apexTraversalDeathVector)) {
       move_away_from_surface(self.apexTraversalDeathVector, APEX_TRAVERSAL_DEATH_OFFSET);
+    }
 
     play_death_anim_and_ragdoll_internal(primary_animState, eInflictor, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc);
   }
@@ -234,8 +248,9 @@ play_death_anim_and_ragdoll(eInflictor, iDamage, sMeansOfDeath, sWeapon, vDir, s
 should_do_immediate_ragdoll(deathAnimState) {
   if(isDefined(level.dlc_alien_should_immediate_ragdoll_on_death_override_func)) {
     should_immediate_ragdoll = [[level.dlc_alien_should_immediate_ragdoll_on_death_override_func]](deathAnimState);
-    if(isDefined(should_immediate_ragdoll))
+    if(isDefined(should_immediate_ragdoll)) {
       return should_immediate_ragdoll;
+    }
   }
 
   switch (deathAnimState) {
@@ -272,35 +287,43 @@ move_away_from_surface(direction, offset_length) {
 }
 
 get_primary_death_anim_state() {
-  if(isDefined(self.shocked) && self.shocked)
+  if(isDefined(self.shocked) && self.shocked) {
     return "electric_shock_death";
+  }
 
   switch (self.currentAnimState) {
     case "scripted": {
       return "idle";
     }
     case "move": {
-      if(self.trajectoryActive)
+      if(self.trajectoryActive) {
         return "jump";
-      else
+      }
+      else {
         return "run";
+      }
     }
     case "idle": {
       return "idle";
     }
     case "melee": {
-      if(self.trajectoryActive)
+      if(self.trajectoryActive) {
         return "jump";
-      if(self.melee_in_move_back || self.melee_in_posture)
+      }
+      if(self.melee_in_move_back || self.melee_in_posture) {
         return "idle";
-      else
+      }
+      else {
         return "run";
+      }
     }
     case "traverse": {
-      if(self.trajectoryActive)
+      if(self.trajectoryActive) {
         return "jump";
-      else
+      }
+      else {
         return "traverse";
+      }
     }
     default: {
       AssertMsg("currentAnimState: " + self.currentAnimState + " does not have a death anim mapping.");
@@ -384,8 +407,9 @@ delayStartRagdoll(corpse, deathAnim) {
   } else {
     corpse startragdoll();
 
-    if(corpse isRagdoll())
+    if(corpse isRagdoll()) {
       return;
+    }
   }
 
   println("Corpse failed first ragdoll at " + corpse.origin);
@@ -398,29 +422,34 @@ delayStartRagdoll(corpse, deathAnim) {
     } else {
       corpse startragdoll();
 
-      if(corpse isRagdoll())
+      if(corpse isRagdoll()) {
         return;
+      }
     }
 
     println("Corpse failed second ragdoll at " + corpse.origin);
 
   }
 
-  if(isDefined(corpse))
+  if(isDefined(corpse)) {
     corpse delete();
+  }
 }
 
 should_do_ragdoll(ent, deathAnim) {
-  if(ent isRagDoll())
+  if(ent isRagDoll()) {
     return false;
+  }
 
-  if(animhasnotetrack(deathAnim, "ignore_ragdoll"))
+  if(animhasnotetrack(deathAnim, "ignore_ragdoll")) {
     return false;
+  }
 
   if(isDefined(level.noRagdollEnts) && level.noRagdollEnts.size) {
     foreach(noRag in level.noRagdollEnts) {
-      if(distanceSquared(ent.origin, noRag.origin) < 65536)
+      if(distanceSquared(ent.origin, noRag.origin) < 65536) {
         return false;
+      }
     }
   }
 
@@ -446,8 +475,9 @@ blackBox_alienKilled(eAttacker) {
 
     if(isDefined(eAttacker.agent_type)) {
       attacker_agent_type = eAttacker.agent_type;
-      if(isDefined(eAttacker.alien_type))
+      if(isDefined(eAttacker.alien_type)) {
         attacker_agent_type = eAttacker.alien_type;
+      }
     }
   } else {
     attacker_alive_time = 0;
@@ -456,8 +486,9 @@ blackBox_alienKilled(eAttacker) {
     if(isplayer(eAttacker)) {
       attacker_agent_type = "player";
 
-      if(isDefined(eAttacker.name))
+      if(isDefined(eAttacker.name)) {
         attacker_name = eAttacker.name;
+      }
     } else {
       attacker_agent_type = "nonagent";
     }
@@ -473,26 +504,31 @@ blackBox_alienKilled(eAttacker) {
   }
 
   victim_alive_time = 0;
-  if(isDefined(self.birthtime))
+  if(isDefined(self.birthtime)) {
     victim_alive_time = (gettime() - self.birthtime) / 1000;
+  }
 
   victim_spawn_origin = (0, 0, 0);
-  if(isDefined(self.spawnorigin))
+  if(isDefined(self.spawnorigin)) {
     victim_spawn_origin = self.spawnorigin;
+  }
 
   victim_dist_from_spawn = 0;
-  if(isDefined(self.spawnorigin))
+  if(isDefined(self.spawnorigin)) {
     victim_dist_from_spawn = distance(self.origin, self.spawnorigin);
+  }
 
   victim_damage_done = 0;
-  if(isDefined(self.damage_done))
+  if(isDefined(self.damage_done)) {
     victim_damage_done = self.damage_done;
+  }
 
   victim_agent_type = "unknown agent";
   if(isDefined(self.agent_type)) {
     victim_agent_type = self.agent_type;
-    if(isDefined(self.alien_type))
+    if(isDefined(self.alien_type)) {
       victim_agent_type = self.alien_type;
+    }
   }
 
   current_enemy_population = 0;
@@ -500,13 +536,15 @@ blackBox_alienKilled(eAttacker) {
     if(!isDefined(agent.isActive) || !agent.isActive) {
       continue;
     }
-    if(isDefined(agent.team) && agent.team == "axis")
+    if(isDefined(agent.team) && agent.team == "axis") {
       current_enemy_population++;
+    }
   }
 
   current_player_population = 0;
-  if(isDefined(level.players))
+  if(isDefined(level.players)) {
     current_player_population = level.players.size;
+  }
 
   if(GetDvarInt("alien_bbprint_debug") > 0) {
     IPrintLnBold("^8bbprint: alienkilled (1/2)\n" +
@@ -564,8 +602,9 @@ getKillTriggerSpawnLoc() {
 should_do_pipebomb_death(sWeapon) {
   alientype = self get_alien_type();
 
-  if(alientype == "minion" || alientype == "elite" || alientype == "mammoth")
+  if(alientype == "minion" || alientype == "elite" || alientype == "mammoth") {
     return false;
+  }
 
   return (isDefined(sWeapon) && sWeapon == "iw6_aliendlc22_mp");
 }

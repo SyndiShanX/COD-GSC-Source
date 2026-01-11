@@ -1078,4 +1078,3 @@ devgui_setup() {
   util::function_3f749abc(var_78a6fb52 + "<dev string:xda1>", var_c8d599b5 + "<dev string:xdbd>");
   util::function_3f749abc(var_78a6fb52 + "<dev string:xde5>", var_c8d599b5 + "<dev string:xe03>");
 }
-

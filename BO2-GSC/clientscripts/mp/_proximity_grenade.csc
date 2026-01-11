@@ -40,10 +40,12 @@ playflarefx(localclientnum) {
   self endon("entityshutdown");
   level endon("player_switch");
 
-  if(friendnotfoe(localclientnum))
+  if(friendnotfoe(localclientnum)) {
     fx_handle = playFXOnTag(localclientnum, level._effect["prox_grenade_friendly_default"], self, "tag_fx");
-  else
+  }
+  else {
     fx_handle = playFXOnTag(localclientnum, level._effect["prox_grenade_enemy_default"], self, "tag_fx");
+  }
 
   self thread watchproxyshutdown(localclientnum, fx_handle);
   return fx_handle;
@@ -53,8 +55,9 @@ watchproxyshutdown(localclientnum, fxhandle) {
   msg = self waittill_any_return("entityshutdown", "team_changed", "player_switch");
   stopfx(localclientnum, fxhandle);
 
-  if(msg == "team_changed")
+  if(msg == "team_changed") {
     self thread proxygrenadefx(localclientnum);
+  }
 }
 
 checkforplayerswitch(localclientnum, fxhandle) {
@@ -63,8 +66,9 @@ checkforplayerswitch(localclientnum, fxhandle) {
   level waittill("player_switch");
   self notify("player_switch");
 
-  if(isDefined(fxhandle))
+  if(isDefined(fxhandle)) {
     stopfx(localclientnum, fxhandle);
+  }
 
   waittillframeend;
   self thread proxygrenadefx(localclientnum);
@@ -80,8 +84,9 @@ taserhudfx(localclientnum, position) {
   trace = bulletTrace(getlocalclienteyepos(localclientnum), position, 0, self);
 
   if(trace["fraction"] >= 1) {
-    if(self hasperk(localclientnum, "specialty_proximityprotection"))
+    if(self hasperk(localclientnum, "specialty_proximityprotection")) {
       self thread reducedshock(localclientnum, position);
+    }
     else {
       self thread flickervisionset(localclientnum, 0.03, 1.25, 0.0);
       cycles = 3;
@@ -99,14 +104,17 @@ taserhudfx(localclientnum, position) {
             rdot = vectordot(explosionvec, rightvec);
 
             if(abs(fdot) > abs(rdot)) {
-              if(fdot > 0)
+              if(fdot > 0) {
                 menustate = "proximity_vertical_top" + j;
-              else
+              }
+              else {
                 menustate = "proximity_vertical_bottom" + j;
+              }
             } else if(rdot > 0)
               menustate = "proximity_horizontal_right" + j;
-            else
+            else {
               menustate = "proximity_horizontal_left" + j;
+            }
 
             animateui(localclientnum, menuname, menustate, "in", 0);
           }
@@ -135,14 +143,17 @@ reducedshock(localclientnum, position) {
   rdot = vectordot(explosionvec, rightvec);
 
   if(abs(fdot) > abs(rdot)) {
-    if(fdot > 0)
+    if(fdot > 0) {
       menustate = "proximity_vertical_top0";
-    else
+    }
+    else {
       menustate = "proximity_vertical_bottom0";
+    }
   } else if(rdot > 0)
     menustate = "proximity_horizontal_right0";
-  else
+  else {
     menustate = "proximity_horizontal_left0";
+  }
 
   animateui(localclientnum, menuname, menustate, "in", 0);
 }
@@ -160,10 +171,12 @@ flickervisionset(localclientnum, period, duration_seconds, transition) {
       break;
     }
 
-    if(toggle)
+    if(toggle) {
       visionsetnaked(localclientnum, "taser_mine_shock", transition);
-    else
+    }
+    else {
       visionsetnaked(localclientnum, saved_vision, transition);
+    }
 
     toggle = !toggle;
     wait(period);
@@ -175,10 +188,12 @@ flickervisionset(localclientnum, period, duration_seconds, transition) {
 visionsettoggle(localclientnum, toggle) {
   duration = 0.05;
 
-  if(toggle)
+  if(toggle) {
     visionsetnaked(localclientnum, "taser_mine_shock", duration);
-  else
+  }
+  else {
     visionsetnaked(localclientnum, getdvar(#"mapname"), duration);
+  }
 
   return !toggle;
 }

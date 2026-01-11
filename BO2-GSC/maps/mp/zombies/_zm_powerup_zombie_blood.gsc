@@ -21,11 +21,13 @@ init(str_zombie_model) {
   level.a_zombie_blood_entities = [];
   array_thread(getEntArray("zombie_blood_visible", "targetname"), ::make_zombie_blood_entity);
 
-  if(!isDefined(level.vsmgr_prio_visionset_zm_powerup_zombie_blood))
+  if(!isDefined(level.vsmgr_prio_visionset_zm_powerup_zombie_blood)) {
     level.vsmgr_prio_visionset_zm_powerup_zombie_blood = 15;
+  }
 
-  if(!isDefined(level.vsmgr_prio_overlay_zm_powerup_zombie_blood))
+  if(!isDefined(level.vsmgr_prio_overlay_zm_powerup_zombie_blood)) {
     level.vsmgr_prio_overlay_zm_powerup_zombie_blood = 16;
+  }
 
   maps\mp\_visionset_mgr::vsmgr_register_info("visionset", "zm_powerup_zombie_blood_visionset", 14000, level.vsmgr_prio_visionset_zm_powerup_zombie_blood, 15, 1);
   maps\mp\_visionset_mgr::vsmgr_register_info("overlay", "zm_powerup_zombie_blood_overlay", 14000, level.vsmgr_prio_overlay_zm_powerup_zombie_blood, 15, 1);
@@ -66,8 +68,9 @@ zombie_blood_powerup(m_powerup, e_player) {
 
   foreach(e_zombie_blood in level.a_zombie_blood_entities) {
     if(isDefined(e_zombie_blood.e_unique_player)) {
-      if(e_zombie_blood.e_unique_player == e_player)
+      if(e_zombie_blood.e_unique_player == e_player) {
         e_zombie_blood setvisibletoplayer(e_player);
+      }
 
       continue;
     }
@@ -102,8 +105,9 @@ zombie_blood_powerup(m_powerup, e_player) {
 
   e_player notify("zombie_blood_over");
 
-  if(isDefined(e_player.characterindex))
+  if(isDefined(e_player.characterindex)) {
     e_player playSound("vox_plr_" + e_player.characterindex + "_exert_grunt_" + randomintrange(0, 3));
+  }
 
   e_player.m_fx delete();
   maps\mp\_visionset_mgr::vsmgr_deactivate("visionset", "zm_powerup_zombie_blood_visionset", e_player);
@@ -113,10 +117,12 @@ zombie_blood_powerup(m_powerup, e_player) {
   e_player._show_solo_hud = 0;
   e_player setclientfield("player_zombie_blood_fx", 0);
 
-  if(!isDefined(e_player.early_exit))
+  if(!isDefined(e_player.early_exit)) {
     e_player.ignoreme = 0;
-  else
+  }
+  else {
     e_player.early_exit = undefined;
+  }
 
   __new = [];
 
@@ -133,8 +139,9 @@ zombie_blood_powerup(m_powerup, e_player) {
 
   level.a_zombie_blood_entities = __new;
 
-  foreach(e_zombie_blood in level.a_zombie_blood_entities)
+  foreach(e_zombie_blood in level.a_zombie_blood_entities) {
   e_zombie_blood setinvisibletoplayer(e_player);
+  }
 
   if(isDefined(e_player.hero_model)) {
     e_player setModel(e_player.hero_model);
@@ -166,8 +173,9 @@ make_zombie_blood_entity() {
   foreach(e_player in getplayers()) {
     if(e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
       if(isDefined(self.e_unique_player)) {
-        if(self.e_unique_player == e_player)
+        if(self.e_unique_player == e_player) {
           self setvisibletoplayer(e_player);
+        }
 
         continue;
       }

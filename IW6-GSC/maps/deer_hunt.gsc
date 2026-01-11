@@ -50,8 +50,9 @@ main() {
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9);
   setup_motion_blur();
 
-  if(!maps\_utility::is_gen4())
+  if(!maps\_utility::is_gen4()) {
     setsaveddvar("sm_sunshadowscale", 0.7);
+  }
 
   maps\deer_hunt_audio::main();
   maps\_drone_deer::init();
@@ -68,10 +69,12 @@ main() {
   maps\_utility::add_global_spawn_function("allies", ::gun_inventory);
   thread objectives();
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     setsaveddvar("r_HudOutlineWidth", 3);
-  else
+  }
+  else {
     setsaveddvar("r_HudOutlineWidth", 2);
+  }
 
   thread level_music();
   maps\deer_hunt_util::drone_civs_init();
@@ -123,11 +126,13 @@ gun_inventory() {
   }
   maps\_utility::disable_surprise();
 
-  if(!isDefined(level.possible_guns))
+  if(!isDefined(level.possible_guns)) {
     level.possible_guns = [];
+  }
 
-  if(!maps\_utility::is_in_array(level.possible_guns, self.weapon))
+  if(!maps\_utility::is_in_array(level.possible_guns, self.weapon)) {
     level.possible_guns = common_scripts\utility::add_to_array(level.possible_guns, self.weapon);
+  }
 }
 
 precache_stuff() {
@@ -195,8 +200,9 @@ objectives() {
       objective_add(maps\_utility::obj("la_river"), "current", &"DEER_HUNT_BACKUP_LARIVER");
       common_scripts\utility::flag_wait("pipe_enter");
 
-      if(!common_scripts\utility::flag("did_slide_hint"))
+      if(!common_scripts\utility::flag("did_slide_hint")) {
         thread maps\_utility::display_hint_timeout("slide_hint", 7);
+      }
     case "lariver_defend":
     case "lariver":
       common_scripts\utility::flag_wait("drag_complete");
@@ -386,11 +392,13 @@ flag_trigs() {
   var_1 = [];
   var_1[var_1.size] = "player_dropped_down";
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   init_flag_and_set_on_targetname_trigger(var_3);
+  }
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   thread maps\deer_hunt_util::set_flag_on_targetname_trigger_by_player(var_3);
+  }
 }
 
 init_flag_and_set_on_targetname_trigger(var_0) {
@@ -526,11 +534,13 @@ encounter1_start() {
   level.hesh maps\_utility::enable_cqbwalk();
   var_4 = common_scripts\utility::getstructarray("team2_encounter1", "targetname");
 
-  while(!isDefined(level.team2))
+  while(!isDefined(level.team2)) {
     wait 0.25;
+  }
 
-  foreach(var_3, var_6 in var_4)
+  foreach(var_3, var_6 in var_4) {
   level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
+  }
 
   maps\_utility::activate_trigger_with_targetname("dropdown_arrive");
   maps\_utility::activate_trigger_with_targetname("player_on_bus");
@@ -558,11 +568,13 @@ encounter2_start() {
 
   var_4 = common_scripts\utility::getstructarray("team2_encounter2", "targetname");
 
-  while(!isDefined(level.team2))
+  while(!isDefined(level.team2)) {
     wait 0.25;
+  }
 
-  foreach(var_3, var_6 in var_4)
+  foreach(var_3, var_6 in var_4) {
   level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
+  }
 
   maps\_utility::activate_trigger_with_targetname("encounter1_approach");
   maps\_utility::activate_trigger_with_targetname("hesh_to_dropdown");
@@ -587,8 +599,9 @@ lariver_start() {
 
   var_4 = common_scripts\utility::getstructarray("team2_lariver", "targetname");
 
-  foreach(var_3, var_6 in var_4)
+  foreach(var_3, var_6 in var_4) {
   level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
+  }
 
   thread maps\deer_hunt_intro::lariver_global_setup();
   thread maps\deer_hunt_intro::lariver_spawn_wall_battle_guys_early();
@@ -602,8 +615,9 @@ spawn_lariver_defend_balcony_guys() {
   maps\_utility::array_spawn_function_targetname("rpg_guys", maps\deer_hunt_intro::lariver_balcony_friendly_logic, 1);
   level.balcony_friendlies = maps\_utility::array_spawn_targetname("rpg_guys", 1);
 
-  foreach(var_1 in level.balcony_friendlies)
+  foreach(var_1 in level.balcony_friendlies) {
   var_1.spawner = common_scripts\utility::random(getEntArray("rpg_guys", "targetname"));
+  }
 }
 
 lariver_defend_start() {
@@ -631,8 +645,9 @@ lariver_defend_start() {
   level.matv attachpath(var_4);
   var_5 = common_scripts\utility::getstructarray("la_river_defend_team2", "targetname");
 
-  foreach(var_3, var_7 in var_5)
+  foreach(var_3, var_7 in var_5) {
   level.team2[var_3] forceteleport(var_7.origin, var_7.angles);
+  }
 
   level.lariver_early_ai = level.balcony_friendlies;
   thread maps\deer_hunt_intro::lariver_defend_globals(1);

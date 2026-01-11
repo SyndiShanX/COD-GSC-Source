@@ -4,8 +4,9 @@
 ****************************************************/
 
 objectives(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = &"OILROCKS_OBJ_APACHE_ANTIAIR";
+  }
 
   var_4 = maps\_utility::obj(var_0);
   objective_add(var_4, "current", var_3);
@@ -18,8 +19,9 @@ objectives(var_0, var_1, var_2, var_3) {
   for(var_8 = 0; isDefined(var_5); var_8++) {
     var_5 thread anti_air_objectiv_trigger(var_4, var_8, var_7);
 
-    if(var_7.activecount >= var_6)
+    if(var_7.activecount >= var_6) {
       var_7 waittill("countdown");
+    }
 
     if(!isDefined(var_5.target)) {
       break;
@@ -28,11 +30,13 @@ objectives(var_0, var_1, var_2, var_3) {
     var_5 = getent(var_5.target, "targetname");
   }
 
-  while(var_7.activecount)
+  while(var_7.activecount) {
     var_7 waittill("countdown");
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     common_scripts\utility::flag_set(var_2);
+  }
 
   maps\_utility::objective_complete(var_4);
 }

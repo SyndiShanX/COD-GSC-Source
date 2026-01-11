@@ -71,52 +71,69 @@ banzai_force() {
 
 may_banzai_attack(enemy, maxAttackers) {
   assert(isDefined(enemy));
-  if(enemy animscripts\banzai::in_banzai_melee() && DistanceSquared(self.origin, enemy.origin) < 96 * 96)
+  if(enemy animscripts\banzai::in_banzai_melee() && DistanceSquared(self.origin, enemy.origin) < 96 * 96) {
     return false;
-  if(isDefined(enemy.num_banzai_chargers) && enemy.num_banzai_chargers >= maxAttackers)
+  }
+  if(isDefined(enemy.num_banzai_chargers) && enemy.num_banzai_chargers >= maxAttackers) {
     return false;
-  if(isDefined(enemy.no_banzai_attack) && enemy.no_banzai_attack)
+  }
+  if(isDefined(enemy.no_banzai_attack) && enemy.no_banzai_attack) {
     return false;
+  }
   if(isDefined(enemy.magic_bullet_shield) && enemy.magic_bullet_shield) {
-    if(enemy.a.pose != "stand")
+    if(enemy.a.pose != "stand") {
       return false;
+    }
   }
   if(IsPlayer(enemy)) {
-    if(isDefined(enemy.usingturret) && enemy.usingturret)
+    if(isDefined(enemy.usingturret) && enemy.usingturret) {
       return false;
-    if(isDefined(enemy.usingvehicle) && enemy.usingvehicle)
+    }
+    if(isDefined(enemy.usingvehicle) && enemy.usingvehicle) {
       return false;
-    if(!check_player_can_see_me(enemy))
+    }
+    if(!check_player_can_see_me(enemy)) {
       return false;
-    if(enemy maps\_laststand::player_is_in_laststand())
+    }
+    if(enemy maps\_laststand::player_is_in_laststand()) {
       return false;
-    if(isDefined(self.primaryweapon) && self.primaryweapon == "type100_smg")
+    }
+    if(isDefined(self.primaryweapon) && self.primaryweapon == "type100_smg") {
       return false;
+    }
   }
   return true;
 }
 
 should_switch_immediately(enemy) {
-  if(!isDefined(enemy))
+  if(!isDefined(enemy)) {
     return true;
-  if(!IsAlive(enemy))
+  }
+  if(!IsAlive(enemy)) {
     return true;
-  if(isDefined(enemy.no_banzai_attack) && enemy.no_banzai_attack)
+  }
+  if(isDefined(enemy.no_banzai_attack) && enemy.no_banzai_attack) {
     return true;
+  }
   if(isDefined(enemy.magic_bullet_shield) && enemy.magic_bullet_shield) {
-    if(enemy.a.pose != "stand")
+    if(enemy.a.pose != "stand") {
       return true;
+    }
   }
   if(IsPlayer(enemy)) {
-    if(isDefined(enemy.usingTurret) && enemy.usingTurret)
+    if(isDefined(enemy.usingTurret) && enemy.usingTurret) {
       return true;
-    if(isDefined(enemy.usingVehicle) && enemy.usingvehicle)
+    }
+    if(isDefined(enemy.usingVehicle) && enemy.usingvehicle) {
       return true;
-    if(enemy maps\_laststand::player_is_in_laststand())
+    }
+    if(enemy maps\_laststand::player_is_in_laststand()) {
       return true;
+    }
     if(distanceSquared(self.origin, enemy.origin) < 20736) {
-      if(self.a.movement == "stop" && (self.origin[2] < (enemy.origin[2] - 24)))
+      if(self.a.movement == "stop" && (self.origin[2] < (enemy.origin[2] - 24))) {
         return true;
+      }
     }
   }
   return false;
@@ -144,14 +161,16 @@ find_enemy() {
     enemies = get_array_of_closest(self.origin, enemies, undefined, undefined, maxDistance);
     for(numAttackers = 1; numAttackers <= 2; numAttackers++) {
       for(i = 0; i < enemies.size; i++) {
-        if(may_banzai_attack(enemies[i], numAttackers))
+        if(may_banzai_attack(enemies[i], numAttackers)) {
           return enemies[i];
+        }
       }
     }
     players = get_array_of_closest(self.origin, players, undefined, undefined, maxDistance);
     for(i = 0; i < players.size; i++) {
-      if(may_banzai_attack(players[i], numAttackers))
+      if(may_banzai_attack(players[i], numAttackers)) {
         return players[i];
+      }
     }
     return undefined;
   }
@@ -170,15 +189,17 @@ find_enemy() {
   enemies = GetAiArray(opposite_team);
   enemies = get_array_of_closest(self.origin, enemies, undefined, undefined, maxDistance);
   for(i = 0; i < enemies.size; i++) {
-    if(may_banzai_attack(enemies[i], 2))
+    if(may_banzai_attack(enemies[i], 2)) {
       return enemies[i];
+    }
   }
   return undefined;
 }
 
 check_player_can_see_me(player) {
-  if(!isDefined(self.script_banzai_within_fov) || !self.script_banzai_within_fov)
+  if(!isDefined(self.script_banzai_within_fov) || !self.script_banzai_within_fov) {
     return true;
+  }
   return player_can_see_me(player);
 }
 

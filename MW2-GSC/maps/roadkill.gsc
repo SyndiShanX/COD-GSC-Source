@@ -353,8 +353,9 @@ roadkill_intro_common() {
 
   level.stair_block_guys = [];
   array_spawn_function_targetname("stair_block_guy", ::stair_block_guy);
-  if(is_default_start())
+  if(is_default_start()) {
     array_spawn_targetname("stair_block_guy");
+  }
 
   // wall on the front of a building breaks off during exploder
   run_thread_on_targetname("broken_wall", ::broken_wall);
@@ -510,8 +511,9 @@ roadkill_convoy() {
   array_spawn_function_targetname("ride_vehicle_starts_moving", ::ride_vehicle_starts_moving);
 
   // xx
-  if(!is_default_start())
+  if(!is_default_start()) {
     wait(0.1);
+  }
   spawn_vehicle_from_targetname("player_ride_vehicle");
   spawn_vehicles_from_targetname("ride_vehicle_starts_moving");
   //	wait( 0.05 ); // for the start points
@@ -592,8 +594,9 @@ roadkill_convoy() {
 
   ai = GetAIArray("allies");
   foreach(guy in ai) {
-    if(isDefined(guy.magic_bullet_shield))
+    if(isDefined(guy.magic_bullet_shield)) {
       guy stop_magic_bullet_shield();
+    }
     guy.ignoreall = false;
   }
 
@@ -646,8 +649,9 @@ roadkill_convoy() {
 
   for(i = 1; i <= 6; i++) {
     // convoy_crosses_bridge1
-    if(flag_exist("convoy_crosses_bridge" + i))
+    if(flag_exist("convoy_crosses_bridge" + i)) {
       flag_set("convoy_crosses_bridge" + i);
+    }
     wait(waits[i]);
   }
 
@@ -704,8 +708,9 @@ start_ride_common(from_start_point) {
   // guy that ends the ride
   array_spawn_function_noteworthy("ride_killer", ::ride_killer);
 
-  if(from_start_point)
+  if(from_start_point) {
     spawn_vehicles_from_targetname_and_drive("ride_vehicle_spawner");
+  }
 
   add_global_spawn_function("axis", ::no_grenades);
 
@@ -721,8 +726,9 @@ start_ride_common(from_start_point) {
 roadkill_ride() {
   ai = GetAIArray();
   foreach(guy in ai) {
-    if(IsAlive(level.detour_gunner) && guy == level.detour_gunner)
+    if(IsAlive(level.detour_gunner) && guy == level.detour_gunner) {
       continue;
+    }
 
     if(isDefined(guy.magic_bullet_shield)) {
       guy stop_magic_bullet_shield();
@@ -795,8 +801,9 @@ roadkill_ride() {
 
   ai = GetAIArray("allies");
   foreach(guy in ai) {
-    if(isDefined(guy.ridingVehicle))
+    if(isDefined(guy.ridingVehicle)) {
       continue;
+    }
     guy safe_delete();
   }
 
@@ -877,10 +884,12 @@ roadkill_crazy_ride() {
 
   ai = GetAIArray();
   foreach(guy in ai) {
-    if(isDefined(guy GetTurret()))
+    if(isDefined(guy GetTurret())) {
       continue;
-    if(guy.team != "neutral")
+    }
+    if(guy.team != "neutral") {
       continue;
+    }
 
     guy safe_delete();
   }
@@ -1129,8 +1138,9 @@ roadkill_crazy_ride_later() {
         break;
       }
     }
-    if(found_rocket)
+    if(found_rocket) {
       break;
+    }
     wait(0.05);
   }
 
@@ -1146,8 +1156,9 @@ roadkill_crazy_ride_later() {
   }
 
   for(;;) {
-    if(!isDefined(rocket))
+    if(!isDefined(rocket)) {
       break;
+    }
     if(Distance(rocket.origin, level.player.origin) < 150) {
       if(slowmo) {
         slowmo = false;
@@ -1157,8 +1168,9 @@ roadkill_crazy_ride_later() {
       }
     }
 
-    if(Distance(rocket.origin, level.player.origin) < 75)
+    if(Distance(rocket.origin, level.player.origin) < 75) {
       break;
+    }
 
     wait(0.05);
   }
@@ -1183,8 +1195,9 @@ roadkill_crazy_ride_later() {
 
   ai = GetAIArray("allies");
   foreach(guy in ai) {
-    if(isDefined(guy.magic_bullet_shield))
+    if(isDefined(guy.magic_bullet_shield)) {
       guy stop_magic_bullet_shield();
+    }
   }
 
   // I banish ye to vehicle hell
@@ -1251,8 +1264,9 @@ roadkill_convoy_dismounts() {
   destroyed_humvee_models = getEntArray("destroyed_humvee_model", "targetname");
   array_thread(destroyed_humvee_models, ::show_solid);
 
-  if(level.start_point != "dismount")
+  if(level.start_point != "dismount") {
     thread maps\_autosave::_autosave_game_now_nochecks();
+  }
 
   thread dismount_dialogue_and_friendly_progression_logic();
 
@@ -1299,8 +1313,9 @@ roadkill_convoy_dismounts() {
   ai = GetAIArray("axis");
   get_array_of_closest(level.player.origin, ai);
   for(i = ai.size - 1; i >= 0 && i >= ai.size - 4; i--) {
-    if(isDefined(ai[i].magic_bullet_shield))
+    if(isDefined(ai[i].magic_bullet_shield)) {
       continue;
+    }
     ai[i] Kill();
   }
 
@@ -1331,8 +1346,9 @@ roadkill_convoy_dismounts() {
   timer = 5;
   frames = timer * 20;
   for(i = 0; i < frames; i++) {
-    if(level.player GetStance() != "prone")
+    if(level.player GetStance() != "prone") {
       break;
+    }
     wait(0.05);
   }
 
@@ -1345,8 +1361,9 @@ roadkill_convoy_dismounts() {
     }
     other_weapon = weapon;
   }
-  if(isDefined(other_weapon))
+  if(isDefined(other_weapon)) {
     level.player SwitchToWeapon(other_weapon);
+  }
 
   level.player delayCall(4, ::EnableDeathShield, false);
   level.player EnableWeapons();
@@ -1627,8 +1644,9 @@ school_enemies_retreat_dialogue() {
 }
 
 roadkill_ending_run_dialogue() {
-  if(flag("player_rounds_end_corner"))
+  if(flag("player_rounds_end_corner")) {
     return;
+  }
 
   level endon("player_rounds_end_corner");
 
@@ -1729,8 +1747,9 @@ roadkill_the_end() {
   activate_trigger_with_targetname("final_friendly_trigger");
 
   // Clear! That's the last of 'em!	
-  if(IsAlive(level.pistol_killer))
+  if(IsAlive(level.pistol_killer)) {
     level.pistol_killer thread generic_dialogue_queue("roadkill_fly_lastofem");
+  }
 
   flag_wait("player_rounds_end_corner");
 
@@ -1804,14 +1823,17 @@ roadkill_startpoint_catchup_thread() {
   waittillframeend; // let the actual start functions run before this one
   start = level.start_point;
 
-  if(start == "intro")
+  if(start == "intro") {
     return;
+  }
 
-  if(start == "riverbank")
+  if(start == "riverbank") {
     return;
+  }
 
-  if(start == "move_out")
+  if(start == "move_out") {
     return;
+  }
 
   flag_set("bridgelayer_crosses");
   flag_set("riverbank_baddies_retreat");
@@ -1824,8 +1846,9 @@ roadkill_startpoint_catchup_thread() {
 
   battlechatter_off("allies");
 
-  if(start == "convoy")
+  if(start == "convoy") {
     return;
+  }
 
   battlechatter_off("axis");
 
@@ -1833,47 +1856,55 @@ roadkill_startpoint_catchup_thread() {
   flag_set("roadkill_town_dialogue");
   flag_set("100ton_bomb_goes_off");
 
-  if(start == "ride")
+  if(start == "ride") {
     return;
+  }
 
   flag_set("fight_back");
   //	flag_set( "ambush_spawner_angry" );
 
-  if(start == "ambush")
+  if(start == "ambush") {
     return;
+  }
 
   flag_set("detour_convoy_slows_down");
   flag_set("ambush_spawn");
   flag_set("ambush");
 
-  if(start == "ride_later")
+  if(start == "ride_later") {
     return;
-  if(start == "ride_end")
+  }
+  if(start == "ride_end") {
     return;
+  }
   set_player_attacker_accuracy(0.0);
   level.player.IgnoreRandomBulletDamage = true;
   thread player_becomes_normal_gameskill();
-  if(start == "dismount")
+  if(start == "dismount") {
     return;
+  }
 
   battlechatter_on("allies");
 
   flag_set("player_enters_ambush_house");
   flag_set("player_is_dismounted");
 
-  if(start == "school")
+  if(start == "school") {
     return;
+  }
 
   flag_set("final_objective");
   flag_set("roadkill_school_20");
 
   flag_set("school_back_baddies_dead");
 
-  if(start == "endfight")
+  if(start == "endfight") {
     return;
+  }
 
-  if(start == "end")
+  if(start == "end") {
     return;
+  }
 
   AssertMsg("Unhandled start point " + start);
 }

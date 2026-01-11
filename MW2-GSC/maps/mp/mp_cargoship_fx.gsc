@@ -5,8 +5,9 @@
 
 main() {
   thread precache_createfx_fx();
-  if(!getdvarint("1106"))
+  if(!getdvarint("1106")) {
     maps\createfx\mp_cargoship_fx::main();
+  }
 }
 
 precache_createfx_fx() {

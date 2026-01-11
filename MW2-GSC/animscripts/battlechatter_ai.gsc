@@ -23,17 +23,20 @@ addToSystem(squadName) {
 
   //prof_begin("addToSystem");
 
-  if(!bcsEnabled())
+  if(!bcsEnabled()) {
     return;
+  }
 
-  if(self.chatInitialized)
+  if(self.chatInitialized) {
     return;
+  }
 
   assert(isDefined(self.squad));
 
   // initialize battlechatter data for this AI's squad if it hasn't been already
-  if(!isDefined(self.squad.chatInitialized) || !self.squad.chatInitialized)
+  if(!isDefined(self.squad.chatInitialized) || !self.squad.chatInitialized) {
     self.squad init_squadBattleChatter();
+  }
 
   self.enemyClass = "infantry";
   self.calledOut = [];
@@ -61,10 +64,12 @@ addToSystem(squadName) {
   }
 
   if(forceEnglish()) {
-    if(self.team == "allies")
+    if(self.team == "allies") {
       self.script_battlechatter = false;
-    else
+    }
+    else {
       self.voice = "american";
+    }
   }
 
   // SRS 1/31/09: turning off multilingual voices to avoid a bunch of errors that don't really
@@ -126,20 +131,24 @@ get_random_nationality()
 	//determine what language the multilingual PMC will speak
 	sMultiLang = "";
 	iRand = RandomIntrange( 1, 4 );
-	if( iRand == 1 )
+	if( iRand == 1 ) {
 		sMultiLang = "german";
-	else if( iRand == 2 )
+	}
+	else if( iRand == 2 ) {
 		sMultiLang = "italian";
-	else
+	}
+	else {
 		sMultiLang = "spanish";
+	}
 
 	return sMultiLang;
 }
 */
 
 forceEnglish() {
-  if(!getDvarInt("bcs_forceEnglish", 0))
+  if(!getDvarInt("bcs_forceEnglish", 0)) {
     return false;
+  }
 
   switch (level.script) {
     case "airlift":
@@ -210,8 +219,9 @@ setNPCID() {
 
   lowestID = startIndex;
   for(index = 0; index <= numIDs; index++) {
-    if(usedIDs[(startIndex + index) % numIDs].count < usedIDs[lowestID].count)
+    if(usedIDs[(startIndex + index) % numIDs].count < usedIDs[lowestID].count) {
       lowestID = (startIndex + index) % numIDs;
+    }
   }
 
   self thread npcIDTracker(lowestID);
@@ -224,8 +234,9 @@ npcIDTracker(lowestID) {
 
   anim.usedIDs[self.voice][lowestID].count++;
   self waittill("death");
-  if(!bcsEnabled())
+  if(!bcsEnabled()) {
     return;
+  }
 
   anim.usedIDs[self.voice][lowestID].count--;
 }
@@ -532,8 +543,9 @@ addReactionEvent(eventType, modifier, reactTo, priority) {
   	return;
   }
   */
-  if(!isDefined(self.chatQueue))
+  if(!isDefined(self.chatQueue)) {
     return;
+  }
 
   chatEvent = self createChatEvent("reaction", eventType, priority);
 
@@ -577,15 +589,18 @@ squadOfficerWaiter() {
   while(1) {
     officer = undefined;
 
-    if(self.officers.size)
+    if(self.officers.size) {
       members = self.officers;
-    else
+    }
+    else {
       members = self.members;
+    }
 
     officers = [];
     for(index = 0; index < members.size; index++) {
-      if(isalive(members[index]))
+      if(isalive(members[index])) {
         officers[officers.size] = members[index];
+      }
     }
 
     if(officers.size) {
@@ -801,8 +816,9 @@ aiOfficerOrders() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!isDefined(self.squad.chatInitialized))
+  if(!isDefined(self.squad.chatInitialized)) {
     self.squad waittill("squad chat initialized");
+  }
 
   while(1) {
     if(getdvar("bcs_enable", "on") == "off") {
@@ -823,11 +839,13 @@ aiGrenadeDangerWaiter() {
   while(1) {
     self waittill("grenade danger", grenade);
 
-    if(getdvar("bcs_enable", "on") == "off")
+    if(getdvar("bcs_enable", "on") == "off") {
       continue;
+    }
 
-    if(!isDefined(grenade) || grenade.model != "projectile_m67fraggrenade")
+    if(!isDefined(grenade) || grenade.model != "projectile_m67fraggrenade") {
       continue;
+    }
 
     if(distance(grenade.origin, level.player.origin) < 512) // grenade radius is 220
       self addInformEvent("incoming", "grenade");
@@ -841,8 +859,9 @@ aiDisplaceWaiter() {
   while(true) {
     self waittill("trigger");
 
-    if(getdvar("bcs_enable", "on") == "off")
+    if(getdvar("bcs_enable", "on") == "off") {
       continue;
+    }
 
     // no acknowledgement if you just took pain, looks dumb
     if(GetTime() < self.a.painTime + 4000) {
@@ -936,11 +955,13 @@ aiFollowOrderWaiter() {
   while(true) {
     level waittill("follow order", speaker);
 
-    if(!bcsEnabled())
+    if(!bcsEnabled()) {
       return;
+    }
 
-    if(speaker.team != self.team)
+    if(speaker.team != self.team) {
       continue;
+    }
 
     if(distance(self.origin, speaker.origin) < 600) {
       self addResponseEvent("ack", "yes", speaker, 0.9);
@@ -1041,11 +1062,13 @@ evaluateMeleeEvent() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!bcsEnabled())
+  if(!bcsEnabled()) {
     return (false);
+  }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return (false);
+  }
 
   //	self addReactionEvent("taunt", "generic", self.enemy);
 
@@ -1057,11 +1080,13 @@ evaluateFiringEvent() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!bcsEnabled())
+  if(!bcsEnabled()) {
     return;
+  }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return;
+  }
 
   //	if(distance(self.origin, self.enemy.origin) > 384)
   //		self addReactionEvent("taunt", "generic", self.enemy, 0.4);
@@ -1071,11 +1096,13 @@ evaluateSuppressionEvent() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!bcsEnabled())
+  if(!bcsEnabled()) {
     return;
+  }
 
-  if(!self.suppressed)
+  if(!self.suppressed) {
     return;
+  }
 
   self addInformEvent("suppressed", "generic");
 }
@@ -1229,8 +1256,9 @@ custom_battlechatter_internal(string) {
 }
 
 beginCustomEvent() {
-  if(!bcsEnabled())
+  if(!bcsEnabled()) {
     return;
+  }
 
   self.customChatPhrase = createChatPhrase();
 }
@@ -1252,24 +1280,29 @@ addInformReloadingAliasEx() {
 }
 
 addNameAliasEx(name) {
-  if(!bcsEnabled())
+  if(!bcsEnabled()) {
     return;
+  }
 
   self.customChatPhrase addNameAlias(name);
 }
 
 endCustomEvent(eventDuration, typeOverride) {
-  if(!bcsEnabled())
+  if(!bcsEnabled()) {
     return;
+  }
 
   chatEvent = self createChatEvent("custom", "generic", 1.0);
-  if(isDefined(eventDuration))
+  if(isDefined(eventDuration)) {
     chatEvent.expireTime = gettime() + eventDuration;
+  }
 
-  if(isDefined(typeOverride))
+  if(isDefined(typeOverride)) {
     chatEvent.type = typeOverride;
-  else
+  }
+  else {
     chatEvent.type = "custom";
+  }
 
   self.chatQueue["custom"] = undefined;
   self.chatQueue["custom"] = chatEvent;

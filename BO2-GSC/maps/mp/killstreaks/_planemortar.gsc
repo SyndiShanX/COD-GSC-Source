@@ -26,14 +26,16 @@ init() {
 }
 
 usekillstreakplanemortar(hardpointtype) {
-  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
+  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
     return false;
+  }
 
   self thread playpilotdialog("a10_used", 1.5);
   result = self selectplanemortarlocation(hardpointtype);
 
-  if(!isDefined(result) || !result)
+  if(!isDefined(result) || !result) {
     return false;
+  }
 
   return true;
 }
@@ -51,14 +53,16 @@ selectplanemortarlocation(hardpointtype) {
   self thread endselectionthink();
   locations = [];
 
-  if(!isDefined(self.pers["mortarRadarUsed"]) || !self.pers["mortarRadarUsed"])
+  if(!isDefined(self.pers["mortarRadarUsed"]) || !self.pers["mortarRadarUsed"]) {
     self thread singleradarsweep();
+  }
 
   for(i = 0; i < 3; i++) {
     location = self waittill_confirm_location();
 
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return 0;
+    }
 
     if(!isDefined(location)) {
       self.pers["mortarRadarUsed"] = 1;
@@ -80,16 +84,18 @@ selectplanemortarlocation(hardpointtype) {
 }
 
 playpilotdialog(dialog, waittime) {
-  if(isDefined(waittime))
+  if(isDefined(waittime)) {
     wait(waittime);
+  }
 
   self.pilotvoicenumber = self.bcvoicenumber + 1;
   soundalias = level.teamprefix[self.team] + self.pilotvoicenumber + "_" + dialog;
 
   if(isDefined(self)) {
     if(self.pilotisspeaking) {
-      while(self.pilotisspeaking)
+      while(self.pilotisspeaking) {
         wait 0.2;
+      }
     }
   }
 
@@ -99,8 +105,9 @@ playpilotdialog(dialog, waittime) {
     self thread waitplaybacktime(soundalias);
     self waittill_any(soundalias, "death", "disconnect");
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self.pilotisspeaking = 0;
+    }
   }
 }
 
@@ -124,13 +131,16 @@ singleradarsweep() {
   wait 0.5;
   self playlocalsound("mpl_killstreak_satellite");
 
-  if(level.teambased)
+  if(level.teambased) {
     has_satellite = level.activesatellites[self.team] > 0;
-  else
+  }
+  else {
     has_satellite = level.activesatellites[self.entnum] > 0;
+  }
 
-  if(self.hasspyplane == 0 && !has_satellite && !level.forceradar)
+  if(self.hasspyplane == 0 && !has_satellite && !level.forceradar) {
     self thread doradarsweep();
+  }
 }
 
 doradarsweep() {
@@ -143,8 +153,9 @@ useplanemortar(positions) {
   team = self.team;
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart("planemortar_mp", team, 0, 1);
 
-  if(killstreak_id == -1)
+  if(killstreak_id == -1) {
     return false;
+  }
 
   self maps\mp\killstreaks\_killstreaks::playkillstreakstartdialog("planemortar_mp", team, 1);
   level.globalkillstreakscalled++;
@@ -165,10 +176,12 @@ doplanemortar(positions, team, killstreak_id) {
     maps\mp\gametypes\_spawning::create_artillery_influencers(position, -1);
     self thread dobombrun(position, yaw, team);
 
-    if(odd == 0)
+    if(odd == 0) {
       yaw = (yaw + 35) % 360;
-    else
+    }
+    else {
       yaw = (yaw + 290) % 360;
+    }
 
     odd = (odd + 1) % 2;
     wait 0.8;
@@ -180,26 +193,33 @@ doplanemortar(positions, team, killstreak_id) {
 }
 
 plane_mortar_bda_dialog() {
-  if(!isDefined(self.planemortarbda))
+  if(!isDefined(self.planemortarbda)) {
     self.planemortarbda = 0;
+  }
 
-  if(self.planemortarbda == 0)
+  if(self.planemortarbda == 0) {
     bdadialog = "kls_killn";
+  }
 
-  if(self.planemortarbda == 1)
+  if(self.planemortarbda == 1) {
     bdadialog = "kls_kill1";
+  }
 
-  if(self.planemortarbda == 2)
+  if(self.planemortarbda == 2) {
     bdadialog = "kls_kill2";
+  }
 
-  if(self.planemortarbda == 3)
+  if(self.planemortarbda == 3) {
     bdadialog = "kls_kill3";
+  }
 
-  if(self.planemortarbda > 3)
+  if(self.planemortarbda > 3) {
     bdadialog = "kls_killm";
+  }
 
-  if(isDefined(bdadialog))
+  if(isDefined(bdadialog)) {
     self thread playpilotdialog(bdadialog);
+  }
 
   self.planemortarbda = 0;
 }
@@ -250,8 +270,9 @@ dobombrun(position, yaw, team) {
   plane.killcament thread followbomb(plane, position, direction, impact, player);
   wait(2.0 / 2);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self thread dropbomb(plane, position);
+  }
 
   wait(2.0 * 3 / 4);
   plane plane_cleanupondeath();

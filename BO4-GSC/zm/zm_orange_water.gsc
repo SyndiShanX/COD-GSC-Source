@@ -733,4 +733,3 @@ update_hud_elem(player) {
     player notify(#"update_frost_state");
   }
 }
-

@@ -47,8 +47,9 @@ deletebuyabledebris(justtriggers) {
 
   if(!is_true(justtriggers)) {
     foreach(trig in debris_trigs) {
-      if(isDefined(trig.script_flag))
+      if(isDefined(trig.script_flag)) {
         flag_set(trig.script_flag);
+      }
 
       parts = getEntArray(trig.target, "targetname");
       array_thread(parts, ::self_delete);
@@ -63,8 +64,9 @@ deleteslothbarricades(justtriggers) {
 
   if(!is_true(justtriggers)) {
     foreach(trig in sloth_trigs) {
-      if(isDefined(trig.script_flag) && level flag_exists(trig.script_flag))
+      if(isDefined(trig.script_flag) && level flag_exists(trig.script_flag)) {
         flag_set(trig.script_flag);
+      }
 
       parts = getEntArray(trig.target, "targetname");
       array_thread(parts, ::self_delete);
@@ -79,8 +81,9 @@ deleteslothbarricade(location) {
 
   foreach(trig in sloth_trigs) {
     if(isDefined(trig.script_location) && trig.script_location == location) {
-      if(isDefined(trig.script_flag))
+      if(isDefined(trig.script_flag)) {
         flag_set(trig.script_flag);
+      }
 
       parts = getEntArray(trig.target, "targetname");
       array_thread(parts, ::self_delete);
@@ -89,8 +92,9 @@ deleteslothbarricade(location) {
 }
 
 spawnmapcollision(collision_model, origin) {
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     origin = (0, 0, 0);
+  }
 
   collision = spawn("script_model", origin, 1);
   collision setModel(collision_model);
@@ -103,15 +107,17 @@ turnperkon(perk) {
 }
 
 disableallzonesexcept(zones) {
-  foreach(zone in zones)
+  foreach(zone in zones) {
   level thread maps\mp\zombies\_zm_zonemgr::enable_zone(zone);
+  }
 
   foreach(zoneindex, zone in level.zones) {
     should_disable = 1;
 
     foreach(cleared_zone in zones) {
-      if(zoneindex == cleared_zone)
+      if(zoneindex == cleared_zone) {
         should_disable = 0;
+      }
     }
 
     if(is_true(should_disable)) {
@@ -122,11 +128,13 @@ disableallzonesexcept(zones) {
 }
 
 remove_adjacent_zone(main_zone, adjacent_zone) {
-  if(isDefined(level.zones[main_zone].adjacent_zones) && isDefined(level.zones[main_zone].adjacent_zones[adjacent_zone]))
+  if(isDefined(level.zones[main_zone].adjacent_zones) && isDefined(level.zones[main_zone].adjacent_zones[adjacent_zone])) {
     level.zones[main_zone].adjacent_zones[adjacent_zone] = undefined;
+  }
 
-  if(isDefined(level.zones[adjacent_zone].adjacent_zones) && isDefined(level.zones[adjacent_zone].adjacent_zones[main_zone]))
+  if(isDefined(level.zones[adjacent_zone].adjacent_zones) && isDefined(level.zones[adjacent_zone].adjacent_zones[main_zone])) {
     level.zones[adjacent_zone].adjacent_zones[main_zone] = undefined;
+  }
 }
 
 builddynamicwallbuy(location, weaponname) {
@@ -153,8 +161,9 @@ buildbuildable(buildable) {
         stub maps\mp\zombies\_zm_buildables::buildablestub_finish_build(player);
         stub maps\mp\zombies\_zm_buildables::buildablestub_remove();
 
-        foreach(piece in stub.buildablezone.pieces)
+        foreach(piece in stub.buildablezone.pieces) {
         piece maps\mp\zombies\_zm_buildables::piece_unspawn();
+        }
 
         stub.model notsolid();
         stub.model show();
@@ -181,8 +190,9 @@ generatebuildabletarps() {
     tarp setModel("p6_zm_bu_buildable_bench_tarp");
     tarp.targetname = "buildable_tarp";
 
-    if(isDefined(struct.script_location))
+    if(isDefined(struct.script_location)) {
       tarp.script_location = struct.script_location;
+    }
 
     level.buildable_tarps[level.buildable_tarps.size] = tarp;
   }
@@ -190,16 +200,18 @@ generatebuildabletarps() {
 
 deletebuildabletarp(location) {
   foreach(tarp in level.buildable_tarps) {
-    if(isDefined(tarp.script_location) && tarp.script_location == location)
+    if(isDefined(tarp.script_location) && tarp.script_location == location) {
       tarp delete();
+    }
   }
 }
 
 powerswitchstate(on) {
   trigger = getent("use_elec_switch", "targetname");
 
-  if(isDefined(trigger))
+  if(isDefined(trigger)) {
     trigger delete();
+  }
 
   master_switch = getent("elec_switch", "targetname");
 

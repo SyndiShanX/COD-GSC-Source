@@ -25,10 +25,12 @@ init() {
     door.origin_opened = door.origin;
     door.force_open_time = 0;
 
-    if(isDefined(door.script_noteworthy) && door.script_noteworthy == "flip")
+    if(isDefined(door.script_noteworthy) && door.script_noteworthy == "flip") {
       door.origin_closed = door.origin - right;
-    else
+    }
+    else {
       door.origin_closed = door.origin + right;
+    }
 
     door.origin = door.origin_closed;
     pointa = door getpointinbounds(1, 1, 1);
@@ -67,8 +69,9 @@ getminpoint(pointa, pointb) {
   point[2] = pointa[2];
 
   for(i = 0; i < 3; i++) {
-    if(point[i] > pointb[i])
+    if(point[i] > pointb[i]) {
       point[i] = pointb[i];
+    }
   }
 
   return (point[0], point[1], point[2]);
@@ -81,8 +84,9 @@ getmaxpoint(pointa, pointb) {
   point[2] = pointa[2];
 
   for(i = 0; i < 3; i++) {
-    if(point[i] < pointb[i])
+    if(point[i] < pointb[i]) {
       point[i] = pointb[i];
+    }
   }
 
   return (point[0], point[1], point[2]);
@@ -117,22 +121,26 @@ door_notify_think(index) {
     if(!isDefined(event)) {
       continue;
     }
-    if(event == "dooropen")
+    if(event == "dooropen") {
       self door_open();
-    else
+    }
+    else {
       self door_close();
+    }
 
     self movement_process();
   }
 }
 
 door_should_open() {
-  if(gettime() < self.force_open_time)
+  if(gettime() < self.force_open_time) {
     return true;
+  }
 
   foreach(trigger in self.triggers) {
-    if(trigger trigger_is_occupied())
+    if(trigger trigger_is_occupied()) {
       return true;
+    }
   }
 
   return false;
@@ -166,8 +174,9 @@ movement_process() {
   moving = 0;
 
   if(self.opened) {
-    if(distancesquared(self.origin, self.origin_opened) > 0.001)
+    if(distancesquared(self.origin, self.origin_opened) > 0.001) {
       moving = 1;
+    }
   } else if(distancesquared(self.origin, self.origin_closed) > 0.001)
     moving = 1;
 
@@ -194,14 +203,16 @@ movement_process() {
         continue;
       }
       if(isDefined(entity.classname) && entity.classname == "auto_turret") {
-        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath)
+        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
           entity domaxdamage(self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
+        }
 
         continue;
       }
 
-      if(isDefined(entity.model) && entity.model == "t6_wpn_tac_insert_world")
+      if(isDefined(entity.model) && entity.model == "t6_wpn_tac_insert_world") {
         entity maps\mp\_tacticalinsertion::destroy_tactical_insertion();
+      }
     }
   }
 }
@@ -211,8 +222,9 @@ trigger_is_occupied() {
 
   foreach(entity in entities) {
     if(isalive(entity)) {
-      if(isplayer(entity) || isai(entity) || isvehicle(entity))
+      if(isplayer(entity) || isai(entity) || isvehicle(entity)) {
         return true;
+      }
     }
   }
 
@@ -220,11 +232,13 @@ trigger_is_occupied() {
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return undefined;
+  }
 
-  if(!isplayer(self))
+  if(!isplayer(self)) {
     return undefined;
+  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {

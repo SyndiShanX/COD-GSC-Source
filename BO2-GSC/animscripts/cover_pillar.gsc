@@ -29,12 +29,15 @@ main() {
   animscripts\utility::initialize(scriptname);
 
   if(self.node has_spawnflag(1024)) {
-    if(usingpistol)
+    if(usingpistol) {
       animscripts\cover_corner::corner_think("left", -90);
-    else
+    }
+    else {
       animscripts\cover_corner::corner_think("left", 180);
+    }
   } else if(usingpistol)
     animscripts\cover_corner::corner_think("right", 90);
-  else
+  else {
     animscripts\cover_corner::corner_think("right", 180);
+  }
 }

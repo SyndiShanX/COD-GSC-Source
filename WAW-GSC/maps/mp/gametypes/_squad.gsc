@@ -60,12 +60,14 @@ squadCommandWaiter() {
     self waittill("weapon_change");
     self.squadId = getplayersquad(self);
     currentWeapon = self getCurrentWeapon();
-    if(currentWeapon != "squadcommand_mp" && currentWeapon != "none" && currentWeapon != "artillery_mp" && currentWeapon != "dogs_mp")
+    if(currentWeapon != "squadcommand_mp" && currentWeapon != "none" && currentWeapon != "artillery_mp" && currentWeapon != "dogs_mp") {
       self.lastWeapon = currentWeapon;
+    }
     if(currentWeapon == "squadcommand_mp") {
       self ShowSquadLocationSelectionMap();
-      if(self.lastWeapon != "none")
+      if(self.lastWeapon != "none") {
         self switchToWeapon(self.lastWeapon);
+      }
     }
   }
 }
@@ -79,8 +81,9 @@ giveSquadFeatures() {
 takeSquadFeatures() {
   self.squadCommandInProgress = undefined;
   self SetActionSlot(1, "");
-  if(self hasWeapon("squadcommand_mp"))
+  if(self hasWeapon("squadcommand_mp")) {
     self takeWeapon("squadcommand_mp");
+  }
 }
 
 ShowSquadLocationSelectionMap() {
@@ -104,15 +107,17 @@ ShowSquadLocationSelectionMap() {
 selectConfirmcommand(currentWeapon) {
   self endon("used");
   self waittill("confirm_location", location);
-  if(currentWeapon == "squadcommand_mp")
+  if(currentWeapon == "squadcommand_mp") {
     self finishSquadCommandUsage(location, "confirm_location", ::useSquadCommand);
+  }
 }
 
 selectClearcommand(currentWeapon) {
   self endon("used");
   self waittill("clear_squadcommand", location);
-  if(currentWeapon == "squadcommand_mp")
+  if(currentWeapon == "squadcommand_mp") {
     self finishSquadCommandUsage(location, "clear_squadcommand", ::useSquadCommand);
+  }
 }
 
 finishSquadCommandUsage(location, command, usedCallback) {

@@ -83,8 +83,9 @@ main() {
   getent("intelligence_item", "targetname") thread maps\skyway_util::waittill_notify_func("end_trigger_thread", ::delete_intel);
   maps\skyway_util::setup_player_for_animated_sequence(1, 0);
 
-  if(!isDefined(level.debug_no_move) || !level.debug_no_move)
+  if(!isDefined(level.debug_no_move) || !level.debug_no_move) {
     common_scripts\utility::flag_wait("sw_introscreen_complete");
+  }
 
   thread maps\skyway_audio::skyway_intro_sfx();
   thread event_intro();
@@ -155,8 +156,9 @@ player_push() {
 }
 
 player_push_impulse(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.05;
+  }
 
   var_2 = var_1;
 
@@ -224,8 +226,9 @@ fx_blood_splatter() {
 spawnfunc_intro() {
   self.animname = self.script_parameters;
 
-  if(issubstr(self.animname, "1"))
+  if(issubstr(self.animname, "1")) {
     level._hangar.player_enemy = self;
+  }
 
   self.v.invincible = 1;
   self.v.silent_script_death = 1;
@@ -257,8 +260,9 @@ dialogue() {
   level waittill("notify_start_intro");
   wait 1;
 
-  if(!isDefined(level.debug_no_move) || !level.debug_no_move)
+  if(!isDefined(level.debug_no_move) || !level.debug_no_move) {
     common_scripts\utility::flag_wait("sw_introscreen_complete");
+  }
 
   common_scripts\utility::flag_wait("flag_hangar_screen_smash");
   maps\_utility::radio_dialogue_stop();
@@ -270,16 +274,18 @@ event_sat_1_rog_hit() {
   var_1 = level._train.cars["train_sat_1"].body;
   var_2 = [];
 
-  for(var_3 = 0; var_3 < 1; var_3++)
+  for(var_3 = 0; var_3 < 1; var_3++) {
     var_2[var_3] = getent("model_rog_hit_ref_" + (var_3 + 1), "targetname");
+  }
 
   thread maps\skyway_util::waittill_nt(level._allies[0] maps\_utility::getanim("hangar_intro"), "open_door", -0.5, "flag_hangar_rog_hit");
   common_scripts\utility::flag_wait("flag_hangar_rog_hit");
   var_4 = 1.5;
   var_5 = [0.35, 0.3, 0.22];
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++)
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     thread maps\_utility::delaythread(var_3 * var_4, ::event_sat_1_rog_impact, var_2[var_3], var_5[var_3]);
+  }
 }
 
 event_sat_1_rog_impact(var_0, var_1) {
@@ -342,15 +348,17 @@ cleanup_hangar() {
   common_scripts\utility::flag_wait("flag_hangar_intro_done");
   wait 0.5;
 
-  while(issubstr(level.player.car, "hangar"))
+  while(issubstr(level.player.car, "hangar")) {
     wait 0.05;
+  }
 
   var_0 = level._hangar.intro_door;
   var_0 linkto(var_0.original_pos, "tag_origin", (0, 0, 0), (0, 0, 0));
 
   foreach(var_2 in level._train.cars["train_hangar"].other_linked_parts["script_model"]) {
-    if(issubstr(var_2.model, "cargo") || issubstr(var_2.model, "stacker") || issubstr(var_2.model, "lynx") || issubstr(var_2.model, "tool_cabinet"))
+    if(issubstr(var_2.model, "cargo") || issubstr(var_2.model, "stacker") || issubstr(var_2.model, "lynx") || issubstr(var_2.model, "tool_cabinet")) {
       var_2 delete();
+    }
   }
 }
 

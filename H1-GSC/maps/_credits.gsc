@@ -27,8 +27,9 @@ initrmcredits() {
   maps\_utility::set_console_status();
   var_0 = 25;
 
-  if(level.pc)
+  if(level.pc) {
     var_0 = 0;
+  }
 
   addcentergradientimage("h1_deco_gradient_black", "bottom", var_0);
   addcentergradientimage("h1_deco_gradient_black_02", "top", -1 * var_0);
@@ -2080,10 +2081,12 @@ initactivisioncredits() {
   addcenterheading(&"CREDIT_USES_BINK_VIDEO_COPYRIGHT");
   addspace();
 
-  if(level.console && !level.xenon)
+  if(level.console && !level.xenon) {
     addcenterheading(&"CREDIT_THIS_PRODUCT_USES_FMOD");
-  else
+  }
+  else {
     addcenterheading(&"CREDIT_USES_MILES_SOUND_SYSTEM");
+  }
 
   addspace();
   addspace();
@@ -2109,8 +2112,9 @@ initactivisioncredits() {
 addlefttitle(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "lefttitle";
@@ -2122,8 +2126,9 @@ addlefttitle(var_0, var_1) {
 addleftname(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "leftname";
@@ -2139,8 +2144,9 @@ addsublefttitle(var_0, var_1) {
 addsubleftname(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "subleftname";
@@ -2152,8 +2158,9 @@ addsubleftname(var_0, var_1) {
 addrighttitle(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "righttitle";
@@ -2165,8 +2172,9 @@ addrighttitle(var_0, var_1) {
 addrightname(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "rightname";
@@ -2178,8 +2186,9 @@ addrightname(var_0, var_1) {
 addcenterheading(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.headingsize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "centerheading";
@@ -2191,8 +2200,9 @@ addcenterheading(var_0, var_1) {
 addcentername(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "centername";
@@ -2205,8 +2215,9 @@ addcenternamedouble(var_0, var_1, var_2) {
   precachestring(var_0);
   precachestring(var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level.linesize;
+  }
 
   var_3 = spawnStruct();
   var_3.type = "centernamedouble";
@@ -2222,8 +2233,9 @@ adddoublecenterdualgrey(var_0, var_1, var_2, var_3, var_4) {
   precachestring(var_2);
   precachestring(var_3);
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = level.linesize;
+  }
 
   var_5 = spawnStruct();
   var_5.type = "doublecenterdualgrey";
@@ -2239,8 +2251,9 @@ addcenterdualgrey(var_0, var_1, var_2) {
   precachestring(var_0);
   precachestring(var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level.linesize;
+  }
 
   var_3 = spawnStruct();
   var_3.type = "centerdualgrey";
@@ -2255,8 +2268,9 @@ addcentertriplegrey(var_0, var_1, var_2, var_3) {
   precachestring(var_1);
   precachestring(var_2);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = level.linesize;
+  }
 
   var_4 = spawnStruct();
   var_4.type = "centertriplegrey";
@@ -2270,8 +2284,9 @@ addcentertriplegrey(var_0, var_1, var_2, var_3) {
 addcenternamecenter(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "centernamecenter";
@@ -2284,8 +2299,9 @@ addcenterdual(var_0, var_1, var_2) {
   precachestring(var_0);
   precachestring(var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level.linesize;
+  }
 
   var_3 = spawnStruct();
   var_3.type = "centerdual";
@@ -2300,8 +2316,9 @@ addcentertriple(var_0, var_1, var_2, var_3) {
   precachestring(var_1);
   precachestring(var_2);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = level.linesize;
+  }
 
   var_4 = spawnStruct();
   var_4.type = "centertriple";
@@ -2345,8 +2362,9 @@ addcenterimage(var_0, var_1, var_2, var_3) {
   var_4.width = var_1;
   var_4.height = var_2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4.delay = var_3;
+  }
 
   level.linelist[level.linelist.size] = var_4;
 }
@@ -2359,8 +2377,9 @@ addleftimage(var_0, var_1, var_2, var_3) {
   var_4.width = var_1;
   var_4.height = var_2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4.delay = var_3;
+  }
 
   level.linelist[level.linelist.size] = var_4;
 }
@@ -2370,8 +2389,9 @@ addfunction(var_0, var_1) {
   var_2.type = "function";
   var_2.function = var_0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2.delay = var_1;
+  }
 
   level.linelist[level.linelist.size] = var_2;
 }
@@ -2423,10 +2443,12 @@ playcredits() {
       var_6 moveovertime(level.moveovertimevalue);
       var_6.y = -120;
 
-      if(isDefined(level.linelist[var_0].delay))
+      if(isDefined(level.linelist[var_0].delay)) {
         var_1 = level.linelist[var_0].delay;
-      else
+      }
+      else {
         var_1 = 0.037 * var_5;
+      }
     } else if(var_2 == "centergradientimage") {
       var_3 = level.linelist[var_0].image;
       var_4 = level.linelist[var_0].width;
@@ -2677,8 +2699,9 @@ playcredits() {
     } else if(var_2 == "spacesmall")
       var_1 = 0.1875;
     else if(var_2 == "function") {
-      if(isDefined(level.linelist[var_0].function))
+      if(isDefined(level.linelist[var_0].function)) {
         [[level.linelist[var_0].function]]();
+      }
     } else if(var_2 == "doublecenterdualgrey") {
       var_15 = level.linelist[var_0].name1;
       var_19 = level.linelist[var_0].title1;

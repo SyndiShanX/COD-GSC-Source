@@ -18,13 +18,15 @@ init() {
   level.tombstone_spawn_func = ::tombstone_spawn;
   level thread tombstone_hostmigration();
 
-  if(isDefined(level.zombiemode_using_tombstone_perk) && level.zombiemode_using_tombstone_perk)
+  if(isDefined(level.zombiemode_using_tombstone_perk) && level.zombiemode_using_tombstone_perk) {
     add_custom_limited_weapon_check(::is_weapon_available_in_tombstone);
+  }
 }
 
 tombstone_player_init() {
-  while(!isDefined(self.tombstone_index))
+  while(!isDefined(self.tombstone_index)) {
     wait 0.1;
+  }
 
   level.tombstones[self.tombstone_index] = spawnStruct();
 }
@@ -94,12 +96,14 @@ tombstone_laststand() {
     dc.weapon[index] = weapon;
     dc.stockcount[index] = self getweaponammostock(weapon);
 
-    if(weapon == currentweapon)
+    if(weapon == currentweapon) {
       dc.current_weapon = index;
+    }
   }
 
-  if(isDefined(self.hasriotshield) && self.hasriotshield)
+  if(isDefined(self.hasriotshield) && self.hasriotshield) {
     dc.hasriotshield = 1;
+  }
 
   dc save_weapons_for_tombstone(self);
 
@@ -116,38 +120,48 @@ tombstone_laststand() {
   dc.perk = tombstone_save_perks(self);
   lethal_grenade = self get_player_lethal_grenade();
 
-  if(self hasweapon(lethal_grenade))
+  if(self hasweapon(lethal_grenade)) {
     dc.grenade = self getweaponammoclip(lethal_grenade);
-  else
+  }
+  else {
     dc.grenade = 0;
+  }
 
-  if(maps\mp\zombies\_zm_weap_cymbal_monkey::cymbal_monkey_exists())
+  if(maps\mp\zombies\_zm_weap_cymbal_monkey::cymbal_monkey_exists()) {
     dc.zombie_cymbal_monkey_count = self getweaponammoclip("cymbal_monkey_zm");
+  }
 }
 
 tombstone_save_perks(ent) {
   perk_array = [];
 
-  if(ent hasperk("specialty_armorvest"))
+  if(ent hasperk("specialty_armorvest")) {
     perk_array[perk_array.size] = "specialty_armorvest";
+  }
 
-  if(ent hasperk("specialty_deadshot"))
+  if(ent hasperk("specialty_deadshot")) {
     perk_array[perk_array.size] = "specialty_deadshot";
+  }
 
-  if(ent hasperk("specialty_fastreload"))
+  if(ent hasperk("specialty_fastreload")) {
     perk_array[perk_array.size] = "specialty_fastreload";
+  }
 
-  if(ent hasperk("specialty_flakjacket"))
+  if(ent hasperk("specialty_flakjacket")) {
     perk_array[perk_array.size] = "specialty_flakjacket";
+  }
 
-  if(ent hasperk("specialty_longersprint"))
+  if(ent hasperk("specialty_longersprint")) {
     perk_array[perk_array.size] = "specialty_longersprint";
+  }
 
-  if(ent hasperk("specialty_quickrevive"))
+  if(ent hasperk("specialty_quickrevive")) {
     perk_array[perk_array.size] = "specialty_quickrevive";
+  }
 
-  if(ent hasperk("specialty_rof"))
+  if(ent hasperk("specialty_rof")) {
     perk_array[perk_array.size] = "specialty_rof";
+  }
 
   return perk_array;
 }
@@ -168,8 +182,9 @@ tombstone_grab() {
         istombstonepowered = 0;
 
         foreach(trigger in tombstone_machine_triggers) {
-          if(isDefined(trigger.power_on) && trigger.power_on || isDefined(trigger.turbine_power_on) && trigger.turbine_power_on)
+          if(isDefined(trigger.power_on) && trigger.power_on || isDefined(trigger.turbine_power_on) && trigger.turbine_power_on) {
             istombstonepowered = 1;
+          }
         }
 
         if(istombstonepowered) {
@@ -204,8 +219,9 @@ tombstone_give() {
     primaries = self getweaponslistprimaries();
 
     if(dc.weapon.size > 1 || primaries.size > 1) {
-      foreach(weapon in primaries)
+      foreach(weapon in primaries) {
       self takeweapon(weapon);
+      }
     }
 
     for(i = 0; i < dc.weapon.size; i++) {
@@ -223,8 +239,9 @@ tombstone_give() {
         self setweaponammoclip(weapon, weaponclipsize(weapon));
         self setweaponammostock(weapon, stock);
 
-        if(i == dc.current_weapon)
+        if(i == dc.current_weapon) {
           self switchtoweapon(weapon);
+        }
       }
     }
   }
@@ -232,8 +249,9 @@ tombstone_give() {
   if(isDefined(dc.hasriotshield) && dc.hasriotshield) {
     self maps\mp\zombies\_zm_equipment::equipment_give("riotshield_zm");
 
-    if(isDefined(self.player_shield_reset_health))
+    if(isDefined(self.player_shield_reset_health)) {
       self[[self.player_shield_reset_health]]();
+    }
   }
 
   dc restore_weapons_for_tombstone(self);
@@ -265,10 +283,12 @@ tombstone_give() {
   if(dc.grenade > 0 && !flag("solo_game")) {
     curgrenadecount = 0;
 
-    if(self hasweapon(self get_player_lethal_grenade()))
+    if(self hasweapon(self get_player_lethal_grenade())) {
       self getweaponammoclip(self get_player_lethal_grenade());
-    else
+    }
+    else {
       self giveweapon(self get_player_lethal_grenade());
+    }
 
     self setweaponammoclip(self get_player_lethal_grenade(), dc.grenade + curgrenadecount);
   }
@@ -304,10 +324,12 @@ tombstone_timeout() {
   wait 48.5;
 
   for(i = 0; i < 40; i++) {
-    if(i % 2)
+    if(i % 2) {
       self.icon ghost();
-    else
+    }
+    else {
       self.icon show();
+    }
 
     if(i < 15) {
       wait 0.5;
@@ -349,18 +371,21 @@ playtombstonetimerout(player) {
 save_weapons_for_tombstone(player) {
   self.tombstone_melee_weapons = [];
 
-  for(i = 0; i < level._melee_weapons.size; i++)
+  for(i = 0; i < level._melee_weapons.size; i++) {
     self save_weapon_for_tombstone(player, level._melee_weapons[i].weapon_name);
+  }
 }
 
 save_weapon_for_tombstone(player, weapon_name) {
-  if(player hasweapon(weapon_name))
+  if(player hasweapon(weapon_name)) {
     self.tombstone_melee_weapons[weapon_name] = 1;
+  }
 }
 
 restore_weapons_for_tombstone(player) {
-  for(i = 0; i < level._melee_weapons.size; i++)
+  for(i = 0; i < level._melee_weapons.size; i++) {
     self restore_weapon_for_tombstone(player, level._melee_weapons[i].weapon_name);
+  }
 
   self.tombstone_melee_weapons = undefined;
 }
@@ -385,8 +410,9 @@ tombstone_hostmigration() {
     level waittill("host_migration_end");
     tombstones = getEntArray("player_tombstone_model", "script_noteworthy");
 
-    foreach(model in tombstones)
+    foreach(model in tombstones) {
     playFXOnTag(level._effect["powerup_on"], model, "tag_origin");
+    }
   }
 }
 
@@ -394,8 +420,9 @@ is_weapon_available_in_tombstone(weapon, player_to_check) {
   count = 0;
   upgradedweapon = weapon;
 
-  if(isDefined(level.zombie_weapons[weapon]) && isDefined(level.zombie_weapons[weapon].upgrade_name))
+  if(isDefined(level.zombie_weapons[weapon]) && isDefined(level.zombie_weapons[weapon].upgrade_name)) {
     upgradedweapon = level.zombie_weapons[weapon].upgrade_name;
+  }
 
   for(tombstone_index = 0; tombstone_index < level.tombstones.size; tombstone_index++) {
     dc = level.tombstones[tombstone_index];
@@ -412,8 +439,9 @@ is_weapon_available_in_tombstone(weapon, player_to_check) {
       }
       tombstone_weapon = dc.weapon[weapon_index];
 
-      if(tombstone_weapon == weapon || tombstone_weapon == upgradedweapon)
+      if(tombstone_weapon == weapon || tombstone_weapon == upgradedweapon) {
         count++;
+      }
     }
   }
 

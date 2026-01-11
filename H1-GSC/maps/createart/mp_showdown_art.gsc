@@ -7,10 +7,12 @@
 main() {
   level.tweakfile = 1;
 
-  if(isusinghdr())
+  if(isusinghdr()) {
     maps\createart\mp_showdown_fog_hdr::setupfog();
-  else
+  }
+  else {
     maps\createart\mp_showdown_fog::setupfog();
+  }
 
   visionsetnaked("mp_showdown", 0);
 }

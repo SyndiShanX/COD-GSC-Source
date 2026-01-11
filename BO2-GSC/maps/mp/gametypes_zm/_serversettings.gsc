@@ -6,48 +6,57 @@
 init() {
   level.hostname = getdvar(#"sv_hostname");
 
-  if(level.hostname == "")
+  if(level.hostname == "") {
     level.hostname = "CoDHost";
+  }
 
   setdvar("sv_hostname", level.hostname);
   setdvar("ui_hostname", level.hostname);
   makedvarserverinfo("ui_hostname", "CoDHost");
   level.motd = getdvar(#"scr_motd");
 
-  if(level.motd == "")
+  if(level.motd == "") {
     level.motd = "";
+  }
 
   setdvar("scr_motd", level.motd);
   setdvar("ui_motd", level.motd);
   makedvarserverinfo("ui_motd", "");
   level.allowvote = getdvar(#"g_allowVote");
 
-  if(level.allowvote == "")
+  if(level.allowvote == "") {
     level.allowvote = "1";
+  }
 
   setdvar("g_allowvote", level.allowvote);
   setdvar("ui_allowvote", level.allowvote);
   makedvarserverinfo("ui_allowvote", "1");
   level.allow_teamchange = "0";
 
-  if(sessionmodeisprivate() || !sessionmodeisonlinegame())
+  if(sessionmodeisprivate() || !sessionmodeisonlinegame()) {
     level.allow_teamchange = "1";
+  }
 
   setdvar("ui_allow_teamchange", level.allow_teamchange);
   level.friendlyfire = getgametypesetting("friendlyfiretype");
   setdvar("ui_friendlyfire", level.friendlyfire);
   makedvarserverinfo("ui_friendlyfire", "0");
 
-  if(getdvar(#"scr_mapsize") == "")
+  if(getdvar(#"scr_mapsize") == "") {
     setdvar("scr_mapsize", "64");
-  else if(getdvarfloat(#"scr_mapsize") >= 64)
+  }
+  else if(getdvarfloat(#"scr_mapsize") >= 64) {
     setdvar("scr_mapsize", "64");
-  else if(getdvarfloat(#"scr_mapsize") >= 32)
+  }
+  else if(getdvarfloat(#"scr_mapsize") >= 32) {
     setdvar("scr_mapsize", "32");
-  else if(getdvarfloat(#"scr_mapsize") >= 16)
+  }
+  else if(getdvarfloat(#"scr_mapsize") >= 16) {
     setdvar("scr_mapsize", "16");
-  else
+  }
+  else {
     setdvar("scr_mapsize", "8");
+  }
 
   level.mapsize = getdvarfloat(#"scr_mapsize");
   constraingametype(getdvar(#"g_gametype"));
@@ -96,43 +105,49 @@ constraingametype(gametype) {
     entity = entities[i];
 
     if(gametype == "dm") {
-      if(isDefined(entity.script_gametype_dm) && entity.script_gametype_dm != "1")
+      if(isDefined(entity.script_gametype_dm) && entity.script_gametype_dm != "1") {
         entity delete();
+      }
 
       continue;
     }
 
     if(gametype == "tdm") {
-      if(isDefined(entity.script_gametype_tdm) && entity.script_gametype_tdm != "1")
+      if(isDefined(entity.script_gametype_tdm) && entity.script_gametype_tdm != "1") {
         entity delete();
+      }
 
       continue;
     }
 
     if(gametype == "ctf") {
-      if(isDefined(entity.script_gametype_ctf) && entity.script_gametype_ctf != "1")
+      if(isDefined(entity.script_gametype_ctf) && entity.script_gametype_ctf != "1") {
         entity delete();
+      }
 
       continue;
     }
 
     if(gametype == "hq") {
-      if(isDefined(entity.script_gametype_hq) && entity.script_gametype_hq != "1")
+      if(isDefined(entity.script_gametype_hq) && entity.script_gametype_hq != "1") {
         entity delete();
+      }
 
       continue;
     }
 
     if(gametype == "sd") {
-      if(isDefined(entity.script_gametype_sd) && entity.script_gametype_sd != "1")
+      if(isDefined(entity.script_gametype_sd) && entity.script_gametype_sd != "1") {
         entity delete();
+      }
 
       continue;
     }
 
     if(gametype == "koth") {
-      if(isDefined(entity.script_gametype_koth) && entity.script_gametype_koth != "1")
+      if(isDefined(entity.script_gametype_koth) && entity.script_gametype_koth != "1") {
         entity delete();
+      }
     }
   }
 }
@@ -144,29 +159,33 @@ constrainmapsize(mapsize) {
     entity = entities[i];
 
     if(int(mapsize) == 8) {
-      if(isDefined(entity.script_mapsize_08) && entity.script_mapsize_08 != "1")
+      if(isDefined(entity.script_mapsize_08) && entity.script_mapsize_08 != "1") {
         entity delete();
+      }
 
       continue;
     }
 
     if(int(mapsize) == 16) {
-      if(isDefined(entity.script_mapsize_16) && entity.script_mapsize_16 != "1")
+      if(isDefined(entity.script_mapsize_16) && entity.script_mapsize_16 != "1") {
         entity delete();
+      }
 
       continue;
     }
 
     if(int(mapsize) == 32) {
-      if(isDefined(entity.script_mapsize_32) && entity.script_mapsize_32 != "1")
+      if(isDefined(entity.script_mapsize_32) && entity.script_mapsize_32 != "1") {
         entity delete();
+      }
 
       continue;
     }
 
     if(int(mapsize) == 64) {
-      if(isDefined(entity.script_mapsize_64) && entity.script_mapsize_64 != "1")
+      if(isDefined(entity.script_mapsize_64) && entity.script_mapsize_64 != "1") {
         entity delete();
+      }
     }
   }
 }

@@ -13,8 +13,9 @@ main() {
   precache_createfx_fx();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0)
+  if(!isDefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
+  }
 
   footsteps();
 }
@@ -141,10 +142,12 @@ footsteps() {
 }
 
 toggle_water_fx_actor(localclientnum, set, newent) {
-  if(set)
+  if(set) {
     self thread _play_water_fx_actor(localclientnum);
-  else
+  }
+  else {
     self _kill_water_fx_actor(localclientnum);
+  }
 }
 
 _play_water_fx_actor(localclientnum) {
@@ -158,8 +161,9 @@ _play_water_fx_actor(localclientnum) {
 
   self.playing_water_fx = 0;
 
-  if(!self isplayer())
+  if(!self isplayer()) {
     self thread play_water_fx_audio();
+  }
 
   while(isDefined(self)) {
     v_start = self.origin + vectorscale((0, 0, 1), 50.0);
@@ -190,15 +194,18 @@ _kill_water_fx_actor(localclientnum) {
     wait 2;
   }
 
-  if(isDefined(self.e_water_fx))
+  if(isDefined(self.e_water_fx)) {
     self.e_water_fx delete();
+  }
 }
 
 toggle_water_fx_model(localclientnum, set, newent) {
-  if(set)
+  if(set) {
     self thread _play_water_fx_model(localclientnum);
-  else
+  }
+  else {
     self _kill_water_fx_model(localclientnum);
+  }
 }
 
 _play_water_fx_model(localclientnum) {
@@ -212,10 +219,12 @@ _play_water_fx_model(localclientnum) {
 
   n_fx_id = level._effect["frogger_wake_" + self.model];
 
-  if(isDefined(n_fx_id))
+  if(isDefined(n_fx_id)) {
     self.n_water_fx_id = playFXOnTag(localclientnum, n_fx_id, self.e_water_fx, "tag_origin");
-  else
+  }
+  else {
     return;
+  }
 
   while(isDefined(self)) {
     v_start = self.origin + vectorscale((0, 0, 1), 50.0);
@@ -244,8 +253,9 @@ _kill_water_fx_model(localclientnum) {
     wait 2;
   }
 
-  if(isDefined(self.e_water_fx))
+  if(isDefined(self.e_water_fx)) {
     self.e_water_fx delete();
+  }
 }
 
 play_water_fx_audio() {
@@ -259,10 +269,12 @@ play_water_fx_audio() {
 
   while(isDefined(self) && isDefined(self.playing_water_fx)) {
     while(isDefined(self)) {
-      if(self getspeed() > 50)
+      if(self getspeed() > 50) {
         self.e_water_fx playLoopSound("chr_swimming_swim_loop_npc", 0.1);
-      else
+      }
+      else {
         self.e_water_fx playLoopSound("chr_swimming_float_loop_npc", 0.1);
+      }
 
       wait 0.25;
     }

@@ -301,10 +301,12 @@ gaz_crush(var_0) {
   if(level.bgazcrushsndplaying == 0) {
     level.bgazcrushsndplaying = 1;
 
-    if(!common_scripts\utility::flag("aud_exfil"))
+    if(!common_scripts\utility::flag("aud_exfil")) {
       thread common_scripts\utility::play_sound_in_space("satf_tank_metal_crush", var_0);
-    else
+    }
+    else {
       thread common_scripts\utility::play_sound_in_space("satf_tank_metal_crush_small", var_0);
+    }
 
     wait 0.3;
     level.bgazcrushsndplaying = 0;
@@ -341,8 +343,9 @@ hangar_wall_shot(var_0) {
 hangar_wall_debris() {
   common_scripts\utility::flag_wait("aud_enter_hangar");
 
-  if(!level.bwalldestroyed)
+  if(!level.bwalldestroyed) {
     thread common_scripts\utility::play_sound_in_space("satf_concrete_barrier_crush_plr_lyr2", level.player.origin);
+  }
 }
 
 walldowncheck() {
@@ -401,8 +404,9 @@ tower_door_listen() {
 tower_door_listen_2() {
   wait 0.5;
 
-  if(!common_scripts\utility::flag("breach_start"))
+  if(!common_scripts\utility::flag("breach_start")) {
     thread common_scripts\utility::play_sound_in_space("satf_tower_door_breach_listen_2", (-5233, 53557, 268));
+  }
 }
 
 tower_door_breach() {
@@ -588,20 +592,24 @@ player_tank_driving_sound() {
     var_2 = level.left_stick[1];
     var_3 = level.playertank vehicle_getspeed();
 
-    if(var_3 > 0)
+    if(var_3 > 0) {
       level.tank_sound_pitch = 0.8 + 0.2 * (var_3 / 50);
+    }
 
-    if(var_1 < 0)
+    if(var_1 < 0) {
       var_1 = var_1 - var_1 * 2;
+    }
 
-    if(var_2 < 0)
+    if(var_2 < 0) {
       var_2 = var_2 - var_2 * 2;
+    }
 
     if(var_1 > 0.05 || var_2 > 0.05) {
       var_4 = var_1 + var_2;
 
-      if(var_4 > 1)
+      if(var_4 > 1) {
         var_4 = 1;
+      }
 
       var_0 scalevolume(var_4, 0.2);
     } else
@@ -611,8 +619,9 @@ player_tank_driving_sound() {
     wait 0.5;
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 maps\_utility::sound_fade_and_delete(0.2);
+  }
 }
 
 player_tank_impeded_sound() {
@@ -626,11 +635,13 @@ player_tank_impeded_sound() {
     var_3 = level.left_stick[1];
     var_4 = level.playertank vehicle_getspeed();
 
-    if(var_2 < 0)
+    if(var_2 < 0) {
       var_2 = var_2 - var_2 * 2;
+    }
 
-    if(var_3 < 0)
+    if(var_3 < 0) {
       var_3 = var_3 - var_3 * 2;
+    }
 
     var_5 = var_2 + var_3;
 
@@ -652,8 +663,9 @@ player_tank_impeded_sound() {
     wait 0.05;
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 maps\_utility::sound_fade_and_delete(0.2);
+  }
 }
 
 player_tank_turret_sounds() {
@@ -670,10 +682,12 @@ player_tank_turret_sounds() {
   var_8 = 1;
 
   while(common_scripts\utility::flag("player_in_tank") && !common_scripts\utility::flag("aud_tank_destroyed")) {
-    if(level.bthermalon == 1)
+    if(level.bthermalon == 1) {
       level.player setclienttriggeraudiozone("thermal");
-    else
+    }
+    else {
       level.player clearclienttriggeraudiozone(1);
+    }
 
     var_9 = level.player getnormalizedcameramovement();
     level.left_stick = level.player getnormalizedmovement();
@@ -732,8 +746,9 @@ player_tank_turret_sounds() {
     }
 
     if(var_11 >= -0.05 && var_11 <= 0.05) {
-      if(level.y_turretcheck == 1)
+      if(level.y_turretcheck == 1) {
         var_2 playSound("satf_tank_turret_stop");
+      }
 
       level.y_turretcheck = 0;
       wait 0.05;
@@ -743,17 +758,21 @@ player_tank_turret_sounds() {
     wait 0.05;
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 }
 
 player_acceleration_sounds() {

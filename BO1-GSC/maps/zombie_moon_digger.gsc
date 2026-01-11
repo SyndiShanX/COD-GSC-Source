@@ -133,8 +133,9 @@ digger_activate(force_digger) {
 play_digger_start_vox(digger_name) {
   level thread maps\zombie_moon_amb::play_mooncomp_vox("vox_mcomp_digger_start_", digger_name);
   wait(7);
-  if(!is_true(level.on_the_moon))
+  if(!is_true(level.on_the_moon)) {
     return;
+  }
   players = get_players();
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("digger", "incoming");
 }
@@ -142,22 +143,28 @@ play_digger_start_vox(digger_name) {
 send_clientnotify(digger_name, pause) {
   switch (digger_name) {
     case "hangar":
-      if(!pause)
+      if(!pause) {
         clientnotify("Dz3");
-      else
+      }
+      else {
         clientnotify("Dz3e");
+      }
       break;
     case "teleporter":
-      if(!pause)
+      if(!pause) {
         clientnotify("Dz2");
-      else
+      }
+      else {
         clientnotify("Dz2e");
+      }
       break;
     case "biodome":
-      if(!pause)
+      if(!pause) {
         clientnotify("Dz5");
-      else
+      }
+      else {
         clientnotify("Dz5e");
+      }
       break;
   }
 }
@@ -727,16 +734,19 @@ switch_ambient_packages(digger) {
 }
 
 play_delayed_breach_vox(digger) {
-  if(!level.on_the_moon)
+  if(!level.on_the_moon) {
     return;
+  }
   playsoundatposition("evt_breach_alarm", (0, 0, 0));
   wait(1.5);
-  if(!level.on_the_moon)
+  if(!level.on_the_moon) {
     return;
+  }
   playsoundatposition("evt_breach_alarm", (0, 0, 0));
   wait(1.5);
-  if(!level.on_the_moon)
+  if(!level.on_the_moon) {
     return;
+  }
   playsoundatposition("evt_breach_alarm", (0, 0, 0));
   wait(2);
   level thread maps\zombie_moon_amb::play_mooncomp_vox("vox_mcomp_digger_breach_", digger);

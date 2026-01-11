@@ -23,11 +23,13 @@ preload() {
   level.spawnmins = (0, 0, 0);
   level.globalkillstreakscalled = 0;
 
-  if(!isDefined(level.killstreakrounddelay))
+  if(!isDefined(level.killstreakrounddelay)) {
     level.killstreakrounddelay = 0;
+  }
 
-  if(getdvar(#"scr_allow_killstreak_building") == "")
+  if(getdvar(#"scr_allow_killstreak_building") == "") {
     setdvar("scr_allow_killstreak_building", "0");
+  }
 
   precachestring(&"MP_KILLSTREAK_N");
   killstreak_setup();
@@ -44,8 +46,9 @@ init() {
   maps\sp_killstreaks\_remotemissile::init();
   level.overrideactorkilled = ::callback_killstreakactorkilled;
 
-  foreach(player in getplayers())
+  foreach(player in getplayers()) {
   player thread onplayerspawned();
+  }
 
   level thread onplayerconnect();
 
@@ -70,13 +73,16 @@ isactionslotpressed() {
 iskillstreakregistered(killstreaktype) {
   assert(isDefined(killstreaktype), "Cannot pass undefined as parameter");
 
-  if(!isDefined(level.killstreaks))
+  if(!isDefined(level.killstreaks)) {
     return false;
+  }
 
-  if(isDefined(level.killstreaks[killstreaktype]))
+  if(isDefined(level.killstreaks[killstreaktype])) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 registerkillstreak(killstreaktype, killstreakweapon, killstreakmenuname, killstreakusagekey, killstreakusefunction, killstreakdelaystreak, weaponholdallowed, killstreakstatsname) {
@@ -98,11 +104,13 @@ registerkillstreak(killstreaktype, killstreakweapon, killstreakmenuname, killstr
     level.killstreakweapons[killstreakweapon] = killstreaktype;
   }
 
-  if(!isDefined(weaponholdallowed))
+  if(!isDefined(weaponholdallowed)) {
     weaponholdallowed = 0;
+  }
 
-  if(isDefined(killstreakstatsname))
+  if(isDefined(killstreakstatsname)) {
     level.killstreaks[killstreaktype].killstreakstatsname = killstreakstatsname;
+  }
 
   level.killstreaks[killstreaktype].weaponholdallowed = weaponholdallowed;
   level.menureferenceforkillstreak[killstreakmenuname] = killstreaktype;
@@ -116,17 +124,21 @@ registerkillstreakstrings(killstreaktype, receivedtext, notusabletext, inboundte
   level.killstreaks[killstreaktype].inboundtext = inboundtext;
   level.killstreaks[killstreaktype].inboundnearplayertext = inboundnearplayertext;
 
-  if(isDefined(level.killstreaks[killstreaktype].receivedtext))
+  if(isDefined(level.killstreaks[killstreaktype].receivedtext)) {
     precachestring(level.killstreaks[killstreaktype].receivedtext);
+  }
 
-  if(isDefined(level.killstreaks[killstreaktype].notavailabletext))
+  if(isDefined(level.killstreaks[killstreaktype].notavailabletext)) {
     precachestring(level.killstreaks[killstreaktype].notavailabletext);
+  }
 
-  if(isDefined(level.killstreaks[killstreaktype].inboundtext))
+  if(isDefined(level.killstreaks[killstreaktype].inboundtext)) {
     precachestring(level.killstreaks[killstreaktype].inboundtext);
+  }
 
-  if(isDefined(level.killstreaks[killstreaktype].inboundnearplayertext))
+  if(isDefined(level.killstreaks[killstreaktype].inboundnearplayertext)) {
     precachestring(level.killstreaks[killstreaktype].inboundnearplayertext);
+  }
 }
 
 registerkillstreakdialog(killstreaktype, receiveddialog, friendlystartdialog, friendlyenddialog, enemystartdialog, enemyenddialog, dialog) {
@@ -147,11 +159,13 @@ registerkillstreakaltweapon(killstreaktype, weapon) {
   if(level.killstreaks[killstreaktype].weapon == weapon) {
     return;
   }
-  if(!isDefined(level.killstreaks[killstreaktype].altweapons))
+  if(!isDefined(level.killstreaks[killstreaktype].altweapons)) {
     level.killstreaks[killstreaktype].altweapons = [];
+  }
 
-  if(!isDefined(level.killstreakweapons[weapon]))
+  if(!isDefined(level.killstreakweapons[weapon])) {
     level.killstreakweapons[weapon] = killstreaktype;
+  }
 
   level.killstreaks[killstreaktype].altweapons[level.killstreaks[killstreaktype].altweapons.size] = weapon;
 }
@@ -167,25 +181,30 @@ allowkillstreakassists(killstreaktype, allow) {
 }
 
 doesplayerhavekillstreak(killstreak) {
-  if(!isDefined(self.pers))
+  if(!isDefined(self.pers)) {
     return false;
+  }
 
-  if(!isDefined(self.pers["killstreaks"]))
+  if(!isDefined(self.pers["killstreaks"])) {
     return false;
+  }
 
   for(i = 0; i < self.pers["killstreaks"].size; i++) {
-    if(self.pers["killstreaks"][i] == killstreak)
+    if(self.pers["killstreaks"][i] == killstreak) {
       return true;
+    }
   }
 
   return false;
 }
 
 iskillstreakavailable(killstreak) {
-  if(isDefined(level.menureferenceforkillstreak[killstreak]))
+  if(isDefined(level.menureferenceforkillstreak[killstreak])) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 getkillstreakbymenuname(killstreak) {
@@ -214,8 +233,9 @@ getkillstreaklevel(index, killstreak) {
     if(isDefined(self.killstreak[index]) && killstreak == self.killstreak[index]) {
       killsrequired = getdvarint(#"_id_8F4AAEF4" + index + 1 + "_kills");
 
-      if(killsrequired)
+      if(killsrequired) {
         killstreaklevel = getdvarint(#"_id_8F4AAEF4" + index + 1 + "_kills");
+      }
     }
   }
 
@@ -223,17 +243,21 @@ getkillstreaklevel(index, killstreak) {
 }
 
 givekillstreakifstreakcountmatches(index, killstreak, streakcount) {
-  if(!iskillstreaksstreakcountsenabled())
+  if(!iskillstreaksstreakcountsenabled()) {
     return false;
+  }
 
-  if(!isDefined(killstreak))
+  if(!isDefined(killstreak)) {
     println("Killstreak Undefined.\\n");
+  }
 
-  if(isDefined(killstreak))
+  if(isDefined(killstreak)) {
     println("Killstreak listed as." + killstreak + "\\n");
+  }
 
-  if(!iskillstreakavailable(killstreak))
+  if(!iskillstreakavailable(killstreak)) {
     println("Killstreak Not Available.\\n");
+  }
 
   hasalreadyearnedkillstreak = 0;
 
@@ -254,18 +278,21 @@ givekillstreakforstreak() {
   if(!iskillstreaksenabled()) {
     return;
   }
-  if(!isDefined(self.pers["totalKillstreakCount"]))
+  if(!isDefined(self.pers["totalKillstreakCount"])) {
     self.pers["totalKillstreakCount"] = 0;
+  }
 
   given = 0;
 
-  for(i = 0; i < self.killstreak.size; i++)
+  for(i = 0; i < self.killstreak.size; i++) {
     given = given | givekillstreakifstreakcountmatches(i, self.killstreak[i], self.pers["totalKillstreakCount"]);
+  }
 }
 
 isoneawayfromkillstreak() {
-  if(!isDefined(self.pers["kill_streak_before_death"]))
+  if(!isDefined(self.pers["kill_streak_before_death"])) {
     self.pers["kill_streak_before_death"] = 0;
+  }
 
   streakplusone = self.pers["kill_streak_before_death"] + 1;
 
@@ -277,8 +304,9 @@ isoneawayfromkillstreak() {
   oneaway = 0;
   killstreakcount = self.killstreak.size;
 
-  for(killstreaknum = 0; killstreaknum < killstreakcount; killstreaknum++)
+  for(killstreaknum = 0; killstreaknum < killstreakcount; killstreaknum++) {
     oneaway = oneaway | doesstreakcountmatch(self.killstreak[killstreaknum], streakplusone);
+  }
 
   return oneaway;
 }
@@ -287,8 +315,9 @@ doesstreakcountmatch(killstreak, streakcount) {
   if(isDefined(killstreak) && iskillstreakavailable(killstreak)) {
     killstreaklevel = level.killstreaks[getkillstreakbymenuname(killstreak)].killstreaklevel;
 
-    if(killstreaklevel == streakcount)
+    if(killstreaklevel == streakcount) {
       return true;
+    }
   }
 
   return false;
@@ -322,44 +351,56 @@ givekillstreak(killstreaktype, streak, suppressnotification, noxp) {
 }
 
 givekillstreakinternal(killstreaktype, do_not_update_death_count, noxp) {
-  if(level.gameended)
+  if(level.gameended) {
     return false;
+  }
 
-  if(!iskillstreaksenabled())
+  if(!iskillstreaksenabled()) {
     return false;
+  }
 
-  if(!isDefined(killstreaktype))
+  if(!isDefined(killstreaktype)) {
     return false;
+  }
 
-  if(!isDefined(level.killstreaks))
+  if(!isDefined(level.killstreaks)) {
     return false;
+  }
 
-  if(!isDefined(level.killstreaks[killstreaktype]))
+  if(!isDefined(level.killstreaks[killstreaktype])) {
     return false;
+  }
 
-  if(!isDefined(self.pers))
+  if(!isDefined(self.pers)) {
     self.pers = [];
+  }
 
-  if(!isDefined(self.pers["killstreaks"]))
+  if(!isDefined(self.pers["killstreaks"])) {
     self.pers["killstreaks"] = [];
+  }
 
-  if(!isDefined(self.pers["killstreak_has_been_used"]))
+  if(!isDefined(self.pers["killstreak_has_been_used"])) {
     self.pers["killstreak_has_been_used"] = [];
+  }
 
-  if(!isDefined(self.pers["killstreak_unique_id"]))
+  if(!isDefined(self.pers["killstreak_unique_id"])) {
     self.pers["killstreak_unique_id"] = [];
+  }
 
-  if(!isDefined(self.pers["team"]))
+  if(!isDefined(self.pers["team"])) {
     self.pers["team"] = self.team;
+  }
 
   self.pers["killstreaks"][self.pers["killstreaks"].size] = killstreaktype;
   self.pers["killstreak_unique_id"][self.pers["killstreak_unique_id"].size] = level.killstreakcounter;
   level.killstreakcounter++;
 
-  if(isDefined(noxp))
+  if(isDefined(noxp)) {
     self.pers["killstreak_has_been_used"][self.pers["killstreak_has_been_used"].size] = noxp;
-  else
+  }
+  else {
     self.pers["killstreak_has_been_used"][self.pers["killstreak_has_been_used"].size] = 0;
+  }
 
   weapon = getkillstreakweapon(killstreaktype);
   givekillstreakweapon(weapon);
@@ -376,8 +417,9 @@ addkillstreaktoqueue(menuname, streakcount, hardpointtype, nonotify) {
   if(isDefined(nonotify) && nonotify) {
     return;
   }
-  if(!isDefined(self.killstreaknotifyqueue))
+  if(!isDefined(self.killstreaknotifyqueue)) {
     self.killstreaknotifyqueue = [];
+  }
 
   size = self.killstreaknotifyqueue.size;
   self.killstreaknotifyqueue[size] = spawnStruct();
@@ -392,8 +434,9 @@ haskillstreakequipped() {
   keys = getarraykeys(level.killstreaks);
 
   for(i = 0; i < keys.size; i++) {
-    if(level.killstreaks[keys[i]].weapon == currentweapon)
+    if(level.killstreaks[keys[i]].weapon == currentweapon) {
       return true;
+    }
   }
 
   return false;
@@ -420,8 +463,9 @@ givekillstreakweapon(weapon) {
         continue;
     }
 
-    if(iskillstreakweapon(carriedweapon))
+    if(iskillstreakweapon(carriedweapon)) {
       self takeweapon(carriedweapon);
+    }
   }
 
   if(currentweapon != weapon && !self hasweapon(weapon)) {
@@ -433,25 +477,29 @@ givekillstreakweapon(weapon) {
 }
 
 activatenextkillstreak(do_not_update_death_count) {
-  if(level.gameended)
+  if(level.gameended) {
     return false;
+  }
 
   self setactionslot(level.actionslot, "");
 
-  if(!isDefined(self.pers["killstreaks"]) || self.pers["killstreaks"].size == 0)
+  if(!isDefined(self.pers["killstreaks"]) || self.pers["killstreaks"].size == 0) {
     return false;
+  }
 
   killstreaktype = self.pers["killstreaks"][self.pers["killstreaks"].size - 1];
 
-  if(!isDefined(level.killstreaks[killstreaktype]))
+  if(!isDefined(level.killstreaks[killstreaktype])) {
     return false;
+  }
 
   weapon = level.killstreaks[killstreaktype].weapon;
   wait 0.05;
   givekillstreakweapon(weapon);
 
-  if(!isDefined(do_not_update_death_count) || do_not_update_death_count != 0)
+  if(!isDefined(do_not_update_death_count) || do_not_update_death_count != 0) {
     self.pers["killstreakItemDeathCount" + killstreaktype] = self.deathcount;
+  }
 
   return true;
 }
@@ -460,14 +508,17 @@ takekillstreak(killstreaktype) {
   if(level.gameended) {
     return;
   }
-  if(!iskillstreaksenabled())
+  if(!iskillstreaksenabled()) {
     return 0;
+  }
 
-  if(isDefined(self.selectinglocation))
+  if(isDefined(self.selectinglocation)) {
     return 0;
+  }
 
-  if(!isDefined(level.killstreaks[killstreaktype]))
+  if(!isDefined(level.killstreaks[killstreaktype])) {
     return 0;
+  }
 
   weapon = getkillstreakweapon(killstreaktype);
   self takeweapon(weapon);
@@ -486,8 +537,9 @@ takeallkillstreaks() {
 }
 
 giveownedkillstreak() {
-  if(isDefined(self.pers["killstreaks"]) && self.pers["killstreaks"].size > 0)
+  if(isDefined(self.pers["killstreaks"]) && self.pers["killstreaks"].size > 0) {
     self activatenextkillstreak(0);
+  }
 }
 
 changeweaponafterkillstreak(killstreak) {
@@ -500,12 +552,15 @@ changeweaponafterkillstreak(killstreak) {
   }
   self waittill("killstreak_done");
 
-  if(isDefined(self.laststand) && self.laststand && isDefined(self.laststandpistol) && self hasweapon(self.laststandpistol))
+  if(isDefined(self.laststand) && self.laststand && isDefined(self.laststandpistol) && self hasweapon(self.laststandpistol)) {
     self switchtoweapon(self.laststandpistol);
-  else if(isDefined(self.lastnonkillstreakweapon) && self hasweapon(self.lastnonkillstreakweapon))
+  }
+  else if(isDefined(self.lastnonkillstreakweapon) && self hasweapon(self.lastnonkillstreakweapon)) {
     self switchtoweapon(self.lastnonkillstreakweapon);
-  else if(isDefined(self.lastdroppableweapon) && self hasweapon(self.lastdroppableweapon))
+  }
+  else if(isDefined(self.lastdroppableweapon) && self hasweapon(self.lastdroppableweapon)) {
     self switchtoweapon(self.lastdroppableweapon);
+  }
 }
 
 removekillstreakwhendone(killstreak, haskillstreakbeenused) {
@@ -515,8 +570,9 @@ removekillstreakwhendone(killstreak, haskillstreakbeenused) {
   if(successful) {
     logstring("killstreak: " + getkillstreakmenuname(killstreak));
 
-    if(isDefined(haskillstreakbeenused))
+    if(isDefined(haskillstreakbeenused)) {
       removeusedkillstreak(killstreak);
+    }
 
     self setactionslot(level.actionslot, "");
     success = 1;
@@ -532,8 +588,9 @@ removekillstreakwhendone(killstreak, haskillstreakbeenused) {
 }
 
 usekillstreak(killstreak) {
-  if(!isDefined(killstreak))
+  if(!isDefined(killstreak)) {
     killstreak = gettopkillstreak();
+  }
 
   haskillstreakbeenused = getiftopkillstreakhasbeenused();
 
@@ -575,8 +632,9 @@ removeusedkillstreak(killstreak, killstreakid) {
 }
 
 gettopkillstreak() {
-  if(!isDefined(self.pers["killstreaks"]) || self.pers["killstreaks"].size == 0)
+  if(!isDefined(self.pers["killstreaks"]) || self.pers["killstreaks"].size == 0) {
     return undefined;
+  }
 
   return self.pers["killstreaks"][self.pers["killstreaks"].size - 1];
 }
@@ -586,28 +644,33 @@ hasanykillstreak() {
 }
 
 getiftopkillstreakhasbeenused() {
-  if(!isDefined(self.pers))
+  if(!isDefined(self.pers)) {
     self.pers = [];
+  }
 
-  if(!isDefined(self.pers["killstreak_has_been_used"]))
+  if(!isDefined(self.pers["killstreak_has_been_used"])) {
     self.pers["killstreak_has_been_used"] = [];
+  }
 
-  if(self.pers["killstreak_has_been_used"].size == 0)
+  if(self.pers["killstreak_has_been_used"].size == 0) {
     return undefined;
+  }
 
   return self.pers["killstreak_has_been_used"][self.pers["killstreak_has_been_used"].size - 1];
 }
 
 gettopkillstreakuniqueid() {
-  if(self.pers["killstreak_unique_id"].size == 0)
+  if(self.pers["killstreak_unique_id"].size == 0) {
     return undefined;
+  }
 
   return self.pers["killstreak_unique_id"][self.pers["killstreak_unique_id"].size - 1];
 }
 
 getkillstreakweapon(killstreak) {
-  if(!isDefined(killstreak))
+  if(!isDefined(killstreak)) {
     return "none";
+  }
 
   assert(isDefined(level.killstreaks[killstreak]));
   return level.killstreaks[killstreak].weapon;
@@ -618,8 +681,9 @@ getkillstreakforweapon(weapon) {
 }
 
 iskillstreakweapon(weapon) {
-  if(isweaponassociatedwithkillstreak(weapon))
+  if(isweaponassociatedwithkillstreak(weapon)) {
     return true;
+  }
 
   switch (weapon) {
     case "briefcase_bomb_defuse_mp":
@@ -638,8 +702,9 @@ iskillstreakweapon(weapon) {
 
   specificuse = 0;
 
-  if(isDefined(specificuse) && specificuse == 1)
+  if(isDefined(specificuse) && specificuse == 1) {
     return true;
+  }
 
   return false;
 }
@@ -647,11 +712,13 @@ iskillstreakweapon(weapon) {
 iskillstreakweaponassistallowed(weapon) {
   killstreak = getkillstreakforweapon(weapon);
 
-  if(!isDefined(killstreak))
+  if(!isDefined(killstreak)) {
     return false;
+  }
 
-  if(level.killstreaks[killstreak].allowassists)
+  if(level.killstreaks[killstreak].allowassists) {
     return true;
+  }
 
   return false;
 }
@@ -665,10 +732,12 @@ trackweaponusage() {
   if(self.lastnonkillstreakweapon == "none") {
     weapons = self getweaponslistprimaries();
 
-    if(weapons.size > 0)
+    if(weapons.size > 0) {
       self.lastnonkillstreakweapon = weapons[0];
-    else
+    }
+    else {
       self.lastnonkillstreakweapon = "knife_mp";
+    }
   }
 
   assert(self.lastnonkillstreakweapon != "none");
@@ -693,8 +762,9 @@ trackweaponusage() {
     if(isDefined(name)) {
       killstreak = level.killstreaks[name];
 
-      if(killstreak.weaponholdallowed == 1)
+      if(killstreak.weaponholdallowed == 1) {
         self.lastnonkillstreakweapon = weapon;
+      }
 
       continue;
     }
@@ -731,31 +801,37 @@ killstreakwaiter() {
     if(isDefined(self.selectinglocation)) {
       event = self waittill_any_return("cancel_location", "game_ended", "used", "weapon_change");
 
-      if(event == "cancel_location" || event == "weapon_change")
+      if(event == "cancel_location" || event == "weapon_change") {
         wait 1;
+      }
     }
   }
 }
 
 shoulddelaykillstreak(killstreaktype) {
-  if(!isDefined(level.starttime))
+  if(!isDefined(level.starttime)) {
     return false;
+  }
 
-  if(level.killstreakrounddelay < (gettime() - level.starttime - level.discardtime) / 1000)
+  if(level.killstreakrounddelay < (gettime() - level.starttime - level.discardtime) / 1000) {
     return false;
+  }
 
-  if(!isdelayablekillstreak(killstreaktype))
+  if(!isdelayablekillstreak(killstreaktype)) {
     return false;
+  }
 
-  if(maps\sp_killstreaks\_killstreak_weapons::isheldkillstreakweapon(killstreaktype))
+  if(maps\sp_killstreaks\_killstreak_weapons::isheldkillstreakweapon(killstreaktype)) {
     return false;
+  }
 
   return true;
 }
 
 isdelayablekillstreak(killstreaktype) {
-  if(isDefined(level.killstreaks[killstreaktype]) && isDefined(level.killstreaks[killstreaktype].delaystreak) && level.killstreaks[killstreaktype].delaystreak)
+  if(isDefined(level.killstreaks[killstreaktype]) && isDefined(level.killstreaks[killstreaktype].delaystreak) && level.killstreaks[killstreaktype].delaystreak) {
     return true;
+  }
 
   return false;
 }
@@ -802,12 +878,14 @@ triggerkillstreak(killstreaktype) {
   assert(isDefined(level.killstreaks[killstreaktype].usefunction), "No use function defined for killstreak " + killstreaktype);
 
   if([[level.killstreaks[killstreaktype].usefunction]](killstreaktype)) {
-    if(isDefined(level.killstreaks[killstreaktype].killstreaklevel))
+    if(isDefined(level.killstreaks[killstreaktype].killstreaklevel)) {
       xpamount = getxpamountforkillstreak(killstreaktype);
+    }
 
     if(isDefined(self)) {
-      if(!isDefined(self.pers[level.killstreaks[killstreaktype].usagekey]))
+      if(!isDefined(self.pers[level.killstreaks[killstreaktype].usagekey])) {
         self.pers[level.killstreaks[killstreaktype].usagekey] = 0;
+      }
 
       self.pers[level.killstreaks[killstreaktype].usagekey]++;
       self notify("killstreak_used", killstreaktype);
@@ -817,15 +895,17 @@ triggerkillstreak(killstreaktype) {
     return true;
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("killstreak_done", 0, killstreaktype);
+  }
 
   return false;
 }
 
 addtokillstreakcount(weapon) {
-  if(!isDefined(self.pers["totalKillstreakCount"]))
+  if(!isDefined(self.pers["totalKillstreakCount"])) {
     self.pers["totalKillstreakCount"] = 0;
+  }
 
   self.pers["totalKillstreakCount"]++;
 }
@@ -839,8 +919,9 @@ getfirstvalidkillstreakaltweapon(killstreaktype) {
 
   if(isDefined(level.killstreaks[killstreaktype].altweapons)) {
     for(i = 0; i < level.killstreaks[killstreaktype].altweapons.size; i++) {
-      if(isDefined(level.killstreaks[killstreaktype].altweapons[i]))
+      if(isDefined(level.killstreaks[killstreaktype].altweapons[i])) {
         return level.killstreaks[killstreaktype].altweapons[i];
+      }
     }
   }
 
@@ -848,14 +929,16 @@ getfirstvalidkillstreakaltweapon(killstreaktype) {
 }
 
 shouldgivekillstreak(weapon) {
-  if(!iskillstreaksstreakcountsenabled())
+  if(!iskillstreaksstreakcountsenabled()) {
     return false;
+  }
 
   killstreakbuilding = getdvarint(#"scr_allow_killstreak_building");
 
   if(killstreakbuilding == 0) {
-    if(isweaponassociatedwithkillstreak(weapon))
+    if(isweaponassociatedwithkillstreak(weapon)) {
       return false;
+    }
   }
 
   return true;
@@ -866,8 +949,9 @@ pointisindangerarea(point, targetpos, radius) {
 }
 
 printkillstreakstarttext(killstreaktype, owner, team, targetpos, dangerradius) {
-  if(!isDefined(level.killstreaks[killstreaktype]))
+  if(!isDefined(level.killstreaks[killstreaktype])) {
     return;
+  }
 }
 
 playkillstreakstartdialog(killstreaktype, team, playnonteambasedenemysounds) {
@@ -875,8 +959,9 @@ playkillstreakstartdialog(killstreaktype, team, playnonteambasedenemysounds) {
     return;
   }
   if(killstreaktype == "radar_mp") {
-    if(gettime() - level.radartimers[team] > 30000)
+    if(gettime() - level.radartimers[team] > 30000) {
       level.radartimers[team] = gettime();
+    }
 
     return;
   }
@@ -886,13 +971,15 @@ playkillstreakreadydialog(killstreaktype) {
 }
 
 playkillstreakreadyandinformdialog(killstreaktype) {
-  if(isDefined(level.killstreaks[killstreaktype].informdialog))
+  if(isDefined(level.killstreaks[killstreaktype].informdialog)) {
     self playlocalsound(level.killstreaks[killstreaktype].informdialog);
+  }
 }
 
 playkillstreakenddialog(killstreaktype, team) {
-  if(!isDefined(level.killstreaks[killstreaktype]))
+  if(!isDefined(level.killstreaks[killstreaktype])) {
     return;
+  }
 }
 
 getkillstreakusagebykillstreak(killstreaktype) {
@@ -901,8 +988,9 @@ getkillstreakusagebykillstreak(killstreaktype) {
 }
 
 getkillstreakusage(usagekey) {
-  if(!isDefined(self.pers[usagekey]))
+  if(!isDefined(self.pers[usagekey])) {
     return 0;
+  }
 
   return self.pers[usagekey];
 }
@@ -922,19 +1010,23 @@ onplayerspawned() {
     self waittill("spawned_player");
     giveownedkillstreak();
 
-    if(!isDefined(self.pers["killstreaks"]))
+    if(!isDefined(self.pers["killstreaks"])) {
       self.pers["killstreaks"] = [];
+    }
 
-    if(!isDefined(self.pers["killstreak_has_been_used"]))
+    if(!isDefined(self.pers["killstreak_has_been_used"])) {
       self.pers["killstreak_has_been_used"] = [];
+    }
 
-    if(!isDefined(self.pers["killstreak_unique_id"]))
+    if(!isDefined(self.pers["killstreak_unique_id"])) {
       self.pers["killstreak_unique_id"] = [];
+    }
 
     size = self.pers["killstreaks"].size;
 
-    if(size > 0)
+    if(size > 0) {
       playkillstreakreadydialog(self.pers["killstreaks"][size - 1]);
+    }
   }
 }
 
@@ -950,8 +1042,9 @@ killstreak_debug_think() {
         break;
     }
 
-    if(cmd != "")
+    if(cmd != "") {
       setdvar("debug_killstreak", "");
+    }
 
     wait 0.5;
   }
@@ -975,8 +1068,9 @@ killstreak_data_dump() {
     if(isDefined(data.altweapons)) {
       assert(data.altweapons.size <= 4);
 
-      for(alt = 0; alt < data.altweapons.size; alt++)
+      for(alt = 0; alt < data.altweapons.size; alt++) {
         print(data.altweapons[alt] + ",");
+      }
     }
 
     while(alt < 4) {
@@ -991,8 +1085,9 @@ killstreak_data_dump() {
       type_keys = getarraykeys(type_data);
 
       while(type < type_keys.size) {
-        if(type_data[type_keys[type]] == 1)
+        if(type_data[type_keys[type]] == 1) {
           print(type_keys[type] + ",");
+        }
 
         type++;
       }

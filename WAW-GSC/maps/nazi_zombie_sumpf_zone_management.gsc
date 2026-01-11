@@ -19,8 +19,9 @@ manage_building_zone() {
       }
     }
     if(dog_spawners.size > 0) {
-      for(i = 0; i < dog_spawners.size; i++)
+      for(i = 0; i < dog_spawners.size; i++) {
         spawners = array_remove(spawners, dog_spawners[i]);
+      }
     }
     if(self.targetname == "center_building_combined") {
       level.southwest = getEntArray("southwest_center_building_spawners", "targetname");
@@ -41,23 +42,27 @@ manage_building_zone() {
       if(isDefined(spawners)) {
         if(self.targetname == "center_building_combined" && !level.all_blockers) {
           if(!level.got_southwest && flag("sw_magic_box")) {
-            for(i = 0; i < (level.southwest).size; i++)
+            for(i = 0; i < (level.southwest).size; i++) {
               spawners = array_add(spawners, level.southwest[i]);
+            }
             level.got_southwest = true;
           }
           if(!level.got_southeast && flag("se_magic_box")) {
-            for(i = 0; i < (level.southeast).size; i++)
+            for(i = 0; i < (level.southeast).size; i++) {
               spawners = array_add(spawners, level.southeast[i]);
+            }
             level.got_southeast = true;
           }
           if(!level.got_northeast && flag("ne_magic_box")) {
-            for(i = 0; i < (level.northeast).size; i++)
+            for(i = 0; i < (level.northeast).size; i++) {
               spawners = array_add(spawners, level.northeast[i]);
+            }
             level.got_northeast = true;
           }
           if(!level.got_northwest && flag("nw_magic_box")) {
-            for(i = 0; i < (level.northwest).size; i++)
+            for(i = 0; i < (level.northwest).size; i++) {
               spawners = array_add(spawners, level.northwest[i]);
+            }
             level.got_northwest = true;
           }
           if(level.got_southwest && level.got_southeast && level.got_northeast && level.got_northwest) {
@@ -102,8 +107,9 @@ manage_outside_zone(zone_area, key, building) {
       }
     }
     if(dog_spawners.size > 0) {
-      for(i = 0; i < dog_spawners.size; i++)
+      for(i = 0; i < dog_spawners.size; i++) {
         spawners = array_remove(spawners, dog_spawners[i]);
+      }
     }
   }
   check_ent = undefined;
@@ -113,8 +119,9 @@ manage_outside_zone(zone_area, key, building) {
     if(isDefined(check_ent)) {
       for(i = 0; i < check_ent.size; i++) {
         for(j = 0; j < players.size; j++) {
-          if(players[j] istouching(check_ent[i]))
+          if(players[j] istouching(check_ent[i])) {
             zone_active = true;
+          }
         }
       }
     }
@@ -162,8 +169,9 @@ manage_outside_zone(zone_area, key, building) {
 activate_building_zones(zone_name, key) {
   volume_entity = [];
   volume_entity = getEntArray(zone_name, key);
-  for(i = 0; i < volume_entity.size; i++)
+  for(i = 0; i < volume_entity.size; i++) {
     volume_entity[i] thread manage_building_zone();
+  }
 }
 
 combine_center_building_zones() {
@@ -206,8 +214,9 @@ add_area_dog_spawners(area_location) {
 deactivate_building_zones(zone_name, key) {
   volume_entity = [];
   volume_entity = getEntArray(zone_name, key);
-  for(i = 0; i < volume_entity.size; i++)
+  for(i = 0; i < volume_entity.size; i++) {
     volume_entity[i] notify("deactivate_zone");
+  }
 }
 
 activate_outdoor_zones(zone_area, key) {

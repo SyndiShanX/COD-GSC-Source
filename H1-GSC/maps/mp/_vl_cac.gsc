@@ -15,19 +15,23 @@ init_cac() {
 }
 
 playercacprocesslui(var_0, var_1) {
-  if(var_0 == "reset_loadout")
+  if(var_0 == "reset_loadout") {
     resetloadout(var_1);
+  }
   else {
     if(maps\mp\_utility::is_true(level.in_depot)) {
       return;
     }
-    if(var_0 == "cac")
+    if(var_0 == "cac") {
       handlecacmodechange(var_1);
-    else if(var_0 == "classpreview" || issubstr(var_0, "preset_classpreview"))
+    }
+    else if(var_0 == "classpreview" || issubstr(var_0, "preset_classpreview")) {
       handleclassselect(var_0, var_1);
+    }
     else if(var_0 == "weapon_highlighted" && var_1 != "none") {
-      if(maps\mp\_vl_cao::iscollectionsmenuactive())
+      if(maps\mp\_vl_cao::iscollectionsmenuactive()) {
         maps\mp\_vl_cao::turncollectionsmodeoff();
+      }
 
       handleweaponhighlighted(var_1);
     } else {
@@ -37,8 +41,9 @@ playercacprocesslui(var_0, var_1) {
         return;
       }
 
-      if(var_0 == "faction_changed")
+      if(var_0 == "faction_changed") {
         handlefactionchanged(var_1);
+      }
     }
   }
 }
@@ -82,8 +87,9 @@ handlecacweapmodechange(var_0, var_1) {
 handlecacmodechange(var_0) {
   if(var_0 == 0) {
     if(maps\mp\_utility::is_true(level.cac)) {
-      if(maps\mp\_utility::is_true(level.cac_weap))
+      if(maps\mp\_utility::is_true(level.cac_weap)) {
         handlecacweapmodechange(0);
+      }
 
       maps\mp\_vl_base::resetweaponavatar();
       maps\mp\_vl_base::resetplayeravatar();
@@ -112,8 +118,9 @@ handleclassselect(var_0, var_1) {
     var_3 = int(var_1 / 16);
     maps\mp\_vl_base::vlprintln("handleClassSelect " + var_0 + " controller=" + var_2 + "class=" + var_3);
 
-    if(var_3 > 0)
+    if(var_3 > 0) {
       self.currentselectedclass = var_3;
+    }
 
     var_4 = maps\mp\_utility::cac_getcustomclassloc();
     self.currentclassloc = var_4;
@@ -125,8 +132,9 @@ handleclassselect(var_0, var_1) {
       _func_300(var_2);
       level.vl_focus = var_5;
 
-      if(!maps\mp\_vl_cao::isequipmenuactive())
+      if(!maps\mp\_vl_cao::isequipmenuactive()) {
         handlecacmodechange(1);
+      }
 
       maps\mp\_vl_avatar::hide_avatar_weapons(var_6);
       maps\mp\_vl_camera::set_avatar_dof(1);
@@ -155,14 +163,16 @@ handleweaponhighlighted(var_0) {
     maps\mp\_vl_avatar::hide_avatars();
     var_5 = handlecacweapmodechange(1, var_3);
 
-    if(var_5)
+    if(var_5) {
       var_1 = 1;
+    }
   }
 
   var_6 = "weapons_lobby";
 
-  if(maps\mp\_vl_cao::iscollectionsmenuactive())
+  if(maps\mp\_vl_cao::iscollectionsmenuactive()) {
     var_6 = "weapons_collection";
+  }
 
   maps\mp\_vl_base::weaponroomscenelightsupdate(var_6);
 
@@ -196,27 +206,31 @@ handleweaponhighlighted(var_0) {
           continue;
         }
 
-        if(var_15 == "Reticle")
+        if(var_15 == "Reticle") {
           var_11 = int(var_16);
+        }
       }
     }
 
     var_17 = -1;
 
     if(isDefined(self.emblemloadout.emblemindex)) {
-      if(self.emblemloadout.shouldapplyemblemtoweapon)
+      if(self.emblemloadout.shouldapplyemblemtoweapon) {
         var_17 = self.emblemloadout.emblemindex;
+      }
     } else {
       var_18 = getcacplayerdataforgroup(var_4, common_scripts\utility::getstatsgroup_common(), "applyEmblemToWeapon");
 
-      if(var_18)
+      if(var_18) {
         var_17 = getcacplayerdataforgroup(var_4, common_scripts\utility::getstatsgroup_common(), "emblemPatchIndex");
+      }
     }
 
     var_19 = shouldhidecamoonweapon(var_4, var_7, var_10);
 
-    if(var_19)
+    if(var_19) {
       var_10 = 0;
+    }
 
     thread setcacweapon(var_7, var_3, var_8, var_9, var_10, var_11, var_17, var_1);
   } else
@@ -296,8 +310,9 @@ handlefactionchanged(var_0) {
     if(var_4 >= 0) {
       var_5 = level.vlavatars[var_4];
 
-      if(!isDefined(var_5.loadout))
+      if(!isDefined(var_5.loadout)) {
         var_5.loadout = spawnStruct();
+      }
 
       var_5.loadout._id_A7E7 = var_2;
       thread maps\mp\_vl_base::playerrefreshavatar(var_4);
@@ -332,16 +347,18 @@ streamcacweaponwait(var_0) {
     waitframe();
   }
 
-  while((gettime() - var_2) / 1000 < var_3)
+  while((gettime() - var_2) / 1000 < var_3) {
     waitframe();
+  }
 }
 
 setcacweapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self notify("setCacWeapon");
   self endon("setCacWeapon");
 
-  if(maps\mp\_utility::is_true(var_7))
+  if(maps\mp\_utility::is_true(var_7)) {
     maps\mp\_utility::waittillplayersnextsnapshot(self);
+  }
 
   var_8 = "none";
 
@@ -370,16 +387,18 @@ setcacweapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 }
 
 buildweaponnamecac(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(issubstr(var_0, "meleebottle") || issubstr(var_0, "meleejun6") || issubstr(var_0, "meleejun5"))
+  if(issubstr(var_0, "meleebottle") || issubstr(var_0, "meleejun6") || issubstr(var_0, "meleejun5")) {
     var_2 = "lby";
+  }
 
   return maps\mp\gametypes\_class::buildweaponname(var_0, var_1, var_2, var_3, var_4, var_5);
 }
 
 has_suffix(var_0, var_1) {
   if(var_0.size >= var_1.size) {
-    if(getsubstr(var_0, var_0.size - var_1.size, var_0.size) == var_1)
+    if(getsubstr(var_0, var_0.size - var_1.size, var_0.size) == var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -416,16 +435,20 @@ getweaponavatarforwarddistance(var_0, var_1) {
   var_4 = var_2[2];
   var_5 = 0;
 
-  if(isavatarameleeweapon(var_0))
+  if(isavatarameleeweapon(var_0)) {
     var_5 = 3.54 * var_4 + 11.492;
-  else
+  }
+  else {
     var_5 = 1.8325 * var_3 + 28.587;
+  }
 
-  if(isavataraperk(var_0))
+  if(isavataraperk(var_0)) {
     var_5 = var_5 + 20;
+  }
 
-  if(maps\mp\_vl_cao::iscollectionsmenuactive())
+  if(maps\mp\_vl_cao::iscollectionsmenuactive()) {
     var_5 = var_5 + 15;
+  }
 
   return var_5;
 }
@@ -433,8 +456,9 @@ getweaponavatarforwarddistance(var_0, var_1) {
 getweaponavatarrightdistance(var_0) {
   var_1 = 125;
 
-  if(maps\mp\_vl_cao::iscollectionsmenuactive())
+  if(maps\mp\_vl_cao::iscollectionsmenuactive()) {
     var_1 = 20;
+  }
 
   return var_1;
 }
@@ -442,11 +466,13 @@ getweaponavatarrightdistance(var_0) {
 getweaponavatarupdistance(var_0, var_1) {
   var_2 = 0;
 
-  if(!isavatarameleeweapon(var_0))
+  if(!isavatarameleeweapon(var_0)) {
     var_2 = 20;
+  }
 
-  if(maps\mp\_vl_cao::iscollectionsmenuactive())
+  if(maps\mp\_vl_cao::iscollectionsmenuactive()) {
     var_2 = var_2 - 55;
+  }
 
   return var_2;
 }
@@ -458,37 +484,44 @@ getweaponavatarlocation(var_0, var_1) {
   var_5 = (var_2, var_3, var_4);
   var_6 = getdvarfloat("cg_fov");
 
-  if(isDefined(self.fovscale))
+  if(isDefined(self.fovscale)) {
     var_6 = var_6 * self.fovscale;
+  }
 
   var_7 = self screenpostoworldpoint((var_3, var_4, 0), var_6, var_2, 1);
   return var_7;
 }
 
 getweaponbounds(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(isDefined(level.weaponmodelboundscache[var_0.weapon_name]))
+  if(isDefined(level.weaponmodelboundscache[var_0.weapon_name])) {
     return level.weaponmodelboundscache[var_0.weapon_name];
+  }
   else if(!var_1) {
     var_2 = getweaponmodelbounds(var_0);
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = [];
+    }
 
-    if(!maps\mp\_utility::is_true(var_0.isloadingweapon))
+    if(!maps\mp\_utility::is_true(var_0.isloadingweapon)) {
       level.weaponmodelboundscache[var_0.weapon_name] = var_2;
+    }
 
     return var_2;
   }
 }
 
 getavatarbounds(var_0, var_1) {
-  if(isweaponavataraweapon(var_0))
+  if(isweaponavataraweapon(var_0)) {
     var_2 = getweaponbounds(var_0, var_1);
-  else
+  }
+  else {
     var_2 = getperkbounds(var_0);
+  }
 
   return var_2;
 }
@@ -505,8 +538,9 @@ positionweaponavatar(var_0, var_1) {
   }
   var_3 = var_0;
 
-  if(isDefined(var_0.linker))
+  if(isDefined(var_0.linker)) {
     var_3 = var_0.linker;
+  }
 
   var_3 unlink();
   var_4 = getweaponavatarforwarddistance(var_0, var_2);
@@ -516,19 +550,24 @@ positionweaponavatar(var_0, var_1) {
   var_7 = var_2["midpoint"];
   var_8 = var_2["halfsize"];
 
-  if(var_6)
+  if(var_6) {
     var_7 = (0, 0, -1 * var_8[2]);
-  else if(var_1 == "Equipment")
+  }
+  else if(var_1 == "Equipment") {
     var_7 = (0, 0, var_7[2]);
+  }
 
   var_3.origin = var_5 - var_7;
 
-  if(var_6)
+  if(var_6) {
     var_3.angles = (185, 126, 0);
-  else if(isweaponavataraweapon(var_0))
+  }
+  else if(isweaponavataraweapon(var_0)) {
     var_3.angles = (5, 0, 0);
-  else
+  }
+  else {
     var_3.angles = (0, 300, 15);
+  }
 
   level.weaponavatarparent.origin = var_5;
   var_9 = level.weaponavatarparent.angles;
@@ -577,13 +616,15 @@ showloadingweaponavatar(var_0, var_1) {
   hideperkavatar();
   var_2 = level.weaponavatarparent.loadingweaponavatar;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = spawnloadingweaponavatar(var_0);
+  }
   else {
     var_2 show();
 
-    if(var_2.weapon_name == var_0)
+    if(var_2.weapon_name == var_0) {
       return;
+    }
   }
 
   var_3 = strtok(var_0, "_");
@@ -608,8 +649,9 @@ showloadingweaponavatar(var_0, var_1) {
     weaponitemplayidleanim(var_2.akimboavatar, var_5);
     var_2 linktosynchronizedparent(var_2.linker, "j_prop_1", (0, 0, 0), (0, 0, 0));
   } else {
-    if(isDefined(var_2.akimboavatar))
+    if(isDefined(var_2.akimboavatar)) {
       var_2.akimboavatar hide();
+    }
 
     var_2 linktosynchronizedparent(var_2.linker, "j_prop_3", (0, 0, 0), (0, 0, 0));
   }
@@ -624,8 +666,9 @@ hideloadingweaponavatar() {
     var_0 = level.weaponavatarparent.loadingweaponavatar;
     var_0 hide();
 
-    if(isDefined(var_0.akimboavatar))
+    if(isDefined(var_0.akimboavatar)) {
       var_0.akimboavatar hide();
+    }
   }
 }
 
@@ -658,8 +701,9 @@ showweaponavatar(var_0) {
     weaponitemplayidleanim(var_1.akimboavatar, var_2);
     var_1 linktosynchronizedparent(var_1.linker, "j_prop_1", (0, 0, 0), (0, 0, 0));
   } else {
-    if(isDefined(var_1.akimboavatar))
+    if(isDefined(var_1.akimboavatar)) {
       var_1.akimboavatar hide();
+    }
 
     var_1 linktosynchronizedparent(var_1.linker, "j_prop_3", (0, 0, 0), (0, 0, 0));
   }
@@ -678,8 +722,9 @@ hideweaponavatar() {
     var_0 = level.weaponavatarparent.savedweaponavatar;
     var_0 hide();
 
-    if(isDefined(var_0.akimboavatar))
+    if(isDefined(var_0.akimboavatar)) {
       var_0.akimboavatar hide();
+    }
   }
 }
 
@@ -703,8 +748,9 @@ showperkavatar(var_0) {
 }
 
 hideperkavatar() {
-  if(isDefined(level.weaponavatarparent.savedperkavatar))
+  if(isDefined(level.weaponavatarparent.savedperkavatar)) {
     level.weaponavatarparent.savedperkavatar hide();
+  }
 }
 
 playerhidecacavatars() {
@@ -788,8 +834,9 @@ setselectedfaction(var_0) {
   var_1 = maps\mp\gametypes\_class::cac_getlastteam(var_0);
   var_2 = maps\mp\gametypes\_class::cac_getlastenvironment(var_0);
 
-  if(var_1 == "axis" && var_2 == "urban")
+  if(var_1 == "axis" && var_2 == "urban") {
     var_2 = "woodland";
+  }
 
   level.vl_selectedfaction = getfactionindex(var_1, var_2);
 }
@@ -798,8 +845,9 @@ getfactionindex(var_0, var_1) {
   for(var_2 = 0; var_2 < level.vl_factions.size; var_2++) {
     var_3 = level.vl_factions[var_2];
 
-    if(var_3.team == var_0 && var_3._id_3338 == var_1)
+    if(var_3.team == var_0 && var_3._id_3338 == var_1) {
       return var_2;
+    }
   }
 
   return 0;
@@ -808,16 +856,20 @@ getfactionindex(var_0, var_1) {
 getvlclass(var_0, var_1) {
   var_2 = "none";
 
-  if(var_0 == "preset_classpreview_allies")
+  if(var_0 == "preset_classpreview_allies") {
     var_2 = "allies_recipe" + var_1;
-  else if(var_0 == "preset_classpreview_axis")
+  }
+  else if(var_0 == "preset_classpreview_axis") {
     var_2 = "axis_recipe" + var_1;
-  else if(var_0 == "classpreview")
+  }
+  else if(var_0 == "classpreview") {
     var_2 = "lobby" + var_1;
+  }
 
   if(!isclassvalid(var_2, var_1)) {
-    if(var_1 > 0)
+    if(var_1 > 0) {
       var_1--;
+    }
 
     var_2 = "class" + var_1;
   }
@@ -826,14 +878,18 @@ getvlclass(var_0, var_1) {
 }
 
 isclassvalid(var_0, var_1) {
-  if(issubstr(var_0, "lobby"))
+  if(issubstr(var_0, "lobby")) {
     return 1;
-  else if(issubstr(var_0, "axis"))
+  }
+  else if(issubstr(var_0, "axis")) {
     var_2 = "axis";
-  else if(issubstr(var_0, "allies"))
+  }
+  else if(issubstr(var_0, "allies")) {
     var_2 = "allies";
-  else
+  }
+  else {
     return 0;
+  }
 
   var_3 = maps\mp\_utility::getclassindex(var_0);
   var_4 = getmatchrulesdata("defaultClasses", var_2, "defaultClass", var_3, "class", "weaponSetups", 0, "weapon");

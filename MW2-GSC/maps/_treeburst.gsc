@@ -7,17 +7,20 @@
 
 main() {
   treebursts = getEntArray("treeburst", "script_noteworthy");
-  for(i = 0; i < treebursts.size; i++)
+  for(i = 0; i < treebursts.size; i++) {
     treebursts[i] thread treeburst();
+  }
 }
 
 treeburst() {
   self waittill("treeburst");
 
-  if(isDefined(self.script_falldirection))
+  if(isDefined(self.script_falldirection)) {
     yaw = self.script_falldirection;
-  else
+  }
+  else {
     yaw = randomint(360);
+  }
 
   break_angles = (self.angles[0], yaw, self.angles[2]);
   break_vector = anglesToForward(break_angles);
@@ -55,8 +58,9 @@ treeburst() {
   }
 
   remainder = lasttravelled - dist;
-  if(remainder < 0)
+  if(remainder < 0) {
     remainder = remainder * -1;
+  }
 
   time = lastcount + (remainder / velocity);
 
@@ -114,8 +118,9 @@ drawline(start, end, color, alpha) {
 }
 
 draworigin(origin, color, alpha) {
-  if(!isDefined(alpha))
+  if(!isDefined(alpha)) {
     alpha = 1;
+  }
 
   if(isDefined(color)) {
     while(1) {

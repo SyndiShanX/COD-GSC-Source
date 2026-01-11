@@ -56,21 +56,27 @@ movewalk() {
 dowalkanim(walkanim) {
   self endon("movemode");
 
-  if(self.a.pose == "stand")
+  if(self.a.pose == "stand") {
     self animscripts\run::updaterunweightsonce(walkanim, animarray("tactical_walk_b"), animarray("tactical_walk_r"), animarray("tactical_walk_l"));
-  else
+  }
+  else {
     self animscripts\run::updaterunweightsonce(walkanim, animarray("walk_b"), animarray("walk_l"), animarray("walk_r"));
+  }
 
   self animscripts\shared::donotetracksfortime(0.2, "walkanim");
 }
 
 getstandwalkanim() {
-  if(isDefined(self.walk_combatanim) && self animscripts\utility::isincombat())
+  if(isDefined(self.walk_combatanim) && self animscripts\utility::isincombat()) {
     return self.walk_combatanim;
-  else if(isDefined(self.walk_noncombatanim) && !self animscripts\utility::isincombat())
+  }
+  else if(isDefined(self.walk_noncombatanim) && !self animscripts\utility::isincombat()) {
     return self.walk_noncombatanim;
-  else if(self.a.pose == "stand")
+  }
+  else if(self.a.pose == "stand") {
     return animarray("tactical_walk_f");
-  else
+  }
+  else {
     return animarray("walk_f");
+  }
 }

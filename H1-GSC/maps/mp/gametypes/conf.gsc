@@ -36,8 +36,9 @@ main() {
   level.killstreak_tag_friendly = getdvarint("scr_conf_killstreak_tag_friendly", 0);
   level.killstreak_tag_enemy = getdvarint("scr_conf_killstreak_tag_enemy", 0);
 
-  if(level.matchrules_damagemultiplier || level.matchrules_vampirism)
+  if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
     level.modifyplayerdamage = maps\mp\gametypes\_damage::gamemodemodifyplayerdamage;
+  }
 
   game["dialog"]["gametype"] = "kc_intro";
   game["dialog"]["kill_confirmed"] = "kc_killconfirmed";
@@ -68,8 +69,9 @@ initializematchrules() {
     var_2 = 1;
   } else if(var_3 == 1)
     var_2 = 1;
-  else
+  else {
     var_0 = 1;
+  }
 
   setdynamicdvar("scr_conf_killstreak_kill", var_0);
   setdynamicdvar("scr_conf_killstreak_tag_friendly", var_1);
@@ -79,8 +81,9 @@ initializematchrules() {
 onstartgametype() {
   setclientnamemode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     var_0 = game["attackers"];
@@ -122,11 +125,13 @@ initspawns() {
 getspawnpoint() {
   var_0 = self.pers["team"];
 
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     var_0 = maps\mp\_utility::getotherteam(var_0);
+  }
 
-  if(level.usestartspawns && level.ingraceperiod)
+  if(level.usestartspawns && level.ingraceperiod) {
     var_1 = maps\mp\gametypes\_spawnlogic::getbeststartspawn("mp_tdm_spawn_" + var_0 + "_start");
+  }
   else {
     var_2 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(var_0);
     var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_awayfromenemies(var_2);
@@ -139,8 +144,9 @@ getspawnpoint() {
 onnormaldeath(var_0, var_1, var_2) {
   level thread spawndogtags(var_0, var_1);
 
-  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level.otherteam[var_1.team]])
+  if(game["state"] == "postgame" && game["teamScores"][var_1.team] > game["teamScores"][level.otherteam[var_1.team]]) {
     var_1.finalkill = 1;
+  }
 }
 
 spawndogtags(var_0, var_1) {
@@ -150,11 +156,13 @@ spawndogtags(var_0, var_1) {
     playFX(level.conf_fx["vanish"], level.dogtags[var_0.guid].curorigin);
     level.dogtags[var_0.guid] notify("reset");
   } else {
-    if(!isDefined(level.killconfirmeddogtagenemy))
+    if(!isDefined(level.killconfirmeddogtagenemy)) {
       level.killconfirmeddogtagenemy = "h1_dogtag_enemy_animated";
+    }
 
-    if(!isDefined(level.killconfirmeddogtagfriend))
+    if(!isDefined(level.killconfirmeddogtagfriend)) {
       level.killconfirmeddogtagfriend = "h1_dogtag_friend_animated";
+    }
 
     var_3[0] = spawn("script_model", (0, 0, 0));
     var_3[0] setModel(level.killconfirmeddogtagenemy);
@@ -209,11 +217,13 @@ showtoteam(var_0, var_1) {
   self hide();
 
   foreach(var_3 in level.players) {
-    if(var_3.team == var_1)
+    if(var_3.team == var_1) {
       self showtoplayer(var_3);
+    }
 
-    if(var_3.team == "spectator" && var_1 == "allies")
+    if(var_3.team == "spectator" && var_1 == "allies") {
       self showtoplayer(var_3);
+    }
   }
 
   for(;;) {
@@ -221,53 +231,63 @@ showtoteam(var_0, var_1) {
     self hide();
 
     foreach(var_3 in level.players) {
-      if(var_3.team == var_1)
+      if(var_3.team == var_1) {
         self showtoplayer(var_3);
+      }
 
-      if(var_3.team == "spectator" && var_1 == "allies")
+      if(var_3.team == "spectator" && var_1 == "allies") {
         self showtoplayer(var_3);
+      }
 
-      if(var_0.victimteam == var_3.team && var_3 == var_0.attacker)
+      if(var_0.victimteam == var_3.team && var_3 == var_0.attacker) {
         objective_state(var_0.objid, "invisible");
+      }
     }
   }
 }
 
 onuse(var_0) {
-  if(isDefined(var_0.owner))
+  if(isDefined(var_0.owner)) {
     var_0 = var_0.owner;
+  }
 
   var_1 = var_0.pers["team"];
 
   if(var_1 == self.victimteam) {
     self.trigger playSound("mp_kc_tag_denied");
 
-    if(isplayer(var_0))
+    if(isplayer(var_0)) {
       var_0 maps\mp\_utility::leaderdialogonplayer("kill_denied");
+    }
 
-    if(isDefined(self.attacker) && isplayer(self.attacker))
+    if(isDefined(self.attacker) && isplayer(self.attacker)) {
       self.attacker maps\mp\_utility::leaderdialogonplayer("kc_killlost");
+    }
 
     var_2 = self.victim == var_0;
     var_0 maps\mp\_events::killdeniedevent(var_2);
 
-    if(level.killstreak_tag_friendly)
+    if(level.killstreak_tag_friendly) {
       maps\mp\gametypes\_damage::incrementkillstreak(var_0);
+    }
   } else {
     self.trigger playSound("mp_kc_tag_collected");
 
-    if(isplayer(self.attacker) && self.attacker != var_0)
+    if(isplayer(self.attacker) && self.attacker != var_0) {
       level thread maps\mp\gametypes\_rank::awardgameevent("team_confirmed", self.attacker);
+    }
 
     var_0 maps\mp\_events::killconfirmedevent();
 
-    if(isplayer(var_0))
+    if(isplayer(var_0)) {
       var_0 maps\mp\_utility::leaderdialogonplayer("kill_confirmed");
+    }
 
     var_0 maps\mp\gametypes\_gamescore::giveteamscoreforobjective(var_1, 1);
 
-    if(level.killstreak_tag_enemy)
+    if(level.killstreak_tag_enemy) {
       maps\mp\gametypes\_damage::incrementkillstreak(var_0);
+    }
   }
 
   level thread maps\mp\_events::monitortagcollector(var_0);
@@ -315,8 +335,9 @@ clearonvictimdisconnect(var_0) {
       objective_delete(level.dogtags[var_1].objidself);
       level.dogtags[var_1].trigger delete();
 
-      for(var_2 = 0; var_2 < level.dogtags[var_1].visuals.size; var_2++)
+      for(var_2 = 0; var_2 < level.dogtags[var_1].visuals.size; var_2++) {
         level.dogtags[var_1].visuals[var_2] delete();
+      }
 
       level.dogtags[var_1] notify("deleted");
       level.dogtags[var_1] = undefined;

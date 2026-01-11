@@ -43,10 +43,12 @@ main() {
   level._effect["ground_smoke_dcburning1200x1200"] = loadfx("smoke/ground_smoke1200x1200_dcburning");
 
   //MinSpec Spotlight
-  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0")
+  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
     level._effect["_attack_heli_spotlight"] = loadfx("misc/hunted_spotlight_model_dim");
-  else
+  }
+  else {
     level._effect["_attack_heli_spotlight"] = loadfx("misc/spotlight_large");
+  }
 
   level._effect["planecrash_spotlight"] = loadfx("misc/dcemp_planecrash_spotlight_model");
   level._effect["dcemp_nuke_spotlight_fade"] = loadfx("misc/dcemp_nuke_spotlight_fade");
@@ -236,8 +238,9 @@ footstep_fx() {
 }
 
 parking_lightning(brightness) {
-  if(!flag("spotlight_lightning"))
+  if(!flag("spotlight_lightning")) {
     return;
+  }
   lights = getEntArray("parking_lighting_primary", "script_noteworthy");
   array_call(lights, ::setLightIntensity, brightness);
 
@@ -245,8 +248,9 @@ parking_lightning(brightness) {
 }
 
 parking_lightning_reset() {
-  if(!flag("spotlight_lightning"))
+  if(!flag("spotlight_lightning")) {
     return;
+  }
   lights = getEntArray("parking_lighting_primary", "script_noteworthy");
   array_call(lights, ::setLightIntensity, 0);
 
@@ -257,13 +261,15 @@ lightning_flash(dir) {
   level notify("emp_lighting_flash");
   level endon("emp_lighting_flash");
 
-  if(level.createFX_enabled)
+  if(level.createFX_enabled) {
     return;
+  }
 
   num = randomintrange(1, 4);
 
-  if(!isDefined(dir))
+  if(!isDefined(dir)) {
     dir = (-20, 60, 0);
+  }
 
   for(i = 0; i < num; i++) {
     type = randomint(3);

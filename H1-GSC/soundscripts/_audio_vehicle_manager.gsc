@@ -10,8 +10,9 @@ avm_init() {
   if(isDefined(level._audio.vm)) {
     return;
   }
-  if(!isDefined(level._audio.vm))
+  if(!isDefined(level._audio.vm)) {
     level._audio.vm = spawnStruct();
+  }
 
   var_0 = avmx_get();
   var_0.init_time = gettime();
@@ -136,10 +137,12 @@ avm_begin_loop_data(var_0, var_1, var_2) {
 }
 
 avm_begin_loop_def(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isarray(var_0))
+  if(isarray(var_0)) {
     var_6 = var_0;
-  else
+  }
+  else {
     var_6 = [var_0];
+  }
 
   var_1 = soundscripts\_audio::aud_get_optional_param(self.loop_data.defaults.fadeout_time, var_1);
   var_2 = soundscripts\_audio::aud_get_optional_param(self.loop_data.defaults.smooth_up, var_2);
@@ -168,8 +171,9 @@ avmx_preset_determine_param_map_owner(var_0) {
     }
   } else if(isDefined(self.oneshot_data) && isDefined(self.oneshot_data.oneshot_under_construction))
     var_1 = self.oneshot_data.oneshot_under_construction;
-  else if(isDefined(self.behavior_data) && isDefined(self.behavior_data.behavior_under_construction))
+  else if(isDefined(self.behavior_data) && isDefined(self.behavior_data.behavior_under_construction)) {
     var_1 = self.behavior_data.behavior_under_construction;
+  }
 
   return var_1;
 }
@@ -178,8 +182,9 @@ avmx_preset_determine_param_map_env_owner(var_0) {
   var_1 = undefined;
   var_2 = avmx_preset_determine_param_map_owner(var_0);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_1 = var_2.pmap_under_construction;
+  }
 
   return var_1;
 }
@@ -200,8 +205,9 @@ avm_begin_param_map(var_0, var_1, var_2) {
   var_0 = tolower(var_0);
   var_3 = var_0;
 
-  if(!isstring(var_3))
+  if(!isstring(var_3)) {
     var_3 = "";
+  }
 
   var_4 = avmx_preset_determine_param_map_owner(var_3);
   var_3 = var_0;
@@ -239,14 +245,16 @@ avmx_add_behavior_shortcut_param_maps(var_0, var_1, var_2) {
 }
 
 avm_add_param_map_env(var_0, var_1, var_2) {
-  if(isstring(var_1))
+  if(isstring(var_1)) {
     var_2 = soundscripts\_audio::aud_get_optional_param(var_1, var_2);
+  }
 
   var_3 = avmx_preset_determine_param_map_env_owner(var_2);
   var_4 = var_1;
 
-  if(!isstring(var_4))
+  if(!isstring(var_4)) {
     var_4 = "???";
+  }
 
   var_5 = spawnStruct();
   var_5.asset_name = var_1;
@@ -257,8 +265,9 @@ avm_add_param_map_env(var_0, var_1, var_2) {
 avm_end_param_map() {
   var_0 = avmx_preset_determine_param_map_owner("UNKNOWN param_map being terminated by AVM_end_param_map()");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.pmap_under_construction = undefined;
+  }
 }
 
 avm_end_loop_def() {
@@ -284,8 +293,9 @@ avm_begin_oneshot_def(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_5 = soundscripts\_audio::aud_get_optional_param(var_6.def_asset_type, var_5);
   var_7 = var_4;
 
-  if(isstring(var_4))
+  if(isstring(var_4)) {
     var_7 = [var_4];
+  }
 
   var_11 = spawnStruct();
   var_11.name = var_0;
@@ -335,8 +345,9 @@ avm_begin_behavior_def(var_0, var_1, var_2, var_3, var_4) {
   self.behavior_data.behaviors[var_6.name] = var_6;
   self.behavior_data.behavior_under_construction = var_6;
 
-  if(isarray(var_2))
+  if(isarray(var_2)) {
     avmx_add_behavior_shortcut_param_maps(var_2, self.behavior_data.defaults.smooth_up, self.behavior_data.defaults.smooth_down);
+  }
 }
 
 avm_add_init_state_callback(var_0) {
@@ -348,8 +359,9 @@ avm_add_in_state_callback(var_0) {
 }
 
 avm_add_oneshots(var_0) {
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_0 = [var_0];
+  }
 
   foreach(var_2 in var_0) {
     var_3 = self.behavior_data.behavior_under_construction;
@@ -360,16 +372,20 @@ avm_add_oneshots(var_0) {
 avm_add_loops(var_0) {
   var_1 = self.behavior_data.behavior_under_construction;
 
-  if(!isDefined(var_0) || var_0.size == 0)
+  if(!isDefined(var_0) || var_0.size == 0) {
     var_0 = "none";
+  }
 
   if(isstring(var_0)) {
-    if(tolower(var_0) == "all")
+    if(tolower(var_0) == "all") {
       var_1.loops[0] = "all";
-    else if(tolower(var_0) == "none")
+    }
+    else if(tolower(var_0) == "none") {
       var_1.loops[0] = "none";
-    else
+    }
+    else {
       var_1.loops[var_0] = var_0;
+    }
   } else {
     var_1.loops[0] = undefined;
 
@@ -389,8 +405,9 @@ avm_end_behavior_def() {
 avm_end_behavior_data() {}
 
 avm_begin_state_data(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 = var_0 * 1000;
+  }
 
   var_2 = avmx_get();
   self.state_data = spawnStruct();
@@ -401,8 +418,9 @@ avm_begin_state_data(var_0, var_1) {
 }
 
 avm_begin_state_group(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 = var_4 * 1000;
+  }
 
   var_5 = spawnStruct();
   var_5.name = var_0;
@@ -415,8 +433,9 @@ avm_begin_state_group(var_0, var_1, var_2, var_3, var_4) {
 }
 
 avm_begin_state_def(var_0, var_1, var_2) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 = var_1 * 1000;
+  }
 
   var_3 = self.state_data.group_under_construction;
   var_4 = var_3.name;
@@ -446,13 +465,15 @@ avm_end_state_group() {
 avm_end_state_data() {}
 
 avm_add_envelope(var_0, var_1) {
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_0 = tolower(var_0);
+  }
 
   var_4 = avmx_get();
 
-  if(!isDefined(self.env_data))
+  if(!isDefined(self.env_data)) {
     self.env_data = [];
+  }
 
   var_5 = spawnStruct();
 
@@ -465,8 +486,9 @@ avm_add_envelope(var_0, var_1) {
         var_5.env_array[var_5.env_array.size] = (var_7[0], var_7[1], 0);
       }
     } else {
-      foreach(var_7 in var_1)
+      foreach(var_7 in var_1) {
       var_5.env_array[var_5.env_array.size] = (var_7[0], var_7[1], 0);
+      }
     }
   } else
     var_5.env_function = var_1;
@@ -482,24 +504,27 @@ avm_end_preset_def() {
     var_3 = var_8;
     var_4 = var_2;
 
-    foreach(var_7, var_6 in var_4.param_maps)
+    foreach(var_7, var_6 in var_4.param_maps) {
     self.consolidated_inputs[var_7] = avmx_get_callback(var_7);
+    }
   }
 
   foreach(var_8, var_2 in self.oneshot_data.oneshots) {
     var_10 = var_8;
     var_11 = var_2;
 
-    foreach(var_7, var_6 in var_11.param_maps)
+    foreach(var_7, var_6 in var_11.param_maps) {
     self.consolidated_inputs[var_7] = avmx_get_callback(var_7);
+    }
   }
 
   foreach(var_8, var_2 in self.behavior_data.behaviors) {
     var_14 = var_8;
     var_15 = var_2;
 
-    foreach(var_7, var_6 in var_15.param_maps)
+    foreach(var_7, var_6 in var_15.param_maps) {
     self.consolidated_inputs[var_7] = avmx_get_callback(var_7);
+    }
   }
 
   var_0.vehicle_under_construction = undefined;
@@ -540,15 +565,19 @@ avmx_set_instance_master_volume(var_0, var_1) {
 
   for(;;) {
     if(var_9 < 0) {
-      if(var_2.master_volume > var_0)
+      if(var_2.master_volume > var_0) {
         var_2.master_volume = max(0, var_2.master_volume + var_9);
-      else
+      }
+      else {
         break;
+      }
     } else if(var_9 > 0) {
-      if(var_2.master_volume < var_0)
+      if(var_2.master_volume < var_0) {
         var_2.master_volume = min(1.0, var_2.master_volume + var_9);
-      else
+      }
+      else {
         break;
+      }
     }
 
     wait(var_6);
@@ -570,12 +599,14 @@ vm2_get_vehicle_instance_count(var_0) {
   if(isstring(var_0)) {
     var_3 = var_2.presets[var_0];
 
-    if(isDefined(var_3) &isarray(var_3.instances))
+    if(isDefined(var_3) &isarray(var_3.instances)) {
       var_1 = var_3.instances.size;
+    }
   } else {
     foreach(var_3 in var_2.presets) {
-      if(isarray(var_3.instances))
+      if(isarray(var_3.instances)) {
         var_1 = var_1 + var_3.instances.size;
+      }
     }
   }
 
@@ -623,8 +654,9 @@ avmx_remove_instance() {
 avmx_generate_instance_name(var_0) {
   var_1 = self.header.preset_name + "_" + avm_get_running_instance_count();
 
-  if(isDefined(var_0) && var_0 == 1)
+  if(isDefined(var_0) && var_0 == 1) {
     var_1 = var_1 + "_player";
+  }
 
   return var_1;
 }
@@ -731,8 +763,9 @@ avmx_create_instance_struct(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  if(isDefined(var_5.global_data.instance_init_callback))
+  if(isDefined(var_5.global_data.instance_init_callback)) {
     var_6[[var_5.global_data.instance_init_callback]](var_6.user_data);
+  }
 
   return var_6;
 }
@@ -740,13 +773,15 @@ avmx_create_instance_struct(var_0, var_1, var_2, var_3, var_4) {
 avmx_start_instance(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = self;
 
-  if(var_6 avmx_is_vehicle_proxy() == 0)
+  if(var_6 avmx_is_vehicle_proxy() == 0) {
     var_6 vehicle_turnengineoff();
+  }
 
   var_7 = avmx_get_preset(var_0);
 
-  if(!isDefined(var_7))
+  if(!isDefined(var_7)) {
     var_7 = avmx_create_preset(var_0);
+  }
 
   var_8 = var_7 avmx_create_instance_struct(var_6, var_2, var_3, var_4, var_1);
   var_8 avmx_add_instance();
@@ -797,16 +832,19 @@ avmx_create_param_io_struct(var_0) {
     var_2.smoothed_input[var_4.input_name] = 0;
 
     foreach(var_6 in var_4.envs) {
-      if(!isDefined(var_2.physical_output[var_6.output_name]))
+      if(!isDefined(var_2.physical_output[var_6.output_name])) {
         var_2.physical_output[var_6.output_name] = 1.0;
+      }
     }
   }
 
-  if(!isDefined(var_2.physical_output["volume"]))
+  if(!isDefined(var_2.physical_output["volume"])) {
     var_2.physical_output["volume"] = 1.0;
+  }
 
-  if(!isDefined(var_2.physical_output["pitch"]))
+  if(!isDefined(var_2.physical_output["pitch"])) {
     var_2.physical_output["pitch"] = 1.0;
+  }
 
   return var_2;
 }
@@ -814,11 +852,13 @@ avmx_create_param_io_struct(var_0) {
 vm2x_init_param_io_struct(var_0) {
   var_1 = self;
 
-  foreach(var_4, var_3 in var_0.smoothed_input)
+  foreach(var_4, var_3 in var_0.smoothed_input) {
   var_0.smoothed_input[var_4] = 0;
+  }
 
-  foreach(var_4, var_3 in var_0.physical_output)
+  foreach(var_4, var_3 in var_0.physical_output) {
   var_0.physical_output[var_4] = 1.0;
+  }
 }
 
 avmx_get_current_instance_sound_item_input() {
@@ -833,8 +873,9 @@ avmx_get_instance_sound_item_volume() {
   var_0 = avmx_get_instance_sound_item_output();
   var_1 = var_0["volume"];
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1.0;
+  }
 
   return var_1;
 }
@@ -862,12 +903,15 @@ avmx_update_loops() {
     var_3 = gettime();
     var_8 = distance2d(var_0.veh_ent.origin, level.player.origin);
 
-    if(var_8 < 400)
+    if(var_8 < 400) {
       var_9 = 1.0;
-    else if(var_8 > 1500)
+    }
+    else if(var_8 > 1500) {
       var_9 = 10.0;
-    else
+    }
+    else {
       var_9 = 1.0 + 9.0 * ((var_8 - 400) / 1100);
+    }
 
     wait(0.1 * var_9);
   }
@@ -910,18 +954,21 @@ avmx_map_io(var_0, var_1) {
   var_5.physical_output = [];
   var_7 = [];
 
-  foreach(var_10, var_9 in var_3.consolidated_inputs)
+  foreach(var_10, var_9 in var_3.consolidated_inputs) {
   var_7[var_10] = var_2[[var_9]]();
+  }
 
   foreach(var_12 in var_4.param_maps) {
     var_13 = var_12.input_name;
     var_14 = var_7[var_13];
     var_15 = var_5.smoothed_input[var_13];
 
-    if(var_14 > var_15)
+    if(var_14 > var_15) {
       var_16 = var_12.smooth_up;
-    else
+    }
+    else {
       var_16 = var_12.smooth_down;
+    }
 
     var_17 = (var_6 - var_1) / 100.0;
     var_16 = 1.0 - pow(1 - var_16, var_17);
@@ -946,8 +993,9 @@ avmx_map_io(var_0, var_1) {
 avmx_update_loop_ducking_scalar() {
   self.loop_duck_scalar = 1.0;
 
-  foreach(var_1 in self.oneshot_duck_vals)
+  foreach(var_1 in self.oneshot_duck_vals) {
   self.loop_duck_scalar = self.loop_duck_scalar * var_1;
+  }
 }
 
 avmx_update_instance_loop_assets(var_0) {
@@ -961,13 +1009,15 @@ avmx_update_instance_loop_assets(var_0) {
         var_0.fade_in_scalar = min(var_0.fade_in_scalar + var_0.fade_in_inc, 1.0);
         var_3 = var_3 * var_0.fade_in_scalar;
 
-        if(var_0.fade_in_scalar >= 1.0)
+        if(var_0.fade_in_scalar >= 1.0) {
           var_0.fade_in_scalar = undefined;
+        }
       }
     }
 
-    foreach(var_5 in var_0.snd_ents)
+    foreach(var_5 in var_0.snd_ents) {
     var_5 avmx_update_sound_ent_output_param(var_7, var_3);
+    }
   }
 }
 
@@ -976,8 +1026,9 @@ avm_set_loop_mute_state(var_0, var_1, var_2) {
   var_4 = var_3.loop_list[var_0];
   var_5 = 1.0;
 
-  if(var_1 == 1)
+  if(var_1 == 1) {
     var_5 = 0;
+  }
 
   var_2 = soundscripts\_audio::aud_get_optional_param(0.05, var_2);
   var_6 = var_5 - var_4.volume;
@@ -998,15 +1049,19 @@ avmx_set_loop_volume(var_0, var_1, var_2, var_3) {
 
   for(;;) {
     if(var_2 < 0) {
-      if(var_0.volume > var_1)
+      if(var_0.volume > var_1) {
         var_0.volume = max(0, var_0.volume + var_2);
-      else
+      }
+      else {
         break;
+      }
     } else if(var_2 > 0) {
-      if(var_0.volume < var_1)
+      if(var_0.volume < var_1) {
         var_0.volume = min(1.0, var_0.volume + var_2);
-      else
+      }
+      else {
         break;
+      }
     }
 
     wait(var_3);
@@ -1020,8 +1075,9 @@ avmx_launch_state_machines(var_0) {
   foreach(var_10, var_4 in var_2.state_data.state_groups) {
     var_5 = var_4.initial_state_name_pair;
 
-    if(isarray(var_0))
+    if(isarray(var_0)) {
       var_5 = var_0[var_10];
+    }
 
     var_6 = var_5[0];
     var_7 = var_5[1];
@@ -1045,8 +1101,9 @@ avmx_state_enter_action_function(var_0, var_1, var_2) {
   var_3 avmx_state_enter_action_play_oneshots(var_0, var_1);
   var_3 avmx_state_enter_action_play_loops(var_0, var_1);
 
-  if(isDefined(var_1.ps_item.init_state_callback))
+  if(isDefined(var_1.ps_item.init_state_callback)) {
     var_3[[var_1.ps_item.init_state_callback]](var_3.user_data);
+  }
 
   var_7 = undefined;
   var_8 = undefined;
@@ -1099,12 +1156,15 @@ avmx_state_enter_action_function(var_0, var_1, var_2) {
     var_11 = gettime();
     var_24 = distance2d(var_3.veh_ent.origin, level.player.origin);
 
-    if(var_24 < 400)
+    if(var_24 < 400) {
       var_25 = 1.0;
-    else if(var_24 > 1500)
+    }
+    else if(var_24 > 1500) {
       var_25 = 10.0;
-    else
+    }
+    else {
       var_25 = 1.0 + 9.0 * ((var_24 - 400) / 1100);
+    }
 
     wait(0.1 * var_25);
   }
@@ -1125,8 +1185,9 @@ avmx_state_enter_action_init_data(var_0, var_1) {
 
   if(isDefined(var_3.loops[0])) {
     if(var_3.loops[0] == "all") {
-      foreach(var_5 in var_2.loop_list)
+      foreach(var_5 in var_2.loop_list) {
       var_5.volume = 1.0;
+      }
     }
   } else {
     foreach(var_8 in var_3.loops) {
@@ -1149,8 +1210,9 @@ avmx_state_exit_action_function(var_0, var_1) {
       var_6.snd_ents = [];
       var_9 = var_6.ps_item.fadeout_time;
 
-      foreach(var_12, var_11 in var_8)
+      foreach(var_12, var_11 in var_8) {
       var_11 thread avmx_stop_snd_ent(var_9);
+      }
     }
   }
 }
@@ -1166,8 +1228,9 @@ vm2x_fade_sound_obj(var_0) {
           var_3 setvolume(0, var_0);
           wait(var_0);
 
-          if(isDefined(var_3))
+          if(isDefined(var_3)) {
             var_3 stopsounds();
+          }
         }
       }
 
@@ -1195,8 +1258,9 @@ avmx_state_enter_action_play_oneshots(var_0, var_1) {
   var_5 = var_1.ps_item;
   var_6 = var_1.oneshot_overrides;
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = var_5.oneshots;
+  }
 
   foreach(var_8 in var_6) {
     var_9 = var_2.oneshot_list[var_8];
@@ -1210,14 +1274,17 @@ avmx_state_enter_action_play_oneshots(var_0, var_1) {
       for(var_13 = 0; var_13 < var_10.asset_names.size; var_13++) {
         var_14 = var_2 avmx_start_oneshot_alias(var_9, var_13);
 
-        foreach(var_17, var_16 in var_9.curr_io.physical_output)
+        foreach(var_17, var_16 in var_9.curr_io.physical_output) {
         var_14 avmx_update_sound_ent_output_param(var_17, var_16);
+        }
 
-        if(var_12)
+        if(var_12) {
           var_2 thread avmx_continuously_update_snd_ent(var_9, var_14);
+        }
 
-        if(var_11 == 1 || var_11 == 2)
+        if(var_11 == 1 || var_11 == 2) {
           var_9.snd_ents[var_13] = var_14;
+        }
       }
 
       var_2 thread avmx_handle_oneshot_ducking(var_9);
@@ -1238,8 +1305,9 @@ avmx_continuously_update_snd_ent(var_0, var_1) {
     var_2 avmx_map_io(var_0);
 
     if(isDefined(var_1)) {
-      foreach(var_7, var_6 in var_0.curr_io.physical_output)
+      foreach(var_7, var_6 in var_0.curr_io.physical_output) {
       var_1 avmx_update_sound_ent_output_param(var_7, var_6);
+      }
     }
 
     wait(var_4);
@@ -1255,11 +1323,13 @@ avmx_state_enter_action_play_loops(var_0, var_1) {
 
   if(isDefined(var_6[0])) {
     if(var_6[0] == "all") {
-      foreach(var_9, var_8 in var_2.loop_list)
+      foreach(var_9, var_8 in var_2.loop_list) {
       avmx_set_loop_play_state(var_8, 1);
+      }
     } else if(var_6[0] == "none") {
-      foreach(var_9, var_8 in var_2.loop_list)
+      foreach(var_9, var_8 in var_2.loop_list) {
       avmx_set_loop_play_state(var_8, 0);
+      }
     } else {
     }
   } else if(var_6.size > 0) {
@@ -1275,11 +1345,13 @@ avmx_state_enter_action_play_loops(var_0, var_1) {
       var_12[var_9] = var_8;
     }
 
-    foreach(var_9, var_8 in var_11)
+    foreach(var_9, var_8 in var_11) {
     avmx_set_loop_play_state(var_8, 1);
+    }
 
-    foreach(var_9, var_8 in var_12)
+    foreach(var_9, var_8 in var_12) {
     avmx_set_loop_play_state(var_8, 0);
+    }
   }
 }
 
@@ -1316,8 +1388,9 @@ input_callback_relative_speed() {
 input_callback_speed_mph() {
   var_0 = avmx_get_vehicle_entity();
 
-  if(isDefined(var_0.fakespeed))
+  if(isDefined(var_0.fakespeed)) {
     return var_0.fakespeed;
+  }
 
   return var_0 maps\_shg_utility::get_differentiated_speed() * 0.0568182;
 }
@@ -1348,14 +1421,17 @@ input_callback_doppler_subtle() {
 }
 
 avm_compute_doppler_pitch(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1;
+  }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1;
+  }
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 13397;
+  }
 
   if(var_4 != 1) {
     var_7 = var_1 - var_3;
@@ -1423,8 +1499,9 @@ input_callback_player_jetbike_height() {
   var_2 = 0.1;
 
   if(avmx_is_player_mode()) {
-    if(!isDefined(var_1.amv_jetbike_height_time))
+    if(!isDefined(var_1.amv_jetbike_height_time)) {
       var_1.amv_jetbike_height_time = 0;
+    }
 
     var_3 = gettime();
 
@@ -1433,8 +1510,9 @@ input_callback_player_jetbike_height() {
       var_4 = bulletTrace(var_1.origin, var_1.origin - (0, 0, 360), 0);
       var_1.amv_jetbike_height_val = var_4["fraction"];
 
-      if(!isDefined(var_1.amv_jetbike_height_val))
+      if(!isDefined(var_1.amv_jetbike_height_val)) {
         var_1.amv_jetbike_height_val = 0;
+      }
     }
 
     var_0 = clamp(var_1.amv_jetbike_height_val, 0, 1.0);
@@ -1552,8 +1630,9 @@ input_diveboat_throttle() {
   } else {
     var_1 = var_0 vehicle_diveboatgetthrottleforce();
 
-    if(var_1 != 0)
+    if(var_1 != 0) {
       level.aud.diveboat_throttle = var_1;
+    }
 
     return var_1;
   }
@@ -1577,10 +1656,12 @@ input_player_pdrone_look() {
   var_1 = abs(var_0[0]);
   var_2 = abs(var_0[1]);
 
-  if(var_1 > var_2)
+  if(var_1 > var_2) {
     return var_1;
-  else
+  }
+  else {
     return var_2;
+  }
 }
 
 avmx_start_oneshot_alias(var_0, var_1) {
@@ -1605,8 +1686,9 @@ avmx_monitor_oneshot_done(var_0) {
   self endon("death");
   self waittill(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 avmx_is_player_mode() {
@@ -1617,8 +1699,9 @@ avmx_get_sound_alias(var_0, var_1) {
   var_2 = self;
   var_3 = var_0.asset_names[soundscripts\_audio::aud_get_optional_param(0, var_1)];
 
-  if(isDefined(var_3) && var_2 avmx_is_player_mode())
+  if(isDefined(var_3) && var_2 avmx_is_player_mode()) {
     var_3 = var_3 + "_plr";
+  }
 
   return var_3;
 }
@@ -1745,8 +1828,9 @@ avmx_get_instance(var_0, var_1) {
   if(isstring(var_1)) {
     var_4 = avmx_get_preset(var_1);
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_2 = var_4.instances[var_0];
+    }
   } else {
     foreach(var_4 in var_3.presets) {
       foreach(var_7 in var_4.instances) {
@@ -1788,12 +1872,14 @@ avmx_get_behavior_restricted_oneshots(var_0) {
   var_4 = avmx_get_preset(var_3.preset_name);
   var_5 = var_0.oneshot_overrides;
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = var_3.oneshots;
+  }
 
   foreach(var_7 in var_5) {
-    if(var_1 avmx_get_oneshot_poly_mode(var_7) == 1)
+    if(var_1 avmx_get_oneshot_poly_mode(var_7) == 1) {
       var_2[var_7] = var_7;
+    }
   }
 
   return var_2;
@@ -1809,15 +1895,18 @@ avmx_get_oneshot_update_mode(var_0) {
   var_1 = self;
   var_2 = 0;
 
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_3 = var_1.oneshot_list[var_0].ps_item;
-  else
+  }
+  else {
     var_3 = var_0.ps_item;
+  }
 
   var_2 = var_3.oneshot_update_mode;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   return var_2;
 }
@@ -1830,10 +1919,12 @@ avmx_map_input(var_0, var_1) {
   var_2 = self;
   var_3 = var_2 avmx_get_envelope(var_1);
 
-  if(isDefined(var_3.env_function))
+  if(isDefined(var_3.env_function)) {
     var_4 = [[var_3.env_function]](var_0);
-  else
+  }
+  else {
     var_4 = piecewiselinearlookup(var_0, var_3.env_array);
+  }
 
   return var_4;
 }
@@ -1865,8 +1956,9 @@ avmx_stop_loop(var_0) {
   var_2 = var_0.snd_ents;
   var_0.snd_ents = [];
 
-  foreach(var_4 in var_2)
+  foreach(var_4 in var_2) {
   var_4 thread avmx_stop_snd_ent(var_0.ps_item.fadeout_time);
+  }
 }
 
 avmx_stop_snd_ent(var_0) {
@@ -1877,24 +1969,28 @@ avmx_stop_snd_ent(var_0) {
     var_1 setvolume(0, var_0);
     wait(var_0);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 stopsounds();
+    }
 
     wait 0.05;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
   }
 }
 
 vm2x_fadeout_vehicle(var_0) {
   var_1 = self;
 
-  foreach(var_3 in var_1.loop_list)
+  foreach(var_3 in var_1.loop_list) {
   var_3 avmx_fade_stop_and_delete_sound_obj(var_0);
+  }
 
-  foreach(var_6 in var_1.oneshot_list)
+  foreach(var_6 in var_1.oneshot_list) {
   var_6 avmx_fade_stop_and_delete_sound_obj(var_0);
+  }
 }
 
 avmx_fade_stop_and_delete_sound_obj(var_0) {
@@ -1934,8 +2030,9 @@ vm2x_delete_vehicle_sound_ents() {
   }
 
   foreach(var_5 in var_0.oneshot_list) {
-    foreach(var_7 in var_5.snd_ents)
+    foreach(var_7 in var_5.snd_ents) {
     var_7 thread avmx_stop_snd_ent(0.05);
+    }
 
     var_5.snd_ents = [];
   }
@@ -1960,8 +2057,9 @@ yards2dist(var_0) {
 avmx_vehicle_getspeed() {
   var_0 = 0;
 
-  if(avmx_is_vehicle_proxy() == 0)
+  if(avmx_is_vehicle_proxy() == 0) {
     var_0 = self vehicle_getspeed();
+  }
 
   return var_0;
 }

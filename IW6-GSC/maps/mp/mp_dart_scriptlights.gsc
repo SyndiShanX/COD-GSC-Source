@@ -75,8 +75,9 @@ mp_dart_ent_flag_init(message) {
     self.ent_flags_lock = [];
   }
 
-  if(isDefined(level.first_frame) && level.first_frame == -1)
+  if(isDefined(level.first_frame) && level.first_frame == -1) {
     AssertEx(!isDefined(self.ent_flag[message]), "Attempt to reinitialize existing message: " + message + " on entity.");
+  }
 
   self.ent_flag[message] = false;
 
@@ -103,17 +104,21 @@ mp_dart_pulsing_light() {
     assertex(self.linked_prefab_ents.size == 2, "Dynamic light at " + self.origin + " needs to script_LinkTo a prefab that contains both on and off light models");
     foreach(ent in self.linked_prefab_ents) {
       if((isDefined(ent.script_noteworthy)) && (ent.script_noteworthy == "on")) {
-        if(!isDefined(self.lit_models))
+        if(!isDefined(self.lit_models)) {
           self.lit_models[0] = ent;
-        else
+        }
+        else {
           self.lit_models[self.lit_models.size] = ent;
+        }
         continue;
       }
       if((isDefined(ent.script_noteworthy)) && (ent.script_noteworthy == "off")) {
-        if(!isDefined(self.unlit_models))
+        if(!isDefined(self.unlit_models)) {
           self.unlit_models[0] = ent;
-        else
+        }
+        else {
           self.unlit_models[self.unlit_models.size] = ent;
+        }
         self.unlit_model = ent;
         continue;
       }
@@ -160,23 +165,26 @@ mp_dart_generic_flicker_pause() {
         }
       }
       if(isDefined(self.unlit_models)) {
-        foreach(unlit_model in self.unlit_models)
+        foreach(unlit_model in self.unlit_models) {
         unlit_model show();
+        }
       }
     }
 
     self setLightIntensity(0);
     if(self.linked_lights) {
-      for(i = 0; i < self.linked_light_ents.size; i++)
+      for(i = 0; i < self.linked_light_ents.size; i++) {
         self.linked_light_ents[i] setLightIntensity(0);
+      }
     }
 
     self waittill("flicker_on");
 
     self setLightIntensity(f_on);
     if(self.linked_lights) {
-      for(i = 0; i < self.linked_light_ents.size; i++)
+      for(i = 0; i < self.linked_light_ents.size; i++) {
         self.linked_light_ents[i] setLightIntensity(f_on);
+      }
     }
 
     if(self.linked_models) {
@@ -192,8 +200,9 @@ mp_dart_generic_flicker_pause() {
         }
       }
       if(isDefined(self.unlit_models)) {
-        foreach(unlit_model in self.unlit_models)
+        foreach(unlit_model in self.unlit_models) {
         unlit_model hide();
+        }
       }
     }
 
@@ -233,8 +242,9 @@ mp_dart_generic_flicker() {
           }
         }
         if(isDefined(self.unlit_models)) {
-          foreach(unlit_model in self.unlit_models)
+          foreach(unlit_model in self.unlit_models) {
           unlit_model show();
+          }
         }
       } else {
         curr = on;
@@ -260,8 +270,9 @@ mp_dart_generic_flicker() {
 
       self setLightIntensity(curr);
       if(self.linked_lights) {
-        for(i = 0; i < self.linked_light_ents.size; i++)
+        for(i = 0; i < self.linked_light_ents.size; i++) {
           self.linked_light_ents[i] setLightIntensity(curr);
+        }
       }
       num--;
     }
@@ -270,8 +281,9 @@ mp_dart_generic_flicker() {
 
     self setLightIntensity(on);
     if(self.linked_lights) {
-      for(i = 0; i < self.linked_light_ents.size; i++)
+      for(i = 0; i < self.linked_light_ents.size; i++) {
         self.linked_light_ents[i] setLightIntensity(on);
+      }
     }
     if(self.linked_models) {
       if(isDefined(self.lit_models)) {
@@ -285,8 +297,9 @@ mp_dart_generic_flicker() {
         }
       }
       if(isDefined(self.unlit_models)) {
-        foreach(unlit_model in self.unlit_models)
+        foreach(unlit_model in self.unlit_models) {
         unlit_model hide();
+        }
       }
     }
     wait(randomfloatrange(min_flickerless_time, max_flickerless_time));

@@ -33,8 +33,9 @@ setup_bot_infect() {
 }
 
 bot_should_pickup_weapons_infect() {
-  if(level.infect_choseFirstInfected && self.team == "axis")
+  if(level.infect_choseFirstInfected && self.team == "axis") {
     return false;
+  }
 
   return maps\mp\bots\_bots::bot_should_pickup_weapons();
 }
@@ -56,13 +57,15 @@ bot_infect_think() {
       }
     }
 
-    if(self.bot_team != self.team)
+    if(self.bot_team != self.team) {
       self.bot_team = self.team;
+    }
 
     if(self.team == "axis") {
       result = self bot_melee_tactical_insertion_check();
-      if(!isDefined(result) || result)
+      if(!isDefined(result) || result) {
         self BotClearScriptGoal();
+      }
     }
 
     self[[self.personality_update_function]]();
@@ -82,25 +85,29 @@ bot_infect_ai_director_update() {
     infected_players = [];
     non_infected_players = [];
     foreach(player in level.players) {
-      if(!isDefined(player.initial_spawn_time) && player.health > 0 && isDefined(player.team) && (player.team == "allies" || player.team == "axis"))
+      if(!isDefined(player.initial_spawn_time) && player.health > 0 && isDefined(player.team) && (player.team == "allies" || player.team == "axis")) {
         player.initial_spawn_time = GetTime();
+      }
 
       if(isDefined(player.initial_spawn_time) && GetTime() - player.initial_spawn_time > 5000) {
         if(!isDefined(player.team)) {
           continue;
         }
-        if(player.team == "axis")
+        if(player.team == "axis") {
           infected_players[infected_players.size] = player;
-        else if(player.team == "allies")
+        }
+        else if(player.team == "allies") {
           non_infected_players[non_infected_players.size] = player;
+        }
       }
     }
 
     if(infected_players.size > 0 && non_infected_players.size > 0) {
       all_bots_are_infected = true;
       foreach(non_infected_player in non_infected_players) {
-        if(IsBot(non_infected_player))
+        if(IsBot(non_infected_player)) {
           all_bots_are_infected = false;
+        }
       }
 
       if(all_bots_are_infected) {
@@ -220,8 +227,9 @@ bot_infect_retrieve_knife() {
 }
 
 bot_infect_angle_too_steep_for_knife_throw(testOrigin, testDest) {
-  if(abs(testOrigin[2] - testDest[2]) > 56.0 && Distance2DSquared(testOrigin, testDest) < INFECTED_BOT_MELEE_MIN_DIST_SQ)
+  if(abs(testOrigin[2] - testDest[2]) > 56.0 && Distance2DSquared(testOrigin, testDest) < INFECTED_BOT_MELEE_MIN_DIST_SQ) {
     return true;
+  }
 
   return false;
 }
@@ -231,8 +239,9 @@ bot_infect_find_node_can_see_ent(targetEnt, startNode) {
     return;
   }
   at_begin_node = false;
-  if(IsSubStr(startNode.type, "Begin"))
+  if(IsSubStr(startNode.type, "Begin")) {
     at_begin_node = true;
+  }
 
   neighborNodes = GetLinkedNodes(startNode);
   if(isDefined(neighborNodes) && neighborNodes.size) {

@@ -23,8 +23,9 @@ cover_wall_think(covertype) {
   self.covernode = self.node;
   self.covertype = covertype;
 
-  if(!isDefined(self.covernode.turret))
+  if(!isDefined(self.covernode.turret)) {
     animscripts\cover_utility::turntomatchnodedirection(0);
+  }
 
   if(covertype == "crouch") {
     self setup_cover_crouch();
@@ -41,8 +42,9 @@ cover_wall_think(covertype) {
   self.a.standidlethread = undefined;
   self orientmode("face angle", self.covernode.angles[1]);
 
-  if(isDefined(self.covernode.turret))
+  if(isDefined(self.covernode.turret)) {
     self usestationaryturret();
+  }
 
   self animmode("normal");
 
@@ -65,8 +67,9 @@ cover_wall_think(covertype) {
     self thread animscripts\shared::movetooriginovertime(self.covernode.origin, 0.4);
     wait 0.2;
 
-    if(covertype == "crouch")
+    if(covertype == "crouch") {
       self.a.pose = "crouch";
+    }
 
     wait 0.2;
   }
@@ -74,16 +77,19 @@ cover_wall_think(covertype) {
   self animmode("zonly_physics");
 
   if(covertype == "crouch") {
-    if(self.a.pose == "prone")
+    if(self.a.pose == "prone") {
       self exitpronewrapper(1);
+    }
 
     self.a.pose = "crouch";
   }
 
-  if(self.covertype == "stand")
+  if(self.covertype == "stand") {
     self.a.special = "cover_stand";
-  else
+  }
+  else {
     self.a.special = "cover_crouch";
+  }
 
   behaviorcallbacks = spawnStruct();
   behaviorcallbacks.reload = ::coverreload;
@@ -213,8 +219,9 @@ shootastold() {
 }
 
 shootuntilshootbehaviorchange_coverwall() {
-  if(self.covertype == "crouch")
+  if(self.covertype == "crouch") {
     self thread anglerangethread();
+  }
 
   self thread standidlethread();
   shootuntilshootbehaviorchange();
@@ -226,10 +233,12 @@ idle() {
   while(true) {
     usetwitch = randomint(2) == 0 && animarrayanyexist("hide_idle_twitch");
 
-    if(usetwitch && !self.looking_at_entity)
+    if(usetwitch && !self.looking_at_entity) {
       idleanim = animarraypickrandom("hide_idle_twitch");
-    else
+    }
+    else {
       idleanim = animarray("hide_idle");
+    }
 
     playidleanimation(idleanim, usetwitch);
   }
@@ -260,10 +269,12 @@ flinch() {
 }
 
 playidleanimation(idleanim, needsrestart) {
-  if(needsrestart)
+  if(needsrestart) {
     self setflaggedanimknoballrestart("idle", idleanim, % body, 1, 0.1, 1);
-  else
+  }
+  else {
     self setflaggedanimknoball("idle", idleanim, % body, 1, 0.1, 1);
+  }
 
   self.a.covermode = "Hide";
   self animscripts\shared::donotetracks("idle");
@@ -276,16 +287,19 @@ look(looktime) {
     return false;
   }
 
-  if(!peekout())
+  if(!peekout()) {
     return false;
+  }
 
   animscripts\shared::playlookanimation(animarray("look_idle"), looktime);
   lookanim = undefined;
 
-  if(self issuppressedwrapper())
+  if(self issuppressedwrapper()) {
     lookanim = animarray("look_to_hide_fast");
-  else
+  }
+  else {
     lookanim = animarray("look_to_hide");
+  }
 
   self setflaggedanimknoballrestart("looking_end", lookanim, % body, 1, 0.1);
   animscripts\shared::donotetracks("looking_end");
@@ -353,8 +367,9 @@ standidlethreadinternal() {
 }
 
 pop_up_and_hide_speed() {
-  if(self.a.covermode == "left" || self.a.covermode == "right" || self.a.covermode == "over")
+  if(self.a.covermode == "left" || self.a.covermode == "right" || self.a.covermode == "over") {
     return 1;
+  }
 
   return randomfasteranimspeed();
 }
@@ -363,27 +378,34 @@ pop_up() {
   assert(self.a.covermode == "Hide");
   newcovermode = getbestcovermode();
 
-  if(!isDefined(newcovermode))
+  if(!isDefined(newcovermode)) {
     return false;
+  }
 
   popupanim = animarray("hide_2_" + newcovermode);
 
-  if(!self maymovetopoint(getanimendpos(popupanim)))
+  if(!self maymovetopoint(getanimendpos(popupanim))) {
     return false;
+  }
 
-  if(self.covertype == "crouch")
+  if(self.covertype == "crouch") {
     self setup_cover_crouch();
-  else
+  }
+  else {
     self setup_cover_stand();
+  }
 
   self.a.special = "none";
 
-  if(self.covertype == "stand")
+  if(self.covertype == "stand") {
     self.a.special = "cover_stand_aim";
-  else if(newcovermode == "left" || newcovermode == "right")
+  }
+  else if(newcovermode == "left" || newcovermode == "right") {
     self.a.special = "cover_crouch_aim_" + newcovermode;
-  else
+  }
+  else {
     self.a.special = "cover_crouch_aim";
+  }
 
   self.changingcoverpos = 1;
   self notify("done_changing_cover_pos");
@@ -419,16 +441,19 @@ donotetracksforpopup(animname) {
 }
 
 setup_additive_aim(transtime) {
-  if(self.a.covermode == "left" || self.a.covermode == "right")
+  if(self.a.covermode == "left" || self.a.covermode == "right") {
     aimcovermode = "crouch";
-  else
+  }
+  else {
     aimcovermode = self.a.covermode;
+  }
 
   self setanimknoball(animarray(aimcovermode + "_aim"), % body, 1, transtime);
   prefix = "";
 
-  if(self.a.covermode == "over")
+  if(self.a.covermode == "over") {
     prefix = "over_";
+  }
 
   self setanimlimited(animarray(prefix + "add_aim_down"), 1, 0);
   self setanimlimited(animarray(prefix + "add_aim_left"), 1, 0);
@@ -451,10 +476,12 @@ go_to_hide() {
   self animscripts\shared::stoptracking();
   self.a.covermode = "Hide";
 
-  if(self.covertype == "stand")
+  if(self.covertype == "stand") {
     self.a.special = "cover_stand";
-  else
+  }
+  else {
     self.a.special = "cover_crouch";
+  }
 
   self.changingcoverpos = 0;
 }
@@ -466,12 +493,15 @@ trythrowinggrenadestayhidden(throwat, forcethrow) {
 trythrowinggrenade(throwat, safe, forcethrow) {
   theanim = undefined;
 
-  if(animarrayexist("grenade_rambo") && isDefined(self.rambochance) && randomfloat(1) < self.rambochance)
+  if(animarrayexist("grenade_rambo") && isDefined(self.rambochance) && randomfloat(1) < self.rambochance) {
     theanim = animarray("grenade_rambo");
-  else if(isDefined(safe) && safe)
+  }
+  else if(isDefined(safe) && safe) {
     theanim = animarraypickrandom("grenade_safe");
-  else
+  }
+  else {
     theanim = animarraypickrandom("grenade_exposed");
+  }
 
   self animmode("zonly_physics");
   self.keepclaimednodeifvalid = 1;
@@ -488,17 +518,21 @@ createturret(posent, weaponinfo, weaponmodel) {
   turret maketurretusable();
   turret setdefaultdroppitch(0);
 
-  if(isDefined(posent.leftarc))
+  if(isDefined(posent.leftarc)) {
     turret.leftarc = posent.leftarc;
+  }
 
-  if(isDefined(posent.rightarc))
+  if(isDefined(posent.rightarc)) {
     turret.rightarc = posent.rightarc;
+  }
 
-  if(isDefined(posent.toparc))
+  if(isDefined(posent.toparc)) {
     turret.toparc = posent.toparc;
+  }
 
-  if(isDefined(posent.bottomarc))
+  if(isDefined(posent.bottomarc)) {
     turret.bottomarc = posent.bottomarc;
+  }
 
   return turret;
 }
@@ -531,13 +565,15 @@ usestationaryturret() {
   assert(isDefined(self.covernode.turret));
   self.covernode.turret.ai_node_user = self;
 
-  if(self.covernode.turret maps\_turret::is_turret_enabled())
+  if(self.covernode.turret maps\_turret::is_turret_enabled()) {
     self thread maps\_turret::use_turret(self.covernode.turret);
+  }
 }
 
 loophide(transtime) {
-  if(!isDefined(transtime))
+  if(!isDefined(transtime)) {
     transtime = 0.1;
+  }
 
   self setanimknoballrestart(animarray("hide_idle"), % body, 1, transtime);
   self.a.covermode = "Hide";
@@ -561,15 +597,18 @@ anglerangethread() {
 }
 
 needtochangecovermode() {
-  if(self.covertype != "crouch")
+  if(self.covertype != "crouch") {
     return false;
+  }
 
   pitch = getshootpospitch(self getEye());
 
-  if(self.a.covermode == "lean")
+  if(self.a.covermode == "lean") {
     return pitch < 10;
-  else
+  }
+  else {
     return abs(pitch) > 45;
+  }
 }
 
 getbestcovermode() {
@@ -583,46 +622,55 @@ getbestcovermode() {
     if(modes.size > 0) {
       pitch = getshootpospitch(self.covernode.origin + getnodeoffset(self.covernode));
 
-      if(pitch > 15)
+      if(pitch > 15) {
         allowstepback = 0;
+      }
     }
 
-    if(allowstepback)
+    if(allowstepback) {
       modes[modes.size] = "stand";
+    }
   } else {
     pitch = getshootpospitch(self.covernode.origin + getnodeoffset(self.covernode));
 
-    if(pitch > 30)
+    if(pitch > 30) {
       return "lean";
+    }
 
-    if(pitch > 15 || !self.covernode.crouchingisok)
+    if(pitch > 15 || !self.covernode.crouchingisok) {
       return "stand";
+    }
 
     modes = self.covernode getvalidcoverpeekouts();
     modes[modes.size] = "crouch";
   }
 
-  if(self.covertype == "stand" && self.a.pose != "stand")
+  if(self.covertype == "stand" && self.a.pose != "stand") {
     modes = array_exclude(modes, array("over"));
+  }
 
-  if(self.covertype == "crouch")
+  if(self.covertype == "crouch") {
     modes = array_exclude(modes, array("over"));
+  }
 
   return getrandomcovermode(modes);
 }
 
 resetweaponanims() {
-  if(self.covertype == "crouch")
+  if(self.covertype == "crouch") {
     self setup_cover_crouch();
-  else
+  }
+  else {
     self setup_cover_stand();
+  }
 }
 
 rambo() {
   self animscripts\debug::debugpushstate("rambo");
 
-  if(!hasenemysightpos())
+  if(!hasenemysightpos()) {
     return false;
+  }
 
   shouldrambo = isDefined(self.covernode.script_forcerambo) || isDefined(self.rambochance) && randomfloat(1) < self.rambochance;
 
@@ -642,25 +690,29 @@ rambo() {
 rambostepout() {
   animtype = "rambo";
 
-  if(randomfloat(1) < 0.2 && animarrayanyexist("rambo_jam"))
+  if(randomfloat(1) < 0.2 && animarrayanyexist("rambo_jam")) {
     animtype = "rambo_jam";
+  }
 
-  if(self.covertype == "crouch" && !self.covernode.crouchingisok)
+  if(self.covertype == "crouch" && !self.covernode.crouchingisok) {
     return false;
+  }
 
   assert(animarrayanyexist(animtype));
   pitch = getshootpospitch(self.covernode.origin + getnodeoffset(self.covernode));
 
-  if(pitch > 15)
+  if(pitch > 15) {
     return false;
+  }
 
   forward = anglesToForward(self.angles);
   rambooutpos = self.origin + forward * -16;
 
   self thread debugrambooutposition(rambooutpos);
 
-  if(!self maymovetopoint(rambooutpos))
+  if(!self maymovetopoint(rambooutpos)) {
     return false;
+  }
 
   ramboanim = animarraypickrandom(animtype);
   resetanimspecial(0);
@@ -675,8 +727,9 @@ rambostepout() {
     self thread stopblindaiming(ramboanim, "rambo");
   }
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     self animscripts\shoot_behavior::setshootent(self.enemy);
+  }
 
   self animscripts\shared::donotetracks("rambo");
   self.keepclaimednode = 1;
@@ -690,8 +743,9 @@ rambostepout() {
 resetanimspecial(delay) {
   self endon("killanimscript");
 
-  if(delay > 0)
+  if(delay > 0) {
     wait(delay);
+  }
 
   self.a.special = "none";
 }

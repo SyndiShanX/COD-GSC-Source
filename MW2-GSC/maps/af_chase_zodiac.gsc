@@ -18,8 +18,9 @@
 clear_all_ai_grenades() {
   add_global_spawn_function("axis", ::no_grenades);
   ai = getaiarray("axis");
-  foreach(guy in ai)
+  foreach(guy in ai) {
   guy no_grenades();
+  }
 }
 
 no_grenades() {
@@ -52,8 +53,9 @@ zodiac_main() {
   level.longRegenTime = 2000;
 
   // a little extra invul time for the harder difs
-  if(level.player.deathInvulnerableTime > 2000)
+  if(level.player.deathInvulnerableTime > 2000) {
     level.player.deathInvulnerableTime = 2000;
+  }
 
   zodiac = level.players_boat;
   assert(isDefined(zodiac));
@@ -87,8 +89,9 @@ player_path_trigger_think() {
 }
 
 enemy_zodiacs_spawn_and_attack() {
-  if(flag("enemy_zodiacs_wipe_out"))
+  if(flag("enemy_zodiacs_wipe_out")) {
     return;
+  }
   level endon("enemy_zodiacs_wipe_out");
   wait_time = 3;
   wait(2);
@@ -96,8 +99,9 @@ enemy_zodiacs_spawn_and_attack() {
     thread spawn_enemy_bike();
     wait(wait_time);
     wait_time -= 0.5;
-    if(wait_time < 0.5)
+    if(wait_time < 0.5) {
       wait_time = 0.5;
+    }
     //wait( randomfloatrange( 2, 3 ) );		
   }
 }
@@ -117,7 +121,8 @@ enemy_zodiacs_wipe_out() {
 wipeout_soon() {
   self endon("death");
   wait(randomfloatrange(2, 4));
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self.wipeout = true;
 }

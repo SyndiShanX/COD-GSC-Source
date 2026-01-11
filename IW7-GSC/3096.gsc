@@ -4,13 +4,15 @@
 ***************************************/
 
 func_1EDC() {
-  if(!isDefined(self.anims))
+  if(!isDefined(self.anims)) {
     self.anims = spawnStruct();
+  }
 }
 
 func_A3B2(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = self.spaceship_mode;
+  }
 
   self.anims.state = var_00;
 }
@@ -58,16 +60,20 @@ func_A1E5(var_00, var_01, var_02) {
   self.func_92CC = undefined;
   self.func_BBB5 = undefined;
 
-  if(var_00 == "fly_glide")
+  if(var_00 == "fly_glide") {
     var_00 = "fly";
+  }
 
-  if(var_00 == "hover_glide")
+  if(var_00 == "hover_glide") {
     var_00 = "hover";
+  }
 
-  if(level.func_241D)
+  if(level.func_241D) {
     var_03 = "";
-  else
+  }
+  else {
     var_03 = "_space";
+  }
 
   switch (var_00) {
     case "hover":

@@ -23,8 +23,9 @@ init() {
   var_0.carriedtrapoffset = (0, 0, 25);
   var_0.carriedtrapangles = (0, 0, 0);
 
-  if(!isDefined(level.func_47B3))
+  if(!isDefined(level.func_47B3)) {
     level.func_47B3 = [];
+  }
 
   level.func_47B3["crafted_electric_trap"] = var_00;
 }
@@ -72,18 +73,21 @@ setsuppressiontime(var_00, var_01) {
   removeperks();
   self.carriedsentry = var_02;
 
-  if(var_00)
+  if(var_00) {
     var_2.firstplacement = 1;
+  }
 
   var_03 = func_F68A(var_02, var_00, var_01);
   self.carriedsentry = undefined;
   thread waitrestoreperks();
   self.iscarrying = 0;
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 func_F68A(var_00, var_01, var_02) {
@@ -108,8 +112,9 @@ func_F68A(var_00, var_01, var_02) {
       return 1;
     }
 
-    if(!isDefined(var_03))
+    if(!isDefined(var_03)) {
       var_03 = "force_cancel_placement";
+    }
 
     if(var_03 == "cancel_trap" || var_03 == "force_cancel_placement") {
       if(!var_01 && var_03 == "cancel_trap") {
@@ -118,10 +123,12 @@ func_F68A(var_00, var_01, var_02) {
       scripts\engine\utility::allow_weapon(1);
       var_00 func_126A7();
 
-      if(var_03 != "force_cancel_placement")
+      if(var_03 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_01)
+      }
+      else if(var_01) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -129,8 +136,9 @@ func_F68A(var_00, var_01, var_02) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_01)
+    if(var_01) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_00 func_126AA(var_02, self);
     scripts\engine\utility::allow_weapon(1);
@@ -218,8 +226,9 @@ func_126A0(var_00) {
     wait 0.1;
 
     if(isDefined(self)) {
-      if(isDefined(self.carried_trap))
+      if(isDefined(self.carried_trap)) {
         self.carried_trap delete();
+      }
 
       self delete();
     }
@@ -241,8 +250,9 @@ func_126A1() {
     }
     var_00 thread setsuppressiontime(0, self.lifespan);
 
-    if(isDefined(self.charge_fx))
+    if(isDefined(self.charge_fx)) {
       self.charge_fx delete();
+    }
 
     scripts\cp\utility::removefromtraplist();
     self delete();
@@ -269,8 +279,9 @@ func_126AA(var_00, var_01) {
 func_126A7() {
   self.carriedby getrigindexfromarchetyperef();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.carried_trap delete();
   self delete();
@@ -328,10 +339,12 @@ func_126AF() {
         self playSound("trap_electric_shock");
         thread electrocute_zombie(var_03);
 
-        if(scripts\engine\utility::is_true(var_3.dismember_crawl))
+        if(scripts\engine\utility::is_true(var_3.dismember_crawl)) {
           var_03 thread scripts\cp\utility::damage_over_time(var_03, self, 1, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
-        else
+        }
+        else {
           var_03 thread scripts\cp\utility::damage_over_time(var_03, self, 3, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
+        }
 
         wait 1.5;
       }

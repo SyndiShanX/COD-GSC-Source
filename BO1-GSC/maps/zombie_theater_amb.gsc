@@ -113,8 +113,9 @@ play_radio_egg(delay) {
   if(isDefined(delay)) {
     wait(delay);
   }
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self playSound("vox_zmb_egg_0" + level.radio_egg_counter);
   level.radio_egg_counter++;
 }
@@ -124,8 +125,9 @@ setup_radio_egg_audio() {
   array_thread(getEntArray("audio_egg_radio", "targetname"), ::radio_egg_trigger);
 }
 radio_egg_trigger() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self waittill("trigger", who);
   who thread play_radio_egg();
 }

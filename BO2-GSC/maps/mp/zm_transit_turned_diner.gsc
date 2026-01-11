@@ -14,10 +14,12 @@ main() {
   getspawnpoints();
   maps\mp\gametypes_zm\_zm_gametype::setup_standard_objects("diner");
 
-  if(getdvar(#"ui_gametype") == "zcleansed")
+  if(getdvar(#"ui_gametype") == "zcleansed") {
     maps\mp\zombies\_zm_game_module::set_current_game_module(level.game_module_cleansed_index);
-  else
+  }
+  else {
     maps\mp\zombies\_zm_game_module::set_current_game_module(level.game_module_turned_index);
+  }
 
   setdvar("aim_target_player_enabled", 1);
   diner_front_door = getEntArray("auto2278", "targetname");

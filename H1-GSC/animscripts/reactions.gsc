@@ -28,8 +28,9 @@ init_animset_reactions() {
   foreach(var_2 in var_0) {
     var_3 = length(getmovedelta(var_2, 0, 1));
 
-    if(var_3 > anim.longestrunwizby)
+    if(var_3 > anim.longestrunwizby) {
       anim.longestrunwizby = var_3;
+    }
   }
 
   anim.lastrunningreactanim = 0;
@@ -70,10 +71,12 @@ bulletwhizbyreaction() {
 
     var_3 = var_2[randomint(var_2.size)];
 
-    if(var_1)
+    if(var_1) {
       var_4 = 1 + randomfloat(0.5);
-    else
+    }
+    else {
       var_4 = 0.2 + randomfloat(0.5);
+    }
 
     self setflaggedanimknobrestart("reactanim", var_3, 1, 0.1, 1);
     animscripts\notetracks::donotetracksfortime(var_4, "reactanim");
@@ -97,10 +100,12 @@ bulletwhizbyreaction() {
 
     var_7 = anglesToForward(self.angles);
 
-    if(isDefined(self.whizbyenemy))
+    if(isDefined(self.whizbyenemy)) {
       var_8 = vectornormalize(self.whizbyenemy.origin - self.origin);
-    else
+    }
+    else {
       var_8 = var_7;
+    }
 
     if(vectordot(var_8, var_7) > 0) {
       var_9 = animscripts\utility::randomanimoftwo( % exposed_crouch_idle_twitch_v2, % exposed_crouch_idle_twitch_v3);
@@ -188,10 +193,12 @@ getnewenemyreactionanim() {
       var_5[1] = % exposed_idle_reactb;
     }
 
-    if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.reactiontargetpos) < 65536)
+    if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.reactiontargetpos) < 65536) {
       self orientmode("face enemy");
-    else
+    }
+    else {
       self orientmode("face point", self.reactiontargetpos);
+    }
 
     if(self.a.pose == "crouch") {
       var_3 = vectornormalize(self.reactiontargetpos - self.origin);
@@ -217,8 +224,9 @@ stealthnewenemyreactanim() {
     self orientmode("face enemy");
     var_0 = % exposed_idle_reactb;
 
-    if(animscripts\utility::usingsmg())
+    if(animscripts\utility::usingsmg()) {
       var_0 = % smg_exposed_idle_reactb;
+    }
 
     self setflaggedanimknobrestart("reactanim", var_0, 1, 0.2, 1);
     var_1 = getanimlength(var_0);
@@ -251,8 +259,9 @@ newenemyreactionanim() {
   self.a.movement = "stop";
   self.playing_new_enemy_reaction_anim = 1;
 
-  if(isDefined(self._stealth) && self.alertlevel != "combat")
+  if(isDefined(self._stealth) && self.alertlevel != "combat") {
     stealthnewenemyreactanim();
+  }
   else {
     var_0 = getnewenemyreactionanim();
     self clearanim( % animscript_root, 0.2);
@@ -278,8 +287,9 @@ newenemysurprisedreaction() {
   }
   self animmode("gravity");
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     newenemyreactionanim();
+  }
 }
 
 end_script() {

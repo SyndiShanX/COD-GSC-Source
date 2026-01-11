@@ -14,18 +14,22 @@ cover() {
 
   self clearanim( % root, 0.2);
 
-  if(self animscripts\utility::IsInCombat())
+  if(self animscripts\utility::IsInCombat()) {
     situation = "idle_combat";
-  else
+  }
+  else {
     situation = "idle_noncombat";
+  }
 
   idle_array = undefined;
-  if(isDefined(self.animname) && isDefined(level.scr_anim[self.animname]))
+  if(isDefined(self.animname) && isDefined(level.scr_anim[self.animname])) {
     idle_array = level.scr_anim[self.animname][situation];
+  }
 
   if(!isDefined(idle_array)) {
-    if(!isDefined(level.scr_anim["default_civilian"]))
+    if(!isDefined(level.scr_anim["default_civilian"])) {
       return;
+    }
 
     idle_array = level.scr_anim["default_civilian"][situation];
   }

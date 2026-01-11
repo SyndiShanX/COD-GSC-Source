@@ -146,10 +146,12 @@ initBotLevelVariables() {
 }
 
 initBotMapExtents() {
-  if(isDefined(level.teleportGetActiveNodesFunc))
+  if(isDefined(level.teleportGetActiveNodesFunc)) {
     all_nodes = [[level.teleportGetActiveNodesFunc]]();
-  else
+  }
+  else {
     all_nodes = GetAllNodes();
+  }
 
   level.bot_map_min_x = 0;
   level.bot_map_max_x = 0;
@@ -168,23 +170,29 @@ initBotMapExtents() {
     for(i = 1; i < all_nodes.size; i++) {
       node_origin = all_nodes[i].origin;
 
-      if(node_origin[0] < level.bot_map_min_x)
+      if(node_origin[0] < level.bot_map_min_x) {
         level.bot_map_min_x = node_origin[0];
+      }
 
-      if(node_origin[0] > level.bot_map_max_x)
+      if(node_origin[0] > level.bot_map_max_x) {
         level.bot_map_max_x = node_origin[0];
+      }
 
-      if(node_origin[1] < level.bot_map_min_y)
+      if(node_origin[1] < level.bot_map_min_y) {
         level.bot_map_min_y = node_origin[1];
+      }
 
-      if(node_origin[1] > level.bot_map_max_y)
+      if(node_origin[1] > level.bot_map_max_y) {
         level.bot_map_max_y = node_origin[1];
+      }
 
-      if(node_origin[2] < level.bot_map_min_z)
+      if(node_origin[2] < level.bot_map_min_z) {
         level.bot_map_min_z = node_origin[2];
+      }
 
-      if(node_origin[2] > level.bot_map_max_z)
+      if(node_origin[2] > level.bot_map_max_z) {
         level.bot_map_max_z = node_origin[2];
+      }
     }
   }
 
@@ -221,8 +229,9 @@ refresh_existing_bots() {
 bot_debug_drawing() {
   level endon("game_ended");
 
-  while(!bot_bots_enabled_or_added())
+  while(!bot_bots_enabled_or_added()) {
     wait(1.0);
+  }
 
   level.defense_debug_structs = [];
   for(i = 0; i < 10; i++) {
@@ -265,8 +274,9 @@ bot_debug_drawing() {
 clear_defense_draw() {
   for(i = 0; i < level.cur_num_defense_debug_structs; i++) {
     struct = level.defense_debug_structs[i];
-    if(isDefined(struct.defense_trigger) && struct.defense_trigger.classname != "trigger_radius")
+    if(isDefined(struct.defense_trigger) && struct.defense_trigger.classname != "trigger_radius") {
       BotDebugDrawTrigger(false, level.defense_debug_structs[i].defense_trigger);
+    }
   }
 
   level.cur_num_defense_debug_structs = 0;
@@ -325,15 +335,18 @@ bot_debug_draw_defense() {
     struct = level.defense_debug_structs[i];
 
     if(isDefined(struct.defense_nodes)) {
-      foreach(node in struct.defense_nodes)
+      foreach(node in struct.defense_nodes) {
       bot_draw_cylinder(node.origin, 10, 10, 0.05, undefined, struct.cylinder_color, true, 4);
+      }
     }
 
     if(isDefined(struct.defense_trigger)) {
-      if(struct.defense_trigger.classname != "trigger_radius")
+      if(struct.defense_trigger.classname != "trigger_radius") {
         BotDebugDrawTrigger(true, level.defense_debug_structs[i].defense_trigger, struct.cylinder_color, true);
-      else
+      }
+      else {
         bot_draw_cylinder(struct.defense_center, struct.defense_trigger.radius, struct.defense_trigger.height, 0.05, undefined, struct.cylinder_color, true);
+      }
     }
 
     if(isDefined(struct.defense_radius)) {
@@ -345,10 +358,12 @@ bot_debug_draw_defense() {
       lineEnd = bot.origin + (0, 0, 25);
 
       line_color = undefined;
-      if(bot.team == "allies")
+      if(bot.team == "allies") {
         line_color = (0, 0, 1);
-      else if(bot.team == "axis")
+      }
+      else if(bot.team == "axis") {
         line_color = (1, 0, 0);
+      }
 
       line(lineStart, lineEnd, line_color, 1, true);
 
@@ -394,13 +409,15 @@ bot_debug_draw_cached_entrances() {
       line(level.entrance_origin_points[i] + standing_offset, entrance_collection[j].origin + node_offset + (0, 0, node_height / 2), color_visible, 1, true);
 
       color_to_use = color_not_visible;
-      if(entrance_collection[j].crouch_visible_from[level.entrance_indices[i]])
+      if(entrance_collection[j].crouch_visible_from[level.entrance_indices[i]]) {
         color_to_use = color_visible;
+      }
       line(level.entrance_origin_points[i] + crouching_offset, entrance_collection[j].origin + node_offset + (0, 0, node_height / 2), color_to_use, 1, true);
 
       color_to_use = color_not_visible;
-      if(entrance_collection[j].prone_visible_from[level.entrance_indices[i]])
+      if(entrance_collection[j].prone_visible_from[level.entrance_indices[i]]) {
         color_to_use = color_visible;
+      }
       line(level.entrance_origin_points[i] + prone_offset, entrance_collection[j].origin + node_offset + (0, 0, node_height / 2), color_to_use, 1, true);
     }
 
@@ -461,8 +478,9 @@ bot_player_spawned() {
 bot_set_loadout_class() {
   if(!isDefined(self.bot_class)) {
     if(!bot_gametype_chooses_class()) {
-      while(!isDefined(level.bot_loadouts_initialized))
+      while(!isDefined(level.bot_loadouts_initialized)) {
         wait(0.05);
+      }
 
       debugClass = GetDvar("bot_debugClass", "");
       if(isDefined(debugClass) && debugClass != "") {
@@ -519,27 +537,33 @@ monitor_pause_spawning() {
   childthread watch_players_connecting();
 
   while(1) {
-    if(level.players_waiting_to_join.size > 0)
+    if(level.players_waiting_to_join.size > 0) {
       level.pausing_bot_connect_monitor = true;
-    else
+    }
+    else {
       level.pausing_bot_connect_monitor = false;
+    }
 
     wait(0.5);
   }
 }
 
 bot_can_join_team(team) {
-  if(matchMakingGame())
+  if(matchMakingGame()) {
     return true;
+  }
 
-  if(GetDvar("squad_vs_squad") == "1")
+  if(GetDvar("squad_vs_squad") == "1") {
     return true;
+  }
 
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return true;
+  }
 
-  if(maps\mp\gametypes\_teams::getJoinTeamPermissions(team))
+  if(maps\mp\gametypes\_teams::getJoinTeamPermissions(team)) {
     return true;
+  }
 
   return false;
 }
@@ -556,14 +580,17 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(0.5);
   bot_connect_monitor_update_time = 1.5;
 
-  if(!isDefined(level.bot_cm_spawned_bots))
+  if(!isDefined(level.bot_cm_spawned_bots)) {
     level.bot_cm_spawned_bots = false;
+  }
 
-  if(!isDefined(level.bot_cm_waited_players_time))
+  if(!isDefined(level.bot_cm_waited_players_time)) {
     level.bot_cm_waited_players_time = 0;
+  }
 
-  if(!isDefined(level.bot_cm_human_picked))
+  if(!isDefined(level.bot_cm_human_picked)) {
     level.bot_cm_human_picked = false;
+  }
 
   if((GetDvar("squad_vs_squad") == "1")) {
     while(!(isDefined(level.squad_vs_squad_allies_client) && isDefined(level.squad_vs_squad_axis_client))) {
@@ -637,10 +664,12 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
     ally_team_size = bot_get_team_limit();
     enemy_team_size = bot_get_team_limit();
     if(ally_team_size + enemy_team_size < bot_get_client_limit()) {
-      if(ally_team_size < max_ally_bots_absolute)
+      if(ally_team_size < max_ally_bots_absolute) {
         ally_team_size++;
-      else if(enemy_team_size < max_enemy_bots_absolute)
+      }
+      else if(enemy_team_size < max_enemy_bots_absolute) {
         enemy_team_size++;
+      }
     }
 
     cur_num_ally_humans = cat_array_get(clientCounts, "humans_" + team_ally);
@@ -659,10 +688,12 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
       } else if(!ally_team_has_room_for_another_spectator && enemy_team_has_room_for_another_spectator) {
         cur_num_enemy_spectators++;
       } else if(ally_team_has_room_for_another_spectator && enemy_team_has_room_for_another_spectator) {
-        if((cur_num_spectators % 2) == 1)
+        if((cur_num_spectators % 2) == 1) {
           cur_num_ally_spectators++;
-        else
+        }
+        else {
           cur_num_enemy_spectators++;
+        }
       }
 
       cur_num_spectators--;
@@ -671,19 +702,22 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
     cur_num_ally_bots = cat_array_get(clientCounts, "bots_" + team_ally);
     cur_num_enemy_bots = cat_array_get(clientCounts, "bots_" + team_enemy);
     cur_num_bots = cur_num_ally_bots + cur_num_enemy_bots;
-    if(cur_num_bots > 0)
+    if(cur_num_bots > 0) {
       level.bot_cm_spawned_bots = true;
+    }
 
     waitingForHumanToChoose = false;
 
     if(!level.bot_cm_human_picked) {
       waitingForHumanToChoose = !bot_get_human_picked_team();
 
-      if(GetDvarInt("bot_autoconnectdefault") && waitingForHumanToChoose)
+      if(GetDvarInt("bot_autoconnectdefault") && waitingForHumanToChoose) {
         waitingForHumanToChoose = false;
+      }
 
-      if(!waitingForHumanToChoose)
+      if(!waitingForHumanToChoose) {
         level.bot_cm_human_picked = true;
+      }
     }
 
     if(waitingForHumanToChoose) {
@@ -706,10 +740,12 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
     slotLimit = (max_ally_bots_absolute + max_enemy_bots_absolute + numHumans);
     lastSlotCount = [-1, -1];
     while((slotCount < bot_get_client_limit()) && (slotCount < slotLimit)) {
-      if(fillTeam && (ally_bot_slots < max_ally_bots_absolute) && bot_can_join_team(team_ally))
+      if(fillTeam && (ally_bot_slots < max_ally_bots_absolute) && bot_can_join_team(team_ally)) {
         ally_bot_slots++;
-      else if(!fillTeam && (enemy_bot_slots < max_enemy_bots_absolute) && bot_can_join_team(team_enemy))
+      }
+      else if(!fillTeam && (enemy_bot_slots < max_enemy_bots_absolute) && bot_can_join_team(team_enemy)) {
         enemy_bot_slots++;
+      }
       slotCount = (ally_bot_slots + enemy_bot_slots + numHumans);
 
       if(lastSlotCount[fillTeam] == slotCount) {
@@ -721,10 +757,12 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
     }
 
     if((max_ally_bots_absolute == max_enemy_bots_absolute) && !ignore_team_balance && (cur_num_ally_spectators == 1) && (cur_num_enemy_spectators == 0) && (enemy_bot_slots > 0)) {
-      if(!isDefined(level.bot_prematchDoneTime) && gameFlag("prematch_done"))
+      if(!isDefined(level.bot_prematchDoneTime) && gameFlag("prematch_done")) {
         level.bot_prematchDoneTime = GetTime();
-      if(waitingForHumanToChoose && (!isDefined(level.bot_prematchDoneTime) || ((GetTime() - level.bot_prematchDoneTime) < 10000)))
+      }
+      if(waitingForHumanToChoose && (!isDefined(level.bot_prematchDoneTime) || ((GetTime() - level.bot_prematchDoneTime) < 10000))) {
         enemy_bot_slots--;
+      }
     }
 
     ally_bots_wanted = ally_bot_slots - cur_num_ally_bots;
@@ -753,31 +791,40 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
     } else if(!matchMakingGame() && (ally_bots_wanted * enemy_bots_wanted < 0 && gameFlag("prematch_done") && !isDefined(level.bots_disable_team_switching))) {
       difference = INT(min(abs(ally_bots_wanted), abs(enemy_bots_wanted)));
 
-      if(ally_bots_wanted > 0)
+      if(ally_bots_wanted > 0) {
         move_bots_from_team_to_team(difference, team_enemy, team_ally, difficultyAlly);
-      else if(enemy_bots_wanted > 0)
+      }
+      else if(enemy_bots_wanted > 0) {
         move_bots_from_team_to_team(difference, team_ally, team_enemy, difficultyEnemy);
+      }
 
       need_to_spawn_or_drop = false;
     }
 
     if(need_to_spawn_or_drop) {
-      if(enemy_bots_wanted < 0)
+      if(enemy_bots_wanted < 0) {
         drop_bots(enemy_bots_wanted * -1, team_enemy);
-      if(ally_bots_wanted < 0)
+      }
+      if(ally_bots_wanted < 0) {
         drop_bots(ally_bots_wanted * -1, team_ally);
+      }
 
-      if(enemy_bots_wanted > 0)
+      if(enemy_bots_wanted > 0) {
         level thread spawn_bots(enemy_bots_wanted, team_enemy, undefined, undefined, "spawned_enemies", difficultyEnemy);
-      if(ally_bots_wanted > 0)
+      }
+      if(ally_bots_wanted > 0) {
         level thread spawn_bots(ally_bots_wanted, team_ally, undefined, undefined, "spawned_allies", difficultyAlly);
+      }
 
-      if(enemy_bots_wanted > 0 && ally_bots_wanted > 0)
+      if(enemy_bots_wanted > 0 && ally_bots_wanted > 0) {
         level waittill_multiple("spawned_enemies", "spawned_allies");
-      else if(enemy_bots_wanted > 0)
+      }
+      else if(enemy_bots_wanted > 0) {
         level waittill("spawned_enemies");
-      else if(ally_bots_wanted > 0)
+      }
+      else if(ally_bots_wanted > 0) {
         level waittill("spawned_allies");
+      }
     }
 
     if(difficultyEnemy != difficultyAlly) {
@@ -790,19 +837,22 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
 }
 
 bot_get_player_team() {
-  if(isDefined(self.team))
+  if(isDefined(self.team)) {
     return self.team;
+  }
 
-  if(isDefined(self.pers["team"]))
+  if(isDefined(self.pers["team"])) {
     return self.pers["team"];
+  }
 
   return undefined;
 }
 
 bot_get_host_team() {
   foreach(player in level.players) {
-    if(!isAI(player) && player isHost())
+    if(!isAI(player) && player isHost()) {
       return player bot_get_player_team();
+    }
   }
 
   return "spectator";
@@ -815,14 +865,16 @@ bot_get_human_picked_team() {
 
   foreach(player in level.players) {
     if(!isAI(player)) {
-      if(player isHost())
+      if(player isHost()) {
         haveHost = true;
+      }
 
       if(player_picked_team(player)) {
         humanChose = true;
 
-        if(player IsHost())
+        if(player IsHost()) {
           hostChose = true;
+        }
       }
     }
   }
@@ -831,14 +883,17 @@ bot_get_human_picked_team() {
 }
 
 player_picked_team(player) {
-  if(isDefined(player.team) && player.team != "spectator")
+  if(isDefined(player.team) && player.team != "spectator") {
     return true;
+  }
 
-  if(isDefined(player.spectating_actively) && player.spectating_actively)
+  if(isDefined(player.spectating_actively) && player.spectating_actively) {
     return true;
+  }
 
-  if(player IsMLGSpectator() && isDefined(player.team) && player.team == "spectator")
+  if(player IsMLGSpectator() && isDefined(player.team) && player.team == "spectator") {
     return true;
+  }
 
   return false;
 }
@@ -897,8 +952,9 @@ move_bots_from_team_to_team(count, teamFrom, teamTo, difficulty) {
     }
     if(isDefined(player.connected) && player.connected && IsBot(player) && player.team == teamFrom) {
       player.bot_team = teamTo;
-      if(isDefined(difficulty))
+      if(isDefined(difficulty)) {
         player bot_set_difficulty(difficulty);
+      }
 
       player notify("luinotifyserver", "team_select", bot_lui_convert_team_to_int(teamTo));
       wait(0.05);
@@ -920,8 +976,9 @@ bots_update_difficulty(team, difficulty) {
       continue;
     }
     if(isDefined(player.connected) && player.connected && IsBot(player) && player.team == team) {
-      if(difficulty != (player BotGetDifficulty()))
+      if(difficulty != (player BotGetDifficulty())) {
         player bot_set_difficulty(difficulty);
+      }
     }
   }
 }
@@ -939,8 +996,9 @@ drop_bots(count, team) {
   bots = [];
 
   foreach(player in level.players) {
-    if(isDefined(player.connected) && player.connected && IsBot(player) && (!isDefined(team) || (isDefined(player.team) && player.team == team)))
+    if(isDefined(player.connected) && player.connected && IsBot(player) && (!isDefined(team) || (isDefined(player.team) && player.team == team))) {
       bots[bots.size] = player;
+    }
   }
 
   for(i = bots.size - 1; i >= 0; i--) {
@@ -966,14 +1024,18 @@ drop_bots(count, team) {
 }
 
 bot_lui_convert_team_to_int(team_name) {
-  if(team_name == "axis")
+  if(team_name == "axis") {
     return 0;
-  else if(team_name == "allies")
+  }
+  else if(team_name == "allies") {
     return 1;
-  else if(team_name == "autoassign" || team_name == "random")
+  }
+  else if(team_name == "autoassign" || team_name == "random") {
     return 2;
-  else
+  }
+  else {
     return 3;
+  }
 }
 
 spawn_bot_latent(team, botCallback, connecting) {
@@ -1007,8 +1069,9 @@ spawn_bot_latent(team, botCallback, connecting) {
   self.equipment_enabled = true;
   self.bot_team = team;
 
-  if(isDefined(connecting.difficulty))
+  if(isDefined(connecting.difficulty)) {
     self bot_set_difficulty(connecting.difficulty);
+  }
 
   if(isDefined(botCallback)) {
     self[[botCallback]]();
@@ -1183,8 +1246,9 @@ spawn_bots(num_bots, team, botCallback, haltWhenFull, notifyWhenDone, difficulty
 
     if(!isDefined(bot)) {
       if(isDefined(haltWhenFull) && haltWhenFull) {
-        if(isDefined(notifyWhenDone))
+        if(isDefined(notifyWhenDone)) {
           self notify(notifyWhenDone);
+        }
 
         return;
       }
@@ -1213,23 +1277,27 @@ spawn_bots(num_bots, team, botCallback, haltWhenFull, notifyWhenDone, difficulty
     connectedComplete = 0;
 
     foreach(connecting in connectingArray) {
-      if(connecting.ready || connecting.abort)
+      if(connecting.ready || connecting.abort) {
         connectedComplete++;
+      }
     }
 
     wait 0.05;
   }
 
-  if(isDefined(notifyWhenDone))
+  if(isDefined(notifyWhenDone)) {
     self notify(notifyWhenDone);
+  }
 }
 
 bot_gametype_chooses_team() {
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return true;
+  }
 
-  if(isDefined(level.bots_gametype_handles_team_choice) && level.bots_gametype_handles_team_choice)
+  if(isDefined(level.bots_gametype_handles_team_choice) && level.bots_gametype_handles_team_choice) {
     return true;
+  }
 
   return false;
 }
@@ -1249,12 +1317,14 @@ bot_think() {
 
   level.hasbots = true;
 
-  if(bot_gametype_chooses_team())
+  if(bot_gametype_chooses_team()) {
     self.bot_team = self.pers["team"];
+  }
 
   team = self.bot_team;
-  if(!isDefined(team))
+  if(!isDefined(team)) {
     team = self.pers["team"];
+  }
 
   maps\mp\bots\_bots_ks::bot_killstreak_setup();
 
@@ -1282,8 +1352,9 @@ bot_think() {
     self bot_set_difficulty(self BotGetDifficulty());
 
     allowAdvPersonality = self BotGetDifficultySetting("advancedPersonality");
-    if(firstSpawn && isDefined(allowAdvPersonality) && allowAdvPersonality != 0)
+    if(firstSpawn && isDefined(allowAdvPersonality) && allowAdvPersonality != 0) {
       self bot_balance_personality();
+    }
 
     self bot_set_personality_from_dev_dvar();
 
@@ -1291,12 +1362,15 @@ bot_think() {
 
     if(firstSpawn) {
       self bot_set_loadout_class();
-      if(!bot_gametype_chooses_class())
+      if(!bot_gametype_chooses_class()) {
         self notify("luinotifyserver", "class_select", self.bot_class);
-      if(self.health == 0)
+      }
+      if(self.health == 0) {
         self waittill("spawned_player");
-      if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["know_enemies_on_start"]))
+      }
+      if(isDefined(level.bot_funcs) && isDefined(level.bot_funcs["know_enemies_on_start"])) {
         self thread[[level.bot_funcs["know_enemies_on_start"]]]();
+      }
       firstSpawn = false;
     }
 
@@ -1315,21 +1389,24 @@ bot_think() {
 bot_set_personality_from_dev_dvar() {
   debug_personality = GetDvar("bot_debugPersonality", "default");
 
-  if(debug_personality != "default")
+  if(debug_personality != "default") {
     self bot_set_personality(debug_personality);
+  }
 }
 
 respawn_watcher() {
   self endon("started_spawnPlayer");
 
-  while(!self.waitingToSpawn)
+  while(!self.waitingToSpawn) {
     wait(0.05);
+  }
 
   if(self maps\mp\gametypes\_playerlogic::needsButtonToRespawn()) {
     while(self.waitingToSpawn) {
       if(self.sessionstate == "spectator") {
-        if(GetDvarInt("numlives") == 0 || self.pers["lives"] > 0)
+        if(GetDvarInt("numlives") == 0 || self.pers["lives"] > 0) {
           self BotPressButton("use", 0.5);
+        }
       }
 
       wait(1.0);
@@ -1339,8 +1416,9 @@ respawn_watcher() {
 
 bot_get_rank_xp() {
   if(self bot_israndom() == false) {
-    if(!isDefined(self.pers["rankxp"]))
+    if(!isDefined(self.pers["rankxp"])) {
       self.pers["rankxp"] = 0;
+    }
 
     return self.pers["rankxp"];
   }
@@ -1348,8 +1426,9 @@ bot_get_rank_xp() {
   difficulty = self BotGetDifficulty();
   persName = "bot_rank_" + difficulty;
 
-  if(isDefined(self.pers[persName]) && self.pers[persName] > 0)
+  if(isDefined(self.pers[persName]) && self.pers[persName] > 0) {
     return self.pers[persName];
+  }
 
   desiredRanks = bot_random_ranks_for_difficulty(difficulty);
 
@@ -1374,8 +1453,9 @@ bot_3d_sighting_model_thread(associatedEnt) {
   level endon("game_ended");
 
   while(1) {
-    if(IsAlive(self) && !(self BotCanSeeEntity(associatedEnt)) && within_fov(self.origin, self.angles, associatedEnt.origin, self BotGetFovDot()))
+    if(IsAlive(self) && !(self BotCanSeeEntity(associatedEnt)) && within_fov(self.origin, self.angles, associatedEnt.origin, self BotGetFovDot())) {
       self BotGetImperfectEnemyInfo(associatedEnt, associatedEnt.origin);
+    }
 
     wait 0.1;
   }
@@ -1386,8 +1466,9 @@ bot_random_ranks_for_difficulty(difficulty) {
   result["rank"] = 0;
   result["prestige"] = 0;
 
-  if(difficulty == "default")
+  if(difficulty == "default") {
     return result;
+  }
 
   if(!isDefined(level.bot_rnd_rank)) {
     level.bot_rnd_rank = [];
@@ -1413,18 +1494,21 @@ bot_random_ranks_for_difficulty(difficulty) {
     level.bot_rnd_prestige["veteran"][1] = 9;
   }
 
-  if(isDefined(level.bot_rnd_rank[difficulty][0]) && isDefined(level.bot_rnd_rank[difficulty][1]))
+  if(isDefined(level.bot_rnd_rank[difficulty][0]) && isDefined(level.bot_rnd_rank[difficulty][1])) {
     result["rank"] = RandomIntRange(level.bot_rnd_rank[difficulty][0], level.bot_rnd_rank[difficulty][1] + 1);
+  }
 
-  if(isDefined(level.bot_rnd_prestige[difficulty][0]) && isDefined(level.bot_rnd_prestige[difficulty][1]))
+  if(isDefined(level.bot_rnd_prestige[difficulty][0]) && isDefined(level.bot_rnd_prestige[difficulty][1])) {
     result["prestige"] = RandomIntRange(level.bot_rnd_prestige[difficulty][0], level.bot_rnd_prestige[difficulty][1] + 1);
+  }
 
   return result;
 }
 
 crate_can_use_always(crate) {
-  if(IsAgent(self) && !isDefined(crate.boxType))
+  if(IsAgent(self) && !isDefined(crate.boxType)) {
     return false;
+  }
 
   return true;
 }
@@ -1450,8 +1534,9 @@ get_all_humans() {
   humans = [];
 
   foreach(player in level.players) {
-    if(player.connected && !IsAI(player))
+    if(player.connected && !IsAI(player)) {
       humans = array_add(humans, player);
+    }
   }
 
   return humans;
@@ -1461,8 +1546,9 @@ spectators_exist() {
   humans = get_all_humans();
 
   foreach(player in humans) {
-    if(player.team == "spectator")
+    if(player.team == "spectator") {
       return true;
+    }
   }
 
   return false;
@@ -1490,15 +1576,18 @@ bot_damage_callback(eAttacker, iDamage, sMeansOfDeath, sWeapon, eInflictor, sHit
 
   if(isDefined(eInflictor)) {
     if(level.teamBased) {
-      if(isDefined(eInflictor.team) && eInflictor.team == self.team)
+      if(isDefined(eInflictor.team) && eInflictor.team == self.team) {
         return;
-      else if(isDefined(eAttacker) && isDefined(eAttacker.team) && eAttacker.team == self.team)
+      }
+      else if(isDefined(eAttacker) && isDefined(eAttacker.team) && eAttacker.team == self.team) {
         return;
+      }
     }
 
     attacker_ent = bot_get_known_attacker(eAttacker, eInflictor);
-    if(isDefined(attacker_ent))
+    if(isDefined(attacker_ent)) {
       self BotSetAttacker(attacker_ent);
+    }
   }
 }
 
@@ -1509,8 +1598,9 @@ on_bot_killed(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitL
   attacker_ent = bot_get_known_attacker(attacker, eInflictor);
   if(!bot_is_fireteam_mode() && GetDvar("squad_match") != "1" && GetDvar("squad_vs_squad") != "1" && isDefined(attacker_ent) && attacker_ent.classname == "script_vehicle" && isDefined(attacker_ent.helitype)) {
     respawn_chance = self BotGetDifficultySetting("launcherRespawnChance");
-    if(RandomFloat(1.0) < respawn_chance)
+    if(RandomFloat(1.0) < respawn_chance) {
       self.respawn_with_launcher = true;
+    }
   }
 }
 
@@ -1521,8 +1611,9 @@ bot_should_do_killcam() {
     }
   }
 
-  if(bot_is_fireteam_mode())
+  if(bot_is_fireteam_mode()) {
     return false;
+  }
 
   skip_killcam_chance = 0.0;
   bot_difficulty = self BotGetDifficulty();
@@ -1541,8 +1632,9 @@ bot_should_do_killcam() {
 }
 
 bot_should_pickup_weapons() {
-  if(self isJuggernaut())
+  if(self isJuggernaut()) {
     return false;
+  }
 
   return true;
 }
@@ -1580,8 +1672,9 @@ bot_think_debug() {
         self BotSetScriptGoal(level.bot_debug_force_path_location, 0, "tactical");
       } else {
         goal = self BotGetScriptGoal();
-        if(!bot_vectors_are_equal(goal, level.bot_debug_force_path_location))
+        if(!bot_vectors_are_equal(goal, level.bot_debug_force_path_location)) {
           self BotSetScriptGoal(level.bot_debug_force_path_location, 0, "tactical");
+        }
       }
     }
 
@@ -1592,8 +1685,9 @@ bot_think_debug() {
 bot_think_watch_enemy(bEndOnDeath) {
   endMessage = "spawned_player";
 
-  if(isDefined(bEndOnDeath) && bEndOnDeath)
+  if(isDefined(bEndOnDeath) && bEndOnDeath) {
     endMessage = "death";
+  }
 
   self notify("bot_think_watch_enemy");
   self endon("bot_think_watch_enemy");
@@ -1688,12 +1782,14 @@ bot_seek_dropped_weapon(dropped_weapon) {
       needs_to_pickup_weapon = true;
       heldweapons = self GetWeaponsListPrimaries();
       foreach(held_weapon in heldweapons) {
-        if(dropped_weapon.model == GetWeaponModel(held_weapon))
+        if(dropped_weapon.model == GetWeaponModel(held_weapon)) {
           needs_to_pickup_weapon = false;
+        }
       }
 
-      if(needs_to_pickup_weapon)
+      if(needs_to_pickup_weapon) {
         action_thread = ::bot_pickup_weapon;
+      }
     }
 
     extra_params = spawnStruct();
@@ -1711,12 +1807,14 @@ bot_pickup_weapon(goal) {
 }
 
 should_stop_seeking_weapon(goal) {
-  if(!isDefined(goal.object))
+  if(!isDefined(goal.object)) {
     return true;
+  }
 
   if(goal.object.targetname == "dropped_weapon") {
-    if(self bot_get_total_gun_ammo() > 0)
+    if(self bot_get_total_gun_ammo() > 0) {
       return true;
+    }
   } else if(goal.object.targetname == "dropped_knife") {
     if(self bot_in_combat()) {
       self.going_for_knife = undefined;
@@ -1761,10 +1859,12 @@ bot_think_level_actions(override_radius) {
       }
       level_triggers_sorted = get_array_of_closest(self.origin, level.level_specific_bot_targets);
       max_dist = 256;
-      if(isDefined(override_radius))
+      if(isDefined(override_radius)) {
         max_dist = override_radius;
-      else if(self BotGetScriptGoalType() == "hunt" && self BotPursuingScriptGoal())
+      }
+      else if(self BotGetScriptGoalType() == "hunt" && self BotPursuingScriptGoal()) {
         max_dist = 512;
+      }
 
       if(DistanceSquared(self.origin, level_triggers_sorted[0].origin) > max_dist * max_dist) {
         continue;
@@ -1782,8 +1882,9 @@ bot_think_level_actions(override_radius) {
         height_diff_to_node_1 = target_picked.origin[2] - (target_picked.bot_targets[1].origin[2] + 55);
 
         if((height_diff_to_node_0 > 55 && height_diff_to_node_1 > 55)) {
-          if(array_contains(target_picked.high_priority_for, self))
+          if(array_contains(target_picked.high_priority_for, self)) {
             target_picked.high_priority_for = array_remove(target_picked.high_priority_for, self);
+          }
           continue;
         }
       }
@@ -1796,8 +1897,9 @@ bot_think_level_actions(override_radius) {
         dist_to_node_0_sq = LengthSquared(vec_to_node_0);
         dist_to_node_1_sq = LengthSquared(vec_to_node_1);
         if((dist_to_node_0_sq > 150 * 150 && dist_to_node_1_sq > 150 * 150)) {
-          if(array_contains(target_picked.high_priority_for, self))
+          if(array_contains(target_picked.high_priority_for, self)) {
             target_picked.high_priority_for = array_remove(target_picked.high_priority_for, self);
+          }
           continue;
         }
       }
@@ -1807,10 +1909,12 @@ bot_think_level_actions(override_radius) {
     extra_params.object = target_picked;
 
     if(target_picked.bot_interaction_type == "damage") {
-      if(should_melee_target)
+      if(should_melee_target) {
         extra_params.should_abort = ::level_trigger_should_abort_melee;
-      else
+      }
+      else {
         extra_params.should_abort = ::level_trigger_should_abort_ranged;
+      }
     }
 
     if(target_picked.bot_interaction_type == "use") {
@@ -1842,14 +1946,16 @@ bot_think_level_actions(override_radius) {
       }
       if(path_dist_0 > 0) {
         Assert(isDefined(target_picked.bot_targets[0]));
-        if(path_dist_1 < 0 || path_dist_0 <= path_dist_1)
+        if(path_dist_1 < 0 || path_dist_0 <= path_dist_1) {
           node_target = target_picked.bot_targets[0];
+        }
       }
 
       if(path_dist_1 > 0) {
         Assert(isDefined(target_picked.bot_targets[1]));
-        if(path_dist_0 < 0 || path_dist_1 <= path_dist_0)
+        if(path_dist_0 < 0 || path_dist_1 <= path_dist_0) {
           node_target = target_picked.bot_targets[1];
+        }
       }
 
       Assert(isDefined(node_target));
@@ -1857,8 +1963,9 @@ bot_think_level_actions(override_radius) {
       if(!isDefined(node_target)) {
         continue;
       }
-      if(!should_melee_target)
+      if(!should_melee_target) {
         self childthread monitor_node_visible(node_target);
+      }
       self bot_new_tactical_goal("map_interactive_object", node_target.origin, 10, extra_params);
     }
   }
@@ -1892,8 +1999,9 @@ monitor_node_visible(node_target) {
     nearest_node_self = self GetNearestNode();
     if(isDefined(nearest_node_self)) {
       if(NodesVisible(nearest_node_self, node_target)) {
-        if(SightTracePassed(self.origin + (0, 0, 55), node_target.origin + (0, 0, 55), false, self))
+        if(SightTracePassed(self.origin + (0, 0, 55), node_target.origin + (0, 0, 55), false, self)) {
           self notify("goal");
+        }
       }
     }
 
@@ -1907,8 +2015,9 @@ attack_damage_trigger(goal) {
   Assert(goal.object.bot_interaction_type == "damage");
 
   if(goal.object.origin[2] - self getEye()[2] > 55) {
-    if(Distance2DSquared(goal.object.origin, self.origin) < 15 * 15)
+    if(Distance2DSquared(goal.object.origin, self.origin) < 15 * 15) {
       return;
+    }
   }
 
   self BotSetFlag("disable_movement", true);
@@ -1944,8 +2053,9 @@ melee_damage_trigger(goal) {
 
 look_at_damage_trigger(damage_trigger, time) {
   look_origin = damage_trigger.origin;
-  if(Distance2DSquared(self.origin, look_origin) < 10 * 10)
+  if(Distance2DSquared(self.origin, look_origin) < 10 * 10) {
     look_origin = (look_origin[0], look_origin[1], self getEye()[2]);
+  }
   self BotLookAtPoint(look_origin, time, "script_forced");
 }
 
@@ -1964,19 +2074,22 @@ use_use_trigger(goal) {
 
   if(IsAgent(self)) {
     self _disableUsability();
-    if(isDefined(goal.object))
+    if(isDefined(goal.object)) {
       goal.object DisablePlayerUse(self);
+    }
   }
 }
 
 level_trigger_should_abort_melee(goal) {
   Assert(!isDefined(goal.object) || goal.object.bot_interaction_type == "damage");
 
-  if(level_trigger_should_abort(goal))
+  if(level_trigger_should_abort(goal)) {
     return true;
+  }
 
-  if(!self bot_should_melee_level_damage_target(goal.object))
+  if(!self bot_should_melee_level_damage_target(goal.object)) {
     return true;
+  }
 
   return false;
 }
@@ -1984,48 +2097,58 @@ level_trigger_should_abort_melee(goal) {
 level_trigger_should_abort_ranged(goal) {
   Assert(!isDefined(goal.object) || goal.object.bot_interaction_type == "damage");
 
-  if(level_trigger_should_abort(goal))
+  if(level_trigger_should_abort(goal)) {
     return true;
+  }
 
-  if(self bot_should_melee_level_damage_target(goal.object))
+  if(self bot_should_melee_level_damage_target(goal.object)) {
     return true;
+  }
 
   return false;
 }
 
 level_trigger_should_abort(goal) {
-  if(!isDefined(goal.object))
+  if(!isDefined(goal.object)) {
     return true;
+  }
 
-  if(isDefined(goal.object.already_used))
+  if(isDefined(goal.object.already_used)) {
     return true;
+  }
 
-  if(self bot_in_combat())
+  if(self bot_in_combat()) {
     return true;
+  }
 
   return false;
 }
 
 crate_in_range(crate) {
   if(!isDefined(crate.owner) || (crate.owner != self)) {
-    if(DistanceSquared(self.origin, crate.origin) > 2048 * 2048)
+    if(DistanceSquared(self.origin, crate.origin) > 2048 * 2048) {
       return false;
+    }
   }
   return true;
 }
 
 bot_crate_valid(crate) {
-  if(!isDefined(crate))
+  if(!isDefined(crate)) {
     return false;
+  }
 
-  if(!(self[[level.bot_funcs["crate_can_use"]]](crate)))
+  if(!(self[[level.bot_funcs["crate_can_use"]]](crate))) {
     return false;
+  }
 
-  if(!crate_landed_and_on_path_grid(crate))
+  if(!crate_landed_and_on_path_grid(crate)) {
     return false;
+  }
 
-  if(level.teamBased && isDefined(crate.bomb) && isDefined(crate.team) && (crate.team == self.team))
+  if(level.teamBased && isDefined(crate.bomb) && isDefined(crate.team) && (crate.team == self.team)) {
     return false;
+  }
 
   if(!(self[[level.bot_funcs["crate_in_range"]]](crate))) {
     return false;
@@ -2037,16 +2160,18 @@ bot_crate_valid(crate) {
       ]())
       return false;
 
-    if(isDefined(crate.disabled_use_for) && isDefined(crate.disabled_use_for[self GetEntityNumber()]) && crate.disabled_use_for[self GetEntityNumber()])
+    if(isDefined(crate.disabled_use_for) && isDefined(crate.disabled_use_for[self GetEntityNumber()]) && crate.disabled_use_for[self GetEntityNumber()]) {
       return false;
+    }
     /#				
     if(!isDefined(level.bot_can_use_box_by_type[crate.boxType])) {
       AssertMsg("Crate type <" + crate.boxType + "> is not supported for bots");
       return false;
     }
 
-    if(!self[[level.bot_can_use_box_by_type[crate.boxType]]](crate))
+    if(!self[[level.bot_can_use_box_by_type[crate.boxType]]](crate)) {
       return false;
+    }
   }
 
   return isDefined(crate);
@@ -2054,12 +2179,14 @@ bot_crate_valid(crate) {
 
 crate_landed_and_on_path_grid(crate) {
   Assert(isDefined(crate));
-  if(!crate_has_landed(crate))
+  if(!crate_has_landed(crate)) {
     return false;
+  }
 
   Assert(isDefined(crate));
-  if(!crate_is_on_path_grid(crate))
+  if(!crate_is_on_path_grid(crate)) {
     return false;
+  }
 
   return isDefined(crate);
 }
@@ -2075,8 +2202,9 @@ crate_has_landed(crate) {
 crate_is_on_path_grid(crate) {
   Assert(crate_has_landed(crate));
 
-  if(!isDefined(crate.on_path_grid))
+  if(!isDefined(crate.on_path_grid)) {
     crate_calculate_on_path_grid(crate);
+  }
 
   return (isDefined(crate) && crate.on_path_grid);
 }
@@ -2127,8 +2255,9 @@ crate_calculate_on_path_grid(crate) {
 
     nearest_point = undefined;
     if(isDefined(crate.boxtype) && crate.boxtype == "scavenger_bag") {
-      if(bot_point_is_on_pathgrid(crate.origin))
+      if(bot_point_is_on_pathgrid(crate.origin)) {
         nearest_point = crate.origin;
+      }
     } else {
       nearest_point = BotGetClosestNavigablePoint(crate.origin, player_use_radius);
     }
@@ -2141,25 +2270,29 @@ crate_calculate_on_path_grid(crate) {
   }
 
   if(isDefined(crate.forceDisconnectUntil)) {
-    if(crate.forceDisconnectUntil == time_to_disconnect_until)
+    if(crate.forceDisconnectUntil == time_to_disconnect_until) {
       crate.forceDisconnectUntil = prev_forceDisconnectUntil;
+    }
   }
 }
 
 crate_get_nearest_valid_nodes(crate) {
   nodes = GetNodesInRadiusSorted(crate.origin, 256, 0);
-  for(i = nodes.size; i > 0; i--)
+  for(i = nodes.size; i > 0; i--) {
     nodes[i] = nodes[i - 1];
+  }
   nodes[0] = GetClosestNodeInSight(crate.origin);
 
   all_nodes = undefined;
-  if(isDefined(crate.forceDisconnectUntil))
+  if(isDefined(crate.forceDisconnectUntil)) {
     all_nodes = GetAllNodes();
+  }
 
   nodes_to_return = [];
   nodes_wanted = 1;
-  if(!isDefined(crate.boxType))
+  if(!isDefined(crate.boxType)) {
     nodes_wanted = 2;
+  }
 
   for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
@@ -2170,10 +2303,12 @@ crate_get_nearest_valid_nodes(crate) {
       continue;
     }
     if(!node_within_use_radius_of_crate(node, crate)) {
-      if(i == 0)
+      if(i == 0) {
         continue;
-      else
+      }
+      else {
         break;
+      }
     }
 
     wait(0.05);
@@ -2189,10 +2324,12 @@ crate_get_nearest_valid_nodes(crate) {
 
       if(!isDefined(crate.forceDisconnectUntil)) {
         nodes_to_return[nodes_to_return.size] = node;
-        if(nodes_to_return.size == nodes_wanted)
+        if(nodes_to_return.size == nodes_wanted) {
           return nodes_to_return;
-        else
+        }
+        else {
           continue;
+        }
       }
 
       other_node_to_test = undefined;
@@ -2200,18 +2337,21 @@ crate_get_nearest_valid_nodes(crate) {
       while(!isDefined(other_node_to_test) && num_tested < 100) {
         num_tested++;
         node_trying = Random(all_nodes);
-        if(DistanceSquared(node.origin, node_trying.origin) > 500 * 500)
+        if(DistanceSquared(node.origin, node_trying.origin) > 500 * 500) {
           other_node_to_test = node_trying;
+        }
       }
 
       if(isDefined(other_node_to_test)) {
         path = bot_queued_process("GetNodesOnPathCrate", ::func_get_nodes_on_path, node.origin, other_node_to_test.origin);
         if(isDefined(path)) {
           nodes_to_return[nodes_to_return.size] = node;
-          if(nodes_to_return.size == nodes_wanted)
+          if(nodes_to_return.size == nodes_wanted) {
             return nodes_to_return;
-          else
+          }
+          else {
             continue;
+          }
         }
       }
     }
@@ -2221,8 +2361,9 @@ crate_get_nearest_valid_nodes(crate) {
 }
 
 crate_get_bot_target(crate) {
-  if(isDefined(crate.nearest_points))
+  if(isDefined(crate.nearest_points)) {
     return crate.nearest_points[0];
+  }
 
   if(isDefined(crate.nearest_nodes)) {
     if(crate.nearest_nodes.size > 1) {
@@ -2240,10 +2381,12 @@ crate_get_bot_target_check_distance(crate, use_radius) {
 
   testRadiusSq = use_radius * 0.9;
   testRadiusSq *= testRadiusSq;
-  if(DistanceSquared(crate.origin, crateStandPos) <= testRadiusSq)
+  if(DistanceSquared(crate.origin, crateStandPos) <= testRadiusSq) {
     return crateStandPos;
-  else
+  }
+  else {
     return undefined;
+  }
 }
 
 bot_think_crate() {
@@ -2260,16 +2403,19 @@ bot_think_crate() {
     wait_time = RandomFloatRange(2, 4);
     self waittill_notify_or_timeout("new_crate_to_take", wait_time);
 
-    if(isDefined(self.boxes) && self.boxes.size == 0)
+    if(isDefined(self.boxes) && self.boxes.size == 0) {
       self.boxes = undefined;
+    }
 
     all_crates = level.carePackages;
 
-    if(!(self bot_in_combat()) && isDefined(self.boxes))
+    if(!(self bot_in_combat()) && isDefined(self.boxes)) {
       all_crates = array_combine(all_crates, self.boxes);
+    }
 
-    if(isDefined(level.bot_scavenger_bags) && self _hasPerk("specialty_scavenger"))
+    if(isDefined(level.bot_scavenger_bags) && self _hasPerk("specialty_scavenger")) {
       all_crates = array_combine(all_crates, level.bot_scavenger_bags);
+    }
 
     all_crates = array_removeUndefined(all_crates);
     if(all_crates.size == 0) {
@@ -2281,8 +2427,9 @@ bot_think_crate() {
 
     all_valid_crates = [];
     foreach(crate in all_crates) {
-      if(self bot_crate_valid(crate))
+      if(self bot_crate_valid(crate)) {
         all_valid_crates[all_valid_crates.size] = crate;
+      }
     }
 
     all_valid_crates = array_remove_duplicates(all_valid_crates);
@@ -2305,11 +2452,13 @@ bot_think_crate() {
       if((!isDefined(crate.owner) || crate.owner != self) && !isDefined(crate.boxType)) {
         human_allies_near_crate = [];
         foreach(player in level.players) {
-          if(!isDefined(player.team))
+          if(!isDefined(player.team)) {
             continue;
+          }
           if(!IsAI(player) && level.teamBased && player.team == self.team) {
-            if(DistanceSquared(player.origin, crate.origin) < 700 * 700)
+            if(DistanceSquared(player.origin, crate.origin) < 700 * 700) {
               human_allies_near_crate[human_allies_near_crate.size] = player;
+            }
           }
         }
 
@@ -2383,8 +2532,9 @@ bot_think_crate() {
         crate_dest = crate_dest + (0, 0, 24);
       }
 
-      if(isDefined(extra_params.script_goal_radius))
+      if(isDefined(extra_params.script_goal_radius)) {
         Assert(extra_params.script_goal_radius >= 0);
+      }
 
       crate_to_take notify("path_disconnect");
       wait 0.05;
@@ -2410,8 +2560,9 @@ crate_low_ammo_check() {
 }
 
 bot_should_use_ammo_crate(crate) {
-  if(self GetCurrentWeapon() == level.boxSettings[crate.boxType].minigunWeapon)
+  if(self GetCurrentWeapon() == level.boxSettings[crate.boxType].minigunWeapon) {
     return false;
+  }
 
   return true;
 }
@@ -2431,8 +2582,9 @@ bot_should_use_scavenger_bag(crate) {
     nearest_node_bot = self GetNearestNode();
     if(isDefined(crate.nearest_nodes) && isDefined(crate.nearest_nodes[0]) && isDefined(nearest_node_bot)) {
       if(NodesVisible(nearest_node_bot, crate.nearest_nodes[0], true)) {
-        if(within_fov(self.origin, self.angles, crate.origin, self BotGetFovDot()))
+        if(within_fov(self.origin, self.angles, crate.origin, self BotGetFovDot())) {
           return true;
+        }
       }
     }
   }
@@ -2443,8 +2595,9 @@ bot_should_use_scavenger_bag(crate) {
 bot_should_use_grenade_crate(crate) {
   offhand_list = self GetWeaponsListOffhands();
   foreach(weapon in offhand_list) {
-    if(self GetWeaponAmmoStock(weapon) == 0)
+    if(self GetWeaponAmmoStock(weapon) == 0) {
       return true;
+    }
   }
 
   return false;
@@ -2464,8 +2617,9 @@ crate_monitor_position() {
   while(1) {
     lastPos = self.origin;
     wait(0.5);
-    if(!IsAlive(self))
+    if(!IsAlive(self)) {
       return;
+    }
     if(!bot_vectors_are_equal(self.origin, lastPos)) {
       self.on_path_grid = undefined;
       self.nearest_nodes = undefined;
@@ -2477,8 +2631,9 @@ crate_monitor_position() {
 crate_wait_use() {}
 
 crate_picked_up(goal) {
-  if(!isDefined(goal.object))
+  if(!isDefined(goal.object)) {
     return true;
+  }
 
   return false;
 }
@@ -2503,13 +2658,15 @@ use_crate(goal) {
 
   if(IsAgent(self)) {
     self _disableUsability();
-    if(isDefined(goal.object))
+    if(isDefined(goal.object)) {
       goal.object DisablePlayerUse(self);
+    }
   }
 
   if(isDefined(goal.object)) {
-    if(!isDefined(goal.object.bots_used))
+    if(!isDefined(goal.object.bots_used)) {
       goal.object.bots_used = [];
+    }
 
     goal.object.bots_used[goal.object.bots_used.size] = self;
   }
@@ -2524,23 +2681,26 @@ use_box(goal) {
 
   if(isDefined(goal.object) && isDefined(goal.object.boxType)) {
     boxType = goal.object.boxType;
-    if(isDefined(level.bot_pre_use_box_of_type[boxType]))
+    if(isDefined(level.bot_pre_use_box_of_type[boxType])) {
       self[[level.bot_pre_use_box_of_type[boxType]]](goal.object);
+    }
 
     if(isDefined(goal.object)) {
       time = (level.boxSettings[goal.object.boxType].useTime / 1000) + 0.5;
       self BotPressButton("use", time);
       wait(time);
 
-      if(isDefined(level.bot_post_use_box_of_type[boxType]))
+      if(isDefined(level.bot_post_use_box_of_type[boxType])) {
         self[[level.bot_post_use_box_of_type[boxType]]](goal.object);
+      }
     }
   }
 
   if(IsAgent(self)) {
     self _disableUsability();
-    if(isDefined(goal.object))
+    if(isDefined(goal.object)) {
       goal.object DisablePlayerUse(self);
+    }
   }
 }
 
@@ -2622,8 +2782,9 @@ bot_think_revive() {
     waitTime = 2.0;
     revive_triggers = getEntArray("revive_trigger", "targetname");
 
-    if(revive_triggers.size > 0)
+    if(revive_triggers.size > 0) {
       waitTime = 0.05;
+    }
 
     level waittill_notify_or_timeout("player_last_stand", waitTime);
 
@@ -2685,8 +2846,9 @@ bot_think_revive() {
         extra_params = spawnStruct();
         extra_params.object = revive_trigger;
         extra_params.script_goal_radius = 64;
-        if(isDefined(self.last_revive_fail_time) && GetTime() - self.last_revive_fail_time < 1000)
+        if(isDefined(self.last_revive_fail_time) && GetTime() - self.last_revive_fail_time < 1000) {
           extra_params.script_goal_radius = 32;
+        }
         extra_params.start_thread = ::watch_bot_died_during_revive;
         extra_params.end_thread = ::stop_reviving;
         extra_params.should_abort = ::player_revived_or_dead;
@@ -2709,11 +2871,13 @@ stop_reviving(goal) {
 }
 
 player_revived_or_dead(goal) {
-  if(!isDefined(goal.object.owner) || goal.object.owner.health <= 0)
+  if(!isDefined(goal.object.owner) || goal.object.owner.health <= 0) {
     return true;
+  }
 
-  if(!isDefined(goal.object.owner.inLastStand) || !goal.object.owner.inLastStand)
+  if(!isDefined(goal.object.owner.inLastStand) || !goal.object.owner.inLastStand) {
     return true;
+  }
 
   return false;
 }
@@ -2735,32 +2899,39 @@ revive_player(goal) {
 
   wait(level.lastStandUseTime / 1000 + 1.5);
 
-  if(isDefined(goal.object.owner))
+  if(isDefined(goal.object.owner)) {
     goal.object.bots[prev_team] = 0;
+  }
 
   if(IsAgent(self)) {
     self _disableUsability();
-    if(isDefined(goal.object))
+    if(isDefined(goal.object)) {
       goal.object DisablePlayerUse(self);
+    }
   }
 }
 
 bot_can_revive() {
-  if(isDefined(self.laststand) && self.laststand == true)
+  if(isDefined(self.laststand) && self.laststand == true) {
     return false;
+  }
 
-  if(self bot_has_tactical_goal("revive"))
+  if(self bot_has_tactical_goal("revive")) {
     return false;
+  }
 
-  if(self bot_is_remote_or_linked())
+  if(self bot_is_remote_or_linked()) {
     return false;
+  }
 
-  if(self bot_is_bodyguarding())
+  if(self bot_is_bodyguarding()) {
     return true;
+  }
 
   goalType = self BotGetScriptGoalType();
-  if(goalType == "none" || goalType == "hunt" || goalType == "guard")
+  if(goalType == "none" || goalType == "hunt" || goalType == "guard") {
     return true;
+  }
 
   return false;
 }
@@ -2793,11 +2964,13 @@ bot_know_enemies_on_start() {
   for(enemyIdx = 0; enemyIdx < level.players.size; enemyIdx++) {
     otherPlayer = level.players[enemyIdx];
     if(isDefined(otherPlayer) && isDefined(self.team) && isDefined(otherPlayer.team) && IsEnemyTeam(self.team, otherPlayer.team)) {
-      if(!isDefined(otherPlayer.bot_start_known_by_enemy))
+      if(!isDefined(otherPlayer.bot_start_known_by_enemy)) {
         chosenEnemy = otherPlayer;
+      }
 
-      if(IsAI(otherPlayer) && !isDefined(otherPlayer.bot_start_know_enemy))
+      if(IsAI(otherPlayer) && !isDefined(otherPlayer.bot_start_know_enemy)) {
         chosenEnemyKnowSelf = otherPlayer;
+      }
     }
   }
 
@@ -2815,10 +2988,12 @@ bot_know_enemies_on_start() {
 }
 
 bot_make_entity_sentient(team, expendable) {
-  if(isDefined(expendable))
+  if(isDefined(expendable)) {
     return self MakeEntitySentient(team, expendable);
-  else
+  }
+  else {
     return self MakeEntitySentient(team);
+  }
 }
 
 bot_think_gametype() {
@@ -2838,10 +3013,12 @@ monitor_smoke_grenades() {
   while(1) {
     level waittill("smoke", smoke_grenade, smoke_grenade_weaponName);
 
-    if(smoke_grenade_weaponName == "smoke_grenade_mp" || smoke_grenade_weaponName == "smoke_grenadejugg_mp" || smoke_grenade_weaponName == "odin_projectile_smoke_mp")
+    if(smoke_grenade_weaponName == "smoke_grenade_mp" || smoke_grenade_weaponName == "smoke_grenadejugg_mp" || smoke_grenade_weaponName == "odin_projectile_smoke_mp") {
       smoke_grenade thread handle_smoke(9.0);
-    else if(smoke_grenade_weaponName == "odin_projectile_large_rod_mp")
+    }
+    else if(smoke_grenade_weaponName == "odin_projectile_large_rod_mp") {
       smoke_grenade thread handle_smoke(2.5);
+    }
   }
 }
 
@@ -2887,8 +3064,9 @@ bot_add_scavenger_bag(dropBag) {
   dropBag.boxType = "scavenger_bag";
   dropBag.boxTouchOnly = true;
 
-  if(!isDefined(level.bot_scavenger_bags))
+  if(!isDefined(level.bot_scavenger_bags)) {
     level.bot_scavenger_bags = [];
+  }
 
   foreach(index, existingBag in level.bot_scavenger_bags) {
     if(!isDefined(existingBag)) {
@@ -2898,12 +3076,14 @@ bot_add_scavenger_bag(dropBag) {
     }
   }
 
-  if(!added)
+  if(!added) {
     level.bot_scavenger_bags[level.bot_scavenger_bags.size] = dropBag;
+  }
 
   foreach(participant in level.participants) {
-    if(isAI(participant) && participant _hasPerk("specialty_scavenger"))
+    if(isAI(participant) && participant _hasPerk("specialty_scavenger")) {
       participant notify("new_crate_to_take");
+    }
   }
 }
 

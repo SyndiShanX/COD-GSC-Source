@@ -45,10 +45,12 @@ movePlayerToStartPoint(sTargetname) {
     assert(isDefined(lookat));
   }
 
-  if(isDefined(lookat))
+  if(isDefined(lookat)) {
     level.player setPlayerAngles(vectorToAngles(lookat.origin - start.origin));
-  else
+  }
+  else {
     level.player setPlayerAngles(start.angles);
+  }
 }
 
 modify_battlechatter_times() {
@@ -93,10 +95,12 @@ start_traffic_group(delay, targetname1, targetname2, targetname3) {
   assert(isDefined(targetname1));
 
   carTargetNames[0] = targetname1;
-  if(isDefined(targetname2))
+  if(isDefined(targetname2)) {
     carTargetNames[1] = targetname2;
-  if(isDefined(targetname3))
+  }
+  if(isDefined(targetname3)) {
     carTargetNames[2] = targetname3;
+  }
 
   for(;;) {
     thread traffic_car_go(carTargetNames[randomint(carTargetNames.size)]);
@@ -112,10 +116,12 @@ stop_traffic() {
 delete_cars_far_away() {
   cars = getEntArray("script_vehicle", "code_classname");
   foreach(car in cars) {
-    if(!car ent_flag_exist("dont_delete_me"))
+    if(!car ent_flag_exist("dont_delete_me")) {
       continue;
-    if(car ent_flag("dont_delete_me"))
+    }
+    if(car ent_flag("dont_delete_me")) {
       continue;
+    }
     car delete();
   }
 }
@@ -149,8 +155,9 @@ delete_ai_at_goal(ignoreCanSeeChecks) {
   self endon("death");
   self waittill("goal");
   if(isDefined(ignoreCanSeeChecks) && ignoreCanSeeChecks) {
-    if(isDefined(self.magic_bullet_shield))
+    if(isDefined(self.magic_bullet_shield)) {
       self stop_magic_bullet_shield();
+    }
     self delete();
   } else
     delete_ai(self);
@@ -159,8 +166,9 @@ delete_ai_at_goal(ignoreCanSeeChecks) {
 dog_seek_player() {
   self endon("death");
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     self waittill("goal");
+  }
 
   self setgoalentity(level.player);
   self.goalradius = 300;
@@ -169,8 +177,9 @@ dog_seek_player() {
 seek_player() {
   self endon("death");
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     self waittill("goal");
+  }
 
   self setgoalentity(level.player);
   self.goalradius = 1000;
@@ -265,10 +274,12 @@ getWindowParts() {
   leftWindow = undefined;
   rightWindow = undefined;
   foreach(part in windowParts) {
-    if(part.script_noteworthy == "left")
+    if(part.script_noteworthy == "left") {
       leftWindow = part;
-    else if(part.script_noteworthy == "right")
+    }
+    else if(part.script_noteworthy == "right") {
       rightWindow = part;
+    }
   }
   assert(isDefined(leftWindow));
   assert(isDefined(rightWindow));
@@ -280,8 +291,9 @@ getWindowParts() {
 }
 
 open_window(window, delay) {
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait delay;
+  }
 
   thread play_sound_in_space("scn_favela_npc_open_shutters", window["left"].origin);
 
@@ -363,8 +375,9 @@ faust_spawn_func() {
 
   level.faust waittill("reached_path_end");
 
-  if(isDefined(level.faust.magic_bullet_shield))
+  if(isDefined(level.faust.magic_bullet_shield)) {
     level.faust stop_magic_bullet_shield();
+  }
   wait 0.05;
   level.faust delete();
   level.faust = undefined;
@@ -384,14 +397,17 @@ faust_mission_fail() {
   for(;;) {
     self waittill("damage", damage, attacker);
 
-    if(!isDefined(attacker))
+    if(!isDefined(attacker)) {
       continue;
+    }
 
-    if(attacker != level.player)
+    if(attacker != level.player) {
       continue;
+    }
 
-    if(damage <= 1)
+    if(damage <= 1) {
       continue;
+    }
 
     break;
   }
@@ -411,11 +427,13 @@ trigger_spawn_chance() {
   self waittill("trigger");
 
   chance_percent = 25;
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     chance_percent = int(self.script_noteworthy);
+  }
 
-  if(randomint(100) > chance_percent)
+  if(randomint(100) > chance_percent) {
     return;
+  }
 
   spawners = array_removeundefined(spawners);
   array_thread(spawners, ::spawn_ai);
@@ -445,8 +463,9 @@ desert_eagle_guy() {
   while(level.player.health > 0) {
     level waittill("an_enemy_shot", guy);
 
-    if(guy != self)
+    if(guy != self) {
       continue;
+    }
 
     num = 1;
     while(num) {
@@ -460,24 +479,28 @@ desert_eagle_guy() {
 }
 
 set_goal_player() {
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     return;
-  if(!isAlive(level.player))
+  }
+  if(!isAlive(level.player)) {
     return;
+  }
   self setGoalPos(level.player.origin);
 }
 
 process_ai_script_parameters() {
-  if(!isDefined(self.script_parameters))
+  if(!isDefined(self.script_parameters)) {
     return;
+  }
 
   parms = strtok(self.script_parameters, ":;, ");
 
   foreach(parm in parms) {
     parm = tolower(parm);
 
-    if(parm == "balcony")
+    if(parm == "balcony") {
       self.deathFunction = ::try_balcony_death;
+    }
   }
 }
 
@@ -485,35 +508,42 @@ try_balcony_death() {
   // always return false in this function because we want the death
   // animscript to continue after this function no matter what
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return false;
+  }
 
   if(self.a.pose == "prone") // allow crouch
     return false;
 
-  if(!isDefined(self.prevnode))
+  if(!isDefined(self.prevnode)) {
     return false;
+  }
 
-  if(!isDefined(self.prevnode.script_balcony))
+  if(!isDefined(self.prevnode.script_balcony)) {
     return false;
+  }
 
   angleAI = self.angles[1];
   angleNode = self.prevnode.angles[1];
   angleDiff = abs(angleAI - angleNode);
-  if(angleDiff > 15)
+  if(angleDiff > 15) {
     return false;
+  }
 
   d = distance(self.origin, self.prevnode.origin);
-  if(d > 16)
+  if(d > 16) {
     return false;
+  }
 
-  if(!isDefined(level.last_balcony_death))
+  if(!isDefined(level.last_balcony_death)) {
     level.last_balcony_death = getTime();
+  }
   elapsedTime = getTime() - level.last_balcony_death;
 
   // if one just happened within 5 seconds dont do it
-  if(elapsedTime < 5 * 1000)
+  if(elapsedTime < 5 * 1000) {
     return false;
+  }
 
   deathAnims = [];
   deathAnims[0] = % death_rooftop_A;
@@ -560,12 +590,14 @@ get_best_run_speed() {
   offset = cap_value(offset, DISTANCE_MIN, DISTANCE_MAX);
 
   // player is far behind, normal run speed
-  if(offset < DISTANCE_MIN)
+  if(offset < DISTANCE_MIN) {
     return RATE_MIN;
+  }
 
   // player is ahead of AI, max run speed
-  if(offset >= DISTANCE_MAX)
+  if(offset >= DISTANCE_MAX) {
     return RATE_MAX;
+  }
 
   // player is close behind the AI, control run speed to make sure AI stays ahead
   fraction = get_fraction(offset, DISTANCE_MIN, DISTANCE_MAX);
@@ -716,8 +748,9 @@ trigger_cleanup() {
 }
 
 delete_ai_not_bullet_shielded() {
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     return;
+  }
   self delete();
 }
 
@@ -766,12 +799,14 @@ potted_plant() {
   pos = self.origin;
 
   trig = undefined;
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     trig = getent(self.target, "targetname");
+  }
 
   self thread potted_plant_damage();
-  if(isDefined(trig))
+  if(isDefined(trig)) {
     self thread potted_plant_triggered(trig);
+  }
 
   self waittill("fall");
 
@@ -825,20 +860,24 @@ civilian_flee_walla() {
   self endon("death");
 
   // civillians don't do wallas until you're in the favela
-  if(!flag("civilians_walla"))
+  if(!flag("civilians_walla")) {
     return;
+  }
 
   wait 0.05;
 
-  while(self.alertLevelInt <= 1)
+  while(self.alertLevelInt <= 1) {
     wait 0.05;
+  }
 
-  if(!isDefined(level.nextWallaIndex))
+  if(!isDefined(level.nextWallaIndex)) {
     level.nextWallaIndex = 0;
+  }
 
   elapsedTime = getTime() - level.lastWallaTime;
-  if(elapsedTime < 5000)
+  if(elapsedTime < 5000) {
     return;
+  }
   level.lastWallaTime = getTime();
 
   // walla
@@ -847,8 +886,9 @@ civilian_flee_walla() {
   self thread anim_generic(self, animScene);
 
   level.nextWallaIndex++;
-  if(level.nextWallaIndex >= level.fleeing_civilian_wallas.size)
+  if(level.nextWallaIndex >= level.fleeing_civilian_wallas.size) {
     nextWallaIndex = 0;
+  }
 }
 
 ending_car_fx(vehicle) {
@@ -870,16 +910,18 @@ dive_through_glass(guy) {
 delete_ai_during_blackscreen() {
   ai = getAIArray();
   foreach(guy in ai) {
-    if(isDefined(guy.magic_bullet_shield))
+    if(isDefined(guy.magic_bullet_shield)) {
       guy stop_magic_bullet_shield();
+    }
     guy notify("deleted");
   }
   array_call(getAIArray(), ::delete);
 }
 
 curtain_pulldown(bWaitForPlayer) {
-  if(!isDefined(bWaitForPlayer))
+  if(!isDefined(bWaitForPlayer)) {
     bWaitForPlayer = false;
+  }
 
   assert(isDefined(self.target));
   node = self curtain_pulldown_getnode();
@@ -890,8 +932,9 @@ curtain_pulldown(bWaitForPlayer) {
   node thread anim_first_frame_solo(curtain, "pulldown");
 
   self waittill("spawned", guy);
-  if(spawn_failed(guy))
+  if(spawn_failed(guy)) {
     return;
+  }
 
   guy endon("death");
 
@@ -928,15 +971,17 @@ curtain_pulldown(bWaitForPlayer) {
 
 allow_death_delayed(delay) {
   wait delay;
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.allowdeath = true;
+  }
 }
 
 curtain_pulldown_getnode() {
   nodes = getEntArray(self.target, "targetname");
   foreach(node in nodes) {
-    if(node.classname == "script_origin")
+    if(node.classname == "script_origin") {
       return node;
+    }
   }
   assertMsg("curtain pulldown guy doesn't target a script_origin");
 }
@@ -949,14 +994,16 @@ car_screech_node() {
   sound[1] = "scn_favela_car_traffic_skid2";
   sound[2] = "scn_favela_car_traffic_skid3";
 
-  if(!isDefined(level.next_skid_sound))
+  if(!isDefined(level.next_skid_sound)) {
     level.next_skid_sound = 0;
+  }
 
   vehicle playSound(sound[level.next_skid_sound]);
 
   level.next_skid_sound++;
-  if(level.next_skid_sound >= sound.size)
+  if(level.next_skid_sound >= sound.size) {
     level.next_skid_sound = 0;
+  }
 }
 
 retreat_trigger() {
@@ -984,8 +1031,9 @@ timed_favela_autosaves() {
 
   while(!flag("cleared_favela")) {
     wait 60;
-    if(flag("cleared_favela"))
+    if(flag("cleared_favela")) {
       return;
+    }
     thread autosave_by_name("lower_favela");
   }
 }
@@ -1006,13 +1054,15 @@ faust_assistant_kill_player_monitor() {
 
     // player must be within range of Faust's assistant
     d = DistanceSquared(self.origin, level.player.origin);
-    if(d > distSq)
+    if(d > distSq) {
       continue;
+    }
 
     // player must be in front of Faust's assistant
     FOV = within_fov(self.origin, self.angles, level.player.origin, cos90);
-    if(!FOV)
+    if(!FOV) {
       continue;
+    }
 
     // Faust's assisstant should now kill the player for getting in front of him
     self thread faust_assistant_kill_player();
@@ -1044,6 +1094,7 @@ faust_assistant_kill_player() {
 
   wait 0.05;
 
-  if(isalive(level.player))
+  if(isalive(level.player)) {
     level.player kill();
+  }
 }

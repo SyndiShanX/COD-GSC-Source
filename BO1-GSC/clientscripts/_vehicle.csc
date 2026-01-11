@@ -280,8 +280,9 @@ playTankExhaust(localClientNum) {
   }
   if(isDefined(self) && (self isalive()) && isDefined(self.exhaust_fx)) {
     playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_left");
-    if(!self.oneexhaust)
+    if(!self.oneexhaust) {
       playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_right");
+    }
   }
 }
 
@@ -291,8 +292,9 @@ play_exhaust(localClientNum) {
   }
   if(isDefined(self) && (self isalive()) && isDefined(self.exhaust_fx)) {
     playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_left");
-    if(!self.oneexhaust)
+    if(!self.oneexhaust) {
       playFXOnTag(localClientNum, self.exhaust_fx, self, "tag_engine_right");
+    }
   }
 }
 

@@ -11,8 +11,9 @@ init() {
 }
 
 destructible_create(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(level.destructible_type))
+  if(!isDefined(level.destructible_type)) {
     level.destructible_type = [];
+  }
 
   var_5 = level.destructible_type.size;
   var_5 = level.destructible_type.size;
@@ -45,8 +46,9 @@ destructible_state(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 destructible_fx(var_0, var_1, var_2) {
   var_1 = try_override_destructible_fx(var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_3 = level.destructible_type.size - 1;
   var_4 = level.destructible_type[var_3].parts.size - 1;
@@ -67,14 +69,16 @@ destructible_loopfx(var_0, var_1, var_2) {
 }
 
 try_override_destructible_fx(var_0) {
-  if(!isDefined(level.destructible_effect_override))
+  if(!isDefined(level.destructible_effect_override)) {
     return var_0;
+  }
 
   var_1 = getarraykeys(level.destructible_effect_override);
 
   foreach(var_3 in var_1) {
-    if(var_3 == var_0)
+    if(var_3 == var_0) {
       return level.destructible_effect_override[var_3];
+    }
   }
 
   return var_0;
@@ -168,10 +172,12 @@ destructible_info(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
   level.destructible_type[var_12].parts[var_0][var_1].v["grenadeImpactDeath"] = var_10;
   level.destructible_type[var_12].parts[var_0][var_1].v["godModeAllowed"] = 0;
 
-  if(!isDefined(var_11))
+  if(!isDefined(var_11)) {
     level.destructible_type[var_12].parts[var_0][var_1].v["createEntityForAnimation"] = 0;
-  else
+  }
+  else {
     level.destructible_type[var_12].parts[var_0][var_1].v["createEntityForAnimation"] = var_11;
+  }
 }
 
 find_destructibles() {
@@ -185,30 +191,35 @@ precache_destructibles() {
         if(level.destructible_type[self.destuctableinfo].parts[var_0].size <= var_1) {
           continue;
         }
-        if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["modelName"]))
+        if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["modelName"])) {
           precachemodel(level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["modelName"]);
+        }
 
-        if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["fx_filename"]))
+        if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["fx_filename"])) {
           level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["fx"] = loadfx(level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["fx_filename"]);
+        }
 
-        if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["loopfx_filename"]))
+        if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["loopfx_filename"])) {
           level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["loopfx"] = loadfx(level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["loopfx_filename"]);
+        }
       }
     }
   }
 }
 
 setup_destructibles(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   var_1 = undefined;
   self.modeldummyon = 0;
   add_damage_owner_recorder();
   self.destuctableinfo = common_scripts\_destructible_types::maketype(self.destructible_type);
 
-  if(!var_0)
+  if(!var_0) {
     precache_destructibles();
+  }
 
   if(isDefined(level.destructible_type[self.destuctableinfo].parts)) {
     self.destructible_parts = [];
@@ -217,8 +228,9 @@ setup_destructibles(var_0) {
       self.destructible_parts[var_2] = spawnStruct();
       self.destructible_parts[var_2].v["currentState"] = 0;
 
-      if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_2][0].v["health"]))
+      if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_2][0].v["health"])) {
         self.destructible_parts[var_2].v["health"] = level.destructible_type[self.destuctableinfo].parts[var_2][0].v["health"];
+      }
 
       if(var_2 == 0) {
         continue;
@@ -227,13 +239,15 @@ setup_destructibles(var_0) {
       var_4 = level.destructible_type[self.destuctableinfo].parts[var_2][0].v["tagName"];
       self attach(var_3, var_4);
 
-      if(self.modeldummyon)
+      if(self.modeldummyon) {
         self.modeldummy attach(var_3, var_4);
+      }
     }
   }
 
-  if(self.classname != "script_vehicle")
+  if(self.classname != "script_vehicle") {
     self setCanDamage(1);
+  }
 
   thread setup_destructible_entities();
   thread connecttraverses();
@@ -260,11 +274,13 @@ destructible_think() {
     }
     var_4 = getdamagetype(var_4);
 
-    if(var_5 == "")
+    if(var_5 == "") {
       var_5 = self.model;
+    }
 
-    if(isDefined(var_6) && var_6 == "")
+    if(isDefined(var_6) && var_6 == "") {
       var_6 = undefined;
+    }
 
     if(var_4 == "splash") {
       destructible_splash_damage(int(var_0), var_3, var_2, var_1, var_4);
@@ -339,13 +355,15 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       break;
     }
 
-    if(var_11)
+    if(var_11) {
       self.destructible_parts[var_7].v["health"] = level.destructible_type[self.destuctableinfo].parts[var_7][var_8].v["health"];
+    }
 
     var_11 = 0;
 
-    if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_7][var_8].v["grenadeImpactDeath"]) && var_6 == "impact")
+    if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_7][var_8].v["grenadeImpactDeath"]) && var_6 == "impact") {
       var_0 = 100000000;
+    }
 
     var_15 = isattackervalid(var_7, var_8, var_5);
 
@@ -353,10 +371,12 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_16 = isvaliddamagecause(var_7, var_8, var_6);
 
       if(var_16) {
-        if(var_5 == level.player)
+        if(var_5 == level.player) {
           self.player_damage = self.player_damage + var_0;
-        else if(var_5 != self)
+        }
+        else if(var_5 != self) {
           self.non_player_damage = self.non_player_damage + var_0;
+        }
 
         self.destructible_parts[var_7].v["health"] = self.destructible_parts[var_7].v["health"] - var_0;
       }
@@ -377,15 +397,17 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(!isDefined(level.destructible_type[self.destuctableinfo].parts[var_7][var_17])) {
       return;
     }
-    if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_7][var_17].v["explode_force_min"]))
+    if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_7][var_17].v["explode_force_min"])) {
       self.exploding = 1;
+    }
 
     if(isDefined(self.loopingsoundstopnotifies) && isDefined(self.loopingsoundstopnotifies[maps\_utility::string(var_7)])) {
       for(var_9 = 0; var_9 < self.loopingsoundstopnotifies[maps\_utility::string(var_7)].size; var_9++) {
         self notify(self.loopingsoundstopnotifies[maps\_utility::string(var_7)][var_9]);
 
-        if(self.modeldummyon)
+        if(self.modeldummyon) {
           self.modeldummy notify(self.loopingsoundstopnotifies[maps\_utility::string(var_7)][var_9]);
+        }
       }
 
       self.loopingsoundstopnotifies[maps\_utility::string(var_7)] = undefined;
@@ -396,20 +418,23 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         var_18 = level.destructible_type[self.destuctableinfo].parts[var_7][var_8].v["modelName"];
         self setModel(var_18);
 
-        if(self.modeldummyon)
+        if(self.modeldummyon) {
           self.modeldummy setModel(var_18);
+        }
       } else {
         self detach(var_1, var_2);
 
-        if(self.modeldummyon)
+        if(self.modeldummyon) {
           self.modeldummy detach(var_1, var_2);
+        }
 
         var_1 = level.destructible_type[self.destuctableinfo].parts[var_7][var_8].v["modelName"];
         var_2 = level.destructible_type[self.destuctableinfo].parts[var_7][var_8].v["tagName"];
 
         if(isDefined(var_1) && isDefined(var_2)) {
-          if(self.modeldummyon)
+          if(self.modeldummyon) {
             self.modeldummy attach(var_1, var_2);
+          }
 
           self attach(var_1, var_2);
         }
@@ -427,14 +452,17 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
         if(level.destructible_type[self.destuctableinfo].parts[var_7][var_17].v["fx_useTagAngles"]) {
           if(delayvfxonmultipleframes(var_19)) {
-            if(!isDefined(self.playingfxpartscount))
+            if(!isDefined(self.playingfxpartscount)) {
               self.playingfxpartscount = 0;
+            }
 
-            if(self.playingfxpartscount < 3)
+            if(self.playingfxpartscount < 3) {
               destructible_playfxontag_internal(var_20, var_19, var_21);
+            }
             else {
-              while(self.playingfxpartscount >= 3)
+              while(self.playingfxpartscount >= 3) {
                 wait 0.05;
+              }
 
               destructible_playfxontag_internal(var_20, var_19, var_21);
             }
@@ -467,22 +495,26 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         var_19 useanimtree(var_28);
         var_29 = level.destructible_type[self.destuctableinfo].parts[var_7][var_17].v["animType"];
 
-        if(!isDefined(self.animsapplied))
+        if(!isDefined(self.animsapplied)) {
           self.animsapplied = [];
+        }
 
         self.animsapplied[self.animsapplied.size] = var_27;
 
         if(isDefined(self.exploding)) {
           if(isDefined(self.animsapplied)) {
-            for(var_9 = 0; var_9 < self.animsapplied.size; var_9++)
+            for(var_9 = 0; var_9 < self.animsapplied.size; var_9++) {
               var_19 clearanim(self.animsapplied[var_9], 0);
+            }
           }
         }
 
-        if(var_29 == "setanim")
+        if(var_29 == "setanim") {
           var_19 setanim(var_27, 1.0, 1.0, 1.0);
-        else if(var_29 == "setanimknob")
+        }
+        else if(var_29 == "setanimknob") {
           var_19 setanimknob(var_27, 1.0, 1.0, 1.0);
+        }
         else {
         }
       }
@@ -497,20 +529,24 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         var_30 useanimtree(var_28);
         var_29 = level.destructible_type[self.destuctableinfo].parts[var_7][var_17].v["partAnimType"];
 
-        if(!isDefined(self.animsapplied))
+        if(!isDefined(self.animsapplied)) {
           self.animsapplied = [];
+        }
 
         self.animsapplied[self.animsapplied.size] = var_27;
 
         if(isDefined(self.exploding) && isDefined(self.animsapplied)) {
-          for(var_9 = 0; var_9 < self.animsapplied.size; var_9++)
+          for(var_9 = 0; var_9 < self.animsapplied.size; var_9++) {
             var_30 clearanim(self.animsapplied[var_9], 0);
+          }
         }
 
-        if(var_29 == "setanim")
+        if(var_29 == "setanim") {
           var_30 setanim(var_27, 1.0, 1.0, 1.0);
-        else if(var_29 == "setanimknob")
+        }
+        else if(var_29 == "setanimknob") {
           var_30 setanimknob(var_27, 1.0, 1.0, 1.0);
+        }
         else {
         }
       }
@@ -539,11 +575,13 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
           var_35 = level.destructible_type[self.destuctableinfo].parts[var_7][var_17].v["tagName"];
           thread play_loop_sound_on_destructible(var_34, var_35);
 
-          if(!isDefined(self.loopingsoundstopnotifies))
+          if(!isDefined(self.loopingsoundstopnotifies)) {
             self.loopingsoundstopnotifies = [];
+          }
 
-          if(!isDefined(self.loopingsoundstopnotifies[maps\_utility::string(var_7)]))
+          if(!isDefined(self.loopingsoundstopnotifies[maps\_utility::string(var_7)])) {
             self.loopingsoundstopnotifies[maps\_utility::string(var_7)] = [];
+          }
 
           var_36 = self.loopingsoundstopnotifies[maps\_utility::string(var_7)].size;
           self.loopingsoundstopnotifies[maps\_utility::string(var_7)][var_36] = "stop sound" + var_34;
@@ -560,8 +598,9 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_41 = level.destructible_type[self.destuctableinfo].parts[var_7][var_17].v["badplace_radius"];
       var_42 = level.destructible_type[self.destuctableinfo].parts[var_7][var_17].v["badplace_team"];
 
-      if(var_37 > 0)
+      if(var_37 > 0) {
         thread health_drain(var_37, var_38, var_7, var_39, var_40, var_41, var_42);
+      }
     }
 
     if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_7][var_17].v["explode_force_min"])) {
@@ -572,8 +611,9 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_46 = level.destructible_type[self.destuctableinfo].parts[var_7][var_17].v["explode_mindamage"];
       var_47 = level.destructible_type[self.destuctableinfo].parts[var_7][var_17].v["explode_maxdamage"];
 
-      if(isDefined(var_5) && var_5 != self)
+      if(isDefined(var_5) && var_5 != self) {
         self.attacker = var_5;
+      }
 
       thread explode(var_7, var_43, var_44, var_45, var_46, var_47);
     }
@@ -585,8 +625,9 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       if(isDefined(var_5)) {
         var_49 = var_5.origin;
 
-        if(var_5 == level.player)
+        if(var_5 == level.player) {
           var_49 = level.player getEye();
+        }
 
         var_48 = vectornormalize(var_3 - var_49);
         var_48 = maps\_utility::vector_multiply(var_48, 200);
@@ -639,8 +680,9 @@ destructible_splash_damage(var_0, var_1, var_2, var_3, var_4) {
             var_10 = distance(var_1, self gettagorigin(var_11));
           }
 
-          if(!isDefined(var_6) || var_10 < var_6)
+          if(!isDefined(var_6) || var_10 < var_6) {
             var_6 = var_10;
+          }
 
           var_12 = var_5.size;
           var_5[var_12] = spawnStruct();
@@ -675,75 +717,91 @@ destructible_splash_damage(var_0, var_1, var_2, var_3, var_4) {
 isvalidsoundcause(var_0, var_1, var_2, var_3, var_4) {
   var_5 = level.destructible_type[self.destuctableinfo].parts[var_1][var_2].v[var_0][var_3];
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     return 1;
+  }
 
-  if(var_5 == var_4)
+  if(var_5 == var_4) {
     return 1;
+  }
 
   return 0;
 }
 
 isattackervalid(var_0, var_1, var_2) {
-  if(isDefined(self.forceexploding))
+  if(isDefined(self.forceexploding)) {
     return 1;
-
-  if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["explode_force_min"])) {
-    if(isDefined(self.dontallowexplode))
-      return 0;
   }
 
-  if(!isDefined(var_2))
-    return 1;
+  if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["explode_force_min"])) {
+    if(isDefined(self.dontallowexplode)) {
+      return 0;
+    }
+  }
 
-  if(var_2 == self)
+  if(!isDefined(var_2)) {
     return 1;
+  }
+
+  if(var_2 == self) {
+    return 1;
+  }
 
   var_3 = level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["validAttackers"];
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return 1;
+  }
 
   if(var_3 == "no_player") {
-    if(var_2 != level.player)
+    if(var_2 != level.player) {
       return 1;
+    }
   } else if(var_3 == "player_only") {
-    if(var_2 == level.player)
+    if(var_2 == level.player) {
       return 1;
+    }
   } else if(var_3 == "no_ai") {
-    if(!isai(var_2))
+    if(!isai(var_2)) {
       return 1;
+    }
   } else if(var_3 == "ai_only") {
-    if(isai(var_2))
+    if(isai(var_2)) {
       return 1;
+    }
   } else {}
 
   return 0;
 }
 
 isvaliddamagecause(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 1;
+  }
 
   var_3 = level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["godModeAllowed"];
 
-  if(var_3 && (isDefined(self.godmode) && self.godmode || isDefined(self.script_bulletshield) && self.script_bulletshield && var_2 == "bullet"))
+  if(var_3 && (isDefined(self.godmode) && self.godmode || isDefined(self.script_bulletshield) && self.script_bulletshield && var_2 == "bullet")) {
     return 0;
+  }
 
   var_4 = level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v["validDamageCause"];
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     return 1;
+  }
 
-  if(var_4 == "no_melee" && var_2 == "melee")
+  if(var_4 == "no_melee" && var_2 == "melee") {
     return 0;
+  }
 
   return 1;
 }
 
 getdamagetype(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return "unknown";
+  }
 
   var_0 = tolower(var_0);
 
@@ -796,10 +854,12 @@ health_drain(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7 = "" + gettime();
 
     if(!isDefined(self.disablebadplace)) {
-      if(var_6 == "both")
+      if(var_6 == "both") {
         badplace_cylinder(var_7, 0, self.origin, var_5, 128, "allies", "axis");
-      else
+      }
+      else {
         badplace_cylinder(var_7, 0, self.origin, var_5, 128, var_6);
+      }
     }
   }
 
@@ -808,8 +868,9 @@ health_drain(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     wait(var_1);
   }
 
-  if(isDefined(var_5) && isDefined(var_6))
+  if(isDefined(var_5) && isDefined(var_6)) {
     badplace_delete(var_7);
+  }
 }
 
 physics_launch(var_0, var_1, var_2, var_3) {
@@ -822,11 +883,13 @@ physics_launch(var_0, var_1, var_2, var_3) {
   }
   self detach(var_4, var_6);
 
-  if(self.modeldummyon)
+  if(self.modeldummyon) {
     self.modeldummy detach(var_4, var_6);
+  }
 
-  if(level.destructiblespawnedents.size >= level.destructiblespawnedentslimit)
+  if(level.destructiblespawnedents.size >= level.destructiblespawnedentslimit) {
     physics_object_remove(level.destructiblespawnedents[0]);
+  }
 
   var_7 = spawn("script_model", self gettagorigin(var_6));
   var_7.angles = self gettagangles(var_6);
@@ -859,16 +922,18 @@ createentity(var_0, var_1, var_2) {
   }
   self detach(var_3, var_5);
 
-  if(self.modeldummyon)
+  if(self.modeldummyon) {
     self.modeldummy detach(var_3, var_5);
+  }
 
   var_6 = spawn("script_model", self gettagorigin(var_5));
   var_6.angles = self gettagangles(var_5);
   var_6 setModel(var_4);
   var_6 linkto(self);
 
-  if(!isDefined(self.partsspawnedents))
+  if(!isDefined(self.partsspawnedents)) {
     self.partsspawnedents = [];
+  }
 
   self.partsspawnedents[self.partsspawnedents.size] = var_6;
   return var_6;
@@ -880,25 +945,29 @@ explode(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
   self.exploded = 1;
 
-  if(self.classname == "script_vehicle" || self.code_classname == "script_vehicle")
+  if(self.classname == "script_vehicle" || self.code_classname == "script_vehicle") {
     self notify("death");
+  }
 
   thread disconnecttraverses();
   thread destroy_destructible_entities();
   wait 0.05;
   var_6 = level.destructible_type[self.destuctableinfo].parts[var_0][self.destructible_parts[var_0].v["currentState"]].v["tagName"];
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_7 = self gettagorigin(var_6);
-  else
+  }
+  else {
     var_7 = self.origin;
+  }
 
   self notify("damage", var_5, self, (0, 0, 0), var_7, "MOD_EXPLOSIVE", "", "");
   waittillframeend;
 
   if(isDefined(self.partsspawnedents)) {
-    foreach(var_9 in self.partsspawnedents)
+    foreach(var_9 in self.partsspawnedents) {
     var_9 delete();
+    }
   }
 
   if(isDefined(level.destructible_type[self.destuctableinfo].parts)) {
@@ -908,8 +977,9 @@ explode(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
       var_12 = self.destructible_parts[var_11].v["currentState"];
 
-      if(var_12 >= level.destructible_type[self.destuctableinfo].parts[var_11].size)
+      if(var_12 >= level.destructible_type[self.destuctableinfo].parts[var_11].size) {
         var_12 = level.destructible_type[self.destuctableinfo].parts[var_11].size - 1;
+      }
 
       var_13 = get_model_from_part(var_11, var_12);
       var_6 = get_tag_from_part(var_11, var_12);
@@ -930,8 +1000,9 @@ explode(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       self detach(var_13, var_6);
 
-      if(self.modeldummyon)
+      if(self.modeldummyon) {
         self.modeldummy detach(var_13, var_6);
+      }
     }
   }
 
@@ -948,34 +1019,40 @@ explode(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   self radiusdamage(var_14, var_3, var_5, var_4, self);
 
-  if(arcademode_car_kill())
+  if(arcademode_car_kill()) {
     thread maps\_arcademode::arcademode_add_points(self.origin, 1, "explosive", 200);
+  }
 
   self notify("destroyed");
 }
 
 arcademode_car_kill() {
-  if(!maps\_utility::arcademode())
+  if(!maps\_utility::arcademode()) {
     return 0;
+  }
 
-  if(level.script == "ac130")
+  if(level.script == "ac130") {
     return 0;
+  }
 
-  if(isDefined(level.allcarsdamagedbyplayer))
+  if(isDefined(level.allcarsdamagedbyplayer)) {
     return 1;
+  }
 
   return maps\_gameskill::player_did_most_damage();
 }
 
 get_destructible_index(var_0, var_1, var_2) {
-  if(var_1 >= 0)
+  if(var_1 >= 0) {
     return level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v[var_2];
+  }
   else if(var_1 == -1) {
     var_3 = undefined;
 
     for(var_4 = 0; var_4 < level.destructible_type[self.destuctableinfo].parts[var_0].size; var_4++) {
-      if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][var_4].v[var_2]))
+      if(isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][var_4].v[var_2])) {
         var_3 = level.destructible_type[self.destuctableinfo].parts[var_0][var_4].v[var_2];
+      }
     }
 
     return var_3;
@@ -1003,8 +1080,9 @@ apply_physics_explosion_to_part(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 part_has_physics_exposion(var_0) {
-  if(!isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][0].v["physicsOnExplosion"]))
+  if(!isDefined(level.destructible_type[self.destuctableinfo].parts[var_0][0].v["physicsOnExplosion"])) {
     return 0;
+  }
 
   return level.destructible_type[self.destuctableinfo].parts[var_0][0].v["physicsOnExplosion"] > 0;
 }
@@ -1014,14 +1092,16 @@ ismodelattached(var_0, var_1) {
   var_0 = tolower(var_0);
   var_1 = tolower(var_1);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return var_2;
+  }
 
   var_3 = self getattachsize();
   var_4 = [];
 
-  for(var_5 = 0; var_5 < var_3; var_5++)
+  for(var_5 = 0; var_5 < var_3; var_5++) {
     var_4[var_5] = tolower(self getattachmodelname(var_5));
+  }
 
   for(var_5 = 0; var_5 < var_4.size; var_5++) {
     if(var_4[var_5] != var_0) {
@@ -1043,13 +1123,16 @@ play_loop_sound_on_destructible(var_0, var_1) {
   var_2 = get_dummy();
   var_3 = spawn("script_origin", (0, 0, 0));
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3.origin = var_2 gettagorigin(var_1);
-  else
+  }
+  else {
     var_3.origin = var_2.origin;
+  }
 
-  if(soundexists(var_0))
+  if(soundexists(var_0)) {
     var_3 playLoopSound(var_0);
+  }
   else {}
 
   var_2 thread force_stop_sound(var_0);
@@ -1081,10 +1164,12 @@ notifydamageafterframe(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 get_dummy() {
-  if(self.modeldummyon)
+  if(self.modeldummyon) {
     var_0 = self.modeldummy;
-  else
+  }
+  else {
     var_0 = self;
+  }
 
   return var_0;
 }
@@ -1100,16 +1185,19 @@ force_explosion() {
 }
 
 get_traverse_disconnect_brush() {
-  if(!isDefined(self.target))
+  if(!isDefined(self.target)) {
     return undefined;
+  }
 
   var_0 = getent(self.target, "targetname");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
-  if(!var_0.spawnflags & 1)
+  if(!var_0.spawnflags & 1) {
     return undefined;
+  }
 
   return var_0;
 }

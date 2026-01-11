@@ -74,10 +74,12 @@ jail_traversal_fix() {
           self setphysparams(25, 0, 72);
           wait 1;
 
-          if(is_true(self.has_legs))
+          if(is_true(self.has_legs)) {
             self setphysparams(15, 0, 72);
-          else
+          }
+          else {
             self setphysparams(15, 0, 24);
+          }
         }
       }
     }
@@ -103,11 +105,13 @@ zgrief_mode_fix() {
     if(trig.origin == (-170.5, -328.25, 174)) {
       trig.origin = trig.origin + vectorscale((0, -1, 0), 32.0);
 
-      if(isDefined(trig.clip))
+      if(isDefined(trig.clip)) {
         trig.clip.origin = trig.clip.origin + vectorscale((0, -1, 0), 32.0);
+      }
 
-      if(isDefined(trig.machine))
+      if(isDefined(trig.machine)) {
         trig.machine.origin = trig.machine.origin + vectorscale((0, -1, 0), 32.0);
+      }
     }
   }
 }
@@ -130,16 +134,19 @@ zgrief_respawn_override(revivee, return_struct) {
   backup_group = undefined;
   backup_distance = 100000000;
 
-  if(spawn_points.size == 0)
+  if(spawn_points.size == 0) {
     return undefined;
+  }
 
   for(i = 0; i < players.size; i++) {
     if(is_player_valid(players[i], undefined, 1) && players[i] != self) {
       for(j = 0; j < spawn_points.size; j++) {
-        if(isDefined(spawn_points[j].script_int))
+        if(isDefined(spawn_points[j].script_int)) {
           ideal_distance = spawn_points[j].script_int;
-        else
+        }
+        else {
           ideal_distance = 1000;
+        }
 
         if(spawn_points[j].locked == 0) {
           plyr_dist = distancesquared(players[i].origin, spawn_points[j].origin);
@@ -161,8 +168,9 @@ zgrief_respawn_override(revivee, return_struct) {
       }
     }
 
-    if(!isDefined(closest_group))
+    if(!isDefined(closest_group)) {
       closest_group = backup_group;
+    }
 
     if(isDefined(closest_group)) {
       spawn_location = maps\mp\zombies\_zm::get_valid_spawn_location(revivee, spawn_points, closest_group, return_struct);
@@ -212,8 +220,9 @@ spawned_slide_push_trigger() {
   while(true) {
     trig1 waittill("trigger", who);
 
-    if(who getstance() == "prone" && isplayer(who))
+    if(who getstance() == "prone" && isplayer(who)) {
       who setstance("crouch");
+    }
 
     trig1 thread slide_push_think(who);
     wait 0.1;
@@ -224,8 +233,9 @@ slide_push_think(who) {
   whopos = (0, 0, 0);
 
   while(who istouching(self)) {
-    if(who.origin == whopos)
+    if(who.origin == whopos) {
       who setvelocity(self get_push_vector());
+    }
 
     whopos = who.origin;
     wait 2.0;
@@ -233,8 +243,9 @@ slide_push_think(who) {
 }
 
 slide_push_in_trigger(player) {
-  if(!player is_player_using_thumbstick())
+  if(!player is_player_using_thumbstick()) {
     player setvelocity(self get_push_vector());
+  }
 }
 
 spawned_life_triggers() {
@@ -467,8 +478,9 @@ push_players_standing_in_trigger_volumes() {
   while(true) {
     self waittill("trigger", player);
 
-    if(!player is_player_using_thumbstick())
+    if(!player is_player_using_thumbstick()) {
       player setvelocity(self get_push_vector());
+    }
   }
 }
 
@@ -476,8 +488,9 @@ is_player_using_thumbstick() {
   b_using_thumbstick = 1;
   v_thumbstick = self getnormalizedmovement();
 
-  if(length(v_thumbstick) < 0.3)
+  if(length(v_thumbstick) < 0.3) {
     b_using_thumbstick = 0;
+  }
 
   return b_using_thumbstick;
 }
@@ -495,8 +508,9 @@ bar_spawner_fix() {
     if(isDefined(spawner.script_string) && spawner.script_string == "bar2") {
       dist = distancesquared(spawner.origin, bad_pos);
 
-      if(dist < dist_fix)
+      if(dist < dist_fix) {
         spawner.origin = (459.5, -2020, 84);
+      }
     }
   }
 }
@@ -505,8 +519,9 @@ player_respawn_fix() {
   maze_spawners = getstructarray("maze_spawn_points", "targetname");
 
   foreach(spawner in maze_spawners) {
-    if(spawner.origin == (3469, 1026, 20))
+    if(spawner.origin == (3469, 1026, 20)) {
       spawner.origin = (3509, 1032, 76);
+    }
   }
 }
 
@@ -514,15 +529,17 @@ door_clip_fix() {
   bank1 = getEntArray("pf728_auto2510", "targetname");
 
   for(i = 0; i < bank1.size; i++) {
-    if(isDefined(bank1[i].script_noteworthy) && bank1[i].script_noteworthy == "clip")
+    if(isDefined(bank1[i].script_noteworthy) && bank1[i].script_noteworthy == "clip") {
       bank1[i] delete();
+    }
   }
 
   bank2 = getEntArray("pf728_auto2507", "targetname");
 
   for(i = 0; i < bank2.size; i++) {
-    if(isDefined(bank2[i].script_noteworthy) && bank2[i].script_noteworthy == "clip")
+    if(isDefined(bank2[i].script_noteworthy) && bank2[i].script_noteworthy == "clip") {
       bank2[i] delete();
+    }
   }
 }
 
@@ -563,8 +580,9 @@ time_bomb_takeaway() {
   while(true) {
     self waittill("new_tactical_grenade", new_weapon);
 
-    if((!isDefined(new_weapon) || new_weapon != "time_bomb_zm") && self hasweapon("time_bomb_detonator_zm"))
+    if((!isDefined(new_weapon) || new_weapon != "time_bomb_zm") && self hasweapon("time_bomb_detonator_zm")) {
       self takeweapon("time_bomb_detonator_zm");
+    }
   }
 }
 
@@ -620,8 +638,9 @@ dtp_push() {
     self waittill("trigger", player);
 
     if(pos == player.origin) {
-      if(player getstance() == "prone")
+      if(player getstance() == "prone") {
         player setstance("crouch");
+      }
 
       player setvelocity(self get_push_vector());
     }

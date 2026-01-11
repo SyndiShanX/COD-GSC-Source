@@ -58,15 +58,18 @@ whitehouse_spotlight_pathing(target_struct) {
     self settargetentity(target_ent);
     self waittill("turret_on_target");
 
-    if(isDefined(target_struct.script_flag_set))
+    if(isDefined(target_struct.script_flag_set)) {
       flag_set(target_struct.script_flag_set);
+    }
 
     target_struct script_delay();
-    if(isDefined(target_struct.script_flag_wait))
+    if(isDefined(target_struct.script_flag_wait)) {
       flag_wait(target_struct.script_flag_wait);
+    }
 
-    if(!isDefined(target_struct.target))
+    if(!isDefined(target_struct.target)) {
       break;
+    }
 
     target_struct = getstruct(target_struct.target, "targetname");
   }
@@ -83,8 +86,9 @@ whitehouse_spotlight_targeting() {
     ai_arr = getaiarray("allies");
     target_arr = [];
     foreach(ai in ai_arr) {
-      if(ai istouching(volume) && !ai is_hero())
+      if(ai istouching(volume) && !ai is_hero()) {
         target_arr[target_arr.size] = ai;
+      }
     }
 
     if(target_arr.size == 0) {
@@ -135,8 +139,9 @@ whitehouse_spotlight_damage() {
 manual_mg_init(delay) {
   self endon("death");
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait randomint(3);
+  }
 
   self thread manual_mg_drone();
 
@@ -148,8 +153,9 @@ manual_mg_init(delay) {
 
   self thread manual_mg_fire();
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     self thread manual_mg_path();
+  }
 
   if(isDefined(self.script_group)) {
     level waittill("sandbag_group_" + self.script_group);
@@ -189,10 +195,12 @@ manual_mg_path(start_target, noloop) {
   self SetAISpread(0.4);
   self SetMode("manual");
 
-  if(isDefined(start_target))
+  if(isDefined(start_target)) {
     self.current_target = start_target;
-  else
+  }
+  else {
     self.current_target = getstruct(self.target, "targetname");
+  }
 
   target_ent = spawn("script_origin", self.current_target.origin);
 
@@ -212,12 +220,15 @@ manual_mg_path(start_target, noloop) {
     //		self waittill( "turret_on_target" );
     //		wait 0.5;
 
-    if(isDefined(self.current_target.target))
+    if(isDefined(self.current_target.target)) {
       self.current_target = getstruct(self.current_target.target, "targetname");
-    else if(isDefined(self.target))
+    }
+    else if(isDefined(self.target)) {
       self.current_target = getstruct(self.target, "targetname");
-    else
+    }
+    else {
       break;
+    }
   }
 
   target_ent delete();
@@ -234,14 +245,16 @@ manual_mg_stop(delay) {
     self notify("stop_firing");
   }
   self delete();
-  if(isalive(self.drone))
+  if(isalive(self.drone)) {
     self.drone kill();
+  }
 }
 
 manual_mg_threat_trigger(turret) {
   self waittill("trigger");
-  if(flag("mg_threat"))
+  if(flag("mg_threat")) {
     return;
+  }
 
   turret setmode("manual");
   turret setturretteam("axis");
@@ -292,8 +305,9 @@ sandbag_group_setup(str_targetname) {
   group_array = [];
   foreach(sandbag in sandbag_array) {
     group_id = sandbag.script_group;
-    if(!isDefined(group_array[group_id]))
+    if(!isDefined(group_array[group_id])) {
       group_array[group_id] = [];
+    }
 
     index = group_array[group_id].size;
     group_array[group_id][index] = sandbag;
@@ -363,14 +377,16 @@ find_lowest_indexed_ent(ent_array, damaged_ent) {
   current_index = 1000000;
   final_ent = undefined;
   foreach(ent in ent_array) {
-    if(ent.script_index > current_index)
+    if(ent.script_index > current_index) {
       continue;
+    }
     current_index = ent.script_index;
     final_ent = ent;
   }
 
-  if(isDefined(damaged_ent) && final_ent.script_index == damaged_ent.script_index)
+  if(isDefined(damaged_ent) && final_ent.script_index == damaged_ent.script_index) {
     return damaged_ent;
+  }
 
   return final_ent;
 }
@@ -392,8 +408,9 @@ sandbag_damage(group_struct) {
 whitehouse_cleanup_approach() {
   // kill east side enemies and friendly mg guys
   allied_mg = get_ai_group_ai("allied_mg");
-  foreach(ai in allied_mg)
+  foreach(ai in allied_mg) {
   ai kill();
+  }
 
   enemies = get_ai_group_ai("whitehouse_approach_enemies");
   delay = 0;
@@ -408,8 +425,9 @@ whitehouse_cleanup_approach() {
   mg_array = getEntArray("manual_mg", "script_noteworthy");
   mg_array = array_add(mg_array, getent("west_side_mg", "script_noteworthy"));
 
-  for(i = 0; i < mg_array.size; i++)
+  for(i = 0; i < mg_array.size; i++) {
     mg_array[i] thread manual_mg_stop(i + 1);
+  }
 
   // kill remaining exterior enemies
   axis_arr = getaiarray("axis");
@@ -418,8 +436,9 @@ whitehouse_cleanup_approach() {
   // delete exterior allies
   ai_arr = getaiarray("allies");
   foreach(ai in ai_arr) {
-    if(ai is_hero())
+    if(ai is_hero()) {
       continue;
+    }
 
     ai kill();
   }
@@ -560,8 +579,9 @@ waittill_player_damage(damage_limit) {
   //	lets not wait for death anymore
   //	self endon( "death" );
 
-  if(!isDefined(damage_limit))
+  if(!isDefined(damage_limit)) {
     damage_limit = 0;
+  }
 
   state = false;
   total_damage = 0;
@@ -569,8 +589,9 @@ waittill_player_damage(damage_limit) {
   while(!state) {
     self waittill("damage", damage, attacker);
 
-    if(attacker == level.player)
+    if(attacker == level.player) {
       total_damage += damage;
+    }
 
     state = (total_damage > damage_limit);
   }
@@ -585,8 +606,9 @@ turret_on_target(target_ent) {
     target_vector = vectornormalize(target_ent.origin - self.origin);
 
     dot = vectordot(aim_vector, target_vector);
-    if(dot > 0.9999)
+    if(dot > 0.9999) {
       return;
+    }
     wait 0.05;
   }
 }
@@ -605,10 +627,12 @@ hero_dynamic_speed() {
   self endon("stop_dynamic_speed");
 
   while(true) {
-    if(within_fov(level.player.origin, level.player.angles, self.origin, level.cosine["60"]))
+    if(within_fov(level.player.origin, level.player.angles, self.origin, level.cosine["60"])) {
       self.moveplaybackrate = 1.0;
-    else
+    }
+    else {
       self.moveplaybackrate = 2.5;
+    }
     wait 0.05;
   }
 }
@@ -658,13 +682,15 @@ chandelier_react() {
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, type);
 
-    if(common_scripts\_destructible::getDamageType(type) != "splash")
+    if(common_scripts\_destructible::getDamageType(type) != "splash") {
       continue;
+    }
 
     self thread chandelier_swing(damage, direction_vec);
     self thread chandelier_flicker();
-    if(isDefined(self.script_parameters))
+    if(isDefined(self.script_parameters)) {
       self thread chandelier_fall();
+    }
   }
 }
 
@@ -732,8 +758,9 @@ chandelier_fall() {
 
   playFX(level._effect["wire_spark"], self.origin);
 
-  if(self.swing)
+  if(self.swing) {
     self waittill("chandelier_turn");
+  }
 
   self unlink();
 
@@ -760,15 +787,17 @@ chandelier_get(noteworthy) {
   ent_arr = getEntArray(noteworthy, "script_noteworthy");
   chandelier = undefined;
   foreach(chandelier in ent_arr) {
-    if(chandelier.targetname == "chandelier")
+    if(chandelier.targetname == "chandelier") {
       break;
+    }
   }
   return chandelier;
 }
 
 chandelier_force_swing(damage, direction_vec) {
-  if(!isDefined(direction_vec))
+  if(!isDefined(direction_vec)) {
     direction_vec = (10, 10, 0);
+  }
 
   self notify("damage", damage, undefined, direction_vec, undefined, "mod_grenade_splash");
 }
@@ -811,8 +840,9 @@ tunnels_teleport() {
   fx_rain_pause();
   fx_rain_pause2();
 
-  while(!level.player IsOnGround())
+  while(!level.player IsOnGround()) {
     wait 0.05;
+  }
 
   flag_set("end_fx");
 
@@ -873,8 +903,9 @@ remove_drone_weapon() {
   for(i = 0; i < size; i++) {
     model_name = self GetAttachModelName(i);
     tag_name = self GetAttachTagName(i);
-    if(IsSubStr(model_name, "weapon"))
+    if(IsSubStr(model_name, "weapon")) {
       self detach(model_name, tag_name);
+    }
   }
 }
 

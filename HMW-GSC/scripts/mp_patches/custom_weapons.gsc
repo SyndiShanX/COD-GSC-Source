@@ -44,8 +44,9 @@ applyloadout() {
   maps\mp\gametypes\_class::_detachall();
   self.changingweapon = undefined;
 
-  if(var_0.copycatloadout)
+  if(var_0.copycatloadout) {
     self.curclass = "copycat";
+  }
 
   self.class_num = var_0.class_num;
   self.loadoutprimary = var_0.primary;
@@ -53,20 +54,24 @@ applyloadout() {
   self.loadoutsecondary = var_0.secondary;
   self.loadoutsecondarycamo = int(tablelookup("mp/camoTable.csv", 1, var_0.secondarycamo, 0));
 
-  if(!issubstr(var_0.primary, "iw5") && !issubstr(var_0.primary, "h1_") && !issubstr(var_0.primary, "h2_"))
+  if(!issubstr(var_0.primary, "iw5") && !issubstr(var_0.primary, "h1_") && !issubstr(var_0.primary, "h2_")) {
     self.loadoutprimarycamo = 0;
+  }
 
-  if(!issubstr(var_0.secondary, "iw5") && !issubstr(var_0.secondary, "h1_") && !issubstr(var_0.secondary, "h2_"))
+  if(!issubstr(var_0.secondary, "iw5") && !issubstr(var_0.secondary, "h1_") && !issubstr(var_0.secondary, "h2_")) {
     self.loadoutsecondarycamo = 0;
+  }
 
   self.loadoutprimaryreticle = int(tablelookup("mp/reticleTable.csv", 1, var_0.primaryreticle, 0));
   self.loadoutsecondaryreticle = int(tablelookup("mp/reticleTable.csv", 1, var_0.secondaryreticle, 0));
 
-  if(!issubstr(var_0.primary, "iw5") && !issubstr(var_0.primary, "h1_") && !issubstr(var_0.primary, "h2_"))
+  if(!issubstr(var_0.primary, "iw5") && !issubstr(var_0.primary, "h1_") && !issubstr(var_0.primary, "h2_")) {
     self.loadoutprimaryreticle = 0;
+  }
 
-  if(!issubstr(var_0.secondary, "iw5") && !issubstr(var_0.secondary, "h1_") && !issubstr(var_0.secondary, "h2_"))
+  if(!issubstr(var_0.secondary, "iw5") && !issubstr(var_0.secondary, "h1_") && !issubstr(var_0.secondary, "h2_")) {
     self.loadoutsecondaryreticle = 0;
+  }
 
   self.loadoutmelee = var_0.meleeweapon;
 
@@ -91,20 +96,24 @@ applyloadout() {
       if(var_0.perks[0] == "specialty_onemanarmy" || var_0.perks[0] == "specialty_omaquickchange") {
         can_give_secondary = false;
 
-        if(!maps\mp\_utility::invirtuallobby())
+        if(!maps\mp\_utility::invirtuallobby()) {
           maps\mp\_utility::_giveweapon("onemanarmy_mp");
+        }
       }
     }
 
-    if(can_give_secondary)
+    if(can_give_secondary) {
       maps\mp\_utility::_giveweapon(var_2);
+    }
 
-    if(level.oldschool)
+    if(level.oldschool) {
       maps\mp\gametypes\_oldschool::givestartammooldschool(var_2);
+    }
   }
 
-  if(level.diehardmode)
+  if(level.diehardmode) {
     maps\mp\_utility::giveperk("specialty_pistoldeath", 0);
+  }
 
   maps\mp\gametypes\_class::loadoutallperks(var_0);
   maps\mp\perks\_perks::applyperks();
@@ -127,25 +136,30 @@ applyloadout() {
   var_5 = var_0.primaryname;
   maps\mp\_utility::_giveweapon(var_5);
 
-  if(level.oldschool)
+  if(level.oldschool) {
     maps\mp\gametypes\_oldschool::givestartammooldschool(var_5);
+  }
 
-  if(!isai(self) && !maps\mp\_utility::ishodgepodgemm())
+  if(!isai(self) && !maps\mp\_utility::ishodgepodgemm()) {
     self switchtoweapon(var_5);
+  }
 
-  if(var_0.setprimaryspawnweapon)
+  if(var_0.setprimaryspawnweapon) {
     self setspawnweapon(maps\mp\_utility::get_spawn_weapon_name(var_0));
+  }
   self.pers["primaryWeapon"] = maps\mp\_utility::getbaseweaponname(var_5);
   self.loadoutoffhand = var_0.offhand;
   self settacticalweapon(var_0.offhand);
 
-  if(!level.oldschool)
+  if(!level.oldschool) {
     giveoffhand(var_0.offhand);
+  }
 
   self setweaponammoclip(var_0.offhand, weaponStartAmmo(var_0.offhand));
 
-  if(level.oldschool)
+  if(level.oldschool) {
     self setweaponammoclip(var_0.offhand, 0);
+  }
 
   var_6 = var_5;
   self.primaryweapon = var_6;
@@ -171,13 +185,15 @@ applyloadout() {
   if(maps\mp\_utility::_hasperk("specialty_extraammo")) {
     self givemaxammo(var_5);
 
-    if(var_2 != "none")
+    if(var_2 != "none") {
       self givemaxammo(var_2);
+    }
   }
 
   if(!issubstr(var_0.class, "juggernaut")) {
-    if(isDefined(self.lastclass) && self.lastclass != "" && self.lastclass != self.class)
+    if(isDefined(self.lastclass) && self.lastclass != "" && self.lastclass != self.class) {
       self notify("changed_class");
+    }
 
     self.pers["lastClass"] = self.class;
     self.lastclass = self.class;
@@ -188,8 +204,9 @@ applyloadout() {
     self.pers["lastClass"] = self.gamemode_chosenclass;
     self.class = self.gamemode_chosenclass;
 
-    if(!isDefined(self.gamemode_carrierclass))
+    if(!isDefined(self.gamemode_carrierclass)) {
       self.lastclass = self.gamemode_chosenclass;
+    }
 
     self.gamemode_chosenclass = undefined;
   }
@@ -198,10 +215,12 @@ applyloadout() {
 
   if(!isDefined(level.iszombiegame) || !level.iszombiegame) {
     if(!isDefined(self.costume)) {
-      if(isplayer(self))
+      if(isplayer(self)) {
         self.costume = maps\mp\gametypes\_class::cao_getactivecostume();
-      else if(isagent(self) && self.agent_type == "player")
+      }
+      else if(isagent(self) && self.agent_type == "player") {
         self.costume = maps\mp\gametypes\_teams::getdefaultcostume();
+      }
     }
 
     if(maps\mp\_utility::invirtuallobby() && isDefined(level.vl_cac_getfactionteam) && isDefined(level.vl_cac_getfactionenvironment)) {
@@ -214,8 +233,9 @@ applyloadout() {
       maps\mp\gametypes\_teams::applycostume(var_6, var_7, var_8);
     } else if(level.teambased)
       maps\mp\gametypes\_teams::applycostume();
-    else
+    else {
       maps\mp\gametypes\_teams::applycostume(var_6, self.team);
+    }
 
     maps\mp\gametypes\_class::logplayercostume();
     self _meth_857C(var_0._id_A7ED);
@@ -229,15 +249,19 @@ applyloadout() {
 
   // only give the deathstreak for the initial spawn for this life.
   if(isDefined(loadoutDeathStreak) && loadoutDeathStreak != "specialty_null" && gettime() == self.spawnTime) {
-    if(loadoutDeathStreak == "specialty_copycat")
+    if(loadoutDeathStreak == "specialty_copycat") {
       deathVal = 3;
-    else if(loadoutDeathStreak == "specialty_combathigh")
+    }
+    else if(loadoutDeathStreak == "specialty_combathigh") {
       deathVal = 5;
-    else
+    }
+    else {
       deathVal = 4;
+    }
 
-    if(self maps\mp\_utility::_hasPerk("specialty_rollover"))
+    if(self maps\mp\_utility::_hasPerk("specialty_rollover")) {
       deathVal -= 1;
+    }
 
     if(isDefined(self.pers["cur_death_streak"]) && self.pers["cur_death_streak"] >= deathVal) {
       self thread maps\mp\_utility::givePerk(loadoutDeathStreak);
@@ -253,14 +277,16 @@ table_getweaponfurniturekit(var_0, var_1, var_2) {
 }
 
 isvalidattachkit(var_0, var_1, var_2) {
-  if(!isDefined(var_0) || var_0 == "" || var_0 == "none")
+  if(!isDefined(var_0) || var_0 == "" || var_0 == "none") {
     return 1;
+  }
 
   var_3 = _func_304("mp/attachkits.csv", 1, var_0);
 
   if(var_3 <= 0) {
-    if(maps\mp\_utility::is_true(var_2))
+    if(maps\mp\_utility::is_true(var_2)) {
       foundinfraction("Replacing invalid attachKit " + var_0);
+    }
 
     return 0;
   }
@@ -270,8 +296,9 @@ isvalidattachkit(var_0, var_1, var_2) {
     var_5 = getinventoryitemtype(var_4);
 
     if(var_5 == "default") {
-      if(maps\mp\_utility::is_true(var_2))
+      if(maps\mp\_utility::is_true(var_2)) {
         foundinfraction("Replacing invalid attachKit " + var_0);
+      }
 
       return 0;
     }
@@ -279,8 +306,9 @@ isvalidattachkit(var_0, var_1, var_2) {
 
   var_6 = tablelookupbyrow("mp/attachkits.csv", var_3, 6);
 
-  if(var_6 == "")
+  if(var_6 == "") {
     return 1;
+  }
 
   var_7 = maps\mp\_utility::getweaponclass(var_1);
   var_8 = "";
@@ -333,11 +361,13 @@ isvalidattachkit(var_0, var_1, var_2) {
 }
 
 getloadout(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_5 = 0;
   var_6 = undefined;
@@ -348,12 +378,15 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
   var_11 = [];
   var_12 = var_1 == "gamemode";
 
-  if(issubstr(var_1, "axis"))
+  if(issubstr(var_1, "axis")) {
     var_13 = "axis";
-  else if(issubstr(var_1, "allies"))
+  }
+  else if(issubstr(var_1, "allies")) {
     var_13 = "allies";
-  else
+  }
+  else {
     var_13 = "none";
+  }
 
   var_14 = [];
 
@@ -375,8 +408,9 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = var_14["loadoutEquipment"];
     var_26 = var_14["loadoutOffhand"];
 
-    for(var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++) {
       var_11[var_27] = var_14["loadoutPerks"][var_27];
+    }
 
     var_28 = var_14["loadoutMelee"];
   } else if(var_13 != "none") {
@@ -409,8 +443,9 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "equipment", 0);
     var_26 = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "equipment", 1);
 
-    for(var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++) {
       var_11[var_27] = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "perkSlots", var_27);
+    }
 
     var_28 = getmatchrulesdata("defaultClasses", var_13, "defaultClass", var_29, "class", "meleeWeapon");
 
@@ -446,8 +481,9 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = maps\mp\gametypes\_class::cac_getequipment(var_6, 0);
     var_26 = maps\mp\gametypes\_class::cac_getequipment(var_6, 1);
 
-    for(var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++) {
       var_11[var_27] = maps\mp\gametypes\_class::cac_getperk(var_6, var_27);
+    }
 
     var_28 = maps\mp\gametypes\_class::cac_getmeleeweapon(var_6);
   } else if(issubstr(var_1, "lobby")) {
@@ -467,8 +503,9 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = var_33["equipment"];
     var_26 = var_33["offhand"];
 
-    for(var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++) {
       var_11[var_27] = var_33["perk" + var_27];
+    }
 
     var_28 = var_33["meleeWeapon"];
   } else if(var_12) {
@@ -486,21 +523,25 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_25 = var_34["loadoutEquipment"];
     var_26 = var_34["loadoutOffhand"];
 
-    if(var_26 == "specialty_null")
+    if(var_26 == "specialty_null") {
       var_26 = "none";
+    }
 
-    for(var_27 = 0; var_27 < 3; var_27++)
+    for(var_27 = 0; var_27 < 3; var_27++) {
       var_11[var_27] = var_34["loadoutPerks"][var_27];
+    }
 
     var_28 = var_34["loadoutMelee"];
   } else if(var_1 == "callback") {
-    if(!isDefined(self.classcallback))
+    if(!isDefined(self.classcallback)) {
       common_scripts\utility::error("self.classCallback function reference required for class 'callback'");
+    }
 
     var_35 = [[self.classcallback]](var_4);
 
-    if(!isDefined(var_35))
+    if(!isDefined(var_35)) {
       common_scripts\utility::error("array required from self.classCallback for class 'callback'");
+    }
 
     var_15 = var_35["loadoutPrimary"];
     var_16 = var_35["loadoutPrimaryAttachKit"];
@@ -551,17 +592,21 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
       var_17 = "none";
     }
 
-    if(!maps\mp\gametypes\_class::isvalidcamo(var_18, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::iscamounlocked(var_15, var_18))
+    if(!maps\mp\gametypes\_class::isvalidcamo(var_18, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::iscamounlocked(var_15, var_18)) {
       var_18 = maps\mp\gametypes\_class::table_getweaponcamo(level.classtablename, 10, 0);
+    }
 
-    if(!maps\mp\gametypes\_class::isvalidreticle(var_19, 1))
+    if(!maps\mp\gametypes\_class::isvalidreticle(var_19, 1)) {
       var_19 = maps\mp\gametypes\_class::table_getweaponreticle(level.classtablename, 10, 0);
+    }
 
-    if(!maps\mp\gametypes\_class::isvalidattachkit(var_16, var_15, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::isattachkitunlocked(var_15, var_16))
+    if(!maps\mp\gametypes\_class::isvalidattachkit(var_16, var_15, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::isattachkitunlocked(var_15, var_16)) {
       var_16 = maps\mp\gametypes\_class::table_getweaponattachkit(level.classtablename, 10, 0);
+    }
 
-    if(!maps\mp\gametypes\_class::isvalidfurniturekit(var_17, var_15, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::isfurniturekitunlocked(var_15, var_17))
+    if(!maps\mp\gametypes\_class::isvalidfurniturekit(var_17, var_15, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::isfurniturekitunlocked(var_15, var_17)) {
       var_17 = table_getweaponfurniturekit(level.classtablename, 10, 0);
+    }
 
     var_40 = common_scripts\utility::array_contains(var_11, "specialty_twoprimaries");
 
@@ -573,29 +618,37 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
       var_22 = "none";
     }
 
-    if(!maps\mp\gametypes\_class::isvalidcamo(var_23, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::iscamounlocked(var_20, var_23))
+    if(!maps\mp\gametypes\_class::isvalidcamo(var_23, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::iscamounlocked(var_20, var_23)) {
       var_23 = maps\mp\gametypes\_class::table_getweaponcamo(level.classtablename, 10, 1);
+    }
 
-    if(!maps\mp\gametypes\_class::isvalidreticle(var_24, 1))
+    if(!maps\mp\gametypes\_class::isvalidreticle(var_24, 1)) {
       var_24 = maps\mp\gametypes\_class::table_getweaponreticle(level.classtablename, 10, 1);
+    }
 
-    if(!maps\mp\gametypes\_class::isvalidattachkit(var_21, var_20, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::isattachkitunlocked(var_20, var_21))
+    if(!maps\mp\gametypes\_class::isvalidattachkit(var_21, var_20, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::isattachkitunlocked(var_20, var_21)) {
       var_21 = maps\mp\gametypes\_class::table_getweaponattachkit(level.classtablename, 10, 1);
+    }
 
-    if(!isvalidfurniturekit(var_22, var_20, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::isfurniturekitunlocked(var_20, var_22))
+    if(!isvalidfurniturekit(var_22, var_20, 1) || level.rankedmatch && var_36 && !var_38 && !maps\mp\gametypes\_class::isfurniturekitunlocked(var_20, var_22)) {
       var_22 = table_getweaponfurniturekit(level.classtablename, 10, 1);
+    }
 
-    if(!maps\mp\gametypes\_class::isvalidequipment(var_25, 1) || level.rankedmatch && var_36 && !var_38 && !self isitemunlocked(var_25))
+    if(!maps\mp\gametypes\_class::isvalidequipment(var_25, 1) || level.rankedmatch && var_36 && !var_38 && !self isitemunlocked(var_25)) {
       var_25 = maps\mp\gametypes\_class::table_getequipment(level.classtablename, 10);
+    }
 
-    if(var_25 == var_26)
+    if(var_25 == var_26) {
       var_25 = "specialty_null";
+    }
 
-    if(!maps\mp\gametypes\_class::isvalidoffhand(var_26, 1))
+    if(!maps\mp\gametypes\_class::isvalidoffhand(var_26, 1)) {
       var_26 = maps\mp\gametypes\_class::table_getoffhand(level.classtablename, 10);
+    }
 
-    if(!maps\mp\gametypes\_class::isvalidmeleeweapon(var_28, 1))
+    if(!maps\mp\gametypes\_class::isvalidmeleeweapon(var_28, 1)) {
       var_28 = "none";
+    }
   }
 
   for(var_27 = 0; var_27 < 3; var_27++) {
@@ -605,8 +658,9 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
     var_41 = var_11[var_27];
     var_11[var_27] = maps\mp\perks\_perks::validateperk(var_27, var_11[var_27]);
 
-    if(var_41 != var_11[var_27])
+    if(var_41 != var_11[var_27]) {
       foundinfraction("^1Warning: Perk " + var_41 + " in wrong slot.");
+    }
 
     if(var_27 == 0 && var_11[var_27] != "specialty_null" && (maps\mp\gametypes\_class::isgrenadelauncher(var_16) || maps\mp\gametypes\_class::isgrenadelauncher(var_21))) {
       foundinfraction("^1Warning: Player has a perk " + var_41 + " in slot 1 and a grenade launcher too.");
@@ -646,15 +700,18 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
 
   var_45 = var_42;
 
-  if(!var_43)
+  if(!var_43) {
     var_45 = -1;
+  }
 
   var_46 = 0;
 
-  if(maps\mp\_utility::invirtuallobby())
+  if(maps\mp\_utility::invirtuallobby()) {
     var_46 = self.charactercamoloadout.camoindex;
-  else
+  }
+  else {
     var_46 = self getplayerdata(common_scripts\utility::getstatsgroup_common(), "characterCamoIndex");
+  }
 
   var_33 = spawnStruct();
   var_33.class = var_1;
@@ -691,8 +748,9 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
   var_33._id_A7EC = var_44;
   var_33._id_A7ED = var_46;
 
-  if(maps\mp\_utility::is_true(level.movecompareactive) && isDefined(level.movecompareloadoutfunc))
+  if(maps\mp\_utility::is_true(level.movecompareactive) && isDefined(level.movecompareloadoutfunc)) {
     var_33 = self[[level.movecompareloadoutfunc]]();
+  }
 
   return var_33;
 }
@@ -736,8 +794,9 @@ getmatchrulesspecialclass(var_0, var_1) {
   var_2["loadoutEquipment"] = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_1, "class", "equipment", 0);
   var_2["loadoutOffhand"] = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_1, "class", "equipment", 1);
 
-  for(var_5 = 0; var_5 < 3; var_5++)
+  for(var_5 = 0; var_5 < 3; var_5++) {
     var_2["loadoutPerks"][var_5] = getmatchrulesdata("defaultClasses", var_0, "defaultClass", var_1, "class", "perkSlots", var_5);
+  }
 
   var_2["loadoutMelee"] = "none";
   return var_2;
@@ -793,8 +852,9 @@ isvalidcamo(var_0, var_1) {
     case "gold":
       return 1;
     default:
-      if(maps\mp\_utility::is_true(var_1))
+      if(maps\mp\_utility::is_true(var_1)) {
         maps\mp\gametypes\_class::foundinfraction("Replacing invalid camo: " + var_0);
+      }
 
       return 0;
   }
@@ -853,8 +913,9 @@ h2_buildweaponname(baseName, attachment1, attachment2, camo, perks) {
     perk1 = perks[0];
   }
 
-  if(perk1 == "specialty_bling" || perk1 == "specialty_secondarybling")
+  if(perk1 == "specialty_bling" || perk1 == "specialty_secondarybling") {
     attachments[attachments.size] = attachment2;
+  }
 
   attachments = common_scripts\utility::array_remove(attachments, "none");
 
@@ -879,19 +940,24 @@ h2_buildweaponname(baseName, attachment1, attachment2, camo, perks) {
 
   foreach(attachment in attachments) {
     name = get_attachment_name(baseName, attachment);
-    if(isDefined(name) && name != "")
+    if(isDefined(name) && name != "") {
       attachment = name;
+    }
 
-    if(issubstr(weaponName, "_" + attachment))
+    if(issubstr(weaponName, "_" + attachment)) {
       weaponName = weaponName;
-    else
+    }
+    else {
       weaponName += "_" + attachment;
+    }
 
-    if(attachment == "gl" || attachment == "glak47")
+    if(attachment == "gl" || attachment == "glak47") {
       weaponName += "_glpre";
+    }
 
-    if(attachment == "sho")
+    if(attachment == "sho") {
       weaponName += "_shopre";
+    }
   }
 
   if(isSubStr(weaponName, "at4_") || isSubStr(weaponName, "stinger_") || isSubStr(weaponName, "javelin_") || IsSubStr(weaponName, "h2_") || IsSubStr(weaponName, "h1_")) {
@@ -948,8 +1014,9 @@ buildweaponname(var_0, var_1, var_2, var_3, perks, var_5) {
   }
 
   if(issubstr(var_7, "h2_") || issubstr(var_7, "h1_") || var_7 == "at4_mp" || var_7 == "stinger_mp" || var_7 == "javelin_mp") {
-    if(var_2 == "base")
+    if(var_2 == "base") {
       var_2 = "none";
+    }
     return h2_buildweaponname(var_7, var_1, var_2, var_3, perks);
   }
 
@@ -961,14 +1028,17 @@ buildweaponname(var_0, var_1, var_2, var_3, perks, var_5) {
       }
     }
   } else if(var_9 || var_10) {
-    if(!var_9)
+    if(!var_9) {
       var_1 = "none";
+    }
 
-    if(!var_10)
+    if(!var_10) {
       var_2 = "base";
+    }
 
-    if(issubstr(var_0, "h2_"))
+    if(issubstr(var_0, "h2_")) {
       var_2 = "none";
+    }
 
     var_7 += ("_a#" + var_1);
     var_7 += ("_f#" + var_2);
@@ -1095,8 +1165,9 @@ isvalidequipment(var_0, var_1) {
     case "h1_c4_mp":
       return 1;
     default:
-      if(maps\mp\_utility::is_true(var_1))
+      if(maps\mp\_utility::is_true(var_1)) {
         maps\mp\gametypes\_class::foundinfraction("Replacing invalid equipment: " + var_0);
+      }
 
       return 0;
   }
@@ -1151,8 +1222,9 @@ takeoffhand(var_0) {
 }
 
 is_lethal_equipment(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   switch (var_0) {
     case "h1_fraggrenade_mp":
@@ -1177,8 +1249,9 @@ isvalidmeleeweapon(var_0, var_1) {
     case "specialty_grenadepulldeath":
       return 1;
     default:
-      if(maps\mp\_utility::is_true(var_1))
+      if(maps\mp\_utility::is_true(var_1)) {
         foundinfraction("Replacing invalid melee weapon: " + var_0);
+      }
 
       return 0;
   }
@@ -1274,8 +1347,9 @@ isvalidattachment(var_0, var_1, var_2) {
     var_3 = common_scripts\utility::array_contains(var_4, var_0);
   }
 
-  if(!var_3 && maps\mp\_utility::is_true(var_2))
+  if(!var_3 && maps\mp\_utility::is_true(var_2)) {
     foundinfraction("Replacing invalid attachment: " + var_0);
+  }
 
   return var_3;
 }

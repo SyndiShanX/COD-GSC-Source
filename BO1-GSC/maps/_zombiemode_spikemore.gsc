@@ -192,8 +192,9 @@ shouldAffectWeaponObject(object) {
   dirToPos = pos - object.origin;
   objectForward = anglesToForward(object.angles);
   dist = vectorDot(dirToPos, objectForward);
-  if(dist < level.spikemore_detectionMinDist)
+  if(dist < level.spikemore_detectionMinDist) {
     return false;
+  }
   dirToPos = vectornormalize(dirToPos);
   dot = vectorDot(dirToPos, objectForward);
   return (dot > level.spikemore_detectionDot);
@@ -213,19 +214,24 @@ spikemore_detonation() {
   damagearea enablelinkto();
   damagearea linkto(self);
   self thread delete_spikemores_on_death(damagearea);
-  if(!isDefined(level.spikemores))
+  if(!isDefined(level.spikemores)) {
     level.spikemores = [];
+  }
   level.spikemores = array_add(level.spikemores, self);
-  if(level.spikemores.size > 15 && getDvar(#"player_sustainAmmo") != "0")
+  if(level.spikemores.size > 15 && getDvar(#"player_sustainAmmo") != "0") {
     level.spikemores[0] delete();
+  }
   while(1) {
     damagearea waittill("trigger", ent);
-    if(isDefined(self.owner) && ent == self.owner)
+    if(isDefined(self.owner) && ent == self.owner) {
       continue;
-    if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] != playerTeamToAllow)
+    }
+    if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] != playerTeamToAllow) {
       continue;
-    if(!ent shouldAffectWeaponObject(self))
+    }
+    if(!ent shouldAffectWeaponObject(self)) {
       continue;
+    }
     if(ent damageConeTrace(self.origin, self) > 0) {
       self _spikemore_SmallSpearActivate();
       return;
@@ -237,8 +243,9 @@ delete_spikemores_on_death(ent) {
   self waittill("death");
   level.spikemores = array_remove_nokeys(level.spikemores, self);
   wait .05;
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 give_spikemores_after_rounds() {

@@ -195,8 +195,9 @@ perktablelookupimage(var_0) {
 }
 
 validateperk(var_0, var_1) {
-  if(getdvarint("scr_game_perks") == 0)
+  if(getdvarint("scr_game_perks") == 0) {
     return "specialty_null";
+  }
 
   if(var_0 == 0) {
     switch (var_1) {
@@ -246,8 +247,9 @@ validateperk(var_0, var_1) {
 getemptyperks() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 3; var_1++)
+  for(var_1 = 0; var_1 < 3; var_1++) {
     var_0[var_1] = "specialty_null";
+  }
 
   return var_0;
 }
@@ -266,36 +268,45 @@ onplayerspawned() {
 }
 
 cac_modified_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isDefined(var_0) || !isDefined(var_1) || !isplayer(var_1) || !maps\mp\_utility::invirtuallobby() && !isplayer(var_0))
+  if(!isDefined(var_0) || !isDefined(var_1) || !isplayer(var_1) || !maps\mp\_utility::invirtuallobby() && !isplayer(var_0)) {
     return var_2;
+  }
 
-  if(var_1.sessionstate != "playing" || !isDefined(var_2) || !isDefined(var_3))
+  if(var_1.sessionstate != "playing" || !isDefined(var_2) || !isDefined(var_3)) {
     return var_2;
+  }
 
-  if(var_3 == "")
+  if(var_3 == "") {
     return var_2;
+  }
 
   var_9 = var_2;
   var_10 = var_2;
 
   if(isDefined(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") && maps\mp\_utility::isbulletdamage(var_3)) {
-    if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
+    if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest")) {
       var_10 = var_9;
-    else
+    }
+    else {
       var_10 = var_10 + var_2 * level.bulletdamagemod;
+    }
   } else if(isDefined(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_explosivedamage") && isexplosivedamagemod(var_3)) {
-    if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
+    if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest")) {
       var_10 = var_9;
-    else
+    }
+    else {
       var_10 = var_10 + var_2 * level.explosivedamagemod;
+    }
   } else if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
     var_10 = var_10 - var_2 * level.armorvestmod;
-  else
+  else {
     var_10 = var_9;
+  }
 
   if(isexplosivedamagemod(var_3)) {
-    if(maps\mp\gametypes\_weapons::ingrenadegraceperiod())
+    if(maps\mp\gametypes\_weapons::ingrenadegraceperiod()) {
       var_10 = var_10 * level.juggernautmod;
+    }
   }
 
   if(var_10 <= 1) {
@@ -335,11 +346,13 @@ giveblindeyeafterspawn() {
 applyperks() {
   self setviewkickscale(1.0);
 
-  if(maps\mp\_utility::_hasperk("specialty_extended_battery"))
+  if(maps\mp\_utility::_hasperk("specialty_extended_battery")) {
     maps\mp\_utility::giveperk("specialty_exo_slamboots", 0);
+  }
 
-  if(maps\mp\_utility::_hasperk("specialty_class_lowprofile"))
+  if(maps\mp\_utility::_hasperk("specialty_class_lowprofile")) {
     maps\mp\_utility::giveperk("specialty_radarimmune", 0);
+  }
 
   if(maps\mp\_utility::_hasperk("specialty_class_flakjacket")) {
     maps\mp\_utility::giveperk("specialty_hard_shell", 0);
@@ -347,15 +360,18 @@ applyperks() {
     maps\mp\_utility::giveperk("specialty_blastshield2", 0);
     self.specialty_blastshield_bonus = maps\mp\_utility::getintproperty("perk_blastShieldScale", 45) / 100;
 
-    if(isDefined(level.hardcoremode) && level.hardcoremode)
+    if(isDefined(level.hardcoremode) && level.hardcoremode) {
       self.specialty_blastshield_bonus = maps\mp\_utility::getintproperty("perk_blastShieldScale_HC", 50) / 100;
+    }
   }
 
-  if(maps\mp\_utility::_hasperk("specialty_class_lightweight"))
+  if(maps\mp\_utility::_hasperk("specialty_class_lightweight")) {
     maps\mp\_utility::giveperk("specialty_lightweight", 0);
+  }
 
-  if(maps\mp\_utility::_hasperk("specialty_class_dangerclose"))
+  if(maps\mp\_utility::_hasperk("specialty_class_dangerclose")) {
     maps\mp\_utility::giveperk("specialty_explosivedamage", 0);
+  }
 
   if(maps\mp\_utility::_hasperk("specialty_class_blindeye")) {
     maps\mp\_utility::giveperk("specialty_blindeye", 0);
@@ -379,8 +395,9 @@ applyperks() {
     maps\mp\_utility::giveperk("specialty_sprintreload", 0);
   }
 
-  if(maps\mp\_utility::_hasperk("specialty_class_dexterity"))
+  if(maps\mp\_utility::_hasperk("specialty_class_dexterity")) {
     maps\mp\_utility::giveperk("specialty_sprintfire", 0);
+  }
 
   if(maps\mp\_utility::_hasperk("specialty_class_hardwired")) {
     maps\mp\_utility::giveperk("specialty_empimmune", 0);
@@ -388,8 +405,9 @@ applyperks() {
     self.stunscaler = 0.1;
   }
 
-  if(maps\mp\_utility::_hasperk("specialty_class_toughness"))
+  if(maps\mp\_utility::_hasperk("specialty_class_toughness")) {
     self setviewkickscale(0.2);
+  }
 
   if(maps\mp\_utility::_hasperk("specialty_class_scavenger")) {
     self.ammopickup_scalar = 0.2;
@@ -398,8 +416,9 @@ applyperks() {
     maps\mp\_utility::giveperk("specialty_extraammo", 0);
   }
 
-  if(maps\mp\_utility::_hasperk("specialty_class_hardline"))
+  if(maps\mp\_utility::_hasperk("specialty_class_hardline")) {
     maps\mp\_utility::giveperk("specialty_hardline", 0);
+  }
 }
 
 get_specialtydata(var_0, var_1, var_2) {
@@ -408,15 +427,19 @@ get_specialtydata(var_0, var_1, var_2) {
 
   if(var_1 == "specialty1") {
     if(issubstr(var_3, "grenade")) {
-      if(var_0 == "specialty_fraggrenade")
+      if(var_0 == "specialty_fraggrenade") {
         self.perkscustom["grenades_count"] = var_4;
-      else
+      }
+      else {
         self.perkscustom["grenades_count"] = 1;
+      }
 
-      if(var_0 == "specialty_specialgrenade" && isDefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp")
+      if(var_0 == "specialty_specialgrenade" && isDefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp") {
         self.perkscustom["specialgrenades_count"] = var_4;
-      else
+      }
+      else {
         self.perkscustom["specialgrenades_count"] = 1;
+      }
 
       return;
     } else {
@@ -444,8 +467,9 @@ giveperkinventory() {
 }
 
 setweaponammooverall(var_0, var_1) {
-  if(isweaponcliponly(var_0))
+  if(isweaponcliponly(var_0)) {
     self setweaponammoclip(var_0, var_1);
+  }
   else {
     self setweaponammoclip(var_0, var_1);
     var_2 = var_1 - self getweaponammoclip(var_0);

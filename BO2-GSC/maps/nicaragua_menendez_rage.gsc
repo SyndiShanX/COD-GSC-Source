@@ -120,15 +120,17 @@ precache_rage_mode_overlays() {
   a_images = [];
   a_images[a_images.size] = "hud_nicar_rage_girl_image";
 
-  foreach(image in a_images)
+  foreach(image in a_images) {
   precacheshader(image);
+  }
 
   level.rage_mode_images = a_images;
 }
 
 is_rage_on() {
-  if(level.str_rage_on)
+  if(level.str_rage_on) {
     return true;
+  }
 
   return false;
 }
@@ -174,8 +176,9 @@ rage_low() {
     level thread rage_weapon_fire_vo_on();
     level thread maps\createart\nicaragua_art::blend_exposure_over_time(2.2, 0.5);
 
-    if(flag("menendez_intro_part2_done"))
+    if(flag("menendez_intro_part2_done")) {
       self visionsetnaked("rage_mode_low", 2);
+    }
 
     rpc("clientscripts/nicaragua", "rage_toggle", 0);
     rpc("clientscripts/nicaragua", "rage_mode_low");
@@ -190,8 +193,9 @@ rage_medium() {
     flag_clear("rage_weapon_fire_audio_on");
     rpc("clientscripts/nicaragua", "rage_mode_medium");
 
-    if(flag("menendez_intro_part2_done"))
+    if(flag("menendez_intro_part2_done")) {
       self visionsetnaked("rage_mode_low", 2);
+    }
 
     self heartbeat_medium();
     level.str_rage_mode = "medium";
@@ -204,15 +208,17 @@ rage_high(b_is_outdoor) {
     flag_clear("rage_off");
     level notify("rage_on");
 
-    if(isDefined(b_is_outdoor) && b_is_outdoor)
+    if(isDefined(b_is_outdoor) && b_is_outdoor) {
       level thread maps\createart\nicaragua_art::blend_exposure_over_time(2.6, 0.5);
+    }
 
     rpc("clientscripts/nicaragua", "rage_toggle", 1);
     rpc("clientscripts/nicaragua", "rage_mode_fade_shift_to_high", 0.4);
     rpc("clientscripts/nicaragua", "rage_mode_high");
 
-    if(flag("menendez_intro_part2_done"))
+    if(flag("menendez_intro_part2_done")) {
       self visionsetnaked("rage_mode_high", 0.5);
+    }
 
     self heartbeat_high();
     self thread rage_mode_audio_loop("vox_nic_2_01_002a_mene");
@@ -267,8 +273,9 @@ rage_dive_to_prone_logic() {
   level endon("rage_off");
   wait 0.05;
 
-  while(self.divetoprone)
+  while(self.divetoprone) {
     wait 0.05;
+  }
 
   self allow_divetoprone(0);
 }
@@ -278,8 +285,9 @@ rage_high_weapon_switch_logic(b_first_shot) {
   self allowpickupweapons(0);
 
   if(isDefined(b_first_shot) && b_first_shot) {
-    while(level.n_rage_kills < 1)
+    while(level.n_rage_kills < 1) {
       wait 0.05;
+    }
   }
 
   self disableweapons(1);
@@ -300,14 +308,16 @@ rage_high_take_weapons() {
   weapon_list_modified = [];
 
   for(i = 0; i < self.weapons_list.size; i++) {
-    if(!is_weapon_attachment(self.weapons_list[i]))
+    if(!is_weapon_attachment(self.weapons_list[i])) {
       weapon_list_modified[weapon_list_modified.size] = self.weapons_list[i];
+    }
   }
 
   self.weapons_list = weapon_list_modified;
 
-  if(is_weapon_attachment(self.curweapon))
+  if(is_weapon_attachment(self.curweapon)) {
     self.curweapon = get_baseweapon_for_attachment(self.curweapon);
+  }
 
   self.weapons_info = [];
 
@@ -326,8 +336,9 @@ rage_high_take_weapons() {
   }
 
   foreach(str_weapon in self.weapons_list) {
-    if(str_weapon != "machete_held_sp")
+    if(str_weapon != "machete_held_sp") {
       self takeweapon(str_weapon);
+    }
   }
 }
 
@@ -375,8 +386,9 @@ rage_end_by_kills(str_ai_group) {
 rage_end_by_no_enemies() {
   level endon("rage_off");
 
-  while(getaiarray("axis").size > 0)
+  while(getaiarray("axis").size > 0) {
     wait 0.05;
+  }
 
   wait 0.15;
   level.player thread rage_low();
@@ -407,10 +419,12 @@ rage_high_ammo_check() {
   if(str_weapon_current != "none") {
     n_clip_size = weaponclipsize(str_weapon_current);
 
-    if(n_bullets_used >= n_clip_size)
+    if(n_bullets_used >= n_clip_size) {
       n_ammo_give = 1;
-    else
+    }
+    else {
       n_ammo_give = n_clip_size - n_bullets_used;
+    }
 
     self setweaponammoclip(str_weapon_current, n_ammo_give);
   }
@@ -429,8 +443,9 @@ rage_ammo_check() {
       n_ammo = self getweaponammostock(str_weapon_current);
       n_stock_size = weaponmaxammo(str_weapon_current);
 
-      if(n_ammo < n_stock_size)
+      if(n_ammo < n_stock_size) {
         self setweaponammostock(str_weapon_current, n_stock_size);
+      }
     }
 
     wait 0.05;
@@ -518,8 +533,9 @@ should_fast_reload_by_weapon(str_weapon) {
 rage_player_invulnerability_disable_based_on_kills(n_kills_before_disable) {
   level endon("rage_off");
 
-  while(level.n_rage_kills < n_kills_before_disable)
+  while(level.n_rage_kills < n_kills_before_disable) {
     wait 0.05;
+  }
 
   self disableinvulnerability();
 }
@@ -537,8 +553,9 @@ rage_enemy_logic() {
 
   foreach(ai_enemy in a_enemies) {
     if(isalive(ai_enemy)) {
-      if(!isDefined(ai_enemy.ent_flag["rage_extra_gore"]))
+      if(!isDefined(ai_enemy.ent_flag["rage_extra_gore"])) {
         ai_enemy ent_flag_init("rage_extra_gore");
+      }
     }
   }
 
@@ -546,8 +563,9 @@ rage_enemy_logic() {
   a_enemies = getaiarray("axis");
 
   foreach(ai_enemy in a_enemies) {
-    if(isalive(ai_enemy))
+    if(isalive(ai_enemy)) {
       ai_enemy notify("rage_off");
+    }
   }
 }
 
@@ -563,8 +581,9 @@ cool_rage_death() {
 rage_ragdoll_death(v_hit_direction, v_hit_location) {
   n_dist = distance(level.player.origin, self.origin);
 
-  if(n_dist > 512)
+  if(n_dist > 512) {
     n_dist = 512;
+  }
 
   n_dist_invert = 512 - n_dist;
   n_launch_force = linear_map(n_dist_invert, 0, 512, 3, 45);
@@ -574,24 +593,28 @@ rage_ragdoll_death(v_hit_direction, v_hit_location) {
   playFX(level._effect["rage_mode_blood"], v_hit_location, v_hit_direction);
   self ragdoll_death();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self launchragdoll(v_launch_final);
+  }
 
-  if(is_mature())
+  if(is_mature()) {
     self thread blood_splat_logic();
+  }
 }
 
 rage_blood_enemy_death(v_hit_direction, v_hit_location) {
-  if(is_alive(self))
+  if(is_alive(self)) {
     self disable_long_death();
+  }
 
   if(isDefined(self.ent_flag["rage_extra_gore"])) {
     if(!ent_flag("rage_extra_gore")) {
       self thread rage_extra_gore_cool_down();
       playFX(level._effect["rage_mode_blood"], v_hit_location, v_hit_direction);
 
-      if(is_mature())
+      if(is_mature()) {
         self blood_splat_logic();
+      }
     }
   }
 }
@@ -612,19 +635,22 @@ blood_splat_logic(n_alpha_max_forced) {
   n_blood_dist_inverse = n_blood_dist_max - n_blood_dist;
   n_alpha = linear_map(n_blood_dist_inverse, 0, n_blood_dist_max, 0, 1);
 
-  if(isDefined(n_alpha_max_forced) && n_alpha_max_forced)
+  if(isDefined(n_alpha_max_forced) && n_alpha_max_forced) {
     n_alpha = n_alpha_max_forced;
+  }
 
-  if(n_alpha > 0)
+  if(n_alpha > 0) {
     level.player visionsetnaked("rage_mode_blood", 0.05);
+  }
 
   n_alpha_reset = 0;
 
   if(isDefined(level.player.b_in_courtyard) && level.player.b_in_courtyard && n_dist <= 192) {
     n_alpha_reset = 0.5;
 
-    if(n_alpha < n_alpha_reset)
+    if(n_alpha < n_alpha_reset) {
       n_alpha = 0.5;
+    }
   }
 
   n_time = linear_map(n_alpha, n_alpha_reset, 1, 0, 3);
@@ -633,10 +659,12 @@ blood_splat_logic(n_alpha_max_forced) {
   level endon("end_other_blood_splat");
   wait 0.25;
 
-  if(isDefined(level.player.b_in_courtyard) && level.player.b_in_courtyard && flag("rage_off"))
+  if(isDefined(level.player.b_in_courtyard) && level.player.b_in_courtyard && flag("rage_off")) {
     level.player visionsetnaked("rage_mode_low", 0.05);
-  else
+  }
+  else {
     level.player visionsetnaked("rage_mode_high", 0.05);
+  }
 }
 
 _get_timescale_kill_slow() {
@@ -713,8 +741,9 @@ rage_low_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_
   s_rage_settings_low = level.a_rage_settings["low"];
   n_damage = int(n_damage * s_rage_settings_low.n_damage_frac);
 
-  if(n_damage > s_rage_settings_low.n_damage_cap)
+  if(n_damage > s_rage_settings_low.n_damage_cap) {
     n_damage = s_rage_settings_low.n_damage_cap;
+  }
 
   return n_damage;
 }
@@ -722,21 +751,28 @@ rage_low_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_
 rage_high_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
   s_rage_settings_high = level.a_rage_settings["high"];
 
-  if(level.n_rage_kills == 0)
+  if(level.n_rage_kills == 0) {
     n_damage = 1;
-  else if(level.n_rage_kills == 1)
+  }
+  else if(level.n_rage_kills == 1) {
     n_damage = int(n_damage * s_rage_settings_high.n_damage_frac_kill_1);
-  else if(level.n_rage_kills == 2)
+  }
+  else if(level.n_rage_kills == 2) {
     n_damage = int(n_damage * s_rage_settings_high.n_damage_frac_kill_2);
-  else if(level.n_rage_kills == 3)
+  }
+  else if(level.n_rage_kills == 3) {
     n_damage = int(n_damage * s_rage_settings_high.n_damage_frac_kill_3);
-  else if(level.n_rage_kills == 4)
+  }
+  else if(level.n_rage_kills == 4) {
     n_damage = int(n_damage * s_rage_settings_high.n_damage_frac_kill_4);
-  else
+  }
+  else {
     n_damage = int(n_damage * s_rage_settings_high.n_damage_frac_cap);
+  }
 
-  if(n_damage > s_rage_settings_high.n_damage_cap)
+  if(n_damage > s_rage_settings_high.n_damage_cap) {
     n_damage = s_rage_settings_high.n_damage_cap;
+  }
 
   level notify("rage_high_player_damage");
   return n_damage;
@@ -744,8 +780,9 @@ rage_high_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str
 
 rage_ai_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
   if(!flag("rage_off")) {
-    if(level.player getcurrentweapon() == "machete_held_sp")
+    if(level.player getcurrentweapon() == "machete_held_sp") {
       level.player playrumbleonentity("reload_clipout");
+    }
 
     self thread rage_blood_enemy_death(v_dir, v_point);
 
@@ -756,14 +793,16 @@ rage_ai_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_o
 
     n_damage = self.health;
   } else {
-    if(isDefined(e_inflictor) && isplayer(e_inflictor))
+    if(isDefined(e_inflictor) && isplayer(e_inflictor)) {
       n_damage = int(n_damage * 1.05);
+    }
 
     if(isDefined(level.player.b_in_courtyard) && level.player.b_in_courtyard) {
       n_possible_health = self.health - n_damage;
 
-      if(n_possible_health < 1)
+      if(n_possible_health < 1) {
         self thread rage_blood_enemy_death(v_dir, v_point);
+      }
     }
   }
 
@@ -779,8 +818,9 @@ fake_rage_ai_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_me
   n_possible_health = self.health - n_damage;
 
   if(n_possible_health < 1) {
-    if(is_alive(self))
+    if(is_alive(self)) {
       self disable_long_death();
+    }
 
     self thread rage_blood_enemy_death(v_dir, v_point);
   }
@@ -803,16 +843,18 @@ rage_mode_create_hud_elem() {
 rage_mode_low_cycle_images() {
   level endon("disable_rage");
 
-  if(!isDefined(self.rage_mode_hud_enabled))
+  if(!isDefined(self.rage_mode_hud_enabled)) {
     self.rage_mode_hud_enabled = 0;
+  }
 
   if(self.rage_mode_hud_enabled) {
     return;
   }
   self.rage_mode_hud_enabled = 1;
 
-  if(!isDefined(self.rage_mode_hud))
+  if(!isDefined(self.rage_mode_hud)) {
     self.rage_mode_hud = rage_mode_create_hud_elem();
+  }
 
   a_images = array_randomize(level.rage_mode_images);
   n_image_index = 0;
@@ -824,8 +866,9 @@ rage_mode_low_cycle_images() {
       self.rage_mode_hud rage_fade_image();
       n_image_index++;
 
-      if(n_image_index >= a_images.size)
+      if(n_image_index >= a_images.size) {
         n_image_index = 0;
+      }
     }
 
     wait 55;
@@ -870,8 +913,9 @@ rage_mode_high_cycle_images() {
     self.rage_mode_hud.alpha = 0;
     n_index++;
 
-    if(n_index >= a_images.size)
+    if(n_index >= a_images.size) {
       n_index = 0;
+    }
   }
 }
 
@@ -885,8 +929,9 @@ rage_health_overlay() {
     wait 0.05;
     n_target_damage_alpha = 1.0 - self.health / self.maxhealth;
 
-    if(n_target_damage_alpha > 0.75)
+    if(n_target_damage_alpha > 0.75) {
       n_target_damage_alpha = 0.75;
+    }
 
     if(n_alpha < n_target_damage_alpha) {
       rpc("clientscripts/nicaragua", "rage_health_fade_end_notify");
@@ -894,8 +939,9 @@ rage_health_overlay() {
       b_fading_to_low_damage = 0;
     } else if(n_alpha > n_target_damage_alpha) {
       if(!b_fading_to_low_damage) {
-        if(n_target_damage_alpha == 0)
+        if(n_target_damage_alpha == 0) {
           b_fading_to_low_damage = 1;
+        }
 
         level thread rage_health_high_damage_to_low(n_alpha, n_target_damage_alpha);
       }
@@ -908,8 +954,9 @@ rage_health_overlay() {
 rage_health_high_damage_to_low(n_alpha, n_target_damage_alpha) {
   n_time_to_fade_out = 1;
 
-  if(n_target_damage_alpha < 0.15)
+  if(n_target_damage_alpha < 0.15) {
     n_time_to_fade_out = 3;
+  }
 
   rpc("clientscripts/nicaragua", "rage_health_fade", n_alpha, n_target_damage_alpha, n_time_to_fade_out);
 }
@@ -924,8 +971,9 @@ health_fade_off_watcher(n_alpha_previous) {
     wait 0.05;
   }
 
-  if(isDefined(level.disable_damage_overlay) && level.disable_damage_overlay)
+  if(isDefined(level.disable_damage_overlay) && level.disable_damage_overlay) {
     rpc("clientscripts/nicaragua", "rage_health_fade", n_alpha_previous, 0, 0.05);
+  }
 }
 
 rage_sprint_logic() {
@@ -997,8 +1045,9 @@ rage_josefina_vo() {
   level endon("shattered_1_started");
   level endon("disable_rage");
 
-  if(!isDefined(self.b_josefina_vo_on))
+  if(!isDefined(self.b_josefina_vo_on)) {
     self.b_josefina_vo_on = 0;
+  }
 
   if(self.b_josefina_vo_on) {
     return;
@@ -1052,8 +1101,9 @@ rage_melee_player_vo() {
 
     n_melee++;
 
-    if(n_melee == 2)
+    if(n_melee == 2) {
       n_melee = 0;
+    }
 
     wait 0.05;
   }

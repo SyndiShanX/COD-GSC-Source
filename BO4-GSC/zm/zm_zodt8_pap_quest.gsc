@@ -653,4 +653,3 @@ function_4944c76f() {
     waitframe(1);
   }
 }
-

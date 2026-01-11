@@ -58,10 +58,12 @@ giveCustomLoadout() {
 onPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime) {
   if((sWeapon == "crossbow_explosive_mp") && (sMeansOfDeath == "MOD_IMPACT")) {
     if(isDefined(eAttacker) && IsPlayer(eAttacker)) {
-      if(!isDefined(eAttacker.pers["sticks"]))
+      if(!isDefined(eAttacker.pers["sticks"])) {
         eAttacker.pers["sticks"] = 1;
-      else
+      }
+      else {
         eAttacker.pers["sticks"]++;
+      }
       eAttacker.sticks = eAttacker.pers["sticks"];
     }
   }
@@ -154,16 +156,18 @@ onSpawnPlayer() {
 }
 onWagerAwards() {
   tomahawks = self maps\mp\gametypes\_globallogic_score::getPersStat("tomahawks");
-  if(!isDefined(tomahawks))
+  if(!isDefined(tomahawks)) {
     tomahawks = 0;
+  }
   self maps\mp\gametypes\_persistence::setAfterActionReportStat("wagerAwards", tomahawks, 0);
   sticks = self maps\mp\gametypes\_globallogic_score::getPersStat("sticks");
-  if(!isDefined(sticks))
+  if(!isDefined(sticks)) {
     sticks = 0;
+  }
   self maps\mp\gametypes\_persistence::setAfterActionReportStat("wagerAwards", sticks, 1);
   bestKillstreak = self maps\mp\gametypes\_globallogic_score::getPersStat("best_kill_streak");
-  if(!isDefined(bestKillstreak))
+  if(!isDefined(bestKillstreak)) {
     bestKillstreak = 0;
+  }
   self maps\mp\gametypes\_persistence::setAfterActionReportStat("wagerAwards", bestKillstreak, 2);
 }
-

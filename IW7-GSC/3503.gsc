@@ -14,8 +14,9 @@ init() {
   var_0.func_B49A = 0.5;
   var_0.func_11141 = 150;
 
-  if(!isDefined(level.func_A692))
+  if(!isDefined(level.func_A692)) {
     level.func_A692 = [];
+  }
 
   level.func_A692["mrsiartillery"] = var_00;
 }
@@ -24,10 +25,12 @@ func_12906(var_00, var_01) {
   var_02 = level.func_A692["mrsiartillery"];
   var_03 = scripts\mp\killstreaks\designator_grenade::func_526C("mrsiartillery", var_2.weaponname, ::onteamchangedeath);
 
-  if(!isDefined(var_03) || !var_03)
+  if(!isDefined(var_03) || !var_03) {
     return 0;
-  else
+  }
+  else {
     return 1;
+  }
 }
 
 onteamchangedeath(var_00, var_01) {

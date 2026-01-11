@@ -11,14 +11,16 @@ func_CBB5(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(getdvarint("e3")) {
     return;
   }
-  if(gettime() < 500)
+  if(gettime() < 500) {
     wait 0.5;
+  }
 
   if(!isDefined(var_01)) {
     return;
   }
-  if(!isDefined(level.func_CB9C))
+  if(!isDefined(level.func_CB9C)) {
     level.func_CB9C = level.player getweaponattachmentarray();
+  }
 
   if(func_CBAC()) {
     return;
@@ -33,11 +35,13 @@ func_CBB5(var_00, var_01, var_02, var_03, var_04, var_05) {
   level.func_CB9C.tag = var_01;
   level.func_CB9C.fov = scripts\engine\utility::ter_op(isDefined(var_02), var_02, 30);
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     level.func_CB9C.origin_offset = var_03;
+  }
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     level.func_CB9C.angles_offset = var_04;
+  }
 
   level.func_CB9C.entity = var_00;
   level.func_CB9C.enable = 1;
@@ -50,10 +54,12 @@ func_CBB5(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(!isDefined(var_05)) {
     setomnvar("ui_show_pip", 1);
 
-    if(isDefined(level.player _meth_8473()))
+    if(isDefined(level.player _meth_8473())) {
       setomnvar("ui_jackal_hide_follow_pip", 1);
-    else
+    }
+    else {
       setomnvar("ui_jackal_hide_follow_pip", 0);
+    }
   }
 }
 
@@ -71,11 +77,13 @@ func_2ADF(var_00) {
   setomnvar("ui_show_pip", 1);
   _cinematicingame(var_00);
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.05;
+  }
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     wait 0.05;
+  }
 
   _stopcinematicingame();
   setomnvar("ui_show_pip", 0);

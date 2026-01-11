@@ -25,8 +25,9 @@ main() {
 }
 
 loadtreadfx(type) {
-  if(!isDefined(level._effect[type]))
+  if(!isDefined(level._effect[type])) {
     level._effect[type] = [];
+  }
 
   level._effect[type]["rcbomb_driving_1st"] = loadfx("vehicle/treadfx/fx_treadfx_rcbomb_" + type + "_first_person");
   level._effect[type]["rcbomb_driving_slow_1st"] = loadfx("vehicle/treadfx/fx_treadfx_rcbomb_" + type + "_slow");
@@ -71,11 +72,13 @@ spawn_solid_fx(localclientnum) {
       continue;
     } else if(player getinkillcam(localclientnum))
       continue;
-    else if(self.friend != self friendnotfoe(localclientnum))
+    else if(self.friend != self friendnotfoe(localclientnum)) {
       self stop_light_fx(localclientnum);
+    }
 
-    if(!isDefined(self.fx) || self.fx == 0)
+    if(!isDefined(self.fx) || self.fx == 0) {
       self start_light_fx(localclientnum);
+    }
   }
 }
 
@@ -87,24 +90,29 @@ death(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemo
 }
 
 start_light_fx(localclientnum, blink) {
-  if(!isDefined(blink))
+  if(!isDefined(blink)) {
     blink = 0;
+  }
 
   friend = self friendnotfoe(localclientnum);
   player = getlocalplayer(localclientnum);
 
   if(friend) {
-    if(blink)
+    if(blink) {
       self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_friendly_light_blink"], self, "tag_origin");
-    else
+    }
+    else {
       self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_friendly_light"], self, "tag_origin");
+    }
 
     self.friend = 1;
   } else {
-    if(blink)
+    if(blink) {
       self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_enemy_light_blink"], self, "tag_origin");
-    else
+    }
+    else {
       self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_enemy_light"], self, "tag_origin");
+    }
 
     self.friend = 0;
   }
@@ -126,8 +134,9 @@ countdown(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
   self endon("light_disable");
   interval = 1;
 
-  if(newval == 2)
+  if(newval == 2) {
     interval = 0.133;
+  }
 
   self stop_light_fx(localclientnum);
 
@@ -155,27 +164,35 @@ demo_think(localclientnum) {
 play_screen_fx_dirt(localclientnum) {
   pick_one = randomintrange(0, 4);
 
-  if(pick_one == 0)
+  if(pick_one == 0) {
     animateui(localclientnum, "fullscreen_dirt", "dirt", "in", 0);
-  else if(pick_one == 1)
+  }
+  else if(pick_one == 1) {
     animateui(localclientnum, "fullscreen_dirt", "dirt_right_splash", "in", 0);
-  else if(pick_one == 2)
+  }
+  else if(pick_one == 2) {
     animateui(localclientnum, "fullscreen_dirt", "dirt_left_splash", "in", 0);
-  else
+  }
+  else {
     animateui(localclientnum, "fullscreen_dirt", "blurred_dirt_random", "in", 0);
+  }
 }
 
 play_screen_fx_dust(localclientnum) {
   pick_one = randomintrange(0, 4);
 
-  if(pick_one == 0)
+  if(pick_one == 0) {
     animateui(localclientnum, "fullscreen_dust", "dust", "in", 0);
-  else if(pick_one == 1)
+  }
+  else if(pick_one == 1) {
     animateui(localclientnum, "fullscreen_dust", "dust_right_splash", "in", 0);
-  else if(pick_one == 2)
+  }
+  else if(pick_one == 2) {
     animateui(localclientnum, "fullscreen_dust", "dust_left_splash", "in", 0);
-  else
+  }
+  else {
     animateui(localclientnum, "fullscreen_dust", "blurred_dust_random", "in", 0);
+  }
 }
 
 play_driving_fx_firstperson(localclientnum, speed, speed_fraction, surf_type) {
@@ -203,18 +220,23 @@ play_driving_fx_firstperson(localclientnum, speed, speed_fraction, surf_type) {
   decelerating_throttle_fraction = 0.25;
   throttle = self getthrottle();
 
-  if(speed < slow_speed * -1)
+  if(speed < slow_speed * -1) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_reverse_1st"], self, "tag_origin");
-  else if(speed_fraction >= normal_speed_fraction && !(speed_fraction < decelerating_speed_fraction && throttle < decelerating_throttle_fraction))
+  }
+  else if(speed_fraction >= normal_speed_fraction && !(speed_fraction < decelerating_speed_fraction && throttle < decelerating_throttle_fraction)) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_1st"], self, "tag_origin");
-  else if(speed > slow_speed)
+  }
+  else if(speed > slow_speed) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_slow_1st"], self, "tag_origin");
+  }
 
-  if(speed_fraction >= 0.75 && speed > 0)
+  if(speed_fraction >= 0.75 && speed > 0) {
     play_trail = 1;
+  }
 
-  if(play_trail)
+  if(play_trail) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_trail_1st"], self, "tag_origin");
+  }
 
   if(!issplitscreen() && speed > 0 && speed_fraction >= normal_speed_fraction) {
     viewangles = getlocalclientangles(localclientnum);
@@ -226,16 +248,19 @@ play_driving_fx_firstperson(localclientnum, speed, speed_fraction, surf_type) {
     if(pitch < no_effects_pitch) {
       current_additional_time = 0;
 
-      if(pitch > full_effects_pitch)
+      if(pitch > full_effects_pitch) {
         current_additional_time = max_additional_time * ((pitch - full_effects_pitch) / (no_effects_pitch - full_effects_pitch));
+      }
 
       if(self.last_screen_dirt + self.screen_dirt_delay + current_additional_time < getrealtime()) {
         screen_fx_type = self[[level.rcbombsurfacetypeforscreenfx]]();
 
-        if(screen_fx_type == "dirt")
+        if(screen_fx_type == "dirt") {
           play_screen_fx_dirt(localclientnum);
-        else
+        }
+        else {
           play_screen_fx_dust(localclientnum);
+        }
 
         self.last_screen_dirt = getrealtime();
         self.screen_dirt_delay = randomintrange(250, 500);
@@ -266,18 +291,23 @@ play_driving_fx_thirdperson(localclientnum, speed, speed_fraction, surf_type) {
   slow_speed = 5;
   normal_speed_fraction = 0.25;
 
-  if(speed < slow_speed * -1)
+  if(speed < slow_speed * -1) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_reverse_3rd"], self, "tag_origin");
-  else if(speed_fraction >= normal_speed_fraction)
+  }
+  else if(speed_fraction >= normal_speed_fraction) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_3rd"], self, "tag_origin");
-  else if(speed > slow_speed)
+  }
+  else if(speed > slow_speed) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_slow_3rd"], self, "tag_origin");
+  }
 
-  if(speed_fraction >= 0.75 && speed > 0)
+  if(speed_fraction >= 0.75 && speed > 0) {
     play_trail = 1;
+  }
 
-  if(play_trail)
+  if(play_trail) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_trail_3rd"], self, "tag_origin");
+  }
 }
 
 play_driving_screen_fx(localclientnum) {
@@ -287,13 +317,16 @@ play_driving_screen_fx(localclientnum) {
     speed = self getspeed();
     maxspeed = self getmaxspeed();
 
-    if(speed < 0)
+    if(speed < 0) {
       maxspeed = self getmaxreversespeed();
+    }
 
-    if(maxspeed > 0)
+    if(maxspeed > 0) {
       speed_fraction = abs(speed) / maxspeed;
-    else
+    }
+    else {
       speed_fraction = 0;
+    }
 
     if(self iswheelcolliding("back_left") || self iswheelcolliding("back_right")) {
       if(self islocalclientdriver(localclientnum)) {
@@ -313,22 +346,27 @@ play_driving_fx(localclientnum) {
     speed = self getspeed();
     maxspeed = self getmaxspeed();
 
-    if(speed < 0)
+    if(speed < 0) {
       maxspeed = self getmaxreversespeed();
+    }
 
-    if(maxspeed > 0)
+    if(maxspeed > 0) {
       speed_fraction = abs(speed) / maxspeed;
-    else
+    }
+    else {
       speed_fraction = 0;
+    }
 
     if(self iswheelcolliding("back_left") || self iswheelcolliding("back_right")) {
       surf_type = self[[level.rcbombsurfacetypefortreadfx]]();
 
       if(isDefined(surf_type)) {
-        if(self islocalclientdriver(localclientnum))
+        if(self islocalclientdriver(localclientnum)) {
           play_driving_fx_firstperson(localclientnum, speed, speed_fraction, surf_type);
-        else
+        }
+        else {
           play_driving_fx_thirdperson(localclientnum, speed, speed_fraction, surf_type);
+        }
       }
     }
 
@@ -362,10 +400,12 @@ collisionhandler(localclientnum) {
       player = getlocalplayer(driver_local_client);
 
       if(isDefined(player)) {
-        if(hit_intensity > 15)
+        if(hit_intensity > 15) {
           player playrumbleonentity(driver_local_client, "damage_heavy");
-        else
+        }
+        else {
           player playrumbleonentity(driver_local_client, "damage_light");
+        }
       }
     }
   }
@@ -410,8 +450,9 @@ enginestutterhandler(localclientnum) {
     if(self islocalclientdriver(localclientnum)) {
       player = getlocalplayer(localclientnum);
 
-      if(isDefined(player))
+      if(isDefined(player)) {
         player playrumbleonentity(localclientnum, "rcbomb_engine_stutter");
+      }
     }
   }
 }
@@ -426,11 +467,13 @@ slidehandler(localclientnum) {
 
       if(isDefined(player)) {
         if(self ispeelingout() || self iswheelsliding("back_left") && self iswheelsliding("back_right")) {
-          if(slide_start_time == 0)
+          if(slide_start_time == 0) {
             slide_start_time = getrealtime();
+          }
 
-          if(slide_start_time + 200 < getrealtime())
+          if(slide_start_time + 200 < getrealtime()) {
             player playrumbleonentity(localclientnum, "rcbomb_slide");
+          }
         } else
           slide_start_time = 0;
       }
@@ -523,17 +566,21 @@ default_surface_type_for_screen_fx() {
   right_rear = self getwheelsurface("back_right");
   left_rear = self getwheelsurface("back_left");
 
-  if(default_dirt_surface_type(right_rear))
+  if(default_dirt_surface_type(right_rear)) {
     return "dirt";
+  }
 
-  if(default_dirt_surface_type(left_rear))
+  if(default_dirt_surface_type(left_rear)) {
     return "dirt";
+  }
 
-  if(default_snow_surface_type(right_rear))
+  if(default_snow_surface_type(right_rear)) {
     return "snow";
+  }
 
-  if(default_snow_surface_type(left_rear))
+  if(default_snow_surface_type(left_rear)) {
     return "snow";
+  }
 
   return "dust";
 }
@@ -542,14 +589,17 @@ default_surface_type_for_tread_fx() {
   right_rear = self getwheelsurface("back_right");
   left_rear = self getwheelsurface("back_left");
 
-  if(default_snow_surface_type(right_rear) || default_snow_surface_type(left_rear))
+  if(default_snow_surface_type(right_rear) || default_snow_surface_type(left_rear)) {
     return "snow";
+  }
 
-  if(default_dirt_surface_type(right_rear) || default_dirt_surface_type(left_rear))
+  if(default_dirt_surface_type(right_rear) || default_dirt_surface_type(left_rear)) {
     return "dust";
+  }
 
-  if(default_concrete_surface_type(right_rear) || default_concrete_surface_type(left_rear))
+  if(default_concrete_surface_type(right_rear) || default_concrete_surface_type(left_rear)) {
     return "concrete";
+  }
 
   return undefined;
 }

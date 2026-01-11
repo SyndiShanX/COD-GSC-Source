@@ -16,8 +16,9 @@ main() {
   level.dofDefault["nearBlur"] = 4;
   level.dofDefault["farBlur"] = 1.75146;
   players = getEntArray("player", "classname");
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     players[i] maps\_art::setdefaultdepthoffield();
+  }
 
   //* Fog section *
 

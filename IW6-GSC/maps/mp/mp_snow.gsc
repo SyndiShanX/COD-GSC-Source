@@ -222,8 +222,9 @@ satellite_fall() {
   }
 
   if(level.createFX_enabled) {
-    while(!isDefined(level.player))
+    while(!isDefined(level.player)) {
       waitframe();
+    }
     level.players = [level.player];
     level.characters = [];
   } else {
@@ -426,8 +427,9 @@ satellite_flash(test_origin, test_radius, test_dot, test_volume) {
       continue;
     }
     if(isDefined(test_volume)) {
-      if(!player IsTouching(test_volume))
+      if(!player IsTouching(test_volume)) {
         continue;
+      }
     }
 
     player ShellShock("flashbang_mp", max(2.0, 4 * (1 - (dist_to_sat / test_radius))));
@@ -449,11 +451,13 @@ satellite_group_hide() {
 }
 
 satellite_clip_hide() {
-  if(self is_dynamic_path())
+  if(self is_dynamic_path()) {
     self ConnectPaths();
+  }
 
-  if(self is_ai_sight_line())
+  if(self is_ai_sight_line()) {
     self SetAISightLineVisible(false);
+  }
 
   self maps\mp\_movers::notify_moving_platform_invalid();
 
@@ -480,17 +484,20 @@ satellite_clip_show() {
   self SetContents(self.old_contents);
   self Show();
 
-  if(self is_dynamic_path())
+  if(self is_dynamic_path()) {
     self DisconnectPaths();
+  }
 
-  if(self is_ai_sight_line())
+  if(self is_ai_sight_line()) {
     self SetAISightLineVisible(true);
+  }
 }
 
 satellite_group(targetname) {
   struct = getstruct(targetname, "targetname");
-  if(!isDefined(struct))
+  if(!isDefined(struct)) {
     return undefined;
+  }
 
   parent = spawn("script_model", struct.origin);
   parent setModel("tag_origin");
@@ -757,8 +764,9 @@ rotate_helicopter_rotor() {
   rotor RotateVelocity((0, -300, 0), 36000, 0, 0);
 
   rotor_back = GetEnt("heli_rotor_back", "targetname");
-  if(isDefined(rotor_back))
+  if(isDefined(rotor_back)) {
     rotor_back RotateVelocity((-300, 0, 0), 36000, 0, 0);
+  }
 }
 
 satellite_static() {
@@ -873,15 +881,17 @@ ice_sink() {
   sink_origin = raise_origin - (0, 0, 100);
 
   while(1) {
-    while(self.sink_time < GetTime())
+    while(self.sink_time < GetTime()) {
       waitframe();
+    }
 
     dist = Distance(self.origin, sink_origin);
     move_time = dist / sink_speed;
     self.anim_ref MoveTo(sink_origin, move_time);
 
-    while(self.sink_time >= GetTime())
+    while(self.sink_time >= GetTime()) {
       waitframe();
+    }
 
     dist = Distance(self.origin, raise_origin);
     move_time = dist / raise_speed;
@@ -890,8 +900,9 @@ ice_sink() {
 }
 
 wait_game_percent_complete(time_percent, score_percent) {
-  if(!isDefined(score_percent))
+  if(!isDefined(score_percent)) {
     score_percent = time_percent;
+  }
 
   gameFlagWait("prematch_done");
 
@@ -950,8 +961,9 @@ get_highest_score() {
   } else {
     if(isDefined(level.players)) {
       foreach(player in level.players) {
-        if(isDefined(player.score) && player.score > highestScore)
+        if(isDefined(player.score) && player.score > highestScore) {
           highestScore = player.score;
+        }
       }
     }
   }
@@ -960,8 +972,9 @@ get_highest_score() {
 
 SNOW_SATELLITE_WEIGHT = 55;
 snowCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   if(!level.snow_satellite_allowed || game["player_holding_level_killstrek"]) {
     return;

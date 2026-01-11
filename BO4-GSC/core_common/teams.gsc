@@ -114,4 +114,3 @@ function_d28f6fa0(team) {
     function_a9d594a0(player getparty());
   }
 }
-

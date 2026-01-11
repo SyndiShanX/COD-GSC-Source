@@ -131,18 +131,24 @@ main() {
 littlebird_monument_crash(crashStruct) {
   while(isDefined(self)) {
     self waittill("damage", amount, attacker, enemy_org, impact_org, type);
-    if(!isDefined(type))
+    if(!isDefined(type)) {
       continue;
-    if(!isDefined(attacker))
+    }
+    if(!isDefined(attacker)) {
       continue;
-    if(!isDefined(amount))
+    }
+    if(!isDefined(amount)) {
       continue;
-    if(isplayer(attacker))
+    }
+    if(isplayer(attacker)) {
       continue;
-    if((type == "MOD_PROJECTILE") && (amount > 999))
+    }
+    if((type == "MOD_PROJECTILE") && (amount > 999)) {
       break;
-    if((type == "MOD_PROJECTILE_SPLASH") && (amount == 4000))
+    }
+    if((type == "MOD_PROJECTILE_SPLASH") && (amount == 4000)) {
       break;
+    }
   }
 
   self vehicle_detachfrompath();
@@ -167,8 +173,9 @@ littlebird_monument_crash(crashStruct) {
 }
 
 littlebird_monument_rider_death(heli) {
-  if((self.script_startingposition == 0) || (self.script_startingposition == 1))
+  if((self.script_startingposition == 0) || (self.script_startingposition == 1)) {
     return;
+  }
   tag = "tag_detach_right";
   linked = false;
 
@@ -176,10 +183,12 @@ littlebird_monument_rider_death(heli) {
   if((self.script_startingposition == 2) || (self.script_startingposition == 3) || (self.script_startingposition == 4)) {
     tag = "tag_detach_left";
   }
-  if((self.script_startingposition == 2) || (self.script_startingposition == 5))
+  if((self.script_startingposition == 2) || (self.script_startingposition == 5)) {
     sAnim = "little_bird_death_guy1";
-  if((self.script_startingposition == 3) || (self.script_startingposition == 6) || (self.script_startingposition == 7))
+  }
+  if((self.script_startingposition == 3) || (self.script_startingposition == 6) || (self.script_startingposition == 7)) {
     sAnim = "little_bird_death_guy3";
+  }
   if(self.script_startingposition == 4) {
     linked = true;
     sAnim = "little_bird_death_guy2";
@@ -208,8 +217,9 @@ littlebird_monument_rider_death(heli) {
     self unlink();
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self kill();
+  }
 }
 
 ent_cleanup(ent) {

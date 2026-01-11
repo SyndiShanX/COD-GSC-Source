@@ -38,10 +38,12 @@ init() {
 fontpulseinit(var_0) {
   self.basefontscale = self.fontscale;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.maxfontscale = min(var_0, 6.3);
-  else
+  }
+  else {
     self.maxfontscale = min(self.fontscale * 2, 6.3);
+  }
 
   self.inframes = 2;
   self.outframes = 4;

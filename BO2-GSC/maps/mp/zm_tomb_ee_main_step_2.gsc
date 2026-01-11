@@ -129,8 +129,9 @@ robot_head_trigger_think() {
       maps\mp\zm_tomb_craftables::clear_player_staff(str_weap_staff);
       level.n_ee_robot_staffs_planted++;
 
-      if(level.n_ee_robot_staffs_planted == 4)
+      if(level.n_ee_robot_staffs_planted == 4) {
         flag_set("ee_all_staffs_placed");
+      }
 
       e_upgraded_staff thread place_staff(self.stub.m_plinth);
     }

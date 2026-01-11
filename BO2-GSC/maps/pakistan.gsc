@@ -53,8 +53,9 @@ on_player_connect() {
   setsaveddvar("phys_buoyancy", 1);
   n_water_level_offset = 2;
 
-  if(flag("frogger_started") && !flag("frogger_done"))
+  if(flag("frogger_started") && !flag("frogger_done")) {
     n_water_level_offset = 10;
+  }
 
   setdvar("r_waterWaveBase", n_water_level_offset);
   self thread scale_speed_in_water();
@@ -85,8 +86,9 @@ scale_speed_in_water() {
       self.moveplaybackrate = linear_map(n_depth, 35, 0, 0.75, 1);
 
       if(n_depth >= 16) {
-        if(!(isDefined(self.rusher) && self.rusher) && !(isDefined(self.pakistan_move_mode) && self.pakistan_move_mode))
+        if(!(isDefined(self.rusher) && self.rusher) && !(isDefined(self.pakistan_move_mode) && self.pakistan_move_mode)) {
           self change_movemode("cqb_walk");
+        }
       } else if(!(isDefined(self.rusher) && self.rusher) && !(isDefined(self.pakistan_move_mode) && self.pakistan_move_mode))
         self reset_movemode();
     }
@@ -238,8 +240,9 @@ drone_add_cheap_spotlight() {
 float_longer_on_death() {
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self floatlonger();
+  }
 }
 
 take_no_damage() {
@@ -314,8 +317,9 @@ claw_kill_callback(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, 
     if(sweapon == "claw_grenade_impact_explode_sp" || sweapon == "bigdog_flamethrower" || sweapon == "bigdog_dual_turret") {
       level.n_fire_direction_kill_count++;
 
-      if(level.n_fire_direction_kill_count >= 8)
+      if(level.n_fire_direction_kill_count >= 8) {
         flag_set("claw_challenge_done");
+      }
     }
   }
 }

@@ -40,8 +40,9 @@ init() {
 
   level.tiSpawnDelay = getDvarInt("scr_tispawndelay");
 
-  if(!isDefined(level.tweakablesInitialized))
+  if(!isDefined(level.tweakablesInitialized)) {
     maps\mp\gametypes\_tweakables::init();
+  }
 
   precacheString(&"MP_HALFTIME");
   precacheString(&"MP_OVERTIME");
@@ -55,10 +56,12 @@ init() {
   precacheString(&"MP_OBITUARY_FRIENDLY");
   precacheString(&"MP_OBITUARY_ENEMY");
 
-  if(level.splitScreen)
+  if(level.splitScreen) {
     precacheString(&"MP_ENDED_GAME");
-  else
+  }
+  else {
     precacheString(&"MP_HOST_ENDED_GAME");
+  }
 
   level.halftimeType = "halftime";
   level.halftimeSubCaption = &"MP_SWITCHING_SIDES";
@@ -85,8 +88,9 @@ init() {
   level.fx_airstrike_afterburner = loadfx("fire/jet_afterburner");
   level.fx_airstrike_contrail = loadfx("smoke/jet_contrail");
 
-  if(level.console)
+  if(level.console) {
     precacheLeaderboards("LB_KILLS LB_WINS LB_TOTALXP LB_ACCURACY");
+  }
 
   level.teamCount["allies"] = 0;
   level.teamCount["axis"] = 0;
@@ -162,8 +166,9 @@ xpRateThread() {
 
   for(;;) {
     wait(5.0);
-    if(level.players[0].pers["team"] == "allies" || level.players[0].pers["team"] == "axis")
+    if(level.players[0].pers["team"] == "allies" || level.players[0].pers["team"] == "axis") {
       self maps\mp\gametypes\_rank::giveRankXP("kill", int(min(getDvarInt("scr_xprate"), 50)));
+    }
   }
 }
 

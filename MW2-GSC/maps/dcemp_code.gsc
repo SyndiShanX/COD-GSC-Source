@@ -39,8 +39,9 @@ iss_get_satellite_model() {
   model.angles = node.angles;
   model linkto(node);
 
-  foreach(part in level.iss_ents["satellite"])
+  foreach(part in level.iss_ents["satellite"]) {
   part linkto(model);
+  }
 
   return model;
 }
@@ -152,8 +153,9 @@ iss_organize_ents_by_node() {
 
   num = 0;
   foreach(obj in ents) {
-    if(distancesquared(obj getorigin(), self.origin) > squared(self.radius))
+    if(distancesquared(obj getorigin(), self.origin) > squared(self.radius)) {
       continue;
+    }
 
     obj.distance_to_blast = distance(node.origin, obj getorigin());
 
@@ -219,10 +221,12 @@ iss_destroy_iss_parts() {
   signp = 1;
   signr = 1;
 
-  if(cointoss())
+  if(cointoss()) {
     signp = -1;
-  if(cointoss())
+  }
+  if(cointoss()) {
     signr = -1;
+  }
 
   blaststart = getstruct("iss_blast_node", "targetname");
   blastend = getstruct(blaststart.target, "targetname");
@@ -268,10 +272,12 @@ iss_destroy_sat_parts() {
   signp = 1;
   signr = 1;
 
-  if(cointoss())
+  if(cointoss()) {
     signp = -1;
-  if(cointoss())
+  }
+  if(cointoss()) {
     signr = -1;
+  }
 
   blaststart = getstruct("iss_blast_node", "targetname");
   blastend = getstruct(blaststart.target, "targetname");
@@ -333,8 +339,9 @@ iss_lights_out() {
 
   for(i = 1; i <= level.bg_iss_darknum; i++) {
     name = "bg_iss_dark0";
-    if(i > 9)
+    if(i > 9) {
       name = "bg_iss_dark";
+    }
 
     model setModel(name + i);
 
@@ -346,8 +353,9 @@ iss_preload_lights() {
   origin = level.player.origin + (0, 0, 1024);
   for(i = 1; i <= level.bg_iss_darknum; i++) {
     name = "bg_iss_dark0";
-    if(i > 9)
+    if(i > 9) {
       name = "bg_iss_dark";
+    }
 
     model = spawn("script_model", origin);
     model.targetname = "iss_lights";
@@ -481,8 +489,9 @@ emp_ents_wait(type) {
   dist = 0;
   magicnumber = 1 / 2500;
 
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = self.targetname;
+  }
 
   switch (type) {
     case "emp_delete":
@@ -503,8 +512,9 @@ emp_ents_wait(type) {
   }
 
   time = dist * magicnumber - 13;
-  if(time < 0)
+  if(time < 0) {
     time = 0;
+  }
   wait time;
 }
 
@@ -518,15 +528,17 @@ emp_stop_start_heli() {
   self vehicle_setspeedimmediate(0, 100, 100);
   node = undefined;
 
-  if(level.start_point != "emp")
+  if(level.start_point != "emp") {
     node = getstruct(self.currentNode.target, "targetname");
+  }
 
   flag_wait("iss_done");
 
   self vehicle_setspeedimmediate(speed, 100, 100);
 
-  if(level.start_point != "emp")
+  if(level.start_point != "emp") {
     self thread maps\_vehicle::vehicle_paths(node);
+  }
 }
 
 #using_animtree("vehicles");
@@ -613,8 +625,9 @@ attackheli_spotlight_flicker() {
 
 #using_animtree("vehicles");
 emp_heli_rappel() {
-  if(!isDefined(level.helis_crash_rappel))
+  if(!isDefined(level.helis_crash_rappel)) {
     level.helis_crash_rappel = [];
+  }
   level.helis_crash_rappel[level.helis_crash_rappel.size] = self;
 
   self thread emp_stop_start_heli();
@@ -622,8 +635,9 @@ emp_heli_rappel() {
   flag_wait("emp_heli_crash_go");
   wait .25;
 
-  if(isDefined(level.emp_heli_rappel))
+  if(isDefined(level.emp_heli_rappel)) {
     wait .5;
+  }
   level.emp_heli_rappel = 1;
 
   heli = spawn("script_model", self.origin);
@@ -659,8 +673,9 @@ emp_heli_rappel() {
 
 #using_animtree("vehicles");
 emp_heli_distant() {
-  if(!isDefined(level.helis_crash_distant))
+  if(!isDefined(level.helis_crash_distant)) {
     level.helis_crash_distant = [];
+  }
   level.helis_crash_distant[level.helis_crash_distant.size] = self;
 
   self thread emp_stop_start_heli();
@@ -843,8 +858,9 @@ emp_heli_crash_guys_fallout() {
 /************************************************************************************************************/
 
 street_hide_moment() {
-  foreach(member in level.team)
+  foreach(member in level.team) {
   member ent_flag_wait("street_hide");
+  }
 
   flag_wait("street_player_hide");
   flag_set("street_safe");
@@ -862,8 +878,9 @@ street_hide_moment() {
   clip disconnectpaths();
   clip solid();
 
-  if(isalive(level.player) && level.player istouching(clip))
+  if(isalive(level.player) && level.player istouching(clip)) {
     level.player kill();
+  }
 
   array_thread(level.team, ::walkdist_reset);
 
@@ -899,8 +916,9 @@ street_hide_moment() {
 
   glass = getglassarray("street_hide_glass");
   dir = anglesToForward((0, 345, 0));
-  foreach(piece in glass)
+  foreach(piece in glass) {
   destroyglass(piece, dir * 200);
+  }
 
   //	time = 4.5;
   //	array_thread( level.team, ::notify_delay, "killanimscript", time );
@@ -916,8 +934,9 @@ street_hide_moment() {
   level.player setWeaponAmmoStock("fraggrenade", 4);
   level.player setWeaponAmmoStock("flash_grenade", 4);
 
-  if(isalive(level.player))
+  if(isalive(level.player)) {
     thread autosave_by_name("street_hide_moment");
+  }
 
   wait 1;
   SetSavedDvar("ammoCounterHide", "0");
@@ -990,18 +1009,21 @@ street_heli_player_kill() {
       model moveto(org, time);
       wait interval;
       time -= interval;
-      if(time <= 0)
+      if(time <= 0) {
         count = 0;
-      else
+      }
+      else {
         count--;
+      }
     }
   }
 
   origin = level.player.origin + (0, 0, 80);
   model delete();
 
-  if(flag("street_safe"))
+  if(flag("street_safe")) {
     return;
+  }
 
   range = 300;
 
@@ -1149,8 +1171,9 @@ street_crash_cars() {
     playFX(level._effect["me_dumpster_fire_FX"], fx.origin, anglesToForward(fx.angles), anglestoup(fx.angles));
     thread play_loopsound_in_space("fire_dumpster_medium", fx.origin);
   }
-  foreach(light in info["light"])
+  foreach(light in info["light"]) {
   light setlightintensity(light.old_intensity);
+  }
 
   wait .05;
 
@@ -1188,8 +1211,9 @@ street_crash_helis() {
   if(level.start_point != "corner" && level.start_point != "meetup") {
     self hide();
 
-    if(self.script_flag_wait == "street_crash_heli_first")
+    if(self.script_flag_wait == "street_crash_heli_first") {
       self.origin += (0, 0, CONST_NEW_HELI_DROP_HEIGHT);
+    }
     //self.script_flag_wait = "street_crash_btr_first";
 
     flag_wait(self.script_flag_wait);
@@ -1201,22 +1225,25 @@ street_crash_helis() {
     time = dist * magicnumber;
 
     sndtime = time - 3;
-    if(sndtime >= 0)
+    if(sndtime >= 0) {
       self delaycall(sndtime, ::playsound, "scn_dcemp_heli_shutdown");
+    }
 
     self moveto(endorg, time, time);
     self rotateto(endang, time);
 
-    if(isDefined(self.script_flag_set))
+    if(isDefined(self.script_flag_set)) {
       thread flag_set_delayed(self.script_flag_set, time - CONST_STREET_CAR_WAIT);
+    }
     self waittill("movedone");
 
     do_player_crash_fx(self.origin);
 
     range = 300;
     maxd = 300;
-    if(!flag("street_safe"))
+    if(!flag("street_safe")) {
       RadiusDamage(self.origin + (0, 0, 10), range, maxd, 20, self); //similar to destructibles
+    }
     PhysicsExplosionSphere(self.origin, range, 0, range * .01); //similar to destructibles	
 
     playFX(level._effect["helicopter_explosion"], endorg + (0, 0, -128));
@@ -1225,10 +1252,12 @@ street_crash_helis() {
 
   self delete();
 
-  if(isDefined(clip))
+  if(isDefined(clip)) {
     clip solid();
-  if(deathmodel.size)
+  }
+  if(deathmodel.size) {
     array_call(deathmodel, ::show);
+  }
   foreach(fx in fx_array) {
     playFX(level._effect["me_dumpster_fire_FX"], fx.origin, anglesToForward(fx.angles), anglestoup(fx.angles));
     thread play_loopsound_in_space("fire_dumpster_medium", fx.origin);
@@ -1243,8 +1272,9 @@ street_crash_helis_anim() {
   clip = undefined;
   dmg = undefined;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     parts = array_combine(getEntArray(self.target, "targetname"), getstructarray(self.target, "targetname"));
+  }
 
   foreach(part in parts) {
     switch (part.script_noteworthy) {
@@ -1330,8 +1360,9 @@ street_crash_helis_anim() {
 
     range = 300;
     maxd = 300;
-    if(!flag("street_safe"))
+    if(!flag("street_safe")) {
       RadiusDamage(heli gettagOrigin("TAG_DEATHFX"), range, maxd, 20, heli); //similar to destructibles
+    }
     PhysicsExplosionSphere(heli gettagOrigin("TAG_DEATHFX"), range, 0, range * .01); //similar to destructibles	
 
     switch (self.script_flag_set) {
@@ -1370,8 +1401,9 @@ street_crash_helis_anim() {
 
   dmg delete();
 
-  if(isDefined(clip))
+  if(isDefined(clip)) {
     clip solid();
+  }
   foreach(fx in fx_array) {
     playFX(level._effect["me_dumpster_fire_FX"], fx.origin, anglesToForward(fx.angles), anglestoup(fx.angles));
     thread play_loopsound_in_space("fire_dumpster_medium", fx.origin);
@@ -1420,10 +1452,12 @@ street_trees() {
 
     p = randomfloatrange(100, 150);
     r = randomfloatrange(100, 150);
-    if(cointoss())
+    if(cointoss()) {
       p *= -1;
-    if(cointoss())
+    }
+    if(cointoss()) {
       r *= -1;
+    }
 
     vec += (0, 0, randomfloat(.5) + .75);
     vec *= randomfloatrange(300, 400);
@@ -1612,8 +1646,9 @@ street_btr_animate_btr() {
 }
 
 street_btr_blur(btr) {
-  if(!player_looking_at(btr.origin, undefined, true))
+  if(!player_looking_at(btr.origin, undefined, true)) {
     return;
+  }
 
   setblur(4, 0);
   wait .1;
@@ -1645,13 +1680,15 @@ street_btr_animate_heli() {
   }
 
   wait 5;
-  foreach(part in parts)
+  foreach(part in parts) {
   part delete();
+  }
 }
 
 do_player_crash_fx(origin) {
-  if(flag("do_player_crash_fx"))
+  if(flag("do_player_crash_fx")) {
     return;
+  }
   flag_set("do_player_crash_fx");
 
   thread flag_clear_delayed("do_player_crash_fx", .25);
@@ -1723,10 +1760,12 @@ corner_get_scene() {
 corner_palm_style_door_open(soundalias) {
   wait(1.35);
 
-  if(isDefined(soundalias))
+  if(isDefined(soundalias)) {
     self playSound(soundalias);
-  else
+  }
+  else {
     self playSound("door_wood_slow_open");
+  }
 
   self ConnectPaths();
 
@@ -1745,13 +1784,15 @@ corner_plane_launch() {
   names[names.size] = "rubble_large_slab_02";
   names[names.size] = "727_seats_row_left";
 
-  if(!isDefined(level.corner_plane_launch_num))
+  if(!isDefined(level.corner_plane_launch_num)) {
     level.corner_plane_launch_num = 0;
+  }
 
   level.corner_plane_launch_num++;
 
-  if(level.corner_plane_launch_num == names.size)
+  if(level.corner_plane_launch_num == names.size) {
     level.corner_plane_launch_num = 0;
+  }
 
   name = names[level.corner_plane_launch_num];
 
@@ -1763,12 +1804,15 @@ corner_plane_launch() {
   neg2 = 1;
   neg3 = 1;
 
-  if(cointoss())
+  if(cointoss()) {
     neg1 = -1;
-  if(cointoss())
+  }
+  if(cointoss()) {
     neg2 = -1;
-  if(cointoss())
+  }
+  if(cointoss()) {
     neg3 = -1;
+  }
 
   fxmod = spawn("script_model", model.origin);
   fxmod setModel("tag_origin");
@@ -1818,10 +1862,12 @@ corner_truck_engine_crash() {
   for(i = 0; i < 11; i++) {
     playFX(level._effect["fire_trail_60"], centerfx.origin + (randomfloatrange(-15, 15), 0, -5), anglestoup(centerfx.angles), anglesToForward(centerfx.angles));
 
-    if(i > 8)
+    if(i > 8) {
       wait .2;
-    else
+    }
+    else {
       wait .1;
+    }
   }
 
   wait .25;
@@ -1840,8 +1886,9 @@ corner_vehicle_engine_crash_setup() {
   ents = getEntArray(self.target, "targetname");
   array = [];
 
-  foreach(ent in ents)
+  foreach(ent in ents) {
   array[ent.script_noteworthy] = ent;
+  }
 
   array["clip"] linkto(self);
   array["clip"] disconnectpaths();
@@ -2036,10 +2083,12 @@ meetup_runner_walk(name) {
 
   self set_generic_run_anim_array("patrol_bored_patrolwalk");
 
-  if(distance(node.origin, self.origin) > 48)
+  if(distance(node.origin, self.origin) > 48) {
     node anim_generic_reach(self, "patrol_bored_walk_2_bored");
-  else
+  }
+  else {
     node = self;
+  }
 
   node anim_generic_gravity_run(self, "patrol_bored_walk_2_bored");
 
@@ -2090,8 +2139,9 @@ meetup_runner_end() {
       break;
   }
 
-  if(!angle)
+  if(!angle) {
     return;
+  }
 
   self ent_flag_wait("meetup_runner_end");
 
@@ -2115,8 +2165,9 @@ lobby_enemy_suppressive_fire() {
 
   while(1) {
     weapon = "ak47";
-    if(cointoss())
+    if(cointoss()) {
       weapon = "rpd";
+    }
 
     shots = randomintrange(10, 25);
     for(i = 0; i < shots; i++) {
@@ -2206,8 +2257,9 @@ parking_high_spec() {
 parking_btr_extra_wait() {
   self thread anim_generic_loop(self, "coverstand_hide_idle");
 
-  while(!flag("parking_open_fire") && distancesquared(self.origin, level.player.origin) > squared(1250))
+  while(!flag("parking_open_fire") && distancesquared(self.origin, level.player.origin) > squared(1250)) {
     wait .1;
+  }
 
   self notify("stop_loop");
   self anim_stopanimscripted();
@@ -2306,8 +2358,9 @@ plaza_enemies_player_close() {
   level endon("plaza_open_fire");
   level.player endon("death");
 
-  while(distancesquared(level.player.origin, self.origin) > squared(300))
+  while(distancesquared(level.player.origin, self.origin) > squared(300)) {
     wait .25;
+  }
 
   flag_set("plaza_open_fire");
 }
@@ -2322,8 +2375,9 @@ plaza_enemies_wakeup() {
   node.origin = self.origin;
   node.angles = (0, 270, 0);
 
-  if(!isDefined(level.plaza_enemies_wakeup))
+  if(!isDefined(level.plaza_enemies_wakeup)) {
     level.plaza_enemies_wakeup = 0;
+  }
 
   self.reactnum = level.plaza_enemies_wakeup;
   level.plaza_enemies_wakeup++;
@@ -2338,8 +2392,9 @@ plaza_enemies_wakeup() {
   delays[delays.size] = 0;
   delays[delays.size] = .5;
 
-  if(!flag("plaza_open_fire"))
+  if(!flag("plaza_open_fire")) {
     wait .5;
+  }
 
   wait(delays[self.reactnum]);
 
@@ -2368,29 +2423,34 @@ send_team_to_random_nodes(team, nodes) {
 
 send_team_to_specific_nodes(name, type) {
   nodes = getnodearray(name, type);
-  if(!nodes.size)
+  if(!nodes.size) {
     nodes = getEntArray(name, type);
-  if(!nodes.size)
+  }
+  if(!nodes.size) {
     nodes = getstructarray(name, type);
+  }
 
   foreach(node in nodes) {
     name = node.script_noteworthy;
-    if(!isalive(level.team[name]))
+    if(!isalive(level.team[name])) {
       continue;
+    }
     level.team[name] thread follow_path(node);
   }
 }
 
 emp_teleport_player(name) {
-  if(!isDefined(name))
+  if(!isDefined(name)) {
     name = level.start_point;
+  }
 
   array = getstructarray("start_point", "targetname");
 
   nodes = [];
   foreach(ent in array) {
-    if(ent.script_noteworthy != name)
+    if(ent.script_noteworthy != name) {
       continue;
+    }
 
     nodes[nodes.size] = ent;
   }
@@ -2407,8 +2467,9 @@ emp_teleport_team(team, nodes) {
 }
 
 emp_teleport_team_specific(team, nodes) {
-  foreach(node in nodes)
+  foreach(node in nodes) {
   level.team[node.script_noteworthy] thread teleport_actor(node);
+  }
 }
 
 teleport_actor(node) {
@@ -2417,8 +2478,9 @@ teleport_actor(node) {
   self linkto(link);
 
   link moveto(node.origin, .05);
-  if(isDefined(node.angles))
+  if(isDefined(node.angles)) {
     link rotateto(node.angles, .05);
+  }
 
   link waittill("movedone");
   wait .05;
@@ -2510,43 +2572,51 @@ disable_node_advance(nodes) {
 advance_team_to_nodes(nodes) {
   team = [];
   foreach(key, member in level.team) {
-    if(!isDefined(member.node_advance))
+    if(!isDefined(member.node_advance)) {
       continue;
+    }
 
     team[key] = member;
   }
 
-  if(!team.size)
+  if(!team.size) {
     return;
+  }
 
   foreach(node in nodes) {
     guy = team[node.script_noteworthy];
-    if(!isDefined(guy))
+    if(!isDefined(guy)) {
       continue;
+    }
 
     guy thread follow_path(node);
   }
 }
 
 stop_shield_on_random_teammate(num) {
-  if(!isDefined(num))
+  if(!isDefined(num)) {
     num = 1;
+  }
 
   array = [];
   foreach(member in level.team) {
-    if(member is_hero())
+    if(member is_hero()) {
       continue;
-    if(!isDefined(member.magic_bullet_shield))
+    }
+    if(!isDefined(member.magic_bullet_shield)) {
       continue;
+    }
 
     array[array.size] = member;
   }
 
-  if(!array.size)
+  if(!array.size) {
     return;
+  }
 
-  if(array.size < num)
+  if(array.size < num) {
     num = array.size;
+  }
 
   for(i = 0; i < num; i++) {
     actor = random(array);
@@ -2556,42 +2626,52 @@ stop_shield_on_random_teammate(num) {
 }
 
 kill_random_teammate(num, del) {
-  if(!isDefined(num))
+  if(!isDefined(num)) {
     num = 1;
-  if(!isDefined(del))
+  }
+  if(!isDefined(del)) {
     del = false;
+  }
 
   array = [];
   foreach(member in level.team) {
-    if(member is_hero())
+    if(member is_hero()) {
       continue;
-    if(isDefined(member.magic_bullet_shield))
+    }
+    if(isDefined(member.magic_bullet_shield)) {
       continue;
+    }
 
     array[array.size] = member;
   }
 
-  if(!array.size)
+  if(!array.size) {
     return false;
+  }
 
-  if(array.size < num)
+  if(array.size < num) {
     num = array.size;
+  }
 
   array = get_array_of_farthest(level.player.origin, array);
 
   for(i = 0; i < array.size; i++) {
     member = array[i];
-    if(player_looking_at(member getEye()))
+    if(player_looking_at(member getEye())) {
       continue;
+    }
 
-    if(del)
+    if(del) {
       member delete();
-    else
+    }
+    else {
       member kill();
+    }
     num--;
 
-    if(num == 0)
+    if(num == 0) {
       return true;
+    }
   }
 
   array = array_removedead(array);
@@ -2602,14 +2682,17 @@ kill_random_teammate(num, del) {
   for(i = 0; i < num; i++) {
     member = array[i];
 
-    if(del)
+    if(del) {
       member delete();
-    else
+    }
+    else {
       member kill();
+    }
     num--;
 
-    if(num == 0)
+    if(num == 0) {
       return true;
+    }
   }
 
   return false;
@@ -2617,10 +2700,12 @@ kill_random_teammate(num, del) {
 
 add_team(team) {
   array = [];
-  if(!isarray(team))
+  if(!isarray(team)) {
     array[array.size] = team;
-  else
+  }
+  else {
     array = team;
+  }
 
   array_thread(array, ::remove_team);
 
@@ -2657,8 +2742,9 @@ team_init() {
   }
 
   spawners = getEntArray("intro_team", "targetname");
-  if(level.team.size == spawners.size)
+  if(level.team.size == spawners.size) {
     flag_set("team_initialized");
+  }
 }
 
 setup_sun() {
@@ -2690,8 +2776,9 @@ setup_sun() {
 }
 
 vision_set_intro(time) {
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 0;
+  }
 
   thread maps\_utility::set_vision_set("dcburning_crash", time);
   thread maps\_utility::vision_set_fog_changes("dcburning_crash", time);
@@ -2765,8 +2852,9 @@ fake_motion() {
 }
 
 vision_set_sunset(time) {
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 60;
+  }
 
   thread maps\_utility::set_vision_set("dcemp_postemp2", time);
   thread maps\_utility::vision_set_fog_changes("dcemp_postemp2", time);
@@ -2774,8 +2862,9 @@ vision_set_sunset(time) {
 }
 
 vision_set_office(time) {
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 5;
+  }
 
   thread maps\_utility::set_vision_set("dcemp_office", time);
   thread maps\_utility::vision_set_fog_changes("dcemp_office", time);
@@ -2791,8 +2880,9 @@ vision_set_lobby() {
 }
 
 vision_set_parking(time) {
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 5;
+  }
 
   thread maps\_utility::set_vision_set("dcemp_parking", time);
   thread maps\_utility::vision_set_fog_changes("dcemp_parking", time);
@@ -2801,8 +2891,9 @@ vision_set_parking(time) {
 }
 
 vision_set_night(time) {
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 0;
+  }
 
   thread maps\_utility::set_vision_set("dcemp", time);
   thread maps\_utility::vision_set_fog_changes("dcemp", time);
@@ -2827,8 +2918,9 @@ lerp_sunlight(color, time) {
   level notify("lerp_sunlight");
   level endon("lerp_sunlight");
 
-  if(array_compare(color, level.suncolor_cur))
+  if(array_compare(color, level.suncolor_cur)) {
     return;
+  }
 
   interval = .05;
   count = time / interval;
@@ -2865,8 +2957,9 @@ lerp_specular(scale, time) {
 
   start_scale = getdvarfloat("r_specularColorScale", "2.5");
 
-  if(scale == start_scale)
+  if(scale == start_scale) {
     return;
+  }
 
   interval = .05;
   count = time / interval;
@@ -2895,10 +2988,12 @@ anim_generic_gravity_run(guy, anime, tag) {
 }
 
 set_pushplayer(value) {
-  if(value)
+  if(value) {
     self.dontchangepushplayer = true;
-  else
+  }
+  else {
     self.dontchangepushplayer = undefined;
+  }
 
   self pushplayer(value);
 }
@@ -2923,8 +3018,9 @@ fx_rain_pause() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"])) {
       EntFx pauseEffect();
+    }
   }
 
   /*
@@ -2947,8 +3043,9 @@ fx_rain_pause2() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"])) {
       EntFx pauseEffect();
+    }
   }
 }
 
@@ -2957,8 +3054,9 @@ fx_rain_restart() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"])) {
       EntFx restartEffect();
+    }
   }
 
   /*	array = getfxarraybyID( "rain_noise_splashes" );
@@ -2980,8 +3078,9 @@ fx_end_pause() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"])) {
       EntFx pauseEffect();
+    }
   }
 }
 
@@ -2990,14 +3089,16 @@ fx_end_restart() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"]))
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius && !isDefined(EntFx.v["exploder"])) {
       EntFx restartEffect();
+    }
   }
 }
 
 fx_intro_pause() {
-  if(!flag("intro_fx"))
+  if(!flag("intro_fx")) {
     return;
+  }
 
   pauseExploder("plane_crash_aftermath");
 
@@ -3005,16 +3106,18 @@ fx_intro_pause() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius)
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius) {
       EntFx pauseEffect();
+    }
   }
 
   flag_clear("intro_fx");
 }
 
 fx_intro_restart() {
-  if(flag("intro_fx"))
+  if(flag("intro_fx")) {
     return;
+  }
 
   restartExploder("plane_crash_aftermath");
 
@@ -3022,20 +3125,23 @@ fx_intro_restart() {
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
-    if(distancesquared(EntFx.v["origin"], node.origin) < radius)
+    if(distancesquared(EntFx.v["origin"], node.origin) < radius) {
       EntFx restartEffect();
+    }
   }
 
   flag_set("intro_fx");
 }
 
 fx_iss_pause() {
-  if(!flag("iss_fx"))
+  if(!flag("iss_fx")) {
     return;
+  }
 
   foreach(EntFx in level.createfxent) {
-    if(EntFx.v["fxid"] == "dcemp_sun")
+    if(EntFx.v["fxid"] == "dcemp_sun") {
       EntFx pauseEffect();
+    }
   }
 
   flag_clear("iss_fx");
@@ -3086,23 +3192,28 @@ dcemp_create_triggerfx() {
     isendfx = true;
 
   //INTRO FX
-  if(distancesquared(self.v["origin"], intro.node.origin) < intro.radius)
+  if(distancesquared(self.v["origin"], intro.node.origin) < intro.radius) {
     flag_wait("intro_fx");
+  }
   //ISS FX
-  else
+  else {
   if(isissfx)
+  }
     flag_wait("iss_fx");
   //RAIN FX
-  else
+  else {
   if(distancesquared(self.v["origin"], rain.node.origin) < rain.radius)
+  }
     flag_wait("rain_fx");
   //RAIN FX2
-  else
+  else {
   if(distancesquared(self.v["origin"], rain.node.origin) < rain.radius)
+  }
     flag_wait("rain_fx2");
   //END FX
-  else
+  else {
   if(distancesquared(self.v["origin"], end.node.origin) < end.radius || isendfx)
+  }
     flag_wait("end_fx");
 
   //OTHER FX just start at first frame
@@ -3180,19 +3291,22 @@ script2model_precache() {
   data = array_combine(data, getstructarray("iss_entity", "targetname"));
 
   foreach(obj in data) {
-    if(isDefined(precachelist[obj.script_modelname]))
+    if(isDefined(precachelist[obj.script_modelname])) {
       continue;
+    }
 
     precachelist[obj.script_modelname] = obj.script_modelname;
   }
 
-  foreach(model in precachelist)
+  foreach(model in precachelist) {
   precachemodel(model);
+  }
 }
 
 script2model_intro() {
-  if(flag("script2model_intro"))
+  if(flag("script2model_intro")) {
     return;
+  }
 
   data = getstructarray("script_to_model_swap_intro", "script_noteworthy");
   data = array_combine(data, getstructarray("crash_cars", "targetname"));
@@ -3210,8 +3324,9 @@ script2model_intro() {
 }
 
 script2model_iss() {
-  if(flag("script2model_iss"))
+  if(flag("script2model_iss")) {
     return;
+  }
 
   earthdata = getstruct("earth_model", "targetname");
   earth = spawn("script_model", earthdata.origin);
@@ -3243,8 +3358,9 @@ script2model_iss() {
 }
 
 script2model_del_intro() {
-  if(!flag("script2model_intro"))
+  if(!flag("script2model_intro")) {
     return;
+  }
 
   models = getEntArray("script_to_model_swap_intro", "script_noteworthy");
   models = array_combine(models, getEntArray("crash_cars", "targetname"));
@@ -3255,8 +3371,9 @@ script2model_del_intro() {
 }
 
 script2model_del_iss() {
-  if(!flag("script2model_iss"))
+  if(!flag("script2model_iss")) {
     return;
+  }
 
   models = getEntArray("iss_entity", "targetname");
   models = array_combine(models, getEntArray("iss_lights", "targetname"));

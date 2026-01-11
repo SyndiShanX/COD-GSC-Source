@@ -1606,4 +1606,3 @@ insure_player_does_not_set_forcecolor_twice_in_one_frame() {
 
   self.setforcecolor = undefined;
 }
-

@@ -4,8 +4,9 @@
 **************************************/
 
 init_filter_indices() {
-  if(isDefined(level.genericfilterinitialized))
+  if(isDefined(level.genericfilterinitialized)) {
     return;
+  }
   level.genericfilterinitialized = true;
   level.filter_matcount = 4;
   level.targetid_none = 0;
@@ -202,14 +203,18 @@ set_filter_hazmat_opacity(player, filterid, overlayid, opacity) {
 enable_filter_hazmat(player, filterid, overlayid, stage, opacity) {
   player set_filter_pass_material(filterid, 0, level.filter_matid["generic_filter_hazmat"], level.targerid_scene, level.targerid_scene, level.targetid_none);
   player set_filter_pass_enabled(filterid, 0, true);
-  if(stage == 1)
+  if(stage == 1) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_1"], 1);
-  else if(stage == 2)
+  }
+  else if(stage == 2) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_2"], 1);
-  else if(stage == 3)
+  }
+  else if(stage == 3) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_3"], 1);
-  else if(stage == 4)
+  }
+  else if(stage == 4) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_4"], 1);
+  }
   player set_overlay_enabled(overlayid, true);
   set_filter_hazmat_opacity(player, filterid, overlayid, opacity);
 }
@@ -322,14 +327,16 @@ disable_filter_lensflare(player, filterid) {
 
 init_filter_scope(player) {
   init_filter_indices();
-  if(!isps3() || getLocalPlayers().size == 1)
+  if(!isps3() || getLocalPlayers().size == 1) {
     player map_material(0, "generic_filter_scope");
+  }
 }
 
 init_filter_infrared(player) {
   init_filter_indices();
-  if(!isps3() || getLocalPlayers().size == 1)
+  if(!isps3() || getLocalPlayers().size == 1) {
     player map_material(1, "generic_filter_infrared");
+  }
 }
 
 init_filter_tvguided(player) {

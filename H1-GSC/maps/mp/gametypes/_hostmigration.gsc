@@ -14,8 +14,9 @@ callback_hostmigration() {
   var_0++;
   setmatchdata("hostMigrationCount", var_0);
 
-  foreach(var_2 in level.characters)
+  foreach(var_2 in level.characters) {
   var_2.hostmigrationcontrolsfrozen = 0;
+  }
 
   level.hostmigrationtimer = 1;
   setdvar("ui_inhostmigration", 1);
@@ -25,8 +26,9 @@ callback_hostmigration() {
   foreach(var_2 in level.characters) {
     var_2 thread hostmigrationtimerthink();
 
-    if(isplayer(var_2))
+    if(isplayer(var_2)) {
       var_2 setclientomnvar("ui_session_state", var_2.sessionstate);
+    }
   }
 
   setdvar("ui_game_state", game["state"]);
@@ -56,26 +58,32 @@ hostmigrationwaitforplayers() {
 }
 
 hostmigrationname(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return "<removed_ent>";
+  }
 
   var_1 = -1;
   var_2 = "?";
 
-  if(isDefined(var_0.entity_number))
+  if(isDefined(var_0.entity_number)) {
     var_1 = var_0.entity_number;
+  }
 
-  if(isplayer(var_0) && isDefined(var_0.name))
+  if(isplayer(var_0) && isDefined(var_0.name)) {
     var_2 = var_0.name;
+  }
 
-  if(isplayer(var_0))
+  if(isplayer(var_0)) {
     return "player <" + var_2 + "> (entNum " + var_1 + ")";
+  }
 
-  if(isagent(var_0) && maps\mp\_utility::isgameparticipant(var_0))
+  if(isagent(var_0) && maps\mp\_utility::isgameparticipant(var_0)) {
     return "participant agent <" + var_1 + ">";
+  }
 
-  if(isagent(var_0))
+  if(isagent(var_0)) {
     return "non-participant agent <" + var_1 + ">";
+  }
 
   return "unknown entity <" + var_1 + ">";
 }
@@ -86,8 +94,9 @@ hostmigrationtimerthink_internal() {
   self endon("disconnect");
   self.hostmigrationcontrolsfrozen = 1;
 
-  while(!maps\mp\_utility::isreallyalive(self))
+  while(!maps\mp\_utility::isreallyalive(self)) {
     self waittill("spawned");
+  }
 
   maps\mp\_utility::freezecontrolswrapper(1);
   self disableammogeneration();
@@ -98,8 +107,9 @@ hostmigrationtimerthink() {
   level endon("host_migration_begin");
   self endon("disconnect");
 
-  if(isagent(self))
+  if(isagent(self)) {
     self endon("death");
+  }
 
   hostmigrationtimerthink_internal();
 
@@ -114,8 +124,9 @@ hostmigrationtimerthink() {
 }
 
 waittillhostmigrationdone() {
-  if(!isDefined(level.hostmigrationtimer))
+  if(!isDefined(level.hostmigrationtimer)) {
     return 0;
+  }
 
   var_0 = gettime();
   level waittill("host_migration_end");

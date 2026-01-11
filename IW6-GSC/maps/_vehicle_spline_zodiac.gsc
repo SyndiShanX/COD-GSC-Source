@@ -96,8 +96,9 @@ draw_path(var_0) {
     droppedlinez(var_4.z, var_8, var_10, (0, 0.5, 1), 1, 1, 50000);
     droppedlinez(var_4.z, var_9, var_11, (0, 0.5, 1), 1, 1, 50000);
 
-    foreach(var_13 in var_4.col_volumes)
+    foreach(var_13 in var_4.col_volumes) {
     var_4 draw_col_vol(var_4.z, var_13);
+    }
 
     foreach(var_16 in var_4.col_lines) {
       var_17 = var_16.origin;
@@ -139,8 +140,9 @@ create_path() {
   for(;;) {
     var_4 = var_0;
 
-    if(isDefined(var_0.target))
+    if(isDefined(var_0.target)) {
       var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    }
 
     var_4.origin = (var_4.origin[0], var_4.origin[1], 0);
     var_1[var_1.size] = var_0;
@@ -171,8 +173,9 @@ create_path() {
   for(;;) {
     var_4 = var_0;
 
-    if(isDefined(var_0.target))
+    if(isDefined(var_0.target)) {
       var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    }
 
     var_4.origin = (var_4.origin[0], var_4.origin[1], 0);
     var_6 = var_1[var_5];
@@ -187,8 +190,9 @@ create_path() {
     var_0 = var_4;
   }
 
-  foreach(var_8 in var_1)
+  foreach(var_8 in var_1) {
   var_8.midpoint = (var_8.origins["left"] + var_8.origins["right"]) * 0.5;
+  }
 
   foreach(var_8 in var_1) {
     var_11 = var_8.midpoint;
@@ -237,8 +241,9 @@ add_collision_to_path(var_0) {
   var_8 = self;
 
   foreach(var_10 in var_0) {
-    foreach(var_3 in var_1)
+    foreach(var_3 in var_1) {
     add_collision_to_path_ent(var_10, var_3);
+    }
   }
 
   var_14 = getEntArray("moto_collision", "targetname");
@@ -246,8 +251,9 @@ add_collision_to_path(var_0) {
   foreach(var_16 in var_14) {
     var_17 = common_scripts\utility::get_array_of_closest(var_16.origin, var_0, undefined, 2);
 
-    foreach(var_10 in var_17)
+    foreach(var_10 in var_17) {
     var_10.col_radiuses[var_10.col_radiuses.size] = var_16;
+    }
   }
 }
 
@@ -256,8 +262,9 @@ get_offset_percent(var_0, var_1, var_2, var_3) {
   var_5 = 1 - var_2 / var_4;
   var_6 = "left";
 
-  if(var_3 > 0)
+  if(var_3 > 0) {
     var_6 = "right";
+  }
 
   var_7 = var_0.origins[var_6];
   var_8 = var_1.origins[var_6];
@@ -275,8 +282,9 @@ add_collision_to_path_ent(var_0, var_1) {
   }
   var_2 = var_0.road_width;
 
-  if(var_0.dist_to_next_targ > var_2)
+  if(var_0.dist_to_next_targ > var_2) {
     var_2 = var_0.dist_to_next_targ;
+  }
 
   if(distance(var_1.origin, var_0.next_node.midpoint) > var_2 * 1.5) {
     return;
@@ -377,13 +385,15 @@ add_vol_to_node(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = [];
   var_7["max"] = var_1;
 
-  if(var_7["max"] > var_0.dist_to_next_targ)
+  if(var_7["max"] > var_0.dist_to_next_targ) {
     var_7["max"] = var_0.dist_to_next_targ;
+  }
 
   var_7["min"] = var_2;
 
-  if(var_7["min"] < 0)
+  if(var_7["min"] < 0) {
     var_7["min"] = 0;
+  }
 
   var_7["left_offset"] = var_4;
   var_7["right_offset"] = var_3;
@@ -415,8 +425,9 @@ get_progression_between_points(var_0, var_1, var_2) {
   var_8 = vectordot(var_13, var_7);
   var_3["dot"] = var_8;
 
-  if(var_8 > 0)
+  if(var_8 > 0) {
     var_3["offset"] = var_3["offset"] * -1;
+  }
 
   return var_3;
 }
@@ -425,12 +436,14 @@ wipe_out(var_0) {
   foreach(var_2 in self.targ.col_radiuses) {
     var_3 = (self.origin[0], self.origin[1], 0);
 
-    if(distance((var_2.origin[0], var_2.origin[1], 0), var_3) < var_2.radius)
+    if(distance((var_2.origin[0], var_2.origin[1], 0), var_3) < var_2.radius) {
       return 1;
+    }
   }
 
-  if(var_0.health >= 100)
+  if(var_0.health >= 100) {
     return 0;
+  }
 
   level.bike_score++;
   return 1;
@@ -440,8 +453,9 @@ vehicle_line(var_0) {
   self endon("death");
   var_0 endon("death");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 spawner_random_team() {
@@ -452,11 +466,13 @@ spawner_random_team() {
   }
   var_0 = "axis";
 
-  if(common_scripts\utility::cointoss())
+  if(common_scripts\utility::cointoss()) {
     var_0 = "allies";
+  }
 
-  foreach(var_2 in self.riders)
+  foreach(var_2 in self.riders) {
   var_2.team = var_0;
+  }
 }
 
 get_spawn_position(var_0, var_1) {
@@ -466,13 +482,15 @@ get_spawn_position(var_0, var_1) {
   var_5 = var_4.road_width * 0.5;
   var_6 = undefined;
 
-  if(isDefined(level.player.nooffset))
+  if(isDefined(level.player.nooffset)) {
     var_6 = 0;
+  }
   else if(isDefined(level.player.offset)) {
     var_7 = 500;
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_7 = var_7 * -1;
+    }
 
     var_6 = level.player.offset + var_7;
   } else
@@ -480,8 +498,9 @@ get_spawn_position(var_0, var_1) {
 
   var_8 = get_obstacle_dodge_amount(var_4, var_3, var_6);
 
-  if(isDefined(var_8["dodge"]))
+  if(isDefined(var_8["dodge"])) {
     var_6 = var_8["dodge"];
+  }
 
   var_9 = get_position_from_spline_unlimited(var_4, var_3, var_6);
   var_10 = [];
@@ -498,8 +517,9 @@ debug_enemy_vehicles_line() {
   self endon("death");
   level endon("stop_debugging_enemy_vehicles");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 spawn_enemy_bike() {
@@ -522,8 +542,9 @@ spawn_enemy_bike() {
     var_2 = "backward";
     var_5 = common_scripts\utility::within_fov(level.player.origin, level.player.angles, var_4, 0);
 
-    if(var_5)
+    if(var_5) {
       return;
+    }
   }
 
   var_4 = common_scripts\utility::drop_to_ground(var_4);
@@ -533,8 +554,9 @@ spawn_enemy_bike() {
   var_6.angles = vectortoangles(var_7.next_node.midpoint - var_7.midpoint);
   var_8 = var_6 maps\_vehicle_code::get_vehicle_ai_spawners();
 
-  foreach(var_10 in var_8)
+  foreach(var_10 in var_8) {
   var_10.origin = var_6.origin;
+  }
 
   var_12 = maps\_vehicle::vehicle_spawn(var_6);
   var_12.offset_percent = var_3["offset"];
@@ -555,8 +577,9 @@ rider_death_detection(var_0) {
   }
   self waittill("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 wipeout("driver died!");
+  }
 }
 
 wipeout(var_0) {
@@ -588,8 +611,9 @@ update_bike_player_avoidance(var_0) {
       }
     }
 
-    if(!var_5)
+    if(!var_5) {
       level.enemy_snowmobiles[level.enemy_snowmobiles.size] = var_0;
+    }
   }
 
   var_8 = 0;
@@ -601,23 +625,27 @@ update_bike_player_avoidance(var_0) {
 }
 
 bike_drives_path(var_0) {
-  if(!isDefined(var_0.left_spline_path_time))
+  if(!isDefined(var_0.left_spline_path_time)) {
     var_0.left_spline_path_time = gettime();
+  }
 
-  if(!isDefined(var_0.wipeout))
+  if(!isDefined(var_0.wipeout)) {
     var_0.wipeout = 0;
+  }
 
   var_0.bike_avoidance_offset = 0;
   update_bike_player_avoidance(var_0);
 
-  if(!isDefined(var_0.player_offset))
+  if(!isDefined(var_0.player_offset)) {
     var_0.player_offset = 250;
+  }
 
   var_0.steering = 0;
   var_1 = randomfloatrange(0, 1);
 
-  if(!isDefined(var_0.offset_percent))
+  if(!isDefined(var_0.offset_percent)) {
     var_0.offset_percent = var_1 * 2 - 1;
+  }
 
   var_2 = self;
   var_3 = spawnStruct();
@@ -650,8 +678,9 @@ bike_drives_path(var_0) {
       break;
     }
 
-    if(abs(var_0.progress_dif) > 6000 && gettime() > var_0.left_spline_path_time + 4000)
+    if(abs(var_0.progress_dif) > 6000 && gettime() > var_0.left_spline_path_time + 4000) {
       var_0 wipeout("left behind!");
+    }
 
     waittillframeend;
 
@@ -676,8 +705,9 @@ bike_drives_path(var_0) {
 
       wait 5;
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         var_0 delete();
+      }
 
       update_bike_player_avoidance();
       return;
@@ -692,8 +722,9 @@ bike_drives_path(var_0) {
   var_3 notify("stop_bike");
   level notify("biker_dies");
 
-  if(isalive(var_0) && var_0.wipeout && !common_scripts\utility::flag("race_complete"))
+  if(isalive(var_0) && var_0.wipeout && !common_scripts\utility::flag("race_complete")) {
     wait 5;
+  }
 
   var_3 maps\_utility::ent_flag_clear("biker_reaches_path_end");
 }
@@ -718,10 +749,12 @@ get_obstacle_dodge_amount(var_0, var_1, var_2) {
     }
     var_6 = (var_0.midpoint + var_0.next_node.midpoint) * 0.5;
 
-    if(var_2 > var_5["mid_offset"])
+    if(var_2 > var_5["mid_offset"]) {
       var_3["dodge"] = var_5["right_offset"];
-    else
+    }
+    else {
       var_3["dodge"] = var_5["left_offset"];
+    }
 
     break;
   }
@@ -819,13 +852,16 @@ modulate_speed_based_on_progress() {
       var_8 = level.player.vehicle.veh_speed + var_7 * 0.05;
       var_9 = level.player.vehicle.veh_speed;
 
-      if(var_9 < 100)
+      if(var_9 < 100) {
         var_9 = 100;
+      }
 
-      if(var_8 > var_9)
+      if(var_8 > var_9) {
         var_8 = var_9;
-      else if(var_8 < self.min_speed)
+      }
+      else if(var_8 < self.min_speed) {
         var_8 = self.min_speed;
+      }
 
       level.desired_speed = var_8;
       self vehicle_setspeed(var_8, 90, 20);
@@ -843,29 +879,35 @@ price_match_player_speed(var_0, var_1) {
   var_4 = get_progression_between_points(level.player.vehicle.origin, self.origin + var_3 * 1, self.origin - var_3 * 1);
   var_5 = var_4["progress"];
 
-  if(var_5 > 4000)
+  if(var_5 > 4000) {
     self vehicle_setspeed(0, 90, 20);
+  }
   else {
     var_6 = maps\_utility::get_dot(self.origin, self.angles, level.player.origin);
     var_7 = 1;
 
-    if(var_5 > 0)
+    if(var_5 > 0) {
       var_7 = 1;
+    }
     else {
-      if(var_5 > -500)
+      if(var_5 > -500) {
         var_7 = 1.25;
+      }
 
-      if(var_7 > 0.95 && var_6 > 0.97)
+      if(var_7 > 0.95 && var_6 > 0.97) {
         var_7 = 0.95;
+      }
     }
 
     var_8 = 70 * var_7;
 
-    if(var_8 < self.min_speed)
+    if(var_8 < self.min_speed) {
       var_8 = self.min_speed;
+    }
 
-    if(var_8 < 25)
+    if(var_8 < 25) {
       var_8 = 25;
+    }
 
     level.price_desired_speed = var_8;
     self vehicle_setspeed(var_8, var_0, var_1);
@@ -879,20 +921,24 @@ match_player_speed(var_0, var_1) {
   var_4 = get_progression_between_points(level.player.vehicle.origin, self.origin + var_3 * 1, self.origin - var_3 * 1);
   var_5 = var_4["progress"];
 
-  if(var_5 > 4000)
+  if(var_5 > 4000) {
     self vehicle_setspeed(0, 90, 20);
+  }
   else {
-    if(var_5 < level.spline_min_progress && gettime() > self.left_spline_path_time + 4000)
+    if(var_5 < level.spline_min_progress && gettime() > self.left_spline_path_time + 4000) {
       wipeout("low progress!");
+    }
 
     var_5 = var_5 - 750;
     var_5 = var_5 + self.bike_avoidance_offset;
     var_6 = 1;
 
-    if(var_5 > 150)
+    if(var_5 > 150) {
       var_6 = 0.6;
-    else if(var_5 > 100)
+    }
+    else if(var_5 > 100) {
       var_6 = 1.0;
+    }
     else if(var_5 < -100) {
       if(!maps\_utility::ent_flag("dialog_six")) {
         maps\_utility::ent_flag_set("dialog_six");
@@ -909,8 +955,9 @@ match_player_speed(var_0, var_1) {
 
     var_7 = level.player.vehicle.veh_speed * var_6;
 
-    if(var_7 < 25)
+    if(var_7 < 25) {
       var_7 = 25;
+    }
 
     self vehicle_setspeed(var_7, var_0, var_1);
   }
@@ -922,8 +969,9 @@ track_player_progress(var_0) {
   var_1 = getent("player_sweep_trigger", "targetname");
   var_2 = isDefined(var_1);
 
-  if(var_2)
+  if(var_2) {
     var_1 thread sweep_tells_vehicles_to_get_off_path();
+  }
 
   for(;;) {
     if(self.targ == self.targ.next_node) {
@@ -1000,13 +1048,15 @@ set_bike_position(var_0) {
   var_11 = progress_dif(var_5, var_3, get_player_targ(), get_player_progress());
   var_1.progress_dif = var_11;
 
-  if(var_1.direction == "forward")
+  if(var_1.direction == "forward") {
     var_3 = var_3 + level.pos_lookahead_dist;
+  }
   else {
     var_3 = var_3 - level.pos_lookahead_dist;
 
-    if(var_11 < 500)
+    if(var_11 < 500) {
       var_1.direction = "forward";
+    }
   }
 
   var_12 = 60;
@@ -1014,10 +1064,12 @@ set_bike_position(var_0) {
   var_14 = 100;
   var_15 = 200;
 
-  if(var_11 > var_15)
+  if(var_11 > var_15) {
     var_16 = var_12;
-  else if(var_11 < var_14)
+  }
+  else if(var_11 < var_14) {
     var_16 = var_13;
+  }
   else {
     var_17 = var_15 - var_14;
     var_18 = var_13 - var_12;
@@ -1051,35 +1103,43 @@ set_bike_position(var_0) {
   var_4 = var_4 * var_5.road_width / var_21;
   var_9 = get_obstacle_dodge_amount(var_5, var_3, var_4);
 
-  if(isDefined(var_9["dodge"]))
+  if(isDefined(var_9["dodge"])) {
     var_4 = var_9["dodge"];
-  else if(isDefined(var_1.preferred_offset))
+  }
+  else if(isDefined(var_1.preferred_offset)) {
     var_4 = var_1.preferred_offset;
+  }
 
   var_23 = 0.95;
   var_24 = var_5.road_width * 0.5;
   var_24 = var_24 - 50;
 
-  if(var_4 > var_24)
+  if(var_4 > var_24) {
     var_4 = var_24;
-  else if(var_4 < -1 * var_24)
+  }
+  else if(var_4 < -1 * var_24) {
     var_4 = -1 * var_24;
+  }
 
   if(var_5 != var_5.next_node) {
     var_25 = var_1 get_bike_pos_from_spline(var_5, var_3, var_4, var_1.origin[2]);
     var_26 = maps\_utility::get_dot(var_1.origin, var_1.angles, var_25);
 
-    if(var_26 < 0.97)
+    if(var_26 < 0.97) {
       var_16 = 50;
-    else if(var_26 < 0.96)
+    }
+    else if(var_26 < 0.96) {
       var_16 = 25;
-    else if(var_26 < 0.95)
+    }
+    else if(var_26 < 0.95) {
       var_16 = 15;
+    }
 
     var_1 vehicledriveto(var_25, var_16);
 
-    if(!isDefined(level.player.vehicle))
+    if(!isDefined(level.player.vehicle)) {
       var_1 vehicle_setspeed(65, 1, 1);
+    }
     else {
       var_1.veh_topspeed = level.player.vehicle.veh_topspeed * 1.3;
       var_1 match_player_speed(45, 30);
@@ -1127,8 +1187,9 @@ move_to_correct_segment(var_0, var_1) {
 
 get_position_from_spline_unlimited(var_0, var_1, var_2) {
   for(;;) {
-    if(var_0 == var_0.next_node)
+    if(var_0 == var_0.next_node) {
       return var_0.midpoint;
+    }
 
     if(var_1 > var_0.dist_to_next_targ) {
       var_1 = var_1 - var_0.dist_to_next_targ;
@@ -1211,15 +1272,19 @@ bike_randomly_changes_lanes() {
 
   for(;;) {
     if(self.targ.col_volumes.size == 0 && self.dodge_dir == 0) {
-      if(common_scripts\utility::cointoss())
+      if(common_scripts\utility::cointoss()) {
         self.goal_dir++;
-      else
+      }
+      else {
         self.goal_dir--;
+      }
 
-      if(self.goal_dir > 1)
+      if(self.goal_dir > 1) {
         self.goal_dir = self.goal_dir - 3;
-      else if(self.goal_dir < -1)
+      }
+      else if(self.goal_dir < -1) {
         self.goal_dir = self.goal_dir + 3;
+      }
     }
 
     wait(randomfloatrange(1, 3));
@@ -1227,14 +1292,17 @@ bike_randomly_changes_lanes() {
 }
 
 should_stabilize() {
-  if(self.goal_dir == 0)
+  if(self.goal_dir == 0) {
     return 1;
+  }
 
-  if(self.goal_dir == 1 && self.offset > self.safe_offset)
+  if(self.goal_dir == 1 && self.offset > self.safe_offset) {
     return 1;
+  }
 
-  if(self.goal_dir == -1 && self.offset < self.safe_offset * -1)
+  if(self.goal_dir == -1 && self.offset < self.safe_offset * -1) {
     return 1;
+  }
 
   return 0;
 }
@@ -1247,19 +1315,24 @@ bike_turns() {
 
   for(;;) {
     if(should_stabilize()) {
-      if(self.tilt > 0)
+      if(self.tilt > 0) {
         self.tilt_vel = self.tilt_vel - var_1;
-      else if(self.tilt < 0)
+      }
+      else if(self.tilt < 0) {
         self.tilt_vel = self.tilt_vel + var_1;
+      }
     } else if(self.goal_dir == 1)
       self.tilt_vel = self.tilt_vel + var_1;
-    else if(self.goal_dir == -1)
+    else if(self.goal_dir == -1) {
       self.tilt_vel = self.tilt_vel - var_1;
+    }
 
-    if(self.tilt_vel > var_0)
+    if(self.tilt_vel > var_0) {
       self.tilt_vel = var_0;
-    else if(self.tilt_vel < -1 * var_0)
+    }
+    else if(self.tilt_vel < -1 * var_0) {
       self.tilt_vel = -1 * var_0;
+    }
 
     self.tilt = self.tilt + self.tilt_vel;
 
@@ -1276,13 +1349,16 @@ bike_turns() {
 }
 
 stabalize(var_0, var_1) {
-  if(self.tilt > 0)
+  if(self.tilt > 0) {
     self.tilt = self.tilt - var_1;
-  else
+  }
+  else {
     self.tilt = self.tilt + var_1;
+  }
 
-  if(abs(self.tilt) < var_1)
+  if(abs(self.tilt) < var_1) {
     self.tilt = var_1;
+  }
 }
 
 tilt_right(var_0, var_1) {
@@ -1293,8 +1369,9 @@ tilt_right(var_0, var_1) {
 
   self.tilt = self.tilt + var_1;
 
-  if(self.tilt >= var_0)
+  if(self.tilt >= var_0) {
     self.tilt = var_0;
+  }
 }
 
 tilt_left(var_0, var_1) {
@@ -1305,20 +1382,23 @@ tilt_left(var_0, var_1) {
 
   self.tilt = self.tilt - var_1;
 
-  if(self.tilt < var_0 * -1)
+  if(self.tilt < var_0 * -1) {
     self.tilt = var_0 * -1;
+  }
 }
 
 get_player_progress() {
-  if(isDefined(level.player.progress))
+  if(isDefined(level.player.progress)) {
     return level.player.progress;
+  }
 
   return 0;
 }
 
 get_player_targ() {
-  if(isDefined(level.player.targ))
+  if(isDefined(level.player.targ)) {
     return level.player.targ;
+  }
 
   return level.snowmobile_path[0];
 }
@@ -1326,8 +1406,9 @@ get_player_targ() {
 debug_bike_line() {
   var_0 = (0.2, 0.2, 1);
 
-  if(isDefined(level.player.vehicle) && self.veh_speed > level.player.vehicle.veh_speed)
+  if(isDefined(level.player.vehicle) && self.veh_speed > level.player.vehicle.veh_speed) {
     var_0 = (1, 0.2, 0.2);
+  }
 
   self.old_pos = self.origin;
 }

@@ -313,4 +313,3 @@ delete_all_ai_corpses() {
     }
   }
 }
-

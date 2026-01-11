@@ -53,8 +53,9 @@ pipe_calc_ballistic(var_0, var_1) {
 }
 
 pipe_calc_splash(var_0, var_1) {
-  if(self.use_bullet_hitnormal)
+  if(self.use_bullet_hitnormal) {
     return undefined;
+  }
 
   var_2 = vectornormalize(vectorfromlinetopoint(self.a, self.b, var_0));
   var_0 = pointonsegmentnearesttopoint(self.a, self.b, var_0);
@@ -91,8 +92,9 @@ pipemasteriterate(var_0) {
     level.pipe_breaks = common_scripts\utility::array_remove(level.pipe_breaks, var_1[var_2]);
   }
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     pipemasteriterate(var_1[var_2]);
+  }
 }
 
 get_pipes_in_range(var_0, var_1) {
@@ -269,11 +271,13 @@ pipebreak_damage() {
   var_1 = 250;
   var_2 = 200;
 
-  if(self.script_noteworthy == "fueltanker")
+  if(self.script_noteworthy == "fueltanker") {
     var_2 = 350;
+  }
 
-  for(var_3 = 0; var_3 < self.hurtnode.size; var_3++)
+  for(var_3 = 0; var_3 < self.hurtnode.size; var_3++) {
     radiusdamage(self.hurtnode[var_3], var_2, var_1, var_0);
+  }
 }
 
 pipebreakthink() {
@@ -317,8 +321,9 @@ pipebreakthink4() {
       thread common_scripts\utility::play_sound_in_space("explo_rock", self.fxnode.origin);
       break;
     default:
-      if(isDefined(self.master.firstsnd))
+      if(isDefined(self.master.firstsnd)) {
         thread common_scripts\utility::play_sound_in_space("expl_gas_pipe_burst", self.fxnode.origin);
+      }
       else {
         self.master.firstsnd = 1;
         thread common_scripts\utility::play_sound_in_space("expl_gas_pipe_burst_decay", self.fxnode.origin);
@@ -337,13 +342,15 @@ pipebreakthink4() {
   self solid();
 
   if(isDefined(self.fx_multinode)) {
-    for(var_0 = 0; var_0 < self.fx_multinode.size; var_0++)
+    for(var_0 = 0; var_0 < self.fx_multinode.size; var_0++) {
       playFX(level._effect["pipe_interactive"][self.script_noteworthy], self.fx_multinode[var_0].origin, self.fx_multinode[var_0].forward, self.fx_multinode[var_0].up);
+    }
   } else
     playFX(level._effect["pipe_interactive"][self.script_noteworthy], self.fxnode.origin, self.fxnode.forward, self.fxnode.up);
 
-  if(self.script_noteworthy == "fueltanker")
+  if(self.script_noteworthy == "fueltanker") {
     earthquake(0.4, 1.5, self.fxnode.origin, 600);
+  }
 
   thread pipeimpact();
 }
@@ -353,8 +360,9 @@ pipesetup() {
   var_0 = undefined;
   self.use_bullet_hitnormal = 0;
 
-  if(isDefined(self.script_parameters) && self.script_parameters == "use_bullet_hitnormal")
+  if(isDefined(self.script_parameters) && self.script_parameters == "use_bullet_hitnormal") {
     self.use_bullet_hitnormal = 1;
+  }
   else if(isDefined(self.target)) {
     var_0 = common_scripts\utility::getstruct(self.target, "targetname");
 
@@ -372,8 +380,9 @@ pipesetup() {
     self.b = self.origin + var_2;
   }
 
-  if(self.script_noteworthy == "fire")
+  if(self.script_noteworthy == "fire") {
     self.limit = 4;
+  }
 
   thread pipethink();
 }
@@ -428,8 +437,9 @@ pipethink_logic(var_0, var_1, var_2, var_3, var_4) {
     thread pipefx(var_3, var_8);
     var_9 = pipeoverlaymaskfxduration(level.pipe_fx_time[self.script_noteworthy]);
 
-    if(var_9)
+    if(var_9) {
       thread pipeoverlaymaskfx(var_9, var_3, var_8);
+    }
 
     self notify("pipe_ruptured");
   } else
@@ -439,11 +449,13 @@ pipethink_logic(var_0, var_1, var_2, var_3, var_4) {
 pipeoverlaymaskfxduration(var_0) {
   var_1 = 0;
 
-  if(getdvarint("ui_multiplayer"))
+  if(getdvarint("ui_multiplayer")) {
     return var_1;
+  }
 
-  if(getomnvar("ui_gasmask") != 0 && (self.script_noteworthy == "steam" || self.script_noteworthy == "water") && isDefined(level._effect["screen_heavy_rain_cgoshp"]) && isDefined(level.pipe_fx_time[self.script_noteworthy]))
+  if(getomnvar("ui_gasmask") != 0 && (self.script_noteworthy == "steam" || self.script_noteworthy == "water") && isDefined(level._effect["screen_heavy_rain_cgoshp"]) && isDefined(level.pipe_fx_time[self.script_noteworthy])) {
     return level.pipe_fx_time[self.script_noteworthy];
+  }
 
   return var_1;
 }
@@ -511,8 +523,9 @@ pipefx(var_0, var_1) {
   thread pipesndloopfx("mtl_gas_pipe_flame_loop", var_0, "pipe_breaking");
   thread pipe_snd_end("mtl_gas_pipe_flame_end", var_0, "pipe_breaking");
 
-  if(var_1 == (0, 0, 0))
+  if(var_1 == (0, 0, 0)) {
     var_1 = (0, 360, 0);
+  }
 
   for(var_3 = 0; var_3 < self.burnsec; var_3++) {
     playFX(level._effect["pipe_interactive"][self.script_noteworthy], var_0, var_1);
@@ -544,8 +557,9 @@ pipesndloopfx(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     wait(var_3);
+  }
 
   thread common_scripts\utility::play_loopsound_in_space_with_end(var_0, var_1, var_2);
 }
@@ -607,20 +621,25 @@ precachefx() {
 }
 
 override_pipe_fx(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.pipe_fx_override))
+  if(!isDefined(level.pipe_fx_override)) {
     level.pipe_fx_override = [];
+  }
 
-  if(!isDefined(level.pipe_fx_override[var_0]))
+  if(!isDefined(level.pipe_fx_override[var_0])) {
     level.pipe_fx_override[var_0] = [];
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level.pipe_fx_override[var_0]["fx"] = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.pipe_fx_override[var_0]["sound"] = var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level.pipe_fx_override[var_0]["time"] = var_3;
+  }
 }
 
 update_pipe_fx_with_overrides() {
@@ -633,13 +652,16 @@ update_pipe_fx_with_overrides() {
   var_0 = getarraykeys(level.pipe_fx_override);
 
   foreach(var_2 in var_0) {
-    if(isDefined(level.pipe_fx_override[var_2]["fx"]))
+    if(isDefined(level.pipe_fx_override[var_2]["fx"])) {
       level._effect["pipe_interactive"][var_2] = loadfx(level.pipe_fx_override[var_2]["fx"]);
+    }
 
-    if(isDefined(level.pipe_fx_override[var_2]["sound"]))
+    if(isDefined(level.pipe_fx_override[var_2]["sound"])) {
       level._sound["pipe_interactive"][var_2] = level.pipe_fx_override[var_2]["sound"];
+    }
 
-    if(isDefined(level.pipe_fx_override[var_2]["time"]))
+    if(isDefined(level.pipe_fx_override[var_2]["time"])) {
       level.pipe_fx_time[var_2] = level.pipe_fx_override[var_2]["time"];
+    }
   }
 }

@@ -8,15 +8,17 @@
 #include maps\_anim;
 #using_animtree("generic_human");
 patrol(start_target) {
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return;
+  }
   self endon("enemy");
 
   self endon("death");
   self endon("damage");
   self endon("end_patrol");
-  if(isDefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup)) {
     [[level.global_callbacks["_patrol_endon_spotted_flag"]]]();
+  }
 
   self thread waittill_combat();
   self thread waittill_death();
@@ -45,8 +47,9 @@ patrol(start_target) {
   set_goal_func["node"] = ::set_goal_node;
   set_goal_func["struct"] = ::set_goal_ent;
 
-  if(isDefined(start_target))
+  if(isDefined(start_target)) {
     self.target = start_target;
+  }
 
   assertEx(isDefined(self.target) || isDefined(self.script_linkto), "Patroller with no target or script_linkto defined.");
 
@@ -116,10 +119,12 @@ patrol(start_target) {
     [[set_goal_func[goal_type]]](currentgoal);
     //check for both defined and size - because ents dont have radius defined by
     //default - but nodes do - and that radius is 0 by default.
-    if(isDefined(currentgoal.radius) && currentgoal.radius > 0)
+    if(isDefined(currentgoal.radius) && currentgoal.radius > 0) {
       self.goalradius = currentgoal.radius;
-    else
+    }
+    else {
       self.goalradius = 32;
+    }
 
     self waittill("goal");
 
@@ -143,12 +148,14 @@ patrol(start_target) {
     if(!currentgoals.size) {
       self notify("reached_path_end");
       self notify("_patrol_reached_path_end");
-      if(isalive(self.patrol_pet))
+      if(isalive(self.patrol_pet)) {
         self.patrol_pet notify("master_reached_patrol_end");
+      }
     }
 
-    if(isDefined(currentgoal.script_delay))
+    if(isDefined(currentgoal.script_delay)) {
       wait currentgoal.script_delay;
+    }
 
     if(isDefined(currentgoal.script_flag_wait)) {
       flag_wait(currentgoal.script_flag_wait);
@@ -247,8 +254,9 @@ patrol_resume_move_start_func() {
 }
 
 turn_180_move_start_func() {
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return;
+  }
 
   pos = self.pathgoalpos;
 
@@ -256,8 +264,9 @@ turn_180_move_start_func() {
   vec2 = (vec2[0], vec2[1], 0);
   vec2LengthSq = lengthSquared(vec2);
 
-  if(vec2LengthSq < 1)
+  if(vec2LengthSq < 1) {
     return;
+  }
 
   vec2 = vec2 / sqrt(vec2LengthSq);
 
@@ -301,8 +310,9 @@ set_patrol_run_anim_array() {
 waittill_combat_wait() {
   self endon("end_patrol");
 
-  if(isDefined(self.patrol_master))
+  if(isDefined(self.patrol_master)) {
     self.patrol_master endon("death");
+  }
 
   self waittill("enemy");
 }
@@ -310,13 +320,15 @@ waittill_combat_wait() {
 waittill_death() {
   self waittill("death");
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   self notify("release_node");
 
-  if(!isDefined(self.last_patrol_goal))
+  if(!isDefined(self.last_patrol_goal)) {
     return;
+  }
 
   self.last_patrol_goal.patrol_claimed = undefined;
 }
@@ -341,17 +353,20 @@ waittill_combat() {
     self.goalradius = level.default_goalradius;
   }
 
-  if(isDefined(self.old_interval))
+  if(isDefined(self.old_interval)) {
     self.interval = self.old_interval;
+  }
   self.moveplaybackrate = 1;
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   self notify("release_node");
 
-  if(!isDefined(self.last_patrol_goal))
+  if(!isDefined(self.last_patrol_goal)) {
     return;
+  }
 
   self.last_patrol_goal.patrol_claimed = undefined;
 }
@@ -359,8 +374,9 @@ waittill_combat() {
 get_target_ents() {
   array = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     array = getEntArray(self.target, "targetname");
+  }
 
   return array;
 }
@@ -368,8 +384,9 @@ get_target_ents() {
 get_target_nodes() {
   array = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     array = getnodearray(self.target, "targetname");
+  }
 
   return array;
 }
@@ -377,8 +394,9 @@ get_target_nodes() {
 get_target_structs() {
   array = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     array = getstructarray(self.target, "targetname");
+  }
 
   return array;
 }
@@ -390,8 +408,9 @@ get_linked_nodes() {
     linknames = strtok(self.script_linkto, " ");
     for(i = 0; i < linknames.size; i++) {
       ent = getnode(linknames[i], "script_linkname");
-      if(isDefined(ent))
+      if(isDefined(ent)) {
         array[array.size] = ent;
+      }
     }
   }
 
@@ -419,8 +438,9 @@ linkPet() {
     return;
   }
 
-  if(!isDefined(self.script_pet))
+  if(!isDefined(self.script_pet)) {
     return;
+  }
 
   waittillframeend; // make sure everyone is spawned;
 
@@ -428,10 +448,12 @@ linkPet() {
   pet = undefined;
 
   for(i = 0; i < pets.size; i++) {
-    if(!isDefined(pets[i].script_pet))
+    if(!isDefined(pets[i].script_pet)) {
       continue;
-    if(pets[i].script_pet != self.script_pet)
+    }
+    if(pets[i].script_pet != self.script_pet) {
       continue;
+    }
 
     pet = pets[i];
     self.patrol_pet = pet;
@@ -439,8 +461,9 @@ linkPet() {
     break;
   }
 
-  if(!isDefined(pet))
+  if(!isDefined(pet)) {
     return;
+  }
 
   pet thread pet_patrol();
 }
@@ -448,14 +471,16 @@ linkPet() {
 pet_patrol() {
   spawn_failed(self);
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return;
+  }
   self endon("enemy");
 
   self endon("death");
   self endon("end_patrol");
-  if(isDefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup)) {
     [[level.global_callbacks["_patrol_endon_spotted_flag"]]]();
+  }
 
   self.patrol_master endon("death");
 
@@ -472,8 +497,9 @@ pet_patrol() {
   right = anglestoright(self.patrol_master.angles);
 
   curr_pos = "left";
-  if(vectordot(forward, right) > 0)
+  if(vectordot(forward, right) > 0) {
     curr_pos = "right";
+  }
 
   wait 1; // wait for everyone to actually start moving
 
@@ -577,8 +603,9 @@ pet_debug_positions(positions) {
   keys = getarraykeys(positions);
   for(i = 0; i < keys.size; i++) {
     key = keys[i];
-    if(key == "null")
+    if(key == "null") {
       continue;
+    }
     print3d(positions[key].origin, "o", (0, 1, 0), 1, .5);
   }
 }
@@ -589,11 +616,13 @@ pet_patrol_get_available_origin(positions, curr) {
   for(i = 0; i < positions[curr].options.size; i++) {
     name = positions[curr].options[i];
 
-    if(positions[name].checked)
+    if(positions[name].checked) {
       continue;
+    }
 
-    if(self maymovetopoint(positions[name].origin))
+    if(self maymovetopoint(positions[name].origin)) {
       return name;
+    }
 
     positions[name].checked = true;
   }
@@ -601,8 +630,9 @@ pet_patrol_get_available_origin(positions, curr) {
   for(i = 0; i < positions[curr].options.size; i++) {
     name = positions[curr].options[i];
 
-    if(positions[name].recursed)
+    if(positions[name].recursed) {
       continue;
+    }
 
     name = pet_patrol_get_available_origin(positions, name);
     return name;
@@ -612,8 +642,9 @@ pet_patrol_get_available_origin(positions, curr) {
 }
 
 pet_patrol_handle_move_state(walkdist) {
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return;
+  }
   self endon("enemy");
 
   self endon("death");
@@ -627,8 +658,9 @@ pet_patrol_handle_move_state(walkdist) {
     return;
   }
 
-  if(!isDefined(walkdist))
+  if(!isDefined(walkdist)) {
     walkdist = 200; //was 200
+  }
 
   //min_walkdist = 30;
 
@@ -645,8 +677,9 @@ pet_patrol_handle_move_state(walkdist) {
 
     if(dist > squared(walkdist)) {
       //we want to run
-      if(self.a.movement == "run")
+      if(self.a.movement == "run") {
         continue;
+      }
 
       self anim_generic_custom_animmode(self, "gravity", "patrol_dog_start");
       self clear_run_anim();
@@ -661,8 +694,9 @@ pet_patrol_handle_move_state(walkdist) {
 }
 
 pet_patrol_handle_movespeed(tooclose, toofar) {
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return;
+  }
   self endon("enemy");
 
   self endon("death");
@@ -679,20 +713,24 @@ pet_patrol_handle_movespeed(tooclose, toofar) {
       //println( self.a.movement + " speed: " + self.moveplaybackrate );
 
       if(dist < squared(16)) {
-        if(self.moveplaybackrate > .4)
+        if(self.moveplaybackrate > .4) {
           self.moveplaybackrate -= .05;
+        }
       } else if(dist > squared(48)) {
-        if(self.moveplaybackrate < 1.8)
+        if(self.moveplaybackrate < 1.8) {
           self.moveplaybackrate += .05;
+        }
       } else
         self.moveplaybackrate = 1;
     }
   }
 
-  if(!isDefined(tooclose))
+  if(!isDefined(tooclose)) {
     tooclose = 16;
-  if(!isDefined(toofar))
+  }
+  if(!isDefined(toofar)) {
     toofar = 48;
+  }
 
   tooclose2rd = tooclose * tooclose;
   toofar2rd = toofar * toofar;
@@ -714,11 +752,13 @@ pet_patrol_handle_movespeed(tooclose, toofar) {
 
     //too close?
     if(dist < tooclose2rd) {
-      if(self.moveplaybackrate > .4)
+      if(self.moveplaybackrate > .4) {
         self.moveplaybackrate -= .05;
+      }
     } else if(dist > toofar2rd) {
-      if(self.moveplaybackrate < .75)
+      if(self.moveplaybackrate < .75) {
         self.moveplaybackrate += .05;
+      }
     } else
       self.moveplaybackrate = .5;
   }

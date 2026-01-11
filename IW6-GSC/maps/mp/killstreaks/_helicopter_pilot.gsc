@@ -25,10 +25,12 @@ init() {
   heliPilot_setAirStartNodes();
 
   level.heli_pilot_mesh = GetEnt("heli_pilot_mesh", "targetname");
-  if(!isDefined(level.heli_pilot_mesh))
+  if(!isDefined(level.heli_pilot_mesh)) {
     PrintLn("heli_pilot_mesh doesn't exist in this level: " + level.script);
-  else
+  }
+  else {
     level.heli_pilot_mesh.origin += getHeliPilotMeshOffset();
+  }
 
   config = spawnStruct();
   config.xpPopup = "destroyed_helo_pilot";
@@ -72,23 +74,28 @@ tryUseHeliPilot(lifeId, streakName) {
 
   result = self startHeliPilot(heli);
 
-  if(!isDefined(result))
+  if(!isDefined(result)) {
     result = false;
+  }
 
   return result;
 }
 
 exceededMaxHeliPilots(team) {
   if(level.gameType == "dm") {
-    if(isDefined(level.heli_pilot[team]) || isDefined(level.heli_pilot[level.otherTeam[team]]))
+    if(isDefined(level.heli_pilot[team]) || isDefined(level.heli_pilot[level.otherTeam[team]])) {
       return true;
-    else
+    }
+    else {
       return false;
+    }
   } else {
-    if(isDefined(level.heli_pilot[team]))
+    if(isDefined(level.heli_pilot[team])) {
       return true;
-    else
+    }
+    else {
       return false;
+    }
   }
 }
 
@@ -176,8 +183,9 @@ startHeliPilot(heli) {
 
   self setUsingRemote(heli.heliPilotType);
 
-  if(GetDvarInt("camera_thirdPerson"))
+  if(GetDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(false);
+  }
 
   self.restoreAngles = self.angles;
 
@@ -188,8 +196,9 @@ startHeliPilot(heli) {
   self freezeControlsWrapper(true);
   result = self maps\mp\killstreaks\_killstreaks::initRideKillstreak(heli.heliPilotType);
   if(result != "success") {
-    if(isDefined(self.disabledWeapon) && self.disabledWeapon)
+    if(isDefined(self.disabledWeapon) && self.disabledWeapon) {
       self _enableWeapon();
+    }
     heli notify("death");
 
     return false;
@@ -284,8 +293,9 @@ watchPlayersSpawning() {
 
   while(true) {
     level waittill("player_spawned", player);
-    if(player.sessionstate == "playing" && self.owner isEnemy(player))
+    if(player.sessionstate == "playing" && self.owner isEnemy(player)) {
       player thread watchForPerkRemoval(self);
+    }
   }
 }
 
@@ -332,11 +342,13 @@ heliPilot_watchDeath() {
 
   self waittill("death");
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner heliPilot_EndRide(self);
+  }
 
-  if(isDefined(self.killCamEnt))
+  if(isDefined(self.killCamEnt)) {
     self.killCamEnt delete();
+  }
 
   self thread maps\mp\killstreaks\_helicopter::lbOnKilled();
 }
@@ -351,8 +363,9 @@ heliPilot_watchObjectiveCam() {
   level waittill("objective_cam");
 
   self thread maps\mp\killstreaks\_helicopter::lbOnKilled();
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner heliPilot_EndRide(self);
+  }
 }
 
 heliPilot_watchTimeout() {
@@ -397,8 +410,9 @@ heliPilot_leave() {
   self endon("death");
   self notify("leaving");
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner heliPilot_EndRide(self);
+  }
 
   flyHeight = self maps\mp\killstreaks\_airdrop::getFlyHeightOffset(self.origin);
   targetPos = self.origin + (0, 0, flyHeight);
@@ -434,11 +448,13 @@ heliPilot_EndRide(heli) {
 
     heli notify("end_remote");
 
-    if(self isUsingRemote())
+    if(self isUsingRemote()) {
       self clearUsingRemote();
+    }
 
-    if(GetDvarInt("camera_thirdPerson"))
+    if(GetDvarInt("camera_thirdPerson")) {
       self setThirdPersonDOF(true);
+    }
 
     self RemoteControlVehicleOff(heli);
 

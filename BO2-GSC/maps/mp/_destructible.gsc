@@ -36,8 +36,9 @@ init() {
       continue;
     }
 
-    if(destructibles[i].destructibledef == "fxdest_upl_metal_tank_01")
+    if(destructibles[i].destructibledef == "fxdest_upl_metal_tank_01") {
       destructibles[i] thread destructible_tank_grenade_stuck_think();
+    }
   }
 
   destructible_anims = [];
@@ -51,12 +52,15 @@ destructible_event_callback(destructible_event, attacker, weapon) {
     tokens = strtok(destructible_event, "_");
     explosion_radius = tokens[1];
 
-    if(explosion_radius == "sm")
+    if(explosion_radius == "sm") {
       explosion_radius = 150;
-    else if(explosion_radius == "lg")
+    }
+    else if(explosion_radius == "lg") {
       explosion_radius = 450;
-    else
+    }
+    else {
       explosion_radius = int(explosion_radius);
+    }
 
     destructible_event = "explode_complex";
   }
@@ -70,15 +74,17 @@ destructible_event_callback(destructible_event, attacker, weapon) {
     case "destructible_car_explosion":
       self destructible_car_explosion(attacker);
 
-      if(isDefined(weapon))
+      if(isDefined(weapon)) {
         self.destroyingweapon = weapon;
+      }
 
       break;
     case "destructible_car_fire":
       self thread destructible_car_fire_think(attacker);
 
-      if(isDefined(weapon))
+      if(isDefined(weapon)) {
         self.destroyingweapon = weapon;
+      }
 
       break;
     case "destructible_barrel_fire":
@@ -97,8 +103,9 @@ destructible_event_callback(destructible_event, attacker, weapon) {
       break;
   }
 
-  if(isDefined(level.destructible_callbacks[destructible_event]))
+  if(isDefined(level.destructible_callbacks[destructible_event])) {
     self thread[[level.destructible_callbacks[destructible_event]]](destructible_event, attacker);
+  }
 }
 
 simple_explosion(attacker) {
@@ -110,10 +117,12 @@ simple_explosion(attacker) {
   self radiusdamage(self.origin + offset, 256, 300, 75, attacker, "MOD_EXPLOSIVE", "explodable_barrel_mp");
   physicsexplosionsphere(self.origin, 255, 254, 0.3, 400, 25);
 
-  if(isDefined(attacker))
+  if(isDefined(attacker)) {
     self dodamage(self.health + 10000, self.origin + offset, attacker);
-  else
+  }
+  else {
     self dodamage(self.health + 10000, self.origin + offset);
+  }
 }
 
 simple_timed_explosion(destructible_event, attacker) {
@@ -122,8 +131,9 @@ simple_timed_explosion(destructible_event, attacker) {
   str = getsubstr(destructible_event, 23);
   tokens = strtok(str, "_");
 
-  for(i = 0; i < tokens.size; i++)
+  for(i = 0; i < tokens.size; i++) {
     wait_times[wait_times.size] = int(tokens[i]);
+  }
 
   if(wait_times.size <= 0) {
     wait_times[0] = 5;
@@ -137,27 +147,32 @@ simple_timed_explosion(destructible_event, attacker) {
 complex_explosion(attacker, max_radius) {
   offset = vectorscale((0, 0, 1), 5.0);
 
-  if(isDefined(attacker))
+  if(isDefined(attacker)) {
     self radiusdamage(self.origin + offset, max_radius, 300, 100, attacker);
-  else
+  }
+  else {
     self radiusdamage(self.origin + offset, max_radius, 300, 100);
+  }
 
   playrumbleonposition("grenade_rumble", self.origin);
   earthquake(0.5, 0.5, self.origin, max_radius);
   physicsexplosionsphere(self.origin + offset, max_radius, max_radius - 1, 0.3);
 
-  if(isDefined(attacker))
+  if(isDefined(attacker)) {
     self dodamage(20000, self.origin + offset, attacker);
-  else
+  }
+  else {
     self dodamage(20000, self.origin + offset);
+  }
 }
 
 destructible_car_explosion(attacker, physics_explosion) {
   if(self.car_dead) {
     return;
   }
-  if(!isDefined(physics_explosion))
+  if(!isDefined(physics_explosion)) {
     physics_explosion = 1;
+  }
 
   players = get_players();
 
@@ -170,8 +185,9 @@ destructible_car_explosion(attacker, physics_explosion) {
     if(distancesquared(body.origin, self.origin) > 9216) {
       continue;
     }
-    if(body.origin[2] - (self.origin[2] + 32) > 0)
+    if(body.origin[2] - (self.origin[2] + 32) > 0) {
       body.origin = (body.origin[0], body.origin[1], body.origin[2] + 16);
+    }
 
     body maps\mp\gametypes\_globallogic_player::start_explosive_ragdoll();
   }
@@ -180,26 +196,32 @@ destructible_car_explosion(attacker, physics_explosion) {
   self.car_dead = 1;
   self thread destructible_car_explosion_animate();
 
-  if(isDefined(attacker))
+  if(isDefined(attacker)) {
     self radiusdamage(self.origin, 256, 300, 75, attacker, "MOD_EXPLOSIVE", "destructible_car_mp");
-  else
+  }
+  else {
     self radiusdamage(self.origin, 256, 300, 75);
+  }
 
   playrumbleonposition("grenade_rumble", self.origin);
   earthquake(0.5, 0.5, self.origin, 800);
 
-  if(physics_explosion)
+  if(physics_explosion) {
     physicsexplosionsphere(self.origin, 255, 254, 0.3, 400, 25);
+  }
 
-  if(isDefined(attacker))
+  if(isDefined(attacker)) {
     attacker thread maps\mp\_challenges::destroyed_car();
+  }
 
   level.globalcarsdestroyed++;
 
-  if(isDefined(attacker))
+  if(isDefined(attacker)) {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1), attacker);
-  else
+  }
+  else {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1));
+  }
 
   self setclientflag(3);
 }
@@ -214,8 +236,9 @@ destructible_tank_grenade_stuck_think() {
     if(!isDefined(missile) || !isDefined(missile.model)) {
       continue;
     }
-    if(missile.model == "t5_weapon_crossbow_bolt" || missile.model == "t6_wpn_grenade_semtex_projectile" || missile.model == "t6_wpn_c4_world")
+    if(missile.model == "t5_weapon_crossbow_bolt" || missile.model == "t6_wpn_grenade_semtex_projectile" || missile.model == "t6_wpn_c4_world") {
       self thread destructible_tank_grenade_stuck_explode(missile);
+    }
   }
 }
 
@@ -233,10 +256,12 @@ destructible_tank_grenade_stuck_explode(missile) {
 
   missile waittill("explode");
 
-  if(isDefined(owner))
+  if(isDefined(owner)) {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1), owner);
-  else
+  }
+  else {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1));
+  }
 }
 
 destructible_tank_hacked_c4(tank) {
@@ -254,8 +279,9 @@ destructible_car_death_think() {
   self thread destructible_car_death_notify();
   self waittill("destructible_base_piece_death", attacker);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self thread destructible_car_explosion(attacker, 0);
+  }
 }
 
 destructible_car_grenade_stuck_think() {
@@ -269,8 +295,9 @@ destructible_car_grenade_stuck_think() {
     if(!isDefined(missile) || !isDefined(missile.model)) {
       continue;
     }
-    if(missile.model == "t5_weapon_crossbow_bolt" || missile.model == "t6_wpn_grenade_semtex_projectile" || missile.model == "t6_wpn_c4_world")
+    if(missile.model == "t5_weapon_crossbow_bolt" || missile.model == "t6_wpn_grenade_semtex_projectile" || missile.model == "t6_wpn_c4_world") {
       self thread destructible_car_grenade_stuck_explode(missile);
+    }
   }
 }
 
@@ -289,10 +316,12 @@ destructible_car_grenade_stuck_explode(missile) {
 
   missile waittill("explode");
 
-  if(isDefined(owner))
+  if(isDefined(owner)) {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1), owner);
-  else
+  }
+  else {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1));
+  }
 }
 
 destructible_car_hacked_c4(car) {
@@ -320,8 +349,9 @@ destructible_car_explosion_animate() {
 
   for(i = 0; i < items.size; i++) {
     if(distancesquared(end_origin, items[i].origin) < 16384) {
-      if(items[i].origin[2] - (end_origin[2] + 32) > 0)
+      if(items[i].origin[2] - (end_origin[2] + 32) > 0) {
         items[i] delete();
+      }
     }
   }
 
@@ -361,8 +391,9 @@ destructible_barrel_death_think() {
   self endon("barrel_dead");
   self waittill("death", attacker);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self thread destructible_barrel_explosion(attacker, 0);
+  }
 }
 
 destructible_barrel_fire_think(attacker) {
@@ -374,8 +405,9 @@ destructible_barrel_fire_think(attacker) {
 }
 
 destructible_barrel_explosion(attacker, physics_explosion) {
-  if(!isDefined(physics_explosion))
+  if(!isDefined(physics_explosion)) {
     physics_explosion = 1;
+  }
 
   self notify("barrel_dead");
 
@@ -388,8 +420,9 @@ destructible_barrel_explosion(attacker, physics_explosion) {
   playrumbleonposition("grenade_rumble", self.origin);
   earthquake(0.5, 0.5, self.origin, 800);
 
-  if(physics_explosion)
+  if(physics_explosion) {
     physicsexplosionsphere(self.origin, 255, 254, 0.3, 400, 25);
+  }
 
   level.globalbarrelsdestroyed++;
   self dodamage(self.health + 10000, self.origin + (0, 0, 1), attacker);

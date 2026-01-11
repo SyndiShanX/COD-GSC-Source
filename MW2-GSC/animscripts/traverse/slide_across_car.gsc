@@ -9,10 +9,12 @@
 #using_animtree("generic_human");
 
 main() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     slide_across_car_dog();
-  else
+  }
+  else {
     slide_across_car_human();
+  }
 }
 
 slide_across_car_human() {

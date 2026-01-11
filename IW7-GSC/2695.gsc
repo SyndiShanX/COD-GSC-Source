@@ -4,8 +4,9 @@
 ***************************************/
 
 animationsuite() {
-  while(!scripts\mp\utility\game::istrue(game["gamestarted"]))
+  while(!scripts\mp\utility\game::istrue(game["gamestarted"])) {
     wait 0.05;
+  }
 
   var_00 = getEntArray("animObj", "targetname");
   var_01 = gathergroups(var_00);
@@ -66,8 +67,9 @@ gathergroups(var_00) {
   var_02 = [];
 
   foreach(var_04 in var_00) {
-    if(isDefined(var_4.script_noteworthy) && issubstr(var_4.script_noteworthy, "group"))
+    if(isDefined(var_4.script_noteworthy) && issubstr(var_4.script_noteworthy, "group")) {
       var_01 = scripts\engine\utility::array_add(var_01, var_04);
+    }
   }
 
   foreach(var_07 in var_01) {
@@ -89,8 +91,9 @@ gathergroups(var_00) {
 
 animsuite_getparentobject(var_00) {
   foreach(var_02 in var_00) {
-    if(isDefined(var_2.script_linkname))
+    if(isDefined(var_2.script_linkname)) {
       return var_02;
+    }
   }
 }
 
@@ -106,11 +109,13 @@ animsuite_linkchildrentoparentobject(var_00, var_01) {
 }
 
 animsuite_translation(var_00) {
-  if(issubstr(var_00, "pingpong"))
+  if(issubstr(var_00, "pingpong")) {
     thread animsuite_translation_pingpong();
+  }
 
-  if(issubstr(var_00, "once"))
+  if(issubstr(var_00, "once")) {
     thread animsuite_translation_once();
+  }
 }
 
 animsuite_translation_pingpong() {
@@ -122,44 +127,53 @@ animsuite_translation_pingpong() {
   var_04 = undefined;
   var_05 = undefined;
 
-  if(isDefined(self.script_translation_amount))
+  if(isDefined(self.script_translation_amount)) {
     var_00 = self.script_translation_amount;
+  }
 
-  if(isDefined(self.script_translation_time))
+  if(isDefined(self.script_translation_time)) {
     var_01 = self.script_translation_time;
+  }
 
   if(isDefined(self.script_audio_parameters)) {
-    if(issubstr(self.script_audio_parameters, "start"))
+    if(issubstr(self.script_audio_parameters, "start")) {
       var_03 = "mp_quarry_lg_crane_start";
+    }
 
-    if(issubstr(self.script_audio_parameters, "stop"))
+    if(issubstr(self.script_audio_parameters, "stop")) {
       var_04 = "mp_quarry_lg_crane_stop";
+    }
 
-    if(issubstr(self.script_audio_parameters, "loop"))
+    if(issubstr(self.script_audio_parameters, "loop")) {
       var_05 = "mp_quarry_lg_crane_loop";
+    }
   }
 
   for(;;) {
     var_06 = self.origin;
     self moveto(self.origin + var_00, var_1[0], var_1[1], var_1[2]);
 
-    if(isDefined(var_04))
+    if(isDefined(var_04)) {
       thread animsuite_playthreadedsound(var_1[0], var_04);
+    }
 
     wait(var_1[0] + var_02);
 
-    if(isDefined(var_03))
+    if(isDefined(var_03)) {
       playLoopSound(self.origin, var_03);
+    }
 
     self moveto(var_06, var_1[0], var_1[1], var_1[2]);
 
-    if(isDefined(var_04))
+    if(isDefined(var_04)) {
       thread animsuite_playthreadedsound(var_1[0], var_04);
+    }
 
     wait(var_1[0] + var_02);
 
-    if(isDefined(var_03))
+    if(isDefined(var_03)) {
       playLoopSound(self.origin, var_03);
+    }
   }
 }
 
@@ -173,11 +187,13 @@ animsuite_translation_once() {
   var_00 = (0, 90, 0);
   var_01 = 5;
 
-  if(isDefined(self.script_translation_amount))
+  if(isDefined(self.script_translation_amount)) {
     var_00 = self.script_translation_amount;
+  }
 
-  if(isDefined(self.script_translation_time))
+  if(isDefined(self.script_translation_time)) {
     var_01 = length(self.script_translation_time);
+  }
 
   for(;;) {
     self rotateby(var_00, var_01, 0, 0);
@@ -186,11 +202,13 @@ animsuite_translation_once() {
 }
 
 animsuite_rotation(var_00) {
-  if(issubstr(var_00, "pingpong"))
+  if(issubstr(var_00, "pingpong")) {
     thread animsuite_rotation_pingpong();
+  }
 
-  if(issubstr(var_00, "continuous"))
+  if(issubstr(var_00, "continuous")) {
     thread animsuite_rotation_continuous();
+  }
 }
 
 animsuite_rotation_pingpong() {
@@ -202,11 +220,13 @@ animsuite_rotation_pingpong() {
   var_04 = undefined;
   var_05 = undefined;
 
-  if(isDefined(self.script_rotation_amount))
+  if(isDefined(self.script_rotation_amount)) {
     var_00 = self.script_rotation_amount;
+  }
 
-  if(isDefined(self.script_rotation_speed))
+  if(isDefined(self.script_rotation_speed)) {
     var_01 = self.script_rotation_speed;
+  }
 
   if(self.model == "jackal_arena_aa_turret_01_mp_sml") {
     var_03 = "divide_turret_move_start";
@@ -217,23 +237,27 @@ animsuite_rotation_pingpong() {
   for(;;) {
     self rotateby(var_00, var_1[0], var_1[1], var_1[2]);
 
-    if(isDefined(var_04))
+    if(isDefined(var_04)) {
       thread animsuite_playthreadedsound(var_1[0] * 0.9, var_04);
+    }
 
     wait(var_1[0] + var_02);
 
-    if(isDefined(var_03))
+    if(isDefined(var_03)) {
       playLoopSound(self.origin, var_03);
+    }
 
     self rotateby(var_00 * -1, var_1[0], var_1[1], var_1[2]);
 
-    if(isDefined(var_04))
+    if(isDefined(var_04)) {
       thread animsuite_playthreadedsound(var_1[0] * 0.9, var_04);
+    }
 
     wait(var_1[0] + var_02);
 
-    if(isDefined(var_03))
+    if(isDefined(var_03)) {
       playLoopSound(self.origin, var_03);
+    }
   }
 }
 
@@ -243,11 +267,13 @@ animsuite_rotation_continuous() {
   var_01 = (5, 0, 0);
   var_02 = 0.5;
 
-  if(isDefined(self.script_rotation_amount))
+  if(isDefined(self.script_rotation_amount)) {
     var_00 = self.script_rotation_amount;
+  }
 
-  if(isDefined(self.script_rotation_speed))
+  if(isDefined(self.script_rotation_speed)) {
     var_01 = self.script_rotation_speed;
+  }
 
   for(;;) {
     self rotateby(var_00, var_1[0], var_1[1], var_1[2]);

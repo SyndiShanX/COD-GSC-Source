@@ -100,8 +100,9 @@ chicken_achievement() {
   destructible_toy = getEntArray("destructible_toy", "targetname");
   chickens = [];
   foreach(item in destructible_toy) {
-    if(issubstr(item.destructible_type, "toy_chicken"))
+    if(issubstr(item.destructible_type, "toy_chicken")) {
       chickens[chickens.size] = item;
+    }
   }
 
   array_thread(chickens, ::chicken_achievement_think);
@@ -110,19 +111,22 @@ chicken_achievement() {
 chicken_achievement_think() {
   self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, dflags);
 
-  if(!isplayer(attacker))
+  if(!isplayer(attacker)) {
     return;
+  }
 
   level.chickens_killed[level.chickens_killed.size] = gettime();
 
-  if(level.chickens_killed.size < CONST_CHICKEN_ACHIEVEMENT_NUM)
+  if(level.chickens_killed.size < CONST_CHICKEN_ACHIEVEMENT_NUM) {
     return;
+  }
 
   time1 = level.chickens_killed[level.chickens_killed.size - CONST_CHICKEN_ACHIEVEMENT_NUM];
   time2 = level.chickens_killed[level.chickens_killed.size - 1];
 
-  if((time2 - time1) > CONST_CHICKEN_ACHIEVEMENT_TIME * 1000)
+  if((time2 - time1) > CONST_CHICKEN_ACHIEVEMENT_TIME * 1000) {
     return;
+  }
 
   maps\_utility::giveachievement_wrapper("COLONEL_SANDERSON");
 }
@@ -1494,8 +1498,9 @@ solorun_balcony_save_aicheck() {
     		/# maps\_autosave::AutoSavePrint( "autosave failed: AI too close to player" );
     		return false;
     	}
-    	else
+    	else {
     	if( dist < 1000 )
+    	}
     	{
     		proximity_threat = true;
     	}

@@ -8,13 +8,16 @@ move_player_to_start_point(var_0) {
   level.player setorigin(var_1.origin);
   var_2 = undefined;
 
-  if(isDefined(var_1.target))
+  if(isDefined(var_1.target)) {
     var_2 = getent(var_1.target, "targetname");
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.player setplayerangles(vectortoangles(var_2.origin - var_1.origin));
-  else
+  }
+  else {
     level.player setplayerangles(var_1.angles);
+  }
 }
 
 actor_teleport(var_0, var_1) {
@@ -35,8 +38,9 @@ safe_trigger_by_targetname(var_0) {
   }
   var_1 notify("trigger");
 
-  if(var_1.classname == "trigger_once" || isDefined(var_1.spawnflags) && var_1.spawnflags & 64)
+  if(var_1.classname == "trigger_once" || isDefined(var_1.spawnflags) && var_1.spawnflags & 64) {
     var_1 delete();
+  }
 }
 
 safe_trigger_by_noteworthy(var_0) {
@@ -47,15 +51,18 @@ safe_trigger_by_noteworthy(var_0) {
   }
   var_1 notify("trigger");
 
-  if(var_1.classname == "trigger_once" || isDefined(var_1.spawnflags) && var_1.spawnflags & 64)
+  if(var_1.classname == "trigger_once" || isDefined(var_1.spawnflags) && var_1.spawnflags & 64) {
     var_1 delete();
+  }
 }
 
 teleport_squad(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_2 = ["ALLY_ALPHA", "ALLY_BRAVO", "ALLY_CHARLIE", "ALLY_DELTA", "ALLY_ECHO"];
-  else
+  }
+  else {
     var_2 = ["ALLY_ALPHA", "ALLY_BRAVO", "ALLY_CHARLIE"];
+  }
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
     actor_teleport(level.squad[var_2[var_3]], var_2[var_3] + "_" + var_0 + "_teleport");
@@ -79,22 +86,25 @@ safe_delete_noteworthy(var_0) {
 }
 
 safe_delete(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
   else {}
 }
 
 safe_delete_array(var_0) {
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   safe_delete(var_2);
+  }
 }
 
 add_debug_dialogue(var_0, var_1, var_2) {
   if(getdvarint("loc_warnings", 0)) {
     return;
   }
-  if(!isDefined(level.debug_dialogue_huds))
+  if(!isDefined(level.debug_dialogue_huds)) {
     level.debug_dialogue_huds = [];
+  }
 
   var_3 = "^3";
 
@@ -154,8 +164,9 @@ add_debug_dialogue(var_0, var_1, var_2) {
     if(var_7 == 0) {
       continue;
     }
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_6.y = 325 - var_7 * 18;
+    }
   }
 
   wait 2;
@@ -176,8 +187,9 @@ add_debug_dialogue(var_0, var_1, var_2) {
 teleport_to_target() {
   var_0 = common_scripts\utility::get_target_ent();
 
-  if(!isDefined(var_0.angles))
+  if(!isDefined(var_0.angles)) {
     var_0.angles = self.angles;
+  }
 
   self forceteleport(var_0.origin, var_0.angles);
 }
@@ -186,8 +198,9 @@ spawn_odin_actor_array(var_0, var_1) {
   var_2 = getEntArray(var_0, "targetname");
   var_3 = [];
 
-  foreach(var_5 in var_2)
+  foreach(var_5 in var_2) {
   var_3[var_3.size] = var_5 spawn_odin_actor_internal(var_1);
+  }
 
   return var_3;
 }
@@ -195,19 +208,22 @@ spawn_odin_actor_array(var_0, var_1) {
 spawn_odin_actor_single(var_0, var_1) {
   var_2 = getent(var_0, "targetname");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return undefined;
+  }
 
   var_3 = var_2 spawn_odin_actor_internal(var_1);
   return var_3;
 }
 
 spawn_odin_actor_internal(var_0, var_1) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return undefined;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = maps\_utility::spawn_ai(var_1);
 
@@ -218,8 +234,9 @@ spawn_odin_actor_internal(var_0, var_1) {
   var_3 = common_scripts\utility::get_target_ent();
 
   if(isDefined(var_3)) {
-    if(!isDefined(var_3.angles))
+    if(!isDefined(var_3.angles)) {
       var_3.angles = self.angles;
+    }
 
     var_2 forceteleport(var_3.origin, var_3.angles);
   }
@@ -243,11 +260,13 @@ add_light_to_actor(var_0) {
   var_1 linkto(self, "tag_eye");
   var_3 = common_scripts\utility::getfx("light_blue_steady_FX");
 
-  if(var_0 == "ally")
+  if(var_0 == "ally") {
     var_3 = common_scripts\utility::getfx("light_blue_steady_FX");
+  }
 
-  if(var_0 == "axis")
+  if(var_0 == "axis") {
     var_3 = common_scripts\utility::getfx("amber_light_45_beacon_nolight_glow");
+  }
 
   while(isalive(self)) {
     playFXOnTag(var_3, var_1, "tag_origin");
@@ -262,8 +281,9 @@ add_light_to_actor(var_0) {
 set_mission_view_tweaks() {
   setsaveddvar("cg_fov", level.odin_fov);
 
-  if(!common_scripts\utility::flag("spin_start_exterior_dialogue"))
+  if(!common_scripts\utility::flag("spin_start_exterior_dialogue")) {
     maps\_utility::lerp_fov_overtime(0.05, level.odin_fov);
+  }
 
   common_scripts\utility::flag_wait("ally_gun_struggle_FOV_change");
   maps\_utility::lerp_fov_overtime(1, level.odin_fov + 10);
@@ -340,11 +360,13 @@ floating_corpses(var_0, var_1) {
 
   wait 1.0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     common_scripts\utility::flag_wait(var_1);
+  }
 
-  foreach(var_4 in var_2)
+  foreach(var_4 in var_2) {
   var_4 kill();
+  }
 }
 
 load_transient(var_0) {
@@ -353,8 +375,9 @@ load_transient(var_0) {
 }
 
 sync_transients() {
-  while(!synctransients())
+  while(!synctransients()) {
     wait 0.05;
+  }
 }
 
 moving_objects_handler(var_0) {
@@ -364,13 +387,15 @@ moving_objects_handler(var_0) {
   var_4 = getEntArray(var_0, "script_noteworthy");
 
   foreach(var_6 in var_4) {
-    if(var_6.script_parameters == "moving_object_origin")
+    if(var_6.script_parameters == "moving_object_origin") {
       var_3 = var_6;
+    }
   }
 
   foreach(var_6 in var_4) {
-    if(var_6.script_parameters == "moving_object")
+    if(var_6.script_parameters == "moving_object") {
       var_6 linkto(var_3);
+    }
 
     if(var_6.script_parameters == "path_connector") {
       var_6 linkto(var_3);
@@ -408,8 +433,9 @@ path_disconnector(var_0, var_1) {
 create_sliding_space_door(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = getEntArray(var_0, "script_noteworthy");
 
-  if(!isDefined(var_7) || var_7.size == 0)
+  if(!isDefined(var_7) || var_7.size == 0) {
     iprintln("create_sliding_space_door failed. No parts");
+  }
   else {
     var_8 = undefined;
     var_9 = undefined;
@@ -428,8 +454,9 @@ create_sliding_space_door(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
             continue;
           }
 
-          if(var_12.targetname == "door_open_node")
+          if(var_12.targetname == "door_open_node") {
             var_10 = var_12;
+          }
         }
       }
     }
@@ -446,8 +473,9 @@ create_sliding_space_door(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_14 = getEntArray(var_8.door.target, "targetname");
     var_8.parts = var_14;
 
-    foreach(var_12 in var_14)
+    foreach(var_12 in var_14) {
     var_12 linkto(var_8.door);
+    }
 
     var_8.trigger = spawn("trigger_radius", var_8.origin, 3, var_8.radius, 64);
 
@@ -478,8 +506,9 @@ automatic_sliding_door_logic() {
       if(self.state == "closing" || self.state == "closed") {
         self.state = "open";
 
-        if(self.delay > 0)
+        if(self.delay > 0) {
           wait(self.delay);
+        }
 
         self.door moveto(self.door_open.origin, self.time, self.accel);
         thread maps\odin_audio::sfx_interior_door_open(self);
@@ -487,8 +516,9 @@ automatic_sliding_door_logic() {
     } else if(self.state == "opening" || self.state == "open") {
       self.state = "closed";
 
-      if(self.delay > 0)
+      if(self.delay > 0) {
         wait(self.delay);
+      }
 
       self.door moveto(self.origin, self.time, self.accel);
       thread maps\odin_audio::sfx_interior_door_close(self);
@@ -522,17 +552,21 @@ sliding_door_logic() {
     if(self.state == "closing" || self.state == "closed") {
       self.state = "open";
 
-      if(self.delay > 0)
+      if(self.delay > 0) {
         wait(self.delay);
+      }
 
       self.door moveto(self.door_open.origin, self.time, self.accel);
 
-      if(self.door_name == "post_z_door" || self.door_name == "escape_door_blocker")
+      if(self.door_name == "post_z_door" || self.door_name == "escape_door_blocker") {
         thread maps\odin_audio::sfx_escape_door_open();
-      else if(self.door_name == "spin_decomp_door")
+      }
+      else if(self.door_name == "spin_decomp_door") {
         thread maps\odin_audio::sfx_decomp_door();
-      else
+      }
+      else {
         thread maps\odin_audio::sfx_interior_door_open(self);
+      }
     }
   }
 }
@@ -543,8 +577,9 @@ sliding_door_lock() {
   level waittill(self.lock_notify);
   self.state = "closed";
 
-  if(self.delay > 0)
+  if(self.delay > 0) {
     wait(self.delay);
+  }
 
   self.door moveto(self.origin, self.time, self.accel);
   thread maps\odin_audio::sfx_interior_door_close(self);
@@ -556,10 +591,12 @@ sliding_door_lock() {
 }
 
 normalize_value(var_0, var_1, var_2) {
-  if(var_2 > var_1)
+  if(var_2 > var_1) {
     return 1.0;
-  else if(var_2 < var_0)
+  }
+  else if(var_2 < var_0) {
     return 0.0;
+  }
 
   return (var_2 - var_0) / (var_1 - var_0);
 }
@@ -571,8 +608,9 @@ factor_value_min_max(var_0, var_1, var_2) {
 check_anim_time(var_0, var_1, var_2) {
   var_3 = self getanimtime(level.scr_anim[var_0][var_1]);
 
-  if(var_3 >= var_2)
+  if(var_3 >= var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -586,10 +624,12 @@ god_rays_from_moving_source(var_0, var_1, var_2) {
     var_6 = var_0.origin;
     var_3 = atan((level.player.origin[2] - var_6[2]) / sqrt(squared(level.player.origin[0] - var_6[0]) + squared(level.player.origin[1] - var_6[1])));
 
-    if(level.player.origin[0] < var_6[0])
+    if(level.player.origin[0] < var_6[0]) {
       var_4 = atan((level.player.origin[1] - var_6[1]) / (level.player.origin[0] - var_6[0]));
-    else
+    }
+    else {
       var_4 = 180 + atan((level.player.origin[1] - var_6[1]) / (level.player.origin[0] - var_6[0]));
+    }
 
     var_5.position = (var_3, var_4, 0);
     maps\_art::sunflare_changes("default", 0);
@@ -625,22 +665,27 @@ nag_line_generator(var_0, var_1, var_2) {
   var_5 = 0.5;
   var_6 = 1.5;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = randomizer_create(["factory_bkr_hurryuprook", "factory_bkr_comeon", "factory_bkr_theholdup"]);
-  else
+  }
+  else {
     var_0 = randomizer_create(var_0);
+  }
 
   for(;;) {
     wait(var_3 + randomfloatrange(-2.0, 2.0));
     var_7 = var_0 randomizer_get_no_repeat();
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       maps\_utility::smart_radio_dialogue(var_7);
-    else
+    }
+    else {
       thread maps\_utility::smart_dialogue(var_7);
+    }
 
-    if(var_3 < var_4)
+    if(var_3 < var_4) {
       var_3 = var_3 + randomfloatrange(var_5, var_6);
+    }
   }
 }
 
@@ -656,8 +701,9 @@ randomizer_get_no_repeat() {
   if(self.array.size > 1 && isDefined(self.last_index)) {
     var_0 = randomint(self.array.size - 1);
 
-    if(var_0 >= self.last_index)
+    if(var_0 >= self.last_index) {
       var_0++;
+    }
   } else
     var_0 = randomint(self.array.size);
 
@@ -679,8 +725,9 @@ nag_line_generator_text(var_0, var_1, var_2, var_3) {
     var_8 = var_0 randomizer_get_no_repeat();
     thread add_debug_dialogue(var_2, var_8, var_3);
 
-    if(var_4 < var_5)
+    if(var_4 < var_5) {
       var_4 = var_4 + randomfloatrange(var_6, var_7);
+    }
   }
 }
 
@@ -738,23 +785,27 @@ spawn_and_assemble_animated_satellite(var_0) {
   level.odin_animnode maps\_anim::anim_first_frame(level.animated_sat_part, "sat_blossom_close");
   level.odin_rotator linkto(level.odin_animnode);
 
-  foreach(var_6 in level.animated_sat_part)
+  foreach(var_6 in level.animated_sat_part) {
   var_6 linkto(level.odin_animnode);
+  }
 
   level.odin_animnode thread maps\_anim::anim_loop_solo(level.odin_rotator, "odin_sat_blossom_close_spin", "stop_sat_loops");
 
-  foreach(var_6 in level.animated_sat_part)
+  foreach(var_6 in level.animated_sat_part) {
   var_6 stopanimscripted();
+  }
 }
 
 satellite_move_to(var_0, var_1, var_2, var_3) {
   var_4 = satellite_get_script_mover();
   var_5 = getent(var_0, "targetname");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 moveto(var_5.origin, var_1, var_2, var_3);
-  else
+  }
+  else {
     var_4 moveto(var_5.origin, var_1);
+  }
 }
 
 earth_get_script_mover() {
@@ -769,8 +820,9 @@ earth_get_script_mover() {
         continue;
       }
 
-      if(var_4.classname == "script_model")
+      if(var_4.classname == "script_model") {
         var_2 = var_4;
+      }
     }
 
     if(!isDefined(var_1)) {
@@ -779,8 +831,9 @@ earth_get_script_mover() {
     var_0 = common_scripts\utility::array_remove(var_0, var_1);
 
     if(isDefined(var_1.target)) {
-      foreach(var_4 in var_0)
+      foreach(var_4 in var_0) {
       var_4 linkto(var_1);
+      }
     }
 
     level.earth_script_mover = var_1;
@@ -793,8 +846,9 @@ earth_get_script_mover() {
 odin_control_player_speed() {
   var_0 = 0;
 
-  if(level.start_point != "default")
+  if(level.start_point != "default") {
     var_0 = 1;
+  }
 
   switch (level.start_point) {
     case "odin_intro":
@@ -910,8 +964,9 @@ push_out_of_doorway(var_0, var_1, var_2, var_3) {
 finale_anim_loop_killer(var_0, var_1) {
   common_scripts\utility::flag_wait("end_ally_loop_anims");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 notify("ender");
+  }
 }
 
 entity_counter() {
@@ -936,8 +991,9 @@ player_speed_check() {
     var_3 = var_3 / 12;
     var_3 = var_3 / 5280;
 
-    if(var_2 < var_3)
+    if(var_2 < var_3) {
       var_2 = var_3;
+    }
 
     iprintlnbold("MPH:" + var_3 + " Top:" + var_2);
     var_1 = level.player.origin;
@@ -968,15 +1024,19 @@ odin_drop_weapon() {
     var_1 show();
     animscripts\shared::placeweaponon(var_0, "none");
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_3 = randomintrange(-400, -100);
-    else
+    }
+    else {
       var_3 = randomintrange(100, 400);
+    }
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_4 = randomintrange(-400, -100);
-    else
+    }
+    else {
       var_4 = randomintrange(100, 400);
+    }
 
     var_1 physicslaunchserver(var_1.origin + (0, 0, 10), (var_3, 0, 0));
     var_1 thread odin_drop_weapon_cleanup(var_2);
@@ -1005,15 +1065,18 @@ display_splash_func() {
       if(isDefined(var_2)) {
         var_3 = distance(level.player.origin, var_2.origin);
 
-        if(var_3 <= 60)
+        if(var_3 <= 60) {
           var_0 = 1;
+        }
       }
     }
 
-    if(var_0 == 1)
+    if(var_0 == 1) {
       common_scripts\utility::flag_set("show_custom_weap_splash");
-    else
+    }
+    else {
       common_scripts\utility::flag_clear("show_custom_weap_splash");
+    }
 
     wait 0.1;
   }
@@ -1077,8 +1140,9 @@ create_pushed_dropped_weapon(var_0, var_1, var_2, var_3, var_4) {
   var_5.attachments = var_3;
   var_5 create_world_model_from_ent_weapon();
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5 hidepart("tag_silencer");
+  }
 
   var_5 physicslaunchserver(var_5.origin, anglesToForward(level.player.angles) * 2500, 500000, 5);
   wait 0.5;
@@ -1106,16 +1170,19 @@ odin_drop_weapon_trigger(var_0) {
 odin_drop_weapon_cleanup(var_0, var_1) {
   self endon("death");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 45;
+  }
 
   wait(var_1);
 
-  while(maps\_utility::player_looking_at(self.origin, 0.4, 1))
+  while(maps\_utility::player_looking_at(self.origin, 0.4, 1)) {
     common_scripts\utility::waitframe();
+  }
 
-  if(isDefined(var_0) && isalive(var_0))
+  if(isDefined(var_0) && isalive(var_0)) {
     var_0 delete();
+  }
 
   self delete();
 }
@@ -1145,11 +1212,13 @@ view_control_lerp(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   wait 0.05;
   level.player playerlinktodelta(var_7, "tag_player", 1, var_0, var_0, var_0, var_0, 1);
 
-  if(!isDefined(var_4) || var_4 > var_3)
+  if(!isDefined(var_4) || var_4 > var_3) {
     var_4 = 0;
+  }
 
-  if(!isDefined(var_5) || var_5 > var_3)
+  if(!isDefined(var_5) || var_5 > var_3) {
     var_5 = 0;
+  }
 
   var_7 moveto(var_1, var_3, var_4, var_5);
   var_7 rotateto(var_2, var_3, var_4, var_5);
@@ -1201,17 +1270,20 @@ dynamic_repulsor(var_0) {
 fx_odin_monitor_bink_init() {
   setsaveddvar("cg_cinematicFullScreen", "0");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     cinematicingameloopresident("prologue_odin_monitor_ng");
-  else
+  }
+  else {
     cinematicingameloopresident("prologue_odin_monitor");
+  }
 
   thread fx_odin_monitor_bink_shutdown();
 }
 
 fx_odin_monitor_bink_shutdown() {
-  if(level.start_point == "odin_escape")
+  if(level.start_point == "odin_escape") {
     stopcinematicingame();
+  }
   else {
     common_scripts\utility::flag_wait("player_second_z_turn");
     stopcinematicingame();
@@ -1220,10 +1292,12 @@ fx_odin_monitor_bink_shutdown() {
   common_scripts\utility::flag_wait("kyra_push_bag_anim");
   setsaveddvar("cg_cinematicFullScreen", "0");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     cinematicingameloopresident("prologue_odin_monitor_ng");
-  else
+  }
+  else {
     cinematicingameloopresident("prologue_odin_monitor");
+  }
 
   common_scripts\utility::flag_wait("decomp_done");
   stopcinematicingame();
@@ -1245,8 +1319,9 @@ odin_breathing_func(var_0) {
 create_qte_prompt(var_0, var_1, var_2, var_3) {
   var_4 = -3;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 100;
+  }
 
   var_5 = var_2;
   var_6 = 3;
@@ -1295,8 +1370,9 @@ destroy_qte_prompt() {
   level notify("stop_blink");
 
   foreach(var_1 in level.qte_prompt) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 destroy();
+    }
   }
 }
 

@@ -5,13 +5,15 @@
 ********************************/
 
 playerjavelinads() {
-  if(self playerads() < 1.0)
+  if(self playerads() < 1.0) {
     return 0;
+  }
 
   var_0 = self getcurrentweapon();
 
-  if(!issubstr(var_0, "javelin"))
+  if(!issubstr(var_0, "javelin")) {
     return 0;
+  }
 
   return 1;
 }
@@ -42,14 +44,16 @@ getbestjavelintarget() {
   var_1 = [];
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(insidejavelinreticlenolock(var_0[var_2]))
+    if(insidejavelinreticlenolock(var_0[var_2])) {
       var_1[var_1.size] = var_0[var_2];
+    }
 
     target_setoffscreenshader(var_0[var_2], "javelin_hud_target_offscreen");
   }
 
-  if(var_1.size == 0)
+  if(var_1.size == 0) {
     return undefined;
+  }
 
   var_3 = var_1[0];
 
@@ -59,14 +63,17 @@ getbestjavelintarget() {
 }
 
 isstillvalidtarget(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!target_istarget(var_0))
+  if(!target_istarget(var_0)) {
     return 0;
+  }
 
-  if(!insidejavelinreticlelocked(var_0))
+  if(!insidejavelinreticlelocked(var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -74,15 +81,18 @@ isstillvalidtarget(var_0) {
 settargettooclose(var_0) {
   var_1 = 1000;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_2 = distance2d(self.origin, var_0.origin);
 
-  if(var_2 < var_1)
+  if(var_2 < var_1) {
     self weaponlocktargettooclose(1);
-  else
+  }
+  else {
     self weaponlocktargettooclose(0);
+  }
 }
 
 setnoclearance() {
@@ -98,10 +108,12 @@ setnoclearance() {
   var_5[3] = (-40, 0, 40);
   var_5[4] = (40, 0, 40);
 
-  if(getdvar("missileDebugDraw") == "1")
+  if(getdvar("missileDebugDraw") == "1") {
     var_6 = 1;
-  else
+  }
+  else {
     var_6 = 0;
+  }
 
   var_7 = self getplayerangles();
   var_8 = anglesToForward(var_7);
@@ -191,13 +203,15 @@ javelintoggleloop() {
   self endon("death");
 
   for(;;) {
-    while(!playerjavelinads())
+    while(!playerjavelinads()) {
       wait 0.05;
+    }
 
     thread javelincluloop();
 
-    while(playerjavelinads())
+    while(playerjavelinads()) {
       wait 0.05;
+    }
 
     self notify("javelin_clu_off");
     clearclutarget();

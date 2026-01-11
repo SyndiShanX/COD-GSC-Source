@@ -197,8 +197,9 @@ func_A058() {
   self.loop_sound = 0;
   wait 0.05;
 
-  if(isDefined(level.func_D127.func_76F8))
+  if(isDefined(level.func_D127.func_76F8)) {
     level.func_D127.func_76F8 stoploopsound("jackal_gatling_fire_plr");
+  }
 }
 
 func_A268(var_00) {
@@ -206,10 +207,12 @@ func_A268(var_00) {
   self endon("new_fire_func");
   setomnvar("ui_jackal_firing", 1);
 
-  if(var_00)
+  if(var_00) {
     level.func_D127.func_6D2D playSound("jackal_microlite_space_left");
-  else
+  }
+  else {
     level.func_D127.func_6D2E playSound("jackal_microlite_space_right");
+  }
 
   earthquake(0.16, 0.76, level.func_D127.origin, 10000);
   wait 0.1;
@@ -223,10 +226,12 @@ func_A2CC(var_00) {
   self endon("new_fire_func");
   var_01 = level.player _meth_848A();
 
-  if(isDefined(var_01) && isDefined(var_1[0]) && var_1[2] > 0.05)
+  if(isDefined(var_01) && isDefined(var_1[0]) && var_1[2] > 0.05) {
     var_02 = var_1[0];
-  else
+  }
+  else {
     var_02 = self.func_5F27;
+  }
 
   playfxontagsbetweenclients(scripts\engine\utility::getfx("jackal_primary_energy"), level.func_D127, "tag_flash", var_02, "tag_origin");
   playfxontagsbetweenclients(scripts\engine\utility::getfx("jackal_primary_energy"), level.func_D127, "tag_flash_2", var_02, "tag_origin");
@@ -256,16 +261,18 @@ func_A059(var_00) {
 
   var_06 = 0.15;
 
-  if(var_01 > 0)
+  if(var_01 > 0) {
     func_0BDC::func_A079(level.func_D127.origin + anglesToForward(level.func_D127.angles) * 500, var_01, 0.05, 3);
+  }
 
   if(abs(var_02 + var_03) > 0) {
     func_0BDC::func_A07E((var_02, var_03, 0), 0.05, 0.5);
     func_0BDC::func_A07E((-0.5 * var_02, -0.5 * var_03, 0), 0.05, var_06 * 3.0);
   }
 
-  if(abs(var_04 + var_05) > 0)
+  if(abs(var_04 + var_05) > 0) {
     func_0BDC::func_A081((var_04, var_05, 0) * -1, 0.05, var_06);
+  }
 
   earthquake(0.13, 0.76, level.func_D127.origin, 10000);
   wait 0.05;
@@ -303,8 +310,9 @@ func_A1F6(var_00) {
     func_0BDC::func_A07E((-0.5 * var_03, -0.5 * var_04, 0), 0.05, var_07 * 3.0);
   }
 
-  if(abs(var_05 + var_06) > 0)
+  if(abs(var_05 + var_06) > 0) {
     func_0BDC::func_A081((var_05, var_06, 0) * -1, 0.05, var_07);
+  }
 
   earthquake(0.15, 0.76, level.func_D127.origin, 10000);
   wait 0.05;
@@ -346,16 +354,18 @@ func_A05B(var_00) {
   var_06 = 0.25;
   earthquake(0.23, 0.76, level.func_D127.origin, 10000);
 
-  if(var_01 > 0)
+  if(var_01 > 0) {
     func_0BDC::func_A079(level.func_D127.origin + anglesToForward(level.func_D127.angles) * 500, var_01, 0.05, 3);
+  }
 
   if(abs(var_02 + var_03) > 0) {
     func_0BDC::func_A07E((var_02, var_03, 0), 0.05, 0.5);
     func_0BDC::func_A07E((-0.5 * var_02, -0.5 * var_03, 0), 0.05, var_06 * 3.0);
   }
 
-  if(abs(var_04 + var_05) > 0)
+  if(abs(var_04 + var_05) > 0) {
     func_0BDC::func_A081((var_04, var_05, 0) * -1, 0.05, var_06);
+  }
 
   wait 0.1;
   setomnvar("ui_jackal_firing", 0);
@@ -381,16 +391,18 @@ func_A101(var_00) {
   var_06 = 0.25;
   earthquake(0.23, 0.76, level.func_D127.origin, 10000);
 
-  if(var_01 > 0)
+  if(var_01 > 0) {
     func_0BDC::func_A079(level.func_D127.origin + anglesToForward(level.func_D127.angles) * 500, var_01, 0.05, 3);
+  }
 
   if(abs(var_02 + var_03) > 0) {
     func_0BDC::func_A07E((var_02, var_03, 0), 0.05, 0.5);
     func_0BDC::func_A07E((-0.5 * var_02, -0.5 * var_03, 0), 0.05, var_06 * 3.0);
   }
 
-  if(abs(var_04 + var_05) > 0)
+  if(abs(var_04 + var_05) > 0) {
     func_0BDC::func_A081((var_04, var_05, 0) * -1, 0.05, var_06);
+  }
 
   wait 0.1;
   setomnvar("ui_jackal_firing", 0);
@@ -416,16 +428,18 @@ func_A075(var_00) {
   var_06 = 0.25;
   earthquake(0.32, 0.76, level.func_D127.origin, 10000);
 
-  if(var_01 > 0)
+  if(var_01 > 0) {
     func_0BDC::func_A079(level.func_D127.origin + anglesToForward(level.func_D127.angles) * 500, var_01, 0.05, 3);
+  }
 
   if(abs(var_02 + var_03) > 0) {
     func_0BDC::func_A07E((var_02, var_03, 0), 0.05, 0.5);
     func_0BDC::func_A07E((-0.5 * var_02, -0.5 * var_03, 0), 0.05, var_06 * 3.0);
   }
 
-  if(abs(var_04 + var_05) > 0)
+  if(abs(var_04 + var_05) > 0) {
     func_0BDC::func_A081((var_04, var_05, 0) * -1, 0.05, var_06);
+  }
 
   wait 0.1;
   setomnvar("ui_jackal_firing", 0);
@@ -537,10 +551,12 @@ func_A27A(var_00) {
 }
 
 func_A27B() {
-  if(scripts\sp\utility::func_D15B("weapons"))
+  if(scripts\sp\utility::func_D15B("weapons")) {
     self.missiles.func_B446 = 12;
-  else
+  }
+  else {
     self.missiles.func_B446 = 8;
+  }
 
   self.missiles.count = self.missiles.func_B446;
   setomnvar("ui_jackal_missile_count", self.missiles.count);
@@ -559,10 +575,12 @@ func_A26A(var_00) {
     self.missiles.active = var_00;
     setomnvar("ui_jackal_missile", var_00);
 
-    if(var_00)
+    if(var_00) {
       thread func_A277();
-    else
+    }
+    else {
       self notify("jackal_missiles_off");
+    }
   }
 }
 
@@ -581,8 +599,9 @@ func_A277() {
 
   for(;;) {
     if(level.player fragbuttonpressed() && !var_02 && !level.player scripts\sp\utility::func_65DB("disable_jackal_missiles")) {
-      if(self.missiles.count <= 0)
+      if(self.missiles.count <= 0) {
         func_A273();
+      }
       else {
         level.func_D127 scripts\sp\utility::func_65E1("player_jackal_missile");
         var_01 = func_A275(var_00, var_01);
@@ -590,10 +609,12 @@ func_A277() {
       }
     }
 
-    if(level.player fragbuttonpressed())
+    if(level.player fragbuttonpressed()) {
       var_02 = 1;
-    else
+    }
+    else {
       var_02 = 0;
+    }
 
     wait 0.05;
   }
@@ -611,14 +632,18 @@ func_A275(var_00, var_01) {
   while(var_02 > 0) {
     var_08 = undefined;
 
-    if(var_02 == 4)
+    if(var_02 == 4) {
       var_07 = var_06 * var_04;
-    else if(var_02 == 3)
+    }
+    else if(var_02 == 3) {
       var_07 = var_06 * var_05;
-    else if(var_02 == 2)
+    }
+    else if(var_02 == 2) {
       var_07 = var_06 * var_04 * -1;
-    else if(var_02 == 1)
+    }
+    else if(var_02 == 1) {
       var_07 = var_06 * var_05 * -1;
+    }
 
     var_09 = level.player _meth_848A();
 
@@ -634,8 +659,9 @@ func_A275(var_00, var_01) {
     func_A274(var_08, var_0[var_01], var_07);
     var_1++;
 
-    if(var_01 == var_0.size)
+    if(var_01 == var_0.size) {
       var_01 = 0;
+    }
 
     var_2--;
     wait 0.1;
@@ -656,8 +682,9 @@ func_A274(var_00, var_01, var_02) {
   level.player playrumbleonentity("damage_heavy");
   earthquake(0.235, 0.9, level.func_D127.origin, 5000);
 
-  if(isDefined(self.func_727D))
+  if(isDefined(self.func_727D)) {
     var_00 = self.func_727D;
+  }
 
   var_08 = scripts\engine\utility::spawn_tag_origin();
   var_8.origin = var_07;
@@ -668,20 +695,25 @@ func_A274(var_00, var_01, var_02) {
   } else
     var_8.angles = self.angles;
 
-  if(isDefined(self.func_B83B))
+  if(isDefined(self.func_B83B)) {
     var_10 = self.func_B83B;
-  else
+  }
+  else {
     var_10 = "missile_flare_short";
+  }
 
-  if(isDefined(self.func_B803))
+  if(isDefined(self.func_B803)) {
     var_11 = self.func_B803;
-  else
+  }
+  else {
     var_11 = undefined;
+  }
 
   var_12 = 1000;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_13 = 1;
+  }
   else {
     var_13 = 0;
     var_00 = scripts\engine\utility::spawn_tag_origin();
@@ -727,8 +759,9 @@ func_B838(var_00) {
   var_03 = scripts\sp\math::func_6A8E(0, 0.5, var_02);
   wait(var_03);
 
-  if(isDefined(var_00) && isvalidmissile(self) && isDefined(self))
+  if(isDefined(var_00) && isvalidmissile(self) && isDefined(self)) {
     self missile_settargetent(var_00);
+  }
 }
 
 func_A273() {
@@ -751,25 +784,33 @@ func_A270(var_00) {
 func_A271() {
   self endon("jackal_missile_count_try_vo" + self.missiles.count);
 
-  if(self.missiles.count < 5)
+  if(self.missiles.count < 5) {
     self notify("jackal_missile_count_try_vo" + (self.missiles.count + 1));
+  }
 
   wait 1.5;
 
-  if(self.missiles.count == 1)
+  if(self.missiles.count == 1) {
     func_A26C("jackal_hud_1missileremaini");
-  else if(self.missiles.count == 15)
+  }
+  else if(self.missiles.count == 15) {
     func_A26C("jackal_hud_15missilesremai");
-  else if(self.missiles.count == 10)
+  }
+  else if(self.missiles.count == 10) {
     func_A26C("jackal_hud_10missilesremai");
-  else if(self.missiles.count == 5)
+  }
+  else if(self.missiles.count == 5) {
     func_A26C("jackal_hud_5missilesremain");
-  else if(self.missiles.count == 4)
+  }
+  else if(self.missiles.count == 4) {
     func_A26C("jackal_hud_4missilesremain");
-  else if(self.missiles.count == 3)
+  }
+  else if(self.missiles.count == 3) {
     func_A26C("jackal_hud_3missilesremain");
-  else if(self.missiles.count == 2)
+  }
+  else if(self.missiles.count == 2) {
     func_A26C("jackal_hud_2missilesremain");
+  }
 }
 
 func_A26C(var_00) {

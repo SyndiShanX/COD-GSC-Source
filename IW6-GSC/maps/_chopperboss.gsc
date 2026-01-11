@@ -12,10 +12,12 @@ init() {
 chopper_boss_locs_populate(var_0, var_1) {
   var_2 = getent("heli_nav_optimizer", "targetname");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     thread chopper_boss_locs_populate_thread_optimized(var_0, var_1, var_2);
-  else
+  }
+  else {
     thread chopper_boss_locs_populate_thread(var_0, var_1);
+  }
 }
 
 chopper_boss_locs_populate_thread(var_0, var_1) {
@@ -29,19 +31,22 @@ chopper_boss_locs_populate_thread(var_0, var_1) {
       if(var_4 == var_6) {
         continue;
       }
-      if(!common_scripts\utility::array_contains(var_4.neighbors, var_6) && common_scripts\utility::array_contains(var_6 maps\_utility::get_linked_structs(), var_4))
+      if(!common_scripts\utility::array_contains(var_4.neighbors, var_6) && common_scripts\utility::array_contains(var_6 maps\_utility::get_linked_structs(), var_4)) {
         var_4.neighbors[var_4.neighbors.size] = var_6;
+      }
 
       var_2++;
       var_2 = var_2 % 2000;
 
-      if(var_2 == 0)
+      if(var_2 == 0) {
         wait 0.05;
+      }
     }
 
     foreach(var_9 in var_4.neighbors) {
-      if(isDefined(var_9.script_ignoreme) && var_9.script_ignoreme)
+      if(isDefined(var_9.script_ignoreme) && var_9.script_ignoreme) {
         var_4.neighbors = common_scripts\utility::array_remove(var_4.neighbors, var_9);
+      }
     }
   }
 
@@ -57,8 +62,9 @@ chopper_boss_locs_populate_thread_optimized(var_0, var_1, var_2) {
     var_4.boss_locs = [];
 
     foreach(var_6 in level.chopper_boss_locs) {
-      if(ispointinvolume(var_6.origin, var_4))
+      if(ispointinvolume(var_6.origin, var_4)) {
         var_4.boss_locs[var_4.boss_locs.size] = var_6;
+      }
     }
 
     if(!isDefined(var_4.target)) {
@@ -66,26 +72,31 @@ chopper_boss_locs_populate_thread_optimized(var_0, var_1, var_2) {
     }
   }
 
-  foreach(var_6 in level.chopper_boss_locs)
+  foreach(var_6 in level.chopper_boss_locs) {
   var_6.neighbors = var_6 maps\_utility::get_linked_structs();
+  }
 
   var_4 = var_2;
   var_10 = getent(var_4.target, "targetname");
 
   for(var_11 = undefined; isDefined(var_4); var_4 = var_10) {
-    if(isDefined(var_4.target))
+    if(isDefined(var_4.target)) {
       var_10 = getent(var_4.target, "targetname");
-    else
+    }
+    else {
       var_10 = undefined;
+    }
 
     foreach(var_6 in var_4.boss_locs) {
       var_6 add_back_links_for_neighbors(var_4.boss_locs);
 
-      if(isDefined(var_10))
+      if(isDefined(var_10)) {
         var_6 add_back_links_for_neighbors(var_10.boss_locs);
+      }
 
-      if(isDefined(var_11))
+      if(isDefined(var_11)) {
         var_6 add_back_links_for_neighbors(var_11.boss_locs);
+      }
     }
 
     var_11 = var_4;
@@ -93,8 +104,9 @@ chopper_boss_locs_populate_thread_optimized(var_0, var_1, var_2) {
 
   foreach(var_6 in level.chopper_boss_locs) {
     foreach(var_16 in var_6.neighbors) {
-      if(isDefined(var_16.script_ignoreme) && var_16.script_ignoreme)
+      if(isDefined(var_16.script_ignoreme) && var_16.script_ignoreme) {
         var_6.neighbors = common_scripts\utility::array_remove(var_6.neighbors, var_16);
+      }
     }
   }
 
@@ -107,8 +119,9 @@ add_back_links_for_neighbors(var_0) {
     if(self == var_2) {
       continue;
     }
-    if(!common_scripts\utility::array_contains(self.neighbors, var_2) && common_scripts\utility::array_contains(var_2 maps\_utility::get_linked_structs(), self))
+    if(!common_scripts\utility::array_contains(self.neighbors, var_2) && common_scripts\utility::array_contains(var_2 maps\_utility::get_linked_structs(), self)) {
       self.neighbors[self.neighbors.size] = var_2;
+    }
   }
 }
 
@@ -116,8 +129,9 @@ chopper_path_release(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2 = strtok(var_1, " ");
 
-    foreach(var_4 in var_2)
+    foreach(var_4 in var_2) {
     self endon(var_4);
+    }
   }
 
   var_6 = strtok(var_0, " ");
@@ -139,8 +153,9 @@ chopper_path_release(var_0, var_1) {
       break;
   }
 
-  if(isDefined(self.loc_current))
+  if(isDefined(self.loc_current)) {
     self.loc_current.in_use = undefined;
+  }
 }
 
 chopper_boss_think(var_0, var_1) {
@@ -155,8 +170,9 @@ chopper_boss_think(var_0, var_1) {
   self.fired_weapons = 0;
 
   for(;;) {
-    if(!isDefined(self.chopper_boss_agro))
+    if(!isDefined(self.chopper_boss_agro)) {
       self.heli_target = undefined;
+    }
 
     if(pause_action()) {
       continue;
@@ -181,8 +197,9 @@ chopper_boss_think(var_0, var_1) {
 
     var_5 = isDefined(self.request_move) && self.request_move || self.fired_weapons;
 
-    while(isDefined(level.chopper_boss_finding_target))
+    while(isDefined(level.chopper_boss_finding_target)) {
       wait 0.05;
+    }
 
     var_6 = chopper_boss_get_best_location_and_target(var_5);
 
@@ -194,16 +211,19 @@ chopper_boss_think(var_0, var_1) {
       self.request_move = undefined;
       thread chopper_boss_move(var_6);
 
-      if(!isDefined(self.chopper_boss_agro))
+      if(!isDefined(self.chopper_boss_agro)) {
         self waittill("reached_dynamic_path_end");
-      else
+      }
+      else {
         common_scripts\utility::waittill_any("near_goal", "request_move_update");
+      }
 
       self thread[[maps\_chopperboss_utility::get_chopperboss_data("post_move_func")]]();
     }
 
-    if(!isDefined(self.chopper_boss_agro) || !self.chopper_boss_agro)
+    if(!isDefined(self.chopper_boss_agro) || !self.chopper_boss_agro) {
       self[[maps\_chopperboss_utility::get_chopperboss_data("stop_func")]]();
+    }
 
     wait 0.1;
   }
@@ -212,8 +232,9 @@ chopper_boss_think(var_0, var_1) {
 chopper_boss_get_closest_target_2d() {
   var_0 = [[maps\_chopperboss_utility::get_chopperboss_data("get_targets_func")]]();
 
-  if(!var_0.size)
+  if(!var_0.size) {
     return undefined;
+  }
 
   var_1 = undefined;
   var_2 = undefined;
@@ -267,19 +288,23 @@ chopper_boss_in_range(var_0, var_1, var_2) {
   var_4 = maps\_chopperboss_utility::get_chopperboss_data("min_target_dist2d");
   var_5 = undefined;
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     var_5 = 90000;
-  else
+  }
+  else {
     var_5 = maps\_chopperboss_utility::get_chopperboss_data("max_target_dist2d");
+  }
 
   return var_3 >= var_4 && var_3 <= var_5;
 }
 
 chopper_boss_set_target(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.heli_target = var_0;
-  else if(isDefined(self.chopper_boss_agro) && self.chopper_boss_agro)
+  }
+  else if(isDefined(self.chopper_boss_agro) && self.chopper_boss_agro) {
     self.heli_target = undefined;
+  }
 }
 
 chopper_boss_attempt_firing(var_0, var_1) {
@@ -296,11 +321,13 @@ chopper_boss_attempt_firing(var_0, var_1) {
     } else {
       var_5 = 0;
 
-      if(isDefined(var_0.heli_shooting))
+      if(isDefined(var_0.heli_shooting)) {
         var_5 = var_0.heli_shooting;
+      }
 
-      if(var_5 < maps\_chopperboss_utility::get_chopperboss_data("heli_shoot_limit") && chopper_boss_in_range(var_0.origin, undefined, isDefined(var_1)))
+      if(var_5 < maps\_chopperboss_utility::get_chopperboss_data("heli_shoot_limit") && chopper_boss_in_range(var_0.origin, undefined, isDefined(var_1))) {
         var_4 = 1;
+      }
     }
   }
 
@@ -324,14 +351,16 @@ chopper_boss_attempt_firing(var_0, var_1) {
 }
 
 chopper_boss_manage_shooting_flag(var_0) {
-  if(!isDefined(var_0.heli_shooting))
+  if(!isDefined(var_0.heli_shooting)) {
     var_0.heli_shooting = 0;
+  }
 
   var_0.heli_shooting++;
   common_scripts\utility::waittill_any("death", "deathspin", "chopper_done_shooting");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.heli_shooting--;
+  }
 }
 
 chopper_boss_wait_face_target(var_0, var_1) {
@@ -340,15 +369,18 @@ chopper_boss_wait_face_target(var_0, var_1) {
   var_0 endon("death");
   var_2 = undefined;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = gettime() + var_1 * 1000;
+  }
 
   while(isDefined(var_0)) {
-    if(maps\_utility::within_fov_2d(self.origin, self.angles, var_0.origin, 0.766))
+    if(maps\_utility::within_fov_2d(self.origin, self.angles, var_0.origin, 0.766)) {
       return 1;
+    }
 
-    if(isDefined(var_2) && gettime() >= var_2)
+    if(isDefined(var_2) && gettime() >= var_2) {
       return 0;
+    }
 
     wait 0.25;
   }
@@ -364,11 +396,13 @@ chopper_boss_get_best_location_and_target(var_0) {
   self endon("death");
   var_1 = self.loc_current.neighbors;
 
-  if(!isDefined(var_0) || var_0 == 0)
+  if(!isDefined(var_0) || var_0 == 0) {
     var_1[var_1.size] = self.loc_current;
+  }
 
-  if(isDefined(level.chopper_boss_hangout))
+  if(isDefined(level.chopper_boss_hangout)) {
     var_1 = level.chopper_boss_hangout;
+  }
 
   var_2 = chopper_boss_get_target();
   return [[maps\_chopperboss_utility::get_chopperboss_data("next_loc_func")]](var_1, var_2);
@@ -377,10 +411,12 @@ chopper_boss_get_best_location_and_target(var_0) {
 chopper_boss_get_target() {
   var_0 = undefined;
 
-  if(isDefined(maps\_chopperboss_utility::chopper_boss_forced_target_get()))
+  if(isDefined(maps\_chopperboss_utility::chopper_boss_forced_target_get())) {
     var_0 = [maps\_chopperboss_utility::chopper_boss_forced_target_get()];
-  else
+  }
+  else {
     var_0 = [[maps\_chopperboss_utility::get_chopperboss_data("get_targets_func")]]();
+  }
 
   return var_0;
 }
@@ -415,8 +451,9 @@ chopper_boss_get_best_location_and_target_proc(var_0, var_1) {
       }
       var_10 = var_9.origin + (0, 0, 64);
 
-      if(isai(var_9) || isplayer(var_9))
+      if(isai(var_9) || isplayer(var_9)) {
         var_10 = var_9 getEye();
+      }
 
       if(self[[var_2]](var_6.origin, var_10)) {
         if(!isDefined(var_6.heli_target)) {
@@ -442,8 +479,9 @@ chopper_boss_get_best_location_and_target_proc(var_0, var_1) {
     var_14 = [];
 
     foreach(var_6 in var_3) {
-      if(isDefined(var_6.heli_target) && !isDefined(var_6.in_use) && !isDefined(var_6.disabled))
+      if(isDefined(var_6.heli_target) && !isDefined(var_6.in_use) && !isDefined(var_6.disabled)) {
         var_14[var_14.size] = var_6;
+      }
     }
 
     var_3 = var_14;
@@ -477,12 +515,14 @@ chopper_boss_get_best_location_and_target_proc(var_0, var_1) {
         }
       }
 
-      if(isDefined(var_6.dist2d))
+      if(isDefined(var_6.dist2d)) {
         var_3[var_3.size] = var_6;
+      }
     }
   } else {
-    foreach(var_6 in var_3)
+    foreach(var_6 in var_3) {
     var_6.dist2d = distance2d(var_6.heli_target.origin, var_6.origin);
+    }
   }
 
   var_25 = common_scripts\utility::array_sort_by_handler(var_3, ::chopper_boss_loc_compare);
@@ -498,18 +538,22 @@ chopper_boss_get_best_location_and_target_proc(var_0, var_1) {
     }
   }
 
-  if(!isDefined(var_26) && var_25.size)
+  if(!isDefined(var_26) && var_25.size) {
     var_26 = var_25[0];
+  }
 
-  if(isDefined(var_26) && isDefined(var_26.heli_target))
+  if(isDefined(var_26) && isDefined(var_26.heli_target)) {
     chopper_boss_set_target(var_26.heli_target);
+  }
 
   self notify("chopper_done_targeting");
 
-  if(isDefined(var_26) && var_26 != self.loc_current)
+  if(isDefined(var_26) && var_26 != self.loc_current) {
     return var_26;
-  else
+  }
+  else {
     return undefined;
+  }
 }
 
 get_trace_loc_for_target(var_0, var_1) {
@@ -550,23 +594,29 @@ chopper_boss_get_best_target_proc(var_0) {
 }
 
 sillyboxtrace(var_0, var_1, var_2) {
-  if(sighttracepassed(var_0, var_1 getpointinbounds(0, 0, 1), 0, var_2))
+  if(sighttracepassed(var_0, var_1 getpointinbounds(0, 0, 1), 0, var_2)) {
     return 1;
+  }
 
-  if(sighttracepassed(var_0, var_1 getpointinbounds(0, 0, -1), 0, var_2))
+  if(sighttracepassed(var_0, var_1 getpointinbounds(0, 0, -1), 0, var_2)) {
     return 1;
+  }
 
-  if(sighttracepassed(var_0, var_1 getpointinbounds(0, 1, 0), 0, var_2))
+  if(sighttracepassed(var_0, var_1 getpointinbounds(0, 1, 0), 0, var_2)) {
     return 1;
+  }
 
-  if(sighttracepassed(var_0, var_1 getpointinbounds(0, -1, 0), 0, var_2))
+  if(sighttracepassed(var_0, var_1 getpointinbounds(0, -1, 0), 0, var_2)) {
     return 1;
+  }
 
-  if(sighttracepassed(var_0, var_1 getpointinbounds(1, 0, 0), 0, var_2))
+  if(sighttracepassed(var_0, var_1 getpointinbounds(1, 0, 0), 0, var_2)) {
     return 1;
+  }
 
-  if(sighttracepassed(var_0, var_1 getpointinbounds(-1, 0, 0), 0, var_2))
+  if(sighttracepassed(var_0, var_1 getpointinbounds(-1, 0, 0), 0, var_2)) {
     return 1;
+  }
 
   return 0;
 }
@@ -578,8 +628,9 @@ chopper_boss_loc_compare() {
 chopper_boss_move(var_0, var_1) {
   self notify("chopper_boss_move");
 
-  if(isDefined(self.loc_current))
+  if(isDefined(self.loc_current)) {
     self.loc_current.in_use = undefined;
+  }
 
   self.loc_current = var_0;
   self.loc_current.in_use = 1;
@@ -604,10 +655,12 @@ chopper_boss_agro_chopper() {
     if(pause_action()) {
       continue;
     }
-    if(isDefined(self.heli_target))
+    if(isDefined(self.heli_target)) {
       self.fired_weapons = chopper_boss_attempt_firing(self.heli_target, 1);
-    else
+    }
+    else {
       self.fired_weapons = 0;
+    }
 
     wait 0.05;
   }

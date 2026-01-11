@@ -63,8 +63,9 @@ set_default_visionset() {
 }
 
 wait_while_player_touching_ent(e_touching) {
-  while(self istouching(e_touching))
+  while(self istouching(e_touching)) {
     wait 0.05;
+  }
 }
 
 bunker_exposure_scale() {

@@ -10,11 +10,13 @@ init() {
   level thread onplayerconnect();
   level thread scriptable_vo_handler();
 
-  if(!isDefined(level.vo_functions))
+  if(!isDefined(level.vo_functions)) {
     level.vo_functions = [];
+  }
 
-  if(isDefined(level.level_specific_vo_callouts))
+  if(isDefined(level.level_specific_vo_callouts)) {
     level.vo_functions = [[level.level_specific_vo_callouts]](level.vo_functions);
+  }
 
   level.func_18E8 = ::func_9D12;
 }
@@ -22,29 +24,35 @@ init() {
 blank() {}
 
 can_play_dialogue_system() {
-  if(level.players.size != 4)
+  if(level.players.size != 4) {
     return 0;
+  }
 
-  if(scripts\cp\cp_vo::is_vo_system_busy())
+  if(scripts\cp\cp_vo::is_vo_system_busy()) {
     return 0;
+  }
 
   foreach(var_01 in level.players) {
-    if(var_1.vo_prefix == "p5_")
+    if(var_1.vo_prefix == "p5_") {
       return 0;
+    }
   }
 
   return 1;
 }
 
 vo_is_playing() {
-  if(level.announcer_vo_playing || scripts\engine\utility::is_true(level.elvira_playing))
+  if(level.announcer_vo_playing || scripts\engine\utility::is_true(level.elvira_playing)) {
     return 1;
-  else if(level.player_vo_playing)
+  }
+  else if(level.player_vo_playing) {
     return 1;
+  }
   else {
     foreach(var_01 in level.players) {
-      if(scripts\engine\utility::is_true(var_1.vo_system_playing_vo))
+      if(scripts\engine\utility::is_true(var_1.vo_system_playing_vo)) {
         return 1;
+      }
     }
   }
 
@@ -88,10 +96,12 @@ onplayerconnect() {
 
 func_9D12(var_00) {
   if(isDefined(level.vo_alias_data[var_00].func_18E3)) {
-    if(int(level.vo_alias_data[var_00].func_18E3) == 1)
+    if(int(level.vo_alias_data[var_00].func_18E3) == 1) {
       return 1;
-    else
+    }
+    else {
       return 0;
+    }
   }
 }
 
@@ -100,12 +110,14 @@ onplayerspawned() {
   self waittill("spawned_player");
 
   if(!level.splitscreen || level.splitscreen && !isDefined(level.playedstartingmusic)) {
-    if(level.splitscreen)
+    if(level.splitscreen) {
       level.playedstartingmusic = 1;
+    }
   }
 
-  if(!scripts\engine\utility::flag("vo_system_setup_done"))
+  if(!scripts\engine\utility::flag("vo_system_setup_done")) {
     scripts\engine\utility::flag_set("vo_system_setup_done");
+  }
 }
 
 playvofordowned(var_00, var_01) {
@@ -127,8 +139,9 @@ playvoforscriptable(var_00) {
 
   if(!isDefined(level.next_scriptable_vo_time) || level.next_scriptable_vo_time < var_02) {
     if(isDefined(level.next_scriptable_vo_time)) {
-      if(randomint(100) < 60)
+      if(randomint(100) < 60) {
         return;
+      }
     }
 
     level.next_scriptable_vo_time = var_02 + randomintrange(var_01, var_01 + 5000);
@@ -162,31 +175,39 @@ func_6A20(var_00) {
   var_00 playlocalsound("mantle_cloth_plr_24_up");
   wait 0.65;
 
-  if(var_0.vo_prefix == "p1_")
+  if(var_0.vo_prefix == "p1_") {
     var_00 playlocalsound("p1_breathing_better");
-  else if(var_0.vo_prefix == "p2_")
+  }
+  else if(var_0.vo_prefix == "p2_") {
     var_00 playlocalsound("p2_breathing_better");
-  else if(var_0.vo_prefix == "p3_")
+  }
+  else if(var_0.vo_prefix == "p3_") {
     var_00 playlocalsound("p3_breathing_better");
-  else if(var_0.vo_prefix == "p4_")
+  }
+  else if(var_0.vo_prefix == "p4_") {
     var_00 playlocalsound("p4_breathing_better");
-  else if(var_0.vo_prefix == "p5_")
+  }
+  else if(var_0.vo_prefix == "p5_") {
     var_00 playlocalsound("p5_breathing_better");
-  else
+  }
+  else {
     var_00 playlocalsound("p3_breathing_better");
+  }
 }
 
 play_solo_vo(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 = var_00 + "_solo";
 
-  if(soundexists(var_06))
+  if(soundexists(var_06)) {
     scripts\cp\cp_vo::play_vo_on_player(var_06);
+  }
 }
 
 playsoundonplayers(var_00, var_01, var_02) {
   if(level.splitscreen) {
-    if(isDefined(level.players[0]))
+    if(isDefined(level.players[0])) {
       level.players[0] playlocalsound(var_00);
+    }
   } else if(isDefined(var_01)) {
     if(isDefined(var_02)) {
       for(var_03 = 0; var_03 < level.players.size; var_3++) {
@@ -195,8 +216,9 @@ playsoundonplayers(var_00, var_01, var_02) {
         if(var_04 issplitscreenplayer() && !var_04 isreloading()) {
           continue;
         }
-        if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_01 && !isexcluded(var_04, var_02))
+        if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_01 && !isexcluded(var_04, var_02)) {
           var_04 playlocalsound(var_00);
+        }
       }
 
       return;
@@ -208,8 +230,9 @@ playsoundonplayers(var_00, var_01, var_02) {
       if(var_04 issplitscreenplayer() && !var_04 isreloading()) {
         continue;
       }
-      if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_01)
+      if(isDefined(var_4.pers["team"]) && var_4.pers["team"] == var_01) {
         var_04 playlocalsound(var_00);
+      }
     }
 
     return;
@@ -218,8 +241,9 @@ playsoundonplayers(var_00, var_01, var_02) {
       if(level.players[var_03] issplitscreenplayer() && !level.players[var_03] isreloading()) {
         continue;
       }
-      if(!isexcluded(level.players[var_03], var_02))
+      if(!isexcluded(level.players[var_03], var_02)) {
         level.players[var_03] playlocalsound(var_00);
+      }
     }
   } else {
     for(var_03 = 0; var_03 < level.players.size; var_3++) {
@@ -233,8 +257,9 @@ playsoundonplayers(var_00, var_01, var_02) {
 
 isexcluded(var_00, var_01) {
   for(var_02 = 0; var_02 < var_1.size; var_2++) {
-    if(var_00 == var_1[var_02])
+    if(var_00 == var_1[var_02]) {
       return 1;
+    }
   }
 
   return 0;
@@ -289,14 +314,16 @@ func_5AF8() {
   level notify("vo_notify", "reaction_casualty_generic", "reaction_casualty_generic", self);
   wait 10.0;
 
-  while(self.being_revived)
+  while(self.being_revived) {
     wait 0.1;
+  }
 
   self notify("vo_notify", "bleeding_out", "bleeding_out", self);
   wait 8.0;
 
-  while(self.being_revived)
+  while(self.being_revived) {
     wait 0.1;
+  }
 
   self notify("vo_notify", "bleeding_out", "bleeding_out", self);
 }
@@ -318,8 +345,9 @@ player_casualty_vo(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
 is_in_array(var_00, var_01) {
   for(var_02 = 0; var_02 < var_0.size; var_2++) {
-    if(var_0[var_02] == var_01)
+    if(var_0[var_02] == var_01) {
       return 1;
+    }
   }
 
   return 0;
@@ -375,16 +403,18 @@ add_to_ambient_sound_queue(var_00, var_01, var_02, var_03, var_04, var_05, var_0
   var_7.chance_to_play = var_05;
   var_7.max_player_distance = var_04;
 
-  if(isDefined(var_06))
+  if(isDefined(var_06)) {
     var_7.next_play_time = gettime() + var_06 * 1000;
+  }
 
   level.ambient_sound_queue = scripts\engine\utility::add_to_array(level.ambient_sound_queue, var_07);
 }
 
 ambient_sound_queue() {
   for(;;) {
-    while(level.ambient_sound_queue.size == 0)
+    while(level.ambient_sound_queue.size == 0) {
       wait 1;
+    }
 
     var_00 = scripts\engine\utility::array_randomize(level.ambient_sound_queue);
 
@@ -409,11 +439,13 @@ ambient_sound_queue() {
 
       var_06 = var_2.alias;
 
-      if(isarray(var_2.alias))
+      if(isarray(var_2.alias)) {
         var_06 = scripts\engine\utility::random(var_2.alias);
+      }
 
-      if(soundexists(var_06))
+      if(soundexists(var_06)) {
         playLoopSound(var_2.play_origin, var_06);
+      }
 
       var_2.next_play_time = gettime() + var_03 * 1000;
       wait 1;

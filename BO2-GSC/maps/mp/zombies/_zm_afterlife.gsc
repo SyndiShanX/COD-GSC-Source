@@ -35,10 +35,12 @@ init() {
   maps\mp\_visionset_mgr::vsmgr_register_info("visionset", "zm_afterlife", 9000, 120, 1, 1);
   maps\mp\_visionset_mgr::vsmgr_register_info("overlay", "zm_afterlife_filter", 9000, 120, 1, 1);
 
-  if(isDefined(level.afterlife_player_damage_override))
+  if(isDefined(level.afterlife_player_damage_override)) {
     maps\mp\zombies\_zm::register_player_damage_callback(level.afterlife_player_damage_override);
-  else
+  }
+  else {
     maps\mp\zombies\_zm::register_player_damage_callback(::afterlife_player_damage_callback);
+  }
 
   registerclientfield("toplayer", "player_lives", 9000, 2, "int");
   registerclientfield("toplayer", "player_in_afterlife", 9000, 1, "int");
@@ -60,8 +62,9 @@ init() {
   array_thread(level.zombie_spawners, ::add_spawn_function, ::afterlife_zombie_damage);
   a_afterlife_triggers = getstructarray("afterlife_trigger", "targetname");
 
-  foreach(struct in a_afterlife_triggers)
+  foreach(struct in a_afterlife_triggers) {
   afterlife_trigger_create(struct);
+  }
 
   level.afterlife_interact_dist = 256;
   level.is_player_valid_override = ::is_player_valid_afterlife;
@@ -84,15 +87,17 @@ afterlife_gameover_cleanup() {
     player clientnotify("end_game");
     player notify("end_game");
 
-    if(isDefined(player.client_hint))
+    if(isDefined(player.client_hint)) {
       player.client_hint destroy();
+    }
   }
 
   wait 5;
 
   foreach(player in getplayers()) {
-    if(isDefined(level.optimise_for_splitscreen) && !level.optimise_for_splitscreen)
+    if(isDefined(level.optimise_for_splitscreen) && !level.optimise_for_splitscreen) {
       maps\mp\_visionset_mgr::vsmgr_deactivate("overlay", "zm_afterlife_filter", player);
+    }
   }
 }
 
@@ -136,8 +141,9 @@ afterlife_start_zombie_logic() {
 
   wait 0.5;
 
-  while(level.intermission)
+  while(level.intermission) {
     wait 0.05;
+  }
 
   flag_set("afterlife_start_over");
   wait 2;
@@ -145,29 +151,34 @@ afterlife_start_zombie_logic() {
 }
 
 is_player_valid_afterlife(player) {
-  if(isDefined(player.afterlife) && player.afterlife)
+  if(isDefined(player.afterlife) && player.afterlife) {
     return false;
+  }
 
   return true;
 }
 
 can_revive_override(revivee) {
-  if(isDefined(self.afterlife) && self.afterlife)
+  if(isDefined(self.afterlife) && self.afterlife) {
     return false;
+  }
 
   return true;
 }
 
 player_out_of_playable_area() {
-  if(isDefined(self.afterlife) && self.afterlife)
+  if(isDefined(self.afterlife) && self.afterlife) {
     return false;
+  }
 
-  if(isDefined(self.on_a_plane) && self.on_a_plane)
+  if(isDefined(self.on_a_plane) && self.on_a_plane) {
     return false;
+  }
 
   if(isDefined(level.gondola_kill_brush_override) && level.gondola_kill_brush_override) {
-    if(self istouching(level.gondola_docks_landing_killbrush))
+    if(self istouching(level.gondola_docks_landing_killbrush)) {
       return false;
+    }
   }
 
   return true;
@@ -176,10 +187,12 @@ player_out_of_playable_area() {
 init_player() {
   flag_wait("initial_players_connected");
 
-  if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game)
+  if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
     self.lives = 3;
-  else
+  }
+  else {
     self.lives = 1;
+  }
 
   self setclientfieldtoplayer("player_lives", self.lives);
   self.afterlife = 0;
@@ -190,13 +203,16 @@ init_player() {
 }
 
 afterlife_remove(b_afterlife_death) {
-  if(!isDefined(b_afterlife_death))
+  if(!isDefined(b_afterlife_death)) {
     b_afterlife_death = 0;
+  }
 
-  if(isDefined(b_afterlife_death) && b_afterlife_death)
+  if(isDefined(b_afterlife_death) && b_afterlife_death) {
     self.lives = 0;
-  else if(self.lives > 0)
+  }
+  else if(self.lives > 0) {
     self.lives--;
+  }
 
   self notify("sndLifeGone");
   self setclientfieldtoplayer("player_lives", self.lives);
@@ -222,8 +238,9 @@ afterlife_add_fx() {
     self setclientfieldtoplayer("player_afterlife_refill", 1);
     wait 3;
 
-    if(isDefined(self.afterlife) && !self.afterlife)
+    if(isDefined(self.afterlife) && !self.afterlife) {
       self setclientfieldtoplayer("player_afterlife_refill", 0);
+    }
   }
 }
 
@@ -243,10 +260,12 @@ afterlife_player_refill_watch() {
 afterlife_player_damage_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime) {
   if(isDefined(eattacker)) {
     if(isDefined(eattacker.is_zombie) && eattacker.is_zombie) {
-      if(isDefined(eattacker.custom_damage_func))
+      if(isDefined(eattacker.custom_damage_func)) {
         idamage = eattacker[[eattacker.custom_damage_func]](self);
-      else if(isDefined(eattacker.meleedamage) && smeansofdeath != "MOD_GRENADE_SPLASH")
+      }
+      else if(isDefined(eattacker.meleedamage) && smeansofdeath != "MOD_GRENADE_SPLASH") {
         idamage = eattacker.meleedamage;
+      }
 
       if(isDefined(self.afterlife) && self.afterlife) {
         self afterlife_reduce_mana(10);
@@ -256,15 +275,17 @@ afterlife_player_damage_callback(einflictor, eattacker, idamage, idflags, smeans
     }
   }
 
-  if(isDefined(self.afterlife) && self.afterlife)
+  if(isDefined(self.afterlife) && self.afterlife) {
     return 0;
+  }
 
   if(isDefined(eattacker) && (isDefined(eattacker.is_zombie) && eattacker.is_zombie || isplayer(eattacker))) {
     if(isDefined(self.hasriotshield) && self.hasriotshield && isDefined(vdir)) {
       item_dmg = 100;
 
-      if(isDefined(eattacker.custom_item_dmg))
+      if(isDefined(eattacker.custom_item_dmg)) {
         item_dmg = eattacker.custom_item_dmg;
+      }
 
       if(isDefined(self.hasriotshieldequipped) && self.hasriotshieldequipped) {
         if(self player_shield_facing_attacker(vdir, 0.2) && isDefined(self.player_shield_apply_damage)) {
@@ -297,11 +318,13 @@ afterlife_player_damage_callback(einflictor, eattacker, idamage, idflags, smeans
         idamage = 10;
       }
     } else {
-      if(self hasperk("specialty_flakjacket"))
+      if(self hasperk("specialty_flakjacket")) {
         return 0;
+      }
 
-      if(self.health > 75 && !(isDefined(self.is_zombie) && self.is_zombie))
+      if(self.health > 75 && !(isDefined(self.is_zombie) && self.is_zombie)) {
         idamage = 75;
+      }
     }
   }
 
@@ -312,10 +335,12 @@ afterlife_player_damage_callback(einflictor, eattacker, idamage, idflags, smeans
       self.afterlife = 1;
       self thread afterlife_laststand();
 
-      if(self.health <= 1)
+      if(self.health <= 1) {
         return 0;
-      else
+      }
+      else {
         idamage = self.health - 1;
+      }
     } else
       self thread last_stand_conscience_vo();
   }
@@ -327,8 +352,9 @@ afterlife_enter() {
   if(!isDefined(self.afterlife_visionset) || self.afterlife_visionset == 0) {
     maps\mp\_visionset_mgr::vsmgr_activate("visionset", "zm_afterlife", self);
 
-    if(isDefined(level.optimise_for_splitscreen) && !level.optimise_for_splitscreen)
+    if(isDefined(level.optimise_for_splitscreen) && !level.optimise_for_splitscreen) {
       maps\mp\_visionset_mgr::vsmgr_activate("overlay", "zm_afterlife_filter", self);
+    }
 
     self.afterlife_visionset = 1;
   }
@@ -343,36 +369,42 @@ afterlife_enter() {
   self setclientfield("player_afterlife_fx", 1);
   self afterlife_create_mana_bar(self.e_afterlife_corpse);
 
-  if(!isDefined(self.keep_perks) && flag("afterlife_start_over"))
+  if(!isDefined(self.keep_perks) && flag("afterlife_start_over")) {
     self increment_downed_stat();
+  }
 
   a_afterlife_triggers = getstructarray("afterlife_trigger", "targetname");
 
-  foreach(struct in a_afterlife_triggers)
+  foreach(struct in a_afterlife_triggers) {
   struct.unitrigger_stub maps\mp\zombies\_zm_unitrigger::run_visibility_function_for_all_triggers();
+  }
 
   a_exterior_goals = getstructarray("exterior_goal", "targetname");
 
   foreach(struct in a_exterior_goals) {
-    if(isDefined(struct.unitrigger_stub))
+    if(isDefined(struct.unitrigger_stub)) {
       struct.unitrigger_stub maps\mp\zombies\_zm_unitrigger::run_visibility_function_for_all_triggers();
+    }
   }
 }
 
 afterlife_leave(b_revived) {
-  if(!isDefined(b_revived))
+  if(!isDefined(b_revived)) {
     b_revived = 1;
+  }
 
-  while(self ismantling())
+  while(self ismantling()) {
     wait 0.05;
+  }
 
   self clientnotify("al_t");
 
   if(isDefined(self.afterlife_visionset) && self.afterlife_visionset) {
     maps\mp\_visionset_mgr::vsmgr_deactivate("visionset", "zm_afterlife", self);
 
-    if(isDefined(level.optimise_for_splitscreen) && !level.optimise_for_splitscreen)
+    if(isDefined(level.optimise_for_splitscreen) && !level.optimise_for_splitscreen) {
       maps\mp\_visionset_mgr::vsmgr_deactivate("overlay", "zm_afterlife_filter", self);
+    }
 
     self.afterlife_visionset = 0;
   }
@@ -391,20 +423,24 @@ afterlife_leave(b_revived) {
   self setModel(self.str_living_model);
   self setviewmodel(self.str_living_view);
 
-  if(self.e_afterlife_corpse.revivetrigger.origin != self.e_afterlife_corpse.origin)
+  if(self.e_afterlife_corpse.revivetrigger.origin != self.e_afterlife_corpse.origin) {
     self setorigin(self.e_afterlife_corpse.revivetrigger.origin);
-  else
+  }
+  else {
     self setorigin(self.e_afterlife_corpse.origin);
+  }
 
   if(isDefined(level.e_gondola)) {
     a_gondola_doors_gates = get_gondola_doors_and_gates();
 
     for(i = 0; i < a_gondola_doors_gates.size; i++) {
       if(self.e_afterlife_corpse istouching(a_gondola_doors_gates[i])) {
-        if(isDefined(level.e_gondola.is_moving) && level.e_gondola.is_moving)
+        if(isDefined(level.e_gondola.is_moving) && level.e_gondola.is_moving) {
           str_location = level.e_gondola.destination;
-        else
+        }
+        else {
           str_location = level.e_gondola.location;
+        }
 
         a_s_orgs = getstructarray("gondola_dropped_parts_" + str_location, "targetname");
 
@@ -419,8 +455,9 @@ afterlife_leave(b_revived) {
       }
     }
 
-    if(self.e_afterlife_corpse islinkedto(level.e_gondola) && (isDefined(level.e_gondola.is_moving) && level.e_gondola.is_moving))
+    if(self.e_afterlife_corpse islinkedto(level.e_gondola) && (isDefined(level.e_gondola.is_moving) && level.e_gondola.is_moving)) {
       self.is_on_gondola = 1;
+    }
   }
 
   self setplayerangles(self.e_afterlife_corpse.angles);
@@ -436,8 +473,9 @@ afterlife_leave(b_revived) {
 }
 
 afterlife_laststand(b_electric_chair) {
-  if(!isDefined(b_electric_chair))
+  if(!isDefined(b_electric_chair)) {
     b_electric_chair = 0;
+  }
 
   self endon("disconnect");
   self endon("afterlife_bleedout");
@@ -452,14 +490,16 @@ afterlife_laststand(b_electric_chair) {
   self.health = 1000;
   b_has_electric_cherry = 0;
 
-  if(self hasperk("specialty_grenadepulldeath"))
+  if(self hasperk("specialty_grenadepulldeath")) {
     b_has_electric_cherry = 1;
+  }
 
   self[[level.afterlife_save_loadout]]();
   self afterlife_fake_death();
 
-  if(isDefined(b_electric_chair) && !b_electric_chair)
+  if(isDefined(b_electric_chair) && !b_electric_chair) {
     wait 1;
+  }
 
   if(isDefined(b_has_electric_cherry) && b_has_electric_cherry && (isDefined(b_electric_chair) && !b_electric_chair)) {
     self maps\mp\zombies\_zm_perk_electric_cherry::electric_cherry_laststand();
@@ -485,8 +525,9 @@ afterlife_laststand(b_electric_chair) {
   wait 0.5;
   self show();
 
-  if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen))
+  if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen)) {
     self freezecontrols(0);
+  }
 
   self disableinvulnerability();
   self.e_afterlife_corpse waittill("player_revived", e_reviver);
@@ -533,8 +574,9 @@ afterlife_laststand_cleanup(corpse) {
 
 afterlife_create_mana_bar(corpse) {
   if(self.afterliferound == level.round_number) {
-    if(!isDefined(self.keep_perks) || self.afterlifedeaths == 0)
+    if(!isDefined(self.keep_perks) || self.afterlifedeaths == 0) {
       self.afterlifedeaths++;
+    }
   } else {
     self.afterliferound = level.round_number;
     self.afterlifedeaths = 1;
@@ -547,13 +589,16 @@ afterlife_create_mana_bar(corpse) {
 }
 
 afterlife_infinite_mana(b_infinite) {
-  if(!isDefined(b_infinite))
+  if(!isDefined(b_infinite)) {
     b_infinite = 1;
+  }
 
-  if(isDefined(b_infinite) && b_infinite)
+  if(isDefined(b_infinite) && b_infinite) {
     self.infinite_mana = 1;
-  else
+  }
+  else {
     self.infinite_mana = 0;
+  }
 }
 
 afterlife_mana_watch(corpse) {
@@ -564,16 +609,18 @@ afterlife_mana_watch(corpse) {
     wait 0.05;
     self afterlife_reduce_mana(0.05 * self.afterlifedeaths * 3);
 
-    if(self.manacur < 0)
+    if(self.manacur < 0) {
       self.manacur = 0;
+    }
 
     n_mapped_mana = linear_map(self.manacur, 0, 200, 0, 1);
     self setclientfieldtoplayer("player_afterlife_mana", n_mapped_mana);
   }
 
   if(isDefined(corpse.revivetrigger)) {
-    while(corpse.revivetrigger.beingrevived)
+    while(corpse.revivetrigger.beingrevived) {
       wait 0.05;
+    }
   }
 
   corpse notify("stop_revive_trigger");
@@ -596,8 +643,9 @@ afterlife_doors_open() {
       wait_network_frame();
     }
 
-    if(isDefined(ent))
+    if(isDefined(ent)) {
       ent setvisibletoplayer(self);
+    }
   }
 
   a_hide = getEntArray("afterlife_door", "targetname");
@@ -614,14 +662,16 @@ afterlife_doors_open() {
       wait_network_frame();
     }
 
-    if(isDefined(ent))
+    if(isDefined(ent)) {
       ent setinvisibletoplayer(self);
+    }
   }
 
   if(isDefined(self.claymores)) {
     foreach(claymore in self.claymores) {
-      if(isDefined(claymore.pickuptrigger))
+      if(isDefined(claymore.pickuptrigger)) {
         claymore.pickuptrigger setinvisibletoplayer(self);
+      }
     }
   }
 }
@@ -639,8 +689,9 @@ afterlife_doors_close() {
       wait_network_frame();
     }
 
-    if(isDefined(ent))
+    if(isDefined(ent)) {
       ent setinvisibletoplayer(self);
+    }
   }
 
   a_show = getEntArray("afterlife_door", "targetname");
@@ -657,14 +708,16 @@ afterlife_doors_close() {
       wait_network_frame();
     }
 
-    if(isDefined(ent))
+    if(isDefined(ent)) {
       ent setvisibletoplayer(self);
+    }
   }
 
   if(isDefined(self.claymores)) {
     foreach(claymore in self.claymores) {
-      if(isDefined(claymore.pickuptrigger))
+      if(isDefined(claymore.pickuptrigger)) {
         claymore.pickuptrigger setvisibletoplayer(self);
+      }
     }
   }
 }
@@ -693,8 +746,9 @@ is_weapon_available_in_afterlife_corpse(weapon, player_to_check) {
   count = 0;
   upgradedweapon = weapon;
 
-  if(isDefined(level.zombie_weapons[weapon]) && isDefined(level.zombie_weapons[weapon].upgrade_name))
+  if(isDefined(level.zombie_weapons[weapon]) && isDefined(level.zombie_weapons[weapon].upgrade_name)) {
     upgradedweapon = level.zombie_weapons[weapon].upgrade_name;
+  }
 
   players = getplayers();
 
@@ -709,8 +763,9 @@ is_weapon_available_in_afterlife_corpse(weapon, player_to_check) {
         for(i = 0; i < player.loadout.weapons.size; i++) {
           afterlife_weapon = player.loadout.weapons[i];
 
-          if(isDefined(afterlife_weapon) && (afterlife_weapon == weapon || afterlife_weapon == upgradedweapon))
+          if(isDefined(afterlife_weapon) && (afterlife_weapon == weapon || afterlife_weapon == upgradedweapon)) {
             count++;
+          }
         }
       }
     }
@@ -720,8 +775,9 @@ is_weapon_available_in_afterlife_corpse(weapon, player_to_check) {
 }
 
 afterlife_spawn_corpse() {
-  if(isDefined(self.is_on_gondola) && self.is_on_gondola && level.e_gondola.destination == "roof")
+  if(isDefined(self.is_on_gondola) && self.is_on_gondola && level.e_gondola.destination == "roof") {
     corpse = maps\mp\zombies\_zm_clone::spawn_player_clone(self, self.origin, undefined);
+  }
   else {
     trace_start = self.origin;
     trace_end = self.origin + vectorscale((0, 0, -1), 500.0);
@@ -736,8 +792,9 @@ afterlife_spawn_corpse() {
   corpse.revive_hud = self afterlife_revive_hud_create();
   corpse thread afterlife_revive_trigger_spawn();
 
-  if(flag("solo_game"))
+  if(flag("solo_game")) {
     corpse thread afterlife_corpse_create_pois();
+  }
 
   return corpse;
 }
@@ -745,8 +802,9 @@ afterlife_spawn_corpse() {
 afterlife_corpse_create_pois() {
   n_attractors = ceil(get_current_zombie_count() / 3);
 
-  if(n_attractors < 4)
+  if(n_attractors < 4) {
     n_attractors = 4;
+  }
 
   a_nodes = afterlife_corpse_get_array_poi_positions();
   self.pois = [];
@@ -786,8 +844,9 @@ afterlife_corpse_get_array_poi_positions() {
   a_nodes = getanynodearray(self.origin, 1200);
 
   for(i = 0; i < a_nodes.size; i++) {
-    if(!a_nodes[i] is_valid_teleport_node())
+    if(!a_nodes[i] is_valid_teleport_node()) {
       a_nodes[i] = undefined;
+    }
   }
 
   a_nodes = remove_undefined_from_array(a_nodes);
@@ -868,8 +927,9 @@ afterlife_revive_trigger_think() {
       revive_success = reviver afterlife_revive_do_revive(self, gun);
       reviver revive_give_back_weapons(gun);
 
-      if(isplayer(self))
+      if(isplayer(self)) {
         self allowjump(1);
+      }
 
       self.laststand = undefined;
 
@@ -883,23 +943,29 @@ afterlife_revive_trigger_think() {
 }
 
 afterlife_can_revive(revivee) {
-  if(isDefined(self.afterlife) && self.afterlife && isDefined(self.e_afterlife_corpse) && self.e_afterlife_corpse != revivee)
+  if(isDefined(self.afterlife) && self.afterlife && isDefined(self.e_afterlife_corpse) && self.e_afterlife_corpse != revivee) {
     return false;
+  }
 
-  if(!isDefined(revivee.revivetrigger))
+  if(!isDefined(revivee.revivetrigger)) {
     return false;
+  }
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     return false;
+  }
 
-  if(self player_is_in_laststand())
+  if(self player_is_in_laststand()) {
     return false;
+  }
 
-  if(self.team != revivee.team)
+  if(self.team != revivee.team) {
     return false;
+  }
 
-  if(self has_powerup_weapon())
+  if(self has_powerup_weapon()) {
     return false;
+  }
 
   ignore_sight_checks = 0;
   ignore_touch_checks = 0;
@@ -907,21 +973,25 @@ afterlife_can_revive(revivee) {
   if(isDefined(level.revive_trigger_should_ignore_sight_checks)) {
     ignore_sight_checks = [[level.revive_trigger_should_ignore_sight_checks]](self);
 
-    if(ignore_sight_checks && isDefined(revivee.revivetrigger.beingrevived) && revivee.revivetrigger.beingrevived == 1)
+    if(ignore_sight_checks && isDefined(revivee.revivetrigger.beingrevived) && revivee.revivetrigger.beingrevived == 1) {
       ignore_touch_checks = 1;
+    }
   }
 
   if(!ignore_touch_checks) {
-    if(!self istouching(revivee.revivetrigger))
+    if(!self istouching(revivee.revivetrigger)) {
       return false;
+    }
   }
 
   if(!ignore_sight_checks) {
-    if(!self is_facing(revivee))
+    if(!self is_facing(revivee)) {
       return false;
+    }
 
-    if(!sighttracepassed(self.origin + vectorscale((0, 0, 1), 50.0), revivee.origin + vectorscale((0, 0, 1), 30.0), 0, undefined))
+    if(!sighttracepassed(self.origin + vectorscale((0, 0, 1), 50.0), revivee.origin + vectorscale((0, 0, 1), 30.0), 0, undefined)) {
       return false;
+    }
   }
 
   return true;
@@ -944,20 +1014,24 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
   playerbeingrevived revive_hud_show_n_fade(3.0);
   playerbeingrevived.revivetrigger sethintstring("");
 
-  if(isplayer(playerbeingrevived))
+  if(isplayer(playerbeingrevived)) {
     playerbeingrevived startrevive(self);
+  }
 
-  if(!isDefined(self.reviveprogressbar))
+  if(!isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar = self createprimaryprogressbar();
+  }
 
-  if(!isDefined(self.revivetexthud))
+  if(!isDefined(self.revivetexthud)) {
     self.revivetexthud = newclienthudelem(self);
+  }
 
   self thread revive_clean_up_on_gameover();
   self thread laststand_clean_up_on_disconnect(playerbeingrevived, revivergun);
 
-  if(!isDefined(self.is_reviving_any))
+  if(!isDefined(self.is_reviving_any)) {
     self.is_reviving_any = 0;
+  }
 
   self.is_reviving_any++;
   self thread laststand_clean_up_reviving_any(playerbeingrevived);
@@ -968,8 +1042,9 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
   self.revivetexthud.vertalign = "bottom";
   self.revivetexthud.y = -113;
 
-  if(self issplitscreen())
+  if(self issplitscreen()) {
     self.revivetexthud.y = -347;
+  }
 
   self.revivetexthud.foreground = 1;
   self.revivetexthud.font = "default";
@@ -978,8 +1053,9 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
   self.revivetexthud.color = (1, 1, 1);
   self.revivetexthud.hidewheninmenu = 1;
 
-  if(self maps\mp\zombies\_zm_pers_upgrades_functions::pers_revive_active())
+  if(self maps\mp\zombies\_zm_pers_upgrades_functions::pers_revive_active()) {
     self.revivetexthud.color = (0.5, 0.5, 1.0);
+  }
 
   self.revivetexthud settext(&"GAME_REVIVING");
   self thread check_for_failed_revive(playerbeingrevived);
@@ -988,8 +1064,9 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
   e_fx thread revive_fx_clean_up_on_disconnect(playerbeingrevived);
   playFXOnTag(level._effect["afterlife_leave"], e_fx, "tag_origin");
 
-  if(isDefined(playloop) && playloop)
+  if(isDefined(playloop) && playloop) {
     e_fx playLoopSound("zmb_afterlife_reviving", 0.05);
+  }
 
   while(self is_reviving_afterlife(playerbeingrevived)) {
     wait 0.05;
@@ -1011,16 +1088,19 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
 
   e_fx delete();
 
-  if(isDefined(self.reviveprogressbar))
+  if(isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar destroyelem();
+  }
 
-  if(isDefined(self.revivetexthud))
+  if(isDefined(self.revivetexthud)) {
     self.revivetexthud destroy();
+  }
 
   if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {
   } else if(!revived) {
-    if(isplayer(playerbeingrevived))
+    if(isplayer(playerbeingrevived)) {
       playerbeingrevived stoprevive(self);
+    }
   }
 
   playerbeingrevived.revivetrigger sethintstring(&"GAME_BUTTON_TO_REVIVE_PLAYER");
@@ -1028,8 +1108,9 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
   self notify("do_revive_ended_normally");
   self.is_reviving_any--;
 
-  if(!revived)
+  if(!revived) {
     playerbeingrevived thread checkforbleedout(self);
+  }
 
   return revived;
 }
@@ -1044,11 +1125,13 @@ revive_clean_up_on_gameover() {
   self endon("do_revive_ended_normally");
   level waittill("end_game");
 
-  if(isDefined(self.reviveprogressbar))
+  if(isDefined(self.reviveprogressbar)) {
     self.reviveprogressbar destroyelem();
+  }
 
-  if(isDefined(self.revivetexthud))
+  if(isDefined(self.revivetexthud)) {
     self.revivetexthud destroy();
+  }
 }
 
 is_reviving_afterlife(revivee) {
@@ -1081,14 +1164,16 @@ afterlife_save_loadout() {
       self.loadout.clipcountalt[index] = self getweaponammoclip(weapon_alt);
     }
 
-    if(weapon == currentweapon)
+    if(weapon == currentweapon) {
       self.loadout.current_weapon = index;
+    }
   }
 
   self.loadout.equipment = self get_player_equipment();
 
-  if(isDefined(self.loadout.equipment))
+  if(isDefined(self.loadout.equipment)) {
     self equipment_take(self.loadout.equipment);
+  }
 
   if(self hasweapon("claymore_zm")) {
     self.loadout.hasclaymore = 1;
@@ -1108,10 +1193,12 @@ afterlife_save_loadout() {
   self.loadout.perks = afterlife_save_perks(self);
   lethal_grenade = self get_player_lethal_grenade();
 
-  if(self hasweapon(lethal_grenade))
+  if(self hasweapon(lethal_grenade)) {
     self.loadout.grenade = self getweaponammoclip(lethal_grenade);
-  else
+  }
+  else {
     self.loadout.grenade = 0;
+  }
 
   self.loadout.lethal_grenade = lethal_grenade;
   self set_player_lethal_grenade(undefined);
@@ -1123,8 +1210,9 @@ afterlife_give_loadout() {
   primaries = self getweaponslistprimaries();
 
   if(loadout.weapons.size > 1 || primaries.size > 1) {
-    foreach(weapon in primaries)
+    foreach(weapon in primaries) {
     self takeweapon(weapon);
+    }
   }
 
   for(i = 0; i < loadout.weapons.size; i++) {
@@ -1160,8 +1248,9 @@ afterlife_give_loadout() {
   self setspawnweapon(loadout.weapons[loadout.current_weapon]);
   self switchtoweaponimmediate(loadout.weapons[loadout.current_weapon]);
 
-  if(isDefined(self get_player_melee_weapon()))
+  if(isDefined(self get_player_melee_weapon())) {
     self giveweapon(self get_player_melee_weapon());
+  }
 
   self maps\mp\zombies\_zm_equipment::equipment_give(self.loadout.equipment);
 
@@ -1197,8 +1286,9 @@ afterlife_give_loadout() {
       if(self hasperk(loadout.perks[i])) {
         continue;
       }
-      if(loadout.perks[i] == "specialty_quickrevive" && flag("solo_game"))
+      if(loadout.perks[i] == "specialty_quickrevive" && flag("solo_game")) {
         level.solo_game_free_player_quickrevive = 1;
+      }
 
       if(loadout.perks[i] == "specialty_finalstand") {
         continue;
@@ -1213,10 +1303,12 @@ afterlife_give_loadout() {
   if(loadout.grenade > 0) {
     curgrenadecount = 0;
 
-    if(self hasweapon(self get_player_lethal_grenade()))
+    if(self hasweapon(self get_player_lethal_grenade())) {
       self getweaponammoclip(self get_player_lethal_grenade());
-    else
+    }
+    else {
       self giveweapon(self get_player_lethal_grenade());
+    }
 
     self setweaponammoclip(self get_player_lethal_grenade(), loadout.grenade + curgrenadecount);
   }
@@ -1232,8 +1324,9 @@ afterlife_fake_death() {
   self setstance("prone");
 
   if(self is_jumping()) {
-    while(self is_jumping())
+    while(self is_jumping()) {
       wait 0.05;
+    }
   }
 
   playFX(level._effect["afterlife_enter"], self.origin);
@@ -1272,18 +1365,21 @@ afterlife_fake_revive() {
 afterlife_get_spawnpoint() {
   spawnpoint = check_for_valid_spawn_in_zone(self);
 
-  if(!isDefined(spawnpoint))
+  if(!isDefined(spawnpoint)) {
     spawnpoint = maps\mp\zombies\_zm::check_for_valid_spawn_near_position(self, self.origin, 1);
+  }
 
-  if(!isDefined(spawnpoint))
+  if(!isDefined(spawnpoint)) {
     spawnpoint = maps\mp\zombies\_zm::check_for_valid_spawn_near_team(self, 1);
+  }
 
   if(!isDefined(spawnpoint)) {
     match_string = "";
     location = level.scr_zm_map_start_location;
 
-    if((location == "default" || location == "") && isDefined(level.default_start_location))
+    if((location == "default" || location == "") && isDefined(level.default_start_location)) {
       location = level.default_start_location;
+    }
 
     match_string = level.scr_zm_ui_gametype + "_" + location;
     spawnpoints = [];
@@ -1295,15 +1391,17 @@ afterlife_get_spawnpoint() {
           tokens = strtok(struct.script_string, " ");
 
           foreach(token in tokens) {
-            if(token == match_string)
+            if(token == match_string) {
               spawnpoints[spawnpoints.size] = struct;
+            }
           }
         }
       }
     }
 
-    if(!isDefined(spawnpoints) || spawnpoints.size == 0)
+    if(!isDefined(spawnpoints) || spawnpoints.size == 0) {
       spawnpoints = getstructarray("initial_spawn_points", "targetname");
+    }
 
     assert(isDefined(spawnpoints), "Could not find initial spawn points!");
     spawnpoint = maps\mp\zombies\_zm::getfreespawnpoint(spawnpoints, self);
@@ -1317,10 +1415,12 @@ check_for_valid_spawn_in_zone(player) {
 
   if(isDefined(level.e_gondola) && (isDefined(level.e_gondola.is_moving) && level.e_gondola.is_moving)) {
     if(player maps\mp\zm_alcatraz_travel::is_player_on_gondola()) {
-      if(level.e_gondola.destination == "roof")
+      if(level.e_gondola.destination == "roof") {
         str_player_zone = "zone_cellblock_west_gondola";
-      else if(level.e_gondola.destination == "docks")
+      }
+      else if(level.e_gondola.destination == "docks") {
         str_player_zone = "zone_dock";
+      }
     } else
       str_player_zone = player maps\mp\zombies\_zm_zonemgr::get_player_zone();
   } else
@@ -1335,23 +1435,28 @@ check_for_valid_spawn_in_zone(player) {
 
       foreach(s_spawn in a_spawn_structs) {
         if(!flag("afterlife_start_over")) {
-          if(isDefined(s_spawn.en_num) && s_spawn.en_num != player.playernum)
+          if(isDefined(s_spawn.en_num) && s_spawn.en_num != player.playernum) {
             continue;
+          }
         }
 
-        if(positionwouldtelefrag(s_spawn.origin) || distancesquared(player.origin, s_spawn.origin) < 250000)
+        if(positionwouldtelefrag(s_spawn.origin) || distancesquared(player.origin, s_spawn.origin) < 250000) {
           continue;
-        else
+        }
+        else {
           return s_spawn;
+        }
       }
 
       a_spawn_structs = get_array_of_farthest(player.origin, a_spawn_structs, undefined, 250000);
 
       foreach(s_spawn in a_spawn_structs) {
-        if(positionwouldtelefrag(s_spawn.origin))
+        if(positionwouldtelefrag(s_spawn.origin)) {
           continue;
-        else
+        }
+        else {
           return s_spawn;
+        }
       }
     }
   }
@@ -1362,8 +1467,9 @@ check_for_valid_spawn_in_zone(player) {
 afterlife_save_perks(ent) {
   perk_array = ent get_perk_array(1);
 
-  foreach(perk in perk_array)
+  foreach(perk in perk_array) {
   ent unsetperk(perk);
+  }
 
   return perk_array;
 }
@@ -1375,16 +1481,18 @@ afterlife_hostmigration() {
     foreach(player in getplayers()) {
       player setclientfieldtoplayer("player_lives", player.lives);
 
-      if(isDefined(player.e_afterlife_corpse))
+      if(isDefined(player.e_afterlife_corpse)) {
         player.e_afterlife_corpse setclientfield("player_corpse_id", 0);
+      }
     }
 
     wait_network_frame();
     wait_network_frame();
 
     foreach(player in getplayers()) {
-      if(isDefined(player.e_afterlife_corpse))
+      if(isDefined(player.e_afterlife_corpse)) {
         player.e_afterlife_corpse setclientfield("player_corpse_id", player getentitynumber() + 1);
+      }
     }
   }
 }
@@ -1464,8 +1572,9 @@ afterlife_trigger_visibility(player) {
   b_is_invis = player.afterlife;
   self setinvisibletoplayer(player, b_is_invis);
 
-  if(player.lives == 0)
+  if(player.lives == 0) {
     self sethintstring(&"ZM_PRISON_OUT_OF_LIVES");
+  }
   else {
     self sethintstring(self.stub.hint_string);
 
@@ -1523,10 +1632,12 @@ afterlife_trigger_think() {
 afterlife_interact_object_think() {
   self endon("afterlife_interact_complete");
 
-  if(isDefined(self.script_int) && self.script_int > 0)
+  if(isDefined(self.script_int) && self.script_int > 0) {
     n_total_interact_count = self.script_int;
-  else if(!isDefined(self.script_int) || isDefined(self.script_int) && self.script_int <= 0)
+  }
+  else if(!isDefined(self.script_int) || isDefined(self.script_int) && self.script_int <= 0) {
     n_total_interact_count = 0;
+  }
 
   n_count = 0;
   self.health = 5000;
@@ -1542,8 +1653,9 @@ afterlife_interact_object_think() {
   trig_spawn_offset = (0, 0, 0);
 
   if(self.model != "p6_anim_zm_al_nixie_tubes") {
-    if(isDefined(self.script_string) && self.script_string == "intro_powerup_activate")
+    if(isDefined(self.script_string) && self.script_string == "intro_powerup_activate") {
       self.t_bump = spawn("trigger_radius", self.origin + vectorscale((0, 1, 0), 28.0), 0, 28, 64);
+    }
     else {
       if(issubstr(self.model, "p6_zm_al_shock_box")) {
         trig_spawn_offset = (0, 11, 46);
@@ -1558,8 +1670,9 @@ afterlife_interact_object_think() {
   }
 
   while(true) {
-    if(isDefined(self.unitrigger_stub))
+    if(isDefined(self.unitrigger_stub)) {
       self.unitrigger_stub.is_activated_in_afterlife = 0;
+    }
     else if(isDefined(self.t_bump)) {
       self.t_bump setcursorhint("HINT_NOICON");
       self.t_bump sethintstring(&"ZM_PRISON_AFTERLIFE_INTERACT");
@@ -1609,8 +1722,9 @@ afterlife_interact_object_think() {
                 self.unitrigger_stub maps\mp\zombies\_zm_unitrigger::run_visibility_function_for_all_triggers();
               }
             } else {
-              if(isDefined(self.t_bump))
+              if(isDefined(self.t_bump)) {
                 self.t_bump delete();
+              }
 
               break;
             }
@@ -1642,10 +1756,12 @@ afterlife_trigger_visible_in_afterlife(player) {
 
   if(!b_is_invis) {
     if(player is_player_looking_at(self.origin, 0.25)) {
-      if(cointoss())
+      if(cointoss()) {
         player thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "need_electricity");
-      else
+      }
+      else {
         player thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "electric_zap");
+      }
     }
   }
 
@@ -1766,17 +1882,21 @@ afterlife_zapped() {
 }
 
 is_valid_teleport_node() {
-  if(!check_point_in_enabled_zone(self.origin))
+  if(!check_point_in_enabled_zone(self.origin)) {
     return false;
+  }
 
-  if(self.type != "Path")
+  if(self.type != "Path") {
     return false;
+  }
 
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "no_teleport")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "no_teleport") {
     return false;
+  }
 
-  if(isDefined(self.no_teleport) && self.no_teleport)
+  if(isDefined(self.no_teleport) && self.no_teleport) {
     return false;
+  }
 
   return true;
 }
@@ -1842,8 +1962,9 @@ last_stand_conscience_vo() {
   self endon("disconnect");
   self endon("end_game");
 
-  if(!isDefined(self.conscience_vo_played))
+  if(!isDefined(self.conscience_vo_played)) {
     self.conscience_vo_played = 0;
+  }
 
   self.conscience_vo_played++;
   convo = [];
@@ -1856,8 +1977,9 @@ last_stand_conscience_vo() {
     if(a_players.size > 1) {
       foreach(player in a_players) {
         if(player != self) {
-          if(distancesquared(self.origin, player.origin) < 1000000)
+          if(distancesquared(self.origin, player.origin) < 1000000) {
             return;
+          }
         }
       }
     }

@@ -143,8 +143,9 @@ soct_death_challenge() {
   self waittill("death", e_attacker, damagefromunderneath, weaponname, point, dir);
 
   if(isDefined(e_attacker) && e_attacker == level.player) {
-    if(!maps\pakistan_s3_util::is_player_in_drone())
+    if(!maps\pakistan_s3_util::is_player_in_drone()) {
       level notify("soct_soct_kill");
+    }
 
     return;
   }
@@ -161,8 +162,9 @@ challenge_nodeath(str_notify) {
   flag_wait("player_enters_hanger");
   n_deaths = get_player_stat("deaths");
 
-  if(n_deaths == 0)
+  if(n_deaths == 0) {
     self notify(str_notify);
+  }
 }
 
 challenge_big_jumps(str_notify) {

@@ -35,35 +35,41 @@ longestexposedapproachdist() {
 
   assert(isDefined(anim.longestexposedapproachdist));
 
-  if(self.subclass != "regular" && isDefined(anim.longestexposedapproachdist[self.subclass]))
+  if(self.subclass != "regular" && isDefined(anim.longestexposedapproachdist[self.subclass])) {
     return anim.longestexposedapproachdist[self.subclass];
+  }
 
-  if(isDefined(anim.longestexposedapproachdist[self.animtype]))
+  if(isDefined(anim.longestexposedapproachdist[self.animtype])) {
     return anim.longestexposedapproachdist[self.animtype];
+  }
 
   return anim.longestexposedapproachdist["default"];
 }
 
 longestapproachdist(animname) {
   if(isDefined(self.longestapproachdist)) {
-    if(isDefined(self.longestapproachdist[self.animtype][animname]))
+    if(isDefined(self.longestapproachdist[self.animtype][animname])) {
       return self.longestapproachdist[self.animtype][animname];
+    }
   }
 
   assert(isDefined(anim.longestapproachdist));
 
-  if(self.subclass != "regular" && isDefined(anim.longestapproachdist[self.subclass]) && isDefined(anim.longestapproachdist[self.subclass][animname]))
+  if(self.subclass != "regular" && isDefined(anim.longestapproachdist[self.subclass]) && isDefined(anim.longestapproachdist[self.subclass][animname])) {
     return anim.longestapproachdist[self.subclass][animname];
+  }
 
-  if(isDefined(anim.longestapproachdist[self.animtype]) && isDefined(anim.longestapproachdist[self.animtype][animname]))
+  if(isDefined(anim.longestapproachdist[self.animtype]) && isDefined(anim.longestapproachdist[self.animtype][animname])) {
     return anim.longestapproachdist[self.animtype][animname];
+  }
 
   return anim.longestapproachdist["default"][animname];
 }
 
 setidleanimoverride(overrideanim) {
-  if(!isDefined(self.anim_array))
+  if(!isDefined(self.anim_array)) {
     self.anim_array = [];
+  }
 
   if(!isDefined(overrideanim)) {
     self.anim_array[self.animtype]["stop"]["stand"]["none"]["idle"] = undefined;
@@ -88,8 +94,9 @@ animarraygeneric(animname, scriptoverride, errorifmissing, my_anim_array, global
   if(usecache) {
     cacheentry = self.anim_array_cache[animname];
 
-    if(isDefined(cacheentry))
+    if(isDefined(cacheentry)) {
       return cacheentry;
+    }
   }
 
   theanim = % void;
@@ -98,18 +105,22 @@ animarraygeneric(animname, scriptoverride, errorifmissing, my_anim_array, global
   animpose = self.a.pose;
   animweaponanims = self weaponanims();
 
-  if(isai(self) && !self holdingweapon())
+  if(isai(self) && !self holdingweapon()) {
     animweaponanims = "none";
+  }
 
   errorifmissingoverride = errorifmissing;
 
-  if(isDefined(scriptoverride))
+  if(isDefined(scriptoverride)) {
     animscript = scriptoverride;
-  else if(isDefined(self.a.script_suffix))
+  }
+  else if(isDefined(self.a.script_suffix)) {
     animscript = animscript + self.a.script_suffix;
+  }
 
-  if(isDefined(my_anim_array))
+  if(isDefined(my_anim_array)) {
     theanim = self animarrayinternal(my_anim_array, animtype, animscript, animpose, animweaponanims, animname, 0, 0);
+  }
 
   assert(isDefined(global_anim_array));
 
@@ -124,18 +135,22 @@ animarraygeneric(animname, scriptoverride, errorifmissing, my_anim_array, global
   }
 
   if(isDefined(global_anim_array) && (!isDefined(theanim) || !isarray(theanim) && theanim == % void)) {
-    if(self.subclass != "regular")
+    if(self.subclass != "regular") {
       theanim = self animarrayinternal(global_anim_array, self.subclass, animscript, animpose, animweaponanims, animname, errorifmissingoverride, 1);
+    }
 
-    if(!isDefined(theanim) || !isarray(theanim) && theanim == % void)
+    if(!isDefined(theanim) || !isarray(theanim) && theanim == % void) {
       theanim = self animarrayinternal(global_anim_array, animtype, animscript, animpose, animweaponanims, animname, errorifmissingoverride, 1);
+    }
 
-    if(animtype != "default" && (!isDefined(theanim) || !isarray(theanim) && theanim == % void))
+    if(animtype != "default" && (!isDefined(theanim) || !isarray(theanim) && theanim == % void)) {
       theanim = self animarrayinternal(global_anim_array, "default", animscript, animpose, animweaponanims, animname, errorifmissing, 1);
+    }
   }
 
-  if(usecache && isDefined(theanim))
+  if(usecache && isDefined(theanim)) {
     self.anim_array_cache[animname] = theanim;
+  }
 
   return theanim;
 }
@@ -143,8 +158,9 @@ animarraygeneric(animname, scriptoverride, errorifmissing, my_anim_array, global
 animarrayexist(animname, scriptoverride) {
   theanim = animarray(animname, scriptoverride, 0);
 
-  if(!isDefined(theanim) || theanim == % void)
+  if(!isDefined(theanim) || theanim == % void) {
     return false;
+  }
 
   return true;
 }
@@ -152,10 +168,12 @@ animarrayexist(animname, scriptoverride) {
 animarrayanyexist(animname, scriptoverride) {
   animarray = animarray(animname, scriptoverride, 0);
 
-  if(!isDefined(animarray) || !isarray(animarray) && animarray == % void)
+  if(!isDefined(animarray) || !isarray(animarray) && animarray == % void) {
     return false;
-  else if(!isarray(animarray))
+  }
+  else if(!isarray(animarray)) {
     return true;
+  }
 
   return animarray.size > 0;
 }
@@ -163,18 +181,22 @@ animarrayanyexist(animname, scriptoverride) {
 animarraypickrandom(animname, scriptoverride, oncepercache) {
   animarray = animarray(animname, scriptoverride);
 
-  if(!isarray(animarray))
+  if(!isarray(animarray)) {
     return animarray;
+  }
 
   assert(animarray.size > 0);
 
-  if(animarray.size > 1)
+  if(animarray.size > 1) {
     index = randomint(animarray.size);
-  else
+  }
+  else {
     index = 0;
+  }
 
-  if(isDefined(oncepercache))
+  if(isDefined(oncepercache)) {
     self.anim_array_cache[animname] = animarray[index];
+  }
 
   return animarray[index];
 }
@@ -194,8 +216,9 @@ animarrayinternal(anim_array, animtype, animscript, animpose, animweaponanims, a
   script_array = animtype_array[animscript];
 
   if(!isDefined(script_array)) {
-    if(isDefined(self.covernode) && animscript != "combat" && animscripts\shared::isexposed())
+    if(isDefined(self.covernode) && animscript != "combat" && animscripts\shared::isexposed()) {
       return animarrayinternal(anim_array, animtype, "combat", animpose, animweaponanims, animname, errorifmissing, globalarraylookup);
+    }
 
     if(errorifmissing) {
       errormsg = "Missing anim: " + animtype + "/" + animscript + "/" + animpose + "/" + animweaponanims + "/" + animname + ". Script '" + animscript + "' not part of anim array. ";
@@ -219,8 +242,9 @@ animarrayinternal(anim_array, animtype, animscript, animpose, animweaponanims, a
   weapon_array = pose_array[animweaponanims];
 
   if(!isDefined(weapon_array)) {
-    if(animweaponanims != "rifle" && globalarraylookup)
+    if(animweaponanims != "rifle" && globalarraylookup) {
       return animarrayinternal(anim_array, animtype, animscript, animpose, "rifle", animname, errorifmissing, globalarraylookup);
+    }
 
     if(errorifmissing) {
       errormsg = "Missing anim: " + animtype + "/" + animscript + "/" + animpose + "/" + animweaponanims + "/" + animname + ". WeaponType '" + animweaponanims + "' not part of anim array. ";
@@ -234,10 +258,12 @@ animarrayinternal(anim_array, animtype, animscript, animpose, animweaponanims, a
   theanim = weapon_array[animname];
 
   if(!isDefined(theanim)) {
-    if(animweaponanims != "rifle")
+    if(animweaponanims != "rifle") {
       theanim = animarrayinternal(anim_array, animtype, animscript, animpose, "rifle", animname, errorifmissing, globalarraylookup);
-    else if(isDefined(self.covernode) && animscript != "combat" && globalarraylookup)
+    }
+    else if(isDefined(self.covernode) && animscript != "combat" && globalarraylookup) {
       theanim = animarrayinternal(anim_array, animtype, "combat", animpose, animweaponanims, animname, errorifmissing, globalarraylookup);
+    }
 
     if((!isDefined(theanim) || !isarray(theanim) && theanim == % void) && errorifmissing) {
       errormsg = "Missing anim: " + animtype + "/" + animscript + "/" + animpose + "/" + animweaponanims + "/" + animname + ". Anim '" + animname + "' not part of anim array. Cur: " + self.a.script + "Prev: " + self.a.prevscript;

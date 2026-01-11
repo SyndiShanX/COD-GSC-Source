@@ -38,11 +38,13 @@ init() {
   game["dialog"]["last_alive"] = "lastalive";
   game["dialog"]["boost"] = "generic_boost";
 
-  if(!isDefined(game["dialog"]["offense_obj"]))
+  if(!isDefined(game["dialog"]["offense_obj"])) {
     game["dialog"]["offense_obj"] = "generic_boost";
+  }
 
-  if(!isDefined(game["dialog"]["defense_obj"]))
+  if(!isDefined(game["dialog"]["defense_obj"])) {
     game["dialog"]["defense_obj"] = "generic_boost";
+  }
 
   game["dialog"]["hardcore"] = "hardcore";
   game["dialog"]["oldschool"] = "oldschool";
@@ -146,8 +148,9 @@ init() {
 }
 
 registerdialoggroup(group, skipifcurrentlyplayinggroup) {
-  if(!isDefined(level.dialoggroups))
+  if(!isDefined(level.dialoggroups)) {
     level.dialoggroups = [];
+  }
   else if(isDefined(level.dialoggroup[group])) {
     error("registerDialogGroup:Dialog group " + group + " already registered.");
     return;
@@ -166,8 +169,9 @@ sndstartmusicsystem() {
     return;
   }
   if(game["state"] == "pregame") {
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - music state is undefined Waiting 15 seconds to set music state");
+    }
 
     wait 30;
 
@@ -178,8 +182,9 @@ sndstartmusicsystem() {
   }
 
   if(!isDefined(level.nextmusicstate)) {
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - music state is undefined Waiting 15 seconds to set music state");
+    }
 
     self.pers["music"].currentstate = "UNDERSCORE";
     self thread suspensemusic();
@@ -190,8 +195,9 @@ suspensemusicforplayer() {
   self endon("disconnect");
   self thread set_music_on_player("UNDERSCORE", 0);
 
-  if(getdvarint(#"_id_0BC4784C") > 0)
+  if(getdvarint(#"_id_0BC4784C") > 0) {
     println("Music System - Setting Music State Random Underscore " + self.pers["music"].returnstate + " On player " + self getentitynumber());
+  }
 }
 
 suspensemusic(random) {
@@ -199,34 +205,40 @@ suspensemusic(random) {
   level endon("match_ending_soon");
   self endon("disconnect");
 
-  if(getdvarint(#"_id_0BC4784C") > 0)
+  if(getdvarint(#"_id_0BC4784C") > 0) {
     println("Music System - Starting random underscore");
+  }
 
   while(true) {
     wait(randomintrange(25, 60));
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - Checking for random underscore");
+    }
 
-    if(!isDefined(self.pers["music"].inque))
+    if(!isDefined(self.pers["music"].inque)) {
       self.pers["music"].inque = 0;
+    }
 
     if(self.pers["music"].inque) {
-      if(getdvarint(#"_id_0BC4784C") > 0)
+      if(getdvarint(#"_id_0BC4784C") > 0) {
         println("Music System - Inque no random underscore");
+      }
 
       continue;
     }
 
-    if(!isDefined(self.pers["music"].currentstate))
+    if(!isDefined(self.pers["music"].currentstate)) {
       self.pers["music"].currentstate = "SILENT";
+    }
 
     if(randomint(100) < self.underscorechance && self.pers["music"].currentstate != "ACTION" && self.pers["music"].currentstate != "TIME_OUT") {
       self thread suspensemusicforplayer();
       self.underscorechance = self.underscorechance - 20;
 
-      if(getdvarint(#"_id_0BC4784C") > 0)
+      if(getdvarint(#"_id_0BC4784C") > 0) {
         println("Music System - Starting random underscore");
+      }
 
     }
   }
@@ -234,14 +246,16 @@ suspensemusic(random) {
 
 leaderdialogforotherteams(dialog, skip_team, squad_dialog) {
   foreach(team in level.teams) {
-    if(team != skip_team)
+    if(team != skip_team) {
       leaderdialog(dialog, team, undefined, undefined, squad_dialog);
+    }
   }
 }
 
 announceroundwinner(winner, delay) {
-  if(delay > 0)
+  if(delay > 0) {
     wait(delay);
+  }
 
   if(!isDefined(winner) || isplayer(winner)) {
     return;
@@ -250,16 +264,18 @@ announceroundwinner(winner, delay) {
     leaderdialog("round_success", winner);
     leaderdialogforotherteams("round_failure", winner);
   } else {
-    foreach(team in level.teams)
+    foreach(team in level.teams) {
     thread playsoundonplayers("mus_round_draw" + "_" + level.teampostfix[team]);
+    }
 
     leaderdialog("round_draw");
   }
 }
 
 announcegamewinner(winner, delay) {
-  if(delay > 0)
+  if(delay > 0) {
     wait(delay);
+  }
 
   if(!isDefined(winner) || isplayer(winner)) {
     return;
@@ -275,8 +291,9 @@ doflameaudio() {
   self endon("disconnect");
   waittillframeend;
 
-  if(!isDefined(self.lastflamehurtaudio))
+  if(!isDefined(self.lastflamehurtaudio)) {
     self.lastflamehurtaudio = 0;
+  }
 
   currenttime = gettime();
 
@@ -298,16 +315,18 @@ leaderdialog(dialog, team, group, excludelist, squaddialog) {
   if(!isDefined(team)) {
     dialogs = [];
 
-    foreach(team in level.teams)
+    foreach(team in level.teams) {
     dialogs[team] = dialog;
+    }
 
     leaderdialogallteams(dialogs, group, excludelist);
     return;
   }
 
   if(level.splitscreen) {
-    if(level.players.size)
+    if(level.players.size) {
       level.players[0] leaderdialogonplayer(dialog, group);
+    }
 
     return;
   }
@@ -316,15 +335,17 @@ leaderdialog(dialog, team, group, excludelist, squaddialog) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
 
-      if(isDefined(player.pers["team"]) && player.pers["team"] == team && !maps\mp\gametypes_zm\_globallogic_utils::isexcluded(player, excludelist))
+      if(isDefined(player.pers["team"]) && player.pers["team"] == team && !maps\mp\gametypes_zm\_globallogic_utils::isexcluded(player, excludelist)) {
         player leaderdialogonplayer(dialog, group);
+      }
     }
   } else {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
 
-      if(isDefined(player.pers["team"]) && player.pers["team"] == team)
+      if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
         player leaderdialogonplayer(dialog, group);
+      }
     }
   }
 }
@@ -336,8 +357,9 @@ leaderdialogallteams(dialogs, group, excludelist) {
     return;
   }
   if(level.splitscreen) {
-    if(level.players.size)
+    if(level.players.size) {
       level.players[0] leaderdialogonplayer(dialogs[level.players[0].team], group);
+    }
 
     return;
   }
@@ -360,8 +382,9 @@ leaderdialogallteams(dialogs, group, excludelist) {
 }
 
 flushdialog() {
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player flushdialogonplayer();
+  }
 }
 
 flushdialogonplayer() {
@@ -372,16 +395,18 @@ flushdialogonplayer() {
 }
 
 flushgroupdialog(group) {
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player flushgroupdialogonplayer(group);
+  }
 }
 
 flushgroupdialogonplayer(group) {
   self.leaderdialoggroups[group] = undefined;
 
   foreach(key, dialog in self.leaderdialogqueue) {
-    if(dialog == group)
+    if(dialog == group) {
       self.leaderdialogqueue[key] = undefined;
+    }
   }
 }
 
@@ -393,8 +418,9 @@ addgroupdialogtoplayer(dialog, group) {
 
   addtoqueue = 0;
 
-  if(!isDefined(self.leaderdialoggroups[group]))
+  if(!isDefined(self.leaderdialoggroups[group])) {
     addtoqueue = 1;
+  }
 
   if(!level.dialoggroup[group].skipifcurrentlyplayinggroup) {
     if(self.currentleaderdialog == dialog && self.currentleaderdialogtime + 2000 > gettime()) {
@@ -402,8 +428,9 @@ addgroupdialogtoplayer(dialog, group) {
 
       foreach(key, leader_dialog in self.leaderdialogqueue) {
         if(leader_dialog == group) {
-          for(i = key + 1; i < self.leaderdialogqueue.size; i++)
+          for(i = key + 1; i < self.leaderdialogqueue.size; i++) {
             self.leaderdialogqueue[i - 1] = self.leaderdialogqueue[i];
+          }
 
           self.leaderdialogqueue[i - 1] = undefined;
           break;
@@ -423,12 +450,14 @@ testdialogqueue(group) {
   count = 0;
 
   foreach(temp in self.leaderdialogqueue) {
-    if(temp == group)
+    if(temp == group) {
       count++;
+    }
   }
 
-  if(count > 1)
+  if(count > 1) {
     shit = 0;
+  }
 }
 
 leaderdialogonplayer(dialog, group) {
@@ -452,22 +481,27 @@ leaderdialogonplayer(dialog, group) {
     dialog = group;
   }
 
-  if(!self.leaderdialogactive)
+  if(!self.leaderdialogactive) {
     self thread playleaderdialogonplayer(dialog);
-  else
+  }
+  else {
     self.leaderdialogqueue[self.leaderdialogqueue.size] = dialog;
+  }
 }
 
 waitforsound(sound, extratime) {
-  if(!isDefined(extratime))
+  if(!isDefined(extratime)) {
     extratime = 0.1;
+  }
 
   time = soundgetplaybacktime(sound);
 
-  if(time < 0)
+  if(time < 0) {
     wait(3.0 + extratime);
-  else
+  }
+  else {
     wait(time * 0.001 + extratime);
+  }
 }
 
 playleaderdialogonplayer(dialog) {
@@ -486,10 +520,12 @@ playleaderdialogonplayer(dialog) {
     self testdialogqueue(group);
   }
 
-  if(level.wagermatch || !isDefined(game["voice"]))
+  if(level.wagermatch || !isDefined(game["voice"])) {
     faction = "vox_wm_";
-  else
+  }
+  else {
     faction = game["voice"][team];
+  }
 
   sound_name = faction + game["dialog"][dialog];
 
@@ -507,13 +543,15 @@ playleaderdialogonplayer(dialog) {
   if(self.leaderdialogqueue.size > 0) {
     nextdialog = self.leaderdialogqueue[0];
 
-    for(i = 1; i < self.leaderdialogqueue.size; i++)
+    for(i = 1; i < self.leaderdialogqueue.size; i++) {
       self.leaderdialogqueue[i - 1] = self.leaderdialogqueue[i];
+    }
 
     self.leaderdialogqueue[i - 1] = undefined;
 
-    if(isDefined(self.leaderdialoggroups[dialog]))
+    if(isDefined(self.leaderdialoggroups[dialog])) {
       self testdialogqueue(dialog);
+    }
 
     self thread playleaderdialogonplayer(nextdialog);
   }
@@ -524,8 +562,9 @@ isteamwinning(checkteam) {
 
   foreach(team in level.teams) {
     if(team != checkteam) {
-      if(game["teamScores"][team] >= score)
+      if(game["teamScores"][team] >= score) {
         return false;
+      }
     }
   }
 
@@ -552,14 +591,16 @@ musiccontroller() {
   if(islastround() || isoneround()) {
     if(!level.splitscreen) {
       if(level.teambased) {
-        if(!announceteamiswinning())
+        if(!announceteamiswinning()) {
           leaderdialog("min_draw");
+        }
       }
 
       level waittill("match_ending_very_soon");
 
-      foreach(team in level.teams)
+      foreach(team in level.teams) {
       leaderdialog("timesup", team, undefined, undefined, "squad_30sec");
+      }
     }
   } else {
     level waittill("match_ending_vox");
@@ -586,8 +627,9 @@ play_2d_on_team(alias, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers["team"]) && player.pers["team"] == team)
+    if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
       player playlocalsound(alias);
+    }
   }
 }
 
@@ -600,32 +642,36 @@ set_music_on_team(state, team, save_state, return_state, wait_time) {
   if(!isDefined(team)) {
     team = "both";
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - team undefined: Setting to both");
+    }
 
   }
 
   if(!isDefined(save_state)) {
     save_sate = 0;
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - save_sate undefined: Setting to false");
+    }
 
   }
 
   if(!isDefined(return_state)) {
     return_state = 0;
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - Music System - return_state undefined: Setting to false");
+    }
 
   }
 
   if(!isDefined(wait_time)) {
     wait_time = 0;
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - wait_time undefined: Setting to 0");
+    }
 
   }
 
@@ -640,8 +686,9 @@ set_music_on_team(state, team, save_state, return_state, wait_time) {
     if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
       player thread set_music_on_player(state, save_state, return_state, wait_time);
 
-      if(getdvarint(#"_id_0BC4784C") > 0)
+      if(getdvarint(#"_id_0BC4784C") > 0) {
         println("Music System - Setting Music State " + state + " On player " + player getentitynumber());
+      }
 
     }
   }
@@ -658,32 +705,36 @@ set_music_on_player(state, save_state, return_state, wait_time) {
   if(!isDefined(save_state)) {
     save_state = 0;
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - Music System - save_sate undefined: Setting to false");
+    }
 
   }
 
   if(!isDefined(return_state)) {
     return_state = 0;
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - Music System - return_state undefined: Setting to false");
+    }
 
   }
 
   if(!isDefined(wait_time)) {
     wait_time = 0;
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - wait_time undefined: Setting to 0");
+    }
 
   }
 
   if(!isDefined(state)) {
     state = "UNDERSCORE";
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - state undefined: Setting to UNDERSCORE");
+    }
 
   }
 
@@ -692,20 +743,23 @@ set_music_on_player(state, save_state, return_state, wait_time) {
   if(isDefined(self.pers["music"].currentstate) && save_state) {
     self.pers["music"].returnstate = state;
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - Saving Music State " + self.pers["music"].returnstate + " On " + self getentitynumber());
+    }
 
   }
 
   self.pers["music"].previousstate = self.pers["music"].currentstate;
   self.pers["music"].currentstate = state;
 
-  if(getdvarint(#"_id_0BC4784C") > 0)
+  if(getdvarint(#"_id_0BC4784C") > 0) {
     println("Music System - Setting Music State " + state + " On player " + self getentitynumber());
+  }
 
   if(isDefined(self.pers["music"].returnstate) && return_state) {
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - Starting Return State " + self.pers["music"].returnstate + " On " + self getentitynumber());
+    }
 
     self set_next_music_state(self.pers["music"].returnstate, wait_time);
   }
@@ -715,8 +769,9 @@ return_music_state_player(wait_time) {
   if(!isDefined(wait_time)) {
     wait_time = 0;
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - wait_time undefined: Setting to 0");
+    }
 
   }
 
@@ -727,8 +782,9 @@ return_music_state_team(team, wait_time) {
   if(!isDefined(wait_time)) {
     wait_time = 0;
 
-    if(getdvarint(#"_id_0BC4784C") > 0)
+    if(getdvarint(#"_id_0BC4784C") > 0) {
       println("Music System - wait_time undefined: Setting to 0");
+    }
 
   }
 
@@ -743,8 +799,9 @@ return_music_state_team(team, wait_time) {
     if(isDefined(player.pers["team"]) && player.pers["team"] == team) {
       player thread set_next_music_state(self.pers["music"].returnstate, wait_time);
 
-      if(getdvarint(#"_id_0BC4784C") > 0)
+      if(getdvarint(#"_id_0BC4784C") > 0) {
         println("Music System - Setting Music State " + self.pers["music"].returnstate + " On player " + player getentitynumber());
+      }
 
     }
   }
@@ -754,11 +811,13 @@ set_next_music_state(nextstate, wait_time) {
   self endon("disconnect");
   self.pers["music"].nextstate = nextstate;
 
-  if(getdvarint(#"_id_0BC4784C") > 0)
+  if(getdvarint(#"_id_0BC4784C") > 0) {
     println("Music System - Setting next Music State " + self.pers["music"].nextstate + " On " + self getentitynumber());
+  }
 
-  if(!isDefined(self.pers["music"].inque))
+  if(!isDefined(self.pers["music"].inque)) {
     self.pers["music"].inque = 0;
+  }
 
   if(self.pers["music"].inque) {
     return;
@@ -768,8 +827,9 @@ set_next_music_state(nextstate, wait_time) {
   } else {
     self.pers["music"].inque = 1;
 
-    if(wait_time)
+    if(wait_time) {
       wait(wait_time);
+    }
 
     self set_music_on_player(self.pers["music"].nextstate, 0);
     self.pers["music"].inque = 0;

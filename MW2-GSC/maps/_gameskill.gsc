@@ -10,21 +10,25 @@
 
 // this script handles all major global gameskill considerations
 setSkill(reset) {
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = ToLower(GetDvar("mapname"));
+  }
 
   if(!isDefined(reset) || reset == false) {
-    if(isDefined(level.gameSkill))
+    if(isDefined(level.gameSkill)) {
       return;
+    }
 
-    if(!isDefined(level.custom_player_attacker))
+    if(!isDefined(level.custom_player_attacker)) {
       level.custom_player_attacker = ::return_false;
+    }
 
     level.global_damage_func_ads = ::empty_kill_func;
     level.global_damage_func = ::empty_kill_func;
     level.global_kill_func = ::empty_kill_func;
-    if(GetDvar("arcademode") == "1")
+    if(GetDvar("arcademode") == "1") {
       thread maps\_arcademode::main();
+    }
 
     // first init stuff
     set_console_status();
@@ -51,13 +55,15 @@ setSkill(reset) {
       player.damage_functions = [];
       player maps\_player_stats::init_stats();
       player ent_flag_init("global_hint_in_use");
-      if(is_coop())
+      if(is_coop()) {
         player ent_flag_init("coop_is_dead");
+      }
       player.pers = [];
       //player thread watchWeaponChange();
 
-      if(!isDefined(player.baseIgnoreRandomBulletDamage))
+      if(!isDefined(player.baseIgnoreRandomBulletDamage)) {
         player.baseIgnoreRandomBulletDamage = false;
+      }
 
       player.disabledWeapon = 0;
       player.disabledWeaponSwitch = 0;
@@ -292,8 +298,9 @@ setSkill(reset) {
   // in case there are no enties in the map.
   level.lastPlayerSighted = 0;
 
-  if(isDefined(level.custom_gameskill_func))
+  if(isDefined(level.custom_gameskill_func)) {
     [[level.custom_gameskill_func]]();
+  }
 
   if(coop_with_one_player_downed()) {
     make_remaining_player_a_little_stronger();
@@ -415,19 +422,23 @@ setGlobalDifficulty() {
 }
 
 updateGameSkill() {
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player.gameskill = player get_player_gameskill();
+  }
 
   level.gameskill = level.player.gameskill;
-  if(is_coop() && (level.player2.gameskill > level.gameskill))
+  if(is_coop() && (level.player2.gameskill > level.gameskill)) {
     level.gameskill = level.player2.gameskill;
+  }
 
   level.specops_reward_gameskill = level.player.gameskill;
-  if(is_coop() && (level.player2.gameskill < level.specops_reward_gameskill))
+  if(is_coop() && (level.player2.gameskill < level.specops_reward_gameskill)) {
     level.specops_reward_gameskill = level.player2.gameskill;
+  }
 
-  if(isDefined(level.forcedgameskill))
+  if(isDefined(level.forcedgameskill)) {
     level.gameskill = level.forcedgameskill;
+  }
 
   Assert(level.gameSkill >= 0 && level.gameSkill <= 3);
 
@@ -466,8 +477,9 @@ get_skill_from_index(index) {
 }
 
 aa_should_start_fresh() {
-  if(level.script == "killhouse")
+  if(level.script == "killhouse") {
     return true;
+  }
   return level.gameskill == GetDvarInt("autodifficulty_original_setting");
 }
 
@@ -512,8 +524,9 @@ apply_difficulty_frac_with_func(difficulty_func, current_frac) {
 }
 
 update_player_attacker_accuracy() {
-  if(self ent_flag("player_zero_attacker_accuracy"))
+  if(self ent_flag("player_zero_attacker_accuracy")) {
     return;
+  }
 
   self.IgnoreRandomBulletDamage = self.baseIgnoreRandomBulletDamage;
   self.attackeraccuracy = self.gs.player_attacker_accuracy;
@@ -601,28 +614,34 @@ always_pain() {
 }
 
 pain_protection() {
-  if(!pain_protection_check())
+  if(!pain_protection_check()) {
     return false;
+  }
 
   return (RandomInt(100) > 25);
 }
 
 pain_protection_check() {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return false;
+  }
 
-  if(!isplayer(self.enemy))
+  if(!isplayer(self.enemy)) {
     return false;
+  }
 
-  if(!isalive(level.painAI) || level.painAI.script != "pain")
+  if(!isalive(level.painAI) || level.painAI.script != "pain") {
     level.painAI = self;
+  }
 
   // The pain AI can always take pain, so if the player focuses on one guy he'll see pain animations.	
-  if(self == level.painAI)
+  if(self == level.painAI) {
     return false;
+  }
 
-  if(self.damageWeapon != "none" && WeaponIsBoltAction(self.damageWeapon))
+  if(self.damageWeapon != "none" && WeaponIsBoltAction(self.damageWeapon)) {
     return false;
+  }
 
   return true;
 }
@@ -633,14 +652,16 @@ playerHealthDebug() {
 
   while(1) {
     while(1) {
-      if(GetDebugDvar("scr_health_debug") == "1")
+      if(GetDebugDvar("scr_health_debug") == "1") {
         break;
+      }
       wait .5;
     }
     thread printHealthDebug();
     while(1) {
-      if(GetDebugDvar("scr_health_debug") != "1")
+      if(GetDebugDvar("scr_health_debug") != "1") {
         break;
+      }
       wait .5;
     }
     level notify("stop_printing_health_bars");
@@ -663,10 +684,12 @@ printHealthDebug() {
 
   for(playerIndex = 0; playerIndex < level.players.size; playerIndex++) {
     player = level.players[playerIndex];
-    if(!isDefined(player.playerInvulTimeEnd))
+    if(!isDefined(player.playerInvulTimeEnd)) {
       player.playerInvulTimeEnd = 0;
-    if(!isDefined(player.deathInvulnerableTimeout))
+    }
+    if(!isDefined(player.deathInvulnerableTimeout)) {
       player.deathInvulnerableTimeout = 0;
+    }
 
     for(i = 0; i < healthBarKeys.size; i++) {
       key = healthBarKeys[i];
@@ -707,12 +730,15 @@ printHealthDebug() {
 
       width = 0;
       type = i % 3;
-      if(type == 0)
+      if(type == 0) {
         width = player.health / player.maxhealth * 300;
-      else if(type == 1)
+      }
+      else if(type == 1) {
         width = (player.playerInvulTimeEnd - GetTime()) / 1000 * 40;
-      else if(type == 2)
+      }
+      else if(type == 2) {
         width = (player.deathInvulnerableTimeout - GetTime()) / 1000 * 40;
+      }
 
       width = Int(max(width, 1));
 
@@ -723,8 +749,9 @@ printHealthDebug() {
 }
 
 destroyHealthDebug() {
-  if(!isDefined(level.healthBarHudElems))
+  if(!isDefined(level.healthBarHudElems)) {
     return;
+  }
   for(i = 0; i < level.healthBarHudElems.size; i++) {
     level.healthBarHudElems[i].bar Destroy();
     level.healthBarHudElems[i] Destroy();
@@ -757,8 +784,9 @@ destroyHealthDebug() {
   			if( isDefined( self.enemy ) && IsPlayer( self.enemy ) && self CanSee( self.enemy ) )
   			{
   				self.a.accuracyGrowthMultiplier += 0.05 * anim.accuracyGrowthRate;
-  				if( self.a.accuracyGrowthMultiplier > anim.accuracyGrowthMax )
+  				if( self.a.accuracyGrowthMultiplier > anim.accuracyGrowthMax ) {
   					self.a.accuracyGrowthMultiplier = anim.accuracyGrowthMax;
+  				}
   			}
   			else
   			{
@@ -798,18 +826,21 @@ destroyHealthDebug() {
     }
 
     if(self.script == "move") {
-      if(self isCQBWalkingOrFacingEnemy())
+      if(self isCQBWalkingOrFacingEnemy()) {
         self.accuracy = anim.walk_accuracy * self.baseAccuracy;
-      else
+      }
+      else {
         self.accuracy = anim.run_accuracy * self.baseAccuracy;
+      }
       return;
     }
 
     self.accuracy = self.baseAccuracy;
 
     // rambo corner is more accurate so it's still a threat to the player
-    if(isDefined(self.isRambo) && isDefined(self.ramboAccuracyMult))
+    if(isDefined(self.isRambo) && isDefined(self.ramboAccuracyMult)) {
       self.accuracy *= self.ramboAccuracyMult;
+    }
   }
 
 setSniperAccuracy() {
@@ -827,15 +858,17 @@ setSniperAccuracy() {
   self.sniperShotCount++;
 
   gameskill = level.gameskill;
-  if(IsPlayer(self.enemy))
+  if(IsPlayer(self.enemy)) {
     gameskill = self.enemy.gameskill;
+  }
 
   if(shouldForceSniperMissShot()) {
     // miss
     self.accuracy = 0;
 
-    if(gameskill > 0 || self.sniperShotCount > 1)
+    if(gameskill > 0 || self.sniperShotCount > 1) {
       self.lastMissedEnemy = self.enemy;
+    }
     return;
   }
 
@@ -844,23 +877,28 @@ setSniperAccuracy() {
 
   self.sniperHitCount++;
 
-  if(gameskill < 1 && self.sniperHitCount == 1)
+  if(gameskill < 1 && self.sniperHitCount == 1) {
     self.lastMissedEnemy = undefined; // miss again
+  }
 }
 
 shouldForceSniperMissShot() {
-  if(isDefined(self.neverForceSniperMissEnemy) && self.neverForceSniperMissEnemy)
+  if(isDefined(self.neverForceSniperMissEnemy) && self.neverForceSniperMissEnemy) {
     return false;
+  }
 
   //dont do this if you're an ally of the player, changed by z for Price cliffhanger sniping
-  if(self.team == "allies")
+  if(self.team == "allies") {
     return false;
+  }
 
-  if(isDefined(self.lastMissedEnemy) && (self.enemy == self.lastMissedEnemy))
+  if(isDefined(self.lastMissedEnemy) && (self.enemy == self.lastMissedEnemy)) {
     return false;
+  }
 
-  if(DistanceSquared(self.origin, self.enemy.origin) > (500 * 500))
+  if(DistanceSquared(self.origin, self.enemy.origin) > (500 * 500)) {
     return false;
+  }
 
   return true;
 }
@@ -884,14 +922,17 @@ resetAccuracyAndPause() {
 waitTimeIfPlayerIsHit() {
   waittime = 0;
   waittillframeend;
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return waittime;
+  }
 
-  if(!isplayer(self.enemy))
+  if(!isplayer(self.enemy)) {
     return waittime;
+  }
 
-  if(self.enemy ent_flag("player_is_invulnerable"))
+  if(self.enemy ent_flag("player_is_invulnerable")) {
     waittime = (0.3 + RandomFloat(0.4));
+  }
   return waittime;
 }
 
@@ -905,11 +946,13 @@ print3d_time(org, text, color, timer) {
 
 resetMissTime() {
   //prof_begin( "resetMissTime" );
-  if(!self IsBadGuy())
+  if(!self IsBadGuy()) {
     return;
+  }
 
-  if(self.weapon == "none")
+  if(self.weapon == "none") {
     return;
+  }
 
   if(!self animscripts\weaponList::usingAutomaticWeapon() && !self animscripts\weaponList::usingSemiAutoWeapon()) {
     self.missTime = 0;
@@ -945,8 +988,9 @@ setMissTime(howLong) {
     return;
   }
 
-  if(howLong > 0)
+  if(howLong > 0) {
     self.accuracy = 0;
+  }
 
   howLong *= 1000; // convert to milliseconds
 
@@ -963,8 +1007,9 @@ player_aim_debug() {
 
   for(;;) {
     color = (0, 1, 0);
-    if(self.a.misstime > GetTime())
+    if(self.a.misstime > GetTime()) {
       color = (1, 0, 0);
+    }
     Print3d(self.origin + (0, 0, 32), self.finalaccuracy, color);
     wait(0.05);
   }
@@ -1079,15 +1124,18 @@ dirt_right_blurry_alpha() {
 }
 
 grenade_dirt_on_screen(type) {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return;
+  }
 
-  if(isDefined(self.is_controlling_UAV))
+  if(isDefined(self.is_controlling_UAV)) {
     return;
+  }
 
   // already did this effect on this frame
-  if(self.dirt_on_screen[type] == GetTime())
+  if(self.dirt_on_screen[type] == GetTime()) {
     return;
+  }
 
   self.dirt_on_screen[type] = GetTime();
 
@@ -1196,14 +1244,17 @@ playerHurtcheck() {
 		}
 
 		packetBase = self.player_health_packets;
-		if( packetBase <= 0 )
+		if( packetBase <= 0 ) {
 			packetBase = 0;
+		}
 		
 		color = red;
-		if( packetBase == 2 )
+		if( packetBase == 2 ) {
 			color = orange;
-		if( packetBase == 3 )
+		}
+		if( packetBase == 3 ) {
 			color = green;
+		}
 			
 		for( i = 0; i < packetBase; i++ )
 		{
@@ -1273,8 +1324,9 @@ playerHealthRegen() {
     waittillframeend; // if we're on hard, we need to wait until the bolt damage check before we decide what to do
     //prof_begin( "playerHealthRegen" );
 
-    if(is_coop())
+    if(is_coop()) {
       self thread maps\_coop::player_coop_proc();
+    }
 
     if(self.health == self.maxhealth) {
       if(self ent_flag("player_has_red_flashing_overlay")) {
@@ -1315,8 +1367,9 @@ playerHealthRegen() {
     }
 
     /*
-    if( !wasVeryHurt && veryHurt )
+    if( !wasVeryHurt && veryHurt ) {
     	nearAIRushesPlayer();
+    }
     */
 
     if(self.hurtAgain) {
@@ -1325,29 +1378,34 @@ playerHealthRegen() {
     }
 
     if(self.health / self.maxhealth >= oldratio) {
-      if(GetTime() - hurttime < self.gs.playerHealth_RegularRegenDelay)
+      if(GetTime() - hurttime < self.gs.playerHealth_RegularRegenDelay) {
         continue;
+      }
 
       if(veryHurt) {
         newHealth = ratio;
-        if(GetTime() > hurtTime + self.gs.longRegenTime)
+        if(GetTime() > hurtTime + self.gs.longRegenTime) {
           newHealth += self.gs.regenRate;
-        if(newHealth >= 1)
+        }
+        if(newHealth >= 1) {
           reduceTakeCoverWarnings();
+        }
       } else {
         newHealth = 1;
       }
 
-      if(newHealth > 1.0)
+      if(newHealth > 1.0) {
         newHealth = 1.0;
+      }
 
       if(newHealth <= 0) {
         // Player is dead
         return;
       }
 
-      if(newHealth > self.health / self.maxhealth)
+      if(newHealth > self.health / self.maxhealth) {
         logRegen(newHealth);
+      }
 
         self SetNormalHealth(newHealth);
       oldRatio = self.health / self.maxHealth;
@@ -1359,8 +1417,9 @@ playerHealthRegen() {
     worthyDamageRatio = self.gs.worthyDamageRatio;
 
     // could tweak for more than 1 guy but 2 guys seem to kill the player well enough
-    if(self.attackerCount == 1)
+    if(self.attackerCount == 1) {
       worthyDamageRatio *= 3;
+    }
 
     invulWorthyHealthDrop = oldratio - ratio >= worthyDamageRatio;
 
@@ -1370,10 +1429,12 @@ playerHealthRegen() {
       self SetNormalHealth(2 / self.maxhealth);
       invulWorthyHealthDrop = true;
 
-      if(!isDefined(self.deathInvulnerableTimeout))
+      if(!isDefined(self.deathInvulnerableTimeout)) {
         self.deathInvulnerableTimeout = 0;
-      if(self.deathInvulnerableTimeout < GetTime())
+      }
+      if(self.deathInvulnerableTimeout < GetTime()) {
         self.deathInvulnerableTimeout = GetTime() + self.deathInvulnerableTime;
+      }
 
     }
 
@@ -1388,8 +1449,9 @@ playerHealthRegen() {
       /#logHit( self.health, 0 );
       continue;
     }
-    if(self ent_flag("player_is_invulnerable"))
+    if(self ent_flag("player_is_invulnerable")) {
       continue;
+    }
     self ent_flag_set("player_is_invulnerable");
     level notify("player_becoming_invulnerable"); // because "player_is_invulnerable" notify happens on both set * and * clear
 
@@ -1416,8 +1478,9 @@ reduceTakeCoverWarnings() {
 
   //prof_begin( "reduceTakeCoverWarnings" );
 
-  if(!self take_cover_warnings_enabled())
+  if(!self take_cover_warnings_enabled()) {
     return;
+  }
 
   if(IsAlive(self)) {
     takeCoverWarnings = (self GetLocalPlayerProfileData("takeCoverWarnings"));
@@ -1489,8 +1552,9 @@ showHitLog() {
   	else
   	{
   		damage = healthlost;
-  		if( damage == 0 )
+  		if( damage == 0 ) {
   			damage = "unknown";
+  		}
   		PrintLn( "^0Hit at time ^3" + level.hitlog[ i ].time / 1000 + "^0 for ^3" + damage + "^0 damage; invul for ^3" + level.hitlog[ i ].invulTime + "^0 seconds. Health is now " + level.hitlog[ i ].health );
   	}
   	
@@ -1504,12 +1568,14 @@ showHitLog() {
   playerInvul(timer) {
     Assert(IsPlayer(self));
 
-    if(isDefined(self.flashendtime) && self.flashendtime > GetTime())
+    if(isDefined(self.flashendtime) && self.flashendtime > GetTime()) {
       timer = timer * getCurrentDifficultySetting("flashbangedInvulFactor");
+    }
 
     if(timer > 0) {
-      if(!isDefined(self.noPlayerInvul))
+      if(!isDefined(self.noPlayerInvul)) {
         self.attackeraccuracy = 0;
+      }
       self.IgnoreRandomBulletDamage = true;
 
       self.playerInvulTimeEnd = GetTime() + timer * 1000;
@@ -1526,8 +1592,9 @@ default_door_node_flashbang_frequency() {
   //added .doorFragChance and .doorFlashChance for throwing frag/flash grenades through doors.
   //Set it to a value between 0 and 1; 0 for never, 1 for always if possible.
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     self.doorFlashChance = .6;
+  }
 
   if(self IsBadGuy()) {
     if(level.gameSkill >= 2) {
@@ -1549,24 +1616,29 @@ grenadeAwareness() {
   if(self IsBadGuy()) {
     if(level.gameSkill >= 2) {
       // hard and fu
-      if(RandomInt(100) < 33)
+      if(RandomInt(100) < 33) {
         self.grenadeawareness = 0.2;
-      else
+      }
+      else {
         self.grenadeawareness = 0.5;
+      }
     } else {
       // normal
-      if(RandomInt(100) < 33)
+      if(RandomInt(100) < 33) {
         self.grenadeawareness = 0;
-      else
+      }
+      else {
         self.grenadeawareness = 0.2;
+      }
     }
   }
 }
 
 blurView(blur, timer) {
   Assert(IsPlayer(self));
-  if(ent_flag("player_no_auto_blur"))
+  if(ent_flag("player_no_auto_blur")) {
     return;
+  }
 
   self notify("blurview_stop");
   self endon("blurview_stop");
@@ -1581,13 +1653,15 @@ playerBreathingSound(healthcap) {
   wait(2);
   for(;;) {
     wait(0.2);
-    if(self.health <= 0)
+    if(self.health <= 0) {
       return;
+    }
 
     // Player still has a lot of health so no breathing sound
     ratio = self.health / self.maxHealth;
-    if(ratio > self.gs.healthOverlayCutoff)
+    if(ratio > self.gs.healthOverlayCutoff) {
       continue;
+    }
 
     self PlayLocalSound("breathing_hurt");
     wait(0.1 + RandomFloat(0.8));
@@ -1635,11 +1709,13 @@ healthOverlay() {
 
     targetDamageAlpha = 1.0 - self.health / self.maxHealth;
 
-    if(damageAlpha > targetDamageAlpha)
+    if(damageAlpha > targetDamageAlpha) {
       damageAlpha -= (lerpRate * updateTime);
+    }
 
-    if(damageAlpha < targetDamageAlpha)
+    if(damageAlpha < targetDamageAlpha) {
       damageAlpha = targetDamageAlpha;
+    }
 
     overlay.alpha = damageAlpha;
   }
@@ -1674,12 +1750,15 @@ do_non_flashing_alpha_when_not_hurt( overlay )
 	{
 		// Overlay comes in immediately, but fades out gradually
 		new_alpha = ( 1 - ( self.health * 0.01 ) ) * 0.5;
-		if(new_alpha > overlay.alpha)
+		if(new_alpha > overlay.alpha) {
 			overlay.alpha = new_alpha;
-		else if( overlay.alpha - 0.025 < new_alpha )
+		}
+		else if( overlay.alpha - 0.025 < new_alpha ) {
 			overlay.alpha = new_alpha;
-		else
+		}
+		else {
 			overlay.alpha -=0.025;
+		}
 		
 		wait( 0.05 );
 	}
@@ -1689,10 +1768,12 @@ do_non_flashing_alpha_when_not_hurt( overlay )
 add_hudelm_position_internal(alignY) {
   //prof_begin( "add_hudelm_position_internal" );
 
-  if(level.console)
+  if(level.console) {
     self.fontScale = 2;
-  else
+  }
+  else {
     self.fontScale = 1.6;
+  }
 
   self.x = 0; // 320;
   self.y = -36; // 200;
@@ -1700,10 +1781,12 @@ add_hudelm_position_internal(alignY) {
 
   /* if( 0 )// if we ever get the chance to localize or find a way to dynamically find how many lines in a string
   {
-  	if( isDefined( alignY ) )
+  	if( isDefined( alignY ) ) {
   		self.alignY = alignY;
-  	else
+  	}
+  	else {
   		self.alignY = "middle";	
+  	}
   }
   else
   {*/
@@ -1713,18 +1796,21 @@ add_hudelm_position_internal(alignY) {
   self.horzAlign = "center";
   self.vertAlign = "middle";
 
-  if(!isDefined(self.background))
+  if(!isDefined(self.background)) {
     return;
+  }
   self.background.x = 0; // 320;
   self.background.y = -40; // 200;
   self.background.alignX = "center";
   self.background.alignY = "middle";
   self.background.horzAlign = "center";
   self.background.vertAlign = "middle";
-  if(level.console)
+  if(level.console) {
     self.background SetShader("popmenu_bg", 650, 52);
-  else
+  }
+  else {
     self.background SetShader("popmenu_bg", 650, 42);
+  }
   self.background.alpha = .5;
 
   //prof_end( "add_hudelm_position_internal" );
@@ -1787,10 +1873,12 @@ destroy_warning_elem(fadeout) {
 }
 
 may_change_cover_warning_alpha(coverWarning) {
-  if(!isDefined(coverWarning))
+  if(!isDefined(coverWarning)) {
     return false;
-  if(isDefined(coverWarning.beingDestroyed))
+  }
+  if(isDefined(coverWarning.beingDestroyed)) {
     return false;
+  }
   return true;
 }
 
@@ -1812,8 +1900,9 @@ fadeFunc(coverWarning, severity, mult, hud_scaleOnly) {
   fadeOutFullTime = pulseTime * 0.3;
   remainingTime = pulseTime - fadeInTime - stayFullTime - fadeOutHalfTime - fadeOutFullTime;
   Assert(remainingTime >= -.001);
-  if(remainingTime < 0)
+  if(remainingTime < 0) {
     remainingTime = 0;
+  }
 
   halfAlpha = 0.8 + severity * 0.1;
   leastAlpha = 0.5 + severity * 0.3;
@@ -1824,8 +1913,9 @@ fadeFunc(coverWarning, severity, mult, hud_scaleOnly) {
       coverWarning.alpha = mult * 1.0;
     }
   }
-  if(isDefined(coverWarning))
+  if(isDefined(coverWarning)) {
     coverWarning thread fontScaler(1.0, fadeInTime);
+  }
   wait fadeInTime + stayFullTime;
 
   if(may_change_cover_warning_alpha(coverWarning)) {
@@ -1843,8 +1933,9 @@ fadeFunc(coverWarning, severity, mult, hud_scaleOnly) {
       coverWarning.alpha = mult * leastAlpha;
     }
   }
-  if(isDefined(coverWarning))
+  if(isDefined(coverWarning)) {
     coverWarning thread fontScaler(0.9, fadeOutFullTime);
+  }
   wait fadeOutFullTime;
 
   wait remainingTime;
@@ -1858,8 +1949,9 @@ take_cover_warnings_enabled() {
     return false;
   }
 
-  if(isDefined(self.vehicle))
+  if(isDefined(self.vehicle)) {
     return false;
+  }
 
   return true;
 }
@@ -1867,30 +1959,37 @@ take_cover_warnings_enabled() {
 should_show_cover_warning() {
   Assert(IsPlayer(self));
 
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     return false;
+  }
 
-  if(self isLinked())
+  if(self isLinked()) {
     return false;
+  }
 
   // why get to cover if you're being ignored?
-  if(self.ignoreme)
+  if(self.ignoreme) {
     return false;
+  }
 
-  if(level.MissionFailed)
+  if(level.MissionFailed) {
     return false;
+  }
 
-  if(!self take_cover_warnings_enabled())
+  if(!self take_cover_warnings_enabled()) {
     return false;
+  }
 
-  if(self.gameskill > 1 && !maps\_load::map_is_early_in_the_game())
+  if(self.gameskill > 1 && !maps\_load::map_is_early_in_the_game()) {
     return false;
+  }
 
   // note: takeCoverWarnings is 3 more than the number of warnings left.
   // this lets it stay away for a while unless we die 3 times in a row without taking cover successfully.
   takeCoverWarnings = (self GetLocalPlayerProfileData("takeCoverWarnings"));
-  if(takeCoverWarnings <= 3)
+  if(takeCoverWarnings <= 3) {
     return false;
+  }
 
   return true;
 }
@@ -1918,11 +2017,13 @@ take_cover_warning() {
   stopFlashingBadlyTime += regen_time;
 
   fadeFunc(coverWarning, 1, 1, false);
-  while(GetTime() < stopFlashingBadlyTime && IsAlive(self))
+  while(GetTime() < stopFlashingBadlyTime && IsAlive(self)) {
     fadeFunc(coverWarning, .9, 1, false);
+  }
 
-  if(IsAlive(self))
+  if(IsAlive(self)) {
     fadeFunc(coverWarning, .65, 0.8, false);
+  }
 
   if(may_change_cover_warning_alpha(coverWarning)) {
     coverWarning FadeOverTime(1.0);
@@ -2003,15 +2104,18 @@ increment_take_cover_warnings_on_death() {
   self waittill("death");
 
   // dont increment if player died to grenades, explosion, etc
-  if(!self ent_flag("player_has_red_flashing_overlay"))
+  if(!self ent_flag("player_has_red_flashing_overlay")) {
     return;
+  }
 
-  if(!self take_cover_warnings_enabled())
+  if(!self take_cover_warnings_enabled()) {
     return;
+  }
 
   warnings = (self GetLocalPlayerProfileData("takeCoverWarnings"));
-  if(warnings < 10)
+  if(warnings < 10) {
     self SetLocalPlayerProfileData("takeCoverWarnings", warnings + 1);
+  }
 
   /#DebugTakeCoverWarnings();
 }
@@ -2022,8 +2126,9 @@ auto_adjust_difficulty_player_positioner() {
   org = self.origin;
   // 	thread debug_message( ".", org, 6 );
   wait(5);
-  if(self autospot_is_close_to_player(org))
+  if(self autospot_is_close_to_player(org)) {
     level.autoAdjust_playerSpots[level.autoAdjust_playerSpots.size] = org;
+  }
 }
 
 autospot_is_close_to_player(org) {
@@ -2042,12 +2147,14 @@ auto_adjust_difficulty_player_movement_check() {
     level.player.movedRecently = true;
     newSpots = [];
     start = level.autoAdjust_playerSpots.size - 5;
-    if(start < 0)
+    if(start < 0) {
       start = 0;
+    }
 
     for(i = start; i < level.autoAdjust_playerSpots.size; i++) {
-      if(!level.player autospot_is_close_to_player(level.autoAdjust_playerSpots[i]))
+      if(!level.player autospot_is_close_to_player(level.autoAdjust_playerSpots[i])) {
         continue;
+      }
 
       newSpots[newSpots.size] = level.autoAdjust_playerSpots[i];
       level.player.movedRecently = false;
@@ -2073,14 +2180,16 @@ auto_adjust_difficulty_track_player_shots() {
   // reduce the "time spent alive" by the time between shots fired if there has been significant time between shots
   lastShotTime = GetTime();
   for(;;) {
-    if(level.player AttackButtonPressed())
+    if(level.player AttackButtonPressed()) {
       lastShotTime = GetTime();
+    }
 
     level.timeBetweenShots = GetTime() - lastShotTime;
     wait(0.05);
     /*
-    if( lastShotTime < 10000 )
+    if( lastShotTime < 10000 ) {
     	continue;
+    }
 
     playerDeathTimer = getcvarint( "playerDeathTimer" );
     playerDeathTimer = Int( playerDeathTimer - lastShotTime * 0.001 );
@@ -2100,16 +2209,18 @@ hud_debug_add(msg, num) {
 hud_debug_clear() {
   level.hudNum = 0;
   if(isDefined(level.hudDebugNum)) {
-    for(i = 0; i < level.hudDebugNum.size; i++)
+    for(i = 0; i < level.hudDebugNum.size; i++) {
       level.hudDebugNum[i] Destroy();
+    }
   }
 
   level.hudDebugNum = [];
 }
 
 hud_debug_add_message(msg) {
-  if(!isDefined(level.hudMsgShare))
+  if(!isDefined(level.hudMsgShare)) {
     level.hudMsgShare = [];
+  }
   if(!isDefined(level.hudMsgShare[msg])) {
     hud = NewHudElem();
     hud.x = level.debugLeft;
@@ -2139,8 +2250,9 @@ hud_debug_add_display(msg, num, isfloat) {
   hundreds = 0;
   tens = 0;
   ones = 0;
-  while(num >= 10000)
+  while(num >= 10000) {
     num -= 10000;
+  }
 
   while(num >= 1000) {
     num -= 1000;
@@ -2256,8 +2368,9 @@ hud_debug_add_second_string(num, offset) {
 }
 
 aa_init_stats() {
-  if(GetDvar("createfx") == "on")
+  if(GetDvar("createfx") == "on") {
     return;
+  }
   if(GetDvarInt("noder") || GetDvarInt("painter")) {
     return;
   }
@@ -2315,10 +2428,12 @@ command_used(cmd) {
 }
 
 aa_time_tracking() {
-  if(GetDvar("createfx") != "")
+  if(GetDvar("createfx") != "") {
     return;
-  if(GetDvar("scr_generateClipModels") != "" && GetDvar("scr_generateClipModels") != "0")
+  }
+  if(GetDvar("scr_generateClipModels") != "" && GetDvar("scr_generateClipModels") != "0") {
     return; // shortcut for generating clipmodels gah.
+  }
 
     waittillframeend; // so level.start_point is defined
   for(;;) {
@@ -2327,8 +2442,9 @@ aa_time_tracking() {
     //aa_add_event_float( "aa_time_tracking", 0.2 );
 
     if(IsGodMode(level.player) || level.start_point != "default" || GetDvar("timescale", 1) != "1") {
-      if(GetDvar("player_cheated") != "1")
+      if(GetDvar("player_cheated") != "1") {
         SetDvar("player_cheated", 1);
+      }
     }
 
       /*
@@ -2375,8 +2491,9 @@ aa_player_health_tracking() {
 }
 
 auto_adjust_new_zone(zone) {
-  if(GetDvar("createfx") == "on")
+  if(GetDvar("createfx") == "on") {
     return;
+  }
 
     if(!isDefined(level.auto_adjust_flags)) {
       level.auto_adjust_flags = [];
@@ -2539,14 +2656,17 @@ return_false(attacker) {
 }
 
 player_attacker(attacker) {
-  if([[level.custom_player_attacker]](attacker))
+  if([[level.custom_player_attacker]](attacker)) {
     return true;
+  }
 
-  if(IsPlayer(attacker))
+  if(IsPlayer(attacker)) {
     return true;
+  }
 
-  if(!isDefined(attacker.car_damage_owner_recorder))
+  if(!isDefined(attacker.car_damage_owner_recorder)) {
     return false;
+  }
 
   return attacker player_did_most_damage();
 }
@@ -2564,10 +2684,12 @@ auto_adjust_enemy_died(amount, attacker, type, point) {
   /*
   Not worth effecting the speed of the game for one spot in one map in one mode
   // in case the team got changed.
-  if( !self IsBadGuy() )
+  if( !self IsBadGuy() ) {
   	return;
-  if( self.type == "civilian" )
+  }
+  if( self.type == "civilian" ) {
   	return;
+  }
   */
 
   aa_add_event("aa_enemy_deaths", 1);
@@ -2594,8 +2716,9 @@ auto_adjust_enemy_death_detection(amount, attacker, direction_vec, point, type, 
     return;
   }
 
-  if(!player_attacker(attacker))
+  if(!player_attacker(attacker)) {
     return;
+  }
   aa_player_attacks_enemy_with_ads(amount, type, point);
 }
 
@@ -2623,8 +2746,9 @@ aa_player_attacks_enemy_with_ads(amount, type, point) {
 }
 
 bullet_attack(type) {
-  if(type == "MOD_PISTOL_BULLET")
+  if(type == "MOD_PISTOL_BULLET") {
     return true;
+  }
   return type == "MOD_RIFLE_BULLET";
 }
 
@@ -2661,16 +2785,19 @@ add_fractional_data_point(name, frac, val) {
 }
 
 coop_with_one_player_downed() {
-  if(!is_coop())
+  if(!is_coop()) {
     return false;
+  }
 
-  if(level.players.size != 2)
+  if(level.players.size != 2) {
     return false;
+  }
 
   downed_players = 0;
   foreach(player in level.players) {
-    if(!player ent_flag("coop_downed"))
+    if(!player ent_flag("coop_downed")) {
       continue;
+    }
 
     downed_players++;
   }

@@ -45,8 +45,9 @@ watchEntsInDeepWater_ks(trigUnderWater, waterDeleteZ) {
     ksToDestroy = array_combine(ksToDestroy, level.turrets);
 
     foreach(kstreak in ksToDestroy) {
-      if(!isDefined(kstreak))
+      if(!isDefined(kstreak)) {
         continue;
+      }
       waterZoverride = ter_op(isDefined(kstreak.sentrytype) && kstreak.sentrytype == "sentry_minigun", waterDeleteZ - CONST_SENTRY_AND_AGENT_OFFSET, waterDeleteZ);
       if(kstreak.origin[2] <= waterZoverride && kstreak IsTouching(trigUnderWater)) {
         kstreak notify("death");
@@ -91,8 +92,9 @@ watchEntsInDeepWater_mines(trigUnderWater, waterDeleteZ) {
         continue;
       }
       offset = 0;
-      if(isDefined(mine.isTallForWaterChecks))
+      if(isDefined(mine.isTallForWaterChecks)) {
         offset = CONST_TROPHY_OFFSET;
+      }
 
       if(mine.origin[2] <= waterDeleteZ - offset && mine IsTouching(trigUnderWater)) {
         mine maps\mp\gametypes\_weapons::deleteExplosive();
@@ -240,10 +242,12 @@ inWaterWake(waterShallowSplashZ) {
   zGround = ter_op(isDefined(waterShallowSplashZ), waterShallowSplashZ, self.origin[2]);
   fxPlayedRecently = false;
   while(true) {
-    if(fxPlayedRecently)
+    if(fxPlayedRecently) {
       wait(0.05);
-    else
+    }
+    else {
       wait(0.3);
+    }
 
     if(!isDefined(level.waterKickTimeNext)) {
       level.waterKickTimeNext = GetTime() + CONST_WATER_KICK_MIN_MSEC;
@@ -328,14 +332,16 @@ underWaterBubbles() {
 
 startWaterVisuals() {
   self ShellShock("mp_flooded_water", 8);
-  if(IsPlayer(self))
+  if(IsPlayer(self)) {
     self SetBlurForPlayer(10, 0.0);
+  }
 }
 
 stopWaterVisuals() {
   self StopShellShock();
-  if(IsPlayer(self))
+  if(IsPlayer(self)) {
     self SetBlurForPlayer(0, 0.85);
+  }
 }
 
 stopWaterVisualsOnRemote() {

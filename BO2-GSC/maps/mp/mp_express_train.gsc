@@ -25,8 +25,9 @@ init() {
   triggers = getEntArray("train_gate_kill_trigger", "targetname");
   traintriggers = getEntArray("train_kill_trigger", "targetname");
 
-  foreach(brush in brushes)
+  foreach(brush in brushes) {
   brush disconnectpaths();
+  }
 
   waittime = 0.05;
 
@@ -120,15 +121,17 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     gatedownwait = getdvarintdefault("scr_express_gateDownWait", 2);
     wait(gatedownwait);
 
-    foreach(gate in gates)
+    foreach(gate in gates) {
     gate stoploopsound(2);
+    }
 
     wait 2;
     cars[0] attachpath(start);
     cars[0].killcament = undefined;
 
-    if(isDefined(cars[0].trainkilltrigger))
+    if(isDefined(cars[0].trainkilltrigger)) {
       cars[0] thread train_move_think(cars[0].trainkilltrigger);
+    }
 
     cars[0] startpath();
     cars[0] showaftertime(0.2);
@@ -142,10 +145,12 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     next = "_b";
 
     for(i = 1; i < cars.size; i++) {
-      if(i == 1)
+      if(i == 1) {
         wait 0.4;
-      else
+      }
+      else {
         wait 0.35;
+      }
 
       if(i >= 3 && i % 3 == 0) {
         cars[i] playLoopSound("amb_train_lp" + next);
@@ -183,8 +188,9 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     exitgate gate_move();
     array_func(gates, ::gate_move);
 
-    foreach(gate in gates)
+    foreach(gate in gates) {
     gate playSound("amb_gate_move");
+    }
 
     wait 6;
   }
@@ -220,8 +226,9 @@ watch_player_touch() {
   for(;;) {
     self waittill("touch", entity);
 
-    if(isplayer(entity))
+    if(isplayer(entity)) {
       entity dodamage(entity.health * 2, self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
+    }
   }
 }
 
@@ -241,8 +248,9 @@ car_move() {
     self.angles = level.train_angles[i];
     wait 0.05;
 
-    if(i == 4)
+    if(i == 4) {
       self show();
+    }
   }
 
   self notify("end_of_track");
@@ -257,11 +265,13 @@ gate_rotate(yaw) {
 }
 
 gate_move(z_dist) {
-  if(isDefined(self.kill_trigger))
+  if(isDefined(self.kill_trigger)) {
     self thread gate_move_think(isDefined(z_dist));
+  }
 
-  if(!isDefined(z_dist))
+  if(!isDefined(z_dist)) {
     self moveto(self.og_origin, 5);
+  }
   else {
     self.og_origin = self.origin;
     self movez(z_dist, 5);
@@ -343,8 +353,9 @@ train_move_think(kill_trigger) {
         if(isDefined(entity.carried) && entity.carried == 1) {
           continue;
         }
-        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath)
+        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
           entity domaxdamage(self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
+        }
 
         continue;
       }
@@ -356,12 +367,14 @@ train_move_think(kill_trigger) {
 
     if(level.gametype == "ctf") {
       foreach(flag in level.flags) {
-        if(flag.curorigin != flag.trigger.baseorigin && flag.visuals[0] istouching(kill_trigger))
+        if(flag.curorigin != flag.trigger.baseorigin && flag.visuals[0] istouching(kill_trigger)) {
           flag maps\mp\gametypes\ctf::returnflag();
+        }
       }
     } else if(level.gametype == "sd" && !level.multibomb) {
-      if(level.sdbomb.visuals[0] istouching(kill_trigger))
+      if(level.sdbomb.visuals[0] istouching(kill_trigger)) {
         level.sdbomb maps\mp\gametypes\_gameobjects::returnhome();
+      }
     }
 
     pixendevent();
@@ -373,8 +386,9 @@ gate_move_think(ignoreplayers) {
   self.disablefinalkillcam = 1;
   corpse_delay = 0;
 
-  if(isDefined(self.waittime))
+  if(isDefined(self.waittime)) {
     wait(self.waittime);
+  }
 
   for(;;) {
     wait 0.4;
@@ -444,8 +458,9 @@ gate_move_think(ignoreplayers) {
         if(isDefined(entity.carried) && entity.carried == 1) {
           continue;
         }
-        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath)
+        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
           entity domaxdamage(self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
+        }
 
         continue;
       }
@@ -455,17 +470,20 @@ gate_move_think(ignoreplayers) {
 
     self destroy_supply_crates();
 
-    if(gettime() > corpse_delay)
+    if(gettime() > corpse_delay) {
       self destroy_corpses();
+    }
 
     if(level.gametype == "ctf") {
       foreach(flag in level.flags) {
-        if(flag.visuals[0] istouching(self.kill_trigger))
+        if(flag.visuals[0] istouching(self.kill_trigger)) {
           flag maps\mp\gametypes\ctf::returnflag();
+        }
       }
     } else if(level.gametype == "sd" && !level.multibomb) {
-      if(level.sdbomb.visuals[0] istouching(self.kill_trigger))
+      if(level.sdbomb.visuals[0] istouching(self.kill_trigger)) {
         level.sdbomb maps\mp\gametypes\_gameobjects::returnhome();
+      }
     }
 
     pixendevent();
@@ -473,11 +491,13 @@ gate_move_think(ignoreplayers) {
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return undefined;
+  }
 
-  if(!isplayer(self))
+  if(!isplayer(self)) {
     return undefined;
+  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {
@@ -508,7 +528,8 @@ destroy_corpses() {
   corpses = getcorpsearray();
 
   for(i = 0; i < corpses.size; i++) {
-    if(distancesquared(corpses[i].origin, self.origin) < 10000)
+    if(distancesquared(corpses[i].origin, self.origin) < 10000) {
       corpses[i] delete();
+    }
   }
 }

@@ -27,8 +27,9 @@ init() {
   var_2["mugger"] = 20;
 
   for(;;) {
-    if(!isDefined(var_2[var_0]))
+    if(!isDefined(var_2[var_0])) {
       var_0 = "war";
+    }
 
     var_3 = tablelookupbyrow("mp\xp_event_table.csv", var_1, 0);
     var_4 = tablelookupbyrow("mp\xp_event_table.csv", var_1, 1);
@@ -39,10 +40,12 @@ init() {
       break;
     }
 
-    if(var_3 == "win" || var_3 == "loss" || var_3 == "tie")
+    if(var_3 == "win" || var_3 == "loss" || var_3 == "tie") {
       var_6 = float(var_6);
-    else
+    }
+    else {
       var_6 = int(var_6);
+    }
 
     if(var_6 != -1) {
       var_5 = int(var_5);
@@ -71,13 +74,15 @@ onplayerconnect() {
 }
 
 addnemesisscoreforplayer(var_0, var_1) {
-  if(!isDefined(self.pers["nemesis_tracking"][var_0]))
+  if(!isDefined(self.pers["nemesis_tracking"][var_0])) {
     self.pers["nemesis_tracking"][var_0] = 0.0;
+  }
 
   self.pers["nemesis_tracking"][var_0] = self.pers["nemesis_tracking"][var_0] + var_1;
 
-  if(self.pers["nemesis_guid"] == "" || self.pers["nemesis_tracking"][var_0] > self.pers["nemesis_tracking"][self.pers["nemesis_guid"]])
+  if(self.pers["nemesis_guid"] == "" || self.pers["nemesis_tracking"][var_0] > self.pers["nemesis_tracking"][self.pers["nemesis_guid"]]) {
     self.pers["nemesis_guid"] = var_0;
+  }
 }
 
 killedplayer(var_0, var_1, var_2, var_3, var_4) {
@@ -88,10 +93,12 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
   var_8 = gettime();
 
   if(maps\mp\_utility::isbulletdamage(var_3)) {
-    if(self.lastkilltime == var_8)
+    if(self.lastkilltime == var_8) {
       self.bulletstreak++;
-    else
+    }
+    else {
       self.bulletstreak = 1;
+    }
   } else
     self.bulletstreak = 0;
 
@@ -102,12 +109,14 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
   thread updaterecentkills(var_0, var_2);
 
   if(!maps\mp\_utility::iskillstreakweapon(var_2)) {
-    if(var_2 == "none")
+    if(var_2 == "none") {
       return 0;
+    }
 
     if(isDefined(var_1.throwinggrenade)) {
-      if(var_1.throwinggrenade == "h1_fraggrenade_mp")
+      if(var_1.throwinggrenade == "h1_fraggrenade_mp") {
         self.modifiers["cooking"] = 1;
+      }
     }
 
     if(weaponinventorytype(var_2) == "primary") {
@@ -115,97 +124,127 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
       self.segments["killDistanceCount"]++;
     }
 
-    if(var_3 == "MOD_HEAD_SHOT")
+    if(var_3 == "MOD_HEAD_SHOT") {
       headshotevent(var_0, var_2, var_3);
-
-    if(level.numkills == 1)
-      firstbloodevent(var_0, var_2, var_3);
-
-    if(level.teambased && var_8 - var_1.lastkilltime < 3000 && var_1.lastkilledplayer != self)
-      avengedplayerevent(var_0, var_2, var_3);
-
-    if(!isalive(self) && self != var_1 && isDefined(self.deathtime) && self.deathtime + 1200 < gettime())
-      postdeathkillevent(var_0);
-
-    if(self.pers["cur_death_streak"] > 3)
-      comebackevent(var_0, var_2, var_3);
-
-    if(isDefined(self.assistedsuicide) && self.assistedsuicide)
-      assistedsuicideevent(var_0, var_2, var_3);
-
-    if(islongshot(self, var_2, var_3, var_1))
-      longshotevent(var_0, var_2, var_3);
-
-    if(isresuce(var_1, var_8))
-      defendedplayerevent(var_0, var_2, var_3);
-
-    if(var_6 > 0 && isbuzzkillevent(var_1))
-      buzzkillevent(var_0, var_1, var_2, var_3);
-
-    if(isoneshotkill(var_1, var_2, var_3))
-      oneshotkillevent(var_0, var_2, var_3);
-
-    if(isDefined(self.lastkilledby) && self.lastkilledby == var_1)
-      revengeevent(var_0);
-
-    if(var_1.idflags &level.idflags_penetration)
-      bulletpenetrationevent(var_0, var_2);
-
-    if(ispointblank(var_1, var_3))
-      pointblankevent(var_0, var_2, var_3);
-
-    if(self.health < 20 && self.health > 0)
-      neardeathkillevent(var_2, var_3);
-
-    if(common_scripts\utility::isflashed())
-      flashedkillevent(var_2, var_3);
-
-    if(isthinkfast(var_2, var_3))
-      thinkfastevent();
-
-    if(self.bulletstreak == 2)
-      multikillonebulletevent();
-
-    if(isbackstabevent(var_1, var_2, var_3))
-      backstabevent();
-
-    if(isthrowbackevent(var_1, var_2, var_3))
-      throwbackkillevent();
-
-    if(isDefined(self.pickedupweaponfrom[var_2]) && self.pickedupweaponfrom[var_2] == var_1 && !maps\mp\_utility::ismeleemod(var_3))
-      takeandkillevent();
-
-    if(maps\mp\_utility::isbulletdamage(var_3) && !isDefined(self.assistedsuicide)) {
-      if(maps\mp\_utility::_hasperk("specialty_bulletdamage"))
-        stoppingpowerevent();
-
-      if(maps\mp\_utility::_hasperk("specialty_fastreload"))
-        sleightofhandevent(var_2);
-
-      if(maps\mp\_utility::_hasperk("specialty_rof") && maps\mp\_utility::is_true(var_1.laststand))
-        doubletapevent();
-
-      if(maps\mp\_utility::_hasperk("specialty_twoprimaries") && var_2 == self.secondaryweapon)
-        overkillevent();
-
-      if(maps\mp\_utility::_hasperk("specialty_bulletaccuracy") && self playerads() < 0.5)
-        steadyaimevent();
-
-      if(maps\mp\_utility::_hasperk("specialty_pistoldeath") && maps\mp\_utility::is_true(self.laststand) && maps\mp\_utility::is_true(var_1.laststand))
-        laststandevent();
-
-      if(maps\mp\_utility::_hasperk("specialty_holdbreath") && weaponclass(var_2) == "sniper")
-        ironlungsevent();
-
-      if(maps\mp\_utility::_hasperk("specialty_parabolic"))
-        eavesdropevent();
     }
 
-    if(maps\mp\_utility::_hasperk("specialty_radarimmune") && var_1 maps\mp\gametypes\_hardpoints::playerhasuavactive())
-      uavjammerevent();
+    if(level.numkills == 1) {
+      firstbloodevent(var_0, var_2, var_3);
+    }
 
-    if(maps\mp\_utility::_hasperk("specialty_explosivedamage") && isexplosivedamagemod(var_3))
+    if(level.teambased && var_8 - var_1.lastkilltime < 3000 && var_1.lastkilledplayer != self) {
+      avengedplayerevent(var_0, var_2, var_3);
+    }
+
+    if(!isalive(self) && self != var_1 && isDefined(self.deathtime) && self.deathtime + 1200 < gettime()) {
+      postdeathkillevent(var_0);
+    }
+
+    if(self.pers["cur_death_streak"] > 3) {
+      comebackevent(var_0, var_2, var_3);
+    }
+
+    if(isDefined(self.assistedsuicide) && self.assistedsuicide) {
+      assistedsuicideevent(var_0, var_2, var_3);
+    }
+
+    if(islongshot(self, var_2, var_3, var_1)) {
+      longshotevent(var_0, var_2, var_3);
+    }
+
+    if(isresuce(var_1, var_8)) {
+      defendedplayerevent(var_0, var_2, var_3);
+    }
+
+    if(var_6 > 0 && isbuzzkillevent(var_1)) {
+      buzzkillevent(var_0, var_1, var_2, var_3);
+    }
+
+    if(isoneshotkill(var_1, var_2, var_3)) {
+      oneshotkillevent(var_0, var_2, var_3);
+    }
+
+    if(isDefined(self.lastkilledby) && self.lastkilledby == var_1) {
+      revengeevent(var_0);
+    }
+
+    if(var_1.idflags &level.idflags_penetration) {
+      bulletpenetrationevent(var_0, var_2);
+    }
+
+    if(ispointblank(var_1, var_3)) {
+      pointblankevent(var_0, var_2, var_3);
+    }
+
+    if(self.health < 20 && self.health > 0) {
+      neardeathkillevent(var_2, var_3);
+    }
+
+    if(common_scripts\utility::isflashed()) {
+      flashedkillevent(var_2, var_3);
+    }
+
+    if(isthinkfast(var_2, var_3)) {
+      thinkfastevent();
+    }
+
+    if(self.bulletstreak == 2) {
+      multikillonebulletevent();
+    }
+
+    if(isbackstabevent(var_1, var_2, var_3)) {
+      backstabevent();
+    }
+
+    if(isthrowbackevent(var_1, var_2, var_3)) {
+      throwbackkillevent();
+    }
+
+    if(isDefined(self.pickedupweaponfrom[var_2]) && self.pickedupweaponfrom[var_2] == var_1 && !maps\mp\_utility::ismeleemod(var_3)) {
+      takeandkillevent();
+    }
+
+    if(maps\mp\_utility::isbulletdamage(var_3) && !isDefined(self.assistedsuicide)) {
+      if(maps\mp\_utility::_hasperk("specialty_bulletdamage")) {
+        stoppingpowerevent();
+      }
+
+      if(maps\mp\_utility::_hasperk("specialty_fastreload")) {
+        sleightofhandevent(var_2);
+      }
+
+      if(maps\mp\_utility::_hasperk("specialty_rof") && maps\mp\_utility::is_true(var_1.laststand)) {
+        doubletapevent();
+      }
+
+      if(maps\mp\_utility::_hasperk("specialty_twoprimaries") && var_2 == self.secondaryweapon) {
+        overkillevent();
+      }
+
+      if(maps\mp\_utility::_hasperk("specialty_bulletaccuracy") && self playerads() < 0.5) {
+        steadyaimevent();
+      }
+
+      if(maps\mp\_utility::_hasperk("specialty_pistoldeath") && maps\mp\_utility::is_true(self.laststand) && maps\mp\_utility::is_true(var_1.laststand)) {
+        laststandevent();
+      }
+
+      if(maps\mp\_utility::_hasperk("specialty_holdbreath") && weaponclass(var_2) == "sniper") {
+        ironlungsevent();
+      }
+
+      if(maps\mp\_utility::_hasperk("specialty_parabolic")) {
+        eavesdropevent();
+      }
+    }
+
+    if(maps\mp\_utility::_hasperk("specialty_radarimmune") && var_1 maps\mp\gametypes\_hardpoints::playerhasuavactive()) {
+      uavjammerevent();
+    }
+
+    if(maps\mp\_utility::_hasperk("specialty_explosivedamage") && isexplosivedamagemod(var_3)) {
       sonicboomevent();
+    }
 
     checkhigherrankkillevents(var_1);
     checkweaponspecifickill(var_1, var_2, var_3);
@@ -213,14 +252,17 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
 
   checkstreakingevents(var_1);
 
-  if(!isDefined(self.pers["killed_players"][var_5]))
+  if(!isDefined(self.pers["killed_players"][var_5])) {
     self.pers["killed_players"][var_5] = 0;
+  }
 
-  if(!isDefined(self.killedplayerscurrent[var_5]))
+  if(!isDefined(self.killedplayerscurrent[var_5])) {
     self.killedplayerscurrent[var_5] = 0;
+  }
 
-  if(!isDefined(var_1.pers["killed_by"][var_7]))
+  if(!isDefined(var_1.pers["killed_by"][var_7])) {
     var_1.pers["killed_by"][var_7] = 0;
+  }
 
   self.pers["killed_players"][var_5]++;
   self.killedplayerscurrent[var_5]++;
@@ -229,8 +271,9 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
   var_1.lastkilledby = self;
   var_1 addnemesisscoreforplayer(var_7, 1.5);
 
-  if(self.pers["prey_guid"] == "" || self.pers["killed_players"][var_5] > self.pers["killed_players"][self.pers["prey_guid"]])
+  if(self.pers["prey_guid"] == "" || self.pers["killed_players"][var_5] > self.pers["killed_players"][self.pers["prey_guid"]]) {
     self.pers["prey_guid"] = var_5;
+  }
 }
 
 ispointblank(var_0, var_1) {
@@ -238,11 +281,13 @@ ispointblank(var_0, var_1) {
     var_2 = self.origin;
     var_3 = 9216;
 
-    if(isDefined(var_0.attackerposition))
+    if(isDefined(var_0.attackerposition)) {
       var_2 = var_0.attackerposition;
+    }
 
-    if(distancesquared(var_2, var_0.origin) < var_3)
+    if(distancesquared(var_2, var_0.origin) < var_3) {
       return 1;
+    }
   }
 
   return 0;
@@ -252,8 +297,9 @@ pointblankevent(var_0, var_1, var_2) {
   maps\mp\_utility::incplayerstat("pointblank", 1);
   level thread maps\mp\gametypes\_rank::awardgameevent("pointblank", self, var_1, undefined, var_2);
 
-  if(maps\mp\_utility::_hasperk("specialty_quieter"))
+  if(maps\mp\_utility::_hasperk("specialty_quieter")) {
     maps\mp\gametypes\_missions::processchallenge("ch_deadsilence");
+  }
 }
 
 killedplayerevent(var_0, var_1, var_2) {
@@ -284,12 +330,14 @@ killedplayerevent(var_0, var_1, var_2) {
 }
 
 isthinkfast(var_0, var_1) {
-  if(maps\mp\_utility::is_true(self.assistedsuicide))
+  if(maps\mp\_utility::is_true(self.assistedsuicide)) {
     return 0;
+  }
 
   if(var_1 == "MOD_IMPACT" || var_1 == "MOD_HEAD_SHOT") {
-    if(isthinkfastweapon(var_0))
+    if(isthinkfastweapon(var_0)) {
       return 1;
+    }
   }
 
   return 0;
@@ -323,8 +371,9 @@ bulletpenetrationevent(var_0, var_1) {
   level thread maps\mp\gametypes\_rank::awardgameevent("bulletpen", self);
   maps\mp\gametypes\_missions::processchallenge("ch_xrayvision");
 
-  if(maps\mp\_utility::_hasperk("specialty_bulletpenetration"))
+  if(maps\mp\_utility::_hasperk("specialty_bulletpenetration")) {
     maps\mp\gametypes\_missions::processchallenge("ch_deepimpact");
+  }
 }
 
 multikillonebulletevent() {
@@ -338,8 +387,9 @@ neardeathkillevent(var_0, var_1) {
   maps\mp\_utility::incplayerstat("near_death_kill", 1);
   level thread maps\mp\gametypes\_rank::awardgameevent("near_death_kill", self, var_0, undefined, var_1);
 
-  if(maps\mp\_utility::_hasperk("specialty_armorvest"))
+  if(maps\mp\_utility::_hasperk("specialty_armorvest")) {
     maps\mp\gametypes\_missions::processchallenge("ch_juggernaut");
+  }
 }
 
 flashedkillevent(var_0, var_1) {
@@ -348,34 +398,41 @@ flashedkillevent(var_0, var_1) {
 }
 
 isoneshotkill(var_0, var_1, var_2) {
-  if(var_0.attackers.size != 1)
+  if(var_0.attackers.size != 1) {
     return 0;
+  }
 
-  if(!isDefined(var_0.attackers[self.guid]))
+  if(!isDefined(var_0.attackers[self.guid])) {
     return 0;
+  }
 
-  if(maps\mp\_utility::ismeleemod(var_2))
+  if(maps\mp\_utility::ismeleemod(var_2)) {
     return 0;
+  }
 
-  if(gettime() != var_0.attackerdata[self.guid].firsttimedamaged)
+  if(gettime() != var_0.attackerdata[self.guid].firsttimedamaged) {
     return 0;
+  }
 
   var_3 = maps\mp\_utility::getweaponclass(var_1);
 
-  if(var_3 == "weapon_sniper" || var_3 == "weapon_shotgun")
+  if(var_3 == "weapon_sniper" || var_3 == "weapon_shotgun") {
     return 1;
+  }
 
   return 0;
 }
 
 islongshot(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3.agentbody))
+  if(isDefined(var_3.agentbody)) {
     return 0;
+  }
 
   var_4 = self.origin;
 
-  if(isDefined(var_3.attackerposition))
+  if(isDefined(var_3.attackerposition)) {
     var_4 = var_3.attackerposition;
+  }
 
   if(isalive(var_0) && !var_0 maps\mp\_utility::isusingremote() && (var_2 == "MOD_RIFLE_BULLET" || var_2 == "MOD_PISTOL_BULLET" || var_2 == "MOD_HEAD_SHOT" || issubstr(var_1, "exocrossbow") || issubstr(var_1, "m990")) && !maps\mp\_utility::iskillstreakweapon(var_1) && !isDefined(var_0.assistedsuicide)) {
     var_5 = maps\mp\_utility::getweaponclass(var_1);
@@ -403,25 +460,29 @@ islongshot(var_0, var_1, var_2, var_3) {
         break;
     }
 
-    if(issubstr(var_1, "exocrossbow"))
+    if(issubstr(var_1, "exocrossbow")) {
       var_6 = 1200;
+    }
 
     var_7 = var_6 * var_6;
 
-    if(distancesquared(var_4, var_3.origin) > var_7)
+    if(distancesquared(var_4, var_3.origin) > var_7) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 isresuce(var_0, var_1) {
-  if(!level.teambased)
+  if(!level.teambased) {
     return 0;
+  }
 
   foreach(var_4, var_3 in var_0.damagedplayers) {
-    if(var_4 != self.guid && var_1 - var_3 < 500)
+    if(var_4 != self.guid && var_1 - var_3 < 500) {
       return 1;
+    }
   }
 
   return 0;
@@ -443,8 +504,9 @@ headshotevent(var_0, var_1, var_2) {
   level thread maps\mp\gametypes\_rank::awardgameevent("headshot", self, var_1, undefined, var_2);
   thread maps\mp\_matchdata::logkillevent(var_0, "headshot");
 
-  if(!isDefined(self.headhuntercounter))
+  if(!isDefined(self.headhuntercounter)) {
     self.headhuntercounter = 1;
+  }
 
   if(isDefined(self.headshots) && self.headshots >= self.headhuntercounter * 10) {
     maps\mp\gametypes\_missions::processchallenge("ch_headhunter");
@@ -453,14 +515,17 @@ headshotevent(var_0, var_1, var_2) {
 }
 
 isthrowbackevent(var_0, var_1, var_2) {
-  if(!isexplosivedamagemod(var_2))
+  if(!isexplosivedamagemod(var_2)) {
     return 0;
+  }
 
-  if(!issubstr(var_1, "h1_frag"))
+  if(!issubstr(var_1, "h1_frag")) {
     return 0;
+  }
 
-  if(isDefined(var_0) && isDefined(var_0.explosiveinfo) && isDefined(var_0.explosiveinfo["throwbackKill"]) && var_0.explosiveinfo["throwbackKill"])
+  if(isDefined(var_0) && isDefined(var_0.explosiveinfo) && isDefined(var_0.explosiveinfo["throwbackKill"]) && var_0.explosiveinfo["throwbackKill"]) {
     return 1;
+  }
 
   return 0;
 }
@@ -516,18 +581,21 @@ postdeathkillevent(var_0) {
 }
 
 isbackstabevent(var_0, var_1, var_2) {
-  if(!maps\mp\_utility::ismeleemod(var_2))
+  if(!maps\mp\_utility::ismeleemod(var_2)) {
     return 0;
+  }
 
-  if(maps\mp\gametypes\_weapons::isriotshield(var_1))
+  if(maps\mp\gametypes\_weapons::isriotshield(var_1)) {
     return 0;
+  }
 
   var_3 = var_0 getplayerangles();
   var_4 = self getplayerangles();
   var_5 = angleclamp180(var_3[1] - var_4[1]);
 
-  if(abs(var_5) < 75)
+  if(abs(var_5) < 75) {
     return 1;
+  }
 
   return 0;
 }
@@ -548,21 +616,25 @@ revengeevent(var_0) {
 }
 
 multikillevent(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   var_4 = maps\mp\gametypes\_missions::get_challenge_weapon_class(var_2);
   var_5 = maps\mp\_utility::getbaseweaponname(var_2);
 
-  if(maps\mp\_utility::islootweapon(var_5))
+  if(maps\mp\_utility::islootweapon(var_5)) {
     var_5 = maps\mp\gametypes\_class::getbasefromlootversion(var_5);
+  }
 
   var_6 = "";
 
-  if(common_scripts\utility::string_starts_with(var_5, "iw5_"))
+  if(common_scripts\utility::string_starts_with(var_5, "iw5_")) {
     var_6 = getsubstr(var_5, 4);
-  else if(common_scripts\utility::string_starts_with(var_5, "h1_"))
+  }
+  else if(common_scripts\utility::string_starts_with(var_5, "h1_")) {
     var_6 = getsubstr(var_5, 3);
+  }
 
   switch (var_1) {
     case 2:
@@ -576,8 +648,9 @@ multikillevent(var_0, var_1, var_2, var_3) {
       maps\mp\_utility::incplayerstat("triplekill", 1);
       maps\mp\gametypes\_missions::processchallenge("ch_killer_triple");
 
-      if(maps\mp\gametypes\_missions::isatbrinkofdeath())
+      if(maps\mp\gametypes\_missions::isatbrinkofdeath()) {
         maps\mp\gametypes\_missions::processchallenge("ch_triplehurt");
+      }
 
       break;
     case 4:
@@ -623,8 +696,9 @@ takeandkillevent() {
   level thread maps\mp\gametypes\_rank::awardgameevent("take_and_kill", self);
   maps\mp\gametypes\_missions::processchallenge("ch_backfire");
 
-  if(maps\mp\_utility::getmapname() == "mp_bog_summer")
+  if(maps\mp\_utility::getmapname() == "mp_bog_summer") {
     maps\mp\gametypes\_missions::processchallenge("ch_summer_backfire");
+  }
 }
 
 setuplinkstats() {
@@ -712,8 +786,9 @@ monitortagcollector(var_0) {
   var_0 notify("tagCollector");
   var_0 endon("tagCollector");
 
-  if(!isDefined(var_0.tagcollectortotal))
+  if(!isDefined(var_0.tagcollectortotal)) {
     var_0.tagcollectortotal = 0;
+  }
 
   var_0.tagcollectortotal++;
 
@@ -724,8 +799,9 @@ monitortagcollector(var_0) {
 
   wait 2.5;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.tagcollectortotal = 0;
+  }
 }
 
 bombplantevent() {
@@ -748,8 +824,9 @@ bombdefuseevent(var_0) {
   if(var_0 == "ninja_defuse" || var_0 == "last_man_defuse") {
     maps\mp\_utility::incplayerstat(var_0, 1);
 
-    if(var_0 == "ninja_defuse" && isDefined(level.bombowner) && level.bombowner.bombplantedtime + 6000 + level.defusetime * 1000 > gettime())
+    if(var_0 == "ninja_defuse" && isDefined(level.bombowner) && level.bombowner.bombplantedtime + 6000 + level.defusetime * 1000 > gettime()) {
       maps\mp\gametypes\_missions::processchallenge("ch_ninja");
+    }
   }
 
   level thread maps\mp\gametypes\_rank::awardgameevent(var_0, self);
@@ -881,8 +958,9 @@ firstbloodevent(var_0, var_1, var_2) {
 isbuzzkillevent(var_0) {
   var_1 = var_0.pers["cur_kill_streak"];
 
-  if(var_1 == 2 || var_1 == 4 || var_1 == 6)
+  if(var_1 == 2 || var_1 == 4 || var_1 == 6) {
     return 1;
+  }
 
   return 0;
 }
@@ -946,38 +1024,48 @@ disconnected() {
   var_0 = self.guid;
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
-    if(isDefined(level.players[var_1].pers["killed_players"][var_0]))
+    if(isDefined(level.players[var_1].pers["killed_players"][var_0])) {
       level.players[var_1].pers["killed_players"][var_0] = undefined;
+    }
 
-    if(isDefined(level.players[var_1].killedplayerscurrent[var_0]))
+    if(isDefined(level.players[var_1].killedplayerscurrent[var_0])) {
       level.players[var_1].killedplayerscurrent[var_0] = undefined;
+    }
 
-    if(isDefined(level.players[var_1].pers["killed_by"][var_0]))
+    if(isDefined(level.players[var_1].pers["killed_by"][var_0])) {
       level.players[var_1].pers["killed_by"][var_0] = undefined;
+    }
 
-    if(isDefined(level.players[var_1].pers["nemesis_tracking"][var_0]))
+    if(isDefined(level.players[var_1].pers["nemesis_tracking"][var_0])) {
       level.players[var_1].pers["nemesis_tracking"][var_0] = undefined;
+    }
 
-    if(isDefined(level.players[var_1].pers["nemesis_guid"]) && level.players[var_1].pers["nemesis_guid"] == var_0)
+    if(isDefined(level.players[var_1].pers["nemesis_guid"]) && level.players[var_1].pers["nemesis_guid"] == var_0) {
       level.players[var_1] choosenextbestnemesis();
+    }
 
-    if(isDefined(level.players[var_1].pers["prey_guid"]) && level.players[var_1].pers["prey_guid"] == var_0)
+    if(isDefined(level.players[var_1].pers["prey_guid"]) && level.players[var_1].pers["prey_guid"] == var_0) {
       level.players[var_1] choosenextbestprey();
+    }
 
-    if(isDefined(level.players[var_1].attackers) && isDefined(level.players[var_1].attackers[var_0]))
+    if(isDefined(level.players[var_1].attackers) && isDefined(level.players[var_1].attackers[var_0])) {
       level.players[var_1].attackers[var_0] = undefined;
+    }
 
-    if(isDefined(level.players[var_1].attackerdata) && isDefined(level.players[var_1].attackerdata[var_0]))
+    if(isDefined(level.players[var_1].attackerdata) && isDefined(level.players[var_1].attackerdata[var_0])) {
       level.players[var_1].attackerdata[var_0] = undefined;
+    }
 
-    if(isDefined(level.players[var_1].enemyhitcounts) && isDefined(level.players[var_1].enemyhitcounts[var_0]))
+    if(isDefined(level.players[var_1].enemyhitcounts) && isDefined(level.players[var_1].enemyhitcounts[var_0])) {
       level.players[var_1].enemyhitcounts[var_0] = undefined;
+    }
   }
 }
 
 updaterecentkills(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "";
+  }
 
   self endon("disconnect");
   level endon("game_ended");
@@ -986,13 +1074,15 @@ updaterecentkills(var_0, var_1) {
   self.recentkillcount++;
   var_2 = 0;
 
-  if(self playerads() >= 0.2)
+  if(self playerads() >= 0.2) {
     var_2 = 1;
+  }
 
   wait 2.0;
 
-  if(self.recentkillcount > 1)
+  if(self.recentkillcount > 1) {
     multikillevent(var_0, self.recentkillcount, var_1, var_2);
+  }
 
   self.recentkillcount = 0;
 }
@@ -1004,13 +1094,15 @@ checkvandalismmedal(var_0) {
   if(!isDefined(self.attackerlist)) {
     return;
   }
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self;
+  }
 
   var_1 = self.owner;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self;
+  }
 
   foreach(var_3 in self.attackerlist) {
     if(!isDefined(var_3)) {
@@ -1082,8 +1174,9 @@ checkhigherrankkillevents(var_0) {
   }
   var_1 = level.players;
 
-  if(level.teambased)
+  if(level.teambased) {
     var_1 = level.teamlist[maps\mp\_utility::getotherteam(self.team)];
+  }
 
   if(var_1.size < 3) {
     return;
@@ -1107,8 +1200,9 @@ processassistevent(var_0, var_1) {
   }
   var_2 = "assist";
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
+  }
 
   self endon("disconnect");
   var_0 endon("disconnect");
@@ -1127,8 +1221,9 @@ processassistevent(var_0, var_1) {
     maps\mp\_utility::incplayerstat("assists", 1);
     maps\mp\_utility::incpersstat("assists", 1);
 
-    if(!maps\mp\_utility::is_true(level.assists_count_disabled))
+    if(!maps\mp\_utility::is_true(level.assists_count_disabled)) {
       self.assists = maps\mp\_utility::getpersstat("assists");
+    }
 
     maps\mp\gametypes\_persistence::statsetchild("round", "assists", self.assists);
     thread maps\mp\gametypes\_missions::playerassist();
@@ -1146,8 +1241,9 @@ sleightofhandeventwatcher() {
   level endon("game_ended");
   var_0 = common_scripts\utility::waittill_any_return("sleightOfHandEventEarned", "sleightOfHandEventFailed");
 
-  if(var_0 == "sleightOfHandEventEarned")
+  if(var_0 == "sleightOfHandEventEarned") {
     maps\mp\gametypes\_missions::processchallenge("ch_sleightofhand");
+  }
 
   self.sleightofhandeventweap = undefined;
 }
@@ -1160,8 +1256,9 @@ sleightofhandtimer() {
   level endon("game_ended");
   wait 3;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("sleightOfHandEventFailed");
+  }
 }
 
 sleightofhandreloadwatch(var_0) {
@@ -1173,8 +1270,9 @@ sleightofhandreloadwatch(var_0) {
   thread sleightofhandtimer();
   self waittill("reload");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.sleightofhandeventweap = var_0;
+  }
 }
 
 sleightofhandevent(var_0, var_1) {

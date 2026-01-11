@@ -35,21 +35,26 @@ main() {
 
   level.assists_disabled = true;
 
-  if(level.matchRules_damageMultiplier || level.matchRules_vampirism)
+  if(level.matchRules_damageMultiplier || level.matchRules_vampirism) {
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
+  }
 
   SetTeamMode("ffa");
 
   game["dialog"]["gametype"] = "freeforall";
 
-  if(getDvarInt("g_hardcore"))
+  if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  else if(getDvarInt("camera_thirdPerson"))
+  }
+  else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  else if(getDvarInt("scr_diehard"))
+  }
+  else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  else if(getDvarInt("scr_" + level.gameType + "_promode"))
+  }
+  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
+  }
 }
 
 initializeMatchRules() {
@@ -116,11 +121,13 @@ onSpawnPlayer() {
 onNormalDeath(victim, attacker, lifeId) {
   highestScore = 0;
   foreach(player in level.players) {
-    if(isDefined(player.score) && player.score > highestScore)
+    if(isDefined(player.score) && player.score > highestScore) {
       highestScore = player.score;
+    }
   }
-  if(game["state"] == "postgame" && attacker.score >= highestScore)
+  if(game["state"] == "postgame" && attacker.score >= highestScore) {
     attacker.finalKill = true;
+  }
 }
 
 onPlayerScore(event, player, victim) {

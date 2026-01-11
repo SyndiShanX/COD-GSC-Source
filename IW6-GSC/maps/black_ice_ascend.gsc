@@ -8,14 +8,16 @@ start() {
   maps\black_ice_util::player_start("player_start_ascend");
   maps\_utility::vision_set_fog_changes("black_ice_catwalks", 0);
 
-  if(level._allies.size < 2)
+  if(level._allies.size < 2) {
     level maps\black_ice_util::spawn_allies();
+  }
 
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_ignoresuppression, 1);
   var_0 = getent("vignette_alpha_team_rigascend", "script_noteworthy");
 
-  if(level._bravo.size < 2)
+  if(level._bravo.size < 2) {
     level maps\black_ice_util::spawn_bravo();
+  }
 
   var_1 = common_scripts\utility::getstruct("vignette_beta_rig_ascend", "script_noteworthy");
   var_2 = getnode("bc_node_ascend_ally1", "targetname");
@@ -43,8 +45,9 @@ start() {
 main() {
   level.ascend_launch_pos = common_scripts\utility::getstruct("ascend_launch_pos", "script_noteworthy");
 
-  if(!isDefined(level.ascend_anim_node))
+  if(!isDefined(level.ascend_anim_node)) {
     level.ascend_anim_node = getent("vignette_alpha_team_rigascend", "script_noteworthy");
+  }
 
   level.bravo_ascend_anim_node = common_scripts\utility::getstruct("vignette_beta_rig_ascend", "script_noteworthy");
   level.bravo_ascend_anim_node.origin = level.ascend_anim_node.origin;
@@ -90,8 +93,9 @@ section_precache() {
 ally_setup() {}
 
 player_setup(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 60;
+  }
 
   maps\black_ice_util::setup_player_for_animated_sequence(1, var_0, var_1, var_2, 0, undefined);
 }
@@ -188,8 +192,9 @@ ascend_dialog() {
   maps\_utility::smart_radio_dialogue("blackice_diz_atthetop");
   level._allies[0] maps\_utility::smart_dialogue("black_ice_bkr_rookfuentesstickwithme");
 
-  if(!common_scripts\utility::flag("flag_player_ascending"))
+  if(!common_scripts\utility::flag("flag_player_ascending")) {
     level._allies[0] maps\_utility::smart_dialogue("blackice_bkr_yourmarkrook");
+  }
 
   common_scripts\utility::flag_wait("flag_player_ascending");
   wait 0.8;
@@ -221,13 +226,15 @@ dialog_linesout() {
   level._allies[0] maps\_utility::smart_dialogue("blackice_bkr_linesuphere");
   wait 0.8;
 
-  if(!common_scripts\utility::flag("flag_player_line_launched"))
+  if(!common_scripts\utility::flag("flag_player_line_launched")) {
     maps\_utility::smart_radio_dialogue("blackice_diz_lineout");
+  }
 
   wait 3.0;
 
-  if(!common_scripts\utility::flag("flag_player_line_launched"))
+  if(!common_scripts\utility::flag("flag_player_line_launched")) {
     level._allies[0] maps\_utility::smart_dialogue("blackice_bkr_ropeup");
+  }
 }
 
 runin_to_ascend(var_0, var_1) {
@@ -243,8 +250,9 @@ runin_to_ascend(var_0, var_1) {
   var_0 maps\_anim::anim_single(var_2, "ascend_runin");
   level.ascend_anim_node thread maps\_anim::anim_loop(var_2, "ascend_waiting", "stop_loop");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     common_scripts\utility::flag_set(var_1);
+  }
 }
 
 ascend_logic() {
@@ -264,8 +272,9 @@ ascend_logic() {
     level.launchers_attached = 0;
   }
 
-  if(isDefined(level.ascend_waiting) && level.ascend_waiting)
+  if(isDefined(level.ascend_waiting) && level.ascend_waiting) {
     level.ascend_anim_node thread maps\_anim::anim_loop(var_0, "ascend_waiting", "stop_loop");
+  }
 
   maps\black_ice_util::waittill_trigger_activate_looking_at(level.ascend_launch_pos, "hint_ascend_init", 150, undefined, undefined, 5, "flag_ascend_ready");
   level.ascend_launch_pos = undefined;
@@ -311,8 +320,9 @@ ascend_logic() {
   level.player_rig setanim(level.scr_anim["player_rig"]["alpha_rig_ascend_aim_loop"][0], 1, 0, 1);
   level.ascend_launcher setanim(level.scr_anim["ascend_launcher"]["alpha_rig_ascend_aim_loop"][0], 1, 0, 1);
 
-  if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled())
+  if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled()) {
     level.player enablemousesteer(1);
+  }
 
   level.player_rig thread ascend_aim_logic();
   maps\_anim::anim_set_rate(var_0, "alpha_rope_shoot", 0.0);
@@ -345,8 +355,9 @@ ascend_logic() {
   level notify("ascend_rope_launched");
   common_scripts\utility::flag_set("flag_player_line_launched");
 
-  if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled())
+  if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled()) {
     level.player enablemousesteer(0);
+  }
 
   setthreatbias("axis", "player", -256);
 
@@ -396,15 +407,17 @@ ascend_logic() {
   calculate_bravo_rubberband_base();
   maps\_utility::display_hint("hint_ascend");
 
-  while(!level.player attackbuttonpressed())
+  while(!level.player attackbuttonpressed()) {
     wait(level.timestep);
+  }
 
   common_scripts\utility::flag_set("flag_player_ascending");
   level.player_ascend_anim_node notify("stop_loop");
   level.ascend_anim_node notify("stop_loop");
 
-  foreach(var_9 in var_3)
+  foreach(var_9 in var_3) {
   var_9 linkto(level.player_ascend_anim_node);
+  }
 
   thread maps\black_ice_audio::sfx_rig_ascend_logic("go");
   level.player lerpviewangleclamp(var_7, 0, 0, 0, 0, 0, 0);
@@ -472,8 +485,9 @@ ascend_aim_lerp_anims() {
   level endon("ascend_rope_launched");
   var_0 = level.player getnormalizedcameramovement();
 
-  if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled())
+  if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled()) {
     var_0 = (var_0[0], var_0[1] * -1, var_0[2]);
+  }
 
   var_1 = common_scripts\utility::ter_op(var_0[0] > 0.1, 1, 0);
   var_2 = common_scripts\utility::ter_op(var_0[0] < -0.1, 1, 0);
@@ -489,27 +503,35 @@ ascend_aim_lerp_anims() {
   var_12 = 0.0;
 
   if(var_1) {
-    if(!var_6)
+    if(!var_6) {
       var_9 = var_0[0];
-    else
+    }
+    else {
       var_10 = -1.0 * var_0[0];
+    }
   } else if(var_2) {
-    if(!var_5)
+    if(!var_5) {
       var_10 = -1.0 * var_0[0];
-    else
+    }
+    else {
       var_9 = var_0[0];
+    }
   }
 
   if(var_3) {
-    if(!var_8)
+    if(!var_8) {
       var_11 = -1.0 * var_0[1];
-    else
+    }
+    else {
       var_12 = var_0[1];
+    }
   } else if(var_4) {
-    if(!var_7)
+    if(!var_7) {
       var_12 = var_0[1];
-    else
+    }
+    else {
       var_11 = -1.0 * var_0[1];
+    }
   }
 
   self.up_velocity = self.up_velocity + var_9 * level.accel_factor * level.timestep;
@@ -525,10 +547,12 @@ ascend_aim_lerp_anims() {
   self.right_velocity = common_scripts\utility::ter_op(self.right_velocity > level.max_velocity, level.max_velocity, self.right_velocity);
   self.right_velocity = common_scripts\utility::ter_op(self.right_velocity < -1 * level.max_velocity, -1 * level.max_velocity, self.right_velocity);
 
-  if(!(var_1 || var_2 || var_3 || var_4))
+  if(!(var_1 || var_2 || var_3 || var_4)) {
     var_13 = level.static_damping_factor;
-  else
+  }
+  else {
     var_13 = level.kinetic_damping_factor;
+  }
 
   self.up_velocity = self.up_velocity + var_13 * self.up_velocity * level.timestep;
   self.down_velocity = self.down_velocity + var_13 * self.down_velocity * level.timestep;
@@ -696,16 +720,19 @@ bravo_ascend() {
     level.launchers_attached = 0;
   }
 
-  if(isDefined(level.ascend_waiting) && level.ascend_waiting)
+  if(isDefined(level.ascend_waiting) && level.ascend_waiting) {
     level.bravo_ascend_anim_node thread maps\_anim::anim_loop(var_0, "ascend_waiting", "stop_loop");
+  }
 
-  while(!common_scripts\utility::flag("flag_ascend_triggered"))
+  while(!common_scripts\utility::flag("flag_ascend_triggered")) {
     wait(level.timestep);
+  }
 
   var_1 = gettime() / 1000.0;
 
-  if(!common_scripts\utility::flag("flag_ascend_ready_bravo_0") || !common_scripts\utility::flag("flag_ascend_ready_bravo_1"))
+  if(!common_scripts\utility::flag("flag_ascend_ready_bravo_0") || !common_scripts\utility::flag("flag_ascend_ready_bravo_1")) {
     common_scripts\utility::flag_wait("flag_bravo_ascend_ready");
+  }
 
   var_1 = clamp(gettime() / 1000.0 - var_1, 0.0, 3.0);
   level.bravo_ascend_anim_node notify("stop_loop");
@@ -724,8 +751,9 @@ bravo_ascend() {
   wait(var_3);
   level.bravo_ascend_anim_node thread maps\_anim::anim_loop(var_0, "bravo_rope_idle", "stop_loop");
 
-  while(!common_scripts\utility::flag("flag_ascend_bravo_go"))
+  while(!common_scripts\utility::flag("flag_ascend_bravo_go")) {
     wait(level.timestep);
+  }
 
   level.bravo_ascend_anim_node notify("stop_loop");
   common_scripts\utility::array_thread(level._bravo, maps\_utility::set_ignoreme, 1);
@@ -760,8 +788,9 @@ bravo_ascend_rubberband(var_0) {
     var_6 = level._bravo[1] getanimtime(level.scr_anim["bravo2"]["bravo_rig_ascend"]);
     var_7 = 0;
 
-    if(common_scripts\utility::flag("flag_player_ascending"))
+    if(common_scripts\utility::flag("flag_player_ascending")) {
       var_7 = level.player_rig getanimtime(level.scr_anim["player_rig"]["alpha_rig_ascend"]);
+    }
 
     var_8 = var_6 - var_7 - level.bravo_ascend_rubberband_base;
     var_9 = maps\black_ice_util::normalize_value(var_3, var_4, var_8);
@@ -782,8 +811,9 @@ bravo_ascend_rubberband_cleanup(var_0) {
     level.bravo_curr_rate = level.bravo_curr_rate + (level.ascend_anims_rate - level.bravo_curr_rate) * var_1;
     maps\_anim::anim_set_rate(var_0, "bravo_rig_ascend", level.bravo_curr_rate);
 
-    if(isDefined(level.ascend_enemy))
+    if(isDefined(level.ascend_enemy)) {
       maps\_anim::anim_set_rate_single(level.ascend_enemy, "alpha_rig_ascend", level.bravo_curr_rate);
+    }
 
     wait(level.timestep);
   }
@@ -805,20 +835,23 @@ ascend_mechanics(var_0) {
 
     switch (level.ascend_state) {
       case "idle":
-        if(level.ascend_state_transition)
+        if(level.ascend_state_transition) {
           ascend_idle_state_transition();
+        }
 
         ascend_idle_state();
         break;
       case "ascend":
-        if(level.ascend_state_transition)
+        if(level.ascend_state_transition) {
           ascend_ascend_state_transition();
+        }
 
         ascend_ascend_state();
         break;
       case "stop":
-        if(level.ascend_state_transition)
+        if(level.ascend_state_transition) {
           ascend_stop_state_transition();
+        }
 
         ascend_stop_state();
         break;
@@ -890,8 +923,9 @@ ascend_stop_state() {
 }
 
 ascend_pendulum(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     level endon(var_5);
+  }
 
   var_6 = var_0.angles[0];
   var_7 = var_0.angles[1];
@@ -923,16 +957,18 @@ ascend_pendulum(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_23 = level.player_rig getanimtime(level.scr_anim["player_rig"]["alpha_rig_ascend"]);
       var_19 = (1.0 - var_23) * var_14;
 
-      if(var_19 < var_15)
+      if(var_19 < var_15) {
         var_19 = var_15;
+      }
 
       var_20 = sqrt(var_13 / var_19);
       var_21 = var_17 * var_20;
       var_22 = 1.0 / var_21;
     }
 
-    if(var_18 > var_22)
+    if(var_18 > var_22) {
       var_18 = var_18 - var_22;
+    }
 
     var_24 = var_20 * var_18 * var_16;
     var_9 = var_9 + (var_1 - var_9) * var_12;
@@ -972,8 +1008,9 @@ hanging_cargo_motion() {
 
         var_6 = var_6 + var_4[var_7].origin[2];
 
-        if(var_2 == 2)
+        if(var_2 == 2) {
           var_4[var_7] retargetscriptmodellighting(var_1);
+        }
       }
 
       var_6 = var_6 / var_4.size;
@@ -984,8 +1021,9 @@ hanging_cargo_motion() {
     thread ascend_pendulum(var_3, randomfloatrange(0.975, 1.275), randomfloatrange(4.0, 6.0), randomfloatrange(0.3, 0.6), var_5);
     thread hanging_cargo_cleanup(var_3, var_4);
 
-    if(isDefined(var_3.targetname) && var_3.targetname == "hanging_cargo_ascend")
+    if(isDefined(var_3.targetname) && var_3.targetname == "hanging_cargo_ascend") {
       thread hanging_cargo_ascension(var_3);
+    }
   }
 }
 
@@ -1007,18 +1045,21 @@ hanging_cargo_ascension(var_0) {
 hanging_cargo_cleanup(var_0, var_1) {
   var_0 waittill("notify_pendular_motion_complete");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_1[var_2] delete();
+  }
 
   var_0 delete();
 }
 
 post_ascend_cleanup() {
-  while(!level.player_rig maps\black_ice_util::check_anim_time("player_rig", "alpha_rig_ascend", 1.0))
+  while(!level.player_rig maps\black_ice_util::check_anim_time("player_rig", "alpha_rig_ascend", 1.0)) {
     wait(level.timestep);
+  }
 
-  while(!common_scripts\utility::flag("flag_alpha_ascend_complete") || !common_scripts\utility::flag("flag_bravo_ascend_complete"))
+  while(!common_scripts\utility::flag("flag_alpha_ascend_complete") || !common_scripts\utility::flag("flag_bravo_ascend_complete")) {
     wait(level.timestep);
+  }
 
   common_scripts\utility::flag_set("sfx_ascend_done");
   common_scripts\utility::flag_set("flag_ascend_end");
@@ -1072,6 +1113,7 @@ ascend_mblur_changes() {
 
   common_scripts\utility::flag_wait("flag_ascend_end");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     maps\black_ice::set_default_mb_values();
+  }
 }

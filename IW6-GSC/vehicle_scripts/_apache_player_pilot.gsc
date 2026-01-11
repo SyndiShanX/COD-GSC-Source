@@ -193,8 +193,9 @@ hud_update_roll() {
   var_8 = ["apache_roll_marker_right2", "apache_roll_marker_right1", "apache_roll_marker", "apache_roll_marker_left1", "apache_roll_marker_left2"];
   var_9 = [];
 
-  for(var_10 = 0; var_10 < var_8.size; var_10++)
+  for(var_10 = 0; var_10 < var_8.size; var_10++) {
     var_9[int(var_4 + var_6 * var_10)] = var_8[var_10];
+  }
 
   var_8 = undefined;
   var_11 = "";
@@ -225,8 +226,9 @@ hud_update_mg_heat() {
   var_0 = self.hud;
   var_1 = self.vehicle.mgturret[0];
 
-  if(!isDefined(var_1.heat))
+  if(!isDefined(var_1.heat)) {
     var_1.heat = 0;
+  }
 
   var_0["mg_bar"] maps\_hud_util::updatebar(var_1.heat);
   var_0["mg_bar"].alpha = 0.24;
@@ -237,8 +239,9 @@ hud_update_mg_heat() {
     var_1.heat_warn_lastoggle = gettime();
   }
 
-  if(!isDefined(var_1.overheated))
+  if(!isDefined(var_1.overheated)) {
     var_1.overheated = 0;
+  }
 
   if(var_1.heat > 0.5 && gettime() - var_1.heat_warn_lastoggle >= 100) {
     var_0["mg_warn"].alpha = var_1.heat_warn_toggle;
@@ -309,8 +312,9 @@ _start(var_0) {
   thread monitorturretfire();
   thread monitorweaponchange();
 
-  if(var_0)
+  if(var_0) {
     thread monitorads();
+  }
 
   thread monitorthermalvision();
 }
@@ -505,10 +509,12 @@ button_pressed_from_string(var_0) {
 
   var_6 = undefined;
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_6 = self call[[var_4]](var_5);
-  else
+  }
+  else {
     var_6 = self call[[var_4]]();
+  }
 
   return var_6;
 }
@@ -541,8 +547,9 @@ monitorads() {
       var_3 = 1;
     }
 
-    if(!var_3)
+    if(!var_3) {
       var_2 = var_0 common_scripts\utility::waittill_any_return("LISTEN_apache_player_toggle_ADS", "LISTEN_apache_player_start_ADS", "LISTEN_apache_player_stop_ADS", "SAVGAME_RELEASES_BUTTONS");
+    }
 
     if(var_2 == "SAVGAME_RELEASES_BUTTONS") {
       continue;
@@ -615,11 +622,13 @@ monitorads_blend_dof(var_0) {
 }
 
 monitorads_zoom_elem_offset(var_0, var_1) {
-  if(!isDefined(self.xoffset_default))
+  if(!isDefined(self.xoffset_default)) {
     self.xoffset_default = self.xoffset;
+  }
 
-  if(!isDefined(self.yoffset_default))
+  if(!isDefined(self.yoffset_default)) {
     self.yoffset_default = self.yoffset;
+  }
 
   var_0 = common_scripts\utility::ter_op(isDefined(var_0), var_0, self.xoffset_default);
   var_1 = common_scripts\utility::ter_op(isDefined(var_1), var_1, self.yoffset_default);
@@ -641,8 +650,9 @@ monitorads_zoom_hud_delay(var_0, var_1) {
   var_3 = self.weapon[self.weapon_curr];
 
   if(var_0) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       wait(var_1);
+    }
 
     maps\_utility::deep_array_thread(self.hud, ::set_key, [0.0, "alpha"]);
     self.hud["mg_reticle"].alpha = 1.0;
@@ -654,21 +664,25 @@ monitorads_zoom_hud_delay(var_0, var_1) {
     }
 
     if(isDefined(var_2.hud)) {
-      if(isDefined(var_2.hud["flares"]) && isDefined(var_2.hud["flares"]["back"]))
+      if(isDefined(var_2.hud["flares"]) && isDefined(var_2.hud["flares"]["back"])) {
         var_2.hud["flares"]["back"] monitorads_zoom_elem_offset(-230, 101);
+      }
 
-      if(isDefined(var_2.hud["warning"]) && isDefined(var_2.hud["warning"]["bg_lock_left"]))
+      if(isDefined(var_2.hud["warning"]) && isDefined(var_2.hud["warning"]["bg_lock_left"])) {
         var_2.hud["warning"]["bg_lock_left"] monitorads_zoom_elem_offset(-230);
+      }
 
-      if(isDefined(var_2.hud["warning"]) && isDefined(var_2.hud["warning"]["bg_lock_right"]))
+      if(isDefined(var_2.hud["warning"]) && isDefined(var_2.hud["warning"]["bg_lock_right"])) {
         var_2.hud["warning"]["bg_lock_right"] monitorads_zoom_elem_offset(230);
+      }
     }
 
     wait 0.05;
     self.hud["mg_reticle"].alpha = 0.0;
   } else {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       wait(var_1);
+    }
 
     maps\_utility::deep_array_thread(self.hud, ::set_key, [1.0, "alpha"]);
 
@@ -678,14 +692,17 @@ monitorads_zoom_hud_delay(var_0, var_1) {
     }
 
     if(isDefined(var_2.hud)) {
-      if(isDefined(var_2.hud["flares"]) && isDefined(var_2.hud["flares"]["back"]))
+      if(isDefined(var_2.hud["flares"]) && isDefined(var_2.hud["flares"]["back"])) {
         var_2.hud["flares"]["back"] monitorads_zoom_elem_reset();
+      }
 
-      if(isDefined(var_2.hud["warning"]) && isDefined(var_2.hud["warning"]["bg_lock_left"]))
+      if(isDefined(var_2.hud["warning"]) && isDefined(var_2.hud["warning"]["bg_lock_left"])) {
         var_2.hud["warning"]["bg_lock_left"] monitorads_zoom_elem_reset();
+      }
 
-      if(isDefined(var_2.hud["warning"]) && isDefined(var_2.hud["warning"]["bg_lock_right"]))
+      if(isDefined(var_2.hud["warning"]) && isDefined(var_2.hud["warning"]["bg_lock_right"])) {
         var_2.hud["warning"]["bg_lock_right"] monitorads_zoom_elem_reset();
+      }
     }
 
     wait 0.05;
@@ -697,8 +714,9 @@ monitorads_zoom_in() {
   var_0 = self.owner;
   var_0 maps\_utility::lerpfov_saved(15, 0.15);
 
-  if(!maps\_utility::is_coop())
+  if(!maps\_utility::is_coop()) {
     monitorads_blend_dof(1);
+  }
 
   thread monitorads_zoom_hud_delay(1);
 }
@@ -707,8 +725,9 @@ monitorads_zoom_out() {
   var_0 = self.owner;
   var_0 maps\_utility::lerpfov_saved(65, 0.2);
 
-  if(!maps\_utility::is_coop())
+  if(!maps\_utility::is_coop()) {
     monitorads_blend_dof(0);
+  }
 
   thread monitorads_zoom_hud_delay(0);
 }
@@ -802,8 +821,9 @@ _destroy() {
   self.vehicle.mgturret[0].mytarget delete();
   self.weapon["hydra_lockOn_missile"] vehicle_scripts\_apache_player_missile_hydra_and_lockon::_destroy();
 
-  if(!isplatformweakfillrate())
+  if(!isplatformweakfillrate()) {
     self.hud_mask_model delete();
+  }
 }
 
 set_key(var_0, var_1) {

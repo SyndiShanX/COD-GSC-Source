@@ -33,8 +33,9 @@ special_gun_watcher() {
     if(var_0 != "iw6_aliendlc41_mp" && var_0 != "iw6_aliendlc42_mp") {
       continue;
     }
-    if(var_0 == "iw6_aliendlc41_mp" && self.adspressedtime != 9999999)
+    if(var_0 == "iw6_aliendlc41_mp" && self.adspressedtime != 9999999) {
       self stoplocalsound("weap_cortex_chrg_plr");
+    }
 
     var_1.health = 1;
     thread cortex_gun_shoot(var_1, var_0);
@@ -58,8 +59,9 @@ cortex_gun_hud_monitor() {
   self endon("disconnect");
   var_0 = 10;
 
-  if(self _meth_842C("nerf_min_ammo"))
+  if(self _meth_842C("nerf_min_ammo")) {
     var_0 = 5;
+  }
 
   self.gun_chargeable = 0;
 
@@ -70,8 +72,9 @@ cortex_gun_hud_monitor() {
       if(var_1 >= var_0) {
         self.gun_chargeable = 1;
 
-        if(maps\mp\alien\_utility::is_true(self.adsallowed))
+        if(maps\mp\alien\_utility::is_true(self.adsallowed)) {
           self notify("cortex_launcher_full");
+        }
 
         self.cortex_weapon_ammo_full = 1;
       } else if(var_1 < var_0) {
@@ -79,8 +82,9 @@ cortex_gun_hud_monitor() {
         self.gun_chargeable = 0;
       }
 
-      if(maps\mp\alien\_perk_utility::has_perk("perk_bullet_damage", [2, 3, 4]))
+      if(maps\mp\alien\_perk_utility::has_perk("perk_bullet_damage", [2, 3, 4])) {
         self unsetperk("specialty_quickdraw", 1);
+      }
     } else if(maps\mp\alien\_perk_utility::has_perk("perk_bullet_damage", [2, 3, 4]))
       self setperk("specialty_quickdraw", 1, 0);
 
@@ -102,8 +106,9 @@ cortex_gun_charge_watcher() {
     var_2 = -1;
 
     if(self getcurrentweapon() != "iw6_aliendlc41_mp" || self isusingturret() || maps\mp\_utility::isusingremote() || isDefined(self.throwinggrenade) || maps\mp\alien\_utility::is_true(self.is_grabbed)) {
-      if(self.adspressedtime != 9999999)
+      if(self.adspressedtime != 9999999) {
         thread audio_cortex_interrupt_charge();
+      }
 
       self.adsallowed = 1;
       self.adspressedtime = 9999999;
@@ -144,13 +149,15 @@ cortex_gun_charge_watcher() {
       var_5 = 350.0;
 
       for(var_6 = 1; var_6 <= 4; var_6++) {
-        if(var_4 >= var_6 * var_5)
+        if(var_4 >= var_6 * var_5) {
           var_2++;
+        }
       }
 
       if(var_4 > 1400) {
-        if(!var_0)
+        if(!var_0) {
           var_0 = 1;
+        }
         else if(var_4 > 1400) {
           fire_large_cortex_blast();
           wait 0.5;
@@ -163,10 +170,12 @@ cortex_gun_charge_watcher() {
         self.adsallowed = 0;
         self allowads(0);
 
-        if(self meleebuttonpressed())
+        if(self meleebuttonpressed()) {
           thread allow_ads_reset();
-        else
+        }
+        else {
           thread allow_ads_reset(0.25);
+        }
       }
 
       self.adspressed = 0;
@@ -192,12 +201,14 @@ audio_cortex_interrupt_charge() {
 fire_large_cortex_blast() {
   var_0 = 10;
 
-  if(self _meth_842C("nerf_min_ammo"))
+  if(self _meth_842C("nerf_min_ammo")) {
     var_0 = 5;
+  }
 
   if(self getcurrentweapon() != "iw6_aliendlc41_mp" || self isusingturret() || maps\mp\_utility::isusingremote() || isDefined(self.throwinggrenade) || maps\mp\alien\_utility::is_true(self.is_grabbed) || self getcurrentweaponclipammo() != var_0) {
-    if(self.adspressedtime != 9999999)
+    if(self.adspressedtime != 9999999) {
       self stoplocalsound("weap_cortex_chrg_plr");
+    }
 
     self.adspressed = 0;
     self.adspressedtime = 9999999;
@@ -239,8 +250,9 @@ fire_large_cortex_blast() {
 }
 
 allow_ads_reset(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.75;
+  }
 
   common_scripts\utility::waittill_any_timeout(var_0, "weapon_switch_started", "weapon_change", "cortex_launcher_full");
   self allowads(1);
@@ -391,8 +403,9 @@ singularity_kill_near_center(var_0, var_1) {
   var_2 = 1024;
 
   for(;;) {
-    if(distancesquared(var_0.origin, var_1.origin) < var_2)
+    if(distancesquared(var_0.origin, var_1.origin) < var_2) {
       var_0 suicide();
+    }
 
     wait 0.2;
   }
@@ -405,8 +418,9 @@ cortex_gun_explode(var_0) {
   var_0 waittill("explode", var_1);
   earthquake(0.35, 0.5, var_1, 512);
 
-  if(isDefined(var_0.attractor))
+  if(isDefined(var_0.attractor)) {
     missile_deleteattractor(var_0.attractor);
+  }
 
   wait 0.6;
   physicsexplosionsphere(var_1 + (0, 0, -5), 250, 32, 10);
@@ -432,8 +446,9 @@ grenade_explosion_monitor(var_0, var_1) {
   var_0 waittill("death");
   var_2 = var_0.origin;
 
-  if(is_venom_grenade(var_1))
+  if(is_venom_grenade(var_1)) {
     level thread cloudmonitor(self, var_2, var_1);
+  }
   else if(var_1 == "iw6_aliendlc43_mp") {
     wait 0.6;
     physicsexplosionsphere(var_2 + (0, 0, -5), 800, 250, 10);
@@ -498,14 +513,17 @@ cloudmonitor(var_0, var_1, var_2) {
   earthquake(0.5, 1, var_1, 512);
   playrumbleonposition("grenade_rumble", var_1);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     triggerfx(var_3);
+  }
 
-  if(var_2 == "iw6_aliendlc11li_mp")
+  if(var_2 == "iw6_aliendlc11li_mp") {
     playsoundatpos(var_1, "venom_lightning_expl");
+  }
 
-  if(var_2 == "iw6_aliendlc11fi_mp")
+  if(var_2 == "iw6_aliendlc11fi_mp") {
     playsoundatpos(var_1, "venom_fire_expl");
+  }
 
   var_16 = 0.0;
   var_17 = 0.25;
@@ -527,8 +545,9 @@ cloudmonitor(var_0, var_1, var_2) {
 
     if(isDefined(level.alive_plants)) {
       foreach(var_25 in level.alive_plants) {
-        if(isDefined(var_25) && isDefined(var_25.coll_model) && var_25.coll_model istouching(var_15))
+        if(isDefined(var_25) && isDefined(var_25.coll_model) && var_25.coll_model istouching(var_15)) {
           var_25.coll_model dodamage(var_6, var_25.origin, var_0, var_0);
+        }
       }
     }
 
@@ -544,18 +563,21 @@ cloudmonitor(var_0, var_1, var_2) {
 
   var_15 delete();
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 }
 
 alien_corrosive_on() {
-  if(!isDefined(self.is_corrosive))
+  if(!isDefined(self.is_corrosive)) {
     self.is_corrosive = 0;
+  }
 
   self.is_corrosive++;
 
-  if(self.is_corrosive == 1)
+  if(self.is_corrosive == 1) {
     self setscriptablepartstate("body", "corrosive");
+  }
 }
 
 alien_corrosive_off() {
@@ -574,16 +596,18 @@ cloud_melt_alien(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("stasis_cloud_burning");
   self endon("death");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 6;
+  }
 
   self.melting = 1;
 
   switch (var_5) {
     case "iw6_aliendlc11_mp":
     case "iw6_aliendlc31_mp":
-      if(!isDefined(level.spider) || isDefined(level.spider) && self != level.spider)
+      if(!isDefined(level.spider) || isDefined(level.spider) && self != level.spider) {
         alien_corrosive_on();
+      }
 
       break;
     case "iw6_aliendlc11fi_mp":
@@ -599,17 +623,20 @@ cloud_melt_alien(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = 0;
 
   while(var_6 < var_2) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       self dodamage(var_0, self.origin, var_1, var_1, "MOD_UNKNOWN");
-    else
+    }
+    else {
       self dodamage(var_0, self.origin, var_1);
+    }
 
     var_6 = var_6 + var_4;
     wait(var_4);
   }
 
-  if(isDefined(self.is_corrosive))
+  if(isDefined(self.is_corrosive)) {
     alien_corrosive_off();
+  }
 
   self.melting = undefined;
 }

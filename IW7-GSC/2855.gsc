@@ -7,12 +7,15 @@ func_5F84(var_00) {
   self notify("disable_dynamic_move");
   self endon("disable_dynamic_move");
 
-  if(isDefined(self.func_5F76))
+  if(isDefined(self.func_5F76)) {
     var_01 = squared(self.func_5F76);
-  else if(isDefined(var_00))
+  }
+  else if(isDefined(var_00)) {
     var_01 = squared(var_00);
-  else
+  }
+  else {
     var_01 = squared(300);
+  }
 
   self.func_51E4 = undefined;
   scripts\sp\utility::func_4145();
@@ -29,8 +32,9 @@ func_5F84(var_00) {
         if(!isDefined(self.demeanoroverride) || isDefined(self.demeanoroverride) && self.demeanoroverride == "sprint") {
           scripts\sp\utility::func_4145();
 
-          if(isDefined(self.func_51E4))
+          if(isDefined(self.func_51E4)) {
             scripts\sp\utility::func_51E1(self.func_51E4);
+          }
         }
       } else if(!isDefined(self.demeanoroverride) || isDefined(self.demeanoroverride) && self.demeanoroverride != "sprint") {
         self.func_51E4 = self.demeanoroverride;
@@ -48,10 +52,12 @@ func_5F84(var_00) {
 func_5557() {
   self notify("disable_dynamic_move");
 
-  if(isDefined(self.func_51E4))
+  if(isDefined(self.func_51E4)) {
     scripts\sp\utility::func_51E1(self.func_51E4);
-  else
+  }
+  else {
     scripts\sp\utility::func_4145();
+  }
 
   self.func_51E4 = undefined;
   scripts\sp\utility::func_4169("sprint");

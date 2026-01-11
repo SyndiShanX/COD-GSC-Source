@@ -31,8 +31,9 @@ init_rats() {
 run_rat(var_0, var_1) {
   precachempanim(var_0);
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   precachempanim(var_3);
+  }
 
   self setCanDamage(1);
   self.health = 1;

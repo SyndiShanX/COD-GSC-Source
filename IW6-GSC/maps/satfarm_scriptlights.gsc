@@ -20,10 +20,12 @@ intro_cargo_light_test() {
   common_scripts\utility::flag_wait("cargo_doors_opened");
   var_0 = 0;
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     var_0 = 15;
-  else
+  }
+  else {
     var_0 = 1.8;
+  }
 
   var_1 = 0.01;
   var_2 = 0.05;

@@ -178,10 +178,12 @@ gulliver() {
   level.ai_gulliver thread gulliver_viewmodel_render_flag_set();
   run_scene_and_delete("it_mgr_surprise", 0.5);
 
-  if(flag("it_mgr_disabled"))
+  if(flag("it_mgr_disabled")) {
     level.ai_gulliver gulliver_eye_scan();
-  else
+  }
+  else {
     spiderbot_lost(0, &"KARMA_TAZE_FAIL_HINT");
+  }
 
   level.vh_spiderbot ent_flag_clear("playing_scripted_anim");
   flag_wait("spiderbot_end");
@@ -199,8 +201,9 @@ gulliver_viewmodel_render_flag_set() {
 gulliver_walkin() {
   run_scene_and_delete("it_mgr_walkin2");
 
-  if(!flag("spiderbot_entered_crc"))
+  if(!flag("spiderbot_entered_crc")) {
     level thread run_scene_and_delete("it_mgr_idle2");
+  }
 }
 
 spiderbot_light_trigger_think() {
@@ -237,8 +240,9 @@ display_hints() {
   screen_message(&"KARMA_HINT_SPIDERBOT_JUMP", 3);
   flag_wait("near_power_box");
 
-  if(!flag("bug_zapper_disabled"))
+  if(!flag("bug_zapper_disabled")) {
     screen_message(&"KARMA_HINT_SPIDERBOT_TAZER", 3);
+  }
 }
 
 spin_fan() {
@@ -327,8 +331,9 @@ gulliver_wait_for_tazer() {
   wait 0.225;
   thread screen_message(&"KARMA_HINT_SPIDERBOT_TAZER", 2);
 
-  while(!level.player attackbuttonpressed())
+  while(!level.player attackbuttonpressed()) {
     wait 0.05;
+  }
 
   flag_set("it_mgr_disabled");
   set_objective(level.obj_enter_crc, undefined, "reactivate");
@@ -368,11 +373,13 @@ spiderbot_squashed(ai_callback) {
 }
 
 spiderbot_lost(b_continue_mission, str_fail_string, do_remove_string, str_lui_string) {
-  if(!isDefined(b_continue_mission))
+  if(!isDefined(b_continue_mission)) {
     b_continue_mission = 0;
+  }
 
-  if(!isDefined(do_remove_string))
+  if(!isDefined(do_remove_string)) {
     do_remove_string = 0;
+  }
 
   if(do_remove_string) {
     level notify("kill_zapper_proximity_warning");
@@ -402,14 +409,17 @@ spiderbot_cleanup() {
 setup_proximity_scan_and_alarm(danger, danger_ender, level_ender, dist) {
   danger endon("death");
 
-  if(isDefined(danger_ender))
+  if(isDefined(danger_ender)) {
     danger endon(danger_ender);
+  }
 
-  if(isDefined(level_ender))
+  if(isDefined(level_ender)) {
     level endon(level_ender);
+  }
 
-  if(!isDefined(dist))
+  if(!isDefined(dist)) {
     dist = 50;
+  }
 
   spiderbot = level.vh_spiderbot;
   danger._audio_alarm_active = 0;
@@ -438,11 +448,13 @@ play_scan_and_alarm(danger, danger_ender, level_ender) {
   self endon("death");
   danger endon("death");
 
-  if(isDefined(danger_ender))
+  if(isDefined(danger_ender)) {
     danger endon(danger_ender);
+  }
 
-  if(isDefined(level_ender))
+  if(isDefined(level_ender)) {
     level endon(level_ender);
+  }
 
   self playSound("veh_spiderbot_scan");
   wait 0.9;
@@ -458,8 +470,9 @@ stop_alarms_on_ender(danger, danger_ender, level_ender) {
   self endon("death");
   danger endon("death");
 
-  if(isDefined(level_ender))
+  if(isDefined(level_ender)) {
     level endon(level_ender);
+  }
 
   if(isDefined(danger_ender)) {
     danger waittill(danger_ender);

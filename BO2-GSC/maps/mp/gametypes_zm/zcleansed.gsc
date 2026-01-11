@@ -50,10 +50,12 @@ main() {
   level.human_player_suicide_penalty = 0;
   level.score_rank_bonus = array(1.5, 0.75, 0.5, 0.25);
 
-  if(isDefined(level.should_use_cia) && level.should_use_cia)
+  if(isDefined(level.should_use_cia) && level.should_use_cia) {
     level.characterindex = 0;
-  else
+  }
+  else {
     level.characterindex = 1;
+  }
 
   level.graceperiodfunc = ::waitforhumanselection;
   level.customalivecheck = ::cleansed_alive_check;
@@ -124,8 +126,9 @@ onstartgametype() {
   set_zombie_var("penalty_downed", 1.0);
 
   if(isDefined(level._zcleansed_weapon_progression)) {
-    for(i = 0; i < level._zcleansed_weapon_progression.size; i++)
+    for(i = 0; i < level._zcleansed_weapon_progression.size; i++) {
       addguntoprogression(level._zcleansed_weapon_progression[i]);
+    }
   }
 
   maps\mp\gametypes_zm\_zm_gametype::rungametypemain("zcleansed", ::zcleansed_logic);
@@ -139,40 +142,49 @@ cleansed_player_laststand(einflictor, attacker, idamage, smeansofdeath, sweapon,
   self maps\mp\zombies\_zm_score::player_downed_penalty();
 
   if(isDefined(attacker) && isplayer(attacker) && attacker != self) {
-    if(isDefined(self.hide_owner) && self.hide_owner)
+    if(isDefined(self.hide_owner) && self.hide_owner) {
       attacker notify("invisible_player_killed");
+    }
   }
 
-  if(isDefined(self.is_zombie) && self.is_zombie && deathanimduration == 0)
+  if(isDefined(self.is_zombie) && self.is_zombie && deathanimduration == 0) {
     self stopsounds();
+  }
 }
 
 cleansed_alive_check(player) {
-  if(player maps\mp\zombies\_zm_laststand::player_is_in_laststand() || isDefined(player.nuked) && player.nuked || isDefined(player.is_in_process_of_zombify) && player.is_in_process_of_zombify || isDefined(player.is_in_process_of_humanify) && player.is_in_process_of_humanify)
+  if(player maps\mp\zombies\_zm_laststand::player_is_in_laststand() || isDefined(player.nuked) && player.nuked || isDefined(player.is_in_process_of_zombify) && player.is_in_process_of_zombify || isDefined(player.is_in_process_of_humanify) && player.is_in_process_of_humanify) {
     return false;
+  }
 
   return true;
 }
 
 cleanseddamagechecks(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
-  if(self maps\mp\zombies\_zm_laststand::player_is_in_laststand() || isDefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify || isDefined(self.is_in_process_of_humanify) && self.is_in_process_of_humanify)
+  if(self maps\mp\zombies\_zm_laststand::player_is_in_laststand() || isDefined(self.is_in_process_of_zombify) && self.is_in_process_of_zombify || isDefined(self.is_in_process_of_humanify) && self.is_in_process_of_humanify) {
     return 0;
+  }
 
-  if(isDefined(self.nuked) && self.nuked && eattacker != self.nuker && eattacker != self)
+  if(isDefined(self.nuked) && self.nuked && eattacker != self.nuker && eattacker != self) {
     return 0;
+  }
 
   if(isDefined(eattacker) && isplayer(eattacker) && eattacker != self) {
-    if(eattacker.team == self.team)
+    if(eattacker.team == self.team) {
       return 0;
+    }
 
-    if((isDefined(eattacker.is_zombie) && eattacker.is_zombie) == (isDefined(self.is_zombie) && self.is_zombie))
+    if((isDefined(eattacker.is_zombie) && eattacker.is_zombie) == (isDefined(self.is_zombie) && self.is_zombie)) {
       return 0;
+    }
 
-    if(!cleansed_alive_check(eattacker))
+    if(!cleansed_alive_check(eattacker)) {
       return 0;
+    }
 
-    if(isDefined(self.nuked) && self.nuked && isDefined(self.nuker) && eattacker != self.nuker)
+    if(isDefined(self.nuked) && self.nuked && isDefined(self.nuker) && eattacker != self.nuker) {
       return 0;
+    }
 
     if(isDefined(self.is_zombie) && self.is_zombie && sweapon == "cymbal_monkey_zm" && smeansofdeath != "MOD_IMPACT") {
       level notify("killed_by_decoy", eattacker, self);
@@ -182,12 +194,14 @@ cleanseddamagechecks(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
 
     eattacker thread maps\mp\gametypes_zm\_weapons::checkhit(sweapon);
 
-    if(!eattacker.is_zombie && eattacker maps\mp\zombies\_zm_powerups::is_insta_kill_active())
+    if(!eattacker.is_zombie && eattacker maps\mp\zombies\_zm_powerups::is_insta_kill_active()) {
       idamage = self.health + 666;
+    }
   }
 
-  if(isDefined(eattacker.is_zombie) && eattacker.is_zombie)
+  if(isDefined(eattacker.is_zombie) && eattacker.is_zombie) {
     self playsoundtoplayer("evt_player_swiped", self);
+  }
 
   return self maps\mp\zombies\_zm::player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime);
 }
@@ -197,8 +211,9 @@ custom_end_screen() {
   winner = players[0];
 
   foreach(player in players) {
-    if(isDefined(winner) && player.score > winner.score)
+    if(isDefined(winner) && player.score > winner.score) {
       winner = player;
+    }
   }
 
   if(isDefined(level.last_human_standing)) {
@@ -210,8 +225,9 @@ custom_end_screen() {
       players[i].bonus_msg_hud.vertalign = "middle";
       players[i].bonus_msg_hud.y = players[i].bonus_msg_hud.y - 130;
 
-      if(players[i] issplitscreen())
+      if(players[i] issplitscreen()) {
         players[i].bonus_msg_hud.y = players[i].bonus_msg_hud.y + 70;
+      }
 
       players[i].bonus_msg_hud.foreground = 1;
       players[i].bonus_msg_hud.fontscale = 5;
@@ -244,8 +260,9 @@ custom_end_screen() {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i].bonus_msg_hud))
+    if(isDefined(players[i].bonus_msg_hud)) {
       players[i].bonus_msg_hud destroy();
+    }
 
     players[i].game_over_hud = newclienthudelem(players[i]);
     players[i].game_over_hud.alignx = "center";
@@ -287,12 +304,15 @@ custom_end_screen() {
     winner_text = &"ZOMBIE_CLEANSED_WIN";
     loser_text = &"ZOMBIE_CLEANSED_LOSE";
 
-    if(isDefined(level.host_ended_game) && level.host_ended_game)
+    if(isDefined(level.host_ended_game) && level.host_ended_game) {
       players[i].survived_hud settext(&"MP_HOST_ENDED_GAME");
-    else if(players[i] == winner)
+    }
+    else if(players[i] == winner) {
       players[i].survived_hud settext(winner_text);
-    else
+    }
+    else {
       players[i].survived_hud settext(loser_text);
+    }
 
     players[i].survived_hud fadeovertime(1);
     players[i].survived_hud.alpha = 1;
@@ -303,8 +323,9 @@ allow_player_movement(allowed) {
   level.player_movement_suppressed = !allowed;
 
   foreach(player in get_players()) {
-    if(!(isDefined(player.in_zombify_call) && player.in_zombify_call))
+    if(!(isDefined(player.in_zombify_call) && player.in_zombify_call)) {
       player freezecontrolswrapper(level.player_movement_suppressed);
+    }
   }
 }
 
@@ -329,8 +350,9 @@ listen_to_the_doctor_pregame() {
     wait 4;
   }
 
-  if(level.start_audio_allowed)
+  if(level.start_audio_allowed) {
     level waittill("cleansed_game_started");
+  }
 }
 
 listen_to_the_doctor_started() {
@@ -380,8 +402,9 @@ listen_to_the_doctor_human_deaths() {
     if(isDefined(level.playing_turned_kill_vo) && level.playing_turned_kill_vo) {
       continue;
     }
-    if(!isDefined(killee.vo_human_killed_chance))
+    if(!isDefined(killee.vo_human_killed_chance)) {
       killee.vo_human_killed_chance = 24;
+    }
 
     if(randomint(100) < killee.vo_human_killed_chance) {
       level.playing_turned_kill_vo = 1;
@@ -406,8 +429,9 @@ listen_to_the_doctor_zombie_deaths() {
     if(isDefined(level.playing_turned_kill_vo) && level.playing_turned_kill_vo) {
       continue;
     }
-    if(!isDefined(killer.vo_human_killer_chance))
+    if(!isDefined(killer.vo_human_killer_chance)) {
       killer.vo_human_killer_chance = 24;
+    }
 
     if(randomint(100) < killer.vo_human_killer_chance) {
       killer.vo_human_killer_chance = int(killer.vo_human_killer_chance * 0.5);
@@ -425,28 +449,34 @@ listen_to_the_doctor_zombie_deaths() {
 listen_to_the_doctor_endgame() {
   wait 5;
 
-  while(maps\mp\gametypes_zm\_globallogic_utils::gettimeremaining() > 12000)
+  while(maps\mp\gametypes_zm\_globallogic_utils::gettimeremaining() > 12000) {
     wait 1;
+  }
 
   r = randomint(3);
 
-  if(r == 0)
+  if(r == 0) {
     level maps\mp\zombies\_zm_audio_announcer::leaderdialog("dr_countdown0", undefined, undefined, 1, 4);
-  else if(r == 1)
+  }
+  else if(r == 1) {
     level maps\mp\zombies\_zm_audio_announcer::leaderdialog("dr_countdown1", undefined, undefined, 1, 4);
-  else
+  }
+  else {
     level maps\mp\zombies\_zm_audio_announcer::leaderdialog("dr_countdown2", undefined, undefined, 1, 4);
+  }
 
-  while(maps\mp\gametypes_zm\_globallogic_utils::gettimeremaining() > 500)
+  while(maps\mp\gametypes_zm\_globallogic_utils::gettimeremaining() > 500) {
     wait 1;
+  }
 
   level maps\mp\zombies\_zm_audio_announcer::leaderdialog("dr_ending", undefined, undefined, 1, 4);
 }
 
 anysplitscreen() {
   foreach(player in get_players()) {
-    if(player issplitscreen())
+    if(player issplitscreen()) {
       return true;
+    }
   }
 
   return false;
@@ -472,8 +502,9 @@ watch_survival_time() {
   self endon("zombify");
   wait 10;
 
-  if(!isDefined(self.vo_human_survival_chance))
+  if(!isDefined(self.vo_human_survival_chance)) {
     self.vo_human_survival_chance = 24;
+  }
 
   while(true) {
     if(!(isDefined(level.playing_turned_kill_vo) && level.playing_turned_kill_vo)) {
@@ -502,8 +533,9 @@ zcleansed_logic() {
   level._supress_survived_screen = 1;
   doors = getEntArray("zombie_door", "targetname");
 
-  foreach(door in doors)
+  foreach(door in doors) {
   door setinvisibletoall();
+  }
 
   level thread maps\mp\zombies\_zm_blockers::open_all_zbarriers();
   level thread delay_box_hide();
@@ -520,8 +552,9 @@ zcleansed_logic() {
   wait 1.5;
   players = get_players();
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     players[i] thread create_match_start_message(&"ZOMBIE_FIND_THE_CURE", 3.0);
+  }
 
   allow_player_movement(1);
   spawn_initial_cure_powerup();
@@ -530,15 +563,17 @@ zcleansed_logic() {
   level thread leaderwatch();
   players = get_players();
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     players[i] thread create_match_start_message(&"ZOMBIE_MOST_TIME_AS_HUMAN_TO_WIN", 3.0);
+  }
 
   wait 1.2;
   flag_clear("pregame");
   players = get_players();
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     players[i] thread destroystartmsghud();
+  }
 
   registertimelimit(0, 1440);
   level.discardtime = gettime() - level.starttime;
@@ -554,8 +589,9 @@ wait_for_round_end() {
   level endon("early_game_end");
   level endon("normal_game_end");
 
-  while(maps\mp\gametypes_zm\_globallogic_utils::gettimeremaining() > 0)
+  while(maps\mp\gametypes_zm\_globallogic_utils::gettimeremaining() > 0) {
     wait 1;
+  }
 }
 
 end_game_early() {
@@ -596,8 +632,9 @@ create_match_start_message(text, duration) {
     self.match_start_msg_hud.fontscale = 5;
     self.match_start_msg_hud.foreground = 1;
 
-    if(self issplitscreen())
+    if(self issplitscreen()) {
       self.match_start_msg_hud.y = self.match_start_msg_hud.y + 70;
+    }
 
     self.match_start_msg_hud.color = (1, 1, 1);
     self.match_start_msg_hud.hidewheninmenu = 1;
@@ -610,8 +647,9 @@ create_match_start_message(text, duration) {
   self.match_start_msg_hud.alpha = 1;
   self.match_start_msg_hud.fontscale = 2;
 
-  if(self issplitscreen())
+  if(self issplitscreen()) {
     self.match_start_msg_hud.fontscale = 1.5;
+  }
 
   wait(duration);
 
@@ -638,8 +676,9 @@ delay_box_hide() {
   wait 2.0;
   start_chest = getstruct("start_chest", "script_noteworthy");
 
-  if(isDefined(start_chest))
+  if(isDefined(start_chest)) {
     start_chest maps\mp\zombies\_zm_magicbox::hide_chest();
+  }
 }
 
 onplayerconnect() {
@@ -665,15 +704,17 @@ onplayerdisconnect() {
   level endon("end_game");
   self waittill("disconnect");
 
-  if(get_players().size <= 1)
+  if(get_players().size <= 1) {
     end_game_early();
+  }
   else if(!(isDefined(level.ingraceperiod) && level.ingraceperiod)) {
     thread checkzombiehumanratio();
     wait 2;
     players = get_players();
 
-    foreach(player in players)
+    foreach(player in players) {
     player.nuked = undefined;
+    }
   }
 }
 
@@ -683,10 +724,12 @@ zombie_ramp_up() {
   self endon("death_or_disconnect");
   self endon("humanify");
 
-  if(isDefined(level.cleansed_zombie_round))
+  if(isDefined(level.cleansed_zombie_round)) {
     self.maxhealth = maps\mp\zombies\_zm::ai_zombie_health(level.cleansed_zombie_round);
-  else
+  }
+  else {
     self.maxhealth = maps\mp\zombies\_zm::ai_zombie_health(2);
+  }
 
   self.health = self.maxhealth;
 }
@@ -703,8 +746,9 @@ give_trophy() {
     self setclientfield("player_has_eyes", 0);
     wait_network_frame();
 
-    if(cleansed_alive_check(self))
+    if(cleansed_alive_check(self)) {
       self setclientfield("player_has_eyes", self.is_zombie);
+    }
 
     self.has_trophy = 1;
   }
@@ -716,8 +760,9 @@ remove_trophy() {
     self setclientfield("player_has_eyes", 0);
     wait_network_frame();
 
-    if(cleansed_alive_check(self))
+    if(cleansed_alive_check(self)) {
       self setclientfield("player_has_eyes", self.is_zombie);
+    }
 
     self.has_trophy = 0;
   }
@@ -729,8 +774,9 @@ enthrone(player) {
 
   while(true) {
     if(cleansed_alive_check(player) && player.is_zombie) {
-      if(!player.has_trophy)
+      if(!player.has_trophy) {
         player give_trophy();
+      }
     } else if(player.has_trophy)
       player remove_trophy();
 
@@ -761,8 +807,9 @@ cleansed_set_leader(leader) {
   }
 
   if(!isDefined(leader) && isDefined(level.cleansed_leader)) {
-    if(isDefined(level.cleansed_leader))
+    if(isDefined(level.cleansed_leader)) {
       dethrone(level.cleansed_leader);
+    }
 
     level.cleansed_leader = leader;
     return;
@@ -781,8 +828,9 @@ leaderwatch() {
     players = get_players();
 
     foreach(player in players) {
-      if(player.score > hiscore)
+      if(player.score > hiscore) {
         hiscore = player.score;
+      }
     }
 
     foreach(player in players) {
@@ -809,10 +857,12 @@ cover_transition() {
 disappear_in_flash(washuman) {
   playsoundatposition("zmb_bolt", self.origin);
 
-  if(washuman)
+  if(washuman) {
     playFX(level._effect["human_disappears"], self.origin);
-  else
+  }
+  else {
     playFX(level._effect["zombie_disappears"], self.origin);
+  }
 
   self ghost();
 }
@@ -839,8 +889,9 @@ onzombifyplayer() {
   }
   self.in_zombify_call = 1;
 
-  while(isDefined(level.in_zombify_call) && level.in_zombify_call)
+  while(isDefined(level.in_zombify_call) && level.in_zombify_call) {
     wait 0.1;
+  }
 
   level.in_zombify_call = 1;
   self freezecontrolswrapper(1);
@@ -877,8 +928,9 @@ onzombifyplayer() {
   self maps\mp\zombies\_zm_laststand::laststand_enable_player_weapons();
   self.ignoreme = 1;
 
-  if(isDefined(self.revivetrigger))
+  if(isDefined(self.revivetrigger)) {
     self.revivetrigger delete();
+  }
 
   self.revivetrigger = undefined;
   self reviveplayer();
@@ -949,8 +1001,9 @@ onspawnzombie() {
 makefindfleshstructs() {
   structs = getstructarray("spawn_location", "script_noteworthy");
 
-  foreach(struct in structs)
+  foreach(struct in structs) {
   struct.script_string = "find_flesh";
+  }
 }
 
 setup_players() {
@@ -989,8 +1042,9 @@ setup_player() {
   self.has_trophy = 0;
   self.home_team = self.team;
 
-  if(self.home_team == "axis")
+  if(self.home_team == "axis") {
     self.home_team = "team3";
+  }
 
   self thread wait_turn_to_zombie(hotjoined);
 }
@@ -1007,8 +1061,9 @@ wait_turn_to_zombie(hot) {
 }
 
 addguntoprogression(gunname) {
-  if(!isDefined(level.gunprogression))
+  if(!isDefined(level.gunprogression)) {
     level.gunprogression = [];
+  }
 
   level.gunprogression[level.gunprogression.size] = gunname;
 }
@@ -1031,8 +1086,9 @@ check_spawn_cymbal_monkey(origin, weapon) {
 delete_spawned_monkey_on_turned(player) {
   wait 1;
 
-  while(isDefined(self) && !(isDefined(player.is_zombie) && player.is_zombie))
+  while(isDefined(self) && !(isDefined(player.is_zombie) && player.is_zombie)) {
     wait_network_frame();
+  }
 
   if(isDefined(self)) {
     self maps\mp\zombies\_zm_powerups::powerup_delete();
@@ -1048,8 +1104,9 @@ rewardsthink() {
     self waittill("killed_a_zombie_player", einflictor, target, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration);
 
     if(!(isDefined(self.is_zombie) && self.is_zombie)) {
-      if(self check_spawn_cymbal_monkey(target.origin, sweapon))
+      if(self check_spawn_cymbal_monkey(target.origin, sweapon)) {
         target.suppress_drops = 1;
+      }
     }
   }
 }
@@ -1067,8 +1124,9 @@ shotgunloadout() {
   }
 
   if(!(isDefined(self.is_zombie) && self.is_zombie) && !self hasweapon(level.start_weapon)) {
-    if(!self hasweapon("knife_zm"))
+    if(!self hasweapon("knife_zm")) {
       self giveweapon("knife_zm");
+    }
 
     self give_start_weapon(0);
   }
@@ -1078,13 +1136,16 @@ shotgunloadout() {
     self setweaponammostock("rottweil72_zm", 0);
   }
 
-  if(self hasweapon(level.start_weapon))
+  if(self hasweapon(level.start_weapon)) {
     self givemaxammo(level.start_weapon);
+  }
 
-  if(self hasweapon(self get_player_lethal_grenade()))
+  if(self hasweapon(self get_player_lethal_grenade())) {
     self getweaponammoclip(self get_player_lethal_grenade());
-  else
+  }
+  else {
     self giveweapon(self get_player_lethal_grenade());
+  }
 
   self setweaponammoclip(self get_player_lethal_grenade(), 2);
 
@@ -1099,13 +1160,15 @@ gunprogressionthink() {
   self endon("zombify");
   counter = 0;
 
-  if(isDefined(level.gunprogression) && !isDefined(level.cymbal_monkey_clone_weapon))
+  if(isDefined(level.gunprogression) && !isDefined(level.cymbal_monkey_clone_weapon)) {
     level.cymbal_monkey_clone_weapon = level.gunprogression[0];
+  }
 
   last = level.start_weapon;
 
-  if(!self hasweapon(self get_player_lethal_grenade()))
+  if(!self hasweapon(self get_player_lethal_grenade())) {
     self giveweapon(self get_player_lethal_grenade());
+  }
 
   self setweaponammoclip(self get_player_lethal_grenade(), 2);
 
@@ -1124,8 +1187,9 @@ gunprogressionthink() {
     self switchtoweapon(level.gunprogression[counter]);
     self waittill_notify_or_timeout("weapon_change_complete", 0.5);
 
-    if(isDefined(last) && self hasweapon(last))
+    if(isDefined(last) && self hasweapon(last)) {
       self takeweapon(last);
+    }
 
     last = level.gunprogression[counter];
 
@@ -1144,8 +1208,9 @@ gunprogressionthink() {
   self switchtoweapon(level.start_weapon);
   self waittill("weapon_change_complete");
 
-  if(isDefined(last) && self hasweapon(last))
+  if(isDefined(last) && self hasweapon(last)) {
     self takeweapon(last);
+  }
 
   while(true) {
     self waittill("killed_a_zombie_player", einflictor, target, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration);
@@ -1169,11 +1234,13 @@ checkzombiehumanratio(playertomove, playertoignore) {
   earliestzombie = undefined;
   earliestzombietime = 99999999;
 
-  if(get_players().size <= 1)
+  if(get_players().size <= 1) {
     end_game_early();
+  }
 
-  while(isDefined(level.checking_human_zombie_ratio) && level.checking_human_zombie_ratio)
+  while(isDefined(level.checking_human_zombie_ratio) && level.checking_human_zombie_ratio) {
     wait 0.05;
+  }
 
   level.checking_human_zombie_ratio = 1;
 
@@ -1182,12 +1249,14 @@ checkzombiehumanratio(playertomove, playertoignore) {
     players = get_players();
 
     foreach(player in players) {
-      if(isDefined(player.is_in_process_of_humanify) && player.is_in_process_of_humanify)
+      if(isDefined(player.is_in_process_of_humanify) && player.is_in_process_of_humanify) {
         someonebecominghuman = 1;
+      }
     }
 
-    if(!(isDefined(someonebecominghuman) && someonebecominghuman))
+    if(!(isDefined(someonebecominghuman) && someonebecominghuman)) {
       playertomove turn_to_human();
+    }
 
     level.checking_human_zombie_ratio = 0;
     return;
@@ -1257,8 +1326,9 @@ get_player_rank() {
   }
 
   for(index = 0; index < level.player_score_sort.size; index++) {
-    if(self == level.player_score_sort[index])
+    if(self == level.player_score_sort[index]) {
       return index;
+    }
   }
 
   assertmsg("This should not happen");
@@ -1269,10 +1339,12 @@ get_player_rank() {
 player_add_score(bonus) {
   mult = 1;
 
-  if(isDefined(self.is_zombie) && self.is_zombie)
+  if(isDefined(self.is_zombie) && self.is_zombie) {
     mult = level.zombie_vars[level.zombie_team]["zombie_point_scalar"];
-  else
+  }
+  else {
     mult = level.zombie_vars["allies"]["zombie_point_scalar"];
+  }
 
   self maps\mp\zombies\_zm_score::add_to_player_score(bonus * mult);
 }
@@ -1318,8 +1390,9 @@ award_round_end_bonus() {
   wait 0.25;
   level thread maps\mp\zombies\_zm_audio_announcer::leaderdialog("dr_time_line", undefined, undefined, 1);
 
-  while(maps\mp\zombies\_zm_laststand::player_any_player_in_laststand() || isDefined(level.in_zombify_call) && level.in_zombify_call)
+  while(maps\mp\zombies\_zm_laststand::player_any_player_in_laststand() || isDefined(level.in_zombify_call) && level.in_zombify_call) {
     wait 0.25;
+  }
 
   hiscore = -1;
 
@@ -1329,8 +1402,9 @@ award_round_end_bonus() {
       level.last_human_standing = player;
     }
 
-    if(player.score > hiscore)
+    if(player.score > hiscore) {
       hiscore = player.score;
+    }
   }
 
   foreach(player in get_players()) {
@@ -1375,8 +1449,9 @@ player_score_update() {
       continue;
     }
     if(!(isDefined(level.ingraceperiod) && level.ingraceperiod)) {
-      if(!cleansed_alive_check(self))
+      if(!cleansed_alive_check(self)) {
         waittime = 0.05;
+      }
       else if(isDefined(self.is_zombie) && self.is_zombie) {
         waittime = level.zombie_penalty_period;
         self player_sub_score(level.zombie_penalty_points);
@@ -1406,8 +1481,9 @@ respawn_cleansed_player() {
 }
 
 zcleansed_zombie_powerup_grab(powerup, zombie_player) {
-  if(!cleansed_alive_check(zombie_player))
+  if(!cleansed_alive_check(zombie_player)) {
     return false;
+  }
 
   switch (powerup.powerup_name) {
     case "the_cure":
@@ -1418,22 +1494,25 @@ zcleansed_zombie_powerup_grab(powerup, zombie_player) {
       players = get_players();
 
       foreach(player in players) {
-        if(player.is_zombie)
+        if(player.is_zombie) {
           player thread zombie_ramp_up();
+        }
       }
 
       break;
     default:
       if(isDefined(level.cleansed_powerups[powerup.powerup_name])) {
-        if(isDefined(level.cleansed_powerups[powerup.powerup_name].callback))
+        if(isDefined(level.cleansed_powerups[powerup.powerup_name].callback)) {
           powerup thread[[level.cleansed_powerups[powerup.powerup_name].callback]](zombie_player);
+        }
       }
   }
 }
 
 zcleansed_powerup_grab(powerup, player) {
-  if(!cleansed_alive_check(player))
+  if(!cleansed_alive_check(player)) {
     return false;
+  }
 
   switch (powerup.powerup_name) {
     case "blue_monkey":
@@ -1443,15 +1522,17 @@ zcleansed_powerup_grab(powerup, player) {
       break;
     default:
       if(isDefined(level.cleansed_powerups[powerup.powerup_name])) {
-        if(isDefined(level.cleansed_powerups[powerup.powerup_name].callback))
+        if(isDefined(level.cleansed_powerups[powerup.powerup_name].callback)) {
           powerup thread[[level.cleansed_powerups[powerup.powerup_name].callback]](player);
+        }
       }
   }
 }
 
 zcleansed_powerup_custom_time_logic(powerup) {
-  if(powerup.powerup_name == "the_cure")
+  if(powerup.powerup_name == "the_cure") {
     return 0;
+  }
 
   return 15;
 }
@@ -1467,8 +1548,9 @@ spawn_cymbalmonkey(origin) {
 }
 
 check_for_drops(washuman) {
-  if(!isDefined(level.cleansed_kills_for_drops))
+  if(!isDefined(level.cleansed_kills_for_drops)) {
     level.cleansed_kills_for_drops = 0;
+  }
 
   if(isDefined(self.nuked) && self.nuked || isDefined(self.suppress_drops) && self.suppress_drops) {
     return;
@@ -1487,8 +1569,9 @@ check_for_drops(washuman) {
 }
 
 add_cleansed_powerup(name, powerupmodel, text, team, zombie_death_frequency, human_death_frequency, callback) {
-  if(!isDefined(level.cleansed_powerups))
+  if(!isDefined(level.cleansed_powerups)) {
     level.cleansed_powerups = [];
+  }
 
   precachemodel(powerupmodel);
 
@@ -1496,8 +1579,9 @@ add_cleansed_powerup(name, powerupmodel, text, team, zombie_death_frequency, hum
     maps\mp\zombies\_zm_powerups::include_zombie_powerup(name);
     maps\mp\zombies\_zm_powerups::add_zombie_powerup(name, powerupmodel, text, maps\mp\zombies\_zm_powerups::func_should_never_drop, 0, team == 2, team == 1);
 
-    if(!isDefined(level.statless_powerups))
+    if(!isDefined(level.statless_powerups)) {
       level.statless_powerups = [];
+    }
 
     level.statless_powerups[name] = 1;
   }
@@ -1547,8 +1631,9 @@ pick_a_powerup(washuman) {
     powerup.recent = 0;
 
     for(i = 0; i < level.cleansed_powerup_history_depth[washuman]; i++) {
-      if(level.cleansed_powerup_history[washuman][i] == powerup.name)
+      if(level.cleansed_powerup_history[washuman][i] == powerup.name) {
         powerup.recent = 1;
+      }
     }
 
     if(powerup.recent) {
@@ -1562,8 +1647,9 @@ pick_a_powerup(washuman) {
     total = total + powerup.zfrequency;
   }
 
-  if(total == 0)
+  if(total == 0) {
     return undefined;
+  }
 
   r = randomfloat(total);
 
@@ -1571,17 +1657,20 @@ pick_a_powerup(washuman) {
     if(powerup.recent) {
       continue;
     }
-    if(washuman)
+    if(washuman) {
       r = r - powerup.hfrequency;
-    else
+    }
+    else {
       r = r - powerup.zfrequency;
+    }
 
     if(r <= 0) {
       level.cleansed_powerup_history[washuman][level.cleansed_powerup_history_last[washuman]] = powerup.name;
       level.cleansed_powerup_history_last[washuman]++;
 
-      if(level.cleansed_powerup_history_last[washuman] >= level.cleansed_powerup_history_depth[washuman])
+      if(level.cleansed_powerup_history_last[washuman] >= level.cleansed_powerup_history_depth[washuman]) {
         level.cleansed_powerup_history_last[washuman] = 0;
+      }
 
       return powerup;
     }
@@ -1601,21 +1690,26 @@ drop_powerup(washuman) {
 }
 
 powerup_can_player_grab(player) {
-  if(!cleansed_alive_check(player))
+  if(!cleansed_alive_check(player)) {
     return false;
+  }
 
   if(isDefined(level.cleansed_powerups[self.powerup_name])) {
-    if(level.cleansed_powerups[self.powerup_name].team == 0 && (isDefined(player.is_zombie) && player.is_zombie))
+    if(level.cleansed_powerups[self.powerup_name].team == 0 && (isDefined(player.is_zombie) && player.is_zombie)) {
       return false;
+    }
 
-    if(level.cleansed_powerups[self.powerup_name].team == 1 && !(isDefined(player.is_zombie) && player.is_zombie))
+    if(level.cleansed_powerups[self.powerup_name].team == 1 && !(isDefined(player.is_zombie) && player.is_zombie)) {
       return false;
+    }
   } else {
-    if(self.zombie_grabbable && !(isDefined(player.is_zombie) && player.is_zombie))
+    if(self.zombie_grabbable && !(isDefined(player.is_zombie) && player.is_zombie)) {
       return false;
+    }
 
-    if(!self.zombie_grabbable && (isDefined(player.is_zombie) && player.is_zombie))
+    if(!self.zombie_grabbable && (isDefined(player.is_zombie) && player.is_zombie)) {
       return false;
+    }
   }
 
   return true;
@@ -1627,8 +1721,9 @@ player_nuke_fx() {
   self endon("stop_flame_damage");
 
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_torso"])) {
-    if(!self.isdog)
+    if(!self.isdog) {
       playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+    }
   }
 
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"])) {
@@ -1666,8 +1761,9 @@ player_nuke(player) {
   wait(nuke_time);
 
   if(isDefined(self)) {
-    if(isDefined(player))
+    if(isDefined(player)) {
       self dodamage(self.health + 666, player.origin, player, player, "none", "MOD_EXPLOSIVE", 0, "nuke_zm");
+    }
     else {
       self.nuked = undefined;
       self dodamage(self.health + 666, self.origin, self, self, "none", "MOD_EXPLOSIVE", 0, "nuke_zm");
@@ -1751,8 +1847,9 @@ turned_powerup_yellow_nuke(player) {
     if(!cleansed_alive_check(target)) {
       continue;
     }
-    if(isDefined(target.team != player.team) && target.team != player.team)
+    if(isDefined(target.team != player.team) && target.team != player.team) {
       target thread player_nuke(player);
+    }
   }
 }
 

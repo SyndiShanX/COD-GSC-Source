@@ -174,13 +174,15 @@ create_weapon_object_watcher(name, weapon, ownerTeam) {
     weaponObjectWatcher = spawnStruct();
     self.weaponObjectWatcherArray[self.weaponObjectWatcherArray.size] = weaponObjectWatcher;
   }
-  if(getDvar(#"scr_deleteexplosivesonspawn") == "")
+  if(getDvar(#"scr_deleteexplosivesonspawn") == "") {
     setdvar("scr_deleteexplosivesonspawn", "1");
+  }
   if(GetDvarInt(#"scr_deleteexplosivesonspawn") == 1) {
     weaponObjectWatcher delete_weapon_object_array();
   }
-  if(!isDefined(weaponObjectWatcher.objectArray))
+  if(!isDefined(weaponObjectWatcher.objectArray)) {
     weaponObjectWatcher.objectArray = [];
+  }
   weaponObjectWatcher.name = name;
   weaponObjectWatcher.ownerTeam = ownerTeam;
   weaponObjectWatcher.type = "use";
@@ -203,10 +205,12 @@ create_weapon_object_watcher(name, weapon, ownerTeam) {
 setup_retrievable_watcher() {
   for(i = 0; i < level.retrievableWeapons.size; i++) {
     watcher = get_weapon_object_watcher_by_weapon(level.retrievableWeapons[i]);
-    if(!isDefined(watcher.onSpawnRetrieveTriggers))
+    if(!isDefined(watcher.onSpawnRetrieveTriggers)) {
       watcher.onSpawnRetrieveTriggers = ::on_spawn_retrievable_weapon_object;
-    if(!isDefined(watcher.pickUp))
+    }
+    if(!isDefined(watcher.pickUp)) {
       watcher.pickUp = ::pick_up;
+    }
   }
 }
 
@@ -290,8 +294,9 @@ watch_weapon_object_alt_detonate() {
 delete_weapon_objects_on_disconnect() {
   self endon("death");
   self waittill("disconnect");
-  if(!isDefined(self.weaponObjectWatcherArray))
+  if(!isDefined(self.weaponObjectWatcherArray)) {
     return;
+  }
   watchers = [];
   for(watcher = 0; watcher < self.weaponObjectWatcherArray.size; watcher++) {
     weaponObjectWatcher = spawnStruct();
@@ -314,10 +319,12 @@ on_spawn_retrievable_weapon_object(watcher, player) {
   self waittill_not_moving();
   self.pickUpTrigger = spawn("trigger_radius_use", self.origin, 0, 64, 64);
   self.pickUpTrigger SetCursorHint("HINT_NOICON");
-  if(isDefined(level.retrieveHints[watcher.name]))
+  if(isDefined(level.retrieveHints[watcher.name])) {
     self.pickUpTrigger SetHintString(level.retrieveHints[watcher.name].hint);
-  else
+  }
+  else {
     self.pickUpTrigger SetHintString(&"WEAPON_GENERIC_PICKUP");
+  }
   player ClientClaimTrigger(self.pickUpTrigger);
   self.pickupTrigger enablelinkto();
   self.pickupTrigger linkto(self);
@@ -392,22 +399,27 @@ add_weapon_object(watcher, weapon) {
     weapon thread weapon_object_damage(watcher);
   }
   weapon.owner notify("weapon_object_placed", weapon);
-  if(isDefined(watcher.onSpawn))
+  if(isDefined(watcher.onSpawn)) {
     weapon thread[[watcher.onSpawn]](watcher, self);
-  if(isDefined(watcher.onSpawnFX))
+  }
+  if(isDefined(watcher.onSpawnFX)) {
     weapon thread[[watcher.onSpawnFX]]();
-  if(isDefined(watcher.onSpawnRetrieveTriggers))
+  }
+  if(isDefined(watcher.onSpawnRetrieveTriggers)) {
     weapon thread[[watcher.onSpawnRetrieveTriggers]](watcher, self);
+  }
   RefreshHudAmmoCounter();
 }
 
 detonate_weapon_object_array() {
-  if(isDefined(self.disableDetonation) && self.disableDetonation)
+  if(isDefined(self.disableDetonation) && self.disableDetonation) {
     return;
+  }
   if(isDefined(self.objectArray)) {
     for(i = 0; i < self.objectArray.size; i++) {
-      if(isDefined(self.objectArray[i]))
+      if(isDefined(self.objectArray[i])) {
         self thread wait_and_detonate(self.objectArray[i], 0.1);
+      }
     }
   }
   self.objectArray = [];
@@ -416,8 +428,9 @@ detonate_weapon_object_array() {
 delete_weapon_object_array() {
   if(isDefined(self.objectArray)) {
     for(i = 0; i < self.objectArray.size; i++) {
-      if(isDefined(self.objectArray[i]))
+      if(isDefined(self.objectArray[i])) {
         self.objectArray[i] delete();
+      }
     }
   }
   self.objectArray = [];
@@ -427,16 +440,21 @@ watch_use_trigger(trigger, callback) {
   self endon("delete");
   while(true) {
     trigger waittill("trigger", player);
-    if(!IsAlive(player))
+    if(!IsAlive(player)) {
       continue;
-    if(!player IsOnGround())
+    }
+    if(!player IsOnGround()) {
       continue;
-    if(isDefined(trigger.triggerTeam) && (player.pers["team"] != trigger.triggerTeam))
+    }
+    if(isDefined(trigger.triggerTeam) && (player.pers["team"] != trigger.triggerTeam)) {
       continue;
-    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy))
+    }
+    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy)) {
       continue;
-    if(player UseButtonPressed() && !player.throwingGrenade && !player MeleeButtonPressed())
+    }
+    if(player UseButtonPressed() && !player.throwingGrenade && !player MeleeButtonPressed()) {
       self thread[[callback]]();
+    }
   }
 }
 
@@ -455,8 +473,9 @@ weapon_object_damage(watcher) {
   while(1) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelName, tagName, partName, iDFlags);
     if(!isDefined(self.allowAIToAttack)) {
-      if(!IsPlayer(attacker))
+      if(!IsPlayer(attacker)) {
         continue;
+      }
     }
     if(damage < 5) {
       if(isDefined(watcher.specialGrenadeDisabledTime)) {
@@ -466,30 +485,38 @@ weapon_object_damage(watcher) {
     }
     break;
   }
-  if(level.weaponobjectexplodethisframe)
+  if(level.weaponobjectexplodethisframe) {
     wait .1 + randomfloat(.4);
-  else
+  }
+  else {
     wait .05;
-  if(!isDefined(self))
+  }
+  if(!isDefined(self)) {
     return;
+  }
   level.weaponobjectexplodethisframe = true;
   thread reset_weapon_object_explode_this_frame();
-  if(isDefined(type) && (IsSubStr(type, "MOD_GRENADE_SPLASH") || IsSubStr(type, "MOD_GRENADE") || IsSubStr(type, "MOD_EXPLOSIVE")))
+  if(isDefined(type) && (IsSubStr(type, "MOD_GRENADE_SPLASH") || IsSubStr(type, "MOD_GRENADE") || IsSubStr(type, "MOD_EXPLOSIVE"))) {
     self.wasChained = true;
-  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
+  }
+  if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
     self.wasDamagedFromBulletPenetration = true;
+  }
   self.wasDamaged = true;
   watcher thread wait_and_detonate(self, 0.0, attacker);
 }
 
 wait_and_detonate(object, delay, attacker) {
   object endon("death");
-  if(delay)
+  if(delay) {
     wait(delay);
-  if(object.detonated)
+  }
+  if(object.detonated) {
     return;
-  if(!isDefined(self.detonate))
+  }
+  if(!isDefined(self.detonate)) {
     return;
+  }
   object.detonated = true;
   object notify("detonated");
   object[[self.detonate]](attacker);

@@ -35,8 +35,9 @@ main() {
 change_anim_set(animset) {
   assert(animset == "shepherd" || animset == "zombie");
   self.animSet = animset;
-  if(isDefined(anim.dogAnims) && isDefined(anim.dogAnims[self.animSet]))
+  if(isDefined(anim.dogAnims) && isDefined(anim.dogAnims[self.animSet])) {
     self.stopAnimDistSq = anim.dogAnims[self.animSet].dogStoppingDistSq;
+  }
 }
 
 setMeleeAttackDist() {

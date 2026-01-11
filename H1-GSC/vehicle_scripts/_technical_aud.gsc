@@ -29,8 +29,9 @@ snd_monitor_about_to_stop() {
   if(var_0 > 1.0) {
     wait(var_0 - 1.0);
 
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return;
+    }
   }
 
   self.about_to_stop = 1;
@@ -127,8 +128,9 @@ technical_condition_callback_to_idle(var_0, var_1) {
   var_2 = var_0["speed"];
   var_3 = var_0["about_to_stop"];
 
-  if(var_2 <= 0.1 || var_3 > 0.5)
+  if(var_2 <= 0.1 || var_3 > 0.5) {
     return 1;
+  }
 
   return 0;
 }
@@ -137,8 +139,9 @@ technical_condition_callback_to_engine(var_0, var_1) {
   var_2 = var_0["speed"];
   var_3 = var_0["about_to_stop"];
 
-  if(var_2 > 0.1 && var_3 <= 0.5)
+  if(var_2 > 0.1 && var_3 <= 0.5) {
     return 1;
+  }
 
   return 0;
 }

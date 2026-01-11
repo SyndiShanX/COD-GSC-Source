@@ -62,4 +62,3 @@ bgb_devgui_think() {
     wait 0.5;
   }
 }
-

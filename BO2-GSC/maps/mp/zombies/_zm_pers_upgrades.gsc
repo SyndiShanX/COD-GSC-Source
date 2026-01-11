@@ -39,26 +39,31 @@ pers_abilities_init_globals() {
   self.pers["zombies_multikilled"] = 0;
   self.non_headshot_kill_counter = 0;
 
-  if(isDefined(level.pers_upgrade_box_weapon) && level.pers_upgrade_box_weapon)
+  if(isDefined(level.pers_upgrade_box_weapon) && level.pers_upgrade_box_weapon) {
     self.pers_box_weapon_awarded = undefined;
+  }
 
-  if(isDefined(level.pers_upgrade_nube) && level.pers_upgrade_nube)
+  if(isDefined(level.pers_upgrade_nube) && level.pers_upgrade_nube) {
     self thread pers_nube_unlock_watcher();
+  }
 }
 
 is_pers_system_active() {
-  if(!is_classic())
+  if(!is_classic()) {
     return false;
+  }
 
-  if(is_pers_system_disabled())
+  if(is_pers_system_disabled()) {
     return false;
+  }
 
   return true;
 }
 
 is_pers_system_disabled() {
-  if(level flag_exists("sq_minigame_active") && flag("sq_minigame_active"))
+  if(level flag_exists("sq_minigame_active") && flag("sq_minigame_active")) {
     return true;
+  }
 
   return false;
 }
@@ -295,8 +300,9 @@ pers_upgrade_insta_kill_active() {
 is_insta_kill_upgraded_and_active() {
   if(maps\mp\zombies\_zm_pers_upgrades::is_pers_system_active()) {
     if(self maps\mp\zombies\_zm_powerups::is_insta_kill_active()) {
-      if(isDefined(self.pers_upgrades_awarded["insta_kill"]) && self.pers_upgrades_awarded["insta_kill"])
+      if(isDefined(self.pers_upgrades_awarded["insta_kill"]) && self.pers_upgrades_awarded["insta_kill"]) {
         return true;
+      }
     }
   }
 
@@ -360,8 +366,9 @@ persistent_carpenter_ability_check() {
   if(isDefined(level.pers_upgrade_carpenter) && level.pers_upgrade_carpenter) {
     self endon("disconnect");
 
-    if(isDefined(self.pers_upgrades_awarded["carpenter"]) && self.pers_upgrades_awarded["carpenter"])
+    if(isDefined(self.pers_upgrades_awarded["carpenter"]) && self.pers_upgrades_awarded["carpenter"]) {
       level.pers_carpenter_boards_active = 1;
+    }
 
     self.pers_carpenter_zombie_check_active = 1;
     self.pers_carpenter_kill = undefined;
@@ -372,8 +379,9 @@ persistent_carpenter_ability_check() {
     while(true) {
       if(!is_pers_system_disabled()) {
         if(!isDefined(level.carpenter_powerup_active)) {
-          if(!isDefined(level.carpenter_finished_start_time))
+          if(!isDefined(level.carpenter_finished_start_time)) {
             level.carpenter_finished_start_time = gettime();
+          }
 
           time = gettime();
           dt = (time - level.carpenter_finished_start_time) / 1000;
@@ -404,8 +412,9 @@ pers_zombie_death_location_check(attacker, v_pos) {
   if(maps\mp\zombies\_zm_pers_upgrades::is_pers_system_active()) {
     if(is_player_valid(attacker)) {
       if(isDefined(attacker.pers_carpenter_zombie_check_active)) {
-        if(!check_point_in_playable_area(v_pos))
+        if(!check_point_in_playable_area(v_pos)) {
           attacker.pers_carpenter_kill = 1;
+        }
       }
     }
   }

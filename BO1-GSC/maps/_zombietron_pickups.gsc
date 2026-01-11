@@ -1712,16 +1712,21 @@ shield_trigger_think(player) {
   self endon("disconnect");
   while(1) {
     self waittill("trigger", guy);
-    if(!isDefined(guy))
+    if(!isDefined(guy)) {
       continue;
-    if(IsPlayer(guy))
+    }
+    if(IsPlayer(guy)) {
       continue;
-    if(isDefined(guy.launched))
+    }
+    if(isDefined(guy.launched)) {
       continue;
-    if(isDefined(guy.boss))
+    }
+    if(isDefined(guy.boss)) {
       continue;
-    if(!IsSentient(guy))
+    }
+    if(!IsSentient(guy)) {
       continue;
+    }
     if(isDefined(player.rhino_deaths)) {
       player.rhino_deaths++;
     }
@@ -1736,10 +1741,12 @@ shield_trigger_think(player) {
 }
 
 shield_flag_on(onOff) {
-  if(onOff)
+  if(onOff) {
     self.shield_is_on = 1;
-  else
+  }
+  else {
     self.shield_is_on = undefined;
+  }
 }
 
 turn_shield_on(short_shield) {
@@ -2141,10 +2148,12 @@ spawn_armory() {
     spawn_specific_pickup("booster");
     wait 0.2;
   }
-  if(numplayers > 1)
+  if(numplayers > 1) {
     numChickens = 1;
-  else
+  }
+  else {
     numChickens = 4;
+  }
   while(numChickens) {
     numChickens--;
     spawn_specific_pickup("double_shot");

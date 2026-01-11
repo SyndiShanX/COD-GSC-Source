@@ -17,8 +17,9 @@ tryusepredatormissile(var_00, var_01) {
   var_02 = scripts\mp\killstreaks\killstreaks::initridekillstreak();
 
   if(var_02 != "success") {
-    if(var_02 != "disconnect")
+    if(var_02 != "disconnect") {
       scripts\mp\utility\game::clearusingremote();
+    }
 
     return 0;
   }
@@ -68,8 +69,9 @@ func_7E01(var_00) {
     foreach(var_06 in var_3.func_1314F) {
       var_3.func_10909 = var_3.func_10909 + 1;
 
-      if(bullettracepassed(var_6.origin + (0, 0, 32), var_3.origin, 0, var_06))
+      if(bullettracepassed(var_6.origin + (0, 0, 32), var_3.origin, 0, var_06)) {
         var_3.func_10909 = var_3.func_10909 + 3;
+      }
 
       if(var_3.func_10909 > var_13.func_10909) {
         var_13 = var_03;
@@ -77,8 +79,9 @@ func_7E01(var_00) {
       }
 
       if(var_3.func_10909 == var_13.func_10909) {
-        if(scripts\engine\utility::cointoss())
+        if(scripts\engine\utility::cointoss()) {
           var_13 = var_03;
+        }
       }
     }
   }
@@ -90,14 +93,17 @@ _fire(var_00, var_01) {
   var_02 = getEntArray("remoteMissileSpawn", "targetname");
 
   foreach(var_04 in var_02) {
-    if(isDefined(var_4.target))
+    if(isDefined(var_4.target)) {
       var_4.func_1155F = getent(var_4.target, "targetname");
+    }
   }
 
-  if(var_2.size > 0)
+  if(var_2.size > 0) {
     var_06 = var_01 func_7E01(var_02);
-  else
+  }
+  else {
     var_06 = undefined;
+  }
 
   if(isDefined(var_06)) {
     var_07 = var_6.origin;
@@ -133,8 +139,9 @@ handledamage() {
   self endon("deleted");
   self setCanDamage(1);
 
-  for(;;)
+  for(;;) {
     self waittill("damage");
+  }
 }
 
 missileeyes(var_00, var_01) {
@@ -153,27 +160,31 @@ missileeyes(var_00, var_01) {
     var_00 cameralinkto(var_01, "tag_origin");
     var_00 controlslinkto(var_01);
 
-    if(getdvarint("camera_thirdPerson"))
+    if(getdvarint("camera_thirdPerson")) {
       var_00 scripts\mp\utility\game::setthirdpersondof(0);
+    }
 
     var_01 waittill("death");
     var_00 thermalvisionoff();
 
-    if(isDefined(var_01))
+    if(isDefined(var_01)) {
       var_00 scripts\mp\matchdata::logkillstreakevent("predator_missile", var_1.origin);
+    }
 
     var_00 controlsunlink();
     var_00 scripts\mp\utility\game::freezecontrolswrapper(1);
 
-    if(!level.gameended)
+    if(!level.gameended) {
       var_00 setclientomnvar("ui_predator_missile", 2);
+    }
 
     wait 0.5;
     var_00 thermalvisionfofoverlayoff();
     var_00 cameraunlink();
 
-    if(getdvarint("camera_thirdPerson"))
+    if(getdvarint("camera_thirdPerson")) {
       var_00 scripts\mp\utility\game::setthirdpersondof(1);
+    }
   }
 
   var_00 setclientomnvar("ui_predator_missile", 0);
@@ -198,8 +209,9 @@ player_cleanuponteamchange(var_00) {
     self controlsunlink();
     self cameraunlink();
 
-    if(getdvarint("camera_thirdPerson"))
+    if(getdvarint("camera_thirdPerson")) {
       scripts\mp\utility\game::setthirdpersondof(1);
+    }
   }
 
   scripts\mp\utility\game::clearusingremote();
@@ -222,6 +234,7 @@ player_cleanupongameended(var_00) {
   self controlsunlink();
   self cameraunlink();
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(1);
+  }
 }

@@ -8,8 +8,9 @@
 //#using_animtree ("generic_human"); - This file doesn't call animations directly.
 
 InitCharacterFace() {
-  if(!anim.useFacialAnims)
+  if(!anim.useFacialAnims) {
     return;
+  }
 
   // Does any per-character initialization which is required by this facial animation script.
   // InitLevelFace must be called before this function.
@@ -28,10 +29,12 @@ SayGenericDialogue(typeString) {
   // possible for the character to be changed after the level loads (generally right before it starts).
   // Use (entity number) modulus (number of voices) to get a consistent result.
 
-  if((self.voice == "multilingual") || (self.voice == "italian") || (self.voice == "german") || (self.voice == "spanish"))
+  if((self.voice == "multilingual") || (self.voice == "italian") || (self.voice == "german") || (self.voice == "spanish")) {
     voiceString = "russian";
-  else
+  }
+  else {
     voiceString = self.voice;
+  }
 
   ASSERT(isDefined(voiceString));
 
@@ -126,8 +129,9 @@ SetIdleFaceDelayed(facialAnimationArray) {
 // The array is animation1, weight1, animation2, weight2, etc.The animations will play in turn - each time
 // one finishes a new one will be chosen randomly based on weight.
 SetIdleFace(facialAnimationArray) {
-  if(!anim.useFacialAnims)
+  if(!anim.useFacialAnims) {
     return;
+  }
 
   self animscripts\battleChatter::playBattleChatter();
 
@@ -155,8 +159,9 @@ SaySpecificDialogue(facialanim, soundAlias, importance, notifyString, waitOrNot,
 ChooseAnimFromSet(animSet) {
   return; // Facial animations are now part of full body aniamtions
   /*
-  	if(!anim.useFacialAnims)
+  	if(!anim.useFacialAnims) {
   		return;
+  	}
   	// First, normalize the weights.
   	totalWeight = 0;
   	numAnims = animSet["anim"].size;
@@ -215,8 +220,9 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
   } else
     self playSound(soundAlias);
 
-  if(!anim.useFacialAnims)
+  if(!anim.useFacialAnims) {
     return;
+  }
 
   InitCharacterFace();
 
@@ -266,8 +272,9 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
     // up and remove this entry from the queue.If the notify happens first, we stop waiting for the
     // time and we play the face.
     self thread PlayFace_WaitForNotify(("animscript face stop waiting " + self.faceWaiting[thisEntryNum]["notifyNum"]), "Face done waiting", "Face done waiting");
-    if(isDefined(timeToWait))
+    if(isDefined(timeToWait)) {
       self thread PlayFace_WaitForTime(timeToWait, "Face done waiting", "Face done waiting");
+    }
     self waittill("Face done waiting");
 
     // First, find the entry, since it may have been moved.

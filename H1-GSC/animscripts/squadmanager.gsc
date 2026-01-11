@@ -56,8 +56,9 @@ createsquad(var_0, var_1) {
     var_2 thread[[var_4]]();
   }
 
-  for(var_3 = 0; var_3 < anim.squadindex.size; var_3++)
+  for(var_3 = 0; var_3 < anim.squadindex.size; var_3++) {
     anim.squadindex[var_3] updatesquadlist();
+  }
 
   var_2 thread updatewaiter();
   var_2 thread squadtracker();
@@ -74,8 +75,9 @@ deletesquad(var_0) {
   var_2 = anim.squads[var_0];
   var_2 notify("squad_deleting");
 
-  while(var_2.members.size)
+  while(var_2.members.size) {
     var_2.members[0] addtosquad(var_2.members[0].team);
+  }
 
   anim.squadindex[var_1] = anim.squadindex[anim.squadindex.size - 1];
   anim.squadindex[var_1].squadid = var_1;
@@ -84,8 +86,9 @@ deletesquad(var_0) {
   level notify("squad deleted " + var_0);
   anim notify("squad deleted " + var_0);
 
-  for(var_3 = 0; var_3 < anim.squadindex.size; var_3++)
+  for(var_3 = 0; var_3 < anim.squadindex.size; var_3++) {
     anim.squadindex[var_3] updatesquadlist();
+  }
 }
 
 generatesquadname() {
@@ -96,14 +99,17 @@ generatesquadname() {
 
 addplayertosquad(var_0) {
   if(!isDefined(var_0)) {
-    if(isDefined(self.script_squadname))
+    if(isDefined(self.script_squadname)) {
       var_0 = self.script_squadname;
-    else
+    }
+    else {
       var_0 = self.team;
+    }
   }
 
-  if(!isDefined(anim.squads[var_0]))
+  if(!isDefined(anim.squads[var_0])) {
     anim createsquad(var_0, self);
+  }
 
   var_1 = anim.squads[var_0];
   self.squad = var_1;
@@ -113,10 +119,12 @@ squadchange() {
   self endon("death");
   wait 10.0;
 
-  if(!isDefined(self.script_squadname))
+  if(!isDefined(self.script_squadname)) {
     var_0 = self.team + self.script_flanker;
-  else
+  }
+  else {
     var_0 = self.script_squadname + self.script_flanker;
+  }
 
   addtosquad(var_0);
 }
@@ -124,33 +132,40 @@ squadchange() {
 getsquadteam(var_0) {
   var_1 = "allies";
 
-  if(var_0.team == "axis" || var_0.team == "neutral" || var_0.team == "team3")
+  if(var_0.team == "axis" || var_0.team == "neutral" || var_0.team == "team3") {
     var_1 = var_0.team;
+  }
 
   return var_1;
 }
 
 addtosquad(var_0) {
   if(!isDefined(var_0)) {
-    if(isDefined(self.script_flanker))
+    if(isDefined(self.script_flanker)) {
       thread squadchange();
+    }
 
-    if(isDefined(self.script_squadname))
+    if(isDefined(self.script_squadname)) {
       var_0 = self.script_squadname;
-    else
+    }
+    else {
       var_0 = self.team;
+    }
   }
 
-  if(!isDefined(anim.squads[var_0]))
+  if(!isDefined(anim.squads[var_0])) {
     anim createsquad(var_0, self);
+  }
 
   var_1 = anim.squads[var_0];
 
   if(isDefined(self.squad)) {
-    if(self.squad == var_1)
+    if(self.squad == var_1) {
       return;
-    else
+    }
+    else {
       removefromsquad();
+    }
   }
 
   self.lastenemysighttime = 0;
@@ -161,8 +176,9 @@ addtosquad(var_0) {
   var_1.membercount = var_1.members.size;
 
   if(isDefined(level.loadoutcomplete)) {
-    if(self.team == "allies" && animscripts\battlechatter::isofficer())
+    if(self.team == "allies" && animscripts\battlechatter::isofficer()) {
       addofficertosquad();
+    }
   }
 
   for(var_2 = 0; var_2 < self.squad.memberaddfuncs.size; var_2++) {
@@ -178,12 +194,14 @@ removefromsquad() {
   var_0 = self.squad;
   var_1 = -1;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     var_1 = self.memberid;
+  }
   else {
     for(var_2 = 0; var_2 < var_0.members.size; var_2++) {
-      if(var_0.members[var_2] == self)
+      if(var_0.members[var_2] == self) {
         var_1 = var_2;
+      }
     }
   }
 
@@ -191,23 +209,26 @@ removefromsquad() {
     var_3 = var_0.members[var_0.members.size - 1];
     var_0.members[var_1] = var_3;
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3.memberid = var_1;
+    }
   }
 
   var_0.members[var_0.members.size - 1] = undefined;
   var_0.membercount = var_0.members.size;
 
-  if(isDefined(self.officerid))
+  if(isDefined(self.officerid)) {
     removeofficerfromsquad();
+  }
 
   for(var_2 = 0; var_2 < self.squad.memberremovefuncs.size; var_2++) {
     var_4 = self.squad.memberremovefuncs[var_2];
     self thread[[var_4]](var_0.squadname);
   }
 
-  if(var_0.membercount == 0)
+  if(var_0.membercount == 0) {
     deletesquad(var_0.squadname);
+  }
 
   if(isDefined(self)) {
     self.squad = undefined;
@@ -232,12 +253,14 @@ removeofficerfromsquad() {
   var_0 = self.squad;
   var_1 = -1;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     var_1 = self.officerid;
+  }
   else {
     for(var_2 = 0; var_2 < var_0.officers.size; var_2++) {
-      if(var_0.officers[var_2] == self)
+      if(var_0.officers[var_2] == self) {
         var_1 = var_2;
+      }
     }
   }
 
@@ -245,24 +268,28 @@ removeofficerfromsquad() {
     var_3 = var_0.officers[var_0.officers.size - 1];
     var_0.officers[var_1] = var_3;
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_3.officerid = var_1;
+    }
   }
 
   var_0.officers[var_0.officers.size - 1] = undefined;
   var_0.officercount = var_0.officers.size;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.officerid = undefined;
+  }
 }
 
 officerwaiter() {
-  if(!isDefined(level.loadoutcomplete))
+  if(!isDefined(level.loadoutcomplete)) {
     anim waittill("loadout complete");
+  }
 
   for(var_0 = 0; var_0 < self.members.size; var_0++) {
-    if(self.members[var_0] animscripts\battlechatter::isofficer())
+    if(self.members[var_0] animscripts\battlechatter::isofficer()) {
       self.members[var_0] addofficertosquad();
+    }
   }
 }
 
@@ -291,8 +318,9 @@ squadtracker() {
   anim endon("squad deleted " + self.squadname);
   var_0 = 0.1;
 
-  if(level.currentgen)
+  if(level.currentgen) {
     var_0 = 0.5;
+  }
 
   for(;;) {
     updateall();
@@ -304,8 +332,9 @@ memberdeathwaiter() {
   self endon("removed from squad");
   self waittill("death", var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.attacker = var_0;
+  }
 
   removefromsquad();
 }
@@ -316,18 +345,21 @@ membercombatwaiter() {
   for(;;) {
     self waittill("enemy");
 
-    if(!isDefined(self.enemy))
+    if(!isDefined(self.enemy)) {
       self.squad notify("squadupdate", "combat");
-    else
+    }
+    else {
       self.squad.isincombat = 1;
+    }
 
     wait 0.05;
   }
 }
 
 updateheading() {
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     self.forward = vectornormalize(self.enemy.origin - self.origin);
+  }
   else {
     var_0 = (0, 0, 0);
     var_1 = 0;
@@ -361,21 +393,25 @@ updateorigin() {
     var_1++;
   }
 
-  if(var_1)
+  if(var_1) {
     self.origin = (var_0[0] / var_1, var_0[1] / var_1, var_0[2] / var_1);
-  else
+  }
+  else {
     self.origin = var_0;
+  }
 }
 
 updatecombat() {
   self.isincombat = 0;
 
-  for(var_0 = 0; var_0 < anim.squadindex.size; var_0++)
+  for(var_0 = 0; var_0 < anim.squadindex.size; var_0++) {
     self.squadlist[anim.squadindex[var_0].squadname].isincontact = 0;
+  }
 
   for(var_0 = 0; var_0 < self.members.size; var_0++) {
-    if(isDefined(self.members[var_0].enemy) && isDefined(self.members[var_0].enemy.squad) && self.members[var_0].combattime > 0)
+    if(isDefined(self.members[var_0].enemy) && isDefined(self.members[var_0].enemy.squad) && self.members[var_0].combattime > 0) {
       self.squadlist[self.members[var_0].enemy.squad.squadname].isincontact = 1;
+    }
   }
 }
 
@@ -389,8 +425,9 @@ updateenemy() {
         continue;
       }
 
-      if(self.members[var_1].enemy.squad.membercount > var_0.membercount)
+      if(self.members[var_1].enemy.squad.membercount > var_0.membercount) {
         var_0 = self.members[var_1].enemy.squad;
+      }
     }
   }
 
@@ -417,15 +454,18 @@ updateall() {
         continue;
       }
 
-      if(self.members[var_4].enemy.squad.membercount > var_2.membercount)
+      if(self.members[var_4].enemy.squad.membercount > var_2.membercount) {
         var_2 = self.members[var_4].enemy.squad;
+      }
     }
   }
 
-  if(var_1)
+  if(var_1) {
     self.origin = (var_0[0] / var_1, var_0[1] / var_1, var_0[2] / var_1);
-  else
+  }
+  else {
     self.origin = var_0;
+  }
 
   self.isincombat = var_3;
   self.enemy = var_2;
@@ -449,11 +489,13 @@ updatesquadlist() {
 printabovehead(var_0, var_1, var_2, var_3) {
   self endon("death");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = (0, 0, 0);
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = (1, 0, 0);
+  }
 
   for(var_4 = 0; var_4 < var_1 * 2; var_4++) {
     if(!isalive(self)) {
@@ -524,8 +566,9 @@ updatememberstates() {
   anim endon("squad deleted " + self.squadname);
   var_0 = 0.05;
 
-  if(level.currentgen)
+  if(level.currentgen) {
     var_0 = 0.25;
+  }
 
   for(;;) {
     for(var_1 = 0; var_1 < self.members.size; var_1++) {
@@ -542,10 +585,12 @@ updatememberstates() {
 
 aiupdatecombat(var_0) {
   if(isDefined(self.lastenemysightpos)) {
-    if(self.combattime < 0)
+    if(self.combattime < 0) {
       self.combattime = var_0;
-    else
+    }
+    else {
       self.combattime = self.combattime + var_0;
+    }
 
     self.lastenemysighttime = gettime();
     return;
@@ -554,18 +599,22 @@ aiupdatecombat(var_0) {
     return;
   }
 
-  if(self.combattime > 0)
+  if(self.combattime > 0) {
     self.combattime = 0 - var_0;
-  else
+  }
+  else {
     self.combattime = self.combattime - var_0;
+  }
 }
 
 aiupdatesuppressed(var_0) {
   if(self.suppressed) {
-    if(self.suppressedtime < 0)
+    if(self.suppressedtime < 0) {
       self.suppressedtime = var_0;
-    else
+    }
+    else {
       self.suppressedtime = self.suppressedtime + var_0;
+    }
   } else {
     if(self.suppressedtime > 0) {
       self.suppressedtime = 0 - var_0;
@@ -591,34 +640,40 @@ resetstate(var_0) {
 querymemberanimstate(var_0) {
   self.squadstates[var_0.a.state].numactive++;
 
-  if(self.squadstates[var_0.a.state].numactive > self.squadstates[var_0.a.state].activateratio * self.members.size)
+  if(self.squadstates[var_0.a.state].numactive > self.squadstates[var_0.a.state].activateratio * self.members.size) {
     self.squadstates[var_0.a.state].isactive = 1;
+  }
 }
 
 querymemberstate(var_0, var_1) {
   switch (var_1) {
     case "suppressed":
-      if(var_0.suppressedtime > 1.0)
+      if(var_0.suppressedtime > 1.0) {
         self.squadstates[var_1].numactive++;
+      }
 
       break;
     case "combat":
-      if(var_0.combattime > 0.0)
+      if(var_0.combattime > 0.0) {
         self.squadstates[var_1].numactive++;
+      }
 
       break;
     case "attacking":
-      if(gettime() < var_0.a.lastshoottime + 2000)
+      if(gettime() < var_0.a.lastshoottime + 2000) {
         self.squadstates[var_1].numactive++;
+      }
 
       break;
     case "cover":
-      if(!var_0 animscripts\battlechatter::isexposed())
+      if(!var_0 animscripts\battlechatter::isexposed()) {
         self.squadstates[var_1].numactive++;
+      }
 
       break;
   }
 
-  if(self.squadstates[var_1].numactive > self.squadstates[var_1].activateratio * self.members.size)
+  if(self.squadstates[var_1].numactive > self.squadstates[var_1].activateratio * self.members.size) {
     self.squadstates[var_1].isactive = 1;
+  }
 }

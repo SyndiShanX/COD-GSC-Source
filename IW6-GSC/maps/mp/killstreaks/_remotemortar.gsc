@@ -28,8 +28,9 @@ tryUseRemoteMortar(lifeId, streakName) {
   self setUsingRemote("remote_mortar");
   result = self maps\mp\killstreaks\_killstreaks::initRideKillstreak("remote_mortar");
   if(result != "success") {
-    if(result != "disconnect")
+    if(result != "disconnect") {
       self clearUsingRemote();
+    }
 
     return false;
   } else if(isDefined(level.remote_mortar)) {
@@ -45,8 +46,9 @@ tryUseRemoteMortar(lifeId, streakName) {
 
 startRemoteMortar(lifeId) {
   remote = spawnRemote(lifeId, self);
-  if(!isDefined(remote))
+  if(!isDefined(remote)) {
     return false;
+  }
 
   level.remote_mortar = remote;
 
@@ -58,8 +60,9 @@ startRemoteMortar(lifeId) {
 
 spawnRemote(lifeId, owner) {
   remote = spawnPlane(owner, "script_model", level.UAVRig getTagOrigin("tag_origin"), "compass_objpoint_reaper_friendly", "compass_objpoint_reaper_enemy");
-  if(!isDefined(remote))
+  if(!isDefined(remote)) {
     return undefined;
+  }
 
   remote setModel("vehicle_predator_b");
   remote.lifeId = lifeId;
@@ -116,8 +119,9 @@ remoteRide(remote) {
   self thread waitSetThermal(1.0, remote);
   self thread reInitializeThermal(remote);
 
-  if(getDvarInt("camera_thirdPerson"))
+  if(getDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(false);
+  }
 
   self PlayerLinkWeaponviewToDelta(remote, "tag_player", 1.0, 40, 40, 25, 40);
   self thread lookCenter(remote);
@@ -229,8 +233,9 @@ handleToggleZoom(remote) {
   while(true) {
     result = waittill_any_return("remote_mortar_toggleZoom1");
 
-    if(!isDefined(self.remote_mortar_toggleZoom))
+    if(!isDefined(self.remote_mortar_toggleZoom)) {
       self.remote_mortar_toggleZoom = 0;
+    }
 
     self.remote_mortar_toggleZoom = 1 - self.remote_mortar_toggleZoom;
   }
@@ -251,8 +256,9 @@ remoteZoom(remote) {
   while(true) {
     if(self adsButtonPressed()) {
       wait(0.05);
-      if(isDefined(self.remote_mortar_toggleZoom))
+      if(isDefined(self.remote_mortar_toggleZoom)) {
         usingToggle = true;
+      }
       break;
     }
     wait(0.05);
@@ -316,8 +322,9 @@ remoteEndRide(remote) {
 
   self unlink();
   self clearUsingRemote();
-  if(getDvarInt("camera_thirdPerson"))
+  if(getDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(true);
+  }
 
   self switchToWeapon(self getLastWeapon());
 
@@ -341,11 +348,13 @@ handleTimeout(owner) {
 
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(lifeSpan);
 
-  while(owner.firingReaper)
+  while(owner.firingReaper) {
     wait(0.05);
+  }
 
-  if(isDefined(owner))
+  if(isDefined(owner)) {
     owner remoteEndRide(self);
+  }
   self thread remoteLeave();
 }
 
@@ -357,8 +366,9 @@ handleDeath(owner) {
 
   self waittill("death");
 
-  if(isDefined(owner))
+  if(isDefined(owner)) {
     owner remoteEndRide(self);
+  }
   level thread removeRemote(self, true);
 }
 
@@ -371,8 +381,9 @@ handleOwnerChangeTeam(owner) {
 
   owner waittill_any("joined_team", "joined_spectators");
 
-  if(isDefined(owner))
+  if(isDefined(owner)) {
     owner remoteEndRide(self);
+  }
   self thread remoteLeave();
 }
 
@@ -390,16 +401,18 @@ handleOwnerDisconnect(owner) {
 removeRemote(remote, clearLevelRef) {
   self notify("remote_removed");
 
-  if(isDefined(remote.targetEnt))
+  if(isDefined(remote.targetEnt)) {
     remote.targetEnt delete();
+  }
 
   if(isDefined(remote)) {
     remote delete();
     remote maps\mp\killstreaks\_uav::removeUAVModel();
   }
 
-  if(!isDefined(clearLevelRef) || clearLevelRef == true)
+  if(!isDefined(clearLevelRef) || clearLevelRef == true) {
     level.remote_mortar = undefined;
+  }
 }
 
 remoteLeave() {
@@ -446,8 +459,9 @@ damageTracker() {
     if(!isDefined(self)) {
       return;
     }
-    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION))
+    if(isDefined(iDFlags) && (iDFlags &level.iDFLAGS_PENETRATION)) {
       self.wasDamagedFromBulletPenetration = true;
+    }
 
     self.wasDamaged = true;
 
@@ -457,8 +471,9 @@ damageTracker() {
       attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
 
       if(meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET") {
-        if(attacker _hasPerk("specialty_armorpiercing"))
+        if(attacker _hasPerk("specialty_armorpiercing")) {
           modifiedDamage += damage * level.armorPiercingMod;
+        }
       }
     }
 
@@ -480,8 +495,9 @@ damageTracker() {
 
     self.damageTaken += modifiedDamage;
 
-    if(isDefined(self.owner))
+    if(isDefined(self.owner)) {
       self.owner playLocalSound("reaper_damaged");
+    }
 
     if(self.damageTaken >= self.maxHealth) {
       if(isPlayer(attacker) && (!isDefined(self.owner) || attacker != self.owner)) {
@@ -493,8 +509,9 @@ damageTracker() {
 
       }
 
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self.owner StopLocalSound("missile_incoming");
+      }
 
       self thread remoteExplode();
 
@@ -523,8 +540,9 @@ stingerProximityDetonate(missileTarget, player) {
   self endon("death");
   missileTarget endon("death");
 
-  if(isDefined(missileTarget.owner))
+  if(isDefined(missileTarget.owner)) {
     missileTarget.owner PlayLocalSound("missile_incoming");
+  }
 
   self Missile_SetTargetEnt(missileTarget);
 
@@ -532,10 +550,12 @@ stingerProximityDetonate(missileTarget, player) {
   lastCenter = missileTarget GetPointInBounds(0, 0, 0);
 
   while(true) {
-    if(!isDefined(missileTarget))
+    if(!isDefined(missileTarget)) {
       center = lastCenter;
-    else
+    }
+    else {
       center = missileTarget GetPointInBounds(0, 0, 0);
+    }
 
     lastCenter = center;
 
@@ -550,14 +570,16 @@ stingerProximityDetonate(missileTarget, player) {
       self Missile_SetTargetEnt(newTarget);
       missileTarget = newTarget;
 
-      if(isDefined(missileTarget.owner))
+      if(isDefined(missileTarget.owner)) {
         missileTarget.owner StopLocalSound("missile_incoming");
+      }
 
       return;
     }
 
-    if(curDist < minDist)
+    if(curDist < minDist) {
       minDist = curDist;
+    }
 
     if(curDist > minDist) {
       if(curDist > 1536) {
@@ -567,8 +589,9 @@ stingerProximityDetonate(missileTarget, player) {
         missileTarget.owner stopLocalSound("missile_incoming");
 
         if(level.teambased) {
-          if(missileTarget.team != player.team)
+          if(missileTarget.team != player.team) {
             RadiusDamage(self.origin, 1000, 1000, 1000, player, "MOD_EXPLOSIVE", "stinger_mp");
+          }
         } else {
           RadiusDamage(self.origin, 1000, 1000, 1000, player, "MOD_EXPLOSIVE", "stinger_mp");
         }
@@ -602,18 +625,21 @@ handleIncomingSAM() {
 samProximityDetonate(missileTarget, player, missileGroup) {
   missileTarget endon("death");
 
-  if(isDefined(missileTarget.owner))
+  if(isDefined(missileTarget.owner)) {
     missileTarget.owner PlayLocalSound("missile_incoming");
+  }
 
   sam_projectile_damage = 150;
   sam_projectile_damage_radius = 1000;
 
   minDist = [];
   for(i = 0; i < missileGroup.size; i++) {
-    if(isDefined(missileGroup[i]))
+    if(isDefined(missileGroup[i])) {
       minDist[i] = Distance(missileGroup[i].origin, missileTarget GetPointInBounds(0, 0, 0));
-    else
+    }
+    else {
       minDist[i] = undefined;
+    }
   }
 
   while(true) {
@@ -621,8 +647,9 @@ samProximityDetonate(missileTarget, player, missileGroup) {
 
     curDist = [];
     for(i = 0; i < missileGroup.size; i++) {
-      if(isDefined(missileGroup[i]))
+      if(isDefined(missileGroup[i])) {
         curDist[i] = Distance(missileGroup[i].origin, center);
+      }
     }
 
     for(i = 0; i < curDist.size; i++) {
@@ -639,14 +666,16 @@ samProximityDetonate(missileTarget, player, missileGroup) {
             }
           }
 
-          if(isDefined(missileTarget.owner))
+          if(isDefined(missileTarget.owner)) {
             missileTarget.owner StopLocalSound("missile_incoming");
+          }
 
           return;
         }
 
-        if(curDist[i] < minDist[i])
+        if(curDist[i] < minDist[i]) {
           minDist[i] = curDist[i];
+        }
 
         if(curDist[i] > minDist[i]) {
           if(curDist[i] > 1536) {
@@ -656,8 +685,9 @@ samProximityDetonate(missileTarget, player, missileGroup) {
             missileTarget.owner StopLocalSound("missile_incoming");
 
             if(level.teambased) {
-              if(missileTarget.team != player.team)
+              if(missileTarget.team != player.team) {
                 RadiusDamage(missileGroup[i].origin, sam_projectile_damage_radius, sam_projectile_damage, sam_projectile_damage, player, "MOD_EXPLOSIVE", "sam_projectile_mp");
+              }
             } else {
               RadiusDamage(missileGroup[i].origin, sam_projectile_damage_radius, sam_projectile_damage, sam_projectile_damage, player, "MOD_EXPLOSIVE", "sam_projectile_mp");
             }

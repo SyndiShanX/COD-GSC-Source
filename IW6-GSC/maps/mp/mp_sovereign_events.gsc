@@ -209,8 +209,9 @@ assembly_line_tank_part_explode(attacker) {
   playFXOnTag(level._effect["tank_part_explode"], self, "tag_origin");
 
   playFXOnTag(level._effect["tank_part_burn"], self, "tag_origin");
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     attacker = self;
+  }
   RadiusDamage(self.origin, 400, 300, 50, attacker, "MOD_EXPLOSIVE");
 }
 
@@ -265,16 +266,18 @@ kill_all(damageLoc, damageRadius, damageRadiusHeight) {
 
 kill_players(zone) {
   foreach(player in level.participants) {
-    if(player IsTouching(zone))
+    if(player IsTouching(zone)) {
       player DoDamage(1000, player.origin, undefined, undefined, "MOD_CRUSH");
+    }
   }
 }
 
 kill_boxes(zone) {
   script_models = getEntArray("script_model", "classname");
   foreach(mod in script_models) {
-    if(isDefined(mod.boxtype) && mod IsTouching(zone))
+    if(isDefined(mod.boxtype) && mod IsTouching(zone)) {
       mod notify("death");
+    }
   }
 }
 
@@ -379,8 +382,9 @@ halon_system_killstreak() {
 
     wait explosive_time_total - 1;
 
-    if(!flag("walkway_collasped"))
+    if(!flag("walkway_collasped")) {
       level notify("activate_walkway", player);
+    }
 
     level notify("activate_halon_system", player);
   }
@@ -397,11 +401,13 @@ halon_system_killstreak_explode(attacker) {
   playFX(level._effect["tank_part_explode"], self.origin, anglesToForward(self.angles), AnglesToUp(self.angles));
 
   inflictor = visuals[0];
-  if(!isDefined(inflictor))
+  if(!isDefined(inflictor)) {
     inflictor = attacker;
+  }
   inflictor RadiusDamage(self.origin, 400, 1200, 1000, attacker, "MOD_EXPLOSIVE", "sovereign_gas_mp");
-  foreach(visual in visuals)
+  foreach(visual in visuals) {
   visual Delete();
+  }
 }
 
 halon_system_run(killstreak_player) {
@@ -478,8 +484,9 @@ halon_system_fog_off() {
 halon_system_spawn_watch() {
   while(1) {
     level waittill("player_spawned", player);
-    if(isDefined(level.vision_set_stage))
+    if(isDefined(level.vision_set_stage)) {
       player VisionSetStage(level.vision_set_stage, .1);
+    }
   }
 }
 
@@ -490,8 +497,9 @@ bot_clear_of_gas() {
     }
 
     if(isDefined(level.halon_dangerzone)) {
-      if(self IsTouching(level.halon_dangerzone))
+      if(self IsTouching(level.halon_dangerzone)) {
         return false;
+      }
     }
   }
 
@@ -500,8 +508,9 @@ bot_clear_of_gas() {
   }
 
   if(isDefined(level.explosives_dangerzone)) {
-    if(self IsTouching(level.explosives_dangerzone))
+    if(self IsTouching(level.explosives_dangerzone)) {
       return false;
+    }
   }
 
   return true;
@@ -528,13 +537,15 @@ halon_fog_only() {
   SetDevDvarIfUninitialized(dvar_name, default_value);
 
   while(1) {
-    while(!GetDvarInt(dvar_name, default_value))
+    while(!GetDvarInt(dvar_name, default_value)) {
       waitframe();
+    }
 
     halon_system_fog_on();
 
-    while(GetDvarInt(dvar_name, default_value))
+    while(GetDvarInt(dvar_name, default_value)) {
       waitframe();
+    }
 
     halon_system_fog_off();
   }

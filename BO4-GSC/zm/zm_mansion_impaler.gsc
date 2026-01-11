@@ -1293,4 +1293,3 @@ function_1e640843(n_drop) {
     wait 0.2;
   }
 }
-

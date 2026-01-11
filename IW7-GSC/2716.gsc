@@ -35,8 +35,9 @@ func_17C1(var_00, var_01, var_02, var_03) {
   if(level.hardcoremode) {
     return;
   }
-  if(isDefined(self.lastdeathicon))
+  if(isDefined(self.lastdeathicon)) {
     self.lastdeathicon destroy();
+  }
 
   var_05 = newteamhudelem(var_02);
   var_5.x = var_4[0];
@@ -46,10 +47,12 @@ func_17C1(var_00, var_01, var_02, var_03) {
   var_5.archived = 0;
   var_5.showinkillcam = 0;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     var_05 setshader("hud_icon_death", 14, 14);
-  else
+  }
+  else {
     var_05 setshader("hud_icon_death", 7, 7);
+  }
 
   var_05 setwaypoint(0);
   self.lastdeathicon = var_05;

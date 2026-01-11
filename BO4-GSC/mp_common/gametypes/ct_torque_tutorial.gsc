@@ -2565,4 +2565,3 @@ function_24e6adf3(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_deat
 }
 
 function_16eca645() {}
-

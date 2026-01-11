@@ -8,21 +8,25 @@
 #include common_scripts\utility;
 
 prop_notetrack_exist(animname, name) {
-  if(!isDefined(level.prop_notetracks))
+  if(!isDefined(level.prop_notetracks)) {
     level.prop_notetracks = [];
-  if(!isDefined(level.prop_notetracks[animname]))
+  }
+  if(!isDefined(level.prop_notetracks[animname])) {
     level.prop_notetracks[animname] = [];
+  }
 
-  if(isDefined(level.prop_notetracks[animname][name]))
+  if(isDefined(level.prop_notetracks[animname][name])) {
     return true;
+  }
 
   level.prop_notetracks[animname][name] = 1;
   return false;
 }
 
 add_smoking_notetracks(animname) {
-  if(prop_notetrack_exist(animname, "add_smoking_notetracks"))
+  if(prop_notetrack_exist(animname, "add_smoking_notetracks")) {
     return;
+  }
 
   addNotetrack_customFunction(animname, "attach cig", ::attach_cig);
   addNotetrack_customFunction(animname, "detach cig", ::detach_cig);
@@ -38,13 +42,15 @@ add_smoking_notetracks(animname) {
 }
 
 detach_idle_clip(guy) {
-  if(isDefined(guy.clip))
+  if(isDefined(guy.clip)) {
     guy.clip delete();
+  }
 }
 
 add_sit_load_ak_notetracks(animname) {
-  if(prop_notetrack_exist(animname, "add_cellphone_notetracks"))
+  if(prop_notetrack_exist(animname, "add_cellphone_notetracks")) {
     return;
+  }
 
   addNotetrack_customFunction(animname, "attach clip left", ::attach_clip);
   addNotetrack_customFunction(animname, "detach clip left", ::detach_idle_clip);
@@ -64,8 +70,9 @@ attach_clip(guy) {
 }
 
 add_cellphone_notetracks(animname) {
-  if(prop_notetrack_exist(animname, "add_cellphone_notetracks"))
+  if(prop_notetrack_exist(animname, "add_cellphone_notetracks")) {
     return;
+  }
 
   addNotetrack_customFunction(animname, "attach phone", ::attach_phone);
   addNotetrack_customFunction(animname, "detach phone", ::detach_phone);
@@ -85,8 +92,9 @@ attach_phone(guy) {
 }
 
 detach_phone(guy) {
-  if(isDefined(guy.phone))
+  if(isDefined(guy.phone)) {
     guy.phone delete();
+  }
 }
 
 attach_cig(guy) {
@@ -102,8 +110,9 @@ attach_cig(guy) {
 }
 
 detach_cig(guy) {
-  if(isDefined(guy.cigar))
+  if(isDefined(guy.cigar)) {
     guy.cigar thread prop_cig_throw();
+  }
 }
 
 prop_delete(prop, guy) {
@@ -137,10 +146,12 @@ prop_delete_cig(prop, guy) {
 prop_cig_throw() {
   self endon("death");
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if(isDefined(self.cig_throwing) && self.cig_throwing)
+  }
+  if(isDefined(self.cig_throwing) && self.cig_throwing) {
     return;
+  }
   self.cig_throwing = true;
 
   stopFXOnTag(getfx("cigar_glow"), self, "tag_cigarglow");
@@ -155,8 +166,9 @@ prop_cig_throw() {
 }
 
 smoke_puff(guy) {
-  if(!isDefined(guy.cigar))
+  if(!isDefined(guy.cigar)) {
     return;
+  }
 
   guy endon("death");
   guy.cigar endon("death");
@@ -166,8 +178,9 @@ smoke_puff(guy) {
 }
 
 smoke_exhale(guy) {
-  if(!isDefined(guy.cigar))
+  if(!isDefined(guy.cigar)) {
     return;
+  }
   playFXOnTag(getfx("cigar_exhale"), guy, "tag_eye");
 }
 

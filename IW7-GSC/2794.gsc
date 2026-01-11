@@ -21,8 +21,9 @@ func_FC59() {}
 func_FC5B(var_00, var_01) {
   self notify("powers_shardBall_used", 1);
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0;
+  }
 
   var_00 endon("death");
 
@@ -37,8 +38,9 @@ func_FC5B(var_00, var_01) {
   if(!var_01) {
     var_00 waittill("missile_stuck", var_02);
 
-    if(isplayer(var_02) || isagent(var_02))
+    if(isplayer(var_02) || isagent(var_02)) {
       scripts\mp\weapons::grenadestuckto(var_00, var_02);
+    }
   }
 
   var_00 thread scripts\mp\shellshock::grenade_earthquake();
@@ -65,8 +67,9 @@ func_13B39() {
 func_7EA7() {
   var_00 = self.angles;
 
-  if(isDefined(self.stuckenemyentity))
+  if(isDefined(self.stuckenemyentity)) {
     var_00 = self.stuckenemyentity.angles;
+  }
 
   return var_00;
 }
@@ -76,8 +79,9 @@ func_7EA8(var_00, var_01, var_02, var_03) {
   var_05 = 200;
   var_06 = anglestoup(var_00);
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_04 = var_02;
+  }
 
   var_07 = var_05 * var_06;
   var_08 = var_01 + var_07;
@@ -100,22 +104,25 @@ func_7EA8(var_00, var_01, var_02, var_03) {
 func_13AEA(var_00) {
   var_00 waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 func_13A0A(var_00) {
   self waittill("death");
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 delete();
+  }
 }
 
 func_13B1F(var_00) {
   self endon("death");
 
-  while(self.origin != var_00)
+  while(self.origin != var_00) {
     wait 0.05;
+  }
 
   self notify("start_secondary_explosion", var_00);
 }
@@ -126,8 +133,9 @@ func_13B34(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_01 endon("joined_spectators");
   var_06 = "start_secondary_explosion";
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_06 = var_03;
+  }
 
   self waittill(var_06, var_07);
   playLoopSound(var_07, "shard_ball_explode_default");
@@ -151,8 +159,9 @@ func_13B34(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_14 = scripts\engine\utility::get_array_of_closest(var_07, var_08, undefined, undefined, var_13, var_12);
   var_15 = 15;
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     var_15 = var_04;
+  }
 
   var_16 = var_01 scripts\mp\powerloot::func_7FC2("power_shardBall", var_15);
 
@@ -188,14 +197,16 @@ func_6D81(var_00, var_01, var_02, var_03, var_04) {
   self endon("disconnect");
   var_05 = var_00 + var_01;
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_05 = var_03;
+  }
 
   var_06 = scripts\mp\utility\game::_magicbullet("iw6_semtexshards_mp", var_00, var_05, self);
   var_6.func_1653 = var_04;
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_06 setentityowner(var_02);
+  }
 
   var_06 waittill("explode", var_07);
   playLoopSound(var_07, "mp_shard_grenade_impacts");

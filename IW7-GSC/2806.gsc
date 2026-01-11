@@ -12,8 +12,9 @@ func_F87E() {
 func_12D44() {
   self notify("teleportUnset");
 
-  if(self.loadoutarchetype == "archetype_assassin")
+  if(self.loadoutarchetype == "archetype_assassin") {
     self setscriptablepartstate("teleporttrail", "neutral", 0);
+  }
 
   self motionblurhqdisable();
   scripts\mp\utility\game::removedamagemodifier("teleport", 0);
@@ -50,8 +51,9 @@ func_13A73() {
     waittillframeend;
 
     if(isDefined(var_0.func_6ACF)) {
-      if(isplayer(self))
+      if(isplayer(self)) {
         scripts\mp\hud_message::showerrormessage("MP_TELEPORT_FAILED");
+      }
 
       scripts\mp\supers::refundsuper();
     } else if(isDefined(var_0.func_10DE6) && isDefined(var_0.func_4E59))

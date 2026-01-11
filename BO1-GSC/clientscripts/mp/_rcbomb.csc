@@ -63,13 +63,15 @@ spawn_solid_fx(localClientNum) {
   }
 }
 start_blink(localClientNum, set) {
-  if(!set)
+  if(!set) {
     return;
+  }
   self notify("blink");
 }
 final_blink(localClientNum, set) {
-  if(!set)
+  if(!set) {
     return;
+  }
   self.interval = .133;
 }
 check_for_time_jump(localClientNum) {
@@ -458,43 +460,53 @@ snowy_level_concrete_surface_type(surface_type) {
 default_surface_type_for_screen_fx() {
   right_rear = self GetWheelSurface("back_right");
   left_rear = self GetWheelSurface("back_left");
-  if(default_dirt_surface_type(right_rear))
+  if(default_dirt_surface_type(right_rear)) {
     return "dirt";
-  if(default_dirt_surface_type(left_rear))
+  }
+  if(default_dirt_surface_type(left_rear)) {
     return "dirt";
-  if(default_snow_surface_type(right_rear))
+  }
+  if(default_snow_surface_type(right_rear)) {
     return "snow";
-  if(default_snow_surface_type(left_rear))
+  }
+  if(default_snow_surface_type(left_rear)) {
     return "snow";
+  }
   return "dust";
 }
 default_surface_type_for_tread_fx() {
   right_rear = self GetWheelSurface("back_right");
   left_rear = self GetWheelSurface("back_left");
-  if(default_snow_surface_type(right_rear) || default_snow_surface_type(left_rear))
+  if(default_snow_surface_type(right_rear) || default_snow_surface_type(left_rear)) {
     return "snow";
-  if(default_dirt_surface_type(right_rear) || default_dirt_surface_type(left_rear))
+  }
+  if(default_dirt_surface_type(right_rear) || default_dirt_surface_type(left_rear)) {
     return "dust";
-  if(default_concrete_surface_type(right_rear) || default_concrete_surface_type(left_rear))
+  }
+  if(default_concrete_surface_type(right_rear) || default_concrete_surface_type(left_rear)) {
     return "concrete";
+  }
   return undefined;
 }
 snowy_level_surface_type_for_screen_fx() {
   right_rear = self GetWheelSurface("back_right");
   left_rear = self GetWheelSurface("back_left");
-  if(snowy_level_snow_surface_type(right_rear))
+  if(snowy_level_snow_surface_type(right_rear)) {
     return "snow";
-  if(snowy_level_snow_surface_type(left_rear))
+  }
+  if(snowy_level_snow_surface_type(left_rear)) {
     return "snow";
+  }
   return "snow_dust";
 }
 snowy_level_surface_type_for_tread_fx() {
   right_rear = self GetWheelSurface("back_right");
   left_rear = self GetWheelSurface("back_left");
-  if(snowy_level_snow_surface_type(right_rear) || snowy_level_snow_surface_type(left_rear))
+  if(snowy_level_snow_surface_type(right_rear) || snowy_level_snow_surface_type(left_rear)) {
     return "snow";
-  if(snowy_level_concrete_surface_type(right_rear) || snowy_level_concrete_surface_type(left_rear))
+  }
+  if(snowy_level_concrete_surface_type(right_rear) || snowy_level_concrete_surface_type(left_rear)) {
     return "concrete";
+  }
   return "snow";
 }
-

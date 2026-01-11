@@ -154,8 +154,9 @@ fx_origin_link_with_train_angles(var_0, var_1, var_2, var_3) {
   self linkto(var_0, var_2);
   self endon("death");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level endon(var_3);
+  }
 
   for(;;) {
     self unlink();
@@ -168,8 +169,9 @@ fx_origin_link_with_train_angles(var_0, var_1, var_2, var_3) {
 fx_origin_with_train_angles(var_0, var_1, var_2, var_3) {
   self endon("death");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level endon(var_3);
+  }
 
   for(;;) {
     self.angles = var_1 gettagangles("j_mainroot");
@@ -228,10 +230,12 @@ fx_screen_bokehdots_grit01() {
   create_view_particle_source_locked();
 
   for(;;) {
-    if(common_scripts\utility::flag("flag_fx_screen_bokehdots_grit01"))
+    if(common_scripts\utility::flag("flag_fx_screen_bokehdots_grit01")) {
       playFXOnTag(common_scripts\utility::getfx("bokeh_splats_01"), level.view_particle_source_locked, "tag_origin");
-    else
+    }
+    else {
       stopFXOnTag(common_scripts\utility::getfx("bokeh_splats_01"), level.view_particle_source_locked, "tag_origin");
+    }
 
     wait 0.3;
   }
@@ -397,8 +401,9 @@ fx_bridgefall(var_0, var_1) {
   level waittill("flag_loco_end");
   wait(level.timestep);
 
-  foreach(var_12 in var_10)
+  foreach(var_12 in var_10) {
   var_12 delete();
+  }
 }
 
 fx_bridgefall_small_splash(var_0) {
@@ -428,11 +433,13 @@ shockwave_dirt_hit(var_0, var_1, var_2) {
   var_3.alpha = 0;
   var_4 = 0;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   while(var_4 < var_1) {
     var_3.alpha = var_3.alpha + 0.05;

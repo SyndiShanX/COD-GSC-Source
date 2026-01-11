@@ -206,71 +206,81 @@ settweakablevalue(var_00, var_01, var_02) {
 }
 
 registertweakable(var_00, var_01, var_02, var_03) {
-  if(isstring(var_03))
+  if(isstring(var_03)) {
     var_03 = getdvar(var_02, var_03);
-  else
+  }
+  else {
     var_03 = getdvarint(var_02, var_03);
+  }
 
   switch (var_00) {
     case "rule":
-      if(!isDefined(level.rules[var_01]))
+      if(!isDefined(level.rules[var_01])) {
         level.rules[var_01] = spawnStruct();
+      }
 
       level.rules[var_01].value = var_03;
       level.rules[var_01].func_AA40 = var_03;
       level.rules[var_01].dvar = var_02;
       break;
     case "game":
-      if(!isDefined(level.gametweaks[var_01]))
+      if(!isDefined(level.gametweaks[var_01])) {
         level.gametweaks[var_01] = spawnStruct();
+      }
 
       level.gametweaks[var_01].value = var_03;
       level.gametweaks[var_01].func_AA40 = var_03;
       level.gametweaks[var_01].dvar = var_02;
       break;
     case "team":
-      if(!isDefined(level.teamtweaks[var_01]))
+      if(!isDefined(level.teamtweaks[var_01])) {
         level.teamtweaks[var_01] = spawnStruct();
+      }
 
       level.teamtweaks[var_01].value = var_03;
       level.teamtweaks[var_01].func_AA40 = var_03;
       level.teamtweaks[var_01].dvar = var_02;
       break;
     case "player":
-      if(!isDefined(level.playertweaks[var_01]))
+      if(!isDefined(level.playertweaks[var_01])) {
         level.playertweaks[var_01] = spawnStruct();
+      }
 
       level.playertweaks[var_01].value = var_03;
       level.playertweaks[var_01].func_AA40 = var_03;
       level.playertweaks[var_01].dvar = var_02;
       break;
     case "class":
-      if(!isDefined(level.classtweaks[var_01]))
+      if(!isDefined(level.classtweaks[var_01])) {
         level.classtweaks[var_01] = spawnStruct();
+      }
 
       level.classtweaks[var_01].value = var_03;
       level.classtweaks[var_01].func_AA40 = var_03;
       level.classtweaks[var_01].dvar = var_02;
       break;
     case "weapon":
-      if(!isDefined(level.weapontweaks[var_01]))
+      if(!isDefined(level.weapontweaks[var_01])) {
         level.weapontweaks[var_01] = spawnStruct();
+      }
 
       level.weapontweaks[var_01].value = var_03;
       level.weapontweaks[var_01].func_AA40 = var_03;
       level.weapontweaks[var_01].dvar = var_02;
       break;
     case "hardpoint":
-      if(!isDefined(level.hardpointtweaks[var_01]))
+      if(!isDefined(level.hardpointtweaks[var_01])) {
         level.hardpointtweaks[var_01] = spawnStruct();
+      }
 
       level.hardpointtweaks[var_01].value = var_03;
       level.hardpointtweaks[var_01].func_AA40 = var_03;
       level.hardpointtweaks[var_01].dvar = var_02;
       break;
     case "hud":
-      if(!isDefined(level.hudtweaks[var_01]))
+      if(!isDefined(level.hudtweaks[var_01])) {
         level.hudtweaks[var_01] = spawnStruct();
+      }
 
       level.hudtweaks[var_01].value = var_03;
       level.hudtweaks[var_01].func_AA40 = var_03;
@@ -292,10 +302,12 @@ init() {
   level.hudtweaks = [];
 
   if(level.console) {
-    if(level.func_13E0E || level.func_DADC)
+    if(level.func_13E0E || level.func_DADC) {
       registertweakable("game", "graceperiod", "scr_game_graceperiod", 20);
-    else
+    }
+    else {
       registertweakable("game", "graceperiod", "scr_game_graceperiod", 15);
+    }
 
     registertweakable("game", "graceperiod_comp", "scr_game_graceperiod_comp", 30);
   } else {

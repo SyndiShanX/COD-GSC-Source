@@ -46,8 +46,9 @@ main() {
   setdvar("r_veilStrength", 0.627);
   setdvar("r_veilBackgroundStrength", 0.963);
 
-  if(level.ps3)
+  if(level.ps3) {
     setdvar("sm_sunShadowScale", "0.5"); // ps3 optimization
+  }
 
   thread zombie_easter_egg();
 }
@@ -66,13 +67,15 @@ zombie_easter_egg() {
     damageTrigger waittill("damage", damage, attacker, direction_vec, point, sMeansOfDeath, modelName, tagName, partName, iDFlags, sWeapon);
 
     if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_MELEE" && isDefined(attacker) && isPlayer(attacker)) {
-      if(!isDefined(attacker.easter_egg_index))
+      if(!isDefined(attacker.easter_egg_index)) {
         attacker.easter_egg_index = -1;
+      }
 
       attacker.easter_egg_index++;
 
-      if(attacker.easter_egg_index > 3)
+      if(attacker.easter_egg_index > 3) {
         attacker.easter_egg_index = 0;
+      }
 
       switch (attacker.easter_egg_index) {
         case 0:

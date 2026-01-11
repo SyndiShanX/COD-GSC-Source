@@ -140,8 +140,9 @@ vibrate() {
     self waittill("rotatedone");
     self RotateTo(angles1, vibrateTime);
     self waittill("rotatedone");
-    if(vibrateAmplitude > 0)
+    if(vibrateAmplitude > 0) {
       vibrateAmplitude -= 0.25;
+    }
     pitchVibrateAmplitude = 0 - pitchVibrateAmplitude;
     pitchVibrateAmplitude *= 0.66;
   }
@@ -209,4 +210,3 @@ nuked_doomsday_clock_seconds_think() {
     self waittill("rotatedone");
   }
 }
-

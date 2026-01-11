@@ -711,8 +711,9 @@ playerHealthRegen() {
     if(!invulWorthyHealthDrop || playerInvulTimeScale <= 0.0) {
       continue;
     }
-    if(self player_flag("player_is_invulnerable"))
+    if(self player_flag("player_is_invulnerable")) {
       continue;
+    }
     self player_flag_set("player_is_invulnerable");
     level notify("player_becoming_invulnerable");
     if(playerJustGotRedFlashing) {
@@ -1553,8 +1554,9 @@ update_skill_on_change() {
   for(;;) {
     lowest_current_skill = GetDvarInt(#"saved_gameskill");
     gameskill = GetDvarInt(#"g_gameskill");
-    if(gameskill < lowest_current_skill)
+    if(gameskill < lowest_current_skill) {
       lowest_current_skill = gameskill;
+    }
     if(lowest_current_skill < level.gameskill) {
       setSkill(true, lowest_current_skill);
     }

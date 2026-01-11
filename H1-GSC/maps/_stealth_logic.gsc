@@ -272,8 +272,9 @@ friendly_logic() {
   friendly_init();
   var_0 = self._stealth.logic.current_stance_func;
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     thread friendly_movespeed_calc_loop();
+  }
 
   for(;;) {
     self[[var_0]]();
@@ -290,8 +291,9 @@ friendly_init() {
     self._stealth.logic.getstance_func = ::friendly_getstance_player;
     self._stealth.logic.getangles_func = ::friendly_getangles_player;
 
-    if(level.console)
+    if(level.console) {
       self._stealth.logic.getvelocity_func = ::friendly_getvelocity;
+    }
     else {
       self._stealth.logic.getvelocity_func = ::player_getvelocity_pc;
       self._stealth.logic.player_pc_velocity = 0;
@@ -344,18 +346,21 @@ player_getvelocity_pc() {
   var_3["crouch"] = 25;
   var_3["prone"] = 10;
 
-  if(!var_0)
+  if(!var_0) {
     self._stealth.logic.player_pc_velocity = 0;
+  }
   else if(var_0 > self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity = self._stealth.logic.player_pc_velocity + var_2[var_1];
 
-    if(self._stealth.logic.player_pc_velocity > var_0)
+    if(self._stealth.logic.player_pc_velocity > var_0) {
       self._stealth.logic.player_pc_velocity = var_0;
+    }
   } else if(var_0 < self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity = self._stealth.logic.player_pc_velocity - var_3[var_1];
 
-    if(self._stealth.logic.player_pc_velocity < 0)
+    if(self._stealth.logic.player_pc_velocity < 0) {
       self._stealth.logic.player_pc_velocity = 0;
+    }
   }
 
   return self._stealth.logic.player_pc_velocity;
@@ -373,14 +378,16 @@ friendly_movespeed_calc_loop() {
   for(;;) {
     var_3 = undefined;
 
-    if(maps\_utility::ent_flag("_stealth_in_shadow"))
+    if(maps\_utility::ent_flag("_stealth_in_shadow")) {
       var_3 = 0;
+    }
     else {
       var_4 = self[[var_1]]();
       var_5 = length(var_2 - self[[var_0]]());
 
-      if(var_5 > 30)
+      if(var_5 > 30) {
         var_5 = 30;
+      }
 
       var_3 = var_4 + var_5;
     }
@@ -400,8 +407,9 @@ friendly_movespeed_calc_loop() {
 }
 
 friendly_compute_score(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self._stealth.logic.stance;
+  }
 
   var_1 = level._stealth.logic.detection_level;
   var_2 = level._stealth.logic.detect_range[var_1][var_0];
@@ -409,14 +417,16 @@ friendly_compute_score(var_0) {
   if(maps\_utility::ent_flag("_stealth_in_shadow")) {
     var_2 = var_2 * 0.5;
 
-    if(var_2 < level._stealth.logic.detect_range["hidden"]["prone"])
+    if(var_2 < level._stealth.logic.detect_range["hidden"]["prone"]) {
       var_2 = level._stealth.logic.detect_range["hidden"]["prone"];
+    }
   }
 
   var_3 = self._stealth.logic.movespeed_multiplier[var_1][var_0];
 
-  if(isDefined(self._stealth_move_detection_cap) && var_3 > self._stealth_move_detection_cap)
+  if(isDefined(self._stealth_move_detection_cap) && var_3 > self._stealth_move_detection_cap) {
     var_3 = self._stealth_move_detection_cap;
+  }
 
   return var_2 + var_3;
 }
@@ -448,13 +458,15 @@ friendly_compute_stances_player() {
   if(!self._stealth.logic.stance_change) {
     switch (var_0) {
       case "prone":
-        if(self._stealth.logic.oldstance != "prone")
+        if(self._stealth.logic.oldstance != "prone") {
           self._stealth.logic.stance_change = self._stealth.logic.stance_change_time;
+        }
 
         break;
       case "crouch":
-        if(self._stealth.logic.oldstance == "stand")
+        if(self._stealth.logic.oldstance == "stand") {
           self._stealth.logic.stance_change = self._stealth.logic.stance_change_time;
+        }
 
         break;
     }
@@ -463,8 +475,9 @@ friendly_compute_stances_player() {
   if(self._stealth.logic.stance_change) {
     self._stealth.logic.stance = self._stealth.logic.oldstance;
 
-    if(self._stealth.logic.stance_change > 0.05)
+    if(self._stealth.logic.stance_change > 0.05) {
       self._stealth.logic.stance_change = self._stealth.logic.stance_change - 0.05;
+    }
     else {
       self._stealth.logic.stance_change = 0;
       self._stealth.logic.stance = var_0;
@@ -488,8 +501,9 @@ enemy_init() {
   self._stealth.logic = spawnStruct();
   self._stealth.logic.dog = 0;
 
-  if(issubstr(self.classname, "dog"))
+  if(issubstr(self.classname, "dog")) {
     self._stealth.logic.dog = 1;
+  }
 
   self._stealth.logic.alert_level = spawnStruct();
   self._stealth.logic.alert_level.lvl = undefined;
@@ -513,14 +527,16 @@ enemy_event_listeners_init() {
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "silenced_shot";
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "projectile_impact";
 
-  for(var_0 = 0; var_0 < self._stealth.logic.event.listener.size; var_0++)
+  for(var_0 = 0; var_0 < self._stealth.logic.event.listener.size; var_0++) {
     self addaieventlistener(self._stealth.logic.event.listener[var_0]);
+  }
 
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "explode";
   self._stealth.logic.event.listener[self._stealth.logic.event.listener.size] = "doFlashBanged";
 
-  for(var_0 = 0; var_0 < self._stealth.logic.event.listener.size; var_0++)
+  for(var_0 = 0; var_0 < self._stealth.logic.event.listener.size; var_0++) {
     thread enemy_event_listeners_logic(self._stealth.logic.event.listener[var_0]);
+  }
 
   thread enemy_event_declare_to_team("damage", "ai_eventDistPain");
   thread enemy_event_declare_to_team("death", "ai_eventDistDeath");
@@ -577,8 +593,9 @@ enemy_event_awareness(var_0) {
     self waittill(var_0, var_2, var_3);
 
     if(!self._stealth.logic.dog) {
-      if(common_scripts\utility::flag("_stealth_spotted") && (isDefined(self.enemy) || isDefined(self.favoriteenemy)))
+      if(common_scripts\utility::flag("_stealth_spotted") && (isDefined(self.enemy) || isDefined(self.favoriteenemy))) {
         continue;
+      }
     }
 
     switch (var_0) {
@@ -595,8 +612,9 @@ enemy_event_awareness(var_0) {
     level notify("event_awareness", var_0);
     waittillframeend;
 
-    if(!common_scripts\utility::flag("_stealth_spotted") && var_0 != "alerted_once")
+    if(!common_scripts\utility::flag("_stealth_spotted") && var_0 != "alerted_once") {
       common_scripts\utility::flag_set("_stealth_alert");
+    }
   }
 }
 
@@ -662,8 +680,9 @@ enemy_threat_logic() {
       continue;
     }
     if(!common_scripts\utility::flag("_stealth_spotted") && !self._stealth.logic.dog) {
-      if(!enemy_alert_level_logic(self.enemy))
+      if(!enemy_alert_level_logic(self.enemy)) {
         continue;
+      }
     } else
       enemy_alert_level_change("attack", self.enemy);
 
@@ -671,8 +690,9 @@ enemy_threat_logic() {
     wait 20;
 
     while(isDefined(self.enemy)) {
-      if(distance(self.origin, self.enemy.origin) > self.maxvisibledist)
+      if(distance(self.origin, self.enemy.origin) > self.maxvisibledist) {
         self clearenemy();
+      }
 
       wait 0.25;
     }
@@ -700,14 +720,17 @@ enemy_threat_being_spotted_clear() {
 }
 
 enemy_alert_level_logic(var_0) {
-  if(!isDefined(var_0._stealth))
+  if(!isDefined(var_0._stealth)) {
     return 1;
+  }
 
-  if(!isDefined(var_0._stealth.logic.spotted_list[self.ai_number]))
+  if(!isDefined(var_0._stealth.logic.spotted_list[self.ai_number])) {
     var_0._stealth.logic.spotted_list[self.ai_number] = 0;
+  }
 
-  if(!self._stealth.logic.stoptime)
+  if(!self._stealth.logic.stoptime) {
     var_0._stealth.logic.spotted_list[self.ai_number]++;
+  }
 
   if(maps\_utility::ent_flag("_stealth_bad_event_listener") || var_0._stealth.logic.spotted_list[self.ai_number] > 2) {
     enemy_alert_level_change("attack", var_0);
@@ -716,8 +739,9 @@ enemy_alert_level_logic(var_0) {
 
   self clearenemy();
 
-  if(self._stealth.logic.stoptime)
+  if(self._stealth.logic.stoptime) {
     return 0;
+  }
 
   switch (var_0._stealth.logic.spotted_list[self.ai_number]) {
     case 1:
@@ -791,8 +815,9 @@ enemy_corpse_logic() {
           }
           var_5 = distancesquared(self.origin, self._stealth.logic.corpse.corpse_entity.origin);
 
-          if(var_5 <= var_4)
+          if(var_5 <= var_4) {
             continue;
+          }
         }
 
         if(var_4 > level._stealth.logic.corpse.sight_distsqrd) {
@@ -819,10 +844,12 @@ enemy_corpse_logic() {
       }
 
       if(var_0) {
-        if(!maps\_utility::ent_flag("_stealth_found_corpse"))
+        if(!maps\_utility::ent_flag("_stealth_found_corpse")) {
           maps\_utility::ent_flag_set("_stealth_found_corpse");
-        else
+        }
+        else {
           self notify("_stealth_found_corpse");
+        }
 
         maps\_utility::ent_flag_clear("_stealth_saw_corpse");
         thread enemy_corpse_found(var_2);
@@ -830,10 +857,12 @@ enemy_corpse_logic() {
       } else if(var_1) {
         self._stealth.logic.corpse.corpse_entity = var_2;
 
-        if(!maps\_utility::ent_flag("_stealth_saw_corpse"))
+        if(!maps\_utility::ent_flag("_stealth_saw_corpse")) {
           maps\_utility::ent_flag_set("_stealth_saw_corpse");
-        else
+        }
+        else {
           self notify("_stealth_saw_corpse");
+        }
 
         level notify("_stealth_saw_corpse");
         self notify("saw_corpse", var_2);
@@ -869,15 +898,17 @@ enemy_corpse_death() {
     wait 0.01;
   }
 
-  if(level.cheatstates["sf_use_tire_explosion"])
+  if(level.cheatstates["sf_use_tire_explosion"]) {
     wait 0.25;
+  }
 
   var_3 enemy_corpse_add_to_stack();
 }
 
 enemy_corpse_add_to_stack() {
-  if(level._stealth.logic.corpse.array.size == level._stealth.logic.corpse.max_num)
+  if(level._stealth.logic.corpse.array.size == level._stealth.logic.corpse.max_num) {
     enemy_corpse_shorten_stack();
+  }
 
   level._stealth.logic.corpse.array[level._stealth.logic.corpse.array.size] = self;
 }
@@ -887,8 +918,9 @@ enemy_corpse_shorten_stack() {
   var_1 = level._stealth.logic.corpse.array;
   var_2 = level._stealth.logic.corpse.array[0];
 
-  for(var_3 = 1; var_3 < level._stealth.logic.corpse.max_num; var_3++)
+  for(var_3 = 1; var_3 < level._stealth.logic.corpse.max_num; var_3++) {
     var_0[var_0.size] = var_1[var_3];
+  }
 
   level._stealth.logic.corpse.array = var_0;
   var_2 delete();
@@ -906,10 +938,12 @@ enemy_corpse_found(var_0) {
 
   wait(randomfloatrange(0.25, 0.5));
 
-  if(!common_scripts\utility::flag("_stealth_found_corpse"))
+  if(!common_scripts\utility::flag("_stealth_found_corpse")) {
     common_scripts\utility::flag_set("_stealth_found_corpse");
-  else
+  }
+  else {
     level notify("_stealth_found_corpse");
+  }
 
   thread enemy_corpse_clear();
 }
@@ -933,13 +967,16 @@ enemy_corpse_found_loop() {
 enemy_corpse_alert_level() {
   var_0 = undefined;
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     var_0 = self.enemy;
-  else
+  }
+  else {
     var_0 = level.player;
+  }
 
-  if(!isDefined(var_0._stealth.logic.spotted_list[self.ai_number]))
+  if(!isDefined(var_0._stealth.logic.spotted_list[self.ai_number])) {
     var_0._stealth.logic.spotted_list[self.ai_number] = 0;
+  }
 
   switch (var_0._stealth.logic.spotted_list[self.ai_number]) {
     case 0:
@@ -972,8 +1009,9 @@ stealth_shadow_ai_in_volume(var_0) {
   self endon("_stealth_stop_stealth_logic");
   maps\_utility::ent_flag_set("_stealth_in_shadow");
 
-  while(self istouching(var_0))
+  while(self istouching(var_0)) {
     wait 0.05;
+  }
 
   maps\_utility::ent_flag_clear("_stealth_in_shadow");
 }

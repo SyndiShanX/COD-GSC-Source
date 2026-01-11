@@ -12,8 +12,9 @@ marktarget_run(var_00, var_01) {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(scripts\engine\utility::isbulletdamage(var_01) && isplayer(var_00) && var_0.team != self.team && !var_00 scripts\mp\utility\game::_hasperk("specialty_empimmune") && !isDefined(var_0.ismarkedtarget))
+  if(scripts\engine\utility::isbulletdamage(var_01) && isplayer(var_00) && var_0.team != self.team && !var_00 scripts\mp\utility\game::_hasperk("specialty_empimmune") && !isDefined(var_0.ismarkedtarget)) {
     thread marktarget_execute(var_00);
+  }
 }
 
 marktarget_execute(var_00) {
@@ -28,8 +29,9 @@ marktarget_execute(var_00) {
   tagmarkedplayer(var_00, var_02);
   wait 0.1;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 removemarkfromtarget(var_01);
+  }
 }
 
 tagmarkedplayer(var_00, var_01) {
@@ -39,10 +41,12 @@ tagmarkedplayer(var_00, var_01) {
   var_02 = gettime() + 3000;
 
   while(isalive(var_00) && gettime() < var_02) {
-    if(level.gametype != "dm")
+    if(level.gametype != "dm") {
       var_03 = _playfxontagforteam(scripts\engine\utility::getfx("marked_target"), var_01, "tag_origin", self.team);
-    else
+    }
+    else {
       var_03 = playfxontagforclients(scripts\engine\utility::getfx("marked_target"), var_01, "tag_origin", self);
+    }
 
     wait 1.1;
   }
@@ -59,6 +63,7 @@ func_13AA0(var_00, var_01, var_02) {
   level endon("game_ended");
   scripts\engine\utility::waittill_any_timeout_no_endon_death(var_02, "leave");
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     scripts\mp\utility\game::outlinedisable(var_00, var_01);
+  }
 }

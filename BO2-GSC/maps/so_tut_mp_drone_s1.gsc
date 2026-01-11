@@ -189,11 +189,13 @@ drone_mission_complete_s1(success, basejustlost) {
 }
 
 level_fade_in(player, delay) {
-  if(!isDefined(player))
+  if(!isDefined(player)) {
     player = level.rts.player;
+  }
 
-  if(!isDefined(delay))
+  if(!isDefined(delay)) {
     delay = 0.5;
+  }
 
   thread screen_fade_in(delay);
 }
@@ -203,52 +205,61 @@ drone_geo_changes() {
   level.rts_floor delete();
   ents = getEntArray("rts_poi_LZ", "targetname");
 
-  foreach(ent in ents)
+  foreach(ent in ents) {
   ent delete();
+  }
 
   ents = getEntArray("rts_remove", "targetname");
 
-  foreach(ent in ents)
+  foreach(ent in ents) {
   ent delete();
+  }
 
   ents = getEntArray("script_model", "classname");
 
   foreach(ent in ents) {
     if(isDefined(ent.script_index)) {
-      if(ent.script_index == 999)
+      if(ent.script_index == 999) {
         ent delete();
+      }
     }
   }
 
   ents = getEntArray("delivery_van", "targetname");
 
-  foreach(ent in ents)
+  foreach(ent in ents) {
   ent delete();
+  }
 
   level.laser_doors = getEntArray("laser_door", "targetname");
 
-  foreach(ent in level.laser_doors)
+  foreach(ent in level.laser_doors) {
   ent disconnectpaths();
+  }
 
   roof = getent("rts_factory_roof", "targetname");
 
   if(isDefined(roof)) {
     targetloc = getstruct("rts_factory_roof_pos", "targetname");
 
-    if(isDefined(targetloc))
+    if(isDefined(targetloc)) {
       roof moveto(targetloc.origin, 0.1);
+    }
   }
 }
 
 drone_tutorialmsg(text, onnote, offnote, yoff, scmod, color) {
-  if(!isDefined(yoff))
+  if(!isDefined(yoff)) {
     yoff = 0;
+  }
 
-  if(!isDefined(scmod))
+  if(!isDefined(scmod)) {
     scmod = 0;
+  }
 
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 1, 1);
+  }
 
   note = level waittill_any_return(onnote, "tutorial_abort");
 
@@ -310,28 +321,33 @@ drone_watchbuttonpress() {
     level waittill("button_event", btn);
 
     if(btn == "DPAD_DOWN" || btn == "DPAD_DOWN_LONG") {
-      if(flag("fps_mode_locked_out"))
+      if(flag("fps_mode_locked_out")) {
         package_highlightunits(dogsquad.id);
+      }
     }
 
     if(btn == "DPAD_LEFT" || btn == "DPAD_LEFT_LONG") {
-      if(flag("fps_mode_locked_out"))
+      if(flag("fps_mode_locked_out")) {
         package_highlightunits(infsquad.id);
+      }
     }
 
     if(btn == "DPAD_RIGHT" || btn == "DPAD_RIGHT_LONG") {
-      if(flag("fps_mode_locked_out"))
+      if(flag("fps_mode_locked_out")) {
         package_highlightunits(inf2squad.id);
+      }
     }
   }
 }
 
 drone_magicmarker(startscale, desiredscale, timeinsec, show) {
-  if(!isDefined(show))
+  if(!isDefined(show)) {
     show = 1;
+  }
 
-  if(show)
+  if(show) {
     self show();
+  }
 
   self setscale(startscale);
   incs = int(timeinsec * 1000 / 50);
@@ -341,17 +357,20 @@ drone_magicmarker(startscale, desiredscale, timeinsec, show) {
   while(incs > 0) {
     curscale = curscale + inc;
 
-    if(curscale <= 0)
+    if(curscale <= 0) {
       self hide();
-    else
+    }
+    else {
       self setscale(curscale);
+    }
 
     incs--;
     wait 0.05;
   }
 
-  if(!show)
+  if(!show) {
     self hide();
+  }
 }
 
 nag_until_notify(interval, note) {
@@ -363,10 +382,12 @@ nag_until_notify(interval, note) {
     repeat--;
     thenote = waittill_any_timeout(interval, note);
 
-    if(thenote == "timeout")
+    if(thenote == "timeout") {
       maps\_so_rts_event::trigger_event("dlg_nag");
-    else
+    }
+    else {
       break;
+    }
 
     interval = interval + interval / 2;
   }
@@ -378,8 +399,9 @@ drone_tutorial() {
   level thread drone_watchbuttonpress();
   localized_text_size = 0;
 
-  if(getdvar(#"language") == "russian" || getdvar(#"language") == "polish")
+  if(getdvar(#"language") == "russian" || getdvar(#"language") == "polish") {
     localized_text_size = -0.7;
+  }
 
   if(getdvarint(#"_id_0F241E06") == 0) {
     level thread drone_tutorialmsg(&"SO_TUT_MP_DRONE_TUT_START", "tut_start", "tut_start_done");
@@ -427,8 +449,9 @@ drone_tutorial() {
   tursquad = getsquadbypkg("turret_pkg", "allies");
   tursquad.no_show_marker = 1;
 
-  foreach(dog in dogsquad.members)
+  foreach(dog in dogsquad.members) {
   dog.takedamage = 0;
+  }
 
   foreach(guy in infsquad.members) {
     guy.goalradius = 350;
@@ -518,8 +541,9 @@ drone_tutorial() {
   maps\_so_rts_event::trigger_event("dlg_prep_tactical");
   level thread nag_until_notify(15, "tact_prompt_done");
 
-  while(flag("fps_mode"))
+  while(flag("fps_mode")) {
     wait 0.05;
+  }
 
   maps\_so_rts_event::trigger_event("dlg_prep_tactical_ack");
   flag_set("fps_mode_locked_out");
@@ -623,10 +647,12 @@ drone_tutorial() {
     flag_set("block_button_press");
     infsquadid = level.rts.activesquad;
 
-    if(infsquad.id == infsquadid)
+    if(infsquad.id == infsquadid) {
       inf2squad.selectable = 0;
-    else
+    }
+    else {
       infsquad.selectable = 0;
+    }
 
     level notify("tact_inf_done");
     level waittill("tact_inf_done_done");
@@ -681,8 +707,9 @@ drone_tutorial() {
   flag_clear("unit_select_locked_out");
   dogsquad.members[0].no_takeover = 1;
 
-  foreach(tur in tursquad.members)
+  foreach(tur in tursquad.members) {
   tur.no_takeover = 1;
+  }
 
   maps\_so_rts_event::trigger_event("dlg_switch_soldier_fps");
   level thread nag_until_notify(15, "tact_control_done");
@@ -731,8 +758,9 @@ drone_tutorial() {
   level notify("tact_prompt2");
   level waittill("tact_prompt2_ready");
 
-  while(flag("fps_mode"))
+  while(flag("fps_mode")) {
     wait 0.05;
+  }
 
   flag_set("fps_mode_locked_out");
   flag_clear("unit_select_locked_out");
@@ -896,15 +924,17 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
     squadid = maps\_so_rts_ai::spawn_ai_package_standard(pkg_ref, team, undefined, spot.origin);
     maps\_so_rts_squad::reissuesquadlastorders(squadid);
 
-    foreach(guy in level.rts.squads[squadid].members)
+    foreach(guy in level.rts.squads[squadid].members) {
     guy.allow_oob = 1;
+    }
   } else if(pkg_ref.ref == "infantry_ally_reg2_pkg") {
     spot = getent("squad_2_loc", "targetname");
     squadid = maps\_so_rts_ai::spawn_ai_package_standard(pkg_ref, team, undefined, spot.origin);
     maps\_so_rts_squad::reissuesquadlastorders(squadid);
 
-    foreach(guy in level.rts.squads[squadid].members)
+    foreach(guy in level.rts.squads[squadid].members) {
     guy.allow_oob = 1;
+    }
   } else if(pkg_ref.ref == "bigdog_pkg") {
     spot = getstruct("bigdog_unit_start_point", "targetname");
     squadid = maps\_so_rts_ai::spawn_ai_package_standard(pkg_ref, team, undefined, spot.origin, 0);
@@ -924,8 +954,9 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
     maps\_so_rts_catalog::units_delivered(team, squadid);
   }
 
-  if(isDefined(callback))
+  if(isDefined(callback)) {
     thread[[callback]](squadid);
+  }
 
   return squadid;
 }

@@ -46,8 +46,9 @@ set_vehicle_anims(positions) {
 #using_animtree("generic_human");
 setanims() {
   positions = [];
-  for(i = 0; i < 1; i++)
+  for(i = 0; i < 1; i++) {
     positions[i] = spawnStruct();
+  }
 
   return positions;
 }
@@ -80,10 +81,12 @@ playerisinfront(other) {
   forwardvec = anglesToForward(flat_angle(other.angles));
   normalvec = vectorNormalize(flat_origin(level.player.origin) - other.origin);
   dot = vectordot(forwardvec, normalvec);
-  if(dot > 0)
+  if(dot > 0) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 plane_sound_node() {
@@ -91,8 +94,9 @@ plane_sound_node() {
   other endon("death");
   self thread plane_sound_node(); // spawn new thread for next plane that passes through this pathnode
   other thread play_loop_sound_on_entity("veh_mig29_dist_loop");
-  while(playerisinfront(other))
+  while(playerisinfront(other)) {
     wait .05;
+  }
   wait .5; // little delay for the boom
   other thread play_sound_in_space("veh_mig29_sonic_boom");
   other waittill("reached_end_node");

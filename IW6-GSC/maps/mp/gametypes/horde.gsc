@@ -202,8 +202,9 @@ updateTimerOmnvars(player) {
 }
 
 getMaxPickupsPerRound() {
-  if(CONST_FORCE_PICKUP_DROP)
+  if(CONST_FORCE_PICKUP_DROP) {
     return 100;
+  }
 
   maxPickupsPerRound = getNumPlayers() + 1;
 
@@ -211,8 +212,9 @@ getMaxPickupsPerRound() {
 }
 
 getPercentChanceToDrop() {
-  if(CONST_FORCE_PICKUP_DROP)
+  if(CONST_FORCE_PICKUP_DROP) {
     return 100;
+  }
 
   percentChanceToDrop = 0;
   numPlayers = getNumPlayers();
@@ -263,8 +265,9 @@ initializeMatchRules() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = false;
+  }
 
   setObjectiveText("allies", &"HORDE_OBJECTIVE");
   setObjectiveText("axis", &"HORDE_OBJECTIVE");
@@ -326,8 +329,9 @@ hordeDropLocationTrace() {
 
     dropLocation.traceLocation = dropLocation.origin;
 
-    if(trace["fraction"] < 1)
+    if(trace["fraction"] < 1) {
       dropLocation.traceLocation = trace["position"];
+    }
   }
 }
 
@@ -338,8 +342,9 @@ onPlayerConnectHorde() {
     player.gameModefirstSpawn = true;
     player.hasUsedSquadMate = false;
 
-    if(level.currentRoundNumber > 10)
+    if(level.currentRoundNumber > 10) {
       player.hasUsedSquadMate = true;
+    }
 
     level thread createPlayerVariables(player);
     level thread monitorDoubleTap(player);
@@ -381,8 +386,9 @@ createHordeWeaponState(player, weaponName, bSetBarSize) {
   player.weaponState[baseWeaponName]["vaule"] = 0;
   player.weaponState[baseWeaponName]["barSize"] = 0;
 
-  if(bSetBarSize)
+  if(bSetBarSize) {
     player.weaponState[baseWeaponName]["barSize"] = getWeaponBarSize(1, baseWeaponName);
+  }
 }
 
 hasWeaponState(player, baseWeaponName) {
@@ -468,26 +474,33 @@ setEnemyDifficultySettings(agent) {
 }
 
 giveEnemyPerks() {
-  if(level.currentRoundNumber > 15)
+  if(level.currentRoundNumber > 15) {
     self givePerk("specialty_fastreload", false);
+  }
 
-  if(level.currentRoundNumber > 20)
+  if(level.currentRoundNumber > 20) {
     self givePerk("specialty_fastsprintrecovery", false);
+  }
 
-  if(level.currentRoundNumber > 30)
+  if(level.currentRoundNumber > 30) {
     self givePerk("specialty_lightweight", false);
+  }
 
-  if(level.currentRoundNumber > 35)
+  if(level.currentRoundNumber > 35) {
     self givePerk("specialty_quickdraw", false);
+  }
 
-  if(level.currentRoundNumber > 40)
+  if(level.currentRoundNumber > 40) {
     self givePerk("specialty_stalker", false);
+  }
 
-  if(level.currentRoundNumber > 45)
+  if(level.currentRoundNumber > 45) {
     self givePerk("specialty_marathon", false);
+  }
 
-  if(level.currentRoundNumber > 50)
+  if(level.currentRoundNumber > 50) {
     self givePerk("specialty_regenfaster", false);
+  }
 }
 
 setEnemyAgentHealth(agent) {
@@ -530,8 +543,9 @@ onSpawnFinished() {
       self childthread ammoRefillPrimary();
       self thread maps\mp\bots\_bots::bot_think_revive();
 
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self.owner.hasUsedSquadMate = true;
+      }
     }
   } else {
     self childthread ammoRefillPrimary();
@@ -572,8 +586,9 @@ onSpawnFinished() {
 updateRespawnSplash(isFirstSpawn) {
   self waittill("spawned_player");
 
-  if(!isFirstSpawn)
+  if(!isFirstSpawn) {
     self thread maps\mp\gametypes\_hud_message::SplashNotify("horde_respawn");
+  }
 }
 
 monitorStuck(player) {
@@ -618,8 +633,9 @@ updateOutlines(player) {
 setRavagerModel() {
   self setModel("mp_body_infected_a");
 
-  if(isDefined(self.headModel))
+  if(isDefined(self.headModel)) {
     self Detach(self.headModel, "");
+  }
 
   self.headModel = "head_mp_infected";
   self Attach(self.headModel, "", true);
@@ -628,8 +644,9 @@ setRavagerModel() {
 setEnforcerModel() {
   self setModel("mp_body_juggernaut_light_black");
 
-  if(isDefined(self.headModel))
+  if(isDefined(self.headModel)) {
     self Detach(self.headModel, "");
+  }
 
   self.headModel = "head_juggernaut_light_black";
   self Attach(self.headModel, "", true);
@@ -638,8 +655,9 @@ setEnforcerModel() {
 setStrikerModel() {
   self setModel("mp_body_infected_a");
 
-  if(isDefined(self.headModel))
+  if(isDefined(self.headModel)) {
     self Detach(self.headModel, "");
+  }
 
   self.headModel = "head_mp_infected";
   self Attach(self.headModel, "", true);
@@ -657,8 +675,9 @@ setBlasterModel() {
 setHammerModel() {
   self setModel("mp_body_juggernaut_light_black");
 
-  if(isDefined(self.headModel))
+  if(isDefined(self.headModel)) {
     self Detach(self.headModel, "");
+  }
 
   self.headModel = "head_juggernaut_light_black";
   self Attach(self.headModel, "", true);
@@ -744,11 +763,13 @@ closeClassMenu() {
 }
 
 assignIntel() {
-  if(CONST_FORCE_TEAM_INTEL && level.isTeamIntelComplete)
+  if(CONST_FORCE_TEAM_INTEL && level.isTeamIntelComplete) {
     level notify("giveTeamIntel", level.playerTeam);
+  }
 
-  if(!(level.currentRoundNumber % 4) && level.isTeamIntelComplete)
+  if(!(level.currentRoundNumber % 4) && level.isTeamIntelComplete) {
     level notify("giveTeamIntel", level.playerTeam);
+  }
 
   if((level.currentRoundNumber == 21) && (getNumPlayers() == 1) && !hasAgentSquadMember(level.players[0])) {
     level.players[0] thread maps\mp\killstreaks\_killstreaks::giveKillstreak("agent", false, false, level.players[0]);
@@ -795,8 +816,9 @@ notifyRoundOver() {
   level thread respawnEliminatedPlayers();
   level thread playSoundToAllPlayers("mp_safe_round_end");
 
-  if(!isSpecialRound())
+  if(!isSpecialRound()) {
     level thread leaderDialog("round_end", level.playerTeam, "status");
+  }
 }
 
 respawnEliminatedPlayers() {
@@ -855,14 +877,16 @@ updateHordeSettings() {
     level.lastDogRound = level.currentRoundNumber;
   }
 
-  if(level.currentRoundNumber > 4)
+  if(level.currentRoundNumber > 4) {
     SetNoJIPScore(true);
+  }
 
   foreach(player in level.players) {
     player.roundsPlayed++;
 
-    if((player.roundsPlayed != level.currentRoundNumber) && (player.roundsPlayed > 9))
+    if((player.roundsPlayed != level.currentRoundNumber) && (player.roundsPlayed > 9)) {
       player.roundsPlayed = level.currentRoundNumber;
+    }
 
     awardHordeRoundNumber(player, player.roundsPlayed);
   }
@@ -871,20 +895,25 @@ updateHordeSettings() {
 }
 
 chanceForDogRound() {
-  if(level.currentRoundNumber < 4)
+  if(level.currentRoundNumber < 4) {
     return false;
+  }
 
-  if(isSpecialRound(level.currentRoundNumber))
+  if(isSpecialRound(level.currentRoundNumber)) {
     return false;
+  }
 
-  if(level.lastDogRound == (level.currentRoundNumber - 1))
+  if(level.lastDogRound == (level.currentRoundNumber - 1)) {
     return false;
+  }
 
-  if(RandomIntRange(1, 101) < CONST_DOG_ROUND_CHANCE)
+  if(RandomIntRange(1, 101) < CONST_DOG_ROUND_CHANCE) {
     return true;
+  }
 
-  if((level.currentRoundNumber - level.lastDogRound) > 4)
+  if((level.currentRoundNumber - level.lastDogRound) > 4) {
     return true;
+  }
 
   return false;
 }
@@ -968,8 +997,9 @@ waitUntilMatchStart() {
 }
 
 showNextRoundMessage() {
-  if(showIntermissionTimer())
+  if(showIntermissionTimer()) {
     setHudTimer("start_time", getRoundIntermissionTimer());
+  }
 
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(getRoundIntermissionTimer());
 
@@ -981,8 +1011,9 @@ showNextRoundMessage() {
   if(!isSpecialRound()) {
     soundName = "mp_safe_round_start";
 
-    if(isDogRound())
+    if(isDogRound()) {
       soundName = "mp_safe_round_boss";
+    }
 
     level childthread playSoundToAllPlayers(soundName);
     level thread leaderDialog("round_start", level.playerTeam, "status");
@@ -992,21 +1023,25 @@ showNextRoundMessage() {
 }
 
 showIntermissionTimer() {
-  if(level.currentRoundNumber == 1)
+  if(level.currentRoundNumber == 1) {
     return false;
+  }
 
-  if(isSpecialRound(level.currentRoundNumber))
+  if(isSpecialRound(level.currentRoundNumber)) {
     return false;
+  }
 
-  if(isSpecialRound(level.currentRoundNumber - 1))
+  if(isSpecialRound(level.currentRoundNumber - 1)) {
     return false;
+  }
 
   return true;
 }
 
 getRoundIntermissionTimer() {
-  if(!showIntermissionTimer())
+  if(!showIntermissionTimer()) {
     return 5;
+  }
 
   return CONST_ROUND_INTERMISSION;
 }
@@ -1029,8 +1064,9 @@ runDropLocations() {
     dropNum = getNumPlayers() + 1;
     dropNum = min(dropNum, 4);
 
-    if(CONST_MAX_DROP_NUMBER)
+    if(CONST_MAX_DROP_NUMBER) {
       dropNum = 4;
+    }
 
     sortDropLocations();
 
@@ -1063,8 +1099,9 @@ sortDropLocations() {
 getNextDropLocationIndex(previousIndex) {
   nextIndex = previousIndex + 1;
 
-  if(nextIndex == level.hordeDropLocations.size)
+  if(nextIndex == level.hordeDropLocations.size) {
     return 0;
+  }
 
   return nextIndex;
 }
@@ -1105,8 +1142,9 @@ activatePlayerHUD(player) {
 
   baseWeaponNames = GetArrayKeys(player.weaponState);
 
-  foreach(baseWeaponName in baseWeaponNames)
+  foreach(baseWeaponName in baseWeaponNames) {
   player.weaponState[baseWeaponName]["barSize"] = getWeaponBarSize(1, baseWeaponName);
+  }
 
   player SetClientOmnvar("ui_horde_weapon_progress", 0);
   player SetClientOmnvar("ui_horde_weapon_level", 1);
@@ -1240,8 +1278,9 @@ updateWeaponCamo(player, baseweaponName, weaponName) {
 }
 
 allowCamo(baseweaponName) {
-  if(!level.allowCamoSwap)
+  if(!level.allowCamoSwap) {
     return false;
+  }
 
   switch (baseweaponName) {
     case "iw6_mts255_mp":
@@ -1345,8 +1384,9 @@ getWeaponBarSize(weaponLevel, baseWeaponName) {
   enemyCount = getMaxEnemyCount(weaponLevel);
   barSize = (enemyCount * 0.8 * CONST_AVG_SCORE_PER_KILL);
 
-  if(isSniper)
+  if(isSniper) {
     barSize = barSize / 2.5;
+  }
 
   return barSize;
 }
@@ -1479,15 +1519,18 @@ getAgentDamageScalar() {
 }
 
 modifyPlayerDamageHorde(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc) {
-  if(!isDefined(victim))
+  if(!isDefined(victim)) {
     return 0;
+  }
 
-  if(isDefined(eAttacker) && isDefined(eAttacker.team) && (eAttacker.team == victim.team))
+  if(isDefined(eAttacker) && isDefined(eAttacker.team) && (eAttacker.team == victim.team)) {
     return 0;
+  }
 
   if(isDefined(eAttacker) && IsPlayer(eAttacker)) {
-    if((victim == eAttacker) && isKillstreakWeapon(sWeapon))
+    if((victim == eAttacker) && isKillstreakWeapon(sWeapon)) {
       iDamage = 0;
+    }
 
     baseWeaponName = GetWeaponBaseName(sWeapon);
 
@@ -1499,25 +1542,30 @@ modifyPlayerDamageHorde(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoi
       if(sMeansOfDeath == "MOD_MELEE") {
         iDamage = victim.maxhealth + 1;
 
-        if(victim.horde_type == "Blaster")
+        if(victim.horde_type == "Blaster") {
           iDamage = Int(victim.maxhealth * 0.70);
+        }
       }
 
-      if(isKillstreakWeapon(sWeapon))
+      if(isKillstreakWeapon(sWeapon)) {
         iDamage = int(iDamage + (CONST_ENEMY_HEALTH_INCREASE * level.currentRoundNumber));
+      }
 
-      if(isDefined(level.killstreakWeildWeapons[sWeapon]) && (level.killstreakWeildWeapons[sWeapon] == "heli_sniper"))
+      if(isDefined(level.killstreakWeildWeapons[sWeapon]) && (level.killstreakWeildWeapons[sWeapon] == "heli_sniper")) {
         iDamage = Int(victim.maxhealth) + 1;
+      }
 
       if(maps\mp\gametypes\_class::isValidEquipment(sWeapon, false)) {
-        if(IsExplosiveDamageMOD(sMeansOfDeath))
+        if(IsExplosiveDamageMOD(sMeansOfDeath)) {
           iDamage = Int(victim.maxhealth) + 1;
+        }
 
         if(sWeapon == "throwingknife_mp") {
           iDamage = victim.maxhealth + 1;
 
-          if(victim.horde_type == "Blaster")
+          if(victim.horde_type == "Blaster") {
             iDamage = Int(victim.maxhealth * 0.70);
+          }
         }
       }
 
@@ -1528,8 +1576,9 @@ modifyPlayerDamageHorde(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoi
   if(isDefined(eAttacker) && isDefined(eAttacker.owner) && IsPlayer(eAttacker.owner)) {
     bIsAgent = false;
 
-    if(isKillstreakWeapon(sWeapon))
+    if(isKillstreakWeapon(sWeapon)) {
       iDamage = int(iDamage + (CONST_ENEMY_HEALTH_INCREASE * level.currentRoundNumber));
+    }
 
     if(IsAgent(eAttacker)) {
       iDamage = int(iDamage + (iDamage * CONST_WEAPON_LEVEL_INCREASE * (level.currentRoundNumber - 2)));
@@ -1540,14 +1589,17 @@ modifyPlayerDamageHorde(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoi
   }
 
   if(IsPlayer(victim) || isOnHumanTeam(victim)) {
-    if(isPlayerInLastStand(victim) && !(victim touchingBadTrigger()))
+    if(isPlayerInLastStand(victim) && !(victim touchingBadTrigger())) {
       return 0;
+    }
 
-    if(isDefined(victim.OnHeliSniper) && victim.OnHeliSniper)
+    if(isDefined(victim.OnHeliSniper) && victim.OnHeliSniper) {
       return 0;
+    }
 
-    if(sWeapon == "semtexproj_mp")
+    if(sWeapon == "semtexproj_mp") {
       iDamage = iDamage * 3;
+    }
 
     if(IsPlayer(victim)) {
       iDamage = int(iDamage * CONST_PLAYER_DAMAGE_SCALE);
@@ -1559,23 +1611,28 @@ modifyPlayerDamageHorde(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoi
       eAttacker HudOutlineEnable(level.enemyOutlineColor, false);
       eAttacker.outlineColor = level.enemyOutlineColor;
 
-      if(sMeansOfDeath == "MOD_MELEE")
+      if(sMeansOfDeath == "MOD_MELEE") {
         iDamage = Int(victim.maxhealth / 2) + 1;
+      }
 
-      if(eAttacker.agent_type == "dog")
+      if(eAttacker.agent_type == "dog") {
         iDamage = Int(victim.maxhealth / 4) + 1;
+      }
     }
 
     if(isDefined(victim.isReviving) && victim.isReviving) {
-      if(IsAgent(victim))
+      if(IsAgent(victim)) {
         iDamage = 0;
+      }
 
-      if(IsPlayer(victim))
+      if(IsPlayer(victim)) {
         iDamage = int(iDamage * 0.9);
+      }
     }
 
-    if((victim isUsingRemote()) && (victim getRemoteName() == "remotemissile"))
+    if((victim isUsingRemote()) && (victim getRemoteName() == "remotemissile")) {
       iDamage = int(iDamage * 0.9);
+    }
   }
 
   return iDamage;
@@ -1592,19 +1649,24 @@ givePointsForDamage(victim, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitL
   eventName = undefined;
 
   if(isKillshot) {
-    if(isMelee)
+    if(isMelee) {
       eventName = "kill_melee";
-    else if(isHeadshot)
+    }
+    else if(isHeadshot) {
       eventName = "kill_head";
-    else
+    }
+    else {
       eventName = "kill_normal";
+    }
 
     self notify("horde_kill", victim, sWeapon, sMeansOfDeath);
   } else {
-    if(isHeadshot)
+    if(isHeadshot) {
       eventName = "damage_head";
-    else
+    }
+    else {
       eventName = "damage_body";
+    }
   }
 
   self givePointsForEvent(eventName, sWeapon, bIsAgent);
@@ -1660,8 +1722,9 @@ onNormalDeath(victim, attacker, lifeId) {
   if(!isDefined(attacker)) {
     return;
   }
-  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]])
+  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]]) {
     attacker.finalKill = true;
+  }
 }
 
 removePerkHUD(player) {
@@ -1733,8 +1796,9 @@ pickupBounce() {
   topPos = self.curOrigin + (0, 0, 12);
   time = 1.25;
 
-  if(isDefined(self.visuals) && isDefined(self.visuals[0]))
+  if(isDefined(self.visuals) && isDefined(self.visuals[0])) {
     pickUpModel = self.visuals[0];
+  }
 
   while(true) {
     pickUpModel moveTo(topPos, time, 0.15, 0.15);
@@ -1811,8 +1875,9 @@ ammoPickup(player) {
 }
 
 hordeMayDropWeapon(weaponName) {
-  if(weaponName == level.playerStartWeaponName)
+  if(weaponName == level.playerStartWeaponName) {
     return false;
+  }
 
   return true;
 }
@@ -1820,8 +1885,9 @@ hordeMayDropWeapon(weaponName) {
 dropWeaponForDeathHorde(attacker, sMeansOfDeath) {
   dropWeaponName = getPlayerWeaponHorde(self);
 
-  if(dropWeaponName == level.intelMiniGun)
+  if(dropWeaponName == level.intelMiniGun) {
     dropWeaponName = self maps\mp\killstreaks\_killstreaks::getFirstPrimaryWeapon();
+  }
 
   if(!hordeMayDropWeapon(dropWeaponName)) {
     return;
@@ -1837,8 +1903,9 @@ dropWeaponForDeathHorde(attacker, sMeansOfDeath) {
   item.trigger = spawn("trigger_radius", self.origin + offset, 0, 32, 32);
 
   foreach(player in level.players) {
-    if(item.owner == player)
+    if(item.owner == player) {
       item ShowToPlayer(item.owner);
+    }
   }
 
   item thread pickupBounce();
@@ -2073,12 +2140,14 @@ setSpecialLoadouts() {
 getHordeEnemyLoadOut() {
   loadout = level.hordeLoadouts[CONST_ENEMY_TEAM]["a"];
 
-  if(level.currentRoundNumber < 5)
+  if(level.currentRoundNumber < 5) {
     return loadout;
+  }
 
   if(level.currentRoundNumber < 9) {
-    if(cointoss())
+    if(cointoss()) {
       loadout = level.hordeLoadouts[CONST_ENEMY_TEAM]["b"];
+    }
 
     return loadout;
   }
@@ -2086,8 +2155,9 @@ getHordeEnemyLoadOut() {
   loadout = level.hordeLoadouts[CONST_ENEMY_TEAM]["b"];
 
   if(level.currentRoundNumber < 13) {
-    if(RandomIntRange(1, 11) < 4)
+    if(RandomIntRange(1, 11) < 4) {
       loadout = level.hordeLoadouts[CONST_ENEMY_TEAM]["c"];
+    }
 
     return loadout;
   }
@@ -2095,8 +2165,9 @@ getHordeEnemyLoadOut() {
   if(level.currentRoundNumber < 16) {
     loadoutChance = RandomIntRange(1, 11);
 
-    if(loadoutChance < 4)
+    if(loadoutChance < 4) {
       loadout = level.hordeLoadouts[CONST_ENEMY_TEAM]["d"];
+    }
 
     return loadout;
   }
@@ -2141,8 +2212,9 @@ getHordeEnemyLoadOut() {
 
   if(type_limit_hit) {
     loadout = level.hordeLoadouts[CONST_ENEMY_TEAM]["a"];
-    if(cointoss())
+    if(cointoss()) {
       loadout = level.hordeLoadouts[CONST_ENEMY_TEAM]["b"];
+    }
   }
 
   return loadout;

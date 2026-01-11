@@ -178,14 +178,18 @@ exploder_find(num) {
   num = int(num);
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(!isDefined(ent))
+    if(!isDefined(ent)) {
       continue;
-    if(ent.v["type"] != "exploder")
+    }
+    if(ent.v["type"] != "exploder") {
       continue;
-    if(!isDefined(ent.v["exploder"]))
+    }
+    if(!isDefined(ent.v["exploder"])) {
       continue;
-    if(ent.v["exploder"] != num)
+    }
+    if(ent.v["exploder"] != num) {
       continue;
+    }
     return ent;
   }
   return undefined;
@@ -223,4 +227,3 @@ gopher_init() {
   game["gopher_fx"] = true;
   exploder(random(exploders));
 }
-

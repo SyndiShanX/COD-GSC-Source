@@ -11,8 +11,9 @@ main() {
   self clearanim( % root, 0.2);
   self clearanim( % german_shepherd_run_stop, 0);
 
-  if(!isDefined(self.traversecomplete) && !isDefined(self.skipstartmove) && self.a.movement == "run" && (!isDefined(self.disableexits) || self.disableexits == 0))
+  if(!isDefined(self.traversecomplete) && !isDefined(self.skipstartmove) && self.a.movement == "run" && (!isDefined(self.disableexits) || self.disableexits == 0)) {
     startmove();
+  }
 
   thread randomsoundduringrunloop();
   self.traversecomplete = undefined;
@@ -35,8 +36,9 @@ main() {
     moveloop();
 
     if(self.a.movement == "run") {
-      if(self.disablearrivals == 0)
+      if(self.disablearrivals == 0) {
         thread stopmove();
+      }
 
       common_scripts\utility::waittill_any("run", "path_set");
       self clearanim( % german_shepherd_run_stop, 0.1);
@@ -50,10 +52,12 @@ moveloop() {
   self.moveloopcleanupfunc = undefined;
 
   for(;;) {
-    if(self.disablearrivals)
+    if(self.disablearrivals) {
       self.stopanimdistsq = 0;
-    else
+    }
+    else {
       self.stopanimdistsq = anim.dogstoppingdistsq;
+    }
 
     if(isDefined(self.moveloopcleanupfunc)) {
       self[[self.moveloopcleanupfunc]]();
@@ -137,14 +141,18 @@ pathchangecheck2() {
 pathchange_getdogturnanim(var_0) {
   var_1 = undefined;
 
-  if(var_0 < -135)
+  if(var_0 < -135) {
     var_1 = % german_shepherd_run_start_180_l;
-  else if(var_0 > 135)
+  }
+  else if(var_0 > 135) {
     var_1 = % german_shepherd_run_start_180_r;
-  else if(var_0 < -60)
+  }
+  else if(var_0 < -60) {
     var_1 = % german_shepherd_run_start_l;
-  else if(var_0 > 60)
+  }
+  else if(var_0 > 60) {
     var_1 = % german_shepherd_run_start_r;
+  }
 
   return var_1;
 }
@@ -193,8 +201,9 @@ startmovetracklookahead() {
 playmovestartanim() {
   self endon("move_loop_restart");
 
-  if(self.lookaheaddist == 0)
+  if(self.lookaheaddist == 0) {
     thread pathchangecheck2();
+  }
   else {
     var_0 = self.origin;
     var_1 = anim.dogstartmovedist * 0.6;
@@ -206,18 +215,23 @@ playmovestartanim() {
       var_4 = angleclamp180(var_3[1] - self.angles[1]);
 
       if(var_4 >= 0) {
-        if(var_4 < 45)
+        if(var_4 < 45) {
           var_5 = 8;
-        else if(var_4 < 135)
+        }
+        else if(var_4 < 135) {
           var_5 = 6;
-        else
+        }
+        else {
           var_5 = 3;
+        }
       } else if(var_4 > -45)
         var_5 = 8;
-      else if(var_4 > -135)
+      else if(var_4 > -135) {
         var_5 = 4;
-      else
+      }
+      else {
         var_5 = 1;
+      }
 
       self setanimrestart(anim.dogstartmoveanim[var_5], 1, 0.2, 1);
       var_6 = self.angles[1] + anim.dogstartmoveangles[var_5];
@@ -240,10 +254,12 @@ playmovestartanim() {
     var_9 = angleclamp180(var_3[1] - self.angles[1]);
 
     if(abs(var_9) > 20) {
-      if(var_9 > 0)
+      if(var_9 > 0) {
         var_10 = % german_shepherd_rotate_ccw;
-      else
+      }
+      else {
         var_10 = % german_shepherd_rotate_cw;
+      }
 
       self setflaggedanimrestart("dog_turn", var_10, 1, 0.2, 1.0);
       animscripts\shared::donotetracks("dog_turn");
@@ -285,8 +301,9 @@ stopmove() {
 dogplaysoundandnotify(var_0, var_1) {
   maps\_utility::play_sound_on_tag_endon_death(var_0, "tag_eye");
 
-  if(isalive(self))
+  if(isalive(self)) {
     self notify(var_1);
+  }
 }
 
 randomsoundduringrunloop() {
@@ -296,10 +313,12 @@ randomsoundduringrunloop() {
   for(;;) {
     var_0 = undefined;
 
-    if(isDefined(self.script_growl))
+    if(isDefined(self.script_growl)) {
       var_0 = "anml_dog_growl";
-    else if(!isDefined(self.script_nobark))
+    }
+    else if(!isDefined(self.script_nobark)) {
       var_0 = "anml_dog_bark";
+    }
 
     if(!isDefined(var_0)) {
       break;
@@ -318,30 +337,36 @@ getrunanimweights() {
   var_0["right"] = 0;
 
   if(self.leanamount > 0) {
-    if(self.leanamount < 0.95)
+    if(self.leanamount < 0.95) {
       self.leanamount = 0.95;
+    }
 
     var_0["left"] = 0;
     var_0["right"] = (1 - self.leanamount) * 20;
 
-    if(var_0["right"] > 1)
+    if(var_0["right"] > 1) {
       var_0["right"] = 1;
-    else if(var_0["right"] < 0)
+    }
+    else if(var_0["right"] < 0) {
       var_0["right"] = 0;
+    }
 
     var_0["center"] = 1 - var_0["right"];
   } else if(self.leanamount < 0) {
-    if(self.leanamount > -0.95)
+    if(self.leanamount > -0.95) {
       self.leanamount = -0.95;
+    }
 
     var_0["right"] = 0;
     var_0["left"] = (1 + self.leanamount) * 20;
 
-    if(var_0["left"] > 1)
+    if(var_0["left"] > 1) {
       var_0["left"] = 1;
+    }
 
-    if(var_0["left"] < 0)
+    if(var_0["left"] < 0) {
       var_0["left"] = 0;
+    }
 
     var_0["center"] = 1 - var_0["left"];
   } else {

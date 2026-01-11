@@ -13,17 +13,21 @@ main() {
   self clearanim( % root, 0.1);
   var_0 = maps\_utility::flashbanggettimeleftsec();
 
-  if(var_0 > 2 && randomint(100) > 60)
+  if(var_0 > 2 && randomint(100) > 60) {
     self setflaggedanimrestart("flashed_anim", % german_shepherd_run_pain, 1, 0.2, self.animplaybackrate * 0.75);
-  else
+  }
+  else {
     self setflaggedanimrestart("flashed_anim", % german_shepherd_run_flashbang_b, 1, 0.2, self.animplaybackrate);
+  }
 
   var_1 = getanimlength( % german_shepherd_run_flashbang_b) * self.animplaybackrate;
 
-  if(var_0 < var_1)
+  if(var_0 < var_1) {
     animscripts\notetracks::donotetracksfortime(var_0, "flashed_anim");
-  else
+  }
+  else {
     animscripts\shared::donotetracks("flashed_anim");
+  }
 
   self.flashed = 0;
   self notify("stop_flashbang_effect");

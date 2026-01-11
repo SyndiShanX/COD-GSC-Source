@@ -38,8 +38,9 @@ main() {
   maps\_load::main();
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 7);
 
-  if(level.xenon)
+  if(level.xenon) {
     setsaveddvar("r_texFilterProbeBilinear", 1);
+  }
 
   maps\las_vegas_audio::main();
   maps\las_vegas_anim::main();
@@ -272,8 +273,9 @@ achievement() {
 achievement_thread() {
   thread draw_slot_machine();
 
-  if(!common_scripts\utility::flag("las_vegas_transient_hotel_tr_loaded"))
+  if(!common_scripts\utility::flag("las_vegas_transient_hotel_tr_loaded")) {
     common_scripts\utility::flag_wait("las_vegas_transient_hotel_tr_loaded");
+  }
 
   if(!maps\las_vegas_code::is_start_point_before("entrance")) {
     return;
@@ -286,8 +288,9 @@ achievement_thread() {
   self notify("__destroyed");
   level.slot_machine_count--;
 
-  if(level.slot_machine_count == level.slot_machine_total)
+  if(level.slot_machine_count == level.slot_machine_total) {
     level.player maps\_utility::player_giveachievement_wrapper("LEVEL_14A");
+  }
 }
 
 draw_slot_machine() {
@@ -296,6 +299,7 @@ draw_slot_machine() {
   }
   self endon("__destroyed");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }

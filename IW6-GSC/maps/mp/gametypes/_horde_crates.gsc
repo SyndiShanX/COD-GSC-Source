@@ -204,8 +204,9 @@ hordeCrateWeaponThink(dropType) {
   self endon("doubleTap");
   self endon("restarting_physics");
 
-  if(!isDefined(self.doubleTapCount))
+  if(!isDefined(self.doubleTapCount)) {
     self.doubleTapCount = 0;
+  }
 
   crateHint = game["strings"][self.crateType + "_hint"];
   self thread doubleTapThink();
@@ -243,18 +244,21 @@ tryGiveHordeWeapon(player, weaponName) {
     removeWeapon = true;
 
     foreach(weaponInList in weaponList) {
-      if(weaponName == weaponInList)
+      if(weaponName == weaponInList) {
         removeWeapon = false;
+      }
     }
 
     if(removeWeapon) {
       replaceWeapon = player GetCurrentPrimaryWeapon();
 
-      if(replaceWeapon == "none")
+      if(replaceWeapon == "none") {
         replaceWeapon = player getLastWeapon();
+      }
 
-      if(!player HasWeapon(replaceWeapon) || (replaceWeapon == level.intelMiniGun))
+      if(!player HasWeapon(replaceWeapon) || (replaceWeapon == level.intelMiniGun)) {
         replaceWeapon = player maps\mp\killstreaks\_killstreaks::getFirstPrimaryWeapon();
+      }
 
       player TakeWeapon(replaceWeapon);
     } else {
@@ -277,8 +281,9 @@ hordeCratePerkThink(dropType) {
   self endon("doubleTap");
   self endon("restarting_physics");
 
-  if(!isDefined(self.doubleTapCount))
+  if(!isDefined(self.doubleTapCount)) {
     self.doubleTapCount = 0;
+  }
 
   crateHint = game["strings"][self.crateType + "_hint"];
   self thread doubleTapThink();
@@ -315,8 +320,9 @@ hordeCrateLethalThink(dropType) {
   self endon("doubleTap");
   self endon("restarting_physics");
 
-  if(!isDefined(self.doubleTapCount))
+  if(!isDefined(self.doubleTapCount)) {
     self.doubleTapCount = 0;
+  }
 
   crateHint = game["strings"][self.crateType + "_hint"];
   self thread doubleTapThink();
@@ -414,8 +420,9 @@ crateAllCaptureThinkHorde(useTime) {
   self endon("doubleTap");
   self endon("restarting_physics");
 
-  if(!isDefined(useTime))
+  if(!isDefined(useTime)) {
     useTime = 500;
+  }
 
   while(isDefined(self)) {
     self MakeUsable();
@@ -455,8 +462,9 @@ handleKillStreakLimit(player) {
 
 handleAgentUse(player) {
   if(!IsPlayer(player)) {
-    if(isDefined(player.disablePlayerUseEnt))
+    if(isDefined(player.disablePlayerUseEnt)) {
       player.disablePlayerUseEnt EnablePlayerUse(player);
+    }
 
     player.disablePlayerUseEnt = self;
     self DisablePlayerUse(player);
@@ -505,8 +513,9 @@ doubleTapThink() {
 
   maxDistanceSq = 128 * 128;
 
-  if(self.doubleTapCount > 0)
+  if(self.doubleTapCount > 0) {
     wait(1.0);
+  }
 
   while(true) {
     level waittill("doubleTap", player);
@@ -552,11 +561,13 @@ runLootDrop() {
   crateOffest = RandomInt(level.crateTypes["loot"].size);
   createSpawnHeight = (0, 0, 75);
 
-  if(isDefined(level.spawnMaxCrates))
+  if(isDefined(level.spawnMaxCrates)) {
     dropNum = level.hordeDropLocations.size;
+  }
 
-  if(!level.carePackages.size)
+  if(!level.carePackages.size) {
     sortDropLocations();
+  }
 
   for(i = 0; i < dropNum; i++) {
     dropLocation = level.hordeDropLocations[level.dropLocationIndex];
@@ -601,14 +612,16 @@ lootCrateEffect(crate) {
 }
 
 getFinalDropLocation(groundLocation) {
-  if(!isPlayerNearLocation(groundLocation))
+  if(!isPlayerNearLocation(groundLocation)) {
     return groundLocation;
+  }
 
   pathNodeArray = GetNodesInRadiusSorted(groundLocation, 256, 64, 128, "Path");
 
   foreach(pathNode in pathNodeArray) {
-    if(!isPlayerNearLocation(pathNode.origin))
+    if(!isPlayerNearLocation(pathNode.origin)) {
       return pathNode.origin;
+    }
   }
 
   return undefined;
@@ -701,21 +714,25 @@ getNumPowerWeapons() {
     if(!isOnHumanTeam(player)) {
       continue;
     }
-    if(player HasWeapon(CONST_POWER_GUN))
+    if(player HasWeapon(CONST_POWER_GUN)) {
       numPowerWeapons++;
+    }
 
-    if(player _hasPerk(CONST_POWER_PERK))
+    if(player _hasPerk(CONST_POWER_PERK)) {
       numPowerWeapons++;
+    }
   }
 
   carePackages = getEntArray("care_package", "targetname");
 
   foreach(crate in carePackages) {
-    if(crate.crateType == CONST_POWER_GUN)
+    if(crate.crateType == CONST_POWER_GUN) {
       numPowerWeapons++;
+    }
 
-    if(crate.crateType == CONST_POWER_PERK)
+    if(crate.crateType == CONST_POWER_PERK) {
       numPowerWeapons++;
+    }
   }
 
   return numPowerWeapons;
@@ -726,8 +743,9 @@ isPowerWeapon(crateType) {
 }
 
 canPickCrate(crateType, numPowerWeapons) {
-  if(isPowerWeapon(crateType) && (numPowerWeapons >= CONST_POWER_LIMIT))
+  if(isPowerWeapon(crateType) && (numPowerWeapons >= CONST_POWER_LIMIT)) {
     return false;
+  }
 
   return true;
 }
@@ -736,8 +754,9 @@ setCrateLook(crate, outlineNum, HUDColor) {
   crate.friendlyModel HudOutlineEnable(outlineNum, false);
   crate.outlineColor = outlineNum;
 
-  foreach(icon in crate.entityHeadIcons)
+  foreach(icon in crate.entityHeadIcons) {
   icon.color = HUDColor;
+  }
 }
 
 setCrateLooksBasedOnTap(crate) {

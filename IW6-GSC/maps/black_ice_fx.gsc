@@ -375,8 +375,9 @@ fx_snakecam_lens_shmutz() {
   playFXOnTag(level._effect["snakecam_shmutz_02"], var_0, "tag_origin");
   level waittill("flag_snake_cam_below_water");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 intro_turn_on_vehicle_underwater_lights_fx() {
@@ -716,43 +717,58 @@ heat_column_fx() {
     var_17 = vectordot(var_15, var_16);
 
     if(var_14 < var_4) {
-      if(var_17 > 0.33)
+      if(var_17 > 0.33) {
         var_18 = 5;
-      else if(var_17 > -0.33)
+      }
+      else if(var_17 > -0.33) {
         var_18 = 4;
-      else
+      }
+      else {
         var_18 = 3;
+      }
     } else if(var_14 < var_3) {
-      if(var_17 > 0.65)
+      if(var_17 > 0.65) {
         var_18 = 5;
-      else if(var_17 > -0.33)
+      }
+      else if(var_17 > -0.33) {
         var_18 = 4;
-      else
+      }
+      else {
         var_18 = 3;
+      }
     } else if(var_14 < var_2) {
-      if(var_17 > 0.35)
+      if(var_17 > 0.35) {
         var_18 = 3;
-      else
+      }
+      else {
         var_18 = 2;
+      }
     } else if(var_14 < var_1) {
-      if(var_17 > 0.75)
+      if(var_17 > 0.75) {
         var_18 = 3;
-      else if(var_17 > -0.33)
+      }
+      else if(var_17 > -0.33) {
         var_18 = 2;
-      else
+      }
+      else {
         var_18 = 1;
+      }
     } else if(var_14 < var_0) {
-      if(var_17 > 0.6)
+      if(var_17 > 0.6) {
         var_18 = 2;
-      else if(var_17 > -0.25)
+      }
+      else if(var_17 > -0.25) {
         var_18 = 1;
-      else
+      }
+      else {
         var_18 = 0;
+      }
     } else
       var_18 = 0;
 
-    if(common_scripts\utility::flag("flag_vision_mudpumps"))
+    if(common_scripts\utility::flag("flag_vision_mudpumps")) {
       var_18 = 0;
+    }
 
     if(var_18 != var_10) {
       switch (var_18) {
@@ -866,11 +882,13 @@ heat_column_fx() {
       }
     }
 
-    if(!common_scripts\utility::flag("flag_vision_mudpumps"))
+    if(!common_scripts\utility::flag("flag_vision_mudpumps")) {
       var_11 = pipedeckvisionswitching(var_11, var_12);
+    }
 
-    if(var_9 > 0)
+    if(var_9 > 0) {
       earthquake(var_9, 0.2, level.player.origin, 128);
+    }
 
     wait(level.timestep);
   }
@@ -880,12 +898,15 @@ pipedeckvisionswitching(var_0, var_1) {
   var_2 = 0.025;
   var_3 = abs(var_0 - var_1);
 
-  if(var_3 <= var_2)
+  if(var_3 <= var_2) {
     var_0 = var_1;
-  else if(var_0 > var_1)
+  }
+  else if(var_0 > var_1) {
     var_0 = var_0 - var_2;
-  else
+  }
+  else {
     var_0 = var_0 + var_2;
+  }
 
   level.player visionsetnakedforplayer_lerp("black_ice_pipedeck", "black_ice_pipedeck_heat_5", var_0);
   return var_0;
@@ -1073,13 +1094,15 @@ exfil_heli_smoke_fx_01() {
 coldbreathfx() {
   var_0 = level._allies;
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread turn_on_cold_breath_fx();
+  }
 
   common_scripts\utility::flag_wait("flag_catwalks_end");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   self notify("stop personal effect");
+  }
 }
 
 turn_on_cold_breath_fx() {
@@ -1138,10 +1161,12 @@ fx_screen_bokehdots_rain() {
   create_view_particle_source();
 
   for(;;) {
-    if(common_scripts\utility::flag("flag_fx_screen_bokehdots_rain"))
+    if(common_scripts\utility::flag("flag_fx_screen_bokehdots_rain")) {
       playFXOnTag(common_scripts\utility::getfx("bokeh_splats_01"), level.view_particle_source, "tag_origin");
-    else
+    }
+    else {
       stopFXOnTag(common_scripts\utility::getfx("bokeh_splats_01"), level.view_particle_source, "tag_origin");
+    }
 
     wait 3.0;
   }
@@ -1161,17 +1186,22 @@ fx_screen_raindrops() {
       }
 
       if(common_scripts\utility::flag("fx_screen_raindrops")) {
-        if(!var_0 && var_1[0] < -55 && randomint(100) < 20)
+        if(!var_0 && var_1[0] < -55 && randomint(100) < 20) {
           level.player setwatersheeting(1, 1.0);
+        }
 
-        if(var_1[0] < -40)
+        if(var_1[0] < -40) {
           playFXOnTag(level._effect["raindrops_screen_20"], level.view_particle_source, "tag_origin");
-        else if(var_1[0] < -25)
+        }
+        else if(var_1[0] < -25) {
           playFXOnTag(level._effect["raindrops_screen_10"], level.view_particle_source, "tag_origin");
-        else if(var_1[0] < 25)
+        }
+        else if(var_1[0] < 25) {
           playFXOnTag(level._effect["raindrops_screen_5"], level.view_particle_source, "tag_origin");
-        else if(var_1[0] < 40)
+        }
+        else if(var_1[0] < 40) {
           playFXOnTag(level._effect["raindrops_screen_3"], level.view_particle_source, "tag_origin");
+        }
       }
     }
 
@@ -1193,13 +1223,16 @@ fx_screen_oildrops() {
       }
 
       if(common_scripts\utility::flag("fx_screen_oildrops")) {
-        if(!var_0 && var_1[0] < -55 && randomint(100) < 20)
+        if(!var_0 && var_1[0] < -55 && randomint(100) < 20) {
           level.player setwatersheeting(1, 1.0);
+        }
 
-        if(var_1[0] < 25)
+        if(var_1[0] < 25) {
           playFXOnTag(level._effect["oildrops_screen_5"], level.view_particle_source, "tag_origin");
-        else if(var_1[0] < 40)
+        }
+        else if(var_1[0] < 40) {
           playFXOnTag(level._effect["oildrops_screen_3"], level.view_particle_source, "tag_origin");
+        }
       }
     }
 
@@ -1301,11 +1334,13 @@ shockwave_dirt_hit(var_0, var_1, var_2) {
   var_3.alpha = 0;
   var_4 = 0;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   while(var_4 < var_1) {
     var_3.alpha = var_3.alpha + 0.05;

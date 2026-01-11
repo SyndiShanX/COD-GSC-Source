@@ -13,8 +13,9 @@ init() {
 }
 
 outlineenableinternal(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
-  if(!isDefined(var_0.outlines))
+  if(!isDefined(var_0.outlines)) {
     var_0.outlines = [];
+  }
 
   var_08 = spawnStruct();
   var_8.isdisabled = 0;
@@ -26,8 +27,9 @@ outlineenableinternal(var_00, var_01, var_02, var_03, var_04, var_05, var_06, va
   var_8.func_6C10 = var_04;
   var_8.type = var_06;
 
-  if(var_06 == "TEAM")
+  if(var_06 == "TEAM") {
     var_8.team = var_07;
+  }
 
   var_09 = outlinegenerateuniqueid();
   var_0.outlines[var_09] = var_08;
@@ -43,12 +45,14 @@ outlineenableinternal(var_00, var_01, var_02, var_03, var_04, var_05, var_06, va
 
     var_13 = outlinegethighestinfoforplayer(var_00, var_12);
 
-    if(!isDefined(var_13) || var_13 == var_08 || var_13.priority == var_8.priority)
+    if(!isDefined(var_13) || var_13 == var_08 || var_13.priority == var_8.priority) {
       var_10[var_10.size] = var_12;
+    }
   }
 
-  if(var_10.size > 0)
+  if(var_10.size > 0) {
     var_00 _hudoutlineenableforclients(var_10, var_8.colorindex, var_8.func_525C, var_8.func_6C10);
+  }
 
   return var_09;
 }
@@ -82,8 +86,9 @@ outlinedisableinternal(var_00, var_01) {
     var_05 = outlinegethighestinfoforplayer(var_01, var_04);
 
     if(isDefined(var_05)) {
-      if(var_5.priority <= var_2.priority)
+      if(var_5.priority <= var_2.priority) {
         var_01 _hudoutlineenableforclient(var_04, var_5.colorindex, var_5.func_525C, var_5.func_6C10);
+      }
 
       continue;
     }
@@ -94,8 +99,9 @@ outlinedisableinternal(var_00, var_01) {
   if(var_2.playersvisibletopending.size == 0) {
     var_1.outlines[var_00] = undefined;
 
-    if(var_1.outlines.size == 0)
+    if(var_1.outlines.size == 0) {
       outlineremovefromgloballist(var_01);
+    }
   }
 }
 
@@ -113,8 +119,9 @@ func_C7AB(var_00) {
       }
       var_05 = outlinegethighestinfoforplayer(var_00, var_04);
 
-      if(isDefined(var_05))
+      if(isDefined(var_05)) {
         var_00 _hudoutlineenableforclient(var_04, var_5.colorindex, var_5.func_525C, var_5.func_6C10);
+      }
     }
   }
 }
@@ -169,8 +176,9 @@ outlineremoveplayerfromvisibletoarrays(var_00) {
       }
     }
 
-    if(var_03 && isDefined(var_02) && isDefined(var_00))
+    if(var_03 && isDefined(var_02) && isDefined(var_00)) {
       var_02 hudoutlinedisableforclient(var_00);
+    }
   }
 }
 
@@ -183,17 +191,20 @@ outlineaddplayertoexistingallandteamoutlines(var_00) {
 
     foreach(var_05 in var_2.outlines) {
       if(var_5.type == "ALL" || var_5.type == "TEAM" && var_5.team == var_0.team) {
-        if(!scripts\engine\utility::array_contains(var_5.playersvisibleto, var_00))
+        if(!scripts\engine\utility::array_contains(var_5.playersvisibleto, var_00)) {
           var_5.playersvisibleto[var_5.playersvisibleto.size] = var_00;
+        }
         else {}
 
-        if(!isDefined(var_03) || var_5.priority > var_3.priority)
+        if(!isDefined(var_03) || var_5.priority > var_3.priority) {
           var_03 = var_05;
+        }
       }
     }
 
-    if(isDefined(var_03))
+    if(isDefined(var_03)) {
       var_02 _hudoutlineenableforclient(var_00, var_3.colorindex, var_3.func_525C, var_3.func_6C10);
+    }
   }
 }
 
@@ -201,13 +212,15 @@ outlinedisableinternalall(var_00) {
   if(!isDefined(var_00) || !isDefined(var_0.outlines) || var_0.outlines.size == 0) {
     return;
   }
-  foreach(var_03, var_02 in var_0.outlines)
+  foreach(var_03, var_02 in var_0.outlines) {
   outlinedisableinternal(var_03, var_00);
+  }
 }
 
 outlineaddtogloballist(var_00) {
-  if(!scripts\engine\utility::array_contains(level.outlineents, var_00))
+  if(!scripts\engine\utility::array_contains(level.outlineents, var_00)) {
     level.outlineents[level.outlineents.size] = var_00;
+  }
 }
 
 outlineremovefromgloballist(var_00) {
@@ -217,8 +230,9 @@ outlineremovefromgloballist(var_00) {
 outlinegethighestpriorityid(var_00) {
   var_01 = -1;
 
-  if(!isDefined(var_0.outlines) || var_0.size == 0)
+  if(!isDefined(var_0.outlines) || var_0.size == 0) {
     return var_01;
+  }
 
   var_02 = undefined;
 
@@ -238,15 +252,17 @@ outlinegethighestpriorityid(var_00) {
 outlinegethighestinfoforplayer(var_00, var_01) {
   var_02 = undefined;
 
-  if(!isDefined(var_0.outlines) || var_0.size == 0)
+  if(!isDefined(var_0.outlines) || var_0.size == 0) {
     return var_02;
+  }
 
   foreach(var_05, var_04 in var_0.outlines) {
     if(!isDefined(var_04) || var_4.isdisabled) {
       continue;
     }
-    if(scripts\engine\utility::array_contains(var_4.playersvisibleto, var_01) && (!isDefined(var_02) || var_4.priority > var_2.priority))
+    if(scripts\engine\utility::array_contains(var_4.playersvisibleto, var_01) && (!isDefined(var_02) || var_4.priority > var_2.priority)) {
       var_02 = var_04;
+    }
   }
 
   return var_02;
@@ -345,8 +361,9 @@ outlineidswatchpending() {
         continue;
       }
       if(var_2.playersvisibletopending.size > 0) {
-        if(outlinerefreshpending(var_01, var_03))
+        if(outlinerefreshpending(var_01, var_03)) {
           level.outlineidspending[var_03] = undefined;
+        }
       }
     }
 
@@ -364,10 +381,12 @@ outlinerefreshpending(var_00, var_01) {
     if(canoutlineforplayer(var_04)) {
       var_05 = outlinegethighestinfoforplayer(var_00, var_04);
 
-      if(isDefined(var_05))
+      if(isDefined(var_05)) {
         var_00 hudoutlineenableforclient(var_04, var_5.colorindex, var_5.func_525C, var_5.func_6C10);
-      else
+      }
+      else {
         var_00 hudoutlinedisableforclient(var_04);
+      }
 
       var_2.playersvisibletopending[var_06] = undefined;
     }
@@ -376,11 +395,13 @@ outlinerefreshpending(var_00, var_01) {
   var_2.playersvisibletopending = scripts\engine\utility::array_removeundefined(var_2.playersvisibletopending);
 
   if(var_2.playersvisibletopending.size == 0) {
-    if(var_2.isdisabled)
+    if(var_2.isdisabled) {
       var_0.outlines[var_01] = undefined;
+    }
 
-    if(var_0.outlines.size == 0)
+    if(var_0.outlines.size == 0) {
       outlineremovefromgloballist(var_00);
+    }
 
     return 1;
   }
@@ -393,15 +414,19 @@ canoutlineforplayer(var_00) {
 }
 
 _hudoutlineenableforclient(var_00, var_01, var_02, var_03) {
-  if(var_01 == 7)
+  if(var_01 == 7) {
     self hudoutlinedisableforclient(var_00);
-  else
+  }
+  else {
     self hudoutlineenableforclient(var_00, var_01, var_02, var_03);
+  }
 }
 
 _hudoutlineenableforclients(var_00, var_01, var_02, var_03) {
-  if(var_01 == 7)
+  if(var_01 == 7) {
     self hudoutlinedisableforclients(var_00);
-  else
+  }
+  else {
     self hudoutlineenableforclients(var_00, var_01, var_02, var_03);
+  }
 }

@@ -84,8 +84,9 @@ init() {
 
   gametype = getdvar("g_gametype");
   level.istactical = true;
-  if(gametype == "war" || gametype == "kc" || gametype == "dom")
+  if(gametype == "war" || gametype == "kc" || gametype == "dom") {
     level.istactical = false;
+  }
 
   level thread onPlayerConnect();
 
@@ -118,8 +119,9 @@ onPlayerSpawned() {
 
     {
       mf = "";
-      if(!isAgent(self) && self hasFemaleCustomizationModel())
+      if(!isAgent(self) && self hasFemaleCustomizationModel()) {
         mf = "w";
+      }
       self.pers["voiceNum"] = level.voice_count[self.team][mf];
       level.voice_count[self.team][mf] = (level.voice_count[self.team][mf] + 1) % 3;
 
@@ -181,8 +183,9 @@ grenadeProximityTracking() {
         if(WeaponInventoryType(grenade.weapon_name) != "offhand" && WeaponClass(grenade.weapon_name) == "grenade") {
           continue;
         }
-        if(!isDefined(grenade.owner))
+        if(!isDefined(grenade.owner)) {
           grenade.owner = GetMissileOwner(grenade);
+        }
 
         if(isDefined(grenade.owner) && level.teamBased && grenade.owner.team == self.team) {
           continue;
@@ -280,8 +283,9 @@ claymoreTracking() {
   while(1) {
     self waittill("begin_firing");
     weaponName = self getCurrentWeapon();
-    if(weaponName == "claymore_mp")
+    if(weaponName == "claymore_mp") {
       level thread sayLocalSound(self, "claymore_plant");
+    }
   }
 }
 
@@ -304,18 +308,24 @@ grenadeTracking() {
   for(;;) {
     self waittill("grenade_fire", grenade, weaponName);
 
-    if(weaponName == "frag_grenade_mp")
+    if(weaponName == "frag_grenade_mp") {
       level thread sayLocalSound(self, "frag_out");
-    else if(weaponName == "semtex_mp")
+    }
+    else if(weaponName == "semtex_mp") {
       level thread sayLocalSound(self, "semtex_out");
-    else if(weaponName == "flash_grenade_mp")
+    }
+    else if(weaponName == "flash_grenade_mp") {
       level thread sayLocalSound(self, "flash_out");
-    else if(weaponName == "concussion_grenade_mp")
+    }
+    else if(weaponName == "concussion_grenade_mp") {
       level thread sayLocalSound(self, "conc_out");
-    else if(weaponName == "smoke_grenade_mp")
+    }
+    else if(weaponName == "smoke_grenade_mp") {
       level thread sayLocalSound(self, "smoke_out");
-    else if(weaponName == "c4_mp")
+    }
+    else if(weaponName == "c4_mp") {
       level thread sayLocalSound(self, "c4_plant");
+    }
   }
 }
 
@@ -404,8 +414,9 @@ threatCalloutTracking() {
     found_enemy = false;
     dist = MAX_CALLOUT_DISTSQ;
 
-    if(self PlayerAds() > 0.7)
+    if(self PlayerAds() > 0.7) {
       dist = MAX_CALLOUT_DISTSQ_ADS;
+    }
 
     foreach(enemy in enemies) {
       if(isDefined(enemy) && isReallyAlive(enemy) && !enemy _hasPerk("specialty_coldblooded") && DistanceSquared(self.origin, enemy.origin) < dist) {
@@ -425,8 +436,9 @@ threatCalloutTracking() {
       }
     }
 
-    if(found_enemy && self canSay("callout_generic"))
+    if(found_enemy && self canSay("callout_generic")) {
       level thread sayLocalSound(self, "callout_generic");
+    }
   }
 }
 
@@ -469,8 +481,9 @@ sayLocalSound(player, soundType, hearMyselfSpeak, playDistant) {
 doSound(soundAlias, hearMyselfSpeak, playDistant) {
   battleChatter_debugPrint(soundAlias);
 
-  if(!isDefined(playDistant))
+  if(!isDefined(playDistant)) {
     playDistant = true;
+  }
 
   team = self.pers["team"];
   level addSpeaker(self, team);
@@ -478,8 +491,9 @@ doSound(soundAlias, hearMyselfSpeak, playDistant) {
   relevantToEnemies = (!level.istactical || (!self _hasPerk("specialty_coldblooded") && (isAgent(self) || self IsSighted())));
 
   if(playDistant && relevantToEnemies) {
-    if(isAgent(self) || level.alivecount[team] > 3)
+    if(isAgent(self) || level.alivecount[team] > 3) {
       self thread doSoundDistant(soundalias, team);
+    }
   }
 
   if(isAgent(self) || (isDefined(hearMyselfSpeak) && hearMyselfSpeak)) {
@@ -513,10 +527,12 @@ doThreatCalloutResponse(soundAlias, location) {
   notify_string = self waittill_any_return(soundAlias, "death", "disconnect");
   if(notify_string == soundAlias) {
     team = self.team;
-    if(!IsAgent(self))
+    if(!IsAgent(self)) {
       mf = self hasFemaleCustomizationModel();
-    else
+    }
+    else {
       mf = false;
+    }
     voiceNum = self.pers["voiceNum"];
     pos = self.origin;
 
@@ -535,20 +551,24 @@ doThreatCalloutResponse(soundAlias, location) {
       if(player.team != team) {
         continue;
       }
-      if(!IsAgent(player))
+      if(!IsAgent(player)) {
         playerMF = player HasFemaleCustomizationModel();
-      else
+      }
+      else {
         playerMF = false;
+      }
 
       if(isDefined(player.pers["voiceNum"]) && (voiceNum != player.pers["voiceNum"] || mf != playerMF) &&
         DistanceSquared(pos, player.origin) <= CASUALTY_DISTANCE_LIMIT &&
         !isSpeakerInRange(player)) {
         prefix = player.pers["voicePrefix"];
         echoAlias = prefix + "co_loc_" + location + "_echo";
-        if(SoundExists(echoAlias) && cointoss())
+        if(SoundExists(echoAlias) && cointoss()) {
           newAlias = echoAlias;
-        else
+        }
+        else {
           newAlias = prefix + level.bcSounds["callout_response_generic"];
+        }
 
         player thread doSound(newAlias, false, true);
         break;
@@ -569,21 +589,24 @@ isSpeakerInRange(player, max_dist) {
   player endon("death");
   player endon("disconnect");
 
-  if(!isDefined(max_dist))
+  if(!isDefined(max_dist)) {
     max_dist = 1000;
+  }
   distSq = max_dist * max_dist;
 
   if(isDefined(player) && isDefined(player.team) && player.team != "spectator") {
     for(index = 0; index < level.speakers[player.team].size; index++) {
       teammate = level.speakers[player.team][index];
-      if(teammate == player)
+      if(teammate == player) {
         return true;
+      }
 
       if(!isDefined(teammate)) {
         continue;
       }
-      if(distancesquared(teammate.origin, player.origin) < distSq)
+      if(distancesquared(teammate.origin, player.origin) < distSq) {
         return true;
+      }
     }
   }
 
@@ -616,8 +639,9 @@ enableBattleChatter(player) {
 
 canSay(soundType) {
   self_pers_team = self.pers["team"];
-  if(self_pers_team == "spectator")
+  if(self_pers_team == "spectator") {
     return false;
+  }
 
   limit = level.bcInfo["timeout_player"][soundType];
   time = GetTime() - self.bcInfo["last_say_time"][soundType];
@@ -699,8 +723,9 @@ get_all_my_locations() {
   touchingLocations = self GetIsTouchingEntities(allLocations);
   myLocations = [];
   foreach(location in touchingLocations) {
-    if(isDefined(location.locationAliases))
+    if(isDefined(location.locationAliases)) {
       myLocations[myLocations.size] = location;
+    }
   }
 
   return myLocations;
@@ -765,8 +790,9 @@ canCalloutLocation(location) {
     aliasQA = self getQACalloutAlias(alias, 0);
     aliasConcat = self getLocCalloutAlias("concat_loc_" + alias);
     valid = SoundExists(aliasNormal) || SoundExists(aliasQA) || SoundExists(aliasConcat);
-    if(valid)
+    if(valid) {
       return valid;
+    }
   }
   return false;
 }
@@ -774,8 +800,9 @@ canCalloutLocation(location) {
 canConcat(location) {
   aliases = location.locationAliases;
   foreach(alias in aliases) {
-    if(IsCalloutTypeConcat(alias, self))
+    if(IsCalloutTypeConcat(alias, self)) {
       return true;
+    }
   }
   return false;
 }
@@ -950,8 +977,9 @@ battleChatter_printDumpLine(file, str, controlFlag) {
 }
 
 friendly_nearby(max_dist) {
-  if(!isDefined(max_dist))
+  if(!isDefined(max_dist)) {
     max_dist = TEAMPLAYER_DISTSQ;
+  }
 
   foreach(player in level.players) {
     if(player.team == self.pers["team"]) {

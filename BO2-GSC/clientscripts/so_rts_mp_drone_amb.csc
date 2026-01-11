@@ -204,10 +204,12 @@ setpoialarms(set, location) {
   if(!isDefined(origin)) {
     return;
   }
-  if(set == 1)
+  if(set == 1) {
     playloopat("amb_under_attack_alarm", origin);
-  else
+  }
+  else {
     stoploopat("amb_under_attack_alarm", origin);
+  }
 }
 
 setfinalalarms() {

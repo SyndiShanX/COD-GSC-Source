@@ -36,10 +36,12 @@ friendly_bubbles_cleanup() {
 }
 
 player_scuba() {
-  if(!issplitscreen())
+  if(!issplitscreen()) {
     thread player_scuba_breathe_sound();
-  else if(self == level.player)
+  }
+  else if(self == level.player) {
     thread player_scuba_breathe_sound();
+  }
 
   thread player_scuba_bubbles();
 }
@@ -54,10 +56,12 @@ player_scuba_breathe_sound() {
     wait 0.05;
     self notify("scuba_breathe_sound_starting");
 
-    if(self issprinting())
+    if(self issprinting()) {
       self playlocalsound("scuba_breathe_player_sprint", "scuba_breathe_sound_done");
-    else
+    }
+    else {
       self playlocalsound("scuba_breathe_player", "scuba_breathe_sound_done");
+    }
 
     self waittill("scuba_breathe_sound_done");
   }
@@ -69,8 +73,9 @@ stop_player_scuba() {
 }
 
 debug_org() {
-  for(;;)
+  for(;;) {
     wait 0.5;
+  }
 }
 
 player_scuba_bubbles() {
@@ -92,8 +97,9 @@ player_scuba_bubbles() {
     wait 2.1;
     thread player_bubbles_fx(self.playerfxorg);
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       self waittill("scuba_breathe_sound_starting");
+    }
   }
 }
 
@@ -130,8 +136,9 @@ player_scuba_mask(var_0, var_1) {
   }
   var_2 = "halo_overlay_scuba";
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
+  }
 
   self.hud_scubamask = maps\_hud_util::create_client_overlay(var_2, 1, self);
   self.hud_scubamask.foreground = 0;

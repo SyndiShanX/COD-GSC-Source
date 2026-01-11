@@ -199,11 +199,13 @@ jeepride_fxline() {
 apply_ghettotag(var_0, var_1) {
   self endon("ghettotag_removed");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "tag_body";
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self.model;
+  }
 
   if(!isDefined(level.ghettotag) || !isDefined(level.ghettotag[var_0])) {
     return;
@@ -251,8 +253,9 @@ get_dummy() {
 ghettotag_generate_sparks(var_0) {
   self endon("ghettotag_removed");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "tag_body";
+  }
 
   var_1 = self.origin;
   wait 0.05;
@@ -269,8 +272,9 @@ ghettotag_generate_sparks(var_0) {
         var_8 = self.ghettotags[var_6].origin + maps\_utility::vector_multiply(anglestoup(self.ghettotags[var_6].angles), 8);
         var_9 = bulletTrace(var_7, var_8, 0, self);
 
-        if(var_9["fraction"] < 1 && !trace_isjunk(var_9))
+        if(var_9["fraction"] < 1 && !trace_isjunk(var_9)) {
           playfxontag_record(getspark(), self.ghettotags[var_6], "polySurface1");
+        }
       }
 
       var_2 = gettime() + 1000;
@@ -279,14 +283,16 @@ ghettotag_generate_sparks(var_0) {
     var_1 = var_3;
     wait 0.05;
 
-    if(gettime() > var_2)
+    if(gettime() > var_2) {
       return;
+    }
   }
 }
 
 getspark() {
-  if(level.sparksclaimed > 3)
+  if(level.sparksclaimed > 3) {
     return "tunnelspark";
+  }
   else {
     thread claimspark();
     return "tunnelspark_dl";
@@ -301,8 +307,9 @@ claimspark() {
 
 trace_isjunk(var_0) {
   if(isDefined(var_0["entity"])) {
-    if(var_0["entity"].classname == "script_model")
+    if(var_0["entity"].classname == "script_model") {
       return 1;
+    }
   }
 
   return 0;
@@ -330,8 +337,9 @@ heli_tread_fx_swap(var_0, var_1) {
   foreach(var_3 in level.all_choppers) {
     maps\_treadfx::setallvehiclefx(var_3, var_0);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       maps\_treadfx::setvehiclefx(var_3, "water", var_1);
+    }
   }
 }
 
@@ -340,8 +348,9 @@ remove_light_group_from_vehicle(var_0, var_1) {
     var_2 = level.vehicle_lights_group[var_0][var_1];
     var_3 = level.vehicle_lights_group[var_0]["all"];
 
-    foreach(var_5 in var_2)
+    foreach(var_5 in var_2) {
     var_3 = common_scripts\utility::array_remove(var_3, var_5);
+    }
 
     level.vehicle_lights_group[var_0]["all"] = var_3;
     level.vehicle_lights_group[var_0][var_1] = [];
@@ -369,11 +378,13 @@ init_collapsing_bridge_parts() {
 
       var_9 = var_4.script_index;
 
-      if(!isDefined(var_9))
+      if(!isDefined(var_9)) {
         var_9 = var_2;
+      }
 
-      if(!isDefined(var_1[var_9]))
+      if(!isDefined(var_1[var_9])) {
         var_1[var_9] = [];
+      }
 
       var_1[var_9][var_1[var_9].size] = var_4;
       var_4 hide();
@@ -381,8 +392,9 @@ init_collapsing_bridge_parts() {
     }
   }
 
-  foreach(var_9, var_12 in var_1)
+  foreach(var_9, var_12 in var_1) {
   thread show_bridge_parts_with_exploder(var_12, int(var_9));
+  }
 }
 
 show_bridge_parts_with_exploder(var_0, var_1) {

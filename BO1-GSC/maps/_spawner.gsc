@@ -11,8 +11,9 @@
 main() {
   CreateThreatBiasGroup("allies");
   CreateThreatBiasGroup("axis");
-  if(level.script != "frontend" && !isDefined(level.zombietron_mode))
+  if(level.script != "frontend" && !isDefined(level.zombietron_mode)) {
     precachemodel("grenade_bag");
+  }
   level._nextcoverprint = 0;
   level._ai_group = [];
   level.killedaxis = 0;
@@ -888,10 +889,12 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     node = get_least_used_from_array(node);
     player_wait_dist = require_player_dist;
     if(isDefined(node.script_requires_player)) {
-      if(node.script_requires_player > 1)
+      if(node.script_requires_player > 1) {
         player_wait_dist = node.script_requires_player;
-      else
+      }
+      else {
         player_wait_dist = 256;
+      }
       node.script_requires_player = false;
     }
     self set_goalradius_based_on_settings(node);
@@ -910,13 +913,15 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
       flag_set(node.script_flag_clear);
     }
     if(isDefined(node.script_ent_flag_set)) {
-      if(!self flag_exists(node.script_ent_flag_set))
+      if(!self flag_exists(node.script_ent_flag_set)) {
         AssertEx("Tried to set a ent flag" + node.script_ent_flag_set + "on a node, but it doesnt exist.");
+      }
       self ent_flag_set(node.script_ent_flag_set);
     }
     if(isDefined(node.script_ent_flag_clear)) {
-      if(!self flag_exists(node.script_ent_flag_clear))
+      if(!self flag_exists(node.script_ent_flag_clear)) {
         AssertEx("Tried to clear a ent flag" + node.script_ent_flag_clear + "on a node, but it doesnt exist.");
+      }
       self ent_flag_clear(node.script_ent_flag_clear);
     }
     if(targets_and_uses_turret(node)) {
@@ -973,11 +978,13 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     }
     node = nextNode_array;
   }
-  if(isDefined(self.arrived_at_end_node_func))
+  if(isDefined(self.arrived_at_end_node_func)) {
     [[self.arrived_at_end_node_func]](node);
+  }
   self notify("reached_path_end");
-  if(isDefined(self.delete_on_path_end))
+  if(isDefined(self.delete_on_path_end)) {
     self Delete();
+  }
   self set_goalradius_based_on_settings(node);
 }
 
@@ -985,16 +992,19 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    if(distancesquared(player.origin, node.origin) < distancesquared(self.origin, node.origin))
+    if(distancesquared(player.origin, node.origin) < distancesquared(self.origin, node.origin)) {
       return true;
+    }
   }
   vec = anglesToForward(self.angles);
   if(isDefined(node.target)) {
     temp = [[get_target_func]](node.target);
-    if(temp.size == 1)
+    if(temp.size == 1) {
       vec = vectornormalize(temp[0].origin - node.origin);
-    else if(isDefined(node.angles))
+    }
+    else if(isDefined(node.angles)) {
       vec = anglesToForward(node.angles);
+    }
   } else if(isDefined(node.angles))
     vec = anglesToForward(node.angles);
   vec2 = [];
@@ -1004,14 +1014,16 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
   }
   for(i = 0; i < vec2.size; i++) {
     value = vec2[i];
-    if(vectordot(vec, value) > 0)
+    if(vectordot(vec, value) > 0) {
       return true;
+    }
   }
   dist2rd = dist * dist;
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    if(distancesquared(player.origin, self.origin) < dist2rd)
+    if(distancesquared(player.origin, self.origin) < dist2rd) {
       return true;
+    }
   }
   return false;
 }

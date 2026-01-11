@@ -31,8 +31,9 @@ main() {
   game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_MAPNAME_E";
   level thread waitforglassbreak();
 
-  if(getgametypesetting("allowMapScripting"))
+  if(getgametypesetting("allowMapScripting")) {
     level maps\mp\mp_vertigo_doors::init();
+  }
 }
 
 levelspawndvars(reset_dvars) {
@@ -126,14 +127,16 @@ ragdoll_override(idamage, smeansofdeath, sweapon, shitloc, vdir, vattackerorigin
     if(animhasnotetrack(deathanim, "start_ragdoll")) {
       times = getnotetracktimes(deathanim, "start_ragdoll");
 
-      if(isDefined(times))
+      if(isDefined(times)) {
         startfrac = times[0];
+      }
     }
 
     self.body = body;
 
-    if(!isDefined(self.switching_teams))
+    if(!isDefined(self.switching_teams)) {
       thread maps\mp\gametypes\_deathicons::adddeathicon(body, self, self.team, 5.0);
+    }
 
     thread startragdollonground(startfrac);
     return true;

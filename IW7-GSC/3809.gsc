@@ -19,8 +19,9 @@ func_47DA() {
 func_E3D8(var_00) {
   level func_47DA();
 
-  if(!isDefined(level.func_E35D))
+  if(!isDefined(level.func_E35D)) {
     level.func_E35D = spawnStruct();
+  }
 
   if(!isDefined(var_00)) {
     var_00 = "_ignore_last_sparam";
@@ -105,8 +106,9 @@ func_25C7() {
 func_6C94() {
   self endon("death");
 
-  for(;;)
+  for(;;) {
     wait 1000;
+  }
 }
 
 func_E3DA(var_00) {
@@ -146,8 +148,9 @@ func_E3D9(var_00, var_01, var_02, var_03, var_04) {
   var_00 vehicle_teleport(var_1.func_3FFD gettagorigin("j_cranebase"), var_1.func_3FFD gettagangles("j_cranebase"));
 
   if(isDefined(var_02)) {
-    if(!isDefined(var_03))
+    if(!isDefined(var_03)) {
       var_03 = "crib_craneride";
+    }
 
     var_00 func_0BDC::func_A07D();
     var_00 thread func_0BDC::func_F43D("player");
@@ -157,10 +160,12 @@ func_E3D9(var_00, var_01, var_02, var_03, var_04) {
 
   var_05 = length(var_1.func_3FFB.origin - var_1.func_3FFD gettagorigin("j_cranebase"));
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     var_00 linkto(var_1.func_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 180, 0));
-  else
+  }
+  else {
     var_00 linkto(var_1.func_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 0, 0));
+  }
 }
 
 func_E3CB() {
@@ -197,8 +202,9 @@ func_E3D1(var_00, var_01, var_02, var_03, var_04) {
       level.func_E35D.func_A2EA moveto(level.func_E35D.func_A2EA.origin + anglestoright(level.func_E35D.func_A2EA.angles) * 816, var_05);
       wait(var_05 - 0.25);
 
-      if(var_00 == "a")
+      if(var_00 == "a") {
         level.func_E35D.func_A2E8[var_00] thread func_E3CC(var_04);
+      }
 
       level.func_E35D.func_A2E8[var_00] moveto(level.func_E35D.func_A2E8[var_00].func_1ACA, var_04);
       level.func_E35D.func_A2EA thread func_E3D2(var_06, var_00);
@@ -219,10 +225,12 @@ func_E3D1(var_00, var_01, var_02, var_03, var_04) {
       level.func_E35D.func_A2E9 moveto(level.func_E35D.func_A2E9.origin + anglestoright(level.func_E35D.func_A2E9.angles) * 816, var_07);
       wait(var_07);
 
-      if(var_00 == "a")
+      if(var_00 == "a") {
         level.func_E35D.func_A2E8[var_00] thread func_E3CC(var_03);
-      else
+      }
+      else {
         level.func_E35D.func_A2E8[var_00] thread func_E3CC(var_03, 1);
+      }
 
       level.func_E35D.func_A2E8[var_00] moveto(level.func_E35D.func_A2E8[var_00].func_62EB, var_03);
       wait(var_03);
@@ -246,16 +254,18 @@ func_E3D1(var_00, var_01, var_02, var_03, var_04) {
     case "returned":
       var_12 = 90;
 
-      if(var_00 == "a")
+      if(var_00 == "a") {
         var_12 = -90;
+      }
 
       level.func_E35D.func_A2E8[var_00].func_3FFB unlink();
       level.func_E35D.func_A2E8[var_00].func_3FFB rotateby((0, var_12, 0), 0.05);
       scripts\engine\utility::waitframe();
       scripts\engine\utility::waitframe();
 
-      if(var_00 == "b")
+      if(var_00 == "b") {
         level.func_E35D.func_A2E8[var_00].func_3FFB.origin = level.func_E35D.func_A2E8[var_00].func_3FFB.origin + anglesToForward(level.func_E35D.func_A2E8["b"].func_3FFB.angles) * level.func_E35D.func_A2E8[var_00].func_3FFB.func_EACA;
+      }
 
       level.func_E35D.func_A2E8[var_00].func_3FFB linkto(level.func_E35D.func_A2E8[var_00]);
       level.func_E35D.func_A2E8[var_00] moveto(level.func_E35D.func_A2E8[var_00].func_62EB, 0.05);
@@ -272,8 +282,9 @@ func_E3D2(var_00, var_01) {
   self.func_9B94 = 1;
 
   if(isDefined(var_01)) {
-    while(level.func_E35D.func_A2E8[var_01].origin[2] + 20 > self.origin[2])
+    while(level.func_E35D.func_A2E8[var_01].origin[2] + 20 > self.origin[2]) {
       scripts\engine\utility::waitframe();
+    }
   }
 
   thread func_E3D4(var_00);
@@ -284,8 +295,9 @@ func_E3D2(var_00, var_01) {
 }
 
 func_E3CE(var_00, var_01, var_02, var_03) {
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     level.func_E35D.func_A2E8[var_00].func_3FFD give_attacker_kill_rewards(level.func_EC85["crane"][var_03], 10, 0, 1 / var_01);
+  }
   else if(var_00 == "a") {
     var_01 = getanimlength( % shipcrib_crane_clamp_extended_rotate_cc) / 0.45;
     level.func_E35D.func_A2E8[var_00].func_3FFD playSound("scn_ship_titan_jackal_lower_plr_start_lr");
@@ -298,20 +310,24 @@ func_E3CE(var_00, var_01, var_02, var_03) {
 }
 
 func_E3CD(var_00, var_01, var_02, var_03) {
-  if(!isDefined(level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3))
+  if(!isDefined(level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3)) {
     level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3 = 1;
-  else
+  }
+  else {
     level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3 = level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3 + 1;
+  }
 
   var_03 = 1;
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_03 = 1;
+  }
 
   var_04 = 90 * var_03;
 
-  if(var_00 == "a")
+  if(var_00 == "a") {
     var_04 = -90 * var_03;
+  }
 
   var_04 = var_04 * level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3;
   var_05 = undefined;
@@ -321,17 +337,20 @@ func_E3CD(var_00, var_01, var_02, var_03) {
     var_01 = var_01 * 0.7;
   }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_06 = 1;
-  else
+  }
+  else {
     var_06 = -1;
+  }
 
   var_07 = var_01 / 0.05;
   var_08 = var_04 / var_07;
   var_09 = undefined;
 
-  if(var_00 == "b")
+  if(var_00 == "b") {
     var_09 = level.func_E35D.func_A2E8[var_00].func_3FFB.func_EACA / var_07;
+  }
 
   level.func_E35D.func_A2E8[var_00].func_3FFB _meth_826F((0, var_04, 0), var_01);
 
@@ -346,8 +365,9 @@ func_E3CD(var_00, var_01, var_02, var_03) {
     scripts\engine\utility::waitframe();
   }
 
-  if(var_00 == "b")
+  if(var_00 == "b") {
     wait(var_05 - var_01);
+  }
 
   level.func_E35D.func_A2E8[var_00] thread func_E3D0();
 }
@@ -374,15 +394,17 @@ func_E3D4(var_00) {
 }
 
 func_E3CF(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     self playSound("scn_ship_titan_jackal_lower_plr_start2_lr");
+  }
 
   _screenshake(level.player.origin, 0.35, 0.35, 0.35, 0.3, 0, 0, 1024, 9, 9, 9);
 }
 
 func_E3D0(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     self playSound("scn_ship_titan_jackal_lower_plr_stop2_lr");
+  }
 
   _screenshake(level.player.origin, 0.5, 0.5, 0.5, 0.35, 0, 0, 1024, 9, 9, 9);
 }

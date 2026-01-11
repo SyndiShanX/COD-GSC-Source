@@ -4,15 +4,17 @@
 **************************************************/
 
 seeder_level_init() {
-  if(!isDefined(level.alien_funcs))
+  if(!isDefined(level.alien_funcs)) {
     level.agent_funcs = [];
+  }
 
   level.alien_funcs["seeder"]["approach"] = maps\mp\agents\alien\_alien_think::default_approach;
   level.alien_funcs["seeder"]["combat"] = ::seeder_combat;
   level.alien_funcs["seeder"]["badpath"] = maps\mp\agents\alien\_alien_think::handle_badpath;
 
-  if(!isDefined(level.seeder_active_turrets))
+  if(!isDefined(level.seeder_active_turrets)) {
     level.seeder_active_turrets = [];
+  }
 
   level.seeder_active_pet_turrets = 0;
 }
@@ -35,15 +37,17 @@ load_seeder_fx() {
 }
 
 seeder_death(var_0) {
-  if(!var_0)
+  if(!var_0) {
     level thread seeder_explode_on_death(self);
+  }
 
   maps\mp\agents\alien\_alien_spitter::release_spit_node();
 
   if(isDefined(self.pet) && level.seeder_active_pet_turrets > 0) {
     foreach(var_2 in level.seeder_active_turrets) {
-      if(isDefined(var_2.parent) && var_2.parent == self && isDefined(var_2.pet))
+      if(isDefined(var_2.parent) && var_2.parent == self && isDefined(var_2.pet)) {
         var_2 notify("death");
+      }
     }
   }
 }
@@ -64,20 +68,25 @@ seeder_combat(var_0) {
       var_5 = get_seeder_val("max_desired");
       var_6 = level.seeder_active_turrets.size - level.seeder_active_pet_turrets;
 
-      if(var_6 < var_4)
+      if(var_6 < var_4) {
         var_3 = 1;
+      }
       else if(var_6 >= var_4 && var_6 < var_5) {
-        if(common_scripts\utility::cointoss())
+        if(common_scripts\utility::cointoss()) {
           var_3 = 1;
+        }
       }
 
-      if(self.total_turrets_spawned >= get_seeder_val("ammo"))
+      if(self.total_turrets_spawned >= get_seeder_val("ammo")) {
         var_3 = 0;
+      }
 
-      if(var_3)
+      if(var_3) {
         seeder_attack(self.enemy);
-      else
+      }
+      else {
         maps\mp\agents\alien\_alien_spitter::spitter_attack(self.enemy);
+      }
     } else
       wait 0.05;
 
@@ -95,8 +104,9 @@ seeder_attack(var_0) {
     return;
   }
 
-  if(!maps\mp\agents\alien\_alien_spitter::is_escape_sequence_active())
+  if(!maps\mp\agents\alien\_alien_spitter::is_escape_sequence_active()) {
     wait(randomfloatrange(1.5, 2.5) * 0.5);
+  }
 
   for(;;) {
     var_1 = undefined;
@@ -156,8 +166,9 @@ seeder_spit_attack(var_0) {
   var_1 endon("death");
   var_2 = self.spit_target_location;
 
-  if(isDefined(self.current_spit_node))
+  if(isDefined(self.current_spit_node)) {
     match_node_orientation(self.current_spit_node);
+  }
 
   turntowardsorigin(var_2);
   self.looktarget = var_1;
@@ -173,10 +184,12 @@ seeder_spit_attack(var_0) {
   } else {
     var_4 = vectornormalize(var_2 - self.origin);
 
-    if(isDefined(self.current_spit_node))
+    if(isDefined(self.current_spit_node)) {
       var_3 = anglestoup(self.current_spit_node.angles);
-    else
+    }
+    else {
       var_3 = anglestoup(self.angles);
+    }
 
     var_5 = vectorcross(var_3, var_4);
     var_4 = vectorcross(var_5, var_3);
@@ -187,15 +200,19 @@ seeder_spit_attack(var_0) {
   self scragentsetorientmode("face angle abs", var_7);
   self.spit_type = "long_range";
 
-  if(self.oriented)
+  if(self.oriented) {
     self scragentsetanimmode("anim angle delta");
-  else
+  }
+  else {
     self scragentsetanimmode("anim deltas");
+  }
 
-  if(common_scripts\utility::cointoss())
+  if(common_scripts\utility::cointoss()) {
     maps\mp\agents\_scriptedagents::playanimuntilnotetrack("close_spit_attack", "spit_attack", "end", ::handleattacknotetracks);
-  else
+  }
+  else {
     maps\mp\agents\_scriptedagents::playanimuntilnotetrack("turret_spit_attack", "spit_attack", "end", ::handleattacknotetracks);
+  }
 
   maps\mp\alien\_utility::set_alien_emissive_default(0.2);
   self.looktarget = undefined;
@@ -203,8 +220,9 @@ seeder_spit_attack(var_0) {
 }
 
 handleattacknotetracks(var_0, var_1, var_2, var_3) {
-  if(var_0 == "spit")
+  if(var_0 == "spit") {
     return fire_seeder_projectile();
+  }
 }
 
 fire_seeder_projectile() {
@@ -216,8 +234,9 @@ fire_seeder_projectile() {
   var_2 = magicbullet("seeder_spit_mp", var_1, var_0, self);
   var_2.parent = self;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 thread seeder_projectile_impact_monitor(self);
+  }
 }
 
 seeder_projectile_impact_monitor(var_0) {
@@ -229,21 +248,25 @@ seeder_projectile_impact_monitor(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(isDefined(self.spit_target_location))
+  if(isDefined(self.spit_target_location)) {
     var_1 = self.spit_target_location;
+  }
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     thread seeder_spawn_turret(var_0, var_1, var_0.pet, 0);
+  }
 }
 
 get_best_turret_location(var_0) {
-  if(!isDefined(var_0) || !isDefined(var_0.origin))
+  if(!isDefined(var_0) || !isDefined(var_0.origin)) {
     return undefined;
+  }
 
   var_1 = get_best_seeder_node(var_0.origin, 0, 0, 1, self gettagorigin("TAG_BREATH"));
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return undefined;
+  }
 
   if(!turret_capsule_trace_passed(var_1)) {
     var_1.bad_turret_spot = 1;
@@ -253,8 +276,9 @@ get_best_turret_location(var_0) {
   self.spit_target_node = var_1;
   self.spit_target_location = var_1.origin;
 
-  if(!isDefined(var_1) || !isDefined(var_1.origin))
+  if(!isDefined(var_1) || !isDefined(var_1.origin)) {
     return undefined;
+  }
 
   return var_1.origin;
 }
@@ -286,22 +310,25 @@ get_best_seeder_node(var_0, var_1, var_2, var_3, var_4) {
       var_13 = anglestoup(var_12.angles);
       var_14 = (0, 0, 1);
 
-      if(vectordot(var_13, var_14) < 0.3)
+      if(vectordot(var_13, var_14) < 0.3) {
         continue;
+      }
     }
 
     if(isDefined(var_3) && var_3) {
       var_15 = bulletTrace(var_4, var_12.origin, 1);
 
-      if(!isDefined(var_15) || distancesquared(var_15["position"], var_12.origin) > 64)
+      if(!isDefined(var_15) || distancesquared(var_15["position"], var_12.origin) > 64) {
         continue;
+      }
     }
 
     var_10[var_10.size] = var_12;
   }
 
-  if(var_10.size == 0)
+  if(var_10.size == 0) {
     return undefined;
+  }
 
   return common_scripts\utility::random(var_10);
 }
@@ -320,19 +347,23 @@ seeder_explode_on_death(var_0) {
 }
 
 seeder_spawn_turret(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_0.spit_target_node))
+  if(isDefined(var_0.spit_target_node)) {
     var_4 = var_0.spit_target_node;
-  else
+  }
+  else {
     var_4 = get_best_seeder_node(var_1, 1, var_3);
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_1 = common_scripts\utility::drop_to_ground(var_1, 5, -1000);
+  }
 
   if(turret_spawn_failed(var_0, var_1, var_2, var_4)) {
     return;
   }
-  if(isDefined(var_2) && isDefined(self.force_use_attacknode) && isDefined(var_4))
+  if(isDefined(var_2) && isDefined(self.force_use_attacknode) && isDefined(var_4)) {
     var_1 = var_4.origin;
+  }
 
   var_5 = spawn("script_model", var_1);
   var_5 setModel("alien_spore");
@@ -358,17 +389,20 @@ seeder_spawn_turret(var_0, var_1, var_2, var_3) {
 
   level.seeder_active_turrets = common_scripts\utility::array_add(level.seeder_active_turrets, var_5);
 
-  if(isDefined(var_5.pet))
+  if(isDefined(var_5.pet)) {
     level.seeder_active_pet_turrets = level.seeder_active_pet_turrets + 1;
+  }
 
   if(isDefined(var_0.alien_type)) {
-    if(!isDefined(var_0.total_turrets_spawned))
+    if(!isDefined(var_0.total_turrets_spawned)) {
       var_0.total_turrets_spawned = 0;
+    }
 
     var_0.total_turrets_spawned = var_0.total_turrets_spawned + 1;
 
-    if(!isDefined(var_0.num_active_turrets))
+    if(!isDefined(var_0.num_active_turrets)) {
       var_0.num_active_turrets = 0;
+    }
 
     var_0.num_active_turrets = var_0.num_active_turrets + 1;
   }
@@ -397,41 +431,50 @@ seeder_spawn_turret(var_0, var_1, var_2, var_3) {
   var_5.coll_model thread seeder_turret_damage_watcher();
   wait 0.05;
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     playsoundatpos(var_5.origin, "spore_spawn");
+  }
 }
 
 turret_spawn_failed(var_0, var_1, var_2, var_3) {
   self endon("death");
 
-  if(!isDefined(var_2) && level.seeder_active_turrets.size > 12)
+  if(!isDefined(var_2) && level.seeder_active_turrets.size > 12) {
     return 1;
+  }
 
   var_4 = get_seeder_val("max_per_alien");
 
-  if(!isDefined(var_2) && !isDefined(var_0.num_active_turrets) && (isDefined(var_0.num_active_turrets) && var_0.num_active_turrets > var_4))
+  if(!isDefined(var_2) && !isDefined(var_0.num_active_turrets) && (isDefined(var_0.num_active_turrets) && var_0.num_active_turrets > var_4)) {
     return 1;
+  }
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 1;
+  }
 
   var_5 = maps\mp\alien\_utility::get_closest_living_player();
 
-  if(distancesquared(var_5.origin, var_1) > 1440000)
+  if(distancesquared(var_5.origin, var_1) > 1440000) {
     return 1;
+  }
 
-  if(!check_is_turret_pos_clear(var_1))
+  if(!check_is_turret_pos_clear(var_1)) {
     return 1;
+  }
 
-  if(!isDefined(var_2) && !isDefined(var_3))
+  if(!isDefined(var_2) && !isDefined(var_3)) {
     return 1;
+  }
 
   if(isDefined(var_2)) {
     if(isplayer(var_0) && !capsuletracepassed(var_1 + (0, 0, 5), 20, 100, undefined, 1, 1)) {
-      if(isDefined(var_3) && var_0 turret_capsule_trace_passed(var_3))
+      if(isDefined(var_3) && var_0 turret_capsule_trace_passed(var_3)) {
         self.force_use_attacknode = 1;
-      else
+      }
+      else {
         return 1;
+      }
     }
 
     if(level.seeder_active_turrets.size >= 12) {
@@ -456,8 +499,9 @@ turret_capsule_trace_passed(var_0) {
   var_3 = var_0.origin + var_1 * 100;
   var_4 = self aiphysicstracepassed(var_2, var_3, 10, 20, 0);
 
-  if(!var_4)
+  if(!var_4) {
     return 0;
+  }
 
   return 1;
 }
@@ -496,10 +540,12 @@ seeder_turret_anim_state_machine() {
         if(self.current_anim == "none" || self.current_anim == "play_anim_idle" || self.current_anim == "play_anim_pain") {
           self.current_anim = var_0;
 
-          if(var_0 == "play_anim_attack_up")
+          if(var_0 == "play_anim_attack_up") {
             thread seeder_play_interruptible_anim_and_wait("alien_seeder_spore_attack_up_dlc", 2.0, 1);
-          else
+          }
+          else {
             thread seeder_play_interruptible_anim_and_wait("alien_seeder_spore_attack_dlc", 2.63, 1);
+          }
         } else {}
 
         break;
@@ -530,10 +576,12 @@ seeder_play_interruptible_anim_and_wait(var_0, var_1, var_2, var_3) {
   self endon("seeder_stop_anims");
   self scriptmodelclearanim();
 
-  if(var_2)
+  if(var_2) {
     self scriptmodelplayanimdeltamotion(var_0);
-  else
+  }
+  else {
     self scriptmodelplayanim(var_0);
+  }
 
   wait(var_1);
 
@@ -563,17 +611,20 @@ seeder_turret_damage_watcher() {
     var_12 = 0;
     var_0 = onaliensporedamaged(var_10, var_1, var_0, var_8, var_4, var_9, var_3, var_2, var_11, var_12);
 
-    if(isDefined(var_9) && weaponclass(var_9) == "spread")
+    if(isDefined(var_9) && weaponclass(var_9) == "spread") {
       var_0 = var_0 * 4.0;
+    }
 
     self.spore_health = self.spore_health - var_0;
 
     if(self.spore_health <= 0) {
-      if(isDefined(var_1) && isDefined(var_1.owner) && isplayer(var_1.owner))
+      if(isDefined(var_1) && isDefined(var_1.owner) && isplayer(var_1.owner)) {
         var_1 = var_1.owner;
+      }
 
-      if(maps\mp\alien\_utility::is_chaos_mode())
+      if(maps\mp\alien\_utility::is_chaos_mode()) {
         maps\mp\alien\_chaos::update_alien_killed_event(maps\mp\alien\_utility::get_alien_type(), self.origin, var_1);
+      }
 
       if(isDefined(var_1) && isplayer(var_1)) {
         var_13 = 25;
@@ -607,11 +658,13 @@ seeder_turret_death_watcher() {
 }
 
 onaliensporedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(isDefined(var_5) && (var_5 == "alienspit_mp" || var_5 == "alienspit_gas_mp"))
+  if(isDefined(var_5) && (var_5 == "alienspit_mp" || var_5 == "alienspit_gas_mp")) {
     var_2 = int(var_2 * 5);
+  }
 
-  if(isDefined(var_1) && isDefined(self.parent.pet) && isDefined(var_1.team) && self.parent.team == var_1.team)
+  if(isDefined(var_1) && isDefined(self.parent.pet) && isDefined(var_1.team) && self.parent.team == var_1.team) {
     return 0;
+  }
 
   var_2 = maps\mp\alien\_damage::set_alien_damage_by_weapon_type(var_4, var_5, var_2, var_1);
 
@@ -620,18 +673,21 @@ onaliensporedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
     var_2 = maps\mp\alien\_damage::scale_alien_damage_by_weapon_type(var_1, var_2, var_4, var_5, var_8);
   }
 
-  if(var_2 <= 0)
+  if(var_2 <= 0) {
     return 0;
+  }
 
   if(isDefined(var_1) && var_1 != self && var_2 > 0) {
-    if(isDefined(level.attack_heli) && var_1 == level.attack_heli)
+    if(isDefined(level.attack_heli) && var_1 == level.attack_heli) {
       var_2 = int(var_2 * 0.6);
+    }
   }
 
   var_2 = maps\mp\alien\_damage::scale_alien_damage_by_prestige(var_1, var_2);
 
-  if(isDefined(var_1) && isDefined(var_5))
+  if(isDefined(var_1) && isDefined(var_5)) {
     level thread maps\mp\alien\_challenge_function::update_alien_damage_challenge(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, self);
+  }
 
   var_1 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("standard");
   return var_2;
@@ -642,14 +698,17 @@ seeder_turret_spit_attack() {
   var_0 = turret_get_new_target();
   wait 5.86;
 
-  if(isDefined(self.pet))
+  if(isDefined(self.pet)) {
     var_1 = "spore_pet_beam_mp";
-  else
+  }
+  else {
     var_1 = "spore_beam_mp";
+  }
 
   for(;;) {
-    if(common_scripts\utility::cointoss() || !isDefined(var_0))
+    if(common_scripts\utility::cointoss() || !isDefined(var_0)) {
       var_0 = turret_get_new_target();
+    }
 
     if(!isDefined(var_0)) {
       wait 2.0;
@@ -663,18 +722,22 @@ seeder_turret_spit_attack() {
       continue;
     }
 
-    if((isplayer(var_0) || issentient(var_0)) && !var_0 maps\mp\_utility::isusingremote())
+    if((isplayer(var_0) || issentient(var_0)) && !var_0 maps\mp\_utility::isusingremote()) {
       var_2 = var_0 getEye() + (0, 0, -15);
-    else if(isDefined(var_0.alien_type) && var_0.alien_type == "seeder_spore")
+    }
+    else if(isDefined(var_0.alien_type) && var_0.alien_type == "seeder_spore") {
       var_2 = var_0 gettagorigin("J_Spore_46");
-    else
+    }
+    else {
       var_2 = var_0.origin + (0, 0, 32);
+    }
 
     var_3 = self gettagorigin("J_Spore_46");
     var_4 = "play_anim_attack";
 
-    if(target_is_above_turret(var_2))
+    if(target_is_above_turret(var_2)) {
       var_4 = "play_anim_attack_up";
+    }
 
     self notify(var_4);
     wait 0.84;
@@ -682,24 +745,29 @@ seeder_turret_spit_attack() {
 
     while(var_5 > 0) {
       if(!isDefined(self) || !isDefined(self.coll_model) || !isDefined(var_0) || isDefined(self.current_anim) && self.current_anim == "play_anim_death" || isDefined(self.coll_model.spore_health) && self.coll_model.spore_health <= 0) {
-        if(isDefined(self) && isDefined(self.fxent))
+        if(isDefined(self) && isDefined(self.fxent)) {
           self.fxent delete();
+        }
 
         return;
       }
 
-      if((isplayer(var_0) || issentient(var_0)) && !var_0 maps\mp\_utility::isusingremote())
+      if((isplayer(var_0) || issentient(var_0)) && !var_0 maps\mp\_utility::isusingremote()) {
         var_2 = var_0 getEye() + (0, 0, -15);
-      else if(isDefined(var_0.alien_type) && var_0.alien_type == "seeder_spore")
+      }
+      else if(isDefined(var_0.alien_type) && var_0.alien_type == "seeder_spore") {
         var_2 = var_0 gettagorigin("J_Spore_46");
-      else
+      }
+      else {
         var_2 = var_0.origin + (0, 0, 32);
+      }
 
       var_6 = var_2 - self gettagorigin("J_Spore_46");
       var_6 = vectortoangles(var_6);
 
-      if(!isDefined(self.fxent))
+      if(!isDefined(self.fxent)) {
         self.fxent = spawnfx(level._effect["spore_darts_fire"], self gettagorigin("J_Spore_46"), anglesToForward(var_6), anglestoup(var_6));
+      }
       else {
         self.fxent.origin = self gettagorigin("J_Spore_46");
         self.fxent.angles = var_6;
@@ -710,8 +778,9 @@ seeder_turret_spit_attack() {
       var_5 = var_5 - 1;
       wait 0.35;
 
-      if(isDefined(self) && isDefined(self.fxent))
+      if(isDefined(self) && isDefined(self.fxent)) {
         self.fxent delete();
+      }
     }
 
     self.can_rotate = 1;
@@ -731,8 +800,9 @@ target_is_above_turret(var_0) {
   var_3 = vectornormalize(var_0 - var_1);
   var_4 = vectordot(var_2, var_3);
 
-  if(var_4 > 0.32)
+  if(var_4 > 0.32) {
     return 1;
+  }
 
   return 0;
 }
@@ -750,24 +820,29 @@ seeder_turret_cleanup() {
   self waittill("death");
   level.seeder_active_turrets = common_scripts\utility::array_remove(level.seeder_active_turrets, self);
 
-  if(isDefined(self.pet))
+  if(isDefined(self.pet)) {
     level.seeder_active_pet_turrets = level.seeder_active_pet_turrets - 1;
+  }
 
-  if(isDefined(self.parent) && !isplayer(self.parent) && isDefined(self.parent.num_active_turrets))
+  if(isDefined(self.parent) && !isplayer(self.parent) && isDefined(self.parent.num_active_turrets)) {
     self.parent.num_active_turrets = self.parent.num_active_turrets - 1;
+  }
 
-  if(isDefined(self.coll_model))
+  if(isDefined(self.coll_model)) {
     self.coll_model delete();
+  }
 
-  if(isDefined(self.fxent))
+  if(isDefined(self.fxent)) {
     self.fxent delete();
+  }
 
   self notify("play_anim_death");
   self waittill("do_after_death_cleanup");
   wait 0.4;
 
-  if(isDefined(self.claimed_node))
+  if(isDefined(self.claimed_node)) {
     self.claimed_node.claimed = 0;
+  }
 
   self delete();
 }
@@ -777,10 +852,12 @@ seeder_turret_face_target() {
   self.can_rotate = 0;
   self.is_rotating = 0;
 
-  if(isDefined(self.pet))
+  if(isDefined(self.pet)) {
     var_0 = 0.15;
-  else
+  }
+  else {
     var_0 = 0.45;
+  }
 
   var_1 = 1;
   wait 3.06;
@@ -803,8 +880,9 @@ seeder_turret_face_target() {
       var_6 = acos(var_5);
       var_7 = vectordot(vectorcross(var_3, var_4), vectornormalize(anglestoup(self.angles)));
 
-      if(var_7 > 0)
+      if(var_7 > 0) {
         var_6 = var_6 * -1;
+      }
 
       var_8 = var_0 / 0.05;
       var_9 = var_6 / var_8;
@@ -879,14 +957,16 @@ seeder_turret_timeout() {
   self endon("death");
   var_0 = 60000;
 
-  if(isDefined(self.pet))
+  if(isDefined(self.pet)) {
     var_0 = 60000;
+  }
 
   var_1 = gettime();
 
   for(;;) {
-    if(gettime() - var_1 > var_0)
+    if(gettime() - var_1 > var_0) {
       self notify("death");
+    }
 
     wait 0.2;
   }
@@ -894,11 +974,13 @@ seeder_turret_timeout() {
 
 check_is_turret_pos_clear(var_0) {
   for(var_1 = 0; var_1 < level.seeder_active_turrets.size; var_1++) {
-    if(var_1 >= 12)
+    if(var_1 >= 12) {
       return 0;
+    }
 
-    if(isDefined(level.seeder_active_turrets[var_1]) && distancesquared(var_0, level.seeder_active_turrets[var_1].origin) < 1024)
+    if(isDefined(level.seeder_active_turrets[var_1]) && distancesquared(var_0, level.seeder_active_turrets[var_1].origin) < 1024) {
       return 0;
+    }
   }
 
   return 1;

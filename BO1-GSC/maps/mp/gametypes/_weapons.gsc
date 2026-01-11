@@ -28,10 +28,12 @@ init() {
   precacheShellShock("tabun_gas_nokick_mp");
   thread maps\mp\_flashgrenades::main();
   thread maps\mp\_entityheadicons::init();
-  if(!isDefined(level.grenadeLauncherDudTime))
+  if(!isDefined(level.grenadeLauncherDudTime)) {
     level.grenadeLauncherDudTime = 0;
-  if(!isDefined(level.thrownGrenadeDudTime))
+  }
+  if(!isDefined(level.thrownGrenadeDudTime)) {
     level.thrownGrenadeDudTime = 0;
+  }
   level thread onPlayerConnect();
   maps\mp\gametypes\_weaponobjects::init();
   maps\mp\_tabun::init();
@@ -105,8 +107,9 @@ watchWeaponChange() {
   self.lastDroppableWeapon = self GetCurrentWeapon();
   self.hitsThisMag = [];
   weapon = self getCurrentWeapon();
-  if(isPrimaryWeapon(weapon) && !isDefined(self.hitsThisMag[weapon]))
+  if(isPrimaryWeapon(weapon) && !isDefined(self.hitsThisMag[weapon])) {
     self.hitsThisMag[weapon] = weaponClipSize(weapon);
+  }
   while(1) {
     previous_weapon = self GetCurrentWeapon();
     self waittill("weapon_change", newWeapon);
@@ -114,8 +117,9 @@ watchWeaponChange() {
       self.lastDroppableWeapon = newWeapon;
     }
     if(newWeapon != "none") {
-      if((isPrimaryWeapon(newWeapon) || issidearm(newWeapon)) && !isDefined(self.hitsThisMag[newWeapon]))
+      if((isPrimaryWeapon(newWeapon) || issidearm(newWeapon)) && !isDefined(self.hitsThisMag[newWeapon])) {
         self.hitsThisMag[newWeapon] = weaponClipSize(newWeapon);
+      }
     }
   }
 }
@@ -144,16 +148,18 @@ updateWeaponTimings(newTime) {
   if(isDefined(self.weapon_array_grenade)) {
     for(i = 0; i < self.weapon_array_grenade.size; i++) {
       currItem = self.weapon_array_grenade[i];
-      if(issubstr(currItem, "_mp"))
+      if(issubstr(currItem, "_mp")) {
         currItem = getsubstr(currItem, 0, currItem.size - 3);
+      }
       self maps\mp\gametypes\_globallogic_score::incItemStatByReference(currItem, totalTime, "timeUsed");
     }
   }
   if(isDefined(self.weapon_array_inventory)) {
     for(i = 0; i < self.weapon_array_inventory.size; i++) {
       currItem = self.weapon_array_inventory[i];
-      if(issubstr(currItem, "_mp"))
+      if(issubstr(currItem, "_mp")) {
         currItem = getsubstr(currItem, 0, currItem.size - 3);
+      }
       self maps\mp\gametypes\_globallogic_score::incItemStatByReference(currItem, totalTime, "timeUsed");
     }
   }
@@ -189,10 +195,12 @@ updateWeaponTimings(newTime) {
     } else {
       for(i = 0; i < specialtys.size; i++) {
         specialty = specialtys[i];
-        if(!isDefined(specialty))
+        if(!isDefined(specialty)) {
           continue;
-        if(specialty == "specialty_null" || specialty == "weapon_null")
+        }
+        if(specialty == "specialty_null" || specialty == "weapon_null") {
           continue;
+        }
         if(isDefined(level.specialtyToPerkIndex[specialtys[i]])) {
           basePerkIndex = level.specialtyToPerkIndex[specialtys[i]];
           if(isDefined(basePerkIndex)) {
@@ -203,8 +211,9 @@ updateWeaponTimings(newTime) {
     }
     perkIndexArrayKeys = getarraykeys(perksIndexArray);
     for(i = 0; i < perkIndexArrayKeys.size; i++) {
-      if(perksIndexArray[perkIndexArrayKeys[i]] == true)
+      if(perksIndexArray[perkIndexArrayKeys[i]] == true) {
         self maps\mp\gametypes\_globallogic_score::incItemStatByIndex(perkIndexArrayKeys[i], totalTime, "timeUsed");
+      }
     }
   }
 }
@@ -236,32 +245,41 @@ isPistol(weapon) {
   return isDefined(level.side_arm_array[weapon]);
 }
 isHackWeapon(weapon) {
-  if(maps\mp\gametypes\_hardpoints::isKillstreakWeapon(weapon))
+  if(maps\mp\gametypes\_hardpoints::isKillstreakWeapon(weapon)) {
     return true;
-  if(weapon == "briefcase_bomb_mp")
+  }
+  if(weapon == "briefcase_bomb_mp") {
     return true;
+  }
   return false;
 }
 mayDropWeapon(weapon) {
-  if(GetDvarInt(#"scr_disable_weapondrop") == 1)
+  if(GetDvarInt(#"scr_disable_weapondrop") == 1) {
     return false;
-  if(weapon == "none")
+  }
+  if(weapon == "none") {
     return false;
-  if(isHackWeapon(weapon))
+  }
+  if(isHackWeapon(weapon)) {
     return false;
+  }
   invType = WeaponInventoryType(weapon);
-  if(invType != "primary")
+  if(invType != "primary") {
     return false;
-  if(weapon == "none")
+  }
+  if(weapon == "none") {
     return false;
+  }
   return true;
 }
 dropWeaponForDeath(attacker) {
-  if(GetDvarInt(#"scr_disable_weapondrop") == 1)
+  if(GetDvarInt(#"scr_disable_weapondrop") == 1) {
     return;
+  }
   weapon = self.lastDroppableWeapon;
-  if(isDefined(self.droppedDeathWeapon))
+  if(isDefined(self.droppedDeathWeapon)) {
     return;
+  }
   if(!isDefined(weapon)) {
     return;
   }
@@ -284,8 +302,9 @@ dropWeaponForDeath(attacker) {
     return;
   }
   stockMax = WeaponMaxAmmo(weapon);
-  if(stockAmmo > stockMax)
+  if(stockAmmo > stockMax) {
     stockAmmo = stockMax;
+  }
   item = self dropItem(weapon);
   dropLimitedWeapon(weapon, self, item);
   self.droppedDeathWeapon = true;
@@ -328,8 +347,9 @@ dropWeaponToGround(weapon) {
     return;
   }
   stockMax = WeaponMaxAmmo(weapon);
-  if(stockAmmo > stockMax)
+  if(stockAmmo > stockMax) {
     stockAmmo = stockMax;
+  }
   item = self dropItem(weapon);
   dropLimitedWeapon(weapon, self, item);
   item ItemWeaponSetAmmo(clipAmmo, stockAmmo);
@@ -340,8 +360,9 @@ dropWeaponToGround(weapon) {
 deletePickupAfterAWhile() {
   self endon("death");
   wait 60;
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self delete();
 }
 getItemWeaponName() {
@@ -386,11 +407,13 @@ itemRemoveAmmoFromAltModes() {
 dropOffhand() {
   grenadeTypes = [];
   for(index = 0; index < grenadeTypes.size; index++) {
-    if(!self hasWeapon(grenadeTypes[index]))
+    if(!self hasWeapon(grenadeTypes[index])) {
       continue;
+    }
     count = self getAmmoCount(grenadeTypes[index]);
-    if(!count)
+    if(!count) {
       continue;
+    }
     self dropItem(grenadeTypes[index]);
   }
 }
@@ -415,8 +438,9 @@ watchWeaponUsage() {
     self waittill("weapon_fired", curWeapon);
     self.hasDoneCombat = true;
     if(maps\mp\gametypes\_weapons::isPrimaryWeapon(curWeapon) || maps\mp\gametypes\_weapons::isSideArm(curWeapon)) {
-      if(isDefined(self.hitsThisMag[curWeapon]))
+      if(isDefined(self.hitsThisMag[curWeapon])) {
         self thread updateMagShots(curWeapon);
+      }
     }
     switch (weaponClass(curWeapon)) {
       case "rifle":
@@ -509,8 +533,9 @@ checkHit(sWeapon) {
       break;
   }
   waittillframeend;
-  if(isDefined(self.hitsThisMag[sWeapon]))
+  if(isDefined(self.hitsThisMag[sWeapon])) {
     self thread checkHitsThisMag(sWeapon);
+  }
   if((sWeapon == "bazooka_mp") || isStrStart(sWeapon, "t34") || isStrStart(sWeapon, "panzer")) {
     self setWeaponStat(sWeapon, 1, "hits");
   }
@@ -579,8 +604,9 @@ beginGrenadeTracking() {
   if(grenade maps\mp\gametypes\_weaponobjects::isHacked()) {
     return;
   }
-  if((getTime() - startTime > 1000))
+  if((getTime() - startTime > 1000)) {
     grenade.isCooked = true;
+  }
   switch (weaponName) {
     case "frag_grenade_mp":
       level.globalFragGrenadesFired++;
@@ -653,8 +679,9 @@ checkStuckToPlayer(deleteOnTeamChange) {
   self endon("death");
   self waittill("stuck_to_player", player);
   if(isDefined(player)) {
-    if(!isDefined(deleteOnTeamChange) || deleteOnTeamChange)
+    if(!isDefined(deleteOnTeamChange) || deleteOnTeamChange) {
       self thread stuckToPlayerTeamChange(player);
+    }
     self.stuckToPlayer = player;
   }
 }
@@ -691,8 +718,9 @@ watchForThrowbacks() {
       self.gotPullbackNotify = false;
       continue;
     }
-    if(!isSubStr(weapname, "frag_"))
+    if(!isSubStr(weapname, "frag_")) {
       continue;
+    }
     grenade.threwBack = true;
     grenade thread maps\mp\gametypes\_shellshock::grenade_earthQuake();
     grenade.originalOwner = self;
@@ -700,12 +728,15 @@ watchForThrowbacks() {
 }
 registerGrenadeLauncherDudDvar(dvarString, defaultValue, minValue, maxValue) {
   dvarString = ("scr_" + dvarString + "_grenadeLauncherDudTime");
-  if(getDvar(dvarString) == "")
+  if(getDvar(dvarString) == "") {
     setDvar(dvarString, defaultValue);
-  if(getDvarInt(dvarString) > maxValue)
+  }
+  if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  else if(getDvarInt(dvarString) < minValue)
+  }
+  else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
+  }
   level.grenadeLauncherDudTimeDvar = dvarString;
   level.grenadeLauncherDudTimeMin = minValue;
   level.grenadeLauncherDudTimeMax = maxValue;
@@ -713,12 +744,15 @@ registerGrenadeLauncherDudDvar(dvarString, defaultValue, minValue, maxValue) {
 }
 registerThrownGrenadeDudDvar(dvarString, defaultValue, minValue, maxValue) {
   dvarString = ("scr_" + dvarString + "_thrownGrenadeDudTime");
-  if(getDvar(dvarString) == "")
+  if(getDvar(dvarString) == "") {
     setDvar(dvarString, defaultValue);
-  if(getDvarInt(dvarString) > maxValue)
+  }
+  if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  else if(getDvarInt(dvarString) < minValue)
+  }
+  else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
+  }
   level.thrownGrenadeDudTimeDvar = dvarString;
   level.thrownGrenadeDudTimeMin = minValue;
   level.thrownGrenadeDudTimeMax = maxValue;
@@ -726,30 +760,36 @@ registerThrownGrenadeDudDvar(dvarString, defaultValue, minValue, maxValue) {
 }
 registerKillstreakDelay(dvarString, defaultValue, minValue, maxValue) {
   dvarString = ("scr_" + dvarString + "_killstreakDelayTime");
-  if(getDvar(dvarString) == "")
+  if(getDvar(dvarString) == "") {
     setDvar(dvarString, defaultValue);
-  if(getDvarInt(dvarString) > maxValue)
+  }
+  if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  else if(getDvarInt(dvarString) < minValue)
+  }
+  else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
+  }
   level.killstreakRoundDelay = getDvarInt(dvarString);
 }
 turnGrenadeIntoADud(weapname, isThrownGrenade, player) {
   if(level.grenadeLauncherDudTime >= (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000) && !isThrownGrenade) {
     if(isSubStr(weapname, "gl_") || weapname == "china_lake_mp") {
       timeLeft = Int(level.grenadeLauncherDudTime - (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000));
-      if(!timeLeft)
+      if(!timeLeft) {
         timeLeft = 1;
+      }
       player iPrintLnBold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", " " + timeLeft + " ", &"EXE_SECONDS");
       self makeGrenadeDud();
     }
   } else if(level.thrownGrenadeDudTime >= (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000) && isThrownGrenade) {
     if(weapname == "frag_grenade_mp" || weapname == "sticky_grenade_mp") {
-      if(isDefined(player.suicide) && player.suicide)
+      if(isDefined(player.suicide) && player.suicide) {
         return;
+      }
       timeLeft = Int(level.thrownGrenadeDudTime - (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000));
-      if(!timeLeft)
+      if(!timeLeft) {
         timeLeft = 1;
+      }
       player iPrintLnBold(&"MP_GRENADE_UNAVAILABLE_FOR_N", " " + timeLeft + " ", &"EXE_SECONDS");
       self makeGrenadeDud();
     }
@@ -773,14 +813,17 @@ watchForGrenadeLauncherDuds() {
 }
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
-  if(!isDefined(doLOS))
+  if(!isDefined(doLOS)) {
     doLOS = false;
-  if(!isDefined(startRadius))
+  }
+  if(!isDefined(startRadius)) {
     startRadius = 0;
+  }
   players = level.players;
   for(i = 0; i < players.size; i++) {
-    if(!isalive(players[i]) || players[i].sessionstate != "playing")
+    if(!isalive(players[i]) || players[i].sessionstate != "playing") {
       continue;
+    }
     playerpos = players[i].origin + (0, 0, 32);
     dist = distance(pos, playerpos);
     if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, playerpos, startRadius, undefined))) {
@@ -841,8 +884,9 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
   }
   if(isDefined(level.dogs) && level.dogs.size > 0) {
     for(i = 0; i < level.dogs.size; i++) {
-      if(!isalive(level.dogs[i]))
+      if(!isalive(level.dogs[i])) {
         continue;
+      }
       entpos = level.dogs[i].origin;
       dist = distance(pos, entpos);
       if(dist < radius && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, level.dogs[i]))) {
@@ -866,8 +910,9 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
 weaponDamageTrace(from, to, startRadius, ignore) {
   midpos = undefined;
   diff = to - from;
-  if(lengthsquared(diff) < startRadius * startRadius)
+  if(lengthsquared(diff) < startRadius * startRadius) {
     midpos = to;
+  }
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
   trace = bulletTrace(midpos, to, false, ignore);
@@ -923,8 +968,9 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
       sWeapon
     );
   } else {
-    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp" || sWeapon == "airstrike_mp" || sWeapon == "napalm_mp"))
+    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp" || sWeapon == "airstrike_mp" || sWeapon == "napalm_mp")) {
       return;
+    }
     self.entity damage_notify_wrapper(iDamage, eAttacker, (0, 0, 0), (0, 0, 0), "mod_explosive", "", "");
   }
 }
@@ -941,16 +987,18 @@ onWeaponDamage(eAttacker, eInflictor, sWeapon, meansOfDeath, damage) {
     case "concussion_grenade_mp":
       radius = 512;
       scale = 1 - (distance(self.origin, eInflictor.origin) / radius);
-      if(scale < 0)
+      if(scale < 0) {
         scale = 0;
+      }
       time = 2 + (4 * scale);
       wait(0.05);
       if(self HasPerk("specialty_stunprotection")) {
         time *= 0.1;
       }
       self thread playConcussionSound(time);
-      if(self mayApplyScreenEffect())
+      if(self mayApplyScreenEffect()) {
         self shellShock("concussion_grenade_mp", time);
+      }
       self.concussionEndTime = getTime() + (time * 1000);
       break;
     default:
@@ -967,8 +1015,9 @@ playConcussionSound(duration) {
   concussionSound thread deleteEntOnOwnerDeath(self);
   concussionSound playSound("");
   concussionSound playLoopSound("");
-  if(duration > 0.5)
+  if(duration > 0.5) {
     wait(duration - 0.5);
+  }
   concussionSound playSound("");
   concussionSound StopLoopSound(.5);
   wait(0.5);
@@ -1005,14 +1054,18 @@ isGrenade(weaponname) {
   return isDefined(level.grenade_array[weaponname]);
 }
 getWeaponClass_array(current) {
-  if(isPrimaryWeapon(current))
+  if(isPrimaryWeapon(current)) {
     return level.primary_weapon_array;
-  else if(isSideArm(current))
+  }
+  else if(isSideArm(current)) {
     return level.side_arm_array;
-  else if(isGrenade(current))
+  }
+  else if(isGrenade(current)) {
     return level.grenade_array;
-  else
+  }
+  else {
     return level.inventory_array;
+  }
 }
 updateStowedWeapon() {
   self endon("spawned");
@@ -1040,16 +1093,21 @@ updateStowedWeapon() {
         default:
           break;
       }
-      if(isPrimaryWeapon(weaponsList[idx]))
+      if(isPrimaryWeapon(weaponsList[idx])) {
         self.weapon_array_primary[self.weapon_array_primary.size] = weaponsList[idx];
-      else if(isSideArm(weaponsList[idx]))
+      }
+      else if(isSideArm(weaponsList[idx])) {
         self.weapon_array_sidearm[self.weapon_array_sidearm.size] = weaponsList[idx];
-      else if(isGrenade(weaponsList[idx]))
+      }
+      else if(isGrenade(weaponsList[idx])) {
         self.weapon_array_grenade[self.weapon_array_grenade.size] = weaponsList[idx];
-      else if(isInventory(weaponsList[idx]))
+      }
+      else if(isInventory(weaponsList[idx])) {
         self.weapon_array_inventory[self.weapon_array_inventory.size] = weaponsList[idx];
-      else if(IsWeaponPrimary(weaponsList[idx]))
+      }
+      else if(IsWeaponPrimary(weaponsList[idx])) {
         self.weapon_array_primary[self.weapon_array_primary.size] = weaponsList[idx];
+      }
     }
     detach_all_weapons();
     stow_on_back();
@@ -1093,8 +1151,9 @@ stow_on_back(current) {
     for(idx = 0; idx < self.weapon_array_primary.size; idx++) {
       temp_index_weapon = self.weapon_array_primary[idx];
       assertex(isDefined(temp_index_weapon), "Primary weapon list corrupted.");
-      if(temp_index_weapon == current)
+      if(temp_index_weapon == current) {
         continue;
+      }
       if(isSubStr(current, "gl_") || isSubStr(temp_index_weapon, "gl_") ||
         isSubStr(current, "mk_") || isSubStr(temp_index_weapon, "mk_") ||
         isSubStr(current, "ft_") || isSubStr(temp_index_weapon, "ft_")) {
@@ -1106,8 +1165,9 @@ stow_on_back(current) {
             break;
           }
         }
-        if(i == index_weapon_tok.size)
+        if(i == index_weapon_tok.size) {
           continue;
+        }
       }
       index_weapon = temp_index_weapon;
       assertex(isDefined(self.curclass), "Player missing current class");
@@ -1122,22 +1182,26 @@ stow_on_back(current) {
       }
     }
   }
-  if(!isDefined(self.tag_stowed_back))
+  if(!isDefined(self.tag_stowed_back)) {
     return;
+  }
   self attach(self.tag_stowed_back, "tag_stowed_back", true, weaponOptions, index_weapon);
 }
 stow_on_hip() {
   current = self getCurrentWeapon();
   self.tag_stowed_hip = undefined;
   for(idx = 0; idx < self.weapon_array_inventory.size; idx++) {
-    if(self.weapon_array_inventory[idx] == current)
+    if(self.weapon_array_inventory[idx] == current) {
       continue;
-    if(!self GetWeaponAmmoStock(self.weapon_array_inventory[idx]))
+    }
+    if(!self GetWeaponAmmoStock(self.weapon_array_inventory[idx])) {
       continue;
+    }
     self.tag_stowed_hip = self.weapon_array_inventory[idx];
   }
-  if(!isDefined(self.tag_stowed_hip))
+  if(!isDefined(self.tag_stowed_hip)) {
     return;
+  }
   if(self.tag_stowed_hip == "satchel_charge_mp" || self.tag_stowed_hip == "claymore_mp") {
     self.tag_stowed_hip = undefined;
     return;
@@ -1151,8 +1215,9 @@ stow_inventory(inventories, current) {
     self detach(detach_model, "tag_stowed_hip_rear");
     self.inventory_tag = undefined;
   }
-  if(!isDefined(inventories[0]) || self GetWeaponAmmoStock(inventories[0]) == 0)
+  if(!isDefined(inventories[0]) || self GetWeaponAmmoStock(inventories[0]) == 0) {
     return;
+  }
   if(inventories[0] != current) {
     self.inventory_tag = inventories[0];
     weapon_model = getweaponmodel(self.inventory_tag);
@@ -1171,15 +1236,18 @@ weapons_get_dvar(dvar, def) {
   }
 }
 player_is_driver() {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return false;
-  if(self IsRemoteControlling())
+  }
+  if(self IsRemoteControlling()) {
     return false;
+  }
   vehicle = self GetVehicleOccupied();
   if(isDefined(vehicle)) {
     seat = vehicle GetOccupantSeat(self);
-    if(isDefined(seat) && seat == 0)
+    if(isDefined(seat) && seat == 0) {
       return true;
+    }
   }
   return false;
 }
@@ -1254,8 +1322,9 @@ scavenger_think() {
   }
 }
 scavenger_hud_create() {
-  if(level.wagerMatch)
+  if(level.wagerMatch) {
     return;
+  }
   self.scavenger_icon = NewClientHudElem(self);
   self.scavenger_icon.horzAlign = "center";
   self.scavenger_icon.vertAlign = "middle";
@@ -1288,12 +1357,15 @@ isLauncherkWeapon(weapon) {
   }
 }
 dropScavengerForDeath(attacker) {
-  if(level.wagerMatch)
+  if(level.wagerMatch) {
     return;
-  if(!isDefined(attacker))
+  }
+  if(!isDefined(attacker)) {
     return;
-  if(attacker == self)
+  }
+  if(attacker == self) {
     return;
+  }
   item = self dropScavengerItem("scavenger_item_mp");
   item thread scavenger_think();
 }

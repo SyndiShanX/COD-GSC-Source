@@ -13,13 +13,15 @@ main() {
   level.badplace_delete_func = ::badplace_delete;
   level thread maps\mp\agents\_agent_common::init();
 
-  if(!maps\mp\_utility::invirtuallobby() && !(isDefined(level.iszombiegame) && level.iszombiegame))
+  if(!maps\mp\_utility::invirtuallobby() && !(isDefined(level.iszombiegame) && level.iszombiegame)) {
     return;
+  }
 }
 
 setup_callbacks() {
-  if(!isDefined(level.agent_funcs))
+  if(!isDefined(level.agent_funcs)) {
     level.agent_funcs = [];
+  }
 
   if(!(isDefined(level.iszombiegame) && level.iszombiegame)) {
     level.agent_funcs["player"] = [];
@@ -32,15 +34,17 @@ setup_callbacks() {
 }
 
 wait_till_agent_funcs_defined() {
-  while(!isDefined(level.agent_funcs))
+  while(!isDefined(level.agent_funcs)) {
     wait 0.05;
+  }
 }
 
 add_humanoid_agent(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_9 = maps\mp\agents\_agent_common::connectnewagent(var_0, var_1, var_2);
 
-  if(isDefined(var_9))
+  if(isDefined(var_9)) {
     var_9 thread[[var_9 maps\mp\agents\_agent_utility::agentfunc("spawn")]](var_3, var_4, var_5, var_6, var_7, var_8);
+  }
 
   return var_9;
 }
@@ -48,11 +52,13 @@ add_humanoid_agent(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
 spawn_agent_player(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("disconnect");
 
-  while(!isDefined(level.getspawnpoint))
+  while(!isDefined(level.getspawnpoint)) {
     waitframe();
+  }
 
-  if(self.hasdied)
+  if(self.hasdied) {
     wait(randomintrange(6, 10));
+  }
 
   maps\mp\agents\_agent_utility::initplayerscriptvariables(1);
 
@@ -76,31 +82,37 @@ spawn_agent_player(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_10 = var_6;
   var_11 = playerphysicstrace(var_9, var_10);
 
-  if(distancesquared(var_11, var_9) > 1)
+  if(distancesquared(var_11, var_9) > 1) {
     var_6 = var_11;
+  }
 
   self spawnagent(var_6, var_7);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self.agent_override_difficulty = var_5;
+  }
 
   if(isDefined(self.agent_override_difficulty)) {
-    if(self.agent_override_difficulty == "follow_code_and_dev_dvar")
+    if(self.agent_override_difficulty == "follow_code_and_dev_dvar") {
       maps\mp\bots\_bots_util::bot_set_difficulty(self botgetdifficulty(), 1);
-    else
+    }
+    else {
       maps\mp\bots\_bots_util::bot_set_difficulty(var_5);
+    }
   } else
     maps\mp\bots\_bots_util::bot_set_difficulty(self botgetdifficulty());
 
-  if(isDefined(var_3) && var_3)
+  if(isDefined(var_3) && var_3) {
     self.use_randomized_personality = 1;
+  }
 
   if(isDefined(self.use_randomized_personality) && self.use_randomized_personality) {
     if(!self.hasdied) {
       var_12 = self botgetdifficultysetting("advancedPersonality");
 
-      if(isDefined(var_12) && var_12 != 0)
+      if(isDefined(var_12) && var_12 != 0) {
         maps\mp\bots\_bots_personality::bot_balance_personality();
+      }
     }
 
     maps\mp\bots\_bots_personality::bot_assign_personality_functions();
@@ -110,14 +122,17 @@ spawn_agent_player(var_0, var_1, var_2, var_3, var_4, var_5) {
   initplayerclass();
   maps\mp\agents\_agent_common::set_agent_health(100);
 
-  if(isDefined(var_4) && var_4)
+  if(isDefined(var_4) && var_4) {
     self.respawn_on_death = 1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     maps\mp\agents\_agent_utility::set_agent_team(var_2.team, var_2);
+  }
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     thread destroyonownerdisconnect(self.owner);
+  }
 
   thread maps\mp\_flashgrenades::monitorflash();
   self enableanimstate(0);
@@ -127,8 +142,9 @@ spawn_agent_player(var_0, var_1, var_2, var_3, var_4, var_5) {
   thread maps\mp\bots\_bots_strategy::bot_think_tactical_goals();
   self thread[[maps\mp\agents\_agent_utility::agentfunc("think")]]();
 
-  if(!self.hasdied)
+  if(!self.hasdied) {
     maps\mp\gametypes\_spawnlogic::addtoparticipantsarray();
+  }
 
   if(!self.hasdied) {
     thread maps\mp\gametypes\_weapons::onplayerspawned();
@@ -138,8 +154,9 @@ spawn_agent_player(var_0, var_1, var_2, var_3, var_4, var_5) {
   self.hasdied = 0;
   thread maps\mp\gametypes\_healthoverlay::playerhealthregen();
 
-  if(isDefined(self.use_randomized_personality) && self.use_randomized_personality && isDefined(self.respawn_on_death) && self.respawn_on_death)
+  if(isDefined(self.use_randomized_personality) && self.use_randomized_personality && isDefined(self.respawn_on_death) && self.respawn_on_death) {
     self setagentcostumeindex(1);
+  }
 
   level notify("spawned_agent_player", self);
   level notify("spawned_agent", self);
@@ -152,29 +169,34 @@ destroyonownerdisconnect(var_0) {
   var_0 waittill("killstreak_disowned");
   self notify("owner_disconnect");
 
-  if(maps\mp\gametypes\_hostmigration::waittillhostmigrationdone())
+  if(maps\mp\gametypes\_hostmigration::waittillhostmigrationdone()) {
     wait 0.05;
+  }
 
   self suicide();
 }
 
 agent_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   if(isDefined(var_0) || isDefined(var_1)) {
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       var_0 = var_1;
-
-    if(isDefined(self.allowvehicledamage) && !self.allowvehicledamage) {
-      if(isDefined(var_0.classname) && var_0.classname == "script_vehicle")
-        return 0;
     }
 
-    if(isDefined(var_0.classname) && var_0.classname == "auto_turret")
+    if(isDefined(self.allowvehicledamage) && !self.allowvehicledamage) {
+      if(isDefined(var_0.classname) && var_0.classname == "script_vehicle") {
+        return 0;
+      }
+    }
+
+    if(isDefined(var_0.classname) && var_0.classname == "auto_turret") {
       var_1 = var_0;
+    }
 
     if(isDefined(var_1) && var_4 != "MOD_FALLING" && var_4 != "MOD_SUICIDE") {
       if(level.teambased) {
-        if(isDefined(var_1.team) && var_1.team != self.team)
+        if(isDefined(var_1.team) && var_1.team != self.team) {
           self setagentattacker(var_1);
+        }
       } else
         self setagentattacker(var_1);
     }
@@ -182,11 +204,13 @@ agent_damage_finished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
 
   var_10 = self finishagentdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 0.0);
 
-  if(isDefined(var_10))
+  if(isDefined(var_10)) {
     thread finishagentdamage_impactfxwrapper(var_10[0], var_10[1], var_10[2], var_10[3], var_10[4], var_10[5], var_10[6]);
+  }
 
-  if(!isDefined(self.isactive))
+  if(!isDefined(self.isactive)) {
     self.waitingtodeactivate = 1;
+  }
 
   return 1;
 }
@@ -204,44 +228,56 @@ on_agent_generic_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   var_10 = isDefined(var_1) && isDefined(self.owner) && self.owner == var_1;
   var_11 = maps\mp\_utility::attackerishittingteam(self.owner, var_1) || var_10;
 
-  if(level.teambased && var_11 && !level.friendlyfire)
+  if(level.teambased && var_11 && !level.friendlyfire) {
     return 0;
+  }
 
-  if(!level.teambased && var_10)
+  if(!level.teambased && var_10) {
     return 0;
+  }
 
-  if(isDefined(var_4) && var_4 == "MOD_CRUSH" && isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "script_vehicle")
+  if(isDefined(var_4) && var_4 == "MOD_CRUSH" && isDefined(var_0) && isDefined(var_0.classname) && var_0.classname == "script_vehicle") {
     return 0;
+  }
 
-  if(!isDefined(self) || !maps\mp\_utility::isreallyalive(self))
+  if(!isDefined(self) || !maps\mp\_utility::isreallyalive(self)) {
     return 0;
+  }
 
-  if(isDefined(var_1) && var_1.classname == "script_origin" && isDefined(var_1.type) && var_1.type == "soft_landing")
+  if(isDefined(var_1) && var_1.classname == "script_origin" && isDefined(var_1.type) && var_1.type == "soft_landing") {
     return 0;
+  }
 
-  if(var_5 == "bouncingbetty_mp" && !maps\mp\gametypes\_weapons::minedamageheightpassed(var_0, self))
+  if(var_5 == "bouncingbetty_mp" && !maps\mp\gametypes\_weapons::minedamageheightpassed(var_0, self)) {
     return 0;
+  }
 
-  if(isDefined(var_0) && isDefined(var_0.stuckenemyentity) && var_0.stuckenemyentity == self)
+  if(isDefined(var_0) && isDefined(var_0.stuckenemyentity) && var_0.stuckenemyentity == self) {
     var_2 = self.health + 1;
+  }
 
-  if(var_2 <= 0)
+  if(var_2 <= 0) {
     return 0;
+  }
 
-  if(isDefined(level.modifyplayerdamage))
+  if(isDefined(level.modifyplayerdamage)) {
     var_2 = [[level.modifyplayerdamage]](self, var_1, var_2, var_4, var_5, var_6, var_7, var_8);
+  }
 
   if(isDefined(var_1) && var_1 != self && var_2 > 0 && (!isDefined(var_8) || var_8 != "shield")) {
-    if(var_3 &level.idflags_stun)
+    if(var_3 &level.idflags_stun) {
       var_12 = "stun";
-    else if(!maps\mp\gametypes\_damage::shouldweaponfeedback(var_5))
+    }
+    else if(!maps\mp\gametypes\_damage::shouldweaponfeedback(var_5)) {
       var_12 = "none";
+    }
     else {
       var_12 = "standard";
 
       if(isDefined(level.iszombiegame) && level.iszombiegame) {
-        if(var_5 == "trap_zm_mp")
+        if(var_5 == "trap_zm_mp") {
           var_12 = "none";
+        }
         else if(var_2 < self.health) {
           switch (var_8) {
             case "neck":
@@ -274,8 +310,9 @@ on_agent_generic_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
 on_agent_player_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_10 = isDefined(var_1) && isDefined(self.owner) && self.owner == var_1;
 
-  if(!level.teambased && var_10)
+  if(!level.teambased && var_10) {
     return 0;
+  }
 
   maps\mp\gametypes\_damage::callback_playerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
 }
@@ -283,35 +320,43 @@ on_agent_player_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 on_agent_player_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 1);
 
-  if(isplayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner) && (!isDefined(self.nonkillstreakagent) || !self.nonkillstreakagent))
+  if(isplayer(var_1) && (!isDefined(self.owner) || var_1 != self.owner) && (!isDefined(self.nonkillstreakagent) || !self.nonkillstreakagent)) {
     maps\mp\gametypes\_damage::onkillstreakkilled(var_1, var_4, var_3, var_2, "destroyed_squad_mate");
+  }
 
-  if(isDefined(level.on_agent_player_killed))
+  if(isDefined(level.on_agent_player_killed)) {
     [[level.on_agent_player_killed]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+  }
 
   if(self.isactive) {
     self.hasdied = 1;
 
-    if(maps\mp\_utility::getgametypenumlives() != 1 && (isDefined(self.respawn_on_death) && self.respawn_on_death))
+    if(maps\mp\_utility::getgametypenumlives() != 1 && (isDefined(self.respawn_on_death) && self.respawn_on_death)) {
       self thread[[maps\mp\agents\_agent_utility::agentfunc("spawn")]]();
-    else
+    }
+    else {
       maps\mp\agents\_agent_utility::deactivateagent();
+    }
   }
 }
 
 on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
-  if(var_9)
+  if(var_9) {
     self thread[[level.weapondropfunction]](var_1, var_3);
+  }
 
   self.body = self cloneagent(var_8);
   thread maps\mp\gametypes\_damage::delaystartragdoll(self.body, var_6, var_5, var_4, var_0, var_3);
 }
 
 initplayerclass() {
-  if(isDefined(self.class_override))
+  if(isDefined(self.class_override)) {
     self.class = self.class_override;
-  else if(maps\mp\bots\_bots_loadout::bot_setup_loadout_callback())
+  }
+  else if(maps\mp\bots\_bots_loadout::bot_setup_loadout_callback()) {
     self.class = "callback";
-  else
+  }
+  else {
     self.class = "class1";
+  }
 }

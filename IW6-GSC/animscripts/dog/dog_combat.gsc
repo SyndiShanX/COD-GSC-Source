@@ -13,8 +13,9 @@ main() {
 
   self endon("killanimscript");
 
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     combatidle();
+  }
   else {
     if(isplayer(self.enemy)) {
       meleebiteattackplayer();
@@ -79,20 +80,24 @@ knock_down_player_coop(var_0, var_1) {
   var_0.player_view notify("pvd_melee_done");
   var_0.player_view playerview_endsequence(var_0);
 
-  if(!maps\_utility::killing_will_down(var_0))
+  if(!maps\_utility::killing_will_down(var_0)) {
     var_0 dog_player_kill(var_1);
+  }
 }
 
 dog_player_kill(var_0) {
-  if(maps\_utility::laststand_enabled())
+  if(maps\_utility::laststand_enabled()) {
     self enabledeathshield(0);
+  }
 
   self disableinvulnerability();
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     self kill(self.origin, var_0);
-  else
+  }
+  else {
     self kill(self.origin);
+  }
 }
 
 dog_death_hud(var_0, var_1) {
@@ -105,10 +110,12 @@ dog_death_hud(var_0, var_1) {
   var_2.x = 0;
   var_2.y = 50;
 
-  if(var_1)
+  if(var_1) {
     var_2 setshader("hud_hyena_melee", 96, 96);
-  else
+  }
+  else {
     var_2 setshader("hud_dog_melee", 96, 96);
+  }
 
   var_2.alignx = "center";
   var_2.aligny = "middle";
@@ -145,16 +152,19 @@ attackmiss() {
     var_2 = vectornormalize(self.enemy.origin - self.origin);
     var_3 = self.enemy.origin - (self.origin + var_1 * 40);
 
-    if(vectordot(var_2, var_1) > 0.707 || vectordot(var_3, var_1) > 0)
+    if(vectordot(var_2, var_1) > 0.707 || vectordot(var_3, var_1) > 0) {
       thread animscripts\dog\dog_stop::lookattarget("normal");
+    }
     else {
       self.skipstartmove = 1;
       thread attackmisstracktargetthread();
 
-      if(var_2[0] * var_1[1] - var_2[1] * var_1[0] > 0)
+      if(var_2[0] * var_1[1] - var_2[1] * var_1[0] > 0) {
         var_0 = % german_shepherd_attack_player_miss_turnr;
-      else
+      }
+      else {
         var_0 = % german_shepherd_attack_player_miss_turnl;
+      }
     }
   }
 
@@ -179,22 +189,27 @@ knockoutofads(var_0) {
 
 dogmelee() {
   if(isDefined(self.meleeingplayer)) {
-    if(isDefined(self.meleeingplayer.using_uav) && self.meleeingplayer.using_uav)
+    if(isDefined(self.meleeingplayer.using_uav) && self.meleeingplayer.using_uav) {
       self.meleeingplayer notify("force_out_of_uav");
+    }
 
-    if(self.meleeingplayer islinked())
+    if(self.meleeingplayer islinked()) {
       return undefined;
+    }
 
-    if(self.meleeingplayer ismantling())
+    if(self.meleeingplayer ismantling()) {
       return undefined;
+    }
 
-    if(self.meleeingplayer.laststand && self.meleeingplayer.ignoreme)
+    if(self.meleeingplayer.laststand && self.meleeingplayer.ignoreme) {
       return undefined;
+    }
   }
 
   if(isDefined(self.enemy)) {
-    if(distance2d(self.origin, self.enemy.origin) < 32)
+    if(distance2d(self.origin, self.enemy.origin) < 32) {
       return self melee();
+    }
   }
 
   return self melee(anglesToForward(self.angles));
@@ -225,8 +240,9 @@ handlemeleebiteattacknotetracks(var_0) {
 addsafetyhealth() {
   var_0 = self.meleeingplayer getnormalhealth();
 
-  if(var_0 == 0)
+  if(var_0 == 0) {
     return 0;
+  }
 
   if(var_0 < 0.25) {
     self.meleeingplayer setnormalhealth(var_0 + 0.25);
@@ -239,10 +255,12 @@ addsafetyhealth() {
 removesafetyhealth() {
   var_0 = self.meleeingplayer getnormalhealth();
 
-  if(var_0 > 0.25)
+  if(var_0 > 0.25) {
     self.meleeingplayer setnormalhealth(var_0 - 0.25);
-  else
+  }
+  else {
     self.meleeingplayer setnormalhealth(0.01);
+  }
 }
 
 handlemeleefinishattacknotetracks(var_0) {
@@ -252,17 +270,20 @@ handlemeleefinishattacknotetracks(var_0) {
       var_2 = dogmelee();
 
       if(isDefined(var_2) && isplayer(var_2) && isalive(self.meleeingplayer)) {
-        if(var_1)
+        if(var_1) {
           removesafetyhealth();
+        }
 
         self.skipstartmove = undefined;
         self.meleeingplayer.player_view = playerview_spawn(self);
 
-        if(self.meleeingplayer.player_view playerview_startsequence(self))
+        if(self.meleeingplayer.player_view playerview_startsequence(self)) {
           self setCanDamage(0);
+        }
       } else {
-        if(var_1)
+        if(var_1) {
           removesafetyhealth();
+        }
 
         attackmiss();
         return 1;
@@ -322,8 +343,9 @@ playerdoginit() {
 meleebiteattackplayer() {
   self.meleeingplayer = self.enemy;
 
-  if(!isDefined(self.meleeingplayer.doginited))
+  if(!isDefined(self.meleeingplayer.doginited)) {
     self.meleeingplayer playerdoginit();
+  }
 
   var_0 = 30;
   var_1 = self.meleeattackdist + var_0;
@@ -403,17 +425,21 @@ clear_player_attacked_by_dog_on_death() {
 }
 
 dog_cant_kill_in_one_hit() {
-  if(isDefined(self.meleeingplayer.dogs_dont_instant_kill))
+  if(isDefined(self.meleeingplayer.dogs_dont_instant_kill)) {
     return 1;
+  }
 
-  if(maps\_utility::is_player_down(self.meleeingplayer))
+  if(maps\_utility::is_player_down(self.meleeingplayer)) {
     return 1;
+  }
 
-  if(isDefined(self.meleeingplayer.slidemodel))
+  if(isDefined(self.meleeingplayer.slidemodel)) {
     return 1;
+  }
 
-  if(gettime() - self.meleeingplayer.lastdogmeleeplayertime > 8000)
+  if(gettime() - self.meleeingplayer.lastdogmeleeplayertime > 8000) {
     self.meleeingplayer.dogmeleeplayercounter = 0;
+  }
 
   return self.meleeingplayer.dogmeleeplayercounter < self.meleeingplayer.gs.dog_hits_before_kill && self.meleeingplayer.health > 25;
 }
@@ -441,8 +467,9 @@ meleestrugglevsai() {
     }
   }
 
-  if(isDefined(self.enemy.syncedmeleetarget) || shouldwaitincombatidle() || !isai(self.enemy))
+  if(isDefined(self.enemy.syncedmeleetarget) || shouldwaitincombatidle() || !isai(self.enemy)) {
     combatidle();
+  }
   else {
     self.in_melee = 1;
     self.enemy setnextdogattackallowtime(500);
@@ -491,11 +518,13 @@ meleestrugglevsai() {
     self.enemy.diequietly = 1;
     var_2 = 0;
 
-    if(isDefined(self.enemy.use_old_dog_attack))
+    if(isDefined(self.enemy.use_old_dog_attack)) {
       var_2 = 1;
+    }
 
-    if(meleestruggle_istraverse())
+    if(meleestruggle_istraverse()) {
       return meleestrugglevsai_traverse(var_1);
+    }
 
     var_3 = vectortoangles(self.origin - self.enemy.origin);
     var_3 = (0, var_3[1], 0);
@@ -507,10 +536,12 @@ meleestrugglevsai() {
       var_4[1] = % iw6_dog_kill_front_quick_1;
       var_5 = 1;
 
-      if(isDefined(self.controlling_dog) && self.controlling_dog)
+      if(isDefined(self.controlling_dog) && self.controlling_dog) {
         thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short");
-      else
+      }
+      else {
         thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short_npc");
+      }
     } else if(isDefined(self.enemy.a.doinglongdeath) || self.enemy.a.pose == "prone" || self.enemy isdoingtraversal()) {
       thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short_npc");
       return domeleevsai_simple();
@@ -524,10 +555,12 @@ meleestrugglevsai() {
           var_5 = 1;
           var_3 = var_3 + (0, 90, 0);
 
-          if(isDefined(self.controlling_dog) && self.controlling_dog)
+          if(isDefined(self.controlling_dog) && self.controlling_dog) {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short");
-          else
+          }
+          else {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short_npc");
+          }
 
           break;
         case "L":
@@ -535,10 +568,12 @@ meleestrugglevsai() {
           var_5 = 1;
           var_3 = var_3 + (0, -90, 0);
 
-          if(isDefined(self.controlling_dog) && self.controlling_dog)
+          if(isDefined(self.controlling_dog) && self.controlling_dog) {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short");
-          else
+          }
+          else {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short_npc");
+          }
 
           break;
         case "B":
@@ -546,17 +581,21 @@ meleestrugglevsai() {
           var_5 = 1;
           var_3 = var_3 - (0, 180, 0);
 
-          if(isDefined(self.controlling_dog) && self.controlling_dog)
+          if(isDefined(self.controlling_dog) && self.controlling_dog) {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_quick_back_plr");
-          else
+          }
+          else {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_quick_back_npc");
+          }
 
           break;
         default:
-          if(isDefined(self.controlling_dog) && self.controlling_dog)
+          if(isDefined(self.controlling_dog) && self.controlling_dog) {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_plr");
-          else
+          }
+          else {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_npc");
+          }
 
           break;
       }
@@ -598,8 +637,9 @@ domeleevsai(var_0, var_1, var_2, var_3) {
   self clearanim(var_0[0], 0.1);
   self animrelative("meleeanim", self.enemy.origin, var_2, var_0[1]);
 
-  if(!animhasnotetrack(var_0[1], "ai_attack_start"))
+  if(!animhasnotetrack(var_0[1], "ai_attack_start")) {
     handlestartaipart("ai_attack_start");
+  }
 
   animscripts\shared::donotetracks("meleeanim", ::handlestartaipart);
   self notify("end_dog_interrupted_check");
@@ -607,8 +647,9 @@ domeleevsai(var_0, var_1, var_2, var_3) {
   self animmode("zonly_physics");
 
   for(var_4 = 1; var_4 < var_1; var_4++) {
-    if(isDefined(level._effect["dog_bite"]) && isDefined(level._effect["dog_bite"][var_4]) && isDefined(self.enemy))
+    if(isDefined(level._effect["dog_bite"]) && isDefined(level._effect["dog_bite"][var_4]) && isDefined(self.enemy)) {
       playFXOnTag(level._effect["dog_bite"][var_4], self.enemy, "TAG_EYE");
+    }
 
     self clearanim(var_0[var_4], 0);
 
@@ -616,8 +657,9 @@ domeleevsai(var_0, var_1, var_2, var_3) {
       break;
     }
 
-    if(!self.meleekilltarget && var_4 + 1 == var_1)
+    if(!self.meleekilltarget && var_4 + 1 == var_1) {
       self.health = 1;
+    }
 
     self setflaggedanimrestart("meleeanim", var_0[var_4 + 1], 1, 0, 1);
     animscripts\shared::donotetracks("meleeanim");
@@ -631,8 +673,9 @@ melee_dogcleanup() {
   self unlink();
 
   if(!self.meleekilltarget) {
-    if(!isDefined(self.magic_bullet_shield))
+    if(!isDefined(self.magic_bullet_shield)) {
       self kill();
+    }
   } else {
     self.pushable = 1;
     self.safetochangescript = 1;
@@ -645,8 +688,9 @@ melee_dogcleanup() {
   if(isDefined(self.doglastknowngoodpos)) {
     var_0 = self aiphysicstrace(self.origin, self.origin + (0, 0, 2), undefined, undefined, 1, 0, 1);
 
-    if(distancesquared(var_0, self.origin) < 0.001)
+    if(distancesquared(var_0, self.origin) < 0.001) {
       self forceteleport(self.doglastknowngoodpos, self.angles, 60);
+    }
 
     self.doglastknowngoodpos = undefined;
   }
@@ -674,12 +718,15 @@ meleestrugglevsai_traverse(var_0) {
   var_2[1] = % iw6_dog_kill_wall_over_front_1;
   var_3 = 1;
 
-  if(self.enemy isdoingtraversal())
+  if(self.enemy isdoingtraversal()) {
     thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short_npc");
-  else if(isDefined(self.controlling_dog) && self.controlling_dog)
+  }
+  else if(isDefined(self.controlling_dog) && self.controlling_dog) {
     thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_plr");
-  else
+  }
+  else {
     thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_npc");
+  }
 
   self.doglastknowngoodpos = self.origin;
   return domeleevsai(var_2, var_3, var_1, ::meleestrugglevsdog_traverse);
@@ -693,8 +740,9 @@ meleestrugglevsai_interrupted_animcustom() {
 }
 
 meleestrugglevsai_interrupted_animcustom_cleanup() {
-  if(isDefined(self.doglastknowngoodposcustom))
+  if(isDefined(self.doglastknowngoodposcustom)) {
     self.doglastknowngoodpos = self.doglastknowngoodposcustom;
+  }
 
   self.doglastknowngoodposcustom = undefined;
   self animmode("zonly_physics");
@@ -751,8 +799,9 @@ combatidlepreventoverlappingplayer() {
       var_3 = (var_3[0], var_3[1], 0);
       var_4 = length(var_3);
 
-      if(var_4 < 1)
+      if(var_4 < 1) {
         var_3 = anglesToForward(self.angles);
+      }
 
       if(var_4 < 30) {
         var_3 = var_3 * (3 / var_4);
@@ -772,29 +821,36 @@ handlestartaipart(var_0) {
     return undefined;
   }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 1;
+  }
 
-  if(self.enemy != self.originaltarget)
+  if(self.enemy != self.originaltarget) {
     return 1;
+  }
 
-  if(isDefined(self.enemy.syncedmeleetarget))
+  if(isDefined(self.enemy.syncedmeleetarget)) {
     return 1;
+  }
 
   self.flashbangimmunity = 1;
   self.enemy.syncedmeleetarget = self;
 
-  if(self.enemy isdoingtraversal())
+  if(self.enemy isdoingtraversal()) {
     self.enemy meleestrugglevsdog_justdie();
-  else if(isDefined(self.enemy.fndogmeleevictim))
+  }
+  else if(isDefined(self.enemy.fndogmeleevictim)) {
     self.enemy animcustom(self.enemy.fndogmeleevictim);
-  else
+  }
+  else {
     self.enemy animcustom(::meleestrugglevsdog);
+  }
 }
 
 checkendcombat(var_0) {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
   var_1 = distancesquared(self.origin, self.enemy.origin);
   return var_1 > var_0 * var_0;
@@ -840,8 +896,9 @@ dog_hint() {
   var_0 = self.meleeingplayer.gs.dog_presstime / 1000 / dog_vs_player_anim_rate();
   level endon("clearing_dog_hint");
 
-  if(isDefined(self.meleeingplayer.doghintelem))
+  if(isDefined(self.meleeingplayer.doghintelem)) {
     self.meleeingplayer.doghintelem maps\_hud_util::destroyelem();
+  }
 
   self.meleeingplayer.doghintelem = self.meleeingplayer maps\_hud_util::createclientfontstring("default", 3);
   self.meleeingplayer.doghintelem.color = (1, 1, 1);
@@ -886,16 +943,18 @@ dog_hint_fade() {
 dog_delayed_unlink() {
   wait 0.7;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self unlink();
+  }
 }
 
 dog_delayed_allow_damage() {
   self endon("death");
   wait 1.5;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self setCanDamage(1);
+  }
 }
 
 dog_melee_death() {
@@ -905,8 +964,9 @@ dog_melee_death() {
   var_1 = self.meleeingplayer.gs.dog_presstime / dog_vs_player_anim_rate();
   self waittill("dog_early_notetrack");
 
-  while(player_attacked())
+  while(player_attacked()) {
     wait 0.05;
+  }
 
   var_2 = 0;
 
@@ -979,11 +1039,13 @@ dog_melee_death() {
 }
 
 can_early_melee() {
-  if(self.gameskill == 3)
+  if(self.gameskill == 3) {
     return 1;
+  }
 
-  if(isDefined(self.dogmeleeearly) && self.dogmeleeearly)
+  if(isDefined(self.dogmeleeearly) && self.dogmeleeearly) {
     return 1;
+  }
 
   return 0;
 }
@@ -992,8 +1054,9 @@ set_melee_early(var_0) {
   if(!var_0) {
     return;
   }
-  if(level.gameskill > 1 && !isDefined(self.dogmeleeearly))
+  if(level.gameskill > 1 && !isDefined(self.dogmeleeearly)) {
     self.dogmeleeearly = 1;
+  }
 }
 
 #using_animtree("generic_human");
@@ -1053,8 +1116,9 @@ meleestrugglevsdog() {
 }
 
 playsound_victim(var_0) {
-  if(isDefined(self.syncedmeleetarget.controlling_dog))
+  if(isDefined(self.syncedmeleetarget.controlling_dog)) {
     var_0 = var_0 + "plr";
+  }
 
   thread animscripts\face::saygenericdialogue(var_0);
 }
@@ -1067,8 +1131,9 @@ meleestrugglevsdog_interruptedcheck() {
   var_0[1] = % ai_attacked_german_shepherd_02_getup_a;
   var_0[2] = % ai_attacked_german_shepherd_02_getup_a;
 
-  if(self.syncedmeleetarget.meleekilltarget)
+  if(self.syncedmeleetarget.meleekilltarget) {
     var_0[4] = % ai_attacked_german_shepherd_04_getup_a;
+  }
 
   for(;;) {
     if(!isDefined(self.syncedmeleetarget) || !isalive(self.syncedmeleetarget)) {
@@ -1118,8 +1183,9 @@ meleestrugglevsdog_collision(var_0) {
   var_1 endon("death");
   var_1 endon("killanimscript");
 
-  if(isDefined(var_0) && var_0 > 0)
+  if(isDefined(var_0) && var_0 > 0) {
     wait(var_0);
+  }
 
   var_1.doglastknowngoodpos = var_1.origin;
 
@@ -1142,8 +1208,9 @@ meleestrugglevsdog_collision(var_0) {
         var_7 = var_5 + (0, 0, -9);
         var_8 = self aiphysicstrace(var_6, var_7);
 
-        if(var_8[2] > var_5[2])
+        if(var_8[2] > var_5[2]) {
           var_5 = var_8;
+        }
 
         self forceteleport(var_5, self.angles, 60);
       }
@@ -1197,8 +1264,9 @@ domeleevsdog(var_0, var_1, var_2) {
   self.a.pose = "stand";
   self.a.special = "none";
 
-  if(animscripts\utility::usingsidearm())
+  if(animscripts\utility::usingsidearm()) {
     animscripts\shared::placeweaponon(self.primaryweapon, "right");
+  }
 
   self.ragdoll_immediate = 1;
   self.meleeseq = 0;
@@ -1317,19 +1385,22 @@ playerview_checkinterrupted(var_0) {
 }
 
 playerview_startsequence(var_0) {
-  if(isDefined(self.inseq))
+  if(isDefined(self.inseq)) {
     return 0;
+  }
 
   var_1 = var_0.meleeingplayer;
 
-  if(isDefined(var_1) && isDefined(var_1.placingsentry))
+  if(isDefined(var_1) && isDefined(var_1.placingsentry)) {
     var_1 notify("sentry_placement_canceled");
+  }
 
   var_1 notify("dog_attacks_player");
   self.inseq = 1;
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     var_1 hidehud();
+  }
 
   var_1 setstance("stand");
   var_1.syncedmeleetarget = var_0;
@@ -1341,10 +1412,12 @@ playerview_startsequence(var_0) {
   var_3 = var_1.origin;
   var_4 = var_1 getdroptofloorposition(var_1.origin);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     self.origin = var_4;
-  else
+  }
+  else {
     self.origin = var_1.origin;
+  }
 
   thread playerview_knockdownanim(var_0);
   self dontinterpolate();
@@ -1382,19 +1455,22 @@ playerview_endsequence(var_0) {
     if(isDefined(self.necksnapped)) {
       self setflaggedanimrestart("viewanim", % player_view_dog_knockdown_neck_snap, 1, 0.2, 1);
 
-      if(isDefined(self.playerdrone))
+      if(isDefined(self.playerdrone)) {
         self.playerdrone playerdone_anim_neck_snap();
+      }
     } else if(isDefined(var_0.dog_downed_player)) {
       self setflaggedanimknobrestart("viewanim", % player_view_dog_knockdown_laststand, 1, 0.1, 1);
 
-      if(isDefined(self.playerdrone))
+      if(isDefined(self.playerdrone)) {
         self.playerdrone playerdone_anim_laststand();
+      }
     } else {
       thread savednotify(var_0);
       self setflaggedanimrestart("viewanim", % player_view_dog_knockdown_saved);
 
-      if(isDefined(self.playerdrone))
+      if(isDefined(self.playerdrone)) {
         self.playerdrone playerdone_anim_saved();
+      }
     }
 
     if(!isDefined(var_0.dog_downed_player)) {
@@ -1425,8 +1501,9 @@ playerview_unlinkplayeranddelete(var_0) {
   var_1 = var_0.player_view;
 
   if(isDefined(var_1)) {
-    if(isDefined(var_1.playerdrone))
+    if(isDefined(var_1.playerdrone)) {
       var_1.playerdrone delete();
+    }
 
     var_1 delete();
     var_0.player_view = undefined;
@@ -1467,16 +1544,18 @@ playerview_playknockdownanimlimited(var_0) {
   self setflaggedanimlimited("viewanim", % player_view_dog_knockdown, 1, 0.2, var_0);
   self setflaggedanimlimited("viewanim", % player_view_dog_knockdown_late, 1, 0.2, var_0);
 
-  if(isDefined(self.playerdrone))
+  if(isDefined(self.playerdrone)) {
     self.playerdrone playerdrone_anim_knockdown(var_0);
+  }
 }
 
 playerview_playknockdownanim(var_0) {
   self setflaggedanimlimited("viewanim", % player_view_dog_knockdown, 1, 0.2, var_0);
   self setflaggedanimlimited("viewanim", % player_view_dog_knockdown_late, 1, 0.2, var_0);
 
-  if(isDefined(self.playerdrone))
+  if(isDefined(self.playerdrone)) {
     self.playerdrone playerdrone_anim_knockdown(var_0);
+  }
 }
 
 playerview_playmissanim(var_0) {
@@ -1493,8 +1572,9 @@ dog_vs_player_anim_rate() {
 }
 
 is_hyena() {
-  if(issubstr(self.classname, "hyena"))
+  if(issubstr(self.classname, "hyena")) {
     return 1;
+  }
 
   return 0;
 }
@@ -1504,23 +1584,27 @@ ragdoll_corpses() {
   var_0 = getcorpsearray();
 
   foreach(var_2 in var_0) {
-    if(var_2 isragdoll() == 0)
+    if(var_2 isragdoll() == 0) {
       var_2 startragdoll();
+    }
   }
 }
 
 handlevxnotetrack(var_0) {
   if(common_scripts\utility::string_starts_with(var_0, "vfx")) {
-    if(isDefined(level._effect[var_0]))
+    if(isDefined(level._effect[var_0])) {
       playFXOnTag(common_scripts\utility::getfx(var_0), self, "TAG_MOUTH_FX");
+    }
   } else if(common_scripts\utility::string_starts_with(var_0, "screen_blood")) {
     if(isDefined(self.controlling_dog)) {
       var_1 = "bottom";
 
-      if(issubstr(var_0, "right"))
+      if(issubstr(var_0, "right")) {
         var_1 = "right";
-      else if(issubstr(var_0, "left"))
+      }
+      else if(issubstr(var_0, "left")) {
         var_1 = "left";
+      }
 
       self notify("screen_blood", var_1);
     }

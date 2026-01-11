@@ -146,8 +146,9 @@ exploders_watch_late_players() {
 }
 
 exploder_cache(index) {
-  if(!isDefined(level.exploders_cached))
+  if(!isDefined(level.exploders_cached)) {
     level.exploders_cached = [];
+  }
 
   exploderData = spawnStruct();
   exploderData.index = (index);
@@ -264,11 +265,13 @@ random_destruction_preprocess(destructible_array) {
 
     before_offset = undefined;
     after_offset = undefined;
-    if(isDefined(before_start_origin) && isDefined(before_end_origin))
+    if(isDefined(before_start_origin) && isDefined(before_end_origin)) {
       before_offset = before_end_origin - before_start_origin;
+    }
 
-    if(isDefined(after_start_origin) && isDefined(after_end_origin))
+    if(isDefined(after_start_origin) && isDefined(after_end_origin)) {
       after_offset = after_end_origin - after_start_origin;
+    }
 
     ents = getEntArray(element.target, "targetname");
     foreach(destructible_element in ents) {
@@ -276,12 +279,14 @@ random_destruction_preprocess(destructible_array) {
         case "destructible_before":
 
           destructible_before[destructible_before.size] = destructible_element;
-          if(isDefined(before_offset))
+          if(isDefined(before_offset)) {
             destructible_element.origin += before_offset;
+          }
           break;
         case "destructible_after":
-          if(isDefined(after_offset))
+          if(isDefined(after_offset)) {
             destructible_element.origin += after_offset;
+          }
           destructible_element trigger_off();
           break;
         case "loop_sound_ent":
@@ -309,8 +314,9 @@ random_destruction_preprocess(destructible_array) {
 #using_animtree("animated_props");
 
 plane_crash_init() {
-  if(!isDefined(self.target))
+  if(!isDefined(self.target)) {
     return;
+  }
   if(!isDefined(self.script_animation) || !isDefined(level.plane_crash_anims[self.script_animation])) {
     return;
   }
@@ -329,8 +335,9 @@ plane_crash_init() {
         break;
       case "scene_node":
         self.scene_node = target;
-        if(!isDefined(self.scene_node.angles))
+        if(!isDefined(self.scene_node.angles)) {
           self.scene_node.angles = (0, 0, 0);
+        }
         break;
       case "show":
         target Hide();
@@ -372,8 +379,9 @@ plane_crash_init() {
 plan_crash_run(waitTime) {
   level endon("stop_dynamic_events");
 
-  if(isDefined(waitTime))
+  if(isDefined(waitTime)) {
     wait waitTime;
+  }
 
   if(isDefined(self.scene_node)) {
     self.plane.origin = self.scene_node.origin;
@@ -402,8 +410,9 @@ run_anim_events(events) {
       if((GetTime() - start_time) / 1000 >= event.time) {
         self notify(event.note);
         event.done = true;
-        if(event.note == "end")
+        if(event.note == "end") {
           return;
+        }
       }
     }
     wait .05;
@@ -512,8 +521,9 @@ random_mortars_fire_run(start_org, end_org, air_time, owner, launch_dir, play_fx
 
   mortar_model waittill("movedone");
 
-  if(level.createFX_enabled && !isDefined(level.players))
+  if(level.createFX_enabled && !isDefined(level.players)) {
     level.players = [];
+  }
 
   if(isDefined(owner)) {
     mortar_model RadiusDamage(end_org, 250, 750, 500, owner, "MOD_EXPLOSIVE", "warhawk_mortar_mp");
@@ -550,8 +560,9 @@ random_mortars_incoming_sound(org) {
 
 random_mortars_get_target() {
   targets = getstructarray(self.target, "targetname");
-  if(targets.size == 0)
+  if(targets.size == 0) {
     return undefined;
+  }
 
   target = random(targets);
 
@@ -620,8 +631,9 @@ jet_flyby() {
         start = spawnStruct();
         end = spawnStruct();
 
-        if(!isDefined(plane.radius))
+        if(!isDefined(plane.radius)) {
           plane.radius = 8000;
+        }
 
         fly_angles = (0, RandomFloatRange(0, 360), 0);
         fly_dir = anglesToForward(fly_angles);
@@ -676,16 +688,18 @@ air_raid() {
 
   level.air_raids = getstructarray("air_raid", "targetname");
   foreach(air_raid_path in level.air_raids) {
-    if(!isDefined(air_raid_path.radius))
+    if(!isDefined(air_raid_path.radius)) {
       air_raid_path.radius = 300;
+    }
 
     air_raid_path.current_end = 0;
     air_raid_path.ends = [];
     end = air_raid_path;
     while(isDefined(end.target)) {
       end = getstruct(end.target, "targetname");
-      if(!isDefined(end.radius))
+      if(!isDefined(end.radius)) {
         end.radius = 100;
+      }
       air_raid_path.ends[air_raid_path.ends.size] = end;
     }
   }
@@ -731,11 +745,13 @@ air_raid_fire(delay_min, delay_max, mortar_time_sec, owner) {
         continue;
       }
       if(level.teamBased) {
-        if(player.team == level.air_raid_team_called)
+        if(player.team == level.air_raid_team_called) {
           continue;
+        }
       } else {
-        if(isDefined(owner) && player == owner)
+        if(isDefined(owner) && player == owner) {
           continue;
+        }
       }
 
       if(player.spawnTime + 8000 > GetTime()) {
@@ -763,13 +779,15 @@ air_raid_fire(delay_min, delay_max, mortar_time_sec, owner) {
     while(mortars_launched < mortars_per_loop) {
       start_struct = level.air_raids[air_raid_num];
       air_raid_num++;
-      if(air_raid_num >= level.air_raids.size)
+      if(air_raid_num >= level.air_raids.size) {
         air_raid_num = 0;
+      }
 
       end_struct = start_struct.ends[start_struct.current_end];
       start_struct.current_end++;
-      if(start_struct.current_end >= start_struct.ends.size)
+      if(start_struct.current_end >= start_struct.ends.size) {
         start_struct.current_end = 0;
+      }
 
       start = random_point_in_circle(start_struct.origin, start_struct.radius);
       end = random_point_in_circle(end_struct.origin, end_struct.radius);
@@ -800,8 +818,9 @@ heli_anims() {
   heli_index = heli_anims.size;
 
   foreach(heli in heli_anims) {
-    if(!isDefined(heli.angles))
+    if(!isDefined(heli.angles)) {
       heli.angles = (0, 0, 0);
+    }
   }
 
   while(1) {

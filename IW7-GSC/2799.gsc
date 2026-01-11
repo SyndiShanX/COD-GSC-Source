@@ -4,8 +4,9 @@
 ***************************************/
 
 checkdynamicspawns(var_00) {
-  if(isDefined(level.dynamicspawns))
+  if(isDefined(level.dynamicspawns)) {
     var_00 = [[level.dynamicspawns]](var_00);
+  }
 
   return var_00;
 }
@@ -16,8 +17,9 @@ selectbestspawnpoint(var_00, var_01) {
 }
 
 func_6CB1() {
-  if(!level.teambased || isDefined(level.func_112BF) && !level.func_112BF)
+  if(!level.teambased || isDefined(level.func_112BF) && !level.func_112BF) {
     return undefined;
+  }
 
   var_00 = isonground(self.team);
   var_01 = [];
@@ -36,8 +38,9 @@ func_6CB1() {
     var_5.isdynamicspawn = 1;
     var_05 scripts\mp\spawnlogic::func_108FA();
 
-    if(isDefined(var_3.analyticslog) && isDefined(var_3.analyticslog.playerid))
+    if(isDefined(var_3.analyticslog) && isDefined(var_3.analyticslog.playerid)) {
       var_5.buddyspawnid = var_3.analyticslog.playerid;
+    }
 
     var_1[var_1.size] = var_05;
   }
@@ -56,8 +59,9 @@ func_6CB1() {
   var_10 = undefined;
 
   foreach(var_05 in var_07) {
-    if(!isDefined(var_10) || var_5.totalscore > var_10.totalscore)
+    if(!isDefined(var_10) || var_5.totalscore > var_10.totalscore) {
       var_10 = var_05;
+    }
   }
 
   return var_10;
@@ -72,8 +76,9 @@ func_7E0F(var_00, var_01) {
   var_02 = (0, var_0.angles[1], 0);
   var_03 = findentrances(var_01);
 
-  if(isDefined(var_03) && var_3.size > 0)
+  if(isDefined(var_03) && var_3.size > 0) {
     var_02 = vectortoangles(var_3[0].origin - var_01);
+  }
 
   return var_02;
 }
@@ -98,23 +103,29 @@ isonground(var_00) {
 }
 
 canplayerbebuddyspawnedon(var_00) {
-  if(var_0.sessionstate != "playing")
+  if(var_0.sessionstate != "playing") {
     return 0;
+  }
 
-  if(!scripts\mp\utility\game::isreallyalive(var_00))
+  if(!scripts\mp\utility\game::isreallyalive(var_00)) {
     return 0;
+  }
 
-  if(!var_00 isonground())
+  if(!var_00 isonground()) {
     return 0;
+  }
 
-  if(var_00 isonladder())
+  if(var_00 isonladder()) {
     return 0;
+  }
 
-  if(var_00 scripts\engine\utility::isflashed())
+  if(var_00 scripts\engine\utility::isflashed()) {
     return 0;
+  }
 
-  if(var_0.health < var_0.maxhealth && (!isDefined(var_0.lastdamagedtime) || gettime() < var_0.lastdamagedtime + 3000))
+  if(var_0.health < var_0.maxhealth && (!isDefined(var_0.lastdamagedtime) || gettime() < var_0.lastdamagedtime + 3000)) {
     return 0;
+  }
 
   return 1;
 }
@@ -123,8 +134,9 @@ findspawnlocationnearplayer(var_00) {
   var_01 = scripts\mp\spawnlogic::getplayertraceheight(var_00, 1);
   var_02 = findbuddypathnode(var_00, var_01, 0.5);
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     return var_2.origin;
+  }
 
   return undefined;
 }
@@ -250,50 +262,61 @@ func_11748(var_00) {
     return "bad";
   }
 
-  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B3, var_00))
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B3, var_00)) {
     return "secondary";
+  }
 
-  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26AE, var_00))
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26AE, var_00)) {
     return "secondary";
+  }
 
   return "primary";
 }
 
 func_11746(var_00) {
-  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B7, var_00))
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B7, var_00)) {
     return 0;
+  }
 
-  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B8, var_00))
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26B8, var_00)) {
     return 0;
+  }
 
-  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26BC, var_00))
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26BC, var_00)) {
     return 0;
+  }
 
-  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26AB, var_00))
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26AB, var_00)) {
     return 0;
+  }
 
-  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::avoidcarepackages, var_00))
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::avoidcarepackages, var_00)) {
     return 0;
+  }
 
-  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26C4, var_00))
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26C4, var_00)) {
     return 0;
+  }
 
-  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26AE, var_00))
+  if(!scripts\mp\spawnfactor::critical_factor(scripts\mp\spawnfactor::func_26AE, var_00)) {
     return 0;
+  }
 
   return 1;
 }
 
 getstartspawnpoint_freeforall(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return undefined;
+  }
 
   var_01 = undefined;
   var_02 = scripts\mp\spawnlogic::getactiveplayerlist();
   var_00 = checkdynamicspawns(var_00);
 
-  if(!isDefined(var_02) || var_2.size == 0)
+  if(!isDefined(var_02) || var_2.size == 0) {
     return scripts\mp\spawnlogic::getspawnpoint_random(var_00);
+  }
 
   var_03 = 0;
 
@@ -304,8 +327,9 @@ getstartspawnpoint_freeforall(var_00) {
       foreach(var_08 in var_02) {
         var_09 = distancesquared(var_5.origin, var_8.origin);
 
-        if(!isDefined(var_06) || var_09 < var_06)
+        if(!isDefined(var_06) || var_09 < var_06) {
           var_06 = var_09;
+        }
       }
 
       if(!isDefined(var_01) || var_06 > var_03) {
@@ -315,8 +339,9 @@ getstartspawnpoint_freeforall(var_00) {
     }
   }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return scripts\mp\spawnlogic::getspawnpoint_random(var_00);
+  }
 
   return var_01;
 }
@@ -325,13 +350,16 @@ logbadspawn(var_00, var_01) {
   if(isDefined(var_01) && isDefined(var_1.disablespawnwarnings) && var_1.disablespawnwarnings) {
     return;
   }
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = "";
-  else
+  }
+  else {
     var_00 = var_00;
+  }
 
-  if(isDefined(level.matchrecording_logeventmsg))
+  if(isDefined(level.matchrecording_logeventmsg)) {
     [[level.matchrecording_logeventmsg]]("LOG_BAD_SPAWN", gettime(), var_00);
+  }
 }
 
 getspawnpoint(var_00, var_01, var_02, var_03) {
@@ -340,8 +368,9 @@ getspawnpoint(var_00, var_01, var_02, var_03) {
   if(level.func_72A2) {
     var_04 = func_6CB1();
 
-    if(isDefined(var_04))
+    if(isDefined(var_04)) {
       return var_04;
+    }
   }
 
   var_05 = undefined;
@@ -349,10 +378,12 @@ getspawnpoint(var_00, var_01, var_02, var_03) {
   var_06 = getmuzzlepos(var_00, var_02, 0);
 
   if(isDefined(var_06)) {
-    if(!scripts\mp\utility\game::istrue(var_6.func_9D60))
+    if(!scripts\mp\utility\game::istrue(var_6.func_9D60)) {
       return var_06;
-    else
+    }
+    else {
       var_05 = var_06;
+    }
   }
 
   if(isDefined(var_01)) {
@@ -360,8 +391,9 @@ getspawnpoint(var_00, var_01, var_02, var_03) {
 
     if(isDefined(var_07)) {
       if(scripts\mp\utility\game::istrue(var_7.func_9D60)) {
-        if(!isDefined(var_05) || var_7.totalscore > var_5.totalscore)
+        if(!isDefined(var_05) || var_7.totalscore > var_5.totalscore) {
           var_05 = var_07;
+        }
       } else {
         logbadspawn("Using a fallback spawn.", self);
         return var_07;
@@ -369,8 +401,9 @@ getspawnpoint(var_00, var_01, var_02, var_03) {
     }
   }
 
-  if(scripts\mp\utility\game::istrue(var_03))
+  if(scripts\mp\utility\game::istrue(var_03)) {
     return undefined;
+  }
 
   logbadspawn("Using a LastResort spawn point.", self);
   var_08 = func_6CB1();
@@ -379,8 +412,9 @@ getspawnpoint(var_00, var_01, var_02, var_03) {
     var_8.spawntype = 7;
     level.spawnglobals.budy_death_watcher = 0;
 
-    if(isDefined(var_8.buddyspawnid))
+    if(isDefined(var_8.buddyspawnid)) {
       level.spawnglobals.buddyspawnid = var_8.buddyspawnid;
+    }
 
     return var_08;
   }
@@ -390,10 +424,12 @@ getspawnpoint(var_00, var_01, var_02, var_03) {
   if(level.teambased && !scripts\mp\utility\game::isanymlgmatch()) {
     var_09 = level.spawnglobals.lastbadspawntime[self.team];
 
-    if(isDefined(var_09) && gettime() - var_09 < 5000)
+    if(isDefined(var_09) && gettime() - var_09 < 5000) {
       var_05 = var_0[randomint(var_0.size)];
-    else
+    }
+    else {
       level.spawnglobals.lastbadspawntime[self.team] = gettime();
+    }
   }
 
   return var_05;
@@ -406,11 +442,13 @@ getmuzzlepos(var_00, var_01, var_02) {
   var_3["bad"] = [];
 
   if(scripts\mp\spawnlogic::shoulduseprecomputedlos() && !scripts\mp\spawnlogic::isttlosdataavailable()) {
-    if(isDefined(level.matchrecording_logeventmsg))
+    if(isDefined(level.matchrecording_logeventmsg)) {
       [[level.matchrecording_logeventmsg]]("LOG_GENERIC_MESSAGE", gettime(), "ERROR: TTLOS System disabled! Could not access visDistData");
+    }
 
-    if(!isDefined(level.func_8C28))
+    if(!isDefined(level.func_8C28)) {
       level.func_8C28 = 1;
+    }
 
     level.func_560C = 1;
     scripts\mp\spawnlogic::func_E2B6();
@@ -454,8 +492,9 @@ getmuzzlepos(var_00, var_01, var_02) {
     logbadspawn("Using Bad Spawn", self);
     var_06 = func_7F01(var_3["bad"], var_01);
 
-    if(isDefined(var_06))
+    if(isDefined(var_06)) {
       var_6.func_9D60 = 1;
+    }
 
     return var_06;
   }
@@ -469,8 +508,9 @@ func_7F01(var_00, var_01) {
   foreach(var_04 in var_00) {
     scripts\mp\spawnlogic::func_EC46(var_04, var_01);
 
-    if(var_4.totalscore > var_2.totalscore)
+    if(var_4.totalscore > var_2.totalscore) {
       var_02 = var_04;
+    }
   }
 
   var_02 = selectbestspawnpoint(var_02, var_00);

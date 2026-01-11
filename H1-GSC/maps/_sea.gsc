@@ -22,8 +22,9 @@ main() {
 
   level.sea_black = getent("sea_black", "targetname");
 
-  if(isDefined(level.sea_black))
+  if(isDefined(level.sea_black)) {
     level.sea_black linkto(level._sea_link);
+  }
 
   common_scripts\utility::flag_init("_sea_waves");
   common_scripts\utility::flag_init("_sea_viewbob");
@@ -32,8 +33,9 @@ main() {
   common_scripts\utility::flag_set("_sea_viewbob");
   var_0 = getEntArray("boat_sway", "script_noteworthy");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     common_scripts\utility::array_thread(var_0, ::sea_objectbob, level._sea_org);
+  }
 
   thread sea_logic();
   return;
@@ -62,10 +64,12 @@ sea_logic() {
 sea_objectbob_precalc(var_0, var_1) {
   self.waittime = randomfloatrange(0.5, 1);
 
-  if(isDefined(self.setscale))
+  if(isDefined(self.setscale)) {
     self.scale = self.setscale;
-  else
+  }
+  else {
     self.scale = randomfloatrange(2, 3);
+  }
 
   var_2 = 0;
   var_3 = 0;
@@ -83,10 +87,12 @@ sea_objectbob_precalc(var_0, var_1) {
     var_4 = var_0.rotation[0] * self.pratio * self.scale + var_0.rotation[2] * self.rratio * self.scale;
 
     if(var_2 < abs(var_4)) {
-      if(var_4 < 1)
+      if(var_4 < 1) {
         var_3 = var_2 * -1;
-      else
+      }
+      else {
         var_3 = var_2;
+      }
     } else
       var_3 = var_4;
 
@@ -99,8 +105,9 @@ sea_objectbob(var_0) {
   if(isDefined(self.targetname)) {
     var_1 = getEntArray(self.targetname, "target");
 
-    for(var_2 = 0; var_2 < var_1.size; var_2++)
+    for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_1[var_2] linkto(self);
+    }
   }
 
   var_3 = common_scripts\utility::getstructarray(self.target, "targetname");
@@ -163,10 +170,12 @@ sea_objectbob(var_0) {
     var_11 = undefined;
     var_12 = (0, 360, 0);
 
-    if(!isDefined(var_3[1]))
+    if(!isDefined(var_3[1])) {
       var_11 = var_3[0].angles;
-    else
+    }
+    else {
       var_11 = vectortoangles(var_5 - var_4);
+    }
 
     var_6.rratio = vectordot(anglestoright(var_11), anglestoright(var_12));
     var_6.pratio = vectordot(anglestoright(var_11), anglesToForward(var_12));
@@ -175,8 +184,9 @@ sea_objectbob(var_0) {
   self.link = var_6;
   self notify("got_link");
 
-  for(var_2 = 0; var_2 < var_3.size; var_2++)
+  for(var_2 = 0; var_2 < var_3.size; var_2++) {
     var_3[var_2] thread sea_objectbob_findparent(var_6, var_0);
+  }
 
   wait 0.05;
   self linkto(var_6);
@@ -188,25 +198,29 @@ sea_objectbob(var_0) {
 
 sea_objectbob_logic(var_0, var_1) {
   for(;;) {
-    if(var_0.sway == "sway2")
+    if(var_0.sway == "sway2") {
       var_0 waittill("sway1");
+    }
 
     var_1 sea_objectbob_precalc(var_0, "sway1");
     var_1 notify("precalcdone1");
 
-    if(!isDefined(var_1.parent))
+    if(!isDefined(var_1.parent)) {
       wait(var_1.waittime);
+    }
 
     var_1 rotateto(var_1.ang, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
 
-    if(var_0.sway == "sway1")
+    if(var_0.sway == "sway1") {
       var_0 waittill("sway2");
+    }
 
     var_1 sea_objectbob_precalc(var_0, "sway2");
     var_1 notify("precalcdone2");
 
-    if(!isDefined(var_1.parent))
+    if(!isDefined(var_1.parent)) {
       wait(var_1.waittime);
+    }
 
     var_1 rotateto(var_1.ang, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
   }
@@ -225,8 +239,9 @@ sea_objectbob_findparent(var_0, var_1) {
   }
   var_0.parent = getent(self.target, "targetname");
 
-  if(!isDefined(var_0.parent.link))
+  if(!isDefined(var_0.parent.link)) {
     var_0.parent waittill("got_link");
+  }
 
   var_2 = var_0.parent.link;
   var_3 = var_0.origin;
@@ -262,8 +277,9 @@ sea_bob() {
     self.sway = "sway1";
     self notify("sway1");
 
-    if(common_scripts\utility::flag("_sea_bob"))
+    if(common_scripts\utility::flag("_sea_bob")) {
       level._sea_link rotateto(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
+    }
 
     self rotateto(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
     level.heli.heightsea = 110;
@@ -273,8 +289,9 @@ sea_bob() {
     self.sway = "sway2";
     self notify("sway2");
 
-    if(common_scripts\utility::flag("_sea_bob"))
+    if(common_scripts\utility::flag("_sea_bob")) {
       level._sea_link rotateto(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
+    }
 
     self rotateto(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
     level.heli.heightsea = 180;
@@ -326,8 +343,9 @@ sea_waves_fx(var_0, var_1) {
   var_2 = 2;
   var_3 = common_scripts\utility::random(sea_closestwavearray(var_0[var_1], var_2));
 
-  if(!isDefined(self.oldwaves[var_1]))
+  if(!isDefined(self.oldwaves[var_1])) {
     self.oldwaves[var_1] = var_3;
+  }
 
   while(self.oldwaves[var_1] == var_3) {
     wait 0.05;
@@ -347,16 +365,19 @@ sea_waves_fx2() {
 sea_closestwavearray(var_0, var_1) {
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_0.size; var_3++)
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_0[var_3]._sea_dist = distancesquared(var_0[var_3].origin, level.player.origin);
+  }
 
-  for(var_3 = 0; var_3 < var_0.size; var_3++)
+  for(var_3 = 0; var_3 < var_0.size; var_3++) {
     var_2 = sea_closestwavelogic(var_2, var_0[var_3]);
+  }
 
   var_4 = [];
 
-  for(var_3 = 0; var_3 < var_1; var_3++)
+  for(var_3 = 0; var_3 < var_1; var_3++) {
     var_4[var_3] = var_2[var_3];
+  }
 
   return var_4;
 }
@@ -374,8 +395,9 @@ sea_closestwavelogic(var_0, var_1) {
     }
   }
 
-  if(var_2 == var_0.size)
+  if(var_2 == var_0.size) {
     var_0 = common_scripts\utility::array_add(var_0, var_1);
+  }
 
   return var_0;
 }
@@ -384,8 +406,9 @@ sea_waves_setup() {
   var_0 = common_scripts\utility::getstructarray("wave_fx", "targetname");
   var_1 = common_scripts\utility::getstruct("wave_fx_center", "targetname");
 
-  if(!var_0.size)
+  if(!var_0.size) {
     return undefined;
+  }
 
   var_2 = anglesToForward(var_1.angles);
   var_3 = anglestoright(var_1.angles);
@@ -410,8 +433,9 @@ sea_waves_setup() {
 
   var_6 = level._waves_exploders;
 
-  for(var_5 = 0; var_5 < var_6.size; var_5++)
+  for(var_5 = 0; var_5 < var_6.size; var_5++) {
     var_6[var_5].origin = var_6[var_5].v["origin"];
+  }
 
   for(var_5 = 0; var_5 < var_4["right"].size; var_5++) {
     var_7 = common_scripts\utility::getclosest(var_4["right"][var_5].origin, var_6, 64);
@@ -452,8 +476,9 @@ sea_viewbob() {
     common_scripts\utility::flag_wait("_sea_viewbob");
     level.player playersetgroundreferenceent(self);
 
-    if(common_scripts\utility::flag("_sea_viewbob"))
+    if(common_scripts\utility::flag("_sea_viewbob")) {
       level waittill("_sea_viewbob");
+    }
 
     level.player playersetgroundreferenceent(undefined);
   }

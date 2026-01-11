@@ -96,8 +96,9 @@ getclosests_flickering_model(origin) {
   array = getEntArray("light_flicker_model", "targetname");
   return_array = [];
   model = getclosest(origin, array);
-  if(isDefined(model))
+  if(isDefined(model)) {
     return_array[0] = model;
+  }
   return return_array;
 }
 

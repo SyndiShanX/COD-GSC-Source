@@ -231,8 +231,9 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   maps\_busing::businit();
   maps\_music::music_init();
   maps\_dds::dds_init();
-  if(!isDefined(level.reviveFeature))
+  if(!isDefined(level.reviveFeature)) {
     level.reviveFeature = true;
+  }
   anim.useFacialAnims = false;
   if(!isDefined(level.missionfailed)) {
     level.missionfailed = false;

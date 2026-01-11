@@ -55,8 +55,9 @@ electric_puzzle_watch_staff() {
           a_players = getplayers();
 
           foreach(e_player in a_players) {
-            if(e_player hasweapon("staff_lightning_zm"))
+            if(e_player hasweapon("staff_lightning_zm")) {
               level notify("vo_try_puzzle_lightning1", e_player);
+            }
           }
         }
       }
@@ -81,8 +82,9 @@ piano_keys_stop() {
 }
 
 show_chord_debug(a_chord_notes) {
-  if(!isDefined(a_chord_notes))
+  if(!isDefined(a_chord_notes)) {
     a_chord_notes = [];
+  }
 
   a_piano_keys = getstructarray("piano_key", "script_noteworthy");
 
@@ -124,19 +126,22 @@ piano_run_chords() {
 
         foreach(played_note in level.a_piano_keys_playing) {
           foreach(requested_note in s_chord.notes) {
-            if(requested_note == played_note)
+            if(requested_note == played_note) {
               correct_notes_playing++;
+            }
           }
         }
 
-        if(correct_notes_playing == 3)
+        if(correct_notes_playing == 3) {
           chord_solved = 1;
+        }
         else {
           a_players = getplayers();
 
           foreach(e_player in a_players) {
-            if(e_player hasweapon("staff_lightning_zm"))
+            if(e_player hasweapon("staff_lightning_zm")) {
               level notify("vo_puzzle_bad", e_player);
+            }
           }
         }
       }
@@ -145,8 +150,9 @@ piano_run_chords() {
     a_players = getplayers();
 
     foreach(e_player in a_players) {
-      if(e_player hasweapon("staff_lightning_zm"))
+      if(e_player hasweapon("staff_lightning_zm")) {
         level notify("vo_puzzle_good", e_player);
+      }
     }
 
     flag_set("piano_chord_ringing");
@@ -171,8 +177,9 @@ piano_key_run() {
     self waittill("piano_key_shot");
 
     if(!flag("piano_chord_ringing")) {
-      if(level.a_piano_keys_playing.size >= 3)
+      if(level.a_piano_keys_playing.size >= 3) {
         piano_keys_stop();
+      }
 
       self.e_fx = spawn("script_model", self.origin);
       self.e_fx playLoopSound("zmb_kbd_" + piano_key_note);
@@ -198,8 +205,9 @@ electric_puzzle_2_init() {
   level.electric_relays["ice"] = spawnStruct();
   level.electric_relays["village"] = spawnStruct();
 
-  foreach(s_relay in level.electric_relays)
+  foreach(s_relay in level.electric_relays) {
   s_relay.connections = [];
+  }
 
   level.electric_relays["tank_platform"].connections[0] = "ruins";
   level.electric_relays["start"].connections[1] = "tank_platform";
@@ -218,8 +226,9 @@ electric_puzzle_2_init() {
   level.electric_relays["village"].position = 1;
   a_switches = getEntArray("puzzle_relay_switch", "script_noteworthy");
 
-  foreach(e_switch in a_switches)
+  foreach(e_switch in a_switches) {
   level.electric_relays[e_switch.script_string].e_switch = e_switch;
+  }
 
   array_thread(level.electric_relays, ::relay_switch_run);
 }
@@ -230,14 +239,17 @@ electric_puzzle_2_run() {
 
 electric_puzzle_2_cleanup() {
   foreach(s_relay in level.electric_relays) {
-    if(isDefined(s_relay.trigger_stub))
+    if(isDefined(s_relay.trigger_stub)) {
       maps\mp\zombies\_zm_unitrigger::register_unitrigger(s_relay.trigger_stub);
+    }
 
-    if(isDefined(s_relay.e_switch))
+    if(isDefined(s_relay.e_switch)) {
       s_relay.e_switch stoploopsound(0.5);
+    }
 
-    if(isDefined(s_relay.e_fx))
+    if(isDefined(s_relay.e_fx)) {
       s_relay.e_fx delete();
+    }
   }
 }
 
@@ -279,8 +291,9 @@ update_relay_fx_and_sound() {
   }
   foreach(s_relay in level.electric_relays) {
     if(s_relay.sending_power) {
-      if(isDefined(s_relay.e_fx))
+      if(isDefined(s_relay.e_fx)) {
         s_relay.e_fx delete();
+      }
 
       s_relay.e_switch playLoopSound("zmb_squest_elec_switch_hum", 1);
       continue;
@@ -299,8 +312,9 @@ update_relay_fx_and_sound() {
       continue;
     }
 
-    if(isDefined(s_relay.e_fx))
+    if(isDefined(s_relay.e_fx)) {
       s_relay.e_fx delete();
+    }
 
     s_relay.e_switch stoploopsound(1);
   }
@@ -339,12 +353,14 @@ relay_switch_run() {
     str_target_relay = self.connections[self.position];
 
     if(isDefined(str_target_relay)) {
-      if(str_target_relay == "village" || str_target_relay == "ruins")
+      if(str_target_relay == "village" || str_target_relay == "ruins") {
         level notify("vo_puzzle_good", e_user);
+      }
     } else if(n_tries % 8 == 0)
       level notify("vo_puzzle_confused", e_user);
-    else if(n_tries % 4 == 0)
+    else if(n_tries % 4 == 0) {
       level notify("vo_puzzle_bad", e_user);
+    }
 
     self update_relay_rotation();
     update_relays();

@@ -6,8 +6,9 @@
 catchup_function() {
   var_0 = ["landing_zpus"];
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   maps\_utility::array_delete(getEntArray(var_2, "targetname"));
+  }
 
   maps\oilrocks_apache_code::spawn_apache_allies("apache_landing_ally_0");
   maps\oilrocks_apache_code::spawn_blackhawk_ally("apache_landing_blackhawk_ally", undefined, undefined, 0);
@@ -59,13 +60,15 @@ objective_player_clears_landing() {
   maps\oilrocks_apache_code::spawn_vehicles_from_targetname_prunespawning("landing_zpus");
   var_2 = get_landing_zpus();
 
-  if(var_2.size)
+  if(var_2.size) {
     maps\_utility::waittill_dead(var_2);
+  }
 
   var_1 = maps\_utility::array_removedead_or_dying(var_1);
 
-  if(var_1.size)
+  if(var_1.size) {
     maps\_utility::waittill_dead(var_1, 6);
+  }
 
   return var_0;
 }
@@ -78,8 +81,9 @@ get_landing_zpus() {
 
   foreach(var_5 in var_3) {
     if(distancesquared(var_5.origin, var_1.origin) < var_2) {
-      if(isalive(var_5) && var_5.classname == "script_vehicle_zpu4_oilrocks")
+      if(isalive(var_5) && var_5.classname == "script_vehicle_zpu4_oilrocks") {
         var_0[var_0.size] = var_5;
+      }
     }
   }
 
@@ -100,8 +104,9 @@ blackhawk_landing(var_0, var_1, var_2) {
   var_6.origin = maps\_utility::add_z(var_6.origin, var_7);
   var_6.angles = var_4.angles;
 
-  if(var_3 maps\_utility::ent_flag_exist("blackhawk_reached_end"))
+  if(var_3 maps\_utility::ent_flag_exist("blackhawk_reached_end")) {
     var_3 maps\_utility::ent_flag_wait("blackhawk_reached_end");
+  }
 
   var_8 = (var_6.origin + var_3.origin) * 0.5;
   var_3 setvehgoalpos(var_8, 1);
@@ -131,8 +136,9 @@ spawn_gaz(var_0) {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-    if(var_4.riders.size)
+    if(var_4.riders.size) {
       var_2 = common_scripts\utility::array_combine(var_2, var_4.riders);
+    }
   }
 
   maps\_utility::waittill_dead(var_2);
@@ -168,7 +174,8 @@ kill_enemies_touching_trigger(var_0) {
   var_1 = getaiarray("axis");
 
   foreach(var_3 in var_1) {
-    if(var_3 istouching(var_0))
+    if(var_3 istouching(var_0)) {
       var_3 kill();
+    }
   }
 }

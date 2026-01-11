@@ -87,8 +87,9 @@ main() {
   clientscripts\_utility::registerSystem("levelNotify", ::levelNotifyHandler);
   clientscripts\_utility::registerSystem("lsm", ::last_stand_monitor);
   level.createFX_enabled = (getdvar("createfx") != "");
-  if(!isDefined(level.scr_anim))
+  if(!isDefined(level.scr_anim)) {
     level.scr_anim[0][0] = 0;
+  }
   clientscripts\_global_fx::main();
   clientscripts\_busing::busInit();
   clientscripts\_ambientpackage::init();

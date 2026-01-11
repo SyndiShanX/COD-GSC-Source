@@ -21,6 +21,7 @@ main() {
   level._effect["light_shaft_dust_large_mp_vacant_sidewall"] = loadfx("dust/light_shaft_dust_large_mp_vacant_sidewall");
 
   /#		
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_vacant_fx::main();
+  }
 }

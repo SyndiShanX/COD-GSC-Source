@@ -10,8 +10,9 @@ init() {
   createthreatbiasgroup("vanguard");
   setignoremegroup("vanguard", "dontattackdrill");
 
-  for(var_0 = 1; var_0 <= 2; var_0++)
+  for(var_0 = 1; var_0 <= 2; var_0++) {
     thread vanguard_activate_wait_for_access_notify(var_0);
+  }
 }
 
 vanguard_activate_wait_for_access_notify(var_0) {
@@ -47,8 +48,9 @@ setup_heli_range() {
   level.vanguardrangetriggers = getEntArray("remote_heli_range", "targetname");
   level.vanguardmaxheightent = getent("airstrikeheight", "targetname");
 
-  if(isDefined(level.vanguardmaxheightent))
+  if(isDefined(level.vanguardmaxheightent)) {
     level.vanguardmaxheight = level.vanguardmaxheightent.origin[2];
+  }
 }
 
 alien_vanguard_wait_and_cleanup(var_0, var_1) {
@@ -66,8 +68,9 @@ vanguard_activate_think(var_0, var_1, var_2) {
     var_0 sethintstring(&"MP_ALIEN_DESCENT_VANGUARD_ACTIVATE");
 
     foreach(var_4 in level.players) {
-      if(isDefined(var_4.lowermessage))
+      if(isDefined(var_4.lowermessage)) {
         var_4 maps\mp\_utility::setlowermessage("vanguard_use_hint", &"MP_ALIEN_DESCENT_VANGUARD_USE_HINT", 3.5);
+      }
     }
 
     for(;;) {
@@ -133,49 +136,58 @@ find_valid_vanguard_spawn_point(var_0, var_1) {
   var_5 = var_4 + (0, 0, var_1);
   var_6 = var_5 - var_0 * var_2;
 
-  if(check_vanguard_spawn_point(var_4, var_6))
+  if(check_vanguard_spawn_point(var_4, var_6)) {
     return var_6;
+  }
 
   var_6 = var_5 + var_0 * var_2;
 
-  if(check_vanguard_spawn_point(var_4, var_6))
+  if(check_vanguard_spawn_point(var_4, var_6)) {
     return var_6;
+  }
 
   var_6 = var_6 + var_0 * var_3;
 
-  if(check_vanguard_spawn_point(var_4, var_6))
+  if(check_vanguard_spawn_point(var_4, var_6)) {
     return var_6;
+  }
 
   var_6 = var_5 - var_0 * var_3;
 
-  if(check_vanguard_spawn_point(var_4, var_6))
+  if(check_vanguard_spawn_point(var_4, var_6)) {
     return var_6;
+  }
 
   var_6 = var_5;
 
-  if(check_vanguard_spawn_point(var_4, var_6))
+  if(check_vanguard_spawn_point(var_4, var_6)) {
     return var_6;
+  }
 
   common_scripts\utility::waitframe();
   var_6 = var_5 + 0.707 * var_0 * (var_2 + var_3);
 
-  if(check_vanguard_spawn_point(var_4, var_6))
+  if(check_vanguard_spawn_point(var_4, var_6)) {
     return var_6;
+  }
 
   var_6 = var_5 + 0.707 * var_0 * (var_2 - var_3);
 
-  if(check_vanguard_spawn_point(var_4, var_6))
+  if(check_vanguard_spawn_point(var_4, var_6)) {
     return var_6;
+  }
 
   var_6 = var_5 + 0.707 * var_0 * (var_3 - var_2);
 
-  if(check_vanguard_spawn_point(var_4, var_6))
+  if(check_vanguard_spawn_point(var_4, var_6)) {
     return var_6;
+  }
 
   var_6 = var_5 + 0.707 * var_0 * (-1 * var_2 - var_3);
 
-  if(check_vanguard_spawn_point(var_4, var_6))
+  if(check_vanguard_spawn_point(var_4, var_6)) {
     return var_6;
+  }
 
   return undefined;
 }
@@ -183,8 +195,9 @@ find_valid_vanguard_spawn_point(var_0, var_1) {
 find_vanguard_spawn_angles() {
   var_0 = (0, 0, 0);
 
-  foreach(var_2 in level.scanned_obelisks)
+  foreach(var_2 in level.scanned_obelisks) {
   var_0 = var_0 + var_2.scriptables[0].origin;
+  }
 
   var_0 = var_0 / level.scanned_obelisks.size;
   return vectortoangles(var_0 - self getEye());
@@ -193,8 +206,9 @@ find_vanguard_spawn_angles() {
 check_vanguard_spawn_point(var_0, var_1) {
   var_2 = 0;
 
-  if(capsuletracepassed(var_1, 10, 20.01, undefined, 1, 1))
+  if(capsuletracepassed(var_1, 10, 20.01, undefined, 1, 1)) {
     var_2 = bullettracepassed(var_0, var_1, 0, undefined);
+  }
 
   return var_2;
 }
@@ -202,8 +216,9 @@ check_vanguard_spawn_point(var_0, var_1) {
 alien_vanguard_handle_threatbias(var_0, var_1) {
   if(maps\mp\alien\_utility::is_true(var_1)) {
     if(isDefined(self)) {
-      if(isDefined(self.threatbias))
+      if(isDefined(self.threatbias)) {
         self.threatbias = self.threatbias + 10000;
+      }
 
       self.ignoreme = 0;
     }
@@ -211,8 +226,9 @@ alien_vanguard_handle_threatbias(var_0, var_1) {
     setthreatbias("vanguard", "spitters", 10000);
 
     if(isDefined(self)) {
-      if(isDefined(self.threatbias))
+      if(isDefined(self.threatbias)) {
         self.threatbias = self.threatbias - 10000;
+      }
 
       self.ignoreme = 1;
     }
@@ -234,8 +250,9 @@ start_vanguard(var_0) {
   maps\mp\_utility::setusingremote("alien_vanguard");
   alien_vanguard_handle_threatbias(var_0);
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     maps\mp\_utility::setthirdpersondof(0);
+  }
 
   var_0 enableaimassist();
   var_0.playerlinked = 1;
@@ -285,16 +302,19 @@ disconnect_delete(var_0, var_1) {
   self endon(var_1);
   common_scripts\utility::waittill_any("disconnect", "death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 initvanguardhud(var_0) {
-  if(maps\mp\alien\_utility::is_true(self.isferal))
+  if(maps\mp\alien\_utility::is_true(self.isferal)) {
     maps\mp\alien\_deployablebox_functions::custom_unset_adrenaline();
+  }
 
-  if(isDefined(self.camfx))
+  if(isDefined(self.camfx)) {
     self.camfx delete();
+  }
 
   self visionsetnakedforplayer("black_bw", var_0);
   thread maps\mp\_utility::set_visionset_for_watching_players("black_bw", var_0, 1.5, undefined, 1);
@@ -320,38 +340,44 @@ initride_internal() {
   var_0 = common_scripts\utility::waittill_any_timeout(1.0, "disconnect", "death");
   maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     return "fail";
+  }
 
   if(var_0 == "disconnect" || var_0 == "death") {
-    if(var_0 == "disconnect")
+    if(var_0 == "disconnect") {
       return "disconnect";
+    }
 
-    if(self.team == "spectator")
+    if(self.team == "spectator") {
       return "fail";
+    }
 
     return "success";
   }
 
   maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     return "fail";
+  }
 
   return "success";
 }
 
 vanguard_moving_platform_death(var_0) {
-  if(!isDefined(var_0.lasttouchedplatform.destroydroneoncollision) || var_0.lasttouchedplatform.destroydroneoncollision || !isDefined(self.spawngraceperiod) || gettime() > self.spawngraceperiod)
+  if(!isDefined(var_0.lasttouchedplatform.destroydroneoncollision) || var_0.lasttouchedplatform.destroydroneoncollision || !isDefined(self.spawngraceperiod) || gettime() > self.spawngraceperiod) {
     self notify("death");
+  }
 }
 
 create_vanguard(var_0, var_1) {
   var_2 = spawnhelicopter(var_0, var_1, var_0.angles, "remote_alien_uav_mp", "vehicle_drone_vanguard");
   level.alien_vanguard = var_2;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return undefined;
+  }
 
   var_2 makevehiclesolidcapsule(20, -5, 10);
   var_2.attackarrow = spawn("script_model", (0, 0, 0));
@@ -369,8 +395,9 @@ create_vanguard(var_0, var_1) {
   var_2.owner = var_0;
   var_2 thread makesentient(var_0.team);
 
-  if(issentient(var_2))
+  if(issentient(var_2)) {
     var_2 setthreatbiasgroup("vanguard");
+  }
 
   var_4 = missile_createattractorent(var_2, 1000, 8000);
   var_2.health = 999999;
@@ -417,8 +444,9 @@ makesentient(var_0) {
   self makeentitysentient(var_0);
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self freeentitysentient();
+  }
 }
 
 vanguard_monitormanualplayerexit(var_0) {
@@ -453,8 +481,9 @@ vanguard_turrettarget(var_0) {
   var_0 endon("death");
   var_0 endon("end_remote");
 
-  while(!isDefined(var_0.attackarrow))
+  while(!isDefined(var_0.attackarrow)) {
     wait 0.05;
+  }
 
   var_0 setotherent(var_0.attackarrow);
   var_0 setturrettargetent(var_0.attackarrow);
@@ -467,8 +496,9 @@ vanguard_think(var_0) {
   var_0 endon("end_remote");
 
   for(;;) {
-    if(var_0 maps\mp\_utility::touchingbadtrigger("gryphon"))
+    if(var_0 maps\mp\_utility::touchingbadtrigger("gryphon")) {
       var_0 notify("damage", 1019, self, self.angles, self.origin, "MOD_EXPLOSIVE", undefined, undefined, undefined, undefined, "c4_mp");
+    }
 
     self.lockedlocation = var_0.attackarrow.origin;
     common_scripts\utility::waitframe();
@@ -487,11 +517,13 @@ gettargetpoint(var_0, var_1) {
   var_5 = var_2 + var_4 * 15000;
   var_6 = bulletTrace(var_2, var_5, 0, var_1);
 
-  if(var_6["surfacetype"] == "none")
+  if(var_6["surfacetype"] == "none") {
     return undefined;
+  }
 
-  if(var_6["surfacetype"] == "default")
+  if(var_6["surfacetype"] == "default") {
     return undefined;
+  }
 
   var_7 = var_6["entity"];
   var_8 = [];
@@ -528,8 +560,9 @@ vanguard_monitormissile(var_0) {
     if(isDefined(level.hostmigrationtimer)) {
       continue;
     }
-    if(isDefined(self.lockedlocation) && gettime() >= var_0.missile_ready_time)
+    if(isDefined(self.lockedlocation) && gettime() >= var_0.missile_ready_time) {
       thread vanguard_firemissile(var_0, self.lockedlocation);
+    }
   }
 }
 
@@ -547,8 +580,9 @@ vanguard_monitorbullet(var_0) {
       if(isDefined(level.hostmigrationtimer)) {
         continue;
       }
-      if(isDefined(self.lockedlocation) && gettime() >= var_0.bullet_ready_time)
+      if(isDefined(self.lockedlocation) && gettime() >= var_0.bullet_ready_time) {
         thread vanguard_firebullet(var_0, self.lockedlocation);
+      }
     }
 
     wait 0.05;
@@ -639,19 +673,22 @@ getstartposition(var_0, var_1) {
   var_4 = rotatevector(var_3, (0, 25, 0));
   var_5 = var_1 + var_4 * var_2;
 
-  if(isvalidstartpoint(var_5, var_1))
+  if(isvalidstartpoint(var_5, var_1)) {
     return var_5;
+  }
 
   var_4 = rotatevector(var_3, (0, -25, 0));
   var_5 = var_1 + var_4 * var_2;
 
-  if(isvalidstartpoint(var_5, var_1))
+  if(isvalidstartpoint(var_5, var_1)) {
     return var_5;
+  }
 
   var_5 = var_1 + var_3 * var_2;
 
-  if(isvalidstartpoint(var_5, var_1))
+  if(isvalidstartpoint(var_5, var_1)) {
     return var_5;
+  }
 
   return var_1 + (0, 0, 3000);
 }
@@ -659,8 +696,9 @@ getstartposition(var_0, var_1) {
 isvalidstartpoint(var_0, var_1) {
   var_2 = bulletTrace(var_0, var_1, 0);
 
-  if(var_2["fraction"] > 0.99)
+  if(var_2["fraction"] > 0.99) {
     return 1;
+  }
 
   return 0;
 }
@@ -690,10 +728,12 @@ vanguard_watch_distance() {
           thread vanguard_rangecountdown();
         }
 
-        if(isDefined(self.heliinproximity))
+        if(isDefined(self.heliinproximity)) {
           var_1 = distance(self.origin, self.heliinproximity.origin);
-        else
+        }
+        else {
           var_1 = distance(self.origin, var_0);
+        }
 
         var_2 = getsignalstrengthalpha(var_1);
         self.owner setclientomnvar("ui_vanguard", var_2);
@@ -724,13 +764,15 @@ getsignalstrengthalpha(var_0) {
 }
 
 vanguard_in_range() {
-  if(isDefined(self.inheliproximity) && self.inheliproximity)
+  if(isDefined(self.inheliproximity) && self.inheliproximity) {
     return 0;
+  }
 
   if(isDefined(level.vanguardrangetriggers[0])) {
     foreach(var_1 in level.vanguardrangetriggers) {
-      if(self istouching(var_1))
+      if(self istouching(var_1)) {
         return 0;
+      }
     }
 
     return 1;
@@ -779,8 +821,9 @@ vanguard_monitordeath(var_0) {
   var_0 playSound("ball_drone_explode");
   var_1 delete();
 
-  if(isDefined(var_0.targeteffect))
+  if(isDefined(var_0.targeteffect)) {
     var_0.targeteffect delete();
+  }
 
   vanguard_endride(var_0.owner, var_0);
 }
@@ -821,8 +864,9 @@ vanguard_removeplayer(var_0, var_1) {
   var_0 restorevisionset();
   var_0 setclientomnvar("ui_vanguard", 0);
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     var_0 maps\mp\_utility::setthirdpersondof(1);
+  }
 
   var_0 cameraunlink(var_1);
   var_0 remotecontrolvehicleoff(var_1);
@@ -885,8 +929,9 @@ vanguard_handledamage() {
 
     self.owner setclientomnvar("ui_vanguard_health", self.maxhealth - self.damagetaken);
 
-    if(self.damagetaken >= self.maxhealth / 2)
+    if(self.damagetaken >= self.maxhealth / 2) {
       level notify("dlc_vo_notify", "descent_vo", "defend_vanguard");
+    }
   }
 }
 
@@ -928,13 +973,15 @@ modifydamage(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("end_remote");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return 0;
+  }
 
   var_4 = var_3;
 
-  if(var_2 == "MOD_MELEE" || var_2 == "MOD_UNKNOWN")
+  if(var_2 == "MOD_MELEE" || var_2 == "MOD_UNKNOWN") {
     var_4 = self.maxhealth * 0.34;
+  }
 
   playfxontagforclients(level.vanguard_fx["hit"], self, "tag_origin", self.owner);
 

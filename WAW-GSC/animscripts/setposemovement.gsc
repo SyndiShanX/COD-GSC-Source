@@ -10,10 +10,12 @@
 
 SetPoseMovement(desiredPose, desiredMovement) {
   if(desiredPose == "") {
-    if((self.a.pose == "prone") && ((desiredMovement == "walk") || (desiredMovement == "run")))
+    if((self.a.pose == "prone") && ((desiredMovement == "walk") || (desiredMovement == "run"))) {
       desiredPose = "crouch";
-    else
+    }
+    else {
       desiredPose = self.a.pose;
+    }
   }
   if(!isDefined(desiredMovement) || desiredMovement == "") {
     desiredMovement = self.a.movement;
@@ -397,13 +399,16 @@ PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement, endAiming) 
   wait crossblendTime / 2;
   self.a.pose = endPose;
   self.a.movement = endMovement;
-  if(endAiming)
+  if(endAiming) {
     self.a.alertness = "aiming";
-  else
+  }
+  else {
     self.a.alertness = "casual";
+  }
   waittime = (endTime - gettime()) / 1000;
-  if(waittime < 0.05)
+  if(waittime < 0.05) {
     waittime = 0.05;
+  }
   wait waittime;
 }
 
@@ -448,8 +453,9 @@ BlendIntoStandRun() {
       PlayBlendTransitionStandRun(self.run_combatanim);
     } else {
       runAnimTransTime = 0.0;
-      if(self.a.movement != "stop")
+      if(self.a.movement != "stop") {
         runAnimTransTime = 0.5;
+      }
       self setAnimKnobLimited(animscripts\run::GetRunAnim(), 1, runAnimTransTime, 1);
       self thread animscripts\run::UpdateRunWeights("BlendIntoStandRun", %
         combatrun_forward, %
@@ -464,8 +470,9 @@ BlendIntoStandRun() {
       PlayBlendTransitionStandRun(self.run_noncombatanim);
     } else {
       runAnimTransTime = 0.0;
-      if(self.a.movement != "stop")
+      if(self.a.movement != "stop") {
         runAnimTransTime = 0.5;
+      }
       self setAnimKnobLimited(animscripts\run::GetRunAnim(), 1, runAnimTransTime, 1);
       self thread animscripts\run::UpdateRunWeights("BlendIntoStandRun", %
         combatrun_forward, %
@@ -480,8 +487,9 @@ BlendIntoStandRun() {
 }
 
 PlayBlendTransitionStandWalk(animname) {
-  if(self.a.movement != "stop")
+  if(self.a.movement != "stop") {
     self endon("movemode");
+  }
   PlayBlendTransition(animname, 0.6, "stand", "walk", 1);
 }
 
@@ -739,18 +747,22 @@ CrouchRunToProneRun() {
 
 PlayTransitionAnimation2(transAnim, endPose, endMovement, endAiming, finalAnim) {
   self setflaggedanimknoball("transAnimDone1", transAnim, % body, 1, .05, 1);
-  if(!isDefined(self.a.pose))
+  if(!isDefined(self.a.pose)) {
     self.pose = "undefined";
-  if(!isDefined(self.a.movement))
+  }
+  if(!isDefined(self.a.movement)) {
     self.movement = "undefined";
+  }
   debugIdentifier = self.a.pose + " to " + endPose + ", " + self.a.movement + " to " + endMovement;
   self animscripts\shared::DoNoteTracks("transAnimDone1", undefined, debugIdentifier);
   self.a.pose = endPose;
   self.a.movement = endMovement;
-  if(endAiming)
+  if(endAiming) {
     self.a.alertness = "aiming";
-  else
+  }
+  else {
     self.a.alertness = "casual";
+  }
   if(isDefined(finalAnim)) {
     self setanimknoball(finalAnim, % body, 1, 0, 1);
   }
@@ -767,8 +779,9 @@ PlayTransitionAnimation(transAnim, endPose, endMovement, endAiming, finalAnim, r
 }
 
 PlayTransitionAnimationFunc(transAnim, endPose, endMovement, endAiming, finalAnim, rate, waitSetStatesEnabled) {
-  if(!isDefined(rate))
+  if(!isDefined(rate)) {
     rate = 1;
+  }
   if(getdebugdvar("debug_grenadehand") == "on") {
     if(endPose != self.a.pose) {
       if(!animhasnotetrack(transAnim, "anim_pose = \"" + endPose + "\"")) {
@@ -783,13 +796,16 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, endAiming, finalAni
       }
     }
   }
-  if(waitSetStatesEnabled)
+  if(waitSetStatesEnabled) {
     self thread waitSetStates(getanimlength(transAnim) / 2.0, "killtimerscript", endPose);
+  }
   self setflaggedanimknoballrestart("transAnimDone2", transAnim, % body, 1, .2, rate);
-  if(!isDefined(self.a.pose))
+  if(!isDefined(self.a.pose)) {
     self.pose = "undefined";
-  if(!isDefined(self.a.movement))
+  }
+  if(!isDefined(self.a.movement)) {
     self.movement = "undefined";
+  }
   debugIdentifier = "";
   debugIdentifier = self.a.script + ", " + self.a.pose + " to " + endPose + ", " + self.a.movement + " to " + endMovement;
   self animscripts\shared::DoNoteTracks("transAnimDone2", undefined, debugIdentifier);
@@ -797,10 +813,12 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, endAiming, finalAni
   self.a.pose = endPose;
   self notify("entered_pose" + endPose);
   self.a.movement = endMovement;
-  if(endAiming)
+  if(endAiming) {
     self.a.alertness = "aiming";
-  else
+  }
+  else {
     self.a.alertness = "casual";
+  }
   if(isDefined(finalAnim)) {
     self setanimknoball(finalAnim, % body, 1, 0.3, rate);
   }

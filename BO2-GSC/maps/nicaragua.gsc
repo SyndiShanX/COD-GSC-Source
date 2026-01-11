@@ -75,15 +75,18 @@ on_player_connect() {
 }
 
 on_saved_restored() {
-  if(!flag("menendez_section_done"))
+  if(!flag("menendez_section_done")) {
     setsaveddvar("ammoCounterHide", 1);
+  }
 }
 
 reset_client_dvars() {
-  if(!flag("menendez_section_done"))
+  if(!flag("menendez_section_done")) {
     self setclientdvars("compass", "1", "hud_showStance", "1", "cg_cursorHints", "4", "hud_showobjectives", "1", "ammoCounterHide", "1", "miniscoreboardhide", "0", "ui_hud_hardcore", "0", "credits_active", "0", "hud_missionFailed", "0", "cg_cameraUseTagCamera", "1", "cg_drawCrosshair", "1", "r_heroLightScale", "1 1 1", "player_sprintUnlimited", "0", "r_bloomTweaks", "0", "r_exposureTweak", "0");
-  else
+  }
+  else {
     self setclientdvars("compass", "1", "hud_showStance", "1", "cg_cursorHints", "4", "hud_showobjectives", "1", "ammoCounterHide", "0", "miniscoreboardhide", "0", "ui_hud_hardcore", "0", "credits_active", "0", "hud_missionFailed", "0", "cg_cameraUseTagCamera", "1", "cg_drawCrosshair", "1", "r_heroLightScale", "1 1 1", "player_sprintUnlimited", "0", "r_bloomTweaks", "0", "r_exposureTweak", "0");
+  }
 
   self resetfov();
   self allowspectateteam("allies", 0);
@@ -204,6 +207,7 @@ skipto_setup() {
   if(skipto == "the_escape_route") {
     return;
   }
-  if(skipto == "the_landing_zone")
+  if(skipto == "the_landing_zone") {
     return;
+  }
 }

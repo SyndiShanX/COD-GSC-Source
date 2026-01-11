@@ -84,8 +84,9 @@ static_flash(var_0, var_1) {
   for(var_2 = 0; var_2 < var_0; var_2++) {
     level.player setclientomnvar("ui_loki_rog_static", 1);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       level.player thread maps\_utility::play_sound_on_entity(var_1);
+    }
 
     wait 0.1;
     level.player setclientomnvar("ui_loki_rog_static", 0);
@@ -96,8 +97,9 @@ static_flash(var_0, var_1) {
 uav_static_lines(var_0) {
   level endon("slamzoom_start");
 
-  if(!isDefined(level.uav_static_lines))
+  if(!isDefined(level.uav_static_lines)) {
     level.uav_static_lines = [];
+  }
 
   var_1 = newhudelem();
   var_1.alpha = 1;
@@ -108,8 +110,9 @@ uav_static_lines(var_0) {
   var_1.hidewhendead = 1;
   var_1 thread random_line_flicker();
 
-  if(var_0)
+  if(var_0) {
     level maps\_utility::delaythread(2.0, ::remove_static_line, var_1);
+  }
 
   level.uav_static_lines[level.uav_static_lines.size] = var_1;
 }
@@ -121,8 +124,9 @@ remove_static_line(var_0) {
 }
 
 remove_all_static_lines() {
-  foreach(var_1 in level.uav_static_lines)
+  foreach(var_1 in level.uav_static_lines) {
   var_1 destroy();
+  }
 }
 
 random_line_flicker() {

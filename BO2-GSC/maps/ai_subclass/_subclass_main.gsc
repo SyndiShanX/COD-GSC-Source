@@ -15,8 +15,9 @@
 #include maps\ai_subclass\_subclass_elite;
 
 subclass_setup_spawn_functions() {
-  if(!isDefined(level.subclass_spawn_functions))
+  if(!isDefined(level.subclass_spawn_functions)) {
     level.subclass_spawn_functions = [];
+  }
 
   level.subclass_spawn_functions["regular"] = ::subclass_regular;
   level.subclass_spawn_functions["militia"] = ::subclass_militia;
@@ -30,10 +31,12 @@ run_subclass_spawn_function() {
 }
 
 subclass_regular() {
-  if(self.team == "allies")
+  if(self.team == "allies") {
     subclass_regular_allies();
-  else
+  }
+  else {
     subclass_regular_axis();
+  }
 }
 
 subclass_regular_allies() {

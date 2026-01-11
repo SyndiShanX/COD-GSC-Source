@@ -605,4 +605,3 @@ function_1091b2a0(var_4f1c1316) {
 
   return color;
 }
-

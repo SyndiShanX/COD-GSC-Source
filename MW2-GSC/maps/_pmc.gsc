@@ -51,23 +51,26 @@ main() {
   assert(isDefined(level.pmc_gametype));
   assert(isDefined(level.pmc_enemies));
   assert(level.pmc_enemies > 0);
-  if(isDefined(level.pmc_enemies_alive))
+  if(isDefined(level.pmc_enemies_alive)) {
     assert(level.pmc_enemies_alive > 0);
+  }
 
   if(isDefendMatch()) {
     assert(isDefined(level.pmc_defend_enemy_count));
     assert(level.pmc_defend_enemy_count > 0);
   }
 
-  if(!isDefined(level.pmc_alljuggernauts))
+  if(!isDefined(level.pmc_alljuggernauts)) {
     level.pmc_alljuggernauts = false;
+  }
 
   //-------------------------------------------------------------
 
   common_scripts\_sentry::main();
 
-  if(!is_specialop())
+  if(!is_specialop()) {
     maps\_specialops_code::pick_starting_location_pmc();
+  }
   initialize_gametype();
 
   start_pmc_gametype();
@@ -140,10 +143,12 @@ initialize_gametype() {
   level.pmc.defendSetupTime = DEFEND_SETUP_TIME;
   level.pmc.defendTime = DEFEND_TIME;
 
-  if(isDefined(level.pmc_enemies_alive))
+  if(isDefined(level.pmc_enemies_alive)) {
     level.pmc.max_ai_alive = level.pmc_enemies_alive;
-  else
+  }
+  else {
     level.pmc.max_ai_alive = MAX_ENEMIES_ALIVE_ELIMINATION;
+  }
 
   level.pmc.enemy_goal_radius_min = DEFAULT_ENEMY_GOAL_RADIUS_MIN;
   level.pmc.enemy_goal_radius_max = DEFAULT_ENEMY_GOAL_RADIUS_MAX;
@@ -224,8 +229,9 @@ start_pmc_gametype() {
   level.sentry_enemies = getEntArray("sentry_gun", "targetname");
   level.sentry_enemies = array_combine(level.sentry_enemies, getEntArray("sentry_minigun", "targetname"));
 
-  if(isDefendMatch())
+  if(isDefendMatch()) {
     array_thread(level.sentry_enemies, common_scripts\_sentry::delete_sentry_turret);
+  }
 
   //----------------------------------------
   // Set gametype specific function pointers
@@ -317,8 +323,9 @@ set_gametype_vars() {
     level.pmc.enemies_kills_to_win = level.pmc_enemies;
   assert(level.pmc.enemies_kills_to_win > 0);
 
-  if(isDefendMatch())
+  if(isDefendMatch()) {
     level.pmc.max_ai_alive = level.pmc_defend_enemy_count;
+  }
 }
 
 pick_enemy_spawn_positions_defend() {
@@ -339,14 +346,18 @@ pick_enemy_spawn_positions() {
   y_max = level.pmc.enemy_spawners_full_list[0].origin[1];
 
   foreach(spawner in level.pmc.enemy_spawners_full_list) {
-    if(spawner.origin[0] < x_min)
+    if(spawner.origin[0] < x_min) {
       x_min = spawner.origin[0];
-    if(spawner.origin[0] > x_max)
+    }
+    if(spawner.origin[0] > x_max) {
       x_max = spawner.origin[0];
-    if(spawner.origin[1] < y_min)
+    }
+    if(spawner.origin[1] < y_min) {
       y_min = spawner.origin[1];
-    if(spawner.origin[1] > y_max)
+    }
+    if(spawner.origin[1] > y_max) {
       y_max = spawner.origin[1];
+    }
   }
 
   x_min -= 250;
@@ -410,8 +421,9 @@ pick_enemy_spawn_positions() {
   // see which quads don't have any spawners in them at all
   // so they aren't used in spawn logic
   foreach(spawner in level.pmc.enemy_spawners_full_list) {
-    if(distance(getAveragePlayerOrigin(), spawner.origin) <= MIN_SPAWN_DISTANCE)
+    if(distance(getAveragePlayerOrigin(), spawner.origin) <= MIN_SPAWN_DISTANCE) {
       continue;
+    }
     quadIndex = spawner get_quad_index();
     level.quads[quadIndex].containsSpawners = true;
   }
@@ -434,8 +446,9 @@ pick_enemy_spawn_positions() {
       lineColor = color_blue;
       textColor = color_white;
 
-      if(!quad.containsSpawners)
+      if(!quad.containsSpawners) {
         continue;
+      }
 
       thread draw_line(topLeft, topRight, lineColor[0], lineColor[1], lineColor[2]);
       thread draw_line(topRight, bottomRight, lineColor[0], lineColor[1], lineColor[2]);
@@ -460,16 +473,18 @@ pick_enemy_spawn_positions() {
     for(;;) {
       loopCount = 0;
       foreach(spawner in randomized) {
-        if(distance(getAveragePlayerOrigin(), spawner.origin) <= MIN_SPAWN_DISTANCE)
+        if(distance(getAveragePlayerOrigin(), spawner.origin) <= MIN_SPAWN_DISTANCE) {
           continue;
+        }
 
         quadIndex = spawner get_quad_index();
         assert(level.quads[quadIndex].containsSpawners);
         assert(isDefined(level.quads[quadIndex].enemiesInQuad));
 
         // If this quad has already been used once we don't use it again
-        if(level.quads[quadIndex].enemiesInQuad >= allowedSpawnersPerQuad)
+        if(level.quads[quadIndex].enemiesInQuad >= allowedSpawnersPerQuad) {
           continue;
+        }
 
         // This spawner is in a quad that hasn't been used yet so we can use it
         level.quads[quadIndex].enemiesInQuad++;
@@ -479,8 +494,9 @@ pick_enemy_spawn_positions() {
         randomized = array_remove(randomized, spawner);
 
         // If we've reached the number of enemies to kill then move on
-        if(spawnsToUse.size >= level.pmc.enemies_kills_to_win)
+        if(spawnsToUse.size >= level.pmc.enemies_kills_to_win) {
           break;
+        }
 
         loopCount++;
         if(loopCount > 50) {
@@ -492,8 +508,9 @@ pick_enemy_spawn_positions() {
         }
       }
       allowedSpawnersPerQuad++;
-      if(spawnsToUse.size >= level.pmc.enemies_kills_to_win)
+      if(spawnsToUse.size >= level.pmc.enemies_kills_to_win) {
         break;
+      }
       debug_print("Still need more spawners");
     }
     assert(spawnsToUse.size > 0);
@@ -504,11 +521,13 @@ pick_enemy_spawn_positions() {
   debug_print("All spawners are ready");
 
   if(getdvar("pmc_debug") == "1") {
-    foreach(spawner in spawnsToUse)
+    foreach(spawner in spawnsToUse) {
     thread draw_line(spawner.origin, spawner.origin + (0, 0, 250), color_green[0], color_green[1], color_green[2]);
+    }
     if(isDefined(randomized)) {
-      foreach(spawner in randomized)
+      foreach(spawner in randomized) {
       thread draw_line(spawner.origin, spawner.origin + (0, 0, 50), color_red[0], color_red[1], color_red[2]);
+      }
     }
   }
 
@@ -532,19 +551,22 @@ get_quad_index() {
 }
 
 populate_enemies() {
-  if(is_specialop())
+  if(is_specialop()) {
     flag_wait("mission_start");
+  }
 
   //---------------------------------------------------------------------
   // Spawns all of the best located AI until the max alive AI count is reached
   //---------------------------------------------------------------------
 
-  if(level.pmc._populating_enemies)
+  if(level.pmc._populating_enemies) {
     return;
+  }
   level.pmc._populating_enemies = true;
 
-  if(isDefendMatch())
+  if(isDefendMatch()) {
     flag_wait("pmc_defend_setup_time_finished");
+  }
 
   prof_begin("populate_enemies");
 
@@ -553,8 +575,9 @@ populate_enemies() {
   aliveEnemies = getaiarray("axis");
   assert(isDefined(aliveEnemies));
   assert(aliveEnemies.size + level.pmc.enemy_vehicles_alive <= level.pmc.max_ai_alive);
-  if(level.pmc.limitRespawns)
+  if(level.pmc.limitRespawns) {
     assert(aliveEnemies.size + level.pmc.enemy_vehicles_alive <= level.pmc.enemies_remaining);
+  }
 
   // Make sure we don't already have enough AI alive to beat the level
   if(level.pmc.limitRespawns) {
@@ -573,8 +596,9 @@ populate_enemies() {
   // See how many AI we have room to spawn
   numberToSpawn = level.pmc.max_ai_alive - (aliveEnemies.size + level.pmc.enemy_vehicles_alive);
   freeAISlots = getFreeAICount();
-  if(numberToSpawn > freeAISlots)
+  if(numberToSpawn > freeAISlots) {
     numberToSpawn = freeAISlots;
+  }
 
   assert(numberToSpawn > 0);
 
@@ -588,15 +612,17 @@ populate_enemies() {
   // Again, make sure that the new amount of AI we're about to spawn, plus the alive AI, doesn't
   // exceed the number of AI remaining to win. Cap numberToSpawn if required.
   if(level.pmc.limitRespawns) {
-    if(aliveEnemies.size + level.pmc.enemy_vehicles_alive + numberToSpawn > level.pmc.enemies_remaining)
+    if(aliveEnemies.size + level.pmc.enemy_vehicles_alive + numberToSpawn > level.pmc.enemies_remaining) {
       numberToSpawn = level.pmc.enemies_remaining - (aliveEnemies.size + level.pmc.enemy_vehicles_alive);
+    }
     assert(numberToSpawn > 0);
   }
 
   // Make sure that we don't spawn AI on the ground if a chopper is in queue, because it's waiting to fill up
   if(level.pmc.helicopter_queuing) {
-    if(numberToSpawn >= AI_INSIDE_TRANSPORT_CHOPPER)
+    if(numberToSpawn >= AI_INSIDE_TRANSPORT_CHOPPER) {
       level notify("spawn_chopper");
+    }
     level.pmc._populating_enemies = false;
     debug_print(numberToSpawn + " AI are in chopper queue");
     return;
@@ -630,16 +656,18 @@ get_spawnlist_defend() {
 
   if(getdvar("pmc_debug") == "1") {
     level notify("updated_spawn_list");
-    foreach(spawner in spawners)
+    foreach(spawner in spawners) {
     thread draw_line_until_notify(spawner.origin, spawner.origin + (0, 0, 250), 0, 1, 0, level, "updated_spawn_list");
+    }
   }
 
   return array_randomize(spawners);
 }
 
 re_populate_enemies() {
-  if(level.pmc._re_populating_enemies)
+  if(level.pmc._re_populating_enemies) {
     return;
+  }
   level.pmc._re_populating_enemies = true;
 
   wait 3.0;
@@ -680,20 +708,25 @@ spawn_juggernaut(reg_spawner) {
 }
 
 init_enemy_combat_mode(spawnerIndex) {
-  if(isDefendMatch())
+  if(isDefendMatch()) {
     return;
+  }
 
-  if(getdvar("scr_force_ai_combat_mode") != "0")
+  if(getdvar("scr_force_ai_combat_mode") != "0") {
     return;
+  }
 
-    if(self animscripts\combat_utility::isLongRangeAI())
+    if(self animscripts\combat_utility::isLongRangeAI()) {
       return;
+    }
 
-  if(self animscripts\combat_utility::isShotgunAI())
+  if(self animscripts\combat_utility::isShotgunAI()) {
     return;
+  }
 
-  if(spawnerIndex % 3)
+  if(spawnerIndex % 3) {
     self.combatMode = "ambush";
+  }
 }
 
 spawn_more_enemies(spawnList, numberToSpawn) {
@@ -705,8 +738,9 @@ spawn_more_enemies(spawnList, numberToSpawn) {
 
   // Try spawning remaining ( if any ) from any spawners, instead of just ones that haven't been used yet.
   numberSpawnedIncorrectly = 0;
-  if(numberSpawnedCorrectly < numberToSpawn)
+  if(numberSpawnedCorrectly < numberToSpawn) {
     numberSpawnedIncorrectly = spawn_more_enemies_from_array(level.pmc.enemy_spawners_full_list, numberToSpawn - numberSpawnedCorrectly, false);
+  }
 
   assertEx(numberSpawnedCorrectly + numberSpawnedIncorrectly == numberToSpawn, "There are enough spawn locations in the level, but none of them could be used for spawning");
 
@@ -715,10 +749,12 @@ spawn_more_enemies(spawnList, numberToSpawn) {
 }
 
 spawn_more_enemies_from_array(spawnList, numberToSpawn, removeSpawnedFromArray) {
-  if(!isDefined(removeSpawnedFromArray))
+  if(!isDefined(removeSpawnedFromArray)) {
     removeSpawnedFromArray = true;
-  if(isDefendMatch())
+  }
+  if(isDefendMatch()) {
     removeSpawnedFromArray = false;
+  }
 
   spawnersUsed = [];
   numberFailedAttempts = 0;
@@ -755,8 +791,9 @@ spawn_more_enemies_from_array(spawnList, numberToSpawn, removeSpawnedFromArray) 
 
     numberToSpawnRemaining--;
     assert(numberToSpawnRemaining >= 0);
-    if(numberToSpawnRemaining == 0)
+    if(numberToSpawnRemaining == 0) {
       break;
+    }
   }
 
   if(removeSpawnedFromArray) {
@@ -779,10 +816,12 @@ enemy_update_goal_on_jumpout() {
 enemy_set_goal_when_player_spotted() {
   self endon("death");
 
-  if(!isAI(self))
+  if(!isAI(self)) {
     return;
-  if(!isAlive(self))
+  }
+  if(!isAlive(self)) {
     return;
+  }
 
   //small goal, but aware of player moves them to spots where they could see him, but keeps them spread out
   self.goalradius = 450;
@@ -796,17 +835,21 @@ enemy_set_goal_when_player_spotted() {
 
   self waittill("enemy_visible");
 
-  if(self animscripts\combat_utility::isShotgunAI() || (randomint(3) == 0))
+  if(self animscripts\combat_utility::isShotgunAI() || (randomint(3) == 0)) {
     enemy_set_goal_when_player_spotted_loop();
+  }
 }
 
 set_goal_height() {
-  if(isDefined(self.juggernaut))
+  if(isDefined(self.juggernaut)) {
     self.goalheight = DEFAULT_ENEMY_GOAL_HEIGHT_JUGGERNAUT;
-  else if(self animscripts\combat_utility::isSniper())
+  }
+  else if(self animscripts\combat_utility::isSniper()) {
     self.goalheight = DEFAULT_ENEMY_GOAL_HEIGHT_SNIPER;
-  else
+  }
+  else {
     self.goalheight = DEFAULT_ENEMY_GOAL_HEIGHT;
+  }
 }
 
 juggernaut_set_goal_when_player_spotted_loop() {
@@ -818,10 +861,12 @@ juggernaut_set_goal_when_player_spotted_loop() {
   while(1) {
     self.goalradius = 32;
     self set_goal_height();
-    if(isDefined(self.enemy))
+    if(isDefined(self.enemy)) {
       self setgoalpos(self.enemy.origin);
-    else
+    }
+    else {
       self setgoalpos(level.player.origin);
+    }
     wait 4;
   }
 }
@@ -830,27 +875,34 @@ enemy_set_goal_when_player_spotted_loop() {
   self endon("death");
   //large goal at the player so they can close in intelligently
   while(1) {
-    if(self.doingAmbush)
+    if(self.doingAmbush) {
       self.goalradius = 2048;
-    else if(self animscripts\combat_utility::isSniper())
+    }
+    else if(self animscripts\combat_utility::isSniper()) {
       self.goalradius = 5000;
-    else
+    }
+    else {
       self.goalradius = randomintrange(1200, 1600);
+    }
 
-    if(isDefined(self.enemy))
+    if(isDefined(self.enemy)) {
       self setgoalpos(self.enemy.origin);
-    else
+    }
+    else {
       self setgoalpos(level.player.origin);
+    }
 
     wait 45;
   }
 }
 
 enemy_set_goalradius() {
-  if(!isAI(self))
+  if(!isAI(self)) {
     return;
-  if(!isAlive(self))
+  }
+  if(!isAlive(self)) {
     return;
+  }
   self.goalradius = randomintrange(level.pmc.enemy_goal_radius_min, level.pmc.enemy_goal_radius_max);
   self set_goal_height();
 }
@@ -871,10 +923,12 @@ enemy_seek_player(modScale) {
   while(1) {
     self.goalradius = randomintrange(1200, 1600);
     self set_goal_height();
-    if(isDefined(self.enemy) && self.enemy.classname == "player")
+    if(isDefined(self.enemy) && self.enemy.classname == "player") {
       self setgoalpos(self.enemy.origin);
-    else
+    }
+    else {
       self setgoalpos(level.players[randomint(level.players.size)].origin);
+    }
     wait 45;
   }
 }
@@ -897,8 +951,9 @@ enemy_seek_player_in_stages() {
     self set_goal_height();
     self setGoalEntity(random(level.players));
     modScale--;
-    if(modScale <= 0)
+    if(modScale <= 0) {
       break;
+    }
     wait 45;
   }
 }
@@ -942,20 +997,24 @@ enemy_died(attacker) {
   thread re_populate_enemies();
 
   // Check if we should send the remaining few enemies out towards the AI
-  if(level.pmc.enemies_remaining <= SEEK_PLAYERS_ENEMY_COUNT)
+  if(level.pmc.enemies_remaining <= SEEK_PLAYERS_ENEMY_COUNT) {
     flag_set("enemies_seek_players");
+  }
 
   // Check to see if the mission has been completed
   if((level.pmc.limitRespawns) && (level.pmc.enemies_remaining == 0)) {
-    if(isObjectiveMatch())
+    if(isObjectiveMatch()) {
       flag_wait("objective_complete");
+    }
 
     //		wait 3.0;
-    if(isDefined(level.pmc.objective_enemies_index))
+    if(isDefined(level.pmc.objective_enemies_index)) {
       objective_state(level.pmc.objective_enemies_index, "done");
+    }
 
-    if(!isObjectiveMatch())
+    if(!isObjectiveMatch()) {
       thread mission_complete();
+    }
   }
 }
 
@@ -1016,8 +1075,9 @@ setup_objective_entities() {
   }
 
   // Delete unused objective location entities
-  foreach(location in objectiveLocations)
+  foreach(location in objectiveLocations) {
   location.trigger delete();
+  }
 }
 
 delete_sentry_pickup() {
@@ -1031,8 +1091,9 @@ set_up_defend_location(defend_obj, defend_volume) {
 
   foreach(gun in level.sentry_pickups) {
     d = distance(gun.origin, defend_obj.trigger.origin);
-    if(d <= 300)
+    if(d <= 300) {
       continue;
+    }
     gun thread delete_sentry_pickup();
   }
 }
@@ -1055,8 +1116,9 @@ defend_setup_time_hint() {
   // Approach the laptop to skip set up time.
   hint_defend_setup.string = &"PMC_START_ATTACK_HINT";
   hint_defend_setup.timeout = 5;
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player show_hint(hint_defend_setup);
+  }
 
   flag_wait("pmc_defend_setup_time_finished");
 
@@ -1085,8 +1147,9 @@ defend_think(fill_time) {
     foreach(enemy in enemies) {
       if((distance(enemy.origin, self.origin)) < 600) {
         enemy setGoalPos(level.pmc.defend_obj_origin);
-        if(enemy istouching(self))
+        if(enemy istouching(self)) {
           self.enemy_count++;
+        }
       }
     }
 
@@ -1111,13 +1174,16 @@ defend_think(fill_time) {
       }
     } else // no enemies in volume, if players are, empty the bar
     {
-      foreach(player in level.players)
+      foreach(player in level.players) {
       if(player istouching(self))
+      }
         enemy_time = enemy_time - .1;
-      if(enemy_time < 0)
+      if(enemy_time < 0) {
         enemy_time = 0;
-      if(bar_doesnt_exist == false)
+      }
+      if(bar_doesnt_exist == false) {
         bar updateBar(enemy_time / totalTime);
+      }
     }
 
     if((enemy_time == 0) && (bar_doesnt_exist == false)) {
@@ -1173,12 +1239,14 @@ show_remaining_enemy_count() {
 
     // Update the number of enemies remaining on the HUD
     self.remainingEnemyCountHudElemNum setValue(level.pmc.enemies_remaining);
-    if(isDefined(level.pmc.enemies_kills_to_win) && (level.pmc.enemies_kills_to_win > 0))
+    if(isDefined(level.pmc.enemies_kills_to_win) && (level.pmc.enemies_kills_to_win > 0)) {
       thread so_dialog_counter_update(level.pmc.enemies_remaining, level.pmc_enemies);
+    }
 
     // Kill all enemies in the level [ && 1 Remaining ].
-    if(isDefined(level.pmc.objective_enemies_index))
+    if(isDefined(level.pmc.objective_enemies_index)) {
       // Kill all enemies in the level [ && 1 Remaining ].
+    }
       objective_String_NoMessage(level.pmc.objective_enemies_index, &"PMC_OBJECTIVE_KILL_ENEMIES_REMAINING", level.pmc.enemies_remaining);
 
     if(level.pmc.enemies_remaining <= 0) {
@@ -1231,8 +1299,9 @@ gametype_setup() {
 player_use_objective_think() {
   level endon("kill_objective_use_thread");
 
-  while(!isDefined(level.pmc.objective))
+  while(!isDefined(level.pmc.objective)) {
     wait 0.05;
+  }
 
   // Press and hold && 1 to use the laptop.
   level.pmc.objective.trigger trigger_on();
@@ -1244,8 +1313,9 @@ player_use_objective_think() {
     wait 0.05;
 
     level.pmc.objective.trigger waittill("trigger", player);
-    if(player != self)
+    if(player != self) {
       continue;
+    }
 
     buttonTime = 0;
     totalTime = 3.0;
@@ -1269,10 +1339,12 @@ player_use_objective_think() {
       }
     }
 
-    if(isDefined(self.objective_bar))
+    if(isDefined(self.objective_bar)) {
       self.objective_bar destroyElem();
-    if(isDefined(self.objective_bar_text))
+    }
+    if(isDefined(self.objective_bar_text)) {
       self.objective_bar_text destroyElem();
+    }
 
     player notify("remove_laptop_pickup_hud");
 
@@ -1370,15 +1442,17 @@ add_player_objectives() {
     thread objective_add_defend();
   } else {
     objective_add_enemies(1);
-    foreach(player in level.players)
+    foreach(player in level.players) {
     player thread show_remaining_enemy_count();
+    }
   }
 
 }
 
 objective_add_enemies(objNum) {
-  if(!isDefined(objNum))
+  if(!isDefined(objNum)) {
     objNum = 1;
+  }
   level.pmc.objective_enemies_index = objNum;
   // Kill all enemies in the level.
   objective_add(objNum, "current", &"PMC_OBJECTIVE_KILL_ENEMIES", (0, 0, 0));
@@ -1387,13 +1461,15 @@ objective_add_enemies(objNum) {
 }
 
 objective_add_laptop(objNum) {
-  if(!isDefined(objNum))
+  if(!isDefined(objNum)) {
     objNum = 1;
+  }
   assert(isDefined(level.pmc.objective.trigger.origin));
 
   //wait for trigger to get turned on since it effects it's origin
-  while(!isDefined(level.pmc.objective.trigger.active))
+  while(!isDefined(level.pmc.objective.trigger.active)) {
     wait 0.05;
+  }
 
   // Retrieve enemy intel.
   objective_add(objNum, "current", &"PMC_OBJECTIVE_ABORT_CODES", level.pmc.objective.trigger.origin);
@@ -1481,8 +1557,9 @@ debug_print(string) {
 }
 
 debug_show_enemy_spawners_count() {
-  if(isDefendMatch())
+  if(isDefendMatch()) {
     return;
+  }
 
   level.pmc.hud.enemySpawnerCountHudElem = newHudElem();
   level.pmc.hud.enemySpawnerCountHudElem.x = 0;
@@ -1547,8 +1624,9 @@ debug_show_vehicles_alive_count() {
 /*
 set_up_preplaced_enemy_sentry_turrets( turrets )
 {
-	if( turrets.size == 0 )
+	if( turrets.size == 0 ) {
 		return;
+	}
 
 	//sort from closest to furtherest
 	turrets = get_array_of_closest( getAveragePlayerOrigin(), turrets );
@@ -1557,16 +1635,18 @@ set_up_preplaced_enemy_sentry_turrets( turrets )
 	turrets[ 0 ] thread common_scripts\_sentry::delete_sentry_turret();
 	turrets = array_remove( turrets, turrets[ 0 ] );
 
-	if( turrets.size == 0 )
+	if( turrets.size == 0 ) {
 		return;
+	}
 
 	turrets[ 0 ] thread common_scripts\_sentry::delete_sentry_turret();
 	turrets = array_remove( turrets, turrets[ 0 ] );
 
 	num_to_keep = 3;
 
-	if( turrets.size <= num_to_keep )
+	if( turrets.size <= num_to_keep ) {
 		return;
+	}
 
 	turrets = array_randomize( turrets );
 
@@ -1604,8 +1684,9 @@ delete_unseen_enemy() {
 
 enemy_can_see_any_player() {
   foreach(player in level.players) {
-    if(self cansee(player))
+    if(self cansee(player)) {
       return true;
+    }
   }
   return false;
 }
@@ -1672,8 +1753,9 @@ juggernaut_hunt_immediately_behavior() {
   while(1) {
     self.goalradius = 32;
     self set_goal_height();
-    if(isDefined(self.enemy))
+    if(isDefined(self.enemy)) {
       self setgoalpos(self.enemy.origin);
+    }
     else {
       enemyPlayer = level.players[randomInt(level.players.size)];
       self setgoalpos(enemyPlayer.origin);
@@ -1690,17 +1772,20 @@ send_in_one_juggernaut(one_third) {
   living = level.pmc.juggernauts_spawned - level.pmc.juggernauts_killed;
   allowed_for_this_stage = (level.pmc.max_juggernauts / 2);
 
-  if(living > 0)
+  if(living > 0) {
     return;
+  }
 
-  if(level.pmc.juggernauts_spawned >= allowed_for_this_stage)
+  if(level.pmc.juggernauts_spawned >= allowed_for_this_stage) {
     return;
+  }
 
   println("pacingtrying for 1 juggernaut");
   odds = int((one_third / allowed_for_this_stage) / 2);
 
-  if(randomint(odds) > 0)
+  if(randomint(odds) > 0) {
     return;
+  }
 
   println("pacingspawning 1 juggernaut");
   delete_unseen_enemy();
@@ -1710,16 +1795,19 @@ send_in_one_juggernaut(one_third) {
 send_in_multiple_juggernauts() {
   jugs_remaining = level.pmc.max_juggernauts - level.pmc.juggernauts_spawned;
 
-  if(jugs_remaining < 1)
+  if(jugs_remaining < 1) {
     return;
+  }
 
   println("pacingtrying for x juggernauts");
   odds = int(level.pmc.enemies_remaining / jugs_remaining);
 
-  if(odds <= 0)
+  if(odds <= 0) {
     odds = 1;
-  if(randomint(odds) > 0)
+  }
+  if(randomint(odds) > 0) {
     return;
+  }
 
   println("pacingspawning 1 juggernaut");
   delete_unseen_enemy();
@@ -1727,10 +1815,12 @@ send_in_multiple_juggernauts() {
 }
 
 should_spawn_juggernaut() {
-  if(level.pmc_alljuggernauts)
+  if(level.pmc_alljuggernauts) {
     return true;
-  if(!level.juggernaut_mode)
+  }
+  if(!level.juggernaut_mode) {
     return false;
+  }
 
   // spawn a juggernaut at the start of the game instead of waiting until the end if this is set.
   if(!level.pmc.spawned_juggernaut_at_game_start) {
@@ -1744,13 +1834,17 @@ should_spawn_juggernaut() {
   }
 
   if(flag("staged_pacing_used")) {
-    if(level.pmc.send_in_juggernaut)
+    if(level.pmc.send_in_juggernaut) {
       return true;
-    else
+    }
+    else {
       return false;
+    }
   }
-  if(randomint(10) > 0)
+  if(randomint(10) > 0) {
     return false;
-  else
+  }
+  else {
     return true;
+  }
 }

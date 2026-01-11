@@ -2432,4 +2432,3 @@ function_4910c182(insertion) {
   players = getplayers();
   players[0] function_adc8cff4();
 }
-

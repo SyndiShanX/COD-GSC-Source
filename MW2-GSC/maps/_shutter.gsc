@@ -7,8 +7,9 @@
 #include common_scripts\utility;
 
 main() {
-  if(!isDefined(level.windStrength))
+  if(!isDefined(level.windStrength)) {
     level.windStrength = 0.2;
+  }
 
   //WIND SETTINGS
   //-------------
@@ -17,10 +18,12 @@ main() {
   level.animWeightMin = (level.windStrength - 0.5);
   level.animWeightMax = (level.windStrength + 0.2);
   //clamp values
-  if(level.animWeightMin < 0.1)
+  if(level.animWeightMin < 0.1) {
     level.animWeightMin = 0.1;
-  if(level.animWeightMax > 1.0)
+  }
+  if(level.animWeightMax > 1.0) {
     level.animWeightMax = 1.0;
+  }
   //-------------
   //-------------
 
@@ -44,8 +47,9 @@ main() {
   array = getEntArray("shutter_left_closed", "targetname");
   leftShutters = array_combine(leftShutters, array);
 
-  foreach(shutter in leftShutters)
+  foreach(shutter in leftShutters) {
   shutter AddYaw(180);
+  }
 
   rightShutters = [];
   array = getEntArray("shutter_right", "targetname");
@@ -77,8 +81,9 @@ main() {
 windController() {
   for(;;) {
     windDirection = "left";
-    if(RandomInt(100) > 50)
+    if(RandomInt(100) > 50) {
       windDirection = "right";
+    }
     level notify("wind blows", windDirection);
     wait(2 + RandomFloat(10));
   }
@@ -124,17 +129,20 @@ shutterWander(shutter, windDirection) {
 
   next_swap = randomint(3) + 1;
   modifier = 1;
-  if(coinToss())
+  if(coinToss()) {
     modifier *= -1;
+  }
 
   max_right_angle = 80;
   max_left_angle = 80;
 
-  if(isDefined(shutter.script_max_left_angle))
+  if(isDefined(shutter.script_max_left_angle)) {
     max_left_angle = shutter.script_max_left_angle;
+  }
 
-  if(isDefined(shutter.script_max_right_angle))
+  if(isDefined(shutter.script_max_right_angle)) {
     max_right_angle = shutter.script_max_right_angle;
+  }
 
   for(;;) {
     shutter notify("shutterSound");
@@ -149,11 +157,13 @@ shutterWander(shutter, windDirection) {
     rot *= modifier;
 
     if(modifier > 0) {
-      if(rot > max_right_angle)
+      if(rot > max_right_angle) {
         rot = max_right_angle;
+      }
     } else {
-      if(rot > max_left_angle)
+      if(rot > max_left_angle) {
         rot = max_left_angle;
+      }
     }
 
     dest_yaw = pivot.startYaw + rot;
@@ -161,8 +171,9 @@ shutterWander(shutter, windDirection) {
     dif = abs(pivot.angles[1] - dest_yaw);
 
     newTime = dif * 0.05 + RandomFloat(1) + 0.25;
-    if(newTime < 0.25)
+    if(newTime < 0.25) {
       newTime = 0.25;
+    }
 
     pivot RotateTo((0, dest_yaw, 0), newTime, newTime * 0.5, newTime * 0.5);
     //Print3d( pivot.origin, newtime, (1,1,1), 1, 1, int( newTime * 20 ) );
@@ -180,8 +191,9 @@ shutterWanderLeft(shutter, windDirection) {
   level endon("wind blows");
 
   newYaw = shutter.startYaw;
-  if(windDirection == "left")
+  if(windDirection == "left") {
     newYaw += 179.9;
+  }
 
   newTime = 0.2;
   shutter RotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
@@ -190,8 +202,9 @@ shutterWanderLeft(shutter, windDirection) {
   for(;;) {
     shutter notify("shutterSound");
     rot = RandomInt(80);
-    if(coinToss())
+    if(coinToss()) {
       rot *= -1;
+    }
 
     newYaw = shutter.angles[1] + rot;
     altYaw = shutter.angles[1] + (rot * -1);
@@ -202,8 +215,9 @@ shutterWanderLeft(shutter, windDirection) {
     dif = abs(shutter.angles[1] - newYaw);
 
     newTime = dif * 0.02 + RandomFloat(2);
-    if(newTime < 0.3)
+    if(newTime < 0.3) {
       newTime = 0.3;
+    }
     //		println ("startyaw " + shutter.startyaw + " newyaw " + newYaw);
 
     //		assert (newYaw >= shutter.startYaw);
@@ -224,8 +238,9 @@ shutterWanderRight(shutter, windDirection) {
   level endon("wind blows");
 
   newYaw = shutter.startYaw;
-  if(windDirection == "left")
+  if(windDirection == "left") {
     newYaw += 179.9;
+  }
 
   newTime = 0.2;
   shutter RotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
@@ -234,8 +249,9 @@ shutterWanderRight(shutter, windDirection) {
   for(;;) {
     shutter notify("shutterSound");
     rot = RandomInt(80);
-    if(RandomInt(100) > 50)
+    if(RandomInt(100) > 50) {
       rot *= -1;
+    }
 
     newYaw = shutter.angles[1] + rot;
     altYaw = shutter.angles[1] + (rot * -1);
@@ -246,8 +262,9 @@ shutterWanderRight(shutter, windDirection) {
     dif = abs(shutter.angles[1] - newYaw);
 
     newTime = dif * 0.02 + RandomFloat(2);
-    if(newTime < 0.3)
+    if(newTime < 0.3) {
       newTime = 0.3;
+    }
     //		println ("startyaw " + shutter.startyaw + " newyaw " + newYaw);
 
     //		assert (newYaw >= shutter.startYaw);
@@ -338,8 +355,9 @@ awningWander(ent) {
   			break;
   	}
   	
-  	if(!isdefined (ent.animname))
+  	if(!isdefined (ent.animname)) {
   		return;
+  	}
   	
   	wait RandomFloat(2);
   	
@@ -387,8 +405,9 @@ palmTrees(ent) {
       break;
   }
 
-  if(!isDefined(ent.animname))
+  if(!isDefined(ent.animname)) {
     return;
+  }
 
   wait RandomFloat(2);
 

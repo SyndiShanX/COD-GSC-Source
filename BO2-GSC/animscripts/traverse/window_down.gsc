@@ -59,8 +59,9 @@ main() {
     wait 0.05;
   }
 
-  if(isDefined(self.groundtype))
+  if(isDefined(self.groundtype)) {
     self playSound("Land_" + self.groundtype);
+  }
 
   self notify("stop_traverse_notetracks");
   self setflaggedanimknoballrestart("traverse", landanim, % body, 1, 0.15, 1);

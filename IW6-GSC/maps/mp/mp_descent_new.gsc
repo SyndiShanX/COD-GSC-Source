@@ -109,15 +109,17 @@ connect_watch_endofframe(player) {
   player endon("death");
 
   waittillframeend;
-  if(isDefined(level.vista))
+  if(isDefined(level.vista)) {
     player PlayerSetGroundReferenceEnt(level.vista);
+  }
 }
 
 spawn_watch() {
   while(1) {
     level waittill("player_spawned", player);
-    if(isDefined(level.vista))
+    if(isDefined(level.vista)) {
       player PlayerSetGroundReferenceEnt(level.vista);
+    }
   }
 }
 
@@ -156,8 +158,9 @@ world_tilt() {
 
   foreach(ent in vista_ents) {
     if(ent != level.vista) {
-      if(isDefined(ent.classname) && IsSubStr(ent.classname, "trigger"))
+      if(isDefined(ent.classname) && IsSubStr(ent.classname, "trigger")) {
         ent EnableLinkTo();
+      }
       ent LinkTo(level.vista);
     }
     if(!isDefined(ent.target)) {
@@ -165,8 +168,9 @@ world_tilt() {
     }
     targets = getEntArray(ent.target, "targetname");
     foreach(target in targets) {
-      if(!isDefined(target.script_noteworthy))
+      if(!isDefined(target.script_noteworthy)) {
         target.script_noteworthy = "link";
+      }
 
       switch (target.script_noteworthy) {
         case "link":
@@ -178,8 +182,9 @@ world_tilt() {
     }
   }
 
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     waitframe();
+  }
 
   foreach(player in level.players) {
     player PlayerSetGroundReferenceEnt(level.vista);
@@ -305,8 +310,9 @@ world_tilt_damage(damage) {
   damage_scale = clamp((damage - damage_min) / (damage_max - damage_min), .1, 1);
 
   pitch_move = RandomFloatRange(2, 3) * damage_scale;
-  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "east")
+  if(isDefined(self.script_noteworthy) && self.script_noteworthy == "east") {
     pitch_move *= -1.0;
+  }
 
   new_pitch = level.vista.angles[0] + pitch_move;
   new_pitch = Clamp(new_pitch, -1 * level.max_world_pitch, level.max_world_pitch);
@@ -320,8 +326,9 @@ world_tilt_damage(damage) {
 }
 
 wait_game_percent_complete(time_percent, score_percent) {
-  if(!isDefined(score_percent))
+  if(!isDefined(score_percent)) {
     score_percent = time_percent;
+  }
 
   gameFlagWait("prematch_done");
 
@@ -380,8 +387,9 @@ get_highest_score() {
   } else {
     if(isDefined(level.players)) {
       foreach(player in level.players) {
-        if(isDefined(player.score) && player.score > highestScore)
+        if(isDefined(player.score) && player.score > highestScore) {
           highestScore = player.score;
+        }
       }
     }
   }
@@ -412,20 +420,24 @@ world_tilt_move(trans) {
   level thread tilt_sounds();
 
   move_time = trans["time"];
-  if(trans["origin"] != self.origin)
+  if(trans["origin"] != self.origin) {
     self MoveTo(trans["origin"], move_time, move_time);
-  if(anglesClamp180(trans["angles"]) != anglesClamp180(self.angles))
+  }
+  if(anglesClamp180(trans["angles"]) != anglesClamp180(self.angles)) {
     self RotateTo(trans["angles"], move_time);
+  }
 
   Earthquake(RandomFloatRange(.3, .5), move_time, self.origin, 100000);
   wait move_time;
 }
 
 array_zero_to_one_rand(count, min_value, max_value, sum_to) {
-  if(!isDefined(min_value))
+  if(!isDefined(min_value)) {
     min_value = 0;
-  if(!isDefined(max_value))
+  }
+  if(!isDefined(max_value)) {
     max_value = 1;
+  }
 
   a = [];
   sum = 0;
@@ -449,8 +461,9 @@ array_zero_to_one_rand(count, min_value, max_value, sum_to) {
 }
 
 array_zero_to_one(count, rand, sum_to) {
-  if(!isDefined(rand))
+  if(!isDefined(rand)) {
     rand = 0;
+  }
 
   a = [];
 
@@ -558,8 +571,9 @@ watersheet_sound_play(trig) {
 
     trig playLoopSound("scn_jungle_under_falls_plr");
 
-    while(trig.sound_end_time > GetTime())
+    while(trig.sound_end_time > GetTime()) {
       wait(trig.sound_end_time - GetTime()) / 1000;
+    }
 
     trig StopLoopSound();
   }
@@ -740,14 +754,17 @@ moverCreate(moverName, triggerFlag) {
     if(isDefined(struct)) {
       ent.keyframes[i] = struct;
 
-      if(!isDefined(struct.script_duration))
+      if(!isDefined(struct.script_duration)) {
         struct.script_duration = 1.0;
+      }
 
-      if(!isDefined(struct.script_accel))
+      if(!isDefined(struct.script_accel)) {
         struct.script_accel = 0.0;
+      }
 
-      if(!isDefined(struct.script_decel))
+      if(!isDefined(struct.script_decel)) {
         struct.script_decel = 0.0;
+      }
 
       i++;
       nextKeyFrameName = struct.target;
@@ -762,8 +779,9 @@ moverCreate(moverName, triggerFlag) {
 moverExplosiveTrigger(note) {
   level endon("game_ended");
 
-  if(!isDefined(note))
+  if(!isDefined(note)) {
     note = "explosive_damage";
+  }
 
   self setCanDamage(true);
   while(true) {
@@ -969,10 +987,12 @@ setupBuildingCollapse() {
 
     level.dropNodes[level.dropNodes.size] = curNode;
 
-    if(isDefined(curNode.target))
+    if(isDefined(curNode.target)) {
       curNode = getstruct(curNode.target, "targetname");
-    else
+    }
+    else {
       break;
+    }
   }
 
   level thread dropNodeWait();
@@ -1042,12 +1062,14 @@ doBuildingFall(nodeIndex) {
   Earthquake(RandomFloatRange(0.1, 0.2), startShockTime, level.mapCenter, CONST_EARTHQUAKE_RANGE);
 
   targetRoll = RandomFloatRange(CONST_DEFAULT_MIN_ROLL, CONST_DEFAULT_MAX_ROLL);
-  if(RandomFloat(1) < 0.5)
+  if(RandomFloat(1) < 0.5) {
     targetRoll *= -1;
+  }
 
   targetPitch = RandomFloatRange(CONST_DEFAULT_MIN_PITCH, CONST_DEFAULT_MAX_PITCH);
-  if(RandomFloat(1) < 0.5)
+  if(RandomFloat(1) < 0.5) {
     targetPitch *= -1;
+  }
 
   targetAngle = (targetPitch, 0, targetRoll);
   level.vista RotateTo(0.75 * targetAngle, startShockTime, 1.0 * startShockTime, 0.0);
@@ -1230,8 +1252,9 @@ periodicTremor(minTime, maxTime) {
   interval = 0.5 * RandomFloatRange(minTime, maxTime);
 
   debugInterval = GetDvarInt("scr_dbg_tremor_interval");
-  if(debugInterval > 0)
+  if(debugInterval > 0) {
     interval = debugInterval;
+  }
 
   wait(interval);
 
@@ -1249,8 +1272,9 @@ periodicTremor(minTime, maxTime) {
     interval = RandomFloatRange(minTime, maxTime);
 
     debugInterval = GetDvarInt("scr_dbg_tremor_interval");
-    if(debugInterval > 0)
+    if(debugInterval > 0) {
       interval = debugInterval;
+    }
 
     wait(interval);
   }
@@ -1302,11 +1326,13 @@ debugDescent() {
 
 checkDbgDvar(dvarName, callback, notifyStr) {
   if(GetDvarInt(dvarName) > 0) {
-    if(isDefined(callback))
+    if(isDefined(callback)) {
       [[callback]](GetDvarInt(dvarName));
+    }
 
-    if(isDefined(notifyStr))
+    if(isDefined(notifyStr)) {
       level notify(notifyStr);
+    }
 
     SetDvar(dvarName, 0);
   }

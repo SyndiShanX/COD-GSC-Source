@@ -11,16 +11,19 @@ init(localclientnum) {
   level._effect["acousticsensor_enemy_light"] = loadfx("misc/fx_equip_light_red");
   level._effect["acousticsensor_friendly_light"] = loadfx("misc/fx_equip_light_green");
 
-  if(!isDefined(level.acousticsensors))
+  if(!isDefined(level.acousticsensors)) {
     level.acousticsensors = [];
+  }
 
-  if(!isDefined(level.acousticsensorhandle))
+  if(!isDefined(level.acousticsensorhandle)) {
     level.acousticsensorhandle = 0;
+  }
 
   setlocalradarenabled(localclientnum, 0);
 
-  if(localclientnum == 0)
+  if(localclientnum == 0) {
     level thread updateacousticsensors();
+  }
 }
 
 addacousticsensor(handle, sensorent, owner) {
@@ -75,8 +78,9 @@ updateacousticsensors() {
     localplayers = level.localplayers;
 
     if(previousacousticsensorcount != 0 || level.acousticsensors.size != 0) {
-      for(i = 0; i < localplayers.size; i++)
+      for(i = 0; i < localplayers.size; i++) {
         localradarenabled[i] = 0;
+      }
 
       for(i = 0; i < level.acousticsensors.size; i++) {
         if(isDefined(level.acousticsensors[i].sensorent.stunned) && level.acousticsensors[i].sensorent.stunned) {
@@ -90,8 +94,9 @@ updateacousticsensors() {
         }
       }
 
-      for(i = 0; i < localplayers.size; i++)
+      for(i = 0; i < localplayers.size; i++) {
         setlocalradarenabled(i, localradarenabled[i]);
+      }
     }
 
     previousacousticsensorcount = level.acousticsensors.size;

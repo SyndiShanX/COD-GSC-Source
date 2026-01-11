@@ -166,8 +166,9 @@ main() {
   maps\_utility::add_hint_string("where_is_he", &"SNIPERESCAPE_WHERE_IS_HE", maps\sniperescape_code::should_break_where_is_he);
   maps\sniperescape_code::set_c4_throw_binding();
 
-  if(level.start_point != "sunset")
+  if(level.start_point != "sunset") {
     thread maps\_radiation::main();
+  }
 
   maps\sniperescape_anim::main();
   level thread maps\sniperescape_amb::main();
@@ -296,10 +297,12 @@ main() {
   common_scripts\utility::run_thread_on_targetname("set_go_line", maps\sniperescape_code::set_go_line);
   common_scripts\utility::run_thread_on_targetname("enemy_door_trigger", maps\sniperescape_code::enemy_door_trigger);
 
-  if(getdvar("use_old_obj_grass") == "1")
+  if(getdvar("use_old_obj_grass") == "1") {
     common_scripts\utility::run_thread_on_targetname("grass_obj", maps\sniperescape_wounding::grass_obj);
-  else
+  }
+  else {
     thread maps\sniperescape_wounding::ferris_wheel_placement_objective();
+  }
 
   level.kill_heli_last_warning_refresh_time = 0;
   level.kill_heli_index = 0;
@@ -344,10 +347,12 @@ monitor_macmellon() {
   self endon("melonhead_monitor");
 
   for(;;) {
-    if(level.melonhead_mode_enabled)
+    if(level.melonhead_mode_enabled) {
       self.name = "Cpt. MacMellon";
-    else
+    }
+    else {
       self.name = "Cpt. MacMillan";
+    }
 
     level waittill("melonhead_mode_updated");
   }
@@ -363,10 +368,12 @@ music() {
   for(;;) {
     maps\_utility::musicplaywrapper("sniperescape_secondary_run_music");
 
-    if(!common_scripts\utility::flag("fairbattle_detected") && common_scripts\utility::flag("heat_enemies_back_off"))
+    if(!common_scripts\utility::flag("fairbattle_detected") && common_scripts\utility::flag("heat_enemies_back_off")) {
       wait 56;
-    else
+    }
+    else {
       wait 24;
+    }
 
     if(level.firstplay) {
       level.firstplay = 0;
@@ -438,8 +445,9 @@ priceinit() {
 }
 
 playerangles() {
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 snipe() {
@@ -506,8 +514,9 @@ snipe() {
   wait 0.25;
   maps\sniperescape_code::price_clears_dialogue();
 
-  if(!common_scripts\utility::flag("exchange_success"))
+  if(!common_scripts\utility::flag("exchange_success")) {
     common_scripts\utility::flag_wait("exchange_success");
+  }
 
   maps\_utility::objective_complete(maps\sniperescape_wounding::getobj("zakhaev"));
   wait 2;
@@ -605,8 +614,9 @@ price_talks() {
 }
 
 barline() {
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 setup_rappel() {
@@ -624,18 +634,21 @@ setup_rappel() {
   common_scripts\utility::flag_clear("aa_snipe");
   var_4 maps\_anim::anim_single_solo(level.price, "spotter_exit");
 
-  if(isDefined(level.binocs))
+  if(isDefined(level.binocs)) {
     level.binocs delete();
+  }
 }
 
 trigger_monitor_player_lean() {
   self endon("stop_monitor_lean");
 
   for(;;) {
-    if(level.player isleaning())
+    if(level.player isleaning()) {
       common_scripts\utility::trigger_off();
-    else
+    }
+    else {
       common_scripts\utility::trigger_on();
+    }
 
     waitframe();
   }
@@ -719,18 +732,21 @@ rappel_out_of_hotel() {
   var_0 = getnode("price_rappel_node", "targetname");
   common_scripts\utility::flag_set("player_can_rappel");
 
-  if(getdvarint("use_old_macmillan_rappel") == 1)
+  if(getdvarint("use_old_macmillan_rappel") == 1) {
     var_0 thread maps\_anim::anim_reach_solo(level.price, "rappel_start");
-  else
+  }
+  else {
     h1_handle_mac_run_past_chair();
+  }
 
   maps\_utility::delaythread(2, common_scripts\_exploder::exploder, 6);
   var_1 = [];
   var_1[var_1.size] = level.price;
   var_1[var_1.size] = level.rope;
 
-  if(!common_scripts\utility::flag("player_rappels"))
+  if(!common_scripts\utility::flag("player_rappels")) {
     price_climbs_until_player_rappels(var_1, var_0);
+  }
 
   if(!common_scripts\utility::flag("price_starts_rappel")) {
     level.price_anim_start_time = gettime() + 100;
@@ -740,10 +756,12 @@ rappel_out_of_hotel() {
   wait 0.15;
   var_2 = 1;
 
-  if(!isDefined(level.rappel_buffer))
+  if(!isDefined(level.rappel_buffer)) {
     wait(var_2);
-  else
+  }
+  else {
     maps\_utility::wait_for_buffer_time_to_pass(level.rappel_buffer, var_2);
+  }
 
   var_3 = getanimlength(level.price maps\_utility::getanim("rappel_start"));
   var_4 = gettime() - level.price_anim_start_time;
@@ -771,8 +789,9 @@ rappel_out_of_hotel() {
 activate_chair_clip() {
   level endon("player_rappels");
 
-  while(level.player istouching(self))
+  while(level.player istouching(self)) {
     waitframe();
+  }
 
   self solid();
 }
@@ -1042,8 +1061,9 @@ confirm_price_at_goal() {
 fight_enemies_behind() {
   level endon("crash_heli_shows_up");
 
-  if(common_scripts\utility::flag("price_arrives_wait_more_behind_node"))
+  if(common_scripts\utility::flag("price_arrives_wait_more_behind_node")) {
     maps\_anim::anim_single_solo(self, "behind_turn");
+  }
 
   var_0 = getnode("price_more_behind_node", "targetname");
   self setgoalnode(var_0);
@@ -1056,8 +1076,9 @@ surprisers_interval() {
 surprisers_goal() {
   var_0 = getnode("surprise_guys_goal", "script_noteworthy");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     maps\_utility::set_goal_node(var_0);
+  }
 }
 
 heli_attacks_price() {
@@ -1239,16 +1260,19 @@ pool() {
   thread maps\sniperescape_wounding::pool_have_body();
   common_scripts\utility::flag_init("pool_dogs_flee");
 
-  if(getdvar("player_sees_pool_dogs") == "")
+  if(getdvar("player_sees_pool_dogs") == "") {
     setdvar("player_sees_pool_dogs", "1");
-  else
+  }
+  else {
     common_scripts\utility::flag_set("pool_dogs_flee");
+  }
 
   if(!common_scripts\utility::flag("fairbattle_high_intensity")) {
     var_1 = maps\_utility::get_guys_with_targetname_from_spawner("eating_dog");
 
-    for(var_2 = 0; var_2 < var_1.size; var_2++)
+    for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_1[var_2] thread maps\sniperescape_wounding::pool_dog_think(var_2);
+    }
   }
 
   common_scripts\utility::flag_wait("player_enters_fairgrounds");
@@ -1385,18 +1409,21 @@ fairgrounds_after_prep() {
   wait 2;
   maps\sniperescape_code::sniper_escape_initial_secondary_weapon_loadout();
 
-  if(level.gameskill <= 1)
+  if(level.gameskill <= 1) {
     maps\sniperescape_code::max_ammo_on_legit_sniper_escape_weapon();
+  }
 
   if(getdvar("claymore_hint") == "") {
     setdvar("claymore_hint", "claymore");
     var_1 = level.player maps\_utility::getplayerclaymores();
 
     if(var_1) {
-      if(var_1 < 9)
+      if(var_1 < 9) {
         thread maps\sniperescape_code::price_line("take_my_claymores");
-      else
+      }
+      else {
         thread maps\sniperescape_code::price_line("use_claymores");
+      }
 
       level.player thread maps\_utility::display_hint("claymore_plant");
       wait 4;
@@ -1469,15 +1496,17 @@ start_seaknight() {
 seaknight_flies_in(var_0) {
   var_1 = "seaknight_normal";
 
-  if(level.gameskill >= 1)
+  if(level.gameskill >= 1) {
     var_1 = "seaknight_hard";
+  }
 
   var_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(var_1);
   level.seaknight = var_2;
   thread seaknight_pilot();
 
-  if(!var_0)
+  if(!var_0) {
     var_2 waittill("reached_dynamic_path_end");
+  }
 
   var_3 = getent("seaknight_landing", "targetname");
   var_4 = var_2;
@@ -1564,8 +1593,9 @@ seaknight_flies_in(var_0) {
     common_scripts\utility::flag_clear("aa_seaknight_rescue");
     wait 2;
 
-    if(isalive(level.player))
+    if(isalive(level.player)) {
       maps\_utility::objective_complete(maps\sniperescape_wounding::getobj("seaknight"));
+    }
 
     return;
   }
@@ -1616,8 +1646,9 @@ spawn_seaknight_crew() {
   common_scripts\utility::array_thread(var_2, maps\_utility::send_notify, "stop_first_frame");
   maps\_anim::anim_single(var_2, "unload", "tag_detach");
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++)
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_2[var_3] unlink();
+  }
 
   common_scripts\utility::flag_wait("player_putting_down_price_seaknight");
 
@@ -1643,8 +1674,9 @@ seaknight_guys_cleanup() {
 }
 
 seaknight_pilot() {
-  if(isDefined(level.seaknight.attachedguys[0]))
+  if(isDefined(level.seaknight.attachedguys[0])) {
     level.seaknight.attachedguys[0] setModel("body_force_assault_pilot_woodland");
+  }
 }
 
 seaknight_defender() {
@@ -1667,8 +1699,9 @@ h1_set_up_mac_run_rappel() {
 h1_handle_mac_run_past_chair() {
   level endon("player_rappels");
 
-  if(!isDefined(level.scripted_node_mac_run_rappel))
+  if(!isDefined(level.scripted_node_mac_run_rappel)) {
     h1_set_up_mac_run_rappel();
+  }
 
   var_0 = [];
   var_0[var_0.size] = level.price;

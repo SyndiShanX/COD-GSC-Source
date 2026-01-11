@@ -15,8 +15,9 @@ init() {
   if(isDefined(barrels) && barrels.size > 0) {
     qbarrels = 1;
 
-    for(i = 0; i < barrels.size; i++)
+    for(i = 0; i < barrels.size; i++) {
       all_barrels[all_barrels.size] = barrels[i];
+    }
   }
 
   barrels = getEntArray("explodable_barrel", "script_noteworthy");
@@ -24,8 +25,9 @@ init() {
   if(isDefined(barrels) && barrels.size > 0) {
     qbarrels = 1;
 
-    for(i = 0; i < barrels.size; i++)
+    for(i = 0; i < barrels.size; i++) {
       all_barrels[all_barrels.size] = barrels[i];
+    }
   }
 
   if(qbarrels) {
@@ -47,8 +49,9 @@ init() {
   if(isDefined(crates) && crates.size > 0) {
     qcrates = 1;
 
-    for(i = 0; i < crates.size; i++)
+    for(i = 0; i < crates.size; i++) {
       all_crates[all_crates.size] = crates[i];
+    }
   }
 
   crates = getEntArray("flammable_crate", "script_noteworthy");
@@ -56,8 +59,9 @@ init() {
   if(isDefined(crates) && crates.size > 0) {
     qcrates = 1;
 
-    for(i = 0; i < crates.size; i++)
+    for(i = 0; i < crates.size; i++) {
       all_crates[all_crates.size] = crates[i];
+    }
   }
 
   if(qcrates) {
@@ -72,8 +76,9 @@ init() {
     array_thread(all_crates, ::flammable_crate_think);
   }
 
-  if(!qbarrels && !qcrates)
+  if(!qbarrels && !qcrates) {
     return;
+  }
 }
 
 explodable_barrel_think() {
@@ -86,8 +91,9 @@ explodable_barrel_think() {
   self setCanDamage(1);
   self.targetname = "explodable_barrel";
 
-  if(sessionmodeiszombiesgame())
+  if(sessionmodeiszombiesgame()) {
     self.removeexplodable = 1;
+  }
 
   for(;;) {
     self waittill("damage", amount, attacker, direction_vec, p, type);
@@ -100,15 +106,18 @@ explodable_barrel_think() {
     if(isDefined(self.script_requires_player) && self.script_requires_player && !isplayer(attacker)) {
       continue;
     }
-    if(isDefined(self.script_selfisattacker) && self.script_selfisattacker)
+    if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
       self.damageowner = self;
-    else
+    }
+    else {
       self.damageowner = attacker;
+    }
 
     self.health = self.health - amount;
 
-    if(self.health <= level.barrelburn)
+    if(self.health <= level.barrelburn) {
       self thread explodable_barrel_burn();
+    }
   }
 }
 
@@ -133,14 +142,16 @@ explodable_barrel_burn() {
       startedfx = 1;
     }
 
-    if(count > 20)
+    if(count > 20) {
       count = 0;
+    }
 
     playFX(level.breakables_fx["barrel"]["burn"], self.origin + offset2);
     self playLoopSound("barrel_fuse");
 
-    if(count == 0)
+    if(count == 0) {
       self.health = self.health - (10 + randomint(10));
+    }
 
     count++;
     wait 0.05;
@@ -174,25 +185,30 @@ explodable_barrel_explode() {
   physicsexplosionsphere(self.origin + offset, 100, 80, 1, maxdamage, mindamage);
   level.barrelexplodingthisframe = 1;
 
-  if(isDefined(self.remove))
+  if(isDefined(self.remove)) {
     self.remove delete();
+  }
 
-  if(isDefined(self.radius))
+  if(isDefined(self.radius)) {
     blastradius = self.radius;
+  }
 
   self radiusdamage(self.origin + vectorscale((0, 0, 1), 56.0), blastradius, maxdamage, mindamage, self.damageowner);
   attacker = undefined;
 
-  if(isDefined(self.damageowner))
+  if(isDefined(self.damageowner)) {
     attacker = self.damageowner;
+  }
 
   level.lastexplodingbarrel["time"] = gettime();
   level.lastexplodingbarrel["origin"] = self.origin + vectorscale((0, 0, 1), 30.0);
 
-  if(isDefined(self.removeexplodable))
+  if(isDefined(self.removeexplodable)) {
     self hide();
-  else
+  }
+  else {
     self setModel("global_explosive_barrel");
+  }
 
   if(dot < 0.5) {
     start = self.origin + vectorscale(up, 22);
@@ -221,18 +237,22 @@ flammable_crate_think() {
     if(isDefined(self.script_requires_player) && self.script_requires_player && !isplayer(attacker)) {
       continue;
     }
-    if(isDefined(self.script_selfisattacker) && self.script_selfisattacker)
+    if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
       self.damageowner = self;
-    else
+    }
+    else {
       self.damageowner = attacker;
+    }
 
-    if(level.barrelexplodingthisframe)
+    if(level.barrelexplodingthisframe) {
       wait(randomfloat(1));
+    }
 
     self.health = self.health - amount;
 
-    if(self.health <= level.crateburn)
+    if(self.health <= level.crateburn) {
       self thread flammable_crate_burn();
+    }
   }
 }
 
@@ -257,13 +277,15 @@ flammable_crate_burn() {
       startedfx = 1;
     }
 
-    if(count > 20)
+    if(count > 20) {
       count = 0;
+    }
 
     playFX(level.breakables_fx["ammo_crate"]["burn"], self.origin);
 
-    if(count == 0)
+    if(count == 0) {
       self.health = self.health - (10 + randomint(10));
+    }
 
     count++;
     wait 0.05;
@@ -296,16 +318,19 @@ flammable_crate_explode() {
   physicsexplosionsphere(self.origin + offset, 100, 80, 1, maxdamage, mindamage);
   level.barrelexplodingthisframe = 1;
 
-  if(isDefined(self.remove))
+  if(isDefined(self.remove)) {
     self.remove delete();
+  }
 
-  if(isDefined(self.radius))
+  if(isDefined(self.radius)) {
     blastradius = self.radius;
+  }
 
   attacker = undefined;
 
-  if(isDefined(self.damageowner))
+  if(isDefined(self.damageowner)) {
     attacker = self.damageowner;
+  }
 
   self radiusdamage(self.origin + vectorscale((0, 0, 1), 30.0), blastradius, maxdamage, mindamage, attacker);
   self setModel("global_flammable_crate_jap_piece01_d");
@@ -332,11 +357,13 @@ breakable_clip() {
     }
   }
 
-  if(isDefined(level.breakables_clip) && level.breakables_clip.size > 0)
+  if(isDefined(level.breakables_clip) && level.breakables_clip.size > 0) {
     self.remove = getclosestent(self.origin, level.breakables_clip);
+  }
 
-  if(isDefined(self.remove))
+  if(isDefined(self.remove)) {
     arrayremovevalue(level.breakables_clip, self.remove);
+  }
 }
 
 getclosestent(org, array) {

@@ -352,13 +352,15 @@ script_shooting_tanks_01() {
   wait 23;
   var_1 = getEntArray("targets_spaceport_firing01_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (6880, -23728, -127675));
+  }
 
   wait 30;
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position");
+  }
 }
 
 script_shooting_tanks_04() {
@@ -367,13 +369,15 @@ script_shooting_tanks_04() {
   wait 28;
   var_1 = getEntArray("targets_spaceport_firing04_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (7896, -13914, -127675));
+  }
 
   wait 34;
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position");
+  }
 }
 
 script_shooting_tanks_02() {
@@ -382,13 +386,15 @@ script_shooting_tanks_02() {
   wait 32;
   var_1 = getEntArray("targets_spaceport_firing02_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (6555, -575, -127565));
+  }
 
   wait 34;
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position");
+  }
 }
 
 script_shooting_tanks_03() {
@@ -397,13 +403,15 @@ script_shooting_tanks_03() {
   wait 32;
   var_1 = getEntArray("targets_spaceport_firing03_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (4109, 9387, -127565));
+  }
 
   wait 35;
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position");
+  }
 }
 
 script_shooting_tanks_05() {
@@ -412,13 +420,15 @@ script_shooting_tanks_05() {
   wait 32;
   var_1 = getEntArray("targets_spaceport_firing05_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (4109, 9387, -127565));
+  }
 
   wait 35;
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position");
+  }
 }
 
 script_shooting_tanks_06() {
@@ -427,13 +437,15 @@ script_shooting_tanks_06() {
   wait 40;
   var_1 = getEntArray("targets_spaceport_firing06_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (-12067, 5129, -127565));
+  }
 
   wait 35;
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position");
+  }
 }
 
 script_shooting_tanks_07() {
@@ -442,13 +454,15 @@ script_shooting_tanks_07() {
   wait 40;
   var_1 = getEntArray("targets_spaceport_firing07_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (-12067, 5129, -127565));
+  }
 
   wait 35;
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position");
+  }
 }
 
 script_shooting_tanks_08() {
@@ -457,8 +471,9 @@ script_shooting_tanks_08() {
   wait 50;
   var_1 = getEntArray("targets_west_firing01_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (-10551, 3849, -127565));
+  }
 }
 
 script_shooting_tanks_09() {
@@ -467,8 +482,9 @@ script_shooting_tanks_09() {
   wait 50;
   var_1 = getEntArray("targets_airfield_north_firing01_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (-6665, 10065, -127565));
+  }
 }
 
 script_shooting_tanks_10() {
@@ -477,8 +493,9 @@ script_shooting_tanks_10() {
   wait 55;
   var_1 = getEntArray("targets_airfield_north_firing02_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (10671, 9063, -127565));
+  }
 }
 
 script_vehicle_jets_01() {
@@ -606,20 +623,23 @@ script_missile_attacks01() {
   wait 7;
   var_0 = getEntArray("targets_missile_launcher_area_01_model", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 notify("update_firing_position", (-8108, -2642, -127714));
+  }
 
   wait 10;
   var_0 = getEntArray("targets_missile_launcher_area_01_model", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 notify("update_firing_position", (-1196, -3108, -127730));
+  }
 
   wait 6;
   var_0 = getEntArray("targets_missile_launcher_area_01_model", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 notify("update_firing_position", (-6274, 574, -127730));
+  }
 
   wait 2;
   thread script_missile_attacks02();
@@ -631,14 +651,16 @@ script_missile_attacks02() {
   wait 7;
   var_1 = getEntArray("targets_missile_launcher_area_02_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (7206, -10192, -127728));
+  }
 
   wait 7;
   var_1 = getEntArray("targets_missile_launcher_area_02_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (6952, -7622, -127728));
+  }
 
   common_scripts\utility::flag_wait("ROG_look_at_airfield");
   thread script_missile_attacks03();
@@ -650,14 +672,16 @@ script_missile_attacks03() {
   wait 7;
   var_1 = getEntArray("targets_missile_launcher_area_03_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (-12860, 2976, -127728));
+  }
 
   wait 7;
   var_1 = getEntArray("targets_missile_launcher_area_03_model", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notify("update_firing_position", (-7074, 12432, -127728));
+  }
 }
 
 rog_spawn_and_move(var_0, var_1, var_2) {
@@ -680,24 +704,29 @@ rog_spawn_and_move(var_0, var_1, var_2) {
     var_4 = common_scripts\utility::array_add(var_4, var_7);
   }
 
-  if(isDefined(var_2) && !var_2)
+  if(isDefined(var_2) && !var_2) {
     level thread rog_audio_hook_group(var_0);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level thread script_delete_vehicles(var_4, var_1);
+  }
 }
 
 rog_audio_hook_group(var_0) {
   var_1 = undefined;
 
-  if("vehicle_jet_spaceport_02" == var_0)
+  if("vehicle_jet_spaceport_02" == var_0) {
     var_1 = level.jet_passby_09b;
-  else if("vehicle_jet_airstrip_01" == var_0)
+  }
+  else if("vehicle_jet_airstrip_01" == var_0) {
     var_1 = level.jet_passby_10;
+  }
 
   if(isDefined(var_1)) {
-    for(var_2 = getEntArray(var_0 + "_vehicle", "targetname"); var_2.size > 0; var_2 = getEntArray(var_0 + "_vehicle", "targetname"))
+    for(var_2 = getEntArray(var_0 + "_vehicle", "targetname"); var_2.size > 0; var_2 = getEntArray(var_0 + "_vehicle", "targetname")) {
       wait 0.2;
+    }
 
     var_1 notify("destroyed");
   }
@@ -745,8 +774,9 @@ rog_audio_hook() {
     self waittill("death");
     var_0 notify("destroyed");
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 notify("destroyed");
+    }
   }
 }
 
@@ -761,28 +791,33 @@ rog_spawn_and_move_friendly(var_0, var_1) {
     var_3 = common_scripts\utility::array_add(var_3, var_6);
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level thread script_delete_vehicles(var_3, var_1);
+  }
 }
 
 script_delete_vehicles(var_0, var_1) {
   level waittill(var_1);
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 delete();
+  }
 }
 
 wait_till_player_uses_terminal() {
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     setsaveddvar("r_mbEnable", 0);
+  }
 
   thread control_screen_bink_init();
 
-  if(!isDefined(level.breach_anim_node))
+  if(!isDefined(level.breach_anim_node)) {
     maps\loki_space_breach::create_anim_node();
+  }
 
-  while(!isDefined(level.breach_anim_node))
+  while(!isDefined(level.breach_anim_node)) {
     common_scripts\utility::waitframe();
+  }
 
   var_0 = 50;
   var_1 = getent("rog_terminal", "targetname");
@@ -790,8 +825,9 @@ wait_till_player_uses_terminal() {
   thread maps\loki_audio::sfx_loki_control_room_start();
   maps\loki_util::player_boundaries_off();
 
-  if(isDefined(level.glow_console))
+  if(isDefined(level.glow_console)) {
     level.glow_console delete();
+  }
 
   level.allies[0] notify("stop nags");
   level notify("kill_thrusters");
@@ -807,8 +843,9 @@ wait_till_player_uses_terminal() {
   thread put_ally_in_chair();
   var_4 = level.player getweaponammoclip(level.breach_weapon);
 
-  if(var_4 < 10)
+  if(var_4 < 10) {
     var_4 = 20;
+  }
 
   level.player setweaponammoclip(level.breach_weapon, var_4);
   var_5 = 60;
@@ -829,8 +866,9 @@ wait_till_player_uses_terminal() {
   maps\_utility::smart_radio_dialogue("loki_mrk_copythat");
   common_scripts\utility::flag_set("space_breach_vo_done");
 
-  if(!common_scripts\utility::flag("rog_controls_start_done"))
+  if(!common_scripts\utility::flag("rog_controls_start_done")) {
     thread maps\_utility::smart_radio_dialogue("loki_gs3_wilcofiringforeffect");
+  }
 
   thread maps\_utility::smart_radio_dialogue("loki_gs3_thompsonyouhavetargeting");
   common_scripts\utility::flag_wait("rog_controls_start_done");
@@ -867,15 +905,18 @@ wait_till_player_uses_terminal() {
 }
 
 wait_for_player_to_use_chair() {
-  while(common_scripts\utility::flag("use_pressed"))
+  while(common_scripts\utility::flag("use_pressed")) {
     wait 0.1;
+  }
 
   var_0 = getent("rog_controls_use_trigger", "targetname");
 
-  if(level.console || level.player usinggamepad())
+  if(level.console || level.player usinggamepad()) {
     maps\loki_util::waittill_trigger_activate_looking_at(self, "activate_console_hint", 100, 0.5, undefined, 1, var_0);
-  else
+  }
+  else {
     maps\loki_util::waittill_trigger_activate_looking_at(self, "activate_console_hint_pc", 100, 0.5, undefined, 1, var_0);
+  }
 }
 
 manage_player_linked_view(var_0) {
@@ -890,10 +931,12 @@ manage_use_region() {
   self sethintstring(&"SCRIPT_HOLD_TO_USE");
 
   for(;;) {
-    if(level.player istouching(var_0))
+    if(level.player istouching(var_0)) {
       self makeusable();
-    else
+    }
+    else {
       self makeunusable();
+    }
 
     common_scripts\utility::waitframe();
   }
@@ -942,10 +985,12 @@ launch_rogs(var_0) {
   var_2 = common_scripts\utility::array_randomize(var_1);
 
   for(var_3 = 0; var_3 < 6; var_3++) {
-    if(var_3 < 6)
+    if(var_3 < 6) {
       var_4 = "tag_rogfx_0" + var_2[var_3];
-    else
+    }
+    else {
       var_4 = "tag_rogfx_" + var_2[var_3];
+    }
 
     playFXOnTag(common_scripts\utility::getfx("loki_rog_close_1_missile"), self, var_4);
     common_scripts\utility::waitframe();
@@ -954,10 +999,12 @@ launch_rogs(var_0) {
   wait 0.1;
 
   for(var_3 = 0; var_3 < 6; var_3++) {
-    if(var_3 < 6)
+    if(var_3 < 6) {
       var_4 = "tag_rogfx_0" + var_2[var_3];
-    else
+    }
+    else {
       var_4 = "tag_rogfx_" + var_2[var_3];
+    }
 
     killfxontag(common_scripts\utility::getfx("loki_rog_close_1_missile"), self, var_4);
     playFXOnTag(common_scripts\utility::getfx("loki_rog_trail_close_2_emit"), self, var_4);
@@ -1033,8 +1080,9 @@ play_cinematic_thread_once(var_0, var_1, var_2) {
   wait 0.1;
   show_hide_all_static(0);
 
-  while(cinematicgettimeinmsec() < var_2)
+  while(cinematicgettimeinmsec() < var_2) {
     common_scripts\utility::waitframe();
+  }
 
   level notify(var_1);
 }
@@ -1069,8 +1117,9 @@ delete_all_ents() {
     var_0 notify("end_trigger_thread");
   }
 
-  if(!isDefined(level.breach_anim_node))
+  if(!isDefined(level.breach_anim_node)) {
     maps\loki_space_breach::create_anim_node();
+  }
 
   var_1 = 0;
   var_2 = getEntArray();
@@ -1078,14 +1127,16 @@ delete_all_ents() {
 
   foreach(var_4 in var_2) {
     if(isDefined(var_4.origin) && var_4.origin[2] > 55000 && var_4.origin[0] > -76000) {
-      if(isai(var_4))
+      if(isai(var_4)) {
         var_4 kill();
+      }
     }
 
     if(isDefined(var_4.origin) && var_4.origin[2] > 55000 && var_4.origin[2] < 92300) {
       if(!isDefined(var_4.model) || var_4.model != "loki_rog_satellite_close") {
-        if(isai(var_4))
+        if(isai(var_4)) {
           var_4 kill();
+        }
       }
     }
   }
@@ -1191,14 +1242,17 @@ script_retreating_allies04_firing() {
     var_2 = getEntArray("targets_retreating_allies04_model", "targetname");
 
     if(var_1 == 0) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (-17315, -12647, -127565));
+      }
     } else if(var_1 == 1) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (-5171, -7815, -127565));
+      }
     } else if(var_1 == 2) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (-2531, -12535, -127565));
+      }
     }
 
     wait(randomfloatrange(10.0, 15.0));
@@ -1211,14 +1265,17 @@ script_airfield_allies_west_firing01() {
     var_2 = getEntArray("targets_airfield_allies_west_firing01_model", "targetname");
 
     if(var_1 == 0) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (-27907, 13705, -127565));
+      }
     } else if(var_1 == 1) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (-24515, 8857, -127565));
+      }
     } else if(var_1 == 2) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (-30675, 6313, -127565));
+      }
     }
 
     wait(randomfloatrange(10.0, 15.0));
@@ -1231,14 +1288,17 @@ script_airfield_allies_north_firing01() {
     var_2 = getEntArray("targets_airfield_allies_north_firing01_model", "targetname");
 
     if(var_1 == 0) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (-16963, 20105, -127565));
+      }
     } else if(var_1 == 1) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (-15011, 24633, -127565));
+      }
     } else if(var_1 == 2) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (-9859, 20857, -127565));
+      }
     }
 
     wait(randomfloatrange(10.0, 15.0));
@@ -1251,14 +1311,17 @@ script_airfield_allies_north_firing02() {
     var_2 = getEntArray("targets_airfield_allies_north_firing02_model", "targetname");
 
     if(var_1 == 0) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (-1827, 21161, -127565));
+      }
     } else if(var_1 == 1) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (2413, 22585, -127565));
+      }
     } else if(var_1 == 2) {
-      foreach(var_4 in var_2)
+      foreach(var_4 in var_2) {
       var_4 notify("update_firing_position", (5661, 21369, -127565));
+      }
     }
 
     wait(randomfloatrange(10.0, 15.0));
@@ -1282,8 +1345,9 @@ rog_target_create_model_logic(var_0, var_1) {
     var_2 thread rog_target_deathtimer();
   }
 
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     var_2.script_noteworthy = self.script_noteworthy;
+  }
 
   var_2 thread rog_target_hud_logic(var_2, "ROG_reveal_allies");
   var_2 thread rog_target_firing_logic(var_1);
@@ -1294,14 +1358,16 @@ rog_target_create_model_logic(var_0, var_1) {
 }
 
 rog_target_cleanup(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "rog_done";
+  }
 
   self endon("death");
   common_scripts\utility::flag_wait("ROG_take_in_destruction");
 
-  if("allies" != self.script_team)
+  if("allies" != self.script_team) {
     childthread rog_target_cleaned_up_by_allies();
+  }
 
   common_scripts\utility::flag_wait(var_0);
   rog_target_overkill_death(1, 0);
@@ -1360,13 +1426,16 @@ rog_target_handle_rod_impact(var_0) {
     wait(var_4[var_6]);
 
     if(var_2 < var_3 * var_5[var_6]) {
-      if(self.script_team == "allies")
+      if(self.script_team == "allies") {
         level.rog_pass_fail["allies"]["targets"]++;
-      else if(!self.is_dead)
+      }
+      else if(!self.is_dead) {
         level.rog_num_enemy_targets_killed++;
+      }
 
-      if(var_6 < 2)
+      if(var_6 < 2) {
         thread rog_target_overkill_death(0, 0);
+      }
       else if(!self.is_dead) {
         self.is_dead = 1;
         thread rog_target_normal_death(0, self.origin - (var_0 - (0, 0, 384)));
@@ -1387,10 +1456,12 @@ rog_vehicle_handle_rod_impact(var_0) {
     var_5 = length(self.origin - var_0);
 
     if(var_5 < var_1 * var_3[var_4]) {
-      if(var_4 < 1)
+      if(var_4 < 1) {
         childthread vehicle_overkill_from_rog();
-      else
+      }
+      else {
         childthread vehicle_blow_up_from_rog();
+      }
 
       break;
     }
@@ -1402,8 +1473,9 @@ rog_target_handle_enemy_fire(var_0, var_1) {
   var_3 = length(var_2);
   var_4 = level.rog_explosion_radius[var_1];
 
-  if(var_3 < var_4)
+  if(var_3 < var_4) {
     rog_target_normal_death(1);
+  }
 }
 
 rog_target_move_along_path() {
@@ -1413,8 +1485,9 @@ rog_target_move_along_path() {
   var_0 = getvehiclenode(self.target, "targetname");
   var_1 = undefined;
 
-  if(isDefined(var_0.target))
+  if(isDefined(var_0.target)) {
     var_1 = getvehiclenode(var_0.target, "targetname");
+  }
 
   var_2 = var_0.speed;
 
@@ -1423,8 +1496,9 @@ rog_target_move_along_path() {
     var_4 = var_3 / var_2;
     self moveto(var_0.origin, var_4);
 
-    if("allies" != self.script_team)
+    if("allies" != self.script_team) {
       thread rog_target_interupt_path(var_0.origin);
+    }
 
     if(isDefined(var_1)) {
       wait(var_4 * 0.8);
@@ -1436,10 +1510,12 @@ rog_target_move_along_path() {
     if(isDefined(var_1)) {
       var_0 = var_1;
 
-      if(isDefined(var_1.target))
+      if(isDefined(var_1.target)) {
         var_1 = getvehiclenode(var_1.target, "targetname");
-      else
+      }
+      else {
         var_1 = undefined;
+      }
 
       continue;
     }
@@ -1565,14 +1641,16 @@ rog_target_deathtimer() {
 }
 
 rog_target_normal_death(var_0, var_1) {
-  if(self.script_team == "allies" && !var_0)
+  if(self.script_team == "allies" && !var_0) {
     level notify("ally_hit");
+  }
 
   self notify("stop_pathing");
   self moveto(self.origin, 0.05);
 
-  if(!var_0)
+  if(!var_0) {
     thread rog_target_get_thrown(var_1);
+  }
 
   rog_target_remove_hud_element(var_0 == 0);
   self notify("husk");
@@ -1582,16 +1660,18 @@ rog_target_normal_death(var_0, var_1) {
     case "vehicle_t90ms_tank_iw6_low":
       self setModel("vehicle_t90ms_tank_destroyed_iw6_low");
 
-      if(var_0)
+      if(var_0) {
         playFXOnTag(level._effect["target_explosion_tank"], self, "TAG_DEATHFX");
+      }
 
       break;
     case "vehicle_sa6_static_desert":
     case "vehicle_m880_launcher_low":
       self setModel("vehicle_m880_launcher_destroyed_low");
 
-      if(var_0)
+      if(var_0) {
         playFX(level._effect["target_explosion_tank"], self.origin + (0, 0, 64));
+      }
 
       break;
     case "vehicle_mig29":
@@ -1609,19 +1689,22 @@ rog_target_normal_death(var_0, var_1) {
 }
 
 rog_target_overkill_death(var_0, var_1) {
-  if(self.script_team == "allies" && !var_0)
+  if(self.script_team == "allies" && !var_0) {
     level notify("ally_hit");
+  }
 
-  if(var_1)
+  if(var_1) {
     playFX(level._effect["target_explosion_tank"], self.origin + (0, 0, 64));
+  }
 
   rog_target_remove_hud_element(var_0 == 0);
   self delete();
 }
 
 rog_target_get_thrown(var_0) {
-  if(!isDefined(level.rog_fired_targ))
+  if(!isDefined(level.rog_fired_targ)) {
     level.rog_fired_targ = (0, 0, 0);
+  }
 
   var_1 = self.origin - level.rog_fired_targ;
   var_1 = (var_1[0], var_1[1], 0);
@@ -1659,8 +1742,9 @@ rog_target_hud_logic(var_0, var_1) {
 }
 
 rog_target_add_hud_element(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(var_0);
+  }
 
   var_1 = undefined;
 
@@ -1669,8 +1753,9 @@ rog_target_add_hud_element(var_0) {
       case "large_target":
         var_1 = common_scripts\utility::ter_op(self.script_team == "allies", "hud_rog_target_big_g", "hud_rog_target_big_r");
 
-        if(self.script_team == "axis")
+        if(self.script_team == "axis") {
           level.rog_pass_fail["axis"]["targets"]++;
+        }
 
         break;
       case "vehicle":
@@ -1702,8 +1787,9 @@ rog_target_add_hud_element(var_0) {
   var_2 setwaypoint(1);
   level notify("target_reveal");
 
-  if(self.script_team == "axis")
+  if(self.script_team == "axis") {
     self hudoutlineenable(common_scripts\utility::ter_op(self.script_team == "allies", 3, 4), 0);
+  }
 
   self.hud_element = var_2;
 }
@@ -1711,8 +1797,9 @@ rog_target_add_hud_element(var_0) {
 rog_target_remove_hud_element(var_0) {
   if(isDefined(self.hud_element)) {
     if(isDefined(var_0) && var_0) {
-      if(isDefined(self.script_noteworthy) && self.script_noteworthy == "large_target" && self.script_team == "axis")
+      if(isDefined(self.script_noteworthy) && self.script_noteworthy == "large_target" && self.script_team == "axis") {
         level.rog_pass_fail["axis"]["targets"]--;
+      }
     }
 
     self.hud_element destroy();
@@ -1720,8 +1807,9 @@ rog_target_remove_hud_element(var_0) {
     level.current_target_hud_count--;
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self hudoutlinedisable();
+  }
 }
 
 rog_target_vehicle_tracking() {
@@ -1753,15 +1841,17 @@ rog_logic() {
 black_fade(var_0, var_1, var_2) {
   var_3 = maps\_hud_util::create_client_overlay("black", 0, level.player);
 
-  if(var_0 > 0)
+  if(var_0 > 0) {
     var_3 fadeovertime(var_0);
+  }
 
   var_3.alpha = 1;
   wait(var_0);
   wait(var_1);
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     var_3 fadeovertime(var_2);
+  }
 
   var_3.alpha = 0;
   wait(var_2);
@@ -1771,8 +1861,9 @@ black_fade(var_0, var_1, var_2) {
 check_anim_time(var_0, var_1, var_2) {
   var_3 = self getanimtime(level.scr_anim[var_0][var_1]);
 
-  if(var_3 >= var_2)
+  if(var_3 >= var_2) {
     return 1;
+  }
 
   return 0;
 }
@@ -1827,8 +1918,9 @@ rog_fire_single_new(var_0) {
     var_6 = var_6 + level.rog_single_acceleration * level.timestep;
     var_7 = var_7 + level.rog_single_acceleration * level.timestep;
 
-    if(var_7 > level.rog_single_velocity_max)
+    if(var_7 > level.rog_single_velocity_max) {
       var_7 = level.rog_single_velocity_max;
+    }
 
     var_9 = lengthsquared(var_0 - var_1.origin);
     var_10 = 1.0 - var_9 / var_8;
@@ -1879,8 +1971,9 @@ rog_impact_danger_close_check(var_0) {
       var_4 = distance2d(var_3.origin, var_0);
 
       if(var_4 > get_explosion_radius()) {
-        if(level.rog_explosion_radius["danger_close"] > var_4)
+        if(level.rog_explosion_radius["danger_close"] > var_4) {
           level notify("danger_close_train");
+        }
 
         continue;
       }
@@ -1893,8 +1986,9 @@ rog_impact_danger_close_check(var_0) {
     }
   }
 
-  if(var_1)
+  if(var_1) {
     level notify("danger_close");
+  }
 }
 
 preimpactsmoke(var_0) {
@@ -1928,8 +2022,9 @@ rog_get_next_target_marker() {
     var_2 = level.rog_blast_markers[var_1].time;
 
     for(var_1 = 1; var_1 < level.rog_blast_markers.size; var_1++) {
-      if(level.rog_blast_markers[var_1].time < var_2)
+      if(level.rog_blast_markers[var_1].time < var_2) {
         var_2 = level.rog_blast_markers[var_1];
+      }
     }
 
     var_2.time = gettime();
@@ -2054,8 +2149,9 @@ rog_aoe_hide_reticle() {
 }
 
 rog_display_hint_strings() {
-  if(!common_scripts\utility::flag("dont_show_pull_trigger_hint"))
+  if(!common_scripts\utility::flag("dont_show_pull_trigger_hint")) {
     level maps\_utility::delaythread(0.5, maps\_utility::display_hint, "hint_launch_single_rod");
+  }
 }
 
 rog_uav_camera_logic() {
@@ -2119,8 +2215,9 @@ rog_uav_explosion_effects(var_0) {
   var_2 = int(var_1 / pow(10, 8));
   var_3 = var_2 / 10;
 
-  if(var_3 > 2)
+  if(var_3 > 2) {
     return;
+  }
   else {
     var_4 = 0.0;
     level thread rog_uav_initial_blur(4 * var_3);
@@ -2128,13 +2225,15 @@ rog_uav_explosion_effects(var_0) {
     level.player playrumbleonentity("grenade_rumble");
 
     if(var_3 < 1.5) {
-      for(var_5 = 0; var_5 < 6; var_5++)
+      for(var_5 = 0; var_5 < 6; var_5++) {
         level thread maps\loki_rog_hud::uav_static_lines(1);
+      }
     }
 
     if(var_3 < 1.0) {
-      for(var_5 = 0; var_5 < 2; var_5++)
+      for(var_5 = 0; var_5 < 2; var_5++) {
         level thread maps\loki_rog_hud::uav_static_lines(1);
+      }
 
       level.player common_scripts\utility::delaycall(0.5, ::playrumbleonentity, "grenade_rumble");
       var_4 = 2.6;
@@ -2142,8 +2241,9 @@ rog_uav_explosion_effects(var_0) {
     }
 
     if(var_3 < 0.6) {
-      for(var_5 = 0; var_5 < 3; var_5++)
+      for(var_5 = 0; var_5 < 3; var_5++) {
         level thread maps\loki_rog_hud::uav_static_lines(1);
+      }
 
       level maps\_utility::delaythread(0.4, ::static_flash, 1);
       level.player common_scripts\utility::delaycall(1.0, ::playrumbleonentity, "grenade_rumble");
@@ -2182,20 +2282,23 @@ rog_tag_train() {
   var_1 = 0.0;
 
   for(var_2 = 0; var_2 < 5; var_2++) {
-    foreach(var_4 in level.rog_train)
+    foreach(var_4 in level.rog_train) {
     var_4 hudoutlineenable(3, 0);
+    }
 
     level.player playSound("scn_loki_rog_target_on");
     wait 0.2;
 
-    foreach(var_4 in level.rog_train)
+    foreach(var_4 in level.rog_train) {
     var_4 hudoutlinedisable();
+    }
 
     wait 0.25;
   }
 
-  foreach(var_4 in level.rog_train)
+  foreach(var_4 in level.rog_train) {
   var_4 hudoutlineenable(3, 0);
+  }
 
   var_10 = [];
   level.rog_train[7].script_team = "allies";
@@ -2204,13 +2307,15 @@ rog_tag_train() {
   common_scripts\utility::flag_wait("ROG_look_at_main_base");
   wait 13.0;
 
-  foreach(var_4 in level.rog_train)
+  foreach(var_4 in level.rog_train) {
   var_4 hudoutlinedisable();
+  }
 
   common_scripts\utility::flag_wait("ROG_look_at_airfield");
 
-  foreach(var_14 in var_10)
+  foreach(var_14 in var_10) {
   var_14 destroy();
+  }
 }
 
 rog_uav_update_lookat(var_0) {
@@ -2239,8 +2344,9 @@ transition_static(var_0, var_1) {
   level notify("end_connection");
   setsaveddvar("cg_cinematicCanPause", "0");
 
-  if(var_1)
+  if(var_1) {
     stopcinematicingame();
+  }
 }
 
 static_flash(var_0, var_1) {
@@ -2258,8 +2364,9 @@ static_flash(var_0, var_1) {
   for(var_3 = 0; var_3 < var_0; var_3++) {
     var_2.alpha = 1;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       level.player thread maps\_utility::play_sound_on_entity(var_1);
+    }
 
     wait 0.1;
     var_2.alpha = 0;
@@ -2274,8 +2381,9 @@ uav_useby(var_0, var_1) {
   self.view_controller = maps\_utility::get_player_view_controller(self, "tag_origin", (0, 0, -8), "player_view_controller");
   var_2 = self.origin + (0, 0, -1000);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
+  }
 
   self.target_ent = spawn("script_origin", var_2);
   self.view_controller snaptotargetentity(self.target_ent);
@@ -2296,8 +2404,9 @@ uav_rig_controller(var_0, var_1) {
   var_3 = var_0 gettagorigin(var_2);
   var_4 = var_0 gettagangles(var_2);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "player_view_controller";
+  }
 
   var_5 = spawnturret("misc_turret", var_3, var_1);
   var_5.angles = var_4;
@@ -2329,11 +2438,13 @@ uav_cam_lookat(var_0, var_1, var_2, var_3, var_4) {
   } else
     wait(var_2);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level.uav.target_ent unlink();
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     thread lerp_turret_fov(level.uav_defualt_fov, 0.5);
+  }
 
   level notify("camera_release");
   level.player lerpviewangleclamp(1, 0.5, 0.5, 45, 45, 45, 45);
@@ -2421,8 +2532,9 @@ rog_explosion_fx() {
     wait(level.rog_explosion_grow_time / var_4);
   }
 
-  if(common_scripts\utility::flag("enemies_been_hit") && !common_scripts\utility::flag("allies_been_hit"))
+  if(common_scripts\utility::flag("enemies_been_hit") && !common_scripts\utility::flag("allies_been_hit")) {
     level notify("enemy_hit");
+  }
 
   common_scripts\utility::flag_clear("enemies_been_hit");
   common_scripts\utility::flag_clear("allies_been_hit");
@@ -2450,19 +2562,23 @@ rog_hit_radiate_ground_shockwave(var_0, var_1) {
   for(var_2 = 0; var_2 < randomintrange(1, 3); var_2++) {
     var_3 = randomfloatrange(0 - var_1 * 2, var_1 * 2);
 
-    if(var_3 < 0 && var_3 > 0 - var_1 * 0.75)
+    if(var_3 < 0 && var_3 > 0 - var_1 * 0.75) {
       var_3 = 0 - var_1 * 0.75;
+    }
 
-    if(var_3 > 0 && var_3 < var_1 * 0.75)
+    if(var_3 > 0 && var_3 < var_1 * 0.75) {
       var_3 = var_1 * 0.75;
+    }
 
     var_4 = randomfloatrange(0 - var_1 * 2, var_1 * 2);
 
-    if(var_4 < 0 && var_4 > 0 - var_1 * 0.75)
+    if(var_4 < 0 && var_4 > 0 - var_1 * 0.75) {
       var_4 = 0 - var_1 * 0.75;
+    }
 
-    if(var_4 > 0 && var_4 < var_1 * 0.75)
+    if(var_4 > 0 && var_4 < var_1 * 0.75) {
       var_4 = var_1 * 0.75;
+    }
 
     var_5 = var_0[0] + var_3;
     var_6 = var_0[1] + var_4;
@@ -2471,8 +2587,9 @@ rog_hit_radiate_ground_shockwave(var_0, var_1) {
 }
 
 get_ent_array_with_prefix(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_3 = [];
   var_4 = 0;
@@ -2480,10 +2597,12 @@ get_ent_array_with_prefix(var_0, var_1, var_2) {
   for(;;) {
     var_5 = maps\_utility::getent_or_struct_or_node(var_0 + var_2, var_1);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_3[var_4] = var_5;
-    else
+    }
+    else {
       break;
+    }
 
     var_2++;
     var_4++;
@@ -2521,10 +2640,12 @@ rog_scriptable_radius_damage(var_0) {
   foreach(var_6 in level.rog_scriptables) {
     var_7 = length(var_6.origin - var_0);
 
-    if(var_7 < var_1)
+    if(var_7 < var_1) {
       var_3 = common_scripts\utility::array_add(var_3, var_6);
-    else
+    }
+    else {
       var_4 = common_scripts\utility::array_add(var_4, var_6);
+    }
 
     level.rog_scriptables = var_4;
   }
@@ -2549,8 +2670,9 @@ rog_scriptable_radius_damage(var_0) {
   foreach(var_6 in level.rog_scriptables) {
     var_7 = length(var_6.origin - var_0);
 
-    if(var_7 < var_2 && var_7 >= var_1)
+    if(var_7 < var_2 && var_7 >= var_1) {
       var_11 = common_scripts\utility::array_add(var_11, var_6);
+    }
   }
 
   wait 0.1;
@@ -2695,8 +2817,9 @@ throw_rog_destruction(var_0, var_1, var_2, var_3) {
   wait(var_6 * 0.2);
   var_0.origin = var_0.origin + (0, 0, -3000);
 
-  if(var_4)
+  if(var_4) {
     var_0 delete();
+  }
 }
 
 rog_building_collapse() {
@@ -2733,8 +2856,9 @@ rog_building_collapse() {
 
 destruction_reset() {
   foreach(var_1 in level.crater_array) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
   }
 }
 
@@ -2745,12 +2869,14 @@ waittill_any_plus_return(var_0) {
   foreach(var_4 in var_0) {
     childthread common_scripts\utility::waittill_string(var_4, var_2);
 
-    if(var_4 == "death")
+    if(var_4 == "death") {
       var_1 = 1;
+    }
   }
 
-  if(!var_1)
+  if(!var_1) {
     self endon("death");
+  }
 
   var_2 waittill("returned", var_6);
   var_2 notify("die");
@@ -2760,21 +2886,25 @@ waittill_any_plus_return(var_0) {
 space_cleanup() {
   var_0 = getweaponarray();
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 
   var_4 = getscriptablearray();
 
-  foreach(var_6 in var_4)
+  foreach(var_6 in var_4) {
   var_6 delete();
+  }
 
   var_8 = getaiarray("axis");
 
-  foreach(var_10 in var_8)
+  foreach(var_10 in var_8) {
   var_10 delete();
+  }
 
-  if(isDefined(level.player.hud_space_helmet_rim))
+  if(isDefined(level.player.hud_space_helmet_rim)) {
     level.player.hud_space_helmet_rim maps\_hud_util::destroyelem();
+  }
 
   level.player maps\loki::player_helmet_disable();
 }
@@ -2839,8 +2969,9 @@ pip_show_target(var_0) {
 checking_for_hits() {
   level.recent_rog_hits = 0;
 
-  while(!common_scripts\utility::flag("ROG_take_in_destruction"))
+  while(!common_scripts\utility::flag("ROG_take_in_destruction")) {
     wait 4;
+  }
 }
 
 update_scripted_explosion_point(var_0) {
@@ -2890,8 +3021,9 @@ update_scripted_explosion_point(var_0) {
 vehicle_activate_outline(var_0) {
   self endon("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     common_scripts\utility::flag_wait(var_0);
+  }
 
   self hudoutlineenable(4, 0);
 }
@@ -2899,8 +3031,9 @@ vehicle_activate_outline(var_0) {
 friendly_vehicle_activate_outline(var_0) {
   self endon("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     common_scripts\utility::flag_wait(var_0);
+  }
 
   self hudoutlineenable(3, 0);
 }
@@ -2908,8 +3041,9 @@ friendly_vehicle_activate_outline(var_0) {
 check_for_rog_death(var_0, var_1) {
   self endon("death");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     common_scripts\utility::flag_wait(var_1);
+  }
 
   for(;;) {
     level waittill("rog_explosion", var_2, var_3);
@@ -2934,13 +3068,16 @@ vehicle_blow_up_from_rog() {
     playFXOnTag(level._effect["building_blast"], self, "tag_origin");
     rog_target_remove_hud_element(1);
 
-    if(issubstr(self.classname, "mig"))
+    if(issubstr(self.classname, "mig")) {
       thread rog_kill_jet();
+    }
 
-    if(issubstr(self.classname, "hind"))
+    if(issubstr(self.classname, "hind")) {
       thread rog_kill_helicopter();
-    else
+    }
+    else {
       self kill();
+    }
   }
 }
 
@@ -2955,22 +3092,25 @@ setup_rog_warscene() {
 spawn_stage1_missile_trucks() {
   var_0 = getEntArray("ROG_missile_truck_area01", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread create_single_missile_truck(1, var_2.origin, var_2.angles, "ROG_look_at_sat_farm");
+  }
 }
 
 spawn_stage2_missile_trucks() {
   var_0 = getEntArray("ROG_missile_truck_area02", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread create_single_missile_truck(2, var_2.origin, var_2.angles, "ROG_look_at_main_base");
+  }
 }
 
 spawn_stage3_missile_trucks() {
   var_0 = getEntArray("ROG_missile_truck_area03", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread create_single_missile_truck(3, var_2.origin, var_2.angles, "ROG_look_at_main_base");
+  }
 }
 
 create_single_missile_truck(var_0, var_1, var_2, var_3) {
@@ -3011,8 +3151,9 @@ missile_truck_fire_missile(var_0) {
     var_12[var_14 - 1] = self.origin[1] + var_4 * (var_9 * var_14);
   }
 
-  for(var_14 = 1; var_14 <= var_7; var_14++)
+  for(var_14 = 1; var_14 <= var_7; var_14++) {
     var_13[var_14 - 1] = self.origin[2] + var_10 * sqrt(var_14);
+  }
 
   var_15 = var_7;
 
@@ -3190,10 +3331,12 @@ spawn_single_ground_vehicle(var_0, var_1, var_2, var_3, var_4) {
   var_7 = var_1 - var_0;
   var_5 rotateto(vectortoangles(var_7), 0.1);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     common_scripts\utility::flag_wait(var_4);
-  else
+  }
+  else {
     wait(randomfloatrange(0, 2));
+  }
 
   var_5 moveto(var_1, var_6, var_6 * 0.3, var_6 * 0.3);
   var_5 waittill("movedone");
@@ -3272,23 +3415,28 @@ spawn_single_helo() {
 spawn_dogfight_pass() {}
 
 spawn_bombing_run(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = (randomfloatrange(-40638, -2454), randomfloatrange(-80675, -69493), -124148);
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (randomfloatrange(-18256, 26735), randomfloatrange(48087, 52200), -124148);
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = randomfloatrange(10, 20);
+  }
 
   var_3 = 0;
   var_4 = randomintrange(2, 7);
 
   for(var_5 = 0; var_5 < var_4; var_5++) {
-    if(var_4 < 4)
+    if(var_4 < 4) {
       thread single_bomb_run_script(var_0 + (var_3, 0 - abs(var_3), 0), var_1 + (var_3, 0 - abs(var_3), 0), var_2, "large");
-    else
+    }
+    else {
       thread single_bomb_run_script(var_0 + (var_3, 0 - abs(var_3), 0), var_1 + (var_3, 0 - abs(var_3), 0), var_2, "small");
+    }
 
     if(var_3 < 0) {
       var_3 = (var_3 - randomfloatrange(500, 2000)) * -1;
@@ -3395,18 +3543,21 @@ rog_check_done() {
 }
 
 wtf_is_it(var_0) {
-  for(;;)
+  for(;;) {
     wait 1.0;
+  }
 }
 
 debug_wait(var_0) {
   while(var_0 > 0) {
     iprintln(var_0);
 
-    if(1.0 < var_0)
+    if(1.0 < var_0) {
       wait 1.0;
-    else
+    }
+    else {
       wait(var_0);
+    }
 
     var_0 = var_0 - 1.0;
   }
@@ -3596,8 +3747,9 @@ rog_running_cleanup() {
     var_2 = getent("ROG_cleanup_vol_" + var_1, "targetname");
 
     foreach(var_4 in level.rog_target_models) {
-      if(isDefined(var_4) && var_4 istouching(var_2))
+      if(isDefined(var_4) && var_4 istouching(var_2)) {
         var_4 rog_target_overkill_death(1, 0);
+      }
     }
 
     level.rog_target_models = common_scripts\utility::array_removeundefined(level.rog_target_models);
@@ -3608,20 +3760,24 @@ rog_running_cleanup() {
 rog_check_pass_fail(var_0) {
   var_1 = 0;
 
-  if(level.rog_pass_fail["axis"]["targets"] <= level.rog_pass_fail["axis"][var_0])
+  if(level.rog_pass_fail["axis"]["targets"] <= level.rog_pass_fail["axis"][var_0]) {
     var_1 = 1;
+  }
 
   return var_1;
 }
 
 rog_fail_wrapper() {
   if(!common_scripts\utility::flag("ROG_no_fail")) {
-    if(level.rog_ff_fail)
+    if(level.rog_ff_fail) {
       setdvar("ui_deadquote", &"LOKI_ROG_FAIL_FF");
-    else if(level.rog_track_fail)
+    }
+    else if(level.rog_track_fail) {
       setdvar("ui_deadquote", &"LOKI_ROG_FAIL_TRAINTRACK");
-    else
+    }
+    else {
       setdvar("ui_deadquote", &"LOKI_ROG_FAIL");
+    }
 
     level thread maps\_utility::missionfailedwrapper();
   }
@@ -3639,8 +3795,9 @@ rog_check_friendly_fire() {
       maps\_utility::smart_radio_dialogue("loki_kgn_thompsongetyourshots");
       var_0 = 0;
 
-      if(level.rog_pass_fail["allies"]["targets"] > level.rog_pass_fail["allies"]["c"])
+      if(level.rog_pass_fail["allies"]["targets"] > level.rog_pass_fail["allies"]["c"]) {
         level.rog_pass_fail["allies"]["c"] = level.rog_pass_fail["allies"]["targets"] + 2;
+      }
     } else if(!var_0) {
       level.rog_ff_fail = level.rog_pass_fail["allies"]["targets"] > level.rog_pass_fail["allies"]["c"];
 
@@ -3684,8 +3841,9 @@ rog_vo_section_a() {
   var_1 = level common_scripts\utility::waittill_any_timeout(6.0, "rog_strike");
 
   if(var_1 == "rog_strike" || level.rog_strike_active > 0) {
-    if(var_1 == "rog_strike")
+    if(var_1 == "rog_strike") {
       wait 1.15;
+    }
     else {
       level waittill("rog_strike");
       wait 1.15;
@@ -3711,8 +3869,9 @@ rog_vo_section_a() {
     var_1 = level common_scripts\utility::waittill_any_timeout(3.0, "rog_strike");
 
     if(var_1 == "rog_strike" || level.rog_strike_active > 0) {
-      if(var_1 == "rog_strike")
+      if(var_1 == "rog_strike") {
         wait 1.15;
+      }
       else {
         level waittill("rog_strike");
         wait 1.15;
@@ -3760,8 +3919,9 @@ rog_vo_section_b() {
 rog_vo_section_c() {
   wait 6.0;
 
-  while(level.rog_strike_active > 0)
+  while(level.rog_strike_active > 0) {
     wait 0.05;
+  }
 
   if(level.rog_pass_fail["axis"]["targets"] > level.rog_pass_fail["axis"]["c"]) {
     common_scripts\utility::flag_set("ROG_VO_script_active");
@@ -3802,8 +3962,9 @@ rog_achievement_gather_targets() {
   var_1 = common_scripts\utility::array_combine(var_1, getEntArray("targets_airfield_north_02", "targetname"));
 
   foreach(var_3 in var_1) {
-    if(var_3.script_team == "axis")
+    if(var_3.script_team == "axis") {
       var_0++;
+    }
   }
 
   level.rog_achievement_target_count = var_0;
@@ -3811,8 +3972,9 @@ rog_achievement_gather_targets() {
 
 rog_achievement_check() {
   if(level.rog_pass_fail["allies"]["targets"] <= 0) {
-    if(level.rog_num_enemy_targets_killed + level.rog_achievement_target_count_adjustment >= level.rog_achievement_target_count)
+    if(level.rog_num_enemy_targets_killed + level.rog_achievement_target_count_adjustment >= level.rog_achievement_target_count) {
       level.player maps\_utility::player_giveachievement_wrapper("LEVEL_17A");
+    }
   }
 }
 

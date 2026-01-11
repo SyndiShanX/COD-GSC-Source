@@ -30,10 +30,12 @@ doturn(overrideanim, overrideblendoutanim, faceangleoffset, keependyaw) {
 
   anglestr = "";
 
-  if(turnangle < 0)
+  if(turnangle < 0) {
     anglestr = "right " + turnangle;
-  else
+  }
+  else {
     anglestr = "left " + turnangle;
+  }
 
   self animscripts\debug::debugpushstate("turn", anglestr);
 
@@ -43,8 +45,9 @@ doturn(overrideanim, overrideblendoutanim, faceangleoffset, keependyaw) {
   self delay_thread(0.05, ::stoptracking);
   turnanim = getturnanim(turnangle);
 
-  if(isDefined(overrideanim))
+  if(isDefined(overrideanim)) {
     turnanim = overrideanim;
+  }
 
   if(isDefined(turnanim)) {
     self animmode("gravity", 0);
@@ -56,8 +59,9 @@ doturn(overrideanim, overrideblendoutanim, faceangleoffset, keependyaw) {
     animlength = getanimlength(turnanim);
     hasexitalign = animhasnotetrack(turnanim, "exit_align");
 
-    if(!hasexitalign)
+    if(!hasexitalign) {
       println("^3Warning: turn animation for angle " + turnangle + " has no \"exit_align\" notetrack.");
+    }
 
     self thread doturnnotetracks("turn_anim");
     self thread turnblendout(animlength, "turn_anim", hasexitalign, overrideblendoutanim);
@@ -71,18 +75,21 @@ doturn(overrideanim, overrideblendoutanim, faceangleoffset, keependyaw) {
       assert(times.size == 1, "More than one code_move notetrack found");
       timeleft = times[0] * animlength - elapsed;
 
-      if(anim.debugturns)
+      if(anim.debugturns) {
         recordenttext("hasCodeMove", self, level.color_debug["red"], "Animscript");
+      }
 
     }
 
-    if(anim.debugturns)
+    if(anim.debugturns) {
       recordenttext("animLength: " + animlength + " elapsed: " + elapsed + " timeLeft: " + timeleft, self, level.color_debug["red"], "Animscript");
+    }
 
     self animmode("pos deltas", 0);
 
-    if(!isDefined(faceangleoffset))
+    if(!isDefined(faceangleoffset)) {
       faceangleoffset = 0;
+    }
 
     intendedyawchangeperframe = abs(turnangle) / (timeleft / 0.05);
     turnrateyawchangeperframe = self.turnrate / 20;
@@ -98,8 +105,9 @@ doturn(overrideanim, overrideblendoutanim, faceangleoffset, keependyaw) {
       newangles = (self.angles[0], self.angles[1] + yawdelta, self.angles[2]);
       self teleport(self.origin, newangles);
 
-      if(anim.debugturns)
+      if(anim.debugturns) {
         recordenttext("face angle: " + (self.angles[1] + yawdelta), self, level.color_debug["red"], "Animscript");
+      }
 
       timeleft = timeleft - 0.05;
       wait 0.05;
@@ -110,8 +118,9 @@ doturn(overrideanim, overrideblendoutanim, faceangleoffset, keependyaw) {
     self clearmovehistory();
     self animmode("normal", 0);
 
-    if(!(isDefined(keependyaw) && keependyaw))
+    if(!(isDefined(keependyaw) && keependyaw)) {
       self orientmode("face motion");
+    }
 
     elapsed = (gettime() - animstarttime) / 1000.0;
     timeleft = animlength - elapsed;
@@ -148,15 +157,17 @@ turnblendout(animlength, animname, hasexitalign, overrideblendoutanim) {
   wait(animlength - 0.2);
   nextanim = animscripts\run::getrunanim();
 
-  if(isDefined(overrideblendoutanim))
+  if(isDefined(overrideblendoutanim)) {
     nextanim = overrideblendoutanim;
+  }
 
   self.a.movement = "run";
   self clearanim( % body, 0.2);
   self setflaggedanimrestart("run_anim", nextanim, 1, 0.2);
 
-  if(!hasexitalign)
+  if(!hasexitalign) {
     self notify(animname, "exit_align");
+  }
 }
 
 getturnangle() {
@@ -169,10 +180,12 @@ getturnangle() {
 
   anglestr = "lookahead: " + int(turnangle);
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     turnpreditiontype = anim.turn_prediction_type_allies;
-  else
+  }
+  else {
     turnpreditiontype = anim.turn_prediction_type_axis;
+  }
 
   if(abs(turnangle) < anim.turn_min_angle && turnpreditiontype > 0) {
     forwarddist = min(self.lookaheaddist, 30);
@@ -196,10 +209,12 @@ getturnangle() {
         if(isDefined(lookaheadnextnode)) {
           nextnodeangle = getyawtoorigin(lookaheadnextnode) * -1;
 
-          if(abs(nextnodeangle) <= max(anim.turn_min_angle, abs(prevnodeangle)))
+          if(abs(nextnodeangle) <= max(anim.turn_min_angle, abs(prevnodeangle))) {
             doexpensivelookahead = 0;
-          else if(isDefined(prevnodeangle) && sign(nextnodeangle) != sign(prevnodeangle))
+          }
+          else if(isDefined(prevnodeangle) && sign(nextnodeangle) != sign(prevnodeangle)) {
             doexpensivelookahead = 0;
+          }
         } else
           doexpensivelookahead = 0;
 
@@ -207,8 +222,9 @@ getturnangle() {
           lookaheadnode = undefined;
           predictedlookahead = self calclookaheadpos(futurepos, 3);
 
-          if(isDefined(predictedlookahead))
+          if(isDefined(predictedlookahead)) {
             lookaheadnode = predictedlookahead["node"];
+          }
         }
       }
 
@@ -217,26 +233,32 @@ getturnangle() {
       }
       nextnodeangle = getyawtoorigin(lookaheadnode) * -1;
 
-      if(i == 0)
+      if(i == 0) {
         anglestr = anglestr + (" node: " + int(nextnodeangle));
-      else
+      }
+      else {
         anglestr = anglestr + (" predicted: " + int(nextnodeangle));
+      }
 
       if(abs(nextnodeangle) <= max(anim.turn_min_angle, abs(turnangle))) {
-        if(anim.debugturns)
+        if(anim.debugturns) {
           recordline(futurepos, lookaheadnode, level.color_debug["yellow"], "Animscript", self);
+        }
 
       } else if(isDefined(prevnodeangle) && sign(nextnodeangle) != sign(prevnodeangle)) {
-        if(anim.debugturns)
+        if(anim.debugturns) {
           recordline(futurepos, lookaheadnode, level.color_debug["yellow"], "Animscript", self);
+        }
 
       } else if(!self maymovefrompointtopoint(futurepos, lookaheadnode)) {
-        if(anim.debugturns)
+        if(anim.debugturns) {
           recordline(futurepos, lookaheadnode, level.color_debug["red"], "Animscript", self);
+        }
 
       } else {
-        if(anim.debugturns)
+        if(anim.debugturns) {
           recordline(futurepos, lookaheadnode, level.color_debug["green"], "Animscript", self);
+        }
 
         turnangle = nextnodeangle;
       }
@@ -246,37 +268,44 @@ getturnangle() {
   }
 
   if(anim.debugturns) {
-    if(abs(turnangle) > anim.turn_min_angle)
+    if(abs(turnangle) > anim.turn_min_angle) {
       recordenttext(anglestr, self, level.color_debug["green"], "Animscript");
-    else
+    }
+    else {
       recordenttext(anglestr, self, level.color_debug["red"], "Animscript");
+    }
   }
 
   return turnangle;
 }
 
 shouldturn() {
-  if(isDefined(self.disableturns) && self.disableturns)
+  if(isDefined(self.disableturns) && self.disableturns) {
     return false;
+  }
 
-  if(self.a.pose != "stand")
+  if(self.a.pose != "stand") {
     return false;
+  }
 
-  if(!self.facemotion)
+  if(!self.facemotion) {
     return false;
+  }
 
   pathgoalpos = self.pathgoalpos;
   traversalstartnode = self getnegotiationstartnode();
 
-  if(isDefined(traversalstartnode))
+  if(isDefined(traversalstartnode)) {
     pathgoalpos = traversalstartnode.origin;
+  }
 
   if(isDefined(pathgoalpos)) {
     disttogoal = distancesquared(pathgoalpos, self.origin);
 
     if(disttogoal < 2500) {
-      if(anim.debugturns)
+      if(anim.debugturns) {
         recordenttext("distSq: " + disttogoal, self, level.color_debug["red"], "Animscript");
+      }
 
       return false;
     }
@@ -290,11 +319,13 @@ shouldturn() {
   motionangle = self getmotionangle();
 
   if(!self.a.turnignoremotionangle && abs(motionangle) > 45 && abs(turnangle) > 135) {
-    if(!animscripts\run::shouldfullsprint() && isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < animscripts\run::getrunbackwardsdistancesquared())
+    if(!animscripts\run::shouldfullsprint() && isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) < animscripts\run::getrunbackwardsdistancesquared()) {
       return false;
+    }
 
-    if(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) < 22500)
+    if(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) < 22500) {
       return false;
+    }
   }
 
   velocity = self getvelocity();
@@ -302,21 +333,26 @@ shouldturn() {
   speedsq = lengthsquared(velocity);
   turnangle = getturnangle();
 
-  if(abs(turnangle) < anim.turn_min_angle)
+  if(abs(turnangle) < anim.turn_min_angle) {
     return false;
-
-  if(abs(turnangle) <= 90 && isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) < 40000)
-    return false;
-
-  if(speedsq < minspeed) {
-    if(self.a.prevscript == "traverse" && self.a.movement == "run" && self.a.scriptstarttime == gettime())
-      self.a.turnignoremotionangle = 1;
-    else
-      return false;
   }
 
-  if(!isDefined(getturnanim(turnangle)))
+  if(abs(turnangle) <= 90 && isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) < 40000) {
     return false;
+  }
+
+  if(speedsq < minspeed) {
+    if(self.a.prevscript == "traverse" && self.a.movement == "run" && self.a.scriptstarttime == gettime()) {
+      self.a.turnignoremotionangle = 1;
+    }
+    else {
+      return false;
+    }
+  }
+
+  if(!isDefined(getturnanim(turnangle))) {
+    return false;
+  }
 
   self.a.turnangle = turnangle;
   self.a.turnangletime = gettime();
@@ -331,33 +367,41 @@ getturnanim(turnangle) {
 
   if(!(isDefined(self.a.turnignoremotionangle) && self.a.turnignoremotionangle) && abs(motionangle) > 45) {
     if(abs(turnangle) > 135) {
-      if(turnangle > 0)
+      if(turnangle > 0) {
         turnanimlookupkey = "turn_b_r_180";
-      else
+      }
+      else {
         turnanimlookupkey = "turn_b_l_180";
+      }
     }
   } else if(turnangle >= 115 && turnangle <= 155) {
     turnanimlookupkey = "turn_f_l_135";
 
-    if(!animarrayanyexist(turnanimlookupkey + turnanimlookupspecial, "turn"))
+    if(!animarrayanyexist(turnanimlookupkey + turnanimlookupspecial, "turn")) {
       turnanimlookupkey = "turn_f_l_180";
+    }
   } else if(turnangle > 155)
     turnanimlookupkey = "turn_f_l_180";
-  else if(turnangle >= 65)
+  else if(turnangle >= 65) {
     turnanimlookupkey = "turn_f_l_90";
-  else if(turnangle >= 35)
+  }
+  else if(turnangle >= 35) {
     turnanimlookupkey = "turn_f_l_45";
+  }
   else if(turnangle <= -115 && turnangle >= -155) {
     turnanimlookupkey = "turn_f_r_135";
 
-    if(!animarrayanyexist(turnanimlookupkey + turnanimlookupspecial, "turn"))
+    if(!animarrayanyexist(turnanimlookupkey + turnanimlookupspecial, "turn")) {
       turnanimlookupkey = "turn_f_r_180";
+    }
   } else if(turnangle < -155)
     turnanimlookupkey = "turn_f_r_180";
-  else if(turnangle <= -65)
+  else if(turnangle <= -65) {
     turnanimlookupkey = "turn_f_r_90";
-  else if(turnangle < -35)
+  }
+  else if(turnangle < -35) {
     turnanimlookupkey = "turn_f_r_45";
+  }
 
   if(isDefined(turnanimlookupkey)) {
     turnanimlookupkey = turnanimlookupkey + turnanimlookupspecial;
@@ -370,8 +414,9 @@ getturnanim(turnangle) {
 shoulddospecialturn() {
   specialturnsuffix = "";
 
-  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol"))
+  if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol")) {
     specialturnsuffix = "_cqb";
+  }
 
   return specialturnsuffix;
 }

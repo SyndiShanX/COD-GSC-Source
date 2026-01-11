@@ -202,8 +202,9 @@ afcaves_civ1_think() {
 
     dot = vectordot(vectornormalize(p3 - p1), vectornormalize(p2 - p1));
 
-    if(dot < .999)
+    if(dot < .999) {
       continue;
+    }
 
     guys[num] ent_flag_set("do_anim");
     num++;
@@ -232,8 +233,9 @@ afcaves_ai_setup() {
 afcaves_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim"))
+  while(!self ent_flag_exist("do_anim")) {
     wait .05;
+  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -250,12 +252,15 @@ afcaves_ai_think() {
       self thread ai_loop_random(node.animation, "foley_talk");
       break;
     case "afchase_ending_shepherd_gun_monologue":
-      if(isai(self))
+      if(isai(self)) {
         ai_wait_current_anim();
-      else
+      }
+      else {
         ai_wait_current_anim(.40);
-      foreach(ent in level.anim_ai["af_caves"])
+      }
+      foreach(ent in level.anim_ai["af_caves"]) {
       ent ent_flag_clear("do_anim");
+      }
       flag_set("af_caves_done");
       break;
     default:
@@ -293,8 +298,9 @@ dcburning_main() {
 
   flag_wait("dc_burning_go");
   wait 2;
-  foreach(ent in level.anim_ai["dc_burning"])
+  foreach(ent in level.anim_ai["dc_burning"]) {
   ent ent_flag_set("do_anim");
+  }
 
   array_thread(getEntArray("civ_dc_burning_1", "script_noteworthy"), ::delaythread, 11, ::spawn_ai, true);
 
@@ -357,8 +363,9 @@ dcburning_ai_setup() {
       self gun_remove();
       break;
     case "riotshield_idle":
-      if(!isai(self))
+      if(!isai(self)) {
         self attach("weapon_riot_shield", "TAG_WEAPON_LEFT");
+      }
       break;
   }
 }
@@ -366,8 +373,9 @@ dcburning_ai_setup() {
 dcburning_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim"))
+  while(!self ent_flag_exist("do_anim")) {
     wait .05;
+  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -420,8 +428,9 @@ dcburning_dunn(animation) {
 }
 
 dcburning_dunn_stop() {
-  foreach(ent in level.anim_ai["dc_burning"])
+  foreach(ent in level.anim_ai["dc_burning"]) {
   ent ent_flag_clear("do_anim");
+  }
   flag_set("dc_burning_done");
 }
 
@@ -477,8 +486,9 @@ airport_main() {
   thread flag_set_delayed("looked_at_big_board", 3);
   wait 1.5;
 
-  foreach(ent in level.anim_ai["airport"])
+  foreach(ent in level.anim_ai["airport"]) {
   ent ent_flag_set("do_anim");
+  }
 
   array_thread(getEntArray("civ_airport_1", "script_noteworthy"), ::delaythread, 6.5, ::spawn_ai, true);
   flag_wait("airport_done");
@@ -530,8 +540,9 @@ airport_ai_setup() {
 airport_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim"))
+  while(!self ent_flag_exist("do_anim")) {
     wait .05;
+  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -540,8 +551,9 @@ airport_ai_think() {
   switch (node.animation) {
     case "airport_elevator_sequence_guy2":
       self ai_wait_current_anim(.42);
-      foreach(ent in level.anim_ai["airport"])
+      foreach(ent in level.anim_ai["airport"]) {
       ent ent_flag_clear("do_anim");
+      }
       flag_set("airport_done");
       break;
     case "airport_security_guard_pillar_react_R":
@@ -578,8 +590,9 @@ cliffhanger_main() {
 
   flag_wait("cliffhanger_go");
   wait 2;
-  foreach(ent in level.anim_ai["cliffhanger"])
+  foreach(ent in level.anim_ai["cliffhanger"]) {
   ent ent_flag_set("do_anim");
+  }
 
   flag_wait("cliffhanger_done");
   wait 1.5;
@@ -632,8 +645,9 @@ cliffhanger_ai_setup() {
 cliffhanger_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim"))
+  while(!self ent_flag_exist("do_anim")) {
     wait .05;
+  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -645,8 +659,9 @@ cliffhanger_ai_think() {
     	case "killhouse_sas_3":*/
     case "killhouse_sas_price":
       self ai_wait_current_anim(.5);
-      foreach(ent in level.anim_ai["cliffhanger"])
+      foreach(ent in level.anim_ai["cliffhanger"]) {
       ent ent_flag_clear("do_anim");
+      }
       flag_set("cliffhanger_done");
       break;
     case "guardA_standing_cold_idle":
@@ -680,8 +695,9 @@ favela_main() {
 
   wait 3;
 
-  foreach(ent in level.anim_ai["favela"])
+  foreach(ent in level.anim_ai["favela"]) {
   ent ent_flag_set("do_anim");
+  }
 
   array_thread(getEntArray("civ_favela_3", "script_noteworthy"), ::delaythread, 6, ::spawn_ai, true);
 
@@ -733,8 +749,9 @@ favela_ai_setup() {
 favela_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim"))
+  while(!self ent_flag_exist("do_anim")) {
     wait .05;
+  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -745,8 +762,9 @@ favela_ai_think() {
       link = spawn("script_origin", self.origin);
       self linkto(link);
       self ai_wait_current_anim(.20);
-      foreach(ent in level.anim_ai["favela"])
+      foreach(ent in level.anim_ai["favela"]) {
       ent ent_flag_clear("do_anim");
+      }
       flag_set("favela_done");
       break;
     case "favela_chaotic_standcover_gunjamB":
@@ -886,8 +904,9 @@ oilrig_main() {
   flag_wait("oilrig_go");
   wait 2;
 
-  foreach(ent in level.anim_ai["oilrig"])
+  foreach(ent in level.anim_ai["oilrig"]) {
   ent ent_flag_set("do_anim");
+  }
 
   array_thread(getEntArray("civ_oilrig_1", "script_noteworthy"), ::delaythread, 12, ::spawn_ai, true);
   flag_wait("oilrig_done");
@@ -920,8 +939,9 @@ oilrig_ai_setup() {
 oilrig_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim"))
+  while(!self ent_flag_exist("do_anim")) {
     wait .05;
+  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -930,14 +950,16 @@ oilrig_ai_think() {
   switch (node.animation) {
     case "roadkill_opening_foley":
       self ai_wait_current_anim(.73);
-      foreach(ent in level.anim_ai["oilrig"])
+      foreach(ent in level.anim_ai["oilrig"]) {
       ent ent_flag_clear("do_anim");
+      }
       flag_set("oilrig_done");
       break;
     case "roadkill_opening_shepherd":
       self ai_wait_current_anim(.83);
-      foreach(ent in level.anim_ai["oilrig"])
+      foreach(ent in level.anim_ai["oilrig"]) {
       ent ent_flag_clear("do_anim");
+      }
       flag_set("oilrig_done");
       break;
     case "oilrig_sub_B_idle_3":
@@ -967,8 +989,9 @@ estate_main() {
   flag_wait("estate_go");
   wait 2;
 
-  foreach(ent in level.anim_ai["estate"])
+  foreach(ent in level.anim_ai["estate"]) {
   ent ent_flag_set("do_anim");
+  }
 
   array_thread(getEntArray("civ_estate_1", "script_noteworthy"), ::delaythread, 6, ::spawn_ai, true);
 
@@ -999,8 +1022,9 @@ estate_camera_think() {
 }
 
 estate_ai_setup() {
-  if(isDefined(self.target) && self.target == "bh_ai_node")
+  if(isDefined(self.target) && self.target == "bh_ai_node") {
     self estate_bh_setup();
+  }
 
   self ai_default_setup("estate");
   node = self.anim_node;
@@ -1015,8 +1039,9 @@ estate_ai_setup() {
     case "roadkill_cover_spotter":
     case "roadkill_cover_soldier":
     case "roadkill_cover_active_soldier2":
-      if(isai(self))
+      if(isai(self)) {
         self.a.pose = "crouch";
+      }
       break;
   }
 }
@@ -1024,8 +1049,9 @@ estate_ai_setup() {
 estate_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim"))
+  while(!self ent_flag_exist("do_anim")) {
     wait .05;
+  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -1035,8 +1061,9 @@ estate_ai_think() {
     case "bh_rope_drop_le":
     case "bh_6_drop":
       self ai_wait_current_anim(.936);
-      foreach(ent in level.anim_ai["estate"])
+      foreach(ent in level.anim_ai["estate"]) {
       ent ent_flag_clear("do_anim");
+      }
       flag_set("estate_done");
       break;
     default:
@@ -1049,17 +1076,20 @@ estate_struct_setup() {
   helo = getent(self.target, "targetname");
 
   node = spawnStruct();
-  if(level.level_mode == "free")
+  if(level.level_mode == "free") {
     node.origin = helo GetTagOrigin("TAG_DETACH") + (0, 0, -10);
-  else
+  }
+  else {
     node.origin = helo GetTagOrigin("TAG_DETACH");
+  }
 
   node.angles = helo GetTagangles("TAG_DETACH");
   node.animation = "bh_6_drop";
   node.targetname = "bh_ai_node";
 
-  if(!isDefined(level.struct_class_names["targetname"][node.targetname]))
+  if(!isDefined(level.struct_class_names["targetname"][node.targetname])) {
     level.struct_class_names["targetname"][node.targetname] = [];
+  }
   size = level.struct_class_names["targetname"][node.targetname].size;
   level.struct_class_names["targetname"][node.targetname][size] = node;
 
@@ -1069,8 +1099,9 @@ estate_struct_setup() {
   node.animation = "bh_rope_drop_le";
   node.targetname = "bh_rope_node";
 
-  if(!isDefined(level.struct_class_names["targetname"][node.targetname]))
+  if(!isDefined(level.struct_class_names["targetname"][node.targetname])) {
     level.struct_class_names["targetname"][node.targetname] = [];
+  }
   size = level.struct_class_names["targetname"][node.targetname].size;
   level.struct_class_names["targetname"][node.targetname][size] = node;
 
@@ -1103,15 +1134,17 @@ hostage_setup() {
 }
 
 hostage_main() {
-  if(level.start_point == "hostage")
+  if(level.start_point == "hostage") {
     level waittill("cam_hostage");
+  }
 
   thread hostage_camera_think();
 
   flag_wait("hostage_go");
 
-  foreach(ent in level.anim_ai["hostage"])
+  foreach(ent in level.anim_ai["hostage"]) {
   ent ent_flag_set("do_anim");
+  }
 
   array_thread(getEntArray("civ_hostage_1", "script_noteworthy"), ::delaythread, 5, ::spawn_ai, true);
 
@@ -1135,8 +1168,9 @@ hostage_ai_setup() {
   switch (node.animation) {
     case "takedown_room1B_hostage":
       self.anim_mode = "gravity";
-      if(isai(self))
+      if(isai(self)) {
         self.a.pose = "crouch";
+      }
     case "takedown_room1B_soldier":
       self set_anim_time(node, .19);
       break;
@@ -1149,8 +1183,9 @@ hostage_ai_setup() {
 hostage_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim"))
+  while(!self ent_flag_exist("do_anim")) {
     wait .05;
+  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -1161,8 +1196,9 @@ hostage_ai_think() {
     case "takedown_room1B_soldier":
       self thread hostage_pose(node.animation);
       self ai_wait_current_anim(.74);
-      foreach(ent in level.anim_ai["hostage"])
+      foreach(ent in level.anim_ai["hostage"]) {
       ent ent_flag_clear("do_anim");
+      }
       flag_set("hostage_done");
       break;
     case "hostage_chair_dive":
@@ -1177,8 +1213,9 @@ hostage_ai_think() {
 hostage_pose(animation) {
   self endon("death");
 
-  if(!isai(self))
+  if(!isai(self)) {
     return;
+  }
 
   self ai_wait_current_anim(.39);
 
@@ -1210,8 +1247,9 @@ hostage_dive(animation) {
   self thread ai_current_anim_stop();
 
   self ai_next_anim( % hostage_chair_ground_idle);
-  if(isai(self))
+  if(isai(self)) {
     self.a.pose = "prone";
+  }
   self ai_next_anim( % hostage_chair_ground_idle);
   self ai_next_anim( % hostage_chair_ground_idle);
   self ai_next_anim( % hostage_chair_ground_idle);
@@ -1234,8 +1272,9 @@ trainer_main() {
   flag_wait("trainer_go");
   wait 2.5;
 
-  foreach(ent in level.anim_ai["trainer"])
+  foreach(ent in level.anim_ai["trainer"]) {
   ent ent_flag_set("do_anim");
+  }
 
   flag_wait("trainer_done");
   array_thread(getEntArray("civ_trainer_1", "script_noteworthy"), ::delaythread, 0, ::spawn_ai, true);
@@ -1288,8 +1327,9 @@ trainer_ai_setup() {
 trainer_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim"))
+  while(!self ent_flag_exist("do_anim")) {
     wait .05;
+  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -1300,8 +1340,9 @@ trainer_ai_think() {
     case "training_intro_translator_end":
     case "training_intro_foley_end":
       self ai_wait_current_anim(.50);
-      foreach(ent in level.anim_ai["trainer"])
+      foreach(ent in level.anim_ai["trainer"]) {
       ent ent_flag_clear("do_anim");
+      }
       flag_set("trainer_done");
       break;
     default:
@@ -1327,8 +1368,9 @@ arcadia_main() {
   flag_wait("arcadia_go");
   wait 2;
 
-  foreach(ent in level.anim_ai["arcadia"])
+  foreach(ent in level.anim_ai["arcadia"]) {
   ent ent_flag_set("do_anim");
+  }
 
   array_thread(getEntArray("civ_arcadia_1", "script_noteworthy"), ::delaythread, 2.5, ::spawn_ai, true);
 
@@ -1395,8 +1437,9 @@ arcadia_ai_setup() {
 arcadia_ai_think() {
   self endon("panic_button");
   self endon("death");
-  while(!self ent_flag_exist("do_anim"))
+  while(!self ent_flag_exist("do_anim")) {
     wait .05;
+  }
   self ent_flag_wait("do_anim");
   node = self.anim_node;
 
@@ -1407,8 +1450,9 @@ arcadia_ai_think() {
     case "village_interrogationA_Price":
       self thread arcadia_pose(node.animation);
       self ai_wait_current_anim(.97);
-      foreach(ent in level.anim_ai["arcadia"])
+      foreach(ent in level.anim_ai["arcadia"]) {
       ent ent_flag_clear("do_anim");
+      }
       flag_set("arcadia_done");
       break;
     default:
@@ -1421,8 +1465,9 @@ arcadia_pose(animation) {
   self endon("panic_button");
   self endon("death");
 
-  if(!isai(self))
+  if(!isai(self)) {
     return;
+  }
 
   switch (animation) {
     case "village_interrogationA_Zak":
@@ -1474,10 +1519,12 @@ museum_main() {
 
   set_console_status();
   if(level.Console) {
-    if(level.ps3)
+    if(level.ps3) {
       wait 9.0;
-    if(level.xenon)
+    }
+    if(level.xenon) {
       wait 6.0;
+    }
   } else {
     wait 2;
   }
@@ -1791,8 +1838,9 @@ end_credits() {
   level.credits_speed = 25.5;
 
   thread maps\_credits::playCredits();
-  if(level.level_mode == "credits_1")
+  if(level.level_mode == "credits_1") {
     wait 3.5;
+  }
   thread fade_from_black();
 
   wait 290; //-> magic timing - do not change...change credit speed instead
@@ -1805,10 +1853,12 @@ end_credits() {
   thread music_stop(4);
   wait 5;
 
-  if(level.level_mode == "credits_1")
+  if(level.level_mode == "credits_1") {
     flag_set("af_chase_nextmission");
-  else
+  }
+  else {
     nextmission();
+  }
 }
 
 fade_from_black() {

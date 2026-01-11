@@ -7,8 +7,9 @@
 #include clientscripts\_fx;
 
 init_filter_indices() {
-  if(isDefined(level.genericfilterinitialized))
+  if(isDefined(level.genericfilterinitialized)) {
     return;
+  }
   level.genericfilterinitialized = true;
   level.filter_matcount = 4;
   level.targetid_none = 0;

@@ -16,8 +16,9 @@ bot_conf_think() {
   goal = self getgoal("conf_dogtag");
 
   if(isDefined(goal)) {
-    if(!conf_tag_in_radius(goal, 64))
+    if(!conf_tag_in_radius(goal, 64)) {
       self cancelgoal("conf_dogtag");
+    }
   }
 
   conf_get_tag_in_sight();
@@ -60,23 +61,27 @@ conf_get_tag_in_sight() {
       continue;
     }
 
-    if(!isDefined(tag.unreachable) && !findpath(self.origin, tag.curorigin, tag, 0, 1))
+    if(!isDefined(tag.unreachable) && !findpath(self.origin, tag.curorigin, tag, 0, 1)) {
       tag.unreachable = 1;
-    else
+    }
+    else {
       tag.unreachable = 0;
+    }
 
     closest = distsq;
     closetag = tag;
   }
 
-  if(isDefined(closetag))
+  if(isDefined(closetag)) {
     self addgoal(closetag.curorigin, 16, 3, "conf_dogtag");
+  }
 }
 
 conf_tag_in_radius(origin, radius) {
   foreach(tag in level.dogtags) {
-    if(distancesquared(origin, tag.curorigin) < radius * radius)
+    if(distancesquared(origin, tag.curorigin) < radius * radius) {
       return true;
+    }
   }
 
   return false;

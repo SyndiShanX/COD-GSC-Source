@@ -27,8 +27,9 @@ setup_church_lighting() {
   var_0 = getent("village_defend_church_light", "targetname");
   var_1 = getEntArray("village_defend_church_models", "script_noteworthy");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 overridelightingorigin(var_0.origin);
+  }
 }
 
 handle_player_on_chopper_cinematic() {

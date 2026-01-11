@@ -47,8 +47,9 @@ parking_lot_vehicle_setup() {
   parking_lot_blockade();
   thread parking_lot_dialog();
 
-  foreach(var_1 in level.squad)
+  foreach(var_1 in level.squad) {
   var_1.grenadeammo = 0;
+  }
 
   common_scripts\utility::flag_wait("allies_in_loading_dock");
   wait 4;
@@ -90,8 +91,9 @@ parking_lot_blockade() {
   wait 0.1;
   thread parking_lot_blockade_vehicle_3("blockade_vehicle_3");
 
-  foreach(var_1 in level.squad)
+  foreach(var_1 in level.squad) {
   var_1 thread parking_lot_allies_take_cover();
+  }
 }
 
 parking_lot_allies_take_cover() {

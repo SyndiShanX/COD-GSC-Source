@@ -21,8 +21,9 @@ main() {
   lit_discs = [];
 
   foreach(disc in chamber_discs) {
-    if(isDefined(disc.script_int))
+    if(isDefined(disc.script_int)) {
       lit_discs[disc.script_int - 1] = disc;
+    }
   }
 
   flag_wait_any("ee_all_staffs_upgraded", "show_morse_code");
@@ -94,13 +95,15 @@ init_morse_code() {
 }
 
 turn_all_lights_off(a_discs) {
-  foreach(disc in a_discs)
+  foreach(disc in a_discs) {
   disc maps\mp\zm_tomb_quest_crypt::bryce_cake_light_update(0);
+  }
 }
 
 turn_all_lights_on(a_discs) {
-  foreach(disc in a_discs)
+  foreach(disc in a_discs) {
   disc maps\mp\zm_tomb_quest_crypt::bryce_cake_light_update(1);
+  }
 }
 
 phrase_convert_to_cipher(str_phrase, str_key) {
@@ -145,10 +148,12 @@ light_show_morse(a_discs, message) {
       for(j = 0; j < letter_code.size; j++) {
         turn_all_lights_on(a_discs);
 
-        if(letter_code[j] == ".")
+        if(letter_code[j] == ".") {
           wait 0.2;
-        else if(letter_code[j] == "-")
+        }
+        else if(letter_code[j] == "-") {
           wait 1.0;
+        }
 
         turn_all_lights_off(a_discs);
         wait 0.5;

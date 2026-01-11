@@ -36,15 +36,18 @@ ark_console_init() {
 ark_console_encounter() {
   level endon("end_ark_encounter");
 
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait 0.1;
+  }
 
   level thread debug_end_encounter();
 
-  if(isDefined(level.debug_ark_jump))
+  if(isDefined(level.debug_ark_jump)) {
     level thread debug_open_ark_doors();
-  else
+  }
+  else {
     level thread open_ark_doors();
+  }
 
   common_scripts\utility::flag_wait("entering_ark_flag");
   level thread initial_outline_for_connecting_player();
@@ -98,16 +101,18 @@ ark_console_encounter() {
   spawn_wave(19);
   common_scripts\utility::flag_wait("ark_console_cycle_over");
 
-  foreach(var_8 in level.players)
+  foreach(var_8 in level.players) {
   var_8 thread remove_ark_vo_on_player();
+  }
 
   foreach(var_11 in level.attack_points) {
     maps\mp\alien\_outline_proto::disable_outline_for_players(var_11, level.players);
     var_11.ignoreme = 1;
   }
 
-  foreach(var_11 in level.gas_ents)
+  foreach(var_11 in level.gas_ents) {
   var_11 delete();
+  }
 
   setomnvar("ui_alien_boss_status", 0);
   level notify("stop_waves");
@@ -122,8 +127,9 @@ ark_console_encounter() {
 }
 
 give_players_ark_rewards() {
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 thread maps\mp\alien\_hive::wait_to_give_rewards();
+  }
 }
 
 set_ark_encounter_flag() {
@@ -150,8 +156,9 @@ wait_until_players_are_not_using_cortex() {
     var_0 = 1;
 
     foreach(var_2 in level.players) {
-      if(isDefined(var_2.cortex_spot))
+      if(isDefined(var_2.cortex_spot)) {
         var_0 = 0;
+      }
     }
 
     if(var_0) {
@@ -198,11 +205,13 @@ turn_on_consoles() {
   level endon("end_ark_encounter");
   wait 1.0;
 
-  while(!isDefined(level.cortex))
+  while(!isDefined(level.cortex)) {
     wait 0.1;
+  }
 
-  while(!isDefined(level.cortex_use_trigger))
+  while(!isDefined(level.cortex_use_trigger)) {
     wait 0.1;
+  }
 
   level thread start_ark_encounter_nag();
   level.cortex_use_trigger makeusable();
@@ -216,8 +225,9 @@ turn_on_consoles() {
   level.cortex_use_trigger sethintstring("");
   maps\mp\alien\_outline_proto::enable_outline_for_players(level.cortex, level.players, 1, 0, "high");
 
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 remove_ark_vo_on_player();
+  }
 
   common_scripts\utility::flag_set("consoles_all_on");
 }
@@ -243,8 +253,9 @@ start_ark_encounter_nag() {
     level notify("dlc_vo_notify", "descent_vo", "nag_obelisks");
     wait(20 + var_1);
 
-    if(var_1 < 120)
+    if(var_1 < 120) {
       var_1 = var_1 + 20;
+    }
   }
 }
 
@@ -255,10 +266,12 @@ ark_console_attack_point_logic(var_0) {
   self.threatbias = 1000;
   self setCanDamage(1);
 
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     self.progresshealth = 500;
-  else
+  }
+  else {
     self.progresshealth = 100;
+  }
 
   thread ark_console_point_health_monitor(var_0);
   thread prevent_friendly_fire();
@@ -325,8 +338,9 @@ ark_console_point_health_monitor(var_0) {
         self.outline_color = 5;
         maps\mp\alien\_outline_proto::enable_outline_for_players(self, level.players, 5, 0, "high");
 
-        if(self.alarmed == 0)
+        if(self.alarmed == 0) {
           self.alarmed = 1;
+        }
       }
 
       if(self.progresshealth != self.start_health) {
@@ -383,11 +397,13 @@ turn_off_console() {
   self.panels setscriptablepartstate(0, "off");
 
   if(isDefined(self.cable_on_array)) {
-    foreach(var_1 in self.cable_on_array)
+    foreach(var_1 in self.cable_on_array) {
     var_1 hide();
+    }
 
-    foreach(var_1 in self.cable_off_array)
+    foreach(var_1 in self.cable_off_array) {
     var_1 show();
+    }
   }
 }
 
@@ -406,20 +422,26 @@ init_console_outlines(var_0) {
   var_0 waittill("outline_init_done");
 
   foreach(var_2 in level.attack_points) {
-    if(maps\mp\alien\_utility::isplayingsolo())
+    if(maps\mp\alien\_utility::isplayingsolo()) {
       var_3 = 500;
-    else
+    }
+    else {
       var_3 = 100;
+    }
 
     if(var_2.progresshealth > 0) {
-      if(var_2.progresshealth > var_3 * 0.75)
+      if(var_2.progresshealth > var_3 * 0.75) {
         maps\mp\alien\_outline_proto::enable_outline_for_player(var_2, var_0, 2, 0, "high");
-      else if(var_2.progresshealth > var_3 * 0.5)
+      }
+      else if(var_2.progresshealth > var_3 * 0.5) {
         maps\mp\alien\_outline_proto::enable_outline_for_player(var_2, var_0, 2, 0, "high");
-      else if(var_2.progresshealth > var_3 * 0.25)
+      }
+      else if(var_2.progresshealth > var_3 * 0.25) {
         maps\mp\alien\_outline_proto::enable_outline_for_player(var_2, var_0, 5, 0, "high");
-      else
+      }
+      else {
         maps\mp\alien\_outline_proto::enable_outline_for_player(var_2, var_0, 5, 0, "high");
+      }
 
       continue;
     }
@@ -438,11 +460,13 @@ make_cable_arrays(var_0, var_1) {
 
   foreach(var_4 in var_2) {
     if(isDefined(var_4.script_noteworthy)) {
-      if(var_4.script_noteworthy == "on")
+      if(var_4.script_noteworthy == "on") {
         var_0.cable_on_array = common_scripts\utility::add_to_array(var_0.cable_on_array, var_4);
+      }
 
-      if(var_4.script_noteworthy == "off")
+      if(var_4.script_noteworthy == "off") {
         var_0.cable_off_array = common_scripts\utility::add_to_array(var_0.cable_off_array, var_4);
+      }
     }
   }
 }
@@ -451,11 +475,13 @@ turn_on_console() {
   self.panels setscriptablepartstate(0, "on");
 
   if(isDefined(self.cable_on_array)) {
-    foreach(var_1 in self.cable_on_array)
+    foreach(var_1 in self.cable_on_array) {
     var_1 show();
+    }
 
-    foreach(var_1 in self.cable_off_array)
+    foreach(var_1 in self.cable_off_array) {
     var_1 hide();
+    }
   }
 }
 
@@ -483,11 +509,13 @@ multiple_terminals_down_nag() {
   common_scripts\utility::flag_wait("consoles_all_on");
 
   while(!common_scripts\utility::flag("ark_console_cycle_over")) {
-    while(get_num_online_consoles() > 3)
+    while(get_num_online_consoles() > 3) {
       wait 5;
+    }
 
-    if(get_num_online_consoles() < 3)
+    if(get_num_online_consoles() < 3) {
       level notify("dlc_vo_notify", "descent_vo", "offline_obelisk");
+    }
 
     common_scripts\utility::flag_wait("cortex_pulse");
     common_scripts\utility::flag_waitopen("cortex_pulse");
@@ -495,10 +523,12 @@ multiple_terminals_down_nag() {
 }
 
 reset_console_health() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     self.progresshealth = 500;
-  else
+  }
+  else {
     self.progresshealth = 100;
+  }
 
   self.outline_color = 0;
 }
@@ -535,8 +565,9 @@ ark_console_combat_timer(var_0) {
       }
 
       if(var_8 == level.total_consoles) {
-        if(var_7)
+        if(var_7) {
           level notify("all_consoles_up");
+        }
       }
 
       level.elapsed_time = level.elapsed_time + var_4 * var_8;
@@ -557,11 +588,13 @@ fx_ramp_on_progression(var_0) {
   var_6 = getent("ark_glow_01", "targetname");
   level thread lightning_loop_01();
 
-  while(!isDefined(level.elapsed_time))
+  while(!isDefined(level.elapsed_time)) {
     wait 0.1;
+  }
 
-  while(level.elapsed_time < var_1)
+  while(level.elapsed_time < var_1) {
     wait 0.1;
+  }
 
   level notify("progress_25");
   maps\mp\mp_alien_dlc3_vignettes::descent_vo_ark_defenses();
@@ -572,8 +605,9 @@ fx_ramp_on_progression(var_0) {
   var_5 setscriptablepartstate("base", "medium");
   var_6 setscriptablepartstate("base", "medium");
 
-  while(level.elapsed_time < var_2)
+  while(level.elapsed_time < var_2) {
     wait 0.1;
+  }
 
   maps\mp\mp_alien_dlc3_vignettes::descent_vo_ark_combat_halfway();
   level notify("progress_50");
@@ -586,8 +620,9 @@ fx_ramp_on_progression(var_0) {
   var_6 setscriptablepartstate("base", "hot");
   level thread lightning_loop_01();
 
-  while(level.elapsed_time < var_3)
+  while(level.elapsed_time < var_3) {
     wait 0.1;
+  }
 
   level notify("progress_75");
   maps\mp\mp_alien_dlc3_vignettes::descent_vo_ark_combat_almost_done();
@@ -609,8 +644,9 @@ spawn_ark_event_wave(var_0) {
 aud_node_cleanup(var_0) {
   wait 7.5;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 lightning_loop_01() {
@@ -650,8 +686,9 @@ listen_for_all_consoles_down() {
   while(!common_scripts\utility::flag("ark_console_cycle_over")) {
     level waittill("all_consoles_down");
 
-    if(!common_scripts\utility::flag("cortex_pulse"))
+    if(!common_scripts\utility::flag("cortex_pulse")) {
       level thread ark_emp_on_all_consoles_down();
+    }
 
     level waittill("all_consoles_up");
   }
@@ -701,11 +738,13 @@ ark_emp_on_all_consoles_down() {
     if(!isDefined(var_11.crafted_items)) {
       continue;
     }
-    if(isDefined(var_11.crafted_items["alien_crafting_hypno_trap"]))
+    if(isDefined(var_11.crafted_items["alien_crafting_hypno_trap"])) {
       empattempttodestroydeployable(var_11.crafted_items["alien_crafting_hypno_trap"]);
+    }
 
-    if(isDefined(var_11.crafted_items["alien_crafting_tesla_trap"]))
+    if(isDefined(var_11.crafted_items["alien_crafting_tesla_trap"])) {
       empattempttodestroydeployable(var_11.crafted_items["alien_crafting_tesla_trap"]);
+    }
   }
 
   empprocessdeployablesarray(level.turrets);
@@ -716,10 +755,12 @@ ark_emp_on_all_consoles_down() {
 doempdisables(var_0, var_1, var_2) {
   var_0 endon("disconnect");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
-  else
+  }
+  else {
     var_3 = 10;
+  }
 
   var_0.turn_off_class_skill_activation = 1;
   var_0.player_action_disabled = 1;
@@ -735,21 +776,24 @@ doempdisables(var_0, var_1, var_2) {
 }
 
 empprocessdeployablesarray(var_0) {
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   empattempttodestroydeployable(var_2);
+  }
 }
 
 empattempttodestroydeployable(var_0) {
-  if(isDefined(var_0) && !isDefined(var_0.carriedby))
+  if(isDefined(var_0) && !isDefined(var_0.carriedby)) {
     var_0 notify("death");
+  }
 }
 
 get_num_online_consoles() {
   var_0 = 0;
 
   foreach(var_2 in level.attack_points) {
-    if(var_2.progresshealth > 0)
+    if(var_2.progresshealth > 0) {
       var_0++;
+    }
   }
 
   return var_0;
@@ -758,8 +802,9 @@ get_num_online_consoles() {
 cortex_pulse_logic() {
   level endon("end_ark_encounter");
 
-  while(!isDefined(level.cortex_use_trigger))
+  while(!isDefined(level.cortex_use_trigger)) {
     wait 0.1;
+  }
 
   while(!common_scripts\utility::flag("ark_console_cycle_over")) {
     wait_until_enough_alien_killed();
@@ -775,17 +820,21 @@ cortex_pulse_logic() {
     maps\mp\alien\_outline_proto::enable_outline_for_players(level.cortex, level.players, 1, 0, "high");
     level thread hide_cortex_waypoint();
 
-    if(isDefined(level.cortex))
+    if(isDefined(level.cortex)) {
       var_2 = level.cortex;
-    else if(isDefined(level.cortex_carrier))
+    }
+    else if(isDefined(level.cortex_carrier)) {
       var_2 = level.cortex_carrier;
-    else
+    }
+    else {
       var_2 = level.archer;
+    }
 
     common_scripts\utility::flag_set("cortex_pulse");
 
-    foreach(var_4 in level.players)
+    foreach(var_4 in level.players) {
     var_4 remove_ark_vo_on_player();
+    }
 
     playsoundatpos(level.cortex.origin, "scn_cortex_activate");
     level thread rumble_players("heavygun_fire", 0.5);
@@ -800,8 +849,9 @@ cortex_pulse_logic() {
 rumble_players(var_0, var_1) {
   wait(var_1);
 
-  foreach(var_3 in level.players)
+  foreach(var_3 in level.players) {
   var_3 playrumbleonentity(var_0);
+  }
 }
 
 wait_until_enough_alien_killed() {
@@ -809,10 +859,12 @@ wait_until_enough_alien_killed() {
   var_0 = 0;
   var_1 = 1;
 
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     var_2 = 10;
-  else
+  }
+  else {
     var_2 = 20;
+  }
 
   while(var_0 < var_2) {
     level waittill("alien_killed", var_3, var_4, var_5);
@@ -834,8 +886,9 @@ kill_aliens_with_cortex_pulse() {
   wait 1.5;
   var_0 = maps\mp\alien\_spawnlogic::get_alive_agents();
 
-  if(isDefined(level.seeder_active_turrets))
+  if(isDefined(level.seeder_active_turrets)) {
     var_0 = common_scripts\utility::array_combine(var_0, level.seeder_active_turrets);
+  }
 
   foreach(var_2 in var_0) {
     if(!isDefined(var_2)) {
@@ -848,13 +901,15 @@ kill_aliens_with_cortex_pulse() {
 }
 
 show_cortex_waypoint() {
-  if(isDefined(level.cortex_icon))
+  if(isDefined(level.cortex_icon)) {
     level.cortex_icon.alpha = 0.75;
+  }
 }
 
 hide_cortex_waypoint() {
-  if(isDefined(level.cortex_icon))
+  if(isDefined(level.cortex_icon)) {
     level.cortex_icon.alpha = 0;
+  }
 }
 
 spawn_archer() {
@@ -902,8 +957,9 @@ spawn_model(var_0, var_1, var_2, var_3) {
 spawn_archer_force_field() {
   wait 2;
 
-  while(!isDefined(level.cortex))
+  while(!isDefined(level.cortex)) {
     wait 0.1;
+  }
 
   var_0 = spawnfx(level._effect["archer_shield"], level.cortex.origin + (0, 20, 7));
   var_1 = spawn("script_origin", level.cortex.origin);
@@ -917,8 +973,9 @@ spawn_archer_force_field() {
 }
 
 reset_consoles() {
-  foreach(var_1 in level.attack_points)
+  foreach(var_1 in level.attack_points) {
   var_1.progresshealth = 200;
+  }
 }
 
 zap_console(var_0) {
@@ -950,8 +1007,9 @@ use_cortex_to_attack_enemies() {
   level endon("end_ark_encounter");
 
   while(!common_scripts\utility::flag("ark_console_cycle_over")) {
-    while(!isDefined(level.cortex_carrier))
+    while(!isDefined(level.cortex_carrier)) {
       wait 0.1;
+    }
 
     var_0 = level.cortex_carrier;
     level.cortex_carrier notifyonplayercommand("melee_button_pressed", "+melee");
@@ -964,8 +1022,9 @@ use_cortex_to_attack_enemies() {
     }
     var_1 = maps\mp\alien\_spawnlogic::get_alive_agents();
 
-    if(isDefined(level.seeder_active_turrets))
+    if(isDefined(level.seeder_active_turrets)) {
       var_1 = common_scripts\utility::array_combine(var_1, level.seeder_active_turrets);
+    }
 
     foreach(var_3 in var_1) {
       if(!isDefined(var_3)) {
@@ -1012,8 +1071,9 @@ make_aliens_ignore_consoles() {
   while(!common_scripts\utility::flag("ark_console_cycle_over")) {
     level waittill("spawned_agent", var_0);
 
-    if(isDefined(var_0.alien_type) && var_0.alien_type == "elite")
+    if(isDefined(var_0.alien_type) && var_0.alien_type == "elite") {
       var_0 setthreatbiasgroup("ignore_consoles");
+    }
   }
 }
 
@@ -1031,19 +1091,22 @@ wait_until_player_use_cortex() {
       break;
     }
 
-    if(useholdthink_cortex(var_1))
+    if(useholdthink_cortex(var_1)) {
       var_0 = 1;
+    }
   }
 }
 
 remove_cortex_spot_when_possible() {
   self endon("disconnect");
 
-  while(isDefined(self.cortex_spot) && !self.cortex_spot.done_with_use_bar)
+  while(isDefined(self.cortex_spot) && !self.cortex_spot.done_with_use_bar) {
     wait 0.1;
+  }
 
-  if(isDefined(self.cortex_spot))
+  if(isDefined(self.cortex_spot)) {
     self.cortex_spot = undefined;
+  }
 }
 
 useholdthink_cortex(var_0) {
@@ -1086,11 +1149,13 @@ wait_until_player_repairs_console() {
 remove_repair_spot_when_possible() {
   self endon("disconnect");
 
-  while(isDefined(self.repair_spot) && !self.repair_spot.done_with_use_bar)
+  while(isDefined(self.repair_spot) && !self.repair_spot.done_with_use_bar) {
     wait 0.1;
+  }
 
-  if(isDefined(self.repair_spot))
+  if(isDefined(self.repair_spot)) {
     self.repair_spot = undefined;
+  }
 }
 
 useholdthink(var_0) {
@@ -1100,18 +1165,22 @@ useholdthink(var_0) {
   var_0.repair_spot.inuse = 1;
   var_0.repair_spot.userate = 1;
 
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     var_0.repair_spot.usetime = 2000;
-  else
+  }
+  else {
     var_0.repair_spot.usetime = 5000;
+  }
 
-  if(var_0 maps\mp\alien\_perk_utility::has_perk("perk_rigger", [1, 2, 3, 4]))
+  if(var_0 maps\mp\alien\_perk_utility::has_perk("perk_rigger", [1, 2, 3, 4])) {
     var_0.repair_spot.usetime = var_0.repair_spot.usetime * 0.5;
+  }
 
   var_0.repair_spot.done_with_use_bar = 0;
 
-  if(isplayer(var_0))
+  if(isplayer(var_0)) {
     var_0 thread personalusebar(self);
+  }
 
   var_0.hasprogressbar = 1;
   var_1 = useholdthinkloop(var_0, self, 40000);
@@ -1129,10 +1198,12 @@ personalusebar(var_0, var_1) {
   self endon("disconnect");
   self endon("game_ended");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self setclientomnvar("ui_securing", var_1);
-  else
+  }
+  else {
     self setclientomnvar("ui_securing", 5);
+  }
 
   var_2 = -1;
 
@@ -1145,18 +1216,21 @@ personalusebar(var_0, var_1) {
   self setclientomnvar("ui_securing", 0);
   self setclientomnvar("ui_securing_progress", 0);
 
-  if(isDefined(self.repair_spot))
+  if(isDefined(self.repair_spot)) {
     self.repair_spot.done_with_use_bar = 1;
+  }
 }
 
 personalusebarcortex(var_0, var_1) {
   self endon("disconnect");
   self endon("game_ended");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self setclientomnvar("ui_securing", var_1);
-  else
+  }
+  else {
     self setclientomnvar("ui_securing", 5);
+  }
 
   var_2 = -1;
 
@@ -1169,22 +1243,25 @@ personalusebarcortex(var_0, var_1) {
   self setclientomnvar("ui_securing", 0);
   self setclientomnvar("ui_securing_progress", 0);
 
-  if(isDefined(self.cortex_spot))
+  if(isDefined(self.cortex_spot)) {
     self.cortex_spot.done_with_use_bar = 1;
+  }
 }
 
 useholdthinkloop(var_0, var_1, var_2) {
   while(!level.gameended && isDefined(self) && isDefined(var_0) && isDefined(var_0.repair_spot) && var_0.sessionstate == "playing" && var_0 usebuttonpressed() && var_0.repair_spot.curprogress < var_0.repair_spot.usetime) {
     if(isDefined(var_1) && isDefined(var_2)) {
-      if(distancesquared(var_0.origin, var_1.origin) > var_2)
+      if(distancesquared(var_0.origin, var_1.origin) > var_2) {
         return 0;
+      }
     }
 
     var_0.repair_spot.curprogress = var_0.repair_spot.curprogress + 50 * var_0.repair_spot.userate;
     var_0.repair_spot.userate = 1;
 
-    if(var_0.repair_spot.curprogress >= var_0.repair_spot.usetime)
+    if(var_0.repair_spot.curprogress >= var_0.repair_spot.usetime) {
       return var_0.sessionstate == "playing";
+    }
 
     wait 0.05;
   }
@@ -1201,8 +1278,9 @@ useholdthinkloopcortex(var_0, var_1, var_2, var_3) {
 
   while(!level.gameended && isDefined(self) && isDefined(var_0) && isDefined(var_0.cortex_spot) && var_0.sessionstate == "playing" && var_0 usebuttonpressed() && var_0.cortex_spot.curprogress < var_0.cortex_spot.usetime) {
     if(isDefined(var_1) && isDefined(var_2)) {
-      if(distancesquared(var_0.origin, var_1.origin) > var_2)
+      if(distancesquared(var_0.origin, var_1.origin) > var_2) {
         return 0;
+      }
     }
 
     var_4 = var_0.cortex_spot.userate;
@@ -1221,18 +1299,22 @@ useholdthinkloopcortex(var_0, var_1, var_2, var_3) {
   var_0 setclientomnvar("ui_securing", 0);
   var_0 setclientomnvar("ui_securing_progress", 0);
 
-  if(isDefined(var_0.cortex_spot))
+  if(isDefined(var_0.cortex_spot)) {
     var_0.cortex_spot.done_with_use_bar = 1;
+  }
 
-  if(var_5 && var_0.sessionstate == "playing")
+  if(var_5 && var_0.sessionstate == "playing") {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 remove_ark_vo_on_player() {
-  foreach(var_2, var_1 in level.alien_vo_priority_level)
+  foreach(var_2, var_1 in level.alien_vo_priority_level) {
   maps\mp\alien\_music_and_dialog::remove_vo_data("obelisk", var_1);
+  }
 }
 
 ark_defense_lightning(var_0) {
@@ -1250,22 +1332,27 @@ ark_defense_lightning(var_0) {
   var_7[3] = (4181, 1278, 1179);
 
   foreach(var_9 in level.players) {
-    if(isDefined(var_9) && isalive(var_9) && !var_9 maps\mp\alien\_utility::is_in_laststand())
+    if(isDefined(var_9) && isalive(var_9) && !var_9 maps\mp\alien\_utility::is_in_laststand()) {
       var_6 = common_scripts\utility::add_to_array(var_6, var_9);
+    }
   }
 
   var_9 = common_scripts\utility::random(var_6);
   var_11 = var_9.origin;
 
-  if(var_11[2] < 890)
+  if(var_11[2] < 890) {
     var_11 = (var_11[0], var_11[1], 890);
+  }
 
-  if(var_11[1] > 1900)
+  if(var_11[1] > 1900) {
     var_5 = [0, 1];
-  else if(var_11[1] < 1830)
+  }
+  else if(var_11[1] < 1830) {
     var_5 = [2, 3];
-  else
+  }
+  else {
     var_5 = [0, 3];
+  }
 
   var_4 = var_7[common_scripts\utility::random(var_5)];
   var_11 = ark_zap_attack(var_4, var_9, var_11, undefined, 1);
@@ -1281,8 +1368,9 @@ ark_defense_lightning(var_0) {
 
   while(var_12 < var_13) {
     foreach(var_9 in level.players) {
-      if(distancesquared(var_11, var_9.origin) < var_3)
+      if(distancesquared(var_11, var_9.origin) < var_3) {
         var_9 dodamage(var_1, var_9.origin, undefined, undefined, "MOD_MELEE");
+      }
     }
 
     var_12 = var_12 + var_14;
@@ -1294,8 +1382,9 @@ ark_zap_attack(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_1)) {
     var_2 = var_1.origin;
 
-    if(var_2[2] < 890)
+    if(var_2[2] < 890) {
       var_2 = (var_2[0], var_2[1], 890);
+    }
   }
 
   var_5 = (randomintrange(-100, 100), randomintrange(-100, 100), 0);
@@ -1305,13 +1394,16 @@ ark_zap_attack(var_0, var_1, var_2, var_3, var_4) {
   playsoundatpos(var_2, "turret_shock");
   wait 0.1;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_6 = playFX(level._effect["ark_attack_ball_buildup"], var_2);
-  else
+  }
+  else {
     var_6 = playFX(level._effect["ark_attack_ball"], var_2);
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     playsoundatpos(var_2, "scn_ark_electric_ball");
+  }
 
   return var_2;
 }
@@ -1324,20 +1416,23 @@ activate_ark_defenses() {
 }
 
 trigger_ark_defenses() {
-  while(level.elapsed_time < 60.0)
+  while(level.elapsed_time < 60.0) {
     wait 0.1;
+  }
 
   wait 10;
   level.ark_defense_wait = 40;
   level thread activate_ark_defenses();
 
-  while(level.elapsed_time < 120.0)
+  while(level.elapsed_time < 120.0) {
     wait 0.1;
+  }
 
   level.ark_defense_wait = 20;
 
-  while(level.elapsed_time < 180.0)
+  while(level.elapsed_time < 180.0) {
     wait 0.1;
+  }
 
   level.ark_defense_wait = 10;
 }
@@ -1507,11 +1602,13 @@ teleport_players_not_in_ark() {
 teleport_player_to_ark(var_0) {
   var_1 = var_0;
 
-  if(isDefined(var_0.reviveent))
+  if(isDefined(var_0.reviveent)) {
     var_1 = var_0.reviveent;
+  }
 
-  if(!isDefined(var_0.forceteleportorigin))
+  if(!isDefined(var_0.forceteleportorigin)) {
     var_0 thread find_spot_to_teleport(var_1);
+  }
 }
 
 teleport_player_to_spot(var_0, var_1) {
@@ -1533,16 +1630,19 @@ teleport_player_to_spot(var_0, var_1) {
     self.teleport_overlay.alpha = 0;
     wait 1;
 
-    if(isDefined(self.teleport_overlay))
+    if(isDefined(self.teleport_overlay)) {
       self.teleport_overlay destroy();
+    }
   }
 
   maps\mp\_utility::clearlowermessage("cargo_teleport");
 
-  if(isDefined(self.reviveent))
+  if(isDefined(self.reviveent)) {
     thread wait_for_spawn_and_remove_forceteleport();
-  else
+  }
+  else {
     self.forceteleportorigin = undefined;
+  }
 }
 
 wait_for_spawn_and_remove_forceteleport() {
@@ -1593,10 +1693,12 @@ find_spot_to_teleport(var_0) {
         }
 
         if(canspawn(var_5) && !positionwouldtelefrag(var_5)) {
-          if(isDefined(var_0) && var_0 != self)
+          if(isDefined(var_0) && var_0 != self) {
             teleport_player_to_spot(var_5, var_0);
-          else
+          }
+          else {
             teleport_player_to_spot(var_5);
+          }
 
           var_3 = 1;
           break;

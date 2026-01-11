@@ -20,8 +20,9 @@ Callback_HostMigration() {
 
   println("Migration starting at time " + gettime());
 
-  foreach(character in level.characters)
+  foreach(character in level.characters) {
   character.hostMigrationControlsFrozen = false;
+  }
 
   level.hostMigrationTimer = true;
   setDvar("ui_inhostmigration", 1);
@@ -74,26 +75,32 @@ hostMigrationWaitForPlayers() {
 }
 
 hostMigrationName(ent) {
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return "<removed_ent>";
+  }
 
   entNum = -1;
   entName = "?";
 
-  if(isDefined(ent.entity_number))
+  if(isDefined(ent.entity_number)) {
     entNum = ent.entity_number;
+  }
 
-  if(isPlayer(ent) && isDefined(ent.name))
+  if(isPlayer(ent) && isDefined(ent.name)) {
     entName = ent.name;
+  }
 
-  if(isPlayer(ent))
+  if(isPlayer(ent)) {
     return "player <" + entName + ">";
+  }
 
-  if(IsAgent(ent) && IsGameParticipant(ent))
+  if(IsAgent(ent) && IsGameParticipant(ent)) {
     return "participant agent <" + entNum + ">";
+  }
 
-  if(IsAgent(ent))
+  if(IsAgent(ent)) {
     return "non-participant agent <" + entNum + ">";
+  }
 
   return "unknown entity <" + entNum + ">";
 }
@@ -121,8 +128,9 @@ hostMigrationTimerThink() {
 
   assertex(isDefined(self.hostMigrationControlsFrozen), "Not properly tracking controller frozen for " + hostMigrationName(self));
 
-  if(IsPlayer(self))
+  if(IsPlayer(self)) {
     self setClientDvar("cg_scoreboardPingGraph", "0");
+  }
 
   hostMigrationTimerThink_Internal();
 
@@ -130,18 +138,21 @@ hostMigrationTimerThink() {
   println("Migration attempting to unfreeze controls for " + hostMigrationName(self) + " with hostMigrationControlsFrozen = " + self.hostMigrationControlsFrozen);
 
   if(self.hostMigrationControlsFrozen) {
-    if(gameFlag("prematch_done"))
+    if(gameFlag("prematch_done")) {
       self freezeControlsWrapper(false);
+    }
     self.hostMigrationControlsFrozen = undefined;
   }
 
-  if(IsPlayer(self))
+  if(IsPlayer(self)) {
     self setClientDvar("cg_scoreboardPingGraph", "1");
+  }
 }
 
 waitTillHostMigrationDone() {
-  if(!isDefined(level.hostMigrationTimer))
+  if(!isDefined(level.hostMigrationTimer)) {
     return 0;
+  }
 
   starttime = gettime();
   level waittill("host_migration_end");
@@ -157,8 +168,9 @@ waitTillHostMigrationStarts(duration) {
 }
 
 waitLongDurationWithHostMigrationPause(duration) {
-  if(duration == 0)
+  if(duration == 0) {
     return;
+  }
   assert(duration > 0);
 
   starttime = gettime();
@@ -182,8 +194,9 @@ waitLongDurationWithHostMigrationPause(duration) {
 waittill_notify_or_timeout_hostmigration_pause(msg, duration) {
   self endon(msg);
 
-  if(duration == 0)
+  if(duration == 0) {
     return;
+  }
   assert(duration > 0);
 
   starttime = gettime();
@@ -205,8 +218,9 @@ waittill_notify_or_timeout_hostmigration_pause(msg, duration) {
 }
 
 waitLongDurationWithGameEndTimeUpdate(duration) {
-  if(duration == 0)
+  if(duration == 0) {
     return;
+  }
   assert(duration > 0);
 
   starttime = gettime();

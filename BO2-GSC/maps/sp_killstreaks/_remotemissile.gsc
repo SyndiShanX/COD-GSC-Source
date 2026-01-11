@@ -29,8 +29,9 @@ init() {
 tryusepredatormissile(lifeid) {
   team = self.team;
 
-  if(!self maps\sp_killstreaks\_killstreakrules::killstreakstart("remote_missile_sp", team, 0, 1))
+  if(!self maps\sp_killstreaks\_killstreakrules::killstreakstart("remote_missile_sp", team, 0, 1)) {
     return 0;
+  }
 
   origin = isDefined(level.remotemissile_override_origin) ? level.remotemissile_override_origin : undefined;
   angles = isDefined(level.remotemissile_override_angles) ? level.remotemissile_override_angles : undefined;
@@ -76,8 +77,9 @@ getbestspawnpoint(remotemissilespawnpoints) {
     foreach(player in spawnpoint.validplayers) {
       spawnpoint.spawnscore = spawnpoint.spawnscore + 1;
 
-      if(bullettracepassed(player.origin + vectorscale((0, 0, 1), 32.0), spawnpoint.origin, 0, player))
+      if(bullettracepassed(player.origin + vectorscale((0, 0, 1), 32.0), spawnpoint.origin, 0, player)) {
         spawnpoint.spawnscore = spawnpoint.spawnscore + 3;
+      }
 
       if(spawnpoint.spawnscore > bestspawn.spawnscore) {
         bestspawn = spawnpoint;
@@ -85,8 +87,9 @@ getbestspawnpoint(remotemissilespawnpoints) {
       }
 
       if(spawnpoint.spawnscore == bestspawn.spawnscore) {
-        if(cointoss())
+        if(cointoss()) {
           bestspawn = spawnpoint;
+        }
       }
     }
   }
@@ -109,13 +112,16 @@ _fire(lifeid, player, team, origin, angles, targetpos) {
   level.missileremotelaunchhorz = 7000;
   level.missileremotelaunchtargetdist = 1500;
 
-  if(!isDefined(angles))
+  if(!isDefined(angles)) {
     angles = player.angles;
+  }
 
-  if(isDefined(origin))
+  if(isDefined(origin)) {
     startpos = origin;
-  else
+  }
+  else {
     origin = player.origin;
+  }
 
   if(!isDefined(startpos)) {
     upvector = (0, 0, level.missileremotelaunchvert);
@@ -125,8 +131,9 @@ _fire(lifeid, player, team, origin, angles, targetpos) {
     startpos = origin + upvector + forward * backdist * -1;
   }
 
-  if(!isDefined(targetpos))
+  if(!isDefined(targetpos)) {
     targetpos = origin + forward * targetdist;
+  }
 
   player.killstreak_waitamount = 10;
   player thread maps\_hud_util::fadetoblackforxsec(0.0, 0.5, 0.5, 0.5);
@@ -141,8 +148,9 @@ _fire(lifeid, player, team, origin, angles, targetpos) {
     player.killstreak_waitamount = undefined;
     maps\sp_killstreaks\_killstreakrules::killstreakstop("remote_missile_sp", team);
 
-    if(isDefined(player))
+    if(isDefined(player)) {
       player notify("remotemissile_done");
+    }
 
     return false;
   }
@@ -150,8 +158,9 @@ _fire(lifeid, player, team, origin, angles, targetpos) {
   level notify("remote_missile_start");
   type = "remote_missile_missile_sp";
 
-  if(isDefined(level.remote_missile_type))
+  if(isDefined(level.remote_missile_type)) {
     type = level.remote_missile_type;
+  }
 
   rocket = magicbullet(type, startpos, targetpos, player);
   rocket hide();
@@ -184,8 +193,9 @@ cleanupwaiter(rocket) {
   self waittill_any("joined_team", "joined_spectators", "disconnect");
   self.killstreak_waitamount = undefined;
 
-  if(isDefined(rocket.owner))
+  if(isDefined(rocket.owner)) {
     rocket.owner unlink();
+  }
 
   rocket delete();
 }
@@ -214,8 +224,9 @@ handledamage() {
   self endon("deleted");
   self setCanDamage(1);
 
-  for(;;)
+  for(;;) {
     self waittill("damage");
+  }
 }
 
 missileeyes(player, rocket) {

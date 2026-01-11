@@ -24,8 +24,9 @@ power_clangs() {
   wait(5);
   flag_wait("power_on");
   clangs = getstructarray("amb_power_clang", "targetname");
-  if(!isDefined(clangs))
+  if(!isDefined(clangs)) {
     return;
+  }
   for(i = 0; i < clangs.size; i++) {
     playsoundatposition("zmb_circuit", clangs[i].origin);
     wait(RandomFloatrange(0.25, 0.7));
@@ -33,38 +34,49 @@ power_clangs() {
 }
 
 weapon_type_check_custom(weapon) {
-  if(!isDefined(self.entity_num))
+  if(!isDefined(self.entity_num)) {
     return "crappy";
+  }
   switch (self.entity_num) {
     case 0:
-      if(weapon == "spectre_zm")
+      if(weapon == "spectre_zm") {
         return "favorite";
-      else if(weapon == "spectre_upgraded_zm")
+      }
+      else if(weapon == "spectre_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 1:
-      if(weapon == "rpk_zm")
+      if(weapon == "rpk_zm") {
         return "favorite";
-      else if(weapon == "rpk_upgraded_zm")
+      }
+      else if(weapon == "rpk_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 2:
-      if(weapon == "ak74u_zm")
+      if(weapon == "ak74u_zm") {
         return "favorite";
-      else if(weapon == "ak74u_upgraded_zm")
+      }
+      else if(weapon == "ak74u_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
     case 3:
-      if(weapon == "ithaca_zm")
+      if(weapon == "ithaca_zm") {
         return "favorite";
-      else if(weapon == "ithaca_upgraded_zm")
+      }
+      else if(weapon == "ithaca_upgraded_zm") {
         return "favorite_upgrade";
+      }
       break;
   }
-  if(IsSubStr(weapon, "upgraded"))
+  if(IsSubStr(weapon, "upgraded")) {
     return "upgrade";
-  else
+  }
+  else {
     return level.zombie_weapons[weapon].vox;
+  }
 }
 
 setup_response_line_custom(player, index, category, type) {
@@ -219,10 +231,12 @@ director_behind_vox(director) {
       z_diff = self.origin[2] - director.origin[2];
       if((yaw < -95 || yaw > 95) && abs(z_diff) < 50) {
         if(isDefined(level._audio_director_vox_play)) {
-          if(director.is_activated)
+          if(director.is_activated) {
             director thread[[level._audio_director_vox_play]]("vox_director_slam");
-          else
+          }
+          else {
             director thread[[level._audio_director_vox_play]]("vox_director_behind_you");
+          }
         }
       }
     }
@@ -360,8 +374,9 @@ play_music_egg(player) {
   }
   wait(420);
   level.music_override = false;
-  if(level.music_round_override == false)
+  if(level.music_round_override == false) {
     level thread maps\_zombiemode_audio::change_zombie_music("wave_loop");
+  }
 }
 
 skit_start_reminder(ent) {
@@ -427,8 +442,9 @@ create_and_play_dialog_egg(category, type, response, force_variant, override) {
     return;
   }
   alias_suffix = level.plr_vox[category][type];
-  if(isDefined(response))
+  if(isDefined(response)) {
     alias_suffix = response + alias_suffix;
+  }
   index = maps\_zombiemode_weapons::get_player_index(self);
   prefix = level.plr_vox["prefix"] + index + "_";
   if(!isDefined(self.sound_dialog)) {
@@ -465,8 +481,9 @@ do_player_playvox_egg(prefix, index, sound_to_play, waittime, category, type, ov
   if(!isDefined(level.player_is_speaking)) {
     level.player_is_speaking = 0;
   }
-  if(is_true(level.skit_vox_override) && !override)
+  if(is_true(level.skit_vox_override) && !override) {
     return;
+  }
   if(level.player_is_speaking != 1) {
     level.player_is_speaking = 1;
     self playSound(prefix + sound_to_play, "sound_done" + sound_to_play);

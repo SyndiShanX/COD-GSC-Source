@@ -49,23 +49,27 @@ player_watcher() {
   }
   self thread player_watch_upgrade();
 
-  if(!is_chaos_mode())
+  if(!is_chaos_mode()) {
     self thread player_watch_currency_transfer();
+  }
 }
 
 can_use_munition() {
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     return false;
+  }
 
-  if(self maps\mp\alien\_prestige::prestige_getNoDeployables() == 1.0)
+  if(self maps\mp\alien\_prestige::prestige_getNoDeployables() == 1.0) {
     return false;
+  }
 
   return true;
 }
 
 can_use_ability() {
-  if(self maps\mp\alien\_prestige::prestige_getNoAbilities() == 1.0)
+  if(self maps\mp\alien\_prestige::prestige_getNoAbilities() == 1.0) {
     return false;
+  }
 
   return true;
 }
@@ -108,16 +112,19 @@ player_watch_upgrade_internal(resource, type) {
       maps\mp\alien\_alien_matchdata::record_perk_upgrade(resource.ref);
 
       cyclenum = -1;
-      if(isDefined(level.current_cycle_num))
+      if(isDefined(level.current_cycle_num)) {
         cyclenum = level.current_cycle_num;
+      }
 
       playername = "unknown";
-      if(isDefined(self.name))
+      if(isDefined(self.name)) {
         playername = self.name;
+      }
 
       hivename = "unknown";
-      if(isDefined(level.current_hive_name))
+      if(isDefined(level.current_hive_name)) {
         hivename = level.current_hive_name;
+      }
 
       if(GetDvarInt("alien_bbprint_debug") > 0) {
         IPrintLnBold("^8bbprint: aliencombatresourceupgraded \n" +
@@ -193,8 +200,9 @@ player_cancel_internal() {
     if(!isDefined(self.playerLinkedToChopper) || !self.playerLinkedToChopper) {
       self.deployable = false;
       self notify("cancel_deployable_via_marker");
-      if(!self HasWeapon("mortar_detonator_mp") && !self HasWeapon("switchblade_laptop_mp"))
+      if(!self HasWeapon("mortar_detonator_mp") && !self HasWeapon("switchblade_laptop_mp")) {
         self notify("player_action_slot_restart");
+      }
     }
   }
   resource = self.alien_used_resource;
@@ -216,8 +224,9 @@ player_watch_riotshield_use(resource, rank) {
   self thread reenable_usability(3.1);
   self waittill_any_timeout(3, "action_use", "riotshield_block", "riotshield_melee");
 
-  if(self player_has_enough_currency(Ceil(resource.upgrades[rank].cost)))
+  if(self player_has_enough_currency(Ceil(resource.upgrades[rank].cost))) {
     return true;
+  }
   else {
     self[[resource.callbacks.CancelUse]](resource, rank);
     self notify("action_finish_used");
@@ -229,8 +238,9 @@ player_watch_riotshield_use(resource, rank) {
 player_watch_equalizer_use(resource, rank) {
   self endon("cancel_watch");
   self waittill_any_timeout(3, "action_use");
-  if(self player_has_enough_currency(Ceil(resource.upgrades[rank].cost)))
+  if(self player_has_enough_currency(Ceil(resource.upgrades[rank].cost))) {
     return true;
+  }
   else {
     self[[resource.callbacks.CancelUse]](resource, rank);
     self notify("action_finish_used");
@@ -245,8 +255,9 @@ player_watch_use_manned_turret() {
   while(1) {
     self waittill("action_use");
     if(isDefined(self.carriedSentry)) {
-      if(is_true(self.carriedSentry.canbeplaced))
+      if(is_true(self.carriedSentry.canbeplaced)) {
         return true;
+      }
     }
   }
 }
@@ -270,8 +281,9 @@ player_watch_use_sentry() {
 
     if(isDefined(self.current_sentry)) {
       canBePlaced = self maps\mp\alien\_autosentry_alien::can_place_sentry(self.current_sentry);
-      if(canBePlaced)
+      if(canBePlaced) {
         return true;
+      }
     }
 
     wait(0.05);
@@ -288,10 +300,12 @@ player_use(resource, rank) {
   self[[resource.callbacks.TryUse]](resource, rank);
 
   if(self[[resource.callbacks.CanUse]](resource)) {
-    if(!show_alternate_spend_hint(resource))
+    if(!show_alternate_spend_hint(resource)) {
       self thread maps\mp\alien\_hud::createSpendHintHUD(resource, rank);
-    else
+    }
+    else {
       self thread maps\mp\alien\_hud::createSpendHintHUD(resource, rank, &"ALIENS_PATCH_CANCEL_USE");
+    }
 
     usage = wait_for_use(resource, rank);
     if(!isDefined(usage) || !usage) {
@@ -313,16 +327,19 @@ player_use(resource, rank) {
     self.alien_used_resource = undefined;
 
     cyclenum = -1;
-    if(isDefined(level.current_cycle_num))
+    if(isDefined(level.current_cycle_num)) {
       cyclenum = level.current_cycle_num;
+    }
 
     playername = "unknown";
-    if(isDefined(self.name))
+    if(isDefined(self.name)) {
       playername = self.name;
+    }
 
     hivename = "unknown";
-    if(isDefined(level.current_hive_name))
+    if(isDefined(level.current_hive_name)) {
       hivename = level.current_hive_name;
+    }
 
     if(GetDvarInt("alien_bbprint_debug") > 0) {
       IPrintLnBold("^8bbprint: aliencombatresourceused \n" +
@@ -347,8 +364,9 @@ player_use(resource, rank) {
 }
 
 show_alternate_spend_hint(resource) {
-  if(level_uses_MAAWS() && IsSubStr(resource.ref, "predator"))
+  if(level_uses_MAAWS() && IsSubStr(resource.ref, "predator")) {
     return true;
+  }
 
   return (IsSubStr(resource.ref, "turret") || isSubStr(resource.ref, "_ims"));
 }
@@ -387,8 +405,9 @@ wait_for_use(resource, rank) {
 
     case "dpad_predator":
 
-      if(level_uses_MAAWS())
+      if(level_uses_MAAWS()) {
         return player_watch_equalizer_use(resource, rank);
+      }
 
     default:
       return player_watch_use();
@@ -400,8 +419,9 @@ player_watch_box_thrown() {
   while(true) {
     self waittill("grenade_fire", item_thrown, weapon_name);
 
-    if(weapon_name == "aliendeployable_crate_marker_mp")
+    if(weapon_name == "aliendeployable_crate_marker_mp") {
       return true;
+    }
   }
 }
 
@@ -471,8 +491,9 @@ player_action_slot_internal(resource, get_rank_func, waittillname) {
 
 reenable_usability(wait_time) {
   self endon("disconnect");
-  if(!isDefined(wait_time))
+  if(!isDefined(wait_time)) {
     wait_time = 1;
+  }
 
   wait(wait_time);
   self _enableUsability();
@@ -519,19 +540,22 @@ player_watch_currency_transfer() {
         level notify("currency_dropped", self);
       }
 
-      while(self is_drop_button_pressed())
+      while(self is_drop_button_pressed()) {
         wait 0.05;
+      }
     }
     wait 0.5;
   }
 }
 
 is_drop_button_pressed() {
-  if(!isDefined(self) || !isalive(self))
+  if(!isDefined(self) || !isalive(self)) {
     return false;
+  }
 
-  if(isDefined(self.laststand) && self.laststand)
+  if(isDefined(self.laststand) && self.laststand) {
     return false;
+  }
 
   pressed_button_1 = self AdsButtonPressed();
   pressed_button_2 = self JumpButtonPressed();
@@ -568,6 +592,7 @@ currency_box_think(box) {
   box thread maps\mp\alien\_deployablebox::box_setActive(true);
 
   self waittill("deploying_currency");
-  if(isDefined(box))
+  if(isDefined(box)) {
     box maps\mp\alien\_deployablebox::box_leave();
+  }
 }

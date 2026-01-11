@@ -259,4 +259,3 @@ function_a5242577(struct, color) {
     waitframe(1);
   }
 }
-

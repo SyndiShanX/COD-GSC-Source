@@ -17,8 +17,9 @@ init_nuked_perks() {
   flag_init("perk_vehicle_bringing_in_perk");
   structs = getstructarray("zm_perk_machine", "targetname");
 
-  for(i = 0; i < structs.size; i++)
+  for(i = 0; i < structs.size; i++) {
     structs[i] structdelete();
+  }
 
   level.nuked_perks = [];
   level.nuked_perks[0] = spawnStruct();
@@ -59,8 +60,9 @@ init_nuked_perks() {
     level.random_revive_structs[0].script_noteworthy = level.nuked_perks[0].script_noteworthy;
     level.random_revive_structs[0].turn_on_notify = level.nuked_perks[0].turn_on_notify;
 
-    if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"]))
+    if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"])) {
       level.struct_class_names["targetname"]["zm_perk_machine_override"] = [];
+    }
 
     level.struct_class_names["targetname"]["zm_perk_machine_override"][level.struct_class_names["targetname"]["zm_perk_machine_override"].size] = level.random_revive_structs[0];
 
@@ -84,8 +86,9 @@ init_nuked_perks() {
       level.random_perk_structs[i].script_noteworthy = level.nuked_perks[i].script_noteworthy;
       level.random_perk_structs[i].turn_on_notify = level.nuked_perks[i].turn_on_notify;
 
-      if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"]))
+      if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"])) {
         level.struct_class_names["targetname"]["zm_perk_machine_override"] = [];
+      }
 
       level.struct_class_names["targetname"]["zm_perk_machine_override"][level.struct_class_names["targetname"]["zm_perk_machine_override"].size] = level.random_perk_structs[i];
 
@@ -111,8 +114,9 @@ init_nuked_perks() {
       level.random_perk_structs[i].script_noteworthy = level.nuked_perks[i].script_noteworthy;
       level.random_perk_structs[i].turn_on_notify = level.nuked_perks[i].turn_on_notify;
 
-      if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"]))
+      if(!isDefined(level.struct_class_names["targetname"]["zm_perk_machine_override"])) {
         level.struct_class_names["targetname"]["zm_perk_machine_override"] = [];
+      }
 
       level.struct_class_names["targetname"]["zm_perk_machine_override"][level.struct_class_names["targetname"]["zm_perk_machine_override"].size] = level.random_perk_structs[i];
 
@@ -128,8 +132,9 @@ draw_debug_location() {
 wait_for_round_range(start_round, end_round) {
   round_to_spawn = randomintrange(start_round, end_round);
 
-  while(level.round_number < round_to_spawn)
+  while(level.round_number < round_to_spawn) {
     wait 1;
+  }
 }
 
 bring_random_perk(machines, machine_triggers) {
@@ -188,8 +193,9 @@ bring_perk(machine, trigger) {
     is_jugger = 1;
   }
 
-  if(!is_revive)
+  if(!is_revive) {
     trigger.blocker_model delete();
+  }
 
   machine.original_pos = machine.original_pos + (offset[0], offset[1], 0);
   machine.origin = machine.original_pos;
@@ -218,10 +224,12 @@ bring_perk(machine, trigger) {
     machine thread maps\mp\zombies\_zm_perks::perk_fx("revive_light");
   } else if(is_jugger)
     machine thread maps\mp\zombies\_zm_perks::perk_fx("jugger_light");
-  else if(is_doubletap)
+  else if(is_doubletap) {
     machine thread maps\mp\zombies\_zm_perks::perk_fx("doubletap_light");
-  else if(is_sleight)
+  }
+  else if(is_sleight) {
     machine thread maps\mp\zombies\_zm_perks::perk_fx("sleight_light");
+  }
 }
 
 perk_incoming_sound() {
@@ -273,8 +281,9 @@ perk_follow_path(node) {
   flag_set("perk_vehicle_bringing_in_perk");
   self notify("newpath");
 
-  if(isDefined(node))
+  if(isDefined(node)) {
     self.attachedpath = node;
+  }
 
   pathstart = self.attachedpath;
   self.currentnode = self.attachedpath;

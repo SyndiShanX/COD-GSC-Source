@@ -131,8 +131,9 @@ intro_logic(var_0, var_1, var_2) {
   var_2 maps\_anim::anim_single_solo(level.vargas, "int_intro");
   level.vargas linkto(var_2);
 
-  foreach(var_4 in var_0)
+  foreach(var_4 in var_0) {
   var_4 thread create_node_and_idle(var_1, "int_intro_idle");
+  }
 
   level.chair_vargas_2 linkto(var_2);
   var_2 thread maps\_anim::anim_loop_solo(level.vargas, "int_intro_idle");
@@ -183,8 +184,9 @@ dot() {
 drag_animation(var_0, var_1, var_2) {
   level endon("drop_vargas");
 
-  foreach(var_4 in var_0)
+  foreach(var_4 in var_0) {
   var_4.animnode notify("stop_loop");
+  }
 
   var_1 notify("stop_loop");
   var_2 thread do_elias_int_anim();
@@ -205,8 +207,9 @@ do_elias_int_anim() {
 }
 
 create_node_and_idle(var_0, var_1) {
-  if(self == level.merrick)
+  if(self == level.merrick) {
     wait 1.5;
+  }
 
   self.animnode = spawnStruct();
   self.animnode.origin = var_0.origin;
@@ -287,8 +290,9 @@ drag_hints(var_0, var_1, var_2) {
   wait 4;
 
   for(;;) {
-    if(level.old_dist - distance(var_0.origin, var_1.origin) < 6)
+    if(level.old_dist - distance(var_0.origin, var_1.origin) < 6) {
       maps\_utility::display_hint("hint_drag");
+    }
 
     wait 1;
   }
@@ -305,13 +309,15 @@ drag_on_ls(var_0, var_1, var_2) {
       var_4 = vectornormalize(var_1.origin - var_0.origin);
       var_5 = var_2 * 0.07 * (var_3[0] + 0.01);
 
-      if(common_scripts\utility::flag("iplane_drag_talk_done"))
+      if(common_scripts\utility::flag("iplane_drag_talk_done")) {
         var_5 = var_5 * 2;
+      }
 
       var_6 = length(var_1.origin - var_0.origin);
 
-      if(var_5 > var_6)
+      if(var_5 > var_6) {
         var_5 = var_6;
+      }
 
       var_0 moveto(var_0.origin + var_5 * var_4, 0.1);
       level.old_dist = distance(var_0.origin, var_1.origin) - var_5;
@@ -462,8 +468,9 @@ open_the_ramp() {
   var_1 = 3;
   var_2 = getEntArray("destroy_plane_debris02", "targetname");
 
-  foreach(var_4 in var_2)
+  foreach(var_4 in var_2) {
   var_4 linkto(level.bay_door_lower);
+  }
 
   thread maps\iplane::setup_plane_debris(var_2, var_1);
   var_1 = 6.1;
@@ -507,11 +514,13 @@ connect_and_start_tarps() {
   var_0 = getEntArray("crates", "targetname");
   var_1 = getEntArray("crates02", "targetname");
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 linkto(level.bay_door_lower);
+  }
 
-  foreach(var_6 in var_1)
+  foreach(var_6 in var_1) {
   var_6 linkto(level.plane_tail);
+  }
 
   foreach(var_3 in var_0) {
     var_3.animname = "crates_tarp";
@@ -524,8 +533,9 @@ connect_and_start_tarps() {
   common_scripts\utility::flag_wait("player_activated_ramps_open");
   wait 2;
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 show();
+  }
 
   foreach(var_6 in var_1) {
     var_6.animname = "crates_tarp";
@@ -541,10 +551,12 @@ lower_bottom_bay_door(var_0) {
   level.bay_door_lower_model maps\_anim::setanimtree();
   level.bay_door_lower_model unlink();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level.bay_door_lower_model rotatepitch(-30, 0.05);
-  else
+  }
+  else {
     level.bay_door_lower_model rotatepitch(-30, 10, 5, 1);
+  }
 
   level.bay_door_lower_model waittill("rotatedone");
   level.bay_door_lower_model linkto(level.plane_core);
@@ -556,10 +568,12 @@ raise_top_bay_door(var_0) {
   level.bay_door_upper_model maps\_anim::setanimtree();
   level.bay_door_upper_model unlink();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level.bay_door_upper_model rotatepitch(-25, 0.05);
-  else
+  }
+  else {
     level.bay_door_upper_model rotatepitch(-25, 10, 5, 1);
+  }
 
   level.bay_door_upper_model waittill("rotatedone");
   level.bay_door_upper_model thread maps\_utility::play_sound_on_entity("scn_iplane_ramp_open_end");
@@ -579,8 +593,9 @@ set_start_positions(var_0) {
         level.hesh forceteleport(var_3.origin, var_3.angles);
         level.hesh setgoalpos(var_3.origin);
 
-        if(isDefined(var_3.animation))
+        if(isDefined(var_3.animation)) {
           var_3 thread maps\_anim::anim_generic(level.hesh, var_3.animation);
+        }
 
         if(isDefined(var_3.target)) {
           var_3 = var_3 common_scripts\utility::get_target_ent();
@@ -592,8 +607,9 @@ set_start_positions(var_0) {
         level.merrick forceteleport(var_3.origin, var_3.angles);
         level.merrick setgoalpos(var_3.origin);
 
-        if(isDefined(var_3.animation))
+        if(isDefined(var_3.animation)) {
           var_3 thread maps\_anim::anim_generic(level.merrick, var_3.animation);
+        }
 
         if(isDefined(var_3.target)) {
           var_3 = var_3 common_scripts\utility::get_target_ent();
@@ -605,8 +621,9 @@ set_start_positions(var_0) {
         level.elias forceteleport(var_3.origin, var_3.angles);
         level.elias setgoalpos(var_3.origin);
 
-        if(isDefined(var_3.animation))
+        if(isDefined(var_3.animation)) {
           var_3 thread maps\_anim::anim_generic(level.elias, var_3.animation);
+        }
 
         if(isDefined(var_3.target)) {
           var_3 = var_3 common_scripts\utility::get_target_ent();
@@ -618,8 +635,9 @@ set_start_positions(var_0) {
         level.vargas forceteleport(var_3.origin, var_3.angles);
         level.vargas setgoalpos(var_3.origin);
 
-        if(isDefined(var_3.animation))
+        if(isDefined(var_3.animation)) {
           var_3 thread maps\_anim::anim_generic(level.vargas, var_3.animation);
+        }
 
         if(isDefined(var_3.target)) {
           var_3 = var_3 common_scripts\utility::get_target_ent();

@@ -6,10 +6,12 @@
 #using_animtree("generic_human");
 
 main() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     animscripts\traverse\shared::dog_wall_and_window_hop("wallhop", 40);
-  else
+  }
+  else {
     advancedwindowtraverse( % windowclimb, 35);
+  }
 }
 
 advancedwindowtraverse(var_0, var_1) {

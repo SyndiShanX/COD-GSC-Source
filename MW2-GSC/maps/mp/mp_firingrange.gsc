@@ -163,16 +163,18 @@ triggerCheck(target) {
     //If the target is close enough to the player to cause a possible issue, tell the target to go back the other direction.
     distance = Distance(target.origin, self.origin);
     if(distance <= 90) {
-      if(isDefined(target.triggeroff))
+      if(isDefined(target.triggeroff)) {
         target.triggeroff = false; //Stop the target.
+      }
 
       target notify("targetStopMoving");
 
       while(isDefined(player) && player isTouching(self) && distance <= 90) {
         wait 0.1;
       }
-      if(isDefined(target.triggeroff))
+      if(isDefined(target.triggeroff)) {
         target.triggeroff = true; //Start the target.
+      }
 
       target notify("targetStopMoving");
     }
@@ -286,8 +288,9 @@ moveTarget(dir, dis, speed) {
         if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
           keepMoving = self.triggeroff;
 
-        if(keepMoving == false)
+        if(keepMoving == false) {
           break;
+        }
         self moveto(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
@@ -300,8 +303,9 @@ moveTarget(dir, dis, speed) {
         if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
           keepMoving = self.triggeroff;
 
-        if(keepMoving == false)
+        if(keepMoving == false) {
           break;
+        }
         self moveto(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
@@ -314,8 +318,9 @@ moveTarget(dir, dis, speed) {
         if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
           keepMoving = self.triggeroff;
 
-        if(keepMoving == false)
+        if(keepMoving == false) {
           break;
+        }
         self moveto(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
@@ -328,8 +333,9 @@ moveTarget(dir, dis, speed) {
         if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
           keepMoving = self.triggeroff;
 
-        if(keepMoving == false)
+        if(keepMoving == false) {
           break;
+        }
         self moveto(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
@@ -342,8 +348,9 @@ moveTarget(dir, dis, speed) {
         if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
           keepMoving = self.triggeroff;
 
-        if(keepMoving == false)
+        if(keepMoving == false) {
           break;
+        }
         self moveto(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
@@ -355,15 +362,17 @@ moveTarget(dir, dis, speed) {
         if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
           keepMoving = self.triggeroff;
 
-        if(keepMoving == false)
+        if(keepMoving == false) {
           break;
+        }
         self moveto(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
       case 7: //Custom
-        if(keepMoving == false)
+        if(keepMoving == false) {
           self waittill("targetStopMoving"); //Wait here till the player leaves the trigger.
+        }
 
         self moveto(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
@@ -371,8 +380,9 @@ moveTarget(dir, dis, speed) {
         if(isDefined(self.triggeroff)) //Does the target have the Key triggeroff? If so, set keepMoving to its value.
           keepMoving = self.triggeroff;
 
-        if(keepMoving == false)
+        if(keepMoving == false) {
           self waittill("targetStopMoving"); //Wait here till the player leaves the trigger.
+        }
         self moveto(StartPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");

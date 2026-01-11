@@ -15,6 +15,7 @@ main() {
   level._effect["dust_wind_slow"] = loadfx("dust/dust_wind_slow_yel_loop");
 
   /#		
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_cross_fire_fx::main();
+  }
 }

@@ -7,8 +7,9 @@
 maketype(var_0) {
   var_1 = getinfoindex(var_0);
 
-  if(var_1 >= 0)
+  if(var_1 >= 0) {
     return var_1;
+  }
 
   switch (var_0) {
     case "vehicle_80s_sedan1_green":
@@ -251,15 +252,18 @@ maketype(var_0) {
 }
 
 getinfoindex(var_0) {
-  if(!isDefined(level.destructible_type))
+  if(!isDefined(level.destructible_type)) {
     return -1;
+  }
 
-  if(level.destructible_type.size == 0)
+  if(level.destructible_type.size == 0) {
     return -1;
+  }
 
   for(var_1 = 0; var_1 < level.destructible_type.size; var_1++) {
-    if(var_0 == level.destructible_type[var_1].v["type"])
+    if(var_0 == level.destructible_type[var_1].v["type"]) {
       return var_1;
+    }
   }
 
   return -1;
@@ -1196,10 +1200,12 @@ vehicle_80s_sedan1_lowres(var_0, var_1) {
   common_scripts\_destructible::destructible_explode(4000, 5000, 200, 150, 300);
   var_2 = undefined;
 
-  if(var_1 == "green")
+  if(var_1 == "green") {
     var_2 = "dest";
-  else
+  }
+  else {
     var_2 = "_destroyed";
+  }
 
   common_scripts\_destructible::destructible_state(undefined, "vehicle_80s_sedan1_" + var_1 + var_2);
 }

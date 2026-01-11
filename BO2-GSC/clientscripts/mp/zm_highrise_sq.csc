@@ -49,8 +49,9 @@ sq_play_maxis_vo(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
         }
       }
 
-      for(i = 0; i < 3; i++)
+      for(i = 0; i < 3; i++) {
         playSound(localclientnum, level.sq_clientfield_vo[newval], a_sorted_spots[i].origin);
+      }
     }
   }
 }
@@ -60,16 +61,18 @@ dragon_fireworks_init() {
   a_which_drg = array("r", "m");
   assert(a_tail_noteworthy.size == a_which_drg.size, "zm_highrise_sq::dragon_fireworks_init - a_tail_noteworthy and a_which_drg must be the same size");
 
-  for(i = 0; i < a_tail_noteworthy.size; i++)
+  for(i = 0; i < a_tail_noteworthy.size; i++) {
     level thread dragon_fireworks_think(a_tail_noteworthy[i], a_which_drg[i]);
+  }
 }
 
 dragon_fireworks_think(str_tail_noteworthy, str_which_drg) {
   level waittill(str_tail_noteworthy);
   str_fx = "sidequest_dragon_spark_max";
 
-  if(str_which_drg == "r")
+  if(str_which_drg == "r") {
     str_fx = "sidequest_dragon_spark_ric";
+  }
 
   for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
     m_tail = getstruct(str_tail_noteworthy, "targetname");
@@ -104,15 +107,17 @@ play_fireworks_audio(origin) {
 dragon_fireball_init() {
   a_dragons = array("dragon_a", "dragon_b");
 
-  foreach(str_dragon in a_dragons)
+  foreach(str_dragon in a_dragons) {
   level thread dragon_fireball(str_dragon);
+  }
 }
 
 dragon_fireball(str_which_dragon) {
   level waittill("start_fireball_" + str_which_dragon);
 
-  for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++)
+  for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
     level thread dragon_fireball_go(localclientnum, str_which_dragon);
+  }
 }
 
 dragon_fireball_go(localclientnum, str_which_dragon) {
@@ -120,8 +125,9 @@ dragon_fireball_go(localclientnum, str_which_dragon) {
   n_fx_id = undefined;
   str_fx = "sidequest_dragon_fireball_max";
 
-  if(str_which_dragon == "r")
+  if(str_which_dragon == "r") {
     str_fx = "sidequest_dragon_fireball_ric";
+  }
 
   foreach(m_fxanim in a_fxanim) {
     if(isDefined(m_fxanim.fxanim_scene_1) && m_fxanim.fxanim_scene_1 == str_which_dragon) {

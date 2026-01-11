@@ -77,8 +77,9 @@ dog_fx_trail() {
 
 dog_death() {
   self waittill("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self playSound("zmb_hellhound_vox_death");
   if(isDefined(self.attacker) && isai(self.attacker)) {
     self.attacker notify("killed", self);

@@ -116,8 +116,9 @@ init_sounds() {}
 has_challenge_occured(type) {
   for(i = 0; i < level.ChallengeEvents.size; i++) {
     challenge = level.ChallengeEvents[i];
-    if(!isDefined(challenge.round))
+    if(!isDefined(challenge.round)) {
       continue;
+    }
     if(challenge.type == type && challenge.round < level.round_number) {
       return true;
     }
@@ -128,8 +129,9 @@ has_challenge_occured(type) {
 is_this_a_challenge_round(roundNum) {
   for(i = 0; i < level.ChallengeEvents.size; i++) {
     challenge = level.ChallengeEvents[i];
-    if(!isDefined(challenge.round))
+    if(!isDefined(challenge.round)) {
       continue;
+    }
     if(challenge.round == roundNum) {
       return true;
     }
@@ -154,8 +156,9 @@ try_to_start_challenge_round(roundNum) {
   level.challenge = undefined;
   for(i = 0; i < level.ChallengeEvents.size; i++) {
     level.challenge = level.ChallengeEvents[i];
-    if(!isDefined(level.challenge.round))
+    if(!isDefined(level.challenge.round)) {
       continue;
+    }
     if(level.challenge.round == roundNum) {
       break;
     }
@@ -270,8 +273,9 @@ barrel_bomb_think() {
 
 barrel_burst(which) {
   self endon("exit_taken");
-  if(flag(which))
+  if(flag(which)) {
     return;
+  }
   flag_set(which);
   barrelSpawns = [];
   if(which == "barrel_burst1") {

@@ -47,8 +47,9 @@ light_geo_delete() {
     if(!isDefined(var_0[var_1].script_noteworthy)) {
       continue;
     }
-    if(var_0[var_1].script_noteworthy == "tube_light_geo")
+    if(var_0[var_1].script_noteworthy == "tube_light_geo") {
       var_0[var_1] delete();
+    }
   }
 }
 
@@ -59,8 +60,9 @@ light_model_delete() {
     if(!isDefined(var_0[var_1].script_noteworthy)) {
       continue;
     }
-    if(var_0[var_1].script_noteworthy == "tube_light_geo")
+    if(var_0[var_1].script_noteworthy == "tube_light_geo") {
       var_0[var_1] delete();
+    }
   }
 }
 
@@ -80,10 +82,12 @@ playerplaysnowfx() {
   var_0 = (0, 0, 30);
   var_1 = self getstance();
 
-  if(var_1 == "crouch")
+  if(var_1 == "crouch") {
     var_0 = (0, 0, 20);
-  else if(var_1 == "prone")
+  }
+  else if(var_1 == "prone") {
     var_0 = (0, 0, 10);
+  }
 
   playFX(common_scripts\utility::getfx("deathfx_xmas_snow"), self.origin + var_0);
 }

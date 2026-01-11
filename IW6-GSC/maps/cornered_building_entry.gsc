@@ -192,10 +192,12 @@ begin_building_entry() {
   thread building_entry();
   common_scripts\utility::flag_wait("building_entry_finished");
 
-  if(maps\cornered_code::is_e3())
+  if(maps\cornered_code::is_e3()) {
     thread maps\_utility::autosave_by_name_silent("building_entry");
-  else
+  }
+  else {
     thread maps\_utility::autosave_tactical();
+  }
 }
 
 begin_shadow_kill() {
@@ -205,10 +207,12 @@ begin_shadow_kill() {
   thread shadow_kill();
   common_scripts\utility::flag_wait("shadow_kill_finished");
 
-  if(maps\cornered_code::is_e3())
+  if(maps\cornered_code::is_e3()) {
     thread maps\_utility::autosave_by_name_silent("shadow_kill");
-  else
+  }
+  else {
     thread maps\_utility::autosave_tactical();
+  }
 }
 
 begin_inverted_rappel() {
@@ -244,8 +248,9 @@ building_entry() {
     level.rappel_params = var_0;
     maps\cornered_code_rappel::cornered_start_rappel("rope_ref_stealth", "player_rappel_ground_ref_stealth", var_0);
 
-    foreach(var_2 in level.allies)
+    foreach(var_2 in level.allies) {
     var_2 maps\cornered_code_rappel_allies::ally_rappel_start_rope(var_0.rappel_type);
+    }
 
     level.player thread maps\cornered_code::player_flap_sleeves();
   }
@@ -319,10 +324,12 @@ handle_building_entry() {
   var_1 = getent("player_enter_building_trigger", "targetname");
 
   if(!maps\cornered_code::is_e3()) {
-    if(level.player common_scripts\utility::is_player_gamepad_enabled())
+    if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
       var_1 sethintstring(&"CORNERED_ENTER_BUILDING_CONSOLE");
-    else
+    }
+    else {
       var_1 sethintstring(&"CORNERED_ENTER_BUILDING");
+    }
   }
 
   var_1 thread trigger_disable_on_jump();
@@ -350,8 +357,9 @@ player_enter_building() {
   var_0 hide();
   level.building_entry_exit_anim_struct thread maps\_anim::anim_first_frame_solo(var_0, "cornered_rappel_stealth_enterbldg_cut_playerline");
 
-  if(level.player getstance() != "stand")
+  if(level.player getstance() != "stand") {
     level.player setstance("stand");
+  }
 
   maps\cornered_code_rappel::cornered_stop_rappel();
   wait 0.1;
@@ -408,8 +416,9 @@ player_enter_building() {
   level.player_exit_to_inverted_rope = maps\_utility::spawn_anim_model("cnd_rappel_tele_rope");
   level.building_entry_exit_anim_struct maps\_anim::anim_first_frame_solo(level.player_exit_to_inverted_rope, "rappel_stealth_exit");
 
-  if(isDefined(level.cnd_rappel_player_rope))
+  if(isDefined(level.cnd_rappel_player_rope)) {
     level.cnd_rappel_player_rope delete();
+  }
 }
 
 glass_cutting_fx_notetrack_handler(var_0) {
@@ -502,10 +511,12 @@ glass_cutter_off(var_0) {
 }
 
 delete_glass_cutter(var_0) {
-  if(var_0.animname == "rorke")
+  if(var_0.animname == "rorke") {
     level.rorke_glass_cutter delete();
-  else
+  }
+  else {
     level.player_glass_cutter delete();
+  }
 }
 
 punch_glass(var_0) {
@@ -556,27 +567,31 @@ building_entry_tv() {
     common_scripts\utility::flag_wait("player_in_power_junction_hallway");
     stopcinematicingame();
 
-    if(isDefined(level.hide_bink_brush))
+    if(isDefined(level.hide_bink_brush)) {
       level.hide_bink_brush show();
+    }
 
     var_0 = getent("building_entry_tv_light", "targetname");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 setlightintensity(0.01);
+    }
   } else {
     level.hide_bink_brush show();
     var_0 = getent("building_entry_tv_light", "targetname");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 setlightintensity(0.01);
+    }
   }
 
   common_scripts\utility::flag_wait("virus_upload_bar_complete");
   wait 1;
   cinematicingameloop("cornered_concert");
 
-  if(isDefined(level.hide_bink_brush))
+  if(isDefined(level.hide_bink_brush)) {
     level.hide_bink_brush delete();
+  }
 
   common_scripts\utility::flag_wait("player_exiting_building");
   stopcinematicingame();
@@ -613,10 +628,12 @@ upload_virus_setup() {
   var_1 delete();
 
   if(!maps\cornered_code::is_e3()) {
-    if(level.player common_scripts\utility::is_player_gamepad_enabled())
+    if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
       level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
-    else
+    }
+    else {
       level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS");
+    }
   }
 
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(level.rack_pull_out_trigger, level.rack_pull_out_lookat, cos(40));
@@ -626,14 +643,16 @@ upload_virus_setup() {
   thread maps\cornered_audio::aud_virus("plant");
   level.rack setModel("cnd_server_rack_anim");
 
-  if(level.player common_scripts\utility::isweaponenabled())
+  if(level.player common_scripts\utility::isweaponenabled()) {
     level.player common_scripts\utility::_disableweapon();
+  }
 
   level.player allowcrouch(0);
   level.player allowprone(0);
 
-  if(level.player getstance() != "stand")
+  if(level.player getstance() != "stand") {
     level.player setstance("stand");
+  }
 
   level.player freezecontrols(1);
   wait 0.4;
@@ -673,11 +692,13 @@ player_upload_virus_hint() {
     var_1 = common_scripts\utility::flag_wait_any_return("player_start_upload", "player_leave_upload");
     common_scripts\utility::flag_set("player_started_uploading");
 
-    if(var_1 == "player_start_upload")
+    if(var_1 == "player_start_upload") {
       common_scripts\utility::flag_wait("player_stop_upload");
+    }
 
-    if(var_1 == "player_leave_upload")
+    if(var_1 == "player_leave_upload") {
       common_scripts\utility::flag_waitopen("player_leave_upload");
+    }
 
     common_scripts\utility::waitframe();
   }
@@ -701,10 +722,12 @@ upload_virus_enter() {
     level.rack_pull_out_trigger common_scripts\utility::trigger_on();
 
     if(!maps\cornered_code::is_e3()) {
-      if(level.player common_scripts\utility::is_player_gamepad_enabled())
+      if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
         level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
-      else
+      }
+      else {
         level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS");
+      }
     }
 
     maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(level.rack_pull_out_trigger, level.rack_pull_out_lookat, cos(40));
@@ -715,10 +738,12 @@ upload_virus_enter() {
     level.virus_upload_trigger common_scripts\utility::trigger_on();
 
     if(!maps\cornered_code::is_e3()) {
-      if(level.player common_scripts\utility::is_player_gamepad_enabled())
+      if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
         level.virus_upload_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
-      else
+      }
+      else {
         level.virus_upload_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS");
+      }
     }
 
     maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(level.virus_upload_trigger, level.virus_upload_lookat, cos(40));
@@ -733,8 +758,9 @@ delay_show_animated_hands(var_0, var_1) {
   wait(var_0);
   level.cornered_player_arms show();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 show();
+  }
 
   level.player freezecontrols(0);
 }
@@ -742,14 +768,16 @@ delay_show_animated_hands(var_0, var_1) {
 upload_virus_anims() {
   setsaveddvar("ammoCounterHide", 1);
 
-  if(level.player common_scripts\utility::isweaponenabled())
+  if(level.player common_scripts\utility::isweaponenabled()) {
     level.player common_scripts\utility::_disableweapon();
+  }
 
   level.player allowcrouch(0);
   level.player allowprone(0);
 
-  if(level.player getstance() != "stand")
+  if(level.player getstance() != "stand") {
     level.player setstance("stand");
+  }
 
   level.player freezecontrols(1);
   level.player.is_in_upload = 1;
@@ -771,10 +799,12 @@ upload_virus_anims() {
 
   level.player playerlinktodelta(level.cornered_player_arms, "tag_player", 0, 15, 15, 15, 10);
 
-  if(common_scripts\utility::flag("force_player_to_end_virus_upload"))
+  if(common_scripts\utility::flag("force_player_to_end_virus_upload")) {
     upload_virus_exit();
-  else
+  }
+  else {
     upload_virus_loop();
+  }
 }
 
 upload_virus_loop() {
@@ -852,8 +882,9 @@ watch_player_left_stick() {
     var_0 = level.player getnormalizedmovement();
 
     if(var_0[0] < 0) {
-      if(common_scripts\utility::flag("player_stop_upload") || !common_scripts\utility::flag("player_start_upload"))
+      if(common_scripts\utility::flag("player_stop_upload") || !common_scripts\utility::flag("player_start_upload")) {
         common_scripts\utility::flag_set("player_leave_upload");
+      }
     }
 
     common_scripts\utility::waitframe();
@@ -867,13 +898,15 @@ upload_virus_exit() {
     level.shadowkill_struct maps\_anim::anim_single(level.virus_upload_anim_array, "virus_upload_end");
     level.player unlink();
 
-    if(!level.player common_scripts\utility::isweaponenabled())
+    if(!level.player common_scripts\utility::isweaponenabled()) {
       level.player common_scripts\utility::_enableweapon();
+    }
 
     level.player maps\cornered_code::player_showviewmodelsleeveflaps();
 
-    if(!level.player common_scripts\utility::isweaponswitchenabled())
+    if(!level.player common_scripts\utility::isweaponswitchenabled()) {
       level.player common_scripts\utility::_enableweaponswitch();
+    }
 
     level.player allowfire(1);
     level.allow_fire = 1;
@@ -905,28 +938,32 @@ upload_virus_exit() {
       if(level.player getcurrentweapon() == "computer_idf") {
         level.player switchtoweapon(level.player.currentweapon);
 
-        if(!level.player common_scripts\utility::isweaponenabled())
+        if(!level.player common_scripts\utility::isweaponenabled()) {
           level.player common_scripts\utility::_enableweapon();
+        }
 
         level.player maps\cornered_code::player_showviewmodelsleeveflaps();
         wait 0.5;
         level.player takeweapon("computer_idf");
 
-        if(!level.player common_scripts\utility::isweaponswitchenabled())
+        if(!level.player common_scripts\utility::isweaponswitchenabled()) {
           level.player common_scripts\utility::_enableweaponswitch();
+        }
 
         level.player allowfire(1);
         level.allow_fire = 1;
         level.player enableweaponpickup();
         setsaveddvar("ammoCounterHide", 0);
       } else {
-        if(!level.player common_scripts\utility::isweaponenabled())
+        if(!level.player common_scripts\utility::isweaponenabled()) {
           level.player common_scripts\utility::_enableweapon();
+        }
 
         level.player maps\cornered_code::player_showviewmodelsleeveflaps();
 
-        if(!level.player common_scripts\utility::isweaponswitchenabled())
+        if(!level.player common_scripts\utility::isweaponswitchenabled()) {
           level.player common_scripts\utility::_enableweaponswitch();
+        }
 
         level.player allowfire(1);
         level.allow_fire = 1;
@@ -938,13 +975,15 @@ upload_virus_exit() {
       level.player giveweapon("computer_idf");
       level.player switchtoweaponimmediate("computer_idf");
 
-      if(level.player common_scripts\utility::isweaponswitchenabled())
+      if(level.player common_scripts\utility::isweaponswitchenabled()) {
         level.player common_scripts\utility::_disableweaponswitch();
+      }
 
       wait 0.2;
 
-      if(!level.player common_scripts\utility::isweaponenabled())
+      if(!level.player common_scripts\utility::isweaponenabled()) {
         level.player common_scripts\utility::_enableweapon();
+      }
 
       level.player maps\cornered_code::player_showviewmodelsleeveflaps();
       setsaveddvar("ammoCounterHide", 1);
@@ -961,8 +1000,9 @@ player_in_upload_volume() {
   level.allow_fire = undefined;
   level.player disableweaponpickup();
 
-  while(level.player istouching(var_0) && !isDefined(level.player.is_in_upload))
+  while(level.player istouching(var_0) && !isDefined(level.player.is_in_upload)) {
     wait 0.05;
+  }
 
   if(isDefined(level.player.is_in_upload)) {
     level.player switchtoweapon(level.player.currentweapon);
@@ -972,15 +1012,18 @@ player_in_upload_volume() {
 
   level.player switchtoweapon(level.player.currentweapon);
 
-  if(level.player.currentweapon == "imbel+acog_sp+silencer_sp")
+  if(level.player.currentweapon == "imbel+acog_sp+silencer_sp") {
     wait 1.0;
-  else
+  }
+  else {
     wait 0.5;
+  }
 
   level.player takeweapon("computer_idf");
 
-  if(!level.player common_scripts\utility::isweaponswitchenabled())
+  if(!level.player common_scripts\utility::isweaponswitchenabled()) {
     level.player common_scripts\utility::_enableweaponswitch();
+  }
 
   level.player allowfire(1);
   level.allow_fire = 1;
@@ -989,8 +1032,9 @@ player_in_upload_volume() {
 }
 
 virus_upload_bink_start() {
-  if(isDefined(level.start_point) && level.start_point == "shadow_kill")
+  if(isDefined(level.start_point) && level.start_point == "shadow_kill") {
     wait 2;
+  }
 
   if(isDefined(level.start_point) && level.start_point != "shadow_kill") {
     common_scripts\utility::flag_wait("player_in_power_junction_hallway");
@@ -1000,8 +1044,9 @@ virus_upload_bink_start() {
   setsaveddvar("cg_cinematicFullScreen", "0");
   cinematicingame("cornered_pda_upload");
 
-  while(cinematicgetframe() <= 20)
+  while(cinematicgetframe() <= 20) {
     common_scripts\utility::waitframe();
+  }
 
   pausecinematicingame(1);
 }
@@ -1048,29 +1093,34 @@ virus_upload_bink_progress() {
     level.bink_current_time = cinematicgettimeinmsec();
     level.bink_percentage = level.bink_current_time / 22000;
 
-    if(level.bink_percentage == 0)
+    if(level.bink_percentage == 0) {
       level.bink_percentage = 1.0;
+    }
 
     thread maps\cornered_audio::audio_check_to_play_a_beep_or_not();
 
     if(level.bink_percentage >= 0.2) {
-      if(!common_scripts\utility::flag("spawn_power_junction_patrol"))
+      if(!common_scripts\utility::flag("spawn_power_junction_patrol")) {
         common_scripts\utility::flag_set("spawn_power_junction_patrol");
+      }
     }
 
     if(level.bink_percentage >= 0.92) {
-      if(!common_scripts\utility::flag("virus_upload_bar_almost_complete"))
+      if(!common_scripts\utility::flag("virus_upload_bar_almost_complete")) {
         common_scripts\utility::flag_set("virus_upload_bar_almost_complete");
+      }
     }
 
     if(level.bink_percentage >= 0.93) {
-      if(!common_scripts\utility::flag("force_virus_upload_bar_complete"))
+      if(!common_scripts\utility::flag("force_virus_upload_bar_complete")) {
         common_scripts\utility::flag_set("force_virus_upload_bar_complete");
+      }
     }
 
     if(level.bink_percentage >= 1.0) {
-      if(!common_scripts\utility::flag("virus_upload_bar_complete"))
+      if(!common_scripts\utility::flag("virus_upload_bar_complete")) {
         common_scripts\utility::flag_set("virus_upload_bar_complete");
+      }
 
       break;
     }
@@ -1089,10 +1139,12 @@ force_player_to_end_upload() {
       common_scripts\utility::flag_set("force_player_to_end_virus_upload");
     }
   } else {
-    if(isDefined(level.rack_shut))
+    if(isDefined(level.rack_shut)) {
       level.rack_pull_out_trigger common_scripts\utility::trigger_off();
-    else
+    }
+    else {
       level.virus_upload_trigger common_scripts\utility::trigger_off();
+    }
 
     level.rack setModel("cnd_server_rack_anim");
 
@@ -1100,15 +1152,18 @@ force_player_to_end_upload() {
       level.player switchtoweapon(level.player.currentweapon);
       wait 0.4;
 
-      if(level.player.currentweapon == "imbel+acog_sp+silencer_sp")
+      if(level.player.currentweapon == "imbel+acog_sp+silencer_sp") {
         wait 1.0;
-      else
+      }
+      else {
         wait 0.5;
+      }
 
       level.player takeweapon("computer_idf");
 
-      if(!level.player common_scripts\utility::isweaponswitchenabled())
+      if(!level.player common_scripts\utility::isweaponswitchenabled()) {
         level.player common_scripts\utility::_enableweaponswitch();
+      }
 
       level.player allowfire(1);
       level.allow_fire = 1;
@@ -1120,13 +1175,15 @@ force_player_to_end_upload() {
   if(!common_scripts\utility::flag("force_virus_upload_bar_complete")) {
     common_scripts\utility::flag_wait_any("finish_upload", "enemies_aware");
 
-    if(!common_scripts\utility::flag("power_junction_patrol_killed"))
+    if(!common_scripts\utility::flag("power_junction_patrol_killed")) {
       thread watch_player_after_shadow_kill();
+    }
 
     maps\_utility::delaythread(2, common_scripts\utility::flag_clear, "force_player_to_end_virus_upload");
 
-    if(!common_scripts\utility::flag("enemies_aware"))
+    if(!common_scripts\utility::flag("enemies_aware")) {
       upload_virus_enter();
+    }
   }
 }
 
@@ -1134,10 +1191,12 @@ watch_player_after_shadow_kill() {
   level endon("virus_upload_bar_complete");
   common_scripts\utility::flag_wait("enemies_aware");
 
-  if(isDefined(level.rack_shut))
+  if(isDefined(level.rack_shut)) {
     level.rack_pull_out_trigger common_scripts\utility::trigger_off();
-  else
+  }
+  else {
     level.virus_upload_trigger common_scripts\utility::trigger_off();
+  }
 
   level.rack setModel("cnd_server_rack_anim");
   common_scripts\utility::flag_wait("power_junction_patrol_killed");
@@ -1179,8 +1238,9 @@ gun_down_trigger() {
 
       while(level.player maps\_utility::isads()) {
         if(level.player isfiring()) {
-          while(level.player maps\_utility::isads())
+          while(level.player maps\_utility::isads()) {
             wait 0.05;
+          }
 
           break;
         }
@@ -1193,8 +1253,9 @@ gun_down_trigger() {
     level.player.equipped_hide_weapon = level.player getcurrentweapon();
 
     foreach(var_2 in var_0) {
-      if(var_2 != level.player.equipped_hide_weapon)
+      if(var_2 != level.player.equipped_hide_weapon) {
         level.player.unequipped_hide_weapon = var_2;
+      }
     }
 
     determine_weapon();
@@ -1203,8 +1264,9 @@ gun_down_trigger() {
     var_6 = level.player getweaponammostock(level.player.unequipped_hide_weapon);
     var_7 = level.player getweaponammoclip(level.player.unequipped_hide_weapon);
 
-    if(level.player common_scripts\utility::isweaponenabled())
+    if(level.player common_scripts\utility::isweaponenabled()) {
       level.player common_scripts\utility::_disableweapon();
+    }
 
     wait 0.5;
     level.player takeallweapons();
@@ -1217,8 +1279,9 @@ gun_down_trigger() {
     level.player setweaponammostock(level.player.unequipped_weapon, var_6);
     level.player setweaponammoclip(level.player.unequipped_weapon, var_7);
 
-    if(!level.player common_scripts\utility::isweaponenabled())
+    if(!level.player common_scripts\utility::isweaponenabled()) {
       level.player common_scripts\utility::_enableweapon();
+    }
   }
 }
 
@@ -1234,8 +1297,9 @@ gun_down_trigger_internal() {
 
     foreach(var_2 in var_0) {
       if(var_2 == "computer_idf") {
-        if(level.player getcurrentweapon() == "computer_idf")
+        if(level.player getcurrentweapon() == "computer_idf") {
           level.player.computer_idf = 1;
+        }
 
         level.player.equipped_weapon = level.player.currentweapon;
         level.player takeweapon("computer_idf");
@@ -1245,14 +1309,17 @@ gun_down_trigger_internal() {
 
     var_0 = level.player getweaponslistprimaries();
 
-    if(!isDefined(level.player.computer_idf))
+    if(!isDefined(level.player.computer_idf)) {
       level.player.equipped_weapon = level.player getcurrentweapon();
-    else
+    }
+    else {
       level.player.computer_idf = undefined;
+    }
 
     foreach(var_2 in var_0) {
-      if(var_2 != level.player.equipped_weapon)
+      if(var_2 != level.player.equipped_weapon) {
         level.player.unequipped_weapon = var_2;
+      }
     }
 
     determine_weapon(1);
@@ -1261,13 +1328,16 @@ gun_down_trigger_internal() {
     var_8 = level.player getweaponammostock(level.player.unequipped_weapon);
     var_9 = level.player getweaponammoclip(level.player.unequipped_weapon);
 
-    if(level.player common_scripts\utility::isweaponenabled())
+    if(level.player common_scripts\utility::isweaponenabled()) {
       level.player common_scripts\utility::_disableweapon();
+    }
 
-    if(level.player.equipped_weapon == "imbel+acog_sp+silencer_sp")
+    if(level.player.equipped_weapon == "imbel+acog_sp+silencer_sp") {
       wait 1.0;
-    else
+    }
+    else {
       wait 0.5;
+    }
 
     level.player takeallweapons();
     level.player giveweapon(level.player.equipped_hide_weapon, 0, 0, 0, 1);
@@ -1279,13 +1349,16 @@ gun_down_trigger_internal() {
     level.player setweaponammostock(level.player.unequipped_hide_weapon, var_8);
     level.player setweaponammoclip(level.player.unequipped_hide_weapon, var_9);
 
-    if(!level.player common_scripts\utility::isweaponenabled())
+    if(!level.player common_scripts\utility::isweaponenabled()) {
       level.player common_scripts\utility::_enableweapon();
+    }
 
-    if(level.player.equipped_hide_weapon == "imbel_hide_acog_silenced_cornered+acog_sp+silencer_sp")
+    if(level.player.equipped_hide_weapon == "imbel_hide_acog_silenced_cornered+acog_sp+silencer_sp") {
       wait 0.5;
-    else
+    }
+    else {
       wait 0.5;
+    }
 
     level.has_hidden_weapon_equipped = 1;
     thread hold_fire_unless_ads();
@@ -1295,8 +1368,9 @@ gun_down_trigger_internal() {
     level.player.equipped_hide_weapon = level.player getcurrentweapon();
 
     foreach(var_2 in var_0) {
-      if(var_2 != level.player.equipped_hide_weapon)
+      if(var_2 != level.player.equipped_hide_weapon) {
         level.player.unequipped_hide_weapon = var_2;
+      }
     }
 
     determine_weapon();
@@ -1305,13 +1379,16 @@ gun_down_trigger_internal() {
     var_14 = level.player getweaponammostock(level.player.unequipped_hide_weapon);
     var_15 = level.player getweaponammoclip(level.player.unequipped_hide_weapon);
 
-    if(level.player common_scripts\utility::isweaponenabled())
+    if(level.player common_scripts\utility::isweaponenabled()) {
       level.player common_scripts\utility::_disableweapon();
+    }
 
-    if(level.player.equipped_hide_weapon == "imbel_hide_acog_silenced_cornered+acog_sp+silencer_sp")
+    if(level.player.equipped_hide_weapon == "imbel_hide_acog_silenced_cornered+acog_sp+silencer_sp") {
       wait 0.5;
-    else
+    }
+    else {
       wait 0.5;
+    }
 
     level.player takeallweapons();
     level.player giveweapon(level.player.equipped_weapon, 0, 0, 0, 1);
@@ -1323,13 +1400,16 @@ gun_down_trigger_internal() {
     level.player setweaponammostock(level.player.unequipped_weapon, var_14);
     level.player setweaponammoclip(level.player.unequipped_weapon, var_15);
 
-    if(!level.player common_scripts\utility::isweaponenabled())
+    if(!level.player common_scripts\utility::isweaponenabled()) {
       level.player common_scripts\utility::_enableweapon();
+    }
 
-    if(level.player.equipped_weapon == "imbel+acog_sp+silencer_sp")
+    if(level.player.equipped_weapon == "imbel+acog_sp+silencer_sp") {
       wait 0.5;
-    else
+    }
+    else {
       wait 0.5;
+    }
 
     level.has_hidden_weapon_equipped = undefined;
   }
@@ -1371,8 +1451,9 @@ hold_fire_unless_ads() {
 
       while(level.player playerads() == 1) {
         if(level.player isfiring()) {
-          while(level.player playerads() == 1)
+          while(level.player playerads() == 1) {
             wait 0.05;
+          }
 
           level.player allowfire(0);
           level.allow_fire = undefined;
@@ -1395,8 +1476,9 @@ shut_server_rack() {
   common_scripts\utility::flag_wait("force_player_upload_end");
 
   if(isDefined(level.player.is_in_upload)) {
-    while(isDefined(level.player.is_in_upload))
+    while(isDefined(level.player.is_in_upload)) {
       wait 0.05;
+    }
   }
 
   level.shadowkill_struct maps\_anim::anim_single_solo(level.virus_upload_anim_array[2], "virus_upload_end");
@@ -1420,8 +1502,9 @@ festival_spotlights() {
     var_4 thread maps\_anim::anim_loop_solo(var_4, "cornered_festival_spotlight_1", "stop_loop");
   }
 
-  if(level.start_point == "intro" || level.start_point == "zipline" || level.start_point == "rappel_stealth" || level.start_point == "building_entry" || level.start_point == "shadow_kill" || level.start_point == "inverted_rappel" || level.start_point == "courtyard")
+  if(level.start_point == "intro" || level.start_point == "zipline" || level.start_point == "rappel_stealth" || level.start_point == "building_entry" || level.start_point == "shadow_kill" || level.start_point == "inverted_rappel" || level.start_point == "courtyard") {
     common_scripts\utility::flag_wait("baker_security_vo");
+  }
 
   foreach(var_4 in var_1) {
     stopFXOnTag(level._effect["vfx_festival_spot_cnd"], var_4, "J_prop_1");
@@ -1467,14 +1550,16 @@ festival_balloons() {
 festival_balloons_internal(var_0, var_1) {
   var_1 linkto(level.vista_pivot);
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 linkto(var_1, "J_prop_1");
+  }
 
   wait(randomfloatrange(0.3, 2.5));
   var_1 thread maps\_anim::anim_loop_solo(var_1, "cornered_balloon_wiggle", "stop_loop");
 
-  if(level.start_point == "intro" || level.start_point == "zipline" || level.start_point == "rappel_stealth" || level.start_point == "building_entry" || level.start_point == "shadow_kill" || level.start_point == "inverted_rappel" || level.start_point == "courtyard")
+  if(level.start_point == "intro" || level.start_point == "zipline" || level.start_point == "rappel_stealth" || level.start_point == "building_entry" || level.start_point == "shadow_kill" || level.start_point == "inverted_rappel" || level.start_point == "courtyard") {
     common_scripts\utility::flag_wait("baker_security_vo");
+  }
 
   var_1 notify("stop_loop");
   var_1 stopanimscripted();
@@ -1526,16 +1611,19 @@ ambient_building_lights_internal(var_0, var_1) {
     self.is_hidden = 1;
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 ambient_building_elevators(var_0, var_1) {
   while(!common_scripts\utility::flag("baker_security_vo")) {
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       self.going_up = 1;
-    else
+    }
+    else {
       self.going_up = undefined;
+    }
 
     var_2 = 180 * randomintrange(5, 40);
     var_3 = var_2 * 0.005;
@@ -1559,8 +1647,9 @@ ambient_building_elevators(var_0, var_1) {
     wait(randomfloatrange(5, 10));
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 building_entry_combat() {
@@ -1576,8 +1665,9 @@ building_entry_combat() {
 allies_building_entry_vo() {
   level.allies[level.const_rorke] maps\_utility::smart_radio_dialogue("cornered_rke_targetfloor");
 
-  if(!isDefined(level.building_entry_startpoint))
+  if(!isDefined(level.building_entry_startpoint)) {
     thread player_in_rorkes_way();
+  }
 
   common_scripts\utility::flag_wait("rorke_started_cutting_glass");
   wait 1;
@@ -1596,8 +1686,9 @@ player_in_rorkes_way() {
   level endon("player_out_of_rorkes_way");
   wait 3;
 
-  if(!common_scripts\utility::flag("player_out_of_rorkes_way"))
+  if(!common_scripts\utility::flag("player_out_of_rorkes_way")) {
     level.allies[level.const_rorke] maps\_utility::smart_radio_dialogue("cornered_mrk_youreinmyway");
+  }
 
   var_0 = maps\_utility::make_array("cornered_mrk_move", "cornered_mrk_youreinmyway");
   thread maps\cornered_code::nag_until_flag(var_0, "player_out_of_rorkes_way", 10, 15, 5);
@@ -1606,8 +1697,9 @@ player_in_rorkes_way() {
 nag_player_to_jump() {
   wait 1;
 
-  if(!common_scripts\utility::flag("player_jumped_into_building"))
+  if(!common_scripts\utility::flag("player_jumped_into_building")) {
     maps\cornered_code::temp_dialogue("Rorke", "Rook, kick that glass in and get in here!");
+  }
 }
 
 allies_building_entry_movement() {
@@ -1777,8 +1869,9 @@ power_junction_patrollers() {
   self.allowdeath = 1;
   self.patrol_walk_anim = "cornered_shadowkill_patrol_walk";
 
-  if(self.script_noteworthy == "shadow_kill_enemy")
+  if(self.script_noteworthy == "shadow_kill_enemy") {
     thread shadow_kill_enemy_setup();
+  }
   else {
     thread maps\cornered_code::wait_till_shot(undefined, "enemies_aware");
     thread stealth_is_broken();
@@ -1821,15 +1914,17 @@ waittill_goal_and_animate() {
   if(self.script_noteworthy == "enemy_1" || self.script_noteworthy == "enemy_2") {
     level.first_two_patrollers_at_goal++;
 
-    while(level.first_two_patrollers_at_goal < 2)
+    while(level.first_two_patrollers_at_goal < 2) {
       wait 0.05;
+    }
   }
 
   if(self.script_noteworthy == "enemy_3" || self.script_noteworthy == "enemy_4") {
     level.second_two_patrollers_at_goal++;
 
-    while(level.second_two_patrollers_at_goal < 2)
+    while(level.second_two_patrollers_at_goal < 2) {
       wait 0.05;
+    }
   }
 
   level.shadowkill_struct thread maps\_anim::anim_single_solo(self, "cornered_shadowkill_" + self.script_noteworthy);
@@ -1860,8 +1955,9 @@ alert_all_on_death() {
   level endon("shadow_kill_stab");
   self waittill("death");
 
-  if(!common_scripts\utility::flag("enemies_aware"))
+  if(!common_scripts\utility::flag("enemies_aware")) {
     common_scripts\utility::flag_set("enemies_aware");
+  }
 }
 
 shadow_kill_enemy() {
@@ -1918,8 +2014,9 @@ shadow_kill_patrol_vo() {
 stealth_is_broken(var_0) {
   self endon("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level endon(var_0);
+  }
 
   common_scripts\utility::flag_wait("enemies_aware");
   maps\_utility::anim_stopanimscripted();
@@ -1957,22 +2054,25 @@ check_patrol_in_volume(var_0) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(isalive(var_4) && var_4.script_noteworthy != "shadow_kill_enemy")
+    if(isalive(var_4) && var_4.script_noteworthy != "shadow_kill_enemy") {
       var_2 = common_scripts\utility::add_to_array(var_2, var_4);
+    }
   }
 
   for(;;) {
     var_6 = 1;
 
     foreach(var_8 in var_2) {
-      if(isalive(var_8) && !var_8 istouching(var_1))
+      if(isalive(var_8) && !var_8 istouching(var_1)) {
         var_6 = 0;
+      }
     }
 
     if(var_6) {
       foreach(var_8 in var_2) {
-        if(isalive(var_8))
+        if(isalive(var_8)) {
           var_8 thread wait_till_offscreen_then_delete();
+        }
       }
 
       break;
@@ -1981,8 +2081,9 @@ check_patrol_in_volume(var_0) {
     wait 0.05;
   }
 
-  while(level.patroller_deleted < var_2.size)
+  while(level.patroller_deleted < var_2.size) {
     wait 0.05;
+  }
 
   common_scripts\utility::flag_set("all_in");
   thread door_sounds("door_sound_struct_2", "crnd_door_open2_virus_room", "crnd_door_close2_virus_room");
@@ -2019,8 +2120,9 @@ watch_for_player_to_break_stealth(var_0) {
   var_2 = [];
 
   foreach(var_4 in var_0) {
-    if(var_4.script_noteworthy != "shadow_kill_enemy")
+    if(var_4.script_noteworthy != "shadow_kill_enemy") {
       var_2 = common_scripts\utility::add_to_array(var_2, var_4);
+    }
   }
 
   var_1 = getent("power_junction_post_shadow_kill_volume", "targetname");
@@ -2042,8 +2144,9 @@ watch_for_player_to_shoot_while_enemy_in_volume(var_0, var_1, var_2) {
     if(self istouching(var_0) && level.player istouching(var_0)) {
       if(level.player attackbuttonpressed() && !isDefined(level.player.is_in_upload) && level.player getcurrentweapon() != "computer_idf") {
         if(isDefined(level.allow_fire)) {
-          if(!common_scripts\utility::flag(var_1))
+          if(!common_scripts\utility::flag(var_1)) {
             common_scripts\utility::flag_set(var_1);
+          }
         }
 
         break;
@@ -2058,8 +2161,9 @@ handle_volume_touching(var_0, var_1, var_2, var_3) {
   self endon("death");
   level endon("enemies_aware");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level endon(var_2);
+  }
 
   for(;;) {
     if(self istouching(var_0)) {
@@ -2087,11 +2191,13 @@ allies_shadow_kill_vo() {
   thread stealth_break_rorke_vo();
   common_scripts\utility::flag_wait_any("all_in", "enemies_aware");
 
-  if(common_scripts\utility::flag("enemies_aware") && !common_scripts\utility::flag("all_in"))
+  if(common_scripts\utility::flag("enemies_aware") && !common_scripts\utility::flag("all_in")) {
     common_scripts\utility::flag_wait("power_junction_patrol_killed");
+  }
 
-  if(!common_scripts\utility::flag("virus_upload_bar_complete"))
+  if(!common_scripts\utility::flag("virus_upload_bar_complete")) {
     common_scripts\utility::flag_wait("virus_upload_bar_complete");
+  }
 
   wait 1;
   level.allies[level.const_rorke] maps\_utility::smart_dialogue("cornered_mrk_letsgettothe");
@@ -2108,8 +2214,9 @@ rorke_shadow_kill_vo() {
   if(!common_scripts\utility::flag("rorke_at_virus_upload")) {
     common_scripts\utility::flag_wait("rorke_at_virus_upload");
 
-    if(!common_scripts\utility::flag("player_started_virus_upload"))
+    if(!common_scripts\utility::flag("player_started_virus_upload")) {
       level.allies[level.const_rorke] maps\_utility::smart_radio_dialogue("cornered_mrk_uploadthevirus");
+    }
   }
 
   var_0 = maps\_utility::make_array("cornered_mrk_planttheviruswe", "cornered_mrk_moveyourasscmon");
@@ -2214,8 +2321,9 @@ shadow_kill_leadup() {
   level endon("enemies_aware");
   self.ignoreall = 1;
 
-  if(!isDefined(level.shadow_kill_startpoint))
+  if(!isDefined(level.shadow_kill_startpoint)) {
     common_scripts\utility::flag_wait("move_into_power_junction_room");
+  }
 
   thread maps\cornered_audio::aud_virus("r_approach");
   level.shadowkill_struct maps\_anim::anim_reach_solo(self, "virus_upload_enter_rorke");
@@ -2286,8 +2394,9 @@ shadowkill_knife_show(var_0) {
 }
 
 shadowkill_knife_delete(var_0) {
-  if(isDefined(level.rorke_knife))
+  if(isDefined(level.rorke_knife)) {
     level.rorke_knife delete();
+  }
 }
 
 shadowkill_knife_stab(var_0) {
@@ -2333,8 +2442,9 @@ shadowkill_phone() {
   level.shadowkill_enemy_phone_array[0] show();
   level.shadowkill_struct maps\_anim::anim_single(level.shadowkill_enemy_phone_array, "shadowkill_enter_enemy");
 
-  foreach(var_1 in level.shadowkill_enemy_phone_array)
+  foreach(var_1 in level.shadowkill_enemy_phone_array) {
   var_1 thread maps\cornered_code::entity_cleanup("player_exiting_building");
+  }
 }
 
 handle_phone_if_stealth_is_broken() {
@@ -2348,8 +2458,9 @@ handle_phone_if_stealth_is_broken() {
     common_scripts\utility::flag_set("shadowkill_phone_off");
   }
 
-  foreach(var_1 in level.shadowkill_enemy_phone_array)
+  foreach(var_1 in level.shadowkill_enemy_phone_array) {
   var_1 thread maps\cornered_code::entity_cleanup();
+  }
 }
 
 shadowkill_phone_on(var_0) {
@@ -2357,8 +2468,9 @@ shadowkill_phone_on(var_0) {
   level.shadowkill_enemy_phone_array[0] hide();
   wait 0.5;
 
-  if(isDefined(level.shadowkill_enemy_phone_array[1]))
+  if(isDefined(level.shadowkill_enemy_phone_array[1])) {
     playFXOnTag(level._effect["cell_screen_glow"], level.shadowkill_enemy_phone_array[1], "tag_fx");
+  }
 
   common_scripts\utility::flag_set("shadowkill_phone_on");
 }
@@ -2403,8 +2515,9 @@ allies_building_exit_hookup() {
     common_scripts\utility::flag_set("rorke_at_building_exit_node");
   }
 
-  if(!isDefined(level.building_entry_exit_anim_struct))
+  if(!isDefined(level.building_entry_exit_anim_struct)) {
     level.building_entry_exit_anim_struct = common_scripts\utility::getstruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
+  }
 
   level.building_entry_exit_anim_struct maps\_anim::anim_single_solo(self, "cnd_rappel_stealth_exit_bldg_hookup_" + self.animname);
   level.building_entry_exit_anim_struct thread maps\_anim::anim_loop_solo(self, "cnd_rappel_stealth_exit_bldg_wait_loop_" + self.animname, "stop_loop");
@@ -2443,8 +2556,9 @@ rorke_react_to_stealth_break(var_0) {
 
 handle_rappel_inverted() {
   if(isDefined(level.inverted_rappel_startpoint)) {
-    if(!isDefined(level.player_exit_to_inverted_rope))
+    if(!isDefined(level.player_exit_to_inverted_rope)) {
       level.player_exit_to_inverted_rope = maps\_utility::spawn_anim_model("cnd_rappel_tele_rope");
+    }
 
     level.rappel_entry_anim_struct = common_scripts\utility::getstruct("rappel_entry_anim_struct_stealth", "targetname");
     level.building_entry_exit_anim_struct = common_scripts\utility::getstruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
@@ -2458,21 +2572,25 @@ handle_rappel_inverted() {
     common_scripts\utility::exploder(5004);
   }
 
-  if(common_scripts\utility::flag("rappel_down_ready"))
+  if(common_scripts\utility::flag("rappel_down_ready")) {
     common_scripts\utility::flag_clear("rappel_down_ready");
+  }
 
-  if(common_scripts\utility::flag("player_allow_rappel_down"))
+  if(common_scripts\utility::flag("player_allow_rappel_down")) {
     common_scripts\utility::flag_clear("player_allow_rappel_down");
+  }
 
   level.player_exit_to_inverted_rope setModel("cnd_rappel_tele_rope_obj");
   common_scripts\utility::flag_wait("exit_building_ready");
   var_0 = getent("player_exit_building_trigger", "targetname");
 
   if(!maps\cornered_code::is_e3()) {
-    if(level.player common_scripts\utility::is_player_gamepad_enabled())
+    if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
       var_0 sethintstring(&"CORNERED_EXIT_BUILDING_CONSOLE");
-    else
+    }
+    else {
       var_0 sethintstring(&"CORNERED_EXIT_BUILDING");
+    }
   }
 
   var_1 = common_scripts\utility::getstruct("inverted_look_at", "targetname");
@@ -2487,8 +2605,9 @@ handle_rappel_inverted() {
   thread detonate_lights_off();
   common_scripts\utility::flag_wait("rappel_down_ready");
 
-  if(!maps\cornered_code::is_e3())
+  if(!maps\cornered_code::is_e3()) {
     thread maps\cornered_code::player_move_on_rappel_hint();
+  }
 
   common_scripts\utility::flag_set("player_allow_rappel_down");
   maps\cornered_code_rappel::rappel_limit_vertical_move(-10000, 0);
@@ -2498,16 +2617,18 @@ handle_rappel_inverted() {
   wait 0.5;
   level.player.currentweapon = level.player getcurrentweapon();
 
-  if(level.player common_scripts\utility::isweaponenabled())
+  if(level.player common_scripts\utility::isweaponenabled()) {
     level.player common_scripts\utility::_disableweapon();
+  }
 
   level.player allowfire(0);
   level.player giveweapon("push_knife");
   level.player switchtoweapon("push_knife");
   level.player common_scripts\utility::_disableweaponswitch();
 
-  if(!level.player common_scripts\utility::isweaponenabled())
+  if(!level.player common_scripts\utility::isweaponenabled()) {
     level.player common_scripts\utility::_enableweapon();
+  }
 
   maps\cornered_code_rappel::cornered_stop_random_wind();
   thread maps\cornered_audio::aud_stop_wind();
@@ -2530,8 +2651,9 @@ handle_rappel_inverted() {
   common_scripts\utility::flag_wait("start_courtyard");
   common_scripts\utility::flag_wait("inverted_rorke_done");
 
-  if(!maps\cornered_code::is_e3())
+  if(!maps\cornered_code::is_e3()) {
     common_scripts\utility::flag_set("inverted_rappel_finished");
+  }
 
   maps\_utility::stop_exploder(23);
   maps\_utility::stop_exploder(3456);
@@ -2543,8 +2665,9 @@ player_handle_outside_effects() {
   var_1 = 1;
 
   for(;;) {
-    if(!var_1)
+    if(!var_1) {
       var_0 waittill("trigger");
+    }
 
     if(level.player istouching(var_0)) {
       if(!var_1) {
@@ -2566,8 +2689,9 @@ player_exit_building() {
   level.reflection_window_inverted show();
   level.building_entry_exit_anim_struct thread maps\_anim::anim_first_frame(level.arms_and_legs, "rappel_stealth_exit");
 
-  if(level.player getstance() != "stand")
+  if(level.player getstance() != "stand") {
     level.player setstance("stand");
+  }
 
   level.player freezecontrols(1);
   level.player allowfire(0);
@@ -2612,13 +2736,15 @@ player_exit_building() {
   maps\cornered_code_rappel::cornered_start_rappel("rope_ref_stealth", "player_rappel_ground_ref_upside_down_stealth", var_0);
   maps\cornered_code_rappel::cornered_start_random_wind();
 
-  foreach(var_2 in level.allies)
+  foreach(var_2 in level.allies) {
   var_2 maps\cornered_code_rappel_allies::ally_rappel_start_rope(var_0.rappel_type);
+  }
 
   level.player_exit_to_inverted_rope delete();
 
-  if(isDefined(level.rorke_exit_to_inverted_rope))
+  if(isDefined(level.rorke_exit_to_inverted_rope)) {
     level.rorke_exit_to_inverted_rope delete();
+  }
 
   common_scripts\utility::flag_wait("player_ready_to_deploy_virus");
   wait 0.25;
@@ -2644,8 +2770,9 @@ virus_deploy_bink() {
   setsaveddvar("cg_cinematicFullScreen", "0");
   cinematicingame("cornered_pda_activate");
 
-  while(cinematicgetframe() <= 1)
+  while(cinematicgetframe() <= 1) {
     common_scripts\utility::waitframe();
+  }
 
   pausecinematicingame(1);
 }
@@ -2655,8 +2782,9 @@ virus_deploy() {
     level.player notifyonplayercommand("deploy", "+attack");
     level.player notifyonplayercommand("deploy", "+attack_akimbo_accessible");
 
-    if(!maps\cornered_code::is_e3())
+    if(!maps\cornered_code::is_e3()) {
       level.player thread maps\cornered_code::time_to_pass_before_hint(3, "virus_deploy", "player_deployed_virus");
+    }
 
     level.player waittill("deploy");
   }
@@ -2680,13 +2808,15 @@ detonate_lights_off() {
   turn_lights_off(var_0, "brushes");
   level.large_outside_lights_on = getEntArray("large_outside_lights_on", "targetname");
 
-  foreach(var_2 in level.large_outside_lights_on)
+  foreach(var_2 in level.large_outside_lights_on) {
   var_2 hide();
+  }
 
   level.large_outside_lights_off = getEntArray("large_outside_lights_off", "targetname");
 
-  foreach(var_5 in level.large_outside_lights_off)
+  foreach(var_5 in level.large_outside_lights_off) {
   var_5 show();
+  }
 
   for(var_7 = 10; var_7 <= 35; var_7++) {
     wait 0.2;
@@ -2695,30 +2825,37 @@ detonate_lights_off() {
     var_0 = getEntArray("emissive_window_brush_" + var_7, "targetname");
     turn_lights_off(var_0, "brushes");
 
-    if(var_7 == 13)
+    if(var_7 == 13) {
       maps\_utility::stop_exploder(5001);
+    }
 
-    if(var_7 == 21)
+    if(var_7 == 21) {
       maps\_utility::stop_exploder(5002);
+    }
 
-    if(var_7 == 25)
+    if(var_7 == 25) {
       maps\_utility::stop_exploder(5003);
+    }
 
-    if(var_7 == 28)
+    if(var_7 == 28) {
       maps\_utility::stop_exploder(5004);
+    }
 
-    if(var_7 == 28)
+    if(var_7 == 28) {
       maps\_utility::stop_exploder(56);
+    }
   }
 }
 
 turn_lights_off(var_0, var_1) {
   if(var_1 == "lights") {
-    foreach(var_3 in var_0)
+    foreach(var_3 in var_0) {
     var_3 setlightintensity(0.01);
+    }
   } else {
-    foreach(var_6 in var_0)
+    foreach(var_6 in var_0) {
     var_6 delete();
+    }
   }
 }
 
@@ -2748,10 +2885,12 @@ funnel_player_internal(var_0, var_1, var_2) {
       var_8 = var_7 / var_5;
       var_0 = var_3 - var_8 * var_4;
 
-      if(var_2 == "right")
+      if(var_2 == "right") {
         level.rappel_max_lateral_dist_right = var_0;
-      else
+      }
+      else {
         level.rappel_max_lateral_dist_left = var_0;
+      }
     }
 
     common_scripts\utility::waitframe();
@@ -2884,8 +3023,9 @@ player_inverted_kill_fail() {
 }
 
 player_pounce_anim() {
-  if(common_scripts\utility::flag("inverted_kill_fail"))
+  if(common_scripts\utility::flag("inverted_kill_fail")) {
     level.rappel_entry_anim_struct thread maps\_anim::anim_single(level.arms_and_legs, "pounce_player_fail");
+  }
   else {
     level.rappel_entry_anim_struct thread maps\_anim::anim_single(level.arms_and_legs, "pounce_player");
     level thread do_inverted_kill_blood();
@@ -2926,8 +3066,9 @@ watch_push_knife_throw() {
 
   level.player_push_knife_projectile unlink();
 
-  if(isDefined(level.player_knife_throw_enemy))
+  if(isDefined(level.player_knife_throw_enemy)) {
     level.player_push_knife_projectile linkto(level.player_knife_throw_enemy, "tag_weapon_chest", (0, -6, 0), (0, -90, 0));
+  }
 
   common_scripts\utility::flag_wait("courtyard_intro_goto_elevator");
   level.player_push_knife_projectile delete();
@@ -2944,8 +3085,9 @@ player_initiates_inverted_kill() {
       if(common_scripts\utility::flag("player_not_in_inverted_kill_volume")) {
         common_scripts\utility::flag_clear("player_not_in_inverted_kill_volume");
 
-        if(!maps\cornered_code::is_e3())
+        if(!maps\cornered_code::is_e3()) {
           level.player maps\_utility::display_hint_timeout("inverted_kill", 5);
+        }
       }
 
       if(level.player meleebuttonpressed() || level.player attackbuttonpressed()) {
@@ -3004,8 +3146,9 @@ flag_if_player_aims_knife_at_enemy(var_0, var_1) {
       common_scripts\utility::flag_clear("player_aims_knife_at_enemy");
       var_0.color = (1, 1, 1);
 
-      if(var_1)
+      if(var_1) {
         level.player allowfire(1);
+      }
     }
 
     wait 0.05;
@@ -3090,8 +3233,9 @@ allies_help_when_player_shoots_balcony_enemies() {
 }
 
 player_shoots(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     common_scripts\utility::flag_wait(var_0);
+  }
 
   for(;;) {
     if(level.player attackbuttonpressed()) {
@@ -3160,8 +3304,9 @@ if_player_passes_balcony_before_killing() {
   self endon("death");
   common_scripts\utility::flag_wait("player_is_past_balcony");
 
-  if(!common_scripts\utility::flag("player_is_past_balcony_and_enemies_are_alive"))
+  if(!common_scripts\utility::flag("player_is_past_balcony_and_enemies_are_alive")) {
     common_scripts\utility::flag_set("player_is_past_balcony_and_enemies_are_alive");
+  }
 
   wait(randomfloatrange(0.25, 0.75));
   var_0 = level.allies[level.const_rorke] gettagorigin("j_head");
@@ -3228,11 +3373,13 @@ watch_for_death_achievement() {
 cleanup_sleeping_enemy(var_0, var_1) {
   common_scripts\utility::flag_wait("start_courtyard");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 inverted_kill_enemies_setup() {
@@ -3249,8 +3396,9 @@ inverted_kill_enemies_setup() {
     thread maps\cornered_code::head_swap("head_fed_basic_a");
     player_inverted_kill_enemy_anims();
 
-    if(isDefined(self.walkin_anim))
+    if(isDefined(self.walkin_anim)) {
       self stopanimscripted();
+    }
     else {
       level.rappel_entry_anim_struct notify("stop_player_inverted_kill_enemy_idle");
       waittillframeend;
@@ -3379,13 +3527,15 @@ player_inverted_kill_enemy_fail_anim() {
   thread player_pushes_too_far();
   var_0 = maps\_utility::getanim("player_inverted_kill_enemy_pounce_alert");
 
-  while(self getanimtime(var_0) < 0.35)
+  while(self getanimtime(var_0) < 0.35) {
     wait 0.05;
+  }
 
   common_scripts\utility::flag_set("inverted_kill_enemy_started_turning_around");
 
-  while(self getanimtime(var_0) < 0.45)
+  while(self getanimtime(var_0) < 0.45) {
     wait 0.05;
+  }
 
   common_scripts\utility::flag_set("inverted_kill_enemy_turned_around");
   thread inverted_kill_enemy_kills_player();
@@ -3458,8 +3608,9 @@ allies_inverted_rappel_vo() {
   wait 0.25;
 
   if(common_scripts\utility::flag("player_is_past_balcony")) {
-    if(common_scripts\utility::flag("player_is_past_balcony_and_enemies_are_alive"))
+    if(common_scripts\utility::flag("player_is_past_balcony_and_enemies_are_alive")) {
       level.allies[level.const_rorke] maps\_utility::smart_radio_dialogue("cornered_mrk_ivegotem");
+    }
   } else if(common_scripts\utility::flag("balcony_enemies_killed"))
     level.allies[level.const_baker] maps\_utility::smart_radio_dialogue("cornered_hsh_targetsdown");
 
@@ -3486,24 +3637,29 @@ inverted_kill_too_close_vo() {
 }
 
 allies_inverted_rappel_movement() {
-  if(!isDefined(level.rappel_anim_struct))
+  if(!isDefined(level.rappel_anim_struct)) {
     level.rappel_anim_struct = getent("allies_rappel_struct_stealth", "targetname");
+  }
 
-  if(!isDefined(level.building_entry_exit_anim_struct))
+  if(!isDefined(level.building_entry_exit_anim_struct)) {
     level.building_entry_exit_anim_struct = common_scripts\utility::getstruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
+  }
 
   if(isDefined(level.inverted_rappel_startpoint)) {
-    if(self.animname == "baker")
+    if(self.animname == "baker") {
       level.building_entry_exit_anim_struct thread maps\_anim::anim_loop_solo(self, "cnd_rappel_inverted_idle_" + self.animname, "stop_loop");
+    }
   }
 
   common_scripts\utility::flag_wait("player_has_exited_the_building");
   level.building_entry_exit_anim_struct notify("stop_loop");
 
-  if(self.animname == "rorke")
+  if(self.animname == "rorke") {
     inverted_rappel_movement_rorke();
-  else
+  }
+  else {
     inverted_rappel_movement_baker();
+  }
 }
 
 inverted_rappel_movement_rorke() {

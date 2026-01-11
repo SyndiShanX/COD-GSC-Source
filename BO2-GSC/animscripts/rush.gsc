@@ -40,34 +40,43 @@ sidestepwatchforevent() {
 }
 
 cansidestep() {
-  if(!allowevasivemovement())
+  if(!allowevasivemovement()) {
     return false;
+  }
 
-  if(gettime() - self.a.rusherlastsidesteptime < 500)
+  if(gettime() - self.a.rusherlastsidesteptime < 500) {
     return false;
+  }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
 
-  if(!self usingrifle() && !self usingpistol())
+  if(!self usingrifle() && !self usingpistol()) {
     return false;
+  }
 
-  if(self.a.pose != "stand")
+  if(self.a.pose != "stand") {
     return false;
+  }
 
-  if(distancesquared(self.origin, self.enemy.origin) < 90000)
+  if(distancesquared(self.origin, self.enemy.origin) < 90000) {
     return false;
+  }
 
-  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 90000)
+  if(!isDefined(self.pathgoalpos) || distancesquared(self.origin, self.pathgoalpos) < 90000) {
     return false;
+  }
 
-  if(abs(self getmotionangle()) > 15)
+  if(abs(self getmotionangle()) > 15) {
     return false;
+  }
 
   yaw = getyawtoorigin(self.enemy.origin);
 
-  if(abs(yaw) > 15)
+  if(abs(yaw) > 15) {
     return false;
+  }
 
   return true;
 }
@@ -78,13 +87,16 @@ shouldsidestep() {
   if(cansidestep()) {
     runlooptime = self getanimtime( % walk_and_run_loops);
 
-    if(self.a.rusherhadsidestepevent)
+    if(self.a.rusherhadsidestepevent) {
       return "roll";
+    }
     else if(isplayer(self.enemy) && self.enemy islookingat(self)) {
-      if(randomfloat(1) < 0.2)
+      if(randomfloat(1) < 0.2) {
         return "step";
-      else
+      }
+      else {
         return "roll";
+      }
     } else if(runlooptime > 0.9 && randomfloat(1) < 0.75)
       return "step";
   }
@@ -95,16 +107,18 @@ shouldsidestep() {
 trysidestep() {
   self.rushersidesteptype = shouldsidestep();
 
-  if(self.rushersidesteptype == "none")
+  if(self.rushersidesteptype == "none") {
     return false;
+  }
 
   self animscripts\debug::debugpushstate("sideStep");
 
   self.rusherdesiredstepdir = getdesiredsidestepdir(self.rushersidesteptype);
   self.rusherdesiredgunhand = self.a.rushergunhand;
 
-  if(self.a.rushersteppeddir == 0 && self.rusherdesiredstepdir == "left" && randomfloat(1) < 0.5)
+  if(self.a.rushersteppeddir == 0 && self.rusherdesiredstepdir == "left" && randomfloat(1) < 0.5) {
     self.rusherdesiredgunhand = "lh";
+  }
 
   animname = self.rushersidesteptype + "_" + self.rusherdesiredstepdir + "_" + self.rusherdesiredgunhand;
   self.stepanim = animscripts\anims::animarraypickrandom(animname);
@@ -135,17 +149,20 @@ dosidestep() {
   self endon("death");
   self endon("killanimscript");
 
-  if(self.rusherdesiredstepdir == "right" && self.rusherdesiredgunhand == "lh")
+  if(self.rusherdesiredstepdir == "right" && self.rusherdesiredgunhand == "lh") {
     self.rusherdesiredgunhand = "rh";
+  }
 
   self.a.rushergunhand = self.rusherdesiredgunhand;
   setruncycle();
   playsidestepanim(self.stepanim, self.rushersidesteptype);
 
-  if(self.rusherdesiredstepdir == "left")
+  if(self.rusherdesiredstepdir == "left") {
     self.a.rushersteppeddir--;
-  else
+  }
+  else {
     self.a.rushersteppeddir++;
+  }
 
   self.a.rusherlastsidesteptime = gettime();
 
@@ -199,16 +216,19 @@ playsidestepanim(stepanim, rushersidesteptype) {
     lookaheadangles = vectortoangles(self.lookaheaddir);
     yawdelta = angleclamp180(lookaheadangles[1] - self.angles[1]);
 
-    if(yawdelta > 2)
+    if(yawdelta > 2) {
       yawdelta = 2;
-    else if(yawdelta < 2 * -1)
+    }
+    else if(yawdelta < 2 * -1) {
       yawdelta = 2 * -1;
+    }
 
     newangles = (self.angles[0], self.angles[1] + yawdelta, self.angles[2]);
     self teleport(self.origin, newangles);
 
-    if(getdvarint(#"_id_32B996B1"))
+    if(getdvarint(#"_id_32B996B1")) {
       recordenttext("face angle: " + (self.angles[1] + yawdelta), self, level.color_debug["red"], "Animscript");
+    }
 
     timer = timer + 0.05 * self.moveplaybackrate;
     wait 0.05;
@@ -218,8 +238,9 @@ playsidestepanim(stepanim, rushersidesteptype) {
   elapsed = (gettime() - animstarttime) / 1000.0;
   timeleft = animlength - elapsed;
 
-  if(timeleft > 0)
+  if(timeleft > 0) {
     wait(timeleft / self.moveplaybackrate);
+  }
 
   if(isalive(self)) {
     self thread facelookaheadforabit();
@@ -246,8 +267,9 @@ sidestepblendout(animlength, animname, hasexitalign) {
   assert(animlength > 0.0);
   wait((animlength - 0.0) / self.moveplaybackrate);
 
-  if(!hasexitalign)
+  if(!hasexitalign) {
     self notify(animname, "exit_align");
+  }
 
   self clearanim( % exposed_modern, 0);
   self setflaggedanimknoballrestart("run_anim", animarray("run_n_gun_f"), % body, 1, 0.0, self.moveplaybackrate);
@@ -264,21 +286,25 @@ restorepainonkillanimscript() {
 }
 
 allowevasivemovement() {
-  if(!self.a.allowevasivemovement)
+  if(!self.a.allowevasivemovement) {
     return false;
+  }
 
-  if(self.animtype != "spetsnaz")
+  if(self.animtype != "spetsnaz") {
     return false;
-  else if(self.iswounded)
+  }
+  else if(self.iswounded) {
     return false;
+  }
 
   return true;
 }
 
 setruncycle() {
   if(is_rusher()) {
-    if(self.animtype == "spetsnaz" || self.lastanimtype == "spetsnaz")
+    if(self.animtype == "spetsnaz" || self.lastanimtype == "spetsnaz") {
       self.anim_array_cache["run_n_gun_f"] = animarraypickrandom("rusher_run_f_" + self.a.rushergunhand);
+    }
   }
 }
 
@@ -307,21 +333,27 @@ checkroomforanim(stepanim) {
 getdesiredsidestepdir(rushersidesteptype) {
   rightchance = 0.333;
 
-  if(rushersidesteptype == "step")
+  if(rushersidesteptype == "step") {
     rightchance = 0.5;
+  }
 
   randomroll = randomfloat(1);
 
-  if(self.a.rushersteppeddir < 0)
+  if(self.a.rushersteppeddir < 0) {
     self.rusherdesiredstepdir = "right";
-  else if(self.a.rushersteppeddir > 0)
+  }
+  else if(self.a.rushersteppeddir > 0) {
     self.rusherdesiredstepdir = "left";
-  else if(randomroll < rightchance)
+  }
+  else if(randomroll < rightchance) {
     self.rusherdesiredstepdir = "right";
-  else if(randomroll < rightchance * 2)
+  }
+  else if(randomroll < rightchance * 2) {
     self.rusherdesiredstepdir = "left";
-  else
+  }
+  else {
     self.rusherdesiredstepdir = "forward";
+  }
 
   return self.rusherdesiredstepdir;
 }

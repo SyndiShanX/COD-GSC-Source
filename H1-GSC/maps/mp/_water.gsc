@@ -11,26 +11,33 @@ init() {
   level._effect["water_splash_enter"] = loadfx("vfx\water\body_splash");
   precacheshellshock("underwater");
 
-  if(!isDefined(level.waterline_ents))
+  if(!isDefined(level.waterline_ents)) {
     level.waterline_ents = [];
+  }
 
-  if(!isDefined(level.waterline_offset))
+  if(!isDefined(level.waterline_offset)) {
     level.waterline_offset = 0;
+  }
 
-  if(!isDefined(level.shallow_water_weapon))
+  if(!isDefined(level.shallow_water_weapon)) {
     setshallowwaterweapon("iw5_combatknife_mp");
+  }
 
-  if(!isDefined(level.deep_water_weapon))
+  if(!isDefined(level.deep_water_weapon)) {
     setdeepwaterweapon("iw5_underwater_mp");
+  }
 
-  if(!isDefined(level.allow_swimming))
+  if(!isDefined(level.allow_swimming)) {
     level.allow_swimming = 1;
+  }
 
-  if(level.deep_water_weapon == level.shallow_water_weapon)
+  if(level.deep_water_weapon == level.shallow_water_weapon) {
     level.allow_swimming = 0;
+  }
 
-  if(!isDefined(level.swimming_depth))
+  if(!isDefined(level.swimming_depth)) {
     level.swimming_depth = 48;
+  }
 
   var_0 = getEntArray("trigger_underwater", "targetname");
   level.water_triggers = var_0;
@@ -45,10 +52,12 @@ init() {
 }
 
 player_set_in_water(var_0) {
-  if(var_0)
+  if(var_0) {
     self.inwater = 1;
-  else
+  }
+  else {
     self.inwater = undefined;
+  }
 }
 
 watchforhostmigration() {
@@ -59,8 +68,9 @@ watchforhostmigration() {
   for(;;) {
     self waittill("player_migrated");
 
-    foreach(var_1 in level.waterline_ents)
+    foreach(var_1 in level.waterline_ents) {
     self initwaterclienttrigger(var_1.script_noteworthy, var_1);
+    }
   }
 }
 
@@ -71,8 +81,9 @@ onplayerconnectfunctions() {
     level waittill("connected", var_0);
     var_0 thread watchforhostmigration();
 
-    foreach(var_2 in level.waterline_ents)
+    foreach(var_2 in level.waterline_ents) {
     var_0 initwaterclienttrigger(var_2.script_noteworthy, var_2);
+    }
   }
 }
 
@@ -113,8 +124,9 @@ watchplayerenterwater() {
   for(;;) {
     self waittill("trigger", var_0);
 
-    if(isDefined(level.ishorde) && level.ishorde && isagent(var_0) && isDefined(var_0.horde_type) && var_0.horde_type == "Quad" && !isDefined(var_0.inwater))
+    if(isDefined(level.ishorde) && level.ishorde && isagent(var_0) && isDefined(var_0.horde_type) && var_0.horde_type == "Quad" && !isDefined(var_0.inwater)) {
       var_0 thread hordedoginwater(self);
+    }
 
     if(!isplayer(var_0) && !isai(var_0)) {
       continue;
@@ -139,8 +151,9 @@ hordedoginwater(var_0) {
     if(!inshallowwater(var_0, 40)) {
       wait 2.5;
 
-      if(!inshallowwater(var_0, 20))
+      if(!inshallowwater(var_0, 20)) {
         self dodamage(self.health, self.origin);
+      }
     }
 
     waitframe();
@@ -187,10 +200,12 @@ playerinwater(var_0) {
     if(inshallowwater(var_0, 32)) {
       self.inthickwater = undefined;
 
-      if(isDefined(level.watermovescale))
+      if(isDefined(level.watermovescale)) {
         self.movespeedscaler = level.baseplayermovescale * level.watermovescale;
-      else
+      }
+      else {
         self.movespeedscaler = level.baseplayermovescale;
+      }
 
       maps\mp\gametypes\_weapons::updatemovespeedscale();
     }
@@ -205,8 +220,9 @@ playerinwater(var_0) {
       self.underwater = 1;
       thread playerhandledamage();
 
-      if(maps\mp\_utility::isaugmentedgamemode())
+      if(maps\mp\_utility::isaugmentedgamemode()) {
         disableexo();
+      }
 
       if(!maps\mp\_utility::isusingremote()) {
         self shellshock("underwater", 19, 0, 0);
@@ -218,17 +234,21 @@ playerinwater(var_0) {
       if(var_1 != "none") {
         var_2 = weaponinventorytype(var_1);
 
-        if(var_2 == "primary" || var_2 == "altmode")
+        if(var_2 == "primary" || var_2 == "altmode") {
           self.water_last_weapon = var_1;
-        else if(isDefined(self.lastnonuseweapon) && self hasweapon(self.lastnonuseweapon))
+        }
+        else if(isDefined(self.lastnonuseweapon) && self hasweapon(self.lastnonuseweapon)) {
           self.water_last_weapon = self.lastnonuseweapon;
+        }
       }
 
-      if(isDefined(level.gamemodeonunderwater))
+      if(isDefined(level.gamemodeonunderwater)) {
         self[[level.gamemodeonunderwater]](var_0);
+      }
 
-      if(isDefined(level.hordeonunderwater))
+      if(isDefined(level.hordeonunderwater)) {
         self[[level.hordeonunderwater]](var_0);
+      }
     }
 
     if(isDefined(self.underwater) && (isDefined(self.isswimming) || !isDefined(self.iswading)) && (inshallowwater(var_0, level.swimming_depth) || self getstance() == "prone" || !level.allow_swimming)) {
@@ -273,8 +293,9 @@ playerinwater(var_0) {
 
       playerdisableunderwater();
 
-      if(maps\mp\_utility::isaugmentedgamemode())
+      if(maps\mp\_utility::isaugmentedgamemode()) {
         enableexo();
+      }
     }
 
     wait 0.05;
@@ -286,8 +307,9 @@ isactivekillstreakwaterrestricted(var_0) {
     var_1 = self.pers["killstreaks"][self.killstreakindexweapon].streakname;
 
     if(isDefined(var_1)) {
-      if(common_scripts\utility::string_find(var_1, "turret") > 0)
+      if(common_scripts\utility::string_find(var_1, "turret") > 0) {
         return 1;
+      }
     }
   }
 
@@ -322,10 +344,12 @@ inwaterwake(var_0) {
     var_3 = self getvelocity();
     var_1 = distance(var_3, (0, 0, 0));
 
-    if(var_1 > 0)
+    if(var_1 > 0) {
       wait(max(1 - var_1 / 120, 0.1));
-    else
+    }
+    else {
       wait 0.3;
+    }
 
     if(var_1 > 5) {
       var_4 = vectornormalize((var_3[0], var_3[1], 0));
@@ -347,15 +371,17 @@ playerhandledamage() {
   self endon("disconnect");
   self endon("above_water");
 
-  if(isDefined(level.ishorde) && level.ishorde)
+  if(isDefined(level.ishorde) && level.ishorde) {
     self endon("becameSpectator");
+  }
 
   thread onplayerdeath();
   wait 13;
 
   for(;;) {
-    if(!isDefined(self.isjuggernaut) || self.isjuggernaut == 0)
+    if(!isDefined(self.isjuggernaut) || self.isjuggernaut == 0) {
       radiusdamage(self.origin + anglesToForward(self.angles) * 5, 1, 20, 20, undefined, "MOD_TRIGGER_HURT");
+    }
 
     wait 1;
   }
@@ -366,10 +392,12 @@ onplayerdeath() {
   self endon("disconnect");
   self endon("above_water");
 
-  if(isDefined(level.ishorde) && level.ishorde)
+  if(isDefined(level.ishorde) && level.ishorde) {
     common_scripts\utility::waittill_any("death", "becameSpectator");
-  else
+  }
+  else {
     self waittill("death");
+  }
 
   player_set_in_water(0);
   self.underwater = undefined;
@@ -383,20 +411,24 @@ onplayerdeath() {
 }
 
 inshallowwater(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 32;
+  }
 
-  if(level getwaterline(var_0) - self.origin[2] <= var_1)
+  if(level getwaterline(var_0) - self.origin[2] <= var_1) {
     return 1;
+  }
 
   return 0;
 }
 
 isabovewaterline(var_0, var_1) {
-  if(getplayereyeheight() + var_1 >= level getwaterline(var_0))
+  if(getplayereyeheight() + var_1 >= level getwaterline(var_0)) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 getplayereyeheight() {
@@ -418,11 +450,13 @@ playerenableunderwater(var_0) {
   self endon("disconnect");
   self endon("end_swimming");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "shallow";
+  }
 
-  if(var_0 == "shallow" && self hasweapon(level.shallow_water_weapon) || var_0 == "deep" && self hasweapon(level.deep_water_weapon))
+  if(var_0 == "shallow" && self hasweapon(level.shallow_water_weapon) || var_0 == "deep" && self hasweapon(level.deep_water_weapon)) {
     self.dont_give_or_take_weapon = 1;
+  }
 
   switch (var_0) {
     case "deep":
@@ -465,19 +499,24 @@ playerdisableunderwater() {
     if(isDefined(self.isjuggernaut) && self.isjuggernaut == 1 && isDefined(self.heavyexodata)) {
       self allowfire(1);
 
-      if(!isDefined(self.heavyexodata.haslongpunch) || self.heavyexodata.haslongpunch == 0)
+      if(!isDefined(self.heavyexodata.haslongpunch) || self.heavyexodata.haslongpunch == 0) {
         self disableoffhandweapons();
+      }
 
-      if(!isDefined(self.heavyexodata.hasrockets) || self.heavyexodata.hasrockets == 0)
+      if(!isDefined(self.heavyexodata.hasrockets) || self.heavyexodata.hasrockets == 0) {
         self disableoffhandsecondaryweapons();
-      else
+      }
+      else {
         self enableoffhandsecondaryweapons();
+      }
     }
 
-    if(isDefined(level.ishorde) && isplayer(self))
+    if(isDefined(level.ishorde) && isplayer(self)) {
       maps\mp\gametypes\_weapons::restoreweapon("underwater");
-    else if(isDefined(self.water_last_weapon))
+    }
+    else if(isDefined(self.water_last_weapon)) {
       maps\mp\_utility::switch_to_last_weapon(self.water_last_weapon);
+    }
 
     switch (var_0) {
       case "deep":
@@ -499,13 +538,15 @@ playerdisableunderwater() {
 }
 
 give_water_weapon(var_0) {
-  if(!isDefined(self.dont_give_or_take_weapon) || !self.dont_give_or_take_weapon)
+  if(!isDefined(self.dont_give_or_take_weapon) || !self.dont_give_or_take_weapon) {
     self giveweapon(var_0);
+  }
 }
 
 take_water_weapon(var_0) {
-  if(!isDefined(self.dont_give_or_take_weapon) || !self.dont_give_or_take_weapon)
+  if(!isDefined(self.dont_give_or_take_weapon) || !self.dont_give_or_take_weapon) {
     self takeweapon(var_0);
+  }
 }
 
 enableexo() {

@@ -99,8 +99,9 @@ sq_easy_cleanup() {
   computer_buildable_trig delete();
   sq_buildables = getEntArray("buildable_sq_common", "targetname");
 
-  foreach(item in sq_buildables)
+  foreach(item in sq_buildables) {
   item delete();
+  }
 
   a_balls = getEntArray("sq_dragon_lion_ball", "targetname");
   array_delete(a_balls);
@@ -163,22 +164,26 @@ init_sidequest() {
       continue;
     }
 
-    if(lastcompleted == 2)
+    if(lastcompleted == 2) {
       level.maxcompleted = 1;
+    }
   }
 
   if(level.richcompleted) {
-    if(level.maxcompleted)
+    if(level.maxcompleted) {
       flag_set("sq_players_out_of_sync");
-    else
+    }
+    else {
       tower_in_sync_lightning();
+    }
 
     exploder(1003);
   }
 
   if(level.maxcompleted) {
-    if(!flag("sq_players_out_of_sync"))
+    if(!flag("sq_players_out_of_sync")) {
       tower_in_sync_lightning();
+    }
 
     exploder(903);
   }
@@ -222,8 +227,9 @@ sidequest_logic() {
   level thread vo_richtofen_power_on();
   flag_wait("sq_nav_built");
 
-  if(!is_true(level.navcomputer_spawned))
+  if(!is_true(level.navcomputer_spawned)) {
     update_sidequest_stats("sq_highrise_started");
+  }
 
   level thread navcomputer_waitfor_navcard();
   stage_start("sq", "atd");
@@ -231,19 +237,23 @@ sidequest_logic() {
   stage_start("sq", "slb");
   level waittill("sq_slb_over");
 
-  if(!is_true(level.richcompleted))
+  if(!is_true(level.richcompleted)) {
     level thread sidequest_start("sq_1");
+  }
 
-  if(!is_true(level.maxcompleted))
+  if(!is_true(level.maxcompleted)) {
     level thread sidequest_start("sq_2");
+  }
 
   flag_wait("sq_branch_complete");
   tower_punch_watcher();
 
-  if(flag("sq_ric_tower_complete"))
+  if(flag("sq_ric_tower_complete")) {
     update_sidequest_stats("sq_highrise_rich_complete");
-  else if(flag("sq_max_tower_complete"))
+  }
+  else if(flag("sq_max_tower_complete")) {
     update_sidequest_stats("sq_highrise_maxis_complete");
+  }
 }
 
 sidequest_logic_1() {
@@ -279,8 +289,9 @@ sidequest_logic_2() {
 }
 
 watch_nav_computer_built() {
-  if(!is_true(level.navcomputer_spawned))
+  if(!is_true(level.navcomputer_spawned)) {
     wait_for_buildable("sq_common");
+  }
 
   flag_set("sq_nav_built");
 }
@@ -294,8 +305,9 @@ tower_punch_watcher() {
   level thread playtoweraudio();
   a_leg_trigs = [];
 
-  foreach(str_wind in level.a_wind_order)
+  foreach(str_wind in level.a_wind_order) {
   a_leg_trigs[a_leg_trigs.size] = "sq_tower_" + str_wind;
+  }
 
   level.n_cur_leg = 0;
   level.sq_leg_punches = 0;
@@ -351,8 +363,9 @@ tower_punch_watch_leg(a_leg_trigs) {
         level.n_cur_leg++;
         self playSound("zmb_sq_leg_powerup_" + level.n_cur_leg);
 
-        if(level.n_cur_leg == 4)
+        if(level.n_cur_leg == 4) {
           flag_set("sq_tower_active");
+        }
       } else {
         level.n_cur_leg = 0;
         self playSound("zmb_sq_leg_powerdown");
@@ -371,10 +384,12 @@ tower_punch_watch_leg(a_leg_trigs) {
         level.sq_leg_punches = 0;
         wait 2;
 
-        if(flag("sq_ric_tower_complete"))
+        if(flag("sq_ric_tower_complete")) {
           exploder(1002);
-        else
+        }
+        else {
           exploder(902);
+        }
       }
     }
   }
@@ -393,8 +408,9 @@ mahjong_tiles_setup() {
     m_wind_tile.script_noteworthy = undefined;
     s_spot = a_locs[i];
 
-    if(a_winds[i] == "north")
+    if(a_winds[i] == "north") {
       s_spot = getstruct("sq_tile_loc_north", "targetname");
+    }
 
     m_wind_tile.origin = s_spot.origin;
     m_wind_tile.angles = s_spot.angles;
@@ -469,8 +485,9 @@ sidequest_done() {
 }
 
 get_variant_from_entity_num(player_number) {
-  if(!isDefined(player_number))
+  if(!isDefined(player_number)) {
     player_number = 0;
+  }
 
   post_fix = "a";
 
@@ -605,16 +622,19 @@ update_sidequest_stats(stat_name) {
   rich_complete = 0;
   started = 0;
 
-  if(stat_name == "sq_highrise_maxis_complete")
+  if(stat_name == "sq_highrise_maxis_complete") {
     maxis_complete = 1;
-  else if(stat_name == "sq_highrise_rich_complete")
+  }
+  else if(stat_name == "sq_highrise_rich_complete") {
     rich_complete = 1;
+  }
 
   players = get_players();
 
   foreach(player in players) {
-    if(stat_name == "sq_highrise_started")
+    if(stat_name == "sq_highrise_started") {
       player.highrise_sq_started = 1;
+    }
     else if(stat_name == "navcard_applied_zm_highrise") {
       player maps\mp\zombies\_zm_stats::set_global_stat(level.navcard_needed, 0);
       thread sq_refresh_player_navcard_hud();
@@ -632,8 +652,9 @@ update_sidequest_stats(stat_name) {
     player maps\mp\zombies\_zm_stats::increment_client_stat(stat_name, 0);
   }
 
-  if(rich_complete || maxis_complete)
+  if(rich_complete || maxis_complete) {
     level notify("highrise_sidequest_achieved");
+  }
 }
 
 sq_give_all_perks() {
@@ -705,11 +726,13 @@ sq_refresh_player_navcard_hud_internal() {
   for(i = 0; i < level.navcards.size; i++) {
     hasit = self maps\mp\zombies\_zm_stats::get_global_stat(level.navcards[i]);
 
-    if(isDefined(self.navcard_grabbed) && self.navcard_grabbed == level.navcards[i])
+    if(isDefined(self.navcard_grabbed) && self.navcard_grabbed == level.navcards[i]) {
       hasit = 1;
+    }
 
-    if(hasit)
+    if(hasit) {
       navcard_bits = navcard_bits + (1 << i);
+    }
   }
 
   wait_network_frame();
@@ -727,15 +750,17 @@ sq_refresh_player_navcard_hud() {
   }
   players = get_players();
 
-  foreach(player in players)
+  foreach(player in players) {
   player thread sq_refresh_player_navcard_hud_internal();
+  }
 }
 
 vo_maxis_do_quest() {
   wait 20;
 
-  if(1)
+  if(1) {
     maxissay("vox_maxi_sidequest_max_com_0");
+  }
   else {
     maxissay("vox_maxi_sidequest_max_com_1");
     maxissay("vox_maxi_sidequest_max_com_2");
@@ -759,10 +784,12 @@ vo_richtofen_nav_card() {
       break;
   }
 
-  if(1)
+  if(1) {
     level thread vo_maxis_first_tower();
-  else if(0)
+  }
+  else if(0) {
     level thread vo_richtofen_first_tower();
+  }
 }
 
 vo_richtofen_first_tower() {
@@ -820,10 +847,12 @@ vo_weapon_watcher() {
       if(!flag("sq_player_has_sniper") && isDefined(player.currentweapon) && sq_is_weapon_sniper(player.currentweapon)) {
         flag_set("sq_player_has_sniper");
 
-        if(isDefined(level.rich_sq_player) && is_player_valid(level.rich_sq_player) && player == level.rich_sq_player)
+        if(isDefined(level.rich_sq_player) && is_player_valid(level.rich_sq_player) && player == level.rich_sq_player) {
           level thread vo_richtofen_find_sniper();
-        else
+        }
+        else {
           level thread vo_maxis_find_sniper();
+        }
 
         continue;
       }
@@ -842,8 +871,9 @@ sq_is_weapon_sniper(str_weapon) {
   a_snipers = array("dsr50", "barretm82", "svu");
 
   foreach(str_sniper in a_snipers) {
-    if(issubstr(str_weapon, str_sniper))
+    if(issubstr(str_weapon, str_sniper)) {
       return true;
+    }
   }
 
   return false;
@@ -861,19 +891,22 @@ richtofensay(vox_line, time) {
   }
   level endon("richtofen_c_complete");
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 2;
+  }
 
-  while(is_true(level.richtofen_talking_to_samuel))
+  while(is_true(level.richtofen_talking_to_samuel)) {
     wait 1;
+  }
 
   if(isDefined(level.rich_sq_player) && is_player_valid(level.rich_sq_player)) {
     iprintlnbold("Richtoffen Says: " + vox_line);
 
     level.rich_sq_player playsoundtoplayer(vox_line, level.rich_sq_player);
 
-    if(!is_true(level.richtofen_talking_to_samuel))
+    if(!is_true(level.richtofen_talking_to_samuel)) {
       level thread richtofen_talking(time);
+    }
   }
 }
 
@@ -883,8 +916,9 @@ richtofen_talking(time) {
   wait(time);
   level.richtofen_talking_to_samuel = 0;
 
-  if(isDefined(level.rich_sq_player))
+  if(isDefined(level.rich_sq_player)) {
     level.rich_sq_player.dontspeak = 0;
+  }
 }
 
 maxissay(line) {
@@ -897,8 +931,9 @@ maxissay(line) {
   if(is_true(level.intermission)) {
     return;
   }
-  while(is_true(level.maxis_talking))
+  while(is_true(level.maxis_talking)) {
     wait 0.05;
+  }
 
   level.maxis_talking = 1;
 
@@ -906,8 +941,9 @@ maxissay(line) {
 
   players = getplayers();
 
-  foreach(player in players)
+  foreach(player in players) {
   player setclientfieldtoplayer("clientfield_sq_vo", level.sq_clientfield_vo[line]);
+  }
 
   wait 10;
   level.maxis_talking = 0;

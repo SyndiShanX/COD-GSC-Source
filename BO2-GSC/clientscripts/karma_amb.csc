@@ -362,10 +362,12 @@ play_engine_audio() {
   self thread loop_cleanup("exit_vehicle", loop_ent_1);
 
   while(true) {
-    if(self getspeed() >= 5)
+    if(self getspeed() >= 5) {
       loop_ent_1 playLoopSound("veh_spiderbot_legs_loop_front", 0.05);
-    else
+    }
+    else {
       loop_ent_1 stoploopsound(0.1);
+    }
 
     wait 0.05;
   }
@@ -396,17 +398,21 @@ loop_cleanup(string, ent1, ent2, ent3, ent4) {
   level notify("spiderbot_audio_cleanup");
   wait 0.1;
 
-  if(isDefined(ent1))
+  if(isDefined(ent1)) {
     ent1 delete();
+  }
 
-  if(isDefined(ent2))
+  if(isDefined(ent2)) {
     ent2 delete();
+  }
 
-  if(isDefined(ent3))
+  if(isDefined(ent3)) {
     ent3 delete();
+  }
 
-  if(isDefined(ent4))
+  if(isDefined(ent4)) {
     ent4 delete();
+  }
 }
 
 spiderbot_amb_convo_triggers() {
@@ -418,8 +424,9 @@ waitfor_convo_trigger() {
   self waittill("trigger");
   struct = getstruct(self.target, "targetname");
 
-  if(isDefined(struct.script_sound))
+  if(isDefined(struct.script_sound)) {
     playSound(0, struct.script_sound, struct.origin);
+  }
 }
 
 waitfor_bodyscan() {
@@ -460,8 +467,9 @@ play_intro_blockout_pa_vox() {
   location[6].alias = "vox_blk_pa_welcome_sml";
 
   while(true) {
-    for(i = 0; i < location.size; i++)
+    for(i = 0; i < location.size; i++) {
       playSound(0, location[i].alias, location[i].origin);
+    }
 
     wait 18;
   }
@@ -508,17 +516,20 @@ pick_and_play_pa_vox(pa_vox) {
   wait(randomintrange(5, 11));
 
   while(true) {
-    if(num > 1)
+    if(num > 1) {
       num = 0;
+    }
 
     alias = random(pa_vox[num]);
     arrayremovevalue(pa_vox[num], alias);
 
-    for(i = 0; i < ent_array.size; i++)
+    for(i = 0; i < ent_array.size; i++) {
       playSound(0, alias, ent_array[i].origin);
+    }
 
-    if(pa_vox[num].size <= 0)
+    if(pa_vox[num].size <= 0) {
       pa_vox[num] = old_array[num];
+    }
 
     wait(randomintrange(30, 40));
     num++;
@@ -682,8 +693,10 @@ sndplayshadows() {
 }
 
 sndspdbotvox(set) {
-  if(set == 1)
+  if(set == 1) {
     snd_set_snapshot("spl_karma_spiderbot_novox");
-  else
+  }
+  else {
     snd_set_snapshot("default");
+  }
 }

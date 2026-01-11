@@ -7,8 +7,9 @@
 init() {
   precacherumble("stinger_lock_rumble");
 
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 clearirtarget();
+  }
 
   foreach(var_1 in level.players) {
     var_1 thread stingerfirednotify();
@@ -17,8 +18,9 @@ init() {
 }
 
 clearirtarget() {
-  if(!isDefined(self.stinger))
+  if(!isDefined(self.stinger)) {
     self.stinger = spawnStruct();
+  }
 
   self.stinger.stingerlockstarttime = 0;
   self.stinger.stingerlockstarted = 0;
@@ -52,13 +54,15 @@ stingertoggleloop() {
   self endon("death");
 
   for(;;) {
-    while(!playerstingerads())
+    while(!playerstingerads()) {
       wait 0.05;
+    }
 
     thread stingerirtloop();
 
-    while(playerstingerads())
+    while(playerstingerads()) {
       wait 0.05;
+    }
 
     self notify("stinger_IRT_off");
     clearirtarget();
@@ -121,12 +125,14 @@ getbeststingertarget() {
   var_1 = [];
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(insidestingerreticlenolock(var_0[var_2]))
+    if(insidestingerreticlenolock(var_0[var_2])) {
       var_1[var_1.size] = var_0[var_2];
+    }
   }
 
-  if(var_1.size == 0)
+  if(var_1.size == 0) {
     return undefined;
+  }
 
   var_3 = var_1[0];
 
@@ -144,14 +150,17 @@ insidestingerreticlelocked(var_0) {
 }
 
 isstillvalidtarget(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!target_istarget(var_0))
+  if(!target_istarget(var_0)) {
     return 0;
+  }
 
-  if(!insidestingerreticlelocked(var_0))
+  if(!insidestingerreticlelocked(var_0)) {
     return 0;
+  }
 
   return 1;
 }
@@ -159,11 +168,13 @@ isstillvalidtarget(var_0) {
 playerstingerads() {
   var_0 = self getcurrentweapon();
 
-  if(var_0 != "stinger")
+  if(var_0 != "stinger") {
     return 0;
+  }
 
-  if(self playerads() == 1.0)
+  if(self playerads() == 1.0) {
     return 1;
+  }
 
   return 0;
 }
@@ -181,10 +192,12 @@ setnoclearance() {
   var_5[3] = (-40, 0, 40);
   var_5[4] = (40, 0, 40);
 
-  if(getdvar("missileDebugDraw") == "1")
+  if(getdvar("missileDebugDraw") == "1") {
     var_6 = 1;
-  else
+  }
+  else {
     var_6 = 0;
+  }
 
   var_7 = self getplayerangles();
   var_8 = anglesToForward(var_7);
@@ -213,8 +226,9 @@ setnoclearance() {
 settargettooclose(var_0) {
   var_1 = 1000;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_2 = distance2d(self.origin, var_0.origin);
 

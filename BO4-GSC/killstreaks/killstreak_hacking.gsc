@@ -190,4 +190,3 @@ killstreak_switch_team(owner) {
     }
   }
 }
-

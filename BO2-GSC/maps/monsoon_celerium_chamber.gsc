@@ -42,8 +42,9 @@ skipto_celerium() {
 turn_off_all_lab_trigs() {
   a_lab_trigs = getEntArray("lab_trigs", "script_noteworthy");
 
-  foreach(trig in a_lab_trigs)
+  foreach(trig in a_lab_trigs) {
   trig trigger_off();
+  }
 
   a_lab_trigs = [];
   a_lab_trigs[0] = getent("trig_spawn_lobby_guys", "targetname");
@@ -76,8 +77,9 @@ turn_off_all_lab_trigs() {
   a_lab_trigs[27] = getent("trig_lab_2_2_guys_cleared", "targetname");
   a_lab_trigs[28] = getent("trig_lab_1_2_guys_cleared", "targetname");
 
-  foreach(trig in a_lab_trigs)
+  foreach(trig in a_lab_trigs) {
   trig trigger_off();
+  }
 }
 
 init_celerium_flags() {
@@ -154,8 +156,9 @@ escape_lab() {
   a_exit_blood_01 = getEntArray("exit_blood_01", "targetname");
 
   foreach(blood in a_exit_blood_01) {
-    if(is_mature())
+    if(is_mature()) {
       blood show();
+    }
   }
 
   kill_spawnernum(202);
@@ -165,8 +168,9 @@ escape_lab() {
   e_escape_blast_doors disconnectpaths();
   a_escape_trigs = getEntArray("escape_trigs", "script_noteworthy");
 
-  foreach(trig in a_escape_trigs)
+  foreach(trig in a_escape_trigs) {
   trig trigger_on();
+  }
 
   simple_spawn("isaacs_killers");
   level thread monitor_escape_enemies();
@@ -223,18 +227,21 @@ escape_lab() {
   simple_spawn("ending_gaurds");
   a_destroyed_lobby_asd = getEntArray("destroyed_lobby_asd", "targetname");
 
-  foreach(asd in a_destroyed_lobby_asd)
+  foreach(asd in a_destroyed_lobby_asd) {
   playFXOnTag(level._effect["agr_death_smolder"], asd, "tag_origin");
+  }
 
   a_top_stairs_guys = get_ai_group_ai("top_stairs_guys");
 
-  foreach(ai in a_top_stairs_guys)
+  foreach(ai in a_top_stairs_guys) {
   ai die();
+  }
 
   a_top_stairs_guys_2 = get_ai_group_ai("top_stairs_guys_2");
 
-  foreach(ai in a_top_stairs_guys_2)
+  foreach(ai in a_top_stairs_guys_2) {
   ai die();
+  }
 
   flag_wait("player_at_briggs");
   setmusicstate("MONSOON_ENDING");
@@ -256,8 +263,9 @@ escape_lab() {
   delete_scene_all("corpse_2");
   a_ai_axis = getaiarray("axis");
 
-  foreach(ai in a_ai_axis)
+  foreach(ai in a_ai_axis) {
   ai delete();
+  }
 
   flag_set("celerium_obj_done");
   run_scene("ending_player");
@@ -301,8 +309,9 @@ crawl_back_victim() {
   flag_wait("player_at_briggs");
   ai_crawl_dude = get_ais_from_scene("dying_crawl_back", "crawl_back_guy");
 
-  if(isDefined(ai_crawl_dude))
+  if(isDefined(ai_crawl_dude)) {
     ai_crawl_dude die();
+  }
 }
 
 gun_shots_to_victim(guy) {
@@ -430,14 +439,16 @@ celerium_vision_set_tracking() {
   s_pos = getstruct("back_celerium_door_rumble_dist", "targetname");
 
   while(true) {
-    while(level.player.origin[0] > s_pos.origin[0])
+    while(level.player.origin[0] > s_pos.origin[0]) {
       wait 0.05;
+    }
 
     level thread maps\createart\monsoon_art::celerium_chamber_vision();
     wait 1;
 
-    while(level.player.origin[0] < s_pos.origin[0])
+    while(level.player.origin[0] < s_pos.origin[0]) {
       wait 0.05;
+    }
 
     level thread maps\createart\monsoon_art::lab_vision();
     wait 1;
@@ -464,8 +475,9 @@ data_fade_think() {
   level endon("shutdown_lights");
 
   while(true) {
-    if(cointoss())
+    if(cointoss()) {
       self hide_data_element();
+    }
 
     wait(randomfloatrange(2.0, 3.0));
   }
@@ -532,15 +544,17 @@ celerium_entrance_doors() {
   s_front_celerium_door_rumble_dist.is_moving = 0;
   n_distance = distance2d(s_front_celerium_door_rumble_dist.origin, level.player.origin);
 
-  if(n_distance < 500)
+  if(n_distance < 500) {
     level.player playrumbleonentity("damage_heavy");
+  }
 
   bm_celerium_door_rear_l waittill("movedone");
   s_back_celerium_door_rumble_dist.is_moving = 0;
   n_distance = distance2d(s_back_celerium_door_rumble_dist.origin, level.player.origin);
 
-  if(n_distance < 500)
+  if(n_distance < 500) {
     level.player playrumbleonentity("damage_heavy");
+  }
 
   bm_celerium_door_front_l connectpaths();
   bm_celerium_door_front_r connectpaths();
@@ -557,8 +571,9 @@ celerium_lighting() {
   clientnotify("light_celerium");
   a_data_streams = getEntArray("data_streams", "script_noteworthy");
 
-  foreach(data in a_data_streams)
+  foreach(data in a_data_streams) {
   data hide();
+  }
 
   c_data_00 = getent("c_data_00", "targetname");
   c_data_00 hide();
@@ -650,21 +665,24 @@ player_celerium() {
   a_defend_asds = getEntArray("defend_asds", "script_noteworthy");
 
   foreach(asd in a_defend_asds) {
-    if(issentient(asd))
+    if(issentient(asd)) {
       asd notify("death");
+    }
   }
 
   ai_axis = getaiarray("axis");
 
   foreach(ai in ai_axis) {
-    if(isDefined(ai) && isalive(ai))
+    if(isDefined(ai) && isalive(ai)) {
       ai die();
+    }
   }
 
   delay_thread(0.05, maps\_camo_suit::data_glove_on, "player_celerium_door_open");
 
-  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on"))
+  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on")) {
     level.player ent_flag_clear("camo_suit_on");
+  }
 
   clientnotify("light_celerium");
   run_scene("player_celerium_door_open");
@@ -685,8 +703,9 @@ player_celerium() {
   flag_set("remove_celerium_breadcrumb");
   level thread holster_guns_on_approach();
 
-  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on"))
+  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on")) {
     level.player ent_flag_clear("camo_suit_on");
+  }
 
   run_scene("player_chip_approach");
   flag_set("player_at_celerium");

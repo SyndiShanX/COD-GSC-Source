@@ -31,25 +31,31 @@ watchGrenadeUsage() {
     self waittill("grenade_pullback", weaponName);
     self.throwingGrenade = true;
 
-    if(weaponName == "c4")
+    if(weaponName == "c4") {
       self beginC4Tracking();
-    else if(weaponName == "smoke_grenade_american")
+    }
+    else if(weaponName == "smoke_grenade_american") {
       self beginsmokegrenadetracking();
+    }
     //else if( weaponName == "semtex_grenade" )
     //	self beginsemtexgrenadetracking();
-    else
+    else {
       self beginGrenadeTracking();
+    }
   }
 }
 
 beginsmokegrenadetracking() {
   self waittill("grenade_fire", grenade, weaponName);
-  if(!isDefined(level.smokegrenades))
+  if(!isDefined(level.smokegrenades)) {
     level.smokegrenades = 0;
-  if(level.smokegrenades > 2 && getdvar("player_sustainAmmo") != "0")
+  }
+  if(level.smokegrenades > 2 && getdvar("player_sustainAmmo") != "0") {
     grenade delete();
-  else
+  }
+  else {
     grenade thread smoke_grenade_death();
+  }
 }
 
 begin_semtex_grenade_tracking() {
@@ -65,10 +71,12 @@ begin_semtex_grenade_tracking() {
 track_semtex_grenade(grenade) {
   self.throwingGrenade = false;
 
-  if(!isDefined(level.thrown_semtex_grenades))
+  if(!isDefined(level.thrown_semtex_grenades)) {
     level.thrown_semtex_grenades = 1;
-  else
+  }
+  else {
     level.thrown_semtex_grenades++;
+  }
 
   grenade waittill("death");
 
@@ -79,19 +87,22 @@ track_semtex_grenade(grenade) {
 semtex_sticky_handle(attacker) {
   self waittill("missile_stuck", entity);
 
-  if(!isDefined(entity))
+  if(!isDefined(entity)) {
     return;
+  }
 
   // just handling vehicles for now.
-  if(entity.code_classname != "script_vehicle")
+  if(entity.code_classname != "script_vehicle") {
     return;
+  }
 
   entity.has_semtex_on_it = true;
 
   self waittill("explode");
 
-  if(!isDefined(entity) || !isalive(entity))
+  if(!isDefined(entity) || !isalive(entity)) {
     return; // possible it could be dead at this point
+  }
 
   if(
     entity maps\_vehicle::is_godmode() ||
@@ -114,8 +125,9 @@ beginGrenadeTracking() {
   self endon("death");
 
   self waittill("grenade_fire", grenade, weaponName);
-  if(weaponName == "fraggrenade")
+  if(weaponName == "fraggrenade") {
     grenade thread grenade_earthQuake();
+  }
 
   self.throwingGrenade = false;
 }
@@ -133,16 +145,18 @@ watchC4() {
   while(1) {
     self waittill("grenade_fire", c4, weapname);
     if(weapname == "c4") {
-      if(!self.c4array.size)
+      if(!self.c4array.size) {
         self thread watchC4AltDetonate();
+      }
 
       /*if( self.c4array.size >= maxc4 )
       {
       	newarray = [];
       	for( i = 0; i < self.c4array.size; i++ )
       	{
-      		if( isDefined(self.c4array[i]) )
+      		if( isDefined(self.c4array[i]) ) {
       			newarray[newarray.size] = self.c4array[i];
+      		}
       	}
       	self.c4array = newarray;
       	for( i = 0; i < self.c4array.size - maxc4 + 1; i++ )
@@ -158,8 +172,9 @@ watchC4() {
       }*/
 
       self.c4array[self.c4array.size] = c4;
-      if(self.c4array.size > 15 && getdvar("player_sustainAmmo") != "0")
+      if(self.c4array.size > 15 && getdvar("player_sustainAmmo") != "0") {
         self.c4array[0] delete();
+      }
       c4.owner = self;
       //			c4 thread maps\mp\gametypes\_shellshock::c4_earthQuake();
       c4 thread c4Damage();
@@ -214,8 +229,9 @@ claymoreDetonation() {
 
   self thread deleteOnDeath(damagearea);
 
-  if(!isDefined(level.claymores))
+  if(!isDefined(level.claymores)) {
     level.claymores = [];
+  }
   level.claymores = array_add(level.claymores, self);
 
   // limit the number of active claymores
@@ -226,19 +242,23 @@ claymoreDetonation() {
   while(1) {
     damagearea waittill("trigger", ent);
 
-    if(isDefined(self.owner) && ent == self.owner)
+    if(isDefined(self.owner) && ent == self.owner) {
       continue;
+    }
 
-    if(isplayer(ent))
+    if(isplayer(ent)) {
       continue; // no enemy claymores in SP.
+    }
 
     if(ent damageConeTrace(self.origin, self) > 0) {
       self playSound("claymore_activated_SP");
       wait 0.4;
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self detonate(self.owner);
-      else
+      }
+      else {
         self detonate(undefined);
+      }
 
       return;
     }
@@ -250,8 +270,9 @@ deleteOnDeath(ent) {
   // stupid getarraykeys in array_remove reversing the order - nate
   level.claymores = array_remove_nokeys(level.claymores, self);
   wait .05;
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 watchC4Detonation() {
@@ -261,8 +282,9 @@ watchC4Detonation() {
     weap = self getCurrentWeapon();
     if(weap == "c4") {
       for(i = 0; i < self.c4array.size; i++) {
-        if(isDefined(self.c4array[i]))
+        if(isDefined(self.c4array[i])) {
           self.c4array[i] thread waitAndDetonate(0.1);
+        }
       }
       self.c4array = [];
     }
@@ -280,8 +302,9 @@ watchC4AltDetonation() {
       newarray = [];
       for(i = 0; i < self.c4array.size; i++) {
         c4 = self.c4array[i];
-        if(isDefined(self.c4array[i]))
+        if(isDefined(self.c4array[i])) {
           c4 thread waitAndDetonate(0.1);
+        }
       }
       self.c4array = newarray;
       self notify("detonated");
@@ -318,22 +341,27 @@ c4Damage() {
 
   self playSound("claymore_activated_SP");
 
-  if(level.c4explodethisframe)
+  if(level.c4explodethisframe) {
     wait .1 + randomfloat(.4);
-  else
+  }
+  else {
     wait .05;
+  }
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   level.c4explodethisframe = true;
 
   thread resetC4ExplodeThisFrame();
 
-  if(isplayer(attacker))
+  if(isplayer(attacker)) {
     self detonate(attacker);
-  else
+  }
+  else {
     self detonate();
+  }
   // won't get here; got death notify.
 }
 
@@ -378,16 +406,19 @@ clearFXOnDeath(fx) {
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
 
-  if(!isDefined(doLOS))
+  if(!isDefined(doLOS)) {
     doLOS = false;
+  }
 
-  if(!isDefined(startRadius))
+  if(!isDefined(startRadius)) {
     startRadius = 0;
+  }
 
   // players
   for(i = 0; i < level.players.size; i++) {
-    if(!isalive(level.players[i]) || level.players[i].sessionstate != "playing")
+    if(!isalive(level.players[i]) || level.players[i].sessionstate != "playing") {
       continue;
+    }
 
     playerpos = level.players[i].origin + (0, 0, 32);
     dist = distance(pos, playerpos);
@@ -437,8 +468,9 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
   midpos = undefined;
 
   diff = to - from;
-  if(lengthsquared(diff) < startRadius * startRadius)
+  if(lengthsquared(diff) < startRadius * startRadius) {
     midpos = to;
+  }
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
 
@@ -480,8 +512,9 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
     );
   } else {
     // destructable walls and such can only be damaged in certain ways.
-    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp"))
+    if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp")) {
       return;
+    }
 
     self.entity notify("damage", iDamage, eAttacker);
   }
@@ -532,8 +565,9 @@ watchC4AltDetonate() {
       }
 
       println("pressTime1: " + buttonTime);
-      if(buttonTime >= 0.5)
+      if(buttonTime >= 0.5) {
         continue;
+      }
 
       buttonTime = 0;
       while(!self UseButtonPressed() && buttonTime < 0.5) {
@@ -542,11 +576,13 @@ watchC4AltDetonate() {
       }
 
       println("delayTime: " + buttonTime);
-      if(buttonTime >= 0.5)
+      if(buttonTime >= 0.5) {
         continue;
+      }
 
-      if(!self.c4Array.size)
+      if(!self.c4Array.size) {
         return;
+      }
 
       self notify("alt_detonate");
     }

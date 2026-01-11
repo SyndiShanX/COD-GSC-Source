@@ -6,10 +6,12 @@
 #include maps\_vehicle;
 
 main() {
-  if(issubstr(self.vehicletype, "wturret"))
+  if(issubstr(self.vehicletype, "wturret")) {
     build_aianims(::set_50cal_gunner_anims, ::set_50cal_vehicle_anims);
-  else
+  }
+  else {
     build_aianims(::setanims, ::set_vehicle_anims);
+  }
 
   build_unload_groups(::unload_groups);
 }
@@ -34,8 +36,9 @@ set_50cal_vehicle_anims(positions) {
 set_50cal_gunner_anims() {
   positions = [];
 
-  for(i = 0; i < 7; i++)
+  for(i = 0; i < 7; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
@@ -92,8 +95,9 @@ set_vehicle_anims(positions) {
 setanims() {
   positions = [];
 
-  for(i = 0; i < 6; i++)
+  for(i = 0; i < 6; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

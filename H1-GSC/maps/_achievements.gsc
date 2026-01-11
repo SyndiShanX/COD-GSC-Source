@@ -23,8 +23,9 @@ master_ninja_mission_complete() {
   level endon("master_ninja_illegal_kill");
   level waittill("achievements_level_complete");
 
-  if(common_scripts\utility::flag("master_ninja_melee_kill") && !common_scripts\utility::flag("master_ninja_illegal_kill"))
+  if(common_scripts\utility::flag("master_ninja_melee_kill") && !common_scripts\utility::flag("master_ninja_illegal_kill")) {
     maps\_utility::giveachievement_wrapper("MASTER_NINJA");
+  }
 }
 
 master_ninja_enemy_spawned() {
@@ -32,10 +33,12 @@ master_ninja_enemy_spawned() {
   self waittill("death", var_0, var_1);
 
   if(isDefined(var_0) && var_0 == level.player) {
-    if(var_1 == "MOD_MELEE")
+    if(var_1 == "MOD_MELEE") {
       common_scripts\utility::flag_set("master_ninja_melee_kill");
-    else
+    }
+    else {
       common_scripts\utility::flag_set("master_ninja_illegal_kill");
+    }
   }
 }
 
@@ -92,8 +95,9 @@ parse_weapon_name(var_0) {
   var_2 = get_base_weapon_list();
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(issubstr(var_1, var_2[var_3]))
+    if(issubstr(var_1, var_2[var_3])) {
       return var_2[var_3];
+    }
   }
 
   return var_1;
@@ -102,8 +106,9 @@ parse_weapon_name(var_0) {
 weapon_master_enemy_spawned() {
   self waittill("death", var_0, var_1, var_2);
 
-  if(isDefined(var_0) && var_0 == level.player && isDefined(var_2) && var_1 != "MOD_MELEE")
+  if(isDefined(var_0) && var_0 == level.player && isDefined(var_2) && var_1 != "MOD_MELEE") {
     weapon_master_register_kill(var_2);
+  }
 }
 
 weapon_master_vehicle_damaged() {
@@ -117,14 +122,17 @@ weapon_master_vehicle_damaged() {
     var_4 = tolower(var_4);
 
     if(var_4 == "mod_explosive" || var_4 == "mod_explosive_splash") {
-      if(var_0 != 100)
+      if(var_0 != 100) {
         var_7 = "c4";
+      }
     } else if(var_4 == "mod_projectile" || var_4 == "mod_projectile_splash") {
-      if(var_0 >= 900)
+      if(var_0 >= 900) {
         var_7 = "javelin";
+      }
       else if(var_0 >= 300) {
-        if(var_1 == level.player)
+        if(var_1 == level.player) {
           var_7 = "rpg";
+        }
       }
     }
 
@@ -141,16 +149,18 @@ weapon_master_vehicle_spawned() {
   thread weapon_master_vehicle_damaged();
   self waittill("death", var_1, var_2, var_3);
 
-  if(isDefined(var_1) && var_1 == level.player && isDefined(var_3) && var_2 != "MOD_MELEE")
+  if(isDefined(var_1) && var_1 == level.player && isDefined(var_3) && var_2 != "MOD_MELEE") {
     weapon_master_register_kill(var_3);
+  }
   else {
     wait 0.25;
 
     if(level.weapon_master_explosive == "unknown" || level.weapon_master_vehicle_id != var_0) {
       return;
     }
-    if(abs(gettime() - level.weapon_master_timestamp) <= 1000)
+    if(abs(gettime() - level.weapon_master_timestamp) <= 1000) {
       weapon_master_register_kill(level.weapon_master_explosive);
+    }
   }
 }
 
@@ -180,12 +190,14 @@ weapon_master_check_success() {
     var_4 = level.player getlocalplayerprofiledata("sp_weaponMaster", var_3);
     var_1[var_0[var_3]] = var_4;
 
-    if(var_4 == "1")
+    if(var_4 == "1") {
       var_2++;
+    }
   }
 
-  if(var_2 == var_0.size || platform_tracks_progression())
+  if(var_2 == var_0.size || platform_tracks_progression()) {
     maps\_utility::giveachievement_wrapper("WEAPON_MASTER");
+  }
 }
 
 i_hate_dogs_init() {
@@ -214,8 +226,9 @@ i_hate_dogs_enemy_spawned() {
       level.player setlocalplayerprofiledata("sp_iHateDogs", var_2);
       updategamerprofileall();
 
-      if(var_2 >= var_3 || platform_tracks_progression())
+      if(var_2 >= var_3 || platform_tracks_progression()) {
         maps\_utility::giveachievement_wrapper("DOGS_I_HATE_DOGS");
+      }
     }
   }
 }

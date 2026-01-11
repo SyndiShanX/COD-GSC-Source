@@ -433,10 +433,12 @@ event2_snare_trap(guy) {
   branch = getstruct("event2_snare_branch", "targetname");
   pos = (branch.origin[0], branch.origin[1], node.origin[2]);
   what_to_gib = randomintrange(0, 2);
-  if(0)
+  if(0) {
     guy.a.gib_ref = "left_arm";
-  else
+  }
+  else {
     guy.a.gib_ref = "right_arm";
+  }
   dist = Distance(node.origin, branch.origin);
   DeleteRope(level.snare_rope_id);
   guy playSound("trap_spring");
@@ -1486,8 +1488,9 @@ lerp_fov(new_fov, time, wait_time) {
     maps\mak::set_player_attrib("fov", curr_fov);
     wait(0.05);
   }
-  if(isDefined(wait_time))
+  if(isDefined(wait_time)) {
     self thread fov_thread(new_fov, wait_time);
+  }
   self SetClientDvar("cg_fov", new_fov);
   maps\mak::set_player_attrib("fov", new_fov);
 }

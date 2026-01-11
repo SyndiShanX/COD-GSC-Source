@@ -58,13 +58,15 @@ clear_fluid_column_anims() {
 }
 
 clear_pump_anims(b_skip_blend) {
-  if(!isDefined(b_skip_blend))
+  if(!isDefined(b_skip_blend)) {
     b_skip_blend = 0;
+  }
 
   n_blend_time = 0.2;
 
-  if(b_skip_blend)
+  if(b_skip_blend) {
     n_blend_time = 0;
+  }
 
   self clearanim( % fxanim_zom_tomb_generator_start_anim, n_blend_time);
   self clearanim( % fxanim_zom_tomb_generator_up_idle_anim, n_blend_time);
@@ -87,13 +89,15 @@ generator_set_progress(localclientnumber, oldval, newval) {
 }
 
 set_fluid_height(newval, b_skip_blend) {
-  if(!isDefined(b_skip_blend))
+  if(!isDefined(b_skip_blend)) {
     b_skip_blend = 0;
+  }
 
   n_blend_time = 0.2;
 
-  if(b_skip_blend)
+  if(b_skip_blend) {
     n_blend_time = 0;
+  }
 
   self setanim( % fxanim_zom_tomb_generator_fluid_up_anim, newval, n_blend_time, 1);
   self setanim( % fxanim_zom_tomb_generator_fluid_down_anim, 1 - newval, n_blend_time, 1);
@@ -101,20 +105,24 @@ set_fluid_height(newval, b_skip_blend) {
 }
 
 get_generator_entity(str_name, localclientnumber) {
-  if(!isDefined(level.zone_capture_generators))
+  if(!isDefined(level.zone_capture_generators)) {
     level.zone_capture_generators = [];
+  }
 
-  if(!isDefined(level.zone_capture_generators[localclientnumber]))
+  if(!isDefined(level.zone_capture_generators[localclientnumber])) {
     level.zone_capture_generators[localclientnumber] = [];
+  }
 
-  if(!isDefined(level.zone_capture_generators[localclientnumber][str_name]))
+  if(!isDefined(level.zone_capture_generators[localclientnumber][str_name])) {
     level.zone_capture_generators[localclientnumber][str_name] = getent(localclientnumber, str_name, "targetname");
+  }
 
   assert(isDefined(level.zone_capture_generators[localclientnumber][str_name]), "generator with name " + str_name + " is missing in level.zone_capture_generators array!");
   level.zone_capture_generators[localclientnumber][str_name] waittill_dobj(localclientnumber);
 
-  if(!level.zone_capture_generators[localclientnumber][str_name] hasanimtree())
+  if(!level.zone_capture_generators[localclientnumber][str_name] hasanimtree()) {
     level.zone_capture_generators[localclientnumber][str_name] useanimtree(#animtree);
+  }
 
   return level.zone_capture_generators[localclientnumber][str_name];
 }
@@ -123,14 +131,16 @@ set_generator_state(localclientnum, oldval, newval, bnewent, binitialsnap, field
   m_generator = get_generator_entity(getsubstr(fieldname, 6), localclientnum);
   n_blend_time = 0.2;
 
-  if(bnewent || binitialsnap || bwasdemojump)
+  if(bnewent || binitialsnap || bwasdemojump) {
     n_blend_time = 0;
+  }
 
   m_generator clear_pump_anims();
   m_generator notify("generator_state_changed");
 
-  if(newval != 0)
+  if(newval != 0) {
     m_generator thread rumble_at_generator_origin(localclientnum);
+  }
 
   switch (newval) {
     case 0:
@@ -159,8 +169,9 @@ set_generator_state(localclientnum, oldval, newval, bnewent, binitialsnap, field
 rumble_at_generator_origin(localclientnumber) {
   self endon("entityshutdown");
 
-  if(!isDefined(self.playing_rumble_loop))
+  if(!isDefined(self.playing_rumble_loop)) {
     self.playing_rumble_loop = 0;
+  }
 
   if(!self.playing_rumble_loop) {
     self.playing_rumble_loop = 1;
@@ -209,8 +220,9 @@ _generator_play_spark_fx(localclientnumber) {
   self endon("generator_starts_spark_fx");
   self endon("generator_stop_damage_fx");
 
-  if(!isDefined(self.n_spark_fx))
+  if(!isDefined(self.n_spark_fx)) {
     self.n_spark_fx = [];
+  }
 
   a_tags = array("fx_side_exhaust01", "fx_frnt_exhaust", "fx_side_exhaust02", "j_piston_01");
 
@@ -225,8 +237,9 @@ _generator_play_steam_fx(localclientnumber) {
   self endon("generator_starts_steam_fx");
   self endon("generator_stop_damage_fx");
 
-  if(!isDefined(self.n_steam_fx))
+  if(!isDefined(self.n_steam_fx)) {
     self.n_steam_fx = [];
+  }
 
   a_tags = array("fx_side_exhaust01", "fx_frnt_exhaust", "fx_side_exhaust02", "j_piston_01");
 
@@ -239,11 +252,13 @@ _generator_play_steam_fx(localclientnumber) {
 generator_delete_damage_fx(localclientnumber) {
   self notify("generator_stop_damage_fx");
 
-  if(isDefined(self.n_spark_fx) && isDefined(self.n_spark_fx[localclientnumber]))
+  if(isDefined(self.n_spark_fx) && isDefined(self.n_spark_fx[localclientnumber])) {
     deletefx(localclientnumber, self.n_spark_fx[localclientnumber], 1);
+  }
 
-  if(isDefined(self.n_steam_fx) && isDefined(self.n_steam_fx[localclientnumber]))
+  if(isDefined(self.n_steam_fx) && isDefined(self.n_steam_fx[localclientnumber])) {
     deletefx(localclientnumber, self.n_steam_fx[localclientnumber], 1);
+  }
 }
 
 generator_state_turn_off(localclientnumber, n_blend_time) {
@@ -284,27 +299,33 @@ generator_fx_enable(localclientnumber) {
 }
 
 generator_fx_disable(localclientnumber) {
-  if(!isDefined(self.a_fx_power_on))
+  if(!isDefined(self.a_fx_power_on)) {
     self.a_fx_power_on = [];
+  }
 
-  if(isDefined(self.a_fx_power_on[localclientnumber]))
+  if(isDefined(self.a_fx_power_on[localclientnumber])) {
     deletefx(localclientnumber, self.a_fx_power_on[localclientnumber], 1);
+  }
 
-  if(!isDefined(self.a_fx_exhaust))
+  if(!isDefined(self.a_fx_exhaust)) {
     self.a_fx_exhaust = [];
+  }
 
-  if(isDefined(self.a_fx_exhaust[localclientnumber]))
+  if(isDefined(self.a_fx_exhaust[localclientnumber])) {
     deletefx(localclientnumber, self.a_fx_exhaust[localclientnumber], 1);
+  }
 
   self generator_delete_damage_fx(localclientnumber);
 }
 
 generator_offline_light_disable(localclientnumber) {
-  if(!isDefined(self.a_fx_light))
+  if(!isDefined(self.a_fx_light)) {
     self.a_fx_light = [];
+  }
 
-  if(isDefined(self.a_fx_light[localclientnumber]))
+  if(isDefined(self.a_fx_light[localclientnumber])) {
     deletefx(localclientnumber, self.a_fx_light[localclientnumber], 1);
+  }
 }
 
 generator_offline_light_enable(localclientnumber) {
@@ -324,11 +345,13 @@ loop_generator_offline_light(localclientnumber) {
 }
 
 scale_speed(x1, x2, y1, y2, z) {
-  if(z < x1)
+  if(z < x1) {
     z = x1;
+  }
 
-  if(z > x2)
+  if(z > x2) {
     z = x2;
+  }
 
   dx = x2 - x1;
   n = (z - x1) / dx;
@@ -338,8 +361,9 @@ scale_speed(x1, x2, y1, y2, z) {
 }
 
 sndliquidvats(start) {
-  if(!isDefined(self.b_liquid_vats_sound_enabled))
+  if(!isDefined(self.b_liquid_vats_sound_enabled)) {
     self.b_liquid_vats_sound_enabled = 0;
+  }
 
   origin1 = self gettagorigin("vat_01_sound");
   origin2 = self gettagorigin("vat_02_sound");
@@ -376,18 +400,21 @@ monolith_crysal_glow(localclientnumber, oldval, newval, bnewent, binitialsnap, f
 sndexploderloop(play, num) {
   origin = level.createfxexploders[num][0].v["origin"];
 
-  if(play)
+  if(play) {
     playloopat("amb_monolith_sparks", origin);
-  else
+  }
+  else {
     stoploopat("amb_monolith_sparks", origin);
+  }
 }
 
 crystal_flicker(localclientnumber, n_glow_value_low, n_glow_value_high, n_time_update_low, n_time_update_high, n_hold_time_low, n_hold_time_high) {
   self notify("flicker_update");
   self endon("flicker_update");
 
-  if(!isDefined(self.n_glow_value))
+  if(!isDefined(self.n_glow_value)) {
     self.n_glow_value = n_glow_value_low;
+  }
 
   while(true) {
     n_glow_value_target = randomfloatrange(n_glow_value_low, n_glow_value_high);
@@ -409,8 +436,9 @@ crystal_glow_lerp_to_value(localclientnumber, n_glow_value_target, n_transition_
   self notify("flicker_update");
   self endon("flicker_update");
 
-  if(!isDefined(self.n_glow_value))
+  if(!isDefined(self.n_glow_value)) {
     self.n_glow_value = 1;
+  }
 
   n_steps = int(n_transition_time / 0.0167);
   n_change_per_step = (n_glow_value_target - self.n_glow_value) / n_steps;
@@ -423,11 +451,13 @@ crystal_glow_lerp_to_value(localclientnumber, n_glow_value_target, n_transition_
 }
 
 get_monolith_crystal_model(str_targetname, localclientnum) {
-  if(!isDefined(level.zone_capture_crystals))
+  if(!isDefined(level.zone_capture_crystals)) {
     level.zone_capture_crystals = [];
+  }
 
-  if(!isDefined(level.zone_capture_crystals[localclientnum]))
+  if(!isDefined(level.zone_capture_crystals[localclientnum])) {
     level.zone_capture_crystals[localclientnum] = [];
+  }
 
   if(!isDefined(level.zone_capture_crystals[localclientnum][str_targetname])) {
     level.zone_capture_crystals[localclientnum][str_targetname] = getent(localclientnum, str_targetname, "targetname");
@@ -462,10 +492,12 @@ pap_monolith_ring_callback(localclientnumber, oldval, newval, bnewent, binitials
   m_pack_a_punch = get_pack_a_punch_model(localclientnumber);
 
   if(isDefined(m_pack_a_punch)) {
-    if(newval)
+    if(newval) {
       m_pack_a_punch thread crystal_flicker(localclientnumber, 0, 0.2, 0.7, 1.0, 0.05, 0.35);
-    else
+    }
+    else {
       m_pack_a_punch thread crystal_glow_lerp_to_value(localclientnumber, 0.65, 5);
+    }
   }
 }
 
@@ -518,11 +550,13 @@ lerp_glow_to_value(localclientnumber, n_value) {
   self notify("new_glow_lerp_thread_started");
   self endon("new_glow_lerp_thread_started");
 
-  if(!isDefined(self.n_glow_value))
+  if(!isDefined(self.n_glow_value)) {
     self.n_glow_value = [];
+  }
 
-  if(!isDefined(self.n_glow_value[localclientnumber]))
+  if(!isDefined(self.n_glow_value[localclientnumber])) {
     self.n_glow_value[localclientnumber] = 0;
+  }
 
   n_delta = n_value - self.n_glow_value[localclientnumber];
   n_increment = n_delta / 4.5 * 0.0167;
@@ -535,11 +569,13 @@ lerp_glow_to_value(localclientnumber, n_value) {
 }
 
 get_monolith_ring_model(localclientnumber) {
-  if(!isDefined(level.zone_capture_monolith_ring))
+  if(!isDefined(level.zone_capture_monolith_ring)) {
     level.zone_capture_monolith_ring = [];
+  }
 
-  if(!isDefined(level.zone_capture_monolith_ring[localclientnumber]))
+  if(!isDefined(level.zone_capture_monolith_ring[localclientnumber])) {
     level.zone_capture_monolith_ring[localclientnumber] = getent(localclientnumber, "pap_monolith_ring", "targetname");
+  }
 
   level.zone_capture_monolith_ring[localclientnumber] waittill_dobj(localclientnumber);
 
@@ -555,8 +591,9 @@ emergence_hole_callback(localclientnumber, oldval, newval, bnewent, binitialsnap
   if(!isDefined(self)) {
     return;
   }
-  if(newval)
+  if(newval) {
     self emergence_hole_spawn(localclientnumber);
+  }
   else {
     b_delete_despawn_fx = self emergence_hole_despawn(localclientnumber, oldval && !bnewent && !bwasdemojump);
     self emergence_hole_fx_stop(localclientnumber, b_delete_despawn_fx);
@@ -594,17 +631,21 @@ emergence_hole_despawn(localclientnumber, b_do_despawn) {
 }
 
 emergence_hole_fx_stop(localclientnumber, b_delete_despawn_fx) {
-  if(!isDefined(b_delete_despawn_fx))
+  if(!isDefined(b_delete_despawn_fx)) {
     b_delete_despawn_fx = 1;
+  }
 
-  if(!isDefined(self.n_fx_spawn))
+  if(!isDefined(self.n_fx_spawn)) {
     self.n_fx_spawn = [];
+  }
 
-  if(!isDefined(self.n_fx_loop))
+  if(!isDefined(self.n_fx_loop)) {
     self.n_fx_loop = [];
+  }
 
-  if(!isDefined(self.n_fx_despawn))
+  if(!isDefined(self.n_fx_despawn)) {
     self.n_fx_despawn = [];
+  }
 
   if(isDefined(self.n_fx_loop[localclientnumber])) {
     deletefx(localclientnumber, self.n_fx_spawn[localclientnumber], 1);
@@ -623,13 +664,15 @@ emergence_hole_fx_stop(localclientnumber, b_delete_despawn_fx) {
     }
   }
 
-  if(isDefined(self.sndent))
+  if(isDefined(self.sndent)) {
     self.sndent delete();
+  }
 }
 
 capture_zombie_riser_fx() {
-  while(!isDefined(self._aitype))
+  while(!isDefined(self._aitype)) {
     wait 0.0167;
+  }
 
   if(self._aitype == "zm_tomb_basic_zone_capture") {
     s_info = spawnStruct();
@@ -682,8 +725,9 @@ play_pap_anim(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 
       anim_clear = level.pack_a_punch_anim_sequence["assemble"][i + 1];
 
-      if(isDefined(anim_clear))
+      if(isDefined(anim_clear)) {
         m_pap clearanim(anim_clear, 0.0);
+      }
 
       anim_disassemble = level.pack_a_punch_anim_sequence["disassemble"][i];
       m_pap setanim(anim_disassemble, 1.0, 0.0, n_anim_rate);
@@ -693,33 +737,40 @@ play_pap_anim(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 }
 
 clear_all_pack_a_punch_anims() {
-  foreach(anim_name in level.pack_a_punch_anim_sequence["assemble"])
+  foreach(anim_name in level.pack_a_punch_anim_sequence["assemble"]) {
   self clearanim(anim_name, 0);
+  }
 
-  foreach(anim_name in level.pack_a_punch_anim_sequence["disassemble"])
+  foreach(anim_name in level.pack_a_punch_anim_sequence["disassemble"]) {
   self clearanim(anim_name, 0);
+  }
 }
 
 add_pack_a_punch_progress_anims(n_index, anim_assemble, anim_disassemble) {
-  if(!isDefined(level.pack_a_punch_anim_sequence))
+  if(!isDefined(level.pack_a_punch_anim_sequence)) {
     level.pack_a_punch_anim_sequence = [];
+  }
 
-  if(!isDefined(level.pack_a_punch_anim_sequence["assemble"]))
+  if(!isDefined(level.pack_a_punch_anim_sequence["assemble"])) {
     level.pack_a_punch_anim_sequence["assemble"] = [];
+  }
 
-  if(!isDefined(level.pack_a_punch_anim_sequence["disassemble"]))
+  if(!isDefined(level.pack_a_punch_anim_sequence["disassemble"])) {
     level.pack_a_punch_anim_sequence["disassemble"] = [];
+  }
 
   level.pack_a_punch_anim_sequence["assemble"][n_index] = anim_assemble;
   level.pack_a_punch_anim_sequence["disassemble"][n_index] = anim_disassemble;
 }
 
 get_pack_a_punch_model(localclientnumber) {
-  if(!isDefined(level.pack_a_punch_model))
+  if(!isDefined(level.pack_a_punch_model)) {
     level.pack_a_punch_model = [];
+  }
 
-  if(!isDefined(level.pack_a_punch_model[localclientnumber]))
+  if(!isDefined(level.pack_a_punch_model[localclientnumber])) {
     level.pack_a_punch_model[localclientnumber] = getent(localclientnumber, "pap_cs", "targetname");
+  }
 
   level.pack_a_punch_model[localclientnumber] waittill_dobj(localclientnumber);
 
@@ -735,8 +786,9 @@ init_custom_pap() {
   waitforallclients();
   a_players = getlocalplayers();
 
-  for(localclientnum = 0; localclientnum < a_players.size; localclientnum++)
+  for(localclientnum = 0; localclientnum < a_players.size; localclientnum++) {
     e_custom_pap = get_pack_a_punch_model(localclientnum);
+  }
 }
 
 zone_capture_zombie_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -764,16 +816,19 @@ capture_zombie_torso_fx_enable(localclientnumber) {
 snddeleteent(ent) {
   self waittill_any("death", "entityshutdown");
 
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 capture_zombie_torso_fx_disable(localclientnumber) {
-  if(!isDefined(self.a_fx_torso))
+  if(!isDefined(self.a_fx_torso)) {
     self.a_fx_torso = [];
+  }
 
-  if(isDefined(self.a_fx_torso[localclientnumber]))
+  if(isDefined(self.a_fx_torso[localclientnumber])) {
     deletefx(localclientnumber, self.a_fx_torso[localclientnumber], 1);
+  }
 }
 
 register_exploders_with_capture_zones() {
@@ -786,11 +841,13 @@ register_exploders_with_capture_zones() {
 }
 
 add_exploder_id_to_zone_capture_field(str_field_name, n_exploder_id) {
-  if(!isDefined(level.zone_capture_exploder_ids))
+  if(!isDefined(level.zone_capture_exploder_ids)) {
     level.zone_capture_exploder_ids = [];
+  }
 
-  if(!isDefined(level.zone_capture_exploder_ids[str_field_name]))
+  if(!isDefined(level.zone_capture_exploder_ids[str_field_name])) {
     level.zone_capture_exploder_ids[str_field_name] = n_exploder_id;
+  }
 }
 
 register_perk_machine_smoke_struct_references() {
@@ -801,11 +858,13 @@ register_perk_machine_smoke_struct_references() {
 }
 
 register_perk_machine_smoke_struct_with_field_name(str_field_name, str_perk_machine_struct_targetname) {
-  if(!isDefined(level.perk_machine_smoke_struct_references))
+  if(!isDefined(level.perk_machine_smoke_struct_references)) {
     level.perk_machine_smoke_struct_references = [];
+  }
 
-  if(!isDefined(level.perk_machine_smoke_struct_references[str_field_name]))
+  if(!isDefined(level.perk_machine_smoke_struct_references[str_field_name])) {
     level.perk_machine_smoke_struct_references[str_field_name] = str_perk_machine_struct_targetname;
+  }
 }
 
 perk_machine_smoke_fx_always_on_callback(localclientnumber, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -819,10 +878,12 @@ perk_machine_smoke_fx_callback(localclientnumber, oldval, newval, bnewent, binit
   s_pipes = get_perk_machine_smoke_fx_struct_from_field_name(fieldname);
 
   if(isDefined(s_pipes)) {
-    if(newval == 1)
+    if(newval == 1) {
       s_pipes perk_pipe_smoke_fx_enable(localclientnumber);
-    else
+    }
+    else {
       s_pipes perk_pipe_smoke_fx_disable(localclientnumber);
+    }
   }
 }
 
@@ -830,11 +891,13 @@ get_perk_machine_smoke_fx_struct_from_field_name(str_field_name) {
   s_fx = undefined;
 
   if(isDefined(level.perk_machine_smoke_struct_references[str_field_name])) {
-    if(!isDefined(level.perk_machine_smoke_structs))
+    if(!isDefined(level.perk_machine_smoke_structs)) {
       level.perk_machine_smoke_structs = [];
+    }
 
-    if(!isDefined(level.perk_machine_smoke_structs[level.perk_machine_smoke_struct_references[str_field_name]]))
+    if(!isDefined(level.perk_machine_smoke_structs[level.perk_machine_smoke_struct_references[str_field_name]])) {
       level.perk_machine_smoke_structs[level.perk_machine_smoke_struct_references[str_field_name]] = getstruct(level.perk_machine_smoke_struct_references[str_field_name], "targetname");
+    }
 
     s_fx = level.perk_machine_smoke_structs[level.perk_machine_smoke_struct_references[str_field_name]];
   }
@@ -843,11 +906,13 @@ get_perk_machine_smoke_fx_struct_from_field_name(str_field_name) {
 }
 
 perk_pipe_smoke_fx_disable(localclientnumber) {
-  if(!isDefined(self.a_fx))
+  if(!isDefined(self.a_fx)) {
     self.a_fx = [];
+  }
 
-  if(isDefined(self.a_fx[localclientnumber]))
+  if(isDefined(self.a_fx[localclientnumber])) {
     deletefx(localclientnumber, self.a_fx[localclientnumber], 0);
+  }
 }
 
 perk_pipe_smoke_fx_enable(localclientnumber) {

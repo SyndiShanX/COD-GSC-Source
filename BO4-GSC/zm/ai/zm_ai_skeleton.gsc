@@ -584,4 +584,3 @@ private function_2d69eef6(speed) {
     skeleton zombie_utility::set_zombie_run_cycle(speed);
   }
 }
-

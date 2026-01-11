@@ -19,8 +19,9 @@ pip_enable(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9)
     var_8 = 101;
   }
 
-  if(!isDefined(var_9))
+  if(!isDefined(var_9)) {
     var_9 = "ac130_enhanced";
+  }
 
   level.pip.opened_width = var_7;
   level.pip.opened_height = var_8;
@@ -55,15 +56,17 @@ pip_enable(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9)
 
 pip_set_entity(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(level.pip.entity)) {
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       level.pip notify("stop_interference");
+    }
 
     level.pip.entity delete();
     level.pip.entity = undefined;
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level thread pip_interference();
+  }
 
   var_5 = undefined;
 
@@ -103,10 +106,12 @@ pip_set_entity(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_5)) {
     level.pip.entity = var_5;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       level.pip.tag = var_1;
-    else
+    }
+    else {
       level.pip.tag = "tag_origin";
+    }
   } else
     level.pip.origin = level.player.origin + (0, 0, 60);
 
@@ -114,10 +119,12 @@ pip_set_entity(var_0, var_1, var_2, var_3, var_4) {
 }
 
 pip_static() {
-  if(!isDefined(level.pip.static_overlay))
+  if(!isDefined(level.pip.static_overlay)) {
     var_0 = newhudelem();
-  else
+  }
+  else {
     var_0 = level.pip.static_overlay;
+  }
 
   var_0.alpha = 1;
   var_0.sort = -50;
@@ -216,8 +223,9 @@ pip_interference() {
 pip_open() {
   var_0 = 0.1;
 
-  foreach(var_3, var_2 in level.pip.borders)
+  foreach(var_3, var_2 in level.pip.borders) {
   var_2 thread pip_open_l_corner(var_3, var_0);
+  }
 
   wait(var_0 + 0.05);
   level.pip.width = level.pip.opened_width;
@@ -314,8 +322,9 @@ pip_open_l_corner(var_0, var_1) {
 pip_disable() {
   level.pip notify("stop_interference");
 
-  if(isDefined(level.pip.static_overlay))
+  if(isDefined(level.pip.static_overlay)) {
     level.pip.static_overlay.alpha = 1;
+  }
 
   wait 0.5;
   var_0 = 0.25;
@@ -329,16 +338,19 @@ pip_disable() {
   wait(var_0);
   level.pip.enable = 0;
 
-  if(isDefined(level.pip.linked_ent))
+  if(isDefined(level.pip.linked_ent)) {
     level.pip.linked_ent delete();
+  }
 
   var_0 = 0.1;
 
-  foreach(var_3, var_2 in level.pip.borders)
+  foreach(var_3, var_2 in level.pip.borders) {
   var_2 thread pip_close_l_corner(var_3, var_0);
+  }
 
-  if(isDefined(level.pip.static_overlay))
+  if(isDefined(level.pip.static_overlay)) {
     level.pip.static_overlay scaleovertime(var_0, level.pip.closed_width, level.pip.closed_height);
+  }
 
   wait(var_0 + 0.05);
   level.pip.width = level.pip.closed_width;
@@ -346,23 +358,29 @@ pip_disable() {
   level.pip.x = level.pip.closed_x;
   level.pip.y = level.pip.closed_y;
 
-  if(isDefined(level.pip.borders))
+  if(isDefined(level.pip.borders)) {
     common_scripts\utility::array_thread(level.pip.borders, ::pip_remove_l_corners);
+  }
 
-  if(isDefined(level.pip.static_overlay))
+  if(isDefined(level.pip.static_overlay)) {
     level.pip.static_overlay destroy();
+  }
 
-  if(isDefined(level.pip_display_name))
+  if(isDefined(level.pip_display_name)) {
     level.pip_display_name destroy();
+  }
 
-  if(isDefined(level.pip_timer))
+  if(isDefined(level.pip_timer)) {
     level.pip_timer destroy();
+  }
 
-  if(isDefined(level.pip.border))
+  if(isDefined(level.pip.border)) {
     level.pip.border destroy();
+  }
 
-  if(isDefined(level.pip.line_a))
+  if(isDefined(level.pip.line_a)) {
     level.pip.line_a destroy();
+  }
 
   if(isDefined(level.pip.entity)) {
     level.pip.entity delete();

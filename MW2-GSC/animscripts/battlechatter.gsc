@@ -34,8 +34,9 @@
 
 // Initializes the battle chatter system
 init_battleChatter() {
-  if(isDefined(anim.chatInitialized) && anim.chatInitialized)
+  if(isDefined(anim.chatInitialized) && anim.chatInitialized) {
     return;
+  }
 
   SetDvarIfUninitialized("bcs_enable", "on");
 
@@ -367,8 +368,9 @@ init_battleChatter() {
   // how long before we can chatter about a threat again?
   anim.bcs_threatResetTime = 3000;
 
-  if(GetDvar("debug_bcdrawobjects") == "on")
+  if(GetDvar("debug_bcdrawobjects") == "on") {
     thread bcDrawObjects();
+  }
 
     anim.squadCreateFuncs[anim.squadCreateFuncs.size] = ::init_squadBattleChatter;
   anim.squadCreateStrings[anim.squadCreateStrings.size] = "::init_squadBattleChatter";
@@ -411,8 +413,9 @@ init_battleChatter() {
   anim.lastNameSaidTimeout = 10000;
 
   for(index = 0; index < anim.squadIndex.size; index++) {
-    if(isDefined(anim.squadIndex[index].chatInitialized) && anim.squadIndex[index].chatInitialized)
+    if(isDefined(anim.squadIndex[index].chatInitialized) && anim.squadIndex[index].chatInitialized) {
       continue;
+    }
 
     anim.squadIndex[index] init_squadBattleChatter();
   }
@@ -430,9 +433,9 @@ init_battleChatter() {
    - zero values do not get considered.
    - 100+ values are prioritized above everything except other 100+ values.
    - chances are dicerolled against one another to find a winner, like this:
-   if( RandomInt( threatCallouts[ "player_yourclock" ] ) > RandomInt( threatCallouts[ "ai_yourclock ] ) )
-	
+   if( RandomInt( threatCallouts[ "player_yourclock" ] ) > RandomInt( threatCallouts[ "ai_yourclock ] ) ) {
   rough priorities:
+   }
   1. RPG
   2. exposed
   3. player_obvious
@@ -630,8 +633,9 @@ shutdown_battleChatter() {
   level.battlechatter = undefined;
 
   for(i = 0; i < anim.squadCreateFuncs.size; i++) {
-    if(anim.squadCreateStrings[i] != "::init_squadBattleChatter")
+    if(anim.squadCreateStrings[i] != "::init_squadBattleChatter") {
       continue;
+    }
 
     if(i != (anim.squadCreateFuncs.size - 1)) {
       anim.squadCreateFuncs[i] = anim.squadCreateFuncs[anim.squadCreateFuncs.size - 1];
@@ -689,8 +693,9 @@ init_squadBattleChatter() {
   squad.fbt_firstBurst = true;
   squad.fbt_lastBursterID = undefined;
 
-  for(i = 0; i < anim.squadIndex.size; i++)
+  for(i = 0; i < anim.squadIndex.size; i++) {
     squad thread initContact(anim.squadIndex[i].squadName);
+  }
 
   squad thread squadThreatWaiter();
   squad thread squadOfficerWaiter();
@@ -722,8 +727,9 @@ shutdown_squadBattleChatter() {
   squad.fbt_lastBursterID = undefined;
 
   for(i = 0; i < squad.memberAddFuncs.size; i++) {
-    if(squad.memberAddStrings[i] != "::addToSystem")
+    if(squad.memberAddStrings[i] != "::addToSystem") {
       continue;
+    }
 
     if(i != (squad.memberAddFuncs.size - 1)) {
       squad.memberAddFuncs[i] = squad.memberAddFuncs[squad.memberAddFuncs.size - 1];
@@ -735,8 +741,9 @@ shutdown_squadBattleChatter() {
   }
 
   for(i = 0; i < squad.memberRemoveFuncs.size; i++) {
-    if(squad.memberRemoveStrings[i] != "::removeFromSystem")
+    if(squad.memberRemoveStrings[i] != "::removeFromSystem") {
       continue;
+    }
 
     if(i != (squad.memberRemoveFuncs.size - 1)) {
       squad.memberRemoveFuncs[i] = squad.memberRemoveFuncs[squad.memberRemoveFuncs.size - 1];
@@ -748,8 +755,9 @@ shutdown_squadBattleChatter() {
   }
 
   for(i = 0; i < squad.squadUpdateFuncs.size; i++) {
-    if(squad.squadUpdateStrings[i] != "::initContact")
+    if(squad.squadUpdateStrings[i] != "::initContact") {
       continue;
+    }
 
     if(i != (squad.squadUpdateFuncs.size - 1)) {
       squad.squadUpdateFuncs[i] = squad.squadUpdateFuncs[squad.squadUpdateFuncs.size - 1];
@@ -760,8 +768,9 @@ shutdown_squadBattleChatter() {
     squad.squadUpdateStrings[squad.squadUpdateStrings.size - 1] = undefined;
   }
 
-  for(i = 0; i < anim.squadIndex.size; i++)
+  for(i = 0; i < anim.squadIndex.size; i++) {
     squad shutdownContact(anim.squadIndex[i].squadName);
+  }
 
   squad.chatInitialized = false;
 }
@@ -779,12 +788,14 @@ bcsDebugWaiter() {
     if(state != lastState) {
       switch (state) {
         case "on":
-          if(!anim.chatInitialized)
+          if(!anim.chatInitialized) {
             enableBattleChatter();
+          }
           break;
         case "off":
-          if(anim.chatInitialized)
+          if(anim.chatInitialized) {
             disableBattleChatter();
+          }
           break;
       }
       lastState = state;
@@ -810,8 +821,9 @@ disableBattleChatter() {
 
   ai = GetAIArray();
   for(i = 0; i < ai.size; i++) {
-    if(isDefined(ai[i].squad) && ai[i].squad.chatInitialized)
+    if(isDefined(ai[i].squad) && ai[i].squad.chatInitialized) {
       ai[i].squad shutdown_squadBattleChatter();
+    }
 
     ai[i] removeFromSystem();
   }
@@ -945,8 +957,9 @@ playThreatEvent() {
 
   anim thread lockAction(self, "threat");
 
-  if(GetDvar("debug_bcinteraction") == "on")
+  if(GetDvar("debug_bcinteraction") == "on") {
     animscripts\utility::showDebugLine(self.origin + (0, 0, 50), threat.origin + (0, 0, 50), (1, 0, 0), 1.5);
+  }
 
     success = false;
 
@@ -1741,8 +1754,9 @@ playResponseEvent() {
 
   anim thread lockAction(self, "response");
 
-  if(GetDvar("debug_bcinteraction") == "on")
+  if(GetDvar("debug_bcinteraction") == "on") {
     animscripts\utility::showDebugLine(self.origin + (0, 0, 50), respondTo.origin + (0, 0, 50), (1, 1, 0), 1.5);
+  }
 
     switch (self.chatQueue["response"].eventType) {
       case "exposed":
@@ -1872,8 +1886,9 @@ orderMove(modifier, orderTo) {
 
   chatPhrase = self createChatPhrase();
 
-  if(GetDvar("debug_bcinteraction") == "on" && isDefined(orderTo))
+  if(GetDvar("debug_bcinteraction") == "on" && isDefined(orderTo)) {
     animscripts\utility::showDebugLine(self.origin + (0, 0, 50), orderTo.origin + (0, 0, 50), (0, 1, 0), 1.5);
+  }
 
     self tryOrderTo(chatPhrase, orderTo);
 
@@ -1972,8 +1987,9 @@ informIncoming(modifier) {
   self endon("removed from battleChatter");
 
   chatPhrase = self createChatPhrase();
-  if(modifier == "grenade")
+  if(modifier == "grenade") {
     chatPhrase.master = true;
+  }
 
   chatPhrase addInformAlias("incoming", modifier);
 
@@ -2030,8 +2046,9 @@ playPhrase(chatPhrase, noSound) {
 
   //	if( GetDvar( "bcs_stealth" ) != "" && self.voice == "british" )
   if(isDefined(level._stealth) && (self voice_is_british_based())) {
-    for(i = 0; i < chatPhrase.soundAliases.size; i++)
+    for(i = 0; i < chatPhrase.soundAliases.size; i++) {
       chatPhrase.soundAliases[i] = chatPhrase.soundAliases[i] + "_s";
+    }
   }
 
   if(self battleChatter_canPrint() || self battleChatter_canPrintDump()) {
@@ -2175,8 +2192,9 @@ updateContact(squadName, member) {
   if(GetTime() - self.squadList[squadName].lastContact > 10000) {
     isInContact = false;
     for(i = 0; i < self.members.size; i++) {
-      if(self.members[i] != member && IsAlive(self.members[i].enemy) && isDefined(self.members[i].enemy.squad) && self.members[i].enemy.squad.squadName == squadName)
+      if(self.members[i] != member && IsAlive(self.members[i].enemy) && isDefined(self.members[i].enemy.squad) && self.members[i].enemy.squad.squadName == squadName) {
         isInContact = true;
+      }
     }
 
     if(!isInContact) {
@@ -2201,59 +2219,74 @@ canSay(eventAction, eventType, priority, modifier) {
   }
 
   // our battlechatter is disabled
-  if(!isDefined(self.battlechatter) || !self.battlechatter)
+  if(!isDefined(self.battlechatter) || !self.battlechatter) {
     return (false);
+  }
 
-  if(isDefined(priority) && priority >= 1)
+  if(isDefined(priority) && priority >= 1) {
     return (true);
+  }
 
   // we're not allowed to call out a threat now, and won't be able to before it expires
-  if((GetTime() + anim.eventActionMinWait[eventAction]["self"]) < self.nextSayTimes[eventAction])
+  if((GetTime() + anim.eventActionMinWait[eventAction]["self"]) < self.nextSayTimes[eventAction]) {
     return (false);
+  }
 
   // the squad is not allowed to call out a threat yet and won't be able to before it expires
-  if((GetTime() + anim.eventActionMinWait[eventAction]["squad"]) < self.squad.nextSayTimes[eventAction])
+  if((GetTime() + anim.eventActionMinWait[eventAction]["squad"]) < self.squad.nextSayTimes[eventAction]) {
     return (false);
+  }
 
-  if(isDefined(eventType) && typeLimited(eventAction, eventType))
+  if(isDefined(eventType) && typeLimited(eventAction, eventType)) {
     return (false);
+  }
 
-  if(isDefined(eventType) && anim.eventPriority[eventAction][eventType] < self.bcs_minPriority)
+  if(isDefined(eventType) && anim.eventPriority[eventAction][eventType] < self.bcs_minPriority) {
     return (false);
+  }
 
-  if(self voice_is_british_based())
+  if(self voice_is_british_based()) {
     return quietFilter(eventAction, eventType, modifier);
+  }
 
   return (true);
 }
 
 quietFilter(action, type, modifier) {
-  if(!isDefined(modifier))
+  if(!isDefined(modifier)) {
     modifier = "";
+  }
 
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     return false;
+  }
 
   switch (action) {
     case "order":
-      if(type == "action" && modifier == "coverme")
+      if(type == "action" && modifier == "coverme") {
         return true;
+      }
       break;
     case "threat":
-      if(type == "infantry" || type == "dog" || type == "rpg")
+      if(type == "infantry" || type == "dog" || type == "rpg") {
         return true;
+      }
       break;
     case "inform":
-      if(type == "attack" && modifier == "grenade")
+      if(type == "attack" && modifier == "grenade") {
         return true;
-      else if(type == "incoming" && modifier == "grenade")
+      }
+      else if(type == "incoming" && modifier == "grenade") {
         return true;
-      else if(type == "reloading" && modifier == "generic")
+      }
+      else if(type == "reloading" && modifier == "generic") {
         return true;
+      }
       break;
     case "reaction":
-      if(type == "casualty" && modifier == "generic")
+      if(type == "casualty" && modifier == "generic") {
         return true;
+      }
       break;
     default:
       return false;
@@ -2309,17 +2342,20 @@ getTargettingAI(threat) {
   squad = self.squad;
   targettingAI = [];
   for(index = 0; index < squad.members.size; index++) {
-    if(isDefined(squad.members[index].enemy) && squad.members[index].enemy == threat)
+    if(isDefined(squad.members[index].enemy) && squad.members[index].enemy == threat) {
       targettingAI[targettingAI.size] = squad.members[index];
+    }
   }
 
-  if(!isDefined(targettingAI[0]))
+  if(!isDefined(targettingAI[0])) {
     return (undefined);
+  }
 
   targettingSpeaker = undefined;
   for(index = 0; index < targettingAI.size; index++) {
-    if(targettingAI[index] canSay("response"))
+    if(targettingAI[index] canSay("response")) {
       return (targettingSpeaker);
+    }
   }
   return (getClosest(self.origin, targettingAI));
 }
@@ -2354,10 +2390,12 @@ getQueueEvents() {
     } else if(eventState == " valid") {
       queueEventStates[i] = "y " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
     } else {
-      if(self.chatQueue[queueEvents[i]].expireTime == 0)
+      if(self.chatQueue[queueEvents[i]].expireTime == 0) {
         queueEventStates[i] = "b " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
-      else
+      }
+      else {
         queueEventStates[i] = "r " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
+      }
     }
   }
 
@@ -2366,22 +2404,27 @@ getQueueEvents() {
 
 getEventState(strAction) {
   strState = "";
-  if(self.squad.isMemberSaying[strAction])
+  if(self.squad.isMemberSaying[strAction]) {
     strState += " playing";
-  if(GetTime() > self.chatQueue[strAction].expireTime)
+  }
+  if(GetTime() > self.chatQueue[strAction].expireTime) {
     strState += " expired";
-  if(GetTime() < self.squad.nextSayTimes[strAction])
+  }
+  if(GetTime() < self.squad.nextSayTimes[strAction]) {
     strState += " cantspeak";
+  }
 
-  if(strState == "")
+  if(strState == "") {
     strState = " valid";
+  }
 
   return (strState);
 }
 
 isFiltered(strAction) {
-  if(GetDvar("bcs_filter" + strAction, "off") == "on" || GetDvar("bcs_filter" + strAction, "off") == "1")
+  if(GetDvar("bcs_filter" + strAction, "off") == "on" || GetDvar("bcs_filter" + strAction, "off") == "1") {
     return (true);
+  }
 
   return (false);
 }
@@ -2392,39 +2435,46 @@ isValidEvent(strAction) {
     GetTime() < self.chatQueue[strAction].expireTime &&
     GetTime() > self.squad.nextSayTimes[strAction]) {
     // redundant?
-    if(!typeLimited(strAction, self.chatQueue[strAction].eventType))
+    if(!typeLimited(strAction, self.chatQueue[strAction].eventType)) {
       return (true);
+    }
   }
 
   return (false);
 }
 
 typeLimited(strAction, strType) {
-  if(!isDefined(anim.eventTypeMinWait[strAction][strType]))
+  if(!isDefined(anim.eventTypeMinWait[strAction][strType])) {
     return (false);
+  }
 
-  if(!isDefined(self.squad.nextTypeSayTimes[strAction][strType]))
+  if(!isDefined(self.squad.nextTypeSayTimes[strAction][strType])) {
     return (false);
+  }
 
-  if(GetTime() > self.squad.nextTypeSayTimes[strAction][strType])
+  if(GetTime() > self.squad.nextTypeSayTimes[strAction][strType]) {
     return (false);
+  }
 
   return (true);
 }
 
 doTypeLimit(strAction, strType) {
-  if(!isDefined(anim.eventTypeMinWait[strAction][strType]))
+  if(!isDefined(anim.eventTypeMinWait[strAction][strType])) {
     return;
+  }
 
   self.squad.nextTypeSayTimes[strAction][strType] = GetTime() + anim.eventTypeMinWait[strAction][strType];
 }
 
 bcIsSniper() {
-  if(IsPlayer(self))
+  if(IsPlayer(self)) {
     return false;
+  }
 
-  if(self isExposed())
+  if(self isExposed()) {
     return false;
+  }
 
   return IsSniperRifle(self.weapon);
 }
@@ -2481,8 +2531,9 @@ squadHasOfficer(squad) {
 isOfficer() {
   fullRank = self getRank();
 
-  if(!isDefined(fullRank))
+  if(!isDefined(fullRank)) {
     return false;
+  }
 
   if(fullRank == "sergeant" ||
     fullRank == "lieutenant" ||
@@ -2495,17 +2546,21 @@ isOfficer() {
 }
 
 bcGetClaimedNode() {
-  if(IsPlayer(self))
+  if(IsPlayer(self)) {
     return self.node;
-  else
+  }
+  else {
     return self GetClaimedNode();
+  }
 }
 
 enemy_team_name() {
-  if(self IsBadGuy())
+  if(self IsBadGuy()) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 getName() {
@@ -2715,19 +2770,24 @@ getDirectionReferenceSide( vOrigin, vPoint, vReference )
 	angle = anglesToReference[ 1 ] - anglesToPoint[ 1 ];
 	angle += 360;
 	angle = Int( angle ) % 360;
-	if( angle > 180 )
+	if( angle > 180 ) {
 		angle -= 360;
+	}
 
-	if( angle > 2 && angle < 45 )
+	if( angle > 2 && angle < 45 ) {
 		 side = "right";
-	else if( angle < - 2 && angle > - 45 )
+	}
+	else if( angle < - 2 && angle > - 45 ) {
 		 side = "left";
+	}
 	else
 	{
-		if( Distance( vOrigin, vPoint ) < Distance( vOrigin, vReference ) )
+		if( Distance( vOrigin, vPoint ) < Distance( vOrigin, vReference ) ) {
 			side = "front";
-		else
+		}
+		else {
 			side = "rear";
+		}
 	}
 
 	return( side );
@@ -2742,14 +2802,18 @@ getDirectionFacingFlank(vOrigin, vPoint, vFacing) {
   angle += 360;
   angle = Int(angle) % 360;
 
-  if(angle > 315 || angle < 45)
+  if(angle > 315 || angle < 45) {
     direction = "front";
-  else if(angle < 135)
+  }
+  else if(angle < 135) {
     direction = "right";
-  else if(angle < 225)
+  }
+  else if(angle < 225) {
     direction = "rear";
-  else
+  }
+  else {
     direction = "left";
+  }
 
   return (direction);
 }
@@ -2806,29 +2870,40 @@ getDirectionCompass(vOrigin, vPoint) {
   northYaw = GetNorthYaw();
   angle -= northYaw;
 
-  if(angle < 0)
+  if(angle < 0) {
     angle += 360;
-  else if(angle > 360)
+  }
+  else if(angle > 360) {
     angle -= 360;
+  }
 
-  if(angle < 22.5 || angle > 337.5)
+  if(angle < 22.5 || angle > 337.5) {
     direction = "north";
-  else if(angle < 67.5)
+  }
+  else if(angle < 67.5) {
     direction = "northwest";
-  else if(angle < 112.5)
+  }
+  else if(angle < 112.5) {
     direction = "west";
-  else if(angle < 157.5)
+  }
+  else if(angle < 157.5) {
     direction = "southwest";
-  else if(angle < 202.5)
+  }
+  else if(angle < 202.5) {
     direction = "south";
-  else if(angle < 247.5)
+  }
+  else if(angle < 247.5) {
     direction = "southeast";
-  else if(angle < 292.5)
+  }
+  else if(angle < 292.5) {
     direction = "east";
-  else if(angle < 337.5)
+  }
+  else if(angle < 337.5) {
     direction = "northeast";
-  else
+  }
+  else {
     direction = "impossible";
+  }
 
   return (direction);
 }
@@ -2898,8 +2973,9 @@ getVectorRightAngle(vDir) {
 getVectorArrayAverage(avAngles) {
   vDominantDir = (0, 0, 0);
 
-  for(i = 0; i < avAngles.size; i++)
+  for(i = 0; i < avAngles.size; i++) {
     vDominantDir += avAngles[i];
+  }
 
   return (vDominantDir[0] / avAngles.size, vDominantDir[1] / avAngles.size, vDominantDir[2] / avAngles.size);
 }
@@ -3323,14 +3399,17 @@ addOrderAlias(type, modifier) {
 }
 
 initContact(squadName) {
-  if(!isDefined(self.squadList[squadName].calledOut))
+  if(!isDefined(self.squadList[squadName].calledOut)) {
     self.squadList[squadName].calledOut = false;
+  }
 
-  if(!isDefined(self.squadList[squadName].firstContact))
+  if(!isDefined(self.squadList[squadName].firstContact)) {
     self.squadList[squadName].firstContact = 2000000000;
+  }
 
-  if(!isDefined(self.squadList[squadName].lastContact))
+  if(!isDefined(self.squadList[squadName].lastContact)) {
     self.squadList[squadName].lastContact = 0;
+  }
 }
 
 shutdownContact(squadName) {
@@ -3345,10 +3424,12 @@ createChatEvent(eventAction, eventType, priority) {
   chatEvent.eventType = eventType;
   chatEvent.eventAction = eventAction;
 
-  if(isDefined(priority))
+  if(isDefined(priority)) {
     chatEvent.priority = priority;
-  else
+  }
+  else {
     chatEvent.priority = anim.eventPriority[eventAction][eventType];
+  }
 
   chatEvent.expireTime = GetTime() + anim.eventDuration[eventAction][eventType];
 
@@ -3625,8 +3706,9 @@ playFlavorBurstLine(burster, alias) {
 
   soundOrg Delete();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("burst_line_done");
+  }
 }
 
 flavorBurstLineDebug(burster, alias) {
@@ -3645,11 +3727,13 @@ flavorBurstLineDebug(burster, alias) {
 /*
 debugPrintEvents()
 {
-	if( !isalive( self ) )
+	if( !isalive( self ) ) {
 		return;
+	}
 
-	if( GetDvar( "debug_bcshowqueue" ) != self.team && GetDvar( "debug_bcshowqueue" ) != "all" )
+	if( GetDvar( "debug_bcshowqueue" ) != self.team && GetDvar( "debug_bcshowqueue" ) != "all" ) {
 		return;
+	}
 
 	self endon( "death" );
 	self notify( "debugPrintEvents" );
@@ -3675,27 +3759,33 @@ debugPrintEvents()
 
 debugQueueEvents()
 {
-	if( GetDvar( "debug_bcresponse" ) == "on" )
+	if( GetDvar( "debug_bcresponse" ) == "on" ) {
 		self thread printQueueEvent( "response" );
-	if( GetDvar( "debug_bcthreat" ) == "on" )
+	}
+	if( GetDvar( "debug_bcthreat" ) == "on" ) {
 		self thread printQueueEvent( "threat" );
-	if( GetDvar( "debug_bcinform" ) == "on" )
+	}
+	if( GetDvar( "debug_bcinform" ) == "on" ) {
 		self thread printQueueEvent( "inform" );
-	if( GetDvar( "debug_bcorder" ) == "on" )
+	}
+	if( GetDvar( "debug_bcorder" ) == "on" ) {
 		self thread printQueueEvent( "order" );
+	}
 }
 
 printAboveHead( string, duration, offset )
 {
 	self endon( "death" );
 
-	if( !isDefined( offset ) )
+	if( !isDefined( offset ) ) {
 		offset = ( 0, 0, 0 );
+	}
 
 	for( i = 0; i < ( duration * 2 ); i++ )
 	{
-		if( !isalive( self ) )
+		if( !isalive( self ) ) {
 			return;
+		}
 
 		aboveHead = self GetShootAtPos() + ( 0, 0, 10 ) + offset;
 		Print3d( aboveHead, string, ( 1, 0, 0 ), 1, 0.5 );	// origin, text, RGB, alpha, scale
@@ -3710,10 +3800,12 @@ printQueueEvent( eventAction )
 	if( self.chatQueue[ eventAction ].expireTime > 0 && !isDefined( self.chatQueue[ eventAction ].printed ) )
 	{
 		Print( "QUEUE EVENT " + eventAction + "_" + self.chatQueue[ eventAction ].eventType + ": " );
-		if( time > self.chatQueue[ eventAction ].expireTime )
+		if( time > self.chatQueue[ eventAction ].expireTime ) {
 			PrintLn( "^2 missed by " + ( time - self.chatQueue[ eventAction ].expireTime ) + "ms" );
-		else
+		}
+		else {
 			PrintLn( "slack of " + ( self.chatQueue[ eventAction ].expireTime - time ) + "ms" );
+		}
 
 		self.chatQueue[ eventAction ].printed = true;
 	}
@@ -3721,8 +3813,9 @@ printQueueEvent( eventAction )
 */
 
 battleChatter_canPrint() {
-  if(GetDebugDvar("debug_bcprint") == self.team || GetDebugDvar("debug_bcprint") == "all")
+  if(GetDebugDvar("debug_bcprint") == self.team || GetDebugDvar("debug_bcprint") == "all") {
     return (true);
+  }
 
     return (false);
 }
@@ -3922,11 +4015,13 @@ resetNextSayTimes(team, action) {
   for(index = 0; index < soldiers.size; index++) {
     soldier = soldiers[index];
 
-    if(!isAlive(soldier))
+    if(!isAlive(soldier)) {
       continue;
+    }
 
-    if(!isDefined(soldier.battlechatter))
+    if(!isDefined(soldier.battlechatter)) {
       continue;
+    }
 
     soldier.nextSayTimes[action] = GetTime() + 350;
     soldier.squad.nextSayTimes[action] = GetTime() + 350;
@@ -3935,10 +4030,12 @@ resetNextSayTimes(team, action) {
 
 voice_is_british_based() {
   self endon("death");
-  if(self.voice == "british" || self.voice == "spanish" || self.voice == "italian" || self.voice == "german")
+  if(self.voice == "british" || self.voice == "spanish" || self.voice == "italian" || self.voice == "german") {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 friendlyfire_warning() {

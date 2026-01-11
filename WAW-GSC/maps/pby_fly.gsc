@@ -4993,8 +4993,9 @@ ptboat_engine_fx_control() {
     while(self GetSpeed() < 12 && !self.fake_motion) {
       wait(0.1);
     }
-    if(isDefined(self.churn_fx))
+    if(isDefined(self.churn_fx)) {
       self.churn_fx Delete();
+    }
     self.churn_fx = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pt_churn"], "tag_churn_fx");
     while(self GetSpeed() >= 12 || self.fake_motion) {
       wait(0.1);
@@ -7891,8 +7892,9 @@ pby_veh_idle(idle, delay_time, pontoons_up, hatch_open) {
   }
   self notify("stop_pby_idling");
   self.current_idle = "none";
-  if(isDefined(self.current_idle_anim))
+  if(isDefined(self.current_idle_anim)) {
     self ClearAnim(self.current_idle_anim, 0);
+  }
   if(idle == "fly" || idle == "fly_up_open" || idle == "fly_up") {
     if(isDefined(pontoons_up) || idle == "fly_up_open" || idle == "fly_up") {
       if(isDefined(hatch_open) || idle == "fly_up_open") {
@@ -8302,10 +8304,12 @@ turret_ads_reminder() {
   level.ads_remind_text.alpha = 1.0;
   level.ads_remind_text.sort = 20;
   level.ads_remind_text.font = "default";
-  if(level.console)
+  if(level.console) {
     str_ref = &"PBY_FLY_ADS_HINT";
-  else
+  }
+  else {
     str_ref = &"SCRIPT_PLATFORM_PBY_FLY_ADS_HINT";
+  }
   level.ads_remind_text SetText(str_ref);
   level thread turret_ads_reminder_off();
   level thread turret_ads_reminder_press();

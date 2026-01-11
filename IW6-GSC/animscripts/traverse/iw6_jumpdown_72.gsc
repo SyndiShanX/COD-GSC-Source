@@ -4,10 +4,12 @@
 ****************************************************/
 
 main() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     animscripts\traverse\shared::dog_jump_down(7, 0.7);
-  else
+  }
+  else {
     human_traverse();
+  }
 }
 
 #using_animtree("generic_human");

@@ -48,8 +48,9 @@ stealth_plugin_basic(var_0) {
     }
   }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     stealth_basic_states_custom(var_0);
+  }
 
   self._stealth.plugins.basic = 1;
 }
@@ -87,11 +88,13 @@ stealth_pre_spotted_function_default() {
 }
 
 stealth_plugin_threat(var_0) {
-  if(!isDefined(self._stealth.plugins.threat))
+  if(!isDefined(self._stealth.plugins.threat)) {
     maps\_stealth_threat_enemy::stealth_threat_enemy_main();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     stealth_threat_behavior_replace(var_0);
+  }
 }
 
 stealth_enable_seek_player_on_spotted() {
@@ -103,11 +106,13 @@ stealth_disable_seek_player_on_spotted() {
 }
 
 stealth_threat_behavior_custom(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     maps\_stealth_threat_enemy::enemy_set_threat_behavior(var_0);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     maps\_stealth_threat_enemy::enemy_set_threat_anim_behavior(var_1);
+  }
 }
 
 stealth_threat_behavior_replace(var_0, var_1) {
@@ -118,8 +123,9 @@ stealth_threat_behavior_replace(var_0, var_1) {
 
   if(isDefined(var_0)) {
     while(isDefined(self._stealth.behavior.ai_functions[var_2][var_5])) {
-      if(!isDefined(var_0[var_5]))
+      if(!isDefined(var_0[var_5])) {
         var_0[var_5] = maps\_stealth_shared_utilities::ai_get_behavior_function(var_2, var_5);
+      }
 
       var_4++;
       var_5 = var_3 + var_4;
@@ -144,11 +150,13 @@ stealth_alert_level_duration(var_0) {
 }
 
 stealth_plugin_corpse(var_0) {
-  if(!isDefined(self._stealth.plugins.corpse))
+  if(!isDefined(self._stealth.plugins.corpse)) {
     maps\_stealth_corpse_enemy::stealth_corpse_enemy_main();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     stealth_corpse_behavior_custom(var_0);
+  }
 }
 
 stealth_corpse_behavior_custom(var_0) {
@@ -188,14 +196,16 @@ stealth_plugin_event_all(var_0) {
   maps\_stealth_event_enemy::stealth_event_mod_all();
 
   if(isDefined(var_0)) {
-    foreach(var_3, var_2 in var_0)
+    foreach(var_3, var_2 in var_0) {
     maps\_stealth_event_enemy::stealth_event_mod(var_3, var_2);
+    }
   }
 }
 
 stealth_plugin_event_main() {
-  if(!isDefined(self._stealth.plugins.event))
+  if(!isDefined(self._stealth.plugins.event)) {
     maps\_stealth_event_enemy::stealth_event_enemy_main();
+  }
 }
 
 stealth_plugin_event_heard_scream(var_0, var_1) {
@@ -219,11 +229,13 @@ stealth_plugin_event_custom(var_0, var_1, var_2, var_3) {
 }
 
 stealth_plugin_aicolor(var_0) {
-  if(!isDefined(self._stealth.plugins.color_system))
+  if(!isDefined(self._stealth.plugins.color_system)) {
     maps\_stealth_color_friendly::stealth_color_friendly_main();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     stealth_color_state_custom(var_0);
+  }
 }
 
 stealth_color_state_custom(var_0) {
@@ -235,11 +247,13 @@ stealth_color_state_default() {
 }
 
 stealth_plugin_accuracy(var_0) {
-  if(!isDefined(self._stealth.plugins.accaracy_mod))
+  if(!isDefined(self._stealth.plugins.accaracy_mod)) {
     maps\_stealth_accuracy_friendly::stealth_accuracy_friendly_main();
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     stealth_accuracy_state_custom(var_0);
+  }
 }
 
 stealth_accuracy_state_custom(var_0) {
@@ -275,8 +289,9 @@ stealth_is_everything_normal() {
       var_3 = maps\_stealth_shared_utilities::group_get_ai_in_group(var_7);
 
       foreach(var_5 in var_3) {
-        if(!var_5 maps\_utility::ent_flag("_stealth_normal"))
+        if(!var_5 maps\_utility::ent_flag("_stealth_normal")) {
           return 0;
+        }
       }
     }
   }
@@ -358,10 +373,12 @@ stealth_ai_idle_and_react(var_0, var_1, var_2, var_3, var_4) {
   var_6 = "stop_loop";
   var_0.allowdeath = 1;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     thread maps\_anim::anim_generic_custom_animmode_loop(var_0, "gravity", var_1, var_3);
-  else
+  }
+  else {
     thread maps\_anim::anim_generic_loop(var_0, var_1, var_3);
+  }
 
   var_0 maps\_stealth_shared_utilities::ai_set_custom_animation_reaction(self, var_2, var_3, var_6);
   maps\_utility::add_wait(maps\_utility::waittill_msg, "stop_idle_proc");
@@ -480,8 +497,9 @@ stealth_set_group_default() {
 }
 
 stealth_set_group_proc(var_0) {
-  if(isDefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup)) {
     level._stealth.group.groups[self.script_stealthgroup] = common_scripts\utility::array_remove(level._stealth.group.groups[self.script_stealthgroup], self);
+  }
 
   self.script_stealthgroup = maps\_utility::string(var_0);
 
@@ -501,12 +519,14 @@ enable_stealth_system() {
   common_scripts\utility::flag_set("_stealth_enabled");
   var_0 = getaispeciesarray("all", "all");
 
-  foreach(var_3, var_2 in var_0)
+  foreach(var_3, var_2 in var_0) {
   var_2 enable_stealth_for_ai();
+  }
 
   foreach(var_5 in level.players) {
-    if(var_5 maps\_utility::ent_flag_exist("_stealth_enabled"))
+    if(var_5 maps\_utility::ent_flag_exist("_stealth_enabled")) {
       var_5 maps\_utility::ent_flag_set("_stealth_enabled");
+    }
 
     var_5 maps\_stealth_visibility_friendly::friendly_visibility_logic();
   }
@@ -518,30 +538,35 @@ disable_stealth_system() {
   common_scripts\utility::flag_clear("_stealth_enabled");
   var_0 = getaispeciesarray("all", "all");
 
-  foreach(var_3, var_2 in var_0)
+  foreach(var_3, var_2 in var_0) {
   var_2 disable_stealth_for_ai();
+  }
 
   foreach(var_5 in level.players) {
     var_5.maxvisibledist = 8192;
 
-    if(var_5 maps\_utility::ent_flag_exist("_stealth_enabled"))
+    if(var_5 maps\_utility::ent_flag_exist("_stealth_enabled")) {
       var_5 maps\_utility::ent_flag_clear("_stealth_enabled");
+    }
   }
 
   maps\_stealth_visibility_system::system_event_change("spotted");
 }
 
 enable_stealth_for_ai() {
-  if(maps\_utility::ent_flag_exist("_stealth_enabled"))
+  if(maps\_utility::ent_flag_exist("_stealth_enabled")) {
     maps\_utility::ent_flag_set("_stealth_enabled");
+  }
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     thread maps\_stealth_visibility_friendly::friendly_visibility_logic();
+  }
 }
 
 disable_stealth_for_ai() {
-  if(maps\_utility::ent_flag_exist("_stealth_enabled"))
+  if(maps\_utility::ent_flag_exist("_stealth_enabled")) {
     maps\_utility::ent_flag_clear("_stealth_enabled");
+  }
 
   self.maxvisibledist = 8192;
 }

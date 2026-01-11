@@ -41,8 +41,9 @@ main() {
 debug_test_next_mission() {
   wait 10;
 
-  while(getdvarint("test_next_mission") < 1)
+  while(getdvarint("test_next_mission") < 1) {
     wait 3;
+  }
 
   _nextmission();
 }
@@ -51,8 +52,9 @@ _setmissiondvar(var_0, var_1) {
   if(maps\_cheat::is_cheating() || common_scripts\utility::flag("has_cheated")) {
     return;
   }
-  if(getdvar("mis_cheat") == "1")
+  if(getdvar("mis_cheat") == "1") {
     return;
+  }
 }
 
 _nextmission() {
@@ -88,14 +90,17 @@ _nextmission() {
   level.missionsettings setlevelcompleted(var_0);
   updategamerprofile();
 
-  if(level.missionsettings hasachievement(var_0))
+  if(level.missionsettings hasachievement(var_0)) {
     maps\_utility::giveachievement_wrapper(level.missionsettings getachievement(var_0));
+  }
 
-  if(level.missionsettings haslevelveteranaward(var_0) && getlevelcompleted(var_0) == 4 && level.missionsettings check_other_haslevelveteranachievement(var_0))
+  if(level.missionsettings haslevelveteranaward(var_0) && getlevelcompleted(var_0) == 4 && level.missionsettings check_other_haslevelveteranachievement(var_0)) {
     maps\_utility::giveachievement_wrapper(level.missionsettings getlevelveteranaward(var_0));
+  }
 
-  if(level.missionsettings hasmissionhardenedaward() && level.missionsettings getlowestskill() > 2)
+  if(level.missionsettings hasmissionhardenedaward() && level.missionsettings getlowestskill() > 2) {
     maps\_utility::giveachievement_wrapper(level.missionsettings gethardenedaward());
+  }
 
   level.missionsettings checkcampaigncompleted();
   var_2 = level.missionsettings.levels.size;
@@ -165,8 +170,9 @@ _nextmission() {
 updatesppercent() {
   var_0 = int(gettotalpercentcompletesp() * 100);
 
-  if(getdvarint("mis_cheat") == 0)
+  if(getdvarint("mis_cheat") == 0) {
     level.player setlocalplayerprofiledata("percentCompleteSP", var_0);
+  }
 
   return var_0;
 }
@@ -195,8 +201,9 @@ getstat_progression(var_0) {
   var_4 = 0;
 
   for(var_5 = 0; var_5 < level.missionsettings.levels.size; var_5++) {
-    if(int(var_1[var_5]) >= var_0)
+    if(int(var_1[var_5]) >= var_0) {
       var_2++;
+    }
   }
 
   var_6 = var_2 / level.missionsettings.levels.size * 100;
@@ -242,8 +249,9 @@ setlevelcompleted(var_0) {
   var_2 = "";
   var_3 = level.gameskill;
 
-  if(level.script == "killhouse" || level.script == "coup" || level.script == "aftermath")
+  if(level.script == "killhouse" || level.script == "coup" || level.script == "aftermath") {
     var_3 = 3;
+  }
 
   for(var_4 = 0; var_4 < var_1.size; var_4++) {
     if(var_4 != var_0) {
@@ -262,8 +270,9 @@ setlevelcompleted(var_0) {
   var_5 = 0;
 
   for(var_6 = 0; var_6 < var_2.size; var_6++) {
-    if(int(var_2[var_6]) > 0)
+    if(int(var_2[var_6]) > 0) {
       var_5 = var_6;
+    }
   }
 
   _sethighestmissionifnotcheating(var_5);
@@ -296,10 +305,12 @@ getlevelskill(var_0) {
 }
 
 getmissiondvarstring(var_0) {
-  if(var_0 < 9)
+  if(var_0 < 9) {
     return "mis_0" + (var_0 + 1);
-  else
+  }
+  else {
     return "mis_" + (var_0 + 1);
+  }
 }
 
 getlowestskill() {
@@ -307,8 +318,9 @@ getlowestskill() {
   var_1 = 4;
 
   for(var_2 = 0; var_2 < self.levels.size; var_2++) {
-    if(int(var_0[var_2]) < var_1)
+    if(int(var_0[var_2]) < var_1) {
       var_1 = int(var_0[var_2]);
+    }
   }
 
   return var_1;
@@ -318,8 +330,9 @@ isallmisioncompleted() {
   var_0 = level.player getlocalplayerprofiledata("missionHighestDifficulty");
 
   for(var_1 = 0; var_1 < self.levels.size; var_1++) {
-    if(int(var_0[var_1]) == 0)
+    if(int(var_0[var_1]) == 0) {
       return 0;
+    }
   }
 
   return 1;
@@ -331,18 +344,22 @@ checkcampaigncompleted() {
   var_2 = 1;
 
   for(var_3 = 0; var_3 < self.levels.size - 1; var_3++) {
-    if(int(var_0[var_3]) == 0)
+    if(int(var_0[var_3]) == 0) {
       var_1 = 0;
+    }
 
-    if(int(var_0[var_3]) < 3)
+    if(int(var_0[var_3]) < 3) {
       var_2 = 0;
+    }
   }
 
-  if(var_1)
+  if(var_1) {
     maps\_utility::giveachievement_wrapper("CAMPAIGN_COMPLETE");
+  }
 
-  if(var_2)
+  if(var_2) {
     maps\_utility::giveachievement_wrapper("DEEP_AND_HARD");
+  }
 }
 
 createmission(var_0) {
@@ -362,8 +379,9 @@ addlevel(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self.levels[var_7].skipssuccess = var_3;
   self.levels[var_7].veteran_achievement = var_4;
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     self.levels[var_7].fade_time = var_5;
+  }
 }
 
 addprereq(var_0) {
@@ -373,8 +391,9 @@ addprereq(var_0) {
 
 getlevelindex(var_0) {
   foreach(var_3, var_2 in self.levels) {
-    if(var_2.name == var_0)
+    if(var_2.name == var_0) {
       return var_3;
+    }
   }
 
   return undefined;
@@ -397,24 +416,29 @@ getlevelveteranaward(var_0) {
 }
 
 getfadetime(var_0) {
-  if(!isDefined(self.levels[var_0].fade_time))
+  if(!isDefined(self.levels[var_0].fade_time)) {
     return undefined;
+  }
 
   return self.levels[var_0].fade_time;
 }
 
 haslevelveteranaward(var_0) {
-  if(isDefined(self.levels[var_0].veteran_achievement))
+  if(isDefined(self.levels[var_0].veteran_achievement)) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 hasachievement(var_0) {
-  if(isDefined(self.levels[var_0].achievement))
+  if(isDefined(self.levels[var_0].achievement)) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 check_other_haslevelveteranachievement(var_0) {
@@ -426,8 +450,9 @@ check_other_haslevelveteranachievement(var_0) {
       continue;
     }
     if(self.levels[var_1].veteran_achievement == self.levels[var_0].veteran_achievement) {
-      if(getlevelcompleted(var_1) < 4)
+      if(getlevelcompleted(var_1) < 4) {
         return 0;
+      }
     }
   }
 
@@ -435,8 +460,9 @@ check_other_haslevelveteranachievement(var_0) {
 }
 
 skipssuccess(var_0) {
-  if(!isDefined(self.levels[var_0].skipssuccess))
+  if(!isDefined(self.levels[var_0].skipssuccess)) {
     return 0;
+  }
 
   return self.levels[var_0].skipssuccess;
 }
@@ -446,16 +472,19 @@ gethardenedaward() {
 }
 
 hasmissionhardenedaward() {
-  if(isDefined(self.hardenedaward))
+  if(isDefined(self.hardenedaward)) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 getnextlevelindex() {
   for(var_0 = 0; var_0 < self.levels.size; var_0++) {
-    if(!getlevelskill(var_0))
+    if(!getlevelskill(var_0)) {
       return var_0;
+    }
   }
 
   return 0;

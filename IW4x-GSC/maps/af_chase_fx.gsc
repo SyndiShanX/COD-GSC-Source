@@ -113,10 +113,12 @@ main() {
   level._effect["light_shaft_ground_dust_large_yel"] = LoadFX("dust/light_shaft_ground_dust_large_yel");
   level._effect["light_shaft_motes_afchase"] = LoadFX("dust/light_shaft_motes_afchase");
 
-  if(level.script == "ending")
+  if(level.script == "ending") {
     level._effect["light_glow_white_bulb"] = LoadFX("dust/light_shaft_motes_afchase");
-  else
+  }
+  else {
     level._effect["light_glow_white_bulb"] = LoadFX("misc/light_glow_white_bulb");
+  }
 
   level._effect["splash_underwater_afchase"] = loadfx("water/splash_underwater_afchase");
   level._effect["rapids_splash_0x1000"] = LoadFX("water/rapids_splash_0x1000");

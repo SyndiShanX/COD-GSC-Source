@@ -75,8 +75,9 @@ begin_atrium() {
   common_scripts\utility::trigger_off("TRIG_player_exit_truck", "targetname");
   common_scripts\utility::flag_wait("atrium_done");
 
-  foreach(var_1 in level.allies)
+  foreach(var_1 in level.allies) {
   var_1.ignoresuppression = 1;
+  }
 }
 
 spawn_truck_setup_riders() {
@@ -202,11 +203,13 @@ grenades_merrick(var_0) {
   for(;;) {
     var_2 = gettime() - var_1;
 
-    if(!common_scripts\utility::flag("FLAG_mk32_shot1") && var_2 >= 500)
+    if(!common_scripts\utility::flag("FLAG_mk32_shot1") && var_2 >= 500) {
       common_scripts\utility::flag_set("FLAG_mk32_shot1");
+    }
 
-    if(!common_scripts\utility::flag("FLAG_mk32_shot2") && var_2 >= 800)
+    if(!common_scripts\utility::flag("FLAG_mk32_shot2") && var_2 >= 800) {
       common_scripts\utility::flag_set("FLAG_mk32_shot2");
+    }
 
     if(!common_scripts\utility::flag("FLAG_mk32_atrium_detonate") && var_2 >= 2200) {
       common_scripts\utility::flag_set("FLAG_mk32_atrium_detonate");
@@ -232,8 +235,9 @@ track_gren(var_0, var_1, var_2, var_3) {
   playFXOnTag(common_scripts\utility::getfx("rpg_geotrail4"), var_5, "tag_origin");
   thread gren_explosion_sphere(var_0, var_3);
 
-  if(level.trailwait > 0)
+  if(level.trailwait > 0) {
     wait(level.trailwait);
+  }
 
   var_7 = playFXOnTag(level._effect[level.rpgfx], var_5, "tag_fx");
 }
@@ -265,8 +269,9 @@ wall_chunks_show() {
   var_2 delete();
   var_0 show();
 
-  foreach(var_4 in var_1)
+  foreach(var_4 in var_1) {
   var_4 show();
+  }
 
   var_6 = getent("bust_wall_clip", "targetname");
   var_6 solid();
@@ -278,8 +283,9 @@ wall_chunks_hide() {
   var_1 = getEntArray("bust_thru_models", "targetname");
   var_0 hide();
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 hide();
+  }
 
   var_5 = getent("bust_wall_clip", "targetname");
   var_5 notsolid();
@@ -312,8 +318,9 @@ start_atrium_combat() {
   var_0 = array_spawn_targetname_allow_fail_setthreat_insideaware("atrium_wave_1");
   var_1 = array_spawn_targetname_allow_fail_setthreat_insideaware("atrium_mk32_guys");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3.accuracy = 0.01;
+  }
 
   thread maps\_utility::autosave_tactical();
   maps\_utility::activate_trigger_with_targetname("TRIG_advance_allies_wave1");
@@ -387,8 +394,9 @@ atrium_done(var_0) {
   thread triggers_on_fingers_vo();
   maps\enemyhq_code::safe_activate_trigger_with_targetname("TRIG_atrium_done");
 
-  foreach(var_2 in level.allies)
+  foreach(var_2 in level.allies) {
   var_2.ignoresuppression = 0;
+  }
 }
 
 triggers_on_fingers_vo() {
@@ -402,8 +410,9 @@ dog_wait_anim_finished() {
   self setgoalnode(var_0);
   common_scripts\utility::flag_wait("FLAG_player_exit_truck");
 
-  if(!isDefined(self.script_forcecolor))
+  if(!isDefined(self.script_forcecolor)) {
     maps\_utility::enable_ai_color();
+  }
 
   maps\enemyhq_code::unlock_player_control();
 }
@@ -428,13 +437,15 @@ kill_after_anim(var_0) {
 reach_goal_die() {
   self waittill("goal");
 
-  if(!maps\enemyhq_code::raven_player_can_see_ai(self))
+  if(!maps\enemyhq_code::raven_player_can_see_ai(self)) {
     self delete();
+  }
 }
 
 ai_group_killcount_flag_set(var_0, var_1, var_2) {
-  while(maps\_utility::get_ai_group_sentient_count(var_0) > var_1)
+  while(maps\_utility::get_ai_group_sentient_count(var_0) > var_1) {
     wait 0.05;
+  }
 
   common_scripts\utility::flag_set(var_2);
 }
@@ -442,23 +453,26 @@ ai_group_killcount_flag_set(var_0, var_1, var_2) {
 check_triggers_flagset(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 thread set_flag_in_trigger();
+  }
 }
 
 set_flag_in_trigger() {
   self waittill("trigger");
 
-  if(isDefined(self.script_flag_set))
+  if(isDefined(self.script_flag_set)) {
     common_scripts\utility::flag_set(self.script_flag_set);
+  }
 }
 
 check_trigger_flagset(var_0) {
   var_1 = getent(var_0, "targetname");
   var_1 waittill("trigger");
 
-  if(isDefined(var_1.script_flag_set))
+  if(isDefined(var_1.script_flag_set)) {
     common_scripts\utility::flag_set(var_1.script_flag_set);
+  }
 }
 
 array_spawn_targetname_allow_fail_setthreat_insideaware(var_0) {
@@ -498,8 +512,9 @@ watch_inside_trigger() {
       }
 
       if(var_1 == level.player) {
-        if(level.atrium_player_outside == 1)
+        if(level.atrium_player_outside == 1) {
           setplayerinside();
+        }
 
         continue;
       }
@@ -530,8 +545,9 @@ watch_outside_trigger() {
       }
 
       if(var_1 == level.player) {
-        if(level.atrium_player_outside == 0)
+        if(level.atrium_player_outside == 0) {
           setplayeroutside();
+        }
 
         continue;
       }

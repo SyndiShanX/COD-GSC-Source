@@ -70,15 +70,17 @@ nodeath_challenge(str_notify) {
   self waittill("mission_finished");
   n_deaths = get_player_stat("deaths");
 
-  if(n_deaths == 0)
+  if(n_deaths == 0) {
     self notify(str_notify);
+  }
 }
 
 enemy_kills_with_beartrap_challenge(str_notify) {
   self waittill("mission_finished");
 
-  if(isDefined(level.num_beartrap_catches) && level.num_beartrap_catches >= level.num_beartrap_challenge_kills)
+  if(isDefined(level.num_beartrap_catches) && level.num_beartrap_catches >= level.num_beartrap_challenge_kills) {
     self notify(str_notify);
+  }
 }
 
 kill_three_enemies_with_motar_beartrap_challenge(str_notify) {
@@ -118,8 +120,9 @@ grenade_dive_challenge(str_notify) {
 player_flakjacket_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
   if(isDefined(e_attacker) && isDefined(e_attacker.team) && e_attacker.team == "axis") {
     if((str_means_of_death == "MOD_GRENADE" || str_means_of_death == "MOD_GRENADE_SPLASH") && isDefined(level.player.just_used_dtp) && level.player.just_used_dtp) {
-      if(level.player hasperk("specialty_flakjacket"))
+      if(level.player hasperk("specialty_flakjacket")) {
         n_damage = 10;
+      }
     }
   }
 
@@ -128,8 +131,9 @@ player_flakjacket_damage_override(e_inflictor, e_attacker, n_damage, n_flags, st
 
 grenade_dive_divetoprone_watcher() {
   while(true) {
-    while(!self.divetoprone)
+    while(!self.divetoprone) {
       wait 0.05;
+    }
 
     self.just_used_dtp = 1;
     self thread grenade_dive_watch_standup();
@@ -142,8 +146,9 @@ grenade_dive_divetoprone_watcher() {
 grenade_dive_watch_standup() {
   self endon("stop_watching_standup");
 
-  while(self getstance() == "prone")
+  while(self getstance() == "prone") {
     wait 0.5;
+  }
 
   self notify("not_prone");
 }
@@ -152,8 +157,9 @@ destroy_heli_using_bullets(str_notify) {
   level.hind_bullet_only_used = 1;
   level waittill("hind_crash");
 
-  if(!level.hind_bullet_only_used)
+  if(!level.hind_bullet_only_used) {
     self notify(str_notify);
+  }
 }
 
 enemy_kills_using_sniper_tree_challenge(str_notify) {
@@ -191,12 +197,14 @@ check_mortar_killcount() {
       continue;
     }
 
-    if(guy.targetname == "drone" && isDefined(guy.dead))
+    if(guy.targetname == "drone" && isDefined(guy.dead)) {
       n_killcount++;
+    }
   }
 
-  if(n_killcount >= 5)
+  if(n_killcount >= 5) {
     flag_set("mortar_challenge_complete");
+  }
 }
 
 level_precache() {
@@ -291,8 +299,9 @@ skipto_cleanup() {
   if(skipto == "eventname") {
     return;
   }
-  if(skipto == "eventname2")
+  if(skipto == "eventname2") {
     return;
+  }
 }
 
 level_fade_out(m_player_body) {

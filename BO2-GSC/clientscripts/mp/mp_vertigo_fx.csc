@@ -58,8 +58,9 @@ main() {
   precache_fxanim_props_dlc();
   disablefx = getdvarint(#"_id_C9B177D6");
 
-  if(!isDefined(disablefx) || disablefx <= 0)
+  if(!isDefined(disablefx) || disablefx <= 0) {
     precache_scripted_fx();
+  }
 }
 
 #using_animtree("fxanim_props");
@@ -99,8 +100,9 @@ fxanim_init(localclientnum) {
   fxanims = getEntArray(localclientnum, "fxanim_level", "targetname");
 
   foreach(fxanim in fxanims) {
-    if(isDefined(fxanim.fxanim_scene_1) && fxanim.fxanim_scene_1 == "blinds_impact")
+    if(isDefined(fxanim.fxanim_scene_1) && fxanim.fxanim_scene_1 == "blinds_impact") {
       fxanim thread blind_animate();
+    }
   }
 }
 

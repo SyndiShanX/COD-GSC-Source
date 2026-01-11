@@ -41,8 +41,9 @@ start() {
   maps\black_ice_util::player_start("player_start_camp");
   thread basecamp_dof();
 
-  if(!isDefined(level._bravo) || level._bravo.size < 2)
+  if(!isDefined(level._bravo) || level._bravo.size < 2) {
     maps\black_ice_util::spawn_bravo();
+  }
 
   thread maps\black_ice_anim::swim_truck_surface_anim();
   level.breach_anim_node = common_scripts\utility::getstruct("breach_anim_node", "script_noteworthy");
@@ -178,8 +179,9 @@ bc_helo_reinforce() {
   var_2 maps\_anim::anim_first_frame_solo(level.op_helo, "arrive");
 
   foreach(var_4 in var_1) {
-    if(isDefined(var_4) && isai(var_4) && isalive(var_4))
+    if(isDefined(var_4) && isai(var_4) && isalive(var_4)) {
       var_2 thread maps\_anim::anim_single_solo(var_4, "arrive");
+    }
   }
 
   var_2 maps\_anim::anim_single_solo(level.op_helo, "arrive");
@@ -227,21 +229,24 @@ bc_street_cleanup() {
       continue;
     }
 
-    if(!isDefined(var_0[var_3].script_startingposition))
+    if(!isDefined(var_0[var_3].script_startingposition)) {
       var_2[var_2.size] = var_0[var_3];
+    }
   }
 
   for(var_3 = 4; var_3 < var_1.size; var_3++) {
     var_1[var_3].health = 1;
     var_1[var_3] setthreatbiasgroup("bc_killme");
 
-    if(var_3 >= 6)
+    if(var_3 >= 6) {
       var_1[var_3] thread maps\_utility_code::kill_deathflag_proc(0.5);
+    }
   }
 
   for(var_3 = 2; var_3 < var_2.size; var_3++) {
-    if(!maps\_utility::player_can_see_ai(var_2[var_3]) && !var_2[var_3] cansee(level.player))
+    if(!maps\_utility::player_can_see_ai(var_2[var_3]) && !var_2[var_3] cansee(level.player)) {
       var_2[var_3] thread maps\_utility_code::kill_deathflag_proc(0.5);
+    }
   }
 }
 
@@ -276,11 +281,13 @@ bc_end() {
   level.bravo2_ascend_launcher hide();
   level._bravo[1].launcher = level.bravo2_ascend_launcher;
 
-  foreach(var_4, var_3 in level._allies)
+  foreach(var_4, var_3 in level._allies) {
   var_3 thread maps\black_ice_ascend::runin_to_ascend(var_1, "flag_ascend_ready_alpha_" + maps\_utility::string(var_4));
+  }
 
-  foreach(var_4, var_6 in level._bravo)
+  foreach(var_4, var_6 in level._bravo) {
   var_6 thread maps\black_ice_ascend::runin_to_ascend(var_1, "flag_ascend_ready_bravo_" + maps\_utility::string(var_4));
+  }
 
   common_scripts\utility::flag_wait_all("flag_ascend_ready_alpha_0", "flag_ascend_ready_alpha_1");
   level.launchers_attached = 0;
@@ -360,8 +367,9 @@ heli_spawn_and_path(var_0) {
   var_1 endon("death");
   var_1.fastropeoffset = 322;
 
-  if(var_0 == "bc_veh_intro_helo")
+  if(var_0 == "bc_veh_intro_helo") {
     var_1 vehicle_turnengineoff();
+  }
 
   var_1 waittill("reached_dynamic_path_end");
   var_1 delete();
@@ -390,8 +398,9 @@ left_flank_spawn_proc() {
   self waittill("trigger");
   wait 1;
 
-  while(level.mid_window_count > 0)
+  while(level.mid_window_count > 0) {
     wait 0.1;
+  }
 
   var_0 = getent("bc_opfor_flank_left", "targetname");
 
@@ -421,8 +430,9 @@ setup_spawners() {
   var_0 = getEntArray("bc_opfor_flank_right", "targetname");
 
   foreach(var_3, var_2 in var_0) {
-    if(randomint(3 - var_3) == 0)
+    if(randomint(3 - var_3) == 0) {
       var_2 delete();
+    }
   }
 
   setthreatbias("bc_lmg", "player", 1000);
@@ -445,22 +455,27 @@ opfor_run() {
     var_0 = getent(self.script_parameters, "targetname");
     var_1 = 0.1;
 
-    if(self.script_parameters == "camp_pain_short_1")
+    if(self.script_parameters == "camp_pain_short_1") {
       var_1 = 1;
-    else if(self.script_parameters == "camp_pain_tumble")
+    }
+    else if(self.script_parameters == "camp_pain_tumble") {
       self.ragdoll_immediate = 1;
+    }
 
-    if(isDefined(self.script_noteworthy))
+    if(isDefined(self.script_noteworthy)) {
       thread maps\_utility::smart_dialogue(self.script_noteworthy);
+    }
 
     self.allowdeath = 1;
     var_0 maps\_anim::anim_generic_first_frame(self, self.script_parameters);
     var_0 maps\_anim::anim_single_solo(self, self.script_parameters, undefined, var_1, "generic");
 
-    if(self.script_parameters == "camp_pain_dead")
+    if(self.script_parameters == "camp_pain_dead") {
       self kill();
-    else if(self.script_parameters == "camp_pain_tumble")
+    }
+    else if(self.script_parameters == "camp_pain_tumble") {
       self.ragdoll_immediate = undefined;
+    }
   }
 }
 
@@ -473,8 +488,9 @@ opfor_runback() {
   var_0 = getent(self.target, "targetname");
   var_0 maps\_anim::anim_generic_reach(self, self.script_parameters);
 
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     thread maps\_utility::smart_dialogue(self.script_noteworthy);
+  }
 
   self.allowdeath = 1;
   var_0 maps\_anim::anim_single_solo(self, self.script_parameters, undefined, 0.1, "generic");
@@ -516,8 +532,9 @@ opfor_porch_runner() {
 ignore_move_suppression(var_0) {
   self endon("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self endon(var_0);
+  }
 
   for(;;) {
     if(self ismovesuppressed()) {
@@ -552,8 +569,9 @@ opfor_left_flank_run() {
   maps\_utility::set_ignoreall(1);
   var_0 = common_scripts\utility::getstruct("bc_left_flank_runaway", "targetname");
 
-  while(distance2d(self.origin, var_0.origin) > 70)
+  while(distance2d(self.origin, var_0.origin) > 70) {
     wait 0.05;
+  }
 
   if(level.mid_window_count < 1 && distance2d(level.player.origin, var_0.origin) > 300) {
     var_0 maps\_anim::anim_generic_reach(self, "run_180_1");
@@ -569,8 +587,9 @@ opfor_left_flank_run() {
 opfor_helo_rein() {
   self endon("death");
 
-  if(isDefined(self.script_parameters))
+  if(isDefined(self.script_parameters)) {
     self.animname = self.script_parameters;
+  }
 
   wait 0.05;
   self.allowdeath = 1;
@@ -624,8 +643,9 @@ main_spot() {
 }
 
 fake_spot(var_0, var_1) {
-  if(!common_scripts\utility::flag("bc_flag_spots_close"))
+  if(!common_scripts\utility::flag("bc_flag_spots_close")) {
     wait(randomfloatrange(0.6, 1.8));
+  }
 
   var_2 = getent(var_0, "targetname");
   var_3 = getEntArray(var_1, "targetname");
@@ -653,8 +673,9 @@ spotlight_motion(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_2 = var_2 + (var_7 - var_2) * var_3.lerp_rate;
       var_0.origin = var_0.origin + var_2 * var_3.velocity_factor * level.timestep;
 
-      if(isDefined(var_6) && var_6)
+      if(isDefined(var_6) && var_6) {
         var_0.origin = var_0.origin + (randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(-1, 1));
+      }
 
       var_3.angles = vectortoangles(var_0.origin - var_3.origin);
       wait(level.timestep);
@@ -681,8 +702,9 @@ spotlight_motion(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       foreach(var_14 in var_4) {
         var_15 = vectordot(vectornormalize(var_2), vectornormalize(var_14.origin - var_0.origin));
 
-        if(var_15 < 0.25)
+        if(var_15 < 0.25) {
           var_11[var_11.size] = var_14;
+        }
 
         if(var_4.size == var_11.size) {
           var_12 = 0;
@@ -691,14 +713,16 @@ spotlight_motion(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
 
       if(var_12) {
-        foreach(var_14 in var_11)
+        foreach(var_14 in var_11) {
         var_4 = common_scripts\utility::array_remove(var_4, var_14);
+        }
       } else {
         var_19 = 3;
 
         if(var_4.size > var_19) {
-          foreach(var_14 in var_4)
+          foreach(var_14 in var_4) {
           var_14.dist2d = distance2d(var_10.origin, var_14.origin);
+          }
 
           var_4 = common_scripts\utility::array_sort_by_handler(var_4, ::target_dist_compare);
           var_11 = [];
@@ -714,8 +738,9 @@ spotlight_motion(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_1 = var_4[randomint(var_4.size)];
     var_4[var_4.size] = var_10;
 
-    foreach(var_14 in var_11)
+    foreach(var_14 in var_11) {
     var_4[var_4.size] = var_14;
+    }
 
     wait(level.timestep);
   }
@@ -762,8 +787,9 @@ camp_mblur_changes() {
 
   wait 2.25;
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     return;
+  }
 }
 
 camp_primary_light_switch() {
@@ -775,8 +801,9 @@ camp_primary_light_switch() {
     var_0[var_0.size] = getent("light_infil_script_top3", "targetname");
   }
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 setlightintensity(0);
+  }
 
   var_4 = getEntArray("light_camp_tent1_spot", "targetname");
   var_5[0] = 0;
@@ -788,8 +815,9 @@ camp_primary_light_switch() {
 
   maps\_utility::trigger_wait("show_tent_lights", "targetname");
 
-  for(var_6 = 0; var_6 < var_4.size; var_6++)
+  for(var_6 = 0; var_6 < var_4.size; var_6++) {
     var_4[var_6] setlightintensity(var_5[var_6]);
+  }
 }
 
 delete_path_clip() {

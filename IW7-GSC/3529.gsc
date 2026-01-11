@@ -40,11 +40,13 @@ func_1843(var_00, var_01, var_02, var_03, var_04) {
       thread removefromplayerkillstreaklistondeath(var_05);
     }
 
-    if(scripts\mp\utility\game::func_9E64(var_00))
+    if(scripts\mp\utility\game::func_9E64(var_00)) {
       self.func_18DD = 1;
+    }
 
-    if(scripts\mp\utility\game::func_9E6A(var_00))
+    if(scripts\mp\utility\game::func_9E6A(var_00)) {
       self.func_18DE = 1;
+    }
   }
 
   level.func_1655[var_05] = self;
@@ -57,11 +59,13 @@ func_1843(var_00, var_01, var_02, var_03, var_04) {
     if(level.teambased) {
       if(scripts\mp\utility\game::func_9F2C(var_00)) {
         foreach(var_09 in level.players) {
-          if(var_9.team == self.team && var_09 != self.owner)
+          if(var_9.team == self.team && var_09 != self.owner) {
             var_06 = scripts\mp\utility\game::outlineenableforplayer(self, "cyan", var_09, 0, 0, "lowest");
+          }
 
-          if(isDefined(var_06))
+          if(isDefined(var_06)) {
             thread func_E14B(var_06, var_04);
+          }
         }
 
         var_07 = 1;
@@ -70,8 +74,9 @@ func_1843(var_00, var_01, var_02, var_03, var_04) {
     } else
       var_06 = scripts\mp\utility\game::outlineenableforplayer(self, "cyan", var_02, 0, 0, "lowest");
 
-    if(!scripts\mp\utility\game::istrue(var_07))
+    if(!scripts\mp\utility\game::istrue(var_07)) {
       thread func_E14B(var_06, var_04);
+    }
   }
 
   if(isDefined(var_01) && var_01 != "") {
@@ -83,8 +88,9 @@ func_1843(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_7D98() {
-  if(!isDefined(self.pers["nextActiveID"]))
+  if(!isDefined(self.pers["nextActiveID"])) {
     self.pers["nextActiveID"] = 0;
+  }
 
   var_00 = self.pers["nextActiveID"];
   self.pers["nextActiveID"]++;
@@ -94,8 +100,9 @@ func_7D98() {
 func_E14B(var_00, var_01) {
   var_02 = ["death", "carried"];
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_02 = [var_01];
+  }
 
   scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_02);
   scripts\mp\utility\game::outlinedisable(var_00, self);
@@ -110,13 +117,16 @@ func_1654(var_00) {
 }
 
 func_1863(var_00) {
-  if(!isDefined(level.uavmodels))
+  if(!isDefined(level.uavmodels)) {
     level.uavmodels = [];
+  }
 
-  if(level.teambased)
+  if(level.teambased) {
     level.uavmodels[self.team][level.uavmodels[self.team].size] = self;
-  else
+  }
+  else {
     level.uavmodels[self.owner.guid + "_" + gettime()] = self;
+  }
 }
 
 func_115CF(var_00) {
@@ -125,8 +135,9 @@ func_115CF(var_00) {
       if(!isDefined(var_02)) {
         continue;
       }
-      if(var_2.uavtype == "counter_uav")
+      if(var_2.uavtype == "counter_uav") {
         return 0;
+      }
     }
   }
 
@@ -135,8 +146,9 @@ func_115CF(var_00) {
       if(!isDefined(var_02)) {
         continue;
       }
-      if(var_2.uavtype == "uav" || var_2.uavtype == "directional_uav")
+      if(var_2.uavtype == "uav" || var_2.uavtype == "directional_uav") {
         return 1;
+      }
     }
   }
 
@@ -161,8 +173,9 @@ func_12F51() {
 func_E121(var_00) {
   self waittill("death");
 
-  if(isDefined(self.func_12AF5))
+  if(isDefined(self.func_12AF5)) {
     self.func_12AF5 delete();
+  }
 
   if(level.teambased) {
     var_01 = self.team;
@@ -170,25 +183,29 @@ func_E121(var_00) {
   } else
     level.uavmodels = scripts\engine\utility::array_removeundefined(level.uavmodels);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 
   func_E0FD(var_00);
 }
 
 func_9FB9(var_00) {
-  if(!isDefined(level.uavmodels))
+  if(!isDefined(level.uavmodels)) {
     return 0;
+  }
 
-  if(!isDefined(level.uavmodels[var_00]))
+  if(!isDefined(level.uavmodels[var_00])) {
     return 0;
+  }
 
   return level.uavmodels[var_00].size > 0;
 }
 
 func_1844(var_00) {
-  if(!isDefined(level.func_1AFC))
+  if(!isDefined(level.func_1AFC)) {
     level.func_1AFC = [];
+  }
 
   level.func_1AFC[var_00] = self;
 }
@@ -200,8 +217,9 @@ func_E0FE(var_00) {
 }
 
 addtolittlebirdlist(var_00) {
-  if(!isDefined(level.littlebirds))
+  if(!isDefined(level.littlebirds)) {
     level.littlebirds = [];
+  }
 
   level.littlebirds[var_00] = self;
 }
@@ -213,8 +231,9 @@ func_E111(var_00) {
 }
 
 func_184E(var_00) {
-  if(!isDefined(level.helis))
+  if(!isDefined(level.helis)) {
     level.helis = [];
+  }
 
   level.helis[var_00] = self;
 }
@@ -226,8 +245,9 @@ func_E10A(var_00) {
 }
 
 func_185A(var_00) {
-  if(!isDefined(level.func_105EA))
+  if(!isDefined(level.func_105EA)) {
     level.func_105EA = [];
+  }
 
   level.func_105EA[var_00] = self;
 }
@@ -239,8 +259,9 @@ func_E118(var_00) {
 }
 
 func_1847(var_00) {
-  if(!isDefined(level.balldrones))
+  if(!isDefined(level.balldrones)) {
     level.balldrones = [];
+  }
 
   level.balldrones[var_00] = self;
 }
@@ -252,8 +273,9 @@ func_E102(var_00) {
 }
 
 func_1862(var_00) {
-  if(!isDefined(level.turrets))
+  if(!isDefined(level.turrets)) {
     level.turrets = [];
+  }
 
   level.turrets[var_00] = self;
 }
@@ -265,8 +287,9 @@ func_E120(var_00) {
 }
 
 func_184A(var_00) {
-  if(!isDefined(level.func_5228))
+  if(!isDefined(level.func_5228)) {
     level.func_5228 = [];
+  }
 
   level.func_5228[var_00] = self;
 }
@@ -278,8 +301,9 @@ func_E105(var_00) {
 }
 
 func_1857(var_00) {
-  if(!isDefined(level.func_DA61))
+  if(!isDefined(level.func_DA61)) {
     level.func_DA61 = [];
+  }
 
   level.func_DA61[var_00] = self;
 }
@@ -291,8 +315,9 @@ func_E115(var_00) {
 }
 
 func_1856(var_00) {
-  if(!isDefined(level.func_D3CC))
+  if(!isDefined(level.func_D3CC)) {
     level.func_D3CC = [];
+  }
 
   level.func_D3CC[var_00] = self;
 }
@@ -344,8 +369,9 @@ func_20CF(var_00, var_01) {
   if(!scripts\mp\utility\game::isreallyalive(var_00) || var_0.team == "spectator") {
     return;
   }
-  if(var_00 == var_03)
+  if(var_00 == var_03) {
     var_04 = "cyan";
+  }
   else if(var_00 != var_03) {
     if(level.teambased && var_0.team != var_02 || !level.teambased) {
       var_04 = "orange";
@@ -356,8 +382,9 @@ func_20CF(var_00, var_01) {
 
   if(isDefined(var_04)) {
     if(scripts\mp\utility\game::istrue(var_05)) {
-      if(var_00 scripts\mp\utility\game::_hasperk("specialty_noplayertarget"))
+      if(var_00 scripts\mp\utility\game::_hasperk("specialty_noplayertarget")) {
         return;
+      }
     }
 
     var_06 = scripts\mp\utility\game::outlineenableforplayer(var_00, var_04, self.owner, 1, 1, "killstreak");
@@ -459,18 +486,22 @@ getmodifiedantikillstreakdamage(var_00, var_01, var_02, var_03, var_04, var_05, 
     }
   }
 
-  if(isDefined(var_08))
+  if(isDefined(var_08)) {
     self.largeprojectiledamage = var_08;
+  }
 
-  if(isDefined(var_15) && isDefined(var_02) && (var_02 == "MOD_EXPLOSIVE" || var_02 == "MOD_EXPLOSIVE_BULLET" || var_02 == "MOD_PROJECTILE" || var_02 == "MOD_PROJECTILE_SPLASH" || var_02 == "MOD_GRENADE"))
+  if(isDefined(var_15) && isDefined(var_02) && (var_02 == "MOD_EXPLOSIVE" || var_02 == "MOD_EXPLOSIVE_BULLET" || var_02 == "MOD_PROJECTILE" || var_02 == "MOD_PROJECTILE_SPLASH" || var_02 == "MOD_GRENADE")) {
     var_03 = ceil(var_04 / var_15);
+  }
 
   if(isDefined(var_00)) {
-    if(isDefined(var_0.owner))
+    if(isDefined(var_0.owner)) {
       var_00 = var_0.owner;
+    }
 
-    if(var_00 == self.owner)
+    if(var_00 == self.owner) {
       var_03 = ceil(var_03 / 2);
+    }
   }
 
   return int(var_03);
@@ -518,8 +549,9 @@ isexplosiveantikillstreakweapon(var_00) {
       var_01 = 1;
       break;
     case "iw7_arclassic_mp":
-      if(scripts\mp\utility\game::istrue(var_03))
+      if(scripts\mp\utility\game::istrue(var_03)) {
         var_01 = 1;
+      }
 
       break;
   }
@@ -543,16 +575,19 @@ dodamagetokillstreak(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if(isDefined(var_03)) {
     if(level.teambased) {
-      if(!scripts\mp\utility\game::func_9FE7(var_01, var_03, self))
+      if(!scripts\mp\utility\game::func_9FE7(var_01, var_03, self)) {
         return;
+      }
     } else if(!scripts\mp\utility\game::func_9FD8(var_01, var_03, self))
       return;
   }
 
-  if(isagent(self))
+  if(isagent(self)) {
     self getrandomarmkillstreak(var_00, var_04, var_01, var_02, var_05, var_06);
-  else
+  }
+  else {
     self notify("damage", var_00, var_01, var_07, var_08, var_05, var_11, var_12, var_13, var_14, var_06, var_04, var_09, var_10, var_02);
+  }
 }
 
 func_FAE4(var_00, var_01) {
@@ -568,8 +603,9 @@ func_139B5(var_00, var_01, var_02) {
   var_03 endon("disconnect");
   var_04 = self;
 
-  if(scripts\mp\utility\game::func_9EF0(self))
+  if(scripts\mp\utility\game::func_9EF0(self)) {
     var_04 = var_03;
+  }
 
   var_04 endon(var_01);
   level endon("game_ended");
@@ -597,13 +633,15 @@ func_139B5(var_00, var_01, var_02) {
 func_13B85(var_00) {
   var_01 = undefined;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     var_01 = self.owner;
+  }
 
   var_02 = self;
 
-  if(scripts\mp\utility\game::func_9EF0(self))
+  if(scripts\mp\utility\game::func_9EF0(self)) {
     var_02 = var_01;
+  }
 
   var_02 waittill(var_00);
 
@@ -612,8 +650,9 @@ func_13B85(var_00) {
     var_01 _meth_859E("", 0);
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.func_1D44 = undefined;
+  }
 }
 
 func_13B84(var_00, var_01, var_02) {
@@ -621,21 +660,24 @@ func_13B84(var_00, var_01, var_02) {
   var_03 endon("disconnect");
   var_04 = self;
 
-  if(scripts\mp\utility\game::func_9EF0(self))
+  if(scripts\mp\utility\game::func_9EF0(self)) {
     var_04 = var_03;
+  }
 
   var_04 endon(var_01);
   level endon("game_ended");
 
-  if(!isDefined(self.lastboundstimelimit))
+  if(!isDefined(self.lastboundstimelimit)) {
     self.lastboundstimelimit = scripts\mp\utility\game::func_7F9B();
+  }
 
   var_05 = gettime() + int(self.lastboundstimelimit * 1000);
   self.func_1D44 = 1;
   var_06 = var_03;
 
-  if(scripts\mp\utility\game::func_9EF0(self))
+  if(scripts\mp\utility\game::func_9EF0(self)) {
     var_06 = self;
+  }
 
   if(!scripts\mp\utility\game::func_9EF0(self) || scripts\mp\utility\game::func_9EF0(self) && getplayerkillstreakcombatmode(self) == "MANUAL") {
     var_03 setclientomnvar("ui_out_of_bounds_countdown", var_05);
@@ -656,16 +698,19 @@ func_13B84(var_00, var_01, var_02) {
   var_03 setclientomnvar("ui_out_of_bounds_countdown", 0);
   var_06 _meth_859E("");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.func_1D44 = undefined;
+  }
 
   if(scripts\mp\utility\game::istrue(var_07)) {
     self.lastboundstimelimit = undefined;
 
-    if(scripts\mp\utility\game::func_9EF0(self))
+    if(scripts\mp\utility\game::func_9EF0(self)) {
       var_04 notify(var_01, 0);
-    else
+    }
+    else {
       var_04 notify(var_01, self.origin);
+    }
   } else {
     self.lastboundstimelimit = var_08;
     thread watchtimelimitcooldown();
@@ -677,19 +722,22 @@ watchtimelimitcooldown() {
   self notify("start_time_limit_cooldown");
   self endon("start_time_limit_cooldown");
 
-  for(var_00 = scripts\mp\utility\game::getmaxoutofboundscooldown(); var_00 > 0; var_00 = var_00 - 0.05)
+  for(var_00 = scripts\mp\utility\game::getmaxoutofboundscooldown(); var_00 > 0; var_00 = var_00 - 0.05) {
     scripts\engine\utility::waitframe();
+  }
 
   self.lastboundstimelimit = undefined;
 }
 
 func_A69F(var_00, var_01) {
-  if(!isDefined(var_0.passives))
+  if(!isDefined(var_0.passives)) {
     return 0;
+  }
 
   foreach(var_03 in var_0.passives) {
-    if(var_03 == var_01)
+    if(var_03 == var_01) {
       return 1;
+    }
   }
 
   return 0;
@@ -703,22 +751,27 @@ getfirstprimaryweapon() {
 func_CF1D(var_00, var_01) {
   self endon("death");
 
-  if(!isDefined(level._effect["dlight_large"]))
+  if(!isDefined(level._effect["dlight_large"])) {
     level._effect["dlight_large"] = loadfx("vfx\iw7\_requests\mp\vfx_killstreak_dlight");
+  }
 
-  if(!isDefined(level._effect["dlight_small"]))
+  if(!isDefined(level._effect["dlight_small"])) {
     level._effect["dlight_small"] = loadfx("vfx\iw7\_requests\mp\vfx_killstreak_dlight_small");
+  }
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = (0, 0, 0);
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = (0, 0, 0);
+  }
 
   var_02 = scripts\engine\utility::getfx("dlight_large");
 
-  if(scripts\mp\utility\game::istrue(self.isairdrop))
+  if(scripts\mp\utility\game::istrue(self.isairdrop)) {
     var_02 = scripts\engine\utility::getfx("dlight_small");
+  }
 
   self.func_7625 = spawn("script_model", self.origin);
   self.func_7625 setModel("tag_origin");
@@ -732,8 +785,9 @@ deleteonparentdeath(var_00) {
   self endon("death");
   var_00 waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 func_9D28(var_00) {
@@ -751,8 +805,9 @@ func_9D28(var_00) {
 getplayerkillstreakcombatmode(var_00) {
   var_01 = "NONE";
 
-  if(isDefined(var_0.owner) && isDefined(var_0.owner.func_4BE1))
+  if(isDefined(var_0.owner) && isDefined(var_0.owner.func_4BE1)) {
     var_01 = var_0.owner.func_4BE1;
+  }
 
   return var_01;
 }
@@ -785,8 +840,9 @@ getkillstreaknomeleetarget(var_00) {
 }
 
 watchhostmigrationlifetime(var_00, var_01, var_02) {
-  if(var_00 != "death")
+  if(var_00 != "death") {
     self endon("death");
+  }
 
   self endon(var_00);
   level endon("game_ended");
@@ -800,10 +856,12 @@ watchhostmigrationlifetime(var_00, var_01, var_02) {
   var_07 = var_06 + var_05;
   var_05 = var_05 / 1000;
 
-  if(isDefined(self.func_DCFC) && getplayerkillstreakcombatmode(self.func_DCFC) == "MANUAL")
+  if(isDefined(self.func_DCFC) && getplayerkillstreakcombatmode(self.func_DCFC) == "MANUAL") {
     self.func_DCFC setclientomnvar("ui_remote_c8_countdown", var_07);
-  else if(isDefined(self.streakname) && scripts\mp\utility\game::func_9F2C(self.streakname))
+  }
+  else if(isDefined(self.streakname) && scripts\mp\utility\game::func_9F2C(self.streakname)) {
     self.owner setclientomnvar("ui_killstreak_countdown", var_07);
+  }
 
   self[[var_02]](var_05);
 }
@@ -812,8 +870,9 @@ func_7E92(var_00) {
   var_01 = [];
 
   foreach(var_03 in level.players) {
-    if(var_00 scripts\mp\utility\game::isenemy(var_03))
+    if(var_00 scripts\mp\utility\game::isenemy(var_03)) {
       var_1[var_1.size] = var_03;
+    }
   }
 
   return var_01;
@@ -822,11 +881,13 @@ func_7E92(var_00) {
 manualmissilecantracktarget(var_00) {
   var_01 = 1;
 
-  if(!isDefined(var_00) || !scripts\mp\utility\game::isreallyalive(var_00))
+  if(!isDefined(var_00) || !scripts\mp\utility\game::isreallyalive(var_00)) {
     var_01 = 0;
+  }
 
-  if(var_00 isinphase() || scripts\mp\utility\game::istrue(var_0.func_9D8B) || var_00 scripts\mp\utility\game::_hasperk("specialty_noscopeoutline"))
+  if(var_00 isinphase() || scripts\mp\utility\game::istrue(var_0.func_9D8B) || var_00 scripts\mp\utility\game::_hasperk("specialty_noscopeoutline")) {
     var_01 = 0;
+  }
 
   return var_01;
 }

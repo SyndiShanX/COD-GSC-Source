@@ -80,8 +80,9 @@ mason_truck_setup() {
   e_wagon_clip trigger_off();
   a_nd_nodes = getnodearray("mason_truck_exposed_nodes", "script_noteworthy");
 
-  foreach(node in a_nd_nodes)
+  foreach(node in a_nd_nodes) {
   setenablenode(node, 0);
+  }
 
   level thread run_scene("mason_truck_pdf_corpse");
 }
@@ -105,8 +106,9 @@ mason_truck_combat() {
   level thread mason_truck_check_for_enemies_dead();
   a_ai_enemies = get_ai_group_ai("mason_truck_cartel_wave1");
 
-  if(a_ai_enemies.size > 3)
+  if(a_ai_enemies.size > 3) {
     waittill_dead(a_ai_enemies, 3);
+  }
 
   flag_set("mason_truck_wave2_begin");
   spawn_manager_enable("mason_truck_cartel_wave2_sm");
@@ -133,8 +135,9 @@ mason_truck_player_uses_turret(vh_truck) {
   flag_set("player_using_truck_turret");
   a_nd_nodes = getnodearray("mason_truck_exposed_nodes", "script_noteworthy");
 
-  foreach(node in a_nd_nodes)
+  foreach(node in a_nd_nodes) {
   setenablenode(node, 1);
+  }
 
   spawn_manager_enable("mason_truck_turret_enemies_sm");
   self waittill("exit_vehicle");
@@ -143,8 +146,9 @@ mason_truck_player_uses_turret(vh_truck) {
   a_s_spawner = getEntArray("mason_truck_turret_enemies", "targetname");
 
   foreach(spawner in a_s_spawner) {
-    if(isDefined(spawner))
+    if(isDefined(spawner)) {
       spawner.count = 0;
+    }
   }
 }
 
@@ -205,8 +209,9 @@ mason_truck_begin() {
     level thread mason_truck_turnout_vo();
     run_scene("mason_truck_stop", 2.0);
 
-    if(!flag("mason_truck_gunner_killed"))
+    if(!flag("mason_truck_gunner_killed")) {
       vh_truck thread mason_truck_turnout_explode();
+    }
 
     flag_set("mason_truck_stopped");
     vh_truck mason_truck_passengers_getout();
@@ -246,8 +251,9 @@ trough_1_break(e_truck) {
   level.player thread rumble_loop(4, 0.05, "damage_light");
   a_nd_nodes = getnodearray("mason_truck_trough1_nodes", "script_noteworthy");
 
-  foreach(node in a_nd_nodes)
+  foreach(node in a_nd_nodes) {
   setenablenode(node, 0);
+  }
 }
 
 trough_2_break(e_truck) {
@@ -258,8 +264,9 @@ trough_2_break(e_truck) {
   e_trough_clip trigger_off();
   a_nd_nodes = getnodearray("mason_truck_trough2_nodes", "script_noteworthy");
 
-  foreach(node in a_nd_nodes)
+  foreach(node in a_nd_nodes) {
   setenablenode(node, 0);
+  }
 }
 
 fence_break(e_truck) {
@@ -348,10 +355,12 @@ mason_truck_damage_override(einflictor, eattacker, idamage, idflags, smeansofdea
       n_delta = distance2d(level.mason_truck_driver.origin, vpoint);
 
       if(n_delta <= 40) {
-        if(sweapon == "molotov_dpad_sp")
+        if(sweapon == "molotov_dpad_sp") {
           n_damage = idamage;
-        else
+        }
+        else {
           n_damage = int(idamage / 2.0);
+        }
 
         self.damagerecieved = self.damagerecieved + n_damage;
 
@@ -390,8 +399,9 @@ mason_truck_passengers_getout() {
   e_goalvolume = getent("mason_truck_riders_goalvolume", "targetname");
 
   foreach(guy in a_ai_passengers) {
-    if(!isDefined(guy.script_noteworthy))
+    if(!isDefined(guy.script_noteworthy)) {
       guy setgoalvolumeauto(e_goalvolume);
+    }
   }
 }
 
@@ -399,10 +409,12 @@ mason_truck_vo() {
   trigger_wait("mason_truck_turns_corner");
   level.hudson queue_dialog("huds_mg_truck_incoming_0");
 
-  if(is_mature())
+  if(is_mature()) {
     level.woods queue_dialog("wood_shoot_the_fucking_dr_0", 0.5);
-  else
+  }
+  else {
     level.woods queue_dialog("wood_shoot_the_driver_ma_0", 0.5);
+  }
 }
 
 mason_truck_crash_vo() {
@@ -414,8 +426,9 @@ mason_truck_crash_vo() {
 mason_truck_turnout_vo() {
   level.woods queue_dialog("wood_too_slow_mason_0");
 
-  if(!flag("mason_truck_gunner_killed"))
+  if(!flag("mason_truck_gunner_killed")) {
     level.hudson queue_dialog("huds_take_down_the_gunner_0", 1.0);
+  }
 
   flag_set("mason_truck_VO_complete");
 }
@@ -432,8 +445,9 @@ mason_truck_cleanup() {
   a_ai_pdf = get_ai_group_ai("mason_truck_pdf");
 
   foreach(guy in a_ai_pdf) {
-    if(isalive(guy))
+    if(isalive(guy)) {
       guy thread timebomb(0.1, 2.0);
+    }
   }
 
   level waittill("nicaragua_mason_donkeykong_complete");

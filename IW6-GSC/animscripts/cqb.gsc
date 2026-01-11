@@ -11,8 +11,9 @@ movecqb() {
   if(self.a.pose != "stand") {
     self clearanim( % root, 0.2);
 
-    if(self.a.pose == "prone")
+    if(self.a.pose == "prone") {
       animscripts\utility::exitpronewrapper(1);
+    }
 
     self.a.pose = "stand";
   }
@@ -28,24 +29,29 @@ movecqb() {
   if(animscripts\run::standrun_checkreload()) {
     return;
   }
-  if(isDefined(self.timeofmaincqbupdate))
+  if(isDefined(self.timeofmaincqbupdate)) {
     var_0 = self.timeofmaincqbupdate;
-  else
+  }
+  else {
     var_0 = 0;
+  }
 
   self.timeofmaincqbupdate = gettime();
   var_1 = determinecqbanim();
 
-  if(self.stairsstate == "none")
+  if(self.stairsstate == "none") {
     var_2 = 0.3;
-  else
+  }
+  else {
     var_2 = 0.1;
+  }
 
   var_3 = 0.2;
   var_4 = % walk_and_run_loops;
 
-  if(self.timeofmaincqbupdate - var_0 > var_3 * 1000)
+  if(self.timeofmaincqbupdate - var_0 > var_3 * 1000) {
     var_4 = % stand_and_crouch;
+  }
 
   self setflaggedanimknoball("runanim", var_1, var_4, 1, var_2, self.moveplaybackrate, 1);
   cqb_playfacialanim(var_1);
@@ -55,25 +61,31 @@ movecqb() {
 }
 
 determinecqbanim() {
-  if(isDefined(self.custommoveanimset) && isDefined(self.custommoveanimset["cqb"]))
+  if(isDefined(self.custommoveanimset) && isDefined(self.custommoveanimset["cqb"])) {
     return animscripts\run::getrunanim();
+  }
 
-  if(self.stairsstate == "up")
+  if(self.stairsstate == "up") {
     return animscripts\utility::lookupanim("cqb", "stairs_up");
+  }
 
-  if(self.stairsstate == "down")
+  if(self.stairsstate == "down") {
     return animscripts\utility::lookupanim("cqb", "stairs_down");
+  }
 
-  if(self.movemode == "walk")
+  if(self.movemode == "walk") {
     return animscripts\utility::lookupanim("cqb", "move_f");
+  }
 
-  if(isDefined(self.a.bdisablemovetwitch) && self.a.bdisablemovetwitch)
+  if(isDefined(self.a.bdisablemovetwitch) && self.a.bdisablemovetwitch) {
     return animscripts\utility::lookupanim("cqb", "straight");
+  }
 
   var_0 = animscripts\utility::lookupanim("cqb", "straight_twitch");
 
-  if(!isDefined(var_0) || var_0.size == 0)
+  if(!isDefined(var_0) || var_0.size == 0) {
     return animscripts\utility::lookupanim("cqb", "straight");
+  }
 
   var_1 = animscripts\utility::getrandomintfromseed(self.a.runloopcount, 4);
 
@@ -91,8 +103,9 @@ cqb_reloadinternal() {
   var_0 = "reload_" + animscripts\combat_utility::getuniqueflagnameindex();
   var_1 = animscripts\utility::lookupanim("cqb", "reload");
 
-  if(isarray(var_1))
+  if(isarray(var_1)) {
     var_1 = var_1[randomint(var_1.size)];
+  }
 
   self setflaggedanimknoballrestart(var_0, var_1, % body, 1, 0.25);
   cqb_playfacialanim(var_1);
@@ -106,10 +119,12 @@ cqbtracking() {
   var_1 = !var_0 && animscripts\move::mayshootwhilemoving();
   animscripts\run::setshootwhilemoving(var_1);
 
-  if(var_0)
+  if(var_0) {
     animscripts\run::endfaceenemyaimtracking();
-  else
+  }
+  else {
     thread animscripts\run::faceenemyaimtracking();
+  }
 }
 
 setupcqbpointsofinterest() {
@@ -161,8 +176,9 @@ findcqbpointsofinterest() {
               }
               var_14 = vectordot(vectornormalize(var_12 - var_5), var_7);
 
-              if(var_14 < 0.643 || var_14 > 0.966)
+              if(var_14 < 0.643 || var_14 > 0.966) {
                 continue;
+              }
             } else if(var_13 < 2500) {
               continue;
             }
@@ -174,18 +190,21 @@ findcqbpointsofinterest() {
           }
         }
 
-        if(var_9 < 0)
+        if(var_9 < 0) {
           var_3.cqb_point_of_interest = undefined;
-        else
+        }
+        else {
           var_3.cqb_point_of_interest = level.cqbpointsofinterest[var_9];
+        }
 
         wait 0.05;
         var_1 = 1;
       }
     }
 
-    if(!var_1)
+    if(!var_1) {
       wait 0.25;
+    }
   }
 }
 

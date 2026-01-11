@@ -33,15 +33,18 @@ init_agent(var_00) {
     foreach(var_11, var_08 in var_01) {
       var_09 = tablelookupbyrow(var_00, var_04, var_08);
 
-      if(var_09 == "0")
+      if(var_09 == "0") {
         var_09 = 0;
+      }
       else if(int(var_09) != 0) {
         var_10 = var_09 + "";
 
-        if(issubstr(var_10, "."))
+        if(issubstr(var_10, ".")) {
           var_09 = float(var_09);
-        else
+        }
+        else {
           var_09 = int(var_09);
+        }
       }
 
       var_6[var_11] = var_09;
@@ -78,21 +81,25 @@ spawnnewagent(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 = getfreeagent(var_00);
 
   if(isDefined(var_06)) {
-    if(!isDefined(var_03))
+    if(!isDefined(var_03)) {
       var_03 = (0, 0, 0);
+    }
 
     var_6.connecttime = gettime();
 
-    if(isDefined(var_05))
+    if(isDefined(var_05)) {
       var_06 setup_spawn_struct(var_05);
+    }
 
     var_06 set_agent_model(var_06, var_00);
     var_06 set_agent_species(var_06, var_00);
 
-    if(is_scripted_agent(var_00))
+    if(is_scripted_agent(var_00)) {
       var_06 = spawn_scripted_agent(var_06, var_00, var_02, var_03);
-    else
+    }
+    else {
       var_06 = spawn_regular_agent(var_06, var_02, var_03);
+    }
 
     var_06 setup_agent(var_00);
     var_06 set_agent_team(var_01);
@@ -100,11 +107,13 @@ spawnnewagent(var_00, var_01, var_02, var_03, var_04, var_05) {
     var_06 set_agent_traversal_unit_type(var_06, var_00);
     var_06 addtocharactersarray();
 
-    if(isDefined(var_04))
+    if(isDefined(var_04)) {
       var_06 func_FAFA(var_04);
+    }
 
-    if(func_9CF8(var_00))
+    if(func_9CF8(var_00)) {
       var_06 func_F8ED();
+    }
 
     var_06 activateagent();
   }
@@ -120,8 +129,9 @@ set_agent_traversal_unit_type(var_00, var_01) {
 }
 
 can_set_traversal_unit_type(var_00) {
-  if(is_agent_scripted(var_00))
+  if(is_agent_scripted(var_00)) {
     return 1;
+  }
 
   return 0;
 }
@@ -144,8 +154,9 @@ is_scripted_agent(var_00) {
 }
 
 func_9CF8(var_00) {
-  if(!isDefined(level.agent_definition[var_00]))
+  if(!isDefined(level.agent_definition[var_00])) {
     return 0;
+  }
 
   return level.agent_definition[var_00]["behaviorTree"] != "";
 }
@@ -155,13 +166,15 @@ spawn_scripted_agent(var_00, var_01, var_02, var_03) {
   var_0.is_scripted_agent = 1;
   var_04 = level.agent_definition[var_01]["radius"];
 
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     var_04 = 15;
+  }
 
   var_05 = level.agent_definition[var_01]["height"];
 
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     var_05 = 50;
+  }
 
   var_00 spawnagent(var_02, var_03, level.agent_definition[var_01]["animclass"], var_04, var_05);
   var_0.func_18F4 = var_05;
@@ -180,10 +193,12 @@ is_agent_scripted(var_00) {
 }
 
 agent_go_to_pos(var_00, var_01, var_02, var_03, var_04) {
-  if(is_agent_scripted(self))
+  if(is_agent_scripted(self)) {
     self ghostskulls_complete_status(var_00);
-  else
+  }
+  else {
     self botsetscriptgoal(var_00, var_01, var_02, var_03, var_04);
+  }
 }
 
 setup_agent(var_00) {
@@ -201,8 +216,9 @@ setup_agent(var_00) {
 }
 
 set_agent_species(var_00, var_01) {
-  if(!isDefined(level.agent_funcs[var_01]))
+  if(!isDefined(level.agent_funcs[var_01])) {
     level.agent_funcs[var_01] = [];
+  }
 
   var_0.species = level.agent_definition[var_01]["species"];
 
@@ -221,10 +237,12 @@ assign_agent_func(var_00, var_01) {
   var_02 = self.agent_type;
 
   if(!isDefined(level.agent_funcs[var_02][var_00])) {
-    if(!isDefined(level.species_funcs[self.species]) || !isDefined(level.species_funcs[self.species][var_00]))
+    if(!isDefined(level.species_funcs[self.species]) || !isDefined(level.species_funcs[self.species][var_00])) {
       level.agent_funcs[var_02][var_00] = var_01;
-    else
+    }
+    else {
       level.agent_funcs[var_02][var_00] = level.species_funcs[self.species][var_00];
+    }
   }
 }
 
@@ -237,8 +255,9 @@ get_agent_type(var_00) {
 }
 
 getfreeagentcount() {
-  if(!isDefined(level.agentarray))
+  if(!isDefined(level.agentarray)) {
     return 0;
+  }
 
   var_00 = gettime();
   var_01 = 0;
@@ -323,8 +342,9 @@ initplayerscriptvariables() {
   self.current_icon = undefined;
   self.do_immediate_ragdoll = undefined;
 
-  if(isDefined(level.func_768B))
+  if(isDefined(level.func_768B)) {
     self[[level.func_768B]]();
+  }
 }
 
 set_agent_team(var_00, var_01) {
@@ -338,8 +358,9 @@ set_agent_team(var_00, var_01) {
 
 addtocharactersarray() {
   for(var_00 = 0; var_00 < level.characters.size; var_0++) {
-    if(level.characters[var_00] == self)
+    if(level.characters[var_00] == self) {
       return;
+    }
   }
 
   level.characters[level.characters.size] = self;
@@ -354,11 +375,13 @@ speciesfunc(var_00) {
 }
 
 validateattacker(var_00) {
-  if(isagent(var_00) && (!isDefined(var_0.isactive) || !var_0.isactive))
+  if(isagent(var_00) && (!isDefined(var_0.isactive) || !var_0.isactive)) {
     return undefined;
+  }
 
-  if(isagent(var_00) && !isDefined(var_0.classname))
+  if(isagent(var_00) && !isDefined(var_0.classname)) {
     return undefined;
+  }
 
   return var_00;
 }
@@ -373,11 +396,13 @@ default_spawn_func(var_00, var_01, var_02) {}
 
 is_friendly_damage(var_00, var_01) {
   if(isDefined(var_01)) {
-    if(isDefined(var_1.team) && var_1.team == var_0.team)
+    if(isDefined(var_1.team) && var_1.team == var_0.team) {
       return 1;
+    }
 
-    if(isDefined(var_1.owner) && isDefined(var_1.owner.team) && var_1.owner.team == var_0.team)
+    if(isDefined(var_1.owner) && isDefined(var_1.owner.team) && var_1.owner.team == var_0.team) {
       return 1;
+    }
   }
 
   return 0;
@@ -387,8 +412,9 @@ default_on_damage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07
   var_12 = self;
   var_13 = level.agent_funcs[self.agent_type]["gametype_on_damaged"];
 
-  if(isDefined(var_13))
+  if(isDefined(var_13)) {
     [[var_13]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
+  }
 
   if(is_friendly_damage(var_12, var_00)) {
     return;
@@ -415,27 +441,32 @@ default_on_damage_finished(var_00, var_01, var_02, var_03, var_04, var_05, var_0
   self.func_4D62 = var_06;
   self finishagentdamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, 0.0, var_11, var_12);
 
-  if(self.health > 0 && self.health < var_13)
+  if(self.health > 0 && self.health < var_13) {
     self notify("pain");
+  }
 
   if(isalive(self) && isDefined(self.agent_type)) {
     var_16 = level.agent_funcs[self.agent_type]["gametype_on_damage_finished"];
 
-    if(isDefined(var_16))
+    if(isDefined(var_16)) {
       [[var_16]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12);
+    }
   }
 }
 
 default_on_killed(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
-  if(isDefined(level.func_C4BD))
+  if(isDefined(level.func_C4BD)) {
     self[[level.func_C4BD]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, 0);
-  else
+  }
+  else {
     on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, 0);
+  }
 
   var_09 = level.agent_funcs[self.agent_type]["gametype_on_killed"];
 
-  if(isDefined(var_09))
+  if(isDefined(var_09)) {
     [[var_09]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08);
+  }
 
   deactivateagent();
 }
@@ -467,8 +498,9 @@ deactivateagent() {
 }
 
 getnumactiveagents(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = "all";
+  }
 
   var_01 = getactiveagentsoftype(var_00);
   return var_1.size;
@@ -477,13 +509,15 @@ getnumactiveagents(var_00) {
 getactiveagentsoftype(var_00) {
   var_01 = [];
 
-  if(!isDefined(level.agentarray))
+  if(!isDefined(level.agentarray)) {
     return var_01;
+  }
 
   foreach(var_03 in level.agentarray) {
     if(isDefined(var_3.isactive) && var_3.isactive) {
-      if(var_00 == "all" || var_3.agent_type == var_00)
+      if(var_00 == "all" || var_3.agent_type == var_00) {
         var_1[var_1.size] = var_03;
+      }
     }
   }
 
@@ -494,8 +528,9 @@ getaliveagentsofteam(var_00) {
   var_01 = [];
 
   foreach(var_03 in level.agentarray) {
-    if(isalive(var_03) && isDefined(var_3.team) && var_3.team == var_00)
+    if(isalive(var_03) && isDefined(var_3.team) && var_3.team == var_00) {
       var_1[var_1.size] = var_03;
+    }
   }
 
   return var_01;
@@ -504,13 +539,15 @@ getaliveagentsofteam(var_00) {
 getactiveagentsofspecies(var_00) {
   var_01 = [];
 
-  if(!isDefined(level.agentarray))
+  if(!isDefined(level.agentarray)) {
     return var_01;
+  }
 
   foreach(var_03 in level.agentarray) {
     if(isDefined(var_3.isactive) && var_3.isactive) {
-      if(var_3.species == var_00)
+      if(var_3.species == var_00) {
         var_1[var_1.size] = var_03;
+      }
     }
   }
 
@@ -521,8 +558,9 @@ getaliveagents() {
   var_00 = [];
 
   foreach(var_02 in level.agentarray) {
-    if(isalive(var_02))
+    if(isalive(var_02)) {
       var_0[var_0.size] = var_02;
+    }
   }
 
   return var_00;
@@ -537,8 +575,9 @@ on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, 
   var_10 = self.func_164D[self.asmname].func_4BC0;
   var_11 = anim.asm[self.asmname].states[var_10];
 
-  if(scripts\asm\asm_mp::func_2382(self.asmname, var_11))
+  if(scripts\asm\asm_mp::func_2382(self.asmname, var_11)) {
     scripts\asm\asm::func_231E(self.asmname, var_11, var_10);
+  }
 
   if(isDefined(self.nocorpse)) {
     return;
@@ -546,36 +585,42 @@ on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, 
   var_12 = self;
   self.body = self cloneagent(var_08);
 
-  if(should_do_immediate_ragdoll(self))
+  if(should_do_immediate_ragdoll(self)) {
     do_immediate_ragdoll(self.body);
-  else
+  }
+  else {
     thread delaystartragdoll(self.body, var_06, var_05, var_04, var_00, var_03);
+  }
 }
 
 should_do_immediate_ragdoll(var_00) {
-  if(isDefined(var_0.do_immediate_ragdoll) && var_0.do_immediate_ragdoll)
+  if(isDefined(var_0.do_immediate_ragdoll) && var_0.do_immediate_ragdoll) {
     return 1;
+  }
 
   return 0;
 }
 
 do_immediate_ragdoll(var_00) {
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 startragdoll();
+  }
 }
 
 delaystartragdoll(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(isDefined(var_00)) {
     var_06 = var_00 _meth_8112();
 
-    if(animhasnotetrack(var_06, "ignore_ragdoll"))
+    if(animhasnotetrack(var_06, "ignore_ragdoll")) {
       return;
+    }
   }
 
   if(isDefined(level.noragdollents) && level.noragdollents.size) {
     foreach(var_08 in level.noragdollents) {
-      if(distancesquared(var_0.origin, var_8.origin) < 65536)
+      if(distancesquared(var_0.origin, var_8.origin) < 65536) {
         return;
+      }
     }
   }
 
@@ -593,19 +638,23 @@ delaystartragdoll(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(animhasnotetrack(var_06, "start_ragdoll")) {
     var_11 = getnotetracktimes(var_06, "start_ragdoll");
 
-    if(isDefined(var_11))
+    if(isDefined(var_11)) {
       var_10 = var_11[0];
+    }
   }
 
   var_12 = var_10 * getanimlength(var_06) - 0.2;
 
-  if(var_12 > 0)
+  if(var_12 > 0) {
     wait(var_12);
+  }
 
   if(isDefined(var_00)) {
-    if(isDefined(var_0.ragdollhitloc) && isDefined(var_0.ragdollimpactvector))
+    if(isDefined(var_0.ragdollhitloc) && isDefined(var_0.ragdollimpactvector)) {
       var_00 giverankxp_regularmp(var_0.ragdollhitloc, var_0.ragdollimpactvector);
-    else
+    }
+    else {
       var_00 startragdoll();
+    }
   }
 }

@@ -6,13 +6,16 @@
 #using_animtree("animated_props");
 
 main() {
-  if(!isDefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
+  }
 
   var_0 = "fence_tarp_80x84";
 
-  if(common_scripts\utility::issp())
+  if(common_scripts\utility::issp()) {
     level.anim_prop_models[var_0]["wind"] = % fence_tarp_80x84_med_01;
-  else
+  }
+  else {
     level.anim_prop_models[var_0]["wind"] = "fence_tarp_80x84_med_01";
+  }
 }

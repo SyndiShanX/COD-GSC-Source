@@ -515,8 +515,9 @@ button_parse_parameters(parameters) {
   button = self;
   button.button_sound = undefined;
 
-  if(!isDefined(parameters))
+  if(!isDefined(parameters)) {
     parameters = "";
+  }
 
   params = StrTok(parameters, ";");
   foreach(param in params) {
@@ -549,8 +550,9 @@ door_parse_parameters(parameters) {
   door.loop_sound = undefined;
   door.interrupt_sound = undefined;
 
-  if(!isDefined(parameters))
+  if(!isDefined(parameters)) {
     parameters = "";
+  }
 
   params = StrTok(parameters, ";");
   foreach(param in params) {
@@ -594,8 +596,9 @@ door_parse_parameters(parameters) {
 trigger_parse_parameters(parameters) {
   trigger = self;
 
-  if(!isDefined(parameters))
+  if(!isDefined(parameters)) {
     parameters = "";
+  }
 
   params = StrTok(parameters, ";");
   foreach(param in params) {

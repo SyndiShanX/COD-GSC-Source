@@ -524,8 +524,9 @@ custom_eog_summary() {
     player add_custom_eog_summary_line("@SO_ROOFTOP_CONTINGENCY_STANDARD_KILLS", standard_kills);
     player add_custom_eog_summary_line("@SO_ROOFTOP_CONTINGENCY_HELLFIRE_KILLS", player.hellfire_kills);
     player add_custom_eog_summary_line("@SO_ROOFTOP_CONTINGENCY_CLAYMORE_KILLS", player.claymore_kills);
-    if(is_coop_online())
+    if(is_coop_online()) {
       player maps\_endmission::use_custom_eog_default_kills(get_other_player(player));
+    }
   }
 }
 
@@ -899,8 +900,9 @@ player_on_roof_think() {
 }
 
 set_grenade_frequency(fraction) {
-  if(!isDefined(fraction))
+  if(!isDefined(fraction)) {
     fraction = 1;
+  }
 
   maps\_gameskill::add_fractional_data_point("playerGrenadeBaseTime", 0.25, 40000 * fraction); // original easy
   maps\_gameskill::add_fractional_data_point("playerGrenadeBaseTime", 0.75, 35000 * fraction); // original normal

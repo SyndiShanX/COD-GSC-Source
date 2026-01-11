@@ -20,8 +20,9 @@ main(n_fog_blend_time) {
 
   n_exposure = 3.32;
 
-  if(b_blend_exposure)
+  if(b_blend_exposure) {
     level thread blend_exposure_over_time(n_exposure, n_fog_blend_time);
+  }
   else {
     setdvar("r_exposureTweak", 1);
     setdvar("r_exposureValue", n_exposure);
@@ -31,8 +32,9 @@ main(n_fog_blend_time) {
 }
 
 art_jet_mode_settings(n_transition_time) {
-  if(isDefined(n_transition_time))
+  if(isDefined(n_transition_time)) {
     time = n_transition_time;
+  }
 
   setsaveddvar("sm_sunSampleSizeNear", 0.25);
   m_god_rays = getEntArray("godrays", "targetname");
@@ -44,8 +46,9 @@ art_jet_mode_settings(n_transition_time) {
 }
 
 art_vtol_mode_settings(n_transition_time) {
-  if(isDefined(n_transition_time))
+  if(isDefined(n_transition_time)) {
     time = n_transition_time;
+  }
 
   setsaveddvar("sm_sunSampleSizeNear", 0.5);
   m_god_rays = getEntArray("godrays", "targetname");

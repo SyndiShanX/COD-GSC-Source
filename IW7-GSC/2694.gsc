@@ -4,16 +4,18 @@
 ***************************************/
 
 main() {
-  if(!isDefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
+  }
 
   var_00 = getarraykeys(level.anim_prop_models);
 
   foreach(var_02 in var_00) {
     var_03 = getarraykeys(level.anim_prop_models[var_02]);
 
-    foreach(var_05 in var_03)
+    foreach(var_05 in var_03) {
     precachempanim(level.anim_prop_models[var_02][var_05]);
+    }
   }
 
   waittillframeend;
@@ -24,8 +26,9 @@ main() {
 }
 
 animatemodel() {
-  if(isDefined(self.animation))
+  if(isDefined(self.animation)) {
     var_00 = self.animation;
+  }
   else {
     var_01 = getarraykeys(level.anim_prop_models[self.model]);
     var_02 = var_1[randomint(var_1.size)];

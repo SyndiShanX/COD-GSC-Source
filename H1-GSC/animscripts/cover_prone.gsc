@@ -65,10 +65,12 @@ main() {
     return;
   }
 
-  if(isDefined(self.a.arrivaltype) && self.a.arrivaltype == "prone_saw")
+  if(isDefined(self.a.arrivaltype) && self.a.arrivaltype == "prone_saw") {
     animscripts\cover_wall::useselfplacedturret("saw_bipod_prone", "weapon_saw_MG_Setup", 0);
-  else if(isDefined(self.node.turret))
+  }
+  else if(isDefined(self.node.turret)) {
     animscripts\cover_wall::usestationaryturret();
+  }
 
   if(isDefined(self.enemy) && lengthsquared(self.origin - self.enemy.origin) < squared(512)) {
     thread animscripts\combat::main();
@@ -88,8 +90,9 @@ main() {
   } else {
     var_0 = 0;
 
-    if(self.a.movement != "stop")
+    if(self.a.movement != "stop") {
       var_0 = 0.15;
+    }
 
     animscripts\utility::enterpronewrapper(var_0);
 
@@ -155,46 +158,58 @@ doturn(var_0, var_1) {
   if(self.a.scriptstarttime + 500 > gettime()) {
     var_4 = 0.25;
 
-    if(var_5)
+    if(var_5) {
       thread animscripts\combat::faceenemyimmediately();
+    }
   } else if(var_5) {
     var_6 = 1.0 - distance(self.enemy.origin, self.origin) / 512;
     var_3 = 1 + var_6 * 1;
 
-    if(var_3 > 2)
+    if(var_3 > 2) {
       var_4 = 0.05;
-    else if(var_3 > 1.3)
+    }
+    else if(var_3 > 1.3) {
       var_4 = 0.1;
-    else
+    }
+    else {
       var_4 = 0.15;
+    }
   }
 
   var_7 = 0;
 
-  if(var_1 > 157.5)
+  if(var_1 > 157.5) {
     var_7 = 180;
-  else if(var_1 > 67.5)
+  }
+  else if(var_1 > 67.5) {
     var_7 = 90;
-  else
+  }
+  else {
     var_7 = 45;
+  }
 
   var_8 = "turn_" + var_0 + "_" + var_7;
   var_9 = animscripts\utility::animarray(var_8);
 
-  if(isDefined(self.turntomatchnode))
+  if(isDefined(self.turntomatchnode)) {
     self animmode("angle deltas", 0);
-  else if(isDefined(self.node) && isDefined(anim.iscombatpathnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256)
+  }
+  else if(isDefined(self.node) && isDefined(anim.iscombatpathnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256) {
     self animmode("angle deltas", 0);
-  else if(animscripts\combat::isanimdeltaingoal(var_9))
+  }
+  else if(animscripts\combat::isanimdeltaingoal(var_9)) {
     animscripts\combat::resetanimmode();
-  else
+  }
+  else {
     self animmode("angle deltas", 0);
+  }
 
   self setanimknoball( % exposed_aiming, % body, 1, var_4);
   self setanimlimited( % turn, 1, var_4);
 
-  if(isDefined(self.heat))
+  if(isDefined(self.heat)) {
     var_3 = min(1.0, var_3);
+  }
 
   self setflaggedanimknoblimitedrestart("turn", var_9, 1, var_4, var_3);
   self notify("turning");
@@ -213,13 +228,15 @@ doturn(var_0, var_1) {
 }
 
 needtoturn() {
-  if(!isDefined(self.enableproneturn))
+  if(!isDefined(self.enableproneturn)) {
     return 0;
+  }
 
   var_0 = self.shootpos;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_1 = self.angles[1] - vectortoyaw(var_0 - self.origin);
   var_2 = distancesquared(self.origin, var_0);
@@ -227,8 +244,9 @@ needtoturn() {
   if(var_2 < 65536) {
     var_3 = sqrt(var_2);
 
-    if(var_3 > 3)
+    if(var_3 > 3) {
       var_1 = var_1 + asin(-3 / var_3);
+    }
   }
 
   return animscripts\utility::absangleclamp180(var_1) > self.turnthreshold;
@@ -254,13 +272,15 @@ coverproneneedtoturn() {
   if(needtoturn()) {
     var_0 = 0.25;
 
-    if(isDefined(self.shootent) && !issentient(self.shootent))
+    if(isDefined(self.shootent) && !issentient(self.shootent)) {
       var_0 = 1.5;
+    }
 
     var_1 = animscripts\shared::getpredictedaimyawtoshootentorpos(var_0);
 
-    if(turntofacerelativeyaw(var_1))
+    if(turntofacerelativeyaw(var_1)) {
       return 1;
+    }
   }
 
   return 0;
@@ -334,10 +354,12 @@ setup_cover_prone() {
 trythrowinggrenade(var_0, var_1) {
   var_2 = undefined;
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     var_2 = animscripts\utility::animarraypickrandom("grenade_safe");
-  else
+  }
+  else {
     var_2 = animscripts\utility::animarraypickrandom("grenade_exposed");
+  }
 
   self animmode("zonly_physics");
   self.keepclaimednodeifvalid = 1;
@@ -349,25 +371,30 @@ trythrowinggrenade(var_0, var_1) {
 
 considerthrowgrenade() {
   if(isDefined(anim.throwgrenadeatplayerasap) && isalive(level.player)) {
-    if(trythrowinggrenade(level.player, 200))
+    if(trythrowinggrenade(level.player, 200)) {
       return 1;
+    }
   }
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return trythrowinggrenade(self.enemy, 850);
+  }
 
   return 0;
 }
 
 shouldfirewhilechangingpose() {
-  if(!isDefined(self.weapon) || !weaponisauto(self.weapon))
+  if(!isDefined(self.weapon) || !weaponisauto(self.weapon)) {
     return 0;
+  }
 
-  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 256)
+  if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 256) {
     return 0;
+  }
 
-  if(isDefined(self.enemy) && self cansee(self.enemy) && !isDefined(self.grenade) && animscripts\shared::getaimyawtoshootentorpos() < 20)
+  if(isDefined(self.enemy) && self cansee(self.enemy) && !isDefined(self.grenade) && animscripts\shared::getaimyawtoshootentorpos() < 20) {
     return animscripts\move::mayshootwhilemoving();
+  }
 
   return 0;
 }
@@ -379,10 +406,12 @@ prone_transitionto(var_0) {
   self clearanim( % animscript_root, 0.3);
   animscripts\combat_utility::endfireandanimidlethread();
 
-  if(shouldfirewhilechangingpose())
+  if(shouldfirewhilechangingpose()) {
     var_1 = animscripts\utility::animarray(self.a.pose + "_2_" + var_0 + "_firing");
-  else
+  }
+  else {
     var_1 = animscripts\utility::animarray(self.a.pose + "_2_" + var_0);
+  }
 
   if(var_0 == "prone") {}
 
@@ -410,30 +439,37 @@ proneto(var_0, var_1, var_2) {
   var_3 = undefined;
 
   if(shouldfirewhilechangingpose()) {
-    if(var_0 == "crouch")
+    if(var_0 == "crouch") {
       var_3 = % prone_2_crouch_firing;
-    else if(var_0 == "stand")
+    }
+    else if(var_0 == "stand") {
       var_3 = % prone_2_stand_firing;
+    }
   } else if(var_0 == "crouch")
     var_3 = % prone_2_crouch;
-  else if(var_0 == "stand")
+  else if(var_0 == "stand") {
     var_3 = % prone_2_stand_nodelta;
+  }
 
-  if(isDefined(self.prone_anim_override))
+  if(isDefined(self.prone_anim_override)) {
     var_3 = self.prone_anim_override;
+  }
 
-  if(isDefined(self.prone_rate_override))
+  if(isDefined(self.prone_rate_override)) {
     var_1 = self.prone_rate_override;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   animscripts\utility::exitpronewrapper(getanimlength(var_3) / 2);
   self setflaggedanimknoballrestart("trans", var_3, % body, 1, 0.2, var_1);
   animscripts\shared::donotetracks("trans");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.1;
+  }
 
   self clearanim(var_3, var_2);
 }

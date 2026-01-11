@@ -17,8 +17,9 @@ spawn_start_guys(var_0) {
   maps\oilrocks_code::assign_friendly_heros();
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4.script_friendname) && var_4.script_friendname == "Logan")
+    if(isDefined(var_4.script_friendname) && var_4.script_friendname == "Logan") {
       var_4 delete();
+    }
   }
 
   var_2 = common_scripts\utility::array_removeundefined(var_2);
@@ -40,8 +41,9 @@ spawn_start_guys(var_0) {
 convert_old_spawners_to_structs(var_0) {
   var_1 = getEntArray(var_0.target, "targetname");
 
-  if(var_1.size == 0)
+  if(var_1.size == 0) {
     return common_scripts\utility::getstructarray(var_0.target, "targetname");
+  }
 
   var_2 = [];
 
@@ -49,10 +51,12 @@ convert_old_spawners_to_structs(var_0) {
     var_5 = spawnStruct();
     var_5.origin = var_4.origin;
 
-    if(isDefined(var_4.angles))
+    if(isDefined(var_4.angles)) {
       var_5.angles = var_4.angles;
-    else
+    }
+    else {
       var_5.angles = (0, 0, 0);
+    }
 
     var_2[var_2.size] = var_5;
   }
@@ -74,8 +78,9 @@ color_helper_trigger() {
   var_1 = getent(var_0.target, "targetname");
 
   if(!isDefined(var_1)) {
-    if(!maps\_utility::is_default_start())
+    if(!maps\_utility::is_default_start()) {
       iprintln("can't find color_trigger for trigger with target, " + var_0.target);
+    }
 
     return;
   }
@@ -86,8 +91,9 @@ color_helper_trigger() {
     self waittill("trigger");
     var_0 maps\_utility::waittill_volume_dead_or_dying();
 
-    if(level.player istouching(self))
+    if(level.player istouching(self)) {
       var_1 notify("trigger");
+    }
   }
 }
 

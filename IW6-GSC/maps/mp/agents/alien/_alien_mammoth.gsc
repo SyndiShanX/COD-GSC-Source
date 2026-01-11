@@ -4,8 +4,9 @@
 ***************************************************/
 
 mammoth_level_init() {
-  if(!isDefined(level.alien_funcs))
+  if(!isDefined(level.alien_funcs)) {
     level.alien_funcs = [];
+  }
 
   level.alien_funcs["mammoth"]["approach"] = ::mammoth_approach;
   level.alien_funcs["mammoth"]["combat"] = maps\mp\agents\alien\_alien_think::default_alien_combat;
@@ -79,8 +80,9 @@ burrow(var_0) {
   level notify("dlc_vo_notify", "warn_dig", self);
   thread burrow_fx();
 
-  if(isDefined(self.burrow_now) && self.burrow_now)
+  if(isDefined(self.burrow_now) && self.burrow_now) {
     self.burrow_now = undefined;
+  }
 
   self.lastburrowattacktime = gettime();
   self.burrowing = 1;
@@ -101,8 +103,9 @@ burrow(var_0) {
     var_6 = vectortoangles(var_5 - var_4);
   } else if(isDefined(self.emerge_angles))
     var_6 = self.emerge_angles;
-  else
+  else {
     var_6 = self.last_burrow_angles;
+  }
 
   self scragentsetorientmode("face angle abs", var_6);
   var_3 = rotatevector(var_3, var_6);
@@ -137,8 +140,9 @@ get_valid_burrow_emerge_location(var_0) {
   if(isalive(var_0) && !is_enemy_vanguard(var_0)) {
     var_4 = find_emerge_node(var_0, var_1, var_2);
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = find_emerge_node(var_0, var_2, var_3);
+    }
   }
 
   if(!isDefined(var_4)) {
@@ -174,22 +178,28 @@ find_emerge_node(var_0, var_1, var_2) {
 }
 
 mammoth_approach(var_0, var_1) {
-  if(distancesquared(var_0.origin, self.origin) > 250000)
+  if(distancesquared(var_0.origin, self.origin) > 250000) {
     mammoth_approach_enemy(500, var_0);
+  }
 
   for(;;) {
     if(!self.burrowing) {
-      if(should_do_fissure_spawn())
+      if(should_do_fissure_spawn()) {
         return "fissure_spawn";
+      }
 
-      if(should_do_new_phase())
+      if(should_do_new_phase()) {
         return "mammoth_angered";
-      else if(should_burrow(var_0))
+      }
+      else if(should_burrow(var_0)) {
         return "burrow";
-      else if(maps\mp\agents\alien\_alien_elite::can_do_charge_attack(var_0))
+      }
+      else if(maps\mp\agents\alien\_alien_elite::can_do_charge_attack(var_0)) {
         return "charge";
-      else if(maps\mp\agents\alien\_alien_elite::run_to_slam(var_0))
+      }
+      else if(maps\mp\agents\alien\_alien_elite::run_to_slam(var_0)) {
         return "slam";
+      }
     }
 
     wait 0.05;
@@ -204,29 +214,36 @@ mammoth_approach_enemy(var_0, var_1) {
 }
 
 should_burrow(var_0) {
-  if(isDefined(self.burrow_now) && self.burrow_now)
+  if(isDefined(self.burrow_now) && self.burrow_now) {
     return 1;
+  }
 
-  if(is_enemy_vanguard(var_0))
+  if(is_enemy_vanguard(var_0)) {
     return 0;
+  }
 
-  if(!self.canburrow)
+  if(!self.canburrow) {
     return 0;
+  }
 
-  if(!self isonground())
+  if(!self isonground()) {
     return 0;
+  }
 
   foreach(var_2 in level.donotburrowvolumes) {
-    if(ispointinvolume(self.origin, var_2))
+    if(ispointinvolume(self.origin, var_2)) {
       return 0;
+    }
   }
 
   var_4 = 0;
 
-  if(distancesquared(self.origin, var_0.origin) > 262144.0)
+  if(distancesquared(self.origin, var_0.origin) > 262144.0) {
     var_4 = 1;
-  else if(attack_timer_expired() || burrow_timer_expired())
+  }
+  else if(attack_timer_expired() || burrow_timer_expired()) {
     var_4 = 1;
+  }
 
   return var_4 && has_room_to_burrow();
 }
@@ -241,15 +258,17 @@ has_room_to_burrow() {
 }
 
 attack_timer_expired() {
-  if(gettime() - self.lastattacktime > 10000)
+  if(gettime() - self.lastattacktime > 10000) {
     return 1;
+  }
 
   return 0;
 }
 
 burrow_timer_expired() {
-  if(gettime() - self.lastburrowattacktime > self.burrowtimeout)
+  if(gettime() - self.lastburrowattacktime > self.burrowtimeout) {
     return 1;
+  }
 
   return 0;
 }
@@ -257,31 +276,37 @@ burrow_timer_expired() {
 should_do_new_phase() {
   var_0 = [0.85, 0.5, 0.25];
 
-  if(self.currentphase >= var_0.size - 1)
+  if(self.currentphase >= var_0.size - 1) {
     return 0;
+  }
 
-  if(self.health / self.maxhealth > var_0[self.currentphase])
+  if(self.health / self.maxhealth > var_0[self.currentphase]) {
     return 0;
+  }
 
   return 1;
 }
 
 should_do_fissure_spawn(var_0) {
-  if(!self.canfissurespawn)
+  if(!self.canfissurespawn) {
     return 0;
+  }
 
-  if(!fissure_spawn_timer_expired())
+  if(!fissure_spawn_timer_expired()) {
     return 0;
+  }
 
-  if(!fissure_spawn_find_spawn_loc())
+  if(!fissure_spawn_find_spawn_loc()) {
     return 0;
+  }
 
   return 1;
 }
 
 fissure_spawn_timer_expired() {
-  if(gettime() - self.lastfissurespawntime > self.fissurespawntimeout)
+  if(gettime() - self.lastfissurespawntime > self.fissurespawntimeout) {
     return 1;
+  }
 
   return 0;
 }
@@ -293,23 +318,27 @@ fissure_spawn_find_spawn_loc() {
   var_2 = self.origin + var_0 * 56.0;
   var_2 = maps\mp\agents\_scriptedagents::droppostoground(var_2);
 
-  if(isDefined(var_2) && maps\mp\agents\_scriptedagents::canmovepointtopoint(self.origin, var_2, 12.0))
+  if(isDefined(var_2) && maps\mp\agents\_scriptedagents::canmovepointtopoint(self.origin, var_2, 12.0)) {
     self.fissurespawnlocs[self.fissurespawnlocs.size] = var_2;
+  }
 
   var_3 = self.origin + var_1 * 56.0;
   var_3 = maps\mp\agents\_scriptedagents::droppostoground(var_3);
 
-  if(isDefined(var_3) && maps\mp\agents\_scriptedagents::canmovepointtopoint(self.origin, var_3, 12.0))
+  if(isDefined(var_3) && maps\mp\agents\_scriptedagents::canmovepointtopoint(self.origin, var_3, 12.0)) {
     self.fissurespawnlocs[self.fissurespawnlocs.size] = var_3;
+  }
 
   var_4 = self.origin + var_1 * -56.0;
   var_4 = maps\mp\agents\_scriptedagents::droppostoground(var_4);
 
-  if(isDefined(var_4) && maps\mp\agents\_scriptedagents::canmovepointtopoint(self.origin, var_4, 12.0))
+  if(isDefined(var_4) && maps\mp\agents\_scriptedagents::canmovepointtopoint(self.origin, var_4, 12.0)) {
     self.fissurespawnlocs[self.fissurespawnlocs.size] = var_4;
+  }
 
-  if(self.fissurespawnlocs.size > 0)
+  if(self.fissurespawnlocs.size > 0) {
     return 1;
+  }
 
   return 0;
 }
@@ -323,8 +352,9 @@ fissure_spawn_attack(var_0) {
 release_reserved_space_on_death() {
   self waittill("death");
 
-  if(isDefined(self.reserved_space) && self.reserved_space > 0)
+  if(isDefined(self.reserved_space) && self.reserved_space > 0) {
     maps\mp\alien\_spawn_director::release_custom_spawn_space(self.reserved_space);
+  }
 }
 
 fissure_spawn(var_0) {
@@ -401,8 +431,9 @@ mammoth_angered(var_0) {
 fissure_spawn_angered(var_0) {
   self.numfissurespawns = get_default_fissure_spawns() * 2;
 
-  if(!fissure_spawn_find_spawn_loc())
+  if(!fissure_spawn_find_spawn_loc()) {
     self.fissurespawnlocs[self.fissurespawnlocs.size] = self.origin;
+  }
 
   fissure_spawn(var_0);
 }

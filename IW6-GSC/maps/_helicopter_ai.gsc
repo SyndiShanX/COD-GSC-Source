@@ -64,28 +64,34 @@ evasive_startmaneuvers(var_0, var_1) {
   var_0 notify("evasive_action_done");
   thread evasive_endmaneuvers(var_0);
 
-  if(getdvar("cobrapilot_debug") == "1")
+  if(getdvar("cobrapilot_debug") == "1") {
     var_0 evasive_drawpoints(var_1);
+  }
 
   var_0 setneargoalnotifydist(1500);
   var_0 vehicle_setspeed(100, 30, 30);
   var_2 = var_0.angles[1];
 
   for(var_3 = 1; var_3 < var_1.size; var_3++) {
-    if(isDefined(var_1[var_3 + 1]))
+    if(isDefined(var_1[var_3 + 1])) {
       var_4 = vectortoangles(var_1[var_3 + 1]["pos"] - var_1[var_3]["pos"]);
-    else
+    }
+    else {
       var_4 = (0, var_2, 0);
+    }
 
     var_5 = var_4[1];
 
-    if(var_1[var_3]["goalYawMethod"] == "average")
+    if(var_1[var_3]["goalYawMethod"] == "average") {
       var_5 = (var_4[1] + var_2) / 2;
-    else if(var_1[var_3]["goalYawMethod"] == "forward")
+    }
+    else if(var_1[var_3]["goalYawMethod"] == "forward") {
       var_5 = var_0.angles[1];
+    }
 
-    if(getdvar("cobrapilot_debug") == "1")
+    if(getdvar("cobrapilot_debug") == "1") {
       thread maps\_utility::draw_line_until_notify(var_1[var_3]["pos"], var_1[var_3]["pos"] + anglesToForward((0, var_5, 0)) * 250, 1.0, 1.0, 0.2, var_0, "evasive_action_done");
+    }
 
     var_0 settargetyaw(var_5);
     var_0 thread maps\_vehicle_code::setvehgoalpos_wrap(var_1[var_3]["pos"], 0);
@@ -114,11 +120,13 @@ evasive_addpoint(var_0, var_1, var_2, var_3) {
 
   var_4 = self.evasive_points.size;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = "none";
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   self.evasive_points[var_4]["forward"] = var_0;
   self.evasive_points[var_4]["side"] = var_1;
@@ -136,8 +144,9 @@ evasive_getallpoints(var_0) {
 }
 
 evasive_drawpoints(var_0) {
-  for(var_1 = 1; var_1 < var_0.size; var_1++)
+  for(var_1 = 1; var_1 < var_0.size; var_1++) {
     thread maps\_utility::draw_line_until_notify(var_0[var_1 - 1]["pos"], var_0[var_1]["pos"], 1.0, 0.2, 0.2, self, "evasive_action_done");
+  }
 }
 
 wingman_think(var_0) {
@@ -192,21 +201,25 @@ wingman_think(var_0) {
       var_16 = var_6;
       var_17 = var_7;
 
-      if(var_16 >= var_15 / 2)
+      if(var_16 >= var_15 / 2) {
         var_16 = var_15 / 2;
+      }
 
-      if(var_17 >= var_15 / 2)
+      if(var_17 >= var_15 / 2) {
         var_17 = var_15 / 2;
+      }
 
       var_0 vehicle_setspeed(var_15, var_16, var_17);
       var_0 settargetyaw(level.playervehicle.angles[1]);
       var_18 = 0;
 
-      if(getplayerhelispeed() <= 30)
+      if(getplayerhelispeed() <= 30) {
         var_18 = 1;
+      }
 
-      if(getdvar("cobrapilot_debug") == "1")
+      if(getdvar("cobrapilot_debug") == "1") {
         iprintln("wingman speed: " + var_15 + " : " + var_18);
+      }
 
       var_0 setvehgoalpos(var_12, var_18);
     }

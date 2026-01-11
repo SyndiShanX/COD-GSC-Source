@@ -17,8 +17,9 @@ initialize() {
   var_0.max_ai_out = 9;
   var_1 = maps\_utility::getstructarray_delete("proximity_spawned_ai", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_0.locations[var_0.locations.size] = var_3;
+  }
 
   level.proximity_spawn_ai = var_0;
   common_scripts\utility::create_lock("proximity_spawned_ai_heavy_hide");
@@ -40,21 +41,26 @@ monitor_spawners() {
 
     foreach(var_3, var_2 in self.locations) {
       if(isDefined(var_2)) {
-        if(isDefined(var_2.exhausted))
+        if(isDefined(var_2.exhausted)) {
           var_0[var_0.size] = var_2;
+        }
 
-        if(distancesquared(var_2.origin, level.player.origin) < self.distance_to_spawn && common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, 0.342))
+        if(distancesquared(var_2.origin, level.player.origin) < self.distance_to_spawn && common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, 0.342)) {
           thread spawn_ai_for_location(var_2);
-        else if(isDefined(var_2.living_ai) && var_2.living_ai.size)
+        }
+        else if(isDefined(var_2.living_ai) && var_2.living_ai.size) {
           maps\_utility::array_notify(var_2.living_ai, "player_out_of_range");
+        }
       }
 
-      if(var_3 % 7 == 0)
+      if(var_3 % 7 == 0) {
         wait 0.05;
+      }
     }
 
-    if(var_0.size)
+    if(var_0.size) {
       self.locations = common_scripts\utility::array_remove_array(self.locations, var_0);
+    }
   }
 }
 
@@ -71,8 +77,9 @@ set_spawners_for_location(var_0) {
       var_3 = getnodearray(var_2.target, "targetname");
 
       foreach(var_5 in var_3) {
-        if(!isDefined(var_5.radius) || var_5.radius == 2048)
+        if(!isDefined(var_5.radius) || var_5.radius == 2048) {
           var_5.radius = 128;
+        }
       }
     }
   }
@@ -82,8 +89,9 @@ set_spawners_for_location(var_0) {
 }
 
 spawn_ai_for_location(var_0) {
-  if(!isDefined(var_0.living_ai))
+  if(!isDefined(var_0.living_ai)) {
     set_spawners_for_location(var_0);
+  }
 
   if(var_0.living_ai.size) {
     return;
@@ -95,8 +103,9 @@ spawn_ai_for_location(var_0) {
 
   var_1 = spawn_ai_for_location_from_pool(var_0);
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   thread ai_track(var_3, var_0);
+  }
 }
 
 spawn_ai_for_location_from_pool(var_0) {
@@ -126,15 +135,17 @@ ai_track(var_0, var_1) {
   var_0 endon("death");
   var_3 = var_0 common_scripts\utility::waittill_any_return("goal", "player_out_of_range", "return_to_spawn_hole");
 
-  if(var_3 != "return_to_spawn_hole" && var_3 != "player_out_of_range")
+  if(var_3 != "return_to_spawn_hole" && var_3 != "player_out_of_range") {
     common_scripts\utility::waittill_notify_or_timeout_return("return_to_spawn_hole", self.ai_out_time);
+  }
 
   if(common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, 0.3746)) {
     var_0 maps\_utility::set_goal_pos(var_2);
     var_0 maps\_utility::set_goal_radius(64);
 
-    if(common_scripts\utility::waittill_notify_or_timeout_return("goal", 2) == "timeout")
+    if(common_scripts\utility::waittill_notify_or_timeout_return("goal", 2) == "timeout") {
       var_0 do_heavy_delete_wait();
+    }
   } else {}
 
   var_0 delete();
@@ -162,11 +173,13 @@ ai_track_death_by_player(var_0, var_1) {
   var_0 waittill("death", var_2);
   var_3 = isalive(var_2) && isplayer(var_2);
 
-  if(!var_3 && isDefined(var_2) && var_2.classname == "worldspawn")
+  if(!var_3 && isDefined(var_2) && var_2.classname == "worldspawn") {
     var_3 = 1;
+  }
 
-  if(isDefined(var_2.owner) && var_2.owner == level.player)
+  if(isDefined(var_2.owner) && var_2.owner == level.player) {
     var_3 = 1;
+  }
 
   if(var_3) {
     var_1.player_killed_ai_count++;
@@ -175,13 +188,15 @@ ai_track_death_by_player(var_0, var_1) {
 }
 
 try_exausting_location(var_0) {
-  if(var_0.player_killed_ai_count >= var_0.ai_to_kill)
+  if(var_0.player_killed_ai_count >= var_0.ai_to_kill) {
     var_0.exhausted = 1;
+  }
 }
 
 end() {
-  if(isDefined(level.proximity_spawn_ai))
+  if(isDefined(level.proximity_spawn_ai)) {
     level.proximity_spawn_ai notify("monitor_spawners");
+  }
 }
 
 test_all() {
@@ -190,8 +205,9 @@ test_all() {
   level.proxytestent = common_scripts\utility::spawn_tag_origin();
   level.player playerlinkto(level.proxytestent, "tag_origin");
 
-  foreach(var_1 in level.proximity_spawn_ai.locations)
+  foreach(var_1 in level.proximity_spawn_ai.locations) {
   level.proximity_spawn_ai test_location(var_1);
+  }
 
   iprintlnbold("success!!");
   level waittill("forever");
@@ -207,16 +223,18 @@ test_location(var_0) {
   var_3 = spawn_ai_for_location_from_pool(var_0);
   var_0.ai_test_count = var_3.size;
 
-  foreach(var_5 in var_3)
+  foreach(var_5 in var_3) {
   thread test_individual_spawner(var_0, var_5);
+  }
 
   var_7 = gettime() + 20000;
 
   while(var_0.ai_test_count) {
     wait 0.05;
 
-    if(gettime() > var_7)
+    if(gettime() > var_7) {
       iprintlnbold("timeout!");
+    }
   }
 }
 
@@ -224,8 +242,9 @@ test_individual_spawner(var_0, var_1) {
   test_guy_do_goalor_die(var_1);
   var_0.ai_test_count--;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 test_guy_do_goalor_die(var_0) {
@@ -244,6 +263,7 @@ start() {
 }
 
 start_test() {
-  if(isDefined(level.proxy_start_test))
+  if(isDefined(level.proxy_start_test)) {
     test_all();
+  }
 }

@@ -71,10 +71,12 @@ triggercheck(target) {
       target notify("targetStopMoving");
 
       while(isDefined(player) && player istouching(self) && distance <= 90) {
-        if(distancesquared(target.origin, target.railpoints[0]) < distancesquared(player.origin, target.railpoints[0]))
+        if(distancesquared(target.origin, target.railpoints[0]) < distancesquared(player.origin, target.railpoints[0])) {
           target.preferrednextpos = 0;
-        else
+        }
+        else {
           target.preferrednextpos = 1;
+        }
 
         wait 0.25;
       }
@@ -102,8 +104,9 @@ damagetarget(dir) {
         if(isDefined(attacker) && isplayer(attacker)) {
           yaw = get2dyaw(attacker.origin, self.origin);
 
-          if(attacker.angles[1] > yaw)
+          if(attacker.angles[1] > yaw) {
             rotation = -1;
+          }
         }
 
         self rotateyaw(self.angles[2] + 180 * rotation, 0.3);
@@ -194,10 +197,12 @@ movetarget(dir, dis, speed) {
   while(true) {
     nextpos = self.railpoints[self.preferrednextpos];
 
-    if(self.preferrednextpos == 0)
+    if(self.preferrednextpos == 0) {
       self.preferrednextpos = 1;
-    else
+    }
+    else {
       self.preferrednextpos = 0;
+    }
 
     self moveto(nextpos, speed);
     self waittill_either("movedone", "targetStopMoving");
@@ -287,8 +292,9 @@ movement_process() {
           continue;
         }
         if(entity.name == "satchel_charge_mp") {
-          if(entity.origin[2] > self.origin[2] + 5)
+          if(entity.origin[2] > self.origin[2] + 5) {
             continue;
+          }
         }
 
         watcher = entity.owner getwatcherforweapon(entity.name);
@@ -306,8 +312,9 @@ movement_process() {
         }
       }
 
-      if(isDefined(entity.model) && entity.model == "t6_wpn_tac_insert_world")
+      if(isDefined(entity.model) && entity.model == "t6_wpn_tac_insert_world") {
         entity thread maps\mp\_tacticalinsertion::fizzle();
+      }
     }
 
     wait 0.25;
@@ -315,11 +322,13 @@ movement_process() {
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return undefined;
+  }
 
-  if(!isplayer(self))
+  if(!isplayer(self)) {
     return undefined;
+  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {
@@ -337,7 +346,8 @@ death_streamer_think(notifytype, attacker) {
   for(i = 0; i < streamers.size; i++) {
     streamer = streamers[i];
 
-    if(distancesquared(streamer.origin, self.origin) < 2500)
+    if(distancesquared(streamer.origin, self.origin) < 2500) {
       streamer delete();
+    }
   }
 }

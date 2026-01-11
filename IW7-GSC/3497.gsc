@@ -19,13 +19,15 @@ givejuggernaut(var_00) {
   self endon("disconnect");
   wait 0.05;
 
-  if(isDefined(self.lightarmorhp))
+  if(isDefined(self.lightarmorhp)) {
     scripts\mp\perks\perkfunctions::unsetlightarmor();
+  }
 
   scripts\mp\weapons::func_5608();
 
-  if(scripts\mp\utility\game::_hasperk("specialty_explosivebullets"))
+  if(scripts\mp\utility\game::_hasperk("specialty_explosivebullets")) {
     scripts\mp\utility\game::removeperk("specialty_explosivebullets");
+  }
 
   self.health = self.maxhealth;
   var_01 = 1;
@@ -77,8 +79,9 @@ givejuggernaut(var_00) {
       break;
   }
 
-  if(func_CA4E("specialty_hardline"))
+  if(func_CA4E("specialty_hardline")) {
     scripts\mp\utility\game::giveperk("specialty_hardline");
+  }
 
   scripts\mp\weapons::updatemovespeedscale();
   self disableweaponpickup();
@@ -93,8 +96,9 @@ givejuggernaut(var_00) {
     }
   }
 
-  if(self.streaktype == "specialist")
+  if(self.streaktype == "specialist") {
     thread scripts\mp\killstreaks\killstreaks::func_41C0();
+  }
 
   thread func_A4AC();
 
@@ -111,8 +115,9 @@ func_CA4E(var_00) {
   var_01 = self.pers["loadoutPerks"];
 
   foreach(var_03 in var_01) {
-    if(var_03 == var_00)
+    if(var_03 == var_00) {
       return 1;
+    }
   }
 
   return 0;
@@ -137,8 +142,9 @@ func_13AB0() {
     level waittill("host_migration_end");
 
     foreach(var_01 in level.players) {
-      if(isai(var_01))
+      if(isai(var_01)) {
         continue;
+      }
       else {
         if(var_01 scripts\mp\utility\game::isjuggernaut() && !(isDefined(var_1.isjuggernautlevelcustom) && var_1.isjuggernautlevelcustom)) {
           var_01 setclientomnvar("ui_juggernaut", 1);
@@ -165,8 +171,9 @@ func_A4AC() {
   self.isjuggernautmaniac = 0;
   self.isjuggernautlevelcustom = 0;
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     self setclientomnvar("ui_juggernaut", 0);
+  }
 
   self unsetperk("specialty_radarjuggernaut", 1);
   self notify("jugg_removed");
@@ -177,8 +184,9 @@ func_A4AB() {
   self endon("jugg_removed");
   level waittill("game_ended");
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     self setclientomnvar("ui_juggernaut", 0);
+  }
 }
 
 func_F766() {
@@ -242,8 +250,9 @@ func_13A13() {
   level endon("game_ended");
 
   for(;;) {
-    if(isDefined(self.func_A4A4) && !scripts\mp\utility\game::isusingremote())
+    if(isDefined(self.func_A4A4) && !scripts\mp\utility\game::isusingremote()) {
       func_626C();
+    }
 
     wait 0.05;
   }

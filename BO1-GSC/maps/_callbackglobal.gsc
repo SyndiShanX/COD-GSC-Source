@@ -46,10 +46,12 @@ SetupCallbacks() {
   level._callbacks["on_actor_killed"] = [];
   level._callbacks["on_vehicle_damage"] = [];
   level._callbacks["on_save_restored"] = [];
-  if(!isDefined(level.onMenuMessage))
+  if(!isDefined(level.onMenuMessage)) {
     level.onMenuMessage = ::blank;
-  if(!isDefined(level.onDec20Message))
+  }
+  if(!isDefined(level.onDec20Message)) {
     level.onDec20Message = ::blank;
+  }
 }
 
 AddCallback(event, func) {

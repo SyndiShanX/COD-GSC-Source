@@ -11,12 +11,15 @@ Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
   }
   self.iDFlags = iDFlags;
   self.iDFlagsTime = getTime();
-  if(game["state"] == "postgame")
+  if(game["state"] == "postgame") {
     return;
-  if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(eAttacker.canDoCombat) && !eAttacker.canDoCombat)
+  }
+  if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(eAttacker.canDoCombat) && !eAttacker.canDoCombat) {
     return;
-  if(!isDefined(vDir))
+  }
+  if(!isDefined(vDir)) {
     iDFlags |= level.iDFLAGS_NO_KNOCKBACK;
+  }
   friendly = false;
   if((isDefined(self.maxhealth) && (self.health == self.maxhealth)) || !isDefined(self.attackers)) {
     self.attackers = [];
@@ -24,10 +27,12 @@ Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
     self.attackerDamage = [];
   }
   if(sWeapon == "none" && isDefined(eInflictor)) {
-    if(isDefined(eInflictor.targetname) && eInflictor.targetname == "explodable_barrel")
+    if(isDefined(eInflictor.targetname) && eInflictor.targetname == "explodable_barrel") {
       sWeapon = "explodable_barrel_mp";
-    else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_"))
+    }
+    else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_")) {
       sWeapon = "destructible_car_mp";
+    }
   }
   if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(self IsVehicleImmuneToDamage(iDFlags, sMeansOfDeath, sWeapon)) {
@@ -48,8 +53,9 @@ Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
     }
     iDamage *= level.vehicleDamageScalar;
     iDamage = int(iDamage);
-    if(isPlayer(eAttacker))
+    if(isPlayer(eAttacker)) {
       eAttacker.pers["participation"]++;
+    }
     prevHealthRatio = self.health / self.maxhealth;
     if(isDefined(self.owner) && IsPlayer(self.owner)) {
       team = self.owner.pers["team"];
@@ -58,59 +64,73 @@ Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
     }
     if(level.teamBased && isPlayer(eAttacker) && (team == eAttacker.pers["team"])) {
       if(level.friendlyfire == 0) {
-        if(!AllowFriendlyFireDamage(eInflictor, eAttacker, sMeansOfDeath, sWeapon))
+        if(!AllowFriendlyFireDamage(eInflictor, eAttacker, sMeansOfDeath, sWeapon)) {
           return;
-        if(iDamage < 1)
+        }
+        if(iDamage < 1) {
           iDamage = 1;
+        }
         self.lastDamageWasFromEnemy = false;
         self finishVehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, damageFromUnderneath, modelIndex, partName, true);
       } else if(level.friendlyfire == 1) {
-        if(iDamage < 1)
+        if(iDamage < 1) {
           iDamage = 1;
+        }
         self.lastDamageWasFromEnemy = false;
         self finishVehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, damageFromUnderneath, modelIndex, partName, false);
       } else if(level.friendlyfire == 2) {
-        if(!AllowFriendlyFireDamage(eInflictor, eAttacker, sMeansOfDeath, sWeapon))
+        if(!AllowFriendlyFireDamage(eInflictor, eAttacker, sMeansOfDeath, sWeapon)) {
           return;
-        if(iDamage < 1)
+        }
+        if(iDamage < 1) {
           iDamage = 1;
+        }
         self.lastDamageWasFromEnemy = false;
         self finishVehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, damageFromUnderneath, modelIndex, partName, true);
       } else if(level.friendlyfire == 3) {
         iDamage = int(iDamage * .5);
-        if(iDamage < 1)
+        if(iDamage < 1) {
           iDamage = 1;
+        }
         self.lastDamageWasFromEnemy = false;
         self finishVehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, damageFromUnderneath, modelIndex, partName, false);
       }
       friendly = true;
     } else {
-      if(!level.teamBased && isDefined(self.targetname) && self.targetname == "rcbomb") {} else if(isDefined(self.owner) && self.owner == eAttacker)
+      if(!level.teamBased && isDefined(self.targetname) && self.targetname == "rcbomb") {} else if(isDefined(self.owner) && self.owner == eAttacker) {
         return;
-      if(iDamage < 1)
+      }
+      if(iDamage < 1) {
         iDamage = 1;
-      if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(sWeapon))
+      }
+      if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(sWeapon)) {
         eAttacker thread maps\mp\gametypes\_weapons::checkHit(sWeapon);
-      if(issubstr(sMeansOfDeath, "MOD_GRENADE") && isDefined(eInflictor.isCooked))
+      }
+      if(issubstr(sMeansOfDeath, "MOD_GRENADE") && isDefined(eInflictor.isCooked)) {
         self.wasCooked = getTime();
-      else
+      }
+      else {
         self.wasCooked = undefined;
+      }
       attacker_seat = undefined;
-      if(isDefined(eAttacker))
+      if(isDefined(eAttacker)) {
         attacker_seat = self GetOccupantSeat(eAttacker);
+      }
       self.lastDamageWasFromEnemy = (isDefined(eAttacker) && !isDefined(attacker_seat));
       self finishVehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, damageFromUnderneath, modelIndex, partName, false);
     }
     if(isDefined(eAttacker) && eAttacker != self) {
       if(maps\mp\gametypes\_globallogic_player::doDamageFeedback(sWeapon, eInflictor)) {
         hasBodyArmor = false;
-        if(iDamage > 0)
+        if(iDamage > 0) {
           eAttacker thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback(hasBodyArmor, sMeansOfDeath);
+        }
       }
     }
   }
-  if(GetDvarInt(#"g_debugDamage"))
+  if(GetDvarInt(#"g_debugDamage")) {
     println("actor:" + self getEntityNumber() + " health:" + self.health + " attacker:" + eAttacker.clientid + " inflictor is player:" + isPlayer(eInflictor) + " damage:" + iDamage + " hitLoc:" + sHitLoc);
+  }
   if(1) {
     lpselfnum = self getEntityNumber();
     lpselfteam = "";
@@ -135,10 +155,12 @@ Callback_VehicleRadiusDamage(eInflictor, eAttacker, iDamage, fInnerDamage, fOute
   fOuterDamage = maps\mp\gametypes\_class::cac_modified_vehicle_damage(self, eAttacker, fOuterDamage, sMeansOfDeath, sWeapon, eInflictor);
   self.iDFlags = iDFlags;
   self.iDFlagsTime = getTime();
-  if(game["state"] == "postgame")
+  if(game["state"] == "postgame") {
     return;
-  if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(eAttacker.canDoCombat) && !eAttacker.canDoCombat)
+  }
+  if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(eAttacker.canDoCombat) && !eAttacker.canDoCombat) {
     return;
+  }
   friendly = false;
   if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
     if(self IsVehicleImmuneToDamage(iDFlags, sMeansOfDeath, sWeapon)) {
@@ -159,35 +181,42 @@ Callback_VehicleRadiusDamage(eInflictor, eAttacker, iDamage, fInnerDamage, fOute
     occupant_team = self maps\mp\_vehicles::vehicle_get_occupant_team();
     if(level.teamBased && isPlayer(eAttacker) && (occupant_team == eAttacker.pers["team"])) {
       if(level.friendlyfire == 0) {
-        if(!AllowFriendlyFireDamage(eInflictor, eAttacker, sMeansOfDeath, sWeapon))
+        if(!AllowFriendlyFireDamage(eInflictor, eAttacker, sMeansOfDeath, sWeapon)) {
           return;
-        if(iDamage < 1)
+        }
+        if(iDamage < 1) {
           iDamage = 1;
+        }
         self.lastDamageWasFromEnemy = false;
         self finishVehicleRadiusDamage(eInflictor, eAttacker, iDamage, fInnerDamage, fOuterDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, fRadius, fConeAngleCos, vConeDir, psOffsetTime);
       } else if(level.friendlyfire == 1) {
-        if(iDamage < 1)
+        if(iDamage < 1) {
           iDamage = 1;
+        }
         self.lastDamageWasFromEnemy = false;
         self finishVehicleRadiusDamage(eInflictor, eAttacker, iDamage, fInnerDamage, fOuterDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, fRadius, fConeAngleCos, vConeDir, psOffsetTime);
       } else if(level.friendlyfire == 2) {
-        if(!AllowFriendlyFireDamage(eInflictor, eAttacker, sMeansOfDeath, sWeapon))
+        if(!AllowFriendlyFireDamage(eInflictor, eAttacker, sMeansOfDeath, sWeapon)) {
           return;
-        if(iDamage < 1)
+        }
+        if(iDamage < 1) {
           iDamage = 1;
+        }
         self.lastDamageWasFromEnemy = false;
         self finishVehicleRadiusDamage(eInflictor, eAttacker, iDamage, fInnerDamage, fOuterDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, fRadius, fConeAngleCos, vConeDir, psOffsetTime);
       } else if(level.friendlyfire == 3) {
         iDamage = int(iDamage * .5);
-        if(iDamage < 1)
+        if(iDamage < 1) {
           iDamage = 1;
+        }
         self.lastDamageWasFromEnemy = false;
         self finishVehicleRadiusDamage(eInflictor, eAttacker, iDamage, fInnerDamage, fOuterDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, fRadius, fConeAngleCos, vConeDir, psOffsetTime);
       }
       friendly = true;
     } else {
-      if(iDamage < 1)
+      if(iDamage < 1) {
         iDamage = 1;
+      }
       self finishVehicleRadiusDamage(eInflictor, eAttacker, iDamage, fInnerDamage, fOuterDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, fRadius, fConeAngleCos, vConeDir, psOffsetTime);
     }
   }
@@ -280,8 +309,9 @@ AllowFriendlyFireDamage(eInflictor, eAttacker, sMeansOfDeath, sWeapon) {
   if(isDefined(self.allowFriendlyFireDamageOverride)) {
     return [[self.allowFriendlyFireDamageOverride]](eInflictor, eAttacker, sMeansOfDeath, sWeapon);
   }
-  if(sWeapon != "artillery_mp")
+  if(sWeapon != "artillery_mp") {
     return false;
+  }
   vehicle = eAttacker GetVehicleOccupied();
   if((isDefined(vehicle) && vehicle == self) || (isDefined(self.owner) && self.owner == eAttacker)) {
     return true;

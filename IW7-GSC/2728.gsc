@@ -209,8 +209,9 @@ preloadfinalkillcam() {
   var_00 = level.finalkillcam_attacker[level.finalkillcam_winner];
 
   if(isDefined(var_00)) {
-    foreach(var_02 in level.players)
+    foreach(var_02 in level.players) {
     var_02 gettweakablelastvalue(var_00);
+    }
   }
 }
 
@@ -219,8 +220,9 @@ func_5853() {
   level.showingfinalkillcam = 1;
   var_00 = "none";
 
-  if(isDefined(level.finalkillcam_winner))
+  if(isDefined(level.finalkillcam_winner)) {
     var_00 = level.finalkillcam_winner;
+  }
 
   var_01 = level.finalkillcam_delay[var_00];
   var_02 = level.finalkillcam_victim[var_00];
@@ -259,13 +261,16 @@ func_5853() {
   }
 
   if(isDefined(var_03)) {
-    if(level.teambased)
+    if(level.teambased) {
       var_23 = var_3.team;
-    else
+    }
+    else {
       var_23 = var_3.guid;
+    }
 
-    if(isDefined(level.finalkillcam_attacker[var_23]) && level.finalkillcam_attacker[var_23] == var_03)
+    if(isDefined(level.finalkillcam_attacker[var_23]) && level.finalkillcam_attacker[var_23] == var_03) {
       scripts\mp\missions::processfinalkillchallenges(var_03, var_02);
+    }
   }
 
   var_24 = spawnStruct();
@@ -278,16 +283,18 @@ func_5853() {
     var_27.killcamentitylookat = var_02 getentitynumber();
     var_27 scripts\mp\damage::updatedeathdetails(var_17, var_18);
 
-    if(!scripts\mp\utility\game::iskillstreakweapon(var_11))
+    if(!scripts\mp\utility\game::iskillstreakweapon(var_11)) {
       var_27 scripts\mp\killcam::func_F770(var_11, var_16, var_05);
+    }
 
     var_27 thread scripts\mp\killcam::killcam(var_05, var_24, var_04, var_08, var_09, var_02 getentitynumber(), var_10, var_11, var_25 + var_12, var_13, 0, 12, var_03, var_02, var_16, var_19, var_20);
   }
 
   wait(0.15 + level.func_B4A7);
 
-  while(anyplayersinkillcam())
+  while(anyplayersinkillcam()) {
     wait 0.05;
+  }
 
   level notify("final_killcam_done");
   level.showingfinalkillcam = 0;
@@ -398,18 +405,21 @@ func_13717(var_00) {
 func_10266(var_00) {
   self endon("disconnect");
 
-  if(level.showingfinalkillcam)
+  if(level.showingfinalkillcam) {
     return 0;
+  }
 
   if(!isai(self)) {
     thread func_13716();
     thread func_13717(var_00);
     var_01 = scripts\engine\utility::waittill_any_return("killcam_death_done_waiting", "killcam_death_button_cancel");
 
-    if(var_01 == "killcam_death_done_waiting")
+    if(var_01 == "killcam_death_done_waiting") {
       return 0;
-    else
+    }
+    else {
       return 1;
+    }
   }
 
   return 0;
@@ -426,8 +436,9 @@ func_5854(var_00, var_01, var_02, var_03, var_04) {
   var_06 = 0;
   var_07 = var_03 getentitynumber();
 
-  if(!isDefined(var_0.func_24FF))
+  if(!isDefined(var_0.func_24FF)) {
     var_0.func_24FF = var_02 getentitynumber();
+  }
 
   var_08 = var_05;
 
@@ -502,8 +513,9 @@ func_5854(var_00, var_01, var_02, var_03, var_04) {
 
 anyplayersinkillcam() {
   foreach(var_01 in level.players) {
-    if(isDefined(var_1.killcam))
+    if(isDefined(var_1.killcam)) {
       return 1;
+    }
   }
 
   return 0;

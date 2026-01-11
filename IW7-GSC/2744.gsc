@@ -56,11 +56,13 @@ playerhealthregen() {
     var_02 = self.health / self.maxhealth;
     self.regenspeed = level.playerhealth_regularregendelay;
 
-    if(scripts\mp\utility\game::_hasperk("specialty_regenfaster"))
+    if(scripts\mp\utility\game::_hasperk("specialty_regenfaster")) {
       self.regenspeed = self.regenspeed * level.func_DE8A;
+    }
 
-    if(var_02 <= level.healthoverlaycutoff)
+    if(var_02 <= level.healthoverlaycutoff) {
       self.func_2410 = 1;
+    }
 
     thread healthregeneration(var_01, var_02);
   }
@@ -84,12 +86,15 @@ func_D367() {
   if(scripts\mp\utility\game::isusingremote()) {
     return;
   }
-  if(scripts\mp\utility\game::func_9D48("archetype_scout"))
+  if(scripts\mp\utility\game::func_9D48("archetype_scout")) {
     self playlocalsound("breathing_better_c6");
-  else if(scripts\mp\utility\game::isfemale())
+  }
+  else if(scripts\mp\utility\game::isfemale()) {
     self playlocalsound("Fem_breathing_better");
-  else
+  }
+  else {
     self playlocalsound("breathing_better");
+  }
 }
 
 healthregeneration(var_00, var_01) {
@@ -105,20 +110,25 @@ healthregeneration(var_00, var_01) {
     if(level.healthregendisabled) {
       return;
     }
-    while(scripts\mp\utility\game::istrue(self.healthregendisabled))
+    while(scripts\mp\utility\game::istrue(self.healthregendisabled)) {
       wait 0.5;
+    }
   }
 
-  if(!scripts\mp\utility\game::_hasperk("specialty_adrenaline"))
+  if(!scripts\mp\utility\game::_hasperk("specialty_adrenaline")) {
     scripts\mp\utility\game::func_1359E(self.regenspeed, "force_regeneration");
+  }
 
-  if(var_01 < 0.55)
+  if(var_01 < 0.55) {
     var_02 = 1;
-  else
+  }
+  else {
     var_02 = 0;
+  }
 
-  if(scripts\mp\utility\game::_hasperk("specialty_adrenaline") || scripts\mp\utility\game::_hasperk("specialty_regenfaster"))
+  if(scripts\mp\utility\game::_hasperk("specialty_adrenaline") || scripts\mp\utility\game::_hasperk("specialty_regenfaster")) {
     self setclientomnvar("ui_health_regen_hud", 1);
+  }
 
   var_03 = self.maxhealth / 50.0;
   var_04 = 0.0;
@@ -131,12 +141,15 @@ healthregeneration(var_00, var_01) {
     wait 0.05;
     var_06 = 0;
 
-    if(scripts\mp\utility\game::_hasperk("specialty_adrenaline") || scripts\mp\utility\game::_hasperk("specialty_adrenaline_lite"))
+    if(scripts\mp\utility\game::_hasperk("specialty_adrenaline") || scripts\mp\utility\game::_hasperk("specialty_adrenaline_lite")) {
       var_06 = scripts\mp\equipment\adrenaline::func_7EF5();
-    else if(scripts\mp\utility\game::_hasperk("specialty_regenfaster"))
+    }
+    else if(scripts\mp\utility\game::_hasperk("specialty_regenfaster")) {
       var_06 = var_03 * level.func_DE89;
-    else
+    }
+    else {
       var_06 = var_03;
+    }
 
     var_07 = 0;
 
@@ -151,8 +164,9 @@ healthregeneration(var_00, var_01) {
     if(self.health >= self.maxhealth) {
       self.health = self.maxhealth;
 
-      if(var_07 && scripts\mp\utility\game::_hasperk("specialty_regenfaster"))
+      if(var_07 && scripts\mp\utility\game::_hasperk("specialty_regenfaster")) {
         scripts\mp\missions::func_D991("ch_trait_icu");
+      }
 
       break;
     }
@@ -200,20 +214,24 @@ func_D368(var_00) {
     if(scripts\mp\utility\game::isusingremote()) {
       continue;
     }
-    if(scripts\mp\utility\game::func_9D48("archetype_scout"))
+    if(scripts\mp\utility\game::func_9D48("archetype_scout")) {
       self playlocalsound("breathing_hurt_c6");
-    else if(scripts\mp\utility\game::isfemale())
+    }
+    else if(scripts\mp\utility\game::isfemale()) {
       self playlocalsound("Fem_breathing_hurt");
-    else
+    }
+    else {
       self playlocalsound("breathing_hurt");
+    }
 
     wait 1.5;
 
     if(level.hardcoremode) {
       self.hardcoreinjuredlooopsplayed++;
 
-      if(self.hardcoreinjuredlooopsplayed > 3)
+      if(self.hardcoreinjuredlooopsplayed > 3) {
         return;
+      }
     }
   }
 }

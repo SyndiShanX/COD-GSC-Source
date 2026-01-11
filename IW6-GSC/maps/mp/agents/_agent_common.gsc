@@ -46,16 +46,20 @@ connectNewAgent(agent_type, team, class) {
   if(isDefined(agent)) {
     agent.connectTime = GetTime();
 
-    if(isDefined(team))
+    if(isDefined(team)) {
       agent set_agent_team(team);
-    else
+    }
+    else {
       agent set_agent_team(agent.team);
+    }
 
-    if(isDefined(class))
+    if(isDefined(class)) {
       agent.class_override = class;
+    }
 
-    if(isDefined(level.agent_funcs[agent_type]["onAIConnect"]))
+    if(isDefined(level.agent_funcs[agent_type]["onAIConnect"])) {
       agent[[agent agentFunc("onAIConnect")]]();
+    }
 
     agent maps\mp\gametypes\_spawnlogic::addToCharactersArray();
 

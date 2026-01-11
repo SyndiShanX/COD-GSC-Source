@@ -62,8 +62,9 @@ sq_buried_clientfield_init() {
   registerclientfield("world", "buried_sq_bp_light_08", 13000, 2, "int", ::sq_bp_tag08, 0);
   registerclientfield("world", "buried_sq_bp_light_09", 13000, 2, "int", ::sq_bp_tag09, 0);
 
-  if(!isDefined(level.gamedifficulty) || level.gamedifficulty != 0)
+  if(!isDefined(level.gamedifficulty) || level.gamedifficulty != 0) {
     clientscripts\mp\_visionset_mgr::vsmgr_register_visionset_info("cheat_bw", 12000, 1, "cheat_bw", "cheat_bw");
+  }
 }
 
 sq_wisp_fx_think() {
@@ -75,19 +76,22 @@ sq_wisp_fx_think() {
 }
 
 wisp_fx_enable(localclientnumber) {
-  if(isDefined(level.perk_vulture.vulture_vision.custom["wisp"]))
+  if(isDefined(level.perk_vulture.vulture_vision.custom["wisp"])) {
     level.perk_vulture.vulture_vision.custom["wisp"] _enable_wisp_fx(localclientnumber);
+  }
 }
 
 wisp_fx_disable(localclientnumber) {
-  if(isDefined(level.perk_vulture.vulture_vision.custom["wisp"]) && isDefined(level.perk_vulture.vulture_vision.custom["wisp"].vulture_fx) && isDefined(level.perk_vulture.vulture_vision.custom["wisp"].vulture_fx[localclientnumber]))
+  if(isDefined(level.perk_vulture.vulture_vision.custom["wisp"]) && isDefined(level.perk_vulture.vulture_vision.custom["wisp"].vulture_fx) && isDefined(level.perk_vulture.vulture_vision.custom["wisp"].vulture_fx[localclientnumber])) {
     deletefx(localclientnumber, level.perk_vulture.vulture_vision.custom["wisp"].vulture_fx[localclientnumber], 1);
+  }
 }
 
 toggle_wisp_fx(localclientnumber, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    if(!isDefined(level.perk_vulture.vulture_vision.custom["wisp"]))
+    if(!isDefined(level.perk_vulture.vulture_vision.custom["wisp"])) {
       level.perk_vulture.vulture_vision.custom["wisp"] = self;
+    }
 
     self _enable_wisp_fx(localclientnumber);
   } else {
@@ -116,8 +120,9 @@ _enable_wisp_fx(localclientnumber) {
   level endon("sq_stop_wisp");
   self endon("entityshutdown");
 
-  if(!isDefined(self.vulture_fx))
+  if(!isDefined(self.vulture_fx)) {
     self.vulture_fx = [];
+  }
 
   if(!isDefined(self.m_client)) {
     self.m_client = spawn(localclientnumber, self.origin, "script_model");
@@ -132,11 +137,13 @@ _enable_wisp_fx(localclientnumber) {
 
   while(isDefined(self)) {
     if(clientscripts\mp\zombies\_zm_perk_vulture::_player_has_vulture(localclientnumber)) {
-      if(!level.sq_wisp_at_tower)
+      if(!level.sq_wisp_at_tower) {
         playFXOnTag(localclientnumber, level._effect["vulture_fx_wisp"], self, "tag_origin");
+      }
 
-      for(i = 1; i <= level.sq_wisp_orb_count; i++)
+      for(i = 1; i <= level.sq_wisp_orb_count; i++) {
         playFXOnTag(localclientnumber, level._effect["vulture_fx_wisp_orb"], self.m_client, "tag_orb_fx" + i);
+      }
     }
 
     wait 0.25;
@@ -146,8 +153,9 @@ _enable_wisp_fx(localclientnumber) {
 cleanup_m_client(owner) {
   self endon("entityshutdown");
 
-  while(isDefined(owner))
+  while(isDefined(owner)) {
     wait 0.1;
+  }
 
   self delete();
 }
@@ -155,15 +163,18 @@ cleanup_m_client(owner) {
 _disable_wisp_fx(localclientnumber) {
   level notify("sq_stop_wisp");
 
-  if(isDefined(self.m_client))
+  if(isDefined(self.m_client)) {
     self.m_client stoploopsound(0.5);
+  }
 }
 
 toggle_sq_special_round(localclientnumber, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     level.sq_special_round_enabled = 1;
-  else
+  }
+  else {
     level.sq_special_round_enabled = 0;
+  }
 }
 
 sq_setup_player_connect(clientnum) {
@@ -177,8 +188,9 @@ sq_setup_player_connect(clientnum) {
 }
 
 sq_bp_spawn_button(clientnum) {
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   m_button = spawn(clientnum, self.origin, "script_model");
   m_button.angles = self.angles;
@@ -190,8 +202,9 @@ sq_bp_spawn_button(clientnum) {
 sq_spawn_model_at_struct(clientnum, str_struct, str_model) {
   s_struct = getstruct(str_struct, "targetname");
 
-  if(!isDefined(s_struct))
+  if(!isDefined(s_struct)) {
     return undefined;
+  }
 
   m_prop = spawn(clientnum, s_struct.origin, "script_model");
   m_prop.angles = s_struct.angles;
@@ -203,8 +216,9 @@ sq_spawn_model_at_struct(clientnum, str_struct, str_model) {
 sq_gallows_light_tubes(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   i = oldval;
 
-  if(bwasdemojump)
+  if(bwasdemojump) {
     i = 0;
+  }
 
   while(i < newval) {
     thread ctw_light_tube_think(localclientnum, i + 1);
@@ -230,23 +244,27 @@ ctw_light_tube_think(clientnum, newval) {
 }
 
 sq_gallows_build_vaccume_tube(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     thread build_tower_think(localclientnum, "gt_b_vt");
+  }
 }
 
 sq_gallows_build_buildable_battery(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     thread build_tower_think(localclientnum, "gt_b_bb");
+  }
 }
 
 sq_gallows_build_antenna(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     thread build_tower_think(localclientnum, "gt_b_a");
+  }
 }
 
 sq_gallows_build_wire_spool(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     thread build_tower_think(localclientnum, "gt_b_ws");
+  }
 }
 
 build_tower_think(clientnum, event) {
@@ -297,23 +315,27 @@ sq_endgamemachine_animate(localclientnum, oldval, newval, bnewent, binitialsnap,
 sq_endgamemachine_toggle_light(localclientnum, fxbit, tag) {
   endgamemachine = getent(localclientnum, "sq_endgame_machine", "targetname");
 
-  if(!isDefined(endgamemachine._lights))
+  if(!isDefined(endgamemachine._lights)) {
     endgamemachine._lights = [];
+  }
 
   if(fxbit == 0) {
-    if(isDefined(endgamemachine._lights[tag]))
+    if(isDefined(endgamemachine._lights[tag])) {
       deletefx(localclientnum, endgamemachine._lights[tag]);
+    }
 
     return;
   }
 
   fx = "sq_bulb_blue";
 
-  if(fxbit == 2)
+  if(fxbit == 2) {
     fx = "sq_bulb_orange";
+  }
 
-  if(issubstr(tag, "TAG_BULB_"))
+  if(issubstr(tag, "TAG_BULB_")) {
     fx = "sq_bulb_yellow";
+  }
 
   endgamemachine._lights[tag] = playFXOnTag(localclientnum, level._effect[fx], endgamemachine, tag);
 }
@@ -382,20 +404,23 @@ sq_bp_toggle_light(localclientnum, fxbit, tag) {
   if(!isDefined(level.m_lightboard._lights)) {
     level.m_lightboard._lights = [];
 
-    if(!isDefined(level.m_lightboard._lights[tag]))
+    if(!isDefined(level.m_lightboard._lights[tag])) {
       level.m_lightboard._lights[tag] = [];
+    }
   }
 
-  if(isDefined(level.m_lightboard._lights[tag]) && isDefined(level.m_lightboard._lights[tag][localclientnum]))
+  if(isDefined(level.m_lightboard._lights[tag]) && isDefined(level.m_lightboard._lights[tag][localclientnum])) {
     deletefx(localclientnum, level.m_lightboard._lights[tag][localclientnum]);
+  }
 
   if(fxbit == 0) {
     return;
   }
   fx = "sq_bulb_yellow";
 
-  if(fxbit == 2)
+  if(fxbit == 2) {
     fx = "sq_bulb_green";
+  }
 
   level.m_lightboard._lights[tag][localclientnum] = playFXOnTag(localclientnum, level._effect[fx], level.m_lightboard, tag);
 }
@@ -441,10 +466,12 @@ sq_bp_tag09(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
 }
 
 toggle_richtofen_ending(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     level thread run_richtofen_earthquake_and_rumble(localclientnum);
-  else
+  }
+  else {
     self notify("richtofen_ending_done");
+  }
 }
 
 run_richtofen_earthquake_and_rumble(localclientnumber) {
@@ -454,8 +481,9 @@ run_richtofen_earthquake_and_rumble(localclientnumber) {
   a_players = getlocalplayers();
   playSound(0, "zmb_sq_endgame_earthquake_rich", (0, 0, 0));
 
-  foreach(player in a_players)
+  foreach(player in a_players) {
   player earthquake(0.5, 12, player.origin, 99999);
+  }
 
   for(i = 0; i < 9; i = i + 0.25) {
     a_players = getlocalplayers();

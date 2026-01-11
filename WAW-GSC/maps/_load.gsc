@@ -597,8 +597,9 @@ setupExploders() {
       } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
         ents[i] Hide();
         ents[i] NotSolid();
-        if(isDefined(ents[i].script_disconnectpaths))
+        if(isDefined(ents[i].script_disconnectpaths)) {
           ents[i] ConnectPaths();
+        }
       } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploderchunk")) {
         ents[i] Hide();
         ents[i] NotSolid();

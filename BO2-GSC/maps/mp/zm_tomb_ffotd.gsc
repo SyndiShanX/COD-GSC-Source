@@ -23,11 +23,13 @@ main_end() {
 }
 
 update_charger_position() {
-  foreach(e_staff in level.a_elemental_staffs)
+  foreach(e_staff in level.a_elemental_staffs) {
   e_staff moveto(e_staff.charger.origin, 0.05);
+  }
 
-  foreach(e_staff in level.a_elemental_staffs_upgraded)
+  foreach(e_staff in level.a_elemental_staffs_upgraded) {
   e_staff moveto(e_staff.charger.origin, 0.05);
+  }
 }
 
 spawned_collision_ffotd() {
@@ -166,8 +168,9 @@ one_inch_punch_take_think() {
     self waittill("bled_out");
     self.one_inch_punch_flag_has_been_init = 0;
 
-    if(self ent_flag_exist("melee_punch_cooldown"))
+    if(self ent_flag_exist("melee_punch_cooldown")) {
       self.ent_flag["melee_punch_cooldown"] = undefined;
+    }
   }
 }
 
@@ -210,8 +213,9 @@ traversal_blocker_disabler() {
     a_players = getplayers();
 
     foreach(player in a_players) {
-      if(distancesquared(player.origin, pos1) < 4096 || distancesquared(player.origin, pos2) < 4096)
+      if(distancesquared(player.origin, pos1) < 4096 || distancesquared(player.origin, pos2) < 4096) {
         b_too_close = 1;
+      }
     }
 
     wait 1;

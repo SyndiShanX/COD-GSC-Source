@@ -47,8 +47,9 @@ playerspawned(localClientNum) {
   self thread clientscripts\mp\_explode::playerspawned(localClientNum);
   self thread clientscripts\mp\_players::dtp_effects();
   self thread clientscripts\mp\_cameraspike::playerSpawned();
-  if(isDefined(level._faceAnimCBFunc))
+  if(isDefined(level._faceAnimCBFunc)) {
     self thread[[level._faceAnimCBFunc]](localClientNum);
+  }
 }
 entityspawned(localClientNum) {
   self endon("entityshutdown");
@@ -210,10 +211,12 @@ demo_player_switch(localClientNum) {
 stunned_callback(localClientNum, set) {
   self.stunned = set;
   PrintLn("stunned_callback");
-  if(set)
+  if(set) {
     self notify("stunned");
-  else
+  }
+  else {
     self notify("not_stunned");
+  }
 }
 client_flag_debug(msg) {}
 client_flag_callback(localClientNum, flag, set) {

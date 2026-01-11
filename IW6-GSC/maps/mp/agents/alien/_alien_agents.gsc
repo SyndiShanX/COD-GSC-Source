@@ -25,8 +25,9 @@ main() {
 }
 
 setup_callbacks() {
-  if(!isDefined(level.agent_funcs))
+  if(!isDefined(level.agent_funcs)) {
     level.agent_funcs = [];
+  }
 
   level.agent_funcs["alien"] = [];
 
@@ -72,8 +73,9 @@ setup_callbacks() {
 alienAgentThink() {}
 
 alienAgentspawn(spawnOrigin, spawnAngles, alienType, introVignetteAnim) {
-  if(!isDefined(alienType))
+  if(!isDefined(alienType)) {
     alienType = "wave goon";
+  }
 
   alien_type = remove_spawn_type(alienType);
 
@@ -92,8 +94,9 @@ alienAgentspawn(spawnOrigin, spawnAngles, alienType, introVignetteAnim) {
 
       tokens = strtok(alienType, " ");
       type = tokens[0];
-      if(tokens.size > 1)
+      if(tokens.size > 1) {
         type = tokens[1];
+      }
 
       prof_begin("port_to_player_loc");
       if(alien_type == "spitter" && isDefined(level.escape_spitter_target_node)) {
@@ -103,8 +106,9 @@ alienAgentspawn(spawnOrigin, spawnAngles, alienType, introVignetteAnim) {
         if(!isDefined(port_to_data)) {
           port_failed = true;
 
-          if(GetDvarInt("alien_debug_escape") > 0)
+          if(GetDvarInt("alien_debug_escape") > 0) {
             IPrintLnBold("^1Failed to port alien");
+          }
 
         } else {
           spawnOrigin = port_to_data[0];
@@ -139,11 +143,13 @@ alienAgentspawn(spawnOrigin, spawnAngles, alienType, introVignetteAnim) {
 
   self misc_setup();
 
-  if(isDefined(introVignetteAnim))
+  if(isDefined(introVignetteAnim)) {
     self doIntroVignetteAnim(introVignetteAnim);
+  }
 
-  if(isDefined(self.noTriggerHurt))
+  if(isDefined(self.noTriggerHurt)) {
     self.noTriggerHurt = undefined;
+  }
 
   self maps\mp\alien\_ffotd::onSpawnAlien();
 
@@ -162,13 +168,15 @@ set_code_fields(alien_type) {
   self.stopSoonNotifyDist = level.alienAnimData.stopSoon_NotifyDist;
   self.jumpCost = level.alien_types[alien_type].attributes["jump_cost"];
 
-  if(flag_exist("hives_cleared") && flag("hives_cleared"))
+  if(flag_exist("hives_cleared") && flag("hives_cleared")) {
     self.jumpCost = max(0.85, self.jumpCost * 0.66);
+  }
 
   self.traverseCost = level.alien_types[alien_type].attributes["traverse_cost"];
   self.runCost = level.alien_types[alien_type].attributes["run_cost"];
-  if(isDefined(level.alien_types[alien_type].attributes["wall_run_cost"]))
+  if(isDefined(level.alien_types[alien_type].attributes["wall_run_cost"])) {
     self ScrAgentSetWallRunCost(level.alien_types[alien_type].attributes["wall_run_cost"]);
+  }
 }
 
 get_default_movemode() {
@@ -193,8 +201,9 @@ set_threat_bias_group(alien_type) {
 can_attack_drill(alien_type) {
   if(isDefined(level.dlc_alien_can_attack_drill_override_func)) {
     canAttackDrill = [[level.dlc_alien_can_attack_drill_override_func]](alien_type);
-    if(isDefined(canAttackDrill))
+    if(isDefined(canAttackDrill)) {
       return canAttackDrill;
+    }
   }
 
   switch (alien_type) {
@@ -227,10 +236,12 @@ set_script_fields(spawnOrigin) {
 
 remove_spawn_type(alienType) {
   spawnTypeConfig = strtok(alienType, " ");
-  if(isDefined(spawnTypeConfig) && spawnTypeConfig.size == 2)
+  if(isDefined(spawnTypeConfig) && spawnTypeConfig.size == 2) {
     return spawnTypeConfig[1];
-  else
+  }
+  else {
     return alienType;
+  }
 }
 
 set_alien_model(alien_type) {
@@ -297,8 +308,9 @@ setup_watcher() {
   self thread maps\mp\agents\alien\_alien_think::MonitorFlash();
 
   /#	
-  if(GetDvarInt("scr_aliendebugvelocity") == 1)
+  if(GetDvarInt("scr_aliendebugvelocity") == 1) {
     self thread maps\mp\alien\_debug::alienDebugVelocity();
+  }
 }
 
 doIntroVignetteAnim(vignetteAnimInfo) {
@@ -331,18 +343,22 @@ doIntroVignetteAnim(vignetteAnimInfo) {
 
   animEntry = self GetAnimEntry(animState, animIndex);
 
-  if(shouldDoGroundLerp(animEntry))
+  if(shouldDoGroundLerp(animEntry)) {
     doLerpToEndOnGround(animState, animIndex);
+  }
 
-  if(willPlayScriptables(animEntry))
+  if(willPlayScriptables(animEntry)) {
     resetAllScriptables(self.vignetteAnimInfo["scriptableName"], self.origin);
+  }
 
   result = maps\mp\agents\alien\_alien_traverse::needFlexibleHeightSupport(animEntry);
 
-  if(result.need_support)
+  if(result.need_support) {
     doSpawnVignetteWithFlexibleHeight(animState, animIndex, animLabel, animEntry, result.start_notetrack, result.end_notetrack, ::vignetteNotetrackHandler);
-  else
+  }
+  else {
     maps\mp\agents\_scriptedAgents::PlayAnimNUntilNotetrack(animState, animIndex, animLabel, endNotetrack, ::vignetteNotetrackHandler);
+  }
 
   self ScrAgentSetScripted(false);
 }
@@ -371,8 +387,9 @@ getEndLocOnGround(animEntry) {
 }
 
 replaceNoneWithEmptyString(string) {
-  if(string == "NONE")
+  if(string == "NONE") {
     return "";
+  }
 
   return string;
 }
@@ -381,16 +398,18 @@ vignetteNotetrackHandler(note, animState, animIndex, animTime) {
   switch (note) {
     case "alien_drone_spawn_underground":
     case "play_fx":
-      if(!is_empty_string(self.vignetteAnimInfo["FX"]))
+      if(!is_empty_string(self.vignetteAnimInfo["FX"])) {
         playSpawnVignetteFX(self.vignetteAnimInfo["FX"]);
+      }
       break;
 
     case "play_scriptable":
       if(can_play_scriptable(self.vignetteAnimInfo["spawnNodeID"], self.vignetteAnimInfo["scriptableName"])) {
         playAnimOnAllScriptables(self.vignetteAnimInfo["scriptableName"], self.origin, self.vignetteAnimInfo["scriptableState"]);
 
-        if(is_one_off_scriptable(self.vignetteAnimInfo["spawnNodeID"]))
+        if(is_one_off_scriptable(self.vignetteAnimInfo["spawnNodeID"])) {
           inactivate_scriptable_for_node(self.vignetteAnimInfo["spawnNodeID"]);
+        }
       }
       break;
 
@@ -399,8 +418,9 @@ vignetteNotetrackHandler(note, animState, animIndex, animTime) {
       break;
 
     case "delete_spawn_clip":
-      if(isDefined(self.intro_clips))
+      if(isDefined(self.intro_clips)) {
         delete_items(self.intro_clips);
+      }
       break;
 
     case "frontal_cone_knock_player_back":
@@ -434,8 +454,9 @@ inactivate_scriptable_for_node(node_id) {
 
 delete_items(item_array) {
   foreach(item in item_array) {
-    if(isDefined(item))
+    if(isDefined(item)) {
       item delete();
+    }
   }
 }
 
@@ -457,15 +478,17 @@ frontal_cone_knock_player_back() {
 }
 
 resetAllScriptables(scriptable_name_list, position) {
-  for(i = 0; i < scriptable_name_list.size; i++)
+  for(i = 0; i < scriptable_name_list.size; i++) {
     maps\mp\agents\alien\_alien_anim_utils::resetScriptable(scriptable_name_list[i], position);
+  }
 }
 
 playAnimOnAllScriptables(scriptable_name_list, position, scriptable_state_list) {
   /# AssertEx( scriptable_name_list.size == scriptable_state_list.size, "The scriptable name lists and state lists have mismatch with their size near position ( " + position + " )." );
 
-  for(i = 0; i < scriptable_name_list.size; i++)
+  for(i = 0; i < scriptable_name_list.size; i++) {
     maps\mp\agents\alien\_alien_anim_utils::playAnimOnScriptable(scriptable_name_list[i], position, int(scriptable_state_list[i]));
+  }
 }
 
 is_empty_string(string) {

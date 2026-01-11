@@ -16,21 +16,24 @@ store_undo_state(change_type, ents) {
     level.cfx_max_states = 10;
   }
 
-  if(!isarray(ents))
+  if(!isarray(ents)) {
     ents = array(ents);
+  }
 
   temp_array = [];
 
-  for(i = 0; i < ents.size; i++)
+  for(i = 0; i < ents.size; i++) {
     temp_array[i] = copy_fx_ent(ents[i]);
+  }
 
   state = spawnStruct();
   state.operation = change_type;
   state.last_action = level.cfx_last_action;
   state.ent_array = temp_array;
 
-  if(level.cfx_undo_states.size >= level.cfx_max_states)
+  if(level.cfx_undo_states.size >= level.cfx_max_states) {
     level.cfx_undo_states = array_drop(level.cfx_undo_states);
+  }
 
   level.cfx_undo_states[level.cfx_undo_states.size] = state;
   level.cfx_redo_states = [];
@@ -79,27 +82,34 @@ apply_state_change(type, revert_state) {
   if(type == "undo") {
     println("^2CreateFX: Undo operation");
 
-    if(revert_state.operation == "edit")
+    if(revert_state.operation == "edit") {
       undo_edit(revert_state.ent_array);
-    else if(revert_state.operation == "add")
+    }
+    else if(revert_state.operation == "add") {
       undo_add(revert_state.ent_array);
-    else if(revert_state.operation == "delete")
+    }
+    else if(revert_state.operation == "delete") {
       undo_delete(revert_state.ent_array);
+    }
   } else {
     println("^2CreateFX: Redo operation");
 
-    if(revert_state.operation == "edit")
+    if(revert_state.operation == "edit") {
       undo_edit(revert_state.ent_array);
-    else if(revert_state.operation == "add")
+    }
+    else if(revert_state.operation == "add") {
       undo_delete(revert_state.ent_array);
-    else if(revert_state.operation == "delete")
+    }
+    else if(revert_state.operation == "delete") {
       undo_add(revert_state.ent_array);
+    }
   }
 }
 
 move_undo_state_to_redo() {
-  if(level.cfx_redo_states.size >= level.cfx_max_states)
+  if(level.cfx_redo_states.size >= level.cfx_max_states) {
     level.cfx_redo_states = array_drop(level.cfx_redo_states);
+  }
 
   level.cfx_redo_states[level.cfx_redo_states.size] = level.cfx_undo_states[level.cfx_undo_states.size - 1];
   level.cfx_undo_states = array_pop(level.cfx_undo_states);
@@ -108,8 +118,9 @@ move_undo_state_to_redo() {
 }
 
 move_redo_state_to_undo() {
-  if(level.cfx_undo_states.size >= level.cfx_max_states)
+  if(level.cfx_undo_states.size >= level.cfx_max_states) {
     level.cfx_undo_states = array_drop(level.cfx_undo_states);
+  }
 
   level.cfx_undo_states[level.cfx_undo_states.size] = level.cfx_redo_states[level.cfx_redo_states.size - 1];
   level.cfx_redo_states = array_pop(level.cfx_redo_states);
@@ -132,8 +143,9 @@ move_redo_state_to_limbo() {
 }
 
 move_limbo_state_to_undo() {
-  if(level.cfx_undo_states.size >= level.cfx_max_states)
+  if(level.cfx_undo_states.size >= level.cfx_max_states) {
     level.cfx_undo_states = array_drop(level.cfx_undo_states);
+  }
 
   level.cfx_undo_states[level.cfx_undo_states.size] = level.cfx_limbo_state;
   level.cfx_limbo_state = undefined;
@@ -142,8 +154,9 @@ move_limbo_state_to_undo() {
 }
 
 move_limbo_state_to_redo() {
-  if(level.cfx_redo_states.size >= level.cfx_max_states)
+  if(level.cfx_redo_states.size >= level.cfx_max_states) {
     level.cfx_redo_states = array_drop(level.cfx_redo_states);
+  }
 
   level.cfx_redo_states[level.cfx_redo_states.size] = level.cfx_limbo_state;
   level.cfx_limbo_state = undefined;
@@ -159,8 +172,9 @@ undo_edit(ent_array) {
 
   last_id = ent_array[ent_array.size - 1].uniqueid;
 
-  if(last_id > level.createfxent.size - 1)
+  if(last_id > level.createfxent.size - 1) {
     last_id = level.createfxent.size - 1;
+  }
 
   j = ent_array.size - 1;
   source_ent = ent_array[j];
@@ -196,8 +210,9 @@ undo_add(ent_array) {
 
   last_id = ent_array[ent_array.size - 1].uniqueid;
 
-  if(last_id > level.createfxent.size - 1)
+  if(last_id > level.createfxent.size - 1) {
     last_id = level.createfxent.size - 1;
+  }
 
   j = ent_array.size - 1;
   source_ent = ent_array[j];
@@ -206,8 +221,9 @@ undo_add(ent_array) {
     target_ent = level.createfxent[i];
 
     if(source_ent.uniqueid == target_ent.uniqueid) {
-      if(isDefined(target_ent.looper))
+      if(isDefined(target_ent.looper)) {
         target_ent.looper delete();
+      }
 
       target_ent notify("stop_loop");
       level.createfxent[i] = undefined;
@@ -240,8 +256,9 @@ undo_delete(ent_array) {
   ent_array = reorder_ent_array_by_uniqueid(ent_array);
 
   if(level.createfxent.size == 0) {
-    for(i = 0; i < ent_array.size; i++)
+    for(i = 0; i < ent_array.size; i++) {
       level.createfxent[i] = copy_fx_ent(ent_array[i]);
+    }
   } else {
     temp_array = [];
     i = 0;
@@ -279,8 +296,9 @@ undo_delete(ent_array) {
 
   last_id = ent_array[ent_array.size - 1].uniqueid;
 
-  if(last_id > level.createfxent.size - 1)
+  if(last_id > level.createfxent.size - 1) {
     last_id = level.createfxent.size - 1;
+  }
 
   j = ent_array.size - 1;
   source_ent = ent_array[j];
@@ -318,18 +336,21 @@ redo() {
     revert_state = level.cfx_redo_states[level.cfx_redo_states.size - 1];
     apply_state_change("redo", revert_state);
 
-    if(revert_state.operation == "edit")
+    if(revert_state.operation == "edit") {
       move_redo_state_to_limbo();
-    else
+    }
+    else {
       move_redo_state_to_undo();
+    }
   }
 
   level.cfx_last_action = "none";
 }
 
 reorder_ent_array_by_uniqueid(ent_array) {
-  if(ent_array.size <= 1)
+  if(ent_array.size <= 1) {
     return ent_array;
+  }
 
   array_size = ent_array.size;
 
@@ -370,11 +391,13 @@ array_pop(array) {
   array_size = array.size - 1;
   temp_array = [];
 
-  if(array_size <= 0)
+  if(array_size <= 0) {
     return temp_array;
+  }
 
-  for(i = 0; i < array_size; i++)
+  for(i = 0; i < array_size; i++) {
     temp_array[i] = array[i];
+  }
 
   array = temp_array;
   return array;
@@ -384,8 +407,9 @@ array_drop(array) {
   if(array.size > 0) {
     temp_array = [];
 
-    for(i = 1; i < array.size; i++)
+    for(i = 1; i < array.size; i++) {
       temp_array[i - 1] = array[i];
+    }
 
     array = temp_array;
   }
@@ -394,10 +418,12 @@ array_drop(array) {
 }
 
 debug_print_ent_array(array, name) {
-  if(isDefined(name))
+  if(isDefined(name)) {
     println("Printing out " + name);
-  else
+  }
+  else {
     println("Printing out some array");
+  }
 
   for(i = 0; i < array.size; i++) {
     if(!isDefined(array[i])) {

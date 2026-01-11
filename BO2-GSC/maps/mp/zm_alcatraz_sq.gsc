@@ -105,30 +105,39 @@ start_alcatraz_sidequest() {
   setup_puzzles();
   setup_quest_triggers();
 
-  if(isDefined(level.gamedifficulty) && level.gamedifficulty != 0)
+  if(isDefined(level.gamedifficulty) && level.gamedifficulty != 0) {
     maps\mp\zm_prison_sq_final::final_flight_setup();
+  }
 
   level thread warden_fence_hotjoin_handler();
 
-  if(isDefined(level.host_migration_listener_custom_func))
+  if(isDefined(level.host_migration_listener_custom_func)) {
     level thread[[level.host_migration_listener_custom_func]]();
-  else
+  }
+  else {
     level thread host_migration_listener();
+  }
 
-  if(isDefined(level.manage_electric_chairs_custom_func))
+  if(isDefined(level.manage_electric_chairs_custom_func)) {
     level thread[[level.manage_electric_chairs_custom_func]]();
-  else
+  }
+  else {
     level thread manage_electric_chairs();
+  }
 
-  if(isDefined(level.plane_flight_thread_custom_func))
+  if(isDefined(level.plane_flight_thread_custom_func)) {
     level thread[[level.plane_flight_thread_custom_func]]();
-  else
+  }
+  else {
     level thread plane_flight_thread();
+  }
 
-  if(isDefined(level.track_quest_status_thread_custom_func))
+  if(isDefined(level.track_quest_status_thread_custom_func)) {
     level thread[[level.track_quest_status_thread_custom_func]]();
-  else
+  }
+  else {
     level thread track_quest_status_thread();
+  }
 
   maps\mp\zm_alcatraz_sq_vo::opening_vo();
 }
@@ -147,23 +156,27 @@ host_migration_listener() {
 
     if(flag("plane_boarded") && !flag("plane_departed")) {
       foreach(player in a_players) {
-        if(isDefined(player) && isDefined(player.character_name) && isinarray(level.characters_in_nml, player.character_name))
+        if(isDefined(player) && isDefined(player.character_name) && isinarray(level.characters_in_nml, player.character_name)) {
           player playerlinktodelta(m_plane_craftable, "tag_player_crouched_" + (player.n_passenger_index + 1));
+        }
       }
     } else if(flag("plane_departed") && !flag("plane_approach_bridge")) {
       foreach(player in a_players) {
-        if(isDefined(player) && isDefined(player.character_name) && isinarray(level.characters_in_nml, player.character_name))
+        if(isDefined(player) && isDefined(player.character_name) && isinarray(level.characters_in_nml, player.character_name)) {
           player playerlinktodelta(veh_plane_flyable, "tag_player_crouched_" + (player.n_passenger_index + 1));
+        }
       }
     } else if(flag("plane_approach_bridge") && !flag("plane_zapped")) {
       foreach(player in a_players) {
-        if(isDefined(player) && isDefined(player.character_name) && isinarray(level.characters_in_nml, player.character_name))
+        if(isDefined(player) && isDefined(player.character_name) && isinarray(level.characters_in_nml, player.character_name)) {
           player playerlinktoabsolute(veh_plane_flyable, "tag_player_crouched_" + (player.n_passenger_index + 1));
+        }
       }
     } else if(flag("plane_zapped") && !flag("plane_crashed")) {
       foreach(player in a_players) {
-        if(isDefined(player) && isDefined(player.character_name) && isinarray(level.characters_in_nml, player.character_name))
+        if(isDefined(player) && isDefined(player.character_name) && isinarray(level.characters_in_nml, player.character_name)) {
           player playerlinktodelta(m_plane_about_to_crash, "tag_player_crouched_" + (player.n_passenger_index + 1), 1, 0, 0, 0, 0, 1);
+        }
       }
     }
 
@@ -171,10 +184,12 @@ host_migration_listener() {
     setclientfield("fake_master_key", level.is_master_key_west + 1);
 
     if(!flag("key_found")) {
-      if(level.is_master_key_west)
+      if(level.is_master_key_west) {
         exploder(101);
-      else
+      }
+      else {
         exploder(100);
+      }
     }
   }
 }
@@ -194,14 +209,16 @@ prevent_theater_mode_spoilers() {
   for(i = 0; i < a_str_partnames.size; i++) {
     m_plane_piece = get_craftable_piece_model("plane", a_str_partnames[i]);
 
-    if(isDefined(m_plane_piece))
+    if(isDefined(m_plane_piece)) {
       m_plane_piece setinvisibletoall();
+    }
   }
 
   m_master_key = get_craftable_piece_model("quest_key1", "p6_zm_al_key");
 
-  if(isDefined(m_master_key))
+  if(isDefined(m_master_key)) {
     m_master_key setinvisibletoall();
+  }
 }
 
 setup_puzzle_piece_glint() {
@@ -216,24 +233,28 @@ setup_puzzle_piece_glint() {
   for(i = 0; i < a_str_partnames.size; i++) {
     m_plane_piece = get_craftable_piece_model("plane", a_str_partnames[i]);
 
-    if(isDefined(m_plane_piece))
+    if(isDefined(m_plane_piece)) {
       playFXOnTag(level._effect["quest_item_glow"], m_plane_piece, "tag_origin");
+    }
 
     m_fuel_can = get_craftable_piece_model("refuelable_plane", "fuel" + (i + 1));
 
-    if(isDefined(m_fuel_can))
+    if(isDefined(m_fuel_can)) {
       playFXOnTag(level._effect["quest_item_glow"], m_fuel_can, "tag_origin");
+    }
   }
 
   m_master_key = get_craftable_piece_model("quest_key1", "p6_zm_al_key");
 
-  if(isDefined(m_master_key))
+  if(isDefined(m_master_key)) {
     playFXOnTag(level._effect["key_glint"], m_master_key, "tag_origin");
+  }
 
   m_fake_plane_steering = getent("fake_veh_t6_dlc_zombie_part_control", "targetname");
 
-  if(isDefined(m_fake_plane_steering))
+  if(isDefined(m_fake_plane_steering)) {
     playFXOnTag(level._effect["quest_item_glow"], m_fake_plane_steering, "tag_origin");
+  }
 }
 
 setup_devgui() {
@@ -300,8 +321,9 @@ watch_devgui_afterlife() {
       a_players = [];
       a_players = getplayers();
 
-      for(i = 0; i < a_players.size; i++)
+      for(i = 0; i < a_players.size; i++) {
         a_players[i] afterlife_add();
+      }
 
       setdvar("add_afterlife", "off");
     }
@@ -314,8 +336,9 @@ watch_devgui_give_shield() {
   while(true) {
     if(getdvar(#"_id_DF65AA39") == "on") {
       foreach(player in getplayers()) {
-        if(is_equipment_included("alcatraz_shield_zm"))
+        if(is_equipment_included("alcatraz_shield_zm")) {
           player maps\mp\zombies\_zm_equipment::equipment_buy("alcatraz_shield_zm");
+        }
       }
 
       setdvar("alcatraz_give_shield", "off");
@@ -339,8 +362,9 @@ watch_devgui_plane() {
   }
 
   for(i = 0; i < level.a_uts_craftables.size; i++) {
-    if(level.a_uts_craftables[i].equipname == "plane")
+    if(level.a_uts_craftables[i].equipname == "plane") {
       level.a_uts_craftables[i].crafted = 1;
+    }
   }
 
   level thread maps\mp\zm_alcatraz_sq_vo::escape_flight_vo();
@@ -364,13 +388,15 @@ watch_devgui_plane() {
       if(isDefined(level.custom_plane_validation)) {
         valid = t_plane_fly[[level.custom_plane_validation]](e_triggerer);
 
-        if(!valid)
+        if(!valid) {
           continue;
+        }
       }
 
       if(level.n_plane_fuel_count == 5) {
-        if(isDefined(level.plane_boarding_thread_custom_func))
+        if(isDefined(level.plane_boarding_thread_custom_func)) {
           e_triggerer thread[[level.plane_boarding_thread_custom_func]]();
+        }
         else {
           iprintlnbold("LINK PLAYER TO PLANE, START COUNTDOWN IF NOT YET STARTED");
 
@@ -440,10 +466,12 @@ key_door_trigger_visibility(player) {
   b_is_invis = player.afterlife || isDefined(self.stub.master_key_door_opened) && self.stub.master_key_door_opened || self.stub.n_door_index == 2 && !flag("generator_challenge_completed");
   self setinvisibletoplayer(player, b_is_invis);
 
-  if(flag("key_found"))
+  if(flag("key_found")) {
     self sethintstring(&"ZM_PRISON_KEY_DOOR");
-  else
+  }
+  else {
     self sethintstring(self.stub.hint_string);
+  }
 
   return !b_is_invis;
 }
@@ -487,8 +515,9 @@ open_custom_door_master_key(n_door_index, e_triggerer) {
       shower_key_door moveto(shower_key_door.origin + vectorscale((1, 0, 0), 80.0), 0.25);
       shower_key_door connectpaths();
 
-      if(isDefined(e_triggerer))
+      if(isDefined(e_triggerer)) {
         e_triggerer door_rumble_on_open();
+      }
 
       shower_key_door playSound("zmb_chainlink_open");
       break;
@@ -507,8 +536,9 @@ open_custom_door_master_key(n_door_index, e_triggerer) {
       m_nixie_tube_weaponclip = getent("nixie_tube_weaponclip", "targetname");
       m_nixie_tube_weaponclip delete();
 
-      if(isDefined(e_triggerer))
+      if(isDefined(e_triggerer)) {
         e_triggerer door_rumble_on_open();
+      }
 
       break;
     case 4:
@@ -520,8 +550,9 @@ open_custom_door_master_key(n_door_index, e_triggerer) {
       gate_1_monsterclip disconnectpaths();
       gate_1_monsterclip.origin = gate_1_monsterclip.origin - vectorscale((0, 0, 1), 256.0);
 
-      if(isDefined(e_triggerer))
+      if(isDefined(e_triggerer)) {
         e_triggerer door_rumble_on_open();
+      }
 
       m_gate_01 playSound("zmb_chainlink_open");
       flag_set("docks_inner_gate_unlocked");
@@ -538,8 +569,9 @@ open_custom_door_master_key(n_door_index, e_triggerer) {
       m_plane_steering setvisibletoall();
       m_fake_plane_steering hide();
 
-      if(isDefined(e_triggerer))
+      if(isDefined(e_triggerer)) {
         e_triggerer door_rumble_on_open();
+      }
 
       m_infirmary_case_door_right playSound("zmb_cabinet_door");
       break;
@@ -621,10 +653,12 @@ key_pulley(str_master_key_location) {
   t_hurt_trigger = getent("pulley_hurt_trigger_" + str_master_key_location, "targetname");
   t_hurt_trigger delete();
 
-  if(str_master_key_location == "west")
+  if(str_master_key_location == "west") {
     level setclientfield("fxanim_pulley_down_start", 1);
-  else if(str_master_key_location == "east")
+  }
+  else if(str_master_key_location == "east") {
     level setclientfield("fxanim_pulley_down_start", 2);
+  }
 
   wait 3;
   level setclientfield("master_key_is_lowered", 1);
@@ -703,8 +737,9 @@ dryer_trigger_thread() {
   sndent stoploopsound();
   sndent playSound("evt_dryer_stop");
 
-  if(isDefined(sndset) && sndset)
+  if(isDefined(sndset) && sndset) {
     level.music_override = 0;
+  }
 
   level clientnotify("sndFF");
   level setclientfield("dryer_stage", 3);
@@ -733,8 +768,9 @@ dryer_zombies_thread() {
   flag_wait("dryer_cycle_active");
 
   if(level.round_number > 4 || isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
-    if(level.zombie_total < n_zombie_count_min)
+    if(level.zombie_total < n_zombie_count_min) {
       level.zombie_total = n_zombie_count_min;
+    }
 
     while(flag("dryer_cycle_active")) {
       a_zombies_in_shower = [];
@@ -756,8 +792,9 @@ dryer_zombies_thread() {
 }
 
 get_farthest_available_zombie(e_landmark) {
-  if(!isDefined(e_landmark))
+  if(!isDefined(e_landmark)) {
     return undefined;
+  }
 
   while(true) {
     a_zombies = getaiarray(level.zombie_team);
@@ -790,8 +827,9 @@ get_zombies_touching_volume(team, volume_name, volume) {
   guys_touching_volume = [];
 
   for(i = 0; i < guys.size; i++) {
-    if(guys[i] istouching(volume))
+    if(guys[i] istouching(volume)) {
       guys_touching_volume[guys_touching_volume.size] = guys[i];
+    }
   }
 
   return guys_touching_volume;
@@ -837,10 +875,12 @@ snddryercountdown(num) {
   ent = spawn("script_origin", self.origin);
 
   for(i = num; i > 0; i--) {
-    if(i <= 10)
+    if(i <= 10) {
       ent playSound("zmb_quest_nixie_count_final");
-    else
+    }
+    else {
       ent playSound("zmb_quest_nixie_count");
+    }
 
     wait 1;
   }
@@ -852,8 +892,9 @@ setup_generator_challenge() {
   level.n_generator_panels_active = 0;
   generator_soundent = spawn("script_origin", (-467, 6388, 132));
 
-  for(i = 1; i < 4; i++)
+  for(i = 1; i < 4; i++) {
     level thread generator_panel_trigger_thread(i, generator_soundent);
+  }
 
   level thread generator_challenge_main_thread();
 }
@@ -904,8 +945,9 @@ generator_panel_trigger_thread(n_panel_index, generator_soundent) {
 }
 
 set_generator_vfx_amount(n_vfx_amount, generator_soundent) {
-  if(n_vfx_amount == 1)
+  if(n_vfx_amount == 1) {
     generator_soundent playLoopSound("zmb_quest_generator_loop1");
+  }
 
   if(n_vfx_amount == 2) {
     generator_soundent stoploopsound();
@@ -934,16 +976,18 @@ setup_gate_puzzle() {
   a_players = [];
   a_players = getplayers();
 
-  if(a_players.size > 1)
+  if(a_players.size > 1) {
     is_inner_gate_toggleable = 1;
+  }
 
   while(true) {
     m_docks_shockbox thread afterlife_interact_object_think();
     level waittill("cable_puzzle_gate_afterlife");
     array_set_visible_to_all(getEntArray("wires_docks_gate_toggle", "script_noteworthy"), 1);
 
-    if(is_inner_gate_toggleable && flag("docks_inner_gate_unlocked"))
+    if(is_inner_gate_toggleable && flag("docks_inner_gate_unlocked")) {
       level thread toggle_inner_gate(n_gate_move_duration);
+    }
 
     if(!flag("docks_outer_gate_open")) {
       m_gate_02 moveto(m_gate_02.origin + (-16, 80, 0), n_gate_move_duration);
@@ -980,25 +1024,29 @@ toggle_inner_gate(n_gate_move_duration) {
   a_m_gate_01 = getEntArray("cable_puzzle_gate_01", "targetname");
 
   if(flag("docks_inner_gate_open") && !flag("docks_gates_remain_open")) {
-    for(i = 0; i < a_m_gate_01.size; i++)
+    for(i = 0; i < a_m_gate_01.size; i++) {
       a_m_gate_01[i] moveto(a_m_gate_01[i].origin - (-16, 80, 0), n_gate_move_duration);
+    }
 
     wait(n_gate_move_duration + 0.25);
 
-    for(i = 0; i < a_m_gate_01.size; i++)
+    for(i = 0; i < a_m_gate_01.size; i++) {
       a_m_gate_01[i] disconnectpaths();
+    }
 
     gate_1_monsterclip = getent("docks_gate_1_monsterclip", "targetname");
     gate_1_monsterclip connectpaths();
     a_m_gate_01[0] playSound("zmb_chainlink_close");
   } else {
-    for(i = 0; i < a_m_gate_01.size; i++)
+    for(i = 0; i < a_m_gate_01.size; i++) {
       a_m_gate_01[i] moveto(a_m_gate_01[i].origin + (-16, 80, 0), n_gate_move_duration);
+    }
 
     wait(n_gate_move_duration + 0.25);
 
-    for(i = 0; i < a_m_gate_01.size; i++)
+    for(i = 0; i < a_m_gate_01.size; i++) {
       a_m_gate_01[i] connectpaths();
+    }
 
     gate_1_monsterclip = getent("docks_gate_1_monsterclip", "targetname");
     gate_1_monsterclip.origin = gate_1_monsterclip.origin + vectorscale((0, 0, 1), 256.0);
@@ -1039,16 +1087,19 @@ plane_fly_trigger_thread() {
         if(isDefined(level.custom_plane_validation)) {
           valid = self[[level.custom_plane_validation]](e_triggerer);
 
-          if(!valid)
+          if(!valid) {
             continue;
+          }
         }
 
         self setinvisibletoplayer(e_triggerer);
 
-        if(isDefined(level.plane_boarding_thread_custom_func))
+        if(isDefined(level.plane_boarding_thread_custom_func)) {
           e_triggerer thread[[level.plane_boarding_thread_custom_func]]();
-        else
+        }
+        else {
           e_triggerer thread plane_boarding_thread();
+        }
       }
     }
   }
@@ -1067,8 +1118,9 @@ plane_boarding_thread() {
   level.brutus_respawn_after_despawn = 0;
   a_nml_teleport_targets = [];
 
-  for(i = 1; i < 6; i++)
+  for(i = 1; i < 6; i++) {
     a_nml_teleport_targets[i - 1] = getstruct("nml_telepoint_" + i, "targetname");
+  }
 
   level.characters_in_nml[level.characters_in_nml.size] = self.character_name;
   self.on_a_plane = 1;
@@ -1109,16 +1161,18 @@ plane_boarding_thread() {
   players = getplayers();
 
   foreach(player in players) {
-    if(player != self)
+    if(player != self) {
       player setinvisibletoplayer(self);
+    }
   }
 
   flag_wait("plane_crashed");
   self setclientfieldtoplayer("effects_escape_flight", 5);
   self takeweapon("falling_hands_zm");
 
-  if(isDefined(str_current_weapon) && str_current_weapon != "none")
+  if(isDefined(str_current_weapon) && str_current_weapon != "none") {
     self switchtoweaponimmediate(str_current_weapon);
+  }
 
   self thread fadetoblackforxsec(0, 2, 0, 0.5, "black");
   self thread snddelayedmusic();
@@ -1128,8 +1182,9 @@ plane_boarding_thread() {
   players = getplayers();
 
   foreach(player in players) {
-    if(player != self)
+    if(player != self) {
       player setvisibletoplayer(self);
+    }
   }
 
   flag_clear("spawn_zombies");
@@ -1148,10 +1203,12 @@ plane_boarding_thread() {
   self disableinvulnerability();
   self.on_a_plane = 0;
 
-  if(level.characters_in_nml.size == 1)
+  if(level.characters_in_nml.size == 1) {
     self vo_bridge_soliloquy();
-  else if(level.characters_in_nml.size == 4)
+  }
+  else if(level.characters_in_nml.size == 4) {
     vo_bridge_four_part_convo();
+  }
 
   wait 10;
   self playsoundtoplayer("zmb_ggb_swarm_start", self);
@@ -1162,8 +1219,9 @@ plane_boarding_thread() {
   players = getplayers();
 
   foreach(player in players) {
-    if(isDefined(player) && player.character_name == character_name)
+    if(isDefined(player) && player.character_name == character_name) {
       player thread do_player_general_vox("quest", "zombie_arrive_gg", undefined, 100);
+    }
   }
 }
 
@@ -1182,11 +1240,13 @@ snddelayedmusic() {
 
 track_quest_status_thread() {
   while(true) {
-    while(level.characters_in_nml.size == 0)
+    while(level.characters_in_nml.size == 0) {
       wait 1;
+    }
 
-    while(level.characters_in_nml.size > 0)
+    while(level.characters_in_nml.size > 0) {
       wait 1;
+    }
 
     if(flag("plane_trip_to_nml_successful")) {
       bestow_quest_rewards();
@@ -1196,8 +1256,9 @@ track_quest_status_thread() {
     level notify("bridge_empty");
     level waittill("start_of_round");
 
-    if(level.n_quest_iteration_count == 2)
+    if(level.n_quest_iteration_count == 2) {
       vo_play_four_part_conversation(level.four_part_convos["alcatraz_return_alt" + randomintrange(0, 2)]);
+    }
 
     prep_for_new_quest();
     waittill_crafted("refuelable_plane");
@@ -1271,8 +1332,9 @@ plane_flight_thread() {
     flag_wait("plane_boarded");
     level clientnotify("sndPB");
 
-    if(!(isDefined(level.music_override) && level.music_override))
+    if(!(isDefined(level.music_override) && level.music_override)) {
       t_plane_fly playLoopSound("mus_event_plane_countdown_loop", 0.25);
+    }
 
     for(i = 10; i > 0; i--) {
       iprintlnbold("TAKE-OFF IN " + i + "...");
@@ -1334,10 +1396,12 @@ plane_flight_thread() {
     wait 20;
 
     if(!level.final_flight_activated) {
-      if(isDefined(level.brutus_on_the_bridge_custom_func))
+      if(isDefined(level.brutus_on_the_bridge_custom_func)) {
         level thread[[level.brutus_on_the_bridge_custom_func]]();
-      else
+      }
+      else {
         level thread brutus_on_the_bridge();
+      }
     }
 
     flag_clear("plane_built");
@@ -1365,15 +1429,19 @@ brutus_on_the_bridge() {
   n_spawn_cap = 4;
   level.n_bridge_brutuses_killed = 0;
 
-  if(isDefined(level.last_brutus_on_bridge_custom_func))
+  if(isDefined(level.last_brutus_on_bridge_custom_func)) {
     level thread[[level.last_brutus_on_bridge_custom_func]]();
-  else
+  }
+  else {
     level thread last_brutus_on_bridge();
+  }
 
-  if(isDefined(level.brutus_despawn_manager_custom_func))
+  if(isDefined(level.brutus_despawn_manager_custom_func)) {
     level thread[[level.brutus_despawn_manager_custom_func]]();
-  else
+  }
+  else {
     level thread brutus_despawn_manager();
+  }
 
   while(true) {
     level.brutus_last_spawn_round = 0;
@@ -1387,8 +1455,9 @@ brutus_on_the_bridge() {
       if(isDefined(ai)) {
         ai.is_bridge_brutus = 1;
 
-        if(level.n_bridge_brutuses_killed == 0)
+        if(level.n_bridge_brutuses_killed == 0) {
           ai thread suppress_brutus_bridge_powerups();
+        }
       }
 
       wait(randomfloatrange(1.0, 4.0));
@@ -1409,8 +1478,9 @@ last_brutus_on_bridge() {
 
     if(a_bridge_brutuses.size > 1) {
       foreach(brutus in a_bridge_brutuses) {
-        if(isDefined(brutus))
+        if(isDefined(brutus)) {
           brutus.suppress_teargas_behavior = 1;
+        }
       }
     } else if(a_bridge_brutuses.size == 1)
       a_bridge_brutuses[0].suppress_teargas_behavior = 0;
@@ -1473,8 +1543,9 @@ brutus_despawn_manager() {
       players = getplayers();
 
       foreach(player in players) {
-        if(isDefined(player) && player istouching(e_gg_zone) && !player.afterlife && !player maps\mp\zombies\_zm_laststand::player_is_in_laststand())
+        if(isDefined(player) && player istouching(e_gg_zone) && !player.afterlife && !player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
           b_is_time_to_despawn = 0;
+        }
       }
 
       wait 0.1;
@@ -1483,8 +1554,9 @@ brutus_despawn_manager() {
     zombies = getaispeciesarray("axis", "all");
 
     for(i = 0; i < zombies.size; i++) {
-      if(isDefined(zombies[i].is_brutus) && zombies[i].is_brutus && (isDefined(zombies[i].is_bridge_brutus) && zombies[i].is_bridge_brutus))
+      if(isDefined(zombies[i].is_brutus) && zombies[i].is_brutus && (isDefined(zombies[i].is_bridge_brutus) && zombies[i].is_bridge_brutus)) {
         level thread brutus_temp_despawn(zombies[i], "bridge_empty", "bring_bridge_brutuses_back");
+      }
     }
 
     b_is_time_to_bring_back = 0;
@@ -1494,8 +1566,9 @@ brutus_despawn_manager() {
       players = getplayers();
 
       foreach(player in players) {
-        if(isDefined(player) && player istouching(e_gg_zone) && !player.afterlife && !player maps\mp\zombies\_zm_laststand::player_is_in_laststand())
+        if(isDefined(player) && player istouching(e_gg_zone) && !player.afterlife && !player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
           b_is_time_to_bring_back = 1;
+        }
       }
 
       wait 0.1;
@@ -1514,8 +1587,9 @@ get_bridge_brutus_count() {
     if(isDefined(zombies[i].is_brutus) && zombies[i].is_brutus) {
       brutus = zombies[i];
 
-      if(brutus istouching(e_gg_zone))
+      if(brutus istouching(e_gg_zone)) {
         n_touching_count++;
+      }
     }
   }
 
@@ -1554,10 +1628,12 @@ manage_electric_chairs() {
       str_trigger_targetname = "trigger_electric_chair_" + i;
       t_electric_chair = getent(str_trigger_targetname, "targetname");
 
-      if(isDefined(level.electric_chair_trigger_thread_custom_func))
+      if(isDefined(level.electric_chair_trigger_thread_custom_func)) {
         t_electric_chair thread[[level.electric_chair_trigger_thread_custom_func]](i);
-      else
+      }
+      else {
         t_electric_chair thread electric_chair_trigger_thread(i);
+      }
 
       t_electric_chair setcursorhint("HINT_NOICON");
       t_electric_chair sethintstring(&"ZM_PRISON_ELECTRIC_CHAIR_ACTIVATE");
@@ -1586,8 +1662,9 @@ manage_electric_chairs() {
         t_electric_chair trigger_off();
       }
 
-      while(flag("plane_approach_bridge"))
+      while(flag("plane_approach_bridge")) {
         wait 1;
+      }
     } else {
       for(i = 1; i < 5; i++) {
         m_electric_chair = getent("electric_chair_" + i, "targetname");
@@ -1642,17 +1719,20 @@ electric_chair_trigger_thread(chair_number) {
       self trigger_off();
       flag_set("plane_trip_to_nml_successful");
 
-      if(level.characters_in_nml.size == 1)
+      if(level.characters_in_nml.size == 1) {
         clean_up_bridge_brutuses();
+      }
 
       v_origin = m_electric_chair gettagorigin("seated") + (10, 0, -40);
       v_seated_angles = m_electric_chair gettagangles("seated");
       m_linkpoint = spawn_model("tag_origin", v_origin, v_seated_angles);
 
-      if(isDefined(level.electric_chair_player_thread_custom_func))
+      if(isDefined(level.electric_chair_player_thread_custom_func)) {
         e_triggerer thread[[level.electric_chair_player_thread_custom_func]](m_linkpoint, chair_number, n_effects_duration);
-      else
+      }
+      else {
         e_triggerer thread electric_chair_player_thread(m_linkpoint, chair_number, n_effects_duration);
+      }
 
       chair_corpse = e_triggerer maps\mp\zombies\_zm_clone::spawn_player_clone(e_triggerer, e_triggerer.origin, undefined);
       chair_corpse linkto(m_electric_chair, "tag_origin", (0, 0, 0), (0, 0, 0));
@@ -1663,8 +1743,9 @@ electric_chair_trigger_thread(chair_number) {
       chair_corpse setinvisibletoplayer(e_triggerer);
       chair_corpse maps\mp\zombies\_zm_clone::clone_animate("chair");
 
-      if(isDefined(e_triggerer))
+      if(isDefined(e_triggerer)) {
         e_triggerer setclientfieldtoplayer("rumble_electric_chair", 1);
+      }
 
       wait(n_effects_wait_1);
       m_fx_1 = spawn_model("tag_origin", (-516.883, -3912.04, -7494.9), vectorscale((0, 1, 0), 180.0));
@@ -1678,22 +1759,26 @@ electric_chair_trigger_thread(chair_number) {
       wait(n_effects_wait_3);
       m_electric_chair play_fx("fx_alcatraz_elec_chair", m_electric_chair.origin, m_electric_chair.angles, "bridge_empty");
 
-      if(isDefined(e_triggerer))
+      if(isDefined(e_triggerer)) {
         e_triggerer setclientfieldtoplayer("rumble_electric_chair", 2);
+      }
 
       wait(n_effects_wait_4);
       playFXOnTag(level._effect["fx_alcatraz_afterlife_zmb_tport"], m_electric_chair, "tag_origin");
 
-      if(isDefined(e_triggerer))
+      if(isDefined(e_triggerer)) {
         e_triggerer playsoundtoplayer("zmb_afterlife_death", e_triggerer);
+      }
 
       chair_corpse delete();
 
-      if(level.characters_in_nml.size == 1)
+      if(level.characters_in_nml.size == 1) {
         clean_up_bridge_brutuses();
+      }
 
-      if(isinarray(level.characters_in_nml, character_name))
+      if(isinarray(level.characters_in_nml, character_name)) {
         arrayremovevalue(level.characters_in_nml, character_name);
+      }
 
       m_fx_1 delete();
       m_fx_2 delete();
@@ -1787,14 +1872,17 @@ play_fx(str_fx, v_origin, v_angles, time_to_delete_or_notify, b_link_to_self, st
     m_fx = spawn_model("tag_origin", v_origin, v_angles);
 
     if(isDefined(b_link_to_self) && b_link_to_self) {
-      if(isDefined(str_tag))
+      if(isDefined(str_tag)) {
         m_fx linkto(self, str_tag, (0, 0, 0), (0, 0, 0));
-      else
+      }
+      else {
         m_fx linkto(self);
+      }
     }
 
-    if(isDefined(b_no_cull) && b_no_cull)
+    if(isDefined(b_no_cull) && b_no_cull) {
       m_fx setforcenocull();
+    }
 
     playFXOnTag(getfx(str_fx), m_fx, "tag_origin");
     m_fx thread _play_fx_delete(self, time_to_delete_or_notify);
@@ -1803,17 +1891,20 @@ play_fx(str_fx, v_origin, v_angles, time_to_delete_or_notify, b_link_to_self, st
 }
 
 spawn_model(model_name, origin, angles, n_spawnflags) {
-  if(!isDefined(n_spawnflags))
+  if(!isDefined(n_spawnflags)) {
     n_spawnflags = 0;
+  }
 
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     origin = (0, 0, 0);
+  }
 
   model = spawn("script_model", origin, n_spawnflags);
   model setModel(model_name);
 
-  if(isDefined(angles))
+  if(isDefined(angles)) {
     model.angles = angles;
+  }
 
   return model;
 }
@@ -1824,18 +1915,23 @@ getfx(fx) {
 }
 
 _play_fx_delete(ent, time_to_delete_or_notify) {
-  if(!isDefined(time_to_delete_or_notify))
+  if(!isDefined(time_to_delete_or_notify)) {
     time_to_delete_or_notify = -1;
+  }
 
-  if(isstring(time_to_delete_or_notify))
+  if(isstring(time_to_delete_or_notify)) {
     ent waittill_either("death", time_to_delete_or_notify);
-  else if(time_to_delete_or_notify > 0)
+  }
+  else if(time_to_delete_or_notify > 0) {
     ent waittill_notify_or_timeout("death", time_to_delete_or_notify);
-  else
+  }
+  else {
     ent waittill("death");
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 player_disconnect_watcher() {
@@ -1850,8 +1946,9 @@ player_disconnect_watcher() {
 
   iprintlnbold("player_disconnect_watcher");
 
-  if(!isDefined(self.character_name))
+  if(!isDefined(self.character_name)) {
     wait 0.1;
+  }
 
   character_name = self.character_name;
   self waittill("disconnect");
@@ -1889,8 +1986,9 @@ player_death_watcher() {
       if(player istouching(e_gg_zone) || isDefined(player.on_a_plane) && player.on_a_plane) {
         nml_trip_is_over = 0;
 
-        if(!isinarray(level.characters_in_nml, player.character_name))
+        if(!isinarray(level.characters_in_nml, player.character_name)) {
           level.characters_in_nml[level.characters_in_nml.size] = player.character_name;
+        }
       }
     }
   }
@@ -1899,8 +1997,9 @@ player_death_watcher() {
     for(i = 0; i < level.characters_in_nml.size; i++) {
       character_name = level.characters_in_nml[i];
 
-      if(isinarray(level.characters_in_nml, character_name))
+      if(isinarray(level.characters_in_nml, character_name)) {
         arrayremovevalue(level.characters_in_nml, character_name);
+      }
     }
   }
 
@@ -1910,11 +2009,13 @@ player_death_watcher() {
 
 array_set_visible_to_all(a_ents, is_visible) {
   if(is_visible) {
-    foreach(ent in a_ents)
+    foreach(ent in a_ents) {
     ent setvisibletoall();
+    }
   } else {
-    foreach(ent in a_ents)
+    foreach(ent in a_ents) {
     ent setinvisibletoall();
+    }
   }
 }
 

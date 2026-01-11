@@ -372,8 +372,9 @@ ftn_chatter(myanim) {
   level endon("found_infountain");
   level endon("player_broke_stealth");
   level endon("E1_shooting_done");
-  if(flag("E1_shooting_done") || flag("found_infountain"))
+  if(flag("E1_shooting_done") || flag("found_infountain")) {
     return;
+  }
   if(flag("found_infountain_reznov_hide")) {
     level thread say_dialogue(myanim);
     return;
@@ -700,8 +701,9 @@ dodamage_onhit(amount) {
 }
 
 plane_controller(wave) {
-  if(flag("player_is_effed"))
+  if(flag("player_is_effed")) {
     return;
+  }
   level endon("player_broke_stealth");
   level endon("event2_started");
   level.enginefire_plane_passed = undefined;
@@ -1068,10 +1070,12 @@ hunters_after_hero_infountain() {
 crouch_hint() {
   level.hintelem = NewHudElem();
   level.hintelem init_results_hudelem(320, 160, "center", "bottom", 1.5, 1.0);
-  if(level.console)
+  if(level.console) {
     level.hintelem setText(&"SNIPER_HINT_CROUCH");
-  else
+  }
+  else {
     level.hintelem setText(&"SCRIPT_PLATFORM_SNIPER_HINT_CROUCH");
+  }
   while(get_players()[0] getstance() != "crouch") {
     wait 0.2;
   }

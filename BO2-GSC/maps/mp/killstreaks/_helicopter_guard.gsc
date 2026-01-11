@@ -37,8 +37,9 @@ init() {
 
   level.heliguardflyovernfz = 0;
 
-  if(level.script == "mp_hydro")
+  if(level.script == "mp_hydro") {
     level.heliguardflyovernfz = 1;
+  }
 }
 
 register() {
@@ -51,8 +52,9 @@ tryuseheliguardsupport(lifeid) {
     return false;
   }
 
-  if(self isremotecontrolling())
+  if(self isremotecontrolling()) {
     return false;
+  }
 
   if(!isDefined(level.heli_paths) || level.heli_paths.size <= 0) {
     self iprintlnbold(&"MP_UNAVAILABLE_IN_LEVEL");
@@ -61,13 +63,15 @@ tryuseheliguardsupport(lifeid) {
 
   killstreak_id = self maps\mp\killstreaks\_killstreakrules::killstreakstart("helicopter_guard_mp", self.team, 0, 1);
 
-  if(killstreak_id == -1)
+  if(killstreak_id == -1) {
     return false;
+  }
 
   heliguard = createheliguardsupport(lifeid, killstreak_id);
 
-  if(!isDefined(heliguard))
+  if(!isDefined(heliguard)) {
     return false;
+  }
 
   self thread startheliguardsupport(heliguard, lifeid);
   return true;
@@ -77,10 +81,12 @@ createheliguardsupport(lifeid, killstreak_id) {
   hardpointtype = "helicopter_guard_mp";
   closeststartnode = heliguardsupport_getcloseststartnode(self.origin);
 
-  if(isDefined(closeststartnode.angles))
+  if(isDefined(closeststartnode.angles)) {
     startang = closeststartnode.angles;
-  else
+  }
+  else {
     startang = (0, 0, 0);
+  }
 
   closestnode = heliguardsupport_getclosestnode(self.origin);
   flyheight = max(self.origin[2] + 1600, getnoflyzoneheight(self.origin));
@@ -141,8 +147,9 @@ createheliguardsupport(lifeid, killstreak_id) {
 }
 
 getmeshheight(littlebird, owner) {
-  if(!owner isinsideheightlock())
+  if(!owner isinsideheightlock()) {
     return maps\mp\killstreaks\_airsupport::getminimumflyheight();
+  }
 
   maxmeshheight = littlebird getheliheightlockheight(owner.origin);
   return max(maxmeshheight, owner.origin[2]);
@@ -173,8 +180,9 @@ startheliguardsupport(littlebird, lifeid) {
   littlebird setspeed(littlebird.speed, 80, 30);
   littlebird waittill("goal");
 
-  if(getdvar(#"scr_heli_guard_debug") == "1")
+  if(getdvar(#"scr_heli_guard_debug") == "1") {
     debug_no_fly_zones();
+  }
 
   littlebird thread heliguardsupport_followplayer();
 }
@@ -195,8 +203,9 @@ heliguardsupport_followplayer() {
   self setspeed(self.followspeed, 20, 20);
 
   while(true) {
-    if(isDefined(self.owner) && isalive(self.owner))
+    if(isDefined(self.owner) && isalive(self.owner)) {
       heliguardsupport_movetoplayer();
+    }
 
     wait 3;
   }
@@ -377,8 +386,9 @@ heliguardsupport_leave() {
     collide = crossesnoflyzone(self.origin, targetpos);
   }
 
-  if(tries == 0)
+  if(tries == 0) {
     targetpos = self.origin + (0, 0, flyheight);
+  }
 
   self setspeed(self.speed, 80);
   self setmaxpitchroll(45, 180);
@@ -435,8 +445,9 @@ removelittlebird() {
   level.lbstrike = 0;
   maps\mp\killstreaks\_killstreakrules::killstreakstop("helicopter_guard_mp", self.team, self.killstreak_id);
 
-  if(isDefined(self.marker))
+  if(isDefined(self.marker)) {
     self.marker delete();
+  }
 
   self delete();
 }
@@ -453,8 +464,9 @@ heliguardsupport_watchsamproximity(player, missileteam, missiletarget, missilegr
       newtarget movegravity(anglestoright(missilegroup[i].angles) * -1000, 0.05);
 
       for(j = 0; j < missilegroup.size; j++) {
-        if(isDefined(missilegroup[j]))
+        if(isDefined(missilegroup[j])) {
           missilegroup[j] settargetentity(newtarget);
+        }
       }
 
       dodgepoint = missiletarget.origin + anglestoright(missilegroup[i].angles) * 200;
@@ -502,13 +514,15 @@ heliguardsupport_getclosestnode(pos) {
 }
 
 littlebird_debug_text(string) {
-  if(getdvar(#"scr_heli_guard_debug") == "1")
+  if(getdvar(#"scr_heli_guard_debug") == "1") {
     iprintln(string);
+  }
 }
 
 littlebird_debug_line(start, end, color) {
-  if(getdvar(#"scr_heli_guard_debug") == "1")
+  if(getdvar(#"scr_heli_guard_debug") == "1") {
     line(start, end, color, 1, 1, 300);
+  }
 }
 
 heli_path_debug() {
@@ -569,12 +583,14 @@ heliguardsupport_getclosestlinkednode(pos) {
 }
 
 heliguardsupport_arraycontains(array, compare) {
-  if(array.size <= 0)
+  if(array.size <= 0) {
     return false;
+  }
 
   foreach(member in array) {
-    if(member == compare)
+    if(member == compare) {
       return true;
+    }
   }
 
   return false;
@@ -588,8 +604,9 @@ heliguardsupport_getlinkedstructs() {
 heliguardsupport_setairstartnodes() {
   level.air_start_nodes = getstructarray("chopper_boss_path_start", "targetname");
 
-  foreach(loc in level.air_start_nodes)
+  foreach(loc in level.air_start_nodes) {
   loc.neighbors = loc heliguardsupport_getlinkedstructs();
+  }
 }
 
 heliguardsupport_setairnodemesh() {
@@ -602,8 +619,9 @@ heliguardsupport_setairnodemesh() {
       if(loc == other_loc) {
         continue;
       }
-      if(!heliguardsupport_arraycontains(loc.neighbors, other_loc) && heliguardsupport_arraycontains(other_loc heliguardsupport_getlinkedstructs(), loc))
+      if(!heliguardsupport_arraycontains(loc.neighbors, other_loc) && heliguardsupport_arraycontains(other_loc heliguardsupport_getlinkedstructs(), loc)) {
         loc.neighbors[loc.neighbors.size] = other_loc;
+      }
     }
   }
 }
@@ -613,8 +631,9 @@ heliguardsupport_attacktargets() {
   level endon("game_ended");
   self endon("leaving");
 
-  for(;;)
+  for(;;) {
     self heliguardsupport_firestart();
+  }
 }
 
 heliguardsupport_firestart() {
@@ -626,8 +645,9 @@ heliguardsupport_firestart() {
   for(;;) {
     numshots = randomintrange(10, 21);
 
-    if(!isDefined(self.primarytarget))
+    if(!isDefined(self.primarytarget)) {
       self waittill("primary acquired");
+    }
 
     if(isDefined(self.primarytarget)) {
       targetent = self.primarytarget;

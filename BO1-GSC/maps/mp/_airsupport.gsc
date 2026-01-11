@@ -7,8 +7,9 @@
 #include common_scripts\utility;
 
 initAirsupport() {
-  if(!isDefined(level.airsupportHeightScale))
+  if(!isDefined(level.airsupportHeightScale)) {
     level.airsupportHeightScale = 1;
+  }
   level.airsupportHeightScale = getDvarIntDefault(#"scr_airsupportHeightScale", level.airsupportHeightScale);
   level.noFlyZones = [];
   level.noFlyZones = getEntArray("no_fly_zone", "targetname");
@@ -126,8 +127,9 @@ callStrike(flightPlan) {
   level thread planeStrike(flightPlan.owner, requiredDeathCount, startPoint + side_offset, endPoint + side_offset, bombTime, flyTime, flightPlan.speed, flightPlan.bombSpeedScale, direction, flightPlan.planeSpawnCallback);
 }
 planeStrike(owner, requiredDeathCount, pathStart, pathEnd, bombTime, flyTime, flyspeed, bombSpeedScale, direction, planeSpawnedFunction) {
-  if(!isDefined(owner))
+  if(!isDefined(owner)) {
     return;
+  }
   plane = spawnplane(owner, "script_model", pathStart);
   plane.angles = direction;
   plane moveTo(pathEnd, flyTime, 0, 0);
@@ -157,26 +159,31 @@ getMaxTargetHeight() {
 clampTarget(target) {
   min = getMinTargetHeight();
   max = getMaxTargetHeight();
-  if(target[2] < min)
+  if(target[2] < min) {
     target[2] = min;
-  if(target[2] > max)
+  }
+  if(target[2] > max) {
     target[2] = max;
+  }
   return target;
 }
 _insideCylinder(point, base, radius, height) {
   if(isDefined(height)) {
-    if(point[2] > base[2] + height)
+    if(point[2] > base[2] + height) {
       return false;
+    }
   }
   dist = Distance2D(point, base);
-  if(dist < radius)
+  if(dist < radius) {
     return true;
+  }
   return false;
 }
 _insideNoFlyZoneByIndex(point, index, disregardHeight) {
   height = level.noFlyZones[index].height;
-  if(isDefined(disregardHeight))
+  if(isDefined(disregardHeight)) {
     height = undefined;
+  }
   return _insideCylinder(point, level.noFLyZones[index].origin, level.noFlyZones[index].radius, height);
 }
 getNoFlyZoneHeight(point) {
@@ -190,8 +197,9 @@ getNoFlyZoneHeight(point) {
       }
     }
   }
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     return point[2];
+  }
   return origin[2] + height;
 }
 insideNoFlyZones(point, disregardHeight) {
@@ -207,8 +215,9 @@ crossesNoFlyZone(start, end) {
   for(i = 0; i < level.noFlyZones.size; i++) {
     point = closestPointOnLine(level.noFlyZones[i].origin, start, end);
     dist = Distance2D(point, level.noFlyZones[i].origin);
-    if(point[2] > (level.noFlyZones[i].origin[2] + level.noFlyZones[i].height))
+    if(point[2] > (level.noFlyZones[i].origin[2] + level.noFlyZones[i].height)) {
       continue;
+    }
     if(dist < level.noFlyZones[i].radius) {
       return i;
     }
@@ -220,8 +229,9 @@ crossesNoFlyZones(start, end) {
   for(i = 0; i < level.noFlyZones.size; i++) {
     point = closestPointOnLine(level.noFlyZones[i].origin, start, end);
     dist = Distance2D(point, level.noFlyZones[i].origin);
-    if(point[2] > (level.noFlyZones[i].origin[2] + level.noFlyZones[i].height))
+    if(point[2] > (level.noFlyZones[i].origin[2] + level.noFlyZones[i].height)) {
       continue;
+    }
     if(dist < level.noFlyZones[i].radius) {
       zones[zones.size] = i;
     }
@@ -234,28 +244,34 @@ getNoFlyZoneHeightCrossed(start, end, minHeight) {
     point = closestPointOnLine(level.noFlyZones[i].origin, start, end);
     dist = Distance2D(point, level.noFlyZones[i].origin);
     if(dist < level.noFlyZones[i].radius) {
-      if(height < level.noFlyZones[i].height)
+      if(height < level.noFlyZones[i].height) {
         height = level.noFlyZones[i].height;
+      }
     }
   }
   return height;
 }
 _shouldIgnoreNoFlyZone(noFlyZone, noFlyZones) {
-  if(!isDefined(noFlyZone))
+  if(!isDefined(noFlyZone)) {
     return true;
+  }
   for(i = 0; i < noFlyZones.size; i++) {
-    if(isDefined(noFlyZones[i]) && noFlyZones[i] == noFlyZone)
+    if(isDefined(noFlyZones[i]) && noFlyZones[i] == noFlyZone) {
       return true;
+    }
   }
   return false;
 }
 _shouldIgnoreStartGoalNoFlyZone(noFlyZone, startNoFlyZones, goalNoFlyZones) {
-  if(!isDefined(noFlyZone))
+  if(!isDefined(noFlyZone)) {
     return true;
-  if(_shouldIgnoreNoFlyZone(noFlyZone, startNoFlyZones))
+  }
+  if(_shouldIgnoreNoFlyZone(noFlyZone, startNoFlyZones)) {
     return true;
-  if(_shouldIgnoreNoFlyZone(noFlyZone, goalNoFlyZones))
+  }
+  if(_shouldIgnoreNoFlyZone(noFlyZone, goalNoFlyZones)) {
     return true;
+  }
   return false;
 }
 getHeliPath(start, goal) {
@@ -266,8 +282,9 @@ getHeliPath(start, goal) {
     goal = (goal[0], goal[1], getNoFlyZoneHeight(goal));
   }
   goal_points = calculatePath(start, goal, startNoFlyZones, goalNoFlyZones);
-  if(!isDefined(goal_points))
+  if(!isDefined(goal_points)) {
     return undefined;
+  }
   Assert(goal_points.size >= 1);
   return goal_points;
 }
@@ -285,8 +302,9 @@ followPath(path, doneNotify, stopAtGoal) {
   }
 }
 setGoalPosition(goal, doneNotify, stopAtGoal) {
-  if(!isDefined(stopAtGoal))
+  if(!isDefined(stopAtGoal)) {
     stopAtGoal = true;
+  }
   start = self.origin;
   goal_points = getHeliPath(start, goal);
   if(!isDefined(goal_points)) {
@@ -328,8 +346,9 @@ calculatePath_r(start, end, points, startNoFlyZones, goalNoFlyZones, depth) {
 calculatePath(start, end, startNoFlyZones, goalNoFlyZones) {
   points = [];
   points = calculatePath_r(start, end, points, startNoFlyZones, goalNoFlyZones, 3);
-  if(!isDefined(points))
+  if(!isDefined(points)) {
     return undefined;
+  }
   Assert(points.size >= 1);
   debug_sphere(points[points.size - 1], 10, (1, 0, 0), 1, 1000);
   point = start;
@@ -400,8 +419,9 @@ entLOSRadiusDamage(ent, pos, radius, max, min, owner, eInflictor) {
       if(indoors) {
         debug_star((pos[0], pos[1], head_height), (0, 1, 0), debug_display_time);
         dist *= 4;
-        if(dist > radius)
+        if(dist > radius) {
           return false;
+        }
       } else {
         debug_star((pos[0], pos[1], head_height), (1, 0, 0), debug_display_time);
         trace = maps\mp\gametypes\_weapons::weaponDamageTrace((pos[0], pos[1], head_height), pos, 0, undefined);
@@ -409,8 +429,9 @@ entLOSRadiusDamage(ent, pos, radius, max, min, owner, eInflictor) {
         if(indoors) {
           debug_star(pos, (0, 1, 0), debug_display_time);
           dist *= 4;
-          if(dist > radius)
+          if(dist > radius) {
             return false;
+          }
         } else {
           debug_star(pos, (1, 0, 0), debug_display_time);
         }

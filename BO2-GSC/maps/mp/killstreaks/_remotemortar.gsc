@@ -43,22 +43,28 @@ init() {
   level.remore_mortar_enhanced_vision = "remote_mortar_enhanced";
   minimaporigins = getEntArray("minimap_corner", "targetname");
 
-  if(minimaporigins.size)
+  if(minimaporigins.size) {
     uavorigin = maps\mp\gametypes\_spawnlogic::findboxcenter(minimaporigins[0].origin, minimaporigins[1].origin);
-  else
+  }
+  else {
     uavorigin = (0, 0, 0);
+  }
 
-  if(level.script == "mp_la")
+  if(level.script == "mp_la") {
     uavorigin = uavorigin + vectorscale((1, 0, 0), 1200.0);
+  }
 
-  if(level.script == "mp_hydro")
+  if(level.script == "mp_hydro") {
     uavorigin = uavorigin + vectorscale((0, 1, 0), 2000.0);
+  }
 
-  if(level.script == "mp_concert")
+  if(level.script == "mp_concert") {
     uavorigin = uavorigin + vectorscale((0, -1, 0), 750.0);
+  }
 
-  if(level.script == "mp_vertigo")
+  if(level.script == "mp_vertigo") {
     uavorigin = uavorigin + vectorscale((-1, 0, 0), 500.0);
+  }
 
   level.remotemortarrig = spawn("script_model", uavorigin);
   level.remotemortarrig setModel("tag_origin");
@@ -78,8 +84,9 @@ init() {
 remote_mortar_killstreak(hardpointtype) {
   assert(hardpointtype == "remote_mortar_mp");
 
-  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
+  if(self maps\mp\killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
     return false;
+  }
 
   if(!self isonground() || self isusingremote()) {
     self iprintlnbold(&"KILLSTREAK_REMOTE_MORTAR_NOT_USABLE");
@@ -128,8 +135,9 @@ remote_mortar_killstreak(hardpointtype) {
   remote.copilotvoicenumber = self.bcvoicenumber;
   remote.pilotvoicenumber = self.bcvoicenumber + 1;
 
-  if(remote.pilotvoicenumber > 3)
+  if(remote.pilotvoicenumber > 3) {
     remote.pilotvoicenumber = 0;
+  }
 
   self clientnotify("krms");
   self player_linkto_remote(remote);
@@ -143,11 +151,13 @@ remote_mortar_killstreak(hardpointtype) {
   self thread visionswitch();
   level waittill("remote_unlinked");
 
-  if(isDefined(remote))
+  if(isDefined(remote)) {
     remote stoploopsound(4);
+  }
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return true;
+  }
 
   self clientnotify("krme");
   self clearclientflag(1);
@@ -229,8 +239,9 @@ remote_mortar_spawn() {
   remote.flareattackerdamage = [];
   remote.pilotvoicenumber = self.bcvoicenumber + 1;
 
-  if(remote.pilotvoicenumber > 3)
+  if(remote.pilotvoicenumber > 3) {
     remote.pilotvoicenumber = 0;
+  }
 
   angle = randomint(360);
   xoffset = cos(angle) * level.remote_radiusoffset;
@@ -255,8 +266,9 @@ remote_mortar_spawn() {
 rotaterig(clockwise) {
   turn = 360;
 
-  if(clockwise)
+  if(clockwise) {
     turn = -360;
+  }
 
   for(;;) {
     if(!clockwise) {
@@ -313,15 +325,17 @@ play_lockon_sounds(player) {
 }
 
 enemy_locking() {
-  if(isDefined(self.locking_on) && self.locking_on)
+  if(isDefined(self.locking_on) && self.locking_on) {
     return true;
+  }
 
   return false;
 }
 
 enemy_locked() {
-  if(isDefined(self.locked_on) && self.locked_on)
+  if(isDefined(self.locked_on) && self.locked_on) {
     return true;
+  }
 
   return false;
 }
@@ -388,24 +402,29 @@ fade_out_hint_hud(remote) {
 }
 
 remove_hud() {
-  if(isDefined(self.missile_hud))
+  if(isDefined(self.missile_hud)) {
     self.missile_hud destroy();
+  }
 
-  if(isDefined(self.zoom_hud))
+  if(isDefined(self.zoom_hud)) {
     self.zoom_hud destroy();
+  }
 
-  if(isDefined(self.hud_prompt_exit))
+  if(isDefined(self.hud_prompt_exit)) {
     self.hud_prompt_exit destroy();
+  }
 }
 
 remote_killstreak_end(explode, disconnected) {
   level notify("remote_end");
 
-  if(!isDefined(explode))
+  if(!isDefined(explode)) {
     explode = 0;
+  }
 
-  if(!isDefined(disconnected))
+  if(!isDefined(disconnected)) {
     disconnected = 0;
+  }
 
   if(isDefined(self.owner)) {
     if(disconnected == 0) {
@@ -425,8 +444,9 @@ remote_killstreak_end(explode, disconnected) {
     self.owner enableweaponcycling();
     self.owner remove_hud();
 
-    if(isDefined(level.gameended) && level.gameended)
+    if(isDefined(level.gameended) && level.gameended) {
       self.owner freezecontrolswrapper(1);
+    }
   }
 
   self maps\mp\gametypes\_spawning::remove_tvmissile_influencers();
@@ -441,13 +461,16 @@ remote_killstreak_end(explode, disconnected) {
     self.owner useservervisionset(0);
   }
 
-  if(isDefined(self.fx))
+  if(isDefined(self.fx)) {
     self.fx delete();
+  }
 
-  if(explode)
+  if(explode) {
     self remote_explode();
-  else
+  }
+  else {
     self remote_leave();
+  }
 }
 
 player_linkto_remote(remote) {
@@ -456,17 +479,21 @@ player_linkto_remote(remote) {
   uparc = 25;
   downarc = 65;
 
-  if(isDefined(level.remotemotarviewleft))
+  if(isDefined(level.remotemotarviewleft)) {
     leftarc = level.remotemotarviewleft;
+  }
 
-  if(isDefined(level.remotemotarviewright))
+  if(isDefined(level.remotemotarviewright)) {
     rightarc = level.remotemotarviewright;
+  }
 
-  if(isDefined(level.remotemotarviewup))
+  if(isDefined(level.remotemotarviewup)) {
     uparc = level.remotemotarviewup;
+  }
 
-  if(isDefined(level.remotemotarviewdown))
+  if(isDefined(level.remotemotarviewdown)) {
     downarc = level.remotemotarviewdown;
+  }
 
   leftarc = getdvarintdefault("scr_remotemortar_right", leftarc);
   rightarc = getdvarintdefault("scr_remotemortar_left", rightarc);
@@ -502,8 +529,9 @@ player_aim_think(remote) {
       self.pegasus_influencer = undefined;
     }
 
-    if(isDefined(self.active_pegasus))
+    if(isDefined(self.active_pegasus)) {
       self.pegasus_influencer = maps\mp\gametypes\_spawning::create_pegasus_influencer(trace["position"], self.team);
+    }
 
     wait 0.05;
   }
@@ -526,8 +554,9 @@ player_fire_think(remote) {
     self playrumbleonentity("sniper_fire");
 
     if(shot % 3 == 1) {
-      if(isDefined(remote.owner) && isDefined(remote.owner.pilottalking) && remote.owner.pilottalking)
+      if(isDefined(remote.owner) && isDefined(remote.owner.pilottalking) && remote.owner.pilottalking) {
         shot = 0;
+      }
 
       remote thread playpilotdialog("reaper_fire", 0.25, undefined, 0);
     }
@@ -583,17 +612,20 @@ remote_damage_think() {
       attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback(meansofdeath);
 
       if(attacker hasperk("specialty_armorpiercing")) {
-        if(meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET")
+        if(meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET") {
           damage = damage + int(damage * level.cac_armorpiercing_data);
+        }
       }
     }
 
-    if(meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET")
+    if(meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET") {
       damage = damage * level.heli_armor_bulletdamage;
+    }
 
     if(isDefined(weapon)) {
-      if(maps\mp\gametypes\_weapon_utils::islauncherweapon(weapon) || weapon == "remote_missile_missile_mp")
+      if(maps\mp\gametypes\_weapon_utils::islauncherweapon(weapon) || weapon == "remote_missile_missile_mp") {
         damage = maxhealth + 1;
+      }
     }
 
     if(damage <= 0) {
@@ -636,8 +668,9 @@ remote_leave() {
     nfz = crossesnoflyzone(self.origin, exitpoint);
 
     if(isDefined(nfz)) {
-      if(tries % 2 == 1 && tries != 1)
+      if(tries % 2 == 1 && tries != 1) {
         yaw = yaw * -1;
+      }
       else if(tries != 1) {
         yaw = yaw + 10;
         yaw = yaw * -1;
@@ -651,8 +684,9 @@ remote_leave() {
   self thread maps\mp\killstreaks\_spyplane::flattenyaw(self.angles[1] + yaw);
   self moveto(exitpoint, 8, 4);
 
-  if(self.lowhealth)
+  if(self.lowhealth) {
     playFXOnTag(level.chopper_fx["damage"]["heavy_smoke"], self, "tag_origin");
+  }
 
   self thread play_afterburner_fx();
   maps\mp\gametypes\_hostmigration::waitlongdurationwithhostmigrationpause(8);
@@ -712,8 +746,9 @@ visionswitch() {
 
       inverted = !inverted;
 
-      while(self changeseatbuttonpressed())
+      while(self changeseatbuttonpressed()) {
         wait 0.05;
+      }
     }
 
     wait 0.05;

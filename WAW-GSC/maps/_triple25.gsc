@@ -98,8 +98,9 @@ set_vehicle_anims(positions) {
 setanims() {
   max_positions = 2;
   positions = [];
-  for(i = 0; i < max_positions; i++)
+  for(i = 0; i < max_positions; i++) {
     positions[i] = spawnStruct();
+  }
   positions[0].sittag = "tag_driver1";
   positions[1].sittag = "tag_driver2";
   positions[0].idle = % crew_flak1_tag1_idle_1;
@@ -191,8 +192,9 @@ monitor_gunner(triple25, trig) {
 }
 
 waittill_trigger_array(triggers) {
-  for(k = 1; k < triggers.size; k++)
+  for(k = 1; k < triggers.size; k++) {
     triggers[k] endon("trigger");
+  }
   triggers[0] waittill("trigger");
 }
 

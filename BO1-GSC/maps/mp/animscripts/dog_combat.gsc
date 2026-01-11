@@ -20,8 +20,9 @@ main() {
     combatIdle();
     return;
   }
-  if(IsPlayer(self.enemy))
+  if(IsPlayer(self.enemy)) {
     self meleeBiteAttackPlayer(self.enemy);
+  }
 }
 combatIdle() {
   self set_orient_mode("face enemy");
@@ -43,17 +44,21 @@ combatIdlePreventOverlappingPlayer() {
   self endon("combatIdleEnd");
   while(1) {
     wait 0.1;
-    if(!isDefined(self.enemy))
+    if(!isDefined(self.enemy)) {
       continue;
-    if(!isDefined(self.enemy.syncedMeleeTarget) || self.enemy.syncedMeleeTarget == self)
+    }
+    if(!isDefined(self.enemy.syncedMeleeTarget) || self.enemy.syncedMeleeTarget == self) {
       continue;
+    }
     offsetVec = self.enemy.origin - self.origin;
-    if(offsetVec[2] * offsetVec[2] > 6400)
+    if(offsetVec[2] * offsetVec[2] > 6400) {
       continue;
+    }
     offsetVec = (offsetVec[0], offsetVec[1], 0);
     offset = length(offsetVec);
-    if(offset < 1)
+    if(offset < 1) {
       offsetVec = anglesToForward(self.angles);
+    }
     if(offset < 30) {
       offsetVec = vector_scale(offsetVec, 3 / offset);
       self teleport(self.origin - offsetVec);
@@ -135,8 +140,9 @@ doMeleeAfterWait(time) {
   wait(time);
   hitEnt = self melee();
   if(isDefined(hitEnt)) {
-    if(isplayer(hitEnt))
+    if(isplayer(hitEnt)) {
       hitEnt shellshock("dog_bite", 1);
+    }
   }
 }
 handleMeleeBiteAttackNoteTracks(note, player) {
@@ -148,8 +154,9 @@ handleMeleeBiteAttackNoteTracks(note, player) {
       }
       hitEnt = self melee(anglesToForward(self.angles));
       if(isDefined(hitEnt)) {
-        if(isplayer(hitEnt))
+        if(isplayer(hitEnt)) {
           hitEnt shellshock("dog_bite", 1);
+        }
       } else {
         attackMiss();
         return true;
@@ -224,8 +231,9 @@ orientToPlayerDeadReckoning(player, time_till_bite) {
   self set_orient_mode("face point", enemy_predicted_position);
 }
 checkEndCombat(meleeRange) {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
   distToTargetSq = distanceSquared(self.origin, self.enemy.origin);
   return (distToTargetSq > meleeRange * meleeRange);
 }
@@ -285,8 +293,9 @@ dog_cant_kill_in_one_hit(player) {
     assertex(player.dogs_dont_instant_kill, "Dont set player.dogs_dont_instant_kill to false, set to undefined");
     return true;
   }
-  if(getTime() - level.lastDogMeleePlayerTime > 8000)
+  if(getTime() - level.lastDogMeleePlayerTime > 8000) {
     level.dogMeleePlayerCounter = 0;
+  }
   return level.dogMeleePlayerCounter < level.dog_hits_before_kill &&
     player.health > 25;
 }
@@ -377,6 +386,7 @@ killplayer(player) {
   player setCanDamage(true);
   wait 1;
   damage = player.health + 1;
-  if(!isalive(player))
+  if(!isalive(player)) {
     return;
+  }
 }

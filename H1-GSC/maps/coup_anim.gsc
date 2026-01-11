@@ -617,31 +617,39 @@ killed_by_player(var_0) {
 }
 
 playdriveranim(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     printturnanim(" ---" + var_1 + ", " + var_0);
-  else
+  }
+  else {
     printturnanim(" ---, " + var_0);
+  }
 
-  if(var_0 == "bigleft2center" && var_1 == "turnleft3")
+  if(var_0 == "bigleft2center" && var_1 == "turnleft3") {
     self setanimknob(maps\_utility::getanim("wheel_bigleftloop2center"), 1, 0, 1);
-  else
+  }
+  else {
     self setanimknob(maps\_utility::getanim("wheel_" + var_0), 1, 0, 1);
+  }
 
   maps\_anim::anim_single_solo(self.driver, "cardriver_" + var_0, "tag_driver");
 }
 
 loopdriveranim(var_0, var_1, var_2) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     printturnanim(" --- (loop) " + var_1 + ", " + var_0);
-  else
+  }
+  else {
     printturnanim(" --- (loop) , " + var_0);
+  }
 
   self notify("stop_driver_loop");
 
-  if(var_0 == "bigleft_idle" && var_1 == "turnleft3")
+  if(var_0 == "bigleft_idle" && var_1 == "turnleft3") {
     self setanimknob(maps\_utility::getanim("wheel_bigleftloop_idle"), 1, 0, 1);
-  else
+  }
+  else {
     self setanimknob(maps\_utility::getanim("wheel_" + var_0), 1, 0, 1);
+  }
 
   thread maps\_anim::anim_loop_solo(self.driver, "cardriver_" + var_0, "tag_driver", "stop_driver_loop");
 
@@ -659,18 +667,21 @@ looppassengeranim(var_0, var_1) {
   self notify("stop_passenger_loop");
   thread maps\_anim::anim_loop_solo(self.passenger, var_0, "tag_passenger", "stop_passenger_loop");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self waittillmatch("single anim", var_1);
+  }
 }
 
 printturnanim(var_0) {
-  if(isDefined(level.debug_turnanims) && level.debug_turnanims)
+  if(isDefined(level.debug_turnanims) && level.debug_turnanims) {
     return;
+  }
 }
 
 printpassengeranim(var_0) {
-  if(isDefined(level.debug_passengeranims) && level.debug_passengeranims)
+  if(isDefined(level.debug_passengeranims) && level.debug_passengeranims) {
     return;
+  }
 }
 
 ambientcarinterior(var_0) {

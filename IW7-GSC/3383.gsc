@@ -28,8 +28,9 @@ func_94EF() {
     var_02 = scripts\engine\utility::getclosest(var_1.origin, scripts\engine\utility::getstructarray("spinner", "script_noteworthy"));
     var_03 = spawn("script_model", var_2.origin + (0, 0, 0.15));
 
-    if(!isDefined(var_2.angles))
+    if(!isDefined(var_2.angles)) {
       var_2.angles = (0, 0, 0);
+    }
 
     var_3.angles = var_2.angles;
     var_03 setModel("zmb_magic_wheel_spinner");
@@ -95,10 +96,12 @@ func_13643() {
       }
     }
 
-    if(scripts\engine\utility::flag_exist("fire_sale") && scripts\engine\utility::flag("fire_sale"))
+    if(scripts\engine\utility::flag_exist("fire_sale") && scripts\engine\utility::flag("fire_sale")) {
       var_02 = 10;
-    else
+    }
+    else {
       var_02 = 950;
+    }
 
     if(var_00 scripts\cp\cp_persistence::player_has_enough_currency(var_02)) {
       var_00 scripts\cp\cp_persistence::take_player_currency(var_02, 1, "magic_wheel");
@@ -115,8 +118,9 @@ func_51EB(var_00, var_01, var_02) {
   var_01 endon("disconnect");
   var_01 playlocalsound("purchase_deny");
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_01 forceusehinton(&"COOP_INTERACTIONS_CANNOT_BUY");
+  }
   else {
     var_01 thread scripts\cp\cp_vo::try_to_play_vo("no_cash", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
     var_01 forceusehinton(&"COOP_INTERACTIONS_NEED_MONEY");
@@ -155,8 +159,9 @@ init_magic_wheel(var_00) {
   if(!isDefined(var_0.area_name)) {
     return;
   }
-  if(var_0.area_name != level.func_B161)
+  if(var_0.area_name != level.func_B161) {
     level thread func_8E95(var_00);
+  }
   else {
     var_00 setscriptablepartstate("base", "on");
     var_00 setscriptablepartstate("fx", get_default_fx_state());
@@ -170,16 +175,19 @@ init_magic_wheel(var_00) {
     var_00 setuserange(72);
     level.current_active_wheel = var_00;
 
-    if(isDefined(level.magic_wheel_spin_hint))
+    if(isDefined(level.magic_wheel_spin_hint)) {
       var_00 sethintstring(level.magic_wheel_spin_hint);
-    else
+    }
+    else {
       var_00 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+    }
   }
 }
 
 func_8E95(var_00) {
-  while(scripts\engine\utility::is_true(var_0.inuse))
+  while(scripts\engine\utility::is_true(var_0.inuse)) {
     wait 0.05;
+  }
 
   var_00 makeunusable();
   var_00 setscriptablepartstate("base", "off");
@@ -203,8 +211,9 @@ func_100ED(var_00) {
   var_02 hide();
   var_03 = get_default_fx_state();
 
-  if(scripts\engine\utility::flag("fire_sale"))
+  if(scripts\engine\utility::flag("fire_sale")) {
     var_03 = "firesale";
+  }
 
   var_00 setscriptablepartstate("fx", var_03);
   wait 1;
@@ -214,17 +223,21 @@ func_100ED(var_00) {
   var_00 setusefov(60);
   var_00 setuserange(72);
 
-  if(scripts\engine\utility::flag_exist("fire_sale") && scripts\engine\utility::flag("fire_sale"))
+  if(scripts\engine\utility::flag_exist("fire_sale") && scripts\engine\utility::flag("fire_sale")) {
     var_00 sethintstring(&"COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
-  else if(isDefined(level.magic_wheel_spin_hint))
+  }
+  else if(isDefined(level.magic_wheel_spin_hint)) {
     var_00 sethintstring(level.magic_wheel_spin_hint);
-  else
+  }
+  else {
     var_00 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+  }
 }
 
 get_default_fx_state() {
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded))
+  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded)) {
     return "upgrade";
+  }
 
   return "normal";
 }
@@ -234,8 +247,9 @@ get_area(var_00) {
 
   foreach(var_03 in var_01) {
     if(ispointinvolume(var_0.origin + (0, 0, 50), var_03)) {
-      if(isDefined(var_3.basename))
+      if(isDefined(var_3.basename)) {
         return var_3.basename;
+      }
     }
   }
 
@@ -272,8 +286,9 @@ func_12FFA(var_00, var_01, var_02) {
       var_14 = var_07;
       var_15 = scripts\cp\utility::getrawbaseweaponname(var_07);
 
-      if(isDefined(var_0.weapon_build_models[var_15]))
+      if(isDefined(var_0.weapon_build_models[var_15])) {
         var_14 = var_0.weapon_build_models[var_15];
+      }
 
       var_5[var_5.size] = var_14;
     }
@@ -289,22 +304,25 @@ func_12FFA(var_00, var_01, var_02) {
   var_1.func_10A05 = 0;
   var_01 waittill("ready");
 
-  if(!level.func_B162)
+  if(!level.func_B162) {
     var_1.func_10A03 setscriptablepartstate("spinner", "idle");
+  }
 
   var_1.inuse = 0;
   var_01 setscriptablepartstate("spin_light", "off");
 
   if(!scripts\engine\utility::flag_exist("fire_sale") || !scripts\engine\utility::flag("fire_sale")) {
     if(level.func_B162) {
-      if(isDefined(var_00))
+      if(isDefined(var_00)) {
         var_00 scripts\cp\cp_persistence::give_player_currency(var_02, undefined, undefined, 1, "magicWheelRefund");
+      }
 
       level.func_B162 = 0;
       wait 0.5;
 
-      if(isDefined(var_1.weapon))
+      if(isDefined(var_1.weapon)) {
         var_1.weapon delete();
+      }
 
       func_BC3F();
     } else {
@@ -330,8 +348,9 @@ func_12FFA(var_00, var_01, var_02) {
 }
 
 func_13D00(var_00) {
-  while(!isDefined(var_0.weapon))
+  while(!isDefined(var_0.weapon)) {
     wait 0.05;
+  }
 
   while(var_0.func_10A05) {
     var_01 = var_0.weapon.scriptmodelplayanim;
@@ -342,10 +361,12 @@ func_13D00(var_00) {
 func_7B18(var_00) {
   var_01 = 21 / (var_0.func_E74A / 5 * 0.05);
 
-  if(var_01 - int(var_01) > 0)
+  if(var_01 - int(var_01) > 0) {
     var_01 = int(var_01) + 1;
-  else
+  }
+  else {
     var_01 = int(var_01);
+  }
 
   var_0.func_E74D = var_01 * 0.05;
   var_02 = randomint(var_0.func_13C25.size);
@@ -353,24 +374,30 @@ func_7B18(var_00) {
 }
 
 can_have_nunchucks(var_00) {
-  if(var_0.vo_prefix != "p5_")
+  if(var_0.vo_prefix != "p5_") {
     return 0;
+  }
   else {
     var_01 = var_00 getrankedplayerdata("cp", "alienSession", "escapedRank0");
     var_02 = var_00 getrankedplayerdata("cp", "alienSession", "escapedRank1");
     var_03 = var_00 getrankedplayerdata("cp", "alienSession", "escapedRank2");
     var_04 = var_00 getrankedplayerdata("cp", "alienSession", "escapedRank3");
 
-    if(isDefined(var_01) && var_01 == 1)
+    if(isDefined(var_01) && var_01 == 1) {
       return 1;
-    else if(isDefined(var_02) && var_02 == 1)
+    }
+    else if(isDefined(var_02) && var_02 == 1) {
       return 1;
-    else if(isDefined(var_03) && var_03 == 1)
+    }
+    else if(isDefined(var_03) && var_03 == 1) {
       return 1;
-    else if(isDefined(var_04) && var_04 == 1)
+    }
+    else if(isDefined(var_04) && var_04 == 1) {
       return 1;
-    else
+    }
+    else {
       return 0;
+    }
   }
 }
 
@@ -384,14 +411,16 @@ get_weapon_with_new_camo(var_00, var_01, var_02) {
 }
 
 func_1010C(var_00, var_01) {
-  if(scripts\engine\utility::flag("fire_sale"))
+  if(scripts\engine\utility::flag("fire_sale")) {
     var_0.fire_sale_spin = 1;
+  }
 
   var_02 = undefined;
   var_0.func_BF6D = func_7B18(var_00);
 
-  if(isDefined(level.nextwheelweaponfunc))
+  if(isDefined(level.nextwheelweaponfunc)) {
     var_0.func_BF6D = [[level.nextwheelweaponfunc]](var_00, var_0.func_BF6D, var_01);
+  }
 
   if(scripts\engine\utility::is_true(var_1.finished_backstory) && !scripts\engine\utility::is_true(var_1.given_nunchucks)) {
     var_03 = "";
@@ -406,8 +435,9 @@ func_1010C(var_00, var_01) {
       var_03 = "iw7_nunchucks_zm_pap2";
     }
 
-    if(var_03 != "")
+    if(var_03 != "") {
       var_0.func_BF6D = var_03;
+    }
     else {
       var_0.func_13C25 = scripts\engine\utility::array_add(var_0.func_13C25, "iw7_nunchucks_zm");
       var_0.func_BF6D = "iw7_nunchucks_zm";
@@ -428,8 +458,9 @@ func_1010C(var_00, var_01) {
         var_03 = "iw7_nunchucks_zm_pap2";
       }
 
-      if(var_03 != "")
+      if(var_03 != "") {
         var_0.func_BF6D = var_03;
+      }
       else {
         var_0.func_13C25 = scripts\engine\utility::array_add(var_0.func_13C25, "iw7_nunchucks_zm");
         var_0.func_BF6D = "iw7_nunchucks_zm";
@@ -439,19 +470,23 @@ func_1010C(var_00, var_01) {
 
   var_04 = getweaponindexfromlist(var_0.func_BF6D, var_0.func_13C25);
 
-  if(scripts\engine\utility::array_contains(var_0.func_13C25, "iw7_forgefreeze_zm+forgefreezealtfire"))
+  if(scripts\engine\utility::array_contains(var_0.func_13C25, "iw7_forgefreeze_zm+forgefreezealtfire")) {
     var_0.func_13C25 = scripts\engine\utility::array_remove(var_0.func_13C25, "iw7_forgefreeze_zm+forgefreezealtfire");
+  }
 
   var_01 loadweaponsforplayer([var_0.func_BF6D], 1);
 
-  if(level.currentweaponlist.size > 0)
+  if(level.currentweaponlist.size > 0) {
     var_05 = level.currentweaponlist;
-  else
+  }
+  else {
     var_05 = getrotationlist(var_0.func_13C25);
+  }
 
   if(scripts\engine\utility::is_true(level.magic_wheel_upgraded)) {
-    foreach(var_08, var_07 in var_05)
+    foreach(var_08, var_07 in var_05) {
     var_5[var_08] = get_weapon_with_new_camo(var_01, var_07, get_camo_for_upgraded_weapon(getweaponbasename(var_07), var_01));
+    }
   }
 
   level.activewheels++;
@@ -466,34 +501,41 @@ func_1010C(var_00, var_01) {
     var_00 playSound("zmb_wheel_spin_tick");
     var_9++;
 
-    if(isDefined(var_0.weapon))
+    if(isDefined(var_0.weapon)) {
       var_0.weapon setmoverweapon(var_5[var_09]);
+    }
     else {
       var_0.weapon = spawn("script_weapon", var_11.origin, 0, 0, var_5[var_09]);
 
-      if(isDefined(var_11.angles))
+      if(isDefined(var_11.angles)) {
         var_0.weapon.angles = var_11.angles;
-      else
+      }
+      else {
         var_0.weapon.angles = (0, 0, 0);
+      }
     }
 
     var_0.weapon.scriptmodelplayanim = var_5[var_09];
 
-    if(var_09 >= var_5.size - 1)
+    if(var_09 >= var_5.size - 1) {
       var_09 = -1;
+    }
   }
 
   var_0.weapon.scriptmodelplayanim = var_0.func_13C25[var_04];
 
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded))
+  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded)) {
     var_0.weapon setmoverweapon(get_weapon_with_new_camo(var_01, var_0.weapon.scriptmodelplayanim, get_camo_for_upgraded_weapon(getweaponbasename(var_0.weapon.scriptmodelplayanim), var_01)));
-  else
+  }
+  else {
     var_0.weapon setmoverweapon(var_0.weapon.scriptmodelplayanim);
+  }
 
   level.activewheels--;
 
-  if(level.activewheels < 0)
+  if(level.activewheels < 0) {
     level.activewheels = 0;
+  }
 
   if(!level.activewheels) {
     _clearworldweapons();
@@ -508,15 +550,17 @@ func_1010C(var_00, var_01) {
     level.func_13D01++;
     var_15 = randomint(100);
 
-    if(level.func_13D01 == 7)
+    if(level.func_13D01 == 7) {
       var_15 = 100;
+    }
 
     if(var_15 > 50 && level.func_13D01 > 4) {
       level.func_B162 = 1;
       var_16 = var_0.weapon.origin;
 
-      if(isDefined(var_0.weapon))
+      if(isDefined(var_0.weapon)) {
         var_0.weapon delete();
+      }
 
       var_17 = spawn("script_model", var_16);
       var_17 setModel("zmb_arcade_toy_astronaut_blue");
@@ -564,16 +608,18 @@ func_1010C(var_00, var_01) {
 getrotationlist(var_00) {
   var_01 = [];
 
-  for(var_02 = 0; var_02 < 8; var_2++)
+  for(var_02 = 0; var_02 < 8; var_2++) {
     var_1[var_02] = var_0[var_02];
+  }
 
   return var_01;
 }
 
 getweaponindexfromlist(var_00, var_01) {
   for(var_02 = 0; var_02 < var_1.size; var_2++) {
-    if(var_00 == var_1[var_02])
+    if(var_00 == var_1[var_02]) {
       return var_02;
+    }
   }
 
   return 0;
@@ -590,8 +636,9 @@ func_B16B(var_00) {
 func_7C20() {
   var_00 = 1440;
 
-  if(randomint(100) > 50)
+  if(randomint(100) > 50) {
     var_00 = 1080;
+  }
 
   return var_00;
 }
@@ -616,8 +663,9 @@ func_7A37(var_00, var_01) {
   var_02 = getarraykeys(var_00);
 
   for(var_03 = 0; var_03 < var_2.size; var_3++) {
-    if(var_2[var_03] == var_01)
+    if(var_2[var_03] == var_01) {
       return var_03;
+    }
   }
 }
 
@@ -627,10 +675,12 @@ func_782E(var_00, var_01) {
 }
 
 func_7D60(var_00) {
-  if(isDefined(level.coop_weapontable))
+  if(isDefined(level.coop_weapontable)) {
     var_01 = level.coop_weapontable;
-  else
+  }
+  else {
     var_01 = "cp\cp_weapontable.csv";
+  }
 
   return tablelookup(var_01, 2, var_00, 1);
 }
@@ -641,8 +691,9 @@ wait_for_player_to_take_weapon(var_00) {
   for(;;) {
     self waittill("trigger", var_01);
 
-    while(var_01 ismeleeing() || var_01 meleebuttonpressed())
+    while(var_01 ismeleeing() || var_01 meleebuttonpressed()) {
       wait 0.05;
+    }
 
     if(isDefined(level.magicwheel_weapon_take_check)) {
       if([
@@ -657,10 +708,12 @@ wait_for_player_to_take_weapon(var_00) {
   }
 
   if(isDefined(self.scriptmodelplayanim) && getsubstr(self.scriptmodelplayanim, 0, 5) == "power") {
-    if(level.powers[self.scriptmodelplayanim].defaultslot == "secondary")
+    if(level.powers[self.scriptmodelplayanim].defaultslot == "secondary") {
       var_01 scripts\cp\powers\coop_powers::givepower(self.scriptmodelplayanim, level.powers[self.scriptmodelplayanim].defaultslot, undefined, undefined, undefined, 0, 0);
-    else
+    }
+    else {
       var_01 scripts\cp\powers\coop_powers::givepower(self.scriptmodelplayanim, level.powers[self.scriptmodelplayanim].defaultslot, undefined, undefined, undefined, 0, 1);
+    }
   } else {
     var_02 = self.scriptmodelplayanim;
     func_B16A(var_01, var_02);
@@ -703,8 +756,9 @@ wait_for_player_to_take_weapon(var_00) {
 func_B16A(var_00, var_01) {
   var_00 notify("weapon_purchased");
 
-  if(scripts\engine\utility::is_true(var_0.isusingsupercard))
+  if(scripts\engine\utility::is_true(var_0.isusingsupercard)) {
     wait 0.5;
+  }
 
   var_02 = undefined;
 
@@ -722,8 +776,9 @@ func_B16A(var_00, var_01) {
   var_05 = scripts\cp\utility::getrawbaseweaponname(var_01);
   var_00 scripts\cp\utility::take_fists_weapon(var_00);
 
-  if(isDefined(var_0.weapon_build_models[var_05]))
+  if(isDefined(var_0.weapon_build_models[var_05])) {
     var_01 = var_0.weapon_build_models[var_05];
+  }
 
   if(var_00 scripts\cp\cp_weapon::can_upgrade(var_01) && is_magic_wheel_upgrades(var_00)) {
     var_02 = get_camo_for_upgraded_weapon(var_05, var_00);
@@ -737,8 +792,9 @@ func_B16A(var_00, var_01) {
     var_00 notify("weapon_level_changed");
     var_00 scripts\cp\cp_merits::processmerit("mt_purchased_weapon");
 
-    if(var_00 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade"))
+    if(var_00 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
       var_00 scripts\cp\utility::notify_used_consumable("magic_wheel_upgrade");
+    }
   } else {
     var_06 = getweaponattachments(var_01);
     var_01 = var_00 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_01, undefined, var_06, undefined, undefined);
@@ -750,35 +806,45 @@ func_B16A(var_00, var_01) {
     var_00 notify("weapon_level_changed");
   }
 
-  if(issubstr(var_01, "g18_"))
+  if(issubstr(var_01, "g18_")) {
     var_0.has_replaced_starting_pistol = 1;
+  }
 
-  if(issubstr(var_01, "udm45_"))
+  if(issubstr(var_01, "udm45_")) {
     var_00 scripts\cp\cp_merits::processmerit("mt_udm_unlock");
+  }
 
-  if(issubstr(var_01, "rvn_"))
+  if(issubstr(var_01, "rvn_")) {
     var_00 scripts\cp\cp_merits::processmerit("mt_rvn_unlock");
+  }
 
-  if(issubstr(var_01, "crdb_"))
+  if(issubstr(var_01, "crdb_")) {
     var_00 scripts\cp\cp_merits::processmerit("mt_crdb_unlock");
+  }
 
-  if(issubstr(var_01, "vr_"))
+  if(issubstr(var_01, "vr_")) {
     var_00 scripts\cp\cp_merits::processmerit("mt_vr_unlock");
+  }
 
-  if(issubstr(var_01, "mp28_"))
+  if(issubstr(var_01, "mp28_")) {
     var_00 scripts\cp\cp_merits::processmerit("mt_mp28_unlock");
+  }
 
-  if(issubstr(var_01, "minilmg_"))
+  if(issubstr(var_01, "minilmg_")) {
     var_00 scripts\cp\cp_merits::processmerit("mt_minilmg_unlock");
+  }
 
-  if(issubstr(var_01, "ba50cal_"))
+  if(issubstr(var_01, "ba50cal_")) {
     var_00 scripts\cp\cp_merits::processmerit("mt_ba50cal_unlock");
+  }
 
-  if(issubstr(var_01, "mod2187_"))
+  if(issubstr(var_01, "mod2187_")) {
     var_00 scripts\cp\cp_merits::processmerit("mt_mod2187_unlock");
+  }
 
-  if(issubstr(var_01, "longshot_"))
+  if(issubstr(var_01, "longshot_")) {
     var_00 scripts\cp\cp_merits::processmerit("mt_longshot_unlock");
+  }
 
   var_00 notify("wor_item_pickup", var_01);
   var_00 givemaxammo(var_01);
@@ -788,12 +854,15 @@ func_B16A(var_00, var_01) {
 get_camo_for_upgraded_weapon(var_00, var_01) {
   var_02 = undefined;
 
-  if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_00))
+  if(isDefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos, var_00)) {
     var_02 = undefined;
-  else if(scripts\engine\utility::is_true(level.magic_wheel_upgraded) && var_01 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade") && isDefined(level.pap_2_camo))
+  }
+  else if(scripts\engine\utility::is_true(level.magic_wheel_upgraded) && var_01 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade") && isDefined(level.pap_2_camo)) {
     var_02 = level.pap_2_camo;
-  else if(isDefined(level.pap_1_camo))
+  }
+  else if(isDefined(level.pap_1_camo)) {
     var_02 = level.pap_1_camo;
+  }
 
   switch (var_00) {
     case "dischord":
@@ -817,21 +886,25 @@ get_camo_for_upgraded_weapon(var_00, var_01) {
 }
 
 get_attachment_for_upgraded_weapon(var_00, var_01) {
-  if(issubstr(var_00, "nunchucks"))
+  if(issubstr(var_00, "nunchucks")) {
     return undefined;
+  }
 
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded) && var_01 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade"))
+  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded) && var_01 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
     return "pap2";
+  }
 
   return "pap1";
 }
 
 is_magic_wheel_upgrades(var_00) {
-  if(var_00 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade"))
+  if(var_00 scripts\cp\utility::is_consumable_active("magic_wheel_upgrade")) {
     return 1;
+  }
 
-  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded))
+  if(scripts\engine\utility::is_true(level.magic_wheel_upgraded)) {
     return 1;
+  }
 
   return 0;
 }
@@ -876,13 +949,16 @@ func_4DB4(var_00, var_01, var_02) {
     scripts\engine\utility::flag_clear("fire_sale");
 
     foreach(var_05 in level.func_B163) {
-      if(!isDefined(var_02))
+      if(!isDefined(var_02)) {
         func_BC3F();
+      }
       else if(var_05 == var_02) {
-        if(isDefined(level.magic_wheel_spin_hint))
+        if(isDefined(level.magic_wheel_spin_hint)) {
           var_05 sethintstring(level.magic_wheel_spin_hint);
-        else
+        }
+        else {
           var_05 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+        }
 
         continue;
       }
@@ -891,8 +967,9 @@ func_4DB4(var_00, var_01, var_02) {
       thread func_8E95(var_05);
     }
 
-    foreach(var_08 in level.players)
+    foreach(var_08 in level.players) {
     var_8.func_8B7B = undefined;
+    }
 
     level notify("deactivated" + var_00);
     var_10 = 1;
@@ -908,8 +985,9 @@ func_4DB4(var_00, var_01, var_02) {
         }
       }
 
-      if(!var_11)
+      if(!var_11) {
         var_10 = 0;
+      }
     }
 
     wait 0.25;

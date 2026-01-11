@@ -108,8 +108,9 @@ leper_wait_at_node(enemy) {
 
 get_leper_retreat_node(enemy) {
   retreat_nodes = get_named_retreat_nodes();
-  if(!isDefined(retreat_nodes))
+  if(!isDefined(retreat_nodes)) {
     retreat_nodes = get_possible_retreat_nodes();
+  }
 
   filters = [];
   filters["direction"] = "override";
@@ -140,13 +141,15 @@ get_possible_retreat_nodes() {
 }
 
 get_direction_away_from_players() {
-  if(level.players.size == 0)
+  if(level.players.size == 0) {
     return self.origin + anglesToForward(self.angles) * 100;
+  }
 
   centralLocation = (0, 0, 0);
 
-  foreach(player in level.players)
+  foreach(player in level.players) {
   centralLocation += player.origin;
+  }
 
   centralLocation = centralLocation / level.players.size;
 
@@ -160,8 +163,9 @@ leper_attack() {
 get_named_retreat_nodes() {
   current_area = get_current_area_name();
   possible_nodes = getnodearray(current_area + "_leper_location", "targetname");
-  if(isDefined(possible_nodes) && possible_nodes.size > 0)
+  if(isDefined(possible_nodes) && possible_nodes.size > 0) {
     return possible_nodes;
+  }
 
   return undefined;
 }

@@ -207,71 +207,81 @@ settweakablelastvalue(var_0, var_1, var_2) {
 }
 
 registertweakable(var_0, var_1, var_2, var_3) {
-  if(isstring(var_3))
+  if(isstring(var_3)) {
     var_3 = getdvar(var_2, var_3);
-  else
+  }
+  else {
     var_3 = getdvarint(var_2, var_3);
+  }
 
   switch (var_0) {
     case "rule":
-      if(!isDefined(level.rules[var_1]))
+      if(!isDefined(level.rules[var_1])) {
         level.rules[var_1] = spawnStruct();
+      }
 
       level.rules[var_1].value = var_3;
       level.rules[var_1].lastvalue = var_3;
       level.rules[var_1].dvar = var_2;
       break;
     case "game":
-      if(!isDefined(level.gametweaks[var_1]))
+      if(!isDefined(level.gametweaks[var_1])) {
         level.gametweaks[var_1] = spawnStruct();
+      }
 
       level.gametweaks[var_1].value = var_3;
       level.gametweaks[var_1].lastvalue = var_3;
       level.gametweaks[var_1].dvar = var_2;
       break;
     case "team":
-      if(!isDefined(level.teamtweaks[var_1]))
+      if(!isDefined(level.teamtweaks[var_1])) {
         level.teamtweaks[var_1] = spawnStruct();
+      }
 
       level.teamtweaks[var_1].value = var_3;
       level.teamtweaks[var_1].lastvalue = var_3;
       level.teamtweaks[var_1].dvar = var_2;
       break;
     case "player":
-      if(!isDefined(level.playertweaks[var_1]))
+      if(!isDefined(level.playertweaks[var_1])) {
         level.playertweaks[var_1] = spawnStruct();
+      }
 
       level.playertweaks[var_1].value = var_3;
       level.playertweaks[var_1].lastvalue = var_3;
       level.playertweaks[var_1].dvar = var_2;
       break;
     case "class":
-      if(!isDefined(level.classtweaks[var_1]))
+      if(!isDefined(level.classtweaks[var_1])) {
         level.classtweaks[var_1] = spawnStruct();
+      }
 
       level.classtweaks[var_1].value = var_3;
       level.classtweaks[var_1].lastvalue = var_3;
       level.classtweaks[var_1].dvar = var_2;
       break;
     case "weapon":
-      if(!isDefined(level.weapontweaks[var_1]))
+      if(!isDefined(level.weapontweaks[var_1])) {
         level.weapontweaks[var_1] = spawnStruct();
+      }
 
       level.weapontweaks[var_1].value = var_3;
       level.weapontweaks[var_1].lastvalue = var_3;
       level.weapontweaks[var_1].dvar = var_2;
       break;
     case "hardpoint":
-      if(!isDefined(level.hardpointtweaks[var_1]))
+      if(!isDefined(level.hardpointtweaks[var_1])) {
         level.hardpointtweaks[var_1] = spawnStruct();
+      }
 
       level.hardpointtweaks[var_1].value = var_3;
       level.hardpointtweaks[var_1].lastvalue = var_3;
       level.hardpointtweaks[var_1].dvar = var_2;
       break;
     case "hud":
-      if(!isDefined(level.hudtweaks[var_1]))
+      if(!isDefined(level.hudtweaks[var_1])) {
         level.hudtweaks[var_1] = spawnStruct();
+      }
 
       level.hudtweaks[var_1].value = var_3;
       level.hudtweaks[var_1].lastvalue = var_3;

@@ -47,14 +47,16 @@ teleporter_init() {
   level.a_teleport_exits = [];
   a_exits = getstructarray("portal_exit", "script_noteworthy");
 
-  foreach(s_portal in a_exits)
+  foreach(s_portal in a_exits) {
   level.a_teleport_exits[s_portal.script_int] = s_portal;
+  }
 
   level.a_teleport_exit_triggers = [];
   a_trigs = getstructarray("chamber_exit_trigger", "script_noteworthy");
 
-  foreach(s_trig in a_trigs)
+  foreach(s_trig in a_trigs) {
   level.a_teleport_exit_triggers[s_trig.script_int] = s_trig;
+  }
 
   a_s_teleporters = getstructarray("trigger_teleport_pad", "targetname");
   array_thread(a_s_teleporters, ::run_chamber_entrance_teleporter);
@@ -134,8 +136,9 @@ run_chamber_exit(n_enum) {
     s_activate_pos.trigger_stub set_unitrigger_hint_string("");
     s_activate_pos.trigger_stub trigger_off();
 
-    if(level.teleport_cost > 0)
+    if(level.teleport_cost > 0) {
       e_player maps\mp\zombies\_zm_score::minus_to_player_score(level.teleport_cost);
+    }
 
     e_portal_frame playLoopSound("zmb_teleporter_loop_pre", 1);
     e_portal_frame setanim( % fxanim_zom_tomb_portal_open_anim, 1.0, 0.1, 1);
@@ -217,8 +220,9 @@ run_chamber_entrance_teleporter() {
 }
 
 teleporter_radius_think(radius) {
-  if(!isDefined(radius))
+  if(!isDefined(radius)) {
     radius = 120.0;
+  }
 
   self endon("teleporter_radius_stop");
   radius_sq = radius * radius;
@@ -283,11 +287,13 @@ spawn_stargate_fx_origins() {
 }
 
 stargate_teleport_player(str_teleport_to, player, n_teleport_time_sec, show_fx) {
-  if(!isDefined(n_teleport_time_sec))
+  if(!isDefined(n_teleport_time_sec)) {
     n_teleport_time_sec = 2.0;
+  }
 
-  if(!isDefined(show_fx))
+  if(!isDefined(show_fx)) {
     show_fx = 1;
+  }
 
   player.teleporting = 1;
 
@@ -306,12 +312,15 @@ stargate_teleport_player(str_teleport_to, player, n_teleport_time_sec, show_fx) 
   player freezecontrols(1);
   wait_network_frame();
 
-  if(player getstance() == "prone")
+  if(player getstance() == "prone") {
     desired_origin = image_room.origin + prone_offset;
-  else if(player getstance() == "crouch")
+  }
+  else if(player getstance() == "crouch") {
     desired_origin = image_room.origin + crouch_offset;
-  else
+  }
+  else {
     desired_origin = image_room.origin + stand_offset;
+  }
 
   player.teleport_origin = spawn("script_model", player.origin);
   player.teleport_origin setModel("tag_origin");
@@ -320,14 +329,16 @@ stargate_teleport_player(str_teleport_to, player, n_teleport_time_sec, show_fx) 
   player.teleport_origin.origin = desired_origin;
   player.teleport_origin.angles = image_room.angles;
 
-  if(show_fx)
+  if(show_fx) {
     player playsoundtoplayer("zmb_teleporter_tele_2d", player);
+  }
 
   wait_network_frame();
   player.teleport_origin.angles = image_room.angles;
 
-  if(show_fx)
+  if(show_fx) {
     image_room thread stargate_play_fx();
+  }
 
   wait(n_teleport_time_sec);
 
@@ -359,8 +370,9 @@ is_teleport_landing_valid(s_pos, n_radius) {
   a_players = getplayers();
 
   foreach(e_player in a_players) {
-    if(distance2dsquared(s_pos.origin, e_player.origin) < n_radius_sq)
+    if(distance2dsquared(s_pos.origin, e_player.origin) < n_radius_sq) {
       return false;
+    }
   }
 
   return true;
@@ -373,8 +385,9 @@ get_free_teleport_pos(player, a_structs) {
     a_players = getplayers();
 
     foreach(s_pos in a_structs) {
-      if(is_teleport_landing_valid(s_pos, n_player_radius))
+      if(is_teleport_landing_valid(s_pos, n_player_radius)) {
         return s_pos;
+      }
     }
 
     wait 0.05;

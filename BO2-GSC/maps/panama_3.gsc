@@ -118,6 +118,7 @@ challenge_docks_guards_speed_kill(str_notify) {
 
   iprintln("total digbat killed : " + level.total_digbat_killed);
 
-  if(level.total_digbat_killed >= 8)
+  if(level.total_digbat_killed >= 8) {
     self notify(str_notify);
+  }
 }

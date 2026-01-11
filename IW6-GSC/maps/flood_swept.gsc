@@ -34,8 +34,9 @@ swept_start() {
   level.flood_mall_weapon_model = level.player maps\flood_util::create_world_model_from_ent_weapon("r5rgp+reflex_sp");
   var_0 = level.player getweaponslistprimaries();
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   level.player takeweapon(var_2);
+  }
 
   level.player disableoffhandweapons();
   level.cw_waterwipe_above = "waterline_above";
@@ -100,10 +101,12 @@ swept() {
 }
 
 swept_hint() {
-  if(isDefined(level.ps3) && level.ps3 || isDefined(level.ps4) && level.ps4)
+  if(isDefined(level.ps3) && level.ps3 || isDefined(level.ps4) && level.ps4) {
     level.player maps\_utility::display_hint_timeout("swept_hint_no_glyph", 3);
-  else
+  }
+  else {
     level.player maps\_utility::display_hint_timeout("swept_hint", 3);
+  }
 }
 
 start_swept_control() {
@@ -146,8 +149,9 @@ swept_end(var_0) {
   var_5 = maps\_utility::spawn_anim_model("sweptaway_end_ibeam");
   var_6 = maps\_utility::spawn_anim_model("sweptaway_end_pinned");
 
-  if(!isDefined(level.skybridge_model))
+  if(!isDefined(level.skybridge_model)) {
     level.skybridge_model = maps\_utility::spawn_anim_model("sweptaway_skybridge_01");
+  }
 
   var_7 = [];
   var_7["sweptaway_antenna_01"] = level.sweptaway_antenna_01;
@@ -289,10 +293,12 @@ start_blend_to_endpos() {
   while(isDefined(level.swept_path_rig) && isDefined(level.hands_rig) && distance2d(level.swept_path_rig.origin, level.hands_rig.origin) > 4) {
     var_3 = anglestoright(level.swept_path_rig.angles);
 
-    if(level.swept_path_rig.origin[0] - level.hands_rig.origin[0] > 0)
+    if(level.swept_path_rig.origin[0] - level.hands_rig.origin[0] > 0) {
       var_4 = level.hands_rig.origin + var_2 * -1 * var_3;
-    else
+    }
+    else {
       var_4 = level.hands_rig.origin + var_2 * var_3;
+    }
 
     level.hands_rig.origin = var_4;
     level.hands_rig linkto(level.swept_path_rig, "tag_player");
@@ -445,10 +451,12 @@ watch_waterlevel() {
     var_1 = level.player getEye();
     var_2 = bulletTrace(var_1, var_1 + (0, 0, 240), 0);
 
-    if(var_2["surfacetype"] == "water" && var_0 != "water")
+    if(var_2["surfacetype"] == "water" && var_0 != "water") {
       swept_underwater();
-    else if(var_2["surfacetype"] == "none" && var_0 != "none")
+    }
+    else if(var_2["surfacetype"] == "none" && var_0 != "none") {
       swept_abovewater();
+    }
     else if(var_2["surfacetype"] == "water" && var_0 == "water") {} else if(var_2["surfacetype"] == "none" && var_0 == "none") {}
 
     var_0 = var_2["surfacetype"];
@@ -525,8 +533,9 @@ player_surface_blur_think(var_0) {
 }
 
 no_swept_hint() {
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     return 1;
+  }
 
   return 0;
 }
@@ -537,18 +546,22 @@ building_slide_control_hint() {
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
     if(isDefined(level.ps3) && level.ps3) {
-      if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacy")
+      if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacy") {
         maps\_utility::display_hint_timeout("control_slide_gamepad_l_no_glyph", 3);
-      else
+      }
+      else {
         maps\_utility::display_hint_timeout("control_slide_gamepad_no_glyph", 3);
+      }
     } else if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacy")
       maps\_utility::display_hint_timeout("control_slide_gamepad_l", 3);
-    else
+    else {
       maps\_utility::display_hint_timeout("control_slide_gamepad", 3);
+    }
   } else if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacy")
     maps\_utility::display_hint_timeout("control_slide_l", 3);
-  else
+  else {
     maps\_utility::display_hint_timeout("control_slide", 3);
+  }
 }
 
 truck_rumble(var_0) {

@@ -1117,8 +1117,9 @@ explodable_liferaft_burn() {
       level thread play_sound_in_space(level.barrelIngSound, self.origin);
       startedfx = true;
     }
-    if(count > 20)
+    if(count > 20) {
       count = 0;
+    }
     if(count == 0) {
       self.damageTaken += (10 + randomfloat(10));
       badplace_cylinder("", 1, self.origin, 128, 250);

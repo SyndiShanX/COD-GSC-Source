@@ -69,16 +69,19 @@ redriver_breach_init() {
 
   foreach(breach in breaches) {
     pathnodes = GetNodeArray(breach.target, "targetname");
-    foreach(p in pathnodes)
+    foreach(p in pathnodes) {
     p DisconnectNode();
+    }
   }
 
   foreach(p in proxy) {
-    if(!isDefined(p.target))
+    if(!isDefined(p.target)) {
       continue;
+    }
     breach = getstruct(p.target, "targetname");
-    if(!isDefined(breach))
+    if(!isDefined(breach)) {
       continue;
+    }
     breaches[breaches.size] = breach;
   }
   array_thread(breaches, ::redriver_breach_update);
@@ -91,18 +94,22 @@ redriver_breach_update() {
   eq_duration = .5;
   eq_radius = 600;
 
-  if(isDefined(self.script_dot))
+  if(isDefined(self.script_dot)) {
     eq_scale = self.script_dot;
-  if(isDefined(self.script_wait))
+  }
+  if(isDefined(self.script_wait)) {
     eq_duration = self.script_wait;
-  if(isDefined(self.radius))
+  }
+  if(isDefined(self.radius)) {
     eq_radius = self.radius;
+  }
 
   Earthquake(eq_scale, eq_duration, self.origin, eq_radius);
 
   pathnodes = GetNodeArray(self.target, "targetname");
-  foreach(p in pathnodes)
+  foreach(p in pathnodes) {
   p ConnectNode();
+  }
 }
 
 redriverCustomCrateFunc() {
@@ -130,13 +137,15 @@ tryUseRedRiverNuke(lifeId, streakName) {
 setup_pinatas() {
   pinatas = getEntArray("pinata", "targetname");
   if(pinatas.size > 0) {
-    foreach(pinata in pinatas)
+    foreach(pinata in pinatas) {
     pinata thread update_pinata(level._effect["mp_ca_red_river_pinata_boom"]);
+    }
   }
   largePinatas = getEntArray("pinata_large", "targetname");
   if(largePinatas.size > 0) {
-    foreach(pinata in largePinatas)
+    foreach(pinata in largePinatas) {
     pinata thread update_pinata(level._effect["mp_ca_red_river_pinata_boom_lg"]);
+    }
   }
 }
 
@@ -166,10 +175,12 @@ update_pinata(death_effect) {
     }
   }
 
-  if(!isDefined(explosionDirection))
+  if(!isDefined(explosionDirection)) {
     self waittill("damage", amount, attacker, direction_vec, hit_point, damage_type);
-  else
+  }
+  else {
     direction_vec = explosionDirection;
+  }
 
   self Hide();
   self setCanDamage(false);

@@ -2915,4 +2915,3 @@ supply_drop_dev_gui() {
     level.dev_gui_supply_drop = devgui_string;
   }
 }
-

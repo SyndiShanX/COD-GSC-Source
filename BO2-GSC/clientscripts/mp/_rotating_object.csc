@@ -17,14 +17,17 @@ rotating_object_think() {
   revolutions = 1000;
   rotate_time = 12;
 
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     axis = self.script_noteworthy;
+  }
 
-  if(isDefined(self.script_float))
+  if(isDefined(self.script_float)) {
     rotate_time = self.script_float;
+  }
 
-  if(rotate_time == 0)
+  if(rotate_time == 0) {
     rotate_time = 12;
+  }
 
   if(rotate_time < 0) {
     direction = direction * -1;

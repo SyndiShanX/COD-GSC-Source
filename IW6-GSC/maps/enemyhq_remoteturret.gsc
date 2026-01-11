@@ -75,8 +75,9 @@ remote_turret_init(var_0) {
 }
 
 remote_turret_activate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  while(maps\_utility::issliding())
+  while(maps\_utility::issliding()) {
     wait 0.05;
+  }
 
   if(!isDefined(level.remote_sniper_return_struct)) {
     level.old_player_origin = self.origin;
@@ -116,8 +117,9 @@ remote_turret_activate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self.player_view_controller_model.origin = var_1;
   self.player_view_controller_model.angles = var_2;
 
-  if(!isDefined(self.player_view_controller))
+  if(!isDefined(self.player_view_controller)) {
     self.player_view_controller = maps\_utility::get_player_view_controller(self.player_view_controller_model, "tag_origin", (0, 0, 0), level.remote_turret_type);
+  }
 
   if(!isDefined(self.turret_look_at_ent)) {
     self.turret_look_at_ent = spawn("script_model", var_1);
@@ -139,19 +141,23 @@ remote_turret_activate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       break;
   }
 
-  if(!level.console && !common_scripts\utility::is_player_gamepad_enabled())
+  if(!level.console && !common_scripts\utility::is_player_gamepad_enabled()) {
     self enablemousesteer(1);
+  }
 
-  if(isDefined(level.sniper_vision_override))
+  if(isDefined(level.sniper_vision_override)) {
     self visionsetnakedforplayer(level.sniper_vision_override, 0.25);
-  else
+  }
+  else {
     self visionsetnakedforplayer("enemyhq_sniper_view", 0.25);
+  }
 
   thread remote_turret_handle_zoom();
   thread set_slow_aim();
 
-  if(!isDefined(self.allow_dry_fire) || self.allow_dry_fire == 0)
+  if(!isDefined(self.allow_dry_fire) || self.allow_dry_fire == 0) {
     thread remote_turret_monitor_ammo(var_0);
+  }
   else {
     self setweaponammoclip(var_0, 0);
     thread remote_turret_monitor_dryfire(var_0);
@@ -164,8 +170,9 @@ remote_turret_activate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 restore_weapons_no_first_raise(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "default";
+  }
 
   if(!isDefined(self.stored_weapons) || !isDefined(self.stored_weapons[var_0])) {
     return;
@@ -173,8 +180,9 @@ restore_weapons_no_first_raise(var_0) {
   self takeallweapons();
 
   foreach(var_3, var_2 in self.stored_weapons[var_0]["inventory"]) {
-    if(weaponinventorytype(var_3) != "altmode")
+    if(weaponinventorytype(var_3) != "altmode") {
       self giveweapon(var_3, 0, 0, 0, 1);
+    }
 
     self setweaponammoclip(var_3, var_2["clip_left"], "left");
     self setweaponammoclip(var_3, var_2["clip_right"], "right");
@@ -183,8 +191,9 @@ restore_weapons_no_first_raise(var_0) {
 
   var_4 = self.stored_weapons[var_0]["current_weapon"];
 
-  if(var_4 != "none")
+  if(var_4 != "none") {
     self switchtoweapon(var_4);
+  }
 }
 
 remote_turret_deactivate() {
@@ -204,8 +213,9 @@ remote_turret_deactivate() {
   self allowcrouch(1);
   self allowprone(1);
 
-  if(!level.console && !common_scripts\utility::is_player_gamepad_enabled())
+  if(!level.console && !common_scripts\utility::is_player_gamepad_enabled()) {
     self enablemousesteer(0);
+  }
 
   setsaveddvar("actionSlotsHide", "0");
   setsaveddvar("cg_fov", 65);
@@ -237,8 +247,9 @@ remote_turret_deactivate() {
 remote_turret_hud() {
   level.remote_turret_hud = [];
 
-  if(!isDefined(level.remote_turret_fade_in))
+  if(!isDefined(level.remote_turret_fade_in)) {
     level.remote_turret_fade_in = 1;
+  }
 
   var_0 = 100;
   var_1 = 25;
@@ -568,10 +579,12 @@ remote_turret_hud() {
   level.remote_turret_hud["weapon_name_bar"].y = level.remote_turret_hud["weapon_name_bar_bg"].y + int(level.remote_turret_hud["weapon_name_bar_bg"].height * 0.25);
   level.remote_turret_hud["weapon_name_bar"].sort = level.remote_turret_hud["weapon_name_bar"].sort + 1;
 
-  if(isDefined(level.player.allow_dry_fire) && level.player.allow_dry_fire)
+  if(isDefined(level.player.allow_dry_fire) && level.player.allow_dry_fire) {
     level.remote_turret_hud["weapon_name_bar"].alpha = 0;
-  else
+  }
+  else {
     level.remote_turret_hud["weapon_name_bar"].alpha = 0.5;
+  }
 
   level.remote_turret_hud["zoom_txt"] = maps\_hud_util::createclientfontstring("small", 1.2);
   level.remote_turret_hud["zoom_txt"] set_default_hud_parameters();
@@ -822,17 +835,20 @@ remote_turret_update_status() {
         if(var_0 == 0) {
           level.remote_turret_hud["weapon_status_txt"] fadeovertime(0.2);
 
-          if(level.remote_turret_hud["weapon_status_txt"].alpha > 0.0)
+          if(level.remote_turret_hud["weapon_status_txt"].alpha > 0.0) {
             level.remote_turret_hud["weapon_status_txt"].alpha = 0.0;
-          else
+          }
+          else {
             level.remote_turret_hud["weapon_status_txt"].alpha = 0.5;
+          }
         }
 
         wait 0.05;
         var_0 = var_0 + 0.05;
 
-        if(var_0 > 0.2)
+        if(var_0 > 0.2) {
           var_0 = 0;
+        }
       }
     }
 
@@ -847,10 +863,12 @@ remote_turret_update_status() {
     var_1 = self getcurrentweaponclipammo() / weaponclipsize(self getcurrentweapon());
     level.remote_turret_hud["weapon_name_bar"] setshader("green_block", int(max(1, var_1 * level.remote_turret_hud["weapon_name_bar_bg"].width * 0.6)), level.remote_turret_hud["weapon_name_bar"].height);
 
-    if(var_1 == 0)
+    if(var_1 == 0) {
       level.remote_turret_hud["weapon_name_bar"].alpha = 0;
-    else
+    }
+    else {
       level.remote_turret_hud["weapon_name_bar"].alpha = 0.5;
+    }
 
     wait 0.25;
     level.remote_turret_hud["weapon_status_bg"] setshader("black", level.remote_turret_hud["weapon_status_bg"].width, level.remote_turret_hud["weapon_status_bg"].height);
@@ -963,57 +981,76 @@ remote_turret_update_compass() {
   for(;;) {
     var_5 = angleclamp(self getplayerangles()[1] - var_0);
 
-    if(var_5 < 11.25 || var_5 > 348.75)
+    if(var_5 < 11.25 || var_5 > 348.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_NORTH");
-    else if(var_5 < 33.75)
+    }
+    else if(var_5 < 33.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_NORTH_BY_NORTHEAST");
-    else if(var_5 < 56.25)
+    }
+    else if(var_5 < 56.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_NORTHEAST");
-    else if(var_5 < 78.75)
+    }
+    else if(var_5 < 78.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_EAST_BY_NORTHEAST");
-    else if(var_5 < 101.25)
+    }
+    else if(var_5 < 101.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_EAST");
-    else if(var_5 < 123.75)
+    }
+    else if(var_5 < 123.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_EAST_BY_SOUTHEAST");
-    else if(var_5 < 146.25)
+    }
+    else if(var_5 < 146.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_SOUTHEAST");
-    else if(var_5 < 168.75)
+    }
+    else if(var_5 < 168.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_SOUTH_BY_SOUTHEAST");
-    else if(var_5 < 191.25)
+    }
+    else if(var_5 < 191.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_SOUTH");
-    else if(var_5 < 213.75)
+    }
+    else if(var_5 < 213.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_SOUTH_BY_SOUTHWEST");
-    else if(var_5 < 236.25)
+    }
+    else if(var_5 < 236.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_SOUTHWEST");
-    else if(var_5 < 258.75)
+    }
+    else if(var_5 < 258.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_WEST_BY_SOUTHWEST");
-    else if(var_5 < 281.25)
+    }
+    else if(var_5 < 281.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_WEST");
-    else if(var_5 < 303.75)
+    }
+    else if(var_5 < 303.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_WEST_BY_NORTHWEST");
-    else if(var_5 < 326.25)
+    }
+    else if(var_5 < 326.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_NORTHWEST");
-    else
+    }
+    else {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_NORTH_BY_NORTHWEST");
+    }
 
     var_6 = var_1 + (1.0 - modulus(abs(var_5), var_3) / var_3) * var_4;
     var_7 = int(var_5 / var_3) * var_3 - var_3 * (int(level.remote_turret_compass_numbers.size / 2) - common_scripts\utility::ter_op(modulus(abs(var_5), var_3) < var_3 / 2, 0, 1));
 
-    if(var_7 < 0)
+    if(var_7 < 0) {
       var_7 = var_7 + 360;
+    }
 
     for(var_8 = 0; var_8 < level.remote_turret_compass_numbers.size; var_8++) {
       level.remote_turret_compass_lines[var_8].x = var_6 + var_8 * var_4;
       level.remote_turret_compass_numbers[var_8].x = var_6 + (var_8 + 0.5) * var_4;
       level.remote_turret_compass_numbers[var_8] settext(int(var_7));
 
-      if(modulus(abs(var_5), var_3) < var_3 / 2)
+      if(modulus(abs(var_5), var_3) < var_3 / 2) {
         level.remote_turret_compass_numbers[var_8].x = level.remote_turret_compass_numbers[var_8].x - var_4;
+      }
 
       var_7 = var_7 + var_3;
 
-      if(var_7 > 360)
+      if(var_7 > 360) {
         var_7 = var_7 - 360;
+      }
     }
 
     wait 0.05;
@@ -1108,8 +1145,9 @@ create_outofrange_hud() {
   level.remote_turret_hud["out_range_bg"].alpha = 0.4;
   level.remote_turret_hud["out_range_bg"] setshader("red_block", level.remote_turret_hud["out_range_bg"].width, level.remote_turret_hud["out_range_bg"].height);
 
-  if(!isDefined(level.remote_turret_shot_missed) || !level.remote_turret_shot_missed)
+  if(!isDefined(level.remote_turret_shot_missed) || !level.remote_turret_shot_missed) {
     maps\_utility::player_giveachievement_wrapper("LEVEL_4A");
+  }
 
   var_2 = 0;
 
@@ -1117,17 +1155,20 @@ create_outofrange_hud() {
     if(var_2 == 0) {
       level.remote_turret_hud["out_range_txt"] fadeovertime(0.2);
 
-      if(level.remote_turret_hud["out_range_txt"].alpha > 0.0)
+      if(level.remote_turret_hud["out_range_txt"].alpha > 0.0) {
         level.remote_turret_hud["out_range_txt"].alpha = 0.0;
-      else
+      }
+      else {
         level.remote_turret_hud["out_range_txt"].alpha = 0.5;
+      }
     }
 
     wait 0.05;
     var_2 = var_2 + 0.05;
 
-    if(var_2 > 0.2)
+    if(var_2 > 0.2) {
       var_2 = 0;
+    }
   }
 }
 
@@ -1212,8 +1253,9 @@ set_slow_aim() {
 }
 
 remote_turret_lerp_dof(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.5;
+  }
 
   self notify("remote_turret_lerp_dof");
   self endon("remote_turret_lerp_dof");
@@ -1242,8 +1284,9 @@ remote_turret_monitor_ammo(var_0) {
     if(self getcurrentweapon() != var_0) {
       return;
     }
-    if(level.remote_turret_hud["reticle_red"].alpha == 0 && (!isDefined(level.remote_turret_last_kill_time) || gettime() > level.remote_turret_last_kill_time))
+    if(level.remote_turret_hud["reticle_red"].alpha == 0 && (!isDefined(level.remote_turret_last_kill_time) || gettime() > level.remote_turret_last_kill_time)) {
       level.remote_turret_shot_missed = 1;
+    }
 
     earthquake(0.1, 0.3, self.origin, 100);
     level.player playrumbleonentity("heavygun_fire");
@@ -1270,8 +1313,9 @@ update_remote_turret_targets() {
       if(!isDefined(var_2)) {
         continue;
       }
-      if(var_2.team == "axis" && (!isDefined(var_2.monitoring_sniper_damage) || !var_2.monitoring_sniper_damage))
+      if(var_2.team == "axis" && (!isDefined(var_2.monitoring_sniper_damage) || !var_2.monitoring_sniper_damage)) {
         var_2 thread monitor_sniper_damage();
+      }
     }
 
     wait 0.05;
@@ -1282,8 +1326,9 @@ remove_remote_turret_target_on_death() {
   self endon("hud_outline_disabled");
   common_scripts\utility::waittill_any("death", "remove_sniper_outline");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self hudoutlinedisable();
+  }
 }
 
 remove_remote_turret_targets() {
@@ -1317,8 +1362,9 @@ remote_turret_update_player_position() {
   for(;;) {
     switch (getdvarint("debug_sniper_mode", 1)) {
       case 0:
-        if(var_6 >= 3)
+        if(var_6 >= 3) {
           self playerlinktodelta(self.player_view_controller, "tag_aim", 1.0, level.remote_turret_right_arc, level.remote_turret_left_arc, level.remote_turret_top_arc, level.remote_turret_bottom_arc);
+        }
 
         if(var_6 != 0) {
           self.player_view_controller_model.origin = var_0 + anglesToForward(var_1) * var_2;
@@ -1327,8 +1373,9 @@ remote_turret_update_player_position() {
 
         break;
       case 1:
-        if(var_6 >= 3)
+        if(var_6 >= 3) {
           self playerlinktodelta(self.player_view_controller, "tag_aim", 1.0, level.remote_turret_right_arc, level.remote_turret_left_arc, level.remote_turret_top_arc, level.remote_turret_bottom_arc);
+        }
 
         if(var_6 != 1) {
           self.player_view_controller_model.origin = var_0;
@@ -1359,8 +1406,9 @@ remote_turret_update_player_position() {
         var_11 = var_2 * tan(level.remote_turret_bottom_arc);
         var_12 = self getnormalizedcameramovement();
 
-        if(!level.console && !common_scripts\utility::is_player_gamepad_enabled())
+        if(!level.console && !common_scripts\utility::is_player_gamepad_enabled()) {
           var_12 = (var_12[0], var_12[1] * -1, 0);
+        }
 
         var_4 = var_4 + var_12[1] * min(25.0, 25.0 * getdvarfloat("cg_fov") / 10);
         var_5 = var_5 + var_12[0] * min(25.0, 25.0 * getdvarfloat("cg_fov") / 10);
@@ -1382,8 +1430,9 @@ remote_turret_update_player_position() {
         var_11 = var_2 * tan(level.remote_turret_bottom_arc);
         var_12 = self getnormalizedcameramovement();
 
-        if(!level.console && !common_scripts\utility::is_player_gamepad_enabled())
+        if(!level.console && !common_scripts\utility::is_player_gamepad_enabled()) {
           var_12 = (var_12[0], var_12[1] * -1, 0);
+        }
 
         if(!level.console && !common_scripts\utility::is_player_gamepad_enabled()) {
           var_4 = var_4 + var_12[1] * 75;

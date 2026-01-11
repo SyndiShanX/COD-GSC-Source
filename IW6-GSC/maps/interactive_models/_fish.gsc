@@ -13,22 +13,26 @@ fish() {
   var_0 = getEntArray("interactive_fish", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(var_2.classname == "script_model")
+    if(var_2.classname == "script_model") {
       var_2 thread single_fish_start();
+    }
   }
 }
 
 single_fish_start() {
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_0 = getEntArray(self.target, "targetname");
-  else
+  }
+  else {
     var_0 = [];
+  }
 
   if(var_0.size >= 1 && isDefined(var_0[0].script_noteworthy) && var_0[0].script_noteworthy == "interactive_fish") {
     self.following = var_0[0];
 
-    if(!isDefined(var_0[0].followedby))
+    if(!isDefined(var_0[0].followedby)) {
       var_0[0].followedby = [];
+    }
 
     var_0[0].followedby[var_0[0].followedby.size] = self;
     var_0 = [];
@@ -39,12 +43,14 @@ single_fish_start() {
   var_1.script_radius = self.script_radius;
   var_0[var_0.size] = var_1;
 
-  if(!isDefined(self.script_moveplaybackrate))
+  if(!isDefined(self.script_moveplaybackrate)) {
     self.script_moveplaybackrate = 1;
+  }
 
   foreach(var_3 in var_0) {
-    if(!isDefined(var_3.script_radius))
+    if(!isDefined(var_3.script_radius)) {
       var_3.script_radius = level._interactive[self.interactive_type].default_wander_radius;
+    }
   }
 
   thread single_fish_detectdamage("interrupted");
@@ -56,8 +62,9 @@ single_fish_idle(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   self endon("interrupted");
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
   var_5 = level._interactive[var_0];
   self useanimtree(var_5.animtree);
@@ -69,10 +76,12 @@ single_fish_idle(var_0, var_1, var_2, var_3, var_4) {
     var_6 = var_2 - self.origin;
     var_7 = length((var_6[0], var_6[1], 2 * var_6[2]));
 
-    if(var_7 > var_3 * 2)
+    if(var_7 > var_3 * 2) {
       var_8 = maps\interactive_models\_interactive_utility::single_anim(var_5.anims, "flee_continue", "idle anim", 1, self.script_moveplaybackrate);
-    else
+    }
+    else {
       var_8 = maps\interactive_models\_interactive_utility::single_anim(var_5.anims, "idle", "idle anim", 1, self.script_moveplaybackrate);
+    }
 
     var_9 = getanimlength(var_8) / self.script_moveplaybackrate;
     var_10 = length(getmovedelta(var_8)) / var_9;
@@ -89,11 +98,13 @@ single_fish_idle(var_0, var_1, var_2, var_3, var_4) {
     while(var_11 < var_9) {
       var_13 = var_5.wander_redirect_time * randomfloatrange(0.5, 1.5) / self.script_moveplaybackrate;
 
-      if(var_11 + var_13 > var_9 - var_5.wander_redirect_time / 2)
+      if(var_11 + var_13 > var_9 - var_5.wander_redirect_time / 2) {
         var_13 = var_9 - var_11;
+      }
 
-      if(var_10 * var_13 > var_3)
+      if(var_10 * var_13 > var_3) {
         var_13 = var_3 / (var_10 * 1.5);
+      }
 
       var_14 = anglesToForward(self.angles);
       var_15 = self.origin + 0.5 * var_10 * var_14 * var_13;
@@ -101,10 +112,12 @@ single_fish_idle(var_0, var_1, var_2, var_3, var_4) {
       var_17 = length((var_16[0], var_16[1], 2 * var_16[2]));
 
       if(var_17 + var_10 * var_13 < var_3) {
-        if(var_7 < var_3)
+        if(var_7 < var_3) {
           var_18 = randomfloatrange(-20, 20);
-        else
+        }
+        else {
           var_18 = randomfloatrange(-60, 60);
+        }
 
         var_19 = randomfloatrange(-20, 20) - 0.5 * self.angles[0];
         maps\interactive_models\_interactive_utility::interactives_drawdebuglinefortime(self.origin, var_2, 0, 1, 0, var_13);
@@ -115,25 +128,32 @@ single_fish_idle(var_0, var_1, var_2, var_3, var_4) {
         if(vectordot(var_16, var_14) > 0) {
           var_18 = var_18 - 60;
 
-          if(var_7 < var_3)
+          if(var_7 < var_3) {
             var_18 = var_18 / 2;
+          }
         }
 
-        if(vectordot(var_16, var_20) > 0)
+        if(vectordot(var_16, var_20) > 0) {
           var_18 = var_18 * -1;
+        }
 
         var_21 = var_3 / 2;
 
-        if(var_16[2] < -1 * var_21)
+        if(var_16[2] < -1 * var_21) {
           var_19 = randomfloatrange(15, 30) - 0.5 * self.angles[0];
-        else if(var_16[2] > var_21)
+        }
+        else if(var_16[2] > var_21) {
           var_19 = randomfloatrange(-30, -15) - 0.5 * self.angles[0];
-        else if(var_16[2] < -0.5 * var_21)
+        }
+        else if(var_16[2] < -0.5 * var_21) {
           var_19 = randomfloatrange(0, 30) - 0.5 * self.angles[0];
-        else if(var_16[2] > 0.5 * var_21)
+        }
+        else if(var_16[2] > 0.5 * var_21) {
           var_19 = randomfloatrange(-30, 0) - 0.5 * self.angles[0];
-        else
+        }
+        else {
           var_19 = randomfloatrange(-20, 20) - 0.5 * self.angles[0];
+        }
 
         maps\interactive_models\_interactive_utility::interactives_drawdebuglinefortime(self.origin, var_2, 0.7, 0.7, 0, var_13);
       }
@@ -166,10 +186,12 @@ single_fish_flee(var_0, var_1) {
   var_5 = undefined;
 
   if(isDefined(self.interruptedent)) {
-    if(issentient(self.interruptedent))
+    if(issentient(self.interruptedent)) {
       var_6 = self.interruptedent getEye();
-    else
+    }
+    else {
       var_6 = self.interruptedent.origin;
+    }
 
     var_5 = vectornormalize(var_6 - self.origin);
   }
@@ -179,20 +201,24 @@ single_fish_flee(var_0, var_1) {
   var_7 = self.nextorigin - self.origin;
   var_8 = vectornormalize(var_7);
 
-  if(isDefined(var_5) && vectordot(var_5, var_8) > 0.7)
+  if(isDefined(var_5) && vectordot(var_5, var_8) > 0.7) {
     var_8 = var_5 + vectornormalize(var_8 - var_5);
+  }
 
   var_9 = anglesToForward(self.angles);
 
-  if(vectordot(var_8, var_9) > 0.7)
+  if(vectordot(var_8, var_9) > 0.7) {
     var_10 = "flee_straight";
+  }
   else {
     var_11 = anglestoright(self.angles);
 
-    if(vectordot(var_8, var_11) > 0)
+    if(vectordot(var_8, var_11) > 0) {
       var_10 = "flee_right";
-    else
+    }
+    else {
       var_10 = "flee_left";
+    }
   }
 
   var_12 = vectortoangles(var_8);
@@ -218,10 +244,12 @@ single_fish_flee(var_0, var_1) {
 }
 
 single_fish_getnextorigin() {
-  if(isDefined(self.following))
+  if(isDefined(self.following)) {
     return self.following single_fish_getnextorigin();
-  else
+  }
+  else {
     return self.nextorigin;
+  }
 }
 
 single_fish_interruptfollowers() {

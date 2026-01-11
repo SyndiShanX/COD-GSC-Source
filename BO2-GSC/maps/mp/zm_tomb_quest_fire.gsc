@@ -61,8 +61,9 @@ fire_puzzle_1_run() {
     b_any_volumes_unfinished = 0;
 
     foreach(e_volume in level.sacrifice_volumes) {
-      if(!e_volume.b_gods_pleased)
+      if(!e_volume.b_gods_pleased) {
         b_any_volumes_unfinished = 1;
+      }
     }
   }
 
@@ -130,8 +131,9 @@ run_sacrifice_ignition(e_volume) {
   array_thread(a_torch_pos, ::run_sacrifice_plinth, e_volume);
   sndorigin = a_torch_pos[0].origin;
 
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   max_hit_distance_sq = 10000;
 
@@ -210,16 +212,19 @@ delete_oldest_clone() {
 }
 
 fire_sacrifice_death_clone(e_sacrifice_volume) {
-  if(level.clone_list.size >= 15)
+  if(level.clone_list.size >= 15) {
     level delete_oldest_clone();
+  }
 
   self ghost();
   clone = self spawn_zombie_clone();
 
-  if(self.has_legs)
+  if(self.has_legs) {
     clone setanim( % ch_dazed_a_death, 1.0, 0.0, 1.0);
-  else
+  }
+  else {
     clone setanim( % ai_zombie_crawl_death_v1, 1.0, 0.0, 1.0);
+  }
 
   n_anim_time = getanimlength( % ch_dazed_a_death);
   level.clone_list[level.clone_list.size] = clone;
@@ -229,16 +234,18 @@ fire_sacrifice_death_clone(e_sacrifice_volume) {
   a_players = getplayers();
 
   foreach(e_player in a_players) {
-    if(e_player hasweapon("staff_fire_zm"))
+    if(e_player hasweapon("staff_fire_zm")) {
       level notify("vo_puzzle_good", e_player);
+    }
   }
 
   playFX(level._effect["fire_ash_explosion"], clone.origin, anglesToForward(clone.angles), anglestoup(clone.angles));
   e_sacrifice_volume.num_sacrifices_received++;
   e_sacrifice_volume.pct_sacrifices_received = e_sacrifice_volume.num_sacrifices_received / 32;
 
-  if(e_sacrifice_volume.num_sacrifices_received >= 32)
+  if(e_sacrifice_volume.num_sacrifices_received >= 32) {
     e_sacrifice_volume.b_gods_pleased = 1;
+  }
 
   e_sacrifice_volume notify("sacrifice_received");
   arrayremovevalue(level.clone_list, clone);
@@ -316,18 +323,22 @@ fire_puzzle_2_is_complete() {
   unlit_torch = 0;
 
   foreach(e_torch in a_torches) {
-    if(isDefined(e_torch.e_fx) && !e_torch.b_correct_torch)
+    if(isDefined(e_torch.e_fx) && !e_torch.b_correct_torch) {
       wrong_torch = 1;
+    }
 
-    if(!isDefined(e_torch.e_fx) && e_torch.b_correct_torch)
+    if(!isDefined(e_torch.e_fx) && e_torch.b_correct_torch) {
       unlit_torch = 1;
+    }
   }
 
-  if(!isDefined(level.n_torches_lit))
+  if(!isDefined(level.n_torches_lit)) {
     level.n_torches_lit = 0;
+  }
 
-  if(!isDefined(level.n_wrong_torches))
+  if(!isDefined(level.n_wrong_torches)) {
     level.n_wrong_torches = 0;
+  }
 
   level.n_torches_lit++;
   a_players = getplayers();
@@ -342,14 +353,16 @@ fire_puzzle_2_is_complete() {
       if(wrong_torch && !flag("fire_puzzle_2_complete")) {
         level.n_wrong_torches++;
 
-        if(level.n_wrong_torches % 5 == 0)
+        if(level.n_wrong_torches % 5 == 0) {
           level notify("vo_puzzle_bad", e_player);
+        }
 
         continue;
       }
 
-      if(unlit_torch)
+      if(unlit_torch) {
         level notify("vo_puzzle_good", e_player);
+      }
     }
   }
 
@@ -362,14 +375,16 @@ fire_puzzle_watch_staff() {
   while(true) {
     self waittill("projectile_impact", str_weap_name, v_explode_point, n_radius, e_projectile, n_impact);
 
-    if(str_weap_name == "staff_fire_zm")
+    if(str_weap_name == "staff_fire_zm") {
       level notify("fire_staff_explosion", v_explode_point, e_projectile);
+    }
   }
 }
 
 fire_puzzle_2_torch_flame() {
-  if(isDefined(self.e_fx))
+  if(isDefined(self.e_fx)) {
     self.e_fx delete();
+  }
 
   self.e_fx = spawn("script_model", self.origin);
   self.e_fx.angles = vectorscale((-1, 0, 0), 90.0);
@@ -390,8 +405,9 @@ fire_puzzle_2_torch_flame() {
   self.e_fx stoploopsound(0.1);
   self.e_fx playSound("zmb_squest_fire_torch_out");
 
-  if(!flag("fire_puzzle_2_complete"))
+  if(!flag("fire_puzzle_2_complete")) {
     self.e_fx delete();
+  }
 }
 
 fire_puzzle_torch_run() {
@@ -413,8 +429,9 @@ fire_puzzle_torch_run() {
     a_players = getplayers();
 
     foreach(e_player in a_players) {
-      if(e_player hasweapon("staff_fire_zm"))
+      if(e_player hasweapon("staff_fire_zm")) {
         level notify("vo_try_puzzle_fire2", e_player);
+      }
     }
 
     self thread fire_puzzle_2_torch_flame();

@@ -24,8 +24,9 @@ initfinalkillcam() {
   level.finalkillcamsettings = [];
   initfinalkillcamteam("none");
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   initfinalkillcamteam(team);
+  }
 
   level.finalkillcam_winner = undefined;
 }
@@ -81,15 +82,17 @@ recordkillcamsettings(spectatorclient, targetentityindex, sweapon, deathtime, de
 erasefinalkillcam() {
   clearfinalkillcamteam("none");
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   clearfinalkillcamteam(team);
+  }
 
   level.finalkillcam_winner = undefined;
 }
 
 finalkillcamwaiter() {
-  if(!isDefined(level.finalkillcam_winner))
+  if(!isDefined(level.finalkillcam_winner)) {
     return false;
+  }
 
   level waittill("final_killcam_done");
   return true;
@@ -109,8 +112,9 @@ dofinalkillcam() {
   level.infinalkillcam = 1;
   winner = "none";
 
-  if(isDefined(level.finalkillcam_winner))
+  if(isDefined(level.finalkillcam_winner)) {
     winner = level.finalkillcam_winner;
+  }
 
   if(!isDefined(level.finalkillcamsettings[winner].targetentityindex)) {
     level.infinalkillcam = 0;
@@ -118,8 +122,9 @@ dofinalkillcam() {
     return;
   }
 
-  if(isDefined(level.finalkillcamsettings[winner].attacker))
+  if(isDefined(level.finalkillcamsettings[winner].attacker)) {
     maps\mp\_challenges::getfinalkill(level.finalkillcamsettings[winner].attacker);
+  }
 
   visionsetnaked(getdvar(#"mapname"), 0.0);
   players = level.players;
@@ -133,8 +138,9 @@ dofinalkillcam() {
 
   wait 0.1;
 
-  while(areanyplayerswatchingthekillcam())
+  while(areanyplayerswatchingthekillcam()) {
     wait 0.05;
+  }
 
   level notify("final_killcam_done");
   level.infinalkillcam = 0;
@@ -149,8 +155,9 @@ areanyplayerswatchingthekillcam() {
   for(index = 0; index < players.size; index++) {
     player = players[index];
 
-    if(isDefined(player.killcam))
+    if(isDefined(player.killcam)) {
       return true;
+    }
   }
 
   return false;
@@ -174,8 +181,9 @@ killcam(attackernum, targetnum, killcamentity, killcamentityindex, killcamentity
     if(maxtime < 2) {
       return;
     }
-    if(maxtime - camtime >= 1)
+    if(maxtime - camtime >= 1) {
       postdelay = maxtime - camtime;
+    }
     else {
       postdelay = 1;
       camtime = maxtime - 1;
@@ -191,8 +199,9 @@ killcam(attackernum, targetnum, killcamentity, killcamentityindex, killcamentity
   self.spectatorclient = attackernum;
   self.killcamentity = -1;
 
-  if(killcamentityindex >= 0)
+  if(killcamentityindex >= 0) {
     self thread setkillcamentity(killcamentityindex, killcamentitystarttime - killcamstarttime - 100);
+  }
 
   self.killcamtargetentity = targetnum;
   self.archivetime = killcamoffset;
@@ -200,8 +209,9 @@ killcam(attackernum, targetnum, killcamentity, killcamentityindex, killcamentity
   self.psoffsettime = offsettime;
   recordkillcamsettings(attackernum, targetnum, sweapon, deathtime, deathtimeoffset, offsettime, killcamentityindex, killcamentitystarttime, perks, killstreaks, attacker);
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   self allowspectateteam(team, 1);
+  }
 
   self allowspectateteam("freelook", 1);
   self allowspectateteam("none", 1);
@@ -246,8 +256,9 @@ setkillcamentity(killcamentityindex, delayms) {
   self endon("end_killcam");
   self endon("spawned");
 
-  if(delayms > 0)
+  if(delayms > 0) {
     wait(delayms / 1000);
+  }
 
   self.killcamentity = killcamentityindex;
 }
@@ -278,11 +289,13 @@ waitskipkillcambutton() {
   self endon("disconnect");
   self endon("end_killcam");
 
-  while(self usebuttonpressed())
+  while(self usebuttonpressed()) {
     wait 0.05;
+  }
 
-  while(!self usebuttonpressed())
+  while(!self usebuttonpressed()) {
     wait 0.05;
+  }
 
   self notify("end_killcam");
   self clientnotify("fkce");
@@ -299,27 +312,32 @@ waitskipkillcamsafespawnbutton() {
   self endon("disconnect");
   self endon("end_killcam");
 
-  while(self fragbuttonpressed())
+  while(self fragbuttonpressed()) {
     wait 0.05;
+  }
 
-  while(!self fragbuttonpressed())
+  while(!self fragbuttonpressed()) {
     wait 0.05;
+  }
 
   self.wantsafespawn = 1;
   self notify("end_killcam");
 }
 
 endkillcam(final) {
-  if(isDefined(self.kc_skiptext))
+  if(isDefined(self.kc_skiptext)) {
     self.kc_skiptext.alpha = 0;
+  }
 
-  if(isDefined(self.kc_timer))
+  if(isDefined(self.kc_timer)) {
     self.kc_timer.alpha = 0;
+  }
 
   self.killcam = undefined;
 
-  if(!self issplitscreen())
+  if(!self issplitscreen()) {
     self hideallperks();
+  }
 
   self thread maps\mp\gametypes\_spectating::setspectatepermissions();
 }
@@ -444,8 +462,9 @@ finalkillcam(winner) {
     setmatchflag("round_end_killcam", 0);
   }
 
-  if(level.console)
+  if(level.console) {
     self maps\mp\gametypes\_globallogic_spawn::setthirdperson(0);
+  }
 
   killcamsettings = level.finalkillcamsettings[winner];
   postdeathdelay = (gettime() - killcamsettings.deathtime) / 1000;
@@ -460,16 +479,18 @@ finalkillcam(winner) {
   self.spectatorclient = killcamsettings.spectatorclient;
   self.killcamentity = -1;
 
-  if(killcamsettings.entityindex >= 0)
+  if(killcamsettings.entityindex >= 0) {
     self thread setkillcamentity(killcamsettings.entityindex, killcamsettings.entitystarttime - killcamstarttime - 100);
+  }
 
   self.killcamtargetentity = killcamsettings.targetentityindex;
   self.archivetime = killcamoffset;
   self.killcamlength = killcamlength;
   self.psoffsettime = killcamsettings.offsettime;
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   self allowspectateteam(team, 1);
+  }
 
   self allowspectateteam("freelook", 1);
   self allowspectateteam("none", 1);
@@ -489,8 +510,9 @@ finalkillcam(winner) {
   self thread checkforabruptkillcamend();
   self.killcam = 1;
 
-  if(!self issplitscreen())
+  if(!self issplitscreen()) {
     self addkillcamtimer(camtime);
+  }
 
   self thread waitkillcamtime();
   self thread waitfinalkillcamslowdown(level.finalkillcamsettings[winner].deathtime, killcamstarttime);
@@ -507,21 +529,26 @@ spawnendoffinalkillcam() {
 }
 
 iskillcamentityweapon(sweapon) {
-  if(sweapon == "planemortar_mp")
+  if(sweapon == "planemortar_mp") {
     return true;
+  }
 
   return false;
 }
 
 iskillcamgrenadeweapon(sweapon) {
-  if(sweapon == "frag_grenade_mp")
+  if(sweapon == "frag_grenade_mp") {
     return true;
-  else if(sweapon == "frag_grenade_short_mp")
+  }
+  else if(sweapon == "frag_grenade_short_mp") {
     return true;
-  else if(sweapon == "sticky_grenade_mp")
+  }
+  else if(sweapon == "sticky_grenade_mp") {
     return true;
-  else if(sweapon == "tabun_gas_mp")
+  }
+  else if(sweapon == "tabun_gas_mp") {
     return true;
+  }
 
   return false;
 }
@@ -530,23 +557,29 @@ calckillcamtime(sweapon, entitystarttime, predelay, respawn, maxtime) {
   camtime = 0.0;
 
   if(getdvar(#"_id_C45D9077") == "") {
-    if(iskillcamentityweapon(sweapon))
+    if(iskillcamentityweapon(sweapon)) {
       camtime = (gettime() - entitystarttime) / 1000 - predelay - 0.1;
-    else if(!respawn)
+    }
+    else if(!respawn) {
       camtime = 5.0;
-    else if(iskillcamgrenadeweapon(sweapon))
+    }
+    else if(iskillcamgrenadeweapon(sweapon)) {
       camtime = 4.25;
-    else
+    }
+    else {
       camtime = 2.5;
+    }
   } else
     camtime = getdvarfloat(#"_id_C45D9077");
 
   if(isDefined(maxtime)) {
-    if(camtime > maxtime)
+    if(camtime > maxtime) {
       camtime = maxtime;
+    }
 
-    if(camtime < 0.05)
+    if(camtime < 0.05) {
       camtime = 0.05;
+    }
   }
 
   return camtime;
@@ -555,13 +588,15 @@ calckillcamtime(sweapon, entitystarttime, predelay, respawn, maxtime) {
 calcpostdelay() {
   postdelay = 0;
 
-  if(getdvar(#"_id_0D34D95D") == "")
+  if(getdvar(#"_id_0D34D95D") == "") {
     postdelay = 2;
+  }
   else {
     postdelay = getdvarfloat(#"_id_0D34D95D");
 
-    if(postdelay < 0.05)
+    if(postdelay < 0.05) {
       postdelay = 0.05;
+    }
   }
 
   return postdelay;
@@ -588,10 +623,12 @@ addkillcamskiptext(respawn) {
     self.kc_skiptext.fontscale = 2;
   }
 
-  if(respawn)
+  if(respawn) {
     self.kc_skiptext settext(&"PLATFORM_PRESS_TO_RESPAWN");
-  else
+  }
+  else {
     self.kc_skiptext settext(&"PLATFORM_PRESS_TO_SKIP");
+  }
 
   self.kc_skiptext.alpha = 1;
 }

@@ -36,36 +36,47 @@ killcam(
   }
 
   if(getdvar("scr_killcam_time") == "") {
-    if(sWeapon == "artillery_mp" || sWeapon == "stealth_bomb_mp")
+    if(sWeapon == "artillery_mp" || sWeapon == "stealth_bomb_mp") {
       camtime = (gettime() - killcamentitystarttime) / 1000 - predelay - .1;
-    else if(level.showingFinalKillcam)
+    }
+    else if(level.showingFinalKillcam) {
       camtime = 4.0;
-    else if(sWeapon == "javelin_mp")
+    }
+    else if(sWeapon == "javelin_mp") {
       camtime = 8;
-    else if(issubstr(sWeapon, "remotemissile_"))
+    }
+    else if(issubstr(sWeapon, "remotemissile_")) {
       camtime = 5;
-    else if(!timeUntilRespawn || timeUntilRespawn > 5.0)
+    }
+    else if(!timeUntilRespawn || timeUntilRespawn > 5.0) {
       camtime = 5.0;
-    else if(sWeapon == "frag_grenade_mp" || sWeapon == "frag_grenade_short_mp" || sWeapon == "semtex_mp")
+    }
+    else if(sWeapon == "frag_grenade_mp" || sWeapon == "frag_grenade_short_mp" || sWeapon == "semtex_mp") {
       camtime = 4.25;
-    else
+    }
+    else {
       camtime = 2.5;
+    }
   } else
     camtime = getdvarfloat("scr_killcam_time");
 
   if(isDefined(maxtime)) {
-    if(camtime > maxtime)
+    if(camtime > maxtime) {
       camtime = maxtime;
-    if(camtime < .05)
+    }
+    if(camtime < .05) {
       camtime = .05;
+    }
   }
 
-  if(getdvar("scr_killcam_posttime") == "")
+  if(getdvar("scr_killcam_posttime") == "") {
     postdelay = 2;
+  }
   else {
     postdelay = getdvarfloat("scr_killcam_posttime");
-    if(postdelay < 0.05)
+    if(postdelay < 0.05) {
       postdelay = 0.05;
+    }
   }
 
   killcamlength = camtime + postdelay;
@@ -92,8 +103,9 @@ killcam(
   self.sessionstate = "spectator";
   self.forcespectatorclient = attackerNum;
   self.killcamentity = -1;
-  if(killcamentityindex >= 0)
+  if(killcamentityindex >= 0) {
     self thread setKillCamEntity(killcamentityindex, killcamoffset, killcamentitystarttime);
+  }
   self.archivetime = killcamoffset;
   self.killcamlength = killcamlength;
   self.psoffsettime = offsetTime;
@@ -114,8 +126,9 @@ killcam(
   wait 0.05;
 
   assertex(self.archivetime <= killcamoffset + 0.0001, "archivetime: " + self.archivetime + ", killcamoffset: " + killcamoffset);
-  if(self.archivetime < killcamoffset)
+  if(self.archivetime < killcamoffset) {
     println("WARNING: Code trimmed killcam time by " + (killcamoffset - self.archivetime) + " seconds because it doesn't have enough game time recorded!");
+  }
 
   camtime = self.archivetime - .05 - predelay;
   killcamlength = camtime + postdelay;
@@ -136,8 +149,9 @@ killcam(
     return;
   }
 
-  if(level.showingFinalKillcam)
+  if(level.showingFinalKillcam) {
     thread doFinalKillCamFX(camtime);
+  }
 
   self.killcam = true;
 
@@ -149,31 +163,38 @@ killcam(
   }
 
   if(timeUntilRespawn && !level.gameEnded) {
-    if(timeUntilRespawn > 0)
+    if(timeUntilRespawn > 0) {
       setLowerMessage("kc_info", game["strings"]["waiting_to_spawn"], timeUntilRespawn);
-    else
+    }
+    else {
       setLowerMessage("kc_info", &"PLATFORM_PRESS_TO_SKIP");
+    }
   } else if(!level.gameEnded) {
     setLowerMessage("kc_info", &"PLATFORM_PRESS_TO_RESPAWN");
   }
 
-  if(!level.showingFinalKillcam)
+  if(!level.showingFinalKillcam) {
     self.kc_skiptext.alpha = 1;
-  else
+  }
+  else {
     self.kc_skiptext.alpha = 0;
+  }
 
   self.kc_othertext.alpha = 0;
   self.kc_icon.alpha = 0;
 
   self thread spawnedKillcamCleanup();
 
-  if(self == victim && victim _hasPerk("specialty_copycat") && isDefined(victim.pers["copyCatLoadout"]))
+  if(self == victim && victim _hasPerk("specialty_copycat") && isDefined(victim.pers["copyCatLoadout"])) {
     self thread waitKCCopyCatButton(attacker);
+  }
 
-  if(!level.showingFinalKillcam)
+  if(!level.showingFinalKillcam) {
     self thread waitSkipKillcamButton(timeUntilRespawn);
-  else
+  }
+  else {
     self notify("showing_final_killcam");
+  }
 
   self thread endKillcamIfNothingToShow();
 
@@ -190,8 +211,9 @@ killcam(
 }
 
 doFinalKillCamFX(camTime) {
-  if(isDefined(level.doingFinalKillcamFx))
+  if(isDefined(level.doingFinalKillcamFx)) {
     return;
+  }
   level.doingFinalKillcamFx = true;
 
   intoSlowMoTime = camTime;
@@ -230,8 +252,9 @@ setKillCamEntity(killcamentityindex, killcamoffset, starttime) {
     killcamoffset = self.archivetime;
     killcamtime = (gettime() - killcamoffset * 1000);
 
-    if(starttime > killcamtime)
+    if(starttime > killcamtime) {
       wait(starttime - killcamtime) / 1000;
+    }
   }
   self.killcamentity = killcamentityindex;
 }
@@ -240,17 +263,21 @@ waitSkipKillcamButton(timeUntilRespawn) {
   self endon("disconnect");
   self endon("killcam_ended");
 
-  while(self useButtonPressed())
+  while(self useButtonPressed()) {
     wait .05;
+  }
 
-  while(!(self useButtonPressed()))
+  while(!(self useButtonPressed())) {
     wait .05;
+  }
 
-  if(!matchMakingGame())
+  if(!matchMakingGame()) {
     self incPlayerStat("killcamskipped", 1);
+  }
 
-  if(timeUntilRespawn <= 0)
+  if(timeUntilRespawn <= 0) {
     clearLowerMessage("kc_info");
+  }
 
   self notify("abort_killcam");
 }
@@ -299,8 +326,9 @@ waitCopyCatButton(attacker) {
   self.kc_icon scaleOverTime(0.25, 512, 512);
   self.kc_icon.alpha = 0;
 
-  if(isDefined(attacker))
+  if(isDefined(attacker)) {
     attacker thread maps\mp\gametypes\_hud_message::playerCardSplashNotify("copied", self);
+  }
 
   self playLocalSound("copycat_steal_class");
 
@@ -314,11 +342,13 @@ waitSkipKillcamSafeSpawnButton() {
   if(!self maps\mp\gametypes\_playerlogic::mayspawn()) {
     return;
   }
-  while(self fragButtonPressed())
+  while(self fragButtonPressed()) {
     wait .05;
+  }
 
-  while(!(self fragButtonPressed()))
+  while(!(self fragButtonPressed())) {
     wait .05;
+  }
 
   self.wantSafeSpawn = true;
 
@@ -357,22 +387,27 @@ endedKillcamCleanup() {
 }
 
 killcamCleanup(clearState) {
-  if(isDefined(self.kc_skiptext))
+  if(isDefined(self.kc_skiptext)) {
     self.kc_skiptext.alpha = 0;
+  }
 
-  if(isDefined(self.kc_timer))
+  if(isDefined(self.kc_timer)) {
     self.kc_timer.alpha = 0;
+  }
 
-  if(isDefined(self.kc_icon))
+  if(isDefined(self.kc_icon)) {
     self.kc_icon.alpha = 0;
+  }
 
-  if(isDefined(self.kc_othertext))
+  if(isDefined(self.kc_othertext)) {
     self.kc_othertext.alpha = 0;
+  }
 
   self.killcam = undefined;
 
-  if(!level.gameEnded)
+  if(!level.gameEnded) {
     self clearLowerMessage("kc_info");
+  }
 
   self thread maps\mp\gametypes\_spectating::setSpectatePermissions();
 

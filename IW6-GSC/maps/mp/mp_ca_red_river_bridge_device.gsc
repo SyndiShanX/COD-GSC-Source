@@ -10,8 +10,9 @@
 
 REDRIVER_NUKE_WEIGHT = 85;
 redriverCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   level.allow_level_killstreak = allowLevelKillstreaks();
   if(!level.allow_level_killstreak || game["player_holding_level_killstrek"]) {
@@ -106,8 +107,9 @@ bridge_device_scramble_radar(bridge_device) {
   level.device_scrambler_active = true;
   while(1) {
     level waittill("connected", player);
-    if(!IsBot(player))
+    if(!IsBot(player)) {
       player thread run_func_after_spawn(::bridge_device_static, device_scrambler.origin, bridge_device.device_det_radius);
+    }
   }
 }
 
@@ -178,8 +180,9 @@ bridge_device_mortar_attack(start_org, end_org, owner) {
   wait RandomFloatRange(0.0, self.mortar_delay_range);
 
   air_time = RandomFloatRange(4.0, 5.0);
-  if(self.end_of_match_volley)
+  if(self.end_of_match_volley) {
     air_time = 2.5;
+  }
 
   gravity = (0, 0, -800);
   launch_dir = TrajectoryCalculateInitialVelocity(start_org.origin, end_org.origin, gravity, air_time);
@@ -202,11 +205,13 @@ bridge_device_mortar_attack(start_org, end_org, owner) {
   mortar_model MoveGravity(launch_dir, air_time);
   mortar_model waittill("movedone");
 
-  if(level.createFX_enabled && !isDefined(level.players))
+  if(level.createFX_enabled && !isDefined(level.players)) {
     level.players = [];
+  }
 
-  if(!isDefined(owner))
+  if(!isDefined(owner)) {
     owner = undefined;
+  }
 
   mortar_model RadiusDamage(end_org.origin, 350, 750, 500, owner, "MOD_EXPLOSIVE", "warhawk_mortar_mp");
   PlayRumbleOnPosition("artillery_rumble", end_org.origin);
@@ -219,17 +224,20 @@ bridge_device_mortar_attack(start_org, end_org, owner) {
     if(DistanceSquared(end_org.origin, player.origin) > dirt_effect_radiusSq) {
       continue;
     }
-    if(player DamageConeTrace(end_org.origin))
+    if(player DamageConeTrace(end_org.origin)) {
       player thread maps\mp\gametypes\_shellshock::dirtEffect(end_org.origin);
+    }
   }
 
-  if(play_fx)
+  if(play_fx) {
     playFX(getfx("mortar_impact_00"), end_org.origin);
+  }
 
   stopFXOnTag(getfx("random_mortars_trail"), mortar_model, "tag_fx");
 
-  if(isDefined(end_org.script_noteworthy) && (end_org.script_noteworthy == "device_target"))
+  if(isDefined(end_org.script_noteworthy) && (end_org.script_noteworthy == "device_target")) {
     self thread bridge_device_mortar_hit_nuke(owner, mortar_model);
+  }
   wait 0.05;
   mortar_model Delete();
 }
@@ -292,8 +300,9 @@ bridge_device_mortar_hit_nuke(owner, mortar_model) {
   self.device_model NotSolid();
   self.device_model Hide();
   self.device_model maps\mp\_movers::notify_moving_platform_invalid();
-  if(!self.end_of_match_volley)
+  if(!self.end_of_match_volley) {
     VisionSetNaked("mp_ca_red_river_exploding", 0.5);
+  }
 
   PhysicsExplosionSphere(self.device_model.origin, splash_radius, det_radius, 1.0);
 
@@ -335,8 +344,9 @@ update_bridge_event_player_effects(refPoint, det_distance, splash_distance, skip
         shock_time = shock_time * (1 - ((sqrt(playerDistSq) - det_distance) / (splash_distance - det_distance)));
       }
     }
-    if(shock_time > 0.0)
+    if(shock_time > 0.0) {
       self shellshock("mp_ca_red_river_event", shock_time);
+    }
   }
 
   wait 1.0;
@@ -380,8 +390,9 @@ random_mortars_get_model(origin) {
 get_bridge_vehicles() {
   vehicles = GetScriptableArray("vehicle_pickup_destructible_mp_rr", "targetname");
 
-  if(vehicles.size <= 0)
+  if(vehicles.size <= 0) {
     PrintLn("No destructable vehicles found.");
+  }
 
   return vehicles;
 }
@@ -392,8 +403,9 @@ bridge_event_handle_vehicles(vehicles, bridge_device) {
   device_origin = bridge_device.device_model.origin;
 
   foreach(vehicle in vehicles) {
-    if(DistanceSquared(vehicle.origin, device_origin) <= blow_distanceSq)
+    if(DistanceSquared(vehicle.origin, device_origin) <= blow_distanceSq) {
       vehicle thread bridge_event_handle_vehicle();
+    }
   }
 }
 
@@ -441,8 +453,9 @@ bridge_event_handle_glass(bridge_device) {
 
   blast_origin = bridge_device.device_model.origin;
   level waittill("bridge_fully_exploded");
-  foreach(window in windows)
+  foreach(window in windows) {
   DestroyGlass(window, GetGlassOrigin(window) - blast_origin);
+  }
 }
 
 bridge_event_handle_churchbells(device_origin) {
@@ -463,11 +476,13 @@ redriver_detecthit_churchbell() {
   sound_alias = bell_sound_alias(self.script_noteworthy);
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, hit_point, type);
-    if(!isDefined(attacker) || !IsPlayer(attacker))
+    if(!isDefined(attacker) || !IsPlayer(attacker)) {
       continue;
+    }
     current_weapon = attacker GetCurrentWeapon();
-    if(!isDefined(current_weapon) || (WeaponClass(current_weapon) != "sniper"))
+    if(!isDefined(current_weapon) || (WeaponClass(current_weapon) != "sniper")) {
       continue;
+    }
     self playSound(sound_alias);
     self thread redriver_update_hitsway_churchbell(attacker);
     wait 0.5;
@@ -483,10 +498,12 @@ redriver_update_hitsway_churchbell(attacker) {
   vec = AnglesToRight(self.angles);
   vec2 = VectorNormalize(attacker.origin - self.origin);
   swing_dir = vectordot(vec, vec2) * 2.0;
-  if(swing_dir > 0.0)
+  if(swing_dir > 0.0) {
     swing_dir = Max(0.3, swing_dir);
-  else
+  }
+  else {
     swing_dir = Min(-0.3, swing_dir);
+  }
 
   self.is_swaying = true;
   self RotateRoll(15 * swing_dir, 1.0, 0, 0.5);
@@ -515,10 +532,12 @@ bridge_event_update_churchbell(blast_origin) {
   vec = AnglesToRight(self.angles);
   vec2 = VectorNormalize(blast_origin - self.origin);
   swing_dir = vectordot(vec, vec2) * 2.0;
-  if(swing_dir > 0.0)
+  if(swing_dir > 0.0) {
     swing_dir = Max(0.7, swing_dir);
-  else
+  }
+  else {
     swing_dir = Min(-0.7, swing_dir);
+  }
 
   ring_offset = RandomFloatRange(0.1, 0.8);
 
@@ -560,16 +579,20 @@ bridge_event_update_churchbell(blast_origin) {
 bell_sound_alias(bell_info) {
   sound_alias = "rr_church_bell";
   if(isDefined(bell_info) && (bell_info == "small")) {
-    if(!isDefined(level.small_bells))
+    if(!isDefined(level.small_bells)) {
       level.small_bells = 0;
+    }
 
     level.small_bells++;
-    if(level.small_bells == 1)
+    if(level.small_bells == 1) {
       sound_alias = "rr_church_bell_smallest";
-    else if(level.small_bells == 2)
+    }
+    else if(level.small_bells == 2) {
       sound_alias = "rr_church_bell_smaller";
-    else
+    }
+    else {
       sound_alias = "rr_church_bell_small";
+    }
   }
   return sound_alias;
 }

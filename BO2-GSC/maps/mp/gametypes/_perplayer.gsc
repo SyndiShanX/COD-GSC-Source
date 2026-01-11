@@ -26,8 +26,9 @@ enable(handler) {
   level.handlerglobalflagval++;
   players = get_players();
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     players[i].handlerflagval = level.handlerglobalflagval;
+  }
 
   players = handler.players;
 
@@ -35,8 +36,9 @@ enable(handler) {
     if(players[i].handlerflagval != level.handlerglobalflagval) {
       continue;
     }
-    if(players[i].handlers[handler.id].ready)
+    if(players[i].handlers[handler.id].ready) {
       players[i] handleplayer(handler);
+    }
   }
 }
 
@@ -48,8 +50,9 @@ disable(handler) {
   level.handlerglobalflagval++;
   players = get_players();
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     players[i].handlerflagval = level.handlerglobalflagval;
+  }
 
   players = handler.players;
 
@@ -57,8 +60,9 @@ disable(handler) {
     if(players[i].handlerflagval != level.handlerglobalflagval) {
       continue;
     }
-    if(players[i].handlers[handler.id].ready)
+    if(players[i].handlers[handler.id].ready) {
       players[i] unhandleplayer(handler, 0, 0);
+    }
   }
 }
 
@@ -66,8 +70,9 @@ onplayerconnect(handler) {
   for(;;) {
     level waittill("connecting", player);
 
-    if(!isDefined(player.handlers))
+    if(!isDefined(player.handlers)) {
       player.handlers = [];
+    }
 
     player.handlers[handler.id] = spawnStruct();
     player.handlers[handler.id].ready = 0;
@@ -87,8 +92,9 @@ onplayerdisconnect(handler) {
   newplayers = [];
 
   for(i = 0; i < handler.players.size; i++) {
-    if(handler.players[i] != self)
+    if(handler.players[i] != self) {
       newplayers[newplayers.size] = handler.players[i];
+    }
   }
 
   handler.players = newplayers;
@@ -145,14 +151,16 @@ handleplayer(handler) {
 }
 
 unhandleplayer(handler, unsetready, disconnected) {
-  if(!disconnected && unsetready)
+  if(!disconnected && unsetready) {
     self.handlers[handler.id].ready = 0;
+  }
 
   if(!self.handlers[handler.id].handled) {
     return;
   }
-  if(!disconnected)
+  if(!disconnected) {
     self.handlers[handler.id].handled = 0;
+  }
 
   self thread[[handler.playerendcallback]](disconnected);
 }

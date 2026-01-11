@@ -122,8 +122,9 @@ shadow_trigger_think(var_0) {
     if(self.script_noteworthy != level.current_shadow) {
       var_1 = common_scripts\utility::ter_op(self.script_noteworthy == "on", "normal", "force_off");
 
-      foreach(var_3 in var_0)
+      foreach(var_3 in var_0) {
       var_3 setlightshadowstate(var_1);
+      }
 
       level.current_shadow = var_1;
     }

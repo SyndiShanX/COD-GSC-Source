@@ -46,17 +46,20 @@ func_18A5(var_00) {
   var_02 thread func_18A3(self);
   var_02 thread scripts\mp\weapons::func_66B4();
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 delete();
+  }
 
   var_02 thread scripts\mp\weapons::createbombsquadmodel("mp_trophy_system_iw6_bombsquad", "tag_origin", self);
   var_02 thread func_189B(self);
   var_02 thread func_18A1(45);
 
-  if(level.teambased)
+  if(level.teambased) {
     var_02 scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 65));
-  else
+  }
+  else {
     var_02 scripts\mp\entityheadicons::setplayerheadicon(self, (0, 0, 65));
+  }
 
   scripts\mp\weapons::ontacticalequipmentplanted(var_02, "power_adrenalineMist");
   var_02 thread func_CEA3();
@@ -94,8 +97,9 @@ func_18A7() {
   wait 3;
 
   if(isDefined(self)) {
-    if(isDefined(self.killcament))
+    if(isDefined(self.killcament)) {
       self.killcament delete();
+    }
 
     scripts\mp\weapons::equipmentdeletevfx();
     scripts\mp\weapons::deleteexplosive();
@@ -215,8 +219,9 @@ func_1398F(var_00) {
   self endon("exit_adrenaline_mist");
   var_00 waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     func_4193();
+  }
 }
 
 func_13A09(var_00) {
@@ -224,8 +229,9 @@ func_13A09(var_00) {
   var_00 endon("death");
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     func_4193();
+  }
 }
 
 func_4193() {
@@ -233,8 +239,9 @@ func_4193() {
     self.func_189A = undefined;
     scripts\mp\utility\game::clearhealthshield();
 
-    if(isDefined(self.func_1894))
+    if(isDefined(self.func_1894)) {
       self.func_1894 delete();
+    }
 
     self setclientomnvar("ui_adrenaline_mist", 0);
   }
@@ -244,16 +251,18 @@ func_1398E(var_00) {
   level endon("game_ended");
   var_00 waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 func_13990(var_00) {
   self endon("death");
 
   for(;;) {
-    if(self.origin != var_0.origin)
+    if(self.origin != var_0.origin) {
       self.origin = var_0.origin;
+    }
 
     wait 0.5;
   }
@@ -267,10 +276,12 @@ func_CEA4(var_00, var_01) {
 
   for(;;) {
     if(isDefined(var_00) && var_04) {
-      if(self.team == var_0.team)
+      if(self.team == var_0.team) {
         var_02 = spawnfxforclient(scripts\engine\utility::getfx("adrenaline_mist_friendly"), var_03, self);
-      else
+      }
+      else {
         var_02 = spawnfxforclient(scripts\engine\utility::getfx("adrenaline_mist_enemy"), var_03, self);
+      }
 
       if(isDefined(var_02)) {
         triggerfx(var_02);
@@ -285,8 +296,9 @@ func_CEA4(var_00, var_01) {
     wait 0.5;
 
     if(var_03 != var_0.origin) {
-      if(isDefined(var_02))
+      if(isDefined(var_02)) {
         var_02 delete();
+      }
 
       var_03 = var_0.origin;
       self notify("adrenaline_mist_moved");
@@ -299,16 +311,19 @@ func_13991(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_00 endon("death");
   self endon("adrenaline_mist_moved");
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     self endon(var_03);
+  }
 
   self waittill(var_04);
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_02 delete();
+  }
 
-  if(isDefined(var_05) && var_05)
+  if(isDefined(var_05) && var_05) {
     thread func_CEA4(var_00, var_01);
+  }
 }
 
 func_CEA3() {}

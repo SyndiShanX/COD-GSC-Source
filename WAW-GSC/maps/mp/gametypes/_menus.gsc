@@ -85,10 +85,12 @@ onMenuResponse() {
       self closeInGameMenu();
       if(level.console) {
         if(menu == game["menu_changeclass"] || menu == game["menu_changeclass_offline"] || menu == game["menu_team"] || menu == game["menu_controls"]) {
-          if(self.pers["team"] == "allies")
+          if(self.pers["team"] == "allies") {
             self openMenu(game["menu_class_allies"]);
-          if(self.pers["team"] == "axis")
+          }
+          if(self.pers["team"] == "axis") {
             self openMenu(game["menu_class_axis"]);
+          }
         } else if(menu == "class") {
           self[[level.showsquadinfo]]();
         }
@@ -133,39 +135,48 @@ onMenuResponse() {
       self openMenu(game["menu_changeclass_axis"]);
       continue;
     }
-    if(response == "changeclass_marines_splitscreen")
+    if(response == "changeclass_marines_splitscreen") {
       self openMenu("changeclass_marines_splitscreen");
-    if(response == "changeclass_opfor_splitscreen")
+    }
+    if(response == "changeclass_opfor_splitscreen") {
       self openMenu("changeclass_opfor_splitscreen");
+    }
     if(response == "xpTextToggle") {
       self.enableText = !self.enableText;
-      if(self.enableText)
+      if(self.enableText) {
         self setClientDvar("ui_xpText", "1");
-      else
+      }
+      else {
         self setClientDvar("ui_xpText", "0");
+      }
       continue;
     }
     if(response == "waypointToggle") {
       self.enable3DWaypoints = !self.enable3DWaypoints;
-      if(self.enable3DWaypoints)
+      if(self.enable3DWaypoints) {
         self setClientDvar("ui_3dwaypointtext", "1");
-      else
+      }
+      else {
         self setClientDvar("ui_3dwaypointtext", "0");
+      }
       continue;
     }
     if(response == "deathIconToggle") {
       self.enableDeathIcons = !self.enableDeathIcons;
-      if(self.enableDeathIcons)
+      if(self.enableDeathIcons) {
         self setClientDvar("ui_deathicontext", "1");
-      else
+      }
+      else {
         self setClientDvar("ui_deathicontext", "0");
+      }
       self maps\mp\gametypes\_deathicons::updateDeathIconsEnabled();
       continue;
     }
     if(response == "endgame") {
       if(level.splitscreen) {
-        if(level.console)
+        if(level.console) {
           endparty();
+        }
         level.skipVote = true;
         if(!level.gameEnded) {
           level thread maps\mp\gametypes\_globallogic::forceEnd();
@@ -208,12 +219,15 @@ onMenuResponse() {
       self.selectedClass = true;
       self[[level.class]](response);
     } else if(!level.console) {
-      if(menu == game["menu_quickcommands"])
+      if(menu == game["menu_quickcommands"]) {
         maps\mp\gametypes\_quickmessages::quickcommands(response);
-      else if(menu == game["menu_quickstatements"])
+      }
+      else if(menu == game["menu_quickstatements"]) {
         maps\mp\gametypes\_quickmessages::quickstatements(response);
-      else if(menu == game["menu_quickresponses"])
+      }
+      else if(menu == game["menu_quickresponses"]) {
         maps\mp\gametypes\_quickmessages::quickresponses(response);
+      }
     }
   }
 }

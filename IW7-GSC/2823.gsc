@@ -7,35 +7,42 @@ func_C0E1(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_00 endon("stop_sequencing_notetracks");
   var_00 endon("death");
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_06 = var_02;
-  else
+  }
+  else {
     var_06 = self;
+  }
 
   var_07 = undefined;
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     var_07 = var_04;
-  else
+  }
+  else {
     var_07 = var_0.func_1FBB;
+  }
 
   var_08 = spawnStruct();
   var_8.func_53F2 = [];
   var_09 = [];
 
   if(isDefined(var_07) && isDefined(level.func_EC8D[var_07]) && isDefined(var_03)) {
-    if(isDefined(level.func_EC8D[var_07][var_03]))
+    if(isDefined(level.func_EC8D[var_07][var_03])) {
       var_9[var_03] = level.func_EC8D[var_07][var_03];
+    }
 
-    if(isDefined(level.func_EC8D[var_07]["any"]))
+    if(isDefined(level.func_EC8D[var_07]["any"])) {
       var_9["any"] = level.func_EC8D[var_07]["any"];
+    }
   }
 
   foreach(var_18, var_11 in var_09) {
     foreach(var_13 in level.func_EC8D[var_07][var_18]) {
       foreach(var_15 in var_13) {
-        if(isDefined(var_15["dialog"]))
+        if(isDefined(var_15["dialog"])) {
           var_8.func_53F2[var_15["dialog"]] = 1;
+        }
       }
     }
   }
@@ -59,8 +66,9 @@ func_C0E1(var_00, var_01, var_02, var_03, var_04, var_05) {
     } else
       var_00 waittill(var_01, var_23);
 
-    if(!isarray(var_23))
+    if(!isarray(var_23)) {
       var_23 = [var_23];
+    }
 
     scripts\anim\utility::validatenotetracks(var_01, var_23, var_05);
     var_24 = undefined;
@@ -68,8 +76,9 @@ func_C0E1(var_00, var_01, var_02, var_03, var_04, var_05) {
     foreach(var_26 in var_23) {
       func_C0CC(var_00, var_03, var_26, var_07, var_09, var_06, var_08);
 
-      if(var_26 == "end")
+      if(var_26 == "end") {
         var_24 = 1;
+      }
     }
 
     if(isDefined(var_24)) {
@@ -79,13 +88,15 @@ func_C0E1(var_00, var_01, var_02, var_03, var_04, var_05) {
 }
 
 func_C0CC(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  if(var_02 == "end")
+  if(var_02 == "end") {
     return 1;
+  }
 
   foreach(var_12, var_08 in var_04) {
     if(isDefined(level.func_EC8D[var_03][var_12][var_02])) {
-      foreach(var_10 in level.func_EC8D[var_03][var_12][var_02])
+      foreach(var_10 in level.func_EC8D[var_03][var_12][var_02]) {
       func_1ED8(var_10, var_00, var_06, var_05);
+      }
     }
   }
 
@@ -101,15 +112,18 @@ func_C0DB(var_00) {
   if(var_01 == "ps_") {
     var_02 = getsubstr(var_00, 3);
 
-    if(isDefined(self.func_1EFF))
+    if(isDefined(self.func_1EFF)) {
       self thread[[self.func_1EFF]](var_02, "j_head", 1);
+    }
     else {
       var_03 = strtok(var_02, ",");
 
-      if(var_3.size < 2)
+      if(var_3.size < 2) {
         thread scripts\sp\utility::play_sound_on_tag(var_02, undefined, 1);
-      else
+      }
+      else {
         thread scripts\sp\utility::play_sound_on_tag(var_3[0], var_3[1], 1);
+      }
     }
 
     return 1;
@@ -118,12 +132,15 @@ func_C0DB(var_00) {
   if(var_01 == "vo_") {
     var_02 = getsubstr(var_00, 3);
 
-    if(isDefined(self.func_1EFF))
+    if(isDefined(self.func_1EFF)) {
       self thread[[self.func_1EFF]](var_02, "j_head", 1);
-    else if(!issentient(self))
+    }
+    else if(!issentient(self)) {
       thread scripts\sp\utility::play_sound_on_tag(var_02, "j_head", 1, var_02);
-    else
+    }
+    else {
       self getyawtoenemy(var_02, "sounddone", 1);
+    }
 
     return 1;
   }
@@ -211,10 +228,12 @@ func_C0DB(var_00) {
   if(var_01 == "pip_") {
     var_02 = getsubstr(var_00, 4);
 
-    if(isDefined(self.func_1EFF))
+    if(isDefined(self.func_1EFF)) {
       self thread[[self.func_1EFF]](var_02, "j_head", 1);
-    else
+    }
+    else {
       thread scripts\sp\pip_util::func_CBA5(var_02);
+    }
 
     return 1;
   }
@@ -297,35 +316,41 @@ func_7729(var_00, var_01) {
       var_00 func_0F18::func_10E8A("set_blind", 0);
       break;
     case "helmet_on":
-      if(!isai(var_00))
+      if(!isai(var_00)) {
         var_00 thread func_0E4B::func_8E05();
+      }
 
       break;
     case "helmet_on_visor_up":
-      if(!isai(var_00))
+      if(!isai(var_00)) {
         var_00 thread func_0E4B::func_8E05(1);
+      }
 
       break;
     case "helmet_on_visor_up_no_audio":
-      if(!isai(var_00))
+      if(!isai(var_00)) {
         var_00 thread func_0E4B::func_8E05(1, undefined, 1);
+      }
 
       break;
     case "helmet_off":
-      if(!isai(var_00))
+      if(!isai(var_00)) {
         var_00 thread func_0E4B::func_8E02();
+      }
 
       break;
     case "visor_up":
     case "visor_raise":
-      if(!isai(var_00))
+      if(!isai(var_00)) {
         var_00 thread func_0E4B::func_1348D();
+      }
 
       break;
     case "visor_down":
     case "visor_lower":
-      if(!isai(var_00))
+      if(!isai(var_00)) {
         var_00 thread func_0E4B::func_13485();
+      }
 
       break;
     case "plr_pull_visor_down_activate_lma_normal_and_clear":
@@ -338,13 +363,15 @@ func_7729(var_00, var_01) {
       thread func_0B0B::func_25C0();
       break;
     case "opsmap_scene_start":
-      if(isDefined(var_0.func_9A30))
+      if(isDefined(var_0.func_9A30)) {
         var_00 thread scripts\sp\interaction::func_CD50(var_0.func_9A30, var_0.func_C6B8);
+      }
 
       break;
     case "opsmap_scene_end":
-      if(isDefined(var_0.func_9A30))
+      if(isDefined(var_0.func_9A30)) {
         var_00 thread scripts\sp\interaction::func_9A0F();
+      }
 
       break;
     case "vr_npc_switch_fire_rate":
@@ -354,17 +381,21 @@ func_7729(var_00, var_01) {
 }
 
 func_1ED8(var_00, var_01, var_02, var_03) {
-  if(isDefined(var_0["function"]))
+  if(isDefined(var_0["function"])) {
     self thread[[var_0["function"]]](var_01);
+  }
 
-  if(isDefined(var_0["flag"]))
+  if(isDefined(var_0["flag"])) {
     scripts\engine\utility::flag_set(var_0["flag"]);
+  }
 
-  if(isDefined(var_0["flag_clear"]))
+  if(isDefined(var_0["flag_clear"])) {
     scripts\engine\utility::flag_clear(var_0["flag_clear"]);
+  }
 
-  if(isDefined(var_0["notify"]))
+  if(isDefined(var_0["notify"])) {
     level notify(var_0["notify"]);
+  }
 
   if(isDefined(var_0["attach gun left"])) {
     var_01 func_86DE();
@@ -382,40 +413,48 @@ func_1ED8(var_00, var_01, var_02, var_03) {
   }
 
   if(isDefined(var_0["attach model"])) {
-    if(isDefined(var_0["selftag"]))
+    if(isDefined(var_0["selftag"])) {
       var_01 attach(var_0["attach model"], var_0["selftag"]);
-    else
+    }
+    else {
       var_03 attach(var_0["attach model"], var_0["tag"]);
+    }
 
     return;
   }
 
   if(isDefined(var_0["detach model"])) {
-    if(isDefined(var_0["selftag"]))
+    if(isDefined(var_0["selftag"])) {
       var_01 detach(var_0["detach model"], var_0["selftag"]);
-    else
+    }
+    else {
       var_03 detach(var_0["detach model"], var_0["tag"]);
+    }
   }
 
   if(isDefined(var_0["sound"])) {
     var_04 = undefined;
 
-    if(!isDefined(var_0["sound_stays_death"]))
+    if(!isDefined(var_0["sound_stays_death"])) {
       var_04 = 1;
+    }
 
     var_05 = undefined;
 
-    if(isDefined(var_0["sound_on_tag"]))
+    if(isDefined(var_0["sound_on_tag"])) {
       var_05 = var_0["sound_on_tag"];
+    }
 
     var_01 thread scripts\sp\utility::play_sound_on_tag(var_0["sound"], var_05, var_04);
   }
 
-  if(isDefined(var_0["playersound"]))
+  if(isDefined(var_0["playersound"])) {
     level.player playSound(var_0["playersound"]);
+  }
 
-  if(isDefined(var_0["playerdialogue"]))
+  if(isDefined(var_0["playerdialogue"])) {
     level.player thread scripts\sp\utility::func_1034D(var_0["playerdialogue"]);
+  }
 
   if(!var_2.func_54A9) {
     if(isDefined(var_0["dialog"]) && isDefined(var_2.func_53F2[var_0["dialog"]])) {
@@ -425,17 +464,21 @@ func_1ED8(var_00, var_01, var_02, var_03) {
     }
   }
 
-  if(isDefined(var_0["create model"]))
+  if(isDefined(var_0["create model"])) {
     func_1E93(var_01, var_00);
-  else if(isDefined(var_0["delete model"]))
+  }
+  else if(isDefined(var_0["delete model"])) {
     func_1F1E(var_01, var_00);
+  }
 
   if(isDefined(var_0["selftag"])) {
-    if(isDefined(var_0["effect"]))
+    if(isDefined(var_0["effect"])) {
       level thread func_C0C8(var_01, var_00);
+    }
 
-    if(isDefined(var_0["stop_effect"]))
+    if(isDefined(var_0["stop_effect"])) {
       stopFXOnTag(level._effect[var_0["stop_effect"]], var_01, var_0["selftag"]);
+    }
 
     if(isDefined(var_0["swap_part_to_efx"])) {
       playFXOnTag(level._effect[var_0["swap_part_to_efx"]], var_01, var_0["selftag"]);
@@ -446,31 +489,37 @@ func_1ED8(var_00, var_01, var_02, var_03) {
       var_06 = undefined;
       var_07 = scripts\engine\utility::getfx(var_0["trace_part_for_efx"]);
 
-      if(isDefined(var_0["trace_part_for_efx_water"]))
+      if(isDefined(var_0["trace_part_for_efx_water"])) {
         var_06 = scripts\engine\utility::getfx(var_0["trace_part_for_efx_water"]);
+      }
 
       var_08 = 0;
 
-      if(isDefined(var_0["trace_part_for_efx_delete_depth"]))
+      if(isDefined(var_0["trace_part_for_efx_delete_depth"])) {
         var_08 = var_0["trace_part_for_efx_delete_depth"];
+      }
 
       var_01 thread func_11A80(var_0["selftag"], var_07, var_06, var_08);
     }
 
-    if(isDefined(var_0["trace_part_for_efx_canceling"]))
+    if(isDefined(var_0["trace_part_for_efx_canceling"])) {
       var_01 thread func_11A81(var_0["selftag"]);
+    }
   }
 
-  if(isDefined(var_0["tag"]) && isDefined(var_0["effect"]))
+  if(isDefined(var_0["tag"]) && isDefined(var_0["effect"])) {
     playFXOnTag(level._effect[var_0["effect"]], var_03, var_0["tag"]);
+  }
 
-  if(isDefined(var_0["selftag"]) && isDefined(var_0["effect_looped"]))
+  if(isDefined(var_0["selftag"]) && isDefined(var_0["effect_looped"])) {
     playFXOnTag(level._effect[var_0["effect_looped"]], var_01, var_0["selftag"]);
+  }
 }
 
 func_1E93(var_00, var_01) {
-  if(!isDefined(var_0.func_EF84))
+  if(!isDefined(var_0.func_EF84)) {
     var_0.func_EF84 = [];
+  }
 
   var_02 = var_0.func_EF84.size;
   var_0.func_EF84[var_02] = spawn("script_model", (0, 0, 0));
@@ -519,8 +568,9 @@ func_86D5(var_00) {
   var_02 = self gettagangles(var_0["tag"]);
   var_03 = 0;
 
-  if(isDefined(var_0["suspend"]))
+  if(isDefined(var_0["suspend"])) {
     var_03 = var_0["suspend"];
+  }
 
   var_04 = spawn("weapon_" + self.weapon, var_01, var_03);
   var_4.angles = var_02;
@@ -532,13 +582,15 @@ func_86D5(var_00) {
 func_C0C8(var_00, var_01) {
   var_02 = isDefined(var_1["moreThanThreeHack"]);
 
-  if(var_02)
+  if(var_02) {
     scripts\engine\utility::lock("moreThanThreeHack");
+  }
 
   playFXOnTag(level._effect[var_1["effect"]], var_00, var_1["selftag"]);
 
-  if(var_02)
+  if(var_02) {
     scripts\engine\utility::unlock("moreThanThreeHack");
+  }
 }
 
 func_11A81(var_00) {
@@ -564,29 +616,34 @@ func_11A80(var_00, var_01, var_02, var_03) {
     func_1173F(var_07);
     scripts\sp\utility::func_12BDD(var_04);
 
-    if(var_7.func_10E51 == 1 && gettime() - var_7.func_A8EE > 3000)
+    if(var_7.func_10E51 == 1 && gettime() - var_7.func_A8EE > 3000) {
       return;
+    }
   }
 
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(var_02) && var_7.func_9034)
+  if(isDefined(var_02) && var_7.func_9034) {
     var_01 = var_02;
+  }
 
   playFX(var_01, var_7.func_A8F6);
 
-  if(var_03 == 0)
+  if(var_03 == 0) {
     self hidepart(var_00);
-  else
+  }
+  else {
     thread func_8ED1(var_7.func_A8F6[2] - var_03, var_00);
+  }
 }
 
 func_8ED1(var_00, var_01) {
   self endon("entitydeleted");
 
-  while(self gettagorigin(var_01)[2] > var_00)
+  while(self gettagorigin(var_01)[2] > var_00) {
     wait 0.05;
+  }
 
   self hidepart(var_01);
 }
@@ -712,8 +769,9 @@ func_1697(var_00) {
 }
 
 func_1754() {
-  if(!isDefined(self.func_1FDC))
+  if(!isDefined(self.func_1FDC)) {
     self.func_1FDC = [];
+  }
 
   var_00 = 0;
 
@@ -724,8 +782,9 @@ func_1754() {
     }
   }
 
-  if(!var_00)
+  if(!var_00) {
     level.func_1FDC[level.func_1FDC.size] = self;
+  }
 }
 
 func_6A85(var_00, var_01, var_02) {
@@ -743,10 +802,12 @@ func_6A85(var_00, var_01, var_02) {
       if(var_06 == "vo_") {
         var_07 = getsubstr(var_05, 3);
 
-        if(!issentient(self))
+        if(!issentient(self)) {
           thread scripts\sp\utility::play_sound_on_tag(var_07, "j_head", 1, var_07);
-        else
+        }
+        else {
           self getyawtoenemy(var_07, "face_sounddone", 1);
+        }
 
         continue;
       }

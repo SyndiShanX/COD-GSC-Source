@@ -76,42 +76,53 @@ main() {
   maps\_utility::add_start("bridge_rescue", ::bridge_rescue_start, &"STARTS_BRIDGERESCUE");
   maps\_utility::add_start("nowhere", ::start_nowhere, &"STARTS_NOWHERE");
 
-  if(getdvar("jeepride_smoke_shadow") == "")
+  if(getdvar("jeepride_smoke_shadow") == "") {
     setdvar("jeepride_smoke_shadow", "off");
+  }
 
-  if(getdvar("jeepride_crashrepro") == "")
+  if(getdvar("jeepride_crashrepro") == "") {
     setdvar("jeepride_crashrepro", "off");
+  }
 
-  if(getdvar("jeepride_showhelitargets") == "")
+  if(getdvar("jeepride_showhelitargets") == "") {
     setdvar("jeepride_showhelitargets", "off");
+  }
 
-  if(getdvar("jeepride_recordeffects") == "")
+  if(getdvar("jeepride_recordeffects") == "") {
     setdvar("jeepride_recordeffects", "off");
+  }
 
-  if(getdvar("jeepride_startgen") == "")
+  if(getdvar("jeepride_startgen") == "") {
     setdvar("jeepride_startgen", "off");
+  }
 
-  if(getdvar("jeepride_rpgbox") == "")
+  if(getdvar("jeepride_rpgbox") == "") {
     setdvar("jeepride_rpgbox", "off");
+  }
 
-  if(getdvar("jeepride_nobridgefx") == "")
+  if(getdvar("jeepride_nobridgefx") == "") {
     setdvar("jeepride_nobridgefx", "off");
+  }
 
-  if(getdvar("jeepride_tirefx") == "")
+  if(getdvar("jeepride_tirefx") == "") {
     setdvar("jeepride_tirefx", "off");
+  }
 
-  if(getdvar("jeepride_player_pickup") == "")
+  if(getdvar("jeepride_player_pickup") == "") {
     setdvar("jeepride_player_pickup", "off");
+  }
 
-  if(getdvar("jeepride_multi_shot") == "")
+  if(getdvar("jeepride_multi_shot") == "") {
     setdvar("jeepride_multi_shot", "off");
+  }
 
   setdvar("use_old_uaz_anims", 1);
   setsaveddvar("g_DisableAntilagOnLinkedVehicles", 1);
   setsaveddvar("ragdoll_use_linear_velocity", 1);
 
-  if(getdvar("jeepride_crashrepro") == "off" && getdvar("jeepride_recordeffects") == "off")
+  if(getdvar("jeepride_crashrepro") == "off" && getdvar("jeepride_recordeffects") == "off") {
     thread maps\jeepride_fx::jeepride_fxline();
+  }
 
   common_scripts\utility::array_thread(getEntArray("bridge_triggers", "script_noteworthy"), common_scripts\utility::trigger_off);
   common_scripts\utility::array_thread(getEntArray("bridge_triggers2", "script_noteworthy"), common_scripts\utility::trigger_off);
@@ -260,8 +271,9 @@ main() {
   } else
     level.createfxent = [];
 
-  if(getdvar("jeepride_startgen") != "off")
+  if(getdvar("jeepride_startgen") != "off") {
     common_scripts\utility::array_thread(getvehiclenodearray("startgen", "script_noteworthy"), maps\jeepride_code::startgen);
+  }
 
   maps\_utility::delaythread(185, maps\jeepride_code::falling_bridge_price);
   thread maps\jeepride_code::bridge_bumper();
@@ -519,11 +531,13 @@ music() {
 music_flagged(var_0, var_1, var_2, var_3) {
   var_4 = 0.2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4 = var_3;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   if(common_scripts\utility::flag(var_1)) {
     return;
@@ -638,8 +652,9 @@ dialog_ride_griggs() {
 end_print_fx() {}
 
 blown_bridge(var_0) {
-  while(isDefined(var_0) && distance2d(self.origin, var_0.origin) > 350 && isDefined(self))
+  while(isDefined(var_0) && distance2d(self.origin, var_0.origin) > 350 && isDefined(self)) {
     wait 0.05;
+  }
 
   blow_bridge();
 }
@@ -722,8 +737,9 @@ dialog_get_off_your_ass() {
   level endon("bridge_sequence");
 
   for(;;) {
-    if(level.player getstance() == "stand")
+    if(level.player getstance() == "stand") {
       var_0 = gettime();
+    }
 
     var_4 = gettime();
 
@@ -771,8 +787,9 @@ checkmantle() {
   level.player endon("death");
   level endon("stop_mantle");
 
-  while(!level.player ismantling())
+  while(!level.player ismantling()) {
     waitframe();
+  }
 
   var_0 = maps\_utility::spawn_anim_model("playerview", level.player.origin, level.player.angles);
   var_0 dontcastshadows();
@@ -982,25 +999,29 @@ h1_bridgecollapserumblesystem(var_0, var_1, var_2) {
   }
 
   if(var_3 == "normal" || var_3 == "sustain") {
-    if(var_6 != "")
+    if(var_6 != "") {
       level.player playrumbleonentity(var_6);
+    }
 
     earthquake(var_4, var_5, var_0, 10000);
     wait(var_5);
 
-    if(var_6 == "tank_rumble")
+    if(var_6 == "tank_rumble") {
       level.player stoprumble("tank_rumble");
+    }
   } else if(var_3 == "fade") {
-    if(var_6 != "")
+    if(var_6 != "") {
       level.player playrumbleonentity(var_6);
+    }
 
     earthquake(var_4 * 0.6, var_5 / 4.0, var_0, 10000);
     wait(var_5 / 4.0);
     earthquake(var_4 * 1.0, var_5 / 4.0, var_0, 10000);
     wait(var_5 / 4.0);
 
-    if(var_6 == "tank_rumble")
+    if(var_6 == "tank_rumble") {
       level.player stoprumble("tank_rumble");
+    }
 
     earthquake(var_4 * 0.5, var_5 / 4.0, var_0, 10000);
     wait(var_5 / 4.0);
@@ -1222,8 +1243,9 @@ bridge_zak() {
     if(var_3[var_4] maps\jeepride_code::ishero()) {
       continue;
     }
-    if(isDefined(var_3[var_4].magic_bullet_shield) && var_3[var_4].magic_bullet_shield)
+    if(isDefined(var_3[var_4].magic_bullet_shield) && var_3[var_4].magic_bullet_shield) {
       var_3[var_4] maps\_utility::stop_magic_bullet_shield();
+    }
 
     var_3[var_4] delete();
   }
@@ -1249,18 +1271,21 @@ spawn_vehiclegroup_and_go_to_end_node_quick_and_then_blow_up_boy_this_function_n
 disable_bridge_triggers_for_zak_start() {
   var_0 = getEntArray("bridge_triggers", "script_noteworthy");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] common_scripts\utility::trigger_off();
+  }
 }
 
 blow_up_at_end_node() {
   self waittill("reached_end_node");
   self.godmode = 0;
 
-  if(common_scripts\utility::isdestructible())
+  if(common_scripts\utility::isdestructible()) {
     common_scripts\_destructible::force_explosion();
-  else
+  }
+  else {
     self notify("death");
+  }
 }
 
 switch_team_fordamage() {
@@ -1283,8 +1308,9 @@ switch_team_fordamage() {
 
   maps\_vehicle::godoff();
 
-  if(common_scripts\utility::isdestructible())
+  if(common_scripts\utility::isdestructible()) {
     common_scripts\_destructible::force_explosion();
+  }
 
   self notify("death");
 }
@@ -1309,8 +1335,9 @@ remove_non_hero_shields() {
   var_0 = getaiarray("allies");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(!var_0[var_1] maps\jeepride_code::ishero() && isDefined(var_0[var_1].magic_bullet_shield) && var_0[var_1].magic_bullet_shield)
+    if(!var_0[var_1] maps\jeepride_code::ishero() && isDefined(var_0[var_1].magic_bullet_shield) && var_0[var_1].magic_bullet_shield) {
       var_0[var_1] maps\_utility::stop_magic_bullet_shield();
+    }
   }
 }
 
@@ -1378,8 +1405,9 @@ enemys_run_to_safety() {
     var_0[var_3] thread ignoreall_for_running_away();
     var_2++;
 
-    if(var_2 == var_1.size)
+    if(var_2 == var_1.size) {
       var_2 = 0;
+    }
   }
 }
 
@@ -1413,8 +1441,9 @@ bridge_blow_trigger() {
 trigger_set_cover_from_heli() {
   level endon("cover_from_heli");
 
-  if(!level.player istouching(self))
+  if(!level.player istouching(self)) {
     self waittill("trigger");
+  }
 
   common_scripts\utility::flag_set("cover_from_heli");
 }
@@ -1430,8 +1459,9 @@ attack_origin_with_targetname(var_0) {
 #using_animtree("generic_human");
 
 force_position(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = (0, 0, 0);
+  }
 
   self dontinterpolate();
   self animscripted("forcemove", var_0, (0, 88, 0), % dying_crawl);
@@ -1459,8 +1489,9 @@ escape_shellshock_heartbeat() {
   for(;;) {
     level.player maps\_utility::play_sound_on_entity("breathing_heartbeat");
 
-    if(var_0 > 0)
+    if(var_0 > 0) {
       wait(var_0);
+    }
 
     var_0 = var_0 + 0.1;
   }
@@ -1512,8 +1543,9 @@ delete_all_non_heros() {
     if(var_0[var_1] maps\jeepride_code::ishero()) {
       continue;
     }
-    if(isDefined(var_0[var_1].magic_bullet_shield))
+    if(isDefined(var_0[var_1].magic_bullet_shield)) {
       var_0[var_1] maps\_utility::stop_magic_bullet_shield();
+    }
 
     var_0[var_1] delete();
   }
@@ -1585,14 +1617,17 @@ bridge_zakhaev() {
   level.gaz setgoalpos(var_1.origin);
   level.griggs setgoalpos(var_2.origin);
 
-  if(!isDefined(level.price.magic_bullet_shield))
+  if(!isDefined(level.price.magic_bullet_shield)) {
     level.price thread maps\_utility::magic_bullet_shield();
+  }
 
-  if(!isDefined(level.griggs.magic_bullet_shield))
+  if(!isDefined(level.griggs.magic_bullet_shield)) {
     level.griggs thread maps\_utility::magic_bullet_shield();
+  }
 
-  if(!isDefined(level.gaz.magic_bullet_shield))
+  if(!isDefined(level.gaz.magic_bullet_shield)) {
     level.gaz thread maps\_utility::magic_bullet_shield();
+  }
 
   level.player allowcrouch(0);
   level.player allowprone(0);
@@ -1613,8 +1648,9 @@ bridge_zakhaev() {
   maps\jeepride_code::exploder_loc(143);
   thread bx_warmup_vfx_end();
 
-  if(level.start_point != "bridge_zak")
+  if(level.start_point != "bridge_zak") {
     level.hind notify("gunner_new_target");
+  }
 
   common_scripts\utility::array_thread(maps\_vehicle::get_script_vehicles(), ::stop_thinking);
   thread h1_jeepride_bridgeending_dof_seq();
@@ -1638,8 +1674,9 @@ bridge_zakhaev() {
   var_8.origin = level.price.origin;
   var_8 setModel(level.price.model);
 
-  if(isDefined(level.price.headmodel))
+  if(isDefined(level.price.headmodel)) {
     var_8 attach(level.price.headmodel, "", 1);
+  }
 
   level.price delete();
   level.pricedummy = var_8;
@@ -1684,10 +1721,12 @@ bridge_zakhaev() {
   maps\_utility::delaythread(0.25, maps\_anim::anim_set_rate_single, var_10, "intopain", 20);
   var_0 thread maps\_anim::anim_single(var_11, "drag_player");
 
-  if(getdvar("chaplincheat") == "1")
+  if(getdvar("chaplincheat") == "1") {
     thread bridge_zak_slomo_script_timed_chaplincheat();
-  else
+  }
+  else {
     thread bridge_zak_slomo_script_timed();
+  }
 
   level.player thread end_slowmo_on_death();
   var_9 maps\_utility::delaythread(1.3, ::_show);
@@ -1737,10 +1776,12 @@ bridge_zakhaev() {
     var_18[var_19] linkto(var_20);
     var_18[var_19] thread end_scene_actor_unlink_on_death();
 
-    if(getdvar("jeepride_multi_shot") == "off")
+    if(getdvar("jeepride_multi_shot") == "off") {
       var_18[var_19].health = 1;
-    else
+    }
+    else {
       var_18[var_19] thread stop_animscripted_on_damage();
+    }
 
     var_18[var_19].allowdeath = 1;
     var_18[var_19].grenadeammo = 0;
@@ -1943,25 +1984,29 @@ h1_endingcutsceneshakesystem(var_0) {
   }
 
   if(var_1 == "normal") {
-    if(var_4 != "")
+    if(var_4 != "") {
       level.player playrumbleonentity(var_4);
+    }
 
     earthquake(var_2, var_3, var_8, 100);
     wait(var_3);
 
-    if(var_4 == "tank_rumble")
+    if(var_4 == "tank_rumble") {
       level.player stoprumble("tank_rumble");
+    }
   } else if(var_1 == "fade") {
-    if(var_4 != "")
+    if(var_4 != "") {
       level.player playrumbleonentity(var_4);
+    }
 
     earthquake(var_2 * 0.6, var_3 / 4.0, var_8, 10000);
     wait(var_3 / 4.0);
     earthquake(var_2 * 1.0, var_3 / 4.0, var_8, 10000);
     wait(var_3 / 4.0);
 
-    if(var_4 == "tank_rumble")
+    if(var_4 == "tank_rumble") {
       level.player stoprumble("tank_rumble");
+    }
 
     earthquake(var_2 * 0.5, var_3 / 4.0, var_8, 10000);
     wait(var_3 / 4.0);
@@ -1983,14 +2028,16 @@ player_janxed_end_shot(var_0) {
   level endon("all_end_scene_guys_dead");
 
   for(;;) {
-    while(!level.player isfiring())
+    while(!level.player isfiring()) {
       wait 0.05;
+    }
 
     var_1 = undefined;
 
     for(var_2 = 0; var_2 < var_0.size; var_2++) {
-      if(janxed_end_shot(var_0[var_2]))
+      if(janxed_end_shot(var_0[var_2])) {
         var_1 = var_0[var_2];
+      }
     }
 
     if(isDefined(var_1)) {
@@ -2002,8 +2049,9 @@ player_janxed_end_shot(var_0) {
       break;
     }
 
-    while(level.player isfiring())
+    while(level.player isfiring()) {
       wait 0.05;
+    }
   }
 }
 
@@ -2137,14 +2185,18 @@ lerp_player_view_to_position_oldstyle_loc(var_0, var_1, var_2, var_3, var_4, var
   var_9.origin = level.player maps\_utility::get_player_feet_from_view();
   var_9.angles = level.player getplayerangles();
 
-  if(isDefined(var_8))
+  if(isDefined(var_8)) {
     level.player playerlinktodelta(var_9, "", var_3, var_4, var_5, var_6, var_7, var_8);
-  else if(isDefined(var_4))
+  }
+  else if(isDefined(var_4)) {
     level.player playerlinktodelta(var_9, "", var_3, var_4, var_5, var_6, var_7);
-  else if(isDefined(var_3))
+  }
+  else if(isDefined(var_3)) {
     level.player playerlinktodelta(var_9, "", var_3);
-  else
+  }
+  else {
     level.player playerlinktodelta(var_9);
+  }
 
   var_9 moveto(var_0, var_2, var_2 * 0.25, var_2 * 0.25);
   var_9 rotateto(var_1, var_2, var_2 * 0.25, var_2 * 0.25);
@@ -2243,30 +2295,35 @@ earthquaker_small() {
 }
 
 _setblur(var_0, var_1) {
-  if(getdvar("jeepride_player_pickup") == "off")
+  if(getdvar("jeepride_player_pickup") == "off") {
     setblur(var_0, var_1);
+  }
 }
 
 dof_focuser_tag(var_0, var_1, var_2, var_3, var_4) {
   level notify("new_dof_focus");
   level endon("new_dof_focus");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 4;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 4;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "J_Head";
+  }
 
   for(;;) {
     var_5 = distance(level.player getEye(), var_0 gettagorigin(var_2));
     var_6 = 0;
     var_7 = var_5 - var_1;
 
-    if(var_7 <= 0)
+    if(var_7 <= 0) {
       var_7 = 1;
+    }
 
     var_8 = var_5 + var_1;
     var_9 = var_8 + 35000;
@@ -2294,8 +2351,9 @@ medic_focus(var_0) {
 player_takes_shots() {
   level.player_takes_shots = 0;
 
-  while(level.player_takes_shots < 2)
+  while(level.player_takes_shots < 2) {
     level waittill("player_takes_shot");
+  }
 
   maps\jeepride_code::player_kill();
 }
@@ -2312,16 +2370,19 @@ shot_counter(var_0) {
   var_2 = 0;
 
   if(level.gameskill == 0) {
-    if(level.player_takes_shots > 3)
+    if(level.player_takes_shots > 3) {
       var_2 = 1;
+    }
   } else if(level.gameskill == 1) {
-    if(level.player_takes_shots > 3)
+    if(level.player_takes_shots > 3) {
       var_2 = 1;
+    }
   } else if(level.player_takes_shots > 2)
     var_2 = 1;
 
-  if(var_2)
+  if(var_2) {
     level.player enablehealthshield(0);
+  }
 
   self shoot(1, level.player getEye());
 }
@@ -2489,15 +2550,17 @@ hind_shoots_the_tanker(var_0) {
   var_1.oldmissiletype = 0;
   thread earthquaker(10);
 
-  if(!maps\jeepride_code::player_in_blastradius())
+  if(!maps\jeepride_code::player_in_blastradius()) {
     level.player enableinvulnerability();
+  }
 
   level.player thread maps\_utility::play_sound_on_entity("scn_last_hind_flyby_stinger");
   level.hind thread maps\jeepride_code::shootenemytarget(var_1);
   level waittill("bridge_blower");
 
-  if(maps\jeepride_code::player_in_blastradius())
+  if(maps\jeepride_code::player_in_blastradius()) {
     maps\jeepride_code::player_kill();
+  }
 
   soundscripts\_snd::snd_message("start_hind_shoots_the_tanker_mix");
   musicstop(3.5);
@@ -2557,8 +2620,9 @@ bridge_save() {
   level.special_autosavecondition = ::bridge_save_check;
   maps\_loadout::give_loadout();
 
-  if(level.cheat_lemonade)
+  if(level.cheat_lemonade) {
     maps\_cheat::givelemonade();
+  }
 
   level notify("stop_mantle");
   maps\_utility::vision_set_fog_changes("jeepride_end_2", 6);
@@ -2568,8 +2632,9 @@ bridge_save() {
   level.price.ignoresuppression = 0;
   thread maps\_utility::autosave_by_name("bridge_save");
 
-  while(!common_scripts\utility::flag("game_saving"))
+  while(!common_scripts\utility::flag("game_saving")) {
     level waittill("game_saving");
+  }
 
   level.special_autosavecondition = undefined;
 }
@@ -2615,8 +2680,9 @@ bridge_rescue_start() {
     if(var_3[var_4] maps\jeepride_code::ishero()) {
       continue;
     }
-    if(isDefined(var_3[var_4].magic_bullet_shield) && var_3[var_4].magic_bullet_shield)
+    if(isDefined(var_3[var_4].magic_bullet_shield) && var_3[var_4].magic_bullet_shield) {
       var_3[var_4] maps\_utility::stop_magic_bullet_shield();
+    }
 
     var_3[var_4] delete();
   }
@@ -2692,13 +2758,15 @@ fx_thing() {
   var_0 = loadfx("fx\explosions\small_vehicle_explosion");
 
   for(;;) {
-    while(!level.player usebuttonpressed())
+    while(!level.player usebuttonpressed()) {
       wait 0.05;
+    }
 
     playFX(var_0, level.player getEye());
 
-    while(level.player usebuttonpressed())
+    while(level.player usebuttonpressed()) {
       wait 0.05;
+    }
   }
 }
 
@@ -2730,8 +2798,9 @@ beam_me_up_to_the_chopper(var_0) {
   var_1 show();
   level.player playrumbleonentity("tank_rumble");
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++)
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_2[var_3] show();
+  }
 
   wait 1;
   var_1 ghettolinkto(level.player);
@@ -2793,18 +2862,21 @@ bx_warmup_vfx_bridge() {
   var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("cloud_mountain_liar"));
   var_1 = maps\_utility::getfxarraybyid("cloud_bank_far");
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_0[var_2] common_scripts\utility::pauseeffect();
+  }
 
   common_scripts\utility::flag_wait("bx_start_level");
   maps\jeepride_fx::heli_tread_fx_swap("fx\treadfx\heli_dust_jeepride", "fx\treadfx\heli_water_jeepride");
   common_scripts\utility::flag_wait("bridge_section_start");
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_0[var_2] maps\_utility::restarteffect();
+  }
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_1[var_2] common_scripts\utility::pauseeffect();
+  }
 
   maps\jeepride_fx::heli_tread_fx_swap("fx\treadfx\heli_dust_jeepride2");
 }
@@ -2813,8 +2885,9 @@ bx_warmup_vfx_end() {
   var_0 = maps\_utility::getfxarraybyid("bridge_amb_smk_2");
   var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("bridge_amb_smk_4"));
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] common_scripts\utility::pauseeffect();
+  }
 
   common_scripts\_exploder::kill_exploder("74");
   common_scripts\_exploder::kill_exploder("14001");
@@ -2825,8 +2898,9 @@ bx_warmup_vfx_end() {
 bx_vfx_wind_kill() {
   var_0 = maps\_utility::getfxarraybyid("bridge_amb_smk_3");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] common_scripts\utility::pauseeffect();
+  }
 
   maps\_utility::stop_exploder("142");
   maps\_utility::stop_exploder("14004");
@@ -2854,8 +2928,9 @@ bx_performance_vfx_count() {
   var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("leaves_fall_4"));
   var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("leaves_fall_5"));
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] common_scripts\utility::pauseeffect();
+  }
 
   thread bx_performance_vfx_out("cloud_bank_road", "leaves_fall", "bx_perf_section_1_out");
   thread bx_performance_vfx_out("cloud_bank_road_2", "leaves_fall_2", "bx_perf_section_2_out");
@@ -2873,8 +2948,9 @@ bx_performance_vfx_out(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::array_combine(var_3, maps\_utility::getfxarraybyid(var_1));
   common_scripts\utility::flag_wait(var_2);
 
-  for(var_4 = 0; var_4 < var_3.size; var_4++)
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
     var_3[var_4] common_scripts\utility::pauseeffect();
+  }
 }
 
 bx_performance_vfx_in(var_0, var_1, var_2) {
@@ -2882,8 +2958,9 @@ bx_performance_vfx_in(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::array_combine(var_3, maps\_utility::getfxarraybyid(var_1));
   common_scripts\utility::flag_wait(var_2);
 
-  for(var_4 = 0; var_4 < var_3.size; var_4++)
+  for(var_4 = 0; var_4 < var_3.size; var_4++) {
     var_3[var_4] maps\_utility::restarteffect();
+  }
 }
 
 play_bridge_collapse_vfx() {
@@ -2901,8 +2978,9 @@ impact_sedan_car_vfx() {
 reconnect_bridge_paths() {
   var_0 = getEntArray("reconnect_path", "script_noteworthy");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 connectpaths();
+  }
 }
 
 play_bridge_vehicle_collapse_vfx(var_0) {

@@ -84,10 +84,12 @@ main() {
   level.spawn_node_info_table = "mp/alien/beacon_spawn_node_info.csv";
   level.alien_challenge_table = "mp/alien/mp_alien_beacon_challenges.csv";
 
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.base_player_count_multiplier = 1;
-  else
+  }
+  else {
     level.base_player_count_multiplier = 0.49;
+  }
 
   level.additional_player_count_multiplier = 0.17;
   level.waypoint_dist_override = 2500;
@@ -157,8 +159,9 @@ main() {
   register_encounter();
   maps\mp\mp_alien_beacon_vignettes::main();
 
-  if(!maps\mp\alien\_utility::is_chaos_mode())
+  if(!maps\mp\alien\_utility::is_chaos_mode()) {
     init_container_spawn();
+  }
 
   maps\mp\alien\_pillage_intel::create_intel_spots();
   level thread maps\mp\alien\mp_alien_beacon_turret::set_up_remote_turrets();
@@ -253,16 +256,18 @@ cleanup_strings() {
   var_1 = getarraykeys(game["dialog"]);
 
   foreach(var_3 in var_1) {
-    if(game["dialog"][var_3] == "enemy_null" || game["dialog"][var_3] == "friendly_null" || game["dialog"][var_3] == "null")
+    if(game["dialog"][var_3] == "enemy_null" || game["dialog"][var_3] == "friendly_null" || game["dialog"][var_3] == "null") {
       game["dialog"][var_3] = undefined;
+    }
   }
 
   game["dialog"] = common_scripts\utility::array_removeundefined(game["dialog"]);
 }
 
 setup_beacon_offhands() {
-  while(!isDefined(level.offhand_explosives))
+  while(!isDefined(level.offhand_explosives)) {
     wait 1;
+  }
 
   level.offhand_explosives = common_scripts\utility::array_add(level.offhand_explosives, "iw6_aliendlc22_mp");
   level.offhand_secondaries = common_scripts\utility::array_add(level.offhand_secondaries, "iw6_aliendlc21_mp");
@@ -306,8 +311,9 @@ place_waypoint_on_blocker_door() {
 use_drillbot_door(var_0, var_1) {
   var_2 = var_1.script_angles;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = var_2 * -1;
+  }
 
   var_1 moveto(var_1.origin + var_2, 2);
   playsoundatpos(var_1.origin, "scn_drillbot_door");
@@ -331,8 +337,9 @@ spawn_beacon_cargo_drillbot() {
   var_4 = 0.75;
   var_5 = level.drill_vehicle.origin + (0, 0, 40);
 
-  foreach(var_7 in level.players)
+  foreach(var_7 in level.players) {
   maps\mp\alien\_outline_proto::enable_outline_for_player(level.drill_vehicle, var_7, 3, 0, "high");
+  }
 
   level.drillbot_waypoint_icon = maps\mp\alien\_hud::make_waypoint(var_1, var_2, var_3, var_4, var_5);
 }
@@ -347,8 +354,9 @@ beacon_watch_bomb_stuck_override(var_0) {
     return 1;
   }
 
-  if(!isDefined(level.drill_vehicle) || !maps\mp\alien\_utility::is_true(level.drillbot_door_open))
+  if(!isDefined(level.drill_vehicle) || !maps\mp\alien\_utility::is_true(level.drillbot_door_open)) {
     return 0;
+  }
 
   if(distancesquared(var_0.origin, level.drill_vehicle.origin) < 6400 && !isDefined(level.drillbot_event_finished)) {
     level thread cargo_drillbot_logic(var_0);
@@ -369,8 +377,9 @@ link_drill_to_container(var_0) {
   level.drill linkto(var_1[0]);
   level.drill makeunusable();
 
-  if(isDefined(level.drill_icon))
+  if(isDefined(level.drill_icon)) {
     level.drill_icon.alpha = 0;
+  }
 
   var_0 maps\mp\alien\_drill::restore_last_weapon();
   var_0 common_scripts\utility::_enableoffhandweapons();
@@ -379,8 +388,9 @@ link_drill_to_container(var_0) {
   level.drill unlink();
   level.drill_linked_to_container = undefined;
 
-  foreach(var_3 in level.players)
+  foreach(var_3 in level.players) {
   var_3.on_container = undefined;
+  }
 
   if(isDefined(level.drill_icon)) {
     level.drill_icon.x = level.drill.origin[0];
@@ -394,8 +404,9 @@ cargo_drillbot_logic(var_0) {
   level notify("drillbot_used");
   clear_drillbot_lowermessage();
 
-  if(isDefined(level.drillbot_waypoint_icon))
+  if(isDefined(level.drillbot_waypoint_icon)) {
     level.drillbot_waypoint_icon destroy();
+  }
 
   var_0 takeweapon("alienbomb_mp");
   level.drill_vehicle playsoundonmovingent("scn_drillbot_attach");
@@ -421,8 +432,9 @@ cargo_drillbot_logic(var_0) {
 
   var_2 maps\mp\alien\_hive::disable_other_strongholds();
 
-  if(isDefined(var_2.icon))
+  if(isDefined(var_2.icon)) {
     var_2.icon destroy();
+  }
 
   wait_for_player_to_activate_platform();
   level.non_player_drill_plant = 1;
@@ -438,8 +450,9 @@ cargo_drillbot_logic(var_0) {
   use_drillbot_door(var_7, getent("cargo_bot_exit_door", "targetname"));
   level.drill makeusable();
 
-  foreach(var_9 in level.players)
+  foreach(var_9 in level.players) {
   maps\mp\alien\_outline_proto::disable_outline_for_player(level.drill_vehicle, var_9);
+  }
 
   level.drill_headlight_fx delete();
   level.drillbot_event_finished = 1;
@@ -448,8 +461,9 @@ cargo_drillbot_logic(var_0) {
 }
 
 send_bot_to_hive_and_drill(var_0) {
-  if(isDefined(level.drill_icon))
+  if(isDefined(level.drill_icon)) {
     level.drill_icon destroy();
+  }
 
   var_1 = getvehiclenode("cargo_drillbot_start", "targetname");
   level.drill_vehicle attachpath(var_1);
@@ -480,8 +494,9 @@ send_bot_to_hive_and_drill(var_0) {
   level.drill makeunusable();
   level.drill linkto(level.drill_vehicle, "tag_turret_attach", (0, 0, -2), (0, 0, 0));
 
-  if(isDefined(level.drill_icon))
+  if(isDefined(level.drill_icon)) {
     level.drill_icon destroy();
+  }
 }
 
 wait_for_player_to_activate_platform() {
@@ -503,8 +518,9 @@ wait_for_player_to_activate_platform() {
 }
 
 clear_drillbot_lowermessage() {
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 maps\mp\_utility::clearlowermessage("bot_drill");
+  }
 }
 
 check_for_player_near_bot_with_drill() {
@@ -517,8 +533,9 @@ check_for_player_near_bot_with_drill() {
   }
   var_0 = 6400;
 
-  while(!isDefined(level.drill_vehicle))
+  while(!isDefined(level.drill_vehicle)) {
     wait 1;
+  }
 
   for(;;) {
     while(!common_scripts\utility::flag("drill_drilling")) {
@@ -531,15 +548,17 @@ check_for_player_near_bot_with_drill() {
         if(!isDefined(level.drill_carrier) || isDefined(level.drill_carrier) && level.drill_carrier != self) {
           maps\mp\_utility::setlowermessage("bot_drill", &"MP_ALIEN_BEACON_PLACE_DRILL", undefined, 10);
 
-          while(player_should_see_drillbot_hint(level.drill_vehicle, var_0, 1))
+          while(player_should_see_drillbot_hint(level.drill_vehicle, var_0, 1)) {
             wait 0.05;
+          }
 
           maps\mp\_utility::clearlowermessage("bot_drill");
         } else {
           maps\mp\_utility::setlowermessage("bot_drill", &"MP_ALIEN_BEACON_DRILL_ONBOT", undefined, 10);
 
-          while(player_should_see_drillbot_hint(level.drill_vehicle, var_0, 0))
+          while(player_should_see_drillbot_hint(level.drill_vehicle, var_0, 0)) {
             wait 0.05;
+          }
 
           maps\mp\_utility::clearlowermessage("bot_drill");
         }
@@ -553,22 +572,28 @@ check_for_player_near_bot_with_drill() {
 }
 
 player_should_see_drillbot_hint(var_0, var_1, var_2) {
-  if(distancesquared(var_0.origin, self.origin) > var_1)
+  if(distancesquared(var_0.origin, self.origin) > var_1) {
     return 0;
+  }
 
-  if(common_scripts\utility::flag("drill_drilling"))
+  if(common_scripts\utility::flag("drill_drilling")) {
     return 0;
+  }
 
-  if(self.inlaststand)
+  if(self.inlaststand) {
     return 0;
+  }
 
-  if(isDefined(self.usingremote))
+  if(isDefined(self.usingremote)) {
     return 0;
+  }
 
-  if(maps\mp\alien\_utility::is_true(var_2))
+  if(maps\mp\alien\_utility::is_true(var_2)) {
     return 1;
-  else if(maps\mp\alien\_utility::is_true(self.iscarrying))
+  }
+  else if(maps\mp\alien\_utility::is_true(self.iscarrying)) {
     return 0;
+  }
 
   return 1;
 }
@@ -600,8 +625,9 @@ register_encounter() {
 encounter_init() {
   var_0 = getent("drill_pickup_trig", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
   maps\mp\alien\_drill::init_drill();
   maps\mp\alien\_hive::init_hives();
@@ -622,18 +648,21 @@ init_seeder() {
 }
 
 beacon_alien_init_override() {
-  if(maps\mp\alien\_utility::get_alien_type() == "seeder")
+  if(maps\mp\alien\_utility::get_alien_type() == "seeder") {
     maps\mp\agents\alien\_alien_seeder::seeder_init();
+  }
 }
 
 beacon_alien_melee_override(var_0) {
-  if(self.melee_type == "seeder_spit")
+  if(self.melee_type == "seeder_spit") {
     maps\mp\agents\alien\_alien_seeder::seeder_spit_attack(var_0);
+  }
 }
 
 beacon_alien_death_override(var_0) {
-  if(maps\mp\alien\_utility::get_alien_type() == "seeder")
+  if(maps\mp\alien\_utility::get_alien_type() == "seeder") {
     maps\mp\agents\alien\_alien_seeder::seeder_death(var_0);
+  }
 }
 
 beacon_get_non_agent_enemies() {
@@ -641,8 +670,9 @@ beacon_get_non_agent_enemies() {
 
   if(isDefined(level.seeder_active_turrets)) {
     foreach(var_2 in level.seeder_active_turrets) {
-      if(!isDefined(var_2.pet))
+      if(!isDefined(var_2.pet)) {
         var_0 = common_scripts\utility::array_add(var_0, var_2);
+      }
     }
 
     return var_0;
@@ -739,8 +769,9 @@ mp_alien_beacon_onspawnplayer_func() {
   thread maps\mp\alien\_achievement::eggallfoundforpack(1);
   level notify("boat_spawn", var_0);
 
-  if(common_scripts\utility::flag_exist("boat_ride_over") && !common_scripts\utility::flag("boat_ride_over"))
+  if(common_scripts\utility::flag_exist("boat_ride_over") && !common_scripts\utility::flag("boat_ride_over")) {
     var_0 thread boat_intro_on_connect(var_0, level.players.size);
+  }
 }
 
 tp_to_well_deck() {
@@ -855,8 +886,9 @@ beacon_get_hintstring_for_item_pickup_func(var_0) {
       return &"ALIEN_CRAFTING_PICKUP_STICKYFLARE";
   }
 
-  if(isDefined(level.level_locker_weapon_pickup_string_func))
+  if(isDefined(level.level_locker_weapon_pickup_string_func)) {
     return [[level.level_locker_weapon_pickup_string_func]](var_0);
+  }
 }
 
 beacon_build_pillageitem_array_func(var_0) {
@@ -965,8 +997,9 @@ intro_boat_ride() {
   common_scripts\utility::flag_set("give_player_abilities");
   var_1 solid();
 
-  foreach(var_6 in level.boat_vehicle.spawn_locations)
+  foreach(var_6 in level.boat_vehicle.spawn_locations) {
   var_6 delete();
+  }
 
   var_0 delete();
 }
@@ -983,8 +1016,9 @@ boat_intro_on_connect(var_0, var_1) {
   }
 
   if(!isDefined(var_2)) {
-    foreach(var_4 in level.boat_vehicle.spawn_locations)
+    foreach(var_4 in level.boat_vehicle.spawn_locations) {
     var_4.used_node = undefined;
+    }
 
     var_2 = level.boat_vehicle.spawn_locations[1];
     var_2.usedspot = 1;
@@ -1016,18 +1050,22 @@ hives_3_custom() {
   thread maps\mp\mp_alien_beacon_vignettes::post_miniboss_vo();
   maps\mp\alien\_achievement_dlc2::update_blocker_achievements("tentacle_fight");
 
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 maps\mp\alien\_persistence::try_award_bonus_pool_token();
+  }
 
-  if(maps\mp\alien\_utility::isplayingsolo() && !issplitscreen())
+  if(maps\mp\alien\_utility::isplayingsolo() && !issplitscreen()) {
     maps\mp\alien\_laststand::give_laststand(level.players[0], 1);
+  }
 }
 
 get_mini_boss_score_component_list() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     return ["drill", "personal", "challenge", "tentacle_bonus"];
-  else
+  }
+  else {
     return ["drill", "team", "personal", "challenge", "tentacle_bonus"];
+  }
 }
 
 first_cargo_hive() {
@@ -1037,8 +1075,9 @@ first_cargo_hive() {
 }
 
 pre_hive() {
-  if(level.current_hive_name == "cargo_area_mini_3")
+  if(level.current_hive_name == "cargo_area_mini_3") {
     return 23;
+  }
 
   return level.cycle_count;
 }
@@ -1069,14 +1108,17 @@ cargo_hive() {
 
   level maps\mp\mp_alien_beacon_vignettes::set_up_blast_doors();
 
-  if(level.current_hive_name == "cargo_area_mini_1_post" || level.current_hive_name == "cargo_area_mini_2_post" || level.current_hive_name == "cargo_area_mini_3_post" || level.current_hive_name == "cargo_area_mini_4_post" || level.current_hive_name == "cargo_area_mini_5_post" || level.current_hive_name == "cargo_area_mini_6_post")
+  if(level.current_hive_name == "cargo_area_mini_1_post" || level.current_hive_name == "cargo_area_mini_2_post" || level.current_hive_name == "cargo_area_mini_3_post" || level.current_hive_name == "cargo_area_mini_4_post" || level.current_hive_name == "cargo_area_mini_5_post" || level.current_hive_name == "cargo_area_mini_6_post") {
     level.blast_doors_lifted++;
+  }
 
-  if(level.current_hive_name == "cargo_area_mini_2_post")
+  if(level.current_hive_name == "cargo_area_mini_2_post") {
     level thread maps\mp\mp_alien_beacon_vignettes::cargo_room_use_ugv_vo();
+  }
 
-  if(level.blast_doors_lifted > 3 && !common_scripts\utility::flag("cargo_control_room_vo_played"))
+  if(level.blast_doors_lifted > 3 && !common_scripts\utility::flag("cargo_control_room_vo_played")) {
     level thread maps\mp\mp_alien_beacon_vignettes::cargo_room_go_to_control_room_vo();
+  }
 
   level thread spawn_elites_from_container();
 }
@@ -1145,22 +1187,25 @@ final_deck_hive() {
   var_1 = getent("deck_to_lab_door_linker", "targetname");
 
   foreach(var_3 in var_0) {
-    if(isDefined(var_3) && isDefined(var_1))
+    if(isDefined(var_3) && isDefined(var_1)) {
       var_3 linkto(var_1);
+    }
   }
 
   var_5 = getEntArray("top_deck_mini_1", "targetname");
 
   foreach(var_7 in var_5) {
-    if(var_7.classname == "script_brushmodel")
+    if(var_7.classname == "script_brushmodel") {
       var_7 delete();
+    }
   }
 
   var_1 movez(92, 5, 0, 1);
   thread maps\mp\mp_alien_beacon_vignettes::lab_entrance_vo();
 
-  if(maps\mp\alien\_utility::isplayingsolo() && !issplitscreen())
+  if(maps\mp\alien\_utility::isplayingsolo() && !issplitscreen()) {
     maps\mp\alien\_laststand::give_laststand(level.players[0], 1);
+  }
 
   thread update_override_info((264, 4232, 1152.13), (0, 130, 0));
 }
@@ -1209,10 +1254,12 @@ give_gas_encounter_rewards() {
 }
 
 get_gas_encounter_score_components() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     return ["gas", "personal"];
-  else
+  }
+  else {
     return ["gas", "team", "personal"];
+  }
 }
 
 mp_alien_beacon_story_moment() {}
@@ -1252,8 +1299,9 @@ mp_alien_beacon_boss_encounter() {
   maps\mp\alien\_achievement_dlc2::update_blocker_achievements("kraken", var_3);
   maps\mp\mp_alien_beacon_vignettes::post_boss_vo();
 
-  if(!maps\mp\alien\_utility::is_casual_mode())
+  if(!maps\mp\alien\_utility::is_casual_mode()) {
     set_players_escaped();
+  }
 
   give_players_completion_tokens();
   maps\mp\alien\_unlock::update_escape_item_unlock(level.players);
@@ -1280,8 +1328,9 @@ gather_ye_players_for_kraken() {
     foreach(var_4 in level.players) {
       var_5 = var_4;
 
-      if(isDefined(var_4.reviveent))
+      if(isDefined(var_4.reviveent)) {
         var_5 = var_4.reviveent;
+      }
 
       if(var_5.origin[1] < 6640) {
         var_4 teleport_player_to_boss_fight(var_5);
@@ -1298,8 +1347,9 @@ clean_aliens_for_kraken() {
   var_1 = getEntArray("spawn_zone", "targetname");
 
   foreach(var_3 in var_1) {
-    if(issubstr(var_3.script_linkname, "spawn_9") || issubstr(var_3.script_linkname, "spawn_10") || issubstr(var_3.script_linkname, "spawn_11") || issubstr(var_3.script_linkname, "spawn_12") || issubstr(var_3.script_linkname, "spawn_13"))
+    if(issubstr(var_3.script_linkname, "spawn_9") || issubstr(var_3.script_linkname, "spawn_10") || issubstr(var_3.script_linkname, "spawn_11") || issubstr(var_3.script_linkname, "spawn_12") || issubstr(var_3.script_linkname, "spawn_13")) {
       var_0[var_0.size] = var_3;
+    }
   }
 
   var_5 = maps\mp\alien\_spawnlogic::get_alive_agents();
@@ -1308,12 +1358,14 @@ clean_aliens_for_kraken() {
     var_8 = 0;
 
     foreach(var_3 in var_0) {
-      if(var_7 istouching(var_3))
+      if(var_7 istouching(var_3)) {
         var_8 = 1;
+      }
     }
 
-    if(!var_8)
+    if(!var_8) {
       var_7 suicide();
+    }
   }
 }
 
@@ -1335,10 +1387,12 @@ teleport_player_to_boss_fight(var_0) {
         }
 
         if(canspawn(var_5) && !positionwouldtelefrag(var_5)) {
-          if(isDefined(var_0) && var_0 != self)
+          if(isDefined(var_0) && var_0 != self) {
             teleport_player_to_spot(var_5, var_0);
-          else
+          }
+          else {
             teleport_player_to_spot(var_5);
+          }
 
           var_3 = 1;
           break;
@@ -1354,18 +1408,21 @@ teleport_player_to_boss_fight(var_0) {
 }
 
 beacon_player_initial_spawn_loc_override() {
-  if(maps\mp\alien\_utility::is_chaos_mode())
+  if(maps\mp\alien\_utility::is_chaos_mode()) {
     chaos_player_initial_spawn_loc_override();
-  else
+  }
+  else {
     regular_player_initial_spawn_loc_override();
+  }
 }
 
 regular_player_initial_spawn_loc_override() {
   if(!isDefined(level.currentspawnoriginoverride)) {
     return;
   }
-  if(!isDefined(level.currentspawnanglesoverride))
+  if(!isDefined(level.currentspawnanglesoverride)) {
     level.currentspawnanglesoverride = (0, 0, 0);
+  }
 
   self.forcespawnorigin = level.currentspawnoriginoverride;
   self.forcespawnangles = level.currentspawnanglesoverride;
@@ -1393,19 +1450,22 @@ update_override_info(var_0, var_1) {
 }
 
 set_players_escaped() {
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 maps\mp\alien\_persistence::set_player_escaped();
+  }
 }
 
 give_players_completion_tokens() {
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 maps\mp\alien\_persistence::award_completion_tokens();
+  }
 }
 
 get_win_condition() {
   foreach(var_1 in level.players) {
-    if(maps\mp\alien\_utility::is_true(var_1.inlaststand))
+    if(maps\mp\alien\_utility::is_true(var_1.inlaststand)) {
       return "some_escape";
+    }
   }
 
   return "all_escape";
@@ -1425,8 +1485,9 @@ play_kraken_intro_music() {
       common_scripts\utility::flag_clear("alien_music_playing");
     }
 
-    if(!common_scripts\utility::flag("exfil_music_playing"))
+    if(!common_scripts\utility::flag("exfil_music_playing")) {
       level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_dlc2_kraken");
+    }
   }
 }
 
@@ -1446,14 +1507,18 @@ get_lb_final_kraken_rank(var_0) {
   var_2 = 630000;
   var_3 = 750000;
 
-  if(var_0 <= var_1)
+  if(var_0 <= var_1) {
     return 0;
-  else if(var_0 <= var_2)
+  }
+  else if(var_0 <= var_2) {
     return 1;
-  else if(var_0 <= var_3)
+  }
+  else if(var_0 <= var_3) {
     return 2;
-  else
+  }
+  else {
     return 3;
+  }
 }
 
 generic_blocker_hive_logic(var_0) {
@@ -1502,13 +1567,15 @@ init_level_flags() {
 }
 
 beacon_enter_area_func(var_0) {
-  if(!maps\mp\alien\_utility::is_chaos_mode())
+  if(!maps\mp\alien\_utility::is_chaos_mode()) {
     maps\mp\alien\_container_spawn::activate_container_spawners_in_area(var_0);
+  }
 }
 
 beacon_leave_area_func(var_0) {
-  if(!maps\mp\alien\_utility::is_chaos_mode())
+  if(!maps\mp\alien\_utility::is_chaos_mode()) {
     maps\mp\alien\_container_spawn::deactivate_container_spawners_in_area(var_0);
+  }
 }
 
 init_container_spawn() {
@@ -1551,15 +1618,18 @@ notify_and_remove_door(var_0, var_1) {
   common_scripts\utility::waitframe();
   var_3 = getent(var_1, "targetname");
 
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     var_3 setscriptablepartstate(0, 1);
-  else
+  }
+  else {
     var_3 setscriptablepartstate(0, 4);
+  }
 
   common_scripts\utility::waitframe();
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 
   level notify(var_0);
 }
@@ -1583,8 +1653,9 @@ jump_to_lab_blocker() {}
 jump_to_boss_area() {}
 
 set_spawn_table() {
-  if(maps\mp\alien\_utility::is_chaos_mode())
+  if(maps\mp\alien\_utility::is_chaos_mode()) {
     set_chaos_spawn_table();
+  }
   else {
     if(maps\mp\alien\_utility::is_hardcore_mode()) {
       set_hardcore_extinction_spawn_table();
@@ -1596,17 +1667,21 @@ set_spawn_table() {
 }
 
 set_container_spawn_table() {
-  if(maps\mp\alien\_utility::is_hardcore_mode())
+  if(maps\mp\alien\_utility::is_hardcore_mode()) {
     set_hardcore_container_spawn_table();
-  else
+  }
+  else {
     set_regular_container_spawn_table();
+  }
 }
 
 set_alien_definition_table() {
-  if(maps\mp\alien\_utility::is_hardcore_mode())
+  if(maps\mp\alien\_utility::is_hardcore_mode()) {
     set_hardcore_alien_definition_table();
-  else
+  }
+  else {
     set_regular_alien_definition_table();
+  }
 }
 
 set_chaos_spawn_table() {
@@ -1638,24 +1713,30 @@ set_chaos_spawn_table() {
 }
 
 set_regular_extinction_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table = "mp/alien/cycle_spawn_beacon_sp.csv";
-  else
+  }
+  else {
     level.alien_cycle_table = "mp/alien/cycle_spawn_beacon_mp.csv";
+  }
 }
 
 set_regular_container_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.container_spawn_table = "mp/alien/beacon_container_spawn_sp.csv";
-  else
+  }
+  else {
     level.container_spawn_table = "mp/alien/beacon_container_spawn.csv";
+  }
 }
 
 set_regular_alien_definition_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.default_alien_definition = "mp/alien/beacon_alien_definition_sp.csv";
-  else
+  }
+  else {
     level.default_alien_definition = "mp/alien/beacon_alien_definition.csv";
+  }
 }
 
 chaos_init() {
@@ -1737,24 +1818,30 @@ register_egg_default_loc() {
 }
 
 set_hardcore_extinction_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_beacon_hardcore_sp.csv";
-  else
+  }
+  else {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_beacon_hardcore_mp.csv";
+  }
 }
 
 set_hardcore_container_spawn_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.container_spawn_table = "mp/alien/beacon_container_spawn_hardcore_sp.csv";
-  else
+  }
+  else {
     level.container_spawn_table = "mp/alien/beacon_container_spawn_hardcore.csv";
+  }
 }
 
 set_hardcore_alien_definition_table() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     level.default_alien_definition = "mp/alien/beacon_alien_definition_hardcore_sp.csv";
-  else
+  }
+  else {
     level.default_alien_definition = "mp/alien/beacon_alien_definition_hardcore_mp.csv";
+  }
 }
 
 beacon_door_encounter_logic() {
@@ -1788,8 +1875,9 @@ lower_cargo_container() {
   var_9 = common_scripts\utility::array_combine(var_9, var_8);
   var_9 = common_scripts\utility::array_combine(var_9, var_7);
 
-  foreach(var_11 in var_9)
+  foreach(var_11 in var_9) {
   var_11 linkto(var_1, "j_Base_Wire_07");
+  }
 
   var_13 = getent("crane_container_bad_place", "targetname");
   badplace_brush("crane_lower_spot", 0, var_13, "axis");
@@ -1797,14 +1885,17 @@ lower_cargo_container() {
   wait(var_0 + 1);
   badplace_delete("crane_lower_spot");
 
-  if(isDefined(var_13))
+  if(isDefined(var_13)) {
     var_13 delete();
+  }
 
-  foreach(var_11 in var_9)
+  foreach(var_11 in var_9) {
   var_11 unlink();
+  }
 
-  foreach(var_17 in var_7)
+  foreach(var_17 in var_7) {
   var_17 disconnectpaths();
+  }
 }
 
 lower_cargo_container_sfx() {
@@ -1846,8 +1937,9 @@ raise_cargo_container() {
   var_9 wait_for_players_to_enter_container(var_8);
   var_9 thread update_player_in_container_status();
 
-  foreach(var_11 in var_5)
+  foreach(var_11 in var_5) {
   var_11.unresolved_collision_func = ::crane_unresolved_collision;
+  }
 
   level notify("crane_started");
   common_scripts\utility::flag_set("everyone_in_cargo_container");
@@ -1862,8 +1954,9 @@ raise_cargo_container() {
   var_7 = common_scripts\utility::array_combine(var_7, var_6);
   var_7 = common_scripts\utility::array_combine(var_7, var_5);
 
-  foreach(var_16 in var_7)
+  foreach(var_16 in var_7) {
   var_16 linkto(var_8);
+  }
 
   thread update_override_info((659, 1494, 1024.13), (0, 90, 0));
   maps\mp\_utility::delaythread(30, ::crane_walls_hide, 1);
@@ -1879,8 +1972,9 @@ raise_cargo_container() {
   maps\mp\alien\_achievement_dlc2::update_blocker_achievements("blocker_cargo");
   badplace_delete("crane_lower_spot");
 
-  foreach(var_11 in var_6)
+  foreach(var_11 in var_6) {
   var_11 disconnectpaths();
+  }
 
   level notify("beacon_starting_topdeck");
   common_scripts\utility::flag_set("players_on_top_deck");
@@ -1906,8 +2000,9 @@ disable_cargo_door_drill_spots() {
 
   foreach(var_2 in level.stronghold_hive_locs) {
     if(isDefined(var_2.target) && (var_2.target == "door_hive_7" || var_2.target == "door_hive_8")) {
-      if(isDefined(var_2.icon))
+      if(isDefined(var_2.icon)) {
         var_2.icon destroy();
+      }
 
       var_2 makeunusable();
       var_2 sethintstring("");
@@ -1939,16 +2034,19 @@ teleport_player_to_spot(var_0, var_1) {
     self.teleport_overlay.alpha = 0;
     wait 1;
 
-    if(isDefined(self.teleport_overlay))
+    if(isDefined(self.teleport_overlay)) {
       self.teleport_overlay destroy();
+    }
   }
 
   maps\mp\_utility::clearlowermessage("cargo_teleport");
 
-  if(isDefined(self.reviveent))
+  if(isDefined(self.reviveent)) {
     thread wait_for_spawn_and_remove_forceteleport();
-  else
+  }
+  else {
     self.forceteleportorigin = undefined;
+  }
 }
 
 wait_for_spawn_and_remove_forceteleport() {
@@ -2007,13 +2105,15 @@ teleport_drill_to_container_if_needed() {
     var_1 = (432, 1487, 1033);
     var_2 = (0, 0, 0);
 
-    if(isDefined(level.drill_linked_to_container))
+    if(isDefined(level.drill_linked_to_container)) {
       var_0 = 1;
+    }
 
     if(isDefined(level.drill_carrier)) {
       foreach(var_4 in level.players) {
-        if(level.drill_carrier == var_4)
+        if(level.drill_carrier == var_4) {
           var_0 = 1;
+        }
       }
     }
 
@@ -2045,10 +2145,12 @@ teleport_player_to_top_deck(var_0) {
         }
 
         if(canspawn(var_5) && !positionwouldtelefrag(var_5)) {
-          if(isDefined(var_0) && var_0 != self)
+          if(isDefined(var_0) && var_0 != self) {
             teleport_player_to_spot(var_5, var_0);
-          else
+          }
+          else {
             teleport_player_to_spot(var_5);
+          }
 
           var_3 = 1;
           break;
@@ -2070,8 +2172,9 @@ teleport_player_if_not_on_top_deck() {
     foreach(var_1 in level.players) {
       var_2 = var_1;
 
-      if(isDefined(var_1.reviveent))
+      if(isDefined(var_1.reviveent)) {
         var_2 = var_1.reviveent;
+      }
 
       if(!isDefined(var_1.forceteleportorigin) && var_2.origin[2] < 1000) {
         var_1 thread teleport_player_to_top_deck(var_2);
@@ -2113,12 +2216,14 @@ cargo_activate_crane_hint() {
 crane_walls_hide(var_0) {
   var_1 = getEntArray("cargo_container_walls", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 notsolid();
+  }
 
   if(maps\mp\alien\_utility::is_true(var_0)) {
-    foreach(var_3 in var_1)
+    foreach(var_3 in var_1) {
     var_3 delete();
+    }
   }
 }
 
@@ -2143,22 +2248,26 @@ wait_for_players_to_enter_container(var_0) {
   for(;;) {
     self waittill("trigger", var_7);
 
-    if(!maps\mp\alien\_utility::is_true(var_7.on_container))
+    if(!maps\mp\alien\_utility::is_true(var_7.on_container)) {
       var_7.on_container = 1;
+    }
 
     var_8 = 1;
     var_9 = 0;
 
     foreach(var_7 in level.players) {
-      if(!var_7 isonground() || !maps\mp\alien\_utility::is_true(var_7.on_container) || !var_7 istouching(self) || distance(var_7.origin, var_0.origin) > 125)
+      if(!var_7 isonground() || !maps\mp\alien\_utility::is_true(var_7.on_container) || !var_7 istouching(self) || distance(var_7.origin, var_0.origin) > 125) {
         var_8 = 0;
+      }
 
-      if(isDefined(level.drill_carrier) && level.drill_carrier == var_7)
+      if(isDefined(level.drill_carrier) && level.drill_carrier == var_7) {
         var_9 = 1;
+      }
     }
 
-    if(!(var_9 || isDefined(level.drill_linked_to_container)))
+    if(!(var_9 || isDefined(level.drill_linked_to_container))) {
       var_8 = 0;
+    }
 
     if(var_8) {
       level.all_players_on_container = 1;
@@ -2195,10 +2304,12 @@ beacon_play_sound_on_moving_tag(var_0, var_1, var_2) {
     wait 0.1;
     var_3 playsoundonmovingent(var_0);
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       wait(var_2);
-    else
+    }
+    else {
       wait 10;
+    }
 
     var_3 delete();
   }
@@ -2207,8 +2318,9 @@ beacon_play_sound_on_moving_tag(var_0, var_1, var_2) {
 player_death_trigger_monitor() {
   var_0 = getEntArray("player_drill_death", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread _death_trigger_monitor();
+  }
 }
 
 _death_trigger_monitor() {
@@ -2247,11 +2359,13 @@ beacon_intro_music_play() {
       var_1 stoplocalsound("us_spawn_music");
 
       if(!level.splitscreen || level.splitscreen && !isDefined(level.playedbeaconstartingmusic)) {
-        if(!self issplitscreenplayer() || self issplitscreenplayerprimary())
+        if(!self issplitscreenplayer() || self issplitscreenplayerprimary()) {
           level thread maps\mp\alien\_music_and_dialog::play_alien_music("mus_alien_dlc2_beacon_intro");
+        }
 
-        if(level.splitscreen)
+        if(level.splitscreen) {
           level.playedbeaconstartingmusic = 1;
+        }
       }
 
       continue;
@@ -2424,8 +2538,9 @@ beacon_warn_pipes(var_0) {
   var_3 = 15000;
   var_4 = gettime();
 
-  if(!isDefined(level.next_pipe_vo_time))
+  if(!isDefined(level.next_pipe_vo_time)) {
     level.next_pipe_vo_time = var_4 + randomintrange(var_3, var_3 + 2000);
+  }
   else if(var_4 < level.next_pipe_vo_time) {
     return;
   }
@@ -2460,14 +2575,17 @@ playkrakenvo(var_0) {
   if(!soundexists(var_2.vo_prefix + var_0)) {
     return;
   }
-  if(var_0 == "warn_metal")
+  if(var_0 == "warn_metal") {
     wait 5.0;
+  }
 
-  if(var_0 == "kraken_weak")
+  if(var_0 == "kraken_weak") {
     wait 5.0;
+  }
 
-  if(var_0 == "warn_emp")
+  if(var_0 == "warn_emp") {
     wait 5.0;
+  }
 
   var_3 = var_2.vo_prefix + var_0;
   var_2 maps\mp\alien\_music_and_dialog_dlc::play_vo_on_player(var_3, "high", 10);
@@ -2492,8 +2610,9 @@ playkrakenattackvo() {
   var_3 = 20000;
   var_4 = gettime();
 
-  if(!isDefined(level.next_kraken_attack_vo_time))
+  if(!isDefined(level.next_kraken_attack_vo_time)) {
     level.next_kraken_attack_vo_time = var_4 + randomintrange(var_3, var_3 + 2000);
+  }
   else if(var_4 < level.next_kraken_attack_vo_time) {
     return;
   }
@@ -2503,11 +2622,13 @@ playkrakenattackvo() {
 }
 
 beacon_customprematchperiod() {
-  if(!maps\mp\alien\_utility::is_true(level.introscreen_done))
+  if(!maps\mp\alien\_utility::is_true(level.introscreen_done)) {
     level.prematchperiod = 10;
+  }
 
-  while(level.players.size == 0)
+  while(level.players.size == 0) {
     wait 0.05;
+  }
 
   foreach(var_1 in level.players) {
     var_1 maps\mp\_utility::freezecontrolswrapper(1);
@@ -2524,8 +2645,9 @@ beacon_customprematchperiod() {
       level.players[var_3] maps\mp\_utility::freezecontrolswrapper(0);
       level.players[var_3] enableweapons();
 
-      if(!isDefined(level.players[var_3].pers["team"]))
+      if(!isDefined(level.players[var_3].pers["team"])) {
         continue;
+      }
     }
 
     return;
@@ -2534,18 +2656,21 @@ beacon_customprematchperiod() {
   if(level.prematchperiod > 0) {
     var_1 = level wait_for_first_player_connect();
 
-    if(maps\mp\alien\_intro_sequence::intro_sequence_enabled())
+    if(maps\mp\alien\_intro_sequence::intro_sequence_enabled()) {
       level thread maps\mp\alien\_intro_sequence::play_intro_sequence(var_1);
+    }
 
     level thread show_introscreen_text();
 
-    if(isDefined(level.intro_dialogue_func))
+    if(isDefined(level.intro_dialogue_func)) {
       level thread[[level.intro_dialogue_func]]();
+    }
 
     wait(level.prematchperiod - 3);
 
-    if(isDefined(level.postintroscreenfunc))
+    if(isDefined(level.postintroscreenfunc)) {
       [[level.postintroscreenfunc]]();
+    }
 
     level notify("introscreen_over");
     level.introscreen_done = 1;
@@ -2558,18 +2683,21 @@ beacon_customprematchperiod() {
     level.players[var_3] maps\mp\_utility::freezecontrolswrapper(0);
     level.players[var_3] enableweapons();
 
-    if(!isDefined(level.players[var_3].pers["team"]))
+    if(!isDefined(level.players[var_3].pers["team"])) {
       continue;
+    }
   }
 }
 
 wait_for_first_player_connect() {
   var_0 = undefined;
 
-  if(level.players.size == 0)
+  if(level.players.size == 0) {
     level waittill("connected", var_0);
-  else
+  }
+  else {
     var_0 = level.players[0];
+  }
 
   return var_0;
 }
@@ -2606,8 +2734,9 @@ beacon_non_player_drill_plant_check() {
 beacon_get_alien_model(var_0) {
   var_1 = level.alien_types[var_0].attributes["model"];
 
-  if(isDefined(level.kraken))
+  if(isDefined(level.kraken)) {
     var_1 = var_1 + "_lowlod";
+  }
 
   return var_1;
 }
@@ -2615,20 +2744,24 @@ beacon_get_alien_model(var_0) {
 beacon_cangive_weapon_handler_func(var_0, var_1, var_2, var_3) {
   var_4 = 0;
 
-  if(self hasweapon("aliensoflam_mp"))
+  if(self hasweapon("aliensoflam_mp")) {
     var_4++;
+  }
 
-  if(self.hasriotshield || self.hasriotshieldequipped)
+  if(self.hasriotshield || self.hasriotshieldequipped) {
     var_4++;
+  }
 
   var_5 = self getcurrentweapon();
   var_6 = 0;
 
-  if(issubstr(var_5, "aliendlc11"))
+  if(issubstr(var_5, "aliendlc11")) {
     var_6 = 1;
+  }
 
-  if(var_6 && var_0.size + 1 > var_3 + var_4)
+  if(var_6 && var_0.size + 1 > var_3 + var_4) {
     return 0;
+  }
 
   return 1;
 }
@@ -2636,15 +2769,17 @@ beacon_cangive_weapon_handler_func(var_0, var_1, var_2, var_3) {
 beacon_give_weapon_handler_func(var_0) {
   var_1 = self getcurrentweapon();
 
-  if(issubstr(var_1, "aliendlc11"))
+  if(issubstr(var_1, "aliendlc11")) {
     return 0;
+  }
 
   return undefined;
 }
 
 beacon_hive_icon_override_func() {
-  if(isDefined(self.target) && self.target == "cargo_area_main")
+  if(isDefined(self.target) && self.target == "cargo_area_main") {
     return 1;
+  }
 
   return 0;
 }
@@ -2652,8 +2787,9 @@ beacon_hive_icon_override_func() {
 disable_lab_doors() {
   foreach(var_1 in level.stronghold_hive_locs) {
     if(isDefined(var_1.target) && (var_1.target == "door_hive_10" || var_1.target == "door_hive_9")) {
-      if(isDefined(var_1.icon))
+      if(isDefined(var_1.icon)) {
         var_1.icon destroy();
+      }
 
       var_1 makeunusable();
       var_1 sethintstring("");
@@ -2692,8 +2828,9 @@ fix_beacon_jump_exploit() {
   var_1 = var_0.origin;
   var_0.origin = (-224, -608, 118);
 
-  while(level.current_hive_name != "door_hive_1_post" && level.current_hive_name != "well_deck_2_post")
+  while(level.current_hive_name != "door_hive_1_post" && level.current_hive_name != "well_deck_2_post") {
     wait 0.25;
+  }
 
   var_0.origin = var_1;
 }
@@ -2718,19 +2855,23 @@ fix_cargo_leftovers() {
     if(isDefined(var_6.crafted_items["alien_crafting_hypno_trap"])) {
       var_7 = var_6.crafted_items["alien_crafting_hypno_trap"];
 
-      if(!isarray(var_7))
+      if(!isarray(var_7)) {
         var_4 = common_scripts\utility::add_to_array(var_4, var_7);
-      else
+      }
+      else {
         var_4 = common_scripts\utility::array_combine(var_4, var_7);
+      }
     }
 
     if(isDefined(var_6.crafted_items["alien_crafting_tesla_trap"])) {
       var_7 = var_6.crafted_items["alien_crafting_tesla_trap"];
 
-      if(!isarray(var_7))
+      if(!isarray(var_7)) {
         var_4 = common_scripts\utility::add_to_array(var_4, var_7);
-      else
+      }
+      else {
         var_4 = common_scripts\utility::array_combine(var_4, var_7);
+      }
     }
   }
 
@@ -2739,14 +2880,16 @@ fix_cargo_leftovers() {
   var_4 = common_scripts\utility::array_combine(var_4, level.balldrones);
 
   foreach(var_10 in var_4) {
-    if(isDefined(var_10) && isDefined(var_10.origin) && !isDefined(var_10.carriedby) && var_10.origin[2] < 925)
+    if(isDefined(var_10) && isDefined(var_10.origin) && !isDefined(var_10.carriedby) && var_10.origin[2] < 925) {
       var_10 notify("death");
+    }
   }
 }
 
 should_enable_crafting() {
-  if(maps\mp\alien\_utility::is_chaos_mode())
+  if(maps\mp\alien\_utility::is_chaos_mode()) {
     return 0;
+  }
 
   return 1;
 }

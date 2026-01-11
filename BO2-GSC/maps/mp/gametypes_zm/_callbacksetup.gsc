@@ -94,8 +94,9 @@ codecallback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, f
 
 codecallback_faceeventnotify(notify_msg, ent) {
   if(isDefined(ent) && isDefined(ent.do_face_anims) && ent.do_face_anims) {
-    if(isDefined(level.face_event_handler) && isDefined(level.face_event_handler.events[notify_msg]))
+    if(isDefined(level.face_event_handler) && isDefined(level.face_event_handler.events[notify_msg])) {
       ent sendfaceevent(level.face_event_handler.events[notify_msg]);
+    }
   }
 }
 

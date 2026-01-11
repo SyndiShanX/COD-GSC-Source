@@ -187,8 +187,9 @@ validate_crate_type(killstreak_name, weapon_name, crate_type_name) {
       }
       crate_ents = getEntArray("care_package", "script_noteworthy");
       for(j = 0; j < crate_ents.size; j++) {
-        if(!isDefined(crate_ents[j].crateType))
+        if(!isDefined(crate_ents[j].crateType)) {
           continue;
+        }
         if(isDefined(crate_ents[j].crateType.name)) {
           if(crate_ents[j].crateType.name == crate_type_name) {
             return true;
@@ -200,8 +201,9 @@ validate_crate_type(killstreak_name, weapon_name, crate_type_name) {
   return false;
 }
 giveCrateItem(crate) {
-  if(!IsAlive(self))
+  if(!IsAlive(self)) {
     return;
+  }
   [[crate.crateType.giveFunction]](crate.crateType.name);
 }
 giveCrateKillstreak(killstreak) {
@@ -294,31 +296,39 @@ useSupplyDropMarker() {
       supplyDropWeapon = currentWeapon;
     }
   }
-  if(!isDefined(supplyDropWeapon))
+  if(!isDefined(supplyDropWeapon)) {
     return false;
-  if(self HasWeapon(supplyDropWeapon) && !self GetAmmoCount(supplyDropWeapon))
+  }
+  if(self HasWeapon(supplyDropWeapon) && !self GetAmmoCount(supplyDropWeapon)) {
     self TakeWeapon(supplyDropWeapon);
-  if(self HasWeapon(supplyDropWeapon) || self GetAmmoCount(supplyDropWeapon))
+  }
+  if(self HasWeapon(supplyDropWeapon) || self GetAmmoCount(supplyDropWeapon)) {
     return false;
+  }
   return true;
 }
 isSupplyDropGrenadeAllowed(hardpointType, killstreakWeapon) {
-  if(!isDefined(killstreakWeapon))
+  if(!isDefined(killstreakWeapon)) {
     killstreakWeapon = hardpointType;
+  }
   if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) {
-    if(isDefined(self.lastStand) && self.lastStand && isDefined(self.laststandpistol) && self hasWeapon(self.laststandpistol))
+    if(isDefined(self.lastStand) && self.lastStand && isDefined(self.laststandpistol) && self hasWeapon(self.laststandpistol)) {
       self switchToWeapon(self.laststandpistol);
-    else if(isDefined(self.lastNonKillstreakWeapon) && self.lastNonKillstreakWeapon != killstreakWeapon && self.lastNonKillstreakWeapon != "none")
+    }
+    else if(isDefined(self.lastNonKillstreakWeapon) && self.lastNonKillstreakWeapon != killstreakWeapon && self.lastNonKillstreakWeapon != "none") {
       self SwitchToWeapon(self.lastNonKillstreakWeapon);
-    else if(isDefined(self.lastDroppableWeapon) && self.lastDroppableWeapon != killstreakWeapon && self.lastDroppableWeapon != "none")
+    }
+    else if(isDefined(self.lastDroppableWeapon) && self.lastDroppableWeapon != killstreakWeapon && self.lastDroppableWeapon != "none") {
       self SwitchToWeapon(self.lastDroppableWeapon);
+    }
     return false;
   }
   return true;
 }
 useKillstreakSupplyDrop(hardpointType) {
-  if(self isSupplyDropGrenadeAllowed(hardpointType, "supplydrop_mp") == false)
+  if(self isSupplyDropGrenadeAllowed(hardpointType, "supplydrop_mp") == false) {
     return false;
+  }
   self thread refCountDecChopperOnDisconnect(self.team);
   result = self useSupplyDropMarker();
   self notify("supply_drop_marker_done");
@@ -328,8 +338,9 @@ useKillstreakSupplyDrop(hardpointType) {
   return result;
 }
 use_killstreak_death_machine(hardpointType) {
-  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false)
+  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) {
     return false;
+  }
   weapon = "minigun_mp";
   currentWeapon = self GetCurrentWeapon();
   if(isSupplyDropWeapon(currentWeapon) || isDefined(level.grenade_array[currentWeapon]) || isDefined(level.inventory_array[currentWeapon])) {
@@ -348,8 +359,9 @@ use_killstreak_death_machine(hardpointType) {
   return true;
 }
 use_killstreak_grim_reaper(hardpointType) {
-  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false)
+  if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) {
     return false;
+  }
   weapon = "m202_flash_mp";
   currentWeapon = self GetCurrentWeapon();
   if(isSupplyDropWeapon(currentWeapon) || isDefined(level.grenade_array[currentWeapon]) || isDefined(level.inventory_array[currentWeapon])) {
@@ -420,8 +432,9 @@ supplyDropWatcher(supplyDropWeapon) {
   team = self.team;
   self thread checkWeaponChange(team);
   self thread supplyDropGrenadePullWatcher();
-  if(self maps\mp\_killstreakrules::killstreakStart("supply_drop_mp", team) == false)
+  if(self maps\mp\_killstreakrules::killstreakStart("supply_drop_mp", team) == false) {
     return;
+  }
   self waittill("grenade_fire", weapon, weapname);
   if(isSupplyDropWeapon(weapname)) {
     self thread doSupplyDrop(weapon, weapname, self);
@@ -436,8 +449,9 @@ supplyDropGrenadeTimeout(team) {
   self endon("stationary");
   GRENADE_LIFETIME = 10;
   wait(GRENADE_LIFETIME);
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self notify("grenade_timeout");
   maps\mp\_killstreakrules::killstreakStop("supply_drop_mp", team);
   self delete();
@@ -606,8 +620,9 @@ crateDeactivate() {
 }
 ownerTeamChangeWatcher() {
   self endon("death");
-  if(!level.teamBased || !isDefined(self.owner))
+  if(!level.teamBased || !isDefined(self.owner)) {
     return;
+  }
   self.owner waittill("joined_team");
   self.owner = undefined;
 }
@@ -630,8 +645,9 @@ dropCratesToGround(origin, radius) {
 }
 dropCrateToGround() {
   self endon("death");
-  if(isDefined(self.droppingToGround))
+  if(isDefined(self.droppingToGround)) {
     return;
+  }
   self.droppingToGround = true;
   dropEverythingTouchingCrate(self.origin);
   self crateDeactivate();
@@ -647,8 +663,9 @@ cratespawn(weaponname, owner, team, drop_origin, drop_angle) {
   crate SetTeam(team);
   crate SetOwner(owner);
   crate.script_noteworthy = "care_package";
-  if(!level.teamBased || (isDefined(owner) && owner.team == team))
+  if(!level.teamBased || (isDefined(owner) && owner.team == team)) {
     crate.owner = owner;
+  }
   crate thread ownerTeamChangeWatcher();
   crate setModel(level.crateModelFriendly);
   crate setEnemyModel(level.crateModelEnemy);
@@ -867,14 +884,18 @@ crateKill() {
   numFramesStationary = 0;
   while(true) {
     vel = 0;
-    if(isDefined(self.velocity))
+    if(isDefined(self.velocity)) {
       vel = abs(self.velocity[2]);
-    if(vel > killThreshold)
+    }
+    if(vel > killThreshold) {
       self is_touching_crate();
-    if(vel < stationaryThreshold)
+    }
+    if(vel < stationaryThreshold) {
       numFramesStationary++;
-    else
+    }
+    else {
       numFramesStationary = 0;
+    }
     if(numFramesStationary >= maxFramesTillStationary) {
       break;
     }
@@ -888,17 +909,21 @@ crateDropToGroundKill() {
     players = get_players();
     doTrace = false;
     for(i = 0; i < players.size; i++) {
-      if(players[i].sessionstate != "playing")
+      if(players[i].sessionstate != "playing") {
         continue;
-      if(players[i].team == "spectator")
+      }
+      if(players[i].team == "spectator") {
         continue;
+      }
       self is_equipment_touching_crate(players[i]);
-      if(!IsAlive(players[i]))
+      if(!IsAlive(players[i])) {
         continue;
+      }
       flattenedSelfOrigin = (self.origin[0], self.origin[1], 0);
       flattenedPlayerOrigin = (players[i].origin[0], players[i].origin[1], 0);
-      if(DistanceSquared(flattenedSelfOrigin, flattenedPlayerOrigin) > 64 * 64)
+      if(DistanceSquared(flattenedSelfOrigin, flattenedPlayerOrigin) > 64 * 64) {
         continue;
+      }
       doTrace = true;
       break;
     }
@@ -932,10 +957,12 @@ crateDropToGroundTrace(start) {
   trace = bulletTrace(start, end, true, self, true, true);
   if(isDefined(trace["entity"]) && IsPlayer(trace["entity"]) && IsAlive(trace["entity"])) {
     player = trace["entity"];
-    if(player.sessionstate != "playing")
+    if(player.sessionstate != "playing") {
       return;
-    if(player.team == "spectator")
+    }
+    if(player.team == "spectator") {
       return;
+    }
     if(DistanceSquared(start, trace["position"]) < 12 * 12 || self IsTouching(player)) {
       player DoDamage(player.health + 1, player.origin, self.owner, self, 0, "MOD_HIT_BY_OBJECT", 0, "supplydrop_mp");
       player playSound("mpl_supply_crush");
@@ -1002,12 +1029,15 @@ useEntOwnerDeathWaiter(owner) {
 crateUseThink() {
   while(isDefined(self)) {
     self waittill("trigger", player);
-    if(!isAlive(player))
+    if(!isAlive(player)) {
       continue;
-    if(!player isOnGround())
+    }
+    if(!player isOnGround()) {
       continue;
-    if(isDefined(self.owner) && self.owner == player)
+    }
+    if(isDefined(self.owner) && self.owner == player) {
       continue;
+    }
     useEnt = self spawnUseEnt();
     result = false;
     if(isDefined(self.hacker)) {
@@ -1059,14 +1089,18 @@ crateUseThinkOwner() {
   self endon("joined_team");
   while(isDefined(self)) {
     self waittill("trigger", player);
-    if(!isAlive(player))
+    if(!isAlive(player)) {
       continue;
-    if(!player isOnGround())
+    }
+    if(!player isOnGround()) {
       continue;
-    if(!isDefined(self.owner))
+    }
+    if(!isDefined(self.owner)) {
       continue;
-    if(self.owner != player)
+    }
+    if(self.owner != player) {
       continue;
+    }
     result = self useHoldThink(player, level.crateOwnerUseTime);
     if(result) {
       self notify("captured", player);
@@ -1095,8 +1129,9 @@ useHoldThink(player, useTime) {
   if(isDefined(self)) {
     self.inUse = false;
   }
-  if(isDefined(result) && result)
+  if(isDefined(result) && result) {
     return true;
+  }
   return false;
 }
 useHoldThinkLoop(player) {
@@ -1155,8 +1190,9 @@ personalUseBar(object) {
   lastRate = -1;
   while(isAlive(self) && isDefined(object) && object.inUse && !level.gameEnded) {
     if(lastRate != object.useRate) {
-      if(object.curProgress > object.useTime)
+      if(object.curProgress > object.useTime) {
         object.curProgress = object.useTime;
+      }
       self.useBar updateBar(object.curProgress / object.useTime, (1000 / object.useTime) * object.useRate);
       if(!object.useRate) {
         self.useBar hideElem();
@@ -1205,8 +1241,9 @@ getDropDirection() {
 }
 getNextDropDirection(drop_direction, degrees) {
   drop_direction = (0, drop_direction[1] + degrees, 0);
-  if(drop_direction[1] >= 360)
+  if(drop_direction[1] >= 360) {
     drop_direction = (0, drop_direction[1] - 360, 0);
+  }
   return drop_direction;
 }
 getHeliStart(drop_origin, drop_direction) {
@@ -1220,10 +1257,12 @@ getHeliStart(drop_origin, drop_direction) {
 getHeliEnd(drop_origin, drop_direction) {
   pathRandomness = 150;
   dist = -1 * getDvarIntDefault(#"scr_supplydropOutgoingDistance", 15000);
-  if(RandomIntRange(0, 2) == 0)
+  if(RandomIntRange(0, 2) == 0) {
     turn = RandomIntRange(60, 121);
-  else
+  }
+  else {
     turn = -1 * RandomIntRange(60, 121);
+  }
   direction = drop_direction + (0, turn, 0);
   end_origin = drop_origin + vector_multiply(anglesToForward(direction), dist);
   end_origin += ((randomfloat(2) - 1) * pathRandomness, (randomfloat(2) - 1) * pathRandomness, 0);
@@ -1305,8 +1344,9 @@ heliDeliverCrate(origin, weaponname, owner, team) {
   killCamEnt linkTo(chopper);
   Target_SetTurretAquire(self, false);
   chopper thread SAMTurretWatcher(drop_origin);
-  if(!isDefined(chopper))
+  if(!isDefined(chopper)) {
     return;
+  }
   chopper thread heliDropCrate(weaponname, owner, rear_hatch_offset_local, killCamEnt);
   chopper endon("death");
   chopper thread maps\mp\_airsupport::followPath(goalPath.path, "drop_goal", true);
@@ -1371,8 +1411,9 @@ heliDestroyed() {
     }
     wait(0.05);
   }
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self SetSpeed(25, 5);
   self thread lbSpin(RandomIntRange(180, 220));
   wait(RandomFloatRange(.5, 1.5));
@@ -1405,4 +1446,3 @@ refCountDecChopperOnDisconnect(team) {
   self waittill("disconnecct");
   maps\mp\_killstreakrules::killstreakStop("supply_drop_mp", team);
 }
-

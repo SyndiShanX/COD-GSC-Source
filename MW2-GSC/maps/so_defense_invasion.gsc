@@ -111,8 +111,9 @@ so_defense_init() {
 
   // Remove unwanted sentries
   sentries = getEntArray("misc_turret", "classname");
-  foreach(sentry in sentries)
+  foreach(sentry in sentries) {
   sentry Delete();
+  }
   common_scripts\_sentry::main();
 
   // Attacker Accuracy modifiers for sentry turrets.
@@ -221,8 +222,9 @@ so_defense_challenge_prep() {
 }
 
 so_defense_wave_1(force_wave) {
-  if(!so_defense_can_do_wave(1, force_wave))
+  if(!so_defense_can_do_wave(1, force_wave)) {
     return;
+  }
 
   so_defense_announce_wave_start("SO_DEFENSE_INVASION_WAVE_1", 10, true);
   thread hud_display_wavecount(1);
@@ -237,8 +239,9 @@ so_defense_wave_1(force_wave) {
 }
 
 so_defense_wave_2(force_wave) {
-  if(!so_defense_can_do_wave(1, force_wave))
+  if(!so_defense_can_do_wave(1, force_wave)) {
     return;
+  }
 
   so_defense_announce_wave_start("SO_DEFENSE_INVASION_WAVE_2", 10);
   thread hud_display_wavecount(2);
@@ -254,8 +257,9 @@ so_defense_wave_2(force_wave) {
 }
 
 so_defense_wave_3(force_wave) {
-  if(!so_defense_can_do_wave(1, force_wave))
+  if(!so_defense_can_do_wave(1, force_wave)) {
     return;
+  }
 
   so_defense_announce_wave_start("SO_DEFENSE_INVASION_WAVE_3", 10);
   thread hud_display_wavecount(3);
@@ -273,8 +277,9 @@ so_defense_wave_3(force_wave) {
 }
 
 so_defense_wave_4(force_wave) {
-  if(!so_defense_can_do_wave(2, force_wave))
+  if(!so_defense_can_do_wave(2, force_wave)) {
     return;
+  }
 
   so_defense_announce_wave_start("SO_DEFENSE_INVASION_WAVE_4", 10);
   thread hud_display_wavecount(4);
@@ -292,8 +297,9 @@ so_defense_wave_4(force_wave) {
 }
 
 so_defense_wave_5(force_wave) {
-  if(!so_defense_can_do_wave(3, force_wave))
+  if(!so_defense_can_do_wave(3, force_wave)) {
     return;
+  }
 
   so_defense_announce_wave_start("SO_DEFENSE_INVASION_WAVE_5", 10);
   thread hud_display_wavecount(5);
@@ -327,8 +333,9 @@ so_defense_announce_wave_start(wave, timer, set_start_time) {
   level.so_progress_goal_status = "none";
 
   // Reset the hunter dialog throttle so that it will happen on the first wave again.
-  if(isDefined(level.hunter_dialog_throttle))
+  if(isDefined(level.hunter_dialog_throttle)) {
     level.hunter_dialog_time = gettime() - level.hunter_dialog_throttle - 1;
+  }
 
   // Reset the stinger missile dialog throttle so that it will wait a while before activating.
   stringer_dialog_throttle_reset();
@@ -338,10 +345,12 @@ so_defense_announce_start_music(wave) {
   // Gives time for the snare drum SFX to complete.
   wait 0.75;
 
-  if(wave == "SO_DEFENSE_INVASION_WAVE_5")
+  if(wave == "SO_DEFENSE_INVASION_WAVE_5") {
     thread music_loop("so_defense_invasion_finalwave_music", 114);
-  else
+  }
+  else {
     thread music_loop("so_defense_invasion_music", 191);
+  }
 }
 
 so_defense_announce_wave_complete() {
@@ -363,8 +372,9 @@ so_defense_challenge_complete() {
 }
 
 so_defense_can_do_wave(skill, force_wave) {
-  if(isDefined(force_wave) && force_wave)
+  if(isDefined(force_wave) && force_wave) {
     return true;
+  }
 
   return level.gameSkill >= skill;
 }

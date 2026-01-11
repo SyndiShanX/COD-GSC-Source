@@ -33,8 +33,9 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 1; var_1++)
+  for(var_1 = 0; var_1 < 1; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   return var_0;
 }
@@ -52,10 +53,12 @@ playcontrail() {
 playerisclose(var_0) {
   var_1 = playerisinfront(var_0);
 
-  if(var_1)
+  if(var_1) {
     var_2 = 1;
-  else
+  }
+  else {
     var_2 = -1;
+  }
 
   var_3 = common_scripts\utility::flat_origin(var_0.origin);
   var_4 = var_3 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_2 * 100000);
@@ -63,8 +66,9 @@ playerisclose(var_0) {
   var_6 = distance(var_3, var_5);
   var_7 = 3000;
 
-  if(isDefined(level.mig29_near_distance_override))
+  if(isDefined(level.mig29_near_distance_override)) {
     var_7 = level.mig29_near_distance_override;
+  }
 
   return var_6 < var_7;
 }
@@ -74,10 +78,12 @@ playerisinfront(var_0) {
   var_2 = vectornormalize(common_scripts\utility::flat_origin(level.player.origin) - var_0.origin);
   var_3 = vectordot(var_1, var_2);
 
-  if(var_3 > 0)
+  if(var_3 > 0) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 plane_sound_node() {
@@ -87,13 +93,15 @@ plane_sound_node() {
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("veh_mig29_dist_loop");
   var_1 = 0;
 
-  if(isDefined(self.script_parameters) && self.script_parameters == "play_additional_sound")
+  if(isDefined(self.script_parameters) && self.script_parameters == "play_additional_sound") {
     var_1 = 1;
+  }
 
   var_0 thread plane_passby_sfx(var_1);
 
-  while(playerisinfront(var_0))
+  while(playerisinfront(var_0)) {
     wait 0.05;
+  }
 
   wait 0.5;
   var_0 thread common_scripts\utility::play_sound_in_space("veh_mig29_sonic_boom");
@@ -106,13 +114,15 @@ plane_passby_sfx(var_0) {
   self endon("death");
   self endon("reached_end_node");
 
-  while(!playerisclose(self))
+  while(!playerisclose(self)) {
     wait 0.05;
+  }
 
   thread maps\_utility::play_sound_on_entity("veh_mig29_passby");
 
-  if(var_0)
+  if(var_0) {
     thread maps\_utility::play_sound_on_entity("veh_mig29_passby_layer");
+  }
 }
 
 plane_bomb_node() {
@@ -129,15 +139,17 @@ plane_bomb_node() {
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_2++;
 
-    if(var_2 == 3)
+    if(var_2 == 3) {
       var_2 = 1;
+    }
 
     var_1[var_3] thread maps\_utility::play_sound_on_entity("airstrike_explosion");
     var_4 = "plane_bomb_explosion" + var_2;
     var_5 = level._effect[var_4];
 
-    if(isDefined(level.plane_bomb_explosion_overrides) && isDefined(level.plane_bomb_explosion_overrides[var_4]))
+    if(isDefined(level.plane_bomb_explosion_overrides) && isDefined(level.plane_bomb_explosion_overrides[var_4])) {
       var_5 = level.plane_bomb_explosion_overrides[var_4];
+    }
 
     playFX(var_5, var_1[var_3].origin);
     wait(randomfloatrange(0.3, 1.2));
@@ -156,8 +168,9 @@ plane_bomb_cluster() {
   var_4 = anglestoup(var_1.angles) * -0.2;
   var_5 = [];
 
-  for(var_6 = 0; var_6 < 3; var_6++)
+  for(var_6 = 0; var_6 < 3; var_6++) {
     var_5[var_6] = (var_3[var_6] + var_4[var_6]) / 2;
+  }
 
   var_5 = (var_5[0], var_5[1], var_5[2]);
   var_5 = var_5 * 7000;
@@ -204,15 +217,17 @@ stop_sound(var_0) {
 }
 
 setmig29fxoverride(var_0, var_1) {
-  if(!isDefined(level.mig29_fx_override))
+  if(!isDefined(level.mig29_fx_override)) {
     level.mig29_fx_override = [];
+  }
 
   level.mig29_fx_override[var_0] = var_1;
 }
 
 buildmig29fx(var_0, var_1) {
-  if(isDefined(level.mig29_fx_override) && isDefined(level.mig29_fx_override[var_0]))
+  if(isDefined(level.mig29_fx_override) && isDefined(level.mig29_fx_override[var_0])) {
     var_1 = level.mig29_fx_override[var_0];
+  }
 
   level._effect[var_0] = loadfx(var_1);
 }

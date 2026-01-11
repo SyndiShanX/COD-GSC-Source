@@ -14,16 +14,19 @@
 #include clientscripts\mp\zombies\_zm_gump;
 
 statechange(clientnum, system, newstate) {
-  if(!isDefined(level._systemstates))
+  if(!isDefined(level._systemstates)) {
     level._systemstates = [];
+  }
 
-  if(!isDefined(level._systemstates[system]))
+  if(!isDefined(level._systemstates[system])) {
     level._systemstates[system] = spawnStruct();
+  }
 
   level._systemstates[system].state = newstate;
 
-  if(isDefined(level._systemstates[system].callback))
+  if(isDefined(level._systemstates[system].callback)) {
     [[level._systemstates[system].callback]](clientnum, newstate);
+  }
   else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
 
@@ -77,18 +80,21 @@ playerspawned(localclientnum) {
   if(!sessionmodeiszombiesgame()) {
   }
 
-  if(isDefined(level._faceanimcbfunc))
+  if(isDefined(level._faceanimcbfunc)) {
     self thread[[level._faceanimcbfunc]](localclientnum);
+  }
 }
 
 codecallback_gibevent(localclientnum, type, locations) {
-  if(isDefined(level._gibeventcbfunc))
+  if(isDefined(level._gibeventcbfunc)) {
     self thread[[level._gibeventcbfunc]](localclientnum, type, locations);
+  }
 }
 
 codecallback_precachegametype() {
-  if(isDefined(level.callbackprecachegametype))
+  if(isDefined(level.callbackprecachegametype)) {
     [[level.callbackprecachegametype]]();
+  }
 }
 
 codecallback_startgametype() {
@@ -114,8 +120,9 @@ entityspawned(localclientnum) {
 }
 
 entityshutdown_callback(localclientnum, entity) {
-  if(isDefined(level._entityshutdowncbfunc))
+  if(isDefined(level._entityshutdowncbfunc)) {
     [[level._entityshutdowncbfunc]](localclientnum, entity);
+  }
 }
 
 localclientchanged_callback(localclientnum) {
@@ -247,10 +254,12 @@ stunned_callback(localclientnum, set) {
 
   println("stunned_callback");
 
-  if(set)
+  if(set) {
     self notify("stunned");
-  else
+  }
+  else {
     self notify("not_stunned");
+  }
 }
 
 emp_callback(localclientnum, set) {
@@ -258,10 +267,12 @@ emp_callback(localclientnum, set) {
 
   println("emp_callback");
 
-  if(set)
+  if(set) {
     self notify("emp");
-  else
+  }
+  else {
     self notify("not_emp");
+  }
 }
 
 proximity_callback(localclientnum, set) {
@@ -269,8 +280,9 @@ proximity_callback(localclientnum, set) {
 }
 
 client_flag_debug(msg) {
-  if(getdvarintdefault("scr_client_flag_debug", 0) > 0)
+  if(getdvarintdefault("scr_client_flag_debug", 0) > 0) {
     println(msg);
+  }
 }
 
 client_flag_callback(localclientnum, flag, set) {
@@ -285,15 +297,17 @@ client_flag_callback(localclientnum, flag, set) {
   }
 
   if(isarray(level._client_flag_callbacks[self.type])) {
-    if(isDefined(level._client_flag_callbacks[self.type][flag]))
+    if(isDefined(level._client_flag_callbacks[self.type][flag])) {
       self thread[[level._client_flag_callbacks[self.type][flag]]](localclientnum, set);
+    }
   } else
     self thread[[level._client_flag_callbacks[self.type]]](localclientnum, flag, set);
 }
 
 client_flagasval_callback(localclientnum, val) {
-  if(isDefined(level._client_flagasval_callbacks) && isDefined(level._client_flagasval_callbacks[self.type]))
+  if(isDefined(level._client_flagasval_callbacks) && isDefined(level._client_flagasval_callbacks[self.type])) {
     self thread[[level._client_flagasval_callbacks[self.type]]](localclientnum, val);
+  }
 }
 
 codecallback_creatingcorpse(localclientnum, player) {
@@ -324,8 +338,9 @@ onfinalizeinitialization_callback(func) {
 addcallback(event, func) {
   assert(isDefined(event), "Trying to set a callback on an undefined event.");
 
-  if(!isDefined(level._callbacks) || !isDefined(level._callbacks[event]))
+  if(!isDefined(level._callbacks) || !isDefined(level._callbacks[event])) {
     level._callbacks[event] = [];
+  }
 
   level._callbacks[event] = add_to_array(level._callbacks[event], func, 0);
 }
@@ -335,8 +350,9 @@ callback(event) {
     for(i = 0; i < level._callbacks[event].size; i++) {
       callback = level._callbacks[event][i];
 
-      if(isDefined(callback))
+      if(isDefined(callback)) {
         self thread[[callback]]();
+      }
     }
   }
 }
@@ -395,6 +411,7 @@ prevent_round_switch_animation() {
 }
 
 chargeshotweaponsoundnotify(localclientnum, weaponname, chargeshotlevel) {
-  if(isDefined(level.sndchargeshot_func))
+  if(isDefined(level.sndchargeshot_func)) {
     self[[level.sndchargeshot_func]](localclientnum, weaponname, chargeshotlevel);
+  }
 }

@@ -23,8 +23,9 @@ main() {
     level.tilt_sky hide();
   }
 
-  if(getdvar("createfx") != "")
+  if(getdvar("createfx") != "") {
     thread create_fx_ent_setup();
+  }
 
   maps\_load::main();
   maps\_dynamic_run_speed::main();
@@ -201,18 +202,21 @@ obj_exfil() {
   objective_position(var_0, var_1.origin);
   common_scripts\utility::flag_wait("obj_exfil_complete");
 
-  if(common_scripts\utility::flag("player_at_silenthawk"))
+  if(common_scripts\utility::flag("player_at_silenthawk")) {
     objective_state(var_0, "done");
-  else
+  }
+  else {
     objective_state(var_0, "failed");
+  }
 }
 
 create_fx_ent_setup() {
   wait 2;
   var_0 = getEntArray("deck_intact_odin", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 
   var_4 = getent("island_antenna", "targetname");
   var_4.animname = "tilt_tower";
@@ -222,8 +226,9 @@ create_fx_ent_setup() {
   var_5 delete();
   var_7 = getEntArray("deck_damaged", "targetname");
 
-  foreach(var_2 in var_7)
+  foreach(var_2 in var_7) {
   var_2 movez(-4096, 0.05);
+  }
 
   var_10 = getEntArray("deck_clean", "targetname");
   maps\_utility::array_delete(var_10);

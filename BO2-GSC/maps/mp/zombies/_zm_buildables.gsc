@@ -29,11 +29,13 @@ init() {
   level.buildable_piece_count = 0;
   level._effect["building_dust"] = loadfx("maps/zombie/fx_zmb_buildable_assemble_dust");
 
-  if(isDefined(level.init_buildables))
+  if(isDefined(level.init_buildables)) {
     [[level.init_buildables]]();
+  }
 
-  if(isDefined(level.use_swipe_protection))
+  if(isDefined(level.use_swipe_protection)) {
     onplayerconnect_callback(::buildables_watch_swipes);
+  }
 }
 
 anystub_update_prompt(player) {
@@ -61,8 +63,9 @@ anystub_update_prompt(player) {
 }
 
 anystub_get_unitrigger_origin() {
-  if(isDefined(self.origin_parent))
+  if(isDefined(self.origin_parent)) {
     return self.origin_parent.origin;
+  }
 
   return self.origin;
 }
@@ -91,8 +94,9 @@ buildables_watch_swipes() {
     if(isDefined(trigger) && isDefined(trigger.stub.piece)) {
       piece = trigger.stub.piece;
 
-      if(!isDefined(piece.damage))
+      if(!isDefined(piece.damage)) {
         piece.damage = 0;
+      }
 
       piece.damage++;
 
@@ -101,8 +105,9 @@ buildables_watch_swipes() {
         piece maps\mp\zombies\_zm_buildables::piece_unspawn();
         self maps\mp\zombies\_zm_stats::increment_client_stat("cheat_total", 0);
 
-        if(isalive(self))
+        if(isalive(self)) {
           self playlocalsound(level.zmb_laugh_alias);
+        }
       }
     }
   }
@@ -115,24 +120,28 @@ explosiondamage(damage, pos) {
 }
 
 add_zombie_buildable(buildable_name, hint, building, bought) {
-  if(!isDefined(level.zombie_include_buildables))
+  if(!isDefined(level.zombie_include_buildables)) {
     level.zombie_include_buildables = [];
+  }
 
   if(isDefined(level.zombie_include_buildables) && !isDefined(level.zombie_include_buildables[buildable_name])) {
     return;
   }
   precachestring(hint);
 
-  if(isDefined(building))
+  if(isDefined(building)) {
     precachestring(building);
+  }
 
-  if(isDefined(bought))
+  if(isDefined(bought)) {
     precachestring(bought);
+  }
 
   buildable_struct = level.zombie_include_buildables[buildable_name];
 
-  if(!isDefined(level.zombie_buildables))
+  if(!isDefined(level.zombie_buildables)) {
     level.zombie_buildables = [];
+  }
 
   buildable_struct.hint = hint;
   buildable_struct.building = building;
@@ -143,8 +152,9 @@ add_zombie_buildable(buildable_name, hint, building, bought) {
   level.zombie_buildables[buildable_struct.name] = buildable_struct;
 
   if(!level.createfx_enabled) {
-    if(level.zombie_buildables.size == 1)
+    if(level.zombie_buildables.size == 1) {
       register_clientfields();
+    }
   }
 }
 
@@ -161,10 +171,12 @@ register_clientfields() {
 }
 
 set_buildable_clientfield(slot, newvalue) {
-  if(isDefined(level.buildable_slot_count))
+  if(isDefined(level.buildable_slot_count)) {
     self setclientfieldtoplayer(level.buildable_clientfields[slot], newvalue);
-  else
+  }
+  else {
     self setclientfieldtoplayer("buildable", newvalue);
+  }
 }
 
 clear_buildable_clientfield(slot) {
@@ -172,8 +184,9 @@ clear_buildable_clientfield(slot) {
 }
 
 include_zombie_buildable(buiildable_struct) {
-  if(!isDefined(level.zombie_include_buildables))
+  if(!isDefined(level.zombie_include_buildables)) {
     level.zombie_include_buildables = [];
+  }
 
   println("ZM >> Including buildable - " + buiildable_struct.name);
 
@@ -183,15 +196,17 @@ include_zombie_buildable(buiildable_struct) {
 generate_zombie_buildable_piece(buildablename, modelname, radius, height, drop_offset, hud_icon, onpickup, ondrop, use_spawn_num, part_name, can_reuse, client_field_state, buildable_slot) {
   precachemodel(modelname);
 
-  if(isDefined(hud_icon))
+  if(isDefined(hud_icon)) {
     precacheshader(hud_icon);
+  }
 
   piece = spawnStruct();
   buildable_pieces = [];
   buildable_pieces_structs = getstructarray(buildablename + "_" + modelname, "targetname");
 
-  if(buildable_pieces_structs.size < 1)
+  if(buildable_pieces_structs.size < 1) {
     println("ERROR: Missing buildable piece <" + buildablename + "> <" + modelname + ">\\n");
+  }
 
   foreach(index, struct in buildable_pieces_structs) {
     buildable_pieces[index] = struct;
@@ -209,10 +224,12 @@ generate_zombie_buildable_piece(buildablename, modelname, radius, height, drop_o
   piece.drop_offset = drop_offset;
   piece.max_instances = 256;
 
-  if(isDefined(buildable_slot))
+  if(isDefined(buildable_slot)) {
     piece.buildable_slot = buildable_slot;
-  else
+  }
+  else {
     piece.buildable_slot = 0;
+  }
 
   piece.onpickup = onpickup;
   piece.ondrop = ondrop;
@@ -256,21 +273,26 @@ combine_buildable_pieces(piece1, piece2, piece3) {
 }
 
 add_buildable_piece(piece, part_name, can_reuse) {
-  if(!isDefined(self.buildablepieces))
+  if(!isDefined(self.buildablepieces)) {
     self.buildablepieces = [];
+  }
 
-  if(isDefined(part_name))
+  if(isDefined(part_name)) {
     piece.part_name = part_name;
+  }
 
-  if(isDefined(can_reuse))
+  if(isDefined(can_reuse)) {
     piece.can_reuse = can_reuse;
+  }
 
   self.buildablepieces[self.buildablepieces.size] = piece;
 
-  if(!isDefined(self.buildable_slot))
+  if(!isDefined(self.buildable_slot)) {
     self.buildable_slot = piece.buildable_slot;
-  else
+  }
+  else {
     assert(self.buildable_slot == piece.buildable_slot);
+  }
 }
 
 create_zombie_buildable_piece(modelname, radius, height, hud_icon) {
@@ -305,19 +327,24 @@ onplayerlaststand() {
       return_to_start_pos = 0;
 
       if(isDefined(level.safe_place_for_buildable_piece)) {
-        if(!self[[level.safe_place_for_buildable_piece]](piece))
+        if(!self[[level.safe_place_for_buildable_piece]](piece)) {
           return_to_start_pos = 1;
+        }
       }
 
-      if(return_to_start_pos)
+      if(return_to_start_pos) {
         piece piece_spawn_at();
-      else if(pieces.size < 2)
+      }
+      else if(pieces.size < 2) {
         piece piece_spawn_at(self.origin + vectorscale((1, 1, 0), 5.0), self.angles);
-      else
+      }
+      else {
         piece piece_spawn_at(spawn_pos[spawnidx], self.angles);
+      }
 
-      if(isDefined(piece.ondrop))
+      if(isDefined(piece.ondrop)) {
         piece[[piece.ondrop]](self);
+      }
 
       self clear_buildable_clientfield(slot);
       spawnidx++;
@@ -329,46 +356,57 @@ onplayerlaststand() {
 }
 
 piecestub_get_unitrigger_origin() {
-  if(isDefined(self.origin_parent))
+  if(isDefined(self.origin_parent)) {
     return self.origin_parent.origin + vectorscale((0, 0, 1), 12.0);
+  }
 
   return self.origin;
 }
 
 generate_piece_unitrigger(classname, origin, angles, flags, radius, script_height, moving) {
-  if(!isDefined(radius))
+  if(!isDefined(radius)) {
     radius = 64;
+  }
 
-  if(!isDefined(script_height))
+  if(!isDefined(script_height)) {
     script_height = 64;
+  }
 
   script_width = script_height;
 
-  if(!isDefined(script_width))
+  if(!isDefined(script_width)) {
     script_width = 64;
+  }
 
   script_length = script_height;
 
-  if(!isDefined(script_length))
+  if(!isDefined(script_length)) {
     script_length = 64;
+  }
 
   unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = origin;
 
-  if(isDefined(script_length))
+  if(isDefined(script_length)) {
     unitrigger_stub.script_length = script_length;
-  else
+  }
+  else {
     unitrigger_stub.script_length = 13.5;
+  }
 
-  if(isDefined(script_width))
+  if(isDefined(script_width)) {
     unitrigger_stub.script_width = script_width;
-  else
+  }
+  else {
     unitrigger_stub.script_width = 27.5;
+  }
 
-  if(isDefined(script_height))
+  if(isDefined(script_height)) {
     unitrigger_stub.script_height = script_height;
-  else
+  }
+  else {
     unitrigger_stub.script_height = 24;
+  }
 
   unitrigger_stub.radius = radius;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
@@ -396,10 +434,12 @@ generate_piece_unitrigger(classname, origin, angles, flags, radius, script_heigh
   unitrigger_stub.originfunc = ::piecestub_get_unitrigger_origin;
   unitrigger_stub.onspawnfunc = ::anystub_on_spawn_trigger;
 
-  if(isDefined(moving) && moving)
+  if(isDefined(moving) && moving) {
     maps\mp\zombies\_zm_unitrigger::register_unitrigger(unitrigger_stub, ::piece_unitrigger_think);
-  else
+  }
+  else {
     maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(unitrigger_stub, ::piece_unitrigger_think);
+  }
 
   return unitrigger_stub;
 }
@@ -408,16 +448,20 @@ piecetrigger_update_prompt(player) {
   can_use = self.stub piecestub_update_prompt(player);
   self setinvisibletoplayer(player, !can_use);
 
-  if(isDefined(self.stub.hint_parm1))
+  if(isDefined(self.stub.hint_parm1)) {
     self sethintstring(self.stub.hint_string, self.stub.hint_parm1);
-  else
+  }
+  else {
     self sethintstring(self.stub.hint_string);
+  }
 
   if(isDefined(self.stub.cursor_hint)) {
-    if(self.stub.cursor_hint == "HINT_WEAPON" && isDefined(self.stub.cursor_hint_weapon))
+    if(self.stub.cursor_hint == "HINT_WEAPON" && isDefined(self.stub.cursor_hint_weapon)) {
       self setcursorhint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
-    else
+    }
+    else {
       self setcursorhint(self.stub.cursor_hint);
+    }
   }
 
   return can_use;
@@ -444,11 +488,13 @@ piecestub_update_prompt(player) {
     } else
       self.hint_string = &"ZOMBIE_BUILD_PIECE_SWITCH";
 
-    if(isDefined(self.piece.cursor_hint))
+    if(isDefined(self.piece.cursor_hint)) {
       self.cursor_hint = self.piece.cursor_hint;
+    }
 
-    if(isDefined(self.piece.cursor_hint_weapon))
+    if(isDefined(self.piece.cursor_hint_weapon)) {
       self.cursor_hint_weapon = self.piece.cursor_hint_weapon;
+    }
   } else {
     if(isDefined(self.piece.hint_grab)) {
       self.hint_string = self.piece.hint_grab;
@@ -456,11 +502,13 @@ piecestub_update_prompt(player) {
     } else
       self.hint_string = &"ZOMBIE_BUILD_PIECE_GRAB";
 
-    if(isDefined(self.piece.cursor_hint))
+    if(isDefined(self.piece.cursor_hint)) {
       self.cursor_hint = self.piece.cursor_hint;
+    }
 
-    if(isDefined(self.piece.cursor_hint_weapon))
+    if(isDefined(self.piece.cursor_hint_weapon)) {
       self.cursor_hint_weapon = self.piece.cursor_hint_weapon;
+    }
   }
 
   return true;
@@ -494,38 +542,45 @@ piece_unitrigger_think() {
 }
 
 player_get_buildable_pieces() {
-  if(!isDefined(self.current_buildable_pieces))
+  if(!isDefined(self.current_buildable_pieces)) {
     self.current_buildable_pieces = [];
+  }
 
   return self.current_buildable_pieces;
 }
 
 player_get_buildable_piece(slot) {
-  if(!isDefined(slot))
+  if(!isDefined(slot)) {
     slot = 0;
+  }
 
-  if(!isDefined(self.current_buildable_pieces))
+  if(!isDefined(self.current_buildable_pieces)) {
     self.current_buildable_pieces = [];
+  }
 
   return self.current_buildable_pieces[slot];
 }
 
 player_set_buildable_piece(piece, slot) {
-  if(!isDefined(slot))
+  if(!isDefined(slot)) {
     slot = 0;
+  }
 
-  if(isDefined(slot) && isDefined(piece) && isDefined(piece.buildable_slot))
+  if(isDefined(slot) && isDefined(piece) && isDefined(piece.buildable_slot)) {
     assert(slot == piece.buildable_slot);
+  }
 
-  if(!isDefined(self.current_buildable_pieces))
+  if(!isDefined(self.current_buildable_pieces)) {
     self.current_buildable_pieces = [];
+  }
 
   self.current_buildable_pieces[slot] = piece;
 }
 
 player_can_take_piece(piece) {
-  if(!isDefined(piece))
+  if(!isDefined(piece)) {
     return false;
+  }
 
   return true;
 }
@@ -571,8 +626,9 @@ player_throw_piece(piece, origin, dir, return_to_spawn, return_time, endangles) 
       landed_on = grenade getgroundent();
       grenade delete();
 
-      if(isDefined(landed_on) && landed_on == level)
+      if(isDefined(landed_on) && landed_on == level) {
         done = 1;
+      }
       else {
         origin = grenade_origin;
         dir = (dir[0] * -1 / 10, dir[1] * -1 / 10, -1);
@@ -580,19 +636,23 @@ player_throw_piece(piece, origin, dir, return_to_spawn, return_time, endangles) 
       }
     }
 
-    if(!isDefined(endangles))
+    if(!isDefined(endangles)) {
       endangles = grenade_angles;
+    }
 
     piece piece_spawn_at(grenade_origin, endangles);
 
-    if(isDefined(altmodel))
+    if(isDefined(altmodel)) {
       altmodel delete();
+    }
 
-    if(isDefined(piece.ondrop))
+    if(isDefined(piece.ondrop)) {
       piece[[piece.ondrop]](self);
+    }
 
-    if(isDefined(return_to_spawn) && return_to_spawn)
+    if(isDefined(return_to_spawn) && return_to_spawn) {
       piece piece_wait_and_return(return_time);
+    }
   }
 }
 
@@ -603,8 +663,9 @@ watch_hit_players() {
   while(isDefined(self)) {
     self waittill("grenade_bounce", pos, normal, ent);
 
-    if(isplayer(ent))
+    if(isplayer(ent)) {
       ent explosiondamage(25, pos);
+    }
   }
 }
 
@@ -612,10 +673,12 @@ piece_wait_and_return(return_time) {
   self endon("pickup");
   wait 0.15;
 
-  if(isDefined(level.exploding_jetgun_fx))
+  if(isDefined(level.exploding_jetgun_fx)) {
     playFXOnTag(level.exploding_jetgun_fx, self.model, "tag_origin");
-  else
+  }
+  else {
     playFXOnTag(level._effect["powerup_on"], self.model, "tag_origin");
+  }
 
   wait(return_time - 6);
   self piece_hide();
@@ -636,8 +699,9 @@ piece_wait_and_return(return_time) {
 }
 
 player_return_piece_to_original_spawn(slot) {
-  if(!isDefined(slot))
+  if(!isDefined(slot)) {
     slot = 0;
+  }
 
   self notify("piece_released" + slot);
   piece = self player_get_buildable_piece(slot);
@@ -658,40 +722,49 @@ player_drop_piece_on_death(slot) {
   self waittill("death_or_disconnect");
   piece piece_spawn_at(origin, angles);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self clear_buildable_clientfield(slot);
+  }
 
-  if(isDefined(piece.ondrop))
+  if(isDefined(piece.ondrop)) {
     piece[[piece.ondrop]](self);
+  }
 }
 
 player_drop_piece(piece, slot) {
-  if(!isDefined(slot))
+  if(!isDefined(slot)) {
     slot = 0;
+  }
 
-  if(!isDefined(piece))
+  if(!isDefined(piece)) {
     piece = self player_get_buildable_piece(slot);
-  else
+  }
+  else {
     slot = piece.buildable_slot;
+  }
 
   if(isDefined(piece)) {
     origin = self.origin;
     origintrace = groundtrace(origin + vectorscale((0, 0, 1), 5.0), origin - vectorscale((0, 0, 1), 999999.0), 0, self);
 
-    if(isDefined(origintrace["entity"]))
+    if(isDefined(origintrace["entity"])) {
       origintrace = groundtrace(origintrace["entity"].origin, origintrace["entity"].origin - vectorscale((0, 0, 1), 999999.0), 0, origintrace["entity"]);
+    }
 
-    if(isDefined(origintrace["position"]))
+    if(isDefined(origintrace["position"])) {
       origin = origintrace["position"];
+    }
 
     piece.damage = 0;
     piece piece_spawn_at(origin, self.angles);
 
-    if(isplayer(self))
+    if(isplayer(self)) {
       self clear_buildable_clientfield(slot);
+    }
 
-    if(isDefined(piece.ondrop))
+    if(isDefined(piece.ondrop)) {
       piece[[piece.ondrop]](self);
+    }
   }
 
   self player_set_buildable_piece(undefined, slot);
@@ -709,15 +782,17 @@ player_take_piece(piece) {
     self do_player_general_vox("general", "build_swap");
   }
 
-  if(isDefined(piece.onpickup))
+  if(isDefined(piece.onpickup)) {
     piece[[piece.onpickup]](self);
+  }
 
   piece piece_unspawn();
   piece notify("pickup");
 
   if(isplayer(self)) {
-    if(isDefined(piece.client_field_state))
+    if(isDefined(piece.client_field_state)) {
       self set_buildable_clientfield(piece_slot, piece.client_field_state);
+    }
 
     self player_set_buildable_piece(piece, piece_slot);
     self thread player_drop_piece_on_death(piece_slot);
@@ -726,8 +801,9 @@ player_take_piece(piece) {
 }
 
 player_destroy_piece(piece) {
-  if(!isDefined(piece))
+  if(!isDefined(piece)) {
     piece = self player_get_buildable_piece();
+  }
 
   if(isplayer(self)) {
     slot = piece.buildable_slot;
@@ -743,8 +819,9 @@ player_destroy_piece(piece) {
 }
 
 claim_location(location) {
-  if(!isDefined(level.buildable_claimed_locations))
+  if(!isDefined(level.buildable_claimed_locations)) {
     level.buildable_claimed_locations = [];
+  }
 
   if(!isDefined(level.buildable_claimed_locations[location])) {
     level.buildable_claimed_locations[location] = 1;
@@ -758,16 +835,18 @@ is_point_in_build_trigger(point) {
   candidate_list = [];
 
   foreach(zone in level.zones) {
-    if(isDefined(zone.unitrigger_stubs))
+    if(isDefined(zone.unitrigger_stubs)) {
       candidate_list = arraycombine(candidate_list, zone.unitrigger_stubs, 1, 0);
+    }
   }
 
   valid_range = 128;
   closest = maps\mp\zombies\_zm_unitrigger::get_closest_unitriggers(point, candidate_list, valid_range);
 
   for(index = 0; index < closest.size; index++) {
-    if(isDefined(closest[index].registered) && closest[index].registered && isDefined(closest[index].piece))
+    if(isDefined(closest[index].registered) && closest[index].registered && isDefined(closest[index].piece)) {
       return true;
+    }
   }
 
   return false;
@@ -806,8 +885,9 @@ piece_allocate_spawn(piecespawn) {
     spawnweights = [];
 
     for(i = 0; i < self.spawns.size; i++) {
-      if(isDefined(piecespawn.piece_allocated[i]) && piecespawn.piece_allocated[i])
+      if(isDefined(piecespawn.piece_allocated[i]) && piecespawn.piece_allocated[i]) {
         spawnweights[i] = 0;
+      }
       else if(isDefined(self.spawns[i].script_forcespawn) && self.spawns[i].script_forcespawn) {
         switch (self.spawns[i].script_forcespawn) {
           case 4:
@@ -842,8 +922,9 @@ piece_allocate_spawn(piecespawn) {
 
     assert(any_good || any_okay, "There is nowhere to spawn this piece");
 
-    if(any_good)
+    if(any_good) {
       totalweight = float(int(totalweight));
+    }
 
     r = randomfloat(totalweight);
 
@@ -871,13 +952,15 @@ piece_allocate_cyclic(piecespawn) {
       piecespawn.cyclic_index = randomint(self.spawns.size);
     }
 
-    if(!isDefined(piecespawn.cyclic_index))
+    if(!isDefined(piecespawn.cyclic_index)) {
       piecespawn.cyclic_index = 0;
+    }
 
     piecespawn.cyclic_index++;
 
-    if(piecespawn.cyclic_index >= self.spawns.size)
+    if(piecespawn.cyclic_index >= self.spawns.size) {
       piecespawn.cyclic_index = 0;
+    }
   } else
     piecespawn.cyclic_index = 0;
 
@@ -919,8 +1002,9 @@ piece_pick_random_spawn() {
 piece_set_spawn(num) {
   self.current_spawn = 0;
 
-  if(self.spawns.size >= 1 && self.spawns.size > 1)
+  if(self.spawns.size >= 1 && self.spawns.size > 1) {
     self.current_spawn = int(min(num, self.spawns.size - 1));
+  }
 }
 
 piece_spawn_in(piecespawn) {
@@ -928,12 +1012,14 @@ piece_spawn_in(piecespawn) {
     return;
   }
   if(isDefined(self.managed_spawn) && self.managed_spawn) {
-    if(!isDefined(self.current_spawn))
+    if(!isDefined(self.current_spawn)) {
       self piece_allocate_spawn(self.piecespawn);
+    }
   }
 
-  if(!isDefined(self.current_spawn))
+  if(!isDefined(self.current_spawn)) {
     self.current_spawn = 0;
+  }
 
   spawndef = self.spawns[self.current_spawn];
   self.script_noteworthy = spawndef.script_noteworthy;
@@ -955,8 +1041,9 @@ piece_spawn_in(piecespawn) {
   self.hint_swap = piecespawn.hint_swap;
   self.model = spawn("script_model", self.start_origin);
 
-  if(isDefined(self.start_angles))
+  if(isDefined(self.start_angles)) {
     self.model.angles = self.start_angles;
+  }
 
   self.model setModel(piecespawn.modelname);
   self.model ghostindemo();
@@ -977,8 +1064,9 @@ piece_spawn_at_with_notify_delay(origin, angles, str_notify, unbuild_respawn_fn)
   level waittill(str_notify);
   piece_spawn_at(origin, angles);
 
-  if(isDefined(unbuild_respawn_fn))
+  if(isDefined(unbuild_respawn_fn)) {
     self[[unbuild_respawn_fn]]();
+  }
 }
 
 piece_spawn_at(origin, angles) {
@@ -997,26 +1085,30 @@ piece_spawn_at(origin, angles) {
 
   unitrigger_offset = vectorscale((0, 0, 1), 12.0);
 
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     origin = self.start_origin;
+  }
   else {
     origin = origin + (0, 0, self.drop_offset);
     unitrigger_offset = unitrigger_offset - (0, 0, self.drop_offset);
   }
 
-  if(!isDefined(angles))
+  if(!isDefined(angles)) {
     angles = self.start_angles;
+  }
 
-  if(!isDefined(level.drop_offset))
+  if(!isDefined(level.drop_offset)) {
     level.drop_offset = 0;
+  }
 
   origin = origin + (0, 0, level.drop_offset);
   unitrigger_offset = unitrigger_offset - (0, 0, level.drop_offset);
 
   self.model = spawn("script_model", origin);
 
-  if(isDefined(angles))
+  if(isDefined(angles)) {
     self.model.angles = angles;
+  }
 
   self.model setModel(self.modelname);
 
@@ -1037,68 +1129,84 @@ piece_spawn_at(origin, angles) {
   self.unitrigger.origin_parent = self.model;
   self.building = undefined;
 
-  if(isDefined(self.onspawn))
+  if(isDefined(self.onspawn)) {
     self[[self.onspawn]]();
+  }
 }
 
 piece_unspawn() {
-  if(isDefined(self.onunspawn))
+  if(isDefined(self.onunspawn)) {
     self[[self.onunspawn]]();
+  }
 
-  if(isDefined(self.managed_spawn) && self.managed_spawn)
+  if(isDefined(self.managed_spawn) && self.managed_spawn) {
     self piece_deallocate_spawn();
+  }
 
-  if(isDefined(self.model))
+  if(isDefined(self.model)) {
     self.model delete();
+  }
 
   self.model = undefined;
 
-  if(isDefined(self.unitrigger))
+  if(isDefined(self.unitrigger)) {
     thread maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(self.unitrigger);
+  }
 
   self.unitrigger = undefined;
 }
 
 piece_hide() {
-  if(isDefined(self.model))
+  if(isDefined(self.model)) {
     self.model ghost();
+  }
 }
 
 piece_show() {
-  if(isDefined(self.model))
+  if(isDefined(self.model)) {
     self.model show();
+  }
 }
 
 piece_destroy() {
-  if(isDefined(self.ondestroy))
+  if(isDefined(self.ondestroy)) {
     self[[self.ondestroy]]();
+  }
 }
 
 generate_piece(buildable_piece_spawns) {
   piece = spawnStruct();
   piece.spawns = buildable_piece_spawns.spawns;
 
-  if(isDefined(buildable_piece_spawns.managing_pieces) && buildable_piece_spawns.managing_pieces)
+  if(isDefined(buildable_piece_spawns.managing_pieces) && buildable_piece_spawns.managing_pieces) {
     piece piece_allocate_spawn(buildable_piece_spawns);
-  else if(isDefined(buildable_piece_spawns.use_spawn_num))
+  }
+  else if(isDefined(buildable_piece_spawns.use_spawn_num)) {
     piece piece_set_spawn(buildable_piece_spawns.use_spawn_num);
-  else
+  }
+  else {
     piece piece_pick_random_spawn();
+  }
 
   piece piece_spawn_in(buildable_piece_spawns);
 
-  if(piece.spawns.size >= 1)
+  if(piece.spawns.size >= 1) {
     piece.hud_icon = buildable_piece_spawns.hud_icon;
+  }
 
-  if(isDefined(buildable_piece_spawns.onpickup))
+  if(isDefined(buildable_piece_spawns.onpickup)) {
     piece.onpickup = buildable_piece_spawns.onpickup;
-  else
+  }
+  else {
     piece.onpickup = ::onpickuputs;
+  }
 
-  if(isDefined(buildable_piece_spawns.ondrop))
+  if(isDefined(buildable_piece_spawns.ondrop)) {
     piece.ondrop = buildable_piece_spawns.ondrop;
-  else
+  }
+  else {
     piece.ondrop = ::ondroputs;
+  }
 
   return piece;
 }
@@ -1108,27 +1216,32 @@ buildable_piece_unitriggers(buildable_name, origin) {
   assert(isDefined(level.zombie_buildables[buildable_name]), "Called buildable_think() without including the buildable - " + buildable_name);
   buildable = level.zombie_buildables[buildable_name];
 
-  if(!isDefined(buildable.buildablepieces))
+  if(!isDefined(buildable.buildablepieces)) {
     buildable.buildablepieces = [];
+  }
 
   flag_wait("start_zombie_round_logic");
   buildablezone = spawnStruct();
   buildablezone.buildable_name = buildable_name;
   buildablezone.buildable_slot = buildable.buildable_slot;
 
-  if(!isDefined(buildablezone.pieces))
+  if(!isDefined(buildablezone.pieces)) {
     buildablezone.pieces = [];
+  }
 
   buildablepickups = [];
 
   foreach(buildablepiece in buildable.buildablepieces) {
-    if(!isDefined(buildablepiece.generated_instances))
+    if(!isDefined(buildablepiece.generated_instances)) {
       buildablepiece.generated_instances = 0;
+    }
 
-    if(isDefined(buildablepiece.generated_piece) && (isDefined(buildablepiece.can_reuse) && buildablepiece.can_reuse))
+    if(isDefined(buildablepiece.generated_piece) && (isDefined(buildablepiece.can_reuse) && buildablepiece.can_reuse)) {
       piece = buildablepiece.generated_piece;
-    else if(buildablepiece.generated_instances >= buildablepiece.max_instances)
+    }
+    else if(buildablepiece.generated_instances >= buildablepiece.max_instances) {
       piece = buildablepiece.generated_piece;
+    }
     else {
       piece = generate_piece(buildablepiece);
       buildablepiece.generated_piece = piece;
@@ -1179,8 +1292,9 @@ setup_unitrigger_buildable_array(trigger_targetname, equipname, weaponname, trig
   triggers = getEntArray(trigger_targetname, "targetname");
   stubs = [];
 
-  foreach(trig in triggers)
+  foreach(trig in triggers) {
   stubs[stubs.size] = setup_unitrigger_buildable_internal(trig, equipname, weaponname, trigger_hintstring, delete_trigger, persistent);
+  }
 
   return stubs;
 }
@@ -1193,14 +1307,16 @@ setup_unitrigger_buildable_internal(trig, equipname, weaponname, trigger_hintstr
   unitrigger_stub.buildablestruct = level.zombie_include_buildables[equipname];
   angles = trig.script_angles;
 
-  if(!isDefined(angles))
+  if(!isDefined(angles)) {
     angles = (0, 0, 0);
+  }
 
   unitrigger_stub.origin = trig.origin + anglestoright(angles) * -6;
   unitrigger_stub.angles = trig.angles;
 
-  if(isDefined(trig.script_angles))
+  if(isDefined(trig.script_angles)) {
     unitrigger_stub.angles = trig.script_angles;
+  }
 
   unitrigger_stub.equipname = equipname;
   unitrigger_stub.weaponname = weaponname;
@@ -1214,20 +1330,26 @@ setup_unitrigger_buildable_internal(trig, equipname, weaponname, trigger_hintstr
   unitrigger_stub.onuse = ::onuseplantobjectuts;
   unitrigger_stub.oncantuse = ::oncantuseuts;
 
-  if(isDefined(trig.script_length))
+  if(isDefined(trig.script_length)) {
     unitrigger_stub.script_length = trig.script_length;
-  else
+  }
+  else {
     unitrigger_stub.script_length = 32;
+  }
 
-  if(isDefined(trig.script_width))
+  if(isDefined(trig.script_width)) {
     unitrigger_stub.script_width = trig.script_width;
-  else
+  }
+  else {
     unitrigger_stub.script_width = 100;
+  }
 
-  if(isDefined(trig.script_height))
+  if(isDefined(trig.script_height)) {
     unitrigger_stub.script_height = trig.script_height;
-  else
+  }
+  else {
     unitrigger_stub.script_height = 64;
+  }
 
   unitrigger_stub.target = trig.target;
   unitrigger_stub.targetname = trig.targetname;
@@ -1235,8 +1357,9 @@ setup_unitrigger_buildable_internal(trig, equipname, weaponname, trigger_hintstr
   unitrigger_stub.script_parameters = trig.script_parameters;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
 
-  if(isDefined(level.zombie_buildables[equipname].hint))
+  if(isDefined(level.zombie_buildables[equipname].hint)) {
     unitrigger_stub.hint_string = level.zombie_buildables[equipname].hint;
+  }
 
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   unitrigger_stub.require_look_at = 1;
@@ -1251,8 +1374,9 @@ setup_unitrigger_buildable_internal(trig, equipname, weaponname, trigger_hintstr
     unitrigger_stub.model = getent(unitrigger_stub.target, "targetname");
 
     if(isDefined(unitrigger_stub.model)) {
-      if(isDefined(unitrigger_stub.zombie_weapon_upgrade))
+      if(isDefined(unitrigger_stub.zombie_weapon_upgrade)) {
         unitrigger_stub.model useweaponhidetags(unitrigger_stub.zombie_weapon_upgrade);
+      }
 
       unitrigger_stub.model hide();
       unitrigger_stub.model notsolid();
@@ -1261,8 +1385,9 @@ setup_unitrigger_buildable_internal(trig, equipname, weaponname, trigger_hintstr
 
   unitrigger_stub.buildablezone = unitrigger_stub buildable_piece_unitriggers(equipname, unitrigger_stub.origin);
 
-  if(delete_trigger)
+  if(delete_trigger) {
     trig delete();
+  }
 
   level.buildable_stubs[level.buildable_stubs.size] = unitrigger_stub;
   return unitrigger_stub;
@@ -1270,8 +1395,9 @@ setup_unitrigger_buildable_internal(trig, equipname, weaponname, trigger_hintstr
 
 buildable_has_piece(piece) {
   for(i = 0; i < self.pieces.size; i++) {
-    if(self.pieces[i].modelname == piece.modelname && self.pieces[i].buildablename == piece.buildablename)
+    if(self.pieces[i].modelname == piece.modelname && self.pieces[i].buildablename == piece.buildablename) {
       return true;
+    }
   }
 
   return false;
@@ -1279,8 +1405,9 @@ buildable_has_piece(piece) {
 
 buildable_set_piece_built(piece) {
   for(i = 0; i < self.pieces.size; i++) {
-    if(self.pieces[i].modelname == piece.modelname && self.pieces[i].buildablename == piece.buildablename)
+    if(self.pieces[i].modelname == piece.modelname && self.pieces[i].buildablename == piece.buildablename) {
       self.pieces[i].built = 1;
+    }
   }
 }
 
@@ -1294,14 +1421,16 @@ buildable_set_piece_building(piece) {
 }
 
 buildable_clear_piece_building(piece) {
-  if(isDefined(piece))
+  if(isDefined(piece)) {
     piece.building = 0;
+  }
 }
 
 buildable_is_piece_built(piece) {
   for(i = 0; i < self.pieces.size; i++) {
-    if(self.pieces[i].modelname == piece.modelname && self.pieces[i].buildablename == piece.buildablename)
+    if(self.pieces[i].modelname == piece.modelname && self.pieces[i].buildablename == piece.buildablename) {
       return isDefined(self.pieces[i].built) && self.pieces[i].built;
+    }
   }
 
   return false;
@@ -1309,8 +1438,9 @@ buildable_is_piece_built(piece) {
 
 buildable_is_piece_building(piece) {
   for(i = 0; i < self.pieces.size; i++) {
-    if(self.pieces[i].modelname == piece.modelname && self.pieces[i].buildablename == piece.buildablename)
+    if(self.pieces[i].modelname == piece.modelname && self.pieces[i].buildablename == piece.buildablename) {
       return isDefined(self.pieces[i].building) && self.pieces[i].building && self.pieces[i] == piece;
+    }
   }
 
   return false;
@@ -1318,8 +1448,9 @@ buildable_is_piece_building(piece) {
 
 buildable_is_piece_built_or_building(piece) {
   for(i = 0; i < self.pieces.size; i++) {
-    if(self.pieces[i].modelname == piece.modelname && self.pieces[i].buildablename == piece.buildablename)
+    if(self.pieces[i].modelname == piece.modelname && self.pieces[i].buildablename == piece.buildablename) {
       return isDefined(self.pieces[i].built) && self.pieces[i].built || isDefined(self.pieces[i].building) && self.pieces[i].building;
+    }
   }
 
   return false;
@@ -1327,31 +1458,37 @@ buildable_is_piece_built_or_building(piece) {
 
 buildable_all_built() {
   for(i = 0; i < self.pieces.size; i++) {
-    if(!(isDefined(self.pieces[i].built) && self.pieces[i].built))
+    if(!(isDefined(self.pieces[i].built) && self.pieces[i].built)) {
       return false;
+    }
   }
 
   return true;
 }
 
 player_can_build(buildable, continuing) {
-  if(!isDefined(buildable))
+  if(!isDefined(buildable)) {
     return false;
+  }
 
-  if(!isDefined(self player_get_buildable_piece(buildable.buildable_slot)))
+  if(!isDefined(self player_get_buildable_piece(buildable.buildable_slot))) {
     return false;
+  }
 
-  if(!buildable buildable_has_piece(self player_get_buildable_piece(buildable.buildable_slot)))
+  if(!buildable buildable_has_piece(self player_get_buildable_piece(buildable.buildable_slot))) {
     return false;
+  }
 
   if(isDefined(continuing) && continuing) {
-    if(buildable buildable_is_piece_built(self player_get_buildable_piece(buildable.buildable_slot)))
+    if(buildable buildable_is_piece_built(self player_get_buildable_piece(buildable.buildable_slot))) {
       return false;
+    }
   } else if(buildable buildable_is_piece_built_or_building(self player_get_buildable_piece(buildable.buildable_slot)))
     return false;
 
-  if(isDefined(buildable.stub) && isDefined(buildable.stub.custom_buildablestub_update_prompt) && isDefined(buildable.stub.playertrigger[0]) && isDefined(buildable.stub.playertrigger[0].stub) && !buildable.stub.playertrigger[0].stub[[buildable.stub.custom_buildablestub_update_prompt]](self, 1, buildable.stub.playertrigger[0]))
+  if(isDefined(buildable.stub) && isDefined(buildable.stub.custom_buildablestub_update_prompt) && isDefined(buildable.stub.playertrigger[0]) && isDefined(buildable.stub.playertrigger[0].stub) && !buildable.stub.playertrigger[0].stub[[buildable.stub.custom_buildablestub_update_prompt]](self, 1, buildable.stub.playertrigger[0])) {
     return false;
+  }
 
   return true;
 }
@@ -1383,18 +1520,21 @@ player_build(buildable, pieces) {
     }
   }
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     self track_buildable_pieces_built(buildable);
+  }
 
   if(buildable buildable_all_built()) {
     self player_finish_buildable(buildable);
     buildable.stub buildablestub_finish_build(self);
 
-    if(isplayer(self))
+    if(isplayer(self)) {
       self track_buildables_built(buildable);
+    }
 
-    if(isDefined(level.buildable_built_custom_func))
+    if(isDefined(level.buildable_built_custom_func)) {
       self thread[[level.buildable_built_custom_func]](buildable);
+    }
 
     alias = sndbuildablecompletealias(buildable.buildable_name);
     self playSound(alias);
@@ -1402,8 +1542,9 @@ player_build(buildable, pieces) {
     self playSound("zmb_buildable_piece_add");
     assert(isDefined(level.zombie_buildables[buildable.buildable_name].building), "Missing builing hint");
 
-    if(isDefined(level.zombie_buildables[buildable.buildable_name].building))
+    if(isDefined(level.zombie_buildables[buildable.buildable_name].building)) {
       return level.zombie_buildables[buildable.buildable_name].building;
+    }
   }
 
   return "";
@@ -1445,30 +1586,35 @@ buildabletrigger_update_prompt(player) {
   self sethintstring(self.stub.hint_string);
 
   if(isDefined(self.stub.cursor_hint)) {
-    if(self.stub.cursor_hint == "HINT_WEAPON" && isDefined(self.stub.cursor_hint_weapon))
+    if(self.stub.cursor_hint == "HINT_WEAPON" && isDefined(self.stub.cursor_hint_weapon)) {
       self setcursorhint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
-    else
+    }
+    else {
       self setcursorhint(self.stub.cursor_hint);
+    }
   }
 
   return can_use;
 }
 
 buildablestub_update_prompt(player) {
-  if(!self anystub_update_prompt(player))
+  if(!self anystub_update_prompt(player)) {
     return false;
+  }
 
   can_use = 1;
 
   if(isDefined(self.buildablestub_reject_func)) {
     rval = self[[self.buildablestub_reject_func]](player);
 
-    if(rval)
+    if(rval) {
       return false;
+    }
   }
 
-  if(isDefined(self.custom_buildablestub_update_prompt) && !self[[self.custom_buildablestub_update_prompt]](player))
+  if(isDefined(self.custom_buildablestub_update_prompt) && !self[[self.custom_buildablestub_update_prompt]](player)) {
     return false;
+  }
 
   self.cursor_hint = "HINT_NOICON";
   self.cursor_hint_weapon = undefined;
@@ -1477,26 +1623,32 @@ buildablestub_update_prompt(player) {
     slot = self.buildablestruct.buildable_slot;
 
     if(!isDefined(player player_get_buildable_piece(slot))) {
-      if(isDefined(level.zombie_buildables[self.equipname].hint_more))
+      if(isDefined(level.zombie_buildables[self.equipname].hint_more)) {
         self.hint_string = level.zombie_buildables[self.equipname].hint_more;
-      else
+      }
+      else {
         self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
+      }
 
       return false;
     } else if(!self.buildablezone buildable_has_piece(player player_get_buildable_piece(slot))) {
-      if(isDefined(level.zombie_buildables[self.equipname].hint_wrong))
+      if(isDefined(level.zombie_buildables[self.equipname].hint_wrong)) {
         self.hint_string = level.zombie_buildables[self.equipname].hint_wrong;
-      else
+      }
+      else {
         self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
+      }
 
       return false;
     } else {
       assert(isDefined(level.zombie_buildables[self.equipname].hint), "Missing buildable hint");
 
-      if(isDefined(level.zombie_buildables[self.equipname].hint))
+      if(isDefined(level.zombie_buildables[self.equipname].hint)) {
         self.hint_string = level.zombie_buildables[self.equipname].hint;
-      else
+      }
+      else {
         self.hint_string = "Missing buildable hint";
+      }
     }
   } else if(self.persistent == 1) {
     if(maps\mp\zombies\_zm_equipment::is_limited_equipment(self.weaponname) && maps\mp\zombies\_zm_equipment::limited_equipment_in_use(self.weaponname)) {
@@ -1534,28 +1686,35 @@ buildablestub_update_prompt(player) {
 }
 
 player_continue_building(buildablezone, build_stub) {
-  if(!isDefined(build_stub))
+  if(!isDefined(build_stub)) {
     build_stub = buildablezone.stub;
+  }
 
-  if(self maps\mp\zombies\_zm_laststand::player_is_in_laststand() || self in_revive_trigger())
+  if(self maps\mp\zombies\_zm_laststand::player_is_in_laststand() || self in_revive_trigger()) {
     return false;
+  }
 
-  if(self isthrowinggrenade())
+  if(self isthrowinggrenade()) {
     return false;
+  }
 
-  if(!self player_can_build(buildablezone, 1))
+  if(!self player_can_build(buildablezone, 1)) {
     return false;
+  }
 
-  if(isDefined(self.screecher))
+  if(isDefined(self.screecher)) {
     return false;
+  }
 
-  if(!self usebuttonpressed())
+  if(!self usebuttonpressed()) {
     return false;
+  }
 
   slot = build_stub.buildablestruct.buildable_slot;
 
-  if(!buildablezone buildable_is_piece_building(self player_get_buildable_piece(slot)))
+  if(!buildablezone buildable_is_piece_building(self player_get_buildable_piece(slot))) {
     return false;
+  }
 
   trigger = build_stub maps\mp\zombies\_zm_unitrigger::unitrigger_trigger(self);
 
@@ -1564,13 +1723,15 @@ player_continue_building(buildablezone, build_stub) {
     porigin = self getEye();
     radius_sq = 2.25 * build_stub.test_radius_sq;
 
-    if(distance2dsquared(torigin, porigin) > radius_sq)
+    if(distance2dsquared(torigin, porigin) > radius_sq) {
       return false;
+    }
   } else if(!isDefined(trigger) || !trigger istouching(self))
     return false;
 
-  if(isDefined(build_stub.require_look_at) && build_stub.require_look_at && !self is_player_looking_at(trigger.origin, 0.4))
+  if(isDefined(build_stub.require_look_at) && build_stub.require_look_at && !self is_player_looking_at(trigger.origin, 0.4)) {
     return false;
+  }
 
   return true;
 }
@@ -1584,11 +1745,13 @@ player_progress_bar_update(start_time, build_time) {
   while(isDefined(self) && gettime() - start_time < build_time) {
     progress = (gettime() - start_time) / build_time;
 
-    if(progress < 0)
+    if(progress < 0) {
       progress = 0;
+    }
 
-    if(progress > 1)
+    if(progress > 1) {
       progress = 1;
+    }
 
     self.usebar updatebar(progress);
     wait 0.05;
@@ -1599,21 +1762,25 @@ player_progress_bar(start_time, build_time, building_prompt) {
   self.usebar = self createprimaryprogressbar();
   self.usebartext = self createprimaryprogressbartext();
 
-  if(isDefined(building_prompt))
+  if(isDefined(building_prompt)) {
     self.usebartext settext(building_prompt);
-  else
+  }
+  else {
     self.usebartext settext(&"ZOMBIE_BUILDING");
+  }
 
-  if(isDefined(self) && isDefined(start_time) && isDefined(build_time))
+  if(isDefined(self) && isDefined(start_time) && isDefined(build_time)) {
     self player_progress_bar_update(start_time, build_time);
+  }
 
   self.usebartext destroyelem();
   self.usebar destroyelem();
 }
 
 buildable_use_hold_think_internal(player, bind_stub) {
-  if(!isDefined(bind_stub))
+  if(!isDefined(bind_stub)) {
     bind_stub = self.stub;
+  }
 
   wait 0.01;
 
@@ -1628,8 +1795,9 @@ buildable_use_hold_think_internal(player, bind_stub) {
     return;
   }
 
-  if(!isDefined(self.usetime))
+  if(!isDefined(self.usetime)) {
     self.usetime = int(3000);
+  }
 
   self.build_time = self.usetime;
   self.build_start_time = gettime();
@@ -1640,8 +1808,9 @@ buildable_use_hold_think_internal(player, bind_stub) {
   orgweapon = player getcurrentweapon();
   build_weapon = "zombie_builder_zm";
 
-  if(isDefined(bind_stub.build_weapon))
+  if(isDefined(bind_stub.build_weapon)) {
     build_weapon = bind_stub.build_weapon;
+  }
 
   player giveweapon(build_weapon);
   player switchtoweapon(build_weapon);
@@ -1649,18 +1818,21 @@ buildable_use_hold_think_internal(player, bind_stub) {
   bind_stub.buildablezone buildable_set_piece_building(player player_get_buildable_piece(slot));
   player thread player_progress_bar(build_start_time, build_time, bind_stub.building_prompt);
 
-  if(isDefined(level.buildable_build_custom_func))
+  if(isDefined(level.buildable_build_custom_func)) {
     player thread[[level.buildable_build_custom_func]](self.stub);
+  }
 
-  while(isDefined(self) && player player_continue_building(bind_stub.buildablezone, self.stub) && gettime() - self.build_start_time < self.build_time)
+  while(isDefined(self) && player player_continue_building(bind_stub.buildablezone, self.stub) && gettime() - self.build_start_time < self.build_time) {
     wait 0.05;
+  }
 
   player notify("buildable_progress_end");
   player maps\mp\zombies\_zm_weapons::switch_back_primary_weapon(orgweapon);
   player takeweapon("zombie_builder_zm");
 
-  if(isDefined(player.is_drinking) && player.is_drinking)
+  if(isDefined(player.is_drinking) && player.is_drinking) {
     player decrement_is_drinking();
+  }
 
   player enable_player_move_states();
 
@@ -1690,15 +1862,17 @@ buildable_play_build_fx(player) {
 }
 
 buildable_use_hold_think(player, bind_stub) {
-  if(!isDefined(bind_stub))
+  if(!isDefined(bind_stub)) {
     bind_stub = self.stub;
+  }
 
   self thread buildable_play_build_fx(player);
   self thread buildable_use_hold_think_internal(player, bind_stub);
   retval = self waittill_any_return("build_succeed", "build_failed");
 
-  if(retval == "build_succeed")
+  if(retval == "build_succeed") {
     return true;
+  }
 
   return false;
 }
@@ -1727,23 +1901,27 @@ buildable_place_think() {
       self.stub.hint_string = "";
       self sethintstring(self.stub.hint_string);
 
-      if(isDefined(self.stub.oncantuse))
+      if(isDefined(self.stub.oncantuse)) {
         self.stub[[self.stub.oncantuse]](player);
+      }
     } else {
-      if(isDefined(self.stub.onbeginuse))
+      if(isDefined(self.stub.onbeginuse)) {
         self.stub[[self.stub.onbeginuse]](player);
+      }
 
       result = self buildable_use_hold_think(player);
       team = player.pers["team"];
 
-      if(isDefined(self.stub.onenduse))
+      if(isDefined(self.stub.onenduse)) {
         self.stub[[self.stub.onenduse]](team, player, result);
+      }
 
       if(!result) {
         continue;
       }
-      if(isDefined(self.stub.onuse))
+      if(isDefined(self.stub.onuse)) {
         self.stub[[self.stub.onuse]](player);
+      }
 
       slot = self.stub.buildablestruct.buildable_slot;
 
@@ -1789,8 +1967,9 @@ bptrigger_think_unbuild(player_built) {
 }
 
 bptrigger_think_one_use_and_fly(player_built) {
-  if(isDefined(player_built))
+  if(isDefined(player_built)) {
     self buildabletrigger_update_prompt(player_built);
+  }
 
   if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
     self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
@@ -1837,18 +2016,22 @@ bptrigger_think_one_use_and_fly(player_built) {
 
     self.stub.bought = 1;
 
-    if(isDefined(self.stub.model))
+    if(isDefined(self.stub.model)) {
       self.stub.model thread model_fly_away();
+    }
 
     player maps\mp\zombies\_zm_weapons::weapon_give(self.stub.weaponname);
 
-    if(isDefined(level.zombie_include_buildables[self.stub.equipname].onbuyweapon))
+    if(isDefined(level.zombie_include_buildables[self.stub.equipname].onbuyweapon)) {
       self[[level.zombie_include_buildables[self.stub.equipname].onbuyweapon]](player);
+    }
 
-    if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined))
+    if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
       self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
-    else
+    }
+    else {
       self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
+    }
 
     self sethintstring(self.stub.hint_string);
     player track_buildables_pickedup(self.stub.weaponname);
@@ -1886,27 +2069,32 @@ bptrigger_think_persistent(player_built) {
       if(player has_player_equipment(self.stub.weaponname)) {
         continue;
       }
-      if(isDefined(self.stub.buildablestruct.onbought))
+      if(isDefined(self.stub.buildablestruct.onbought)) {
         self[[self.stub.buildablestruct.onbought]](player);
+      }
       else if(!maps\mp\zombies\_zm_equipment::is_limited_equipment(self.stub.weaponname) || !maps\mp\zombies\_zm_equipment::limited_equipment_in_use(self.stub.weaponname)) {
         player maps\mp\zombies\_zm_equipment::equipment_buy(self.stub.weaponname);
         player giveweapon(self.stub.weaponname);
         player setweaponammoclip(self.stub.weaponname, 1);
 
-        if(isDefined(level.zombie_include_buildables[self.stub.equipname].onbuyweapon))
+        if(isDefined(level.zombie_include_buildables[self.stub.equipname].onbuyweapon)) {
           self[[level.zombie_include_buildables[self.stub.equipname].onbuyweapon]](player);
+        }
 
-        if(self.stub.weaponname != "keys_zm")
+        if(self.stub.weaponname != "keys_zm") {
           player setactionslot(1, "weapon", self.stub.weaponname);
+        }
 
         self.stub.cursor_hint = "HINT_NOICON";
         self.stub.cursor_hint_weapon = undefined;
         self setcursorhint(self.stub.cursor_hint);
 
-        if(isDefined(level.zombie_buildables[self.stub.equipname].bought))
+        if(isDefined(level.zombie_buildables[self.stub.equipname].bought)) {
           self.stub.hint_string = level.zombie_buildables[self.stub.equipname].bought;
-        else
+        }
+        else {
           self.stub.hint_string = "";
+        }
 
         self sethintstring(self.stub.hint_string);
         player track_buildables_pickedup(self.stub.weaponname);
@@ -1935,10 +2123,12 @@ model_fly_away() {
   direction = self.origin;
   direction = (direction[1], direction[0], 0);
 
-  if(direction[1] < 0 || direction[0] > 0 && direction[1] > 0)
+  if(direction[1] < 0 || direction[0] > 0 && direction[1] > 0) {
     direction = (direction[0], direction[1] * -1, 0);
-  else if(direction[0] < 0)
+  }
+  else if(direction[0] < 0) {
     direction = (direction[0] * -1, direction[1], 0);
+  }
 
   self vibrate(direction, 10, 0.5, 4);
   self waittill("movedone");
@@ -1948,8 +2138,9 @@ model_fly_away() {
 
 find_buildable_stub(equipname) {
   foreach(stub in level.buildable_stubs) {
-    if(stub.equipname == equipname)
+    if(stub.equipname == equipname) {
       return stub;
+    }
   }
 
   return undefined;
@@ -1975,8 +2166,9 @@ stub_unbuild_buildable(stub, return_pieces, origin, angles) {
       if(isDefined(buildable.pieces[i].part_name)) {
         buildable.stub.model notsolid();
 
-        if(!(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built))
+        if(!(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built)) {
           buildable.stub.model hidepart(buildable.pieces[i].part_name);
+        }
         else {
           buildable.stub.model show();
           buildable.stub.model showpart(buildable.pieces[i].part_name);
@@ -1993,8 +2185,9 @@ stub_unbuild_buildable(stub, return_pieces, origin, angles) {
       }
     }
 
-    if(isDefined(buildable.stub.model))
+    if(isDefined(buildable.stub.model)) {
       buildable.stub.model hide();
+    }
   }
 }
 
@@ -2016,8 +2209,9 @@ player_explode_buildable(equipname, origin, speed, return_to_spawn, return_time)
       if(isDefined(buildable.pieces[i].part_name)) {
         buildable.stub.model notsolid();
 
-        if(!(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built))
+        if(!(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built)) {
           buildable.stub.model hidepart(buildable.pieces[i].part_name);
+        }
         else {
           buildable.stub.model show();
           buildable.stub.model showpart(buildable.pieces[i].part_name);
@@ -2086,25 +2280,33 @@ setup_vehicle_unitrigger_buildable(parent, trigger_targetname, equipname, weapon
   unitrigger_stub.onuse = ::onuseplantobjectuts;
   unitrigger_stub.oncantuse = ::oncantuseuts;
 
-  if(isDefined(trig.script_length))
+  if(isDefined(trig.script_length)) {
     unitrigger_stub.script_length = trig.script_length;
-  else
+  }
+  else {
     unitrigger_stub.script_length = 24;
+  }
 
-  if(isDefined(trig.script_width))
+  if(isDefined(trig.script_width)) {
     unitrigger_stub.script_width = trig.script_width;
-  else
+  }
+  else {
     unitrigger_stub.script_width = 64;
+  }
 
-  if(isDefined(trig.script_height))
+  if(isDefined(trig.script_height)) {
     unitrigger_stub.script_height = trig.script_height;
-  else
+  }
+  else {
     unitrigger_stub.script_height = 24;
+  }
 
-  if(isDefined(trig.radius))
+  if(isDefined(trig.radius)) {
     unitrigger_stub.radius = trig.radius;
-  else
+  }
+  else {
     unitrigger_stub.radius = 64;
+  }
 
   unitrigger_stub.target = trig.target;
   unitrigger_stub.targetname = trig.targetname + "_trigger";
@@ -2112,8 +2314,9 @@ setup_vehicle_unitrigger_buildable(parent, trigger_targetname, equipname, weapon
   unitrigger_stub.script_parameters = trig.script_parameters;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
 
-  if(isDefined(level.zombie_buildables[equipname].hint))
+  if(isDefined(level.zombie_buildables[equipname].hint)) {
     unitrigger_stub.hint_string = level.zombie_buildables[equipname].hint;
+  }
 
   unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
   unitrigger_stub.require_look_at = 1;
@@ -2124,8 +2327,9 @@ setup_vehicle_unitrigger_buildable(parent, trigger_targetname, equipname, weapon
   trig.trigger_stub = unitrigger_stub;
   unitrigger_stub.buildablezone = unitrigger_stub buildable_piece_unitriggers(equipname, unitrigger_stub.origin);
 
-  if(delete_trigger)
+  if(delete_trigger) {
     trig delete();
+  }
 
   level.buildable_stubs[level.buildable_stubs.size] = unitrigger_stub;
   return unitrigger_stub;
@@ -2161,8 +2365,9 @@ ai_buildable_trigger_think(parent, equipname, weaponname, trigger_hintstring, pe
   unitrigger_stub.radius = 64;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
 
-  if(isDefined(level.zombie_buildables[equipname].hint))
+  if(isDefined(level.zombie_buildables[equipname].hint)) {
     unitrigger_stub.hint_string = level.zombie_buildables[equipname].hint;
+  }
 
   unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
   unitrigger_stub.require_look_at = 0;
@@ -2175,23 +2380,27 @@ ai_buildable_trigger_think(parent, equipname, weaponname, trigger_hintstring, pe
 }
 
 onpickuputs(player) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Buildable piece recovered by - " + player.name);
+  }
 }
 
 ondroputs(player) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Buildable piece dropped by - " + player.name);
+  }
 
   player notify("event_ended");
 }
 
 onbeginuseuts(player) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Buildable piece begin use by - " + player.name);
+  }
 
-  if(isDefined(self.buildablestruct.onbeginuse))
+  if(isDefined(self.buildablestruct.onbeginuse)) {
     self[[self.buildablestruct.onbeginuse]](player);
+  }
 
   if(isDefined(player) && !isDefined(player.buildableaudio)) {
     alias = sndbuildableusealias(self.targetname);
@@ -2222,8 +2431,9 @@ sndbuildableusealias(name) {
 }
 
 onenduseuts(team, player, result) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Buildable piece end use by - " + player.name);
+  }
 
   if(!isDefined(player)) {
     return;
@@ -2233,26 +2443,31 @@ onenduseuts(team, player, result) {
     player.buildableaudio = undefined;
   }
 
-  if(isDefined(self.buildablestruct.onenduse))
+  if(isDefined(self.buildablestruct.onenduse)) {
     self[[self.buildablestruct.onenduse]](team, player, result);
+  }
 
   player notify("event_ended");
 }
 
 oncantuseuts(player) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Buildable piece can't use by - " + player.name);
+  }
 
-  if(isDefined(self.buildablestruct.oncantuse))
+  if(isDefined(self.buildablestruct.oncantuse)) {
     self[[self.buildablestruct.oncantuse]](player);
+  }
 }
 
 onuseplantobjectuts(player) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Buildable piece crafted by - " + player.name);
+  }
 
-  if(isDefined(self.buildablestruct.onuseplantobject))
+  if(isDefined(self.buildablestruct.onuseplantobject)) {
     self[[self.buildablestruct.onuseplantobject]](player);
+  }
 
   player notify("bomb_planted");
 }
@@ -2269,15 +2484,18 @@ add_zombie_buildable_piece_vox_category(buildable_name, vox_id, timer) {
 }
 
 is_buildable() {
-  if(!isDefined(level.zombie_buildables))
+  if(!isDefined(level.zombie_buildables)) {
     return false;
+  }
 
-  if(isDefined(self.zombie_weapon_upgrade) && isDefined(level.zombie_buildables[self.zombie_weapon_upgrade]))
+  if(isDefined(self.zombie_weapon_upgrade) && isDefined(level.zombie_buildables[self.zombie_weapon_upgrade])) {
     return true;
+  }
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "specialty_weapupgrade") {
-    if(isDefined(level.buildables_built["pap"]) && level.buildables_built["pap"])
+    if(isDefined(level.buildables_built["pap"]) && level.buildables_built["pap"]) {
       return false;
+    }
 
     return true;
   }
@@ -2290,8 +2508,9 @@ buildable_crafted() {
 }
 
 buildable_complete() {
-  if(self.pieces <= 0)
+  if(self.pieces <= 0) {
     return true;
+  }
 
   return false;
 }
@@ -2305,8 +2524,9 @@ delete_on_disconnect(buildable, self_notify, skip_delete) {
   buildable endon("death");
   self waittill("disconnect");
 
-  if(isDefined(self_notify))
+  if(isDefined(self_notify)) {
     self notify(self_notify);
+  }
 
   if(!(isDefined(skip_delete) && skip_delete)) {
     if(isDefined(buildable.stub)) {
@@ -2314,15 +2534,17 @@ delete_on_disconnect(buildable, self_notify, skip_delete) {
       buildable.stub = undefined;
     }
 
-    if(isDefined(buildable))
+    if(isDefined(buildable)) {
       buildable delete();
+    }
   }
 }
 
 get_buildable_pickup(buildablename, modelname) {
   foreach(buildablepickup in level.buildablepickups) {
-    if(buildablepickup[0].buildablestruct.name == buildablename && buildablepickup[0].visuals[0].model == modelname)
+    if(buildablepickup[0].buildablestruct.name == buildablename && buildablepickup[0].visuals[0].model == modelname) {
       return buildablepickup[0];
+    }
   }
 
   return undefined;
@@ -2344,8 +2566,9 @@ track_buildable_piece_pickedup(piece) {
     }
     self thread do_player_general_vox("general", buildable_struct.piece_vox_id + "_pickup");
 
-    if(isDefined(buildable_struct.piece_vox_timer))
+    if(isDefined(buildable_struct.piece_vox_timer)) {
       self thread buildable_piece_pickedup_vox_cooldown(buildable_struct.piece_vox_id, buildable_struct.piece_vox_timer);
+    }
   } else
     self thread do_player_general_vox("general", "build_pickup");
 }
@@ -2353,8 +2576,9 @@ track_buildable_piece_pickedup(piece) {
 buildable_piece_pickedup_vox_cooldown(piece_vox_id, timer) {
   self endon("disconnect");
 
-  if(!isDefined(self.a_buildable_piece_pickedup_vox_cooldown))
+  if(!isDefined(self.a_buildable_piece_pickedup_vox_cooldown)) {
     self.a_buildable_piece_pickedup_vox_cooldown = [];
+  }
 
   self.a_buildable_piece_pickedup_vox_cooldown[self.a_buildable_piece_pickedup_vox_cooldown.size] = piece_vox_id;
   wait(timer);
@@ -2370,16 +2594,19 @@ track_buildable_pieces_built(buildable) {
 
   bname = buildable.buildable_name;
 
-  if(isDefined(buildable.stat_name))
+  if(isDefined(buildable.stat_name)) {
     bname = buildable.stat_name;
+  }
 
   self add_map_buildable_stat(bname, "pieces_built", 1);
 
   if(!buildable buildable_all_built()) {
-    if(isDefined(level.zombie_include_buildables[buildable.buildable_name]) && isDefined(level.zombie_include_buildables[buildable.buildable_name].snd_build_add_vo_override))
+    if(isDefined(level.zombie_include_buildables[buildable.buildable_name]) && isDefined(level.zombie_include_buildables[buildable.buildable_name].snd_build_add_vo_override)) {
       self thread[[level.zombie_include_buildables[buildable.buildable_name].snd_build_add_vo_override]]();
-    else
+    }
+    else {
       self thread do_player_general_vox("general", "build_add");
+    }
   }
 }
 
@@ -2392,15 +2619,17 @@ track_buildables_built(buildable) {
 
   bname = buildable.buildable_name;
 
-  if(isDefined(buildable.stat_name))
+  if(isDefined(buildable.stat_name)) {
     bname = buildable.stat_name;
+  }
 
   self add_map_buildable_stat(bname, "buildable_built", 1);
   self maps\mp\zombies\_zm_stats::increment_client_stat("buildables_built", 0);
   self maps\mp\zombies\_zm_stats::increment_player_stat("buildables_built");
 
-  if(isDefined(buildable.stub.buildablestruct.vox_id))
+  if(isDefined(buildable.stub.buildablestruct.vox_id)) {
     self thread do_player_general_vox("general", "build_" + buildable.stub.buildablestruct.vox_id + "_final");
+  }
 }
 
 track_buildables_pickedup(buildable) {
@@ -2431,8 +2660,9 @@ track_buildables_planted(equipment) {
 
   buildable_name = undefined;
 
-  if(isDefined(equipment.name))
+  if(isDefined(equipment.name)) {
     buildable_name = get_buildable_stat_name(equipment.name);
+  }
 
   if(!isDefined(buildable_name)) {
     println("STAT TRACKING FAILURE: NO BUILDABLE NAME FOR track_buildables_planted() " + equipment.name + "\\n");
@@ -2444,8 +2674,9 @@ track_buildables_planted(equipment) {
   self add_map_buildable_stat(buildable_name, "buildable_placed", 1);
   vo_name = "build_plc_" + buildable_name;
 
-  if(buildable_name == "electric_trap")
+  if(buildable_name == "electric_trap") {
     vo_name = "build_plc_trap";
+  }
 
   if(!(isDefined(self.buildable_timer) && self.buildable_timer)) {
     self thread do_player_general_vox("general", vo_name);
@@ -2489,8 +2720,9 @@ track_placed_buildables(buildable_name) {
   self add_map_buildable_stat(buildable_name, "buildable_placed", 1);
   vo_name = undefined;
 
-  if(buildable_name == level.riotshield_name)
+  if(buildable_name == level.riotshield_name) {
     vo_name = "build_plc_shield";
+  }
 
   if(!isDefined(vo_name)) {
     return;
@@ -2519,8 +2751,9 @@ say_pickup_buildable_vo(buildable_name, world) {
   }
   vo_name = "build_pck_b" + name;
 
-  if(isDefined(world) && world)
+  if(isDefined(world) && world) {
     vo_name = "build_pck_w" + name;
+  }
 
   if(!isDefined(level.transit_buildable_vo_override) || !self[[level.transit_buildable_vo_override]](name, world)) {
     self thread do_player_general_vox("general", vo_name);

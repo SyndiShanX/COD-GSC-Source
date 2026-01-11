@@ -31,16 +31,19 @@ ending_start() {
   thread maps\loki_fx::loki_ending_lighting();
   thread maps\loki_audio::audio_set_ending_ambience();
 
-  foreach(var_1 in level.allies)
+  foreach(var_1 in level.allies) {
   var_1 maps\_utility::disable_ai_color();
+  }
 
   thread maps\loki_space_breach::set_flags_on_input();
 
-  if(!isDefined(level.center1))
+  if(!isDefined(level.center1)) {
     maps\loki_space_breach::get_center(1);
+  }
 
-  if(!isDefined(level.center2))
+  if(!isDefined(level.center2)) {
     maps\loki_space_breach::get_center(2);
+  }
 
   var_3 = spawn("script_origin", level.center1.origin);
   common_scripts\utility::waitframe();
@@ -53,8 +56,9 @@ ending_start() {
 }
 
 ending() {
-  if(common_scripts\utility::flag("ending_checkpoint_start"))
+  if(common_scripts\utility::flag("ending_checkpoint_start")) {
     ending_init();
+  }
 
   ending_sequence();
 }
@@ -80,8 +84,9 @@ ending_sequence() {
   wait 0.1;
   stopallrumbles();
 
-  if(common_scripts\utility::flag("ending_checkpoint_start"))
+  if(common_scripts\utility::flag("ending_checkpoint_start")) {
     level thread ending_ally_anims();
+  }
 
   level thread ending_dialogue_new();
   level thread fire_final_rod();
@@ -89,17 +94,21 @@ ending_sequence() {
 }
 
 ending_init() {
-  if(!isDefined(level.player_rig))
+  if(!isDefined(level.player_rig)) {
     level.player_rig = create_player_rig();
+  }
 
-  while(!isDefined(level.player_rig))
+  while(!isDefined(level.player_rig)) {
     common_scripts\utility::waitframe();
+  }
 
-  if(!isDefined(level.breach_anim_node))
+  if(!isDefined(level.breach_anim_node)) {
     maps\loki_space_breach::create_anim_node();
+  }
 
-  while(!isDefined(level.breach_anim_node))
+  while(!isDefined(level.breach_anim_node)) {
     common_scripts\utility::waitframe();
+  }
 
   common_scripts\utility::flag_wait("ending_bink_ready");
 }
@@ -134,11 +143,13 @@ ending_fade_out() {
 }
 
 create_player_rig() {
-  if(!isDefined(level.center1))
+  if(!isDefined(level.center1)) {
     maps\loki_space_breach::get_center(1);
+  }
 
-  if(!isDefined(level.center2))
+  if(!isDefined(level.center2)) {
     maps\loki_space_breach::get_center(2);
+  }
 
   var_0 = spawn("script_origin", level.center1.origin);
   var_0.angles = level.center1.angles;
@@ -148,11 +159,13 @@ create_player_rig() {
 }
 
 ending_ally_anims() {
-  if(!isDefined(level.breach_anim_node))
+  if(!isDefined(level.breach_anim_node)) {
     maps\loki_space_breach::create_anim_node();
+  }
 
-  while(!isDefined(level.breach_anim_node))
+  while(!isDefined(level.breach_anim_node)) {
     common_scripts\utility::waitframe();
+  }
 
   level.allies[0] stopanimscripted();
   level.allies[1] stopanimscripted();
@@ -165,8 +178,9 @@ ending_ally_anims() {
   var_0["ally_0"] = level.allies[0];
   level.breach_anim_node maps\_anim::anim_first_frame(var_0, "end");
 
-  if(!common_scripts\utility::flag("ending_checkpoint_start"))
+  if(!common_scripts\utility::flag("ending_checkpoint_start")) {
     wait 4.5;
+  }
 
   thread maps\loki_audio::sfx_loki_npc_monitor_foley(level.allies[0]);
   common_scripts\utility::waitframe();
@@ -188,8 +202,9 @@ ending_bink_display() {
   common_scripts\utility::flag_set("ending_bink_ready");
   common_scripts\utility::flag_wait("ROG_exit");
 
-  if(common_scripts\utility::flag("ending_checkpoint_start"))
+  if(common_scripts\utility::flag("ending_checkpoint_start")) {
     level thread maps\loki_rog::static_flash(2);
+  }
 
   wait 0.2;
   setsaveddvar("cg_cinematicFullScreen", "1");
@@ -208,8 +223,9 @@ ending_bink_display() {
   stopcinematicingame();
   cinematicingameloopresident("loki_rog_intro_launching_missiles");
 
-  while(!iscinematicplaying())
+  while(!iscinematicplaying()) {
     wait 0.1;
+  }
 
   common_scripts\utility::waitframe();
   common_scripts\utility::waitframe();

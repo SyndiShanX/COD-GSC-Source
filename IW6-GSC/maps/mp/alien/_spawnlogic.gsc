@@ -74,11 +74,13 @@ monitor_trig_activation() {
   level.latest_choke_trig_active = level.choke_trigs[0];
 
   level.escape_spitter_target_node = level.choke_trigs[0].spit_at_struct;
-  if(!isDefined(level.escape_spitter_target_node.angles))
+  if(!isDefined(level.escape_spitter_target_node.angles)) {
     level.escape_spitter_target_node.angles = (0, 0, 0);
+  }
 
-  if(!flag("nuke_countdown"))
+  if(!flag("nuke_countdown")) {
     flag_wait("nuke_countdown");
+  }
 
   update_extraction_waypoint_location(level.latest_choke_trig_active get_choke_trig_id());
 
@@ -95,8 +97,9 @@ monitor_trig_activation() {
             update_extraction_waypoint_location(trig get_choke_trig_id());
 
             level.escape_spitter_target_node = trig.spit_at_struct;
-            if(!isDefined(level.escape_spitter_target_node.angles))
+            if(!isDefined(level.escape_spitter_target_node.angles)) {
               level.escape_spitter_target_node.angles = (0, 0, 0);
+            }
 
             thread escape_spawn_special_minion_wave(6);
           }
@@ -138,8 +141,9 @@ escape_spawn_special_minion_wave(delay) {
 
   maps\mp\alien\_spawn_director::activate_spawn_event(notify_msg);
 
-  if(GetDvarInt("alien_debug_escape") > 0)
+  if(GetDvarInt("alien_debug_escape") > 0) {
     IPrintLnBold("^0[MINION METEOR][^7TRIGGERED^0]");
+  }
 }
 
 get_choke_trig_id() {
@@ -149,8 +153,9 @@ get_choke_trig_id() {
 alien_scene_init() {
   level.scene_trigs = getEntArray("scene_trig", "targetname");
 
-  foreach(trig in level.scene_trigs)
+  foreach(trig in level.scene_trigs) {
   trig thread setup_scene();
+  }
 }
 
 setup_scene() {
@@ -181,8 +186,9 @@ run_scene() {
     spawners = array_randomize(self.scene_spawners);
     for(i = 0; i < spawners.size; i++) {
       if(i > 0) {
-        if(randomint(100) >= 50)
+        if(randomint(100) >= 50) {
           continue;
+        }
       }
 
       spawner = spawners[i];
@@ -193,14 +199,16 @@ run_scene() {
 }
 
 spawn_scene_alien(spawner) {
-  if(isDefined(spawner.script_delay))
+  if(isDefined(spawner.script_delay)) {
     wait spawner.script_delay;
+  }
 
   alien_type = "scene " + spawner.types[randomintrange(0, spawner.types.size)];
 
   spawn_angles = spawner.angles;
-  if(!isDefined(spawn_angles))
+  if(!isDefined(spawn_angles)) {
     spawn_angles = (0, 270, 0);
+  }
 
   alien = spawnAlien(spawner.origin, spawn_angles, alien_type);
   alien.spawner = spawner;
@@ -273,8 +281,9 @@ scene_loop() {
       self maps\mp\agents\alien\_alien_anim_utils::turnTowardsEntity(player);
 
       anim_num = 1;
-      if(script_key.size == 2 && int(script_key[1]) > 1)
+      if(script_key.size == 2 && int(script_key[1]) > 1) {
         anim_num = int(script_key[1]);
+      }
 
       if(script_key[0] == "posture") {
         for(i = 0; i < anim_num; i++) {
@@ -310,8 +319,9 @@ scene_loop() {
     }
 
     nodes = getstructarray(cur_node.target, "targetname");
-    if(!isDefined(nodes))
+    if(!isDefined(nodes)) {
       return;
+    }
     cur_node = nodes[RandomIntRange(0, nodes.size)];
   }
 }
@@ -342,10 +352,12 @@ alien_lurker_init() {
     if(isDefined(spawn_loc.script_noteworthy) && spawn_loc.script_noteworthy != "") {
       spawn_types = strtok(spawn_loc.script_noteworthy, " ");
 
-      if(!IsSubStr(spawn_loc.script_noteworthy, "lurker"))
+      if(!IsSubStr(spawn_loc.script_noteworthy, "lurker")) {
         continue;
-      else
+      }
+      else {
         spawn_types = array_remove(spawn_types, spawn_types[0]);
+      }
 
       spawn_loc.spawn_trigger = getent(spawn_loc.target, "targetname");
       assert(isDefined(spawn_loc.spawn_trigger));
@@ -367,8 +379,9 @@ alien_lurker_init() {
   level notify("alien_lurkers_spawn_initialized");
 
   /#	
-  if(!alien_mode_has("nogame"))
+  if(!alien_mode_has("nogame")) {
     thread lurker_loop();
+  }
 }
 
 init_patrol_paths() {
@@ -400,10 +413,12 @@ wave_spawners_init() {
       assertex(spawn_types.size > 0, msg_prefix + "does not have enough spawn types");
 
       foreach(type in spawn_types) {
-        if(isDefined(level.alien_wave[type]))
+        if(isDefined(level.alien_wave[type])) {
           level.alien_wave[type].spawn_locs[level.alien_wave[type].spawn_locs.size] = spawn_loc;
-        else
+        }
+        else {
           assertex(true, msg_prefix + "has unknown spawn type: " + type);
+        }
       }
     } else if(!use_spawn_director()) {
       assertex(false, msg_prefix + "is missing spawner type (script_noteworthy = brute cloaker spitter)");
@@ -420,14 +435,17 @@ assign_alien_attributes(alien_type) {
 
   spawn_type_config = strtok(alien_type, " ");
   if(isDefined(spawn_type_config) && spawn_type_config.size == 2) {
-    if(spawn_type_config[0] == "lurker")
+    if(spawn_type_config[0] == "lurker") {
       spawn_type = "lurker";
+    }
 
-    if(spawn_type_config[0] == "wave")
+    if(spawn_type_config[0] == "wave") {
       spawn_type = "wave";
+    }
 
-    if(spawn_type_config[0] == "scene")
+    if(spawn_type_config[0] == "scene") {
       spawn_type = "scene";
+    }
 
     alien_type = spawn_type_config[1];
   }
@@ -449,8 +467,9 @@ assign_alien_attributes(alien_type) {
 
   self.moveplaybackrate = level.alien_types[alien_type].attributes["speed"] * RandomFloatRange(0.95, 1.05);
 
-  if(flag_exist("hives_cleared") && flag("hives_cleared"))
+  if(flag_exist("hives_cleared") && flag("hives_cleared")) {
     self.moveplaybackrate *= 1.25;
+  }
 
   self.defaultmoveplaybackrate = self.moveplaybackrate;
 
@@ -524,31 +543,37 @@ remaining_alien_management() {
 
 get_blocker_hive(hive_id) {
   foreach(hive_loc in level.stronghold_hive_locs) {
-    if(isDefined(hive_loc.target) && hive_loc.target == hive_id)
+    if(isDefined(hive_loc.target) && hive_loc.target == hive_id) {
       return hive_loc;
+    }
   }
 
   return undefined;
 }
 
 make_spitter_attack_chopper(attack) {
-  if(attack)
+  if(attack) {
     group = "spitters";
-  else
+  }
+  else {
     group = "other_aliens";
+  }
 
-  if(ThreatBiasGroupExists(group) && self GetThreatBiasGroup() != group)
+  if(ThreatBiasGroupExists(group) && self GetThreatBiasGroup() != group) {
     self SetThreatBiasGroup(group);
+  }
 
   if(isDefined(level.hive_heli) && attack) {
-    if(!isDefined(self.favoriteenemy) || self.favoriteenemy != level.hive_heli)
+    if(!isDefined(self.favoriteenemy) || self.favoriteenemy != level.hive_heli) {
       self.favoriteenemy = level.hive_heli;
+    }
   }
 }
 
 escape_spawning(cycle_count) {
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player.threatbias = 100000;
+  }
 
   maps\mp\alien\_spawn_director::start_cycle(cycle_count);
 
@@ -558,10 +583,12 @@ escape_spawning(cycle_count) {
 
   maps\mp\alien\_spawn_director::end_cycle();
 
-  if(flag_exist("nuke_went_off") && flag("nuke_went_off"))
+  if(flag_exist("nuke_went_off") && flag("nuke_went_off")) {
     level waittill_any_timeout(10, "game_ended");
-  else
+  }
+  else {
     wait 7;
+  }
 
   foreach(agent in level.agentArray) {
     if(isalive(agent) && isDefined(agent.isActive) && agent.isActive) {
@@ -616,16 +643,18 @@ clean_up_lagged_aliens() {
       }
       result = false;
       foreach(player in level.players) {
-        if(isalive(player) && distance(player.origin, alien.origin) < CONST_LAGGED_RADIUS)
+        if(isalive(player) && distance(player.origin, alien.origin) < CONST_LAGGED_RADIUS) {
           result = true;
+        }
       }
       if(result) {
         continue;
       }
       time_unseen = gettime() - alien.last_looked_at;
       if(time_unseen / 1000 > CONST_TIME_UNSEEN_RESET) {
-        if(GetDvarInt("alien_debug_escape") > 0)
+        if(GetDvarInt("alien_debug_escape") > 0) {
           IPrintLnBold("^1[ALIEN CLEANED AT: " + alien.origin + "]");
+        }
 
         alien Suicide();
 
@@ -654,8 +683,9 @@ monitor_looked_at() {
       vec = vectornormalize(self.origin - origin);
       cone = 0.55;
 
-      if(VectorDot(sight, vec) > cone)
+      if(VectorDot(sight, vec) > cone) {
         self.last_looked_at = gettime();
+      }
     }
 
     wait 0.25;
@@ -670,16 +700,19 @@ CONST_PORT_ALINE_TO_LEADER_CHANCE = 66;
 port_to_player_loc(alien_type, radius) {
   assertex(isDefined(level.choke_trigs), "There are no choke triggers found in map...");
 
-  if(!isDefined(radius))
+  if(!isDefined(radius)) {
     radius = CONST_TELEPORT_TO_PLAYER_RADIUS;
+  }
 
-  if(isDefined(alien_type) && alien_type == "minion")
+  if(isDefined(alien_type) && alien_type == "minion") {
     radius *= 1.2;
+  }
 
   alive_players = [];
   foreach(player in level.players) {
-    if(isalive(player))
+    if(isalive(player)) {
       alive_players[alive_players.size] = player;
+    }
   }
 
   if(GetDvarInt("alien_debug_escape") > 0 && alive_players.size == 0) {
@@ -694,14 +727,16 @@ port_to_player_loc(alien_type, radius) {
 
     occupants = [];
     foreach(player in alive_players) {
-      if(player istouching(trig))
+      if(player istouching(trig)) {
         occupants[occupants.size] = player;
+      }
     }
 
     if(occupants.size) {
       occupants = SortByDistance(occupants, trig.choke_loc);
-      for(j = 0; j < occupants.size; j++)
+      for(j = 0; j < occupants.size; j++) {
         sorted_players[sorted_players.size] = occupants[j];
+      }
     }
   }
 
@@ -711,8 +746,9 @@ port_to_player_loc(alien_type, radius) {
   }
 
   selected_player = sorted_players[0];
-  if(sorted_players.size > 1 && RandomIntRange(0, 100) <= CONST_PORT_ALINE_TO_LEADER_CHANCE)
+  if(sorted_players.size > 1 && RandomIntRange(0, 100) <= CONST_PORT_ALINE_TO_LEADER_CHANCE) {
     selected_player = sorted_players[RandomIntRange(1, sorted_players.size)];
+  }
 
   choke_loc = undefined;
   foreach(trig in level.choke_trigs) {
@@ -723,33 +759,38 @@ port_to_player_loc(alien_type, radius) {
   }
 
   if(!isDefined(choke_loc)) {
-    if(GetDvarInt("alien_debug_escape") > 0)
+    if(GetDvarInt("alien_debug_escape") > 0) {
       IPrintLnBold("Player at: " + selected_player.origin + " is not inside any choke trigger");
+    }
 
     return undefined;
   }
 
   centering_factor = 3;
-  if(alien_type == "spitter" || alien_type == "seeder")
+  if(alien_type == "spitter" || alien_type == "seeder") {
     centering_factor = 4;
+  }
   origin_infront_of_player = selected_player.origin + VectorNormalize(choke_loc - selected_player.origin) * radius * centering_factor;
   nodes = GetNodesInRadius(origin_infront_of_player, radius, 0, 1024, "Path");
 
-  if(GetDvarInt("alien_debug_escape") > 0)
+  if(GetDvarInt("alien_debug_escape") > 0) {
     thread debug_circle(origin_infront_of_player, radius, (0, 1, 1), true, 16, 1);
+  }
 
   if(nodes.size == 0) {
     if(radius >= CONST_TELEPORT_TO_PLAYER_RADIUS_MAX) {
-      if(GetDvarInt("alien_debug_escape") > 0)
+      if(GetDvarInt("alien_debug_escape") > 0) {
         IPrintLnBold("DEBUG: No spawn node found near player at: " + selected_player.origin + " within 3000 radius");
+      }
 
       return undefined;
     }
 
     new_radius = radius + CONST_TELEPORT_TO_PLAYER_RADIUS_INCREMENT;
 
-    if(GetDvarInt("alien_debug_escape") > 0)
+    if(GetDvarInt("alien_debug_escape") > 0) {
       IPrintLnBold("DEBUG: No spawn node found near player at: " + selected_player.origin + ", new radius=" + new_radius);
+    }
 
     return port_to_player_loc(alien_type, new_radius);
   }
@@ -759,8 +800,9 @@ port_to_player_loc(alien_type, radius) {
   if(GetDvarInt("alien_debug_escape") > 1) {
     position = "#";
     foreach(index, player in sorted_players) {
-      if(player == selected_player)
+      if(player == selected_player) {
         position = int(index + 1);
+      }
     }
 
     population = 1;
@@ -771,8 +813,9 @@ port_to_player_loc(alien_type, radius) {
       population++;
     }
 
-    if(isDefined(selected_player.name) && isDefined(selected_node) && isDefined(selected_node.origin))
+    if(isDefined(selected_player.name) && isDefined(selected_node) && isDefined(selected_node.origin)) {
       iprintln("[^3" + alien_type + "^7 ported to ^3" + selected_player.name + "^7 in position ^3" + position + "^7][dist=^3" + int(distance(selected_node.origin, selected_player.origin)) + "^7][alien#=^3" + population + "^7]");
+    }
   }
 
   angles_facing_player = VectorToAngles(selected_player.origin - selected_node.origin);
@@ -803,8 +846,9 @@ get_selected_node_for_teleport(nodes, location, selected_target) {
   }
 
   if(!isDefined(selected_node)) {
-    if(GetDvarInt("alien_debug_escape") > 0)
+    if(GetDvarInt("alien_debug_escape") > 0) {
       IPrintLnBold("All path nodes near player at: " + selected_target.origin + " are in cooldown for teleport");
+    }
 
     selected_node = nodes[randomint(nodes.size)];
   }
@@ -815,11 +859,13 @@ get_selected_node_for_teleport(nodes, location, selected_target) {
 debug_circle(center, radius, color, depthTest, segments, time) {
   level endon("game_ended");
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 0.5;
+  }
 
-  if(!isDefined(segments))
+  if(!isDefined(segments)) {
     segments = 16;
+  }
 
   angleFrac = 360 / segments;
   circlepoints = [];
@@ -837,10 +883,12 @@ debug_circle(center, radius, color, depthTest, segments, time) {
   while(time > 0) {
     for(i = 0; i < circlepoints.size; i++) {
       start = circlepoints[i];
-      if(i + 1 >= circlepoints.size)
+      if(i + 1 >= circlepoints.size) {
         end = circlepoints[0];
-      else
+      }
+      else {
         end = circlepoints[i + 1];
+      }
 
       line(start, end, color, 1.0, depthTest);
     }
@@ -891,14 +939,16 @@ lurker_loop() {
 
     alive_lurkers = get_alive_lurkers();
 
-    foreach(lurker in alive_lurkers)
+    foreach(lurker in alive_lurkers) {
     lurker thread send_away_and_die();
+    }
 
     wait 6;
 
     if(get_alive_lurkers().size > 0) {
-      foreach(lurker in get_alive_lurkers())
+      foreach(lurker in get_alive_lurkers()) {
       lurker Suicide();
+      }
     }
 
     level waittill("alien_cycle_ended");
@@ -943,8 +993,9 @@ remove_farthest_lurker(avoid_ents) {
     }
   }
 
-  if(!lurkers.size)
+  if(!lurkers.size) {
     return false;
+  }
 
   lurkers[0] Suicide();
 }
@@ -952,8 +1003,9 @@ remove_farthest_lurker(avoid_ents) {
 get_alive_agents() {
   alive_agents = [];
   foreach(agent in level.agentArray) {
-    if(isalive(agent))
+    if(isalive(agent)) {
       alive_agents[alive_agents.size] = agent;
+    }
   }
 
   return alive_agents;
@@ -964,8 +1016,9 @@ get_alive_enemies() {
   alive_non_agents = [];
   alive_agents = get_alive_agents();
 
-  if(isDefined(level.dlc_get_non_agent_enemies))
+  if(isDefined(level.dlc_get_non_agent_enemies)) {
     alive_non_agents = [[level.dlc_get_non_agent_enemies]]();
+  }
 
   alive_enemies = array_combine(alive_agents, alive_non_agents);
 
@@ -975,8 +1028,9 @@ get_alive_enemies() {
 get_alive_lurkers() {
   lurkers = [];
   foreach(agent in level.agentArray) {
-    if(isalive(agent) && isDefined(agent.lurker))
+    if(isalive(agent) && isDefined(agent.lurker)) {
       lurkers[lurkers.size] = agent;
+    }
   }
 
   return lurkers;
@@ -1008,8 +1062,9 @@ lurker_listen_trigger(type) {
       continue;
     }
 
-    if(!self.spawn_trigger.reset)
+    if(!self.spawn_trigger.reset) {
       self wait_for_reset();
+    }
 
     self.spawn_trigger waittill("trigger", owner);
     self.spawn_trigger.reset = false;
@@ -1044,12 +1099,14 @@ wait_for_reset() {
   while(is_touching) {
     is_touching = false;
     foreach(player in get_players()) {
-      if(player IsTouching(self.spawn_trigger))
+      if(player IsTouching(self.spawn_trigger)) {
         is_touching = true;
+      }
     }
 
-    if(is_touching)
+    if(is_touching) {
       wait 0.05;
+    }
   }
 
   self.spawn_trigger.reset = true;
@@ -1059,10 +1116,12 @@ send_away_and_die() {
   self endon("death");
   self notify("run_to_death");
 
-  if(isDefined(self.lurker))
+  if(isDefined(self.lurker)) {
     self thread alien_ai_debug_print("Lurker x_X");
-  else
+  }
+  else {
     self thread alien_ai_debug_print("x_X");
+  }
 
   self maps\mp\agents\alien\_alien_think::set_alien_movemode("run");
   self set_ignore_enemy();
@@ -1088,15 +1147,17 @@ send_away_and_die() {
 set_ignore_enemy() {
   self enable_alien_scripted();
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     self.enemy.current_attackers = [];
+  }
 }
 
 clear_ignore_enemy() {
   self disable_alien_scripted();
 
-  foreach(player in get_players())
+  foreach(player in get_players()) {
   self GetEnemyInfo(player);
+  }
 }
 
 smoke_puff() {
@@ -1113,8 +1174,9 @@ spawn_lurker(type) {
 
   spawner_origin = self.origin;
   spawner_angles = (0, 0, 0);
-  if(isDefined(self.angles))
+  if(isDefined(self.angles)) {
     spawner_angles = self.angles;
+  }
 
   spawn_type = "lurker";
   spawn_type_config = spawn_type + " " + type;
@@ -1131,8 +1193,9 @@ alien_wave_behavior() {
     self GetEnemyInfo(player);
   }
 
-  if(isDefined(level.bomb) && IsSentient(level.bomb))
+  if(isDefined(level.bomb) && IsSentient(level.bomb)) {
     self GetEnemyInfo(level.bomb);
+  }
 
   self.goalradius = 64;
   self.inStandingMelee = false;
@@ -1161,8 +1224,9 @@ alien_lurker_behavior() {
 
   wait 1;
 
-  if(self.movemode == "walk")
+  if(self.movemode == "walk") {
     self maps\mp\agents\alien\_alien_think::set_alien_movemode("run");
+  }
 }
 
 wakeup_to_enemy() {
@@ -1180,8 +1244,9 @@ wakeup_to_player_distance(dist) {
   self endon("death");
   self endon("run_to_death");
 
-  if(!isDefined(dist))
+  if(!isDefined(dist)) {
     dist = 512;
+  }
 
   wakeup = false;
 
@@ -1232,8 +1297,9 @@ walk_patrol_loop() {
       self ScrAgentSetGoalRadius(32);
       self waittill("goal_reached");
 
-      if(isDefined(node.script_delay))
+      if(isDefined(node.script_delay)) {
         wait node.script_delay;
+      }
 
       node = Getstruct(node.target, "targetname");
     }
@@ -1317,8 +1383,9 @@ setup_meteoroid_paths() {
 }
 
 get_meteoroid_impact_node() {
-  if(flag_exist("hives_cleared") && flag("hives_cleared"))
+  if(flag_exist("hives_cleared") && flag("hives_cleared")) {
     return get_meteoroid_impact_node_escape();
+  }
 
   CoM = get_center_of_players();
   range = 2000;
@@ -1331,14 +1398,17 @@ get_meteoroid_impact_node() {
     if(Distance2D(node.origin, CoM) > range) {
       continue;
     }
-    if(node.occupied == false)
+    if(node.occupied == false) {
       free_nodes[free_nodes.size] = node;
+    }
   }
 
-  if(free_nodes.size > 0)
+  if(free_nodes.size > 0) {
     return free_nodes[randomint(free_nodes.size)];
-  else
+  }
+  else {
     return undefined;
+  }
 }
 
 get_meteoroid_impact_node_escape() {
@@ -1356,17 +1426,20 @@ get_meteoroid_impact_node_escape() {
     if(Distance2D(node.origin, CoM) > range) {
       continue;
     }
-    if(node.occupied == false)
+    if(node.occupied == false) {
       free_nodes[free_nodes.size] = node;
+    }
   }
 
   if(free_nodes.size > 0) {
     closest_node = getClosest(CoM, free_nodes);
 
-    if(isDefined(closest_node) && isDefined(closest_node.script_noteworthy) && closest_node.script_noteworthy == "escape_blocker_meteor")
+    if(isDefined(closest_node) && isDefined(closest_node.script_noteworthy) && closest_node.script_noteworthy == "escape_blocker_meteor") {
       return closest_node;
-    else
+    }
+    else {
       return free_nodes[randomint(free_nodes.size)];
+    }
   } else {
     return undefined;
   }
@@ -1393,11 +1466,13 @@ CONST_ESCAPE_BLOCKER_METEOR_DELAY = 25;
 spawn_alien_meteoroid(alien_type, count, respawn, spm, lasting_time) {
   level endon("nuke_went_off");
 
-  if(!isDefined(level.meteoroid_impact_nodes) || level.meteoroid_impact_nodes.size == 0)
+  if(!isDefined(level.meteoroid_impact_nodes) || level.meteoroid_impact_nodes.size == 0) {
     return false;
+  }
 
-  if(!isDefined(respawn))
+  if(!isDefined(respawn)) {
     respawn = false;
+  }
 
   if(!isDefined(count)) {
     count = 4;
@@ -1409,11 +1484,13 @@ spawn_alien_meteoroid(alien_type, count, respawn, spm, lasting_time) {
     }
   }
 
-  if(!isDefined(spm))
+  if(!isDefined(spm)) {
     spm = 60;
+  }
 
-  if(!isDefined(lasting_time))
+  if(!isDefined(lasting_time)) {
     lasting_time = 20;
+  }
 
   impact_node = get_meteoroid_impact_node();
   if(!isDefined(impact_node)) {
@@ -1553,8 +1630,9 @@ spawn_meteoroid_aliens(impact_node, alien_type, count, respawn, spm, spawn_time)
 
     agent = spawnAlien(pos, spawner_angles, "wave " + alien_type);
 
-    if(!isDefined(impact_node.script_noteworthy) || (impact_node.script_noteworthy != "escape_blocker_meteor" && impact_node.script_noteworthy != "escape_meteor"))
+    if(!isDefined(impact_node.script_noteworthy) || (impact_node.script_noteworthy != "escape_blocker_meteor" && impact_node.script_noteworthy != "escape_meteor")) {
       agent thread crawl_out(pos, direction_vec);
+    }
 
     spawned_aliens[spawned_aliens.size] = agent;
 
@@ -1571,8 +1649,9 @@ can_spawn_meteoroid_alien(alien_type, count) {
 
   foreach(agent in level.agentArray) {
     if(isalive(agent)) {
-      if(agent is_alien_agent() && agent.alien_type == alien_type)
+      if(agent is_alien_agent() && agent.alien_type == alien_type) {
         alive_by_type++;
+      }
     }
   }
 
@@ -1707,8 +1786,9 @@ get_current_wave() {
 }
 
 use_spawn_director() {
-  if(isDefined(level.use_spawn_director) && level.use_spawn_director == 1)
+  if(isDefined(level.use_spawn_director) && level.use_spawn_director == 1) {
     return true;
+  }
   return false;
 }
 
@@ -1717,26 +1797,32 @@ encounter_cycle_spawn(force_cycle_start_notify, endon_notify) {
 
   level.current_cycle_started_by_timeout = undefined;
 
-  if(isDefined(endon_notify))
+  if(isDefined(endon_notify)) {
     level endon(endon_notify);
+  }
 
-  if(!isDefined(level.cycle_count))
+  if(!isDefined(level.cycle_count)) {
     level.cycle_count = init_cycle_count();
+  }
 
   cycle_spawn_delay = get_cycle_spawn_delay();
 
   msg = undefined;
-  if(isDefined(force_cycle_start_notify))
+  if(isDefined(force_cycle_start_notify)) {
     msg = level waittill_any_timeout(cycle_spawn_delay, force_cycle_start_notify);
-  else
+  }
+  else {
     wait cycle_spawn_delay;
+  }
 
-  if(isDefined(msg) && msg == "timeout")
+  if(isDefined(msg) && msg == "timeout") {
     level.current_cycle_started_by_timeout = true;
+  }
 
   cycle = level.cycle_count;
-  if(isDefined(level.get_custom_cycle_func))
+  if(isDefined(level.get_custom_cycle_func)) {
     cycle = [[level.get_custom_cycle_func]]();
+  }
 
   maps\mp\alien\_spawn_director::start_cycle(cycle);
   level.cycle_count++;
@@ -1748,8 +1834,9 @@ encounter_cycle_spawn(force_cycle_start_notify, endon_notify) {
 }
 
 init_cycle_count() {
-  if(GetDvarInt("scr_startingcycle") > 0)
+  if(GetDvarInt("scr_startingcycle") > 0) {
     return GetDvarInt("scr_startingcycle");
+  }
 
   return 1;
 }
@@ -1760,8 +1847,10 @@ get_cycle_spawn_delay() {
 }
 
 get_extra_spawn_delay() {
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     return 0;
-  else
+  }
+  else {
     return (getNumActiveAgents() * 3.0);
+  }
 }

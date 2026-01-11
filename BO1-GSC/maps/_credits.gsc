@@ -1154,10 +1154,12 @@ initActivisionCredits() {
   addSpace();
   addCenterHeading(&"CREDIT_USES_BINK_VIDEO_COPYRIGHT");
   addSpace();
-  if(level.console && !level.xenon)
+  if(level.console && !level.xenon) {
     addCenterHeading(&"CREDIT_THIS_PRODUCT_USES_FMOD");
-  else
+  }
+  else {
     addCenterHeading(&"CREDIT_USES_MILES_SOUND_SYSTEM");
+  }
   addSpace();
   addSpace();
   addCenterHeading(&"CREDIT_FONTS_LICENSED_FROM");
@@ -1177,8 +1179,9 @@ initActivisionCredits() {
 
 addLeftTitle(title, textscale) {
   precacheString(title);
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
   temp = spawnStruct();
   temp.type = "lefttitle";
   temp.title = title;
@@ -1188,8 +1191,9 @@ addLeftTitle(title, textscale) {
 
 addLeftName(name, textscale) {
   precacheString(name);
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
   temp = spawnStruct();
   temp.type = "leftname";
   temp.name = name;
@@ -1203,8 +1207,9 @@ addSubLeftTitle(title, textscale) {
 
 addSubLeftName(name, textscale) {
   precacheString(name);
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
   temp = spawnStruct();
   temp.type = "subleftname";
   temp.name = name;
@@ -1214,8 +1219,9 @@ addSubLeftName(name, textscale) {
 
 addRightTitle(title, textscale) {
   precacheString(title);
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
   temp = spawnStruct();
   temp.type = "righttitle";
   temp.title = title;
@@ -1225,8 +1231,9 @@ addRightTitle(title, textscale) {
 
 addRightName(name, textscale) {
   precacheString(name);
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
   temp = spawnStruct();
   temp.type = "rightname";
   temp.name = name;
@@ -1236,8 +1243,9 @@ addRightName(name, textscale) {
 
 addCenterHeading(heading, textscale) {
   precacheString(heading);
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
   temp = spawnStruct();
   temp.type = "centerheading";
   temp.heading = heading;
@@ -1247,8 +1255,9 @@ addCenterHeading(heading, textscale) {
 
 addCenterName(name, textscale) {
   precacheString(name);
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
   temp = spawnStruct();
   temp.type = "centername";
   temp.name = name;
@@ -1259,8 +1268,9 @@ addCenterName(name, textscale) {
 addCenterNameDouble(name1, name2, textscale) {
   precacheString(name1);
   precacheString(name2);
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
   temp = spawnStruct();
   temp.type = "centernamedouble";
   temp.name1 = name1;
@@ -1272,8 +1282,9 @@ addCenterNameDouble(name1, name2, textscale) {
 addCenterDual(title, name, textscale) {
   precacheString(title);
   precacheString(name);
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
   temp = spawnStruct();
   temp.type = "centerdual";
   temp.title = title;
@@ -1286,8 +1297,9 @@ addCenterTriple(name1, name2, name3, textscale) {
   precacheString(name1);
   precacheString(name2);
   precacheString(name3);
-  if(!isDefined(textscale))
+  if(!isDefined(textscale)) {
     textscale = level.linesize;
+  }
   temp = spawnStruct();
   temp.type = "centertriple";
   temp.name1 = name1;
@@ -1316,8 +1328,9 @@ addCenterImage(image, width, height, delay) {
   temp.image = image;
   temp.width = width;
   temp.height = height;
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     temp.delay = delay;
+  }
   level.linelist[level.linelist.size] = temp;
 }
 
@@ -1328,8 +1341,9 @@ addLeftImage(image, width, height, delay) {
   temp.image = image;
   temp.width = width;
   temp.height = height;
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     temp.delay = delay;
+  }
   level.linelist[level.linelist.size] = temp;
 }
 
@@ -1351,10 +1365,12 @@ playCredits() {
       temp thread delayDestroy(22.5);
       temp moveOverTime(22.5);
       temp.y = -120;
-      if(isDefined(level.linelist[i].delay))
+      if(isDefined(level.linelist[i].delay)) {
         delay = level.linelist[i].delay;
-      else
+      }
+      else {
         delay = ((0.037 * height));
+      }
     } else if(type == "leftimage") {
       image = level.linelist[i].image;
       width = level.linelist[i].width;
@@ -1602,8 +1618,9 @@ playCredits() {
       temp2.y = -120;
     } else if(type == "spacesmall")
       delay = 0.1875;
-    else
+    else {
       assert(type == "space");
+    }
     wait delay;
   }
   flag_set("credits_ended");

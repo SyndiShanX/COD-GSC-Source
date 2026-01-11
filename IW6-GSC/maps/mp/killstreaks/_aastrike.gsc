@@ -21,8 +21,9 @@ tryUseAAStrike(lifeId, streakName) {
   heightEnt = GetEnt("airstrikeheight", "targetname");
   assertEx(isDefined(heightEnt), "NO HEIGHT ENT IN LEVEL:Don't know what this means, ask Ned or Jordan");
 
-  if(!isDefined(heightEnt))
+  if(!isDefined(heightEnt)) {
     return false;
+  }
 
   self maps\mp\_matchdata::logKillstreakEvent("aastrike", self.origin);
 
@@ -56,15 +57,17 @@ findTargets() {
 
   if(isDefined(level.littleBirds) && level.littleBirds.size) {
     foreach(lb in level.littleBirds) {
-      if(isDefined(lb.team) && lb.team != self.team)
+      if(isDefined(lb.team) && lb.team != self.team) {
         lbTargets[lbTargets.size] = lb;
+      }
     }
   }
 
   if(isDefined(level.helis) && level.helis.size) {
     foreach(heli in level.helis) {
-      if(heli.team != self.team)
+      if(heli.team != self.team) {
         heliTargets[heliTargets.size] = heli;
+      }
     }
   }
 
@@ -80,10 +83,12 @@ findTargets() {
   foreach(lb in lbTargets) {
     wait(3);
 
-    if(targetCount % 2)
+    if(targetCount % 2) {
       self thread fireAtTarget(lb, self.team, true);
-    else
+    }
+    else {
       self thread fireAtTarget(lb, self.team, false);
+    }
 
     targetCount++;
   }
@@ -130,10 +135,12 @@ finishAAStrike(lifeId) {
 
   for(i = 0; i < 4; i++) {
     wait(6);
-    if(i == 1 || i == 3)
+    if(i == 1 || i == 3) {
       self thread doFlyBy(true);
-    else
+    }
+    else {
       self thread doFlyBy(false);
+    }
   }
 
   wait(3);
@@ -169,15 +176,19 @@ fireAtTarget(curTarget, team, showIcon) {
   rocket2 Missile_SetTargetEnt(curTarget);
   rocket2 Missile_SetFlightmodeDirect();
 
-  if(showIcon)
+  if(showIcon) {
     plane = spawnplane(self, "script_model", startpos, "compass_objpoint_airstrike_friendly", "compass_objpoint_airstrike_friendly");
-  else
+  }
+  else {
     plane = spawnplane(self, "script_model", startpos);
+  }
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     plane setModel("vehicle_av8b_harrier_jet_mp");
-  else
+  }
+  else {
     plane setModel("vehicle_av8b_harrier_jet_opfor_mp");
+  }
 
   length = distance(startPos, endPos);
 
@@ -221,10 +232,12 @@ doFlyBy(showIcon) {
   plane2StartPos = startpos + (randomIntRange(400, 500), randomIntRange(400, 500), randomIntRange(200, 300));
   plane2EndPos = endPos + (randomIntRange(400, 500), randomIntRange(400, 500), randomIntRange(200, 300));
 
-  if(showIcon)
+  if(showIcon) {
     plane = spawnplane(self, "script_model", startpos, "hud_minimap_harrier_green", "hud_minimap_harrier_red");
-  else
+  }
+  else {
     plane = spawnplane(self, "script_model", startpos);
+  }
 
   plane2 = spawnplane(self, "script_model", plane2StartPos);
 

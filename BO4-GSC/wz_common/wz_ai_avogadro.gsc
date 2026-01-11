@@ -228,4 +228,3 @@ function_c698f66b() {
     print3d(self.origin, "<dev string:x38>", (1, 0.5, 0), 1, 1);
   }
 }
-

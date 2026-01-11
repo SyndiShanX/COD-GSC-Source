@@ -8,8 +8,9 @@ anim_get_dvar_int(dvar, def) {
 }
 
 anim_get_dvar(dvar, def) {
-  if(getdvar(dvar) != "")
+  if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
+  }
   else {
     setdvar(dvar, def);
     return def;
@@ -18,22 +19,28 @@ anim_get_dvar(dvar, def) {
 
 set_orient_mode(mode, val1) {
   if(level.dog_debug_orient == self getentnum()) {
-    if(isDefined(val1))
+    if(isDefined(val1)) {
       println("DOG:Setting orient mode: " + mode + " " + val1 + " " + getTime());
-    else
+    }
+    else {
       println("DOG:Setting orient mode: " + mode + " " + getTime());
+    }
   }
-  if(isDefined(val1))
+  if(isDefined(val1)) {
     self OrientMode(mode, val1);
-  else
+  }
+  else {
     self OrientMode(mode);
+  }
 }
 
 debug_anim_print(text) {
-  if(level.dog_debug_anims)
+  if(level.dog_debug_anims) {
     println(text + " " + getTime());
-  if(level.dog_debug_anims_ent == self getentnum())
+  }
+  if(level.dog_debug_anims_ent == self getentnum()) {
     println(text + " " + getTime());
+  }
 }
 
 debug_turn_print(text, line) {
@@ -90,8 +97,9 @@ getAnimDirection(damageyaw) {
 setFootstepEffect(name, fx) {
   assertEx(isDefined(name), "Need to define the footstep surface type.");
   assertEx(isDefined(fx), "Need to define the mud footstep effect.");
-  if(!isDefined(anim.optionalStepEffects))
+  if(!isDefined(anim.optionalStepEffects)) {
     anim.optionalStepEffects = [];
+  }
   anim.optionalStepEffects[anim.optionalStepEffects.size] = name;
   level._effect["step_" + name] = fx;
 }

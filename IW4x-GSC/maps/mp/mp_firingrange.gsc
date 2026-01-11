@@ -131,16 +131,18 @@ triggerCheck(target) {
 
     distance = Distance(target.origin, self.origin);
     if(distance <= 90) {
-      if(isDefined(target.triggeroff))
+      if(isDefined(target.triggeroff)) {
         target.triggeroff = false;
+      }
 
       target notify("targetStopMoving");
 
       while(isDefined(player) && player isTouching(self) && distance <= 90) {
         wait 0.1;
       }
-      if(isDefined(target.triggeroff))
+      if(isDefined(target.triggeroff)) {
         target.triggeroff = true;
+      }
 
       target notify("targetStopMoving");
     }
@@ -233,8 +235,9 @@ moveTarget(dir, dis, speed) {
   }
 
   while(1) {
-    if(isDefined(self.triggeroff))
+    if(isDefined(self.triggeroff)) {
       keepMoving = self.triggeroff;
+    }
 
     switch (dir) {
       case 1:
@@ -242,8 +245,9 @@ moveTarget(dir, dis, speed) {
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
-        if(isDefined(self.triggeroff))
+        if(isDefined(self.triggeroff)) {
           keepMoving = self.triggeroff;
+        }
 
         if(keepMoving == false) {
           break;
@@ -257,8 +261,9 @@ moveTarget(dir, dis, speed) {
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
-        if(isDefined(self.triggeroff))
+        if(isDefined(self.triggeroff)) {
           keepMoving = self.triggeroff;
+        }
 
         if(keepMoving == false) {
           break;
@@ -272,8 +277,9 @@ moveTarget(dir, dis, speed) {
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
-        if(isDefined(self.triggeroff))
+        if(isDefined(self.triggeroff)) {
           keepMoving = self.triggeroff;
+        }
 
         if(keepMoving == false) {
           break;
@@ -287,8 +293,9 @@ moveTarget(dir, dis, speed) {
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
-        if(isDefined(self.triggeroff))
+        if(isDefined(self.triggeroff)) {
           keepMoving = self.triggeroff;
+        }
 
         if(keepMoving == false) {
           break;
@@ -302,8 +309,9 @@ moveTarget(dir, dis, speed) {
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
-        if(isDefined(self.triggeroff))
+        if(isDefined(self.triggeroff)) {
           keepMoving = self.triggeroff;
+        }
 
         if(keepMoving == false) {
           break;
@@ -316,8 +324,9 @@ moveTarget(dir, dis, speed) {
         self moveto(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
-        if(isDefined(self.triggeroff))
+        if(isDefined(self.triggeroff)) {
           keepMoving = self.triggeroff;
+        }
 
         if(keepMoving == false) {
           break;
@@ -327,17 +336,20 @@ moveTarget(dir, dis, speed) {
         self playSound("amb_target_stop");
         break;
       case 7:
-        if(keepMoving == false)
+        if(keepMoving == false) {
           self waittill("targetStopMoving");
+        }
 
         self moveto(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
-        if(isDefined(self.triggeroff))
+        if(isDefined(self.triggeroff)) {
           keepMoving = self.triggeroff;
+        }
 
-        if(keepMoving == false)
+        if(keepMoving == false) {
           self waittill("targetStopMoving");
+        }
         self moveto(StartPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");

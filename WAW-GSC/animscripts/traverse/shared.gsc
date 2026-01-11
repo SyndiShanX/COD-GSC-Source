@@ -38,10 +38,12 @@ advancedTraverse(traverseAnim, normalHeight) {
   } else {
     self waittillmatch("traverse", "gravity on");
     self traverseMode("gravity");
-    if(!animHasNotetrack(traverseAnim, "blend"))
+    if(!animHasNotetrack(traverseAnim, "blend")) {
       wait(gravityToBlendTime);
-    else
+    }
+    else {
       self waittillmatch("traverse", "blend");
+    }
   }
   self.a.movement = self.old_anim_movement;
   self.a.alertness = self.old_anim_alertness;
@@ -72,10 +74,12 @@ teleportThreadEx(verticalOffset, delay, frames) {
   }
   wait delay;
   amount = verticalOffset / frames;
-  if(amount > 10.0)
+  if(amount > 10.0) {
     amount = 10.0;
-  else if(amount < -10.0)
+  }
+  else if(amount < -10.0) {
     amount = -10.0;
+  }
   offset = (0, 0, amount);
   for(i = 0; i < frames; i++) {
     self teleport(self.origin + offset);
@@ -141,12 +145,15 @@ DoTraverse(traverseData) {
 }
 
 handleTraverseNotetracks(note) {
-  if(note == "traverse_death")
+  if(note == "traverse_death") {
     return handleTraverseDeathNotetrack();
-  else if(note == "traverse_align")
+  }
+  else if(note == "traverse_align") {
     return handleTraverseAlignment();
-  else if(note == "traverse_drop")
+  }
+  else if(note == "traverse_drop") {
     return handleTraverseDrop();
+  }
 }
 
 handleTraverseDeathNotetrack() {
@@ -206,8 +213,9 @@ doNothingFunc() {
 
 traverseDeath() {
   self notify("traverse_death");
-  if(!isDefined(self.triedTraverseRagdoll))
+  if(!isDefined(self.triedTraverseRagdoll)) {
     self animscripts\death::PlayDeathSound();
+  }
   deathAnimArray = self.traverseDeathAnim[self.traverseDeathIndex];
   deathAnim = deathAnimArray[randomint(deathAnimArray.size)];
   animscripts\death::play_death_anim(deathAnim);
@@ -256,14 +264,16 @@ TraverseRagdollDeath(traverseAnim) {
     scriptedDeathTimes = getNotetrackTimes(traverseAnim, "traverse_death");
     currentTime = self getAnimTime(traverseAnim);
     scriptedDeathTimes[scriptedDeathTimes.size] = 1.0;
-    if(getDebugDvarInt("scr_forcetraverseragdoll") == 1)
+    if(getDebugDvarInt("scr_forcetraverseragdoll") == 1) {
       scriptedDeathTimes = [];
+    }
     for(i = 0; i < scriptedDeathTimes.size; i++) {
       if(scriptedDeathTimes[i] > currentTime) {
         animLength = getAnimLength(traverseAnim);
         timeUntilScriptedDeath = (scriptedDeathTimes[i] - currentTime) * animLength;
-        if(timeUntilScriptedDeath < 0.5)
+        if(timeUntilScriptedDeath < 0.5) {
           return;
+        }
         break;
       }
     }

@@ -72,8 +72,9 @@ sfx_distant_alarm() {
 }
 
 sfx_fire_tower_spawn() {
-  for(var_0 = 12; var_0 < 18; var_0++)
+  for(var_0 = 12; var_0 < 18; var_0++) {
     level.sfx_black_ice_nodes[var_0] playLoopSound(level.sfx_black_ice_nodes[var_0].soundalias);
+  }
 }
 
 sfx_flare_stack_burn() {
@@ -273,8 +274,9 @@ sfx_rig_ascend_logic(var_0) {
 sfx_stop_ascend_sound_wait(var_0) {
   wait 0.1;
 
-  if(level.sfx_ascend_check == "stop")
+  if(level.sfx_ascend_check == "stop") {
     level.sfx_ascend_node stopsounds();
+  }
 }
 
 sfx_wind_trigger_setup() {
@@ -405,8 +407,9 @@ sfx_node_array_init(var_0, var_1, var_2) {
 }
 
 sfx_play_suppression_sounds() {
-  if(!isDefined(level.sound_water_suppression))
+  if(!isDefined(level.sound_water_suppression)) {
     level.sound_water_suppression = 1;
+  }
 }
 
 sfx_fire_tower_triggers() {
@@ -429,8 +432,9 @@ sfx_fire_tower_triggers() {
   sfx_fire_tower_triggers_init("sfx_fire_tower_trigger_16", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "blackice_oil_rain_ext", 2);
   var_0 = [];
 
-  for(var_1 = 0; var_1 < level.sfx_fire_tower_trigger_array.size; var_1++)
+  for(var_1 = 0; var_1 < level.sfx_fire_tower_trigger_array.size; var_1++) {
     var_0[var_1] = getent(level.sfx_fire_tower_trigger_array[var_1].trig, "targetname");
+  }
 }
 
 sfx_fire_tower_triggers_init(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
@@ -449,27 +453,32 @@ sfx_fire_tower_triggers_init(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
   var_13.vol[9] = var_10;
   var_13.filter = var_11;
 
-  if(isDefined(var_12))
+  if(isDefined(var_12)) {
     var_13.lookatnum = var_12;
-  else
+  }
+  else {
     var_13.lookatnum = 0;
+  }
 
   level.sfx_fire_tower_trigger_array[level.sfx_fire_tower_trigger_array.size] = var_13;
 }
 
 sfx_fire_tower_trigger_logic(var_0, var_1) {
-  for(var_2 = 12; var_2 < 18; var_2++)
+  for(var_2 = 12; var_2 < 18; var_2++) {
     level.sfx_black_ice_nodes[var_2] playLoopSound(level.sfx_black_ice_nodes[var_2].soundalias);
+  }
 }
 
 sfx_generic_node_delete(var_0, var_1) {
   if(!isDefined(var_1)) {
-    if(isDefined(level.sfx_black_ice_nodes[var_0]))
+    if(isDefined(level.sfx_black_ice_nodes[var_0])) {
       level.sfx_black_ice_nodes[var_0] delete();
+    }
   } else {
     for(var_2 = var_0; var_2 < var_1 + 1; var_2++) {
-      if(isDefined(level.sfx_black_ice_nodes[var_2]))
+      if(isDefined(level.sfx_black_ice_nodes[var_2])) {
         level.sfx_black_ice_nodes[var_2] delete();
+      }
     }
   }
 }
@@ -606,16 +615,18 @@ audio_derrick_explode_logic(var_0) {
     level.flarestack_pressurelp_01 stoploopsound();
     level.flarestack_pressurelp_02 stoploopsound();
 
-    if(isDefined(level.flarestack_quake_lp_01))
+    if(isDefined(level.flarestack_quake_lp_01)) {
       level.flarestack_quake_lp_01 stoploopsound();
+    }
 
     wait 0.1;
     level.flarestack_alarm_01 delete();
     level.flarestack_pressurelp_01 delete();
     level.flarestack_pressurelp_02 delete();
 
-    if(isDefined(level.flarestack_quake_lp_01))
+    if(isDefined(level.flarestack_quake_lp_01)) {
       level.flarestack_quake_lp_01 delete();
+    }
 
     thread sfx_playing_fire_tower_sounds();
     wait 4.1;
@@ -950,8 +961,9 @@ sfx_heli_flyaway_cmd_center(var_0) {
 }
 
 sfx_heli_wind_debris() {
-  if(common_scripts\utility::flag("heli_mudpumps_in"))
+  if(common_scripts\utility::flag("heli_mudpumps_in")) {
     wait 3;
+  }
 
   level.heli_wind_debris = spawn("script_origin", level.player.origin);
   level.heli_wind_debris linkto(level.player);
@@ -984,8 +996,9 @@ sfx_heli_turret_fire_start() {}
 sfx_heli_turret_fire_stop() {}
 
 sfx_heli_turret_fire_squibs() {
-  if(common_scripts\utility::flag("sfx_stop_heli_squibs"))
+  if(common_scripts\utility::flag("sfx_stop_heli_squibs")) {
     common_scripts\utility::flag_clear("sfx_stop_heli_squibs");
+  }
 
   if(!isDefined(level.heli_squibs)) {
     level.heli_squibs = spawn("script_origin", self.turret_impact.origin);
@@ -1011,8 +1024,9 @@ sfx_heli_turret_fire_squibs_stop() {
 }
 
 sfx_heli_turret_shells() {
-  if(common_scripts\utility::flag("sfx_stop_heli_shells"))
+  if(common_scripts\utility::flag("sfx_stop_heli_shells")) {
     common_scripts\utility::flag_clear("sfx_stop_heli_shells");
+  }
 
   if(!isDefined(level.heli_shells)) {
     level.heli_shells = spawn("script_origin", self.origin);
@@ -1115,17 +1129,21 @@ sfx_exfil_stop_alarm() {
 }
 
 sfx_cmd_node_cleanup() {
-  if(isDefined(level.exfil_alarm))
+  if(isDefined(level.exfil_alarm)) {
     level.exfil_alarm delete();
+  }
 
-  if(isDefined(level.turbine_fail_node))
+  if(isDefined(level.turbine_fail_node)) {
     level.turbine_fail_node delete();
+  }
 
-  if(isDefined(level.command_warning_node))
+  if(isDefined(level.command_warning_node)) {
     level.command_warning_node delete();
+  }
 
-  if(isDefined(level.command_rumble_node))
+  if(isDefined(level.command_rumble_node)) {
     level.command_rumble_node delete();
+  }
 }
 
 sfx_death_stop_turbines() {
@@ -1148,11 +1166,13 @@ sfx_lever_logic(var_0) {
 
 sfx_lever_green() {
   if(!common_scripts\utility::flag("sfx_lever_green")) {
-    if(common_scripts\utility::flag("sfx_lever_yellow"))
+    if(common_scripts\utility::flag("sfx_lever_yellow")) {
       common_scripts\utility::flag_clear("sfx_lever_yellow");
+    }
 
-    if(common_scripts\utility::flag("sfx_lever_red"))
+    if(common_scripts\utility::flag("sfx_lever_red")) {
       common_scripts\utility::flag_clear("sfx_lever_red");
+    }
 
     common_scripts\utility::flag_set("sfx_lever_green");
 
@@ -1166,11 +1186,13 @@ sfx_lever_green() {
 
 sfx_lever_yellow() {
   if(!common_scripts\utility::flag("sfx_lever_yellow")) {
-    if(common_scripts\utility::flag("sfx_lever_green"))
+    if(common_scripts\utility::flag("sfx_lever_green")) {
       common_scripts\utility::flag_clear("sfx_lever_green");
+    }
 
-    if(common_scripts\utility::flag("sfx_lever_red"))
+    if(common_scripts\utility::flag("sfx_lever_red")) {
       common_scripts\utility::flag_clear("sfx_lever_red");
+    }
 
     common_scripts\utility::flag_set("sfx_lever_yellow");
 
@@ -1179,23 +1201,27 @@ sfx_lever_yellow() {
       level.command_warning_node playLoopSound("scn_blackice_cmd_turbine_warning_lp");
     }
 
-    if(!common_scripts\utility::flag("sfx_rumbles_playing") && common_scripts\utility::flag("minigame_practice_over"))
+    if(!common_scripts\utility::flag("sfx_rumbles_playing") && common_scripts\utility::flag("minigame_practice_over")) {
       thread sfx_yellowshake();
+    }
   }
 }
 
 sfx_lever_red() {
   if(!common_scripts\utility::flag("sfx_lever_red")) {
-    if(common_scripts\utility::flag("sfx_lever_green"))
+    if(common_scripts\utility::flag("sfx_lever_green")) {
       common_scripts\utility::flag_clear("sfx_lever_green");
+    }
 
-    if(common_scripts\utility::flag("sfx_lever_yellow"))
+    if(common_scripts\utility::flag("sfx_lever_yellow")) {
       common_scripts\utility::flag_clear("sfx_lever_yellow");
+    }
 
     common_scripts\utility::flag_set("sfx_lever_red");
 
-    if(!common_scripts\utility::flag("sfx_rumbles_playing") && common_scripts\utility::flag("minigame_practice_over"))
+    if(!common_scripts\utility::flag("sfx_rumbles_playing") && common_scripts\utility::flag("minigame_practice_over")) {
       thread sfx_lever_rumbles();
+    }
   }
 }
 
@@ -1203,17 +1229,20 @@ sfx_lever_rumbles() {
   level.command_rumble_node playLoopSound("emt_blackice_cmd_quake_lp");
   thread sfx_redshake();
 
-  if(!common_scripts\utility::flag("sfx_rumbles_playing"))
+  if(!common_scripts\utility::flag("sfx_rumbles_playing")) {
     common_scripts\utility::flag_set("sfx_rumbles_playing");
+  }
 
   common_scripts\utility::flag_wait("sfx_lever_yellow");
   wait 1.5;
   level.command_rumble_node stoploopsound("emt_blackice_cmd_quake_lp");
 
-  if(common_scripts\utility::flag("sfx_lever_red"))
+  if(common_scripts\utility::flag("sfx_lever_red")) {
     sfx_lever_rumbles();
-  else
+  }
+  else {
     common_scripts\utility::flag_clear("sfx_rumbles_playing");
+  }
 }
 
 sfx_redshake() {

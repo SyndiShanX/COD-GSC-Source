@@ -47,8 +47,9 @@ init_dropoffset() {
 setanims() {
   positions = [];
 
-  for(i = 0; i <= 5; i++)
+  for(i = 0; i <= 5; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].bhasgunwhileriding = 0;
   positions[1].bhasgunwhileriding = 0;
@@ -126,8 +127,9 @@ setanims_land() {
   positions = [];
   positions = [];
 
-  for(i = 0; i <= 5; i++)
+  for(i = 0; i <= 5; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].bhasgunwhileriding = 0;
   positions[1].bhasgunwhileriding = 0;

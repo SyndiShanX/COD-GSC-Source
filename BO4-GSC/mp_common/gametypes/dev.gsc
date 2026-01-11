@@ -2382,4 +2382,3 @@ drawpathsegment(enttarget, linecolor, textcolor, textalpha, textscale, textoffse
     waitframe(1);
   }
 }
-

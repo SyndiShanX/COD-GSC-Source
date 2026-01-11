@@ -29,8 +29,9 @@ main() {
 
 global_FX(targetname, fxName, fxFile, delay, soundalias) {
   ents = getstructarray(targetname, "targetname");
-  if(!isDefined(ents))
+  if(!isDefined(ents)) {
     return;
+  }
   if(ents.size <= 0) {
     return;
   }
@@ -48,12 +49,15 @@ global_FX(targetname, fxName, fxFile, delay, soundalias) {
 }
 
 global_FX_create(fxName, fxFile, delay, soundalias) {
-  if(!isDefined(level._effect))
+  if(!isDefined(level._effect)) {
     level._effect = [];
-  if(!isDefined(level._effect[fxName]))
+  }
+  if(!isDefined(level._effect[fxName])) {
     level._effect[fxName] = loadfx(fxFile);
-  if(!isDefined(self.angles))
+  }
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
   if(!level.clientscripts) {
     ent = createOneshotEffect(fxName);
     ent.v["origin"] = (self.origin);

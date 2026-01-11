@@ -61,8 +61,9 @@ divetonuke_perk_machine_setup(use_trigger, perk_machine, bump_trigger, collision
   perk_machine.script_string = "divetonuke_perk";
   perk_machine.targetname = "vending_divetonuke";
 
-  if(isDefined(bump_trigger))
+  if(isDefined(bump_trigger)) {
     bump_trigger.script_string = "divetonuke_perk";
+  }
 }
 
 divetonuke_perk_machine_think() {
@@ -72,8 +73,9 @@ divetonuke_perk_machine_think() {
     machine = getEntArray("vending_divetonuke", "targetname");
     machine_triggers = getEntArray("vending_divetonuke", "target");
 
-    for(i = 0; i < machine.size; i++)
+    for(i = 0; i < machine.size; i++) {
       machine[i] setModel(level.machine_assets["divetonuke"].off_model);
+    }
 
     array_thread(machine_triggers, ::set_power_on, 0);
     level thread do_initial_power_off_callback(machine, "divetonuke");
@@ -90,13 +92,15 @@ divetonuke_perk_machine_think() {
     level notify("specialty_flakjacket_power_on");
     array_thread(machine_triggers, ::set_power_on, 1);
 
-    if(isDefined(level.machine_assets["divetonuke"].power_on_callback))
+    if(isDefined(level.machine_assets["divetonuke"].power_on_callback)) {
       array_thread(machine, level.machine_assets["divetonuke"].power_on_callback);
+    }
 
     level waittill("divetonuke_off");
 
-    if(isDefined(level.machine_assets["divetonuke"].power_off_callback))
+    if(isDefined(level.machine_assets["divetonuke"].power_off_callback)) {
       array_thread(machine, level.machine_assets["divetonuke"].power_off_callback);
+    }
 
     array_thread(machine, ::turn_perk_off);
   }
@@ -118,10 +122,12 @@ divetonuke_explode(attacker, origin) {
   min_damage = level.zombie_vars["zombie_perk_divetonuke_min_damage"];
   max_damage = level.zombie_vars["zombie_perk_divetonuke_max_damage"];
 
-  if(isDefined(level.flopper_network_optimized) && level.flopper_network_optimized)
+  if(isDefined(level.flopper_network_optimized) && level.flopper_network_optimized) {
     attacker thread divetonuke_explode_network_optimized(origin, radius, max_damage, min_damage, "MOD_GRENADE_SPLASH");
-  else
+  }
+  else {
     radiusdamage(origin, radius, max_damage, min_damage, attacker, "MOD_GRENADE_SPLASH");
+  }
 
   playFX(level._effect["divetonuke_groundhit"], origin);
   attacker playSound("zmb_phdflop_explo");

@@ -4,11 +4,13 @@
 ***************************************/
 
 func_9758() {
-  if(!isDefined(level.func_10680))
+  if(!isDefined(level.func_10680)) {
     level.func_10680 = 250000;
+  }
 
-  if(!isDefined(level.func_656F))
+  if(!isDefined(level.func_656F)) {
     level.func_656F = 810000;
+  }
 
   func_DEF0("avoidShortTimeToEnemySight", ::func_26C2, undefined);
   func_DEF0("preferAlliesByDistance", ::preferalliesbydistance, undefined);
@@ -36,8 +38,9 @@ func_9758() {
 }
 
 func_DEF0(var_00, var_01, var_02) {
-  if(!isDefined(level.spawnglobals.factors))
+  if(!isDefined(level.spawnglobals.factors)) {
     level.spawnglobals.factors = [];
+  }
 
   var_03 = spawnStruct();
   level.spawnglobals.factors[var_00] = var_03;
@@ -89,8 +92,9 @@ avoidcarepackages(var_00) {
     if(!isDefined(var_02)) {
       continue;
     }
-    if(distancesquared(var_0.origin, var_2.origin) < 22500)
+    if(distancesquared(var_0.origin, var_2.origin) < 22500) {
       return 0;
+    }
   }
 
   return 100;
@@ -101,8 +105,9 @@ func_26B8(var_00) {
     if(!isDefined(var_02) || !var_02 isexplosivedangeroustoplayer(self) || scripts\mp\utility\game::istrue(var_2.shouldnotblockspawns)) {
       continue;
     }
-    if(distancesquared(var_0.origin, var_2.origin) < 122500)
+    if(distancesquared(var_0.origin, var_2.origin) < 122500) {
       return 0;
+    }
   }
 
   return 100;
@@ -111,51 +116,60 @@ func_26B8(var_00) {
 func_26BC(var_00) {
   var_01 = scripts\engine\utility::array_combine(level.mines, level.placedims);
 
-  if(isDefined(level.func_126BC) && level.func_126BC.size > 0)
+  if(isDefined(level.func_126BC) && level.func_126BC.size > 0) {
     var_01 = scripts\engine\utility::array_combine(var_01, level.func_126BC);
+  }
 
   foreach(var_03 in var_01) {
     if(!isDefined(var_03) || !var_03 isexplosivedangeroustoplayer(self) || scripts\mp\utility\game::istrue(var_3.shouldnotblockspawns)) {
       continue;
     }
-    if(distancesquared(var_0.origin, var_3.origin) < 122500)
+    if(distancesquared(var_0.origin, var_3.origin) < 122500) {
       return 0;
+    }
   }
 
   return 100;
 }
 
 isexplosivedangeroustoplayer(var_00) {
-  if(!level.teambased || level.friendlyfire || !isDefined(var_0.team))
+  if(!level.teambased || level.friendlyfire || !isDefined(var_0.team)) {
     return 1;
+  }
   else {
     var_01 = undefined;
 
     if(isDefined(self.owner)) {
-      if(var_00 == self.owner)
+      if(var_00 == self.owner) {
         return 1;
+      }
 
       var_01 = self.owner.team;
     }
 
-    if(isDefined(var_01))
+    if(isDefined(var_01)) {
       return var_01 != var_0.team;
-    else
+    }
+    else {
       return 1;
+    }
   }
 }
 
 func_26AB(var_00) {
-  if(!isDefined(level.artillerydangercenters))
+  if(!isDefined(level.artillerydangercenters)) {
     return 100;
+  }
 
-  if(!var_0.func_C7DA)
+  if(!var_0.func_C7DA) {
     return 100;
+  }
 
   var_01 = scripts\mp\killstreaks\airstrike::getairstrikedanger(var_0.origin);
 
-  if(var_01 > 0)
+  if(var_01 > 0) {
     return 0;
+  }
 
   return 100;
 }
@@ -163,11 +177,13 @@ func_26AB(var_00) {
 func_26B3(var_00) {
   var_01 = "all";
 
-  if(level.teambased)
+  if(level.teambased) {
     var_01 = scripts\mp\gameobjects::func_7E93(self.team);
+  }
 
-  if(var_0.func_466B[var_01] > 0)
+  if(var_0.func_466B[var_01] > 0) {
     return 0;
+  }
 
   return 100;
 }
@@ -175,11 +191,13 @@ func_26B3(var_00) {
 func_26B7(var_00) {
   var_01 = "all";
 
-  if(level.teambased)
+  if(level.teambased) {
     var_01 = scripts\mp\gameobjects::func_7E93(self.team);
+  }
 
-  if(var_0.func_74BC[var_01] > 0)
+  if(var_0.func_74BC[var_01] > 0) {
     return 0;
+  }
 
   return 100;
 }
@@ -188,10 +206,12 @@ func_26AE(var_00) {
   var_01 = [];
   var_02 = [];
 
-  if(level.teambased)
+  if(level.teambased) {
     var_1[0] = ::scripts\mp\gameobjects::func_7E93(self.team);
-  else
+  }
+  else {
     var_1[var_1.size] = "all";
+  }
 
   foreach(var_04 in var_01) {
     if(var_0.totalplayers[var_04] == 0) {
@@ -200,25 +220,29 @@ func_26AE(var_00) {
     var_2[var_2.size] = var_04;
   }
 
-  if(var_2.size == 0)
+  if(var_2.size == 0) {
     return 100;
+  }
 
   foreach(var_04 in var_02) {
-    if(var_0.mindistsquared[var_04] < level.func_10680)
+    if(var_0.mindistsquared[var_04] < level.func_10680) {
       return 0;
+    }
   }
 
   return 100;
 }
 
 func_26C4(var_00) {
-  if(isDefined(self.func_1CAE))
+  if(isDefined(self.func_1CAE)) {
     return 100;
+  }
 
   if(positionwouldtelefrag(var_0.origin)) {
     foreach(var_02 in var_0.alternates) {
-      if(!positionwouldtelefrag(var_02))
+      if(!positionwouldtelefrag(var_02)) {
         return 100;
+      }
     }
 
     return 0;
@@ -228,8 +252,9 @@ func_26C4(var_00) {
 }
 
 avoidsamespawn(var_00) {
-  if(isDefined(self.lastspawnpoint) && self.lastspawnpoint == var_00)
+  if(isDefined(self.lastspawnpoint) && self.lastspawnpoint == var_00) {
     return 0;
+  }
 
   return 100;
 }
@@ -238,8 +263,9 @@ func_26B6(var_00) {
   if(isDefined(var_0.lastspawnteam) && (!level.teambased || var_0.lastspawnteam != self.team)) {
     var_01 = var_0.lastspawntime + 500;
 
-    if(gettime() < var_01)
+    if(gettime() < var_01) {
       return 0;
+    }
   }
 
   return 100;
@@ -252,8 +278,9 @@ avoidrecentlyusedbyenemies(var_00) {
     var_02 = gettime() - var_0.lastspawntime;
     var_0.analytics.spawnusedbyenemies = var_02 / 1000;
 
-    if(var_02 > 4000)
+    if(var_02 > 4000) {
       return 100;
+    }
 
     return var_02 / 4000 * 100;
   }
@@ -266,8 +293,9 @@ avoidrecentlyusedbyanyone(var_00) {
     var_01 = gettime() - var_0.lastspawntime;
     var_0.analytics.timesincelastspawn = var_01 / 1000;
 
-    if(var_01 > 4000)
+    if(var_01 > 4000) {
       return 100;
+    }
 
     return var_01 / 4000 * 100;
   }
@@ -276,29 +304,34 @@ avoidrecentlyusedbyanyone(var_00) {
 }
 
 avoidlastdeathlocation(var_00) {
-  if(!isDefined(self.lastdeathpos))
+  if(!isDefined(self.lastdeathpos)) {
     return 100;
+  }
 
   var_01 = distancesquared(var_0.origin, self.lastdeathpos);
 
-  if(var_01 > 810000)
+  if(var_01 > 810000) {
     return 100;
+  }
 
   var_02 = var_01 / 810000;
   return var_02 * 100;
 }
 
 avoidlastattackerlocation(var_00) {
-  if(!isDefined(self.lastattacker) || !isDefined(self.lastattacker.origin))
+  if(!isDefined(self.lastattacker) || !isDefined(self.lastattacker.origin)) {
     return 100;
+  }
 
-  if(!scripts\mp\utility\game::isreallyalive(self.lastattacker))
+  if(!scripts\mp\utility\game::isreallyalive(self.lastattacker)) {
     return 100;
+  }
 
   var_01 = distancesquared(var_0.origin, self.lastattacker.origin);
 
-  if(var_01 > 810000)
+  if(var_01 > 810000) {
     return 100;
+  }
 
   var_02 = var_01 / 810000;
   return var_02 * 100;
@@ -313,56 +346,66 @@ updatefrontline(var_00) {
 }
 
 updatefrontlineposition() {
-  if(!func_4BED())
+  if(!func_4BED()) {
     return 0;
+  }
 
   var_00 = getglobalfrontlineinfo();
   var_01 = gettime();
 
-  if(!isDefined(var_0.lastupdatetime))
+  if(!isDefined(var_0.lastupdatetime)) {
     var_0.lastupdatetime = var_01;
-  else if(var_0.isactive["allies"] && var_0.isactive["axis"])
+  }
+  else if(var_0.isactive["allies"] && var_0.isactive["axis"]) {
     var_0.func_12F92 = var_0.func_12F92 + var_0.func_AA37;
-  else
+  }
+  else {
     var_0.func_5AFE = var_0.func_5AFE + var_0.func_AA37;
+  }
 
   var_02 = (var_01 - var_0.lastupdatetime) / 1000.0;
   var_0.lastupdatetime = var_01;
   var_0.func_AA37 = var_02;
   var_03 = func_7ECA("allies");
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     return 0;
+  }
 
   var_03 = (var_3[0], var_3[1], 0);
   var_0.func_1C27 = var_03;
   var_04 = func_7ECA("axis");
 
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     return 0;
+  }
 
   var_04 = (var_4[0], var_4[1], 0);
   var_0.func_26F3 = var_04;
   var_05 = var_04 - var_03;
   var_06 = vectortoyaw(var_05);
 
-  if(!isDefined(var_0.teamdiffyaw) || !var_0.isactive["allies"] || !var_0.isactive["axis"])
+  if(!isDefined(var_0.teamdiffyaw) || !var_0.isactive["allies"] || !var_0.isactive["axis"]) {
     var_0.teamdiffyaw = var_06;
+  }
 
   var_07 = 80.0 * var_02;
   var_08 = var_06 - var_0.teamdiffyaw;
 
-  if(var_08 > 180)
+  if(var_08 > 180) {
     var_08 = var_08 - 360;
-  else if(var_08 < -180)
+  }
+  else if(var_08 < -180) {
     var_08 = 360 + var_08;
+  }
 
   var_07 = clamp(var_08, var_07 * -1, var_07);
   var_0.teamdiffyaw = var_0.teamdiffyaw + var_07;
   var_09 = var_03 + var_05 * 0.5;
 
-  if(!isDefined(var_0.midpoint) || !var_0.isactive["allies"] || !var_0.isactive["axis"])
+  if(!isDefined(var_0.midpoint) || !var_0.isactive["allies"] || !var_0.isactive["axis"]) {
     var_0.midpoint = var_09;
+  }
 
   var_10 = var_09 - var_0.midpoint;
   var_11 = length2d(var_10);
@@ -422,10 +465,12 @@ updatefrontlinedebug() {
   if(isDefined(level.matchrecording_logevent)) {
     var_07 = undefined;
 
-    if(var_2.isactive["allies"] && var_2.isactive["axis"])
+    if(var_2.isactive["allies"] && var_2.isactive["axis"]) {
       var_07 = "FRONT_LINE";
-    else
+    }
+    else {
       var_07 = scripts\engine\utility::ter_op(var_2.isactive["allies"], "FRONT_LINE_ALLIES", "FRONT_LINE_AXIS");
+    }
 
     [[level.matchrecording_logevent]](var_2.logids["line"], "allies", var_07, var_5[0], var_5[1], gettime(), undefined, var_6[0], var_6[1]);
   }
@@ -450,12 +495,14 @@ func_7ECA(var_00) {
     if(!scripts\mp\utility\game::isreallyalive(var_03)) {
       continue;
     }
-    if(var_3.team == var_00)
+    if(var_3.team == var_00) {
       var_1[var_1.size] = var_03;
+    }
   }
 
-  if(var_1.size == 0)
+  if(var_1.size == 0) {
     return undefined;
+  }
 
   var_05 = scripts\mp\utility\game::func_7DEA(var_01);
   return var_05;
@@ -473,8 +520,9 @@ runfrontlinespawntrapchecks(var_00) {
   }
   var_02 = getdvarint("scr_frontline_min_spawns", 0);
 
-  if(var_02 == 0)
+  if(var_02 == 0) {
     var_02 = 4;
+  }
 
   var_03 = scripts\mp\utility\game::getotherteam(var_00);
   var_04 = 0;
@@ -485,25 +533,29 @@ runfrontlinespawntrapchecks(var_00) {
     if(!isDefined(var_7.func_7450) || var_7.func_7450 != var_00) {
       continue;
     }
-    if(!isDefined(var_7.func_74BC) || !isDefined(var_7.func_74BC[var_03]) || var_7.func_74BC[var_03] <= 0)
+    if(!isDefined(var_7.func_74BC) || !isDefined(var_7.func_74BC[var_03]) || var_7.func_74BC[var_03] <= 0) {
       var_4++;
+    }
   }
 
   var_09 = var_04 / var_5.size;
 
   if(var_04 < var_02 || var_09 < 0.0) {
-    if(var_04 < var_02)
+    if(var_04 < var_02) {
       var_1.disabledreason[var_00] = 0;
-    else
+    }
+    else {
       var_1.disabledreason[var_00] = 1;
+    }
 
     var_1.isactive[var_00] = 0;
   }
 }
 
 func_4BED() {
-  if(level.gametype != "war" && level.gametype != "conf" && level.gametype != "cranked")
+  if(level.gametype != "war" && level.gametype != "conf" && level.gametype != "cranked") {
     return 0;
+  }
 
   return 1;
 }
@@ -522,8 +574,9 @@ getglobalfrontlineinfo() {
 }
 
 preferalliesbydistance(var_00) {
-  if(var_0.totalplayers[self.team] == 0)
+  if(var_0.totalplayers[self.team] == 0) {
     return 0;
+  }
 
   var_01 = var_0.distsumsquared[self.team] / var_0.totalplayers[self.team];
   var_01 = min(var_01, 3240000);
@@ -542,10 +595,12 @@ func_26B4(var_00) {
   var_01 = [];
   var_02 = [];
 
-  if(level.teambased)
+  if(level.teambased) {
     var_1[0] = ::scripts\mp\gameobjects::func_7E93(self.team);
-  else
+  }
+  else {
     var_1[var_1.size] = "all";
+  }
 
   foreach(var_04 in var_01) {
     if(var_0.totalplayers[var_04] == 0) {
@@ -554,12 +609,14 @@ func_26B4(var_00) {
     var_2[var_2.size] = var_04;
   }
 
-  if(var_2.size == 0)
+  if(var_2.size == 0) {
     return 100;
+  }
 
   foreach(var_04 in var_02) {
-    if(var_0.mindistsquared[var_04] < 250000)
+    if(var_0.mindistsquared[var_04] < 250000) {
       return 0;
+    }
   }
 
   var_08 = 0;
@@ -580,14 +637,17 @@ func_26B4(var_00) {
 func_26B5(var_00) {
   var_01 = undefined;
 
-  if(level.teambased)
+  if(level.teambased) {
     var_01 = scripts\mp\gameobjects::func_7E93(self.team);
-  else
+  }
+  else {
     var_01 = "all";
+  }
 
   foreach(var_03 in var_0.func_5721[var_01]) {
-    if(var_03 < level.func_656F)
+    if(var_03 < level.func_656F) {
       return 0;
+    }
   }
 
   return 100;
@@ -597,10 +657,12 @@ func_26AF(var_00) {
   var_01 = [];
   var_02 = [];
 
-  if(level.teambased)
+  if(level.teambased) {
     var_1[0] = ::scripts\mp\gameobjects::func_7E93(self.team);
-  else
+  }
+  else {
     var_1[var_1.size] = "all";
+  }
 
   foreach(var_04 in var_01) {
     if(var_0.totalplayers[var_04] == 0) {
@@ -609,14 +671,16 @@ func_26AF(var_00) {
     var_2[var_2.size] = var_04;
   }
 
-  if(var_2.size == 0)
+  if(var_2.size == 0) {
     return 100;
+  }
 
   var_06 = 0;
 
   foreach(var_04 in var_02) {
-    if(var_0.mindistsquared[var_04] < 250000)
+    if(var_0.mindistsquared[var_04] < 250000) {
       return 0;
+    }
 
     var_08 = min(var_0.mindistsquared[var_04], 3240000);
     var_09 = var_08 / 3240000;
@@ -630,11 +694,13 @@ avoidclosestenemybydistance(var_00, var_01) {
   var_02 = var_1["closestEnemyInfluenceDistSq"];
   var_03 = "all";
 
-  if(level.teambased)
+  if(level.teambased) {
     var_03 = scripts\mp\gameobjects::func_7E93(self.team);
+  }
 
-  if(var_0.mindistsquared[var_03] < 250000)
+  if(var_0.mindistsquared[var_03] < 250000) {
     return 0;
+  }
 
   var_04 = min(var_0.mindistsquared[var_03], var_02);
   var_05 = var_04 / var_02;
@@ -651,28 +717,34 @@ scoreeventalwaysshowassplash(var_00) {
     }
   }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return 100;
+  }
 
   var_05 = var_01 scripts\mp\gameobjects::func_7E29();
 
-  if(var_05 == "none")
+  if(var_05 == "none") {
     return 100;
-  else
+  }
+  else {
     return 50.0;
+  }
 }
 
 func_D82E(var_00, var_01) {
   var_02 = var_1["preferredDomPoints"];
 
-  if(var_2[0] && var_0.dompointa)
+  if(var_2[0] && var_0.dompointa) {
     return scoreeventalwaysshowassplash(0);
+  }
 
-  if(var_2[1] && var_0.dompointb)
+  if(var_2[1] && var_0.dompointb) {
     return scoreeventalwaysshowassplash(1);
+  }
 
-  if(var_2[2] && var_0.dompointc)
+  if(var_2[2] && var_0.dompointc) {
     return scoreeventalwaysshowassplash(2);
+  }
 
   return 0;
 }
@@ -681,16 +753,18 @@ func_D82B(var_00, var_01) {
   var_02 = var_1["closestPoints"];
 
   foreach(var_04 in var_02) {
-    if(var_00 == var_04)
+    if(var_00 == var_04) {
       return 100;
+    }
   }
 
   return 0;
 }
 
 preferbyteambase(var_00, var_01) {
-  if(isDefined(var_0.teambase) && var_0.teambase == var_01)
+  if(isDefined(var_0.teambase) && var_0.teambase == var_01) {
     return 100;
+  }
 
   return 0;
 }
@@ -698,8 +772,9 @@ preferbyteambase(var_00, var_01) {
 func_26C2(var_00) {
   var_01 = "all";
 
-  if(level.teambased)
+  if(level.teambased) {
     var_01 = scripts\mp\gameobjects::func_7E93(self.team);
+  }
 
   var_02 = scripts\engine\utility::ter_op(isDefined(var_0.func_B4C4) && isDefined(var_0.func_B4C4[var_01]), 1.0 - var_0.func_B4C4[var_01], 0.0);
   var_0.analytics.maxenemysightfraction = var_02;
@@ -709,8 +784,9 @@ func_26C2(var_00) {
 func_26C3(var_00) {
   var_01 = "all";
 
-  if(level.teambased)
+  if(level.teambased) {
     var_01 = scripts\mp\gameobjects::func_7E93(self.team);
+  }
 
   var_02 = scripts\engine\utility::ter_op(isDefined(var_0.func_B4A6) && isDefined(var_0.func_B4A6[var_01]), 1.0 - var_0.func_B4A6[var_01], 0.0);
   var_0.analytics.maxjumpingenemysightfraction = var_02;
@@ -720,16 +796,19 @@ func_26C3(var_00) {
 func_26C5(var_00) {
   var_01 = "all";
 
-  if(level.teambased)
+  if(level.teambased) {
     var_01 = scripts\mp\gameobjects::func_7E93(self.team);
+  }
 
   var_02 = scripts\engine\utility::ter_op(isDefined(var_0.func_B4A6) && isDefined(var_0.func_B4A6[var_01]), 1.0 - var_0.func_B4A6[var_01], 0.0);
   var_03 = var_02 * scripts\mp\spawnlogic::getmaxdistancetolos();
 
-  if(var_03 < 300)
+  if(var_03 < 300) {
     return 0;
-  else
+  }
+  else {
     return 100;
+  }
 }
 
 randomspawnscore(var_00) {
@@ -772,10 +851,12 @@ func_26B0(var_00, var_01) {
   var_04 = var_1["ballPosition"];
   var_05 = var_1["avoidBallDeadZoneDistSq"];
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_02 = var_03;
-  else if(isDefined(var_04))
+  }
+  else if(isDefined(var_04)) {
     var_02 = var_04;
+  }
 
   if(isDefined(var_02)) {
     var_06 = distancesquared(var_02, var_0.origin);
@@ -793,8 +874,9 @@ func_26B1(var_00, var_01) {
 prefernearlastteamspawn(var_00) {
   var_01 = level.spawnglobals.lastteamspawnpoints[self.team];
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return 0;
+  }
 
   var_02 = distancesquared(var_1.origin, var_0.origin);
   var_02 = int(min(var_02, 9000000));

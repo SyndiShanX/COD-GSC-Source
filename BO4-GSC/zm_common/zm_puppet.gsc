@@ -44,4 +44,3 @@ wait_for_puppet_pickup() {
     waitframe(1);
   }
 }
-

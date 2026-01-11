@@ -33,8 +33,9 @@ func_128E7(var_00, var_01) {
   var_02 = "heli_pilot";
   var_03 = 1;
 
-  if(isDefined(self.underwater) && self.underwater)
+  if(isDefined(self.underwater) && self.underwater) {
     return 0;
+  }
   else if(func_68C1(self.team)) {
     self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
@@ -54,22 +55,26 @@ func_128E7(var_00, var_01) {
   level.heli_pilot[self.team] = var_04;
   var_05 = func_10DA3(var_04);
 
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     var_05 = 0;
+  }
 
   return var_05;
 }
 
 func_68C1(var_00) {
   if(level.gametype == "dm") {
-    if(isDefined(level.heli_pilot[var_00]) || isDefined(level.heli_pilot[level.otherteam[var_00]]))
+    if(isDefined(level.heli_pilot[var_00]) || isDefined(level.heli_pilot[level.otherteam[var_00]])) {
       return 1;
-    else
+    }
+    else {
       return 0;
+    }
   } else if(isDefined(level.heli_pilot[var_00]))
     return 1;
-  else
+  else {
     return 0;
+  }
 }
 
 watchhostmigrationfinishedinit(var_00) {
@@ -144,8 +149,9 @@ func_10DA3(var_00) {
   var_00 endon("death");
   scripts\mp\utility\game::setusingremote(var_0.helipilottype);
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(0);
+  }
 
   self.restoreangles = self.angles;
   var_00 thread scripts\mp\killstreaks\flares::func_A730(2, "+smoke", "ui_heli_pilot_flare_ammo", "ui_heli_pilot_warn");
@@ -154,8 +160,9 @@ func_10DA3(var_00) {
   var_01 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_0.helipilottype);
 
   if(var_01 != "success") {
-    if(isDefined(self.disabledweapon) && self.disabledweapon)
+    if(isDefined(self.disabledweapon) && self.disabledweapon) {
       scripts\engine\utility::allow_weapon(1);
+    }
 
     var_00 notify("death");
     return 0;
@@ -234,8 +241,9 @@ watchplayersspawning() {
   for(;;) {
     level waittill("player_spawned", var_00);
 
-    if(var_0.sessionstate == "playing" && self.owner scripts\mp\utility\game::isenemy(var_00))
+    if(var_0.sessionstate == "playing" && self.owner scripts\mp\utility\game::isenemy(var_00)) {
       var_00 thread watchforperkremoval(self);
+    }
   }
 }
 
@@ -276,11 +284,13 @@ helipilot_watchdeath() {
   self endon("gone");
   self waittill("death");
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner helipilot_endride(self);
+  }
 
-  if(isDefined(self.killcament))
+  if(isDefined(self.killcament)) {
     self.killcament delete();
+  }
 
   thread scripts\mp\killstreaks\helicopter::lbonkilled();
 }
@@ -294,8 +304,9 @@ helipilot_watchobjectivecam() {
   level waittill("objective_cam");
   thread scripts\mp\killstreaks\helicopter::lbonkilled();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner helipilot_endride(self);
+  }
 }
 
 helipilot_watchtimeout() {
@@ -331,8 +342,9 @@ helipilot_leave() {
   self endon("death");
   self notify("leaving");
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner helipilot_endride(self);
+  }
 
   var_00 = scripts\mp\killstreaks\airdrop::getflyheightoffset(self.origin);
   var_01 = self.origin + (0, 0, var_00);
@@ -366,11 +378,13 @@ helipilot_endride(var_00) {
     self setclientomnvar("ui_heli_pilot", 0);
     var_00 notify("end_remote");
 
-    if(scripts\mp\utility\game::isusingremote())
+    if(scripts\mp\utility\game::isusingremote()) {
       scripts\mp\utility\game::clearusingremote();
+    }
 
-    if(getdvarint("camera_thirdPerson"))
+    if(getdvarint("camera_thirdPerson")) {
       scripts\mp\utility\game::setthirdpersondof(1);
+    }
 
     self remotecontrolvehicleoff(var_00);
     self setplayerangles(self.restoreangles);
@@ -421,8 +435,9 @@ helipilot_getlinkedstruct(var_00) {
     for(var_02 = 0; var_02 < var_1.size; var_2++) {
       var_03 = scripts\engine\utility::getstruct(var_1[var_02], "script_linkname");
 
-      if(isDefined(var_03))
+      if(isDefined(var_03)) {
         return var_03;
+      }
     }
   }
 

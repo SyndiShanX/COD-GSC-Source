@@ -40,4 +40,3 @@ render_struct(selected_struct) {
     waitframe(1);
   }
 }
-

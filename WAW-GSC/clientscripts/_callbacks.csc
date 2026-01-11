@@ -154,8 +154,9 @@ sound_notify(client_num, entity, note) {
     return true;
   }
   prefix = getsubstr(note, 0, 5);
-  if(prefix != "sound")
+  if(prefix != "sound") {
     return false;
+  }
   alias = "anml" + getsubstr(note, 5);
   entity play_dog_sound(client_num, alias);
 }

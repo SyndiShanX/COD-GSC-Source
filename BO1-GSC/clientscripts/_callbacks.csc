@@ -84,10 +84,12 @@ localclientdisconnect(clientNum) {
 playerspawned(localClientNum) {
   self endon("entityshutdown");
   self thread clientscripts\_flamethrower_plight::play_pilot_light_fx(localClientNum);
-  if(isDefined(level._faceAnimCBFunc))
+  if(isDefined(level._faceAnimCBFunc)) {
     self thread[[level._faceAnimCBFunc]](localClientNum);
-  if(isDefined(level._playerCBFunc))
+  }
+  if(isDefined(level._playerCBFunc)) {
     self thread[[level._playerCBFunc]](localClientNum);
+  }
   level thread localclientspawned_callback(localClientNum);
 }
 
@@ -196,8 +198,9 @@ entityspawned(localClientNum) {
     }
   }
   if(self.type == "actor") {
-    if(isDefined(level._faceAnimCBFunc))
+    if(isDefined(level._faceAnimCBFunc)) {
       self thread[[level._faceAnimCBFunc]](localClientNum);
+    }
     if(localClientNum == 0) {
       self._gib_def = get_gib_def();
       if(self._gib_def == -1) {
@@ -288,17 +291,21 @@ airsupport(localClientNum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
 }
 
 scriptmodelspawned(local_client_num, ent, destructable_index) {
-  if(destructable_index == 0)
+  if(destructable_index == 0) {
     return;
-  if(!isDefined(level.createFXent))
+  }
+  if(!isDefined(level.createFXent)) {
     return;
+  }
   fixed = false;
   for(i = 0; i < level.createFXent.size; i++) {
-    if(level.createFXent[i].v["type"] != "exploder")
+    if(level.createFXent[i].v["type"] != "exploder") {
       continue;
+    }
     exploder = level.createFXent[i];
-    if(!isDefined(exploder.needs_fixup))
+    if(!isDefined(exploder.needs_fixup)) {
       continue;
+    }
     if(exploder.needs_fixup == destructable_index) {
       exploder.v["angles"] = VectorToAngles(ent.origin - exploder.v["origin"]);
       exploder clientscripts\_fx::set_forward_and_up_vectors();
@@ -309,8 +316,9 @@ scriptmodelspawned(local_client_num, ent, destructable_index) {
 }
 
 callback_activate_exploder(exploder_id) {
-  if(!isDefined(level._exploder_ids))
+  if(!isDefined(level._exploder_ids)) {
     return;
+  }
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
   for(i = 0; i < keys.size; i++) {
@@ -328,8 +336,9 @@ callback_activate_exploder(exploder_id) {
 }
 
 callback_deactivate_exploder(exploder_id) {
-  if(!isDefined(level._exploder_ids))
+  if(!isDefined(level._exploder_ids)) {
     return;
+  }
   keys = getarraykeys(level._exploder_ids);
   exploder = undefined;
   for(i = 0; i < keys.size; i++) {
@@ -356,8 +365,9 @@ sound_notify(client_num, entity, note) {
     return true;
   }
   prefix = getsubstr(note, 0, 5);
-  if(prefix != "sound")
+  if(prefix != "sound") {
     return false;
+  }
   alias = "aml" + getsubstr(note, 5);
   entity play_dog_sound(client_num, alias);
 }

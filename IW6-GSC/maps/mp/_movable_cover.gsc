@@ -56,8 +56,9 @@ movable_cover_init() {
   self.updatePaths = self.spawnflags & 1;
 
   self.movable_type = "default";
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     self.movable_type = self.script_noteworthy;
+  }
 
   self movable_cover_parse_parameters();
 
@@ -99,8 +100,9 @@ movable_cover_init() {
     }
     switch (target.script_noteworthy) {
       case "move_trigger":
-        if(!isDefined(target.script_label) || !isDefined(end_points[target.script_label]))
+        if(!isDefined(target.script_label) || !isDefined(end_points[target.script_label])) {
           continue;
+        }
         target EnableLinkTo();
         target LinkTo(self);
         self thread movable_cover_trigger(target, end_points[target.script_label]);
@@ -110,8 +112,9 @@ movable_cover_init() {
         self.linked_ents[self.linked_ents.size] = target;
         break;
       case "angels":
-        if(isDefined(target.angles) && isDefined(self.animate_ent))
+        if(isDefined(target.angles) && isDefined(self.animate_ent)) {
           self.animate_ent.angles = target.angles;
+        }
         break;
       case "mantlebrush":
         self.linked_ents[self.linked_ents.size] = target;
@@ -137,8 +140,9 @@ movable_cover_init() {
       continue;
     }
     node.node_type = node.script_noteworthy;
-    if(!isDefined(node.node_type))
+    if(!isDefined(node.node_type)) {
       node.node_type = "closest";
+    }
 
     node_type_valid = false;
     switch (node.node_type) {
@@ -183,12 +187,15 @@ movable_cover_init() {
 }
 
 movable_cover_set_user(user, trigger) {
-  if(!isDefined(self.user) && isDefined(user))
+  if(!isDefined(self.user) && isDefined(user)) {
     self notify("new_user");
-  else if(isDefined(self.user) && isDefined(user) && self.user != user)
+  }
+  else if(isDefined(self.user) && isDefined(user) && self.user != user) {
     self notify("new_user");
-  else if(isDefined(self.user) && !isDefined(user))
+  }
+  else if(isDefined(self.user) && !isDefined(user)) {
     self notify("clear_user");
+  }
 
   self.user = user;
   self.user_trigger = trigger;
@@ -210,8 +217,9 @@ movable_cover_update_use_icon(trigger, move_to) {
   trigger_name = "trigger_" + ent_num;
   while(1) {
     foreach(player in level.players) {
-      if(!isDefined(player.movable_cover_huds))
+      if(!isDefined(player.movable_cover_huds)) {
         player.movable_cover_huds = [];
+      }
 
       dist_sqr = DistanceSquared(player.origin + (0, 0, 30), trigger.origin);
       if(dist_sqr <= show_dist_sqr && !self movable_cover_at_goal(move_to.origin)) {
@@ -274,12 +282,14 @@ movable_cover_parse_parameters() {
   self.start_delay = .2;
   self.stances = ["stand", "crouch"];
 
-  if(!isDefined(self.script_parameters))
+  if(!isDefined(self.script_parameters)) {
     self.script_parameters = "";
+  }
 
   default_parameters = level.movable_cover_default_parameters[self.movable_type];
-  if(isDefined(default_parameters))
+  if(isDefined(default_parameters)) {
     self.script_parameters = default_parameters + self.script_parameters;
+  }
 
   params = StrTok(self.script_parameters, ";");
   foreach(param in params) {
@@ -324,8 +334,9 @@ movable_cover_trigger(trigger, move_to) {
     player = undefined;
     if(auto && !self.stay) {
       waitframe();
-      if(isDefined(self.user) && self.user_trigger != trigger)
+      if(isDefined(self.user) && self.user_trigger != trigger) {
         continue;
+      }
     } else {
       self movable_cover_set_user(undefined, undefined);
       while(1) {
@@ -353,8 +364,9 @@ movable_cover_trigger(trigger, move_to) {
     if(self.moving) {
       continue;
     }
-    if(self.updatePaths)
+    if(self.updatePaths) {
       self ConnectPaths();
+    }
     self movable_cover_disconnect_traversals();
     self.moving = true;
     self.stay = false;
@@ -363,16 +375,19 @@ movable_cover_trigger(trigger, move_to) {
 
     start_time = GetTime();
     accel_time = min(time, self.accel_time);
-    if(auto)
+    if(auto) {
       accel_time = time;
+    }
 
     start_sound = movable_cover_get_sound("start");
-    if(isDefined(start_sound))
+    if(isDefined(start_sound)) {
       self playSound(start_sound);
+    }
 
     move_sound = movable_cover_get_sound("move");
-    if(isDefined(move_sound))
+    if(isDefined(move_sound)) {
       self playLoopSound(move_sound);
+    }
 
     if(isDefined(self.animate_ent) && isDefined(level.movable_cover_move_anim[self.movable_type]["move"])) {
       self.animate_ent scriptmodelPlayanim(level.movable_cover_move_anim[self.movable_type]["move"]);
@@ -407,8 +422,9 @@ movable_cover_trigger(trigger, move_to) {
     self StopLoopSound();
 
     stop_sound = movable_cover_get_sound("stop");
-    if(isDefined(stop_sound))
+    if(isDefined(stop_sound)) {
       self playSound(stop_sound);
+    }
     if(isDefined(self.animate_ent) && isDefined(level.movable_cover_move_anim[self.movable_type]["idle"])) {
       self.animate_ent scriptmodelPlayanim(level.movable_cover_move_anim[self.movable_type]["idle"]);
     }
@@ -417,8 +433,9 @@ movable_cover_trigger(trigger, move_to) {
       self.stay = true;
     }
 
-    if(self.updatePaths)
+    if(self.updatePaths) {
       self DisconnectPaths();
+    }
     self movable_cover_connect_traversals();
     self.moving = false;
 
@@ -436,13 +453,15 @@ movable_cover_connect_traversals() {
       case "radius":
       case "radius3d":
         dist = Distance(node.origin, node.test_origin);
-        if(dist <= node.test_radius)
+        if(dist <= node.test_radius) {
           node.connected_to = node.connected_nodes[0];
+        }
         break;
       case "radius2d":
         dist2d = Distance2d(node.origin, node.test_origin);
-        if(dist2d <= node.test_radius)
+        if(dist2d <= node.test_radius) {
           node.connected_to = node.connected_nodes[0];
+        }
         break;
       default:
         break;
@@ -464,8 +483,9 @@ movable_cover_disconnect_traversals() {
 }
 
 movable_cover_get_sound(type) {
-  if(!isDefined(level.movable_cover_move_sounds[self.movable_type]))
+  if(!isDefined(level.movable_cover_move_sounds[self.movable_type])) {
     return undefined;
+  }
 
   return level.movable_cover_move_sounds[self.movable_type][type];
 }
@@ -476,10 +496,12 @@ movable_cover_wait_for_user_or_timeout(time) {
 }
 
 movable_cover_calc_move_speed_scale(current_time, move_time, accel_time, decel_time) {
-  if(!isDefined(accel_time))
+  if(!isDefined(accel_time)) {
     accel_time = 0;
-  if(!isDefined(decel_time))
+  }
+  if(!isDefined(decel_time)) {
     decel_time = 0;
+  }
 
   if(current_time >= move_time || current_time <= 0) {
     return 0;
@@ -493,18 +515,22 @@ movable_cover_calc_move_speed_scale(current_time, move_time, accel_time, decel_t
 }
 
 movable_cover_is_pushed(player, trigger, move_dir) {
-  if(!isDefined(player) || !IsReallyAlive(player) || !IsPlayer(player))
+  if(!isDefined(player) || !IsReallyAlive(player) || !IsPlayer(player)) {
     return false;
+  }
 
-  if(!movable_cover_is_touched(trigger, player))
+  if(!movable_cover_is_touched(trigger, player)) {
     return false;
+  }
 
-  if(player IsMantling())
+  if(player IsMantling()) {
     return false;
+  }
 
   stance = player GetStance();
-  if(!array_contains(self.stances, stance))
+  if(!array_contains(self.stances, stance)) {
     return false;
+  }
 
   if(self.requires_push) {
     player_move_dir = player GetNormalizedMovement();
@@ -525,20 +551,25 @@ movable_cover_move_delay(delay, player, trigger, move_dir) {
   endTime = (delay * 1000) + GetTime();
 
   while(1) {
-    if(!isDefined(player) || !isReallyAlive(player))
+    if(!isDefined(player) || !isReallyAlive(player)) {
       return false;
+    }
 
-    if(player IsMantling())
+    if(player IsMantling()) {
       return false;
+    }
 
-    if(!movable_cover_is_pushed(player, trigger, move_dir))
+    if(!movable_cover_is_pushed(player, trigger, move_dir)) {
       return false;
+    }
 
-    if(self.moving)
+    if(self.moving) {
       return false;
+    }
 
-    if(getTime() >= endTime)
+    if(getTime() >= endTime) {
       return true;
+    }
 
     wait .05;
   }

@@ -63,8 +63,9 @@ main() {
   clientscripts\mp\zombies\_zm_equip_turbine::init_animtree();
   start_zombie_stuff();
 
-  if(level.scr_zm_ui_gametype == "zclassic")
+  if(level.scr_zm_ui_gametype == "zclassic") {
     clientscripts\mp\zombies\_zm_equip_turbine::init();
+  }
 
   init_gamemodes();
   clientscripts\mp\zm_transit_fx::main();
@@ -83,8 +84,9 @@ main() {
     foreach(struct in claymores) {
       weapon_model = getstruct(struct.target, "targetname");
 
-      if(isDefined(weapon_model))
+      if(isDefined(weapon_model)) {
         weapon_model.script_vector = vectorscale((0, -1, 0), 90.0);
+      }
     }
   }
 
@@ -101,8 +103,9 @@ main() {
   level thread power_controlled_lights();
 
   if(level.scr_zm_ui_gametype == "zclassic") {
-    if(isDefined(level.createfxexploders))
+    if(isDefined(level.createfxexploders)) {
       clientscripts\mp\_fx::activate_exploder(1966);
+    }
 
     setup_morsecode();
   }
@@ -124,10 +127,12 @@ setup_morsecode() {
 }
 
 power_rumble_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     self thread rumble_and_shake_the_player(localclientnum, fieldname);
-  else
+  }
+  else {
     self notify("stop_power_rumble");
+  }
 }
 
 rumble_and_shake_the_player(localclientnum, fieldname) {
@@ -151,8 +156,9 @@ rumble_and_shake_the_player(localclientnum, fieldname) {
     while(gettime() < end_time) {
       wait 0.1;
 
-      if(randomint(100) > 25)
+      if(randomint(100) > 25) {
         self playrumbleonentity(localclientnum, "pullout_small");
+      }
     }
   }
 
@@ -163,10 +169,12 @@ rumble_and_shake_the_player(localclientnum, fieldname) {
 infog_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   println("infog_clientfield_cb called on local client" + localclientnum);
 
-  if(newval == 1)
+  if(newval == 1) {
     self thread lerp_infog_alpha(0);
-  else
+  }
+  else {
     self thread lerp_infog_alpha(1);
+  }
 }
 
 lerp_infog_alpha(up) {
@@ -313,11 +321,13 @@ include_powerups() {
   include_powerup("full_ammo");
   include_powerup("insta_kill_ug");
 
-  if(gametype != "zgrief")
+  if(gametype != "zgrief") {
     include_powerup("carpenter");
+  }
 
-  if(is_encounter() && gametype != "zgrief")
+  if(is_encounter() && gametype != "zgrief") {
     include_powerup("minigun");
+  }
 
   include_powerup("teller_withdrawl");
 }
@@ -329,8 +339,9 @@ include_equipment_for_level() {
 rotate_wind_turbine() {
   turbine = getEntArray(0, "depot_turbine_rotor", "targetname");
 
-  if(isDefined(turbine))
+  if(isDefined(turbine)) {
     array_thread(turbine, ::spin_transit_turbines);
+  }
 }
 
 spin_transit_turbines() {
@@ -393,24 +404,30 @@ transit_vision_change(ent_player) {
     local_clientnum = who getlocalclientnumber();
     visionset = "zm_transit_base";
 
-    if(isDefined(self.script_string))
+    if(isDefined(self.script_string)) {
       visionset = self.script_string;
+    }
 
     if(isDefined(who._previous_vision) && visionset == who._previous_vision) {
       continue;
     }
-    if(isDefined(self.script_float))
+    if(isDefined(self.script_float)) {
       trans_time = self.script_float;
-    else
+    }
+    else {
       trans_time = 2;
+    }
 
-    if(!isDefined(who._previous_vision))
+    if(!isDefined(who._previous_vision)) {
       who._previous_vision = visionset;
-    else
+    }
+    else {
       who clientscripts\mp\zombies\_zm::zombie_vision_set_remove(who._previous_vision, trans_time, local_clientnum);
+    }
 
-    if(isDefined(self.script_string))
+    if(isDefined(self.script_string)) {
       println("*** Client : Changing vision set " + self.script_string);
+    }
 
     who clientscripts\mp\zombies\_zm::zombie_vision_set_apply(visionset, 1, trans_time, local_clientnum);
     who._previous_vision = visionset;
@@ -463,8 +480,9 @@ power_controlled_lights() {
   off_sq = 414;
   level thread power_controlled_or_turbine(on, off, on_sq, off_sq, "bridgedepot");
 
-  if(getdvar(#"ui_gametype") == "zclassic")
+  if(getdvar(#"ui_gametype") == "zclassic") {
     level thread sq_tower_sparks_init();
+  }
 
   while(true) {
     if(!level getclientfield("zombie_power_on")) {
@@ -492,8 +510,9 @@ power_controlled_lights() {
 
     level.power_on = 1;
 
-    if(getdvar(#"ui_gametype") == "zclassic")
+    if(getdvar(#"ui_gametype") == "zclassic") {
       level thread turbine_door_sparks_init();
+    }
 
     fog_vol_to_visionset_set_suffix("_on");
     clientscripts\mp\_fx::activate_exploder(490);
@@ -515,20 +534,25 @@ power_controlled_lights() {
 
       if(isDefined(vision_trigs)) {
         foreach(trig in vision_trigs) {
-          if(isDefined(trig.script_string) && trig.script_string == "zm_transit_depot_int_off")
+          if(isDefined(trig.script_string) && trig.script_string == "zm_transit_depot_int_off") {
             trig.script_string = "zm_transit_depot_int_on";
+          }
 
-          if(isDefined(trig.script_string) && trig.script_string == "zm_transit_diner_int_off")
+          if(isDefined(trig.script_string) && trig.script_string == "zm_transit_diner_int_off") {
             trig.script_string = "zm_transit_diner_int_on";
+          }
 
-          if(isDefined(trig.script_string) && trig.script_string == "zm_transit_town_int_off")
+          if(isDefined(trig.script_string) && trig.script_string == "zm_transit_town_int_off") {
             trig.script_string = "zm_transit_town_int_on";
+          }
 
-          if(isDefined(trig.script_string) && trig.script_string == "zm_transit_power_int_off")
+          if(isDefined(trig.script_string) && trig.script_string == "zm_transit_power_int_off") {
             trig.script_string = "zm_transit_power_int_on";
+          }
 
-          if(isDefined(trig.script_string) && trig.script_string == "zm_transit_tunnel_off")
+          if(isDefined(trig.script_string) && trig.script_string == "zm_transit_tunnel_off") {
             trig.script_string = "zm_transit_tunnel_on";
+          }
         }
       }
     }
@@ -600,10 +624,12 @@ safety_light_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   safety = level.safety_lights_callbacks[fieldname];
 
   if(isDefined(safety)) {
-    if(is_true(newval))
+    if(is_true(newval)) {
       safety notify("power_on");
-    else
+    }
+    else {
       safety notify("power_off");
+    }
   } else {
     println("ERROR: Callback on unknown screecher light " + fieldname);
 
@@ -620,31 +646,38 @@ find_safety_light(name) {
     }
   }
 
-  if(!isDefined(light))
+  if(!isDefined(light)) {
     println("ERROR: Could not find screecher light with script noteworthy " + name);
+  }
 
   return light;
 }
 
 sq_tower_watcher(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     level.sq_tower_complete = 1;
-  else
+  }
+  else {
     level.sq_tower_complete = undefined;
+  }
 }
 
 maxis_lights_watcher(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     level.light_max_sq = 1;
-  else
+  }
+  else {
     level.light_max_sq = undefined;
+  }
 }
 
 screecher_light_watcher(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     level.light_ric_sq = 1;
-  else
+  }
+  else {
     level.light_ric_sq = undefined;
+  }
 }
 
 power_controlled_or_turbine(on, off, on_sq, off_sq, name) {
@@ -674,10 +707,12 @@ power_controlled_or_turbine(on, off, on_sq, off_sq, name) {
     lightstruct thread sq_maxis_lights_on(on, off, on_sq, off_sq);
     lightstruct notify("sound_stopped");
 
-    if(isDefined(lightstruct))
+    if(isDefined(lightstruct)) {
       lightstruct waittill("power_on");
-    else
+    }
+    else {
       level waittill_any("power_on", "pwr");
+    }
 
     level notify("SafeLightOn");
 
@@ -702,10 +737,12 @@ power_controlled_or_turbine(on, off, on_sq, off_sq, name) {
 
     lightstruct thread sq_screecher_light_on(on, off, on_sq, off_sq);
 
-    if(isDefined(lightstruct))
+    if(isDefined(lightstruct)) {
       lightstruct waittill("power_off");
-    else
+    }
+    else {
       level waittill("pwo");
+    }
 
     level notify("SafeLightOff");
   }
@@ -718,8 +755,9 @@ sq_maxis_lights_on(on, off, on_sq, off_sq) {
   level endon("power_on");
   sq_max_on = undefined;
 
-  while(!isDefined(level.light_max_sq))
+  while(!isDefined(level.light_max_sq)) {
     wait 1;
+  }
 
   while(isDefined(level.light_max_sq)) {
     if(!isDefined(sq_max_on)) {
@@ -740,8 +778,9 @@ sq_screecher_light_on(on, off, on_sq, off_sq) {
   level endon("pwo");
   sq_ric_on = undefined;
 
-  while(!isDefined(level.light_ric_sq))
+  while(!isDefined(level.light_ric_sq)) {
     wait 1;
+  }
 
   self loop_fx_sound(0, "zmb_safety_light_sidequest", self.origin, "sound_stopped");
 

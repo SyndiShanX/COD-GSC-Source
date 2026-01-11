@@ -102,21 +102,27 @@ add_trigger_to_ent(ent) {
   ent._triggers[self GetEntityNumber()] = 1;
 }
 remove_trigger_from_ent(ent) {
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return;
-  if(!isDefined(ent._triggers))
+  }
+  if(!isDefined(ent._triggers)) {
     return;
-  if(!isDefined(ent._triggers[self GetEntityNumber()]))
+  }
+  if(!isDefined(ent._triggers[self GetEntityNumber()])) {
     return;
+  }
   ent._triggers[self GetEntityNumber()] = 0;
 }
 ent_already_in_trigger(trig) {
-  if(!isDefined(self._triggers))
+  if(!isDefined(self._triggers)) {
     return false;
-  if(!isDefined(self._triggers[trig GetEntityNumber()]))
+  }
+  if(!isDefined(self._triggers[trig GetEntityNumber()])) {
     return false;
-  if(!self._triggers[trig GetEntityNumber()])
+  }
+  if(!self._triggers[trig GetEntityNumber()]) {
     return false;
+  }
   return true;
 }
 trigger_thread_death_monitor(ent, ender) {
@@ -127,8 +133,9 @@ trigger_thread_death_monitor(ent, ender) {
 trigger_thread(ent, on_enter_payload, on_exit_payload) {
   ent endon("entityshutdown");
   ent endon("death");
-  if(ent ent_already_in_trigger(self))
+  if(ent ent_already_in_trigger(self)) {
     return;
+  }
   self add_trigger_to_ent(ent);
   ender = "end_trig_death_monitor" + self GetEntityNumber() + " " + ent GetEntityNumber();
   self thread trigger_thread_death_monitor(ent, ender);

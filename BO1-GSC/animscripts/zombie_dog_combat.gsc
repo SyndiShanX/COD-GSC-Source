@@ -22,11 +22,13 @@ main() {
 }
 
 handleMeleeBiteAttackNoteTracks(note) {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return;
+  }
   assert(IsPlayer(self.enemy));
-  if(!IsAlive(self.enemy))
+  if(!IsAlive(self.enemy)) {
     return;
+  }
   player = self.enemy;
   switch (note) {
     case "dog_melee": {
@@ -133,8 +135,9 @@ doMeleeAfterWait(time) {
   wait(time);
   hitEnt = self melee();
   if(isDefined(hitEnt)) {
-    if(isplayer(hitEnt))
+    if(isplayer(hitEnt)) {
       hitEnt shellshock("dog_bite", 0.35);
+    }
   }
 }
 
@@ -144,8 +147,9 @@ dog_cant_kill_in_one_hit(player) {
     assertex(player.dogs_dont_instant_kill, "Dont set player.dogs_dont_instant_kill to false, set to undefined");
     return true;
   }
-  if(getTime() - level.lastDogMeleePlayerTime > 8000)
+  if(getTime() - level.lastDogMeleePlayerTime > 8000) {
     level.dogMeleePlayerCounter = 0;
+  }
   return level.dogMeleePlayerCounter < level.dog_hits_before_kill &&
     player.health > 25;
 }

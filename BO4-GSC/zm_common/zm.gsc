@@ -2166,4 +2166,3 @@ printhashids() {
   outputstring += "<dev string:x1c7>";
   println(outputstring);
 }
-

@@ -65,19 +65,23 @@ getClassChoice(response) {
 
 getWeaponChoice(response) {
   tokens = strtok(response, ",");
-  if(tokens.size > 1)
+  if(tokens.size > 1) {
     return int(tokens[1]);
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 logClassChoice(class, primaryWeapon, specialType, perks) {
-  if(class == self.lastClass)
+  if(class == self.lastClass) {
     return;
+  }
 
   self logstring("choseclass: " + class + " weapon: " + primaryWeapon + " special: " + specialType);
-  for(i = 0; i < perks.size; i++)
+  for(i = 0; i < perks.size; i++) {
     self logstring("perk" + i + ": " + perks[i]);
+  }
 
   self.lastClass = class;
 }
@@ -115,38 +119,48 @@ cac_getOffhand(classIndex) {
 }
 
 table_getWeapon(tableName, classIndex, weaponIndex) {
-  if(weaponIndex == 0)
+  if(weaponIndex == 0) {
     return tableLookup(tableName, 0, "loadoutPrimary", classIndex + 1);
-  else
+  }
+  else {
     return tableLookup(tableName, 0, "loadoutSecondary", classIndex + 1);
+  }
 }
 
 table_getWeaponAttachment(tableName, classIndex, weaponIndex, attachmentIndex) {
   tempName = "none";
 
   if(weaponIndex == 0) {
-    if(!isDefined(attachmentIndex) || attachmentIndex == 0)
+    if(!isDefined(attachmentIndex) || attachmentIndex == 0) {
       tempName = tableLookup(tableName, 0, "loadoutPrimaryAttachment", classIndex + 1);
-    else
+    }
+    else {
       tempName = tableLookup(tableName, 0, "loadoutPrimaryAttachment2", classIndex + 1);
+    }
   } else {
-    if(!isDefined(attachmentIndex) || attachmentIndex == 0)
+    if(!isDefined(attachmentIndex) || attachmentIndex == 0) {
       tempName = tableLookup(tableName, 0, "loadoutSecondaryAttachment", classIndex + 1);
-    else
+    }
+    else {
       tempName = tableLookup(tableName, 0, "loadoutSecondaryAttachment2", classIndex + 1);
+    }
   }
 
-  if(tempName == "" || tempName == "none")
+  if(tempName == "" || tempName == "none") {
     return "none";
-  else
+  }
+  else {
     return tempName;
+  }
 }
 
 table_getWeaponCamo(tableName, classIndex, weaponIndex) {
-  if(weaponIndex == 0)
+  if(weaponIndex == 0) {
     return tableLookup(tableName, 0, "loadoutPrimaryCamo", classIndex + 1);
-  else
+  }
+  else {
     return tableLookup(tableName, 0, "loadoutSecondaryCamo", classIndex + 1);
+  }
 }
 
 table_getEquipment(tableName, classIndex, perkIndex) {
@@ -181,18 +195,22 @@ getClassIndex(className) {
 /*
 getPerk( perkIndex )
 {
-	if( isSubstr( self.pers["class"], "CLASS_CUSTOM" ) )
+	if( isSubstr( self.pers["class"], "CLASS_CUSTOM" ) ) {
 		return cac_getPerk( self.class_num, perkIndex );
-	else
+	}
+	else {
 		return table_getPerk( level.classTableName, self.class_num, perkIndex );	
+	}
 }
 
 getWeaponCamo( weaponIndex )
 {
-	if( isSubstr( self.pers["class"], "CLASS_CUSTOM" ) )
+	if( isSubstr( self.pers["class"], "CLASS_CUSTOM" ) ) {
 		return cac_getWeaponCamo( self.class_num, weaponIndex );
-	else
+	}
+	else {
 		return table_getWeaponCamo( level.classTableName, self.class_num, weaponIndex );	
+	}
 }
 */
 
@@ -201,8 +219,9 @@ cloneLoadout() {
 
   class = self.curClass;
 
-  if(class == "copycat")
+  if(class == "copycat") {
     return (undefined);
+  }
 
   if(isSubstr(class, "custom")) {
     class_num = getClassIndex(class);
@@ -270,8 +289,9 @@ giveLoadout(team, class, allowCopycat) {
   // initialize specialty array
   self.specialty = [];
 
-  if(!isDefined(allowCopycat))
+  if(!isDefined(allowCopycat)) {
     allowCopycat = true;
+  }
 
   primaryWeapon = undefined;
 
@@ -338,47 +358,61 @@ giveLoadout(team, class, allowCopycat) {
   if(!(isDefined(self.pers["copyCatLoadout"]) && self.pers["copyCatLoadout"]["inUse"] && allowCopycat)) {
     isCustomClass = isSubstr(class, "custom");
 
-    if(!isValidPrimary(loadoutPrimary) || (isCustomClass && !self isItemUnlocked(loadoutPrimary)))
+    if(!isValidPrimary(loadoutPrimary) || (isCustomClass && !self isItemUnlocked(loadoutPrimary))) {
       loadoutPrimary = table_getWeapon(level.classTableName, 10, 0);
+    }
 
-    if(!isValidAttachment(loadoutPrimaryAttachment) || (isCustomClass && !self isItemUnlocked(loadoutPrimary + " " + loadoutPrimaryAttachment)))
+    if(!isValidAttachment(loadoutPrimaryAttachment) || (isCustomClass && !self isItemUnlocked(loadoutPrimary + " " + loadoutPrimaryAttachment))) {
       loadoutPrimaryAttachment = table_getWeaponAttachment(level.classTableName, 10, 0, 0);
+    }
 
-    if(!isValidAttachment(loadoutPrimaryAttachment2) || (isCustomClass && !self isItemUnlocked(loadoutPrimary + " " + loadoutPrimaryAttachment2)))
+    if(!isValidAttachment(loadoutPrimaryAttachment2) || (isCustomClass && !self isItemUnlocked(loadoutPrimary + " " + loadoutPrimaryAttachment2))) {
       loadoutPrimaryAttachment2 = table_getWeaponAttachment(level.classTableName, 10, 0, 1);
+    }
 
-    if(!isValidCamo(loadoutPrimaryCamo) || (isCustomClass && !self isItemUnlocked(loadoutPrimary + " " + loadoutPrimaryCamo)))
+    if(!isValidCamo(loadoutPrimaryCamo) || (isCustomClass && !self isItemUnlocked(loadoutPrimary + " " + loadoutPrimaryCamo))) {
       loadoutPrimaryCamo = table_getWeaponCamo(level.classTableName, 10, 0);
+    }
 
-    if(!isValidSecondary(loadoutSecondary) || (isCustomClass && !self isItemUnlocked(loadoutSecondary)))
+    if(!isValidSecondary(loadoutSecondary) || (isCustomClass && !self isItemUnlocked(loadoutSecondary))) {
       loadoutSecondary = table_getWeapon(level.classTableName, 10, 1);
+    }
 
-    if(!isValidAttachment(loadoutSecondaryAttachment) || (isCustomClass && !self isItemUnlocked(loadoutSecondary + " " + loadoutSecondaryAttachment)))
+    if(!isValidAttachment(loadoutSecondaryAttachment) || (isCustomClass && !self isItemUnlocked(loadoutSecondary + " " + loadoutSecondaryAttachment))) {
       loadoutSecondaryAttachment = table_getWeaponAttachment(level.classTableName, 10, 1, 0);
+    }
 
-    if(!isValidAttachment(loadoutSecondaryAttachment2) || (isCustomClass && !self isItemUnlocked(loadoutSecondary + " " + loadoutSecondaryAttachment2)))
+    if(!isValidAttachment(loadoutSecondaryAttachment2) || (isCustomClass && !self isItemUnlocked(loadoutSecondary + " " + loadoutSecondaryAttachment2))) {
       loadoutSecondaryAttachment2 = table_getWeaponAttachment(level.classTableName, 10, 1, 1);;
+    }
 
-    if(!isValidCamo(loadoutSecondaryCamo) || (isCustomClass && !self isItemUnlocked(loadoutSecondary + " " + loadoutSecondaryCamo)))
+    if(!isValidCamo(loadoutSecondaryCamo) || (isCustomClass && !self isItemUnlocked(loadoutSecondary + " " + loadoutSecondaryCamo))) {
       loadoutSecondaryCamo = table_getWeaponCamo(level.classTableName, 10, 1);
+    }
 
-    if(!isValidEquipment(loadoutEquipment) || (isCustomClass && !self isItemUnlocked(loadoutEquipment)))
+    if(!isValidEquipment(loadoutEquipment) || (isCustomClass && !self isItemUnlocked(loadoutEquipment))) {
       loadoutEquipment = table_getEquipment(level.classTableName, 10, 0);
+    }
 
-    if(!isValidPerk1(loadoutPerk1) || (isCustomClass && !self isItemUnlocked(loadoutPerk1)))
+    if(!isValidPerk1(loadoutPerk1) || (isCustomClass && !self isItemUnlocked(loadoutPerk1))) {
       loadoutPerk1 = table_getPerk(level.classTableName, 10, 1);
+    }
 
-    if(!isValidPerk2(loadoutPerk2) || (isCustomClass && !self isItemUnlocked(loadoutPerk2)))
+    if(!isValidPerk2(loadoutPerk2) || (isCustomClass && !self isItemUnlocked(loadoutPerk2))) {
       loadoutPerk2 = table_getPerk(level.classTableName, 10, 2);
+    }
 
-    if(!isValidPerk3(loadoutPerk3) || (isCustomClass && !self isItemUnlocked(loadoutPerk3)))
+    if(!isValidPerk3(loadoutPerk3) || (isCustomClass && !self isItemUnlocked(loadoutPerk3))) {
       loadoutPerk3 = table_getPerk(level.classTableName, 10, 3);
+    }
 
-    if(!isValidOffhand(loadoutOffhand))
+    if(!isValidOffhand(loadoutOffhand)) {
       loadoutOffhand = table_getOffhand(level.classTableName, 10);
+    }
 
-    if(!isValidDeathstreak(loadoutDeathstreak) || (isCustomClass && !self isItemUnlocked(loadoutDeathstreak)))
+    if(!isValidDeathstreak(loadoutDeathstreak) || (isCustomClass && !self isItemUnlocked(loadoutDeathstreak))) {
       loadoutDeathstreak = table_getDeathstreak(level.classTableName, 10);
+    }
   }
 
   if(loadoutPerk1 != "specialty_bling") {
@@ -386,8 +420,9 @@ giveLoadout(team, class, allowCopycat) {
     loadoutSecondaryAttachment2 = "none";
   }
 
-  if(loadoutPerk1 != "specialty_onemanarmy" && loadoutSecondary == "onemanarmy")
+  if(loadoutPerk1 != "specialty_onemanarmy" && loadoutSecondary == "onemanarmy") {
     loadoutSecondary = table_getWeapon(level.classTableName, 10, 1);
+  }
 
   loadoutSecondaryCamo = "none";
 
@@ -423,15 +458,17 @@ giveLoadout(team, class, allowCopycat) {
 
   // these special case giving pistol death have to come before
   // perk loadout to ensure player perk icons arent overwritten
-  if(level.dieHardMode)
+  if(level.dieHardMode) {
     self maps\mp\perks\_perks::givePerk("specialty_pistoldeath");
+  }
 
   // only give the deathstreak for the initial spawn for this life.
   if(loadoutDeathStreak != "specialty_null" && getTime() == self.spawnTime) {
     deathVal = int(tableLookup("mp/perkTable.csv", 1, loadoutDeathStreak, 6));
 
-    if(self getPerkUpgrade(loadoutPerk1) == "specialty_rollover" || self getPerkUpgrade(loadoutPerk2) == "specialty_rollover" || self getPerkUpgrade(loadoutPerk3) == "specialty_rollover")
+    if(self getPerkUpgrade(loadoutPerk1) == "specialty_rollover" || self getPerkUpgrade(loadoutPerk2) == "specialty_rollover" || self getPerkUpgrade(loadoutPerk3) == "specialty_rollover") {
       deathVal -= 1;
+    }
 
     if(self.pers["cur_death_streak"] == deathVal) {
       self thread maps\mp\perks\_perks::givePerk(loadoutDeathStreak);
@@ -445,19 +482,22 @@ giveLoadout(team, class, allowCopycat) {
 
   self setKillstreaks(loadoutKillstreak1, loadoutKillstreak2, loadoutKillstreak3);
 
-  if(self hasPerk("specialty_extraammo", true) && getWeaponClass(secondaryName) != "weapon_projectile")
+  if(self hasPerk("specialty_extraammo", true) && getWeaponClass(secondaryName) != "weapon_projectile") {
     self giveMaxAmmo(secondaryName);
+  }
 
   // Primary Weapon
   primaryName = buildWeaponName(loadoutPrimary, loadoutPrimaryAttachment, loadoutPrimaryAttachment2);
   self _giveWeapon(primaryName, self.loadoutPrimaryCamo);
 
   // fix changing from a riotshield class to a riotshield class during grace period not giving a shield
-  if(primaryName == "riotshield_mp" && level.inGracePeriod)
+  if(primaryName == "riotshield_mp" && level.inGracePeriod) {
     self notify("weapon_change", "riotshield_mp");
+  }
 
-  if(self hasPerk("specialty_extraammo", true))
+  if(self hasPerk("specialty_extraammo", true)) {
     self giveMaxAmmo(primaryName);
+  }
 
   self setSpawnWeapon(primaryName);
 
@@ -468,20 +508,26 @@ giveLoadout(team, class, allowCopycat) {
 
   // Secondary Offhand
   offhandSecondaryWeapon = loadoutOffhand + "_mp";
-  if(loadoutOffhand == "flash_grenade")
+  if(loadoutOffhand == "flash_grenade") {
     self SetOffhandSecondaryClass("flash");
-  else
+  }
+  else {
     self SetOffhandSecondaryClass("smoke");
+  }
 
   self giveWeapon(offhandSecondaryWeapon);
-  if(loadOutOffhand == "smoke_grenade")
+  if(loadOutOffhand == "smoke_grenade") {
     self setWeaponAmmoClip(offhandSecondaryWeapon, 1);
-  else if(loadOutOffhand == "flash_grenade")
+  }
+  else if(loadOutOffhand == "flash_grenade") {
     self setWeaponAmmoClip(offhandSecondaryWeapon, 2);
-  else if(loadOutOffhand == "concussion_grenade")
+  }
+  else if(loadOutOffhand == "concussion_grenade") {
     self setWeaponAmmoClip(offhandSecondaryWeapon, 2);
-  else
+  }
+  else {
     self setWeaponAmmoClip(offhandSecondaryWeapon, 1);
+  }
 
   primaryWeapon = primaryName;
   self.primaryWeapon = primaryWeapon;
@@ -518,11 +564,13 @@ _detachAll() {
 isPerkUpgraded(perkName) {
   perkUpgrade = tablelookup("mp/perktable.csv", 1, perkName, 8);
 
-  if(perkUpgrade == "" || perkUpgrade == "specialty_null")
+  if(perkUpgrade == "" || perkUpgrade == "specialty_null") {
     return false;
+  }
 
-  if(!self isItemUnlocked(perkUpgrade))
+  if(!self isItemUnlocked(perkUpgrade)) {
     return false;
+  }
 
   return true;
 }
@@ -530,11 +578,13 @@ isPerkUpgraded(perkName) {
 getPerkUpgrade(perkName) {
   perkUpgrade = tablelookup("mp/perktable.csv", 1, perkName, 8);
 
-  if(perkUpgrade == "" || perkUpgrade == "specialty_null")
+  if(perkUpgrade == "" || perkUpgrade == "specialty_null") {
     return "specialty_null";
+  }
 
-  if(!self isItemUnlocked(perkUpgrade))
+  if(!self isItemUnlocked(perkUpgrade)) {
     return "specialty_null";
+  }
 
   return (perkUpgrade);
 }
@@ -555,11 +605,13 @@ loadoutAllPerks(loadoutEquipment, loadoutPerk1, loadoutPerk2, loadoutPerk3) {
   perkUpgrd[2] = tablelookup("mp/perktable.csv", 1, loadoutPerk3, 8);
 
   foreach(upgrade in perkUpgrd) {
-    if(upgrade == "" || upgrade == "specialty_null")
+    if(upgrade == "" || upgrade == "specialty_null") {
       continue;
+    }
 
-    if(self isItemUnlocked(upgrade))
+    if(self isItemUnlocked(upgrade)) {
       self maps\mp\perks\_perks::givePerk(upgrade);
+    }
   }
 
 }
@@ -586,13 +638,16 @@ trackRiotShield() {
 
     if(newWeapon == "riotshield_mp") {
       // defensive check in case we somehow get an extra "weapon_change"
-      if(self.hasRiotShieldEquipped)
+      if(self.hasRiotShieldEquipped) {
         continue;
+      }
 
-      if(self.hasRiotShield)
+      if(self.hasRiotShield) {
         self MoveShieldModel("weapon_riot_shield_mp", "tag_shield_back", "tag_weapon_left");
-      else
+      }
+      else {
         self AttachShieldModel("weapon_riot_shield_mp", "tag_weapon_left");
+      }
 
       self.hasRiotShield = true;
       self.hasRiotShieldEquipped = true;
@@ -602,10 +657,12 @@ trackRiotShield() {
       assert(self.hasRiotShield);
       self.hasRiotShield = self hasWeapon("riotshield_mp");
 
-      if(self.hasRiotShield)
+      if(self.hasRiotShield) {
         self MoveShieldModel("weapon_riot_shield_mp", "tag_weapon_left", "tag_shield_back");
-      else
+      }
+      else {
         self DetachShieldModel("weapon_riot_shield_mp", "tag_weapon_left");
+      }
 
       self.hasRiotShieldEquipped = false;
     } else if(self.hasRiotShield) {
@@ -620,10 +677,12 @@ trackRiotShield() {
 
 tryAttach(placement) // deprecated; hopefully we won't need to bring this defensive function back
 {
-  if(!isDefined(placement) || placement != "back")
+  if(!isDefined(placement) || placement != "back") {
     tag = "tag_weapon_left";
-  else
+  }
+  else {
     tag = "tag_shield_back";
+  }
 
   attachSize = self getAttachSize();
 
@@ -639,10 +698,12 @@ tryAttach(placement) // deprecated; hopefully we won't need to bring this defens
 
 tryDetach(placement) // deprecated; hopefully we won't need to bring this defensive function back
 {
-  if(!isDefined(placement) || placement != "back")
+  if(!isDefined(placement) || placement != "back") {
     tag = "tag_weapon_left";
-  else
+  }
+  else {
     tag = "tag_shield_back";
+  }
 
   attachSize = self getAttachSize();
 
@@ -657,15 +718,17 @@ tryDetach(placement) // deprecated; hopefully we won't need to bring this defens
 }
 
 buildWeaponName(baseName, attachment1, attachment2) {
-  if(!isDefined(level.letterToNumber))
+  if(!isDefined(level.letterToNumber)) {
     level.letterToNumber = makeLettersToNumbers();
+  }
 
   // disable bling when perks are disabled
   if(getDvarInt("scr_game_perks") == 0) {
     attachment2 = "none";
 
-    if(baseName == "onemanarmy")
+    if(baseName == "onemanarmy") {
       return ("beretta_mp");
+    }
   }
 
   weaponName = baseName;
@@ -698,10 +761,12 @@ buildWeaponName(baseName, attachment1, attachment2) {
     weaponName += "_" + attachment;
   }
 
-  if(!isValidWeapon(weaponName + "_mp"))
+  if(!isValidWeapon(weaponName + "_mp")) {
     return (baseName + "_mp");
-  else
+  }
+  else {
     return (weaponName + "_mp");
+  }
 }
 
 makeLettersToNumbers() {
@@ -740,10 +805,12 @@ makeLettersToNumbers() {
 setKillstreaks(streak1, streak2, streak3) {
   self.killStreaks = [];
 
-  if(self _hasPerk("specialty_hardline"))
+  if(self _hasPerk("specialty_hardline")) {
     modifier = -1;
-  else
+  }
+  else {
     modifier = 0;
+  }
 
   /*if( streak1 == "none" && streak2 == "none" && streak3 == "none" )
   {
@@ -782,13 +849,15 @@ setKillstreaks(streak1, streak2, streak3) {
   // they were added.We'll use this to fix it for now.
   maxVal = 0;
   foreach(streakVal, streakName in killStreaks) {
-    if(streakVal > maxVal)
+    if(streakVal > maxVal) {
       maxVal = streakVal;
+    }
   }
 
   for(streakIndex = 0; streakIndex <= maxVal; streakIndex++) {
-    if(!isDefined(killStreaks[streakIndex]))
+    if(!isDefined(killStreaks[streakIndex])) {
       continue;
+    }
 
     streakName = killStreaks[streakIndex];
 
@@ -820,15 +889,18 @@ replenishLoadout() // used by ammo hardpoint.
     self giveMaxAmmo(weapon);
     self SetWeaponAmmoClip(weapon, 9999);
 
-    if(weapon == "claymore_mp" || weapon == "claymore_detonator_mp")
+    if(weapon == "claymore_mp" || weapon == "claymore_detonator_mp") {
       self setWeaponAmmoStock(weapon, 2);
+    }
   }
 
-  if(self getAmmoCount(level.classGrenades[class]["primary"]["type"]) < level.classGrenades[class]["primary"]["count"])
+  if(self getAmmoCount(level.classGrenades[class]["primary"]["type"]) < level.classGrenades[class]["primary"]["count"]) {
     self SetWeaponAmmoClip(level.classGrenades[class]["primary"]["type"], level.classGrenades[class]["primary"]["count"]);
+  }
 
-  if(self getAmmoCount(level.classGrenades[class]["secondary"]["type"]) < level.classGrenades[class]["secondary"]["count"])
+  if(self getAmmoCount(level.classGrenades[class]["secondary"]["type"]) < level.classGrenades[class]["secondary"]["count"]) {
     self SetWeaponAmmoClip(level.classGrenades[class]["secondary"]["type"], level.classGrenades[class]["secondary"]["count"]);
+  }
 }
 
 onPlayerConnecting() {
@@ -860,10 +932,12 @@ setClass(newClass) {
 getPerkForClass(perkSlot, className) {
   class_num = getClassIndex(className);
 
-  if(isSubstr(className, "custom"))
+  if(isSubstr(className, "custom")) {
     return cac_getPerk(class_num, perkSlot);
-  else
+  }
+  else {
     return table_getPerk(level.classTableName, class_num, perkSlot);
+  }
 }
 
 classHasPerk(className, perkName) {
@@ -1062,12 +1136,14 @@ isValidWeapon(refString) {
   if(!isDefined(level.weaponRefs)) {
     level.weaponRefs = [];
 
-    foreach(weaponRef in level.weaponList)
+    foreach(weaponRef in level.weaponList) {
     level.weaponRefs[weaponRef] = true;
+    }
   }
 
-  if(isDefined(level.weaponRefs[refString]))
+  if(isDefined(level.weaponRefs[refString])) {
     return true;
+  }
 
   assertMsg("Replacing invalid weapon/attachment combo: " + refString);
 

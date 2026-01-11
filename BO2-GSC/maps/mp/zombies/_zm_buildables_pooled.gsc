@@ -11,8 +11,9 @@
 #include maps\mp\gametypes_zm\_hud_util;
 
 add_buildable_to_pool(stub, poolname) {
-  if(!isDefined(level.buildablepools))
+  if(!isDefined(level.buildablepools)) {
     level.buildablepools = [];
+  }
 
   if(!isDefined(level.buildablepools[poolname])) {
     level.buildablepools[poolname] = spawnStruct();
@@ -21,10 +22,12 @@ add_buildable_to_pool(stub, poolname) {
 
   level.buildablepools[poolname].stubs[level.buildablepools[poolname].stubs.size] = stub;
 
-  if(!isDefined(level.buildablepools[poolname].buildable_slot))
+  if(!isDefined(level.buildablepools[poolname].buildable_slot)) {
     level.buildablepools[poolname].buildable_slot = stub.buildablestruct.buildable_slot;
-  else
+  }
+  else {
     assert(level.buildablepools[poolname].buildable_slot == stub.buildablestruct.buildable_slot);
+  }
 
   stub.buildable_pool = level.buildablepools[poolname];
   stub.original_prompt_and_visibility_func = stub.prompt_and_visibility_func;
@@ -36,16 +39,19 @@ add_buildable_to_pool(stub, poolname) {
 reregister_unitrigger(unitrigger_stub, new_trigger_func) {
   static = 0;
 
-  if(isDefined(unitrigger_stub.in_zone))
+  if(isDefined(unitrigger_stub.in_zone)) {
     static = 1;
+  }
 
   unregister_unitrigger(unitrigger_stub);
   unitrigger_stub.trigger_func = new_trigger_func;
 
-  if(static)
+  if(static) {
     register_static_unitrigger(unitrigger_stub, new_trigger_func, 0);
-  else
+  }
+  else {
     register_unitrigger(unitrigger_stub, new_trigger_func);
+  }
 }
 
 randomize_pooled_buildables(poolname) {
@@ -69,8 +75,9 @@ randomize_pooled_buildables(poolname) {
       }
 
       for(i = 0; i < count; i++) {
-        if(isDefined(targets[i]) && targets[i] != i)
+        if(isDefined(targets[i]) && targets[i] != i) {
           swap_buildable_fields(level.buildablepools[poolname].stubs[i], level.buildablepools[poolname].stubs[targets[i]]);
+        }
       }
     }
   }
@@ -85,8 +92,9 @@ pooledbuildable_stub_for_piece(piece) {
     if(isDefined(stub.bound_to_buildable)) {
       continue;
     }
-    if(stub.buildablezone buildable_has_piece(piece))
+    if(stub.buildablezone buildable_has_piece(piece)) {
       return stub;
+    }
   }
 
   return undefined;
@@ -97,23 +105,27 @@ pooledbuildabletrigger_update_prompt(player) {
   self sethintstring(self.stub.hint_string);
 
   if(isDefined(self.stub.cursor_hint)) {
-    if(self.stub.cursor_hint == "HINT_WEAPON" && isDefined(self.stub.cursor_hint_weapon))
+    if(self.stub.cursor_hint == "HINT_WEAPON" && isDefined(self.stub.cursor_hint_weapon)) {
       self setcursorhint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
-    else
+    }
+    else {
       self setcursorhint(self.stub.cursor_hint);
+    }
   }
 
   return can_use;
 }
 
 pooledbuildablestub_update_prompt(player, trigger) {
-  if(!self anystub_update_prompt(player))
+  if(!self anystub_update_prompt(player)) {
     return 0;
+  }
 
   can_use = 1;
 
-  if(isDefined(self.custom_buildablestub_update_prompt) && !self[[self.custom_buildablestub_update_prompt]](player))
+  if(isDefined(self.custom_buildablestub_update_prompt) && !self[[self.custom_buildablestub_update_prompt]](player)) {
     return 0;
+  }
 
   self.cursor_hint = "HINT_NOICON";
   self.cursor_hint_weapon = undefined;
@@ -122,46 +134,58 @@ pooledbuildablestub_update_prompt(player, trigger) {
     slot = self.buildablestruct.buildable_slot;
 
     if(!isDefined(player player_get_buildable_piece(slot))) {
-      if(isDefined(level.zombie_buildables[self.equipname].hint_more))
+      if(isDefined(level.zombie_buildables[self.equipname].hint_more)) {
         self.hint_string = level.zombie_buildables[self.equipname].hint_more;
-      else
+      }
+      else {
         self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
+      }
 
-      if(isDefined(level.custom_buildable_need_part_vo))
+      if(isDefined(level.custom_buildable_need_part_vo)) {
         player thread[[level.custom_buildable_need_part_vo]]();
+      }
 
       return 0;
     } else if(isDefined(self.bound_to_buildable) && !self.bound_to_buildable.buildablezone buildable_has_piece(player player_get_buildable_piece(slot))) {
-      if(isDefined(level.zombie_buildables[self.bound_to_buildable.equipname].hint_wrong))
+      if(isDefined(level.zombie_buildables[self.bound_to_buildable.equipname].hint_wrong)) {
         self.hint_string = level.zombie_buildables[self.bound_to_buildable.equipname].hint_wrong;
-      else
+      }
+      else {
         self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
+      }
 
-      if(isDefined(level.custom_buildable_wrong_part_vo))
+      if(isDefined(level.custom_buildable_wrong_part_vo)) {
         player thread[[level.custom_buildable_wrong_part_vo]]();
+      }
 
       return 0;
     } else if(!isDefined(self.bound_to_buildable) && !self.buildable_pool pooledbuildable_has_piece(player player_get_buildable_piece(slot))) {
-      if(isDefined(level.zombie_buildables[self.equipname].hint_wrong))
+      if(isDefined(level.zombie_buildables[self.equipname].hint_wrong)) {
         self.hint_string = level.zombie_buildables[self.equipname].hint_wrong;
-      else
+      }
+      else {
         self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
+      }
 
       return 0;
     } else if(isDefined(self.bound_to_buildable)) {
       assert(isDefined(level.zombie_buildables[self.equipname].hint), "Missing buildable hint");
 
-      if(isDefined(level.zombie_buildables[self.equipname].hint))
+      if(isDefined(level.zombie_buildables[self.equipname].hint)) {
         self.hint_string = level.zombie_buildables[self.equipname].hint;
-      else
+      }
+      else {
         self.hint_string = "Missing buildable hint";
+      }
     } else {
       assert(isDefined(level.zombie_buildables[self.equipname].hint), "Missing buildable hint");
 
-      if(isDefined(level.zombie_buildables[self.equipname].hint))
+      if(isDefined(level.zombie_buildables[self.equipname].hint)) {
         self.hint_string = level.zombie_buildables[self.equipname].hint;
-      else
+      }
+      else {
         self.hint_string = "Missing buildable hint";
+      }
     }
   } else
     return trigger[[self.original_prompt_and_visibility_func]](player);
@@ -257,8 +281,9 @@ swap_buildable_fields(stub1, stub2) {
 pooled_buildable_place_think() {
   self endon("kill_trigger");
 
-  if(isDefined(self.stub.built) && self.stub.built)
+  if(isDefined(self.stub.built) && self.stub.built) {
     return buildable_place_think();
+  }
 
   player_built = undefined;
 
@@ -279,15 +304,17 @@ pooled_buildable_place_think() {
     bind_to = self.stub;
     slot = bind_to.buildablestruct.buildable_slot;
 
-    if(!isDefined(self.stub.bound_to_buildable))
+    if(!isDefined(self.stub.bound_to_buildable)) {
       bind_to = self.stub.buildable_pool pooledbuildable_stub_for_piece(player player_get_buildable_piece(slot));
+    }
 
     if(!isDefined(bind_to) || isDefined(self.stub.bound_to_buildable) && self.stub.bound_to_buildable != bind_to || isDefined(bind_to.bound_to_buildable) && self.stub != bind_to.bound_to_buildable) {
       self.stub.hint_string = "";
       self sethintstring(self.stub.hint_string);
 
-      if(isDefined(self.stub.oncantuse))
+      if(isDefined(self.stub.oncantuse)) {
         self.stub[[self.stub.oncantuse]](player);
+      }
 
       continue;
     }
@@ -298,38 +325,45 @@ pooled_buildable_place_think() {
       self.stub.hint_string = "";
       self sethintstring(self.stub.hint_string);
 
-      if(isDefined(bind_to.oncantuse))
+      if(isDefined(bind_to.oncantuse)) {
         bind_to[[bind_to.oncantuse]](player);
+      }
     } else {
-      if(isDefined(bind_to.onbeginuse))
+      if(isDefined(bind_to.onbeginuse)) {
         self.stub[[bind_to.onbeginuse]](player);
+      }
 
       result = self buildable_use_hold_think(player, bind_to);
       team = player.pers["team"];
 
       if(result) {
-        if(isDefined(self.stub.bound_to_buildable) && self.stub.bound_to_buildable != bind_to)
+        if(isDefined(self.stub.bound_to_buildable) && self.stub.bound_to_buildable != bind_to) {
           result = 0;
+        }
 
-        if(isDefined(bind_to.bound_to_buildable) && self.stub != bind_to.bound_to_buildable)
+        if(isDefined(bind_to.bound_to_buildable) && self.stub != bind_to.bound_to_buildable) {
           result = 0;
+        }
       }
 
-      if(isDefined(bind_to.onenduse))
+      if(isDefined(bind_to.onenduse)) {
         self.stub[[bind_to.onenduse]](team, player, result);
+      }
 
       if(!result) {
         continue;
       }
       if(!isDefined(self.stub.bound_to_buildable) && isDefined(bind_to)) {
-        if(bind_to != self.stub)
+        if(bind_to != self.stub) {
           swap_buildable_fields(self.stub, bind_to);
+        }
 
         self.stub.bound_to_buildable = self.stub;
       }
 
-      if(isDefined(self.stub.onuse))
+      if(isDefined(self.stub.onuse)) {
         self.stub[[self.stub.onuse]](player);
+      }
 
       if(isDefined(player player_get_buildable_piece(slot))) {
         prompt = player player_build(self.stub.buildablezone);

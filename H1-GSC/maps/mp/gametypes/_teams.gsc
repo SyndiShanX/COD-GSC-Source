@@ -112,8 +112,9 @@ trackplayedtime() {
         self.timeplayed["other"]++;
     }
 
-    if(!maps\mp\_utility::is_true(self.inpartywithotherplayers))
+    if(!maps\mp\_utility::is_true(self.inpartywithotherplayers)) {
       updateinpartywithotherplayers();
+    }
 
     wait 1.0;
   }
@@ -128,8 +129,9 @@ updateplayertimes() {
   for(;;) {
     maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
 
-    foreach(var_1 in level.players)
+    foreach(var_1 in level.players) {
     var_1 updateplayedtime();
+    }
 
     wait 1.0;
   }
@@ -179,8 +181,9 @@ updateteambalancedvar() {
   for(;;) {
     var_0 = getdvarint("scr_teambalance");
 
-    if(level.teambalance != var_0)
+    if(level.teambalance != var_0) {
       level.teambalance = getdvarint("scr_teambalance");
+    }
 
     wait 1;
   }
@@ -192,8 +195,9 @@ updateteambalance() {
   wait 0.15;
 
   if(level.teambalance && maps\mp\_utility::isroundbased()) {
-    if(isDefined(game["BalanceTeamsNextRound"]))
+    if(isDefined(game["BalanceTeamsNextRound"])) {
       iprintlnbold(&"MP_AUTOBALANCE_NEXT_ROUND");
+    }
 
     level waittill("restarting");
 
@@ -211,8 +215,9 @@ updateteambalance() {
           iprintlnbold(&"MP_AUTOBALANCE_SECONDS", 15);
           wait 15.0;
 
-          if(!getteambalance())
+          if(!getteambalance()) {
             level balanceteams();
+          }
         }
 
         wait 59.0;
@@ -234,14 +239,17 @@ getteambalance() {
       continue;
     }
 
-    if(isDefined(var_0[var_1].pers["team"]) && var_0[var_1].pers["team"] == "axis")
+    if(isDefined(var_0[var_1].pers["team"]) && var_0[var_1].pers["team"] == "axis") {
       level.team["axis"]++;
+    }
   }
 
-  if(level.team["allies"] > level.team["axis"] + level.teambalance || level.team["axis"] > level.team["allies"] + level.teambalance)
+  if(level.team["allies"] > level.team["axis"] + level.teambalance || level.team["axis"] > level.team["allies"] + level.teambalance) {
     return 0;
-  else
+  }
+  else {
     return 1;
+  }
 }
 
 balanceteams() {
@@ -259,8 +267,9 @@ balanceteams() {
       continue;
     }
 
-    if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis")
+    if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis") {
       var_1[var_1.size] = var_2[var_3];
+    }
   }
 
   var_4 = undefined;
@@ -276,8 +285,9 @@ balanceteams() {
           continue;
         }
 
-        if(var_0[var_5].pers["teamTime"] > var_4.pers["teamTime"])
+        if(var_0[var_5].pers["teamTime"] > var_4.pers["teamTime"]) {
           var_4 = var_0[var_5];
+        }
       }
 
       var_4[[level.onteamselection]]("axis");
@@ -291,8 +301,9 @@ balanceteams() {
           continue;
         }
 
-        if(var_1[var_5].pers["teamTime"] > var_4.pers["teamTime"])
+        if(var_1[var_5].pers["teamTime"] > var_4.pers["teamTime"]) {
           var_4 = var_1[var_5];
+        }
       }
 
       var_4[[level.onteamselection]]("allies");
@@ -309,8 +320,9 @@ balanceteams() {
         continue;
       }
 
-      if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis")
+      if(isDefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis") {
         var_1[var_1.size] = var_2[var_3];
+      }
     }
   }
 }
@@ -321,8 +333,9 @@ setteammodels(var_0, var_1) {}
 
 setplayermodels() {
   if(level.multiteambased) {
-    for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++)
+    for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
       setteammodels(level.teamnamelist[var_0], game[level.teamnamelist[var_0]]);
+    }
   } else {
     setteammodels("allies", game["allies"]);
     setteammodels("axis", game["axis"]);
@@ -332,11 +345,13 @@ setplayermodels() {
 }
 
 playercostume(var_0, var_1, var_2) {
-  if(isagent(self) && !getdvarint("virtualLobbyActive", 0))
+  if(isagent(self) && !getdvarint("virtualLobbyActive", 0)) {
     return 1;
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 = maps\mp\_utility::getbaseweaponname(var_0) + "_mp";
+  }
 
   self setcostumemodels(self.costume, var_0, var_1, var_2);
   self.voice = "american";
@@ -345,14 +360,16 @@ playercostume(var_0, var_1, var_2) {
 }
 
 validcostume(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_1 = validatecostume(var_0);
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    if(var_0[var_2] != var_1[var_2])
+    if(var_0[var_2] != var_1[var_2]) {
       return 0;
+    }
   }
 
   return 1;
@@ -366,8 +383,9 @@ getdefaultcostume() {
 gethardcorecostume() {
   var_0 = 2;
 
-  if(self.pers["team"] == "axis")
+  if(self.pers["team"] == "axis") {
     var_0 = 1;
+  }
 
   var_1 = getcostumefromtable(level.hardcorecostumetablename, var_0);
   return var_1;
@@ -375,13 +393,15 @@ gethardcorecostume() {
 
 verifycostume() {
   if(!validcostume(self.costume)) {
-    if(isDefined(self.sessioncostume) && validcostume(self.sessioncostume))
+    if(isDefined(self.sessioncostume) && validcostume(self.sessioncostume)) {
       self.costume = self.sessioncostume;
+    }
     else {
       self.costume = getdefaultcostume();
 
-      if(isplayer(self))
+      if(isplayer(self)) {
         maps\mp\gametypes\_class::cao_setactivecostume(self.costume);
+      }
 
       self.sessioncostume = self.costume;
     }
@@ -397,8 +417,9 @@ applycostume(var_0, var_1, var_2) {
 countplayers() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < level.teamnamelist.size; var_1++)
+  for(var_1 = 0; var_1 < level.teamnamelist.size; var_1++) {
     var_0[level.teamnamelist[var_1]] = 0;
+  }
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
     if(level.players[var_1] == self) {
@@ -407,8 +428,9 @@ countplayers() {
     if(level.players[var_1].pers["team"] == "spectator") {
       continue;
     }
-    if(isDefined(level.players[var_1].pers["team"]))
+    if(isDefined(level.players[var_1].pers["team"])) {
       var_0[level.players[var_1].pers["team"]]++;
+    }
   }
 
   return var_0;
@@ -434,8 +456,9 @@ trackfreeplayedtime() {
         self.timeplayed["other"]++;
     }
 
-    if(!maps\mp\_utility::is_true(self.inpartywithotherplayers))
+    if(!maps\mp\_utility::is_true(self.inpartywithotherplayers)) {
       updateinpartywithotherplayers();
+    }
 
     wait 1.0;
   }
@@ -450,11 +473,13 @@ updatefreeplayertimes() {
   for(;;) {
     var_0++;
 
-    if(var_0 >= level.players.size)
+    if(var_0 >= level.players.size) {
       var_0 = 0;
+    }
 
-    if(isDefined(level.players[var_0]))
+    if(isDefined(level.players[var_0])) {
       level.players[var_0] updatefreeplayedtime();
+    }
 
     wait 1.0;
   }
@@ -494,8 +519,9 @@ updatefreeplayedtime() {
 }
 
 getjointeampermissions(var_0) {
-  if(maps\mp\_utility::iscoop())
+  if(maps\mp\_utility::iscoop()) {
     return 1;
+  }
 
   var_1 = 0;
   var_2 = 0;
@@ -507,28 +533,35 @@ getjointeampermissions(var_0) {
     if(isDefined(var_5.pers["team"]) && var_5.pers["team"] == var_0) {
       var_1++;
 
-      if(isbot(var_5))
+      if(isbot(var_5)) {
         var_2++;
+      }
     }
   }
 
-  if(var_1 < level.teamlimit)
+  if(var_1 < level.teamlimit) {
     return 1;
-  else if(var_2 > 0)
+  }
+  else if(var_2 > 0) {
     return 1;
-  else if(level.gametype == "infect")
+  }
+  else if(level.gametype == "infect") {
     return 1;
-  else if(maps\mp\_utility::ishodgepodgemm())
+  }
+  else if(maps\mp\_utility::ishodgepodgemm()) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 onplayerspawned() {
   level endon("game_ended");
 
-  for(;;)
+  for(;;) {
     self waittill("spawned_player");
+  }
 }
 
 mt_getteamname(var_0) {
@@ -688,11 +721,13 @@ getteamdeploymodel(var_0) {
 }
 
 setfactiontableoverride(var_0, var_1, var_2) {
-  if(!isDefined(level.factiontableoverrides))
+  if(!isDefined(level.factiontableoverrides)) {
     level.factiontableoverrides = [];
+  }
 
-  if(!isDefined(level.factiontableoverrides[var_0]))
+  if(!isDefined(level.factiontableoverrides[var_0])) {
     level.factiontableoverrides[var_0] = [];
+  }
 
   level.factiontableoverrides[var_0][var_1] = var_2;
 }
@@ -700,8 +735,9 @@ setfactiontableoverride(var_0, var_1, var_2) {
 getfactiontableoverride(var_0, var_1) {
   var_2 = game[var_0];
 
-  if(isDefined(level.factiontableoverrides) && isDefined(level.factiontableoverrides[var_2]))
+  if(isDefined(level.factiontableoverrides) && isDefined(level.factiontableoverrides[var_2])) {
     return level.factiontableoverrides[var_2][var_1];
+  }
 
   return undefined;
 }
@@ -709,8 +745,9 @@ getfactiontableoverride(var_0, var_1) {
 factiontablelookup(var_0, var_1) {
   var_2 = getfactiontableoverride(var_0, var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return var_2;
+  }
 
   return tablelookup("mp\factionTable.csv", 0, game[var_0], var_1);
 }
@@ -718,8 +755,9 @@ factiontablelookup(var_0, var_1) {
 factiontableistringlookup(var_0, var_1) {
   var_2 = getfactiontableoverride(var_0, var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return var_2;
+  }
 
   return tablelookupistring("mp\factionTable.csv", 0, game[var_0], var_1);
 }

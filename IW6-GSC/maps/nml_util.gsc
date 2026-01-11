@@ -9,8 +9,9 @@ team_set_colors() {
 }
 
 team_unset_colors(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 256;
+  }
 
   level.baker maps\_utility::clear_force_color();
   level.baker.goalradius = var_0;
@@ -22,8 +23,9 @@ team_unset_colors(var_0) {
 }
 
 team_2_unset_colors(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 128;
+  }
 
   level.baker maps\_utility::clear_force_color();
   level.baker.goalradius = var_0;
@@ -44,8 +46,9 @@ set_start_positions(var_0) {
         level.baker forceteleport(var_3.origin, var_3.angles);
         level.baker setgoalpos(var_3.origin);
 
-        if(isDefined(var_3.animation))
+        if(isDefined(var_3.animation)) {
           var_3 thread maps\_anim::anim_generic(level.baker, var_3.animation);
+        }
 
         if(isDefined(var_3.target)) {
           var_3 = var_3 common_scripts\utility::get_target_ent();
@@ -57,8 +60,9 @@ set_start_positions(var_0) {
         level.adam forceteleport(var_3.origin, var_3.angles);
         level.adam setgoalpos(var_3.origin);
 
-        if(isDefined(var_3.animation))
+        if(isDefined(var_3.animation)) {
           var_3 thread maps\_anim::anim_generic(level.adam, var_3.animation);
+        }
 
         if(isDefined(var_3.target)) {
           var_3 = var_3 common_scripts\utility::get_target_ent();
@@ -81,8 +85,9 @@ set_start_positions(var_0) {
         level.merrick forceteleport(var_3.origin, var_3.angles);
         level.merrick setgoalpos(var_3.origin);
 
-        if(isDefined(var_3.animation))
+        if(isDefined(var_3.animation)) {
           var_3 thread maps\_anim::anim_generic(level.merrick, var_3.animation);
+        }
 
         if(isDefined(var_3.target)) {
           var_3 = var_3 common_scripts\utility::get_target_ent();
@@ -94,8 +99,9 @@ set_start_positions(var_0) {
         level.keegan forceteleport(var_3.origin, var_3.angles);
         level.keegan setgoalpos(var_3.origin);
 
-        if(isDefined(var_3.animation))
+        if(isDefined(var_3.animation)) {
           var_3 thread maps\_anim::anim_generic(level.keegan, var_3.animation);
+        }
 
         if(isDefined(var_3.target)) {
           var_3 = var_3 common_scripts\utility::get_target_ent();
@@ -235,8 +241,9 @@ earthquake_trigger() {
   var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
   common_scripts\utility::array_thread(var_0, ::fx_ent_think);
 
-  if(isDefined(self.script_soundalias))
+  if(isDefined(self.script_soundalias)) {
     thread common_scripts\utility::play_sound_in_space(self.script_soundalias, var_0[0].origin);
+  }
 
   wait 0.75;
   level.player maps\_utility::player_speed_percent(50, 1);
@@ -257,10 +264,12 @@ ledge_trigger_logic() {
   for(;;) {
     self waittill("trigger");
 
-    if(level.player maps\_utility::player_looking_at(var_0.origin, 0, 1))
+    if(level.player maps\_utility::player_looking_at(var_0.origin, 0, 1)) {
       common_scripts\utility::flag_set("player_on_ledge");
-    else
+    }
+    else {
       common_scripts\utility::flag_clear("player_on_ledge");
+    }
 
     wait 0.1;
   }
@@ -371,14 +380,16 @@ wait_for_group_attack(var_0) {
     }
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_0 = common_scripts\utility::array_remove(var_0, var_3);
+  }
 
   wait 0.3;
   var_0 = maps\_utility::array_removedead(var_0);
 
-  if(var_0.size > 0)
+  if(var_0.size > 0) {
     maps\nml_stealth::stealth_shot(common_scripts\utility::random(var_0));
+  }
 }
 
 notify_ai_on_attack(var_0) {
@@ -399,20 +410,24 @@ hero_paths(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(isDefined(var_8.script_noteworthy)) {
       switch (var_8.script_noteworthy) {
         case "baker":
-          if(!isDefined(var_2))
+          if(!isDefined(var_2)) {
             var_2 = var_1;
+          }
 
-          if(!isDefined(var_4))
+          if(!isDefined(var_4)) {
             var_4 = 0;
+          }
 
           level.baker maps\_utility::delaythread(var_4, maps\_utility::follow_path_and_animate, var_8, var_2);
           break;
         case "cairo":
-          if(!isDefined(var_3))
+          if(!isDefined(var_3)) {
             var_3 = var_1;
+          }
 
-          if(!isDefined(var_5))
+          if(!isDefined(var_5)) {
             var_5 = 1.5;
+          }
 
           level.dog maps\_utility::delaythread(var_5, maps\_utility::follow_path_and_animate, var_8, var_3);
           break;
@@ -483,8 +498,9 @@ volume_waittill_no_axis(var_0, var_1) {
 }
 
 volume_is_empty(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = getaiarray("axis");
   var_3 = 0;
@@ -493,8 +509,9 @@ volume_is_empty(var_0, var_1) {
     if(var_5 istouching(var_0)) {
       var_3 = var_3 + 1;
 
-      if(var_3 > var_1)
+      if(var_3 > var_1) {
         return 0;
+      }
     }
   }
 
@@ -513,11 +530,13 @@ moveto_rotateto_speed(var_0, var_1, var_2, var_3) {
   var_6 = distance(var_5, var_4);
   var_7 = var_6 / var_1;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
   if(var_7 <= 0) {
     return;
@@ -559,17 +578,20 @@ stealth_range_trigger() {
         wait 0.2;
       }
 
-      if(!isDefined(var_2) || !var_2.istouchingrangetrigger && !var_2.rangetriggeroverride)
+      if(!isDefined(var_2) || !var_2.istouchingrangetrigger && !var_2.rangetriggeroverride) {
         default_stealth_settings();
+      }
     }
   }
 }
 
 default_stealth_settings() {
-  if(isDefined(level.default_stealth_override))
+  if(isDefined(level.default_stealth_override)) {
     [[level.default_stealth_override]]();
-  else
+  }
+  else {
     maps\_stealth_visibility_system::system_default_detect_ranges();
+  }
 }
 
 vehicle_rumble_even_if_not_moving() {
@@ -577,12 +599,15 @@ vehicle_rumble_even_if_not_moving() {
   var_0 = self.classname;
   var_1 = undefined;
 
-  if(isDefined(self.vehicle_rumble_unique))
+  if(isDefined(self.vehicle_rumble_unique)) {
     var_1 = self.vehicle_rumble_unique;
-  else if(isDefined(level.vehicle_rumble_override) && isDefined(level.vehicle_rumble_override[var_0]))
+  }
+  else if(isDefined(level.vehicle_rumble_override) && isDefined(level.vehicle_rumble_override[var_0])) {
     var_1 = level.vehicle_rumble_override;
-  else if(isDefined(level.vehicle_rumble[var_0]))
+  }
+  else if(isDefined(level.vehicle_rumble[var_0])) {
     var_1 = level.vehicle_rumble[var_0];
+  }
 
   if(!isDefined(var_1)) {
     return;
@@ -595,33 +620,44 @@ vehicle_rumble_even_if_not_moving() {
   self.rumbletrigger = var_4;
   self endon("death");
 
-  if(!isDefined(self.rumbleon))
+  if(!isDefined(self.rumbleon)) {
     self.rumbleon = 1;
+  }
 
-  if(isDefined(var_1.scale))
+  if(isDefined(var_1.scale)) {
     self.rumble_scale = var_1.scale;
-  else
+  }
+  else {
     self.rumble_scale = 0.15;
+  }
 
-  if(isDefined(var_1.duration))
+  if(isDefined(var_1.duration)) {
     self.rumble_duration = var_1.duration;
-  else
+  }
+  else {
     self.rumble_duration = 4.5;
+  }
 
-  if(isDefined(var_1.radius))
+  if(isDefined(var_1.radius)) {
     self.rumble_radius = var_1.radius;
-  else
+  }
+  else {
     self.rumble_radius = 600;
+  }
 
-  if(isDefined(var_1.basetime))
+  if(isDefined(var_1.basetime)) {
     self.rumble_basetime = var_1.basetime;
-  else
+  }
+  else {
     self.rumble_basetime = 1;
+  }
 
-  if(isDefined(var_1.randomaditionaltime))
+  if(isDefined(var_1.randomaditionaltime)) {
     self.rumble_randomaditionaltime = var_1.randomaditionaltime;
-  else
+  }
+  else {
     self.rumble_randomaditionaltime = 1;
+  }
 
   var_4.radius = self.rumble_radius;
 
@@ -645,8 +681,9 @@ vehicle_rumble_even_if_not_moving() {
 }
 
 btr_attack_player_on_flag(var_0) {
-  foreach(var_2 in self.mgturret)
+  foreach(var_2 in self.mgturret) {
   var_2 notify("stop_burst_fire_unmanned");
+  }
 
   maps\_vehicle::mgoff();
   self endon("death");
@@ -659,15 +696,17 @@ btr_attack_player_on_flag(var_0) {
     self.baseaccuracy = 9999;
     self.favoriteenemy = level.player;
 
-    foreach(var_2 in self.mgturret)
+    foreach(var_2 in self.mgturret) {
     var_2 thread maps\_mgturret::burst_fire_unmanned();
+    }
 
     thread maps\_vehicle::mgon();
     thread btr_target_player();
     common_scripts\utility::flag_waitopen(var_0);
 
-    foreach(var_2 in self.mgturret)
+    foreach(var_2 in self.mgturret) {
     var_2 notify("stop_burst_fire_unmanned");
+    }
 
     self notify("stop_shooting");
   }
@@ -684,8 +723,9 @@ btr_target_player() {
     self setturrettargetent(level.player);
 
     if(self.model == "vehicle_btr80") {
-      if(can_see_player())
+      if(can_see_player()) {
         fire_at_target();
+      }
     }
 
     wait 0.3;
@@ -731,8 +771,9 @@ dyn_dogspeed_enable(var_0) {
   }
   self.dyn_speed = 1;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 200;
+  }
 
   self.old_moveplaybackrate = self.moveplaybackrate;
 
@@ -741,16 +782,19 @@ dyn_dogspeed_enable(var_0) {
     var_2 = distance(self.origin, level.player.origin);
 
     if(!var_1 || var_2 < var_0) {
-      if(self.type == "dog")
+      if(self.type == "dog") {
         self.moveplaybackrate = self.old_moveplaybackrate * 1.4;
-      else
+      }
+      else {
         self.moveplaybackrate = self.old_moveplaybackrate * 1.15;
+      }
 
       self.movetransitionrate = self.moveplaybackrate;
       wait 1;
 
-      while(!maps\_utility_dogs::player_is_behind_me() || distance(self.origin, level.player.origin) < var_0)
+      while(!maps\_utility_dogs::player_is_behind_me() || distance(self.origin, level.player.origin) < var_0) {
         wait 0.1;
+      }
 
       self.moveplaybackrate = self.old_moveplaybackrate;
       self.movetransitionrate = self.moveplaybackrate;
@@ -795,17 +839,20 @@ make_enemy_squad_burst(var_0, var_1) {
 }
 
 delete_on_notify(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "level_cleanup";
+  }
 
   self endon("death");
   level waittill(var_0);
 
-  if(common_scripts\utility::flag_exist("_stealth_spotted"))
+  if(common_scripts\utility::flag_exist("_stealth_spotted")) {
     common_scripts\utility::flag_waitopen("_stealth_spotted");
+  }
 
-  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)
+  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     maps\_utility::stop_magic_bullet_shield();
+  }
 
   self delete();
 }
@@ -830,8 +877,9 @@ is_dog_really_attacking() {
 }
 
 waittill_player_lookat_on_dog(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = level.player;
+  }
 
   var_5 = int(var_0 * 20);
   var_6 = var_5;
@@ -840,16 +888,19 @@ waittill_player_lookat_on_dog(var_0, var_1, var_2, var_3, var_4) {
   var_8 = undefined;
 
   for(;;) {
-    if(var_7)
+    if(var_7) {
       var_8 = self getEye();
-    else
+    }
+    else {
       var_8 = self.origin;
+    }
 
     if(var_4 player_looking_at_on_dog(var_8, var_1, var_2, var_3)) {
       var_6--;
 
-      if(var_6 <= 0)
+      if(var_6 <= 0) {
         return 1;
+      }
     } else
       var_6 = var_5;
 
@@ -858,8 +909,9 @@ waittill_player_lookat_on_dog(var_0, var_1, var_2, var_3, var_4) {
 }
 
 player_looking_at_on_dog(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.8;
+  }
 
   var_4 = maps\_utility::get_player_from_self();
   var_5 = var_4 maps\_dog_control::get_eye();
@@ -869,11 +921,13 @@ player_looking_at_on_dog(var_0, var_1, var_2, var_3) {
   var_9 = anglesToForward(var_8);
   var_10 = vectordot(var_7, var_9);
 
-  if(var_10 < var_1)
+  if(var_10 < var_1) {
     return 0;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     return 1;
+  }
 
   var_11 = bulletTrace(var_0, var_5, 0, var_3);
   return var_11["fraction"] == 1;
@@ -884,31 +938,37 @@ mission_fail_on_dog_death(var_0) {
     level.dog notify("magic_bullet_shield");
     level.dog endon("magic_bullet_shield");
 
-    if(isDefined(level.dog.magic_bullet_shield) && level.dog.magic_bullet_shield)
+    if(isDefined(level.dog.magic_bullet_shield) && level.dog.magic_bullet_shield) {
       level.dog maps\_utility::stop_magic_bullet_shield();
+    }
 
     level.dog.health = 1;
     level.dog waittill("death", var_1);
 
-    if(isDefined(var_1) && var_1 == level.player)
+    if(isDefined(var_1) && var_1 == level.player) {
       force_deathquote(&"NML_HINT_CAIRO_DEATH_PLR");
-    else if(isDefined(var_0))
+    }
+    else if(isDefined(var_0)) {
       force_deathquote(var_0);
-    else
+    }
+    else {
       force_deathquote("");
+    }
   }
 
   maps\_utility::missionfailedwrapper();
 }
 
 hazmat_if_hazmat(var_0) {
-  if(issubstr(self.model, "hazmat"))
+  if(issubstr(self.model, "hazmat")) {
     thread hazmat_think(var_0);
+  }
 }
 
 hazmat_think(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "stand";
+  }
 
   self.generic_voice_override = "hazmat";
   self.ignoreall = 1;
@@ -965,10 +1025,12 @@ hazmat_gets_scared() {
   thread hazmat_react(var_0);
   wait 1;
 
-  if(hazmat_find_gun() == 0)
+  if(hazmat_find_gun() == 0) {
     hazmat_run_away();
-  else
+  }
+  else {
     thread hazmat_scared_fire();
+  }
 }
 
 hazmat_notify_nearby_allies() {
@@ -1013,8 +1075,9 @@ hazmat_guy_wait_for_dog_attack() {
   for(;;) {
     level waittill("dog_attacks_ai", var_0, var_1);
 
-    if(distance2d(var_0.origin, self.origin) < max(400, level.dog.maxvisibledist))
+    if(distance2d(var_0.origin, self.origin) < max(400, level.dog.maxvisibledist)) {
       self notify("runaway", var_0);
+    }
   }
 }
 
@@ -1118,8 +1181,9 @@ yell_and_scream_kill() {
   var_0 = undefined;
   var_1 = undefined;
 
-  if(isDefined(self.scream_node))
+  if(isDefined(self.scream_node)) {
     var_0 = self.scream_node;
+  }
 
   if(isDefined(self.geiger_sound_source)) {
     self.geiger_sound_source stopsounds();
@@ -1128,19 +1192,22 @@ yell_and_scream_kill() {
 
   wait 0.1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 hazmat_find_gun() {
   self endon("death");
   self endon("dog_attacks_ai");
 
-  if(!isDefined(level.pickup_guns))
+  if(!isDefined(level.pickup_guns)) {
     return 0;
+  }
 
   var_0 = sortbydistance(level.pickup_guns, self.origin);
 
@@ -1187,8 +1254,9 @@ run_away_from_dog() {
   level.dog endon("");
 
   for(;;) {
-    while(distance2d(self.origin, level.dog.origin) > 400)
+    while(distance2d(self.origin, level.dog.origin) > 400) {
       wait 0.1;
+    }
 
     var_0 = getnodesinradius(level.dog.origin, 1024, 600, 300);
     self.goalradius = 128;
@@ -1203,19 +1271,22 @@ scared_behavior() {
 }
 
 load_hazmat_guns(var_0) {
-  if(!isDefined(level.pickup_guns))
+  if(!isDefined(level.pickup_guns)) {
     level.pickup_guns = [];
+  }
 
   var_1 = getEntArray(var_0, "script_noteworthy");
   common_scripts\utility::array_thread(var_1, ::spawn_pickup_gun);
 }
 
 delete_hazmat_guns() {
-  if(!isDefined(level.pickup_guns))
+  if(!isDefined(level.pickup_guns)) {
     level.pickup_guns = [];
+  }
 
-  foreach(var_1 in level.pickup_guns)
+  foreach(var_1 in level.pickup_guns) {
   var_1 delete();
+  }
 
   level.pickup_guns = [];
 }
@@ -1254,8 +1325,9 @@ hudoutline_wait_death() {
 
   var_0 = getcorpsearray();
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 hudoutlinedisable();
+  }
 }
 
 delayhudoutline(var_0, var_1) {
@@ -1268,8 +1340,9 @@ outline_off_when_far(var_0) {
   level.dog endon("death");
 
   for(;;) {
-    while(distance2d(self.origin, level.dog.origin) > level.hudoutline_maxdist)
+    while(distance2d(self.origin, level.dog.origin) > level.hudoutline_maxdist) {
       wait 0.05;
+    }
 
     if(!isDefined(self.no_more_outlines)) {
       wait(randomfloatrange(0, 0.5));
@@ -1279,8 +1352,9 @@ outline_off_when_far(var_0) {
 
     wait 1;
 
-    while(distance2d(self.origin, level.dog.origin) <= level.hudoutline_maxdist)
+    while(distance2d(self.origin, level.dog.origin) <= level.hudoutline_maxdist) {
       wait 0.05;
+    }
 
     self hudoutlinedisable();
     wait 0.2;
@@ -1350,8 +1424,9 @@ ragdoll_corpses() {
   var_0 = getcorpsearray();
 
   foreach(var_2 in var_0) {
-    if(var_2 isragdoll() == 0)
+    if(var_2 isragdoll() == 0) {
       var_2 startragdoll();
+    }
   }
 }
 
@@ -1368,8 +1443,9 @@ group_walla(var_0, var_1, var_2, var_3) {
     var_5 endon("dog_attacks_ai");
   }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level endon(var_3);
+  }
 
   var_7 = var_1;
   var_8 = 1;
@@ -1452,8 +1528,9 @@ reactive_grass_settings_pc() {
 player_has_silenced_weapon() {
   var_0 = level.player getcurrentweapon();
 
-  if(issubstr(var_0, "honeybadger") || issubstr(var_0, "silence"))
+  if(issubstr(var_0, "honeybadger") || issubstr(var_0, "silence")) {
     return 1;
+  }
 
   return 0;
 }

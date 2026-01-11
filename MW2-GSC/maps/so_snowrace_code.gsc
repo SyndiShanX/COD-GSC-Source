@@ -56,8 +56,9 @@ init_snow_race(skipDialog) {
   thread fade_challenge_out("so_snowrace_complete", skipDialog);
 
   if(is_coop()) {
-    foreach(player in level.players)
+    foreach(player in level.players) {
     player thread maps\_coop::createFriendlyHudIcon_Normal();
+    }
   }
 
   level._effect["extraction_smoke"] = loadfx("smoke/signal_smoke_green");
@@ -163,8 +164,9 @@ spawn_new_snowmobile_and_drive(optionalTeleportOrg, optionalTeleportAng) {
   snowmobile = self.snowmobile_spawner spawn_vehicle();
   assert(isDefined(snowmobile));
 
-  if(isDefined(optionalTeleportOrg) && isDefined(optionalTeleportOrg))
+  if(isDefined(optionalTeleportOrg) && isDefined(optionalTeleportOrg)) {
     snowmobile vehicle_Teleport(optionalTeleportOrg, optionalTeleportAng);
+  }
 
   snowmobile thread maps\_snowmobile_drive::drive_vehicle();
   self player_mount_vehicle(snowmobile);
@@ -182,8 +184,9 @@ slow_player_on_damage() {
   for(;;) {
     self waittill("damage", damage, attacker);
 
-    if(!isplayer(attacker))
+    if(!isplayer(attacker)) {
       continue;
+    }
 
     self.snowmobile thread slow_down_vehicle();
   }
@@ -192,19 +195,22 @@ slow_player_on_damage() {
 slow_down_vehicle() {
   // slow vehicle by a percentage, and cap it so we don't crawl to a stop
   self.damage_slowdown += VEH_SLOWDOWN_AMOUNT;
-  if(self.damage_slowdown > VEH_SLOWDOWN_AMOUNT_MIN)
+  if(self.damage_slowdown > VEH_SLOWDOWN_AMOUNT_MIN) {
     self.damage_slowdown = VEH_SLOWDOWN_AMOUNT_MIN;
+  }
 
   wait 1.5;
 
   self.damage_slowdown -= VEH_SLOWDOWN_AMOUNT;
-  if(self.damage_slowdown < 0)
+  if(self.damage_slowdown < 0) {
     self.damage_slowdown = 0;
+  }
 }
 
 start_race() {
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player freezeControls(true);
+  }
 
   wait 1;
 
@@ -252,15 +258,17 @@ start_race_boost() {
   wait 0.2;
 
   // gassed it too soon
-  if(self.vehicle.veh_throttle > 0)
+  if(self.vehicle.veh_throttle > 0) {
     return;
+  }
 
   // window of opportunity
   while(self.vehicle.veh_throttle == 0) {
     wait 0.05;
     BOOST_WINDOW -= 0.05;
-    if(BOOST_WINDOW <= 0)
+    if(BOOST_WINDOW <= 0) {
       return;
+    }
   }
 
   // player gets a boost
@@ -279,41 +287,49 @@ start_race_boost() {
 
 give_vehicle_boost(boostToSpeed) {
   speed = int(self vehicle_GetSpeed());
-  if(speed >= boostToSpeed)
+  if(speed >= boostToSpeed) {
     return;
+  }
 
   while(isDefined(self)) {
     speed += 5;
-    if(speed > boostToSpeed)
+    if(speed > boostToSpeed) {
       break;
+    }
 
     self VehPhys_SetSpeed(speed);
     wait 0.05;
   }
-  if(isDefined(self))
+  if(isDefined(self)) {
     self VehPhys_SetSpeed(boostToSpeed);
+  }
 }
 
 end_race_cleanup() {
-  if(!is_coop())
+  if(!is_coop()) {
     return;
+  }
 
-  foreach(player in level.players)
+  foreach(player in level.players) {
   array_thread(player.snowmobile.riders, ::stop_magic_bullet_shield_if_shielded);
+  }
 }
 
 stop_magic_bullet_shield_if_shielded() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     self thread stop_magic_bullet_shield();
+  }
 }
 
 speed_balance() {
   // no speed balancing for only one player
-  if(!is_coop())
+  if(!is_coop()) {
     return;
+  }
 
   // assuming only 2 players ever
   assert(isDefined(level.player));
@@ -398,8 +414,9 @@ race_music() {
 
 player_snowmobile_downed(vehicle) {
   if(self ent_flag_exist("finish_line")) {
-    if(self ent_flag("finish_line"))
+    if(self ent_flag("finish_line")) {
       return;
+    }
   }
 
   self.ignoreRandomBulletDamage = true;
@@ -430,8 +447,9 @@ put_player_back_on_snowmobile(vehicle) {
   self endSliding();
   self.snowmobile = self spawn_new_snowmobile_and_drive(vehicle.resetPos, vehicle.resetAng);
 
-  if(isDefined(level.track_player_positions))
+  if(isDefined(level.track_player_positions)) {
     self thread track_player_progress(self.snowmobile.origin);
+  }
 
   //self thread maps\_snowmobile_drive::drive_crash_detection( vehicle );
   //self player_mount_vehicle( vehicle );
@@ -445,19 +463,22 @@ player_reset_position_tracking() {
   for(;;) {
     self waittill("trigger", vehicle);
 
-    if(!isDefined(vehicle))
+    if(!isDefined(vehicle)) {
       continue;
+    }
 
     // enemy AI vehicles can also hit this trigger so make sure it's not one of them
-    if(!isDefined(vehicle.player))
+    if(!isDefined(vehicle.player)) {
       continue;
+    }
 
     vehicle.resetPos = ent.origin;
     vehicle.resetAng = ent.angles;
 
     // offset player 2 so if both players die they don't respawn inside each other
-    if(vehicle.player == level.player)
+    if(vehicle.player == level.player) {
       continue;
+    }
 
     right = AnglesToRight(vehicle.resetAng) * 80;
     vehicle.resetPos += right;
@@ -520,43 +541,52 @@ get_current_stars(starsThisPlaythrough) {
 
   stars = int((self GetLocalPlayerProfileData("missionSOHighestDifficulty"))[levelIndex]);
   stars = max(0, stars - 1);
-  if(stars == 0)
+  if(stars == 0) {
     stars = starsThisPlaythrough;
+  }
 
   return stars;
 }
 
 custom_eog_summary() {
   foreach(player in level.players) {
-    if(!isDefined(player))
+    if(!isDefined(player)) {
       continue;
+    }
 
     // Replace "Mission Success" with race winner if it applies
     if(is_coop() && isDefined(level.raceWinner)) {
-      if(player == level.raceWinner)
+      if(player == level.raceWinner) {
         player set_eog_success_heading("@SO_SNOWRACE1_CLIFFHANGER_YOUWIN");
-      else
+      }
+      else {
         player set_eog_success_heading("@SO_SNOWRACE1_CLIFFHANGER_YOULOSE");
+      }
     } else {
-      if(isDefined(player.ran_out_of_time))
+      if(isDefined(player.ran_out_of_time)) {
         player set_eog_success_heading("@SO_SNOWRACE1_CLIFFHANGER_YOULOSE");
+      }
     }
 
     // Replace time for individual times. If player didn't finish print DNF
     finishedRace = isDefined(player.finish_time);
-    if(isDefined(player.dnf))
+    if(isDefined(player.dnf)) {
       finishedRace = false;
+    }
 
     starsThisPlaythrough = 0;
     if(finishedRace) {
       finish_time_in_seconds = (player.finish_time - player.start_time) * 0.001;
       if(isDefined(level.show_time_to_beat)) {
-        if(finish_time_in_seconds <= level.race_times["veteran"])
+        if(finish_time_in_seconds <= level.race_times["veteran"]) {
           starsThisPlaythrough = 3;
-        else if(finish_time_in_seconds <= level.race_times["hard"])
+        }
+        else if(finish_time_in_seconds <= level.race_times["hard"]) {
           starsThisPlaythrough = 2;
-        else
+        }
+        else {
           starsThisPlaythrough = 1;
+        }
       }
 
       time = convert_to_time_string(finish_time_in_seconds, true);
@@ -570,12 +600,14 @@ custom_eog_summary() {
     }
 
     show_time_to_beat = false;
-    if(isDefined(level.timeToBeatString))
+    if(isDefined(level.timeToBeatString)) {
       show_time_to_beat = true;
+    }
     earned_stars = player get_current_stars(starsThisPlaythrough);
     assert(isDefined(earned_stars) && earned_stars < 4 && earned_stars >= 0);
-    if(earned_stars >= 3)
+    if(earned_stars >= 3) {
       show_time_to_beat = false;
+    }
 
     if(show_time_to_beat) {
       assert(isDefined(level.race_times["normal"]));
@@ -583,18 +615,21 @@ custom_eog_summary() {
       assert(isDefined(level.race_times["veteran"]));
 
       time_to_beat = convert_to_time_string(level.race_times["veteran"]);
-      if(earned_stars < 1)
+      if(earned_stars < 1) {
         time_to_beat = convert_to_time_string(level.race_times["normal"]);
-      else if(earned_stars < 2)
+      }
+      else if(earned_stars < 2) {
         time_to_beat = convert_to_time_string(level.race_times["hard"]);
+      }
 
       player add_custom_eog_summary_line(level.timeToBeatString, time_to_beat);
     }
 
     if(level.script == "so_snowrace1_cliffhanger") {
       player maps\_endmission::use_custom_eog_default_kills();
-      if(is_coop_online())
+      if(is_coop_online()) {
         player maps\_endmission::use_custom_eog_default_kills(get_other_player(player));
+      }
     }
   }
 }

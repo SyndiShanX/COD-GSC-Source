@@ -61,15 +61,17 @@ pipe_wait_loop() {
     self waittill("damage", var_03, var_04, var_05, var_00, var_06);
 
     if(var_01) {
-      if(randomint(100) <= 33)
+      if(randomint(100) <= 33) {
         continue;
+      }
     }
 
     var_01 = 1;
     var_07 = pipe_logic(var_05, var_00, var_06, var_04);
 
-    if(var_07)
+    if(var_07) {
       var_2--;
+    }
 
     if(var_02 <= 0) {
       break;
@@ -80,31 +82,39 @@ pipe_wait_loop() {
 }
 
 pipe_logic(var_00, var_01, var_02, var_03) {
-  if(level._pipes.num_pipe_fx > 12)
+  if(level._pipes.num_pipe_fx > 12) {
     return 0;
+  }
 
-  if(!isDefined(level._pipes._pipe_methods[var_02]))
+  if(!isDefined(level._pipes._pipe_methods[var_02])) {
     var_01 = pipe_calc_nofx(var_01, var_02);
-  else
+  }
+  else {
     var_01 = self[[level._pipes._pipe_methods[var_02]]](var_01, var_02);
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return 0;
+  }
 
-  if(isDefined(var_3.classname) && var_3.classname == "worldspawn")
+  if(isDefined(var_3.classname) && var_3.classname == "worldspawn") {
     return 0;
+  }
 
   foreach(var_05 in self.pipe_fx_array) {
-    if(distancesquared(var_01, var_5.origin) < 25)
+    if(distancesquared(var_01, var_5.origin) < 25) {
       return 0;
+    }
   }
 
   var_07 = undefined;
 
-  if(isai(var_03))
+  if(isai(var_03)) {
     var_07 = var_03 getEye();
-  else
+  }
+  else {
     var_07 = var_3.origin;
+  }
 
   var_08 = var_01 - var_07;
   var_09 = bulletTrace(var_07, var_07 + 1.5 * var_08, 0, var_03, 0);
@@ -132,8 +142,9 @@ pipefx(var_00, var_01, var_02) {
   var_10 playLoopSound(var_08);
   self.pipe_fx_array[self.pipe_fx_array.size] = var_10;
 
-  if(scripts\engine\utility::issp() || self.script_noteworthy != "steam")
+  if(scripts\engine\utility::issp() || self.script_noteworthy != "steam") {
     thread pipe_damage(var_00, var_01, var_02, var_10);
+  }
 
   if(self.script_noteworthy == "oil_leak") {
     var_11 = spawn("script_model", var_00);
@@ -187,21 +198,25 @@ pipe_damage(var_00, var_01, var_02, var_03) {
   var_05 = level._pipes._dmg[self.script_noteworthy];
 
   for(;;) {
-    if(!isDefined(self.damageowner))
+    if(!isDefined(self.damageowner)) {
       self radiusdamage(var_04, 36, var_05, var_05 * 0.75, undefined, "MOD_TRIGGER_HURT");
-    else
+    }
+    else {
       self radiusdamage(var_04, 36, var_05, var_05 * 0.75, var_02, "MOD_TRIGGER_HURT");
+    }
 
     wait 0.4;
   }
 }
 
 allow_pipe_damage() {
-  if(!scripts\engine\utility::issp())
+  if(!scripts\engine\utility::issp()) {
     return 0;
+  }
 
-  if(!isDefined(level.pipesdamage))
+  if(!isDefined(level.pipesdamage)) {
     return 1;
+  }
 
   return level.pipesdamage;
 }
@@ -242,8 +257,9 @@ precachefx() {
   var_04 = 0;
 
   foreach(var_06 in self) {
-    if(var_6.script_noteworthy == "water")
+    if(var_6.script_noteworthy == "water") {
       var_6.script_noteworthy = "steam";
+    }
 
     if(var_6.script_noteworthy == "steam") {
       var_06 willneverchange();

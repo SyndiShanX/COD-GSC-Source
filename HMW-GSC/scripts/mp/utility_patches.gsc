@@ -38,13 +38,15 @@ main() {
 }
 
 playerremotekillstreakshowhud_stub() {
-  if(!self isemped_stub())
+  if(!self isemped_stub()) {
     self setclientomnvar("ui_killstreak_remote", 0);
+  }
 }
 
 setusingremote_stub(var_0) {
-  if(isDefined(self.carryicon))
+  if(isDefined(self.carryicon)) {
     self.carryicon.alpha = 0;
+  }
 
   self.usingremote = var_0;
   common_scripts\utility::_disableoffhandweapons();
@@ -66,8 +68,9 @@ _setperk_stub(perk_name, var_1, var_2) {
   self.perksperkname[perk_name] = perk_name;
   self.perksuseslot[perk_name] = var_1;
 
-  if(isDefined(level.perksetfuncs[perk_name]))
+  if(isDefined(level.perksetfuncs[perk_name])) {
     self thread[[level.perksetfuncs[perk_name]]]();
+  }
 
   var_3 = maps\mp\_utility::strip_suffix(perk_name, "_lefthand");
 
@@ -75,10 +78,12 @@ _setperk_stub(perk_name, var_1, var_2) {
     return;
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self setperk(perk_name, !isDefined(level.scriptperks[var_3]), var_1, var_2);
-  else
+  }
+  else {
     self setperk(perk_name, !isDefined(level.scriptperks[var_3]), var_1);
+  }
 }
 
 _unsetperk_stub(perk_name) {
@@ -91,8 +96,9 @@ _unsetperk_stub(perk_name) {
   self.perksuseslot[perk_name] = undefined;
   self.perksperkpower[perk_name] = undefined;
 
-  if(isDefined(level.perkunsetfuncs[perk_name]))
+  if(isDefined(level.perkunsetfuncs[perk_name])) {
     self thread[[level.perkunsetfuncs[perk_name]]]();
+  }
 
   var_1 = maps\mp\_utility::strip_suffix(perk_name, "_lefthand");
   self unsetperk(perk_name, !isDefined(level.scriptperks[var_1]));
@@ -102,8 +108,9 @@ _clearperks_stub() {
   level notify("scavenger_update");
 
   foreach(var_2, var_1 in self.perks) {
-    if(isDefined(level.perkunsetfuncs[var_2]))
+    if(isDefined(level.perkunsetfuncs[var_2])) {
       self[[level.perkunsetfuncs[var_2]]]();
+    }
   }
 
   self.perks = [];
@@ -125,8 +132,9 @@ iskillstreakweapon_stub(var_0) {
 }
 
 getbaseweaponname_stub(var_0) {
-  if(!isDefined(var_0) || var_0 == "none" || var_0 == "")
+  if(!isDefined(var_0) || var_0 == "none" || var_0 == "") {
     return var_0;
+  }
 
   weapon_name_token = maps\mp\_utility::getweaponnametokens(var_0);
   var_2 = "";
@@ -139,12 +147,15 @@ getbaseweaponname_stub(var_0) {
     }
   }
 
-  if(weapon_name_token[0] == "alt")
+  if(weapon_name_token[0] == "alt") {
     var_2 = weapon_name_token[1] + "_" + weapon_name_token[2];
-  else if(weapon_name_token.size > 1 && (weapon_name_token[1] == "grenade" || weapon_name_token[1] == "marker"))
+  }
+  else if(weapon_name_token.size > 1 && (weapon_name_token[1] == "grenade" || weapon_name_token[1] == "marker")) {
     var_2 = weapon_name_token[0] + "_" + weapon_name_token[1];
-  else
+  }
+  else {
     var_2 = weapon_name_token[0];
+  }
 
   return var_2;
 }
@@ -155,12 +166,14 @@ isattachmentsniperscopedefaulttokenized_stub(var_0, var_1) {
   if(var_0.size && isDefined(var_1)) {
     var_3 = 0;
 
-    if(var_0[0] == "alt")
+    if(var_0[0] == "alt") {
       var_3 = 1;
+    }
 
     if(var_0.size >= 3 + var_3 && (var_0[var_3] == "iw5" || var_0[var_3] == "iw6" || var_0[var_3] == "h1" || var_0[var_3] == "h2")) {
-      if(weaponclass(var_0[var_3] + "_" + var_0[var_3 + 1] + "_" + var_0[var_3 + 2]) == "sniper")
+      if(weaponclass(var_0[var_3] + "_" + var_0[var_3 + 1] + "_" + var_0[var_3 + 2]) == "sniper") {
         var_2 = var_0[var_3 + 1] + "scope" == var_1;
+      }
     }
   }
 
@@ -199,21 +212,25 @@ get_players_watching_stub() {
       if(isDefined(var_5.team) && var_5.team == "spectator" || var_5.sessionstate == "spectator") {
         var_7 = var_5 getspectatingplayer();
 
-        if(isDefined(var_7) && var_7 == self)
+        if(isDefined(var_7) && var_7 == self) {
           var_6 = 1;
+        }
       }
 
-      if(var_5.forcespectatorclient == var_2)
+      if(var_5.forcespectatorclient == var_2) {
         var_6 = 1;
+      }
     }
 
     if(!var_0) {
-      if(var_5.killcamentity == var_2)
+      if(var_5.killcamentity == var_2) {
         var_6 = 1;
+      }
     }
 
-    if(var_6)
+    if(var_6) {
       var_3[var_3.size] = var_5;
+    }
   }
 
   return var_3;
@@ -241,10 +258,12 @@ reset_visionset_on_team_change_stub(var_0, var_1, var_2) {
 
   while(gettime() - var_3 < var_1 * 1000) {
     if(self.team != var_4 || !common_scripts\utility::array_contains(var_0 maps\mp\_utility::get_players_watching(), self)) {
-      if(isDefined(var_2) && var_2)
+      if(isDefined(var_2) && var_2) {
         self visionsetpostapplyforplayer("", 0.0);
-      else
+      }
+      else {
         self _visionsetnakedforplayer("", 0.0);
+      }
 
       self notify("changing_visionset");
       break;
@@ -258,15 +277,18 @@ reset_visionset_on_disconnect_stub(var_0, var_1) {
   self endon("changing_watching_visionset");
   var_0 waittill("disconnect");
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     self visionsetpostapplyforplayer("", 0.0);
-  else
+  }
+  else {
     self _visionsetnakedforplayer("", 0.0);
+  }
 }
 
 revertvisionsetforplayer_stub(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   if(isDefined(level.nukedetonated) && isDefined(level.nukevisionset)) {
     self setclienttriggervisionset(level.nukevisionset, var_0);
@@ -298,17 +320,20 @@ leaderdialogonplayer_internal_stub(var_0, var_1, var_2) {
   if(!isDefined(game["dialog"][var_0])) {
     return;
   }
-  if(isai(self) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["leader_dialog"]))
+  if(isai(self) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["leader_dialog"])) {
     self[[level.bot_funcs["leader_dialog"]]](var_0, var_2);
+  }
 
   if(issubstr(game["dialog"][var_0], "null")) {
     return;
   }
   if(isDefined(level.ishorde) && level.ishorde) {
-    if(issubstr(var_0, "coop_gdn"))
+    if(issubstr(var_0, "coop_gdn")) {
       var_4 = var_0;
-    else
+    }
+    else {
       var_4 = "AT_anr0_" + game["dialog"][var_0];
+    }
   } else
     var_4 = game["voice"][var_1] + game["dialog"][var_0];
 
@@ -332,11 +357,13 @@ leaderdialogonplayer_internal_stub(var_0, var_1, var_2) {
     var_6 = self.leaderdialogqueue[0];
     var_7 = self.leaderdialoglocqueue[0];
 
-    for(var_8 = 1; var_8 < self.leaderdialogqueue.size; var_8++)
+    for(var_8 = 1; var_8 < self.leaderdialogqueue.size; var_8++) {
       self.leaderdialogqueue[var_8 - 1] = self.leaderdialogqueue[var_8];
+    }
 
-    for(var_8 = 1; var_8 < self.leaderdialoglocqueue.size; var_8++)
+    for(var_8 = 1; var_8 < self.leaderdialoglocqueue.size; var_8++) {
       self.leaderdialoglocqueue[var_8 - 1] = self.leaderdialoglocqueue[var_8];
+    }
 
     self.leaderdialogqueue[var_8 - 1] = undefined;
     self.leaderdialoglocqueue[var_8 - 1] = undefined;

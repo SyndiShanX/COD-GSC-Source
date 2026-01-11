@@ -2139,4 +2139,3 @@ function_bb5a8b5e(b_charged) {
     e_player switchtoweaponimmediate(w_ww, 1);
   }
 }
-

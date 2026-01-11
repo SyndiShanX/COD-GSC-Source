@@ -20,13 +20,15 @@ init() {
 delete_enemy() {
   var_0 = getspawnerteamarray("axis");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 
   var_4 = getaiarray("axis");
 
-  foreach(var_6 in var_4)
+  foreach(var_6 in var_4) {
   var_6 delete();
+  }
 }
 
 delete_multiple_trigger() {
@@ -57,68 +59,78 @@ delete_battlechatter_trigger() {
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("trigger_damage", "code_classname"));
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(isDefined(var_0[var_1].script_bctrigger))
+    if(isDefined(var_0[var_1].script_bctrigger)) {
       var_0[var_1] delete();
+    }
 
-    if(isDefined(var_0[var_1].script_hint))
+    if(isDefined(var_0[var_1].script_hint)) {
       var_0[var_1] delete();
+    }
   }
 }
 
 delete_flood_spawner_trigger() {
   var_0 = getEntArray("flood_spawner", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 delete_camper_spawner_trigger() {
   var_0 = getEntArray("camper_spawner", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 delete_fog_trigger() {
   var_0 = getEntArray("trigger_fog", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 delete_script_vehicle() {
   var_0 = getEntArray("script_vehicle", "code_classname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 delete_truckjunk() {
   var_0 = getEntArray("truckjunk", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 delete_animated_model() {
   var_0 = getEntArray("animated_model", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 delete_interactive_tv() {
   var_0 = getEntArray("interactive_tv", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 delete_explodable_barrel() {
   var_0 = getEntArray("explodable_barrel", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 delete_color_volumes() {
@@ -130,17 +142,20 @@ delete_color_volumes() {
   var_2 = getEntArray("info_volume", "classname");
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
-    if(isDefined(var_0[var_3].script_color_allies) || isDefined(var_0[var_3].script_color_axis))
+    if(isDefined(var_0[var_3].script_color_allies) || isDefined(var_0[var_3].script_color_axis)) {
       var_0[var_3] disconnectnode();
+    }
   }
 
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
-    if(isDefined(var_1[var_3].script_color_allies) || isDefined(var_1[var_3].script_color_axis))
+    if(isDefined(var_1[var_3].script_color_allies) || isDefined(var_1[var_3].script_color_axis)) {
       var_1[var_3] delete();
+    }
   }
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    if(isDefined(var_2[var_3].script_color_allies) || isDefined(var_2[var_3].script_color_axis))
+    if(isDefined(var_2[var_3].script_color_allies) || isDefined(var_2[var_3].script_color_axis)) {
       var_2[var_3] delete();
+    }
   }
 }

@@ -224,11 +224,13 @@ contuing_to_move_check() {
     var_1[1] = var_0[1];
 
     for(var_3 = 0; var_3 < 2; var_3++) {
-      if(var_1[var_3] < 0)
+      if(var_1[var_3] < 0) {
         var_1[var_3] = var_1[var_3] * -1;
+      }
 
-      if(var_2[var_3] < 0)
+      if(var_2[var_3] < 0) {
         var_2[var_3] = var_2[var_3] * -1;
+      }
 
       var_4 = var_1[var_3] - var_2[var_3];
       var_5 = var_2[var_3] - var_1[var_3];
@@ -255,8 +257,9 @@ random_player_wall_push(var_0, var_1) {
   var_4 = 0;
   var_5 = 40;
 
-  if(var_3 <= 0)
+  if(var_3 <= 0) {
     var_3 = var_3 + 360;
+  }
 
   var_6 = 0;
 
@@ -267,14 +270,16 @@ random_player_wall_push(var_0, var_1) {
     level.player maps\_anim::anim_first_frame(var_2, "viewmodel_space_l_arm_sidepush");
     var_10 = level.player.angles[1];
 
-    if(var_10 <= 0)
+    if(var_10 <= 0) {
       var_10 = var_10 + 360;
+    }
 
     if(var_3 + var_5 > 360) {
       var_4 = var_3 + var_5 - 360;
 
-      if(var_10 > var_3 || var_10 < var_4)
+      if(var_10 > var_3 || var_10 < var_4) {
         var_6 = 1;
+      }
     } else if(var_10 > var_3 - var_5 && var_10 < var_3 + var_5)
       var_6 = 1;
 
@@ -282,8 +287,9 @@ random_player_wall_push(var_0, var_1) {
 
     var_11 = 1;
 
-    if(common_scripts\utility::flag("spacesprint"))
+    if(common_scripts\utility::flag("spacesprint")) {
       var_11 = 1.1;
+    }
 
     if(var_6 == 1 && var_9[0] > 0.4 && level.timecheck > 1 && level.bmovingstraight == 1) {
       var_1 show();
@@ -291,8 +297,9 @@ random_player_wall_push(var_0, var_1) {
       var_1 setanimtime( % viewmodel_space_l_arm_sidepush, 0.25);
       common_scripts\utility::flag_set("wall_push_tweak_player");
 
-      if(level.script == "odin" || level.script == "prologue")
+      if(level.script == "odin" || level.script == "prologue") {
         level.player playSound("space_plr_wall_push");
+      }
 
       wait 1;
       thread anim_boost();
@@ -313,8 +320,9 @@ random_player_wall_pushdownup(var_0, var_1) {
   var_4 = 0;
   var_5 = 40;
 
-  if(var_3 <= 0)
+  if(var_3 <= 0) {
     var_3 = var_3 + 360;
+  }
 
   var_6 = 0;
 
@@ -325,27 +333,31 @@ random_player_wall_pushdownup(var_0, var_1) {
     level.player maps\_anim::anim_first_frame(var_2, "viewmodel_space_l_arm_downpush");
     var_10 = level.player.angles[1];
 
-    if(var_10 <= 0)
+    if(var_10 <= 0) {
       var_10 = var_10 + 360;
+    }
 
     if(var_3 + var_5 > 360) {
       var_4 = var_3 + var_5 - 360;
 
       if(var_10 > var_3 - var_5 || var_10 < var_4) {
-        if(var_8[0] > -10 && var_8[0] < 30)
+        if(var_8[0] > -10 && var_8[0] < 30) {
           var_6 = 1;
+        }
       }
     } else if(var_10 > var_3 - var_5 && var_10 < var_3 + var_5) {
-      if(var_8[0] > -20 && var_8[0] < 30)
+      if(var_8[0] > -20 && var_8[0] < 30) {
         var_6 = 1;
+      }
     }
 
     if(var_7 < 6) {}
 
     var_11 = 1;
 
-    if(common_scripts\utility::flag("spacesprint"))
+    if(common_scripts\utility::flag("spacesprint")) {
       var_11 = 1.1;
+    }
 
     if(var_6 == 1 && var_9[0] > 0.4 && level.timecheck > 1 && level.bmovingstraight == 1) {
       var_1 show();
@@ -353,8 +365,9 @@ random_player_wall_pushdownup(var_0, var_1) {
       var_1 setanimtime( % viewmodel_space_l_arm_downpush, 0.25);
       common_scripts\utility::flag_set("wall_push_tweak_player");
 
-      if(level.script == "odin" || level.script == "prologue")
+      if(level.script == "odin" || level.script == "prologue") {
         level.player playSound("space_plr_wall_push");
+      }
 
       wait 1;
       thread anim_up_down_boost();
@@ -387,8 +400,9 @@ anim_boost() {
 moving_water() {
   var_0 = getEntArray("moving_water_flags", "script_noteworthy");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   thread moving_water_flag(var_2);
+  }
 }
 
 moving_water_flag(var_0) {
@@ -417,49 +431,64 @@ direction_change_smoothing() {
   var_0 = level.player getnormalizedmovement();
   var_1 = var_0;
 
-  if(!isDefined(level.wall_friction_enabled))
+  if(!isDefined(level.wall_friction_enabled)) {
     level.wall_friction_enabled = 1;
+  }
 
-  if(!isDefined(level.wall_friction_trace_dist))
+  if(!isDefined(level.wall_friction_trace_dist)) {
     level.wall_friction_trace_dist = 5;
+  }
 
-  if(!isDefined(level.wall_friction_offset_dist))
+  if(!isDefined(level.wall_friction_offset_dist)) {
     level.wall_friction_offset_dist = 2;
+  }
 
   for(;;) {
     var_0 = level.player getnormalizedmovement();
 
-    if(var_0[0] > 0.15)
+    if(var_0[0] > 0.15) {
       var_2 = "positive";
-    else
+    }
+    else {
       var_2 = "neutral";
+    }
 
-    if(var_0[1] > 0.15)
+    if(var_0[1] > 0.15) {
       var_3 = "positive";
-    else
+    }
+    else {
       var_3 = "neutral";
+    }
 
-    if(var_0[0] < -0.15)
+    if(var_0[0] < -0.15) {
       var_2 = "negative";
+    }
 
-    if(var_0[1] < -0.15)
+    if(var_0[1] < -0.15) {
       var_3 = "negative";
+    }
 
-    if(var_1[0] > 0.15)
+    if(var_1[0] > 0.15) {
       var_4 = "positive";
-    else
+    }
+    else {
       var_4 = "neutral";
+    }
 
-    if(var_1[1] > 0.15)
+    if(var_1[1] > 0.15) {
       var_5 = "positive";
-    else
+    }
+    else {
       var_5 = "neutral";
+    }
 
-    if(var_1[0] < -0.15)
+    if(var_1[0] < -0.15) {
       var_4 = "negative";
+    }
 
-    if(var_1[1] < -0.15)
+    if(var_1[1] < -0.15) {
       var_5 = "negative";
+    }
 
     var_6 = 0;
 
@@ -476,14 +505,16 @@ direction_change_smoothing() {
       var_13 = var_11 + (var_7[0] * var_10, var_7[1] * var_10, var_7[2] * var_10);
       var_14 = level.player aiphysicstrace(var_11, var_13);
 
-      if(var_13 != var_14)
+      if(var_13 != var_14) {
         var_6 = 1;
+      }
       else {
         var_13 = var_12 + (var_7[0] * var_10, var_7[1] * var_10, var_7[2] * var_10);
         var_14 = level.player aiphysicstrace(var_12, var_13);
 
-        if(var_13 != var_14)
+        if(var_13 != var_14) {
           var_6 = 1;
+        }
       }
     }
 
@@ -491,19 +522,22 @@ direction_change_smoothing() {
       setsaveddvar("player_swimFriction", 120);
       wait 0.15;
     } else if(var_3 == "neutral" && var_2 == "neutral" || var_5 == "positive" && var_4 == "positive" && var_3 == "positive" && var_2 == "positive" || var_5 == "negative" && var_4 == "negative" && var_3 == "negative" && var_2 == "negative" || var_5 == "negative" && var_4 == "positive" && var_3 == "negative" && var_2 == "positive" || var_5 == "positive" && var_4 == "negative" && var_3 == "positive" && var_2 == "negative") {
-      if(getdvarint("player_swimFriction", 15) != level.space_friction)
+      if(getdvarint("player_swimFriction", 15) != level.space_friction) {
         setsaveddvar("player_swimFriction", level.space_friction);
+      }
 
-      if(getdvarint("player_swimAcceleration", 66) != 66)
+      if(getdvarint("player_swimAcceleration", 66) != 66) {
         setsaveddvar("player_swimAcceleration", 66);
+      }
     } else {
       setsaveddvar("player_swimFriction", 120);
       setsaveddvar("player_swimAcceleration", 200);
       wait 0.1;
     }
 
-    if(var_2 != "neutral" && var_3 != "neutral ")
+    if(var_2 != "neutral" && var_3 != "neutral ") {
       var_1 = var_0;
+    }
 
     wait 0.1;
   }
@@ -565,19 +599,22 @@ impulse_push() {
     for(var_9 = 0; var_9 < 3; var_9++) {
       var_5[var_9] = var_5[var_9] * 0.25 * (var_0 * var_6);
 
-      if(var_5[var_9] > var_7)
+      if(var_5[var_9] > var_7) {
         var_5[var_9] = var_7;
+      }
 
-      if(var_5[var_9] < 0 - var_7)
+      if(var_5[var_9] < 0 - var_7) {
         var_5[var_9] = 0 - var_7;
+      }
     }
 
     setsaveddvar("player_swimWaterCurrent", (var_5[0], var_5[1], var_5[2]));
     wait(var_8);
 
     for(var_9 = 0; var_9 < 3; var_9++) {
-      for(var_9 = 0; var_9 < 3; var_9++)
+      for(var_9 = 0; var_9 < 3; var_9++) {
         var_5[var_9] = var_5[var_9] * 0.5;
+      }
 
       setsaveddvar("player_swimWaterCurrent", (var_5[0], var_5[1], var_5[2]));
       wait(var_8 * 0.25);
@@ -604,15 +641,17 @@ player_recoil() {
       var_4 = 2500;
       var_5 = 1;
 
-      for(var_6 = 0; var_6 < 3; var_6++)
+      for(var_6 = 0; var_6 < 3; var_6++) {
         var_3[var_6] = var_3[var_6] * var_4 * -1;
+      }
 
       setsaveddvar("player_swimWaterCurrent", (var_3[0], var_3[1], var_3[2]));
       wait(var_5);
 
       for(var_6 = 0; var_6 < 3; var_6++) {
-        for(var_6 = 0; var_6 < 3; var_6++)
+        for(var_6 = 0; var_6 < 3; var_6++) {
           var_3[var_6] = var_3[var_6] * 0.5;
+        }
 
         setsaveddvar("player_swimWaterCurrent", (var_3[0], var_3[1], var_3[2]));
         wait(var_5 * 0.25);
@@ -645,10 +684,12 @@ player_space_breathing() {
   if(level.sfx_player_breathing_started == 0) {
     level.sfx_player_breathing_started = 1;
 
-    if(!issplitscreen())
+    if(!issplitscreen()) {
       thread player_space_breathe_sound();
-    else if(self == level.player)
+    }
+    else if(self == level.player) {
       thread player_space_breathe_sound();
+    }
   }
 }
 
@@ -662,34 +703,44 @@ player_space_breathe_sound() {
   level.space_intense_breathing = 0;
 
   for(;;) {
-    if(level.space_intense_breathing == 1)
+    if(level.space_intense_breathing == 1) {
       wait 0.75;
-    else if(level.space_intense_breathing == 2)
+    }
+    else if(level.space_intense_breathing == 2) {
       wait 0.01;
-    else if(level.space_intense_breathing == 3)
+    }
+    else if(level.space_intense_breathing == 3) {
       wait 0.25;
-    else
+    }
+    else {
       wait 2.75;
+    }
 
     if(level.space_breathing_enabled == 1) {
       if(level.pressurized == 0) {
-        if(level.space_intense_breathing == 1 || level.space_intense_breathing == 2)
+        if(level.space_intense_breathing == 1 || level.space_intense_breathing == 2) {
           self playlocalsound("space_breathe_player_fast_inhale", "scuba_breathe_sound_done");
-        else if(level.space_intense_breathing == 3)
+        }
+        else if(level.space_intense_breathing == 3) {
           self playlocalsound("space_breathe_player_inhale_slomo", "scuba_breathe_sound_done");
-        else
+        }
+        else {
           self playlocalsound("space_breathe_player_inhale", "scuba_breathe_sound_done");
+        }
 
         self waittill("scuba_breathe_sound_done");
       }
 
       if(level.pressurized == 0) {
-        if(level.space_intense_breathing == 1 || level.space_intense_breathing == 2)
+        if(level.space_intense_breathing == 1 || level.space_intense_breathing == 2) {
           self playlocalsound("space_breathe_player_fast_exhale", "scuba_breathe_sound_done");
-        else if(level.space_intense_breathing == 3)
+        }
+        else if(level.space_intense_breathing == 3) {
           self playlocalsound("space_breathe_player_exhale_slomo", "scuba_breathe_sound_done");
-        else
+        }
+        else {
           self playlocalsound("space_breathe_player_exhale", "scuba_breathe_sound_done");
+        }
 
         self waittill("scuba_breathe_sound_done");
       }
@@ -758,20 +809,24 @@ thruster_audio_logic() {
   self.prev_intensity["z_up"] = 0;
   self.prev_intensity["z_down"] = 0;
 
-  if(isDefined(level.prologue) && level.prologue == 1)
+  if(isDefined(level.prologue) && level.prologue == 1) {
     common_scripts\utility::flag_wait("prologue_ready_for_thrusters");
+  }
 
   for(;;) {
     self waittill("thruster_update", var_0, var_1);
     level.bob_value = var_0;
 
-    if("z_up" == var_1 || "z_down" == var_1)
+    if("z_up" == var_1 || "z_down" == var_1) {
       level.bob_axis = "z";
-    else
+    }
+    else {
       level.bob_axis = var_1;
+    }
 
-    if(int(var_0) != self.prev_intensity[var_1])
+    if(int(var_0) != self.prev_intensity[var_1]) {
       thread play_thruster_loop_audio(abs(var_0));
+    }
 
     self.prev_intensity[var_1] = int(var_0);
   }
@@ -835,8 +890,9 @@ player_thruster_logic() {
     while(common_scripts\utility::flag("enable_player_thruster_audio")) {
       var_1 = parse_input_data_for_thruster();
 
-      if(var_1[0] != var_0[0] || var_1[1] != var_0[1] || var_1[2] != var_0[2] || var_1[3] != var_0[3])
+      if(var_1[0] != var_0[0] || var_1[1] != var_0[1] || var_1[2] != var_0[2] || var_1[3] != var_0[3]) {
         set_player_thruster_data(var_1, var_0);
+      }
 
       var_0 = var_1;
       wait 0.05;
@@ -851,21 +907,26 @@ parse_input_data_for_thruster() {
   for(var_2 = 0; var_2 < 2; var_2++) {
     var_0[var_2] = 0;
 
-    if(abs(var_1[var_2]) > 0.1)
+    if(abs(var_1[var_2]) > 0.1) {
       var_0[var_2] = 2;
+    }
 
-    if(var_0[var_2] > 0 && self issprinting())
+    if(var_0[var_2] > 0 && self issprinting()) {
       var_0[var_2] = 4;
+    }
 
-    if(var_1[var_2] < 0)
+    if(var_1[var_2] < 0) {
       var_0[var_2] = var_0[var_2] * -1;
+    }
   }
 
-  if(self jumpbuttonpressed() || self fragbuttonpressed())
+  if(self jumpbuttonpressed() || self fragbuttonpressed()) {
     var_0[2] = var_0[2] + common_scripts\utility::ter_op(self fragbuttonpressed(), 3, 2);
+  }
 
-  if(is_change_stance_pressed() || self secondaryoffhandbuttonpressed())
+  if(is_change_stance_pressed() || self secondaryoffhandbuttonpressed()) {
     var_0[3] = var_0[3] + common_scripts\utility::ter_op(self secondaryoffhandbuttonpressed(), 3, 2);
+  }
 
   return var_0;
 }
@@ -873,8 +934,9 @@ parse_input_data_for_thruster() {
 is_change_stance_pressed() {
   var_0 = 0;
 
-  if(self buttonpressed("BUTTON_CROUCH") || self buttonpressed("BUTTON_PRONE") || self buttonpressed("BUTTON_B") || self buttonpressed("BUTTON_RSTICK"))
+  if(self buttonpressed("BUTTON_CROUCH") || self buttonpressed("BUTTON_PRONE") || self buttonpressed("BUTTON_B") || self buttonpressed("BUTTON_RSTICK")) {
     var_0 = 1;
+  }
 
   return var_0;
 }
@@ -893,27 +955,33 @@ get_thrusters_by_axis(var_0, var_1) {
 
   switch (var_0) {
     case 0:
-      if(var_1 >= 0)
+      if(var_1 >= 0) {
         var_2[var_2.size] = 5;
+      }
 
-      if(var_1 <= 0)
+      if(var_1 <= 0) {
         var_2[var_2.size] = 2;
+      }
 
       break;
     case 1:
-      if(var_1 >= 0)
+      if(var_1 >= 0) {
         var_2[var_2.size] = 3;
+      }
 
-      if(var_1 <= 0)
+      if(var_1 <= 0) {
         var_2[var_2.size] = 4;
+      }
 
       break;
     case 2:
-      if(var_1 >= 0)
+      if(var_1 >= 0) {
         var_2[var_2.size] = 1;
+      }
 
-      if(var_1 <= 0)
+      if(var_1 <= 0) {
         var_2[var_2.size] = 0;
+      }
 
       break;
     default:
@@ -926,30 +994,40 @@ debug_thruster_text(var_0, var_1) {
   var_2 = [];
 
   if(isDefined(var_0)) {
-    if(0 == var_0)
+    if(0 == var_0) {
       var_2[var_2.size] = "TOP";
-    else if(1 == var_0)
+    }
+    else if(1 == var_0) {
       var_2[var_2.size] = "BOTTOM";
-    else if(2 == var_0)
+    }
+    else if(2 == var_0) {
       var_2[var_2.size] = "FRONT";
-    else if(3 == var_0)
+    }
+    else if(3 == var_0) {
       var_2[var_2.size] = "LEFT";
-    else if(4 == var_0)
+    }
+    else if(4 == var_0) {
       var_2[var_2.size] = "RIGHT";
-    else if(5 == var_0)
+    }
+    else if(5 == var_0) {
       var_2[var_2.size] = "BACK";
+    }
   } else
     var_2[var_2.size] = "";
 
   if(isDefined(var_1)) {
-    if(0 == var_1)
+    if(0 == var_1) {
       var_2[var_2.size] = "OFF";
-    else if(1 == var_1)
+    }
+    else if(1 == var_1) {
       var_2[var_2.size] = "LOW";
-    else if(2 == var_1)
+    }
+    else if(2 == var_1) {
       var_2[var_2.size] = "MEDIUM";
-    else
+    }
+    else {
       var_2[var_2.size] = "HIGH";
+    }
   } else
     var_2[var_2.size] = "";
 

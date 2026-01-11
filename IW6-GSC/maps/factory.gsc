@@ -65,8 +65,9 @@ main() {
   setdvar("music_enable", 1);
   setsaveddvar("r_reactiveMotionPlayerRadius", 5.0);
 
-  if(level.ps3 == 1)
+  if(level.ps3 == 1) {
     setsaveddvar("sm_sunSampleSizeNear", 0.1);
+  }
 
   maps\_nightvision::main(level.players, 1);
   level.player setactionslot(1, "");
@@ -128,8 +129,9 @@ motion_blur_during_melee() {
 }
 
 factory_glare() {
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     precacheshader("lens_grime_messy");
+  }
 }
 
 intro_start() {
@@ -269,29 +271,35 @@ fly_around_start() {
 
 fly_around() {
   for(;;) {
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonpressed("BUTTON_X")) {
       wait 0.05;
+    }
 
     maps\factory_util::load_transient("factory_intro_tr");
 
-    while(!istransientloaded("factory_intro_tr"))
+    while(!istransientloaded("factory_intro_tr")) {
       wait 0.05;
+    }
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonpressed("BUTTON_X")) {
       wait 0.05;
+    }
 
     maps\factory_util::load_transient("factory_mid_tr");
 
-    while(!istransientloaded("factory_mid_tr"))
+    while(!istransientloaded("factory_mid_tr")) {
       wait 0.05;
+    }
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonpressed("BUTTON_X")) {
       wait 0.05;
+    }
 
     maps\factory_util::load_transient("factory_outro_tr");
 
-    while(!istransientloaded("factory_outro_tr"))
+    while(!istransientloaded("factory_outro_tr")) {
       wait 0.05;
+    }
   }
 }
 
@@ -304,8 +312,9 @@ mission_objective_logic() {
   waittillframeend;
   var_0 = 0;
 
-  if(level.start_point != "default")
+  if(level.start_point != "default") {
     var_0 = 1;
+  }
 
   switch (level.start_point) {
     case "default":

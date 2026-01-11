@@ -42,23 +42,26 @@ findtargets() {
 
   if(isDefined(level.littlebirds) && level.littlebirds.size) {
     foreach(var_04 in level.littlebirds) {
-      if(isDefined(var_4.team) && var_4.team != self.team)
+      if(isDefined(var_4.team) && var_4.team != self.team) {
         var_0[var_0.size] = var_04;
+      }
     }
   }
 
   if(isDefined(level.helis) && level.helis.size) {
     foreach(var_07 in level.helis) {
-      if(var_7.team != self.team)
+      if(var_7.team != self.team) {
         var_1[var_1.size] = var_07;
+      }
     }
   }
 
   var_09 = scripts\mp\utility\game::getotherteam(self.team);
 
   if(isDefined(level.activeuavs[var_09])) {
-    foreach(var_11 in level.uavmodels[var_09])
+    foreach(var_11 in level.uavmodels[var_09]) {
     var_2[var_2.size] = var_11;
+    }
   }
 
   var_13 = 0;
@@ -66,10 +69,12 @@ findtargets() {
   foreach(var_04 in var_00) {
     wait 3;
 
-    if(var_13 % 2)
+    if(var_13 % 2) {
       thread fireattarget(var_04, self.team, 1);
-    else
+    }
+    else {
       thread fireattarget(var_04, self.team, 0);
+    }
 
     var_13++;
   }
@@ -89,10 +94,12 @@ earlyabortwatcher() {
   self endon("stopFindingTargets");
   var_00 = self.team;
 
-  if(scripts\mp\utility\game::bot_is_fireteam_mode())
+  if(scripts\mp\utility\game::bot_is_fireteam_mode()) {
     self waittill("killstreak_disowned");
-  else
+  }
+  else {
     scripts\engine\utility::waittill_either("killstreak_disowned", "game_ended");
+  }
 
   self notify("owner_gone");
   level.teamairdenied[scripts\mp\utility\game::getotherteam(var_00)] = 0;
@@ -146,15 +153,19 @@ fireattarget(var_00, var_01, var_02) {
   var_13 missile_settargetent(var_00);
   var_13 missile_setflightmodedirect();
 
-  if(var_02)
+  if(var_02) {
     var_14 = spawnplane(self, "script_model", var_10, "compass_objpoint_airstrike_friendly", "compass_objpoint_airstrike_friendly");
-  else
+  }
+  else {
     var_14 = spawnplane(self, "script_model", var_10);
+  }
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     var_14 setModel("vehicle_av8b_harrier_jet_mp");
-  else
+  }
+  else {
     var_14 setModel("vehicle_av8b_harrier_jet_opfor_mp");
+  }
 
   var_15 = distance(var_10, var_11);
   var_14.angles = vectortoangles(var_11 - var_10);
@@ -187,10 +198,12 @@ doflyby(var_00) {
   var_10 = var_08 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
   var_11 = var_09 + (randomintrange(400, 500), randomintrange(400, 500), randomintrange(200, 300));
 
-  if(var_00)
+  if(var_00) {
     var_12 = spawnplane(self, "script_model", var_08, "hud_minimap_harrier_green", "hud_minimap_harrier_red");
-  else
+  }
+  else {
     var_12 = spawnplane(self, "script_model", var_08);
+  }
 
   var_13 = spawnplane(self, "script_model", var_10);
 

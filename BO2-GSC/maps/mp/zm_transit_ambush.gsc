@@ -31,11 +31,13 @@ initambusheffects() {
 }
 
 shouldstartambushround() {
-  if(level.ambushpercentageperstop == 100)
+  if(level.ambushpercentageperstop == 100) {
     return true;
+  }
 
-  if(getdvarint(#"_id_FA81816F") == 2)
+  if(getdvarint(#"_id_FA81816F") == 2) {
     return false;
+  }
 
   if(level.numbusstopssincelastambushround < 2) {
   }
@@ -51,8 +53,9 @@ shouldstartambushround() {
   if(randint < percentchance) {
   }
 
-  if(maps\mp\zm_transit_bus::busgasempty())
+  if(maps\mp\zm_transit_bus::busgasempty()) {
     return true;
+  }
 
   return false;
 }
@@ -93,16 +96,19 @@ ambushroundspawning() {
 }
 
 limitedambushspawn() {
-  if(level.numambushrounds < 3)
+  if(level.numambushrounds < 3) {
     dogcount = level.dog_targets.size * 6;
-  else
+  }
+  else {
     dogcount = level.dog_targets.size * 8;
+  }
 
   setupdogspawnlocs();
   level thread ambushroundspawnfailsafe(20);
 
-  while(get_current_zombie_count() > 0)
+  while(get_current_zombie_count() > 0) {
     wait 1.0;
+  }
 
   level notify("end_ambushWaitFunction");
 }
@@ -177,8 +183,9 @@ ambushdoghealthincrease() {
 ambushroundaftermath() {
   power_up_origin = level.the_bus gettagorigin("tag_body");
 
-  if(isDefined(power_up_origin))
+  if(isDefined(power_up_origin)) {
     level thread maps\mp\zombies\_zm_powerups::specific_powerup_drop("full_ammo", power_up_origin);
+  }
 }
 
 ambushroundeffects() {

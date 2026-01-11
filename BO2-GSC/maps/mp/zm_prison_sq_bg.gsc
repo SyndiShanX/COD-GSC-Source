@@ -85,8 +85,9 @@ wait_and_hide_sq_bg_macguffin() {
 }
 
 tomahawk_the_macguffin(grenade, n_grenade_charge_power) {
-  if(!isDefined(level.sq_bg_macguffins) || level.sq_bg_macguffins.size <= 0)
+  if(!isDefined(level.sq_bg_macguffins) || level.sq_bg_macguffins.size <= 0) {
     return false;
+  }
 
   foreach(macguffin in level.sq_bg_macguffins) {
     if(distancesquared(macguffin.origin, grenade.origin) < 10000) {
@@ -108,8 +109,9 @@ tomahawk_the_macguffin(grenade, n_grenade_charge_power) {
 give_player_macguffin_upon_receipt(m_tomahawk, m_macguffin) {
   self endon("disconnect");
 
-  while(isDefined(m_tomahawk))
+  while(isDefined(m_tomahawk)) {
     wait 0.05;
+  }
 
   m_macguffin notify("sq_bg_macguffin_received_by_player");
   arrayremovevalue(level.sq_bg_macguffins, m_macguffin);
@@ -204,22 +206,26 @@ sq_bg_spawn_rumble() {
   a_players = getplayers();
 
   foreach(player in a_players) {
-    if(player istouching(self))
+    if(player istouching(self)) {
       player setclientfieldtoplayer("rumble_sq_bg", 1);
+    }
   }
 }
 
 take_old_weapon_and_give_reward(current_weapon, reward_weapon, weapon_limit_override) {
-  if(!isDefined(weapon_limit_override))
+  if(!isDefined(weapon_limit_override)) {
     weapon_limit_override = 0;
+  }
 
-  if(weapon_limit_override == 1)
+  if(weapon_limit_override == 1) {
     self takeweapon(current_weapon);
+  }
   else {
     primaries = self getweaponslistprimaries();
 
-    if(isDefined(primaries) && primaries.size >= 2)
+    if(isDefined(primaries) && primaries.size >= 2) {
       self takeweapon(current_weapon);
+    }
   }
 
   self giveweapon(reward_weapon);

@@ -708,8 +708,9 @@ vo_sewer_exterior() {
   flag_wait_any("sewer_guards_cleared", "harper_kills_two");
   wait 0.5;
 
-  if(flag("harper_kills_two"))
+  if(flag("harper_kills_two")) {
     level.harper say_dialog("harp_thanks_for_nothing_0", 0.5);
+  }
 
   flag_wait("drones_gone");
   level.harper say_dialog("harp_we_re_clear_move_u_0", 0.5);

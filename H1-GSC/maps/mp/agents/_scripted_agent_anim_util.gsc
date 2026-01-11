@@ -9,10 +9,12 @@ playanimnatrateuntilnotetrack_safe(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("death");
 
   if(isDefined(var_0)) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_6 = getanimlength(self getanimentry(var_0, var_1));
-    else
+    }
+    else {
       var_6 = getanimlength(self getanimentry(var_0, 0));
+    }
 
     childthread notetrack_timeout(var_3, var_6 * (1.0 / var_2), var_4);
   }
@@ -28,8 +30,9 @@ playanimnuntilnotetrack_safe(var_0, var_1, var_2, var_3, var_4) {
 playanimnatrateuntilnotetrack(var_0, var_1, var_2, var_3, var_4, var_5) {
   set_anim_state(var_0, var_1, var_2);
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = "end";
+  }
 
   waituntilnotetrack(var_3, var_4, var_0, var_1, var_5);
 }
@@ -38,8 +41,9 @@ waituntilnotetrack_safe(var_0, var_1, var_2) {
   self endon("disconnect");
   self endon("death");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     childthread notetrack_timeout(var_0, var_2, var_1);
+  }
 
   waituntilnotetrack(var_0, var_1);
   self notify("Notetrack_Timeout");
@@ -50,14 +54,16 @@ waituntilnotetrack(var_0, var_1, var_2, var_3, var_4) {
   var_6 = undefined;
   var_7 = undefined;
 
-  if(isDefined(var_2) && isDefined(var_3))
+  if(isDefined(var_2) && isDefined(var_3)) {
     var_7 = getanimlength(self getanimentry(var_2, var_3));
+  }
 
   for(;;) {
     self waittill(var_0, var_8);
 
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_6 = (gettime() - var_5) * 0.001 / var_7;
+    }
 
     if(!isDefined(var_7) || var_6 > 0) {
       if(var_8 == var_1 || var_8 == "end" || var_8 == "anim_will_finish" || var_8 == "finish") {
@@ -65,8 +71,9 @@ waituntilnotetrack(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       [[var_4]](var_8, var_2, var_3, var_6);
+    }
   }
 }
 
@@ -76,10 +83,12 @@ notetrack_timeout(var_0, var_1, var_2) {
   var_1 = max(0.05, var_1);
   wait(var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self notify(var_0, var_2);
-  else
+  }
+  else {
     self notify(var_0, "end");
+  }
 }
 
 playanimnatratefortime(var_0, var_1, var_2, var_3) {
@@ -97,25 +106,31 @@ loop_anim_state_randomize(var_0, var_1, var_2) {
 }
 
 set_anim_state(var_0, var_1, var_2) {
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self setanimstate(var_0, var_1, var_2);
-  else if(isDefined(var_1))
+  }
+  else if(isDefined(var_1)) {
     self setanimstate(var_0, var_1);
-  else
+  }
+  else {
     self setanimstate(var_0);
+  }
 }
 
 getangleindexvariable(var_0, var_1) {
-  if(var_1 <= 1)
+  if(var_1 <= 1) {
     return 0;
+  }
 
   var_2 = 360.0 / (var_1 - 1);
   var_3 = var_2 * 0.222222;
 
-  if(var_0 < 0)
+  if(var_0 < 0) {
     return int(ceil((180 + var_0 - var_3) / var_2));
-  else
+  }
+  else {
     return int(floor((180 + var_0 + var_3) / var_2));
+  }
 }
 
 getanimscalefactors(var_0, var_1, var_2) {
@@ -130,15 +145,18 @@ getanimscalefactors(var_0, var_1, var_2) {
     var_9 = (var_1[0], var_1[1], 0);
     var_10 = vectornormalize(var_9);
 
-    if(vectordot(var_10, var_0) < 0)
+    if(vectordot(var_10, var_0) < 0) {
       var_7 = 0;
-    else if(var_5 > 0)
+    }
+    else if(var_5 > 0) {
       var_7 = var_3 / var_5;
+    }
   } else if(var_5 > 0)
     var_7 = var_3 / var_5;
 
-  if(abs(var_6) > 0.001 && var_6 * var_4 >= 0)
+  if(abs(var_6) > 0.001 && var_6 * var_4 >= 0) {
     var_8 = var_4 / var_6;
+  }
 
   var_11 = spawnStruct();
   var_11.xy = var_7;
@@ -149,8 +167,9 @@ getanimscalefactors(var_0, var_1, var_2) {
 onenteranimstate(var_0, var_1) {
   self notify("killanimscript");
 
-  if(isDefined(self.animcbs.onexit[var_0]))
+  if(isDefined(self.animcbs.onexit[var_0])) {
     self[[self.animcbs.onexit[var_0]]]();
+  }
 
   exitaistate(var_0);
 

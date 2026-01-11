@@ -58,17 +58,20 @@ main() {
   level thread enemy_respawn();
   level thread escape_battle_cleanup();
 
-  if(-1)
+  if(-1) {
     level thread dukes_of_hazzard_trigger();
+  }
 
   trigger_wait("vehicle_can_switch");
   nd_start = getvehiclenode("escape_battle_player_start", "script_noteworthy");
   level thread vehicle_switch(nd_start);
 
-  if(0)
+  if(0) {
     flag_set("vehicle_can_switch");
-  else
+  }
+  else {
     flag_clear("vehicle_can_switch");
+  }
 
   level thread market_fake_missile_breaks_window();
   level thread load_gump_escape();
@@ -132,13 +135,15 @@ escape_battle_vo() {
   level notify("slanted_building_started");
   trigger_wait("squeeze_vo");
 
-  if(level.player.vehicle_state == 1)
+  if(level.player.vehicle_state == 1) {
     level.harper say_dialog("harp_gonna_be_a_squeeze_0");
+  }
 
   trigger_wait("go_for_it_vo");
 
-  if(level.player.vehicle_state == 1)
+  if(level.player.vehicle_state == 1) {
     level.harper say_dialog("harp_gotta_go_for_it_0");
+  }
 }
 
 escape_battle_hint() {
@@ -179,8 +184,9 @@ escape_battle_hint() {
 }
 
 boost_while_in_soct() {
-  for(n_counter = 0; !level.player sprintbuttonpressed() && n_counter < 10.5; n_counter = n_counter + 0.05)
+  for(n_counter = 0; !level.player sprintbuttonpressed() && n_counter < 10.5; n_counter = n_counter + 0.05) {
     wait 0.05;
+  }
 
   level.player.b_hint_done = 1;
 }
@@ -194,11 +200,13 @@ escape_battle_checkpoints() {
   level.n_save = 2;
   trigger_wait("escape_battle_save_3");
 
-  while(!isDefined(flag("pakistan_3_gump_escape")))
+  while(!isDefined(flag("pakistan_3_gump_escape"))) {
     wait 0.05;
+  }
 
-  while(!flag("pakistan_3_gump_escape"))
+  while(!flag("pakistan_3_gump_escape")) {
     wait 0.05;
+  }
 
   autosave_by_name("escape_battle_save_3");
   level.n_save = 3;
@@ -284,8 +292,9 @@ slanted_building_drone_2() {
   vh_drone setspeed(33);
   vh_drone waittill("goal");
 
-  if(level.player.vehicle_state == 1)
+  if(level.player.vehicle_state == 1) {
     vh_drone dodamage(vh_drone.health, vh_drone.origin);
+  }
   else {
     vh_drone setvehgoalpos((3072, -22528, 1024));
     vh_drone waittill("goal");
@@ -294,8 +303,9 @@ slanted_building_drone_2() {
       vh_drone.delete_on_death = 1;
       vh_drone notify("death");
 
-      if(!isalive(vh_drone))
+      if(!isalive(vh_drone)) {
         vh_drone delete();
+      }
     }
   }
 }
@@ -378,12 +388,15 @@ heli_crash_ai_spawn_func() {
 }
 
 crash_ai_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
-  if(isDefined(e_attacker.vteam) && e_attacker.vteam == "axis")
+  if(isDefined(e_attacker.vteam) && e_attacker.vteam == "axis") {
     n_damage = 0;
-  else if(isDefined(e_attacker.vehicletype) && e_attacker.vehicletype == "boat_soct_axis")
+  }
+  else if(isDefined(e_attacker.vehicletype) && e_attacker.vehicletype == "boat_soct_axis") {
     n_damage = 0;
-  else if(str_weapon == "boat_gun_turret")
+  }
+  else if(str_weapon == "boat_gun_turret") {
     n_damage = 0;
+  }
 
   return n_damage;
 }
@@ -479,8 +492,9 @@ fx_exp_glass_market_exit_trigger() {
   e_trigger waittill("trigger");
   exploder_id = undefined;
 
-  if(isDefined(s_struct.script_int))
+  if(isDefined(s_struct.script_int)) {
     exploder_id = s_struct.script_int;
+  }
 
   fx_exp_model_triggered("glass_market_exit", s_struct.origin, "soct_window_smash", undefined, 1, "evt_soct_window_explode_2", undefined, exploder_id);
 }
@@ -503,8 +517,9 @@ fxanim_tree_trigger(str_trigger_name) {
 }
 
 street_sign_damage_trigger(str_damage_trigger, str_level_endon, a_model_names, str_level_notify) {
-  if(isDefined(str_level_endon))
+  if(isDefined(str_level_endon)) {
     level endon(str_level_endon);
+  }
 
   e_damage_trigger = getent(str_damage_trigger, "targetname");
 
@@ -551,8 +566,9 @@ suicide_tunnel_running_guys_trigger() {
   e_trigger waittill("trigger");
   a_spawners = getEntArray("end_suicide_tunnel_spawner", "targetname");
 
-  for(i = 0; i < a_spawners.size; i++)
+  for(i = 0; i < a_spawners.size; i++) {
     level thread spawner_run_to_node(a_spawners[i]);
+  }
 }
 
 kill_fxanim_catwalk1(str_level_notify, str_endon_notify) {
@@ -562,15 +578,17 @@ kill_fxanim_catwalk1(str_level_notify, str_endon_notify) {
   a_ents = getEntArray("mall_1_ai", "targetname");
 
   if(isDefined(a_ents)) {
-    for(i = 0; i < a_ents.size; i++)
+    for(i = 0; i < a_ents.size; i++) {
       a_ai[a_ai.size] = a_ents[i];
+    }
   }
 
   a_ents = getEntArray("end_suicide_tunnel_spawner_ai", "targetname");
 
   if(isDefined(a_ents)) {
-    for(i = 0; i < a_ents.size; i++)
+    for(i = 0; i < a_ents.size; i++) {
       a_ai[a_ai.size] = a_ents[i];
+    }
   }
 
   for(i = 0; i < a_ai.size; i++) {
@@ -596,10 +614,12 @@ dukes_of_hazzard_trigger() {
   level.vh_player_soct disable_turret(1);
   wait 0.01;
 
-  if(!level.console && !level.player gamepadusedlast())
+  if(!level.console && !level.player gamepadusedlast()) {
     screen_message_create(&"PAKISTAN_SHARED_CHOOSE_VEHICLE_TO_FINISH_LEVEL_KEYBOARD");
-  else
+  }
+  else {
     screen_message_create(&"PAKISTAN_SHARED_CHOOSE_VEHICLE_TO_FINISH_LEVEL");
+  }
 
   e_can_switch_trigger = getent("vehicle_can_switch", "targetname");
   e_can_switch_trigger activate_trigger();
@@ -646,10 +666,12 @@ dukes_of_hazzard_trigger() {
 
   wait 0.5;
 
-  if(isgodmode(level.player))
+  if(isgodmode(level.player)) {
     flag_set("vehicle_can_switch");
-  else
+  }
+  else {
     flag_clear("vehicle_can_switch");
+  }
 }
 
 drone_slowdown_for_time(delay, speed) {
@@ -697,8 +719,9 @@ check_vehicle_button_rt() {
 }
 
 drone_choice_helper_message(delay) {
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   wait 7;
   screen_message_delete();

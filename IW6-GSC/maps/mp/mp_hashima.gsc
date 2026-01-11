@@ -238,8 +238,9 @@ move_fake_missile(missile_target, missile_launch_height, missile_drop_height, ca
 
   kill_cam_ent thread waitAndDelete(5);
 
-  if(isDefined(target_player))
+  if(isDefined(target_player)) {
     missile_target = target_player.origin;
+  }
 
   stopFXOnTag(level._effect["hashima_missile_lens_flare"], self, "tag_origin");
   waitframe();
@@ -251,8 +252,9 @@ move_fake_missile(missile_target, missile_launch_height, missile_drop_height, ca
 
   flight_time = 1.0;
 
-  if(isDefined(target_player))
+  if(isDefined(target_player)) {
     missile_target = target_player.origin;
+  }
 
   start_pos = self.origin;
   missile_trace = bulletTrace(start_pos, missile_target, false);
@@ -260,10 +262,12 @@ move_fake_missile(missile_target, missile_launch_height, missile_drop_height, ca
 
   self Delete();
 
-  if(!isDefined(calling_player))
+  if(!isDefined(calling_player)) {
     projectile = MagicBullet("hashima_missiles_mp", start_pos, end_pos);
-  else
+  }
+  else {
     projectile = MagicBullet("hashima_missiles_mp", start_pos, end_pos, calling_player);
+  }
 
   projectile PlaySoundOnMovingEnt("hashima_missile_flyover");
   projectile.killCamEnt = kill_cam_ent;
@@ -282,8 +286,9 @@ waitAndDelete(time) {
 
 HASHIMA_MISSILES_WEIGHT = 85;
 hashimaCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;

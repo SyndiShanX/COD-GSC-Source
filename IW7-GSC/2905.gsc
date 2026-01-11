@@ -14,8 +14,9 @@ func_C97C(var_00) {
   self endon("dog_attacks_ai");
   waittillframeend;
 
-  if(isDefined(self.func_EED1))
+  if(isDefined(self.func_EED1)) {
     [[level._meth_83D2["_patrol_endon_spotted_flag"]]]();
+  }
 
   thread func_13749();
   thread func_13759();
@@ -46,8 +47,9 @@ func_C97C(var_00) {
   var_2["node"] = ::scripts\sp\utility::func_F3D9;
   var_2["struct"] = ::scripts\sp\utility::func_F3D3;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     self.target = var_00;
+  }
 
   if(isDefined(self.target)) {
     var_03 = 1;
@@ -93,8 +95,9 @@ func_C97C(var_00) {
   var_10 = var_07;
 
   for(;;) {
-    while(isDefined(var_10.func_C97F))
+    while(isDefined(var_10.func_C97F)) {
       wait 0.05;
+    }
 
     var_7.func_C97F = undefined;
     var_07 = var_10;
@@ -103,34 +106,41 @@ func_C97C(var_00) {
     self.func_A8F4 = var_07;
     [[var_2[var_08]]](var_07);
 
-    if(isDefined(var_7.radius) && var_7.radius > 0)
+    if(isDefined(var_7.radius) && var_7.radius > 0) {
       self.goalradius = var_7.radius;
-    else
+    }
+    else {
       self.goalradius = 32;
+    }
 
     self waittill("goal");
     var_07 notify("trigger", self);
 
-    if(isDefined(var_7.func_ED9E))
+    if(isDefined(var_7.func_ED9E)) {
       scripts\engine\utility::flag_set(var_7.func_ED9E);
+    }
 
-    if(isDefined(var_7.func_ED80))
+    if(isDefined(var_7.func_ED80)) {
       scripts\sp\utility::func_65E1(var_7.func_ED80);
+    }
 
-    if(isDefined(var_7.func_ED9B))
+    if(isDefined(var_7.func_ED9B)) {
       scripts\engine\utility::flag_clear(var_7.func_ED9B);
+    }
 
     var_11 = var_07[[var_1[var_08][var_03]]]();
 
     if(!var_11.size) {
-      if(isDefined(var_7.func_ED88))
+      if(isDefined(var_7.func_ED88)) {
         self orientmode("face angle", var_7.angles[1]);
+      }
 
       self notify("reached_path_end");
       self notify("_patrol_reached_path_end");
 
-      if(isalive(self.func_C991))
+      if(isalive(self.func_C991)) {
         self.func_C991 notify("master_reached_patrol_end");
+      }
     }
 
     var_12 = scripts\anim\reactions::func_DD51;
@@ -165,36 +175,43 @@ func_C97C(var_00) {
       }
     }
 
-    if(isDefined(var_7.func_EE2C))
+    if(isDefined(var_7.func_EE2C)) {
       self.moveplaybackrate = var_7.func_EE2C;
+    }
 
     if(var_07 func_8BA5() && var_07 func_ED4E() || isDefined(var_13) || isDefined(var_7.func_EDA0) && !scripts\engine\utility::flag(var_7.func_EDA0)) {
-      if(!isDefined(self.func_C98F) && var_14)
+      if(!isDefined(self.func_C98F) && var_14) {
         func_C981(var_13, var_12, var_07);
+      }
 
-      if(isDefined(var_7.func_EDA0) && !scripts\engine\utility::flag(var_7.func_EDA0))
+      if(isDefined(var_7.func_EDA0) && !scripts\engine\utility::flag(var_7.func_EDA0)) {
         scripts\engine\utility::flag_wait(var_7.func_EDA0);
+      }
 
       var_07 scripts\sp\utility::script_delay();
 
       if(isDefined(var_13)) {
-        if(isDefined(var_7.func_ED88))
+        if(isDefined(var_7.func_ED88)) {
           self orientmode("face angle", var_7.angles[1]);
+        }
 
         self.func_C99C = 1;
         var_18 = var_9[var_13];
 
         if(!isDefined(var_18)) {
-          if(isDefined(level.func_C99E))
+          if(isDefined(level.func_C99E)) {
             var_18 = level.func_C99E[var_13];
+          }
         }
 
         if(isDefined(var_18)) {
           if(var_13 == "pause") {
-            if(isDefined(self.func_C99D) && isDefined(self.func_C99D[var_13]))
+            if(isDefined(self.func_C99D) && isDefined(self.func_C99D[var_13])) {
               var_18 = self.func_C99D[var_13][randomint(self.func_C99D[var_13].size)];
-            else
+            }
+            else {
               var_18 = var_18 + randomintrange(1, 6);
+            }
           }
 
           if(var_15) {
@@ -207,8 +224,9 @@ func_C97C(var_00) {
         self.func_C99C = undefined;
       }
 
-      if(var_11.size && (!isDefined(var_13) || var_13 != "turn180") && var_14 && (!isDefined(self.func_1025F) || !self.func_1025F))
+      if(var_11.size && (!isDefined(var_13) || var_13 != "turn180") && var_14 && (!isDefined(self.func_1025F) || !self.func_1025F)) {
         func_C980(var_13, var_12);
+      }
     }
 
     if(!var_11.size) {
@@ -238,21 +256,27 @@ func_C981(var_00, var_01, var_02) {
     var_04 = 1;
   }
 
-  if(isDefined(self.func_C9A7) && isDefined(self.func_C9A7[var_00]))
+  if(isDefined(self.func_C9A7) && isDefined(self.func_C9A7[var_00])) {
     var_03 scripts\sp\anim::func_1EC8(self, "gravity", self.func_C9A7[var_00], undefined, var_01, var_04);
-  else if(isDefined(self.script_animation) && isDefined(level.func_EC85["generic"]["patrol_stop_" + self.script_animation]))
+  }
+  else if(isDefined(self.script_animation) && isDefined(level.func_EC85["generic"]["patrol_stop_" + self.script_animation])) {
     scripts\sp\anim::func_1EC8(self, "gravity", "patrol_stop_" + self.script_animation, undefined, var_01);
-  else
+  }
+  else {
     var_03 scripts\sp\anim::func_1EC8(self, "gravity", "patrol_stop", undefined, var_01, var_04);
+  }
 }
 
 func_C980(var_00, var_01) {
-  if(isDefined(self.func_C9A3) && isDefined(self.func_C9A3[var_00]))
+  if(isDefined(self.func_C9A3) && isDefined(self.func_C9A3[var_00])) {
     scripts\sp\anim::func_1EC8(self, "gravity", self.func_C9A3[var_00], undefined, var_01);
-  else if(isDefined(self.script_animation) && isDefined(level.func_EC85["generic"]["patrol_start_" + self.script_animation]))
+  }
+  else if(isDefined(self.script_animation) && isDefined(level.func_EC85["generic"]["patrol_start_" + self.script_animation])) {
     scripts\sp\anim::func_1EC8(self, "gravity", "patrol_start_" + self.script_animation, undefined, var_01);
-  else
+  }
+  else {
     scripts\sp\anim::func_1EC8(self, "gravity", "patrol_start", undefined, var_01);
+  }
 }
 
 #using_animtree("generic_human");
@@ -313,29 +337,35 @@ func_12942() {
 
 func_F4C7() {
   if(isDefined(self.script_animation)) {
-    if(isDefined(level.func_EC85["generic"]["patrol_walk_" + self.script_animation]))
+    if(isDefined(level.func_EC85["generic"]["patrol_walk_" + self.script_animation])) {
       self.func_C9AB = "patrol_walk_" + self.script_animation;
+    }
 
-    if(isDefined(level.func_EC85["generic"]["patrol_walk_weights_" + self.script_animation]))
+    if(isDefined(level.func_EC85["generic"]["patrol_walk_weights_" + self.script_animation])) {
       self.func_C9AC = "patrol_walk_weights_" + self.script_animation;
+    }
 
-    if(isDefined(level.func_EC85["generic"]["patrol_idle_" + self.script_animation]))
+    if(isDefined(level.func_EC85["generic"]["patrol_idle_" + self.script_animation])) {
       self.func_C987 = "patrol_idle_" + self.script_animation;
+    }
   }
 
   var_00 = "patrol_walk";
 
-  if(isDefined(self.func_C9AB))
+  if(isDefined(self.func_C9AB)) {
     var_00 = self.func_C9AB;
+  }
 
   var_01 = undefined;
 
-  if(isDefined(self.func_C9AC))
+  if(isDefined(self.func_C9AC)) {
     var_01 = self.func_C9AC;
+  }
 
   if(isDefined(self.script_animation)) {
-    if(isDefined(level.func_EC85["generic"]["patrol_idle_" + self.script_animation]))
+    if(isDefined(level.func_EC85["generic"]["patrol_idle_" + self.script_animation])) {
       scripts\sp\utility::func_F3C8("patrol_idle_" + self.script_animation);
+    }
   }
 
   scripts\sp\utility::func_F3CC(var_00, var_01);
@@ -344,8 +374,9 @@ func_F4C7() {
 func_1374A() {
   self endon("end_patrol");
 
-  if(isDefined(self.func_C98C))
+  if(isDefined(self.func_C98C)) {
     self.func_C98C endon("death");
+  }
 
   self waittill("enemy");
 }
@@ -370,8 +401,9 @@ func_13749() {
   var_00 = scripts\sp\utility::func_65DF("_stealth_enabled") && scripts\sp\utility::func_65DB("_stealth_enabled");
   self.func_EE7E = 0;
 
-  if(isDefined(self.func_C3E8))
+  if(isDefined(self.func_C3E8)) {
     self.combatmode = self.func_C3E8;
+  }
 
   if(!var_00) {
     scripts\sp\utility::func_4154();
@@ -386,8 +418,9 @@ func_13749() {
     self.goalradius = level.func_4FF6;
   }
 
-  if(isDefined(self.func_C3C3))
+  if(isDefined(self.func_C3C3)) {
     self.interval = self.func_C3C3;
+  }
 
   self.moveplaybackrate = 1;
 
@@ -405,8 +438,9 @@ func_13749() {
 func_7CD9() {
   var_00 = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_00 = getEntArray(self.target, "targetname");
+  }
 
   return var_00;
 }
@@ -414,8 +448,9 @@ func_7CD9() {
 func_7CDB() {
   var_00 = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_00 = getnodearray(self.target, "targetname");
+  }
 
   return var_00;
 }
@@ -423,8 +458,9 @@ func_7CDB() {
 func_7CE0() {
   var_00 = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_00 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  }
 
   return var_00;
 }
@@ -438,8 +474,9 @@ func_7A92() {
     for(var_02 = 0; var_02 < var_1.size; var_2++) {
       var_03 = getnode(var_1[var_02], "script_linkname");
 
-      if(isDefined(var_03))
+      if(isDefined(var_03)) {
         var_0[var_0.size] = var_03;
+      }
     }
   }
 
@@ -492,8 +529,9 @@ func_CA83() {
   self endon("death");
   self endon("end_patrol");
 
-  if(isDefined(self.func_EED1))
+  if(isDefined(self.func_EED1)) {
     [[level._meth_83D2["_patrol_endon_spotted_flag"]]]();
+  }
 
   self.func_C98C endon("death");
   thread func_13749();
@@ -504,8 +542,9 @@ func_CA83() {
   var_02 = anglestoright(self.func_C98C.angles);
   var_03 = "left";
 
-  if(vectordot(var_01, var_02) > 0)
+  if(vectordot(var_01, var_02) > 0) {
     var_03 = "right";
+  }
 
   wait 1;
   thread func_CA86();
@@ -517,8 +556,9 @@ func_CA83() {
     if(isDefined(self.func_C98C) && !isDefined(self.func_C98C.func_C99C)) {
       var_00 = func_CA88(var_00);
 
-      if(var_03 == "null")
+      if(var_03 == "null") {
         var_03 = "back";
+      }
 
       var_03 = func_CA85(var_00, var_03);
       self.func_C986 = var_0[var_03].origin;
@@ -593,8 +633,9 @@ func_CA82(var_00) {
   for(var_02 = 0; var_02 < var_1.size; var_2++) {
     var_03 = var_1[var_02];
 
-    if(var_03 == "null")
+    if(var_03 == "null") {
       continue;
+    }
   }
 }
 
@@ -607,8 +648,9 @@ func_CA85(var_00, var_01) {
     if(var_0[var_03].checked) {
       continue;
     }
-    if(self maymovetopoint(var_0[var_03].origin))
+    if(self maymovetopoint(var_0[var_03].origin)) {
       return var_03;
+    }
 
     var_0[var_03].checked = 1;
   }
@@ -640,8 +682,9 @@ func_CA86(var_00) {
     return;
   }
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 200;
+  }
 
   scripts\sp\utility::func_F35F();
 
@@ -684,15 +727,17 @@ func_CA87(var_00, var_01) {
       var_03 = distancesquared(self.origin, self.func_C986);
 
       if(var_03 < squared(16)) {
-        if(self.moveplaybackrate > 0.4)
+        if(self.moveplaybackrate > 0.4) {
           self.moveplaybackrate = self.moveplaybackrate - 0.05;
+        }
 
         continue;
       }
 
       if(var_03 > squared(48)) {
-        if(self.moveplaybackrate < 1.8)
+        if(self.moveplaybackrate < 1.8) {
           self.moveplaybackrate = self.moveplaybackrate + 0.05;
+        }
 
         continue;
       }
@@ -701,11 +746,13 @@ func_CA87(var_00, var_01) {
     }
   }
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 16;
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 48;
+  }
 
   var_04 = var_00 * var_00;
   var_05 = var_01 * var_01;
@@ -721,15 +768,17 @@ func_CA87(var_00, var_01) {
     }
 
     if(var_03 < var_04) {
-      if(self.moveplaybackrate > 0.4)
+      if(self.moveplaybackrate > 0.4) {
         self.moveplaybackrate = self.moveplaybackrate - 0.05;
+      }
 
       continue;
     }
 
     if(var_03 > var_05) {
-      if(self.moveplaybackrate < 0.75)
+      if(self.moveplaybackrate < 0.75) {
         self.moveplaybackrate = self.moveplaybackrate + 0.05;
+      }
 
       continue;
     }
@@ -739,18 +788,21 @@ func_CA87(var_00, var_01) {
 }
 
 func_8BA5() {
-  if(isDefined(self.script_delay) || isDefined(self.script_delay_min))
+  if(isDefined(self.script_delay) || isDefined(self.script_delay_min)) {
     return 1;
+  }
 
   return 0;
 }
 
 func_ED4E() {
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     return self.script_delay > 0.5;
+  }
 
-  if(isDefined(self.script_delay_min))
+  if(isDefined(self.script_delay_min)) {
     return self.script_delay_min > 0.5;
+  }
 
   return 0;
 }

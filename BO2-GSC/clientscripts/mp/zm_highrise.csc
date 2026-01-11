@@ -50,8 +50,9 @@ main() {
     foreach(struct in claymores) {
       weapon_model = getstruct(struct.target, "targetname");
 
-      if(isDefined(weapon_model))
+      if(isDefined(weapon_model)) {
         weapon_model.script_vector = vectorscale((0, -1, 0), 90.0);
+      }
     }
   }
 
@@ -59,8 +60,9 @@ main() {
   setsaveddvar("r_skyTransition", 1);
   clientscripts\mp\zm_highrise_fx::setup_prop_anims();
 
-  if(is_true(level.zombiemode_using_chugabud_perk))
+  if(is_true(level.zombiemode_using_chugabud_perk)) {
     level thread clientscripts\mp\zombies\_zm_perks::chugabud_setup_afterlife_filters();
+  }
 
   waitforclient(0);
   level thread highrise_watch_for_power();
@@ -203,8 +205,9 @@ highrise_watch_for_power() {
     if(!level getclientfield("zombie_power_on")) {
       level.power_on = 0;
 
-      if(is_true(looped_once))
+      if(is_true(looped_once)) {
         level notify("power_controlled_light");
+      }
 
       fog_vol_to_visionset_set_suffix("_off");
       fog_vol_to_visionset_set_info(0, "zm_highrise");

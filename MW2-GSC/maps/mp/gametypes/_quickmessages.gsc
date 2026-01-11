@@ -43,8 +43,9 @@ init() {
 quickcommands(response) {
   self endon("disconnect");
 
-  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay))
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay)) {
     return;
+  }
 
   self.spamdelay = true;
 
@@ -108,8 +109,9 @@ quickcommands(response) {
 }
 
 quickstatements(response) {
-  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay))
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay)) {
     return;
+  }
 
   self.spamdelay = true;
 
@@ -167,8 +169,9 @@ quickstatements(response) {
 }
 
 quickresponses(response) {
-  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay))
+  if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator" || isDefined(self.spamdelay)) {
     return;
+  }
 
   self.spamdelay = true;
 
@@ -220,8 +223,9 @@ quickresponses(response) {
 }
 
 doQuickMessage(soundalias, saytext) {
-  if(self.sessionstate != "playing")
+  if(self.sessionstate != "playing") {
     return;
+  }
 
   prefix = maps\mp\gametypes\_teams::getTeamVoicePrefix(self.team);
 
@@ -232,10 +236,12 @@ doQuickMessage(soundalias, saytext) {
     self playSound(prefix + soundalias);
     self sayAll(saytext);
   } else {
-    if(self.sessionteam == "allies")
+    if(self.sessionteam == "allies") {
       self.headiconteam = "allies";
-    else if(self.sessionteam == "axis")
+    }
+    else if(self.sessionteam == "axis") {
       self.headiconteam = "axis";
+    }
 
     self.headicon = "talkingicon";
 
@@ -246,17 +252,21 @@ doQuickMessage(soundalias, saytext) {
 }
 
 saveHeadIcon() {
-  if(isDefined(self.headicon))
+  if(isDefined(self.headicon)) {
     self.oldheadicon = self.headicon;
+  }
 
-  if(isDefined(self.headiconteam))
+  if(isDefined(self.headiconteam)) {
     self.oldheadiconteam = self.headiconteam;
+  }
 }
 
 restoreHeadIcon() {
-  if(isDefined(self.oldheadicon))
+  if(isDefined(self.oldheadicon)) {
     self.headicon = self.oldheadicon;
+  }
 
-  if(isDefined(self.oldheadiconteam))
+  if(isDefined(self.oldheadiconteam)) {
     self.headiconteam = self.oldheadiconteam;
+  }
 }

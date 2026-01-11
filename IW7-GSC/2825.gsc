@@ -12,8 +12,9 @@ func_952F() {
   level.func_A03A = getdvar("player_itemUseFOV");
   var_00 = getEntArray("loot_room_volume", "targetname");
 
-  foreach(var_02 in var_00)
+  foreach(var_02 in var_00) {
   var_02 thread func_CF73();
+  }
 }
 
 func_2237() {}
@@ -48,18 +49,21 @@ func_489F(var_00) {
         var_03 = [];
 
         foreach(var_13 in var_09) {
-          if(ispointinvolume(var_13.origin, var_05))
+          if(ispointinvolume(var_13.origin, var_05)) {
             var_01 = scripts\engine\utility::array_add(var_01, var_13);
+          }
         }
 
         foreach(var_16 in var_10) {
-          if(ispointinvolume(var_16.origin, var_05))
+          if(ispointinvolume(var_16.origin, var_05)) {
             var_02 = scripts\engine\utility::array_add(var_02, var_16);
+          }
         }
 
         foreach(var_19 in var_11) {
-          if(ispointinvolume(var_19.origin, var_05))
+          if(ispointinvolume(var_19.origin, var_05)) {
             var_03 = scripts\engine\utility::array_add(var_03, var_19);
+          }
         }
       }
     }
@@ -98,8 +102,9 @@ func_CF73() {
 
 func_CF6C() {
   if(level.script == "sa_assassination") {
-    if(isDefined(level.func_21E7))
+    if(isDefined(level.func_21E7)) {
       level[[level.func_21E7]]();
+    }
   } else {
     level.func_EC87["player_arms"] = #animtree;
     level.func_EC8C["player_arms"] = "viewmodel_base_viewhands_iw7";
@@ -138,8 +143,9 @@ func_B095(var_00, var_01, var_02) {
   foreach(var_08, var_06 in var_01) {
     var_07 = 1;
 
-    if(var_04 > var_03)
+    if(var_04 > var_03) {
       var_07 = 2;
+    }
 
     if(isDefined(level.func_B092)) {
       level.func_B093 = var_06;
@@ -230,8 +236,9 @@ func_AF05(var_00) {
   var_1.func_1FBB = "loot_locker";
   var_01 scripts\sp\anim::func_1F35(var_01, "open_locker_doors");
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     var_04 delete();
+  }
 }
 
 func_AF0F(var_00, var_01) {
@@ -262,8 +269,9 @@ func_B097(var_00) {
     if(var_0.func_F1B8 != "none" && func_0A2F::func_9B49(var_0.func_F1B8)) {
       var_03 = func_0A2F::build_attach_models(var_0.func_F1B8, "random", undefined, 0, 0, 3);
 
-      if(isDefined(var_03))
+      if(isDefined(var_03)) {
         var_0.func_F1B8 = var_0.func_F1B8 + "+" + var_03;
+      }
 
       var_04 = spawn("weapon_" + var_0.func_F1B8, var_0.func_F1B5.origin, 1);
       var_4.angles = var_0.func_F1B5.angles;
@@ -304,16 +312,18 @@ func_3E94(var_00, var_01) {
   if(!isDefined(scripts\engine\utility::get_template_script_MAYBE())) {
     return;
   }
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 1;
+  }
 
   var_0.func_3850 = undefined;
   var_02 = undefined;
   var_03 = undefined;
   var_04 = ["none"];
 
-  if(!var_01)
+  if(!var_01) {
     var_04 = func_0A2F::func_D9FA();
+  }
 
   var_04 = scripts\engine\utility::array_combine(var_04, func_0A2F::func_DA0A());
   var_04 = scripts\engine\utility::array_combine(var_04, func_0A2F::func_DA10());
@@ -332,8 +342,9 @@ func_3E94(var_00, var_01) {
           }
         }
 
-        if(isDefined(var_02))
+        if(isDefined(var_02)) {
           var_03 = func_13C06(var_02, var_0.nodes);
+        }
 
         if(isDefined(var_03)) {
           var_0.func_F1B8 = var_02;
@@ -351,8 +362,9 @@ func_3E94(var_00, var_01) {
     var_0.func_3850 = [];
 
     foreach(var_10 in level.func_D9E5["loaded_weapons"]) {
-      if(!scripts\engine\utility::array_contains(var_04, var_10) && !scripts\engine\utility::array_contains(level.func_D9E5["optionalunlocks"], var_10))
+      if(!scripts\engine\utility::array_contains(var_04, var_10) && !scripts\engine\utility::array_contains(level.func_D9E5["optionalunlocks"], var_10)) {
         var_0.func_3850 = scripts\engine\utility::array_add(var_0.func_3850, var_10);
+      }
     }
   }
 
@@ -360,13 +372,15 @@ func_3E94(var_00, var_01) {
   var_02 = undefined;
   var_03 = undefined;
 
-  if(!isDefined(var_0._meth_845F))
+  if(!isDefined(var_0._meth_845F)) {
     var_0._meth_845F = 0;
+  }
 
   for(var_12 = 0; var_12 < var_0.func_3850.size; var_12++) {
     if(scripts\engine\utility::get_template_script_MAYBE() == "rogue") {
-      if(var_0.func_10310 < var_0.func_11A2E)
+      if(var_0.func_10310 < var_0.func_11A2E) {
         var_0._meth_845F = 1;
+      }
 
       if(var_0._meth_845F && randomint(100) > 25) {
         var_03 = undefined;
@@ -383,11 +397,13 @@ func_3E94(var_00, var_01) {
     } else if(scripts\engine\utility::get_template_script_MAYBE() == "moon_port") {
       var_02 = var_0.func_3850[var_12];
 
-      if(!isDefined(var_0._meth_8460))
+      if(!isDefined(var_0._meth_8460)) {
         var_0._meth_8460 = 0;
+      }
 
-      if(!isDefined(var_0.setplayermusicstate))
+      if(!isDefined(var_0.setplayermusicstate)) {
         var_0.setplayermusicstate = 0;
+      }
 
       if(var_02 == "iw7_devastator" && var_0.setplayermusicstate < 12) {
         var_03 = func_13C06(var_02, var_0.nodes);
@@ -425,48 +441,58 @@ func_13C06(var_00, var_01) {
   var_07 = 0;
 
   if(isDefined(level.func_72A6)) {
-    if(level.func_72A6 == "silencer")
+    if(level.func_72A6 == "silencer") {
       var_07 = 1;
+    }
   }
 
-  if(var_00 == "iw7_sdflmg")
+  if(var_00 == "iw7_sdflmg") {
     var_06 = 0.2;
+  }
   else if(var_00 == "iw7_ar57") {
-    if(var_07)
+    if(var_07) {
       var_02 = "silenced_smg";
+    }
 
     var_06 = 0;
   } else if(var_00 == "iw7_crb") {
-    if(var_07)
+    if(var_07) {
       var_02 = "silenced_smg";
+    }
 
     var_06 = 2.8;
   } else if(var_00 == "iw7_devastator")
     var_06 = 0.5;
-  else if(var_00 == "iw7_m8")
+  else if(var_00 == "iw7_m8") {
     var_06 = 0.2;
-  else if(var_00 == "iw7_kbs")
+  }
+  else if(var_00 == "iw7_kbs") {
     var_06 = 4.8;
+  }
   else if(var_00 == "iw7_fmg") {
-    if(var_07)
+    if(var_07) {
       var_02 = "silenced_smg";
+    }
 
     var_06 = -1;
   } else if(var_00 == "iw7_ripper")
     var_06 = -1;
   else if(var_00 == "iw7_ump45") {
-    if(var_07)
+    if(var_07) {
       var_02 = "silenced_smg";
+    }
 
     var_06 = -4;
   } else if(var_00 == "iw7_erad") {
-    if(var_07)
+    if(var_07) {
       var_02 = "silenced_smg";
+    }
 
     var_06 = 0;
   } else if(var_00 == "iw7_fhr") {
-    if(var_07)
+    if(var_07) {
       var_02 = "silenced_smg";
+    }
 
     var_06 = 1;
   } else if(var_00 == "iw7_ake") {
@@ -517,8 +543,9 @@ func_13C06(var_00, var_01) {
       break;
   }
 
-  if(func_0A2F::func_DA40(var_00))
+  if(func_0A2F::func_DA40(var_00)) {
     var_05 = "heavy";
+  }
 
   var_08 = undefined;
   var_09 = undefined;
@@ -562,24 +589,28 @@ func_13C06(var_00, var_01) {
           foreach(var_14 in var_12) {
             if(!scripts\engine\utility::array_contains(var_01, var_14)) {
               if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "stacked") {
-                if(isDefined(var_14.script_parameters) && var_14.script_parameters == "extra_large")
+                if(isDefined(var_14.script_parameters) && var_14.script_parameters == "extra_large") {
                   var_21 = 1;
+                }
               }
             }
 
             if(!scripts\engine\utility::array_contains(var_01, var_14) && var_00 == "iw7_sdflmg") {
               if(!isDefined(var_11.script_noteworthy)) {
-                if(isDefined(var_14.script_parameters) && var_14.script_parameters == "extra_large")
+                if(isDefined(var_14.script_parameters) && var_14.script_parameters == "extra_large") {
                   var_22 = 1;
+                }
               }
             }
           }
         } else {
-          if(var_00 == "iw7_smg")
+          if(var_00 == "iw7_smg") {
             var_22 = 1;
+          }
 
-          if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "stacked")
+          if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "stacked") {
             var_21 = 1;
+          }
         }
 
         if(!var_21 && !var_22) {
@@ -606,8 +637,9 @@ func_13C06(var_00, var_01) {
       }
     }
 
-    if(!isDefined(var_03))
+    if(!isDefined(var_03)) {
       var_03 = var_04;
+    }
   } else {
     foreach(var_11 in var_01) {
       if(!isDefined(var_11.script_parameters)) {
@@ -619,12 +651,14 @@ func_13C06(var_00, var_01) {
       }
     }
 
-    if(!isDefined(var_03))
+    if(!isDefined(var_03)) {
       var_03 = var_04;
+    }
   }
 
-  if(isDefined(var_06) && isDefined(var_03))
+  if(isDefined(var_06) && isDefined(var_03)) {
     var_3.origin = var_3.origin + (0, 0, var_06);
+  }
 
   return var_03;
 }
@@ -638,16 +672,20 @@ func_116DD(var_00, var_01, var_02) {
   func_8835();
   setomnvar("ui_inworld_terminal_hack", 0);
 
-  if(isDefined(self.func_92B9) && self.func_92B9 == 1)
+  if(isDefined(self.func_92B9) && self.func_92B9 == 1) {
     func_F3F0("on");
-  else
+  }
+  else {
     func_F3F0("on", 1);
+  }
 
   if(func_0A2F::func_DA44(var_01, var_02)) {
-    if(isDefined(self.func_92B9) && self.func_92B9 == 1)
+    if(isDefined(self.func_92B9) && self.func_92B9 == 1) {
       func_F3F0("hacked");
-    else
+    }
+    else {
       func_F3F0("hacked", 1);
+    }
 
     return;
   }
@@ -702,20 +740,23 @@ func_116DC(var_00, var_01, var_02) {
         continue;
       }
 
-      if(var_11 == "upgrade1")
+      if(var_11 == "upgrade1") {
         var_07 = var_07 + 1;
+      }
     }
 
     var_13 = var_5[var_07];
     var_14 = level.player _meth_84C6("equipmentState", var_13);
     var_15 = "upgrade1";
 
-    if(isDefined(var_14) && var_14 == "upgrade1")
+    if(isDefined(var_14) && var_14 == "upgrade1") {
       var_15 = "upgrade2";
+    }
 
     if(var_13 == "coverwall" && var_15 == "upgrade1") {
-      if(level.player.func_4759.active.size > 0)
+      if(level.player.func_4759.active.size > 0) {
         level.player thread scripts\sp\coverwall::func_B9C4();
+      }
     }
 
     level.player _meth_84C7("equipmentState", var_13, var_15);
@@ -735,8 +776,9 @@ func_116DC(var_00, var_01, var_02) {
 terminal_unlocks_ui(var_00, var_01) {
   scripts\engine\utility::waitframe();
 
-  if(scripts\engine\utility::flag("game_saving"))
+  if(scripts\engine\utility::flag("game_saving")) {
     wait 0.25;
+  }
 
   thread clearomnvaronautosave("ui_loot_unlocked");
   var_02 = var_0.size;
@@ -747,8 +789,9 @@ terminal_unlocks_ui(var_00, var_01) {
     wait 3.0;
 
     if(var_03 < var_02 - 1) {
-      while(scripts\engine\utility::flag("game_saving"))
+      while(scripts\engine\utility::flag("game_saving")) {
         scripts\engine\utility::waitframe();
+      }
     }
   }
 
@@ -770,8 +813,9 @@ func_FA17(var_00) {
   var_01 = scripts\sp\utility::func_10639("player_arms");
   var_02 = level.player _meth_84C6("currentViewModel");
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_01 setModel(var_02);
+  }
 
   var_01 hide();
   var_03 = [var_01, self];
@@ -792,14 +836,16 @@ func_FA17(var_00) {
 func_2246() {}
 
 func_8835() {
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   self.func_87EB = [];
   var_00 = undefined;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_00 = getent(self.target, "targetname");
+  }
 
   if(isDefined(var_00)) {
     self.func_87EB["fx_tag"] = var_00 scripts\engine\utility::spawn_tag_origin();
@@ -825,10 +871,12 @@ func_87EC() {
 }
 
 func_8834(var_00) {
-  if(isDefined(self.func_92B9) && self.func_92B9 == 1)
+  if(isDefined(self.func_92B9) && self.func_92B9 == 1) {
     func_F3F0("hack");
-  else
+  }
+  else {
     func_F3F0("hack", 1);
+  }
 
   setomnvar("ui_inworld_terminal_wrist_ent", var_00);
   setomnvar("ui_wrist_pc", 7);
@@ -837,8 +885,9 @@ func_8834(var_00) {
 }
 
 func_F3F0(var_00, var_01) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = "on";
+  }
 
   var_02 = self.func_87EB["fx_tag"];
 
@@ -858,36 +907,45 @@ func_F3F0(var_00, var_01) {
     case "on":
       setomnvar("ui_inworld_terminal_on", 1);
 
-      if(isDefined(var_01) && var_01)
+      if(isDefined(var_01) && var_01) {
         setomnvar("ui_inworld_terminal_hack2", 0);
-      else
+      }
+      else {
         setomnvar("ui_inworld_terminal_hack", 0);
+      }
 
       break;
     case "hacked":
-      if(!getomnvar("ui_inworld_terminal_on"))
+      if(!getomnvar("ui_inworld_terminal_on")) {
         setomnvar("ui_inworld_terminal_on", 1);
+      }
 
-      if(isDefined(var_01) && var_01)
+      if(isDefined(var_01) && var_01) {
         setomnvar("ui_inworld_terminal_hack2", 2);
-      else
+      }
+      else {
         setomnvar("ui_inworld_terminal_hack", 2);
+      }
 
       break;
     case "hack":
-      if(isDefined(var_01) && var_01)
+      if(isDefined(var_01) && var_01) {
         setomnvar("ui_inworld_terminal_hack2", 1);
-      else
+      }
+      else {
         setomnvar("ui_inworld_terminal_hack", 1);
+      }
 
       break;
     case "off":
       setomnvar("ui_inworld_terminal_on", 0);
 
-      if(isDefined(var_01) && var_01)
+      if(isDefined(var_01) && var_01) {
         setomnvar("ui_inworld_terminal_hack2", 0);
-      else
+      }
+      else {
         setomnvar("ui_inworld_terminal_hack", 0);
+      }
 
       break;
   }

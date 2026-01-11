@@ -73,6 +73,7 @@ onSpawnPlayer() {
 }
 
 onEndGame(winningPlayer) {
-  if(isDefined(winningPlayer))
+  if(isDefined(winningPlayer)) {
     [[level._setPlayerScore]](winningPlayer, winningPlayer[[level._getPlayerScore]]() + 1);
+  }
 }

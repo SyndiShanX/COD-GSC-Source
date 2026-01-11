@@ -26,8 +26,9 @@ init() {
 }
 
 getgesturedata(var_00) {
-  if(isbot(self) && var_00 == "devilhorns_mp")
+  if(isbot(self) && var_00 == "devilhorns_mp") {
     var_00 = "gesture009";
+  }
 
   return level.func_77C0[var_00];
 }
@@ -36,10 +37,12 @@ func_41B2() {
   self notify("clearGesture");
 
   if(isDefined(self.gestureweapon) && self.gestureweapon != "none") {
-    if(scripts\engine\utility::is_player_gamepad_enabled())
+    if(scripts\engine\utility::is_player_gamepad_enabled()) {
       scripts\mp\utility\game::_setactionslot(3, "");
-    else
+    }
+    else {
       scripts\mp\utility\game::_setactionslot(7, "");
+    }
 
     scripts\mp\utility\game::_takeweapon(self.gestureweapon);
     self.gestureweapon = "none";
@@ -56,10 +59,12 @@ givegesture(var_00) {
       if(scripts\mp\utility\game::func_9D48("archetype_scout")) {
         var_01 = getbodymodel();
 
-        if(!isDefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype())
+        if(!isDefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype()) {
           var_02 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "ges_plyr_gesture050_synaptic", "ges_plyr_gesture052_synaptic");
-        else
+        }
+        else {
           var_02 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "ges_plyr_gesture050", "ges_plyr_gesture052");
+        }
       } else
         var_02 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "ges_plyr_gesture050", "ges_plyr_gesture052");
 
@@ -70,8 +75,9 @@ givegesture(var_00) {
       if(scripts\mp\utility\game::func_9D48("archetype_scout")) {
         var_01 = getbodymodel();
 
-        if(!isDefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype())
+        if(!isDefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype()) {
           var_00 = "ges_plyr_gesture020_synaptic";
+        }
       }
 
       break;
@@ -79,8 +85,9 @@ givegesture(var_00) {
       if(scripts\mp\utility\game::func_9D48("archetype_scout")) {
         var_01 = getbodymodel();
 
-        if(!isDefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype())
+        if(!isDefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype()) {
           var_00 = "ges_plyr_gesture046_synaptic";
+        }
       }
 
       break;
@@ -88,20 +95,24 @@ givegesture(var_00) {
       if(scripts\mp\utility\game::func_9D48("archetype_scout")) {
         var_01 = getbodymodel();
 
-        if(!isDefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype())
+        if(!isDefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype()) {
           var_00 = "ges_plyr_gesture048_synaptic";
+        }
       }
 
       break;
   }
 
-  if(scripts\engine\utility::is_player_gamepad_enabled())
+  if(scripts\engine\utility::is_player_gamepad_enabled()) {
     scripts\mp\utility\game::_setactionslot(3, "taunt");
-  else
+  }
+  else {
     scripts\mp\utility\game::_setactionslot(7, "taunt");
+  }
 
-  if(!level.console)
+  if(!level.console) {
     thread monitorgamepadswitch();
+  }
 
   scripts\mp\utility\game::_giveweapon(var_00);
   self _meth_8541(var_00);
@@ -145,8 +156,9 @@ func_77A4() {
   for(;;) {
     self waittill("offhand_pullback", var_00);
 
-    if(self.gestureweapon == var_00)
+    if(self.gestureweapon == var_00) {
       self notify("used_cosmetic_gesture");
+    }
   }
 }
 
@@ -176,8 +188,9 @@ gesture_rockpaperscissorsthink() {
 
     self waittill("offhand_fired");
 
-    if(var_00)
+    if(var_00) {
       thread gesture_playrockpaperscissors();
+    }
 
     self waittill("offhand_end");
     thread gesture_resetrockpaperscissorsgesture();
@@ -250,8 +263,9 @@ gesture_getrockpaperscissorsplayers() {
 }
 
 gesture_determinerockpaperscissorswinner(var_00, var_01, var_02, var_03) {
-  if(var_01 == var_03)
+  if(var_01 == var_03) {
     return undefined;
+  }
 
   switch (var_01) {
     case "ges_plyr_gesture043":
@@ -291,26 +305,31 @@ gesture_resetcoinflipgesture() {
 }
 
 getbodymodel() {
-  if(!isplayer(self) || isai(self))
+  if(!isplayer(self) || isai(self)) {
     return undefined;
+  }
 
   var_00 = undefined;
 
-  if(level.rankedmatch)
+  if(level.rankedmatch) {
     var_00 = self getrankedplayerdata("rankedloadouts", "squadMembers", "body");
-  else
+  }
+  else {
     var_00 = self getrankedplayerdata("privateloadouts", "squadMembers", "body");
+  }
 
   return tablelookupbyrow("mp\cac\bodies.csv", var_00, 1);
 }
 
 haschangedarchetype() {
   if(isDefined(self.changedarchetypeinfo)) {
-    if(!isDefined(self.lastarchetypeinfo))
+    if(!isDefined(self.lastarchetypeinfo)) {
       return 1;
+    }
 
-    if(self.changedarchetypeinfo != self.lastarchetypeinfo)
+    if(self.changedarchetypeinfo != self.lastarchetypeinfo) {
       return 1;
+    }
   }
 
   return 0;
@@ -324,7 +343,8 @@ gestureaudioduringcountdown() {
   while(!scripts\mp\utility\game::gameflag("prematch_done")) {
     self waittill("offhand_pullback", var_00);
 
-    if(self.gestureweapon == var_00)
+    if(self.gestureweapon == var_00) {
       self playsoundtoteam("gib_fullbody", self.team, self);
+    }
   }
 }

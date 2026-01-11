@@ -53,8 +53,9 @@ special_gun_detonate_hint_watcher() {
     self waittill("grenade_fire", var_1, var_2);
 
     if(is_venom_weapon(var_2)) {
-      if(!isDefined(self.projectile_time_out_num))
+      if(!isDefined(self.projectile_time_out_num)) {
         self.projectile_time_out_num = 1;
+      }
       else if(self.projectile_time_out_num > var_0) {
         var_0 = 3;
         self.projectile_time_out_num = 0;
@@ -79,8 +80,9 @@ wait_for_detonation(var_0, var_1) {
   var_3 = 0;
   var_4 = (0, 0, 0);
 
-  for(var_5 = var_4; self adsbuttonpressed() && var_3 < var_2; var_3 = var_3 + 1)
+  for(var_5 = var_4; self adsbuttonpressed() && var_3 < var_2; var_3 = var_3 + 1) {
     wait 0.05;
+  }
 
   while(var_3 < var_2) {
     if(isDefined(var_0) && self.adspressed) {
@@ -202,14 +204,17 @@ cloudmonitor(var_0, var_1, var_2) {
   earthquake(0.5, 1, var_1, 512);
   playrumbleonposition("grenade_rumble", var_1);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     triggerfx(var_3);
+  }
 
-  if(var_2 == "iw6_aliendlc11li_mp")
+  if(var_2 == "iw6_aliendlc11li_mp") {
     playsoundatpos(var_1, "venom_lightning_expl");
+  }
 
-  if(var_2 == "iw6_aliendlc11fi_mp")
+  if(var_2 == "iw6_aliendlc11fi_mp") {
     playsoundatpos(var_1, "venom_fire_expl");
+  }
 
   var_16 = 0.0;
   var_17 = 0.25;
@@ -221,14 +226,16 @@ cloudmonitor(var_0, var_1, var_2) {
     var_20 = [];
 
     foreach(var_22 in level.agentarray) {
-      if(isDefined(var_22) && isalive(var_22) && var_22 istouching(var_15) && !isDefined(var_22.melting))
+      if(isDefined(var_22) && isalive(var_22) && var_22 istouching(var_15) && !isDefined(var_22.melting)) {
         var_20[var_20.size] = var_22;
+      }
     }
 
     if(isDefined(level.alive_plants)) {
       foreach(var_25 in level.alive_plants) {
-        if(isDefined(var_25) && isDefined(var_25.coll_model) && var_25.coll_model istouching(var_15))
+        if(isDefined(var_25) && isDefined(var_25.coll_model) && var_25.coll_model istouching(var_15)) {
           var_25.coll_model dodamage(var_6, var_25.origin, var_0, var_0);
+        }
       }
     }
 
@@ -244,18 +251,21 @@ cloudmonitor(var_0, var_1, var_2) {
 
   var_15 delete();
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 delete();
+  }
 }
 
 alien_corrosive_on() {
-  if(!isDefined(self.is_corrosive))
+  if(!isDefined(self.is_corrosive)) {
     self.is_corrosive = 0;
+  }
 
   self.is_corrosive++;
 
-  if(self.is_corrosive == 1)
+  if(self.is_corrosive == 1) {
     self setscriptablepartstate("body", "corrosive");
+  }
 }
 
 alien_corrosive_off() {
@@ -274,16 +284,18 @@ cloud_melt_alien(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("stasis_cloud_burning");
   self endon("death");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 6;
+  }
 
   self.melting = 1;
 
   switch (var_5) {
     case "iw6_aliendlc11_mp":
     case "iw6_aliendlc31_mp":
-      if(!isDefined(level.spider) || isDefined(level.spider) && self != level.spider)
+      if(!isDefined(level.spider) || isDefined(level.spider) && self != level.spider) {
         alien_corrosive_on();
+      }
 
       break;
     case "iw6_aliendlc11fi_mp":
@@ -299,17 +311,20 @@ cloud_melt_alien(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = 0;
 
   while(var_6 < var_2) {
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       self dodamage(var_0, self.origin, var_1, var_1, "MOD_UNKNOWN");
-    else
+    }
+    else {
       self dodamage(var_0, self.origin, var_1);
+    }
 
     var_6 = var_6 + var_4;
     wait(var_4);
   }
 
-  if(isDefined(self.is_corrosive))
+  if(isDefined(self.is_corrosive)) {
     alien_corrosive_off();
+  }
 
   self.melting = undefined;
 }
@@ -334,8 +349,9 @@ venom_ammo_drop_logic() {
 
     if(var_5 > var_2 && level.spitter_ammo_active < 4) {
       if(gettime() < var_3) {
-        if(randomintrange(0, 100) > 92)
+        if(randomintrange(0, 100) > 92) {
           var_6 = 1;
+        }
       } else
         var_6 = 1;
     }
@@ -384,8 +400,9 @@ spitter_ammo_think() {
 
       var_5 = 2;
 
-      if(var_1 maps\mp\alien\_prestige::prestige_getminammo() != 1)
+      if(var_1 maps\mp\alien\_prestige::prestige_getminammo() != 1) {
         var_5 = 1;
+      }
 
       var_1 setweaponammoclip(var_2, var_3 + var_5);
       var_1 setweaponammostock(var_2, var_4 + var_5);
@@ -399,14 +416,18 @@ spitter_ammo_think() {
 }
 
 get_venom_weapon() {
-  if(self hasweapon("iw6_aliendlc11_mp"))
+  if(self hasweapon("iw6_aliendlc11_mp")) {
     return "iw6_aliendlc11_mp";
-  else if(self hasweapon("iw6_aliendlc11li_mp"))
+  }
+  else if(self hasweapon("iw6_aliendlc11li_mp")) {
     return "iw6_aliendlc11li_mp";
-  else if(self hasweapon("iw6_aliendlc11fi_mp"))
+  }
+  else if(self hasweapon("iw6_aliendlc11fi_mp")) {
     return "iw6_aliendlc11fi_mp";
-  else if(self hasweapon("iw6_aliendlc11sp_mp"))
+  }
+  else if(self hasweapon("iw6_aliendlc11sp_mp")) {
     return "iw6_aliendlc11sp_mp";
+  }
 
   return undefined;
 }

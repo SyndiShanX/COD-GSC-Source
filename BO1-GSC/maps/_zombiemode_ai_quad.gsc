@@ -292,10 +292,12 @@ check_wait() {
     }
     if(dist > min_dist && dist < max_dist && self.nextSpecial < GetTime() && z_check) {
       cansee = SightTracePassed(self.origin, self.enemy.origin, false, undefined);
-      if(cansee)
+      if(cansee) {
         self set_leap_attack_properties();
-      else
+      }
+      else {
         self set_default_attack_properties();
+      }
     } else {
       self set_default_attack_properties();
     }

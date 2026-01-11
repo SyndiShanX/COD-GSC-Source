@@ -252,17 +252,20 @@ base_loud_speakers() {
     if(flag("_stealth_spotted")) {
       dialog = loudspeaker[current_alert];
       current_alert++;
-      if(current_alert >= alert.size)
+      if(current_alert >= alert.size) {
         current_alert = 0;
+      }
     } else {
       dialog = loudspeaker[current_line];
       current_line++;
-      if(current_line >= loudspeaker.size)
+      if(current_line >= loudspeaker.size) {
         current_line = 0;
+      }
     }
 
-    foreach(speaker in speakers)
+    foreach(speaker in speakers) {
     speaker playSound(dialog);
+    }
 
     wait(RandomIntRange(12, 16));
   }
@@ -362,17 +365,20 @@ bmp_aims_at_targets() {
 }
 
 price_kills_me_if_too_close() {
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "truck_guys")
+  }
       return;
-  if(!isDefined(self.script_stealth))
+  if(!isDefined(self.script_stealth)) {
     return;
+  }
   self endon("death");
 
   level.price waittill_entity_in_range(self, 300);
 
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
+  }
 
   thread price_kills_me_do_the_killing();
 }
@@ -391,10 +397,12 @@ price_kills_me_do_the_killing() {
   level.price.goalradius = 8;
   self.dontattackme = undefined;
 
-  if(!isDefined(level.price.stargets))
+  if(!isDefined(level.price.stargets)) {
     level.price.stargets = 1;
-  else
+  }
+  else {
     level.price.stargets++;
+  }
 
   self waittill("death");
 
@@ -441,8 +449,9 @@ return_spawning() {
 }
 
 spawn_if_dead() {
-  if(flag(self.dead_flag))
+  if(flag(self.dead_flag)) {
     GetEnt(self.triggername, "targetname") notify("trigger");
+  }
 }
 
 stealth_camp_threatbias() {
@@ -464,8 +473,9 @@ variable_blizzard(first_trans_time) {
     t = RandomFloatRange(1, 3);
     if(first) {
       first = !first;
-      if(isDefined(first_trans_time))
+      if(isDefined(first_trans_time)) {
         t = first_trans_time;
+      }
     }
     maps\_blizzard::blizzard_level_transition_hard(t);
     //println( "blizzard-> hard" );
@@ -1030,20 +1040,24 @@ clifftop_aim_thread()
 {
 	self waittill( "trigger", guy );
 
-	if( guy ent_flag( "_stealth_stay_still" ) )
+	if( guy ent_flag( "_stealth_stay_still" ) ) {
 		return;
+	}
 	guy endon( "_stealth_stay_still" );
 
-	if( flag( "_stealth_spotted" ) )
+	if( flag( "_stealth_spotted" ) ) {
 		return;
+	}
 	level endon( "_stealth_spotted" );
 
-	if( flag( "_stealth_event" ) )
+	if( flag( "_stealth_event" ) ) {
 		return;
+	}
 	level endon( "_stealth_event" );
 
-	if( flag( "clifftop_firefight" ) )
+	if( flag( "clifftop_firefight" ) ) {
 		return;
+	}
 	level endon( "clifftop_firefight" );
 
 	guy.ref_node.origin = guy.origin;
@@ -1061,8 +1075,9 @@ clifftop_aim_thread()
 		vector = ai2[ 0 ].origin - guy.origin;
 		guy.ref_node.angles = VectorToAngles( VectorNormalize( vector ) );
 	}
-	else
+	else {
 		guy.ref_node.angles = self.angles;
+	}
 
 	add_wait( ::flag_wait, "_stealth_event" );
 	add_wait( ::flag_wait, "_stealth_spotted" );
@@ -1077,13 +1092,15 @@ clifftop_aim_thread()
 
 	guy.ref_node thread anim_generic_loop( guy, "crouch_aim" );
 
-	if( isDefined( self.script_delay ) )
+	if( isDefined( self.script_delay ) ) {
 		self.script_delay = self.script_delay - .5;
+	}
 
 	self script_delay();
 
-	if( !self.script_requires_player )
+	if( !self.script_requires_player ) {
 		self waittill( "script_requires_player" );
+	}
 
 	if( self.targetname == "clifftop_node1" )
 	{
@@ -1091,8 +1108,9 @@ clifftop_aim_thread()
 		wait 1;
 	}
 
-	if( self.targetname == "clifftop_lookout_node" )
+	if( self.targetname == "clifftop_lookout_node" ) {
 		flag_wait( "clifftop_firefight" );
+	}
 
 	guy.ref_node notify( "stop_loop" );
 }
@@ -1100,26 +1118,30 @@ clifftop_aim_thread()
 
 flag_if_player_kill() {
   self waittill("death", attacker);
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return;
-  if(IsPlayer(attacker))
+  }
+  if(IsPlayer(attacker)) {
     flag_set("player_killed_one_first_two_encounters");
+  }
 }
 
 clifftop_patroller1_logic() {
   self endon("death");
 
   _flag = self stealth_get_group_spotted_flag();
-  if(flag(_flag))
+  if(flag(_flag)) {
     return;
+  }
   level endon(_flag);
 
   flag_wait("clifftop_guys_move");
   waittillframeend;
   self ent_flag_wait("_stealth_normal");
 
-  if(isDefined(level.clifftop_patroller1_moveout))
+  if(isDefined(level.clifftop_patroller1_moveout)) {
     wait 1;
+  }
   level.clifftop_patroller1_moveout = 1;
 
   //self stealth_ai_clear_custom_idle_and_react();
@@ -1225,8 +1247,9 @@ script_chatgroups() {
       if(isDefined(closest_enemies[i].script_chatgroup)) {
         closest_chat_group = closest_enemies[i].script_chatgroup;
         closest_talker = closest_enemies[i];
-        if(closest_talker ent_flag_exist("_stealth_normal"))
+        if(closest_talker ent_flag_exist("_stealth_normal")) {
           if(!closest_talker ent_flag("_stealth_normal"))
+        }
             continue;
 
         //find next closest member of same chat group
@@ -1234,10 +1257,12 @@ script_chatgroups() {
 
         //if has no buddy or is too far from buddy or buddy is alert find another
 
-        if(!isDefined(next_closest))
+        if(!isDefined(next_closest)) {
           continue;
-        if(next_closest ent_flag_exist("_stealth_normal"))
+        }
+        if(next_closest ent_flag_exist("_stealth_normal")) {
           if(!next_closest ent_flag("_stealth_normal"))
+        }
             continue;
         d = Distance(next_closest.origin, closest_talker.origin);
         if(d > 220) {
@@ -1251,18 +1276,21 @@ script_chatgroups() {
     if(isDefined(next_closest)) {
       //check if closest guy is our last talker, if so use second closest
       if(isDefined(level.last_talker)) {
-        if(level.last_talker == closest_talker)
+        if(level.last_talker == closest_talker) {
           talker = next_closest;
-        else
+        }
+        else {
           talker = closest_talker;
+        }
       } else
         talker = closest_talker;
 
       talker chatter_play_sound(level.chatter_aliases[level.current_conversation_point]);
 
       level.current_conversation_point++;
-      if(level.current_conversation_point >= level.chatter_aliases.size)
+      if(level.current_conversation_point >= level.chatter_aliases.size) {
         level.current_conversation_point = 0;
+      }
       level.last_talker = talker;
 
       wait .5; // conversation has pauses
@@ -1272,8 +1300,9 @@ script_chatgroups() {
 }
 
 setup_chatter() {
-  if(!isDefined(self.script_chatgroup))
+  if(!isDefined(self.script_chatgroup)) {
     return;
+  }
 
   self endon("death");
 
@@ -1291,8 +1320,9 @@ setup_chatter_kill_wait() {
 }
 
 chatter_play_sound(alias) {
-  if(is_dead_sentient())
+  if(is_dead_sentient()) {
     return;
+  }
 
   org = spawn("script_origin", (0, 0, 0));
   org endon("death");
@@ -1306,8 +1336,9 @@ chatter_play_sound(alias) {
   //println( "script_chatter alias = " + alias );
 
   self chatter_play_sound_wait(org);
-  if(IsAlive(self))
+  if(IsAlive(self)) {
     self notify("play_sound_done");
+  }
 
   org StopSounds();
   wait(0.05); // stopsounds doesnt work if the org is deleted same frame
@@ -1324,8 +1355,9 @@ chatter_play_sound_wait(org) {
 find_next_member(closest_enemies, closest, closest_chat_group) {
   for(i = closest + 1; i < closest_enemies.size; i++) {
     if(isDefined(closest_enemies[i].script_chatgroup)) {
-      if(closest_enemies[i].script_chatgroup == closest_chat_group)
+      if(closest_enemies[i].script_chatgroup == closest_chat_group) {
         return closest_enemies[i];
+      }
     }
   }
   return undefined;
@@ -1368,8 +1400,9 @@ twostory_sitter() {
 /*
 camp_time_save()
 {
-	if( flag( "c4_plant" ) )
+	if( flag( "c4_plant" ) ) {
 		return;
+	}
 	level endon( "c4_plant" );
 
 	level notify( "camp_save" );
@@ -1396,8 +1429,9 @@ camp_save_proc() {
 }
 
 mission_fail(string) {
-  if(flag("mission_fail"))
+  if(flag("mission_fail")) {
     return;
+  }
   flag_set("mission_fail");
 
   SetDvar("ui_deadquote", level.strings[string]);
@@ -1405,8 +1439,9 @@ mission_fail(string) {
 }
 
 c4_player_obj() {
-  if(!isDefined(level.basec4num))
+  if(!isDefined(level.basec4num)) {
     level.basec4num = 0;
+  }
 
   level.basec4num++;
   self.script_flag = "base_c4_num_" + level.basec4num;
@@ -1438,10 +1473,12 @@ c4_player_obj() {
 
   level.basec4num--;
 
-  if(self.script_noteworthy == "mig_c4")
+  if(self.script_noteworthy == "mig_c4") {
     flag_set("mig_c4_planted");
-  else
+  }
+  else {
     flag_set("fuel_c4_planted");
+  }
 
   flag_set("one_c4_planted");
 
@@ -1460,8 +1497,9 @@ c4_player_obj() {
 
 show_closest_c4() {
   possible_c4_models = getEntArray("possible_c4_models", "targetname");
-  foreach(model in possible_c4_models)
+  foreach(model in possible_c4_models) {
   model Hide();
+  }
   current_c4 = getClosest(level.player.origin, possible_c4_models);
   current_c4 Show();
   current_c4 setModel("weapon_c4_obj");
@@ -1494,23 +1532,26 @@ follow_player(radius) {
   while(1) {
     flag_waitopen("_stealth_spotted");
 
-    if(Distance(level.player.origin, self.origin) > radius)
+    if(Distance(level.player.origin, self.origin) > radius) {
       self SetGoalPos(level.player.origin);
+    }
 
     wait .5;
   }
 }
 
 ch_teleport_player(name) {
-  if(!isDefined(name))
+  if(!isDefined(name)) {
     name = level.start_point;
+  }
 
   array = getstructarray("start_point", "targetname");
 
   nodes = [];
   foreach(ent in array) {
-    if(ent.script_noteworthy != name)
+    if(ent.script_noteworthy != name) {
       continue;
+    }
 
     nodes[nodes.size] = ent;
   }
@@ -1621,8 +1662,9 @@ objective_c4_mig() {
   // Plant explosives on the MiG-29 Jet Fighter.
   registerObjective("obj_mig", &"CLIFFHANGER_OBJ_C4_MIG", origin);
 
-  if(!flag("mig_c4_planted"))
+  if(!flag("mig_c4_planted")) {
     setObjectiveState("obj_mig", "current");
+  }
 
   flag_wait("mig_c4_planted");
 
@@ -1639,8 +1681,9 @@ objective_c4_fuel_station() {
   // Plant explosives on the fueling station.
   registerObjective("obj_mig", &"CLIFFHANGER_OBJ_FUEL_STATION", origin);
 
-  if(!flag("mig_c4_planted"))
+  if(!flag("mig_c4_planted")) {
     setObjectiveState("obj_mig", "current");
+  }
 
   flag_wait("mig_c4_planted");
 
@@ -1686,8 +1729,9 @@ objective_satellite() {
 
 objective_exfiltrate() {
   flag_wait("escape_with_soap");
-  if(!isalive(level.price))
+  if(!isalive(level.price)) {
     return;
+  }
   level.price endon("death");
 
   //	level.snowmobile_objective_origin = (-12357.9, -32374.2, 397.2);
@@ -1709,8 +1753,9 @@ objective_exfiltrate() {
 }
 
 objective_snowmobile() {
-  if(!isalive(level.price))
+  if(!isalive(level.price)) {
     return;
+  }
 
   // Obtain a snowmobile.
   registerObjective("obj_snowmobile", &"CLIFFHANGER_OBJ_SNOWMOBILE", level.player_snowmobile.origin + (0, 0, 48));
@@ -1804,8 +1849,9 @@ setObjectiveState(objName, objState) {
     Objective_State(objective.id, objective.State);
   }
 
-  if(objective.state == "done")
+  if(objective.state == "done") {
     flag_set(objName);
+  }
 }
 
 setObjectiveString(objName, objString) {
@@ -1834,19 +1880,23 @@ setObjectiveRemaining(objName, objString, objRemaining) {
 
   objective = level.objectives[objName];
 
-  if(!objRemaining)
+  if(!objRemaining) {
     Objective_String(objective.id, objString);
-  else
+  }
+  else {
     Objective_String(objective.id, objString, objRemaining);
+  }
 }
 
 setObjectiveOnEntity(objName, ent, offset) {
   objID = obj(objName);
   //objective = level.objectives[ objName ];
-  if(isDefined(offset))
+  if(isDefined(offset)) {
     Objective_OnEntity(objID, ent, offset);
-  else
+  }
+  else {
     Objective_OnEntity(objID, ent);
+  }
 }
 
 //objective_stealth()
@@ -1900,14 +1950,16 @@ misc_precache() {
   // Escape with Captain MacTavish.
   level.strings["obj_snowmobile"] = &"CLIFFHANGER_OBJ_EVACUATE";
 
-  foreach(string in level.strings)
+  foreach(string in level.strings) {
   PreCacheString(string);
+  }
 }
 
 model_initializations() {
   c4s = getEntArray("base_c4_models", "targetname");
-  foreach(c4 in c4s)
+  foreach(c4 in c4s) {
   c4 Hide();
+  }
 }
 
 player_init() {
@@ -1961,8 +2013,9 @@ price_bullet_sheild() {
     if(Distance(level.player.origin, self.origin) > 1300) {
       self stop_magic_bullet_shield();
 
-      while(Distance(level.player.origin, self.origin) > 1300)
+      while(Distance(level.player.origin, self.origin) > 1300) {
         wait .1;
+      }
 
       self thread magic_bullet_shield();
     }
@@ -1983,8 +2036,9 @@ ShootEnemyWrapper_price() {
   while(1) {
     self waittill("animscript_shot");
 
-    if(flag("_stealth_spotted"))
+    if(flag("_stealth_spotted")) {
       continue;
+    }
     //	if( IsAlive( self.enemy ) )
     //		self.enemy Kill();
   }
@@ -2125,8 +2179,9 @@ dialog_stealth_failure() // in
 
     play_Sound_over_radio(failure[line]);
     line++;
-    if(line >= failure.size)
+    if(line >= failure.size) {
       line = 0;
+    }
     if(flag("said_lets_split_up")) {
       wait 1;
       play_Sound_over_radio(second_line[RandomInt(second_line.size)]);
@@ -2155,8 +2210,9 @@ dialog_stealth_spotted() {
 
     play_Radio_Interupt(failure[line]);
     line++;
-    if(line >= failure.size)
+    if(line >= failure.size) {
       line = 0;
+    }
 
     wait 1;
     flag_waitopen("_stealth_spotted");
@@ -2203,14 +2259,17 @@ dialog_price_battlechatter() {
 
       enemies = GetAIArray("axis");
       enemies = get_array_of_closest(level.player.origin, enemies, undefined, undefined, 800, undefined);
-      if(enemies.size == 0)
+      if(enemies.size == 0) {
         continue;
+      }
       foreach(enemy in enemies) {
-        if(!(enemy CanSee(level.player)))
+        if(!(enemy CanSee(level.player))) {
           continue;
+        }
 
-        if(enemy doingLongDeath())
+        if(enemy doingLongDeath()) {
           continue;
+        }
 
         start_origin = level.player.origin;
         start_angles = level.player.angles;
@@ -2220,8 +2279,9 @@ dialog_price_battlechatter() {
         forward = anglesToForward(start_angles);
         dot = VectorDot(forward, normal);
 
-        if(dot >= 0.77)
+        if(dot >= 0.77) {
           //in front
+        }
           continue;
 
         current_time = GetTime();
@@ -2270,37 +2330,47 @@ dialog_price_battlechatter() {
 dialog_player_kill() {
   self waittill("death", killer, method);
 
-  if(!isDefined(killer))
+  if(!isDefined(killer)) {
     return;
-  if(IsPlayer(killer))
+  }
+  if(IsPlayer(killer)) {
     flag_set("player_killed_someone");
+  }
 
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
-  if(flag("conversation_active"))
+  }
+  if(flag("conversation_active")) {
     return;
-  if(!stealth_is_everything_normal())
+  }
+  if(!stealth_is_everything_normal()) {
     return;
-  if(flag("price_moving_to_hanger"))
+  }
+  if(flag("price_moving_to_hanger")) {
     return;
+  }
 
   if(IsPlayer(killer)) {
     wait 1;
-    if(!stealth_is_everything_normal())
+    if(!stealth_is_everything_normal()) {
       return;
+    }
     if(!isDefined(level.player_kill_time)) {
       level.player_kill_time = GetTime();
     } else {
-      if(GetTime() < (level.player_kill_time + (15 * 1000)))
+      if(GetTime() < (level.player_kill_time + (15 * 1000))) {
         return;
+      }
     }
     level.player_kill_time = GetTime();
 
     PrintLn("--------- player kill: " + method);
-    if((method != "MOD_RIFLE_BULLET") && (method != "MOD_PISTOL_BULLET"))
+    if((method != "MOD_RIFLE_BULLET") && (method != "MOD_PISTOL_BULLET")) {
       play_Sound_Over_Radio("cliff_pri_melee_plyr");
-    else
+    }
+    else {
       play_Sound_Over_Radio("cliff_pri_killfirm_plyr");
+    }
   }
 }
 
@@ -2326,8 +2396,9 @@ dialog_hes_mine() {
     self waittill_player_lookat_for_time(0.4);
     PrintLn("price target looked at");
 
-    if(flag("_stealth_spotted"))
+    if(flag("_stealth_spotted")) {
       return;
+    }
 
     // price should not shoot at me if I have buddies nearby
     if(self price_should_snipe_me()) {
@@ -2345,13 +2416,15 @@ dialog_hes_mine() {
       }
       else
       {
-      	if( GetTime() < ( level.price_kill_time + ( 3 * 1000 ) ) )
+      	if( GetTime() < ( level.price_kill_time + ( 3 * 1000 ) ) ) {
       		return;
+      	}
       }
       level.price_kill_time = GetTime();
       */
-      if(!isDefined(level.price_snipe_dialog))
+      if(!isDefined(level.price_snipe_dialog)) {
         level.price_snipe_dialog = 0;
+      }
 
       thread dialog_hes_mine_think();
       return;
@@ -2371,14 +2444,16 @@ dialog_hes_mine_think() {
   dialog[dialog.size] = "cliff_pri_illtakehim";
 
   can_speak = play_Sound_Over_Radio(dialog[level.price_snipe_dialog]);
-  if(!can_speak)
+  if(!can_speak) {
     return;
+  }
 
   //wait .5;
 
   level.price_snipe_dialog++;
-  if(level.price_snipe_dialog >= dialog.size)
+  if(level.price_snipe_dialog >= dialog.size) {
     level.price_snipe_dialog = 0;
+  }
 
   if(IsAlive(self)) {
     aim_spot = self getEye();
@@ -2403,11 +2478,13 @@ dialog_price_kill() {
 
   self waittill("death", killer);
 
-  if(!isDefined(killer))
+  if(!isDefined(killer)) {
     return;
+  }
 
-  if(level.price == killer)
+  if(level.price == killer) {
     play_Sound_Over_Radio("UK_pri_inform_killfirm_generic_s");
+  }
 }
 
 //dialog_stealth_advice()//in
@@ -2435,8 +2512,9 @@ dialog_found_a_body() {
     if(!flag("_stealth_spotted")) {
       play_Sound_Over_Radio(dialog[current_line]);
       current_line++;
-      if(current_line >= dialog.size)
+      if(current_line >= dialog.size) {
         current_line = 0;
+      }
     }
 
     flag_waitopen("_stealth_found_corpse");
@@ -2478,8 +2556,9 @@ dialog_theyre_looking_for_you() {
 
   self ent_flag_waitopen("_stealth_normal");
 
-  if(flag("someone_became_alert"))
+  if(flag("someone_became_alert")) {
     return;
+  }
 
   flag_set("someone_became_alert");
 
@@ -2490,8 +2569,9 @@ dialog_theyre_looking_for_you() {
   thread do_wait();
 
   level endon("_stealth_spotted");
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
+  }
 
   wait 2; // was 3
 
@@ -2502,14 +2582,16 @@ dialog_theyre_looking_for_you() {
   }
   else
   {
-  	if( GetTime() < ( level.stay_hidden_dialog + ( 15 * 1000 ) ) )
+  	if( GetTime() < ( level.stay_hidden_dialog + ( 15 * 1000 ) ) ) {
   		return;
+  	}
   }
   level.stay_hidden_dialog = GetTime();
   */
 
-  if(flag("price_moving_to_hanger"))
+  if(flag("price_moving_to_hanger")) {
     return;
+  }
 
   dialog_line = dialog[RandomInt(dialog.size)];
   PrintLn(dialog_line);
@@ -2522,8 +2604,9 @@ wait_till_every_thing_stealth_normal_for(time) {
   while(1) {
     if(stealth_is_everything_normal()) {
       wait time;
-      if(stealth_is_everything_normal())
+      if(stealth_is_everything_normal()) {
         return;
+      }
     }
     wait 1;
   }
@@ -2648,8 +2731,9 @@ dialog_truck_coming() {
 //STAY AWAY FROM BMP		-------------in
 dialog_stay_away_from_bmp() {
   flag_wait("stay_away_from_bmp");
-  if(flag("done_with_stealth_camp"))
+  if(flag("done_with_stealth_camp")) {
     return;
+  }
 
   //Picking up large heat signatures near the tower, could be BMPs. I'd avoid that area.
   play_Sound_Over_Radio("cliff_pri_avoidarea", true);
@@ -2769,11 +2853,13 @@ dialog_jeep_blown_up() {
   level endon("price_moving_to_hanger");
   flag_wait("jeep_blown_up");
 
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
+  }
   wait 1;
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
+  }
   //Gee, I wonder if they will notice a flaming wreck in the middle of the road….	
   play_Sound_Over_Radio("cliff_pri_flamingwreck");
 }
@@ -2782,47 +2868,56 @@ dialog_jeep_stopped() {
   level endon("price_moving_to_hanger");
   self waittill("unloading");
 
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
+  }
 
   //Heads up, the truck just stopped.	
   play_Sound_Over_Radio("cliff_pri_headsup", true);
 
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
+  }
 
   truck_guys = getEntArray("truck_guys", "script_noteworthy");
   alive = 0;
   foreach(guy in truck_guys) {
-    if(isalive(guy))
+    if(isalive(guy)) {
       alive++;
+    }
   }
 
   //Four tangos just got out and are looking around.	
-  if(alive == 4)
+  if(alive == 4) {
     play_Sound_Over_Radio("cliff_pri_lookingaround", true, 5);
+  }
 }
 
 play_Sound_Over_Radio_use_que(soundAlias, timeout) {
-  if(flag("tarmac_escape"))
+  if(flag("tarmac_escape")) {
     return;
+  }
 
   return radio_dialogue(soundAlias, timeout);
 }
 
 play_Sound_Over_Radio(soundAlias, force_transmit_on_turn, timeout) {
-  if(flag("tarmac_escape"))
+  if(flag("tarmac_escape")) {
     return;
+  }
 
-  if(isDefined(force_transmit_on_turn) && force_transmit_on_turn == true)
+  if(isDefined(force_transmit_on_turn) && force_transmit_on_turn == true) {
     return radio_dialogue(soundAlias, timeout);
-  else
+  }
+  else {
     return radio_dialogue_safe(soundAlias);
+  }
 }
 
 play_Radio_Interupt(soundAlias, clear_the_que) {
-  if(flag("tarmac_escape"))
+  if(flag("tarmac_escape")) {
     return;
+  }
 
   radio_dialogue_stop();
   radio_dialogue(soundAlias);
@@ -2867,8 +2962,9 @@ player_dies_if_he_moves() {
   }
   wait(2);
 
-  if(IsGodMode(level.player))
+  if(IsGodMode(level.player)) {
     return;
+  }
 
     level.player Kill();
 }
@@ -2891,11 +2987,13 @@ should_break_activate_heartbeat() {
       break;
     }
   }
-  if(!has_masada)
+  if(!has_masada) {
     return true;
+  }
 
-  if(level.player GetCurrentWeapon() == level.motiontrackergun_on)
+  if(level.player GetCurrentWeapon() == level.motiontrackergun_on) {
     return true;
+  }
 
   return false;
 }
@@ -2908,8 +3006,9 @@ price_move_speed_think(pushdist, sprintdist, stopdist, jogdist, crouchdist) {
   self endon("stop_dynamic_run_speed");
   self endon("start_dynamic_run_speed");
 
-  if(self ent_flag_exist("_stealth_custom_anim"))
+  if(self ent_flag_exist("_stealth_custom_anim")) {
     self ent_flag_waitopen("_stealth_custom_anim");
+  }
 
   if(!isDefined(self.ent_flag["dynamic_run_speed_stopped"])) {
     self ent_flag_init("dynamic_run_speed_stopped");
@@ -2934,8 +3033,9 @@ price_move_speed_think(pushdist, sprintdist, stopdist, jogdist, crouchdist) {
 
     player = level.players[0];
     foreach(value in level.players) {
-      if(DistanceSquared(player.origin, self.origin) > DistanceSquared(value.origin, self.origin))
+      if(DistanceSquared(player.origin, self.origin) > DistanceSquared(value.origin, self.origin)) {
         player = value;
+      }
     }
 
     vec = anglesToForward(self.angles);
@@ -2945,8 +3045,9 @@ price_move_speed_think(pushdist, sprintdist, stopdist, jogdist, crouchdist) {
     //how far is the player
     dist2rd = DistanceSquared(self.origin, player.origin);
 
-    if(isDefined(self.cqbwalking) && self.cqbwalking)
+    if(isDefined(self.cqbwalking) && self.cqbwalking) {
       self.moveplaybackrate = 1;
+    }
 
     //	if( dist2rd < sprintdist2rd || vecdot > - .25 )
     //	{
@@ -2989,17 +3090,20 @@ stop_dynamic_price_speed() {
 }
 
 dynamic_price_run_set(speed) {
-  if(self.run_speed_state == speed)
+  if(self.run_speed_state == speed) {
     return;
+  }
 
   self.run_speed_state = speed;
 
   switch (speed) {
     case "sprint":
-      if(isDefined(self.cqbwalking) && self.cqbwalking)
+      if(isDefined(self.cqbwalking) && self.cqbwalking) {
         self.moveplaybackrate = 1;
-      else
+      }
+      else {
         self.moveplaybackrate = 1.15;
+      }
       self set_generic_run_anim("DRS_sprint");
       self AllowedStances("stand", "crouch", "prone");
 
@@ -3056,12 +3160,15 @@ spawn_cliffjump_clouds() {
 }
 
 hide_extra_migs() {
-  if(level.start_point == "snowmobile")
+  if(level.start_point == "snowmobile") {
     return;
-  if(level.start_point == "icepick")
+  }
+  if(level.start_point == "icepick") {
     return;
-  if(level.start_point == "avalanche")
+  }
+  if(level.start_point == "avalanche") {
     return;
+  }
 
     extra_tarmac_migs = getEntArray("extra_tarmac_migs", "script_noteworthy");
   extra_tarmac_mig_delayed = getEntArray("extra_tarmac_mig_delayed", "script_noteworthy");
@@ -3082,18 +3189,21 @@ hide_extra_migs() {
   }
 
   foreach(mig in extra_tarmac_migs) {
-    if(mig.code_classname == "script_model")
+    if(mig.code_classname == "script_model") {
       mig thread destructible_force_explosion();
+    }
   }
 
   // this mig has some guys by it, it blows up when they die	
   flag_wait("jet_defenders_die");
 
   foreach(mig in extra_tarmac_mig_delayed) {
-    if(!isDefined(mig))
+    if(!isDefined(mig)) {
       continue;
-    if(mig.code_classname == "script_model")
+    }
+    if(mig.code_classname == "script_model") {
       mig thread destructible_force_explosion();
+    }
   }
 
   set_off_destructible_with_noteworthy("destructible_oilrig_1");
@@ -3106,11 +3216,13 @@ hide_extra_migs() {
 set_off_destructible_with_noteworthy(noteworthy) {
   destructibles = getEntArray(noteworthy, "script_noteworthy");
   foreach(ent in destructibles) {
-    if(!isDefined(ent))
+    if(!isDefined(ent)) {
       continue;
+    }
 
-    if(ent.code_classname != "script_model")
+    if(ent.code_classname != "script_model") {
       continue;
+    }
 
     ent destructible_force_explosion();
     wait(RandomFloatRange(0.15, 0.25));
@@ -3190,25 +3302,30 @@ new_captain_price_spawns() {
 }
 
 kill_snowmobiles_that_touch_me(damage, attacker, direction_vec, point, type, modelName, tagName) {
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return;
+  }
   classname = attacker.classname;
-  if(!isDefined(classname))
+  if(!isDefined(classname)) {
     return;
-  if(classname != "script_vehicle_snowmobile")
+  }
+  if(classname != "script_vehicle_snowmobile") {
     return;
+  }
 
   foreach(rider in attacker.riders) {
-    if(!isalive(rider))
+    if(!isalive(rider)) {
       continue;
+    }
     rider DoDamage(1000, self.origin, self);
   }
 }
 
 wind_blown_flag_think() {
   animname = "flag_square";
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     animname = self.script_noteworthy;
+  }
   waving_flag = spawn_anim_model(animname);
   waving_flag.origin = self.origin;
   waving_flag.angles = self.angles;
@@ -3225,8 +3342,9 @@ flag_waves() {
   self SetAnim(animation, 1, 0, 1);
   //Print3d( self.origin, "x", (1,1,1), 1, 1, 50000 );
   for(;;) {
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return;
+    }
     flap_rate = RandomFloatRange(0.8, 1.2);
     self SetAnim(animation, 1, 0, flap_rate);
     wait(RandomFloatRange(0.3, 0.7));
@@ -3239,11 +3357,13 @@ base_sound_remove() {
     ent = level.createFXent[i];
 
     if(isDefined(ent.v["soundalias"])) {
-      if(ent.v["soundalias"] == "velocity_whitenoise_loop")
+      if(ent.v["soundalias"] == "velocity_whitenoise_loop") {
         continue;
+      }
     }
-    if(isDefined(ent.looper))
+    if(isDefined(ent.looper)) {
       ent.looper Delete();
+    }
   }
 
   models = getEntArray("script_model", "code_classname");
@@ -3368,10 +3488,12 @@ random_yelling(enemies) {
   while(!flag("start_big_explosion")) {
     current_time = GetTime();
     w = 1;
-    if(current_time > onethird_time)
+    if(current_time > onethird_time) {
       w = .5;
-    if(current_time > twothird_time)
+    }
+    if(current_time > twothird_time) {
       w = 0;
+    }
     wait(RandomFloatRange(1, 3));
     wait(w);
 
@@ -3383,15 +3505,17 @@ random_yelling(enemies) {
       wait(0.5);
     }
     yell_index++;
-    if(yell_index >= yell.size)
+    if(yell_index >= yell.size) {
       yell_index = 0;
+    }
   }
 }
 
 kill_all_enemies() {
   enemies = GetAIArray("axis");
-  foreach(mf in enemies)
+  foreach(mf in enemies) {
   mf Delete();
+  }
 }
 
 brawl_interupted(price, guy) {
@@ -3428,8 +3552,9 @@ cliffhanger_locker_brawl() {
   level.price.cutoff_brawl = true;
 
   guy = locker_brawl_spawner spawn_ai();
-  if(spawn_failed(guy))
+  if(spawn_failed(guy)) {
     return;
+  }
 
   guy set_battlechatter(false);
 
@@ -3494,14 +3619,16 @@ price_puts_his_hands_up() {
 }
 
 price_goes_to_satellite() {
-  if(flag("keyboard_used"))
+  if(flag("keyboard_used")) {
     return;
+  }
 
   level endon("keyboard_used");
 
   satelite_sequence_node = GetEnt("satelite_sequence", "targetname");
-  if(isDefined(level.price.cutoff_brawl))
+  if(isDefined(level.price.cutoff_brawl)) {
     satelite_sequence_node anim_reach_solo(level.price, "enter");
+  }
 
   //delayThread( 2, ::autosave_by_name, "price_to_satellite" );
 
@@ -3576,8 +3703,9 @@ dialog_setup_heartbeat() {
   // with no parameter, stays on forever
   level.player thread display_hint_timeout("hint_heartbeat_sensor"); // it will endon this thread if not threaded
 
-  if(level.console)
+  if(level.console) {
     thread explain_dpad_hint();
+  }
 
   level endon("first_two_guys_in_sight");
 
@@ -3618,8 +3746,9 @@ explain_dpad_hint() {
   level.iconElem3.color = (1, 1, 0);
   level.iconElem3.alpha = .7;
 
-  while(!(level.player should_break_activate_heartbeat()))
+  while(!(level.player should_break_activate_heartbeat())) {
     wait .5;
+  }
   //while( level.player GetCurrentWeapon() != level.motiontrackergun_on )
   //	wait .5;
 
@@ -3694,10 +3823,12 @@ dialog_first_encounter() {
   if(IsAlive(targetguy)) {
     targetguy thread price_stealth_kills_guy(targetguy2);
   } else {
-    if(IsAlive(targetguy2))
+    if(IsAlive(targetguy2)) {
       targetguy2 thread price_stealth_kills_guy(targetguy);
-    else
+    }
+    else {
       thread price_goes_in_two();
+    }
   }
 }
 
@@ -3753,17 +3884,20 @@ player_interupt_first_encounter() {
   wait_for_player_interupt("airfield_in_sight");
   wait .5;
 
-  if(!flag("first_encounter_dialog_finished"))
+  if(!flag("first_encounter_dialog_finished")) {
     level.price StopSounds();
+  }
 
   flag_set("interupt_first_encounter");
 
   targetguy = get_living_ai("patrollers_1_rightguy", "script_noteworthy");
   targetguy2 = get_living_ai("patrollers_1_leftguy", "script_noteworthy");
-  if(IsAlive(targetguy))
+  if(IsAlive(targetguy)) {
     targetguy.dontattackme = undefined;
-  if(IsAlive(targetguy2))
+  }
+  if(IsAlive(targetguy2)) {
     targetguy2.dontattackme = undefined;
+  }
 
   level.price disable_ai_color();
   level.price.fixednode = false;
@@ -3796,8 +3930,9 @@ dialog_first_encounter_success() {
 dialog_first_encounter_failure() {
   failure = false;
   flag_wait("clifftop_patrol1_dead");
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     failure = true;
+  }
   wait .5;
 
   //cliff_pri_dontalertthem
@@ -3822,11 +3957,13 @@ dialog_second_encounter() {
   flag_clear("player_killed_one_first_two_encounters");
   flag_set("second_encounter_dialog_starting");
 
-  if(flag("said_nicely_done"))
+  if(flag("said_nicely_done")) {
     //Same plan.
+  }
     level.price dialogue_queue("cliff_pri_sameplan");
-  else
+  else {
     //You take the one on the left.
+  }
     level.price dialogue_queue("cliff_pri_youtakeleft");
 
   // – “On three.”
@@ -3849,8 +3986,9 @@ dialog_second_encounter() {
 
   targetguy = get_living_ai("patrollers_2_rightguy", "script_noteworthy");
   targetguy2 = get_living_ai("patrollers_2_leftguy", "script_noteworthy");
-  if(IsAlive(targetguy))
+  if(IsAlive(targetguy)) {
     targetguy thread price_stealth_kills_guy(targetguy2);
+  }
 }
 
 player_interupt_second_encounter() {
@@ -3859,17 +3997,20 @@ player_interupt_second_encounter() {
   wait_for_player_interupt("player_passing_second_encounter");
   wait .5;
 
-  if(!flag("second_encounter_dialog_finished"))
+  if(!flag("second_encounter_dialog_finished")) {
     level.price StopSounds();
+  }
 
   flag_set("interupt_second_encounter");
 
   targetguy = get_living_ai("patrollers_2_rightguy", "script_noteworthy");
   targetguy2 = get_living_ai("patrollers_2_leftguy", "script_noteworthy");
-  if(IsAlive(targetguy))
+  if(IsAlive(targetguy)) {
     targetguy.dontattackme = undefined;
-  if(IsAlive(targetguy2))
+  }
+  if(IsAlive(targetguy2)) {
     targetguy2.dontattackme = undefined;
+  }
 
   level.price disable_ai_color();
   level.price.fixednode = false;
@@ -3967,8 +4108,9 @@ dialog_go_do_the_work() {
   flag_wait("said_storm_brewing");
 
   //flag_set( "conversation_active" );
-  if(flag("someone_became_alert") || flag("_stealth_spotted"))
+  if(flag("someone_became_alert") || flag("_stealth_spotted")) {
     return;
+  }
 
   level endon("someone_became_alert");
 
@@ -3998,8 +4140,9 @@ dialog_your_in() {
   flag_wait("give_c4_obj");
 
   //flag_waitopen( "_stealth_spotted" );
-  if(flag("someone_became_alert") || flag("_stealth_spotted"))
+  if(flag("someone_became_alert") || flag("_stealth_spotted")) {
     return;
+  }
 
   //All right, I've tapped into their comms.	
   thread play_Sound_Over_Radio_use_que("cliff_pri_tappedcomms");
@@ -4101,8 +4244,9 @@ turn_off_blizzard() {
 setup_stealth_enemy_cleanup() {
   self.pathrandompercent = 200;
   self thread disable_cqbwalk();
-  if(isDefined(self.script_stealthgroup))
+  if(isDefined(self.script_stealthgroup)) {
     self thread maps\_stealth_shared_utilities::enemy_announce_spotted(self.origin);
+  }
 
   self.goalradius = 400;
   self.favoriteenemy = level.player;
@@ -4199,8 +4343,9 @@ detect_player_shot() {
 }
 
 price_starts_shooting() {
-  if(!isalive(level.price))
+  if(!isalive(level.price)) {
     return;
+  }
   level.price endon("death");
 
   level.price.dontEverShoot = true;
@@ -4209,8 +4354,9 @@ price_starts_shooting() {
 
   level.price.dontEverShoot = undefined;
   level.price disable_cqbwalk();
-  if(level.price ent_flag_exist("_stealth_enabled"))
+  if(level.price ent_flag_exist("_stealth_enabled")) {
     level.price ent_flag_clear("_stealth_enabled");
+  }
 
   //price_targets
   old_acc = level.price.baseaccuracy;
@@ -4223,8 +4369,9 @@ price_starts_shooting() {
   while( !flag( "capture_enemies_dead" ) )
   {
   	new_target = get_closest_living( level.price.origin, level.price_targets );
-  	if( !isalive( new_target ) )
+  	if( !isalive( new_target ) ) {
   		break;
+  	}
   	new_target.ignoreme = false;
   	new_target waittill ( "death" );
   }
@@ -4279,8 +4426,9 @@ price_talks_about_compromised() {
 }
 
 price_tells_you_plan_b() {
-  if(!isalive(level.price))
+  if(!isalive(level.price)) {
     return;
+  }
   level.price endon("death");
   flag_wait("player_can_see_capture");
   SetDvar("player_has_witnessed_capture", 1);
@@ -4303,8 +4451,9 @@ price_tells_you_plan_b() {
 }
 
 petrov_optional_encouragement_lines() {
-  if(flag("player_can_see_capture"))
+  if(flag("player_can_see_capture")) {
     return;
+  }
 
   level endon("player_can_see_capture");
 
@@ -4358,8 +4507,9 @@ soap_opens_hanger_door() {
   door hunted_style_door_open();
 
   for(i = 0; i < attachments.size; i++) {
-    if(attachments[i].classname == "script_brushmodel")
+    if(attachments[i].classname == "script_brushmodel") {
       attachments[i] ConnectPaths();
+    }
   }
   level.price disable_cqbwalk();
 }
@@ -4510,8 +4660,9 @@ dont_shoot_till_explosion() {
 }
 
 player_slow_mo(parameter1, parameter2) {
-  if(!isalive(level.price))
+  if(!isalive(level.price)) {
     return;
+  }
   level.price endon("death");
   flag_wait("start_big_explosion");
 
@@ -4637,8 +4788,9 @@ waittill_reload() {
   	if( ( level.player GetWeaponAmmoClip( level.gunPrimary ) ) < level.gunPrimaryClipAmmo )
   	{
   		thread keyHint( "reload" );
-  		while( ( level.player GetWeaponAmmoClip( level.gunPrimary ) ) < level.gunPrimaryClipAmmo )
+  		while( ( level.player GetWeaponAmmoClip( level.gunPrimary ) ) < level.gunPrimaryClipAmmo ) {
   			wait .1;
+  		}
   		clear_hints();
   		wait 1;
   	}
@@ -4658,8 +4810,9 @@ no_grenades() {
 }
 
 connect_and_delete() {
-  if(self.code_classname == "script_brushmodel")
+  if(self.code_classname == "script_brushmodel") {
     self ConnectPaths();
+  }
   self Delete();
 }
 
@@ -4707,14 +4860,17 @@ stealth_achievement() {
 
 save_game_if_safe(saveID) {
   wait 3;
-  if(!isalive(level.price))
+  if(!isalive(level.price)) {
     return;
+  }
 
-  if(!level.price.damageshield)
+  if(!level.price.damageshield) {
     return;
+  }
 
-  if(!maps\_autosave::autosavecheck())
+  if(!maps\_autosave::autosavecheck()) {
     return;
+  }
 
   CommitSave(saveID);
 }

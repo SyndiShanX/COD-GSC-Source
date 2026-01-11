@@ -429,4 +429,3 @@ private lc_debug_arc(origin, distance) {
     waitframe(1);
   }
 }
-

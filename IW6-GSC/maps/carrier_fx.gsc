@@ -219,8 +219,9 @@ cleanup_missile_fx(var_0) {
 ship_shoot_vert_missile_loop(var_0, var_1, var_2, var_3, var_4, var_5) {
   level endon(var_2);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     level endon(var_5);
+  }
 
   var_6 = common_scripts\utility::getstruct(var_0, "targetname");
 
@@ -245,17 +246,20 @@ ship_shoot_vert_missile(var_0, var_1, var_2, var_3) {
   var_7 = randomintrange(15000, 18000);
   var_8 = randomintrange(13, 15);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_7 = var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_8 = var_3;
+  }
 
   if(var_5.size == 0) {
     return;
   }
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4 thread cleanup_vert_missile_fx(var_1);
+  }
 
   playFXOnTag(common_scripts\utility::getfx("vfx_destroyer_vert_missile_trail"), var_4, "tag_origin");
   var_4 maps\carrier_code::move_arc(var_4.origin, var_6.origin, var_7, var_8, (180, 0, 0));
@@ -273,8 +277,9 @@ cleanup_vert_missile_fx(var_0) {
   level waittill(var_0);
   stopFXOnTag(common_scripts\utility::getfx("vfx_destroyer_vert_missile_trail"), self, "tag_origin");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     maps\_utility::deleteent(self);
+  }
 }
 
 land_aa() {
@@ -287,8 +292,9 @@ enemy_land_missile() {
   level.land_vert_missile_wait_min = 30;
   level.land_vert_missile_wait_max = 50;
 
-  if(!isDefined(level.land_missiles))
+  if(!isDefined(level.land_missiles)) {
     level.land_missiles = [];
+  }
 
   maps\_utility::delaythread(0, ::land_shoot_vert_missile_loop, "fx_shore_missile_vert_01", "fx_shore_missile_vert_01_dest", "defend_sparrow_platform", 11000);
   maps\_utility::delaythread(0, ::land_shoot_vert_missile_loop, "fx_shore_missile_vert_02", "fx_shore_missile_vert_02_dest", "defend_sparrow_platform", 11000);
@@ -298,14 +304,16 @@ enemy_land_missile() {
 land_shoot_vert_missile_loop(var_0, var_1, var_2, var_3, var_4, var_5) {
   level endon(var_2);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     level endon(var_5);
+  }
 
   var_6 = common_scripts\utility::getstruct(var_0, "targetname");
 
   for(;;) {
-    if(isDefined(level.player.using_depth_charge) && level.player.using_depth_charge)
+    if(isDefined(level.player.using_depth_charge) && level.player.using_depth_charge) {
       level.player waittill("depth_charge_exit");
+    }
 
     if(randomint(100) > 75) {
       var_6 thread land_shoot_vert_missile(var_1, var_2, var_3, var_4);
@@ -328,17 +336,20 @@ land_shoot_vert_missile(var_0, var_1, var_2, var_3) {
   var_7 = randomintrange(15000, 18000);
   var_8 = randomintrange(13, 15);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_7 = var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_8 = var_3;
+  }
 
   if(var_5.size == 0) {
     return;
   }
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_4 thread cleanup_land_vert_missile_fx(var_1);
+  }
 
   playFXOnTag(common_scripts\utility::getfx("vfx_destroyer_vert_missile_trail"), var_4, "tag_origin");
   var_4 maps\carrier_code::move_arc(var_4.origin, var_6.origin, var_7, var_8, (180, 0, 0));
@@ -358,8 +369,9 @@ cleanup_land_vert_missile_fx(var_0) {
   level.land_missiles = common_scripts\utility::array_remove(level.land_missiles, self);
   stopFXOnTag(common_scripts\utility::getfx("vfx_destroyer_vert_missile_trail"), self, "tag_origin");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     maps\_utility::deleteent(self);
+  }
 }
 
 defend_zodiac_fx() {
@@ -391,8 +403,9 @@ dz_osprey_missiles() {}
 dz_osprey_fed_destroyer() {
   level.player waittill("using_depth_charge");
 
-  foreach(var_1 in level.fed_destroyer_fx_guns)
+  foreach(var_1 in level.fed_destroyer_fx_guns) {
   var_1 thread fed_destroyer_gun();
+  }
 }
 
 fed_destroyer_gun() {
@@ -429,11 +442,13 @@ playfx_targetname_endon(var_0, var_1, var_2, var_3) {
   foreach(var_6 in var_4) {
     var_7 = var_6.angles;
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_7 = var_3;
+    }
 
-    if(!isDefined(var_7))
+    if(!isDefined(var_7)) {
       var_7 = (0, 0, 0);
+    }
 
     thread playfx_endon(common_scripts\utility::getfx(var_1), var_6.origin, var_7, var_2);
   }
@@ -607,8 +622,9 @@ handle_zodiac_splash() {
 handle_zodiac_propeller_end() {
   common_scripts\utility::waittill_any("death", "reached_dynamic_path_end");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     stopFXOnTag(level._effect["vfx_zodiac_propeller_fast"], self, "TAG_FX_LF");
+  }
 }
 
 handle_sliding_osprey_fx(var_0) {

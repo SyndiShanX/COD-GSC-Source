@@ -47,8 +47,9 @@ assassinateHudElem(hudelm, note) {
 }
 
 destroyHudElem(hudElem) {
-  if(isDefined(hudElem))
+  if(isDefined(hudElem)) {
     hudElem destroy();
+  }
 }
 
 sort_by_score(array) {
@@ -146,8 +147,9 @@ get_number_of_valid_players() {
   players = get_players();
   num_player_valid = 0;
   for(i = 0; i < players.size; i++) {
-    if(is_player_valid(players[i]))
+    if(is_player_valid(players[i])) {
       num_player_valid += 1;
+    }
   }
   return num_player_valid;
 }
@@ -266,8 +268,9 @@ ammo() {
   while(1) {
     wait .5;
     weaponsList = self GetWeaponsListPrimaries();
-    for(idx = 0; idx < weaponsList.size; idx++)
+    for(idx = 0; idx < weaponsList.size; idx++) {
       self SetWeaponAmmoClip(weaponsList[idx], 100);
+    }
   }
 }
 
@@ -297,17 +300,20 @@ is_tesla_damage(mod) {
 
 string_to_float(string) {
   floatParts = strTok(string, ".");
-  if(floatParts.size == 1)
+  if(floatParts.size == 1) {
     return int(floatParts[0]);
+  }
   whole = int(floatParts[0]);
   decimal = 0;
   for(i = floatParts[1].size - 1; i >= 0; i--) {
     decimal = decimal / 10 + int(floatParts[1][i]) / 10;
   }
-  if(whole >= 0)
+  if(whole >= 0) {
     return (whole + decimal);
-  else
+  }
+  else {
     return (whole - decimal);
+  }
 }
 
 set_zombie_var(var, value, is_float, column) {
@@ -410,10 +416,12 @@ fade_in(hold_black_time) {
     wait .05;
   }
   level.introblack.alpha = 1;
-  if(isDefined(hold_black_time))
+  if(isDefined(hold_black_time)) {
     wait hold_black_time;
-  else
+  }
+  else {
     wait .2;
+  }
   level.introblack FadeOverTime(1.5);
   level.introblack.alpha = 0;
   wait 1.5;

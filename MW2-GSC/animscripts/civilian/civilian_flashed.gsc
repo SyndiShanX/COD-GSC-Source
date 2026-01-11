@@ -14,8 +14,9 @@ get_flashed_anim() {
 
 main() {
   flashDuration = self flashBangGetTimeLeftSec();
-  if(flashDuration <= 0)
+  if(flashDuration <= 0) {
     return;
+  }
 
   animscripts\flashed::flashBangedLoop(get_flashed_anim(), flashDuration);
 }

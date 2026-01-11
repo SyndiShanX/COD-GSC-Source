@@ -38,13 +38,15 @@ addDeathIcon(entity, dyingplayer, team, timeout) {
 
   assert(team == "allies" || team == "axis" || IsSubStr(team, "team_"));
 
-  if(getDvar("ui_hud_showdeathicons") == "0")
+  if(getDvar("ui_hud_showdeathicons") == "0") {
     return;
+  }
   if(level.hardcoreMode) {
     return;
   }
-  if(isDefined(self.lastDeathIcon))
+  if(isDefined(self.lastDeathIcon)) {
     self.lastDeathIcon destroy();
+  }
 
   newdeathicon = newTeamHudElem(team);
   newdeathicon.x = iconOrg[0];
@@ -53,10 +55,12 @@ addDeathIcon(entity, dyingplayer, team, timeout) {
   newdeathicon.alpha = .61;
   newdeathicon.archived = false;
   newdeathicon.showinkillcam = false;
-  if(level.splitscreen)
+  if(level.splitscreen) {
     newdeathicon setShader("headicon_dead", 14, 14);
-  else
+  }
+  else {
     newdeathicon setShader("headicon_dead", 7, 7);
+  }
   newdeathicon setwaypoint(false);
 
   self.lastDeathIcon = newdeathicon;

@@ -822,4 +822,3 @@ private function_8391ad40() {
   level flag::wait_till(#"hash_17425b597c04b9c3");
   self flag::set(#"hash_17425b597c04b9c3");
 }
-

@@ -7,8 +7,9 @@
 movewalk() {
   var_0 = undefined;
 
-  if(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > 4096)
+  if(isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > 4096) {
     var_0 = "stand";
+  }
 
   var_1 = [[self.chooseposefunc]](var_0);
 
@@ -48,10 +49,12 @@ dowalkanimoverride(var_0) {
   self setanimknoball( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
 
   if(isarray(self.walk_overrideanim)) {
-    if(isDefined(self.walk_override_weights))
+    if(isDefined(self.walk_override_weights)) {
       var_1 = common_scripts\utility::choose_from_weighted_array(self.walk_overrideanim, self.walk_override_weights);
-    else
+    }
+    else {
       var_1 = self.walk_overrideanim[randomint(self.walk_overrideanim.size)];
+    }
   } else
     var_1 = self.walk_overrideanim;
 
@@ -73,15 +76,18 @@ getwalkanim(var_0) {
     if(isDefined(self.isunstableground) && self.isunstableground) {
       var_4 = animscripts\traverse\shared::getnextfootdown();
 
-      if(var_4 == "Left")
+      if(var_4 == "Left") {
         var_3 = animscripts\utility::getmoveanim("straight_twitch_l");
-      else if(var_4 == "Right")
+      }
+      else if(var_4 == "Right") {
         var_3 = animscripts\utility::getmoveanim("straight_twitch_r");
+      }
     }
 
     if(!isDefined(self.a.runloopcount)) {
-      if(isarray(var_2))
+      if(isarray(var_2)) {
         var_2 = var_2[randomint(var_2.size)];
+      }
 
       return var_2;
     }
@@ -89,13 +95,15 @@ getwalkanim(var_0) {
     if(isDefined(var_3) && var_3.size > 0) {
       var_5 = animscripts\utility::getrandomintfromseed(self.a.runloopcount, 4);
 
-      if(var_5 == 0)
+      if(var_5 == 0) {
         return animscripts\utility::gettwitchanim(var_3);
+      }
     }
   }
 
-  if(isarray(var_2))
+  if(isarray(var_2)) {
     var_2 = var_2[randomint(var_2.size)];
+  }
 
   return var_2;
 }
@@ -104,17 +112,20 @@ dowalkanim(var_0) {
   self endon("movemode");
   var_1 = self.moveplaybackrate;
 
-  if(animscripts\stairs_utility::isonstairs())
+  if(animscripts\stairs_utility::isonstairs()) {
     var_1 = var_1 * 0.9;
+  }
 
   if(self.a.pose == "stand") {
     if(isDefined(self.enemy)) {
       animscripts\cqb::cqbtracking();
 
-      if(animscripts\stairs_utility::isonstairs())
+      if(animscripts\stairs_utility::isonstairs()) {
         var_2 = % body;
-      else
+      }
+      else {
         var_2 = % walk_and_run_loops;
+      }
 
       self setflaggedanimknoball("walkanim", animscripts\cqb::determinecqbanim(), var_2, 1, 1, var_1, 1);
     } else

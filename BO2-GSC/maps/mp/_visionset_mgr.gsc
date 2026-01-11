@@ -32,8 +32,9 @@ vsmgr_register_info(type, name, version, priority, lerp_step_count, activate_per
   level.vsmgr[type].info[lower_name] = spawnStruct();
   level.vsmgr[type].info[lower_name] add_info(type, lower_name, version, priority, lerp_step_count, activate_per_player, lerp_thread, ref_count_lerp_thread);
 
-  if(level.vsmgr[type].highest_version < version)
+  if(level.vsmgr[type].highest_version < version) {
     level.vsmgr[type].highest_version = version;
+  }
 }
 
 vsmgr_activate(type, name, player, opt_param_1, opt_param_2) {
@@ -47,17 +48,20 @@ vsmgr_activate(type, name, player, opt_param_1, opt_param_2) {
   if(state.ref_count_lerp_thread) {
     state.ref_count++;
 
-    if(1 < state.ref_count)
+    if(1 < state.ref_count) {
       return;
+    }
   }
 
-  if(isDefined(state.lerp_thread))
+  if(isDefined(state.lerp_thread)) {
     state thread lerp_thread_wrapper(state.lerp_thread, opt_param_1, opt_param_2);
+  }
   else {
     players = getplayers();
 
-    for(player_index = 0; player_index < players.size; player_index++)
+    for(player_index = 0; player_index < players.size; player_index++) {
       state vsmgr_set_state_active(players[player_index], 1);
+    }
   }
 }
 
@@ -72,15 +76,17 @@ vsmgr_deactivate(type, name, player) {
   if(state.ref_count_lerp_thread) {
     state.ref_count--;
 
-    if(0 < state.ref_count)
+    if(0 < state.ref_count) {
       return;
+    }
   }
 
   state notify("deactivate");
   players = getplayers();
 
-  for(player_index = 0; player_index < players.size; player_index++)
+  for(player_index = 0; player_index < players.size; player_index++) {
     state vsmgr_set_state_inactive(players[player_index]);
+  }
 }
 
 vsmgr_set_state_active(player, lerp) {
@@ -106,8 +112,9 @@ vsmgr_set_state_inactive(player) {
 vsmgr_timeout_lerp_thread(timeout, opt_param_2) {
   players = getplayers();
 
-  for(player_index = 0; player_index < players.size; player_index++)
+  for(player_index = 0; player_index < players.size; player_index++) {
     self vsmgr_set_state_active(players[player_index], 1);
+  }
 
   wait(timeout);
   vsmgr_deactivate(self.type, self.name);
@@ -123,8 +130,9 @@ vsmgr_duration_lerp_thread(duration, max_duration) {
   start_time = gettime();
   end_time = start_time + int(duration * 1000);
 
-  if(isDefined(max_duration))
+  if(isDefined(max_duration)) {
     start_time = end_time - int(max_duration * 1000);
+  }
 
   while(true) {
     lerp = calc_remaining_duration_lerp(start_time, end_time);
@@ -135,8 +143,9 @@ vsmgr_duration_lerp_thread(duration, max_duration) {
 
     players = getplayers();
 
-    for(player_index = 0; player_index < players.size; player_index++)
+    for(player_index = 0; player_index < players.size; player_index++) {
       self vsmgr_set_state_active(players[player_index], lerp);
+    }
 
     wait 0.05;
   }
@@ -148,8 +157,9 @@ vsmgr_duration_lerp_thread_per_player(player, duration, max_duration) {
   start_time = gettime();
   end_time = start_time + int(duration * 1000);
 
-  if(isDefined(max_duration))
+  if(isDefined(max_duration)) {
     start_time = end_time - int(max_duration * 1000);
+  }
 
   while(true) {
     lerp = calc_remaining_duration_lerp(start_time, end_time);
@@ -181,8 +191,9 @@ register_type(type) {
 finalize_clientfields() {
   typekeys = getarraykeys(level.vsmgr);
 
-  for(type_index = 0; type_index < typekeys.size; type_index++)
+  for(type_index = 0; type_index < typekeys.size; type_index++) {
     level.vsmgr[typekeys[type_index]] thread finalize_type_clientfields();
+  }
 
   level.vsmgr_initializing = 0;
 }
@@ -198,14 +209,16 @@ finalize_type_clientfields() {
   for(i = 0; i < self.sorted_name_keys.size; i++) {
     self.info[self.sorted_name_keys[i]].slot_index = i;
 
-    if(self.info[self.sorted_name_keys[i]].lerp_bit_count > self.cf_lerp_bit_count)
+    if(self.info[self.sorted_name_keys[i]].lerp_bit_count > self.cf_lerp_bit_count) {
       self.cf_lerp_bit_count = self.info[self.sorted_name_keys[i]].lerp_bit_count;
+    }
   }
 
   registerclientfield("toplayer", self.cf_slot_name, self.highest_version, self.cf_slot_bit_count, "int");
 
-  if(1 < self.cf_lerp_bit_count)
+  if(1 < self.cf_lerp_bit_count) {
     registerclientfield("toplayer", self.cf_lerp_name, self.highest_version, self.cf_lerp_bit_count, "float");
+  }
 }
 
 validate_info(type, name, priority) {
@@ -254,8 +267,9 @@ add_info(type, name, version, priority, lerp_step_count, activate_per_player, le
   self.lerp_step_count = lerp_step_count;
   self.lerp_bit_count = getminbitcountfornum(lerp_step_count);
 
-  if(!isDefined(ref_count_lerp_thread))
+  if(!isDefined(ref_count_lerp_thread)) {
     ref_count_lerp_thread = 0;
+  }
 
   self.state = spawnStruct();
   self.state.type = type;
@@ -265,8 +279,9 @@ add_info(type, name, version, priority, lerp_step_count, activate_per_player, le
   self.state.ref_count_lerp_thread = ref_count_lerp_thread;
   self.state.players = [];
 
-  if(ref_count_lerp_thread && !activate_per_player)
+  if(ref_count_lerp_thread && !activate_per_player) {
     self.state.ref_count = 0;
+  }
 }
 
 onplayerconnect() {
@@ -292,8 +307,9 @@ on_player_connect() {
       level.vsmgr[type].info[name_key].state.players[self._player_entnum].active = 0;
       level.vsmgr[type].info[name_key].state.players[self._player_entnum].lerp = 0;
 
-      if(level.vsmgr[type].info[name_key].state.ref_count_lerp_thread && level.vsmgr[type].info[name_key].state.activate_per_player)
+      if(level.vsmgr[type].info[name_key].state.ref_count_lerp_thread && level.vsmgr[type].info[name_key].state.activate_per_player) {
         level.vsmgr[type].info[name_key].state.players[self._player_entnum].ref_count = 0;
+      }
     }
 
     level.vsmgr[type].info[level.vsmgr_default_info_name].state vsmgr_set_state_active(self, 1);
@@ -301,8 +317,9 @@ on_player_connect() {
 }
 
 monitor() {
-  while(level.vsmgr_initializing)
+  while(level.vsmgr_initializing) {
     wait 0.05;
+  }
 
   typekeys = getarraykeys(level.vsmgr);
 
@@ -333,8 +350,9 @@ get_first_active_name(type_struct) {
   for(prio_index = 0; prio_index < size; prio_index++) {
     prio_key = type_struct.sorted_prio_keys[prio_index];
 
-    if(type_struct.info[prio_key].state.players[self._player_entnum].active)
+    if(type_struct.info[prio_key].state.players[self._player_entnum].active) {
       return prio_key;
+    }
   }
 
   return level.vsmgr_default_info_name;
@@ -344,8 +362,9 @@ update_clientfields(player, type_struct) {
   name = player get_first_active_name(type_struct);
   player setclientfieldtoplayer(type_struct.cf_slot_name, type_struct.info[name].slot_index);
 
-  if(1 < type_struct.cf_lerp_bit_count)
+  if(1 < type_struct.cf_lerp_bit_count) {
     player setclientfieldtoplayer(type_struct.cf_lerp_name, type_struct.info[name].state.players[player._player_entnum].lerp);
+  }
 }
 
 lerp_thread_wrapper(func, opt_param_1, opt_param_2) {
@@ -371,14 +390,17 @@ activate_per_player(type, name, player, opt_param_1, opt_param_2) {
   if(state.ref_count_lerp_thread) {
     state.players[player_entnum].ref_count++;
 
-    if(1 < state.players[player_entnum].ref_count)
+    if(1 < state.players[player_entnum].ref_count) {
       return;
+    }
   }
 
-  if(isDefined(state.lerp_thread))
+  if(isDefined(state.lerp_thread)) {
     state thread lerp_thread_per_player_wrapper(state.lerp_thread, player, opt_param_1, opt_param_2);
-  else
+  }
+  else {
     state vsmgr_set_state_active(player, 1);
+  }
 }
 
 deactivate_per_player(type, name, player) {
@@ -388,8 +410,9 @@ deactivate_per_player(type, name, player) {
   if(state.ref_count_lerp_thread) {
     state.players[player_entnum].ref_count--;
 
-    if(0 < state.players[player_entnum].ref_count)
+    if(0 < state.players[player_entnum].ref_count) {
       return;
+    }
   }
 
   state vsmgr_set_state_inactive(player);

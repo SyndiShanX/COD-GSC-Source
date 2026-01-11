@@ -157,8 +157,9 @@ shouldAffectWeaponObject(object) {
   dirToPos = pos - object.origin;
   objectForward = anglesToForward(object.angles);
   dist = vectorDot(dirToPos, objectForward);
-  if(dist < level.claymore_detectionMinDist)
+  if(dist < level.claymore_detectionMinDist) {
     return false;
+  }
   dirToPos = vectornormalize(dirToPos);
   dot = vectorDot(dirToPos, objectForward);
   return (dot > level.claymore_detectionDot);
@@ -178,26 +179,33 @@ claymore_detonation() {
   damagearea enablelinkto();
   damagearea linkto(self);
   self thread delete_claymores_on_death(damagearea);
-  if(!isDefined(level.claymores))
+  if(!isDefined(level.claymores)) {
     level.claymores = [];
+  }
   level.claymores = array_add(level.claymores, self);
-  if(level.claymores.size > 15 && getDvar(#"player_sustainAmmo") != "0")
+  if(level.claymores.size > 15 && getDvar(#"player_sustainAmmo") != "0") {
     level.claymores[0] delete();
+  }
   while(1) {
     damagearea waittill("trigger", ent);
-    if(isDefined(self.owner) && ent == self.owner)
+    if(isDefined(self.owner) && ent == self.owner) {
       continue;
-    if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] != playerTeamToAllow)
+    }
+    if(isDefined(ent.pers) && isDefined(ent.pers["team"]) && ent.pers["team"] != playerTeamToAllow) {
       continue;
-    if(!ent shouldAffectWeaponObject(self))
+    }
+    if(!ent shouldAffectWeaponObject(self)) {
       continue;
+    }
     if(ent damageConeTrace(self.origin, self) > 0) {
       self playSound("claymore_activated_SP");
       wait 0.4;
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self detonate(self.owner);
-      else
+      }
+      else {
         self detonate(undefined);
+      }
       return;
     }
   }
@@ -207,8 +215,9 @@ delete_claymores_on_death(ent) {
   self waittill("death");
   level.claymores = array_remove_nokeys(level.claymores, self);
   wait .05;
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 satchel_damage() {
@@ -222,20 +231,26 @@ satchel_damage() {
   while(1) {
     self waittill("damage", amount, attacker);
     self.health = self.maxhealth;
-    if(!isplayer(attacker))
+    if(!isplayer(attacker)) {
       continue;
-    if(isDefined(self.owner) && attacker == self.owner)
+    }
+    if(isDefined(self.owner) && attacker == self.owner) {
       continue;
-    if(isDefined(attacker.pers) && isDefined(attacker.pers["team"]) && attacker.pers["team"] != playerTeamToAllow)
+    }
+    if(isDefined(attacker.pers) && isDefined(attacker.pers["team"]) && attacker.pers["team"] != playerTeamToAllow) {
       continue;
+    }
     break;
   }
-  if(level.satchelexplodethisframe)
+  if(level.satchelexplodethisframe) {
     wait .1 + randomfloat(.4);
-  else
+  }
+  else {
     wait .05;
-  if(!isDefined(self))
+  }
+  if(!isDefined(self)) {
     return;
+  }
   level.satchelexplodethisframe = true;
   thread reset_satchel_explode_this_frame();
   self detonate(attacker);
@@ -290,10 +305,12 @@ setup_client_hintelem() {
 show_claymore_hint(string) {
   self endon("death");
   self endon("disconnect");
-  if(string == "claymore_purchased")
+  if(string == "claymore_purchased") {
     text = &"ZOMBIE_CLAYMORE_HOWTO";
-  else
+  }
+  else {
     text = &"ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
+  }
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);

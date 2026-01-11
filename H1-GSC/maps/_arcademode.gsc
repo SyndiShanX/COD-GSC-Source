@@ -53,8 +53,9 @@ main() {
   level.arcademode_kill_streak_multiplier_count = 3;
   arcademode_reset_kill_streak();
 
-  for(var_0 = 0; var_0 < level.arcademode_checkpoint_max; var_0++)
+  for(var_0 = 0; var_0 < level.arcademode_checkpoint_max; var_0++) {
     setdvar("arcademode_checkpoint_" + var_0, "");
+  }
 
   level.arcademode_last_multi_kill_sound = 0;
   level.arcademode_success = 0;
@@ -63,10 +64,12 @@ main() {
   common_scripts\utility::flag_init("arcademode_ending_complete");
   waittillframeend;
 
-  if(getdvar("arcademode_full") == "1")
+  if(getdvar("arcademode_full") == "1") {
     precacheleaderboards("LB_AM_FULLCHALLENGE");
-  else
+  }
+  else {
     precacheleaderboards("LB_AM_" + level.script);
+  }
 
   level.global_kill_func = ::player_kill;
   level.global_damage_func_ads = ::player_damage_ads;
@@ -93,8 +96,9 @@ main() {
   setdvar("arcademode_died", 0);
   setdvar("arcademode_score", 0);
 
-  if(getdvar("arcademode_combined_score") == "" || getdvar("arcademode_full") == "1" && level.script == "cargoship")
+  if(getdvar("arcademode_combined_score") == "" || getdvar("arcademode_full") == "1" && level.script == "cargoship") {
     setdvar("arcademode_combined_score", 0);
+  }
 
   var_2 = arcademode_get_level_time();
   var_2 = var_2 * 60;
@@ -105,8 +109,9 @@ main() {
   level.arcademode_multikills = [];
   var_3 = getarraykeys(level.arcademode_weaponmultiplier);
 
-  for(var_0 = 0; var_0 < var_3.size; var_0++)
+  for(var_0 = 0; var_0 < var_3.size; var_0++) {
     level.arcademode_multikills[var_3[var_0]] = [];
+  }
 
   var_4 = level.arcademode_multikills;
   thread arcademode_update_lives();
@@ -126,8 +131,9 @@ main() {
 }
 
 arcademode_complete() {
-  if(getdvar("arcademode") != "1")
+  if(getdvar("arcademode") != "1") {
     return 0;
+  }
 
   return common_scripts\utility::flag("arcademode_complete");
 }
@@ -154,8 +160,9 @@ arcademode_get_level_time() {
   var_1["airplane"] = 4;
   var_2 = 1;
 
-  if(isDefined(var_1[level.script]))
+  if(isDefined(var_1[level.script])) {
     var_0 = var_1[level.script];
+  }
 
   level.arcademode_difficultytimerscale = var_2;
   return var_0;
@@ -170,8 +177,9 @@ arcademode_death_detection() {
   var_0 = getdvarint("arcademode_lives");
   var_1 = getdvarint("arcademode_earned_lives");
 
-  if(var_0 > var_1)
+  if(var_0 > var_1) {
     var_0 = var_1;
+  }
 
   var_0 = var_0 - 1;
   setdvar("arcademode_lives", var_0);
@@ -187,8 +195,9 @@ arcademode_death_detection() {
     return;
   }
 
-  if(isalive(level.player))
+  if(isalive(level.player)) {
     missionfailed();
+  }
 }
 
 arcademode_update_timer() {
@@ -222,8 +231,9 @@ arcademode_update_lives() {
   level endon("missionfailed");
   level.arcademode_lives_hud = [];
 
-  for(var_0 = 0; var_0 < level.arcademode_maxlives; var_0++)
+  for(var_0 = 0; var_0 < level.arcademode_maxlives; var_0++) {
     arcademode_add_life(var_0, -28.6667, 68.6667, -14, 64, level.arcademode_hud_sort);
+  }
 
   for(;;) {
     var_1 = getdvarint("arcademode_lives_changed");
@@ -263,8 +273,9 @@ arcademode_convert_extra_lives() {
   var_0 = getdvarint("arcademode_lives");
   var_1 = getdvarint("arcademode_earned_lives");
 
-  if(var_0 > var_1)
+  if(var_0 > var_1) {
     thread extra_lives_display(var_0 - var_1);
+  }
 
   setdvar("arcademode_earned_lives", var_0);
   thread arcademode_redraw_lives(var_0);
@@ -310,8 +321,9 @@ arcademode_redraw_life(var_0, var_1) {
     self setshader("arcademode_life_empty", 20, 20);
     self.empty = 1;
   } else {
-    if(isDefined(self.empty) && self.empty)
+    if(isDefined(self.empty) && self.empty) {
       thread draw_lives_earned_flare(var_0, -18.6667, 58.6667, -14);
+    }
 
     self setshader("arcademode_life", 20, 20);
     self.empty = 0;
@@ -343,13 +355,15 @@ arcademode_remove_life_ending(var_0) {
 }
 
 arcademode_redraw_lives(var_0) {
-  if(var_0 > 10)
+  if(var_0 > 10) {
     var_0 = 10;
+  }
 
   var_1 = getdvarint("arcademode_earned_lives");
 
-  for(var_2 = 0; var_2 < var_0; var_2++)
+  for(var_2 = 0; var_2 < var_0; var_2++) {
     level.arcademode_lives_hud[var_2] arcademode_redraw_life(var_2, var_1);
+  }
 
   for(var_2 = var_0; var_2 < level.arcademode_maxlives; var_2++) {
     if(var_2 < 0) {
@@ -389,8 +403,9 @@ arcademode_redraw_streak_progress() {
   for(;;) {
     var_2 = level.arcademode_kill_streak_current_multiplier + var_1;
 
-    if(var_2 >= level.arcademode_streak_color.size)
+    if(var_2 >= level.arcademode_streak_color.size) {
       var_2 = level.arcademode_streak_color.size - 1;
+    }
 
     for(var_0 = level.arcademode_kill_streak_current_count + var_1 * level.arcademode_kill_streak_multiplier_count; var_0 < level.arcademode_kill_streak_current_count + (var_1 + 1) * level.arcademode_kill_streak_multiplier_count; var_0++) {
       if(var_0 >= level.arcademode_kills_hud.size) {
@@ -410,8 +425,9 @@ arcademode_add_kill(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6.foreground = 1;
   var_6.x = var_1 + var_0 * var_3;
 
-  if(level.arcademode_kills_hud.size == 0)
+  if(level.arcademode_kills_hud.size == 0) {
     level.arcademode_kill_zero_x_location = var_6.x;
+  }
 
   var_6.y = var_2;
   var_6 setshader("arcademode_kill", var_4, var_4);
@@ -437,8 +453,9 @@ arcademode_add_kill(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(var_6.x == level.arcademode_kill_zero_x_location) {
       var_8 = 4;
 
-      if(level.arcademode_kills_hud.size == 1)
+      if(level.arcademode_kills_hud.size == 1) {
         wait 3;
+      }
 
       var_6 fadeovertime(var_8);
       var_6.color = (1, 0, 0);
@@ -447,13 +464,15 @@ arcademode_add_kill(var_0, var_1, var_2, var_3, var_4, var_5) {
       level notify("arcademode_decrement_kill_streak");
       var_6 destroy();
 
-      for(var_9 = 0; var_9 < level.arcademode_kills_hud.size - 1; var_9++)
+      for(var_9 = 0; var_9 < level.arcademode_kills_hud.size - 1; var_9++) {
         level.arcademode_kills_hud[var_9] = level.arcademode_kills_hud[var_9 + 1];
+      }
 
       level.arcademode_kills_hud[level.arcademode_kills_hud.size - 1] = undefined;
 
-      if(!level.arcademode_kills_hud.size)
+      if(!level.arcademode_kills_hud.size) {
         thread arcademode_reset_kill_streak();
+      }
 
       return;
     }
@@ -497,10 +516,12 @@ arcademode_add_kill_streak_time(var_0) {
   level notify("arcademode_new_kill_streak_time");
   level endon("arcademode_new_kill_streak_time");
 
-  if(level.arcademode_kill_streak_ends < gettime())
+  if(level.arcademode_kill_streak_ends < gettime()) {
     level.arcademode_kill_streak_ends = gettime() + var_0 * 1000;
-  else
+  }
+  else {
     level.arcademode_kill_streak_ends = level.arcademode_kill_streak_ends + var_0 * 1000;
+  }
 
   waittillframeend;
 
@@ -517,14 +538,16 @@ arcademode_add_kill_streak_time(var_0) {
   var_6 = level.arcademode_kill_streak_ends - gettime();
   var_6 = var_6 * 0.001;
 
-  if(var_6 > var_3)
+  if(var_6 > var_3) {
     var_6 = var_3;
+  }
 
   var_6 = var_6 * var_2;
   var_6 = int(var_6);
 
-  if(var_6 > 980)
+  if(var_6 > 980) {
     var_6 = 980;
+  }
 
   if(!isDefined(var_4)) {
     var_4 = get_streak_hud(0, 0, var_6, var_1);
@@ -563,17 +586,21 @@ arcademode_add_kill_streak_time(var_0) {
     var_6 = var_6 * var_2;
     var_6 = int(var_6);
 
-    if(var_6 <= 0)
+    if(var_6 <= 0) {
       var_6 = 1;
+    }
 
-    if(var_6 > 980)
+    if(var_6 > 980) {
       var_6 = 980;
+    }
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 scaleovertime(1, var_6, var_1);
+    }
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_5 scaleovertime(1, var_6, var_1);
+    }
 
     wait 1;
 
@@ -706,10 +733,12 @@ arcademode_update_score() {
 
   level.arcademode_hud_score_backer = get_score_backer();
 
-  if(getdvarint("arcademode_full"))
+  if(getdvarint("arcademode_full")) {
     var_1 = getdvarint("arcademode_combined_score");
-  else
+  }
+  else {
     var_1 = getdvarint("arcademode_score");
+  }
 
   hud_draw_score(var_1);
   level.arcademode_redraw_score = 0;
@@ -718,16 +747,19 @@ arcademode_update_score() {
     wait 0.05;
     updatescoreelemsonce();
 
-    if(level.arcademode_redraw_score)
+    if(level.arcademode_redraw_score) {
       level.arcademode_redraw_score = 0;
+    }
   }
 }
 
 updatescoreelemsonce() {
-  if(getdvarint("arcademode_full"))
+  if(getdvarint("arcademode_full")) {
     hud_update_score("arcadeMode_combined_score");
-  else
+  }
+  else {
     hud_update_score("arcademode_score");
+  }
 }
 
 hud_update_score(var_0) {
@@ -745,13 +777,15 @@ hud_update_score(var_0) {
   var_2 = var_1 - level.arcademode_ramping_score;
   var_3 = var_2 * 0.2 + 1;
 
-  if(var_2 <= 15)
+  if(var_2 <= 15) {
     var_3 = 1;
+  }
 
   level.arcademode_ramping_score = level.arcademode_ramping_score + var_3;
 
-  if(level.arcademode_ramping_score > var_1)
+  if(level.arcademode_ramping_score > var_1) {
     level.arcademode_ramping_score = var_1;
+  }
 
   hud_draw_score(int(level.arcademode_ramping_score));
 }
@@ -788,8 +822,9 @@ hud_draw_score_for_elements(var_0, var_1) {
     var_1[var_3].alpha = 1;
   }
 
-  for(var_3 = var_2.size; var_3 < var_1.size; var_3++)
+  for(var_3 = var_2.size; var_3 < var_1.size; var_3++) {
     var_1[var_3].alpha = 0;
+  }
 
   if(var_0 == 0) {
     var_1[0].alpha = 1;
@@ -799,8 +834,9 @@ hud_draw_score_for_elements(var_0, var_1) {
   level.arcademode_hud_score_backer setshader("h1_arcademode_scanelines_border", 50 + (var_2.size - 1) * 22, 50);
   level.arcademode_hud_score_backer.x = -5.16667 + (var_2.size - 1) * 2.4;
 
-  if(!common_scripts\utility::flag("arcademode_complete"))
+  if(!common_scripts\utility::flag("arcademode_complete")) {
     level.player thread common_scripts\utility::play_sound_in_space("h1_arcademode_add_counter_pt", level.player getEye());
+  }
 }
 
 hud_draw_score_for_elements_align_left(var_0, var_1) {
@@ -815,8 +851,9 @@ hud_draw_score_for_elements_align_left(var_0, var_1) {
     var_1[var_1.size - var_2.size + var_3].alpha = 1;
   }
 
-  for(var_3 = var_1.size - var_2.size - 1; var_3 >= 0; var_3--)
+  for(var_3 = var_1.size - var_2.size - 1; var_3 >= 0; var_3--) {
     var_1[var_3].alpha = 0;
+  }
 
   if(var_0 == 0) {
     var_1[var_1.size - 1].alpha = 1;
@@ -919,8 +956,9 @@ arcademode_define_damage_multipliers() {
   level.arcademode_extra_lives_range = var_6;
   var_7 = [];
 
-  for(var_8 = 0; var_8 < 4; var_8++)
+  for(var_8 = 0; var_8 < 4; var_8++) {
     var_7[var_8] = var_6[var_8] * 0.15;
+  }
 
   level.arcademode_extra_lives_base = var_7;
 }
@@ -938,8 +976,9 @@ new_ending_hud(var_0, var_1, var_2, var_3) {
   var_4.vertalign = "middle";
   var_4.fontscale = 3;
 
-  if(getdvar("widescreen") == "1")
+  if(getdvar("widescreen") == "1") {
     var_4.fontscale = 5;
+  }
 
   var_4.color = (0.8, 1, 0.8);
   var_4.font = "objective";
@@ -1058,8 +1097,9 @@ extra_lives_sizzle() {
 round_up_to_five(var_0) {
   var_1 = var_0 - var_0 % 5;
 
-  if(var_1 < var_0)
+  if(var_1 < var_0) {
     var_1 = var_1 + 5;
+  }
 
   return var_1;
 }
@@ -1068,8 +1108,9 @@ arcademode_add_points(var_0, var_1, var_2, var_3) {
   if(var_3 <= 0) {
     return;
   }
-  if(isDefined(level.arcademode_deathtypes[var_2]))
+  if(isDefined(level.arcademode_deathtypes[var_2])) {
     var_2 = level.arcademode_deathtypes[var_2];
+  }
 
   var_3 = int(var_3);
   var_3 = round_up_to_five(var_3);
@@ -1084,8 +1125,9 @@ arcademode_add_points(var_0, var_1, var_2, var_3) {
   var_7 = 1.5;
   var_8 = 0.9 + (var_3 - 10) * 0.01;
 
-  if(var_8 > 1.4)
+  if(var_8 > 1.4) {
     var_8 = 1.4;
+  }
 
   var_9 = (0.75, 0, 0);
 
@@ -1108,8 +1150,9 @@ arcademode_add_point_towards_extra_life() {
   var_0 = getdvarint("arcademode_lives");
   var_0++;
 
-  if(var_0 >= level.arcademode_maxlives)
+  if(var_0 >= level.arcademode_maxlives) {
     var_0 = level.arcademode_maxlives;
+  }
   else {
     setdvar("arcademode_lives", var_0);
     setdvar("arcademode_lives_changed", 1);
@@ -1127,17 +1170,21 @@ arcademode_set_origin_in_radius() {
       var_2 = randomint(1);
       level.player.thirdpointpulseside = 1 - var_2;
 
-      if(var_2)
+      if(var_2) {
         var_1 = 45;
-      else
+      }
+      else {
         var_1 = 135;
+      }
     } else if(level.player.pointpulseindex == 2) {
       var_2 = level.player.thirdpointpulseside;
 
-      if(var_2)
+      if(var_2) {
         var_1 = 45;
-      else
+      }
+      else {
         var_1 = 135;
+      }
     } else if(level.player.pointpulseindex <= 4) {
       var_1 = randomfloatrange(0, 180);
       var_0 = randomfloatrange(60, 120);
@@ -1163,8 +1210,9 @@ pointpulse(var_0) {
     level.player.pointpulseindex = 0;
   }
 
-  if(!common_scripts\utility::flag("arcademode_complete"))
+  if(!common_scripts\utility::flag("arcademode_complete")) {
     level.player thread common_scripts\utility::play_sound_in_space("h1_arcademode_pulse_score", level.player getEye());
+  }
 
   var_1 = newhudelem();
   var_1.horzalign = "center";
@@ -1212,8 +1260,9 @@ pointpulse(var_0) {
   wait 1.0;
   level.player.pointpulsecount--;
 
-  if(level.player.pointpulsecount == 0)
+  if(level.player.pointpulsecount == 0) {
     level.player.pointpulseindex = 0;
+  }
 
   var_1 destroy();
 }
@@ -1230,33 +1279,39 @@ set_circular_origin() {
     }
   }
 
-  if(common_scripts\utility::cointoss())
+  if(common_scripts\utility::cointoss()) {
     var_1 = var_1 * -1;
+  }
 
-  if(common_scripts\utility::cointoss())
+  if(common_scripts\utility::cointoss()) {
     var_2 = var_2 * -1;
+  }
 
   self.x = var_1;
   self.y = var_2;
 }
 
 arcademode_add_points_for_mod(var_0) {
-  for(var_1 = 0; var_1 < level.arcademode_multikills[var_0].size; var_1++)
+  for(var_1 = 0; var_1 < level.arcademode_multikills[var_0].size; var_1++) {
     arcademode_add_points_for_individual_kill(level.arcademode_multikills[var_0][var_1], var_0, level.arcademode_multikills[var_0].size);
+  }
 }
 
 arcademode_add_points_for_individual_kill(var_0, var_1, var_2) {
-  if(var_0["type"] != "melee")
+  if(var_0["type"] != "melee") {
     var_3 = level.arcademode_killbase + level.arcademode_locationkillbonus[var_0["damage_location"]] + level.arcademode_weaponbonus[var_0["type"]];
-  else
+  }
+  else {
     var_3 = level.arcademode_killbase + level.arcademode_weaponbonus[var_0["type"]];
+  }
 
   thread arcademode_add_points(var_0["origin"], 1, var_1, var_3);
 }
 
 player_kill(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "none";
+  }
 
   var_3 = level.arcademode_deathtypes[var_0];
 
@@ -1270,8 +1325,9 @@ player_kill(var_0, var_1, var_2) {
   var_5["type"] = var_3;
   var_5["origin"] = var_2;
 
-  if(var_3 == "explosive")
+  if(var_3 == "explosive") {
     var_5["origin"] = self.origin;
+  }
 
   level.arcademode_multikills[var_3][level.arcademode_multikills[var_3].size] = var_5;
 }
@@ -1353,11 +1409,13 @@ rescale_ending_huds_thread(var_0, var_1, var_2, var_3, var_4, var_5) {
       level.screen_width = var_6;
       level.screen_height = var_7;
 
-      if(level.screen_height == 0)
+      if(level.screen_height == 0) {
         level.screen_height = 1;
+      }
 
-      if(level.screen_width == 0)
+      if(level.screen_width == 0) {
         level.screen_width = 1;
+      }
 
       rescale_ending_huds(var_0, var_1, var_2, var_3, var_4, var_5);
     }
@@ -1374,8 +1432,9 @@ rescale_ending_huds(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(var_9 = 0; var_9 < level.arcademode_hud_digits; var_9++) {
     level.arcademode_hud_mission_scores[var_9].x = 320 + var_9 * (-9 * var_6) + var_8;
 
-    if(isDefined(level.arcademode_hud_total_scores))
+    if(isDefined(level.arcademode_hud_total_scores)) {
       level.arcademode_hud_total_scores[var_9].x = 320 + var_9 * (-9 * var_6) + var_8;
+    }
   }
 
   var_10 = 11.6667 + var_7;
@@ -1387,19 +1446,23 @@ rescale_ending_huds(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_11 = 58.5;
   var_12 = var_11 - (10 - var_3) * 13 * 0.5;
 
-  for(var_9 = 0; var_9 < level.arcademode_maxlives; var_9++)
+  for(var_9 = 0; var_9 < level.arcademode_maxlives; var_9++) {
     level.arcademode_lives_hud[var_9].x = (var_9 * -13 + var_12) * var_6;
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0.x = 320 + var_7;
+  }
 
   var_1.x = 320 + var_7;
   var_2.x = 320 + var_7;
 
-  if(level.arcademode_success)
+  if(level.arcademode_success) {
     var_4 setshader("h1_arcademode_scanelines_border", int(344 * var_6), 65);
-  else
+  }
+  else {
     var_4 setshader("h1_arcademode_scanelines_border", int(216 * var_6), 65);
+  }
 
   var_5 setshader("h1_arcademode_scanelines_border_end_title", int(291 * var_6), 4);
 }
@@ -1414,8 +1477,9 @@ arcademode_ends() {
   maps\_utility::slowmo_end();
 
   if(level.arcademode_success) {
-    if(arcademode_convert_extra_lives())
+    if(arcademode_convert_extra_lives()) {
       wait 2;
+    }
   }
 
   var_0 = 0;
@@ -1432,8 +1496,9 @@ arcademode_ends() {
   var_2 = int(var_2);
 
   if(level.arcademode_success) {
-    if(var_2 == 0)
+    if(var_2 == 0) {
       var_2++;
+    }
   }
 
   var_3 = 0.5;
@@ -1445,8 +1510,9 @@ arcademode_ends() {
   var_4 = 1;
   var_5 = 0;
 
-  if(getdvar("arcademode_full") == "1")
+  if(getdvar("arcademode_full") == "1") {
     var_5 = 27.5556;
+  }
 
   var_6 = -111.111;
   var_7 = -72.0;
@@ -1491,11 +1557,13 @@ arcademode_ends() {
   var_19 = getdvarint("arcademode_lives");
   var_20 = level.arcademode_rewarded_lives;
 
-  if(var_19 > var_20)
+  if(var_19 > var_20) {
     var_19 = var_20;
+  }
 
-  for(var_21 = 0; var_21 < level.arcademode_maxlives; var_21++)
+  for(var_21 = 0; var_21 < level.arcademode_maxlives; var_21++) {
     level.arcademode_lives_hud[var_21] destroy();
+  }
 
   level.arcademode_lives_hud = [];
 
@@ -1551,8 +1619,9 @@ arcademode_ends() {
   hud_draw_score_for_elements_align_left(0, level.arcademode_hud_mission_scores);
   var_26 = 0;
 
-  for(var_27 = 0; var_2 >= 60; var_2 = var_2 - 60)
+  for(var_27 = 0; var_2 >= 60; var_2 = var_2 - 60) {
     var_26++;
+  }
 
   var_27 = var_2;
   var_28 = new_ending_hud("center", var_4, 0, var_12);
@@ -1597,14 +1666,16 @@ arcademode_ends() {
     var_33 = var_29 - var_30;
     var_34 = var_33 * 0.2 + 1;
 
-    if(var_33 <= 15)
+    if(var_33 <= 15) {
       var_34 = 1;
+    }
 
     var_34 = int(var_34);
     var_30 = var_30 + var_34;
 
-    if(var_30 > var_29)
+    if(var_30 > var_29) {
       var_30 = var_29;
+    }
 
     hud_draw_score_for_elements_align_left(var_30, level.arcademode_hud_mission_scores);
 
@@ -1640,8 +1711,9 @@ arcademode_ends() {
     for(var_21 = 1; var_21 <= var_39; var_21++) {
       var_46 = var_21 * 1.0 / var_39;
 
-      if(var_21 == var_39)
+      if(var_21 == var_39) {
         var_46 = 1;
+      }
 
       var_30 = int(var_42 * (1 - var_46) + var_43 * var_46);
 
@@ -1672,13 +1744,16 @@ arcademode_ends() {
       if(var_19 > 10) {
         var_49 = var_19 % 10;
 
-        if(var_19 - var_49 >= 10)
+        if(var_19 - var_49 >= 10) {
           var_48 = 10;
-        else
+        }
+        else {
           var_48 = var_49;
+        }
 
-        if(var_19 < 20)
+        if(var_19 < 20) {
           var_48 = var_49;
+        }
       }
 
       var_19 = var_19 - var_48;
@@ -1712,8 +1787,9 @@ arcademode_ends() {
       var_22 = var_22 + var_34;
     }
   } else {
-    for(var_21 = 0; var_21 < 5; var_21++)
+    for(var_21 = 0; var_21 < 5; var_21++) {
       level.arcademode_hud_timer[var_21] setpulsefx(0, 0, 1000);
+    }
 
     var_28 setpulsefx(0, 0, 1000);
     arcademode_redraw_lives(0);
@@ -1723,12 +1799,15 @@ arcademode_ends() {
   var_51 = level.arcademode_skillmultiplier[level.gameskill];
 
   if(var_51 > 1) {
-    if(var_51 == 1.5)
+    if(var_51 == 1.5) {
       var_52 = &"SCRIPT_DIFFICULTY_BONUS_ONEANDAHALF";
-    else if(var_51 == 3)
+    }
+    else if(var_51 == 3) {
       var_52 = &"SCRIPT_DIFFICULTY_BONUS_THREE";
-    else
+    }
+    else {
       var_52 = &"SCRIPT_DIFFICULTY_BONUS_FOUR";
+    }
 
     var_34 = int(ceil(var_30 * var_51) - var_30);
     arcademode_end_boost(var_30, var_22, var_34, var_52, "h1_arcademode_ending_diff_pts", var_13, var_4, var_17);
@@ -1748,20 +1827,24 @@ arcademode_ends() {
       setdvar(var_54, var_57);
       var_58 = 0;
 
-      if(!level.arcademode_success)
+      if(!level.arcademode_success) {
         var_58 = 1;
+      }
 
-      if(level.script == "airplane")
+      if(level.script == "airplane") {
         var_58 = 1;
+      }
 
-      if(var_58)
+      if(var_58) {
         var_53 = 1;
+      }
     }
 
     var_59 = level.player getplayerdata(common_scripts\utility::getstatsgroup_sp(), "fullChallengeScore");
 
-    if(var_22 > var_59)
+    if(var_22 > var_59) {
       level.player setplayerdata(common_scripts\utility::getstatsgroup_sp(), "fullChallengeScore", var_22);
+    }
 
     level.player uploadscore("LB_AM_FULLCHALLENGE", getdvarint(var_54));
   } else {
@@ -1799,8 +1882,9 @@ arcademode_ends() {
   }
 
   if(var_53) {
-    if(!level.arcademode_success)
+    if(!level.arcademode_success) {
       updategamerprofile();
+    }
 
     wait 1;
     var_62 = new_ending_hud("center", var_4, 0, var_13);
@@ -1843,23 +1927,27 @@ arcademode_ends() {
   if(level.arcademode_success) {
     wait 0.5;
 
-    for(var_21 = 0; var_21 < 5; var_21++)
+    for(var_21 = 0; var_21 < 5; var_21++) {
       level.arcademode_hud_timer[var_21] setpulsefx(0, 0, 1000);
+    }
 
     var_28 setpulsefx(0, 0, 1000);
   }
 
   wait 1;
 
-  if(getdvar("arcademode_full") == "1")
+  if(getdvar("arcademode_full") == "1") {
     logstring("ArcadeMode Score: " + var_30 + ", mission: " + level.script + ", gameskill: " + level.gameskill + ", total: " + var_22);
-  else
+  }
+  else {
     logstring("ArcadeMode Score: " + var_30 + ", mission: " + level.script + ", gameskill: " + level.gameskill);
+  }
 
   setdvar("arcademode_combined_score", var_22);
 
-  if(var_22 >= 400000)
+  if(var_22 >= 400000) {
     maps\_utility::giveachievement_wrapper("ARCADE_ADDICT");
+  }
 
   if(!level.arcademode_success) {
     setdvar("ui_arcade_lost", 1);
@@ -1868,8 +1956,9 @@ arcademode_ends() {
     setdvar("ui_arcade_lost", 0);
 
   for(var_21 = 0; var_21 < level.arcademode_ending_hud.size; var_21++) {
-    if(isDefined(level.arcademode_ending_hud[var_21]))
+    if(isDefined(level.arcademode_ending_hud[var_21])) {
       level.arcademode_ending_hud[var_21].alpha = 0;
+    }
   }
 
   common_scripts\utility::flag_set("arcademode_ending_complete");
@@ -1899,22 +1988,25 @@ arcademode_end_boost(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_13 = var_11 - var_0;
     var_2 = var_13 * 0.2 + 1;
 
-    if(var_13 <= 15)
+    if(var_13 <= 15) {
       var_2 = 1;
+    }
 
     var_2 = int(var_2);
     var_0 = var_0 + var_2;
 
-    if(var_0 > var_11)
+    if(var_0 > var_11) {
       var_0 = var_11;
+    }
 
     hud_draw_score_for_elements_align_left(var_0, level.arcademode_hud_mission_scores);
 
     if(getdvar("arcademode_full") == "1") {
       var_1 = var_1 + var_2;
 
-      if(var_1 > var_12)
+      if(var_1 > var_12) {
         var_1 = var_12;
+      }
 
       set_total_score_hud(var_1);
     }
@@ -1953,8 +2045,9 @@ black_background(var_0) {
   var_1.sort = level.arcademode_hud_sort + 5;
   var_1.alpha = 0;
 
-  if(var_0 > 0)
+  if(var_0 > 0) {
     var_1 fadeovertime(var_0);
+  }
 
   var_1.alpha = 1;
 }
@@ -1973,8 +2066,9 @@ player_invul_forever() {
 ending_set_time(var_0, var_1) {
   var_2 = 0;
 
-  for(var_3 = 0; var_0 >= 10; var_0 = var_0 - 10)
+  for(var_3 = 0; var_0 >= 10; var_0 = var_0 - 10) {
     var_2++;
+  }
 
   while(var_1 >= 10) {
     var_3++;
@@ -2110,8 +2204,9 @@ draw_checkpoint_flare() {
 
 arcademode_checkpoint_getid(var_0) {
   for(var_1 = 0; var_1 < level.arcademode_checkpoint_dvars.size; var_1++) {
-    if(level.arcademode_checkpoint_dvars[var_1] == var_0)
+    if(level.arcademode_checkpoint_dvars[var_1] == var_0) {
       return var_1;
+    }
   }
 
   return undefined;
@@ -2129,8 +2224,9 @@ arcademode_init_kill_streak_colors() {
   level.arcademode_streak_color[level.arcademode_streak_color.size] = (0.988235, 0.792157, 0.223529);
   level.arcademode_streak_color[level.arcademode_streak_color.size] = (0.984314, 0.72549, 0.152941);
 
-  for(var_0 = 0; var_0 < level.arcademode_streak_color.size; var_0++)
+  for(var_0 = 0; var_0 < level.arcademode_streak_color.size; var_0++) {
     level.arcademode_streak_glow[var_0] = (level.arcademode_streak_color[var_0][0] * 0.35, level.arcademode_streak_color[var_0][1] * 0.35, level.arcademode_streak_color[var_0][2] * 0.35);
+  }
 
   level.arcademode_streak_color[0] = level.color_cool_green_glow;
 }
@@ -2173,8 +2269,9 @@ arcademode_reset_kill_streak_art() {
 
   level notify("arcademode_stop_kill_streak_art");
 
-  for(var_0 = 0; var_0 < level.arcademode_kills_hud.size; var_0++)
+  for(var_0 = 0; var_0 < level.arcademode_kills_hud.size; var_0++) {
     level.arcademode_kills_hud[var_0] destroy();
+  }
 
   level.arcademode_kills_hud = [];
 }
@@ -2304,14 +2401,17 @@ get_hud_multi_emphasis() {
 
   wait 0.4;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 destroy();
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 destroy();
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 destroy();
+  }
 }
 
 arcademode_draw_multiplier() {
@@ -2349,8 +2449,9 @@ arcademode_draw_multiplier_kill() {
 get_score_string_from_digits(var_0) {
   var_1 = "";
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1 = var_0[var_2] + var_1;
+  }
 
   return var_1;
 }

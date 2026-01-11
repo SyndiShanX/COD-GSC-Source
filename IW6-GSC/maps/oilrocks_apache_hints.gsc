@@ -23,8 +23,9 @@ apache_hints_tutorial() {
   common_scripts\utility::flag_wait("introscreen_complete");
   common_scripts\utility::flag_wait_or_timeout("FLAG_apache_tut_fly_stop_auto_pilot", 3.5);
 
-  if(!common_scripts\utility::flag("FLAG_apache_tut_fly_stop_auto_pilot"))
+  if(!common_scripts\utility::flag("FLAG_apache_tut_fly_stop_auto_pilot")) {
     level.player apache_hints_display_hint_timeout("hint_apache_move", 5.0);
+  }
 }
 
 apache_hints_factory() {
@@ -53,10 +54,12 @@ apache_hints_island() {
 }
 
 ads_hint() {
-  if(getkeybinding("+toggleads_throw")["count"] > 0)
+  if(getkeybinding("+toggleads_throw")["count"] > 0) {
     level.player apache_hints_display_hint_timeout("hint_apache_ads", 5.0);
-  else
+  }
+  else {
     level.player apache_hints_display_hint_timeout("hint_apache_ads_hold", 5.0);
+  }
 }
 
 apache_hints_chopper() {
@@ -74,8 +77,9 @@ hint_missile_lock() {
   while(!maps\_utility::check_hint_condition(var_0)) {
     wait 0.05;
 
-    if(!isDefined(level.player.riding_heli))
+    if(!isDefined(level.player.riding_heli)) {
       return;
+    }
   }
 
   maps\_utility::display_hint_timeout_mintime(var_1, 5);

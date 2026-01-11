@@ -90,8 +90,9 @@ logMultiKill(lifeId, multikillCount) {
 }
 
 logPlayerLife() {
-  if(!canLogClient(self))
+  if(!canLogClient(self)) {
     lifeId = level.MaxLives;
+  }
 
   if(self.curClass == "gamemode") {
     lifeId = self LogMatchDataLife(self.clientid, self.spawnPos, self.spawnTime, self.wasTI);
@@ -144,8 +145,9 @@ logPlayerAbilityPerks(lifeId) {
 }
 
 logPlayerXP(xp, xpName) {
-  if(!canLogClient(self))
+  if(!canLogClient(self)) {
     return;
+  }
   setMatchData("players", self.clientid, xpName, xp);
 }
 
@@ -156,10 +158,12 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
   if(lifeId >= level.MaxLives) {
     return;
   }
-  if(IsPlayer(attacker) && canLogClient(attacker))
+  if(IsPlayer(attacker) && canLogClient(attacker)) {
     self LogMatchDataDeath(lifeId, self.clientid, attacker, attacker.clientid, sWeapon, sMeansOfDeath, isKillstreakWeapon(sWeapon), attacker isJuggernaut());
-  else
+  }
+  else {
     self LogMatchDataDeath(lifeId, self.clientid, undefined, undefined, sWeapon, sMeansOfDeath, isKillstreakWeapon(sWeapon), false);
+  }
 }
 
 logPlayerData() {
@@ -168,20 +172,26 @@ logPlayerData() {
   }
   setMatchData("players", self.clientid, "score", self getPersStat("score"));
 
-  if(self getPersStat("assists") > 255)
+  if(self getPersStat("assists") > 255) {
     setMatchData("players", self.clientid, "assists", 255);
-  else
+  }
+  else {
     setMatchData("players", self.clientid, "assists", self getPersStat("assists"));
+  }
 
-  if(self getPersStat("longestStreak") > 255)
+  if(self getPersStat("longestStreak") > 255) {
     setMatchData("players", self.clientid, "longestStreak", 255);
-  else
+  }
+  else {
     setMatchData("players", self.clientid, "longestStreak", self getPersStat("longestStreak"));
+  }
 
-  if(self getPersStat("validationInfractions") > 255)
+  if(self getPersStat("validationInfractions") > 255) {
     setMatchData("players", self.clientid, "validationInfractions", 255);
-  else
+  }
+  else {
     setMatchData("players", self.clientid, "validationInfractions", self getPersStat("validationInfractions"));
+  }
 }
 
 endOfGameSummaryLogger() {
@@ -193,8 +203,9 @@ endOfGameSummaryLogger() {
     if(!isDefined(player)) {
       continue;
     }
-    if(isDefined(player.detectedExploit) && player.detectedExploit && (player rankingEnabled()))
+    if(isDefined(player.detectedExploit) && player.detectedExploit && (player rankingEnabled())) {
       player setRankedPlayerData("restXPGoal", player.detectedExploit);
+    }
 
     if(isDefined(player.weaponsUsed)) {
       player doubleBubbleSort();
@@ -229,10 +240,12 @@ endOfGameSummaryLogger() {
     }
 
     for(i = 0; i < 5; i++) {
-      if(isDefined(player.operationsCompleted) && isDefined(player.operationsCompleted[i]) && player.operationsCompleted[i] != "ch_prestige" && !IsSubStr(player.operationsCompleted[i], "_daily") && !IsSubStr(player.operationsCompleted[i], "_weekly"))
+      if(isDefined(player.operationsCompleted) && isDefined(player.operationsCompleted[i]) && player.operationsCompleted[i] != "ch_prestige" && !IsSubStr(player.operationsCompleted[i], "_daily") && !IsSubStr(player.operationsCompleted[i], "_weekly")) {
         player setCommonPlayerData("round", "operationsCompleted", i, player.operationsCompleted[i]);
-      else
+      }
+      else {
         player setCommonPlayerData("round", "operationsCompleted", i, "");
+      }
     }
 
     if(isDefined(player.challengesCompleted)) {
@@ -242,10 +255,12 @@ endOfGameSummaryLogger() {
     }
 
     for(i = 0; i < 20; i++) {
-      if(isDefined(player.challengesCompleted) && isDefined(player.challengesCompleted[i]) && player.challengesCompleted[i] != "ch_prestige" && !IsSubStr(player.challengesCompleted[i], "_daily") && !IsSubStr(player.challengesCompleted[i], "_weekly"))
+      if(isDefined(player.challengesCompleted) && isDefined(player.challengesCompleted[i]) && player.challengesCompleted[i] != "ch_prestige" && !IsSubStr(player.challengesCompleted[i], "_daily") && !IsSubStr(player.challengesCompleted[i], "_weekly")) {
         player setCommonPlayerData("round", "challengesCompleted", i, player.challengesCompleted[i]);
-      else
+      }
+      else {
         player setCommonPlayerData("round", "challengesCompleted", i, "");
+      }
     }
 
     player setCommonPlayerData("round", "gameMode", level.gametype);
@@ -316,10 +331,12 @@ logWeaponStat(weaponName, statName, incValue) {
   if(!canLogClient(self)) {
     return;
   }
-  if(weaponName == "iw6_pdwauto")
+  if(weaponName == "iw6_pdwauto") {
     weaponName = "iw6_pdw";
-  else if(weaponName == "iw6_knifeonlyfast")
+  }
+  else if(weaponName == "iw6_knifeonlyfast") {
     weaponName = "iw6_knifeonly";
+  }
 
   if(isKillstreakWeapon(weaponName)) {
     return;
@@ -339,8 +356,9 @@ storeWeaponAndAttachmentStats(statCategory, weaponName, statName, incValue) {
   newValue = oldValue + incValue;
 
   if(statName == "kills" || statName == "deaths" || statName == "headShots") {
-    if(newValue > 255)
+    if(newValue > 255) {
       newValue = 255;
+    }
   } else if(newValue > 65535) {
     newValue = 65535;
   }

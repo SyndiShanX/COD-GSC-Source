@@ -108,15 +108,18 @@ func_128EF(var_00, var_01) {
 
   var_02 = func_F1C4();
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     return 0;
-  else
+  }
+  else {
     thread scripts\mp\utility\game::func_11079(0);
+  }
 
   var_03 = func_49F1(self, var_02);
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     return 0;
+  }
 
   var_03 thread func_BD1E("entrance");
   return 1;
@@ -154,8 +157,9 @@ func_F1C4() {
       }
     } else {
       for(var_02 = 0; var_02 < 3; var_2++) {
-        if(self.locationobjectives[var_02] != -1)
+        if(self.locationobjectives[var_02] != -1) {
           scripts\mp\objidpoolmanager::minimap_objective_icon(self.locationobjectives[var_02], "compass_objpoint_tank_enemy");
+        }
       }
     }
 
@@ -192,8 +196,9 @@ func_1012E() {
   scripts\engine\utility::waittill_any("cancel_location", "picked_location", "stop_location_selection");
   var_00 scripts\mp\hud_util::destroyelem();
 
-  for(var_01 = 0; var_01 < 3; var_1++)
+  for(var_01 = 0; var_01 < 3; var_1++) {
     scripts\mp\objidpoolmanager::returnminimapid(self.locationobjectives[var_01]);
+  }
 }
 
 func_49F1(var_00, var_01) {
@@ -202,8 +207,9 @@ func_49F1(var_00, var_01) {
   var_04 = var_3["position"] + anglesToForward(level.func_8638[level.script][var_01]["angles"]) * -1000;
   var_05 = spawn("script_model", var_04);
 
-  if(!isDefined(var_05))
+  if(!isDefined(var_05)) {
     return undefined;
+  }
 
   var_5.angles = level.func_8638[level.script][var_01]["angles"];
   var_05 setModel("vehicle_bradley");
@@ -214,8 +220,9 @@ func_49F1(var_00, var_01) {
   var_5.func_D40F = [];
   var_5.func_AA24 = var_5.origin;
 
-  if(level.teambased)
+  if(level.teambased) {
     var_5.team = var_0.team;
+  }
 
   var_5.func_B0ED = level.spawnpoints[0].origin[0];
   var_5.func_8EF9 = level.spawnpoints[0].origin[0];
@@ -225,18 +232,21 @@ func_49F1(var_00, var_01) {
 
   if(level.spawnpoints.size > 1) {
     for(var_07 = 1; var_07 < level.spawnpoints.size; var_7++) {
-      if(level.spawnpoints[var_07].origin[0] < var_5.func_B0ED)
+      if(level.spawnpoints[var_07].origin[0] < var_5.func_B0ED) {
         var_5.func_B0ED = level.spawnpoints[var_07].origin[0];
-      else if(level.spawnpoints[var_07].origin[0] > var_5.func_8EF9)
+      }
+      else if(level.spawnpoints[var_07].origin[0] > var_5.func_8EF9) {
         var_5.func_8EF9 = level.spawnpoints[var_07].origin[0];
+      }
 
       if(level.spawnpoints[var_07].origin[1] < var_5.func_B0EE) {
         var_5.func_B0EE = level.spawnpoints[var_07].origin[1];
         continue;
       }
 
-      if(level.spawnpoints[var_07].origin[1] > var_5.func_8EFA)
+      if(level.spawnpoints[var_07].origin[1] > var_5.func_8EFA) {
         var_5.func_8EFA = level.spawnpoints[var_07].origin[1];
+      }
     }
   } else
     var_06 = -2000;
@@ -283,8 +293,9 @@ func_BD1E(var_00) {
   level endon("game_ended");
   self endon("death");
 
-  if(var_00 == "entrance")
+  if(var_00 == "entrance") {
     var_01 = self.origin + anglesToForward(self.angles) * 1000;
+  }
   else {
     self notify("leaving");
     var_01 = self.origin + anglesToForward(self.angles) * -1000;
@@ -294,8 +305,9 @@ func_BD1E(var_00) {
   self moveto(var_01, var_02, var_02 * 0.6, var_02 * 0.4);
   wait(var_02);
 
-  if(var_00 == "entrance")
+  if(var_00 == "entrance") {
     thread func_BB64();
+  }
   else {
     stopFXOnTag(level.func_114DA, self.fxent, "tag_origin");
     stopFXOnTag(level.func_114DB, self.fxent, "tag_origin");
@@ -324,8 +336,9 @@ func_6CC6() {
       continue;
     }
     for(var_03 = 0; var_03 < self.func_D40F.size; var_3++) {
-      if(var_02 == self.func_D40F[var_03])
+      if(var_02 == self.func_D40F[var_03]) {
         continue;
+      }
     }
 
     if(distancesquared(var_2.origin, self.func_AA24) < 500000) {
@@ -341,8 +354,9 @@ func_6CC6() {
         }
       }
 
-      if(var_04 == 1)
+      if(var_04 == 1) {
         continue;
+      }
     }
 
     wait 0.05;
@@ -393,8 +407,9 @@ func_6CC2() {
     }
   }
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = (randomfloatrange(self.func_B0ED, self.func_8EF9), randomfloatrange(self.func_B0EE, self.func_8EFA), 0);
+  }
 
   return var_00;
 }
@@ -412,8 +427,9 @@ func_BB64() {
   for(;;) {
     var_01 = func_6CC6();
 
-    if(!isDefined(var_01))
+    if(!isDefined(var_01)) {
       var_01 = func_6CC2();
+    }
 
     var_02 = self.origin[2] + 3500;
     var_03 = bulletTrace(var_01 + (0, 0, var_02), var_01 - (0, 0, var_02), 0);
@@ -472,13 +488,16 @@ firemortar(var_00, var_01, var_02) {
     var_7++;
   }
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     var_04 delete();
+  }
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     var_08 = scripts\mp\utility\game::_magicbullet("javelin_mp", var_01 + (0, 0, 200), var_02, var_03);
-  else
+  }
+  else {
     var_08 = scripts\mp\utility\game::_magicbullet("javelin_mp", var_01 + (0, 0, 200), var_02);
+  }
 
   var_8.objidfriendly = var_05;
   var_8.func_C2BA = var_06;
@@ -491,8 +510,9 @@ func_13B16(var_00) {
   scripts\mp\objidpoolmanager::returnminimapid(self.objidfriendly);
   scripts\mp\objidpoolmanager::returnminimapid(self.func_C2BA);
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 notify("mortar_fire_done");
+  }
 }
 
 func_BB98() {

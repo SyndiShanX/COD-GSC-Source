@@ -28,8 +28,9 @@ patrol_init() {
 }
 
 patrol(start_target) {
-  if(!isDefined(level._patrol_init))
+  if(!isDefined(level._patrol_init)) {
     patrol_init();
+  }
 
   if(isDefined(self.enemy)) {
     return;
@@ -56,11 +57,13 @@ patrol(start_target) {
     walkanim = self.unique_patrol_walk_anim;
     self set_run_anim(walkanim, 1);
   } else {
-    if(isDefined(self.patrol_walk_anim))
+    if(isDefined(self.patrol_walk_anim)) {
       walkanim = self.patrol_walk_anim;
+    }
 
-    if(isDefined(self.script_patrol_walk_anim))
+    if(isDefined(self.script_patrol_walk_anim)) {
       walkanim = self.script_patrol_walk_anim;
+    }
 
     self set_generic_run_anim(walkanim, 1);
   }
@@ -74,8 +77,9 @@ patrol(start_target) {
   set_goal_func[1] = ::set_goal_ent;
   set_goal_func[0] = ::set_goal_node;
 
-  if(isDefined(start_target))
+  if(isDefined(start_target)) {
     self.target = start_target;
+  }
 
   assert(isDefined(self.target) || isDefined(self.script_linkto), "Patroller with no target or script_linkto defined.");
 
@@ -109,24 +113,28 @@ patrol(start_target) {
   nextgoal = currentgoal;
 
   for(;;) {
-    while(isDefined(nextgoal.patrol_claimed))
+    while(isDefined(nextgoal.patrol_claimed)) {
       wait 0.05;
+    }
 
     currentgoal.patrol_claimed = undefined;
     currentgoal = nextgoal;
     self notify("release_node");
     assert(!isDefined(currentgoal.patrol_claimed), "Goal was already claimed");
 
-    if(!is_true(self.patrol_dont_claim_node))
+    if(!is_true(self.patrol_dont_claim_node)) {
       currentgoal.patrol_claimed = 1;
+    }
 
     self.last_patrol_goal = currentgoal;
     [[set_goal_func[goal_type]]](currentgoal);
 
-    if(isDefined(currentgoal.radius) && currentgoal.radius > 0)
+    if(isDefined(currentgoal.radius) && currentgoal.radius > 0) {
       self.goalradius = currentgoal.radius;
-    else
+    }
+    else {
       self.goalradius = 32;
+    }
 
     self waittill("goal");
     currentgoal notify("trigger", self);
@@ -216,8 +224,9 @@ patrol_walk_twitch_loop() {
     wait(randomfloatrange(8, 20));
     walkanim = "patrol_walk_twitch";
 
-    if(isDefined(self.patrol_walk_twitch))
+    if(isDefined(self.patrol_walk_twitch)) {
       walkanim = self.patrol_walk_twitch;
+    }
 
     self set_generic_run_anim(walkanim, 1);
     length = getanimlength(getanim_generic(walkanim));
@@ -228,11 +237,13 @@ patrol_walk_twitch_loop() {
       walkanim = self.unique_patrol_walk_anim;
       self set_run_anim(walkanim, 1);
     } else {
-      if(isDefined(self.patrol_walk_anim))
+      if(isDefined(self.patrol_walk_anim)) {
         walkanim = self.patrol_walk_anim;
+      }
 
-      if(isDefined(self.script_patrol_walk_anim))
+      if(isDefined(self.script_patrol_walk_anim)) {
         walkanim = self.script_patrol_walk_anim;
+      }
 
       self set_generic_run_anim(walkanim, 1);
     }
@@ -291,8 +302,9 @@ waittill_combat() {
 get_target_ents() {
   array = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     array = getEntArray(self.target, "targetname");
+  }
 
   return array;
 }
@@ -300,8 +312,9 @@ get_target_ents() {
 get_target_nodes() {
   array = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     array = getnodearray(self.target, "targetname");
+  }
 
   return array;
 }
@@ -315,8 +328,9 @@ get_linked_nodes() {
     for(i = 0; i < linknames.size; i++) {
       ent = getnode(linknames[i], "script_linkname");
 
-      if(isDefined(ent))
+      if(isDefined(ent)) {
         array[array.size] = ent;
+      }
     }
   }
 

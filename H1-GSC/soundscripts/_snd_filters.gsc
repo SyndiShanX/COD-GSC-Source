@@ -55,17 +55,20 @@ snd_set_current_occlusion_name(var_0) {
 snd_load_dsp_buses() {
   var_0 = soundscripts\_snd::snd_parse_soundtables("DSP bus", ["sounddata\dspbuses.csv"], 2, "name", "name");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level._snd.dsp_buses = var_0;
-  else
+  }
+  else {
     level._snd.dsp_buses = [];
+  }
 }
 
 snd_get_dsp_buses() {
   var_0 = [];
 
-  foreach(var_2 in level._snd.dsp_buses)
+  foreach(var_2 in level._snd.dsp_buses) {
   var_0[var_0.size] = var_2.name;
+  }
 
   return var_0;
 }
@@ -92,8 +95,9 @@ snd_set_filter(var_0, var_1, var_2) {
   }
   var_3 = 0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
+  }
 
   if(!isDefined(var_0) || isDefined(var_0) && (var_0 == "" || var_0 == "none")) {
     snd_set_current_filter_name(var_3, "");
@@ -155,8 +159,9 @@ snd_fade_out_filter(var_0) {
 }
 
 snd_get_filter_preset(var_0) {
-  if(isDefined(level._snd.filters.presets[var_0]))
+  if(isDefined(level._snd.filters.presets[var_0])) {
     return level._snd.filters.presets[var_0];
+  }
 
   return undefined;
 }
@@ -182,8 +187,9 @@ snd_set_filter_threaded(var_0, var_1) {
     if(var_6 == "all" || var_6 == "set_all") {
       var_7 = snd_get_dsp_buses();
 
-      foreach(var_9 in var_7)
+      foreach(var_9 in var_7) {
       var_3[var_9] = sndx_get_dsp_filter_setting(var_0, var_9, var_5);
+      }
 
       continue;
     }
@@ -203,8 +209,9 @@ snd_set_filter_threaded(var_0, var_1) {
 snd_clear_filter(var_0) {
   var_1 = 0;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0;
+  }
 
   snd_set_filter(undefined, var_1);
 }
@@ -239,8 +246,9 @@ snd_set_occlusion(var_0) {
 }
 
 snd_get_occlusion_preset(var_0) {
-  if(isDefined(level._snd.occlusion.presets[var_0]))
+  if(isDefined(level._snd.occlusion.presets[var_0])) {
     return level._snd.occlusion.presets[var_0];
+  }
 
   return undefined;
 }
@@ -261,8 +269,9 @@ snd_set_occlusion_threaded(var_0) {
 
       break;
     } else {
-      if(snd_is_dsp_bus(var_4))
+      if(snd_is_dsp_bus(var_4)) {
         level.player setocclusion(var_4, var_3["freq"], var_3["type"], var_3["gain"], var_3["q"]);
+      }
       else {
       }
 
@@ -317,15 +326,18 @@ snd_enable_zone_occlusion_and_filtering() {
     var_2 = soundscripts\_audio_zone_manager::azm_get_current_zone();
     var_3 = level._audio.zone_mgr.zones[var_2];
 
-    if(isDefined(var_3["occlusion"]) && var_3["occlusion"] != "none")
+    if(isDefined(var_3["occlusion"]) && var_3["occlusion"] != "none") {
       var_1 = var_3["occlusion"];
+    }
 
-    if(isDefined(var_3["filter"]) && var_3["filter"] != "none")
+    if(isDefined(var_3["filter"]) && var_3["filter"] != "none") {
       var_0 = var_3["filter"];
+    }
   }
 
-  if(snd_get_current_occlusion_name() != var_1)
+  if(snd_get_current_occlusion_name() != var_1) {
     var_1 = snd_get_current_occlusion_name();
+  }
 
   snd_enable_zone_filters();
   snd_set_filter(var_0, 0);

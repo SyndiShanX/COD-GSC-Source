@@ -12,41 +12,53 @@ init() {
   level.ac130.angles = (0, 115, 0);
   level.ac130 hide();
 
-  if(getdvar("ac130_enabled") == "")
+  if(getdvar("ac130_enabled") == "") {
     setdvar("ac130_enabled", "1");
+  }
 
-  if(getdvar("ac130_post_effects_enabled") == "")
+  if(getdvar("ac130_post_effects_enabled") == "") {
     setdvar("ac130_post_effects_enabled", "1");
+  }
 
-  if(getdvar("ac130_debug_weapons") == "")
+  if(getdvar("ac130_debug_weapons") == "") {
     setdvar("ac130_debug_weapons", "0");
+  }
 
-  if(getdvar("ac130_debug_context_sensative_dialog") == "")
+  if(getdvar("ac130_debug_context_sensative_dialog") == "") {
     setdvar("ac130_debug_context_sensative_dialog", "0");
+  }
 
-  if(getdvar("ac130_debug_friendly_count") == "")
+  if(getdvar("ac130_debug_friendly_count") == "") {
     setdvar("ac130_debug_friendly_count", "0");
+  }
 
-  if(getdvar("ac130_hud_text_misc") == "")
+  if(getdvar("ac130_hud_text_misc") == "") {
     setdvar("ac130_hud_text_misc", "1");
+  }
 
-  if(getdvar("ac130_hud_text_thermal") == "")
+  if(getdvar("ac130_hud_text_thermal") == "") {
     setdvar("ac130_hud_text_thermal", "1");
+  }
 
-  if(getdvar("ac130_hud_text_weapons") == "")
+  if(getdvar("ac130_hud_text_weapons") == "") {
     setdvar("ac130_hud_text_weapons", "1");
+  }
 
-  if(getdvar("ac130_target_markers") == "")
+  if(getdvar("ac130_target_markers") == "") {
     setdvar("ac130_target_markers", "0");
+  }
 
-  if(getdvar("ac130_pre_engagement_mode") == "")
+  if(getdvar("ac130_pre_engagement_mode") == "") {
     setdvar("ac130_pre_engagement_mode", "2");
+  }
 
-  if(getdvar("ac130_alternate_controls") == "")
+  if(getdvar("ac130_alternate_controls") == "") {
     setdvar("ac130_alternate_controls", "0");
+  }
 
-  if(getdvar("ac130_ragdoll_deaths") == "")
+  if(getdvar("ac130_ragdoll_deaths") == "") {
     setdvar("ac130_ragdoll_deaths", "1");
+  }
 
   precacheshader("ac130_overlay_25mm");
   precacheshader("ac130_overlay_40mm");
@@ -194,11 +206,13 @@ init() {
     thread ac130_25mm_loop_rumble();
     thread invertthermal();
 
-    if(getdvar("ac130_pre_engagement_mode") == "1")
+    if(getdvar("ac130_pre_engagement_mode") == "1") {
       thread failmissionforengaging();
+    }
 
-    if(getdvar("ac130_pre_engagement_mode") == "2")
+    if(getdvar("ac130_pre_engagement_mode") == "2") {
       thread nofirecrosshair();
+    }
 
     thread context_sensative_dialog();
     thread shotfired();
@@ -423,8 +437,9 @@ huditemsoff() {
         continue;
       }
 
-      foreach(var_3 in level.huditem[var_0[var_1]])
+      foreach(var_3 in level.huditem[var_0[var_1]]) {
       var_3 destroy();
+      }
     }
   }
 }
@@ -465,8 +480,9 @@ hud_timer() {
     var_3 = gettime() - var_2;
     var_4 = millisecondstoshaders(var_3);
 
-    for(var_1 = 0; var_1 < 4; var_1++)
+    for(var_1 = 0; var_1 < 4; var_1++) {
       level.huditem["timer"][var_1] setshader(var_4[var_1], _1080tovirtualcoords(42), _1080tovirtualcoords(55));
+    }
 
     wait 1;
   }
@@ -643,8 +659,9 @@ attachplayer() {
 getrealac130angles() {
   for(var_0 = level.ac130.angles[1]; var_0 >= 360; var_0 = var_0 - 360) {}
 
-  while(var_0 < 0)
+  while(var_0 < 0) {
     var_0 = var_0 + 360;
+  }
 
   return var_0;
 }
@@ -654,8 +671,9 @@ getflyingac130anglestopoint(var_0) {
 
   for(var_1 = var_1[1] + 90; var_1 >= 360; var_1 = var_1 - 360) {}
 
-  while(var_1 < 0)
+  while(var_1 < 0) {
     var_1 = var_1 + 360;
+  }
 
   return var_1;
 }
@@ -669,8 +687,9 @@ moveplanetopoint(var_0, var_1) {
   level notify("ac130_reposition");
   level endon("ac130_reposition");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = distance(level.ac130.origin, var_0);
   var_3 = var_2 / level.ac130_speed["move"];
@@ -685,24 +704,28 @@ moveplanetopoint(var_0, var_1) {
     thread rotateplane("off");
     var_6 = getflyingac130anglestopoint(var_0) - getrealac130angles();
 
-    if(var_6 < 0)
+    if(var_6 < 0) {
       var_6 = 360 - abs(var_6);
+    }
 
     var_7 = 0;
     var_8 = 20;
 
-    if(var_6 > 0 && var_6 <= var_8)
+    if(var_6 > 0 && var_6 <= var_8) {
       var_7 = 1;
+    }
 
-    if(var_6 > 360 - var_8 && var_6 < 360)
+    if(var_6 > 360 - var_8 && var_6 < 360) {
       var_7 = 1;
+    }
 
     if(!var_7) {
       var_9 = level.ac130_speed["rotate"] / 360 * var_6;
       var_10 = 0;
 
-      if(var_9 > 3.0)
+      if(var_9 > 3.0) {
         var_10 = 3.0;
+      }
 
       level.ac130 rotateyaw(var_6, var_9, 0, var_10);
       wait(var_9 - var_10);
@@ -716,15 +739,17 @@ moveplanetopoint(var_0, var_1) {
     wait(var_3 - 2.0);
     level notify("ac130_almost_at_destination");
 
-    if(var_1)
+    if(var_1) {
       thread rotateplane("on");
+    }
 
     wait 2.0;
   } else {
     wait(var_3);
 
-    if(var_1)
+    if(var_1) {
       thread rotateplane("on");
+    }
   }
 }
 
@@ -809,8 +834,9 @@ changeweapons() {
     level.player notify("shot weapon");
     var_0++;
 
-    if(var_0 >= level.ac130_weapon.size)
+    if(var_0 >= level.ac130_weapon.size) {
       var_0 = 0;
+    }
 
     level.currentweapon = level.ac130_weapon[var_0].name;
 
@@ -824,8 +850,9 @@ changeweapons() {
     thread blink_crosshairs(level.ac130_weapon[var_0].weapon);
     thread blink_hud_elem(var_0);
 
-    if(getdvar("ac130_alternate_controls") == "0")
+    if(getdvar("ac130_alternate_controls") == "0") {
       setsaveddvar("cg_fov", level.ac130_weapon[var_0].fov);
+    }
 
     level.player takeallweapons();
     level.player giveweapon(level.ac130_weapon[var_0].weapon);
@@ -834,8 +861,9 @@ changeweapons() {
     setammo();
     level.player thread maps\_utility::play_sound_on_entity("ac130_weapon_switch");
 
-    if(var_0 == 0)
+    if(var_0 == 0) {
       common_scripts\utility::flag_set("player_changed_weapons_back");
+    }
 
     common_scripts\utility::flag_set("player_changed_weapons");
   }
@@ -848,8 +876,9 @@ blink_hud_elem(var_0) {
   if(!isDefined(level.huditem["weapon_text"])) {
     return;
   }
-  for(var_1 = 0; var_1 < level.huditem["weapon_text"].size; var_1++)
+  for(var_1 = 0; var_1 < level.huditem["weapon_text"].size; var_1++) {
     level.huditem["weapon_text"][var_1].alpha = 0.5;
+  }
 
   level.huditem["weapon_text"][var_0].alpha = 1;
 
@@ -899,10 +928,12 @@ weaponfiredthread() {
     if(!level.weaponreadytofire[var_0[0]]) {
       continue;
     }
-    if(var_0[0] == "ac130_105mm")
+    if(var_0[0] == "ac130_105mm") {
       level.player playSound("ac130_105mm_fire");
-    else if(var_0[0] == "ac130_40mm")
+    }
+    else if(var_0[0] == "ac130_40mm") {
       level.player playSound("ac130_40mm_fire");
+    }
 
     thread blink_crosshairs(var_0[0]);
     thread weaponreload(var_0[0]);
@@ -919,8 +950,9 @@ ac130_25mm_loop_fire_sound() {
     if(level.player isfiring() && var_1[0] == "ac130_25mm" && !level.player ismeleeing()) {
       var_0 playLoopSound("ac130_25mm_fire");
 
-      while(level.player isfiring())
+      while(level.player isfiring()) {
         wait 0.05;
+      }
 
       var_0 stoploopsound();
       var_0 playSound("ac130_25mm_tail_cn");
@@ -939,10 +971,12 @@ ac130_25mm_loop_rumble() {
     var_2 = level.player getweaponslistprimaries();
     var_3 = level.player isfiring() && var_2[0] == "ac130_25mm";
 
-    if(!var_1 && var_3)
+    if(!var_1 && var_3) {
       var_0 playrumblelooponentity("ac130_25mm_fire");
-    else if(var_1 && !var_3)
+    }
+    else if(var_1 && !var_3) {
       var_0 stoprumble("ac130_25mm_fire");
+    }
 
     var_1 = var_3;
     wait 0.05;
@@ -981,21 +1015,24 @@ invertthermal() {
     if(var_0 == "0") {
       maps\_utility::set_vision_set("ac130_inverted", 0);
 
-      if(isDefined(level.huditem["thermal_mode"]))
+      if(isDefined(level.huditem["thermal_mode"])) {
         level.huditem["thermal_mode"] setshader(level.bhot_shader, _1080tovirtualcoords(188), _1080tovirtualcoords(64));
+      }
 
       var_0 = "1";
     } else {
       maps\_utility::set_vision_set("ac130", 0);
 
-      if(isDefined(level.huditem["thermal_mode"]))
+      if(isDefined(level.huditem["thermal_mode"])) {
         level.huditem["thermal_mode"] setshader(level.whot_shader, _1080tovirtualcoords(188), _1080tovirtualcoords(64));
+      }
 
       var_0 = "0";
     }
 
-    if(common_scripts\utility::flag("player_changed_thermal"))
+    if(common_scripts\utility::flag("player_changed_thermal")) {
       common_scripts\utility::flag_set("player_changed_thermal_back");
+    }
 
     common_scripts\utility::flag_set("player_changed_thermal");
   }
@@ -1005,16 +1042,19 @@ setammo() {
   level notify("setting_ammo");
   level endon("setting_ammo");
 
-  if(common_scripts\utility::flag("clear_to_engage"))
+  if(common_scripts\utility::flag("clear_to_engage")) {
     var_0 = 1;
-  else
+  }
+  else {
     var_0 = 0;
+  }
 
   var_1 = level.player getweaponslistprimaries();
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(level.weaponreadytofire[var_1[var_2]])
+    if(level.weaponreadytofire[var_1[var_2]]) {
       level.player setweaponammoclip(var_1[var_2], var_0);
+    }
   }
 }
 
@@ -1106,8 +1146,9 @@ gun_fired_and_ready_105mm() {
   level endon("gun_fired_and_ready_105mm");
   wait 0.5;
 
-  if(randomint(2) == 0)
+  if(randomint(2) == 0) {
     thread context_sensative_dialog_play_random_group_sound("weapons", "105mm_fired");
+  }
 
   wait 5.0;
   thread blink_crosshairs_stop();
@@ -1118,11 +1159,13 @@ getfriendlyscenter() {
   var_0 = undefined;
   var_1 = getaiarray("allies");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return (0, 0, 0);
+  }
 
-  if(var_1.size <= 0)
+  if(var_1.size <= 0) {
     return (0, 0, 0);
+  }
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(!isDefined(var_0)) {
@@ -1142,13 +1185,15 @@ shotfired() {
     level.player waittill("projectile_impact", var_0, var_1, var_2);
     thread shotfiredfriendlyproximity(var_0, var_1);
 
-    if(issubstr(tolower(var_0), "105"))
+    if(issubstr(tolower(var_0), "105")) {
       thread shotfireddarkscreenoverlay();
+    }
 
     thread shotfiredbadplace(var_1, var_0);
 
-    if(getdvar("ac130_ragdoll_deaths") == "1")
+    if(getdvar("ac130_ragdoll_deaths") == "1") {
       thread shotfiredphysicssphere(var_1, var_0);
+    }
 
     wait 0.05;
   }
@@ -1193,8 +1238,9 @@ shotfiredfriendlyproximity_trigger_timeout(var_0, var_1) {
 shotfiredbadplace(var_0, var_1) {
   badplace_cylinder("", level.badplaceduration[var_1], var_0, level.badplaceradius[var_1], level.badplaceradius[var_1], "axis");
 
-  if(getdvar("ac130_debug_weapons") == "1")
+  if(getdvar("ac130_debug_weapons") == "1") {
     thread debug_circle(var_0, level.badplaceradius[var_1], level.badplaceduration[var_1], level.color["blue"], undefined, 1);
+  }
 }
 
 shotfiredphysicssphere(var_0, var_1) {
@@ -1230,8 +1276,9 @@ shotfireddarkscreenoverlay() {
 add_beacon_effect(var_0, var_1) {
   self endon("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level endon(var_0);
+  }
 
   var_2 = 0.75;
   wait(randomfloat(3.0));
@@ -1259,13 +1306,15 @@ vehicle_thermal_models() {
   }
   if(self.model == "vehicle_pickup_roobars") {}
 
-  if(self.model == "vehicle_ch46e_opened_door")
+  if(self.model == "vehicle_ch46e_opened_door") {
     self setModel("vehicle_ch46e_opened_door_ac130");
+  }
 }
 
 spawn_callback_thread(var_0) {
-  if(isDefined(level.levelspecificspawnercallbackthread))
+  if(isDefined(level.levelspecificspawnercallbackthread)) {
     thread[[level.levelspecificspawnercallbackthread]](var_0);
+  }
 
   if(!isDefined(var_0)) {
     return;
@@ -1273,8 +1322,9 @@ spawn_callback_thread(var_0) {
   if(!isDefined(var_0.team)) {
     return;
   }
-  if(var_0.team == "axis")
+  if(var_0.team == "axis") {
     thread enemy_killed_thread(var_0);
+  }
 
   if(getdvar("ac130_target_markers") == "1") {
     target_set(var_0, (0, 0, 32));
@@ -1308,17 +1358,20 @@ enemy_killed_thread(var_0) {
   if(var_0.team != "axis") {
     return;
   }
-  if(getdvar("ac130_ragdoll_deaths") == "1")
+  if(getdvar("ac130_ragdoll_deaths") == "1") {
     var_0.skipdeathanim = 1;
+  }
 
   var_0 waittill("death", var_1);
 
-  if(isDefined(var_1) && var_1 == level.player)
+  if(isDefined(var_1) && var_1 == level.player) {
     level.enemieskilledbyplayer++;
+  }
 
   if(getdvar("ac130_ragdoll_deaths") == "1") {
-    if(isDefined(var_0.damageweapon) && issubstr(var_0.damageweapon, "25mm"))
+    if(isDefined(var_0.damageweapon) && issubstr(var_0.damageweapon, "25mm")) {
       var_0.skipdeathanim = undefined;
+    }
   }
 
   thread context_sensative_dialog_kill(var_0, var_1);
@@ -1337,8 +1390,9 @@ context_sensative_dialog() {
 
 context_sensative_dialog_guy_in_sight() {
   for(;;) {
-    if(context_sensative_dialog_guy_in_sight_check())
+    if(context_sensative_dialog_guy_in_sight_check()) {
       thread context_sensative_dialog_play_random_group_sound("ai", "in_sight");
+    }
 
     wait(randomfloatrange(1, 3));
   }
@@ -1354,8 +1408,9 @@ context_sensative_dialog_guy_in_sight_check() {
     if(!isalive(var_0[var_1])) {
       continue;
     }
-    if(common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0[var_1].origin, level.cosine["5"]))
+    if(common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0[var_1].origin, level.cosine["5"])) {
       return 1;
+    }
 
     wait 0.05;
   }
@@ -1368,8 +1423,9 @@ context_sensative_dialog_guy_crawling() {
     level waittill("ai_crawling", var_0);
 
     if(isDefined(var_0) && isDefined(var_0.origin)) {
-      if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+      if(getdvar("ac130_debug_context_sensative_dialog") == "1") {
         thread debug_line(level.player.origin, var_0.origin, 5.0, (0, 1, 0));
+      }
     }
 
     thread context_sensative_dialog_play_random_group_sound("ai", "wounded_crawl");
@@ -1381,8 +1437,9 @@ context_sensative_dialog_guy_pain_falling() {
     level waittill("ai_pain_falling", var_0);
 
     if(isDefined(var_0) && isDefined(var_0.origin)) {
-      if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+      if(getdvar("ac130_debug_context_sensative_dialog") == "1") {
         thread debug_line(level.player.origin, var_0.origin, 5.0, (1, 0, 0));
+      }
     }
 
     thread context_sensative_dialog_play_random_group_sound("ai", "wounded_pain");
@@ -1394,8 +1451,9 @@ context_sensative_dialog_guy_pain() {
     level waittill("ai_pain", var_0);
 
     if(isDefined(var_0) && isDefined(var_0.origin)) {
-      if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+      if(getdvar("ac130_debug_context_sensative_dialog") == "1") {
         thread debug_line(level.player.origin, var_0.origin, 5.0, (1, 0, 0));
+      }
     }
 
     thread context_sensative_dialog_play_random_group_sound("ai", "wounded_pain");
@@ -1408,8 +1466,9 @@ context_sensative_dialog_secondary_explosion_vehicle() {
     wait 1;
 
     if(isDefined(var_0)) {
-      if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+      if(getdvar("ac130_debug_context_sensative_dialog") == "1") {
         thread debug_line(level.player.origin, var_0, 5.0, (0, 0, 1));
+      }
     }
 
     thread context_sensative_dialog_play_random_group_sound("explosion", "secondary");
@@ -1427,8 +1486,9 @@ context_sensative_dialog_kill(var_0, var_1) {
   level notify("enemy_killed");
 
   if(isDefined(var_0) && isDefined(var_0.origin)) {
-    if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+    if(getdvar("ac130_debug_context_sensative_dialog") == "1") {
       thread debug_line(level.player.origin, var_0.origin, 5.0, (1, 1, 0));
+    }
   }
 }
 
@@ -1441,13 +1501,16 @@ context_sensative_dialog_kill_thread() {
     var_1 = "kill";
     var_2 = undefined;
 
-    if(level.enemieskilledintimewindow >= 5)
+    if(level.enemieskilledintimewindow >= 5) {
       maps\_utility::giveachievement_wrapper("STRAIGHT_FLUSH");
+    }
 
-    if(level.enemieskilledintimewindow >= 3)
+    if(level.enemieskilledintimewindow >= 3) {
       var_2 = "large_group";
-    else if(level.enemieskilledintimewindow == 2)
+    }
+    else if(level.enemieskilledintimewindow == 2) {
       var_2 = "small_group";
+    }
     else {
       var_2 = "single";
 
@@ -1511,8 +1574,9 @@ context_sensative_dialog_vehiclespawn(var_0) {
   thread context_sensative_dialog_vehicledeath(var_0);
   var_0 endon("death");
 
-  while(!common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, level.cosine["45"]))
+  while(!common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_0.origin, level.cosine["45"])) {
     wait 0.5;
+  }
 
   context_sensative_dialog_play_random_group_sound("vehicle", "incoming");
 }
@@ -1524,8 +1588,9 @@ context_sensative_dialog_vehicledeath(var_0) {
 
 context_sensative_dialog_filler() {
   for(;;) {
-    if(isDefined(level.radio_in_use) && level.radio_in_use == 1)
+    if(isDefined(level.radio_in_use) && level.radio_in_use == 1) {
       level waittill("radio_not_in_use");
+    }
 
     var_0 = gettime();
 
@@ -1539,14 +1604,17 @@ context_sensative_dialog_filler() {
 }
 
 context_sensative_dialog_play_random_group_sound(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   if(!common_scripts\utility::flag("allow_context_sensative_dialog")) {
-    if(var_2)
+    if(var_2) {
       common_scripts\utility::flag_wait("allow_context_sensative_dialog");
-    else
+    }
+    else {
       return;
+    }
   }
 
   var_3 = undefined;
@@ -1556,8 +1624,9 @@ context_sensative_dialog_play_random_group_sound(var_0, var_1, var_2) {
     for(var_5 = 0; var_5 < level.scr_sound[var_0][var_1].size; var_5++) {
       var_4++;
 
-      if(var_4 >= level.scr_sound[var_0][var_1].size)
+      if(var_4 >= level.scr_sound[var_0][var_1].size) {
         var_4 = 0;
+      }
 
       if(level.scr_sound[var_0][var_1][var_4].played == 1) {
         continue;
@@ -1567,8 +1636,9 @@ context_sensative_dialog_play_random_group_sound(var_0, var_1, var_2) {
     }
 
     if(!isDefined(var_3)) {
-      for(var_5 = 0; var_5 < level.scr_sound[var_0][var_1].size; var_5++)
+      for(var_5 = 0; var_5 < level.scr_sound[var_0][var_1].size; var_5++) {
         level.scr_sound[var_0][var_1][var_5].played = 0;
+      }
 
       var_3 = randomint(level.scr_sound[var_0][var_1].size);
     }
@@ -1584,27 +1654,32 @@ context_sensative_dialog_play_random_group_sound(var_0, var_1, var_2) {
 }
 
 context_sensative_dialog_timedout(var_0, var_1, var_2) {
-  if(!isDefined(level.context_sensative_dialog_timeouts))
+  if(!isDefined(level.context_sensative_dialog_timeouts)) {
     return 0;
+  }
 
-  if(!isDefined(level.context_sensative_dialog_timeouts[var_0]))
+  if(!isDefined(level.context_sensative_dialog_timeouts[var_0])) {
     return 0;
+  }
 
-  if(!isDefined(level.context_sensative_dialog_timeouts[var_0][var_1]))
+  if(!isDefined(level.context_sensative_dialog_timeouts[var_0][var_1])) {
     return 0;
+  }
 
   if(isDefined(level.context_sensative_dialog_timeouts[var_0][var_1].groups) && isDefined(level.context_sensative_dialog_timeouts[var_0][var_1].groups[maps\_utility::string(var_2)])) {
     var_3 = gettime();
 
-    if(var_3 - level.context_sensative_dialog_timeouts[var_0][var_1].groups[maps\_utility::string(var_2)].v["lastPlayed"] < level.context_sensative_dialog_timeouts[var_0][var_1].groups[maps\_utility::string(var_2)].v["timeoutDuration"])
+    if(var_3 - level.context_sensative_dialog_timeouts[var_0][var_1].groups[maps\_utility::string(var_2)].v["lastPlayed"] < level.context_sensative_dialog_timeouts[var_0][var_1].groups[maps\_utility::string(var_2)].v["timeoutDuration"]) {
       return 1;
+    }
 
     level.context_sensative_dialog_timeouts[var_0][var_1].groups[maps\_utility::string(var_2)].v["lastPlayed"] = var_3;
   } else if(isDefined(level.context_sensative_dialog_timeouts[var_0][var_1].v)) {
     var_3 = gettime();
 
-    if(var_3 - level.context_sensative_dialog_timeouts[var_0][var_1].v["lastPlayed"] < level.context_sensative_dialog_timeouts[var_0][var_1].v["timeoutDuration"])
+    if(var_3 - level.context_sensative_dialog_timeouts[var_0][var_1].v["lastPlayed"] < level.context_sensative_dialog_timeouts[var_0][var_1].v["timeoutDuration"]) {
       return 1;
+    }
 
     level.context_sensative_dialog_timeouts[var_0][var_1].v["lastPlayed"] = var_3;
   }
@@ -1613,14 +1688,17 @@ context_sensative_dialog_timedout(var_0, var_1, var_2) {
 }
 
 playsoundoverradio(var_0, var_1, var_2) {
-  if(!isDefined(level.radio_in_use))
+  if(!isDefined(level.radio_in_use)) {
     level.radio_in_use = 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_2 = var_2 * 1000;
   var_3 = gettime();
@@ -1636,8 +1714,9 @@ playsoundoverradio(var_0, var_1, var_2) {
   level.radioforcedtransmissionqueue[level.radioforcedtransmissionqueue.size] = var_0;
 
   while(!var_4) {
-    if(level.radio_in_use)
+    if(level.radio_in_use) {
       level waittill("radio_not_in_use");
+    }
 
     if(var_2 > 0 && gettime() - var_3 > var_2) {
       break;
@@ -1653,8 +1732,9 @@ playsoundoverradio(var_0, var_1, var_2) {
 }
 
 playaliasoverradio(var_0) {
-  if(level.radio_in_use)
+  if(level.radio_in_use) {
     return 0;
+  }
 
   level.radio_in_use = 1;
   level.player playlocalsound(var_0, "playSoundOverRadio_done");
@@ -1668,8 +1748,9 @@ playaliasoverradio(var_0) {
 mission_fail_casualties() {
   level endon("stop_casualty_tracking");
 
-  if(!isDefined(level.friendlycount))
+  if(!isDefined(level.friendlycount)) {
     level.friendlycount = 0;
+  }
 
   level.friendlycount++;
   self waittill("death");
@@ -1683,8 +1764,9 @@ mission_fail_casualties() {
 }
 
 debug_friendly_count() {
-  while(getdvar("ac130_debug_friendly_count") != "1")
+  while(getdvar("ac130_debug_friendly_count") != "1") {
     wait 1;
+  }
 
   if(!isDefined(level.friendlycounthudelem)) {
     level.friendlycounthudelem = newhudelem();
@@ -1724,38 +1806,46 @@ debug_circle(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_8[var_8.size] = (var_13, var_14, var_15);
   }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     wait(var_4);
+  }
 
   thread debug_circle_drawlines(var_8, var_2, var_3, var_5, var_0);
 }
 
 debug_circle_drawlines(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_3 = 0;
+  }
 
   for(var_5 = 0; var_5 < var_0.size; var_5++) {
     var_6 = var_0[var_5];
 
-    if(var_5 + 1 >= var_0.size)
+    if(var_5 + 1 >= var_0.size) {
       var_7 = var_0[0];
-    else
+    }
+    else {
       var_7 = var_0[var_5 + 1];
+    }
 
     thread debug_line(var_6, var_7, var_1, var_2);
 
-    if(var_3)
+    if(var_3) {
       thread debug_line(var_4, var_6, var_1, var_2);
+    }
   }
 }
 
 debug_line(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = (1, 1, 1);
+  }
 
-  for(var_4 = 0; var_4 < var_2 * 20; var_4++)
+  for(var_4 = 0; var_4 < var_2 * 20; var_4++) {
     wait 0.05;
+  }
 }

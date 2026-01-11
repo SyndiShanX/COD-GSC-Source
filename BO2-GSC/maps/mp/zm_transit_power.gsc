@@ -18,8 +18,9 @@ initializepower() {
   level thread powerevent();
   registerclientfield("toplayer", "power_rumble", 1, 1, "int");
 
-  if(!isDefined(level.vsmgr_prio_visionset_zm_transit_power_high_low))
+  if(!isDefined(level.vsmgr_prio_visionset_zm_transit_power_high_low)) {
     level.vsmgr_prio_visionset_zm_transit_power_high_low = 20;
+  }
 
   maps\mp\_visionset_mgr::vsmgr_register_info("visionset", "zm_power_high_low", 1, level.vsmgr_prio_visionset_zm_transit_power_high_low, 7, 1, ::vsmgr_lerp_power_up_down, 0);
 }
@@ -129,10 +130,12 @@ power_event_vision_set() {
       duration = randomintrange(2, 6) / 5;
       startgoal = endgoal;
 
-      if(startgoal > 0.6)
+      if(startgoal > 0.6) {
         endgoal = randomfloatrange(0.0, 0.5);
-      else
+      }
+      else {
         endgoal = 1;
+      }
 
       self power_event_vision_set_lerp(duration, startgoal, endgoal);
     } else if(randomint(100) > 75) {
@@ -140,10 +143,12 @@ power_event_vision_set() {
         duration = 0.2;
         startgoal = endgoal;
 
-        if(startgoal > 0.6)
+        if(startgoal > 0.6) {
           endgoal = 0.0;
-        else
+        }
+        else {
           endgoal = 1.0;
+        }
 
         self power_event_vision_set_lerp(duration, startgoal, endgoal);
       }
@@ -151,10 +156,12 @@ power_event_vision_set() {
       duration = 0.4;
       startgoal = endgoal;
 
-      if(startgoal > 0.6)
+      if(startgoal > 0.6) {
         endgoal = randomfloatrange(0.0, 0.5);
-      else
+      }
+      else {
         endgoal = randomfloatrange(0.5, 1.0);
+      }
 
       self power_event_vision_set_lerp(duration, startgoal, endgoal);
     }
@@ -170,8 +177,9 @@ power_event_vision_set_lerp(duration, startgoal, endgoal) {
   self endon("disconnect");
   incs = int(duration / 0.05);
 
-  if(incs == 0)
+  if(incs == 0) {
     incs = 1;
+  }
 
   incsgoal = (endgoal - startgoal) / incs;
   currentgoal = startgoal;
@@ -196,8 +204,9 @@ power_event_rumble_and_quake(power_on) {
         continue;
       }
       if(player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_prr", 1) || player maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_pcr", 1)) {
-        if(!(isDefined(player.power_rumble_active) && player.power_rumble_active))
+        if(!(isDefined(player.power_rumble_active) && player.power_rumble_active)) {
           player thread power_event_rumble_and_quake_player();
+        }
 
         continue;
       }
@@ -227,8 +236,9 @@ power_event_rumble_and_quake_player() {
   self thread power_event_vision_set();
   self thread power_event_vision_set_post_event();
 
-  while((self maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_prr", 1) || self maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_pcr", 1)) && (isDefined(level.power_event_in_progress) && level.power_event_in_progress))
+  while((self maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_prr", 1) || self maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_pcr", 1)) && (isDefined(level.power_event_in_progress) && level.power_event_in_progress)) {
     wait 1;
+  }
 
   self.power_rumble_active = 0;
   self notify("end_vision_set_power");
@@ -290,8 +300,9 @@ killzombiesinpowerstation() {
         continue;
       }
       if(isDefined(zombie) && zombie maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_prr", 1) || isDefined(zombie.zone_name) && zombie.zone_name == "zone_prr") {
-        if(!(isDefined(zombie.has_been_damaged_by_player) && zombie.has_been_damaged_by_player))
+        if(!(isDefined(zombie.has_been_damaged_by_player) && zombie.has_been_damaged_by_player)) {
           level.zombie_total++;
+        }
 
         zombie dodamage(zombie.health + 100, zombie.origin);
         wait(randomfloatrange(0.05, 0.15));
@@ -323,13 +334,15 @@ raisepowerplantgates() {
   gate2 = getEntArray("security_booth_gate_2", "targetname");
 
   if(isDefined(gate1)) {
-    for(i = 0; i < gate1.size; i++)
+    for(i = 0; i < gate1.size; i++) {
       gate1[i] thread raisegate(-90);
+    }
   }
 
   if(isDefined(gate2)) {
-    for(i = 0; i < gate2.size; i++)
+    for(i = 0; i < gate2.size; i++) {
       gate2[i] thread raisegate(90);
+    }
   }
 
   level.the_bus notify("OnPowerOn");
@@ -358,8 +371,9 @@ powerevent() {
     reactor_core_mover playLoopSound("zmb_power_rise_loop", 0.75);
     reactor_core_mover thread coremove(power_event_time);
 
-    if(isDefined(level.avogadro) && isDefined(level.avogadro.state) && level.avogadro.state == "chamber")
+    if(isDefined(level.avogadro) && isDefined(level.avogadro.state) && level.avogadro.state == "chamber") {
       level thread avogadroreleasefromchamberevent();
+    }
 
     wait(power_event_time);
     reactor_core_mover stoploopsound(0.5);
@@ -386,10 +400,12 @@ corerotate(time) {
 }
 
 coremove(time, down) {
-  if(isDefined(down) && down)
+  if(isDefined(down) && down) {
     self movez(-160, time);
-  else
+  }
+  else {
     self movez(160, time);
+  }
 }
 
 blockstairs() {
@@ -407,8 +423,9 @@ linkentitiestocoremover(reactor_core_mover) {
   for(i = 0; i < core_entities.size; i++) {
     next_ent = core_entities[i];
 
-    if(next_ent.classname == "trigger_use_touch")
+    if(next_ent.classname == "trigger_use_touch") {
       next_ent enablelinkto();
+    }
 
     next_ent linkto(reactor_core_mover, "tag_origin");
   }
@@ -444,8 +461,9 @@ raisereactordoors() {
 avogadro_show_vox(user) {
   wait 1;
 
-  if(isDefined(user))
+  if(isDefined(user)) {
     user thread maps\mp\zombies\_zm_audio::create_and_play_dialog("power", "power_on");
+  }
 
   wait 8;
   players = get_players();

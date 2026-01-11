@@ -944,8 +944,9 @@ road_price_hillside_nag()
 	while( !flag( "player_at_overlook" ) )
 	{
 		wait( randomintrange( 25, 35 ) );
-		if( flag( "player_at_overlook" ) )
+		if( flag( "player_at_overlook" ) ) {
 			break;
+		}
 			
 		//Price: "Soap, over here."
 		radio_dialogue( "pri_overhere" );
@@ -1903,10 +1904,12 @@ rappel_player_rappel_setup() {
 
   for(;;) {
     rappel_trigger waittill("trigger");
-    if(level.player isthrowinggrenade())
+    if(level.player isthrowinggrenade()) {
       continue;
-    if(level.player isswitchingweapon())
+    }
+    if(level.player isswitchingweapon()) {
       continue;
+    }
     break;
   }
   rappel_trigger delete();
@@ -1931,8 +1934,9 @@ rappel_prices_rappel_start() {
   level.price.anim_ent anim_reach_solo(level.price, "pri_rappel_setup");
   level.price.anim_ent anim_single_solo(level.price, "pri_rappel_setup");
 
-  if(!flag("player_hooking_up"))
+  if(!flag("player_hooking_up")) {
     level.price.anim_ent thread anim_loop_solo(level.price, "pri_rappel_idle");
+  }
 }
 
 // a notetrack in the pri_rappel_setup animation calls this
@@ -2148,22 +2152,25 @@ rappel_price_hookup_nag() {
 
   while(!flag("player_hooking_up")) {
     wait(randomintrange(24, 34));
-    if(flag("player_hooking_up"))
+    if(flag("player_hooking_up")) {
       break;
+    }
 
     //* Price: "Soap, hook up."
     radio_dialogue("pri_soaphookup");
 
     wait(randomintrange(20, 30));
-    if(flag("player_hooking_up"))
+    if(flag("player_hooking_up")) {
       break;
+    }
 
     //* Price: "Soap, what's the problem? Hook up to the railing."
     radio_dialogue("pri_whatstheproblem");
 
     wait(randomintrange(20, 30));
-    if(flag("player_hooking_up"))
+    if(flag("player_hooking_up")) {
       break;
+    }
 
     //* Price: "Soap, hook up, let's go."
     radio_dialogue("pri_hookupletsgo");

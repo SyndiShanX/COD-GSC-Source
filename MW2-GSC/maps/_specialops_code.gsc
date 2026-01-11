@@ -15,8 +15,9 @@ Player 2 spawns at these locations in Special Ops games. Will use the closest sp
 
 pick_starting_location_so(return_placement) {
   if(isDefined(return_placement) && return_placement) {
-    if(isDefined(level.skip_PlayerSetStreamOrigin) && level.skip_PlayerSetStreamOrigin)
+    if(isDefined(level.skip_PlayerSetStreamOrigin) && level.skip_PlayerSetStreamOrigin) {
       return undefined;
+    }
   }
 
   if(isDefined(level.pmc_match) && level.pmc_match) {
@@ -24,8 +25,9 @@ pick_starting_location_so(return_placement) {
   }
 
   p1_starts = getEntArray("info_player_start_so", "classname");
-  if(p1_starts.size <= 0)
+  if(p1_starts.size <= 0) {
     p1_starts = getEntArray("info_player_start", "classname");
+  }
 
   assertex(p1_starts.size > 0, "Special Ops requires at least 1 player starting position. Place either an info_player_start_so or info_player_start in the level.");
 
@@ -73,10 +75,12 @@ pick_starting_location_pmc(return_placement) {
   excluders = [];
   spawnEnt = undefined;
   foreach(player in level.players) {
-    if(!excluders.size)
+    if(!excluders.size) {
       spawnEnt = random(startingLocations);
-    else
+    }
+    else {
       spawnEnt = get_closest_exclude(spawnEnt.origin, startingLocations, excluders);
+    }
 
     assert(isDefined(spawnEnt));
 
@@ -98,8 +102,9 @@ place_player_at_start_point(player, start_point) {
   assertex(isDefined(start_point), "place_player_at_start_point() requires a valid start_point.");
 
   player SetOrigin(start_point.origin);
-  if(isDefined(start_point.angles))
+  if(isDefined(start_point.angles)) {
     player setPlayerAngles(start_point.angles);
+  }
 }
 
 place_player2_near_player1() {
@@ -116,32 +121,38 @@ place_player2_near_player1() {
 }
 
 specialops_remove_entity_check(special_op_state) {
-  if(specialops_remove_flag_check(special_op_state))
+  if(specialops_remove_flag_check(special_op_state)) {
     return true;
+  }
 
-  if(specialops_remove_name_check(special_op_state))
+  if(specialops_remove_name_check(special_op_state)) {
     return true;
+  }
 
   return false;
 }
 
 specialops_remove_flag_check(special_op_state) {
-  if(!isDefined(self.script_specialops))
+  if(!isDefined(self.script_specialops)) {
     return false;
+  }
 
   assertex(((self.script_specialops == 0) || (self.script_specialops == 1)), "Entities with script_specialops set must use a value of either 0 or 1. Classname " + self.classname + " at Origin " + self.origin);
-  if(self.script_specialops == special_op_state)
+  if(self.script_specialops == special_op_state) {
     return false;
+  }
 
   return true;
 }
 
 specialops_remove_name_check(special_op_state) {
-  if(!isDefined(self.script_specialopsname))
+  if(!isDefined(self.script_specialopsname)) {
     return false;
+  }
 
-  if(special_op_state == 0)
+  if(special_op_state == 0) {
     return true;
+  }
 
   tokens = strtok(self.script_specialopsname, ":;, ");
   delete_ent = true;
@@ -157,11 +168,13 @@ specialops_remove_name_check(special_op_state) {
 
 so_create_hud_item_delay_draw(hudelem) {
   hudelem.alpha = 0;
-  while(!so_hud_can_show())
+  while(!so_hud_can_show()) {
     wait 0.5;
+  }
 
-  if(!isDefined(hudelem))
+  if(!isDefined(hudelem)) {
     return;
+  }
 
   if(so_hud_can_toggle(hudelem)) {
     switch (self.so_infohud_toggle_state) {
@@ -179,29 +192,35 @@ so_create_hud_item_delay_draw(hudelem) {
     hudelem fade_over_time(1, 0.5);
   }
 
-  if(!self ent_flag("so_hud_can_toggle"))
+  if(!self ent_flag("so_hud_can_toggle")) {
     self ent_flag_set("so_hud_can_toggle");
+  }
 }
 
 so_hud_can_show() {
-  if(isDefined(level.so_waiting_for_players) && level.so_waiting_for_players)
+  if(isDefined(level.so_waiting_for_players) && level.so_waiting_for_players) {
     return false;
+  }
 
-  if(isDefined(level.challenge_time_force_on) && level.challenge_time_force_on)
+  if(isDefined(level.challenge_time_force_on) && level.challenge_time_force_on) {
     return true;
+  }
 
-  if(!isDefined(self.so_hud_show_time))
+  if(!isDefined(self.so_hud_show_time)) {
     return true;
+  }
 
   return (gettime() > self.so_hud_show_time);
 }
 
 so_hud_can_toggle(hudelem) {
-  if(!isDefined(hudelem.so_can_toggle) || !hudelem.so_can_toggle)
+  if(!isDefined(hudelem.so_can_toggle) || !hudelem.so_can_toggle) {
     return false;
+  }
 
-  if(!isDefined(self.so_infohud_toggle_state))
+  if(!isDefined(self.so_infohud_toggle_state)) {
     return false;
+  }
 
   return true;
 }
@@ -247,8 +266,9 @@ challenge_timer_player_setup(start_flag, passed_flag, message) {
 // CTW - Better way to do this: Have the timer detect the halfway mark when counting down
 // and if you haven't set these flags, tell the player they need to pick it up.
 challenge_timer_detect_3quarter() {
-  if(!flag_exist("so_challenge_is_3quarter"))
+  if(!flag_exist("so_challenge_is_3quarter")) {
     flag_init("so_challenge_is_3quarter");
+  }
 
   flag_wait("so_challenge_is_3quarter");
 
@@ -256,8 +276,9 @@ challenge_timer_detect_3quarter() {
 }
 
 challenge_timer_detect_halfway() {
-  if(!flag_exist("so_challenge_is_halfway"))
+  if(!flag_exist("so_challenge_is_halfway")) {
     flag_init("so_challenge_is_halfway");
+  }
 
   flag_wait("so_challenge_is_halfway");
 
@@ -265,8 +286,9 @@ challenge_timer_detect_halfway() {
 }
 
 challenge_timer_detect_quarter() {
-  if(!flag_exist("so_challenge_is_quarter"))
+  if(!flag_exist("so_challenge_is_quarter")) {
     flag_init("so_challenge_is_quarter");
+  }
 
   flag_wait("so_challenge_is_quarter");
 
@@ -276,43 +298,51 @@ challenge_timer_detect_quarter() {
 challenge_timer_wait_start(hud_msg, hud_time, start_flag) {
   level endon("special_op_terminated");
 
-  if(isDefined(start_flag))
+  if(isDefined(start_flag)) {
     flag_wait(start_flag);
+  }
 
   // Force the hud on if player charges ahead.
   foreach(player in level.players) {
-    if(!player so_hud_can_show())
+    if(!player so_hud_can_show()) {
       player.so_hud_show_time = gettime();
+    }
   }
 
   if(!isDefined(level.challenge_start_time)) {
-    if(challenge_timer_should_play_alarm())
+    if(challenge_timer_should_play_alarm()) {
       level.player playSound("arcademode_zerodeaths");
+    }
     level.challenge_start_time = gettime();
   }
 
   hud_time.label = "";
-  if(isDefined(level.challenge_time_limit))
+  if(isDefined(level.challenge_time_limit)) {
     hud_time settenthstimer(level.challenge_time_limit);
-  else
+  }
+  else {
     hud_time settenthstimerup(0.00);
+  }
 }
 
 challenge_timer_should_play_alarm() {
-  if(isDefined(level.challenge_time_limit))
+  if(isDefined(level.challenge_time_limit)) {
     return true;
+  }
 
   foreach(player in level.players) {
-    if(player.so_infohud_toggle_state != "off")
+    if(player.so_infohud_toggle_state != "off") {
       return true;
+    }
   }
 
   return false;
 }
 
 challenge_timer_show_nudge(hud_msg, hud_time) {
-  if(!validate_timer(level.challenge_time_nudge))
+  if(!validate_timer(level.challenge_time_nudge)) {
     return;
+  }
 
   level endon("challenge_timer_passed");
   level endon("new_challenge_timer");
@@ -327,13 +357,15 @@ challenge_timer_show_nudge(hud_msg, hud_time) {
 
   hud_msg set_hudelem_yellow();
   hud_time set_hudelem_yellow();
-  if(!challenge_timer_be_silent())
+  if(!challenge_timer_be_silent()) {
     thread maps\_specialops::so_dialog_time_low_normal();
+  }
 }
 
 challenge_timer_show_hurry(hud_msg, hud_time) {
-  if(!validate_timer(level.challenge_time_hurry))
+  if(!validate_timer(level.challenge_time_hurry)) {
     return;
+  }
 
   level endon("challenge_timer_passed");
   level endon("new_challenge_timer");
@@ -347,16 +379,19 @@ challenge_timer_show_hurry(hud_msg, hud_time) {
 
   hud_msg set_hudelem_red();
   hud_time set_hudelem_red();
-  if(!challenge_timer_be_silent())
+  if(!challenge_timer_be_silent()) {
     thread maps\_specialops::so_dialog_time_low_hurry();
+  }
 }
 
 challenge_timer_be_silent() {
-  if(self != level.player)
+  if(self != level.player) {
     return true;
+  }
 
-  if(!isDefined(level.challenge_time_silent))
+  if(!isDefined(level.challenge_time_silent)) {
     return false;
+  }
 
   return level.challenge_time_silent;
 }
@@ -383,22 +418,26 @@ challenge_timer_give_alert() {
       player.hud_so_timer_time thread maps\_specialops::so_hud_pulse_create();
     }
 
-    if(level.so_challenge_time_beep < 0)
+    if(level.so_challenge_time_beep < 0) {
       level.player playSound("arcademode_kill_streak_lost");
-    else
+    }
+    else {
       level.player playSound("so_countdown_beep");
+    }
   }
 }
 
 challenge_timer_should_pulse() {
-  if(level.so_challenge_time_left > level.so_challenge_time_beep)
+  if(level.so_challenge_time_left > level.so_challenge_time_beep) {
     return false;
+  }
 
   for(i = 0; i <= level.challenge_time_beep_start; i++) {
     if(level.so_challenge_time_left > i) {
       // If the timer has been increased, need to reset our beep tracking.
-      if(level.so_challenge_time_beep < i)
+      if(level.so_challenge_time_beep < i) {
         level.so_challenge_time_beep = i + 1;
+      }
       continue;
     }
 
@@ -411,8 +450,9 @@ challenge_timer_should_pulse() {
 }
 
 challenge_timer_show_failed(hud_msg, hud_time) {
-  if(!validate_timer(level.challenge_time_limit))
+  if(!validate_timer(level.challenge_time_limit)) {
     return;
+  }
 
   level endon("challenge_timer_passed");
   level endon("new_challenge_timer");
@@ -428,23 +468,27 @@ challenge_timer_show_failed(hud_msg, hud_time) {
   challenge_timer_destroy(hud_msg, hud_time);
 
   //	radio_dialogue_stop();
-  if(self == level.player)
+  if(self == level.player) {
     thread maps\_specialops::so_dialog_mission_failed_time();
+  }
 
   maps\_specialops::so_force_deadquote("@SPECIAL_OPS_FAILURE_HINT_TIME", "ui_time_failure");
 
-  if(self == level.player)
+  if(self == level.player) {
     MissionFailedWrapper();
+  }
 }
 
 challenge_timer_wait_passed(hud_msg, hud_time, passed_flag) {
   level endon("challenge_timer_expired");
   level endon("new_challenge_timer");
 
-  if(flag_exist("individual_timers") && flag("individual_timers"))
+  if(flag_exist("individual_timers") && flag("individual_timers")) {
     self ent_flag_wait(passed_flag);
-  else
+  }
+  else {
     flag_wait(passed_flag);
+  }
 
   flag_set("challenge_timer_passed");
   level.challenge_end_time = gettime();
@@ -452,12 +496,14 @@ challenge_timer_wait_passed(hud_msg, hud_time, passed_flag) {
   // This might not work in every circumstance?
   // Freeze the timer where it is for the couple of seconds it remains visible.
   time = (level.challenge_end_time - level.challenge_start_time) * 0.001;
-  if(isDefined(level.challenge_time_limit))
+  if(isDefined(level.challenge_time_limit)) {
     time = level.challenge_time_limit - time;
+  }
 
   // stupid hack to make this work correctly, because this mission modifies level.challenge_time_limit on the fly
-  if(level.script == "so_snowrace2_cliffhanger")
+  if(level.script == "so_snowrace2_cliffhanger") {
     time = level.challenge_time_limit;
+  }
 
   // We cannot have time be 0 when we call SetTenthsTimerStatic()
   if(time <= 0) {
@@ -466,10 +512,12 @@ challenge_timer_wait_passed(hud_msg, hud_time, passed_flag) {
 
   hud_time SetTenthsTimerStatic(time);
 
-  if(!flag_exist("individual_timers"))
+  if(!flag_exist("individual_timers")) {
     return;
-  if(flag("individual_timers"))
+  }
+  if(flag("individual_timers")) {
     return;
+  }
 
   challenge_timer_destroy(hud_msg, hud_time);
 }
@@ -480,25 +528,30 @@ challenge_timer_destroy_prematurely(hud_msg, hud_time) {
 }
 
 challenge_timer_destroy(hud_msg, hud_time, destroy_immediately) {
-  if(isDefined(hud_msg))
+  if(isDefined(hud_msg)) {
     hud_msg thread maps\_specialops::so_remove_hud_item(destroy_immediately);
-  if(isDefined(hud_time))
+  }
+  if(isDefined(hud_time)) {
     hud_time thread maps\_specialops::so_remove_hud_item(destroy_immediately);
+  }
 }
 
 validate_timer(timer) {
-  if(!isDefined(timer))
+  if(!isDefined(timer)) {
     return false;
+  }
 
-  if(timer <= 0)
+  if(timer <= 0) {
     return false;
+  }
 
   return true;
 }
 
 failure_summary_display() {
-  if(getdvarint("so_nofail"))
+  if(getdvarint("so_nofail")) {
     return;
+  }
 
   thread maps\_specialops::so_dialog_mission_failed_generic();
 
@@ -520,30 +573,36 @@ specialops_mission_over_setup(was_success) {
     assertmsg("The special op has somehow tried to end itself more than once. Current Success = " + was_success + " and Previous Success = " + level.special_op_success);
   }
 
-  if(!isDefined(level.challenge_end_time))
+  if(!isDefined(level.challenge_end_time)) {
     level.challenge_end_time = gettime();
+  }
 
   flag_set("special_op_terminated");
   level notify("stop_music");
 
   // Initiate a pre-fetch of the texture data to help lower load times a bit.
   stream_origin = undefined;
-  if(isDefined(level.pmc_game) && level.pmc_game)
+  if(isDefined(level.pmc_game) && level.pmc_game) {
     stream_origin = pick_starting_location_pmc(true);
-  else
+  }
+  else {
     stream_origin = pick_starting_location_so(true);
+  }
   if(isDefined(stream_origin)) {
-    foreach(player in level.players)
+    foreach(player in level.players) {
     player PlayerSetStreamOrigin(stream_origin);
+    }
   }
 
   ambientStop(2);
   music_stop(1);
 
-  if(was_success)
+  if(was_success) {
     thread specialops_mission_over_setup_success();
-  else
+  }
+  else {
     thread specialops_mission_over_setup_failure();
+  }
 
   foreach(player in level.players) {
     player AllowJump(false);
@@ -588,8 +647,9 @@ specialops_mission_over_remove_ai() {
   ai_to_delete = getaiarray();
   ai_to_delete = array_merge(ai_to_delete, getaiSpeciesArray("axis", "dog"));
   foreach(ai in ai_to_delete) {
-    if(isDefined(ai.magic_bullet_shield))
+    if(isDefined(ai.magic_bullet_shield)) {
       ai stop_magic_bullet_shield();
+    }
     ai Delete();
   }
 }
@@ -603,8 +663,9 @@ specialops_mission_over_setup_success() {
     screen_fade thread fade_over_time(0.25, 2);
   }
 
-  if(isDefined(level.suppress_challenge_success_print))
+  if(isDefined(level.suppress_challenge_success_print)) {
     return;
+  }
 
   passed_hud = maps\_specialops::so_create_hud_item(3, 0, &"SPECIAL_OPS_CHALLENGE_SUCCESS");
   passed_hud.alignX = "center";
@@ -639,12 +700,14 @@ specialops_mission_over_setup_failure() {
 is_current_level_locked() {
   specOpsString = self GetLocalPlayerProfileData("missionSOHighestDifficulty");
 
-  if(!isDefined(specOpsString))
+  if(!isDefined(specOpsString)) {
     return true;
+  }
 
   specOpsSum = 0;
-  for(i = 0; i < specOpsString.size; i++)
+  for(i = 0; i < specOpsString.size; i++) {
     specOpsSum += max(0, int(specOpsString[i]) - 1);
+  }
 
   current_group = tablelookup("sp/specOpsTable.csv", 1, level.script, 13);
 
@@ -665,54 +728,66 @@ specialops_achievement_by_stars(specOpsString) {
   specOpsSum = get_total_stars(specOpsString);
 
   // --------------- Gold Star: earn 1 star in special ops
-  if(specOpsSum >= 1)
+  if(specOpsSum >= 1) {
     self player_giveachievement_wrapper("GOLD_STAR");
+  }
 
   // --------------- Hotel Bravo: earn 4 star in special ops
-  if(specOpsSum >= 4)
+  if(specOpsSum >= 4) {
     self player_giveachievement_wrapper("HOTEL_BRAVO");
+  }
 
   // --------------- Charlie on our six: earn 8 star in special ops
-  if(specOpsSum >= 8)
+  if(specOpsSum >= 8) {
     self player_giveachievement_wrapper("CHARLIE_ON_OUR_SIX");
+  }
 
   // --------------- Blackjack: earn 21 star in special ops
-  if(specOpsSum >= 21)
+  if(specOpsSum >= 21) {
     self player_giveachievement_wrapper("BLACKJACK");
+  }
 
   // --------------- Specialist: earn 30 star in special ops
-  if(specOpsSum >= 30)
+  if(specOpsSum >= 30) {
     self player_giveachievement_wrapper("SPECIALIST");
+  }
 
   // --------------- Star 69: earn 69 star in special ops
-  if(specOpsSum >= 69)
+  if(specOpsSum >= 69) {
     self player_giveachievement_wrapper("STAR_69");
+  }
 
   // =============== It Goes to Eleven: 1 star in 11 different SO
-  if(get_num_of_levels_with_star(specOpsString, 1) >= 11)
+  if(get_num_of_levels_with_star(specOpsString, 1) >= 11) {
     self player_giveachievement_wrapper("IT_GOES_TO_ELEVEN");
+  }
 
   // =============== Operational Asset: 3 stars in 5 different SO
-  if(get_num_of_levels_with_star(specOpsString, 3) >= 5)
+  if(get_num_of_levels_with_star(specOpsString, 3) >= 5) {
     self player_giveachievement_wrapper("OPERATIONAL_ASSET");
+  }
 
   // =============== Honor Roll: 1 star in 23 different SO
-  if(get_num_of_levels_with_star(specOpsString, 1) >= 23)
+  if(get_num_of_levels_with_star(specOpsString, 1) >= 23) {
     self player_giveachievement_wrapper("HONOR_ROLL");
+  }
 
   // =============== Operative: 3 stars in 10 different SO
-  if(get_num_of_levels_with_star(specOpsString, 3) >= 10)
+  if(get_num_of_levels_with_star(specOpsString, 3) >= 10) {
     self player_giveachievement_wrapper("OPERATIVE");
+  }
 
   // =============== Professional: 3 stars in 15 different SO
-  if(get_num_of_levels_with_star(specOpsString, 3) >= 15)
+  if(get_num_of_levels_with_star(specOpsString, 3) >= 15) {
     self player_giveachievement_wrapper("PROFESSIONAL");
+  }
 }
 
 get_total_stars(specOpsString) {
   string_size = specOpsString.size;
-  if(string_size > level.specOpsSettings.levels.size)
+  if(string_size > level.specOpsSettings.levels.size) {
     string_size = level.specOpsSettings.levels.size;
+  }
 
   specOpsSum = 0;
   for(i = 0; i < string_size; i++) {
@@ -723,27 +798,31 @@ get_total_stars(specOpsString) {
 
 get_num_of_levels_with_star(specOpsString, stars) {
   string_size = specOpsString.size;
-  if(string_size > level.specOpsSettings.levels.size)
+  if(string_size > level.specOpsSettings.levels.size) {
     string_size = level.specOpsSettings.levels.size;
+  }
 
   levels = 0;
   for(i = 0; i < string_size; i++) {
-    if(max(0, int(specOpsString[i]) - 1) >= stars)
+    if(max(0, int(specOpsString[i]) - 1) >= stars) {
       levels++;
+    }
   }
   return levels;
 }
 
 specialops_mission_over_stats(was_success) {
-  if(!isDefined(was_success) || !was_success)
+  if(!isDefined(was_success) || !was_success) {
     return;
+  }
 
   // using map name to get dvar used for saving that map's best time
   best_time_name = tablelookup("sp/specOpsTable.csv", 1, level.script, 9);
 
   // Test maps shouldn't have to SRE out.
-  if(best_time_name == "")
+  if(best_time_name == "") {
     return;
+  }
 
   // Early out the player that doesnt have the level unlocked, cause we dont give him reward
   foreach(player in level.players) {
@@ -755,8 +834,9 @@ specialops_mission_over_stats(was_success) {
   }
 
   // PS3 special handler - PS3 splitscreen, guest player always get stars when first player get stars
-  if(issplitscreen() && level.ps3)
+  if(issplitscreen() && level.ps3) {
     level.player2.eog_noreward = false;
+  }
 
   assert(isDefined(best_time_name));
   assert(isDefined(level.challenge_start_time));
@@ -766,20 +846,24 @@ specialops_mission_over_stats(was_success) {
   m_seconds = int(min((level.challenge_end_time - level.challenge_start_time), 86400000));
 
   foreach(player in level.players) {
-    if(isDefined(player.eog_noreward) && player.eog_noreward)
+    if(isDefined(player.eog_noreward) && player.eog_noreward) {
       continue;
+    }
 
     current_best_time = player GetLocalPlayerProfileData(best_time_name);
 
-    if(!isDefined(current_best_time))
+    if(!isDefined(current_best_time)) {
       continue; // non local player
+    }
 
     never_played = current_best_time == 0;
-    if(isDefined(player.finish_time) && isDefined(level.challenge_start_time))
+    if(isDefined(player.finish_time) && isDefined(level.challenge_start_time)) {
       m_seconds = int(min((player.finish_time - level.challenge_start_time), 86400000));
+    }
 
-    if(never_played || m_seconds < current_best_time)
+    if(never_played || m_seconds < current_best_time) {
       player SetLocalPlayerProfileData(best_time_name, m_seconds);
+    }
 
     if(!never_played && m_seconds < current_best_time) {
       player.eog_besttime = true;
@@ -799,38 +883,45 @@ specialops_mission_over_stats(was_success) {
   level.specOpsSettings maps\_endmission::setSoLevelCompleted(levelIndex);
 
   foreach(player in level.players) {
-    if(isDefined(player.eog_noreward) && player.eog_noreward)
+    if(isDefined(player.eog_noreward) && player.eog_noreward) {
       continue;
+    }
 
     missionSpecOps = player GetLocalPlayerProfileData("missionSpecOps");
 
-    if(!isDefined(missionSpecOps))
+    if(!isDefined(missionSpecOps)) {
       continue;
+    }
 
-    if(missionSpecOps < levelindex + 1)
+    if(missionSpecOps < levelindex + 1) {
       player SetLocalPlayerProfileData("missionSpecOps", levelIndex + 1);
+    }
   }
 
   foreach(player in level.players) {
-    if(isDefined(player.eog_noreward) && player.eog_noreward)
+    if(isDefined(player.eog_noreward) && player.eog_noreward) {
       continue;
+    }
 
     specOpsString = player GetLocalPlayerProfileData("missionSOHighestDifficulty");
 
-    if(!isDefined(specOpsString))
+    if(!isDefined(specOpsString)) {
       continue;
+    }
 
     assertex(isDefined(level.specOpsSettings), "Special Op levels are not yet initialized in _endmission.gsc and we are already trying to save level difficulty completed data.");
 
     // specOpsString is a string of something like '0123412324200323404...' ranging from 0 to 4, for special ops we need range of 0 to 3.
     // string size can not count higher then number of levels or we will have 100%+
     string_size = specOpsString.size;
-    if(string_size > level.specOpsSettings.levels.size)
+    if(string_size > level.specOpsSettings.levels.size) {
       string_size = level.specOpsSettings.levels.size;
+    }
 
     specOpsSum = 0;
-    for(i = 0; i < string_size; i++)
+    for(i = 0; i < string_size; i++) {
       specOpsSum += int(max(0, int(specOpsString[i]) - 1));
+    }
 
     assertex(specOpsSum >= 0 && specOpsSum <= (level.specOpsSettings.levels.size * 3), "More stars earned than possible!");
 
@@ -840,10 +931,12 @@ specialops_mission_over_stats(was_success) {
     assert(isDefined(completion_fraction));
 
     // round up or down
-    if(int(completion_fraction * 100) % 100 >= 0.5)
+    if(int(completion_fraction * 100) % 100 >= 0.5) {
       completion_percentage = int(completion_fraction) + 1;
-    else
+    }
+    else {
       completion_percentage = int(completion_fraction);
+    }
 
     assertex((completion_percentage >= 0 && completion_percentage <= 100), "Special Ops' completion percentage [ " + completion_percentage + "% ] is outside of 0 to 100 range!");
 
@@ -914,8 +1007,9 @@ wait_all_players_are_touching(trigger_ent) {
     trigger_ent waittill("trigger");
 
     // If not in co-op, then a simple touch is all we need.
-    if(!is_coop())
+    if(!is_coop()) {
       return;
+    }
 
     level.player thread waiting_message_hide();
     level.player2 thread waiting_message_hide();
@@ -943,8 +1037,9 @@ wait_all_players_have_touched(trigger_ent, touch_style) {
     trigger_ent waittill("trigger");
 
     // If not in co-op, then a simple touch is all we need.
-    if(!is_coop())
+    if(!is_coop()) {
       return;
+    }
 
     level.player thread waiting_message_hide();
     level.player2 thread waiting_message_hide();
@@ -999,8 +1094,9 @@ display_waiting_message() {
   level notify("players_touching_hint");
   level endon("players_touching_hint");
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   if(!isDefined(self.waiting_hud)) {
     self.waiting_hud = create_waiting_message(self);
@@ -1014,12 +1110,14 @@ display_waiting_message() {
 }
 
 display_frozen_message() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   // Don't need to fade in again if already active.
-  if(isDefined(self.frozen_and_waiting) && self.frozen_and_waiting)
+  if(isDefined(self.frozen_and_waiting) && self.frozen_and_waiting) {
     return;
+  }
 
   self.frozen_and_waiting = true;
   self EnableInvulnerability();
@@ -1046,14 +1144,17 @@ create_waiting_message(player) {
 }
 
 waiting_message_hide() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
-  if(!isDefined(self.waiting_hud))
+  if(!isDefined(self.waiting_hud)) {
     return;
+  }
 
-  if(isDefined(self.frozen_and_waiting) && self.frozen_and_waiting)
+  if(isDefined(self.frozen_and_waiting) && self.frozen_and_waiting) {
     return;
+  }
 
   self.waiting_hud fadeovertime(0.25);
   self.waiting_hud.alpha = 0;
@@ -1064,8 +1165,9 @@ waiting_message_delete_on_so_end(waiting_hud) {
 
   level waittill("special_op_terminated");
 
-  if(isDefined(waiting_hud))
+  if(isDefined(waiting_hud)) {
     waiting_hud Destroy();
+  }
 }
 
 disable_saving() {
@@ -1109,8 +1211,9 @@ is_touching_escape_trigger() {
 }
 
 ping_escape_warning() {
-  if(isDefined(self.ping_escape_splash))
+  if(isDefined(self.ping_escape_splash)) {
     return;
+  }
 
   self endon("death");
 
@@ -1139,13 +1242,15 @@ ping_escape_warning() {
 
   self.escape_hint_active = undefined;
 
-  if(isDefined(self.ping_escape_splash))
+  if(isDefined(self.ping_escape_splash)) {
     self.ping_escape_splash Destroy();
+  }
 }
 
 ping_escape_warning_valid() {
-  if(flag("special_op_terminated"))
+  if(flag("special_op_terminated")) {
     return false;
+  }
 
   //	if( !isDefined( self.escape_hint_active ) )
   //	{
@@ -1161,13 +1266,15 @@ ping_escape_warning_valid() {
 
 so_dialog_play(dialog, wait_time, force_stop) {
   assertex(isDefined(dialog), "so_dialog_play() requires valid dialog to be passed in.");
-  if(isDefined(wait_time))
+  if(isDefined(wait_time)) {
     wait wait_time;
+  }
 
   // This isn't a good long term solution to SO spam. The Battle Chatter stuff (reviving) needs to be switched
   // to the actual battle chatter system.
-  if(isDefined(force_stop) && force_stop)
+  if(isDefined(force_stop) && force_stop) {
     radio_dialogue_stop();
+  }
   radio_dialogue(dialog);
 }
 
@@ -1311,8 +1418,9 @@ so_hud_pulse_loop() {
   self endon("destroying");
   self endon("death");
 
-  if(self.pulse_start_big)
+  if(self.pulse_start_big) {
     so_hud_pulse_single(self.pulse_scale_big, self.pulse_scale_loop_normal, self.pulse_time);
+  }
 
   while(isDefined(self.pulse_loop) && self.pulse_loop) {
     so_hud_pulse_single(self.pulse_scale_loop_normal, self.pulse_scale_loop_big, self.pulse_time_loop);
@@ -1321,34 +1429,43 @@ so_hud_pulse_loop() {
 }
 
 so_hud_pulse_init() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return false;
+  }
 
   // Bang defaults
-  if(!isDefined(self.pulse_time))
+  if(!isDefined(self.pulse_time)) {
     self.pulse_time = 0.5;
+  }
 
-  if(!isDefined(self.pulse_scale_normal))
+  if(!isDefined(self.pulse_scale_normal)) {
     self.pulse_scale_normal = 1.0;
+  }
 
-  if(!isDefined(self.pulse_scale_big))
+  if(!isDefined(self.pulse_scale_big)) {
     self.pulse_scale_big = 1.6;
+  }
 
   // Looping defaults
-  if(!isDefined(self.pulse_loop))
+  if(!isDefined(self.pulse_loop)) {
     self.pulse_loop = false;
+  }
 
-  if(!isDefined(self.pulse_time_loop))
+  if(!isDefined(self.pulse_time_loop)) {
     self.pulse_time_loop = 1.0;
+  }
 
-  if(!isDefined(self.pulse_scale_loop_normal))
+  if(!isDefined(self.pulse_scale_loop_normal)) {
     self.pulse_scale_loop_normal = 1.0;
+  }
 
-  if(!isDefined(self.pulse_scale_loop_big))
+  if(!isDefined(self.pulse_scale_loop_big)) {
     self.pulse_scale_loop_big = 1.15;
+  }
 
-  if(!isDefined(self.pulse_start_big))
+  if(!isDefined(self.pulse_start_big)) {
     self.pulse_start_big = true;
+  }
 
   // Successful initialization!		
   return true;
@@ -1374,8 +1491,9 @@ specialops_detect_player_death() {
 }
 
 waittill_either_player() {
-  if(!flag_exist("summary_response"))
+  if(!flag_exist("summary_response")) {
     flag_init("summary_response");
+  }
 
   if(level.players.size > 1) {
     // We must clear this each time we get in here, incase a menuresponse previously was not desired
@@ -1418,8 +1536,9 @@ so_special_failure_hint_reset_dvars(icon_dvar) {
   setdvar("ui_icon_claymore", 0);
   setdvar("ui_icon_stealth_stance", 0);
 
-  if(isDefined(icon_dvar))
+  if(isDefined(icon_dvar)) {
     setdvar(icon_dvar, 1);
+  }
 }
 
 so_special_failure_hint() {
@@ -1446,35 +1565,45 @@ so_special_death_hint_tracker() {
     weapon = self.coop_death_reason["weapon_name"];
   }
 
-  if(so_claymore_death(cause, weapon))
+  if(so_claymore_death(cause, weapon)) {
     return;
+  }
 
-  if(so_friendly_fire_death(attacker))
+  if(so_friendly_fire_death(attacker)) {
     return;
+  }
 
-  if(so_radiation_death(attacker))
+  if(so_radiation_death(attacker)) {
     return;
+  }
 
-  if(so_dog_death(attacker))
+  if(so_dog_death(attacker)) {
     return;
+  }
 
-  if(so_juggernaut_death(attacker))
+  if(so_juggernaut_death(attacker)) {
     return;
+  }
 
-  if(so_grenade_suicide_death(cause))
+  if(so_grenade_suicide_death(cause)) {
     return;
+  }
 
-  if(so_destructible_death(attacker, cause))
+  if(so_destructible_death(attacker, cause)) {
     return;
+  }
 
-  if(so_exploding_barrel_death(cause))
+  if(so_exploding_barrel_death(cause)) {
     return;
+  }
 
-  if(so_grenade_regular_death(cause))
+  if(so_grenade_regular_death(cause)) {
     return;
+  }
 
-  if(so_vehicle_death(attacker, cause))
+  if(so_vehicle_death(attacker, cause)) {
     return;
+  }
 }
 
 so_claymore_death(cause, weapon) {
@@ -1492,40 +1621,48 @@ so_claymore_death(cause, weapon) {
 }
 
 so_friendly_fire_death(attacker) {
-  if(!is_coop())
+  if(!is_coop()) {
     return false;
+  }
 
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
   other_player = get_other_player(self);
-  if(other_player != attacker)
+  if(other_player != attacker) {
     return false;
+  }
 
   so_special_failure_hint_set("@DEADQUOTE_SO_FRIENDLY_FIRE_KILL", "ui_ff_death");
   return true;
 }
 
 so_radiation_death(attacker) {
-  if(!isDefined(attacker) || (attacker.classname != "worldspawn"))
+  if(!isDefined(attacker) || (attacker.classname != "worldspawn")) {
     return false;
+  }
 
-  if(!isDefined(self.radiationDeath) || !self.radiationDeath)
+  if(!isDefined(self.radiationDeath) || !self.radiationDeath) {
     return false;
+  }
 
   so_special_failure_hint_set("@SCRIPT_RADIATION_DEATH");
   return true;
 }
 
 so_dog_death(attacker) {
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
-  if(!isDefined(attacker.weapon))
+  if(!isDefined(attacker.weapon)) {
     return false;
+  }
 
-  if(attacker.weapon != "dog_bite")
+  if(attacker.weapon != "dog_bite") {
     return false;
+  }
 
   switch (level.dog_death_type) {
     case "soon":
@@ -1543,11 +1680,13 @@ so_dog_death(attacker) {
 }
 
 so_juggernaut_death(attacker) {
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
-  if(!isDefined(attacker.juggernaut))
+  if(!isDefined(attacker.juggernaut)) {
     return false;
+  }
 
   deadquotes = [];
 
@@ -1563,17 +1702,21 @@ so_juggernaut_death(attacker) {
 }
 
 so_destructible_death(attacker, cause) {
-  if(!isDefined(cause))
+  if(!isDefined(cause)) {
     return false;
+  }
 
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
-  if(cause != "MOD_EXPLOSIVE")
+  if(cause != "MOD_EXPLOSIVE") {
     return false;
+  }
 
-  if(!isDefined(attacker.destructible_type))
+  if(!isDefined(attacker.destructible_type)) {
     return false;
+  }
 
   if(issubstr(attacker.destructible_type, "vehicle")) {
     // You were killed by an exploding vehicle. Vehicles on fire are likely to explode.
@@ -1587,26 +1730,31 @@ so_destructible_death(attacker, cause) {
 }
 
 so_exploding_barrel_death(cause) {
-  if(!isDefined(cause))
+  if(!isDefined(cause)) {
     return false;
+  }
 
-  if(cause != "MOD_EXPLOSIVE")
+  if(cause != "MOD_EXPLOSIVE") {
     return false;
+  }
 
   // check if the death was caused by a barrel
   // have to check time and location against the last explosion because the attacker isn't the
   // barrel because the ent that damaged the barrel is passed through as the attacker instead
-  if(!isDefined(level.lastExplodingBarrel))
+  if(!isDefined(level.lastExplodingBarrel)) {
     return false;
+  }
 
   // killed the same frame a barrel exploded
-  if(getTime() != level.lastExplodingBarrel["time"])
+  if(getTime() != level.lastExplodingBarrel["time"]) {
     return false;
+  }
 
   // within the blast radius of the barrel that exploded
   d = distance(self.origin, level.lastExplodingBarrel["origin"]);
-  if(d > level.lastExplodingBarrel["radius"])
+  if(d > level.lastExplodingBarrel["radius"]) {
     return false;
+  }
 
   // You were killed by an exploding barrel. Red barrels will explode when shot.
   so_special_failure_hint_set("@SCRIPT_EXPLODING_BARREL_DEATH", "ui_barrel_death");
@@ -1615,15 +1763,18 @@ so_exploding_barrel_death(cause) {
 }
 
 so_grenade_suicide_death(cause) {
-  if(!isDefined(cause))
+  if(!isDefined(cause)) {
     return false;
+  }
 
-  if(cause != "MOD_SUICIDE")
+  if(cause != "MOD_SUICIDE") {
     return false;
+  }
 
   // magic number copied from fraggrenade asset.
-  if((self.lastgrenadetime - gettime()) > 3.5 * 1000)
+  if((self.lastgrenadetime - gettime()) > 3.5 * 1000) {
     return false;
+  }
 
   // You died holding a grenade for too long.
   // Holding ^3[{+frag}]^7 allows you to cook off live grenades.
@@ -1647,17 +1798,21 @@ so_grenade_regular_death(cause) {
 }
 
 so_vehicle_death(attacker, cause) {
-  if(!isDefined(cause))
+  if(!isDefined(cause)) {
     return false;
+  }
 
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return false;
+  }
 
-  if(cause != "MOD_CRUSH")
+  if(cause != "MOD_CRUSH") {
     return false;
+  }
 
-  if(attacker.code_classname != "script_vehicle")
+  if(attacker.code_classname != "script_vehicle") {
     return false;
+  }
 
   // You were run over. Keep on eye out for enemy vehicles on the move.
   so_special_failure_hint_set("@DEADQUOTE_SO_RUN_OVER_BY_VEHICLE");

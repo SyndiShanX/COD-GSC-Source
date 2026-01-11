@@ -38,14 +38,17 @@ uselegacyspawning() {
 getspawnpoint_final(var_0, var_1) {
   var_2 = undefined;
 
-  if(!isDefined(var_0) || var_0.size == 0)
+  if(!isDefined(var_0) || var_0.size == 0) {
     return undefined;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(var_1)
+  if(var_1) {
     var_2 = getbestweightedspawnpoint(var_0);
+  }
   else {
     for(var_3 = 0; var_3 < var_0.size; var_3++) {
       if(isDefined(self.lastspawnpoint) && self.lastspawnpoint == var_0[var_3]) {
@@ -71,10 +74,12 @@ getspawnpoint_final(var_0, var_1) {
   }
 
   if(!isDefined(var_2)) {
-    if(var_1)
+    if(var_1) {
       var_2 = var_0[randomint(var_0.size)];
-    else
+    }
+    else {
       var_2 = var_0[0];
+    }
   }
 
   return var_2;
@@ -107,19 +112,23 @@ getbestweightedspawnpoint(var_0) {
       }
     }
 
-    if(var_3.size == 0)
+    if(var_3.size == 0) {
       return undefined;
+    }
 
     var_5 = var_3[randomint(var_3.size)];
 
-    if(var_2 == var_1)
+    if(var_2 == var_1) {
       return var_5;
+    }
 
-    if(isDefined(var_5.lastsighttracetime) && var_5.lastsighttracetime == gettime())
+    if(isDefined(var_5.lastsighttracetime) && var_5.lastsighttracetime == gettime()) {
       return var_5;
+    }
 
-    if(!lastminutesighttraces(var_5))
+    if(!lastminutesighttraces(var_5)) {
       return var_5;
+    }
 
     var_7 = getlospenalty();
     var_5.weight = var_5.weight - var_7;
@@ -128,8 +137,9 @@ getbestweightedspawnpoint(var_0) {
 }
 
 getspawnpoint_random(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = randomint(var_0.size);
@@ -175,16 +185,19 @@ getallalliedandenemyplayers(var_0) {
 }
 
 initweights(var_0) {
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1].weight = 0;
+  }
 }
 
 getspawnpoint_nearteam(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
-  if(getdvarint("scr_spawnsimple") > 0)
+  if(getdvarint("scr_spawnsimple") > 0) {
     return getspawnpoint_random(var_0);
+  }
 
   spawnlogic_begin();
   initweights(var_0);
@@ -209,8 +222,9 @@ getspawnpoint_nearteam(var_0, var_1) {
   }
 
   if(isDefined(var_1)) {
-    for(var_7 = 0; var_7 < var_1.size; var_7++)
+    for(var_7 = 0; var_7 < var_1.size; var_7++) {
       var_1[var_7].weight = var_1[var_7].weight + 25000;
+    }
   }
 
   avoidsamespawn(var_0);
@@ -222,8 +236,9 @@ getspawnpoint_nearteam(var_0, var_1) {
 }
 
 getspawnpoint_dm(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   spawnlogic_begin();
   initweights(var_0);
@@ -239,8 +254,9 @@ getspawnpoint_dm(var_0) {
       for(var_7 = 0; var_7 < var_1.size; var_7++) {
         var_8 = distance(var_0[var_4].origin, var_1[var_7].origin);
 
-        if(var_8 < var_3)
+        if(var_8 < var_3) {
           var_6 = var_6 + (var_3 - var_8) / var_3;
+        }
 
         var_9 = abs(var_8 - var_2);
         var_5 = var_5 + var_9;
@@ -271,8 +287,9 @@ ispointvulnerable(var_0) {
     var_5 = vectornormalize(var_2 - var_1);
     var_6 = acos(vectordot(var_5, var_4));
 
-    if(var_6 < level.claymoredetectionconeangle)
+    if(var_6 < level.claymoredetectionconeangle) {
       return 1;
+    }
   }
 
   return 0;
@@ -284,8 +301,9 @@ avoidweapondamage(var_0) {
   }
   var_1 = 100000;
 
-  if(getdvar("scr_spawnpointweaponpenalty") != "" && getdvar("scr_spawnpointweaponpenalty") != "0")
+  if(getdvar("scr_spawnpointweaponpenalty") != "" && getdvar("scr_spawnpointweaponpenalty") != "0") {
     var_1 = getdvarfloat("scr_spawnpointweaponpenalty");
+  }
 
   var_2 = 62500;
 
@@ -294,8 +312,9 @@ avoidweapondamage(var_0) {
       if(!isDefined(level.grenades[var_4])) {
         continue;
       }
-      if(distancesquared(var_0[var_3].origin, level.grenades[var_4].origin) < var_2)
+      if(distancesquared(var_0[var_3].origin, level.grenades[var_4].origin) < var_2) {
         var_0[var_3].weight = var_0[var_3].weight - var_1;
+      }
     }
 
     if(!isDefined(level.artillerydangercenters)) {
@@ -358,11 +377,13 @@ spawnperframeupdate() {
       var_11 = length(var_10);
       var_12 = "all";
 
-      if(level.teambased)
+      if(level.teambased) {
         var_12 = var_9.pers["team"];
+      }
 
-      if(var_11 < 1024)
+      if(var_11 < 1024) {
         var_5.nearbyplayers[var_12][var_5.nearbyplayers[var_12].size] = var_9;
+      }
 
       var_5.distsum[var_12] = var_5.distsum[var_12] + var_11;
       var_5.numplayersatlastupdate++;
@@ -395,15 +416,18 @@ spawnperframeupdate() {
 legacybullettracepassed(var_0, var_1, var_2) {
   var_3 = getdvarfloat("legacySpawningSightFrac", 1.0);
 
-  if(var_3 >= 1.0)
+  if(var_3 >= 1.0) {
     return bullettracepassed(var_0, var_1, 0, undefined);
-  else
+  }
+  else {
     return spawnsighttrace(var_2, var_0, var_1, var_2.index) >= var_3;
+  }
 }
 
 getlospenalty() {
-  if(getdvar("scr_spawnpointlospenalty") != "" && getdvar("scr_spawnpointlospenalty") != "0")
+  if(getdvar("scr_spawnpointlospenalty") != "" && getdvar("scr_spawnpointlospenalty") != "0") {
     return getdvarfloat("scr_spawnpointlospenalty");
+  }
 
   return 100000;
 }
@@ -411,11 +435,13 @@ getlospenalty() {
 lastminutesighttraces(var_0) {
   var_1 = "all";
 
-  if(level.teambased)
+  if(level.teambased) {
     var_1 = maps\mp\_utility::getotherteam(self.pers["team"]);
+  }
 
-  if(!isDefined(var_0.nearbyplayers))
+  if(!isDefined(var_0.nearbyplayers)) {
     return 0;
+  }
 
   var_2 = undefined;
   var_3 = undefined;
@@ -451,13 +477,15 @@ lastminutesighttraces(var_0) {
   }
 
   if(isDefined(var_2)) {
-    if(legacybullettracepassed(var_2.origin + (0, 0, 50), var_0.sighttracepoint, var_0))
+    if(legacybullettracepassed(var_2.origin + (0, 0, 50), var_0.sighttracepoint, var_0)) {
       return 1;
+    }
   }
 
   if(isDefined(var_4)) {
-    if(legacybullettracepassed(var_4.origin + (0, 0, 50), var_0.sighttracepoint, var_0))
+    if(legacybullettracepassed(var_4.origin + (0, 0, 50), var_0.sighttracepoint, var_0)) {
       return 1;
+    }
   }
 
   return 0;
@@ -470,8 +498,9 @@ avoidvisibleenemies(var_0, var_1) {
   var_2 = getlospenalty();
   var_3 = "axis";
 
-  if(self.pers["team"] == "axis")
+  if(self.pers["team"] == "axis") {
     var_3 = "allies";
+  }
 
   if(var_1 || maps\mp\_utility::ishodgepodgemm()) {
     for(var_4 = 0; var_4 < var_0.size; var_4++) {

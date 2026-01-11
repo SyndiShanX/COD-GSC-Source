@@ -1156,4 +1156,3 @@ function_883e88be(str_enemy) {
       break;
   }
 }
-

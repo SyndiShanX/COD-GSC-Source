@@ -452,8 +452,9 @@ force_menu_back() {
   keys[7] = "7";
   keys[8] = "8";
   keys[9] = "9";
-  if(key > 0 && key < 10)
+  if(key > 0 && key < 10) {
     key = keys[key];
+  }
   level notify("menu_button_pressed", key);
 }
 
@@ -1185,8 +1186,9 @@ xform_input_handler() {
   while(1) {
     level waittill("xform_button_pressed", key);
     object = level.selected_object;
-    if(!isDefined(object))
+    if(!isDefined(object)) {
       object = level.highlighted_object;
+    }
     if(!level.debug_player ButtonPressed("button_ltrig")) {
       if(key == "button_rshldr") {
         level.selected_object_z_offset += 4;
@@ -1601,8 +1603,9 @@ save_buttons() {
 }
 
 quit() {
-  if(level.xform_hud_active)
+  if(level.xform_hud_active) {
     toggle_xform_hud();
+  }
   level.hud_selector Destroy();
   disable_menu("current_menu");
   level.menu_sys = [];

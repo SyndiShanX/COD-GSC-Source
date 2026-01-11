@@ -41,8 +41,9 @@ survival_init() {
   level.force_team_characters = 1;
   level.should_use_cia = 0;
 
-  if(randomint(100) > 50)
+  if(randomint(100) > 50) {
     level.should_use_cia = 1;
+  }
 
   level.precachecustomcharacters = ::precache_team_characters;
   level.givecustomcharacters = ::give_team_characters;
@@ -57,8 +58,9 @@ createfx_callback() {
   ents = getEntArray();
 
   for(i = 0; i < ents.size; i++) {
-    if(ents[i].classname != "info_player_start")
+    if(ents[i].classname != "info_player_start") {
       ents[i] delete();
+    }
   }
 }
 
@@ -165,8 +167,9 @@ main() {
   level thread sndswitchannouncervox("sam");
   level thread sndgameend();
 
-  if(level.round_number == 1 && is_true(level.enable_magic) && level.gamedifficulty != 0)
+  if(level.round_number == 1 && is_true(level.enable_magic) && level.gamedifficulty != 0) {
     level thread sndmusiceastereggs();
+  }
 
   setdvar("zombiemode_path_minz_bias", 28);
   level.speed_change_round = 15;
@@ -177,8 +180,9 @@ main() {
 }
 
 door_powerup_drop(powerup_name, drop_spot, powerup_team, powerup_location) {
-  if(isDefined(level.door_powerup))
+  if(isDefined(level.door_powerup)) {
     level.door_powerup powerup_delete();
+  }
 
   powerup = maps\mp\zombies\_zm_net::network_safe_spawn("powerup", 1, "script_model", drop_spot + vectorscale((0, 0, 1), 40.0));
   level notify("powerup_dropped", powerup);
@@ -214,8 +218,9 @@ perks_behind_door() {
   while(true) {
     level waittill("nuke_clock_moved");
 
-    if(index == door_perk_drop_list.size)
+    if(index == door_perk_drop_list.size) {
       index = 0;
+    }
 
     perk_type = door_perk_drop_list[index];
     index++;
@@ -234,8 +239,9 @@ nuked_doomsday_clock_think() {
 }
 
 update_doomsday_clock(min_hand_model) {
-  while(is_true(min_hand_model.is_updating))
+  while(is_true(min_hand_model.is_updating)) {
     wait 0.05;
+  }
 
   min_hand_model.is_updating = 1;
 
@@ -290,8 +296,9 @@ fall_down(vdir, stance) {
 
   self freezecontrols(1);
 
-  if(falling)
+  if(falling) {
     linker waittill("movedone");
+  }
 
   self giveweapon("death_throe_zm");
   self switchtoweapon("death_throe_zm");
@@ -352,8 +359,9 @@ melee_miss_func() {
       dist_sq = distancesquared(self.enemy.origin, self.origin);
       melee_dist_sq = self.meleeattackdist * self.meleeattackdist;
 
-      if(dist_sq < melee_dist_sq)
+      if(dist_sq < melee_dist_sq) {
         self.enemy dodamage(self.meleedamage, self.origin, self, self, "none", "MOD_MELEE");
+      }
     }
   }
 }
@@ -361,8 +369,9 @@ melee_miss_func() {
 zombie_init_done() {
   self.allowpain = 0;
 
-  if(isDefined(self.script_parameters) && self.script_parameters == "crater")
+  if(isDefined(self.script_parameters) && self.script_parameters == "crater") {
     self thread zombie_crater_locomotion();
+  }
 
   self setphysparams(15, 0, 48);
 }
@@ -371,16 +380,19 @@ zombie_crater_locomotion() {
   self endon("death");
   stand_trigger = getEntArray("zombie_crawler_standup", "targetname");
 
-  while(is_true(self.needs_run_update))
+  while(is_true(self.needs_run_update)) {
     wait 0.1;
+  }
 
   self allowpitchangle(1);
   self setpitchorient();
 
-  if(self.zombie_move_speed == "sprint")
+  if(self.zombie_move_speed == "sprint") {
     self setanimstatefromasd("zm_move_sprint_crawl", 2);
-  else
+  }
+  else {
     self setanimstatefromasd("zm_move_sprint_crawl", 1);
+  }
 
   touched = 0;
 
@@ -589,8 +601,9 @@ initcharacterstartindex() {
 }
 
 selectcharacterindextouse() {
-  if(level.characterstartindex >= 4)
+  if(level.characterstartindex >= 4) {
     level.characterstartindex = 0;
+  }
 
   self.characterindex = level.characterstartindex;
   level.characterstartindex++;
@@ -798,8 +811,9 @@ custom_add_weapons() {
   add_zombie_weapon("hk416_zm", "hk416_upgraded_zm", &"ZOMBIE_WEAPON_HK416", 100, "", "", undefined);
   add_zombie_weapon("lsat_zm", "lsat_upgraded_zm", &"ZOMBIE_WEAPON_LSAT", 100, "", "", undefined);
 
-  if(isDefined(level.raygun2_included) && level.raygun2_included)
+  if(isDefined(level.raygun2_included) && level.raygun2_included) {
     add_zombie_weapon("raygun_mark2_zm", "raygun_mark2_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN_MARK2", 10000, "raygun_mark2", "", undefined);
+  }
 }
 
 nuked_population_sign_think() {
@@ -824,16 +838,18 @@ nuked_population_sign_think() {
         tens--;
       }
 
-      if(tens < 0)
+      if(tens < 0) {
         tens = 9;
+      }
 
       ones_model rotateroll(0 - step, time);
       ones_model playSound("zmb_counter_flip");
       ones_model waittill("rotatedone");
       level.population_count = ones + tens * 10;
 
-      if(level.population_count == 0 || level.population_count == 33 || level.population_count == 66 || level.population_count == 99)
+      if(level.population_count == 0 || level.population_count == 33 || level.population_count == 66 || level.population_count == 99) {
         level notify("update_doomsday_clock");
+      }
 
       local_zombies_killed++;
     }
@@ -857,13 +873,15 @@ assign_lowest_unused_character_index() {
     foreach(player in players) {
       if(isDefined(player.characterindex)) {
         if(player.characterindex == 0 || player.characterindex == 1) {
-          if(randomint(100) > 50)
+          if(randomint(100) > 50) {
             return 2;
+          }
 
           return 3;
         } else if(player.characterindex == 2 || player.characterindex == 3) {
-          if(randomint(100) > 50)
+          if(randomint(100) > 50) {
             return 0;
+          }
 
           return 1;
         }
@@ -871,12 +889,14 @@ assign_lowest_unused_character_index() {
     }
   } else {
     foreach(player in players) {
-      if(isDefined(player.characterindex))
+      if(isDefined(player.characterindex)) {
         arrayremovevalue(charindexarray, player.characterindex, 0);
+      }
     }
 
-    if(charindexarray.size > 0)
+    if(charindexarray.size > 0) {
       return charindexarray[0];
+    }
   }
 
   return 0;
@@ -926,8 +946,9 @@ nuked_mannequin_filter(destructibles) {
 custom_debris_function() {
   cost = 1000;
 
-  if(isDefined(self.zombie_cost))
+  if(isDefined(self.zombie_cost)) {
     cost = self.zombie_cost;
+  }
 
   while(true) {
     if(isDefined(self.script_noteworthy)) {
@@ -945,8 +966,9 @@ custom_debris_function() {
       if(!who usebuttonpressed()) {
         continue;
       }
-      if(who in_revive_trigger())
+      if(who in_revive_trigger()) {
         continue;
+      }
     }
 
     if(is_player_valid(who)) {
@@ -967,8 +989,9 @@ custom_debris_function() {
       if(isDefined(self.script_flag)) {
         tokens = strtok(self.script_flag, ",");
 
-        for(i = 0; i < tokens.size; i++)
+        for(i = 0; i < tokens.size; i++) {
           flag_set(tokens[i]);
+        }
       }
 
       play_sound_at_pos("purchase", self.origin);
@@ -1005,12 +1028,14 @@ custom_debris_function() {
 
       all_trigs = getEntArray(self.target, "target");
 
-      for(i = 0; i < all_trigs.size; i++)
+      for(i = 0; i < all_trigs.size; i++) {
         all_trigs[i] delete();
+      }
 
       if(isDefined(clip)) {
-        if(isDefined(move_ent))
+        if(isDefined(move_ent)) {
           move_ent waittill("movedone");
+        }
 
         clip delete();
       }
@@ -1036,8 +1061,9 @@ sndmusegg1() {
   level waittill("magic_door_power_up_grabbed");
   min_hand_model = getent("clock_min_hand", "targetname");
 
-  if(level.population_count == 15 && level.music_override == 0)
+  if(level.population_count == 15 && level.music_override == 0) {
     level thread sndmuseggplay(spawn("script_origin", (0, 0, 0)), "zmb_nuked_song_1", 88);
+  }
 }
 
 sndmusegg2() {
@@ -1048,8 +1074,9 @@ sndmusegg2() {
   level.meteor_counter = 0;
   level.music_override = 0;
 
-  for(i = 0; i < origins.size; i++)
+  for(i = 0; i < origins.size; i++) {
     level thread sndmusegg2_wait(origins[i]);
+  }
 }
 
 sndmusegg2_wait(bear_origin) {
@@ -1061,8 +1088,9 @@ sndmusegg2_wait(bear_origin) {
   player playSound("zmb_meteor_activate");
   level.meteor_counter = level.meteor_counter + 1;
 
-  if(level.meteor_counter == 3)
+  if(level.meteor_counter == 3) {
     level thread sndmuseggplay(temp_ent, "zmb_nuked_song_2", 60);
+  }
   else {
     wait 1.5;
     temp_ent delete();
@@ -1070,8 +1098,9 @@ sndmusegg2_wait(bear_origin) {
 }
 
 sndmusegg2_override() {
-  if(isDefined(level.music_override) && level.music_override)
+  if(isDefined(level.music_override) && level.music_override) {
     return false;
+  }
 
   return true;
 }
@@ -1085,8 +1114,9 @@ sndmusegg3_counter(event, attacker) {
   level.mannequin_count--;
 
   if(level.mannequin_count <= 0) {
-    while(isDefined(level.music_override) && level.music_override)
+    while(isDefined(level.music_override) && level.music_override) {
       wait 5;
+    }
 
     level thread sndmuseggplay(spawn("script_origin", (0, 0, 0)), "zmb_nuked_song_3", 80);
   }
@@ -1202,13 +1232,15 @@ player_rocket_rumble() {
 bus_taser_blocker() {
   trig = getent("bus_taser_trigger", "targetname");
 
-  if(isDefined(trig))
+  if(isDefined(trig)) {
     clip = getent(trig.target, "targetname");
+  }
 
   trig waittill("trigger");
 
-  if(isDefined(clip))
+  if(isDefined(clip)) {
     clip delete();
+  }
 }
 
 marlton_vo_inside_bunker() {
@@ -1238,8 +1270,9 @@ marlton_vo_inside_bunker() {
 }
 
 wait_for_next_round(current_round) {
-  while(level.round_number <= current_round)
+  while(level.round_number <= current_round) {
     wait 1;
+  }
 }
 
 moon_transmission_vo() {
@@ -1260,8 +1293,9 @@ moon_transmission_vo() {
 }
 
 wait_for_round_range(round) {
-  while(level.round_number < round)
+  while(level.round_number < round) {
     wait 1;
+  }
 }
 
 death_to_all_zombies() {
@@ -1271,11 +1305,13 @@ death_to_all_zombies() {
     if(!isalive(zombie)) {
       continue;
     }
-    if(isDefined(zombie))
+    if(isDefined(zombie)) {
       zombie dodamage(zombie.health + 666, zombie.origin);
+    }
 
-    if(index % 3 == 0)
+    if(index % 3 == 0) {
       wait_network_frame();
+    }
   }
 }
 
@@ -1285,8 +1321,9 @@ zombie_eye_glow_change() {
   death_to_all_zombies();
   level.zombie_spawners = getEntArray("zombie_spawner_beyes", "script_noteworthy");
 
-  if(isDefined(level._game_module_custom_spawn_init_func))
+  if(isDefined(level._game_module_custom_spawn_init_func)) {
     [[level._game_module_custom_spawn_init_func]]();
+  }
 
   flag_set("spawn_zombies");
   level setclientfield("zombie_eye_change", 1);
@@ -1306,8 +1343,9 @@ bus_random_horn() {
 fake_lighting_cleanup() {
   ent = getent("nuke_reflection", "targetname");
 
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 nuked_collision_patch() {
@@ -1359,16 +1397,19 @@ nuked_collision_patch() {
 nuked_special_weapon_magicbox_check(weapon) {
   if(isDefined(level.raygun2_included) && level.raygun2_included) {
     if(weapon == "ray_gun_zm") {
-      if(self has_weapon_or_upgrade("raygun_mark2_zm"))
+      if(self has_weapon_or_upgrade("raygun_mark2_zm")) {
         return false;
+      }
     }
 
     if(weapon == "raygun_mark2_zm") {
-      if(self has_weapon_or_upgrade("ray_gun_zm"))
+      if(self has_weapon_or_upgrade("ray_gun_zm")) {
         return false;
+      }
 
-      if(randomint(100) >= 33)
+      if(randomint(100) >= 33) {
         return false;
+      }
     }
   }
 

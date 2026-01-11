@@ -107,4 +107,3 @@ shield_devgui_callback(cmd) {
 
   return retval;
 }
-

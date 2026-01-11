@@ -53,8 +53,9 @@ func_85CE(var_00) {
   if(isDefined(var_01) && isplayer(var_01)) {
     scripts\mp\weapons::grenadestuckto(var_00, var_01);
 
-    foreach(var_03 in var_0.grenades)
+    foreach(var_03 in var_0.grenades) {
     var_3.isstuck = var_0.isstuck;
+    }
 
     thread scripts\mp\missions::func_D3A8(var_01, self);
   } else
@@ -77,10 +78,12 @@ setinteractwithethereal(var_00, var_01, var_02, var_03) {
   var_09 = undefined;
   var_10 = [];
 
-  if(level.teambased)
+  if(level.teambased) {
     var_09 = scripts\mp\utility\game::getteamarray(scripts\mp\utility\game::getotherteam(self.team));
-  else
+  }
+  else {
     var_09 = level.characters;
+  }
 
   var_11 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
 
@@ -101,8 +104,9 @@ setinteractwithethereal(var_00, var_01, var_02, var_03) {
     var_10[var_10.size] = var_13;
   }
 
-  if(var_10.size > 0)
+  if(var_10.size > 0) {
     var_10 = scripts\engine\utility::array_randomize(var_10);
+  }
 
   var_17 = 0;
   var_18 = 0;
@@ -130,8 +134,9 @@ setinteractwithethereal(var_00, var_01, var_02, var_03) {
       var_28 = var_22 + 72.0 * var_23;
       var_29 = 85 + randomint(31);
 
-      if(var_23 == 5)
+      if(var_23 == 5) {
         var_29 = 0;
+      }
 
       var_27 = (cos(var_28), sin(var_28), 0) * var_29 + var_20;
       var_23++;
@@ -141,8 +146,9 @@ setinteractwithethereal(var_00, var_01, var_02, var_03) {
       var_27 = (cos(var_30), sin(var_30), 0) * var_31 + var_20;
     }
 
-    if(!var_05)
+    if(!var_05) {
       var_27 = var_27 + (0, 0, 200 + randomint(200));
+    }
 
     var_27 = scripts\mp\powerloot::func_7FC7("power_splashGrenade", var_27);
     var_32 = var_00 + var_21;
@@ -154,8 +160,9 @@ setinteractwithethereal(var_00, var_01, var_02, var_03) {
     var_33.team = self.team;
     var_33.weapon_name = "globproj_mp";
 
-    if(var_24 == 0)
+    if(var_24 == 0) {
       var_33 setscriptablepartstate("explosionLarge", "active");
+    }
 
     var_33 setscriptablepartstate("trail", "active");
     thread func_B79A(var_33, var_19);
@@ -198,13 +205,16 @@ istrialversion(var_00) {
   self notify("grenadeCleanup");
   self endon("grenadeCleanup");
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     self.owner scripts\engine\utility::waittill_any_timeout_no_endon_death(var_00, "disconnect");
-  else
+  }
+  else {
     self.owner waittill("disconnect");
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 func_B24D(var_00, var_01, var_02) {
@@ -213,16 +223,20 @@ func_B24D(var_00, var_01, var_02) {
   self notify("mainScriptableCleanup" + var_03);
   self endon("mainScriptableCleanup" + var_03);
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     wait(var_01);
-  else
+  }
+  else {
     var_00 waittill("death");
+  }
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     wait(var_02);
+  }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 func_13B91() {
@@ -231,8 +245,9 @@ func_13B91() {
   var_00 = self.owner;
   var_01 = var_0.team;
 
-  if(!isDefined(self.func_127C0))
+  if(!isDefined(self.func_127C0)) {
     self.func_127C0 = [];
+  }
 
   thread func_13B93();
   thread func_127B9();
@@ -284,8 +299,9 @@ func_127B9() {
   self.func_B799 waittill("extinguish");
 
   foreach(var_01 in self.func_127C0) {
-    if(isDefined(var_01))
+    if(isDefined(var_01)) {
       var_01 thread func_E0DC(self.func_B799);
+    }
   }
 
   self delete();
@@ -299,8 +315,9 @@ func_D51E(var_00, var_01) {
 }
 
 func_10D77() {
-  if(isplayer(self))
+  if(isplayer(self)) {
     self setscriptablepartstate("burning", "active", 0);
+  }
 
   thread func_139C0();
 }
@@ -309,8 +326,9 @@ func_6312() {
   self notify("endBurning");
   self.func_3291 = undefined;
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     self setscriptablepartstate("burning", "neutral", 0);
+  }
 }
 
 func_139C0() {
@@ -338,8 +356,9 @@ func_139C0() {
     } else {
       var_0.func_32A0 = var_0.func_32A0 + 0.05;
 
-      if(var_0.func_32A0 > 0.25)
+      if(var_0.func_32A0 > 0.25) {
         thread func_6312();
+      }
     }
 
     wait 0.05;
@@ -366,11 +385,13 @@ func_17B0(var_00) {
 
   var_02 = var_1.func_32A4.size;
 
-  if(!func_8BD9(var_00))
+  if(!func_8BD9(var_00)) {
     var_1.func_32A4[var_02] = var_00;
+  }
 
-  if(var_02 == 0)
+  if(var_02 == 0) {
     func_10D77();
+  }
 }
 
 func_E0DC(var_00) {
@@ -390,10 +411,12 @@ func_E0DC(var_00) {
       var_2[var_2.size] = var_04;
     }
 
-    if(var_2.size > 0)
+    if(var_2.size > 0) {
       var_1.func_32A4 = var_02;
-    else
+    }
+    else {
       func_6312();
+    }
   }
 }
 
@@ -402,8 +425,9 @@ func_8BD9(var_00) {
     var_01 = self.func_3291;
 
     foreach(var_03 in var_1.func_32A4) {
-      if(var_03 == var_00)
+      if(var_03 == var_00) {
         return 1;
+      }
     }
   }
 
@@ -418,12 +442,15 @@ func_7E11() {
   var_00 = self.func_3291.func_32A1;
   var_01 = undefined;
 
-  if(var_00 > 1.0)
+  if(var_00 > 1.0) {
     var_01 = 25;
-  else if(var_00 > 0.5)
+  }
+  else if(var_00 > 0.5) {
     var_01 = 25;
-  else
+  }
+  else {
     var_01 = 25;
+  }
 
   return var_01;
 }

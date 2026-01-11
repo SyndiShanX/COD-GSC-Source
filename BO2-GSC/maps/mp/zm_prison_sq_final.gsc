@@ -63,8 +63,9 @@ stage_one() {
 
   players = getplayers();
 
-  foreach(player in players)
+  foreach(player in players) {
   player.fq_client_hint destroy();
+  }
 
   m_nixie_tube = getent("nixie_tube_1", "targetname");
   m_nixie_tube playsoundwithnotify("vox_brutus_nixie_right_0", "scary_voice");
@@ -85,8 +86,9 @@ nixie_tube_off() {
   for(i = 1; i < 4; i++) {
     m_nixie_tube = getent("nixie_tube_" + i, "targetname");
 
-    for(j = 0; j < 10; j++)
+    for(j = 0; j < 10; j++) {
       m_nixie_tube hidepart("J_" + j);
+    }
 
     wait 0.3;
   }
@@ -134,14 +136,17 @@ nixie_final_audio_cue_code() {
 }
 
 nixie_tube_win_effects_all_tubes_final(goal_num_1, goal_num_2, goal_num_3) {
-  if(!isDefined(goal_num_1))
+  if(!isDefined(goal_num_1)) {
     goal_num_1 = 0;
+  }
 
-  if(!isDefined(goal_num_2))
+  if(!isDefined(goal_num_2)) {
     goal_num_2 = 0;
+  }
 
-  if(!isDefined(goal_num_3))
+  if(!isDefined(goal_num_3)) {
     goal_num_3 = 0;
+  }
 
   a_nixie_tube = [];
   a_nixie_tube[1] = getent("nixie_tube_1", "targetname");
@@ -158,14 +163,16 @@ nixie_tube_win_effects_all_tubes_final(goal_num_1, goal_num_2, goal_num_3) {
 
       a_nixie_tube[i] showpart("J_" + level.a_nixie_tube_code[i]);
 
-      if(i == 1 && n_off_tube == 2 || i == 3 && n_off_tube == 1)
+      if(i == 1 && n_off_tube == 2 || i == 3 && n_off_tube == 1) {
         a_nixie_tube[i] playSound("zmb_quest_nixie_count");
+      }
     }
 
     n_off_tube++;
 
-    if(n_off_tube > 3)
+    if(n_off_tube > 3) {
       n_off_tube = 1;
+    }
 
     wait_network_frame();
   }
@@ -195,13 +202,15 @@ nixie_tube_win_effects_all_tubes_final(goal_num_1, goal_num_2, goal_num_3) {
       a_nixie_tube[n_current_tube] hidepart("J_" + level.a_nixie_tube_code[n_current_tube]);
       level.a_nixie_tube_code[n_current_tube]--;
 
-      if(level.a_nixie_tube_code[n_current_tube] == -1)
+      if(level.a_nixie_tube_code[n_current_tube] == -1) {
         level.a_nixie_tube_code[n_current_tube] = 9;
+      }
 
       a_nixie_tube[n_current_tube] showpart("J_" + level.a_nixie_tube_code[n_current_tube]);
 
-      if(j % 3 == 0)
+      if(j % 3 == 0) {
         a_nixie_tube[n_current_tube] playSound("zmb_quest_nixie_count");
+      }
 
       j++;
       wait 0.05;
@@ -232,8 +241,9 @@ stage_two() {
   audio_logs[6][1] = "vox_guar_tour_vo_10_0";
   play_sq_audio_log(0, audio_logs[0], 0);
 
-  for(i = 2; i <= 6; i++)
+  for(i = 2; i <= 6; i++) {
     play_sq_audio_log(i, audio_logs[i], 1);
+  }
 
   level.m_headphones delete();
   t_plane_fly_afterlife = getent("plane_fly_afterlife_trigger", "script_noteworthy");
@@ -247,8 +257,9 @@ stage_two() {
       arlington_is_present = 0;
 
       foreach(player in players) {
-        if(isDefined(player) && player.character_name == "Arlington")
+        if(isDefined(player) && player.character_name == "Arlington") {
           arlington_is_present = 1;
+        }
       }
 
       if(arlington_is_present && !trigger_is_on) {
@@ -302,8 +313,9 @@ play_sq_audio_log(num, a_vo, b_use_trig) {
   level setclientfield("toggle_futz", 1);
   players = getplayers();
 
-  foreach(player in players)
+  foreach(player in players) {
   maps\mp\_visionset_mgr::vsmgr_activate("visionset", "zm_audio_log", player);
+  }
 
   for(i = 0; i < a_vo.size; i++) {
     level.m_headphones playsoundwithnotify(a_vo[i], "at_done");
@@ -314,8 +326,9 @@ play_sq_audio_log(num, a_vo, b_use_trig) {
   level setclientfield("toggle_futz", 0);
   players = getplayers();
 
-  foreach(player in players)
+  foreach(player in players) {
   maps\mp\_visionset_mgr::vsmgr_deactivate("visionset", "zm_audio_log", player);
+  }
 }
 
 final_flight_setup() {
@@ -336,8 +349,9 @@ final_flight_trigger() {
       if(isDefined(level.custom_plane_validation)) {
         valid = self[[level.custom_plane_validation]](e_triggerer);
 
-        if(!valid)
+        if(!valid) {
           continue;
+        }
       }
 
       players = getplayers();
@@ -348,8 +362,9 @@ final_flight_trigger() {
       b_everyone_is_ready = 1;
 
       foreach(player in players) {
-        if(!isDefined(player) || player.sessionstate == "spectator" || player maps\mp\zombies\_zm_laststand::player_is_in_laststand())
+        if(!isDefined(player) || player.sessionstate == "spectator" || player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
           b_everyone_is_ready = 0;
+        }
       }
 
       if(!b_everyone_is_ready) {
@@ -395,15 +410,17 @@ final_flight_player_thread() {
   level.final_flight_players[level.final_flight_players.size] = self;
   a_nml_teleport_targets = [];
 
-  for(i = 1; i < 6; i++)
+  for(i = 1; i < 6; i++) {
     a_nml_teleport_targets[i - 1] = getstruct("nml_telepoint_" + i, "targetname");
+  }
 
   self.n_passenger_index = level.final_flight_players.size;
   a_players = [];
   a_players = getplayers();
 
-  if(a_players.size == 1)
+  if(a_players.size == 1) {
     self.n_passenger_index = 1;
+  }
 
   m_plane_craftable = getent("plane_craftable", "targetname");
   m_plane_about_to_crash = getent("plane_about_to_crash", "targetname");
@@ -532,16 +549,18 @@ stage_final() {
     level thread final_showdown_track_team(a_player_team);
     n_spawns_needed = 2;
 
-    for(i = n_spawns_needed; i > 0; i--)
+    for(i = n_spawns_needed; i > 0; i--) {
       maps\mp\zombies\_zm_ai_brutus::brutus_spawn_in_zone("zone_golden_gate_bridge", 1);
+    }
 
     level thread final_battle_vo(p_weasel, a_player_team);
     level notify("pop_goes_the_weasel_achieved");
     level waittill("showdown_over");
   } else if(isDefined(p_weasel))
     level.winner = "weasel";
-  else
+  else {
     level.winner = "team";
+  }
 
   level clientnotify("sndSQF");
   level.brutus_respawn_after_despawn = 0;
@@ -582,16 +601,18 @@ stage_final() {
   a_players = getplayers();
 
   foreach(player in a_players) {
-    if(isDefined(player.client_hint))
+    if(isDefined(player.client_hint)) {
       player thread destroy_tutorial_message();
+    }
 
     if(isDefined(player.revivetrigger)) {
       player thread revive_success(player, 0);
       player cleanup_suicide_hud();
     }
 
-    if(isDefined(player))
+    if(isDefined(player)) {
       player ghost();
+    }
   }
 
   if(isDefined(p_weasel)) {
@@ -624,8 +645,9 @@ final_showdown_track_team(a_player_team) {
     weasel_won = 1;
 
     foreach(player in a_player_team) {
-      if(is_player_valid(player, 0, 0))
+      if(is_player_valid(player, 0, 0)) {
         weasel_won = 0;
+      }
     }
 
     if(isDefined(weasel_won) && weasel_won) {
@@ -641,8 +663,9 @@ final_showdown_zombie_logic() {
   a_players = getplayers();
 
   foreach(player in a_players) {
-    if(player.character_name == "Arlington")
+    if(player.character_name == "Arlington") {
       self.ignore_player[self.ignore_player.size] = player;
+    }
   }
 
   return true;
@@ -679,8 +702,9 @@ final_showdown_update_icon(enemy) {
 }
 
 revive_trigger_should_ignore_sight_checks(player_down) {
-  if(level.final_flight_activated)
+  if(level.final_flight_activated) {
     return true;
+  }
 
   return false;
 }
@@ -692,16 +716,19 @@ final_battle_vo(p_weasel, a_player_team) {
   player = a_players[randomintrange(0, a_players.size)];
   arrayremovevalue(a_players, player);
 
-  if(a_players.size > 0)
+  if(a_players.size > 0) {
     player_2 = a_players[randomintrange(0, a_players.size)];
+  }
 
-  if(isDefined(player))
+  if(isDefined(player)) {
     player final_battle_reveal();
+  }
 
   wait 3;
 
-  if(isDefined(p_weasel))
+  if(isDefined(p_weasel)) {
     p_weasel playsoundontag("vox_plr_3_end_scenario_0", "J_Head");
+  }
 
   wait 1;
 
@@ -712,10 +739,12 @@ final_battle_vo(p_weasel, a_player_team) {
 
   wait 10;
 
-  if(isDefined(player_2))
+  if(isDefined(player_2)) {
     player_2 playsoundontag("vox_plr_" + player_2.characterindex + "_end_scenario_1", "J_Head");
-  else if(isDefined(player))
+  }
+  else if(isDefined(player)) {
     player playsoundontag("vox_plr_" + player.characterindex + "_end_scenario_1", "J_Head");
+  }
 
   wait 4;
 
@@ -776,8 +805,9 @@ player_intermission_bridge() {
     for(i = 0; i < points.size; i++) {
       point = points[i];
 
-      if(!isDefined(org))
+      if(!isDefined(org)) {
         self spawn(point.origin, point.angles);
+      }
 
       if(isDefined(points[i].target)) {
         if(!isDefined(org)) {
@@ -797,16 +827,18 @@ player_intermission_bridge() {
 
         speed = 20;
 
-        if(isDefined(points[i].speed))
+        if(isDefined(points[i].speed)) {
           speed = points[i].speed;
+        }
 
         target_point = getstruct(points[i].target, "targetname");
         dist = distance(points[i].origin, target_point.origin);
         time = dist / speed;
         q_time = time * 0.25;
 
-        if(q_time > 1)
+        if(q_time > 1) {
           q_time = 1;
+        }
 
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 0;
@@ -835,10 +867,12 @@ create_ending_message(str_msg) {
     self.client_hint.horzalign = "center";
     self.client_hint.vertalign = "bottom";
 
-    if(self issplitscreen())
+    if(self issplitscreen()) {
       self.client_hint.y = -140;
-    else
+    }
+    else {
       self.client_hint.y = -250;
+    }
 
     self.client_hint.foreground = 1;
     self.client_hint.font = "default";
@@ -865,10 +899,12 @@ custom_game_over_hud_elem(player) {
   game_over.color = (1, 1, 1);
   game_over.hidewheninmenu = 1;
 
-  if(isDefined(level.winner))
+  if(isDefined(level.winner)) {
     game_over settext(&"ZM_PRISON_LIFE_OVER");
-  else
+  }
+  else {
     game_over settext(&"ZOMBIE_GAME_OVER");
+  }
 
   game_over fadeovertime(1);
   game_over.alpha = 1;
@@ -885,8 +921,9 @@ clean_up_final_brutuses() {
   while(true) {
     zombies = getaispeciesarray("axis", "all");
 
-    for(i = 0; i < zombies.size; i++)
+    for(i = 0; i < zombies.size; i++) {
       zombies[i] dodamage(10000, zombies[i].origin);
+    }
 
     wait 1;
   }

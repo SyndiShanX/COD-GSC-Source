@@ -962,8 +962,9 @@ notetrack_player_breach_water(var_0) {
   level.player maps\_underwater::underwater_hud_enable(0);
   level.player thread maps\_underwater::stop_player_scuba();
 
-  if(isDefined(level.player.hud_scubamask))
+  if(isDefined(level.player.hud_scubamask)) {
     level.player.hud_scubamask maps\_hud_util::destroyelem();
+  }
 
   level.player_mask show();
   var_4 fadeovertime(var_3);
@@ -1167,8 +1168,9 @@ smooth_player_link(var_0, var_1) {
 }
 
 snake_cam_enemy_anims() {
-  for(var_0 = 1; var_0 < level.snake_cam_enemies.size; var_0++)
+  for(var_0 = 1; var_0 < level.snake_cam_enemies.size; var_0++) {
     level.snake_cam_anim_node thread maps\_anim::anim_single_solo(level.snake_cam_enemies[var_0], "intro_" + (var_0 + 1));
+  }
 
   level.snake_cam_anim_node maps\_anim::anim_single_solo(level.snake_cam_enemies[0], "intro_1");
 
@@ -1187,18 +1189,21 @@ swim_intro_anims() {
   level.allies_breach_anim_node thread maps\_anim::anim_single_solo(level._allies_swim[1], "intro_ally2");
   level common_scripts\utility::waittill_either("notify_swim_dialog5_1", "flag_swim_breach_detonate");
 
-  if(!common_scripts\utility::flag("flag_swim_breach_detonate"))
+  if(!common_scripts\utility::flag("flag_swim_breach_detonate")) {
     thread swim_await_detonate_anims();
+  }
 }
 
 swim_await_detonate_anims() {
-  for(var_0 = 0; var_0 < level.const_expected_num_swim_allies; var_0++)
+  for(var_0 = 0; var_0 < level.const_expected_num_swim_allies; var_0++) {
     level.allies_breach_anim_node thread maps\_anim::anim_loop_solo(level._allies_swim[var_0], "intro_ally" + (var_0 + 1) + "_idle", "stop_loop");
+  }
 }
 
 swim_enemies_first_frame_anims() {
-  for(var_0 = 0; var_0 < level.ice_breach_enemies.size; var_0++)
+  for(var_0 = 0; var_0 < level.ice_breach_enemies.size; var_0++) {
     level.breach_anim_node thread maps\_anim::anim_first_frame_solo(level.ice_breach_enemies[var_0], "introbreach_opfor" + var_0);
+  }
 }
 
 swim_props_first_frame_anims() {
@@ -1252,15 +1257,17 @@ notetrack_snake_cam_underwater_transition(var_0) {
   level notify("notify_underwater_transition");
   common_scripts\utility::flag_set("flag_intro_above_ice");
 
-  if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled())
+  if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled()) {
     level.player enablemousesteer(0);
+  }
 }
 
 swim_breach_anims() {
   level.allies_breach_anim_node notify("stop_loop");
 
-  for(var_0 = 0; var_0 < level.const_expected_num_swim_allies; var_0++)
+  for(var_0 = 0; var_0 < level.const_expected_num_swim_allies; var_0++) {
     level.allies_breach_anim_node thread maps\_anim::anim_single_solo(level._allies_swim[var_0], "breach_ally" + (var_0 + 1));
+  }
 
   for(var_0 = 0; var_0 < level.ice_breach_enemies.size; var_0++) {
     level.breach_anim_node thread maps\_anim::anim_single_solo(level.ice_breach_enemies[var_0], "introbreach_opfor" + var_0);
@@ -1276,15 +1283,17 @@ swim_breach_anims() {
 swim_breach_ice_anims() {
   level endon("bc_player_ready");
 
-  while(!level.breach_props["ice_chunks1"] maps\black_ice_util::check_anim_time("ice_chunks1", "intro_breach", 1.0))
+  while(!level.breach_props["ice_chunks1"] maps\black_ice_util::check_anim_time("ice_chunks1", "intro_breach", 1.0)) {
     wait(level.timestep);
+  }
 
   level.breach_anim_node thread maps\_anim::anim_loop_solo(level.breach_props["ice_chunks1"], "intro_breach_loop", "stop_loop");
 }
 
 swim_enemy_death_anim_override() {
-  if(!isDefined(self.nodeathsound))
+  if(!isDefined(self.nodeathsound)) {
     animscripts\death::playdeathsound();
+  }
 
   if(isDefined(self.deathanim)) {
     self animmode("nogravity");
@@ -1299,15 +1308,17 @@ swim_enemy_death_anim_override() {
 }
 
 swim_allies_swim_forward() {
-  for(var_0 = 0; var_0 < level._allies_swim.size; var_0++)
+  for(var_0 = 0; var_0 < level._allies_swim.size; var_0++) {
     thread swim_single_ally_swim_forward(var_0);
+  }
 }
 
 swim_single_ally_swim_forward(var_0) {
   level.allies_breach_anim_node maps\_anim::anim_single_solo(level._allies_swim[var_0], "surface_ally" + (var_0 + 1));
 
-  if(!common_scripts\utility::flag("flag_player_breaching"))
+  if(!common_scripts\utility::flag("flag_player_breaching")) {
     level.allies_breach_anim_node thread maps\_anim::anim_loop_solo(level._allies_swim[var_0], "surface_ally" + (var_0 + 1) + "_idle");
+  }
 }
 
 swim_ally_surface_anim() {
@@ -1371,8 +1382,9 @@ swim_player_surface_anim() {
   level.allies_breach_anim_node thread maps\_anim::anim_single_solo(var_2, "mask_surface_pt2");
   level.allies_breach_anim_node thread maps\_anim::anim_single_solo(level._bravo[0], "surface_ally3_up_pt2");
 
-  while(!level.player_rig maps\black_ice_util::check_anim_time("player_rig", "player_surface_root_pt2", 1.0))
+  while(!level.player_rig maps\black_ice_util::check_anim_time("player_rig", "player_surface_root_pt2", 1.0)) {
     wait(level.timestep);
+  }
 
   level notify("bc_player_ready");
   var_2 delete();
@@ -1396,10 +1408,12 @@ cw_common_breach_player(var_0) {
   level.player allowcrouch(0);
   var_3 = tolower(level.player getcurrentweapon());
 
-  if(issubstr(var_3, "mts255"))
+  if(issubstr(var_3, "mts255")) {
     wait 0.2;
-  else if(issubstr(var_3, "panzerfaust"))
+  }
+  else if(issubstr(var_3, "panzerfaust")) {
     wait 0.6;
+  }
 
   var_4 = [var_2, level.breach_charge];
   var_5 = 0;
@@ -1432,8 +1446,9 @@ vig_actor_kill(var_0) {
   if(!isalive(var_0)) {
     return;
   }
-  if(isDefined(var_0.magic_bullet_shield))
+  if(isDefined(var_0.magic_bullet_shield)) {
     var_0 maps\_utility::stop_magic_bullet_shield();
+  }
 
   var_0.allowdeath = 1;
   var_0.a.nodeath = 1;

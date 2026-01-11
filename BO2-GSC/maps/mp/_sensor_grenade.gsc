@@ -73,8 +73,9 @@ checkfortracking(origin) {
         if(distancesquared(player.origin, origin) < 562500) {
           trace = bulletTrace(origin, player.origin + vectorscale((0, 0, 1), 12.0), 0, player);
 
-          if(trace["fraction"] == 1)
+          if(trace["fraction"] == 1) {
             self.owner tracksensorgrenadevictim(player);
+          }
         }
       }
     }
@@ -82,19 +83,22 @@ checkfortracking(origin) {
 }
 
 tracksensorgrenadevictim(victim) {
-  if(!isDefined(self.sensorgrenadedata))
+  if(!isDefined(self.sensorgrenadedata)) {
     self.sensorgrenadedata = [];
+  }
 
-  if(!isDefined(self.sensorgrenadedata[victim.clientid]))
+  if(!isDefined(self.sensorgrenadedata[victim.clientid])) {
     self.sensorgrenadedata[victim.clientid] = gettime();
+  }
 }
 
 isplayertracked(player, time) {
   playertracked = 0;
 
   if(isDefined(self.sensorgrenadedata) && isDefined(self.sensorgrenadedata[player.clientid])) {
-    if(self.sensorgrenadedata[player.clientid] + 10000 > time)
+    if(self.sensorgrenadedata[player.clientid] + 10000 > time) {
       playertracked = 1;
+    }
   }
 
   return playertracked;
@@ -103,8 +107,9 @@ isplayertracked(player, time) {
 sensorgrenadedestroyed(attacker, weaponname) {
   from_emp = maps\mp\killstreaks\_emp::isempweapon(weaponname);
 
-  if(!from_emp)
+  if(!from_emp) {
     playFX(level._equipment_explode_fx, self.origin);
+  }
 
   if(isDefined(attacker)) {
     if(self.owner isenemyplayer(attacker)) {
@@ -123,8 +128,9 @@ watchsensorgrenadedamage(watcher) {
   self setCanDamage(1);
   damagemax = 1;
 
-  if(!self maps\mp\_utility::ishacked())
+  if(!self maps\mp\_utility::ishacked()) {
     self.damagetaken = 0;
+  }
 
   while(true) {
     self.maxhealth = 100000;
@@ -135,41 +141,48 @@ watchsensorgrenadedamage(watcher) {
       continue;
     }
     if(level.teambased && isplayer(attacker)) {
-      if(!level.hardcoremode && self.owner.team == attacker.pers["team"] && self.owner != attacker)
+      if(!level.hardcoremode && self.owner.team == attacker.pers["team"] && self.owner != attacker) {
         continue;
+      }
     }
 
     if(isDefined(weaponname)) {
       switch (weaponname) {
         case "concussion_grenade_mp":
         case "flash_grenade_mp":
-          if(watcher.stuntime > 0)
+          if(watcher.stuntime > 0) {
             self thread maps\mp\gametypes\_weaponobjects::stunstart(watcher, watcher.stuntime);
+          }
 
           if(level.teambased && self.owner.team != attacker.team) {
-            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
+            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
               attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
+            }
           } else if(!level.teambased && self.owner != attacker) {
-            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
+            if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
               attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
+            }
           }
 
           continue;
         case "emp_grenade_mp":
           damage = damagemax;
         default:
-          if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker))
+          if(maps\mp\gametypes\_globallogic_player::dodamagefeedback(weaponname, attacker)) {
             attacker maps\mp\gametypes\_damagefeedback::updatedamagefeedback();
+          }
 
           break;
       }
     } else
       weaponname = "";
 
-    if(type == "MOD_MELEE")
+    if(type == "MOD_MELEE") {
       self.damagetaken = damagemax;
-    else
+    }
+    else {
       self.damagetaken = self.damagetaken + damage;
+    }
 
     if(self.damagetaken >= damagemax) {
       watcher thread maps\mp\gametypes\_weaponobjects::waitanddetonate(self, 0.0, attacker, weaponname);

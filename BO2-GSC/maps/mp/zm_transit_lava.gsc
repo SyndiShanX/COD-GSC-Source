@@ -10,21 +10,25 @@
 #include maps\mp\animscripts\zm_death;
 
 object_touching_lava() {
-  if(!isDefined(level.lava))
+  if(!isDefined(level.lava)) {
     level.lava = getEntArray("lava_damage", "targetname");
+  }
 
-  if(!isDefined(level.lava) || level.lava.size < 1)
+  if(!isDefined(level.lava) || level.lava.size < 1) {
     return false;
+  }
 
-  if(isDefined(self.lasttouching) && self istouching(self.lasttouching))
+  if(isDefined(self.lasttouching) && self istouching(self.lasttouching)) {
     return true;
+  }
 
   for(i = 0; i < level.lava.size; i++) {
     if(distancesquared(self.origin, level.lava[i].origin) < 2250000) {
       if(isDefined(level.lava[i].target)) {
         if(self istouching(level.lava[i].volume)) {
-          if(isDefined(level.lava[i].script_float) && level.lava[i].script_float <= 0.1)
+          if(isDefined(level.lava[i].script_float) && level.lava[i].script_float <= 0.1) {
             return false;
+          }
 
           self.lasttouching = level.lava[i].volume;
           return true;
@@ -52,8 +56,9 @@ lava_damage_init() {
 lava_damage_think() {
   self._trap_type = "";
 
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     self._trap_type = self.script_noteworthy;
+  }
 
   if(isDefined(self.target)) {
     self.volume = getent(self.target, "targetname");
@@ -76,8 +81,9 @@ lava_damage_think() {
       switch (self._trap_type) {
         case "fire":
         default:
-          if(!isDefined(self.script_float) || self.script_float >= 0.1)
+          if(!isDefined(self.script_float) || self.script_float >= 0.1) {
             ent thread player_lava_damage(self);
+          }
 
           break;
       }
@@ -85,8 +91,9 @@ lava_damage_think() {
       switch (self._trap_type) {
         case "fire":
         default:
-          if(!isDefined(self.script_float) || self.script_float >= 0.1)
+          if(!isDefined(self.script_float) || self.script_float >= 0.1) {
             ent thread zombie_lava_damage(self);
+          }
 
           break;
       }
@@ -112,8 +119,9 @@ player_lava_damage(trig) {
     min_dmg = min_dmg * trig.script_float;
     burn_time = burn_time * trig.script_float;
 
-    if(burn_time >= 1.5)
+    if(burn_time >= 1.5) {
       burn_time = 1.5;
+    }
   }
 
   if(!isDefined(self.is_burning) && is_player_valid(self)) {
@@ -121,18 +129,21 @@ player_lava_damage(trig) {
     maps\mp\_visionset_mgr::vsmgr_activate("overlay", "zm_transit_burn", self, burn_time, level.zm_transit_burn_max_duration);
     self notify("burned");
 
-    if(isDefined(trig.script_float) && trig.script_float >= 0.1)
+    if(isDefined(trig.script_float) && trig.script_float >= 0.1) {
       self thread player_burning_fx();
+    }
 
     if(!self hasperk("specialty_armorvest") || self.health - 100 < 1) {
       radiusdamage(self.origin, 10, max_dmg, min_dmg);
       wait 0.5;
       self.is_burning = undefined;
     } else {
-      if(self hasperk("specialty_armorvest"))
+      if(self hasperk("specialty_armorvest")) {
         self dodamage(15, self.origin);
-      else
+      }
+      else {
         self dodamage(1, self.origin);
+      }
 
       wait 0.5;
       self.is_burning = undefined;
@@ -195,8 +206,9 @@ zombie_burning_audio() {
   self playLoopSound("zmb_fire_loop");
   self waittill_either("stop_flame_damage", "death");
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     self stoploopsound(0.25);
+  }
 }
 
 player_burning_fx() {
@@ -205,14 +217,16 @@ player_burning_fx() {
   if(isDefined(self.is_on_fire) && self.is_on_fire) {
     return;
   }
-  if(!(isDefined(self.no_burning_sfx) && self.no_burning_sfx))
+  if(!(isDefined(self.no_burning_sfx) && self.no_burning_sfx)) {
     self thread player_burning_audio();
+  }
 
   self.is_on_fire = 1;
   self thread maps\mp\animscripts\zm_death::on_fire_timeout();
 
-  if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"]))
+  if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_sm"])) {
     playFXOnTag(level._effect["character_fire_death_sm"], self, "J_SpineLower");
+  }
 }
 
 player_burning_audio() {
@@ -228,8 +242,9 @@ zombie_lava_damage(trap) {
   self endon("death");
   zombie_dmg = 1;
 
-  if(isDefined(self.script_float))
+  if(isDefined(self.script_float)) {
     zombie_dmg = zombie_dmg * self.script_float;
+  }
 
   switch (trap._trap_type) {
     case "fire":
@@ -246,8 +261,9 @@ zombie_lava_damage(trap) {
         }
       }
 
-      if(self.health > level.zombie_health / 2 && self.health > zombie_dmg)
+      if(self.health > level.zombie_health / 2 && self.health > zombie_dmg) {
         self dodamage(zombie_dmg, self.origin, trap);
+      }
 
       break;
   }
@@ -264,30 +280,35 @@ zombie_exploding_death(zombie_dmg, trap) {
   if(isDefined(self.isdog) && self.isdog && isDefined(self.a.nodeath)) {
     return;
   }
-  while(isDefined(self) && self.health >= zombie_dmg && (isDefined(self.is_on_fire) && self.is_on_fire))
+  while(isDefined(self) && self.health >= zombie_dmg && (isDefined(self.is_on_fire) && self.is_on_fire)) {
     wait 0.5;
+  }
 
   if(!isDefined(self) || !(isDefined(self.is_on_fire) && self.is_on_fire) || isDefined(self.damageweapon) && (self.damageweapon == "tazer_knuckles_zm" || self.damageweapon == "jetgun_zm") || isDefined(self.knuckles_extinguish_flames) && self.knuckles_extinguish_flames) {
     return;
   }
   tag = "J_SpineLower";
 
-  if(isDefined(self.animname) && self.animname == "zombie_dog")
+  if(isDefined(self.animname) && self.animname == "zombie_dog") {
     tag = "tag_origin";
+  }
 
   if(is_mature()) {
-    if(isDefined(level._effect["zomb_gib"]))
+    if(isDefined(level._effect["zomb_gib"])) {
       playFX(level._effect["zomb_gib"], self gettagorigin(tag));
+    }
   } else if(isDefined(level._effect["spawn_cloud"]))
     playFX(level._effect["spawn_cloud"], self gettagorigin(tag));
 
   self radiusdamage(self.origin, 128, 30, 15, undefined, "MOD_EXPLOSIVE");
   self ghost();
 
-  if(isDefined(self.isdog) && self.isdog)
+  if(isDefined(self.isdog) && self.isdog) {
     self hide();
-  else
+  }
+  else {
     self delay_thread(1, ::self_delete);
+  }
 }
 
 zombie_burning_dmg() {

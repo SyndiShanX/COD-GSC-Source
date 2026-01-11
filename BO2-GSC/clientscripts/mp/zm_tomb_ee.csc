@@ -25,8 +25,9 @@ init() {
 }
 
 toggle_ending(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     setdvar("ui_zm_outromovie", "zm_tomb_ee");
+  }
 }
 
 toggle_wagon_fire_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -54,10 +55,12 @@ sndwagonfire(ison, fieldname) {
   struct = getstruct(fieldname, "targetname");
   origin = struct.origin;
 
-  if(ison)
+  if(ison) {
     playloopat("amb_fire_xlg", origin);
-  else
+  }
+  else {
     stoploopat("amb_fire_xlg", origin);
+  }
 }
 
 toggle_fist_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -129,8 +132,9 @@ run_plane_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   while(true) {
     e_player = getlocalplayer(localclientnum);
 
-    if(isDefined(e_player) && is_true(e_player.zombie_blood_fx) && !isDefined(self.plane_fx))
+    if(isDefined(e_player) && is_true(e_player.zombie_blood_fx) && !isDefined(self.plane_fx)) {
       self.plane_fx = playFXOnTag(localclientnum, level._effect["fire_glow"], self, "tag_origin");
+    }
 
     if(isDefined(e_player) && !is_true(e_player.zombie_blood_fx) && isDefined(self.plane_fx)) {
       stopfx(localclientnum, self.plane_fx);

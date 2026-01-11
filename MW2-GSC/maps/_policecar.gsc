@@ -76,8 +76,9 @@ set_vehicle_anims(positions) {
 //MO EDIT: Nate told me to put this in here ( from _uaz.gsc )
 setanims() {
   positions = [];
-  for(i = 0; i < 6; i++)
+  for(i = 0; i < 6; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";

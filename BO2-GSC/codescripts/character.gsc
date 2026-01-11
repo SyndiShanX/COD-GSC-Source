@@ -8,8 +8,9 @@ setmodelfromarray(a) {
 }
 
 precachemodelarray(a) {
-  for(i = 0; i < a.size; i++)
+  for(i = 0; i < a.size; i++) {
     precachemodel(a[i]);
+  }
 }
 
 randomelement(a) {
@@ -79,8 +80,9 @@ load(info) {
   attachinfo = info["attach"];
   attachsize = attachinfo.size;
 
-  for(i = 0; i < attachsize; i++)
+  for(i = 0; i < attachsize; i++) {
     self attach(attachinfo[i]["model"], attachinfo[i]["tag"]);
+  }
 }
 
 precache(info) {
@@ -96,46 +98,54 @@ precache(info) {
   attachinfo = info["attach"];
   attachsize = attachinfo.size;
 
-  for(i = 0; i < attachsize; i++)
+  for(i = 0; i < attachsize; i++) {
     precachemodel(attachinfo[i]["model"]);
+  }
 }
 
 get_random_character(amount) {
   self_info = strtok(self.classname, "_");
 
-  if(self_info.size <= 2)
+  if(self_info.size <= 2) {
     return randomint(amount);
+  }
 
   group = "auto";
   index = undefined;
   prefix = self_info[2];
 
-  if(isDefined(self.script_char_index))
+  if(isDefined(self.script_char_index)) {
     index = self.script_char_index;
+  }
 
   if(isDefined(self.script_char_group)) {
     type = "grouped";
     group = "group_" + self.script_char_group;
   }
 
-  if(!isDefined(level.character_index_cache))
+  if(!isDefined(level.character_index_cache)) {
     level.character_index_cache = [];
+  }
 
-  if(!isDefined(level.character_index_cache[prefix]))
+  if(!isDefined(level.character_index_cache[prefix])) {
     level.character_index_cache[prefix] = [];
+  }
 
-  if(!isDefined(level.character_index_cache[prefix][group]))
+  if(!isDefined(level.character_index_cache[prefix][group])) {
     initialize_character_group(prefix, group, amount);
+  }
 
   if(!isDefined(index)) {
     index = get_least_used_index(prefix, group);
 
-    if(!isDefined(index))
+    if(!isDefined(index)) {
       index = randomint(5000);
+    }
   }
 
-  while(index >= amount)
+  while(index >= amount) {
     index = index - amount;
+  }
 
   level.character_index_cache[prefix][group][index]++;
   return index;
@@ -163,8 +173,9 @@ get_least_used_index(prefix, group) {
 }
 
 initialize_character_group(prefix, group, amount) {
-  for(i = 0; i < amount; i++)
+  for(i = 0; i < amount; i++) {
     level.character_index_cache[prefix][group][i] = 0;
+  }
 }
 
 random(array) {

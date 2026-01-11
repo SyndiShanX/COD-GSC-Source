@@ -14,8 +14,9 @@ precache_cam_names(var_0) {
     var_4 = var_3 common_scripts\utility::get_linked_ents();
 
     foreach(var_6 in var_4) {
-      if(isDefined(var_0[var_6.script_startname]))
+      if(isDefined(var_0[var_6.script_startname])) {
         precachestring(var_0[var_6.script_startname]);
+      }
     }
   }
 }
@@ -31,8 +32,9 @@ init() {
   var_0 = get_terminals();
   common_scripts\utility::array_thread(var_0, ::remote_turret_terminal_think);
 
-  foreach(var_2 in level.players)
+  foreach(var_2 in level.players) {
   var_2 maps\_utility::ent_flag_init("on_remote_turret");
+  }
 
   common_scripts\utility::flag_init("_remoteturret_manual_getoff");
   common_scripts\utility::flag_init("_remoteturret_nofade");
@@ -67,11 +69,13 @@ remote_turret_terminal_think() {
 remote_turret_loop(var_0) {
   self endon("transfer_terminal");
 
-  if(common_scripts\utility::flag("_remoteturret_manual_getoff"))
+  if(common_scripts\utility::flag("_remoteturret_manual_getoff")) {
     self notifyonplayercommand("get_off_turret", "+stance");
+  }
 
-  if(var_0._remote_turrets.size > 1)
+  if(var_0._remote_turrets.size > 1) {
     thread turret_switch_input_loop(var_0);
+  }
 
   thread remote_turret_enable(var_0._remote_turrets[var_0.lastturretindex], var_0);
   thread cancel_on_player_damage();
@@ -89,8 +93,9 @@ turret_switch_input_loop(var_0) {
   for(;;) {
     self waittill("next_turret");
 
-    if(maps\_utility::ent_flag("on_remote_turret"))
+    if(maps\_utility::ent_flag("on_remote_turret")) {
       remote_turret_next(var_0);
+    }
   }
 }
 
@@ -104,17 +109,21 @@ setup_turret(var_0) {
     var_1.last_look_origin = var_2.origin;
   }
 
-  if(!isDefined(var_1.leftarc))
+  if(!isDefined(var_1.leftarc)) {
     var_1.leftarc = 70;
+  }
 
-  if(!isDefined(var_1.rightarc))
+  if(!isDefined(var_1.rightarc)) {
     var_1.rightarc = 70;
+  }
 
-  if(!isDefined(var_1.toparc))
+  if(!isDefined(var_1.toparc)) {
     var_1.toparc = 60;
+  }
 
-  if(!isDefined(var_1.bottomarc))
+  if(!isDefined(var_1.bottomarc)) {
     var_1.bottomarc = 60;
+  }
 
   var_1 setrightarc(var_1.rightarc);
   var_1 setleftarc(var_1.rightarc);
@@ -133,8 +142,9 @@ player_turret_shoot(var_0) {
   var_0 endon("stop_use_turret");
 
   for(;;) {
-    while(!self attackbuttonpressed())
+    while(!self attackbuttonpressed()) {
       wait 0.05;
+    }
 
     var_0 shootturret();
     var_0 notify("create_badplace");
@@ -185,8 +195,9 @@ remote_turret_disable(var_0, var_1) {
   self setsentryowner(undefined);
   maps\_utility::ent_flag_clear("on_remote_turret");
 
-  if(!common_scripts\utility::flag("_remoteturret_nofade"))
+  if(!common_scripts\utility::flag("_remoteturret_nofade")) {
     rt_fade_out();
+  }
 
   turret_deactivate(var_0, var_1);
   self enableweapons();
@@ -197,41 +208,47 @@ remote_turret_disable(var_0, var_1) {
   huditemsshow();
   text_titledestroy();
 
-  if(!common_scripts\utility::flag("_remoteturret_nofade"))
+  if(!common_scripts\utility::flag("_remoteturret_nofade")) {
     rt_fade_in();
+  }
 }
 
 remote_turret_next(var_0) {
   maps\_utility::ent_flag_clear("on_remote_turret");
   self endon("get_off_turret");
 
-  if(!common_scripts\utility::flag("_remoteturret_nofade"))
+  if(!common_scripts\utility::flag("_remoteturret_nofade")) {
     rt_fade_out();
+  }
 
   turret_deactivate(var_0._remote_turrets[var_0.lastturretindex], var_0);
   var_0.lastturretindex = var_0.lastturretindex + 1;
   var_0.lastturretindex = var_0.lastturretindex % var_0._remote_turrets.size;
   thread turret_activate(var_0._remote_turrets[var_0.lastturretindex], var_0);
 
-  if(!common_scripts\utility::flag("_remoteturret_nofade"))
+  if(!common_scripts\utility::flag("_remoteturret_nofade")) {
     rt_fade_in();
+  }
 
   maps\_utility::ent_flag_set("on_remote_turret");
 }
 
 turret_activate(var_0, var_1) {
-  if(isDefined(level._remoteturret_loc_table) && isDefined(var_0.script_startname) && isDefined(level._remoteturret_loc_table[var_0.script_startname]))
+  if(isDefined(level._remoteturret_loc_table) && isDefined(var_0.script_startname) && isDefined(level._remoteturret_loc_table[var_0.script_startname])) {
     text_titlesettext(level._remoteturret_loc_table[var_0.script_startname]);
-  else
+  }
+  else {
     text_titlesettext("CAMERA: " + (var_1.lastturretindex + 1));
+  }
 
   var_0 hideonclient(self);
   uav_enable_view();
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_3 = var_0 gettagangles("tag_origin");
 
-  if(isDefined(var_0.last_look_origin))
+  if(isDefined(var_0.last_look_origin)) {
     var_3 = vectortoangles(var_0.last_look_origin - var_0.origin);
+  }
 
   self setplayerangles((var_3[0], var_3[1], self.angles[2]));
   self playerlinkto(var_0, "tag_player", 0, var_0.rightarc * 0.9, var_0.leftarc * 0.9, var_0.toparc * 0.9, var_0.bottomarc * 0.9);
@@ -291,8 +308,9 @@ rt_fade_out() {
 }
 
 get_white_overlay() {
-  if(!isDefined(self.white_overlay))
+  if(!isDefined(self.white_overlay)) {
     self.white_overlay = maps\_hud_util::create_client_overlay("white", 0, self);
+  }
 
   self.white_overlay.sort = -1;
   self.white_overlay.foreground = 0;
@@ -302,8 +320,9 @@ get_white_overlay() {
 huditemshide() {
   if(level.players.size > 0) {
     for(var_0 = 0; var_0 < level.players.size; var_0++) {
-      if(level.players[var_0] maps\_utility::ent_flag("on_remote_turret"))
+      if(level.players[var_0] maps\_utility::ent_flag("on_remote_turret")) {
         setdvar("ui_remotemissile_playernum", var_0 + 1);
+      }
     }
   } else {
     setsaveddvar("compass", "0");
@@ -313,8 +332,9 @@ huditemshide() {
 }
 
 huditemsshow() {
-  if(level.players.size > 0)
+  if(level.players.size > 0) {
     setdvar("ui_remotemissile_playernum", 0);
+  }
   else {
     setsaveddvar("compass", "1");
     setsaveddvar("ammoCounterHide", "0");
@@ -326,11 +346,13 @@ holdstancechange(var_0) {
   if(!var_0) {
     var_1 = self getstance();
 
-    if(var_1 != "prone")
+    if(var_1 != "prone") {
       self allowprone(var_0);
+    }
 
-    if(var_1 != "crouch")
+    if(var_1 != "crouch") {
       self allowcrouch(var_0);
+    }
 
     if(var_1 != "stand") {
       self allowstand(var_0);
@@ -356,11 +378,13 @@ uav_enable_view(var_0, var_1) {
 }
 
 hud_fade_in_time(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
   self.alpha = 0;
   self fadeovertime(var_0);
@@ -372,8 +396,9 @@ create_hud_static_overlay(var_0) {
   var_1 = maps\_hud_util::create_client_overlay("overlay_grain", 0.3, self);
   var_1.sort = level.uav_sort;
 
-  if(!var_1 hud_fade_in_time(var_0, 0.3))
+  if(!var_1 hud_fade_in_time(var_0, 0.3)) {
     var_1.alpha = 0.3;
+  }
 
   return var_1;
 }
@@ -386,8 +411,9 @@ create_hud_scanline_overlay(var_0) {
   var_1.horzalign = "fullscreen";
   var_1.vertalign = "fullscreen";
 
-  if(!var_1 hud_fade_in_time(var_0, 1))
+  if(!var_1 hud_fade_in_time(var_0, 1)) {
     var_1.alpha = 1;
+  }
 
   return var_1;
 }
@@ -468,8 +494,9 @@ create_hud_lower_right(var_0) {
   var_1["elv"] = [ &"UAV_ELV", &"UAV_F"];
   var_3 = create_hud_section(var_1, 510, 360, "right", var_0);
 
-  foreach(var_6, var_5 in var_3)
+  foreach(var_6, var_5 in var_3) {
   var_2[var_6] = var_5;
+  }
 
   return var_2;
 }
@@ -490,8 +517,9 @@ create_hud_section(var_0, var_1, var_2, var_3, var_4) {
     var_9 settext(var_8[0]);
 
     if(isDefined(var_8[1])) {
-      if(!string_is_valid(var_8[1], "none"))
+      if(!string_is_valid(var_8[1], "none")) {
         var_9 create_hud_data_value(var_8[1], var_4);
+      }
     } else
       var_9 create_hud_data_value(undefined, var_4);
 
@@ -505,8 +533,9 @@ create_hud_section(var_0, var_1, var_2, var_3, var_4) {
 
 string_is_valid(var_0, var_1) {
   if(isstring(var_0)) {
-    if(var_0 == var_1)
+    if(var_0 == var_1) {
       return 1;
+    }
   }
 
   return 0;
@@ -528,8 +557,9 @@ create_hud_data_value(var_0, var_1) {
     self.data_value_suffix = var_3;
     var_4 = 1;
 
-    if(var_0 == &"UAV_NM")
+    if(var_0 == &"UAV_NM") {
       var_4 = 2;
+    }
 
     var_3 hud_fade_in_time(var_1);
     var_2 = var_2 - 10 * var_4;
@@ -605,8 +635,9 @@ uav_disable_view(var_0) {
   if(isDefined(self.uav_huds)) {
     foreach(var_2 in self.uav_huds) {
       if(isarray(var_2)) {
-        foreach(var_4 in var_2)
+        foreach(var_4 in var_2) {
         uav_destroy_hud(var_4, var_0);
+        }
 
         var_2 = undefined;
         continue;
@@ -616,18 +647,21 @@ uav_disable_view(var_0) {
     }
   }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.05;
+  }
 
   setsaveddvar("sm_sunenable", 1.0);
 }
 
 uav_destroy_hud(var_0, var_1) {
-  if(isDefined(var_0.data_value))
+  if(isDefined(var_0.data_value)) {
     var_0.data_value thread uav_destroy_hud_wrapper(var_1);
+  }
 
-  if(isDefined(var_0.data_value_suffix))
+  if(isDefined(var_0.data_value_suffix)) {
     var_0.data_value_suffix thread uav_destroy_hud_wrapper(var_1);
+  }
 
   var_0 thread uav_destroy_hud_wrapper(var_1);
 }
@@ -639,8 +673,9 @@ uav_destroy_hud_wrapper(var_0) {
     wait(var_0);
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self destroy();
+  }
 }
 
 text_titlecreate() {

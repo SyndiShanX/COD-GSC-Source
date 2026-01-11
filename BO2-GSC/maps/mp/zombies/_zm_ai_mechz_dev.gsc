@@ -75,8 +75,9 @@ watch_devgui_mechz() {
       mechz_health_increases();
       level.mechz_left_to_spawn = 1;
 
-      if(getdvarint(#"_id_FA81816F") >= 2)
+      if(getdvarint(#"_id_FA81816F") >= 2) {
         level.round_number++;
+      }
 
       level notify("spawn_mechz");
       setdvar("spawn_Mechz", "off");
@@ -88,8 +89,9 @@ watch_devgui_mechz() {
       zombies = getaiarray("axis");
 
       for(i = 0; i < zombies.size; i++) {
-        if(isDefined(zombies[i].is_mechz) && zombies[i].is_mechz)
+        if(isDefined(zombies[i].is_mechz) && zombies[i].is_mechz) {
           zombies[i] thread mechz_force_behavior(behavior);
+        }
       }
 
       setdvar("mechz_force_behavior", "none");
@@ -101,8 +103,9 @@ watch_devgui_mechz() {
       zombies = getaiarray("axis");
 
       for(i = 0; i < zombies.size; i++) {
-        if(isDefined(zombies[i].is_mechz) && zombies[i].is_mechz)
+        if(isDefined(zombies[i].is_mechz) && zombies[i].is_mechz) {
           mechz = zombies[i];
+        }
       }
 
       if(!isDefined(mechz)) {
@@ -121,8 +124,9 @@ watch_devgui_mechz() {
       zombies = getaiarray("axis");
 
       for(i = 0; i < zombies.size; i++) {
-        if(isDefined(zombies[i].is_mechz) && zombies[i].is_mechz)
+        if(isDefined(zombies[i].is_mechz) && zombies[i].is_mechz) {
           mechz = zombies[i];
+        }
       }
 
       if(!isDefined(mechz)) {
@@ -140,8 +144,9 @@ watch_devgui_mechz() {
       zombies = getaiarray("axis");
 
       for(i = 0; i < zombies.size; i++) {
-        if(isDefined(zombies[i].is_mechz) && zombies[i].is_mechz)
+        if(isDefined(zombies[i].is_mechz) && zombies[i].is_mechz) {
           zombies[i].force_sprint = 1;
+        }
       }
     }
 
@@ -168,26 +173,33 @@ mechz_force_behavior(behavior) {
   self.ignoreall = 1;
   self.force_behavior = 1;
 
-  if(behavior == "jump_in")
+  if(behavior == "jump_in") {
     self thread mechz_force_jump_in();
+  }
 
-  if(behavior == "jump_out")
+  if(behavior == "jump_out") {
     self thread mechz_force_jump_out();
+  }
 
-  if(behavior == "flamethrower")
+  if(behavior == "flamethrower") {
     self thread mechz_force_flamethrower();
+  }
 
-  if(behavior == "claw_attack")
+  if(behavior == "claw_attack") {
     self thread mechz_force_claw_attack();
+  }
 
-  if(behavior == "damage_armor")
+  if(behavior == "damage_armor") {
     self thread mechz_force_damage_armor();
+  }
 
-  if(behavior == "damage_faceplate")
+  if(behavior == "damage_faceplate") {
     self thread mechz_force_damage_faceplate();
+  }
 
-  if(behavior == "melee")
+  if(behavior == "melee") {
     self thread mechz_force_melee();
+  }
 
   if(behavior == "none") {
     self.ignoreall = 0;
@@ -284,8 +296,9 @@ mechz_force_flamethrower() {
       curr_aim_anim++;
       curr_timer = 0;
 
-      if(curr_aim_anim < 10)
+      if(curr_aim_anim < 10) {
         iprintln("Testing aim_" + curr_aim_anim);
+      }
     }
 
     if(curr_aim_anim >= 10) {
@@ -366,8 +379,9 @@ mechz_force_damage_armor() {
   self endon("kill_force_behavior");
   self setup_force_behavior();
 
-  if(!isDefined(self.next_armor_piece))
+  if(!isDefined(self.next_armor_piece)) {
     self.next_armor_piece = 0;
+  }
 
   self thread scripted_behavior("zm_idle", "idle_anim");
 
@@ -377,22 +391,25 @@ mechz_force_damage_armor() {
     for(i = 0; i < self.armor_state.size; i++) {
       self.fx_field = self.fx_field &~(1 << self.armor_state[i].index);
 
-      if(isDefined(self.armor_state[i].model))
+      if(isDefined(self.armor_state[i].model)) {
         self attach(self.armor_state[i].model, self.armor_state[i].tag);
+      }
     }
   } else {
     self.fx_field = self.fx_field | 1 << self.armor_state[self.next_armor_piece].index;
 
-    if(isDefined(self.armor_state[self.next_armor_piece].model))
+    if(isDefined(self.armor_state[self.next_armor_piece].model)) {
       self detach(self.armor_state[self.next_armor_piece].model, self.armor_state[self.next_armor_piece].tag);
+    }
 
     self.next_armor_piece++;
   }
 
   self setclientfield("mechz_fx", self.fx_field);
 
-  while(true)
+  while(true) {
     self scripted_behavior("zm_idle", "idle_anim");
+  }
 }
 
 mechz_force_damage_faceplate() {
@@ -414,8 +431,9 @@ mechz_force_damage_faceplate() {
 
   self setclientfield("mechz_fx", self.fx_field);
 
-  while(true)
+  while(true) {
     self scripted_behavior("zm_idle", "idle_anim");
+  }
 }
 
 mechz_force_melee() {

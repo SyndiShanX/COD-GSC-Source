@@ -37,13 +37,16 @@ main() {
   angles = getstartAngles(self._tag_entity.origin, self._tag_entity.angles, animationName);
 
   newOrigin = self getDropToFloorPosition(origin);
-  if(isDefined(newOrigin))
+  if(isDefined(newOrigin)) {
     origin = newOrigin;
-  else
+  }
+  else {
     println("Custom animation may be playing in solid for entity '" + self getentnum() + "'\n");
+  }
 
-  if(!isDefined(self.noTeleport))
+  if(!isDefined(self.noTeleport)) {
     self teleport(origin, angles);
+  }
 
   self.pushable = 0;
 
@@ -77,10 +80,12 @@ main() {
   endMarker = "end";
 
   if(!loop) {
-    if(animHasNoteTrack(animationName, "finish"))
+    if(animHasNoteTrack(animationName, "finish")) {
       endMarker = "finish";
-    else if(animHasNoteTrack(animationName, "stop anim"))
+    }
+    else if(animHasNoteTrack(animationName, "stop anim")) {
       endMarker = "stop anim";
+    }
   }
 
   while(1) {
@@ -99,8 +104,9 @@ main() {
     }
   }
 
-  if(endMarker != "end")
+  if(endMarker != "end") {
     self OrientMode("face motion");
+  }
 
   self notify("finished_custom_animmode" + anime);
 }

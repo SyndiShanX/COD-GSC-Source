@@ -63,8 +63,9 @@ destructibles_think() {
       self.health = 200;
       immediateExplosion = true;
     }
-    if(self.health < 200)
+    if(self.health < 200) {
       self.health = 200;
+    }
     if(self.health <= 200 && !self.exploded) {
       self.exploded = true;
       attacker notify("destroyed_car");
@@ -73,8 +74,9 @@ destructibles_think() {
         if(isDefined(hood_tag)) {
           playFX(level._effect["dest_car_hoodfire"], hood_tag);
           self playDestructibleBattleChatter();
-          if(!immediateExplosion)
+          if(!immediateExplosion) {
             wait 3;
+          }
           playFX(level._effect["dest_car_fire"], self.origin + (0, 0, 15));
         }
       }

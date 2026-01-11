@@ -16,11 +16,13 @@ GOAL_SCAVENGE_ITEM = 40;
 init_player_achievement() {
   self.achievement_list = [];
 
-  if(isDefined(level.achievement_registration_func))
+  if(isDefined(level.achievement_registration_func)) {
     [[level.achievement_registration_func]]();
+  }
 
-  if(maps\mp\alien\_utility::is_true(level.include_default_achievements))
+  if(maps\mp\alien\_utility::is_true(level.include_default_achievements)) {
     register_default_achievements();
+  }
 }
 
 register_default_achievements() {
@@ -47,8 +49,9 @@ default_init(goal, should_update_func, is_goal_reached_func, complete_in_casual)
   self.should_update_func = should_update_func;
   self.is_goal_reached_func = is_goal_reached_func;
   self.achievement_completed = false;
-  if(isDefined(complete_in_casual))
+  if(isDefined(complete_in_casual)) {
     self.complete_in_casual = complete_in_casual;
+  }
 }
 
 default_should_update(unused_1, unused_2, unused_3, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9, unused_10) {
@@ -113,8 +116,9 @@ update_achievement(reference, progress_amt, param_1, param_2, param_3, param_4, 
 }
 
 update_alien_kill_achievements(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration) {
-  if(isDefined(level.update_alien_kill_achievements_func))
+  if(isDefined(level.update_alien_kill_achievements_func)) {
     [[level.update_alien_kill_achievements_func]](eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration);
+  }
 
   if(!isDefined(eAttacker) || !isPlayer(eAttacker)) {
     return;
@@ -123,8 +127,9 @@ update_alien_kill_achievements(eInflictor, eAttacker, iDamage, sMeansOfDeath, sW
 }
 
 should_update_kill_with_trap(eInflictor, unused_2, unused_3, unused_4, unused_5, unused_6, unused_7, unused_8, unused_9, unused_10) {
-  if(maps\mp\alien\_utility::is_trap(eInflictor))
+  if(maps\mp\alien\_utility::is_trap(eInflictor)) {
     return true;
+  }
 
   return false;
 }
@@ -178,8 +183,9 @@ update_scavenge_achievement() {
 }
 
 update_achievement_damage_weapon(sWeapon) {
-  if(isDefined(level.update_achievement_damage_weapon_func))
+  if(isDefined(level.update_achievement_damage_weapon_func)) {
     self[[level.update_achievement_damage_weapon_func]](sWeapon);
+  }
 }
 
 eggAllFoundForPack(packNum) {
@@ -213,8 +219,9 @@ eggAllFoundForPack(packNum) {
 
     }
 
-    if(hasModifiedFlags == true)
+    if(hasModifiedFlags == true) {
       self SetCoopPlayerDataReservedInt("eggstra_award_flags", eggstra_award_flags);
+    }
 
     self update_mp_eggs_achievement(packnum);
   }
@@ -242,14 +249,18 @@ update_mp_eggs_achievement(dlc_num) {
 update_intel_achievement(dlc_num) {
   dlc_num = 0;
   map_name = getdvar("ui_mapname");
-  if(map_name == "mp_alien_armory")
+  if(map_name == "mp_alien_armory") {
     dlc_num = 1;
-  if(map_name == "mp_alien_beacon")
+  }
+  if(map_name == "mp_alien_beacon") {
     dlc_num = 2;
-  if(map_name == "mp_alien_dlc3")
+  }
+  if(map_name == "mp_alien_dlc3") {
     dlc_num = 3;
-  if(map_name == "mp_alien_last")
+  }
+  if(map_name == "mp_alien_last") {
     dlc_num = 4;
+  }
   switch (dlc_num) {
     case 1:
       self update_achievement("FOUND_ALL_INTELS", 1);

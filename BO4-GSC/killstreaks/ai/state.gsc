@@ -98,4 +98,3 @@ function_3a57bb58() {
     waitframe(1);
   }
 }
-

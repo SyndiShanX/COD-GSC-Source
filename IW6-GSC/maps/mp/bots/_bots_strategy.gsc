@@ -18,8 +18,9 @@ bot_defend_get_random_entrance_point_for_current_area() {
 }
 
 bot_defend_get_precalc_entrances_for_current_area(stance) {
-  if(isDefined(self.defend_entrance_index))
+  if(isDefined(self.defend_entrance_index)) {
     return bot_get_entrances_for_stance_and_index(stance, self.defend_entrance_index);
+  }
 
   return [];
 }
@@ -41,8 +42,9 @@ bot_setup_bot_targets(array) {
       element.botTargets = [];
       nodes_in_trigger = GetNodesInTrigger(element.trigger);
       foreach(node in nodes_in_trigger) {
-        if(!node NodeIsDisconnected())
+        if(!node NodeIsDisconnected()) {
           element.botTargets = array_add(element.botTargets, node);
+        }
       }
     }
   }
@@ -53,16 +55,19 @@ bot_get_ambush_trap_item(purposePriority1, purposePriority2, purposePriority3) {
 
   purpose_priority = [];
   purpose_priority[purpose_priority.size] = purposePriority1;
-  if(isDefined(purposePriority2))
+  if(isDefined(purposePriority2)) {
     purpose_priority[purpose_priority.size] = purposePriority2;
-  if(isDefined(purposePriority2))
+  }
+  if(isDefined(purposePriority2)) {
     purpose_priority[purpose_priority.size] = purposePriority3;
+  }
 
   foreach(purpose in purpose_priority) {
     result["purpose"] = purpose;
     result["item_action"] = self bot_get_grenade_for_purpose(purpose);
-    if(isDefined(result["item_action"]))
+    if(isDefined(result["item_action"])) {
       return result;
+    }
   }
 }
 
@@ -70,20 +75,23 @@ bot_set_ambush_trap(trap_item, ambush_entrances, ambush_node, ambush_yaw, trap_n
   self notify("bot_set_ambush_trap");
   self endon("bot_set_ambush_trap");
 
-  if(!isDefined(trap_item))
+  if(!isDefined(trap_item)) {
     return false;
+  }
 
   chosen_entrance = undefined;
 
   if(!isDefined(trap_node) && isDefined(ambush_entrances) && ambush_entrances.size > 0) {
-    if(!isDefined(ambush_node))
+    if(!isDefined(ambush_node)) {
       return false;
+    }
 
     choose_set = [];
 
     fwd = undefined;
-    if(isDefined(ambush_yaw))
+    if(isDefined(ambush_yaw)) {
       fwd = anglesToForward((0, ambush_yaw, 0));
+    }
 
     foreach(entrance in ambush_entrances) {
       if(!isDefined(fwd)) {
@@ -101,8 +109,9 @@ bot_set_ambush_trap(trap_item, ambush_entrances, ambush_node, ambush_yaw, trap_n
 
       tempChoices = [];
       foreach(node in trap_choices) {
-        if(!isDefined(node.bot_ambush_end))
+        if(!isDefined(node.bot_ambush_end)) {
           tempChoices[tempChoices.size] = node;
+        }
       }
       trap_choices = tempChoices;
 
@@ -117,8 +126,9 @@ bot_set_ambush_trap(trap_item, ambush_entrances, ambush_node, ambush_yaw, trap_n
       yaw = placeAngles[1];
     }
 
-    if((self BotHasScriptGoal()) && (self BotGetScriptGoalType() != "critical") && (self BotGetScriptGoalType() != "tactical"))
+    if((self BotHasScriptGoal()) && (self BotGetScriptGoalType() != "critical") && (self BotGetScriptGoalType() != "tactical")) {
       self BotClearScriptGoal();
+    }
 
     goal_succeeded = self BotSetScriptGoalNode(trap_node, "guard", yaw);
 
@@ -129,21 +139,25 @@ bot_set_ambush_trap(trap_item, ambush_entrances, ambush_node, ambush_yaw, trap_n
         self thread bot_force_stance_for_time("stand", 5.0);
 
         if(!isDefined(self.enemy) || (false == (self BotCanSeeEntity(self.enemy)))) {
-          if(isDefined(yaw))
+          if(isDefined(yaw)) {
             self BotThrowGrenade(chosen_entrance.origin, trap_item["item_action"]);
-          else
+          }
+          else {
             self BotThrowGrenade(self.origin + (anglesToForward(self.angles) * 50), trap_item["item_action"]);
+          }
           self.ambush_trap_ent = undefined;
           self thread bot_set_ambush_trap_wait_fire("grenade_fire");
           self thread bot_set_ambush_trap_wait_fire("missile_fire");
           timeToWait = 3.0;
-          if(trap_item["purpose"] == "tacticalinsertion")
+          if(trap_item["purpose"] == "tacticalinsertion") {
             timeToWait = 6.0;
+          }
           self waittill_any_timeout(timeToWait, "missile_fire", "grenade_fire");
           wait 0.05;
           self notify("ambush_trap_ent");
-          if(isDefined(self.ambush_trap_ent) && trap_item["purpose"] == "c4")
+          if(isDefined(self.ambush_trap_ent) && trap_item["purpose"] == "c4") {
             self thread bot_watch_manual_detonate(self.ambush_trap_ent, trap_item["item_action"], 300);
+          }
           self.ambush_trap_ent = undefined;
           wait RandomFloat(0.25);
           self BotSetStance("none");
@@ -205,31 +219,37 @@ bot_capture_zone(point, nodes, capture_trigger, optional_params) {
 }
 
 bot_protect_point(point, radius, optional_params) {
-  if(!isDefined(optional_params) || !isDefined(optional_params["min_goal_time"]))
+  if(!isDefined(optional_params) || !isDefined(optional_params["min_goal_time"])) {
     optional_params["min_goal_time"] = 12;
+  }
 
-  if(!isDefined(optional_params) || !isDefined(optional_params["max_goal_time"]))
+  if(!isDefined(optional_params) || !isDefined(optional_params["max_goal_time"])) {
     optional_params["max_goal_time"] = 18;
+  }
 
   self thread bot_defend_think(point, radius, "protect", optional_params);
 }
 
 bot_patrol_area(point, radius, optional_params) {
-  if(!isDefined(optional_params) || !isDefined(optional_params["min_goal_time"]))
+  if(!isDefined(optional_params) || !isDefined(optional_params["min_goal_time"])) {
     optional_params["min_goal_time"] = 0.00;
+  }
 
-  if(!isDefined(optional_params) || !isDefined(optional_params["max_goal_time"]))
+  if(!isDefined(optional_params) || !isDefined(optional_params["max_goal_time"])) {
     optional_params["max_goal_time"] = 0.01;
+  }
 
   self thread bot_defend_think(point, radius, "patrol", optional_params);
 }
 
 bot_guard_player(player, radius, optional_params) {
-  if(!isDefined(optional_params) || !isDefined(optional_params["min_goal_time"]))
+  if(!isDefined(optional_params) || !isDefined(optional_params["min_goal_time"])) {
     optional_params["min_goal_time"] = 15;
+  }
 
-  if(!isDefined(optional_params) || !isDefined(optional_params["max_goal_time"]))
+  if(!isDefined(optional_params) || !isDefined(optional_params["max_goal_time"])) {
     optional_params["max_goal_time"] = 20;
+  }
 
   self thread bot_defend_think(player, radius, "bodyguard", optional_params);
 }
@@ -264,12 +284,14 @@ bot_defend_think(defendCenter, defendRadius, defense_type, optional_params) {
     self.bot_defending_trigger = optional_params["capture_trigger"];
     Assert(isDefined(self.bot_defending_nodes) && self.bot_defending_nodes.size > 0);
 
-    if(!isDefined(self.bot_defending_nodes) || self.bot_defending_nodes.size == 0)
+    if(!isDefined(self.bot_defending_nodes) || self.bot_defending_nodes.size == 0) {
       self bot_defend_stop();
+    }
 
   } else {
-    if(isDefined(optional_params))
+    if(isDefined(optional_params)) {
       AssertEx(!isDefined(optional_params["capture_trigger"]), "Only a defense of type 'capture_zone' should have a 'capture_trigger' defined");
+    }
 
     self.bot_defending_radius = defendRadius;
     self.bot_defending_nodes = undefined;
@@ -290,8 +312,9 @@ bot_defend_think(defendCenter, defendRadius, defense_type, optional_params) {
   }
 
   if(self.bot_defending_type == "bodyguard") {
-    if(!isDefined(self.bot_defend_player_guarding) || !IsGameParticipant(self.bot_defend_player_guarding))
+    if(!isDefined(self.bot_defend_player_guarding) || !IsGameParticipant(self.bot_defend_player_guarding)) {
       AssertMsg("Bot <" + self.name + "> was told to guard an invalid player");
+    }
   }
 
   self BotSetStance("none");
@@ -304,14 +327,17 @@ bot_defend_think(defendCenter, defendRadius, defense_type, optional_params) {
     self.defense_score_flags = optional_params["score_flags"];
     self.bot_defending_override_origin_node = optional_params["override_origin_node"];
 
-    if(isDefined(optional_params["override_goal_type"]))
+    if(isDefined(optional_params["override_goal_type"])) {
       goal_type = optional_params["override_goal_type"];
+    }
 
-    if(isDefined(optional_params["min_goal_time"]))
+    if(isDefined(optional_params["min_goal_time"])) {
       min_goal_time = optional_params["min_goal_time"];
+    }
 
-    if(isDefined(optional_params["max_goal_time"]))
+    if(isDefined(optional_params["max_goal_time"])) {
       max_goal_time = optional_params["max_goal_time"];
+    }
 
     if(isDefined(optional_params["override_entrances"]) && optional_params["override_entrances"].size > 0) {
       self.defense_override_entrances = optional_params["override_entrances"];
@@ -330,17 +356,21 @@ bot_defend_think(defendCenter, defendRadius, defense_type, optional_params) {
   if(!isDefined(self.bot_defend_player_guarding)) {
     nearest_node = undefined;
 
-    if(isDefined(optional_params) && isDefined(optional_params["nearest_node_to_center"]))
+    if(isDefined(optional_params) && isDefined(optional_params["nearest_node_to_center"])) {
       nearest_node = optional_params["nearest_node_to_center"];
+    }
 
-    if(!isDefined(nearest_node) && isDefined(self.bot_defending_override_origin_node))
+    if(!isDefined(nearest_node) && isDefined(self.bot_defending_override_origin_node)) {
       nearest_node = self.bot_defending_override_origin_node;
+    }
 
-    if(!isDefined(nearest_node) && isDefined(self.bot_defending_trigger) && isDefined(self.bot_defending_trigger.nearest_node))
+    if(!isDefined(nearest_node) && isDefined(self.bot_defending_trigger) && isDefined(self.bot_defending_trigger.nearest_node)) {
       nearest_node = self.bot_defending_trigger.nearest_node;
+    }
 
-    if(!isDefined(nearest_node))
+    if(!isDefined(nearest_node)) {
       nearest_node = GetClosestNodeInSight(self defend_valid_center());
+    }
 
     if(!isDefined(nearest_node)) {
       defend_center = self defend_valid_center();
@@ -374,8 +404,9 @@ bot_defend_think(defendCenter, defendRadius, defense_type, optional_params) {
 
   if(!isDefined(goal_type)) {
     goal_type = "guard";
-    if(defense_type == "capture" || defense_type == "capture_zone")
+    if(defense_type == "capture" || defense_type == "capture_zone") {
       goal_type = "objective";
+    }
   }
 
   random_stance_at_pathnode_dest = (self bot_is_capturing());
@@ -430,8 +461,9 @@ bot_defend_think(defendCenter, defendRadius, defense_type, optional_params) {
 
       if(isDefined(self.cur_defend_point_override)) {
         yaw = undefined;
-        if(isDefined(self.cur_defend_angle_override))
+        if(isDefined(self.cur_defend_angle_override)) {
           yaw = self.cur_defend_angle_override[1];
+        }
 
         self BotSetScriptGoal(self.cur_defend_point_override, 0, goal_type, yaw);
       } else if(!isDefined(self.cur_defend_angle_override)) {
@@ -515,8 +547,9 @@ calculate_defend_stance(random_stance_at_pathnode_dest) {
 
       bots_prone_at_this_zone = self defend_get_ally_bots_at_zone_for_stance("prone");
 
-      if(bots_prone_at_this_zone.size >= entrances_to_this_zone_for_prone.size)
+      if(bots_prone_at_this_zone.size >= entrances_to_this_zone_for_prone.size) {
         stance = "crouch";
+      }
     }
 
     if(stance == "crouch") {
@@ -524,8 +557,9 @@ calculate_defend_stance(random_stance_at_pathnode_dest) {
 
       bots_crouched_at_this_zone = self defend_get_ally_bots_at_zone_for_stance("crouch");
 
-      if(bots_crouched_at_this_zone.size >= entrances_to_this_zone_for_crouch.size)
+      if(bots_crouched_at_this_zone.size >= entrances_to_this_zone_for_crouch.size) {
         stance = "stand";
+      }
     }
   }
 
@@ -539,11 +573,13 @@ should_start_cautious_approach_default(firstCheck) {
   distance_start_cautiousness_sq = distance_start_cautiousness * distance_start_cautiousness;
 
   if(firstCheck) {
-    if(self BotGetDifficultySetting("strategyLevel") == 0)
+    if(self BotGetDifficultySetting("strategyLevel") == 0) {
       return false;
+    }
 
-    if(self.bot_defending_type == "capture_zone" && self IsTouching(self.bot_defending_trigger))
+    if(self.bot_defending_type == "capture_zone" && self IsTouching(self.bot_defending_trigger)) {
       return false;
+    }
 
     return (DistanceSquared(self.origin, self.bot_defending_center) > distance_start_cautiousness_sq * 0.75 * 0.75);
   } else {
@@ -558,10 +594,12 @@ should_start_cautious_approach_default(firstCheck) {
 
 setup_investigate_location(node, optional_location) {
   new_location = spawnStruct();
-  if(isDefined(optional_location))
+  if(isDefined(optional_location)) {
     new_location.origin = optional_location;
-  else
+  }
+  else {
     new_location.origin = node.origin;
+  }
   AssertEx(isDefined(node), "Bot Investigation Location " + new_location.origin + " has no node");
   new_location.node = node;
   new_location.frames_visible = 0;
@@ -679,8 +717,9 @@ defense_cautious_approach() {
         should_reset_player_base_pos_when_still = false;
 
         while(1) {
-          if(!isDefined(self.bot_defend_player_guarding))
+          if(!isDefined(self.bot_defend_player_guarding)) {
             self thread bot_defend_stop();
+          }
 
           if(self.bot_defend_player_guarding IsLinked()) {
             wait(0.05);
@@ -689,8 +728,9 @@ defense_cautious_approach() {
 
           self.bot_defending_center = self.bot_defend_player_guarding.origin;
           self.node_closest_to_defend_center = self.bot_defend_player_guarding GetNearestNode();
-          if(!isDefined(self.node_closest_to_defend_center))
+          if(!isDefined(self.node_closest_to_defend_center)) {
             self.node_closest_to_defend_center = self GetNearestNode();
+          }
           Assert(isDefined(self.node_closest_to_defend_center));
 
           if(self BotGetScriptGoalType() != "none") {
@@ -807,18 +847,21 @@ defense_cautious_approach() {
           self.cur_defend_node = node;
         } else {
           nearest_node_bot = self GetNearestNode();
-          if(isDefined(nearest_node_bot))
+          if(isDefined(nearest_node_bot)) {
             self.cur_defend_node = nearest_node_bot;
-          else
+          }
+          else {
             self.cur_defend_point_override = self.origin;
+          }
         }
       }
 
       find_defend_node_patrol() {
         node = undefined;
         nodes = GetNodesInRadius(self defend_valid_center(), self.bot_defending_radius, 0);
-        if(isDefined(nodes) && nodes.size > 0)
+        if(isDefined(nodes) && nodes.size > 0) {
           node = self BotNodePick(nodes, 1 + (nodes.size * 0.5), "node_traffic");
+        }
 
         if(isDefined(node)) {
           self.cur_defend_node = node;
@@ -830,10 +873,12 @@ defense_cautious_approach() {
       bot_handle_no_valid_defense_node(face_towards_point, face_away_from_point) {
         assert((!isDefined(face_towards_point) && isDefined(face_away_from_point)) || (isDefined(face_towards_point) && !isDefined(face_away_from_point)));
 
-        if(self.bot_defending_type == "capture_zone")
+        if(self.bot_defending_type == "capture_zone") {
           self.cur_defend_point_override = self bot_pick_random_point_from_set(self defend_valid_center(), self.bot_defending_nodes, ::bot_can_use_point_in_defend);
-        else
+        }
+        else {
           self.cur_defend_point_override = self bot_pick_random_point_in_radius(self defend_valid_center(), self.bot_defending_radius, ::bot_can_use_point_in_defend, 0.15, 0.9);
+        }
 
         if(isDefined(face_towards_point)) {
           angle_dir = VectorNormalize(face_towards_point - self.cur_defend_point_override);
@@ -845,8 +890,9 @@ defense_cautious_approach() {
       }
 
       bot_can_use_point_in_defend(point) {
-        if(self bot_check_team_is_using_position(point, true, true, true))
+        if(self bot_check_team_is_using_position(point, true, true, true)) {
           return false;
+        }
 
         return true;
       }
@@ -919,8 +965,9 @@ defense_cautious_approach() {
               self childthread watch_goal_aborted(new_goal);
 
               goal_type = "tactical";
-              if(isDefined(new_goal.goal_type))
+              if(isDefined(new_goal.goal_type)) {
                 goal_type = new_goal.goal_type;
+              }
 
               self BotSetScriptGoal(new_goal.goal_position, new_goal.goal_radius, goal_type, new_goal.goal_yaw, new_goal.objective_radius);
 
@@ -928,8 +975,9 @@ defense_cautious_approach() {
               self notify("stop_goal_aborted_watch");
 
               if(result == "goal") {
-                if(isDefined(new_goal.action_thread))
+                if(isDefined(new_goal.action_thread)) {
                   self[[new_goal.action_thread]](new_goal);
+                }
               }
 
               if(result != "script_goal_changed") {
@@ -955,8 +1003,9 @@ defense_cautious_approach() {
         wait(0.05);
 
         while(1) {
-          if(isDefined(goal.abort) || (isDefined(goal.should_abort) && self[[goal.should_abort]](goal)))
+          if(isDefined(goal.abort) || (isDefined(goal.should_abort) && self[[goal.should_abort]](goal))) {
             self notify("stop_tactical_goal");
+          }
 
           wait(0.05);
         }
@@ -968,8 +1017,9 @@ defense_cautious_approach() {
         new_goal.goal_position = goal_position;
 
         if(isDefined(self.only_allowable_tactical_goals)) {
-          if(!array_contains(self.only_allowable_tactical_goals, type))
+          if(!array_contains(self.only_allowable_tactical_goals, type)) {
             return;
+          }
         }
 
         assert(priority >= 0 && priority <= 100);
@@ -980,8 +1030,9 @@ defense_cautious_approach() {
         new_goal.goal_type = extra_params.script_goal_type;
         new_goal.goal_yaw = extra_params.script_goal_yaw;
         new_goal.goal_radius = 0;
-        if(isDefined(extra_params.script_goal_radius))
+        if(isDefined(extra_params.script_goal_radius)) {
           new_goal.goal_radius = extra_params.script_goal_radius;
+        }
 
         new_goal.start_thread = extra_params.start_thread;
         new_goal.end_thread = extra_params.end_thread;
@@ -1003,8 +1054,9 @@ defense_cautious_approach() {
       }
 
       bot_has_tactical_goal(goal_type, object) {
-        if(!isDefined(self.tactical_goals))
+        if(!isDefined(self.tactical_goals)) {
           return false;
+        }
 
         if(isDefined(goal_type)) {
           foreach(goal in self.tactical_goals) {
@@ -1032,8 +1084,9 @@ defense_cautious_approach() {
         foreach(goal in self.tactical_goals) {
           if(goal.type == goal_type) {
             if(isDefined(object)) {
-              if(isDefined(goal.object) && (goal.object == object))
+              if(isDefined(goal.object) && (goal.object == object)) {
                 goal.abort = true;
+              }
             } else {
               goal.abort = true;
             }
@@ -1044,8 +1097,9 @@ defense_cautious_approach() {
       bot_disable_tactical_goals() {
         self.only_allowable_tactical_goals[0] = "map_interactive_object";
         foreach(goal in self.tactical_goals) {
-          if(goal.type != "map_interactive_object")
+          if(goal.type != "map_interactive_object") {
             goal.abort = true;
+          }
         }
       }
 
@@ -1061,27 +1115,33 @@ defense_cautious_approach() {
 
           trap_item = self bot_get_ambush_trap_item("tacticalinsertion");
 
-          if(!isDefined(trap_item))
+          if(!isDefined(trap_item)) {
             return false;
+          }
 
-          if(isDefined(self.enemy) && self BotCanSeeEntity(self.enemy))
+          if(isDefined(self.enemy) && self BotCanSeeEntity(self.enemy)) {
             return false;
+          }
 
           myZone = GetZoneNearest(self.origin);
-          if(!isDefined(myZone))
+          if(!isDefined(myZone)) {
             return false;
+          }
 
           nearbyEnemyZone = BotZoneNearestCount(myZone, self.team, 1, "enemy_predict", ">", 0);
-          if(!isDefined(nearbyEnemyZone))
+          if(!isDefined(nearbyEnemyZone)) {
             return false;
+          }
 
           nodesAroundMe = GetNodesInRadius(self.origin, 500, 0);
-          if(nodesAroundMe.size <= 0)
+          if(nodesAroundMe.size <= 0) {
             return false;
+          }
 
           place_node = self BotNodePick(nodesAroundMe, nodesAroundMe.size * 0.15, "node_hide");
-          if(!isDefined(place_node))
+          if(!isDefined(place_node)) {
             return false;
+          }
 
           return self bot_set_ambush_trap(trap_item, undefined, undefined, undefined, place_node);
         }

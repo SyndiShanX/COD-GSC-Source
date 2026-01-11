@@ -4,8 +4,9 @@
 ***************************************/
 
 func_A298() {
-  if(isDefined(level.func_A3B9))
+  if(isDefined(level.func_A3B9)) {
     self[[level.func_A3B9.func_375D.func_444F]]();
+  }
 }
 
 func_9640() {
@@ -13,16 +14,21 @@ func_9640() {
   func_FA3D();
   func_0BDC::func_19B8();
 
-  if(func_0BDC::func_9CF5())
+  if(func_0BDC::func_9CF5()) {
     func_0BDC::func_F43D("player");
-  else if(isDefined(self.func_C0B0) && self.func_C0B0)
+  }
+  else if(isDefined(self.func_C0B0) && self.func_C0B0) {
     func_0BDC::func_F43D("null");
-  else if(self.model == "tag_origin")
+  }
+  else if(self.model == "tag_origin") {
     func_0BDC::func_F43D("null");
-  else if(issubstr(self.classname, "jackal_fake"))
+  }
+  else if(issubstr(self.classname, "jackal_fake")) {
     func_0BDC::func_F43D("fake");
-  else
+  }
+  else {
     func_0BDC::func_F43D("ai");
+  }
 
   self.func_5960 = 1;
   self setneargoalnotifydist(128.0);
@@ -51,8 +57,9 @@ func_FA3D() {
 }
 
 func_A329(var_00) {
-  if(getdvarint("jackalHandbrakeMode"))
+  if(getdvarint("jackalHandbrakeMode")) {
     level.player allowads(0);
+  }
 
   level.player func_0BCE::func_A2B2(self, undefined, var_00);
   level.player setorigin((100000, 100000, 100000));
@@ -63,8 +70,9 @@ func_A329(var_00) {
 func_A2D9() {
   _setsaveddvar("spaceship_disableViewModelNotetracks", 0);
 
-  if(getdvarint("jackalHandbrakeMode"))
+  if(getdvarint("jackalHandbrakeMode")) {
     level.player allowads(1);
+  }
 
   setomnvar("ui_jackal_hide_follow_pip", 1);
   level.player func_0BCE::func_A2B1(self);
@@ -177,8 +185,9 @@ func_10496() {
   scripts\engine\utility::flag_init("jackal_landing_active");
   scripts\engine\utility::flag_init("jackal_landing_never_launch_drone");
 
-  if(!scripts\engine\utility::flag_exist("flag_jackal_in_landingzone"))
+  if(!scripts\engine\utility::flag_exist("flag_jackal_in_landingzone")) {
     scripts\engine\utility::flag_init("flag_jackal_in_landingzone");
+  }
 }
 
 func_10498() {
@@ -216,8 +225,9 @@ func_10498() {
 func_75E7(var_00, var_01) {
   var_02 = "";
 
-  if(var_00 == "axis")
+  if(var_00 == "axis") {
     var_02 = "_enemy";
+  }
 
   level._effect[var_00 + "_rearThrustBoost"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_boost.vfx");
   level._effect[var_00 + "_rearThrustMax"] = loadfx("vfx\iw7\core\vehicle\jackal" + var_02 + "\vfx_jackal" + var_02 + "_rear_thrust_fly_atmosphere.vfx");
@@ -298,8 +308,9 @@ func_75E7(var_00, var_01) {
   level._effect["fake_follow_jackal_tracer"] = loadfx("vfx\core\projectile\jackal\vfx_core_projectile_jackal_ai_modern_tail_fake.vfx");
   level._effect["30mm_flash"] = loadfx("vfx\core\muzflash\jackal\vfx_core_flash_jackal_30mm.vfx");
 
-  if(!isDefined(level.func_A1E3))
+  if(!isDefined(level.func_A1E3)) {
     level.func_A1E3 = [];
+  }
 
   if(var_00 == "axis") {
     level.func_A1E3[var_00 + "_rear_thrusters"] = ["tag_thrust_rear1"];
@@ -373,11 +384,13 @@ func_104A7() {
     var_4.tag_origin.origin = var_4.origin;
     var_4.tag_origin.angles = var_4.angles;
 
-    if(isDefined(var_3.script_noteworthy))
+    if(isDefined(var_3.script_noteworthy)) {
       var_4.script_noteworthy = var_3.script_noteworthy;
+    }
 
-    if(isDefined(var_3.func_EE10))
+    if(isDefined(var_3.func_EE10)) {
       var_4.func_EE10 = var_3.func_EE10;
+    }
 
     var_03 = undefined;
     var_05 = undefined;
@@ -386,8 +399,9 @@ func_104A7() {
       var_05 = getent(var_2.script_noteworthy, "targetname");
 
       if(isDefined(var_05)) {
-        if(issubstr(var_5.classname, "_vehicle"))
+        if(issubstr(var_5.classname, "_vehicle")) {
           var_05 = scripts\sp\utility::func_7D40(var_2.script_noteworthy, "targetname");
+        }
 
         var_02 getrankxp();
         var_02 _meth_8314();
@@ -406,8 +420,9 @@ func_104A7() {
         var_09 = scripts\engine\utility::spawn_tag_origin();
         var_9.origin = var_8.origin;
 
-        if(isDefined(var_05))
+        if(isDefined(var_05)) {
           var_09 linkto(var_05);
+        }
 
         var_4.lights = scripts\engine\utility::array_add(var_4.lights, var_09);
       }
@@ -424,10 +439,12 @@ func_104A7() {
 func_104A8() {
   var_00 = getEntArray("jackal_cockpit_probe", "targetname");
 
-  if(var_0.size == 0)
+  if(var_0.size == 0) {
     return;
-  else
+  }
+  else {
     level.func_A056.func_DE59 = var_0[0];
+  }
 }
 
 init_location() {}
@@ -527,23 +544,29 @@ func_A213() {
 }
 
 func_A20A() {
-  if(!isDefined(level.func_D127))
+  if(!isDefined(level.func_D127)) {
     return 1;
+  }
 
-  if(level.func_D127.spaceship_mode == "hover")
+  if(level.func_D127.spaceship_mode == "hover") {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 func_A21F() {
-  if(!isDefined(level.func_D127))
+  if(!isDefined(level.func_D127)) {
     return 1;
+  }
 
-  if(level.func_D127.spaceship_mode == "fly")
+  if(level.func_D127.spaceship_mode == "fly") {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 func_A223() {

@@ -1239,4 +1239,3 @@ render_spawnpoints_triggers(trig) {
     }
   }
 }
-

@@ -14,8 +14,9 @@ torpedo_go(var_0, var_1) {
   vehicles();
   setdvar("dominator_speed", 5);
 
-  if(level.gameskill == 0)
+  if(level.gameskill == 0) {
     setdvar("dominator_speed", 4);
+  }
 
   setdvar("dominator_angle", 0);
 
@@ -143,10 +144,12 @@ draw_trigger_hints() {
   var_5.y = var_0;
   var_5 set_default_hud_stuff();
 
-  if(maps\ship_graveyard_util::game_is_pc())
+  if(maps\ship_graveyard_util::game_is_pc()) {
     var_5 settext(&"SHIP_GRAVEYARD_HINT_LT");
-  else
+  }
+  else {
     var_5 settext(&"SHIP_GRAVEYARD_HINT_LT_360");
+  }
 
   var_7.x = var_2;
   var_7.y = var_0 + var_1;
@@ -194,8 +197,9 @@ set_default_hud_stuff() {
 }
 
 fade_in_hint(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1.5;
+  }
 
   var_0 fadeovertime(var_1);
   var_0.alpha = 0.95;
@@ -203,8 +207,9 @@ fade_in_hint(var_0, var_1) {
 }
 
 fade_out_hint(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1.5;
+  }
 
   var_0 fadeovertime(var_1);
   var_0.alpha = 0;
@@ -235,14 +240,16 @@ torpedo_fire(var_0, var_1) {
   var_7 = anglesToForward(var_0.angles);
   var_8 = var_0.origin;
 
-  if(var_3)
+  if(var_3) {
     var_8 = var_6;
+  }
 
   var_9 = spawn("script_model", var_8);
   var_9.angles = var_0.angles;
 
-  if(var_3)
+  if(var_3) {
     var_9.angles = (0, 300, 0);
+  }
 
   var_9 setModel("viewmodel_torpedo");
   var_9 useanimtree(level.scr_animtree["torpedo"]);
@@ -267,8 +274,9 @@ torpedo_fire(var_0, var_1) {
   level.sonar_boat setModel("vehicle_lcs_flir");
   setsaveddvar("r_cc_mode", "clut");
 
-  if(!maps\_utility::game_is_current_gen())
+  if(!maps\_utility::game_is_current_gen()) {
     setsaveddvar("r_thermalColorOffset", -0.01);
+  }
 
   level notify("torpedo_ready");
   level.player thread spawn_model_fx((3, 0, 0));
@@ -293,14 +301,17 @@ torpedo_fire(var_0, var_1) {
       var_14 = (max(min(1, var_14[0]), -1), max(min(1, var_14[1]), -1), 0);
     } else {
       if(var_14[0] == 0) {
-        if(isDefined(self getlocalplayerprofiledata("invertedPitch")) && self getlocalplayerprofiledata("invertedPitch"))
+        if(isDefined(self getlocalplayerprofiledata("invertedPitch")) && self getlocalplayerprofiledata("invertedPitch")) {
           var_14 = (var_15[0] * -1.0, var_14[1], var_14[2]);
-        else
+        }
+        else {
           var_14 = (var_15[0], var_14[1], var_14[2]);
+        }
       }
 
-      if(var_14[1] == 0)
+      if(var_14[1] == 0) {
         var_14 = (var_14[0], var_15[1], var_14[2]);
+      }
     }
 
     var_9.dominator_angular_velocity = (var_9 dominator_accelerate("pitch", var_9.dominator_angular_velocity, var_14), var_9 dominator_accelerate("yaw", var_9.dominator_angular_velocity, var_14), var_9 dominator_accelerate("roll", var_9.dominator_angular_velocity, var_14));
@@ -308,10 +319,12 @@ torpedo_fire(var_0, var_1) {
     var_16 = 80;
     var_17 = 55;
 
-    if(var_9.angles[0] > var_16)
+    if(var_9.angles[0] > var_16) {
       var_9.angles = (var_16, var_9.angles[1], 0);
-    else if(var_9.angles[0] < var_17 * -1)
+    }
+    else if(var_9.angles[0] < var_17 * -1) {
       var_9.angles = (var_17 * -1, var_9.angles[1], 0);
+    }
 
     var_9.angles = var_9.angles * (1, 1, 0);
     var_9.angles = var_9.angles + (0, 0, var_9.dominator_angular_velocity[2] * -5.0);
@@ -322,8 +335,9 @@ torpedo_fire(var_0, var_1) {
       if(distance(var_6, var_9.origin) < 128) {
         var_4++;
 
-        if(var_4 < var_5.size)
+        if(var_4 < var_5.size) {
           var_6 = var_5[var_4];
+        }
         else if(var_4 == var_5.size) {
           var_6 = level.sonar_boat.target_points[0].origin + (-166, 154, -156);
           var_18 = 0.25;
@@ -338,8 +352,9 @@ torpedo_fire(var_0, var_1) {
 
     var_20 = var_9.angles[0] / 90.0;
 
-    if(var_9.angles[0] < 0)
+    if(var_9.angles[0] < 0) {
       var_20 = var_20 / 3.0;
+    }
 
     var_21 = getdvarfloat("dominator_speed");
     var_9.velocity = anglesToForward(var_9.angles) * var_21;
@@ -415,24 +430,30 @@ dominator_accelerate(var_0, var_1, var_2) {
   var_8 = dominator_get_dead_zone_range(var_2[var_6] * -1.0, var_7);
 
   if(var_8 == 0) {
-    if(var_0 == "yaw")
+    if(var_0 == "yaw") {
       var_4 = var_4 * 3.5;
-    else if(var_0 == "roll")
+    }
+    else if(var_0 == "roll") {
       var_4 = var_4 * 1.5;
-    else
+    }
+    else {
       var_4 = var_4 * 2.1;
+    }
   }
 
   var_9 = var_1[var_5] / var_3;
   var_10 = var_8 - var_9;
   var_4 = var_10 * var_4;
 
-  if(var_0 == "yaw")
+  if(var_0 == "yaw") {
     var_1 = var_1 + (0, var_4, 0);
-  else if(var_0 == "roll")
+  }
+  else if(var_0 == "roll") {
     var_1 = var_1 + (0, 0, var_4);
-  else
+  }
+  else {
     var_1 = var_1 + (var_4, 0, 0);
+  }
 
   return var_1[var_5];
 }
@@ -442,8 +463,9 @@ dominator_get_dead_zone_range(var_0, var_1) {
   var_3 = 1.0 - var_1;
   var_2 = var_2 / var_3;
 
-  if(var_0 < 0.0)
+  if(var_0 < 0.0) {
     var_2 = var_2 * -1.0;
+  }
 
   return var_2;
 }
@@ -471,11 +493,13 @@ detonate_dominator(var_0, var_1) {
 }
 
 dominator_earthquake(var_0, var_1) {
-  if(var_1 == 0)
+  if(var_1 == 0) {
     earthquake(var_0 * 0.8, 2.0, self.origin, 100000.0);
+  }
 
-  if(var_0 < 0.2)
+  if(var_0 < 0.2) {
     self playrumbleonentity("damage_heavy");
+  }
   else {
     self playrumbleonentity("damage_heavy");
     wait 0.2;
@@ -500,8 +524,9 @@ track_lcs_targets() {
 disable_target_on_death() {
   level waittill("exit_torpedo");
 
-  if(target_istarget(self))
+  if(target_istarget(self)) {
     target_remove(self);
+  }
 }
 
 target_enable(var_0, var_1, var_2, var_3) {
@@ -513,8 +538,9 @@ target_enable(var_0, var_1, var_2, var_3) {
   target_setshader(var_0, var_1);
   target_drawsquare(var_0, 24);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     target_setcolor(var_0, var_2);
+  }
 
   target_setmaxsize(var_0, 128);
   target_setminsize(var_0, 64, 0);
@@ -669,14 +695,17 @@ torpedo_load_bar(var_0) {
     var_0 maps\_hud_util::setpoint("CENTER", "CENTER", var_0.x, -2, 0);
     common_scripts\utility::waitframe();
 
-    if(var_3 > var_1 * 0.25)
+    if(var_3 > var_1 * 0.25) {
       level notify("torpedo_one_quarter_loaded");
+    }
 
-    if(var_3 > var_1 * 0.5)
+    if(var_3 > var_1 * 0.5) {
       level notify("torpedo_half_loaded");
+    }
 
-    if(var_3 > var_1 * 0.75)
+    if(var_3 > var_1 * 0.75) {
       level notify("torpedo_three_quarter_loaded");
+    }
   }
 
   level notify("torpedo_bar_loading_complete");
@@ -690,8 +719,9 @@ torpedo_get_distance_to_target() {
   while(isDefined(level.sonar_boat.target_points)) {
     var_0 = distance(level.player.origin, level.sonar_boat.target_points[0].origin) - 35;
 
-    if(var_0 < 16)
+    if(var_0 < 16) {
       var_0 = 0;
+    }
 
     self settext(abs(int(var_0)) + "m");
     common_scripts\utility::waitframe();
@@ -741,11 +771,13 @@ disable_torpedo_ui() {
   maps\_art::dof_disable_script(0.1);
   level notify("kill_hud_logic");
 
-  foreach(var_1 in level.torpedo_hud_items)
+  foreach(var_1 in level.torpedo_hud_items) {
   var_1 destroy();
+  }
 
-  if(common_scripts\utility::flag("pause_dynamic_dof"))
+  if(common_scripts\utility::flag("pause_dynamic_dof")) {
     common_scripts\utility::flag_clear("pause_dynamic_dof");
+  }
 }
 
 spawn_model_fx(var_0) {
@@ -763,6 +795,7 @@ hud_outlineenable() {
   self hudoutlineenable(0, 1);
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self hudoutlinedisable();
+  }
 }

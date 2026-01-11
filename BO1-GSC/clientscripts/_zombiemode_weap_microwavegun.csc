@@ -57,14 +57,16 @@ microwavegun_bloat(localClientNum) {
   while(1) {
     age = GetRealTime() - begin_time;
     bloat_fraction = age / durationMsec;
-    if(bloat_fraction > bloat_max_fraction)
+    if(bloat_fraction > bloat_max_fraction) {
       bloat_fraction = bloat_max_fraction;
+    }
     if(!isDefined(self)) {
       return;
     }
     self setshaderconstant(localClientNum, 0, (bloat_fraction * 4.0), 0, 0, 0);
-    if(bloat_fraction >= bloat_max_fraction)
+    if(bloat_fraction >= bloat_max_fraction) {
       break;
+    }
     realwait(0.05);
   }
 }

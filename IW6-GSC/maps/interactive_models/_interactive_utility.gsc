@@ -8,8 +8,9 @@
 delete_on_notify(ent, notify1, notify2, notify3) {
   ent endon("death");
   self waittill_any(notify1, notify2, notify3);
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent Delete();
+  }
 }
 
 array_sortByArray(array, sorters) {
@@ -72,20 +73,27 @@ wait_then_fn(notifyStr, enders, fn, arg1, arg2, arg3, arg4) {
       self endon(enders);
     }
   }
-  if(isString(notifyStr))
+  if(isString(notifyStr)) {
     self waittill(notifyStr);
-  else
+  }
+  else {
     wait(notifyStr);
-  if(isDefined(arg4))
+  }
+  if(isDefined(arg4)) {
     self[[fn]](arg1, arg2, arg3, arg4);
-  else if(isDefined(arg3))
+  }
+  else if(isDefined(arg3)) {
     self[[fn]](arg1, arg2, arg3);
-  else if(isDefined(arg2))
+  }
+  else if(isDefined(arg2)) {
     self[[fn]](arg1, arg2);
-  else if(isDefined(arg1))
+  }
+  else if(isDefined(arg1)) {
     self[[fn]](arg1);
-  else
+  }
+  else {
     self[[fn]]();
+  }
 }
 
 waittill_notify(waitStr, notifyEnt, notifyStr, ender, multiple) {
@@ -151,10 +159,12 @@ single_anim(animArray, animName, notifyStr, restartAnim, animRate) {
     animation_mp = animArray[animName + "mp"];
   }
   if(isSP()) {
-    if(isDefined(restartAnim) && restartAnim)
+    if(isDefined(restartAnim) && restartAnim) {
       self call[[level.func["setflaggedanimknobrestart"]]](notifyStr, animation, 1, 0.1, animRate);
-    else
+    }
+    else {
       self call[[level.func["setflaggedanimknob"]]](notifyStr, animation, 1, 0.1, animRate);
+    }
   } else {
     self call[[level.func["scriptModelPlayAnim"]]](animation_mp);
   }
@@ -163,8 +173,9 @@ single_anim(animArray, animName, notifyStr, restartAnim, animRate) {
 
 blendAnimsBySpeed(speed, anims, animSpeeds, animLengths, blendTime) {
   Assert(anims.size == animSpeeds.size && anims.size == animLengths.size);
-  for(i = 1; i < animSpeeds.size; i++)
+  for(i = 1; i < animSpeeds.size; i++) {
     Assert(animSpeeds[i - 1] < animSpeeds[i]);
+  }
 
   if(!isDefined(blendTime)) blendTime = 0.1;
 
@@ -225,13 +236,15 @@ detect_people(radius, notifyStr, endonStr) {
     endonStr = [];
     endonStr[0] = tempStr;
   }
-  foreach(str in endonStr)
+  foreach(str in endonStr) {
   self endon(str);
+  }
 
   self.detect_people_trigger[notifyStr] = spawn("trigger_radius", self.origin, 23, radius, radius);
 
-  for(i = endonStr.size; i < 3; i++)
+  for(i = endonStr.size; i < 3; i++) {
     endonStr[i] = undefined;
+  }
   self thread delete_on_notify(self.detect_people_trigger[notifyStr], endonStr[0], endonStr[1], endonStr[2]);
 
   while(1) {
@@ -250,8 +263,9 @@ detect_player_event(radius, notifyStr, endonStr, eventStr) {
     endonStr = [];
     endonStr[0] = tempStr;
   }
-  foreach(str in endonStr)
+  foreach(str in endonStr) {
   self endon(str);
+  }
 
   while(1) {
     level.player waittill(eventStr);
@@ -329,10 +343,12 @@ newtonsMethod(x0, x1, p3, p2, p1, p0, tolerance) {
     oldx = x;
     x += offset;
 
-    if(x > x1)
+    if(x > x1) {
       x = (oldX + (3 * x1)) / 4;
-    else if(x < x0)
+    }
+    else if(x < x0) {
       x = (oldX + (3 * x0)) / 4;
+    }
     iterations--;
     /# if( iterations == 0 )
     Print("_interactive_utility::newtonsMethod failed to converge. x0:" + x0 + ", x1:" + x1 + ", p3:" + p3 + ", p2:" + p2 + ", p1:" + p1 + ", p0:" + p0 + ", x:" + x);
@@ -394,8 +410,9 @@ NonVectorLength(array, array2) {
 
 clampAndNormalize(x, min, max) {
   AssertEx(min != max, "clampAndNormalize: min must not equal max");
-  if(min < max)
+  if(min < max) {
     x = clamp(x, min, max);
+  }
   else x = clamp(x, max, min);
   return (x - min) / (max - min);
 }

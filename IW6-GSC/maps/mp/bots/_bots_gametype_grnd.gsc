@@ -35,8 +35,9 @@ bot_grnd_think() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while(!isDefined(level.bot_gametype_precaching_done))
+  while(!isDefined(level.bot_gametype_precaching_done)) {
     wait(0.05);
+  }
 
   self BotSetFlag("separation", 0);
 

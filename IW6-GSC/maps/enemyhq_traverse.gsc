@@ -40,8 +40,9 @@ begin_traverse() {
   common_scripts\utility::flag_wait("to_basement");
   level.createrpgrepulsors = 0;
 
-  if(common_scripts\utility::flag("start_sniper_rpg_ambush"))
+  if(common_scripts\utility::flag("start_sniper_rpg_ambush")) {
     thread dog_sniff_traverse();
+  }
 
   var_1 = getnode("doggie_basement_path", "targetname");
   level.dog thread maps\_utility::follow_path(var_1);
@@ -92,8 +93,9 @@ player_rpg_shield() {
     wait 0.25;
   }
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   missile_deleteattractor(var_2);
+  }
 }
 
 player_rpg_attractor() {
@@ -111,8 +113,9 @@ player_rpg_attractor() {
     wait 0.25;
   }
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   missile_deleteattractor(var_3);
+  }
 }
 
 rpg_crash() {
@@ -169,8 +172,9 @@ handle_rpg_ambush() {
   thread maps\enemyhq_code::sniper_hint("start_sniper_rpg_ambush", 4);
   common_scripts\utility::flag_wait("ambush1_dead");
 
-  if(common_scripts\utility::flag("start_sniper_rpg_ambush"))
+  if(common_scripts\utility::flag("start_sniper_rpg_ambush")) {
     common_scripts\utility::flag_wait("ambush2_dead");
+  }
 
   common_scripts\utility::flag_set("done_sniping_early");
   wait 1;
@@ -189,8 +193,9 @@ rpg_ambushers() {
   var_0 = 1;
 
   for(;;) {
-    if(isDefined(self.a.rockets))
+    if(isDefined(self.a.rockets)) {
       self.a.rockets = var_0;
+    }
 
     wait 0.05;
   }
@@ -204,8 +209,9 @@ fudge_ally_accuracy() {
 
   common_scripts\utility::flag_wait("to_basement");
 
-  foreach(var_1 in level.allies)
+  foreach(var_1 in level.allies) {
   var_1 maps\_utility::set_baseaccuracy(var_1.oldaccuracy);
+  }
 }
 
 handle_skip_rpg_sniping() {
@@ -258,10 +264,12 @@ handle_rpg_sniper() {
   wait 30;
   level.rpg_ambush_guys = maps\_utility::array_removedead_or_dying(level.rpg_ambush_guys);
 
-  if(level.rpg_ambush_guys.size > 1)
+  if(level.rpg_ambush_guys.size > 1) {
     common_scripts\utility::array_thread(level.rpg_ambush_guys, ::kill_allies_on_next_shot);
-  else
+  }
+  else {
     common_scripts\utility::array_thread(level.rpg_ambush_guys, ::fake_ally_kill_me);
+  }
 }
 
 kill_allies_on_next_shot() {

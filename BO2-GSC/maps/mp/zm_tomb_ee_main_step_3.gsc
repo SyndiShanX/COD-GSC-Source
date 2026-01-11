@@ -37,8 +37,9 @@ exit_stage(success) {
   array_delete(a_buttons);
   a_structs = getstructarray("fire_link", "targetname");
 
-  foreach(unitrigger_stub in a_structs)
+  foreach(unitrigger_stub in a_structs) {
   unregister_unitrigger(unitrigger_stub);
+  }
 }
 
 create_buttons_and_triggers() {
@@ -90,8 +91,9 @@ watch_for_triple_attack() {
 mech_zombie_hole_valid(valid) {
   t_hole = getent("fire_link_damage", "targetname");
 
-  if(self istouching(t_hole))
+  if(self istouching(t_hole)) {
     return 1;
+  }
 
   return valid;
 }
@@ -123,13 +125,15 @@ fire_link_cooldown(t_button) {
   level endon("fire_link_cooldown");
   flag_set("fire_link_enabled");
 
-  if(isDefined(t_button))
+  if(isDefined(t_button)) {
     t_button playSound("vox_maxi_robot_activated_0");
+  }
 
   wait 25;
 
-  if(isDefined(t_button))
+  if(isDefined(t_button)) {
     t_button playSound("vox_maxi_robot_deactivated_0");
+  }
 
   flag_clear("fire_link_enabled");
 }

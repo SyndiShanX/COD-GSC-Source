@@ -1127,11 +1127,13 @@ trackLoop() {
       adjustedMaxYawDeltaChange = maxYawDeltaChange + abs(shootFromYawDelta);
       adjustedMaxPitchDeltaChange = maxPitchDeltaChange + abs(shootFromPitchDelta);
       yawDeltaChange = yawDelta - prevYawDelta;
-      if(abs(yawDeltaChange) > adjustedMaxYawDeltaChange)
+      if(abs(yawDeltaChange) > adjustedMaxYawDeltaChange) {
         yawDelta = prevYawDelta + adjustedMaxYawDeltaChange * sign(yawDeltaChange);
+      }
       pitchDeltaChange = pitchDelta - prevPitchDelta;
-      if(abs(pitchDeltaChange) > adjustedMaxPitchDeltaChange)
+      if(abs(pitchDeltaChange) > adjustedMaxPitchDeltaChange) {
         pitchDelta = prevPitchDelta + adjustedMaxPitchDeltaChange * sign(pitchDeltaChange);
+      }
     }
     prevshootFromYawAngle = shootFromYawAngle;
     prevshootFromPitchAngle = shootFromPitchAngle;
@@ -1188,8 +1190,9 @@ setAnimAimWeight(goalweight, goaltime) {
     self.a.aimweight_end = goalweight;
     self.a.aimweight_transframes = 0;
   } else {
-    if(!isDefined(self.a.aimweight))
+    if(!isDefined(self.a.aimweight)) {
       self.a.aimweight = 0;
+    }
     self.a.aimweight_start = self.a.aimweight;
     self.a.aimweight_end = goalweight;
     self.a.aimweight_transframes = int(goaltime * 20);

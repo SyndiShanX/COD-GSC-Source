@@ -135,4 +135,3 @@ humangun_director_hit_response(local_client_num, set, newEnt, upgraded) {
     player._zombie_director_impact_humangun_fx = playFXOnTag(i, impact_fx, self, "J_SpineLower");
   }
 }
-

@@ -28,18 +28,21 @@ enemy_event_Loop() {
   while(1) {
     self waittill("event_awareness", type);
 
-    if(!self ent_flag("_stealth_enabled"))
+    if(!self ent_flag("_stealth_enabled")) {
       continue;
+    }
 
-    if(self stealth_group_spotted_flag())
+    if(self stealth_group_spotted_flag()) {
       continue;
+    }
 
     //put this in the loop so that it can check for the function
     //every time...that way we can change the functions on the fly
     func = self._stealth.behavior.ai_functions["event"];
 
-    if(!isDefined(func[type]))
+    if(!isDefined(func[type])) {
       continue;
+    }
     self thread enemy_event_reaction_wrapper(type);
   }
 }
@@ -91,8 +94,9 @@ enemy_event_reaction_flashbang(type) {
   }
 
   wait 0.05;
-  if(self.script == "flashed")
+  if(self.script == "flashed") {
     self waittill("stop_flashbang_effect");
+  }
 
   node = self enemy_find_free_pathnode_near(origin, 300, 40); // 2
 
@@ -150,12 +154,15 @@ stealth_event_mod(type, behavior_function, animation_function, event_listener) {
   behavior = stealth_event_defaults();
   animation = self stealth_event_anim_defaults();
 
-  if(!isDefined(behavior_function))
+  if(!isDefined(behavior_function)) {
     behavior_function = behavior[type];
-  if(!isDefined(animation_function))
+  }
+  if(!isDefined(animation_function)) {
     animation_function = animation[type];
-  if(!isDefined(event_listener))
+  }
+  if(!isDefined(event_listener)) {
     event_listener = stealth_event_listener_defaults(type); // SET TO FALSE IF NO DEFAULT EXISTS
+  }
 
   assertex(isDefined(behavior_function), "tried to set a stealth event of " + type + " to which there is no default behavior for");
   assertex(isDefined(animation_function), "tried to set a stealth event of " + type + " to which there is no default animation for");
@@ -167,8 +174,9 @@ stealth_event_mod(type, behavior_function, animation_function, event_listener) {
   self thread maps\_stealth_visibility_enemy::enemy_event_awareness(type);
 
   //IS THIS A CODE DRIVEN EVENT THAT NEEDS TO BE LISTENED FOR
-  if(event_listener)
+  if(event_listener) {
     self addAIEventListener(type);
+  }
 
   //special case settings
   switch (type) {

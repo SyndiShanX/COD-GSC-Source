@@ -6,18 +6,21 @@
 ash_fall(var_0) {
   self notify("ash_change");
 
-  if(var_0 > 0)
+  if(var_0 > 0) {
     thread ash_fall_thread(var_0);
+  }
 }
 
 ash_fall_thread(var_0) {
   self endon("ash_change");
 
   for(;;) {
-    if(maps\_utility::is_coop())
+    if(maps\_utility::is_coop()) {
       playfxontagforclients(level._effect["ash"], self, "tag_origin", self);
-    else
+    }
+    else {
       playFX(level._effect["ash"], self.origin);
+    }
 
     wait(0.3 / var_0);
   }

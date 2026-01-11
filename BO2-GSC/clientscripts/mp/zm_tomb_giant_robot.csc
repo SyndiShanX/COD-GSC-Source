@@ -42,12 +42,15 @@ register_giant_robot(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     level.a_giant_robots[localclientnum] = [];
   }
 
-  if(self.model == "veh_t6_dlc_zm_robot_0")
+  if(self.model == "veh_t6_dlc_zm_robot_0") {
     level.a_giant_robots[localclientnum][0] = self;
-  else if(self.model == "veh_t6_dlc_zm_robot_1")
+  }
+  else if(self.model == "veh_t6_dlc_zm_robot_1") {
     level.a_giant_robots[localclientnum][1] = self;
-  else if(self.model == "veh_t6_dlc_zm_robot_2")
+  }
+  else if(self.model == "veh_t6_dlc_zm_robot_2") {
     level.a_giant_robots[localclientnum][2] = self;
+  }
 }
 
 play_foot_stomp_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -109,13 +112,15 @@ play_eject_warning_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 }
 
 play_eject_steam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     self thread loop_eject_steam_fx(localclientnum);
+  }
   else {
     self notify("stop_eject_steam_fx");
 
-    if(isDefined(self.fieldname))
+    if(isDefined(self.fieldname)) {
       stopfx(localclientnum, self.fieldname);
+    }
   }
 }
 
@@ -149,8 +154,9 @@ all_tubes_play_eject_steam_fx(localclientnum, oldval, newval, bnewent, binitials
       }
     }
   } else if(isDefined(level.a_s_tubes[localclientnum])) {
-    foreach(struct in level.a_s_tubes[localclientnum])
+    foreach(struct in level.a_s_tubes[localclientnum]) {
     struct notify("stop_all_tubes_eject_steam");
+    }
   }
 }
 
@@ -171,33 +177,39 @@ sndplaysteamfx(the_notify, origin) {
 }
 
 gr_eject_player_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     self.fieldname = playFX(localclientnum, level._effect["beacon_shell_explosion"], self.origin);
-  else if(isDefined(self.fieldname))
+  }
+  else if(isDefined(self.fieldname)) {
     stopfx(localclientnum, self.fieldname);
+  }
 }
 
 get_clientside_giant_robot_ai(localclientnum, fieldname) {
-  if(!isDefined(level.a_giant_robots) || !isDefined(level.a_giant_robots[localclientnum]))
+  if(!isDefined(level.a_giant_robots) || !isDefined(level.a_giant_robots[localclientnum])) {
     return undefined;
+  }
 
   ai_robot = undefined;
 
   if(issubstr(fieldname, 0)) {
     ai_robot = level.a_giant_robots[localclientnum][0];
 
-    if(isDefined(ai_robot))
+    if(isDefined(ai_robot)) {
       ai_robot._index_for_lights = 0;
+    }
   } else if(issubstr(fieldname, 1)) {
     ai_robot = level.a_giant_robots[localclientnum][1];
 
-    if(isDefined(ai_robot))
+    if(isDefined(ai_robot)) {
       ai_robot._index_for_lights = 1;
+    }
   } else {
     ai_robot = level.a_giant_robots[localclientnum][2];
 
-    if(isDefined(ai_robot))
+    if(isDefined(ai_robot)) {
       ai_robot._index_for_lights = 2;
+    }
   }
 
   return ai_robot;
@@ -244,8 +256,9 @@ turn_on_warning_lights(localclientnum, struct_footprint) {
 
   foreach(light in a_lights) {
     if(!isDefined(light.fx_is_on_and_id)) {
-      if(!isDefined(light.angles))
+      if(!isDefined(light.angles)) {
         light.angles = (0, 0, 0);
+      }
 
       light.fx_is_on_and_id = playFX(localclientnum, level._effect["giant_robot_footstep_warning_light"], light.origin, anglesToForward(light.angles), anglestoup(light.angles));
     }
@@ -276,8 +289,9 @@ get_warning_lights_closest(struct_footprint) {
   a_close_lights = [];
 
   foreach(light in level.robot_light_positions[self._index_for_lights].warning_lights) {
-    if(distancesquared(struct_footprint.origin, light.origin) < 640000)
+    if(distancesquared(struct_footprint.origin, light.origin) < 640000) {
       a_close_lights[a_close_lights.size] = light;
+    }
   }
 
   return a_close_lights;

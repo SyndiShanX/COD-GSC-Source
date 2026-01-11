@@ -89,14 +89,17 @@ track_camera_mode(localclientnum) {
       player = playerbeingspectated(localclientnum);
 
       if(isspectating(localclientnum, 1)) {
-        if(isDefined(player.afterlife) && player.afterlife)
+        if(isDefined(player.afterlife) && player.afterlife) {
           self.camera_mode = "spectating_3rd_afterlife";
-        else
+        }
+        else {
           self.camera_mode = "normal";
+        }
       } else if(isDefined(player.afterlife) && player.afterlife)
         self.camera_mode = "spectating_1st_afterlife";
-      else
+      else {
         self.camera_mode = "normal";
+      }
     } else
       self.camera_mode = "normal";
 
@@ -148,8 +151,9 @@ set_player_lives(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 assign_corpse_owner(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self.player = newval;
 
-  if(newval > 0)
+  if(newval > 0) {
     playFXOnTag(localclientnum, level._effect["afterlife_corpse"], self, "tag_origin");
+  }
 }
 
 toggle_player_afterlife_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -157,10 +161,12 @@ toggle_player_afterlife_fx(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
   if(newval == 1) {
-    if(self islocalplayer() && self getlocalclientnumber() == localclientnum)
+    if(self islocalplayer() && self getlocalclientnumber() == localclientnum) {
       self thread player_afterlife_first_fx(localclientnum);
-    else
+    }
+    else {
       self thread player_afterlife_third_fx(localclientnum);
+    }
   } else
     self notify("stop_player_fx");
 }
@@ -249,10 +255,12 @@ toggle_player_refill_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
   if(isspectating(localclientnum, 0)) {
     return;
   }
-  if(newval == 1)
+  if(newval == 1) {
     self thread player_afterlife_first_fx(localclientnum);
-  else
+  }
+  else {
     self notify("stop_player_fx");
+  }
 }
 
 toggle_player_afterlife(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

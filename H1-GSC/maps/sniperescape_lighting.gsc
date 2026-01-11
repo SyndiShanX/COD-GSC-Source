@@ -38,8 +38,9 @@ handle_player_on_sniper_rifle() {
   setsaveddvar("sm_sunShadowCenter", getent("blood_pool", "targetname").origin);
   var_0 = getEntArray("zakhaev_light", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 setlightshadowstate("force_on");
+  }
 
   level.player maps\_utility::set_light_set_player("sniperescape_scope");
   maps\_utility::vision_set_fog_changes("sniperescape_scope", 2);
@@ -48,8 +49,9 @@ handle_player_on_sniper_rifle() {
   setsaveddvar("sm_sunShadowCenter", (0, 0, 0));
   var_0 = getEntArray("zakhaev_light", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 setlightshadowstate("normal");
+  }
 
   level.player maps\_utility::set_light_set_player("sniperescape");
   maps\_utility::vision_set_fog_changes("sniperescape", 2);

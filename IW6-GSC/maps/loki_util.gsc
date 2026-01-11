@@ -32,15 +32,18 @@ spawn_allies() {
 spawn_ally(var_0, var_1) {
   var_2 = undefined;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_2 = level.start_point + "_" + var_0;
-  else
+  }
+  else {
     var_2 = var_1 + "_" + var_0;
+  }
 
   var_3 = spawn_targetname_at_struct_targetname(var_0, var_2);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return undefined;
+  }
 
   var_3 maps\_utility::make_hero();
 
@@ -60,8 +63,9 @@ spawn_targetname_at_struct_targetname(var_0, var_1) {
     var_2 maps\_utility::add_spawn_function(maps\_space_ai::enable_space);
     var_4 = var_2 maps\_utility::spawn_ai();
 
-    if(!isDefined(var_3.angles))
+    if(!isDefined(var_3.angles)) {
       var_3.angles = level.player.angles;
+    }
 
     var_4 forceteleport(var_3.origin, var_3.angles);
     return var_4;
@@ -84,8 +88,9 @@ spawn_space_ai(var_0, var_1) {
   var_2 thread maps\_space_ai::enable_space();
   var_3 = var_0 common_scripts\utility::get_target_ent();
 
-  if(!isDefined(var_3.angles))
+  if(!isDefined(var_3.angles)) {
     var_3.angles = var_0.angles;
+  }
 
   var_2 forceteleport(var_3.origin, var_3.angles);
 
@@ -122,8 +127,9 @@ set_space_goal_node(var_0) {
 }
 
 spawn_space_ai_from_targetname(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = getent(var_0, "targetname");
   var_3 = spawn_space_ai(var_2, var_1);
@@ -131,8 +137,9 @@ spawn_space_ai_from_targetname(var_0, var_1) {
 }
 
 spawn_space_ais_from_targetname(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_2 = getEntArray(var_0, "targetname");
   var_3 = [];
@@ -149,11 +156,13 @@ xm25_destroy_hud(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(isDefined(var_0.data_value))
+  if(isDefined(var_0.data_value)) {
     var_0.data_value destroy();
+  }
 
-  if(isDefined(var_0.data_value_suffix))
+  if(isDefined(var_0.data_value_suffix)) {
     var_0.data_value_suffix destroy();
+  }
 
   var_0 destroy();
 }
@@ -161,8 +170,9 @@ xm25_destroy_hud(var_0) {
 cleanup_ads_at_death() {
   self waittill("death");
 
-  if(isDefined(self.hud0))
+  if(isDefined(self.hud0)) {
     xm25_destroy_hud(self.hud0);
+  }
 }
 
 watchweaponswitch(var_0) {
@@ -171,16 +181,18 @@ watchweaponswitch(var_0) {
   for(;;) {
     self waittill("weapon_switch_started");
 
-    if(isDefined(self.hud0))
+    if(isDefined(self.hud0)) {
       xm25_destroy_hud(self.hud0);
+    }
 
     if(!self.cg_drawbreathhint && self getcurrentweapon() != var_0) {
       setsaveddvar("cg_drawBreathHint", 1);
       self.cg_drawbreathhint = 1;
     }
 
-    if(self getcurrentweapon() == var_0)
+    if(self getcurrentweapon() == var_0) {
       self.weapon_change_timer = 20;
+    }
   }
 }
 
@@ -206,26 +218,31 @@ watchads(var_0) {
     }
 
     if(!var_1 || var_2 != var_0 || self isreloading() || !isalive(self)) {
-      if(isDefined(self.hud0))
+      if(isDefined(self.hud0)) {
         xm25_destroy_hud(self.hud0);
+      }
 
-      if(isDefined(self.hud1))
+      if(isDefined(self.hud1)) {
         xm25_destroy_hud(self.hud1);
+      }
     }
 
     if(var_2 == var_0 && var_1 && self playerads() >= 0.75 && !isDefined(self.hud) && self.weapon_change_timer <= 0) {
-      if(!isDefined(self.hud0))
+      if(!isDefined(self.hud0)) {
         self.hud0 = create_hud_xm25_screen(1, 1, self);
+      }
 
-      if(!isDefined(self.hud1))
+      if(!isDefined(self.hud1)) {
         self.hud1 = create_hud_xm25_scanlines(1, 1);
+      }
     }
 
     if(isDefined(self.hud1)) {
       self.hud1.y = self.hud1.y + 1;
 
-      if(self.hud1.y > 8)
+      if(self.hud1.y > 8) {
         self.hud1.y = -4;
+      }
     }
 
     self.weapon_change_timer--;
@@ -293,31 +310,37 @@ jkuline(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 jkupoint(var_0, var_1, var_2, var_3) {
   if(isDefined(level.jkudebug) && level.jkudebug) {
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = 6;
+    }
 
-    if(!isDefined(var_2))
+    if(!isDefined(var_2)) {
       var_2 = (1, 1, 1);
+    }
 
-    if(!isDefined(var_3))
+    if(!isDefined(var_3)) {
       var_3 = 9999;
+    }
   }
 }
 
 jkuprint(var_0, var_1) {
-  if(isDefined(level.jkudebug) && level.jkudebug)
+  if(isDefined(level.jkudebug) && level.jkudebug) {
     iprintln(var_0);
+  }
 }
 
 reassign_goal_volume(var_0, var_1) {
-  if(!isarray(var_0))
+  if(!isarray(var_0)) {
     var_0 = maps\_utility::make_array(var_0);
+  }
 
   var_0 = maps\_utility::array_removedead_or_dying(var_0);
   var_2 = getent(var_1, "targetname");
 
-  foreach(var_4 in var_0)
+  foreach(var_4 in var_0) {
   var_4 setgoalvolumeauto(var_2);
+  }
 }
 
 enemy_marker() {
@@ -348,29 +371,37 @@ enemy_marker() {
     var_0.z = self gettagorigin("j_spinelower")[2];
 
     if(var_14) {
-      if(level.player playerads() == 1)
+      if(level.player playerads() == 1) {
         var_10 = 0.997;
-      else
+      }
+      else {
         var_10 = 0.95;
+      }
 
-      if(maps\_utility::player_looking_at(self.origin, var_10, 1))
+      if(maps\_utility::player_looking_at(self.origin, var_10, 1)) {
         var_12 = 1;
-      else
+      }
+      else {
         var_12 = 0;
+      }
     }
 
     if(var_13) {
-      if(maps\_utility::player_looking_at(self.origin, 0.2))
+      if(maps\_utility::player_looking_at(self.origin, 0.2)) {
         var_2 = 1;
-      else
+      }
+      else {
         var_2 = 0;
+      }
     }
 
     if(var_15) {
-      if(self.bulletsinclip != var_1)
+      if(self.bulletsinclip != var_1) {
         var_11 = 1;
-      else
+      }
+      else {
         var_11 = 0;
+      }
 
       var_1 = self.bulletsinclip;
     }
@@ -382,13 +413,15 @@ enemy_marker() {
         var_5 = 1;
       } else if(var_2 && var_13)
         var_6 = var_9;
-      else
+      else {
         var_0.alpha = 0.0;
+      }
     }
 
     if(var_6 == var_8) {
-      if(!var_2 && var_13)
+      if(!var_2 && var_13) {
         var_6 = var_7;
+      }
       else if(var_3 > 0) {
         var_6 = var_8;
 
@@ -406,8 +439,9 @@ enemy_marker() {
     }
 
     if(var_6 == var_9) {
-      if(!var_2 && var_13)
+      if(!var_2 && var_13) {
         var_6 = var_7;
+      }
       else if(var_11 && var_15) {
         var_6 = var_8;
         var_3 = 1.0;
@@ -443,8 +477,9 @@ player_boundaries_on(var_0, var_1, var_2, var_3) {
     common_scripts\utility::flag_set("boundary_system_on");
     level thread player_boundary_check(var_0, var_1, var_2, var_3);
 
-    if(!isDefined(var_1) || var_1 == 0)
+    if(!isDefined(var_1) || var_1 == 0) {
       level thread player_boundary_vo_player(var_3);
+    }
   }
 }
 
@@ -452,23 +487,27 @@ player_boundary_check(var_0, var_1, var_2, var_3) {
   level.player endon("death");
   level endon("boundary_system_off");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 7;
+  }
 
   while(common_scripts\utility::flag("boundary_system_on")) {
     common_scripts\utility::flag_waitopen("in_combat_area");
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       level thread player_boundary_ai_focus();
+    }
 
-    if(!isDefined(var_1) || var_1 == 0)
+    if(!isDefined(var_1) || var_1 == 0) {
       level thread player_boundary_vo_player(var_3);
+    }
 
     level thread player_boundary_fail(var_2);
     common_scripts\utility::flag_wait("in_combat_area");
 
-    if(!isDefined(var_0))
+    if(!isDefined(var_0)) {
       level thread player_boundary_ai_return();
+    }
   }
 }
 
@@ -504,10 +543,12 @@ player_boundary_vo_player(var_0) {
   var_1 = getaicount("axis");
 
   if(!isDefined(var_0)) {
-    if(var_1 > 2)
+    if(var_1 > 2) {
       var_0 = ["loki_kgn_thompsonstickwiththe", "loki_kgn_thompsonweneedsupport", "loki_kgn_thompsonweretakingheavy", "loki_kgn_thompsonstayinformation", "loki_kgn_weresurrounded", "loki_kgn_therestoomanyof"];
-    else
+    }
+    else {
       var_0 = ["loki_kgn_thompsonstickwiththe", "loki_kgn_thompsonweneedsupport", "loki_kgn_thompsonstayinformation"];
+    }
   }
 
   level.allies[0] thread play_nag(var_0, "in_combat_area", 1, 8, 1, 8, "boundary_fail");
@@ -521,10 +562,12 @@ player_boundary_fail(var_0) {
   level.allies[0] notify("boundary_fail");
   wait 1.0;
 
-  if(common_scripts\utility::flag("space_breach_done"))
+  if(common_scripts\utility::flag("space_breach_done")) {
     setdvar("ui_deadquote", &"LOKI_CONTROL_BOUNDS_FAIL");
-  else
+  }
+  else {
     setdvar("ui_deadquote", &"LOKI_BOUNDS_FAIL");
+  }
 
   level thread maps\_utility::missionfailedwrapper();
 }
@@ -540,11 +583,13 @@ player_boundaries_off() {
 loki_autosave_now(var_0) {
   level.player endon("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level endon(var_0);
+  }
 
-  if(common_scripts\utility::flag("boundary_system_on"))
+  if(common_scripts\utility::flag("boundary_system_on")) {
     common_scripts\utility::flag_wait("in_combat_area");
+  }
 
   maps\_utility::autosave_now();
 }
@@ -552,11 +597,13 @@ loki_autosave_now(var_0) {
 loki_autosave_by_name_silent(var_0, var_1) {
   level.player endon("death");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level endon(var_1);
+  }
 
-  if(common_scripts\utility::flag("boundary_system_on"))
+  if(common_scripts\utility::flag("boundary_system_on")) {
     common_scripts\utility::flag_wait("in_combat_area");
+  }
 
   maps\_utility::autosave_by_name_silent(var_0);
 }
@@ -564,11 +611,13 @@ loki_autosave_by_name_silent(var_0, var_1) {
 loki_autosave_by_name(var_0, var_1) {
   level.player endon("death");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level endon(var_1);
+  }
 
-  if(common_scripts\utility::flag("boundary_system_on"))
+  if(common_scripts\utility::flag("boundary_system_on")) {
     common_scripts\utility::flag_wait("in_combat_area");
+  }
 
   maps\_utility::autosave_by_name(var_0);
 }
@@ -577,13 +626,15 @@ play_nag(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   self endon("death");
   self endon("stop nags");
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     self endon(var_6);
+  }
 
   var_9 = var_2;
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 30;
+  }
 
   var_10 = 0;
   var_11 = 1;
@@ -610,10 +661,12 @@ play_nag(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     if(!common_scripts\utility::flag(var_1)) {
       level notify("nagging");
 
-      if(isDefined(var_8))
+      if(isDefined(var_8)) {
         maps\_space_ai::smart_radio_dialogue_facial(var_13, var_13);
-      else
+      }
+      else {
         maps\_utility::smart_radio_dialogue(var_13);
+      }
     } else
       break;
 
@@ -626,8 +679,9 @@ play_nag(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
         var_12 = 0;
         var_9 = var_9 * var_5;
 
-        if(var_3 < var_9)
+        if(var_3 < var_9) {
           var_9 = var_3;
+        }
       }
     }
   }
@@ -702,8 +756,9 @@ adjust_movement_step_up(var_0, var_1) {
 }
 
 spawn_and_link_models_to_tags(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   var_3 = 0;
   var_4 = getnumparts(self.model);
@@ -715,12 +770,15 @@ spawn_and_link_models_to_tags(var_0, var_1, var_2) {
       var_7 = getsubstr(var_6, 4, var_6.size - 4);
       jkuprint(var_7);
 
-      if(var_6 == "mdl_loki_exterior_round_hatch_000")
+      if(var_6 == "mdl_loki_exterior_round_hatch_000") {
         var_8 = level.combat_one_door;
-      else if(var_6 == "mdl_space_exterior_airlock_entrance_000")
+      }
+      else if(var_6 == "mdl_space_exterior_airlock_entrance_000") {
         var_8 = spawn("script_model", self gettagorigin(var_6));
-      else if(var_6 == "mdl_space_module_5_000")
+      }
+      else if(var_6 == "mdl_space_module_5_000") {
         var_8 = spawn("script_model", self gettagorigin(var_6));
+      }
       else {
         var_8 = spawn("script_model", self gettagorigin(var_6));
         var_8 setModel(var_7);
@@ -729,11 +787,13 @@ spawn_and_link_models_to_tags(var_0, var_1, var_2) {
       var_8.angles = self gettagangles(var_6);
       var_8 linkto(self, var_6);
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         var_8.targetname = var_0;
+      }
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         var_8 retargetscriptmodellighting(var_1);
+      }
 
       switch (var_6) {
         case "mdl_loki_truss_sail_003":
@@ -812,8 +872,9 @@ ammo_hack(var_0) {
     wait 0.05;
   }
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     self givestartammo(var_0[var_1]);
+  }
 }
 
 loki_drop_weapon(var_0, var_1) {
@@ -828,37 +889,47 @@ loki_drop_weapon(var_0, var_1) {
     var_3.angles = self gettagangles("tag_weapon");
     var_3 linkto(self, "tag_weapon");
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       common_scripts\utility::waittill_any("death", "damage");
-    else
+    }
+    else {
       self waittill("death");
+    }
 
     var_4 = create_drop_weapon_trigger(var_3);
     var_3 show();
     animscripts\shared::placeweaponon(var_2, "none");
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_5 = randomintrange(-400, -100);
-    else
+    }
+    else {
       var_5 = randomintrange(100, 400);
+    }
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       var_6 = randomintrange(-400, -100);
-    else
+    }
+    else {
       var_6 = randomintrange(100, 400);
+    }
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_3 physicslaunchserver(var_3.origin + (0, 0, 10), var_0);
-    else if(common_scripts\utility::cointoss())
+    }
+    else if(common_scripts\utility::cointoss()) {
       var_3 physicslaunchserver(var_3.origin + (0, 0, 10), (var_5, 0, 0));
+    }
     else if(maps\_utility::within_fov_2d(self.origin, self.angles, level.player.origin, cos(45))) {
       jkuprint("launching weapon towards player");
       var_7 = bulletTrace(self.origin, self.origin + anglesToForward(self.angles) * 60, 0);
 
-      if(var_7["surfacetype"] == "none")
+      if(var_7["surfacetype"] == "none") {
         var_3 physicslaunchserver(var_3.origin + (0, 0, 10), anglesToForward(self.angles) * 1000);
-      else
+      }
+      else {
         jkuprint("trace failed");
+      }
     } else {
       jkuprint("not launching weapon towards player");
       var_3 physicslaunchserver(var_3.origin + (0, 0, 10), (var_5, 0, 0));
@@ -914,16 +985,19 @@ loki_drop_weapon_trigger(var_0, var_1) {
 loki_drop_weapon_cleanup(var_0, var_1) {
   self endon("death");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 45;
+  }
 
   wait(var_1);
 
-  while(maps\_utility::player_looking_at(self.origin, 0.4, 1))
+  while(maps\_utility::player_looking_at(self.origin, 0.4, 1)) {
     common_scripts\utility::waitframe();
+  }
 
-  if(isDefined(var_0) && isalive(var_0))
+  if(isDefined(var_0) && isalive(var_0)) {
     var_0 delete();
+  }
 
   self delete();
 }
@@ -975,18 +1049,21 @@ create_world_model_from_ent_weapon(var_0) {
 }
 
 create_rumble_ent(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.origin = level.player.origin + (0, 0, var_0);
   var_3 linkto(level.player);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3.script_noteworthy = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 common_scripts\utility::delaycall(var_2, ::delete);
+  }
 
   return var_3;
 }
@@ -1022,13 +1099,15 @@ ally_physics_pulse(var_0) {
 waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = 0.5;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_7 = var_3;
+  }
 
   var_8 = 64;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_8 = var_2;
+  }
 
   var_9 = var_0;
 
@@ -1037,13 +1116,15 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, v
     var_9 linkto(var_0, var_4, (0, 0, 0), (0, 0, 0));
   }
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 5;
+  }
 
   var_10 = var_1;
 
-  if(!common_scripts\utility::flag_exist(var_10))
+  if(!common_scripts\utility::flag_exist(var_10)) {
     common_scripts\utility::flag_init(var_10);
+  }
 
   var_11 = 0;
   var_12 = 0;
@@ -1056,16 +1137,18 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, v
     } else if(level.player maps\_utility::player_looking_at(var_9.origin, var_7, 1)) {
       if(isDefined(var_6)) {
         if(level.player istouching(var_6)) {
-          if(!common_scripts\utility::flag(var_10))
+          if(!common_scripts\utility::flag(var_10)) {
             var_11 = 1;
+          }
         } else {
           common_scripts\utility::flag_clear(var_10);
           var_12 = 0;
           level.player enableweaponpickup();
         }
       } else if(distance(level.player getEye(), var_9.origin) <= var_8) {
-        if(!common_scripts\utility::flag(var_10))
+        if(!common_scripts\utility::flag(var_10)) {
           var_11 = 1;
+        }
       } else {
         common_scripts\utility::flag_clear(var_10);
         var_12 = 0;
@@ -1077,8 +1160,9 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, v
       level.player enableweaponpickup();
     }
 
-    if(level.player usebuttonpressed())
+    if(level.player usebuttonpressed()) {
       var_12++;
+    }
 
     if(common_scripts\utility::flag(var_10) && var_12 >= var_5) {
       break;
@@ -1097,26 +1181,31 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, v
   level.player enableweaponpickup();
   common_scripts\utility::flag_clear(var_10);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_9 delete();
+  }
 }
 
 waittill_fire_trigger_activate(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 5;
+  }
 
   var_3 = var_0;
 
-  if(!common_scripts\utility::flag_exist(var_3))
+  if(!common_scripts\utility::flag_exist(var_3)) {
     common_scripts\utility::flag_init(var_3);
+  }
 
   var_4 = 0;
 
   for(;;) {
-    if(level.player attackbuttonpressed())
+    if(level.player attackbuttonpressed()) {
       var_4++;
-    else
+    }
+    else {
       var_4 = 0;
+    }
 
     if(level.player ismeleeing()) {
       common_scripts\utility::flag_clear(var_3);
@@ -1129,10 +1218,12 @@ waittill_fire_trigger_activate(var_0, var_1, var_2) {
 
     common_scripts\utility::flag_set(var_3);
 
-    if(!isDefined(var_2) || isDefined(var_2) && !common_scripts\utility::flag(var_2))
+    if(!isDefined(var_2) || isDefined(var_2) && !common_scripts\utility::flag(var_2)) {
       maps\_utility::display_hint_timeout(var_0);
-    else
+    }
+    else {
       common_scripts\utility::flag_clear(var_3);
+    }
 
     common_scripts\utility::waitframe();
   }

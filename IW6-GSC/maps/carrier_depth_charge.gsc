@@ -87,16 +87,20 @@ depth_charge_remove_control(var_0) {
   self notify("depth_charge_remove_control");
   self.osprey_control = 0;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
-  if(isDefined(self.using_depth_charge) && self.using_depth_charge)
+  if(isDefined(self.using_depth_charge) && self.using_depth_charge) {
     depth_charge_exit();
+  }
 
-  if(var_0)
+  if(var_0) {
     self setweaponhudiconoverride("actionslot1", "crr_dpad_osprey_inactive");
-  else
+  }
+  else {
     self setweaponhudiconoverride("actionslot1", "none");
+  }
 
   self notifyonplayercommand("", "+actionslot 1");
   refreshhudammocounter();
@@ -110,8 +114,9 @@ depth_charge_use() {
   self notify("start_using_depth_charge");
   self.using_depth_charge = 1;
 
-  if(self getstance() == "prone")
+  if(self getstance() == "prone") {
     self setstance("crouch");
+  }
 
   self setmovespeedscale(0);
   self allowjump(0);
@@ -135,8 +140,9 @@ depth_charge_use() {
   self allowcrouch(0);
   self allowprone(0);
 
-  if(isDefined(level.defend_zodiac_osprey))
+  if(isDefined(level.defend_zodiac_osprey)) {
     level.defend_zodiac_osprey delete();
+  }
 
   level.defend_zodiac_osprey = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("defend_zodiac_osprey");
   level.defend_zodiac_osprey useanimtree(#animtree);
@@ -164,8 +170,9 @@ depth_charge_use() {
   self.osprey_turret settargetentity(self.osprey_turret.turret_target);
   self.osprey_turret linkto(level.defend_zodiac_osprey);
 
-  if(!isDefined(self.osprey_minigun_ammo))
+  if(!isDefined(self.osprey_minigun_ammo)) {
     self.osprey_minigun_ammo = 9999;
+  }
 
   setsaveddvar("ammoCounterHide", "1");
   setsaveddvar("actionSlotsHide", "1");
@@ -261,8 +268,9 @@ depth_charge_exit() {
   thread depth_charge_clear_hud();
   thread maps\carrier_audio::aud_carr_osprey_zone_off();
 
-  if(isDefined(level.defend_zodiac_osprey))
+  if(isDefined(level.defend_zodiac_osprey)) {
     level.defend_zodiac_osprey stoploopsound("scn_carr_osprey_gun_loop");
+  }
 
   self unlink();
 
@@ -294,8 +302,9 @@ depth_charge_exit() {
   self notify("cleanup_depth_charges");
   level.depth_charges = [];
 
-  if(isDefined(level.defend_zodiac_osprey))
+  if(isDefined(level.defend_zodiac_osprey)) {
     level.defend_zodiac_osprey setcontents(level.defend_zodiac_osprey.old_contents);
+  }
 
   if(isDefined(level.depth_charge_target)) {
     level.depth_charge_target delete();
@@ -340,8 +349,9 @@ depth_charge_hud() {
   self.depth_charge_hud_elements["mg_text"] = maps\_hud_util::createfontstring("hudsmall", 1);
   self.depth_charge_hud_elements["mg_text"].x = -140;
 
-  if(!common_scripts\utility::is_player_gamepad_enabled())
+  if(!common_scripts\utility::is_player_gamepad_enabled()) {
     self.depth_charge_hud_elements["mg_text"].x = 140;
+  }
 
   self.depth_charge_hud_elements["mg_text"].y = -5;
   self.depth_charge_hud_elements["mg_text"].alignx = "center";
@@ -355,8 +365,9 @@ depth_charge_hud() {
   self.depth_charge_hud_elements["missile_text"] = maps\_hud_util::createfontstring("hudsmall", 1);
   self.depth_charge_hud_elements["missile_text"].x = 140;
 
-  if(!common_scripts\utility::is_player_gamepad_enabled())
+  if(!common_scripts\utility::is_player_gamepad_enabled()) {
     self.depth_charge_hud_elements["missile_text"].x = -140;
+  }
 
   self.depth_charge_hud_elements["missile_text"].y = -5;
   self.depth_charge_hud_elements["missile_text"].alignx = "center";
@@ -550,8 +561,9 @@ create_line(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 set_box(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self.depth_charge_hud_elements[var_0] fadeovertime(var_3);
+  }
 
   self.depth_charge_hud_elements[var_0].alpha = var_1;
   self.depth_charge_hud_elements[var_0].color = var_2;
@@ -562,8 +574,9 @@ set_box(var_0, var_1, var_2, var_3) {
 }
 
 set_line(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self.depth_charge_hud_elements[var_0] fadeovertime(var_3);
+  }
 
   self.depth_charge_hud_elements[var_0].alpha = var_1;
   self.depth_charge_hud_elements[var_0].color = var_2;
@@ -624,8 +637,9 @@ depth_charge_update_target_location() {
   for(;;) {
     var_0 = (self getEye()[2] - level.water_level) / cos(90 - self getplayerangles()[0]);
 
-    if(var_0 <= 0)
+    if(var_0 <= 0) {
       var_0 = 100000;
+    }
 
     level.depth_charge_target.origin = self getEye() + anglesToForward(self getplayerangles()) * var_0;
     wait 0.05;
@@ -649,8 +663,9 @@ depth_charge_monitor_drop() {
 depth_charge_drop() {
   self endon("death");
 
-  if(!isDefined(level.osprey_missile_side_left))
+  if(!isDefined(level.osprey_missile_side_left)) {
     level.osprey_missile_side_left = 1;
+  }
 
   var_0 = anglesToForward(level.defend_zodiac_osprey.angles) * 200;
   var_1 = magicbullet("osprey_missile", level.defend_zodiac_osprey gettagorigin(common_scripts\utility::ter_op(level.osprey_missile_side_left, "tag_light_l_wing1", "tag_light_r_wing1")) + anglesToForward(level.defend_zodiac_osprey.angles) * 100 - anglestoup(level.defend_zodiac_osprey.angles) * 50 + anglestoright(level.defend_zodiac_osprey.angles) * common_scripts\utility::ter_op(level.osprey_missile_side_left, -200, 200), level.depth_charge_target.origin + var_0, self);
@@ -661,8 +676,9 @@ depth_charge_drop() {
   var_2 = spawnStruct();
   var_2.impact_loc = maps\_utility::set_z(level.depth_charge_target.origin, level.water_level);
 
-  if(distance2d(var_2.impact_loc, level.old_player_origin) <= 1500)
+  if(distance2d(var_2.impact_loc, level.old_player_origin) <= 1500) {
     self.rain = 1;
+  }
 
   var_2.time = gettime();
   level.depth_charges[level.depth_charges.size] = var_2;
@@ -675,27 +691,32 @@ depth_charge_lockon_to_target() {
   var_1 = spawn("script_origin", level.player getEye() + anglesToForward(level.player getplayerangles()) * var_0);
   wait 0.25;
 
-  if(isvalidmissile(self) && var_0 > 0)
+  if(isvalidmissile(self) && var_0 > 0) {
     self missile_settargetent(var_1);
+  }
 
-  while(isDefined(self) && isvalidmissile(self) && self.origin[2] > level.water_level)
+  while(isDefined(self) && isvalidmissile(self) && self.origin[2] > level.water_level) {
     wait 0.05;
+  }
 
   if(isDefined(self)) {
     var_2 = 0;
 
-    if(self.origin[2] < level.water_level + 32)
+    if(self.origin[2] < level.water_level + 32) {
       var_2 = 1;
+    }
 
     var_3 = undefined;
 
-    if(self istouching(level.osprey_carrier_vol))
+    if(self istouching(level.osprey_carrier_vol)) {
       var_3 = level._effect["vfx_ac130_105mm_impact"];
+    }
 
     thread depth_charge_explode(self.origin, var_2, var_3);
 
-    if(isvalidmissile(self))
+    if(isvalidmissile(self)) {
       self missile_cleartarget();
+    }
   }
 
   var_1 delete();
@@ -706,8 +727,9 @@ depth_charge_explode(var_0, var_1, var_2) {
   var_0 = maps\_utility::set_z(var_0, level.water_level - 52);
   var_3 = level._effect["depth_charge_explosion"];
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 = var_2;
+  }
 
   if(var_1) {
     playFX(var_3, var_0);
@@ -727,8 +749,9 @@ depth_charge_explode(var_0, var_1, var_2) {
   maps\_utility::delaythread(0.1, ::check_friendly_fire, var_0, 1000, 2000);
   level.player waittill("cleanup_depth_charges");
 
-  if(var_1 && var_4 + 3000 < gettime() && common_scripts\utility::distance_2d_squared(level.player.origin, var_0) < 12960000)
+  if(var_1 && var_4 + 3000 < gettime() && common_scripts\utility::distance_2d_squared(level.player.origin, var_0) < 12960000) {
     thread common_scripts\utility::play_sound_in_space("scn_carr_water_plume", var_0);
+  }
 
   var_5 delete();
 }
@@ -742,8 +765,9 @@ depth_charge_replay() {
   var_1 linkto(level.defend_zodiac_osprey);
   var_1 screenshakeonentity(0.2, 0.17, 0.1, 5, 1, 2, 5000, 12, 8, 5);
 
-  if(maps\carrier_code::eval(self.rain))
+  if(maps\carrier_code::eval(self.rain)) {
     thread maps\carrier_code::rain_overlay_alpha(12, 0);
+  }
 
   level.first_time_depth_charge = 0;
   common_scripts\utility::waitframe();
@@ -822,14 +846,17 @@ depth_charge_hint() {
   var_4 = undefined;
 
   if(level.first_time_depth_charge) {
-    if(isDefined(level.iconelem))
+    if(isDefined(level.iconelem)) {
       level.iconelem destroy();
+    }
 
-    if(isDefined(level.iconelem2))
+    if(isDefined(level.iconelem2)) {
       level.iconelem2 destroy();
+    }
 
-    if(isDefined(level.iconelem3))
+    if(isDefined(level.iconelem3)) {
       level.iconelem3 destroy();
+    }
   }
 }
 
@@ -837,10 +864,12 @@ depth_charge_drop_hint() {
   self endon("depth_charge_run_finished");
   self endon("depth_charge_remove_control");
 
-  if(!isDefined(level.first_time_depth_charge_drop_hint))
+  if(!isDefined(level.first_time_depth_charge_drop_hint)) {
     level.first_time_depth_charge_drop_hint = 1;
-  else
+  }
+  else {
     level.first_time_depth_charge_drop_hint = 0;
+  }
 
   var_0 = maps\_hud_util::createfontstring("default", 1.75);
   var_0.horzalign = "center";
@@ -878,10 +907,12 @@ depth_charge_minigun_hint() {
   self endon("depth_charge_run_finished");
   self endon("depth_charge_remove_control");
 
-  if(!isDefined(level.first_time_depth_charge_minigun_hint))
+  if(!isDefined(level.first_time_depth_charge_minigun_hint)) {
     level.first_time_depth_charge_minigun_hint = 1;
-  else
+  }
+  else {
     level.first_time_depth_charge_minigun_hint = 0;
+  }
 
   var_0 = maps\_hud_util::createfontstring("default", 1.75);
   var_0.horzalign = "center";
@@ -895,12 +926,15 @@ depth_charge_minigun_hint() {
   var_1 = getkeybinding("+ads_akimbo_accessible");
   var_3 = isDefined(var_1) && var_1["count"] != 0;
 
-  if(var_2)
+  if(var_2) {
     var_0 settext(&"CARRIER_DEPTH_CHARGE_MG_HINT");
-  else if(var_3)
+  }
+  else if(var_3) {
     var_0 settext(&"CARRIER_DEPTH_CHARGE_MG_NOMAD_HINT");
-  else
+  }
+  else {
     var_0 settext(&"CARRIER_DEPTH_CHARGE_MG_PC_HINT");
+  }
 
   var_0.alpha = 1;
   var_0.sort = 0.5;
@@ -984,8 +1018,9 @@ monitor_machine_gun() {
   while(self.using_depth_charge) {
     var_1 = (self getEye()[2] - level.water_level) / cos(90 - self getplayerangles()[0]);
 
-    if(var_1 <= 0)
+    if(var_1 <= 0) {
       var_1 = 100000;
+    }
 
     self.osprey_turret.turret_target.origin = self getEye() + anglesToForward(self getplayerangles()) * var_1;
 
@@ -1040,8 +1075,9 @@ depth_charge_handle_zoom() {
       continue;
     }
 
-    if(var_0 <= 0 && var_1[0] > 0 && level.depth_charge_current_fov > level.depth_charge_min_fov || var_0 >= 0 && var_1[0] < 0 && level.depth_charge_current_fov < level.depth_charge_max_fov)
+    if(var_0 <= 0 && var_1[0] > 0 && level.depth_charge_current_fov > level.depth_charge_min_fov || var_0 >= 0 && var_1[0] < 0 && level.depth_charge_current_fov < level.depth_charge_max_fov) {
       thread depth_charge_lerp_dof();
+    }
 
     var_0 = var_1[0];
     var_2 = level.depth_charge_current_fov / 20.0;
@@ -1049,10 +1085,12 @@ depth_charge_handle_zoom() {
     var_2 = max(0.5, var_2);
     level.depth_charge_current_fov = level.depth_charge_current_fov - var_1[0] * var_2;
 
-    if(level.depth_charge_current_fov < level.depth_charge_min_fov)
+    if(level.depth_charge_current_fov < level.depth_charge_min_fov) {
       level.depth_charge_current_fov = level.depth_charge_min_fov;
-    else if(level.depth_charge_current_fov > level.depth_charge_max_fov)
+    }
+    else if(level.depth_charge_current_fov > level.depth_charge_max_fov) {
       level.depth_charge_current_fov = level.depth_charge_max_fov;
+    }
 
     self lerpfov(level.depth_charge_current_fov, 0.05);
     depth_charge_set_slow_aim();
@@ -1077,8 +1115,9 @@ depth_charge_set_slow_aim() {
 }
 
 depth_charge_lerp_dof(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.5;
+  }
 
   self notify("depth_charge_lerp_dof");
   self endon("depth_charge_lerp_dof");
@@ -1088,12 +1127,14 @@ depth_charge_lerp_dof(var_0) {
 
 depth_charge_mark_friendlies() {
   foreach(var_1 in getaiarray()) {
-    if(var_1.team == "allies")
+    if(var_1.team == "allies") {
       var_1 thread maps\carrier_code::setup_target_on_vehicle();
+    }
   }
 
-  foreach(var_4 in level.drones["allies"].array)
+  foreach(var_4 in level.drones["allies"].array) {
   var_4 thread maps\carrier_code::setup_target_on_vehicle();
+  }
 }
 
 setup_fake_destroyer_targets() {
@@ -1138,15 +1179,17 @@ explode_single_fake_target(var_0) {
     self delete();
   } else if(isDefined(self.model) && issubstr(self.model, "zodiac"))
     maps\carrier_code_zodiac::explode_single_zodiac(0.5, var_0);
-  else if(maps\_vehicle::isvehicle() && maps\_vehicle::ishelicopter())
+  else if(maps\_vehicle::isvehicle() && maps\_vehicle::ishelicopter()) {
     self kill();
+  }
 }
 
 check_friendly_fire(var_0, var_1, var_2) {
   var_3 = 1300;
 
-  if(var_0[2] > var_3)
+  if(var_0[2] > var_3) {
     radiusdamage(var_0, var_1, var_2, var_2 / 2, level.player);
+  }
 }
 
 depth_charge_check_failure() {

@@ -31,8 +31,9 @@ init_mgTurretsettings() {
 }
 
 main() {
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _mgturret.gsc. Function: main()\n");
+  }
   if(GetDvar("mg42") == "") {
     SetDvar("mgTurret", "off");
   }
@@ -41,8 +42,9 @@ main() {
   for(index = 0; index < turretInfos.size; index++) {
     turretInfos[index] Delete();
   }
-  if(getdebugdvar("replay_debug") == "1")
+  if(getdebugdvar("replay_debug") == "1") {
     println("File: _mgturret.gsc. Function: main() - COMPLETE\n");
+  }
 }
 
 portable_mg_behavior() {
@@ -292,8 +294,9 @@ _spawner_mg42_think() {
     ai = GetAiArray();
     for(i = 0; i < ai.size; i++) {
       excluded = true;
-      if((isDefined(ai[i].script_mg42)) && (ai[i].script_mg42 == self.script_mg42))
+      if((isDefined(ai[i].script_mg42)) && (ai[i].script_mg42 == self.script_mg42)) {
         excluded = false;
+      }
       if(isDefined(ai[i].used_an_mg42)) {
         excluded = true;
       }
@@ -606,10 +609,12 @@ saw_mgTurretLink(nodes) {
   }
   for(nodeIndex = 0; nodeIndex < nodes.size; nodeIndex++) {
     node = nodes[nodeIndex];
-    if(node.type == "Path")
+    if(node.type == "Path") {
       continue;
-    if(node.type == "Begin")
+    }
+    if(node.type == "Begin") {
       continue;
+    }
     if(node.type == "End") {
       continue;
     }

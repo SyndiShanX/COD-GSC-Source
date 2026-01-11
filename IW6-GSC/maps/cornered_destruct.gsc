@@ -165,8 +165,9 @@ begin_stairwell() {
   level thread stairwell_handler();
   level thread office_handler();
 
-  if(maps\cornered_code::is_e3())
+  if(maps\cornered_code::is_e3()) {
     level.player maps\_utility::vision_set_changes("cornered_07", 0.5);
+  }
 
   common_scripts\utility::flag_wait("stairwell_finished");
 }
@@ -260,8 +261,9 @@ vista_tilt() {
   wait 0.1;
 
   foreach(var_6 in level.vista) {
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_6 unlink();
+    }
   }
 }
 
@@ -287,8 +289,9 @@ hvt_office_handler() {
   thread hvt_office_doors();
   common_scripts\utility::flag_wait("hvt_office_breach");
 
-  if(isDefined(level.hvt_door_blocker) && level.hvt_door_blocker == 1)
+  if(isDefined(level.hvt_door_blocker) && level.hvt_door_blocker == 1) {
     thread hvt_office_door_block_down();
+  }
 
   common_scripts\utility::flag_set("obj_capture_complete");
   thread hvt_office_fail();
@@ -369,8 +372,9 @@ hvt_pre_office_hesh() {
     }
     var_0 maps\_anim::anim_single_solo(self, "breach_stackL_approach");
 
-    if(!common_scripts\utility::flag("hvt_office_breach"))
+    if(!common_scripts\utility::flag("hvt_office_breach")) {
       var_0 thread maps\_anim::anim_loop_solo(self, "explosivebreach_v1_stackL_idle", "stop_loop");
+    }
 
     common_scripts\utility::flag_wait("hvt_office_breach");
     var_0 notify("stop_loop");
@@ -406,8 +410,9 @@ hvt_office_keegan() {
     var_0 maps\_anim::anim_single_solo(self, "breach_stackL_approach");
     common_scripts\utility::flag_set("baker_breach_ready");
 
-    if(!common_scripts\utility::flag("hvt_office_breach"))
+    if(!common_scripts\utility::flag("hvt_office_breach")) {
       var_0 thread maps\_anim::anim_loop_solo(self, "explosivebreach_v1_stackL_idle", "stop_loop");
+    }
 
     common_scripts\utility::flag_wait("hvt_office_breach");
     var_0 notify("stop_loop");
@@ -427,14 +432,17 @@ hvt_office_keegan() {
   thread hvt_office_vargas();
   self waittillmatch("single anim", "bink_start");
 
-  if(!level.console)
+  if(!level.console) {
     wait 0.225;
+  }
 
-  if(isDefined(level.ps3) && level.ps3)
+  if(isDefined(level.ps3) && level.ps3) {
     wait 0.225;
+  }
 
-  if(isDefined(level.ps4) && level.ps4)
+  if(isDefined(level.ps4) && level.ps4) {
     wait 0.225;
+  }
 
   setsaveddvar("cg_cinematicFullScreen", "0");
   cinematicingame("cornered_rorke_tv");
@@ -493,8 +501,9 @@ hvt_office_hvt() {
   var_1.allowdeath = 1;
   var_1 waittillmatch("single anim", "end");
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     level.hvt_office_anim_struct thread maps\_anim::anim_loop_solo(var_1, "cornered_office_loop", "stop_loop_hvt");
+  }
 }
 
 hvt_office_hvt_talking() {
@@ -635,16 +644,18 @@ hvt_office_props() {
   var_5 linkto(var_4);
   var_6 = getEntArray("hvt_office_debris_couch1_cushions", "targetname");
 
-  foreach(var_8 in var_6)
+  foreach(var_8 in var_6) {
   var_8 linkto(var_4);
+  }
 
   var_10 = getent("hvt_office_debris_couch2", "targetname");
   var_11 = getent("hvt_office_debris_couch2_clip", "targetname");
   var_11 linkto(var_10);
   var_12 = getEntArray("hvt_office_debris_couch2_cushions", "targetname");
 
-  foreach(var_8 in var_12)
+  foreach(var_8 in var_12) {
   var_8 linkto(var_10);
+  }
 
   var_15 = getent("hvt_debris_plant1", "targetname");
   var_16 = getent("hvt_debris_plant2", "targetname");
@@ -719,13 +730,15 @@ hvt_office_environment() {
   level thread lobby_and_stair_fx();
   var_0 = common_scripts\utility::getstructarray("hvt_office_phys", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   physicsjitter(var_2.origin, 300, 200, 1.0, 1.0);
+  }
 
   var_4 = getEntArray("hvt_office_junk", "targetname");
 
-  foreach(var_2 in var_4)
+  foreach(var_2 in var_4) {
   var_2 physicslaunchclient(var_2.origin + (0, 0, -4), (0, -15, 60));
+  }
 
   wait 2.0;
   earthquake(0.14, 8, level.player.origin, 2500);
@@ -811,8 +824,9 @@ stairwell_crack_flat(var_0, var_1) {
   var_5 hide();
   common_scripts\utility::flag_wait("stairwell_shake_1");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
+  }
 
   var_2 show();
   wait 0.15;
@@ -917,13 +931,15 @@ stairwell_baker() {
   self waittillmatch("single anim", "end");
   var_0 = getent("stair_baker_dont_stop", "targetname");
 
-  if(level.player istouching(var_0))
+  if(level.player istouching(var_0)) {
     level.hvt_office_anim_struct maps\_anim::anim_single_solo(self, "cornered_stairs_run");
+  }
   else {
     level.hvt_office_anim_struct maps\_anim::anim_single_solo(self, "cornered_stairs_wait");
 
-    if(!common_scripts\utility::flag("allies_move_to_rescue"))
+    if(!common_scripts\utility::flag("allies_move_to_rescue")) {
       level.hvt_office_anim_struct thread maps\_anim::anim_loop_solo(self, "cornered_stairs_wait_loop", "stop_loop");
+    }
 
     common_scripts\utility::flag_wait("allies_move_to_rescue");
     level.hvt_office_anim_struct notify("stop_loop");
@@ -1101,8 +1117,9 @@ office_props() {
     var_12 thread maps\cornered_code::debris_remove_after_time(25.0);
   }
 
-  foreach(var_12 in var_10)
+  foreach(var_12 in var_10) {
   var_12 thread office_jitter();
+  }
 }
 
 office_jitter() {
@@ -1137,8 +1154,9 @@ office_door_to_lobby() {
   var_1 = getent("lobby_door_player_clip", "targetname");
   var_2 = getEntArray("door_to_lobby_handles", "targetname");
 
-  foreach(var_4 in var_2)
+  foreach(var_4 in var_2) {
   var_4 linkto(var_0);
+  }
 
   var_6 = maps\_utility::spawn_anim_model("exfil_bldg");
   level.fall_anim_struct maps\_anim::anim_first_frame_solo(var_6, "cornered_building_fall_lobby_door");
@@ -1327,8 +1345,9 @@ fall_player() {
   common_scripts\utility::waitframe();
   var_2 = level.player getgunangles();
 
-  if(var_2[0] < 10)
+  if(var_2[0] < 10) {
     level.player viewkick(127, level.player.origin);
+  }
 
   common_scripts\utility::waitframe();
   level.player setviewkickscale(1);
@@ -1374,8 +1393,9 @@ fall_player() {
   setphysicsgravitydir((0, -0.7, -0.1));
   level.fall_path_rig waittillmatch("single anim", "slomo_on");
 
-  if(maps\cornered_code::is_e3())
+  if(maps\cornered_code::is_e3()) {
     thread maps\cornered_code::end_level();
+  }
 
   level.fall_path_rig waittillmatch("single anim", "slomo_off");
   common_scripts\utility::flag_set("pre_glass_impact");
@@ -1438,8 +1458,9 @@ watch_for_player_death() {
   level endon("atrium_pre_rail_hit");
   level.player waittill("death");
 
-  foreach(var_1 in level.fall_arms_and_legs)
+  foreach(var_1 in level.fall_arms_and_legs) {
   var_1 hide();
+  }
 }
 
 parachute_hint() {
@@ -1485,8 +1506,9 @@ fall_allies_rorke() {
   self waittillmatch("single anim", "end");
   common_scripts\utility::flag_set("lobby_rorke_ready");
 
-  if(!common_scripts\utility::flag("lobby_shake"))
+  if(!common_scripts\utility::flag("lobby_shake")) {
     level.fall_anim_struct thread maps\_anim::anim_loop_solo(self, "idle_lobby", "stop_lobby_idle");
+  }
 
   common_scripts\utility::flag_wait("lobby_shake");
   level.fall_anim_struct notify("stop_lobby_idle");
@@ -1730,8 +1752,9 @@ fall_prop_picture() {
   var_4 = 0.75;
   var_5 = 0.75;
 
-  if(isDefined(level.atrium_checkpoint))
+  if(isDefined(level.atrium_checkpoint)) {
     var_1 rotateroll(7, 0.05);
+  }
 
   common_scripts\utility::flag_wait("lobby_stairwell_shake");
 
@@ -1760,8 +1783,9 @@ fall_props_lobby_furniture() {
     if(var_4.script_noteworthy == "6" || var_4.script_noteworthy == "11") {
       var_7 = getEntArray("pillows_" + var_4.script_noteworthy, "targetname");
 
-      foreach(var_9 in var_7)
+      foreach(var_9 in var_7) {
       var_9 linkto(var_4);
+      }
     }
   }
 
@@ -1795,35 +1819,41 @@ fall_prop_corner_collapse() {
   var_0 thread maps\_anim::anim_single(var_1, "cornered_building_fall_corner_collapse");
   var_1[0] waittillmatch("single anim", "shatter_1");
 
-  foreach(var_3 in var_5)
+  foreach(var_3 in var_5) {
   var_3 delete();
+  }
 
   var_9 = getglassarray("glass_level_1");
 
-  foreach(var_3 in var_9)
+  foreach(var_3 in var_9) {
   destroyglass(var_3);
+  }
 
   var_12 = getent("corner_beam", "targetname");
   var_12 delete();
   wait 0.7;
 
-  foreach(var_3 in var_9)
+  foreach(var_3 in var_9) {
   deleteglass(var_3);
+  }
 
   var_1[0] waittillmatch("single anim", "shatter_2");
 
-  foreach(var_3 in var_6)
+  foreach(var_3 in var_6) {
   var_3 delete();
+  }
 
   var_17 = getglassarray("glass_level_2");
 
-  foreach(var_3 in var_17)
+  foreach(var_3 in var_17) {
   destroyglass(var_3);
+  }
 
   wait 0.7;
 
-  foreach(var_3 in var_17)
+  foreach(var_3 in var_17) {
   deleteglass(var_3);
+  }
 }
 
 fall_props_atrium_lights() {
@@ -1859,8 +1889,9 @@ fall_props_parachute() {
   var_1[1] = maps\_utility::spawn_anim_model("exfil_chute_2");
   var_0 maps\_anim::anim_first_frame(var_1, "cornered_exfil");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 hide();
+  }
 
   common_scripts\utility::flag_wait("parachute_exfil");
   var_0 thread maps\_anim::anim_single(var_1, "cornered_exfil");
@@ -1900,8 +1931,9 @@ fall_props_ext_bldg() {
   var_4 = var_1 gettagangles("J_prop_1");
   common_scripts\utility::waitframe();
 
-  foreach(var_6 in var_0)
+  foreach(var_6 in var_0) {
   var_6 linkto(var_1, "J_prop_1");
+  }
 
   common_scripts\utility::flag_wait("go_exfil_bldg");
   var_2 maps\_anim::anim_single_solo(var_1, "cornered_exfil_building_and_sign");
@@ -1940,21 +1972,24 @@ fall_break_glass() {
   wait 1.25;
   var_0 = getglassarray("lobby_atrium_glass");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   thread fall_break_glass_with_delay(var_2, 0.05, 0.06, 0, 1, 0.1);
+  }
 
   var_4 = getglassarray("lobby_atrium_glass_doors");
   var_5 = getEntArray("atrium_door_handles", "targetname");
   maps\_utility::array_delete(var_5);
 
-  foreach(var_2 in var_4)
+  foreach(var_2 in var_4) {
   thread fall_break_glass_with_delay(var_2, 0.05, 0.06, 0, 1, 0);
+  }
 
   common_scripts\utility::flag_wait("fall_down_shake");
   wait 1.6;
 
-  foreach(var_2 in var_4)
+  foreach(var_2 in var_4) {
   deleteglass(var_2);
+  }
 }
 
 fall_break_glass_with_delay(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -2000,8 +2035,9 @@ fall_physics_debris_entry_stairs() {
 }
 
 fall_physics_debris_lobby() {
-  if(!isDefined(level.atrium_checkpoint))
+  if(!isDefined(level.atrium_checkpoint)) {
     common_scripts\utility::flag_wait("office_explosion");
+  }
 
   var_0 = getEntArray("lobby_debris1", "targetname");
 
@@ -2066,12 +2102,15 @@ random_building_shake_loop(var_0, var_1, var_2, var_3) {
   for(;;) {
     var_4 = randomfloatrange(var_1, var_2);
 
-    if(var_4 < 2)
+    if(var_4 < 2) {
       level.player playrumbleonentity("light_1s");
-    else if(var_4 >= 2 && var_4 < 3)
+    }
+    else if(var_4 >= 2 && var_4 < 3) {
       level.player playrumbleonentity("light_2s");
-    else
+    }
+    else {
       level.player playrumbleonentity("light_3s");
+    }
 
     level thread lobby_and_stair_fx();
     earthquake(var_0, var_4, level.player.origin, 2500);
@@ -2089,8 +2128,9 @@ fall_enemy_self_anim() {
   common_scripts\utility::waitframe();
   maps\_anim::anim_generic(self, self.animation);
 
-  if(isalive(self) && isDefined(self))
+  if(isalive(self) && isDefined(self)) {
     self kill();
+  }
 }
 
 fall_enemy_node_anim(var_0, var_1) {
@@ -2101,8 +2141,9 @@ fall_enemy_node_anim(var_0, var_1) {
   self.deathfunction = maps\cornered_code::death_only_ragdoll;
   var_2 maps\_anim::anim_generic(self, "cornered_building_fall_" + self.script_noteworthy);
 
-  if(isalive(self) && isDefined(self))
+  if(isalive(self) && isDefined(self)) {
     self kill();
+  }
 }
 
 corpse_clear() {
@@ -2113,8 +2154,9 @@ corpse_clear() {
     var_1 = getcorpsearray();
 
     foreach(var_3 in var_1) {
-      if(var_3 istouching(var_0))
+      if(var_3 istouching(var_0)) {
         var_3 delete();
+      }
     }
 
     wait 0.05;

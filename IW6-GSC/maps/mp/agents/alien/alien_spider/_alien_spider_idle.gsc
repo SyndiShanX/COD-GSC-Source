@@ -37,10 +37,12 @@ play_idle() {
 gettarget() {
   var_0 = undefined;
 
-  if(isalive(self.enemy) && distancesquared(self.enemy.origin, self.origin) < 2560000)
+  if(isalive(self.enemy) && distancesquared(self.enemy.origin, self.origin) < 2560000) {
     var_0 = self.enemy;
-  else if(isDefined(self.owner))
+  }
+  else if(isDefined(self.owner)) {
     var_0 = self.owner;
+  }
 
   return var_0;
 }
@@ -48,15 +50,17 @@ gettarget() {
 facetarget() {
   var_0 = gettarget();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     maps\mp\agents\alien\_alien_anim_utils::turntowardsentity(var_0);
+  }
 }
 
 selectidleanimstate() {
   var_0 = getdesiredanimstate();
 
-  if(isDefined(self.anim_state_modifier))
+  if(isDefined(self.anim_state_modifier)) {
     var_0 = self.anim_state_modifier + var_0;
+  }
 
   return var_0;
 }
@@ -78,20 +82,25 @@ is_moving() {
 }
 
 try_move_idle() {
-  if(!isDefined(self.idle_move_data))
+  if(!isDefined(self.idle_move_data)) {
     return 0;
+  }
 
-  if(isDefined(self.disable_idle_move) && self.disable_idle_move)
+  if(isDefined(self.disable_idle_move) && self.disable_idle_move) {
     return 0;
+  }
 
-  if(maps\mp\agents\alien\alien_spider\_alien_spider::candoelevatedeggattack())
+  if(maps\mp\agents\alien\alien_spider\_alien_spider::candoelevatedeggattack()) {
     return 0;
+  }
 
-  if(gettime() < self.idle_move_data.next_valid_move_time)
+  if(gettime() < self.idle_move_data.next_valid_move_time) {
     return 0;
+  }
 
-  if(!common_scripts\utility::cointoss())
+  if(!common_scripts\utility::cointoss()) {
     return 0;
+  }
 
   perform_move(0);
   self.idle_move_data.next_valid_move_time = gettime() + 15000;
@@ -115,10 +124,12 @@ init_idle_move() {
 }
 
 perform_move(var_0) {
-  if(var_0)
+  if(var_0) {
     var_1 = 0;
-  else
+  }
+  else {
     var_1 = get_move_target_position_index();
+  }
 
   var_2 = self.idle_move_data.valid_positions[var_1];
   var_3 = 25.0;
@@ -148,8 +159,9 @@ play_move_anim(var_0, var_1, var_2, var_3) {
   var_6 = length(var_2 - self.origin);
   self.xyanimscale = var_6 / var_5;
 
-  if(!var_3)
+  if(!var_3) {
     self.xyanimscale = min(self.xyanimscale, 1.0);
+  }
 
   self.statelocked = 1;
   self scragentsetanimscale(self.xyanimscale, 1.0);
@@ -172,13 +184,15 @@ move_anim_timeout() {
 get_move_target_position_index() {
   var_0 = self.idle_move_data.valid_positions.size;
 
-  if(self.idle_move_data.last_position_index != -1)
+  if(self.idle_move_data.last_position_index != -1) {
     var_0--;
+  }
 
   var_1 = randomint(var_0);
 
-  if(self.idle_move_data.last_position_index != -1 && var_1 >= self.idle_move_data.last_position_index)
+  if(self.idle_move_data.last_position_index != -1 && var_1 >= self.idle_move_data.last_position_index) {
     var_1++;
+  }
 
   return var_1;
 }
@@ -212,8 +226,9 @@ wait_for_downed_state() {
   self endon("killanimscript");
   self waittill("vulnerable");
 
-  if(isDefined(self.idle_move_data) && self.idle_move_data.active)
+  if(isDefined(self.idle_move_data) && self.idle_move_data.active) {
     clean_up_move();
+  }
 
   self.statelocked = 1;
   self.idle_downed = 1;

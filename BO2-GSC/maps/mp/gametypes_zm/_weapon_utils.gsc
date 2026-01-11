@@ -7,8 +7,9 @@
 #include maps\mp\_utility;
 
 isgrenadelauncherweapon(weapon) {
-  if(getsubstr(weapon, 0, 3) == "gl_")
+  if(getsubstr(weapon, 0, 3) == "gl_") {
     return true;
+  }
 
   switch (weapon) {
     case "china_lake_mp":
@@ -43,21 +44,25 @@ isguidedrocketlauncherweapon(weapon) {
 }
 
 isrocketlauncherweapon(weapon) {
-  if(isdumbrocketlauncherweapon(weapon))
+  if(isdumbrocketlauncherweapon(weapon)) {
     return true;
+  }
 
-  if(isguidedrocketlauncherweapon(weapon))
+  if(isguidedrocketlauncherweapon(weapon)) {
     return true;
+  }
 
   return false;
 }
 
 islauncherweapon(weapon) {
-  if(isrocketlauncherweapon(weapon))
+  if(isrocketlauncherweapon(weapon)) {
     return true;
+  }
 
-  if(isgrenadelauncherweapon(weapon))
+  if(isgrenadelauncherweapon(weapon)) {
     return true;
+  }
 
   return false;
 }

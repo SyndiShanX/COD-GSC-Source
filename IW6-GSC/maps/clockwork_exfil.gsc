@@ -72,16 +72,18 @@ setup_chaos() {
   maps\clockwork_code::hide_dufflebags();
   common_scripts\utility::exploder(5);
 
-  if(level.woof)
+  if(level.woof) {
     level.dog thread maps\ally_attack_dog::lock_player_control_until_flag("ele_anim_done");
+  }
 }
 
 begin_chaos() {
   maps\_utility::battlechatter_off("axis");
   maps\_utility::battlechatter_off("allies");
 
-  if(level.woof)
+  if(level.woof) {
     thread handle_dog_chaos();
+  }
 
   maps\_utility::array_spawn_function_noteworthy("chaos_patrollers", ::exfil_alert_handle);
   maps\_utility::array_spawn_function_noteworthy("exfil_patrollers", ::exfil_alert_handle);
@@ -124,8 +126,9 @@ setup_exfil() {
 }
 
 begin_exfil() {
-  if(level.woof)
+  if(level.woof) {
     thread handle_dog_exfil();
+  }
 
   level.pos_lookahead_dist = 200;
   level.dodge_distance = 50;
@@ -142,13 +145,15 @@ begin_exfil() {
   level.allcrashes = [];
   common_scripts\utility::flag_set("punchit_exfil_hot");
 
-  if(!maps\_utility::is_gen4())
+  if(!maps\_utility::is_gen4()) {
     setsaveddvar("r_sunsprite_size_override", "0");
+  }
 
   maps\_utility::array_spawn_function_noteworthy("exfil_snowmobile", maps\clockwork_code::snowmobile_sounds);
 
-  if(!isDefined(level.jeep))
+  if(!isDefined(level.jeep)) {
     level.jeep = maps\_vehicle::spawn_vehicle_from_targetname("chaos_level_jeep_proxy");
+  }
 
   if(isDefined(level.exfil_checkpoint)) {
     maps\_utility::array_spawn_function_noteworthy("exfil_patrollers", ::exfil_alert_handle);
@@ -192,8 +197,9 @@ exfil_handle_ps4_ssao() {
 
   common_scripts\utility::flag_wait("ally_start_path_exfil");
 
-  if(var_0)
+  if(var_0) {
     maps\_art::enable_ssao_over_time(2);
+  }
 }
 
 setup_exfil_alt() {
@@ -212,8 +218,9 @@ setup_exfil_alt() {
   thread maps\_utility::vision_set_changes("clockwork_outdoor_exfill_02", 1);
   maps\clockwork_code::hide_dufflebags();
 
-  if(!maps\_utility::is_gen4())
+  if(!maps\_utility::is_gen4()) {
     setsaveddvar("r_sunsprite_size_override", "0");
+  }
 }
 
 begin_exfil_tank() {
@@ -332,8 +339,9 @@ place_allies_in_jeep() {
   level.allies[2].script_startingposition = 2;
   wait 0.01;
 
-  foreach(var_1 in level.allies)
+  foreach(var_1 in level.allies) {
   level.playerjeep thread maps\_vehicle_aianim::guy_enter(var_1);
+  }
 
   wait 0.01;
   level.player playerlinkto(level.playerjeep, "tag_guy_turret", 0.5);
@@ -401,20 +409,23 @@ handle_dead_bodies() {
 
   var_0 = getEntArray("chaos_decals_delete", "targetname");
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 delete();
+  }
 
   common_scripts\utility::flag_wait("spawn_more_chaos1");
   var_0 = getEntArray("chaos_decals1", "targetname");
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 delete();
+  }
 
   common_scripts\utility::flag_wait("chaos_stairstop_player");
   var_0 = getEntArray("chaos_decals2", "targetname");
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 delete();
+  }
 }
 
 handle_aggressive_cleanup() {
@@ -432,13 +443,16 @@ handle_aggressive_cleanup() {
     level.aggressive_cleanup = common_scripts\utility::array_removeundefined(level.aggressive_cleanup);
 
     foreach(var_2 in level.aggressive_cleanup) {
-      if(isai(var_2))
+      if(isai(var_2)) {
         var_3 = var_2 getEye();
-      else
+      }
+      else {
         var_3 = var_2 gettagorigin("tag_eye");
+      }
 
-      if(!maps\_utility::within_fov_of_players(var_3, var_0))
+      if(!maps\_utility::within_fov_of_players(var_3, var_0)) {
         var_2 delete();
+      }
     }
 
     common_scripts\utility::waitframe();
@@ -449,8 +463,9 @@ handle_aggressive_cleanup() {
     }
   }
 
-  foreach(var_2 in level.aggressive_cleanup)
+  foreach(var_2 in level.aggressive_cleanup) {
   var_2 delete();
+  }
 
   level.aggressive_cleanup = undefined;
 }
@@ -481,8 +496,9 @@ elevator_movement() {
 
   var_7 = getEntArray("NVG_breakroom_door_clip", "targetname");
 
-  foreach(var_9 in var_7)
+  foreach(var_9 in var_7) {
   var_9 delete();
+  }
 
   var_11 = "head_elite_pmc_head_b";
   var_12 = common_scripts\utility::array_combine(getEntArray("chaos_decals", "targetname"), getEntArray("chaos_decals1", "targetname"));
@@ -509,8 +525,9 @@ elevator_movement() {
     maps\clockwork_interior::open_vault(1);
   }
 
-  foreach(var_17 in var_6)
+  foreach(var_17 in var_6) {
   var_17 linkto(var_0);
+  }
 
   var_0 moveto(var_3.origin, 0.01);
   var_19 = var_1.origin - (54, 0, 0);
@@ -530,8 +547,9 @@ elevator_movement() {
   common_scripts\utility::flag_wait("inpos_player_elevator");
   var_21 = getent("inpos_player_elevator", "targetname");
 
-  while(!level.player istouching(var_21) || anyone_touching_blocker(var_5))
+  while(!level.player istouching(var_21) || anyone_touching_blocker(var_5)) {
     wait 0.05;
+  }
 
   var_5 solid();
   var_5 linkto(var_0);
@@ -547,16 +565,18 @@ elevator_movement() {
   wait 0.05;
   var_22 = getaiarray("axis");
 
-  foreach(var_24 in var_22)
+  foreach(var_24 in var_22) {
   var_24 delete();
+  }
 
   common_scripts\utility::array_thread(level.allies, maps\_utility::disable_arrivals);
   common_scripts\utility::array_thread(level.allies, maps\_utility::disable_exits);
   common_scripts\utility::array_thread(level.allies, maps\_utility::set_ignoreall, 1);
   common_scripts\utility::array_thread(level.allies, maps\_utility::set_ignoreme, 1);
 
-  foreach(var_27 in level.allies)
+  foreach(var_27 in level.allies) {
   var_27.alertlevel = "noncombat";
+  }
 
   wait 0.05;
   thread elevator_anims(var_3, var_4);
@@ -581,8 +601,9 @@ elevator_movement() {
   thread maps\clockwork_audio::elevator();
   maps\clockwork_code::screenshakefade(0.05, 0.5);
 
-  foreach(var_27 in level.allies)
+  foreach(var_27 in level.allies) {
   var_27.alertlevel = "noncombat";
+  }
 
   common_scripts\utility::flag_wait("elevator_enemies_start");
   maps\_utility::autosave_by_name("holdfire");
@@ -675,8 +696,9 @@ ally_on_stairs(var_0) {
   var_1 = self.run_overrideanim;
   maps\_utility::clear_generic_run_anim();
 
-  while(self istouching(var_0))
+  while(self istouching(var_0)) {
     common_scripts\utility::waitframe();
+  }
 
   if(isDefined(var_1)) {
     self.alwaysrunforward = 1;
@@ -689,12 +711,14 @@ ally_on_stairs(var_0) {
 }
 
 anyone_touching_blocker(var_0) {
-  if(level.player istouching(var_0))
+  if(level.player istouching(var_0)) {
     return 1;
+  }
 
   foreach(var_2 in level.allies) {
-    if(var_2 istouching(var_0))
+    if(var_2 istouching(var_0)) {
       return 1;
+    }
   }
 
   return 0;
@@ -724,8 +748,9 @@ baker_enter(var_0) {
   var_0 maps\_anim::anim_single_solo(level.allies[0], "enter_ele_mer");
   common_scripts\utility::flag_set("in_elevator_ally_01");
 
-  if(!common_scripts\utility::flag("start_chaos"))
+  if(!common_scripts\utility::flag("start_chaos")) {
     var_0 maps\_anim::anim_loop_solo(level.allies[0], "wait_ele_mer", "end_loop");
+  }
 }
 
 keegan_enter(var_0) {
@@ -734,8 +759,9 @@ keegan_enter(var_0) {
   var_0 maps\_anim::anim_single_solo(level.allies[1], "enter_ele_kee");
   common_scripts\utility::flag_set("in_elevator_ally_02");
 
-  if(!common_scripts\utility::flag("start_chaos"))
+  if(!common_scripts\utility::flag("start_chaos")) {
     var_0 maps\_anim::anim_loop_solo(level.allies[1], "wait_ele_kee", "end_loop");
+  }
 }
 
 cypher_enter(var_0) {
@@ -744,8 +770,9 @@ cypher_enter(var_0) {
   var_0 maps\_anim::anim_single_solo(level.allies[2], "enter_ele_cyp");
   common_scripts\utility::flag_set("in_elevator_ally_03");
 
-  if(!common_scripts\utility::flag("start_chaos"))
+  if(!common_scripts\utility::flag("start_chaos")) {
     var_0 maps\_anim::anim_loop_solo(level.allies[2], "wait_ele_cyp", "end_loop");
+  }
 }
 
 elevator_anims(var_0, var_1) {
@@ -767,48 +794,59 @@ elevator_anims(var_0, var_1) {
   var_5 maps\_utility::gun_remove();
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
-    if(isDefined(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isalive(var_2)) {
       var_1 thread maps\_anim::anim_single_solo(var_2, "exit_ele_g1");
+    }
 
-    if(isDefined(var_3) && isalive(var_3))
+    if(isDefined(var_3) && isalive(var_3)) {
       var_1 thread maps\_anim::anim_single_solo(var_3, "exit_ele_g2");
+    }
 
-    if(isDefined(var_5) && isalive(var_5))
+    if(isDefined(var_5) && isalive(var_5)) {
       var_1 thread maps\_anim::anim_loop_solo(var_5, "rev_ele_vic");
+    }
 
-    if(isDefined(var_4) && isalive(var_4))
+    if(isDefined(var_4) && isalive(var_4)) {
       var_1 maps\_anim::anim_single_solo(var_4, "exit_ele_g3");
+    }
   } else {
     level.allies[0] maps\_utility::anim_stopanimscripted();
     level.allies[1] maps\_utility::anim_stopanimscripted();
     level.allies[2] maps\_utility::anim_stopanimscripted();
 
-    if(isDefined(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isalive(var_2)) {
       maps\clockwork_code::reassign_goal_volume(var_2, "chaos_lab_vol");
+    }
 
-    if(isDefined(var_3) && isalive(var_3))
+    if(isDefined(var_3) && isalive(var_3)) {
       maps\clockwork_code::reassign_goal_volume(var_3, "chaos_lab_vol");
+    }
 
-    if(isDefined(var_4) && isalive(var_4))
+    if(isDefined(var_4) && isalive(var_4)) {
       maps\clockwork_code::reassign_goal_volume(var_4, "chaos_vault_vol");
+    }
   }
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
-    if(isDefined(var_4) && isalive(var_4))
+    if(isDefined(var_4) && isalive(var_4)) {
       var_1 thread maps\_anim::anim_loop_solo(var_4, "rev_ele_g3");
+    }
   } else {
     level.allies[0] maps\_utility::anim_stopanimscripted();
     level.allies[1] maps\_utility::anim_stopanimscripted();
     level.allies[2] maps\_utility::anim_stopanimscripted();
 
-    if(isDefined(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isalive(var_2)) {
       maps\clockwork_code::reassign_goal_volume(var_2, "chaos_lab_vol");
+    }
 
-    if(isDefined(var_3) && isalive(var_3))
+    if(isDefined(var_3) && isalive(var_3)) {
       maps\clockwork_code::reassign_goal_volume(var_3, "chaos_lab_vol");
+    }
 
-    if(isDefined(var_4) && isalive(var_4))
+    if(isDefined(var_4) && isalive(var_4)) {
       maps\clockwork_code::reassign_goal_volume(var_4, "chaos_vault_vol");
+    }
   }
 
   common_scripts\utility::flag_set("ele_anim_done");
@@ -818,42 +856,52 @@ elevator_anims(var_0, var_1) {
     var_7 = getnode("elevator_node_2", "targetname");
     var_8 = getnode("chaos_end_of_hall_node1", "targetname");
 
-    if(isDefined(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isalive(var_2)) {
       var_2 setgoalnode(var_7);
+    }
 
-    if(isDefined(var_3) && isalive(var_3))
+    if(isDefined(var_3) && isalive(var_3)) {
       var_3 setgoalnode(var_6);
+    }
 
-    if(isDefined(var_4) && isalive(var_4))
+    if(isDefined(var_4) && isalive(var_4)) {
       var_4 setgoalnode(var_8);
+    }
   } else {
     level.allies[0] maps\_utility::anim_stopanimscripted();
     level.allies[1] maps\_utility::anim_stopanimscripted();
     level.allies[2] maps\_utility::anim_stopanimscripted();
 
-    if(isDefined(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isalive(var_2)) {
       maps\clockwork_code::reassign_goal_volume(var_2, "chaos_lab_vol");
+    }
 
-    if(isDefined(var_3) && isalive(var_3))
+    if(isDefined(var_3) && isalive(var_3)) {
       maps\clockwork_code::reassign_goal_volume(var_3, "chaos_lab_vol");
+    }
 
-    if(isDefined(var_4) && isalive(var_4))
+    if(isDefined(var_4) && isalive(var_4)) {
       maps\clockwork_code::reassign_goal_volume(var_4, "chaos_vault_vol");
+    }
   }
 
   common_scripts\utility::flag_wait("spawn_more_chaos1");
 
-  if(isDefined(var_2) && isalive(var_2))
+  if(isDefined(var_2) && isalive(var_2)) {
     var_2 delete();
+  }
 
-  if(isDefined(var_3) && isalive(var_3))
+  if(isDefined(var_3) && isalive(var_3)) {
     var_3 delete();
+  }
 
-  if(isDefined(var_4) && isalive(var_4))
+  if(isDefined(var_4) && isalive(var_4)) {
     var_4 delete();
+  }
 
-  if(isDefined(var_5) && isalive(var_5))
+  if(isDefined(var_5) && isalive(var_5)) {
     var_5 delete();
+  }
 }
 
 limp() {
@@ -877,8 +925,9 @@ limp() {
     var_4 = var_3 / level.player_speed;
     var_5 = randomfloatrange(0.5, 2);
 
-    if(randomint(100) < 20)
+    if(randomint(100) < 20) {
       var_5 = var_5 * 3;
+    }
 
     var_6 = randomfloatrange(0.5, 2);
     var_7 = randomfloatrange(-2, 0);
@@ -888,8 +937,9 @@ limp() {
     var_10 = randomfloatrange(0.55, 0.65);
     var_0++;
 
-    if(var_4 > 1.3)
+    if(var_4 > 1.3) {
       var_0++;
+    }
 
     thread stumble(var_8, var_9, var_10);
     level waittill("recovered");
@@ -897,8 +947,9 @@ limp() {
 
   level.player playersetgroundreferenceent(undefined);
 
-  if(!common_scripts\utility::flag("exfil_fire_fail"))
+  if(!common_scripts\utility::flag("exfil_fire_fail")) {
     thread maps\clockwork_code::blend_movespeedscale_custom(50, 1);
+  }
 }
 
 stumble(var_0, var_1, var_2, var_3) {
@@ -911,8 +962,9 @@ stumble(var_0, var_1, var_2, var_3) {
   level.ground_ref_ent rotateto(var_4, var_2, 0, var_2 / 2);
   level.ground_ref_ent waittill("rotatedone");
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     level notify("recovered");
+  }
 }
 
 adjust_angles_to_player(var_0) {
@@ -946,8 +998,9 @@ chaos_kill_player() {
 }
 
 add_to_agressive_cleanup(var_0) {
-  if(!isDefined(level.aggressive_cleanup))
+  if(!isDefined(level.aggressive_cleanup)) {
     level.aggressive_cleanup = [];
+  }
 
   level.aggressive_cleanup[level.aggressive_cleanup.size] = var_0;
 }
@@ -958,8 +1011,9 @@ security_room_transition() {
   thread maps\clockwork_code::blend_movespeedscale_custom(50, 1);
   thread maps\clockwork_fx::turn_effects_on("tubelight_parking", "fx/lights/lights_flourescent");
 
-  if(!common_scripts\utility::flag("lights_on"))
+  if(!common_scripts\utility::flag("lights_on")) {
     thread maps\clockwork_interior_nvg::nvg_area_lights_on_fx();
+  }
 
   common_scripts\utility::exploder(300);
   thread maps\_utility::autosave_now();
@@ -992,11 +1046,13 @@ security_room_transition() {
     var_5.animname = "generic";
     var_1 thread maps\_anim::anim_loop_solo(var_5, "typer_start");
   } else {
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       maps\clockwork_code::reassign_goal_volume(var_4, "chaos_security_vol");
+    }
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       maps\clockwork_code::reassign_goal_volume(var_5, "chaos_security_vol");
+    }
   }
 
   common_scripts\utility::flag_wait("chaos_upstairs_anims");
@@ -1013,19 +1069,22 @@ security_room_transition() {
   common_scripts\utility::flag_set("chaos_finished");
   common_scripts\utility::flag_wait("spawn_jeeps");
 
-  if(isalive(var_5) || isDefined(var_5))
+  if(isalive(var_5) || isDefined(var_5)) {
     var_5 delete();
+  }
 }
 
 reassign_typer(var_0, var_1) {
   common_scripts\utility::flag_wait("exfil_fire_fail");
 
   if(!common_scripts\utility::flag("spawn_jeeps")) {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       maps\clockwork_code::reassign_goal_volume(var_0, "chaos_security_vol");
+    }
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       maps\clockwork_code::reassign_goal_volume(var_1, "chaos_security_vol");
+    }
   }
 }
 
@@ -1040,8 +1099,9 @@ walkout_vo() {
   thread maps\clockwork_code::radio_dialog_add_and_go("clockwork_oby_suggestyoustartmoving");
   common_scripts\utility::flag_wait("spawn_more_chaos1");
 
-  if(isDefined(level.heyyouguy))
+  if(isDefined(level.heyyouguy)) {
     level.heyyouguy thread maps\clockwork_code::char_dialog_add_and_go("clockwork_saf1_heyyouwhatyou");
+  }
 
   wait 2;
   level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_mrk_weneedtosecure");
@@ -1138,50 +1198,62 @@ runnerguys() {
 
   common_scripts\utility::flag_wait("spawn_more_chaos1");
 
-  if(isalive(var_3))
+  if(isalive(var_3)) {
     var_3 delete();
+  }
 
-  if(isalive(var_4))
+  if(isalive(var_4)) {
     var_4 delete();
+  }
 
-  if(isalive(var_5))
+  if(isalive(var_5)) {
     var_5 delete();
+  }
 
-  if(isalive(var_2) || isDefined(var_2))
+  if(isalive(var_2) || isDefined(var_2)) {
     var_2 delete();
+  }
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     var_1 delete();
+  }
 
   common_scripts\utility::flag_wait("spawn_jeeps");
 
-  if(isalive(var_0) || isDefined(var_0))
+  if(isalive(var_0) || isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 reassign_runners(var_0, var_1, var_2, var_3, var_4, var_5) {
   common_scripts\utility::flag_wait("exfil_fire_fail");
 
   if(!common_scripts\utility::flag("spawn_more_chaos1")) {
-    if(isalive(var_3))
+    if(isalive(var_3)) {
       maps\clockwork_code::reassign_goal_volume(var_3, "chaos_lab_vol");
+    }
 
-    if(isalive(var_4))
+    if(isalive(var_4)) {
       maps\clockwork_code::reassign_goal_volume(var_4, "chaos_lab_vol");
+    }
 
-    if(isalive(var_5))
+    if(isalive(var_5)) {
       maps\clockwork_code::reassign_goal_volume(var_5, "chaos_lab_vol");
+    }
   }
 
   if(!common_scripts\utility::flag("spawn_jeeps")) {
-    if(isalive(var_0))
+    if(isalive(var_0)) {
       maps\clockwork_code::reassign_goal_volume(var_0, "chaos_vault_vol");
+    }
 
-    if(isalive(var_1))
+    if(isalive(var_1)) {
       maps\clockwork_code::reassign_goal_volume(var_1, "chaos_vault_vol");
+    }
 
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       maps\clockwork_code::reassign_goal_volume(var_2, "chaos_vault_vol");
+    }
   }
 }
 
@@ -1232,17 +1304,21 @@ vaultguys() {
 
   common_scripts\utility::flag_wait("chaos_upstairs_anims");
 
-  if(isalive(var_3))
+  if(isalive(var_3)) {
     var_3 delete();
+  }
 
-  if(isalive(var_4))
+  if(isalive(var_4)) {
     var_4 delete();
+  }
 
-  if(isalive(var_5))
+  if(isalive(var_5)) {
     var_5 delete();
+  }
 
-  if(isalive(var_6))
+  if(isalive(var_6)) {
     var_6 delete();
+  }
 
   if(!isDefined(level.physlaunchoccurred)) {
     level.physlaunchoccurred = 1;
@@ -1269,11 +1345,13 @@ reassign_vault_guys(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(!common_scripts\utility::flag("chaos_upstairs_anims") && !isDefined(level.physlaunchoccurred)) {
     level.physlaunchoccurred = 1;
 
-    if(isalive(var_0))
+    if(isalive(var_0)) {
       var_0 kill();
+    }
 
-    if(isalive(var_1))
+    if(isalive(var_1)) {
       var_1 kill();
+    }
 
     if(isalive(var_2)) {
       var_2 maps\_utility::anim_stopanimscripted();
@@ -1342,10 +1420,12 @@ tendwounded() {
   common_scripts\utility::flag_wait_any("chaos_upstairs_anims", "exfil_fire_fail");
 
   if(isalive(var_2)) {
-    if(!common_scripts\utility::flag("chaos_upstairs_anims"))
+    if(!common_scripts\utility::flag("chaos_upstairs_anims")) {
       var_2 kill();
-    else
+    }
+    else {
       var_2 delete();
+    }
   }
 }
 
@@ -1353,8 +1433,9 @@ meetuptalkscene() {
   var_0 = common_scripts\utility::getstruct("chaos_dont_look", "targetname");
   var_1 = common_scripts\utility::getstruct("chaos_meetup_location", "targetname");
 
-  while(common_scripts\utility::within_fov(level.player.origin, level.player.angles, var_0.origin, cos(65)))
+  while(common_scripts\utility::within_fov(level.player.origin, level.player.angles, var_0.origin, cos(65))) {
     common_scripts\utility::waitframe();
+  }
 
   var_2 = undefined;
   var_3 = maps\_utility::spawn_targetname("chaos_meetup_followed");
@@ -1377,21 +1458,25 @@ meetuptalkscene() {
 
   common_scripts\utility::flag_wait("chaos_upstairs_anims");
 
-  if(isalive(var_2))
+  if(isalive(var_2)) {
     var_2 delete();
+  }
 
-  if(isalive(var_3))
+  if(isalive(var_3)) {
     var_3 delete();
+  }
 }
 
 reassign_meetup(var_0, var_1) {
   common_scripts\utility::flag_wait("exfil_fire_fail");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 maps\_utility::enable_ai_color();
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 maps\_utility::enable_ai_color();
+  }
 }
 
 meetup_vo(var_0, var_1) {
@@ -1437,35 +1522,42 @@ drag_interrogate_scene() {
 
   common_scripts\utility::flag_wait("chaos_upstairs_anims");
 
-  if(isalive(var_3))
+  if(isalive(var_3)) {
     var_3 delete();
+  }
 
-  if(isalive(var_6))
+  if(isalive(var_6)) {
     var_6 delete();
+  }
 
-  if(isalive(var_4))
+  if(isalive(var_4)) {
     var_4 delete();
+  }
 
-  if(isalive(var_5))
+  if(isalive(var_5)) {
     var_5 delete();
+  }
 }
 
 reassign_interrogate(var_0, var_1, var_2, var_3) {
   common_scripts\utility::flag_wait("exfil_fire_fail");
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 maps\_utility::enable_ai_color();
+  }
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     var_1 maps\_utility::enable_ai_color();
+  }
 
   if(isalive(var_2)) {
     var_2 maps\_utility::gun_recall();
     var_2 maps\_utility::enable_ai_color();
   }
 
-  if(isalive(var_3))
+  if(isalive(var_3)) {
     var_3 maps\_utility::enable_ai_color();
+  }
 }
 
 drag_interrogate_vo(var_0, var_1) {
@@ -1509,23 +1601,29 @@ computer_guys_runin_vo(var_0) {
   var_0 endon("death");
   wait 3;
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 maps\clockwork_code::char_dialog_add_and_go("clockwork_sc1_shotmonitor");
+  }
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 maps\clockwork_code::char_dialog_add_and_go("clockwork_sc2_password");
+  }
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 maps\clockwork_code::char_dialog_add_and_go("clockwork_sc1_vodka");
+  }
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 maps\clockwork_code::char_dialog_add_and_go("clockwork_sc2_blockingme");
+  }
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 maps\clockwork_code::char_dialog_add_and_go("clockwork_sc1_seeanything");
+  }
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     var_0 maps\clockwork_code::char_dialog_add_and_go("clockwork_sc2_toomuchsmoke");
+  }
 }
 
 help_near_comps() {
@@ -1533,8 +1631,9 @@ help_near_comps() {
   var_1 = common_scripts\utility::getstruct("chaos_bug_find_scene", "targetname");
   var_2 = common_scripts\utility::getstruct("chaos_help_near_comp_struct", "targetname");
 
-  while(common_scripts\utility::within_fov(level.player.origin, level.player.angles, var_0.origin, cos(65)))
+  while(common_scripts\utility::within_fov(level.player.origin, level.player.angles, var_0.origin, cos(65))) {
     common_scripts\utility::waitframe();
+  }
 
   var_3 = maps\_utility::spawn_targetname("chaos_hurt_near_comp");
   var_4 = maps\_utility::spawn_targetname("chaos_help_near_comp");
@@ -1566,24 +1665,29 @@ help_near_comps() {
 
   common_scripts\utility::flag_wait("spawn_jeeps");
 
-  if(isalive(var_4))
+  if(isalive(var_4)) {
     var_4 delete();
+  }
 
-  if(isalive(var_3))
+  if(isalive(var_3)) {
     var_3 delete();
+  }
 }
 
 reassign_comps(var_0, var_1, var_2) {
   common_scripts\utility::flag_wait("exfil_fire_fail");
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     var_1 kill();
+  }
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     maps\clockwork_code::reassign_goal_volume(var_0, "chaos_security_vol");
+  }
 
-  if(isalive(var_2))
+  if(isalive(var_2)) {
     maps\clockwork_code::reassign_goal_volume(var_2, "chaos_security_vol");
+  }
 }
 
 help_vo(var_0, var_1) {
@@ -1593,8 +1697,9 @@ help_vo(var_0, var_1) {
   var_0 maps\clockwork_code::char_dialog_add_and_go("clockwork_sc1_help");
   var_0 maps\clockwork_code::char_dialog_add_and_go("clockwork_sc1_intheknee");
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     var_1 maps\clockwork_code::char_dialog_add_and_go("clockwork_rs2_seeattackers");
+  }
 
   var_0 maps\clockwork_code::char_dialog_add_and_go("clockwork_sc1_sawflashes");
 }
@@ -1614,30 +1719,36 @@ bugfinders() {
     var_0 thread maps\_anim::anim_single_solo(var_1, "bug_finder");
     var_0 maps\_anim::anim_single_solo(var_2, "bug_finder2");
 
-    if(isalive(var_1))
+    if(isalive(var_1)) {
       var_0 thread maps\_anim::anim_loop_solo(var_1, "bug_finder_loop");
+    }
 
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       var_0 thread maps\_anim::anim_loop_solo(var_2, "bug_finder_loop2");
+    }
   }
 
   common_scripts\utility::flag_wait("spawn_jeeps");
 
-  if(isalive(var_1) || isDefined(var_1))
+  if(isalive(var_1) || isDefined(var_1)) {
     var_1 delete();
+  }
 
-  if(isalive(var_2) || isDefined(var_2))
+  if(isalive(var_2) || isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 reassign_bug(var_0, var_1) {
   common_scripts\utility::flag_wait("exfil_fire_fail");
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     maps\clockwork_code::reassign_goal_volume(var_0, "chaos_security_vol");
+  }
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     maps\clockwork_code::reassign_goal_volume(var_1, "chaos_security_vol");
+  }
 }
 
 bug_finders_vo(var_0, var_1) {
@@ -1673,14 +1784,16 @@ cypher_helps_out() {
     var_1.moveplaybackrate = 1;
     level.allies[2].moveplaybackrate = 1;
 
-    if(isalive(var_1))
+    if(isalive(var_1)) {
       var_0 thread maps\_anim::anim_loop_solo(var_1, "helpee_exit_loop");
+    }
   }
 
   common_scripts\utility::flag_wait("spawn_jeeps");
 
-  if(isalive(var_1) || isDefined(var_1))
+  if(isalive(var_1) || isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 cypher_helps_out_vo(var_0, var_1) {
@@ -1712,8 +1825,9 @@ chaos_walkers() {
   var_0 = maps\_utility::spawn_targetname("chaos_walkers_pointer");
   var_0.animname = "generic";
 
-  if(!common_scripts\utility::flag("exfil_fire_fail"))
+  if(!common_scripts\utility::flag("exfil_fire_fail")) {
     var_0 thread maps\_anim::anim_single_solo(var_0, "pointer_start");
+  }
 
   wait 2;
   var_1 = getEntArray("chaos_walkers", "targetname");
@@ -1747,8 +1861,9 @@ waver_moment() {
 
   common_scripts\utility::flag_wait("exfil_fire_fail");
 
-  if(isalive(var_0))
+  if(isalive(var_0)) {
     maps\clockwork_code::reassign_goal_volume(var_0, "chaos_security_vol");
+  }
 }
 
 commander_moment() {
@@ -1788,11 +1903,13 @@ commander_moment() {
       var_6.origin = var_2.origin;
       var_6.angles = var_2.angles;
 
-      if(isDefined(var_4) && isalive(var_4))
+      if(isDefined(var_4) && isalive(var_4)) {
         var_2 thread maps\_anim::anim_loop_solo(var_4, "cha_handler_react", "secloop");
+      }
 
-      if(isDefined(var_5) && isalive(var_5))
+      if(isDefined(var_5) && isalive(var_5)) {
         var_2 thread maps\_anim::anim_loop_solo(var_5, "cha_dog_react", "secloop");
+      }
     }
   }
 
@@ -1808,8 +1925,9 @@ reassign_commander(var_0, var_1) {
     maps\clockwork_code::reassign_goal_volume(var_0, "chaos_exit_vol");
   }
 
-  if(isalive(var_1))
+  if(isalive(var_1)) {
     maps\clockwork_code::reassign_goal_volume(var_1, "chaos_exit_vol");
+  }
 }
 
 barkingdog_handle_stealth_break(var_0) {
@@ -1850,21 +1968,25 @@ direction_group_dog() {
 
   common_scripts\utility::flag_wait("spawn_jeeps");
 
-  if(isalive(var_0) || isDefined(var_0))
+  if(isalive(var_0) || isDefined(var_0)) {
     var_0 delete();
+  }
 
-  if(isalive(var_1) || isDefined(var_1))
+  if(isalive(var_1) || isDefined(var_1)) {
     var_1 delete();
+  }
 }
 
 reassign_dog_group(var_0, var_1) {
   common_scripts\utility::flag_wait("exfil_fire_fail");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     maps\clockwork_code::reassign_goal_volume(var_0, "chaos_exit_vol");
+  }
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     maps\clockwork_code::reassign_goal_volume(var_1, "chaos_exit_vol");
+  }
 }
 
 direction_group() {
@@ -1932,8 +2054,9 @@ commander_vo(var_0, var_1) {
 
     allies_move_to_jeep();
   } else {
-    foreach(var_3 in level.allies)
+    foreach(var_3 in level.allies) {
     var_3 maps\_utility::enable_ai_color();
+    }
   }
 }
 
@@ -1985,19 +2108,23 @@ carry_in() {
     var_0 thread maps\_anim::anim_single_solo(var_1, "carrier_sin");
     var_0 maps\_anim::anim_single_solo(var_2, "carried_sin");
 
-    if(isalive(var_1) && !common_scripts\utility::flag("exfil_fire_fail"))
+    if(isalive(var_1) && !common_scripts\utility::flag("exfil_fire_fail")) {
       var_0 thread maps\_anim::anim_loop_solo(var_1, "carrier_loop");
+    }
 
-    if(isalive(var_2) && !common_scripts\utility::flag("exfil_fire_fail"))
+    if(isalive(var_2) && !common_scripts\utility::flag("exfil_fire_fail")) {
       var_0 thread maps\_anim::anim_loop_solo(var_2, "carried_loop");
+    }
 
     common_scripts\utility::flag_wait("spawn_jeeps");
 
-    if(isalive(var_1) || isDefined(var_1))
+    if(isalive(var_1) || isDefined(var_1)) {
       var_1 delete();
+    }
 
-    if(isalive(var_2) || isDefined(var_2))
+    if(isalive(var_2) || isDefined(var_2)) {
       var_2 delete();
+    }
   }
 }
 
@@ -2017,18 +2144,21 @@ dieing_revival() {
     var_4 maps\_utility::gun_remove();
     thread dieingrevival_vo(var_4);
 
-    if(isalive(var_4))
+    if(isalive(var_4)) {
       var_2 thread maps\_anim::anim_loop_solo(var_4, "dc_burning_cpr_medic_endidle", "doctor_wakeup");
+    }
   }
 
   var_0 thread maps\_anim::anim_loop_solo(var_5, "dc_burning_cpr_wounded_endidle");
   common_scripts\utility::flag_wait("spawn_jeeps");
 
-  if(isalive(var_4) || isDefined(var_4))
+  if(isalive(var_4) || isDefined(var_4)) {
     var_4 delete();
+  }
 
-  if(isalive(var_5) || isDefined(var_5))
+  if(isalive(var_5) || isDefined(var_5)) {
     var_5 delete();
+  }
 }
 
 dieingrevival_vo(var_0) {
@@ -2085,8 +2215,9 @@ in_to_jeep() {
   level.startjeep = maps\_vehicle::spawn_vehicle_from_targetname("enemy_jeep_start2");
 
   foreach(var_4 in var_2) {
-    if(isalive(var_4) && isDefined(var_4.script_startingposition))
+    if(isalive(var_4) && isDefined(var_4.script_startingposition)) {
       var_4 thread waittoturnlightson(level.startjeep);
+    }
   }
 
   var_6 = maps\_vehicle::spawn_vehicle_from_targetname("enemy_jeep_start3");
@@ -2209,8 +2340,9 @@ in_to_jeep() {
     wait 0.1;
   }
 
-  if(!common_scripts\utility::flag("exfil_fire_fail"))
+  if(!common_scripts\utility::flag("exfil_fire_fail")) {
     level.allies[0] thread maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_waitformysignal");
+  }
 
   thread maps\clockwork_audio::chase_player();
 
@@ -2234,8 +2366,9 @@ in_to_jeep() {
   var_15 = getEntArray("chaos_patrollers", "script_noteworthy");
 
   foreach(var_4 in var_15) {
-    if(isalive(var_4))
+    if(isalive(var_4)) {
       var_4 delete();
+    }
   }
 
   wait 2;
@@ -2252,8 +2385,9 @@ in_to_jeep() {
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
     thread handle_sneak_vo();
 
-    foreach(var_4 in var_21)
+    foreach(var_4 in var_21) {
     var_4 maps\clockwork_code::fast_walk(1);
+    }
   } else {
     thread wakeup_enemies(var_19);
     thread wakeup_enemies(var_20);
@@ -2266,8 +2400,9 @@ in_to_jeep() {
 
   common_scripts\utility::flag_wait("exfil_door_close_start");
 
-  if(isalive(var_7))
+  if(isalive(var_7)) {
     var_7 delete();
+  }
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
     thread skip_to_end(var_1, var_13, var_21, var_19, var_20);
@@ -2288,8 +2423,9 @@ vehicle_stop_load_fail(var_0) {
   common_scripts\utility::flag_wait("exfil_fire_fail");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2) && isalive(var_2) && !isDefined(var_2.boarding_vehicle))
+    if(isDefined(var_2) && isalive(var_2) && !isDefined(var_2.boarding_vehicle)) {
       var_2 notify("stop_loading");
+    }
   }
 }
 
@@ -2325,22 +2461,25 @@ punchit_start(var_0) {
   var_1 = getEntArray("stop_guy", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-    if(isalive(var_3))
+    if(isalive(var_3)) {
       level.stopguy1 = var_3;
+    }
   }
 
   var_5 = getEntArray("stop_guy2", "script_noteworthy");
 
   foreach(var_3 in var_5) {
-    if(isalive(var_3))
+    if(isalive(var_3)) {
       level.stopguy2 = var_3;
+    }
   }
 
   var_8 = getEntArray("stop_guy3", "script_noteworthy");
 
   foreach(var_3 in var_8) {
-    if(isalive(var_3))
+    if(isalive(var_3)) {
       level.stopguy3 = var_3;
+    }
   }
 
   var_11 = common_scripts\utility::getstruct("punchit_scene", "targetname");
@@ -2407,8 +2546,9 @@ punchit_end(var_0, var_1, var_2, var_3, var_4) {
   level.skiptoend = 1;
   var_5 = common_scripts\utility::getstruct("punchit_scene", "targetname");
 
-  if(!common_scripts\utility::flag("exfil_fire_fail"))
+  if(!common_scripts\utility::flag("exfil_fire_fail")) {
     thread punchit_jeeps(var_0, var_5);
+  }
 
   if(level.startjeep.riders[0].script_startingposition == 0) {
     if(isDefined(level.startjeep.riders[0]) && isDefined(level.startjeep.riders[1])) {
@@ -2463,8 +2603,9 @@ punchit_end(var_0, var_1, var_2, var_3, var_4) {
   var_1 rotateyaw(-90, 12, 8, 1);
 
   foreach(var_7 in var_2) {
-    if(isDefined(var_7))
+    if(isDefined(var_7)) {
       var_7 maps\clockwork_code::fast_walk(0);
+    }
   }
 
   if(isalive(var_3[0])) {
@@ -2529,14 +2670,17 @@ baker_anim() {
   thread baker_in_to_jeep_anim();
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
-    if(!common_scripts\utility::flag("start_exfil_ride") && !common_scripts\utility::flag("exfil_fire_fail"))
+    if(!common_scripts\utility::flag("start_exfil_ride") && !common_scripts\utility::flag("exfil_fire_fail")) {
       level.playerjeep maps\_anim::anim_reach_solo(level.allies[0], "garage_enter");
+    }
 
-    if(!common_scripts\utility::flag("start_exfil_ride") && !common_scripts\utility::flag("exfil_fire_fail"))
+    if(!common_scripts\utility::flag("start_exfil_ride") && !common_scripts\utility::flag("exfil_fire_fail")) {
       level.playerjeep maps\_anim::anim_single_solo(level.allies[0], "garage_enter");
+    }
 
-    if(!common_scripts\utility::flag("start_exfil_ride") && !common_scripts\utility::flag("exfil_fire_fail"))
+    if(!common_scripts\utility::flag("start_exfil_ride") && !common_scripts\utility::flag("exfil_fire_fail")) {
       level.playerjeep thread maps\_anim::anim_loop_solo(level.allies[0], "garage_loop", "end_loop");
+    }
   }
 
   common_scripts\utility::flag_wait("exfil_fire_fail");
@@ -2551,10 +2695,12 @@ baker_in_to_jeep_anim() {
   common_scripts\utility::flag_wait("start_exfil_ride");
   wait 1;
 
-  if(common_scripts\utility::flag("exfil_fire_fail"))
+  if(common_scripts\utility::flag("exfil_fire_fail")) {
     level.allies[0] maps\_utility::anim_stopanimscripted();
-  else
+  }
+  else {
     level.playerjeep notify("end_loop");
+  }
 
   var_0 = common_scripts\utility::getstruct("get_in_keegan", "targetname");
   var_1 = common_scripts\utility::getstruct("get_in_cipher", "targetname");
@@ -2582,8 +2728,9 @@ wakeup_enemies(var_0) {
       var_2.ignoreall = 0;
       var_2.ignoreme = 0;
 
-      if(isDefined(var_2) && !isDefined(var_2.script_drone) || var_2.script_drone == 0)
+      if(isDefined(var_2) && !isDefined(var_2.script_drone) || var_2.script_drone == 0) {
         var_2 setentitytarget(level.playerjeep);
+      }
     }
 
     wait 0.25;
@@ -2608,40 +2755,49 @@ handle_sneak_vo() {
   level.allies[1] thread maps\clockwork_code::char_dialog_add_and_go("clockwork_kgn_whatsgoingonup");
   wait 0.25;
 
-  if(isalive(level.stopguy2))
+  if(isalive(level.stopguy2)) {
     level.stopguy2 thread maps\clockwork_code::char_dialog_add_and_go("clockwork_saf1_wegottacheckeverybody");
+  }
 
   level.allies[1] maps\clockwork_code::char_dialog_add_and_go("clockwork_kgn_commandjustorderedus");
 
-  if(isalive(level.stopguy2))
+  if(isalive(level.stopguy2)) {
     level.stopguy2 thread maps\clockwork_code::char_dialog_add_and_go("clockwork_saf1_cmongetthemasks");
+  }
 
   level.allies[1] maps\clockwork_code::char_dialog_add_and_go("clockwork_kgn_wedonthavetime");
 
-  if(isDefined(level.stopguy2) && isalive(level.stopguy2))
+  if(isDefined(level.stopguy2) && isalive(level.stopguy2)) {
     level.stopguy2 maps\clockwork_code::char_dialog_add_and_go("clockwork_saf1_getthemasksoff");
+  }
 }
 
 handle_enemies_get_out_of_car() {
-  if(isalive(level.stopguy2))
+  if(isalive(level.stopguy2)) {
     level.stopguy2 thread maps\clockwork_code::char_dialog_add_and_go("clockwork_saf1_outofthecar");
+  }
 
   wait 1;
 
-  if(isalive(level.stopguy1))
+  if(isalive(level.stopguy1)) {
     level.stopguy1 maps\clockwork_code::char_dialog_add_and_go("clockwork_saf2_handsup");
+  }
 
-  if(isalive(level.stopguy2))
+  if(isalive(level.stopguy2)) {
     level.stopguy2 maps\clockwork_code::char_dialog_add_and_go("clockwork_saf1_dontmove");
+  }
 
-  if(isalive(level.stopguy2))
+  if(isalive(level.stopguy2)) {
     level.stopguy2 maps\clockwork_code::char_dialog_add_and_go("clockwork_saf1_youguysstopstop");
+  }
 
-  if(isalive(level.stopguy2))
+  if(isalive(level.stopguy2)) {
     level.stopguy2 maps\clockwork_code::char_dialog_add_and_go("clockwork_saf1_heycuttheengine");
+  }
 
-  if(isalive(level.stopguy2))
+  if(isalive(level.stopguy2)) {
     level.stopguy2 maps\clockwork_code::char_dialog_add_and_go("clockwork_saf1_letsgocmoncut");
+  }
 }
 
 crash_event() {
@@ -2654,15 +2810,17 @@ crash_event() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       var_2 delete();
+    }
   }
 
   wait 0.1;
   var_4 = maps\_utility::array_spawn_targetname("exfil_exterior_base", 1);
 
-  foreach(var_2 in var_4)
+  foreach(var_2 in var_4) {
   var_2 set_diff_accuracy();
+  }
 
   waittillframeend;
   level.enemy_jeep_follower1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("enemy_jeep_follower1");
@@ -2695,20 +2853,24 @@ crash_event() {
   var_8 = maps\_utility::get_living_ai_array("riders_exterior_delete", "script_noteworthy");
 
   foreach(var_2 in var_8) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 
   foreach(var_2 in var_4) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 
-  if(isalive(level.enemy_jeep_follower1))
+  if(isalive(level.enemy_jeep_follower1)) {
     level.enemy_jeep_follower1 delete();
+  }
 
-  if(isalive(level.enemy_jeep_follower2))
+  if(isalive(level.enemy_jeep_follower2)) {
     level.enemy_jeep_follower2 delete();
+  }
 }
 
 getinturret() {
@@ -2816,8 +2978,9 @@ canal_event() {
   wait 1.25;
   thread maps\clockwork_code::add_ice_radius(50, var_3.origin);
 
-  if(isalive(level.speedjeep))
+  if(isalive(level.speedjeep)) {
     level.speedjeep thread maps\clockwork_code::play_long_crash();
+  }
 
   var_2 = var_0[1].origin + (0, -60, 75);
   var_3 = common_scripts\utility::getstruct("rpg_target_ally_jeep", "targetname");
@@ -2826,14 +2989,16 @@ canal_event() {
   thread maps\clockwork_code::add_ice_radius(50, var_3.origin);
   common_scripts\utility::array_thread(var_0, maps\_utility::stop_magic_bullet_shield);
 
-  foreach(var_5 in var_0)
+  foreach(var_5 in var_0) {
   var_5 kill();
+  }
 
   level.allies[0] thread maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_shoottheice");
   var_7 = maps\_utility::array_spawn_targetname("exfil_exterior_tunnel", 1);
 
-  foreach(var_9 in var_7)
+  foreach(var_9 in var_7) {
   var_9 set_diff_accuracy();
+  }
 
   common_scripts\utility::flag_wait("spawn_tunnel_jeep");
   thread maps\clockwork_audio::chase_tunnel_jeep();
@@ -2848,8 +3013,9 @@ canal_event() {
   common_scripts\utility::flag_wait("en_jeep2_jump");
 
   foreach(var_9 in var_7) {
-    if(isDefined(var_9))
+    if(isDefined(var_9)) {
       var_9 delete();
+    }
   }
 }
 
@@ -2976,8 +3142,9 @@ bridge_event() {
   level.enemy_snowmobile[level.enemy_snowmobile.size - 1] maps\_vehicle::vehicle_lights_on("headlights");
   waittillframeend;
 
-  if(isalive(level.tankfire_spline_jeep))
+  if(isalive(level.tankfire_spline_jeep)) {
     level.tankfire_spline_jeep maps\_vehicle_spline_zodiac::wipeout("left behind!");
+  }
 
   wait 0.05;
 
@@ -3010,8 +3177,9 @@ new_cliff_moment() {
   level.iceblocker hide();
   level.enemy_snowmobile = maps\_utility::array_removedead(level.enemy_snowmobile);
 
-  foreach(var_1 in level.enemy_snowmobile)
+  foreach(var_1 in level.enemy_snowmobile) {
   var_1 maps\_vehicle_spline_zodiac::wipeout("left behind!");
+  }
 
   level.enemy_jeep_a[level.enemy_jeep_a.size] = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("enemy_jeep_cave1");
   waittillframeend;
@@ -3027,8 +3195,9 @@ new_cliff_moment() {
   thread enemy_jeep_group_fire();
   thread maps\clockwork_code::radio_dialog_add_and_go("clockwork_diz_vehiclesright");
 
-  if(isalive(level.player))
+  if(isalive(level.player)) {
     level.player lerpviewangleclamp(1.25, 0.5, 0.25, 45, 60, 30, 5);
+  }
 
   wait 6;
   level.endingjeep = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("enemy_jeep_collaspe1");
@@ -3041,13 +3210,15 @@ new_cliff_moment() {
   waittillframeend;
   level.lastsnow2 = thread maps\clockwork_code::spawn_enemy_bike_at_spawer("enemy_snowmobile_collaspe2");
 
-  if(isalive(level.player))
+  if(isalive(level.player)) {
     level.player lerpviewangleclamp(1.25, 0.5, 0.25, 45, 45, 30, 5);
+  }
 
   common_scripts\utility::flag_wait_or_timeout("kill_jeep_1", 6);
 
-  if(isalive(level.enemy_jeep_a[level.enemy_jeep_a.size - 1]) && isalive(level.enemy_jeep_a[level.enemy_jeep_a.size - 1].driver))
+  if(isalive(level.enemy_jeep_a[level.enemy_jeep_a.size - 1]) && isalive(level.enemy_jeep_a[level.enemy_jeep_a.size - 1].driver)) {
     level.enemy_jeep_a[level.enemy_jeep_a.size - 1].driver kill();
+  }
 
   common_scripts\utility::flag_wait_or_timeout("kill_jeep_2", 3);
 
@@ -3193,13 +3364,15 @@ playfx_for_tread() {
 stop_tread() {
   self waittill("kill_tread");
 
-  if(isalive(self))
+  if(isalive(self)) {
     self.conttread = 0;
+  }
 }
 
 playfx_for_player_tread() {
-  for(;;)
+  for(;;) {
     wait 0.25;
+  }
 }
 
 play_fx_for_sub() {
@@ -3335,8 +3508,9 @@ fire_fail_exfil_vo() {
 
   if(!common_scripts\utility::flag("start_exfil_ride")) {
     foreach(var_1 in level.allies) {
-      if(!isDefined(var_1.boarding_vehicle) || !var_1.boarding_vehicle)
+      if(!isDefined(var_1.boarding_vehicle) || !var_1.boarding_vehicle) {
         var_1 maps\_utility::anim_stopanimscripted();
+      }
     }
   }
 
@@ -3441,15 +3615,17 @@ exfil_alert_handle() {
     common_scripts\utility::flag_set("exfil_fire_fail");
   } else {
     if(common_scripts\utility::flag("exfil_fire_fail")) {
-      if(isDefined(self) && isalive(self))
+      if(isDefined(self) && isalive(self)) {
         self kill();
+      }
     }
 
     thread kill_drone();
     self waittill("death");
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       common_scripts\utility::flag_set("exfil_fire_fail");
+    }
   }
 }
 
@@ -3473,16 +3649,18 @@ wakeup_drone_kill() {
   self endon("Death");
   common_scripts\utility::flag_wait("exfil_fire_fail");
 
-  if(isDefined(self) && !isDefined(self.vehicle_position) && !isDefined(self.boarding_vehicle))
+  if(isDefined(self) && !isDefined(self.vehicle_position) && !isDefined(self.boarding_vehicle)) {
     maps\clockwork_code::enemy_stop_stealth();
+  }
 }
 
 kill_drone() {
   self endon("Death");
   common_scripts\utility::flag_wait("exfil_fire_fail");
 
-  if(isDefined(self) && isalive(self))
+  if(isDefined(self) && isalive(self)) {
     self kill();
+  }
 }
 
 kill_player() {
@@ -3513,8 +3691,9 @@ enemy_zodiacs_spawn_and_attack() {
     wait(var_0);
     var_0 = var_0 - 0.5;
 
-    if(var_0 < 0.5)
+    if(var_0 < 0.5) {
       var_0 = 0.5;
+    }
   }
 }
 
@@ -3586,8 +3765,9 @@ enemy_jeep_group_fire() {
 }
 
 jeeps_fire() {
-  foreach(var_1 in self.riders)
+  foreach(var_1 in self.riders) {
   var_1 thread jeep_ai(self);
+  }
 }
 
 jeep_ai(var_0) {
@@ -3622,8 +3802,9 @@ crash_vehicle_on_death() {
     if(isDefined(self) && isalive(self)) {
       var_5 = self.origin[2];
 
-      if(!common_scripts\utility::flag("start_icehole_shooting"))
+      if(!common_scripts\utility::flag("start_icehole_shooting")) {
         maps\clockwork_code::play_crash_anim(self.origin);
+      }
       else {
         var_6 = randomintrange(1, 3);
 
@@ -3649,8 +3830,9 @@ wipeout_bikes() {
   level.enemy_snowmobile = maps\_utility::array_removedead(level.enemy_snowmobile);
 
   if(level.enemy_snowmobile.size > 3) {
-    for(var_0 = 0; var_0 < level.enemy_snowmobile.size - 3; var_0++)
+    for(var_0 = 0; var_0 < level.enemy_snowmobile.size - 3; var_0++) {
       level.enemy_snowmobile[var_0] maps\_vehicle_spline_zodiac::wipeout("left behind!");
+    }
   }
 }
 
@@ -3662,8 +3844,9 @@ vehicle_play_guy_anim(var_0, var_1, var_2, var_3) {
   var_1 endon("death");
   maps\_anim::anim_single_solo(var_1, var_0, var_4.sittag);
 
-  if(!isDefined(var_3) || var_3 == 1)
+  if(!isDefined(var_3) || var_3 == 1) {
     maps\_vehicle_aianim::guy_idle(var_1, var_2);
+  }
 }
 
 anim_enter_finished(var_0) {
@@ -3781,10 +3964,12 @@ player_view_clamp() {
     var_2 = vectordot(var_1, var_0);
 
     if(isalive(level.player)) {
-      if(var_2 <= -0.5)
+      if(var_2 <= -0.5) {
         level.player lerpviewangleclamp(0, 0, 0, 180, 180, 30, 25);
-      else
+      }
+      else {
         level.player lerpviewangleclamp(0, 0, 0, 180, 180, 30, 5);
+      }
     }
 
     common_scripts\utility::waitframe();
@@ -3793,11 +3978,14 @@ player_view_clamp() {
 
 set_diff_accuracy() {
   if(isalive(self)) {
-    if(maps\_utility::getdifficulty() == "fu")
+    if(maps\_utility::getdifficulty() == "fu") {
       self.baseaccuracy = 0.4;
-    else if(maps\_utility::getdifficulty() == "hard")
+    }
+    else if(maps\_utility::getdifficulty() == "hard") {
       self.baseaccuracy = 0.35;
-    else
+    }
+    else {
       self.baseaccuracy = 0.3;
+    }
   }
 }

@@ -23,8 +23,9 @@ patrol(var_0, var_1, var_2) {
   self.script_patroller = 1;
   var_3 = "patrol_walk";
 
-  if(isDefined(self.patrol_walk_anim))
+  if(isDefined(self.patrol_walk_anim)) {
     var_3 = self.patrol_walk_anim;
+  }
 
   var_4 = isDefined(self.canpatrolturn) && self.canpatrolturn;
   maps\_utility::set_generic_run_anim(var_3, 1, !var_4);
@@ -36,8 +37,9 @@ patrol(var_0, var_1, var_2) {
   var_6[1] = maps\_utility::set_goal_ent;
   var_6[0] = maps\_utility::set_goal_node;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self.target = var_0;
+  }
 
   if(isDefined(self.target)) {
     var_7 = 1;
@@ -68,8 +70,9 @@ patrol(var_0, var_1, var_2) {
   var_12 = var_10;
 
   for(;;) {
-    while(isDefined(var_12.patrol_claimed))
+    while(isDefined(var_12.patrol_claimed)) {
       wait 0.05;
+    }
 
     var_10.patrol_claimed = undefined;
     var_10 = var_12;
@@ -78,10 +81,12 @@ patrol(var_0, var_1, var_2) {
     self.last_patrol_goal = var_10;
     [[var_6[var_11]]](var_10);
 
-    if(isDefined(var_10.radius) && var_10.radius > 0)
+    if(isDefined(var_10.radius) && var_10.radius > 0) {
       self.goalradius = var_10.radius;
-    else
+    }
+    else {
       self.goalradius = 32;
+    }
 
     self waittill("goal");
     var_10 notify("trigger", self);
@@ -96,8 +101,9 @@ patrol(var_0, var_1, var_2) {
         case "pause":
           var_14 = "patrol_idle_" + randomintrange(1, 6);
 
-          if(var_14 == "patrol_idle_2" && !can_smoke())
+          if(var_14 == "patrol_idle_2" && !can_smoke()) {
             var_14 = "patrol_idle_" + randomintrange(3, 6);
+          }
 
           maps\_anim::anim_generic(self, var_14);
           var_15 = "patrol_start";
@@ -110,8 +116,9 @@ patrol(var_0, var_1, var_2) {
         case "smoke":
           var_17 = "patrol_idle_smoke";
 
-          if(!can_smoke())
+          if(!can_smoke()) {
             var_17 = "patrol_idle_" + randomintrange(3, 6);
+          }
 
           maps\_anim::anim_generic(self, var_17);
           var_15 = "patrol_start";
@@ -138,8 +145,9 @@ patrol(var_0, var_1, var_2) {
       }
     }
 
-    if(isDefined(var_1) && var_1 == 1)
+    if(isDefined(var_1) && var_1 == 1) {
       self animmode("none");
+    }
 
     var_18 = var_10[[var_5[var_11][var_7]]]();
 
@@ -153,8 +161,9 @@ patrol(var_0, var_1, var_2) {
 }
 
 add_to_patrol_animation_list(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level.patrol_anims[var_0] = var_1;
+  }
 }
 
 init_patrol_animation_list() {
@@ -215,8 +224,9 @@ disable_patrol_turn() {
 }
 
 can_smoke() {
-  if(!isDefined(self.headmodel))
+  if(!isDefined(self.headmodel)) {
     return 0;
+  }
 
   switch (self.headmodel) {
     case "head_spetsnaz_assault_demetry_lob":
@@ -246,8 +256,9 @@ patrol_walk_twitch_loop() {
     wait(randomfloatrange(8, 20));
     var_0 = "patrol_walk_twitch";
 
-    if(isDefined(self.patrol_walk_twitch))
+    if(isDefined(self.patrol_walk_twitch)) {
       var_0 = self.patrol_walk_twitch;
+    }
 
     var_1 = isDefined(self.canpatrolturn) && self.canpatrolturn;
     maps\_utility::set_generic_run_anim(var_0, 1, !var_1);
@@ -255,8 +266,9 @@ patrol_walk_twitch_loop() {
     wait(var_2);
     var_0 = "patrol_walk";
 
-    if(isDefined(self.patrol_walk_anim))
+    if(isDefined(self.patrol_walk_anim)) {
       var_0 = self.patrol_walk_anim;
+    }
 
     maps\_utility::set_generic_run_anim(var_0, 1, !var_1);
   }
@@ -312,8 +324,9 @@ waittill_combat() {
 get_target_ents() {
   var_0 = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_0 = getEntArray(self.target, "targetname");
+  }
 
   return var_0;
 }
@@ -321,8 +334,9 @@ get_target_ents() {
 get_target_nodes() {
   var_0 = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_0 = getnodearray(self.target, "targetname");
+  }
 
   return var_0;
 }
@@ -336,8 +350,9 @@ get_linked_nodes() {
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_3 = getnode(var_1[var_2], "script_linkname");
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_0[var_0.size] = var_3;
+      }
     }
   }
 

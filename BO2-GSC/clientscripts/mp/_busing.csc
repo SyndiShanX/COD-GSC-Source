@@ -27,8 +27,9 @@ buscmdhandler(clientnum, state, oldstate) {
 
 updatebus() {
   while(true) {
-    if(level.activebusstate == level.nextbusstate)
+    if(level.activebusstate == level.nextbusstate) {
       level waittill("new_bus");
+    }
 
     if(level.activebusstate == level.nextbusstate) {
       continue;
@@ -38,8 +39,9 @@ updatebus() {
     busstatedeactivate();
     next = level.nextbusstate;
 
-    if(next != "")
+    if(next != "") {
       busstateactivate(next);
+    }
 
     level.activebusstate = next;
   }
@@ -86,16 +88,18 @@ busfadetime(time) {
 
 busisin(bus, names) {
   for(j = 0; j < names.size; j++) {
-    if(bus == names[j])
+    if(bus == names[j]) {
       return true;
+    }
   }
 
   return false;
 }
 
 busvolumes(names, value) {
-  for(j = 0; j < names.size; j++)
+  for(j = 0; j < names.size; j++) {
     busvolume(names[j], value);
+  }
 }
 
 busvolumeall(value) {
@@ -104,26 +108,33 @@ busvolumeall(value) {
 argsasdict(a, b, c, d, e, f, g) {
   names = [];
 
-  if(isDefined(a))
+  if(isDefined(a)) {
     names[0] = a;
+  }
 
-  if(isDefined(b))
+  if(isDefined(b)) {
     names[1] = b;
+  }
 
-  if(isDefined(c))
+  if(isDefined(c)) {
     names[2] = c;
+  }
 
-  if(isDefined(d))
+  if(isDefined(d)) {
     names[3] = d;
+  }
 
-  if(isDefined(e))
+  if(isDefined(e)) {
     names[4] = e;
+  }
 
-  if(isDefined(f))
+  if(isDefined(f)) {
     names[5] = f;
+  }
 
-  if(isDefined(g))
+  if(isDefined(g)) {
     names[6] = g;
+  }
 
   return names;
 }
@@ -133,8 +144,9 @@ busvolumesexcept(a, b, c, d, e, f, g) {
   value = args[args.size - 1];
   names = [];
 
-  for(i = 0; i < args.size - 1; i++)
+  for(i = 0; i < args.size - 1; i++) {
     names[i] = args[i];
+  }
 }
 
 registerdefaults() {

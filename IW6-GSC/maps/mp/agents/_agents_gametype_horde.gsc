@@ -156,8 +156,9 @@ highlightLastEnemies() {
 }
 
 onAgentKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration) {
-  if(!isOnHumanTeam(self))
+  if(!isOnHumanTeam(self)) {
     self hordeEnemyKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration);
+  }
 
   self HudOutlineDisable();
   self maps\mp\agents\_agents::on_humanoid_agent_killed_common(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration, false);
@@ -165,8 +166,9 @@ onAgentKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
 }
 
 onDogKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration) {
-  if(!isOnHumanTeam(self))
+  if(!isOnHumanTeam(self)) {
     self hordeEnemyKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration);
+  }
 
   self HudOutlineDisable();
   self maps\mp\killstreaks\_dog_killstreak::on_agent_dog_killed(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, timeOffset, deathAnimDuration);
@@ -201,17 +203,21 @@ trackIntelKills(sWeapon, sMeansOfDeath) {
   if(sWeapon == "none") {
     return;
   }
-  if(sMeansOfDeath == "MOD_MELEE")
+  if(sMeansOfDeath == "MOD_MELEE") {
     level.numMeleeKillsIntel++;
+  }
 
-  if(!isKillstreakWeapon(sWeapon) && (sMeansOfDeath == "MOD_HEAD_SHOT"))
+  if(!isKillstreakWeapon(sWeapon) && (sMeansOfDeath == "MOD_HEAD_SHOT")) {
     level.numHeadShotsIntel++;
+  }
 
-  if(isKillstreakWeapon(sWeapon) && (sWeapon != level.intelMiniGun))
+  if(isKillstreakWeapon(sWeapon) && (sWeapon != level.intelMiniGun)) {
     level.numKillStreakKillsIntel++;
+  }
 
-  if(maps\mp\gametypes\_class::isValidEquipment(sWeapon, false) || maps\mp\gametypes\_class::isValidOffhand(sWeapon, false))
+  if(maps\mp\gametypes\_class::isValidEquipment(sWeapon, false) || maps\mp\gametypes\_class::isValidOffhand(sWeapon, false)) {
     level.numEquipmentKillsIntel++;
+  }
 }
 
 enemyAgentThink() {
@@ -294,8 +300,9 @@ checkExpireTime(spawnTime, highLightTime, expireTime) {
   if(aliveTime > highLightTime) {
     outlineStuckAI(self);
 
-    if(aliveTime > expireTime)
+    if(aliveTime > expireTime) {
       return true;
+    }
   }
 
   return false;
@@ -383,8 +390,9 @@ agentDogThink() {
     if(self maps\mp\agents\dog\_dog_think::ProcessDebugMode()) {
       continue;
     }
-    if(self.aiState != "melee" && !self.stateLocked && self maps\mp\agents\dog\_dog_think::readyToMeleeTarget() && !self maps\mp\agents\dog\_dog_think::DidPastMeleeFail())
+    if(self.aiState != "melee" && !self.stateLocked && self maps\mp\agents\dog\_dog_think::readyToMeleeTarget() && !self maps\mp\agents\dog\_dog_think::DidPastMeleeFail()) {
       self ScrAgentBeginMelee(self.curMeleeTarget);
+    }
 
     if(self.randomPathStopTime > GetTime()) {
       wait(0.05);
@@ -432,8 +440,9 @@ locateEnemyPositions() {
 
   while(true) {
     foreach(player in level.participants) {
-      if(isOnHumanTeam(player))
+      if(isOnHumanTeam(player)) {
         self GetEnemyInfo(player);
+      }
     }
 
     wait(0.5);

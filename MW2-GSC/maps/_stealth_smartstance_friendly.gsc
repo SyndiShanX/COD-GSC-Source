@@ -40,18 +40,22 @@ friendly_stance_handler() {
       stances = friendly_stance_handler_check_mightbeseen(stances);
 
       // this means we're currently visible we need to drop a stance or stay still
-      if(stances[self._stealth.logic.stance])
+      if(stances[self._stealth.logic.stance]) {
         self thread friendly_stance_handler_change_stance_down();
+      }
       // ok coast is clear - we can go again if we were staying still
-      else if(self ent_flag("_stealth_stay_still"))
+      else if(self ent_flag("_stealth_stay_still")) {
         self thread friendly_stance_handler_resume_path();
+      }
       // this means we can actually go one stance up
-      else if(!stances[self._stealth.behavior.stance_up] && self._stealth.behavior.stance_up != self._stealth.logic.stance)
+      else if(!stances[self._stealth.behavior.stance_up] && self._stealth.behavior.stance_up != self._stealth.logic.stance) {
         self thread friendly_stance_handler_change_stance_up();
+      }
       // so - we're not stancing up, we're not stancing down, or staying still...lets notify
       // ourselves that we should stay in the same stance( just in case we're about to stance up )
-      else if(self ent_flag("_stealth_stance_change"))
+      else if(self ent_flag("_stealth_stance_change")) {
         self notify("_stealth_stance_dont_change");
+      }
 
       wait .05;
     }
@@ -62,8 +66,9 @@ friendly_stance_handler() {
     self.moveplaybackrate = 1;
     self allowedstances("stand", "crouch", "prone");
 
-    if(self ent_flag("_stealth_stay_still"))
+    if(self ent_flag("_stealth_stay_still")) {
       self thread friendly_stance_handler_resume_path(0);
+    }
   }
 }
 
@@ -110,8 +115,9 @@ friendly_stance_handler_check_mightbeseen(stances) {
       break;
     }
 
-    if(dist < score_up)
+    if(dist < score_up) {
       stances[self._stealth.behavior.stance_up] = score_up;
+    }
   }
 
   //	if( ai.size > 0 )
@@ -137,14 +143,17 @@ friendly_stance_handler_return_ai_sight(ai, stance) {
   vecdot = vectordot(vec1, vec2);
 
   // is the ai facing us?
-  if(vecdot > .3)
+  if(vecdot > .3) {
     return self._stealth.behavior.stance_handler["looking_towards"][stance];
+  }
   // is the ai facing away from us
-  else if(vecdot < -.7)
+  else if(vecdot < -.7) {
     return self._stealth.behavior.stance_handler["looking_away"][stance];
+  }
   // the ai is kinda not facing us or away
-  else
+  else {
     return self._stealth.behavior.stance_handler["neutral"][stance];
+  }
 }
 
 friendly_stance_handler_change_stance_down() {
@@ -158,10 +167,12 @@ friendly_stance_handler_change_stance_down() {
       self allowedstances("crouch");
       break;
     case "crouch":
-      if(self._stealth.behavior.no_prone)
+      if(self._stealth.behavior.no_prone) {
         friendly_stance_handler_stay_still();
-      else
+      }
+      else {
         self allowedstances("prone");
+      }
       break;
     case "prone":
       friendly_stance_handler_stay_still();
@@ -174,8 +185,9 @@ friendly_stance_handler_change_stance_up() {
   self endon("_stealth_stance_dont_change");
   self endon("_stealth_stance_handler");
 
-  if(self ent_flag("_stealth_stance_change"))
+  if(self ent_flag("_stealth_stance_change")) {
     return;
+  }
 
   time = 4;
 
@@ -207,8 +219,9 @@ friendly_stance_handler_change_stance_up() {
 friendly_stance_handler_stay_still() {
   self notify("friendly_stance_handler_stay_still");
 
-  if(self ent_flag("_stealth_stay_still"))
+  if(self ent_flag("_stealth_stay_still")) {
     return;
+  }
   self ent_flag_set("_stealth_stay_still");
 
   badplace_cylinder("_stealth_" + self.unique_id + "_prone", 0, self.origin, 30, 90, "bad_guys");
@@ -220,13 +233,15 @@ friendly_stance_handler_stay_still() {
 friendly_stance_handler_resume_path(time) {
   self endon("friendly_stance_handler_stay_still");
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = self._stealth.behavior.wait_resume_path;
+  }
 
   wait(time);
 
-  if(!self ent_flag("_stealth_stay_still"))
+  if(!self ent_flag("_stealth_stay_still")) {
     return;
+  }
   self ent_flag_clear("_stealth_stay_still");
 
   badplace_delete("_stealth_" + self.unique_id + "_prone");
@@ -242,8 +257,9 @@ friendly_stance_handler_stay_still()
 	//staying still even though we're playing a looping animation
 	self endon( "friendly_stance_handler_resume_path" );
 	
-	if( self ent_flag( "_stealth_stay_still" ) )
+	if( self ent_flag( "_stealth_stay_still" ) ) {
 		return;
+	}
 	self ent_flag_set( "_stealth_stay_still" );
 	
 	badplace_cylinder( "_stealth_" + self.unique_id + "_prone", 0, self.origin, 30, 90, "bad_guys" );
@@ -314,17 +330,20 @@ friendly_default_stance_handler_distances() {
 
 friendly_set_stance_handler_distances(looking_away, neutral, looking_towards) {
   if(isDefined(looking_away)) {
-    foreach(key, value in looking_away)
+    foreach(key, value in looking_away) {
     self._stealth.behavior.stance_handler["looking_away"][key] = value;
+    }
   }
 
   if(isDefined(neutral)) {
-    foreach(key, value in neutral)
+    foreach(key, value in neutral) {
     self._stealth.behavior.stance_handler["neutral"][key] = value;
+    }
   }
 
   if(isDefined(looking_towards)) {
-    foreach(key, value in looking_towards)
+    foreach(key, value in looking_towards) {
     self._stealth.behavior.stance_handler["looking_towards"][key] = value;
+    }
   }
 }

@@ -14,17 +14,21 @@ get_a10_player_start() {
 }
 
 istank() {
-  if(issubstr(self.classname, "t90"))
+  if(issubstr(self.classname, "t90")) {
     return 1;
+  }
 
-  if(issubstr(self.classname, "t72"))
+  if(issubstr(self.classname, "t72")) {
     return 1;
+  }
 
-  if(issubstr(self.classname, "m1a1"))
+  if(issubstr(self.classname, "m1a1")) {
     return 1;
+  }
 
-  if(issubstr(self.classname, "m1a2"))
+  if(issubstr(self.classname, "m1a2")) {
     return 1;
+  }
 
   return 0;
 }

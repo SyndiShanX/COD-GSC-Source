@@ -27,8 +27,9 @@ zgrief_init() {
   encounter_init();
   flag_wait("start_zombie_round_logic");
 
-  if(level.round_number < 4 && level.gamedifficulty != 0)
+  if(level.round_number < 4 && level.gamedifficulty != 0) {
     level.zombie_move_speed = 35;
+  }
 }
 
 encounter_init() {
@@ -44,8 +45,9 @@ alcatraz_grief_laststand_weapon_save(einflictor, attacker, idamage, smeansofdeat
     primaryweapons = self getweaponslistprimaries();
 
     for(i = 0; i < primaryweapons.size; i++) {
-      if(maps\mp\zombies\_zm_weapons::is_weapon_included(primaryweapons[i]) || maps\mp\zombies\_zm_weapons::is_weapon_upgraded(primaryweapons[i]))
+      if(maps\mp\zombies\_zm_weapons::is_weapon_included(primaryweapons[i]) || maps\mp\zombies\_zm_weapons::is_weapon_upgraded(primaryweapons[i])) {
         primary_weapons_that_can_be_taken[primary_weapons_that_can_be_taken.size] = primaryweapons[i];
+      }
     }
 
     if(primary_weapons_that_can_be_taken.size >= 3) {
@@ -61,21 +63,24 @@ alcatraz_grief_laststand_weapon_save(einflictor, attacker, idamage, smeansofdeat
   self.grief_savedweapon_currentweapon = self getcurrentweapon();
   self.grief_savedweapon_grenades = self get_player_lethal_grenade();
 
-  if(isDefined(self.grief_savedweapon_grenades))
+  if(isDefined(self.grief_savedweapon_grenades)) {
     self.grief_savedweapon_grenades_clip = self getweaponammoclip(self.grief_savedweapon_grenades);
+  }
 
   self.grief_savedweapon_tactical = self get_player_tactical_grenade();
 
-  if(isDefined(self.grief_savedweapon_tactical))
+  if(isDefined(self.grief_savedweapon_tactical)) {
     self.grief_savedweapon_tactical_clip = self getweaponammoclip(self.grief_savedweapon_tactical);
+  }
 
   for(i = 0; i < self.grief_savedweapon_weapons.size; i++) {
     self.grief_savedweapon_weaponsammo_clip[i] = self getweaponammoclip(self.grief_savedweapon_weapons[i]);
     self.grief_savedweapon_weaponsammo_stock[i] = self getweaponammostock(self.grief_savedweapon_weapons[i]);
   }
 
-  if(isDefined(self.hasriotshield) && self.hasriotshield)
+  if(isDefined(self.hasriotshield) && self.hasriotshield) {
     self.grief_hasriotshield = 1;
+  }
 
   if(self hasweapon("claymore_zm")) {
     self.grief_savedweapon_claymore = 1;
@@ -97,8 +102,9 @@ give_team_characters() {
   if(!isDefined(self.characterindex)) {
     self.characterindex = 1;
 
-    if(self.team == "axis")
+    if(self.team == "axis") {
       self.characterindex = 0;
+    }
   }
 
   switch (self.characterindex) {
@@ -158,15 +164,17 @@ main() {
         continue;
       }
 
-      if(trigger.script_flag == "activate_cafeteria" || trigger.script_flag == "activate_cellblock_east" || trigger.script_flag == "activate_cellblock_west" || trigger.script_flag == "activate_cellblock_barber" || trigger.script_flag == "activate_cellblock_gondola" || trigger.script_flag == "activate_cellblock_east_west" || trigger.script_flag == "activate_warden_office")
+      if(trigger.script_flag == "activate_cafeteria" || trigger.script_flag == "activate_cellblock_east" || trigger.script_flag == "activate_cellblock_west" || trigger.script_flag == "activate_cellblock_barber" || trigger.script_flag == "activate_cellblock_gondola" || trigger.script_flag == "activate_cellblock_east_west" || trigger.script_flag == "activate_warden_office") {
         continue;
+      }
       else {
         if(isDefined(trigger.target)) {
           str_target = trigger.target;
           a_door_and_clip = getEntArray(str_target, "targetname");
 
-          foreach(ent in a_door_and_clip)
+          foreach(ent in a_door_and_clip) {
           ent delete();
+          }
         }
 
         trigger delete();
@@ -178,8 +186,9 @@ main() {
 
   foreach(t_door in a_t_doors) {
     if(isDefined(t_door.script_flag)) {
-      if(t_door.script_flag == "activate_cellblock_east_west" || t_door.script_flag == "activate_cellblock_barber")
+      if(t_door.script_flag == "activate_cellblock_east_west" || t_door.script_flag == "activate_cellblock_barber") {
         t_door maps\mp\zombies\_zm_blockers::door_opened(self.zombie_cost);
+      }
     }
   }
 
@@ -198,8 +207,9 @@ main() {
 
   foreach(barrier in zbarriers) {
     if(isDefined(barrier.script_noteworthy)) {
-      if(barrier.script_noteworthy == "cafe_chest_zbarrier" || barrier.script_noteworthy == "start_chest_zbarrier")
+      if(barrier.script_noteworthy == "cafe_chest_zbarrier" || barrier.script_noteworthy == "start_chest_zbarrier") {
         continue;
+      }
     }
 
     b_delete_barrier = 1;
@@ -213,8 +223,9 @@ main() {
       }
     }
 
-    if(b_delete_barrier == 1)
+    if(b_delete_barrier == 1) {
       barrier delete();
+    }
   }
 
   t_temp = getent("tower_trap_activate_trigger", "targetname");
@@ -227,33 +238,39 @@ main() {
   e_brush delete();
   a_t_travel_triggers = getEntArray("travel_trigger", "script_noteworthy");
 
-  foreach(trigger in a_t_travel_triggers)
+  foreach(trigger in a_t_travel_triggers) {
   trigger delete();
+  }
 
   a_e_gondola_lights = getEntArray("gondola_state_light", "targetname");
 
-  foreach(light in a_e_gondola_lights)
+  foreach(light in a_e_gondola_lights) {
   light delete();
+  }
 
   a_e_gondola_landing_gates = getEntArray("gondola_landing_gates", "targetname");
 
-  foreach(model in a_e_gondola_landing_gates)
+  foreach(model in a_e_gondola_landing_gates) {
   model delete();
+  }
 
   a_e_gondola_landing_doors = getEntArray("gondola_landing_doors", "targetname");
 
-  foreach(model in a_e_gondola_landing_doors)
+  foreach(model in a_e_gondola_landing_doors) {
   model delete();
+  }
 
   a_e_gondola_gates = getEntArray("gondola_gates", "targetname");
 
-  foreach(model in a_e_gondola_gates)
+  foreach(model in a_e_gondola_gates) {
   model delete();
+  }
 
   a_e_gondola_doors = getEntArray("gondola_doors", "targetname");
 
-  foreach(model in a_e_gondola_doors)
+  foreach(model in a_e_gondola_doors) {
   model delete();
+  }
 
   m_gondola = getent("zipline_gondola", "targetname");
   m_gondola delete();
@@ -268,15 +285,17 @@ main() {
 
   a_afterlife_props = getEntArray("afterlife_show", "targetname");
 
-  foreach(m_prop in a_afterlife_props)
+  foreach(m_prop in a_afterlife_props) {
   m_prop delete();
+  }
 
   spork_portal = getent("afterlife_show_spork", "targetname");
   spork_portal delete();
   a_audio = getEntArray("at_headphones", "script_noteworthy");
 
-  foreach(model in a_audio)
+  foreach(model in a_audio) {
   model delete();
+  }
 
   m_spoon_pickup = getent("pickup_spoon", "targetname");
   m_spoon_pickup delete();
@@ -284,8 +303,9 @@ main() {
   t_sq_bg delete();
   t_crafting_table = getEntArray("open_craftable_trigger", "targetname");
 
-  foreach(trigger in t_crafting_table)
+  foreach(trigger in t_crafting_table) {
   trigger delete();
+  }
 
   t_warden_fence = getent("warden_fence_damage", "targetname");
   t_warden_fence delete();
@@ -339,8 +359,9 @@ main() {
 
   a_m_generator_core = getEntArray("generator_core", "targetname");
 
-  foreach(generator in a_m_generator_core)
+  foreach(generator in a_m_generator_core) {
   generator delete();
+  }
 
   e_playerclip = getent("electric_chair_playerclip", "targetname");
   e_playerclip delete();
@@ -393,8 +414,9 @@ enemy_location_override(zombie, enemy) {
   location = enemy.origin;
 
   if(is_true(self.reroute)) {
-    if(isDefined(self.reroute_origin))
+    if(isDefined(self.reroute_origin)) {
       location = self.reroute_origin;
+    }
   }
 
   return location;

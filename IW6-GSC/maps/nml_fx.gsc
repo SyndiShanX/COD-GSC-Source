@@ -130,8 +130,9 @@ random_earthquakes() {
   for(;;) {
     var_0 = level.player.origin + common_scripts\utility::randomvector(100);
 
-    if(!isDefined(level.next_earthquake))
+    if(!isDefined(level.next_earthquake)) {
       level.next_earthquake = "weak_4s";
+    }
 
     if(common_scripts\utility::cointoss() || level.force_next_earthquake) {
       level notify("earthquaking", 3);
@@ -140,10 +141,12 @@ random_earthquakes() {
 
     level.next_earthquake = undefined;
 
-    if(!isDefined(level.next_quake_sound))
+    if(!isDefined(level.next_quake_sound)) {
       var_1 = "elm_nml_quake_sm";
-    else
+    }
+    else {
       var_1 = level.next_quake_sound;
+    }
 
     thread common_scripts\utility::play_sound_in_space(var_1, var_0);
     level.next_quake_sound = undefined;

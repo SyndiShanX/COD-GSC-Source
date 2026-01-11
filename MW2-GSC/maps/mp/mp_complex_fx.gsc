@@ -27,6 +27,7 @@ main() {
 
   level._effect["trash_spiral_runner"] = loadfx("misc/trash_spiral_runner");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_complex_fx::main();
+  }
 }

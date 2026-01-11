@@ -65,10 +65,12 @@ waitSpread_insert(allotment) {
 }
 
 waittill_objective_event_proc(requireTrigger) {
-  while(level.deathSpawner[self.script_deathChain] > 0)
+  while(level.deathSpawner[self.script_deathChain] > 0) {
     level waittill("spawner_expired" + self.script_deathChain);
-  if(requireTrigger)
+  }
+  if(requireTrigger) {
     self waittill("trigger");
+  }
   flag = self get_trigger_flag();
   flag_set(flag);
 }
@@ -132,8 +134,9 @@ insure_player_does_not_set_forcecolor_twice_in_one_frame() {
   assertEx(!isDefined(self.setforcecolor), "Tried to set forceColor on an ai twice in one frame. Don't spam set_force_color.");
   self.setforcecolor = true;
   waittillframeend;
-  if(!isalive(self))
+  if(!isalive(self)) {
     return;
+  }
   self.setforcecolor = undefined;
 }
 
@@ -161,8 +164,9 @@ radio_queue_thread(msg) {
       break;
     }
     self waittill("finished_radio");
-    if(gettime() > queueTime + 7500)
+    if(gettime() > queueTime + 7500) {
       return;
+    }
   }
   self._radio_queue = true;
   wait_for_buffer_time_to_pass(level.last_mission_sound_time, 0.5);
@@ -175,19 +179,24 @@ radio_queue_thread(msg) {
 delayThread_proc(func, timer, param1, param2, param3, param4) {
   self endon("death");
   wait(timer);
-  if(isDefined(param4))
+  if(isDefined(param4)) {
     thread[[func]](param1, param2, param3, param4);
-  else
+  }
+  else {
   if(isDefined(param3))
+  }
     thread[[func]](param1, param2, param3);
-  else
+  else {
   if(isDefined(param2))
+  }
     thread[[func]](param1, param2);
-  else
+  else {
   if(isDefined(param1))
+  }
     thread[[func]](param1);
-  else
+  else {
     thread[[func]]();
+  }
 }
 
 wait_for_flag_or_time_elapses(flagname, timer) {
@@ -324,38 +333,46 @@ lerp_player_view_to_moving_tag_oldstyle_internal(ent, tag, lerptime, fraction, r
 }
 
 function_stack_proc(caller, func, param1, param2, param3, param4) {
-  if(!isDefined(caller.function_stack))
+  if(!isDefined(caller.function_stack)) {
     caller.function_stack = [];
+  }
   caller.function_stack[caller.function_stack.size] = self;
   function_stack_caller_waits_for_turn(caller);
   if(isDefined(caller)) {
-    if(isDefined(param4))
+    if(isDefined(param4)) {
       caller[[func]](param1, param2, param3, param4);
-    else
+    }
+    else {
     if(isDefined(param3))
+    }
       caller[[func]](param1, param2, param3);
-    else
+    else {
     if(isDefined(param2))
+    }
       caller[[func]](param1, param2);
-    else
+    else {
     if(isDefined(param1))
+    }
       caller[[func]](param1);
-    else
+    else {
       caller[[func]]();
+    }
     if(isDefined(caller)) {
       caller.function_stack = array_remove(caller.function_stack, self);
       caller notify("level_function_stack_ready");
     }
   }
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("function_done");
+  }
 }
 
 function_stack_caller_waits_for_turn(caller) {
   caller endon("death");
   self endon("death");
-  while(caller.function_stack[0] != self)
+  while(caller.function_stack[0] != self) {
     caller waittill("level_function_stack_ready");
+  }
 }
 
 alphabet_compare(a, b) {
@@ -438,28 +455,35 @@ alphabet_compare(a, b) {
   a = tolower(a);
   b = tolower(b);
   val1 = 0;
-  if(isDefined(list[a]))
+  if(isDefined(list[a])) {
     val1 = list[a];
+  }
   val2 = 0;
-  if(isDefined(list[b]))
+  if(isDefined(list[b])) {
     val2 = list[b];
-  if(val1 > val2)
+  }
+  if(val1 > val2) {
     return "1st";
-  if(val1 < val2)
+  }
+  if(val1 < val2) {
     return "2nd";
+  }
   return "same";
 }
 
 is_later_in_alphabet(string1, string2) {
   count = string1.size;
-  if(count >= string2.size)
+  if(count >= string2.size) {
     count = string2.size;
+  }
   for(i = 0; i < count; i++) {
     val = alphabet_compare(string1[i], string2[i]);
-    if(val == "1st")
+    if(val == "1st") {
       return true;
-    if(val == "2nd")
+    }
+    if(val == "2nd") {
       return false;
+    }
   }
   return string1.size > string2.size;
 }
@@ -495,24 +519,29 @@ cannon_effect() {
     return;
   }
   self exploder_delay();
-  if(isDefined(self.looper))
+  if(isDefined(self.looper)) {
     self.looper delete();
+  }
   self.looper = spawnFx(getfx(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
   triggerFx(self.looper);
   exploder_playSound();
 }
 
 exploder_delay() {
-  if(!isDefined(self.v["delay"]))
+  if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
+  }
   min_delay = self.v["delay"];
   max_delay = self.v["delay"] + 0.001;
-  if(isDefined(self.v["delay_min"]))
+  if(isDefined(self.v["delay_min"])) {
     min_delay = self.v["delay_min"];
-  if(isDefined(self.v["delay_max"]))
+  }
+  if(isDefined(self.v["delay_max"])) {
     max_delay = self.v["delay_max"];
-  if(min_delay > 0)
+  }
+  if(min_delay > 0) {
     wait(randomfloatrange(min_delay, max_delay));
+  }
 }
 
 exploder_earthquake() {
@@ -541,15 +570,18 @@ fire_effect() {
   origin = self.v["origin"];
   firefx = self.v["firefx"];
   ender = self.v["ender"];
-  if(!isDefined(ender))
+  if(!isDefined(ender)) {
     ender = "createfx_effectStopper";
+  }
   timeout = self.v["firefxtimeout"];
   fireFxDelay = 0.5;
-  if(isDefined(self.v["firefxdelay"]))
+  if(isDefined(self.v["firefxdelay"])) {
     fireFxDelay = self.v["firefxdelay"];
+  }
   self exploder_delay();
-  if(isDefined(firefxSound))
+  if(isDefined(firefxSound)) {
     level thread loop_fx_sound(firefxSound, origin, ender, timeout);
+  }
   playFX(level._effect[firefx], self.v["origin"], forward, up);
 }
 
@@ -592,8 +624,9 @@ trail_effect_ender(ent, ender) {
 
 init_vision_set(visionset) {
   level.lvl_visionset = visionset;
-  if(!isDefined(level.vision_cheat_enabled))
+  if(!isDefined(level.vision_cheat_enabled)) {
     level.vision_cheat_enabled = false;
+  }
   return level.vision_cheat_enabled;
 }
 
@@ -606,10 +639,12 @@ array_waitlogic1(ent, msg, timeout) {
 array_waitlogic2(ent, msg, timeout) {
   ent endon(msg);
   ent endon("death");
-  if(isDefined(timeout))
+  if(isDefined(timeout)) {
     wait timeout;
-  else
+  }
+  else {
     ent waittill(msg);
+  }
 }
 
 exec_func(func, endons) {

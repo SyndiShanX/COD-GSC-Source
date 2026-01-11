@@ -56,13 +56,15 @@ play_music_easter_egg() {
 }
 
 play_pentagon_announcer_vox(alias, defcon_level) {
-  if(!isDefined(alias))
+  if(!isDefined(alias)) {
     return;
+  }
   if(!isDefined(level.pentann_is_speaking)) {
     level.pentann_is_speaking = 0;
   }
-  if(isDefined(defcon_level))
+  if(isDefined(defcon_level)) {
     alias = alias + "_" + defcon_level;
+  }
   if(level.pentann_is_speaking == 0) {
     level.pentann_is_speaking = 1;
     level play_initial_alarm();

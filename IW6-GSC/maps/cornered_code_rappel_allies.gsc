@@ -179,8 +179,9 @@ calm_idle_get_random(var_0) {
   if(isDefined(var_0) && var_0 == var_4) {
     var_3 = var_3 + 1;
 
-    if(var_3 == var_2 + 1)
+    if(var_3 == var_2 + 1) {
       var_3 = var_1;
+    }
 
     var_4 = "cnd_rappel_stealth_fidgit_" + var_3;
   }
@@ -191,8 +192,9 @@ calm_idle_get_random(var_0) {
 ally_setup_aim(var_0) {
   var_1 = 1;
 
-  if(var_1)
+  if(var_1) {
     self setanimknob( % rappel_aim, 1, 0.2);
+  }
 
   self setanimknob(ally_rappel_get_aim_anim(5), 1, var_0);
   self setanimknob(ally_rappel_get_aim_anim(2), 1, var_0);
@@ -231,8 +233,9 @@ aim_idle_get_random() {
   var_0 = isDefined(self.israppelshooting) && self.israppelshooting;
   var_1 = isDefined(self.rappel_disable_fidgit) && self.rappel_do_not_fidgit;
 
-  if(var_0 || var_1)
+  if(var_0 || var_1) {
     return % cnd_rappel_idle;
+  }
   else {
     var_2 = randomintrange(0, 3);
 
@@ -258,12 +261,14 @@ ally_rappel_get_enemy() {
   if(var_2) {
     var_5 = level.player maps\cornered_code::player_get_favorite_enemy(1500);
 
-    if(isDefined(var_5) && self.rappel_enemy == var_5)
+    if(isDefined(var_5) && self.rappel_enemy == var_5) {
       var_4 = 1;
+    }
   }
 
-  if(var_3)
+  if(var_3) {
     self.rappel_last_enemy_timer = var_1;
+  }
 
   var_6 = var_2 && self.rappel_last_enemy_timer < var_0;
   var_7 = !var_2 || var_6 || var_4;
@@ -273,8 +278,9 @@ ally_rappel_get_enemy() {
     var_9 = -1;
     var_10 = undefined;
 
-    if(!isDefined(var_5))
+    if(!isDefined(var_5)) {
       var_5 = level.player maps\cornered_code::player_get_favorite_enemy(1500);
+    }
 
     foreach(var_12 in var_8) {
       if(!isalive(var_12)) {
@@ -334,8 +340,9 @@ custom_aim_internal() {
   var_3 = rappel_aim_get_parent_node(8);
   thread trackloop(var_3, var_1, var_2, var_0);
 
-  if(!isDefined(self.rappel_shooting_loop) || !self.rappel_shooting_loop)
+  if(!isDefined(self.rappel_shooting_loop) || !self.rappel_shooting_loop) {
     thread ally_shooting_loop();
+  }
 }
 
 trackloop(var_0, var_1, var_2, var_3) {
@@ -358,23 +365,27 @@ trackloop(var_0, var_1, var_2, var_3) {
 
     var_11 = undefined;
 
-    if(isDefined(self.shootpos))
+    if(isDefined(self.shootpos)) {
       var_11 = self.shootpos;
+    }
 
-    if(isDefined(self.shootent))
+    if(isDefined(self.shootent)) {
       var_11 = self.shootent getshootatpos();
+    }
 
     var_12 = isDefined(var_11);
     var_13 = (0, 0, 0);
 
-    if(var_12)
+    if(var_12) {
       var_13 = var_11;
+    }
 
     var_14 = 0;
     var_15 = isDefined(self.stepoutyaw);
 
-    if(var_15)
+    if(var_15) {
       var_14 = self.stepoutyaw;
+    }
 
     var_4 = self getaimangle(var_9, var_13, var_12, var_7, var_14, var_15, var_8);
     var_16 = var_4[0];
@@ -428,14 +439,18 @@ ally_rappel_get_aim_pitch() {
 }
 
 get_weight_change(var_0, var_1) {
-  if(var_0 == 2)
+  if(var_0 == 2) {
     return var_1 / 8.7 * 0.1;
-  else if(var_0 == 8)
+  }
+  else if(var_0 == 8) {
     return var_1 / 2.2 * 0.1;
-  else if(var_0 == 4)
+  }
+  else if(var_0 == 4) {
     return var_1 / 8.8 * 0.1;
-  else if(var_0 == 6)
+  }
+  else if(var_0 == 6) {
     return var_1 / 9.1 * 0.1;
+  }
 }
 
 ally_aim_closer_to(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -445,14 +460,16 @@ ally_aim_closer_to(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 = ally_rappel_get_aim_yaw();
   var_10 = var_5 - var_9;
 
-  if(abs(var_10) < 1)
+  if(abs(var_10) < 1) {
     var_8 = 0;
+  }
 
   var_11 = ally_rappel_get_aim_pitch();
   var_12 = var_4 - var_11;
 
-  if(abs(var_12) < 1)
+  if(abs(var_12) < 1) {
     var_8 = 0;
+  }
 
   var_13 = abs(var_5) > 0;
   var_14 = abs(var_10) > abs(var_12);
@@ -462,15 +479,19 @@ ally_aim_closer_to(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_18 = 0;
 
   if(var_13 && var_14 && var_15) {
-    if(var_5 > 0)
+    if(var_5 > 0) {
       _ally_aim_closer_set_anim_weight(var_2, 6, var_1, var_10, var_8);
-    else if(var_5 < 0)
+    }
+    else if(var_5 < 0) {
       _ally_aim_closer_set_anim_weight(var_1, 4, var_2, var_10, var_8);
+    }
   } else if(var_16 && var_17) {
-    if(var_4 > 0)
+    if(var_4 > 0) {
       _ally_aim_closer_set_anim_weight(var_3, 2, var_0, var_12, var_8);
-    else if(var_4 < 0)
+    }
+    else if(var_4 < 0) {
       _ally_aim_closer_set_anim_weight(var_0, 8, var_3, var_12, var_8);
+    }
   }
 }
 
@@ -478,15 +499,17 @@ _ally_aim_closer_set_anim_weight(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 0.1;
   var_6 = 2;
 
-  if(!var_4)
+  if(!var_4) {
     var_6 = 0.5;
+  }
 
   var_7 = self getanimweight(var_0);
   var_8 = get_weight_change(var_1, var_6);
   var_8 = var_8 * common_scripts\utility::sign(var_3);
 
-  if(var_1 == 4 || var_1 == 8)
+  if(var_1 == 4 || var_1 == 8) {
     var_8 = var_8 * -1;
+  }
 
   var_9 = var_7 + var_8;
   var_9 = clamp(var_9, 0, 1);
@@ -495,17 +518,21 @@ _ally_aim_closer_set_anim_weight(var_0, var_1, var_2, var_3, var_4) {
 }
 
 ally_transition_to_target_weights(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.aim2_target) && _ally_transition_to_weight(var_0, 8, var_3, 2, self.aim2_target))
+  if(isDefined(self.aim2_target) && _ally_transition_to_weight(var_0, 8, var_3, 2, self.aim2_target)) {
     self.aim2_target = undefined;
+  }
 
-  if(isDefined(self.aim4_target) && _ally_transition_to_weight(var_1, 4, var_2, 6, self.aim4_target))
+  if(isDefined(self.aim4_target) && _ally_transition_to_weight(var_1, 4, var_2, 6, self.aim4_target)) {
     self.aim4_target = undefined;
+  }
 
-  if(isDefined(self.aim6_target) && _ally_transition_to_weight(var_2, 6, var_1, 4, self.aim6_target))
+  if(isDefined(self.aim6_target) && _ally_transition_to_weight(var_2, 6, var_1, 4, self.aim6_target)) {
     self.aim6_target = undefined;
+  }
 
-  if(isDefined(self.aim8_target) && _ally_transition_to_weight(var_3, 2, var_0, 8, self.aim8_target))
+  if(isDefined(self.aim8_target) && _ally_transition_to_weight(var_3, 2, var_0, 8, self.aim8_target)) {
     self.aim8_target = undefined;
+  }
 
   if(!isDefined(self.aim2_target) && !isDefined(self.aim4_target) && !isDefined(self.aim6_target) && !isDefined(self.aim8_target)) {
     self.pitch_target = undefined;
@@ -530,18 +557,21 @@ _ally_transition_to_weight(var_0, var_1, var_2, var_3, var_4) {
     var_11 = self getanimweight(var_0);
     var_9 = var_4 - var_11;
 
-    if(abs(var_9) <= var_6)
+    if(abs(var_9) <= var_6) {
       return 1;
+    }
 
     var_5 = get_weight_change(var_1, var_10);
   }
 
   var_5 = var_5 * common_scripts\utility::sign(var_9);
 
-  if(var_5 > 0)
+  if(var_5 > 0) {
     var_5 = min(var_5, var_9);
-  else
+  }
+  else {
     var_5 = max(var_5, var_9);
+  }
 
   var_8 = var_11 + var_5;
   self setanimlimited(var_0, var_8, var_7, 1, 1);
@@ -586,28 +616,37 @@ _ally_get_yaw_left_aim_weight(var_0) {
 }
 
 rappel_aim_get_parent_node(var_0) {
-  if(var_0 == 2)
+  if(var_0 == 2) {
     return % rappel_aim_8;
-  else if(var_0 == 4)
+  }
+  else if(var_0 == 4) {
     return % rappel_aim_4;
-  else if(var_0 == 6)
+  }
+  else if(var_0 == 6) {
     return % rappel_aim_6;
-  else if(var_0 == 8)
+  }
+  else if(var_0 == 8) {
     return % rappel_aim_2;
+  }
   else {}
 }
 
 ally_rappel_get_aim_anim(var_0) {
-  if(var_0 == 2)
+  if(var_0 == 2) {
     return % cnd_rappel_stealth_aim_8_baker_add;
-  else if(var_0 == 4)
+  }
+  else if(var_0 == 4) {
     return % cnd_rappel_stealth_aim_4_baker_add;
-  else if(var_0 == 5)
+  }
+  else if(var_0 == 5) {
     return % cnd_rappel_stealth_aim_5_baker_add;
-  else if(var_0 == 6)
+  }
+  else if(var_0 == 6) {
     return % cnd_rappel_stealth_aim_6_baker_add;
-  else if(var_0 == 8)
+  }
+  else if(var_0 == 8) {
     return % cnd_rappel_stealth_aim_2_baker_add;
+  }
   else {}
 }
 
@@ -638,16 +677,18 @@ aimed_at_shoot_ent_or_pos() {
   var_0 = 5;
   var_1 = 5;
 
-  if(!isDefined(self.shootpos))
+  if(!isDefined(self.shootpos)) {
     return 0;
+  }
 
   var_2 = self getmuzzleangle();
   var_3 = self getmuzzlepos();
   var_4 = vectortoangles(self.shootpos - var_3);
   var_5 = animscripts\utility::absangleclamp180(var_2[1] - var_4[1]);
 
-  if(var_5 > var_0)
+  if(var_5 > var_0) {
     return 0;
+  }
 
   return animscripts\utility::absangleclamp180(var_2[0] - var_4[0]) <= var_1;
 }
@@ -660,15 +701,17 @@ ally_shoot_at_enemy() {
   if(animscripts\combat_utility::aimbutdontshoot()) {
     return;
   }
-  if(self.shootstyle == "full")
+  if(self.shootstyle == "full") {
     ally_fire_until_out_of_ammo(var_0, 1, animscripts\shared::decidenumshotsforfull());
+  }
   else if(self.shootstyle == "burst" || self.shootstyle == "semi") {
     var_1 = 4;
     ally_fire_until_out_of_ammo(var_0, 1, var_1);
   } else if(self.shootstyle == "single")
     ally_fire_until_out_of_ammo(var_0, 1, 1);
-  else
+  else {
     self waittill("hell freezes over");
+  }
 }
 
 ally_fire_until_out_of_ammo(var_0, var_1, var_2) {
@@ -677,16 +720,21 @@ ally_fire_until_out_of_ammo(var_0, var_1, var_2) {
   show_fire_hide_aim_idle();
   var_4 = 1.0;
 
-  if(isDefined(self.shootrateoverride))
+  if(isDefined(self.shootrateoverride)) {
     var_4 = self.shootrateoverride;
-  else if(self.shootstyle == "full")
+  }
+  else if(self.shootstyle == "full") {
     var_4 = animscripts\weaponlist::autoshootanimrate() * randomfloatrange(0.5, 1.0);
-  else if(self.shootstyle == "burst")
+  }
+  else if(self.shootstyle == "burst") {
     var_4 = animscripts\weaponlist::burstshootanimrate();
-  else if(animscripts\utility::usingsidearm())
+  }
+  else if(animscripts\utility::usingsidearm()) {
     var_4 = 3.0;
-  else if(animscripts\utility::usingshotgun())
+  }
+  else if(animscripts\utility::usingshotgun()) {
     var_4 = animscripts\combat_utility::shotgunfirerate();
+  }
 
   self setflaggedanimknobrestart(var_3, var_0, 1, 0.2, var_4);
   ally_fire_until_out_of_ammo_internal(var_3, var_0, var_1, var_2);
@@ -701,16 +749,18 @@ ally_fire_until_out_of_ammo_internal(var_0, var_1, var_2, var_3) {
     self endon("fireAnimEnd");
   }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = -1;
+  }
 
   var_4 = 0;
   var_5 = animhasnotetrack(var_1, "fire");
   thread animscripts\combat_utility::fireuntiloutofammo_waittillended();
 
   while(var_4 < var_3 && var_3 > 0) {
-    if(var_5)
+    if(var_5) {
       self waittillmatch(var_0, "fire");
+    }
 
     if(!self.bulletsinclip) {
       if(!animscripts\combat_utility::cheatammoifnecessary()) {
@@ -727,14 +777,16 @@ ally_fire_until_out_of_ammo_internal(var_0, var_1, var_2, var_3) {
       break;
     }
 
-    if(!var_5 || var_3 == 1 && self.shootstyle == "single")
+    if(!var_5 || var_3 == 1 && self.shootstyle == "single") {
       self waittillmatch(var_0, "end");
+    }
   }
 
   self shootstopsound();
 
-  if(var_2)
+  if(var_2) {
     self notify("fireAnimEnd");
+  }
 }
 
 shoot_at_shoot_ent_or_pos() {
@@ -743,10 +795,12 @@ shoot_at_shoot_ent_or_pos() {
     var_1 = self.shootpos;
     var_2 = 4;
 
-    if(!isDefined(self.perfectaccuracy) || self.perfectaccuracy)
+    if(!isDefined(self.perfectaccuracy) || self.perfectaccuracy) {
       var_3 = bulletspread(var_0, var_1, var_2);
-    else
+    }
+    else {
       var_3 = var_1;
+    }
 
     self.a.lastshoottime = gettime();
     self notify("shooting");
@@ -768,15 +822,17 @@ end_fire_and_anim_idle_thread() {
 }
 
 show_fire_hide_aim_idle() {
-  if(isDefined(self.rappel_aim_idle_thread))
+  if(isDefined(self.rappel_aim_idle_thread)) {
     self setanim( % rappel_idle, 0, 0.2);
+  }
 
   self setanim( % rappel_fire, 1, 0.1);
 }
 
 hide_fire_show_aim_idle() {
-  if(isDefined(self.rappel_aim_idle_thread))
+  if(isDefined(self.rappel_aim_idle_thread)) {
     self setanim( % rappel_idle, 1, 0.2);
+  }
 
   self setanim( % rappel_fire, 0, 0.1);
 }
@@ -786,8 +842,9 @@ ally_get_fire_animation() {
 }
 
 ally_rappel_reload() {
-  if(!animscripts\combat_utility::needtoreload(0.1))
+  if(!animscripts\combat_utility::needtoreload(0.1)) {
     return 0;
+  }
 
   self.rappel_reloading = 1;
   common_scripts\utility::waittill_notify_or_timeout_return("aimed_forward", 5.0);
@@ -795,14 +852,16 @@ ally_rappel_reload() {
   var_0 = % cnd_rappel_fire_reload_1;
   self.finishedreload = 0;
 
-  if(weaponclass(self.weapon) == "pistol")
+  if(weaponclass(self.weapon) == "pistol") {
     self orientmode("face default");
+  }
 
   ally_do_reload_anim(var_0);
   self notify("abort_reload");
 
-  if(self.finishedreload)
+  if(self.finishedreload) {
     animscripts\weaponlist::refillclip();
+  }
 
   self clearanim( % cnd_rappel_fire_reload_1, 0.2);
   self.keepclaimednode = 0;
@@ -818,8 +877,9 @@ ally_do_reload_anim(var_0) {
   self endon("abort_reload");
   var_1 = 1;
 
-  if(!animscripts\utility::usingsidearm() && !animscripts\utility::isshotgun(self.weapon) && isDefined(self.rappel_enemy) && self cansee(self.rappel_enemy) && distancesquared(self.rappel_enemy.origin, self.origin) < 1048576)
+  if(!animscripts\utility::usingsidearm() && !animscripts\utility::isshotgun(self.weapon) && isDefined(self.rappel_enemy) && self cansee(self.rappel_enemy) && distancesquared(self.rappel_enemy.origin, self.origin) < 1048576) {
     var_1 = 1.2;
+  }
 
   var_2 = "reload_" + animscripts\combat_utility::getuniqueflagnameindex();
   self clearanim( % root, 0.2);
@@ -831,8 +891,9 @@ ally_do_reload_anim(var_0) {
 ally_rappel_start_movement_horizontal_internal(var_0, var_1, var_2) {
   level endon(var_2);
 
-  if(var_0 == "stealth")
+  if(var_0 == "stealth") {
     level endon(self.stealth_broken_flag);
+  }
 
   var_3 = 2;
   var_4 = self.animname + "_is_moving";
@@ -853,8 +914,9 @@ ally_rappel_start_movement_horizontal_internal(var_0, var_1, var_2) {
 
     var_7 = isDefined(self.move_to_see_enemies) && self.move_to_see_enemies;
 
-    if(!var_7)
+    if(!var_7) {
       var_6 = "none";
+    }
 
     var_8 = ally_rappel_distance2dsquared_to_player();
     var_9 = !isDefined(self.player_moving_toward_me) || self.player_moving_toward_me;
@@ -862,12 +924,15 @@ ally_rappel_start_movement_horizontal_internal(var_0, var_1, var_2) {
     var_11 = var_9 || var_10;
 
     if(var_8 < self.close_distance_sq || var_6 == "away") {
-      if(!common_scripts\utility::flag(var_4) && var_9 && _ally_is_current_volume(self.in_volume))
+      if(!common_scripts\utility::flag(var_4) && var_9 && _ally_is_current_volume(self.in_volume)) {
         thread animate_til_volume("away", var_4, self.center_volume, self.out_volume, var_2, var_0);
-      else if(!common_scripts\utility::flag(var_4) && var_9 && _ally_is_current_volume(self.center_volume))
+      }
+      else if(!common_scripts\utility::flag(var_4) && var_9 && _ally_is_current_volume(self.center_volume)) {
         thread animate_til_volume("away", var_4, self.out_volume, undefined, var_2, var_0);
-      else if(!common_scripts\utility::flag(var_4) && var_9 && _ally_is_current_volume(self.out_volume)) {} else if(self.movement_back)
+      }
+      else if(!common_scripts\utility::flag(var_4) && var_9 && _ally_is_current_volume(self.out_volume)) {} else if(self.movement_back) {
         thread animate_opposite_direction(var_4, var_2, var_0, common_scripts\utility::flag(var_4));
+      }
     } else if(var_8 > self.far_distance_sq || var_6 == "back") {
       var_12 = gettime() - self.last_move_time;
 
@@ -889,8 +954,9 @@ ally_rappel_start_movement_horizontal_internal(var_0, var_1, var_2) {
           var_11 = var_15 > self.distance_from_next_volume_sq;
         }
 
-        if(var_11)
+        if(var_11) {
           thread animate_til_volume("back", var_4, self.center_volume, self.in_volume, var_2, var_0);
+        }
       } else if(_ally_is_current_volume(self.center_volume)) {
         var_11 = 0;
         var_13 = self.in_volume;
@@ -904,8 +970,9 @@ ally_rappel_start_movement_horizontal_internal(var_0, var_1, var_2) {
           var_11 = var_15 > self.distance_from_next_volume_sq;
         }
 
-        if(var_11)
+        if(var_11) {
           thread animate_til_volume("back", var_4, self.in_volume, undefined, var_2, var_0);
+        }
       } else if(_ally_is_current_volume(self.in_volume)) {} else
         thread animate_til_volume("back", var_4, self.center_volume, self.in_volume, var_2, var_0);
     } else if(!common_scripts\utility::flag(var_4) && isDefined(self.move_to_see_enemies) && self.move_to_see_enemies) {
@@ -919,10 +986,12 @@ ally_rappel_start_movement_horizontal_internal(var_0, var_1, var_2) {
         }
       }
 
-      if(var_6 == "away" || var_6 == "none")
+      if(var_6 == "away" || var_6 == "none") {
         var_6 = "back";
-      else
+      }
+      else {
         var_6 = "away";
+      }
     }
 
     common_scripts\utility::waitframe();
@@ -932,10 +1001,12 @@ ally_rappel_start_movement_horizontal_internal(var_0, var_1, var_2) {
 ally_rappel_distance2dsquared_to_player() {
   var_0 = self gettagorigin("J_MainRoot");
 
-  if(isDefined(level.rpl_plyr_anim_origin))
+  if(isDefined(level.rpl_plyr_anim_origin)) {
     var_1 = level.rpl_plyr_anim_origin.origin;
-  else
+  }
+  else {
     var_1 = level.player.origin;
+  }
 
   var_2 = distance2dsquared(var_0, var_1);
   return var_2;
@@ -966,15 +1037,17 @@ _ally_set_last_volume() {
       var_0 = var_1;
     }
 
-    if(self istouching(self.center_volume))
+    if(self istouching(self.center_volume)) {
       return;
+    }
   }
 
   if(isDefined(self.out_volume)) {
     var_1 = distance2dsquared(self.origin, self.out_volume getcentroid());
 
-    if(var_0 == -1 || var_1 < var_0 || self istouching(self.out_volume))
+    if(var_0 == -1 || var_1 < var_0 || self istouching(self.out_volume)) {
       self.last_volume = self.out_volume;
+    }
   }
 }
 
@@ -1015,13 +1088,15 @@ ally_rappel_movement_setup(var_0, var_1) {
 animate_til_volume(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level endon(var_4);
 
-  if(var_5 == "stealth")
+  if(var_5 == "stealth") {
     level endon(self.stealth_broken_flag);
+  }
 
   level endon(self.animname + "_stop_anim_move");
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = 1;
+  }
 
   self notify("stop_loop");
   ally_rappel_stop_shooting();
@@ -1033,8 +1108,9 @@ animate_til_volume(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     self.movement_back = 0;
     self.move_type = "move_away_start";
 
-    if(var_6)
+    if(var_6) {
       maps\_anim::anim_single_solo(self, "move_away_start");
+    }
 
     thread maps\_anim::anim_loop_solo(self, "move_away", "stop_loop");
     self.move_type = "move_away";
@@ -1042,8 +1118,9 @@ animate_til_volume(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     self.movement_back = 1;
     self.move_type = "move_back_start";
 
-    if(var_6)
+    if(var_6) {
       maps\_anim::anim_single_solo(self, "move_back_start");
+    }
 
     thread maps\_anim::anim_loop_solo(self, "move_back", "stop_loop");
     self.move_type = "move_back";
@@ -1116,8 +1193,9 @@ animate_til_volume(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 animate_opposite_direction(var_0, var_1, var_2, var_3) {
   level endon(var_1);
 
-  if(var_2 == "stealth")
+  if(var_2 == "stealth") {
     level endon(self.stealth_broken_flag);
+  }
 
   common_scripts\utility::flag_set(self.animname + "_stop_anim_move");
   common_scripts\utility::flag_clear(var_0);
@@ -1134,12 +1212,15 @@ animate_opposite_direction(var_0, var_1, var_2, var_3) {
   common_scripts\utility::flag_clear(self.animname + "_stop_anim_move");
   self.last_move_time = gettime();
 
-  if(isDefined(self.in_volume) && self.last_volume == self.in_volume)
+  if(isDefined(self.in_volume) && self.last_volume == self.in_volume) {
     thread animate_til_volume("away", var_0, self.center_volume, self.out_volume, var_1, var_2, !var_3);
-  else if(isDefined(self.center_volume) && self.last_volume == self.center_volume)
+  }
+  else if(isDefined(self.center_volume) && self.last_volume == self.center_volume) {
     thread animate_til_volume("away", var_0, self.out_volume, undefined, var_1, var_2, !var_3);
-  else if(isDefined(self.out_volume) && self.last_volume == self.out_volume)
+  }
+  else if(isDefined(self.out_volume) && self.last_volume == self.out_volume) {
     thread animate_til_volume("away", var_0, self.out_volume, undefined, var_1, var_2, !var_3);
+  }
   else {}
 }
 
@@ -1217,8 +1298,9 @@ ally_rappel_setup_rope(var_0, var_1) {
   self.rope_unwind_length = 2254.0;
   var_4 = (0, 0, 0);
 
-  if(var_0 == "combat")
+  if(var_0 == "combat") {
     var_4 = (0, 235, 0);
+  }
 
   self.cnd_rappel_tele_rope = maps\_utility::spawn_anim_model("cnd_rappel_tele_rope");
   self.cnd_rappel_tele_rope.origin = self.rappel_physical_rope_animation_origin.origin;
@@ -1230,8 +1312,9 @@ ally_rappel_setup_rope(var_0, var_1) {
 ally_rappel_rope(var_0, var_1) {
   self endon("stop_rope_management");
 
-  if(isDefined(level.start_point) && level.start_point == "rappel_stealth" && var_0 == "stealth")
+  if(isDefined(level.start_point) && level.start_point == "rappel_stealth" && var_0 == "stealth") {
     wait 0.5;
+  }
 
   var_2 = 46;
   var_3 = 1.0 / self.rope_unwind_length;

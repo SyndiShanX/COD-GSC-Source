@@ -1605,4 +1605,3 @@ add_devgui(localclientnum, menu_path, commands) {
 remove_devgui(localclientnum, menu_path) {
   adddebugcommand(localclientnum, "<dev string:x369>" + menu_path + "<dev string:x364>");
 }
-

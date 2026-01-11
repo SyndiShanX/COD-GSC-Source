@@ -299,10 +299,12 @@ _flag_wait_trigger(message, continuous) {
 
 wait_endon(waitTime, endOnString, endonString2, endonString3) {
   self endon(endOnString);
-  if(isDefined(endonString2))
+  if(isDefined(endonString2)) {
     self endon(endonString2);
-  if(isDefined(endonString3))
+  }
+  if(isDefined(endonString3)) {
     self endon(endonString3);
+  }
   wait(waitTime);
 }
 
@@ -3161,8 +3163,9 @@ disable_cqbwalk() {
 }
 
 enable_cqbsprint() {
-  if(!(self animscripts\utility::isCQBWalking()))
+  if(!(self animscripts\utility::isCQBWalking())) {
     self enable_cqbwalk();
+  }
   self.sprint = true;
 }
 
@@ -3362,8 +3365,9 @@ enable_ai_reviver() {
 
 switch_weapon_ASAP() {
   assertEX(IsAI(self), "Can only call this function on an AI character");
-  if(IsAlive(self) && !self.a.weapon_switch_ASAP)
+  if(IsAlive(self) && !self.a.weapon_switch_ASAP) {
     self.a.weapon_switch_ASAP = true;
+  }
 }
 
 sg_precachemodel(model) {
@@ -5696,28 +5700,34 @@ add_trigger_to_ent(ent) {
 }
 
 remove_trigger_from_ent(ent) {
-  if(!isDefined(ent._triggers))
+  if(!isDefined(ent._triggers)) {
     return;
-  if(!isDefined(ent._triggers[self getEntityNumber()]))
+  }
+  if(!isDefined(ent._triggers[self getEntityNumber()])) {
     return;
+  }
   ent._triggers[self getEntityNumber()] = 0;
 }
 
 ent_already_in_trigger(trig) {
-  if(!isDefined(self._triggers))
+  if(!isDefined(self._triggers)) {
     return false;
-  if(!isDefined(self._triggers[trig getEntityNumber()]))
+  }
+  if(!isDefined(self._triggers[trig getEntityNumber()])) {
     return false;
-  if(!self._triggers[trig getEntityNumber()])
+  }
+  if(!self._triggers[trig getEntityNumber()]) {
     return false;
+  }
   return true;
 }
 
 trigger_thread(ent, on_enter_payload, on_exit_payload) {
   ent endon("entityshutdown");
   ent endon("death");
-  if(ent ent_already_in_trigger(self))
+  if(ent ent_already_in_trigger(self)) {
     return;
+  }
   self add_trigger_to_ent(ent);
   endon_condition = "leave_trigger_" + self getEntityNumber();
   if(isDefined(on_enter_payload)) {
@@ -5800,8 +5810,9 @@ take_weapons() {
   self.offhand = self GetCurrentOffhand();
   weapon_list_modified = [];
   for(i = 0; i < self.weapons_list.size; i++) {
-    if(!is_weapon_attachment(self.weapons_list[i]))
+    if(!is_weapon_attachment(self.weapons_list[i])) {
       weapon_list_modified[weapon_list_modified.size] = self.weapons_list[i];
+    }
   }
   self.weapons_list = weapon_list_modified;
   if(is_weapon_attachment(self.curweapon)) {
@@ -5854,8 +5865,9 @@ get_baseweapon_for_attachment(weapon_name) {
   weapon = weapon_pieces[1];
   Assert(weapon_pieces[1] != "ft" && weapon_pieces[1] != "mk" && weapon_pieces[1] != "gl" && weapon_pieces[1] != "db");
   for(i = 0; i < self.weapons_list.size; i++) {
-    if(IsSubStr(self.weapons_list[i], weapon) && IsSubStr(self.weapons_list[i], attachment))
+    if(IsSubStr(self.weapons_list[i], weapon) && IsSubStr(self.weapons_list[i], attachment)) {
       return self.weapons_list[i];
+    }
   }
   return self.weapons_list[0];
 }
@@ -5894,10 +5906,12 @@ average_origin_internal(org_array) {
 }
 
 screen_message_create(string_message_1, string_message_2, string_message_3) {
-  if(isDefined(level.missionfailed) && level.missionfailed)
+  if(isDefined(level.missionfailed) && level.missionfailed) {
     return;
-  if(GetDvarInt("hud_missionFailed") == 1)
+  }
+  if(GetDvarInt("hud_missionFailed") == 1) {
     return;
+  }
   if(!isDefined(level._screen_message_1)) {
     level._screen_message_1 = NewHudElem();
     level._screen_message_1.elemType = "font";
@@ -6466,8 +6480,9 @@ sub_fade(alpha, duration) {
 }
 
 do_scene_sub(sub_string, duration) {
-  if(!GetDvarInt(#"cg_subtitles"))
+  if(!GetDvarInt(#"cg_subtitles")) {
     return;
+  }
   if(!isDefined(level.vo_hud)) {
     level.vo_hud = NewHudElem();
     level.vo_hud.fontscale = 2;

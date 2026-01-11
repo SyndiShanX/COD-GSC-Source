@@ -41,8 +41,9 @@ init() {
 func_128DF(var_00, var_01) {
   var_02 = scripts\mp\killstreaks\deployablebox::begindeployableviamarker(var_00, "deployable_grenades");
 
-  if(!isDefined(var_02) || !var_02)
+  if(!isDefined(var_02) || !var_02) {
     return 0;
+  }
 
   scripts\mp\matchdata::logkillstreakevent("deployable_grenades", self.origin);
   return 1;
@@ -57,8 +58,9 @@ func_DE4E() {
 
   if(isDefined(var_00)) {
     foreach(var_02 in var_00) {
-      if(scripts\mp\weapons::func_9E18(var_02) || scripts\mp\weapons::func_9EC0(var_02))
+      if(scripts\mp\weapons::func_9E18(var_02) || scripts\mp\weapons::func_9EC0(var_02)) {
         self givestartammo(var_02);
+      }
     }
   }
 }

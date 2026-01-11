@@ -149,14 +149,17 @@ handle_dismount() {
     wait(var_4 + 0.1);
     var_5 delete();
 
-    if(isDefined(self.disomount_hint))
+    if(isDefined(self.disomount_hint)) {
       self.disomount_hint destroy();
+    }
 
-    if(isDefined(self.mount_hint))
+    if(isDefined(self.mount_hint)) {
       self.mount_hint destroy();
+    }
 
-    if(isDefined(self.player_rig))
+    if(isDefined(self.player_rig)) {
       self.player_rig delete();
+    }
 
     level.player enableweapons();
     level.player freezecontrols(0);
@@ -201,8 +204,9 @@ player_use_chaingun_with_viewmodel(var_0, var_1, var_2) {
   self waittill("geton_anim_finished");
   common_scripts\utility::flag_clear("player_mounting_chaingun_turret");
 
-  if(isDefined(var_2) && var_2 == 1)
+  if(isDefined(var_2) && var_2 == 1) {
     thread chaingun_shells(level.chaingun_shelleject_fx, "player_dismounting_chaingun_turret");
+  }
 
   var_1 playerlinktodelta(self, "tag_player", 0.35, 90, 90, 45, 30, 1);
   var_0.player_rig delete();
@@ -231,10 +235,12 @@ player_use_chaingun_with_viewmodel(var_0, var_1, var_2) {
     var_9 = level.player attackbuttonpressed();
 
     if(var_10 != var_9) {
-      if(var_9)
+      if(var_9) {
         var_0 thread animate_turret_with_viewmodel("chaingun_hands_idle2fire", "chaingun_hands_fire", "turret_gun_idle2fire", "turret_gun_fire");
-      else
+      }
+      else {
         var_0 thread animate_turret_with_viewmodel("chaingun_hands_idle2fire", "chaingun_hands_idle", "turret_gun_fire2idle", "turret_gun_idle");
+      }
 
       var_10 = var_9;
     }
@@ -276,8 +282,9 @@ cleanup_on_death() {
 chaingun_shells(var_0, var_1) {
   self endon("death");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level endon(var_1);
+  }
 
   var_2 = common_scripts\utility::getfx(var_0);
   var_3 = "tag_brass";
@@ -306,11 +313,13 @@ chaingun_turret_disable(var_0) {
   } else
     var_0 notify("disable_player_turret");
 
-  if(isDefined(var_0.usable_turret_trigger))
+  if(isDefined(var_0.usable_turret_trigger)) {
     var_0.usable_turret_trigger delete();
+  }
 
-  if(isDefined(var_0.mount_hint))
+  if(isDefined(var_0.mount_hint)) {
     var_0.mount_hint destroy();
+  }
 }
 
 notifyaftertime(var_0, var_1, var_2) {

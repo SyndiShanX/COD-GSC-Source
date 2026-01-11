@@ -20,8 +20,9 @@ start() {
   level.blockade_vehicle_3 thread vehicle_catch_fire_when_shot();
   thread chase_scripted_flyovers();
 
-  foreach(var_1 in level.squad)
+  foreach(var_1 in level.squad) {
   var_1.grenadeammo = 0;
+  }
 
   thread chase_ally_vehicle_setup();
   thread car_chase_intro_car_crash_setup();
@@ -57,8 +58,9 @@ main() {
 mission_fade_out(var_0, var_1) {
   var_2 = maps\_hud_util::get_optional_overlay(var_1);
 
-  if(var_0 > 0)
+  if(var_0 > 0) {
     var_2 fadeovertime(var_0);
+  }
 
   var_2.alpha = 1;
   var_2.foreground = 0;
@@ -93,22 +95,25 @@ setup_trailer_platform() {
 
   var_5 = getEntArray("trailer_node", "script_noteworthy");
 
-  foreach(var_7 in var_5)
+  foreach(var_7 in var_5) {
   var_7 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
+  }
 
   thread semi_trailer_death_trigger();
   var_9 = getEntArray("trailer_side_rail", "targetname");
 
-  foreach(var_11 in var_9)
+  foreach(var_11 in var_9) {
   var_11 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
+  }
 
   common_scripts\utility::flag_wait("player_mount_vehicle_start");
   thread maps\factory_audio::audio_play_ending_scene();
   common_scripts\utility::flag_set("music_chase_ending");
   setsaveddvar("player_sprintUnlimited", "0");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 delete();
+  }
 }
 
 chase_player_mount_moving_trailer() {
@@ -160,8 +165,9 @@ chase_player_mount_moving_trailer() {
   var_9["ally_bravo"] = level.squad["ALLY_BRAVO"];
   var_9["ally_charlie"] = level.squad["ALLY_CHARLIE"];
 
-  foreach(var_11 in var_9)
+  foreach(var_11 in var_9) {
   var_11 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
+  }
 
   level.ally_vehicle_trailer thread maps\_anim::anim_single(var_9, "factory_car_chase_intro_ally_pulls_up_player", "body_anim_jnt");
   level.ally_vehicle_trailer thread maps\_anim::anim_single_solo(var_3, "factory_car_chase_intro_ally_pulls_up_player", "body_anim_jnt");
@@ -183,8 +189,9 @@ chase_player_mount_moving_trailer() {
   level.player setvelocity(var_1);
   wait 1;
 
-  if(level.player.thermal)
+  if(level.player.thermal) {
     level.player maps\factory_util::thermal_disable();
+  }
 
   level.player.active_anim = 0;
   common_scripts\utility::flag_set("factory_rooftop_wind_gust_moment");
@@ -262,8 +269,9 @@ chase_dialog() {
   level.squad["ALLY_BRAVO"] thread maps\_utility::smart_dialogue("factory_kgn_nicedrivingkick");
   wait 6;
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     wait 1.0;
+  }
 
   level.squad["ALLY_ALPHA"] maps\_utility::smart_dialogue("factory_mrk_wellthereaintgonna");
   wait 0.4;
@@ -310,8 +318,9 @@ chase_headlight_fx_swap(var_0) {
 }
 
 chase_blockade_crash() {
-  foreach(var_1 in level.squad)
+  foreach(var_1 in level.squad) {
   var_1.ignoreme = 1;
+  }
 
   level.player.ignoreme = 1;
   var_3 = maps\_utility::get_living_ai_array("blockade_enemy", "script_noteworthy");
@@ -321,8 +330,9 @@ chase_blockade_crash() {
     var_1.maxsightdistsqrd = 67108864;
     var_5 = var_1 getturret();
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       var_5 settargetentity(level.ally_vehicle);
+    }
   }
 
   wait 1;
@@ -336,8 +346,9 @@ chase_blockade_crash() {
   maps\_utility::activate_trigger_with_targetname("p_b_r_ally_move_602");
   wait 2;
 
-  foreach(var_1 in level.squad)
+  foreach(var_1 in level.squad) {
   var_1.ignoreall = 1;
+  }
 
   level.ally_vehicle thread maps\_utility::play_sound_on_tag("scn_factory_horn_long", "tag_origin");
   var_3 = maps\_utility::get_living_ai_array("blockade_enemy", "script_noteworthy");
@@ -435,8 +446,9 @@ car_chase_intro_car_crash() {
   var_0[var_0.size] = level.blockade_vehicle_3;
   var_0[var_0.size] = level.factory_car_chase_intro_side_car03_blowup;
 
-  foreach(var_4 in var_0)
+  foreach(var_4 in var_0) {
   var_4 delete();
+  }
 }
 
 car_crash_slowmo() {
@@ -466,8 +478,9 @@ semi_trailer_death_trigger_delete() {
 chase_wait_for_semi_touch(var_0) {
   var_1 = getent(var_0, "targetname");
 
-  while(!level.ally_vehicle_front istouching(var_1))
+  while(!level.ally_vehicle_front istouching(var_1)) {
     wait 0.05;
+  }
 }
 
 chase_spawn_drone_group(var_0, var_1, var_2) {
@@ -477,8 +490,9 @@ chase_spawn_drone_group(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     chase_wait_for_semi_touch(var_2);
 
-    foreach(var_5 in var_3)
+    foreach(var_5 in var_3) {
     var_5 delete();
+    }
   }
 }
 
@@ -486,8 +500,9 @@ enemy_vehicle_twitch() {
   self endon("death");
   self endon("non_physics_vehicle");
 
-  if(!self vehicle_isphysveh())
+  if(!self vehicle_isphysveh()) {
     level notify("non_physics_vehicle");
+  }
 
   for(;;) {
     self waittill("damage");
@@ -537,8 +552,9 @@ vehicle_catch_fire_when_shot() {
 }
 
 vehicle_crash_guy(var_0) {
-  if(!isDefined(self) || self.vehicle_position == 0)
+  if(!isDefined(self) || self.vehicle_position == 0) {
     return;
+  }
   else {
     self.deathanim = undefined;
     self.noragdoll = undefined;
@@ -546,8 +562,9 @@ vehicle_crash_guy(var_0) {
     self.ragdoll_immediate = 1;
 
     if(isDefined(self)) {
-      if(!isDefined(self.magic_bullet_shield))
+      if(!isDefined(self.magic_bullet_shield)) {
         self kill();
+      }
     }
   }
 

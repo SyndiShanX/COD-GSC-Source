@@ -97,8 +97,9 @@ func_5297() {
 
   var_00 = getEntArray("lot_script_car", "targetname");
 
-  foreach(var_02 in var_00)
+  foreach(var_02 in var_00) {
   var_02 thread func_DAF0();
+  }
 }
 
 func_DAF0() {
@@ -130,10 +131,12 @@ func_436B(var_00) {
   var_02 linkto(var_01, "j_base");
   var_01 scripts\sp\anim::func_F64A();
 
-  if(scripts\engine\utility::is_true(var_00))
+  if(scripts\engine\utility::is_true(var_00)) {
     var_01 scripts\sp\anim::func_1EC3(var_01, "statue_collapse");
-  else
+  }
+  else {
     var_01 scripts\sp\anim::func_1EE0(var_01, "statue_collapse");
+  }
 
   _createnavrepulsor("statue", 0, var_01, 384);
   var_02 disconnectpaths();
@@ -188,8 +191,9 @@ func_8A04() {
 func_1C1A() {
   level endon("handoff_cleanup");
 
-  for(var_00 = scripts\sp\utility::func_7951(level.player.origin, level.player.angles, self.origin); var_00 >= 0.4; var_00 = scripts\sp\utility::func_7951(level.player.origin, level.player.angles, self.origin))
+  for(var_00 = scripts\sp\utility::func_7951(level.player.origin, level.player.angles, self.origin); var_00 >= 0.4; var_00 = scripts\sp\utility::func_7951(level.player.origin, level.player.angles, self.origin)) {
     scripts\engine\utility::waitframe();
+  }
 
   scripts\sp\utility::func_4145();
 }
@@ -257,8 +261,9 @@ func_8A05() {
 
   wait 3.0;
 
-  foreach(var_05 in level.func_923A)
+  foreach(var_05 in level.func_923A) {
   var_05 scripts\sp\utility::func_51E1("casual_gun");
+  }
 }
 
 func_1073B(var_00) {
@@ -327,8 +332,9 @@ func_8A00() {
 
   if(isDefined(level.func_923A)) {
     foreach(var_07 in level.func_923A) {
-      if(isDefined(var_07))
+      if(isDefined(var_07)) {
         var_07 delete();
+      }
     }
   }
 }
@@ -351,8 +357,9 @@ func_A417() {
   scripts\engine\utility::flag_wait("jackals_start_call_in");
   thread func_A0EF();
 
-  if(!isDefined(level.func_D127))
+  if(!isDefined(level.func_D127)) {
     level.func_D127 = scripts\sp\vehicle::func_1080C("jackal_player");
+  }
 
   level.func_D127 motionblurhqenable();
   level.func_D127 func_0BDC::func_104A6(0);
@@ -377,8 +384,9 @@ func_A417() {
   level.func_A056.func_87D8 = 2.3;
   func_0BDC::func_137CF();
 
-  if(scripts\sp\utility::func_93A6())
+  if(scripts\sp\utility::func_93A6()) {
     func_0BD9::func_FA4F();
+  }
 
   level.func_D127 func_0BDC::func_A167();
   func_0BDC::func_A153(1);
@@ -513,8 +521,9 @@ func_1130D(var_00) {
   if(!isDefined(var_01)) {
     return;
   }
-  if(level.player istouching(var_01))
+  if(level.player istouching(var_01)) {
     level.player _meth_81D0();
+  }
 
   var_01 solid();
   func_0BDC::func_137CF();
@@ -615,8 +624,9 @@ func_A41A() {
     func_0BDC::func_D164(level.func_D2A1.func_BD0D, 0);
     level.player getroundswon(1);
 
-    while(iscinematicplaying())
+    while(iscinematicplaying()) {
       scripts\engine\utility::waitframe();
+    }
 
     level.player getroundswon(0);
   }
@@ -774,10 +784,12 @@ func_39F3(var_00, var_01) {
   self.func_11837 = var_00;
   self endon("stop_launch_vert_wash");
 
-  if(self == level.func_12B67)
+  if(self == level.func_12B67) {
     level.player playSound("scn_phspace_launch_retribution_thrusters_on");
-  else
+  }
+  else {
     level.player playSound("scn_phspace_launch_tigris_thrusters_on");
+  }
 
   playFXOnTag(scripts\engine\utility::getfx(var_00), self.func_11836, "tag_origin");
 
@@ -812,8 +824,9 @@ func_C0CA(var_00) {
     var_00 thread scripts\sp\utility::func_75C4("vfx_capship_un_thruster_rear_lrg_launch_singleton", "fx_engine_l_2");
   }
 
-  if(var_00 == level.func_12B7D)
+  if(var_00 == level.func_12B7D) {
     var_00 playSound("phspace_launch_capital_01");
+  }
 
   wait 0.65;
   var_00 func_0BB8::func_39D0("off");
@@ -828,8 +841,9 @@ func_50B8(var_00, var_01) {
 func_C0C9(var_00) {
   var_00 func_0BB8::func_39CD("heavy");
 
-  if(var_00 == level.func_12B67)
+  if(var_00 == level.func_12B67) {
     var_00 thread func_E317(0);
+  }
 }
 
 func_C0C5(var_00) {
@@ -890,13 +904,15 @@ func_CFDE(var_00) {
   func_0BDC::func_A14A(1);
   func_0BDC::func_A160(1);
 
-  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0))
+  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0)) {
     scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(5);
+  }
 
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(10);
 
-  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0))
+  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0)) {
     func_5F9A(10);
+  }
 
   earthquake(0.22, 1.1, level.func_D127.origin, 5000);
   level.player notify("jackal_vtol_takeoff_plr");
@@ -976,15 +992,17 @@ func_CFDE(var_00) {
       var_21 = scripts\sp\math::func_C097(0, var_06, var_07);
       var_07 = var_07 - 0.05;
 
-      if(var_07 < 0)
+      if(var_07 < 0) {
         var_07 = 0;
+      }
     } else
       var_21 = 1;
 
     var_20 = var_20 * var_19;
 
-    if(!scripts\engine\utility::flag("flag_player_boosters_disengaged"))
+    if(!scripts\engine\utility::flag("flag_player_boosters_disengaged")) {
       var_08 func_CFDF(var_17, var_18, var_19, var_21);
+    }
 
     level.func_D2A1.func_BD0D.origin = level.func_D2A1.origin + (var_20 + var_8.func_BC49) * var_21;
     level.func_D2A1.func_B025.origin = level.func_D2A1.func_AFEB.origin + (var_20 + var_8.func_AFF8) * var_21;
@@ -996,8 +1014,9 @@ func_CFDE(var_00) {
     level.func_1EF0 linkto(level.func_1EF0.parent);
     wait 0.05;
 
-    if(var_07 <= 0.0)
+    if(var_07 <= 0.0) {
       return;
+    }
   }
 }
 
@@ -1201,15 +1220,19 @@ func_CFDF(var_00, var_01, var_02, var_03) {
   self.func_11535 = self.func_11535 + var_19[0] * var_04;
   self.func_11533 = self.func_11533 + var_19[1] * var_05;
 
-  if(self.func_11535 > var_15)
+  if(self.func_11535 > var_15) {
     self.func_11535 = var_15;
-  else if(self.func_11535 < var_16)
+  }
+  else if(self.func_11535 < var_16) {
     self.func_11535 = var_16;
+  }
 
-  if(self.func_11533 < var_17)
+  if(self.func_11533 < var_17) {
     self.func_11533 = var_17;
-  else if(self.func_11533 > var_18)
+  }
+  else if(self.func_11533 > var_18) {
     self.func_11533 = var_18;
+  }
 
   self.func_11535 = self.func_11535 * var_13;
   self.func_11533 = self.func_11533 * var_13;
@@ -1305,8 +1328,9 @@ func_D27C(var_00, var_01) {
 func_424D(var_00) {
   var_01 = getanimlength(level.func_EC85["sled_jackal"]["space_launch"]);
 
-  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0))
+  if(getdvarint("E3", 0) && !getdvarint("e3_negus", 0)) {
     var_01 = var_01 - 6;
+  }
 
   wait(var_01);
   var_02 = scripts\engine\utility::getstruct("jackal_launch_animnode_clone", "targetname");
@@ -1353,8 +1377,9 @@ func_11442() {
 func_408A() {
   var_00 = scripts\sp\utility::func_77DA("jackals_hvr_marines");
 
-  foreach(var_02 in var_00)
+  foreach(var_02 in var_00) {
   var_02 delete();
+  }
 
   if(isDefined(level.func_11323)) {
     level.func_11323 delete();
@@ -1490,11 +1515,13 @@ func_AA74(var_00) {
 }
 
 func_104F7(var_00, var_01) {
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     playFXOnTag(scripts\engine\utility::getfx(var_00), level.func_D127, "j_mainroot_ship");
+  }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     stopFXOnTag(scripts\engine\utility::getfx(var_01), level.func_D127, "j_mainroot_ship");
+  }
 }
 
 func_104FC() {
@@ -1543,14 +1570,16 @@ space_launch_get_offset_from_ship() {
 }
 
 func_104EA(var_00, var_01, var_02) {
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
   var_03 = getent("trigger_local_cloudfx_thick", "targetname");
   var_03 func_0BDC::func_136A6(self);
 
-  foreach(var_05 in var_00)
+  foreach(var_05 in var_00) {
   scripts\sp\utility::func_75C4(var_01, var_05, var_02);
+  }
 }
 
 func_104E9() {
@@ -1616,8 +1645,9 @@ func_104F4() {
   func_0BDC::func_137CF();
   wait 1.5;
 
-  while(!isDefined(level.func_AA61))
+  while(!isDefined(level.func_AA61)) {
     wait 0.05;
+  }
 
   level.func_AA61 _meth_8064();
   level.func_AA62 _meth_8064();
@@ -1668,23 +1698,29 @@ func_104E8() {
 func_E317(var_00) {
   var_01 = ["tag_engine_rear_l_out_01_launch", "tag_engine_rear_l_out_02_launch", "tag_engine_rear_l_out_03_launch", "tag_engine_rear_l_out_04_launch", "tag_engine_rear_r_out_01_launch", "tag_engine_rear_r_out_02_launch", "tag_engine_rear_r_out_03_launch", "tag_engine_rear_r_out_04_launch"];
 
-  if(var_00)
+  if(var_00) {
     var_02 = scripts\sp\utility::func_75C4;
-  else
+  }
+  else {
     var_02 = scripts\sp\utility::func_75F8;
+  }
 
-  foreach(var_04 in var_01)
+  foreach(var_04 in var_01) {
   self[[var_02]]("retribution_thrust_rear_launch", var_04);
+  }
 }
 
 func_118B9(var_00) {
   var_01 = ["fx_engine_l_1", "fx_engine_l_4"];
 
-  if(var_00)
+  if(var_00) {
     var_02 = scripts\sp\utility::func_75C4;
-  else
+  }
+  else {
     var_02 = scripts\sp\utility::func_75F8;
+  }
 
-  foreach(var_04 in var_01)
+  foreach(var_04 in var_01) {
   self[[var_02]]("un_thruster_rear_lrg_launch", var_04);
+  }
 }

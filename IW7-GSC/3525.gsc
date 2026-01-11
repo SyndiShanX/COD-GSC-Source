@@ -52,10 +52,12 @@ func_13AFC() {
       if(!level.func_115EC[self.team]) {
         var_00 = level.func_D410[self.team] - 30;
 
-        if(var_00 <= 0)
+        if(var_00 <= 0) {
           level.func_D410[self.team] = 0;
-        else
+        }
+        else {
           level.func_D410[self.team] = level.func_D410[self.team] - 30;
+        }
 
         func_12F3D(self.team, level.func_D410[self.team]);
       }
@@ -71,8 +73,9 @@ func_13B0C() {
     self waittill("spawned_player");
     wait 1;
 
-    if(self.team != "spectator")
+    if(self.team != "spectator") {
       self setclientomnvar("ui_teamstreak_score", level.func_D410[self.team]);
+    }
   }
 }
 
@@ -166,8 +169,9 @@ func_1E4A(var_00) {
     var_01 = self getcurrentprimaryweapon();
     var_02 = self getweaponammoclip(var_01);
 
-    if(var_02 != weaponclipsize(var_01))
+    if(var_02 != weaponclipsize(var_01)) {
       self setweaponammoclip(var_01, var_02 + 1);
+    }
 
     wait 0.5;
   }

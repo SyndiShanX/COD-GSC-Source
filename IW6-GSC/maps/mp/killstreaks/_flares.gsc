@@ -48,8 +48,9 @@ flares_deleteAfterTime(delayDelete, delayStopTracking, vehicle) {
     delayDelete -= delayStopTracking;
     wait(delayStopTracking);
 
-    if(isDefined(vehicle))
+    if(isDefined(vehicle)) {
       vehicle.flaresLive = array_remove(vehicle.flaresLive, self);
+    }
   }
 
   wait(delayDelete);
@@ -153,10 +154,12 @@ flares_handleIncomingSAM(functionOverride) {
     if(!isDefined(lockTarget) || (lockTarget != self)) {
       continue;
     }
-    if(isDefined(functionOverride))
+    if(isDefined(functionOverride)) {
       level thread[[functionOverride]](player, player.team, lockTarget, missileGroup);
-    else
+    }
+    else {
       level thread flares_watchSAMProximity(player, player.team, lockTarget, missileGroup);
+    }
   }
 }
 
@@ -169,8 +172,9 @@ flares_watchSAMProximity(player, missileTeam, missileTarget, missileGroup) {
 
     curDist = [];
     for(i = 0; i < missileGroup.size; i++) {
-      if(isDefined(missileGroup[i]))
+      if(isDefined(missileGroup[i])) {
         curDist[i] = distance(missileGroup[i].origin, center);
+      }
     }
 
     for(i = 0; i < curDist.size; i++) {
@@ -207,10 +211,12 @@ flares_handleIncomingStinger(functionOverride) {
     if(!isDefined(lockTarget) || (lockTarget != self)) {
       continue;
     }
-    if(isDefined(functionOverride))
+    if(isDefined(functionOverride)) {
       missile thread[[functionOverride]](player, player.team, lockTarget);
-    else
+    }
+    else {
       missile thread flares_watchStingerProximity(player, player.team, lockTarget);
+    }
   }
 }
 
@@ -243,8 +249,9 @@ ks_setup_manual_flares(num_flares, button_action, flares_omnvar_name, incoming_o
   self.flaresReserveCount = num_flares;
   self.flaresLive = [];
 
-  if(isDefined(flares_omnvar_name))
+  if(isDefined(flares_omnvar_name)) {
     self.owner SetClientOmnvar(flares_omnvar_name, num_flares);
+  }
 
   self thread ks_manualFlares_watchUse(button_action, flares_omnvar_name);
   self thread ks_manualFlares_handleIncoming(incoming_omnvar_name);
@@ -257,8 +264,9 @@ ks_manualFlares_watchUse(button_action, omnvar_name) {
   self endon("leaving");
   self endon("helicopter_done");
 
-  if(!IsAI(self.owner))
+  if(!IsAI(self.owner)) {
     self.owner NotifyOnPlayerCommand("manual_flare_popped", button_action);
+  }
 
   while(flares_getNumLeft(self)) {
     self.owner waittill("manual_flare_popped");
@@ -266,8 +274,9 @@ ks_manualFlares_watchUse(button_action, omnvar_name) {
     flare = flares_getFlareReserve(self);
     if(isDefined(flare) && isDefined(self.owner) && !IsAI(self.owner)) {
       self.owner PlayLocalSound(FLARES_POP_SOUND_PLR);
-      if(isDefined(omnvar_name))
+      if(isDefined(omnvar_name)) {
         self.owner SetClientOmnvar(omnvar_name, self flares_getNumLeft(self));
+      }
     }
   }
 }
@@ -293,10 +302,12 @@ ks_manualFlares_handleIncoming(omnvar_name) {
       vec_to_right = VectorNormalize(AnglesToRight(self.angles));
       vec_dot = VectorDot(vec_to_target, vec_to_right);
       dir_index = 1;
-      if(vec_dot > 0)
+      if(vec_dot > 0) {
         dir_index = 2;
-      else if(vec_dot < 0)
+      }
+      else if(vec_dot < 0) {
         dir_index = 3;
+      }
       self.owner SetClientOmnvar(omnvar_name, dir_index);
     }
 

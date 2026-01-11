@@ -74,8 +74,9 @@ cleanupoldturret() {
     }
 
     if(isDefined(self.buildableturret.turret)) {
-      if(isDefined(self.buildableturret.turret.sound_ent))
+      if(isDefined(self.buildableturret.turret.sound_ent)) {
         self.buildableturret.turret.sound_ent delete();
+      }
 
       self.buildableturret.turret delete();
     }
@@ -106,8 +107,9 @@ watchforcleanup() {
 placeturret(origin, angles) {
   item = self maps\mp\zombies\_zm_equipment::placed_equipment_think("p6_anim_zm_buildable_turret", "equip_turret_zm", origin, angles);
 
-  if(isDefined(item))
+  if(isDefined(item)) {
     item.owner = self;
+  }
 
   return item;
 }
@@ -115,8 +117,9 @@ placeturret(origin, angles) {
 dropturret() {
   item = self maps\mp\zombies\_zm_equipment::dropped_equipment_think("p6_anim_zm_buildable_turret", "equip_turret_zm", self.origin, self.angles);
 
-  if(isDefined(item))
+  if(isDefined(item)) {
     item.turret_health = self.turret_health;
+  }
 
   self.turret_health = undefined;
   return item;
@@ -158,15 +161,17 @@ startturretdeploy(weapon) {
   self endon("equip_turret_zm_taken");
   self thread watchforcleanup();
 
-  if(!isDefined(self.turret_health))
+  if(!isDefined(self.turret_health)) {
     self.turret_health = 60;
+  }
 
   if(isDefined(weapon)) {
     weapon hide();
     wait 0.1;
 
-    if(isDefined(weapon.power_on) && weapon.power_on)
+    if(isDefined(weapon.power_on) && weapon.power_on) {
       weapon.turret notify("stop_burst_fire_unmanned");
+    }
 
     if(!isDefined(weapon)) {
       return;
@@ -204,13 +209,16 @@ startturretdeploy(weapon) {
     } else
       weapon.power_on = 1;
 
-    if(weapon.power_on)
+    if(weapon.power_on) {
       turret thread maps\mp\zombies\_zm_mgturret::burst_fire_unmanned();
-    else
+    }
+    else {
       self iprintlnbold(&"ZOMBIE_NEED_LOCAL_POWER");
+    }
 
-    if(!(isDefined(level.equipment_turret_needs_power) && level.equipment_turret_needs_power))
+    if(!(isDefined(level.equipment_turret_needs_power) && level.equipment_turret_needs_power)) {
       self thread turretdecay(weapon);
+    }
 
     self thread maps\mp\zombies\_zm_buildables::delete_on_disconnect(weapon);
 
@@ -244,8 +252,9 @@ startturretdeploy(weapon) {
 }
 
 turret_in_range(delta, origin, radius) {
-  if(distancesquared(self.target.origin, origin) < radius * radius)
+  if(distancesquared(self.target.origin, origin) < radius * radius) {
     return true;
+  }
 
   return false;
 }
@@ -260,8 +269,9 @@ turret_power_on(origin, radius) {
   self.target.turret thread maps\mp\zombies\_zm_mgturret::burst_fire_unmanned();
   player = self.target.turret.owner;
 
-  if(!isDefined(player.buildableturret.sound_ent))
+  if(!isDefined(player.buildableturret.sound_ent)) {
     player.buildableturret.sound_ent = spawn("script_origin", self.target.turret.origin);
+  }
 
   player.buildableturret.sound_ent playSound("wpn_zmb_turret_start");
   player.buildableturret.sound_ent playLoopSound("wpn_zmb_turret_loop", 2);

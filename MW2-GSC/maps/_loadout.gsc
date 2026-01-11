@@ -7,8 +7,9 @@
 #include common_scripts\utility;
 
 init_loadout() {
-  if(!isDefined(level.dodgeloadout))
+  if(!isDefined(level.dodgeloadout)) {
     give_loadout();
+  }
   level.loadoutComplete = true;
   level notify("loadout complete");
 }
@@ -54,8 +55,9 @@ char_switcher() {
 }
 
 give_loadout(character_selected) {
-  if(!isDefined(character_selected))
+  if(!isDefined(character_selected)) {
     character_selected = false;
+  }
 
   level.character_selected = character_selected;
 
@@ -63,14 +65,17 @@ give_loadout(character_selected) {
   possible_precache_items = [];
 
   level.player SetDefaultActionSlot();
-  if(is_coop())
+  if(is_coop()) {
     level.player2 SetDefaultActionSlot();
+  }
 
-  if(!isDefined(game["expectedlevel"]))
+  if(!isDefined(game["expectedlevel"])) {
     game["expectedlevel"] = "";
+  }
 
-  if(!isDefined(level.campaign))
+  if(!isDefined(level.campaign)) {
     level.campaign = "american";
+  }
 
   if(string_starts_with(level.script, "pmc_")) {
     level.player setViewmodel("viewmodel_base_viewhands");
@@ -438,8 +443,9 @@ give_loadout(character_selected) {
     // everybody does it different!! I'm making a new way.
     switch_char = char_switcher();
 
-    if(!character_selected)
+    if(!character_selected) {
       precacheModel("weapon_parabolic_knife");
+    }
 
     // co player 1 loadout
     so_player_num(0);
@@ -479,8 +485,9 @@ give_loadout(character_selected) {
   		if( is_coop() )
   		{
   			// there is a wait at character selection, can not precache after a wait
-  			if( !character_selected )
+  			if( !character_selected ) {
   				precacheModel( "weapon_parabolic_knife" );
+  			}
 
   			assert( isDefined( level.players ) );
   			assert( level.players.size >= 2 );
@@ -629,8 +636,9 @@ give_loadout(character_selected) {
 
     // first character
     if(isDefined(level.coop_player1)) {
-      if(is_coop())
+      if(is_coop()) {
         level.coop_player1 SetModelFunc(::so_body_player_woodland);
+      }
 
       level.coop_player1 giveWeapon("usp_silencer");
       level.coop_player1 givemaxammo("m4m203_silencer_reflex");
@@ -644,8 +652,9 @@ give_loadout(character_selected) {
 
     // second character
     if(isDefined(level.coop_player2)) {
-      if(is_coop())
+      if(is_coop()) {
         level.coop_player2 SetModelFunc(::so_body_player_woodland);
+      }
 
       level.coop_player2 giveWeapon("usp_silencer");
       level.coop_player2 giveWeapon("mp5_silencer");
@@ -659,8 +668,9 @@ give_loadout(character_selected) {
     }
 
     if(!character_selected) {
-      if(is_coop())
+      if(is_coop()) {
         precacheModel("weapon_parabolic_knife");
+      }
       possible_precache(possible_precache_items);
     }
 
@@ -700,8 +710,9 @@ give_loadout(character_selected) {
     }
 
     if(!character_selected) {
-      if(is_coop())
+      if(is_coop()) {
         precacheModel("weapon_parabolic_knife");
+      }
       possible_precache(possible_precache_items);
     }
 
@@ -713,8 +724,9 @@ give_loadout(character_selected) {
     switch_char = char_switcher();
 
     foreach(playerIndex, player in level.players) {
-      if(is_coop())
+      if(is_coop()) {
         player SetModelFunc(::so_body_player_ranger);
+      }
 
       player giveWeapon("Beretta");
       player giveWeapon("m4_grunt");
@@ -726,8 +738,9 @@ give_loadout(character_selected) {
     }
 
     if(!character_selected) {
-      if(is_coop())
+      if(is_coop()) {
         precacheModel("weapon_parabolic_knife");
+      }
       possible_precache(possible_precache_items);
     }
 
@@ -1448,8 +1461,9 @@ give_loadout(character_selected) {
     }
 
     for(i = 0; i < level.players.size; i++) {
-      if(level.players[i] != level.player)
+      if(level.players[i] != level.player) {
         level.players[i] SetModelFunc(::so_body_player_seal);
+      }
 
       level.players[i] giveWeapon("usp_silencer");
       level.players[i] giveWeapon("mp5_silencer");
@@ -1772,16 +1786,20 @@ give_loadout_specialops(character_selected) {
     foreach(player in level.players) {
       player giveWeapon("claymore");
       player setActionSlot(4, "weapon", "claymore");
-      if(!is_coop())
+      if(!is_coop()) {
         player giveMaxAmmo("claymore");
-      else
+      }
+      else {
         player SetWeaponAmmoStock("claymore", 4);
+      }
       player giveWeapon("c4");
       player setActionSlot(2, "weapon", "c4");
-      if(!is_coop())
+      if(!is_coop()) {
         player giveMaxAmmo("c4");
-      else
+      }
+      else {
         player SetWeaponAmmoStock("c4", 5);
+      }
       player SetOffhandSecondaryClass("other");
       player giveWeapon("semtex_grenade");
     }
@@ -1793,8 +1811,9 @@ give_loadout_specialops(character_selected) {
     switch_char = char_switcher();
 
     // there is a wait at character selection, can not precache after a wait
-    if(!character_selected)
+    if(!character_selected) {
       precacheModel("weapon_parabolic_knife");
+    }
 
     assert(isDefined(level.players));
     assert(level.players.size >= 2);
@@ -1828,10 +1847,12 @@ give_loadout_specialops(character_selected) {
       so_player_set_setOffhandSecondaryClass("flash");
       so_player_giveWeapon("m4m203_reflex_arctic");
       so_player_giveWeapon("m1014");
-      if(i == 0)
+      if(i == 0) {
         so_player_set_switchToWeapon("m4m203_reflex_arctic");
-      else
+      }
+      else {
         so_player_set_switchToWeapon("m1014");
+      }
       so_player_setup_body(i);
     }
 
@@ -1868,10 +1889,12 @@ give_loadout_specialops(character_selected) {
       so_player_giveWeapon("claymore");
       so_player_set_maxammo("claymore");
       so_player_setactionslot(4, "weapon", "claymore");
-      if(i == 0)
+      if(i == 0) {
         so_player_set_switchToWeapon("m4m203_reflex");
-      else
+      }
+      else {
         so_player_set_switchToWeapon("m4m203_reflex");
+      }
       so_player_setup_body(i);
     }
 
@@ -1888,10 +1911,12 @@ give_loadout_specialops(character_selected) {
       so_player_num(i);
       so_player_giveWeapon("m4_grunt");
       so_player_giveWeapon("usp");
-      if(i == 0)
+      if(i == 0) {
         so_player_set_switchToWeapon("m4_grunt");
-      else
+      }
+      else {
         so_player_set_switchToWeapon("m4_grunt");
+      }
       so_player_setup_body(i);
     }
 
@@ -2151,8 +2176,9 @@ give_loadout_specialops(character_selected) {
 
 // To precache possible weapons for alternate character loadout
 possible_precache(possible_precache_items) {
-  foreach(item in possible_precache_items)
+  foreach(item in possible_precache_items) {
   PreCacheItem(item);
+  }
 }
 
 give_default_loadout() {
@@ -2169,8 +2195,9 @@ give_default_loadout() {
   level.player giveWeapon("fraggrenade");
   level.player giveWeapon("flash_grenade");
   level.player setOffhandSecondaryClass("flash");
-  if(is_specialop())
+  if(is_specialop()) {
     level.player giveWeapon("m1014");
+  }
   level.player giveWeapon("mp5");
   level.player switchToWeapon("mp5");
   level.player setViewmodel("viewmodel_base_viewhands");
@@ -2183,10 +2210,12 @@ give_default_loadout_coop(num) {
   so_player_set_setOffhandSecondaryClass("flash");
   so_player_giveWeapon("mp5");
   so_player_giveWeapon("m1014");
-  if(num == 0)
+  if(num == 0) {
     so_player_set_switchToWeapon("mp5");
-  else
+  }
+  else {
     so_player_set_switchToWeapon("m1014");
+  }
   so_player_setup_body(num);
 }
 
@@ -2209,11 +2238,13 @@ give_default_loadout_coop(num) {
 
 SavePlayerWeaponStatePersistent(slot) {
   level.player endon("death");
-  if(level.player.health == 0)
+  if(level.player.health == 0) {
     return;
+  }
   current = level.player GetCurrentPrimaryWeapon();
-  if((!isDefined(current)) || (current == "none"))
+  if((!isDefined(current)) || (current == "none")) {
     assertmsg("Player's current weapon is 'none' or undefined. Make sure 'disableWeapons()' has not been called on the player when trying to save weapon states.");
+  }
   game["weaponstates"][slot]["current"] = current;
 
   offhand = level.player getcurrentoffhand();
@@ -2231,10 +2262,12 @@ SavePlayerWeaponStatePersistent(slot) {
 }
 
 RestorePlayerWeaponStatePersistent(slot) {
-  if(!isDefined(game["weaponstates"]))
+  if(!isDefined(game["weaponstates"])) {
     return false;
-  if(!isDefined(game["weaponstates"][slot]))
+  }
+  if(!isDefined(game["weaponstates"][slot])) {
     return false;
+  }
 
   level.player takeallweapons();
 
@@ -2243,15 +2276,18 @@ RestorePlayerWeaponStatePersistent(slot) {
 
     if(isDefined(level.legit_weapons)) {
       // weapon doesn't exist in this level
-      if(!isDefined(level.legit_weapons[weapName]))
+      if(!isDefined(level.legit_weapons[weapName])) {
         continue;
+      }
     }
 
     // don't carry over C4 or claymores
-    if(weapName == "c4")
+    if(weapName == "c4") {
       continue;
-    if(weapName == "claymore")
+    }
+    if(weapName == "claymore") {
       continue;
+    }
     level.player GiveWeapon(weapName);
     level.player GiveMaxAmmo(weapName);
 
@@ -2262,12 +2298,14 @@ RestorePlayerWeaponStatePersistent(slot) {
 
   if(isDefined(level.legit_weapons)) {
     weapname = game["weaponstates"][slot]["offhand"];
-    if(isDefined(level.legit_weapons[weapName]))
+    if(isDefined(level.legit_weapons[weapName])) {
       level.player switchtooffhand(weapname);
+    }
 
     weapname = game["weaponstates"][slot]["current"];
-    if(isDefined(level.legit_weapons[weapName]))
+    if(isDefined(level.legit_weapons[weapName])) {
       level.player SwitchToWeapon(weapname);
+    }
   } else {
     level.player switchtooffhand(game["weaponstates"][slot]["offhand"]);
     level.player SwitchToWeapon(game["weaponstates"][slot]["current"]);
@@ -2402,10 +2440,12 @@ max_ammo_on_legit_sniper_escape_weapon() {
   heldweapons = level.player GetWeaponsListAll();
   for(i = 0; i < heldweapons.size; i++) {
     weapon = heldweapons[i];
-    if(!isDefined(level.legit_weapons[weapon]))
+    if(!isDefined(level.legit_weapons[weapon])) {
       continue;
-    if(weapon == "rpg")
+    }
+    if(weapon == "rpg") {
       continue;
+    }
 
     level.player givemaxammo(weapon);
   }
@@ -2429,8 +2469,9 @@ force_player_to_use_legit_sniper_escape_weapon() {
     level.player takeweapon(weapon);
   }
 
-  if(count == 2)
+  if(count == 2) {
     return;
+  }
 
   if(count == 0) {
     // need to fill in a slot
@@ -2454,8 +2495,9 @@ coop_gamesetup_menu() {
   // update difficulty:
   maps\_gameskill::setGlobalDifficulty();
 
-  foreach(idx, player in level.players)
+  foreach(idx, player in level.players) {
   player maps\_gameskill::setDifficulty();
+  }
 
   // character selection:
   level.character_switched = false;
@@ -2483,8 +2525,9 @@ coop_gamesetup_menu() {
     if(is_coop() && (level_string == level.script)) {
       pilot_num = getdvar("ui_ac130_pilot_num");
 
-      if(isDefined(pilot_num) && pilot_num != "0")
+      if(isDefined(pilot_num) && pilot_num != "0") {
         level.character_switched = true;
+      }
 
       //reset
       //setdvar ( "ui_ac130_pilot_num", "" );
@@ -2673,24 +2716,29 @@ setup_character_menu()
 coop_gamesetup_ac130() {
   assertex(isDefined(level.specops_character_selector), "Failed to select character");
 
-  if(level.specops_character_selector == "so_char_host")
+  if(level.specops_character_selector == "so_char_host") {
     return level.players[0];
+  }
 
-  if(level.specops_character_selector == "so_char_client")
+  if(level.specops_character_selector == "so_char_client") {
     return level.players[1];
+  }
 
   // failed to select	
   return level.players[0];
 
   /*		
-  	if( cointoss() )
+  	if( cointoss() ) {
   		return level.player2;
-  	else
+  	}
+  	else {
   		return level.player;
+  	}
   		*/
   /*
-  	if( isDefined( level.character_switched ) && level.character_switched )
+  	if( isDefined( level.character_switched ) && level.character_switched ) {
   		return level.player2;
+  	}
 
   	return level.player;
   */
@@ -2701,22 +2749,30 @@ so_player_num(num) {
   level.so_player_add_player_giveWeapon[num] = [];
 
   // level vars if this becomes more commmonly used should put the init somewhere above the loadout section.	
-  if(!isDefined(level.so_player_set_maxammo))
+  if(!isDefined(level.so_player_set_maxammo)) {
     level.so_player_set_maxammo = [];
-  if(!isDefined(level.so_player_set_setViewmodel))
+  }
+  if(!isDefined(level.so_player_set_setViewmodel)) {
     level.so_player_set_setViewmodel = [];
-  if(!isDefined(level.so_player_add_player_giveWeapon))
+  }
+  if(!isDefined(level.so_player_add_player_giveWeapon)) {
     level.so_player_add_player_giveWeapon = [];
-  if(!isDefined(level.so_player_set_setOffhandSecondaryClass))
+  }
+  if(!isDefined(level.so_player_set_setOffhandSecondaryClass)) {
     level.so_player_set_setOffhandSecondaryClass = [];
-  if(!isDefined(level.so_player_set_switchToWeapon))
+  }
+  if(!isDefined(level.so_player_set_switchToWeapon)) {
     level.so_player_set_switchToWeapon = [];
-  if(!isDefined(level.so_player_SetModelFunc))
+  }
+  if(!isDefined(level.so_player_SetModelFunc)) {
     level.so_player_SetModelFunc = [];
-  if(!isDefined(level.so_player_SetModelFunc_precache))
+  }
+  if(!isDefined(level.so_player_SetModelFunc_precache)) {
     level.so_player_SetModelFunc_precache = [];
-  if(!isDefined(level.so_player_SetActionSlot))
+  }
+  if(!isDefined(level.so_player_SetActionSlot)) {
     level.so_player_SetActionSlot = [];
+  }
 
   level.so_player_set_maxammo[num] = [];
   level.so_player_set_setOffhandSecondaryClass[num] = [];
@@ -2726,8 +2782,9 @@ so_player_num(num) {
 so_player_giveWeapon(weapon) {
   assert(isDefined(level.so_player_num));
   num = level.so_player_num;
-  if(!level.character_selected)
+  if(!level.character_selected) {
     precacheitem(weapon);
+  }
   level.so_player_add_player_giveWeapon[num][weapon] = 1;
 }
 
@@ -2752,8 +2809,9 @@ so_player_set_switchToWeapon(weapon) {
 so_player_set_setViewmodel(model) {
   assert(isDefined(level.so_player_num));
   num = level.so_player_num;
-  if(!level.character_selected)
+  if(!level.character_selected) {
     precachemodel(model);
+  }
   level.so_player_set_setViewmodel[num] = model;
 }
 
@@ -2763,8 +2821,9 @@ so_player_SetModelFunc(func, precache_func) {
   level.so_player_SetModelFunc[num] = func;
 
   assert(isDefined(precache_func));
-  if(!level.character_selected)
+  if(!level.character_selected) {
     [[precache_func]]();
+  }
 }
 
 so_player_SetActionSlot(slot, parm1, parm2) {
@@ -2776,12 +2835,15 @@ so_player_SetActionSlot(slot, parm1, parm2) {
   struct = spawnStruct();
   struct.slot = slot;
   struct.parm1 = parm1;
-  if(isDefined(parm2))
+  if(isDefined(parm2)) {
     struct.parm2 = parm2;
-  if(isDefined(level.so_player_SetActionSlot[num]))
+  }
+  if(isDefined(level.so_player_SetActionSlot[num])) {
     index = level.so_player_SetActionSlot[num].size;
-  else
+  }
+  else {
     index = 0;
+  }
   level.so_player_SetActionSlot[num][index] = struct;
 }
 
@@ -2798,31 +2860,38 @@ so_player_give_loadout(num) {
   weapons = getarraykeys(level.so_player_add_player_giveWeapon[num]);
   foreach(weapon in weapons) {
     player giveweapon(weapon);
-    if(isDefined(level.so_player_set_maxammo[num][weapon]))
+    if(isDefined(level.so_player_set_maxammo[num][weapon])) {
       player givemaxammo(weapon);
+    }
   }
 
-  if(isDefined(level.so_player_set_setOffhandSecondaryClass[num]))
+  if(isDefined(level.so_player_set_setOffhandSecondaryClass[num])) {
     player setOffhandSecondaryClass("flash");
+  }
 
-  if(isDefined(level.so_player_SetActionSlot[num]))
+  if(isDefined(level.so_player_SetActionSlot[num])) {
     player so_players_give_action(num);
+  }
 
-  if(isDefined(level.so_player_set_switchToWeapon[num]))
+  if(isDefined(level.so_player_set_switchToWeapon[num])) {
     player switchtoweapon(level.so_player_set_switchToWeapon[num]);
+  }
 
-  if(isDefined(level.so_player_set_setViewmodel[num]))
+  if(isDefined(level.so_player_set_setViewmodel[num])) {
     player setviewmodel(level.so_player_set_setViewmodel[num]);
+  }
 }
 
 so_players_give_action(num) {
   player = self;
 
   foreach(struct in level.so_player_SetActionSlot[num]) {
-    if(isDefined(struct.parm2))
+    if(isDefined(struct.parm2)) {
       player SetActionSlot(struct.slot, struct.parm1, struct.parm2);
-    else
+    }
+    else {
       player SetActionSlot(struct.slot, struct.parm1);
+    }
   }
 }
 
@@ -2843,8 +2912,9 @@ UpdateModel(modelFunc) {
 
   self.last_modelfunc = modelFunc;
 
-  if(isDefined(self.is_hidden) && self.is_hidden)
+  if(isDefined(self.is_hidden) && self.is_hidden) {
     return;
+  }
 
   self endon("newupdatemodel");
 
@@ -2876,8 +2946,9 @@ UpdateModel(modelFunc) {
       self attach(knife_model, "tag_inhand", true);
     } else
     if(self isDualWielding()) {
-      if(isDefined(weapon_model))
+      if(isDefined(weapon_model)) {
         self attach(weapon_model, "tag_weapon_left", true);
+      }
     }
 
     // Need to swap this to do all weapons that are visible when stowing is supported.
@@ -2887,8 +2958,9 @@ UpdateModel(modelFunc) {
     if(isDefined(weapon_model)) {
       hide_tag_list = GetWeaponHideTags(weapon);
       if(isDefined(hide_tag_list)) {
-        foreach(part in hide_tag_list)
+        foreach(part in hide_tag_list) {
         self HidePart_AllInstances(part, weapon_model);
+        }
       }
     }
 
@@ -2898,8 +2970,9 @@ UpdateModel(modelFunc) {
 
 so_player_setup_body(num) {
   so_player_set_setViewmodel(so_player_get_hands());
-  if(is_coop())
+  if(is_coop()) {
     so_player_SetModelFunc(so_player_get_bodyfunc(num), so_player_get_bodyfunc_precache(num));
+  }
 }
 
 so_player_get_bodyfunc(num) {

@@ -7,8 +7,9 @@
 getexploders(var_0) {
   var_0 = var_0 + "";
 
-  if(isDefined(level.createfxexploders))
+  if(isDefined(level.createfxexploders)) {
     return level.createfxexploders[var_0];
+  }
 
   var_1 = [];
 
@@ -22,8 +23,9 @@ getexploders(var_0) {
     if(!isDefined(var_3.v["exploder"])) {
       continue;
     }
-    if(var_3.v["exploder"] == var_0)
+    if(var_3.v["exploder"] == var_0) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   return var_1;
@@ -32,13 +34,15 @@ getexploders(var_0) {
 setup_individual_exploder(var_0) {
   var_1 = var_0.script_exploder;
 
-  if(!isDefined(level.exploders[var_1]))
+  if(!isDefined(level.exploders[var_1])) {
     level.exploders[var_1] = [];
+  }
 
   var_2 = var_0.targetname;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = "";
+  }
 
   level.exploders[var_1][level.exploders[var_1].size] = var_0;
 
@@ -52,8 +56,9 @@ setup_individual_exploder(var_0) {
     var_0 notsolid();
 
     if(isDefined(var_0.spawnflags) && var_0.spawnflags & 1) {
-      if(isDefined(var_0.script_disconnectpaths))
+      if(isDefined(var_0.script_disconnectpaths)) {
         var_0 connectpaths();
+      }
     }
 
     return;
@@ -63,8 +68,9 @@ setup_individual_exploder(var_0) {
     var_0 hide();
     var_0 notsolid();
 
-    if(isDefined(var_0.spawnflags) && var_0.spawnflags & 1)
+    if(isDefined(var_0.spawnflags) && var_0.spawnflags & 1) {
       var_0 connectpaths();
+    }
 
     return;
   }
@@ -73,8 +79,9 @@ setup_individual_exploder(var_0) {
     var_0 hide();
     var_0 notsolid();
 
-    if(isDefined(var_0.spawnflags) && var_0.spawnflags & 1)
+    if(isDefined(var_0.spawnflags) && var_0.spawnflags & 1) {
       var_0 connectpaths();
+    }
 
     return;
   }
@@ -85,59 +92,70 @@ setupexploders() {
   var_0 = getEntArray("script_brushmodel", "classname");
   var_1 = getEntArray("script_model", "classname");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_0[var_0.size] = var_1[var_2];
+  }
 
   foreach(var_4 in var_0) {
-    if(isDefined(var_4.script_prefab_exploder))
+    if(isDefined(var_4.script_prefab_exploder)) {
       var_4.script_exploder = var_4.script_prefab_exploder;
+    }
 
     if(isDefined(var_4.masked_exploder)) {
       continue;
     }
-    if(isDefined(var_4.script_exploder))
+    if(isDefined(var_4.script_exploder)) {
       setup_individual_exploder(var_4);
+    }
   }
 
   var_6 = [];
   var_7 = getEntArray("script_brushmodel", "classname");
 
   for(var_2 = 0; var_2 < var_7.size; var_2++) {
-    if(isDefined(var_7[var_2].script_prefab_exploder))
+    if(isDefined(var_7[var_2].script_prefab_exploder)) {
       var_7[var_2].script_exploder = var_7[var_2].script_prefab_exploder;
+    }
 
-    if(isDefined(var_7[var_2].script_exploder))
+    if(isDefined(var_7[var_2].script_exploder)) {
       var_6[var_6.size] = var_7[var_2];
+    }
   }
 
   var_7 = getEntArray("script_model", "classname");
 
   for(var_2 = 0; var_2 < var_7.size; var_2++) {
-    if(isDefined(var_7[var_2].script_prefab_exploder))
+    if(isDefined(var_7[var_2].script_prefab_exploder)) {
       var_7[var_2].script_exploder = var_7[var_2].script_prefab_exploder;
+    }
 
-    if(isDefined(var_7[var_2].script_exploder))
+    if(isDefined(var_7[var_2].script_exploder)) {
       var_6[var_6.size] = var_7[var_2];
+    }
   }
 
   var_7 = getEntArray("script_origin", "classname");
 
   for(var_2 = 0; var_2 < var_7.size; var_2++) {
-    if(isDefined(var_7[var_2].script_prefab_exploder))
+    if(isDefined(var_7[var_2].script_prefab_exploder)) {
       var_7[var_2].script_exploder = var_7[var_2].script_prefab_exploder;
+    }
 
-    if(isDefined(var_7[var_2].script_exploder))
+    if(isDefined(var_7[var_2].script_exploder)) {
       var_6[var_6.size] = var_7[var_2];
+    }
   }
 
   var_7 = getEntArray("item_health", "classname");
 
   for(var_2 = 0; var_2 < var_7.size; var_2++) {
-    if(isDefined(var_7[var_2].script_prefab_exploder))
+    if(isDefined(var_7[var_2].script_prefab_exploder)) {
       var_7[var_2].script_exploder = var_7[var_2].script_prefab_exploder;
+    }
 
-    if(isDefined(var_7[var_2].script_exploder))
+    if(isDefined(var_7[var_2].script_exploder)) {
       var_6[var_6.size] = var_7[var_2];
+    }
   }
 
   var_7 = level.struct;
@@ -146,19 +164,22 @@ setupexploders() {
     if(!isDefined(var_7[var_2])) {
       continue;
     }
-    if(isDefined(var_7[var_2].script_prefab_exploder))
+    if(isDefined(var_7[var_2].script_prefab_exploder)) {
       var_7[var_2].script_exploder = var_7[var_2].script_prefab_exploder;
+    }
 
     if(isDefined(var_7[var_2].script_exploder)) {
-      if(!isDefined(var_7[var_2].angles))
+      if(!isDefined(var_7[var_2].angles)) {
         var_7[var_2].angles = (0, 0, 0);
+      }
 
       var_6[var_6.size] = var_7[var_2];
     }
   }
 
-  if(!isDefined(level.createfxent))
+  if(!isDefined(level.createfxent)) {
     level.createfxent = [];
+  }
 
   var_8 = [];
   var_8["exploderchunk visible"] = 1;
@@ -191,25 +212,29 @@ setupexploders() {
     var_4.v["physics"] = var_9.script_physics;
     var_4.v["type"] = "exploder";
 
-    if(!isDefined(var_9.script_fxid))
+    if(!isDefined(var_9.script_fxid)) {
       var_4.v["fxid"] = "No FX";
-    else
+    }
+    else {
       var_4.v["fxid"] = var_9.script_fxid;
+    }
 
     var_4.v["exploder"] = var_9.script_exploder;
 
     if(isDefined(level.createfxexploders)) {
       var_10 = level.createfxexploders[var_4.v["exploder"]];
 
-      if(!isDefined(var_10))
+      if(!isDefined(var_10)) {
         var_10 = [];
+      }
 
       var_10[var_10.size] = var_4;
       level.createfxexploders[var_4.v["exploder"]] = var_10;
     }
 
-    if(!isDefined(var_4.v["delay"]))
+    if(!isDefined(var_4.v["delay"])) {
       var_4.v["delay"] = 0;
+    }
 
     if(isDefined(var_9.target)) {
       var_11 = getEntArray(var_4.v["target"], "targetname")[0];
@@ -230,19 +255,23 @@ setupexploders() {
     if(!isDefined(var_9.code_classname)) {
       var_4.model = var_9;
 
-      if(isDefined(var_4.model.script_modelname))
+      if(isDefined(var_4.model.script_modelname)) {
         precachemodel(var_4.model.script_modelname);
+      }
     } else if(var_9.code_classname == "script_brushmodel" || isDefined(var_9.model)) {
       var_4.model = var_9;
       var_4.model.disconnect_paths = var_9.script_disconnectpaths;
     }
 
-    if(isDefined(var_9.targetname) && isDefined(var_8[var_9.targetname]))
+    if(isDefined(var_9.targetname) && isDefined(var_8[var_9.targetname])) {
       var_4.v["exploder_type"] = var_9.targetname;
-    else if(isDefined(var_9.targetname) && issubstr(var_9.targetname, "exploderanim"))
+    }
+    else if(isDefined(var_9.targetname) && issubstr(var_9.targetname, "exploderanim")) {
       var_4.v["exploder_type"] = "exploderanim";
-    else
+    }
+    else {
       var_4.v["exploder_type"] = "normal";
+    }
 
     if(isDefined(var_9.masked_exploder)) {
       var_4.v["masked_exploder"] = var_9.model;
@@ -254,8 +283,9 @@ setupexploders() {
     var_4 common_scripts\_createfx::post_entity_creation_function();
   }
 
-  if(level.createfx_enabled && getdvar("createfx_exploder_waittime") == "")
+  if(level.createfx_enabled && getdvar("createfx_exploder_waittime") == "") {
     setdvar("createfx_exploder_waittime", 3);
+  }
 }
 
 setup_flag_exploders() {
@@ -273,19 +303,22 @@ setup_flag_exploders() {
     if(!isDefined(var_3)) {
       continue;
     }
-    if(var_3 == "nil")
+    if(var_3 == "nil") {
       var_2.v["flag"] = undefined;
+    }
 
     var_0[var_3] = 1;
   }
 
-  foreach(var_7, var_6 in var_0)
+  foreach(var_7, var_6 in var_0) {
   thread exploder_flag_wait(var_7);
+  }
 }
 
 exploder_flag_wait(var_0) {
-  if(!common_scripts\utility::flag_exist(var_0))
+  if(!common_scripts\utility::flag_exist(var_0)) {
     common_scripts\utility::flag_init(var_0);
+  }
 
   common_scripts\utility::flag_wait(var_0);
 
@@ -329,11 +362,13 @@ show_exploder_models_proc(var_0) {
 
     if(isDefined(var_1)) {
       foreach(var_3 in var_1) {
-        if(!exploder_model_starts_hidden(var_3.model) && !exploder_model_is_damaged_model(var_3.model) && !exploder_model_is_chunk(var_3.model))
+        if(!exploder_model_starts_hidden(var_3.model) && !exploder_model_is_damaged_model(var_3.model) && !exploder_model_is_chunk(var_3.model)) {
           var_3.model show();
+        }
 
-        if(isDefined(var_3.brush_shown))
+        if(isDefined(var_3.brush_shown)) {
           var_3.model show();
+        }
       }
 
       return;
@@ -355,11 +390,13 @@ show_exploder_models_proc(var_0) {
         continue;
       }
       if(isDefined(var_3.model)) {
-        if(!exploder_model_starts_hidden(var_3.model) && !exploder_model_is_damaged_model(var_3.model) && !exploder_model_is_chunk(var_3.model))
+        if(!exploder_model_starts_hidden(var_3.model) && !exploder_model_is_damaged_model(var_3.model) && !exploder_model_is_chunk(var_3.model)) {
           var_3.model show();
+        }
 
-        if(isDefined(var_3.brush_shown))
+        if(isDefined(var_3.brush_shown)) {
           var_3.model show();
+        }
       }
     }
   }
@@ -412,8 +449,9 @@ get_exploder_array_proc(var_0) {
   if(isDefined(level.createfxexploders)) {
     var_2 = level.createfxexploders[var_0];
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_1 = var_2;
+    }
   } else {
     foreach(var_4 in level.createfxent) {
       if(var_4.v["type"] != "exploder") {
@@ -440,8 +478,9 @@ hide_exploder_models_proc(var_0) {
 
     if(isDefined(var_1)) {
       foreach(var_3 in var_1) {
-        if(isDefined(var_3.model))
+        if(isDefined(var_3.model)) {
           var_3.model hide();
+        }
       }
 
       return;
@@ -462,8 +501,9 @@ hide_exploder_models_proc(var_0) {
       if(var_3.v["exploder"] + "" != var_0) {
         continue;
       }
-      if(isDefined(var_3.model))
+      if(isDefined(var_3.model)) {
         var_3.model hide();
+      }
     }
   }
 }
@@ -476,8 +516,9 @@ delete_exploder_proc(var_0) {
 
     if(isDefined(var_1)) {
       foreach(var_3 in var_1) {
-        if(isDefined(var_3.model))
+        if(isDefined(var_3.model)) {
           var_3.model delete();
+        }
       }
     }
   } else {
@@ -496,8 +537,9 @@ delete_exploder_proc(var_0) {
       if(var_3.v["exploder"] + "" != var_0) {
         continue;
       }
-      if(isDefined(var_3.model))
+      if(isDefined(var_3.model)) {
         var_3.model delete();
+      }
     }
   }
 
@@ -505,71 +547,91 @@ delete_exploder_proc(var_0) {
 }
 
 exploder_damage() {
-  if(isDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"])) {
     var_0 = self.v["delay"];
-  else
+  }
+  else {
     var_0 = 0;
+  }
 
-  if(isDefined(self.v["damage_radius"]))
+  if(isDefined(self.v["damage_radius"])) {
     var_1 = self.v["damage_radius"];
-  else
+  }
+  else {
     var_1 = 128;
+  }
 
   var_2 = self.v["damage"];
   var_3 = self.v["origin"];
   wait(var_0);
 
-  if(isDefined(level.custom_radius_damage_for_exploders))
+  if(isDefined(level.custom_radius_damage_for_exploders)) {
     [[level.custom_radius_damage_for_exploders]](var_3, var_1, var_2);
-  else
+  }
+  else {
     radiusdamage(var_3, var_1, var_2, var_2);
+  }
 }
 
 activate_individual_exploder_proc() {
-  if(isDefined(self.v["firefx"]))
+  if(isDefined(self.v["firefx"])) {
     thread fire_effect();
+  }
 
-  if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX")
+  if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
     thread cannon_effect();
-  else if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil")
+  }
+  else if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
     thread sound_effect();
+  }
 
-  if(isDefined(self.v["loopsound"]) && self.v["loopsound"] != "nil")
+  if(isDefined(self.v["loopsound"]) && self.v["loopsound"] != "nil") {
     thread effect_loopsound();
+  }
 
-  if(isDefined(self.v["damage"]))
+  if(isDefined(self.v["damage"])) {
     thread exploder_damage();
+  }
 
-  if(isDefined(self.v["earthquake"]))
+  if(isDefined(self.v["earthquake"])) {
     thread exploder_earthquake();
+  }
 
-  if(isDefined(self.v["rumble"]))
+  if(isDefined(self.v["rumble"])) {
     thread exploder_rumble();
+  }
 
-  if(self.v["exploder_type"] == "exploderanim")
+  if(self.v["exploder_type"] == "exploderanim") {
     thread exploder_anim();
-  else if(self.v["exploder_type"] == "exploder")
+  }
+  else if(self.v["exploder_type"] == "exploder") {
     thread brush_show();
-  else if(self.v["exploder_type"] == "exploderchunk" || self.v["exploder_type"] == "exploderchunk visible")
+  }
+  else if(self.v["exploder_type"] == "exploderchunk" || self.v["exploder_type"] == "exploderchunk visible") {
     thread brush_throw();
-  else
+  }
+  else {
     thread brush_delete();
+  }
 }
 
 brush_delete() {
   var_0 = self.v["exploder"];
 
-  if(isDefined(self.v["delay"]) && self.v["delay"] >= 0)
+  if(isDefined(self.v["delay"]) && self.v["delay"] >= 0) {
     wait(self.v["delay"]);
-  else
+  }
+  else {
     wait 0.05;
+  }
 
   if(!isDefined(self.model)) {
     return;
   }
   if(isDefined(self.model.classname)) {
-    if(common_scripts\utility::issp() && self.model.spawnflags & 1)
+    if(common_scripts\utility::issp() && self.model.spawnflags & 1) {
       self.model call[[level.connectpathsfunction]]();
+    }
   }
 
   if(level.createfx_enabled) {
@@ -595,35 +657,41 @@ brush_delete() {
     return;
   }
 
-  if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX")
+  if(!isDefined(self.v["fxid"]) || self.v["fxid"] == "No FX") {
     self.v["exploder"] = undefined;
+  }
 
   waittillframeend;
 
-  if(isDefined(self.model) && isDefined(self.model.classname))
+  if(isDefined(self.model) && isDefined(self.model.classname)) {
     self.model delete();
+  }
 }
 
 brush_throw() {
-  if(isDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
+  }
 
   var_0 = undefined;
 
-  if(isDefined(self.v["target"]))
+  if(isDefined(self.v["target"])) {
     var_0 = common_scripts\utility::get_target_ent(self.v["target"]);
+  }
 
   if(!isDefined(var_0)) {
-    if(isDefined(self.model))
+    if(isDefined(self.model)) {
       self.model delete();
+    }
 
     return;
   }
 
   self.model show();
 
-  if(isDefined(self.v["delay_post"]))
+  if(isDefined(self.v["delay_post"])) {
     wait(self.v["delay_post"]);
+  }
 
   var_1 = self.v["origin"];
   var_2 = self.v["angles"];
@@ -637,8 +705,9 @@ brush_throw() {
   if(var_8) {
     var_9 = undefined;
 
-    if(isDefined(var_0.target))
+    if(isDefined(var_0.target)) {
       var_9 = var_0 common_scripts\utility::get_target_ent();
+    }
 
     if(!isDefined(var_9)) {
       var_10 = var_1;
@@ -672,13 +741,15 @@ brush_throw() {
   self.v["exploder"] = undefined;
   wait 6;
 
-  if(isDefined(self.model))
+  if(isDefined(self.model)) {
     self.model delete();
+  }
 }
 
 brush_show() {
-  if(isDefined(self.v["delay"]))
+  if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
+  }
 
   if(!isDefined(self.model.script_modelname)) {
     self.model show();
@@ -686,8 +757,9 @@ brush_show() {
   } else {
     var_0 = self.model common_scripts\utility::spawn_tag_origin();
 
-    if(isDefined(self.model.script_linkname))
+    if(isDefined(self.model.script_linkname)) {
       var_0.script_linkname = self.model.script_linkname;
+    }
 
     var_0 setModel(self.model.script_modelname);
     var_0 show();
@@ -696,10 +768,12 @@ brush_show() {
   self.brush_shown = 1;
 
   if(common_scripts\utility::issp() && !isDefined(self.model.script_modelname) && self.model.spawnflags & 1) {
-    if(!isDefined(self.model.disconnect_paths))
+    if(!isDefined(self.model.disconnect_paths)) {
       self.model call[[level.connectpathsfunction]]();
-    else
+    }
+    else {
       self.model call[[level.disconnectpathsfunction]]();
+    }
   }
 
   if(level.createfx_enabled) {
@@ -723,8 +797,9 @@ exploder_anim() {
   var_0 show();
   var_0 solid();
 
-  if(isDefined(var_0.spawnflags) && var_0.spawnflags & 1)
+  if(isDefined(var_0.spawnflags) && var_0.spawnflags & 1) {
     var_0 connectpaths();
+  }
 
   var_0 notify("play_exploder_anim");
 }
@@ -738,25 +813,30 @@ exploder_rumble() {
 }
 
 exploder_delay() {
-  if(!isDefined(self.v["delay"]))
+  if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
+  }
 
   var_0 = self.v["delay"];
   var_1 = self.v["delay"] + 0.001;
 
-  if(isDefined(self.v["delay_min"]))
+  if(isDefined(self.v["delay_min"])) {
     var_0 = self.v["delay_min"];
+  }
 
-  if(isDefined(self.v["delay_max"]))
+  if(isDefined(self.v["delay_max"])) {
     var_1 = self.v["delay_max"];
+  }
 
-  if(var_0 > 0)
+  if(var_0 > 0) {
     wait(randomfloatrange(var_0, var_1));
+  }
 }
 
 effect_loopsound() {
-  if(isDefined(self.loopsound_ent))
+  if(isDefined(self.loopsound_ent)) {
     self.loopsound_ent delete();
+  }
 
   var_0 = self.v["origin"];
   var_1 = self.v["loopsound"];
@@ -796,18 +876,21 @@ fire_effect() {
   var_5 = self.v["firefx"];
   var_6 = self.v["ender"];
 
-  if(!isDefined(var_6))
+  if(!isDefined(var_6)) {
     var_6 = "createfx_effectStopper";
+  }
 
   var_7 = 0.5;
 
-  if(isDefined(self.v["firefxdelay"]))
+  if(isDefined(self.v["firefxdelay"])) {
     var_7 = self.v["firefxdelay"];
+  }
 
   exploder_delay();
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     common_scripts\utility::loop_fx_sound_with_angles(var_3, var_4, (0, 0, 0), 1, var_6);
+  }
 
   playFX(level._effect[var_5], self.v["origin"], var_0, var_1);
 }
@@ -824,8 +907,9 @@ cannon_effect() {
     return;
   }
 
-  if(!isDefined(self.v["delay"]))
+  if(!isDefined(self.v["delay"])) {
     self.v["delay"] = 0;
+  }
 
   if(self.v["delay"] >= 0) {
     exploder_delay();
@@ -833,27 +917,33 @@ cannon_effect() {
   } else
     var_1 = self.v["delay"];
 
-  if(isDefined(self.v["cannon_spawn_func"]))
+  if(isDefined(self.v["cannon_spawn_func"])) {
     self[[self.v["cannon_spawn_func"]]]();
-  else
+  }
+  else {
     cannon_spawnfx(var_1);
+  }
 
   exploder_playSound();
 }
 
 cannon_spawnfx(var_0) {
-  if(isDefined(self.looper))
+  if(isDefined(self.looper)) {
     self.looper delete();
+  }
 
   self.looper = spawnfx(common_scripts\utility::getfx(self.v["fxid"]), self.v["origin"], self.v["forward"], self.v["up"]);
 
-  if(level.createfx_enabled)
+  if(level.createfx_enabled) {
     setfxkillondelete(self.looper, 1);
+  }
 
-  if(self.v["delay"] >= 0)
+  if(self.v["delay"] >= 0) {
     triggerfx(self.looper);
-  else
+  }
+  else {
     triggerfx(self.looper, var_0);
+  }
 }
 
 activate_exploder(var_0, var_1, var_2) {
@@ -897,8 +987,9 @@ activate_exploder(var_0, var_1, var_2) {
     }
   }
 
-  if(!shouldrunserversideeffects() && !var_3)
+  if(!shouldrunserversideeffects() && !var_3) {
     activate_clientside_exploder(var_0, var_1, var_2);
+  }
 }
 
 exploder(var_0, var_1, var_2) {
@@ -910,14 +1001,16 @@ kill_exploder(var_0) {
 
   if(isDefined(var_1)) {
     foreach(var_3 in var_1) {
-      if(isDefined(var_3.looper))
+      if(isDefined(var_3.looper)) {
         setfxkillondelete(var_3.looper, 1);
+      }
     }
 
     waitframe();
 
-    foreach(var_3 in var_1)
+    foreach(var_3 in var_1) {
     var_3 common_scripts\utility::pauseeffect();
+    }
   }
 }
 
@@ -927,8 +1020,9 @@ check_exploder_platform() {
   if(isDefined(var_0.v["platform"]) && isDefined(level.currentgen)) {
     var_1 = var_0.v["platform"];
 
-    if(var_1 == "cg" && !level.currentgen || var_1 == "ng" && !level.nextgen)
+    if(var_1 == "cg" && !level.currentgen || var_1 == "ng" && !level.nextgen) {
       return 0;
+    }
   }
 
   return 1;
@@ -951,32 +1045,38 @@ deactivate_clientside_exploder(var_0, var_1, var_2) {
 }
 
 is_valid_clientside_exploder_name(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
   var_1 = var_0;
 
   if(isstring(var_0)) {
     var_1 = int(var_0);
 
-    if(var_1 == 0 && var_0 != "0")
+    if(var_1 == 0 && var_0 != "0") {
       return 0;
+    }
   }
 
   return var_1 >= 0;
 }
 
 shouldrunserversideeffects() {
-  if(common_scripts\utility::issp())
+  if(common_scripts\utility::issp()) {
     return 1;
+  }
 
-  if(!isDefined(level.createfx_enabled))
+  if(!isDefined(level.createfx_enabled)) {
     level.createfx_enabled = getdvar("createfx") != "";
+  }
 
-  if(level.createfx_enabled)
+  if(level.createfx_enabled) {
     return 1;
-  else
+  }
+  else {
     return getdvar("clientSideEffects") != "1";
+  }
 }
 
 exploder_before_load(var_0, var_1, var_2) {

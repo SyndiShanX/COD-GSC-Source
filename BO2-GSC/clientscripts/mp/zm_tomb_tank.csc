@@ -57,8 +57,9 @@ sndstopflamethrower(ent) {
 play_flamethrower_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self notify("stop_flamethrower");
 
-  if(!isDefined(self.sndflame))
+  if(!isDefined(self.sndflame)) {
     self.sndflame = spawn(0, (0, 0, 0), "script_origin");
+  }
 
   if(newval == 0) {
     return;
@@ -85,13 +86,16 @@ play_exhaust_fx(localclientnum, is_overheat) {
   self endon("stop_exhaust_fx");
   fx_id = level._effect["tank_exhaust"];
 
-  if(is_overheat)
+  if(is_overheat) {
     fx_id = level._effect["tank_overheat"];
+  }
 
-  if(is_overheat)
+  if(is_overheat) {
     self thread sndplayoverheat(self.origin);
-  else
+  }
+  else {
     self thread sndplayexhaust();
+  }
 
   while(true) {
     playFXOnTag(localclientnum, fx_id, self, "tag_origin");

@@ -20,10 +20,12 @@ init() {
 init_stage() {
   level.sq_ftl_lantern_fuel = 0;
 
-  if(flag("sq_is_max_tower_built"))
+  if(flag("sq_is_max_tower_built")) {
     level thread stage_vo_max();
-  else
+  }
+  else {
     level thread stage_vo_ric();
+  }
 
   level._cur_stage_name = "ftl";
   clientnotify("ftl");
@@ -32,17 +34,21 @@ init_stage() {
 stage_logic() {
   iprintlnbold("FTL Started");
 
-  if(flag("sq_is_max_tower_built"))
+  if(flag("sq_is_max_tower_built")) {
     max_fill_lantern_watcher();
-  else
+  }
+  else {
     ric_fill_lantern_watcher();
+  }
 
   flag_wait("ftl_lantern_charged");
 
-  if(flag("sq_is_max_tower_built"))
+  if(flag("sq_is_max_tower_built")) {
     thread stage_vo_filled_max();
-  else
+  }
+  else {
     thread stage_vo_filled_ric();
+  }
 
   sq_ftl_show_marker();
   wait_for_buildable("buried_sq_oillamp");
@@ -64,8 +70,9 @@ stage_vo_max() {
 sq_ftl_maxis_vo_on_holder(str_vox) {
   player = sq_ftl_get_lantern_holder();
 
-  if(isDefined(player))
+  if(isDefined(player)) {
     maxissay(str_vox, player);
+  }
 }
 
 sq_ftl_show_marker() {
@@ -78,8 +85,9 @@ sq_ftl_get_lantern_holder() {
   players = get_players();
 
   foreach(player in players) {
-    if(isDefined(player player_get_buildable_piece(2)) && isDefined(player player_get_buildable_piece(2).buildablename == "sq_ghost_lamp"))
+    if(isDefined(player player_get_buildable_piece(2)) && isDefined(player player_get_buildable_piece(2).buildablename == "sq_ghost_lamp")) {
       return player;
+    }
   }
 }
 
@@ -119,8 +127,9 @@ max_lantern_zombie_death_watcher() {
 
   foreach(player in players) {
     if(isDefined(player player_get_buildable_piece(2)) && isDefined(player player_get_buildable_piece(2).buildablename == "sq_ghost_lamp")) {
-      if(isDefined(self) && distancesquared(player.origin, self.origin) < 65536)
+      if(isDefined(self) && distancesquared(player.origin, self.origin) < 65536) {
         player ftl_lantern_increment();
+      }
     }
   }
 }
@@ -130,8 +139,9 @@ ric_fill_lantern_watcher() {
   a_ghost = [];
 
   foreach(e_axis in a_axis) {
-    if(is_true(e_axis.is_ghost))
+    if(is_true(e_axis.is_ghost)) {
       a_ghost[a_ghost.size] = e_axis;
+    }
   }
 
   array_thread(a_ghost, ::ric_lantern_ghost_death_watcher);
@@ -150,8 +160,9 @@ ric_lantern_ghost_death_watcher() {
 
   foreach(player in players) {
     if(isDefined(player player_get_buildable_piece(2)) && isDefined(player player_get_buildable_piece(2).buildablename == "sq_ghost_lamp")) {
-      if(isDefined(self) && distancesquared(player.origin, self.origin) < 65536)
+      if(isDefined(self) && distancesquared(player.origin, self.origin) < 65536) {
         player ftl_lantern_increment();
+      }
     }
   }
 }

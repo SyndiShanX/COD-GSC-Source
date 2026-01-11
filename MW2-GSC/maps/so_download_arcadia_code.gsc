@@ -1241,16 +1241,19 @@ waittill_both_players_touch_targetname(tn) {
 // kinda rough method to test if an AI is in view of the player - only checks three points (low, mid, high)
 any_player_can_see_ai(ai) {
   feetOrigin = ai.origin;
-  if(any_player_can_see_origin(feetOrigin))
+  if(any_player_can_see_origin(feetOrigin)) {
     return true;
+  }
 
   midOrigin = ai GetTagOrigin("J_SpineLower");
-  if(any_player_can_see_origin(midOrigin))
+  if(any_player_can_see_origin(midOrigin)) {
     return true;
+  }
 
   eyeOrigin = ai getEye();
-  if(any_player_can_see_origin(eyeOrigin))
+  if(any_player_can_see_origin(eyeOrigin)) {
     return true;
+  }
 
   return false;
 }

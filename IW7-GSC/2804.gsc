@@ -15,8 +15,9 @@ init() {
     var_01 = 25;
     var_02 = 26;
 
-    if(level.gametype == "sd")
+    if(level.gametype == "sd") {
       var_02 = 2;
+    }
   } else {
     var_00 = 4;
     var_01 = 14;
@@ -51,56 +52,71 @@ init() {
     var_5.func_9FF8 = func_DD68(var_03, 18, 1);
     level.func_11264[var_03] = var_04;
 
-    if(!isDefined(level.func_2EFC))
+    if(!isDefined(level.func_2EFC)) {
       level.func_2EFC[var_5.archetype] = [];
+    }
 
-    if(!isDefined(level.func_2EFC[var_5.archetype]))
+    if(!isDefined(level.func_2EFC[var_5.archetype])) {
       level.func_2EFC[var_5.archetype] = [];
+    }
 
-    if(scripts\mp\bots\bots_supers::func_9F8B(var_04))
+    if(scripts\mp\bots\bots_supers::func_9F8B(var_04)) {
       level.func_2EFC[var_5.archetype][level.func_2EFC[var_5.archetype].size] = var_04;
+    }
 
-    if(!isDefined(var_5.weapon))
+    if(!isDefined(var_5.weapon)) {
       level.func_10E4E[var_04] = undefined;
+    }
 
-    if(!isDefined(var_5.cooldown))
+    if(!isDefined(var_5.cooldown)) {
       level.func_10E4E[var_04] = undefined;
+    }
 
     if(isDefined(var_5.func_B473)) {
-      if(var_5.func_B473 > 0)
+      if(var_5.func_B473 > 0) {
         var_5.func_1616 = var_5.func_5F36 / var_5.func_B473 * 1000.0;
-      else
+      }
+      else {
         var_5.func_1616 = var_5.func_5F36;
+      }
     }
 
     if(isDefined(var_5.func_B474)) {
-      if(var_5.func_B474 > 0)
+      if(var_5.func_B474 > 0) {
         var_5.func_1617 = var_5.func_5F36 / var_5.func_B474 * 1000.0;
+      }
     }
 
-    if(isDefined(var_5.useweapon))
+    if(isDefined(var_5.useweapon)) {
       func_1831(var_5.useweapon, var_04, var_05);
+    }
 
-    if(var_5.weapon == "<default>")
+    if(var_5.weapon == "<default>") {
       var_5.weapon = "super_default_mp";
+    }
 
-    if(isDefined(var_5._meth_8487))
+    if(isDefined(var_5._meth_8487)) {
       var_5._meth_8487 = var_5._meth_8487 * 1000.0;
-    else
+    }
+    else {
       var_5._meth_8487 = 0.0;
+    }
 
-    if(isDefined(var_5.func_12B28))
+    if(isDefined(var_5.func_12B28)) {
       var_5.func_12B28 = var_5.func_12B28 * 1000.0;
-    else
+    }
+    else {
       var_5.func_12B28 = 0.0;
+    }
 
     var_3++;
   }
 
   var_06 = tablelookup("mp\superratetable.csv", 0, level.gametype, 1);
 
-  if(isDefined(var_06) && var_06 != "")
+  if(isDefined(var_06) && var_06 != "") {
     level.func_1125E = float(var_06);
+  }
 
   func_DF10();
   scripts\mp\supers\super_reaper::func_DD9E();
@@ -159,14 +175,17 @@ func_DF0F(var_00, var_01, var_02, var_03, var_04) {
 func_DD68(var_00, var_01, var_02) {
   var_03 = tablelookupbyrow("mp\supertable.csv", var_00, var_01);
 
-  if(var_03 == "")
+  if(var_03 == "") {
     return undefined;
+  }
 
   if(scripts\mp\utility\game::istrue(var_02)) {
-    if(issubstr(var_03, "."))
+    if(issubstr(var_03, ".")) {
       var_03 = float(var_03);
-    else
+    }
+    else {
       var_03 = int(var_03);
+    }
   }
 
   return var_03;
@@ -194,8 +213,9 @@ stopridingvehicle(var_00, var_01) {
   var_3.canstow = 0;
   var_04 = var_3.staticdata.func_F71E;
 
-  if(isDefined(var_04))
+  if(isDefined(var_04)) {
     self thread[[var_04]]();
+  }
 
   self setclientomnvar("ui_super_ref", var_00);
   var_05 = 0;
@@ -230,20 +250,24 @@ clearsuper(var_00) {
   if(isDefined(var_01) && isDefined(var_1.staticdata)) {
     var_02 = var_1.staticdata.func_12CC4;
 
-    if(isDefined(var_02))
+    if(isDefined(var_02)) {
       self thread[[var_02]]();
+    }
   }
 
-  if(scripts\mp\utility\game::istrue(var_00) && isDefined(var_01))
+  if(scripts\mp\utility\game::istrue(var_00) && isDefined(var_01)) {
     func_110C4();
+  }
 
   self clearoffhandspecial();
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     scripts\mp\utility\game::_takeweapon(var_1.staticdata.weapon);
+  }
 
-  if(getdvarint("com_codcasterEnabled", 0) == 1)
+  if(getdvarint("com_codcasterEnabled", 0) == 1) {
     self getrandomweapon(0);
+  }
 
   self notify("remove_super");
   self.super = undefined;
@@ -298,16 +322,18 @@ func_12F32() {
     var_00 = getcurrentsuper();
     var_01 = 0.0;
 
-    if(var_0.isinuse)
+    if(var_0.isinuse) {
       var_01 = hudoutlinedisable();
+    }
     else {
       var_02 = var_0.func_461E - var_0.func_461F;
       var_03 = getsupermaxcooldownmsec();
       var_01 = clamp(1.0 - var_02 / var_03, 0.0, 1.0);
     }
 
-    if(!scripts\mp\utility\game::isinkillcam() && isalive(self))
+    if(!scripts\mp\utility\game::isinkillcam() && isalive(self)) {
       self setclientomnvar("ui_super_progress", var_01);
+    }
 
     self _meth_8400(var_01);
     scripts\engine\utility::waitframe();
@@ -375,8 +401,9 @@ func_89F0() {
   var_00 = self.team;
   self waittill("joined_team");
 
-  if(self.team != var_00)
+  if(self.team != var_00) {
     thread clearsuper(0);
+  }
 }
 
 func_11258() {
@@ -396,8 +423,9 @@ func_11258() {
   var_0.numkills = 0;
   scripts\mp\analyticslog::logevent_superearned(var_0.func_B143);
 
-  if(isDefined(self.matchdatalifeindex))
+  if(isDefined(self.matchdatalifeindex)) {
     scripts\mp\matchdata::logsuperavailableevent(self.matchdatalifeindex, self.origin);
+  }
 }
 
 func_13A6F() {
@@ -451,19 +479,22 @@ func_2A79() {
       var_0.func_1CA3 = scripts\engine\utility::ter_op(var_0.staticdata._meth_8487 > 0, 1, 0);
       func_10DF7();
 
-      if(isDefined(self.matchdatalifeindex))
+      if(isDefined(self.matchdatalifeindex)) {
         scripts\mp\matchdata::logsuperactivatedevent(self.matchdatalifeindex, self.origin);
+      }
 
       self setclientomnvar("ui_super_state", 3);
 
-      if(getdvarint("com_codcasterEnabled", 0) == 1)
+      if(getdvarint("com_codcasterEnabled", 0) == 1) {
         self getrandomweapon(1);
+      }
 
       scripts\mp\utility\game::printgameaction("super use started - " + var_0.staticdata.ref, self);
       return 1;
     } else {
-      if(isDefined(var_0.staticdata.useweapon) && var_01)
+      if(isDefined(var_0.staticdata.useweapon) && var_01) {
         thread func_11371();
+      }
 
       self setweaponammoclip(var_0.staticdata.weapon, 1);
     }
@@ -475,21 +506,26 @@ func_2A79() {
 func_1613(var_00, var_01) {
   var_02 = getcurrentsuper();
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 0;
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 1.0;
+  }
 
   var_03 = gettime();
 
-  if(var_2.func_12B2C > var_03)
+  if(var_2.func_12B2C > var_03) {
     var_2.func_12B2C = var_03;
+  }
 
-  if(var_00 && isDefined(var_2.staticdata.func_1617))
+  if(var_00 && isDefined(var_2.staticdata.func_1617)) {
     func_DE3B(var_2.staticdata.func_1617 * var_01);
-  else if(isDefined(var_2.staticdata.func_1616))
+  }
+  else if(isDefined(var_2.staticdata.func_1616)) {
     func_DE3B(var_2.staticdata.func_1616 * var_01);
+  }
 
   return 1;
 }
@@ -555,8 +591,9 @@ superusefinished(var_00, var_01, var_02) {
   var_05 = undefined;
 
   if(isDefined(var_3.staticdata.func_6398)) {
-    if(!isDefined(var_01))
+    if(!isDefined(var_01)) {
       var_01 = 0;
+    }
 
     var_05 = self[[var_3.staticdata.func_6398]](var_01);
   }
@@ -584,16 +621,19 @@ superusefinished(var_00, var_01, var_02) {
   var_08 = var_3.func_130DE - var_3.func_B143;
   scripts\mp\analyticslog::logevent_superended(var_3.staticdata.ref, var_08, 0, var_3.numkills);
 
-  if(getdvarint("com_codcasterEnabled", 0) == 1)
+  if(getdvarint("com_codcasterEnabled", 0) == 1) {
     self getrandomweapon(0);
+  }
 
   scripts\mp\utility\game::printgameaction("super use ended - " + var_3.staticdata.ref, self);
 
   if(isDefined(self.matchdatalifeindex)) {
-    if(isDefined(var_01))
+    if(isDefined(var_01)) {
       scripts\mp\matchdata::logsuperexpiredevent(self.matchdatalifeindex, self.origin, 1);
-    else
+    }
+    else {
       scripts\mp\matchdata::logsuperexpiredevent(self.matchdatalifeindex, self.origin, 0);
+    }
   }
 
   self notify("super_use_finished");
@@ -603,10 +643,12 @@ refundsuper() {
   var_00 = getcurrentsuper();
 
   if(isDefined(var_00)) {
-    if(var_0.isinuse)
+    if(var_0.isinuse) {
       superusefinished(1);
-    else
+    }
+    else {
       func_DE3A(getsupermaxcooldownmsec());
+    }
   }
 }
 
@@ -630,8 +672,9 @@ func_BA37(var_00) {
     var_02 = scripts\mp\weapons::isaltmodeweapon(var_01);
     var_01 = scripts\mp\utility\game::func_E0CF(var_01);
 
-    if(var_01 == var_00)
+    if(var_01 == var_00) {
       func_1613(var_02);
+    }
   }
 }
 
@@ -665,8 +708,9 @@ func_B2F7(var_00) {
     var_03 = self getcurrentweapon();
 
     if(!var_1.canstow && var_03 != "iw7_fistslethal_mp" && var_03 != "iw7_fistsperk_mp" && var_03 != var_00) {
-      if(var_03 == "iw7_uplinkball_mp" || var_03 == "iw7_tdefball_mp")
+      if(var_03 == "iw7_uplinkball_mp" || var_03 == "iw7_tdefball_mp") {
         var_02 = 1;
+      }
 
       break;
     }
@@ -703,14 +747,18 @@ func_110C4() {
   if(!isDefined(var_00)) {
     return;
   }
-  if(issupercharging())
+  if(issupercharging()) {
     self.pers["superCooldownTime"] = getcurrentsuper().func_461F;
-  else if(issuperready())
+  }
+  else if(issuperready()) {
     self.pers["superCooldownTime"] = getcurrentsuper().func_461E;
-  else if(issuperinuse())
+  }
+  else if(issuperinuse()) {
     self.pers["superCooldownTime"] = ::scripts\engine\utility::ter_op(shouldreacttonewenemy(), getcurrentsuper().func_461E, 0);
-  else
+  }
+  else {
     self.pers["superCooldownTime"] = 0;
+  }
 }
 
 hudoutlinedisable() {
@@ -738,8 +786,9 @@ _meth_8188() {
 issuperready() {
   var_00 = getcurrentsuper();
 
-  if(!isDefined(var_00) || var_0.isinuse)
+  if(!isDefined(var_00) || var_0.isinuse) {
     return 0;
+  }
 
   return var_0.func_461F >= var_0.func_461E;
 }
@@ -759,8 +808,9 @@ getcurrentsuper() {
 getcurrentsuperref() {
   var_00 = getcurrentsuper();
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return undefined;
+  }
 
   return var_0.staticdata.ref;
 }
@@ -770,15 +820,18 @@ shouldreacttonewenemy(var_00) {
   var_02 = var_1.staticdata._meth_8487;
   var_03 = gettime() - var_1.func_130DE;
 
-  if(var_03 >= var_02)
+  if(var_03 >= var_02) {
     return 0;
+  }
 
-  if(var_1.numkills > 0)
+  if(var_1.numkills > 0) {
     return 0;
+  }
 
   if(scripts\mp\utility\game::istrue(var_1.useweaponswapped) && !scripts\mp\utility\game::istrue(var_00)) {
-    if(var_1.staticdata.useweapon == "iw7_reaperblade_mp")
+    if(var_1.staticdata.useweapon == "iw7_reaperblade_mp") {
       return 0;
+    }
   }
 
   return var_1.func_1CA3;
@@ -970,8 +1023,9 @@ func_1309C() {
 _meth_8189(var_00) {
   var_00 = scripts\mp\utility\game::getweaponrootname(var_00);
 
-  if(!isDefined(level.superweapons[var_00]))
+  if(!isDefined(level.superweapons[var_00])) {
     return undefined;
+  }
 
   return level.superweapons[var_00].func_11263;
 }
@@ -979,8 +1033,9 @@ _meth_8189(var_00) {
 func_7F0D(var_00) {
   var_00 = scripts\mp\utility\game::getweaponrootname(var_00);
 
-  if(isDefined(level.superweapons[var_00]))
+  if(isDefined(level.superweapons[var_00])) {
     return level.superweapons[var_00].staticdata.id;
+  }
 
   var_01 = undefined;
 
@@ -996,16 +1051,18 @@ func_7F0D(var_00) {
   if(isDefined(var_01)) {
     var_02 = level.func_10E4E[var_01];
 
-    if(isDefined(var_02))
+    if(isDefined(var_02)) {
       return var_2.id;
+    }
   }
 
   return undefined;
 }
 
 _meth_8186(var_00) {
-  if(!isDefined(var_00) || !isDefined(level.func_10E4E[var_00]) || var_00 == "none")
+  if(!isDefined(var_00) || !isDefined(level.func_10E4E[var_00]) || var_00 == "none") {
     return 0;
+  }
 
   return level.func_10E4E[var_00].id;
 }
@@ -1013,8 +1070,9 @@ _meth_8186(var_00) {
 func_7FD0(var_00) {
   var_00 = scripts\mp\utility\game::getweaponrootname(var_00);
 
-  if(!isDefined(level.superweapons[var_00]))
+  if(!isDefined(level.superweapons[var_00])) {
     return undefined;
+  }
 
   return level.superweapons[var_00].staticdata.func_BCEF;
 }
@@ -1050,8 +1108,9 @@ unstowsuperweapon() {
 modifysuperequipmentdamage(var_00, var_01, var_02, var_03, var_04) {
   var_05 = var_03;
 
-  if(isDefined(self.owner) && isDefined(var_00) && var_00 == self.owner)
+  if(isDefined(self.owner) && isDefined(var_00) && var_00 == self.owner) {
     var_05 = int(ceil(var_03 * 0.5));
+  }
 
   return var_05;
 }
@@ -1062,10 +1121,12 @@ func_13B6B() {
   level endon("game_ended");
   level waittill("prematch_over");
 
-  if(scripts\mp\utility\game::isanymlgmatch())
+  if(scripts\mp\utility\game::isanymlgmatch()) {
     level.func_1125A = 0;
-  else
+  }
+  else {
     level.func_1125A = getdvarfloat("scr_superDelay", 0);
+  }
 
   if(level.func_1125A == 0) {
     level.func_1125D = scripts\mp\utility\game::gettimepassed();
@@ -1077,8 +1138,9 @@ func_13B6B() {
   level.func_1125B = level.func_1125D + level.func_1125A * 1000;
   level notify("super_delay_start");
 
-  while(scripts\mp\utility\game::gettimepassed() < level.func_1125B)
+  while(scripts\mp\utility\game::gettimepassed() < level.func_1125B) {
     scripts\engine\utility::waitframe();
+  }
 
   level notify("super_delay_end");
 }
@@ -1102,8 +1164,9 @@ func_13B6D() {
 func_13B6E() {
   level endon("super_delay_end");
 
-  if(!scripts\mp\utility\game::istrue(scripts\mp\utility\game::gameflag("prematch_done")))
+  if(!scripts\mp\utility\game::istrue(scripts\mp\utility\game::gameflag("prematch_done"))) {
     level waittill("super_delay_start");
+  }
 
   for(;;) {
     self waittill("special_weapon_fired", var_00);
@@ -1146,8 +1209,9 @@ cancelsuperdelay() {
 }
 
 func_1125C() {
-  if(isDefined(level.func_1125A) && level.func_1125A == 0)
+  if(isDefined(level.func_1125A) && level.func_1125A == 0) {
     return 1;
+  }
 
   return isDefined(level.func_1125B) && scripts\mp\utility\game::gettimepassed() > level.func_1125B;
 }
@@ -1171,12 +1235,14 @@ watchobjuse(var_00, var_01) {
   self endon("ball_dropped");
 
   if(level.gametype == "sd" || level.gametype == "sr" || level.gametype == "dd") {
-    if(scripts\mp\utility\game::istrue(var_01))
+    if(scripts\mp\utility\game::istrue(var_01)) {
       self waittill("super_obj_drain");
+    }
   } else if(!isDefined(self.carryobject))
     self waittill("obj_picked_up");
-  else
+  else {
     wait 0.05;
+  }
 
   while(issuperinuse()) {
     func_DE3B(var_00);
@@ -1201,8 +1267,9 @@ combatrecordsuperkill(var_00) {
 }
 
 superdisabledinarbitraryup(var_00) {
-  if(var_00 == "super_microturret" || var_00 == "super_supertrophy")
+  if(var_00 == "super_microturret" || var_00 == "super_supertrophy") {
     return 1;
+  }
 
   return 0;
 }

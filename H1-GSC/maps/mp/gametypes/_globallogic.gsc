@@ -13,10 +13,12 @@ init() {
   level.rankedmatch = level.onlinegame && !getdvarint("xblive_privatematch");
   level.script = tolower(getdvar("mapname"));
 
-  if(getdvarint("virtualLobbyActive", 0))
+  if(getdvarint("virtualLobbyActive", 0)) {
     level.gametype = "vlobby";
-  else
+  }
+  else {
     level.gametype = tolower(getdvar("g_gametype"));
+  }
 
   level.teamnamelist = ["axis", "allies"];
   level.otherteam["allies"] = "axis";
@@ -31,8 +33,9 @@ init() {
   level.killstreak_kills = 1;
   level.tispawndelay = getdvarint("scr_tispawndelay");
 
-  if(!isDefined(level.tweakablesinitialized))
+  if(!isDefined(level.tweakablesinitialized)) {
     maps\mp\gametypes\_tweakables::init();
+  }
 
   precachestring(&"MP_HALFTIME");
   precachestring(&"MP_OVERTIME");
@@ -46,10 +49,12 @@ init() {
   precachestring(&"MP_OBITUARY_FRIENDLY");
   precachestring(&"MP_OBITUARY_ENEMY");
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     precachestring(&"MP_ENDED_GAME");
-  else
+  }
+  else {
     precachestring(&"MP_HOST_ENDED_GAME");
+  }
 
   level.halftimetype = "halftime";
   level.halftimeonscorelimit = 0;
@@ -154,6 +159,7 @@ onxpevent(var_0) {
 }
 
 debugline(var_0, var_1) {
-  for(var_2 = 0; var_2 < 50; var_2++)
+  for(var_2 = 0; var_2 < 50; var_2++) {
     wait 0.05;
+  }
 }

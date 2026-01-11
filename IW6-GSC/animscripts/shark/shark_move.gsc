@@ -10,8 +10,9 @@ main() {
   self clearanim( % root, 0.2);
   self clearanim( % shark_swim_f, 0.2);
 
-  for(;;)
+  for(;;) {
     moveloop();
+  }
 }
 
 moveloop() {
@@ -20,10 +21,12 @@ moveloop() {
   self.moveloopcleanupfunc = undefined;
 
   for(;;) {
-    if(self.disablearrivals)
+    if(self.disablearrivals) {
       self.stopanimdistsq = 0;
-    else
+    }
+    else {
       self.stopanimdistsq = anim.dogstoppingdistsq;
+    }
 
     moveloopstep();
   }

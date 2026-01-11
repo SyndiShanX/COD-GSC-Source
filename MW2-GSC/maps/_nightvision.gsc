@@ -8,8 +8,9 @@
 #include maps\_utility;
 
 main(players) {
-  if(!isDefined(players))
+  if(!isDefined(players)) {
     players = level.players;
+  }
 
   thread init_and_run(players);
 }
@@ -62,8 +63,9 @@ nightVision_Toggle() {
 }
 
 nightVision_check(player) {
-  if(!isDefined(player))
+  if(!isDefined(player)) {
     player = level.player;
+  }
   return isDefined(player.nightVision_Enabled);
 }
 
@@ -91,8 +93,9 @@ nightVision_On() {
     ai = getaiarray("allies");
   array_thread(ai, ::enable_ir_beacon);
 
-  if(!exists_global_spawn_function("allies", ::enable_ir_beacon))
+  if(!exists_global_spawn_function("allies", ::enable_ir_beacon)) {
     add_global_spawn_function("allies", ::enable_ir_beacon);
+  }
 }
 
 enable_ir_beacon() {
@@ -121,8 +124,9 @@ loopReflectorEffect() {
 }
 
 stop_reflector_effect() {
-  if(isDefined(self.has_no_ir))
+  if(isDefined(self.has_no_ir)) {
     return;
+  }
 
   stopFXOnTag(level.nightVision_Reflector_Effect, self, "tag_reflector_arm_le");
   stopFXOnTag(level.nightVision_Reflector_Effect, self, "tag_reflector_arm_ri");
@@ -137,8 +141,9 @@ nightVision_Off() {
   // delete the DLight fx
 
   level notify("night_vision_off");
-  if(isDefined(level.nightVision_DLight))
+  if(isDefined(level.nightVision_DLight)) {
     level.nightVision_DLight delete();
+  }
 
   //	self stopshellshock();
 
@@ -151,11 +156,13 @@ nightVision_Off() {
   //this spawn function yet. Only when all players are not in nightvision
   someoneUsingNightvision = false;
   for(i = 0; i < level.players.size; i++) {
-    if(nightvision_Check(level.players[i]))
+    if(nightvision_Check(level.players[i])) {
       someoneUsingNightvision = true;
+    }
   }
-  if(!someoneUsingNightvision)
+  if(!someoneUsingNightvision) {
     remove_global_spawn_function("allies", ::enable_ir_beacon);
+  }
 
   thread nightVision_EffectsOff();
 }

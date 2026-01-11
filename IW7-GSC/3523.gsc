@@ -12,12 +12,15 @@ _meth_819B(var_00, var_01) {
   scripts\mp\utility\game::func_1C47(0);
   var_02 = undefined;
 
-  if(var_0.streakname == "dronedrop")
+  if(var_0.streakname == "dronedrop") {
     var_02 = "deploy_dronepackage_mp";
-  else if(var_0.streakname == "remote_c8")
+  }
+  else if(var_0.streakname == "remote_c8") {
     var_02 = "deploy_rc8_mp";
-  else
+  }
+  else {
     var_02 = "deploy_warden_mp";
+  }
 
   var_03 = undefined;
   thread func_13A47(var_02);
@@ -38,14 +41,17 @@ _meth_819B(var_00, var_01) {
   for(;;) {
     var_03 = func_13808("equip_deploy_succeeded", "equip_deploy_failed", "equip_deploy_end");
 
-    if(var_3.string == "equip_deploy_failed")
+    if(var_3.string == "equip_deploy_failed") {
       continue;
+    }
     else if(var_3.string == "equip_deploy_succeeded") {
       if(isDefined(var_01)) {
-        if(!self[[var_01]]())
+        if(!self[[var_01]]()) {
           continue;
-        else
+        }
+        else {
           break;
+        }
       } else
         break;
     } else
@@ -60,8 +66,9 @@ _meth_819B(var_00, var_01) {
     var_3.func_1349C _meth_85C8(1);
   }
 
-  if(scripts\mp\utility\game::isreallyalive(self))
+  if(scripts\mp\utility\game::isreallyalive(self)) {
     self notify("killstreak_finished_with_weapon_" + var_02);
+  }
 
   self setscriptablepartstate("killstreak", "neutral", 0);
   scripts\mp\utility\game::func_11DB();
@@ -92,8 +99,9 @@ func_13A2F(var_00) {
   for(;;) {
     self waittill("weapon_fired", var_02);
 
-    if(var_02 == var_00)
+    if(var_02 == var_00) {
       self setweaponammoclip(var_02, var_01);
+    }
   }
 }
 
@@ -121,14 +129,17 @@ watchforempapply(var_00) {
 func_13808(var_00, var_01, var_02) {
   var_03 = spawnStruct();
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     childthread func_137F9(var_00, var_03);
+  }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     childthread func_137F9(var_01, var_03);
+  }
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     childthread func_137F9(var_02, var_03);
+  }
 
   childthread func_137F9("death", var_03);
   var_03 waittill("returned", var_04, var_05, var_06, var_07);
@@ -142,8 +153,9 @@ func_13808(var_00, var_01, var_02) {
 }
 
 func_137F9(var_00, var_01) {
-  if(var_00 != "death")
+  if(var_00 != "death") {
     self endon("death");
+  }
 
   var_01 endon("die");
   self waittill(var_00, var_02, var_03, var_04);

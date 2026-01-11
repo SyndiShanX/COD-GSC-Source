@@ -10,11 +10,13 @@ locker_pillage_functions_init() {
   level.get_hintstring_for_pillaged_item_func = ::get_locker_hintstring_for_pillaged_item;
   level.locker_drop_item_on_ground_func = ::drop_locker_pillage_item_on_ground;
 
-  if(!isDefined(level.custom_lockerpillageinitfunc))
+  if(!isDefined(level.custom_lockerpillageinitfunc)) {
     level.custom_lockerpillageinitfunc = ::locker_pillage_init;
+  }
 
-  if(!isDefined(level.level_specific_pillage_show_func))
+  if(!isDefined(level.level_specific_pillage_show_func)) {
     level.level_specific_pillage_show_func = ::default_level_specific_pillage_show_func;
+  }
 
   level.locker_key_check_func = ::locker_key_check;
 }
@@ -33,8 +35,9 @@ locker_pillage_init() {
   var_0 = common_scripts\utility::getstructarray("pillage_area", "targetname");
 
   foreach(var_8, var_2 in var_0) {
-    if(!isDefined(level.pillage_areas[var_8]))
+    if(!isDefined(level.pillage_areas[var_8])) {
       level.pillage_areas[var_8] = [];
+    }
 
     level.pillage_areas[var_8]["locker"] = [];
     var_3 = common_scripts\utility::getstructarray(var_2.target, "targetname");
@@ -44,8 +47,9 @@ locker_pillage_init() {
         var_6 = strtok(var_5.script_noteworthy, ",");
         var_5.pillage_type = var_6[0];
 
-        if(isDefined(var_6[1]))
+        if(isDefined(var_6[1])) {
           var_5.script_model = var_6[1];
+        }
 
         switch (var_5.pillage_type) {
           case "locker":
@@ -76,8 +80,9 @@ debug_locker_weapons() {
 }
 
 set_locker_hint_strings(var_0) {
-  foreach(var_3, var_2 in var_0)
+  foreach(var_3, var_2 in var_0) {
   var_2.pillage_trigger sethintstring(&"ALIEN_PILLAGE_LOCKER_OPEN_LOCKER");
+  }
 }
 
 default_level_specific_pillage_show_func(var_0, var_1, var_2) {
@@ -100,10 +105,12 @@ default_level_specific_pillage_show_func(var_0, var_1, var_2) {
             var_3 = maps\mp\alien\_pillage::get_hintstring_for_pillaged_item(var_2.type);
             var_0 thread maps\mp\alien\_pillage::show_pillage_text(var_3);
 
-            if(var_0 maps\mp\alien\_persistence::is_upgrade_enabled("master_scavenger_upgrade"))
+            if(var_0 maps\mp\alien\_persistence::is_upgrade_enabled("master_scavenger_upgrade")) {
               var_4 = common_scripts\utility::array_combine(level.max_weapon_list, level.max_weapon_list_xmags);
-            else
+            }
+            else {
               var_4 = level.max_weapon_list;
+            }
 
             var_5 = common_scripts\utility::random(var_4);
             var_6 = 0;
@@ -141,8 +148,9 @@ default_level_specific_pillage_show_func(var_0, var_1, var_2) {
           case "locker_weapon":
             var_7 = var_0 try_to_give_player_locker_weapon(self);
 
-            if(var_7)
+            if(var_7) {
               maps\mp\alien\_pillage::delete_pillage_trigger();
+            }
 
             break;
         }
@@ -167,8 +175,9 @@ try_to_give_player_locker_weapon(var_0) {
       var_6 = maps\mp\alien\_collectibles::get_weapon_ref(var_1);
 
       if(isDefined(var_6)) {
-        if(isDefined(level.locker_ark_check_func))
+        if(isDefined(level.locker_ark_check_func)) {
           var_2.item_ref = [
+        }
             [level.locker_ark_check_func]
           ](var_6, var_1);
 
@@ -178,8 +187,9 @@ try_to_give_player_locker_weapon(var_0) {
         var_7 = maps\mp\alien\_utility::getrawbaseweaponname(var_6);
 
         if(maps\mp\alien\_utility::player_has_specialized_ammo(var_7)) {
-          if(isDefined(self.stored_ammo[var_7]))
+          if(isDefined(self.stored_ammo[var_7])) {
             var_3 = 1;
+          }
         }
       }
     }
@@ -212,26 +222,30 @@ give_player_max_ammo(var_0, var_1, var_2) {
 }
 
 try_to_give_player_the_locker_key(var_0) {
-  if(isDefined(self.locker_key))
+  if(isDefined(self.locker_key)) {
     maps\mp\_utility::setlowermessage("max_leash", &"ALIEN_PILLAGE_LOCKER_LOCKER_KEY_MAX", 3);
+  }
   else {
     self.locker_key = 1;
     self playlocalsound("plr_keys_pckup");
     self setclientomnvar("ui_alien_locker_key", 1);
 
-    if(maps\mp\alien\_utility::alien_mode_has("outline"))
+    if(maps\mp\alien\_utility::alien_mode_has("outline")) {
       maps\mp\alien\_outline_proto::remove_from_outline_pillage_watch_list(var_0);
+    }
 
     var_0 delete();
   }
 }
 
 build_locker_pillageitem_arrays(var_0) {
-  if(!isDefined(level.pillageitems))
+  if(!isDefined(level.pillageitems)) {
     level.pillageitems = [];
+  }
 
-  if(!isDefined(level.pillageitems[var_0]))
+  if(!isDefined(level.pillageitems[var_0])) {
     level.pillageitems[var_0] = [];
+  }
 
   switch (var_0) {
     case "easy":
@@ -288,8 +302,9 @@ get_hintstring_for_locker_item_pickup(var_0) {
       return &"ALIEN_PILLAGE_LOCKER_PICKUP_LOCKER_WEAPON";
   }
 
-  if(isDefined(level.level_locker_weapon_pickup_string_func))
+  if(isDefined(level.level_locker_weapon_pickup_string_func)) {
     return [[level.level_locker_weapon_pickup_string_func]](var_0);
+  }
 }
 
 drop_locker_pillage_item_on_ground(var_0) {
@@ -314,10 +329,12 @@ drop_locker_pillage_item_on_ground(var_0) {
   }
 
   if(self.pillage_trigger.model != "tag_origin") {
-    if(isDefined(level.pillage_locker_offset_override_func))
+    if(isDefined(level.pillage_locker_offset_override_func)) {
       self[[level.pillage_locker_offset_override_func]]();
-    else
+    }
+    else {
       offset_locker_trigger_model();
+    }
   }
 
   var_0.locker_key = undefined;
@@ -326,11 +343,13 @@ drop_locker_pillage_item_on_ground(var_0) {
 }
 
 offset_locker_trigger_model() {
-  if(isDefined(self.locker_origin))
+  if(isDefined(self.locker_origin)) {
     self.pillage_trigger.origin = self.locker_origin;
+  }
 
-  if(isDefined(self.locker_angles))
+  if(isDefined(self.locker_angles)) {
     self.pillage_trigger.angles = self.locker_angles;
+  }
 
   var_0 = (0, 0, 20);
   var_1 = (0, 0, 6);
@@ -421,8 +440,9 @@ create_gun_with_max_attachments_list() {
   var_1 = level.collectibles;
 
   foreach(var_4, var_3 in var_1) {
-    if(var_3.isweapon)
+    if(var_3.isweapon) {
       var_0[var_4] = var_3;
+    }
   }
 
   var_5 = [];
@@ -434,16 +454,19 @@ create_gun_with_max_attachments_list() {
       continue;
     }
     if(level.script == "mp_alien_beacon") {
-      if(issubstr(var_3.ref, "g28") || issubstr(var_3.ref, "svu"))
+      if(issubstr(var_3.ref, "g28") || issubstr(var_3.ref, "svu")) {
         continue;
+      }
     }
 
     var_7 = getsubstr(var_7, 7);
 
-    if(is_dlc_weapon(var_3.ref))
+    if(is_dlc_weapon(var_3.ref)) {
       var_8 = var_7;
-    else
+    }
+    else {
       var_8 = getweaponbasename(var_7);
+    }
 
     var_9 = maps\mp\_utility::getweaponclass(var_8);
     var_10 = [];
@@ -456,10 +479,12 @@ create_gun_with_max_attachments_list() {
       continue;
     }
     if(issubstr(var_3.ref, "aliendlc23")) {
-      if(level.script == "mp_alien_dlc3" || level.script == "mp_alien_last")
+      if(level.script == "mp_alien_dlc3" || level.script == "mp_alien_last") {
         var_8 = "iw6_arkaliendlc23_mp";
-      else
+      }
+      else {
         var_8 = "iw6_aliendlc23_mp";
+      }
 
       var_14 = common_scripts\utility::add_to_array(var_14, "dlcweap02scope");
     }
@@ -489,25 +514,33 @@ create_gun_with_max_attachments_list() {
 
     var_18 = [];
 
-    if(var_10.size > 0)
+    if(var_10.size > 0) {
       var_18[0] = var_10;
-    else
+    }
+    else {
       var_18[var_18.size] = ["none"];
+    }
 
-    if(var_11.size > 0)
+    if(var_11.size > 0) {
       var_18[1] = var_11;
-    else
+    }
+    else {
       var_18[var_18.size] = ["none"];
+    }
 
-    if(var_12.size > 0)
+    if(var_12.size > 0) {
       var_18[2] = var_12;
-    else
+    }
+    else {
       var_18[var_18.size] = ["none"];
+    }
 
-    if(var_13.size > 0)
+    if(var_13.size > 0) {
       var_18[3] = var_13;
-    else
+    }
+    else {
       var_18[var_18.size] = ["none"];
+    }
 
     var_3 get_rest_of_attachments_brute_force(var_8, var_18);
   }
@@ -523,10 +556,12 @@ make_weapon_string_and_add_to_array(var_0, var_1, var_2, var_3, var_4) {
     var_8.weapon_string = var_7;
     var_8.model = var_5.model;
 
-    if(!isDefined(var_4) || var_4 != "xmags")
+    if(!isDefined(var_4) || var_4 != "xmags") {
       level.max_weapon_list[level.max_weapon_list.size] = var_8;
-    else
+    }
+    else {
       level.max_weapon_list_xmags[level.max_weapon_list_xmags.size] = var_8;
+    }
   }
 }
 
@@ -557,11 +592,13 @@ get_locker_weapon_from_list() {
 }
 
 is_dlc_weapon(var_0) {
-  if(issubstr(var_0, "aliendlc"))
+  if(issubstr(var_0, "aliendlc")) {
     return 1;
+  }
 
-  if(issubstr(var_0, "alienDLC"))
+  if(issubstr(var_0, "alienDLC")) {
     return 1;
+  }
 
   return 0;
 }

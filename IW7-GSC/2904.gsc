@@ -10,17 +10,21 @@ func_918F() {
 }
 
 func_9197(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     var_04 = 0;
+  }
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = "default";
+  }
 
-  if(!isDefined(level.func_91AA))
+  if(!isDefined(level.func_91AA)) {
     func_918F();
+  }
 
-  if(func_919F(var_00, self))
+  if(func_919F(var_00, self)) {
     func_91A7(var_00, self, var_01, var_02, var_03, var_04);
+  }
   else {
     var_05 = level.func_91AA[var_00].func_6631.size;
     level.func_91AA[var_00].func_6631[var_05] = func_9190(self, var_01, var_02, var_03, var_04);
@@ -28,8 +32,9 @@ func_9197(var_00, var_01, var_02, var_03, var_04) {
   }
 
   if(!isDefined(level.func_91AA[var_00].func_C8F5)) {
-    if(!isDefined(level.func_91AB))
+    if(!isDefined(level.func_91AB)) {
       func_9186(var_00);
+    }
 
     var_06 = level.func_91AA[level.func_91AB].priority;
     var_07 = level.func_91AA[var_00].priority;
@@ -48,28 +53,33 @@ func_9197(var_00, var_01, var_02, var_03, var_04) {
   } else {
     var_08 = level.func_91AA[var_00].func_C8F5;
 
-    if(!isDefined(level.func_91AB))
+    if(!isDefined(level.func_91AB)) {
       func_9186(var_08);
+    }
 
     var_06 = level.func_91AA[level.func_91AB].priority;
     var_09 = level.func_91AA[var_08].priority;
 
-    if(level.func_91AB != var_08 && var_06 < var_09)
+    if(level.func_91AB != var_08 && var_06 < var_09) {
       func_9186(var_08);
-    else if(level.func_91AB == var_08)
+    }
+    else if(level.func_91AB == var_08) {
       func_1251(self, var_01, var_02, var_03, var_04, var_08);
+    }
   }
 }
 
 func_9194(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = "default";
+  }
 
   if(!isDefined(level.func_91AA)) {
     return;
   }
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify(var_00 + "hudoutline_disable");
+  }
 
   var_01 = undefined;
 
@@ -101,8 +111,9 @@ func_9194(var_00) {
     return;
   }
   if(level.func_91AB == var_00) {
-    if(isDefined(var_01))
+    if(isDefined(var_01)) {
       func_11DA(self, var_00);
+    }
 
     if(level.func_91AA[var_00].func_6631.size == 0) {
       var_08 = 0;
@@ -116,17 +127,20 @@ func_9194(var_00) {
         }
       }
 
-      if(!var_08)
+      if(!var_08) {
         func_9185();
+      }
     }
   } else if(isDefined(level.func_91AA[var_00].func_C8F5) && level.func_91AB == level.func_91AA[var_00].func_C8F5) {
     var_12 = level.func_91AA[var_00].func_C8F5;
 
-    if(isDefined(var_01))
+    if(isDefined(var_01)) {
       func_11DA(self, var_12);
+    }
 
-    if(level.func_91AA[var_00].func_6631.size == 0)
+    if(level.func_91AA[var_00].func_6631.size == 0) {
       func_9185();
+    }
   }
 }
 
@@ -147,21 +161,25 @@ func_9185() {
         continue;
       }
       if(!isDefined(var_3.func_3E65) || var_3.func_3E65.size == 0) {
-        if(var_3.func_6631.size == 0)
+        if(var_3.func_6631.size == 0) {
           continue;
+        }
       } else {
         var_06 = 0;
 
-        if(var_3.func_6631.size > 0)
+        if(var_3.func_6631.size > 0) {
           var_06 = 1;
-
-        foreach(var_08 in var_3.func_3E65) {
-          if(level.func_91AA[var_08].func_6631.size > 0)
-            var_06 = 1;
         }
 
-        if(!var_06)
+        foreach(var_08 in var_3.func_3E65) {
+          if(level.func_91AA[var_08].func_6631.size > 0) {
+            var_06 = 1;
+          }
+        }
+
+        if(!var_06) {
           continue;
+        }
       }
 
       if(!isDefined(var_00) || var_3.priority > var_00) {
@@ -171,10 +189,12 @@ func_9185() {
     }
   }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     func_9186(var_01);
-  else
+  }
+  else {
     level.func_91AB = undefined;
+  }
 }
 
 func_9190(var_00, var_01, var_02, var_03, var_04) {
@@ -203,8 +223,9 @@ func_9186(var_00) {
     func_9191(level.func_91AB);
 
     if(isDefined(level.func_91AA[level.func_91AB].func_3E65) && level.func_91AA[level.func_91AB].func_3E65.size > 0) {
-      foreach(var_02 in level.func_91AA[level.func_91AB].func_3E65)
+      foreach(var_02 in level.func_91AA[level.func_91AB].func_3E65) {
       func_9191(var_02);
+      }
     }
   }
 
@@ -225,8 +246,9 @@ func_1250(var_00) {
 }
 
 func_1251(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if(!isDefined(level.func_91AA[var_05].func_3E65) || level.func_91AA[var_05].func_3E65.size == 0)
+  if(!isDefined(level.func_91AA[var_05].func_3E65) || level.func_91AA[var_05].func_3E65.size == 0) {
     var_00 hudoutlineenable(var_01, var_02, var_03, var_04);
+  }
   else {
     var_06 = func_12AA(var_05, 1);
     var_07 = 0;
@@ -248,8 +270,9 @@ func_1251(var_00, var_01, var_02, var_03, var_04, var_05) {
 }
 
 func_11DA(var_00, var_01) {
-  if(!isDefined(level.func_91AA[var_01].func_3E65) || level.func_91AA[var_01].func_3E65.size == 0)
+  if(!isDefined(level.func_91AA[var_01].func_3E65) || level.func_91AA[var_01].func_3E65.size == 0) {
     self hudoutlinedisable();
+  }
   else {
     var_02 = func_12AA(var_01, 1);
     var_03 = 0;
@@ -268,8 +291,9 @@ func_11DA(var_00, var_01) {
       }
     }
 
-    if(!var_03)
+    if(!var_03) {
       self hudoutlinedisable();
+    }
   }
 }
 
@@ -291,8 +315,9 @@ func_91A5(var_00) {
     _setsaveddvar(var_05, var_04);
   }
 
-  if(isDefined(level.func_91AA[var_00].func_B05E))
+  if(isDefined(level.func_91AA[var_00].func_B05E)) {
     func_CC8D(var_00, level.func_91AA[var_00].func_B05E);
+  }
 }
 
 func_9191(var_00) {
@@ -303,11 +328,13 @@ func_9191(var_00) {
 }
 
 func_9188(var_00, var_01, var_02) {
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = ::func_9192;
+  }
 
-  if(!isDefined(level.func_91AA))
+  if(!isDefined(level.func_91AA)) {
     func_918F();
+  }
 
   if(!isDefined(level.func_91AA[var_00])) {
     level.func_91AA[var_00] = spawnStruct();
@@ -327,8 +354,9 @@ func_918A(var_00, var_01, var_02) {
     level.func_91AA[var_00].func_C8F5 = var_02;
   }
 
-  if(!isDefined(level.func_91AA[var_02].func_3E65))
+  if(!isDefined(level.func_91AA[var_02].func_3E65)) {
     level.func_91AA[var_02].func_3E65 = [];
+  }
 
   level.func_91AA[var_02].func_3E65[level.func_91AA[var_02].func_3E65.size] = var_00;
 }
@@ -336,27 +364,31 @@ func_918A(var_00, var_01, var_02) {
 func_91A1(var_00, var_01) {
   level.func_91AA[var_00].func_F88E = var_01;
 
-  if(isDefined(level.func_91AB) && level.func_91AB == var_00)
+  if(isDefined(level.func_91AB) && level.func_91AB == var_00) {
     thread func_91A5(var_00);
+  }
 }
 
 func_919F(var_00, var_01) {
   foreach(var_03 in level.func_91AA[var_00].func_6631) {
-    if(var_3.ent == var_01)
+    if(var_3.ent == var_01) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 func_919A(var_00, var_01) {
-  if(!isDefined(level.func_91AC))
+  if(!isDefined(level.func_91AC)) {
     level.func_91AC = [];
+  }
 
   if(var_01) {
     foreach(var_03 in level.func_91AC) {
-      if(var_03 == var_00)
+      if(var_03 == var_00) {
         return;
+      }
     }
 
     level.func_91AC[level.func_91AC.size] = var_00;
@@ -365,8 +397,9 @@ func_919A(var_00, var_01) {
     var_05 = [];
 
     foreach(var_03 in level.func_91AC) {
-      if(var_03 != var_00)
+      if(var_03 != var_00) {
         var_5[var_5.size] = var_03;
+      }
     }
 
     level.func_91AC = var_05;
@@ -375,8 +408,9 @@ func_919A(var_00, var_01) {
 }
 
 func_9195(var_00, var_01) {
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     self endon("endonMsg");
+  }
 
   self endon(var_00 + "hudoutline_disable");
   scripts\engine\utility::waittill_any("death", "entitydeleted");
@@ -432,8 +466,9 @@ func_9192() {
 }
 
 func_12AA(var_00, var_01) {
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0;
+  }
 
   var_02 = [];
   var_2[0] = var_00;

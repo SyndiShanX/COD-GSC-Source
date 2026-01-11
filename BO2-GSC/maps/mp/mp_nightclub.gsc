@@ -90,8 +90,9 @@ main() {
   spawncollision("collision_physics_32x32x32", "collider", (-17250.5, 2981, 31), (0, 0, 0));
   destructibles = getEntArray("destructible", "targetname");
 
-  foreach(destructible in destructibles)
+  foreach(destructible in destructibles) {
   destructible thread car_sound_think();
+  }
 }
 
 levelspawndvars(reset_dvars) {

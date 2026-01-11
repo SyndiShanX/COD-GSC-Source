@@ -30,8 +30,9 @@ friendly_stream_navigation() {
       common_scripts\utility::array_thread(level.squad, maps\jungle_ghosts_util::generic_ignore_on);
       common_scripts\utility::flag_wait("obj_get_to_river");
 
-      if(!common_scripts\utility::flag("waterfall_to_stream"))
+      if(!common_scripts\utility::flag("waterfall_to_stream")) {
         maps\_utility::activate_trigger_with_targetname("stream_pos_1");
+      }
 
       var_1 = getEntArray("stream_color_trigs", "script_noteworthy");
       common_scripts\utility::array_thread(var_1, common_scripts\utility::trigger_off);
@@ -58,15 +59,17 @@ friendly_stream_navigation() {
 
           while(var_3.size != level.squad.size && !common_scripts\utility::flag("stream_backend_start")) {
             foreach(var_5 in level.squad) {
-              if(var_5 istouching(var_2) && !maps\_utility::is_in_array(var_3, var_5))
+              if(var_5 istouching(var_2) && !maps\_utility::is_in_array(var_3, var_5)) {
                 var_3 = common_scripts\utility::add_to_array(var_3, var_5);
+              }
             }
 
             wait 0.5;
           }
 
-          foreach(var_5 in var_3)
+          foreach(var_5 in var_3) {
           var_5.perfectaim = 1;
+          }
 
           var_3 = undefined;
           common_scripts\utility::flag_set("squad_in_ambush_position");
@@ -81,16 +84,18 @@ friendly_stream_navigation() {
           wait 4;
           common_scripts\utility::array_thread(level.squad, maps\_utility::enable_ai_color);
 
-          foreach(var_5 in level.squad)
+          foreach(var_5 in level.squad) {
           var_5.perfectaim = 0;
+          }
         } else
           maps\_utility::activate_trigger_with_targetname("stream2_pos1");
       }
 
       common_scripts\utility::flag_set("waterfall_ambush_over");
     case "stream backend":
-      if(!common_scripts\utility::flag("stream_backend_start"))
+      if(!common_scripts\utility::flag("stream_backend_start")) {
         maps\_utility::activate_trigger_with_targetname("stream2_pos1");
+      }
 
       var_11 = maps\jungle_ghosts_jungle::jungle_enemy_logic;
       maps\_utility::array_spawn_function_targetname("tall_grass_intro_guys_stealth", var_11, "zero", 1);
@@ -103,14 +108,16 @@ friendly_stream_navigation() {
         var_12 delete();
         common_scripts\utility::flag_wait_any("stream_backend_enemies_dead", "stream_backend_moveup");
 
-        if(!common_scripts\utility::flag("stream_backend_moveup"))
+        if(!common_scripts\utility::flag("stream_backend_moveup")) {
           maps\_utility::activate_trigger_with_targetname("stream_backend_moveup");
+        }
       } else {
         common_scripts\utility::array_thread(level.squad, level.ignore_on_func);
         var_12 = getent("stream_backend_moveup", "targetname");
 
-        if(isDefined(var_12))
+        if(isDefined(var_12)) {
           var_12 delete();
+        }
 
         common_scripts\utility::flag_wait("stream_exit");
         maps\_utility::activate_trigger_with_targetname("stream_backend_moveup_stealth");
@@ -132,8 +139,9 @@ friendly_stream_navigation() {
 
       common_scripts\utility::flag_wait("to_grassy_field");
 
-      if(!common_scripts\utility::flag("ambush_open_fire"))
+      if(!common_scripts\utility::flag("ambush_open_fire")) {
         common_scripts\utility::array_thread(level.squad, ::backend_friendly_stealth_logic);
+      }
 
       maps\_utility::array_notify(level.squad, "stop_water_footsteps");
       level.player notify("stop_water_footsteps");
@@ -193,8 +201,9 @@ stream_enemy_setup(var_0) {
         common_scripts\utility::flag_clear("stream_enemy_alert");
       }
 
-      if(common_scripts\utility::flag("bridge_area_exit") && (common_scripts\utility::flag("_stealth_spotted") || common_scripts\utility::flag("stream_enemy_alert")))
+      if(common_scripts\utility::flag("bridge_area_exit") && (common_scripts\utility::flag("_stealth_spotted") || common_scripts\utility::flag("stream_enemy_alert"))) {
         common_scripts\utility::flag_set("ambush_open_fire");
+      }
       else {}
 
       level.alpha2 maps\_utility::set_force_color("r");
@@ -220,8 +229,9 @@ stream_enemy_setup(var_0) {
     case "backend":
       common_scripts\utility::flag_wait("stream_backend_start");
 
-      if(common_scripts\utility::flag("ambush_open_fire"))
+      if(common_scripts\utility::flag("ambush_open_fire")) {
         common_scripts\utility::array_thread(level.squad, level.ignore_off_func);
+      }
 
       level.player.ignoreme = 0;
       var_4 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("stream_ambient_heli");
@@ -281,15 +291,17 @@ stream_fight_goes_hot() {
   common_scripts\utility::flag_wait_any("_stealth_spotted", "smaw_target_detroyed");
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread maps\jungle_ghosts_util::manually_alert_me();
+  }
 
   var_4 = getEntArray("stream_color_trigs", "script_noteworthy");
   common_scripts\utility::array_thread(var_4, common_scripts\utility::trigger_on);
   common_scripts\utility::flag_wait("stream_fight_begin");
 
-  if(common_scripts\utility::flag("smaw_target_detroyed"))
+  if(common_scripts\utility::flag("smaw_target_detroyed")) {
     wait 7;
+  }
 
   common_scripts\utility::array_thread(level.squad, level.ignore_off_func);
   common_scripts\utility::array_thread(level.squad, maps\_stealth_utility::disable_stealth_for_ai);
@@ -315,10 +327,12 @@ stream_enemy_setup_on_going_hot() {
   thread maps\jungle_ghosts_util::spawn_ai_throttled_targetname("lower_stream_group_1", 1, 2.5);
   wait 2;
 
-  if(common_scripts\utility::cointoss())
+  if(common_scripts\utility::cointoss()) {
     var_0 = "upper_stream_left";
-  else
+  }
+  else {
     var_0 = "upper_stream_right";
+  }
 
   thread spawn_bridge_guys(var_0);
   level thread stream_set_cleared_when_guys_dead();
@@ -330,8 +344,9 @@ stream_set_cleared_when_guys_dead() {
   level endon("bridge_area_exit");
   level.stream_baddies = getaiarray("axis");
 
-  if(!isDefined(level.ambush_patrol_guys))
+  if(!isDefined(level.ambush_patrol_guys)) {
     level.ambush_patrol_guys = [];
+  }
 
   level.stream_baddies = common_scripts\utility::array_remove_array(level.stream_baddies, level.ambush_patrol_guys);
   thread maps\jungle_ghosts_util::set_flag_when_x_remain_custom_stream(0, "stream_clear");
@@ -363,14 +378,17 @@ stream_close_enemy_logic() {
   maps\_utility::clear_run_anim();
 
   if(isDefined(self.script_noteworthy) && (self.script_noteworthy == "crate_guy1" || self.script_noteworthy == "crate_guy2" || self.script_noteworthy == "crate_guy3")) {
-    if(self.script_noteworthy == "crate_guy1")
+    if(self.script_noteworthy == "crate_guy1") {
       wait 0.5;
+    }
 
-    if(self.script_noteworthy == "crate_guy2")
+    if(self.script_noteworthy == "crate_guy2") {
       wait 1;
+    }
 
-    if(self.script_noteworthy == "crate_guy3")
+    if(self.script_noteworthy == "crate_guy3") {
       wait 1.5;
+    }
   } else
     wait(randomfloatrange(2, 4));
 
@@ -470,8 +488,9 @@ spawn_bridge_guys(var_0) {
 }
 
 stream_enemy_logic() {
-  if(self.target == "director_goto")
+  if(self.target == "director_goto") {
     thread direct_chopper_crate_anim();
+  }
 
   self.goalradius = 32;
   maps\_utility::set_ai_bcvoice("shadowcompany");
@@ -541,8 +560,9 @@ chopper_crash() {
   common_scripts\utility::flag_wait("smaw_target_detroyed");
   var_4 = getaiarray("axis");
 
-  foreach(var_6 in var_4)
+  foreach(var_6 in var_4) {
   var_6 thread maps\jungle_ghosts_util::manually_alert_me();
+  }
 
   var_8 = getanimlength( % jungle_ghost_helicrash_helicopter);
   var_2.crate_clip thread crate_clip_of_doom();
@@ -601,17 +621,21 @@ chopper_leaves_after_time() {
 
   wait 22;
 
-  if(isDefined(self.pilot))
+  if(isDefined(self.pilot)) {
     self.pilot delete();
+  }
 
-  if(isDefined(self.pristine_crate))
+  if(isDefined(self.pristine_crate)) {
     self.pristine_crate delete();
+  }
 
-  if(isDefined(self.damaged_crate))
+  if(isDefined(self.damaged_crate)) {
     self.damaged_crate delete();
+  }
 
-  if(isDefined(self.chopper))
+  if(isDefined(self.chopper)) {
     self.chopper delete();
+  }
 }
 
 chopper_rumble_earthquake() {
@@ -664,16 +688,18 @@ notify_on_damage_chopper() {
   level endon("stream_heli_out");
   self setCanDamage(1);
 
-  for(var_0 = 0; var_0 < 600; var_0 = var_0 + var_1)
+  for(var_0 = 0; var_0 < 600; var_0 = var_0 + var_1) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+  }
 
   self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
   common_scripts\utility::flag_set("do_stream_chopper_fx");
 
   if(!common_scripts\utility::flag("smaw_target_detroyed")) {
     if(isDefined(var_2)) {
-      if(var_2 == level.player)
+      if(var_2 == level.player) {
         common_scripts\utility::flag_set("smaw_target_detroyed");
+      }
     }
   }
 }
@@ -685,8 +711,9 @@ crate_clip_of_doom() {
 
   for(;;) {
     foreach(var_2 in var_0) {
-      if(isalive(var_2) && var_2 istouching(self))
+      if(isalive(var_2) && var_2 istouching(self)) {
         var_2 thread maps\_utility::die();
+      }
     }
 
     wait 0.05;
@@ -781,8 +808,9 @@ watersheet_sound(var_0) {
     wait 0.1;
     var_1 scalevolume(1.0, 0.15);
 
-    while(level.player istouching(var_0))
+    while(level.player istouching(var_0)) {
       wait 0.1;
+    }
 
     var_1 thread maps\_utility::play_sound_on_entity("scn_jungle_under_falls_plr_exit");
     wait 0.15;
@@ -819,8 +847,9 @@ player_ambush_area_monitor(var_0) {
   var_3 = 10;
   var_4 = getent("hidden_in_waterfalls", "targetname");
 
-  while(!level.player istouching(var_0) && !level.player istouching(var_4))
+  while(!level.player istouching(var_0) && !level.player istouching(var_4)) {
     common_scripts\utility::waitframe();
+  }
 
   common_scripts\utility::flag_set("player_in_ambush_position");
 
@@ -830,16 +859,18 @@ player_ambush_area_monitor(var_0) {
   }
 
   for(;;) {
-    while(level.player istouching(var_0) || level.player istouching(var_4))
+    while(level.player istouching(var_0) || level.player istouching(var_4)) {
       wait 0.25;
+    }
 
     common_scripts\utility::flag_clear("player_in_ambush_position");
     maps\_stealth_utility::stealth_detect_ranges_set(level.ambush_visible_settings);
     common_scripts\utility::array_thread(level.ambush_patrollers, maps\_stealth_shared_utilities::ai_clear_custom_animation_reaction);
     common_scripts\utility::array_thread(level.ambush_patrollers, maps\_utility::set_baseaccuracy, var_3);
 
-    while(!level.player istouching(var_0) && !level.player istouching(var_4))
+    while(!level.player istouching(var_0) && !level.player istouching(var_4)) {
       wait 0.25;
+    }
 
     common_scripts\utility::flag_set("player_in_ambush_position");
     maps\_stealth_utility::stealth_detect_ranges_set(level.ambush_hidden_settings);
@@ -856,8 +887,9 @@ player_ambush_area_monitor(var_0) {
 ambush_patrol_logic() {
   self endon("death");
 
-  if(!isDefined(level.ambush_patrol_guys))
+  if(!isDefined(level.ambush_patrol_guys)) {
     level.ambush_patrol_guys = [];
+  }
 
   level.ambush_patrol_guys = common_scripts\utility::array_add(level.ambush_patrol_guys, self);
   self.oldmaxsight = self.maxsightdistsqrd;
@@ -935,10 +967,12 @@ ambush_guy_change_sight_dist() {
   var_0 = getent("hidden_in_waterfalls", "targetname");
 
   for(;;) {
-    if(level.player istouching(var_0))
+    if(level.player istouching(var_0)) {
       self.maxsightdistsqrd = 1;
-    else
+    }
+    else {
       self.maxsightdistsqrd = self.oldmaxsight;
+    }
 
     wait 0.5;
   }
@@ -1007,8 +1041,9 @@ ambush_player_ran_ahead() {
   maps\_utility::battlechatter_on();
   common_scripts\utility::flag_wait("stream_backend_start");
 
-  if(!common_scripts\utility::flag("waterfall_patrollers_dead") && !common_scripts\utility::flag("waterfall_patrollers_passed"))
+  if(!common_scripts\utility::flag("waterfall_patrollers_dead") && !common_scripts\utility::flag("waterfall_patrollers_passed")) {
     common_scripts\utility::flag_set("player_rushed_waterfall_passers");
+  }
 }
 
 ambush_player_did_ambush() {
@@ -1055,8 +1090,9 @@ backend_friendly_stealth_logic() {
   common_scripts\utility::array_thread(level.squad, level.ignore_off_func);
 
   if(isDefined(self.old_color)) {
-    if(common_scripts\utility::flag("pre_tall_grass_friendly_moveup_3"))
+    if(common_scripts\utility::flag("pre_tall_grass_friendly_moveup_3")) {
       common_scripts\utility::flag_wait("moving_into_tall_grass");
+    }
 
     maps\_utility::set_force_color(self.old_color);
   }
@@ -1067,10 +1103,12 @@ backend_friendly_stealth_logic() {
 }
 
 squad_save_old_color() {
-  if(isDefined(self.script_forcecolor))
+  if(isDefined(self.script_forcecolor)) {
     self.old_color = self.script_forcecolor;
-  else if(isDefined(self.old_forcecolor))
+  }
+  else if(isDefined(self.old_forcecolor)) {
     self.old_color = self.old_forcecolor;
+  }
 }
 
 pre_tallgrass_stealth_guys_logic() {
@@ -1092,8 +1130,9 @@ check_death() {
   self waittill("death");
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 maps\jungle_ghosts_util::manually_alert_me();
+  }
 }
 
 check_if_went_hot_late() {
@@ -1104,26 +1143,30 @@ check_if_went_hot_late() {
   wait 1;
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread maps\jungle_ghosts_util::manually_alert_me();
+  }
 
   wait 5;
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread maps\jungle_ghosts_util::manually_alert_me();
+  }
 
   wait 5;
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread maps\jungle_ghosts_util::manually_alert_me();
+  }
 
   wait 5;
   var_0 = getaiarray("axis");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread maps\jungle_ghosts_util::manually_alert_me();
+  }
 }
 
 pre_tall_grass_went_hot_vo() {
@@ -1133,8 +1176,9 @@ pre_tall_grass_went_hot_vo() {
   maps\jungle_ghosts_util::dialogue_stop();
   level.alpha1 maps\_utility::smart_dialogue("jungleg_els_shitgoloud");
 
-  while(getaiarray("axis").size > 0)
+  while(getaiarray("axis").size > 0) {
     wait 0.25;
+  }
 
   wait 0.75;
   level.alpha1 maps\_utility::smart_dialogue("jungleg_gs1_okwereclear");
@@ -1149,8 +1193,9 @@ player_caught_in_the_middle() {
   var_1 = 0;
 
   foreach(var_3 in var_0) {
-    if(var_3.origin[1] < 9500)
+    if(var_3.origin[1] < 9500) {
       var_1 = 1;
+    }
   }
 
   if(var_1) {
@@ -1205,8 +1250,9 @@ pre_tall_grass_friendly_movement() {
   level endon("backend_friendlies_go_hot");
   var_0 = common_scripts\utility::getstructarray("pre_grass_friendly_bad_places", "targetname");
 
-  foreach(var_3, var_2 in var_0)
+  foreach(var_3, var_2 in var_0) {
   badplace_cylinder("pre_tall_grass" + var_3, 0, var_2.origin, var_2.radius, 300, "allies");
+  }
 
   var_4 = getent("pre_tall_grass_stealth_move_1", "script_noteworthy");
   var_5 = getent("pre_tall_grass_stealth_move_2", "script_noteworthy");
@@ -1280,8 +1326,9 @@ tall_grass_globals(var_0) {
 }
 
 grass_aas_approach() {
-  if(!common_scripts\utility::flag("_stealth_enabled"))
+  if(!common_scripts\utility::flag("_stealth_enabled")) {
     thread maps\_stealth_utility::enable_stealth_system();
+  }
 
   level.clear_to_go_flag_set_once = 0;
   level thread tall_grass_stealth_settings();
@@ -1345,8 +1392,9 @@ tall_grass_friendly_ignore_state() {
 tall_grass_hot_vo_end() {
   level endon("field_halfway");
 
-  for(var_0 = getaiarray("axis"); var_0.size > 0; var_0 = getaiarray("axis"))
+  for(var_0 = getaiarray("axis"); var_0.size > 0; var_0 = getaiarray("axis")) {
     wait 0.5;
+  }
 
   level.alpha1 thread maps\_utility::smart_dialogue("jungleg_gs1_okwereclear");
 }
@@ -1470,8 +1518,9 @@ sky_change() {
 
   common_scripts\utility::flag_set("skybox_changed");
 
-  if(isDefined(level.rain_skybox))
+  if(isDefined(level.rain_skybox)) {
     level.rain_skybox show();
+  }
 }
 
 tall_grass_weather() {
@@ -1535,14 +1584,16 @@ tall_grass_get_enemies_except_prone_and_rpg_guys() {
 }
 
 tall_grass_friendly_navigation() {
-  if(!common_scripts\utility::flag("ambush_open_fire"))
+  if(!common_scripts\utility::flag("ambush_open_fire")) {
     thread pre_tall_grass_friendly_movement();
+  }
 
   level thread tall_grass_intro_goes_hot();
   common_scripts\utility::flag_wait("field_entrance");
 
-  if(!common_scripts\utility::flag("_stealth_spotted"))
+  if(!common_scripts\utility::flag("_stealth_spotted")) {
     maps\_utility::autosave_by_name("tall_grass_begin");
+  }
 
   common_scripts\utility::flag_wait("moving_into_tall_grass");
   common_scripts\utility::flag_wait("clear_to_move_into_tall_grass");
@@ -1559,21 +1610,24 @@ tall_grass_friendly_navigation() {
   common_scripts\utility::array_thread(level.squad, ::tall_grass_friendly_exit_logic);
   common_scripts\utility::flag_wait("field_end");
 
-  if(common_scripts\utility::flag("_stealth_spotted"))
+  if(common_scripts\utility::flag("_stealth_spotted")) {
     common_scripts\utility::flag_set("keep_tall_grass_alive_longer");
+  }
 
   var_4 = getaiarray("axis");
 
   if(var_4.size != 0 && !common_scripts\utility::flag("keep_tall_grass_alive_longer")) {
-    foreach(var_2 in var_4)
+    foreach(var_2 in var_4) {
     var_2 maps\jungle_ghosts_util::delete_if_player_cant_see_me();
+    }
   } else if(var_4.size != 0 && common_scripts\utility::flag("keep_tall_grass_alive_longer"))
     thread auto_spot_player();
 }
 
 auto_spot_player() {
-  for(var_0 = getaiarray("axis"); var_0.size != 0; var_0 = getaiarray("axis"))
+  for(var_0 = getaiarray("axis"); var_0.size != 0; var_0 = getaiarray("axis")) {
     wait 0.25;
+  }
 
   common_scripts\utility::flag_clear("keep_tall_grass_alive_longer");
 }
@@ -1582,8 +1636,9 @@ tall_grass_friendly_exit_logic() {
   self[[level.ignore_on_func]]();
   self notify("stop_tall_grass_beahavior");
 
-  if(isDefined(self.old_color))
+  if(isDefined(self.old_color)) {
     maps\_utility::set_force_color(self.old_color);
+  }
 
   maps\_utility::enable_ai_color();
   self allowedstances("crouch", "stand", "prone");
@@ -1595,14 +1650,16 @@ tall_grass_friendly_logic(var_0) {
   self.goalradius = 32;
   self.script_forcegoal = 1;
 
-  if(!common_scripts\utility::flag("grass_went_hot"))
+  if(!common_scripts\utility::flag("grass_went_hot")) {
     self allowedstances("crouch", "prone");
+  }
 
   var_1 = distance(self.origin, var_0.origin);
 
   if(common_scripts\utility::flag("ambush_open_fire") || common_scripts\utility::flag("backend_friendlies_go_hot")) {
-    if(var_1 < 100 && var_1 > 60)
+    if(var_1 < 100 && var_1 > 60) {
       wait 2;
+    }
   } else if(self.origin[0] > 5050)
     wait 2;
 
@@ -1615,10 +1672,12 @@ get_latest_struct() {
 
   for(;;) {
     if(distancesquared(self.origin, self.goal_struct.origin) <= 22500) {
-      if(isDefined(self.goal_struct.target))
+      if(isDefined(self.goal_struct.target)) {
         self.goal_struct = common_scripts\utility::getstruct(self.goal_struct.target, "targetname");
-      else
+      }
+      else {
         maps\_utility::ent_flag_set("end_of_spline");
+      }
     }
 
     wait 1;
@@ -1649,18 +1708,21 @@ stream_vo() {
       thread stream_went_hot_vo();
 
       if(!common_scripts\utility::flag("smaw_target_detroyed") && !common_scripts\utility::flag("stream_heli_out") && !common_scripts\utility::flag("_stealth_spotted")) {
-        if(distance(level.alpha1.origin, level.player.origin) < var_1)
+        if(distance(level.alpha1.origin, level.player.origin) < var_1) {
           level.alpha1 thread maps\_utility::smart_dialogue("jungleg_els_supplydroplookslike");
+        }
 
         wait 2;
       }
 
       if(!common_scripts\utility::flag("smaw_target_detroyed") && !common_scripts\utility::flag("stream_heli_out") && !common_scripts\utility::flag("_stealth_spotted")) {
         if(distance(level.alpha1.origin, level.player.origin) < var_1) {
-          if(!common_scripts\utility::flag("player_about_to_break_stream_stealth"))
+          if(!common_scripts\utility::flag("player_about_to_break_stream_stealth")) {
             level.alpha1 thread maps\_utility::smart_dialogue("jungleg_els_waitforthemto");
-          else
+          }
+          else {
             level.alpha1 thread maps\_utility::smart_dialogue("jungleg_hsh_whereareyougoing");
+          }
         }
 
         wait 4;
@@ -1668,10 +1730,12 @@ stream_vo() {
 
       if(!common_scripts\utility::flag("smaw_target_detroyed") && !common_scripts\utility::flag("stream_heli_out") && !common_scripts\utility::flag("_stealth_spotted")) {
         if(distance(level.alpha1.origin, level.player.origin) < var_1) {
-          if(!common_scripts\utility::flag("player_about_to_break_stream_stealth"))
+          if(!common_scripts\utility::flag("player_about_to_break_stream_stealth")) {
             level.alpha1 thread maps\_utility::smart_dialogue("jungleg_els_waitforit");
-          else
+          }
+          else {
             level.merrick thread maps\_utility::smart_dialogue("jungleg_mrk_idontlikethe");
+          }
         }
 
         common_scripts\utility::flag_set("chopper_about_to_leave");
@@ -1684,8 +1748,9 @@ stream_vo() {
       if(!common_scripts\utility::flag("smaw_target_detroyed") && !common_scripts\utility::flag("_stealth_spotted")) {
         wait 4;
 
-        if(distance(level.alpha1.origin, level.player.origin) < var_1)
+        if(distance(level.alpha1.origin, level.player.origin) < var_1) {
           level.alpha1 thread maps\_utility::smart_dialogue("jungleg_els_okaylooksliketheyre");
+        }
       }
 
       common_scripts\utility::flag_wait("stream_fight_begin");
@@ -1722,8 +1787,9 @@ stream_vo() {
           wait 1;
         }
 
-        if(!common_scripts\utility::flag("ambush_open_fire"))
+        if(!common_scripts\utility::flag("ambush_open_fire")) {
           level.alpha1 maps\_utility::smart_dialogue("jungleg_mrk_dontmove");
+        }
 
         common_scripts\utility::flag_wait_any("ambush_open_fire", "waterfall_ambush_over", "waterfall_patrollers_dead");
 
@@ -1733,8 +1799,9 @@ stream_vo() {
           level.alpha1 thread maps\_utility::smart_dialogue("jungleg_gs1_weshouldkeepmovin");
         }
 
-        if(common_scripts\utility::flag("waterfall_ambush_over") && !common_scripts\utility::flag("ambush_open_fire"))
+        if(common_scripts\utility::flag("waterfall_ambush_over") && !common_scripts\utility::flag("ambush_open_fire")) {
           level.alpha1 maps\_utility::smart_dialogue("jungleg_els_letsmovebeforethey");
+        }
       }
 
       if(common_scripts\utility::flag("ambush_open_fire")) {
@@ -1775,8 +1842,9 @@ tall_grass_vo() {
   maps\_utility::battlechatter_off("allies");
   var_0 = getaiarray("axis");
 
-  if(var_0.size > 0 && common_scripts\utility::flag("ambush_open_fire"))
+  if(var_0.size > 0 && common_scripts\utility::flag("ambush_open_fire")) {
     level.alpha2 maps\_utility::smart_dialogue("jungleg_kgn_theyreretreatingintothe");
+  }
 
   common_scripts\utility::flag_wait("field_entrance");
 
@@ -1786,8 +1854,9 @@ tall_grass_vo() {
     wait 0.5;
   }
 
-  if(!common_scripts\utility::flag("grass_went_hot") && !common_scripts\utility::flag("backend_friendlies_go_hot_late"))
+  if(!common_scripts\utility::flag("grass_went_hot") && !common_scripts\utility::flag("backend_friendlies_go_hot_late")) {
     level.alpha1 maps\_utility::smart_dialogue("jungleg_els_helisoverheadwaitat");
+  }
 
   common_scripts\utility::flag_wait("tall_grass_heli_unloaded");
   wait 1;
@@ -1797,8 +1866,9 @@ tall_grass_vo() {
     wait 1;
   }
 
-  if(!common_scripts\utility::flag("grass_went_hot") && !common_scripts\utility::flag("backend_friendlies_go_hot_late"))
+  if(!common_scripts\utility::flag("grass_went_hot") && !common_scripts\utility::flag("backend_friendlies_go_hot_late")) {
     level.alpha1 thread maps\_utility::smart_dialogue("jungleg_gs1_fanout5meter");
+  }
 
   common_scripts\utility::flag_wait("clear_to_move_into_tall_grass");
   common_scripts\utility::flag_set("moving_into_tall_grass");
@@ -1860,11 +1930,13 @@ track_distance_from_friendlies() {
     for(var_2 = 0; var_2 < level.squad.size; var_2++) {
       var_3 = distance(level.player.origin, level.squad[var_2].origin);
 
-      if(var_3 > 200)
+      if(var_3 > 200) {
         var_1++;
+      }
 
-      if(var_1 >= 3)
+      if(var_1 >= 3) {
         var_0 = 0;
+      }
     }
 
     wait 0.25;

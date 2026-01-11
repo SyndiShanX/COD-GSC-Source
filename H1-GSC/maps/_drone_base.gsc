@@ -8,31 +8,38 @@ drone_give_soul() {
   assign_drone_tree();
   self startusingheroonlylighting();
 
-  if(isDefined(self.script_moveplaybackrate))
+  if(isDefined(self.script_moveplaybackrate)) {
     self.moveplaybackrate = self.script_moveplaybackrate;
-  else
+  }
+  else {
     self.moveplaybackrate = 1;
+  }
 
   if(self.team == "allies") {
     maps\_names::get_name();
 
-    if(isDefined(self.name))
+    if(isDefined(self.name)) {
       self setlookattext(self.name, &"");
+    }
   }
 
-  if(isDefined(level.dronecallbackthread))
+  if(isDefined(level.dronecallbackthread)) {
     self thread[[level.dronecallbackthread]]();
+  }
 
-  if(!isDefined(self.script_friendly_fire_disable))
+  if(!isDefined(self.script_friendly_fire_disable)) {
     level thread maps\_friendlyfire::friendly_fire_think(self);
+  }
 
-  if(!isDefined(level.ai_dont_glow_in_thermal))
+  if(!isDefined(level.ai_dont_glow_in_thermal)) {
     thermaldrawenabledrone();
+  }
 }
 
 thermaldrawenabledrone() {
-  if(!isDefined(level.dronesthermalteamselect))
+  if(!isDefined(level.dronesthermalteamselect)) {
     level.dronesthermalteamselect = "all";
+  }
 
   var_0 = 0;
 
@@ -47,8 +54,9 @@ thermaldrawenabledrone() {
       break;
   }
 
-  if(var_0)
+  if(var_0) {
     self thermaldrawenable();
+  }
 }
 
 drone_init_path() {
@@ -166,10 +174,12 @@ drone_init_path() {
 
 assign_drone_tree() {
   if(isDefined(self.type)) {
-    if(self.type == "dog")
+    if(self.type == "dog") {
       assign_animals_tree();
-    else
+    }
+    else {
       assign_generic_human_tree();
+    }
   }
 }
 

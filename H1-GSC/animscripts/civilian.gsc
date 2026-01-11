@@ -11,15 +11,18 @@ cover() {
   self clearanim( % animscript_root, 0.2);
   animscripts\utility::updateisincombattimer();
 
-  if(animscripts\utility::isincombat())
+  if(animscripts\utility::isincombat()) {
     var_0 = "idle_combat";
-  else
+  }
+  else {
     var_0 = "idle_noncombat";
+  }
 
   var_1 = undefined;
 
-  if(isDefined(self.animname) && isDefined(level.scr_anim[self.animname]))
+  if(isDefined(self.animname) && isDefined(level.scr_anim[self.animname])) {
     var_1 = level.scr_anim[self.animname][var_0];
+  }
 
   if(!isDefined(var_1)) {
     if(!isDefined(level.scr_anim["default_civilian"])) {
@@ -39,8 +42,9 @@ cover() {
 move_check() {
   self endon("killanimscript");
 
-  while(!isDefined(self.champion))
+  while(!isDefined(self.champion)) {
     wait 1;
+  }
 }
 
 stop() {

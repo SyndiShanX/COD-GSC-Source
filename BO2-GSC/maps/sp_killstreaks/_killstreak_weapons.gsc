@@ -57,16 +57,19 @@ usekillstreakweapondrop(hardpointtype) {
 }
 
 usecarriedkillstreakweapon(hardpointtype) {
-  if(self maps\sp_killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0)
+  if(self maps\sp_killstreaks\_killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
     return false;
+  }
 
-  if(!isDefined(hardpointtype))
+  if(!isDefined(hardpointtype)) {
     return false;
+  }
 
   currentweapon = self getcurrentweapon();
 
-  if(hardpointtype == "none")
+  if(hardpointtype == "none") {
     return false;
+  }
 
   self.firedkillstreakweapon = 0;
   self thread watchkillsteakweaponswitch(hardpointtype);
@@ -103,27 +106,37 @@ checkifswitchableweapon(currentweapon, newweapon, killstreakweapon, currentkills
   topkillstreak = maps\sp_killstreaks\_killstreaks::gettopkillstreak();
   killstreakid = maps\sp_killstreaks\_killstreaks::gettopkillstreakuniqueid();
 
-  if(!isDefined(killstreakid))
+  if(!isDefined(killstreakid)) {
     killstreakid = -1;
+  }
 
-  if(self hasweapon(killstreakweapon) && !self getammocount(killstreakweapon))
+  if(self hasweapon(killstreakweapon) && !self getammocount(killstreakweapon)) {
     switchableweapon = 1;
-  else if(self.firedkillstreakweapon && newweapon == killstreakweapon && isheldkillstreakweapon(currentweapon))
+  }
+  else if(self.firedkillstreakweapon && newweapon == killstreakweapon && isheldkillstreakweapon(currentweapon)) {
     switchableweapon = 1;
-  else if(isDefined(level.grenade_array[newweapon]))
+  }
+  else if(isDefined(level.grenade_array[newweapon])) {
     switchableweapon = 0;
-  else if(isheldkillstreakweapon(newweapon) && isheldkillstreakweapon(currentweapon) && currentkillstreakid != killstreakid)
+  }
+  else if(isheldkillstreakweapon(newweapon) && isheldkillstreakweapon(currentweapon) && currentkillstreakid != killstreakid) {
     switchableweapon = 1;
-  else if(maps\sp_killstreaks\_killstreaks::iskillstreakweapon(newweapon))
+  }
+  else if(maps\sp_killstreaks\_killstreaks::iskillstreakweapon(newweapon)) {
     switchableweapon = 0;
-  else if(isgameplayweapon(newweapon))
+  }
+  else if(isgameplayweapon(newweapon)) {
     switchableweapon = 0;
-  else if(self.firedkillstreakweapon)
+  }
+  else if(self.firedkillstreakweapon) {
     switchableweapon = 1;
-  else if(self.lastnonkillstreakweapon == killstreakweapon)
+  }
+  else if(self.lastnonkillstreakweapon == killstreakweapon) {
     switchableweapon = 0;
-  else if(isDefined(topkillstreak) && topkillstreak == killstreakweapon && currentkillstreakid == killstreakid)
+  }
+  else if(isDefined(topkillstreak) && topkillstreak == killstreakweapon && currentkillstreakid == killstreakid) {
     switchableweapon = 0;
+  }
 
   return switchableweapon;
 }

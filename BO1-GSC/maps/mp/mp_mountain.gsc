@@ -70,10 +70,12 @@ glass_exploder_init() {
   single_exploders = [];
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(!isDefined(ent))
+    if(!isDefined(ent)) {
       continue;
-    if(ent.v["type"] != "exploder")
+    }
+    if(ent.v["type"] != "exploder") {
       continue;
+    }
     if(ent.v["exploder"] == 201 || ent.v["exploder"] == 202) {
       ent thread glass_group_exploder_think();
     } else if(ent.v["exploder"] >= 101 && ent.v["exploder"] <= 106) {

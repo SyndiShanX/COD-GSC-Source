@@ -15,8 +15,9 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_deathfx("vfx/gameplay/explosions/vfx_exp_m1a2_end", "tag_deathfx", "exp_armor_vehicle", undefined, undefined, undefined, 0, undefined, undefined, undefined, 10);
 
-  if(!issubstr(var_2, "_nocoax"))
+  if(!issubstr(var_2, "_nocoax")) {
     maps\_vehicle::build_turret("dshk_gaz", "tag_coax_mg", "vehicle_m1a2_abrams_remote_gun", undefined, "auto_nonai", 0.0, 0, 0);
+  }
 
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_rumble("tank_rumble", 0.15, 4.5, 900, 1, 1);
@@ -34,8 +35,9 @@ set_vehicle_anims(var_0) {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 11; var_1++)
+  for(var_1 = 0; var_1 < 11; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   var_0[0].getout_delete = 1;
   return var_0;

@@ -120,8 +120,9 @@ scriptedFX() {
 chair_light() {
   lantern = getEnt("morgue_lamp", "script_noteworthy");
   lght = getEnt("lamp_light", "targetname");
-  if(!isDefined(lght))
+  if(!isDefined(lght)) {
     return;
+  }
   lght linkto(lantern);
   lght setlightintensity(2.1);
   mdl = spawn("script_model", lantern.origin);

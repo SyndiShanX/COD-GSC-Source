@@ -6,10 +6,10 @@
 #include common_scripts\utility;
 
 main() {
-  if(!isDefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
+  }
 
   model = "highrise_fencetarp_07b_wind_c";
   level.anim_prop_models[model]["wind_c"] = "mp_storm_fencetarp_07_windC";
 }
-

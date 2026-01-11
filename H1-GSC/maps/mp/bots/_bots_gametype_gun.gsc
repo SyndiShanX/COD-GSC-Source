@@ -22,16 +22,19 @@ bot_gun_pick_personality_from_weapon(var_0, var_1) {
     if(isDefined(var_2)) {
       var_3 = strtok(var_2, "| ");
 
-      if(maps\mp\_utility::getweaponclass(var_0) == "weapon_pistol")
+      if(maps\mp\_utility::getweaponclass(var_0) == "weapon_pistol") {
         var_3 = ["cqb", "run_and_gun"];
+      }
 
       if(var_3.size > 0) {
         var_4 = undefined;
 
-        if(common_scripts\utility::array_contains(var_3, var_1))
+        if(common_scripts\utility::array_contains(var_3, var_1)) {
           var_4 = var_1;
-        else
+        }
+        else {
           var_4 = common_scripts\utility::random(var_3);
+        }
 
         maps\mp\bots\_bots_util::bot_set_personality(var_4);
       }

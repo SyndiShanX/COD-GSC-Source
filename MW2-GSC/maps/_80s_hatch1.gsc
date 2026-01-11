@@ -43,8 +43,9 @@ setanims() {
   positions = [];
   return positions; // no anims yet
   /*
-  	for(i=0;i<4;i++)
+  	for(i=0;i<4;i++) {
   		positions[i] = spawnStruct();
+  	}
 
   	positions[0].sittag = "body_animate_jnt";
   	positions[1].sittag = "body_animate_jnt";

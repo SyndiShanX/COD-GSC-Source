@@ -84,8 +84,9 @@ guy_snipe(var_0, var_1) {
   var_0 endon("death");
   self notify("ropeidleend");
 
-  if(var_1 == 2)
+  if(var_1 == 2) {
     maps\_vehicle_aianim::animontag(var_0, var_2.sittag, % armada_blackhawk_sniper_idle);
+  }
 
   thread maps\_vehicle_aianim::guy_idle(var_0, var_1);
 }
@@ -148,8 +149,9 @@ player_heli_ropeanimoverride() {
 player_heli_ropeanimoverride_idle(var_0, var_1, var_2) {
   self endon("unloading");
 
-  for(;;)
+  for(;;) {
     maps\_vehicle_aianim::animontag(var_0, var_1, var_2);
+  }
 }
 
 #using_animtree("animated_props");

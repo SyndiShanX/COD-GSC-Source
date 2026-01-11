@@ -48,8 +48,9 @@ build_buildable_condition() {
     }
   }
 
-  if(isDefined(remove_zone))
+  if(isDefined(remove_zone)) {
     arrayremovevalue(level.sloth_buildable_zones, remove_zone);
+  }
 
   return false;
 }
@@ -140,8 +141,9 @@ build_buildable_action() {
 
     for(i = 0; i < pieces.size; i++) {
       if(isDefined(pieces[i].unitrigger) && !is_true(pieces[i].built)) {
-        if(getdvarint(#"_id_B6252E7C") == 2)
+        if(getdvarint(#"_id_B6252E7C") == 2) {
           line(self.origin, pieces[i].start_origin, (1, 1, 1), 1, 0, 1000);
+        }
 
         self maps\mp\zombies\_zm_buildables::player_take_piece(pieces[i]);
         self.pieces[self.pieces.size] = pieces[i];
@@ -170,8 +172,9 @@ build_buildable_action() {
   self notify("stop_buildable_fx");
   self maps\mp\zombies\_zm_buildables::player_build(self.buildable_zone, self.pieces);
 
-  if(isDefined(self.buildable_zone.stub.onuse))
+  if(isDefined(self.buildable_zone.stub.onuse)) {
     self.buildable_zone.stub[[self.buildable_zone.stub.onuse]](self);
+  }
 
   self.pieces = undefined;
   self.context_done = 1;
@@ -190,8 +193,9 @@ build_buildable_fx(table) {
 
 build_buildable_interrupt() {
   if(isDefined(self.pieces) && self.pieces.size > 0) {
-    foreach(piece in self.pieces)
+    foreach(piece in self.pieces) {
     piece maps\mp\zombies\_zm_buildables::piece_spawn_at();
+    }
   }
 }
 
@@ -280,15 +284,17 @@ is_turbine_powering_item(turbine, item) {
 
   if(isDefined(localpower.added_list)) {
     foreach(added in localpower.added_list) {
-      if(added == item)
+      if(added == item) {
         return true;
+      }
     }
   }
 
   if(isDefined(localpower.enabled_list)) {
     foreach(enabled in localpower.enabled_list) {
-      if(enabled == item)
+      if(enabled == item) {
         return true;
+      }
     }
   }
 
@@ -300,8 +306,9 @@ get_power_stubs(player) {
 
   foreach(zone in level.power_zones) {
     if(is_true(zone.built)) {
-      if(!player has_player_equipment(zone.stub.weaponname))
+      if(!player has_player_equipment(zone.stub.weaponname)) {
         power_stubs[power_stubs.size] = zone.stub;
+      }
     }
   }
 
@@ -343,8 +350,9 @@ check_localpower_list(list) {
       if(!isDefined(item_name)) {
         continue;
       }
-      if(item_name == "equip_turret_zm" || item_name == "equip_electrictrap_zm" || item_name == "equip_subwoofer_zm")
+      if(item_name == "equip_turret_zm" || item_name == "equip_electrictrap_zm" || item_name == "equip_subwoofer_zm") {
         return true;
+      }
     }
   }
 
@@ -387,17 +395,21 @@ fetch_buildable_action(item) {
     return;
   }
 
-  if(!player has_deployed_equipment(stub.weaponname))
+  if(!player has_deployed_equipment(stub.weaponname)) {
     player.deployed_equipment[player.deployed_equipment.size] = stub.weaponname;
+  }
 
   sloth_print("got " + stub.equipname);
 
-  if(isDefined(self.turbine))
+  if(isDefined(self.turbine)) {
     ground_pos = self.turbine.origin;
-  else if(isDefined(self.power_item))
+  }
+  else if(isDefined(self.power_item)) {
     ground_pos = self.power_item.origin;
-  else
+  }
+  else {
     ground_pos = self.pi_origin;
+  }
 
   run_asd = "run_holding_" + append_name;
   self.ignore_common_run = 1;
@@ -406,8 +418,9 @@ fetch_buildable_action(item) {
   self setgoalpos(ground_pos);
   range = 10000;
 
-  if(item == "power_item" || isDefined(self.power_item))
+  if(item == "power_item" || isDefined(self.power_item)) {
     range = 25600;
+  }
 
   while(true) {
     if(self sloth_is_traversing()) {
@@ -443,13 +456,15 @@ fetch_buildable_action(item) {
   drop_asd = "zm_drop_" + append_name;
   self maps\mp\zombies\_zm_ai_sloth::action_animscripted(drop_asd, "drop_equipment_anim");
 
-  if(player has_player_equipment(stub.weaponname))
+  if(player has_player_equipment(stub.weaponname)) {
     player equipment_take(stub.weaponname);
+  }
 
   player player_set_equipment_damage(stub.weaponname, 0);
 
-  if(!player has_deployed_equipment(stub.weaponname))
+  if(!player has_deployed_equipment(stub.weaponname)) {
     player.deployed_equipment[player.deployed_equipment.size] = stub.weaponname;
+  }
 
   if(isDefined(self.buildable_model)) {
     self.buildable_model unlink();
@@ -467,8 +482,9 @@ fetch_buildable_action(item) {
     replacement.name = equipment;
     player notify("equipment_placed", replacement, equipment);
 
-    if(isDefined(level.equipment_planted))
+    if(isDefined(level.equipment_planted)) {
       player[[level.equipment_planted]](replacement, equipment, self);
+    }
   }
 
   self.context_done = 1;
@@ -482,10 +498,12 @@ pickup_notetracks(note, stub) {
     self.buildable_model = spawn("script_model", twr_origin);
     self.buildable_model.angles = twr_angles;
 
-    if(self.buildable_item == "turbine")
+    if(self.buildable_item == "turbine") {
       self.buildable_model setModel(level.small_turbine);
-    else
+    }
+    else {
       self.buildable_model setModel(stub.model.model);
+    }
 
     self.buildable_model linkto(self, tag_name);
   }
@@ -494,10 +512,12 @@ pickup_notetracks(note, stub) {
 destroy_item(note, item) {
   if(note == "kick") {
     if(isDefined(item)) {
-      if(isDefined(item.owner))
+      if(isDefined(item.owner)) {
         item.owner thread maps\mp\zombies\_zm_equipment::player_damage_equipment(item.equipname, 1001, item.origin);
-      else
+      }
+      else {
         item thread maps\mp\zombies\_zm_equipment::dropped_equipment_destroy(1);
+      }
     }
   }
 }
@@ -510,11 +530,13 @@ fetch_buildable_interrupt() {
 }
 
 wallbuy_condition() {
-  if(!wallbuy_get_stub_array().size)
+  if(!wallbuy_get_stub_array().size) {
     return false;
+  }
 
-  if(!wallbuy_get_piece_array().size)
+  if(!wallbuy_get_piece_array().size) {
     return false;
+  }
 
   if(isDefined(level.gunshop_zone)) {
     if(self istouching(level.gunshop_zone)) {
@@ -549,25 +571,29 @@ wallbuy_get_stub_array() {
     }
 
     if(stub.in_zone == "zone_general_store") {
-      if(!is_general_store_open())
+      if(!is_general_store_open()) {
         continue;
+      }
     }
 
     if(stub.in_zone == "zone_underground_courthouse2") {
-      if(!maps\mp\zm_buried::is_courthouse_open())
+      if(!maps\mp\zm_buried::is_courthouse_open()) {
         continue;
+      }
     }
 
     if(stub.in_zone == "zone_tunnels_center") {
-      if(!maps\mp\zm_buried::is_tunnel_open())
+      if(!maps\mp\zm_buried::is_tunnel_open()) {
         continue;
+      }
     }
 
     stubs[stubs.size] = stub;
   }
 
-  if(isDefined(remove_stub))
+  if(isDefined(remove_stub)) {
     arrayremovevalue(level.sloth_wallbuy_stubs, remove_stub);
+  }
 
   return stubs;
 }
@@ -578,8 +604,9 @@ wallbuy_get_piece_array() {
   for(i = 0; i < level.chalk_pieces.size; i++) {
     piece = level.chalk_pieces[i];
 
-    if(isDefined(piece.unitrigger) && !is_true(piece.built))
+    if(isDefined(piece.unitrigger) && !is_true(piece.built)) {
       pieces[pieces.size] = piece;
+    }
   }
 
   return pieces;
@@ -686,8 +713,9 @@ wallbuy_grab_pieces(note) {
     self.wallbuy_pieces = wallbuy_get_piece_array();
     self.pieces_needed = self.wallbuy_stubs.size;
 
-    if(self.pieces_needed > self.wallbuy_pieces.size)
+    if(self.pieces_needed > self.wallbuy_pieces.size) {
       self.pieces_needed = self.wallbuy_pieces.size;
+    }
 
     self.wallbuy_pieces = array_randomize(self.wallbuy_pieces);
     self.wallbuy_pieces_taken = [];
@@ -701,7 +729,8 @@ wallbuy_grab_pieces(note) {
 
 wallbuy_interrupt() {
   if(isDefined(self.wallbuy_pieces_taken) && self.wallbuy_pieces_taken.size > 0) {
-    foreach(wallbuy in self.wallbuy_pieces_taken)
+    foreach(wallbuy in self.wallbuy_pieces_taken) {
     wallbuy maps\mp\zm_buried_buildables::ondrop_chalk(self);
+    }
   }
 }

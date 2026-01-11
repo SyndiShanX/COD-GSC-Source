@@ -109,6 +109,7 @@ dualweapondroplogic() {
       break;
   }
 
-  if(isassetloaded("weapon", dualweaponname))
+  if(isassetloaded("weapon", dualweaponname)) {
     self.script_dropweapon = dualweaponname;
+  }
 }

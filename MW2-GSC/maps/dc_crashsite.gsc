@@ -183,8 +183,9 @@ dialogue_crash_site() {
 entity_delete_on_flag(sFlag) {
   self endon("death");
   flag_wait(sFlag);
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 AAA_sequence_player_crash_site() {
@@ -205,8 +206,9 @@ AAA_sequence_player_crash_site() {
   movement_grid = crash_site_player_and_heli_setup();
 
   flag_wait("player_crash_done");
-  if(level.script == "dcburning")
+  if(level.script == "dcburning") {
     thread autosave_now(true);
+  }
 
   /*-----------------------
   VISUAL CHANGES
@@ -377,8 +379,9 @@ AAA_sequence_player_crash_site() {
   level.friendly02 thread play_sound_on_entity("dcburn_cpd_tracer3rounds");
 
   //wait ( 3 );
-  foreach(guy in anim_actors_leader_and_dunn)
+  foreach(guy in anim_actors_leader_and_dunn) {
   guy.ignorme = true;
+  }
   level.player.ignoreme = true;
 
   flag_wait("crash_cut_to_black");
@@ -393,8 +396,9 @@ AAA_sequence_player_crash_site() {
 
 delete_on_flag(sFlag) {
   flag_wait(sFlag);
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 macey_last_mag_dialogue() {
@@ -468,8 +472,9 @@ delete_at_end_of_anim() {
 
 player_ammo_monitor_clip_01() {
   //GetWeaponAmmoClip
-  while(level.player GetWeaponAmmoClip("m4m203_eotech") > 0)
+  while(level.player GetWeaponAmmoClip("m4m203_eotech") > 0) {
     wait(0.05);
+  }
   flag_set("player_ran_out_of_first_clip");
 }
 
@@ -491,8 +496,9 @@ player_ammo_monitor_clip_01() {
 //}
 
 waittill_player_fires_empty_gun() {
-  while(!level.player AttackButtonPressed())
+  while(!level.player AttackButtonPressed()) {
     wait(0.05);
+  }
 }
 
 crash_site_player_and_heli_setup() {
@@ -799,12 +805,15 @@ crash_music() {
 player_killing_crash_enemies_at_good_pace() {
   currentTime = getTime();
   timeElapsed = currentTime - level.lasttimePlayerKilledEnemy;
-  if(currentTime == level.lasttimePlayerKilledEnemy)
+  if(currentTime == level.lasttimePlayerKilledEnemy) {
     return true;
-  else if(timeElapsed > 5000)
+  }
+  else if(timeElapsed > 5000) {
     return false;
-  else
+  }
+  else {
     return true;
+  }
 }
 
 crash_dlight(ePlayer_rig) {
@@ -838,8 +847,9 @@ player_crash_movement(movement_grid_top_left, movement_grid_bot_right, ePlayer_r
 
   thread crash_dlight(ePlayer_rig);
 
-  if(level.script != "dcemp" || level.start_point != "iss")
+  if(level.script != "dcemp" || level.start_point != "iss") {
     delaythread(1, ::open_player_fov, ePlayer_rig);
+  }
 
   flag_wait("redshirt_headshot");
 
@@ -911,8 +921,9 @@ AI_axis_crash_think() {
   self.aggressivemode = true; //dont linger at cover when you cant see your enemy
 
   self waittill("death", attacker);
-  if((isDefined(attacker)) && (isplayer(attacker)))
+  if((isDefined(attacker)) && (isplayer(attacker))) {
     level.lasttimePlayerKilledEnemy = getTime();
+  }
 }
 
 open_player_fov(ePlayer_rig) {
@@ -1259,14 +1270,17 @@ crash_bh_anims() {
 
 AI_delete_crashsite(excluders) {
   self endon("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if((isDefined(excluders)) && (excluders.size > 0)) {
-    if(is_in_array(excluders, self))
-      return;
   }
-  if(isDefined(self.magic_bullet_shield))
+  if((isDefined(excluders)) && (excluders.size > 0)) {
+    if(is_in_array(excluders, self)) {
+      return;
+    }
+  }
+  if(isDefined(self.magic_bullet_shield)) {
     self stop_magic_bullet_shield();
+  }
   if(!isSentient(self)) {
     //		self notify( "death" );
     //		waittillframeend;
@@ -1280,12 +1294,14 @@ vehicle_delete_all_crashsite(excluders) {
   vehicles_to_delete2 = level.vehicles["allies"];
   vehicles_to_delete = array_merge(vehicles_to_delete1, vehicles_to_delete2);
   foreach(vehicle in vehicles_to_delete) {
-    if(!isDefined(vehicle))
+    if(!isDefined(vehicle)) {
       continue;
+    }
 
     if((isDefined(excluders)) && (excluders.size > 0)) {
-      if(is_in_array(excluders, vehicle))
+      if(is_in_array(excluders, vehicle)) {
         continue;
+      }
     }
 
     vehicle maps\_vehicle::godoff();
@@ -1294,18 +1310,21 @@ vehicle_delete_all_crashsite(excluders) {
 }
 
 vehicle_delete_crashsite() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self endon("death");
   //cleanly delete riders even if magic_bullet_shielded
-  if((isDefined(self.riders)) && (self.riders.size))
+  if((isDefined(self.riders)) && (self.riders.size)) {
     array_thread(self.riders, ::AI_delete_crashsite);
+  }
 
   //delete any attached turrets
   if(isDefined(self.mgturret)) {
     foreach(turret in self.mgturret) {
-      if(isDefined(turret))
+      if(isDefined(turret)) {
         turret delete();
+      }
     }
 
   }
@@ -1340,10 +1359,12 @@ spawn_trigger_dummy_crashsite(sDummyTargetname) {
 
 AI_ignored_and_oblivious_crashsite() {
   self endon("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if((isDefined(self.code_classname)) && (self.code_classname == "script_model"))
+  }
+  if((isDefined(self.code_classname)) && (self.code_classname == "script_model")) {
     return;
+  }
   self setFlashbangImmunity(true);
   self.ignoreme = true;
   self.ignoreall = true;

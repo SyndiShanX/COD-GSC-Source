@@ -83,8 +83,9 @@ onEnterAnimState(prevState, nextState) {
   if(prevState == nextState && (nextState != "alien_traverse")) {
     return;
   }
-  if(isDefined(self.animCBs.OnExit[prevState]))
+  if(isDefined(self.animCBs.OnExit[prevState])) {
     self[[self.animCBs.OnExit[prevState]]]();
+  }
 
   ExitAIState(self.aiState);
 
@@ -136,10 +137,12 @@ mp_dome_ns_alien_explode(explosion_target, maxDamage, blastRadius, attacker) {
   playFX(level._effect["vfx_alien_minion_explode_dome"], self.origin);
   phyExpMagnitude = 2;
   minDamage = 1;
-  if(!isDefined(maxDamage))
+  if(!isDefined(maxDamage)) {
     maxDamage = 400;
-  if(!isDefined(blastRadius))
+  }
+  if(!isDefined(blastRadius)) {
     blastRadius = 380;
+  }
 
   if(isDefined(attacker)) {
     attacker radiusDamage(self.origin, blastRadius, maxDamage, minDamage, attacker, "MOD_EXPLOSIVE", "killstreak_level_event_mp");
@@ -157,27 +160,33 @@ mp_dome_ns_alien_explode(explosion_target, maxDamage, blastRadius, attacker) {
   self SetAnimState("explode", 0, 1);
 
   wait GetAnimLength(self GetAnimEntry("explode", 0));
-  if(isDefined(self))
+  if(isDefined(self)) {
     self suicide();
+  }
 }
 
 DidPastPursuitFail(enemy) {
   assert(isDefined(enemy));
 
-  if(isDefined(self.curMeleeTarget) && enemy != self.curMeleeTarget)
+  if(isDefined(self.curMeleeTarget) && enemy != self.curMeleeTarget) {
     return false;
+  }
 
-  if(!isDefined(self.lastPursuitFailedPos) || !isDefined(self.lastPursuitFailedMyPos))
+  if(!isDefined(self.lastPursuitFailedPos) || !isDefined(self.lastPursuitFailedMyPos)) {
     return false;
+  }
 
-  if(Distance2DSquared(enemy.origin, self.lastPursuitFailedPos) > 4)
+  if(Distance2DSquared(enemy.origin, self.lastPursuitFailedPos) > 4) {
     return false;
+  }
 
-  if(self.bLastPursuitFailedPosBad)
+  if(self.bLastPursuitFailedPosBad) {
     return true;
+  }
 
-  if(DistanceSquared(self.origin, self.lastPursuitFailedMyPos) > 64 * 64 && GetTime() - self.lastPursuitFailedTime > 2000)
+  if(DistanceSquared(self.origin, self.lastPursuitFailedMyPos) > 64 * 64 && GetTime() - self.lastPursuitFailedTime > 2000) {
     return false;
+  }
 
   return true;
 }
@@ -190,8 +199,9 @@ DidPastMeleeFail() {
     DistanceSquared(self.origin, self.lastMeleeFailedMyPos) < 50 * 50)
     return true;
 
-  if(self WantToAttackTargetButCant(false))
+  if(self WantToAttackTargetButCant(false)) {
     return true;
+  }
 
   return false;
 }
@@ -259,10 +269,12 @@ UpdateMoveState() {
     attackPoint = self GetAttackPoint(self.enemy);
     bLastBadMeleeTarget = false;
     if(isDefined(self.lastBadPathTime) && (GetTime() - self.lastBadPathTime < 3000)) {
-      if(Distance2DSquared(attackPoint, self.lastBadPathGoal) < 16)
+      if(Distance2DSquared(attackPoint, self.lastBadPathGoal) < 16) {
         bLastBadMeleeTarget = true;
-      else if(isDefined(self.lastBadPathMoveState) && self.lastBadPathMoveState == "pursuit" && Distance2DSquared(self.lastBadPathUltimateGoal, self.enemy.origin) < 16)
+      }
+      else if(isDefined(self.lastBadPathMoveState) && self.lastBadPathMoveState == "pursuit" && Distance2DSquared(self.lastBadPathUltimateGoal, self.enemy.origin) < 16) {
         bLastBadMeleeTarget = true;
+      }
     }
     if(bLastBadMeleeTarget) {
       self.moveState = "follow";
@@ -284,11 +296,13 @@ UpdateMoveState() {
     self.bArrivalsEnabled = true;
 
     myPos = self GetPathGoalPos();
-    if(!isDefined(myPos))
+    if(!isDefined(myPos)) {
       myPos = self.origin;
+    }
 
-    if(GetTime() - self.timeOfLastDamage < 5000)
+    if(GetTime() - self.timeOfLastDamage < 5000) {
       bRefreshGoal = true;
+    }
 
     distFromGoalPos = Distance2DSquared(self.origin, self.Alien_GoalPos.origin);
 
@@ -317,18 +331,22 @@ PickNewLocation() {
 
 GetMoveState(prevState) {
   if(isDefined(self.enemy)) {
-    if(!maps\mp\_utility::IsReallyAlive(self.enemy))
+    if(!maps\mp\_utility::IsReallyAlive(self.enemy)) {
       return "follow";
+    }
 
-    if(isDefined(self.favoriteEnemy) && self.enemy == self.favoriteEnemy)
+    if(isDefined(self.favoriteEnemy) && self.enemy == self.favoriteEnemy) {
       return "pursuit";
+    }
 
-    if(abs(self.origin[2] - self.enemy.origin[2]) < self.warningZHeight && Distance2DSquared(self.enemy.origin, self.origin) < self.attackRadiusSq)
+    if(abs(self.origin[2] - self.enemy.origin[2]) < self.warningZHeight && Distance2DSquared(self.enemy.origin, self.origin) < self.attackRadiusSq) {
       return "pursuit";
+    }
 
     if(isDefined(self.curMeleeTarget) && self.curMeleeTarget == self.enemy) {
-      if(Distance2DSquared(self.curMeleeTarget.origin, self.origin) < self.keepPursuingTargetRadiusSq)
+      if(Distance2DSquared(self.curMeleeTarget.origin, self.origin) < self.keepPursuingTargetRadiusSq) {
         return "pursuit";
+      }
     }
   }
 
@@ -362,10 +380,12 @@ WaitForBadPath() {
     self.lastBadPathTime = GetTime();
     self.lastBadPathGoal = badGoalPos;
     self.lastBadPathMoveState = self.moveState;
-    if(self.moveState == "follow" && isDefined(self.owner))
+    if(self.moveState == "follow" && isDefined(self.owner)) {
       self.lastBadPathUltimateGoal = self.owner.origin;
-    else if(self.moveState == "pursuit" && isDefined(self.enemy))
+    }
+    else if(self.moveState == "pursuit" && isDefined(self.enemy)) {
       self.lastBadPathUltimateGoal = self.enemy.origin;
+    }
   }
 }
 
@@ -387,13 +407,16 @@ GetFollowMoveMode(currentMoveMode) {
   if(isDefined(pathGoalPos)) {
     distSq = DistanceSquared(pathGoalPos, self.origin);
     if(currentMoveMode == "run" || currentMoveMode == "sprint") {
-      if(distSq < cRunToFastWalkDistSq)
+      if(distSq < cRunToFastWalkDistSq) {
         return "fastwalk";
-      else if(currentMoveMode == "sprint")
+      }
+      else if(currentMoveMode == "sprint") {
         return "run";
+      }
     } else if(currentMoveMode == "fastwalk") {
-      if(distSq > cFastWalkToRunDistSq)
+      if(distSq > cFastWalkToRunDistSq) {
         return "run";
+      }
     }
   }
 
@@ -407,8 +430,9 @@ IsWithinAttackHeight(targetPos) {
 }
 
 WantToAttackTargetButCant(bCheckSight) {
-  if(!isDefined(self.curMeleeTarget))
+  if(!isDefined(self.curMeleeTarget)) {
     return false;
+  }
 
   return !self IsWithinAttackHeight(self.curMeleeTarget.origin) &&
     Distance2DSquared(self.origin, self.curMeleeTarget.origin) < self.meleeRadiusSq * 0.75 * 0.75 &&
@@ -416,32 +440,39 @@ WantToAttackTargetButCant(bCheckSight) {
 }
 
 readyToMeleeTarget() {
-  if(!isDefined(self.curMeleeTarget))
+  if(!isDefined(self.curMeleeTarget)) {
     return false;
+  }
 
-  if(!maps\mp\_utility::IsReallyAlive(self.curMeleeTarget))
+  if(!maps\mp\_utility::IsReallyAlive(self.curMeleeTarget)) {
     return false;
+  }
 
-  if(self.aiState == "traverse")
+  if(self.aiState == "traverse") {
     return false;
+  }
 
-  if(Distance2DSquared(self.origin, self.curMeleeTarget.origin) > self.meleeRadiusSq)
+  if(Distance2DSquared(self.origin, self.curMeleeTarget.origin) > self.meleeRadiusSq) {
     return false;
+  }
 
-  if(!self IsWithinAttackHeight(self.curMeleeTarget.origin))
+  if(!self IsWithinAttackHeight(self.curMeleeTarget.origin)) {
     return false;
+  }
 
   return true;
 }
 
 wantsToGrowlAtTarget() {
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
 
   if(abs(self.origin[2] - self.enemy.origin[2]) <= self.warningZHeight || self AgentCanSeeSentient(self.enemy)) {
     distSq = Distance2DSquared(self.origin, self.enemy.origin);
-    if(distSq < self.warningRadiusSq)
+    if(distSq < self.warningRadiusSq) {
       return true;
+    }
   }
 
   return false;
@@ -453,21 +484,24 @@ getAttackPoint(enemy) {
 
   pathGoalPos = self GetPathGoalPos();
   closeEnough = self.attackOffset + 4;
-  if(isDefined(pathGoalPos) && Distance2DSquared(pathGoalPos, enemy.origin) < closeEnough * closeEnough && self CanMovePointToPoint(enemy.origin, pathGoalPos))
+  if(isDefined(pathGoalPos) && Distance2DSquared(pathGoalPos, enemy.origin) < closeEnough * closeEnough && self CanMovePointToPoint(enemy.origin, pathGoalPos)) {
     return pathGoalPos;
+  }
 
   attackPoint = enemy.origin - meToTarget * self.attackOffset;
   attackPoint = self DropPosToGround(attackPoint);
 
-  if(!isDefined(attackPoint))
+  if(!isDefined(attackPoint)) {
     return enemy.origin;
+  }
 
   if(!self CanMovePointToPoint(enemy.origin, attackPoint)) {
     enemyFacing = anglesToForward(enemy.angles);
     attackPoint = enemy.origin + enemyFacing * self.attackOffset;
 
-    if(!self CanMovePointToPoint(enemy.origin, attackPoint))
+    if(!self CanMovePointToPoint(enemy.origin, attackPoint)) {
       return enemy.origin;
+    }
   }
 
   return attackPoint;
@@ -483,12 +517,14 @@ destroyOnOwnerDisconnect(owner) {
 
   self notify("owner_disconnect");
 
-  if(maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone())
+  if(maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone()) {
     wait 0.05;
+  }
 
   self notify("killanimscript");
-  if(isDefined(self.animCBs.OnExit[self.aiState]))
+  if(isDefined(self.animCBs.OnExit[self.aiState])) {
     self[[self.animCBs.OnExit[self.aiState]]]();
+  }
   self mp_dome_ns_alien_explode(undefined, 1, 0);
 }
 
@@ -577,8 +613,9 @@ playGrowl(state) {
   level endon("game_ended");
   self endon("end_dog_sound");
 
-  if(isDefined(self.lastGrowlPlayedTime) && GetTime() - self.lastGrowlPlayedTime < 3000)
+  if(isDefined(self.lastGrowlPlayedTime) && GetTime() - self.lastGrowlPlayedTime < 3000) {
     wait(3);
+  }
 
   while(true) {
     self.lastGrowlPlayedTime = GetTime();
@@ -593,8 +630,9 @@ playPanting(state) {
   level endon("game_ended");
   self endon("end_dog_sound");
 
-  if(isDefined(self.lastPantPlayedTime) && GetTime() - self.lastPantPlayedTime < 3000)
+  if(isDefined(self.lastPantPlayedTime) && GetTime() - self.lastPantPlayedTime < 3000) {
     wait(3);
+  }
 
   self.lastPantPlayedTime = GetTime();
 
@@ -605,10 +643,12 @@ playPanting(state) {
     }
 
     self.lastPantPlayedTime = GetTime();
-    if(self.moveMode == "run" || self.moveMode == "sprint")
+    if(self.moveMode == "run" || self.moveMode == "sprint") {
       self PlaySoundOnMovingEnt("alien_minion_idle");
-    else
+    }
+    else {
       self PlaySoundOnMovingEnt("alien_minion_idle");
+    }
 
     wait(RandomIntRange(6, 8));
   }
@@ -659,8 +699,9 @@ watchOwnerDeath() {
       case "sr":
 
         result = level waittill_any_return("sr_player_eliminated", "sr_player_respawned");
-        if(isDefined(result) && result == "sr_player_eliminated")
+        if(isDefined(result) && result == "sr_player_eliminated") {
           killDog();
+        }
         break;
     }
   }
@@ -676,8 +717,9 @@ watchOwnerTeamChange() {
     }
     result = self.owner waittill_any_return_no_endon_death("joined_team", "joined_spectators");
 
-    if(isDefined(result) && (result == "joined_team" || result == "joined_spectators"))
+    if(isDefined(result) && (result == "joined_team" || result == "joined_spectators")) {
       killDog();
+    }
   }
 }
 
@@ -695,8 +737,9 @@ watchFavoriteEnemyDeath() {
 
 OnDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
   self.timeOfLastDamage = GetTime();
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.damagedOwnerToMe = VectorNormalize(self.origin - self.owner.origin);
+  }
 
   if(self ShouldPlayHitReaction(iDamage, sWeapon, sMeansOfDeath)) {
     switch (self.aiState) {
@@ -711,14 +754,18 @@ OnDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint
 }
 
 ShouldPlayHitReaction(iDamage, sWeapon, sMeansOfDeath) {
-  if(isDefined(sWeapon) && WeaponClass(sWeapon) == "sniper")
+  if(isDefined(sWeapon) && WeaponClass(sWeapon) == "sniper") {
     return true;
-  if(isDefined(sMeansOfDeath) && IsExplosiveDamageMOD(sMeansOfDeath) && iDamage >= 10)
+  }
+  if(isDefined(sMeansOfDeath) && IsExplosiveDamageMOD(sMeansOfDeath) && iDamage >= 10) {
     return true;
-  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_MELEE")
+  }
+  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_MELEE") {
     return true;
-  if(isDefined(sWeapon) && sWeapon == "concussion_grenade_mp")
+  }
+  if(isDefined(sWeapon) && sWeapon == "concussion_grenade_mp") {
     return true;
+  }
 
   return false;
 }
@@ -758,8 +805,9 @@ get_closest(origin, points, maxDist) {
     closestPoint = points[index];
   }
 
-  if(!isDefined(maxDist) || dist <= maxDist)
+  if(!isDefined(maxDist) || dist <= maxDist) {
     return closestPoint;
+  }
 
   return undefined;
 }
@@ -772,8 +820,9 @@ debug_dog() {
     if(GetDvarInt("scr_debugdog") > 0) {
       start = self.origin;
       end = self.origin;
-      if(isDefined(self.enemy))
+      if(isDefined(self.enemy)) {
         end = self.enemy.origin;
+      }
       color = [1, 1, 1];
 
       switch (self.attackState) {
@@ -807,14 +856,16 @@ debug_dog() {
 
 ProcessDebugMode() {
   if(getdvarint("scr_alienDebugMode") == 1) {
-    if(!isDefined(self.bDebugMode) || !self.bDebugMode)
+    if(!isDefined(self.bDebugMode) || !self.bDebugMode) {
       self thread DoDebugMode();
+    }
     self.bDebugMode = true;
     wait(0.05);
     return true;
   } else {
-    if(isDefined(self.bDebugMode) && self.bDebugMode)
+    if(isDefined(self.bDebugMode) && self.bDebugMode) {
       self EndDebugMode();
+    }
     self.bDebugMode = false;
     return false;
   }
@@ -854,10 +905,12 @@ DoDebugMode() {
   level endon("game_ended");
   self endon("enddebugmode");
 
-  if(isDefined(self.owner) && IsPlayer(self.owner))
+  if(isDefined(self.owner) && IsPlayer(self.owner)) {
     player = self.owner;
-  else
+  }
+  else {
     player = level.players[0];
+  }
 
   if(IsAI(player)) {
     return;

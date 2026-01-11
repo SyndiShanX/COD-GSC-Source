@@ -31,11 +31,13 @@ blackhawk_path_to_end() {
 apache_player_adjust() {
   var_0 = maps\oilrocks_apache_code::get_apache_player();
 
-  if(getdvarfloat("vehHelicopterPitchOffset") != var_0.heli.pitch_offset_ground)
+  if(getdvarfloat("vehHelicopterPitchOffset") != var_0.heli.pitch_offset_ground) {
     thread maps\_utility::lerp_saveddvar("vehHelicopterPitchOffset", var_0.heli.pitch_offset_ground, 15.0);
+  }
 
-  if(isDefined(var_0.alt_override))
+  if(isDefined(var_0.alt_override)) {
     var_0 thread vehicle_scripts\_apache_player::altitude_min_override_remove(20.0);
+  }
 }
 
 enemies_vehicle() {

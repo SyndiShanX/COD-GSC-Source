@@ -53,8 +53,9 @@ onPlayerSpawned() {
   for(;;) {
     self waittill("spawned_player");
 
-    if(!isDefined(self.pers["ksWeapon_clip_ammo"]) || !isDefined(self.pers["ksWeapon_name"]))
+    if(!isDefined(self.pers["ksWeapon_clip_ammo"]) || !isDefined(self.pers["ksWeapon_name"])) {
       continue;
+    }
 
     weaponName = self.pers["ksWeapon_name"];
 
@@ -88,8 +89,9 @@ saveWeaponAmmoOnDeath(weaponName) {
 
   self waittill("death");
 
-  if(!self hasWeapon(weaponName))
+  if(!self hasWeapon(weaponName)) {
     return;
+  }
 
   self.pers["ksWeapon_name"] = weaponName;
   self.pers["ksWeapon_clip_ammo"] = self getWeaponAmmoClip(weaponName);
@@ -106,12 +108,14 @@ removeWeaponOnOutOfAmmo(weaponName) {
   while(1) {
     self waittill("end_firing");
 
-    if(self getCurrentWeapon() != weaponName)
+    if(self getCurrentWeapon() != weaponName) {
       continue;
+    }
 
     total_ammo = self getWeaponAmmoClip(weaponName) + self getWeaponAmmoStock(weaponName);
-    if(total_ammo)
+    if(total_ammo) {
       continue;
+    }
 
     self takeWeapon(weaponName);
     return;

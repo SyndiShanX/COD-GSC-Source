@@ -10,8 +10,9 @@
 #include maps\mp\gametypes\_globallogic_score;
 
 waittillslowprocessallowed() {
-  while(level.lastslowprocessframe == gettime())
+  while(level.lastslowprocessframe == gettime()) {
     wait 0.05;
+  }
 
   level.lastslowprocessframe = gettime();
 }
@@ -57,8 +58,9 @@ testhps() {
   for(;;) {
     hp = "radar_mp";
 
-    if(self thread maps\mp\killstreaks\_killstreaks::givekillstreak(hp))
+    if(self thread maps\mp\killstreaks\_killstreaks::givekillstreak(hp)) {
       self playlocalsound(level.killstreaks[hp].informdialog);
+    }
 
     wait 20.0;
   }
@@ -69,20 +71,24 @@ timeuntilroundend() {
     timepassed = (gettime() - level.gameendtime) / 1000;
     timeremaining = level.postroundtime - timepassed;
 
-    if(timeremaining < 0)
+    if(timeremaining < 0) {
       return 0;
+    }
 
     return timeremaining;
   }
 
-  if(level.inovertime)
+  if(level.inovertime) {
     return undefined;
+  }
 
-  if(level.timelimit <= 0)
+  if(level.timelimit <= 0) {
     return undefined;
+  }
 
-  if(!isDefined(level.starttime))
+  if(!isDefined(level.starttime)) {
     return undefined;
+  }
 
   timepassed = (gettimepassed() - level.starttime) / 1000;
   timeremaining = level.timelimit * 60 - timepassed;
@@ -94,8 +100,9 @@ gettimeremaining() {
 }
 
 registerpostroundevent(eventfunc) {
-  if(!isDefined(level.postroundevents))
+  if(!isDefined(level.postroundevents)) {
     level.postroundevents = [];
+  }
 
   level.postroundevents[level.postroundevents.size] = eventfunc;
 }
@@ -104,17 +111,21 @@ executepostroundevents() {
   if(!isDefined(level.postroundevents)) {
     return;
   }
-  for(i = 0; i < level.postroundevents.size; i++)
+  for(i = 0; i < level.postroundevents.size; i++) {
     [[level.postroundevents[i]]]();
+  }
 }
 
 getvalueinrange(value, minvalue, maxvalue) {
-  if(value > maxvalue)
+  if(value > maxvalue) {
     return maxvalue;
-  else if(value < minvalue)
+  }
+  else if(value < minvalue) {
     return minvalue;
-  else
+  }
+  else {
     return value;
+  }
 }
 
 assertproperplacement() {
@@ -208,8 +219,9 @@ gametimer() {
   prevtime = gettime();
 
   while(game["state"] == "playing") {
-    if(!level.timerstopped)
+    if(!level.timerstopped) {
       game["timepassed"] = game["timepassed"] + (gettime() - prevtime);
+    }
 
     prevtime = gettime();
     wait 1.0;
@@ -217,13 +229,16 @@ gametimer() {
 }
 
 gettimepassed() {
-  if(!isDefined(level.starttime))
+  if(!isDefined(level.starttime)) {
     return 0;
+  }
 
-  if(level.timerstopped)
+  if(level.timerstopped) {
     return level.timerpausetime - level.starttime - level.discardtime;
-  else
+  }
+  else {
     return gettime() - level.starttime - level.discardtime;
+  }
 }
 
 pausetimer() {
@@ -246,15 +261,18 @@ getscoreremaining(team) {
   assert(isplayer(self) || isDefined(team));
   scorelimit = level.scorelimit;
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     return scorelimit - maps\mp\gametypes\_globallogic_score::_getplayerscore(self);
-  else
+  }
+  else {
     return scorelimit - getteamscore(team);
+  }
 }
 
 getteamscoreforround(team) {
-  if(level.roundscorecarry && isDefined(game["lastroundscore"][team]))
+  if(level.roundscorecarry && isDefined(game["lastroundscore"][team])) {
     return getteamscore(team) - game["lastroundscore"][team];
+  }
 
   return getteamscore(team);
 }
@@ -265,10 +283,12 @@ getscoreperminute(team) {
   timelimit = level.timelimit;
   minutespassed = gettimepassed() / 60000 + 0.0001;
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     return maps\mp\gametypes\_globallogic_score::_getplayerscore(self) / minutespassed;
-  else
+  }
+  else {
     return getteamscoreforround(team) / minutespassed;
+  }
 }
 
 getestimatedtimeuntilscorelimit(team) {
@@ -276,8 +296,9 @@ getestimatedtimeuntilscorelimit(team) {
   scoreperminute = self getscoreperminute(team);
   scoreremaining = self getscoreremaining(team);
 
-  if(!scoreperminute)
+  if(!scoreperminute) {
     return 999999;
+  }
 
   return scoreremaining / scoreperminute;
 }
@@ -307,21 +328,24 @@ waitfortimeornotifynoartillery(time, notifyname) {
 }
 
 isheadshot(sweapon, shitloc, smeansofdeath, einflictor) {
-  if(shitloc != "head" && shitloc != "helmet")
+  if(shitloc != "head" && shitloc != "helmet") {
     return false;
+  }
 
   switch (smeansofdeath) {
     case "MOD_BAYONET":
     case "MOD_MELEE":
       return false;
     case "MOD_IMPACT":
-      if(sweapon != "knife_ballistic_mp")
+      if(sweapon != "knife_ballistic_mp") {
         return false;
+      }
   }
 
   if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(sweapon)) {
-    if(!isDefined(einflictor) || !isDefined(einflictor.controlled) || einflictor.controlled == 0)
+    if(!isDefined(einflictor) || !isDefined(einflictor.controlled) || einflictor.controlled == 0) {
       return false;
+    }
   }
 
   return true;
@@ -368,8 +392,9 @@ debugline(start, end) {
 
 isexcluded(entity, entitylist) {
   for(index = 0; index < entitylist.size; index++) {
-    if(entity == entitylist[index])
+    if(entity == entitylist[index]) {
       return true;
+    }
   }
 
   return false;
@@ -389,11 +414,13 @@ waitfortimeornotifies(desireddelay) {
 logteamwinstring(wintype, winner) {
   log_string = wintype;
 
-  if(isDefined(winner))
+  if(isDefined(winner)) {
     log_string = log_string + ", win: " + winner;
+  }
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   log_string = log_string + ", " + team + ": " + game["teamScores"][team];
+  }
 
   logstring(log_string);
 }

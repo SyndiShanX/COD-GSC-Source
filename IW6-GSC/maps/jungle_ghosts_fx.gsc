@@ -271,12 +271,14 @@ field_birds() {
     var_3 = "perch_tallgrass_" + var_2;
     var_4 = getent(var_3, "target");
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_0[var_2] = var_4 maps\interactive_models\_birds::birds_savetostruct();
+    }
   }
 
   common_scripts\utility::flag_wait("field_entrance");
 
-  foreach(var_7 in var_0)
+  foreach(var_7 in var_0) {
   var_7 maps\interactive_models\_birds::birds_loadfromstruct();
+  }
 }

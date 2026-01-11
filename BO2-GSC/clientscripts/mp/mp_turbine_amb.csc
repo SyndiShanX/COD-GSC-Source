@@ -91,8 +91,9 @@ wmill_sfx_setup() {
   location[2].alias = "amb_wmill_whoosh";
 
   while(true) {
-    for(i = 0; i < location.size; i++)
+    for(i = 0; i < location.size; i++) {
       playSound(0, location[i].alias, location[i].origin);
+    }
 
     wait 1.35;
   }
@@ -103,19 +104,23 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area) {
     if(level.createfxent[i].v["fxid"] == fxid) {
       level.createfxent[i].soundent = spawnfakeent(0);
 
-      if(isDefined(area))
+      if(isDefined(area)) {
         level.createfxent[i].soundentarea = area;
+      }
 
       origin = level.createfxent[i].v["origin"];
 
-      if(isDefined(offsetx) && offsetx > 0)
+      if(isDefined(offsetx) && offsetx > 0) {
         origin = origin + (offsetx, 0, 0);
+      }
 
-      if(isDefined(offsety) && offsetx > 0)
+      if(isDefined(offsety) && offsetx > 0) {
         origin = origin + (0, offsety, 0);
+      }
 
-      if(isDefined(offsetz) && offsetx > 0)
+      if(isDefined(offsetz) && offsetx > 0) {
         origin = origin + (0, 0, offsetz);
+      }
 
       if(isDefined(onground) && onground) {
         trace = undefined;
@@ -140,6 +145,7 @@ snd_play_auto_fturbine_area_emmiters() {
 }
 
 snd_print_fturbine_id(fxid, type, ent) {
-  if(getdvarint(#"_id_0AEB127D") > 0)
+  if(getdvarint(#"_id_0AEB127D") > 0) {
     println("^5******* fxid; " + fxid + "^5 type; " + type);
+  }
 }

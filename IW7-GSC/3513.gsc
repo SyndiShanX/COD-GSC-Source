@@ -60,8 +60,9 @@ func_DCFB() {
   for(;;) {
     if(!self isonground()) {
       if(scripts\mp\utility\game::istrue(self.booston)) {
-        while(scripts\mp\utility\game::istrue(self.booston))
+        while(scripts\mp\utility\game::istrue(self.booston)) {
           scripts\engine\utility::waitframe();
+        }
       }
 
       var_03 = self.origin[2];
@@ -74,8 +75,9 @@ func_DCFB() {
 
       while(!self isonground()) {
         if(scripts\mp\utility\game::istrue(self.booston)) {
-          while(scripts\mp\utility\game::istrue(self.booston))
+          while(scripts\mp\utility\game::istrue(self.booston)) {
             scripts\engine\utility::waitframe();
+          }
 
           var_03 = self.origin[2];
           continue;
@@ -180,10 +182,12 @@ rc8_watchupdateuav() {
 }
 
 rc8_setuavstrength() {
-  if(level.teambased)
+  if(level.teambased) {
     rc8_updateteamuavstatus(self.team);
-  else
+  }
+  else {
     rc8_updateplayersuavstatus();
+  }
 }
 
 rc8_updateteamuavstatus(var_00, var_01) {
@@ -193,37 +197,47 @@ rc8_updateteamuavstatus(var_00, var_01) {
   var_05 = getuavstrengthlevelneutral();
   var_06 = getuavstrengthlevelshowenemyfastsweep();
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_07 = var_01;
-  else
+  }
+  else {
     var_07 = scripts\mp\killstreaks\uav::_getradarstrength(var_00);
+  }
 
-  if(var_00 == "axis")
+  if(var_00 == "axis") {
     var_08 = level.axisactiveuavs;
-  else
+  }
+  else {
     var_08 = level.alliesactiveuavs;
+  }
 
-  if(scripts\mp\utility\game::_hasperk("specialty_empimmune") && var_07 <= var_05)
+  if(scripts\mp\utility\game::_hasperk("specialty_empimmune") && var_07 <= var_05) {
     var_07 = int(clamp(var_08 + var_05, var_05, var_03));
+  }
 
-  if(var_07 <= var_02)
+  if(var_07 <= var_02) {
     var_07 = var_02;
-  else if(var_07 >= var_03)
+  }
+  else if(var_07 >= var_03) {
     var_07 = var_03;
+  }
 
   self _meth_85A6(var_07);
 
-  if(var_07 >= var_05)
+  if(var_07 >= var_05) {
     self _meth_85A5(0);
-  else
+  }
+  else {
     self _meth_85A5(1);
+  }
 
   if(var_07 <= var_05) {
     self _meth_85A4(0);
     self.radarshowenemydirection = 0;
 
-    if(isDefined(self.radarmode) && self.radarmode == "constant_radar")
+    if(isDefined(self.radarmode) && self.radarmode == "constant_radar") {
       self.radarmode = "normal_radar";
+    }
 
     self setclientomnvar("ui_show_hardcore_minimap", 0);
     return;
@@ -254,24 +268,29 @@ rc8_updateplayersuavstatus(var_00) {
     }
   }
 
-  if(var_05 <= var_01)
+  if(var_05 <= var_01) {
     var_05 = var_01;
-  else if(var_05 >= var_02)
+  }
+  else if(var_05 >= var_02) {
     var_05 = var_02;
+  }
 
   self _meth_85A6(var_05);
 
-  if(var_05 >= getuavstrengthlevelneutral())
+  if(var_05 >= getuavstrengthlevelneutral()) {
     self _meth_85A5(0);
-  else
+  }
+  else {
     self _meth_85A5(1);
+  }
 
   if(var_05 <= getuavstrengthlevelneutral()) {
     self _meth_85A4(0);
     self.radarshowenemydirection = 0;
 
-    if(isDefined(self.radarmode) && self.radarmode == "constant_radar")
+    if(isDefined(self.radarmode) && self.radarmode == "constant_radar") {
       self.radarmode = "normal_radar";
+    }
 
     self setclientomnvar("ui_show_hardcore_minimap", 0);
     return;
@@ -289,8 +308,9 @@ rc8_watchupdatecranked() {
   self.owner endon("destroyed_rc8");
   level endon("game_ended");
 
-  if(isDefined(self.owner.cranked) && isDefined(self.owner.cranked_end_time))
+  if(isDefined(self.owner.cranked) && isDefined(self.owner.cranked_end_time)) {
     self setclientomnvar("ui_cranked_bomb_timer_end_milliseconds", self.owner.cranked_end_time);
+  }
 
   for(;;) {
     self.owner scripts\engine\utility::waittill_any("watchBombTimer", "stop_cranked");
@@ -319,8 +339,9 @@ func_DCFA() {
     self waittill("rc8_damage", var_03, var_04);
     var_05 = gettime();
 
-    if(var_05 - var_01 > 1000)
+    if(var_05 - var_01 > 1000) {
       var_02 = 0;
+    }
 
     var_01 = gettime();
     var_02 = var_02 + var_03;
@@ -346,22 +367,26 @@ func_DCF7() {
   self.owner endon("destroyed_rc8");
   level endon("game_ended");
 
-  while(!isDefined(self.mainweapon))
+  while(!isDefined(self.mainweapon)) {
     wait 0.25;
+  }
 
   var_00 = self getweaponammoclip(self.mainweapon);
 
   for(;;) {
     self waittill("weapon_fired", var_01);
 
-    if(isDefined(self.enemy) && isplayer(self.enemy))
+    if(isDefined(self.enemy) && isplayer(self.enemy)) {
       level thread scripts\mp\battlechatter_mp::saytoself(self.enemy, "plr_killstreak_target");
+    }
 
-    if(scripts\mp\utility\game::istrue(self.active))
+    if(scripts\mp\utility\game::istrue(self.active)) {
       thread playvoice(1, "vox_c8_engaging");
+    }
 
-    if(isDefined(var_01) && (var_01 == "iw7_chargeshot_c8_mp" || var_01 == "iw7_minigun_c8_mp"))
+    if(isDefined(var_01) && (var_01 == "iw7_chargeshot_c8_mp" || var_01 == "iw7_minigun_c8_mp")) {
       self setweaponammoclip(var_01, var_00);
+    }
   }
 }
 
@@ -371,8 +396,9 @@ func_DCF8(var_00) {
   level endon("game_ended");
 
   while(isDefined(var_00) && isalive(var_00)) {
-    if(isDefined(self.enemy))
+    if(isDefined(self.enemy)) {
       var_00 = self.enemy;
+    }
 
     if(self botcanseeentity(var_00)) {
       self botclearscriptgoal();
@@ -388,10 +414,12 @@ func_DCF8(var_00) {
         var_03 = vectornormalize(var_0.origin - self getEye());
         var_04 = (0, 0, 1);
 
-        if(vectordot(var_04, var_03) < 0.92)
+        if(vectordot(var_04, var_03) < 0.92) {
           self botlookatpoint(var_0.origin, 0.5, "script_forced");
-        else
+        }
+        else {
           break;
+        }
       }
 
       var_05 = (var_0.origin[0], var_0.origin[1], var_0.origin[2] - 100);
@@ -427,11 +455,13 @@ func_DCF6() {
 
   var_04 = undefined;
 
-  if(var_0.size > 0)
+  if(var_0.size > 0) {
     var_04 = sortbydistance(var_00, self.origin);
+  }
 
-  if(isDefined(var_04) && var_4.size > 0)
+  if(isDefined(var_04) && var_4.size > 0) {
     return var_4[0];
+  }
 
   return undefined;
 }
@@ -443,17 +473,20 @@ func_DCF9() {
   level endon("game_ended");
 
   for(;;) {
-    if(scripts\mp\utility\game::istrue(self.active))
+    if(scripts\mp\utility\game::istrue(self.active)) {
       thread playvoice(1, "vox_c8_seeking");
+    }
 
     if(isDefined(self.enemy) && isalive(self.enemy) && isplayer(self.enemy) && !self.enemy _meth_8181("specialty_blindeye")) {
-      if(!self botcanseeentity(self.enemy))
+      if(!self botcanseeentity(self.enemy)) {
         func_DCF8(self.enemy);
+      }
     } else {
       var_00 = func_DCF6();
 
-      if(isDefined(var_00))
+      if(isDefined(var_00)) {
         func_DCF8(var_00);
+      }
     }
 
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
@@ -465,25 +498,29 @@ func_DCF3(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 func_DCF2(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
   var_12 = isDefined(var_01) && isDefined(self.owner) && self.owner == var_01;
 
-  if(isDefined(level.weaponmapfunc))
+  if(isDefined(level.weaponmapfunc)) {
     var_05 = [[level.weaponmapfunc]](var_05, var_00);
+  }
 
   if(isrc8falldamage(var_00)) {
     return;
   }
   var_13 = 0;
 
-  if(self.owner.func_FC96)
+  if(self.owner.func_FC96) {
     var_13 = self.owner.func_FC96;
+  }
 
-  if(!scripts\mp\utility\game::istrue(self.active))
+  if(!scripts\mp\utility\game::istrue(self.active)) {
     var_02 = var_02 / 2;
+  }
 
   scripts\mp\damage::callback_playerdamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
   var_14 = self.owner.func_FC96 - var_13;
 
-  if(var_14 > 0)
+  if(var_14 > 0) {
     self.owner thread scripts\mp\missions::func_D991("ch_rc8_shield", var_14);
+  }
 
   scripts\mp\damage::logattackerkillstreak(self, var_02, var_01, var_07, var_06, var_04, var_10, undefined, var_11, var_03, var_05);
   scripts\mp\damage::onkillstreakdamaged("remote_c8", var_01, var_05, var_02);
@@ -523,8 +560,9 @@ func_128F7(var_00) {
   var_01 = checkrc8available(1);
 
   if(!var_01) {
-    if(isDefined(var_0.weapon) && var_0.weapon != "none")
+    if(isDefined(var_0.weapon) && var_0.weapon != "none") {
       self notify("killstreak_finished_with_weapon_" + var_0.weapon);
+    }
 
     return 0;
   }
@@ -541,34 +579,39 @@ func_128F7(var_00) {
   var_03 = "used_remote_c8";
   var_04 = scripts\mp\killstreak_loot::getrarityforlootitem(var_0.variantid);
 
-  if(var_04 != "")
+  if(var_04 != "") {
     var_03 = var_03 + "_" + var_04;
+  }
 
   level thread scripts\mp\utility\game::teamplayercardsplash(var_03, self);
   return 1;
 }
 
 checkrc8available(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 0;
+  }
 
   if(scripts\mp\agents\agent_utility::getnumactiveagents("remote_c8") >= 2) {
-    if(var_00)
+    if(var_00) {
       scripts\mp\hud_message::showerrormessage("KILLSTREAKS_RC8_MAX");
+    }
 
     return 0;
   }
 
   if(scripts\mp\agents\agent_utility::getnumownedactiveagentsbytype(self, "remote_c8") >= 1) {
-    if(var_00)
+    if(var_00) {
       scripts\mp\hud_message::showerrormessage("KILLSTREAKS_RC8_MAX");
+    }
 
     return 0;
   }
 
   if(level.teambased && scripts\mp\agents\agent_utility::getnumownedagentsonteambytype(self.team, "remote_c8") >= 1) {
-    if(var_00)
+    if(var_00) {
       scripts\mp\hud_message::showerrormessage("KILLSTREAKS_RC8_MAX");
+    }
 
     return 0;
   }
@@ -631,8 +674,9 @@ func_10D8D(var_00, var_01) {
   var_07 = "mp_robot_c8";
   var_08 = scripts\mp\killstreak_loot::getrarityforlootitem(var_0.variantid);
 
-  if(var_08 != "")
+  if(var_08 != "") {
     var_07 = var_07 + "_" + var_08;
+  }
 
   var_09 = scripts\mp\agents\agents::add_humanoid_agent("remote_c8", self.team, "rc8Agent", var_02, (self.angles[0], 0, 0), self, 0, 0, "veteran", undefined, 1, 1, 1, 1);
   var_09 reset_rc8_functionality();
@@ -677,8 +721,9 @@ func_10D8D(var_00, var_01) {
   var_9.func_ED75 = 60;
   var_9.mainweapon = "iw7_chargeshot_c8_mp";
 
-  if(scripts\mp\killstreaks\utility::func_A69F(var_9.streakinfo, "passive_energy_machgun"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_9.streakinfo, "passive_energy_machgun")) {
     var_9.mainweapon = "iw7_minigun_c8_mp";
+  }
 
   var_09 scripts\mp\utility\game::_giveweapon(var_9.mainweapon);
   var_09 scripts\mp\utility\game::_giveweapon("iw7_c8landing_mp");
@@ -727,11 +772,13 @@ func_10D8D(var_00, var_01) {
     var_06 setscriptablepartstate("pod", "explode");
   }
 
-  if(isDefined(var_10))
+  if(isDefined(var_10)) {
     var_10 delete();
+  }
 
-  if(isDefined(var_1.func_1349C))
+  if(isDefined(var_1.func_1349C)) {
     var_1.func_1349C delete();
+  }
 
   var_9.origin = var_12;
   var_09 showallparts();
@@ -743,16 +790,18 @@ func_10D8D(var_00, var_01) {
   var_9.useobj = spawn("script_model", var_09 gettagorigin("tag_eye"));
   var_9.useobj linkto(var_09, "tag_eye");
 
-  if(isDefined(var_9.headmodel))
+  if(isDefined(var_9.headmodel)) {
     var_9.headmodel = undefined;
+  }
 
   self.func_DCFC = var_09;
   self.func_4BE1 = "AI";
   func_F697(self.func_4BE1, 1);
   var_09 scripts\mp\killstreaks\utility::func_1843(var_9.killstreaktype, "Killstreak_Ground", self, 1);
 
-  if(scripts\mp\killstreaks\utility::func_A69F(var_9.streakinfo, "passive_speed_duration"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_9.streakinfo, "passive_speed_duration")) {
     var_9.func_ED75 = int(var_9.func_ED75 / 1.2);
+  }
 
   thread func_13AD7(var_9.useobj);
   thread watchtimeout(var_9.func_ED75);
@@ -761,16 +810,18 @@ func_10D8D(var_00, var_01) {
   thread func_13ACD(var_09);
   thread func_13B0C(var_09);
 
-  if(scripts\mp\killstreaks\utility::func_A69F(var_9.streakinfo, "passive_speed_duration"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_9.streakinfo, "passive_speed_duration")) {
     var_09 setmovespeedscale(1.0);
+  }
 }
 
 watchreachpoddestination(var_00) {
   self endon("death");
   level endon("game_ended");
 
-  while(distancesquared(self.origin, var_00) > 0)
+  while(distancesquared(self.origin, var_00) > 0) {
     scripts\engine\utility::waitframe();
+  }
 
   self notify("explode", var_00);
 }
@@ -808,16 +859,18 @@ func_FB68(var_00, var_01, var_02) {
   var_00 endon("destroyed_rc8");
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_01);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self playSound(var_02);
+  }
 }
 
 func_FB69(var_00, var_01) {
   level endon("game_ended");
   var_00 waittill(var_01);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 func_13A0B(var_00) {
@@ -828,8 +881,9 @@ func_13A0B(var_00) {
   if(scripts\mp\utility\game::istrue(var_01)) {
     scripts\mp\shellshock::func_22FF(1.0, 0.7, 800);
 
-    if(isDefined(var_00))
+    if(isDefined(var_00)) {
       var_00 delete();
+    }
   }
 }
 
@@ -862,10 +916,12 @@ func_560D(var_00, var_01) {
   self.func_DCFC rc8_disable_rotation(1);
   self.func_DCFC rc8_disable_attack(1);
 
-  if(scripts\mp\utility\game::istrue(var_01))
+  if(scripts\mp\utility\game::istrue(var_01)) {
     self.func_DCFC scripts\mp\utility\game::_switchtoweapon("iw7_c8landing_mp");
-  else
+  }
+  else {
     self.func_DCFC scripts\mp\utility\game::_switchtoweapon("iw7_c8shutdown_mp");
+  }
 
   self.func_DCFC.active = undefined;
 
@@ -906,18 +962,21 @@ func_627B(var_00) {
   waitforswitchtoweapon(self.func_DCFC, self.func_DCFC.mainweapon);
   var_01 = self.func_4BE1;
 
-  if(var_01 == "AI")
+  if(var_01 == "AI") {
     scripts\mp\utility\game::func_C638("remote_c8_ai");
+  }
   else {
     scripts\engine\utility::waitframe();
     self.func_DCFC scripts\mp\utility\game::freezecontrolswrapper(1);
     scripts\mp\utility\game::func_C638("remote_c8_user");
   }
 
-  if(scripts\mp\utility\game::istrue(var_00))
+  if(scripts\mp\utility\game::istrue(var_00)) {
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.6);
-  else
+  }
+  else {
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.2);
+  }
 
   if(!isalive(self.func_DCFC) || scripts\mp\utility\game::istrue(self.func_DCFC.func_5F6F)) {
     return;
@@ -961,10 +1020,12 @@ waitforswitchtoweapon(var_00, var_01) {
 getothermode(var_00) {
   var_01 = undefined;
 
-  if(var_00 == "AI")
+  if(var_00 == "AI") {
     var_01 = "MANUAL";
-  else
+  }
+  else {
     var_01 = "AI";
+  }
 
   return var_01;
 }
@@ -998,8 +1059,9 @@ func_13AD7(var_00) {
     var_04 = 0;
     var_05 = 0.1;
 
-    if(self.func_4BE1 == "MANUAL")
+    if(self.func_4BE1 == "MANUAL") {
       var_05 = 0.3;
+    }
 
     while(var_01 usebuttonpressed()) {
       var_04 = var_04 + 0.05;
@@ -1037,8 +1099,9 @@ watchtimeout(var_00) {
     var_00 = var_00 - 0.05;
     self.func_DCFC.func_ED75 = self.func_DCFC.func_ED75 - 0.05;
 
-    if(self.func_DCFC.func_ED75 < 0)
+    if(self.func_DCFC.func_ED75 < 0) {
       self.func_DCFC.func_ED75 = 0;
+    }
   }
 
   var_01 = ["remote_c8_end", "remote_c8_timeout"];
@@ -1084,16 +1147,18 @@ func_13996() {
       continue;
     }
     if(isDefined(var_06) && var_06 == "concussion_grenade_mp") {
-      if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_02)))
+      if(scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_02))) {
         var_02 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
+      }
     }
 
     if(isplayer(var_02) && var_02 != self) {
       var_07 = "callout_destroyed_remote_c8";
       var_08 = scripts\mp\killstreak_loot::getrarityforlootitem(self.func_DCFC.streakinfo.variantid);
 
-      if(var_08 != "")
+      if(var_08 != "") {
         var_07 = var_07 + "_" + var_08;
+      }
 
       self.func_DCFC scripts\mp\damage::onkillstreakkilled("remote_c8", var_02, var_06, var_05, var_03, "destroyed_remote_c8", "remote_c8_destroy", var_07);
     }
@@ -1113,18 +1178,22 @@ func_13998(var_00, var_01, var_02) {
 }
 
 func_D51B(var_00, var_01, var_02) {
-  if(isDefined(self.loadoutarchetype))
+  if(isDefined(self.loadoutarchetype)) {
     self.loadoutarchetype = undefined;
+  }
 
-  if(isDefined(var_1.func_1349C))
+  if(isDefined(var_1.func_1349C)) {
     var_1.func_1349C delete();
+  }
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_02 delete();
+  }
 
   if(isDefined(self.midairdamage)) {
-    if(isDefined(self.midairdamage.killcament))
+    if(isDefined(self.midairdamage.killcament)) {
       self.midairdamage.killcament delete();
+    }
 
     self.midairdamage delete();
   }
@@ -1134,8 +1203,9 @@ func_D51B(var_00, var_01, var_02) {
     self.useobj delete();
   }
 
-  if(isDefined(self.mainweapon))
+  if(isDefined(self.mainweapon)) {
     self.mainweapon = undefined;
+  }
 
   self setclientomnvar("ui_rc8_controls", 0);
   self setclientomnvar("ui_killstreak_missile_warn", 0);
@@ -1150,8 +1220,9 @@ func_D51B(var_00, var_01, var_02) {
 
   if(scripts\mp\utility\game::istrue(var_00)) {
     if(isDefined(self.owner)) {
-      if(isDefined(self.owner.func_4BE1) && self.owner.func_4BE1 == "MANUAL")
+      if(isDefined(self.owner.func_4BE1) && self.owner.func_4BE1 == "MANUAL") {
         self.owner notify("stop_manual_rc8");
+      }
     }
   } else {
     self.func_5F6F = 1;
@@ -1166,8 +1237,9 @@ func_D51B(var_00, var_01, var_02) {
       self.owner.func_4BE1 = undefined;
       var_04 = self.owner scripts\mp\utility\game::_launchgrenade("dummy_spike_mp", self.origin, self.origin, var_03);
 
-      if(!isDefined(var_4.weapon_name))
+      if(!isDefined(var_4.weapon_name)) {
         var_4.weapon_name = "dummy_spike_mp";
+      }
 
       var_04 linkto(self);
     }
@@ -1188,8 +1260,9 @@ func_D51B(var_00, var_01, var_02) {
   self.nocorpse = 1;
 
   if(!scripts\mp\utility\game::istrue(var_00)) {
-    if(isDefined(self.owner))
+    if(isDefined(self.owner)) {
       self radiusdamage(self.origin, 256, 200, 100, self.owner, "MOD_EXPLOSIVE", self.mainweapon);
+    }
 
     self suicide();
   }
@@ -1241,8 +1314,9 @@ func_13B0C(var_00) {
   for(;;) {
     self waittill("spawned_player");
 
-    if(isDefined(var_00))
+    if(isDefined(var_00)) {
       var_00 setotherent(self);
+    }
   }
 }
 
@@ -1261,55 +1335,67 @@ playvoice(var_00, var_01) {
 
 rc8_disable_movement(var_00) {
   if(var_00) {
-    if(!isDefined(self.disabledmovement))
+    if(!isDefined(self.disabledmovement)) {
       self.disabledmovement = 0;
+    }
 
     self.disabledmovement++;
     self botsetflag("disable_movement", 1);
   } else {
-    if(!isDefined(self.disabledmovement))
+    if(!isDefined(self.disabledmovement)) {
       self.disabledmovement = 0;
-    else
+    }
+    else {
       self.disabledmovement--;
+    }
 
-    if(!self.disabledmovement)
+    if(!self.disabledmovement) {
       self botsetflag("disable_movement", 0);
+    }
   }
 }
 
 rc8_disable_attack(var_00) {
   if(var_00) {
-    if(!isDefined(self.func_55B1))
+    if(!isDefined(self.func_55B1)) {
       self.func_55B1 = 0;
+    }
 
     self.func_55B1++;
     self botsetflag("disable_attack", 1);
   } else {
-    if(!isDefined(self.func_55B1))
+    if(!isDefined(self.func_55B1)) {
       self.func_55B1 = 0;
-    else
+    }
+    else {
       self.func_55B1--;
+    }
 
-    if(!self.func_55B1)
+    if(!self.func_55B1) {
       self botsetflag("disable_attack", 0);
+    }
   }
 }
 
 rc8_disable_rotation(var_00) {
   if(var_00) {
-    if(!isDefined(self.disablerotation))
+    if(!isDefined(self.disablerotation)) {
       self.disablerotation = 0;
+    }
 
     self.disablerotation++;
     self botsetflag("disable_rotation", 1);
   } else {
-    if(!isDefined(self.disablerotation))
+    if(!isDefined(self.disablerotation)) {
       self.disablerotation = 0;
-    else
+    }
+    else {
       self.disablerotation--;
+    }
 
-    if(!self.disablerotation)
+    if(!self.disablerotation) {
       self botsetflag("disable_rotation", 0);
+    }
   }
 }
 

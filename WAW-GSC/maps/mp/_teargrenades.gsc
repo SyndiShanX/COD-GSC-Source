@@ -83,14 +83,16 @@ tear(pos) {
     }
     offset = (player.origin + (0, 0, 32)) - pos;
     offset2d = (offset[0], offset[1], 0);
-    if(lengthsquared(offset2d) > currad * currad)
+    if(lengthsquared(offset2d) > currad * currad) {
       continue;
+    }
     if(player.origin[2] - pos[2] > curheight) {
       continue;
     }
     player.teargasstarttime = gettime();
-    if(!isDefined(player.teargassuffering))
+    if(!isDefined(player.teargassuffering)) {
       player thread teargassuffering();
+    }
   }
 }
 

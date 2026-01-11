@@ -201,8 +201,9 @@ playerTeamIntelStartHUD(challengeReference, team, omnvar_index, intelTarget) {
   self SetClientOmnvar("ui_intel_active_index", omnvar_index);
   self playerUpdateTeamIntelProgress();
 
-  if(isReallyAlive(self))
+  if(isReallyAlive(self)) {
     self thread maps\mp\gametypes\_hud_message::SplashNotify(challengeReference + "_received");
+  }
 }
 
 teamIntelEndHUD(challengeReference, team) {
@@ -215,8 +216,9 @@ teamIntelEndHUD(challengeReference, team) {
     player SetClientOmnvar("ui_intel_active_index", -1);
     player SetClientOmnvar("ui_intel_progress_current", -1);
 
-    if(isReallyAlive(player))
+    if(isReallyAlive(player)) {
       player thread maps\mp\gametypes\_hud_message::SplashNotify(challengeReference);
+    }
   }
 }
 
@@ -244,11 +246,13 @@ intelTeamRewardPlayerWaitTillComplete(rewardTime) {
     wait(1.0);
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
 
-    if((!isDefined(self.isCarrying) || self.isCarrying == 0) && !isDefined(self.ui_securing))
+    if((!isDefined(self.isCarrying) || self.isCarrying == 0) && !isDefined(self.ui_securing)) {
       rewardTime = max(0, rewardTime - 1.0);
+    }
 
-    if(rewardTime == INTEL_MINIGUN_REWARD_EXPIRE_FLASH_DURATION)
+    if(rewardTime == INTEL_MINIGUN_REWARD_EXPIRE_FLASH_DURATION) {
       self childthread flashIntelIcon();
+    }
   }
 }
 
@@ -263,8 +267,9 @@ intelTeamRewardPlayer() {
   player _giveWeapon(level.intelMiniGun);
   player GiveStartAmmo(level.intelMiniGun);
 
-  if((player isWeaponEnabled()) && (player isUsabilityEnabled()) && !(player isUsingRemote()) && !(player maps\mp\killstreaks\_killstreaks::isUsingHeliSniper()))
+  if((player isWeaponEnabled()) && (player isUsabilityEnabled()) && !(player isUsingRemote()) && !(player maps\mp\killstreaks\_killstreaks::isUsingHeliSniper())) {
     player SwitchToWeaponImmediate(level.intelMiniGun);
+  }
 
   player intelTeamRewardPlayerWaitTillComplete(INTEL_MINIGUN_REWARD_DURATION);
 
@@ -630,22 +635,26 @@ watchForTbag(position, challengeReference) {
   }
 
   while(true) {
-    while(self GetStance() != "stand")
+    while(self GetStance() != "stand") {
       wait(0.05);
+    }
 
     self waittill("Tbag_adjustedStance");
 
-    while(self GetStance() != "crouch")
+    while(self GetStance() != "crouch") {
       wait(0.05);
+    }
 
     if(Distance2D(self.origin, position) < 128) {
       self waittill("Tbag_adjustedStance");
 
-      while(self GetStance() != "stand")
+      while(self GetStance() != "stand") {
         wait(0.05);
+      }
 
-      if(Distance2D(self.origin, position) < 128)
+      if(Distance2D(self.origin, position) < 128) {
         numTbag++;
+      }
     }
 
     if(numTbag) {

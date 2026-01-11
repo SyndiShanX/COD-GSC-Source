@@ -5016,4 +5016,3 @@ function_405e6a83() {
   level.players[0] setorigin(s_pap_interact.s_teleport.origin);
   level.players[0] setplayerangles(s_pap_interact.s_teleport.angles);
 }
-

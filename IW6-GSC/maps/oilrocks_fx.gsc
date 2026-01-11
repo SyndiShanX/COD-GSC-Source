@@ -86,8 +86,9 @@ main() {
   common_scripts\utility::add_fx("cliffside_rockslide", "fx/_requests/oilrocks/cliffside_rockslide");
   common_scripts\utility::add_fx("hellfire_cliffside_impact", "fx/_requests/oilrocks/hellfire_cliffside_impact");
 
-  if(!getdvarint("r_reflectionProbeGenerate"))
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     maps\createfx\oilrocks_fx::main();
+  }
 
   maps\createfx\oilrocks_sound::main();
 }

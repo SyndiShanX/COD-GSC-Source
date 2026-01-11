@@ -36,13 +36,15 @@ section_post_inits() {
   if(isDefined(level._pipe_deck.boats_struct)) {
     level._pipe_deck.derrick_scene_struct = common_scripts\utility::getstruct("struct_derrick_scene", "targetname");
 
-    if(maps\black_ice_util::start_point_is_before("mudpumps"))
+    if(maps\black_ice_util::start_point_is_before("mudpumps")) {
       common_scripts\utility::array_call(getEntArray("opt_hide_derrick", "script_noteworthy"), ::hide);
+    }
 
     var_0 = getEntArray("turret_command", "script_noteworthy");
 
-    foreach(var_2 in var_0)
+    foreach(var_2 in var_0) {
     var_2 makeunusable();
+    }
   } else
     iprintln("black_ice_pipe_deck.gsc: Warning - Pipe Deck boats struct missing (compiled out?)");
 }
@@ -161,8 +163,9 @@ enemies() {
   thread dialogue_mgs_1();
   thread dialogue_mgs_2();
 
-  while(level._enemies["derrick_balcony"].size < 2)
+  while(level._enemies["derrick_balcony"].size < 2) {
     wait 0.05;
+  }
 
   var_0 = 0;
 
@@ -300,10 +303,12 @@ spawnfunc_enemies_balcony() {
   self.script_forcegoal = 1;
   self.noragdoll = 1;
 
-  if(issubstr(self.classname, "rpg"))
+  if(issubstr(self.classname, "rpg")) {
     maps\black_ice_util_ai::add_to_group("derrick_balcony_rpg", 0);
-  else
+  }
+  else {
     maps\black_ice_util_ai::add_to_group("derrick_balcony", 0);
+  }
 
   self.on_turret = 0;
   thread maps\black_ice_util_ai::ignore_to_goal();
@@ -341,8 +346,9 @@ enemies_mg_watcher(var_0, var_1, var_2) {
   wait 2;
   var_5 = getnode(var_2, "targetname");
 
-  if(!isDefined(level._enemies[var_0]))
+  if(!isDefined(level._enemies[var_0])) {
     level._enemies[var_0] = [];
+  }
 
   var_6 = undefined;
 
@@ -364,11 +370,13 @@ enemies_mg_watcher(var_0, var_1, var_2) {
           var_11 = var_6 enemies_get_on_mg(var_0, var_3, var_5);
 
           if(isDefined(var_11)) {
-            while(isturretactive(var_3))
+            while(isturretactive(var_3)) {
               wait 0.05;
+            }
 
-            if(isalive(var_6))
+            if(isalive(var_6)) {
               var_6.on_turret = 0;
+            }
           }
         } else
           break;
@@ -534,33 +542,38 @@ heli_spot_on_single(var_0, var_1, var_2) {
   self endon("deleted");
   var_3 = 0.5;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
+  }
 
   var_4 = 1;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = 0;
+  }
 
   if(isai(var_0)) {
     while(isalive(var_0)) {
-      if(var_4)
+      if(var_4) {
         self setlookatent(var_0);
+      }
 
       self.turret_aim moveto(var_0.origin + (0, 0, 32), var_3);
       wait 0.05;
     }
   } else if(var_0 == level.player) {
     for(;;) {
-      if(var_4)
+      if(var_4) {
         self setlookatent(var_0);
+      }
 
       self.turret_aim moveto(var_0.origin + (0, 0, 32), var_3);
       wait 0.05;
     }
   } else {
-    if(var_4)
+    if(var_4) {
       self setlookatent(var_0);
+    }
 
     self.turret_aim moveto(var_0.origin + (0, 0, 32), var_3);
     wait 0.05;
@@ -585,8 +598,9 @@ event_boat_drop() {
   var_0 = level._pipe_deck.boats_struct;
   var_1 = getEntArray("model_lifeboat", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 maps\_utility::assign_animtree(var_3.script_parameters);
+  }
 
   var_5 = maps\_utility::spawn_anim_model("lifeboat_crates");
   var_5 hidepart("jbone_03");
@@ -610,8 +624,9 @@ heli_player_quake() {
     var_4 = maps\black_ice_util::normalize_value(var_1, var_2, var_3);
     var_5 = maps\black_ice_util::factor_value_min_max(var_0, 0, var_4);
 
-    if(var_5 > 0)
+    if(var_5 > 0) {
       earthquake(var_5, 0.4, level.player.origin, 1000);
+    }
 
     wait 0.17;
   }
@@ -728,8 +743,9 @@ light_com_center_lights_on() {
   var_1 setlightintensity(10);
   var_2 = getEntArray("comms_uplight", "targetname");
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++)
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_2[var_3] setlightintensity(10);
+  }
 }
 
 light_com_center_lights_off() {
@@ -739,15 +755,17 @@ light_com_center_lights_off() {
   var_1 setlightintensity(2);
   var_2 = getEntArray("comms_uplight", "targetname");
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++)
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_2[var_3] setlightintensity(0.01);
+  }
 }
 
 pipedeck_godrays() {
   var_0 = getent("cc_gr_origin", "targetname");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     maps\black_ice_util::god_rays_from_world_location(var_0.origin, "flag_pd_godrays_start", "flag_teleport_rig", undefined, undefined);
+  }
 }
 
 light_command_lights_out() {
@@ -761,36 +779,45 @@ pipedecklights() {
   var_2 = getEntArray("lights_pipedeck_c", "targetname");
   var_3 = [getent("escape_emergency_1", "targetname")];
 
-  foreach(var_5 in var_1)
+  foreach(var_5 in var_1) {
   var_5 setlightradius(12);
+  }
 
-  foreach(var_5 in var_2)
+  foreach(var_5 in var_2) {
   var_5 setlightradius(12);
+  }
 
   maps\_utility::trigger_wait("trig_lights_pipedeck_b", "targetname");
 
-  foreach(var_5 in var_1)
+  foreach(var_5 in var_1) {
   var_5 setlightradius(400);
+  }
 
-  foreach(var_5 in var_2)
+  foreach(var_5 in var_2) {
   var_5 setlightradius(550);
+  }
 
   maps\_utility::trigger_wait("trig_lights_pipedeck_a", "targetname");
 
-  foreach(var_5 in var_0)
+  foreach(var_5 in var_0) {
   var_5 setlightradius(12);
+  }
 
-  foreach(var_5 in var_1)
+  foreach(var_5 in var_1) {
   var_5 setlightradius(12);
+  }
 
-  foreach(var_5 in var_2)
+  foreach(var_5 in var_2) {
   var_5 setlightradius(12);
+  }
 
-  foreach(var_5 in var_3)
+  foreach(var_5 in var_3) {
   var_5 setlightradius(12);
+  }
 
   level waittill("flag_start_lights");
 
-  foreach(var_5 in var_3)
+  foreach(var_5 in var_3) {
   var_5 setlightradius(350);
+  }
 }

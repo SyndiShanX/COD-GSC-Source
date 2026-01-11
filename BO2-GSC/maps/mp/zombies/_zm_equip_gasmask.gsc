@@ -32,8 +32,9 @@ gasmask_removed_watcher_thread() {
   if(isDefined(level.zombiemode_gasmask_reset_player_model)) {
     ent_num = self.characterindex;
 
-    if(isDefined(self.zm_random_char))
+    if(isDefined(self.zm_random_char)) {
       ent_num = self.zm_random_char;
+    }
 
     self[[level.zombiemode_gasmask_reset_player_model]](ent_num);
   }
@@ -41,8 +42,9 @@ gasmask_removed_watcher_thread() {
   if(isDefined(level.zombiemode_gasmask_reset_player_viewmodel)) {
     ent_num = self.characterindex;
 
-    if(isDefined(self.zm_random_char))
+    if(isDefined(self.zm_random_char)) {
       ent_num = self.zm_random_char;
+    }
 
     self[[level.zombiemode_gasmask_reset_player_viewmodel]](ent_num);
   }
@@ -60,8 +62,9 @@ gasmask_activation_watcher_thread() {
   if(isDefined(level.zombiemode_gasmask_set_player_model)) {
     ent_num = self.characterindex;
 
-    if(isDefined(self.zm_random_char))
+    if(isDefined(self.zm_random_char)) {
       ent_num = self.zm_random_char;
+    }
 
     self[[level.zombiemode_gasmask_set_player_model]](ent_num);
   }
@@ -69,8 +72,9 @@ gasmask_activation_watcher_thread() {
   if(isDefined(level.zombiemode_gasmask_set_player_viewmodel)) {
     ent_num = self.characterindex;
 
-    if(isDefined(self.zm_random_char))
+    if(isDefined(self.zm_random_char)) {
       ent_num = self.zm_random_char;
+    }
 
     self[[level.zombiemode_gasmask_set_player_viewmodel]](ent_num);
   }
@@ -85,8 +89,9 @@ gasmask_activation_watcher_thread() {
       if(isDefined(level.zombiemode_gasmask_set_player_model)) {
         ent_num = self.characterindex;
 
-        if(isDefined(self.zm_random_char))
+        if(isDefined(self.zm_random_char)) {
           ent_num = self.zm_random_char;
+        }
 
         self[[level.zombiemode_gasmask_change_player_headmodel]](ent_num, 1);
       }
@@ -101,8 +106,9 @@ gasmask_activation_watcher_thread() {
       if(isDefined(level.zombiemode_gasmask_set_player_model)) {
         ent_num = self.characterindex;
 
-        if(isDefined(self.zm_random_char))
+        if(isDefined(self.zm_random_char)) {
           ent_num = self.zm_random_char;
+        }
 
         self[[level.zombiemode_gasmask_change_player_headmodel]](ent_num, 0);
       }
@@ -143,8 +149,9 @@ gasmask_activation_watcher_thread() {
 
     self setactionslot(1, "weapon", "equip_gasmask_zm");
 
-    if(!self maps\mp\zombies\_zm_laststand::player_is_in_laststand() && !(isDefined(self.intermission) && self.intermission))
+    if(!self maps\mp\zombies\_zm_laststand::player_is_in_laststand() && !(isDefined(self.intermission) && self.intermission)) {
       self decrement_is_drinking();
+    }
 
     self notify("equipment_select_response_done");
   }
@@ -171,8 +178,9 @@ gasmask_debug_print(msg, color) {
   if(!getdvarint(#"_id_4D1BCA99")) {
     return;
   }
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 1, 1);
+  }
 
   print3d(self.origin + vectorscale((0, 0, 1), 60.0), msg, color, 1, 1, 40);
 }

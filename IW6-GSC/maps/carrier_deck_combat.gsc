@@ -138,8 +138,9 @@ begin_deck_combat() {
   var_7 = getEntArray("deck_combat_respawn_triggers", "targetname");
   maps\_utility::array_delete(var_7);
 
-  if(!common_scripts\utility::flag("warning_1_rear") && !common_scripts\utility::flag("warning_1"))
+  if(!common_scripts\utility::flag("warning_1_rear") && !common_scripts\utility::flag("warning_1")) {
     thread maps\_utility::autosave_tactical();
+  }
 }
 
 medbay_cleanup() {
@@ -194,13 +195,15 @@ deck_combat_nag_vo() {
   for(;;) {
     wait 8;
 
-    if(level.player istouching(var_0))
+    if(level.player istouching(var_0)) {
       maps\_utility::smart_radio_dialogue("carrier_hsh_comeonadam");
+    }
 
     wait 8;
 
-    if(level.player istouching(var_0))
+    if(level.player istouching(var_0)) {
       maps\_utility::smart_radio_dialogue("carrier_hsh_loganthisway");
+    }
   }
 }
 
@@ -309,8 +312,9 @@ handle_front_elevator() {
 
   common_scripts\utility::flag_wait("deck_combat_finished");
 
-  if(isalive(var_8[3]))
+  if(isalive(var_8[3])) {
     var_8[3] delete();
+  }
 }
 
 elevator_jet_kill() {
@@ -318,8 +322,9 @@ elevator_jet_kill() {
   level.player endon("death");
 
   for(;;) {
-    if(level.player istouching(self))
+    if(level.player istouching(self)) {
       level.player kill();
+    }
 
     wait 0.05;
   }
@@ -407,8 +412,9 @@ handle_jet_taxi() {
 
   common_scripts\utility::flag_wait("defend_zodiac_osprey_turn");
 
-  if(isalive(var_1[0]))
+  if(isalive(var_1[0])) {
     var_1[0] delete();
+  }
 }
 
 taxing_jet_anim_catchup() {
@@ -465,8 +471,9 @@ island_door_shut() {
   common_scripts\utility::flag_wait("island_doorshut_player");
   common_scripts\utility::flag_wait("island_doorshut_hesh");
 
-  if(!common_scripts\utility::flag("warning_1_rear") && !common_scripts\utility::flag("warning_1"))
+  if(!common_scripts\utility::flag("warning_1_rear") && !common_scripts\utility::flag("warning_1")) {
     thread maps\_utility::autosave_tactical();
+  }
 
   var_0 = getent("deck_combat_door", "targetname");
   var_0 rotateto(var_0.angles - (0, -100, 0), 0.5);
@@ -493,8 +500,9 @@ island_drone_anim_helper() {
   var_1 thread maps\_anim::anim_loop_solo(var_3, "island_drag1_loop");
   common_scripts\utility::flag_wait("door_closed");
 
-  if(isalive(var_3))
+  if(isalive(var_3)) {
     var_3 delete();
+  }
 }
 
 island_drone_anim_wounded() {
@@ -514,8 +522,9 @@ island_drone_anim_wounded() {
   var_1 thread maps\_anim::anim_loop_solo(var_3, "island_drag2_loop");
   common_scripts\utility::flag_wait("door_closed");
 
-  if(isalive(var_3))
+  if(isalive(var_3)) {
     var_3 delete();
+  }
 }
 
 missile_towerbuzz() {
@@ -602,8 +611,9 @@ deck_combat_wave1() {
   wait 2;
   var_7 = getent("dc_ally_move_2", "targetname");
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_7 delete();
+  }
 
   maps\_utility::activate_trigger_with_targetname("dc_ally_move_3");
 }
@@ -637,8 +647,9 @@ heli_damage_check() {
 }
 
 dc_shotgun_seek() {
-  if(issubstr(self.model, "shotgun"))
+  if(issubstr(self.model, "shotgun")) {
     maps\_utility::player_seek_enable();
+  }
 }
 
 deck_combat_wave2_helis() {
@@ -741,8 +752,9 @@ heli_array_setup() {
   foreach(var_1 in self) {
     var_1.path_gobbler = 1;
 
-    if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "kill_engine_sound")
+    if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "kill_engine_sound") {
       var_1 vehicle_turnengineoff();
+    }
 
     var_1 waittill("unloaded");
     var_2 = [var_1];

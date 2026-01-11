@@ -21,10 +21,12 @@ main() {
   level.dead_body_count = 1;
   var_0 = getdvarint("ragdoll_max_simulating") - 6;
 
-  if(var_0 > 0)
+  if(var_0 > 0) {
     level.max_number_of_dead_bodies = var_0;
-  else
+  }
+  else {
     level.max_number_of_dead_bodies = 0;
+  }
 
   var_1 = spawnStruct();
   var_1.bodies = [];
@@ -49,13 +51,15 @@ spawn_dead_body(var_0) {
   }
   var_1 = undefined;
 
-  if(isDefined(self.script_index))
+  if(isDefined(self.script_index)) {
     var_1 = self.script_index;
+  }
   else {
     level.dead_body_count++;
 
-    if(level.dead_body_count > 3)
+    if(level.dead_body_count > 3) {
       level.dead_body_count = 1;
+    }
 
     var_1 = level.dead_body_count;
   }
@@ -66,11 +70,13 @@ spawn_dead_body(var_0) {
   var_2.animname = "dead_guy";
   var_2 maps\_utility::assign_animtree();
 
-  if(maps\_utility::is_h1_level())
+  if(maps\_utility::is_h1_level()) {
     var_2 disablerootmotion();
+  }
 
-  if(!h1_ragdollspecialcase(self))
+  if(!h1_ragdollspecialcase(self)) {
     var_0 que_body(var_2);
+  }
 
   if(isDefined(self.custom_deadbody)) {
     precache_custom_deadbody();
@@ -98,8 +104,9 @@ spawn_dead_body(var_0) {
     var_2 setflaggedanim("flag", var_2 maps\_utility::getanim(self.script_noteworthy), 1, 0, 1);
     var_2 waittillmatch("flag", "end");
 
-    if(!isDefined(self.script_start))
+    if(!isDefined(self.script_start)) {
       var_2 startragdoll();
+    }
   }
 }
 
@@ -120,10 +127,12 @@ lookat_custom_death_anim(var_0) {
   var_2 = 0;
 
   for(;;) {
-    if(distancesquared(level.player.origin, self.origin) > 5000 && (!checksighttrace(self) || !common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin + (0, 0, 12), var_1)))
+    if(distancesquared(level.player.origin, self.origin) > 5000 && (!checksighttrace(self) || !common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin + (0, 0, 12), var_1))) {
       var_2 = 0;
-    else
+    }
+    else {
       var_2++;
+    }
 
     if(var_2 > 5) {
       break;
@@ -164,8 +173,9 @@ set_deadbody_info() {
       continue;
     }
 
-    if(issubstr(var_2, "link_corpse_clip"))
+    if(issubstr(var_2, "link_corpse_clip")) {
       self.link_corpse_clip = 1;
+    }
   }
 }
 

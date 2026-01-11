@@ -272,8 +272,9 @@ set_button(button_name, turn_on) {
   self.in_use = turn_on;
   self setModel(name);
 
-  if(isDefined(self.fx_ent))
+  if(isDefined(self.fx_ent)) {
     self.fx_ent Delete();
+  }
 
   if(isDefined(level._effect[name]) && isDefined(self.fx_origin) && isDefined(self.fx_fwd)) {
     self.fx_ent = SpawnFx(level._effect[name], self.fx_origin, self.fx_fwd);

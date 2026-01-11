@@ -15,23 +15,27 @@ bot_killstreak_setup() {
 }
 
 bot_register_killstreak_func(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.killstreak_botfunc))
+  if(!isDefined(level.killstreak_botfunc)) {
     level.killstreak_botfunc = [];
+  }
 
   level.killstreak_botfunc[var_0] = var_1;
 
-  if(!isDefined(level.killstreak_botcanuse))
+  if(!isDefined(level.killstreak_botcanuse)) {
     level.killstreak_botcanuse = [];
+  }
 
   level.killstreak_botcanuse[var_0] = var_2;
 
-  if(!isDefined(level.killstreak_botparm))
+  if(!isDefined(level.killstreak_botparm)) {
     level.killstreak_botparm = [];
+  }
 
   level.killstreak_botparm[var_0] = var_3;
 
-  if(!isDefined(level.bot_supported_killstreaks))
+  if(!isDefined(level.bot_supported_killstreaks)) {
     level.bot_supported_killstreaks = [];
+  }
 
   level.bot_supported_killstreaks[level.bot_supported_killstreaks.size] = var_0;
 }
@@ -43,8 +47,9 @@ bot_think_killstreak() {
   self endon("disconnect");
   level endon("game_ended");
 
-  while(!isDefined(level.killstreak_botfunc))
+  while(!isDefined(level.killstreak_botfunc)) {
     wait 0.05;
+  }
 
   for(;;) {
     wait(randomfloatrange(2.0, 4.0));
@@ -67,8 +72,9 @@ bot_think_killstreak() {
           var_3 = self[[var_2]](var_0, var_1);
 
           if(!isDefined(var_3) || var_3 == 0) {
-            if(!isDefined(self.bot_killstreak_wait))
+            if(!isDefined(self.bot_killstreak_wait)) {
               self.bot_killstreak_wait = [];
+            }
 
             self.bot_killstreak_wait[var_0] = gettime() + 5000;
           }
@@ -86,22 +92,25 @@ bot_killstreak_do_not_use(var_0) {
 }
 
 bot_can_use_uav(var_0) {
-  if(!maps\mp\gametypes\_hardpoints::playerhasuavactive())
+  if(!maps\mp\gametypes\_hardpoints::playerhasuavactive()) {
     return 1;
+  }
 
   return 0;
 }
 
 bot_can_use_airstrike(var_0) {
-  if(isDefined(level.airstrikeinprogress))
+  if(isDefined(level.airstrikeinprogress)) {
     return 0;
+  }
 
   return 1;
 }
 
 bot_can_use_helicopter(var_0) {
-  if(isDefined(level.chopper))
+  if(isDefined(level.chopper)) {
     return 0;
+  }
 
   return 1;
 }
@@ -109,11 +118,13 @@ bot_can_use_helicopter(var_0) {
 bot_killstreak_simple_use(var_0, var_1) {
   wait(randomintrange(3, 5));
 
-  if(!maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks())
+  if(!maps\mp\bots\_bots_util::bot_allowed_to_use_killstreaks()) {
     return 1;
+  }
 
-  if(isDefined(var_1) && !self[[var_1]](var_0))
+  if(isDefined(var_1) && !self[[var_1]](var_0)) {
     return 0;
+  }
 
   bot_switch_to_killstreak_weapon(var_0);
   return 1;
@@ -127,14 +138,16 @@ bot_killstreak_get_zone_enemies() {
   var_0 = [];
 
   foreach(var_2 in level.players) {
-    if(!isalliedsentient(self, var_2) && isalive(var_2))
+    if(!isalliedsentient(self, var_2) && isalive(var_2)) {
       var_0[var_0.size] = var_2;
+    }
   }
 
   var_4 = [];
 
-  for(var_5 = 0; var_5 < level.zonecount; var_5++)
+  for(var_5 = 0; var_5 < level.zonecount; var_5++) {
     var_4[var_5] = [];
+  }
 
   foreach(var_7 in var_0) {
     var_8 = var_7 getnearestnode();
@@ -142,8 +155,9 @@ bot_killstreak_get_zone_enemies() {
     if(!isDefined(var_8)) {
       var_9 = getnodesinradiussorted(var_7.origin, 256, 0);
 
-      if(var_9.size > 0)
+      if(var_9.size > 0) {
         var_8 = var_9[0];
+      }
     }
 
     if(isDefined(var_8)) {
@@ -166,8 +180,9 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
   if(!isDefined(var_2)) {
     return;
   }
-  if(isDefined(var_1) && !self[[var_1]](var_0))
+  if(isDefined(var_1) && !self[[var_1]](var_0)) {
     return 0;
+  }
 
   self botsetflag("disable_movement", 1);
   bot_switch_to_killstreak_weapon(var_0);
@@ -202,15 +217,17 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
         }
 
         if(isDefined(var_16.lastshotfiredtime) && gettime() - var_16.lastshotfiredtime < 1500) {
-          if(!isweaponsilenced(var_16 getcurrentweapon()))
+          if(!isweaponsilenced(var_16 getcurrentweapon())) {
             var_13[var_13.size] = var_16;
+          }
         }
       }
 
       var_12.enemieslist = var_13;
 
-      if(var_13.size > 0)
+      if(var_13.size > 0) {
         var_9[var_9.size] = var_12;
+      }
 
       var_10[var_10.size] = var_12;
     }
@@ -225,13 +242,15 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
 
   var_23 = var_9;
 
-  if(var_23.size == 0)
+  if(var_23.size == 0) {
     var_23 = var_10;
+  }
 
   var_24 = 0;
 
-  foreach(var_19 in var_23)
+  foreach(var_19 in var_23) {
   var_24 = var_24 + var_19.weight;
+  }
 
   if(var_24 > 0) {
     var_27 = randomfloat(var_24);
@@ -245,8 +264,9 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
     var_14 = var_28.enemieslist;
     var_30 = getzoneorigin(var_28.zonenum);
 
-    foreach(var_16 in var_14)
+    foreach(var_16 in var_14) {
     var_30 = var_30 + var_16.origin;
+    }
 
     var_30 = var_30 / (var_14.size + 1);
     var_33 = undefined;
@@ -257,10 +277,12 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
       var_35 = var_34[0].origin;
     }
 
-    if(isDefined(var_33))
+    if(isDefined(var_33)) {
       var_35 = var_33.origin;
-    else
+    }
+    else {
       var_35 = var_30;
+    }
   } else
     var_35 = getzoneorigin(randomint(level.zonecount));
 
@@ -277,8 +299,9 @@ bot_think_watch_aerial_killstreak() {
   self endon("disconnect");
   level endon("game_ended");
 
-  if(!isDefined(level.last_global_badplace_time))
+  if(!isDefined(level.last_global_badplace_time)) {
     level.last_global_badplace_time = -10000;
+  }
 
   if(!isDefined(level.killstreak_global_bp_exists_for)) {
     level.killstreak_global_bp_exists_for["allies"] = [];
@@ -309,13 +332,15 @@ bot_think_watch_aerial_killstreak() {
     if(isDefined(var_3)) {
       var_2 = 1;
 
-      if(!bot_is_monitoring_aerial_danger(var_3))
+      if(!bot_is_monitoring_aerial_danger(var_3)) {
         childthread monitor_aerial_danger(var_3);
+      }
     }
 
     if(enemy_airstrike_exists(self.team)) {
-      if(level.teambased)
+      if(level.teambased) {
         try_place_global_badplace("airstrike", ::enemy_airstrike_exists);
+      }
 
       var_2 = 1;
     }
@@ -335,15 +360,17 @@ bot_think_watch_aerial_killstreak() {
 }
 
 bot_is_monitoring_aerial_danger(var_0) {
-  if(!isDefined(self.aerial_dangers_monitoring))
+  if(!isDefined(self.aerial_dangers_monitoring)) {
     return 0;
+  }
 
   return common_scripts\utility::array_contains(self.aerial_dangers_monitoring, var_0);
 }
 
 monitor_aerial_danger(var_0) {
-  if(!isDefined(self.aerial_dangers_monitoring))
+  if(!isDefined(self.aerial_dangers_monitoring)) {
     self.aerial_dangers_monitoring = [];
+  }
 
   self.aerial_dangers_monitoring[self.aerial_dangers_monitoring.size] = var_0;
   var_1 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
@@ -364,8 +391,9 @@ monitor_aerial_danger(var_0) {
 }
 
 try_place_global_badplace(var_0, var_1) {
-  if(!isDefined(level.killstreak_global_bp_exists_for[self.team][var_0]))
+  if(!isDefined(level.killstreak_global_bp_exists_for[self.team][var_0])) {
     level.killstreak_global_bp_exists_for[self.team][var_0] = 0;
+  }
 
   if(!level.killstreak_global_bp_exists_for[self.team][var_0]) {
     level.killstreak_global_bp_exists_for[self.team][var_0] = 1;
@@ -391,8 +419,9 @@ monitor_enemy_dangerous_killstreak(var_0, var_1, var_2) {
 get_enemy_helicopter(var_0) {
   if(isDefined(level.chopper)) {
     if(level.teambased) {
-      if(level.chopper.team != var_0)
+      if(level.chopper.team != var_0) {
         return level.chopper;
+      }
     } else if(level.chopper.owner != self)
       return level.chopper;
   }
@@ -404,8 +433,9 @@ enemy_airstrike_exists(var_0) {
   if(isDefined(level.artillerydangercenters)) {
     foreach(var_2 in level.artillerydangercenters) {
       if(level.teambased) {
-        if(var_2.team != var_0)
+        if(var_2.team != var_0) {
           return 1;
+        }
       } else
         return 1;
     }

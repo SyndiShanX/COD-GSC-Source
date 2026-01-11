@@ -34,14 +34,17 @@ teleportThreadEx(verticalOffset, delay, frames) {
   self endon("killanimscript");
   self notify("endTeleportThread");
   self endon("endTeleportThread");
-  if(verticalOffset == 0)
+  if(verticalOffset == 0) {
     return;
+  }
   wait delay;
   amount = verticalOffset / frames;
-  if(amount > 10.0)
+  if(amount > 10.0) {
     amount = 10.0;
-  else if(amount < -10.0)
+  }
+  else if(amount < -10.0) {
     amount = -10.0;
+  }
   offset = (0, 0, amount);
   for(i = 0; i < frames; i++) {
     self Teleport(self.origin + offset);
@@ -193,8 +196,9 @@ doNothingFunc() {
 
 traverseDeath() {
   self notify("traverse_death");
-  if(!isDefined(self.triedTraverseRagdoll))
+  if(!isDefined(self.triedTraverseRagdoll)) {
     self animscripts\zombie_death::PlayDeathSound();
+  }
   deathAnimArray = self.traverseDeathAnim[self.traverseDeathIndex];
   deathAnim = deathAnimArray[randomInt(deathAnimArray.size)];
   animscripts\zombie_death::play_death_anim(deathAnim);
@@ -272,8 +276,9 @@ physExplosionForRagdoll(pos) {
 
 postTraverseDeathAnim() {
   self endon("killanimscript");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   deathAnim = animscripts\zombie_death::get_death_anim();
   self SetFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt")) {

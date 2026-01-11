@@ -47,8 +47,9 @@ main() {
           var_5 = 6400;
           var_6 = distancesquared(self.origin, var_2.origin);
 
-          if(var_6 < var_5)
+          if(var_6 < var_5) {
             turntoangle(var_2.angles[1]);
+          }
           else if(var_6 < var_4) {
             var_3 = var_2.origin - self.origin;
             var_7 = vectortoyaw(var_3);
@@ -73,15 +74,17 @@ main() {
     var_9 = getdefaultidlestate();
 
     if(var_9 == "casualidle") {
-      if(isDefined(self.idlelookattargets))
+      if(isDefined(self.idlelookattargets)) {
         dolookatidle();
+      }
       else {
         stoplookatidle();
         playidleanim("casualidle", getdogstopanim("casualidle"), 0, 0.5, 2);
       }
     } else if(var_9 == "attackidle") {
-      if(isDefined(self.idlelookattargets) && isDefined(self.aggresivelookat))
+      if(isDefined(self.idlelookattargets) && isDefined(self.aggresivelookat)) {
         dolookatidle();
+      }
       else {
         stopidlesound();
         stoplookatidle();
@@ -132,15 +135,19 @@ playidleanim(var_0, var_1, var_2, var_3, var_4) {
 
   self.idleanimtype = var_0;
 
-  if(var_2)
+  if(var_2) {
     self setflaggedanimknobrestart("dog_idle", var_1, 1, var_3, self.animplaybackrate);
-  else
+  }
+  else {
     self setflaggedanimknob("dog_idle", var_1, 1, var_3, self.animplaybackrate);
+  }
 
-  if(var_4 > 0)
+  if(var_4 > 0) {
     animscripts\notetracks::donotetracksfortime(var_4, "dog_idle");
-  else
+  }
+  else {
     animscripts\shared::donotetracks("dog_idle");
+  }
 }
 
 waitforstatechange() {
@@ -177,18 +184,23 @@ getturnanim(var_0) {
   var_1 = getdefaultidlestate();
 
   if(var_1 == "casualidle" || var_1 == "sniffidle") {
-    if(var_0 < -135 || var_0 > 135)
+    if(var_0 < -135 || var_0 > 135) {
       return getdogstopanim("casual_turn_180");
-    else if(var_0 < 0)
+    }
+    else if(var_0 < 0) {
       return getdogstopanim("casual_turn_right");
-    else
+    }
+    else {
       return getdogstopanim("casual_turn_left");
+    }
   } else if(var_0 < -135 || var_0 > 135)
     return getdogstopanim("attack_turn_180");
-  else if(var_0 < 0)
+  else if(var_0 < 0) {
     return getdogstopanim("attack_turn_right");
-  else
+  }
+  else {
     return getdogstopanim("attack_turn_left");
+  }
 }
 
 handledogturnnotetracks(var_0) {
@@ -224,13 +236,16 @@ turntoangle(var_0, var_1) {
   var_6 = getangledelta(var_4);
   var_7 = 0.2;
 
-  if(var_5 < 0.7)
+  if(var_5 < 0.7) {
     var_7 = 0.05;
+  }
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     self animmode("zonly_physics");
-  else
+  }
+  else {
     self animmode("angle deltas");
+  }
 
   self setanim( % dog_idle_knob, 1, var_7);
   self setflaggedanimknobrestart("dog_turn", var_4, 1, var_7);
@@ -259,15 +274,17 @@ turntoangle(var_0, var_1) {
 rotatetoangle(var_0, var_1) {
   self orientmode("face angle", var_0);
 
-  while(abs(angleclamp180(var_0 - self.angles[1])) > var_1)
+  while(abs(angleclamp180(var_0 - self.angles[1])) > var_1) {
     wait 0.1;
+  }
 }
 
 shouldcoveridle() {
   var_0 = dogstop_getnode();
 
-  if(isDefined(var_0) && issubstr(var_0.type, "Cover"))
+  if(isDefined(var_0) && issubstr(var_0.type, "Cover")) {
     return 1;
+  }
 
   return 0;
 }
@@ -284,8 +301,9 @@ chooseattackidle() {
 
   var_3 = 0;
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_3 + var_1[var_2];
+  }
 
   var_4 = randomint(var_3);
   var_5 = 0;
@@ -293,8 +311,9 @@ chooseattackidle() {
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_5 = var_5 + var_1[var_2];
 
-    if(var_4 < var_5)
+    if(var_4 < var_5) {
       return var_0[var_2];
+    }
   }
 }
 
@@ -304,10 +323,12 @@ dodrivenidle() {
 }
 
 dospecialidle() {
-  if(isarray(self.specialidleanim))
+  if(isarray(self.specialidleanim)) {
     var_0 = self.specialidleanim[randomint(self.specialidleanim.size)];
-  else
+  }
+  else {
     var_0 = self.specialidleanim;
+  }
 
   playidlesound(self.customidlesound);
   playidleanim("specialidle", var_0, 0, 0.5, -1);
@@ -315,10 +336,12 @@ dospecialidle() {
 
 docustomidle() {
   if(isarray(self.customidleanimset)) {
-    if(isDefined(self.customidleanimweights))
+    if(isDefined(self.customidleanimweights)) {
       var_0 = animscripts\utility::anim_array(self.customidleanimset, self.customidleanimweights);
-    else
+    }
+    else {
       var_0 = self.customidleanimset[randomint(self.customidleanimset.size)];
+    }
   } else
     var_0 = self.customidleanimset;
 
@@ -356,8 +379,9 @@ lookatidleupdate() {
     var_0 = getlookattarget(self.lookattarget);
     self.lookattarget = var_0;
 
-    if(!isDefined(self.idletrackloop))
+    if(!isDefined(self.idletrackloop)) {
       thread idletrackloop();
+    }
 
     var_1 = 3 + randomfloat(3);
     wait(var_1);
@@ -367,23 +391,27 @@ lookatidleupdate() {
 }
 
 getlookattarget(var_0) {
-  if(isDefined(self.alwayslookatfirsttarget) && self.alwayslookatfirsttarget && self.idlelookattargets.size > 0)
+  if(isDefined(self.alwayslookatfirsttarget) && self.alwayslookatfirsttarget && self.idlelookattargets.size > 0) {
     return self.idlelookattargets[0];
+  }
 
   var_1 = isDefined(var_0);
 
   if(self.idlelookattargets.size == 1) {
-    if(var_1)
+    if(var_1) {
       return undefined;
-    else
+    }
+    else {
       return self.idlelookattargets[0];
+    }
   }
 
   if(var_1) {
     var_2 = randomint(100);
 
-    if(var_2 < 33)
+    if(var_2 < 33) {
       return undefined;
+    }
   }
 
   var_3 = self.idlelookattargets;
@@ -395,8 +423,9 @@ getlookattarget(var_0) {
     if(!var_6 && var_3[var_7] == var_0) {
       var_8 = var_3.size - 1;
 
-      if(var_7 != var_8)
+      if(var_7 != var_8) {
         var_3[var_7] = var_3[var_8];
+      }
 
       var_3[var_8] = undefined;
       var_6 = 1;
@@ -417,8 +446,9 @@ getlookattarget(var_0) {
   for(var_7 = 0; var_7 < var_3.size; var_7++) {
     var_11 = var_11 + var_4[var_7];
 
-    if(var_10 < var_11)
+    if(var_10 < var_11) {
       return var_3[var_7];
+    }
   }
 }
 
@@ -467,15 +497,19 @@ idletrackloop() {
     var_13 = 0;
     var_14 = 0;
 
-    if(var_10 > 0)
+    if(var_10 > 0) {
       var_11 = clamp(var_10 / var_0, 0, 1);
-    else
+    }
+    else {
       var_12 = clamp(var_10 / var_1, 0, 1);
+    }
 
-    if(var_9 < 0)
+    if(var_9 < 0) {
       var_13 = clamp(var_9 / var_2, 0, 1);
-    else
+    }
+    else {
       var_14 = clamp(var_9 / var_3, 0, 1);
+    }
 
     self setanimlimited( % look_2, var_14, 1);
     self setanimlimited( % look_4, var_11, 0.1);
@@ -495,25 +529,32 @@ calctrackingyaw(var_0, var_1, var_2) {
   var_9 = angleclamp180(var_8 - var_1);
 
   if(var_8 > var_1) {
-    if(var_2 >= 0 && !needtodecelforarrival(var_9, var_2, var_6))
+    if(var_2 >= 0 && !needtodecelforarrival(var_9, var_2, var_6)) {
       var_10 = var_2 + var_5;
-    else if(var_2 >= 0)
+    }
+    else if(var_2 >= 0) {
       var_10 = var_2 - var_6;
-    else
+    }
+    else {
       var_10 = var_2 + var_6;
+    }
   } else if(var_2 <= 0 && !needtodecelforarrival(var_9, var_2, var_6))
     var_10 = var_2 - var_5;
-  else if(var_2 <= 0)
+  else if(var_2 <= 0) {
     var_10 = var_2 + var_6;
-  else
+  }
+  else {
     var_10 = var_2 - var_6;
+  }
 
   var_10 = clamp(var_10, -1 * var_7, var_7);
 
-  if(var_8 >= var_1 && var_1 + var_10 > var_8)
+  if(var_8 >= var_1 && var_1 + var_10 > var_8) {
     var_10 = var_8 - var_1;
-  else if(var_8 <= var_1 && var_1 + var_10 < var_8)
+  }
+  else if(var_8 <= var_1 && var_1 + var_10 < var_8) {
     var_10 = var_8 - var_1;
+  }
 
   var_11 = var_1 + var_10;
   self.currenttrackingyawspeed = var_10;
@@ -521,8 +562,9 @@ calctrackingyaw(var_0, var_1, var_2) {
 }
 
 needtodecelforarrival(var_0, var_1, var_2) {
-  if(var_1 == 0)
+  if(var_1 == 0) {
     return 0;
+  }
 
   var_3 = abs(var_0);
   var_4 = abs(var_1);
@@ -532,68 +574,82 @@ needtodecelforarrival(var_0, var_1, var_2) {
     var_3 = var_3 - var_4;
     var_4 = var_4 - var_2;
 
-    if(var_4 < 0)
+    if(var_4 < 0) {
       return 0;
+    }
   }
 
   return 1;
 }
 
 dogstop_getnode() {
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     return self.node;
+  }
 
   return self.prevnode;
 }
 
 getdefaultidlestate(var_0) {
-  if(isDefined(self.defaultidlestateoverride))
+  if(isDefined(self.defaultidlestateoverride)) {
     return self.defaultidlestateoverride;
+  }
 
   var_1 = isDefined(self.enemy) && isalive(self.enemy);
   var_2 = var_1 && distancesquared(self.origin, self.enemy.origin) < 1000000 && (isDefined(self.favoriteenemy) || self seerecently(self.enemy, 5));
   var_3 = dogstop_getnode();
 
-  if(isDefined(self.aggresivelookat))
+  if(isDefined(self.aggresivelookat)) {
     return "attackidle";
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1;
+  }
 
   if(isDefined(var_3) && (!var_0 || distance(self.origin, var_3.origin) <= 32)) {
     if(var_3.type == "Guard") {
-      if(var_2)
+      if(var_2) {
         return "attackidle";
-      else
+      }
+      else {
         return "alertidle";
+      }
     } else if(issubstr(var_3.type, "Cover"))
       return "sneakidle";
     else if(var_1) {
-      if(var_2)
+      if(var_2) {
         return "attackidle";
-      else
+      }
+      else {
         return "alertidle";
+      }
     }
   }
 
-  if(var_2)
+  if(var_2) {
     return "attackidle";
+  }
 
-  if(animscripts\dog\dog_move::shouldsniff())
+  if(animscripts\dog\dog_move::shouldsniff()) {
     return "sniffidle";
+  }
 
   return "casualidle";
 }
 
 should_growl() {
-  if(isDefined(self.script_growl))
+  if(isDefined(self.script_growl)) {
     return 1;
+  }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return 1;
+  }
 
   return !self cansee(self.enemy);
 }
@@ -622,8 +678,9 @@ playidlesound(var_0) {
   }
   stopidlesound();
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     thread loopidlesound(var_0);
+  }
 }
 
 loopidlesound(var_0) {
@@ -665,24 +722,29 @@ stopidlesound() {
 }
 
 getdognexttwitchtime() {
-  if(isDefined(self.script_nobark) && self.script_nobark)
+  if(isDefined(self.script_nobark) && self.script_nobark) {
     return gettime() + 4000 + randomint(3000);
+  }
 
   return gettime() + 1000 + randomint(1000);
 }
 
 getdogstopanimbase() {
-  if(isDefined(self.aggresivelookat))
+  if(isDefined(self.aggresivelookat)) {
     return getdogstopanim("attackidle_base");
-  else
+  }
+  else {
     return getdogstopanim("casualidle_base");
+  }
 }
 
 getdogstopanimlook(var_0) {
-  if(isDefined(self.aggresivelookat))
+  if(isDefined(self.aggresivelookat)) {
     return getdogstopanim("attackidle_look_" + var_0);
-  else
+  }
+  else {
     return getdogstopanim("casualidle_look_" + var_0);
+  }
 }
 
 getdogstopanim(var_0) {
@@ -693,8 +755,9 @@ getdogstopanim(var_0) {
 getdogstoptransitionanim(var_0, var_1) {
   var_2 = animscripts\utility::lookupdoganim("stop", "transition");
 
-  if(isDefined(var_2[var_0]) && isDefined(var_2[var_0][var_1]))
+  if(isDefined(var_2[var_0]) && isDefined(var_2[var_0][var_1])) {
     return var_2[var_0][var_1];
+  }
 
   return undefined;
 }

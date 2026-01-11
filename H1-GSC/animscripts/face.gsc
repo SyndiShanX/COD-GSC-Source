@@ -72,8 +72,9 @@ saygenericdialogue(var_0) {
   if(isDefined(self.generic_voice_override)) {
     var_6 = self.generic_voice_override + "_" + var_0 + "_" + var_2;
 
-    if(!soundexists(var_6))
+    if(!soundexists(var_6)) {
       var_6 = "generic_" + var_0 + "_" + var_2;
+    }
   } else
     var_6 = "generic_" + var_0 + "_" + var_2;
 
@@ -163,8 +164,9 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
       self.facewaiting[var_6]["notifyNum"] = var_7;
       thread playface_waitfornotify("animscript face stop waiting " + self.facewaiting[var_6]["notifyNum"], "Face done waiting", "Face done waiting");
 
-      if(isDefined(var_5))
+      if(isDefined(var_5)) {
         thread playface_waitfortime(var_5, "Face done waiting", "Face done waiting");
+      }
 
       self waittill("Face done waiting");
       var_6 = undefined;
@@ -176,8 +178,9 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
         }
       }
 
-      if(self.a.facewaitforresult == "notify")
+      if(self.a.facewaitforresult == "notify") {
         playfacethread(self.facewaiting[var_6]["facialanim"], self.facewaiting[var_6]["soundAlias"], self.facewaiting[var_6]["importance"], self.facewaiting[var_6]["notifyString"]);
+      }
       else if(isDefined(var_3)) {
         self.faceresult = "failed";
         self notify(var_3);
@@ -226,8 +229,9 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
           thread waitforfacesound();
         }
 
-        while(!self.a.facialanimdone || !self.a.facialsounddone)
+        while(!self.a.facialanimdone || !self.a.facialsounddone) {
           self waittill("animscript facedone");
+        }
 
         self.a.currentdialogimportance = 0;
         self.a.currentdialogsound = undefined;
@@ -336,36 +340,43 @@ clearfacialanim() {
 }
 
 playfacialanim(var_0, var_1, var_2) {
-  if(!isDefined(self.facialidlemonitor))
+  if(!isDefined(self.facialidlemonitor)) {
     thread facial_idle_monitor_thread();
+  }
 
-  if(isDefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims)
+  if(isDefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims) {
     self clearanim( % head, 0.2);
+  }
   else {
     if(isDefined(var_0) && animhasfacialoverride(var_0)) {
       self clearanim( % head, 0.2);
       return;
     }
 
-    if(self hasblendshapes())
+    if(self hasblendshapes()) {
       var_1 = var_1 + "_blend";
+    }
 
     if(!isDefined(anim.facial[var_1])) {
       return;
     }
-    if(isDefined(var_2) && var_2 >= 0 && var_2 < anim.facial[var_1].size)
+    if(isDefined(var_2) && var_2 >= 0 && var_2 < anim.facial[var_1].size) {
       var_3 = var_2;
-    else
+    }
+    else {
       var_3 = randomint(anim.facial[var_1].size);
+    }
 
     var_4 = anim.facial[var_1][var_3];
     self setanimknob(var_4);
 
     if(var_1 == "death") {
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         thread end_facial_on_death(getanimlength(var_0));
-      else
+      }
+      else {
         thread end_facial_on_death();
+      }
     }
   }
 }
@@ -374,13 +385,15 @@ end_facial_on_death(var_0) {
   var_1 = 1.0;
   var_2 = 0.2;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = clamp(var_0, var_2 + 0.5, var_1 + var_2) - var_2;
+  }
 
   wait(var_1);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self clearanim( % head, var_2);
+  }
 }
 
 get_eye_relative_dir() {
@@ -396,14 +409,17 @@ get_eye_relative_dir() {
   var_3 = angleclamp180(abs(var_0[0] - var_1[0]));
   var_4 = angleclamp180(abs(var_0[0] - var_2[0]));
 
-  if(!isDefined(self.prev_eyel_diff))
+  if(!isDefined(self.prev_eyel_diff)) {
     self.prev_eyel_diff = var_3;
+  }
 
-  if(!isDefined(self.prev_eyer_diff))
+  if(!isDefined(self.prev_eyer_diff)) {
     self.prev_eyer_diff = var_4;
+  }
 
-  if(!isDefined(self.eye_move_counter))
+  if(!isDefined(self.eye_move_counter)) {
     self.eye_move_counter = 0;
+  }
 
   if(angleclamp180(var_3 - self.prev_eyel_diff) > 5 || angleclamp180(var_4 - self.prev_eyer_diff) > 5) {
     self.prev_eyel_diff = var_3;
@@ -414,8 +430,9 @@ get_eye_relative_dir() {
   if(isDefined(self.eye_move_counter) && self.eye_move_counter > 4 && isDefined(self.script) && self.script != "scripted" && self.script != "death") {
     var_5 = playfacialanim(undefined, "idle", undefined);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       wait(getanimlength(anim.facial["idle"][var_5]));
+    }
 
     self.eye_move_counter = 0;
   }

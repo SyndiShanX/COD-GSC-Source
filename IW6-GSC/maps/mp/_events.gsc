@@ -30,8 +30,9 @@ init() {
   game_type_col["siege"] = 21;
 
   game_type = level.gameType;
-  if(!isDefined(game_type))
+  if(!isDefined(game_type)) {
     game_type = GetDvar("g_gametype");
+  }
 
   row = 0;
   while(true) {
@@ -42,13 +43,16 @@ init() {
 
     ref = TableLookupByRow("mp/xp_event_table.csv", row, 0);
 
-    if(ref == "win" || ref == "loss" || ref == "tie")
+    if(ref == "win" || ref == "loss" || ref == "tie") {
       value = float(value);
-    else
+    }
+    else {
       value = int(value);
+    }
 
-    if(value != -1)
+    if(value != -1) {
       maps\mp\gametypes\_rank::registerScoreInfo(ref, value);
+    }
 
     row++;
   }
@@ -127,10 +131,12 @@ onPlayerConnect() {
 }
 
 damagedPlayer(victim, damage, weapon) {
-  if(damage < 50 && damage > 10)
+  if(damage < 50 && damage > 10) {
     self maps\mp\killstreaks\_killstreaks::giveAdrenaline("damage");
-  else
+  }
+  else {
     self maps\mp\killstreaks\_killstreaks::giveAdrenaline("heavy_damage");
+  }
 }
 
 killedPlayerNotifySys(killId, victim, weapon, meansOfDeath) {
@@ -140,17 +146,20 @@ killedPlayerNotifySys(killId, victim, weapon, meansOfDeath) {
   self notify("killedPlayerNotify");
   self endon("killedPlayerNotify");
 
-  if(!isDefined(self.killsInAFrameCount))
+  if(!isDefined(self.killsInAFrameCount)) {
     self.killsInAFrameCount = 0;
+  }
 
   self.killsInAFrameCount++;
 
   wait(0.05);
 
-  if(self.killsInAFrameCount > 1)
+  if(self.killsInAFrameCount > 1) {
     self thread notifyKilledPlayer(killId, victim, weapon, meansOfDeath, self.killsInAFrameCount);
-  else
+  }
+  else {
     self notify("got_a_kill", victim, weapon, meansOfDeath);
+  }
 
   self.killsInAFrameCount = 0;
 }
@@ -179,8 +188,9 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
   self.damagedPlayers[victimGuid] = undefined;
 
   if(!isKillstreakWeapon(weapon) && !self isJuggernaut() && !self _hasPerk("specialty_explosivebullets")) {
-    if(weapon == "none")
+    if(weapon == "none") {
       return false;
+    }
 
     if(victim.attackers.size == 1 && !isDefined(victim.attackers[victim.guid])) {
       if(!isDefined(victim.attackers[self.guid])) {
@@ -207,34 +217,43 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
       }
     }
 
-    if(isDefined(victim.throwingGrenade) && victim.throwingGrenade == "frag_grenade_mp")
+    if(isDefined(victim.throwingGrenade) && victim.throwingGrenade == "frag_grenade_mp") {
       self.modifiers["cooking"] = true;
-
-    if(isDefined(self.assistedSuicide) && self.assistedSuicide)
-      self assistedSuicide(killId, weapon, meansOfDeath);
-
-    if(level.numKills == 1)
-      self firstBlood(killId, weapon, meansOfDeath);
-
-    if(self.pers["cur_death_streak"] > 3)
-      self comeBack(killId, weapon, meansOfDeath);
-
-    if(meansOfDeath == "MOD_HEAD_SHOT") {
-      if(isDefined(victim.lastStand))
-        execution(killId, weapon, meansOfDeath);
-      else
-        headShot(killId, weapon, meansOfDeath);
     }
 
-    if(isDefined(self.wasti) && self.wasti && getTime() - self.spawnTime <= 5000)
-      self.modifiers["jackintheboxkill"] = true;
+    if(isDefined(self.assistedSuicide) && self.assistedSuicide) {
+      self assistedSuicide(killId, weapon, meansOfDeath);
+    }
 
-    if(!isAlive(self) && self.deathtime + 800 < getTime())
+    if(level.numKills == 1) {
+      self firstBlood(killId, weapon, meansOfDeath);
+    }
+
+    if(self.pers["cur_death_streak"] > 3) {
+      self comeBack(killId, weapon, meansOfDeath);
+    }
+
+    if(meansOfDeath == "MOD_HEAD_SHOT") {
+      if(isDefined(victim.lastStand)) {
+        execution(killId, weapon, meansOfDeath);
+      }
+      else {
+        headShot(killId, weapon, meansOfDeath);
+      }
+    }
+
+    if(isDefined(self.wasti) && self.wasti && getTime() - self.spawnTime <= 5000) {
+      self.modifiers["jackintheboxkill"] = true;
+    }
+
+    if(!isAlive(self) && self.deathtime + 800 < getTime()) {
       postDeathKill(killId);
+    }
 
     if(level.teamBased && curTime - victim.lastKillTime < 500) {
-      if(victim.lastkilledplayer != self)
+      if(victim.lastkilledplayer != self) {
         self avengedPlayer(killId, weapon, meansOfDeath);
+      }
     }
 
     if(isDefined(victim.lastKillDogTime) && curTime - victim.lastKillDogTime < 2000) {
@@ -245,19 +264,24 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
       if(guid == self.guid) {
         continue;
       }
-      if(level.teamBased && curTime - damageTime < 500)
+      if(level.teamBased && curTime - damageTime < 500) {
         self defendedPlayer(killId, weapon, meansOfDeath);
+      }
     }
 
-    if(isDefined(victim.attackerPosition))
+    if(isDefined(victim.attackerPosition)) {
       attackerPosition = victim.attackerPosition;
-    else
+    }
+    else {
       attackerPosition = self.origin;
+    }
 
-    if(isPointBlank(self, weapon, meansOfDeath, attackerPosition, victim))
+    if(isPointBlank(self, weapon, meansOfDeath, attackerPosition, victim)) {
       self thread pointblank(killId, weapon, meansOfDeath);
-    else if(isLongShot(self, weapon, meansOfDeath, attackerPosition, victim))
+    }
+    else if(isLongShot(self, weapon, meansOfDeath, attackerPosition, victim)) {
       self thread longshot(killId, weapon, meansOfDeath);
+    }
 
     victim_pers_cur_kill_streak = victim.pers["cur_kill_streak"];
     if(victim_pers_cur_kill_streak > 0 && isDefined(victim.killstreaks[victim_pers_cur_kill_streak + 1])) {
@@ -267,23 +291,28 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
     self thread checkMatchDataKills(killId, victim, weapon, meansOfDeath);
 
   } else if(weapon == "guard_dog_mp") {
-    if(!isAlive(self) && self.deathtime < GetTime())
+    if(!isAlive(self) && self.deathtime < GetTime()) {
       postDeathDogKill();
+    }
   }
 
-  if(!isDefined(self.killedPlayers[victimGuid]))
+  if(!isDefined(self.killedPlayers[victimGuid])) {
     self.killedPlayers[victimGuid] = 0;
+  }
 
-  if(!isDefined(self.killedPlayersCurrent[victimGuid]))
+  if(!isDefined(self.killedPlayersCurrent[victimGuid])) {
     self.killedPlayersCurrent[victimGuid] = 0;
+  }
 
-  if(!isDefined(victim.killedBy[myGuid]))
+  if(!isDefined(victim.killedBy[myGuid])) {
     victim.killedBy[myGuid] = 0;
+  }
 
   self.killedPlayers[victimGuid]++;
 
-  if(self.killedPlayers[victimGuid] > self.greatestUniquePlayerKills)
+  if(self.killedPlayers[victimGuid] > self.greatestUniquePlayerKills) {
     self setPlayerStat("killedsameplayer", self.killedPlayers[victimGuid]);
+  }
 
   self.killedPlayersCurrent[victimGuid]++;
   victim.killedBy[myGuid]++;
@@ -323,8 +352,9 @@ isLongShot(attacker, weapon, meansOfDeath, attackerPosition, victim) {
 
     weapDistSq = weapDist * weapDist;
     if(DistanceSquared(attackerPosition, victim.origin) > weapDistSq) {
-      if(attacker IsItemUnlocked("specialty_holdbreath") && attacker _hasPerk("specialty_holdbreath"))
+      if(attacker IsItemUnlocked("specialty_holdbreath") && attacker _hasPerk("specialty_holdbreath")) {
         attacker maps\mp\gametypes\_missions::processChallenge("ch_longdistance");
+      }
 
       return true;
     }
@@ -358,30 +388,37 @@ checkMatchDataKills(killId, victim, weapon, meansOfDeath) {
     self revenge(killId);
   }
 
-  if(victim.iDFlags &level.iDFLAGS_PENETRATION)
+  if(victim.iDFlags &level.iDFLAGS_PENETRATION) {
     self incPlayerStat("bulletpenkills", 1);
+  }
 
   self_pers_rank = self.pers["rank"];
   victim_pers_rank = victim.pers["rank"];
-  if(self_pers_rank < victim_pers_rank)
+  if(self_pers_rank < victim_pers_rank) {
     self incPlayerStat("higherrankkills", 1);
+  }
 
-  if(self_pers_rank > victim_pers_rank)
+  if(self_pers_rank > victim_pers_rank) {
     self incPlayerStat("lowerrankkills", 1);
+  }
 
-  if(isDefined(self.inFinalStand) && self.inFinalStand)
+  if(isDefined(self.inFinalStand) && self.inFinalStand) {
     self incPlayerStat("laststandkills", 1);
+  }
 
-  if(isDefined(victim.inFinalStand) && victim.inFinalStand)
+  if(isDefined(victim.inFinalStand) && victim.inFinalStand) {
     self incPlayerStat("laststanderkills", 1);
+  }
 
-  if(self getCurrentWeapon() != self.primaryWeapon && self getCurrentWeapon() != self.secondaryWeapon)
+  if(self getCurrentWeapon() != self.primaryWeapon && self getCurrentWeapon() != self.secondaryWeapon) {
     self incPlayerStat("otherweaponkills", 1);
+  }
 
   timeAlive = getTime() - victim.spawnTime;
 
-  if(!matchMakingGame())
+  if(!matchMakingGame()) {
     victim setPlayerStatIfLower("shortestlife", timeAlive);
+  }
 
   victim setPlayerStatIfGreater("longestlife", timeAlive);
 
@@ -427,8 +464,9 @@ checkMatchDataWeaponKills(victim, weapon, meansOfDeath, weaponType) {
       headshot_ref = "arheadshots";
       break;
     case "weapon_projectile":
-      if(weaponClass(weapon) == "rocketlauncher")
+      if(weaponClass(weapon) == "rocketlauncher") {
         kill_ref = "rocketkills";
+      }
       break;
     case "weapon_dmr":
       kill_ref = "dmrkills";
@@ -451,25 +489,30 @@ checkMatchDataWeaponKills(victim, weapon, meansOfDeath, weaponType) {
       break;
   }
 
-  if(isDefined(kill_ref))
+  if(isDefined(kill_ref)) {
     attacker incPlayerStat(kill_ref, 1);
+  }
 
-  if(isDefined(headshot_ref) && meansOfDeath == "MOD_HEAD_SHOT")
+  if(isDefined(headshot_ref) && meansOfDeath == "MOD_HEAD_SHOT") {
     attacker incPlayerStat(headshot_ref, 1);
+  }
 
-  if(isDefined(death_ref) && !matchMakingGame())
+  if(isDefined(death_ref) && !matchMakingGame()) {
     victim incPlayerStat(death_ref, 1);
+  }
 
   if(attacker isPlayerAds()) {
     attacker incPlayerStat("adskills", 1);
 
     isThermal = IsSubStr(weapon, "thermal");
 
-    if(isThermal || IsSubStr(weapon, "acog") || IsSubStr(weapon, "scope"))
+    if(isThermal || IsSubStr(weapon, "acog") || IsSubStr(weapon, "scope")) {
       attacker incPlayerStat("scopedkills", 1);
+    }
 
-    if(isThermal)
+    if(isThermal) {
       attacker incPlayerStat("thermalkills", 1);
+    }
   } else {
     attacker incPlayerStat("hipfirekills", 1);
   }
@@ -507,8 +550,9 @@ checkMatchDataEquipmentKills(victim, weapon, meansOfDeath) {
       break;
   }
 
-  if(isEquipment)
+  if(isEquipment) {
     attacker incPlayerStat("equipmentkills", 1);
+  }
 }
 
 camperCheck() {
@@ -727,14 +771,17 @@ disconnected() {
   myGuid = self.guid;
 
   for(entry = 0; entry < level.players.size; entry++) {
-    if(isDefined(level.players[entry].killedPlayers[myGuid]))
+    if(isDefined(level.players[entry].killedPlayers[myGuid])) {
       level.players[entry].killedPlayers[myGuid] = undefined;
+    }
 
-    if(isDefined(level.players[entry].killedPlayersCurrent[myGuid]))
+    if(isDefined(level.players[entry].killedPlayersCurrent[myGuid])) {
       level.players[entry].killedPlayersCurrent[myGuid] = undefined;
+    }
 
-    if(isDefined(level.players[entry].killedBy[myGuid]))
+    if(isDefined(level.players[entry].killedBy[myGuid])) {
       level.players[entry].killedBy[myGuid] = undefined;
+    }
   }
 }
 
@@ -759,8 +806,9 @@ updateRecentKills(killId) {
 
   wait(1.0);
 
-  if(self.recentKillCount > 1)
+  if(self.recentKillCount > 1) {
     self multiKill(killId, self.recentKillCount);
+  }
 
   self.recentKillCount = 0;
 }
@@ -810,8 +858,9 @@ monitorCrateJacking() {
         break;
     }
 
-    if(isDefined(owner))
+    if(isDefined(owner)) {
       owner maps\mp\gametypes\_hud_message::playerCardSplashNotify(splashName, self);
+    }
     self notify("process", challengeName);
   }
 }

@@ -15,8 +15,9 @@ start() {
   level.const_expected_num_swim_allies = 2;
   level._allies_swim = maps\black_ice_util::spawn_allies_swim();
 
-  foreach(var_1 in level._allies)
+  foreach(var_1 in level._allies) {
   var_1 hide();
+  }
 }
 
 main() {
@@ -171,19 +172,22 @@ snake_cam_time_countup() {
     var_5 = int(var_4 / 60000);
     var_4 = var_4 - var_5 * 60000;
 
-    if(var_5 < 10)
+    if(var_5 < 10) {
       var_1 = "0";
+    }
 
     var_6 = int(var_4 / 1000);
     var_4 = var_4 - var_6 * 1000;
 
-    if(var_6 < 10)
+    if(var_6 < 10) {
       var_2 = "0";
+    }
 
     var_7 = int(var_4 / 10);
 
-    if(var_7 < 10)
+    if(var_7 < 10) {
       var_3 = "0";
+    }
 
     self settext(var_1 + var_5 + " : " + var_2 + var_6 + " " + var_3 + var_7);
     wait(level.timestep);
@@ -263,29 +267,34 @@ swim_intro_dialogue() {
   thread maps\_utility::smart_radio_dialogue("blackice_bkr_markdropthem");
   wait 1;
 
-  if(!common_scripts\utility::flag("flag_swim_breach_detonate"))
+  if(!common_scripts\utility::flag("flag_swim_breach_detonate")) {
     maps\_utility::display_hint("detonate_string");
+  }
 
   wait 3.0;
   var_0 = 2.0;
 
-  if(!common_scripts\utility::flag("flag_swim_breach_detonate"))
+  if(!common_scripts\utility::flag("flag_swim_breach_detonate")) {
     maps\_utility::smart_radio_dialogue("blackice_bkr_dropthemrook");
+  }
 
   wait(var_0);
 
-  if(!common_scripts\utility::flag("flag_swim_breach_detonate"))
+  if(!common_scripts\utility::flag("flag_swim_breach_detonate")) {
     maps\_utility::smart_radio_dialogue("blackice_bkr_setoffcharges");
+  }
 
   wait(var_0);
 
-  if(!common_scripts\utility::flag("flag_swim_breach_detonate"))
+  if(!common_scripts\utility::flag("flag_swim_breach_detonate")) {
     maps\_utility::smart_radio_dialogue("blackice_bkr_windowsclosing");
+  }
 
   wait(var_0);
 
-  if(!common_scripts\utility::flag("flag_swim_breach_detonate"))
+  if(!common_scripts\utility::flag("flag_swim_breach_detonate")) {
     maps\_utility::smart_radio_dialogue("blackice_bkr_theyremoving");
+  }
 
   wait(var_0);
 
@@ -368,8 +377,9 @@ snake_cam_noise_falloff(var_0) {
 
     var_0 = var_0 * var_4;
 
-    if(var_0 < var_1)
+    if(var_0 < var_1) {
       var_0 = var_1;
+    }
   }
 }
 
@@ -401,14 +411,16 @@ snake_cam_input_logic() {
   level.snake_cam_dummy.noise_amplitude = level.snake_cam_dummy.noise_min_amplitude;
   thread snake_cam_noise(level.snake_cam_dummy.angles);
 
-  if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled())
+  if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled()) {
     level.player enablemousesteer(1);
+  }
 
   for(;;) {
     var_22 = level.player getnormalizedcameramovement();
 
-    if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled())
+    if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled()) {
       var_22 = (var_22[0], var_22[1] * -1, var_22[2]);
+    }
 
     if(var_22[1] || var_22[0]) {
       var_14 = common_scripts\utility::ter_op(var_22[1] > 0, 1, -1);
@@ -460,20 +472,23 @@ snake_cam_transition_to_underwater() {
 black_fade(var_0, var_1, var_2, var_3) {
   var_4 = maps\_hud_util::create_client_overlay("black", 0, level.player);
 
-  if(var_0 > 0)
+  if(var_0 > 0) {
     var_4 fadeovertime(var_0);
+  }
 
   var_4.alpha = 1;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_4.foreground = 0;
+  }
 
   wait(var_0);
   wait(var_1);
   level notify("notify_snakecam_on");
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     var_4 fadeovertime(var_2);
+  }
 
   var_4.alpha = 0;
   wait(var_2);
@@ -711,17 +726,20 @@ prop_attach_coll() {
 }
 
 create_persistent_ice_breach_props(var_0) {
-  if(!isDefined(level.breach_props))
+  if(!isDefined(level.breach_props)) {
     level.breach_props = [];
+  }
 
-  if(!isDefined(level.tag_anim_rig_models))
+  if(!isDefined(level.tag_anim_rig_models)) {
     level.tag_anim_rig_models = [];
+  }
 
   var_1 = maps\black_ice_util::setup_tag_anim_rig("introbreach_props", "introbreach_props", 4, 1);
 
   for(var_2 = 0; var_2 < level.tag_anim_rig_models.size; var_2++) {
-    if(isDefined(level.tag_anim_rig_models[var_2].coll))
+    if(isDefined(level.tag_anim_rig_models[var_2].coll)) {
       level.tag_anim_rig_models[var_2] prop_attach_coll();
+    }
   }
 
   level.breach_props["introbreach_props"] = var_1;
@@ -796,8 +814,9 @@ swim_player_start_breach() {
   wait 1.4;
   level.player takeweapon("test_detonator_black_ice");
 
-  if(isDefined(level.black_ice_hud_ammocounterhide))
+  if(isDefined(level.black_ice_hud_ammocounterhide)) {
     setsaveddvar("ammoCounterHide", level.black_ice_hud_ammocounterhide);
+  }
 
   level.player allowfire(1);
 }
@@ -809,23 +828,27 @@ swim_surface_dialog() {
   thread maps\_utility::smart_radio_dialogue("black_ice_mrk_dropyourtanksand");
   wait 5.0;
 
-  if(!common_scripts\utility::flag("flag_swim_player_drop_tank"))
+  if(!common_scripts\utility::flag("flag_swim_player_drop_tank")) {
     thread maps\_utility::smart_radio_dialogue("black_ice_mrk_doubletimeit");
+  }
 
   wait 2.5;
 
-  if(!common_scripts\utility::flag("flag_swim_player_drop_tank"))
+  if(!common_scripts\utility::flag("flag_swim_player_drop_tank")) {
     thread maps\_utility::smart_radio_dialogue("black_ice_hsh_takingfire");
+  }
 
   wait 3.5;
 
-  if(!common_scripts\utility::flag("flag_swim_player_drop_tank"))
+  if(!common_scripts\utility::flag("flag_swim_player_drop_tank")) {
     thread maps\_utility::smart_radio_dialogue("black_ice_hsh_getuphere");
+  }
 
   wait 5;
 
-  if(!common_scripts\utility::flag("flag_swim_player_drop_tank"))
+  if(!common_scripts\utility::flag("flag_swim_player_drop_tank")) {
     thread maps\_utility::smart_radio_dialogue("black_ice_hsh_whereareyoualpha");
+  }
 
   wait 6;
   var_0 = [ &"BLACK_ICE_HESH_KILLED", &"BLACK_ICE_KEEGAN_KILLED"];
@@ -839,8 +862,9 @@ swim_surface_dialog() {
 swim_wait_for_detonate() {
   level.player allowfire(1);
 
-  while(!level.player attackbuttonpressed())
+  while(!level.player attackbuttonpressed()) {
     wait(level.timestep);
+  }
 
   level.player allowfire(0);
   thread maps\black_ice_audio::sfx_breach_detonate();
@@ -922,20 +946,23 @@ ice_breach_process_enemy_fx() {
 infil_lights_and_vision() {
   common_scripts\utility::flag_wait("flag_swim_breach_detonate");
 
-  if(maps\_utility::is_gen4() && !level.ps4)
+  if(maps\_utility::is_gen4() && !level.ps4) {
     setsaveddvar("r_mbEnable", 2);
+  }
 
   wait 1;
   maps\_utility::vision_set_fog_changes("black_ice_infil_bright", 1.3);
   var_0 = getEntArray("light_infil_script_top", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   thread light_brighten(var_2, 0.7);
+  }
 
   var_4 = getEntArray("light_infil_script_top2", "targetname");
 
-  foreach(var_2 in var_4)
+  foreach(var_2 in var_4) {
   thread light_brighten(var_2, 0.4);
+  }
 
   level waittill("notify_icehole_godrays");
   common_scripts\utility::exploder("intro_icehole_godray");
@@ -964,24 +991,28 @@ player_surface_logic() {
   thread player_swim_water_current_logic();
   thread maps\black_ice_anim::swim_truck_surface_anim();
 
-  while(!common_scripts\utility::flag("flag_swim_player_drop_tank"))
+  while(!common_scripts\utility::flag("flag_swim_player_drop_tank")) {
     wait(level.timestep);
+  }
 
   common_scripts\utility::flag_set("flag_player_breaching");
 
-  if(!isDefined(level._bravo) || level._bravo.size < 2)
+  if(!isDefined(level._bravo) || level._bravo.size < 2) {
     maps\black_ice_util::spawn_bravo();
+  }
 
   surface_breach();
   common_scripts\utility::flag_clear("flag_underwater_sfx");
   common_scripts\utility::flag_set("flag_outofwater_sfx");
   thread player_post_swim();
 
-  if(isDefined(level.breach_anim_node))
+  if(isDefined(level.breach_anim_node)) {
     level.breach_anim_node notify("stop_loop");
+  }
 
-  if(isDefined(level.allies_breach_anim_node))
+  if(isDefined(level.allies_breach_anim_node)) {
     level.allies_breach_anim_node notify("stop_loop");
+  }
 }
 
 surface_breach() {
@@ -1107,8 +1138,9 @@ wait_till_breach_end_conditions() {
 }
 
 player_water_breach_moment() {
-  while(!common_scripts\utility::flag("player_water_breach"))
+  while(!common_scripts\utility::flag("player_water_breach")) {
     wait(level.timestep);
+  }
 }
 
 player_post_swim() {
@@ -1130,11 +1162,13 @@ ice_breach_process_enemy(var_0) {
 ice_breach_process_enemy_anim(var_0) {
   self endon("death");
 
-  while(!maps\black_ice_util::check_anim_time(self.animname, "introbreach_opfor" + var_0, 1.0))
+  while(!maps\black_ice_util::check_anim_time(self.animname, "introbreach_opfor" + var_0, 1.0)) {
     wait(level.timestep);
+  }
 
-  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)
+  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     maps\_utility::stop_magic_bullet_shield();
+  }
 
   self.allowdeath = 1;
   self kill();
@@ -1145,12 +1179,14 @@ ice_breach_process_enemy_dmg(var_0) {
   self waittill("damage", var_1, var_2, var_3, var_4, var_5);
 
   if(var_5 != "MOD_EXPLOSIVE") {
-    if(var_3 != (0, 0, 0))
+    if(var_3 != (0, 0, 0)) {
       playFX(common_scripts\utility::getfx("swim_ai_blood_impact"), var_4, var_3);
+    }
   }
 
-  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)
+  if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     maps\_utility::stop_magic_bullet_shield();
+  }
 
   self.allowdeath = 1;
   self kill();
@@ -1164,30 +1200,35 @@ props_cleanup() {
 prop_destroy(var_0, var_1, var_2) {
   var_0 waittill(var_1);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     [[var_2]]();
+  }
 
   self delete();
 }
 
 destroy_persistent_ice_breach_props() {
   if(isDefined(level.tag_anim_rig_models)) {
-    for(var_0 = 0; var_0 < level.tag_anim_rig_models.size; var_0++)
+    for(var_0 = 0; var_0 < level.tag_anim_rig_models.size; var_0++) {
       level.tag_anim_rig_models[var_0] delete();
+    }
   }
 
   if(isDefined(level.breach_props)) {
-    if(isDefined(level.breach_props["introbreach_props"]))
+    if(isDefined(level.breach_props["introbreach_props"])) {
       level.breach_props["introbreach_props"] delete();
+    }
   }
 
   if(isDefined(level.breach_vehicles)) {
-    if(isDefined(level.breach_vehicles["bm21_1"]))
+    if(isDefined(level.breach_vehicles["bm21_1"])) {
       level.breach_vehicles["bm21_1"] delete();
+    }
   }
 
-  if(isDefined(level.surface_truck))
+  if(isDefined(level.surface_truck)) {
     maps\black_ice_anim::swim_truck_surface_destroy();
+  }
 }
 
 underwater_sfx() {
@@ -1209,10 +1250,12 @@ player_heartbeat() {
 check_analog_movement() {
   var_0 = level.player getnormalizedmovement();
 
-  if(var_0[0] == 0 && var_0[1] == 0)
+  if(var_0[0] == 0 && var_0[1] == 0) {
     return 0;
-  else
+  }
+  else {
     return 1;
+  }
 }
 
 retarget_breach_water() {
@@ -1223,8 +1266,9 @@ set_snakecam_dof() {
   maps\_art::dof_enable_script(0, 211.65, 8, 10000, 30000, 0.3, 2.0);
   level waittill("flag_snake_cam_below_water");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     setsaveddvar("r_mbEnable", 0);
+  }
 
   maps\_art::dof_disable_script(1);
   common_scripts\utility::flag_wait("player_water_breach");
@@ -1239,6 +1283,7 @@ set_snakecam_dof() {
 swim_godrays() {
   var_0 = getent("swim_gr_origin", "targetname");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     maps\black_ice_util::god_rays_from_world_location(var_0.origin, "flag_swim_breach_detonate", "player_water_breach", undefined, undefined);
+  }
 }

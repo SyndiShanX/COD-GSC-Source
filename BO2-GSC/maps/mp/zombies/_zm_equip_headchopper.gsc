@@ -35,8 +35,9 @@ init(pickupstring, howtostring) {
 }
 
 wait_init_damage() {
-  while(!isDefined(level.zombie_vars) || !isDefined(level.zombie_vars["zombie_health_start"]))
+  while(!isDefined(level.zombie_vars) || !isDefined(level.zombie_vars["zombie_health_start"])) {
     wait 1;
+  }
 
   level.headchopper_damage = maps\mp\zombies\_zm::ai_zombie_health(50);
 }
@@ -153,14 +154,16 @@ transferheadchopper(fromplayer, toplayer) {
   buildableheadchopper = toplayer.buildableheadchopper;
   toarmed = 0;
 
-  if(isDefined(buildableheadchopper))
+  if(isDefined(buildableheadchopper)) {
     toarmed = isDefined(buildableheadchopper.is_armed) && buildableheadchopper.is_armed;
+  }
 
   headchopper_kills = toplayer.headchopper_kills;
   fromarmed = 0;
 
-  if(isDefined(fromplayer.buildableheadchopper))
+  if(isDefined(fromplayer.buildableheadchopper)) {
     fromarmed = isDefined(fromplayer.buildableheadchopper.is_armed) && fromplayer.buildableheadchopper.is_armed;
+  }
 
   toplayer.buildableheadchopper = fromplayer.buildableheadchopper;
   toplayer.buildableheadchopper.original_owner = toplayer;
@@ -181,8 +184,9 @@ transferheadchopper(fromplayer, toplayer) {
 }
 
 headchopper_in_range(delta, origin, radius) {
-  if(distancesquared(self.target.origin, origin) < radius * radius)
+  if(distancesquared(self.target.origin, origin) < radius * radius) {
     return true;
+  }
 
   return false;
 }
@@ -218,8 +222,9 @@ startheadchopperdeploy(weapon, armed) {
     self.headchopper_kills = undefined;
   }
 
-  if(!isDefined(weapon.headchopper_kills))
+  if(!isDefined(weapon.headchopper_kills)) {
     weapon.headchopper_kills = 0;
+  }
 
   if(isDefined(weapon)) {
     weapon thread debugheadchopper(electricradius);
@@ -237,8 +242,9 @@ startheadchopperdeploy(weapon, armed) {
           parententity = parententities[0];
 
           if(isDefined(parententity.targetname)) {
-            if(parententity.targetname == "zombie_debris" || parententity.targetname == "zombie_door")
+            if(parententity.targetname == "zombie_debris" || parententity.targetname == "zombie_door") {
               weapon thread destroyheadchopperonplantedblockeropen();
+            }
           }
         }
       }
@@ -254,8 +260,9 @@ startheadchopperdeploy(weapon, armed) {
     } else
       weapon.power_on = 1;
 
-    if(!weapon.power_on)
+    if(!weapon.power_on) {
       self iprintlnbold(&"ZOMBIE_NEED_LOCAL_POWER");
+    }
 
     self thread headchopperthink(weapon, electricradius, armed);
 
@@ -276,8 +283,9 @@ startheadchopperdeploy(weapon, armed) {
 }
 
 headchopper_zombie_damage_response(mod, hit_location, hit_origin, player, amount) {
-  if(isDefined(self.damageweapon) && self.damageweapon == level.headchopper_name || isDefined(self.damageweapon_name) && self.damageweapon_name == level.headchopper_name)
+  if(isDefined(self.damageweapon) && self.damageweapon == level.headchopper_name || isDefined(self.damageweapon_name) && self.damageweapon_name == level.headchopper_name) {
     player.planted_wallmount_on_a_zombie = 1;
+  }
 
   return false;
 }
@@ -286,15 +294,17 @@ headchopper_zombie_death_response(mod, hit_location, hit_origin, player, amount)
   if(isDefined(self.damageweapon) && self.damageweapon == level.headchopper_name && isDefined(self.damagemod) && self.damagemod == "MOD_IMPACT") {
     origin = self.origin;
 
-    if(isDefined(self.damagehit_origin))
+    if(isDefined(self.damagehit_origin)) {
       origin = self.damagehit_origin;
+    }
 
     players = get_players();
     choppers = [];
 
     foreach(player in players) {
-      if(isDefined(player.buildableheadchopper))
+      if(isDefined(player.buildableheadchopper)) {
         choppers[choppers.size] = player.buildableheadchopper;
+      }
     }
 
     chopper = getclosest(origin, choppers);
@@ -328,11 +338,13 @@ init_anim_slice_times() {
   retract_times = getnotetracktimes( % o_zmb_chopper_slice_slow, "retract");
   animlength = getanimlength( % o_zmb_chopper_slice_slow);
 
-  foreach(frac in slice_times)
+  foreach(frac in slice_times) {
   level.headchopper_slice_times[level.headchopper_slice_times.size] = animlength * frac;
+  }
 
-  foreach(frac in retract_times)
+  foreach(frac in retract_times) {
   level.headchopper_slice_times[level.headchopper_slice_times.size] = animlength * frac;
+  }
 }
 
 headchopper_animate(weapon, armed) {
@@ -346,16 +358,19 @@ headchopper_animate(weapon, armed) {
   weapon thread headchopper_audio();
   prearmed = 0;
 
-  if(isDefined(armed) && armed)
+  if(isDefined(armed) && armed) {
     prearmed = 1;
+  }
 
   zombies_only = 0;
 
   while(isDefined(weapon)) {
-    if(!prearmed)
+    if(!prearmed) {
       wait 0.1;
-    else
+    }
+    else {
       wait 0.05;
+    }
 
     prearmed = 0;
     weapon.is_armed = 1;
@@ -385,8 +400,9 @@ headchopper_animate(weapon, armed) {
 watch_notetracks_slicing() {
   self endon("death");
 
-  foreach(time in level.headchopper_slice_times)
+  foreach(time in level.headchopper_slice_times) {
   self thread watch_notetracks_slicing_times(time);
+  }
 }
 
 watch_notetracks_slicing_times(time) {
@@ -455,8 +471,9 @@ headchopperthink(weapon, electricradius, armed) {
   self thread headchopper_fx(weapon);
   self thread headchopper_animate(weapon, armed);
 
-  while(!(isDefined(weapon.is_armed) && weapon.is_armed))
+  while(!(isDefined(weapon.is_armed) && weapon.is_armed)) {
     wait 0.5;
+  }
 
   weapon.chop_targets = [];
   self thread targeting_thread(weapon, trigger);
@@ -473,11 +490,13 @@ headchopperthink(weapon, electricradius, armed) {
         weapon.is_armed = 0;
         weapon.zombies_only = 1;
 
-        foreach(ent in weapon.chop_targets)
+        foreach(ent in weapon.chop_targets) {
         self thread headchopperattack(weapon, ent);
+        }
 
-        if(weapon.headchopper_kills >= 42)
+        if(weapon.headchopper_kills >= 42) {
           self thread headchopper_expired(weapon);
+        }
 
         weapon.chop_targets = [];
         weapon waittill_any("slicing", "end");
@@ -486,8 +505,9 @@ headchopperthink(weapon, electricradius, armed) {
         is_slicing = weapon.is_slicing;
       }
 
-      while(!(isDefined(weapon.is_armed) && weapon.is_armed))
+      while(!(isDefined(weapon.is_armed) && weapon.is_armed)) {
         wait 0.5;
+      }
     } else
       wait 0.1;
   }
@@ -512,12 +532,15 @@ headchopperattack(weapon, ent) {
   is_footchop = abs(foot_position - weapon.origin[2]) <= length_head_to_toe_25_percent;
   trace_point = undefined;
 
-  if(isDefined(is_headchop) && is_headchop)
+  if(isDefined(is_headchop) && is_headchop) {
     trace_point = eye_position;
-  else if(isDefined(is_torsochop) && is_torsochop)
+  }
+  else if(isDefined(is_torsochop) && is_torsochop) {
     trace_point = ent.origin + (0, 0, length_head_to_toe_25_percent * 2);
-  else
+  }
+  else {
     trace_point = ent.origin + (0, 0, length_head_to_toe_25_percent);
+  }
 
   fwdangles = anglestoup(weapon.angles);
   tracefwd = bulletTrace(weapon.origin + fwdangles * 5, trace_point, 0, weapon, 1, 1);
@@ -529,27 +552,33 @@ headchopperattack(weapon, ent) {
     if(isDefined(weapon.deployed_time) && gettime() - weapon.deployed_time <= 2000) {
       return;
     }
-    if(isDefined(is_headchop) && is_headchop && !ent hasperk("specialty_armorvest"))
+    if(isDefined(is_headchop) && is_headchop && !ent hasperk("specialty_armorvest")) {
       ent dodamage(ent.health, weapon.origin);
-    else if(isDefined(is_torsochop) && is_torsochop)
+    }
+    else if(isDefined(is_torsochop) && is_torsochop) {
       ent dodamage(50, weapon.origin);
-    else if(isDefined(is_footchop) && is_footchop)
+    }
+    else if(isDefined(is_footchop) && is_footchop) {
       ent dodamage(25, weapon.origin);
-    else
+    }
+    else {
       ent dodamage(10, weapon.origin);
+    }
   } else {
     if(!(isDefined(is_headchop) && is_headchop) || !(isDefined(is_headchop) && is_headchop) && !(isDefined(ent.has_legs) && ent.has_legs)) {
       headchop_height = 25;
 
-      if(!(isDefined(ent.has_legs) && ent.has_legs))
+      if(!(isDefined(ent.has_legs) && ent.has_legs)) {
         headchop_height = 35;
+      }
 
       is_headchop = abs(eye_position[2] - weapon.origin[2]) <= headchop_height;
     }
 
     if(isDefined(is_headchop) && is_headchop) {
-      if(!(isDefined(ent.no_gib) && ent.no_gib))
+      if(!(isDefined(ent.no_gib) && ent.no_gib)) {
         ent maps\mp\zombies\_zm_spawner::zombie_head_gib();
+      }
 
       ent dodamage(ent.health + 666, weapon.origin);
       ent.headchopper_last_damage_time = gettime();
@@ -576,8 +605,9 @@ headchopperattack(weapon, ent) {
         ent setpitchorient();
         ent thread maps\mp\animscripts\zm_run::needsdelayedupdate();
 
-        if(isDefined(ent.crawl_anim_override))
+        if(isDefined(ent.crawl_anim_override)) {
           ent[[ent.crawl_anim_override]]();
+        }
       }
 
       if(ent.health <= 10) {
@@ -599,8 +629,9 @@ headchopper_kill_vo(zombie) {
     return;
   }
   if(distance2dsquared(self.origin, zombie.origin) < 1000000) {
-    if(self is_player_looking_at(zombie.origin, 0.25))
+    if(self is_player_looking_at(zombie.origin, 0.25)) {
       self thread maps\mp\zombies\_zm_audio::create_and_play_dialog("kill", "headchopper");
+    }
   }
 }
 
@@ -626,8 +657,9 @@ targeting_thread(weapon, trigger) {
 
   while(isDefined(weapon)) {
     if(weapon.is_armed || isDefined(weapon.is_slicing) && weapon.is_slicing) {
-      if(isDefined(weapon.is_slicing) && weapon.is_slicing)
+      if(isDefined(weapon.is_slicing) && weapon.is_slicing) {
         weapon waittill("slice_done");
+      }
 
       zombies = getaiarray(level.zombie_team);
 
@@ -638,8 +670,9 @@ targeting_thread(weapon, trigger) {
         if(isDefined(zombie.ignore_headchopper) && zombie.ignore_headchopper) {
           continue;
         }
-        if(zombie istouching(trigger))
+        if(zombie istouching(trigger)) {
           weapon headchopper_add_chop_ent(zombie);
+        }
       }
 
       players = get_players();
@@ -651,8 +684,9 @@ targeting_thread(weapon, trigger) {
         }
       }
 
-      if(!weapon.zombies_only)
+      if(!weapon.zombies_only) {
         weapon notify("hi_priority_target");
+      }
     }
 
     wait 0.05;
@@ -664,8 +698,9 @@ headchopper_add_chop_ent(ent) {
 }
 
 headchopper_expired(weapon, usedestroyfx) {
-  if(!isDefined(usedestroyfx))
+  if(!isDefined(usedestroyfx)) {
     usedestroyfx = 1;
+  }
 
   weapon maps\mp\zombies\_zm_equipment::dropped_equipment_destroy(usedestroyfx);
   self maps\mp\zombies\_zm_equipment::equipment_release(level.headchopper_name);
@@ -675,8 +710,9 @@ headchopper_expired(weapon, usedestroyfx) {
 headchopperthinkcleanup(trigger) {
   self waittill("death");
 
-  if(isDefined(trigger))
+  if(isDefined(trigger)) {
     trigger delete();
+  }
 }
 
 destroyheadchopperonplantedblockeropen(trigger) {
@@ -704,8 +740,9 @@ destroyheadchopperonplantedentitydeath() {
 destroyheadchopperstouching(usedestroyfx) {
   headchoppers = self getheadchopperstouching();
 
-  foreach(headchopper in headchoppers)
+  foreach(headchopper in headchoppers) {
   headchopper.owner thread headchopper_expired(headchopper, usedestroyfx);
+  }
 }
 
 getheadchopperstouching() {
@@ -732,8 +769,9 @@ getheadchopperstouching() {
       fwdangles = anglestoup(chopper.angles);
       traceback = groundtrace(chopper.origin + fwdangles * 5, chopper.origin - fwdangles * 999999, 0, chopper);
 
-      if(isDefined(traceback) && isDefined(traceback["entity"]) && traceback["entity"] == self)
+      if(isDefined(traceback) && isDefined(traceback["entity"]) && traceback["entity"] == self) {
         headchoppers[headchoppers.size] = chopper;
+      }
     }
   }
 
@@ -741,8 +779,9 @@ getheadchopperstouching() {
 }
 
 getheadchoppersnear(source_origin, max_distance) {
-  if(!isDefined(max_distance))
+  if(!isDefined(max_distance)) {
     max_distance = 128;
+  }
 
   headchoppers = [];
   players = get_players();
@@ -751,8 +790,9 @@ getheadchoppersnear(source_origin, max_distance) {
     if(isDefined(player.buildableheadchopper)) {
       chopper = player.buildableheadchopper;
 
-      if(distancesquared(chopper.origin, source_origin) < max_distance * max_distance)
+      if(distancesquared(chopper.origin, source_origin) < max_distance * max_distance) {
         headchoppers[headchoppers.size] = chopper;
+      }
     }
   }
 
@@ -760,8 +800,9 @@ getheadchoppersnear(source_origin, max_distance) {
 }
 
 check_headchopper_in_bad_area(origin) {
-  if(!isDefined(level.headchopper_bad_areas))
+  if(!isDefined(level.headchopper_bad_areas)) {
     level.headchopper_bad_areas = getEntArray("headchopper_bad_area", "targetname");
+  }
 
   scr_org = spawn("script_origin", origin);
   in_bad_area = 0;
@@ -786,8 +827,9 @@ debugheadchopper(radius) {
       if(isDefined(self.trigger)) {
         color = color_unarmed;
 
-        if(isDefined(self.is_armed) && self.is_armed)
+        if(isDefined(self.is_armed) && self.is_armed) {
           color = color_armed;
+        }
 
         vec = self.trigger.extent;
         box(self.trigger.origin, vec * -1, vec, self.trigger.angles[1], color, 1, 0, 1);
@@ -796,10 +838,12 @@ debugheadchopper(radius) {
       color = (0, 1, 0);
       text = "";
 
-      if(isDefined(self.headchopper_kills))
+      if(isDefined(self.headchopper_kills)) {
         text = "" + self.headchopper_kills + "";
-      else if(isDefined(self.owner.headchopper_kills))
+      }
+      else if(isDefined(self.owner.headchopper_kills)) {
         text = "[ " + self.owner.headchopper_kills + " ]";
+      }
 
       print3d(self.origin + vectorscale((0, 0, 1), 30.0), text, color, 1, 0.5, 1);
     }

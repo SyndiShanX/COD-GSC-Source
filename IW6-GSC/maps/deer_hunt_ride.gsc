@@ -10,8 +10,9 @@ jeep_ride_setup() {
   thread display_stylized_message();
   level.player thread maps\_utility::play_sound_on_entity("scn_deer_jeep_drive_stop");
 
-  if(level.start_point == "ride")
+  if(level.start_point == "ride") {
     thread maps\deer_hunt_util::fade_out_in("black", "fade_in_jeep_ride");
+  }
 
   clean_up();
   wait 1;
@@ -116,17 +117,20 @@ ambient_a10s() {
 ai_debug() {}
 
 clean_up(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = getaiarray();
+  }
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thorough_delete();
+  }
 }
 
 is_hero_ai(var_0) {
   if(isDefined(var_0)) {
-    if(self == var_0)
+    if(self == var_0) {
       return 1;
+    }
   }
 
   return 0;
@@ -136,8 +140,9 @@ thorough_delete() {
   if(is_hero_ai(level.hesh) || is_hero_ai(level.elias) || is_hero_ai(level.dog) || is_hero_ai(level.brian)) {
     return;
   }
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     maps\_utility::stop_magic_bullet_shield();
+  }
 
   self notify("deleted");
   self notify("death");
@@ -167,8 +172,9 @@ spawn_and_put_player_in_jeep() {
   var_2.origin = level.jeep gettagorigin(var_3);
   var_2.angles = level.jeep gettagangles(var_3);
 
-  if(level.player islinked())
+  if(level.player islinked()) {
     level.player unlink();
+  }
 
   var_2 linkto(level.jeep, var_3, var_0, (0, 0, 0));
   level.player setorigin(var_2.origin);
@@ -196,8 +202,9 @@ spawn_friendlies_and_put_in_jeep() {
   level.driver.name = "Cpl. Davis";
   level.squad = [level.hesh, level.dog, level.driver];
 
-  while(!isDefined(level.jeep))
+  while(!isDefined(level.jeep)) {
     wait 0.05;
+  }
 
   level.driver.script_startingposition = 0;
   level.jeep.dontunloadonend = 1;
@@ -244,8 +251,9 @@ ride_dog_bark() {
   common_scripts\utility::play_sound_in_space("deerhunt_us2_heyriley", (26053, 9496, -145));
   level.dog maps\_utility_dogs::dog_bark();
 
-  if(common_scripts\utility::cointoss())
+  if(common_scripts\utility::cointoss()) {
     level.dog maps\_utility_dogs::dog_bark();
+  }
 
   wait 3;
   level thread common_scripts\utility::play_sound_in_space("deerhunt_us2_charliecompanyloadup", (26049, 8336, -159));
@@ -275,11 +283,13 @@ house_vo() {
   var_2 = ["deerhunt_els_yknowineverwanted", "deerhunt_els_hellyouusedto", "deerhunt_hsh_youtrainedusfor", "deerhunt_els_itrainedyouto", "deerhunt_hsh_isthereadifference"];
   var_3 = ["deerhunt_els_ineedyouboys", "deerhunt_hsh_waitwherearewe", "deerhunt_els_home"];
 
-  while(!isDefined(level.elias))
+  while(!isDefined(level.elias)) {
     wait 0.1;
+  }
 
-  while(!isDefined(level.hesh))
+  while(!isDefined(level.hesh)) {
     wait 0.1;
+  }
 
   common_scripts\utility::flag_wait("player_exited_jeep");
   level.hesh thread house_nav_logic();
@@ -428,8 +438,9 @@ setup_gate_ai() {
   var_7 = common_scripts\utility::array_combine(var_5, var_6);
 
   foreach(var_9 in var_7) {
-    if(!maps\_utility::is_in_array(level.squad, var_9))
+    if(!maps\_utility::is_in_array(level.squad, var_9)) {
       var_9 thread delete_when_behind_player();
+    }
   }
 
   common_scripts\utility::flag_wait("gate_clear");
@@ -466,8 +477,9 @@ spawn_stair_runner() {
 
 delete_when_behind_player() {
   while(isDefined(self)) {
-    if(maps\deer_hunt_util::is_behind_player())
+    if(maps\deer_hunt_util::is_behind_player()) {
       thorough_delete();
+    }
 
     wait 1;
   }
@@ -479,8 +491,9 @@ spawn_ai_for_structs(var_0, var_1, var_2, var_3) {
   foreach(var_12, var_6 in var_1) {
     var_7 = strtok(var_6.script_parameters, " ");
 
-    if(!isDefined(var_6.angles))
+    if(!isDefined(var_6.angles)) {
       var_6.angles = (0, 0, 0);
+    }
 
     foreach(var_9 in var_7) {
       var_0.count = 1;
@@ -490,11 +503,13 @@ spawn_ai_for_structs(var_0, var_1, var_2, var_3) {
         var_10.targetname = var_0.targetname;
         var_10.team = "allies";
 
-        if(!isDefined(var_3))
+        if(!isDefined(var_3)) {
           var_10.dontdonotetracks = 1;
+        }
 
-        if(isDefined(var_0.script_patroller))
+        if(isDefined(var_0.script_patroller)) {
           var_10.runanim = % patrol_bored_patrolwalk;
+        }
       } else
         var_10 = var_0 stalingradspawn();
 
@@ -513,8 +528,9 @@ play_anim_off_me(var_0, var_1) {
   self endon("death");
 
   if(isDefined(var_0.script_noteworthy)) {
-    if(var_0.script_noteworthy == "gun_hide")
+    if(var_0.script_noteworthy == "gun_hide") {
       maps\_utility::gun_remove();
+    }
   }
 
   self.animname = "generic";
@@ -536,10 +552,12 @@ play_anim_off_me(var_0, var_1) {
     self waittill("start_scene");
   }
 
-  if(isarray(level.scr_anim[self.animname][var_1]))
+  if(isarray(level.scr_anim[self.animname][var_1])) {
     var_0 maps\_anim::anim_loop_solo(self, var_1);
-  else
+  }
+  else {
     var_0 thread maps\_anim::anim_single_solo(self, var_1);
+  }
 
   if(isDefined(var_0.script_delay)) {
     wait 0.05;
@@ -576,8 +594,9 @@ custom_flavor_bursts() {
   var_0 = 3;
   var_1 = 800;
 
-  while(!isDefined(level.squad))
+  while(!isDefined(level.squad)) {
     wait 0.05;
+  }
 
   maps\_utility::battlechatter_off("allies");
   maps\_utility::flavorbursts_off("allies");
@@ -594,13 +613,15 @@ custom_flavor_burst_on_me() {
   self endon("death");
   self endon("deleted");
 
-  if(!isDefined(level.custom_flavorburst_ents))
+  if(!isDefined(level.custom_flavorburst_ents)) {
     level.custom_flavorburst_ents = [];
+  }
 
   wait(randomfloatrange(0.5, 2));
 
-  if(isDefined(self.sound_ent))
+  if(isDefined(self.sound_ent)) {
     self.sound_ent notify("sounddone");
+  }
 
   var_0 = self.voice;
   var_1 = animscripts\battlechatter::getflavorburstid(self, var_0);
@@ -664,8 +685,9 @@ setup_house() {
   thread balcony_read();
   common_scripts\utility::flag_wait("3rd_floor_start");
 
-  foreach(var_7 in var_0)
+  foreach(var_7 in var_0) {
   var_7.dontdonotetracks = 1;
+  }
 }
 
 outside_reads() {
@@ -735,13 +757,15 @@ ending_scene() {
   common_scripts\utility::flag_set("2nd_floor_start");
   var_4 notify("stop_loop");
 
-  if(isDefined(level.dog))
+  if(isDefined(level.dog)) {
     level.dog notify("stop_sniffing");
+  }
 
   maps\_utility::music_play("mus_deer_elias");
 
-  foreach(var_8 in level.second_floor_actors)
+  foreach(var_8 in level.second_floor_actors) {
   var_8.second_floor_anim_ent thread maps\_anim::anim_single_solo(var_8, "2nd_floor");
+  }
 
   level.brian thread brian_does_idle_after_scene("2nd_floor");
   level.hesh thread hesh_stairs_anim("2nd_floor", var_6);
@@ -760,8 +784,9 @@ ending_scene() {
   var_5 maps\_anim::anim_reach([level.hesh, level.elias], "3rd_floor_start");
   common_scripts\utility::flag_set("3rd_floor_start");
 
-  foreach(var_8 in level.third_floor_actors)
+  foreach(var_8 in level.third_floor_actors) {
   var_8.third_floor_anim_ent thread maps\_anim::anim_single_solo(var_8, "3rd_floor_start");
+  }
 
   level.hesh.third_floor_anim_ent waittill("3rd_floor_start");
 
@@ -773,8 +798,9 @@ ending_scene() {
 
   maps\_utility::delaythread(0.5, maps\_utility::music_crossfade, "mus_deer_balcony", 2.0);
 
-  foreach(var_8 in level.third_floor_actors)
+  foreach(var_8 in level.third_floor_actors) {
   var_8.third_floor_anim_ent thread maps\_anim::anim_single_solo(var_8, "3rd_floor_end");
+  }
 
   var_19 = getanimlength( % dh_ending_hesh_end_b);
   wait(var_19 - 3);
@@ -802,8 +828,9 @@ set_goal_and_angle(var_0, var_1) {
   self waittill("goal");
   wait 0.2;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self orientmode("face angle", var_1);
+  }
 }
 
 elias_stairs(var_0) {
@@ -854,8 +881,9 @@ set_flag_on_anim_reach(var_0, var_1, var_2) {
   self.second_floor_anim_ent waittill(var_0);
   maps\deer_hunt_util::set_flag_if_not_set("2nd_floor_end");
 
-  if(self == level.hesh)
+  if(self == level.hesh) {
     thread maps\_utility::set_moveplaybackrate(1.1, 2);
+  }
 
   self.third_floor_anim_ent maps\_anim::anim_reach_solo(self, var_1);
   common_scripts\utility::flag_set(var_2);
@@ -944,11 +972,13 @@ beach_runners() {
 getnonheroallies() {
   var_0 = getaiarray("allies");
 
-  if(isDefined(level.hesh))
+  if(isDefined(level.hesh)) {
     var_0 = common_scripts\utility::array_remove(var_0, level.hesh);
+  }
 
-  if(isDefined(level.dog))
+  if(isDefined(level.dog)) {
     var_0 = common_scripts\utility::array_remove(var_0, level.dog);
+  }
 
   return var_0;
 }
@@ -967,8 +997,9 @@ target_practice_guys_logic() {
   }
 
   for(;;) {
-    if(common_scripts\utility::cointoss() && !self.pistol)
+    if(common_scripts\utility::cointoss() && !self.pistol) {
       self allowedstances("stand");
+    }
 
     burst_fire();
     self.bulletsinclip = 0;

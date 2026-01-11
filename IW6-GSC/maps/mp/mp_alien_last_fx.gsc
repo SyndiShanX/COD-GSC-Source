@@ -37,8 +37,9 @@ main() {
 }
 
 conduit_fx_on_no_ff(var_0) {
-  if(maps\mp\alien\_utility::is_true(var_0))
+  if(maps\mp\alien\_utility::is_true(var_0)) {
     level waittill("spawn_nondeterministic_entities");
+  }
 
   var_1 = getent("ancestor_left_generator_scriptable", "targetname");
   var_1 setscriptablepartstate("base", "on_no_ff");

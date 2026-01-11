@@ -44,8 +44,9 @@ exit_stage(success) {
 stage_vo_max() {
   level endon("sq_wisp_failed");
 
-  while(!isDefined(level.vh_wisp))
+  while(!isDefined(level.vh_wisp)) {
     wait 1;
+  }
 
   level.vh_wisp endon("delete");
   maxissay("vox_maxi_sidequest_ctw_0", level.e_sq_sign_attacker);
@@ -100,8 +101,9 @@ ctw_ric_move_wisp(s_current) {
 }
 
 ctw_ric_get_next_wisp_struct(s_current) {
-  if(!isDefined(s_current.target))
+  if(!isDefined(s_current.target)) {
     return undefined;
+  }
 
   a_structs = getstructarray(s_current.target, "targetname");
   return array_randomize(a_structs)[0];
@@ -126,8 +128,9 @@ ctw_ric_watch_wisp_dist(s_current) {
       if(!player hasperk("specialty_nomotionsensor")) {
         continue;
       }
-      if(distancesquared(player.origin, self.origin) < 4096)
+      if(distancesquared(player.origin, self.origin) < 4096) {
         is_near_wisp = 1;
+      }
     }
 
     wait 0.1;
@@ -229,8 +232,9 @@ ctw_max_start_wisp() {
   vh_wisp clearvehgoalpos();
   vh_wisp delete();
 
-  if(isDefined(level.vh_wisp))
+  if(isDefined(level.vh_wisp)) {
     level.vh_wisp delete();
+  }
 }
 
 ctw_max_wisp_play_fx() {
@@ -239,8 +243,9 @@ ctw_max_wisp_play_fx() {
   while(isDefined(self)) {
     playFXOnTag(level._effect["fx_wisp_m"], self, "tag_origin");
 
-    if(!flag("sq_m_wisp_weak"))
+    if(!flag("sq_m_wisp_weak")) {
       playFXOnTag(level._effect["fx_wisp_lg_m"], self, "tag_origin");
+    }
 
     wait 0.3;
   }
@@ -282,15 +287,18 @@ ctw_max_fail_watch() {
     if(a_zombies.size) {
       self.n_sq_energy = self.n_sq_energy + 10;
 
-      if(self.n_sq_energy > 30)
+      if(self.n_sq_energy > 30) {
         self.n_sq_energy = 30;
+      }
     } else
       self.n_sq_energy--;
 
-    if(self.n_sq_energy <= 15.0 && !flag("sq_m_wisp_weak"))
+    if(self.n_sq_energy <= 15.0 && !flag("sq_m_wisp_weak")) {
       flag_set("sq_m_wisp_weak");
-    else if(self.n_sq_energy > 15.0 && flag("sq_m_wisp_weak"))
+    }
+    else if(self.n_sq_energy > 15.0 && flag("sq_m_wisp_weak")) {
       flag_clear("sq_m_wisp_weak");
+    }
 
     iprintlnbold(self.n_sq_energy);
 
@@ -309,8 +317,9 @@ ctw_max_wisp_enery_watch() {
   self endon("death");
 
   while(true) {
-    if(self.n_sq_energy <= 0)
+    if(self.n_sq_energy <= 0) {
       flag_set("sq_wisp_failed");
+    }
 
     wait 1;
   }
@@ -327,8 +336,9 @@ debug_origin() {
 }
 
 ctw_find_zombies_for_powerup(v_origin, n_radius, m_ignore) {
-  if(!isDefined(m_ignore))
+  if(!isDefined(m_ignore)) {
     m_ignore = undefined;
+  }
 
   a_zombies = getaispeciesarray(level.zombie_team, "zombie");
   n_radius_sq = n_radius * n_radius;
@@ -336,8 +346,9 @@ ctw_find_zombies_for_powerup(v_origin, n_radius, m_ignore) {
 
   foreach(e_zombie in a_zombies) {
     if(distancesquared(e_zombie.origin, v_origin) < n_radius_sq && !isDefined(e_zombie.sq_wisp_powered)) {
-      if(sighttracepassed(v_origin, e_zombie gettagorigin("J_SpineLower"), 1, m_ignore))
+      if(sighttracepassed(v_origin, e_zombie gettagorigin("J_SpineLower"), 1, m_ignore)) {
         a_near_zombies[a_near_zombies.size] = e_zombie;
+      }
     }
   }
 
@@ -350,8 +361,9 @@ ctw_power_up_zombie() {
   n_oldhealth = self.maxhealth;
   self.maxhealth = self.maxhealth * 2;
 
-  if(self.maxhealth < n_oldhealth)
+  if(self.maxhealth < n_oldhealth) {
     self.maxhealth = n_oldhealth;
+  }
 
   self.health = self.maxhealth;
 
@@ -360,10 +372,12 @@ ctw_power_up_zombie() {
     self.zombie_move_speed_original = self.zombie_move_speed;
   }
 
-  if(flag("sq_is_max_tower_built"))
+  if(flag("sq_is_max_tower_built")) {
     str_fx = "fx_wisp_m";
-  else
+  }
+  else {
     str_fx = "vulture_fx_wisp";
+  }
 
   self thread ctw_power_up_zombie_m_fx(str_fx);
 }

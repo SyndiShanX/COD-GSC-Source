@@ -5,8 +5,9 @@
 ************************************************/
 
 codecallback_startgametype() {
-  if(getdvar("r_reflectionProbeGenerate") == "1")
+  if(getdvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
+  }
 
   if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
     [[level.callbackstartgametype]]();
@@ -15,8 +16,9 @@ codecallback_startgametype() {
 }
 
 codecallback_playerconnect() {
-  if(getdvar("r_reflectionProbeGenerate") == "1")
+  if(getdvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
+  }
 
   self endon("disconnect");
   [[level.callbackplayerconnect]]();
@@ -50,22 +52,27 @@ codecallback_entityoutofworld() {
 codecallback_bullethitentity(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("disconnect");
 
-  if(isDefined(self.bullethitcallback))
+  if(isDefined(self.bullethitcallback)) {
     [[self.bullethitcallback]](var_0, var_1, var_2, var_3, var_4, var_5);
+  }
 }
 
 codecallback_vehicledamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(isDefined(self.damagecallback))
+  if(isDefined(self.damagecallback)) {
     self[[self.damagecallback]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
-  else
+  }
+  else {
     self vehicle_finishdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+  }
 }
 
 codecallback_entitydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(isDefined(self.damagecallback))
+  if(isDefined(self.damagecallback)) {
     self[[self.damagecallback]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
-  else
+  }
+  else {
     self finishentitydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+  }
 }
 
 codecallback_codeendgame() {
@@ -88,18 +95,21 @@ codecallback_hostmigration() {
 }
 
 codecallback_givekillstreak(var_0, var_1) {
-  if(isbot(var_0) || istestclient(var_0) || var_0.team == "spectator" || var_0.sessionstate == "spectator")
+  if(isbot(var_0) || istestclient(var_0) || var_0.team == "spectator" || var_0.sessionstate == "spectator") {
     return;
+  }
 }
 
 codecallback_givekillstreakmodule(var_0, var_1) {
-  if(isbot(var_0) || istestclient(var_0) || var_0.team == "spectator" || var_0.sessionstate == "spectator")
+  if(isbot(var_0) || istestclient(var_0) || var_0.team == "spectator" || var_0.sessionstate == "spectator") {
     return;
+  }
 }
 
 codecallback_partymembers(var_0) {
-  if(isDefined(level.partymembers_cb))
+  if(isDefined(level.partymembers_cb)) {
     [[level.partymembers_cb]](var_0);
+  }
 }
 
 setupdamageflags() {

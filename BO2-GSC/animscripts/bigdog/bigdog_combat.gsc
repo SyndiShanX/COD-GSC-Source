@@ -32,8 +32,9 @@ combatidle() {
     }
     canseeenemy = isDefined(self.enemy) && self cansee(self.enemy);
 
-    if(canseeenemy)
+    if(canseeenemy) {
       lastsawenemytime = gettime();
+    }
 
     if(self.canmove && isDefined(self.enemy) && !self.fixednode && !bigdog_isemped()) {
       canshootenemy = self.turret can_turret_hit_target(self.enemy);
@@ -42,10 +43,12 @@ combatidle() {
         if(gettime() - lastsawenemytime > 2000) {
           betternode = self findbestcovernode();
 
-          if(isDefined(betternode) && (!isDefined(self.node) || betternode != self.node))
+          if(isDefined(betternode) && (!isDefined(self.node) || betternode != self.node)) {
             self usecovernode(betternode);
-          else if(tryreacquire())
+          }
+          else if(tryreacquire()) {
             return;
+          }
         }
       } else if(trymovetonextbestnode())
         return;
@@ -101,17 +104,21 @@ hunkerup() {
 combatturn() {
   return false;
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return false;
+  }
 
-  if(!self.canmove)
+  if(!self.canmove) {
     return false;
+  }
 
-  if(gettime() < self.a.scriptstarttime + 5000)
+  if(gettime() < self.a.scriptstarttime + 5000) {
     return false;
+  }
 
-  if(!self cansee(self.enemy))
+  if(!self cansee(self.enemy)) {
     return false;
+  }
 
   toenemy = self.enemy.origin - self.origin;
   desiredangle = vectortoangles(toenemy)[1];
@@ -132,13 +139,15 @@ turn(anglediff) {
   absanglediff = abs(anglediff);
   sign = sign(anglediff);
 
-  if(absanglediff < self.turnanglethreshold)
+  if(absanglediff < self.turnanglethreshold) {
     return false;
+  }
 
   self animscripts\debug::debugpushstate("turn", anglediff);
 
-  if(!self.hunkereddown)
+  if(!self.hunkereddown) {
     hunkerdown();
+  }
 
   self orientmode("face angle", self.angles[1]);
   self animmode("zonly_physics", 0);
@@ -176,8 +185,9 @@ trymovetonextbestnode() {
 }
 
 movetonextbestnode() {
-  if(self.fixednode)
+  if(self.fixednode) {
     return false;
+  }
 
   betternodes = self findbestcovernodes(self.goalradius, self.goalpos);
   bestnode = undefined;
@@ -208,21 +218,26 @@ getidleanimname() {
   animsuffix = animsuffix();
   animname = "idle" + animsuffix;
 
-  if(self.hunkereddown)
+  if(self.hunkereddown) {
     animname = "hunker_idle" + animsuffix;
+  }
 
   return animname;
 }
 
 tryreacquire() {
-  if(self reacquirestep(64))
+  if(self reacquirestep(64)) {
     return true;
-  else if(self reacquirestep(128))
+  }
+  else if(self reacquirestep(128)) {
     return true;
-  else if(self reacquirestep(192))
+  }
+  else if(self reacquirestep(192)) {
     return true;
-  else if(self reacquirestep(256))
+  }
+  else if(self reacquirestep(256)) {
     return true;
+  }
 
   return false;
 }

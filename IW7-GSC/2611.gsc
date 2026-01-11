@@ -36,8 +36,9 @@ init_menu() {
   level.effect_list_offset = 0;
   level.effect_list_offset_max = 10;
 
-  if(level.mp_createfx)
+  if(level.mp_createfx) {
     level.effect_list_offset_max = 6;
+  }
 
   level.createfxmasks = [];
   level.createfxmasks["all"] = [];
@@ -52,8 +53,9 @@ init_menu() {
   level.createfxmasks["fx"]["oneshotfx"] = 1;
   level.createfxmasks["fx"]["loopfx"] = 1;
 
-  if(!level.mp_createfx)
+  if(!level.mp_createfx) {
     level.createfxmasks["fx"]["reactive_fx"] = 1;
+  }
 
   level.createfxmasks["exploder"] = [];
   level.createfxmasks["exploder"]["exploder"] = 1;
@@ -92,8 +94,9 @@ create_fx_menu() {
     return;
   }
 
-  if(isDefined(level._createfx.menus[level.create_fx_menu]))
+  if(isDefined(level._createfx.menus[level.create_fx_menu])) {
     [[level._createfx.menus[level.create_fx_menu]]]();
+  }
 }
 
 menu_create_select() {
@@ -174,8 +177,9 @@ menu_create() {
 }
 
 menu_none() {
-  if(scripts\common\createfx::button_is_clicked("m"))
+  if(scripts\common\createfx::button_is_clicked("m")) {
     increment_list_offset();
+  }
 
   menu_change_selected_fx();
 
@@ -205,8 +209,9 @@ menu_add_options() {
 
   display_fx_add_options(get_last_selected_ent());
 
-  if(next_button())
+  if(next_button()) {
     increment_list_offset();
+  }
 }
 
 menu_select_by_name() {
@@ -245,8 +250,9 @@ menu_fx_creation() {
     var_00 = var_00 + 1;
     var_04 = var_00;
 
-    if(var_04 == 10)
+    if(var_04 == 10) {
       var_04 = 0;
+    }
 
     if(scripts\common\createfx::button_is_clicked(var_04 + "")) {
       var_01 = var_2[var_03];
@@ -271,11 +277,13 @@ menu_fx_creation() {
 
   var_05 = undefined;
 
-  if(menu("create_loopfx"))
+  if(menu("create_loopfx")) {
     var_05 = scripts\engine\utility::createloopeffect(var_01);
+  }
 
-  if(menu("create_oneshot"))
+  if(menu("create_oneshot")) {
     var_05 = scripts\engine\utility::createoneshoteffect(var_01);
+  }
 
   finish_creating_entity(var_05);
 }
@@ -283,8 +291,9 @@ menu_fx_creation() {
 finish_creating_entity(var_00) {
   var_0.v["angles"] = vectortoangles(var_0.v["origin"] + (0, 0, 100) - var_0.v["origin"]);
 
-  if(isDefined(level._effect) && isDefined(level._effect[var_0.v["fxid"]]) && isvfxfile(level._effect[var_0.v["fxid"]]))
+  if(isDefined(level._effect) && isDefined(level._effect[var_0.v["fxid"]]) && isvfxfile(level._effect[var_0.v["fxid"]])) {
     var_0.v["angles"] = (0, 0, 0);
+  }
 
   var_00 scripts\common\createfx::post_entity_creation_function();
   scripts\common\createfx::clear_entity_selection();
@@ -320,8 +329,9 @@ menu_change_selected_fx() {
     var_1++;
     var_05 = var_01;
 
-    if(var_05 == 10)
+    if(var_05 == 10) {
       var_05 = 0;
+    }
 
     if(scripts\common\createfx::button_is_clicked(var_05 + "")) {
       prepare_option_for_change(var_04, var_01);
@@ -345,10 +355,12 @@ prepare_option_for_change(var_00, var_01) {
   level.createfx_inputlocked = 1;
   level._createfx.hudelems[var_01 + 3][0].color = (1, 1, 0);
 
-  if(isDefined(var_0["input_func"]))
+  if(isDefined(var_0["input_func"])) {
     thread[[var_0["input_func"]]](var_01 + 3);
-  else
+  }
+  else {
     scripts\common\createfx::createfx_centerprint("To change " + var_0["description"] + " on selected entities, type \fx newvalue");
+  }
 
   set_option_index(var_0["name"]);
   setdvar("fx", "nil");
@@ -361,14 +373,17 @@ menu_fx_option_set() {
   var_00 = get_selected_option();
   var_01 = undefined;
 
-  if(var_0["type"] == "string")
+  if(var_0["type"] == "string") {
     var_01 = getdvar("fx");
+  }
 
-  if(var_0["type"] == "int")
+  if(var_0["type"] == "int") {
     var_01 = getdvarint("fx");
+  }
 
-  if(var_0["type"] == "float")
+  if(var_0["type"] == "float") {
     var_01 = getdvarfloat("fx");
+  }
 
   apply_option_to_selected_fx(var_00, var_01);
 }
@@ -377,8 +392,9 @@ apply_option_to_selected_fx(var_00, var_01) {
   for(var_02 = 0; var_02 < level._createfx.selected_fx_ents.size; var_2++) {
     var_03 = level._createfx.selected_fx_ents[var_02];
 
-    if(mask(var_0["mask"], var_3.v["type"]))
+    if(mask(var_0["mask"], var_3.v["type"])) {
       var_3.v[var_0["name"]] = var_01;
+    }
   }
 
   level.last_displayed_ent = undefined;
@@ -412,16 +428,18 @@ addoption(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_6["default"] = var_03;
   var_6["mask"] = var_04;
 
-  if(isDefined(var_05))
+  if(isDefined(var_05)) {
     var_6["input_func"] = var_05;
+  }
 
   level._createfx.options[level._createfx.options.size] = var_06;
 }
 
 get_option(var_00) {
   for(var_01 = 0; var_01 < level._createfx.options.size; var_1++) {
-    if(level._createfx.options[var_01]["name"] == var_00)
+    if(level._createfx.options[var_01]["name"] == var_00) {
       return level._createfx.options[var_01];
+    }
   }
 }
 
@@ -434,10 +452,12 @@ input_reactive_radius(var_00) {
     }
     var_01 = 0;
 
-    if(level.player buttonpressed("-"))
+    if(level.player buttonpressed("-")) {
       var_01 = -10;
-    else if(level.player buttonpressed("="))
+    }
+    else if(level.player buttonpressed("=")) {
       var_01 = 10;
+    }
 
     if(var_01 != 0) {
       foreach(var_03 in level._createfx.selected_fx_ents) {
@@ -464,8 +484,9 @@ display_fx_add_options(var_00) {
   var_02 = 0;
   var_03 = 0;
 
-  if(level.effect_list_offset >= level._createfx.options.size)
+  if(level.effect_list_offset >= level._createfx.options.size) {
     level.effect_list_offset = 0;
+  }
 
   for(var_04 = 0; var_04 < level._createfx.options.size; var_4++) {
     var_05 = level._createfx.options[var_04];
@@ -487,8 +508,9 @@ display_fx_add_options(var_00) {
     var_2++;
     var_06 = var_02;
 
-    if(var_06 == 10)
+    if(var_06 == 10) {
       var_06 = 0;
+    }
 
     if(scripts\common\createfx::button_is_clicked(var_06 + "")) {
       add_option_to_selected_entities(var_05);
@@ -500,8 +522,9 @@ display_fx_add_options(var_00) {
     scripts\common\createfx::set_fx_hudelement(var_06 + ". " + var_5["description"]);
   }
 
-  if(var_01 > level.effect_list_offset_max)
+  if(var_01 > level.effect_list_offset_max) {
     scripts\common\createfx::set_fx_hudelement("(->) More >");
+  }
 
   scripts\common\createfx::set_fx_hudelement("(x) Exit >");
 }
@@ -512,8 +535,9 @@ add_option_to_selected_entities(var_00) {
   for(var_02 = 0; var_02 < level._createfx.selected_fx_ents.size; var_2++) {
     var_03 = level._createfx.selected_fx_ents[var_02];
 
-    if(mask(var_0["mask"], var_3.v["type"]))
+    if(mask(var_0["mask"], var_3.v["type"])) {
       var_3.v[var_0["name"]] = var_0["default"];
+    }
   }
 }
 
@@ -558,8 +582,9 @@ display_fx_info(var_00) {
       }
     }
 
-    if(var_01 > level.effect_list_offset_max)
+    if(var_01 > level.effect_list_offset_max) {
       scripts\common\createfx::set_fx_hudelement("(->) More >");
+    }
 
     scripts\common\createfx::set_fx_hudelement("(a) Add >");
     scripts\common\createfx::set_fx_hudelement("(x) Exit >");
@@ -589,8 +614,9 @@ draw_effects_list(var_00) {
   var_02 = 0;
   var_03 = scripts\common\createfx::func_get_level_fx();
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = "Pick an effect";
+  }
 
   scripts\common\createfx::set_fx_hudelement(var_00 + " [" + level.effect_list_offset + " - " + var_3.size + "]:");
 
@@ -613,10 +639,12 @@ draw_effects_list(var_00) {
 increment_list_offset() {
   var_00 = scripts\common\createfx::func_get_level_fx();
 
-  if(level.effect_list_offset >= var_0.size - level.effect_list_offset_max)
+  if(level.effect_list_offset >= var_0.size - level.effect_list_offset_max) {
     level.effect_list_offset = 0;
-  else
+  }
+  else {
     level.effect_list_offset = level.effect_list_offset + level.effect_list_offset_max;
+  }
 }
 
 decrement_list_offset() {
@@ -637,8 +665,9 @@ select_by_name() {
     var_00 = var_00 + 1;
     var_04 = var_00;
 
-    if(var_04 == 10)
+    if(var_04 == 10) {
       var_04 = 0;
+    }
 
     if(scripts\common\createfx::button_is_clicked(var_04 + "")) {
       var_01 = var_2[var_03];
@@ -656,8 +685,9 @@ select_by_name() {
   var_05 = [];
 
   foreach(var_03, var_07 in level.createfxent) {
-    if(issubstr(var_7.v["fxid"], var_01))
+    if(issubstr(var_7.v["fxid"], var_01)) {
       var_5[var_5.size] = var_03;
+    }
   }
 
   scripts\common\createfx::deselect_all_ents();

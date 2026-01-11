@@ -101,8 +101,9 @@ pilot_loop_logic(s_start) {
 
 ee_plane_vehicledamage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
   if(self.vehicletype == "biplane_zm" && !self ent_flag("biplane_down")) {
-    if(isplayer(e_attacker) && e_attacker.zombie_vars["zombie_powerup_zombie_blood_on"])
+    if(isplayer(e_attacker) && e_attacker.zombie_vars["zombie_powerup_zombie_blood_on"]) {
       self ent_flag_set("biplane_down");
+    }
 
     return 0;
   }

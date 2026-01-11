@@ -23,25 +23,31 @@ MoveRun() {
         return;
       }
       if(self animscripts\utility::IsInCombat()) {
-        if(isDefined(self.run_combatanim))
+        if(isDefined(self.run_combatanim)) {
           MoveStandCombatOverride();
-        else
+        }
+        else {
           MoveStandCombatNormal();
+        }
       } else {
-        if(isDefined(self.run_noncombatanim))
+        if(isDefined(self.run_noncombatanim)) {
           MoveStandNoncombatOverride();
-        else
+        }
+        else {
           MoveStandNoncombatNormal();
+        }
       }
       break;
     case "crouch":
       if(BeginCrouchRun()) {
         return;
       }
-      if(isDefined(self.crouchrun_combatanim))
+      if(isDefined(self.crouchrun_combatanim)) {
         MoveCrouchRunOverride();
-      else
+      }
+      else {
         MoveCrouchRunNormal();
+      }
       break;
     default:
       assert(desiredPose == "prone");
@@ -54,14 +60,16 @@ MoveRun() {
 }
 
 GetRunAnim() {
-  if(isDefined(self.a.combatRunAnim))
+  if(isDefined(self.a.combatRunAnim)) {
     return self.a.combatRunAnim;
+  }
   return % run_lowready_F;
 }
 
 GetCrouchRunAnim() {
-  if(isDefined(self.a.crouchRunAnim))
+  if(isDefined(self.a.crouchRunAnim)) {
     return self.a.crouchRunAnim;
+  }
   return % crouch_fastwalk_F;
 }
 
@@ -112,13 +120,15 @@ MoveStandCombatNormal() {
         }
         self setFlaggedAnimKnob("runanim", % run_n_gun, 1, 0.3, 0.8);
         self.a.allowedPartialReloadOnTheRunTime = gettime() + 500;
-        if(isplayer(self.enemy))
+        if(isplayer(self.enemy)) {
           self updatePlayerSightAccuracy();
+        }
         decidedAnimation = true;
       } else if(CanShootWhileRunningBackward()) {
         self setFlaggedAnimKnob("runanim", % run_n_gun_B, 1, 0.3);
-        if(isplayer(self.enemy))
+        if(isplayer(self.enemy)) {
           self updatePlayerSightAccuracy();
+        }
         DoNoteTracksNoShootStandCombat("runanim");
         self thread stopShootWhileMovingThreads();
         self notify("stopRunning");
@@ -144,8 +154,9 @@ MoveStandCombatNormal() {
 
 runShootWhileMovingThreads() {
   self notify("want_shoot_while_moving");
-  if(isDefined(self.shoot_while_moving_thread))
+  if(isDefined(self.shoot_while_moving_thread)) {
     return;
+  }
   self.shoot_while_moving_thread = true;
   self thread RunDecideWhatAndHowToShoot();
   self thread RunShootWhileMoving();
@@ -174,26 +185,31 @@ RunShootWhileMoving() {
 aimedSomewhatAtEnemy() {
   weaponAngles = self gettagangles("tag_weapon");
   anglesToShootPos = vectorToAngles(self.enemy getShootAtPos() - self gettagorigin("tag_weapon"));
-  if(AbsAngleClamp180(weaponAngles[1] - anglesToShootPos[1]) > 15)
+  if(AbsAngleClamp180(weaponAngles[1] - anglesToShootPos[1]) > 15) {
     return false;
+  }
   return AbsAngleClamp180(weaponAngles[0] - anglesToShootPos[0]) <= 20;
 }
 
 CanShootWhileRunningForward() {
-  if(abs(self getMotionAngle()) > 60)
+  if(abs(self getMotionAngle()) > 60) {
     return false;
+  }
   enemyyaw = self GetPredictedYawToEnemy(0.2);
-  if(abs(enemyyaw) > 75)
+  if(abs(enemyyaw) > 75) {
     return false;
+  }
   return true;
 }
 
 CanShootWhileRunningBackward() {
-  if(180 - abs(self getMotionAngle()) >= 45)
+  if(180 - abs(self getMotionAngle()) >= 45) {
     return false;
+  }
   enemyyaw = self GetPredictedYawToEnemy(0.2);
-  if(abs(enemyyaw) > 30)
+  if(abs(enemyyaw) > 30) {
     return false;
+  }
   return true;
 }
 
@@ -255,23 +271,30 @@ ReloadStandRun() {
   reloadIfEmpty = isDefined(self.a.allowedPartialReloadOnTheRunTime) && self.a.allowedPartialReloadOnTheRunTime > gettime();
   reloadIfEmpty = reloadIfEmpty || (isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 256 * 256);
   if(reloadIfEmpty) {
-    if(!self NeedToReload(0))
+    if(!self NeedToReload(0)) {
       return false;
+    }
   } else {
-    if(!self NeedToReload(.5))
+    if(!self NeedToReload(.5)) {
       return false;
+    }
   }
-  if(self CanShootWhileRunning() && !self NeedToReload(0))
+  if(self CanShootWhileRunning() && !self NeedToReload(0)) {
     return false;
-  if(!isDefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) < 256 * 256)
+  }
+  if(!isDefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) < 256 * 256) {
     return false;
+  }
   motionAngle = AngleClamp180(self getMotionAngle());
-  if(abs(motionAngle) > 25)
+  if(abs(motionAngle) > 25) {
     return false;
-  if(self WeaponAnims() != "rifle")
+  }
+  if(self WeaponAnims() != "rifle") {
     return false;
-  if(!runLoopIsNearBeginning())
+  }
+  if(!runLoopIsNearBeginning()) {
     return false;
+  }
   ReloadStandRunInternal();
   self notify("stopRunning");
   self notify("abort_reload");
@@ -296,14 +319,18 @@ runLoopIsNearBeginning() {
   animfraction = self getAnimTime( % walk_and_run_loops);
   loopLength = getAnimLength( % run_lowready_F) / 3.0;
   animfraction *= 3.0;
-  if(animfraction > 3)
+  if(animfraction > 3) {
     animfraction -= 2.0;
-  else if(animfraction > 2)
+  }
+  else if(animfraction > 2) {
     animfraction -= 1.0;
-  if(animfraction < .15 / loopLength)
+  }
+  if(animfraction < .15 / loopLength) {
     return true;
-  if(animfraction > 1 - .3 / loopLength)
+  }
+  if(animfraction > 1 - .3 / loopLength) {
     return true;
+  }
   return false;
 }
 
@@ -333,8 +360,9 @@ UpdateRunWeightsBiasForward(notifyString, frontAnim, backAnim, leftAnim, rightAn
   self endon(notifyString);
   for(;;) {
     animWeights = animscripts\utility::QuadrantAnimWeights(self getMotionAngle());
-    if(animWeights["front"] < .2)
+    if(animWeights["front"] < .2) {
       animWeights["front"] = .2;
+    }
     self setanim(frontAnim, animWeights["front"], 0.2, 1);
     self setanim(backAnim, 0.0, 0.2, 1);
     self setanim(leftAnim, animWeights["left"], 0.2, 1);
@@ -357,34 +385,45 @@ MakeRunSounds(notifyString) {
 changeWeaponStandRun() {
   wantShotgun = (isDefined(self.wantShotgun) && self.wantShotgun);
   usingShotgun = (weaponclass(self.weapon) == "spread");
-  if(wantShotgun == usingShotgun)
+  if(wantShotgun == usingShotgun) {
     return false;
-  if(!isDefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) < 256 * 256)
+  }
+  if(!isDefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) < 256 * 256) {
     return false;
-  if(usingSidearm())
+  }
+  if(usingSidearm()) {
     return false;
+  }
   assert(self.weapon == self.primaryweapon || self.weapon == self.secondaryweapon);
   if(self.weapon == self.primaryweapon) {
-    if(!wantShotgun)
+    if(!wantShotgun) {
       return false;
-    if(weaponclass(self.secondaryweapon) != "spread")
+    }
+    if(weaponclass(self.secondaryweapon) != "spread") {
       return false;
+    }
   } else {
     assert(self.weapon == self.secondaryweapon);
-    if(wantShotgun)
+    if(wantShotgun) {
       return false;
-    if(weaponclass(self.primaryweapon) == "spread")
+    }
+    if(weaponclass(self.primaryweapon) == "spread") {
       return false;
+    }
   }
   motionAngle = AngleClamp180(self getMotionAngle());
-  if(abs(motionAngle) > 25)
+  if(abs(motionAngle) > 25) {
     return false;
-  if(!runLoopIsNearBeginning())
+  }
+  if(!runLoopIsNearBeginning()) {
     return false;
-  if(wantShotgun)
+  }
+  if(wantShotgun) {
     shotgunSwitchStandRunInternal("shotgunPullout", % shotgun_CQBrun_pullout, "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
-  else
+  }
+  else {
     shotgunSwitchStandRunInternal("shotgunPutaway", % shotgun_CQBrun_putaway, "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
+  }
   self notify("switchEnded");
   return true;
 }
@@ -404,8 +443,9 @@ shotgunSwitchStandRunInternal(flagName, switchAnim, dropGunNotetrack, putGunOnTa
 }
 
 interceptNotetracksForWeaponSwitch(notetrack) {
-  if(notetrack == "gun_2_chest" || notetrack == "gun_2_back")
+  if(notetrack == "gun_2_chest" || notetrack == "gun_2_back") {
     return true;
+  }
 }
 
 watchShotgunSwitchNotetracks(flagName, dropGunNotetrack, putGunOnTag, newGun, pickupNewGunNotetrack) {

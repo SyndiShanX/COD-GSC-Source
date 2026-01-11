@@ -12,8 +12,9 @@ flares_monitor(var_00) {
 func_6EAE(var_00) {
   var_01 = "tag_origin";
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_01 = var_00;
+  }
 
   playLoopSound(self gettagorigin(var_01), "ks_warden_flares");
 
@@ -41,8 +42,9 @@ func_6E9F(var_00, var_01, var_02) {
     var_00 = var_00 - var_01;
     wait(var_01);
 
-    if(isDefined(var_02))
+    if(isDefined(var_02)) {
       var_2.flareslive = scripts\engine\utility::array_remove(var_2.flareslive, self);
+    }
   }
 
   wait(var_00);
@@ -73,8 +75,9 @@ flares_getflarelive(var_00) {
   flares_cleanflareslivearray(var_00);
   var_01 = undefined;
 
-  if(var_0.flareslive.size > 0)
+  if(var_0.flareslive.size > 0) {
     var_01 = var_0.flareslive[var_0.flareslive.size - 1];
+  }
 
   return var_01;
 }
@@ -92,12 +95,14 @@ ks_laserguidedmissile_handleincoming() {
     if(!isDefined(var_02) || var_02 != self) {
       continue;
     }
-    if(!isarray(var_01))
+    if(!isarray(var_01)) {
       var_01 = [var_01];
+    }
 
     foreach(var_04 in var_01) {
-      if(isvalidmissile(var_04))
+      if(isvalidmissile(var_04)) {
         level thread ks_laserguidedmissile_monitorproximity(var_04, var_00, var_0.team, var_02);
+      }
     }
   }
 }
@@ -116,8 +121,9 @@ ks_laserguidedmissile_monitorproximity(var_00, var_01, var_02, var_03) {
     if(distancesquared(var_0.origin, var_04) < 4000000) {
       var_05 = flares_getflarelive(var_03);
 
-      if(!isDefined(var_05))
+      if(!isDefined(var_05)) {
         var_05 = flares_getflarereserve(var_03);
+      }
 
       var_00 missile_settargetent(var_05);
       var_00 notify("missile_pairedWithFlare");
@@ -159,8 +165,9 @@ func_6EB1(var_00, var_01, var_02, var_03) {
     var_05 = [];
 
     for(var_06 = 0; var_06 < var_3.size; var_6++) {
-      if(isDefined(var_3[var_06]))
+      if(isDefined(var_3[var_06])) {
         var_5[var_06] = distance(var_3[var_06].origin, var_04);
+      }
     }
 
     for(var_06 = 0; var_06 < var_5.size; var_6++) {
@@ -235,8 +242,9 @@ func_A730(var_00, var_01, var_02, var_03) {
   self.flaresreservecount = var_00;
   self.flareslive = [];
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     self.owner setclientomnvar(var_02, var_00);
+  }
 
   thread func_A72F(var_01, var_02);
   thread func_A72D(var_03);
@@ -249,8 +257,9 @@ func_A72F(var_00, var_01) {
   self endon("leaving");
   self endon("helicopter_done");
 
-  if(!isai(self.owner))
+  if(!isai(self.owner)) {
     self.owner notifyonplayercommand("manual_flare_popped", var_00);
+  }
 
   while(flares_getnumleft(self)) {
     self.owner waittill("manual_flare_popped");
@@ -259,8 +268,9 @@ func_A72F(var_00, var_01) {
     if(isDefined(var_02) && isDefined(self.owner) && !isai(self.owner)) {
       self.owner playlocalsound("veh_helo_flares_plr");
 
-      if(isDefined(var_01))
+      if(isDefined(var_01)) {
         self.owner setclientomnvar(var_01, flares_getnumleft(self));
+      }
     }
   }
 }
@@ -287,17 +297,20 @@ func_A72D(var_00) {
       var_04 = vectordot(var_02, var_03);
       var_05 = 1;
 
-      if(var_04 > 0)
+      if(var_04 > 0) {
         var_05 = 2;
-      else if(var_04 < 0)
+      }
+      else if(var_04 < 0) {
         var_05 = 3;
+      }
 
       self.owner setclientomnvar(var_00, var_05);
     }
 
     foreach(var_07 in var_01) {
-      if(isvalidmissile(var_07))
+      if(isvalidmissile(var_07)) {
         thread func_A72E(var_07);
+      }
     }
   }
 }

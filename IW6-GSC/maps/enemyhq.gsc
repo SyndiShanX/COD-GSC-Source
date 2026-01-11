@@ -32,10 +32,12 @@ main() {
   setsaveddvar("fx_alphathreshold", 9);
   setsaveddvar("r_hudoutlineenable", 1);
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     setsaveddvar("fx_alphathreshold", 2);
-  else
+  }
+  else {
     setsaveddvar("fx_alphathreshold", 9);
+  }
 
   var_0 = getEntArray("start_dog_sniffing", "targetname");
   common_scripts\utility::array_thread(var_0, maps\enemyhq_code::handle_dog_modes);
@@ -129,20 +131,24 @@ setup_common(var_0) {
   spawn_allies(var_0);
   var_1 = getent("finale_dead_truck_clip", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 notsolid();
+  }
 
   var_1 = getent("finale_dead_truck", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 hide();
+  }
 }
 
 setup_player(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0 + "_start";
-  else
+  }
+  else {
     var_1 = level.start_point + "_start";
+  }
 
   var_2 = common_scripts\utility::getstruct(var_1, "targetname");
 
@@ -170,8 +176,9 @@ spawn_allies(var_0) {
   level.allies[1].npcid = "kgn";
   level.allies[2].npcid = "hsh";
 
-  foreach(var_2 in level.allies)
+  foreach(var_2 in level.allies) {
   self.goalradius = 25;
+  }
 
   var_4 = spawn_ally("dog", var_0);
   var_4 setup_dog();
@@ -206,20 +213,24 @@ setup_dog() {
 spawn_ally(var_0, var_1) {
   var_2 = undefined;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_2 = level.start_point + "_" + var_0;
-  else
+  }
+  else {
     var_2 = var_1 + "_" + var_0;
+  }
 
   var_3 = maps\enemyhq_code::spawn_targetname_at_struct_targetname(var_0, var_2);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     return undefined;
+  }
 
   var_3 maps\_utility::make_hero();
 
-  if(!isDefined(var_3.magic_bullet_shield))
+  if(!isDefined(var_3.magic_bullet_shield)) {
     var_3 maps\_utility::magic_bullet_shield();
+  }
 
   var_3.countryid = "US";
   var_3.voice = "delta";
@@ -229,8 +240,9 @@ spawn_ally(var_0, var_1) {
 lights() {
   var_0 = getEntArray("flickerlight1", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread flareflicker();
+  }
 }
 
 flareflicker() {
@@ -243,11 +255,13 @@ flareflicker() {
 flare_flicker(var_0, var_1) {
   var_2 = getent(self.target, "targetname");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0.6;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1.8;
+  }
 
   thread common_scripts\utility::play_loop_sound_on_entity("flare_burn_loop");
 

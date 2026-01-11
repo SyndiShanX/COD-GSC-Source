@@ -101,8 +101,9 @@ sparrow_handle_ps4_ssao(var_0) {
   if(!level.ps4) {
     return;
   }
-  if(!var_0)
+  if(!var_0) {
     common_scripts\utility::flag_wait("defend_sparrow_start");
+  }
 
   setsaveddvar("r_ssaoScriptScale", 0);
   level waittill("odin_strike_over");
@@ -122,10 +123,12 @@ run_defend_sparrow() {
   var_2 = getent("sparrow_trigger_player", "targetname");
   var_2 setcursorhint("HINT_NOICON");
 
-  if(level.console || level.player common_scripts\utility::is_player_gamepad_enabled())
+  if(level.console || level.player common_scripts\utility::is_player_gamepad_enabled()) {
     var_2 sethintstring(&"CARRIER_USE_SPARROW_CONSOLE");
-  else
+  }
+  else {
     var_2 sethintstring(&"CARRIER_USE_SPARROW");
+  }
 
   level.ds_vo_timer_left = 0;
   level.ds_vo_timer_right = 0;
@@ -174,10 +177,12 @@ sparrow_fire_hint() {
   var_0 = getkeybinding("+speed_throw");
   var_1 = isDefined(var_0) && var_0["count"] != 0;
 
-  if(var_1)
+  if(var_1) {
     level.player thread maps\_utility::display_hint("fire_sparrow");
-  else
+  }
+  else {
     level.player thread maps\_utility::display_hint("fire_sparrow_pc");
+  }
 }
 
 sparrow_dead_operator() {
@@ -219,8 +224,9 @@ cleanup_enemies() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-    if(isalive(var_2))
+    if(isalive(var_2)) {
       var_2 thread maps\ss_util::fake_death_bullet(1.5);
+    }
   }
 }
 
@@ -248,8 +254,9 @@ run_defend_vo() {
   maps\_utility::smart_radio_dialogue("carrier_hsh_thegunshipiscircling");
   wait 3;
 
-  if(level.heli_kill_counter < 1)
+  if(level.heli_kill_counter < 1) {
     maps\_utility::smart_radio_dialogue("carrier_hsh_takeoutthosechoppers_2");
+  }
 
   while(!common_scripts\utility::flag("ac_130_attack_run_4_done")) {
     common_scripts\utility::flag_wait("ac130_start_attack_run");
@@ -288,8 +295,9 @@ destroyer_mg_monitor() {
   self endon("death");
 
   for(;;) {
-    if(self.origin[0] >= 3600 && self.origin[0] <= 6600)
+    if(self.origin[0] >= 3600 && self.origin[0] <= 6600) {
       destroyer_mg_fire();
+    }
 
     wait 0.05;
   }
@@ -354,13 +362,15 @@ bg_zodiac_respawn() {
 
   if(isDefined(self.riders)) {
     foreach(var_2 in self.riders) {
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         var_2 delete();
+      }
     }
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 
   wait 0.25;
   level.sparrow_zodiacs = maps\_utility::array_removedead(level.sparrow_zodiacs);
@@ -390,8 +400,9 @@ spawn_pre_sparrow_helis() {
   common_scripts\utility::flag_wait("sparrow_hud_black");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 }
 
@@ -423,8 +434,9 @@ heli_background_respawn() {
   for(;;) {
     common_scripts\utility::waittill_either("death", "reached_dynamic_path_end");
 
-    if(isDefined(self) && isalive(self))
+    if(isDefined(self) && isalive(self)) {
       self delete();
+    }
 
     level.sparrow_background_helis = maps\_utility::array_removedead(level.sparrow_background_helis);
     wait 0.1;
@@ -492,8 +504,9 @@ spawn_repeating_heli(var_0, var_1) {
   maps\_utility::array_spawn_function_targetname(var_0, ::heli_combat_respawn);
   maps\_utility::array_spawn_function_targetname(var_0, ::heli_combat_path);
 
-  if(issubstr(var_0, "_1"))
+  if(issubstr(var_0, "_1")) {
     maps\_utility::array_spawn_function_targetname(var_0, maps\carrier_code::heli_fast_explode, 100);
+  }
 
   return maps\_vehicle::spawn_vehicles_from_targetname_and_drive(var_0);
 }
@@ -533,8 +546,9 @@ heli_combat_kill_wave(var_0, var_1) {
 heli_combat_stop_respawn(var_0) {
   var_0 = var_0 - 1;
 
-  while(level.heli_kill_counter < var_0)
+  while(level.heli_kill_counter < var_0) {
     wait 0.05;
+  }
 
   level.helis_can_respawn = 0;
 }
@@ -548,26 +562,33 @@ heli_combat_respawn() {
   level.heli_kill_counter = level.heli_kill_counter + 1;
   level.sparrow_helis = maps\_utility::array_removedead(level.sparrow_helis);
 
-  while(!level.helis_can_respawn)
+  while(!level.helis_can_respawn) {
     wait 0.05;
+  }
 
   if(isDefined(level.sam_launchers) && level.sam_launchers[level.sam_launcher_index].angles[1] >= 17.5 && level.sam_launchers[level.sam_launcher_index].angles[1] < 105) {
-    if(issubstr(var_0, "_1"))
+    if(issubstr(var_0, "_1")) {
       thread spawn_repeating_heli("ds_helis_right_1");
-    else if(issubstr(var_0, "_2"))
+    }
+    else if(issubstr(var_0, "_2")) {
       thread spawn_repeating_heli("ds_helis_right_2");
-    else if(issubstr(var_0, "_3"))
+    }
+    else if(issubstr(var_0, "_3")) {
       thread spawn_repeating_heli("ds_helis_right_3");
+    }
     else {}
 
     maps\_utility::delaythread(0.4, ::run_incoming_vo, 0, 1);
   } else {
-    if(issubstr(var_0, "_1"))
+    if(issubstr(var_0, "_1")) {
       thread spawn_repeating_heli("ds_helis_left_1", 1);
-    else if(issubstr(var_0, "_2"))
+    }
+    else if(issubstr(var_0, "_2")) {
       thread spawn_repeating_heli("ds_helis_left_2", 1);
-    else if(issubstr(var_0, "_3"))
+    }
+    else if(issubstr(var_0, "_3")) {
       thread spawn_repeating_heli("ds_helis_left_3", 1);
+    }
     else {}
 
     maps\_utility::delaythread(0.4, ::run_incoming_vo, 1, 0);
@@ -578,8 +599,9 @@ heli_combat_path() {
   self endon("death");
   self waittill("reached_dynamic_path_end");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 run_incoming_vo(var_0, var_1) {
@@ -607,13 +629,15 @@ debug_heli_gun(var_0) {
   self endon("done_with_volley");
   self endon("death");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 heli_attack_mg(var_0, var_1) {
-  if(!isDefined(self.ent_flag["sparrow_heli_start_mg_run"]))
+  if(!isDefined(self.ent_flag["sparrow_heli_start_mg_run"])) {
     maps\_utility::ent_flag_init("sparrow_heli_start_mg_run");
+  }
 
   self endon("death");
   level endon("defend_sparrow_finished");
@@ -641,10 +665,12 @@ heli_attack_mg(var_0, var_1) {
 
     while(maps\_utility::ent_flag("sparrow_heli_start_mg_run") && level.helis_can_respawn == 1) {
       for(var_8 = 0; var_8 < 35; var_8++) {
-        if(isDefined(level.sam_damage_dummy))
+        if(isDefined(level.sam_damage_dummy)) {
           common_scripts\utility::array_call(self.mgturret, ::settargetentity, var_4);
-        else
+        }
+        else {
           common_scripts\utility::array_call(self.mgturret, ::settargetentity, var_3);
+        }
 
         common_scripts\utility::array_call(self.mgturret, ::shootturret);
         wait(var_7);
@@ -665,24 +691,28 @@ self_cleanup(var_0) {
   self waittill("death");
   wait 0.1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 heli_cleanup() {
   foreach(var_1 in level.sparrow_helis) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 kill();
+    }
   }
 
   foreach(var_1 in level.sparrow_background_helis) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 kill();
+    }
   }
 
   foreach(var_6 in level.sparrow_zodiacs) {
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       var_6 delete();
+    }
   }
 }
 
@@ -723,8 +753,9 @@ ac130_direct_attack_path() {
       thread maps\carrier_audio::aud_carr_gunship_attack_run();
       wait 0.75;
 
-      if(common_scripts\utility::flag("ac_130_attack_run_1_done"))
+      if(common_scripts\utility::flag("ac_130_attack_run_1_done")) {
         maps\_utility::smart_radio_dialogue("carrier_us1_ac130totheright");
+      }
     } else {
       common_scripts\utility::flag_set("gunship_left_path");
       self vehicle_teleport(var_0.origin, var_0.angles);
@@ -733,8 +764,9 @@ ac130_direct_attack_path() {
       thread maps\carrier_audio::aud_carr_gunship_attack_run();
       wait 0.75;
 
-      if(common_scripts\utility::flag("ac_130_attack_run_1_done"))
+      if(common_scripts\utility::flag("ac_130_attack_run_1_done")) {
         maps\_utility::smart_radio_dialogue("carrier_us1_ac130totheleft");
+      }
     }
 
     wait 8;
@@ -778,8 +810,9 @@ ac130_constant_target() {
   for(;;) {
     self waittill("sam_targeted", var_1);
 
-    while(gettime() - level.ac130_last_105_fire_time > 8000 && distance2dsquared(self.origin, level.player getEye()) > 12960000)
+    while(gettime() - level.ac130_last_105_fire_time > 8000 && distance2dsquared(self.origin, level.player getEye()) > 12960000) {
       wait 0.05;
+    }
 
     if(gettime() - level.ac130_last_105_fire_time > 8000 && level.ac130_attacked_player_count < 2 && var_0 > level.ac130_attacked_player_count) {
       thread maps\carrier_code::ac130_magic_105(level.sam_launchers[level.sam_launcher_index].origin);
@@ -866,8 +899,9 @@ ac130_missile_defense_init() {
     }
     thread angel_flare_burst(10);
 
-    while(!isDefined(self.flares))
+    while(!isDefined(self.flares)) {
       wait 0.05;
+    }
 
     if(!isDefined(var_0) || !isvalidmissile(var_0)) {
       continue;
@@ -886,8 +920,9 @@ ac130_missile_defense_init() {
 
     var_2 = common_scripts\utility::getfx("chopper_flare_explosion");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 delete();
+    }
 
     playFX(var_2, var_1.origin);
     var_1 delete();
@@ -910,8 +945,9 @@ angel_flare_burst(var_0) {
 }
 
 shootflares() {
-  if(!isDefined(level.anim_index))
+  if(!isDefined(level.anim_index)) {
     level.anim_index = 0;
+  }
 
   var_0 = maps\_utility::spawn_anim_model("flare_rig");
   var_0.origin = self gettagorigin("tag_flash_flares");
@@ -937,8 +973,9 @@ shootflares() {
   var_1 = common_scripts\utility::array_randomize(var_1);
 
   foreach(var_4, var_5 in var_1) {
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       playFXOnTag(var_9, var_1[var_4], "tag_origin");
+    }
   }
 
   var_0 waittillmatch("flare_anim", "end");
@@ -1006,10 +1043,12 @@ ac130_missile_take_hit() {
     }
     var_2 = common_scripts\utility::getclosest(var_1.origin, var_0);
 
-    if(var_2 == var_0[0])
+    if(var_2 == var_0[0]) {
       var_3 = anglestoright(var_2.angles) * -12;
-    else
+    }
+    else {
       var_3 = anglestoright(var_2.angles) * 12;
+    }
 
     var_1 missile_settargetent(var_2, var_3);
     var_4 = missile_createattractorent(var_2, 25000, 10000);
@@ -1025,8 +1064,9 @@ ac130_missile_take_hit() {
     missile_deleteattractor(var_4);
     var_5 = common_scripts\utility::getfx("vfx_missile_death_air");
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
 
     playFX(var_5, var_2.origin);
     wait 0.1;
@@ -1090,8 +1130,9 @@ ac130_final_life() {
     level.ac_130 maps\_utility::delaythread(1.25, maps\carrier_code::ac130_magic_bullet, "40mm", level.sam_launchers[level.sam_launcher_index].origin);
     var_2 = common_scripts\utility::getfx("vfx_missile_death_air");
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_0 delete();
+    }
 
     playFX(var_2, self.origin);
     wait 0.1;
@@ -1121,13 +1162,15 @@ ac130_final_life() {
     stopFXOnTag(common_scripts\utility::getfx("vfx_ac130_engine_fire"), var_3, "tag_origin");
     common_scripts\utility::waitframe();
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self delete();
+    }
 
     common_scripts\utility::waitframe();
     var_3 delete();
 
-    if(isDefined(level.wing_tag))
+    if(isDefined(level.wing_tag)) {
       level.wing_tag delete();
+    }
   }
 }

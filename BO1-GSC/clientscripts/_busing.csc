@@ -16,8 +16,9 @@ busInit() {
 busSaveWait() {
   for(;;) {
     level waittill("save_restore");
-    if(level.nextBusState == "")
+    if(level.nextBusState == "") {
       level.nextBusState = level.activeBusState;
+    }
     level.activeBusState = "";
     if(level.nextBusState == "") {
       busStateDeactivate();
@@ -126,24 +127,33 @@ busVolumes(names, value) {
 busVolumeAll(value) {}
 argsAsDict(a, b, c, d, e, f, g, h, i) {
   names = [];
-  if(isDefined(a))
+  if(isDefined(a)) {
     names[0] = a;
-  if(isDefined(b))
+  }
+  if(isDefined(b)) {
     names[1] = b;
-  if(isDefined(c))
+  }
+  if(isDefined(c)) {
     names[2] = c;
-  if(isDefined(d))
+  }
+  if(isDefined(d)) {
     names[3] = d;
-  if(isDefined(e))
+  }
+  if(isDefined(e)) {
     names[4] = e;
-  if(isDefined(f))
+  }
+  if(isDefined(f)) {
     names[5] = f;
-  if(isDefined(g))
+  }
+  if(isDefined(g)) {
     names[6] = g;
-  if(isDefined(h))
+  }
+  if(isDefined(h)) {
     names[7] = h;
-  if(isDefined(i))
+  }
+  if(isDefined(i)) {
     names[8] = i;
+  }
   return names;
 }
 
@@ -151,8 +161,9 @@ busVolumesExcept(a, b, c, d, e, f, g, h, i) {
   args = argsAsDict(a, b, c, d, e, f, g, h, i);
   value = args[args.size - 1];
   names = [];
-  for(i = 0; i < args.size - 1; i++)
+  for(i = 0; i < args.size - 1; i++) {
     names[i] = args[i];
+  }
 }
 
 registerDefaults() {

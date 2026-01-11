@@ -55,19 +55,24 @@ main() {
 
   level.allowLateComers = false;
 
-  if(level.matchRules_damageMultiplier || level.matchRules_vampirism)
+  if(level.matchRules_damageMultiplier || level.matchRules_vampirism) {
     level.modifyPlayerDamage = maps\mp\gametypes\_damage::gamemodeModifyPlayerDamage;
+  }
 
   game["dialog"]["gametype"] = "searchrescue";
 
-  if(getDvarInt("g_hardcore"))
+  if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  else if(getDvarInt("camera_thirdPerson"))
+  }
+  else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  else if(getDvarInt("scr_diehard"))
+  }
+  else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  else if(getDvarInt("scr_" + level.gameType + "_promode"))
+  }
+  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
+  }
 
   game["dialog"]["offense_obj"] = "obj_destroy";
   game["dialog"]["defense_obj"] = "obj_defend";
@@ -122,8 +127,9 @@ onPrecacheGameType() {
 }
 
 onStartGameType() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = false;
+  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -206,10 +212,12 @@ onSpawnPlayer() {
   self.isDefusing = false;
   self.isBombCarrier = false;
 
-  if(level.multiBomb && self.pers["team"] == game["attackers"])
+  if(level.multiBomb && self.pers["team"] == game["attackers"]) {
     self SetClientOmnvar("ui_carrying_bomb", true);
-  else
+  }
+  else {
     self SetClientOmnvar("ui_carrying_bomb", false);
+  }
 
   level notify("spawned_player");
 
@@ -217,8 +225,9 @@ onSpawnPlayer() {
     level notify("sr_player_joined", self);
 
     self setExtraScore0(0);
-    if(isDefined(self.pers["denied"]))
+    if(isDefined(self.pers["denied"])) {
       self setExtraScore0(self.pers["denied"]);
+    }
 
     self.extrascore1 = 0;
   }
@@ -232,17 +241,21 @@ onPlayerDisconnect() {
 }
 
 shouldSpawnTags(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, killId) {
-  if(isDefined(self.switching_teams))
+  if(isDefined(self.switching_teams)) {
     return false;
+  }
 
-  if(isDefined(self.wasSwitchingTeamsForOnPlayerKilled))
+  if(isDefined(self.wasSwitchingTeamsForOnPlayerKilled)) {
     return false;
+  }
 
-  if(isDefined(attacker) && attacker == self)
+  if(isDefined(attacker) && attacker == self) {
     return false;
+  }
 
-  if(level.teamBased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team)
+  if(level.teamBased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team) {
     return false;
+  }
 
   if(
     isDefined(attacker) &&
@@ -262,16 +275,17 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   } else {
     should_spawn_tags = self shouldSpawnTags(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, killId);
 
-    if(should_spawn_tags)
-
+    if(should_spawn_tags) {
       should_spawn_tags = should_spawn_tags && !isReallyAlive(self);
+    }
 
-    if(should_spawn_tags)
-
+    if(should_spawn_tags) {
       should_spawn_tags = should_spawn_tags && !self maps\mp\gametypes\_playerlogic::mayspawn();
+    }
 
-    if(should_spawn_tags)
+    if(should_spawn_tags) {
       level thread spawnDogTags(self, attacker);
+    }
   }
 
   thread checkAllowSpectating();
@@ -289,8 +303,9 @@ checkAllowSpectating() {
     level.spectateOverride[game["defenders"]].allowEnemySpectate = 1;
     update = true;
   }
-  if(update)
+  if(update) {
     maps\mp\gametypes\_spectating::updateSpectateSettings();
+  }
 }
 
 sd_endGame(winningTeam, endReasonText) {
@@ -311,8 +326,9 @@ sd_endGame(winningTeam, endReasonText) {
       }
     }
 
-    if(eraseKillCam)
+    if(eraseKillCam) {
       maps\mp\gametypes\_damage::eraseFinalKillCam();
+    }
   }
 
   self maps\mp\gametypes\_gamescore::giveTeamScoreForObjective(winningTeam, 1);
@@ -324,10 +340,12 @@ onDeadEvent(team) {
     return;
   }
   if(team == "all") {
-    if(level.bombPlanted)
+    if(level.bombPlanted) {
       sd_endGame(game["attackers"], game["end_reason"][game["defenders"] + "_eliminated"]);
-    else
+    }
+    else {
       sd_endGame(game["defenders"], game["end_reason"][game["attackers"] + "_eliminated"]);
+    }
   } else if(team == game["attackers"]) {
     if(level.bombPlanted) {
       return;
@@ -353,8 +371,9 @@ onNormalDeath(victim, attacker, lifeId) {
 
   team = victim.team;
 
-  if(game["state"] == "postgame" && (victim.team == game["defenders"] || !level.bombPlanted))
+  if(game["state"] == "postgame" && (victim.team == game["defenders"] || !level.bombPlanted)) {
     attacker.finalKill = true;
+  }
 
   if(victim.isPlanting) {
     thread maps\mp\_matchdata::logKillEvent(lifeId, "planting");
@@ -372,8 +391,9 @@ onNormalDeath(victim, attacker, lifeId) {
     attacker maps\mp\gametypes\_persistence::statSetChild("round", "defends", attacker.pers["defends"]);
   }
 
-  if(attacker.isBombCarrier)
+  if(attacker.isBombCarrier) {
     attacker incPlayerStat("killsasbombcarrier", 1);
+  }
 }
 
 giveLastOnTeamWarning() {
@@ -426,8 +446,9 @@ removeBombZoneC(bombZones) {
   foreach(cZone in cZones) {
     cZone.relatedBrushModel delete();
     visuals = getEntArray(cZone.target, "targetname");
-    foreach(visual in visuals)
+    foreach(visual in visuals) {
     visual delete();
+    }
     cZone delete();
   }
 
@@ -484,8 +505,9 @@ bombs() {
     bombZone maps\mp\gametypes\_gameobjects::setWaitWeaponChangeOnUse(false);
     bombZone maps\mp\gametypes\_gameobjects::setUseText(&"MP_PLANTING_EXPLOSIVE");
     bombZone maps\mp\gametypes\_gameobjects::setUseHintText(&"PLATFORM_HOLD_TO_PLANT_EXPLOSIVES");
-    if(!level.multiBomb)
+    if(!level.multiBomb) {
       bombZone maps\mp\gametypes\_gameobjects::setKeyObject(level.sdBomb);
+    }
     label = bombZone maps\mp\gametypes\_gameobjects::getLabel();
     bombZone.label = label;
     bombZone maps\mp\gametypes\_gameobjects::set2DIcon("friendly", "waypoint_defend" + label);
@@ -519,8 +541,9 @@ bombs() {
   for(index = 0; index < level.bombZones.size; index++) {
     array = [];
     for(otherindex = 0; otherindex < level.bombZones.size; otherindex++) {
-      if(otherindex != index)
+      if(otherindex != index) {
         array[array.size] = level.bombZones[otherindex];
+      }
     }
     level.bombZones[index].otherBombZones = array;
   }
@@ -578,8 +601,9 @@ onBeginUse(player) {
     player notify_enemy_bots_bomb_used("defuse");
     player.isDefusing = true;
 
-    if(isDefined(level.sdBombModel))
+    if(isDefined(level.sdBombModel)) {
       level.sdBombModel hide();
+    }
 
     player thread startNpcBombUseSound("briefcase_bomb_defuse_mp", "weap_suitcase_defuse_button");
   } else {
@@ -671,8 +695,9 @@ onUsePlantObject(player) {
     player incPersStat("plants", 1);
     player maps\mp\gametypes\_persistence::statSetChild("round", "plants", player.pers["plants"]);
 
-    if(isDefined(level.sd_loadout) && isDefined(level.sd_loadout[player.team]))
+    if(isDefined(level.sd_loadout) && isDefined(level.sd_loadout[player.team])) {
       player thread removeBombCarrierClass();
+    }
 
     leaderDialog("bomb_planted");
 
@@ -699,11 +724,13 @@ applyBombCarrierClass() {
     wait(0.05);
   }
 
-  while(self IsMantling())
+  while(self IsMantling()) {
     wait(0.05);
+  }
 
-  while(!self isOnGround())
+  while(!self isOnGround()) {
     wait(0.05);
+  }
 
   if(self isJuggernaut()) {
     self notify("lost_juggernaut");
@@ -712,8 +739,9 @@ applyBombCarrierClass() {
 
   self.pers["gamemodeLoadout"] = level.sd_loadout[self.team];
 
-  if(isDefined(self.setSpawnpoint))
+  if(isDefined(self.setSpawnpoint)) {
     self maps\mp\perks\_perkfunctions::deleteTI(self.setSpawnpoint);
+  }
 
   spawnPoint = spawn("script_model", self.origin);
   spawnPoint.angles = self.angles;
@@ -743,11 +771,13 @@ removeBombCarrierClass() {
     wait(0.05);
   }
 
-  while(self IsMantling())
+  while(self IsMantling()) {
     wait(0.05);
+  }
 
-  while(!self isOnGround())
+  while(!self isOnGround()) {
     wait(0.05);
+  }
 
   if(self isJuggernaut()) {
     self notify("lost_juggernaut");
@@ -756,8 +786,9 @@ removeBombCarrierClass() {
 
   self.pers["gamemodeLoadout"] = undefined;
 
-  if(isDefined(self.setSpawnpoint))
+  if(isDefined(self.setSpawnpoint)) {
     self maps\mp\perks\_perkfunctions::deleteTI(self.setSpawnpoint);
+  }
 
   spawnPoint = spawn("script_model", self.origin);
   spawnPoint.angles = self.angles;
@@ -782,10 +813,12 @@ onUseDefuseObject(player) {
 
   level thread teamPlayerCardSplash("callout_bombdefused", player);
 
-  if(isDefined(level.bombOwner) && (level.bombOwner.bombPlantedTime + 3000 + (level.defuseTime * 1000)) > getTime() && isReallyAlive(level.bombOwner))
+  if(isDefined(level.bombOwner) && (level.bombOwner.bombPlantedTime + 3000 + (level.defuseTime * 1000)) > getTime() && isReallyAlive(level.bombOwner)) {
     player thread maps\mp\gametypes\_hud_message::SplashNotify("ninja_defuse", (maps\mp\gametypes\_rank::getScoreInfoValue("defuse")));
-  else
+  }
+  else {
     player thread maps\mp\gametypes\_hud_message::SplashNotify("defuse", maps\mp\gametypes\_rank::getScoreInfoValue("defuse"));
+  }
 
   player thread maps\mp\gametypes\_rank::xpEventPopup("defuse");
   player thread maps\mp\gametypes\_rank::giveRankXP("defuse");
@@ -818,8 +851,9 @@ onPickup(player) {
   self maps\mp\gametypes\_gameobjects::set2DIcon("friendly", "waypoint_escort");
   self maps\mp\gametypes\_gameobjects::set3DIcon("friendly", "waypoint_escort");
 
-  if(isDefined(level.sd_loadout) && isDefined(level.sd_loadout[player.team]))
+  if(isDefined(level.sd_loadout) && isDefined(level.sd_loadout[player.team])) {
     player thread applyBombCarrierClass();
+  }
 
   if(!level.bombDefused) {
     teamPlayerCardSplash("callout_bombtaken", player, player.team);
@@ -895,8 +929,9 @@ bombPlanted(destroyedObj, player) {
 
   level notify("bomb_exploded");
 
-  if(isDefined(level.sd_onBombTimerEnd))
+  if(isDefined(level.sd_onBombTimerEnd)) {
     level thread[[level.sd_onBombTimerEnd]]();
+  }
 
   explosionOrigin = level.sdBombModel.origin;
   level.sdBombModel hide();
@@ -909,10 +944,12 @@ bombPlanted(destroyedObj, player) {
     destroyedObj.visuals[0] RadiusDamage(explosionOrigin, 512, 200, 20, undefined, "MOD_EXPLOSIVE", "bomb_site_mp");
 
   rot = randomfloat(360);
-  if(isDefined(destroyedObj.trigger.effect))
+  if(isDefined(destroyedObj.trigger.effect)) {
     effect = destroyedObj.trigger.effect;
-  else
+  }
+  else {
     effect = "bomb_explosion";
+  }
 
   explosionPos = explosionOrigin + (0, 0, 50);
   explosionEffect = spawnFx(level._effect[effect], explosionPos, (0, 0, 1), (cos(rot), sin(rot), 0));
@@ -924,11 +961,13 @@ bombPlanted(destroyedObj, player) {
 
   thread playSoundinSpace("exp_suitcase_bomb_main", explosionOrigin);
 
-  if(isDefined(destroyedObj.exploderIndex))
+  if(isDefined(destroyedObj.exploderIndex)) {
     exploder(destroyedObj.exploderIndex);
+  }
 
-  for(index = 0; index < level.bombZones.size; index++)
+  for(index = 0; index < level.bombZones.size; index++) {
     level.bombZones[index] maps\mp\gametypes\_gameobjects::disableObject();
+  }
   defuseObject maps\mp\gametypes\_gameobjects::disableObject();
 
   setGameEndTime(0);
@@ -953,10 +992,12 @@ initObjectiveCam(objective) {
     nextNode = getEnt(camStart.target, "targetname");
     while(isDefined(nextNode)) {
       camPath[camPath.size] = nextNode;
-      if(isDefined(nextNode.target))
+      if(isDefined(nextNode.target)) {
         nextNode = getEnt(nextNode.target, "targetname");
-      else
+      }
+      else {
         break;
+      }
     }
   }
 
@@ -1004,12 +1045,14 @@ runObjectiveCam() {
 
   for(i = 0; i < self.path.size; i++) {
     accelTime = 0;
-    if(i == 0)
+    if(i == 0) {
       accelTime = (5 / self.path.size) / 2;
+    }
 
     decelTime = 0;
-    if(i == self.path.size - 1)
+    if(i == self.path.size - 1) {
       decelTime = (5 / self.path.size) / 2;
+    }
 
     self moveTo(self.path[i].origin, 5 / self.path.size, accelTime, decelTime);
     self rotateTo(self.path[i].angles, 5 / self.path.size, accelTime, decelTime);
@@ -1150,11 +1193,13 @@ showToTeam(gameObject, team) {
   self hide();
 
   foreach(player in level.players) {
-    if(player.team == team)
+    if(player.team == team) {
       self ShowToPlayer(player);
+    }
 
-    if(player.team == "spectator" && team == "allies")
+    if(player.team == "spectator" && team == "allies") {
       self ShowToPlayer(player);
+    }
   }
 
   for(;;) {
@@ -1162,11 +1207,13 @@ showToTeam(gameObject, team) {
 
     self hide();
     foreach(player in level.players) {
-      if(player.team == team)
+      if(player.team == team) {
         self ShowToPlayer(player);
+      }
 
-      if(player.team == "spectator" && team == "allies")
+      if(player.team == "spectator" && team == "allies") {
         self ShowToPlayer(player);
+      }
     }
   }
 }
@@ -1258,12 +1305,14 @@ onUse(player) {
     sr_notifyTeam("sr_ally_respawned", "sr_enemy_respawned", self.victim);
 
     if(isDefined(self.victim)) {
-      if(!level.gameEnded)
+      if(!level.gameEnded) {
         self.victim thread sr_respawn();
+      }
     }
 
-    if(isDefined(self.attacker))
+    if(isDefined(self.attacker)) {
       self.attacker thread maps\mp\gametypes\_rank::xpEventPopup("kill_denied");
+    }
 
     player thread onTagsPickup(event);
 
@@ -1303,8 +1352,9 @@ onUse(player) {
       self.victim.extrascore1 = 2;
     }
 
-    if(self.attacker != player)
+    if(self.attacker != player) {
       self.attacker thread onTagsPickup(event);
+    }
 
     player onTagsPickup(event);
 
@@ -1320,8 +1370,9 @@ onTagsPickup(event) {
   level endon("game_ended");
   selfendon("disconnect");
 
-  while(!isDefined(self.pers))
+  while(!isDefined(self.pers)) {
     wait(0.05);
+  }
 
   self thread maps\mp\gametypes\_rank::xpEventPopup(event);
   maps\mp\gametypes\_gamescore::givePlayerScore(event, self, undefined, true);
@@ -1351,8 +1402,9 @@ tagTeamUpdater(tags) {
 
     tags.victimTeam = self.pers["team"];
     tags resetTags();
-    if(!IsAlive(self))
+    if(!IsAlive(self)) {
       self.extrascore1 = 2;
+    }
   }
 }
 
@@ -1365,8 +1417,9 @@ clearOnVictimDisconnect(victim) {
   if(isDefined(level.dogtags[guid])) {
     level.dogtags[guid] maps\mp\gametypes\_gameobjects::allowUse("none");
 
-    if(isDefined(level.dogtags[guid].attacker))
+    if(isDefined(level.dogtags[guid].attacker)) {
       level.dogtags[guid].attacker thread maps\mp\gametypes\_rank::xpEventPopup("kill_denied");
+    }
 
     playFX(level.conf_fx["vanish"], level.dogtags[guid].curOrigin);
     level.dogtags[guid] notify("reset");
@@ -1376,8 +1429,9 @@ clearOnVictimDisconnect(victim) {
       objective_delete(level.dogtags[guid].teamObjIds["allies"]);
       objective_delete(level.dogtags[guid].teamObjIds["axis"]);
       level.dogtags[guid].trigger delete();
-      for(i = 0; i < level.dogtags[guid].visuals.size; i++)
+      for(i = 0; i < level.dogtags[guid].visuals.size; i++) {
         level.dogtags[guid].visuals[i] delete();
+      }
       level.dogtags[guid] notify("deleted");
 
       level.dogtags[guid] = undefined;

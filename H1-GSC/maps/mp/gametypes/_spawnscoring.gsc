@@ -41,8 +41,9 @@ scorespawns_nearteam(var_0, var_1) {
   foreach(var_4 in var_0) {
     scorefactors_nearteam(var_4);
 
-    if(var_4.totalscore > var_2.totalscore)
+    if(var_4.totalscore > var_2.totalscore) {
       var_2 = var_4;
+    }
   }
 
   var_2 = selectbestspawnpoint(var_2, var_0, var_1);
@@ -73,8 +74,9 @@ getspawnpoint_twar(var_0, var_1) {
   }
 
   foreach(var_4 in var_0) {
-    if(!isagent(self))
+    if(!isagent(self)) {
       recon_log_spawnpoint_info(var_4);
+    }
 
     var_4.criticalresult = undefined;
   }
@@ -85,8 +87,9 @@ getspawnpoint_twar(var_0, var_1) {
 criticalfactors_twar(var_0) {
   var_0.criticalresult = criticalfactors_global(var_0);
 
-  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidspawninzone, var_0, level.twar_use_obj.zone))
+  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidspawninzone, var_0, level.twar_use_obj.zone)) {
     return "bad";
+  }
 
   return var_0.criticalresult;
 }
@@ -97,8 +100,9 @@ scorespawns_twar(var_0, var_1, var_2) {
   foreach(var_5 in var_0) {
     scorefactors_twar(var_5, var_1);
 
-    if(var_5.totalscore > var_3.totalscore)
+    if(var_5.totalscore > var_3.totalscore) {
       var_3 = var_5;
+    }
   }
 
   var_3 = selectbestspawnpoint(var_3, var_0, var_2);
@@ -106,8 +110,9 @@ scorespawns_twar(var_0, var_1, var_2) {
 }
 
 checkdynamicspawns(var_0) {
-  if(isDefined(level.dynamicspawns))
+  if(isDefined(level.dynamicspawns)) {
     var_0 = [[level.dynamicspawns]](var_0);
+  }
 
   return var_0;
 }
@@ -137,17 +142,21 @@ recon_log_spawnpoint_info_wrapper(var_0) {
 }
 
 recon_log_spawnpoint_info(var_0) {
-  if(!isDefined(var_0.israndom))
+  if(!isDefined(var_0.israndom)) {
     var_0.israndom = 0;
+  }
 
-  if(!isDefined(var_0.teambase))
+  if(!isDefined(var_0.teambase)) {
     var_0.teambase = "none";
+  }
 
-  if(!isDefined(var_0.lastspawnteam))
+  if(!isDefined(var_0.lastspawnteam)) {
     var_0.lastspawnteam = "none";
+  }
 
-  if(!isDefined(var_0.lastspawntime))
+  if(!isDefined(var_0.lastspawntime)) {
     var_0.lastspawntime = -1;
+  }
 
   if(level.teambased) {
     var_1 = var_0.fullsights["allies"];
@@ -181,29 +190,37 @@ recon_log_spawnpoint_info(var_0) {
   var_20 = var_0.teambase;
   var_21 = var_0.outside;
 
-  if(isDefined(var_0.debugcriticaldata[0]))
+  if(isDefined(var_0.debugcriticaldata[0])) {
     var_7 = var_0.debugcriticaldata[0];
+  }
 
-  if(isDefined(var_0.debugcriticaldata[1]))
+  if(isDefined(var_0.debugcriticaldata[1])) {
     var_8 = var_0.debugcriticaldata[1];
+  }
 
-  if(isDefined(var_0.debugcriticaldata[2]))
+  if(isDefined(var_0.debugcriticaldata[2])) {
     var_9 = var_0.debugcriticaldata[2];
+  }
 
-  if(isDefined(var_0.debugcriticaldata[3]))
+  if(isDefined(var_0.debugcriticaldata[3])) {
     var_10 = var_0.debugcriticaldata[3];
+  }
 
-  if(isDefined(var_0.debugcriticaldata[4]))
+  if(isDefined(var_0.debugcriticaldata[4])) {
     var_11 = var_0.debugcriticaldata[4];
+  }
 
-  if(isDefined(var_0.debugcriticaldata[5]))
+  if(isDefined(var_0.debugcriticaldata[5])) {
     var_12 = var_0.debugcriticaldata[5];
+  }
 
-  if(isDefined(var_0.debugcriticaldata[6]))
+  if(isDefined(var_0.debugcriticaldata[6])) {
     var_13 = var_0.debugcriticaldata[6];
+  }
 
-  if(isDefined(var_0.debugcriticaldata[7]))
+  if(isDefined(var_0.debugcriticaldata[7])) {
     var_14 = var_0.debugcriticaldata[7];
+  }
 
   var_22 = var_0.totalpossiblescore;
   var_23 = -1;
@@ -215,48 +232,59 @@ recon_log_spawnpoint_info(var_0) {
   var_29 = -1;
   var_30 = -1;
 
-  if(isDefined(var_0.debugscoredata[0]))
+  if(isDefined(var_0.debugscoredata[0])) {
     var_23 = var_0.debugscoredata[0];
+  }
 
-  if(isDefined(var_0.debugscoredata[1]))
+  if(isDefined(var_0.debugscoredata[1])) {
     var_24 = var_0.debugscoredata[1];
+  }
 
-  if(isDefined(var_0.debugscoredata[2]))
+  if(isDefined(var_0.debugscoredata[2])) {
     var_25 = var_0.debugscoredata[2];
+  }
 
-  if(isDefined(var_0.debugscoredata[3]))
+  if(isDefined(var_0.debugscoredata[3])) {
     var_26 = var_0.debugscoredata[3];
+  }
 
-  if(isDefined(var_0.debugscoredata[4]))
+  if(isDefined(var_0.debugscoredata[4])) {
     var_27 = var_0.debugscoredata[4];
+  }
 
-  if(isDefined(var_0.debugscoredata[5]))
+  if(isDefined(var_0.debugscoredata[5])) {
     var_28 = var_0.debugscoredata[5];
+  }
 
-  if(isDefined(var_0.debugscoredata[6]))
+  if(isDefined(var_0.debugscoredata[6])) {
     var_29 = var_0.debugscoredata[6];
+  }
 
-  if(isDefined(var_0.debugscoredata[7]))
+  if(isDefined(var_0.debugscoredata[7])) {
     var_30 = var_0.debugscoredata[7];
+  }
 
   reconspatialevent(var_0.origin, "script_mp_spawnpoint_score: player_name %s, life_id %d, script_file %s, gameTime %d, classname %s, totalscore %d, totalPossibleScore %d, score_data0 %d, score_data1 %d, score_data2 %d, score_data3 %d, score_data4 %d, score_data5 %d, score_data6 %d, score_data7 %d, fullsights_allies %d, fullsights_axis %d, cornersights_allies %d, cornersights_axis %d, min_dist_squared_allies %d, min_dist_squared_axis %d, criticalResult %s, critical_data0 %d, critical_data1 %d, critical_data2 %d, critical_data3 %d, critical_data4 %d, critical_data5 %d, critical_data6 %d, critical_data7 %d, teambase %s, outside %d", self.name, self.lifeid, var_15, var_16, var_17, var_18, var_22, var_23, var_24, var_25, var_26, var_27, var_28, var_29, var_30, var_1, var_2, var_3, var_4, var_5, var_6, var_19, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_20, var_21);
 }
 
 findsecondhighestspawnscore(var_0, var_1) {
-  if(var_1.size < 2)
+  if(var_1.size < 2) {
     return var_0;
+  }
 
   var_2 = var_1[0];
 
-  if(var_2 == var_0)
+  if(var_2 == var_0) {
     var_2 = var_1[1];
+  }
 
   foreach(var_4 in var_1) {
     if(var_4 == var_0) {
       continue;
     }
-    if(var_4.totalscore > var_2.totalscore)
+    if(var_4.totalscore > var_2.totalscore) {
       var_2 = var_4;
+    }
   }
 
   return var_2;
@@ -271,29 +299,37 @@ initscoredata(var_0) {
 }
 
 criticalfactors_global(var_0) {
-  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidfullvisibleenemies, var_0))
+  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidfullvisibleenemies, var_0)) {
     return "bad";
+  }
 
-  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidgrenades, var_0))
+  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidgrenades, var_0)) {
     return "bad";
+  }
 
-  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidmines, var_0))
+  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidmines, var_0)) {
     return "bad";
+  }
 
-  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidairstrikelocations, var_0))
+  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidairstrikelocations, var_0)) {
     return "bad";
+  }
 
-  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidcarepackages, var_0))
+  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidcarepackages, var_0)) {
     return "bad";
+  }
 
-  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidtelefrag, var_0))
+  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidtelefrag, var_0)) {
     return "bad";
+  }
 
-  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidenemyspawn, var_0))
+  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidenemyspawn, var_0)) {
     return "bad";
+  }
 
-  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidcornervisibleenemies, var_0))
+  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidcornervisibleenemies, var_0)) {
     return "secondary";
+  }
 
   return "primary";
 }
@@ -359,8 +395,9 @@ scorespawns_domination(var_0, var_1, var_2) {
   foreach(var_5 in var_0) {
     scorefactors_domination(var_5, var_1);
 
-    if(var_5.totalscore > var_3.totalscore)
+    if(var_5.totalscore > var_3.totalscore) {
       var_3 = var_5;
+    }
   }
 
   var_3 = selectbestspawnpoint(var_3, var_0, var_2);
@@ -383,8 +420,9 @@ scorefactors_domination(var_0, var_1) {
 }
 
 getspawnpoint_freeforall(var_0) {
-  if(maps\mp\gametypes\_legacyspawnlogic::uselegacyspawning())
+  if(maps\mp\gametypes\_legacyspawnlogic::uselegacyspawning()) {
     return maps\mp\gametypes\_legacyspawnlogic::getspawnpoint_dm(var_0);
+  }
 
   var_0 = checkdynamicspawns(var_0);
   var_1["primary"] = [];
@@ -397,12 +435,15 @@ getspawnpoint_freeforall(var_0) {
     var_1[var_3.criticalresult][var_1[var_3.criticalresult].size] = var_3;
   }
 
-  if(var_1["primary"].size)
+  if(var_1["primary"].size) {
     var_5 = scorespawns_freeforall(var_1["primary"]);
-  else if(var_1["secondary"].size)
+  }
+  else if(var_1["secondary"].size) {
     var_5 = scorespawns_freeforall(var_1["secondary"]);
-  else
+  }
+  else {
     var_5 = scorespawns_freeforall(var_1["bad"], 1);
+  }
 
   foreach(var_3 in var_0) {
     recon_log_spawnpoint_info(var_3);
@@ -418,8 +459,9 @@ scorespawns_freeforall(var_0, var_1) {
   foreach(var_4 in var_0) {
     scorefactors_freeforall(var_4);
 
-    if(var_4.totalscore > var_2.totalscore)
+    if(var_4.totalscore > var_2.totalscore) {
       var_2 = var_4;
+    }
   }
 
   var_2 = selectbestspawnpoint(var_2, var_0, var_1);
@@ -476,8 +518,9 @@ scorespawns_searchandrescue(var_0, var_1) {
   foreach(var_4 in var_0) {
     scorefactors_searchandrescue(var_4);
 
-    if(var_4.totalscore > var_2.totalscore)
+    if(var_4.totalscore > var_2.totalscore) {
       var_2 = var_4;
+    }
   }
 
   var_2 = selectbestspawnpoint(var_2, var_0, var_1);
@@ -530,8 +573,9 @@ getspawnpoint_hardpoint(var_0) {
 criticalfactors_hardpoint(var_0) {
   var_0.criticalresult = criticalfactors_global(var_0);
 
-  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidspawninzone, var_0, level.zone))
+  if(!maps\mp\gametypes\_spawnfactor::critical_factor(maps\mp\gametypes\_spawnfactor::avoidspawninzone, var_0, level.zone)) {
     return "bad";
+  }
 
   return var_0.criticalresult;
 }
@@ -542,8 +586,9 @@ scorespawns_hardpoint(var_0, var_1) {
   foreach(var_4 in var_0) {
     scorefactors_hardpoint(var_4);
 
-    if(var_4.totalscore > var_2.totalscore)
+    if(var_4.totalscore > var_2.totalscore) {
       var_2 = var_4;
+    }
   }
 
   var_2 = selectbestspawnpoint(var_2, var_0, var_1);
@@ -565,8 +610,9 @@ getspawnpoint_ctf(var_0, var_1) {
   var_2["secondary"] = [];
   var_2["bad"] = [];
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.team;
+  }
 
   foreach(var_4 in var_0) {
     initscoredata(var_4);
@@ -599,8 +645,9 @@ scorespawns_ctf(var_0, var_1, var_2) {
   foreach(var_5 in var_0) {
     scorefactors_ctf(var_5, var_1);
 
-    if(var_5.totalscore > var_3.totalscore)
+    if(var_5.totalscore > var_3.totalscore) {
       var_3 = var_5;
+    }
   }
 
   var_3 = selectbestspawnpoint(var_3, var_0, var_2);
@@ -617,16 +664,18 @@ scorefactors_ctf(var_0, var_1) {
 }
 
 getspawnpoint_awayfromenemies(var_0, var_1) {
-  if(maps\mp\gametypes\_legacyspawnlogic::uselegacyspawning())
+  if(maps\mp\gametypes\_legacyspawnlogic::uselegacyspawning()) {
     return maps\mp\gametypes\_legacyspawnlogic::getspawnpoint_nearteam(var_0);
+  }
 
   var_0 = checkdynamicspawns(var_0);
   var_2["primary"] = [];
   var_2["secondary"] = [];
   var_2["bad"] = [];
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.team;
+  }
 
   foreach(var_4 in var_0) {
     initscoredata(var_4);
@@ -659,8 +708,9 @@ scorespawns_awayfromenemies(var_0, var_1, var_2) {
   foreach(var_5 in var_0) {
     scorefactors_awayfromenemies(var_5, var_1);
 
-    if(var_5.totalscore > var_3.totalscore)
+    if(var_5.totalscore > var_3.totalscore) {
       var_3 = var_5;
+    }
   }
 
   var_3 = selectbestspawnpoint(var_3, var_0, var_2);
@@ -697,8 +747,9 @@ getspawnpoint_safeguard(var_0) {
     level.badspawncount[self.team]++;
   }
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3.criticalresult = undefined;
+  }
 
   return var_5;
 }
@@ -709,8 +760,9 @@ scorespawns_safeguard(var_0, var_1) {
   foreach(var_4 in var_0) {
     scorefactors_safeguard(var_4);
 
-    if(var_4.totalscore > var_2.totalscore)
+    if(var_4.totalscore > var_2.totalscore) {
       var_2 = var_4;
+    }
   }
 
   var_2 = selectbestspawnpoint(var_2, var_0, var_1);

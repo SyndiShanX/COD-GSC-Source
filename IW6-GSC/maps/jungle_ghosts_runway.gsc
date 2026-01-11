@@ -14,8 +14,9 @@ runway_setup() {
 runway_bad_places() {
   var_0 = common_scripts\utility::getstructarray("escape_badplace", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   badplace_cylinder("bp", 0, var_2.origin, var_2.radius, var_2.height, "allies");
+  }
 }
 
 runway_sat_launch() {
@@ -135,11 +136,13 @@ runway_vehicles() {
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.script_noteworthy)) {
-      if(var_2.script_noteworthy == "runway_apache")
+      if(var_2.script_noteworthy == "runway_apache") {
         level.apache1 = var_2;
+      }
 
-      if(var_2.script_noteworthy == "runway_apache2")
+      if(var_2.script_noteworthy == "runway_apache2") {
         level.apache2 = var_2;
+      }
     }
   }
 
@@ -153,8 +156,9 @@ runway_vehicles() {
   maps\jungle_ghosts_util::do_lightning();
   wait 3;
 
-  if(!common_scripts\utility::flag("choppers_saw_player"))
+  if(!common_scripts\utility::flag("choppers_saw_player")) {
     thread cliff_choppers_move_on(var_0);
+  }
   else {
     level.apache1 thread fire_at_player_until_jump();
     level.apache1 thread kill_player_if_go_back_or_not_moving();
@@ -228,8 +232,9 @@ cliff_choppers_move_on(var_0) {
 
   wait 10;
 
-  foreach(var_4, var_2 in var_0)
+  foreach(var_4, var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 runway_detect_player_stance_and_movement() {
@@ -248,8 +253,9 @@ runway_detect_player_stance_and_movement() {
   var_3 = 0;
 
   while(!var_3) {
-    if(level.player getstance() != "prone" || distance2d(var_1, level.player.origin) > var_2)
+    if(level.player getstance() != "prone" || distance2d(var_1, level.player.origin) > var_2) {
       var_3 = 1;
+    }
 
     common_scripts\utility::waitframe();
   }
@@ -311,8 +317,9 @@ magic_missile_fire_at_ent(var_0, var_1, var_2, var_3) {
   level endon("player_jump_watcher_stop");
   var_4 = "missile_attackheli";
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 2;
+  }
 
   var_1 = min(2, var_1);
   var_5 = "tag_missile_right";
@@ -327,10 +334,12 @@ magic_missile_fire_at_ent(var_0, var_1, var_2, var_3) {
     var_7 = var_7 * -500;
     var_8 = undefined;
 
-    if(isDefined(var_3) && var_3)
+    if(isDefined(var_3) && var_3) {
       var_8 = fake_rocket(self gettagorigin(var_5) + (0, 0, 64), var_0.origin + (randomintrange(-64, 64), randomintrange(-64, 64), randomintrange(-64, 64)));
-    else
+    }
+    else {
       var_8 = fake_rocket(level.player.origin + var_7 + (randomintrange(-128, 128), randomintrange(-128, 128), 800), var_0.origin + (randomintrange(-64, 64), randomintrange(-64, 64), randomintrange(-64, 64)));
+    }
 
     if(var_6 == 0) {
       thread common_scripts\utility::play_sound_in_space("scn_chopper_fire_missile", var_8.origin);
@@ -345,10 +354,12 @@ magic_missile_fire_at_ent(var_0, var_1, var_2, var_3) {
       var_8.is_last = 0;
     }
 
-    if(var_5 == "tag_missile_left")
+    if(var_5 == "tag_missile_left") {
       var_5 = "tag_missile_right";
-    else
+    }
+    else {
       var_5 = "tag_missile_left";
+    }
 
     var_8 thread maps\jungle_ghosts_util::escape_earthquake_on_missile_impact();
     common_scripts\utility::waitframe();
@@ -384,8 +395,9 @@ rocket_delete() {
     radiusdamage(self.origin, 300, 5, 4);
   }
 
-  if(self.is_last)
+  if(self.is_last) {
     playFX(var_0, self.origin);
+  }
 
   self stoploopsound("scn_chopper_missile_loop");
   self delete();
@@ -417,10 +429,12 @@ generic_gun_fire_at_player(var_0) {
   var_9 = randomintrange(20, 25);
 
   for(var_10 = 0; var_10 < var_9; var_10++) {
-    if(var_5)
+    if(var_5) {
       self setturrettargetent(level.player);
-    else
+    }
+    else {
       self setturrettargetent(var_6);
+    }
 
     common_scripts\utility::waitframe();
     self fireweapon();
@@ -478,8 +492,9 @@ kill_player_if_go_back_or_not_moving() {
   while(!common_scripts\utility::flag("player_crossed_river")) {
     wait(var_2);
 
-    if(level.player.origin[1] > var_0 - var_1)
+    if(level.player.origin[1] > var_0 - var_1) {
       magic_missile_fire_at_ent(level.player, 6, 1);
+    }
 
     var_1 = var_1 + var_1;
   }
@@ -492,8 +507,9 @@ kill_on_river_crossing_back_track() {
   common_scripts\utility::flag_wait("player_crossed_river");
   wait 10;
 
-  if(level.player.origin[0] > var_0 || level.player.origin[1] > var_1)
+  if(level.player.origin[0] > var_0 || level.player.origin[1] > var_1) {
     magic_missile_fire_at_ent(level.player, 6, 1, 1);
+  }
 
   wait 12;
   magic_missile_fire_at_ent(level.player, 6, 1, 1);
@@ -537,8 +553,9 @@ runway_apache_logic(var_0) {
           for(var_10 = 0; var_10 < var_9; var_10++) {
             var_11 = randomintrange(var_4, var_5);
 
-            if(common_scripts\utility::cointoss())
+            if(common_scripts\utility::cointoss()) {
               var_11 = var_11 * -1;
+            }
 
             self setturrettargetent(var_7);
             wait 0.05;
@@ -569,8 +586,9 @@ runway_apache_logic(var_0) {
 
       common_scripts\utility::flag_wait("player_crossed_river");
 
-      if(common_scripts\utility::flag("choppers_saw_player"))
+      if(common_scripts\utility::flag("choppers_saw_player")) {
         self setlookatent(level.player);
+      }
 
       maps\_utility::trigger_wait_targetname("river_slide_trig");
 
@@ -615,8 +633,9 @@ runway_apache_logic_cliff_chopper(var_0) {
         self setlookatent(level.player);
       }
     case "jungle":
-      if(common_scripts\utility::flag("choppers_saw_player"))
+      if(common_scripts\utility::flag("choppers_saw_player")) {
         escape_apache_pressure_player_until_flag("slide_start");
+      }
 
       common_scripts\utility::flag_wait("slide_start");
       self notify("stop_burst_fire");
@@ -656,8 +675,9 @@ escape_apache_pressure_player_until_flag(var_0) {
     wait 2;
 
     for(var_3 = 0; var_3 < var_2; var_3++) {
-      if(common_scripts\utility::cointoss())
+      if(common_scripts\utility::cointoss()) {
         var_1 = var_1 * -1;
+      }
 
       self setturrettargetent(level.player, (var_1, var_1, 10));
       wait 0.05;
@@ -666,8 +686,9 @@ escape_apache_pressure_player_until_flag(var_0) {
 
     var_1 = var_1 - 10;
 
-    if(var_1 < 0)
+    if(var_1 < 0) {
       var_1 = 0;
+    }
 
     wait(randomintrange(2, 4));
   }
@@ -678,8 +699,9 @@ turret_burst_fire_at_ent(var_0, var_1) {
     self endon("death");
     self endon("stop_burst_fire");
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = randomintrange(10, 20);
+    }
 
     if(level.gameskill < 2) {
       var_2 = 150;
@@ -704,21 +726,25 @@ turret_burst_fire_at_ent(var_0, var_1) {
     for(var_5 = 0; var_5 < var_1; var_5++) {
       var_4 = randomintrange(var_2, var_3);
 
-      if(common_scripts\utility::flag("chopper_kill_player"))
+      if(common_scripts\utility::flag("chopper_kill_player")) {
         var_4 = 0;
+      }
 
-      if(common_scripts\utility::cointoss())
+      if(common_scripts\utility::cointoss()) {
         var_4 = var_4 * -1;
+      }
 
       self setturrettargetent(var_0, (var_4, var_4, 0));
       wait 0.05;
 
-      if(level.player.health > 50 && !common_scripts\utility::flag("chopper_kill_player"))
+      if(level.player.health > 50 && !common_scripts\utility::flag("chopper_kill_player")) {
         self fireweapon();
+      }
     }
 
-    if(common_scripts\utility::flag("chopper_kill_player"))
+    if(common_scripts\utility::flag("chopper_kill_player")) {
       level.player kill();
+    }
 
     self notify("done_shooting");
   }
@@ -727,8 +753,9 @@ turret_burst_fire_at_ent(var_0, var_1) {
 get_target_structs() {
   var_0 = [];
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+  }
 
   return var_0;
 }
@@ -739,8 +766,9 @@ escape_globals(var_0) {
   thread escape_friendly_movement(var_0);
   thread escape_enemies_and_vehicles(var_0);
 
-  if(common_scripts\utility::flag("choppers_saw_player"))
+  if(common_scripts\utility::flag("choppers_saw_player")) {
     thread escape_scripted_destruction(var_0);
+  }
 
   thread escape_player_jump();
   thread escape_vo(var_0);
@@ -757,10 +785,12 @@ water_push_player() {
   var_3 = 10;
 
   for(;;) {
-    if(var_0 istouching(level.player))
+    if(var_0 istouching(level.player)) {
       var_2 = var_2 + 0.2;
-    else
+    }
+    else {
       var_2 = 0;
+    }
 
     var_2 = min(var_2, var_3);
     level.player pushplayervector(var_1 * var_2, 0);
@@ -801,8 +831,9 @@ escape_socr_turret_own_target(var_0, var_1) {
   var_2 = spawn("script_origin", var_0.origin - (0, 0, 40));
   var_2 linkto(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self waittill(var_1);
+  }
 
   self settargetentity(var_2);
   var_3 = randomintrange(60, 70);
@@ -811,8 +842,9 @@ escape_socr_turret_own_target(var_0, var_1) {
   var_0 thread escape_chopper_timeout_death();
   var_0 clearlookatent();
 
-  if(!common_scripts\utility::flag("choppers_attacked"))
+  if(!common_scripts\utility::flag("choppers_attacked")) {
     maps\_utility::delaythread(1.5, common_scripts\utility::flag_set, "choppers_attacked");
+  }
 
   for(;;) {
     for(var_4 = 0; var_4 < var_3; var_4++) {
@@ -835,13 +867,15 @@ escape_chopper_timeout_death() {
   self endon("death");
   wait 2;
 
-  if(isalive(self) || !maps\_vehicle::vehicle_is_crashing())
+  if(isalive(self) || !maps\_vehicle::vehicle_is_crashing()) {
     thread maps\_vehicle_code::_kill_fx(self.model, 0);
+  }
 }
 
 escape_apache_shoot_missiles_at_structs(var_0, var_1) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self waittill(var_1);
+  }
 
   var_2 = "tag_missile_left";
 
@@ -863,11 +897,13 @@ escape_apache_shoot_missiles_at_structs(var_0, var_1) {
 escape_friendly_movement(var_0) {
   thread escape_blockers();
 
-  while(!isDefined(level.squad))
+  while(!isDefined(level.squad)) {
     wait 0.1;
+  }
 
-  while(level.squad.size != 4)
+  while(level.squad.size != 4) {
     wait 0.1;
+  }
 
   switch (var_0) {
     case "runway":
@@ -884,11 +920,13 @@ escape_friendly_movement(var_0) {
 
       common_scripts\utility::flag_wait_any("choppers_are_gone", "choppers_saw_player", "slide_start");
 
-      if(common_scripts\utility::flag("slide_start") && !common_scripts\utility::flag("choppers_are_gone"))
+      if(common_scripts\utility::flag("slide_start") && !common_scripts\utility::flag("choppers_are_gone")) {
         common_scripts\utility::flag_set("choppers_saw_player");
+      }
 
-      if(common_scripts\utility::flag("choppers_are_gone"))
+      if(common_scripts\utility::flag("choppers_are_gone")) {
         wait 5;
+      }
 
       common_scripts\utility::array_call(level.squad, ::allowedstances, "stand", "crouch");
       common_scripts\utility::array_thread(level.squad, maps\_utility::disable_cqbwalk);
@@ -917,8 +955,9 @@ escape_friendly_movement(var_0) {
       var_8 = common_scripts\utility::getstructarray("waterfall_ai_land", "targetname");
       common_scripts\utility::flag_wait("player_at_river");
 
-      foreach(var_4, var_3 in level.squad)
+      foreach(var_4, var_3 in level.squad) {
       var_3 thread escape_friendly_jumps_waterfall_to_swimming(var_7[var_4], var_8[var_4]);
+      }
     case "waterfall":
       common_scripts\utility::flag_wait("choppers_attacked");
       wait 6;
@@ -960,14 +999,16 @@ escape_vo(var_0) {
         level.alpha1 maps\_utility::smart_dialogue("jungleg_gs1_okpreparetorappel");
         wait 2;
 
-        if(!common_scripts\utility::flag("choppers_saw_player"))
+        if(!common_scripts\utility::flag("choppers_saw_player")) {
           level.merrick maps\_utility::smart_dialogue("jungleg_mrk_dontmove_2");
+        }
       }
 
       common_scripts\utility::flag_wait_any("choppers_are_gone", "choppers_saw_player");
 
-      if(common_scripts\utility::flag("choppers_are_gone") && !common_scripts\utility::flag("choppers_saw_player"))
+      if(common_scripts\utility::flag("choppers_are_gone") && !common_scripts\utility::flag("choppers_saw_player")) {
         level.alpha2 maps\_utility::delaythread(5, maps\_utility::smart_dialogue, "jungleg_kgn_weshouldmovenow");
+      }
     case "jungle":
       common_scripts\utility::flag_wait("slide_start");
       thread runway_escape_run_vo_cold();
@@ -1221,8 +1262,9 @@ escape_underwater_fx() {
   level.player endon("stop_underwater_fx");
   level.player shellshock("underwater", 999999);
 
-  if(maps\_utility::game_is_current_gen())
+  if(maps\_utility::game_is_current_gen()) {
     level.player thread maps\_utility::vision_set_fog_changes("jungle_underwater", 0.05);
+  }
 
   level.player setblurforplayer(10, 0.1);
   visionsetnaked("jungle_underwater", 0.1);
@@ -1230,8 +1272,9 @@ escape_underwater_fx() {
   if(common_scripts\utility::flag("choppers_saw_player")) {
     var_5 = [level.river_apache, level.apache1];
 
-    if(isDefined(var_5[0]))
+    if(isDefined(var_5[0])) {
       common_scripts\utility::array_thread(var_5, ::escape_fake_underwater_bullets);
+    }
   }
 
   for(;;) {
@@ -1335,8 +1378,9 @@ escape_enemies_and_vehicles(var_0) {
     case "river":
       maps\_utility::trigger_wait_targetname("player_waterfall_jump_trig");
 
-      if(common_scripts\utility::flag("choppers_saw_player"))
+      if(common_scripts\utility::flag("choppers_saw_player")) {
         level.river_apache setlookatent(level.player);
+      }
     case "waterfall":
       common_scripts\utility::flag_wait("final_read");
       var_1 = spawn_vehicles_throttled("socr_boats", 1);
@@ -1402,10 +1446,12 @@ boat2_in_sounds() {
 boat_vo() {
   wait 2;
 
-  if(!common_scripts\utility::flag("choppers_saw_player"))
+  if(!common_scripts\utility::flag("choppers_saw_player")) {
     level.player maps\_utility::play_sound_on_entity("jungleg_mko_approachingextractionnow");
-  else
+  }
+  else {
     level.player maps\_utility::play_sound_on_entity("jungleg_mko_cominginhotactual");
+  }
 }
 
 boat_populate() {
@@ -1439,8 +1485,9 @@ dog_on_a_boat() {
   var_1 linkto(self, "TAG_TURRET_MIDDLE_RIGHT", (-11, 150, -8), (0, 0, 0));
   var_0 linkto(var_1, "tag_origin");
 
-  while(distance(var_0.origin, level.player.origin) > 700)
+  while(distance(var_0.origin, level.player.origin) > 700) {
     common_scripts\utility::waitframe();
+  }
 
   var_1 notify("stop_loop");
   var_1 maps\_anim::anim_loop_solo(var_0, "sniff", "stop_loop");
@@ -1449,8 +1496,9 @@ dog_on_a_boat() {
 escape_waterfall_enemies_logic() {
   self.dontevershoot = 1;
 
-  if(common_scripts\utility::cointoss())
+  if(common_scripts\utility::cointoss()) {
     maps\_utility::enable_cqbwalk();
+  }
 }
 
 spawn_vehicles_throttled(var_0, var_1) {
@@ -1462,8 +1510,9 @@ spawn_vehicles_throttled(var_0, var_1) {
     if(!isDefined(var_6.code_classname) || var_6.code_classname != "script_vehicle") {
       continue;
     }
-    if(isspawner(var_6))
+    if(isspawner(var_6)) {
       var_2[var_2.size] = maps\_vehicle_code::_vehicle_spawn(var_6);
+    }
 
     wait(var_1);
   }
@@ -1472,18 +1521,21 @@ spawn_vehicles_throttled(var_0, var_1) {
 }
 
 escape_socr_logic(var_0) {
-  if(self.script_noteworthy == "left")
+  if(self.script_noteworthy == "left") {
     var_1 = "tag_wheel_back_right";
-  else
+  }
+  else {
     var_1 = "tag_wheel_back_left";
+  }
 
   thread escape_socr_fx_loop("splash_large", "tag_splash_front", 0.1, 0.25);
   thread escape_socr_fx_loop("splash_small", "tag_splash_back", 0.1, 0.25);
   wait 2;
 
   if(common_scripts\utility::flag("choppers_saw_player")) {
-    foreach(var_4, var_3 in self.mgturret)
+    foreach(var_4, var_3 in self.mgturret) {
     var_3 thread escape_socr_turret_own_target(var_0);
+    }
   }
 
   wait 2;
@@ -1510,25 +1562,30 @@ escape_socr_fx_loop(var_0, var_1, var_2, var_3) {
 #using_animtree("generic_human");
 
 escape_temp_ai_slide(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     common_scripts\utility::flag_wait(var_0);
+  }
 
   var_2 = undefined;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_2 = "jungle_ghost_ai_slide1";
-  else
+  }
+  else {
     var_2 = "jungle_ghost_ai_slide2";
+  }
 
   var_3 = common_scripts\utility::getstruct("ai_slide_anim_ent", "targetname");
   maps\_utility::disable_ai_color();
   maps\_utility::set_forcegoal();
 
   if(isDefined(self.animname)) {
-    if(var_2 == "jungle_ghost_ai_slide1")
+    if(var_2 == "jungle_ghost_ai_slide1") {
       level.scr_anim[self.animname]["jungle_ghost_ai_slide1"] = % jungle_ghost_ai_slide_guy1;
-    else
+    }
+    else {
       level.scr_anim[self.animname]["jungle_ghost_ai_slide2"] = % jungle_ghost_ai_slide_guy2;
+    }
   } else
     self.animname = "generic";
 
@@ -1588,16 +1645,19 @@ escape_dest_tree_logic() {
   foreach(var_4 in var_0) {
     var_4.is_small = 0;
 
-    if(var_4.script_noteworthy == "dest_top_goal")
+    if(var_4.script_noteworthy == "dest_top_goal") {
       var_2 = var_4.angles;
+    }
 
-    if(var_4.model == "ctl_foliage_tree_pine_tall_b_broken_top")
+    if(var_4.model == "ctl_foliage_tree_pine_tall_b_broken_top") {
       var_4.is_small = 1;
+    }
 
     if(var_4.script_noteworthy == "dest_top") {
       foreach(var_6 in var_0) {
-        if(var_6.script_noteworthy == "dest_kill_trig")
+        if(var_6.script_noteworthy == "dest_kill_trig") {
           var_4.kill_trig = var_6;
+        }
       }
     }
   }
@@ -1676,8 +1736,9 @@ escape_dest_tree_parts_logic(var_0) {
       var_16.origin = var_16.origin + (0, 0, 375);
       var_16 linkto(self);
 
-      if(!self.is_small)
+      if(!self.is_small) {
         self.kill_trig thread falling_tree_player_detection(var_10, self.clip_brush);
+      }
 
       thread maps\_utility::play_sound_on_entity(var_14);
       var_16 thread play_impact_sound(var_15);
@@ -1686,8 +1747,9 @@ escape_dest_tree_parts_logic(var_0) {
       wait(var_10 * 0.05);
       thread after_fall_bounce();
 
-      if(var_13)
+      if(var_13) {
         earthquake(0.7, 0.6, var_11, 1000);
+      }
 
       break;
     case "dest_top_goal":
@@ -1771,8 +1833,9 @@ escape_fake_underwater_bullets() {
     var_7 = anglestoup(var_6);
     playFX(common_scripts\utility::getfx("underwater_bullet"), var_5, var_4, var_7);
 
-    if(common_scripts\utility::cointoss())
+    if(common_scripts\utility::cointoss()) {
       thread common_scripts\utility::play_sound_in_space("bullet_large_water", var_5);
+    }
 
     level.player thread maps\_utility::play_sound_on_entity(common_scripts\utility::random(var_1));
     wait(randomfloatrange(0.1, 0.35));

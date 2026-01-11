@@ -51,10 +51,12 @@ lightning_vision() {
 }
 
 camo_vision_set_naked(str_vision, n_time) {
-  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on"))
+  if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on")) {
     self.str_old_vision = str_vision;
-  else
+  }
+  else {
     self visionsetnaked(str_vision, n_time);
+  }
 }
 
 intro_dof_look_down(m_player_body) {

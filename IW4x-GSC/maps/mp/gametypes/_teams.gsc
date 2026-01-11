@@ -151,8 +151,9 @@ updatePlayerTimes() {
   level endon("game_ended");
 
   for(;;) {
-    foreach(player in level.players)
+    foreach(player in level.players) {
     player updatePlayedTime();
+    }
 
     wait(1.0);
   }
@@ -198,8 +199,9 @@ updateTeamTime() {
 updateTeamBalanceDvar() {
   for(;;) {
     teambalance = getdvarInt("scr_teambalance");
-    if(level.teambalance != teambalance)
+    if(level.teambalance != teambalance) {
       level.teambalance = getdvarInt("scr_teambalance");
+    }
 
     wait 1;
   }
@@ -213,8 +215,9 @@ updateTeamBalance() {
   wait .15;
 
   if(level.teamBalance && isRoundBased()) {
-    if(isDefined(game["BalanceTeamsNextRound"]))
+    if(isDefined(game["BalanceTeamsNextRound"])) {
       iPrintLnbold(&"MP_AUTOBALANCE_NEXT_ROUND");
+    }
 
     level waittill("restarting");
 
@@ -232,8 +235,9 @@ updateTeamBalance() {
           iPrintLnBold(&"MP_AUTOBALANCE_SECONDS", 15);
           wait 15.0;
 
-          if(!getTeamBalance())
+          if(!getTeamBalance()) {
             level balanceTeams();
+          }
         }
 
         wait 59.0;
@@ -251,16 +255,20 @@ getTeamBalance() {
 
   players = level.players;
   for(i = 0; i < players.size; i++) {
-    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies"))
+    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       level.team["allies"]++;
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis"))
+    }
+    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       level.team["axis"]++;
+    }
   }
 
-  if((level.team["allies"] > (level.team["axis"] + level.teamBalance)) || (level.team["axis"] > (level.team["allies"] + level.teamBalance)))
+  if((level.team["allies"] > (level.team["axis"] + level.teamBalance)) || (level.team["axis"] > (level.team["allies"] + level.teamBalance))) {
     return false;
-  else
+  }
+  else {
     return true;
+  }
 }
 
 balanceTeams() {
@@ -274,10 +282,12 @@ balanceTeams() {
     if(!isDefined(players[i].pers["teamTime"])) {
       continue;
     }
-    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies"))
+    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       AlliedPlayers[AlliedPlayers.size] = players[i];
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis"))
+    }
+    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       AxisPlayers[AxisPlayers.size] = players[i];
+    }
   }
 
   MostRecent = undefined;
@@ -288,10 +298,12 @@ balanceTeams() {
         if(isDefined(AlliedPlayers[j].dont_auto_balance)) {
           continue;
         }
-        if(!isDefined(MostRecent))
+        if(!isDefined(MostRecent)) {
           MostRecent = AlliedPlayers[j];
-        else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"])
+        }
+        else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
           MostRecent = AlliedPlayers[j];
+        }
       }
 
       MostRecent[[level.axis]]();
@@ -300,10 +312,12 @@ balanceTeams() {
         if(isDefined(AxisPlayers[j].dont_auto_balance)) {
           continue;
         }
-        if(!isDefined(MostRecent))
+        if(!isDefined(MostRecent)) {
           MostRecent = AxisPlayers[j];
-        else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"])
+        }
+        else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
           MostRecent = AxisPlayers[j];
+        }
       }
 
       MostRecent[[level.allies]]();
@@ -315,10 +329,12 @@ balanceTeams() {
 
     players = level.players;
     for(i = 0; i < players.size; i++) {
-      if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies"))
+      if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
         AlliedPlayers[AlliedPlayers.size] = players[i];
-      else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis"))
+      }
+      else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
         AxisPlayers[AxisPlayers.size] = players[i];
+      }
     }
   }
 }
@@ -811,18 +827,22 @@ playerModelForWeapon(weapon, secondary) {
       break;
     case "weapon_assault":
       weaponClass = tablelookup("mp/statstable.csv", 4, secondary, 2);
-      if(weaponClass == "weapon_shotgun")
+      if(weaponClass == "weapon_shotgun") {
         [[game[team + "_model"]["SHOTGUN"]]]();
-      else
+      }
+      else {
         [
+      }
           [game[team + "_model"]["ASSAULT"]]
         ]();
       break;
     case "weapon_sniper":
-      if(level.environment != "" && self isItemUnlocked("ghillie_" + level.environment))
+      if(level.environment != "" && self isItemUnlocked("ghillie_" + level.environment)) {
         [[game[team + "_model"]["GHILLIE"]]]();
-      else
+      }
+      else {
         [
+      }
           [game[team + "_model"]["SNIPER"]]
         ]();
       break;
@@ -852,10 +872,12 @@ CountPlayers() {
     if(players[i] == self) {
       continue;
     }
-    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies"))
+    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       allies++;
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis"))
+    }
+    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       axis++;
+    }
   }
   players["allies"] = allies;
   players["axis"] = axis;
@@ -910,11 +932,13 @@ updateFreePlayerTimes() {
   nextToUpdate = 0;
   for(;;) {
     nextToUpdate++;
-    if(nextToUpdate >= level.players.size)
+    if(nextToUpdate >= level.players.size) {
       nextToUpdate = 0;
+    }
 
-    if(isDefined(level.players[nextToUpdate]))
+    if(isDefined(level.players[nextToUpdate])) {
       level.players[nextToUpdate] updateFreePlayedTime();
+    }
 
     wait(1.0);
   }
@@ -954,14 +978,17 @@ getJoinTeamPermissions(team) {
   for(i = 0; i < players.size; i++) {
     player = players[i];
 
-    if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
+    if((isDefined(player.pers["team"])) && (player.pers["team"] == team)) {
       teamcount++;
+    }
   }
 
-  if(teamCount < level.teamLimit)
+  if(teamCount < level.teamLimit) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 onPlayerSpawned() {

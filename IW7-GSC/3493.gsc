@@ -49,8 +49,9 @@ init() {
 func_128EA(var_00) {
   var_01 = [];
 
-  if(isDefined(self.func_9382))
+  if(isDefined(self.func_9382)) {
     var_01 = self.func_9382;
+  }
 
   var_02 = setwaitspeed("ims", var_00);
 
@@ -58,16 +59,19 @@ func_128EA(var_00) {
     var_02 = 0;
 
     if(isDefined(self.func_9382)) {
-      if(!var_1.size && self.func_9382.size)
+      if(!var_1.size && self.func_9382.size) {
         var_02 = 1;
+      }
 
-      if(var_1.size && var_1[0] != self.func_9382[0])
+      if(var_1.size && var_1[0] != self.func_9382[0]) {
         var_02 = 1;
+      }
     }
   }
 
-  if(var_02)
+  if(var_02) {
     scripts\mp\matchdata::logkillstreakevent(var_0.streakname, self.origin);
+  }
 
   self.iscarrying = 0;
   return var_02;
@@ -211,8 +215,9 @@ func_9363() {
   self.bombsquadmodel = var_00;
   self waittill("death");
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 delete();
+  }
 }
 
 func_936D(var_00) {
@@ -226,16 +231,19 @@ func_9366() {
 }
 
 func_936C(var_00, var_01, var_02, var_03, var_04) {
-  if(self.hidden || var_01 == "ims_projectile_mp")
+  if(self.hidden || var_01 == "ims_projectile_mp") {
     return -1;
+  }
 
   var_05 = var_03;
 
-  if(var_02 == "MOD_MELEE")
+  if(var_02 == "MOD_MELEE") {
     var_05 = self.maxhealth * 0.25;
+  }
 
-  if(isexplosivedamagemod(var_02))
+  if(isexplosivedamagemod(var_02)) {
     var_05 = var_03 * 1.5;
+  }
 
   var_05 = scripts\mp\damage::handlemissiledamage(var_01, var_02, var_05);
   var_05 = scripts\mp\damage::handleapdamage(var_01, var_02, var_05);
@@ -245,8 +253,9 @@ func_936C(var_00, var_01, var_02, var_03, var_04) {
 func_9368(var_00, var_01, var_02, var_03) {
   var_04 = scripts\mp\damage::onkillstreakkilled("ims", var_00, var_01, var_02, var_03, "destroyed_ims", "ims_destroyed");
 
-  if(var_04)
+  if(var_04) {
     var_00 notify("destroyed_equipment");
+  }
 }
 
 func_9367() {
@@ -278,11 +287,13 @@ func_9367() {
     self notify("deleting");
   }
 
-  if(isDefined(self.objidfriendly))
+  if(isDefined(self.objidfriendly)) {
     scripts\mp\objidpoolmanager::returnminimapid(self.objidfriendly);
+  }
 
-  if(isDefined(self.func_C2BA))
+  if(isDefined(self.func_C2BA)) {
     scripts\mp\objidpoolmanager::returnminimapid(self.func_C2BA);
+  }
 
   scripts\mp\weapons::equipmentdeletevfx();
   self _meth_80D4();
@@ -326,8 +337,9 @@ func_9369() {
     func_9378();
     func_936A();
 
-    if(isDefined(self getlinkedparent()))
+    if(isDefined(self getlinkedparent())) {
       self unlink();
+    }
 
     var_00 func_F684(var_01, 0);
   }
@@ -337,13 +349,15 @@ func_9379() {
   self endon("death");
   level endon("game_ended");
 
-  if(isDefined(self.carriedby))
+  if(isDefined(self.carriedby)) {
     self.carriedby getrigindexfromarchetyperef();
+  }
 
   self.carriedby = undefined;
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.firstplacement = undefined;
   var_00 = undefined;
@@ -375,8 +389,9 @@ func_9379() {
   var_00 thread func_9375();
   var_01 = spawnStruct();
 
-  if(isDefined(self.moving_platform))
+  if(isDefined(self.moving_platform)) {
     var_1.linkparent = self.moving_platform;
+  }
 
   var_1.endonstring = "carried";
   var_1.deathoverridecallback = ::func_936D;
@@ -394,14 +409,16 @@ ims_setcancelled(var_00) {
 
     if(isDefined(var_1.func_9382)) {
       foreach(var_03 in var_1.func_9382) {
-        if(isDefined(var_3.bombsquadmodel))
+        if(isDefined(var_3.bombsquadmodel)) {
           var_3.bombsquadmodel delete();
+        }
       }
     }
   }
 
-  if(isDefined(var_00) && var_00)
+  if(isDefined(var_00) && var_00) {
     scripts\mp\weapons::equipmentdeletevfx();
+  }
 
   self delete();
 }
@@ -426,8 +443,9 @@ func_9377(var_00) {
     self.func_935F.carriedby = var_00;
     self.func_935F.isplaced = 0;
 
-    if(isDefined(self.func_935F.bombsquadmodel))
+    if(isDefined(self.func_935F.bombsquadmodel)) {
       self.func_935F.bombsquadmodel hide();
+    }
   }
 }
 
@@ -447,10 +465,12 @@ func_12EB0(var_00) {
     var_0.angles = var_3["angles"];
     var_0.canbeplaced = self isonground() && var_3["result"] && abs(var_0.origin[2] - self.origin[2]) < var_2.placementheighttolerance;
 
-    if(isDefined(var_3["entity"]))
+    if(isDefined(var_3["entity"])) {
       var_0.moving_platform = var_3["entity"];
-    else
+    }
+    else {
       var_0.moving_platform = undefined;
+    }
 
     if(var_0.canbeplaced != var_01) {
       if(var_0.canbeplaced) {
@@ -473,10 +493,12 @@ func_936E(var_00) {
   var_00 endon("disconnect");
   var_00 waittill("death");
 
-  if(self.canbeplaced && var_0.team != "spectator")
+  if(self.canbeplaced && var_0.team != "spectator") {
     thread func_9379();
-  else
+  }
+  else {
     ims_setcancelled();
+  }
 }
 
 func_936F(var_00) {
@@ -491,8 +513,9 @@ func_9370(var_00) {
   self endon("death");
 
   for(;;) {
-    if(isDefined(self.carriedby.onhelisniper) && self.carriedby.onhelisniper)
+    if(isDefined(self.carriedby.onhelisniper) && self.carriedby.onhelisniper) {
       self notify("death");
+    }
 
     wait 0.1;
   }
@@ -511,10 +534,12 @@ func_9375() {
   var_00 = self.owner;
   var_00 getrigindexfromarchetyperef();
 
-  if(level.teambased)
+  if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 60));
-  else
+  }
+  else {
     scripts\mp\entityheadicons::setplayerheadicon(var_00, (0, 0, 60));
+  }
 
   self makeusable();
   self setCanDamage(1);
@@ -551,10 +576,12 @@ func_9375() {
   self.func_A637 = [];
 
   for(var_10 = 0; var_10 < self.config.func_C228; var_10++) {
-    if(func_C229())
+    if(func_C229()) {
       var_11 = func_FCA8(var_10 + 1, self.config.func_C228 - 4);
-    else
+    }
+    else {
       var_11 = var_10 + 1;
+    }
 
     var_12 = self gettagorigin(self.config.func_6A09 + var_11 + "_attach");
     var_13 = self gettagorigin(self.config.func_6A09 + var_11 + "_attach") + var_07;
@@ -570,8 +597,9 @@ func_9375() {
   var_15 = var_9[0];
 
   for(var_10 = 0; var_10 < var_9.size; var_10++) {
-    if(var_9[var_10]["position"][2] < var_15["position"][2])
+    if(var_9[var_10]["position"][2] < var_15["position"][2]) {
       var_15 = var_9[var_10];
+    }
   }
 
   self.func_2514 = var_15["position"] - (0, 0, 20) - self.origin;
@@ -584,8 +612,9 @@ func_9375() {
   func_937B();
   thread func_937D();
 
-  foreach(var_05 in level.players)
+  foreach(var_05 in level.players) {
   thread func_9374(var_05);
+  }
 }
 
 func_937D() {
@@ -619,10 +648,12 @@ func_9372() {
   level endon("game_ended");
   self.owner waittill("killstreak_disowned");
 
-  if(isDefined(self.isplaced))
+  if(isDefined(self.isplaced)) {
     self notify("death");
-  else
+  }
+  else {
     ims_setcancelled(0);
+  }
 }
 
 func_937B() {
@@ -633,21 +664,26 @@ func_937B() {
 func_9378() {
   self makeunusable();
 
-  if(level.teambased)
+  if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
-  else if(isDefined(self.owner))
+  }
+  else if(isDefined(self.owner)) {
     scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
+  }
 
-  if(isDefined(self.func_2536))
+  if(isDefined(self.func_2536)) {
     self.func_2536 delete();
+  }
 
   if(isDefined(self.func_A637)) {
     foreach(var_01 in self.func_A637) {
       if(isDefined(var_01)) {
-        if(isDefined(self.owner) && isDefined(self.owner.func_9381) && var_01 == self.owner.func_9381)
+        if(isDefined(self.owner) && isDefined(self.owner.func_9381) && var_01 == self.owner.func_9381) {
           continue;
-        else
+        }
+        else {
           var_01 delete();
+        }
       }
     }
   }
@@ -661,8 +697,9 @@ func_9378() {
 }
 
 isfriendlytoims(var_00) {
-  if(level.teambased && self.team == var_0.team)
+  if(level.teambased && self.team == var_0.team) {
     return 1;
+  }
 
   return 0;
 }
@@ -685,14 +722,16 @@ func_9362() {
       if(level.teambased && var_0.pers["team"] == self.team) {
         continue;
       }
-      if(!scripts\mp\utility\game::isreallyalive(var_00))
+      if(!scripts\mp\utility\game::isreallyalive(var_00)) {
         continue;
+      }
     } else if(isDefined(var_0.owner)) {
       if(isDefined(self.owner) && var_0.owner == self.owner) {
         continue;
       }
-      if(level.teambased && var_0.owner.pers["team"] == self.team)
+      if(level.teambased && var_0.owner.pers["team"] == self.team) {
         continue;
+      }
     }
 
     var_01 = var_0.origin + (0, 0, 50);
@@ -746,8 +785,9 @@ func_9362() {
 }
 
 func_6D2C(var_00, var_01) {
-  if(func_C229())
+  if(func_C229()) {
     var_01 = func_FCA8(var_01, self.config.func_C228 - 4);
+  }
 
   var_02 = self.func_69F6;
   self.func_69F6 = undefined;
@@ -764,13 +804,15 @@ func_6D2C(var_00, var_01) {
     var_06 = var_2.killcament;
     var_06 unlink();
 
-    if(isDefined(self.owner))
+    if(isDefined(self.owner)) {
       self.owner.func_9381 = var_06;
+    }
 
     var_06 moveto(self.func_2514 + self.origin + self.config.killcamoffset, self.func_2528, self.func_2528 * 0.25, self.func_2528 * 0.25);
 
-    if(!func_C229())
+    if(!func_C229()) {
       var_06 thread deleteaftertime(5.0);
+    }
   }
 
   var_02 playSound("ims_launch");
@@ -796,8 +838,9 @@ deleteaftertime(var_00) {
   self endon("death");
   level scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 func_937C() {
@@ -809,8 +852,9 @@ func_937C() {
     wait 1.0;
     scripts\mp\hostmigration::waittillhostmigrationdone();
 
-    if(!isDefined(self.carriedby))
+    if(!isDefined(self.carriedby)) {
       var_00 = max(0, var_00 - 1.0);
+    }
   }
 
   self notify("death");
@@ -850,8 +894,9 @@ func_937F() {
   for(var_00 = 1; var_00 <= self.config.func_C228 && isDefined(self.func_8BF0[var_00]); var_0++) {}
 
   if(var_00 <= self.config.func_C228) {
-    if(func_C229())
+    if(func_C229()) {
       var_00 = func_FCA8(var_00, self.config.func_C228 - 4);
+    }
 
     var_01 = func_937E(var_00);
     var_01 linkto(self);
@@ -863,10 +908,12 @@ func_9384(var_00, var_01, var_02) {
   var_03 = var_1.func_AC49 + var_00 + "_attach";
   var_04 = undefined;
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_04 = var_1.func_AC48[var_00];
-  else
+  }
+  else {
     var_04 = var_1.func_AC47[var_00];
+  }
 
   self scriptmodelplayanim(var_04);
   var_05 = var_1.func_6A09 + var_00 + "_attach";
@@ -877,8 +924,9 @@ func_9383(var_00, var_01) {
   var_02 = self.func_8BF0.size;
 
   if(var_02 > 0) {
-    if(func_C229())
+    if(func_C229()) {
       var_02 = func_FCA8(var_02, self.config.func_C228 - 4);
+    }
 
     var_00 func_9384(var_02, self.config, var_01);
   }

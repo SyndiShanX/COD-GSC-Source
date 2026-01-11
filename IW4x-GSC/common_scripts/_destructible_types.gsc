@@ -8,8 +8,9 @@
 
 makeType(destructibleType) {
   infoIndex = getInfoIndex(destructibleType);
-  if(infoIndex >= 0)
+  if(infoIndex >= 0) {
     return infoIndex;
+  }
 
   switch (destructibleType) {
     case "toy_glass120x110":
@@ -475,14 +476,17 @@ makeType(destructibleType) {
 }
 
 getInfoIndex(destructibleType) {
-  if(!isDefined(level.destructible_type))
+  if(!isDefined(level.destructible_type)) {
     return -1;
-  if(level.destructible_type.size == 0)
+  }
+  if(level.destructible_type.size == 0) {
     return -1;
+  }
 
   for(i = 0; i < level.destructible_type.size; i++) {
-    if(destructibleType == level.destructible_type[i].v["type"])
+    if(destructibleType == level.destructible_type[i].v["type"]) {
       return i;
+    }
   }
 
   return -1;

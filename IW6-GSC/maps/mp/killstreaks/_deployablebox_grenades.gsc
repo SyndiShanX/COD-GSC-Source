@@ -77,8 +77,9 @@ refillExplosiveWeapons() {
     }
   }
 
-  if(self _hasPerk("specialty_tacticalinsertion") && self getAmmoCount("flare_mp") < 1)
+  if(self _hasPerk("specialty_tacticalinsertion") && self getAmmoCount("flare_mp") < 1) {
     self givePerkOffhand("specialty_tacticalinsertion", false);
+  }
 }
 
 canUseDeployable(boxEnt) {

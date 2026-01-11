@@ -83,10 +83,12 @@ onUseDeployable(boxEnt) {
   if(level.deployableGunBox_BonusInXUses == 0) {
     boxConfig = level.boxSettings[boxEnt.boxType];
 
-    if(isDefined(level.deployableBoxGiveWeaponFunc))
+    if(isDefined(level.deployableBoxGiveWeaponFunc)) {
       [[level.deployableBoxGiveWeaponFunc]](true);
-    else
+    }
+    else {
       giveGun(self, boxConfig.minigunWeapon);
+    }
 
     self maps\mp\gametypes\_missions::processChallenge("ch_guninabox");
 
@@ -206,8 +208,10 @@ canUseDeployable(boxEnt) {
   if(is_aliens() && isDefined(boxEnt) && boxEnt.owner == self && !isDefined(boxEnt.air_dropped)) {
     return false;
   }
-  if(!is_aliens())
+  if(!is_aliens()) {
     return (!self isJuggernaut());
-  else
+  }
+  else {
     return true;
+  }
 }

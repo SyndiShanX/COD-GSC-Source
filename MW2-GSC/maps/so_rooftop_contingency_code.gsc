@@ -607,8 +607,9 @@ so_debug_print(msg, delay) {
     message = ">>" + message;
   }
 
-  if(GetDvar("specialops_debug") == "1")
+  if(GetDvar("specialops_debug") == "1") {
     IPrintLn(message);
+  }
 }
 
 distance2d_squared(pos1, pos2) {

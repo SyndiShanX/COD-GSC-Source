@@ -7,14 +7,16 @@
 #include common_scripts\utility;
 
 processLobbyScoreboards() {
-  foreach(player in level.placement["all"])
+  foreach(player in level.placement["all"]) {
   player setPlayerScoreboardInfo();
+  }
 
   if(level.multiTeamBased) {
     buildScoreboardType("multiteam");
 
-    foreach(player in level.players)
+    foreach(player in level.players) {
     player setCommonPlayerData("round", "scoreboardType", "multiteam");
+    }
 
     setClientMatchData("alliesScore", -1);
     setClientMatchData("axisScore", -1);
@@ -40,12 +42,15 @@ processLobbyScoreboards() {
     setClientMatchData("alliesKills", kills);
     setClientMatchData("alliesDeaths", deaths);
 
-    if(alliesScore == axisScore)
+    if(alliesScore == axisScore) {
       winner = "tied";
-    else if(alliesScore > axisScore)
+    }
+    else if(alliesScore > axisScore) {
       winner = "allies";
-    else
+    }
+    else {
       winner = "axis";
+    }
 
     if(winner == "tied") {
       buildScoreboardType("allies");
@@ -56,22 +61,26 @@ processLobbyScoreboards() {
         if(!isDefined(player_pers_team)) {
           continue;
         }
-        if(player_pers_team == "spectator")
+        if(player_pers_team == "spectator") {
           player setCommonPlayerData("round", "scoreboardType", "allies");
-        else
+        }
+        else {
           player setCommonPlayerData("round", "scoreboardType", player_pers_team);
+        }
       }
     } else {
       buildScoreboardType(winner);
 
-      foreach(player in level.players)
+      foreach(player in level.players) {
       player setCommonPlayerData("round", "scoreboardType", winner);
+      }
     }
   } else {
     buildScoreboardType("neutral");
 
-    foreach(player in level.players)
+    foreach(player in level.players) {
     player setCommonPlayerData("round", "scoreboardType", "neutral");
+    }
 
     setClientMatchData("alliesScore", -1);
     setClientMatchData("axisScore", -1);
@@ -81,8 +90,9 @@ processLobbyScoreboards() {
   }
 
   foreach(player in level.players) {
-    if(!isAi(player) && (privateMatch() || MatchMakingGame()))
+    if(!isAi(player) && (privateMatch() || MatchMakingGame())) {
       player setCommonPlayerData("round", "squadMemberIndex", player.pers["activeSquadMember"]);
+    }
 
     player setCommonPlayerData("round", "totalXp", player.pers["summary"]["xp"]);
     player setCommonPlayerData("round", "scoreXp", player.pers["summary"]["score"]);

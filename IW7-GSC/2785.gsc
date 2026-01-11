@@ -15,8 +15,9 @@ init() {
 }
 
 getpassiveperk(var_00) {
-  if(var_00 <= 0)
+  if(var_00 <= 0) {
     return [];
+  }
 
   var_01 = level.func_D77E.passivestringref[var_00];
 
@@ -46,17 +47,20 @@ func_B030(var_00, var_01) {
 }
 
 func_D779(var_00, var_01) {
-  if(var_00 == "power_teleport" && isDefined(self.func_115FC) && self.func_115FC)
+  if(var_00 == "power_teleport" && isDefined(self.func_115FC) && self.func_115FC) {
     return 0;
+  }
 
   var_03 = self.powers[var_00];
 
-  if(!isDefined(var_03) || !isDefined(var_3.passives))
+  if(!isDefined(var_03) || !isDefined(var_3.passives)) {
     return 0;
+  }
 
   foreach(var_05 in var_3.passives) {
-    if(var_05 == var_01)
+    if(var_05 == var_01) {
       return 1;
+    }
   }
 
   return 0;
@@ -66,8 +70,9 @@ func_DF06(var_00, var_01) {
   var_02 = level.func_D77E;
 
   foreach(var_04 in var_01) {
-    if(!isDefined(var_2.func_D799[var_04]))
+    if(!isDefined(var_2.func_D799[var_04])) {
       var_2.func_D799[var_04] = [];
+    }
 
     var_2.func_D799[var_04][var_00] = 1;
   }
@@ -76,8 +81,9 @@ func_DF06(var_00, var_01) {
 func_DF04(var_00) {
   var_01 = level.func_D77E;
 
-  if(!isDefined(var_1.func_D799[var_00]))
+  if(!isDefined(var_1.func_D799[var_00])) {
     var_1.func_D799[var_00] = [];
+  }
 
   var_1.func_D799[var_00]["all"] = 1;
 }
@@ -85,18 +91,21 @@ func_DF04(var_00) {
 func_9ED5(var_00, var_01) {
   var_02 = level.func_D77E;
 
-  if(!isDefined(var_2.func_D799[var_01]))
+  if(!isDefined(var_2.func_D799[var_01])) {
     return 0;
+  }
 
-  if(scripts\mp\utility\game::istrue(var_2.func_D799[var_01]["all"]))
+  if(scripts\mp\utility\game::istrue(var_2.func_D799[var_01]["all"])) {
     return 1;
+  }
 
   return scripts\mp\utility\game::istrue(var_2.func_D799[var_01][var_00]);
 }
 
 func_B937(var_00) {
-  if(func_D779(var_00, "passive_decreased_cost"))
+  if(func_D779(var_00, "passive_decreased_cost")) {
     return 1.15;
+  }
 
   return 1.0;
 }
@@ -150,10 +159,12 @@ func_7FC7(var_00, var_01) {
   if(func_D779(var_00, "passive_increased_spread")) {
     switch (var_00) {
       default:
-        if(_isvector(var_01))
+        if(_isvector(var_01)) {
           return var_01 * float(1.15);
-        else
+        }
+        else {
           return float(var_01) * float(1.15);
+        }
     }
   }
 

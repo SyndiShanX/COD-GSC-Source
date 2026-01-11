@@ -42,11 +42,13 @@ func_B06A() {
   self endon("stop_javelin_locking_feedback");
 
   for(;;) {
-    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.func_10FAA) && self.func_10FAA == level.chopper.gunner)
+    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.func_10FAA) && self.func_10FAA == level.chopper.gunner) {
       level.ac130player playlocalsound("maaws_incoming_lp");
+    }
 
-    if(isDefined(level.ac130player) && isDefined(self.func_10FAA) && self.func_10FAA == level.ac130.planemodel)
+    if(isDefined(level.ac130player) && isDefined(self.func_10FAA) && self.func_10FAA == level.ac130.planemodel) {
       level.ac130player playlocalsound("maaws_incoming_lp");
+    }
 
     self playlocalsound("maaws_reticle_tracking");
     self playrumbleonentity("ac130_25mm_fire");
@@ -58,11 +60,13 @@ func_B069() {
   self endon("stop_javelin_locked_feedback");
 
   for(;;) {
-    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.func_10FAA) && self.func_10FAA == level.chopper.gunner)
+    if(isDefined(level.chopper) && isDefined(level.chopper.gunner) && isDefined(self.func_10FAA) && self.func_10FAA == level.chopper.gunner) {
       level.ac130player playlocalsound("maaws_incoming_lp");
+    }
 
-    if(isDefined(level.ac130player) && isDefined(self.func_10FAA) && self.func_10FAA == level.ac130.planemodel)
+    if(isDefined(level.ac130player) && isDefined(self.func_10FAA) && self.func_10FAA == level.ac130.planemodel) {
       level.ac130player playlocalsound("maaws_incoming_lp");
+    }
 
     self playlocalsound("maaws_reticle_locked");
     self playrumbleonentity("ac130_25mm_fire");
@@ -78,8 +82,9 @@ softsighttest(var_00) {
     return 1;
   }
 
-  if(self.func_10FA7 == 0)
+  if(self.func_10FA7 == 0) {
     self.func_10FA7 = gettime();
+  }
 
   var_02 = gettime() - self.func_10FA7;
 
@@ -117,8 +122,9 @@ func_10FAD() {
 
     self.func_10FAE = 1;
 
-    if(!isDefined(self.func_10FA9))
+    if(!isDefined(self.func_10FA9)) {
       self.func_10FA9 = 0;
+    }
 
     if(self.func_10FA9 == 0) {
       var_01 = scripts\mp\weapons::func_AF2B(0);
@@ -185,8 +191,9 @@ func_10FAD() {
       var_07 = gettime() - self.func_10FA6;
 
       if(scripts\mp\utility\game::_hasperk("specialty_fasterlockon")) {
-        if(var_07 < 375.0)
+        if(var_07 < 375.0) {
           continue;
+        }
       } else if(var_07 < 750) {
         continue;
       }
@@ -209,10 +216,12 @@ func_10FAD() {
       var_02 stingtargstruct_getinreticle();
       var_02 stingtargstruct_getinlos();
 
-      if(!softsighttest(var_02))
+      if(!softsighttest(var_02)) {
         continue;
-      else
+      }
+      else {
         stinger_finalizelock(var_02);
+      }
 
       if(!var_02 stingtargstruct_isinreticle()) {
         resetmissilelauncherlocking();
@@ -240,8 +249,9 @@ func_17D0(var_00) {
   }
   var_01 = var_00;
 
-  if(isDefined(var_0.owner) && !scripts\mp\utility\game::func_9EF0(var_00))
+  if(isDefined(var_0.owner) && !scripts\mp\utility\game::func_9EF0(var_00)) {
     var_01 = var_0.owner;
+  }
 
   var_01 setclientomnvar("ui_killstreak_missile_warn", 1);
 }
@@ -252,8 +262,9 @@ func_E12E(var_00) {
   }
   var_01 = var_00;
 
-  if(isDefined(var_0.owner) && !scripts\mp\utility\game::func_9EF0(var_00))
+  if(isDefined(var_0.owner) && !scripts\mp\utility\game::func_9EF0(var_00)) {
     var_01 = var_0.owner;
+  }
 
   var_01 setclientomnvar("ui_killstreak_missile_warn", 0);
 }
@@ -353,8 +364,9 @@ stingtargstruct_getinlos() {
   var_02 = [self.player, self.target];
   var_03 = self.target getlinkedchildren();
 
-  if(isDefined(var_03) && var_3.size > 0)
+  if(isDefined(var_03) && var_3.size > 0) {
     var_02 = scripts\engine\utility::array_combine(var_02, var_03);
+  }
 
   if(!self.useoldlosverification) {
     for(var_04 = 0; var_04 < self.inreticlesortedids.size; var_4++) {

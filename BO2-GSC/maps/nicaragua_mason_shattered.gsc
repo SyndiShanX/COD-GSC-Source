@@ -57,13 +57,15 @@ shattered_part_two() {
   level thread run_scene("mason_shattered_part2");
   a_ai_pdf = get_ai_group_ai("mason_finalpush_factionfight_pdf");
 
-  foreach(guy in a_ai_pdf)
+  foreach(guy in a_ai_pdf) {
   guy delete();
+  }
 
   a_ai_cartel = get_ai_group_ai("mason_finalpush_factionfight_cartel");
 
-  foreach(guy in a_ai_cartel)
+  foreach(guy in a_ai_cartel) {
   guy delete();
+  }
 
   scene_wait("mason_shattered_part2");
   level.player hide_hud();

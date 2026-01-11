@@ -17,8 +17,9 @@ init() {
   level.maxkillstreakforaward = 0;
 
   foreach(var_2, var_1 in level.hardpointitems) {
-    if(level.maxkillstreakforaward < var_1)
+    if(level.maxkillstreakforaward < var_1) {
       level.maxkillstreakforaward = var_1;
+    }
   }
 
   level.hardpointhints["radar_mp"] = &"MP_EARNED_RADAR";
@@ -39,11 +40,13 @@ init() {
   precachestring(&"MP_KILLSTREAK_N");
   precachelocationselector("map_artillery_selector");
 
-  if(!isDefined(level.airstrikefx))
+  if(!isDefined(level.airstrikefx)) {
     level.airstrikefx = loadfx("fx\explosions\clusterbomb_mp");
+  }
 
-  if(!isDefined(level.airstrike_close_sound))
+  if(!isDefined(level.airstrike_close_sound)) {
     level.airstrike_close_sound = "h1_ks_veh_mig29_close_loop";
+  }
 
   level.fx_airstrike_harrier_jet = loadfx("fx\fire\jet_afterburner_harrier");
   level.fx_airstrike_afterburner = loadfx("fx\fire\jet_afterburner");
@@ -62,8 +65,9 @@ init() {
   game["dialog"]["airstrike_mp"] = "airstrike";
   game["dialog"]["helicopter_mp"] = "helisupport";
 
-  if(getdvar("scr_heli_hardpoint_interval") != "")
+  if(getdvar("scr_heli_hardpoint_interval") != "") {
     level.helicopterinterval = getdvarfloat("scr_heli_hardpoint_interval");
+  }
   else {
     setdvar("scr_heli_hardpoint_interval", 180);
     level.helicopterinterval = 180;
@@ -112,16 +116,19 @@ onplayerconnect() {
   for(;;) {
     level waittill("connected", var_0);
 
-    if(!level.teambased)
+    if(!level.teambased) {
       level.activeuavs[var_0.guid] = 0;
+    }
   }
 }
 
 adduavmodel() {
-  if(level.teambased)
+  if(level.teambased) {
     level.uavmodels[self.team][level.uavmodels[self.team].size] = self;
-  else
+  }
+  else {
     level.uavmodels[self.owner.guid + "_" + gettime()] = self;
+  }
 }
 
 removeuavmodel() {
@@ -153,17 +160,21 @@ removeuavmodel() {
 addactiveuav() {
   self.uavtype = "standard";
 
-  if(level.teambased)
+  if(level.teambased) {
     level.activeuavs[self.team]++;
-  else
+  }
+  else {
     level.activeuavs[self.owner.guid]++;
+  }
 }
 
 removeactiveuav() {
-  if(level.teambased)
+  if(level.teambased) {
     level.activeuavs[self.team]--;
-  else if(isDefined(self.owner))
+  }
+  else if(isDefined(self.owner)) {
     level.activeuavs[self.owner.guid]--;
+  }
 }
 
 doartillery(var_0, var_1, var_2) {
@@ -172,8 +183,9 @@ doartillery(var_0, var_1, var_2) {
   var_4 = var_3["position"];
   var_5 = level.mapcenter[2] - var_4[2];
 
-  if(abs(var_5) > 2000)
+  if(abs(var_5) > 2000) {
     var_4 = (var_4[0], var_4[1], level.mapcenter[2]);
+  }
 
   var_6 = getbestplanedirection(var_4);
 
@@ -183,8 +195,9 @@ doartillery(var_0, var_1, var_2) {
     if(!level.hardcoremode) {
       for(var_8 = 0; var_8 < var_7.size; var_8++) {
         if(isalive(var_7[var_8]) && isDefined(var_7[var_8].pers["team"]) && var_7[var_8].pers["team"] == var_2) {
-          if(pointisinairstrikearea(var_7[var_8].origin, var_4, var_6))
+          if(pointisinairstrikearea(var_7[var_8].origin, var_4, var_6)) {
             var_7[var_8] iprintlnbold(&"MP_WAR_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION");
+          }
         }
       }
     }
@@ -196,16 +209,18 @@ doartillery(var_0, var_1, var_2) {
       var_10 = var_9.pers["team"];
 
       if(isDefined(var_10)) {
-        if(var_10 == var_2)
+        if(var_10 == var_2) {
           var_9 iprintln(&"MP_WAR_AIRSTRIKE_INBOUND", var_1);
+        }
       }
     }
   } else {
     var_1 maps\mp\_utility::leaderdialogonplayer("airstrike_inbound");
 
     if(!level.hardcoremode) {
-      if(pointisinairstrikearea(var_1.origin, var_4, var_6))
+      if(pointisinairstrikearea(var_1.origin, var_4, var_6)) {
         var_1 iprintlnbold(&"MP_WAR_AIRSTRIKE_INBOUND_NEAR_YOUR_POSITION");
+      }
     }
   }
 
@@ -262,11 +277,13 @@ getsingleairstrikedanger(var_0, var_1, var_2) {
   var_7 = var_6 + var_5 / level.artillerydangerovalscale;
   var_8 = lengthsquared(var_7);
 
-  if(var_8 > level.artillerydangermaxradius * level.artillerydangermaxradius)
+  if(var_8 > level.artillerydangermaxradius * level.artillerydangermaxradius) {
     return 0;
+  }
 
-  if(var_8 < level.artillerydangerminradius * level.artillerydangerminradius)
+  if(var_8 < level.artillerydangerminradius * level.artillerydangerminradius) {
     return 1;
+  }
 
   var_9 = sqrt(var_8);
   var_10 = (var_9 - level.artillerydangerminradius) / (level.artillerydangermaxradius - level.artillerydangerminradius);
@@ -295,8 +312,9 @@ losradiusdamage(var_0, var_1, var_2, var_3, var_4, var_5) {
         if(var_9) {
           var_8 = var_8 * 4;
 
-          if(var_8 > var_1)
+          if(var_8 > var_1) {
             continue;
+          }
         }
       }
     }
@@ -326,8 +344,9 @@ airstrikedamageentsthread() {
         var_0 maps\mp\gametypes\_weapons::damageent(var_0.einflictor, var_0.damageowner, var_0.damage, "MOD_PROJECTILE_SPLASH", "artillery_mp", var_0.pos, vectornormalize(var_0.damagecenter - var_0.pos));
         level.airstrikedamagedents[level.airstrikedamagedentsindex] = undefined;
 
-        if(var_0.isplayer)
+        if(var_0.isplayer) {
           wait 0.05;
+        }
       } else
         level.airstrikedamagedents[level.airstrikedamagedentsindex] = undefined;
     }
@@ -377,15 +396,17 @@ doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(var_13 == "allies") {
     var_14 = "h1_vehicle_av8b_harrier";
 
-    if(isDefined(level.airstrike_model_allies_override))
+    if(isDefined(level.airstrike_model_allies_override)) {
       var_14 = level.airstrike_model_allies_override;
+    }
 
     var_12 setModel(var_14);
   } else {
     var_14 = "h1_vehicle_mig29";
 
-    if(isDefined(level.airstrike_model_axis_override))
+    if(isDefined(level.airstrike_model_axis_override)) {
       var_14 = level.airstrike_model_axis_override;
+    }
 
     var_12 setModel(var_14);
   }
@@ -393,10 +414,12 @@ doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_12.angles = var_7;
   var_15 = anglesToForward(var_7);
 
-  if(isDefined(level.airstrike_plane_fx_func))
+  if(isDefined(level.airstrike_plane_fx_func)) {
     var_12 thread[[level.airstrike_plane_fx_func]](var_13);
-  else
+  }
+  else {
     var_12 thread playplanefx(var_13);
+  }
 
   var_12 moveto(var_11, var_6, 0, 0);
   thread callstrike_planesound(var_12, var_2);
@@ -501,8 +524,9 @@ playplanefx(var_0) {
 }
 
 getbestplanedirection(var_0) {
-  if(getdvarint("scr_airstrikebestangle") != 1)
+  if(getdvarint("scr_airstrikebestangle") != 1) {
     return randomfloat(360);
+  }
 
   var_1 = -25;
   var_2 = 15;
@@ -522,16 +546,19 @@ getbestplanedirection(var_0) {
       var_5 = var_12["fraction"];
       var_4 = var_8;
 
-      if(var_12["fraction"] >= 1)
+      if(var_12["fraction"] >= 1) {
         var_6[var_6.size] = var_8;
+      }
     }
 
-    if(var_7 % 3 == 0)
+    if(var_7 % 3 == 0) {
       wait 0.05;
+    }
   }
 
-  if(var_6.size > 0)
+  if(var_6.size > 0) {
     return var_6[randomint(var_6.size)];
+  }
 
   return var_4;
 }
@@ -543,8 +570,9 @@ callstrike(var_0, var_1, var_2) {
   var_6 = 850;
   var_7 = 7000;
 
-  if(isDefined(level.airstrikeheightscale))
+  if(isDefined(level.airstrikeheightscale)) {
     var_6 = var_6 * level.airstrikeheightscale;
+  }
 
   var_8 = var_1 + common_scripts\utility::vectorscale(anglesToForward(var_3), -1 * var_4);
   var_8 = var_8 + (0, 0, var_6);
@@ -571,20 +599,24 @@ callstrike(var_0, var_1, var_2) {
 targetisclose(var_0, var_1) {
   var_2 = targetisinfront(var_0, var_1);
 
-  if(var_2)
+  if(var_2) {
     var_3 = 1;
-  else
+  }
+  else {
     var_3 = -1;
+  }
 
   var_4 = common_scripts\utility::flat_origin(var_0.origin);
   var_5 = var_4 + common_scripts\utility::vectorscale(anglesToForward(common_scripts\utility::flat_angle(var_0.angles)), var_3 * 100000);
   var_6 = pointonsegmentnearesttopoint(var_4, var_5, var_1);
   var_7 = distance(var_4, var_6);
 
-  if(var_7 < 3000)
+  if(var_7 < 3000) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 targetisinfront(var_0, var_1) {
@@ -592,28 +624,33 @@ targetisinfront(var_0, var_1) {
   var_3 = vectornormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
-  if(var_4 > 0)
+  if(var_4 > 0) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 callstrike_planesound(var_0, var_1) {
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("h1_ks_veh_mig29_dist_loop");
 
-  while(!targetisclose(var_0, var_1))
+  while(!targetisclose(var_0, var_1)) {
     wait 0.05;
+  }
 
   var_0 notify("stop soundh1_ks_veh_mig29_dist_loop");
   var_0 thread common_scripts\utility::play_loop_sound_on_entity(level.airstrike_close_sound);
 
-  while(targetisinfront(var_0, var_1))
+  while(targetisinfront(var_0, var_1)) {
     wait 0.05;
+  }
 
   wait 0.5;
 
-  while(targetisclose(var_0, var_1))
+  while(targetisclose(var_0, var_1)) {
     wait 0.05;
+  }
 
   var_0 notify("stop sound" + level.airstrike_close_sound);
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("h1_ks_veh_mig29_dist_loop");
@@ -636,8 +673,9 @@ givehardpointitemforstreak() {
 }
 
 waittilldoneusingkillstreak() {
-  for(var_0 = self getcurrentprimaryweapon(); maps\mp\_utility::iskillstreakweapon(var_0) || maps\mp\_utility::is_true(self.selectinglocation); var_0 = self getcurrentprimaryweapon())
+  for(var_0 = self getcurrentprimaryweapon(); maps\mp\_utility::iskillstreakweapon(var_0) || maps\mp\_utility::is_true(self.selectinglocation); var_0 = self getcurrentprimaryweapon()) {
     waitframe();
+  }
 }
 
 givehardpoint(var_0, var_1) {
@@ -647,8 +685,9 @@ givehardpoint(var_0, var_1) {
   self endon("death");
   waittilldoneusingkillstreak();
 
-  if(givehardpointitem(var_0))
+  if(givehardpointitem(var_0)) {
     thread hardpointnotify(var_0, var_1);
+  }
 }
 
 hardpointnotify(var_0, var_1) {
@@ -657,11 +696,13 @@ hardpointnotify(var_0, var_1) {
 }
 
 killstreakearned(var_0) {
-  if(var_0 == "radar_mp")
+  if(var_0 == "radar_mp") {
     self.firstkillstreakearned = gettime();
+  }
   else if(isDefined(self.firstkillstreakearned) && var_0 == "helicopter_mp") {
-    if(gettime() - self.firstkillstreakearned < 20000)
+    if(gettime() - self.firstkillstreakearned < 20000) {
       thread maps\mp\gametypes\_missions::genericchallenge("wargasm");
+    }
   }
 }
 
@@ -669,38 +710,47 @@ removekillstreakweapons() {
   var_0 = self getweaponslistall();
 
   foreach(var_2 in var_0) {
-    if(maps\mp\_utility::iskillstreakweapon(var_2))
+    if(maps\mp\_utility::iskillstreakweapon(var_2)) {
       self takeweapon(var_2);
+    }
   }
 }
 
 givehardpointitem(var_0) {
-  if(level.gameended && level.gameendtime != gettime())
+  if(level.gameended && level.gameendtime != gettime()) {
     return 0;
+  }
 
-  if(!maps\mp\_utility::is_true(level.killstreaksenabled))
+  if(!maps\mp\_utility::is_true(level.killstreaksenabled)) {
     return 0;
+  }
 
-  if(getdvar("scr_game_hardpoints") != "" && getdvarint("scr_game_hardpoints") == 0)
+  if(getdvar("scr_game_hardpoints") != "" && getdvarint("scr_game_hardpoints") == 0) {
     return 0;
+  }
 
-  if(isDefined(self.selectinglocation))
+  if(isDefined(self.selectinglocation)) {
     return 0;
+  }
 
   var_1 = self getcurrentprimaryweapon();
 
-  if(maps\mp\_utility::iskillstreakweapon(var_1))
+  if(maps\mp\_utility::iskillstreakweapon(var_1)) {
     return 0;
+  }
 
-  if(!isDefined(level.hardpointitems[var_0]) || !level.hardpointitems[var_0])
+  if(!isDefined(level.hardpointitems[var_0]) || !level.hardpointitems[var_0]) {
     return 0;
+  }
 
-  if((!isDefined(level.heli_paths) || !level.heli_paths.size) && var_0 == "helicopter_mp")
+  if((!isDefined(level.heli_paths) || !level.heli_paths.size) && var_0 == "helicopter_mp") {
     return 0;
+  }
 
   if(isDefined(self.pers["hardPointItem"])) {
-    if(level.hardpointitems[var_0] < level.hardpointitems[self.pers["hardPointItem"]])
+    if(level.hardpointitems[var_0] < level.hardpointitems[self.pers["hardPointItem"]]) {
       return 0;
+    }
   }
 
   removekillstreakweapons();
@@ -714,8 +764,9 @@ givehardpointitem(var_0) {
 }
 
 giveownedhardpointitem() {
-  if(isDefined(self.pers["hardPointItem"]))
+  if(isDefined(self.pers["hardPointItem"])) {
     givehardpointitem(self.pers["hardPointItem"]);
+  }
 }
 
 hardpointitemwaiter() {
@@ -754,8 +805,9 @@ hardpointitemwaiter() {
       case "none":
         break;
       default:
-        if(!maps\mp\gametypes\_class::isperkequipment(var_1))
+        if(!maps\mp\gametypes\_class::isperkequipment(var_1)) {
           var_0 = var_1;
+        }
 
         break;
     }
@@ -768,8 +820,9 @@ playerwaitforweapontoanimate(var_0) {
     var_1 = common_scripts\utility::waittill_notify_or_timeout_return("weapon_change", 0.75);
     common_scripts\utility::_enableweaponswitch();
 
-    if(!isDefined(var_1) && !self isonladder() && !self isusingturret())
+    if(!isDefined(var_1) && !self isonladder() && !self isusingturret()) {
       return 0;
+    }
   }
 
   return 1;
@@ -797,14 +850,16 @@ triggerhardpoint(var_0) {
   if(level.killstreakrounddelay) {
     var_1 = 0;
 
-    if(isDefined(level.prematch_done_time))
+    if(isDefined(level.prematch_done_time)) {
       var_1 = (gettime() - level.prematch_done_time) / 1000;
+    }
 
     if(var_1 < level.killstreakrounddelay) {
       var_2 = int(level.killstreakrounddelay - var_1 + 0.5);
 
-      if(!var_2)
+      if(!var_2) {
         var_2 = 1;
+      }
 
       self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", var_2);
       return 0;
@@ -823,8 +878,9 @@ triggerhardpoint(var_0) {
 
     var_3 = selectairstrikelocation(var_0);
 
-    if(!isDefined(var_3) || !var_3)
+    if(!isDefined(var_3) || !var_3) {
       return 0;
+    }
   } else if(var_0 == "helicopter_mp") {
     if(isDefined(level.chopper)) {
       self iprintlnbold(level.hardpointhints[var_0 + "_not_available"]);
@@ -846,8 +902,9 @@ triggerhardpoint(var_0) {
         var_11 = var_10.pers["team"];
 
         if(isDefined(var_11)) {
-          if(var_11 == var_7)
+          if(var_11 == var_7) {
             var_10 iprintln(&"MP_HELICOPTER_INBOUND", self);
+          }
         }
       }
     } else {
@@ -879,8 +936,9 @@ uavacquiredprintandsound(var_0, var_1, var_2, var_3) {
           continue;
         }
 
-        if(var_8 == var_1)
+        if(var_8 == var_1) {
           var_7 iprintln(&"MP_WAR_RADAR_ACQUIRED_ENEMY", var_3);
+        }
       }
     }
 
@@ -899,8 +957,9 @@ uavacquiredprintandsound(var_0, var_1, var_2, var_3) {
           continue;
         }
 
-        if(var_8 == var_1)
+        if(var_8 == var_1) {
           var_7 iprintln(&"MP_WAR_RADAR_ACQUIRED_ENEMY", var_3);
+        }
       }
     }
   }
@@ -910,8 +969,9 @@ useradaritem() {
   var_0 = self.pers["team"];
   var_1 = "axis";
 
-  if(var_0 == "axis")
+  if(var_0 == "axis") {
     var_1 = "allies";
+  }
 
   if(level.teambased) {
     uavacquiredprintandsound(var_0, var_1, self, level.radarviewtime);
@@ -980,8 +1040,9 @@ setteamradarwrapper(var_0, var_1) {
   setteamradar(var_0, var_1);
   var_2 = 0;
 
-  if(var_1)
+  if(var_1) {
     var_2 = 1;
+  }
 
   level notify("radar_status_change", var_0);
 }
@@ -991,18 +1052,21 @@ waitforairstrikecancel() {
   self endon("disconnect");
   self waittill("stop_location_selection");
 
-  if(maps\mp\gametypes\_hostmigration::waittillhostmigrationdone() > 0)
+  if(maps\mp\gametypes\_hostmigration::waittillhostmigrationdone() > 0) {
     self switchtoweapon(common_scripts\utility::getlastweapon());
+  }
 }
 
 selectairstrikelocation(var_0) {
-  if(!isDefined(level.mapsize))
+  if(!isDefined(level.mapsize)) {
     level.mapsize = 1024;
+  }
 
   var_1 = level.mapsize / 6.46875;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     var_1 = var_1 * 1.5;
+  }
 
   maps\mp\_utility::_beginlocationselection(var_0, "map_artillery_selector", 0, var_1);
   thread waitforairstrikecancel();
@@ -1043,8 +1107,9 @@ killstreakhit(var_0, var_1, var_2) {
       if(maps\mp\_utility::iskillstreakweapon(var_1)) {
         return;
       }
-      if(!isDefined(var_0.lasthittime[var_1]))
+      if(!isDefined(var_0.lasthittime[var_1])) {
         var_0.lasthittime[var_1] = 0;
+      }
 
       if(var_0.lasthittime[var_1] == gettime()) {
         return;
@@ -1066,8 +1131,9 @@ killstreakhit(var_0, var_1, var_2) {
 
 playerhasuavactive() {
   if(level.teambased) {
-    if(level.activeuavs[self.team] > 0)
+    if(level.activeuavs[self.team] > 0) {
       return 1;
+    }
   } else if(level.activeuavs[self.guid] > 0)
     return 1;
 

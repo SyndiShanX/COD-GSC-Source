@@ -76,8 +76,9 @@ watch_allow_dynamic_events() {
 
 WARHAWK_MORTARS_WEIGHT = 85;
 warhawkCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;

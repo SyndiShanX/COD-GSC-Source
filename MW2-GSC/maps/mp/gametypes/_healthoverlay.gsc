@@ -48,8 +48,9 @@ showTempDamage() {
   setDevDvar("scr_damage_numfades", 5);
 
   for(;;) {
-    while(getDvarFloat("scr_damage_wait") <= 0)
+    while(getDvarFloat("scr_damage_wait") <= 0) {
       wait(1.0);
+    }
 
     wait(getDvarFloat("scr_damage_wait"));
 
@@ -113,16 +114,18 @@ playerHealthRegen() {
     ratio = self.health / self.maxHealth;
 
     if(ratio <= level.healthOverlayCutoff) {
-      if(!veryHurt)
+      if(!veryHurt) {
         hurtTime = curTime;
+      }
 
       veryHurt = true;
       self.atBrinkOfDeath = true;
     }
 
     if(self.health >= oldhealth) {
-      if(curTime - hurtTime < level.playerHealth_RegularRegenDelay)
+      if(curTime - hurtTime < level.playerHealth_RegularRegenDelay) {
         continue;
+      }
 
       if(level.healthRegenDisabled) {
         wait(3.0);
@@ -134,21 +137,24 @@ playerHealthRegen() {
 
       if(curTime - lastSoundTime_Recover > level.playerHealth_RegularRegenDelay) {
         lastSoundTime_Recover = curTime;
-        if(!level.gameEnded)
+        if(!level.gameEnded) {
           self playLocalSound("breathing_better");
+        }
       }
 
       if(veryHurt) {
         newHealth = ratio;
-        if(curTime > hurtTime + 3000)
+        if(curTime > hurtTime + 3000) {
           newHealth += regenRate;
+        }
       } else {
         newHealth = 1;
       }
 
       if(newHealth >= 1.0) {
-        if(veryHurt)
+        if(veryHurt) {
           self maps\mp\gametypes\_missions::healthRegenerated();
+        }
 
         self maps\mp\gametypes\_damage::resetAttackerList();
         newHealth = 1.0;
@@ -183,15 +189,18 @@ playerBreathingSound(healthcap) {
   for(;;) {
     wait(0.2);
 
-    if(self.health <= 0)
+    if(self.health <= 0) {
       return;
+    }
 
     // Player still has a lot of health so no breathing sound
-    if(self.health >= healthcap)
+    if(self.health >= healthcap) {
       continue;
+    }
 
-    if(level.healthRegenDisabled && gettime() > self.breathingStopTime)
+    if(level.healthRegenDisabled && gettime() > self.breathingStopTime) {
       continue;
+    }
 
     self playLocalSound("breathing_hurt");
 

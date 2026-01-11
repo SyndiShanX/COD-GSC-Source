@@ -32,8 +32,9 @@ init() {
   init_heli_sound_values("heli_guard", "turbine", 10, 0.9, 1, 30, 0.9, 1.05);
   init_heli_sound_values("heli_guard", "rotor", 10, 0.9, 1, 30, 0.9, 1.1);
 
-  if(getdvar(#"_id_21D60E03") == "")
+  if(getdvar(#"_id_21D60E03") == "") {
     setdvar("helisounds", "");
+  }
 
   level thread command_parser();
 }
@@ -41,18 +42,22 @@ init() {
 vehicle_is_firing_function(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   println("vehicle is firing : " + newval);
 
-  if(newval == 0)
+  if(newval == 0) {
     self.isfiring = 0;
-  else
+  }
+  else {
     self.isfiring = 1;
+  }
 }
 
 init_heli_sound_values(heli_type, part_type, max_speed_vol, min_vol, max_vol, max_speed_pitch, min_pitch, max_pitch) {
-  if(!isDefined(level.helisoundvalues[heli_type]))
+  if(!isDefined(level.helisoundvalues[heli_type])) {
     level.helisoundvalues[heli_type] = [];
+  }
 
-  if(!isDefined(level.helisoundvalues[heli_type][part_type]))
+  if(!isDefined(level.helisoundvalues[heli_type][part_type])) {
     level.helisoundvalues[heli_type][part_type] = spawnStruct();
+  }
 
   level.helisoundvalues[heli_type][part_type].speedvolumemax = max_speed_vol;
   level.helisoundvalues[heli_type][part_type].speedpitchmax = max_speed_pitch;
@@ -83,18 +88,22 @@ command_parser() {
       tokens = strtok(command, " ");
 
       if(!isDefined(tokens[0]) || !isDefined(level.helisoundvalues[tokens[0]])) {
-        if(isDefined(tokens[0]))
+        if(isDefined(tokens[0])) {
           println("helisounds Did not recognize helicopter type:" + tokens[0]);
-        else
+        }
+        else {
           println("helisounds Did not recognize helicopter type");
+        }
 
         println("helisounds usage: helisounds <heli name> <part name> <value name> <value>");
         success = 0;
       } else if(!isDefined(tokens[1])) {
-        if(isDefined(tokens[1]))
+        if(isDefined(tokens[1])) {
           println("helisounds Did not recognize helicopter part:" + tokens[0] + " for heli: " + tokens[1]);
-        else
+        }
+        else {
           println("helisounds Did not recognize helicopter part for heli: " + tokens[0]);
+        }
 
         println("helisounds usage: helisounds <heli name> <part name> <value name> <value>");
         success = 0;
@@ -200,10 +209,12 @@ init_heli_sounds_heli_guard() {
 }
 
 sound_linkto(parent, tag) {
-  if(isDefined(tag))
+  if(isDefined(tag)) {
     self linkto(parent, tag);
-  else
+  }
+  else {
     self linkto(parent, "tag_body");
+  }
 }
 
 setup_heli_sounds(bone_location, type, tag, run, dmg1, dmg2, dmg3) {
@@ -319,8 +330,9 @@ start_helicopter_sounds(localclientnum) {
     self init_terrain_sounds();
     self thread terrain_trace();
 
-    if(getdvarint(#"_id_55AD9BED") > 0)
+    if(getdvarint(#"_id_55AD9BED") > 0) {
       iprintlnbold("helicopter type: " + self.vehicletype + " vehicletype");
+    }
 
   } else {
     println("^6start_helicopter_sounds(): helicopter type not defined");
@@ -402,8 +414,9 @@ heli_idle_run_transition(heli_type, heli_part, wait_time, updown) {
   heli_bone = self.heli[heli_part];
   run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
 
-  if(!isDefined(wait_time))
+  if(!isDefined(wait_time)) {
     wait_time = 0.5;
+  }
 
   while(isDefined(self)) {
     if(!isDefined(level.helisoundvalues[heli_type]) || !isDefined(level.helisoundvalues[heli_type][heli_part])) {
@@ -424,8 +437,9 @@ heli_idle_run_transition(heli_type, heli_part, wait_time, updown) {
     run_pitch = scale_speed(self.idle_run_trans_speed, max_speed_pitch, min_pitch, max_pitch, self.cur_speed);
 
     if(isDefined(updown)) {
-      if(!isDefined(self.qrdrone_z_difference))
+      if(!isDefined(self.qrdrone_z_difference)) {
         self.qrdrone_z_difference = 0;
+      }
 
       run_volume_vertical = scale_speed(5, 50, 0, 1, abs(self.qrdrone_z_difference));
       run_volume = run_volume - run_volume_vertical;
@@ -489,14 +503,16 @@ terrain_trace_brass() {
     pre_trace_real_ent = self.terrain_brass_ent_array[pre_surf_type];
 
     if(!isDefined(trace["position"])) {
-      if(isDefined(pre_trace_real_ent))
+      if(isDefined(pre_trace_real_ent)) {
         pre_trace_real_ent stoploopsound(0.5);
+      }
 
       continue;
     }
 
-    if(!self.isfiring)
+    if(!self.isfiring) {
       pre_trace_real_ent stoploopsound(0.5);
+    }
 
     trace_real_ent.origin = trace["position"];
     pre_trace_real_ent.origin = trace["position"];
@@ -550,8 +566,9 @@ terrain_trace() {
     pre_trace_real_ent = self.terrain_ent_array[pre_surf_type];
 
     if(!isDefined(trace["position"])) {
-      if(isDefined(pre_trace_real_ent))
+      if(isDefined(pre_trace_real_ent)) {
         pre_trace_real_ent stoploopsound(0.5);
+      }
 
       continue;
     }
@@ -592,8 +609,9 @@ aircraft_dustkick(localclientnum) {
   trace_ent = self;
 
   while(isDefined(self)) {
-    if(repeatrate <= 0)
+    if(repeatrate <= 0) {
       repeatrate = defaultrepeatrate;
+    }
 
     if(!serverwait(localclientnum, repeatrate)) {
       continue;
@@ -630,28 +648,33 @@ aircraft_dustkick(localclientnum) {
       continue;
     }
 
-    if(!isDefined(trace["surfacetype"]))
+    if(!isDefined(trace["surfacetype"])) {
       trace["surfacetype"] = "dirt";
+    }
 
     if(!isDefined(self.treadfx[trace["surfacetype"]])) {
-      if(isDefined(self.vehicletype))
+      if(isDefined(self.vehicletype)) {
         println("SCRIPT PRINT: Unknown surface type " + trace["surfacetype"] + " for vehicle type " + self.vehicletype);
-      else
+      }
+      else {
         println("SCRIPT PRINT: Unknown surface type " + trace["surfacetype"] + " for vehicle of undefined vehicletype");
+      }
 
       return;
     }
 
-    if(isDefined(self.treadfx[trace["surfacetype"]]))
+    if(isDefined(self.treadfx[trace["surfacetype"]])) {
       playFX(localclientnum, self.treadfx[trace["surfacetype"]], trace["position"]);
+    }
   }
 }
 
 play_targeting_sound(play, sound, handle) {
   sound_ent = get_lock_sound_ent();
 
-  if(play)
+  if(play) {
     return sound_ent playLoopSound(sound);
+  }
   else if(isDefined(handle)) {
     sound_ent stoploopsound(0.1);
     return undefined;
@@ -673,18 +696,21 @@ play_fired_sound(play) {
 play_leaving_battlefield_alarm(play) {
   sound_ent = get_leaving_sound_ent();
 
-  if(play)
+  if(play) {
     self.leavingbattlefieldsound = sound_ent playLoopSound("veh_helicopter_alarm");
-  else if(isDefined(self.leavingbattlefieldsound) && self.leavingbattlefieldsound)
+  }
+  else if(isDefined(self.leavingbattlefieldsound) && self.leavingbattlefieldsound) {
     sound_ent stoploopsound(0.1);
+  }
 }
 
 get_heli_sound_ent(sound_ent) {
   if(!isDefined(sound_ent)) {
     tag = "tag_origin";
 
-    if(isDefined(self.warning_tag))
+    if(isDefined(self.warning_tag)) {
       tag = self.warning_tag;
+    }
 
     sound_ent = spawn(0, self gettagorigin(tag), "script_origin");
     sound_ent linkto(self, tag);

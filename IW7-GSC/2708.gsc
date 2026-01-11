@@ -14,8 +14,9 @@ init() {
 }
 
 canlogclient(var_00) {
-  if(isagent(var_00))
+  if(isagent(var_00)) {
     return 0;
+  }
 
   return var_0.clientid < level.maxlogclients;
 }
@@ -30,8 +31,10 @@ logplayerdeath(var_00) {
   if(!canlogclient(self) || !canlogdeath(var_01)) {
     return;
   }
-  if(isplayer(var_00) && canlogclient(var_00))
+  if(isplayer(var_00) && canlogclient(var_00)) {
     self getufolightcolor(var_01, self.clientid, var_00, var_0.clientid);
-  else
+  }
+  else {
     self getufolightcolor(var_01, self.clientid, undefined, undefined);
+  }
 }

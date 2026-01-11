@@ -29,8 +29,9 @@ main() {
     return;
   }
 
-  if(isplayer(self.enemy))
+  if(isplayer(self.enemy)) {
     self meleebiteattackplayer(self.enemy);
+  }
 }
 
 combatidle() {
@@ -57,10 +58,12 @@ meleebiteattackplayer(player) {
     self setanimstate("combat_attack_player_close_range");
     wait 0.35;
 
-    if(isplayer(self.enemy) && self.enemy getstance() == "prone")
+    if(isplayer(self.enemy) && self.enemy getstance() == "prone") {
       self meleewithoffset(vectorscale((0, 0, -1), 9.0));
-    else
+    }
+    else {
       self melee();
+    }
 
     self maps\mp\animscripts\shared::donotetracksfortime(1.2, "done");
     self animmode("gravity", 0);
@@ -77,8 +80,9 @@ meleebiteattackplayer(player) {
 }
 
 handlemeleebiteattacknotetracks(note, player) {
-  if(note == "dog_melee")
+  if(note == "dog_melee") {
     self melee(anglesToForward(self.angles));
+  }
 }
 
 use_low_attack() {
@@ -86,8 +90,9 @@ use_low_attack() {
     if(self.enemy getstance() == "prone") {
       attack_height = self.origin[2] + 16;
 
-      if(self.enemy.origin[2] < attack_height)
+      if(self.enemy.origin[2] < attack_height) {
         return true;
+      }
     }
   }
 

@@ -19,15 +19,19 @@ init() {
       surfacetype = surfacearray[surfacearrayindex];
 
       for(index = 0; index < 4; index++) {
-        if(index < 2)
+        if(index < 2) {
           firstperson = 0;
-        else
+        }
+        else {
           firstperson = 1;
+        }
 
-        if(index % 2 == 0)
+        if(index % 2 == 0) {
           islouder = 0;
-        else
+        }
+        else {
           islouder = 1;
+        }
 
         createsoundaliasslot(movementtype, surfacetype, firstperson, islouder);
         snd = buildandcachesoundalias(movementtype, surfacetype, firstperson, islouder);
@@ -43,8 +47,9 @@ checksurfacetypeiscorrect(movetype, surfacetype) {
     println("***Begin");
     arraykeys = getarraykeys(level.playerfootsounds[movetype]);
 
-    for(i = 0; i < arraykeys.size; i++)
+    for(i = 0; i < arraykeys.size; i++) {
       println(arraykeys[i]);
+    }
 
     println("***End");
   }
@@ -80,8 +85,9 @@ playerland(client_num, player, surfacetype, firstperson, quiet, damageplayer, is
   }
 
   if(damageplayer) {
-    if(isDefined(level.playerfalldamagesound))
+    if(isDefined(level.playerfalldamagesound)) {
       player[[level.playerfalldamagesound]](client_num, firstperson);
+    }
     else {
       sound_alias = "fly_land_damage_npc";
 
@@ -96,8 +102,9 @@ playerland(client_num, player, surfacetype, firstperson, quiet, damageplayer, is
 playerfoliage(client_num, player, firstperson, quiet) {
   sound_alias = "fly_movement_foliage_npc";
 
-  if(firstperson)
+  if(firstperson) {
     sound_alias = "fly_movement_foliage_plr";
+  }
 
   volume = clientscripts\mp\_audio::get_vol_from_speed(player);
   player playSound(client_num, sound_alias, player.origin, volume);
@@ -106,23 +113,28 @@ playerfoliage(client_num, player, firstperson, quiet) {
 createsoundaliasslot(movementtype, surfacetype, firstperson, islouder) {
   isprecached = 0;
 
-  if(!isDefined(level.playerfootsounds[movementtype]))
+  if(!isDefined(level.playerfootsounds[movementtype])) {
     level.playerfootsounds[movementtype] = [];
+  }
 
-  if(!isDefined(level.playerfootsounds[movementtype][surfacetype]))
+  if(!isDefined(level.playerfootsounds[movementtype][surfacetype])) {
     level.playerfootsounds[movementtype][surfacetype] = [];
+  }
 
-  if(!isDefined(level.playerfootsounds[movementtype][surfacetype][firstperson]))
+  if(!isDefined(level.playerfootsounds[movementtype][surfacetype][firstperson])) {
     level.playerfootsounds[movementtype][surfacetype][firstperson] = [];
+  }
 }
 
 buildandcachesoundalias(movementtype, surfacetype, firstperson, islouder) {
   sound_alias = "fly_" + movementtype;
 
-  if(firstperson)
+  if(firstperson) {
     sound_alias = sound_alias + "_plr_";
-  else
+  }
+  else {
     sound_alias = sound_alias + "_npc_";
+  }
 
   sound_alias = sound_alias + surfacetype;
   level.playerfootsounds[movementtype][surfacetype][firstperson][islouder] = sound_alias;
@@ -133,11 +145,13 @@ do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
   if(!isDefined(level._optionalstepeffects)) {
     return;
   }
-  if(on_fire)
+  if(on_fire) {
     ground_type = "fire";
+  }
 
-  if(getdvarint(#"_id_49A098B5"))
+  if(getdvarint(#"_id_49A098B5")) {
     print3d(foot_pos, ground_type, (0.5, 0.5, 0.8), 1, 3, 30);
+  }
 
   for(i = 0; i < level._optionalstepeffects.size; i++) {
     if(level._optionalstepeffects[i] == ground_type) {
@@ -154,8 +168,9 @@ do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
 missing_ai_footstep_callback() {
   type = self._aitype;
 
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = "unknown";
+  }
 
   println("*** Ai type : " + type + " has a client-script footstep script callback specified, but has no callback specified.Call _footsteps::RegisterAITypeFootstepCB(\"" + self._aitype + "\", ::yourcbfunc); in your level main .csc file.");
 }

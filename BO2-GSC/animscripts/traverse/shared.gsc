@@ -21,8 +21,9 @@ init_traverse() {
   } else {
     point = getstruct(self.target, "targetname");
 
-    if(isDefined(point))
+    if(isDefined(point)) {
       self.traverse_height = point.origin[2];
+    }
   }
 }
 
@@ -49,10 +50,12 @@ teleportthreadex(verticaloffset, delay, frames) {
   wait(delay);
   amount = verticaloffset / frames;
 
-  if(amount > 10.0)
+  if(amount > 10.0) {
     amount = 10.0;
-  else if(amount < -10.0)
+  }
+  else if(amount < -10.0) {
     amount = -10.0;
+  }
 
   offset = (0, 0, amount);
 
@@ -67,8 +70,9 @@ preparefortraverse() {
   self.a.pose = "stand";
   movement = "move";
 
-  if(isDefined(self.force_traversal_movement))
+  if(isDefined(self.force_traversal_movement)) {
     movement = self.force_traversal_movement;
+  }
 
   return movement;
 }
@@ -112,22 +116,26 @@ dotraverse(traversedata) {
   if(isDefined(traversedata["traverseRagdollDeath"])) {
     self.traverseragdolldeath = traversedata["traverseRagdollDeath"];
 
-    if(self.traverseragdolldeath)
+    if(self.traverseragdolldeath) {
       self traversestartragdolldeath();
+    }
   }
 
   self.traverseanimrate = 1.0;
 
-  if(isDefined(traversedata["traverseAnimRate"]))
+  if(isDefined(traversedata["traverseAnimRate"])) {
     self.traverseanimrate = traversedata["traverseAnimRate"];
+  }
 
   self traversemode("nogravity");
   self traversemode("noclip");
 
-  if(!isDefined(self.traversestance))
+  if(!isDefined(self.traversestance)) {
     self.desired_anim_pose = "stand";
-  else
+  }
+  else {
     self.desired_anim_pose = self.traversestance;
+  }
 
   animscripts\utility::updateanimpose();
   self.traversestartnode = self getnegotiationstartnode();
@@ -145,20 +153,23 @@ dotraverse(traversedata) {
     }
   }
 
-  if(isarray(self.traverseanim) && !self.traverseanimissequence)
+  if(isarray(self.traverseanim) && !self.traverseanimissequence) {
     self.traverseanim = random(self.traverseanim);
+  }
 
   if(tocover) {
-    if(isDefined(self.traversetocoversound))
+    if(isDefined(self.traversetocoversound)) {
       self thread play_sound_on_entity(self.traversetocoversound);
+    }
   } else if(isDefined(self.traversesound))
     self thread play_sound_on_entity(self.traversesound);
 
   self dotraverse_animation();
   self traversemode("gravity");
 
-  if(self.traverseragdolldeath)
+  if(self.traverseragdolldeath) {
     self traversestopragdolldeath();
+  }
 
   if(self.delayeddeath) {
     self animscripts\debug::debugpopstate("traverse", "delayedDeath");
@@ -172,11 +183,13 @@ dotraverse(traversedata) {
     self.a.movement = "stop";
     self teleport(self.node.origin);
   } else {
-    if(isDefined(self.traversemovement))
+    if(isDefined(self.traversemovement)) {
       self.a.movement = self.traversemovement;
+    }
 
-    if(self.a.movement != "stop")
+    if(self.a.movement != "stop") {
       self setanimknoballrestart(animscripts\run::getrunanim(), % body, 1, 0.2, 1);
+    }
   }
 
   self animscripts\debug::debugpopstate("traverse");
@@ -189,8 +202,9 @@ dotraverse_animation() {
   self.in_traversal = 1;
   traverseanim = self.traverseanim;
 
-  if(!isarray(traverseanim))
+  if(!isarray(traverseanim)) {
     traverseanim = add_to_array(undefined, traverseanim);
+  }
 
   self clearanim( % body, 0.2);
   played_trans_in = 0;
@@ -200,8 +214,9 @@ dotraverse_animation() {
     self thread domaintraverse_animationaiming(self.traverseanimtransin, "traverseAnim");
     self setflaggedanimknobrestart("traverseAnim", self.traverseanimtransin, 1, 0.2, self.traverseanimrate);
 
-    if(traverseanim.size || isDefined(self.traverseanimtransout))
+    if(traverseanim.size || isDefined(self.traverseanimtransout)) {
       self domaintraverse_notetracks("traverseAnim");
+    }
     else {
       self thread domaintraverse_notetracks("traverseAnim");
       wait_anim_length(self.traverseanimtransin, 0.2, self.traverseanimrate);
@@ -212,11 +227,13 @@ dotraverse_animation() {
   last = 1;
 
   for(i = 0; i < traverseanim.size; i++) {
-    if(played_trans_in || i > 0)
+    if(played_trans_in || i > 0) {
       first = 0;
+    }
 
-    if(i < traverseanim.size - 1)
+    if(i < traverseanim.size - 1) {
       last = 0;
+    }
 
     domaintraverse_animation(traverseanim[i], first, last);
   }
@@ -256,8 +273,9 @@ domaintraverse_animationaiming(animation, flag) {
   self endon("stop tracking");
 
   if(self.traverseallowaiming) {
-    if(animhasnotetrack(animation, "start_aim"))
+    if(animhasnotetrack(animation, "start_aim")) {
       self waittillmatch(flag, "start_aim");
+    }
 
     self.a.isaiming = 1;
     assert(isDefined(self.traverseaimanims));
@@ -287,13 +305,15 @@ domaintraverse_notetracks(flagname) {
 wait_anim_length(animation, blend, rate) {
   len = getanimlength(animation) / rate - blend;
 
-  if(len > 0)
+  if(len > 0) {
     wait(len);
+  }
 }
 
 handletraversenotetracks(note) {
-  if(note == "traverse_death")
+  if(note == "traverse_death") {
     return handletraversedeathnotetrack();
+  }
 }
 
 handletraversedeathnotetrack() {
@@ -327,8 +347,9 @@ donothingfunc() {
 traversedeath() {
   self notify("traverse_death");
 
-  if(!isDefined(self.triedtraverseragdoll))
+  if(!isDefined(self.triedtraverseragdoll)) {
     self animscripts\death::playdeathsound();
+  }
 
   deathanim = undefined;
 
@@ -337,10 +358,12 @@ traversedeath() {
     deathanim = deathanimarray[randomint(deathanimarray.size)];
   }
 
-  if(isDefined(deathanim))
+  if(isDefined(deathanim)) {
     animscripts\death::play_death_anim(deathanim);
-  else
+  }
+  else {
     traversestartragdolldeath();
+  }
 
   self dodamage(self.health + 5, self.origin);
 }
@@ -387,8 +410,9 @@ traverseragdolldeath(traverseanim) {
     currenttime = self getanimtime(traverseanim);
     scripteddeathtimes[scripteddeathtimes.size] = 1.0;
 
-    if(getdebugdvarint("scr_forcetraverseragdoll") == 1)
+    if(getdebugdvarint("scr_forcetraverseragdoll") == 1) {
       scripteddeathtimes = [];
+    }
 
     for(i = 0; i < scripteddeathtimes.size; i++) {
       if(scripteddeathtimes[i] > currenttime) {
@@ -419,8 +443,9 @@ posttraversedeathanim() {
   deathanim = animscripts\death::get_death_anim();
   self setflaggedanimknoballrestart("deathanim", deathanim, % body, 1, 0.1);
 
-  if(animhasnotetrack(deathanim, "death_neckgrab_spurt"))
+  if(animhasnotetrack(deathanim, "death_neckgrab_spurt")) {
     playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
+  }
 }
 
 #using_animtree("dog");

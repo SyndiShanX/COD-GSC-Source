@@ -7,8 +7,9 @@
 #include clientscripts\mp\zombies\_zm_utility;
 
 init() {
-  if(!is_true(level.disable_blackscreen_clientfield))
+  if(!is_true(level.disable_blackscreen_clientfield)) {
     registerclientfield("toplayer", "blackscreen", 1, 1, "int", ::blackscreen_cb, 0);
+  }
 
   machinelocal = machinelocalstorage();
   machinelocal.gumpname = [];
@@ -24,8 +25,9 @@ init() {
   machinelocal.gump_loading = 0;
   machinelocal.gump_loading_slot = [];
 
-  if(!isDefined(level.uses_gumps))
+  if(!isDefined(level.uses_gumps)) {
     level.uses_gumps = 0;
+  }
 }
 
 get_gump_info(localclientnum, test_ent, gump_trigs) {
@@ -42,12 +44,15 @@ get_gump_info(localclientnum, test_ent, gump_trigs) {
   } else {
     test_ent.origin = getcamposbylocalclientnum(localclientnum);
 
-    if(demoismoviecamera())
+    if(demoismoviecamera()) {
       self.view = level.gump_view_index_camera_movie;
-    else if(demoiseditcamera())
+    }
+    else if(demoiseditcamera()) {
       self.view = level.gump_view_index_camera_edit;
-    else if(demoisdollycamera())
+    }
+    else if(demoisdollycamera()) {
       self.view = level.gump_view_index_camera_dolly;
+    }
   }
 
   for(trig_index = 0; trig_index < gump_trigs.size; trig_index++) {
@@ -92,8 +97,9 @@ demo_monitor(gump_trigs) {
     if(prev_gump_info.gump != curr_gump_info.gump) {
       thread load_gump_for_player(localclientnum, curr_gump_info.gump);
 
-      if(prev_gump_info.view != curr_gump_info.view || level.gump_view_index_camera_intermission == curr_gump_info.view)
+      if(prev_gump_info.view != curr_gump_info.view || level.gump_view_index_camera_intermission == curr_gump_info.view) {
         sethidegumpalpha(localclientnum, spectatecolor);
+      }
     }
 
     prev_gump_info.gump = curr_gump_info.gump;
@@ -103,8 +109,9 @@ demo_monitor(gump_trigs) {
 }
 
 blackscreen_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(oldval != newval && newval)
+  if(oldval != newval && newval) {
     player_blackscreen(localclientnum, newval);
+  }
 }
 
 player_blackscreen(localclientnum, onoff) {
@@ -167,8 +174,9 @@ watch_spectation(gump_trigs) {
   }
   players = getlocalplayers();
 
-  for(i = 0; i < players.size; i++)
+  for(i = 0; i < players.size; i++) {
     players[i] thread watch_spectation_player(i, gump_trigs);
+  }
 }
 
 watch_spectation_player(lcn, gump_trigs) {
@@ -197,8 +205,9 @@ find_new_gump(gump_trigs, lcn, player) {
 }
 
 same_player(p1, p2) {
-  if(p1 getentitynumber() == p2 getentitynumber())
+  if(p1 getentitynumber() == p2 getentitynumber()) {
     return true;
+  }
 
   return false;
 }
@@ -233,23 +242,27 @@ gump_watch_trigger(localclientnum) {
 }
 
 enter_gump_trigger0(player) {
-  if(player isplayer())
+  if(player isplayer()) {
     thread load_gump_for_player(0, self.script_string);
+  }
 }
 
 enter_gump_trigger1(player) {
-  if(player isplayer())
+  if(player isplayer()) {
     thread load_gump_for_player(1, self.script_string);
+  }
 }
 
 enter_gump_trigger2(player) {
-  if(player isplayer())
+  if(player isplayer()) {
     thread load_gump_for_player(2, self.script_string);
+  }
 }
 
 enter_gump_trigger3(player) {
-  if(player isplayer())
+  if(player isplayer()) {
     thread load_gump_for_player(3, self.script_string);
+  }
 }
 
 load_gump_for_player(gump, name) {
@@ -259,8 +272,9 @@ load_gump_for_player(gump, name) {
   if(is_true(machinelocal.gump_loading_slot[gump])) {
     return;
   }
-  while(is_true(machinelocal.gump_loading))
+  while(is_true(machinelocal.gump_loading)) {
     wait 0.25;
+  }
 
   machinelocal.gump_loading = 1;
   machinelocal.gump_loading_slot[gump] = 1;

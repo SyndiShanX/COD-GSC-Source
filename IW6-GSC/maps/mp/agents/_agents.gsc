@@ -26,8 +26,9 @@ main() {
 }
 
 setup_callbacks() {
-  if(!isDefined(level.agent_funcs))
+  if(!isDefined(level.agent_funcs)) {
     level.agent_funcs = [];
+  }
 
   level.agent_funcs["player"] = [];
 
@@ -42,8 +43,9 @@ setup_callbacks() {
 }
 
 wait_till_agent_funcs_defined() {
-  while(!isDefined(level.agent_funcs))
+  while(!isDefined(level.agent_funcs)) {
     wait(0.05);
+  }
 }
 
 new_scr_agent_team() {
@@ -52,14 +54,17 @@ new_scr_agent_team() {
   teamCounts["axis"] = 0;
   minTeam = undefined;
   foreach(player in level.participants) {
-    if(!isDefined(teamCounts[player.team]))
+    if(!isDefined(teamCounts[player.team])) {
       teamCounts[player.team] = 0;
-    if(IsTeamParticipant(player))
+    }
+    if(IsTeamParticipant(player)) {
       teamCounts[player.team]++;
+    }
   }
   foreach(team, count in teamCounts) {
-    if((team != "spectator") && (!isDefined(minTeam) || teamCounts[minTeam] > count))
+    if((team != "spectator") && (!isDefined(minTeam) || teamCounts[minTeam] > count)) {
       minTeam = team;
+    }
   }
 
   return minTeam;
@@ -69,8 +74,9 @@ monitor_scr_agent_players() {
   SetDevDvarIfUninitialized("scr_agent_players_add", "0");
   SetDevDvarIfUninitialized("scr_agent_players_drop", "0");
 
-  while(level.players.size == 0)
+  while(level.players.size == 0) {
     wait(0.05);
+  }
 
   for(;;) {
     wait(0.1);
@@ -78,16 +84,19 @@ monitor_scr_agent_players() {
     add_agent_players = getdvarInt("scr_agent_players_add");
     drop_agent_players = getdvarInt("scr_agent_players_drop");
 
-    if(add_agent_players != 0)
+    if(add_agent_players != 0) {
       SetDevDvar("scr_agent_players_add", 0);
+    }
 
-    if(drop_agent_players != 0)
+    if(drop_agent_players != 0) {
       SetDevDvar("scr_agent_players_drop", 0);
+    }
 
     for(i = 0; i < add_agent_players; i++) {
       agent = add_humanoid_agent("player", new_scr_agent_team(), undefined, undefined, undefined, undefined, true, true);
-      if(isDefined(agent))
+      if(isDefined(agent)) {
         agent.agent_teamParticipant = true;
+      }
     }
 
     foreach(agent in level.agentArray) {
@@ -163,20 +172,24 @@ spawn_agent_player(optional_spawnOrigin, optional_spawnAngles, optional_owner, u
     self maps\mp\bots\_bots_util::bot_set_personality("default");
   }
 
-  if(isDefined(difficulty))
+  if(isDefined(difficulty)) {
     self maps\mp\bots\_bots_util::bot_set_difficulty(difficulty);
+  }
 
   self initPlayerClass();
 
   self maps\mp\agents\_agent_common::set_agent_health(100);
-  if(isDefined(respawn_on_death) && respawn_on_death)
+  if(isDefined(respawn_on_death) && respawn_on_death) {
     self.respawn_on_death = true;
+  }
 
-  if(isDefined(optional_owner))
+  if(isDefined(optional_owner)) {
     self set_agent_team(optional_owner.team, optional_owner);
+  }
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self thread destroyOnOwnerDisconnect(self.owner);
+  }
 
   self thread maps\mp\_flashgrenades::monitorFlash();
 
@@ -187,15 +200,18 @@ spawn_agent_player(optional_spawnOrigin, optional_spawnAngles, optional_owner, u
 
   self thread maps\mp\bots\_bots::bot_think_watch_enemy(true);
   self thread maps\mp\bots\_bots::bot_think_crate();
-  if(self.agent_type == "player")
+  if(self.agent_type == "player") {
     self thread maps\mp\bots\_bots::bot_think_level_actions();
-  else if(self.agent_type == "odin_juggernaut")
+  }
+  else if(self.agent_type == "odin_juggernaut") {
     self thread maps\mp\bots\_bots::bot_think_level_actions(128);
+  }
   self thread maps\mp\bots\_bots_strategy::bot_think_tactical_goals();
   self thread[[self agentFunc("think")]]();
 
-  if(!self.hasDied)
+  if(!self.hasDied) {
     self maps\mp\gametypes\_spawnlogic::addToParticipantsArray();
+  }
 
   self.hasDied = false;
 
@@ -215,24 +231,28 @@ destroyOnOwnerDisconnect(owner) {
 
   self notify("owner_disconnect");
 
-  if(maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone())
+  if(maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone()) {
     wait 0.05;
+  }
 
   self Suicide();
 }
 
 agent_damage_finished(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
   if(isDefined(eInflictor) || isDefined(eAttacker)) {
-    if(!isDefined(eInflictor))
+    if(!isDefined(eInflictor)) {
       eInflictor = eAttacker;
-
-    if(isDefined(self.allowVehicleDamage) && !self.allowVehicleDamage) {
-      if(isDefined(eInflictor.classname) && eInflictor.classname == "script_vehicle")
-        return false;
     }
 
-    if(isDefined(eInflictor.classname) && eInflictor.classname == "auto_turret")
+    if(isDefined(self.allowVehicleDamage) && !self.allowVehicleDamage) {
+      if(isDefined(eInflictor.classname) && eInflictor.classname == "script_vehicle") {
+        return false;
+      }
+    }
+
+    if(isDefined(eInflictor.classname) && eInflictor.classname == "auto_turret") {
       eAttacker = eInflictor;
+    }
 
     if(isDefined(eAttacker) && sMeansOfDeath != "MOD_FALLING" && sMeansOfDeath != "MOD_SUICIDE") {
       if(level.teamBased) {
@@ -257,49 +277,63 @@ on_agent_generic_damaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath,
   attckerIsOwner = isDefined(eAttacker) && isDefined(self.owner) && (self.owner == eAttacker);
   attackerIsTeammate = attackerIsHittingTeam(self.owner, eAttacker) || attckerIsOwner;
 
-  if(level.teambased && attackerIsTeammate && !level.friendlyfire)
+  if(level.teambased && attackerIsTeammate && !level.friendlyfire) {
     return false;
+  }
 
-  if(!level.teambased && attckerIsOwner)
+  if(!level.teambased && attckerIsOwner) {
     return false;
+  }
 
-  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_CRUSH" && isDefined(eInflictor) && isDefined(eInflictor.classname) && eInflictor.classname == "script_vehicle")
+  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_CRUSH" && isDefined(eInflictor) && isDefined(eInflictor.classname) && eInflictor.classname == "script_vehicle") {
     return false;
+  }
 
-  if(!isDefined(self) || !isReallyAlive(self))
+  if(!isDefined(self) || !isReallyAlive(self)) {
     return false;
+  }
 
-  if(isDefined(eAttacker) && eAttacker.classname == "script_origin" && isDefined(eAttacker.type) && eAttacker.type == "soft_landing")
+  if(isDefined(eAttacker) && eAttacker.classname == "script_origin" && isDefined(eAttacker.type) && eAttacker.type == "soft_landing") {
     return false;
+  }
 
-  if(sWeapon == "killstreak_emp_mp")
+  if(sWeapon == "killstreak_emp_mp") {
     return false;
+  }
 
-  if(sWeapon == "bouncingbetty_mp" && !maps\mp\gametypes\_weapons::mineDamageHeightPassed(eInflictor, self))
+  if(sWeapon == "bouncingbetty_mp" && !maps\mp\gametypes\_weapons::mineDamageHeightPassed(eInflictor, self)) {
     return false;
+  }
 
-  if((sWeapon == "throwingknife_mp" || sWeapon == "throwingknifejugg_mp") && sMeansOfDeath == "MOD_IMPACT")
+  if((sWeapon == "throwingknife_mp" || sWeapon == "throwingknifejugg_mp") && sMeansOfDeath == "MOD_IMPACT") {
     iDamage = self.health + 1;
+  }
 
-  if(isDefined(eInflictor) && isDefined(eInflictor.stuckEnemyEntity) && eInflictor.stuckEnemyEntity == self)
+  if(isDefined(eInflictor) && isDefined(eInflictor.stuckEnemyEntity) && eInflictor.stuckEnemyEntity == self) {
     iDamage = self.health + 1;
+  }
 
-  if(iDamage <= 0)
+  if(iDamage <= 0) {
     return false;
+  }
 
   if(isDefined(eAttacker) && eAttacker != self && iDamage > 0 && (!isDefined(sHitLoc) || sHitLoc != "shield")) {
-    if(iDFlags &level.iDFLAGS_STUN)
+    if(iDFlags &level.iDFLAGS_STUN) {
       typeHit = "stun";
-    else if(!shouldWeaponFeedback(sWeapon))
+    }
+    else if(!shouldWeaponFeedback(sWeapon)) {
       typeHit = "none";
-    else
+    }
+    else {
       typeHit = ter_op(iDamage >= self.health, "hitkill", "standard");
+    }
 
     eAttacker thread maps\mp\gametypes\_damagefeedback::updateDamageFeedback(typeHit);
   }
 
-  if(isDefined(level.modifyPlayerDamage))
+  if(isDefined(level.modifyPlayerDamage)) {
     iDamage = [[level.modifyPlayerDamage]](self, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc);
+  }
 
   return self[[self agentFunc("on_damaged_finished")]](eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
 }
@@ -307,8 +341,9 @@ on_agent_generic_damaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath,
 on_agent_player_damaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
   attckerIsOwner = isDefined(eAttacker) && isDefined(self.owner) && (self.owner == eAttacker);
 
-  if(!level.teambased && attckerIsOwner)
+  if(!level.teambased && attckerIsOwner) {
     return false;
+  }
 
   Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
 }
@@ -349,8 +384,9 @@ on_humanoid_agent_killed_common(eInflictor, eAttacker, iDamage, sMeansOfDeath, s
     }
   }
 
-  if(dropWeapons)
+  if(dropWeapons) {
     self[[level.weaponDropFunction]](eAttacker, sMeansOfDeath);
+  }
 
   self.body = self CloneAgent(deathAnimDuration);
   thread delayStartRagdoll(self.body, sHitLoc, vDir, sWeapon, eInflictor, sMeansOfDeath);
@@ -362,9 +398,11 @@ initPlayerClass() {
   if(isDefined(self.class_override)) {
     self.class = self.class_override;
   } else {
-    if(self maps\mp\bots\_bots_loadout::bot_setup_loadout_callback())
+    if(self maps\mp\bots\_bots_loadout::bot_setup_loadout_callback()) {
       self.class = "callback";
-    else
+    }
+    else {
       self.class = "class1";
+    }
   }
 }

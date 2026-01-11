@@ -7,10 +7,12 @@
 main() {
   level.tweakfile = 1;
 
-  if(isusinghdr())
+  if(isusinghdr()) {
     maps\createart\mp_backlot_fog_hdr::setupfog();
-  else
+  }
+  else {
     maps\createart\mp_backlot_fog::setupfog();
+  }
 
   visionsetnaked("mp_backlot", 0);
 }

@@ -9,8 +9,9 @@
 #using_animtree("generic_human");
 main() {
   level._effect["_bulletcam_trail"] = LoadFX("maps/creek/fx_bullet_distortion_emitter");
-  if(!isDefined(level._effect["_bulletcam_impact"]))
+  if(!isDefined(level._effect["_bulletcam_impact"])) {
     level._effect["_bulletcam_impact"] = LoadFX("maps/creek/fx_impact_bullet_time");
+  }
   level._effect["_bulletcam_noncam_impact"] = LoadFX("impacts/fx_flesh_hit_body_nonfatal");
   level thread init_player_flags();
 }
@@ -54,8 +55,9 @@ try_bulletcam(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, v
         playFX(level._effect["_bulletcam_noncam_impact"], vPoint, vector_scale(vDir, -1), (0, 0, 1));
       }
     }
-    if(isDefined(self.bulletcam_nodeath))
+    if(isDefined(self.bulletcam_nodeath)) {
       iDamage = self.health - 1;
+    }
   } else if(is_true(self.bulletcam_fakedeath)) {}
   return iDamage;
 }
@@ -63,10 +65,12 @@ try_bulletcam(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, v
 #using_animtree("animated_props");
 do_bulletcam(player, end_point) {
   BULLET_MODEL = "p_glo_bullet_tip";
-  if(isDefined(level.BULLET_ANIM_CAM))
+  if(isDefined(level.BULLET_ANIM_CAM)) {
     BULLET_ANIM_CAM = level.BULLET_ANIM_CAM;
-  else
+  }
+  else {
     BULLET_ANIM_CAM = % prop_meatshield_bullet_tip_cam;
+  }
   BULLET_ANIM_SPIN = % prop_meatshield_bullet_tip_spin;
   BULLET_DIST_FROM_CAMERA = 15;
   HOLD_DIST = 10;

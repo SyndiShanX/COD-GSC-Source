@@ -18,8 +18,9 @@ init_traverse() {
   } else {
     point = getstruct(self.target, "targetname");
 
-    if(isDefined(point))
+    if(isDefined(point)) {
       self.traverse_height = point.origin[2];
+    }
   }
 }
 
@@ -47,10 +48,12 @@ teleportthreadex(verticaloffset, delay, frames) {
   wait(delay);
   amount = verticaloffset / frames;
 
-  if(amount > 10.0)
+  if(amount > 10.0) {
     amount = 10.0;
-  else if(amount < -10.0)
+  }
+  else if(amount < -10.0) {
     amount = -10.0;
+  }
 
   offset = (0, 0, amount);
 
@@ -71,16 +74,19 @@ handletraversealignment() {
 }
 
 dosimpletraverse(traversealias, no_powerups, traversestate) {
-  if(!isDefined(traversestate))
+  if(!isDefined(traversestate)) {
     traversestate = "zm_traverse";
-
-  if(isDefined(level.ignore_traverse)) {
-    if(self[[level.ignore_traverse]]())
-      return;
   }
 
-  if(isDefined(level.zm_traversal_override))
+  if(isDefined(level.ignore_traverse)) {
+    if(self[[level.ignore_traverse]]()) {
+      return;
+    }
+  }
+
+  if(isDefined(level.zm_traversal_override)) {
     traversealias = self[[level.zm_traversal_override]](traversealias);
+  }
 
   if(!self.has_legs) {
     traversestate = traversestate + "_crawl";
@@ -108,25 +114,29 @@ dotraverse(traversestate, traversealias, no_powerups) {
   self orientmode("face angle", self.traversestartnode.angles[1]);
   self.traversestartz = self.origin[2];
 
-  if(isDefined(self.pre_traverse))
+  if(isDefined(self.pre_traverse)) {
     self[[self.pre_traverse]]();
+  }
 
   self setanimstatefromasd(traversestate, traversealias);
   self maps\mp\animscripts\zm_shared::donotetracks("traverse_anim");
   self traversemode("gravity");
   self.a.nodeath = 0;
 
-  if(isDefined(self.post_traverse))
+  if(isDefined(self.post_traverse)) {
     self[[self.post_traverse]]();
+  }
 
   self maps\mp\animscripts\zm_run::needsupdate();
 
-  if(!self.isdog)
+  if(!self.isdog) {
     self maps\mp\animscripts\zm_run::moverun();
+  }
 
   self.is_traversing = 0;
   self notify("zombie_end_traverse");
 
-  if(isDefined(no_powerups) && no_powerups)
+  if(isDefined(no_powerups) && no_powerups) {
     self.no_powerups = old_powerups;
+  }
 }

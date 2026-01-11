@@ -102,11 +102,13 @@ train_setup() {
   delay_between_eqs = track_time / eq_count;
   travel_time_segment = track_time / eq_count;
   min_time_between_trains -= track_time;
-  if(min_time_between_trains < 0.1)
+  if(min_time_between_trains < 0.1) {
     min_time_between_trains = 0.1;
+  }
   max_time_between_trains -= track_time;
-  if(max_time_between_trains < min_time_between_trains)
+  if(max_time_between_trains < min_time_between_trains) {
     max_time_between_trains = min_time_between_trains + 0.1;
+  }
 
   eq_points = [];
   for(i = 0; i < eq_count; i++) {
@@ -168,8 +170,9 @@ train_play_sounds(max) {
   count = 0;
   for(i = 0; i < self.cars.size; i++) {
     count++;
-    if(count < max)
+    if(count < max) {
       continue;
+    }
     count = 0;
 
     self.cars[i] thread train_play_sound_delayed("veh_train_car_dist_loop");
@@ -188,8 +191,9 @@ train_stop_sounds(max) {
   count = 0;
   for(i = 0; i < self.cars.size; i++) {
     count++;
-    if(count < max)
+    if(count < max) {
       continue;
+    }
     count = 0;
 
     self.cars[i] stopLoopSound("veh_train_car_dist_loop");
@@ -227,8 +231,9 @@ show_trains() {
 }
 
 train_spawns_dust() {
-  if(!isDefined(level._effect["train_dust"]))
+  if(!isDefined(level._effect["train_dust"])) {
     return;
+  }
 
   range = 40;
   self endon("train_stops_killing_players");
@@ -277,14 +282,18 @@ train_kills_players(train_cars, distance_between_cars) {
   max_y = sides["front"][1];
   min_y = sides["front"][1];
   foreach(side in sides) {
-    if(side[0] > max_x)
+    if(side[0] > max_x) {
       max_x = side[0];
-    if(side[0] < min_x)
+    }
+    if(side[0] < min_x) {
       min_x = side[0];
-    if(side[1] > max_y)
+    }
+    if(side[1] > max_y) {
       max_y = side[1];
-    if(side[1] < min_y)
+    }
+    if(side[1] < min_y) {
       min_y = side[1];
+    }
   }
 
   for(;;) {
@@ -309,12 +318,15 @@ train_kills_players(train_cars, distance_between_cars) {
     hit_ents = [];
 
     foreach(player in level.players) {
-      if(!isalive(player))
+      if(!isalive(player)) {
         continue;
-      if(player.sessionstate != "playing")
+      }
+      if(player.sessionstate != "playing") {
         continue;
-      if(!train_hits(player, min_x, min_y, max_x, max_y))
+      }
+      if(!train_hits(player, min_x, min_y, max_x, max_y)) {
         continue;
+      }
 
       player playSound("melee_knife_hit_watermelon");
 
@@ -324,8 +336,9 @@ train_kills_players(train_cars, distance_between_cars) {
 
     grenades = getEntArray("grenade", "classname");
     foreach(grenade in grenades) {
-      if(!train_hits(grenade, min_x, min_y, max_x, max_y))
+      if(!train_hits(grenade, min_x, min_y, max_x, max_y)) {
         continue;
+      }
 
       pos = get_damageable_grenade_pos(grenade);
       hit_ents[hit_ents.size] = get_damageable_grenade(grenade, pos);
@@ -353,22 +366,28 @@ train_kills_players(train_cars, distance_between_cars) {
 }
 
 train_hits(entity, min_x, min_y, max_x, max_y) {
-  if(entity.origin[2] < self.origin[2] - 5)
+  if(entity.origin[2] < self.origin[2] - 5) {
     return false;
+  }
 
-  if(entity.origin[2] > self.origin[2] + 162)
+  if(entity.origin[2] > self.origin[2] + 162) {
     return false;
+  }
 
   x = entity.origin[0];
   y = entity.origin[1];
-  if(x < min_x)
+  if(x < min_x) {
     return false;
-  if(y < min_y)
+  }
+  if(y < min_y) {
     return false;
-  if(x > max_x)
+  }
+  if(x > max_x) {
     return false;
-  if(y > max_y)
+  }
+  if(y > max_y) {
     return false;
+  }
   return true;
 }
 
@@ -402,8 +421,9 @@ train_eq_lerp_for_time(origin, eq1, eq2, eq_radius, eq_time, eq_time_slice) {
   for(i = 0; i < steps; i++) {
     progress = i / steps;
     eq = eq2 * progress + eq1 * (1 - progress);
-    if(eq > 0)
+    if(eq > 0) {
       Earthquake(eq, eq_time_slice * 3, origin, eq_radius);
+    }
     wait(eq_time_slice);
   }
   remainder = eq_time - steps * eq_time_slice;

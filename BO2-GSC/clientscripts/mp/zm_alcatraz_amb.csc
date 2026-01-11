@@ -202,10 +202,12 @@ sndnuclearbomb() {
 }
 
 afterlifeaudio(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     self activateafterlifeaudio();
-  else
+  }
+  else {
     self deactivateafterlifeaudio();
+  }
 }
 
 activateafterlifeaudio() {

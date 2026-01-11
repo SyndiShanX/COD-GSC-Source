@@ -15,8 +15,9 @@
 main(range, freq, wavelength, rotation, origin) {
   floaters = getEntArray("script_floater", "targetname");
 
-  if(!floaters.size)
+  if(!floaters.size) {
     return;
+  }
 
   //defaults
   _range = 10;
@@ -26,19 +27,25 @@ main(range, freq, wavelength, rotation, origin) {
   _rotation = 10;
 
   //intended variables
-  if(isDefined(range))
+  if(isDefined(range)) {
     _range = range;
-  if(isDefined(freq))
+  }
+  if(isDefined(freq)) {
     _freq = freq;
-  if(isDefined(wavelength))
+  }
+  if(isDefined(wavelength)) {
     _wavelength = wavelength;
-  if(isDefined(origin))
+  }
+  if(isDefined(origin)) {
     _origin = origin;
-  if(isDefined(rotation))
+  }
+  if(isDefined(rotation)) {
     _rotation = rotation;
+  }
 
-  for(i = 0; i < floaters.size; i++)
+  for(i = 0; i < floaters.size; i++) {
     floaters[i] thread floater_think(_range, _freq, _wavelength, _rotation, _origin);
+  }
 }
 
 floater_think(range, freq, wavelength, rotation, origin) {
@@ -56,8 +63,9 @@ floater_think(range, freq, wavelength, rotation, origin) {
   frac = sin(degrees);
 
   //are we going up or down	
-  if(cos(degrees) < 0)
+  if(cos(degrees) < 0) {
     self.range = -1 * self.range;
+  }
 
   org = spawn("script_origin", center);
   self linkto(org);
@@ -97,8 +105,10 @@ floater_move(frac, org) {
 }
 
 abval(num) {
-  if(num < 0)
+  if(num < 0) {
     return (-1 * num);
-  else
+  }
+  else {
     return num;
+  }
 }

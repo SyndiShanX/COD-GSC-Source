@@ -286,8 +286,9 @@ setup_driver_turret_aim_assist(driver_turret, target_radius, target_offset) {
       best_target = undefined;
       fov = GetDvarFloat(#"cg_fov");
       for(i = 0; i < ai.size; i++) {
-        if(target_isincircle(ai[i], driver, fov, target_radius))
+        if(target_isincircle(ai[i], driver, fov, target_radius)) {
           best_target = ai[i];
+        }
       }
       if(isDefined(driver_turret)) {
         if(isDefined(best_target)) {

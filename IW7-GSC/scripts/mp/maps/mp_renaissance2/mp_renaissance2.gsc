@@ -60,16 +60,18 @@ apex_not_outofbounds() {
   level waittill("game_ended");
 
   foreach(var_00 in level.outofboundstriggerpatches) {
-    if(isDefined(var_00))
+    if(isDefined(var_00)) {
       var_00 delete();
+    }
   }
 }
 
 oceaninmotion() {
   var_00 = getEntArray("bobbing_boat", "targetname");
 
-  foreach(var_02 in var_00)
+  foreach(var_02 in var_00) {
   thread bobbingboat(var_02);
+  }
 }
 
 bobbingboat(var_00) {
@@ -79,8 +81,9 @@ bobbingboat(var_00) {
   if(isDefined(var_0.target)) {
     var_0.func_BE10 = getEntArray(var_0.target, "targetname");
 
-    foreach(var_02 in var_0.func_BE10)
+    foreach(var_02 in var_0.func_BE10) {
     var_2.deltapos = var_2.origin - var_0.origin;
+    }
   }
 
   thread boatbob(var_00);
@@ -142,8 +145,9 @@ func_F9BA() {
   level.func_BF47 = -1.0;
   var_00 = getEntArray("wine_keg", "targetname");
 
-  foreach(var_02 in var_00)
+  foreach(var_02 in var_00) {
   var_02 thread func_13957();
+  }
 }
 
 func_13957() {
@@ -175,15 +179,17 @@ func_7A63(var_00, var_01, var_02) {
   var_04 = var_02 - var_03;
   var_05 = bulletTrace(var_03, var_03 + 1.5 * var_04, 0, var_00, 0);
 
-  if(isDefined(var_5["normal"]) && isDefined(var_5["entity"]) && var_5["entity"] == self)
+  if(isDefined(var_5["normal"]) && isDefined(var_5["entity"]) && var_5["entity"] == self) {
     return var_5["normal"];
+  }
 
   return undefined;
 }
 
 func_3827() {
-  if(gettime() < level.func_BF47)
+  if(gettime() < level.func_BF47) {
     return 0;
+  }
 
   return 1;
 }

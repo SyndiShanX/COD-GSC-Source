@@ -19,10 +19,12 @@ shellshockondamage(var_00, var_01) {
       if(isplayer(self) && self _meth_84CA()) {
         return;
       }
-      if(isDefined(self.shellshockreduction) && self.shellshockreduction)
+      if(isDefined(self.shellshockreduction) && self.shellshockreduction) {
         self shellshock("frag_grenade_mp", self.shellshockreduction);
-      else
+      }
+      else {
         self shellshock("frag_grenade_mp", 0.5);
+      }
     }
   }
 }
@@ -40,10 +42,12 @@ grenade_earthquake(var_00, var_01) {
   self endon("end_explode");
   var_02 = undefined;
 
-  if(!isDefined(var_01) || var_01)
+  if(!isDefined(var_01) || var_01) {
     self waittill("explode", var_02);
-  else
+  }
+  else {
     var_02 = self.origin;
+  }
 
   grenade_earthquakeatposition_internal(var_02, var_00);
 }
@@ -53,8 +57,9 @@ grenade_earthquakeatposition(var_00, var_01, var_02) {
 }
 
 grenade_earthquakeatposition_internal(var_00, var_01, var_02) {
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 1;
+  }
 
   func_13B9("grenade_rumble", var_00, var_02);
   var_03 = 0.45 * var_01;
@@ -82,8 +87,9 @@ bloodeffect(var_00) {
   if(abs(var_04) < 0.866) {
     var_06 = level._effect["hit_left"];
 
-    if(var_05 > 0)
+    if(var_05 > 0) {
       var_06 = level._effect["hit_right"];
+    }
 
     var_07 = ["death", "damage"];
     thread play_fx_with_entity(var_06, var_07, 7.0);
@@ -94,8 +100,9 @@ func_2BC3(var_00) {
   self endon("disconnect");
 
   if(isDefined(var_00) && scripts\mp\utility\game::getweaponrootname(var_00) == "iw7_axe" && self getweaponammoclip(var_00) > 0) {
-    if(!isDefined(self.axeswingnum))
+    if(!isDefined(self.axeswingnum)) {
       self.axeswingnum = 1;
+    }
 
     var_01 = "axe_blood_" + self.axeswingnum;
     thread activateaxeblood(var_01);
@@ -150,14 +157,17 @@ func_22FF(var_00, var_01, var_02) {
   var_03 = self.origin;
   func_13B9("artillery_rumble", var_03);
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     var_00 = 0.7;
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0.5;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 800;
+  }
 
   _earthquake(var_00, var_01, var_03, var_02);
   _screenshakeonposition(var_03, var_02);
@@ -191,10 +201,12 @@ func_DAF3(var_00) {
   self endon("end_explode");
   var_01 = undefined;
 
-  if(!isDefined(var_00) || var_00)
+  if(!isDefined(var_00) || var_00) {
     self waittill("explode", var_01);
-  else
+  }
+  else {
     var_01 = self.origin;
+  }
 
   playrumbleonentity("grenade_rumble", var_01);
   earthquake(0.3, 0.35, var_01, 800);
@@ -217,10 +229,12 @@ func_65C4(var_00) {
   self endon("end_explode");
   var_01 = undefined;
 
-  if(!isDefined(var_00) || var_00)
+  if(!isDefined(var_00) || var_00) {
     self waittill("explode", var_01);
-  else
+  }
+  else {
     var_01 = self.origin;
+  }
 
   playrumbleonentity("grenade_rumble", var_01);
   earthquake(0.3, 0.35, var_01, 800);
@@ -237,8 +251,9 @@ func_65C4(var_00) {
 }
 
 _earthquake(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     var_04 = 0;
+  }
 
   foreach(var_06 in level.players) {
     if(!isDefined(var_06)) {
@@ -246,14 +261,16 @@ _earthquake(var_00, var_01, var_02, var_03, var_04) {
     }
     var_07 = scripts\mp\equipment\phase_shift::isentityphaseshifted(var_06);
 
-    if(var_07 && var_04 || !var_07 && !var_04)
+    if(var_07 && var_04 || !var_07 && !var_04) {
       var_06 earthquakeforplayer(var_00, var_01, var_02, var_03);
+    }
   }
 }
 
 func_13B9(var_00, var_01, var_02) {
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
   foreach(var_04 in level.players) {
     if(!isDefined(var_04)) {
@@ -261,14 +278,16 @@ func_13B9(var_00, var_01, var_02) {
     }
     var_05 = scripts\mp\equipment\phase_shift::isentityphaseshifted(var_04);
 
-    if(var_05 && var_02 || !var_05 && !var_02)
+    if(var_05 && var_02 || !var_05 && !var_02) {
       var_04 getyaw(var_00, var_01);
+    }
   }
 }
 
 _screenshakeonposition(var_00, var_01, var_02) {
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
   var_03 = var_01 * var_01;
 
@@ -282,8 +301,9 @@ _screenshakeonposition(var_00, var_01, var_02) {
     var_06 = scripts\mp\equipment\phase_shift::isentityphaseshifted(var_05);
 
     if(var_06 && var_02 || !var_06 && !var_02) {
-      if(distancesquared(var_00, var_5.origin) <= var_03)
+      if(distancesquared(var_00, var_5.origin) <= var_03) {
         var_05 setclientomnvar("ui_hud_shake", 1);
+      }
     }
   }
 }

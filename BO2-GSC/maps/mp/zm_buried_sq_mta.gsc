@@ -84,10 +84,12 @@ mta_amplifier_found_watcher() {
   trigger = spawn("trigger_radius", self.origin, 0, 128, 72);
   trigger waittill("trigger", who);
 
-  if(isDefined(level.rich_sq_player) && who == level.rich_sq_player)
+  if(isDefined(level.rich_sq_player) && who == level.rich_sq_player) {
     level notify("mta_amp_found_by_sam");
-  else
+  }
+  else {
     level notify("mta_amp_found", self);
+  }
 }
 
 mta_amplifier_init() {
@@ -158,15 +160,19 @@ mta_check_all_amplifier_states() {
   a_amplifiers = getEntArray("sq_amplifier", "targetname");
 
   foreach(m_amplifier in a_amplifiers) {
-    if(m_amplifier.amplifier_state != "filled")
+    if(m_amplifier.amplifier_state != "filled") {
       is_all_filled = 0;
+    }
 
-    if(m_amplifier.amplifier_state != "broken")
+    if(m_amplifier.amplifier_state != "broken") {
       is_all_broken = 0;
+    }
   }
 
-  if(is_all_filled)
+  if(is_all_filled) {
     flag_set("sq_amplifiers_on");
-  else if(is_all_broken)
+  }
+  else if(is_all_broken) {
     flag_set("sq_amplifiers_broken");
+  }
 }

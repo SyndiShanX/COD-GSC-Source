@@ -127,8 +127,9 @@ odin_spin_room_logic() {
 
   thread hide_spent_rog_mag();
 
-  if(isDefined(level.decomp_door))
+  if(isDefined(level.decomp_door)) {
     common_scripts\utility::flag_set("open_decomp_room_door");
+  }
 
   var_0 = [];
   var_1 = [];
@@ -157,8 +158,9 @@ odin_spin_room_logic() {
   common_scripts\utility::exploder("spin_implosion");
   thread maps\odin_audio::sfx_odin_decompress_explode();
 
-  if(isDefined(level.decomp_door))
+  if(isDefined(level.decomp_door)) {
     thread maps\odin_util::safe_delete_array(level.decomp_door.parts);
+  }
 
   maps\_utility::vision_set_fog_changes("odin_implosion", 0.5);
   level thread maps\odin_fx::fx_spin_player_debris();
@@ -275,8 +277,9 @@ prespawn_decomp_crates() {
   link_bags_to_spin_crates("spin_decomp_bags_2", var_4["decomp_crate_02"]);
   link_bags_to_spin_crates("spin_decomp_bags_3", var_4["decomp_crate_03"]);
 
-  foreach(var_6 in var_4)
+  foreach(var_6 in var_4) {
   level.sat_ent_del[level.sat_ent_del.size] = var_6;
+  }
 
   var_0 maps\_anim::anim_first_frame(var_4, "decompression_props");
   common_scripts\utility::flag_wait("cue_crates_decomp");
@@ -322,8 +325,9 @@ prespawn_decomp_panels() {
   foreach(var_8, var_3 in var_0) {
     var_4 = getEntArray(var_3.target, "targetname");
 
-    foreach(var_6 in var_4)
+    foreach(var_6 in var_4) {
     var_6 linkto(var_1[var_8]);
+    }
 
     var_3 linkto(var_1[var_8]);
   }
@@ -359,8 +363,9 @@ spinning_room_geo_simple(var_0, var_1, var_2, var_3, var_4) {
   var_5 = getent(var_1, "targetname");
   var_6 = getEntArray(var_0, "targetname");
 
-  foreach(var_8 in var_6)
+  foreach(var_8 in var_6) {
   var_8 linkto(var_5);
+  }
 
   var_10 = getent("spin_geo_final_pos", "targetname");
   var_5 moveto(var_10.origin, 0.1);
@@ -382,8 +387,9 @@ spin_busted_module() {
   var_1 = getent("busted_module_path1", "targetname");
   var_2 = getent("busted_module_path2", "targetname");
 
-  foreach(var_4 in var_0)
+  foreach(var_4 in var_0) {
   var_4 linkto(var_1);
+  }
 
   common_scripts\utility::flag_wait("playsound");
   common_scripts\utility::flag_wait("spin_approaching_enemies");
@@ -419,45 +425,61 @@ spin_push_to_spacejump() {
   var_13 = getent("spin_deadguy_static_node_05", "targetname");
 
   for(;;) {
-    if(level.player.origin[1] < var_2 - level.spin_allowance_y)
+    if(level.player.origin[1] < var_2 - level.spin_allowance_y) {
       var_4 = 0 - (level.player.origin[1] - var_2 + level.spin_allowance_y) * var_0;
-    else if(level.player.origin[1] > var_2 + level.spin_allowance_y)
+    }
+    else if(level.player.origin[1] > var_2 + level.spin_allowance_y) {
       var_4 = 0 - (level.player.origin[1] - var_2 - level.spin_allowance_y) * var_0;
-    else
+    }
+    else {
       var_4 = 0;
+    }
 
-    if(level.player.origin[2] < var_3 - level.spin_allowance_z)
+    if(level.player.origin[2] < var_3 - level.spin_allowance_z) {
       var_5 = 0 - (level.player.origin[2] - var_3 + level.spin_allowance_z) * var_0;
-    else if(level.player.origin[2] > var_3 + level.spin_allowance_z)
+    }
+    else if(level.player.origin[2] > var_3 + level.spin_allowance_z) {
       var_5 = 0 - (level.player.origin[2] - var_3 - level.spin_allowance_z) * var_0;
-    else
+    }
+    else {
       var_5 = 0;
+    }
 
-    if(var_4 > 20000)
+    if(var_4 > 20000) {
       var_4 = 20000;
+    }
 
-    if(var_4 < -20000)
+    if(var_4 < -20000) {
       var_4 = -20000;
+    }
 
-    if(var_5 > 20000)
+    if(var_5 > 20000) {
       var_5 = 20000;
+    }
 
-    if(var_5 < -20000)
+    if(var_5 < -20000) {
       var_5 = -20000;
+    }
 
-    if(var_4 == 0 && (var_6 < 200 || var_6 > -200))
+    if(var_4 == 0 && (var_6 < 200 || var_6 > -200)) {
       var_6 = 0;
-    else if(var_6 > var_4)
+    }
+    else if(var_6 > var_4) {
       var_6 = var_6 - 100;
-    else
+    }
+    else {
       var_6 = var_6 + 100;
+    }
 
-    if(var_5 == 0 && (var_7 < 200 || var_7 > -200))
+    if(var_5 == 0 && (var_7 < 200 || var_7 > -200)) {
       var_7 = 0;
-    else if(var_7 > var_5)
+    }
+    else if(var_7 > var_5) {
       var_7 = var_7 - 100;
-    else
+    }
+    else {
       var_7 = var_7 + 100;
+    }
 
     setsaveddvar("player_swimWaterCurrent", (level.forwardpush, var_6, var_7));
 
@@ -466,8 +488,9 @@ spin_push_to_spacejump() {
       var_3 = var_12.origin[2];
 
       if(level.player.origin[0] > var_12.origin[0] + 1500) {
-        if(var_11 < 10)
+        if(var_11 < 10) {
           var_11 = var_11 + 0.03;
+        }
 
         var_10 movex(var_11, 0.05, 0, 0);
       } else
@@ -481,54 +504,62 @@ spin_push_to_spacejump() {
     var_14 = distance(var_12.origin, level.player.origin);
 
     if(level.player.origin[0] <= var_13.origin[0]) {
-      if(!common_scripts\utility::flag("disable_kyra_leader"))
+      if(!common_scripts\utility::flag("disable_kyra_leader")) {
         level.ally.moveplaybackrate = 3;
-      else
+      }
+      else {
         level.ally.moveplaybackrate = 1;
+      }
 
       if(var_14 >= 1000) {
         var_8 = 80;
         level.forwardpush = level.forwardpush - 300;
 
-        if(level.forwardpush <= -9000)
+        if(level.forwardpush <= -9000) {
           level.forwardpush = -9000;
+        }
       }
 
       if(var_14 >= 750 && var_14 < 1000) {
         var_8 = 75;
         level.forwardpush = level.forwardpush - 300;
 
-        if(level.forwardpush <= -6500)
+        if(level.forwardpush <= -6500) {
           level.forwardpush = -6500;
+        }
       }
 
       if(var_14 >= 500 && var_14 < 750) {
         level.forwardpush = level.forwardpush - 300;
 
-        if(level.forwardpush <= -5000)
+        if(level.forwardpush <= -5000) {
           level.forwardpush = -5000;
+        }
       }
 
       if(var_14 >= 250 && var_14 < 500) {
         var_8 = 70;
         level.forwardpush = level.forwardpush - 300;
 
-        if(level.forwardpush <= -2800)
+        if(level.forwardpush <= -2800) {
           level.forwardpush = -2800;
+        }
       }
 
       if(var_14 >= 0 && var_14 < 250) {
         level.forwardpush = level.forwardpush - 300;
 
-        if(level.forwardpush <= -2000)
+        if(level.forwardpush <= -2000) {
           level.forwardpush = -2000;
+        }
       }
     }
 
     setsaveddvar("player_swimSpeed", var_8);
 
-    if(var_14 <= 128 || level.player.origin[0] < -9850)
+    if(var_14 <= 128 || level.player.origin[0] < -9850) {
       var_15 = 1;
+    }
 
     wait 0.1;
   }
@@ -548,26 +579,30 @@ adjust_forward_push() {
   level.spin_allowance_y = 1820;
   level.spin_allowance_z = 1520;
 
-  while(level.player.origin[0] > var_0.origin[0] + 5500)
+  while(level.player.origin[0] > var_0.origin[0] + 5500) {
     wait 0.05;
+  }
 
   level.spin_allowance_y = 1200;
   level.spin_allowance_z = 1000;
 
-  while(level.player.origin[0] > var_0.origin[0] + 3000)
+  while(level.player.origin[0] > var_0.origin[0] + 3000) {
     wait 0.05;
+  }
 
   level.spin_allowance_y = 600;
   level.spin_allowance_z = 400;
 
-  while(level.player.origin[0] > var_0.origin[0] + 2200)
+  while(level.player.origin[0] > var_0.origin[0] + 2200) {
     wait 0.05;
+  }
 
   level.spin_allowance_y = 155;
   level.spin_allowance_z = 100;
 
-  while(level.player.origin[0] > var_0.origin[0] + 1500)
+  while(level.player.origin[0] > var_0.origin[0] + 1500) {
     wait 0.05;
+  }
 
   common_scripts\utility::flag_set("spacejump_clear");
   level.forwardpush = 0;
@@ -591,8 +626,9 @@ spin_sat_and_earth_mover(var_0) {
   var_1 rotateto(var_6.angles, 0.1);
   wait 0.2;
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     common_scripts\utility::flag_wait("start_near_explosion_sequence");
+  }
 
   var_1 unlink();
   wait 0.05;
@@ -605,11 +641,13 @@ spin_sat_and_earth_mover(var_0) {
   var_9 waittill("rotatedone");
   var_11 = 25;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_11 = 1;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     wait 3.5;
+  }
 
   var_9 rotateroll(var_10, var_11, 0.1, var_11 * 0.8);
   var_9 waittill("rotatedone");
@@ -618,8 +656,9 @@ spin_sat_and_earth_mover(var_0) {
   var_5 unlink();
   var_11 = 17;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_11 = 1;
+  }
 
   var_12 = var_11 * 0.1;
   var_13 = var_11 * 0.5;
@@ -667,8 +706,9 @@ spin_do_moving_debris(var_0, var_1, var_2, var_3) {
   var_8 = 75;
   common_scripts\utility::flag_wait(var_1);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     wait(var_3);
+  }
 
   foreach(var_10 in var_4) {
     if(isDefined(var_10.target)) {
@@ -680,25 +720,31 @@ spin_do_moving_debris(var_0, var_1, var_2, var_3) {
         var_14 = randomfloatrange(6.0, 18.0);
         var_15 = randomfloatrange(0.2, 0.55);
 
-        if(common_scripts\utility::cointoss())
+        if(common_scripts\utility::cointoss()) {
           var_13 = var_13 * -1;
+        }
 
-        if(common_scripts\utility::cointoss())
+        if(common_scripts\utility::cointoss()) {
           var_14 = var_14 * -1;
+        }
 
-        if(common_scripts\utility::cointoss())
+        if(common_scripts\utility::cointoss()) {
           var_15 = var_15 * -1;
+        }
 
         var_10 thread spin_do_moving_debris_fx(var_10.origin, var_11.origin, var_12);
         var_10 moveto(var_11.origin, var_12);
         var_16 = randomint(3);
 
-        if(var_16 == 0)
+        if(var_16 == 0) {
           var_10 thread spin_debris_rotation(var_13, var_15, var_14);
-        else if(var_16 == 1)
+        }
+        else if(var_16 == 1) {
           var_10 thread spin_debris_rotation(var_14, var_13, var_15);
-        else if(var_16 == 2)
+        }
+        else if(var_16 == 2) {
           var_10 thread spin_debris_rotation(var_15, var_14, var_13);
+        }
       }
     }
   }
@@ -711,10 +757,12 @@ spin_do_moving_prefab_debris(var_0, var_1, var_2, var_3) {
   var_7 = [];
 
   for(var_8 = 1; var_8 <= var_4; var_8++) {
-    if(var_8 < 10)
+    if(var_8 < 10) {
       var_9 = "0" + var_8;
-    else
+    }
+    else {
       var_9 = "" + var_8;
+    }
 
     var_10 = var_0 + "_" + var_9;
     var_11 = getEntArray(var_10, "targetname");
@@ -726,8 +774,9 @@ spin_do_moving_prefab_debris(var_0, var_1, var_2, var_3) {
     var_12.target = var_10 + "_node";
 
     foreach(var_14 in var_11) {
-      if(var_14 != var_12)
+      if(var_14 != var_12) {
         var_14 linkto(var_12);
+      }
     }
 
     var_7[var_7.size] = var_12;
@@ -739,8 +788,9 @@ spin_do_moving_prefab_debris(var_0, var_1, var_2, var_3) {
   }
   common_scripts\utility::flag_wait(var_1);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     wait(var_3);
+  }
 
   foreach(var_17 in var_7) {
     if(isDefined(var_17.target)) {
@@ -754,24 +804,30 @@ spin_do_moving_prefab_debris(var_0, var_1, var_2, var_3) {
       var_21 = randomfloatrange(6.0, 18.0);
       var_22 = randomfloatrange(0.2, 0.55);
 
-      if(common_scripts\utility::cointoss())
+      if(common_scripts\utility::cointoss()) {
         var_20 = var_20 * -1;
+      }
 
-      if(common_scripts\utility::cointoss())
+      if(common_scripts\utility::cointoss()) {
         var_21 = var_21 * -1;
+      }
 
-      if(common_scripts\utility::cointoss())
+      if(common_scripts\utility::cointoss()) {
         var_22 = var_22 * -1;
+      }
 
       var_17 moveto(var_18.origin, var_19);
       var_23 = randomint(3);
 
-      if(var_23 == 0)
+      if(var_23 == 0) {
         var_17 thread spin_debris_rotation(var_20, var_22, var_21);
-      else if(var_23 == 1)
+      }
+      else if(var_23 == 1) {
         var_17 thread spin_debris_rotation(var_21, var_20, var_22);
-      else if(var_23 == 2)
+      }
+      else if(var_23 == 2) {
         var_17 thread spin_debris_rotation(var_22, var_21, var_20);
+      }
     }
   }
 }
@@ -782,11 +838,13 @@ spin_do_moving_debris_fx(var_0, var_1, var_2) {
   if(self.script_noteworthy != "spin_parts") {
     var_3 = common_scripts\utility::getfx("spc_fire_puff_bigger_light");
 
-    if(self.script_noteworthy == "flying_debris_sparks")
+    if(self.script_noteworthy == "flying_debris_sparks") {
       thread spin_piece_sparks();
+    }
 
-    if(self.script_noteworthy == "flying_debris_fire")
+    if(self.script_noteworthy == "flying_debris_fire") {
       thread spin_piece_fire(var_0, var_1);
+    }
 
     if(self.script_noteworthy == "flying_debris_sparks_metal") {
       thread spin_piece_pieces();
@@ -863,23 +921,27 @@ do_unique_debris() {
 
   var_1 = getent("spin_unique_debris_rotating_01", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 rotatevelocity((10, 0, 0), var_0);
+  }
 
   var_1 = getent("spin_unique_debris_rotating_02", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 rotatevelocity((0, 24, 0), var_0);
+  }
 
   var_1 = getent("spin_unique_debris_rotating_03", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 rotatevelocity((0, 0, 14), var_0);
+  }
 
   var_1 = getent("spin_unique_debris_rotating_05", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 rotatevelocity((6, 0, 0), var_0);
+  }
 }
 
 do_spacejump_debris(var_0) {
@@ -889,30 +951,37 @@ do_spacejump_debris(var_0) {
     if(var_3.classname == "script_origin") {
       var_4 = getEntArray(var_3.script_linkto, "script_linkname");
 
-      foreach(var_6 in var_4)
+      foreach(var_6 in var_4) {
       var_6 linkto(var_3);
+      }
 
       var_8 = randomfloatrange(15.0, 45.0);
       var_9 = randomfloatrange(6.0, 18.0);
       var_10 = randomfloatrange(0.2, 0.55);
 
-      if(common_scripts\utility::cointoss())
+      if(common_scripts\utility::cointoss()) {
         var_8 = var_8 * -1;
+      }
 
-      if(common_scripts\utility::cointoss())
+      if(common_scripts\utility::cointoss()) {
         var_9 = var_9 * -1;
+      }
 
-      if(common_scripts\utility::cointoss())
+      if(common_scripts\utility::cointoss()) {
         var_10 = var_10 * -1;
+      }
 
       var_11 = randomint(3);
 
-      if(var_11 == 0)
+      if(var_11 == 0) {
         var_3 thread spin_debris_rotation(var_8, var_10, var_9);
-      else if(var_11 == 1)
+      }
+      else if(var_11 == 1) {
         var_3 thread spin_debris_rotation(var_9, var_8, var_10);
-      else if(var_11 == 2)
+      }
+      else if(var_11 == 2) {
         var_3 thread spin_debris_rotation(var_10, var_9, var_8);
+      }
     }
   }
 }

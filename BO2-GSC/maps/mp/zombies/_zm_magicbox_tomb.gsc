@@ -66,8 +66,9 @@ custom_magic_box_timer_til_despawn(magic_box) {
   self moveto(self.origin - v_float * 0.25, putbacktime, putbacktime * 0.5);
   wait(putbacktime);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 custom_magic_box_weapon_wait() {
@@ -75,19 +76,23 @@ custom_magic_box_weapon_wait() {
 }
 
 wait_then_create_base_magic_box_fx() {
-  while(!isDefined(level.chests))
+  while(!isDefined(level.chests)) {
     wait 0.5;
+  }
 
-  while(!isDefined(level.chests[level.chests.size - 1].zbarrier))
+  while(!isDefined(level.chests[level.chests.size - 1].zbarrier)) {
     wait 0.5;
+  }
 
-  foreach(chest in level.chests)
+  foreach(chest in level.chests) {
   chest.zbarrier setclientfield("magicbox_initial_fx", 1);
+  }
 }
 
 set_magic_box_zbarrier_state(state) {
-  for(i = 0; i < self getnumzbarrierpieces(); i++)
+  for(i = 0; i < self getnumzbarrierpieces(); i++) {
     self hidezbarrierpiece(i);
+  }
 
   self notify("zbarrier_state_change");
 
@@ -125,8 +130,9 @@ set_magic_box_zbarrier_state(state) {
       self.owner.is_locked = 0;
       break;
     default:
-      if(isDefined(level.custom_magicbox_state_handler))
+      if(isDefined(level.custom_magicbox_state_handler)) {
         self[[level.custom_magicbox_state_handler]](state);
+      }
 
       break;
   }
@@ -142,18 +148,21 @@ magic_box_arrives() {
   self setclientfield("magicbox_leaving_fx", 0);
   self setzbarrierpiecestate(1, "opening");
 
-  while(self getzbarrierpiecestate(1) == "opening")
+  while(self getzbarrierpiecestate(1) == "opening") {
     wait 0.05;
+  }
 
   self notify("arrived");
   self.state = "close";
   s_zone_capture_area = level.zone_capture.zones[self.zone_capture_area];
 
   if(isDefined(s_zone_capture_area)) {
-    if(!s_zone_capture_area ent_flag("player_controlled"))
+    if(!s_zone_capture_area ent_flag("player_controlled")) {
       self setclientfield("magicbox_amb_fx", 1);
-    else
+    }
+    else {
       self setclientfield("magicbox_amb_fx", 2);
+    }
   }
 }
 
@@ -163,21 +172,25 @@ magic_box_leaves() {
   self setzbarrierpiecestate(1, "closing");
   self playSound("zmb_hellbox_rise");
 
-  while(self getzbarrierpiecestate(1) == "closing")
+  while(self getzbarrierpiecestate(1) == "closing") {
     wait 0.1;
+  }
 
   self notify("left");
   s_zone_capture_area = level.zone_capture.zones[self.zone_capture_area];
 
   if(isDefined(s_zone_capture_area)) {
-    if(s_zone_capture_area ent_flag("player_controlled"))
+    if(s_zone_capture_area ent_flag("player_controlled")) {
       self setclientfield("magicbox_amb_fx", 3);
-    else
+    }
+    else {
       self setclientfield("magicbox_amb_fx", 0);
+    }
   }
 
-  if(isDefined(level.dig_magic_box_moved) && !level.dig_magic_box_moved)
+  if(isDefined(level.dig_magic_box_moved) && !level.dig_magic_box_moved) {
     level.dig_magic_box_moved = 1;
+  }
 }
 
 magic_box_opens() {
@@ -185,8 +198,9 @@ magic_box_opens() {
   self setzbarrierpiecestate(2, "opening");
   self playSound("zmb_hellbox_open");
 
-  while(self getzbarrierpiecestate(2) == "opening")
+  while(self getzbarrierpiecestate(2) == "opening") {
     wait 0.1;
+  }
 
   self notify("opened");
   self thread magic_box_open_idle();
@@ -200,8 +214,9 @@ magic_box_open_idle() {
   while(true) {
     self setzbarrierpiecestate(5, "opening");
 
-    while(self getzbarrierpiecestate(5) != "open")
+    while(self getzbarrierpiecestate(5) != "open") {
       wait 0.05;
+    }
   }
 }
 
@@ -213,8 +228,9 @@ magic_box_closes() {
   self playSound("zmb_hellbox_close");
   self setclientfield("magicbox_open_fx", 0);
 
-  while(self getzbarrierpiecestate(2) == "closing")
+  while(self getzbarrierpiecestate(2) == "closing") {
     wait 0.1;
+  }
 
   self notify("closed");
 }
@@ -232,8 +248,9 @@ custom_magic_box_do_weapon_rise() {
   self setzbarrierpiecestate(3, "opening");
   self setzbarrierpiecestate(4, "opening");
 
-  while(self getzbarrierpiecestate(3) != "open")
+  while(self getzbarrierpiecestate(3) != "open") {
     wait 0.5;
+  }
 
   self hidezbarrierpiece(3);
   self hidezbarrierpiece(4);

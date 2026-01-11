@@ -34,17 +34,21 @@ deactivateAmbientRoom(client, room, priority) {
 }
 
 trig_enter(ent) {
-  if(self.useAmbientPackage)
+  if(self.useAmbientPackage) {
     activateAmbientPackage(0, self.script_ambientpackage, self.script_ambientpriority);
-  if(self.useAmbientRoom)
+  }
+  if(self.useAmbientRoom) {
     activateAmbientRoom(0, self.script_ambientroom, self.script_ambientpriority);
+  }
 }
 
 trig_leave(ent) {
-  if(self.useAmbientPackage)
+  if(self.useAmbientPackage) {
     deactivateAmbientPackage(0, self.script_ambientpackage, self.script_ambientpriority);
-  if(self.useAmbientRoom)
+  }
+  if(self.useAmbientRoom) {
     deactivateAmbientRoom(0, self.script_ambientroom, self.script_ambientpriority);
+  }
 }
 
 AmbientPackageTrigger() {
@@ -111,8 +115,9 @@ init() {
 }
 
 declareAmbientPackage(package) {
-  if(isDefined(level.ambientPackages[package]))
+  if(isDefined(level.ambientPackages[package])) {
     return;
+  }
   level.ambientPackages[package] = spawnStruct();
   level.ambientPackages[package].priority = [];
   level.ambientPackages[package].refcount = [];
@@ -127,10 +132,12 @@ addAmbientElement(package, alias, spawnMin, spawnMax, distMin, distMax, angleMin
   index = level.ambientPackages[package].elements.size;
   level.ambientPackages[package].elements[index] = spawnStruct();
   level.ambientPackages[package].elements[index].alias = alias;
-  if(spawnMin < 0)
+  if(spawnMin < 0) {
     spawnMin = 0;
-  if(spawnMin >= spawnMax)
+  }
+  if(spawnMin >= spawnMax) {
     spawnMax = spawnMin + 1;
+  }
   level.ambientPackages[package].elements[index].spawnMin = spawnMin;
   level.ambientPackages[package].elements[index].spawnMax = spawnMax;
   level.ambientPackages[package].elements[index].distMin = -1;
@@ -148,8 +155,9 @@ addAmbientElement(package, alias, spawnMin, spawnMax, distMin, distMax, angleMin
 }
 
 declareAmbientRoom(room) {
-  if(isDefined(level.ambientRooms[room]))
+  if(isDefined(level.ambientRooms[room])) {
     return;
+  }
   level.ambientRooms[room] = spawnStruct();
   level.ambientRooms[room].priority = [];
   level.ambientRooms[room].refcount = [];

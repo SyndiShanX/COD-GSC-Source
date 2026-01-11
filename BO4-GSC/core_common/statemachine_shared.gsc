@@ -289,4 +289,3 @@ function_acc83382() {
     waitframe(1);
   }
 }
-

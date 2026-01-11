@@ -40,8 +40,9 @@ script_mover_classnames() {
 }
 
 script_mover_is_script_mover() {
-  if(isDefined(self.script_mover))
+  if(isDefined(self.script_mover)) {
     return self.script_mover;
+  }
 
   classnames = script_mover_classnames();
   foreach(class in classnames) {
@@ -55,15 +56,17 @@ script_mover_is_script_mover() {
 }
 
 script_mover_add_hintString(name, hintString) {
-  if(!isDefined(level.script_mover_hintstrings))
+  if(!isDefined(level.script_mover_hintstrings)) {
     level.script_mover_hintstrings = [];
+  }
 
   level.script_mover_hintstrings[name] = hintString;
 }
 
 script_mover_add_parameters(name, parameters) {
-  if(!isDefined(level.script_mover_parameters))
+  if(!isDefined(level.script_mover_parameters)) {
     level.script_mover_parameters = [];
+  }
   level.script_mover_parameters[name] = parameters;
 }
 
@@ -87,8 +90,9 @@ script_mover_int() {
     }
     switch (target.script_noteworthy) {
       case "origin":
-        if(!isDefined(target.angles))
+        if(!isDefined(target.angles)) {
           target.angles = (0, 0, 0);
+        }
         self.origin_ent = spawn("script_model", target.origin);
         self.origin_ent.angles = target.angles;
         self.origin_ent setModel("tag_origin");
@@ -178,8 +182,9 @@ script_mover_parse_targets() {
   }
   for(i = 0; i < structs.size; i++) {
     target = structs[i];
-    if(!isDefined(target.script_noteworthy))
+    if(!isDefined(target.script_noteworthy)) {
       target.script_noteworthy = "goal";
+    }
 
     switch (target.script_noteworthy) {
       case "ignore":
@@ -275,8 +280,9 @@ script_mover_move_to_target(current) {
   self endon("death");
   self endon("new_path");
 
-  if(!isDefined(current))
+  if(!isDefined(current)) {
     current = self;
+  }
 
   while(current.goals.size != 0) {
     goal = random(current.goals);
@@ -285,14 +291,17 @@ script_mover_move_to_target(current) {
 
     mover script_mover_apply_move_parameters(goal);
 
-    if(isDefined(mover.params["delay_till"]))
+    if(isDefined(mover.params["delay_till"])) {
       level waittill(mover.params["delay_till"]);
+    }
 
-    if(isDefined(mover.params["delay_till_trigger"]) && mover.params["delay_till_trigger"])
+    if(isDefined(mover.params["delay_till_trigger"]) && mover.params["delay_till_trigger"]) {
       self waittill("trigger");
+    }
 
-    if(mover.params["delay_time"] > 0)
+    if(mover.params["delay_time"] > 0) {
       wait mover.params["delay_time"];
+    }
 
     move_time = mover.params["move_time"];
     accel_time = mover.params["accel_time"];
@@ -355,21 +364,25 @@ script_mover_move_to_target(current) {
     goal notify("arrive");
 
     if(isDefined(mover.params["solid"])) {
-      if(mover.params["solid"])
+      if(mover.params["solid"]) {
         mover solid();
-      else
+      }
+      else {
         mover notsolid();
+      }
     }
 
     foreach(targeted_mover in goal.movers) {
       targeted_mover notify("trigger");
     }
 
-    if(isDefined(mover.params["wait_till"]))
+    if(isDefined(mover.params["wait_till"])) {
       level waittill(mover.params["wait_till"]);
+    }
 
-    if(mover.params["wait_time"] > 0)
+    if(mover.params["wait_time"] > 0) {
       wait mover.params["wait_time"];
+    }
 
     mover script_mover_allow_usable(true);
 
@@ -395,16 +408,18 @@ script_mover_run_notify(notify_origin, level_notify, start, end) {
 script_mover_init_move_parameters() {
   self.params = [];
 
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   self.angles = anglesClamp180(self.angles);
 
   script_mover_parse_move_parameters(self.script_parameters);
 }
 script_mover_parse_move_parameters(parameters) {
-  if(!isDefined(parameters))
+  if(!isDefined(parameters)) {
     parameters = "";
+  }
 
   params = StrTok(parameters, ";");
   foreach(param in params) {
@@ -521,14 +536,16 @@ script_mover_save_default_move_parameters() {
 
 script_mover_set_defaults() {
   foreach(key, value in level.script_mover_defaults) {
-    if(!isDefined(self.params[key]))
+    if(!isDefined(self.params[key])) {
       script_mover_set_param(key, value);
+    }
   }
 
   if(isDefined(self.params_default)) {
     foreach(key, value in self.params_default) {
-      if(!isDefined(self.params[key]))
+      if(!isDefined(self.params[key])) {
         script_mover_set_param(key, value);
+      }
     }
   }
 }
@@ -565,8 +582,9 @@ player_unresolved_collision_watch() {
     self thread clear_unresolved_collision_count_next_frame();
 
     unresolved_collision_notify_min = 3;
-    if(isDefined(mover) && isDefined(mover.unresolved_collision_notify_min))
+    if(isDefined(mover) && isDefined(mover.unresolved_collision_notify_min)) {
       unresolved_collision_notify_min = mover.unresolved_collision_notify_min;
+    }
 
     if(self.unresolved_collision_count >= unresolved_collision_notify_min) {
       if(isDefined(mover)) {
@@ -588,8 +606,9 @@ player_unresolved_collision_watch() {
 clear_unresolved_collision_count_next_frame() {
   self endon("unresolved_collision");
   waitframe();
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.unresolved_collision_count = 0;
+  }
 }
 
 unresolved_collision_owner_damage(player) {
@@ -603,11 +622,13 @@ unresolved_collision_owner_damage(player) {
   canInflictorOwnerDamagePlayer = false;
 
   if(level.teambased) {
-    if(isDefined(inflictor.owner.team) && inflictor.owner.team != player.team)
+    if(isDefined(inflictor.owner.team) && inflictor.owner.team != player.team) {
       canInflictorOwnerDamagePlayer = true;
+    }
   } else {
-    if(player != inflictor.owner)
+    if(player != inflictor.owner) {
       canInflictorOwnerDamagePlayer = true;
+    }
   }
 
   if(!canInflictorOwnerDamagePlayer) {
@@ -616,8 +637,9 @@ unresolved_collision_owner_damage(player) {
   }
 
   damage_ammount = 1000;
-  if(isDefined(inflictor.unresolved_collision_damage))
+  if(isDefined(inflictor.unresolved_collision_damage)) {
     damage_ammount = inflictor.unresolved_collision_damage;
+  }
 
   player DoDamage(damage_ammount, inflictor.origin, inflictor.owner, inflictor, "MOD_CRUSH");
 }
@@ -652,8 +674,9 @@ unresolved_collision_nearest_node(player, bAllowSuicide) {
     if(PositionWouldTelefrag(org)) {
       continue;
     }
-    if(player GetStance() == "prone")
+    if(player GetStance() == "prone") {
       player Setstance("crouch");
+    }
 
     player SetOrigin(org);
     return;
@@ -661,8 +684,9 @@ unresolved_collision_nearest_node(player, bAllowSuicide) {
 
   player SetOrigin(player.origin - avoid_telefrag_offset);
 
-  if(!isDefined(bAllowSuicide))
+  if(!isDefined(bAllowSuicide)) {
     bAllowSuicide = true;
+  }
 
   if(bAllowSuicide) {
     player mover_suicide();
@@ -720,41 +744,49 @@ script_mover_start_use(useEnt) {
   self.startUseMover = self GetMovingPlatformParent();
   if(isDefined(self.startUseMover)) {
     topParent = self.startUseMover script_mover_get_top_parent();
-    if(isDefined(topParent))
+    if(isDefined(topParent)) {
       self.startUseMover = topParent;
+    }
 
     self.startUseMover.startUseOrigin = self.startUseMover.origin;
   }
 }
 
 script_mover_has_parent_moved(parent) {
-  if(!isDefined(parent))
+  if(!isDefined(parent)) {
     return false;
+  }
 
   return LengthSquared(parent.origin - parent.startUseOrigin) > 0.001;
 }
 
 script_mover_use_can_link(ent) {
-  if(!IsPlayer(self))
+  if(!IsPlayer(self)) {
     return true;
+  }
 
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return false;
+  }
 
   topParent = ent script_mover_get_top_parent();
   playerParent = self.startUseMover;
 
-  if(!isDefined(topParent) && !isDefined(playerParent))
+  if(!isDefined(topParent) && !isDefined(playerParent)) {
     return true;
+  }
 
-  if(isDefined(topParent) && isDefined(playerParent) && (topParent == playerParent))
+  if(isDefined(topParent) && isDefined(playerParent) && (topParent == playerParent)) {
     return true;
+  }
 
-  if(script_mover_has_parent_moved(topParent))
+  if(script_mover_has_parent_moved(topParent)) {
     return false;
+  }
 
-  if(script_mover_has_parent_moved(playerParent))
+  if(script_mover_has_parent_moved(playerParent)) {
     return false;
+  }
 
   return true;
 }
@@ -900,8 +932,9 @@ handle_moving_platforms(data) {
 
   if(isDefined(data.linkParent)) {
     parent = self GetLinkedParent();
-    if(!isDefined(parent) || parent != data.linkParent)
+    if(!isDefined(parent) || parent != data.linkParent) {
       self linkto(data.linkParent);
+    }
   }
 
   thread handle_moving_platform_touch(data);

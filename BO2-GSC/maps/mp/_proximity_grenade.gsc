@@ -107,8 +107,9 @@ proximitydetonate(attacker, weaponname) {
 
 proximitygrenadedamageplayer(eattacker, einflictor) {
   if(!self hasperk("specialty_proximityprotection")) {
-    if(!level.proximitygrenadeeffectdebug)
+    if(!level.proximitygrenadeeffectdebug) {
       self thread damageplayerinradius(einflictor.origin, eattacker, einflictor);
+    }
   }
 }
 
@@ -160,8 +161,9 @@ damageplayerinradius(position, owner, einflictor) {
   damage = level.proximitygrenadedotdamageamount;
   playFXOnTag(level._effect["prox_grenade_player_shock"], self, "J_SpineUpper");
 
-  if(level.hardcoremode)
+  if(level.hardcoremode) {
     damage = level.proximitygrenadedotdamageamounthardcore;
+  }
 
   if(self mayapplyscreeneffect()) {
     shellshock_duration = 1.5;

@@ -21,8 +21,9 @@ init() {
     level thread func_12E95();
   }
 
-  if(scripts\mp\utility\game::matchmakinggame())
+  if(scripts\mp\utility\game::matchmakinggame()) {
     level thread watchafk();
+  }
 }
 
 onplayerconnect() {
@@ -69,8 +70,9 @@ func_11B01() {
   self.timeplayed["total"] = 0;
   self.timeplayed["missionTeam"] = 0;
 
-  if(!isDefined(self.pers["validKickTime"]))
+  if(!isDefined(self.pers["validKickTime"])) {
     self.pers["validKickTime"] = 0;
+  }
 
   scripts\mp\utility\game::gameflagwait("prematch_done");
 
@@ -82,8 +84,9 @@ func_11B01() {
       self.timeplayed["total"]++;
       self.timeplayed["missionTeam"]++;
 
-      if(scripts\mp\utility\game::isreallyalive(self))
+      if(scripts\mp\utility\game::isreallyalive(self)) {
         self.pers["validKickTime"]++;
+      }
 
       continue;
     }
@@ -93,29 +96,34 @@ func_11B01() {
       self.timeplayed["total"]++;
       self.timeplayed["missionTeam"]++;
 
-      if(scripts\mp\utility\game::isreallyalive(self))
+      if(scripts\mp\utility\game::isreallyalive(self)) {
         self.pers["validKickTime"]++;
+      }
 
       continue;
     }
 
     if(self.sessionteam == "none") {
-      if(isDefined(self.pers["team"]) && self.pers["team"] == "allies")
+      if(isDefined(self.pers["team"]) && self.pers["team"] == "allies") {
         self.timeplayed["allies"]++;
-      else if(isDefined(self.pers["team"]) && self.pers["team"] == "axis")
+      }
+      else if(isDefined(self.pers["team"]) && self.pers["team"] == "axis") {
         self.timeplayed["axis"]++;
+      }
 
       self.timeplayed["total"]++;
       self.timeplayed["missionTeam"]++;
 
-      if(scripts\mp\utility\game::isreallyalive(self))
+      if(scripts\mp\utility\game::isreallyalive(self)) {
         self.pers["validKickTime"]++;
+      }
 
       continue;
     }
 
-    if(self.sessionteam == "spectator")
+    if(self.sessionteam == "spectator") {
       self.timeplayed["other"]++;
+    }
   }
 }
 
@@ -125,16 +133,18 @@ func_12EF3() {
   for(;;) {
     scripts\mp\hostmigration::waittillhostmigrationdone();
 
-    foreach(var_01 in level.players)
+    foreach(var_01 in level.players) {
     var_01 func_12EEE();
+    }
 
     wait 10.0;
   }
 }
 
 finalizeplayertimes() {
-  while(!level.gameended)
+  while(!level.gameended) {
     wait 2.0;
+  }
 
   foreach(var_01 in level.players) {
     var_01 func_12EEE();
@@ -228,8 +238,9 @@ updateteambalancedvar() {
   for(;;) {
     var_00 = getdvarint("scr_teambalance");
 
-    if(level.teambalance != var_00)
+    if(level.teambalance != var_00) {
       level.teambalance = getdvarint("scr_teambalance");
+    }
 
     wait 1;
   }
@@ -241,8 +252,9 @@ func_12F37() {
   wait 0.15;
 
   if(level.teambalance && scripts\mp\utility\game::isroundbased()) {
-    if(isDefined(game["BalanceTeamsNextRound"]))
+    if(isDefined(game["BalanceTeamsNextRound"])) {
       scripts\mp\hud_message::showerrormessagetoallplayers("MP_AUTOBALANCE_NEXT_ROUND");
+    }
 
     level waittill("restarting");
 
@@ -260,8 +272,9 @@ func_12F37() {
           scripts\mp\hud_message::showerrormessagetoallplayers("MP_AUTOBALANCE_SECONDS", 15);
           wait 15.0;
 
-          if(!_meth_81A2())
+          if(!_meth_81A2()) {
             level balanceteams();
+          }
         }
 
         wait 59.0;
@@ -283,14 +296,17 @@ _meth_81A2() {
       continue;
     }
 
-    if(isDefined(var_0[var_01].pers["team"]) && var_0[var_01].pers["team"] == "axis")
+    if(isDefined(var_0[var_01].pers["team"]) && var_0[var_01].pers["team"] == "axis") {
       level.team["axis"]++;
+    }
   }
 
-  if(level.team["allies"] > level.team["axis"] + level.teambalance || level.team["axis"] > level.team["allies"] + level.teambalance)
+  if(level.team["allies"] > level.team["axis"] + level.teambalance || level.team["axis"] > level.team["allies"] + level.teambalance) {
     return 0;
-  else
+  }
+  else {
     return 1;
+  }
 }
 
 balanceteams() {
@@ -308,8 +324,9 @@ balanceteams() {
       continue;
     }
 
-    if(isDefined(var_2[var_03].pers["team"]) && var_2[var_03].pers["team"] == "axis")
+    if(isDefined(var_2[var_03].pers["team"]) && var_2[var_03].pers["team"] == "axis") {
       var_1[var_1.size] = var_2[var_03];
+    }
   }
 
   var_04 = undefined;
@@ -325,8 +342,9 @@ balanceteams() {
           continue;
         }
 
-        if(var_0[var_05].pers["teamTime"] > var_4.pers["teamTime"])
+        if(var_0[var_05].pers["teamTime"] > var_4.pers["teamTime"]) {
           var_04 = var_0[var_05];
+        }
       }
 
       var_04[[level.onteamselection]]("axis");
@@ -340,8 +358,9 @@ balanceteams() {
           continue;
         }
 
-        if(var_1[var_05].pers["teamTime"] > var_4.pers["teamTime"])
+        if(var_1[var_05].pers["teamTime"] > var_4.pers["teamTime"]) {
           var_04 = var_1[var_05];
+        }
       }
 
       var_04[[level.onteamselection]]("allies");
@@ -358,8 +377,9 @@ balanceteams() {
         continue;
       }
 
-      if(isDefined(var_2[var_03].pers["team"]) && var_2[var_03].pers["team"] == "axis")
+      if(isDefined(var_2[var_03].pers["team"]) && var_2[var_03].pers["team"] == "axis") {
         var_1[var_1.size] = var_2[var_03];
+      }
     }
   }
 }
@@ -373,8 +393,9 @@ func_D3D8(var_00, var_01) {}
 countplayers() {
   var_00 = [];
 
-  for(var_01 = 0; var_01 < level.teamnamelist.size; var_1++)
+  for(var_01 = 0; var_01 < level.teamnamelist.size; var_1++) {
     var_0[level.teamnamelist[var_01]] = 0;
+  }
 
   for(var_01 = 0; var_01 < level.players.size; var_1++) {
     if(level.players[var_01] == self) {
@@ -383,8 +404,9 @@ countplayers() {
     if(level.players[var_01].pers["team"] == "spectator") {
       continue;
     }
-    if(isDefined(level.players[var_01].pers["team"]))
+    if(isDefined(level.players[var_01].pers["team"])) {
       var_0[level.players[var_01].pers["team"]]++;
+    }
   }
 
   return var_00;
@@ -417,8 +439,9 @@ func_F6B8() {
 }
 
 setcharactermodels(var_00, var_01, var_02) {
-  if(isDefined(self.headmodel))
+  if(isDefined(self.headmodel)) {
     self detach(self.headmodel);
+  }
 
   self setModel(var_00);
   self setviewmodel(var_02);
@@ -503,17 +526,21 @@ func_F6BE() {
 }
 
 getplayermodelindex() {
-  if(level.rankedmatch)
+  if(level.rankedmatch) {
     return self getrankedplayerdata("rankedloadouts", "squadMembers", "body");
-  else
+  }
+  else {
     return self getrankedplayerdata("privateloadouts", "squadMembers", "body");
+  }
 }
 
 getplayerheadmodel() {
-  if(level.rankedmatch)
+  if(level.rankedmatch) {
     return self getrankedplayerdata("rankedloadouts", "squadMembers", "head");
-  else
+  }
+  else {
     return self getrankedplayerdata("privateloadouts", "squadMembers", "head");
+  }
 }
 
 clearclienttriggeraudiozone(var_00) {
@@ -525,20 +552,26 @@ getplayermodelname(var_00) {
 }
 
 func_FADC() {
-  if(isai(self) || level.gametype == "infect" && self.team == "allies" && isDefined(self.infected_archtype) && self.infected_archtype == "archetype_scout")
+  if(isai(self) || level.gametype == "infect" && self.team == "allies" && isDefined(self.infected_archtype) && self.infected_archtype == "archetype_scout") {
     var_00 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.loadoutarchetype) + 1;
-  else if(isDefined(self.changedarchetypeinfo))
+  }
+  else if(isDefined(self.changedarchetypeinfo)) {
     var_00 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.changedarchetypeinfo.archetype) + 1;
-  else
+  }
+  else {
     var_00 = getdvarint("forceArchetype", 0);
+  }
 
-  if(level.gametype == "infect" && self.team == "axis")
+  if(level.gametype == "infect" && self.team == "axis") {
     var_00 = 3;
+  }
 
-  if(isplayer(self) && var_00 == 0)
+  if(isplayer(self) && var_00 == 0) {
     setmodelfromcustomization();
-  else
+  }
+  else {
     func_72A5(var_00);
+  }
 
   if(!isai(self)) {
     var_01 = getplayermodelindex();
@@ -552,17 +585,21 @@ func_FADC() {
   if(scripts\mp\utility\game::isanymlgmatch() && !isai(self)) {
     var_03 = getplayermodelname(getplayermodelindex());
 
-    if(issubstr(var_03, "fullbody_sniper"))
+    if(issubstr(var_03, "fullbody_sniper")) {
       thread func_72B2();
+    }
   }
 
   if(scripts\mp\utility\game::isjuggernaut()) {
-    if(isDefined(self.isjuggernautmaniac) && self.isjuggernautmaniac)
+    if(isDefined(self.isjuggernautmaniac) && self.isjuggernautmaniac) {
       thread[[game[self.team + "_model"]["JUGGERNAUT_MANIAC"]]]();
-    else if(isDefined(self.isjuggernautlevelcustom) && self.isjuggernautlevelcustom)
+    }
+    else if(isDefined(self.isjuggernautlevelcustom) && self.isjuggernautlevelcustom) {
       thread[[game[self.team + "_model"]["JUGGERNAUT_CUSTOM"]]]();
-    else
+    }
+    else {
       thread[[game[self.team + "_model"]["JUGGERNAUT"]]]();
+    }
   }
 }
 
@@ -594,11 +631,13 @@ func_12E95() {
   for(;;) {
     var_0++;
 
-    if(var_00 >= level.players.size)
+    if(var_00 >= level.players.size) {
       var_00 = 0;
+    }
 
-    if(isDefined(level.players[var_00]))
+    if(isDefined(level.players[var_00])) {
       level.players[var_00] func_12E94();
+    }
 
     wait 1.0;
   }
@@ -668,8 +707,9 @@ watchafk() {
   for(;;) {
     var_0++;
 
-    if(var_00 >= level.players.size)
+    if(var_00 >= level.players.size) {
       var_00 = 0;
+    }
 
     if(isDefined(level.players[var_00])) {
       if(isai(level.players[var_00])) {
@@ -687,8 +727,9 @@ checkforafk() {
   if(scripts\mp\utility\game::istrue(level.gameended)) {
     return;
   }
-  if(!isDefined(self.pers["validKickTime"]))
+  if(!isDefined(self.pers["validKickTime"])) {
     self.pers["validKickTime"] = 0;
+  }
 
   var_00 = self.pers["validKickTime"];
   var_01 = 0;
@@ -699,15 +740,17 @@ checkforafk() {
   if(isDefined(self.pers["stanceTracking"]) && var_00 > 30) {
     var_05 = self.pers["stanceTracking"]["crouch"] / var_00;
 
-    if(var_05 > 1.0)
+    if(var_05 > 1.0) {
       var_01 = 1;
+    }
   }
 
   if(var_04 && var_00 > 60) {
     if(!isDefined(self.pers["distTrackingPassed"])) {
       if(level.gametype == "infect") {
-        if(self.team == "axis")
+        if(self.team == "axis") {
           var_01 = 1;
+        }
       } else
         var_01 = 1;
     }
@@ -717,16 +760,18 @@ checkforafk() {
     if(!isDefined(self.lastdamagetime) || self.lastdamagetime + 60000 < gettime()) {
       switch (level.gametype) {
         case "gun":
-          if(scripts\mp\utility\game::istrue(level.kick_afk_check))
+          if(scripts\mp\utility\game::istrue(level.kick_afk_check)) {
             var_01 = 1;
+          }
 
           break;
       }
     }
   }
 
-  if(var_01 && !isgamebattlematch())
+  if(var_01 && !isgamebattlematch()) {
     kick(self getentitynumber(), "EXE_PLAYERKICKED_INACTIVE", 1);
+  }
 }
 
 getjointeampermissions(var_00) {
@@ -740,24 +785,30 @@ getjointeampermissions(var_00) {
     if(isDefined(var_5.pers["team"]) && var_5.pers["team"] == var_00) {
       var_1++;
 
-      if(isbot(var_05))
+      if(isbot(var_05)) {
         var_2++;
+      }
     }
   }
 
-  if(var_01 < level.func_115D7)
+  if(var_01 < level.func_115D7) {
     return 1;
-  else if(var_02 > 0)
+  }
+  else if(var_02 > 0) {
     return 1;
-  else if(!scripts\mp\utility\game::matchmakinggame())
+  }
+  else if(!scripts\mp\utility\game::matchmakinggame()) {
     return 1;
-  else if(level.gametype == "infect")
+  }
+  else if(level.gametype == "infect") {
     return 1;
+  }
   else {
     bbprint("mp_exceeded_team_max_error", "player_xuid %s isHost %i", self getxuid(), self ishost());
 
-    if(self ishost())
+    if(self ishost()) {
       wait 1.5;
+    }
 
     setnojiptime(1);
     level.nojip = 1;
@@ -769,8 +820,9 @@ getjointeampermissions(var_00) {
 onplayerspawned() {
   level endon("game_ended");
 
-  for(;;)
+  for(;;) {
     self waittill("spawned_player");
+  }
 }
 
 func_BD73(var_00) {

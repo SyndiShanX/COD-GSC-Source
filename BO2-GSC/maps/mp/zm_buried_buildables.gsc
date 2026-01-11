@@ -56,8 +56,9 @@ prepare_chalk_weapon_list() {
   level.buildable_wallbuy_weapon_angles["870mcs_zm"] = undefined;
 
   foreach(model in level.buildable_wallbuy_weapon_models) {
-    if(isDefined(model))
+    if(isDefined(model)) {
       precachemodel(model);
+    }
   }
 }
 
@@ -85,23 +86,29 @@ init_buildables(buildablesenabledlist) {
     level.buildable_piece_counts[2] = 13;
   }
 
-  if(isinarray(buildablesenabledlist, "sq_common"))
+  if(isinarray(buildablesenabledlist, "sq_common")) {
     add_zombie_buildable("sq_common", level.str_buildables_build, level.str_buildables_building);
+  }
 
-  if(isinarray(buildablesenabledlist, "buried_sq_tpo_switch"))
+  if(isinarray(buildablesenabledlist, "buried_sq_tpo_switch")) {
     add_zombie_buildable("buried_sq_tpo_switch", level.str_buildables_build, level.str_buildables_building);
+  }
 
-  if(isinarray(buildablesenabledlist, "buried_sq_ghost_lamp"))
+  if(isinarray(buildablesenabledlist, "buried_sq_ghost_lamp")) {
     add_zombie_buildable("buried_sq_ghost_lamp", level.str_buildables_build, level.str_buildables_building);
+  }
 
-  if(isinarray(buildablesenabledlist, "buried_sq_bt_m_tower"))
+  if(isinarray(buildablesenabledlist, "buried_sq_bt_m_tower")) {
     add_zombie_buildable("buried_sq_bt_m_tower", level.str_buildables_build, level.str_buildables_building);
+  }
 
-  if(isinarray(buildablesenabledlist, "buried_sq_bt_r_tower"))
+  if(isinarray(buildablesenabledlist, "buried_sq_bt_r_tower")) {
     add_zombie_buildable("buried_sq_bt_r_tower", level.str_buildables_build, level.str_buildables_building);
+  }
 
-  if(isinarray(buildablesenabledlist, "buried_sq_oillamp"))
+  if(isinarray(buildablesenabledlist, "buried_sq_oillamp")) {
     add_zombie_buildable("buried_sq_oillamp", level.str_buildables_build, level.str_buildables_building, &"NULL_EMPTY");
+  }
 
   if(isinarray(buildablesenabledlist, "turbine")) {
     add_zombie_buildable("turbine", level.str_buildables_build, level.str_buildables_building, &"NULL_EMPTY");
@@ -138,8 +145,9 @@ init_buildables(buildablesenabledlist) {
     add_zombie_buildable_piece_vox_category("chalk", "gunshop_chalk", 300);
   }
 
-  if(isinarray(buildablesenabledlist, "sloth"))
+  if(isinarray(buildablesenabledlist, "sloth")) {
     add_zombie_buildable("sloth", &"ZM_BURIED_BOOZE_GV", level.str_buildables_building, &"NULL_EMPTY");
+  }
 
   if(isinarray(buildablesenabledlist, "keys_zm")) {
     add_zombie_buildable("keys_zm", &"ZM_BURIED_KEYS_BL", level.str_buildables_building, &"NULL_EMPTY");
@@ -349,8 +357,9 @@ include_buildables(buildablesenabledlist) {
     chalk.triggerthink = ::chalkbuildable;
     chalk.onuseplantobject = ::onuseplantobject_chalk;
 
-    if(isDefined(level.buy_random_wallbuys) && level.buy_random_wallbuys)
+    if(isDefined(level.buy_random_wallbuys) && level.buy_random_wallbuys) {
       chalk.oncantuse = ::oncantuse_chalk;
+    }
 
     chalk.onbeginuse = ::onbeginuse_chalk;
     chalk.onenduse = ::onenduse_chalk;
@@ -378,8 +387,9 @@ include_buildables(buildablesenabledlist) {
 sqcommonbuildable() {
   level.sq_buildable = maps\mp\zombies\_zm_buildables::buildable_trigger_think("sq_common_buildable_trigger", "sq_common", "sq_common", "", 1, 0);
 
-  if(isDefined(level.sq_buildable))
+  if(isDefined(level.sq_buildable)) {
     level.sq_buildable.ignore_open_sesame = 1;
+  }
 }
 
 sqmtowerbuildable() {
@@ -390,8 +400,9 @@ sqmtowerbuildable() {
 remove_all_ents(named) {
   ents = getEntArray(named, "targetname");
 
-  foreach(ent in ents)
+  foreach(ent in ents) {
   ent delete();
+  }
 }
 
 remove_maxis_tower() {
@@ -471,8 +482,9 @@ chalkbuildable() {
       stub.origin = wallbuy.origin;
       stub.angles = wallbuy.angles;
 
-      if(isDefined(wallbuy.script_location))
+      if(isDefined(wallbuy.script_location)) {
         stub.location = wallbuy.script_location;
+      }
     }
   }
 }
@@ -492,11 +504,13 @@ keysbuildable() {
 }
 
 safe_place_for_buildable_piece(piece) {
-  if(self is_jumping())
+  if(self is_jumping()) {
     return false;
+  }
 
-  if(piece.buildablename == "booze")
+  if(piece.buildablename == "booze") {
     return false;
+  }
 
   return true;
 }
@@ -563,8 +577,9 @@ sqoillampbuildable() {
 }
 
 sq_generator_buildablestub_reject_func(player) {
-  if(!flag("ftl_lantern_charged"))
+  if(!flag("ftl_lantern_charged")) {
     return true;
+  }
 
   return false;
 }
@@ -583,14 +598,17 @@ onpickup_common(player) {
   if(isDefined(self.buildablename)) {
     sound = "zmb_buildable_pickup";
 
-    if(self.buildablename == "candy")
+    if(self.buildablename == "candy") {
       sound = "zmb_candy_pickup";
+    }
 
-    if(self.buildablename == "booze")
+    if(self.buildablename == "booze") {
       sound = "zmb_booze_pickup";
+    }
 
-    if(self.buildablename == "chalk")
+    if(self.buildablename == "chalk") {
       sound = "zmb_chalk_grab";
+    }
 
     player playSound(sound);
   }
@@ -626,16 +644,19 @@ check_for_buildable_turbine_vox(stub, start_build_counter) {
   build_counter = start_build_counter;
 
   for(i = 0; i < buildable.pieces.size; i++) {
-    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built || isDefined(buildable.pieces[i].piece_owner))
+    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built || isDefined(buildable.pieces[i].piece_owner)) {
       piece_counter++;
+    }
 
-    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built)
+    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built) {
       build_counter++;
+    }
   }
 
   if(build_counter >= 2 && piece_counter == 3) {
-    if(!flag("power_on"))
+    if(!flag("power_on")) {
       level.maxis_turbine_vox_played = 1;
+    }
   }
 }
 
@@ -661,10 +682,12 @@ wait_respawn_candy_booze(piece, name) {
 wait_respawn_booze_at_start(piece) {
   wait 4;
 
-  if(isDefined(level.jail_barricade_down) && level.jail_barricade_down)
+  if(isDefined(level.jail_barricade_down) && level.jail_barricade_down) {
     level thread wait_respawn_candy_booze(piece, "booze");
-  else
+  }
+  else {
     piece piece_spawn_at(piece.start_origin, piece.start_angles);
+  }
 }
 
 piece_spawn_booze() {
@@ -682,10 +705,12 @@ piece_unspawn_booze() {
 }
 
 piece_destroy_booze() {
-  if(isDefined(level.jail_barricade_down) && level.jail_barricade_down)
+  if(isDefined(level.jail_barricade_down) && level.jail_barricade_down) {
     level thread wait_respawn_candy_booze(self, "booze");
-  else
+  }
+  else {
     level thread wait_respawn_booze_at_start(self);
+  }
 }
 
 onpickup_booze(player) {
@@ -730,13 +755,15 @@ ondrop_booze(player) {
   player notify("sloth_drop", "booze");
   piece = player player_get_buildable_piece(1);
 
-  if(isDefined(piece))
+  if(isDefined(piece)) {
     piece.model setclientfield("buildable_glint_fx", 1);
+  }
 
   ondrop_common(player);
 
-  if(!(isDefined(level.jail_barricade_down) && level.jail_barricade_down))
+  if(!(isDefined(level.jail_barricade_down) && level.jail_barricade_down)) {
     thread wait_put_piece_back_in_jail(piece, level.booze_start_origin, level.booze_start_angles);
+  }
 }
 
 wait_put_piece_back_in_jail(piece, origin, angles) {
@@ -753,8 +780,9 @@ ondrop_candy(player) {
   player notify("sloth_drop", "candy");
   piece = player player_get_buildable_piece(1);
 
-  if(isDefined(piece))
+  if(isDefined(piece)) {
     piece.model setclientfield("buildable_glint_fx", 1);
+  }
 
   ondrop_common(player);
 }
@@ -802,11 +830,13 @@ chalk_host_migration() {
         weapon = chalk.script_noteworthy;
         fx = level._effect["m14_zm_fx"];
 
-        if(isDefined(level._effect[weapon + "_chalk_fx"]))
+        if(isDefined(level._effect[weapon + "_chalk_fx"])) {
           fx = level._effect[weapon + "_chalk_fx"];
+        }
 
-        if(!(isDefined(level.chalk_buildable_pieces_hide) && level.chalk_buildable_pieces_hide))
+        if(!(isDefined(level.chalk_buildable_pieces_hide) && level.chalk_buildable_pieces_hide)) {
           playFXOnTag(fx, chalk.model, "tag_origin");
+        }
       }
 
       wait_network_frame();
@@ -818,21 +848,25 @@ piece_spawn_chalk_internal() {
   weapon = self.script_noteworthy;
 
   if(isDefined(weapon)) {
-    if(!isDefined(level.chalk_pieces))
+    if(!isDefined(level.chalk_pieces)) {
       level.chalk_pieces = [];
+    }
 
     level.chalk_pieces = add_to_array(level.chalk_pieces, self, 0);
     self.model setModel("tag_origin");
     wait 0.05;
     fx = level._effect["m14_zm_fx"];
 
-    if(isDefined(level._effect[weapon + "_chalk_fx"]))
+    if(isDefined(level._effect[weapon + "_chalk_fx"])) {
       fx = level._effect[weapon + "_chalk_fx"];
+    }
 
-    if(!(isDefined(level.chalk_buildable_pieces_hide) && level.chalk_buildable_pieces_hide))
+    if(!(isDefined(level.chalk_buildable_pieces_hide) && level.chalk_buildable_pieces_hide)) {
       playFXOnTag(fx, self.model, "tag_origin");
-    else
+    }
+    else {
       self.model.origin = self.model.origin + vectorscale((0, 0, -1), 1000.0);
+    }
 
     if(isDefined(level.monolingustic_prompt_format) && level.monolingustic_prompt_format) {
       self.hint_grab = &"ZM_BURIED_WB";
@@ -873,8 +907,9 @@ pick_up(thing) {
   candidate_list = [];
 
   foreach(zone in level.zones) {
-    if(isDefined(zone.unitrigger_stubs))
+    if(isDefined(zone.unitrigger_stubs)) {
       candidate_list = arraycombine(candidate_list, zone.unitrigger_stubs, 1, 0);
+    }
   }
 
   candidate_list = array_randomize(candidate_list);
@@ -941,8 +976,9 @@ buy_random_wallbuy(player, cost) {
   if(player.score >= cost) {
     temp_piece = player pick_up("chalk");
 
-    if(!isDefined(temp_piece))
+    if(!isDefined(temp_piece)) {
       return temp_piece;
+    }
 
     player maps\mp\zombies\_zm_score::minus_to_player_score(cost);
     bbprint("zombie_uses", "playername %s playerscore %d round %d cost %d name %s x %f y %f z %f type %s", player.name, player.score, level.round_number, cost, self.zombie_weapon_upgrade, self.origin, "weapon");
@@ -995,13 +1031,15 @@ oncantuse_chalk(player) {
       origin = self.origin;
       angles = self.angles;
 
-      if(isDefined(level._effect["wallbuy_replace"]))
+      if(isDefined(level._effect["wallbuy_replace"])) {
         playFX(level._effect["wallbuy_replace"], origin, anglesToForward(angles));
+      }
 
       add_dynamic_wallbuy(weapon, self.target, 0);
 
-      if(is_melee_weapon(weapon))
+      if(is_melee_weapon(weapon)) {
         player maps\mp\zombies\_zm_melee_weapon::give_melee_weapon_by_name(weapon);
+      }
       else {
         if(is_lethal_grenade(weapon)) {
           player takeweapon(player get_player_lethal_grenade());
@@ -1012,13 +1050,15 @@ oncantuse_chalk(player) {
         player weapon_give(weapon);
       }
 
-      if(!isDefined(level.built_wallbuys))
+      if(!isDefined(level.built_wallbuys)) {
         level.built_wallbuys = 0;
+      }
 
       level.built_wallbuys++;
 
-      if(level.built_wallbuys >= 6)
+      if(level.built_wallbuys >= 6) {
         level.built_wallbuys = -100;
+      }
     }
 
     self buildablestub_finish_build(player);
@@ -1037,13 +1077,15 @@ onuseplantobject_chalk(entity) {
       origin = self.origin;
       angles = self.angles;
 
-      if(isDefined(level._effect["wallbuy_replace"]))
+      if(isDefined(level._effect["wallbuy_replace"])) {
         playFX(level._effect["wallbuy_replace"], origin, anglesToForward(angles));
+      }
 
       add_dynamic_wallbuy(weapon, self.target, 1);
 
-      if(!isDefined(level.built_wallbuys))
+      if(!isDefined(level.built_wallbuys)) {
         level.built_wallbuys = 0;
+      }
 
       level.built_wallbuys++;
 
@@ -1055,8 +1097,9 @@ onuseplantobject_chalk(entity) {
       }
 
       if(level.built_wallbuys >= 6) {
-        if(isplayer(entity))
+        if(isplayer(entity)) {
           entity maps\mp\zombies\_zm_score::player_add_points("build_wallbuy", 2000);
+        }
 
         level.built_wallbuys = -100;
       } else if(isplayer(entity))
@@ -1087,8 +1130,9 @@ ondrop_keys(player) {
   piece = player player_get_buildable_piece(1);
   ondrop_common(player);
 
-  if(!(isDefined(level.jail_barricade_down) && level.jail_barricade_down))
+  if(!(isDefined(level.jail_barricade_down) && level.jail_barricade_down)) {
     thread wait_put_piece_back_in_jail(piece, level.key_start_origin, level.key_start_angles);
+  }
 }
 
 cell_door_key_prompt(player) {
@@ -1144,8 +1188,9 @@ destroyglintfx() {
   wait_network_frame();
   wait_network_frame();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 generate_piece_makers() {
@@ -1175,45 +1220,58 @@ generate_piece_makers() {
 }
 
 allow_players_purchase(name, allow_purchase) {
-  if(isDefined(level.piece_makers[name]))
+  if(isDefined(level.piece_makers[name])) {
     level.piece_makers[name].allow_purchase = allow_purchase;
+  }
 }
 
 piece_maker_unitrigger(name, prompt_fn, think_fn) {
   unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = self.origin;
 
-  if(isDefined(self.script_angles))
+  if(isDefined(self.script_angles)) {
     unitrigger_stub.angles = self.script_angles;
-  else if(isDefined(self.angles))
+  }
+  else if(isDefined(self.angles)) {
     unitrigger_stub.angles = self.angles;
-  else
+  }
+  else {
     unitrigger_stub.angles = (0, 0, 0);
+  }
 
   unitrigger_stub.script_angles = unitrigger_stub.angles;
 
-  if(isDefined(self.script_length))
+  if(isDefined(self.script_length)) {
     unitrigger_stub.script_length = self.script_length;
-  else
+  }
+  else {
     unitrigger_stub.script_length = 32;
+  }
 
-  if(isDefined(self.script_width))
+  if(isDefined(self.script_width)) {
     unitrigger_stub.script_width = self.script_width;
-  else
+  }
+  else {
     unitrigger_stub.script_width = 32;
+  }
 
-  if(isDefined(self.script_height))
+  if(isDefined(self.script_height)) {
     unitrigger_stub.script_height = self.script_height;
-  else
+  }
+  else {
     unitrigger_stub.script_height = 64;
+  }
 
-  if(isDefined(self.radius))
+  if(isDefined(self.radius)) {
     unitrigger_stub.radius = self.radius;
-  else
+  }
+  else {
     unitrigger_stub.radius = 32;
+  }
 
-  if(isDefined(self.script_unitrigger_type))
+  if(isDefined(self.script_unitrigger_type)) {
     unitrigger_stub.script_unitrigger_type = self.script_unitrigger_type;
+  }
   else {
     unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
     unitrigger_stub.origin = unitrigger_stub.origin - anglestoright(unitrigger_stub.angles) * (unitrigger_stub.script_length / 2);

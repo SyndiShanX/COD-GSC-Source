@@ -7,10 +7,12 @@
 
 main() {
   flag_init("give_player_abilities");
-  if(maps\mp\alien\_utility::is_chaos_mode())
+  if(maps\mp\alien\_utility::is_chaos_mode()) {
     thread maps\mp\alien\_chaos::chaos_setup_op_weapons();
-  else
+  }
+  else {
     thread setup_op_weapons();
+  }
 
   level._effect["smoke_green_signal"] = loadfx("vfx/gameplay/alien/vfx_alien_cskill_medic_smk_01");
 }
@@ -163,10 +165,12 @@ tank_skill_setup(tank_skill, secondary) {
       }
     }
 
-    if(isDefined(secondary))
+    if(isDefined(secondary)) {
       self wait_for_secondary_skill_button();
-    else
+    }
+    else {
       self wait_for_primary_skill_button();
+    }
 
     variables = generic_variable_setup(tank_skill);
 
@@ -182,10 +186,12 @@ tank_skill_setup(tank_skill, secondary) {
 
       self VisionSetNakedForPlayer("", .5);
 
-      if(isDefined(secondary))
+      if(isDefined(secondary)) {
         skill_cooldown_secondary(tank_skill);
-      else
+      }
+      else {
         skill_cooldown_primary(tank_skill);
+      }
     }
     wait .05;
   }
@@ -343,12 +349,14 @@ proto_hack_flare_update() {
 }
 
 create_tank_ring(variables) {
-  if(isDefined(self))
+  if(isDefined(self)) {
     playFXOnTag(loadfx("vfx/gameplay/alien/vfx_alien_cskill_tank_01"), self, "tag_origin");
+  }
 
   waittill_any_timeout(variables["duration"], "last_stand");
-  if(isDefined(self))
+  if(isDefined(self)) {
     stopFXOnTag(loadfx("vfx/gameplay/alien/vfx_alien_cskill_tank_01"), self, "tag_origin");
+  }
 }
 
 HEAL_TICK = .1;
@@ -398,10 +406,12 @@ medic_skill_setup(medic_skill, secondary) {
       }
     }
 
-    if(isDefined(secondary))
+    if(isDefined(secondary)) {
       self wait_for_secondary_skill_button();
-    else
+    }
+    else {
       self wait_for_primary_skill_button();
+    }
 
     variables = generic_variable_setup(medic_skill);
 
@@ -410,10 +420,12 @@ medic_skill_setup(medic_skill, secondary) {
     if(ability_cost(variables["cost"], secondary)) {
       selfmaps\mp\alien\_music_and_dialog::playMedicClassSkillVO(self);
       self create_heal_ring(variables);
-      if(isDefined(secondary))
+      if(isDefined(secondary)) {
         skill_cooldown_secondary(medic_skill);
-      else
+      }
+      else {
         skill_cooldown_primary(medic_skill);
+      }
     }
 
     wait .05;
@@ -445,16 +457,19 @@ create_heal_ring(variables) {
   self thread death_deletes_heal_ring(carriedObj);
   self waittill_any_timeout(variables["duration"], "last_stand", "death", "disconnect");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("heal_over");
+  }
 
   sound_heal StopLoopSound();
   sound_heal unlink();
-  if(isDefined(carriedObj))
+  if(isDefined(carriedObj)) {
     carriedObj delete();
+  }
   wait 0.1;
-  if(isDefined(sound_heal))
+  if(isDefined(sound_heal)) {
     sound_heal delete();
+  }
 }
 
 death_deletes_heal_ring(carriedObj) {
@@ -559,10 +574,12 @@ engineer_skill_setup(engineer_skill, secondary) {
       }
     }
 
-    if(isDefined(secondary))
+    if(isDefined(secondary)) {
       self wait_for_secondary_skill_button();
-    else
+    }
+    else {
       self wait_for_primary_skill_button();
+    }
 
     variables = generic_variable_setup(engineer_skill);
 
@@ -572,10 +589,12 @@ engineer_skill_setup(engineer_skill, secondary) {
       self maps\mp\alien\_music_and_dialog::playEngineerClassSkillVO(self);
       self engineer_slow_field(variables);
 
-      if(isDefined(secondary))
+      if(isDefined(secondary)) {
         skill_cooldown_secondary(engineer_skill);
-      else
+      }
+      else {
         skill_cooldown_primary(engineer_skill);
+      }
     }
 
     wait .05;
@@ -731,10 +750,12 @@ specialist_skill_setup(specialist_skill, secondary) {
       }
     }
 
-    if(isDefined(secondary))
+    if(isDefined(secondary)) {
       self wait_for_secondary_skill_button();
-    else
+    }
+    else {
       self wait_for_primary_skill_button();
+    }
 
     variables = generic_variable_setup(specialist_skill);
 
@@ -749,13 +770,16 @@ specialist_skill_setup(specialist_skill, secondary) {
       self specialist_boost(variables);
 
       self.skill_in_use = undefined;
-      if(isDefined(self.camFX))
+      if(isDefined(self.camFX)) {
         self.camFX delete();
+      }
 
-      if(isDefined(secondary))
+      if(isDefined(secondary)) {
         skill_cooldown_secondary(specialist_skill);
-      else
+      }
+      else {
         skill_cooldown_primary(specialist_skill);
+      }
     }
 
     wait .05;
@@ -830,8 +854,9 @@ specialist_death_watcher() {
     self SetClientOmnvar("ui_alien_unlimited_ammo", 0);
     stopFXOnTag(LoadFX("vfx/gameplay/alien/vfx_alien_cskill_wspecial_02"), self, "tag_origin");
   }
-  if(isDefined(self.camFX))
+  if(isDefined(self.camFX)) {
     self.camFX delete();
+  }
 }
 
 temp_damage_increase(variables) {
@@ -864,8 +889,9 @@ remove_the_outline() {
     if(isDefined(alien.marked_for_challenge)) {
       continue;
     }
-    if(!isDefined(alien.pet))
+    if(!isDefined(alien.pet)) {
       maps\mp\alien\_outline_proto::disable_outline_for_player(alien, self);
+    }
   }
   if(!isDefined(level.seeder_active_turrets)) {
     return;
@@ -1026,8 +1052,9 @@ get_wait_seconds(skill_array) {
     cooldown = skill_array["rank_4_cooldown"];
   }
 
-  if(self maps\mp\alien\_persistence::is_upgrade_enabled("cooldown_skills_upgrade"))
+  if(self maps\mp\alien\_persistence::is_upgrade_enabled("cooldown_skills_upgrade")) {
     cooldown = cooldown * 0.5;
+  }
 
   return cooldown;
 }
@@ -1044,8 +1071,9 @@ wait_for_primary_skill_button() {
     }
 
     self waittill("action_slot_1");
-    if(isDefined(self.turn_off_class_skill_activation))
+    if(isDefined(self.turn_off_class_skill_activation)) {
       continue;
+    }
     if(!isDefined(self.laststand)) {
       self check_for_double_tap_primary();
     }
@@ -1084,8 +1112,9 @@ wait_for_secondary_skill_button() {
     }
 
     self waittill("action_slot_3");
-    if(isDefined(self.turn_off_class_skill_activation))
+    if(isDefined(self.turn_off_class_skill_activation)) {
       continue;
+    }
     if(!isDefined(self.laststand)) {
       self check_for_double_tap_secondary();
     }
@@ -1116,10 +1145,12 @@ ability_cost(amount, secondary) {
   self endon("death");
   self endon("disconnect");
 
-  if(isDefined(secondary))
+  if(isDefined(secondary)) {
     self SetClientOmnvar("ui_alien_class_skill_active_secondary", true);
-  else
+  }
+  else {
     self SetClientOmnvar("ui_alien_class_skill_active", true);
+  }
   self notify("class_skill_used");
   return true;
 }
@@ -1130,8 +1161,9 @@ deleteOnDeath(ent) {
 
   self waittill("death");
 
-  if(isDefined(ent))
+  if(isDefined(ent)) {
     ent delete();
+  }
 }
 
 offhand_check() {
@@ -1150,10 +1182,12 @@ generic_skill_waiter(skill_array, omnvarNum, secondary) {
   self endon("death");
   self endon("disconnect");
 
-  if(isDefined(secondary))
+  if(isDefined(secondary)) {
     self SetClientOmnvar("ui_alien_class_skill_secondary", omnvarNum);
-  else
+  }
+  else {
     self SetClientOmnvar("ui_alien_class_skill", omnvarNum);
+  }
 }
 
 generic_variable_setup(skill_array) {
@@ -1200,6 +1234,7 @@ disconnect_delete(entity, notifyString) {
   self endon(notifyString);
 
   self waittill_any("disconnect", "death");
-  if(isDefined(entity))
+  if(isDefined(entity)) {
     entity delete();
+  }
 }

@@ -72,8 +72,9 @@ buildMovementSoundAliasName(movementtype, ground_type, firstperson, quiet, playe
   return sound_alias;
 }
 do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
-  if(!isDefined(level._optionalStepEffects))
+  if(!isDefined(level._optionalStepEffects)) {
     return;
+  }
   if(on_fire) {
     ground_type = "fire";
   }

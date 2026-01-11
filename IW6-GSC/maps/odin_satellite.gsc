@@ -62,10 +62,12 @@ section_hint_string_init() {
 }
 
 odin_rcs_prompt() {
-  if(level.player usebuttonpressed())
+  if(level.player usebuttonpressed()) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 satellite_main() {
@@ -105,14 +107,16 @@ fade_out_show_title() {
   var_2 = getEntArray("script_model", "classname");
 
   foreach(var_4 in var_2) {
-    if(issubstr(var_4.model, "body_fed_space"))
+    if(issubstr(var_4.model, "body_fed_space")) {
       var_4 delete();
+    }
   }
 
   var_6 = getcorpsearray();
 
-  foreach(var_8 in var_6)
+  foreach(var_8 in var_6) {
   var_8 delete();
+  }
 
   level.player thread maps\_utility::play_sound_on_entity("logo_whoosh_lr");
   wait 0.25;
@@ -141,8 +145,9 @@ satellite_dialogue() {
   maps\_utility::smart_radio_dialogue("odin_kyr_coversoffhouston");
   maps\_utility::smart_radio_dialogue("odin_shq_ignitethosercsfuel");
 
-  if(!common_scripts\utility::flag("player_has_fired"))
+  if(!common_scripts\utility::flag("player_has_fired")) {
     level.ally maps\_space_ai::smart_radio_dialogue_facial("odin_kyr_youheardhimbud", "odin_kyr_youheardhimbud");
+  }
 
   common_scripts\utility::flag_wait("first_finale_stage_done");
   maps\_utility::smart_radio_dialogue("odin_kyr_shit");
@@ -162,8 +167,9 @@ ally_movement_logic() {
   level.ally maps\_utility::set_goal_radius(8);
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 5; var_1++)
+  for(var_1 = 0; var_1 < 5; var_1++) {
     var_0[var_1] = getnode("ally_sat_trail_" + var_1, "targetname");
+  }
 
   level.ally setgoalnode(var_0[0]);
   level.ally waittill("goal");
@@ -192,20 +198,25 @@ push_player_back_from_thor() {
     common_scripts\utility::flag_set("clear_to_tweak_player");
     var_3 = distance(level.player.origin, var_0.origin);
 
-    if(var_3 >= 0 && var_3 <= 256)
+    if(var_3 >= 0 && var_3 <= 256) {
       setsaveddvar("player_swimWaterCurrent", (6000, 0, 6000));
+    }
 
-    if(var_3 >= 257 && var_3 <= 320)
+    if(var_3 >= 257 && var_3 <= 320) {
       setsaveddvar("player_swimWaterCurrent", (5000, 0, 5000));
+    }
 
-    if(var_3 >= 321 && var_3 <= 384)
+    if(var_3 >= 321 && var_3 <= 384) {
       setsaveddvar("player_swimWaterCurrent", (4000, 0, 4000));
+    }
 
-    if(var_3 >= 385 && var_3 <= 512)
+    if(var_3 >= 385 && var_3 <= 512) {
       setsaveddvar("player_swimWaterCurrent", (3000, 0, 3000));
+    }
 
-    if(var_3 >= 513 && var_3 <= 640)
+    if(var_3 >= 513 && var_3 <= 640) {
       setsaveddvar("player_swimWaterCurrent", (1500, 0, 2000));
+    }
 
     if(var_3 >= 641) {
       setsaveddvar("player_swimWaterCurrent", (0, 0, 1000));
@@ -227,16 +238,18 @@ thor_finale_movement(var_0) {
   var_3 = getEntArray("spacejump_sat", "targetname");
   var_4 = 700 - var_0 / 5;
 
-  if(var_4 < 20)
+  if(var_4 < 20) {
     var_4 = 20;
+  }
 
   var_1 moveto(var_2.origin, var_4, 0, 0);
   var_1 rotateto((0, 30, 0), var_4 * 0.1, 0, 0);
   var_5 = 0 - var_0 * 2;
   common_scripts\utility::flag_set("clear_to_tweak_player");
 
-  if(var_5 < -5000)
+  if(var_5 < -5000) {
     var_5 = -5000;
+  }
 
   setsaveddvar("player_swimWaterCurrent", (var_5, 0, var_5));
 }
@@ -282,8 +295,9 @@ sat_exploder(var_0, var_1) {
     if(isDefined(var_3.script_parameters) && var_3.script_parameters == "do_not_explode") {
       continue;
     }
-    if(var_3.classname == "script_model" || var_3.classname == "script_brushmodel" && var_3.classname != "script_origin")
+    if(var_3.classname == "script_model" || var_3.classname == "script_brushmodel" && var_3.classname != "script_origin") {
       var_3 unlink();
+    }
   }
 
   foreach(var_3 in var_0) {
@@ -385,18 +399,21 @@ thor_pod_opens() {
   var_8 = getent("pod_cover_target_2", "script_noteworthy");
 
   foreach(var_10 in var_0) {
-    if(var_10.classname == "script_brushmodel")
+    if(var_10.classname == "script_brushmodel") {
       var_10 linkto(var_3);
+    }
   }
 
   foreach(var_10 in var_1) {
-    if(var_10.classname == "script_brushmodel")
+    if(var_10.classname == "script_brushmodel") {
       var_10 linkto(var_4);
+    }
   }
 
   foreach(var_10 in var_2) {
-    if(var_10.classname == "script_brushmodel")
+    if(var_10.classname == "script_brushmodel") {
       var_10 linkto(var_5);
+    }
   }
 
   common_scripts\utility::flag_wait("new_pod_opens");
@@ -458,8 +475,9 @@ pod_two_spools_up() {
 }
 
 stop_player_backtracking(var_0) {
-  if(level.start_point == "odin_satellite")
+  if(level.start_point == "odin_satellite") {
     wait 3;
+  }
 
   common_scripts\utility::flag_wait("landed_on_satellite");
 
@@ -705,11 +723,13 @@ odin_finale(var_0, var_1) {
   var_9[0] hide();
   var_10 = getEntArray("spacejump_sat", "targetname");
 
-  foreach(var_12 in var_9)
+  foreach(var_12 in var_9) {
   var_12 linkto(level.animated_sat_part["odin_sat_section_04_base"]);
+  }
 
-  foreach(var_15 in var_10)
+  foreach(var_15 in var_10) {
   var_15 linkto(level.animated_sat_part["odin_sat_section_04_base"]);
+  }
 
   thread handle_finale_shakes_and_rumbles(var_1);
   var_4 show();
@@ -768,12 +788,14 @@ solar_panel_handling() {
   common_scripts\utility::flag_wait("mus_atmosphere");
   var_0 = getEntArray("dummy_starter_solar", "script_noteworthy");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 hide();
+  }
 
   foreach(var_5 in level.frames) {
-    foreach(var_2 in var_5.panel_array)
+    foreach(var_2 in var_5.panel_array) {
     var_2 show();
+    }
   }
 
   wait 2;
@@ -824,16 +846,18 @@ handle_finale_shakes_and_rumbles(var_0) {
     if(var_2 >= 0.5 && var_2 < 0.75) {
       var_3 = randomfloatrange(1, 5);
 
-      if(var_1 <= 10)
+      if(var_1 <= 10) {
         var_3 = 4;
+      }
 
       if(var_3 == 3) {
         level.player playrumbleonentity("heavy_1s");
         wait 0.75;
       } else if(var_3 == 1)
         wait 0.55;
-      else
+      else {
         level.player playrumbleonentity("light_1s");
+      }
 
       earthquake(0.1, 1, level.player.origin, 2000);
       var_1 = var_1 + 1;
@@ -847,8 +871,9 @@ handle_finale_shakes_and_rumbles(var_0) {
         wait 0.75;
       } else if(var_3 == 1)
         wait 0.55;
-      else
+      else {
         level.player playrumbleonentity("light_1s");
+      }
 
       earthquake(0.15, 1, level.player.origin, 2000);
     }
@@ -899,8 +924,9 @@ finale_nags() {
     if(var_1 >= var_0) {
       var_5 = randomintrange(0, 3);
 
-      if(var_2 == var_5)
+      if(var_2 == var_5) {
         var_5 = randomintrange(0, 3);
+      }
       else {
         var_2 = var_5;
         iprintlnbold("Kyra: " + var_4[var_5]);
@@ -924,8 +950,9 @@ finale_nags() {
     if(var_1 >= var_0) {
       var_5 = randomintrange(0, 3);
 
-      if(var_2 == var_5)
+      if(var_2 == var_5) {
         var_5 = randomintrange(0, 3);
+      }
       else {
         var_2 = var_5;
         iprintlnbold("Kyra: " + var_4[var_5]);
@@ -1000,8 +1027,9 @@ damage_fx_handling() {
   while(!common_scripts\utility::flag("satellite_end_anim_started")) {
     var_0 waittill("damage", var_5, var_6, var_7, var_8, var_9);
 
-    if(!common_scripts\utility::flag("rcs_is_damaged"))
+    if(!common_scripts\utility::flag("rcs_is_damaged")) {
       common_scripts\utility::flag_set("rcs_is_damaged");
+    }
 
     if(var_4 == 7) {
       maps\odin_fx::fx_sat_rcs_damage(var_3);
@@ -1041,8 +1069,9 @@ finale_fx_handling(var_0) {
     var_4 linkto(var_0);
   }
 
-  foreach(var_4 in var_1)
+  foreach(var_4 in var_1) {
   var_4 delete();
+  }
 
   var_7 = 3;
   var_8 = [];
@@ -1059,13 +1088,15 @@ finale_fx_handling(var_0) {
 
     wait(var_11);
 
-    if(var_7 >= 0.75)
+    if(var_7 >= 0.75) {
       var_7 = var_7 - 0.5;
+    }
   }
 
   foreach(var_4 in var_2) {
-    foreach(var_14 in var_8)
+    foreach(var_14 in var_8) {
     stopFXOnTag(common_scripts\utility::getfx(var_14), var_4, "tag_origin");
+    }
   }
 }
 
@@ -1119,8 +1150,9 @@ satellite_cleanup(var_0) {
 
     if(isDefined(level.sat_ent_del)) {
       foreach(var_2 in level.sat_ent_del) {
-        if(isDefined(var_2))
+        if(isDefined(var_2)) {
           var_2 delete();
+        }
       }
     }
   }

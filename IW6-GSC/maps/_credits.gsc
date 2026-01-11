@@ -12,8 +12,9 @@ initcredits(var_0) {
   level.credits_spacing = -120;
   maps\_utility::set_console_status();
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "all";
+  }
 
   switch (var_0) {
     case "iw":
@@ -32,8 +33,9 @@ initcredits(var_0) {
 addlefttitle(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "lefttitle";
@@ -45,8 +47,9 @@ addlefttitle(var_0, var_1) {
 addleftname(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "leftname";
@@ -62,8 +65,9 @@ addsublefttitle(var_0, var_1) {
 addsubleftname(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "subleftname";
@@ -75,8 +79,9 @@ addsubleftname(var_0, var_1) {
 addrighttitle(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "righttitle";
@@ -88,8 +93,9 @@ addrighttitle(var_0, var_1) {
 addrightname(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "rightname";
@@ -101,8 +107,9 @@ addrightname(var_0, var_1) {
 addcenterheading(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "centerheading";
@@ -114,8 +121,9 @@ addcenterheading(var_0, var_1) {
 addcentersubtitle(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "centersubtitle";
@@ -128,8 +136,9 @@ addcastname(var_0, var_1, var_2) {
   precachestring(var_1);
   precachestring(var_0);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level.linesize;
+  }
 
   var_3 = spawnStruct();
   var_3.type = "castname";
@@ -142,8 +151,9 @@ addcastname(var_0, var_1, var_2) {
 addcentername(var_0, var_1) {
   precachestring(var_0);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level.linesize;
+  }
 
   var_2 = spawnStruct();
   var_2.type = "centername";
@@ -156,8 +166,9 @@ addcenternamedouble(var_0, var_1, var_2) {
   precachestring(var_0);
   precachestring(var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level.linesize;
+  }
 
   var_3 = spawnStruct();
   var_3.type = "centernamedouble";
@@ -171,8 +182,9 @@ addcenterdual(var_0, var_1, var_2) {
   precachestring(var_0);
   precachestring(var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = level.linesize;
+  }
 
   var_3 = spawnStruct();
   var_3.type = "centerdual";
@@ -204,8 +216,9 @@ addcentertriple(var_0, var_1, var_2, var_3) {
   } else
     var_4.name3 = "";
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = level.linesize;
+  }
 
   var_4.textscale = var_3;
   level.linelist[level.linelist.size] = var_4;
@@ -241,10 +254,12 @@ playcredits() {
       var_6.x = 28;
       var_6.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_6.font = "default";
-      else
+      }
+      else {
         var_6.font = "small";
+      }
 
       var_6.fontscale = var_5;
       var_6.sort = 2;
@@ -264,10 +279,12 @@ playcredits() {
       var_6.x = 60;
       var_6.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_6.font = "default";
-      else
+      }
+      else {
         var_6.font = "small";
+      }
 
       var_6.fontscale = var_5;
       var_6.sort = 2;
@@ -288,10 +305,12 @@ playcredits() {
       var_8.x = 60;
       var_8.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_8.font = "default";
-      else
+      }
+      else {
         var_8.font = "small";
+      }
 
       var_8.fontscale = var_5;
       var_8.sort = 2;
@@ -304,10 +323,12 @@ playcredits() {
       var_9.x = 275;
       var_9.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_9.font = "default";
-      else
+      }
+      else {
         var_9.font = "small";
+      }
 
       var_9.fontscale = var_5;
       var_9.sort = 2;
@@ -331,10 +352,12 @@ playcredits() {
       var_6.x = 92;
       var_6.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_6.font = "default";
-      else
+      }
+      else {
         var_6.font = "small";
+      }
 
       var_6.fontscale = var_5;
       var_6.sort = 2;
@@ -354,10 +377,12 @@ playcredits() {
       var_6.x = -132;
       var_6.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_6.font = "default";
-      else
+      }
+      else {
         var_6.font = "small";
+      }
 
       var_6.fontscale = var_5;
       var_6.sort = 2;
@@ -376,10 +401,12 @@ playcredits() {
       var_6.x = -100;
       var_6.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_6.font = "default";
-      else
+      }
+      else {
         var_6.font = "small";
+      }
 
       var_6.fontscale = var_5;
       var_6.sort = 2;
@@ -398,10 +425,12 @@ playcredits() {
       var_6.x = 0;
       var_6.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_6.font = "objective";
-      else
+      }
+      else {
         var_6.font = "objective";
+      }
 
       var_6.fontscale = var_5;
       var_6.sort = 2;
@@ -422,10 +451,12 @@ playcredits() {
       var_6.x = 0;
       var_6.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_6.font = "big";
-      else
+      }
+      else {
         var_6.font = "big";
+      }
 
       var_6.fontscale = var_5;
       var_6.sort = 2;
@@ -447,10 +478,12 @@ playcredits() {
       var_8.x = -4;
       var_8.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_8.font = "small";
-      else
+      }
+      else {
         var_8.font = "small";
+      }
 
       var_8.fontscale = var_5;
       var_8.sort = 2;
@@ -463,10 +496,12 @@ playcredits() {
       var_9.x = 4;
       var_9.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_9.font = "small";
-      else
+      }
+      else {
         var_9.font = "small";
+      }
 
       var_9.fontscale = var_5;
       var_9.sort = 2;
@@ -492,10 +527,12 @@ playcredits() {
       var_8.x = -220;
       var_8.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_8.font = "small";
-      else
+      }
+      else {
         var_8.font = "small";
+      }
 
       var_8.fontscale = var_5;
       var_8.sort = 2;
@@ -508,10 +545,12 @@ playcredits() {
       var_9.x = 0;
       var_9.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_9.font = "small";
-      else
+      }
+      else {
         var_9.font = "small";
+      }
 
       var_9.fontscale = var_5;
       var_9.sort = 2;
@@ -524,10 +563,12 @@ playcredits() {
       var_14.x = 220;
       var_14.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_14.font = "small";
-      else
+      }
+      else {
         var_14.font = "small";
+      }
 
       var_14.fontscale = var_5;
       var_14.sort = 2;
@@ -555,10 +596,12 @@ playcredits() {
       var_6.x = 8;
       var_6.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_6.font = "default";
-      else
+      }
+      else {
         var_6.font = "small";
+      }
 
       var_6.fontscale = var_5;
       var_6.sort = 2;
@@ -578,10 +621,12 @@ playcredits() {
       var_8.x = -80;
       var_8.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_8.font = "default";
-      else
+      }
+      else {
         var_8.font = "small";
+      }
 
       var_8.fontscale = var_5;
       var_8.sort = 2;
@@ -594,10 +639,12 @@ playcredits() {
       var_9.x = 80;
       var_9.y = 480;
 
-      if(!level.console)
+      if(!level.console) {
         var_9.font = "default";
-      else
+      }
+      else {
         var_9.font = "small";
+      }
 
       var_9.fontscale = var_5;
       var_9.sort = 2;
@@ -644,8 +691,9 @@ addgap() {
 readncolumns(var_0, var_1, var_2, var_3) {
   var_4 = [];
 
-  for(var_5 = 0; var_5 < var_3; var_5++)
+  for(var_5 = 0; var_5 < var_3; var_5++) {
     var_4[var_5] = tablelookupbyrow(var_0, var_1, var_2 + var_5);
+  }
 
   return var_4;
 }

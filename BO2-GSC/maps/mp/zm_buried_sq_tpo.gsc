@@ -36,10 +36,12 @@ init() {
 }
 
 init_stage() {
-  if(flag("sq_is_max_tower_built"))
+  if(flag("sq_is_max_tower_built")) {
     level thread stage_vo_max();
-  else
+  }
+  else {
     level thread stage_vo_ric();
+  }
 
   level._cur_stage_name = "tpo";
   clientnotify("tpo");
@@ -72,10 +74,12 @@ stage_logic() {
 
   flag_set("sq_tpo_stage_started");
 
-  if(flag("sq_is_ric_tower_built"))
+  if(flag("sq_is_ric_tower_built")) {
     stage_logic_richtofen();
-  else if(flag("sq_is_max_tower_built"))
+  }
+  else if(flag("sq_is_max_tower_built")) {
     stage_logic_maxis();
+  }
   else {
     assertmsg("SQ TPO: no sidequest side picked!");
 
@@ -97,8 +101,9 @@ stage_logic_richtofen() {
     flag_clear("sq_tpo_time_bomb_in_valid_location");
 
     do {
-      if(!(isDefined(level.time_bomb_save_data) && isDefined(level.time_bomb_save_data.time_bomb_model) && !isDefined(level.time_bomb_save_data.time_bomb_model.sq_location_valid)))
+      if(!(isDefined(level.time_bomb_save_data) && isDefined(level.time_bomb_save_data.time_bomb_model) && !isDefined(level.time_bomb_save_data.time_bomb_model.sq_location_valid))) {
         level waittill("new_time_bomb_set");
+      }
 
       b_time_bomb_in_valid_location = level.time_bomb_save_data.time_bomb_model istouching(e_time_bomb_volume);
       level.time_bomb_save_data.time_bomb_model.sq_location_valid = b_time_bomb_in_valid_location;
@@ -148,10 +153,12 @@ sq_tpo_check_players_in_time_bomb_volume(e_volume) {
     b_players_ready = _are_all_players_in_time_bomb_volume(e_volume);
     level._time_bomb.functionality_override = b_players_ready;
 
-    if(b_players_ready)
+    if(b_players_ready) {
       flag_set("sq_tpo_players_in_position_for_time_warp");
-    else
+    }
+    else {
       flag_clear("sq_tpo_players_in_position_for_time_warp");
+    }
 
     wait 0.25;
   }
@@ -161,14 +168,16 @@ _are_all_players_in_time_bomb_volume(e_volume) {
   n_required_players = 4;
   a_players = get_players();
 
-  if(getdvarint(#"_id_5256118F") > 0)
+  if(getdvarint(#"_id_5256118F") > 0) {
     n_required_players = a_players.size;
+  }
 
   n_players_in_position = 0;
 
   foreach(player in a_players) {
-    if(player istouching(e_volume))
+    if(player istouching(e_volume)) {
       n_players_in_position++;
+    }
   }
 
   b_all_in_valid_position = n_players_in_position == n_required_players;
@@ -193,8 +202,9 @@ special_round_start() {
   level thread spawn_zombies_after_time_bomb_round_killed();
   a_players = get_players();
 
-  foreach(player in a_players)
+  foreach(player in a_players) {
   vsmgr_activate("visionset", "cheat_bw", player);
+  }
 
   level setclientfield("sq_tpo_special_round_active", 1);
 }
@@ -268,12 +278,14 @@ clean_up_special_round() {
 }
 
 _delete_unitrigger() {
-  if(isDefined(self.unitrigger))
+  if(isDefined(self.unitrigger)) {
     self.unitrigger.registered = 0;
+  }
 
   if(isDefined(self.unitrigger.trigger)) {
-    if(isDefined(self.unitrigger.trigger.stub))
+    if(isDefined(self.unitrigger.trigger.stub)) {
       self.unitrigger.trigger maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(self.unitrigger.trigger.stub);
+    }
     else {
       self.trigger notify("kill_trigger");
       self.trigger delete();
@@ -320,8 +332,9 @@ _debug_show_location() {
   level endon("sq_tpo_item_hunt_done");
 
   while(true) {
-    if(getdvarint(#"_id_5256118F") > 0)
+    if(getdvarint(#"_id_5256118F") > 0) {
       debugstar(self.origin, 20, (0, 1, 0));
+    }
 
     wait 1;
   }
@@ -452,16 +465,18 @@ unitrigger_think() {
       self.progress_bar updatebar(n_progress_amount);
       n_frame_count++;
 
-      if(n_progress_amount == 1)
+      if(n_progress_amount == 1) {
         b_progress_bar_done = 1;
+      }
 
       wait 0.05;
     }
 
     self _delete_progress_bar();
 
-    if(b_progress_bar_done)
+    if(b_progress_bar_done) {
       b_trigger_used = 1;
+    }
   }
 
   if(b_progress_bar_done) {
@@ -485,8 +500,9 @@ give_player_sq_tpo_switch() {
 }
 
 item_is_on_corpse() {
-  if(!isDefined(level.sq_tpo.times_searched))
+  if(!isDefined(level.sq_tpo.times_searched)) {
     level.sq_tpo.times_searched = 0;
+  }
 
   switch (level.sq_tpo.times_searched) {
     case 0:
@@ -536,8 +552,9 @@ setup_buildable_switch() {
   s_switch.onuseplantobject = ::onuseplantobject_switch;
   include_buildable(s_switch);
 
-  while(!isDefined(level.sq_tpo_unitrig))
+  while(!isDefined(level.sq_tpo_unitrig)) {
     wait 1;
+  }
 
   level.sq_tpo_unitrig.realorigin = level.sq_tpo_unitrig.origin;
   level.sq_tpo_unitrig.origin = level.sq_tpo_unitrig.origin + vectorscale((0, 0, -1), 10000.0);
@@ -570,15 +587,17 @@ triggerthink_switch() {
 guillotine_trigger_reject_func(player) {
   b_should_reject = 0;
 
-  if(flag("sq_tpo_special_round_active"))
+  if(flag("sq_tpo_special_round_active")) {
     b_should_reject = 1;
+  }
 
   return b_should_reject;
 }
 
 time_bomb_saves_wisp_state() {
-  if(!isDefined(self.sq_data))
+  if(!isDefined(self.sq_data)) {
     self.sq_data = spawnStruct();
+  }
 
   self.sq_data.wisp_stage_complete = flag("sq_wisp_success");
 }

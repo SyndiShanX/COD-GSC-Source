@@ -35,10 +35,12 @@ find_ground_pos(v_current, v_trace_end, checkent) {
   if(isDefined(checkent)) {
     a_trace = entitytrace(v_current, v_trace_end, checkent);
 
-    if(a_trace["fraction"] == 1)
+    if(a_trace["fraction"] == 1) {
       return (0, 0, 0);
-    else
+    }
+    else {
       return a_trace["position"];
+    }
   } else
     a_trace = bulletTrace(v_current, v_trace_end, 0, level.player);
 
@@ -47,8 +49,9 @@ find_ground_pos(v_current, v_trace_end, checkent) {
     n_distance = distance(v_current, v_hit);
     n_threshold = 5000;
 
-    if(n_distance < n_threshold)
+    if(n_distance < n_threshold) {
       v_ground = v_hit;
+    }
   }
 
   return v_ground;
@@ -60,8 +63,9 @@ do_switch_transition(targetent) {
   self setclientflag(1);
   wait 0.1;
 
-  if(isDefined(targetent) && isDefined(level.rts.playerlinkobj))
+  if(isDefined(targetent) && isDefined(level.rts.playerlinkobj)) {
     level.rts.playerlinkobj moveto(targetent.origin + (0, 0, 0), 0.4, 0);
+  }
 
   start = gettime();
   cur = start;
@@ -89,8 +93,9 @@ do_switch_transition(targetent) {
       self stopshellshock();
       self notify("empGrenadeShutOff");
 
-      if(isDefined(self.hud_damagefeedback))
+      if(isDefined(self.hud_damagefeedback)) {
         self.hud_damagefeedback.alpha = 0;
+      }
     }
 
     last = cur;
@@ -107,8 +112,9 @@ do_switch_transition(targetent) {
   level notify("switch_complete");
   self notify("switch_complete");
 
-  if(flag("fps_mode"))
+  if(flag("fps_mode")) {
     level.disable_damage_overlay = 0;
+  }
 
   self clearclientflag(1);
 
@@ -155,12 +161,14 @@ mp_ents_cleanup() {
 
   for(i = 0; i < entitytypes.size; i++) {
     if(isDefined(entitytypes[i].script_gameobjectname)) {
-      if(!isDefined(entitytypes[i].targetname) || entitytypes[i].targetname != "so_dont_delete")
+      if(!isDefined(entitytypes[i].targetname) || entitytypes[i].targetname != "so_dont_delete") {
         entitytypes[i] delete();
+      }
     }
 
-    if(isDefined(entitytypes[i].targetname) && entitytypes[i].targetname == "so_delete")
+    if(isDefined(entitytypes[i].targetname) && entitytypes[i].targetname == "so_delete") {
       entitytypes[i] delete();
+    }
   }
 }
 
@@ -168,33 +176,39 @@ playerlinkobj_zoom(amount, time) {
   if(isDefined(level.rts.fov_lerp)) {
     return;
   }
-  if(!isDefined(time) || time <= 0)
+  if(!isDefined(time) || time <= 0) {
     time = 0.05;
+  }
 
   if(amount < 0) {
     if(level.rts.fov == 15) {
       return;
     }
-    if(level.rts.fov == 65)
+    if(level.rts.fov == 65) {
       level.rts.fov = 15;
+    }
 
-    if(level.rts.fov == 110)
+    if(level.rts.fov == 110) {
       level.rts.fov = 65;
+    }
   }
 
   if(amount > 0) {
     if(level.rts.fov == 110) {
       return;
     }
-    if(level.rts.fov == 65)
+    if(level.rts.fov == 65) {
       level.rts.fov = 110;
+    }
 
-    if(level.rts.fov == 15)
+    if(level.rts.fov == 15) {
       level.rts.fov = 65;
+    }
   }
 
-  if(amount == 0)
+  if(amount == 0) {
     level.rts.fov = 65;
+  }
 
   level.rts.fov_lerp = 1;
   level.rts.player setclientflag(2);
@@ -209,11 +223,13 @@ playerlinkobj_orient(x, y) {
   y = angleclamp180(level.rts.playerlinkobj.angles[1] + y);
   z = angleclamp180(level.rts.playerlinkobj.angles[2]);
 
-  if(x > 89)
+  if(x > 89) {
     x = 89;
+  }
 
-  if(x < -20)
+  if(x < -20) {
     x = -20;
+  }
 
   level.rts.playerlinkobj.angles = (x, y, z);
 }
@@ -260,8 +276,9 @@ playerlinkobj_gettargetgroundpos(force) {
 }
 
 playerlinkobj_getforwardvector(scale) {
-  if(!isDefined(scale))
+  if(!isDefined(scale)) {
     scale = 5000;
+  }
 
   return anglesToForward(level.rts.playerlinkobj.angles) * scale;
 }
@@ -269,8 +286,9 @@ playerlinkobj_getforwardvector(scale) {
 playerlinkobj_defaultpos() {
   maps\_so_rts_support::playerlinkobj_zoom(0, 0);
 
-  if(!isDefined(level.rts.lastfpspoint))
+  if(!isDefined(level.rts.lastfpspoint)) {
     level.rts.lastfpspoint = level.rts.player_startpos;
+  }
 
   height = level.rts.minplayerz + (level.rts.maxplayerz - level.rts.minplayerz) * 0.5;
 
@@ -287,10 +305,12 @@ playerlinkobj_defaultpos() {
     testpos = movepoint(level.rts.lastfpspoint, (0, 0, height));
 
     if(skypos != testpos) {
-      if(isDefined(level.rts.level_default_fps_pos))
+      if(isDefined(level.rts.level_default_fps_pos)) {
         level.rts.lastfpspoint = level.rts.level_default_fps_pos;
-      else
+      }
+      else {
         level.rts.lastfpspoint = level.rts.player_startpos;
+      }
 
       skypos = level.rts.lastfpspoint + (0, 0, height);
       a = level.rts.game_rules.default_camera_pitch;
@@ -301,10 +321,12 @@ playerlinkobj_defaultpos() {
       desiredpos = skypos + addvec;
       testpos = movepoint(skypos, addvec);
 
-      if(desiredpos == testpos)
+      if(desiredpos == testpos) {
         level.rts.playerlinkobj.origin = desiredpos;
-      else
+      }
+      else {
         level.rts.playerlinkobj.origin = skypos;
+      }
     } else {
       a = level.rts.game_rules.default_camera_pitch;
       c = 90 - level.rts.game_rules.default_camera_pitch;
@@ -314,10 +336,12 @@ playerlinkobj_defaultpos() {
       desiredpos = skypos + addvec;
       testpos = movepoint(skypos, addvec);
 
-      if(desiredpos == testpos)
+      if(desiredpos == testpos) {
         level.rts.playerlinkobj.origin = desiredpos;
-      else
+      }
+      else {
         level.rts.playerlinkobj.origin = skypos;
+      }
     }
   }
 
@@ -328,11 +352,13 @@ playerlinkobj_defaultpos() {
 playerlinkobj_viewclamp(onlyz) {
   obj = level.rts.playerlinkobj;
 
-  if(obj.origin[2] < level.rts.minplayerz)
+  if(obj.origin[2] < level.rts.minplayerz) {
     obj.origin = (obj.origin[0], obj.origin[1], level.rts.minplayerz);
+  }
 
-  if(obj.origin[2] > level.rts.maxplayerz)
+  if(obj.origin[2] > level.rts.maxplayerz) {
     obj.origin = (obj.origin[0], obj.origin[1], level.rts.maxplayerz);
+  }
 
   if(!isDefined(onlyz) && level.rts.game_rules.camera_mode == 1) {
     frac = (obj.origin[2] - level.rts.minplayerz) / (level.rts.maxplayerz - level.rts.minplayerz);
@@ -351,8 +377,9 @@ playerlinkobj_moveobj(x, y) {
   forward = vectorscale(level.rts.playerlinkobj_moveincforward, x);
   right = vectorscale(level.rts.playerlinkobj_moveincright, y);
 
-  if(isDefined(level.rts.game_rules.tact_clamp) && level.rts.game_rules.tact_clamp)
+  if(isDefined(level.rts.game_rules.tact_clamp) && level.rts.game_rules.tact_clamp) {
     level.rts.playerlinkobj.origin = movepoint(level.rts.playerlinkobj.origin, forward + right);
+  }
   else {
     level.rts.playerlinkobj.origin = level.rts.playerlinkobj.origin + (forward + right);
     clampenttomapboundary(level.rts.playerlinkobj);
@@ -404,8 +431,9 @@ missile_out_of_bounds_watcher() {
     rocket = level.rts.player.missile_sp;
 
     if(isDefined(rocket) && isDefined(level.rts.bounds)) {
-      if(isDefined(level.rts.missile_oob_check))
+      if(isDefined(level.rts.missile_oob_check)) {
         inbounds = [
+      }
           [level.rts.missile_oob_check]
         ](rocket.origin);
       else {
@@ -413,18 +441,23 @@ missile_out_of_bounds_watcher() {
         y = rocket.origin[1];
         z = rocket.origin[2];
 
-        if(x <= level.rts.bounds.ulx)
+        if(x <= level.rts.bounds.ulx) {
           inbounds = 0;
-        else if(x >= level.rts.bounds.lrx)
+        }
+        else if(x >= level.rts.bounds.lrx) {
           inbounds = 0;
+        }
 
-        if(y <= level.rts.bounds.uly)
+        if(y <= level.rts.bounds.uly) {
           inbounds = 0;
-        else if(y >= level.rts.bounds.lry)
+        }
+        else if(y >= level.rts.bounds.lry) {
           inbounds = 0;
+        }
 
-        if(z <= level.rts.bounds.minz)
+        if(z <= level.rts.bounds.minz) {
           inbounds = 0;
+        }
       }
     }
 
@@ -464,20 +497,25 @@ fire_missile() {
   level.rts.player clearclientflag(3);
   level.rts.player setclientflag(2);
 
-  if(!isDefined(level.remotemissile_override_origin))
+  if(!isDefined(level.remotemissile_override_origin)) {
     level.remotemissile_override_origin = (3025, 3756, 25750);
+  }
 
-  if(!isDefined(level.remotemissile_override_angles))
+  if(!isDefined(level.remotemissile_override_angles)) {
     level.remotemissile_override_angles = vectorscale((0, -1, 0), 112.0);
+  }
 
   level.rts.remotemissile = 1;
 
-  if(isDefined(level.rts.remotemissile_target))
+  if(isDefined(level.rts.remotemissile_target)) {
     level.remotemissile_override_target = level.rts.remotemissile_target.origin;
-  else if(isDefined(level.rts.enemy_center))
+  }
+  else if(isDefined(level.rts.enemy_center)) {
     level.remotemissile_override_target = level.rts.enemy_center.origin;
-  else
+  }
+  else {
     level.remotemissile_override_target = level.rts.player.origin;
+  }
 
   oldfov = getdvarfloat(#"cg_missile_FOV");
   setdvar("cg_missile_FOV", 45);
@@ -493,13 +531,15 @@ fire_missile() {
     if(isDefined(player_vehicle)) {
       nodes = getnodesinradiussorted(player_vehicle.origin, 1024, 0);
 
-      if(nodes.size)
+      if(nodes.size) {
         player_vehicle.origin = nodes[0].origin;
+      }
 
       player_vehicle maps\_vehicle::stop();
 
-      if(isDefined(level.rts.player.ally.swapai))
+      if(isDefined(level.rts.player.ally.swapai)) {
         player_swapvehicle = level.rts.player.ally.swapai;
+      }
 
       level.rts.player thread maps\_so_rts_ai::restorereplacement();
       level.rts.player waittill_notify_or_timeout("exit_vehicle", 0.1);
@@ -541,8 +581,9 @@ fire_missile() {
   setdvar("grenade_indicators_enabled", 1);
   luinotifyevent(&"rts_predator_hud", 1, 0);
 
-  if(isDefined(targeticon))
+  if(isDefined(targeticon)) {
     targeticon delete();
+  }
 
   level.rts.player clearclientflag(2);
   wait 0.2;
@@ -579,8 +620,9 @@ fire_missile() {
       }
     }
 
-    if(isDefined(level.rts.enemy_base) && isDefined(isDefined(level.rts.enemy_base.entity)))
+    if(isDefined(level.rts.enemy_base) && isDefined(isDefined(level.rts.enemy_base.entity))) {
       level.rts.enemy_base.entity.takedamage = 0;
+    }
   }
 
   level notify("fire_missile_done");
@@ -595,18 +637,21 @@ debugline(frompoint, topoint, color, durationframes) {
 }
 
 drawcylinder(pos, rad, height, duration, stop_notify) {
-  if(!isDefined(duration))
+  if(!isDefined(duration)) {
     duration = 0;
+  }
 
   level thread drawcylinder_think(pos, rad, height, duration, stop_notify);
 }
 
 drawcylinder_think(pos, rad, height, seconds, stop_notify) {
-  if(!isDefined(seconds))
+  if(!isDefined(seconds)) {
     seconds = 9999;
+  }
 
-  if(isDefined(stop_notify))
+  if(isDefined(stop_notify)) {
     level endon(stop_notify);
+  }
 
   stop_time = gettime() + seconds * 1000;
   currad = rad;
@@ -630,41 +675,50 @@ drawcylinder_think(pos, rad, height, seconds, stop_notify) {
 }
 
 debug_circle(origin, radius, color, time) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 1, 1);
+  }
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 1;
+  }
 
   circle(origin, radius, color, 1, 1, time);
 }
 
 debug_sphere(origin, radius, color, alpha, time) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 1, 1);
+  }
 
-  if(!isDefined(alpha))
+  if(!isDefined(alpha)) {
     alpha = 0.7;
+  }
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 1;
+  }
 
   sides = int(10 * (1 + int(radius) % 100));
   sphere(origin, radius, color, alpha, 1, sides, time);
 }
 
 debug_sphere_until_notify(origin, radius, color, alpha, note, note2) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 1, 1);
+  }
 
-  if(!isDefined(alpha))
+  if(!isDefined(alpha)) {
     alpha = 0.7;
+  }
 
-  if(!isDefined(note))
+  if(!isDefined(note)) {
     note = "sphere_debug_off";
+  }
 
-  if(!isDefined(note2))
+  if(!isDefined(note2)) {
     note2 = "sphere_debug_off";
+  }
 
   self endon(note);
   self endon(note2);
@@ -678,14 +732,17 @@ debug_sphere_until_notify(origin, radius, color, alpha, note, note2) {
 }
 
 debug_entline_until_notify(froment, topoint, color, note, note2) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 1, 1);
+  }
 
-  if(!isDefined(note))
+  if(!isDefined(note)) {
     note = "line_debug_off";
+  }
 
-  if(!isDefined(note2))
+  if(!isDefined(note2)) {
     note2 = "line_debug_off";
+  }
 
   self endon(note);
   self endon(note2);
@@ -709,14 +766,16 @@ debug_draw_goalpos(center, color) {
       line(self.origin, self.special_node.origin, (0, 0, 1));
       drawnode(self.special_node);
 
-      if(!isDefined(center))
+      if(!isDefined(center)) {
         center = self.goalpos;
+      }
 
       line(self.origin, center, color);
       debug_sphere(center, 32, color, 0.5, 1);
     } else {
-      if(!isDefined(center))
+      if(!isDefined(center)) {
         center = self.goalpos;
+      }
 
       line(self.origin, center, color);
 
@@ -736,8 +795,9 @@ debug_draw_goalpos(center, color) {
 place_weapon_on(weapon, location) {
   assert(isai(self));
 
-  if(!animscripts\utility::aihasweapon(weapon))
+  if(!animscripts\utility::aihasweapon(weapon)) {
     animscripts\init::initweapon(weapon);
+  }
 
   animscripts\shared::placeweaponon(weapon, location);
 }
@@ -755,8 +815,9 @@ get_weapon_name_from_alt(weapon) {
   for(i = 1; i < weapon_name_parts.size; i++) {
     weapon_primary = weapon_primary + weapon_name_parts[i];
 
-    if(i != weapon_name_parts.size - 1)
+    if(i != weapon_name_parts.size - 1) {
       weapon_primary = weapon_primary + "_";
+    }
   }
 
   return weapon_primary;
@@ -773,8 +834,9 @@ registerkeybinding(binding, callback, param, flag) {
   keyaction.param = param;
   keyaction.gateflag = flag;
 
-  if(!isDefined(level.rts.keyactions))
+  if(!isDefined(level.rts.keyactions)) {
     level.rts.keyactions = [];
+  }
 
   level.rts.keyactions[binding] = keyaction;
 }
@@ -783,8 +845,9 @@ debounceallbuttons() {
   if(!isDefined(level.rts.buttons)) {
     return;
   }
-  for(i = 0; i < level.rts.buttons.tags.size; i++)
+  for(i = 0; i < level.rts.buttons.tags.size; i++) {
     level.rts.buttons.bits[i] = 0;
+  }
 }
 
 getbuttonpress() {
@@ -858,8 +921,9 @@ getbuttonpress() {
       }
     }
 
-    if(level.rts.buttons.bits[i] == 4 && !level.rts.player platformbuttonpressed(level.rts.buttons.tags[i]))
+    if(level.rts.buttons.bits[i] == 4 && !level.rts.player platformbuttonpressed(level.rts.buttons.tags[i])) {
       level.rts.buttons.bits[i] = 0;
+    }
   }
 
   if(isDefined(tag) && isDefined(level.rts.keyactions) && isDefined(level.rts.keyactions[tag])) {
@@ -867,8 +931,9 @@ getbuttonpress() {
 
     if(isDefined(action)) {
       if(isDefined(action.gateflag)) {
-        if(flag(action.gateflag))
+        if(flag(action.gateflag)) {
           [[action.callback]](action.param);
+        }
       } else
         [
           [action.callback]
@@ -876,8 +941,9 @@ getbuttonpress() {
     }
   }
 
-  if(isDefined(tag))
+  if(isDefined(tag)) {
     retval = tag;
+  }
 
   level notify("button_event", retval);
   return retval;
@@ -909,11 +975,13 @@ platformbuttonpressed(button) {
     pressed = 0;
 
     if(isDefined(binding)) {
-      if(binding["count"])
+      if(binding["count"]) {
         pressed = self buttonpressed(tolower(binding["key1"]));
+      }
 
-      if(!pressed && binding["count"] == 2)
+      if(!pressed && binding["count"] == 2) {
         pressed = self buttonpressed(tolower(binding["key2"]));
+      }
 
       return pressed;
     }
@@ -960,8 +1028,9 @@ platformbuttonpressed(button) {
       }
     }
 
-    if(controllertype == "remote" && button == "BUTTON_BACK")
+    if(controllertype == "remote" && button == "BUTTON_BACK") {
       button = "WIIU_2";
+    }
   }
 
   return self buttonpressed(button);
@@ -970,12 +1039,14 @@ platformbuttonpressed(button) {
 get_ents_touching_trigger(total_ents) {
   touching = [];
 
-  if(!isDefined(total_ents))
+  if(!isDefined(total_ents)) {
     total_ents = arraycombine(getplayers(), getaiarray(), 1, 0);
+  }
 
   foreach(ent in total_ents) {
-    if(ent istouching(self))
+    if(ent istouching(self)) {
       touching[touching.size] = ent;
+    }
   }
 
   return touching;
@@ -985,8 +1056,9 @@ placevehicle(ref, origin, team) {
   assert(isDefined(ref));
   assert(isDefined(origin));
 
-  if(!isDefined(team))
+  if(!isDefined(team)) {
     team = "allies";
+  }
 
   spawner = get_vehicle_spawner(ref);
   assert(isDefined(spawner), "Invalid vehicle spawner targetname: " + ref);
@@ -1013,12 +1085,15 @@ callbackonnotify(note, cb, param1, param2) {
   } else
     self waittill("death");
 
-  if(isDefined(param1) && isDefined(param2))
+  if(isDefined(param1) && isDefined(param2)) {
     self[[cb]](param1, param2);
-  else if(isDefined(param1))
+  }
+  else if(isDefined(param1)) {
     self[[cb]](param1);
-  else
+  }
+  else {
     self[[cb]]();
+  }
 }
 
 notifylevelondelete(note) {
@@ -1044,47 +1119,59 @@ notifymeinnsec(note, seconds, p1, p2, p3, p4, p5) {
   self endon("death");
   wait(seconds);
 
-  if(isDefined(p1) && isDefined(p2) && isDefined(p3) && isDefined(p4) && isDefined(p5))
+  if(isDefined(p1) && isDefined(p2) && isDefined(p3) && isDefined(p4) && isDefined(p5)) {
     self notify(note, p1, p2, p3, p4, p5);
-  else if(isDefined(p1) && isDefined(p2) && isDefined(p3) && isDefined(p4))
+  }
+  else if(isDefined(p1) && isDefined(p2) && isDefined(p3) && isDefined(p4)) {
     self notify(note, p1, p2, p3, p4);
-  else if(isDefined(p1) && isDefined(p2) && isDefined(p3))
+  }
+  else if(isDefined(p1) && isDefined(p2) && isDefined(p3)) {
     self notify(note, p1, p2, p3);
-  else if(isDefined(p1) && isDefined(p2))
+  }
+  else if(isDefined(p1) && isDefined(p2)) {
     self notify(note, p1, p2);
-  else if(isDefined(p1))
+  }
+  else if(isDefined(p1)) {
     self notify(note, p1);
-  else
+  }
+  else {
     self notify(note);
+  }
 }
 
 getnearai(fromorigin, distsq, team) {
-  if(!isDefined(team))
+  if(!isDefined(team)) {
     ai = getaiarray();
-  else
+  }
+  else {
     ai = getaiarray(team);
+  }
 
   ainear = [];
 
   foreach(dude in ai) {
-    if(distancesquared(dude.origin, fromorigin) < distsq)
+    if(distancesquared(dude.origin, fromorigin) < distsq) {
       ainear[ainear.size] = dude;
+    }
   }
 
   return ainear;
 }
 
 getfarai(fromorigin, distsq, team) {
-  if(!isDefined(team))
+  if(!isDefined(team)) {
     ai = getaiarray();
-  else
+  }
+  else {
     ai = getaiarray(team);
+  }
 
   aifar = [];
 
   foreach(dude in ai) {
-    if(distancesquared(dude.origin, fromorigin) > distsq)
+    if(distancesquared(dude.origin, fromorigin) > distsq) {
       aifar[aifar.size] = dude;
+    }
   }
 
   return aifar;
@@ -1126,10 +1213,12 @@ chopper_closest_open_path_start(target_origin, start_name, struct_string_field, 
       avail_paths[avail_paths.size] = path_start;
     }
 
-    if(avail_paths.size)
+    if(avail_paths.size) {
       return avail_paths[randomint(avail_paths.size)];
-    else
+    }
+    else {
       return undefined;
+    }
   } else {
     closest_path_start = undefined;
     closest_path_start_dist = undefined;
@@ -1150,8 +1239,9 @@ chopper_closest_open_path_start(target_origin, start_name, struct_string_field, 
 
       switch (struct_string_field) {
         case "script_unload":
-          while(!isDefined(path_drop.script_unload))
+          while(!isDefined(path_drop.script_unload)) {
             path_drop = getvehiclenode(path_drop.target, "targetname");
+          }
 
           assert(isDefined(path_drop.script_unload), "Level has a helicopter path without a struct with script_unload defined.");
 
@@ -1161,8 +1251,9 @@ chopper_closest_open_path_start(target_origin, start_name, struct_string_field, 
           found_path = 1;
           break;
         case "script_stopnode":
-          while(!isDefined(path_drop.script_stopnode))
+          while(!isDefined(path_drop.script_stopnode)) {
             path_drop = getvehiclenode(path_drop.target, "targetname");
+          }
 
           assert(isDefined(path_drop.script_stopnode), "Level has a helicopter path without a struct with script_stopnode defined.");
 
@@ -1172,8 +1263,9 @@ chopper_closest_open_path_start(target_origin, start_name, struct_string_field, 
           found_path = 1;
           break;
         default:
-          while(isDefined(path_drop.target) && (!isDefined(path_drop.script_noteworthy) || path_drop.script_noteworthy != struct_string_field))
+          while(isDefined(path_drop.target) && (!isDefined(path_drop.script_noteworthy) || path_drop.script_noteworthy != struct_string_field)) {
             path_drop = getvehiclenode(path_drop.target, "targetname");
+          }
 
           if(!isDefined(path_drop.target)) {
             continue;
@@ -1200,8 +1292,9 @@ chopper_closest_open_path_start(target_origin, start_name, struct_string_field, 
       }
     }
 
-    if(isDefined(closest_path_start))
+    if(isDefined(closest_path_start)) {
       closest_path_start.path_drop = closest_path_drop;
+    }
 
     return closest_path_start;
   }
@@ -1221,21 +1314,24 @@ chopper_spawn_from_targetname(name, spawn_origin, team) {
   chopper_spawner = get_vehicle_spawner(name);
   assert(isDefined(chopper_spawner), "Invalid chopper spawner targetname: " + name);
 
-  while(isDefined(chopper_spawner.vehicle_spawned_thisframe))
+  while(isDefined(chopper_spawner.vehicle_spawned_thisframe)) {
     wait 0.05;
+  }
 
   chopper_spawner.vehicle_spawned_thisframe = 1;
 
-  if(isDefined(spawn_origin))
+  if(isDefined(spawn_origin)) {
     chopper_spawner.origin = spawn_origin;
+  }
 
   chopper = maps\_vehicle::spawn_vehicle_from_targetname(name);
   assert(isDefined(chopper), "chopper failed to spawn.");
   chopper setteam(team);
   chopper godon();
 
-  if(team == "axis")
+  if(team == "axis") {
     target_set(chopper);
+  }
 
   wait 0.05;
   chopper_spawner.vehicle_spawned_thisframe = undefined;
@@ -1269,11 +1365,13 @@ chopper_send(droptarget, team, type, customunload) {
   chopper = chopper_spawn_from_targetname_and_drive(team + "_drop_" + type, path_start.origin, path_start, team);
   chopper.script_vehicle_selfremove = 1;
 
-  if(type == "helo")
+  if(type == "helo") {
     chopper.speed = 85;
+  }
 
-  if(type == "vtol")
+  if(type == "vtol") {
     chopper.speed = 60;
+  }
 
   chopper vehicle_setspeed(chopper.speed, 30, "start helo path");
   chopper.vehicle_passengersonly = 1;
@@ -1305,11 +1403,13 @@ chopper_unload_rope_cargo(cargo, pkg_ref, team, squadid) {
   cargo unlink();
 
   if(isai(cargo) || cargo isvehicle()) {
-    if(cargo isvehicle())
+    if(cargo isvehicle()) {
       cargo maps\_vehicle::defend(cargo.origin, 600);
+    }
   } else {
-    for(i = 0; i < 10; i++)
+    for(i = 0; i < 10; i++) {
       playFX(level._effect["cargo_box_open"], groundpos + (randomint(20), randomint(20), randomint(30)));
+    }
 
     wait 0.1;
     cargo delete();
@@ -1376,11 +1476,13 @@ kill_hud_message_in_time(text, time, endnote) {
 hud_message_queue() {
   level endon("rts_terminated");
 
-  if(!isDefined(level.rts.hud_message_queue))
+  if(!isDefined(level.rts.hud_message_queue)) {
     level.rts.hud_message_queue = [];
+  }
 
-  if(!isDefined(level.challenge_awarded))
+  if(!isDefined(level.challenge_awarded)) {
     level.challenge_awarded = 0;
+  }
 
   while(true) {
     if(level.rts.hud_message_queue.size > 0 && gettime() > level.challenge_awarded + 5000) {
@@ -1395,8 +1497,9 @@ hud_message_queue() {
 }
 
 create_hud_message(text, clearall) {
-  if(!isDefined(clearall))
+  if(!isDefined(clearall)) {
     clearall = 0;
+  }
 
   if(!flag("rts_hud_on")) {
     return;
@@ -1407,46 +1510,55 @@ create_hud_message(text, clearall) {
   }
 
   foreach(msg in level.rts.hud_message_queue) {
-    if(msg == text)
+    if(msg == text) {
       return;
+    }
   }
 
   level.rts.hud_message_queue[level.rts.hud_message_queue.size] = text;
 }
 
 time_countdown(timemin, owner, killnotify, luinote, expirednote, headertext, alertatoneandtwominutes) {
-  if(!isDefined(killnotify))
+  if(!isDefined(killnotify)) {
     killnotify = "kill_countdown";
+  }
 
-  if(!isDefined(luinote))
+  if(!isDefined(luinote)) {
     luinote = "rts_time_left";
+  }
 
-  if(!isDefined(expirednote))
+  if(!isDefined(expirednote)) {
     expirednote = "expired";
+  }
 
-  if(!isDefined(headertext))
+  if(!isDefined(headertext)) {
     headertext = "SO_RTS_MISSION_TIME_REMAINING_CAPS";
+  }
 
-  if(!isDefined(alertatoneandtwominutes))
+  if(!isDefined(alertatoneandtwominutes)) {
     alertatoneandtwominutes = 1;
+  }
 
   level endon("rts_terminated");
   level endon("kill_timer");
   owner endon(killnotify);
   msec = int(1000 * timemin * 60);
 
-  if(alertatoneandtwominutes)
+  if(alertatoneandtwominutes) {
     luinotifyevent(istring(luinote), 3, msec, istring(headertext), 1);
-  else
+  }
+  else {
     luinotifyevent(istring(luinote), 2, msec, istring(headertext));
+  }
 
   wait(timemin * 60);
   owner notify(expirednote);
 }
 
 time_countdown_delete(luinote) {
-  if(!isDefined(luinote))
+  if(!isDefined(luinote)) {
     luinote = "rts_time_left";
+  }
 
   level notify("kill_timer");
   luinotifyevent(istring(luinote), 1, 0);
@@ -1537,8 +1649,9 @@ missionsuccessmenu() {
 }
 
 any_pending_gpr() {
-  if(isDefined(self) && isDefined(self.gpr_queue))
+  if(isDefined(self) && isDefined(self.gpr_queue)) {
     return self.gpr_queue.size > 0;
+  }
 
   return false;
 }
@@ -1546,8 +1659,9 @@ any_pending_gpr() {
 process_pending_gpr_sets() {
   self endon("death");
 
-  if(!isDefined(self.gpr_state))
+  if(!isDefined(self.gpr_state)) {
     self.gpr_state = 0;
+  }
 
   waittillframeend;
 
@@ -1558,10 +1672,12 @@ process_pending_gpr_sets() {
       self setgpr(nextgpr);
       self.gpr_state = !self.gpr_state;
 
-      if(self.gpr_state == 1)
+      if(self.gpr_state == 1) {
         self setclientflag(5);
-      else
+      }
+      else {
         self clearclientflag(5);
+      }
     }
 
     wait 0.1;
@@ -1577,8 +1693,9 @@ set_gpr(val, clearallfirst) {
     self thread process_pending_gpr_sets();
   }
 
-  if(isDefined(clearallfirst) && clearallfirst)
+  if(isDefined(clearallfirst) && clearallfirst) {
     self.gpr_queue = [];
+  }
 
   self.gpr_queue[self.gpr_queue.size] = val;
 }
@@ -1588,16 +1705,19 @@ make_gpr_opcode(id) {
 }
 
 flush_gpr() {
-  while(self any_pending_gpr())
+  while(self any_pending_gpr()) {
     wait 0.05;
+  }
 }
 
 sortarraybyclosest(origin, array, maxdistsq, no3d, noai) {
-  if(array.size == 0)
+  if(array.size == 0) {
     return array;
+  }
 
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     origin = level.rts.player.origin;
+  }
 
   if(isDefined(maxdistsq)) {
     valid = [];
@@ -1623,12 +1743,15 @@ sortarraybyclosest(origin, array, maxdistsq, no3d, noai) {
     array = valid;
   }
 
-  if(isDefined(noai) && noai)
+  if(isDefined(noai) && noai) {
     return maps\_utility_code::mergesort(array, ::closestcomparefunc, origin);
-  else if(isDefined(no3d) && no3d)
+  }
+  else if(isDefined(no3d) && no3d) {
     return maps\_utility_code::mergesort(array, ::closestcomparefunc2d, origin);
-  else
+  }
+  else {
     return arraysort(array, origin, 1);
+  }
 }
 
 sortarraybyfurthest(origin, array, mindistsq, no3d, noai) {
@@ -1657,12 +1780,15 @@ sortarraybyfurthest(origin, array, mindistsq, no3d, noai) {
     array = valid;
   }
 
-  if(isDefined(noai) && noai)
+  if(isDefined(noai) && noai) {
     return maps\_utility_code::mergesort(array, ::furthestcomparefunc, origin);
-  else if(isDefined(no3d) && no3d)
+  }
+  else if(isDefined(no3d) && no3d) {
     return maps\_utility_code::mergesort(array, ::furthestcomparefunc2d, origin);
-  else
+  }
+  else {
     return arraysort(array, origin, 0);
+  }
 }
 
 getclosestinarray(origin, array) {
@@ -1714,8 +1840,9 @@ getclosestai(origin, team, distsqmax) {
   foreach(ai in sortedarray) {
     distsq = distancesquared(origin, ai.origin);
 
-    if(distsq < distsqmax)
+    if(distsq < distsqmax) {
       return ai;
+    }
   }
 
   return undefined;
@@ -1726,8 +1853,9 @@ fademodelout(model, squadid, timesec) {
   self endon("fadeModelOut" + squadid);
   wait(timesec);
 
-  if(isDefined(model))
+  if(isDefined(model)) {
     model hide();
+  }
 }
 
 player_plant_network_intruder(poi) {
@@ -1830,11 +1958,13 @@ setupnetworkintruder(poi) {
   entnum = self getentitynumber();
   luinotifyevent(&"rts_add_poi", 1, entnum);
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     luinotifyevent(&"rts_protect_poi", 2, entnum, poi.poinum);
+  }
 
-  if(self.team == "axis")
+  if(self.team == "axis") {
     luinotifyevent(&"rts_destroy_poi", 2, entnum, poi.poinum);
+  }
 
   level notify("intruder_planted", self);
   lastnotify = 0;
@@ -1847,8 +1977,9 @@ setupnetworkintruder(poi) {
       continue;
     }
 
-    if(flag("rts_mode") && self.team == "allies")
+    if(flag("rts_mode") && self.team == "allies") {
       self.health = self.health + int(damage * 0.6);
+    }
 
     if(!isalive(self)) {
       luinotifyevent(&"rts_del_poi", 1, entnum);
@@ -1861,8 +1992,9 @@ setupnetworkintruder(poi) {
       maps\_so_rts_event::trigger_event("sfx_intruder_explode", self);
       maps\_so_rts_event::trigger_event("fx_intruder_explode", myorigin);
 
-      if(isDefined(fakevehicle))
+      if(isDefined(fakevehicle)) {
         fakevehicle delete();
+      }
 
       self.sndloopingent delete();
       self delete();
@@ -1896,10 +2028,12 @@ blinky_light(fx, tagname) {
   while(true) {
     self playSound("evt_rts_acoustic_sensor_beep");
 
-    if(isDefined(self gettagorigin(tagname)))
+    if(isDefined(self gettagorigin(tagname))) {
       playFXOnTag(fx, self, tagname);
-    else
+    }
+    else {
       playFXOnTag(fx, self, "tag_origin");
+    }
 
     wait 0.5;
   }
@@ -1909,20 +2043,25 @@ setup_devgui() {
   setdvar("cmd_send_chopper", "none");
   setdvar("cmd_take_poi", "none");
 
-  if(getdvarint(#"_id_C79B9C9A") == 0)
+  if(getdvarint(#"_id_C79B9C9A") == 0) {
     setdvar("scr_rts_enemyDisabled", "0");
+  }
 
-  if(getdvarint(#"_id_BC1F5AA9") == 0)
+  if(getdvarint(#"_id_BC1F5AA9") == 0) {
     setdvar("scr_rts_enemyDebug", "0");
+  }
 
-  if(getdvarint(#"_id_C5BAA772") == 0)
+  if(getdvarint(#"_id_C5BAA772") == 0) {
     setdvar("scr_rts_allpkgs", "0");
+  }
 
-  if(getdvarint(#"_id_B36F6E92") == 0)
+  if(getdvarint(#"_id_B36F6E92") == 0) {
     setdvar("scr_rts_cameraMode", "0");
+  }
 
-  if(getdvarint(#"_id_498EBD49") == 0)
+  if(getdvarint(#"_id_498EBD49") == 0) {
     setdvar("scr_rts_squadDebug", "0");
+  }
 
   adddebugcommand("devgui_cmd \"|RTS|/Helicopters:1/Send Ally Infantry:1\" \"cmd_send_chopper allies_helo\"\n");
   adddebugcommand("devgui_cmd \"|RTS|/Helicopters:1/Send Ally Quads:2\" \"cmd_send_chopper allies_quads\"\n");
@@ -1981,8 +2120,9 @@ watch_devgui() {
       level.rts.minplayerz = level.rts.player.origin[2] + level.rts.game_rules.minplayerz;
       level.rts.maxplayerz = level.rts.minplayerz + level.rts.game_rules.maxplayerz;
 
-      if(flag("rts_mode"))
+      if(flag("rts_mode")) {
         player_takeover_random_dude();
+      }
     }
 
     cmd_send_chopper = getdvar(#"_id_D90ED392");
@@ -2054,10 +2194,12 @@ player_takeover_random_dude() {
 test_heli_dropoff(type, team, pkg_ref) {
   availtransport = spawnStruct();
 
-  if(type == "quads" || type == "asd" || type == "claw")
+  if(type == "quads" || type == "asd" || type == "claw") {
     availtransport.cb = maps\_so_rts_ai::spawn_ai_package_cargo;
-  else
+  }
+  else {
     availtransport.cb = maps\_so_rts_ai::spawn_ai_package_helo;
+  }
 
   availtransport.param = undefined;
   availtransport.pkg_ref = pkg_ref;
@@ -2077,8 +2219,9 @@ toggle_damage_indicators(on) {
   } else {
     setdvar("scr_damagefeedback", "0");
 
-    if(isDefined(level.rts.player.hud_damagefeedback))
+    if(isDefined(level.rts.player.hud_damagefeedback)) {
       level.rts.player.hud_damagefeedback.alpha = 0;
+    }
 
     level.disable_damage_overlay = 1;
   }
@@ -2092,10 +2235,12 @@ formatfloat(number, decimals) {
 }
 
 get_player_angles() {
-  if(isDefined(level.wiiu) && level.wiiu)
+  if(isDefined(level.wiiu) && level.wiiu) {
     return level.rts.player getgunangles();
-  else
+  }
+  else {
     return level.rts.player getplayerangles();
+  }
 }
 
 calcent2dscreen() {
@@ -2137,10 +2282,12 @@ calcent2dscreen() {
       self.fy2d = vintersect2d[1];
     }
 
-    if(!isDefined(self.next2dcalc))
+    if(!isDefined(self.next2dcalc)) {
       self.next2dcalc = time + randomint(10) + 150;
-    else
+    }
+    else {
       self.next2dcalc = time + 150;
+    }
   }
 }
 
@@ -2168,8 +2315,9 @@ set_closestunitparams() {
 }
 
 getclosestunittype(type, threshchecksq) {
-  if(!isDefined(threshchecksq))
+  if(!isDefined(threshchecksq)) {
     threshchecksq = 100;
+  }
 
   origin = (0, 0, 0);
 
@@ -2201,18 +2349,21 @@ getclosestunittype(type, threshchecksq) {
     unit = sortedunits[i];
 
     if(isDefined(checkaivalid) && checkaivalid) {
-      if(!maps\_so_rts_ai::ai_isselectable(unit))
+      if(!maps\_so_rts_ai::ai_isselectable(unit)) {
         continue;
+      }
     }
 
     if(isDefined(checknotplayerteam) && checknotplayerteam) {
-      if(unit.team == level.rts.player.team)
+      if(unit.team == level.rts.player.team) {
         continue;
+      }
     }
 
     if(isDefined(checkignoreme) && checkignoreme) {
-      if(isDefined(unit.ignoreme) && unit.ignoreme)
+      if(isDefined(unit.ignoreme) && unit.ignoreme) {
         continue;
+      }
     }
 
     closest = unit;
@@ -2307,14 +2458,17 @@ unitreticletracker() {
     wait 0.1;
   }
 
-  if(isDefined(level.rts.targetpoi))
+  if(isDefined(level.rts.targetpoi)) {
     luinotifyevent(&"rts_deselect_poi", 1, level.rts.targetpoi getentitynumber());
+  }
 
-  if(isDefined(level.rts.targetteamenemy))
+  if(isDefined(level.rts.targetteamenemy)) {
     luinotifyevent(&"rts_deselect_enemy", 1, level.rts.targetteamenemy getentitynumber());
+  }
 
-  if(isDefined(level.rts.targetteammate))
+  if(isDefined(level.rts.targetteammate)) {
     luinotifyevent(&"rts_deselect", 1, level.rts.targetteammate getentitynumber());
+  }
 }
 
 pick_delayed_selection_sound(type, guy) {
@@ -2340,10 +2494,12 @@ pick_delayed_selection_sound(type, guy) {
 }
 
 get_selection_alias_from_targetname(guy, p2, p3) {
-  if(!isDefined(guy) || !isDefined(guy.ai_ref.select_alias))
+  if(!isDefined(guy) || !isDefined(guy.ai_ref.select_alias)) {
     alias = "evt_rts_selection_friendly_generic";
-  else
+  }
+  else {
     alias = guy.ai_ref.select_alias;
+  }
 
   playsoundatposition(alias, (0, 0, 0));
   return true;
@@ -2356,8 +2512,9 @@ block_player_damage_fortime(time) {
 }
 
 set_as_target(team, offset) {
-  if(!isDefined(offset))
+  if(!isDefined(offset)) {
     offset = (0, 0, 0);
+  }
 
   faketarget = maps\_vehicle::spawn_vehicle_from_targetname("fake_vehicle");
   faketarget.team = team;
@@ -2377,20 +2534,23 @@ player_oobwatch() {
   level endon("mission_complete");
 
   while(true) {
-    if(isDefined(level.rts.player) && level.rts.player maps\_so_rts_support::isentbelowmap())
+    if(isDefined(level.rts.player) && level.rts.player maps\_so_rts_support::isentbelowmap()) {
       level.rts.player dodamage(level.rts.player.health + 9999, level.rts.player.origin, level.rts.player, 1, "suicide");
+    }
 
     wait 0.05;
   }
 }
 
 isentbelowmap() {
-  if(isDefined(self.allow_oob) && self.allow_oob)
+  if(isDefined(self.allow_oob) && self.allow_oob) {
     return false;
+  }
 
   if(isDefined(level.rts.bounds)) {
-    if(self.origin[2] <= level.rts.bounds.minz)
+    if(self.origin[2] <= level.rts.bounds.minz) {
       return true;
+    }
   }
 
   return false;
@@ -2416,22 +2576,27 @@ setupmapboundary() {
 }
 
 clampenttomapboundary(ent, damage, warnmsg) {
-  if(!isDefined(damage))
+  if(!isDefined(damage)) {
     damage = 0;
+  }
 
-  if(!isDefined(warnmsg))
+  if(!isDefined(warnmsg)) {
     warnmsg = 0;
+  }
 
-  if(!(isDefined(ent.rts_unloaded) && ent.rts_unloaded) && (isDefined(damage) && damage))
+  if(!(isDefined(ent.rts_unloaded) && ent.rts_unloaded) && (isDefined(damage) && damage)) {
     return true;
+  }
 
-  if(isDefined(ent.allow_oob) && ent.allow_oob)
+  if(isDefined(ent.allow_oob) && ent.allow_oob) {
     return true;
+  }
 
   val = clamporigintomapboundary(ent.origin);
 
-  if(val.inbounds)
+  if(val.inbounds) {
     return true;
+  }
 
   if(isDefined(warnmsg) && warnmsg) {
     if(!isDefined(ent.oob_warning_time)) {
@@ -2439,23 +2604,26 @@ clampenttomapboundary(ent, damage, warnmsg) {
       return false;
     }
 
-    if(gettime() < ent.oob_warning_time)
+    if(gettime() < ent.oob_warning_time) {
       return false;
+    }
   }
 
   if(isDefined(damage) && damage) {
     ent.armor = 0;
 
-    if(isDefined(ent.classname) && ent.classname == "script_vehicle")
+    if(isDefined(ent.classname) && ent.classname == "script_vehicle") {
       ent veh_magic_bullet_shield(0);
+    }
 
     println("@@@@ RIP: AI " + ent getentitynumber() + "[" + ent.ai_ref.ref + "] destroyed for being out of bounds (" + ent.origin + ")");
 
     ent dodamage(int(ent.maxhealth + 100), ent.origin, undefined, undefined, "explosive");
   } else if(!isDefined(ent.classname) || ent.classname == "script_model")
     ent.origin = val.origin;
-  else
+  else {
     ent forceteleport(val.origin, ent.angles);
+  }
 
   return false;
 }
@@ -2503,8 +2671,9 @@ clamporigintomapboundary(origin) {
 }
 
 boundary_watcher(damage, interval, warnmsg, endnote) {
-  if(!isDefined(interval))
+  if(!isDefined(interval)) {
     interval = 0.05;
+  }
 
   self notify("boundary_watcher");
   self endon("death");
@@ -2556,8 +2725,9 @@ trigger_hint(trigger, banner) {
 
     trigger sethintstring(banner);
 
-    while(isDefined(trigger) && who istouching(trigger))
+    while(isDefined(trigger) && who istouching(trigger)) {
       wait 0.05;
+    }
   }
 }
 
@@ -2608,22 +2778,26 @@ trigger_use(trigger, banner, usednote, altbutton, team) {
       time = gettime();
 
       if(isDefined(altbutton) && altbutton) {
-        if(who jumpbuttonpressed() && !who.throwinggrenade && !who meleebuttonpressed() && !isDefined(btndown))
+        if(who jumpbuttonpressed() && !who.throwinggrenade && !who meleebuttonpressed() && !isDefined(btndown)) {
           btndown = time;
+        }
 
-        if(!who jumpbuttonpressed())
+        if(!who jumpbuttonpressed()) {
           btndown = undefined;
+        }
 
         if(isDefined(btndown) && time - btndown >= 300) {
           self notify(usednote, who);
           break;
         }
       } else {
-        if(who usebuttonpressed() && !who.throwinggrenade && !who meleebuttonpressed() && !isDefined(btndown))
+        if(who usebuttonpressed() && !who.throwinggrenade && !who meleebuttonpressed() && !isDefined(btndown)) {
           btndown = time;
+        }
 
-        if(!who usebuttonpressed())
+        if(!who usebuttonpressed()) {
           btndown = undefined;
+        }
 
         if(isDefined(btndown) && time - btndown >= 300) {
           self notify(usednote, who);
@@ -2646,10 +2820,12 @@ killzonewatch() {
   self endon("death");
   teams = [];
 
-  if(isarray(self.teams))
+  if(isarray(self.teams)) {
     teams = self.teams;
-  else
+  }
+  else {
     teams[0] = self.teams;
+  }
 
   while(true) {
     self waittill("trigger", who);
@@ -2662,8 +2838,9 @@ killzonewatch() {
       }
     }
 
-    if(valid)
+    if(valid) {
       who kill();
+    }
   }
 }
 
@@ -2688,14 +2865,17 @@ turret_deathwatcher() {
   fakeveh = self.fakevehicle;
   self waittill("death");
 
-  if(isDefined(level.rts.player.viewlockedentity) && self == level.rts.player.viewlockedentity)
+  if(isDefined(level.rts.player.viewlockedentity) && self == level.rts.player.viewlockedentity) {
     self useby(level.rts.player);
+  }
 
-  if(isDefined(trigger))
+  if(isDefined(trigger)) {
     trigger delete();
+  }
 
-  if(isDefined(fakeveh))
+  if(isDefined(fakeveh)) {
     fakeveh delete();
+  }
 }
 
 turret_usewatcher() {
@@ -2704,13 +2884,15 @@ turret_usewatcher() {
   while(true) {
     self makevehicleusable();
 
-    if(isDefined(self.pickup_trigger))
+    if(isDefined(self.pickup_trigger)) {
       self.pickup_trigger triggeron();
+    }
 
     self waittill("enter_vehicle");
 
-    if(isDefined(self.pickup_trigger))
+    if(isDefined(self.pickup_trigger)) {
       self.pickup_trigger triggeroff();
+    }
 
     self waittill("exit_vehicle");
   }
@@ -2738,11 +2920,13 @@ turret_pickupwatcher(trigger, usednote) {
     while(isDefined(trigger) && who istouching(trigger)) {
       time = gettime();
 
-      if(who jumpbuttonpressed() && !who.throwinggrenade && !who meleebuttonpressed() && !isDefined(btndown))
+      if(who jumpbuttonpressed() && !who.throwinggrenade && !who meleebuttonpressed() && !isDefined(btndown)) {
         btndown = time;
+      }
 
-      if(!who jumpbuttonpressed())
+      if(!who jumpbuttonpressed()) {
         btndown = undefined;
+      }
 
       if(isDefined(btndown) && time - btndown >= 300) {
         level notify(usednote, who);
@@ -2762,19 +2946,22 @@ turret_createmovewatcher() {
   self notify("turret_placed");
   wait 0.05;
 
-  if(isDefined(self.pickup_trigger))
+  if(isDefined(self.pickup_trigger)) {
     self.pickup_trigger delete();
+  }
 
-  if(isDefined(self.bad_turret_spot))
+  if(isDefined(self.bad_turret_spot)) {
     self.bad_turret_spot delete();
+  }
 
   target_vec = self.origin + anglesToForward((0, self.angles[1], 0)) * 1000;
   self settargetorigin(target_vec);
   self thread maps\_cic_turret::cic_turret_on();
   self.no_pickup = gettime() + 2000;
 
-  while(gettime() < self.no_pickup)
+  while(gettime() < self.no_pickup) {
     wait 0.25;
+  }
 
   self.takedamage = 1;
   self makeusable(self.team);
@@ -2826,13 +3013,15 @@ dropturretonnotify(note, turret) {
   turret setModel(turret.model_base);
   turret makeusable(turret.team);
 
-  if(isDefined(turret.pickup_trigger))
+  if(isDefined(turret.pickup_trigger)) {
     turret.pickup_trigger delete();
+  }
 
   turret.takedamage = 1;
 
-  if(isDefined(self.viewlockedentity) && self.viewlockedentity != turret)
+  if(isDefined(self.viewlockedentity) && self.viewlockedentity != turret) {
     turret maps\_cic_turret::cic_turret_on();
+  }
 
   self.carrying_turret = undefined;
   self allowjump(1);
@@ -2847,8 +3036,9 @@ turret_placementwatcher(turret) {
   while(true) {
     level waittill("turret_place_" + turret getentitynumber());
 
-    if(isDefined(turret.pickup_trigger))
+    if(isDefined(turret.pickup_trigger)) {
       turret.pickup_trigger delete();
+    }
 
     turret.origin = turret.lastgoodspot;
     turret.angles = turret.lastgoodang;
@@ -2904,8 +3094,9 @@ updateturretplacement(turret) {
     turret.origin = placement["origin"];
     turret.angles = placement["angles"];
 
-    if(turret.canbeplaced == 1)
+    if(turret.canbeplaced == 1) {
       turret.canbeplaced = placement["result"];
+    }
 
     if(turret.canbeplaced != lastplacedturret) {
       if(turret.canbeplaced) {
@@ -2929,28 +3120,34 @@ updateturretplacement(turret) {
 }
 
 turret_deathwatch(einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
-  if(isDefined(level.rts.turretdamagecb))
+  if(isDefined(level.rts.turretdamagecb)) {
     idamage = [[level.rts.turretdamagecb]](einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name);
+  }
 
   if(self.health < idamage) {
     self setclientflag(7);
 
-    if(self.team == "allies")
+    if(self.team == "allies") {
       self disconnectpaths();
+    }
   }
 
-  if(isDefined(self.classvehicledamage))
+  if(isDefined(self.classvehicledamage)) {
     return [[self.classvehicledamage]](einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name);
-  else
+  }
+  else {
     return idamage;
+  }
 }
 
 level_create_turrets(usable, hitpoints) {
-  if(!isDefined(usable))
+  if(!isDefined(usable)) {
     usable = 0;
+  }
 
-  if(!isDefined(hitpoints))
+  if(!isDefined(hitpoints)) {
     hitpoints = 2000;
+  }
 
   wait 0.05;
   turretorigins = getEntArray("turret_loc_enemy", "targetname");
@@ -2968,18 +3165,21 @@ level_create_turrets(usable, hitpoints) {
     turret.fakevehicle = maps\_vehicle::spawn_vehicle_from_targetname("fake_vehicle");
     origin = turret gettagorigin("tag_player");
 
-    if(!isDefined(origin))
+    if(!isDefined(origin)) {
       turret.fakevehicle linkto(turret, "tag_origin", vectorscale((0, 0, 1), 40.0), (0, 0, 0));
-    else
+    }
+    else {
       turret.fakevehicle linkto(turret, "tag_player");
+    }
 
     turret.fakevehicle.team = "axis";
     turret.fakevehicle.vteam = "axis";
     turret.fakevehicle.origin = origin;
     turret disconnectpaths();
 
-    if(isDefined(turret.overridevehicledamage))
+    if(isDefined(turret.overridevehicledamage)) {
       turret.classvehicledamage = turret.overridevehicledamage;
+    }
 
     turret.overridevehicledamage = ::turret_deathwatch;
     turret.trigger = spawn("trigger_radius", turret.origin, 0, 80, 64);
@@ -3007,10 +3207,12 @@ level_create_turrets(usable, hitpoints) {
     turret.fakevehicle = maps\_vehicle::spawn_vehicle_from_targetname("fake_vehicle");
     origin = turret gettagorigin("tag_player");
 
-    if(!isDefined(origin))
+    if(!isDefined(origin)) {
       turret.fakevehicle linkto(turret, "tag_origin", vectorscale((0, 0, 1), 40.0), (0, 0, 0));
-    else
+    }
+    else {
       turret.fakevehicle linkto(turret, "tag_player");
+    }
 
     turret.fakevehicle.team = "allies";
     turret.fakevehicle.vteam = "allies";
@@ -3027,8 +3229,9 @@ level_create_turrets(usable, hitpoints) {
 
     turret disconnectpaths();
 
-    if(isDefined(turret.overridevehicledamage))
+    if(isDefined(turret.overridevehicledamage)) {
       turret.classvehicledamage = turret.overridevehicledamage;
+    }
 
     turret.overridevehicledamage = ::turret_deathwatch;
     level notify("turret_created", turret);
@@ -3037,11 +3240,13 @@ level_create_turrets(usable, hitpoints) {
 }
 
 badplace_untilnotify(spot, note, radius, team, height) {
-  if(!isDefined(team))
+  if(!isDefined(team)) {
     team = "all";
+  }
 
-  if(!isDefined(height))
+  if(!isDefined(height)) {
     height = 100;
+  }
 
   badplace_name = "bpn_" + note;
   badplace_cylinder(badplace_name, -1, spot, radius, height, team);
@@ -3109,8 +3314,9 @@ claymore_detonationwatch() {
 }
 
 claymore_detonate() {
-  if(isDefined(self.fakevehicle))
+  if(isDefined(self.fakevehicle)) {
     self.fakevehicle delete();
+  }
 
   level notify("badplace_entNum" + self getentitynumber());
   playFX(getfx("claymore_explode"), self gettagorigin("tag_fx"));
@@ -3126,8 +3332,9 @@ perfect_aim_off(ent) {
 }
 
 perfect_aim_fortimeoruntilnotify(note, time, timeout) {
-  if(!isDefined(timeout))
+  if(!isDefined(timeout)) {
     timeout = 5;
+  }
 
   self endon("death");
   self notify("perfect_aim_on");
@@ -3135,11 +3342,13 @@ perfect_aim_fortimeoruntilnotify(note, time, timeout) {
   self thread perfect_aim_off();
   self.perfectaim = 1;
 
-  if(isDefined(time))
+  if(isDefined(time)) {
     wait(time);
+  }
 
-  if(isDefined(note))
+  if(isDefined(note)) {
     waittill_any_timeout(timeout, note, "perfect_aim_off");
+  }
 
   self notify("perfect_aim_off");
 }
@@ -3194,10 +3403,12 @@ get_closest_covernode(origin, radius, height) {
 
 get_player_rts_mode() {
   if(isDefined(self.ally)) {
-    if(self.ally.ai_ref.species == "vehicle" || self.ally.ai_ref.species == "robot_actor")
+    if(self.ally.ai_ref.species == "vehicle" || self.ally.ai_ref.species == "robot_actor") {
       return self.ally.ai_ref.ref;
-    else
+    }
+    else {
       return self.ally.ai_ref.species;
+    }
   } else
     return "overwatch";
 }
@@ -3226,8 +3437,9 @@ track_unit_type_usage() {
     wait 0.5;
     play_type = self get_player_rts_mode();
 
-    if(!isDefined(level.m_unit_usage[play_type]))
+    if(!isDefined(level.m_unit_usage[play_type])) {
       level.m_unit_usage[play_type] = 0.0;
+    }
 
     level.m_unit_usage[play_type] = level.m_unit_usage[play_type] + 0.5;
   }
@@ -3242,8 +3454,9 @@ challenge_tactical(str_notify) {
   keys = getarraykeys(level.m_unit_usage);
 
   foreach(key in keys) {
-    if(key != "overwatch" && level.m_unit_usage[key] > 0)
+    if(key != "overwatch" && level.m_unit_usage[key] > 0) {
       return;
+    }
   }
 
   self notify(str_notify);

@@ -54,10 +54,12 @@ setup_slow_intro() {
 }
 
 begin_slow_intro() {
-  if(isDefined(level.player))
+  if(isDefined(level.player)) {
     var_0 = newclienthudelem(level.player);
-  else
+  }
+  else {
     var_0 = newhudelem();
+  }
 
   var_0.x = 0;
   var_0.y = 0;
@@ -340,8 +342,9 @@ run_exit() {
   thread maps\carrier::obj_flight_deck();
   level.hesh waittillmatch("single anim", "end");
 
-  if(!common_scripts\utility::flag("player_reached_medbay_door"))
+  if(!common_scripts\utility::flag("player_reached_medbay_door")) {
     var_0 thread maps\_anim::anim_loop_solo(level.hesh, "carrier_medbay_letsgo_hesh_loop", "stop_loop");
+  }
 
   common_scripts\utility::flag_wait("player_reached_medbay_door");
   var_0 notify("stop_loop");
@@ -522,8 +525,9 @@ hallway_rear_run_down_back() {
     var_2 setgoalvolumeauto(var_1);
     var_2 waittill("goal");
 
-    if(isDefined(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isalive(var_2)) {
       var_2 delete();
+    }
 
     wait(randomfloatrange(1, 5));
   }
@@ -637,8 +641,9 @@ slow_intro_jet_takeoff_guys(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 thread maps\_drone::drone_move();
   common_scripts\utility::flag_wait("start_promo_fade");
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_7 delete();
+  }
 }
 
 slow_intro_jet_takeoff_jet(var_0, var_1, var_2, var_3) {
@@ -871,7 +876,8 @@ cleanup_intro_exterior() {
   var_16 = level.drones["allies"].array;
 
   foreach(var_18 in var_16) {
-    if(isDefined(var_18.script_noteworthy) && var_18.script_noteworthy == "intro_ally_deck")
+    if(isDefined(var_18.script_noteworthy) && var_18.script_noteworthy == "intro_ally_deck") {
       var_18 delete();
+    }
   }
 }

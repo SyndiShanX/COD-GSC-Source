@@ -104,8 +104,9 @@ getfreeagent(var_0) {
         var_1 = var_3;
         var_1 initagentscriptvariables();
 
-        if(isDefined(var_0))
+        if(isDefined(var_0)) {
           var_1.agent_type = var_0;
+        }
 
         break;
       }
@@ -127,14 +128,17 @@ deactivateagentdelayed() {
   self notify("deactivateAgentDelayed");
   self endon("deactivateAgentDelayed");
 
-  if(!isDefined(level.despawning_agents))
+  if(!isDefined(level.despawning_agents)) {
     level.despawning_agents = [];
+  }
 
-  if(!common_scripts\utility::array_contains(level.despawning_agents, self))
+  if(!common_scripts\utility::array_contains(level.despawning_agents, self)) {
     level.despawning_agents = common_scripts\utility::array_add(level.despawning_agents, self);
+  }
 
-  if(maps\mp\_utility::isgameparticipant(self))
+  if(maps\mp\_utility::isgameparticipant(self)) {
     maps\mp\gametypes\_spawnlogic::removefromparticipantsarray();
+  }
 
   maps\mp\gametypes\_spawnlogic::removefromcharactersarray();
   wait 0.05;
@@ -147,8 +151,9 @@ deactivateagentdelayed() {
   foreach(var_1 in level.characters) {
     if(isDefined(var_1.attackers)) {
       foreach(var_4, var_3 in var_1.attackers) {
-        if(var_3 == self)
+        if(var_3 == self) {
           var_1.attackers[var_4] = undefined;
+        }
       }
     }
   }
@@ -161,8 +166,9 @@ deactivateagentdelayed() {
 }
 
 getnumactiveagents(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "all";
+  }
 
   var_1 = getactiveagentsoftype(var_0);
   return var_1.size;
@@ -171,13 +177,15 @@ getnumactiveagents(var_0) {
 getactiveagentsoftype(var_0) {
   var_1 = [];
 
-  if(!isDefined(level.agentarray))
+  if(!isDefined(level.agentarray)) {
     return var_1;
+  }
 
   foreach(var_3 in level.agentarray) {
     if(isDefined(var_3.isactive) && var_3.isactive) {
-      if(var_0 == "all" || var_3.agent_type == var_0)
+      if(var_0 == "all" || var_3.agent_type == var_0) {
         var_1[var_1.size] = var_3;
+      }
     }
   }
 
@@ -191,14 +199,16 @@ getnumownedactiveagents(var_0) {
 getnumownedactiveagentsbytype(var_0, var_1) {
   var_2 = 0;
 
-  if(!isDefined(level.agentarray))
+  if(!isDefined(level.agentarray)) {
     return var_2;
+  }
 
   foreach(var_4 in level.agentarray) {
     if(isDefined(var_4.isactive) && var_4.isactive) {
       if(isDefined(var_4.owner) && var_4.owner == var_0) {
-        if(var_1 == "all" || var_4.agent_type == var_1)
+        if(var_1 == "all" || var_4.agent_type == var_1) {
           var_2++;
+        }
       }
     }
   }
@@ -209,16 +219,18 @@ getnumownedactiveagentsbytype(var_0, var_1) {
 getvalidspawnpathnodenearplayer(var_0, var_1) {
   var_2 = getnodesinradius(self.origin, 350, 64, 128, "Path");
 
-  if(!isDefined(var_2) || var_2.size == 0)
+  if(!isDefined(var_2) || var_2.size == 0) {
     return undefined;
+  }
 
   if(isDefined(level.waterdeletez) && isDefined(level.trigunderwater)) {
     var_3 = var_2;
     var_2 = [];
 
     foreach(var_5 in var_3) {
-      if(var_5.origin[2] > level.waterdeletez || !ispointinvolume(var_5.origin, level.trigunderwater))
+      if(var_5.origin[2] > level.waterdeletez || !ispointinvolume(var_5.origin, level.trigunderwater)) {
         var_2[var_2.size] = var_5;
+      }
     }
   }
 
@@ -227,11 +239,13 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
   var_9 = maps\mp\gametypes\_spawnlogic::getplayertraceheight(self);
   var_10 = (0, 0, var_9);
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_11 = [];
   var_12 = [];
@@ -263,37 +277,43 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
     var_20 = self.origin + var_10;
     var_21 = var_14.origin + var_10;
 
-    if(var_17 > 0)
+    if(var_17 > 0) {
       wait 0.05;
+    }
 
     if(!sighttracepassed(var_20, var_21, 0, self)) {
       continue;
     }
     if(var_1) {
-      if(var_17 > 0)
+      if(var_17 > 0) {
         wait 0.05;
+      }
 
       var_22 = playerphysicstrace(var_14.origin + var_10, var_14.origin);
 
-      if(distancesquared(var_22, var_14.origin) > 1)
+      if(distancesquared(var_22, var_14.origin) > 1) {
         continue;
+      }
     }
 
     if(var_0) {
-      if(var_17 > 0)
+      if(var_17 > 0) {
         wait 0.05;
+      }
 
       var_22 = physicstrace(var_20, var_21);
 
-      if(distancesquared(var_22, var_21) > 1)
+      if(distancesquared(var_22, var_21) > 1) {
         continue;
+      }
     }
 
     return var_14;
   }
 
-  if(var_11.size > 0 && isDefined(level.ishorde))
+  if(var_11.size > 0 && isDefined(level.ishorde)) {
     return var_11[0];
+  }
 }
 
 killagent(var_0) {

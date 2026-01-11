@@ -13,11 +13,13 @@ _meth_8112(var_00, var_01, var_02) {
   }
   var_03 = 0;
 
-  if(scripts\mp\utility\game::func_9EAF(var_00))
+  if(scripts\mp\utility\game::func_9EAF(var_00)) {
     var_03 = 1;
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 1;
+  }
 
   thread func_13AC4();
   thread func_13AE7();
@@ -57,8 +59,9 @@ func_76F7(var_00, var_01) {
     var_3[var_3.size] = var_04;
     self.func_B338++;
 
-    if(scripts\mp\utility\game::istrue(var_02))
+    if(scripts\mp\utility\game::istrue(var_02)) {
       self setclientomnvar("ui_map_select_uses", var_00 - self.func_B338);
+    }
 
     self playlocalsound("bombardment_killstreak_select");
   }
@@ -67,13 +70,15 @@ func_76F7(var_00, var_01) {
   self notify("map_select_exit");
   self visionsetnakedforplayer("", 0);
 
-  if(scripts\mp\utility\game::istrue(level.nukedetonated) && !scripts\mp\utility\game::istrue(level.func_C1B2))
+  if(scripts\mp\utility\game::istrue(level.nukedetonated) && !scripts\mp\utility\game::istrue(level.func_C1B2)) {
     thread scripts\mp\killstreaks\nuke::func_FB0F(0.05);
+  }
 
   self setscriptablepartstate("killstreak", "neutral", 0);
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     self.pers["startedMapSelect"] = 0;
+  }
 
   return var_03;
 }
@@ -113,11 +118,13 @@ func_10DC2(var_00, var_01, var_02) {
     self.pers["startedMapSelect"] = 1;
   }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0;
+  }
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
   self beginlocationselection(var_00, var_01, var_02, 1);
 }
@@ -128,26 +135,32 @@ func_1107B() {
   self.func_B336 = undefined;
   self.func_D8AD = undefined;
 
-  if(scripts\mp\utility\game::isreallyalive(self))
+  if(scripts\mp\utility\game::isreallyalive(self)) {
     self notify("killstreak_finished_with_weapon_ks_remote_map_mp");
-  else
+  }
+  else {
     self.pers["startedMapSelect"] = 0;
+  }
 }
 
 func_1374C(var_00, var_01, var_02) {
-  if((!isDefined(var_00) || var_00 != "death") && (!isDefined(var_01) || var_01 != "death"))
+  if((!isDefined(var_00) || var_00 != "death") && (!isDefined(var_01) || var_01 != "death")) {
     self endon("death");
+  }
 
   var_03 = spawnStruct();
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     childthread func_137F9(var_00, var_03);
+  }
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     childthread func_137F9(var_01, var_03);
+  }
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     childthread func_137F9(var_02, var_03);
+  }
 
   var_03 waittill("returned", var_04, var_05, var_06);
   var_03 notify("die");
@@ -159,8 +172,9 @@ func_1374C(var_00, var_01, var_02) {
 }
 
 func_137F9(var_00, var_01) {
-  if(var_00 != "death")
+  if(var_00 != "death") {
     self endon("death");
+  }
 
   var_01 endon("die");
   self waittill(var_00, var_02, var_03);

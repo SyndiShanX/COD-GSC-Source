@@ -53,8 +53,9 @@ stealth_corpse_default_distances() {
 }
 
 stealth_corpse_set_distances(array) {
-  foreach(key, value in array)
+  foreach(key, value in array) {
   level._stealth.logic.corpse.distances[key] = value;
+  }
 
   //this is good for optimization
   level._stealth.logic.corpse.player_distsqrd = squared(level._stealth.logic.corpse.distances["player_dist"]);

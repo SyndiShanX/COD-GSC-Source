@@ -162,8 +162,9 @@ sndcanopyclose(guy) {
 }
 
 f35_hide_outer_model_parts(hide, delay) {
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait(delay);
+  }
 
   str_parts = [];
   str_parts[str_parts.size] = "tag_exterior";
@@ -412,8 +413,9 @@ f35_start_flybys() {
   vehicles = getvehiclearray();
 
   for(i = 0; i < vehicles.size; i++) {
-    if(vehicles[i].vehicleclass == "plane" && (vehicles[i].vehicletype == "drone_pegasus_low_la2" || vehicles[i].vehicletype == "plane_f35_low" || vehicles[i].vehicletype == "civ_police_la2" || vehicles[i].vehicletype == "plane_f35_fast_la2"))
+    if(vehicles[i].vehicleclass == "plane" && (vehicles[i].vehicletype == "drone_pegasus_low_la2" || vehicles[i].vehicletype == "plane_f35_low" || vehicles[i].vehicletype == "civ_police_la2" || vehicles[i].vehicletype == "plane_f35_fast_la2")) {
       vehicles[i] delete();
+    }
   }
 
   wait 0.05;
@@ -445,14 +447,16 @@ f35_eject_notetrack_explosion(e_player_body) {
   level.f35.delete_on_death = 1;
   level.f35 notify("death");
 
-  if(!isalive(level.f35))
+  if(!isalive(level.f35)) {
     level.f35 delete();
+  }
 
   vh_drone.delete_on_death = 1;
   vh_drone notify("death");
 
-  if(!isalive(vh_drone))
+  if(!isalive(vh_drone)) {
     vh_drone delete();
+  }
 }
 
 f35_eject_notetrack_hit_ground(e_player_body) {
@@ -512,10 +516,12 @@ vo_rooftops() {
   e_player thread say_dialog("shit_enemy_trucks_020");
   e_player thread say_dialog("keep_moving_go_021", 3.5);
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     vh_van thread say_dialog("bastards_are_every_009", 8);
-  else
+  }
+  else {
     vh_van thread say_dialog("samu_you_gotta_keep_them_0", 8);
+  }
 
   flag_wait("convoy_at_apartment_building");
   wait 12;
@@ -541,8 +547,9 @@ vo_truck_group_1_dead() {
   e_harper = level.convoy.vh_van;
   e_player = level.player;
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     e_harper thread say_dialog("harp_nice_work_section_1", 2);
+  }
 }
 
 vo_after_parking_structure() {
@@ -621,10 +628,12 @@ vo_pip_pacing() {
   flag_waitopen("pip_playing");
   flag_set("pip_intro_done");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     vh_van say_dialog("shit_its_a_fuc_018", 1);
-  else
+  }
+  else {
     vh_van say_dialog("samu_the_attack_devastate_0", 1);
+  }
 
   flag_wait("convoy_can_move");
   wait 1;
@@ -674,14 +683,17 @@ vo_convoy_distance_check_nag() {
 
     if(!flag("convoy_nag_override")) {
       if(!flag("harper_dead")) {
-        if(n_line_choice == 0)
+        if(n_line_choice == 0) {
           vh_van thread say_dialog("take_the_heat_off_009");
-        else
+        }
+        else {
           vh_van thread say_dialog("harp_where_are_you_secti_0");
+        }
       } else if(n_line_choice == 0)
         vh_van thread say_dialog("samu_dammit_we_re_under_0");
-      else
+      else {
         vh_van thread say_dialog("samu_where_are_you_secti_0");
+      }
     }
 
     wait 15;
@@ -800,17 +812,21 @@ vo_eject() {
   level thread maps\la_2_anim::vo_no_guns();
   level.player say_dialog("shit_076");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     vh_van say_dialog("harp_what_are_you_doing_0");
-  else
+  }
+  else {
     vh_van say_dialog("samu_section_what_are_y_0");
+  }
 
   level.player say_dialog("sect_i_m_gonna_hit_him_he_0");
 
-  if(!flag("harper_dead"))
+  if(!flag("harper_dead")) {
     vh_van say_dialog("harp_it_s_suicide_0");
-  else
+  }
+  else {
     vh_van say_dialog("samu_i_hope_you_re_sure_a_0");
+  }
 }
 
 vo_eject_collision() {
@@ -829,8 +845,9 @@ vo_hotel() {
   e_harper thread say_dialog("septic__those_dro_008");
   level.f35 thread say_dialog("missiles_offline_037", 2);
 
-  if(flag("F35_pilot_saved"))
+  if(flag("F35_pilot_saved")) {
     level.f35 thread say_dialog("death_blossom_offl_035", 2);
+  }
 }
 
 vo_to_implement() {
@@ -886,8 +903,9 @@ vo_player_shot_down_drone() {
     level.player say_dialog(str_dialog_array[n_current]);
     n_current++;
 
-    if(n_current >= str_dialog_array.size)
+    if(n_current >= str_dialog_array.size) {
       n_current = 0;
+    }
 
     wait 5.0;
   }
@@ -907,8 +925,9 @@ vo_f38_shot_down_drone() {
     level.player say_dialog(str_dialog_array[n_current]);
     n_current++;
 
-    if(n_current >= str_dialog_array.size)
+    if(n_current >= str_dialog_array.size) {
       n_current = 0;
+    }
 
     wait 5.0;
   }
@@ -926,8 +945,9 @@ vo_lost_lock_on_drone() {
     level.player say_dialog(str_dialog_array[n_current]);
     n_current++;
 
-    if(n_current >= str_dialog_array.size)
+    if(n_current >= str_dialog_array.size) {
       n_current = 0;
+    }
 
     wait 5.0;
   }
@@ -946,8 +966,9 @@ vo_f38_fired_cannons() {
     level.player say_dialog(str_dialog_array[n_current]);
     n_current++;
 
-    if(n_current >= str_dialog_array.size)
+    if(n_current >= str_dialog_array.size) {
       n_current = 0;
+    }
   }
 }
 
@@ -963,8 +984,9 @@ vo_f38_fired_missile() {
     level.player say_dialog(str_dialog_array[n_current]);
     n_current++;
 
-    if(n_current >= str_dialog_array.size)
+    if(n_current >= str_dialog_array.size) {
       n_current = 0;
+    }
   }
 }
 

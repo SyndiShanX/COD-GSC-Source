@@ -999,10 +999,12 @@ ev2_player_get_on_tank(player, tank) {
     }
     wait(2);
     if(isDefined(player.Warning_hud)) {
-      if(level.console)
+      if(level.console) {
         player.Warning_hud SetText(&"SEE1_OFF_TANK");
-      else
+      }
+      else {
         player.Warning_hud SetText(&"SCRIPT_PLATFORM_OFF_TANK");
+      }
     }
     while(1) {
       if(flag("tank_ride_over")) {

@@ -27,8 +27,9 @@ settings() {
 }
 
 main() {
-  if(isDefined(level.swimmingFeature) && !level.swimmingFeature)
+  if(isDefined(level.swimmingFeature) && !level.swimmingFeature) {
     return;
+  }
   if(level.createFX_enabled) {
     return;
   }
@@ -676,8 +677,9 @@ swimmingArms() {
 
 dive_and_surface_audio() {
   self endon("death");
-  if(!isDefined(level.underwater_snapshot_override))
+  if(!isDefined(level.underwater_snapshot_override)) {
     level.underwater_snapshot_override = false;
+  }
   while(true) {
     self waittill("underwater");
     activateAmbientRoom(0, "underwater", 50);
@@ -750,10 +752,12 @@ dry_land_tracker() {
   self endon("entityshutdown");
   self.is_on_dryland = true;
   active_on_ai = true;
-  if(!isDefined(level._swimming))
+  if(!isDefined(level._swimming)) {
     return;
-  if(!level._swimming.is_swimming_enabled)
+  }
+  if(!level._swimming.is_swimming_enabled) {
     return;
+  }
   if(self IsPlayer() == false) {
     if(active_on_ai) {
       PrintLn("***Swimming Threaded On AI***");
@@ -798,8 +802,9 @@ swimming_loop_delete(ent1, ent2) {
 
 save_restore_ent_delete(ent1, ent2) {
   level waittill("save_restore");
-  if(!isDefined(ent1) || !isDefined(ent2))
+  if(!isDefined(ent1) || !isDefined(ent2)) {
     return;
+  }
   PrintLn("*#*#*#*#* Deleting Ents on Save Restore");
   ent1 delete();
   ent2 delete();
@@ -815,25 +820,29 @@ disable_ai_swimming() {
   level endon("save_restore");
   while(true) {
     level waittill("_swimming:disable");
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return;
+    }
     self notify("swimming_end");
   }
 }
 
 disable_underwater_snapshot(value) {
-  if(!isDefined(level.underwater_snapshot_override))
+  if(!isDefined(level.underwater_snapshot_override)) {
     level.underwater_snapshot_override = false;
+  }
   level.underwater_snapshot_override = value;
 }
 
 swimming_drown_vox() {
   self endon("death");
   self endon("disconnect");
-  if(!isDefined(level.is_drowning))
+  if(!isDefined(level.is_drowning)) {
     level.is_drowning = false;
-  if(level.is_drowning || !self._swimming.is_underwater)
+  }
+  if(level.is_drowning || !self._swimming.is_underwater) {
     return;
+  }
   level.is_drowning = true;
   self thread audio_drowning_counter();
   self thread audio_drowning_loopers();
@@ -868,8 +877,9 @@ audio_drowning_vox() {
 audio_drowning_loopers() {
   self endon("surface");
   self endon("death");
-  if(!self._swimming.is_underwater)
+  if(!self._swimming.is_underwater) {
     return;
+  }
   snd_set_snapshot("drowning");
   ent1 = spawn(0, (0, 0, 0), "script_origin");
   ent2 = spawn(0, (0, 0, 0), "script_origin");
@@ -886,8 +896,9 @@ audio_drowning_counter() {
   self endon("surface");
   self endon("death");
   self endon("disconnect");
-  if(!self._swimming.is_underwater)
+  if(!self._swimming.is_underwater) {
     return;
+  }
   for(i = 0; i < 30; i++) {
     level.audio_swimming_counter = i;
     realWait(1);

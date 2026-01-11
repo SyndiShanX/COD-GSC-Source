@@ -4,8 +4,9 @@
 ***************************************/
 
 init() {
-  if(!isDefined(level.boxsettings))
+  if(!isDefined(level.boxsettings)) {
     level.boxsettings = [];
+  }
 }
 
 begindeployableviamarker(var_00, var_01, var_02, var_03) {
@@ -23,8 +24,9 @@ watchdeployablemarkerplacement(var_00, var_01, var_02, var_03) {
   if(!isDefined(var_03)) {
     return;
   }
-  if(!scripts\mp\utility\game::isreallyalive(self))
+  if(!scripts\mp\utility\game::isreallyalive(self)) {
     var_02 delete();
+  }
 
   var_02 _meth_81EF(1);
   self notify("deployable_deployed");
@@ -63,10 +65,12 @@ markeractivate(var_00, var_01, var_02) {
     var_5.origin = var_6.linkparent.origin;
     var_07 = var_6.linkparent getlinkedparent();
 
-    if(isDefined(var_07))
+    if(isDefined(var_07)) {
       var_6.linkparent = var_07;
-    else
+    }
+    else {
       var_6.linkparent = undefined;
+    }
   }
 
   var_6.deathoverridecallback = ::override_box_moving_platform_death;
@@ -77,17 +81,21 @@ markeractivate(var_00, var_01, var_02) {
   var_05 thread[[var_02]]();
   self delete();
 
-  if(isDefined(var_05) && var_05 scripts\mp\utility\game::touchingbadtrigger())
+  if(isDefined(var_05) && var_05 scripts\mp\utility\game::touchingbadtrigger()) {
     var_05 notify("death");
+  }
 }
 
 deployableexclusion(var_00) {
-  if(var_00 == "mp_satcom")
+  if(var_00 == "mp_satcom") {
     return 1;
-  else if(issubstr(var_00, "paris_catacombs_iron"))
+  }
+  else if(issubstr(var_00, "paris_catacombs_iron")) {
     return 1;
-  else if(issubstr(var_00, "mp_warhawk_iron_gate"))
+  }
+  else if(issubstr(var_00, "mp_warhawk_iron_gate")) {
     return 1;
+  }
 
   return 0;
 }
@@ -97,8 +105,9 @@ isholdingdeployablebox() {
 
   if(isDefined(var_00)) {
     foreach(var_02 in level.boxsettings) {
-      if(var_00 == var_2.weaponinfo)
+      if(var_00 == var_2.weaponinfo) {
         return 1;
+      }
     }
   }
 
@@ -117,11 +126,13 @@ createboxforplayer(var_00, var_01, var_02) {
   var_4.team = var_2.team;
   var_4.id = var_3.id;
 
-  if(isDefined(var_3.dpadname))
+  if(isDefined(var_3.dpadname)) {
     var_4.dpadname = var_3.dpadname;
+  }
 
-  if(isDefined(var_3.maxuses))
+  if(isDefined(var_3.maxuses)) {
     var_4.usesremaining = var_3.maxuses;
+  }
 
   var_04 box_setinactive();
   var_04 thread box_handleownerdisconnect();
@@ -139,10 +150,12 @@ box_setactive(var_00) {
   if(var_02 != -1) {
     scripts\mp\objidpoolmanager::minimap_objective_add(var_02, "invisible", (0, 0, 0));
 
-    if(!isDefined(self getlinkedparent()))
+    if(!isDefined(self getlinkedparent())) {
       scripts\mp\objidpoolmanager::minimap_objective_position(var_02, self.origin);
-    else
+    }
+    else {
       scripts\mp\objidpoolmanager::minimap_objective_onentity(var_02, self);
+    }
 
     scripts\mp\objidpoolmanager::minimap_objective_state(var_02, "active");
     scripts\mp\objidpoolmanager::minimap_objective_icon(var_02, var_1.shadername);
@@ -151,19 +164,23 @@ box_setactive(var_00) {
   self.objidfriendly = var_02;
 
   if(level.teambased) {
-    if(var_02 != -1)
+    if(var_02 != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_team(var_02, self.team);
+    }
 
     foreach(var_04 in level.players) {
-      if(self.team == var_4.team && (!isDefined(var_1.canusecallback) || var_04[[var_1.canusecallback]](self)))
+      if(self.team == var_4.team && (!isDefined(var_1.canusecallback) || var_04[[var_1.canusecallback]](self))) {
         box_seticon(var_04, var_1.streakname, var_1.headiconoffset);
+      }
     }
   } else {
-    if(var_02 != -1)
+    if(var_02 != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_player(var_02, self.owner getentitynumber());
+    }
 
-    if(!isDefined(var_1.canusecallback) || self.owner[[var_1.canusecallback]](self))
+    if(!isDefined(var_1.canusecallback) || self.owner[[var_1.canusecallback]](self)) {
       box_seticon(self.owner, var_1.streakname, var_1.headiconoffset);
+    }
   }
 
   self makeusable();
@@ -174,37 +191,43 @@ box_setactive(var_00) {
   thread box_timeout();
   thread disablewhenjuggernaut();
 
-  if(issentient(self))
+  if(issentient(self)) {
     self setthreatbiasgroup("DogsDontAttack");
+  }
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner notify("new_deployable_box", self);
+  }
 
   if(level.teambased) {
     foreach(var_04 in level.participants) {
       _box_setactivehelper(var_04, self.team == var_4.team, var_1.canusecallback);
 
-      if(!isai(var_04))
+      if(!isai(var_04)) {
         thread box_playerjoinedteam(var_04);
+      }
     }
   } else {
-    foreach(var_04 in level.participants)
+    foreach(var_04 in level.participants) {
     _box_setactivehelper(var_04, isDefined(self.owner) && self.owner == var_04, var_1.canusecallback);
+    }
   }
 
   thread box_playerconnected();
   thread box_agentconnected();
 
-  if(isDefined(var_1.ondeploycallback))
+  if(isDefined(var_1.ondeploycallback)) {
     self[[var_1.ondeploycallback]](var_01);
+  }
 
   thread createbombsquadmodel(self.boxtype);
 }
 
 _box_setactivehelper(var_00, var_01, var_02) {
   if(var_01) {
-    if(!isDefined(var_02) || var_00[[var_02]](self))
+    if(!isDefined(var_02) || var_00[[var_02]](self)) {
       box_enableplayeruse(var_00);
+    }
     else {
       box_disableplayeruse(var_00);
       thread doubledip(var_00);
@@ -249,8 +272,9 @@ box_playerjoinedteam(var_00) {
   for(;;) {
     var_00 waittill("joined_team");
 
-    if(level.teambased)
+    if(level.teambased) {
       box_addboxforplayer(var_00);
+    }
   }
 }
 
@@ -270,15 +294,17 @@ box_seticon(var_00, var_01, var_02) {
 }
 
 box_enableplayeruse(var_00) {
-  if(isplayer(var_00))
+  if(isplayer(var_00)) {
     self enableplayeruse(var_00);
+  }
 
   self.disabled_use_for[var_00 getentitynumber()] = 0;
 }
 
 box_disableplayeruse(var_00) {
-  if(isplayer(var_00))
+  if(isplayer(var_00)) {
     self disableplayeruse(var_00);
+  }
 
   self.disabled_use_for[var_00 getentitynumber()] = 1;
 }
@@ -288,8 +314,9 @@ box_setinactive() {
   self.isusable = 0;
   scripts\mp\entityheadicons::setheadicon("none", "", (0, 0, 0));
 
-  if(isDefined(self.objidfriendly))
+  if(isDefined(self.objidfriendly)) {
     scripts\mp\objidpoolmanager::returnminimapid(self.objidfriendly);
+  }
 }
 
 box_handledamage() {
@@ -301,8 +328,9 @@ box_modifydamage(var_00, var_01, var_02, var_03, var_04) {
   var_05 = var_03;
   var_06 = level.boxsettings[self.boxtype];
 
-  if(var_6.allowmeleedamage)
+  if(var_6.allowmeleedamage) {
     var_05 = scripts\mp\damage::handlemeleedamage(var_01, var_02, var_05);
+  }
 
   var_05 = scripts\mp\damage::handlemissiledamage(var_01, var_02, var_05);
   var_05 = scripts\mp\damage::handlegrenadedamage(var_01, var_02, var_05);
@@ -314,8 +342,9 @@ box_handledeathdamage(var_00, var_01, var_02, var_03) {
   var_04 = level.boxsettings[self.boxtype];
   var_05 = scripts\mp\damage::onkillstreakkilled("deployable_ammo", var_00, var_01, var_02, var_03, var_4.scorepopup, var_4.vodestroyed);
 
-  if(var_05)
+  if(var_05) {
     var_00 notify("destroyed_equipment");
+  }
 }
 
 box_handledeath() {
@@ -333,8 +362,9 @@ box_handledeath() {
   if(isDefined(var_0.deathdamagemax)) {
     var_01 = undefined;
 
-    if(isDefined(self.owner))
+    if(isDefined(self.owner)) {
       var_01 = self.owner;
+    }
 
     radiusdamage(self.origin + (0, 0, var_0.headiconoffset), var_0.deathdamageradius, var_0.deathdamagemax, var_0.deathdamagemin, var_01, "MOD_EXPLOSIVE", var_0.deathweaponinfo);
   }
@@ -356,8 +386,9 @@ boxthink(var_00) {
   self endon("death");
   thread boxcapturethink(var_00);
 
-  if(!isDefined(var_0.boxes))
+  if(!isDefined(var_0.boxes)) {
     var_0.boxes = [];
+  }
 
   var_0.boxes[var_0.boxes.size] = self;
   var_01 = level.boxsettings[self.boxtype];
@@ -368,11 +399,13 @@ boxthink(var_00) {
     if(var_02 == var_00) {
       var_00 playlocalsound(var_1.onusesfx);
 
-      if(isDefined(var_1.onusecallback))
+      if(isDefined(var_1.onusecallback)) {
         var_00[[var_1.onusecallback]](self);
+      }
 
-      if(isDefined(self.owner) && var_00 != self.owner)
+      if(isDefined(self.owner) && var_00 != self.owner) {
         self.owner thread scripts\mp\utility\game::giveunifiedpoints("support", undefined, var_1.usexp);
+      }
 
       if(isDefined(self.usesremaining)) {
         self.usesremaining--;
@@ -425,8 +458,9 @@ boxcapturethink(var_00) {
     if(isDefined(level.boxsettings[self.boxtype].nousekillstreak) && level.boxsettings[self.boxtype].nousekillstreak && scripts\mp\utility\game::iskillstreakweapon(var_00 getcurrentweapon())) {
       continue;
     }
-    if(var_01 == var_00 && useholdthink(var_00, level.boxsettings[self.boxtype].usetime))
+    if(var_01 == var_00 && useholdthink(var_00, level.boxsettings[self.boxtype].usetime)) {
       self notify("captured", var_00);
+    }
   }
 }
 
@@ -441,8 +475,9 @@ box_timeout() {
   var_01 = var_0.lifespan;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_01);
 
-  if(isDefined(var_0.vogone))
+  if(isDefined(var_0.vogone)) {
     self.owner thread scripts\mp\utility\game::leaderdialogonplayer(var_0.vogone);
+  }
 
   box_leave();
 }
@@ -464,8 +499,9 @@ box_modelteamupdater(var_00) {
   self hide();
 
   foreach(var_02 in level.players) {
-    if(var_2.team == var_00)
+    if(var_2.team == var_00) {
       self giveperkequipment(var_02);
+    }
   }
 
   for(;;) {
@@ -473,8 +509,9 @@ box_modelteamupdater(var_00) {
     self hide();
 
     foreach(var_02 in level.players) {
-      if(var_2.team == var_00)
+      if(var_2.team == var_00) {
         self giveperkequipment(var_02);
+      }
     }
   }
 }
@@ -488,10 +525,12 @@ useholdthink(var_00, var_01) {
   var_0.boxparams.userate = 0;
   var_0.boxparams.id = self.id;
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_0.boxparams.usetime = var_01;
-  else
+  }
+  else {
     var_0.boxparams.usetime = 3000;
+  }
 
   var_02 = useholdthinkloop(var_00);
 
@@ -500,8 +539,9 @@ useholdthink(var_00, var_01) {
     scripts\mp\movers::script_mover_unlink_from_use_object(var_00);
   }
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return 0;
+  }
 
   var_0.boxparams.inuse = 0;
   var_0.boxparams.curprogress = 0;
@@ -519,10 +559,12 @@ useholdthinkloop(var_00) {
 
     var_1.curprogress = var_1.curprogress + 50 * var_1.userate;
 
-    if(isDefined(var_0.objectivescaler))
+    if(isDefined(var_0.objectivescaler)) {
       var_1.userate = 1 * var_0.objectivescaler;
-    else
+    }
+    else {
       var_1.userate = 1;
+    }
 
     var_00 scripts\mp\gameobjects::updateuiprogress(var_01, 1);
 

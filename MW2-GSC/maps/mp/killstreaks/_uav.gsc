@@ -33,10 +33,12 @@ init() {
   level.killStreakFuncs["counter_uav"] = ::tryUseCounterUAV;
 
   minimapOrigins = getEntArray("minimap_corner", "targetname");
-  if(miniMapOrigins.size)
+  if(miniMapOrigins.size) {
     uavOrigin = maps\mp\gametypes\_spawnlogic::findBoxCenter(miniMapOrigins[0].origin, miniMapOrigins[1].origin);
-  else
+  }
+  else {
     uavOrigin = (0, 0, 0);
+  }
 
   level.UAVRig = spawn("script_model", uavOrigin);
   level.UAVRig setModel("c130_zoomrig");
@@ -114,10 +116,12 @@ launchUAV(owner, team, duration, isCounter) {
 
   UAVModel thread updateUAVModelVisibility();
 
-  if(isCounter)
+  if(isCounter) {
     UAVModel addActiveCounterUAV();
-  else
+  }
+  else {
     UAVModel addActiveUAV();
+  }
 
   level notify("uav_update");
 
@@ -140,10 +144,12 @@ launchUAV(owner, team, duration, isCounter) {
     UAVModel waittill_notify_or_timeout_hostmigration_pause("death", 4);
   }
 
-  if(isCounter)
+  if(isCounter) {
     UAVModel removeActiveCounterUAV();
-  else
+  }
+  else {
     UAVModel removeActiveUAV();
+  }
 
   UAVModel delete();
   removeUAVModel(UAVModel);
@@ -166,11 +172,13 @@ updateUAVModelVisibility() {
     self hide();
     foreach(player in level.players) {
       if(level.teamBased) {
-        if(player.team != self.team)
+        if(player.team != self.team) {
           self showToPlayer(player);
+        }
       } else {
-        if(isDefined(self.owner) && player == self.owner)
+        if(isDefined(self.owner) && player == self.owner) {
           continue;
+        }
 
         self showToPlayer(player);
       }
@@ -189,8 +197,9 @@ damageTracker(isCounterUAV) {
     self waittill("damage", damage, attacker, direction_vec, point, sMeansOfDeath);
 
     if(!isPlayer(attacker)) {
-      if(!isDefined(self))
+      if(!isDefined(self)) {
         return;
+      }
 
       continue;
     }
@@ -204,10 +213,12 @@ damageTracker(isCounterUAV) {
 
     if(!isDefined(self)) {
       if(isPlayer(attacker) && (!isDefined(self.owner) || attacker != self.owner)) {
-        if(isCounterUAV)
+        if(isCounterUAV) {
           thread teamPlayerCardSplash("callout_destroyed_counter_uav", attacker);
-        else
+        }
+        else {
           thread teamPlayerCardSplash("callout_destroyed_uav", attacker);
+        }
 
         thread maps\mp\gametypes\_missions::vehicleKilled(self.owner, self, undefined, attacker, damage, sMeansOfDeath);
         attacker thread maps\mp\gametypes\_rank::giveRankXP("kill", 50);
@@ -238,10 +249,12 @@ useUAV(uavType) {
 
   level thread launchUAV(self, team, useTime, uavType == "counter_uav");
 
-  if(uavType == "counter_uav")
+  if(uavType == "counter_uav") {
     self notify("used_counter_uav");
-  else
+  }
+  else {
     self notify("used_uav");
+  }
 
   return true;
 }
@@ -265,20 +278,24 @@ updateTeamUAVStatus(team) {
   activeUAVs = level.activeUAVs[team];
   activeCounterUAVs = level.activeCounterUAVs[level.otherTeam[team]];
 
-  if(!activeCounterUAVs)
+  if(!activeCounterUAVs) {
     unblockTeamRadar(team);
-  else
+  }
+  else {
     blockTeamRadar(team);
+  }
 
   if(!activeUAVs) {
     setTeamRadarWrapper(team, 0);
     return;
   }
 
-  if(activeUAVs > 1)
+  if(activeUAVs > 1) {
     level.radarMode[team] = "fast_radar";
-  else
+  }
+  else {
     level.radarMode[team] = "normal_radar";
+  }
 
   updateTeamUAVType();
   setTeamRadarWrapper(team, 1);
@@ -303,10 +320,12 @@ updatePlayersUAVStatus() {
       continue;
     }
 
-    if(activeUAVs > 1)
+    if(activeUAVs > 1) {
       player.radarMode = "fast_radar";
-    else
+    }
+    else {
       player.radarMode = "normal_radar";
+    }
 
     player.hasRadar = true;
   }
@@ -317,10 +336,12 @@ updatePlayersUAVStatus() {
       continue;
     }
 
-    if(totalActiveCounterUAVs == 1 && player == counterUAVPlayer)
+    if(totalActiveCounterUAVs == 1 && player == counterUAVPlayer) {
       player.isRadarBlocked = false;
-    else
+    }
+    else {
       player.isRadarBlocked = true;
+    }
   }
 }
 
@@ -341,8 +362,9 @@ blockPlayerUAV() {
 
 updateTeamUAVType() {
   foreach(player in level.players) {
-    if(player.team == "spectator")
+    if(player.team == "spectator") {
       continue;
+    }
 
     player.radarMode = level.radarMode[player.team];
   }
@@ -355,10 +377,12 @@ usePlayerUAV(doubleUAV, useTime) {
   self notify("usePlayerUAV");
   self endon("usePlayerUAV");
 
-  if(doubleUAV)
+  if(doubleUAV) {
     self.radarMode = "fast_radar";
-  else
+  }
+  else {
     self.radarMode = "normal_radar";
+  }
 
   self.hasRadar = true;
 
@@ -381,8 +405,9 @@ handleIncomingStinger() {
   for(;;) {
     level waittill("stinger_fired", player, missile, lockTarget);
 
-    if(!isDefined(lockTarget) || (lockTarget != self))
+    if(!isDefined(lockTarget) || (lockTarget != self)) {
       continue;
+    }
 
     missile thread stingerProximityDetonate(lockTarget, player);
   }
@@ -396,21 +421,25 @@ stingerProximityDetonate(targetEnt, player) {
 
   for(;;) {
     // UAV already destroyed
-    if(!isDefined(targetEnt))
+    if(!isDefined(targetEnt)) {
       center = lastCenter;
-    else
+    }
+    else {
       center = targetEnt GetPointInBounds(0, 0, 0);
+    }
 
     lastCenter = center;
 
     curDist = distance(self.origin, center);
 
-    if(curDist < minDist)
+    if(curDist < minDist) {
       minDist = curDist;
+    }
 
     if(curDist > minDist) {
-      if(curDist > 1536)
+      if(curDist > 1536) {
         return;
+      }
 
       radiusDamage(self.origin, 1536, 600, 600, player);
       playFX(level.stingerFXid, self.origin);
@@ -429,10 +458,12 @@ stingerProximityDetonate(targetEnt, player) {
 }
 
 addUAVModel(UAVModel) {
-  if(level.teamBased)
+  if(level.teamBased) {
     level.UAVModels[UAVModel.team][level.UAVModels[UAVModel.team].size] = UAVModel;
-  else
+  }
+  else {
     level.UAVModels[UAVModel.owner.guid + "_" + getTime()] = UAVModel;
+  }
 }
 
 removeUAVModel(UAVModel) {
@@ -442,8 +473,9 @@ removeUAVModel(UAVModel) {
     team = UAVModel.team;
 
     foreach(uavModel in level.UAVModels[team]) {
-      if(!isDefined(uavModel))
+      if(!isDefined(uavModel)) {
         continue;
+      }
 
       UAVModels[UAVModels.size] = uavModel;
     }
@@ -451,8 +483,9 @@ removeUAVModel(UAVModel) {
     level.UAVModels[team] = UAVModels;
   } else {
     foreach(uavModel in level.UAVModels) {
-      if(!isDefined(uavModel))
+      if(!isDefined(uavModel)) {
         continue;
+      }
 
       UAVModels[UAVModels.size] = uavModel;
     }
@@ -462,58 +495,70 @@ removeUAVModel(UAVModel) {
 }
 
 addActiveUAV() {
-  if(level.teamBased)
+  if(level.teamBased) {
     level.activeUAVs[self.team]++;
-  else
+  }
+  else {
     level.activeUAVs[self.owner.guid]++;
+  }
   /*
   	if( level.teamBased )
   	{
   		foreach ( player in level.players )
   		{
-  			if( player.team == self.team )
+  			if( player.team == self.team ) {
   				player iPrintLn(&"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
-  			else if( player.team == level.otherTeam[self.team] )
+  			}
+  			else if( player.team == level.otherTeam[self.team] ) {
   				player iPrintLn(&"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime);
+  			}
   		}
   	}	
   	else
   	{
   		foreach ( player in level.players )
   		{
-  			if( player == self.owner )
+  			if( player == self.owner ) {
   				player iPrintLn(&"MP_WAR_RADAR_ACQUIRED", self.owner, level.radarViewTime );
-  			else
+  			}
+  			else {
   				player iPrintLn(&"MP_WAR_RADAR_ACQUIRED_ENEMY", level.radarViewTime );
+  			}
   		}
   	}
   */
 }
 
 addActiveCounterUAV() {
-  if(level.teamBased)
+  if(level.teamBased) {
     level.activeCounterUAVs[self.team]++;
-  else
+  }
+  else {
     level.activeCounterUAVs[self.owner.guid]++;
+  }
   /*
   	if( level.teamBased )
   	{
   		foreach ( player in level.players )
   		{
-  			if( player.team == self.team )
+  			if( player.team == self.team ) {
   				player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
-  			else if( player.team == level.otherTeam[self.team] )
+  			}
+  			else if( player.team == level.otherTeam[self.team] ) {
   				player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
+  			}
   		}
   	}	
   	else
   	{
   		foreach ( player in level.players )
   		{
-  			if( player == self.owner )
+  			if( player == self.owner ) {
   				player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED", self.owner, level.uavBlockTime );
-  			else
+  			}
+  			else {
   				player iPrintLn(&"MP_WAR_COUNTER_RADAR_ACQUIRED_ENEMY", level.uavBlockTime );
+  			}
   		}
   	}
   */

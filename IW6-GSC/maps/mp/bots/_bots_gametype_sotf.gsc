@@ -34,8 +34,9 @@ sotf_should_stop_seeking_weapon(goal) {
     myWeapClass = getWeaponClass(self GetCurrentWeapon());
     if(isDefined(goal.object)) {
       dropped_weapon_name = goal.object.classname;
-      if(string_starts_with(dropped_weapon_name, "weapon_"))
+      if(string_starts_with(dropped_weapon_name, "weapon_")) {
         dropped_weapon_name = getsubstr(dropped_weapon_name, 7);
+      }
       weapClass = getWeaponClass(dropped_weapon_name);
       if(!(self bot_weapon_is_better_class(myWeapClass, weapClass))) {
         return true;
@@ -43,8 +44,9 @@ sotf_should_stop_seeking_weapon(goal) {
     }
   }
 
-  if(!isDefined(goal.object))
+  if(!isDefined(goal.object)) {
     return true;
+  }
 
   return false;
 }
@@ -77,8 +79,9 @@ sotf_bot_think_seek_dropped_weapons() {
             myWeapClass = getWeaponClass(self GetCurrentWeapon());
             foreach(dropped_weapon in dropped_weapons_sorted) {
               dropped_weapon_name = dropped_weapon.classname;
-              if(string_starts_with(dropped_weapon_name, "weapon_"))
+              if(string_starts_with(dropped_weapon_name, "weapon_")) {
                 dropped_weapon_name = getsubstr(dropped_weapon_name, 7);
+              }
               weapClass = getWeaponClass(dropped_weapon_name);
               if(self bot_weapon_is_better_class(myWeapClass, weapClass)) {
                 if(!isDefined(dropped_weapon.calculated_nearest_node) || !dropped_weapon.calculated_nearest_node) {
@@ -157,18 +160,22 @@ sotf_crate_in_range(crate) {
 sotf_crate_can_use(crate) {
   if(maps\mp\bots\_bots::crate_can_use_always(crate)) {
     if(isDefined(crate) && isDefined(crate.bots_used) && array_contains(crate.bots_used, self)) {
-      if(self bot_out_of_ammo())
+      if(self bot_out_of_ammo()) {
         return true;
-      else
+      }
+      else {
         return false;
+      }
     }
 
     myWeapClass = getWeaponClass(self GetCurrentWeapon());
-    if(bot_rank_weapon_class(myWeapClass) <= 1)
+    if(bot_rank_weapon_class(myWeapClass) <= 1) {
       return true;
+    }
 
-    if(self sotf_crate_low_ammo_check())
+    if(self sotf_crate_low_ammo_check()) {
       return true;
+    }
 
     return false;
   }

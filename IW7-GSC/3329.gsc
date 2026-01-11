@@ -82,8 +82,9 @@ area_has_enemies(var_00) {
   var_04 = max(var_0[0][1], var_0[1][1]);
 
   foreach(var_06 in level.spawned_enemies) {
-    if(var_01 <= var_6.origin[0] && var_6.origin[0] <= var_02 && (var_03 <= var_6.origin[1] && var_6.origin[1] <= var_04))
+    if(var_01 <= var_6.origin[0] && var_6.origin[0] <= var_02 && (var_03 <= var_6.origin[1] && var_6.origin[1] <= var_04)) {
       return 1;
+    }
   }
 
   return 0;
@@ -92,17 +93,21 @@ area_has_enemies(var_00) {
 drop_meteor_in_area(var_00, var_01) {
   var_02 = get_drop_pos(var_00);
 
-  if(isDefined(var_01) && isplayer(var_01))
+  if(isDefined(var_01) && isplayer(var_01)) {
     magicbullet("iw7_armageddonmeteor_mp", var_2.start, var_2.end, var_01);
-  else
+  }
+  else {
     magicbullet("iw7_armageddonmeteor_mp", var_2.start, var_2.end, level.players[0]);
+  }
 }
 
 get_drop_pos(var_00) {
-  if(area_has_enemies(var_00))
+  if(area_has_enemies(var_00)) {
     return get_enemy_pos(var_00);
-  else
+  }
+  else {
     return get_random_drop_pos(var_00);
+  }
 }
 
 get_enemy_pos(var_00) {
@@ -139,8 +144,9 @@ reset_armageddon_time() {
 }
 
 isfirstarmageddonmeteorhit(var_00) {
-  if(!(isDefined(var_00) && var_00 == "iw7_armageddonmeteor_mp"))
+  if(!(isDefined(var_00) && var_00 == "iw7_armageddonmeteor_mp")) {
     return 0;
+  }
 
   return !scripts\engine\utility::is_true(self.fling_from_meteor);
 }

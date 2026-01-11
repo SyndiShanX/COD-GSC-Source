@@ -33,10 +33,12 @@ playflarefx(localclientnum) {
   self endon("entityshutdown");
   level endon("player_switch");
 
-  if(friendnotfoe(localclientnum))
+  if(friendnotfoe(localclientnum)) {
     fx_handle = playFXOnTag(localclientnum, level._effect["fx_trophy_friendly_light"], self, "tag_light_fx");
-  else
+  }
+  else {
     fx_handle = playFXOnTag(localclientnum, level._effect["fx_trophy_enemy_light"], self, "tag_light_fx");
+  }
 
   self thread watchtrophyshutdown(localclientnum, fx_handle);
   return fx_handle;
@@ -46,8 +48,9 @@ watchtrophyshutdown(localclientnum, fxhandle) {
   msg = self waittill_any_return("entityshutdown", "team_changed", "player_switch");
   stopfx(localclientnum, fxhandle);
 
-  if(msg == "team_changed")
+  if(msg == "team_changed") {
     self thread trophy_fx(localclientnum);
+  }
 }
 
 checkforplayerswitch(localclientnum, fxhandle) {
@@ -56,8 +59,9 @@ checkforplayerswitch(localclientnum, fxhandle) {
   level waittill("player_switch");
   self notify("player_switch");
 
-  if(isDefined(fxhandle))
+  if(isDefined(fxhandle)) {
     stopfx(localclientnum, fxhandle);
+  }
 
   waittillframeend;
   self thread trophy_fx(localclientnum);
@@ -102,8 +106,9 @@ trophy_deploy_anim(localclientnum, playfx) {
   self useanimtree(#animtree);
   self setanim( % o_trophy_deploy, 1.0, 0.0, 1.0);
 
-  if(playfx)
+  if(playfx) {
     playFXOnTag(localclientnum, level._effect["fx_trophy_deploy_impact"], self, "tag_origin");
+  }
 
   wait 0.3;
   self useanimtree(#animtree);

@@ -7,8 +7,9 @@
 #include maps\mp\gametypes\_hud_util;
 
 main() {
-  if(GetDvar(#"mapname") == "mp_background")
+  if(GetDvar(#"mapname") == "mp_background") {
     return;
+  }
   maps\mp\gametypes\_globallogic::init();
   maps\mp\gametypes\_callbacksetup::SetupCallbacks();
   maps\mp\gametypes\_globallogic::SetupCallbacks();
@@ -82,8 +83,9 @@ onSpawnPlayer() {
   self.usingObj = undefined;
   if(level.inGracePeriod) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + self.pers["team"] + "_start");
-    if(!spawnPoints.size)
+    if(!spawnPoints.size) {
       spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_sab_spawn_" + self.pers["team"] + "_start");
+    }
     if(!spawnPoints.size) {
       spawnPoints = maps\mp\gametypes\_spawnlogic::getTeamSpawnPoints(self.pers["team"]);
       spawnPoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(spawnPoints);
@@ -98,16 +100,20 @@ onSpawnPlayer() {
   pixendevent();
 }
 onEndGame(winningTeam) {
-  if(isDefined(winningTeam) && (winningTeam == "allies" || winningTeam == "axis"))
+  if(isDefined(winningTeam) && (winningTeam == "allies" || winningTeam == "axis")) {
     [[level._setTeamScore]](winningTeam, [[level._getTeamScore]](winningTeam) + 1);
+  }
 }
 onRoundEndGame(roundWinner) {
-  if(game["roundswon"]["allies"] == game["roundswon"]["axis"])
+  if(game["roundswon"]["allies"] == game["roundswon"]["axis"]) {
     winner = "tie";
-  else if(game["roundswon"]["axis"] > game["roundswon"]["allies"])
+  }
+  else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
     winner = "axis";
-  else
+  }
+  else {
     winner = "allies";
+  }
   return winner;
 }
 onScoreCloseMusic() {

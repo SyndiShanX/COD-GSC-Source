@@ -39,8 +39,9 @@ func_DBE3() {
 
       var_03 = func_7FB4(var_1[var_02].func_D69A, var_1[0].func_D69A) + 180;
 
-      if(var_03 > 360)
+      if(var_03 > 360) {
         var_03 = var_03 - 360;
+      }
 
       var_1[var_02].func_62A6 = var_03;
       var_1[0].func_10BA0 = var_03;
@@ -65,8 +66,9 @@ func_4F2A() {
 
     var_00 = 1;
 
-    while(!level.func_C2C8 buttonpressed("BUTTON_Y"))
+    while(!level.func_C2C8 buttonpressed("BUTTON_Y")) {
       wait 0.05;
+    }
 
     level.func_C2C8 playSound("mouse_click");
 
@@ -75,8 +77,9 @@ func_4F2A() {
       var_00 = 0;
     }
 
-    while(level.func_C2C8 buttonpressed("BUTTON_Y"))
+    while(level.func_C2C8 buttonpressed("BUTTON_Y")) {
       wait 0.05;
+    }
   }
 }
 
@@ -98,10 +101,12 @@ onplayerconnect() {
   var_00 takeallweapons();
   setdvar("cg_draw2d", 0);
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return;
-  else
+  }
+  else {
     level.func_C2C8 = var_00;
+  }
 
   var_00 thread func_7C17();
   func_13FC9("main");
@@ -111,8 +116,9 @@ func_DD78() {
   self endon("disconnect");
   var_00 = "autoassign";
 
-  while(!isDefined(self.pers["team"]))
+  while(!isDefined(self.pers["team"])) {
     wait 0.05;
+  }
 
   self notify("menuresponse", game["menu_team"], var_00);
   wait 0.5;
@@ -120,8 +126,9 @@ func_DD78() {
   var_02 = [];
 
   for(var_03 = 0; var_03 < var_1.size; var_3++) {
-    if(!issubstr(var_1[var_03], "custom"))
+    if(!issubstr(var_1[var_03], "custom")) {
       var_2[var_2.size] = var_1[var_03];
+    }
   }
 
   for(;;) {
@@ -194,8 +201,9 @@ func_12F12() {
     if(isDefined(level.func_1622)) {
       level.func_1622.func_724D = (1, 1, 0.5);
 
-      if(isDefined(var_00) && var_00 != level.func_1622)
+      if(isDefined(var_00) && var_00 != level.func_1622) {
         level.func_C2C8 playSound("mouse_over");
+      }
     }
 
     wait 0.05;
@@ -213,8 +221,9 @@ func_13B36() {
 
     var_00 = 1;
 
-    while(!level.func_C2C8 buttonpressed("BUTTON_A"))
+    while(!level.func_C2C8 buttonpressed("BUTTON_A")) {
       wait 0.05;
+    }
 
     level.func_C2C8 playSound("mouse_click");
 
@@ -226,8 +235,9 @@ func_13B36() {
       var_00 = 0;
     }
 
-    while(level.func_C2C8 buttonpressed("BUTTON_A"))
+    while(level.func_C2C8 buttonpressed("BUTTON_A")) {
       wait 0.05;
+    }
   }
 }
 
@@ -242,8 +252,9 @@ func_139A7() {
 
     var_00 = 1;
 
-    while(!level.func_C2C8 buttonpressed("BUTTON_X"))
+    while(!level.func_C2C8 buttonpressed("BUTTON_X")) {
       wait 0.05;
+    }
 
     level.func_C2C8 playSound("mouse_click");
 
@@ -252,16 +263,18 @@ func_139A7() {
       var_00 = 0;
     }
 
-    while(level.func_C2C8 buttonpressed("BUTTON_X"))
+    while(level.func_C2C8 buttonpressed("BUTTON_X")) {
       wait 0.05;
+    }
   }
 }
 
 func_10417(var_00) {
   for(var_01 = 0; var_01 < var_0.size - 1; var_1++) {
     for(var_02 = 0; var_02 < var_0.size - 1 - var_01; var_2++) {
-      if(var_0[var_02 + 1].func_D69A < var_0[var_02].func_D69A)
+      if(var_0[var_02 + 1].func_D69A < var_0[var_02].func_D69A) {
         button_sound(var_0[var_02], var_0[var_02 + 1]);
+      }
     }
   }
 }
@@ -285,8 +298,9 @@ button_sound(var_00, var_01) {
 }
 
 func_5B5C(var_00) {
-  foreach(var_02 in level.func_DBDF[var_00])
+  foreach(var_02 in level.func_DBDF[var_00]) {
   var_02 thread func_5B5B(var_00);
+  }
 }
 
 func_5B5B(var_00) {
@@ -298,11 +312,13 @@ func_5B5B(var_00) {
   for(;;) {
     var_03 = (1, 0, 0);
 
-    if(func_9E4E(self.func_10BA0, self.func_62A6))
+    if(func_9E4E(self.func_10BA0, self.func_62A6)) {
       var_03 = (1, 1, 0);
+    }
 
-    if(isDefined(level.func_4A6B) && level.func_4A6B > 0)
+    if(isDefined(level.func_4A6B) && level.func_4A6B > 0) {
       var_04 = var_01 + func_DBDA(level.func_E77B, 2);
+    }
 
     wait 0.05;
   }
@@ -311,20 +327,24 @@ func_5B5B(var_00) {
 func_13FC9(var_00, var_01) {
   level.func_1622 = undefined;
 
-  if(isDefined(level.func_DBDD) && level.func_DBDD != "")
+  if(isDefined(level.func_DBDD) && level.func_DBDD != "") {
     level.func_DBE1 = level.func_DBDD;
+  }
   else {
     level.func_DBE1 = "main";
     level.func_DBDD = "main";
   }
 
-  foreach(var_03 in level.func_DBDF[level.func_DBE1])
+  foreach(var_03 in level.func_DBDF[level.func_DBE1]) {
   var_03 notify("remove_button");
+  }
 
-  if(isDefined(var_01) && var_01)
+  if(isDefined(var_01) && var_01) {
     level.func_C2C8 _meth_83FD(level.radial_button_group[level.func_DBE1]["view_start"], var_00);
-  else
+  }
+  else {
     level.func_C2C8 _meth_83FC(level.radial_button_group[var_00]["view_start"]);
+  }
 
   level thread func_5B5C(var_00);
   level.func_DBDD = var_00;
@@ -341,8 +361,9 @@ disableweaponpickup(var_00, var_01) {
   var_08 = vectornormalize(vectorfromlinetopoint(var_03, var_03 + var_04, var_07));
   var_09 = acos(vectordot(var_08, var_05));
 
-  if(vectordot(anglestoright(var_02), var_08) < 0)
+  if(vectordot(anglestoright(var_02), var_08) < 0) {
     var_09 = 360 - var_09;
+  }
 
   return var_09;
 }
@@ -364,19 +385,23 @@ func_9E4E(var_00, var_01) {
   var_02 = level.func_E77B > var_00 && level.func_E77B < 360;
   var_03 = level.func_E77B > 0 && level.func_E77B < var_01;
 
-  if(var_00 > var_01)
+  if(var_00 > var_01) {
     var_04 = var_02 || var_03;
-  else
+  }
+  else {
     var_04 = level.func_E77B > var_00 && level.func_E77B < var_01;
+  }
 
   return var_04;
 }
 
 func_1576() {
-  if(isDefined(level.func_DBDD) && level.func_DBDD != "main")
+  if(isDefined(level.func_DBDD) && level.func_DBDD != "main") {
     func_13FC9("main", 1);
-  else
+  }
+  else {
     return;
+  }
 }
 
 func_157D() {
@@ -441,15 +466,17 @@ _meth_83FC(var_00) {
   var_02 = max(var_02, 0.1);
   var_04 = var_02;
 
-  if(!1)
+  if(!1) {
     var_04 = var_04 * (var_02 * (level.func_1338D[var_00].size + 1));
+  }
 
   thread func_2BD8(3, var_04);
 
   foreach(var_07, var_06 in level.func_1338D[var_00]) {
     if(1) {
-      if(var_07 != level.func_1338D[var_00].size - 1)
+      if(var_07 != level.func_1338D[var_00].size - 1) {
         continue;
+      }
     }
 
     level.func_5F21 moveto(var_6.origin, var_02, var_02 * 0.5, 0);
@@ -465,8 +492,9 @@ _meth_83FD(var_00, var_01) {
   var_02 = max(var_02, 0.1);
   var_04 = var_02;
 
-  if(!1)
+  if(!1) {
     var_04 = var_04 * (var_02 * (level.func_1338D[var_00].size + 1));
+  }
 
   thread func_2BD8(3, var_04);
 

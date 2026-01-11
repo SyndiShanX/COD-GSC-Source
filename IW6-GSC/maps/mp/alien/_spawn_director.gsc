@@ -162,49 +162,62 @@ MAX_BREAK_AWAY_SCORE_INCREASE = 2.5;
 LANE_CHANGE_SPAWN_SOUND = "alien_distant";
 
 init() {
-  if(!isDefined(level.alien_cycle_table))
+  if(!isDefined(level.alien_cycle_table)) {
     level.alien_cycle_table = CYCLE_TABLE;
+  }
 
-  if(!isDefined(level.alien_cycle_table_hardcore))
+  if(!isDefined(level.alien_cycle_table_hardcore)) {
     level.alien_cycle_table_hardcore = CYCLE_TABLE_HARDCORE;
+  }
 
-  if(is_hardcore_mode())
+  if(is_hardcore_mode()) {
     level.alien_cycle_table = level.alien_cycle_table_hardcore;
+  }
 
   if(!isDefined(level.base_player_count_multiplier)) {
     level.base_player_count_multiplier = BASE_PLAYER_COUNT_MULTIPLIER;
     level.additional_player_count_multiplier = ADDITIONAL_PLAYER_COUNT_MULTIPLIER;
   }
 
-  if(!isDefined(level.hardcore_spawn_multiplier))
+  if(!isDefined(level.hardcore_spawn_multiplier)) {
     level.hardcore_spawn_multiplier = 1.0;
+  }
 
-  if(!isDefined(level.hardcore_damage_scalar))
+  if(!isDefined(level.hardcore_damage_scalar)) {
     level.hardcore_damage_scalar = 1.0;
+  }
 
-  if(!isDefined(level.hardcore_health_scalar))
+  if(!isDefined(level.hardcore_health_scalar)) {
     level.hardcore_health_scalar = 1.0;
+  }
 
-  if(!isDefined(level.hardcore_reward_scalar))
+  if(!isDefined(level.hardcore_reward_scalar)) {
     level.hardcore_reward_scalar = 1.0;
+  }
 
-  if(!isDefined(level.hardcore_score_scalar))
+  if(!isDefined(level.hardcore_score_scalar)) {
     level.hardcore_score_scalar = 1.0;
+  }
 
-  if(!isDefined(level.casual_spawn_multiplier))
+  if(!isDefined(level.casual_spawn_multiplier)) {
     level.casual_spawn_multiplier = 1.0;
+  }
 
-  if(!isDefined(level.casual_damage_scalar))
+  if(!isDefined(level.casual_damage_scalar)) {
     level.casual_damage_scalar = 0.5;
+  }
 
-  if(!isDefined(level.casual_health_scalar))
+  if(!isDefined(level.casual_health_scalar)) {
     level.casual_health_scalar = 0.5;
+  }
 
-  if(!isDefined(level.casual_reward_scalar))
+  if(!isDefined(level.casual_reward_scalar)) {
     level.casual_reward_scalar = 1.0;
+  }
 
-  if(!isDefined(level.casual_score_scalar))
+  if(!isDefined(level.casual_score_scalar)) {
     level.casual_score_scalar = 0.5;
+  }
 
   level.cycle_data = spawnStruct();
   level.lanes = [];
@@ -232,10 +245,12 @@ init() {
   level.pending_custom_spawns = 0;
   level.cycle_spawning_active = false;
 
-  if(isPlayingSolo())
+  if(isPlayingSolo()) {
     level.cycle_data.max_alien_count = int(ceil(MAX_ALIEN_COUNT * level.base_player_count_multiplier));
-  else
+  }
+  else {
     level.cycle_data.max_alien_count = MAX_ALIEN_COUNT;
+  }
 
   level thread monitor_debug_dvar();
 }
@@ -270,8 +285,9 @@ load_encounter_lanes_from_table() {
       break;
     }
 
-    if(!isDefined(level.encounter_lanes[encounter]))
+    if(!isDefined(level.encounter_lanes[encounter])) {
       level.encounter_lanes[encounter] = [];
+    }
 
     activationTimes = strtok(tablelookup(level.alien_cycle_table, TABLE_INDEX, entryIndex, TABLE_LANES_ACTIVATION_TIME), ", ");
     names = strTok(tablelookup(level.alien_cycle_table, TABLE_INDEX, entryIndex, TABLE_LANES_NAMES), " ,()");
@@ -284,8 +300,9 @@ load_encounter_lanes_from_table() {
       if(isRandomSequence) {
         newLanes[0] = lanes[currentIndex];
         currentIndex++;
-        if(currentIndex >= lanes.size)
+        if(currentIndex >= lanes.size) {
           currentIndex = 0;
+        }
       } else {
         newLanes = lanes;
       }
@@ -301,8 +318,9 @@ load_encounter_lanes_from_table() {
     }
   }
 
-  foreach(index, encounterLane in level.encounter_lanes)
+  foreach(index, encounterLane in level.encounter_lanes) {
   level.encounter_lanes[index] = sort_array(level.encounter_lanes[index], ::sort_encounter_level_activation_time_func);
+  }
 }
 
 add_new_encounter_lane(encounter, lanes, time) {
@@ -357,8 +375,9 @@ find_spawners_by_script_name(script_name) {
     if(!isDefined(level.cycle_data.spawner_list[spawnIndex]["location"].script_linkname)) {
       continue;
     }
-    if(level.cycle_data.spawner_list[spawnIndex]["location"].script_linkname == script_name)
+    if(level.cycle_data.spawner_list[spawnIndex]["location"].script_linkname == script_name) {
       spawners[spawners.size] = spawnIndex;
+    }
   }
 
   return spawners;
@@ -415,8 +434,9 @@ load_spawn_event_waves_from_table() {
       break;
     }
 
-    if(!isDefined(level.spawn_event_waves[spawnEventID]))
+    if(!isDefined(level.spawn_event_waves[spawnEventID])) {
       level.spawn_event_waves[spawnEventID] = [];
+    }
 
     spawnEventWave = spawnStruct();
     spawnEventWave.blocking = get_spawn_event_wave_blocking_by_index(entryIndex);
@@ -533,8 +553,9 @@ print_cycle_rewards() {
         amount = level.alien_types[ai_type.type_name].attributes["reward"] * 2.0;
         total_min += amount * ai_type.min_spawned;
 
-        if(isDefined(ai_type.max_spawned))
+        if(isDefined(ai_type.max_spawned)) {
           total_max += amount * ai_type.max_spawned;
+        }
       }
     }
 
@@ -544,8 +565,9 @@ print_cycle_rewards() {
           amount = level.alien_types[ai_type.type_name].attributes["reward"] * 2.0;
           total_min += amount * ai_type.min_spawned;
 
-          if(isDefined(ai_type.max_spawned))
+          if(isDefined(ai_type.max_spawned)) {
             total_max += amount * ai_type.max_spawned;
+          }
         }
       }
     }
@@ -559,10 +581,12 @@ set_intensity(intensity) {
 }
 
 force_intensity(force_on, intensity) {
-  if(force_on)
+  if(force_on) {
     level.forced_current_intensity = clamp(intensity, 0.0, 1.0);
-  else if(isDefined(level.forced_current_intensity))
+  }
+  else if(isDefined(level.forced_current_intensity)) {
     level.forced_current_intensity = undefined;
+  }
 }
 
 load_cycles_from_table(cycle_data) {
@@ -620,8 +644,9 @@ load_cycles_from_table(cycle_data) {
 }
 
 sort_array(array, sort_func, beginning_index, pass_through_parameter_list) {
-  if(!isDefined(beginning_index))
+  if(!isDefined(beginning_index)) {
     beginning_index = 0;
+  }
 
   for(i = beginning_index + 1; i < array.size; i++) {
     entry = array[i];
@@ -649,11 +674,13 @@ sort_encounter_level_activation_time_func(test_entry, base_entry, pass_through_p
 }
 
 sort_priority_levels_func(test_entry, base_entry, pass_through_parameter_list) {
-  if(!isDefined(base_entry.type_name))
+  if(!isDefined(base_entry.type_name)) {
     return false;
+  }
 
-  if(!isDefined(test_entry.type_name))
+  if(!isDefined(test_entry.type_name)) {
     return true;
+  }
 
   testTypeName = get_translated_ai_type(test_entry.type_name);
   baseTypeName = get_translated_ai_type(base_entry.type_name);
@@ -688,8 +715,9 @@ get_player_to_node_dot(player_pos, player_view_dir, node) {
 get_average_distance_to_players(location) {
   playerCount = level.players.size;
 
-  if(playerCount == 0)
+  if(playerCount == 0) {
     return 0;
+  }
 
   totalDistanceSq = 0;
   foreach(player in level.players) {
@@ -750,13 +778,15 @@ put_spawnLocations_into_cycle_data(spawnLocations, cycle_data) {
   foreach(location in spawnLocations) {
     validTypes = [];
 
-    if(isDefined(level.adjust_spawnLocation_func))
+    if(isDefined(level.adjust_spawnLocation_func)) {
       location = [
+    }
         [level.adjust_spawnLocation_func]
       ](location);
 
-    if(isDefined(location.script_noteworthy))
+    if(isDefined(location.script_noteworthy)) {
       validTypes = strtok(cycle_data.spawn_node_info[location.script_noteworthy].validType, " ");
+    }
 
     locationInfo = [];
     locationInfo["types"] = validTypes;
@@ -777,29 +807,33 @@ put_spawnLocations_into_cycle_data(spawnLocations, cycle_data) {
 
 spawn_zone_exists(zone_name, cycle_data) {
   foreach(index, zone in cycle_data.spawn_zones) {
-    if(index == zone_name)
+    if(index == zone_name) {
       return true;
+    }
   }
 
   return false;
 }
 
 can_spawn_type(ai_type) {
-  if(!isDefined(level.current_cycle) || !isDefined(level.current_cycle.type_max_counts[ai_type]))
+  if(!isDefined(level.current_cycle) || !isDefined(level.current_cycle.type_max_counts[ai_type])) {
     return ((get_max_alien_count() - get_current_agent_count()) > 0);
+  }
 
   return (level.current_cycle.type_max_counts[ai_type] - get_current_agent_count_of_type(ai_type) > 0);
 }
 
 reserve_custom_spawn_space(space_size, allow_partial_space, reserve_type) {
-  if(!isDefined(allow_partial_space))
+  if(!isDefined(allow_partial_space)) {
     allow_partial_space = false;
+  }
 
   currentCount = get_current_agent_count();
 
   if(allow_partial_space) {
-    if(isDefined(reserve_type) && isDefined(level.current_cycle) && isDefined(level.current_cycle.type_max_counts[reserve_type]))
+    if(isDefined(reserve_type) && isDefined(level.current_cycle) && isDefined(level.current_cycle.type_max_counts[reserve_type])) {
       space_size = Clamp(level.current_cycle.type_max_counts[reserve_type] - get_current_agent_count_of_type(reserve_type), 0, space_size);
+    }
 
     availableSpace = clamp(get_max_alien_count() - currentCount, 0, space_size);
   } else if(currentCount + space_size <= get_max_alien_count()) {
@@ -842,8 +876,9 @@ get_intensity_level_by_index(index) {
 get_respawn_threshold_by_index(index) {
   respawnThreshold = tablelookup(level.alien_cycle_table, TABLE_INDEX, index, TABLE_RESPAWN_THRESHOLD);
 
-  if(respawnThreshold == "" || respawnThreshold == " ")
+  if(respawnThreshold == "" || respawnThreshold == " ") {
     return undefined;
+  }
 
   return int(respawnThreshold);
 }
@@ -851,8 +886,9 @@ get_respawn_threshold_by_index(index) {
 get_respawn_delay_by_index(index) {
   respawnDelay = tablelookup(level.alien_cycle_table, TABLE_INDEX, index, TABLE_RESPAWN_DELAY);
 
-  if(respawnDelay == "" || respawnDelay == " ")
+  if(respawnDelay == "" || respawnDelay == " ") {
     return undefined;
+  }
 
   return float(respawnDelay);
 }
@@ -877,21 +913,24 @@ get_types_array(cycle) {
 
 get_available_type_data(type_data_array) {
   for(typeIndex = 0; typeIndex < type_data_array.size; typeIndex++) {
-    if(!isDefined(type_data_array[typeIndex].type_name))
+    if(!isDefined(type_data_array[typeIndex].type_name)) {
       return type_data_array[typeIndex];
+    }
   }
 
   return undefined;
 }
 
 get_type_data(type_data, row_index, table_ai_type, table_count_type) {
-  if(!isDefined(type_data))
+  if(!isDefined(type_data)) {
     return undefined;
+  }
 
   typeName = tablelookup(level.alien_cycle_table, TABLE_INDEX, row_index, table_ai_type);
 
-  if(typeName == "")
+  if(typeName == "") {
     return undefined;
+  }
 
   typeRange = strTok(tablelookup(level.alien_cycle_table, TABLE_INDEX, row_index, table_count_type), " ");
   assertex(typeRange.size > 0 && typeRange.size <= 3, typeName + " doesn't have valid spawn range in index " + (row_index + 1));
@@ -915,8 +954,9 @@ get_type_data(type_data, row_index, table_ai_type, table_count_type) {
       type_data.min_spawned = typeRange[0];
     }
 
-    if(typeRange.size == 3)
+    if(typeRange.size == 3) {
       type_data.max_of_type = int(typeRange[2]);
+    }
   }
 
   return type_data;
@@ -967,46 +1007,54 @@ pause_cycle_internal(time_to_pause) {
 }
 
 activate_spawn_event(event_notify, wait_for_completion) {
-  if(!isDefined(wait_for_completion))
+  if(!isDefined(wait_for_completion)) {
     wait_for_completion = false;
+  }
 
   spawnEvent = find_spawn_event(event_notify);
 
   if(!isDefined(spawnEvent)) {
-    if(isDefined(level.current_cycle_num))
+    if(isDefined(level.current_cycle_num)) {
       outputCycleNum = level.current_cycle_num + 1;
-    else
+    }
+    else {
       outputCycleNum = 0;
+    }
 
     AssertMsg(event_notify + " is not a valid notify for cycle " + outputCycleNum + " and is not in the generic spawn events");
     return;
   }
 
-  if(wait_for_completion)
+  if(wait_for_completion) {
     level run_spawn_event(spawnEvent, event_notify);
-  else
+  }
+  else {
     level thread run_spawn_event(spawnEvent, event_notify);
+  }
 }
 
 find_spawn_event(event_notify) {
   if(isDefined(level.current_cycle)) {
     foreach(spawnEvent in level.current_cycle.spawn_events) {
-      if(spawnEvent.activation_notify == event_notify)
+      if(spawnEvent.activation_notify == event_notify) {
         return spawnEvent;
+      }
     }
   }
 
   foreach(spawnEvent in level.cycle_data.generic_spawn_events) {
-    if(spawnEvent.activation_notify == event_notify)
+    if(spawnEvent.activation_notify == event_notify) {
       return spawnEvent;
+    }
   }
 
   return undefined;
 }
 
 wait_for_spawn_event_delay() {
-  while(level.pending_meteor_spawns > 0 || level.pending_ground_spawns > 0)
+  while(level.pending_meteor_spawns > 0 || level.pending_ground_spawns > 0) {
     wait 0.05;
+  }
 
   timeToWait = level.cycle_data.spawn_event_min_activation_time + level.cycle_data.spawn_event_per_alien_activation_increase * get_current_agent_count();
   timeToWait = Min(level.cycle_data.spawn_event_max_activation_increase, timeToWait);
@@ -1028,11 +1076,13 @@ run_spawn_event(spawn_event, event_notify) {
     debug_print("Time Limit: " + spawn_event.time_limit + ", Number of waves: " + spawn_event.waves.size);
   }
 
-  if(level.cycle_spawning_active)
+  if(level.cycle_spawning_active) {
     level.intensity_spawning_paused_count++;
+  }
 
-  if(spawn_event.allow_initial_delay)
+  if(spawn_event.allow_initial_delay) {
     wait_for_spawn_event_delay();
+  }
 
   level thread spawn_event_time_limit_monitor(spawn_event.time_limit, spawn_event.activation_notify);
   level thread process_spawn_event_spawning(spawn_event);
@@ -1061,17 +1111,21 @@ process_spawn_event_spawning(spawn_event) {
       wait wave.spawn_delay;
     }
 
-    if(isDefined(spawn_event.lanes))
+    if(isDefined(spawn_event.lanes)) {
       lanes = spawn_event.lanes;
-    else
+    }
+    else {
       lanes = undefined;
+    }
 
     wave.types = get_spawn_event_types_array(wave.entry_index);
 
-    if(wave_has_delayed_spawn_type(wave))
+    if(wave_has_delayed_spawn_type(wave)) {
       spawnedAliens = spawn_event_delayed_wave_spawn(wave, spawn_event.activation_notify, lanes);
-    else
+    }
+    else {
       spawnedAliens = spawn_event_wave_spawn(wave, spawn_event.activation_notify, lanes);
+    }
 
     allEventSpawnedAliens = array_combine(allEventSpawnedAliens, spawnedAliens);
   }
@@ -1081,11 +1135,13 @@ process_spawn_event_spawning(spawn_event) {
 }
 
 wave_has_delayed_spawn_type(wave) {
-  if(wave_has_type(wave, "minion"))
+  if(wave_has_type(wave, "minion")) {
     return true;
+  }
 
-  if(wave_has_type(wave, "elite"))
+  if(wave_has_type(wave, "elite")) {
     return true;
+  }
 
   return false;
 }
@@ -1095,8 +1151,9 @@ wave_has_type(wave, ai_type) {
     if(!isDefined(alienType.type_name)) {
       continue;
     }
-    if(alienType.type_name == ai_type)
+    if(alienType.type_name == ai_type) {
       return true;
+    }
   }
 
   return false;
@@ -1105,8 +1162,9 @@ wave_has_type(wave, ai_type) {
 spawn_event_wave_spawn(wave, activation_notify, lanes) {
   spawnedAliens = spawn_wave(wave.types, "event", lanes);
 
-  if(wave.blocking)
+  if(wave.blocking) {
     spawn_event_wave_block(spawnedAliens, activation_notify);
+  }
 
   return spawnedAliens;
 }
@@ -1127,10 +1185,12 @@ spawn_event_wave_block(spawnedAliens, activation_notify) {
 spawn_event_delayed_wave_spawn(wave, activation_notify, lanes) {
   spawnedAliens = spawn_wave(wave.types, "event", lanes);
 
-  if(level.pending_meteor_spawns > 0)
+  if(level.pending_meteor_spawns > 0) {
     level thread spawn_event_minion_wave_spawn();
-  if(level.pending_ground_spawns > 0)
+  }
+  if(level.pending_ground_spawns > 0) {
     level thread spawn_event_elite_wave_spawn();
+  }
 
   while(level.pending_meteor_spawns > 0 || level.pending_ground_spawns > 0) {
     level waittill("spawn_event_delayed_spawn_complete", aliens);
@@ -1138,8 +1198,9 @@ spawn_event_delayed_wave_spawn(wave, activation_notify, lanes) {
     wait 0.05;
   }
 
-  if(wave.blocking)
+  if(wave.blocking) {
     spawn_event_wave_block(spawnedAliens, activation_notify);
+  }
 
   return spawnedAliens;
 }
@@ -1230,12 +1291,14 @@ spawn_director_loop(cycle_num) {
 
   activate_current_lane_monitor();
 
-  if(!isDefined(level.debug_spawn_director_active) || !level.debug_spawn_director_active)
+  if(!isDefined(level.debug_spawn_director_active) || !level.debug_spawn_director_active) {
     initial_spawn();
+  }
 
   while(true) {
-    while(level.debug_spawn_director_active)
+    while(level.debug_spawn_director_active) {
       wait 0.05;
+    }
 
     respawnActive = respawn_threshold_monitor();
 
@@ -1285,8 +1348,9 @@ intensity_monitor_update_loop() {
       last_intensity_update_time = currentTime;
       intensityLevel = calculate_current_intensity_level();
 
-      if(level.current_intensity_level != intensityLevel)
+      if(level.current_intensity_level != intensityLevel) {
         level notify("intensity_level_changed");
+      }
 
       level.current_intensity_level = intensityLevel;
 
@@ -1356,8 +1420,9 @@ calculate_current_intensity_level() {
 }
 
 initial_spawn() {
-  while(level.current_intensity_level < 0)
+  while(level.current_intensity_level < 0) {
     wait 0.05;
+  }
 
   types = get_current_wave_ai_types();
   spawn_wave(types, "spawn");
@@ -1395,8 +1460,9 @@ spawn_wave(types, spawn_method, override_lanes) {
   spawnedAliens = [];
 
   for(typesIndex = 0; typesIndex < types.size; typesIndex++) {
-    if(isDefined(types[typesIndex].type_name))
+    if(isDefined(types[typesIndex].type_name)) {
       spawnedAliens = array_combine(spawn_type(types[typesIndex], spawn_method, override_lanes), spawnedAliens);
+    }
   }
 
   return spawnedAliens;
@@ -1408,14 +1474,16 @@ debug_respawn_monitor() {
   level.debug_spawn_director_spawn_list = [];
 
   while(true) {
-    while(!isDefined(level.current_intensity_level) || level.current_intensity_level < 0)
+    while(!isDefined(level.current_intensity_level) || level.current_intensity_level < 0) {
       wait 0.05;
+    }
 
     desiredTotalAI = GetDvarInt("debug_spawn_director", 0);
     currentlyAlive = [];
     foreach(testAI in level.debug_spawn_director_spawn_list) {
-      if(IsAlive(testAi))
+      if(IsAlive(testAi)) {
         currentlyAlive[currentlyAlive.size] = testAI;
+      }
     }
     level.debug_spawn_director_spawn_list = currentlyAlive;
 
@@ -1459,8 +1527,9 @@ respawn_threshold_monitor() {
   }
 
   if(isDefined(level.cycle_data.current_respawn_delay)) {
-    if(level.current_intensity_level >= 0 && level.cycle_data.current_respawn_delay >= 0)
+    if(level.current_intensity_level >= 0 && level.cycle_data.current_respawn_delay >= 0) {
       wait level.cycle_data.current_respawn_delay * get_current_spawn_count_multiplier();
+    }
   }
 
   return true;
@@ -1538,17 +1607,21 @@ spawn_type_vo_monitor() {
 }
 
 debug_spawn_info(spawn_time, spawn_method, requested_amount, modified_amount, spawn_type, actual_amount) {
-  if(isDefined(spawn_method))
+  if(isDefined(spawn_method)) {
     spawnTypeDebug = spawn_method + "=";
-  else
+  }
+  else {
     spawnTypeDebug = "Spawn=";
+  }
 
   msg = spawnTypeDebug + requested_amount + " " + spawn_type + " Modify=" + modified_amount;
-  if(isDefined(spawn_time))
+  if(isDefined(spawn_time)) {
     msg = msg + " Time=" + spawn_time;
+  }
 
-  if(isDefined(actual_amount))
+  if(isDefined(actual_amount)) {
     msg = msg + " Spawned=" + actual_amount;
+  }
 
   totalSpawned = get_current_agent_count() - level.pending_meteor_spawns - level.pending_ground_spawns - level.pending_custom_spawns;
   msg = msg + " Total=" + totalSpawned;
@@ -1569,10 +1642,12 @@ get_modified_alien_amount(desired_amount, ai_type, spawn_method) {
 }
 
 spawn_type(ai_type, spawn_method, override_lanes) {
-  if(!isDefined(ai_type.max_spawned))
+  if(!isDefined(ai_type.max_spawned)) {
     desiredSpawnAmount = ai_type.min_spawned;
-  else
+  }
+  else {
     desiredSpawnAmount = RandomIntRange(ai_type.min_spawned, ai_type.max_spawned);
+  }
   modifiedDesiredSpawnAmount = get_modified_alien_amount(desiredSpawnAmount, ai_type, spawn_method);
 
   spawnedAliens = [];
@@ -1595,10 +1670,12 @@ spawn_type(ai_type, spawn_method, override_lanes) {
   }
 
   if(is_spawn_debug_info_requested()) {
-    if(isDefined(level.current_cycle))
+    if(isDefined(level.current_cycle)) {
       spawnTime = int(level.current_intensity * level.current_cycle.fullIntensityTime * 0.001);
-    else
+    }
+    else {
       spawnTime = undefined;
+    }
 
     debug_spawn_info(spawnTime, spawn_method, desiredSpawnAmount, modifiedDesiredSpawnAmount, ai_type.type_name, spawnedAliens.size);
   }
@@ -1611,20 +1688,24 @@ get_max_alien_count() {
 }
 
 get_max_type_count(ai_type, desiredAmount) {
-  if(!isDefined(level.current_cycle))
+  if(!isDefined(level.current_cycle)) {
     return desiredAmount;
+  }
 
   typeName = get_translated_ai_type(ai_type.type_name);
 
   if(isDefined(ai_type.max_of_type)) {
-    if(ai_type.max_of_type <= 0)
+    if(ai_type.max_of_type <= 0) {
       level.current_cycle.type_max_counts[typeName] = undefined;
-    else
+    }
+    else {
       level.current_cycle.type_max_counts[typeName] = ai_type.max_of_type;
+    }
   }
 
-  if(!isDefined(level.current_cycle.type_max_counts[typeName]))
+  if(!isDefined(level.current_cycle.type_max_counts[typeName])) {
     return desiredAmount;
+  }
 
   currentAllowedCount = get_scaled_alien_amount(level.current_cycle.type_max_counts[typeName]);
   currentAllowedCount = Max(0, currentAllowedCount - get_current_agent_count_of_type(typeName));
@@ -1660,8 +1741,9 @@ spawn_aliens(desired_amount, ai_type, override_lanes) {
 
     sort_func = undefined;
 
-    if(is_chaos_mode())
+    if(is_chaos_mode()) {
       sort_func = ::sort_player_view_direction;
+    }
 
     alien = spawn_alien(ai_type, override_lanes, undefined, sort_func);
 
@@ -1694,8 +1776,9 @@ elite_monitor() {
   self waittill("death");
   level.cycle_data.elite_count--;
 
-  if(level.cycle_data.elite_count == 0)
+  if(level.cycle_data.elite_count == 0) {
     level thread maps\mp\alien\_music_and_dialog::handleLastEliteDeath(self);
+  }
 }
 
 is_spawn_debug_info_requested() {
@@ -1706,17 +1789,20 @@ spawn_meteor_aliens(desired_spawn_amount, alien_type) {
   level endon("game_ended");
   level endon("nuke_went_off");
 
-  if(desired_spawn_amount >= 9)
+  if(desired_spawn_amount >= 9) {
     alien_per_meteoroid = int(desired_spawn_amount / 3);
-  else
+  }
+  else {
     alien_per_meteoroid = 4;
+  }
 
   level.pending_meteor_spawns += desired_spawn_amount;
 
   while(desired_spawn_amount > 0) {
     count = alien_per_meteoroid;
-    if(desired_spawn_amount < alien_per_meteoroid)
+    if(desired_spawn_amount < alien_per_meteoroid) {
       count = desired_spawn_amount;
+    }
 
     earlyFail = level thread maps\mp\alien\_spawnlogic::spawn_alien_meteoroid(alien_type, count);
     if(isDefined(earlyFail)) {
@@ -1783,8 +1869,9 @@ monitor_meteor_spawn() {
     }
 
     level.pending_meteor_spawns -= requestedCount;
-    if(level.pending_meteor_spawns < 0)
+    if(level.pending_meteor_spawns < 0) {
       level.pending_meteor_spawns = 0;
+    }
   }
 }
 
@@ -1805,22 +1892,26 @@ monitor_ground_spawn() {
       continue;
     }
     level.pending_ground_spawns--;
-    if(level.pending_ground_spawns < 0)
+    if(level.pending_ground_spawns < 0) {
       level.pending_ground_spawns = 0;
+    }
   }
 }
 
 get_current_agent_count(exclude_meteor, exclude_ground, exclude_pending) {
   currentCount = maps\mp\agents\_agent_utility::getNumActiveAgents();
 
-  if(!isDefined(exclude_meteor) || !exclude_meteor)
+  if(!isDefined(exclude_meteor) || !exclude_meteor) {
     currentCount += level.pending_meteor_spawns;
+  }
 
-  if(!isDefined(exclude_ground) || !exclude_ground)
+  if(!isDefined(exclude_ground) || !exclude_ground) {
     currentCount += level.pending_ground_spawns;
+  }
 
-  if(!isDefined(exclude_pending) || !exclude_pending)
+  if(!isDefined(exclude_pending) || !exclude_pending) {
     currentCount += level.pending_custom_spawns;
+  }
 
   return currentCount;
 }
@@ -1833,8 +1924,9 @@ get_current_agent_count_of_type(alien_type) {
     if(isDefined(ai.pet) && ai.pet) {
       continue;
     }
-    if(ai get_alien_type() == alien_type)
+    if(ai get_alien_type() == alien_type) {
       typeCount++;
+    }
   }
 
   return typeCount;
@@ -1852,43 +1944,52 @@ spawn_alien(ai_type, override_lanes, override_last_time_used_duration, override_
       if(!isDefined(agent.isActive) || !agent.isActive || !isalive(agent) || !isDefined(agent.alien_type) || agent.alien_type != "spitter") {
         continue;
       }
-      if(agent GetThreatBiasGroup() == "spitters")
+      if(agent GetThreatBiasGroup() == "spitters") {
         against_chopper++;
-      else
+      }
+      else {
         against_players++;
+      }
     }
 
     total = int(max(1, against_chopper + against_players));
     level.spitters_against_players_ratio = against_players / total;
 
     total_dist = 0;
-    foreach(player in level.players)
+    foreach(player in level.players) {
     total_dist += distance2D(player.origin, level.hive_heli.origin);
+    }
 
     avg_dist = total_dist / int(min(1, level.players.size));
 
     chance = 0.32;
-    if(avg_dist > 1500)
+    if(avg_dist > 1500) {
       chance = 0.1;
+    }
 
-    if(level.spitters_against_players_ratio >= chance)
+    if(level.spitters_against_players_ratio >= chance) {
       new_alien_to_attack_the_chopper = true;
+    }
   }
 
   intro_vignette_ai_type = process_intro_vignette_ai_type(ai_type);
 
-  if(isDefined(spawnPoint.script_noteworthy))
+  if(isDefined(spawnPoint.script_noteworthy)) {
     introVignetteAnim = level.cycle_data.spawn_node_info[spawnPoint.script_noteworthy].vignetteInfo[intro_vignette_ai_type];
-  else
+  }
+  else {
     introVignetteAnim = undefined;
+  }
 
   alien = process_spawn(ai_type, spawnPoint, introVignetteAnim);
 
   if((ai_type == "spitter" || ai_type == "seeder") && isDefined(level.hive_heli) && level.hive_heli.health > 0 && ThreatBiasGroupExists("spitters")) {
-    if(new_alien_to_attack_the_chopper)
+    if(new_alien_to_attack_the_chopper) {
       alien maps\mp\alien\_spawnlogic::make_spitter_attack_chopper(true);
-    else
+    }
+    else {
       alien maps\mp\alien\_spawnlogic::make_spitter_attack_chopper(false);
+    }
   }
 
   if((ai_type == "spitter" || ai_type == "seeder" || ai_type == "gargoyle") && flag_exist("player_using_vanguard") && flag("player_using_vanguard") && ThreatBiasGroupExists("spitters")) {
@@ -1897,12 +1998,15 @@ spawn_alien(ai_type, override_lanes, override_last_time_used_duration, override_
   }
 
   if(isDefined(spawnPoint.script_noteworthy)) {
-    if(IsSubStr(spawnPoint.script_noteworthy, "vent"))
+    if(IsSubStr(spawnPoint.script_noteworthy, "vent")) {
       level notify("dlc_vo_notify", "direction_vo", "spawn_vent");
-    if(IsSubStr(spawnPoint.script_noteworthy, "duct"))
+    }
+    if(IsSubStr(spawnPoint.script_noteworthy, "duct")) {
       level notify("dlc_vo_notify", "direction_vo", "spawn_vent");
-    if(IsSubStr(spawnPoint.script_noteworthy, "grate"))
+    }
+    if(IsSubStr(spawnPoint.script_noteworthy, "grate")) {
       level notify("dlc_vo_notify", "direction_vo", "spawn_grate");
+    }
   }
 
   level notify("spawned_alien", alien);
@@ -1924,8 +2028,9 @@ process_intro_vignette_ai_type(ai_type) {
 
 process_spawn(spawn_type, spawn_point, intro_vignette_anim) {
   spawnAngles = (0, 0, 0);
-  if(isDefined(spawn_point.angles))
+  if(isDefined(spawn_point.angles)) {
     spawnAngles = spawn_point.angles;
+  }
 
   spawn_point.last_used_time = GetTime();
 
@@ -1936,8 +2041,9 @@ process_spawn(spawn_type, spawn_point, intro_vignette_anim) {
 }
 
 find_safe_spawn_point_info(type_name, override_lanes, override_last_time_used_duration, override_sort_func) {
-  if(should_lane_spawn(override_lanes, type_name))
+  if(should_lane_spawn(override_lanes, type_name)) {
     return find_lane_spawn_node(override_lanes);
+  }
 
   playerVolumes = get_current_player_volumes();
 
@@ -1964,26 +2070,32 @@ get_current_encounter() {
 should_lane_spawn(override_lanes, type_name) {
   OFFLINE_DRILL_MAX_AVERAGE_DISTANCE = 1024;
 
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     return false;
+  }
 
-  if(isDefined(override_lanes) && override_lanes.size == 0)
+  if(isDefined(override_lanes) && override_lanes.size == 0) {
     return false;
+  }
 
-  if(!can_spawn_at_any_node(type_name))
+  if(!can_spawn_at_any_node(type_name)) {
     return false;
+  }
 
-  if(isDefined(level.blocker_hive_active) && level.blocker_hive_active)
+  if(isDefined(level.blocker_hive_active) && level.blocker_hive_active) {
     return true;
+  }
 
   drillState = get_current_drill_state();
 
   if(!isDefined(override_lanes)) {
-    if(!isDefined(level.cycle_data.current_lane))
+    if(!isDefined(level.cycle_data.current_lane)) {
       return false;
+    }
 
-    if(drillState == "idle")
+    if(drillState == "idle") {
       return false;
+    }
   }
 
   if(drillState == "offline") {
@@ -1997,8 +2109,9 @@ should_lane_spawn(override_lanes, type_name) {
     }
 
     if(player_count > 0) {
-      if(total_dist / player_count > OFFLINE_DRILL_MAX_AVERAGE_DISTANCE)
+      if(total_dist / player_count > OFFLINE_DRILL_MAX_AVERAGE_DISTANCE) {
         return false;
+      }
     }
   }
 
@@ -2006,8 +2119,9 @@ should_lane_spawn(override_lanes, type_name) {
 }
 
 get_current_drill_state() {
-  if(!isDefined(level.drill) || !isDefined(level.drill.state))
+  if(!isDefined(level.drill) || !isDefined(level.drill.state)) {
     return "undefined";
+  }
 
   return level.drill.state;
 }
@@ -2015,11 +2129,13 @@ get_current_drill_state() {
 get_override_lane_entry(override_lanes) {
   /# Assert( override_lanes.size > 0 );
 
-  if(!isDefined(level.override_lane_index))
+  if(!isDefined(level.override_lane_index)) {
     return get_random_entry(override_lanes);
+  }
 
-  if(level.override_lane_index >= override_lanes.size)
+  if(level.override_lane_index >= override_lanes.size) {
     level.override_lane_index = 0;
+  }
 
   currentIndex = level.override_lane_index;
   level.override_lane_index++;
@@ -2036,8 +2152,9 @@ find_lane_spawn_node(override_lanes) {
     spawnIndex = level.lanes[laneIndex][RandomInt(level.lanes[laneIndex].size)];
   }
 
-  if(is_spawn_debug_info_requested())
+  if(is_spawn_debug_info_requested()) {
     PrintLn("Lane spawning: " + laneIndex);
+  }
 
   nodeInfo = [];
   nodeInfo["node"] = level.cycle_data.spawner_list[spawnIndex]["location"];
@@ -2049,8 +2166,9 @@ find_lane_spawn_node(override_lanes) {
 get_current_encounter_lane_index() {
   endIndex = undefined;
   currentEncounter = get_current_encounter();
-  if(!isDefined(currentEncounter))
+  if(!isDefined(currentEncounter)) {
     return undefined;
+  }
 
   foreach(index, lane in level.encounter_lanes[currentEncounter]) {
     laneIntensityThreshold = lane.activation_time / level.current_cycle.fullIntensityTime;
@@ -2070,16 +2188,18 @@ get_random_entry(array) {
 
   foreach(index, entry in array) {
     entryCount++;
-    if(entryCount == randomEntry)
+    if(entryCount == randomEntry) {
       return array[index];
+    }
   }
 
   return undefined;
 }
 
 filter_spawn_point_by_distance_from_player(spawnNode, spawnType) {
-  if(spawnType == "elite")
+  if(spawnType == "elite") {
     return true;
+  }
 
   testLocation = level.players[0].origin;
   return DistanceSquared(testLocation, spawnNode.origin) > level.cycle_data.safe_spawn_distance_sq;
@@ -2097,16 +2217,20 @@ sort_player_view_direction(node_array) {
 }
 
 find_random_spawn_node(spawn_nodes, type_name, override_last_time_used_duration, filter_func, filter_optional_param, sort_func) {
-  if(level.debug_spawn_director_active)
+  if(level.debug_spawn_director_active) {
     return debug_find_spawn_node(spawn_nodes);
+  }
 
-  if(isDefined(override_last_time_used_duration))
+  if(isDefined(override_last_time_used_duration)) {
     lastUsedDuration = override_last_time_used_duration;
-  else
+  }
+  else {
     lastUsedDuration = level.cycle_data.spawn_point_last_used_duration;
+  }
 
-  if(!isDefined(sort_func))
+  if(!isDefined(sort_func)) {
     sort_func = ::array_randomize;
+  }
 
   spawn_nodes = [[sort_func]](spawn_nodes);
   bestIndex = 0;
@@ -2120,10 +2244,12 @@ find_random_spawn_node(spawn_nodes, type_name, override_last_time_used_duration,
     if(isDefined(filter_func) && !passes_spawn_node_filter(spawnNode, type_name, filter_func, filter_optional_param)) {
       continue;
     }
-    if(isDefined(spawn_nodes[nodeIndex]["location"].script_linkName))
+    if(isDefined(spawn_nodes[nodeIndex]["location"].script_linkName)) {
       spawnerName = spawn_nodes[nodeIndex]["location"].script_linkName;
-    else
+    }
+    else {
       spawnerName = undefined;
+    }
 
     if(!is_valid_spawn_node_for_type(spawn_nodes[nodeIndex]["types"], type_name, spawnerName)) {
       continue;
@@ -2156,8 +2282,9 @@ find_random_spawn_node(spawn_nodes, type_name, override_last_time_used_duration,
 }
 
 debug_find_spawn_node(spawn_nodes) {
-  if(level.debug_spawn_director_spawn_index >= spawn_nodes.size)
+  if(level.debug_spawn_director_spawn_index >= spawn_nodes.size) {
     level.debug_spawn_director_spawn_index = 0;
+  }
 
   nodeInfo = [];
   nodeInfo["node"] = spawn_nodes[level.debug_spawn_director_spawn_index]["location"];
@@ -2168,12 +2295,14 @@ debug_find_spawn_node(spawn_nodes) {
 }
 
 is_valid_spawn_node_for_type(valid_types, type_name, spawner_name) {
-  if(valid_types.size == 0)
+  if(valid_types.size == 0) {
     return can_spawn_at_any_node(type_name);
+  }
 
   foreach(ai_type in valid_types) {
-    if(ai_type == type_name)
+    if(ai_type == type_name) {
       return true;
+    }
   }
 
   return false;
@@ -2182,8 +2311,9 @@ is_valid_spawn_node_for_type(valid_types, type_name, spawner_name) {
 can_spawn_at_any_node(type_name) {
   if(isDefined(level.dlc_alien_type_node_match_override_func)) {
     canSpawnAnyNode = self[[level.dlc_alien_type_node_match_override_func]](type_name);
-    if(isDefined(canSpawnAnyNode))
+    if(isDefined(canSpawnAnyNode)) {
       return canSpawnAnyNode;
+    }
   }
 
   switch (type_name) {
@@ -2195,8 +2325,9 @@ can_spawn_at_any_node(type_name) {
 }
 
 passes_spawn_node_filter(spawn_node, spawn_type, filter_func, filter_optional_param) {
-  if(isDefined(filter_optional_param))
+  if(isDefined(filter_optional_param)) {
     return [[filter_func]](spawn_node, spawn_type, filter_optional_param);
+  }
 
   return [[filter_func]](spawn_node, spawn_type);
 }
@@ -2210,13 +2341,15 @@ find_safe_spawn_spot_with_volumes(player_volumes, type_name, override_last_used_
     }
     playersToTest = [];
     foreach(index, zoneVolume in player_volumes) {
-      if(index != zone.name)
+      if(index != zone.name) {
         playersToTest = array_combine(playersToTest, zoneVolume.players);
+      }
     }
 
     spawnLocationInfo = find_random_spawn_node(level.cycle_data.spawn_zones[zone.name].spawn_nodes, type_name, override_last_used_spawn_duration, ::is_safe_spawn_location, playersToTest, override_sort_func);
-    if(spawnLocationInfo["validNode"])
+    if(spawnLocationInfo["validNode"]) {
       return spawnLocationInfo;
+    }
 
   }
 
@@ -2232,11 +2365,13 @@ score_and_sort_spawn_zones(spawn_zones) {
 
     foreach(player in zone.players) {
       zoneScore += level.cycle_data.player_in_zone_score_modifier;
-      if(isDefined(player.current_attackers))
+      if(isDefined(player.current_attackers)) {
         zoneScore -= player.current_attackers.size * level.cycle_data.current_attacker_in_zone_score_modifier;
+      }
 
-      if(isDefined(playerProximity[player.name]) && (playerProximity[player.name] > level.cycle_data.group_break_away_distance_sq))
+      if(isDefined(playerProximity[player.name]) && (playerProximity[player.name] > level.cycle_data.group_break_away_distance_sq)) {
         zoneScore += min(level.cycle_data.max_break_away_zone_score_increase, playerProximity[player.name] / level.cycle_data.group_break_away_distance_sq);
+      }
     }
 
     zoneScore -= get_number_of_recently_used_spawn_points_in_zone(zone) * level.cycle_data.recently_used_spawn_zone_score_modifier;
@@ -2245,8 +2380,9 @@ score_and_sort_spawn_zones(spawn_zones) {
   }
 
   indexedArray = [];
-  foreach(zone in spawn_zones)
+  foreach(zone in spawn_zones) {
   indexedArray[indexedArray.size] = zone;
+  }
 
   return sort_array(indexedArray, ::sort_zone_score_func);
 }
@@ -2254,22 +2390,26 @@ score_and_sort_spawn_zones(spawn_zones) {
 calculate_player_proximity_scores() {
   playerProximity = [];
 
-  if(level.players.size <= 2)
+  if(level.players.size <= 2) {
     return playerProximity;
+  }
 
   for(playerIndex = 0; playerIndex < level.players.size; playerIndex++) {
     playerName = level.players[playerIndex].name;
-    if(!isDefined(playerProximity[playerName]))
+    if(!isDefined(playerProximity[playerName])) {
       playerProximity[playerName] = 99999999.0;
+    }
 
     for(closePlayerIndex = playerIndex + 1; closePlayerIndex < level.players.size; closePlayerIndex++) {
       distanceSq = DistanceSquared(level.players[playerIndex].origin, level.players[closePlayerIndex].origin);
-      if(distanceSq < playerProximity[playerName])
+      if(distanceSq < playerProximity[playerName]) {
         playerProximity[playerName] = distanceSq;
+      }
 
       closePlayerName = level.players[closePlayerIndex].name;
-      if(!isDefined(playerProximity[closePlayerName]) || distanceSq < playerProximity[closePlayerName])
+      if(!isDefined(playerProximity[closePlayerName]) || distanceSq < playerProximity[closePlayerName]) {
         playerProximity[closePlayerName] = distanceSq;
+      }
     }
   }
 
@@ -2284,8 +2424,9 @@ get_number_of_recently_used_spawn_points_in_zone(zone) {
     spawnPoint = level.cycle_data.spawn_zones[zone.name].spawn_nodes[nodeIndex]["location"];
     if(isDefined(spawnPoint.last_used_time)) {
       elapsedTime = currentTime - spawnPoint.last_used_time;
-      if(elapsedTime < level.cycle_data.spawn_point_last_used_duration)
+      if(elapsedTime < level.cycle_data.spawn_point_last_used_duration) {
         recentlyUsedCount++;
+      }
     }
   }
 
@@ -2297,23 +2438,26 @@ sort_zone_score_func(test_entry, base_entry, pass_through_parameter_list) {
 }
 
 is_safe_spawn_location(spawnLocation, spawnType, playersToTest) {
-  if(spawnType == "elite")
+  if(spawnType == "elite") {
     return true;
+  }
 
   foreach(player in playersToTest) {
     if(DistanceSquared(spawnLocation.origin, player.origin) > level.cycle_data.safe_spawn_distance_sq) {
       continue;
     }
-    if(has_line_of_sight(spawnLocation.origin, player.origin))
+    if(has_line_of_sight(spawnLocation.origin, player.origin)) {
       return false;
+    }
   }
 
   return true;
 }
 
 has_line_of_sight(spawnLocation, playerLocation) {
-  while(max_traces_reached())
+  while(max_traces_reached()) {
     wait 0.05;
+  }
 
   level.spawn_node_traces_this_frame++;
 
@@ -2432,8 +2576,9 @@ init_spawn_node_info(cycle_data) {
 }
 
 init_spawn_node_info_from_table(cycle_data) {
-  if(!isDefined(level.spawn_node_info_table))
+  if(!isDefined(level.spawn_node_info_table)) {
     level.spawn_node_info_table = SPAWN_NODE_INFO_TABLE;
+  }
 
   for(entryIndex = TABLE_SPAWN_NODE_INFO_START_INDEX; entryIndex <= TABLE_SPAWN_NODE_INFO_MAX_INDEX; entryIndex++) {
     key = tablelookup(level.spawn_node_info_table, TABLE_INDEX, entryIndex, TABLE_SPAWN_NODE_KEY);
@@ -2477,15 +2622,18 @@ grabVignetteInfo(key, entryIndex, stateIndex, indexArrayIndex, labelIndex, endNo
 getScriptableStatus(entryIndex) {
   string = tablelookup(level.spawn_node_info_table, TABLE_INDEX, entryIndex, TABLE_ONE_OFF_SCRIPTABLE);
 
-  if(maps\mp\agents\alien\_alien_agents::is_empty_string(string))
+  if(maps\mp\agents\alien\_alien_agents::is_empty_string(string)) {
     return "always_on";
-  else
+  }
+  else {
     return "one_off";
+  }
 }
 
 replaceEmptyStringWithNone(string) {
-  if(maps\mp\agents\alien\_alien_agents::is_empty_string(string))
+  if(maps\mp\agents\alien\_alien_agents::is_empty_string(string)) {
     return "NONE";
+  }
 
   return string;
 }
@@ -2503,8 +2651,9 @@ load_cycle_drill_layer_from_table(cycle_data) {
     layers = tablelookup(level.alien_cycle_table, TABLE_INDEX, entryIndex, TABLE_CYCLE_DRILL_LAYERS);
     layers = StrTok(layers, " ");
 
-    for(i = 0; i < layers.size; i++)
+    for(i = 0; i < layers.size; i++) {
       layers[i] = int(layers[i]);
+    }
 
     cycle_data.cycle_drill_layers[int(cycle)] = layers;
 
@@ -2535,8 +2684,9 @@ get_hives_to_remove(num_to_spawn, hive_array) {
   num_to_remove = hive_array.size - num_to_spawn;
   assert(num_to_remove >= 0);
 
-  if(num_to_remove == 0)
+  if(num_to_remove == 0) {
     return [];
+  }
 
   hive_array = array_randomize(hive_array);
   hives_to_remove = [];

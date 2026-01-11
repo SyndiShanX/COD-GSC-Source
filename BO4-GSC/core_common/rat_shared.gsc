@@ -452,4 +452,3 @@ function_9efe300c(params) {
     player setplayerangles(level.spawn_start[team][spawn].angles);
   }
 }
-

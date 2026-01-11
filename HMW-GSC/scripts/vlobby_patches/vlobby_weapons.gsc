@@ -12,8 +12,9 @@ positionweaponavatar_stub(var_0, var_1) {
   }
   var_3 = var_0;
 
-  if(isDefined(var_0.linker))
+  if(isDefined(var_0.linker)) {
     var_3 = var_0.linker;
+  }
 
   var_3 unlink();
   var_4 = maps\mp\_vl_cac::getweaponavatarforwarddistance(var_0, var_2);
@@ -23,20 +24,25 @@ positionweaponavatar_stub(var_0, var_1) {
   var_7 = var_2["midpoint"];
   var_8 = var_2["halfsize"];
 
-  if(var_6)
+  if(var_6) {
     var_7 = (0, 0, -1 * var_8[2]);
-  else if(var_1 == "Equipment")
+  }
+  else if(var_1 == "Equipment") {
     var_7 = (0, 0, var_7[2]);
+  }
 
   var_3.origin = var_5 - var_7;
   var_3.origin -= (3, 3, 0);
 
-  if(var_6)
+  if(var_6) {
     var_3.angles = (185.0, 126.0, 0.0);
-  else if(maps\mp\_vl_cac::isweaponavataraweapon(var_0))
+  }
+  else if(maps\mp\_vl_cac::isweaponavataraweapon(var_0)) {
     var_3.angles = (0.0, 350.0, 0);
-  else
+  }
+  else {
     var_3.angles = (0.0, 300.0, 15.0);
+  }
 
   level.weaponavatarparent.origin = var_5;
   var_9 = level.weaponavatarparent.angles;
@@ -68,8 +74,9 @@ agentplaylobbyanimakimbo(var_0, var_2) {
   if(!isDefined(self.lastanim) || self.lastanim != var_6) {
     var_7 = 0.0;
 
-    if(maps\mp\_utility::is_true(var_2))
+    if(maps\mp\_utility::is_true(var_2)) {
       var_7 = randomfloat(1.0);
+    }
 
     self setanimclass("vlobby_animclass");
     self setanimstate("lobby_shotgun_ranger", var_5, 1, var_7);

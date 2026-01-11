@@ -58,10 +58,12 @@ bot_conf_debug() {
             foreach(tag in player.tags_seen) {
               if(tag.tag maps\mp\gametypes\_gameobjects::canInteractWith(player.team)) {
                 lineColor = undefined;
-                if(player.team != tag.tag.victim.team)
+                if(player.team != tag.tag.victim.team) {
                   lineColor = (1, 0, 0);
-                else
+                }
+                else {
                   lineColor = (0, 0, 1);
+                }
                 line(tag.tag.curorigin, player.origin + (0, 0, 20), lineColor, 1.0, true);
               }
             }
@@ -100,8 +102,9 @@ bot_conf_think() {
 
   if(self.personality == "camper") {
     self.conf_camper_camp_tags = false;
-    if(!isDefined(self.conf_camping_tag))
+    if(!isDefined(self.conf_camping_tag)) {
       self.conf_camping_tag = false;
+    }
   }
 
   while(true) {
@@ -177,10 +180,12 @@ bot_conf_think() {
     if(GetDvar("bot_DrawDebugGametype") == "conf" && GetDvar(SCR_CONST_DEBUG_SHOW_ALL_TAGS_NAME) == "0") {
       if(isDefined(self.tag_getting) && self.health > 0) {
         color = (0.5, 0, 0.5);
-        if(self.team == "allies")
+        if(self.team == "allies") {
           color = (1, 0, 1);
-        if(isDefined(self.conf_camper_camp_tags) && self.conf_camper_camp_tags)
+        }
+        if(isDefined(self.conf_camper_camp_tags) && self.conf_camper_camp_tags) {
           color = (1, 0, 0);
+        }
         Line(self.origin + (0, 0, 40), self.tag_getting.curorigin + (0, 0, 10), color, 1.0, true, 1);
       }
     }
@@ -196,8 +201,9 @@ bot_check_tag_above_head(tag) {
       tag_height_over_bot_head = tag.curorigin[2] - self_eye_pos[2];
       if(tag_height_over_bot_head > 0) {
         if(tag_height_over_bot_head < level.bot_tag_allowable_jump_height) {
-          if(!isDefined(self.last_time_jumped_for_tag))
+          if(!isDefined(self.last_time_jumped_for_tag)) {
             self.last_time_jumped_for_tag = 0;
+          }
 
           if(GetTime() - self.last_time_jumped_for_tag > 3000) {
             self.last_time_jumped_for_tag = GetTime();
@@ -261,8 +267,9 @@ bot_combine_tag_seen_arrays(new_tag_seen_array, old_tag_seen_array) {
       }
     }
 
-    if(!tag_already_exists_in_old_array)
+    if(!tag_already_exists_in_old_array) {
       new_array = array_add(new_array, new_tag);
+    }
   }
 
   return new_array;
@@ -274,8 +281,9 @@ bot_is_tag_visible(tag, nearest_node_self, fov_self) {
     tag.calculated_nearest_node = true;
   }
 
-  if(isDefined(tag.calculations_in_progress))
+  if(isDefined(tag.calculations_in_progress)) {
     return false;
+  }
 
   nearest_node_to_tag = tag.nearest_node;
   tag_first_time_ever_seen = !isDefined(tag.on_path_grid);
@@ -287,8 +295,9 @@ bot_is_tag_visible(tag, nearest_node_self, fov_self) {
         if(tag_first_time_ever_seen) {
           thread calculate_tag_on_path_grid(tag);
           waittill_tag_calculated_on_path_grid(tag);
-          if(!tag.on_path_grid)
+          if(!tag.on_path_grid) {
             return false;
+          }
         }
 
         return true;
@@ -300,16 +309,20 @@ bot_is_tag_visible(tag, nearest_node_self, fov_self) {
 
 bot_find_visible_tags(require_los, optional_nearest_node_self, optional_fov_self) {
   nearest_node_self = undefined;
-  if(isDefined(optional_nearest_node_self))
+  if(isDefined(optional_nearest_node_self)) {
     nearest_node_self = optional_nearest_node_self;
-  else
+  }
+  else {
     nearest_node_self = self GetNearestNode();
+  }
 
   fov_self = undefined;
-  if(isDefined(optional_fov_self))
+  if(isDefined(optional_fov_self)) {
     fov_self = optional_fov_self;
-  else
+  }
+  else {
     fov_self = self BotGetFovDot();
+  }
 
   visible_tags = [];
 
@@ -352,8 +365,9 @@ calculate_tag_on_path_grid(tag) {
 }
 
 waittill_tag_calculated_on_path_grid(tag) {
-  while(!isDefined(tag.on_path_grid))
+  while(!isDefined(tag.on_path_grid)) {
     wait(0.05);
+  }
 }
 
 bot_find_best_tag_from_array(tag_array, check_allies_getting_tag) {
@@ -379,8 +393,9 @@ bot_remove_invalid_tags(tags) {
   valid_tags = [];
   foreach(tag_struct in tags) {
     if(tag_struct.tag maps\mp\gametypes\_gameobjects::canInteractWith(self.team) && bot_vectors_are_equal(tag_struct.tag.curorigin, tag_struct.origin)) {
-      if(!self bot_check_tag_above_head(tag_struct.tag) && tag_struct.tag.on_path_grid)
+      if(!self bot_check_tag_above_head(tag_struct.tag) && tag_struct.tag.on_path_grid) {
         valid_tags = array_add(valid_tags, tag_struct);
+      }
     }
   }
 
@@ -395,11 +410,13 @@ get_num_allies_getting_tag(tag) {
     }
     if(player.team == self.team && player != self) {
       if(IsAI(player)) {
-        if(isDefined(player.tag_getting) && player.tag_getting == tag)
+        if(isDefined(player.tag_getting) && player.tag_getting == tag) {
           num++;
+        }
       } else {
-        if(DistanceSquared(player.origin, tag.curorigin) < 400 * 400)
+        if(DistanceSquared(player.origin, tag.curorigin) < 400 * 400) {
           num++;
+        }
       }
     }
   }
@@ -411,8 +428,9 @@ bot_camp_tag(tag, goal_type, optional_endon) {
   self notify("bot_camp_tag");
   self endon("bot_camp_tag");
   self endon("stop_camping_tag");
-  if(isDefined(optional_endon))
+  if(isDefined(optional_endon)) {
     self endon(optional_endon);
+  }
 
   self BotSetScriptGoalNode(self.node_ambushing_from, goal_type, self.ambush_yaw);
   result = self bot_waittill_goal_or_fail();

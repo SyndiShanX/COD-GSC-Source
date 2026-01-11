@@ -49,8 +49,9 @@ main() {
 onstartgametype() {
   setclientnamemode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     oldattackers = game["attackers"];
@@ -70,10 +71,12 @@ onstartgametype() {
     setobjectivetext(team, &"OBJECTIVES_TDM");
     setobjectivehinttext(team, &"OBJECTIVES_TDM_HINT");
 
-    if(level.splitscreen)
+    if(level.splitscreen) {
       setobjectivescoretext(team, &"OBJECTIVES_TDM");
-    else
+    }
+    else {
       setobjectivescoretext(team, &"OBJECTIVES_TDM_SCORE");
+    }
 
     maps\mp\gametypes\_spawnlogic::addspawnpoints(team, "mp_tdm_spawn");
     maps\mp\gametypes\_spawnlogic::placespawnpoints(maps\mp\gametypes\_spawning::gettdmstartspawnname(team));
@@ -83,8 +86,9 @@ onstartgametype() {
 
   level.spawn_start = [];
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   level.spawn_start[team] = maps\mp\gametypes\_spawnlogic::getspawnpointarray(maps\mp\gametypes\_spawning::gettdmstartspawnname(team));
+  }
 
   level.mapcenter = maps\mp\gametypes\_spawnlogic::findboxcenter(level.spawnmins, level.spawnmaxs);
   setmapcenter(level.mapcenter);
@@ -94,33 +98,40 @@ onstartgametype() {
   if(!isoneround()) {
     level.displayroundendtext = 1;
 
-    if(isscoreroundbased())
+    if(isscoreroundbased()) {
       maps\mp\gametypes\_globallogic_score::resetteamscores();
+    }
   }
 }
 
 onspawnplayerunified(question) {
   self.usingobj = undefined;
 
-  if(level.usestartspawns && !level.ingraceperiod && !level.playerqueuedrespawn)
+  if(level.usestartspawns && !level.ingraceperiod && !level.playerqueuedrespawn) {
     level.usestartspawns = 0;
+  }
 
   spawnteam = self.pers["team"];
 
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     spawnteam = getotherteam(spawnteam);
+  }
 
-  if(isDefined(question))
+  if(isDefined(question)) {
     question = 1;
+  }
 
-  if(isDefined(question))
+  if(isDefined(question)) {
     question = -1;
+  }
 
-  if(isDefined(spawnteam))
+  if(isDefined(spawnteam)) {
     spawnteam = spawnteam;
+  }
 
-  if(!isDefined(spawnteam))
+  if(!isDefined(spawnteam)) {
     spawnteam = -1;
+  }
 
   maps\mp\gametypes\_spawning::onspawnplayer_unified();
 }
@@ -129,53 +140,63 @@ onspawnplayer(predictedspawn, question) {
   pixbeginevent("TDM:onSpawnPlayer");
   self.usingobj = undefined;
 
-  if(isDefined(question))
+  if(isDefined(question)) {
     question = 1;
+  }
 
-  if(isDefined(question))
+  if(isDefined(question)) {
     question = -1;
+  }
 
   spawnteam = self.pers["team"];
 
-  if(isDefined(spawnteam))
+  if(isDefined(spawnteam)) {
     spawnteam = spawnteam;
+  }
 
-  if(!isDefined(spawnteam))
+  if(!isDefined(spawnteam)) {
     spawnteam = -1;
+  }
 
   if(level.ingraceperiod) {
     spawnpoints = maps\mp\gametypes\_spawnlogic::getspawnpointarray(maps\mp\gametypes\_spawning::gettdmstartspawnname(spawnteam));
 
-    if(!spawnpoints.size)
+    if(!spawnpoints.size) {
       spawnpoints = maps\mp\gametypes\_spawnlogic::getspawnpointarray(maps\mp\gametypes\_spawning::getteamstartspawnname(spawnteam, "mp_sab_spawn"));
+    }
 
     if(!spawnpoints.size) {
-      if(game["switchedsides"])
+      if(game["switchedsides"]) {
         spawnteam = getotherteam(spawnteam);
+      }
 
       spawnpoints = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(spawnteam);
       spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_nearteam(spawnpoints);
     } else
       spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_random(spawnpoints);
   } else {
-    if(game["switchedsides"])
+    if(game["switchedsides"]) {
       spawnteam = getotherteam(spawnteam);
+    }
 
     spawnpoints = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(spawnteam);
     spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_nearteam(spawnpoints);
   }
 
-  if(predictedspawn)
+  if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  else
+  }
+  else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "tdm");
+  }
 
   pixendevent();
 }
 
 onendgame(winningteam) {
-  if(isDefined(winningteam) && isDefined(level.teams[winningteam]))
+  if(isDefined(winningteam) && isDefined(level.teams[winningteam])) {
     maps\mp\gametypes\_globallogic_score::giveteamscoreforobjective(winningteam, 1);
+  }
 }
 
 onroundswitch() {
@@ -219,8 +240,9 @@ onscoreclosemusic() {
         continue;
       }
 
-      if(score > runnerupscore)
+      if(score > runnerupscore) {
         runnerupscore = score;
+      }
     }
 
     scoredif = topscore - runnerupscore;
@@ -242,6 +264,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
   attacker maps\mp\gametypes\_globallogic_score::giveteamscoreforobjective(attacker.team, level.teamscoreperkill);
   self maps\mp\gametypes\_globallogic_score::giveteamscoreforobjective(self.team, level.teamscoreperdeath * -1);
 
-  if(smeansofdeath == "MOD_HEAD_SHOT")
+  if(smeansofdeath == "MOD_HEAD_SHOT") {
     attacker maps\mp\gametypes\_globallogic_score::giveteamscoreforobjective(attacker.team, level.teamscoreperheadshot);
+  }
 }

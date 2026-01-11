@@ -231,8 +231,9 @@ createfx_setup() {
   exploder(1001);
   level.skipto_point = tolower(getdvar(#"_id_1BEC029F"));
 
-  if(level.skipto_point == "")
+  if(level.skipto_point == "") {
     level.skipto_point = "intro";
+  }
 
   maps\la_utility::load_gumps();
 }

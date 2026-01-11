@@ -35,8 +35,9 @@ main() {
   maps\black_ice_fx::setup_footstep_fx();
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9.01);
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     set_default_mb_values();
+  }
 
   thread common_scripts\_pipes::main();
   level.pipesdamage = 0;
@@ -251,11 +252,13 @@ main_flarestack() {
 }
 
 transient_load_outro_and_save() {
-  if(!istransientqueued("black_ice_outro_tr"))
+  if(!istransientqueued("black_ice_outro_tr")) {
     maps\_utility::transient_unloadall_and_load("black_ice_outro_tr");
+  }
 
-  while(!istransientloaded("black_ice_outro_tr"))
+  while(!istransientloaded("black_ice_outro_tr")) {
     wait(level.timestep);
+  }
 
   maps\_utility::autosave_by_name("flarestack");
 }
@@ -468,13 +471,15 @@ trains_move(var_0, var_1, var_2) {
   }
 
   if(var_2) {
-    foreach(var_10 in var_1.trains)
+    foreach(var_10 in var_1.trains) {
     var_10 delete();
+    }
 
     var_1 delete();
   } else {
-    foreach(var_10 in var_1.trains)
+    foreach(var_10 in var_1.trains) {
     var_10 hide();
+    }
 
     var_1.origin = var_1.init_origin;
   }
@@ -485,17 +490,21 @@ flarestack_swap(var_0) {
   var_2 = getEntArray("flarestack_optimized", "targetname");
 
   if(isDefined(var_0) && var_0) {
-    foreach(var_4 in var_1)
+    foreach(var_4 in var_1) {
     var_4 hide();
+    }
 
-    foreach(var_4 in var_2)
+    foreach(var_4 in var_2) {
     var_4 show();
+    }
   } else {
-    foreach(var_4 in var_2)
+    foreach(var_4 in var_2) {
     var_4 hide();
+    }
 
-    foreach(var_4 in var_1)
+    foreach(var_4 in var_1) {
     var_4 show();
+    }
   }
 }
 

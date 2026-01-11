@@ -30,15 +30,17 @@ exchange_turret() {
   level.player allowstand(0);
   setsaveddvar("r_lodFOVFixedScale", 0.6);
 
-  if(!common_scripts\utility::flag("player_used_zoom"))
+  if(!common_scripts\utility::flag("player_used_zoom")) {
     level.player thread maps\_utility::display_hint("barrett");
+  }
 
   level.level_specific_dof = 1;
   var_2 = level.player.origin + (0, 0, 60);
   common_scripts\utility::flag_wait_any("player_gets_off_turret_fade", "hotel_destroyed");
 
-  if(!common_scripts\utility::flag("hotel_destroyed"))
+  if(!common_scripts\utility::flag("hotel_destroyed")) {
     thread blackscreendismountgun();
+  }
 
   common_scripts\utility::flag_wait("player_gets_off_turret");
   level.player enableturretdismount();
@@ -85,8 +87,9 @@ track_ent_chain(var_0) {
     var_6 = distance(var_5.origin, var_1.origin);
     var_7 = var_6 * var_4 / var_3;
 
-    if(var_7 < 0.05)
+    if(var_7 < 0.05) {
       var_7 = 0.05;
+    }
 
     var_2 moveto(var_5.origin, var_7);
     wait(var_7);
@@ -121,8 +124,9 @@ exchange_trace_converter() {
     thread exchange_player_fires();
     var_1 = gettime();
 
-    while(level.player attackbuttonpressed())
+    while(level.player attackbuttonpressed()) {
       wait 0.05;
+    }
   }
 }
 
@@ -204,8 +208,9 @@ exchange_player_fires() {
 
     var_29 = var_12 + var_14;
 
-    if(!var_21 || !var_23)
+    if(!var_21 || !var_23) {
       var_26 = level.wind_vec * var_11[level.gameskill];
+    }
 
     var_10 = bulletTrace(var_12, var_29, 1, undefined);
     var_30 = var_10["position"];
@@ -218,11 +223,13 @@ exchange_player_fires() {
 
     var_31 = var_19 / var_18;
 
-    if(var_31 < 0)
+    if(var_31 < 0) {
       var_31 = 0;
+    }
 
-    if(var_31 > 1.0)
+    if(var_31 > 1.0) {
       var_31 = 1.0;
+    }
 
     var_19++;
     level.view_frac = var_31;
@@ -231,8 +238,9 @@ exchange_player_fires() {
     var_16 = var_16 + var_14;
 
     if(var_23) {
-      if(isalive(level.zakhaev))
+      if(isalive(level.zakhaev)) {
         var_25 = level.zakhaev gettagorigin("J_Shoulder_LE");
+      }
 
       var_34 = var_25;
       var_35 = var_24 / var_22;
@@ -244,8 +252,9 @@ exchange_player_fires() {
         var_23 = 0;
         var_12 = var_25;
 
-        if(isalive(level.zakhaev))
+        if(isalive(level.zakhaev)) {
           level.zakhaev notify("fake_damage");
+        }
       }
     } else {
       var_20 = var_17.origin;
@@ -280,12 +289,15 @@ exchange_player_fires() {
   common_scripts\utility::flag_set("price_comments_on_zak_miss");
   maps\sniperescape_code::price_clears_dialogue();
 
-  if(price_thinks_you_are_insane(var_12))
+  if(price_thinks_you_are_insane(var_12)) {
     maps\sniperescape_code::price_line("are_you_insane");
-  else if(level.wind_setting == "end")
+  }
+  else if(level.wind_setting == "end") {
     maps\sniperescape_code::price_line("target_still_standing");
-  else
+  }
+  else {
     maps\sniperescape_code::price_line("went_wide");
+  }
 
   if(1) {
     return;
@@ -348,8 +360,9 @@ exchange_get_safe_shot(var_0) {
           break;
         }
 
-        if(isDefined(var_2["entity"].heli))
+        if(isDefined(var_2["entity"].heli)) {
           var_2["entity"] kill((0, 0, 0));
+        }
 
         var_2 = bulletTrace(var_2["position"], self.traces[var_1], 1, var_2["entity"]);
       }
@@ -383,8 +396,9 @@ exchange_turret_traces(var_0, var_1, var_2) {
     var_9 = var_9 * 25000;
     var_3 = bulletTrace(var_0, var_0 + var_9, 1, undefined);
 
-    if(!hit_zak(var_3))
+    if(!hit_zak(var_3)) {
       self.traces[self.traces.size] = var_0 + var_9;
+    }
 
     var_7 = var_7 + var_8;
     wait 0.025;
@@ -392,16 +406,19 @@ exchange_turret_traces(var_0, var_1, var_2) {
 }
 
 drawhit(var_0, var_1) {
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 hit_zak(var_0) {
-  if(!isalive(var_0["entity"]))
+  if(!isalive(var_0["entity"])) {
     return 0;
+  }
 
-  if(!isalive(level.zakhaev))
+  if(!isalive(level.zakhaev)) {
     return 0;
+  }
 
   return var_0["entity"] == level.zakhaev;
 }
@@ -409,8 +426,9 @@ hit_zak(var_0) {
 drawtrace(var_0, var_1) {
   var_2 = 120;
 
-  for(var_3 = 0; var_3 < var_2; var_3++)
+  for(var_3 = 0; var_3 < var_2; var_3++) {
     wait 0.05;
+  }
 }
 
 exchange_bored_idle() {
@@ -441,10 +459,12 @@ exchange_barrett_trigger() {
   var_0 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_set("player_grabbing_barrett_start");
 
-  if(!isDefined(level.barrett_intro_with_anim))
+  if(!isDefined(level.barrett_intro_with_anim)) {
     player_attach_to_barret_with_script();
-  else
+  }
+  else {
     player_attach_to_barret_with_anim();
+  }
 
   level.view_org moveto(level.view_org.origin + (0, 0, 260), 0.1);
   level.view_org delete();
@@ -555,10 +575,12 @@ h1_playergrabbarrettlogic() {
     var_2 = angleclamp180(var_2);
     var_3 = angleclamp180(var_3);
 
-    if(var_2 < 12 && var_3 > -85)
+    if(var_2 < 12 && var_3 > -85) {
       level.player setphysicaldepthoffield(2.9, 1000, 3.0, 3.0);
-    else if(var_2 > 14 || var_3 < -87)
+    }
+    else if(var_2 > 14 || var_3 < -87) {
       level.player setphysicaldepthoffield(3.4, 32, 2.5, 2.5);
+    }
 
     wait(var_0);
   }
@@ -584,15 +606,17 @@ sniper_text_countup(var_0, var_1, var_2, var_3, var_4) {
   var_6 = 0;
   var_7 = 0.11;
 
-  if(var_0 > 10)
+  if(var_0 > 10) {
     var_7 = 110.11;
+  }
 
   for(;;) {
     level.player playSound("ui_pulse_text_type");
     var_6 = var_6 + var_7;
 
-    if(var_6 > var_0)
+    if(var_6 > var_0) {
       var_6 = var_0;
+    }
 
     var_5 settext(var_6);
 
@@ -631,10 +655,12 @@ sniper_text_init(var_0, var_1, var_2, var_3) {
   var_5.glowcolor = (0.26, 0.65, 0.32);
   var_5.glowalpha = 0.2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_6 = int(10000 + var_3 * 1000);
-  else
+  }
+  else {
     var_6 = 10000;
+  }
 
   var_5 setpulsefx(30, var_6, 700);
   thread hudelem_destroyer(var_5);
@@ -642,10 +668,12 @@ sniper_text_init(var_0, var_1, var_2, var_3) {
 }
 
 hudelem_destroyer(var_0) {
-  if(getdvar("use_old_sniper_text_style") == "1")
+  if(getdvar("use_old_sniper_text_style") == "1") {
     wait 10;
-  else
+  }
+  else {
     level waittill("destroy_snipe_info_text");
+  }
 
   var_0 destroy();
 }
@@ -755,18 +783,21 @@ stop_loop() {
 exchange_baddie_main_think() {
   self endon("death");
 
-  if(!isDefined(self.drivingvehicle))
+  if(!isDefined(self.drivingvehicle)) {
     self.allowdeath = 1;
+  }
 
   maps\_utility::ent_flag_init("run_to_car");
   thread exchange_guy_dies();
   thread exchange_guy_patrol_path();
 
-  if(isDefined(self.ridingvehicle))
+  if(isDefined(self.ridingvehicle)) {
     exchange_rider_gets_out();
+  }
 
-  if(isDefined(self.script_linkto))
+  if(isDefined(self.script_linkto)) {
     thread exchange_baddie_runs_to_car();
+  }
 
   common_scripts\utility::flag_wait("player_attacks_exchange");
   self notify("bulletwhizby", level.player);
@@ -785,10 +816,12 @@ exchange_baddie_main_think() {
   }
 
   if(!isDefined(self.zak_got_hit)) {
-    if(isDefined(self.main_baddie))
+    if(isDefined(self.main_baddie)) {
       wait(level.exchanger_surprise_time);
-    else
+    }
+    else {
       wait(randomfloatrange(0.05, 0.5));
+    }
 
     if(!isDefined(self.drivingvehicle)) {
       stop_loop();
@@ -830,15 +863,18 @@ exchange_baddie_runs_to_car() {
   exchange_waittill_time_to_go_to_car();
 
   if(common_scripts\utility::flag("player_attacks_exchange")) {
-    if(is_zak() && isDefined(self.zak_got_hit))
+    if(is_zak() && isDefined(self.zak_got_hit)) {
       common_scripts\utility::flag_wait("wounded_zak_runs_for_car");
-    else
+    }
+    else {
       maps\_utility::ent_flag_wait("run_to_car");
+    }
   } else {
     self.disableexits = 1;
 
-    if(is_zak())
+    if(is_zak()) {
       maps\_utility::set_generic_run_anim("patrol_jog");
+    }
     else {
       self.run_overrideanim = maps\_utility::getanim_generic("stealth_walk");
       maps\_utility::set_generic_run_anim("stealth_walk");
@@ -853,8 +889,9 @@ exchange_baddie_runs_to_car() {
 
   var_2 = undefined;
 
-  if(isDefined(self.script_vehicleride))
+  if(isDefined(self.script_vehicleride)) {
     var_2 = maps\_vehicle_aianim::get_my_vehicleride();
+  }
   else {
     var_2 = get_shared_linkto();
     self.script_vehicleride = var_2.script_vehicleride;
@@ -886,8 +923,9 @@ exchange_baddie_runs_to_cover() {
   self endon("death");
   var_0 = getnode(self.script_linkto, "script_noteworthy");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     self setgoalnode(var_0);
+  }
 }
 
 get_shared_linkto() {
@@ -904,8 +942,9 @@ get_shared_linkto() {
     var_5 = strtok(var_4.script_linkto, " ");
 
     for(var_6 = 0; var_6 < var_5.size; var_6++) {
-      if(var_5[var_6] == var_1)
+      if(var_5[var_6] == var_1) {
         return var_4;
+      }
     }
   }
 }
@@ -925,8 +964,9 @@ exchange_guy_patrol_path() {
   self endon("got_in_car");
   self endon("death");
 
-  if(isDefined(self.script_vehicleride))
+  if(isDefined(self.script_vehicleride)) {
     self waittill("jumpedout");
+  }
 
   for(;;) {
     self waittill("goal");
@@ -941,10 +981,12 @@ exchange_guy_patrol_path() {
 
     var_0 = getnode(self.node.target, "targetname");
 
-    if(var_0.radius)
+    if(var_0.radius) {
       self.goalradius = var_0.radius;
-    else
+    }
+    else {
       self.goalradius = 16;
+    }
 
     self setgoalnode(var_0);
   }
@@ -990,8 +1032,9 @@ exchange_uaz_preps_for_escape() {
   } else
     maps\_utility::ent_flag_wait("time_to_go");
 
-  if(self.script_flag == "uaz4")
+  if(self.script_flag == "uaz4") {
     self vehicle_setspeed(25, 10);
+  }
 
   if(isDefined(self.script_vehiclespawngroup)) {
     var_2 = "vehicle_go_" + self.script_vehiclespawngroup;
@@ -1016,8 +1059,9 @@ get_path_from_array(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = getvehiclenode(var_0[var_1], "script_linkname");
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       return var_2;
+    }
   }
 }
 
@@ -1058,14 +1102,17 @@ arm_goes_flying(var_0) {
   var_1.origin = var_0;
   var_1 setModel(maps\_utility::getmodel("zak_left_arm"));
 
-  if(getdvar("ax") == "")
+  if(getdvar("ax") == "") {
     setdvar("ax", "-0.01");
+  }
 
-  if(getdvar("ay") == "")
+  if(getdvar("ay") == "") {
     setdvar("ay", "-0.07");
+  }
 
-  if(getdvar("az") == "")
+  if(getdvar("az") == "") {
     setdvar("az", "0.2");
+  }
 
   var_2 = -0.01;
   var_3 = -0.07;
@@ -1149,8 +1196,9 @@ blood_pool() {
     playFX(common_scripts\utility::getfx("blood_pool"), var_0.origin + (0, 0, 1), (0, 0, 1));
     var_1--;
 
-    if(var_1 <= 0)
+    if(var_1 <= 0) {
       wait 0.3;
+    }
 
     if(!isDefined(var_0.target)) {
       return;
@@ -1171,8 +1219,9 @@ zak_dies() {
   common_scripts\utility::waittill_either("damage", "fake_damage");
   var_1 = "zak_pain";
 
-  if(getdvarint("use_old_zak_death") != 1)
+  if(getdvarint("use_old_zak_death") != 1) {
     var_1 = common_scripts\utility::ter_op(common_scripts\utility::flag("zak_is_facing_player"), "zak_pain", "zak_pain_back");
+  }
 
   playFXOnTag(common_scripts\utility::getfx("blood"), self, "J_Shoulder_LE");
 
@@ -1181,8 +1230,9 @@ zak_dies() {
   }
   maps\_utility::arcademode_kill(self getEye(), "rifle", 2000);
 
-  if(!common_scripts\utility::flag("exchange_heli_alerted"))
+  if(!common_scripts\utility::flag("exchange_heli_alerted")) {
     thread maps\_utility::autosave_now();
+  }
 
   common_scripts\utility::flag_set("exchange_success");
   var_0 unlink();
@@ -1261,8 +1311,9 @@ exchange_zak_and_guards_jab_it_up(var_0, var_1) {
   wait 2;
   var_5 = getent("exchange_org2", "targetname");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 unlink();
+  }
 
   var_0 waittill("exchange");
 }
@@ -1302,10 +1353,12 @@ exchange_dof() {
   for(;;) {
     common_scripts\utility::flag_wait("player_is_on_turret");
 
-    if(getdvarint("use_old_turret_dof") == 1)
+    if(getdvarint("use_old_turret_dof") == 1) {
       exchange_scale_dof_while_on_turret_preh1();
-    else
+    }
+    else {
       exchange_scale_dof_while_on_turret();
+    }
 
     common_scripts\utility::flag_waitopen("player_is_on_turret");
     level.player setdepthoffield(0, 0, 0, 0, 8, 8);
@@ -1370,8 +1423,9 @@ exchange_scale_dof_while_on_turret_preh1() {
     var_16 = getturretfov();
 
     if(var_16 < var_0) {
-      if(var_16 >= var_9)
+      if(var_16 >= var_9) {
         var_16 = var_9;
+      }
 
       var_2 = var_2 - var_7;
       level.blur = level.blur + var_13;
@@ -1381,8 +1435,9 @@ exchange_scale_dof_while_on_turret_preh1() {
         var_2 = var_2 + var_6;
         level.blur = level.blur * 0.9;
 
-        if(level.blur < 0.1)
+        if(level.blur < 0.1) {
           level.blur = 0;
+        }
       }
 
       var_15 = 1;
@@ -1398,26 +1453,32 @@ exchange_scale_dof_while_on_turret_preh1() {
       level.blur = var_11;
     }
 
-    if(level.blur > 12)
+    if(level.blur > 12) {
       level.blur = 12;
+    }
 
-    if(level.blur < 0)
+    if(level.blur < 0) {
       level.blur = 0;
+    }
 
     var_17 = var_2 - var_8;
 
-    if(var_17 < 0)
+    if(var_17 < 0) {
       var_17 = 0;
+    }
 
-    if(var_2 > var_3)
+    if(var_2 > var_3) {
       var_2 = var_3;
-    else if(var_2 < var_4)
+    }
+    else if(var_2 < var_4) {
       var_2 = var_4;
+    }
 
     level.player setdepthoffield(0, 0, var_17, var_2, 8, 8);
 
-    if(getdvarint("r_dof_enable") != 1)
+    if(getdvarint("r_dof_enable") != 1) {
       setblur(level.blur, 0.05);
+    }
 
     var_0 = var_16;
     wait 0.05;
@@ -1425,16 +1486,19 @@ exchange_scale_dof_while_on_turret_preh1() {
 }
 
 add_waiters(var_0, var_1, var_2, var_3, var_4) {
-  if(self.script_flag != var_1)
+  if(self.script_flag != var_1) {
     return var_0;
+  }
 
   var_0[var_0.size] = var_2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_0[var_0.size] = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_0[var_0.size] = var_4;
+  }
 
   return var_0;
 }
@@ -1460,14 +1524,16 @@ exchange_wait_until_other_uazs_go(var_0) {
   }
   var_1 = gettime();
 
-  for(var_2 = 0; var_2 < var_0.size; var_2++)
+  for(var_2 = 0; var_2 < var_0.size; var_2++) {
     common_scripts\utility::flag_wait(var_0[var_2]);
+  }
 
   if(gettime() != var_1) {
     wait 0.4;
 
-    if(self.script_flag == "uaz6")
+    if(self.script_flag == "uaz6") {
       wait 2.2;
+    }
   }
 }
 
@@ -1481,8 +1547,9 @@ exchange_case_velcalc() {
   level endon("player_attacks_exchange");
   self endon("death");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 exchange_brick_drop() {
@@ -1528,8 +1595,9 @@ wait_until_seaknight_gets_close(var_0) {
 should_break_prone_hint() {
   var_0 = getent("player_snipe_spot", "targetname");
 
-  if(distance(self.origin, var_0.origin) >= var_0.radius)
+  if(distance(self.origin, var_0.origin) >= var_0.radius) {
     return 1;
+  }
 
   return self getstance() == "prone";
 }
@@ -1537,11 +1605,13 @@ should_break_prone_hint() {
 should_break_claymores() {
   var_0 = maps\_utility::getplayerclaymores();
 
-  if(var_0 <= 0)
+  if(var_0 <= 0) {
     return 1;
+  }
 
-  if(common_scripts\utility::flag("beacon_placed"))
+  if(common_scripts\utility::flag("beacon_placed")) {
     return 1;
+  }
 
   return self getcurrentweapon() == "claymore";
 }
@@ -1549,11 +1619,13 @@ should_break_claymores() {
 should_break_c4() {
   var_0 = getplayerc4();
 
-  if(var_0 <= 0)
+  if(var_0 <= 0) {
     return 1;
+  }
 
-  if(common_scripts\utility::flag("beacon_placed"))
+  if(common_scripts\utility::flag("beacon_placed")) {
     return 1;
+  }
 
   return self getcurrentweapon() == "c4";
 }
@@ -1561,11 +1633,13 @@ should_break_c4() {
 should_break_c4_throw() {
   var_0 = getplayerc4();
 
-  if(level.new_c4count > var_0)
+  if(level.new_c4count > var_0) {
     return 1;
+  }
 
-  if(common_scripts\utility::flag("beacon_placed"))
+  if(common_scripts\utility::flag("beacon_placed")) {
     return 1;
+  }
 
   return self getcurrentweapon() != "c4";
 }
@@ -1573,8 +1647,9 @@ should_break_c4_throw() {
 clear_path_speed(var_0) {
   var_1 = undefined;
 
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     var_1 = getvehiclenode(self.target, "targetname");
+  }
   else {
     var_2 = strtok(self.script_linkto, " ");
     var_1 = get_path_from_array(var_2);
@@ -1582,8 +1657,9 @@ clear_path_speed(var_0) {
 
   for(;;) {
     if(isDefined(var_1.speed)) {
-      if(var_1.speed < var_0)
+      if(var_1.speed < var_0) {
         var_1.speed = var_0;
+      }
     }
 
     if(!isDefined(var_1.target)) {
@@ -1648,21 +1724,25 @@ exchange_flag() {
   for(;;) {
     var_4 = level.wind_vel / 100;
 
-    if(var_4 < 0)
+    if(var_4 < 0) {
       var_4 = 0;
-    else if(var_4 > 0.99)
+    }
+    else if(var_4 > 0.99) {
       var_4 = 0.99;
+    }
 
     if(var_2 < var_4) {
       var_2 = var_2 + var_3;
 
-      if(var_2 > var_4)
+      if(var_2 > var_4) {
         var_2 = var_4;
+      }
     } else {
       var_2 = var_2 - var_3;
 
-      if(var_2 < var_4)
+      if(var_2 < var_4) {
         var_2 = var_4;
+      }
     }
 
     var_5 = randomfloatrange(0.1, 1);
@@ -1931,13 +2011,15 @@ exchange_wind_flunctuates() {
     if(level.wind_vel < var_4) {
       level.wind_vel = level.wind_vel + var_2;
 
-      if(level.wind_vel > var_4)
+      if(level.wind_vel > var_4) {
         level.wind_vel = var_4;
+      }
     } else if(level.wind_vel > var_4) {
       level.wind_vel = level.wind_vel - var_2;
 
-      if(level.wind_vel < var_4)
+      if(level.wind_vel < var_4) {
         level.wind_vel = var_4;
+      }
     }
 
     var_3--;
@@ -1947,10 +2029,12 @@ exchange_wind_flunctuates() {
       var_5 = var_0[level.wind_setting][level.gameskill];
       var_6 = var_1[level.wind_setting][level.gameskill];
 
-      if(var_6 > var_5)
+      if(var_6 > var_5) {
         var_4 = randomfloatrange(var_5, var_6);
-      else
+      }
+      else {
         var_4 = var_6;
+      }
     }
 
     wait 0.05;
@@ -2016,10 +2100,12 @@ exchange_mission_failure() {
   if(common_scripts\utility::flag("exchange_success")) {
     return;
   }
-  if(common_scripts\utility::flag("makarov_killed"))
+  if(common_scripts\utility::flag("makarov_killed")) {
     exchange_mission_failure_paradox_deadquote();
-  else
+  }
+  else {
     setdvar("ui_deadquote", &"SNIPERESCAPE_ZAKHAEV_ESCAPED");
+  }
 
   maps\_utility::missionfailedwrapper();
 }
@@ -2035,8 +2121,9 @@ exchange_mission_failure_paradox_deadquote() {
   setdvar("ui_deadquote", level.paradox_quotes[var_0]);
   var_0++;
 
-  if(var_0 >= level.paradox_quotes.size)
+  if(var_0 >= level.paradox_quotes.size) {
     var_0 = 0;
+  }
 
   setdvar("paradox_fail_quote", var_0);
 }
@@ -2049,8 +2136,9 @@ exchange_vehicle_clip() {
 wait_for_hint_destroy() {}
 
 should_break_zoom_hint() {
-  if(!common_scripts\utility::flag("player_is_on_turret"))
+  if(!common_scripts\utility::flag("player_is_on_turret")) {
     return 1;
+  }
 
   return common_scripts\utility::flag("player_used_zoom");
 }
@@ -2165,11 +2253,13 @@ armtest() {
 }
 
 price_thinks_you_are_insane(var_0) {
-  if(!common_scripts\utility::flag("zak_spawns"))
+  if(!common_scripts\utility::flag("zak_spawns")) {
     return 1;
+  }
 
-  if(level.wind_setting == "start")
+  if(level.wind_setting == "start") {
     return 1;
+  }
 
   return isalive(level.zakhaev) && distance(level.zakhaev.origin, var_0) > 600;
 }
@@ -2185,8 +2275,9 @@ getplayerc4() {
 
   var_4 = 0;
 
-  if(isDefined(var_1["c4"]) && var_1["c4"] > 0)
+  if(isDefined(var_1["c4"]) && var_1["c4"] > 0) {
     var_4 = var_1["c4"];
+  }
 
   return var_4;
 }
@@ -2218,8 +2309,9 @@ flashback_guy_setup() {
 
   thread flashback_guy_death(self.name);
 
-  if(getdvar("enable_flashback_guy_nameplate") == "1")
+  if(getdvar("enable_flashback_guy_nameplate") == "1") {
     thread maps\_hud_util::display_custom_nameplate(::can_display_flashback_guy_name);
+  }
 }
 
 flashback_face_anims() {
@@ -2227,8 +2319,9 @@ flashback_face_anims() {
   level endon("player_attacks_exchange");
   var_0 = level.scr_anim["makarov"]["talking"];
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self setanim(var_0);
+  }
 
   for(;;) {
     wait(getanimlength(var_0));
@@ -2253,19 +2346,23 @@ guy_talk_check(var_0, var_1) {
 guy_talk(var_0, var_1) {
   var_2 = maps\_vehicle_aianim::anim_pos(self, var_1);
 
-  if(isDefined(var_2.talk_transition))
+  if(isDefined(var_2.talk_transition)) {
     do_flashback_anim(var_0, var_1, var_2.talk, var_2.sittag, 1, 0, var_2.talk_transition);
-  else
+  }
+  else {
     do_flashback_anim(var_0, var_1, var_2.talk, var_2.sittag, 1, 0);
+  }
 }
 
 guy_panic(var_0, var_1) {
   var_2 = maps\_vehicle_aianim::anim_pos(self, var_1);
 
-  if(var_1 == 3)
+  if(var_1 == 3) {
     do_flashback_anim(var_0, var_1, var_2.panic, var_2.sittag, 0, 1);
-  else
+  }
+  else {
     do_flashback_anim(var_0, var_1, var_2.panic, var_2.sittag, 0, 0);
+  }
 }
 
 guy_panic_check(var_0, var_1) {
@@ -2278,13 +2375,15 @@ do_flashback_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_0 endon("death");
 
   if(!isDefined(var_5) || var_5 == 0) {
-    if(isDefined(var_6))
+    if(isDefined(var_6)) {
       maps\_vehicle_aianim::animontag(var_0, var_3, var_6);
+    }
 
     maps\_vehicle_aianim::animontag(var_0, var_3, var_2);
 
-    while(isDefined(var_4) && var_4)
+    while(isDefined(var_4) && var_4) {
       maps\_vehicle_aianim::animontag(var_0, var_3, var_2);
+    }
   } else {
     var_7 = self gettagorigin(var_3);
     var_8 = self gettagangles(var_3);
@@ -2336,15 +2435,17 @@ flashback_guy_death(var_0) {
 can_display_flashback_guy_name() {
   var_0 = 5;
 
-  if(getturretfov() > var_0)
+  if(getturretfov() > var_0) {
     return 0;
+  }
 
   var_1 = 0.075;
   var_2 = (0, 0, -8);
   var_3 = common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), self gettagorigin("tag_eye") + var_2, cos(var_1));
 
-  if(!var_3)
+  if(!var_3) {
     return 0;
+  }
 
   var_4 = getent("bullet_block", "targetname");
   var_5 = maps\_vehicle::get_vehicle_from_targetname("view_block_heli");
@@ -2353,10 +2454,12 @@ can_display_flashback_guy_name() {
   var_8 = bulletTrace(level.player getEye(), var_7, 1, var_4);
 
   if(isDefined(var_8["entity"]) && var_8["entity"] != self) {
-    if(isDefined(var_5) && var_8["entity"] == var_5)
+    if(isDefined(var_5) && var_8["entity"] == var_5) {
       var_6 = 1;
-    else if(isDefined(var_8["entity"].team) && var_8["entity"].team == "axis")
+    }
+    else if(isDefined(var_8["entity"].team) && var_8["entity"].team == "axis") {
       var_6 = 1;
+    }
   }
 
   return !var_6;

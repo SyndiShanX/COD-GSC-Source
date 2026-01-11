@@ -126,8 +126,9 @@ start_common() {
   level._allies[1] forceteleport(var_0.origin, var_0.angles);
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_grenadeammo, 0);
 
-  foreach(var_2 in level._allies)
+  foreach(var_2 in level._allies) {
   var_2.old_react_dist = var_2.newenemyreactiondistsq;
+  }
 
   setup_spawners();
   wait 0.05;
@@ -147,8 +148,9 @@ main_catwalks() {
   level waittill("notify_ascend_rubberband_alpha_stop");
 
   foreach(var_1 in level._allies) {
-    if(isDefined(var_1.old_moveplaybackrate))
+    if(isDefined(var_1.old_moveplaybackrate)) {
       var_1 thread maps\_utility::set_moveplaybackrate(var_1.old_moveplaybackrate);
+    }
   }
 
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_grenadeammo, 0);
@@ -235,16 +237,19 @@ cw_low() {
 cw_low_cleanup() {
   var_0 = maps\_utility::get_ai_group_ai("bc_opfor");
 
-  if(var_0.size > 0)
+  if(var_0.size > 0) {
     common_scripts\utility::array_thread(var_0, maps\_utility::set_ignoreall, 1);
-  else
+  }
+  else {
     return;
+  }
 
   wait 3;
   var_0 = maps\_utility::array_removedead(var_0);
 
-  if(var_0.size > 0)
+  if(var_0.size > 0) {
     common_scripts\utility::array_thread(var_0, maps\_utility::set_ignoreall, 0);
+  }
 }
 
 cw_mid() {
@@ -254,8 +259,9 @@ cw_mid() {
   wait 0.05;
   maps\black_ice_util::delay_retreat("cw_opfor", 90, 2, "flag_high_retreat", ["cw_color_exit_door", "cw_color_to_high"], 1);
 
-  if(!common_scripts\utility::flag("flag_mid_retreat"))
+  if(!common_scripts\utility::flag("flag_mid_retreat")) {
     common_scripts\utility::flag_set("flag_mid_retreat");
+  }
 
   thread maps\_spawner::killspawner(129);
   thread maps\_utility::kill_deathflag("flag_opfor_high_clear", 1.0);
@@ -278,15 +284,17 @@ cw_mid_fic() {
   level._allies[0] maps\_utility::smart_dialogue("blackice_bkr_cutthroughmetal");
   wait 10;
 
-  if(!common_scripts\utility::flag("flag_opfor_high_clear"))
+  if(!common_scripts\utility::flag("flag_opfor_high_clear")) {
     level._allies[0] maps\_utility::smart_dialogue("blackice_bkr_coversuseless");
+  }
 }
 
 catwalks_end_fic() {
   level notify("stop_mid_fic");
 
-  if(!isDefined(level.tele_catwalks_end))
+  if(!isDefined(level.tele_catwalks_end)) {
     level._allies[0] maps\_utility::smart_dialogue("blackice_bkr_fallingbackmoveup");
+  }
 
   thread catwalks_end_cleanup_fic();
   common_scripts\utility::flag_wait_all("flag_tape_breach_ally1", "flag_catwalks_end");
@@ -303,8 +311,9 @@ catwalks_end_cleanup_fic() {
   common_scripts\utility::flag_wait("flag_high_dead");
   wait 0.25;
 
-  if(!common_scripts\utility::flag("flag_catwalks_end"))
+  if(!common_scripts\utility::flag("flag_catwalks_end")) {
     level._allies[1] maps\_utility::smart_dialogue("black_ice_hsh_wereclear");
+  }
 
   level._allies[0] maps\_utility::smart_dialogue("black_ice_mrk_movintodeckto");
 }
@@ -341,8 +350,9 @@ cw_barracks_setup() {
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_ignoreall, 1);
 
   foreach(var_1 in level._allies) {
-    if(isDefined(var_1.old_moveplaybackrate))
+    if(isDefined(var_1.old_moveplaybackrate)) {
       var_1 maps\_utility::set_moveplaybackrate(var_1.old_moveplaybackrate);
+    }
 
     var_1.old_react_dist = var_1.newenemyreactiondistsq;
     var_1.newenemyreactiondistsq = 0;
@@ -360,8 +370,9 @@ cw_barracks_slow(var_0, var_1) {
   var_3 = getnode("cwc_node_door_ally2", "targetname");
 
   foreach(var_5 in level._allies) {
-    if(var_5.origin != var_5.goalpos)
+    if(var_5.origin != var_5.goalpos) {
       wait 0.05;
+    }
   }
 
   thread maps\black_ice_audio::hall_search_music();
@@ -378,10 +389,12 @@ cw_barracks_fast(var_0) {
   if(!common_scripts\utility::flag("flag_barracks_go_fast")) {
     return;
   }
-  if(var_0 getanimtime(var_0 maps\_utility::getanim("cw_hallsweep")) > 0.16)
+  if(var_0 getanimtime(var_0 maps\_utility::getanim("cw_hallsweep")) > 0.16) {
     var_1 = [level._allies[0], level._allies[1], level.op_barracks];
-  else
+  }
+  else {
     var_1 = [level._allies[0], level._allies[1], level.op_barracks, var_0];
+  }
 
   maps\_utility::array_notify(var_1, "anim_reach_play");
   maps\_utility::array_notify(var_1, "new_anim_reach");
@@ -422,8 +435,9 @@ cw_barracks_fast_fic() {
   maps\_anim::removenotetrack("ally2", "fuentes_va_clear_1", "cw_hallsweep", "dialog");
   common_scripts\utility::flag_wait_any("flag_barracks_opfor_attack", "flag_barracks_cleared");
 
-  if(!common_scripts\utility::flag("flag_barracks_cleared"))
+  if(!common_scripts\utility::flag("flag_barracks_cleared")) {
     level._allies[1] maps\_utility::smart_dialogue("black_ice_fnt_tangowatchout");
+  }
 
   common_scripts\utility::flag_wait("flag_barracks_cleared");
   wait 1.0;
@@ -436,8 +450,9 @@ cw_common() {
   thread cw_common_fic();
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_ignoreall, 0);
 
-  foreach(var_1 in level._allies)
+  foreach(var_1 in level._allies) {
   var_1.newenemyreactiondistsq = var_1.old_react_dist;
+  }
 
   var_3 = getent("cw_vig_common_room_breach", "targetname");
   var_3 thread maps\_anim::anim_single_solo(level._allies[0], "rec_breach_check");
@@ -554,22 +569,27 @@ goto_door_breach_catchup(var_0, var_1) {
   self endon("death");
   level endon("cw_tape_breach_start");
 
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_0 = common_scripts\utility::getstruct(var_0, "targetname");
-
-  if(isDefined(var_1) && isstring(var_1))
-    var_1 = getnode(var_1, "targetname");
-
-  if(distancesquared(level.player.origin, var_0.origin) + 90000 < distancesquared(level.player.origin, self.origin)) {
-    while(maps\_utility::player_can_see_ai(self))
-      wait 0.1;
-
-    if(distancesquared(level.player.origin, var_0.origin) + 90000 < distancesquared(level.player.origin, self.origin))
-      self teleport(var_0.origin, var_0.angles);
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1) && isstring(var_1)) {
+    var_1 = getnode(var_1, "targetname");
+  }
+
+  if(distancesquared(level.player.origin, var_0.origin) + 90000 < distancesquared(level.player.origin, self.origin)) {
+    while(maps\_utility::player_can_see_ai(self)) {
+      wait 0.1;
+    }
+
+    if(distancesquared(level.player.origin, var_0.origin) + 90000 < distancesquared(level.player.origin, self.origin)) {
+      self teleport(var_0.origin, var_0.angles);
+    }
+  }
+
+  if(isDefined(var_1)) {
     thread maps\_utility::follow_path(var_1);
+  }
 }
 
 high_catwalk_kill() {
@@ -578,8 +598,9 @@ high_catwalk_kill() {
   var_1 = maps\_utility::spawn_targetname("cw_opfor_catwalk_kill");
   var_2 = common_scripts\utility::getclosest(var_0.origin, level._allies, 256);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return;
+  }
   else if(!isDefined(var_2) || common_scripts\utility::flag("flag_no_catwalk_kill")) {
     var_1 delete();
     return;
@@ -593,8 +614,9 @@ high_catwalk_kill() {
   var_2 thread maps\black_ice_audio::sfx_catwalk_guy_over_railing();
   var_0 maps\_anim::anim_single(var_3, "catwalk_kill");
 
-  if(!common_scripts\utility::flag("flag_catwalks_end"))
+  if(!common_scripts\utility::flag("flag_catwalks_end")) {
     var_2 maps\_utility::enable_ai_color();
+  }
 
   var_1 kill();
 }
@@ -620,16 +642,18 @@ cw_tape_breach() {
   var_6 = getent("cw_clip_tape_breach", "targetname");
 
   if(level.player istouching(var_5)) {
-    while(level.player istouching(var_5))
+    while(level.player istouching(var_5)) {
       wait 0.05;
+    }
 
     var_6 movey(-30, 0.05);
   } else
     var_6 movey(-30, 0.05);
 
   foreach(var_8 in level._allies) {
-    if(var_8.origin != var_8.goalpos)
+    if(var_8.origin != var_8.goalpos) {
       wait 0.05;
+    }
   }
 
   level notify("cw_tape_breach_start");
@@ -651,25 +675,30 @@ cw_tape_breach() {
 }
 
 breach_wait_move(var_0, var_1, var_2, var_3, var_4) {
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     level endon(var_4);
+  }
 
-  if(isstring(var_0))
+  if(isstring(var_0)) {
     var_0 = getent(var_0, "targetname");
+  }
 
-  if(isstring(var_1))
+  if(isstring(var_1)) {
     var_1 = getnode(var_1, "targetname");
+  }
 
-  if(isstring(var_2))
+  if(isstring(var_2)) {
     var_2 = getnode(var_2, "targetname");
+  }
 
   while(!common_scripts\utility::flag(var_1.script_flag_set)) {
     if(level.player istouching(var_0)) {
       maps\_utility::follow_path(var_2);
       thread breach_wait_nag_proc(var_0, var_3);
 
-      while(level.player istouching(var_0))
+      while(level.player istouching(var_0)) {
         wait 0.1;
+      }
 
       var_0 notify("breach_end_detour");
       self setlookatentity();
@@ -683,10 +712,12 @@ breach_wait_move(var_0, var_1, var_2, var_3, var_4) {
 breach_wait_nag_proc(var_0, var_1) {
   var_0 endon("breach_end_detour");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = ["blackice_bkr_muchtime", "blackice_bkr_move"];
-  else if(!isarray(var_1))
+  }
+  else if(!isarray(var_1)) {
     var_1 = [var_1];
+  }
 
   wait 1.5;
 
@@ -788,10 +819,12 @@ cw_common_breach_trig_proc() {
   var_0 = getent("cw_common_breach_blast_source", "targetname");
 
   for(;;) {
-    if(!isDefined(self.trigger_off) && (level.player isthrowinggrenade() || !level.player maps\_utility::player_looking_at(var_0.origin, 0.9, 1)))
+    if(!isDefined(self.trigger_off) && (level.player isthrowinggrenade() || !level.player maps\_utility::player_looking_at(var_0.origin, 0.9, 1))) {
       common_scripts\utility::trigger_off();
-    else if(isDefined(self.trigger_off) && !level.player isthrowinggrenade() && level.player maps\_utility::player_looking_at(var_0.origin, 0.9, 1))
+    }
+    else if(isDefined(self.trigger_off) && !level.player isthrowinggrenade() && level.player maps\_utility::player_looking_at(var_0.origin, 0.9, 1)) {
       common_scripts\utility::trigger_on();
+    }
 
     wait 0.05;
   }
@@ -834,8 +867,9 @@ cw_breach_bullets() {
     var_1 = randomint(var_0.size);
     var_3 = randomint(var_2.size);
 
-    if(common_scripts\utility::flag("cw_gps_common_door") && randomint(5) == 0)
+    if(common_scripts\utility::flag("cw_gps_common_door") && randomint(5) == 0) {
       magicbullet(var_4[randomint(var_4.size)], var_0[var_1].origin, level.player getEye());
+    }
     else {
       if(!bullettracepassed(var_0[var_1].origin, var_2[var_3].origin, 1, undefined)) {
         continue;
@@ -867,8 +901,9 @@ cw_common_perfect_breach_proc() {
   }
   common_scripts\utility::waittill_any("damage", "common_encounter_done");
 
-  if(common_scripts\utility::flag("flag_common_cleared"))
+  if(common_scripts\utility::flag("flag_common_cleared")) {
     maps\_utility::player_giveachievement_wrapper("LEVEL_11B");
+  }
 }
 
 common_gps_autokill() {
@@ -881,12 +916,15 @@ common_gps_autokill() {
 
   for(;;) {
     while(var_0 < 30) {
-      if(self istouching(var_1))
+      if(self istouching(var_1)) {
         var_0 = 0;
-      else if(self istouching(var_3))
+      }
+      else if(self istouching(var_3)) {
         var_0 = 30;
-      else if(!self istouching(var_2))
+      }
+      else if(!self istouching(var_2)) {
         var_0 = var_0 + 0.05;
+      }
 
       wait 0.05;
     }
@@ -933,13 +971,15 @@ ascend_ignoreme_loop() {
   for(;;) {
     maps\_utility::set_ignoreme(0);
 
-    while(self.health == self.maxhealth)
+    while(self.health == self.maxhealth) {
       wait 0.05;
+    }
 
     maps\_utility::set_ignoreme(1);
 
-    while(self.health < self.maxhealth)
+    while(self.health < self.maxhealth) {
       wait 0.1;
+    }
   }
 }
 
@@ -961,8 +1001,9 @@ opfor_catwalk_low() {
   self endon("death");
   common_scripts\utility::flag_wait("flag_low_retreat");
 
-  if(!common_scripts\utility::flag("flag_low_runaway"))
+  if(!common_scripts\utility::flag("flag_low_runaway")) {
     thread maps\_utility::follow_path(getnode("cw_node_low_cover_retreat", "targetname"));
+  }
 
   common_scripts\utility::flag_wait("flag_low_runaway");
   maps\_utility::set_ignoresuppression(1);
@@ -1069,8 +1110,9 @@ random_flash() {
 catwalk_godrays() {
   var_0 = getent("origin_flarestack_fx", "targetname");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     maps\black_ice_util::god_rays_from_world_location(var_0.origin, "flag_cw_bravo_breach_1", "flag_catwalks_end", undefined, undefined);
+  }
 }
 
 cw_barracks_fast_trig_proc(var_0) {
@@ -1108,24 +1150,28 @@ delete_path_clip() {
 }
 
 anim_reach_play(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isarray(var_0))
+  if(!isarray(var_0)) {
     var_0 = [var_0];
+  }
 
   var_0[0] notify("anim_reach_play");
   var_0[0] endon("anim_reach_play");
 
-  if(isDefined(var_5) && !isDefined(var_3))
+  if(isDefined(var_5) && !isDefined(var_3)) {
     var_3 = 0.1;
+  }
 
   maps\_utility::anim_stopanimscripted();
 
-  if(!isDefined(var_6) || !var_6)
+  if(!isDefined(var_6) || !var_6) {
     maps\_anim::anim_reach(var_0, var_1, var_2, var_4);
+  }
 
   maps\_anim::anim_single(var_0, var_1, var_2, var_3, var_4);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_0[0] maps\_utility::follow_path(var_5);
+  }
 }
 
 trig_enable_cqb() {

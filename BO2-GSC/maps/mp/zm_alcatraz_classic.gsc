@@ -137,8 +137,9 @@ afterlife_tutorial_attack_watch() {
   self endon("stop_tutorial");
   self endon("disconnect");
 
-  while(isDefined(self.afterlife) && self.afterlife && !self isfiring())
+  while(isDefined(self.afterlife) && self.afterlife && !self isfiring()) {
     wait 0.05;
+  }
 
   wait 0.2;
   self notify("stop_tutorial");
@@ -148,8 +149,9 @@ afterlife_tutorial_jump_watch() {
   self endon("stop_tutorial");
   self endon("disconnect");
 
-  while(isDefined(self.afterlife) && self.afterlife && !self is_jumping())
+  while(isDefined(self.afterlife) && self.afterlife && !self is_jumping()) {
     wait 0.05;
+  }
 
   wait 0.2;
   self notify("stop_tutorial");
@@ -161,17 +163,21 @@ afterlife_powerups() {
   spawn_infinite_powerup_drop(s_powerup_loc.origin, "double_points");
   s_powerup_loc = getstruct("powerup_cell_1", "targetname");
 
-  if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game)
+  if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
     spawn_infinite_powerup_drop(s_powerup_loc.origin, "double_points");
-  else
+  }
+  else {
     spawn_infinite_powerup_drop(s_powerup_loc.origin, "insta_kill");
+  }
 
   s_powerup_loc = getstruct("powerup_cell_2", "targetname");
 
-  if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game)
+  if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
     spawn_infinite_powerup_drop(s_powerup_loc.origin, "double_points");
-  else
+  }
+  else {
     spawn_infinite_powerup_drop(s_powerup_loc.origin, "full_ammo");
+  }
 }
 
 cell_grab_check(player) {
@@ -180,8 +186,9 @@ cell_grab_check(player) {
   if(self.origin == cell_powerup.origin + vectorscale((0, 0, 1), 40.0)) {
     m_door = getent("powerup_door", "targetname");
 
-    if(!isDefined(m_door.opened))
+    if(!isDefined(m_door.opened)) {
       return false;
+    }
   }
 
   cell_powerup = getstruct("powerup_cell_1", "targetname");
@@ -189,8 +196,9 @@ cell_grab_check(player) {
   if(self.origin == cell_powerup.origin + vectorscale((0, 0, 1), 40.0)) {
     m_door = getent("powerup_cell_door_1", "targetname");
 
-    if(!isDefined(m_door.opened))
+    if(!isDefined(m_door.opened)) {
       return false;
+    }
   }
 
   cell_powerup = getstruct("powerup_cell_2", "targetname");
@@ -198,8 +206,9 @@ cell_grab_check(player) {
   if(self.origin == cell_powerup.origin + vectorscale((0, 0, 1), 40.0)) {
     m_door = getent("powerup_cell_door_2", "targetname");
 
-    if(!isDefined(m_door.opened))
+    if(!isDefined(m_door.opened)) {
       return false;
+    }
   }
 
   return true;
@@ -241,10 +250,12 @@ afterlife_cell_door_2() {
 spawn_infinite_powerup_drop(v_origin, str_type) {
   level._powerup_timeout_override = ::powerup_infinite_time;
 
-  if(isDefined(str_type))
+  if(isDefined(str_type)) {
     intro_powerup = maps\mp\zombies\_zm_powerups::specific_powerup_drop(str_type, v_origin);
-  else
+  }
+  else {
     intro_powerup = maps\mp\zombies\_zm_powerups::powerup_drop(v_origin);
+  }
 
   level._powerup_timeout_override = undefined;
 }
@@ -275,6 +286,7 @@ player_quest_vfx() {
   flag_wait("initial_blackscreen_passed");
   wait 1;
 
-  if(!flag("generator_challenge_completed"))
+  if(!flag("generator_challenge_completed")) {
     exploder(2000);
+  }
 }

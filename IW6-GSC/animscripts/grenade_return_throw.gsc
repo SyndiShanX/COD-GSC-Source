@@ -13,20 +13,24 @@ main() {
   var_0 = undefined;
   var_1 = 1000;
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     var_1 = distance(self.origin, self.enemy.origin);
+  }
 
   var_2 = [];
 
   if(var_1 < 600 && islowthrowsafe()) {
-    if(var_1 < 300)
+    if(var_1 < 300) {
       var_2 = animscripts\utility::lookupanim("grenade", "return_throw_short");
-    else
+    }
+    else {
       var_2 = animscripts\utility::lookupanim("grenade", "return_throw_long");
+    }
   }
 
-  if(var_2.size == 0)
+  if(var_2.size == 0) {
     var_2 = animscripts\utility::lookupanim("grenade", "return_throw_default");
+  }
 
   var_0 = var_2[randomint(var_2.size)];
   self setflaggedanimknoballrestart("throwanim", var_0, % body, 1, 0.3);
@@ -47,8 +51,9 @@ main() {
     animscripts\battlechatter_ai::evaluateattackevent("grenade");
   }
 
-  if(isDefined(self.grenade))
+  if(isDefined(self.grenade)) {
     self throwgrenade();
+  }
 
   wait 1;
 

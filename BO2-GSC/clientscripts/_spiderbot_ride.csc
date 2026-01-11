@@ -20,8 +20,9 @@ drive_spiderbot(localclientnum) {
     enable_filter_karma_spiderbot(player, 0);
     setsaveddvar("r_stereo3DEyeSeparationScaler", 0.01);
 
-    if(isDefined(level._audio_spiderbot_override))
+    if(isDefined(level._audio_spiderbot_override)) {
       self thread[[level._audio_spiderbot_override]](player);
+    }
 
     self waittill("exit_vehicle");
     disable_filter_karma_spiderbot(player, 0);

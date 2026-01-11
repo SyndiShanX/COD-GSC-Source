@@ -99,8 +99,9 @@ exchange_barrett_trigger() {
     player_org = level.player.origin + (0, 0, 60);
 
     for(;;) {
-      if(!isDefined(turret getturretowner()))
+      if(!isDefined(turret getturretowner())) {
         break;
+      }
       wait(0.05);
     }
     //flag_wait( "player_gets_off_turret" );
@@ -159,8 +160,9 @@ exchange_trace_converter() {
 }
 
 exchange_player_fires() {
-  if(gettime() < level.player_can_fire_turret_time)
+  if(gettime() < level.player_can_fire_turret_time) {
     return;
+  }
 
   //	min_zoom = .5;// was 1.5
   //	max_zoom = 20;
@@ -401,8 +403,9 @@ exchange_player_fires() {
 should_break_zoom_hint() {
   assert(isplayer(self));
 
-  if(!flag("player_is_on_turret"))
+  if(!flag("player_is_on_turret")) {
     return true;
+  }
 
   return flag("player_used_zoom");
 }
@@ -414,8 +417,9 @@ player_learns_to_zoom() {
   while(true) {
     wait(0.05);
     movement = level.player GetNormalizedMovement(); //needs to move stick forward to learn
-    if(movement[0] > 0.2)
+    if(movement[0] > 0.2) {
       break;
+    }
     //iprintlnbold( movement[ 0 ] + " : " + movement[ 1 ] );
   }
   wait(6);

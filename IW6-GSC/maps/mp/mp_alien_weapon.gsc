@@ -47,8 +47,9 @@ special_gun_watcher() {
     if(weapname == WEAPON_NAME) {
       clipCount = self GetWeaponAmmoClip(WEAPON_NAME);
       {
-        if(clipCount == 0)
+        if(clipCount == 0) {
           self thread remove_alien_weapon(projectile);
+        }
       }
 
       projectile.health = 9999999;
@@ -72,8 +73,9 @@ special_gun_detonate_hint_watcher() {
   while(!isDefined(self.no_more_detonate_hint)) {
     self waittill("grenade_fire", projectile, weapname);
     if(weapname == WEAPON_NAME) {
-      if(!isDefined(self.projectile_time_out_num))
+      if(!isDefined(self.projectile_time_out_num)) {
         self.projectile_time_out_num = 1;
+      }
       else {
         if(self.projectile_time_out_num > projectile_time_out_max) {
           projectile_time_out_max = 3;
@@ -247,11 +249,13 @@ cloud_do_damage(interval_damage, attacker, duration, damage_trigger, interval_ti
   self notify("stasis_cloud_burning");
   self endon("stasis_cloud_burning");
   self endon("death");
-  if(isDefined(attacker))
+  if(isDefined(attacker)) {
     attacker endon("disconnect");
+  }
 
-  if(!isDefined(duration))
+  if(!isDefined(duration)) {
     duration = 6;
+  }
 
   elapsed_time = 0;
   while(elapsed_time < duration) {
@@ -263,8 +267,9 @@ cloud_do_damage(interval_damage, attacker, duration, damage_trigger, interval_ti
           self maps\mp\gametypes\_damage::finishPlayerDamageWrapper(damage_trigger, attacker, interval_damage, 0, "MOD_PROJECTILE_SPLASH", weapname, self.origin, (0, 0, 1), "none", 0, 0);
       }
     } else
-    if(self == attacker && isDefined(damage_trigger))
+    if(self == attacker && isDefined(damage_trigger)) {
       damage_trigger RadiusDamage(self.origin, 10, interval_damage, interval_damage, attacker, "MOD_PROJECTILE_SPLASH", weapname);
+    }
 
     elapsed_time += interval_time;
     wait interval_time;
@@ -281,8 +286,9 @@ give_alien_weapon(deployableBoxWeapon) {
   }
 
   if(!self HasWeapon(WEAPON_NAME)) {
-    if(!isDefined(deployableBoxWeapon) || !deployableBoxWeapon)
+    if(!isDefined(deployableBoxWeapon) || !deployableBoxWeapon) {
       level.remaining_alien_weapons--;
+    }
 
     self thread special_gun_watcher();
     self GiveWeapon(WEAPON_NAME);
@@ -305,10 +311,12 @@ manage_alien_weapon_inventory() {
   self endon("disconnect");
   self endon("alien_weapon_removed");
   while(1) {
-    if(self GetCurrentWeapon() == WEAPON_NAME)
+    if(self GetCurrentWeapon() == WEAPON_NAME) {
       self DisableWeaponPickup();
-    else
+    }
+    else {
       self EnableWeaponPickup();
+    }
     wait .1;
   }
 }

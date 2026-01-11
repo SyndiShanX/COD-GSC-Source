@@ -7,8 +7,9 @@
 #include common_scripts\utility;
 
 build_bomb_explosions(type, quakepower, quaketime, quakeradius, range, min_damage, max_damage) {
-  if(!isDefined(level.plane_bomb_explosion))
+  if(!isDefined(level.plane_bomb_explosion)) {
     level.plane_bomb_explosion = [];
+  }
 
   assert(isDefined(quakepower), "_plane_weapons::build_bomb_explosions(): no quakepower specified!");
   assert(isDefined(quaketime), "_plane_weapons::build_bomb_explosions(): no quaketime specified!");
@@ -32,25 +33,30 @@ build_bombs(type, bombmodel, bombfx, bomb_sound) {
   assert(isDefined(bombfx), "_plane_weapons::build_bombs(): no bomb explosion FX specified!");
   assert(isDefined(bomb_sound), "_plane_weapons::build_bombs(): no bomb explosion sound specified!");
 
-  if(!isDefined(level.plane_bomb_model))
+  if(!isDefined(level.plane_bomb_model)) {
     level.plane_bomb_model = [];
+  }
 
-  if(!isDefined(level.plane_bomb_model[type]))
+  if(!isDefined(level.plane_bomb_model[type])) {
     level.plane_bomb_model[type] = bombmodel;
+  }
 
-  if(!isDefined(level.plane_bomb_fx))
+  if(!isDefined(level.plane_bomb_fx)) {
     level.plane_bomb_fx = [];
+  }
 
   if(!isDefined(level.plane_bomb_fx[type])) {
     fx = loadfx(bombfx);
     level.plane_bomb_fx[type] = fx;
   }
 
-  if(!isDefined(level.plane_bomb_sound))
+  if(!isDefined(level.plane_bomb_sound)) {
     level.plane_bomb_sound = [];
+  }
 
-  if(!isDefined(level.plane_bomb_sound[type]))
+  if(!isDefined(level.plane_bomb_sound[type])) {
     level.plane_bomb_sound[type] = bomb_sound;
+  }
 }
 
 bomb_init(bomb_count) {
@@ -84,8 +90,9 @@ bomb_drop_end() {
 
   if(isDefined(self.bomb)) {
     for(i = 0; i < self.bomb.size; i++) {
-      if(isDefined(self.bomb[i]) && !self.bomb[i].dropped)
+      if(isDefined(self.bomb[i]) && !self.bomb[i].dropped) {
         self.bomb[i] delete();
+      }
     }
   }
 }
@@ -114,8 +121,9 @@ attach_bombs() {
     self.bomb[i] setModel(level.plane_bomb_model[self.vehicletype]);
     self.bomb[i].dropped = 0;
 
-    if(isDefined(bomb_tag[i]))
+    if(isDefined(bomb_tag[i])) {
       self.bomb[i] linkto(self, bomb_tag[i], vectorscale((0, 0, -1), 4.0), vectorscale((-1, 0, 0), 10.0));
+    }
   }
 }
 
@@ -140,11 +148,13 @@ drop_bombs(amount, delay, delay_trace, trace_dist) {
     return;
   }
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     user_delay = delay;
+  }
 
-  if(!isDefined(amount) || amount > total_bomb_count)
+  if(!isDefined(amount) || amount > total_bomb_count) {
     amount = total_bomb_count;
+  }
 
   for(i = 0; i < amount; i++) {
     if(total_bomb_count <= 0) {
@@ -175,10 +185,12 @@ drop_bombs(amount, delay, delay_trace, trace_dist) {
     self.bomb[new_bomb_index] thread bomb_wiggle();
     self.bomb[new_bomb_index] thread bomb_trace(self.vehicletype, delay_trace, trace_dist);
 
-    if(isDefined(user_delay))
+    if(isDefined(user_delay)) {
       delay = user_delay;
-    else
+    }
+    else {
       delay = 0.1 + randomfloat(0.5);
+    }
 
     wait(delay);
   }
@@ -214,19 +226,22 @@ bomb_pitch(time_of_rotation) {
   if(self.pitch < 80) {
     self.pitch = self.pitch + 40 * time_of_rotation;
 
-    if(self.pitch > 80)
+    if(self.pitch > 80) {
       self.pitch = 80;
+    }
   }
 }
 
 bomb_trace(type, delay_trace, trace_dist) {
   self endon("death");
 
-  if(isDefined(delay_trace))
+  if(isDefined(delay_trace)) {
     wait(delay_trace);
+  }
 
-  if(!isDefined(trace_dist))
+  if(!isDefined(trace_dist)) {
     trace_dist = 64;
+  }
 
   while(true) {
     vec1 = self.origin;
@@ -235,8 +250,9 @@ bomb_trace(type, delay_trace, trace_dist) {
     trace_result = bulletTrace(vec1, vec2, 0, undefined);
     dist = distance(self.origin, trace_result["position"]);
 
-    if(dist < trace_dist || dist >= 10000)
+    if(dist < trace_dist || dist >= 10000) {
       self thread bomb_explosion(type);
+    }
 
     wait 0.05;
   }

@@ -16,26 +16,32 @@ set_up_images() {
   level.images = [];
   level.images = getEntArray("screen_image", "targetname");
   level.images = mergeSort(level.images);
-  for(x = 0; x < level.images.size; x++)
+  for(x = 0; x < level.images.size; x++) {
     level.images[x] hide();
+  }
 }
 
 mergeSort(current_list) {
-  if(current_list.size <= 1)
+  if(current_list.size <= 1) {
     return current_list;
+  }
   left = [];
   right = [];
   middle = current_list.size / 2;
-  for(x = 0; x < middle; x++)
+  for(x = 0; x < middle; x++) {
     left = add_to_array(left, current_list[x]);
-  for(; x < current_list.size; x++)
+  }
+  for(; x < current_list.size; x++) {
     right = add_to_array(right, current_list[x]);
+  }
   left = mergeSort(left);
   right = mergeSort(right);
-  if(left[left.size - 1].script_int > right[right.size - 1].script_int)
+  if(left[left.size - 1].script_int > right[right.size - 1].script_int) {
     result = merge(left, right);
-  else
+  }
+  else {
     result = append(left, right);
+  }
   return result;
 }
 
@@ -50,16 +56,19 @@ merge(left, right) {
       right = array_remove_index(right, 0);
     }
   }
-  while(left.size > 0)
+  while(left.size > 0) {
     result = append(result, left);
-  while(right.size > 0)
+  }
+  while(right.size > 0) {
     result = append(result, right);
+  }
   return result;
 }
 
 append(left, right) {
-  for(x = 0; x < right.size; x++)
+  for(x = 0; x < right.size; x++) {
     left = add_to_array(left, right[x]);
+  }
   return left;
 }
 
@@ -91,10 +100,12 @@ monitorCurtain(curtorg) {
     if((abs(curtorg[0] - self.origin[0])) >= 38) {
       clip connectpaths();
       clip NotSolid();
-      if(isDefined(clip.target))
+      if(isDefined(clip.target)) {
         clip = getEnt(clip.target, "targetname");
-      else
+      }
+      else {
         clip = undefined;
+      }
     }
     wait(0.1);
   }
@@ -144,8 +155,9 @@ lower_movie_screen() {
 play_images() {
   x = 0;
   while(1) {
-    if(x > level.images.size - 1)
+    if(x > level.images.size - 1) {
       x = 0;
+    }
     level.images[x] show();
     wait(0.1);
     level.images[x] hide();

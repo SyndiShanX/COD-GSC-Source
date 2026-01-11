@@ -29,10 +29,12 @@ main() {
   precachemodel("collision_physics_wall_128x128x10");
   precachemodel("p6_building_granite_tan_brokenb");
 
-  if(gamemodeismode(level.gamemode_wager_match))
+  if(gamemodeismode(level.gamemode_wager_match)) {
     maps\mp\_compass::setupminimap("compass_map_mp_la_wager");
-  else
+  }
+  else {
     maps\mp\_compass::setupminimap("compass_map_mp_la");
+  }
 
   maps\mp\_load::main();
   maps\mp\mp_la_amb::main();

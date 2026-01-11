@@ -174,10 +174,12 @@ zipThink() {
               self waittill("recallLeverDone");
             }
             who maps\_zombiemode_score::minus_to_player_score(self.zombie_cost);
-            if(isDefined(self.script_noteworthy) && self.script_noteworthy == "nonstatic")
+            if(isDefined(self.script_noteworthy) && self.script_noteworthy == "nonstatic") {
               self thread activateZip(who);
-            else if(isDefined(self.script_noteworthy) && self.script_noteworthy == "static")
+            }
+            else if(isDefined(self.script_noteworthy) && self.script_noteworthy == "static") {
               self thread activateZip(undefined);
+            }
             self waittill("zipDone");
             if(isDefined(self.script_noteworthy) && self.script_noteworthy == "nonstatic") {
               self unlink();
@@ -196,8 +198,9 @@ zipThink() {
                 zipBuyTrigger[i] triggerOn();
                 zipBuyTrigger[i] thread monitorZipHint();
               }
-              if(isDefined(zipBuyTrigger[i].script_noteworthy) && zipBuyTrigger[i].script_noteworthy == "static" && (!isDefined(level.direction)))
+              if(isDefined(zipBuyTrigger[i].script_noteworthy) && zipBuyTrigger[i].script_noteworthy == "static" && (!isDefined(level.direction))) {
                 zipBuyTrigger[i] trigger_on();
+              }
             }
             level.zipinuse = false;
           }
@@ -229,10 +232,12 @@ monitorZipHint() {
     aliveplayers = [];
     stoptrigger = false;
     for(i = 0; i < players.size; i++) {
-      if(players[i] maps\_laststand::player_is_in_laststand() && players[i] IsTouching(self.volume))
+      if(players[i] maps\_laststand::player_is_in_laststand() && players[i] IsTouching(self.volume)) {
         downedplayers = array_add(downedplayers, players[i]);
-      else if(isDefined(players[i]) && IsAlive(players[i]))
+      }
+      else if(isDefined(players[i]) && IsAlive(players[i])) {
         aliveplayers = array_add(aliveplayers, players[i]);
+      }
     }
     if(aliveplayers.size > 0 && downedplayers.size > 0) {
       for(i = 0; i < aliveplayers.size; i++) {
@@ -247,10 +252,12 @@ monitorZipHint() {
         }
       }
     }
-    if(stoptrigger)
+    if(stoptrigger) {
       self triggerOffSumpf();
-    else
+    }
+    else {
       self triggerOnSumpf();
+    }
     wait(1);
   }
 }
@@ -261,10 +268,12 @@ activateZip(rider) {
   self.canshock = false;
   for(i = 0; i < zombs.size; i++) {
     if(isDefined(zombs[i]) && IsAlive(zombs[i]) && zombs[i] IsTouching(self.zipDamageVolume)) {
-      if(zombs[i].isdog)
+      if(zombs[i].isdog) {
         zombs[i].a.nodeath = true;
-      else
+      }
+      else {
         zombs[i] StartRagdoll();
+      }
       zombs[i] dodamage(zombs[i].health + 600, zombs[i].origin);
     }
   }
@@ -317,10 +326,12 @@ activateZip(rider) {
   self.handle notify("stopmonitorsolid");
   self.handle notsolid();
   self.handle unlink();
-  if((!(isDefined(level.direction))))
+  if((!(isDefined(level.direction)))) {
     self.handle rotateto((0, -19.6, -65), 0.5);
-  else
+  }
+  else {
     self.handle rotateto((0, -19.6, 65), 0.5);
+  }
   self.handle waittill("rotatedone");
   self.handle thread objectSolid();
   self.handle LinkTo(self.zip);
@@ -383,10 +394,12 @@ activateZip(rider) {
     level.direction = undefined;
   }
   for(i = 0; i < (self.tempclip).size; i++) {
-    if((!(isDefined(level.direction))) && isDefined((self.tempclip[i]).script_noteworthy) && (self.tempclip[i]).script_noteworthy == "zip_base")
+    if((!(isDefined(level.direction))) && isDefined((self.tempclip[i]).script_noteworthy) && (self.tempclip[i]).script_noteworthy == "zip_base") {
       self.tempclip[i] solid();
-    else
+    }
+    else {
       self.tempclip[i] thread objectSolid();
+    }
   }
   level notify("machine_off");
   self playSound("platform_bang");
@@ -441,10 +454,12 @@ playerZipDamage(parent) {
 
 zombieZipDamage() {
   self endon("death");
-  if(self.isdog)
+  if(self.isdog) {
     self.a.nodeath = true;
-  else
+  }
+  else {
     self StartRagdoll();
+  }
   self dodamage(self.health + 600, self.origin);
 }
 

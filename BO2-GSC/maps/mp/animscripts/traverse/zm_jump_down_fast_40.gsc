@@ -7,8 +7,10 @@
 #include maps\mp\animscripts\traverse\zm_shared;
 
 main() {
-  if(self.zombie_move_speed == "sprint")
+  if(self.zombie_move_speed == "sprint") {
     dosimpletraverse("jump_down_fast_40");
-  else
+  }
+  else {
     dosimpletraverse("jump_down_40");
+  }
 }

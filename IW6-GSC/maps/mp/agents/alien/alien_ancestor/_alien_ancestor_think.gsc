@@ -12,8 +12,9 @@ main() {
   initialize_attacks();
   self.ancestor_scripted_active = 0;
 
-  for(;;)
+  for(;;) {
     main_loop();
+  }
 }
 
 initialize_path() {
@@ -62,10 +63,12 @@ main_loop() {
     } else {
       self.ancestor_scripted_active = 0;
 
-      if(self.badpath)
+      if(self.badpath) {
         badpath(var_0);
-      else
+      }
+      else {
         update_loop();
+      }
     }
 
     wait 0.05;
@@ -84,36 +87,47 @@ update_loop() {
   self.looktarget = self.enemy;
   var_0 = should_i_attack(self.enemy);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     ancestor_attack(var_0, self.enemy);
-  else if(!self.following_path)
+  }
+  else if(!self.following_path) {
     thread follow_path();
+  }
 }
 
 should_i_attack(var_0) {
-  if(self.statelocked)
+  if(self.statelocked) {
     return undefined;
+  }
 
-  if(should_force_blast())
+  if(should_force_blast()) {
     return "forced_blast";
+  }
 
-  if(should_force_grab())
+  if(should_force_grab()) {
     return "forced_grab";
+  }
 
-  if(gettime() - self.last_attack_time < 2000)
+  if(gettime() - self.last_attack_time < 2000) {
     return undefined;
+  }
 
-  if(should_shield(var_0))
+  if(should_shield(var_0)) {
     return "shield";
-  else if(should_grab(var_0))
+  }
+  else if(should_grab(var_0)) {
     return "grab";
-  else if(should_blast(var_0))
+  }
+  else if(should_blast(var_0)) {
     return "blast";
+  }
 
-  if(should_spawn(var_0))
+  if(should_spawn(var_0)) {
     return "spawn";
-  else if(should_direct(var_0))
+  }
+  else if(should_direct(var_0)) {
     return "direct";
+  }
 
   return undefined;
 }
@@ -123,10 +137,12 @@ follow_path() {
     return;
   }
   if(distancesquared(self.origin, self.pathnode.origin) < 1024.0) {
-    if(isDefined(self.pathnode.target))
+    if(isDefined(self.pathnode.target)) {
       self.pathnode = getnode(self.pathnode.target, "targetname");
-    else
+    }
+    else {
       self.pathnode = undefined;
+    }
   }
 
   if(!isDefined(self.pathnode)) {
@@ -145,8 +161,9 @@ follow_path() {
 
   self waittill("goal_reached");
 
-  if(isDefined(self.pathnode.script_noteworthy))
+  if(isDefined(self.pathnode.script_noteworthy)) {
     self notify(self.pathnode.script_noteworthy);
+  }
 
   self.following_path = 0;
 }
@@ -161,11 +178,13 @@ should_shield(var_0) {
 }
 
 should_spawn(var_0) {
-  if(gettime() - self.last_spawn_time < 30000)
+  if(gettime() - self.last_spawn_time < 30000) {
     return 0;
+  }
 
-  if(maps\mp\alien\_spawn_director::can_spawn_type("brute"))
+  if(maps\mp\alien\_spawn_director::can_spawn_type("brute")) {
     return 1;
+  }
 
   return maps\mp\alien\_spawn_director::can_spawn_type("goon");
 }
@@ -175,13 +194,16 @@ should_direct(var_0) {
 }
 
 should_blast(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(var_0.classname == "script_model" && !bullettracepassed(self gettagorigin("TAG_EYE"), var_0.origin, 0, self.shield))
+  if(var_0.classname == "script_model" && !bullettracepassed(self gettagorigin("TAG_EYE"), var_0.origin, 0, self.shield)) {
     return 0;
-  else if(!bullettracepassed(self gettagorigin("TAG_EYE"), var_0 gettagorigin("TAG_EYE"), 0, self.shield))
+  }
+  else if(!bullettracepassed(self gettagorigin("TAG_EYE"), var_0 gettagorigin("TAG_EYE"), 0, self.shield)) {
     return 0;
+  }
 
   return gettime() - self.last_blast_time > 6000;
 }
@@ -195,8 +217,9 @@ should_force_grab() {
 }
 
 should_grab(var_0) {
-  if(gettime() - self.last_grab_time < 4000)
+  if(gettime() - self.last_grab_time < 4000) {
     return 0;
+  }
 
   self.grab_target = undefined;
   var_1 = 0;
@@ -328,8 +351,9 @@ watch_for_badpath() {
     self waittill("bad_path", var_0, var_1);
     self.badpath = 1;
 
-    if(!isDefined(self.badpathcount) || isDefined(self.badpathtime) && gettime() > self.badpathtime + 2000)
+    if(!isDefined(self.badpathcount) || isDefined(self.badpathtime) && gettime() > self.badpathtime + 2000) {
       self.badpathcount = 0;
+    }
 
     self.badpathtime = gettime();
     self.badpathcount++;
@@ -341,8 +365,9 @@ watch_for_badpath() {
 ancestor_enter_scripted() {
   maps\mp\alien\_utility::enable_alien_scripted();
 
-  while(!maps\mp\alien\_utility::is_true(self.ancestor_scripted_active))
+  while(!maps\mp\alien\_utility::is_true(self.ancestor_scripted_active)) {
     wait 0.2;
+  }
 }
 
 ancestor_path_to_node(var_0) {
@@ -394,7 +419,8 @@ ancestor_align_to_angles(var_0) {
     } else
       return;
 
-    if(var_1 >= 5)
+    if(var_1 >= 5) {
       return;
+    }
   }
 }

@@ -5,19 +5,23 @@
 ********************************/
 
 aud_init(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     aud_set_level_fade_time(var_0);
+  }
 
   soundscripts\_snd::snd_init();
 
-  if(!isDefined(level.aud))
+  if(!isDefined(level.aud)) {
     level.aud = spawnStruct();
+  }
 
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = tolower(getdvar("mapname"));
+  }
 
-  if(!isDefined(level._audio))
+  if(!isDefined(level._audio)) {
     level._audio = spawnStruct();
+  }
 
   level._audio.using_string_tables = 0;
   level._audio.stringtables = [];
@@ -51,20 +55,23 @@ aud_init(var_0) {
 }
 
 aud_set_level_fade_time(var_0) {
-  if(!isDefined(level._audio))
+  if(!isDefined(level._audio)) {
     level._audio = spawnStruct();
+  }
 
   level._audio.level_fade_time = var_0;
 }
 
 aud_level_fadein() {
-  if(!isDefined(level._audio.level_fade_time))
+  if(!isDefined(level._audio.level_fade_time)) {
     level._audio.level_fade_time = 1.0;
+  }
 
   wait 0.05;
 
-  if(common_scripts\utility::flag_exist("chyron_video_done"))
+  if(common_scripts\utility::flag_exist("chyron_video_done")) {
     common_scripts\utility::flag_wait("chyron_video_done");
+  }
 
   levelsoundfade(1, level._audio.level_fade_time);
 }
@@ -74,8 +81,9 @@ aud_is_specops() {
 }
 
 audx_set_spec_ops() {
-  if(!isDefined(level._audio))
+  if(!isDefined(level._audio)) {
     level._audio = spawnStruct();
+  }
 
   level._audio.specops = 1;
 }
@@ -97,8 +105,9 @@ aud_play_line_emitter(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = max(var_4, 0);
   }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_7 = max(var_5, 0);
+  }
 
   var_8 = spawn("script_origin", (0, 0, 0));
   var_8.alias = var_1;
@@ -189,8 +198,9 @@ aud_set_ambi_submix(var_0, var_1) {
 aud_get_music_submix() {
   var_0 = 1.0;
 
-  if(isDefined(level._audio.curr_music_submix))
+  if(isDefined(level._audio.curr_music_submix)) {
     var_0 = level._audio.curr_music_submix;
+  }
 
   return var_0;
 }
@@ -198,28 +208,33 @@ aud_get_music_submix() {
 aud_get_ambi_submix() {
   var_0 = 1.0;
 
-  if(isDefined(level._audio.curr_ambi_submix))
+  if(isDefined(level._audio.curr_ambi_submix)) {
     var_0 = level._audio.curr_ambi_submix;
+  }
 
   return var_0;
 }
 
 trigger_multiple_audio_trigger(var_0) {
-  if(!isDefined(level._audio))
+  if(!isDefined(level._audio)) {
     level._audio = spawnStruct();
+  }
 
-  if(!isDefined(level._audio.trigger_functions))
+  if(!isDefined(level._audio.trigger_functions)) {
     level._audio.trigger_functions = [];
+  }
 
   var_1 = undefined;
 
   if(isDefined(var_0) && var_0) {
-    if(isDefined(self.ambient))
+    if(isDefined(self.ambient)) {
       var_1 = strtok(self.ambient, " ");
+    }
   } else if(isDefined(self.script_audio_zones))
     var_1 = strtok(self.script_audio_zones, " ");
-  else if(isDefined(self.audio_zones))
+  else if(isDefined(self.audio_zones)) {
     var_1 = strtok(self.audio_zones, " ");
+  }
 
   if(isDefined(var_1) && var_1.size == 2) {} else if(isDefined(var_1) && var_1.size == 1) {
     for(;;) {
@@ -235,23 +250,29 @@ trigger_multiple_audio_trigger(var_0) {
     }
   }
 
-  if(!isDefined(level._audio.trigger_function_keys))
+  if(!isDefined(level._audio.trigger_function_keys)) {
     level._audio.trigger_function_keys = [];
+  }
 
-  if(isDefined(self.script_audio_enter_func))
+  if(isDefined(self.script_audio_enter_func)) {
     level._audio.trigger_function_keys[level._audio.trigger_function_keys.size] = self.script_audio_enter_func;
+  }
 
-  if(isDefined(self.script_audio_exit_func))
+  if(isDefined(self.script_audio_exit_func)) {
     level._audio.trigger_function_keys[level._audio.trigger_function_keys.size] = self.script_audio_exit_func;
+  }
 
-  if(isDefined(self.script_audio_progress_func))
+  if(isDefined(self.script_audio_progress_func)) {
     level._audio.trigger_function_keys[level._audio.trigger_function_keys.size] = self.script_audio_progress_func;
+  }
 
-  if(isDefined(self.script_audio_point_func))
+  if(isDefined(self.script_audio_point_func)) {
     level._audio.trigger_function_keys[level._audio.trigger_function_keys.size] = self.script_audio_point_func;
+  }
 
-  if(!isDefined(self.script_audio_blend_mode))
+  if(!isDefined(self.script_audio_blend_mode)) {
     self.script_audio_blend_mode = "blend";
+  }
 
   var_3 = undefined;
   var_4 = undefined;
@@ -300,10 +321,12 @@ trigger_multiple_audio_trigger(var_0) {
       if(isDefined(var_1) && isDefined(var_1[0]) && isDefined(var_1[1])) {
         var_10 = soundscripts\_audio_zone_manager::azm_get_current_zone();
 
-        if(var_10 == var_1[0])
+        if(var_10 == var_1[0]) {
           var_9 = 0;
-        else if(var_10 == var_1[1])
+        }
+        else if(var_10 == var_1[1]) {
           var_9 = 1;
+        }
         else if(var_10 != "") {
           var_11 = trigger_multiple_audio_progress(var_3, var_4, var_5, var_2.origin);
 
@@ -319,10 +342,12 @@ trigger_multiple_audio_trigger(var_0) {
       } else {
         var_11 = trigger_multiple_audio_progress(var_3, var_4, var_5, var_2.origin);
 
-        if(var_11 < 0.5)
+        if(var_11 < 0.5) {
           var_9 = 0;
-        else
+        }
+        else {
           var_9 = 1;
+        }
       }
 
       if(!var_9) {
@@ -337,8 +362,9 @@ trigger_multiple_audio_trigger(var_0) {
 
         if(isDefined(self.script_audio_enter_func)) {
           if(isDefined(var_1) && isDefined(var_1[0])) {
-            if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
+            if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func])) {
               [[level._audio.trigger_functions[self.script_audio_enter_func]]](var_1[0]);
+            }
           } else if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
             [[level._audio.trigger_functions[self.script_audio_enter_func]]]("front");
         }
@@ -354,19 +380,22 @@ trigger_multiple_audio_trigger(var_0) {
 
         if(isDefined(self.script_audio_enter_func)) {
           if(isDefined(var_1) && isDefined(var_1[1])) {
-            if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
+            if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func])) {
               [[level._audio.trigger_functions[self.script_audio_enter_func]]](var_1[1]);
+            }
           } else if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
             [[level._audio.trigger_functions[self.script_audio_enter_func]]]("back");
         }
       }
     } else {
-      if(isDefined(self.script_audio_enter_msg))
+      if(isDefined(self.script_audio_enter_msg)) {
         deprecated_aud_send_msg(self.script_audio_enter_msg);
+      }
 
       if(isDefined(self.script_audio_enter_func)) {
-        if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
+        if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func])) {
           [[level._audio.trigger_functions[self.script_audio_enter_func]]]();
+        }
       }
     }
 
@@ -375,8 +404,9 @@ trigger_multiple_audio_trigger(var_0) {
     if(isDefined(trigger_multiple_audio_get_zone_from(var_1, var_9)) && isDefined(trigger_multiple_audio_get_zone_to(var_1, var_9))) {
       var_13 = soundscripts\_audio_zone_manager::azmx_get_blend_args(trigger_multiple_audio_get_zone_from(var_1, var_9), trigger_multiple_audio_get_zone_to(var_1, var_9));
 
-      if(isDefined(var_13))
+      if(isDefined(var_13)) {
         var_13.mode = self.script_audio_blend_mode;
+      }
     }
 
     if(isDefined(var_13)) {
@@ -395,30 +425,36 @@ trigger_multiple_audio_trigger(var_0) {
       if(isDefined(self.script_audio_point_func)) {
         var_15 = trigger_multiple_audio_progress_point(var_3, var_4, var_2.origin);
 
-        if(isDefined(level._audio.trigger_functions[self.script_audio_point_func]))
+        if(isDefined(level._audio.trigger_functions[self.script_audio_point_func])) {
           [[level._audio.trigger_functions[self.script_audio_point_func]]](var_15);
+        }
       }
 
       if(isDefined(var_3) && isDefined(var_4)) {
         var_11 = trigger_multiple_audio_progress(var_3, var_4, var_5, var_2.origin);
 
-        if(isDefined(self.script_audio_progress_map))
+        if(isDefined(self.script_audio_progress_map)) {
           var_11 = deprecated_aud_map(var_11, level._audio.progress_maps[self.script_audio_progress_map]);
+        }
 
         if(var_11 != var_14) {
-          if(isDefined(trigger_multiple_audio_get_zone_from(var_1, var_9)) && isDefined(trigger_multiple_audio_get_zone_to(var_1, var_9)))
+          if(isDefined(trigger_multiple_audio_get_zone_from(var_1, var_9)) && isDefined(trigger_multiple_audio_get_zone_to(var_1, var_9))) {
             soundscripts\_audio_zone_manager::azm_print_enter_blend(trigger_multiple_audio_get_zone_from(var_1, var_9), trigger_multiple_audio_get_zone_to(var_1, var_9), var_11);
-
-          if(isDefined(self.script_audio_progress_msg))
-            deprecated_aud_send_msg(self.script_audio_progress_msg, var_11);
-
-          if(isDefined(self.script_audio_progress_func)) {
-            if(isDefined(level._audio.trigger_functions[self.script_audio_progress_func]))
-              [[level._audio.trigger_functions[self.script_audio_progress_func]]](var_11);
           }
 
-          if(isDefined(var_13))
+          if(isDefined(self.script_audio_progress_msg)) {
+            deprecated_aud_send_msg(self.script_audio_progress_msg, var_11);
+          }
+
+          if(isDefined(self.script_audio_progress_func)) {
+            if(isDefined(level._audio.trigger_functions[self.script_audio_progress_func])) {
+              [[level._audio.trigger_functions[self.script_audio_progress_func]]](var_11);
+            }
+          }
+
+          if(isDefined(var_13)) {
             trigger_multiple_audio_blend(var_11, var_13, var_9);
+          }
 
           var_14 = var_11;
           soundscripts\_audio_zone_manager::azm_print_progress(var_11);
@@ -435,8 +471,9 @@ trigger_multiple_audio_trigger(var_0) {
 
     if(isDefined(var_3) && isDefined(var_4)) {
       if(var_11 > 0.5) {
-        if(isDefined(var_1) && isDefined(var_1[1]))
+        if(isDefined(var_1) && isDefined(var_1[1])) {
           soundscripts\_audio_zone_manager::azm_set_current_zone(var_1[1]);
+        }
 
         if(isDefined(var_1) && isDefined(var_1[1])) {
           if(isDefined(level._snd)) {
@@ -449,16 +486,18 @@ trigger_multiple_audio_trigger(var_0) {
 
         if(isDefined(self.script_audio_exit_func)) {
           if(isDefined(var_1) && isDefined(var_1[1])) {
-            if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
+            if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func])) {
               [[level._audio.trigger_functions[self.script_audio_exit_func]]](var_1[1]);
+            }
           } else if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
             [[level._audio.trigger_functions[self.script_audio_exit_func]]]("back");
         }
 
         var_11 = 1;
       } else {
-        if(isDefined(var_1) && isDefined(var_1[0]))
+        if(isDefined(var_1) && isDefined(var_1[0])) {
           soundscripts\_audio_zone_manager::azm_set_current_zone(var_1[0]);
+        }
 
         if(isDefined(var_1) && isDefined(var_1[0])) {
           if(isDefined(level._snd)) {
@@ -471,8 +510,9 @@ trigger_multiple_audio_trigger(var_0) {
 
         if(isDefined(self.script_audio_exit_func)) {
           if(isDefined(var_1) && isDefined(var_1[0])) {
-            if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
+            if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func])) {
               [[level._audio.trigger_functions[self.script_audio_exit_func]]](var_1[0]);
+            }
           } else if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
             [[level._audio.trigger_functions[self.script_audio_exit_func]]]("front");
         }
@@ -480,25 +520,29 @@ trigger_multiple_audio_trigger(var_0) {
         var_11 = 0;
       }
 
-      if(isDefined(var_13))
+      if(isDefined(var_13)) {
         trigger_multiple_audio_blend(var_11, var_13, var_9);
+      }
 
       continue;
     }
 
-    if(isDefined(self.script_audio_exit_msg))
+    if(isDefined(self.script_audio_exit_msg)) {
       deprecated_aud_send_msg(self.script_audio_exit_msg);
+    }
 
     if(isDefined(self.script_audio_exit_func)) {
-      if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
+      if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func])) {
         [[level._audio.trigger_functions[self.script_audio_exit_func]]]();
+      }
     }
   }
 }
 
 trigger_multiple_audio_progress(var_0, var_1, var_2, var_3) {
-  if(var_2 == 0)
+  if(var_2 == 0) {
     return 0;
+  }
 
   if(!isDefined(self.script_audio_use_distance_only)) {
     var_4 = vectornormalize(var_1 - var_0);
@@ -523,8 +567,9 @@ trigger_multiple_audio_progress_point(var_0, var_1, var_2) {
 trigger_multiple_audio_blend(var_0, var_1, var_2) {
   var_0 = clamp(var_0, 0, 1.0);
 
-  if(var_2)
+  if(var_2) {
     var_0 = 1.0 - var_0;
+  }
 
   var_3 = var_1.mode;
 
@@ -534,13 +579,15 @@ trigger_multiple_audio_blend(var_0, var_1, var_2) {
     soundscripts\_audio_zone_manager::azmx_blend_zones(var_4, var_5, var_1);
   } else if(var_0 < 0.33)
     soundscripts\_audio_zone_manager::azm_start_zone(var_1.zone_from_name);
-  else if(var_0 > 0.66)
+  else if(var_0 > 0.66) {
     soundscripts\_audio_zone_manager::azm_start_zone(var_1.zone_to_name);
+  }
 }
 
 trigger_multiple_audio_register_callback(var_0) {
-  if(!isDefined(level._audio.trigger_functions))
+  if(!isDefined(level._audio.trigger_functions)) {
     level._audio.trigger_functions = [];
+  }
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
@@ -578,31 +625,38 @@ trigger_multiple_audio_get_target_ent_target_ent_origin() {
 }
 
 trigger_multiple_audio_get_zone_from(var_0, var_1) {
-  if(!isDefined(var_0) || !isDefined(var_1))
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return undefined;
+  }
 
-  if(var_1)
+  if(var_1) {
     return var_0[1];
-  else
+  }
+  else {
     return var_0[0];
+  }
 }
 
 trigger_multiple_audio_get_zone_to(var_0, var_1) {
-  if(!isDefined(var_0) || !isDefined(var_1))
+  if(!isDefined(var_0) || !isDefined(var_1)) {
     return undefined;
+  }
 
-  if(var_1)
+  if(var_1) {
     return var_0[0];
-  else
+  }
+  else {
     return var_0[1];
+  }
 }
 
 aud_play_dynamic_explosion(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = spawn("script_origin", level.player.origin);
   var_7 = spawn("script_origin", var_0);
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = distance(var_7.origin, var_6.origin);
+  }
 
   if(!isDefined(var_4)) {
     var_8 = 30;
@@ -614,8 +668,9 @@ aud_play_dynamic_explosion(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9[1] = (var_9[1][0], var_9[1][1], var_6.origin[2]);
   var_10 = distance(var_7.origin, var_9[0]);
 
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 1800;
+  }
 
   var_11 = var_10 / var_5;
 
@@ -655,8 +710,9 @@ audx_do_dynamic_explosion_math(var_0, var_1, var_2, var_3) {
 aud_get_optional_param(var_0, var_1) {
   var_2 = var_0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2 = var_1;
+  }
 
   return var_2;
 }
@@ -712,10 +768,12 @@ aud_print_zone_small(var_0) {
 }
 
 equal_strings(var_0, var_1) {
-  if(isDefined(var_0) && isDefined(var_1))
+  if(isDefined(var_0) && isDefined(var_1)) {
     return var_0 == var_1;
-  else
+  }
+  else {
     return !isDefined(var_0) && !isDefined(var_1);
+  }
 }
 
 isundefined(var_0) {
@@ -737,33 +795,41 @@ aud_fade_loop_out_and_delete(var_0, var_1) {
 }
 
 aud_min(var_0, var_1) {
-  if(var_0 <= var_1)
+  if(var_0 <= var_1) {
     return var_0;
-  else
+  }
+  else {
     return var_1;
+  }
 }
 
 aud_max(var_0, var_1) {
-  if(var_0 >= var_1)
+  if(var_0 >= var_1) {
     return var_0;
-  else
+  }
+  else {
     return var_1;
+  }
 }
 
 aud_clamp(var_0, var_1, var_2) {
-  if(var_0 < var_1)
+  if(var_0 < var_1) {
     var_0 = var_1;
-  else if(var_0 > var_2)
+  }
+  else if(var_0 > var_2) {
     var_0 = var_2;
+  }
 
   return var_0;
 }
 
 aud_get_envelope_domain(var_0) {
-  if(isarray(var_0))
+  if(isarray(var_0)) {
     return [var_0[0][0], var_0[var_0.size - 1][0]];
-  else
+  }
+  else {
     return [var_0.env_array[0][0], var_0.env_array[var_0.env_array.size - 1][0]];
+  }
 }
 
 aud_scale_envelope(var_0, var_1, var_2) {
@@ -789,8 +855,9 @@ aud_is_even(var_0) {
 aud_fade_in_music(var_0) {
   var_1 = 10.0;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_1 = var_0;
+  }
 
   soundscripts\_audio_mix_manager::mm_add_submix("mute_music", 0.1);
   wait 0.05;
@@ -800,8 +867,9 @@ aud_fade_in_music(var_0) {
 aud_check_sound_done() {
   self endon("cleanup");
 
-  if(!isDefined(self.sounddone))
+  if(!isDefined(self.sounddone)) {
     self.sounddone = 0;
+  }
 
   self waittill("sounddone");
 
@@ -819,8 +887,9 @@ aud_find_exploder(var_0) {
   if(isDefined(level.createfxexploders)) {
     var_1 = level.createfxexploders["" + var_0];
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       return var_1[0];
+    }
   } else {
     for(var_2 = 0; var_2 < level.createfxent.size; var_2++) {
       var_3 = level.createfxent[var_2];
@@ -852,13 +921,15 @@ audx_duck(var_0, var_1, var_2, var_3) {
   var_1 = clamp(var_1, 0, 10);
   var_4 = 1.0;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_4 = var_2;
+  }
 
   var_5 = var_4;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5 = var_3;
+  }
 
   soundscripts\_audio_mix_manager::mm_add_submix(var_0, var_4);
   wait(var_1);
@@ -873,8 +944,9 @@ aud_start_slow_mo_gunshot_callback(var_0, var_1) {
   level endon("aud_stop_slow_mo_gunshot");
   var_2 = getaiarray("axis");
 
-  foreach(var_4 in var_2)
+  foreach(var_4 in var_2) {
   var_4 thread aud_impact_monitor(var_1);
+  }
 
   var_6 = 0;
   var_7 = level.player getcurrentweapon();
@@ -901,8 +973,9 @@ aud_impact_monitor(var_0) {
   for(;;) {
     self waittill("damage", var_2, var_3, var_4, var_5, var_6);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       [[var_0]](var_1, var_2, var_3, var_5, var_6);
+    }
   }
 }
 
@@ -914,8 +987,9 @@ aud_wait_delay(var_0, var_1, var_2, var_3) {
   if(isDefined(var_2)) {
     var_4 = 60;
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_4 = var_3;
+    }
 
     var_5 = floor(var_0);
     var_6 = (var_0 - var_5) * 100;
@@ -924,10 +998,12 @@ aud_wait_delay(var_0, var_1, var_2, var_3) {
 
   var_7 = var_0;
 
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     aud_slomo_wait(var_7);
-  else
+  }
+  else {
     wait(var_7);
+  }
 }
 
 aud_slomo_wait(var_0) {
@@ -958,8 +1034,9 @@ aud_print_3d_on_ent(var_0, var_1, var_2, var_3, var_4) {
     var_9 = 5;
     var_10 = var_5;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_9 = var_1;
+    }
 
     if(isDefined(var_2)) {
       var_10 = var_2;
@@ -982,8 +1059,9 @@ aud_print_3d_on_ent(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       thread audx_print_3d_timer(var_4);
+    }
 
     self endon("death");
     self endon("aud_stop_3D_print");
@@ -991,8 +1069,9 @@ aud_print_3d_on_ent(var_0, var_1, var_2, var_3, var_4) {
     while(isDefined(self)) {
       var_11 = var_0;
 
-      if(isDefined(var_3))
+      if(isDefined(var_3)) {
         var_11 = var_11 + self[[var_3]]();
+      }
 
       wait 0.05;
     }
@@ -1003,8 +1082,9 @@ audx_print_3d_timer(var_0) {
   self endon("death");
   wait(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("aud_stop_3D_print");
+  }
 }
 
 aud_add_progress_map(var_0, var_1) {
@@ -1012,15 +1092,18 @@ aud_add_progress_map(var_0, var_1) {
 }
 
 aud_get_progress_map(var_0) {
-  if(isDefined(level._audio.progress_maps[var_0]))
+  if(isDefined(level._audio.progress_maps[var_0])) {
     return level._audio.progress_maps[var_0];
+  }
 }
 
 is_deathsdoor_audio_enabled() {
-  if(!isDefined(level._audio.deathsdoor_enabled))
+  if(!isDefined(level._audio.deathsdoor_enabled)) {
     return 1;
-  else
+  }
+  else {
     return level._audio.deathsdoor_enabled;
+  }
 }
 
 aud_enable_deathsdoor_audio() {
@@ -1054,8 +1137,9 @@ init_deathsdoor() {
 set_deathsdoor() {
   level._audio.in_deathsdoor = 1;
 
-  if(!isDefined(level._audio.deathsdoor))
+  if(!isDefined(level._audio.deathsdoor)) {
     level._audio.deathsdoor = spawnStruct();
+  }
 
   level._audio.deathsdoor.reverb = undefined;
   level._audio.deathsdoor.reverb = level._audio.current_reverb;
@@ -1089,17 +1173,20 @@ aud_set_mission_failed_music(var_0) {
 aud_wait_for_mission_fail_music() {
   wait 0.05;
 
-  while(!common_scripts\utility::flag_exist("missionfailed"))
+  while(!common_scripts\utility::flag_exist("missionfailed")) {
     wait 0.05;
+  }
 
   var_0 = "shg_mission_failed_stinger";
   common_scripts\utility::flag_wait("missionfailed");
 
-  if(isDefined(level._audio.failed_music_alias))
+  if(isDefined(level._audio.failed_music_alias)) {
     var_0 = level._audio.failed_music_alias;
+  }
 
-  if(soundexists(var_0))
+  if(soundexists(var_0)) {
     soundscripts\_audio_music::mus_play(var_0, 2, 4);
+  }
 }
 
 aud_use_string_tables() {
@@ -1126,10 +1213,12 @@ set_damb_stringtable(var_0) {
 }
 
 get_damb_stringtable() {
-  if(!isDefined(level._audio.stringtables["damb"]))
+  if(!isDefined(level._audio.stringtables["damb"])) {
     return "soundtables\" + level.script + ".csv ";
-  else
+  }
+  else {
     return "soundtables\" + level._audio.stringtables["
+  }
   damb "];
 }
 
@@ -1138,10 +1227,12 @@ set_damb_component_stringtable(var_0) {
 }
 
 get_damb_component_stringtable(var_0) {
-  if(!isDefined(level._audio.stringtables["damb_comp"]))
+  if(!isDefined(level._audio.stringtables["damb_comp"])) {
     return "soundtables\" + level.script + ".csv ";
-  else
+  }
+  else {
     return "soundtables\" + level._audio.stringtables["
+  }
   damb_comp "];
 }
 
@@ -1150,10 +1241,12 @@ set_damb_loops_stringtable(var_0) {
 }
 
 get_damb_loops_stringtable(var_0) {
-  if(!isDefined(level._audio.stringtables["damb_loops"]))
+  if(!isDefined(level._audio.stringtables["damb_loops"])) {
     return "soundtables\" + level.script + ".csv ";
-  else
+  }
+  else {
     return "soundtables\" + level._audio.stringtables["
+  }
   damb_loops "];
 }
 
@@ -1162,10 +1255,12 @@ set_reverb_stringtable(var_0) {
 }
 
 get_reverb_stringtable() {
-  if(!isDefined(level._audio.stringtables["reverb"]))
+  if(!isDefined(level._audio.stringtables["reverb"])) {
     return "soundtables\" + level.script + ".csv ";
-  else
+  }
+  else {
     return "soundtables\" + level._audio.stringtables["
+  }
   reverb "];
 }
 
@@ -1174,10 +1269,12 @@ set_zone_stringtable(var_0) {
 }
 
 get_zone_stringtable() {
-  if(!isDefined(level._audio.stringtables["zone"]))
+  if(!isDefined(level._audio.stringtables["zone"])) {
     return "soundtables\" + level.script + ".csv ";
-  else
+  }
+  else {
     return "soundtables\" + level._audio.stringtables["
+  }
   zone "];
 }
 
@@ -1189,21 +1286,25 @@ aud_get_threat_level(var_0, var_1, var_2) {
   var_3 = 0;
   var_4 = aud_get_sticky_threat();
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_3 = var_4;
+  }
   else {
     var_5 = 3;
     var_6 = 10;
     var_7 = 100;
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_5 = var_0;
+    }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_7 = var_2;
+    }
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_6 = var_1;
+    }
 
     var_8 = 36 * var_7;
     var_9 = 36 * var_6;
@@ -1218,20 +1319,24 @@ aud_get_threat_level(var_0, var_1, var_2) {
         if(var_15 < var_8) {
           var_11++;
 
-          if(var_15 < var_9)
+          if(var_15 < var_9) {
             var_16 = 1.0;
-          else
+          }
+          else {
             var_16 = 1.0 - (var_15 - var_9) / (var_8 - var_9);
+          }
 
           var_12 = var_12 + var_16;
         }
       }
     }
 
-    if(var_11 > 0)
+    if(var_11 > 0) {
       var_3 = var_12 / var_11;
-    else
+    }
+    else {
       var_3 = 0;
+    }
   }
 
   return var_3;
@@ -1253,8 +1358,9 @@ aud_num_alive_enemies(var_0) {
   var_1 = 0;
   var_2 = 3600;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2 = 36 * var_0;
+  }
 
   var_3 = getaiarray("bad_guys");
 
@@ -1262,8 +1368,9 @@ aud_num_alive_enemies(var_0) {
     if(isalive(var_5)) {
       var_6 = distance(level.player.origin, var_5.origin);
 
-      if(var_6 < var_2)
+      if(var_6 < var_2) {
         var_1++;
+      }
     }
   }
 
@@ -1275,13 +1382,16 @@ deprecated_aud_fade_sound_in(var_0, var_1, var_2, var_3, var_4) {
   var_3 = aud_max(0.05, var_3);
   var_5 = 0;
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5 = var_4;
+  }
 
-  if(var_5)
+  if(var_5) {
     var_0 soundscripts\_snd_playsound::snd_play_loop(var_1);
-  else
+  }
+  else {
     var_0 soundscripts\_snd_playsound::snd_play(var_1);
+  }
 
   var_0 scalevolume(0.0);
   var_0 common_scripts\utility::delaycall(0.05, ::scalevolume, var_2, var_3);
@@ -1325,15 +1435,18 @@ deprecated_audx_dispatch_msg(var_0, var_1, var_2) {
       continue;
     }
 
-    if(!var_3 && !isDefined(var_4))
+    if(!var_3 && !isDefined(var_4)) {
       var_3 = 1;
+    }
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self notify(var_2);
+  }
 
-  if(!var_3)
+  if(!var_3) {
     aud_print_warning("\tAUDIO MESSAGE NOT HANDLED: " + var_0);
+  }
 }
 
 aud_play_pcap_vo(var_0, var_1, var_2) {
@@ -1341,10 +1454,12 @@ aud_play_pcap_vo(var_0, var_1, var_2) {
   var_4 = 1;
   var_5 = self;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     deprecated_aud_delay_play_2d_sound(var_0, var_1, var_3, var_4);
-  else
+  }
+  else {
     deprecated_aud_delay_play_linked_sound(var_0, var_5, var_1, var_3, var_4);
+  }
 }
 
 deprecated_play_2d_sound_internal(var_0) {
@@ -1400,21 +1515,24 @@ deprecated_audx_play_linked_sound_internal(var_0, var_1, var_2, var_3, var_4) {
   } else if(var_0 == "oneshot") {
     soundscripts\_snd_playsound::snd_play(var_1, "sounddone");
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       self scalevolume(var_3, 0);
+    }
 
     self waittill("sounddone");
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self delete();
+    }
   }
 }
 
 deprecated_audx_monitor_linked_entity_health(var_0, var_1, var_2) {
   level endon(var_1);
 
-  while(isDefined(self))
+  while(isDefined(self)) {
     wait 0.1;
+  }
 
   level notify(var_1 + "internal");
 
@@ -1433,23 +1551,28 @@ deprecated_audx_monitor_linked_entity_health(var_0, var_1, var_2) {
 deprecated_aud_play_linked_sound(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = "oneshot";
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_8 = var_2;
+  }
 
   var_9 = var_1.origin;
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_9 = var_6;
+  }
 
   var_10 = spawn("script_origin", var_9);
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_10 linkto(var_1, "tag_origin", var_4, (0, 0, 0));
-  else
+  }
+  else {
     var_10 linkto(var_1);
+  }
 
-  if(var_8 == "loop")
+  if(var_8 == "loop") {
     var_1 thread deprecated_audx_monitor_linked_entity_health(var_10, var_3, var_7);
+  }
 
   var_10 thread deprecated_audx_play_linked_sound_internal(var_8, var_0, var_3, var_5, var_7);
   return var_10;
@@ -1516,20 +1639,26 @@ deprecated__audio_msg_handler(var_0, var_1) {
       deprecated_aud_play_sound_at(var_1.alias, var_1.pos);
       break;
     case "aud_play_dynamic_explosion":
-      if(isDefined(var_1.spread_width))
+      if(isDefined(var_1.spread_width)) {
         var_5 = var_1.spread_width;
-      else
+      }
+      else {
         var_5 = undefined;
+      }
 
-      if(isDefined(var_1.rear_dist))
+      if(isDefined(var_1.rear_dist)) {
         var_6 = var_1.rear_dist;
-      else
+      }
+      else {
         var_6 = undefined;
+      }
 
-      if(isDefined(var_1.velocity))
+      if(isDefined(var_1.velocity)) {
         var_7 = var_1.velocity;
-      else
+      }
+      else {
         var_7 = undefined;
+      }
 
       aud_play_dynamic_explosion(var_1.explosion_pos, var_1.left_alias, var_1.right_alias, var_5, var_6, var_7);
       break;
@@ -1563,8 +1692,9 @@ deprecated_aud_handle_flickering_light(var_0) {
     case "furniture_lamp_floor1_off":
       var_1 = 1;
 
-      if(soundexists("paris_lamplight_flicker"))
+      if(soundexists("paris_lamplight_flicker")) {
         thread common_scripts\utility::play_sound_in_space("paris_lamplight_flicker", var_0.origin);
+      }
 
       break;
     default:
@@ -1584,8 +1714,9 @@ deprecated_aud_play_conversation(var_0, var_1) {
   }
 
   foreach(var_6 in var_2) {
-    if(isDefined(var_6.delay))
+    if(isDefined(var_6.delay)) {
       wait(var_6.delay);
+    }
 
     var_7 = spawn("script_origin", (0, 0, 0));
     var_7 linkto(var_6.ent, "", (0, 0, 0), (0, 0, 0));
@@ -1595,6 +1726,7 @@ deprecated_aud_play_conversation(var_0, var_1) {
     var_7 delete();
   }
 
-  for(var_4 = 0; var_4 < var_2.size; var_4++)
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_2[var_4].ent.battlechatter = var_3[var_4];
+  }
 }

@@ -32,14 +32,18 @@ scene_pre_briefing() {
   iran_safe = rts_map_completed("so_rts_mp_dockside");
   scene_name = "";
 
-  if(india_safe && iran_safe)
+  if(india_safe && iran_safe) {
     scene_name = "sf_b_both_safe";
-  else if(india_safe && !iran_safe)
+  }
+  else if(india_safe && !iran_safe) {
     scene_name = "sf_b_india_safe";
-  else if(!india_safe && iran_safe)
+  }
+  else if(!india_safe && iran_safe) {
     scene_name = "sf_b_iran_safe";
-  else
+  }
+  else {
     scene_name = "sf_b_neither_safe";
+  }
 
   level thread run_scene(scene_name);
   wait_network_frame();
@@ -105,8 +109,9 @@ scene_afghanistan_models() {
   arrow setModel("p6_hologram_af_path_arrow");
   afghani_models[afghani_models.size] = arrow;
 
-  for(i = 0; i < afghani_models.size; i++)
+  for(i = 0; i < afghani_models.size; i++) {
     afghani_models[i] ignorecheapentityflag(1);
+  }
 
   level waittill("afghan_up");
   holo_table_exploder_switch(115);

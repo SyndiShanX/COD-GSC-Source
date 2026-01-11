@@ -162,13 +162,15 @@ sq_easy_cleanup() {
   computer_buildable_trig delete();
   sq_buildables = getEntArray("buildable_sq_common", "targetname");
 
-  foreach(item in sq_buildables)
+  foreach(item in sq_buildables) {
   item delete();
+  }
 
   t_generator = getent("generator_use_trigger", "targetname");
 
-  if(isDefined(t_generator))
+  if(isDefined(t_generator)) {
     t_generator delete();
+  }
 
   gallow_col = getEntArray("gallow_col", "targetname");
 
@@ -208,17 +210,20 @@ init_sidequest() {
       continue;
     }
 
-    if(lastcompleted == 2)
+    if(lastcompleted == 2) {
       level.maxcompleted = 1;
+    }
   }
 
   level waittill("buildables_setup");
 
   if(level.richcompleted) {
-    if(!level.maxcompleted)
+    if(!level.maxcompleted) {
       playfx_on_tower("sq_tower_bolts");
-    else
+    }
+    else {
       flag_set("sq_players_out_of_sync");
+    }
 
     playfx_on_tower("sq_tower_r");
     a_model_names = array("p6_zm_bu_sq_crystal", "p6_zm_bu_sq_satellite_dish");
@@ -227,8 +232,9 @@ init_sidequest() {
   }
 
   if(level.maxcompleted) {
-    if(!level.richcompleted)
+    if(!level.richcompleted) {
       playfx_on_tower("sq_tower_bolts");
+    }
 
     playfx_on_tower("sq_tower_m");
     a_model_names = array("p6_zm_bu_sq_vaccume_tube", "p6_zm_bu_sq_buildable_battery");
@@ -240,8 +246,9 @@ init_sidequest() {
 sq_delete_tower_pieces(a_model_names, a_pieces) {
   foreach(piece in a_pieces) {
     foreach(str_model in a_model_names) {
-      if(piece.modelname == str_model)
+      if(piece.modelname == str_model) {
         piece maps\mp\zombies\_zm_buildables::piece_unspawn();
+      }
     }
   }
 }
@@ -261,8 +268,9 @@ sq_metagame_clear_tower_pieces() {
       continue;
     }
     foreach(str_model in a_model_names) {
-      if(piece.modelname == str_model)
+      if(piece.modelname == str_model) {
         player maps\mp\zombies\_zm_buildables::player_destroy_piece(piece);
+      }
     }
   }
 }
@@ -274,8 +282,9 @@ sq_spawn_props() {
 sq_spawn_model_at_struct(str_struct, str_model) {
   s_struct = getstruct(str_struct, "targetname");
 
-  if(!isDefined(s_struct))
+  if(!isDefined(s_struct)) {
     return undefined;
+  }
 
   m_prop = spawn("script_model", s_struct.origin);
   m_prop.angles = s_struct.angles;
@@ -366,14 +375,16 @@ sidequest_logic() {
 }
 
 playfx_on_tower(str_fx, delete_old) {
-  if(!isDefined(delete_old))
+  if(!isDefined(delete_old)) {
     delete_old = 0;
+  }
 
   a_fx_spots = getEntArray("sq_complete_tower_fx", "targetname");
 
   if(delete_old) {
-    foreach(m_fx_spot in a_fx_spots)
+    foreach(m_fx_spot in a_fx_spots) {
     m_fx_spot delete();
+    }
   }
 
   s_spot = getstruct("sq_end_smoke", "targetname");
@@ -382,10 +393,12 @@ playfx_on_tower(str_fx, delete_old) {
   m_fx_spot setModel("tag_origin");
   m_fx_spot.targetname = "sq_complete_tower_fx";
 
-  if(delete_old)
+  if(delete_old) {
     playFX(level._effect[str_fx], s_spot.origin, anglesToForward(s_spot.angles));
-  else
+  }
+  else {
     playFXOnTag(level._effect[str_fx], m_fx_spot, "tag_origin");
+  }
 }
 
 snddelayedsidequest8() {
@@ -395,8 +408,9 @@ snddelayedsidequest8() {
 sq_give_player_rewards() {
   players = get_players();
 
-  foreach(player in players)
+  foreach(player in players) {
   player thread sq_give_player_all_perks();
+  }
 }
 
 sq_give_player_all_perks() {
@@ -434,13 +448,15 @@ watch_for_respawn() {
 }
 
 watch_nav_computer_built() {
-  if(!(isDefined(level.navcomputer_spawned) && level.navcomputer_spawned))
+  if(!(isDefined(level.navcomputer_spawned) && level.navcomputer_spawned)) {
     wait_for_buildable("sq_common");
+  }
 
   flag_set("sq_nav_built");
 
-  if(!(isDefined(level.navcomputer_spawned) && level.navcomputer_spawned))
+  if(!(isDefined(level.navcomputer_spawned) && level.navcomputer_spawned)) {
     update_sidequest_stats("sq_buried_started");
+  }
 }
 
 sq_assign_signs() {
@@ -459,11 +475,13 @@ sq_assign_signs() {
   a_max_signs = array(a_signs[a_sign_keys[0]], a_signs[a_sign_keys[1]], a_signs[a_sign_keys[2]]);
   a_ric_signs = array(a_signs[a_sign_keys[3]], a_signs[a_sign_keys[4]], a_max_signs[0]);
 
-  foreach(m_sign in a_max_signs)
+  foreach(m_sign in a_max_signs) {
   m_sign.is_max_sign = 1;
+  }
 
-  foreach(m_sign in a_ric_signs)
+  foreach(m_sign in a_ric_signs) {
   m_sign.is_ric_sign = 1;
+  }
 }
 
 generic_stage_complete() {
@@ -592,16 +610,19 @@ update_sidequest_stats(stat_name) {
   rich_complete = 0;
   started = 0;
 
-  if(stat_name == "sq_buried_maxis_complete")
+  if(stat_name == "sq_buried_maxis_complete") {
     maxis_complete = 1;
-  else if(stat_name == "sq_buried_rich_complete")
+  }
+  else if(stat_name == "sq_buried_rich_complete") {
     rich_complete = 1;
+  }
 
   players = get_players();
 
   foreach(player in players) {
-    if(stat_name == "sq_buried_started")
+    if(stat_name == "sq_buried_started") {
       player.buried_sq_started = 1;
+    }
     else if(stat_name == "navcard_applied_zm_buried") {
       player maps\mp\zombies\_zm_stats::set_global_stat(level.navcard_needed, 0);
       thread sq_refresh_player_navcard_hud();
@@ -619,8 +640,9 @@ update_sidequest_stats(stat_name) {
     player maps\mp\zombies\_zm_stats::increment_client_stat(stat_name, 0);
   }
 
-  if(rich_complete || maxis_complete)
+  if(rich_complete || maxis_complete) {
     level notify("buried_sidequest_achieved");
+  }
 }
 
 sq_refresh_player_navcard_hud_internal() {
@@ -630,11 +652,13 @@ sq_refresh_player_navcard_hud_internal() {
   for(i = 0; i < level.navcards.size; i++) {
     hasit = self maps\mp\zombies\_zm_stats::get_global_stat(level.navcards[i]);
 
-    if(isDefined(self.navcard_grabbed) && self.navcard_grabbed == level.navcards[i])
+    if(isDefined(self.navcard_grabbed) && self.navcard_grabbed == level.navcards[i]) {
       hasit = 1;
+    }
 
-    if(hasit)
+    if(hasit) {
       navcard_bits = navcard_bits + (1 << i);
+    }
   }
 
   wait_network_frame();
@@ -652,8 +676,9 @@ sq_refresh_player_navcard_hud() {
   }
   players = get_players();
 
-  foreach(player in players)
+  foreach(player in players) {
   player thread sq_refresh_player_navcard_hud_internal();
+  }
 }
 
 richtofensay(vox_line, time, play_in_3d) {
@@ -668,16 +693,19 @@ richtofensay(vox_line, time, play_in_3d) {
   }
   level endon("richtofen_c_complete");
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 2;
+  }
 
-  while(isDefined(level.richtofen_talking_to_samuel) && level.richtofen_talking_to_samuel)
+  while(isDefined(level.richtofen_talking_to_samuel) && level.richtofen_talking_to_samuel) {
     wait 1;
+  }
 
   iprintlnbold("Richtoffen Says: " + vox_line);
 
-  while(isDefined(level.rich_sq_player) && (isDefined(level.rich_sq_player.isspeaking) && level.rich_sq_player.isspeaking))
+  while(isDefined(level.rich_sq_player) && (isDefined(level.rich_sq_player.isspeaking) && level.rich_sq_player.isspeaking)) {
     wait 0.05;
+  }
 
   if(!isDefined(level.rich_sq_player) || !is_player_valid(level.rich_sq_player)) {
     return;
@@ -687,13 +715,16 @@ richtofensay(vox_line, time, play_in_3d) {
     delay_thread(time, ::stuhlingerpossessed, 0);
   }
 
-  if(isDefined(play_in_3d) && play_in_3d)
+  if(isDefined(play_in_3d) && play_in_3d) {
     level.rich_sq_player playSound(vox_line);
-  else
+  }
+  else {
     level.rich_sq_player playsoundtoplayer(vox_line, level.rich_sq_player);
+  }
 
-  if(!(isDefined(level.richtofen_talking_to_samuel) && level.richtofen_talking_to_samuel))
+  if(!(isDefined(level.richtofen_talking_to_samuel) && level.richtofen_talking_to_samuel)) {
     level thread richtofen_talking(time);
+  }
 }
 
 richtofen_talking(time) {
@@ -702,8 +733,9 @@ richtofen_talking(time) {
   wait(time);
   level.richtofen_talking_to_samuel = 0;
 
-  if(isDefined(level.rich_sq_player))
+  if(isDefined(level.rich_sq_player)) {
     level.rich_sq_player.dontspeak = 0;
+  }
 }
 
 maxissay(vox_line, m_spot_override, b_wait_for_nearby_speakers) {
@@ -722,8 +754,9 @@ maxissay(vox_line, m_spot_override, b_wait_for_nearby_speakers) {
   if(isDefined(level.intermission) && level.intermission) {
     return;
   }
-  while(isDefined(level.maxis_talking) && level.maxis_talking)
+  while(isDefined(level.maxis_talking) && level.maxis_talking) {
     wait 0.05;
+  }
 
   level.maxis_talking = 1;
 
@@ -731,16 +764,18 @@ maxissay(vox_line, m_spot_override, b_wait_for_nearby_speakers) {
 
   m_vo_spot = level.m_maxis_vo_spot;
 
-  if(isDefined(m_spot_override))
+  if(isDefined(m_spot_override)) {
     m_vo_spot = m_spot_override;
+  }
 
   if(isDefined(b_wait_for_nearby_speakers) && b_wait_for_nearby_speakers) {
     nearbyplayers = get_array_of_closest(m_vo_spot.origin, get_players(), undefined, undefined, 256);
 
     if(isDefined(nearbyplayers) && nearbyplayers.size > 0) {
       foreach(player in nearbyplayers) {
-        while(isDefined(player) && (isDefined(player.isspeaking) && player.isspeaking))
+        while(isDefined(player) && (isDefined(player.isspeaking) && player.isspeaking)) {
           wait 0.05;
+        }
       }
     }
   }
@@ -757,20 +792,23 @@ maxissayvoplay(m_vo_spot, vox_line) {
 }
 
 setup_sq_debug() {
-  while(!isDefined(level.custom_devgui))
+  while(!isDefined(level.custom_devgui)) {
     wait 1;
+  }
 
   if(getdvarint(#"_id_5256118F") > 0) {
     execdevgui("devgui_zombie_buried_sq");
 
-    if(isDefined(level.custom_devgui))
+    if(isDefined(level.custom_devgui)) {
       temp = level.custom_devgui;
+    }
 
     level.custom_devgui = [];
     level.custom_devgui[level.custom_devgui.size] = ::devgui_sq;
 
-    if(isDefined(temp))
+    if(isDefined(temp)) {
       level.custom_devgui[level.custom_devgui.size] = temp;
+    }
 
     thread zombie_devgui_player_sq_commands();
   }
@@ -854,8 +892,9 @@ devgui_sq(cmd) {
     case "nc_on":
       pindex = getdvarint(#"_id_DAD9AAFF");
 
-      if(!isDefined(pindex) || pindex < 1)
+      if(!isDefined(pindex) || pindex < 1) {
         pindex = 1;
+      }
 
       sq_player = level.sq_players[pindex - 1];
       sq_level = getdvar(#"_id_2685E710");
@@ -908,8 +947,9 @@ sq_set_stat(sq_player, sq_level, sq_cmd) {
 }
 
 warp_to_struct_position(str_value, str_key) {
-  if(!isDefined(str_key))
+  if(!isDefined(str_key)) {
     str_key = "targetname";
+  }
 
   a_warp_structs = getstructarray(str_value, str_key);
   a_players = get_players();
@@ -957,8 +997,9 @@ sq_metagame() {
   level endon("sq_metagame_player_connected");
   flag_wait("sq_intro_vo_done");
 
-  if(flag("sq_started"))
+  if(flag("sq_started")) {
     level waittill("buried_sidequest_achieved");
+  }
 
   level thread sq_metagame_turn_off_watcher();
   is_blue_on = 0;
@@ -999,8 +1040,9 @@ sq_metagame() {
   players = get_players();
   player_count = players.size;
 
-  if(getdvarint(#"_id_FA81816F") >= 1)
+  if(getdvarint(#"_id_FA81816F") >= 1) {
     player_count = 4;
+  }
 
   for(n_player = 0; n_player < player_count; n_player++) {
     for(n_stat = 0; n_stat < a_stat.size; n_stat++) {
@@ -1030,10 +1072,12 @@ sq_metagame() {
   }
 
   if(level.n_metagame_machine_lights_on == 12) {
-    if(is_blue_on && is_orange_on)
+    if(is_blue_on && is_orange_on) {
       return;
-    else if(!bulb_on[0] || !bulb_on[1] || !bulb_on[2])
+    }
+    else if(!bulb_on[0] || !bulb_on[1] || !bulb_on[2]) {
       return;
+    }
   } else
     return;
 
@@ -1064,10 +1108,12 @@ sq_metagame() {
 
   sq_metagame_clear_lights();
 
-  if(is_orange_on)
+  if(is_orange_on) {
     level notify("end_game_reward_starts_maxis");
-  else
+  }
+  else {
     level notify("end_game_reward_starts_richtofen");
+  }
 }
 
 sq_metagame_clear_lights() {
@@ -1120,8 +1166,9 @@ sq_metagame_machine_set_light(n_player, n_stat, str_fx) {
   level.n_metagame_machine_lights_on++;
   fxcolorbit = 1;
 
-  if(str_fx == "sq_bulb_orange")
+  if(str_fx == "sq_bulb_orange") {
     fxcolorbit = 2;
+  }
 
   level setclientfield("buried_sq_egm_" + n_player + "_" + n_stat, fxcolorbit);
 }
@@ -1180,8 +1227,9 @@ vo_stuhlingerpossessed() {
   wait 3;
 
   if(isDefined(level.rich_sq_player)) {
-    while(isDefined(level.rich_sq_player) && (isDefined(level.rich_sq_player.isspeaking) && level.rich_sq_player.isspeaking))
+    while(isDefined(level.rich_sq_player) && (isDefined(level.rich_sq_player.isspeaking) && level.rich_sq_player.isspeaking)) {
       wait 1;
+    }
 
     richtofensay("vox_plr_1_stuhlinger_2nd_possession_1_0", 4, !play_in_3d);
   }
@@ -1236,8 +1284,9 @@ end_game_reward_richtofen_wrapper() {
 }
 
 end_game_reward_richtofen() {
-  if(isDefined(level.rich_sq_player))
+  if(isDefined(level.rich_sq_player)) {
     level.rich_sq_player.dontspeak = 1;
+  }
 
   meteors_stop_falling();
   run_richtofen_earthquake();
@@ -1260,11 +1309,13 @@ meteors_stop_falling() {
 
 mule_kick_allows_4_weapons() {
   foreach(player in get_players()) {
-    if(!isDefined(player._retain_perks_array))
+    if(!isDefined(player._retain_perks_array)) {
       player._retain_perks_array = [];
+    }
 
-    if(!player hasperk("specialty_additionalprimaryweapon"))
+    if(!player hasperk("specialty_additionalprimaryweapon")) {
       player maps\mp\zombies\_zm_perks::give_perk("specialty_additionalprimaryweapon", 0);
+    }
 
     player._retain_perks_array["specialty_additionalprimaryweapon"] = 1;
   }
@@ -1313,8 +1364,9 @@ sq_maxis_ending_spawn_func() {
   if(isDefined(self.is_ghost) && self.is_ghost) {
     return;
   }
-  if(can_spawn_richtofen_zombie())
+  if(can_spawn_richtofen_zombie()) {
     self make_richtofen_zombie();
+  }
 }
 
 can_spawn_richtofen_zombie() {
@@ -1345,8 +1397,9 @@ richtofen_zombie_deathfunction_override() {
   if(!(isDefined(self.turning_into_ghost) && self.turning_into_ghost)) {
     self force_random_powerup_drop();
 
-    if(isDefined(self.attacker))
+    if(isDefined(self.attacker)) {
       self.attacker maps\mp\zombies\_zm_score::add_to_player_score(500);
+    }
   }
 
   return self[[self.deathfunction_old]]();
@@ -1366,8 +1419,9 @@ richtofen_zombie_vo_watcher() {
     wait 2;
 
     foreach(player in players) {
-      if(distance2dsquared(self.origin, player.origin) < 262144 && sighttracepassed(self gettagorigin("tag_eye"), player.origin, 0, undefined))
+      if(distance2dsquared(self.origin, player.origin) < 262144 && sighttracepassed(self gettagorigin("tag_eye"), player.origin, 0, undefined)) {
         can_see = 1;
+      }
     }
   }
 
@@ -1377,8 +1431,9 @@ richtofen_zombie_vo_watcher() {
 
 richtofen_zombie_watch_death() {
   while(isDefined(self) && isalive(self)) {
-    if(getdvarint(#"_id_5256118F") > 0)
+    if(getdvarint(#"_id_5256118F") > 0) {
       debugstar(self.origin, 5, (1, 1, 0));
+    }
 
     wait 0.25;
   }
@@ -1410,8 +1465,9 @@ skip_to_sq_stage(str_cmd) {
     wait_network_frame();
   }
 
-  if(level._zombie_sidequests["sq"].stages[str_stage_name].completed)
+  if(level._zombie_sidequests["sq"].stages[str_stage_name].completed) {
     stage_start("sq", str_stage_name);
+  }
 }
 
 get_sq_stages_in_order() {

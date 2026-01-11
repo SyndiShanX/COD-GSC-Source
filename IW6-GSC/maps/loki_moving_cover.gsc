@@ -111,8 +111,9 @@ moving_cover_main() {
     var_2 = maps\_utility::array_removedead_or_dying(var_2);
 
     foreach(var_4 in var_2) {
-      if(isDefined(var_4.magic_bullet_shield))
+      if(isDefined(var_4.magic_bullet_shield)) {
         var_4 maps\_utility::stop_magic_bullet_shield();
+      }
 
       var_4.diequietly = 1;
       var_4 kill();
@@ -176,19 +177,23 @@ moving_cover_opfor_death_tracker() {
 moving_cover_death(var_0) {
   self endon("death");
 
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     maps\_utility::stop_magic_bullet_shield();
-
-  if(isDefined(var_0) && var_0) {
-    if(isDefined(self))
-      self stopanimscripted();
-
-    if(isDefined(self))
-      self safeteleport(self.origin + (0, 100, -1000), self.angles);
   }
 
-  if(isalive(self))
+  if(isDefined(var_0) && var_0) {
+    if(isDefined(self)) {
+      self stopanimscripted();
+    }
+
+    if(isDefined(self)) {
+      self safeteleport(self.origin + (0, 100, -1000), self.angles);
+    }
+  }
+
+  if(isalive(self)) {
     self kill();
+  }
 }
 
 take_control(var_0) {
@@ -214,8 +219,9 @@ animate_combat_two_intro_debris() {
   var_0 maps\_utility::assign_animtree();
   var_1 = getEntArray("combat_two_intro_debris_move", "script_noteworthy");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 linkto(var_0);
+  }
 
   level.moving_cover_start_node maps\_anim::anim_single_solo(var_0, "combat_two_intro_debris_move");
 }
@@ -237,8 +243,9 @@ delete_moving_cover_objects() {
 }
 
 firstframe_moving_cover(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 0;
+  }
 
   level.moving_cover_start_node = getent("moving_cover_vignette", "targetname");
   level.moving_cover_obj1 = maps\_utility::spawn_anim_model("moving_cover_obj1");
@@ -335,10 +342,12 @@ ramp_up_accurracy(var_0, var_1) {
 }
 
 stop_in_your_face_hint() {
-  if(common_scripts\utility::flag("gun_picked_up"))
+  if(common_scripts\utility::flag("gun_picked_up")) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 in_your_face() {
@@ -383,8 +392,9 @@ wait_for_x_pressed() {
 start_moving_cover(var_0, var_1, var_2) {
   var_3 = getEntArray("explosion_debris_col", "targetname");
 
-  foreach(var_5 in var_3)
+  foreach(var_5 in var_3) {
   var_5 linkto(var_5 common_scripts\utility::get_target_ent());
+  }
 
   var_7 = var_1;
 
@@ -437,10 +447,12 @@ ai_follow_cover(var_0, var_1) {
     var_3 = var_0.origin - var_2;
     self setgoalpos(var_3);
 
-    if(bullettracepassed(self.origin, var_3, 0, undefined))
+    if(bullettracepassed(self.origin, var_3, 0, undefined)) {
       maps\loki_util::jkuline(self.origin, var_3);
-    else
+    }
+    else {
       maps\loki_util::jkuline(self.origin, var_3, (1, 0, 0));
+    }
 
     if(distance2d(self.origin, var_3) < var_1 - 50) {
       self.ignoreall = 0;
@@ -478,8 +490,9 @@ movement_input_think(var_0, var_1) {
         maps\loki_util::jkuline(var_0.origin, var_0.origin + (var_4 + var_5), (0, 1, 1));
         var_7 = length(var_2);
 
-        if(var_7 > 1)
+        if(var_7 > 1) {
           var_7 = 1;
+        }
 
         var_8 = anglestoright(var_0.angles) * (var_2[1] * (var_6 * 2 * var_7));
         var_9 = anglesToForward(var_0.angles) * (var_2[0] * (var_6 * 2 * var_7));
@@ -491,16 +504,18 @@ movement_input_think(var_0, var_1) {
         } else
           iprintln("max distance reached");
 
-        if(var_6 != 1)
+        if(var_6 != 1) {
           var_6 = var_6 + 0.05;
+        }
 
         common_scripts\utility::waitframe();
         var_3 = var_8;
       }
 
       while(var_6 != 0.01 && length(var_2) < 0.1) {
-        if(var_6 != 0.01)
+        if(var_6 != 0.01) {
           var_6 = var_6 - 0.01;
+        }
 
         var_10 = var_0.origin + var_3 * (var_6 * 2);
 
@@ -538,14 +553,17 @@ lastframe_moving_cover() {
 hit_panel(var_0, var_1, var_2, var_3, var_4) {
   level.player endon("death");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0.3;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0.5;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0.5;
+  }
 
   earthquake(var_1, var_2, level.player.origin, 1000);
   level.player shellshock("default_nosound", var_3);

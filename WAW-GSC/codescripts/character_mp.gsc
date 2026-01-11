@@ -8,8 +8,9 @@ setModelFromArray(a) {
 }
 
 precacheModelArray(a) {
-  for(i = 0; i < a.size; i++)
+  for(i = 0; i < a.size; i++) {
     precacheModel(a[i]);
+  }
 }
 
 attachFromArray(a) {

@@ -46,8 +46,9 @@ init() {
 initKillstreakData() {
   for(i = 1; true; i++) {
     retVal = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 1);
-    if(!isDefined(retVal) || retVal == "")
+    if(!isDefined(retVal) || retVal == "") {
       break;
+    }
 
     streakRef = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 1);
     assert(streakRef != "");
@@ -81,8 +82,9 @@ initKillstreakData() {
     precacheShader(streakShader);
 
     streakShader = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 15);
-    if(streakShader != "")
+    if(streakShader != "") {
       precacheShader(streakShader);
+    }
   }
 }
 
@@ -90,19 +92,23 @@ onPlayerConnect() {
   for(;;) {
     level waittill("connected", player);
 
-    if(!isDefined(player.pers["killstreaks"]))
+    if(!isDefined(player.pers["killstreaks"])) {
       player.pers["killstreaks"] = [];
+    }
 
-    if(!isDefined(player.pers["kID"]))
+    if(!isDefined(player.pers["kID"])) {
       player.pers["kID"] = 10;
+    }
 
-    if(!isDefined(player.pers["kIDs_valid"]))
+    if(!isDefined(player.pers["kIDs_valid"])) {
       player.pers["kIDs_valid"] = [];
+    }
 
     player.lifeId = 0;
 
-    if(isDefined(player.pers["deaths"]))
+    if(isDefined(player.pers["deaths"])) {
       player.lifeId = player.pers["deaths"];
+    }
 
     player VisionSetMissilecamForPlayer(game["thermal_vision"]);
 
@@ -194,14 +200,17 @@ killstreakUsePressed() {
   assert(isDefined(streakName));
   assert(isDefined(level.killstreakFuncs[streakName]));
 
-  if(!self isOnGround() && (isRideKillstreak(streakName) || isCarryKillstreak(streakName)))
+  if(!self isOnGround() && (isRideKillstreak(streakName) || isCarryKillstreak(streakName))) {
     return (false);
+  }
 
-  if(self isUsingRemote())
+  if(self isUsingRemote()) {
     return (false);
+  }
 
-  if(isDefined(self.selectingLocation))
+  if(isDefined(self.selectingLocation)) {
     return (false);
+  }
 
   if(deadlyKillstreak(streakName) && level.killstreakRoundDelay && getGametypeNumLives()) {
     if(level.gracePeriod - level.inGracePeriod < level.killstreakRoundDelay) {
@@ -225,15 +234,18 @@ killstreakUsePressed() {
     return (false);
   }
 
-  if(!self isWeaponEnabled())
+  if(!self isWeaponEnabled()) {
     return (false);
+  }
 
   if(streakName == "airdrop" || streakName == "airdrop_sentry_minigun" || streakName == "airdrop_mega") {
-    if(!self[[level.killstreakFuncs[streakName]]](lifeId, kID))
+    if(!self[[level.killstreakFuncs[streakName]]](lifeId, kID)) {
       return (false);
+    }
   } else {
-    if(!self[[level.killstreakFuncs[streakName]]](lifeId))
+    if(!self[[level.killstreakFuncs[streakName]]](lifeId)) {
       return (false);
+    }
   }
 
   self usedKillstreak(streakName, awardXp);
@@ -251,8 +263,9 @@ shuffleKillStreaksFILO(streakName) {
 
   streakIndex = -1;
   for(i = 0; i < arraySize; i++) {
-    if(self.pers["killstreaks"][i].streakName != streakName)
+    if(self.pers["killstreaks"][i].streakName != streakName) {
       continue;
+    }
 
     streakIndex = i;
     break;
@@ -274,22 +287,25 @@ shuffleKillStreaksFILO(streakName) {
 usedKillstreak(streakName, awardXp) {
   self playLocalSound("weap_c4detpack_trigger_plr");
 
-  if(awardXp)
+  if(awardXp) {
     self thread[[level.onXPEvent]]("killstreak_" + streakName);
+  }
 
   self thread maps\mp\gametypes\_missions::useHardpoint(streakName);
 
   awardref = maps\mp\_awards::getKillstreakAwardRef(streakName);
-  if(isDefined(awardref))
+  if(isDefined(awardref)) {
     self thread incPlayerStat(awardref, 1);
+  }
 
   team = self.team;
 
   if(level.teamBased) {
     thread leaderDialog(team + "_friendly_" + streakName + "_inbound", team);
 
-    if(getKillstreakInformEnemy(streakName))
+    if(getKillstreakInformEnemy(streakName)) {
       thread leaderDialog(team + "_enemy_" + streakName + "_inbound", level.otherTeam[team]);
+    }
   } else {
     self thread leaderDialogOnPlayer(team + "_friendly_" + streakName + "_inbound");
 
@@ -301,8 +317,9 @@ usedKillstreak(streakName, awardXp) {
 }
 
 clearKillstreaks() {
-  foreach(index, streakStruct in self.pers["killstreaks"])
+  foreach(index, streakStruct in self.pers["killstreaks"]) {
   self.pers["killstreaks"][index] = undefined;
+  }
 }
 
 getFirstPrimaryWeapon() {
@@ -327,22 +344,26 @@ killstreakUseWaiter() {
   level endon("game_ended");
 
   self.lastKillStreak = 0;
-  if(!isDefined(self.pers["lastEarnedStreak"]))
+  if(!isDefined(self.pers["lastEarnedStreak"])) {
     self.pers["lastEarnedStreak"] = undefined;
+  }
 
   self thread finishDeathWaiter();
 
   for(;;) {
     self waittill("weapon_change", newWeapon);
 
-    if(!isAlive(self))
+    if(!isAlive(self)) {
       continue;
+    }
 
-    if(!isDefined(self.pers["killstreaks"][0]))
+    if(!isDefined(self.pers["killstreaks"][0])) {
       continue;
+    }
 
-    if(newWeapon != getKillstreakWeapon(self.pers["killstreaks"][0].streakName))
+    if(newWeapon != getKillstreakWeapon(self.pers["killstreaks"][0].streakName)) {
       continue;
+    }
 
     waittillframeend;
 
@@ -351,18 +372,21 @@ killstreakUseWaiter() {
 
     //no force switching weapon for ridable killstreaks
     if(!isRideKillstreak(streakName) || !result) {
-      if(!self hasWeapon(self getLastWeapon()))
+      if(!self hasWeapon(self getLastWeapon())) {
         self switchToWeapon(self getFirstPrimaryWeapon());
-      else
+      }
+      else {
         self switchToWeapon(self getLastWeapon());
+      }
     }
 
     // give time to switch to the near weapon; when the weapon is none (such as during a "disableWeapon()" period
     // re-enabling the weapon immediately does a "weapon_change" to the killstreak weapon we just used.In the case that
     // we have two of that killstreak, it immediately uses the second one
     if(self getCurrentWeapon() == "none") {
-      while(self getCurrentWeapon() == "none")
+      while(self getCurrentWeapon() == "none") {
         wait(0.05);
+      }
 
       waittillframeend;
     }
@@ -385,18 +409,21 @@ checkKillstreakReward(streakCount) {
   killStreaks = [];
   foreach(streakVal, streakName in self.killStreaks) {
     killStreaks[streakName] = streakVal;
-    if(streakVal > maxVal)
+    if(streakVal > maxVal) {
       maxVal = streakVal;
+    }
   }
 
   foreach(streakVal, streakName in self.killStreaks) {
     actualVal = streakVal + level.killStreakMod;
 
-    if(actualVal > streakCount)
+    if(actualVal > streakCount) {
       break;
+    }
 
-    if(isDefined(self.pers["lastEarnedStreak"]) && killStreaks[streakName] <= killStreaks[self.pers["lastEarnedStreak"]])
+    if(isDefined(self.pers["lastEarnedStreak"]) && killStreaks[streakName] <= killStreaks[self.pers["lastEarnedStreak"]]) {
       continue;
+    }
 
     if(isSubStr(streakName, "-rollover")) {
       continue;
@@ -424,8 +451,9 @@ killstreakEarned(streakName) {
   if(self getPlayerData("killstreaks", 0) == streakName) {
     self.firstKillstreakEarned = getTime();
   } else if(self getPlayerData("killstreaks", 2) == streakName && isDefined(self.firstKillstreakEarned)) {
-    if(getTime() - self.firstKillstreakEarned < 20000)
+    if(getTime() - self.firstKillstreakEarned < 20000) {
       self thread maps\mp\gametypes\_missions::genericChallenge("wargasm");
+    }
   }
 }
 
@@ -438,8 +466,9 @@ rewardNotify(streakName, streakVal) {
 tryGiveKillstreak(streakName, streakVal) {
   level notify("gave_killstreak", streakName);
 
-  if(!level.gameEnded)
+  if(!level.gameEnded) {
     self thread rewardNotify(streakName, streakVal);
+  }
 
   self giveKillstreak(streakName, streakVal, true);
   return true;
@@ -453,8 +482,9 @@ giveKillstreak(streakName, isEarned, awardXp, owner) {
   self giveKillstreakWeapon(weapon);
 
   // shuffle existing killstreaks up a notch
-  for(i = self.pers["killstreaks"].size; i >= 0; i--)
+  for(i = self.pers["killstreaks"].size; i >= 0; i--) {
     self.pers["killstreaks"][i + 1] = self.pers["killstreaks"][i];
+  }
 
   self.pers["killstreaks"][0] = spawnStruct();
   self.pers["killstreaks"][0].streakName = streakName;
@@ -467,28 +497,34 @@ giveKillstreak(streakName, isEarned, awardXp, owner) {
 
   self.pers["kID"]++;
 
-  if(!self.pers["killstreaks"][0].earned)
+  if(!self.pers["killstreaks"][0].earned) {
     self.pers["killstreaks"][0].lifeId = -1;
-  else
+  }
+  else {
     self.pers["killstreaks"][0].lifeId = self.pers["deaths"];
+  }
 
   // probably obsolete unless we bring back the autoshotty	
-  if(isDefined(level.killstreakSetupFuncs[streakName]))
+  if(isDefined(level.killstreakSetupFuncs[streakName])) {
     self[[level.killstreakSetupFuncs[streakName]]]();
+  }
 
-  if(isDefined(isEarned) && isEarned && isDefined(awardXp) && awardXp)
+  if(isDefined(isEarned) && isEarned && isDefined(awardXp) && awardXp) {
     self notify("received_earned_killstreak");
+  }
 }
 
 giveKillstreakWeapon(weapon) {
   weaponList = self getWeaponsListItems();
 
   foreach(item in weaponList) {
-    if(!isSubStr(item, "killstreak"))
+    if(!isSubStr(item, "killstreak")) {
       continue;
+    }
 
-    if(self getCurrentWeapon() == item)
+    if(self getCurrentWeapon() == item) {
       continue;
+    }
 
     self takeWeapon(item);
   }
@@ -530,24 +566,27 @@ getKillstreakCrateIcon(streakName) {
 }
 
 giveOwnedKillstreakItem(skipDialog) {
-  if(!isDefined(self.pers["killstreaks"][0]))
+  if(!isDefined(self.pers["killstreaks"][0])) {
     return;
+  }
 
   streakName = self.pers["killstreaks"][0].streakName;
 
   weapon = getKillstreakWeapon(streakName);
   self giveKillstreakWeapon(weapon);
 
-  if(!isDefined(skipDialog) && !level.inGracePeriod)
+  if(!isDefined(skipDialog) && !level.inGracePeriod) {
     self leaderDialogOnPlayer(streakName, "killstreak_earned");
+  }
 }
 
 initRideKillstreak() {
   self _disableUsability();
   result = self initRideKillstreak_internal();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self _enableUsability();
+  }
 
   return result;
 }
@@ -555,18 +594,22 @@ initRideKillstreak() {
 initRideKillstreak_internal() {
   laptopWait = self waittill_any_timeout(1.0, "disconnect", "death", "weapon_switch_started");
 
-  if(laptopWait == "weapon_switch_started")
+  if(laptopWait == "weapon_switch_started") {
     return ("fail");
+  }
 
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     return "fail";
+  }
 
   if(laptopWait == "disconnect" || laptopWait == "death") {
-    if(laptopWait == "disconnect")
+    if(laptopWait == "disconnect") {
       return ("disconnect");
+    }
 
-    if(self.team == "spectator")
+    if(self.team == "spectator") {
       return "fail";
+    }
 
     return ("success");
   }
@@ -581,30 +624,37 @@ initRideKillstreak_internal() {
   if(blackOutWait != "disconnect") {
     self thread clearRideIntro(1.0);
 
-    if(self.team == "spectator")
+    if(self.team == "spectator") {
       return "fail";
+    }
   }
 
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     return "fail";
+  }
 
-  if(self isEMPed() || self isNuked())
+  if(self isEMPed() || self isNuked()) {
     return "fail";
+  }
 
-  if(blackOutWait == "disconnect")
+  if(blackOutWait == "disconnect") {
     return ("disconnect");
-  else
+  }
+  else {
     return ("success");
+  }
 }
 
 clearRideIntro(delay) {
   self endon("disconnect");
 
-  if(isDefined(delay))
+  if(isDefined(delay)) {
     wait(delay);
+  }
 
   //self freezeControlsWrapper( false );
 
-  if(!isDefined(level.nukeVisionInProgress))
+  if(!isDefined(level.nukeVisionInProgress)) {
     self VisionSetNakedForPlayer(getDvar("mapname"), 0);
+  }
 }

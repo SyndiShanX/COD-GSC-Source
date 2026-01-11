@@ -51,14 +51,16 @@ updateRadiationTriggers() {
 }
 
 updateRadiationTrigger_perplayer(player) {
-  if(player.radiation.inside)
+  if(player.radiation.inside) {
     return;
+  }
 
   player.radiation.inside = true;
   player.radiation.triggers[player.radiation.triggers.size] = self;
 
-  while(player isTouching(self))
+  while(player isTouching(self)) {
     wait 0.05;
+  }
 
   player.radiation.inside = false;
   player.radiation.triggers = array_remove(player.radiation.triggers, self);
@@ -93,14 +95,17 @@ updateRadiationDosage() {
     }
 
     rate = 0;
-    for(i = 0; i < rates.size; i++)
+    for(i = 0; i < rates.size; i++) {
       rate = rate + rates[i];
+    }
 
-    if(rate < min_rate)
+    if(rate < min_rate) {
       rate = min_rate;
+    }
 
-    if(rate > max_rate)
+    if(rate > max_rate) {
       rate = max_rate;
+    }
 
     self.radiation.rate = rate;
     self.radiation.ratepercent = (rate - min_rate) / range * 100;
@@ -115,8 +120,9 @@ updateRadiationDosage() {
       self.radiation.totalpercent = self.radiation.total / max_total * 100;
     } else if(self.radiation.ratepercent < 1 && self.radiation.total > 0) {
       self.radiation.total -= 1500;
-      if(self.radiation.total < 0)
+      if(self.radiation.total < 0) {
         self.radiation.total = 0;
+      }
 
       self.radiation.totalpercent = self.radiation.total / max_total * 100;
     }
@@ -129,12 +135,15 @@ updateRadiationShock() {
   update_frequency = 1;
 
   for(;;) {
-    if(self.radiation.ratepercent >= 75)
+    if(self.radiation.ratepercent >= 75) {
       self shellshock("radiation_high", 5);
-    else if(self.radiation.ratepercent >= 50)
+    }
+    else if(self.radiation.ratepercent >= 50) {
       self shellshock("radiation_med", 5);
-    else if(self.radiation.ratepercent > 25)
+    }
+    else if(self.radiation.ratepercent > 25) {
       self shellshock("radiation_low", 5);
+    }
 
     wait update_frequency;
   }
@@ -144,16 +153,21 @@ updateRadiationSound() {
   self thread playRadiationSound();
 
   for(;;) {
-    if(self.radiation.ratepercent >= 75)
+    if(self.radiation.ratepercent >= 75) {
       self.radiation.sound = "item_geigercouner_level4";
-    else if(self.radiation.ratepercent >= 50)
+    }
+    else if(self.radiation.ratepercent >= 50) {
       self.radiation.sound = "item_geigercouner_level3";
-    else if(self.radiation.ratepercent >= 25)
+    }
+    else if(self.radiation.ratepercent >= 25) {
       self.radiation.sound = "item_geigercouner_level2";
-    else if(self.radiation.ratepercent > 0)
+    }
+    else if(self.radiation.ratepercent > 0) {
       self.radiation.sound = "item_geigercouner_level1";
-    else
+    }
+    else {
       self.radiation.sound = "none";
+    }
 
     wait 0.05;
   }
@@ -161,10 +175,12 @@ updateRadiationSound() {
 
 updateRadiationFlag() {
   for(;;) {
-    if(self.radiation.ratepercent > 25)
+    if(self.radiation.ratepercent > 25) {
       self ent_flag_set("_radiation_poisoning");
-    else
+    }
+    else {
       self ent_flag_clear("_radiation_poisoning");
+    }
 
     wait 0.05;
   }
@@ -184,8 +200,9 @@ playRadiationSound() {
     if(temp != self.radiation.sound) {
       orgin stoploopsound();
 
-      if(isDefined(self.radiation.sound) && self.radiation.sound != "none")
+      if(isDefined(self.radiation.sound) && self.radiation.sound != "none") {
         orgin playLoopSound(self.radiation.sound);
+      }
     }
 
     temp = self.radiation.sound;
@@ -261,16 +278,19 @@ updateRadiationDosimeterColor(player) {
     stepamount = 0.13;
 
     while(player.radiation.rate >= 100) {
-      if(colorvalue <= 0 || colorvalue >= 1)
+      if(colorvalue <= 0 || colorvalue >= 1) {
         stepamount = stepamount * -1;
+      }
 
       colorvalue = colorvalue + stepamount;
 
-      if(colorvalue <= 0)
+      if(colorvalue <= 0) {
         colorvalue = 0;
+      }
 
-      if(colorvalue >= 1)
+      if(colorvalue >= 1) {
         colorvalue = 1;
+      }
 
       self.color = (1, colorvalue, colorvalue);
       //println( "colorvalue: ", colorvalue );
@@ -321,10 +341,12 @@ updateRadiationBlackOut() {
       percent_range = max_percent - min_percent;
       fraction = (self.radiation.totalpercent - min_percent) / percent_range;
 
-      if(fraction < 0)
+      if(fraction < 0) {
         fraction = 0;
-      else if(fraction > 1)
+      }
+      else if(fraction > 1) {
         fraction = 1;
+      }
 
       length_range = max_length - min_length;
       length = min_length + (length_range * (1 - fraction));
@@ -338,8 +360,9 @@ updateRadiationBlackOut() {
 
       println("fraction: ", fraction, " length: ", length, " alpha: ", alpha, " blur: ", blur);
 
-      if(fraction == 1)
+      if(fraction == 1) {
         break;
+      }
 
       duration = length / 2;
 
@@ -351,11 +374,13 @@ updateRadiationBlackOut() {
       wait(fraction * 0.5);
     }
 
-    if(fraction == 1)
+    if(fraction == 1) {
       break;
+    }
 
-    if(overlay.alpha != 0)
+    if(overlay.alpha != 0) {
       overlay fadeoutBlackOut(1, 0, 0, self);
+    }
 
     wait 0.05;
   }
@@ -367,8 +392,9 @@ radiation_kill() {
   self.specialDeath = true;
   self.radiationDeath = true;
 
-  if(!kill_wrapper())
+  if(!kill_wrapper()) {
     return;
+  }
   waittillframeend;
 
   assert(!isAlive(self));
@@ -401,8 +427,9 @@ first_radiation_dialogue() {
   while(1) {
     self ent_flag_wait("_radiation_poisoning");
 
-    if(level.script == "scoutsniper" || level.script == "co_scoutsniper")
+    if(level.script == "scoutsniper" || level.script == "co_scoutsniper") {
       level thread function_stack(::radio_dialogue, "scoutsniper_mcm_youdaft");
+    }
     level notify("radiation_warning");
 
     self ent_flag_waitopen("_radiation_poisoning");

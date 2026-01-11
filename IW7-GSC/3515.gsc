@@ -21,8 +21,9 @@ func_128FD(var_00, var_01) {
   var_02 = scripts\mp\killstreaks\killstreaks::initridekillstreak("remote_mortar");
 
   if(var_02 != "success") {
-    if(var_02 != "disconnect")
+    if(var_02 != "disconnect") {
       scripts\mp\utility\game::clearusingremote();
+    }
 
     return 0;
   } else if(isDefined(level.reminder_reaction_pointat)) {
@@ -38,8 +39,9 @@ func_128FD(var_00, var_01) {
 func_10DE9(var_00) {
   var_01 = func_10906(var_00, self);
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     return 0;
+  }
 
   level.reminder_reaction_pointat = var_01;
   func_DF87(var_01);
@@ -50,8 +52,9 @@ func_10DE9(var_00) {
 func_10906(var_00, var_01) {
   var_02 = spawnplane(var_01, "script_model", level.func_12AF5 gettagorigin("tag_origin"), "compass_objpoint_reaper_friendly", "compass_objpoint_reaper_enemy");
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     return undefined;
+  }
 
   var_02 setModel("vehicle_predator_b");
   var_2.lifeid = var_00;
@@ -97,8 +100,9 @@ func_DF87(var_00) {
   thread waitsetthermal(1.0, var_00);
   thread scripts\mp\utility\game::reinitializethermal(var_00);
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(0);
+  }
 
   self getwholescenedurationmax(var_00, "tag_player", 1.0, 40, 40, 25, 40);
   thread func_B011(var_00);
@@ -193,14 +197,16 @@ func_89F4(var_00) {
   var_00 endon("death");
   self notifyonplayercommand("remote_mortar_toggleZoom1", "+ads_akimbo_accessible");
 
-  if(!level.console)
+  if(!level.console) {
     self notifyonplayercommand("remote_mortar_toggleZoom1", "+toggleads_throw");
+  }
 
   for(;;) {
     var_01 = scripts\engine\utility::waittill_any_return("remote_mortar_toggleZoom1");
 
-    if(!isDefined(self.remote_detonation_monitor))
+    if(!isDefined(self.remote_detonation_monitor)) {
       self.remote_detonation_monitor = 0;
+    }
 
     self.remote_detonation_monitor = 1 - self.remote_detonation_monitor;
   }
@@ -220,8 +226,9 @@ func_DFB3(var_00) {
     if(self adsbuttonpressed()) {
       wait 0.05;
 
-      if(isDefined(self.remote_detonation_monitor))
+      if(isDefined(self.remote_detonation_monitor)) {
         var_01 = 1;
+      }
 
       break;
     }
@@ -272,8 +279,9 @@ remotedefusesetup(var_00) {
   if(!scripts\mp\utility\game::isusingremote()) {
     return;
   }
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 notify("helicopter_done");
+  }
 
   self thermalvisionoff();
   self thermalvisionfofoverlayoff();
@@ -282,8 +290,9 @@ remotedefusesetup(var_00) {
   self unlink();
   scripts\mp\utility\game::clearusingremote();
 
-  if(getdvarint("camera_thirdPerson"))
+  if(getdvarint("camera_thirdPerson")) {
     scripts\mp\utility\game::setthirdpersondof(1);
+  }
 
   scripts\mp\utility\game::_switchtoweapon(scripts\engine\utility::getlastweapon());
   var_01 = scripts\mp\utility\game::getkillstreakweapon("remote_mortar");
@@ -301,11 +310,13 @@ func_89F3(var_00) {
   var_01 = 40.0;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_01);
 
-  while(var_0.func_6DB6)
+  while(var_0.func_6DB6) {
     wait 0.05;
+  }
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 remotedefusesetup(self);
+  }
 
   thread remoteinfo();
 }
@@ -317,8 +328,9 @@ handledeath(var_00) {
   self endon("remote_done");
   self waittill("death");
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 remotedefusesetup(self);
+  }
 
   level thread func_E161(self, 1);
 }
@@ -331,8 +343,9 @@ func_89CE(var_00) {
   var_00 endon("removed_reaper_ammo");
   var_00 scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 remotedefusesetup(self);
+  }
 
   thread remoteinfo();
 }
@@ -349,16 +362,18 @@ func_89CF(var_00) {
 func_E161(var_00, var_01) {
   self notify("remote_removed");
 
-  if(isDefined(var_0.func_1155F))
+  if(isDefined(var_0.func_1155F)) {
     var_0.func_1155F delete();
+  }
 
   if(isDefined(var_00)) {
     var_00 delete();
     var_00 scripts\mp\killstreaks\uav::func_E182();
   }
 
-  if(!isDefined(var_01) || var_01 == 1)
+  if(!isDefined(var_01) || var_01 == 1) {
     level.reminder_reaction_pointat = undefined;
+  }
 }
 
 remoteinfo() {
@@ -399,11 +414,13 @@ damagetracker() {
     if(!isDefined(self)) {
       return;
     }
-    if(isDefined(var_08) && var_08 &level.idflags_penetration)
+    if(isDefined(var_08) && var_08 &level.idflags_penetration) {
       self.wasdamagedfrombulletpenetration = 1;
+    }
 
-    if(isDefined(var_08) && var_08 &level.idflags_no_team_protection)
+    if(isDefined(var_08) && var_08 &level.idflags_no_team_protection) {
       self.wasdamagedfrombulletricochet = 1;
+    }
 
     self.wasdamaged = 1;
     var_10 = var_00;
@@ -412,8 +429,9 @@ damagetracker() {
       var_01 scripts\mp\damagefeedback::updatedamagefeedback("");
 
       if(var_04 == "MOD_RIFLE_BULLET" || var_04 == "MOD_PISTOL_BULLET") {
-        if(var_01 scripts\mp\utility\game::_hasperk("specialty_armorpiercing"))
+        if(var_01 scripts\mp\utility\game::_hasperk("specialty_armorpiercing")) {
           var_10 = var_10 + var_00 * level.armorpiercingmod;
+        }
       }
     }
 
@@ -434,8 +452,9 @@ damagetracker() {
 
     self.damagetaken = self.damagetaken + var_10;
 
-    if(isDefined(self.owner))
+    if(isDefined(self.owner)) {
       self.owner playlocalsound("reaper_damaged");
+    }
 
     if(self.damagetaken >= self.maxhealth) {
       if(isplayer(var_01) && (!isDefined(self.owner) || var_01 != self.owner)) {
@@ -444,8 +463,9 @@ damagetracker() {
         var_01 thread scripts\mp\utility\game::giveunifiedpoints("kill", var_09, 50);
       }
 
-      if(isDefined(self.owner))
+      if(isDefined(self.owner)) {
         self.owner stopolcalsound("missile_incoming");
+      }
 
       thread remotedetonatebeginuse();
       level.reminder_reaction_pointat = undefined;
@@ -473,18 +493,21 @@ func_10FA8(var_00, var_01) {
   self endon("death");
   var_00 endon("death");
 
-  if(isDefined(var_0.owner))
+  if(isDefined(var_0.owner)) {
     var_0.owner playlocalsound("missile_incoming");
+  }
 
   self missile_settargetent(var_00);
   var_02 = distance(self.origin, var_00 getpointinbounds(0, 0, 0));
   var_03 = var_00 getpointinbounds(0, 0, 0);
 
   for(;;) {
-    if(!isDefined(var_00))
+    if(!isDefined(var_00)) {
       var_04 = var_03;
-    else
+    }
+    else {
       var_04 = var_00 getpointinbounds(0, 0, 0);
+    }
 
     var_03 = var_04;
     var_05 = distance(self.origin, var_04);
@@ -496,14 +519,16 @@ func_10FA8(var_00, var_01) {
       self missile_settargetent(var_06);
       var_00 = var_06;
 
-      if(isDefined(var_0.owner))
+      if(isDefined(var_0.owner)) {
         var_0.owner stopolcalsound("missile_incoming");
+      }
 
       return;
     }
 
-    if(var_05 < var_02)
+    if(var_05 < var_02) {
       var_02 = var_05;
+    }
 
     if(var_05 > var_02) {
       if(var_05 > 1536) {
@@ -513,8 +538,9 @@ func_10FA8(var_00, var_01) {
         var_0.owner stopolcalsound("missile_incoming");
 
         if(level.teambased) {
-          if(var_0.team != var_1.team)
+          if(var_0.team != var_1.team) {
             radiusdamage(self.origin, 1000, 1000, 1000, var_01, "MOD_EXPLOSIVE", "stinger_mp");
+          }
         } else
           radiusdamage(self.origin, 1000, 1000, 1000, var_01, "MOD_EXPLOSIVE", "stinger_mp");
       }
@@ -546,8 +572,9 @@ func_89B6() {
 func_EB18(var_00, var_01, var_02) {
   var_00 endon("death");
 
-  if(isDefined(var_0.owner))
+  if(isDefined(var_0.owner)) {
     var_0.owner playlocalsound("missile_incoming");
+  }
 
   var_03 = 150;
   var_04 = 1000;
@@ -567,8 +594,9 @@ func_EB18(var_00, var_01, var_02) {
     var_08 = [];
 
     for(var_06 = 0; var_06 < var_2.size; var_6++) {
-      if(isDefined(var_2[var_06]))
+      if(isDefined(var_2[var_06])) {
         var_8[var_06] = distance(var_2[var_06].origin, var_07);
+      }
     }
 
     for(var_06 = 0; var_06 < var_8.size; var_6++) {
@@ -579,18 +607,21 @@ func_EB18(var_00, var_01, var_02) {
           var_09 = var_00 scripts\mp\killstreaks\flares::func_6EA0();
 
           for(var_10 = 0; var_10 < var_2.size; var_10++) {
-            if(isDefined(var_2[var_10]))
+            if(isDefined(var_2[var_10])) {
               var_2[var_10] missile_settargetent(var_09);
+            }
           }
 
-          if(isDefined(var_0.owner))
+          if(isDefined(var_0.owner)) {
             var_0.owner stopolcalsound("missile_incoming");
+          }
 
           return;
         }
 
-        if(var_8[var_06] < var_5[var_06])
+        if(var_8[var_06] < var_5[var_06]) {
           var_5[var_06] = var_8[var_06];
+        }
 
         if(var_8[var_06] > var_5[var_06]) {
           if(var_8[var_06] > 1536) {
@@ -600,8 +631,9 @@ func_EB18(var_00, var_01, var_02) {
             var_0.owner stopolcalsound("missile_incoming");
 
             if(level.teambased) {
-              if(var_0.team != var_1.team)
+              if(var_0.team != var_1.team) {
                 radiusdamage(var_2[var_06].origin, var_04, var_03, var_03, var_01, "MOD_EXPLOSIVE", "sam_projectile_mp");
+              }
             } else
               radiusdamage(var_2[var_06].origin, var_04, var_03, var_03, var_01, "MOD_EXPLOSIVE", "sam_projectile_mp");
           }

@@ -30,8 +30,9 @@ on_bot_connect() {
   }
   wait 0.1;
 
-  if(self getentitynumber() % 2 == 0)
+  if(self getentitynumber() % 2 == 0) {
     wait 0.05;
+  }
 
   self maps\mp\bots\_bot::bot_set_rank();
 
@@ -52,8 +53,9 @@ on_bot_connect() {
   max_allocation = 10;
 
   for(i = 1; i <= 3; i++) {
-    if(self isitemlocked(maps\mp\gametypes\_rank::getitemindex("feature_allocation_slot_" + i)))
+    if(self isitemlocked(maps\mp\gametypes\_rank::getitemindex("feature_allocation_slot_" + i))) {
       max_allocation--;
+    }
   }
 
   self bot_construct_loadout(max_allocation);
@@ -73,11 +75,13 @@ bot_construct_loadout(allocation_max) {
   bot_construct_class(4, item_list, allocation_max);
   killstreaks = item_list["killstreak1"];
 
-  if(isDefined(item_list["killstreak2"]))
+  if(isDefined(item_list["killstreak2"])) {
     killstreaks = arraycombine(killstreaks, item_list["killstreak2"], 1, 0);
+  }
 
-  if(isDefined(item_list["killstreak3"]))
+  if(isDefined(item_list["killstreak3"])) {
     killstreaks = arraycombine(killstreaks, item_list["killstreak3"], 1, 0);
+  }
 
   if(isDefined(killstreaks) && killstreaks.size) {
     bot_choose_weapon(0, killstreaks);
@@ -129,14 +133,17 @@ bot_construct_class(class, items, allocation_max) {
     lethal_chance = 30;
     tactical_chance = 20;
 
-    if(claimed_count["specialty1"] && claimed_count["specialty2"] && claimed_count["specialty3"])
+    if(claimed_count["specialty1"] && claimed_count["specialty2"] && claimed_count["specialty3"]) {
       perks_chance = 0;
+    }
 
-    if(claimed_count["primarygrenade"])
+    if(claimed_count["primarygrenade"]) {
       lethal_chance = 0;
+    }
 
-    if(claimed_count["specialgrenade"])
+    if(claimed_count["specialgrenade"]) {
       tactical_chance = 0;
+    }
 
     if(perks_chance + lethal_chance + tactical_chance <= 0) {
       return;
@@ -181,14 +188,17 @@ bot_construct_class(class, items, allocation_max) {
         remaining = allocation_max - allocation;
 
         if(remaining > 0) {
-          if(!claimed_count["specialty1"])
+          if(!claimed_count["specialty1"]) {
             perks[perks.size] = "specialty1";
+          }
 
-          if(!claimed_count["specialty2"])
+          if(!claimed_count["specialty2"]) {
             perks[perks.size] = "specialty2";
+          }
 
-          if(!claimed_count["specialty3"])
+          if(!claimed_count["specialty3"]) {
             perks[perks.size] = "specialty3";
+          }
 
           if(perks.size) {
             perk = random(perks);
@@ -252,33 +262,39 @@ bot_chose_action(action1, chance1, action2, chance2, action3, chance3, action4, 
   chance4 = int(chance4 / 10);
   actions = [];
 
-  for(i = 0; i < chance1; i++)
+  for(i = 0; i < chance1; i++) {
     actions[actions.size] = action1;
+  }
 
-  for(i = 0; i < chance2; i++)
+  for(i = 0; i < chance2; i++) {
     actions[actions.size] = action2;
+  }
 
-  for(i = 0; i < chance3; i++)
+  for(i = 0; i < chance3; i++) {
     actions[actions.size] = action3;
+  }
 
-  for(i = 0; i < chance4; i++)
+  for(i = 0; i < chance4; i++) {
     actions[actions.size] = action4;
+  }
 
   return random(actions);
 }
 
 bot_item_is_claimed(item) {
   foreach(claim in self.claimed_items) {
-    if(claim == item)
+    if(claim == item) {
       return true;
+    }
   }
 
   return false;
 }
 
 bot_choose_weapon(class, items) {
-  if(!isDefined(items) || !items.size)
+  if(!isDefined(items) || !items.size) {
     return undefined;
+  }
 
   start = randomint(items.size);
 
@@ -326,8 +342,9 @@ bot_choose_weapon_option(class, optiontype, primary) {
   numoptions = level.botweaponoptionsprob[optiontype].size;
   maxprob = level.botweaponoptionsprob[optiontype][numoptions - 1];
 
-  if(!level.systemlink && self.pers["rank"] < 20)
+  if(!level.systemlink && self.pers["rank"] < 20) {
     maxprob = maxprob + 4 * maxprob * ((20 - self.pers["rank"]) / 20);
+  }
 
   rnd = randomint(int(maxprob));
 
@@ -343,8 +360,9 @@ bot_choose_primary_attachments(class, weapon, allocation, allocation_max) {
   attachments = getweaponattachments(weapon);
   remaining = allocation_max - allocation;
 
-  if(!attachments.size || !remaining)
+  if(!attachments.size || !remaining) {
     return 0;
+  }
 
   attachment_action = bot_chose_action("3_attachments", 25, "2_attachments", 35, "1_attachments", 35, "none", 5);
 
@@ -394,8 +412,9 @@ bot_choose_secondary_attachments(class, weapon, allocation, allocation_max) {
   attachments = getweaponattachments(weapon);
   remaining = allocation_max - allocation;
 
-  if(!attachments.size || !remaining)
+  if(!attachments.size || !remaining) {
     return 0;
+  }
 
   attachment_action = bot_chose_action("2_attachments", 10, "1_attachments", 40, "none", 50, "none", 0);
 
@@ -449,8 +468,9 @@ bot_build_item_list() {
       if(bot_item_is_banned(slot, name)) {
         continue;
       }
-      if(!isDefined(items[slot]))
+      if(!isDefined(items[slot])) {
         items[slot] = [];
+      }
 
       items[slot][items[slot].size] = name;
     }
@@ -461,18 +481,22 @@ bot_build_item_list() {
 }
 
 bot_item_is_banned(slot, item) {
-  if(item == "WEAPON_KNIFE_BALLISTIC")
+  if(item == "WEAPON_KNIFE_BALLISTIC") {
     return true;
+  }
 
-  if(getdvarint(#"tu6_enableDLCWeapons") == 0 && item == "WEAPON_PEACEKEEPER")
+  if(getdvarint(#"tu6_enableDLCWeapons") == 0 && item == "WEAPON_PEACEKEEPER") {
     return true;
+  }
 
-  if(slot != "killstreak1" && slot != "killstreak2" && slot != "killstreak3")
+  if(slot != "killstreak1" && slot != "killstreak2" && slot != "killstreak3") {
     return false;
+  }
 
   foreach(banned in level.bot_banned_killstreaks) {
-    if(item == banned)
+    if(item == banned) {
       return true;
+    }
   }
 
   return false;
@@ -482,8 +506,9 @@ bot_build_claimed_list(items) {
   claimed = [];
   keys = getarraykeys(items);
 
-  foreach(key in keys)
+  foreach(key in keys) {
   claimed[key] = 0;
+  }
 
   return claimed;
 }

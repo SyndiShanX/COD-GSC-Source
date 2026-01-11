@@ -182,4 +182,3 @@ function_3fbc7157(origin, radius) {
     waitframe(1);
   }
 }
-

@@ -34,8 +34,9 @@ main() {
 combatinit() {
   self.a.arrivaltype = undefined;
 
-  if(isDefined(self.node) && isDefined(anim.isambushnode[self.node.type]) && self nearnode(self.node))
+  if(isDefined(self.node) && isDefined(anim.isambushnode[self.node.type]) && self nearnode(self.node)) {
     self.ambushnode = self.node;
+  }
 }
 
 combatglobalsinit() {
@@ -64,8 +65,9 @@ transitiontocombat() {
 }
 
 setup() {
-  if(self.weapon == self.sidearm && self isstanceallowed("stand"))
+  if(self.weapon == self.sidearm && self isstanceallowed("stand")) {
     transitionto("stand");
+  }
 
   self set_aimturn_limits();
   self thread stopshortly();
@@ -122,8 +124,9 @@ idlethread() {
   for(;;) {
     idleanim = animarraypickrandom("exposed_idle");
 
-    if(isarray(idleanim))
+    if(isarray(idleanim)) {
       idleanim = random(idleanim);
+    }
 
     self setflaggedanimknoblimitedrestart("idle", idleanim);
     self waittillmatch("idle", "end");
@@ -227,11 +230,13 @@ exposedcombatmainloopsetup() {
 }
 
 exposedcombatrambo() {
-  if(!(isDefined(self.a.doexposedblindfire) && self.a.doexposedblindfire))
+  if(!(isDefined(self.a.doexposedblindfire) && self.a.doexposedblindfire)) {
     return false;
+  }
 
-  if(!animscripts\weaponlist::usingautomaticweapon())
+  if(!animscripts\weaponlist::usingautomaticweapon()) {
     return false;
+  }
 
   shouldexposedrambo = !isDefined(self.a.nextallowedexposedblindfiretime) || isDefined(self.a.nextallowedexposedblindfiretime) && self.a.nextallowedexposedblindfiretime < gettime();
 
@@ -266,8 +271,9 @@ exposedcombatwaitforstancechange() {
       }
       if(self isstanceallowed(otherstance)) {
         if(curstance == "stand" && self.weapon == self.sidearm) {
-          if(switchtolastweapon())
+          if(switchtolastweapon()) {
             return true;
+          }
         }
 
         transitionto(otherstance);
@@ -280,8 +286,9 @@ exposedcombatwaitforstancechange() {
 }
 
 exposedcombatcantseeenemybehavior() {
-  if(self.a.pose != "stand" && self isstanceallowed("stand") && standifmakesenemyvisible())
+  if(self.a.pose != "stand" && self isstanceallowed("stand") && standifmakesenemyvisible()) {
     return true;
+  }
 
   time = gettime();
   self.a.dontcrouchtime = time + 1500;
@@ -289,40 +296,48 @@ exposedcombatcantseeenemybehavior() {
   if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type])) {
     relyaw = angleclamp180(self.angles[1] - self.node.angles[1]);
 
-    if(self turntofacerelativeyaw(relyaw))
+    if(self turntofacerelativeyaw(relyaw)) {
       return true;
+    }
   } else if(isDefined(self.enemy) && self seerecently(self.enemy, 2) || time > self.a.scriptstarttime + 1200) {
     relyaw = undefined;
     likelyenemydir = self getanglestolikelyenemypath();
 
-    if(isDefined(likelyenemydir))
+    if(isDefined(likelyenemydir)) {
       relyaw = angleclamp180(self.angles[1] - likelyenemydir[1]);
-    else if(isDefined(self.node))
+    }
+    else if(isDefined(self.node)) {
       relyaw = angleclamp180(self.angles[1] - self.node.angles[1]);
+    }
     else if(isDefined(self.enemy)) {
       likelyenemydir = vectortoangles(self lastknownpos(self.enemy) - self.origin);
       relyaw = angleclamp180(self.angles[1] - likelyenemydir[1]);
     }
 
-    if(isDefined(relyaw) && self turntofacerelativeyaw(relyaw))
+    if(isDefined(relyaw) && self turntofacerelativeyaw(relyaw)) {
       return true;
+    }
   }
 
-  if(exposedcombatconsiderthrowgrenade())
+  if(exposedcombatconsiderthrowgrenade()) {
     return true;
+  }
 
   givenuponenemy = self.a.nextgiveuponenemytime < time;
   threshold = 0;
 
-  if(givenuponenemy)
+  if(givenuponenemy) {
     threshold = 0.99999;
+  }
 
-  if(self exposedreload(threshold))
+  if(self exposedreload(threshold)) {
     return true;
+  }
 
   if(givenuponenemy && self.weapon == self.sidearm) {
-    if(switchtolastweapon())
+    if(switchtolastweapon()) {
       return true;
+    }
   }
 
   exposedcantseeenemywait();
@@ -333,10 +348,12 @@ exposedcombatcantseeenemybehavior() {
 exposedcantseeenemywait() {
   self endon("shoot_behavior_change");
 
-  if(isDefined(self.a.shortcantseeenemywait) && self.a.shortcantseeenemywait)
+  if(isDefined(self.a.shortcantseeenemywait) && self.a.shortcantseeenemywait) {
     wait 0.05;
-  else
+  }
+  else {
     wait(0.4 + randomfloat(0.4));
+  }
 
   self waittill("do_slow_things");
 }
@@ -345,14 +362,16 @@ exposedcombatstopusingrpgcheck() {
   if(usingrocketlauncher() && animscripts\shared::shouldthrowdownweapon()) {
     lastweapontype = weaponanims();
 
-    if(self.a.pose != "stand" && self.a.pose != "crouch")
+    if(self.a.pose != "stand" && self.a.pose != "crouch") {
       transitionto("crouch");
+    }
 
     self notify("kill_idle_thread");
     animscripts\shared::throwdownweapon();
 
-    if(lastweapontype == "rocketlauncher")
+    if(lastweapontype == "rocketlauncher") {
       self.a.pose = "stand";
+    }
 
     resetweaponanims();
     self thread idlethread();
@@ -366,13 +385,15 @@ exposedcombatneedtoturn() {
   if(needtoturn()) {
     predicttime = 0.25;
 
-    if(isDefined(self.shootent) && !issentient(self.shootent))
+    if(isDefined(self.shootent) && !issentient(self.shootent)) {
       predicttime = 1.5;
+    }
 
     yawtoshootentorpos = getpredictedaimyawtoshootentorpos(predicttime);
 
-    if(turntofacerelativeyaw(yawtoshootentorpos))
+    if(turntofacerelativeyaw(yawtoshootentorpos)) {
       return true;
+    }
   }
 
   return false;
@@ -385,20 +406,24 @@ exposedcombatconsiderthrowgrenade() {
   if(isDefined(players[0]) && isDefined(anim.throwgrenadeatplayerasap) && isalive(players[0])) {
     self.grenadeammo++;
 
-    if(tryexposedthrowgrenade(players[0], anim.combatglobals.min_exposed_grenade_dist_player, 1))
+    if(tryexposedthrowgrenade(players[0], anim.combatglobals.min_exposed_grenade_dist_player, 1)) {
       return true;
+    }
   } else if(isDefined(self.enemy) && isDefined(anim.throwgrenadeatenemyasap) && isalive(self.enemy)) {
     self.grenadeammo++;
 
-    if(tryexposedthrowgrenade(self.enemy, anim.combatglobals.min_exposed_grenade_dist, 1))
+    if(tryexposedthrowgrenade(self.enemy, anim.combatglobals.min_exposed_grenade_dist, 1)) {
       return true;
+    }
   }
 
-  if(!mygrenadecooldownelapsed())
+  if(!mygrenadecooldownelapsed()) {
     return false;
+  }
 
-  if(isDefined(self.enemy) && tryexposedthrowgrenade(self.enemy, anim.combatglobals.min_exposed_grenade_dist))
+  if(isDefined(self.enemy) && tryexposedthrowgrenade(self.enemy, anim.combatglobals.min_exposed_grenade_dist)) {
     return true;
+  }
 
   self.a.nextgrenadetrytime = gettime() + 2000;
   self.a.throwinggrenade = 0;
@@ -411,41 +436,49 @@ tryexposedthrowgrenade(throwat, mindist, forcethrow) {
   forcethrow = isDefined(forcethrow) && forcethrow;
   threw = 0;
 
-  if(!forcethrow && self recentlysawenemy())
+  if(!forcethrow && self recentlysawenemy()) {
     return 0;
+  }
 
-  if(!forcethrow && !animscripts\cover_behavior::enemyishiding() && !(isDefined(level.allowexposedaigrenadethrow) && level.allowexposedaigrenadethrow))
+  if(!forcethrow && !animscripts\cover_behavior::enemyishiding() && !(isDefined(level.allowexposedaigrenadethrow) && level.allowexposedaigrenadethrow)) {
     return 0;
+  }
 
   throwspot = throwat.origin;
 
   if(!self cansee(throwat)) {
-    if(isDefined(self.enemy) && throwat == self.enemy && isDefined(self.shootpos))
+    if(isDefined(self.enemy) && throwat == self.enemy && isDefined(self.shootpos)) {
       throwspot = self.shootpos;
+    }
   }
 
-  if(!self cansee(throwat))
+  if(!self cansee(throwat)) {
     mindist = 250;
+  }
 
   if(distancesquared(self.origin, throwspot) > mindist * mindist && self.a.pose == "stand") {
     self setactivegrenadetimer(throwat);
 
-    if(!forcethrow && !grenadecooldownelapsed())
+    if(!forcethrow && !grenadecooldownelapsed()) {
       return 0;
+    }
 
     yaw = getyawtospot(throwspot);
 
     if(abs(yaw) < 60) {
       throwanims = [];
 
-      if(isdeltaallowed(animarray("grenade_throw")))
+      if(isdeltaallowed(animarray("grenade_throw"))) {
         throwanims[throwanims.size] = animarray("grenade_throw");
+      }
 
-      if(isdeltaallowed(animarray("grenade_throw_1")))
+      if(isdeltaallowed(animarray("grenade_throw_1"))) {
         throwanims[throwanims.size] = animarray("grenade_throw_1");
+      }
 
-      if(isdeltaallowed(animarray("grenade_throw_2")))
+      if(isdeltaallowed(animarray("grenade_throw_2"))) {
         throwanims[throwanims.size] = animarray("grenade_throw_2");
+      }
 
       if(throwanims.size > 0) {
         self setanim( % exposed_aiming, 0, 0.1);
@@ -454,10 +487,12 @@ tryexposedthrowgrenade(throwat, mindist, forcethrow) {
         threw = trygrenade(throwat, throwanims[randomint(throwanims.size)], forcethrow);
         self setanim( % exposed_aiming, 1, 0.1);
 
-        if(threw)
+        if(threw) {
           setanimaimweight(1, 0.5);
-        else
+        }
+        else {
           setanimaimweight(1, 0);
+        }
       } else {
         self animscripts\debug::debugpopstate("tryThrowGrenade", "no throw anim that wouldn't collide with env");
 
@@ -467,15 +502,18 @@ tryexposedthrowgrenade(throwat, mindist, forcethrow) {
 
     }
   } else {
-    if(distancesquared(self.origin, throwspot) < mindist * mindist)
+    if(distancesquared(self.origin, throwspot) < mindist * mindist) {
       self animscripts\debug::debugpopstate("tryThrowGrenade", "too close (<" + mindist + ")");
-    else
+    }
+    else {
       self animscripts\debug::debugpopstate("tryThrowGrenade", "not standing");
+    }
 
   }
 
-  if(threw)
+  if(threw) {
     self maps\_gameskill::didsomethingotherthanshooting();
+  }
 
   self animscripts\debug::debugpopstate("tryThrowGrenade");
 
@@ -483,19 +521,22 @@ tryexposedthrowgrenade(throwat, mindist, forcethrow) {
 }
 
 exposedcombatcheckreloadorusepistol(distsqtoshootpos) {
-  if(getdvarint(#"_id_28C1D720") == 1)
+  if(getdvarint(#"_id_28C1D720") == 1) {
     self.forcesidearm = 1;
+  }
 
   if(!(self.weapon == self.sidearm)) {
     shouldforcesidearm = isDefined(self.forcesidearm) && self.forcesidearm;
 
     if(shouldforcesidearm && self.a.pose == "stand") {
-      if(self tryusingsidearm())
+      if(self tryusingsidearm()) {
         return true;
+      }
 
       if(issniper() && distsqtoshootpos < anim.combatglobals.pistol_pullout_distsq) {
-        if(self tryusingsidearm())
+        if(self tryusingsidearm()) {
           return true;
+        }
       }
     }
   }
@@ -507,12 +548,14 @@ exposedcombatcheckreloadorusepistol(distsqtoshootpos) {
         return true;
       }
 
-      if(self tryusingsidearm())
+      if(self tryusingsidearm()) {
         return true;
+      }
     }
 
-    if(self exposedreload(0))
+    if(self exposedreload(0)) {
       return true;
+    }
   }
 
   return false;
@@ -522,18 +565,21 @@ exposedcombatcheckputawaypistol(distsqtoshootpos) {
   if(self.weapon == self.sidearm && !isDefined(self.forcesidearm) && !aihasonlypistol()) {
     assert(self.a.pose == "stand");
 
-    if(distsqtoshootpos > anim.combatglobals.pistol_putback_distsq || self.combatmode == "ambush_nodes_only" && (!isDefined(self.enemy) || !self cansee(self.enemy)))
+    if(distsqtoshootpos > anim.combatglobals.pistol_putback_distsq || self.combatmode == "ambush_nodes_only" && (!isDefined(self.enemy) || !self cansee(self.enemy))) {
       switchtolastweapon();
+    }
   }
 }
 
 exposedcombatcheckstance(distsqtoshootpos) {
   desiredstance = undefined;
 
-  if(shouldforcebehavior("force_stand"))
+  if(shouldforcebehavior("force_stand")) {
     desiredstance = "stand";
-  else if(shouldforcebehavior("force_crouch"))
+  }
+  else if(shouldforcebehavior("force_crouch")) {
     desiredstance = "crouch";
+  }
 
   if(isDefined(desiredstance)) {
     if(self.a.pose != desiredstance) {
@@ -550,14 +596,16 @@ exposedcombatcheckstance(distsqtoshootpos) {
       return true;
     }
 
-    if(standifmakesenemyvisible())
+    if(standifmakesenemyvisible()) {
       return true;
+    }
   }
 
   iscrouchingatnodeallowed = 1;
 
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     iscrouchingatnodeallowed = !self.node has_spawnflag(8);
+  }
 
   if(distsqtoshootpos > 262144 && self.a.pose != "crouch" && self isstanceallowed("crouch") && iscrouchingatnodeallowed && !(self.weapon == self.sidearm) && !(isDefined(self.heat) && self.heat) && gettime() >= self.a.dontcrouchtime && randomint(100) <= 25 && lengthsquared(self.shootentvelocity) < 10000) {
     if(!isDefined(self.shootpos) || sighttracepassed(self.origin + vectorscale((0, 0, 1), 36.0), self.shootpos, 0, undefined)) {
@@ -612,8 +660,9 @@ exposedcombatreacquirewhennecessary() {
     wait 0.2;
 
     if(isDefined(self.enemy) && !self seerecently(self.enemy, 2)) {
-      if(self.combatmode == "ambush" || self.combatmode == "ambush_nodes_only")
+      if(self.combatmode == "ambush" || self.combatmode == "ambush_nodes_only") {
         continue;
+      }
     }
 
     tryexposedreacquire();
@@ -714,8 +763,9 @@ tryexposedreacquire() {
 
       break;
     case 4:
-      if(!self cansee(self.enemy) || !self canshootenemy())
+      if(!self cansee(self.enemy) || !self canshootenemy()) {
         self flagenemyunattackable();
+      }
 
       break;
     default:
@@ -745,13 +795,16 @@ keeptryingtomelee() {
     wait(0.2 + randomfloat(0.3));
 
     if(isDefined(self.enemy)) {
-      if(isplayer(self.enemy))
+      if(isplayer(self.enemy)) {
         checkdistsq = 40000;
-      else
+      }
+      else {
         checkdistsq = 10000;
+      }
 
-      if(distancesquared(self.enemy.origin, self.origin) < checkdistsq)
+      if(distancesquared(self.enemy.origin, self.origin) < checkdistsq) {
         trymelee();
+      }
     }
   }
 }
@@ -789,17 +842,21 @@ resetgiveuponenemytime() {
 switchtolastweapon(cleanup) {
   self endon("killanimscript");
 
-  if(self.a.pose != "stand")
+  if(self.a.pose != "stand") {
     return false;
+  }
 
-  if(isDefined(self.forcesidearm) && self.forcesidearm && usingpistol())
+  if(isDefined(self.forcesidearm) && self.forcesidearm && usingpistol()) {
     return false;
+  }
 
-  if(aihasonlypistol())
+  if(aihasonlypistol()) {
     return false;
+  }
 
-  if(!(self.primaryweapon != "" && self.primaryweapon != "none"))
+  if(!(self.primaryweapon != "" && self.primaryweapon != "none")) {
     return false;
+  }
 
   self animscripts\debug::debugpushstate("switchToLastWeapon");
 
@@ -813,10 +870,12 @@ switchtolastweapon(cleanup) {
   self.swapanim = swapanim;
   self setflaggedanimknoballrestart("weapon swap", swapanim, % body, 1, 0.1, 1);
 
-  if(isDefined(cleanup))
+  if(isDefined(cleanup)) {
     self donotetrackspostcallbackwithendon("weapon swap", ::handleputawaycleanup, "end_weapon_swap");
-  else
+  }
+  else {
     self donotetrackspostcallbackwithendon("weapon swap", ::handleputaway, "end_weapon_swap");
+  }
 
   self clearanim(self.swapanim, 0.2);
   self orientmode("face angle", self.angles[1]);
@@ -829,16 +888,19 @@ switchtolastweapon(cleanup) {
 }
 
 handleputawaycleanup(notetrack) {
-  if(notetrack == "pistol_putaway")
+  if(notetrack == "pistol_putaway") {
     self clearanim(animarray("straight_level", "combat"), 0);
+  }
 }
 
 handleputaway(notetrack) {
-  if(notetrack == "pistol_putaway")
+  if(notetrack == "pistol_putaway") {
     self clearanim(animarray("straight_level", "combat"), 0);
+  }
   else if(notetrack == "start_aim") {
-    if(self needtoturn())
+    if(self needtoturn()) {
       self notify("end_weapon_swap");
+    }
     else {
       self thread idlethread();
       self setanimlimited(animarray("straight_level", "combat"), 1, 0);
@@ -871,13 +933,16 @@ transitionto(newpose) {
   self notify("kill_idle_thread");
   transanim = animarray(self.a.pose + "_2_" + newpose, "combat");
 
-  if(newpose == "stand")
+  if(newpose == "stand") {
     rate = 2;
-  else
+  }
+  else {
     rate = 1;
+  }
 
-  if(!animhasnotetrack(transanim, "anim_pose = \"" + newpose + "\""))
+  if(!animhasnotetrack(transanim, "anim_pose = \"" + newpose + "\"")) {
     println("error: ^2Pain missing notetrack to set pose!", transanim);
+  }
 
   self setflaggedanimknoballrestart("trans", transanim, % body, 1, 0.2, rate);
   setupaim(0);
@@ -885,8 +950,9 @@ transitionto(newpose) {
   transtime = getanimlength(transanim) / rate;
   playtime = transtime - 0.3;
 
-  if(playtime < 0.2)
+  if(playtime < 0.2) {
     playtime = 0.2;
+  }
 
   self animscripts\shared::donotetracksfortime(playtime, "trans");
   self clearanim(transanim, 0.2);
@@ -913,10 +979,12 @@ watchshootentvelocity() {
       self.shootentvelocity = vectorscale(curpos - prevpos, 1 / 0.15);
       prevpos = curpos;
     } else {
-      if(isDefined(self.shootent))
+      if(isDefined(self.shootent)) {
         prevpos = self.shootent.origin;
-      else
+      }
+      else {
         prevpos = self.origin;
+      }
 
       prevshootent = self.shootent;
       self.shootentvelocity = (0, 0, 0);
@@ -935,8 +1003,9 @@ isdeltaallowed(theanim) {
 needtoturn() {
   point = self.shootpos;
 
-  if(!isDefined(point))
+  if(!isDefined(point)) {
     return false;
+  }
 
   yaw = self.angles[1] - vectortoangles(point - self.origin)[1];
   distsq = distancesquared(self.origin, point);
@@ -944,8 +1013,9 @@ needtoturn() {
   if(distsq < 65536) {
     dist = sqrt(distsq);
 
-    if(dist > 3)
+    if(dist > 3) {
       yaw = yaw + asin(-3 / dist);
+    }
   }
 
   return absangleclamp180(yaw) > self.turnthreshold;
@@ -964,20 +1034,25 @@ exposedreload(threshold) {
     self.a.exposedreloading = 1;
     crouchreload = 0;
 
-    if(self.a.pose == "crouch")
+    if(self.a.pose == "crouch") {
       crouchreload = 1;
+    }
     else {
-      if(self.a.pose == "stand" && self isstanceallowed("crouch") && !(self.weapon == self.sidearm) && cointoss())
+      if(self.a.pose == "stand" && self isstanceallowed("crouch") && !(self.weapon == self.sidearm) && cointoss()) {
         crouchreload = 1;
+      }
 
-      if(self.a.pose == "stand" && (isDefined(self.heat) && self.heat || self weaponanims() == "rocketlauncher") && !(self.weapon == self.sidearm))
+      if(self.a.pose == "stand" && (isDefined(self.heat) && self.heat || self weaponanims() == "rocketlauncher") && !(self.weapon == self.sidearm)) {
         crouchreload = 1;
+      }
     }
 
-    if(crouchreload && animarrayanyexist("reload_crouchhide"))
+    if(crouchreload && animarrayanyexist("reload_crouchhide")) {
       reloadanim = animarraypickrandom("reload_crouchhide");
-    else
+    }
+    else {
       reloadanim = animarraypickrandom("reload");
+    }
 
     self thread keeptryingtomelee();
     self setanim( % reload, 1, 0.2);
@@ -988,8 +1063,9 @@ exposedreload(threshold) {
     self notify("abort_reload");
     self animscripts\shared::updatelaserstatus(1);
 
-    if(self.a.finishedreload)
+    if(self.a.finishedreload) {
       self animscripts\weaponlist::refillclip();
+    }
 
     self set_aimturn_limits();
     self clearanim( % reload, 0.3);
@@ -1011,20 +1087,23 @@ exposedreload(threshold) {
 doreloadanim(reloadanim, stopwhencanshoot, shouldkeepaiming) {
   self endon("abort_reload");
 
-  if(stopwhencanshoot)
+  if(stopwhencanshoot) {
     self thread abortreloadwhencanshoot();
+  }
 
   animrate = 1;
 
-  if(!(self.weapon == self.sidearm) && !self usingshotgun() && isDefined(self.enemy) && self cansee(self.enemy) && distancesquared(self.enemy.origin, self.origin) < 1048576)
+  if(!(self.weapon == self.sidearm) && !self usingshotgun() && isDefined(self.enemy) && self cansee(self.enemy) && distancesquared(self.enemy.origin, self.origin) < 1048576) {
     animrate = 1.2;
+  }
 
   flagname = "reload_" + getuniqueflagnameindex();
   self setflaggedanimrestart(flagname, reloadanim, 1, 0.3, animrate);
 
   if(!shouldkeepaiming) {
-    if(animhasnotetrack(reloadanim, "stop_aim"))
+    if(animhasnotetrack(reloadanim, "stop_aim")) {
       self waittillmatch(flagname, "stop_aim");
+    }
 
     self setanim( % add_idle, 0, 0.1);
     self setanim( % exposed_aiming, 0, 0.1);
@@ -1065,20 +1144,25 @@ finishnotetracks(animname) {
 }
 
 tryusingsidearm() {
-  if(!(self.sidearm != "" && self.sidearm != "none"))
+  if(!(self.sidearm != "" && self.sidearm != "none")) {
     return false;
+  }
 
-  if(weaponisgasweapon(self.weapon))
+  if(weaponisgasweapon(self.weapon)) {
     return false;
+  }
 
-  if(hassecondaryweapon())
+  if(hassecondaryweapon()) {
     return false;
+  }
 
-  if(!self.a.allow_sidearm)
+  if(!self.a.allow_sidearm) {
     return false;
+  }
 
-  if(usingpistol())
+  if(usingpistol()) {
     return false;
+  }
 
   switchtosidearm(animarray("pistol_pullout"));
   return true;
@@ -1091,8 +1175,9 @@ switchtosidearm(swapanim) {
 
   assert(self.sidearm != "");
 
-  if(!isDefined(self.forcesidearm) || !self.forcesidearm)
+  if(!isDefined(self.forcesidearm) || !self.forcesidearm) {
     self thread putgunbackinhandonkillanimscript();
+  }
 
   self notify("kill_idle_thread");
   self clearanim( % add_idle, 0.2);
@@ -1127,8 +1212,9 @@ handlepickup(notetrack) {
     self clearanim(animarray("straight_level"), 0);
     self thread faceenemydelay(0.25);
   } else if(notetrack == "start_aim") {
-    if(self needtoturn())
+    if(self needtoturn()) {
       self notify("end_weapon_swap");
+    }
     else {
       self thread idlethread();
       self setanimlimited(animarray("straight_level"), 1, 0);
@@ -1186,8 +1272,9 @@ faceenemyimmediately() {
       break;
     }
 
-    if(abs(yawchange) > 5)
+    if(abs(yawchange) > 5) {
       yawchange = 5 * sign(yawchange);
+    }
 
     self orientmode("face angle", self.angles[1] + yawchange);
     wait 0.05;
@@ -1208,28 +1295,35 @@ doturn(direction, amount) {
   if(self.a.scriptstarttime + 500 > gettime()) {
     transtime = 0.25;
 
-    if(mustfaceenemy)
+    if(mustfaceenemy) {
       self thread faceenemyimmediately();
+    }
   } else if(mustfaceenemy) {
     urgency = 1.0 - distance(self.enemy.origin, self.origin) / 512;
     rate = 1 + urgency * 1;
 
-    if(rate > 2)
+    if(rate > 2) {
       transtime = 0.05;
-    else if(rate > 1.3)
+    }
+    else if(rate > 1.3) {
       transtime = 0.1;
-    else
+    }
+    else {
       transtime = 0.15;
+    }
   }
 
   angle = 0;
 
-  if(amount > 157.5)
+  if(amount > 157.5) {
     angle = 180;
-  else if(amount > 112.5)
+  }
+  else if(amount > 112.5) {
     angle = 135;
-  else if(amount > 67.5)
+  }
+  else if(amount > 67.5) {
     angle = 90;
+  }
   else {
     angle = 45;
     keepaimingon45degturn = self.animtype == "default";
@@ -1240,30 +1334,37 @@ doturn(direction, amount) {
   animname = "turn_" + direction + "_" + angle;
   turnanim = animarray(animname, "combat");
 
-  if(self.turntomatchnode)
+  if(self.turntomatchnode) {
     self animmode("angle deltas", 0);
-  else if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256 && (self.goalradius < 16 || !isDefined(self.enemy)))
+  }
+  else if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256 && (self.goalradius < 16 || !isDefined(self.enemy))) {
     self animmode("angle deltas");
-  else if(isdeltaallowed(turnanim))
+  }
+  else if(isdeltaallowed(turnanim)) {
     self animmode("zonly_physics");
-  else
+  }
+  else {
     self animmode("angle deltas");
+  }
 
   self setanimknoball( % exposed_aiming, % body, 1, transtime);
   shouldusestartstopaimnotetrack = animhasnotetrack(turnanim, "start_aim") && animhasnotetrack(turnanim, "stop_aim");
 
-  if(!self.turntomatchnode && !keepaimingon45degturn)
+  if(!self.turntomatchnode && !keepaimingon45degturn) {
     self thread turningaimingoff(turnanim, transtime, rate, shouldusestartstopaimnotetrack);
+  }
 
-  if(self.turntomatchnode)
+  if(self.turntomatchnode) {
     rate = 1.6;
+  }
 
   self setanimlimited( % turn, 1, transtime);
   self setflaggedanimknoblimitedrestart("turn", turnanim, 1, 0, rate);
   self notify("turning");
 
-  if(!keepaimingon45degturn)
+  if(!keepaimingon45degturn) {
     self thread turnstartaiming(turnanim, rate, shouldusestartstopaimnotetrack);
+  }
 
   doturnnotetracks();
   self setanimlimited( % turn, 0, 0.2);
@@ -1276,8 +1377,9 @@ doturn(direction, amount) {
     self thread faceenemyimmediately();
   }
 
-  if(!self usingshotgun())
+  if(!self usingshotgun()) {
     self clearanim( % add_fire, 0.2);
+  }
 
   self notify("done turning");
 
@@ -1296,8 +1398,9 @@ turnstartaiming(turnanim, rate, shouldusestartstopaimnotetrack) {
   self endon("turning_isnt_working");
   self endon("can_stop_turning");
 
-  if(shouldusestartstopaimnotetrack)
+  if(shouldusestartstopaimnotetrack) {
     self waittillmatch("turn", "start_aim");
+  }
   else {
     animlength = getanimlength(turnanim) / rate;
     wait(animlength * 0.8);
@@ -1314,8 +1417,9 @@ turningaimingoff(turnanim, transtime, rate, shouldusestartstopaimnotetrack) {
   self endon("turning_isnt_working");
   self endon("can_stop_turning");
 
-  if(shouldusestartstopaimnotetrack)
+  if(shouldusestartstopaimnotetrack) {
     self waittillmatch("turn", "stop_aim");
+  }
   else {
     animlength = getanimlength(turnanim) / rate;
     wait(animlength * 0.2);
@@ -1351,6 +1455,7 @@ makesureturnworks() {
 }
 
 exposedcombatturndebugmsg(msg) {
-  if(getdvarint(#"_id_04DECC24") == 1)
+  if(getdvarint(#"_id_04DECC24") == 1) {
     recordenttext(msg, self, level.color_debug["green"], "Script");
+  }
 }

@@ -109,19 +109,22 @@ changeWeapons() {
   level.currentWeapon = weapon[currentWeapon].name;
   thread fire_screenShake();
   for(;;) {
-    while(!level.ac130Player useButtonPressed())
+    while(!level.ac130Player useButtonPressed()) {
       wait 0.05;
+    }
     currentWeapon++;
-    if(currentWeapon >= weapon.size)
+    if(currentWeapon >= weapon.size) {
       currentWeapon = 0;
+    }
     level.currentWeapon = weapon[currentWeapon].name;
     level.ac130_overlay setShader(weapon[currentWeapon].overlay, 640, 480);
     level.ac130Player setClientDvar("cg_fov", weapon[currentWeapon].fov);
     level.ac130Player takeAllWeapons();
     level.ac130Player giveWeapon(weapon[currentWeapon].weapon);
     level.ac130Player switchToWeapon(weapon[currentWeapon].weapon);
-    while(level.ac130Player useButtonPressed())
+    while(level.ac130Player useButtonPressed()) {
       wait 0.05;
+    }
   }
 }
 

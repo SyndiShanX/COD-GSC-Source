@@ -18,8 +18,9 @@ watchforrespawn() {
   self endon("entityshutdown");
   menuname = "fullscreen_dirt";
 
-  if(isDefined(level.iswinter) && level.iswinter)
+  if(isDefined(level.iswinter) && level.iswinter) {
     menuname = "fullscreen_snow";
+  }
 
   while(true) {
     localplayers = level.localplayers;
@@ -59,23 +60,28 @@ watchforexplosion() {
 
         if(weaponname == "proximity_grenade_mp" && distancesquared(localplayer.origin, position) < 40000) {
           if(isDefined(owner_cent)) {
-            if(owner_cent == localplayer || !owner_cent friendnotfoe(localclientnum))
+            if(owner_cent == localplayer || !owner_cent friendnotfoe(localclientnum)) {
               localplayer thread clientscripts\mp\_proximity_grenade::taserhudfx(localclientnum, position);
+            }
           }
         } else if((mod == "MOD_GRENADE_SPLASH" || mod == "MOD_PROJECTILE_SPLASH") && distancesquared(localplayer.origin, position) < 360000) {
           menuname = "fullscreen_dirt";
 
-          if(isDefined(level.iswinter) && level.iswinter)
+          if(isDefined(level.iswinter) && level.iswinter) {
             menuname = "fullscreen_snow";
+          }
 
-          if(fdot > 0.5)
+          if(fdot > 0.5) {
             animateui(localclientnum, menuname, "dirt", "in", 0);
+          }
 
           if(abs(fdot) < 0.866) {
-            if(rdot > 0)
+            if(rdot > 0) {
               animateui(localclientnum, menuname, "dirt_right", "in", 0);
-            else
+            }
+            else {
               animateui(localclientnum, menuname, "dirt_left", "in", 0);
+            }
           }
         }
       }

@@ -135,8 +135,9 @@ endpart_objective()
 {
 	flag_wait( "tunnels_teleport_done" );
 
-	if( isDefined( level.objnum ) )
+	if( isDefined( level.objnum ) ) {
 		objective_state( level.objnum, "done" );
+	}
 
 	flag_wait( "whitehouse_moveout" );
 		
@@ -173,8 +174,9 @@ endpart_objective()
 	{
 		nextmission();
 	}
-	else
+	else {
 		IPrintLnBold( "DEVELOPER: END OF SCRIPTED LEVEL" );
+	}
 }
 
 whitehouse_dialogue()
@@ -241,15 +243,17 @@ whitehouse_radio_broadcast( soundalias )
 	{	
 		// distance above or below player
 		dist = abs( level.player.origin[2] - radio_array[i].origin[2] );
-		if( dist > 256 )
+		if( dist > 256 ) {
 			continue;
+		}
 
 		radio =radio_array[i];
 		radio playSound( soundalias, "sounddone" );
 
 		play_count--;
-		if( !play_count )
+		if( !play_count ) {
 			break;
+		}
 	}
 	assert( isDefined( radio ) );
 	radio waittill( "sounddone" );
@@ -292,8 +296,9 @@ countdown_trigger()
 	if( self.script_index == level.countdown_index )
 	{
 		flag_set( "countdown" );
-		if( self.script_index == 2 )
+		if( self.script_index == 2 ) {
 			autosave_by_name( "whitehouse_parlor" );
+		}
 	}
 }
 
@@ -354,8 +359,9 @@ whitehouse_radio()
 		// set countdown flags
 		flag_set( countdown_flag[ level.countdown_index - 1 ] );
 
-		if( level.countdown_index == 4 )
+		if( level.countdown_index == 4 ) {
 			break;
+		}
 
 		level thread countdown_timeout();
 		wait 6;
@@ -500,8 +506,9 @@ whitehouse_nag()
 
 whitehouse_team()
 {
-	if( self is_hero() )
+	if( self is_hero() ) {
 		return;
+	}
 
 	self endon( "death" );
 
@@ -634,8 +641,9 @@ whitehouse_foley_flare()
 
 	flag_wait( "whitehouse_hammerdown_jets_safe" );
 	
-	if( level.player istouching( volume ) )
+	if( level.player istouching( volume ) ) {
 		animent = alt_animent;
+	}
 
 	animent anim_single_solo( self, "flare_moment_stand" );
 	self notify( "remove_flare" );
@@ -772,16 +780,18 @@ whitehouse_drone()
 {
 	self endon( "death" );
 
-	if( !isDefined( level.whitehouse_drone_array ) )
+	if( !isDefined( level.whitehouse_drone_array ) ) {
 		level.whitehouse_drone_array = [];
+	}
 	level.whitehouse_drone_array[ level.whitehouse_drone_array.size ] = self;
 
 	self.health = 10000;
 
 	flag_wait( "whitehouse_silhouette_ready");
 
-	if( isDefined( self.script_animation ) )
+	if( isDefined( self.script_animation ) ) {
 		self.deathanim = level.drone_death_anims[ self.script_animation ];
+	}
 
 	self.health = 200;
 }
@@ -879,8 +889,9 @@ whitehouse_player_flare()
 
 	player_attached_use(&"SCRIPT_PLATFORM_HINTSTR_POPFLARE" );
 
-	while( !level.player IsOnGround() )
+	while( !level.player IsOnGround() ) {
 		wait 0.05;
+	}
 
 	lerp_time = 0.5;
 	enablePlayerWeapons( false );
@@ -889,8 +900,9 @@ whitehouse_player_flare()
 	level.player.rig.angles = ( 0,180,0 );
 	level.player.rig anim_first_frame_solo( level.player.rig, "flare");
 
-	if( !flag( "whitehouse_hammerdown" ) )
+	if( !flag( "whitehouse_hammerdown" ) ) {
 		flag_set( "whitehouse_hammerdown_stopped" );
+	}
 
 	// get rid of the flare and release the player when he should die.
 	level thread whitehouse_player_flare_death();
@@ -943,8 +955,9 @@ steer_player_rig()
 		newLocation = level.player.origin + forward + right;
 		newLocation = ( newLocation[ 0 ], newLocation[ 1 ], z_origin );
 
-		if( inside_box( newLocation, box1 ) || inside_box( newLocation, box2 ) )
+		if( inside_box( newLocation, box1 ) || inside_box( newLocation, box2 ) ) {
 			self MoveTo( newLocation, 0.05 );
+		}
 	}
 }
 
@@ -953,14 +966,18 @@ inside_box( new_origin, box )
 	x = new_origin[0];
 	y = new_origin[1];
 
-	if( x > box[0][0] )
+	if( x > box[0][0] ) {
 		return false;
-	if( y > box[0][1] )
+	}
+	if( y > box[0][1] ) {
 		return false;
-	if( x < box[1][0] )
+	}
+	if( x < box[1][0] ) {
 		return false;
-	if( y < box[1][1] )
+	}
+	if( y < box[1][1] ) {
 		return false;
+	}
 
 	return true;
 }
@@ -991,8 +1008,9 @@ tunnels_flags() {
   flag_init("tunnels_door_open");
   flag_init("tunnels_door_open_done");
 
-  if(!flag_exist("dc_emp_bunker"))
+  if(!flag_exist("dc_emp_bunker")) {
     flag_init("dc_emp_bunker");
+  }
 }
 
 tunnels_main() {
@@ -1031,8 +1049,9 @@ tunnels_main() {
   level.foley set_force_color("y");
   level.dunn set_force_color("o");
 
-  if(!flag("tunnels_indoor"))
+  if(!flag("tunnels_indoor")) {
     activate_trigger_with_targetname("tunnels_color_trigger");
+  }
 
   level thread tunnels_rain();
   level thread tunnels_end();
@@ -1146,10 +1165,12 @@ tunnels_friendlies_teleport() {
   dunn_dest = getstruct("tunnels_door_dunn", "script_noteworthy");
 
   volume = getent("tunnels_door_volume", "targetname");
-  if(!level.foley IsTouching(volume))
+  if(!level.foley IsTouching(volume)) {
     level.foley ForceTeleport(foley_dest.origin, foley_dest.angles);
-  if(!level.dunn IsTouching(volume))
+  }
+  if(!level.dunn IsTouching(volume)) {
     level.dunn ForceTeleport(dunn_dest.origin, dunn_dest.angles);
+  }
 }
 
 tunnels_dialogues() {
@@ -1277,8 +1298,9 @@ tunnels_dead_check_clear(drone, animent) {
 
   flag_wait("tunnels_dunn_anim_end");
   level.dunn anim_stopanimscripted();
-  if(flag("tunnels_main"))
+  if(flag("tunnels_main")) {
     level.dunn enable_ai_color();
+  }
 
   drone anim_stopanimscripted();
   animent anim_stopanimscripted();

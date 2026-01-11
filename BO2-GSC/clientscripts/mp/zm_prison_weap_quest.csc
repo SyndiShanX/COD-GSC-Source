@@ -27,8 +27,9 @@ tomahawk_rune_init() {
   level.a_wolf_structs = getstructarray("wolf_position", "targetname");
   registerclientfield("actor", "make_client_clone", 9000, 4, "int", ::pose_dead_body);
 
-  for(i = 0; i < level.a_wolf_structs.size; i++)
+  for(i = 0; i < level.a_wolf_structs.size; i++) {
     registerclientfield("world", level.a_wolf_structs[i].script_parameters, 9000, 3, "int", ::soul_catcher_callback);
+  }
 
   level.fake_body_death_anim = % ai_zombie_dreamcatch_impact;
   assemble_fake_body_head_arrays();
@@ -59,8 +60,9 @@ tomahawk_rune_init() {
 }
 
 soul_catcher_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  while(!isDefined(level.weap_quest_init))
+  while(!isDefined(level.weap_quest_init)) {
     wait 0.05;
+  }
 
   if(binitialsnap) {
     if(newval == 2 || newval == 3 || newval == 5 || newval == 4) {
@@ -73,8 +75,9 @@ soul_catcher_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     }
   } else if(bwasdemojump) {
     if(newval == 2 || newval == 3 || newval == 5 || newval == 4) {
-      if(isDefined(level.wolf_heads[localclientnum][fieldname].portal_fx))
+      if(isDefined(level.wolf_heads[localclientnum][fieldname].portal_fx)) {
         stopfx(localclientnum, level.wolf_heads[localclientnum][fieldname].portal_fx);
+      }
 
       rune = level.wolf_runes[localclientnum][fieldname];
       rune_forward = anglesToForward(rune.angles + vectorscale((0, 1, 0), 90.0));
@@ -98,26 +101,31 @@ soul_catcher_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     level.wolf_bodies[localclientnum][fieldname] hide();
 
     if(isDefined(level.wolf_bodies[localclientnum][fieldname].head)) {
-      if(isDefined(level.wolf_bodies[localclientnum][fieldname].head.hat))
+      if(isDefined(level.wolf_bodies[localclientnum][fieldname].head.hat)) {
         level.wolf_bodies[localclientnum][fieldname].head.hat hide();
+      }
 
       level.wolf_bodies[localclientnum][fieldname].head hide();
     }
 
-    if(oldval == 3 || oldval == 5 || oldval == 4)
+    if(oldval == 3 || oldval == 5 || oldval == 4) {
       playSound(0, "evt_wolfhead_body_count", level.wolf_heads[localclientnum][fieldname].origin);
+    }
 
     level.wolf_heads[localclientnum][fieldname] thread wolfhead_idle();
   } else if(newval == 3 || newval == 5 || newval == 4) {
     level.wolf_heads[localclientnum][fieldname] show();
     level.wolf_runes[localclientnum][fieldname] hide();
 
-    if(newval == 3)
+    if(newval == 3) {
       level.wolf_heads[localclientnum][fieldname] thread wolfhead_eat_aligned(level.wolf_bodies[localclientnum][fieldname], localclientnum, "front");
-    else if(newval == 4)
+    }
+    else if(newval == 4) {
       level.wolf_heads[localclientnum][fieldname] thread wolfhead_eat_aligned(level.wolf_bodies[localclientnum][fieldname], localclientnum, "right");
-    else
+    }
+    else {
       level.wolf_heads[localclientnum][fieldname] thread wolfhead_eat_aligned(level.wolf_bodies[localclientnum][fieldname], localclientnum, "left");
+    }
   } else if(newval == 6) {
     level.wolf_heads[localclientnum][fieldname] show();
     level.wolf_runes[localclientnum][fieldname] show();
@@ -125,8 +133,9 @@ soul_catcher_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     level.wolf_bodies[localclientnum][fieldname].head hide();
     level.wolf_runes[localclientnum][fieldname] stoploopsound();
 
-    if(isDefined(level.wolf_bodies[localclientnum][fieldname].head.hat))
+    if(isDefined(level.wolf_bodies[localclientnum][fieldname].head.hat)) {
       level.wolf_bodies[localclientnum][fieldname].head.hat hide();
+    }
 
     level.wolf_heads[localclientnum][fieldname] thread wolfhead_depart(localclientnum, level.wolf_runes[localclientnum][fieldname]);
   } else if(newval == 7) {
@@ -135,8 +144,9 @@ soul_catcher_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     level.wolf_bodies[localclientnum][fieldname] hide();
     level.wolf_bodies[localclientnum][fieldname].head hide();
 
-    if(isDefined(level.wolf_bodies[localclientnum][fieldname].head.hat))
+    if(isDefined(level.wolf_bodies[localclientnum][fieldname].head.hat)) {
       level.wolf_bodies[localclientnum][fieldname].head.hat hide();
+    }
 
     level.wolf_runes[localclientnum][fieldname] setModel("p6_zm_al_dream_catcher");
     playFXOnTag(localclientnum, level._effect["soul_charged"], level.wolf_runes[localclientnum][fieldname], "tag_origin");
@@ -192,8 +202,9 @@ pose_dead_body(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
     wait 0.016;
   }
 
-  while(!isDefined(level.weap_quest_init))
+  while(!isDefined(level.weap_quest_init)) {
     wait 0.05;
+  }
 
   if(!isDefined(self)) {
     return;
@@ -204,8 +215,9 @@ pose_dead_body(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 
   if(isDefined(m_body)) {
     if(isDefined(m_body.head)) {
-      if(isDefined(m_body.head.hat))
+      if(isDefined(m_body.head.hat)) {
         m_body.head.hat delete();
+      }
 
       m_body.head delete();
     }
@@ -213,12 +225,15 @@ pose_dead_body(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
     m_body delete();
     m_body = spawn(localclientnum, (0, 0, 0), "script_model");
 
-    if(issubstr(self.model, "body2"))
+    if(issubstr(self.model, "body2")) {
       m_body setModel("c_zom_inmate_body2");
-    else if(issubstr(self.model, "body1"))
+    }
+    else if(issubstr(self.model, "body1")) {
       m_body setModel("c_zom_inmate_body1");
-    else
+    }
+    else {
       m_body setModel("c_zom_guard_body");
+    }
 
     m_body hide();
     m_body.origin = self.origin;
@@ -255,8 +270,9 @@ pose_dead_body(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   if(isDefined(m_head)) {
     m_head show();
 
-    if(isDefined(m_hat))
+    if(isDefined(m_hat)) {
       m_hat show();
+    }
   }
 
   wait(anim_time);
@@ -309,8 +325,9 @@ body_moveto_wolf(m_wolf, localclientnum) {
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(move_fx))
+  if(isDefined(move_fx)) {
     stopfx(localclientnum, move_fx);
+  }
 
   if(isDefined(self.m_soul_fx_player)) {
     self.m_soul_fx_player unlink();
@@ -342,10 +359,12 @@ play_blood_fx_on_bite(localclientnum) {
   while(true) {
     self waittill("bite", note);
 
-    if(note == "blood")
+    if(note == "blood") {
       playFXOnTag(localclientnum, level._effect["soul_charge_impact"], self, "TAG_MOUTH_FX");
-    else if(note == "blood_sm")
+    }
+    else if(note == "blood_sm") {
       playFXOnTag(localclientnum, level._effect["wolf_bite_blood"], self, "TAG_MOUTH_FX");
+    }
   }
 }
 
@@ -377,8 +396,9 @@ assemble_fake_body_head_arrays() {
 is_classic() {
   var = getdvar(#"ui_zm_gamemodegroup");
 
-  if(var == "zclassic")
+  if(var == "zclassic") {
     return true;
+  }
 
   return false;
 }

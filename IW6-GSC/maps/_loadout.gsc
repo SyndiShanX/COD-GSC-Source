@@ -4,8 +4,9 @@
 *****************************************************/
 
 init_loadout() {
-  if(!isDefined(level.campaign))
+  if(!isDefined(level.campaign)) {
     level.campaign = "american";
+  }
 
   give_loadout();
   maps\_loadout_code::loadout_complete();

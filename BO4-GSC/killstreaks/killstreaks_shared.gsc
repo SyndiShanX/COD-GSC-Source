@@ -3586,4 +3586,3 @@ debug_ricochet_protection() {
     }
   }
 }
-

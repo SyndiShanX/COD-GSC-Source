@@ -62,10 +62,12 @@ setdefaultdroppitch(var_00, var_01) {
   thread waitrestoreperks();
   self.iscarrying = 0;
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 func_F683(var_00, var_01, var_02) {
@@ -90,8 +92,9 @@ func_F683(var_00, var_01, var_02) {
       return 1;
     }
 
-    if(!isDefined(var_03))
+    if(!isDefined(var_03)) {
       var_03 = "force_cancel_placement";
+    }
 
     if(var_03 == "cancel_gascan" || var_03 == "force_cancel_placement") {
       if(!var_01 && var_03 == "cancel_gascan") {
@@ -100,10 +103,12 @@ func_F683(var_00, var_01, var_02) {
       scripts\engine\utility::allow_weapon(1);
       var_00 func_76C9();
 
-      if(var_03 != "force_cancel_placement")
+      if(var_03 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_01)
+      }
+      else if(var_01) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -111,8 +116,9 @@ func_F683(var_00, var_01, var_02) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_01)
+    if(var_01) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_00 thread func_76C8(var_02, self);
     self waittill("gas_poured");
@@ -191,8 +197,9 @@ func_76C8(var_00, var_01) {
   var_01 endon("disconnect");
   self.func_9F05 = 1;
 
-  if(!isDefined(level.func_38B3))
+  if(!isDefined(level.func_38B3)) {
     level.func_38B3 = [];
+  }
 
   var_02 = 0;
 
@@ -203,8 +210,9 @@ func_76C8(var_00, var_01) {
         continue;
       }
 
-      if(!isDefined(self.func_8C16))
+      if(!isDefined(self.func_8C16)) {
         self.func_8C16 = 0;
+      }
 
       var_01 playSound("trap_kindle_pops_pour");
       self.func_9F05 = 1;
@@ -283,10 +291,12 @@ func_76C2() {
         if(var_12 == self) {
           continue;
         }
-        if(distancesquared(var_12.origin, self.origin) > var_00)
+        if(distancesquared(var_12.origin, self.origin) > var_00) {
           continue;
-        else
+        }
+        else {
           var_12 notify("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
+        }
       }
 
       return;
@@ -306,8 +316,9 @@ func_76C0(var_00, var_01) {
   self.func_4D27.owner = var_01;
   thread func_76C1();
 
-  while(gettime() < var_00)
+  while(gettime() < var_00) {
     wait 0.1;
+  }
 
   playLoopSound(self.origin, "trap_kindle_pops_fire_end");
   self stoploopsound();
@@ -343,8 +354,9 @@ remove_padding_damage() {
 }
 
 func_3B25(var_00, var_01, var_02) {
-  if(isalive(self) && !scripts\engine\utility::is_true(self.marked_for_death) && !scripts\engine\utility::is_true(self.is_chem_burning))
+  if(isalive(self) && !scripts\engine\utility::is_true(self.marked_for_death) && !scripts\engine\utility::is_true(self.is_chem_burning)) {
     thread scripts\cp\utility::damage_over_time(self, var_02, var_00, var_01, undefined, "iw7_kindlepops_zm", undefined, "chemBurn");
+  }
 }
 
 func_1070D(var_00, var_01) {
@@ -379,8 +391,9 @@ func_1070D(var_00, var_01) {
 func_76C9() {
   self.carriedby getrigindexfromarchetyperef();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.carriedgascan delete();
   self delete();
@@ -421,16 +434,21 @@ func_12EA0(var_00, var_01) {
       if(var_0.canbeplaced) {
         var_0.carriedgascan setModel(level.func_47AF["crafted_gascan"].modelplacement);
 
-        if(!isDefined(var_0.func_8C16))
+        if(!isDefined(var_0.func_8C16)) {
           self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_CANCELABLE");
-        else if(var_0.func_8C16 == 1)
+        }
+        else if(var_0.func_8C16 == 1) {
           self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_80");
-        else if(var_0.func_8C16 == 2)
+        }
+        else if(var_0.func_8C16 == 2) {
           self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_60");
-        else if(var_0.func_8C16 == 3)
+        }
+        else if(var_0.func_8C16 == 3) {
           self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_40");
-        else if(var_0.func_8C16 == 4)
+        }
+        else if(var_0.func_8C16 == 4) {
           self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_20");
+        }
       } else {
         var_0.carriedgascan setModel(level.func_47AF["crafted_gascan"].modelplacementfailed);
         self forceusehinton(&"COOP_CRAFTABLES_CANNOT_PLACE");
@@ -450,10 +468,12 @@ func_3831(var_00) {
   var_0.name = "crafted_gascan";
   var_0.carriedgascan.name = "crafted_gascan";
 
-  if(isDefined(var_0.func_9F05))
+  if(isDefined(var_0.func_9F05)) {
     var_0.carriedgascan.angles = var_1["angles"] + (35, 0, 0);
-  else
+  }
+  else {
     var_0.carriedgascan.angles = var_1["angles"];
+  }
 
   return self isonground() && var_1["result"] && abs(var_1["origin"][2] - self.origin[2]) < 30;
 }

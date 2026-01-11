@@ -138,10 +138,12 @@ menendezchangedvar(menendez) {
 }
 
 set_dvar_and_volume(loop_id, set) {
-  if(set == 0 || !level.surv_on)
+  if(set == 0 || !level.surv_on) {
     setdvarfloat("snd_futz", 1);
-  else
+  }
+  else {
     setdvarfloat("snd_futz", set);
+  }
 }
 
 get_view_num(start_origin, start_angles, end_origin) {

@@ -45,11 +45,13 @@ main() {
   var_5 maps\_utility::anim_stopanimscripted();
   var_5 delete();
 
-  if(var_3)
+  if(var_3) {
     var_1 delete();
+  }
 
-  if(var_4)
+  if(var_4) {
     var_2 delete();
+  }
 }
 
 traverse_allow_death(var_0) {
@@ -80,10 +82,12 @@ traverse_blend_link(var_0, var_1, var_2) {
     var_16 = var_1 gettagorigin(var_5);
     var_17 = var_16 * var_6 + var_15 * (1 - var_6);
 
-    if(var_6 < 0.5)
+    if(var_6 < 0.5) {
       self linkto(var_0, var_4, rotatevectorinverted(var_17 - var_15, var_7), var_14 - var_7);
-    else
+    }
+    else {
       self linkto(var_1, var_5, rotatevectorinverted(var_17 - var_16, var_8), var_14 - var_8);
+    }
 
     wait 0.05;
   }

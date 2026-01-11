@@ -98,11 +98,13 @@ main() {
   digEventExceptions = [];
   showEvents = true;
 
-  if(level.gameType == "horde" || level.gametype == "infect")
+  if(level.gameType == "horde" || level.gametype == "infect") {
     showEvents = false;
+  }
 
-  if(level.gameType == "gun" || level.gametype == "sotf" || level.gametype == "sotf_ffa" || isAnyMLGMatch())
+  if(level.gameType == "gun" || level.gametype == "sotf" || level.gametype == "sotf_ffa" || isAnyMLGMatch()) {
     digEventExceptions[digEventExceptions.size] = CONST_TREASURE_ID;
+  }
 
   setupEvents(showEvents, digEventExceptions);
   setupShrinePerks();
@@ -187,8 +189,9 @@ setupEvents(setup, setupExceptions) {
       }
     }
 
-    if(obelisk)
+    if(obelisk) {
       level thread setupObelisk();
+    }
 
     if(scarabs) {
       level.digScarabPots = [];
@@ -209,8 +212,9 @@ setupEvents(setup, setupExceptions) {
       level thread setupSnakes(snakeLocation);
     }
 
-    if(!shrine)
+    if(!shrine) {
       level.allow_level_killstreak = false;
+    }
   } else {
     level thread setupObelisk(true);
   }
@@ -265,8 +269,9 @@ debugDvarWatcher(DVAR) {
               owner = player;
 
               foreach(torch in level.key_torches) {
-                if(!torch.used)
+                if(!torch.used) {
                   torch activateTorch(owner);
+                }
 
                 wait(0.5);
               }
@@ -303,8 +308,9 @@ updateBFlagPos(resetFlag) {
 
   bFlag = getDomFlagB();
 
-  if(!isDefined(level.dig_old_bflagPos))
+  if(!isDefined(level.dig_old_bflagPos)) {
     level.dig_old_bflagPos = bflag.origin;
+  }
 
   newFlag = getStruct("flag_b_after", "targetname");
   upangles = VectorToAngles((0, 0, 1));
@@ -329,8 +335,9 @@ updateBFlagPos(resetFlag) {
   }
 
   foreach(player in level.players) {
-    if(isDefined(player._domFlagEffect) && isDefined(player._domFlagEffect["_b"]))
+    if(isDefined(player._domFlagEffect) && isDefined(player._domFlagEffect["_b"])) {
       bFlag.useObj maps\mp\gametypes\dom::showCapturedBaseEffectToPlayer(bFlag.useObj.ownerTeam, player);
+    }
   }
 }
 
@@ -368,17 +375,21 @@ setupObelisk(stopTrigger) {
 
   level.obeliskKillTrigger_Air = GetEnt("obelisk_kill_trigger_2", "targetname");
 
-  if(isDefined(level.obeliskAnimated))
+  if(isDefined(level.obeliskAnimated)) {
     hideEnt(level.obeliskAnimated);
+  }
 
-  if(isDefined(level.obeliskAnimated2))
+  if(isDefined(level.obeliskAnimated2)) {
     hideEnt(level.obeliskAnimated2);
+  }
 
-  if(isDefined(level.obeliskFloor))
+  if(isDefined(level.obeliskFloor)) {
     hideEnt(level.obeliskFloor);
+  }
 
-  if(isDefined(level.obeliskAfter))
+  if(isDefined(level.obeliskAfter)) {
     hideEnt(level.obeliskAfter);
+  }
 
   if(isDefined(level.obeliskAfterClip)) {
     if(!isDefined(level.obeliskAfterClip.killCamEnt)) {
@@ -389,8 +400,9 @@ setupObelisk(stopTrigger) {
     hideEnt(level.obeliskAfterClip);
   }
 
-  if(isDefined(level.obeliskPathHolder))
+  if(isDefined(level.obeliskPathHolder)) {
     hideEnt(level.obeliskPathHolder);
+  }
 
   if(isDefined(level.obeliskPathBlocker)) {
     showEnt(level.obeliskPathBlocker);
@@ -409,11 +421,13 @@ setupObelisk(stopTrigger) {
     level.obeliskKillTrigger_Air trigger_off();
   }
 
-  if(isDefined(level.obeliskBefore))
+  if(isDefined(level.obeliskBefore)) {
     showEnt(level.obeliskBefore);
+  }
 
-  if(isDefined(level.obeliskBeforeClip))
+  if(isDefined(level.obeliskBeforeClip)) {
     showEnt(level.obeliskBeforeClip);
+  }
 
   level.obeliskfallen = false;
 
@@ -568,8 +582,9 @@ setupScarabPot(origin) {
     breakablePot.damageOwner = attacker;
 
     breakablePot.damageTaken += amount;
-    if(breakablePot.damageTaken == amount)
+    if(breakablePot.damageTaken == amount) {
       breakablePot thread startPotBreaking(breakablePotLid);
+    }
   }
 }
 
@@ -588,8 +603,9 @@ playPotRattle() {
   level endon("game_ended");
 
   while(true) {
-    if(isDefined(self))
+    if(isDefined(self)) {
       self playSound(self.idleSound);
+    }
 
     maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(RandomIntRange(8, 15));
   }
@@ -624,8 +640,9 @@ startPotBreaking(breakablePotLid) {
 
         startedfx = true;
       }
-      if(count > 20)
+      if(count > 20) {
         count = 0;
+      }
 
       if(count == 0) {
         self.damageTaken += (10 + RandomFloat(10));
@@ -677,8 +694,9 @@ breakPot(breakablePotLid) {
 
   self Hide();
 
-  if(self.hasScarabs)
+  if(self.hasScarabs) {
     self setupDeathZone();
+  }
 }
 
 setupDeathZone() {
@@ -701,8 +719,9 @@ setupScarab(attacker) {
   scarabMover.killcamEnt = spawn("script_model", scarabMover.origin + (0, 0, 100));
   scarabMover.killcamEnt setModel("tag_origin");
 
-  if(!isDefined(level.traps))
+  if(!isDefined(level.traps)) {
     level.traps = [];
+  }
 
   level.traps[level.traps.size] = scarabMover;
 
@@ -822,20 +841,26 @@ playDeathAnimScarabs() {
   deathAnimModel.angles = self.body.angles;
   deathAnimModel LinkTo(self.body, "tag_origin", (0, 50, 0), deathAnimModel.angles);
 
-  if(deathAnim == % mp_scarab_death_stand_1)
+  if(deathAnim == % mp_scarab_death_stand_1) {
     deathAnimModel ScriptModelPlayAnim("scarab_fullbody_bone_fx_stand_anim");
-  else if(deathAnim == % mp_scarab_death_crouch_1)
+  }
+  else if(deathAnim == % mp_scarab_death_crouch_1) {
     deathAnimModel ScriptModelPlayAnim("scarab_fullbody_bone_fx_crouch_anim");
-  else
+  }
+  else {
     deathAnimModel ScriptModelPlayAnim("scarab_fullbody_bone_fx_prone_anim");
+  }
 
   for(index = 0; index < CONST_MAX_SCARAB_DEATH_BONES; index++) {
-    if(index < 2)
+    if(index < 2) {
       continue;
-    else if(index < 10)
+    }
+    else if(index < 10) {
       playFXOnTag(level.dig_fx["scarab"]["deathAnim"], deathAnimModel, "Point00" + index);
-    else
+    }
+    else {
       playFXOnTag(level.dig_fx["scarab"]["deathAnim"], deathAnimModel, "Point0" + index);
+    }
 
     waitframe();
   }
@@ -849,12 +874,15 @@ stopFXOnPlayerspawn(model) {
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(CONST_SCARAB_FALLOFF_TIME);
 
   for(index = 0; index < CONST_MAX_SCARAB_DEATH_BONES; index++) {
-    if(index < 2)
+    if(index < 2) {
       continue;
-    else if(index < 10)
+    }
+    else if(index < 10) {
       stopFXOnTag(level.dig_fx["scarab"]["deathAnim"], model, "Point00" + index);
-    else
+    }
+    else {
       stopFXOnTag(level.dig_fx["scarab"]["deathAnim"], model, "Point0" + index);
+    }
 
     waitframe();
   }
@@ -881,8 +909,9 @@ jackpotWatcher(jackPotStartTime, radioLoopTime) {
   while(true) {
     if(getMinutesPassed() > jackPotStartTime && (isDefined(level.treasure_room_jackpot) && !level.treasure_room_jackpot)) {
       foreach(radio in level.radioArray) {
-        if(isDefined(radio))
+        if(isDefined(radio)) {
           radio playSound("mp_dig_uk_tomb_special");
+        }
       }
 
       level thread jackpotTimeout(CONST_CHEST_JACKPOT_LENGTH);
@@ -890,8 +919,9 @@ jackpotWatcher(jackPotStartTime, radioLoopTime) {
       level.treasure_room_jackpot = true;
     } else {
       foreach(radio in level.radioArray) {
-        if(isDefined(radio))
+        if(isDefined(radio)) {
           radio playSound("mp_dig_uk_tomb1");
+        }
       }
     }
 
@@ -914,8 +944,9 @@ setupTreasureRoom() {
   level.treasureDoor = GetEnt("secret_room_door_model", "targetname");
   level.treasureDoorClip = GetEnt("secret_room_door", "targetname");
 
-  if(isDefined(level.treasureDoor) && isDefined(level.treasureDoorClip))
+  if(isDefined(level.treasureDoor) && isDefined(level.treasureDoorClip)) {
     level.treasureDoorClip LinkTo(level.treasureDoor);
+  }
 
   level.flameDeathZone = GetEnt("secret_room_kill", "targetname");
 
@@ -1019,13 +1050,15 @@ doorSounds() {
 spawnKillstreakChest() {
   level.chest_rewardType = random(["uplink_support", "deployable_vest", "deployable_ammo", "ball_drone_radar", "aa_launcher", "jammer", "ims"]);
 
-  if(isDefined(level.treasure_room_jackpot) && level.treasure_room_jackpot)
+  if(isDefined(level.treasure_room_jackpot) && level.treasure_room_jackpot) {
     level.chest_rewardType = "odin_assault";
+  }
 
   level.chest_rewardHint = game["strings"][level.chest_rewardType + "_hint"];
 
-  if(!isDefined(level.chest_trigger))
+  if(!isDefined(level.chest_trigger)) {
     level.chest_trigger = GetEnt("secret_room_chest", "targetname");
+  }
 
   if(isDefined(level.chest_trigger)) {
     if(!isDefined(level.chest_useObj)) {
@@ -1044,8 +1077,9 @@ spawnKillstreakChest() {
     level.chest_useObj.onBeginUse = ::chestOnBeginUse;
     level.chest_useObj.onEndUse = ::chestOnEndUse;
 
-    if(!isDefined(level.chest_display))
+    if(!isDefined(level.chest_display)) {
       level.chest_display = getStruct(level.chest_trigger.target, "targetname");
+    }
 
     level.chest_display maps\mp\_entityheadIcons::setHeadIcon(level.dig_hidden_door_owner, getKillstreakOverheadIcon(level.chest_rewardType), (0, 0, 0), 14, 14, false, undefined, undefined, undefined, undefined, false);
   }
@@ -1094,13 +1128,15 @@ resetTreasureRoom() {
 
   level waittill("treasure_room_reset");
 
-  if(level.treasure_room_open)
+  if(level.treasure_room_open) {
     level thread closeTreasureRoom();
+  }
 
   level.chest_display maps\mp\_entityheadIcons::setHeadIcon(level.dig_hidden_door_owner, "", (0, 0, 10), 14, 14, false, undefined, undefined, undefined, undefined, false);
 
-  if(isDefined(level.chest_useObj))
+  if(isDefined(level.chest_useObj)) {
     level.chest_useObj maps\mp\gametypes\_gameobjects::disableObject();
+  }
 
   foreach(torch in level.key_torches) {
     if(torch.used) {
@@ -1125,16 +1161,18 @@ notifyDeadPlayers() {
   level.flameDeathZone trigger_on();
 
   foreach(player in level.players) {
-    if(player IsTouching(level.flameDeathZone))
+    if(player IsTouching(level.flameDeathZone)) {
       player PlayLocalSound("mp_dig_tomb_die1");
+    }
   }
 }
 
 closeTreasureRoom() {
   level endon("game_ended");
 
-  if(isDefined(level.doorSoundObj))
+  if(isDefined(level.doorSoundObj)) {
     level.doorSoundObj PlaySoundOnMovingEnt("mp_dig_treasure_door_close");
+  }
 
   level.treasureDoor RotateYaw(-75, CONST_DOOR_MOVE_TIME);
 
@@ -1202,8 +1240,9 @@ setupShrinePerks() {
     for(abilityIndex = 0; abilityIndex < level.abilityPerCategory; abilityIndex++) {
       perkName = TableLookup("mp/cacAbilityTable.csv", 0, abilityCategoryIndex + 1, 4 + abilityIndex);
 
-      if(validShrinePerk(perkName))
+      if(validShrinePerk(perkName)) {
         level.shrinePerks[level.shrinePerks.size] = perkName;
+      }
     }
   }
 }
@@ -1229,8 +1268,9 @@ validShrinePerk(perkName) {
 DIG_LEVEL_KILLSTREAK_WEIGHT = 85;
 
 digCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"] || !level.allow_level_killstreak) {
     return;
@@ -1245,11 +1285,12 @@ digCrateThink(dropType) {
   self endon("restarting_physics");
   level endon("game_ended");
 
-  if(isDefined(game["strings"][self.crateType + "_hint"]))
+  if(isDefined(game["strings"][self.crateType + "_hint"])) {
     crateHint = game["strings"][self.crateType + "_hint"];
-  else
-
+  }
+  else {
     crateHint = &"PLATFORM_GET_KILLSTREAK";
+  }
 
   maps\mp\killstreaks\_airdrop::crateSetupForUse(crateHint, getKillstreakOverheadIcon(self.crateType));
 
@@ -1287,17 +1328,20 @@ crateOtherCaptureThink(useText) {
     if(player isJuggernaut()) {
       player IPrintLnBold(&"MP_DIG_LEVEL_KILLSTREAK_REJECT");
     } else {
-      if(isDefined(level.overrideCrateUseTime))
+      if(isDefined(level.overrideCrateUseTime)) {
         useTime = level.overrideCrateUseTime;
-      else
+      }
+      else {
         useTime = undefined;
+      }
 
       player.isCapturingCrate = true;
       useEnt = self maps\mp\killstreaks\_airdrop::createUseEnt();
       result = useEnt maps\mp\killstreaks\_airdrop::useHoldThink(player, useTime, useText);
 
-      if(isDefined(useEnt))
+      if(isDefined(useEnt)) {
         useEnt delete();
+      }
 
       if(!isDefined(player)) {
         return;
@@ -1401,8 +1445,9 @@ tryUseDigKillstreak(lifeId, streakName) {
   level.dig_killstreak_user thread watchRemoteUse("using_remote");
   level.dig_killstreak_user thread watchRemoteUse("stopped_using_remote");
 
-  if(level.gameType == "blitz")
+  if(level.gameType == "blitz") {
     level.dig_killstreak_user thread watchBlitzTeleport();
+  }
 
   level thread watchPlayersConnect(level.dig_killstreak_user);
 
@@ -1412,12 +1457,14 @@ tryUseDigKillstreak(lifeId, streakName) {
 }
 
 givePerkBonus() {
-  if(!isDefined(level.player_life_counter))
+  if(!isDefined(level.player_life_counter)) {
     level.player_life_counter = 0;
+  }
 
   foreach(perk in level.shrinePerks) {
-    if(!self _hasPerk(perk))
+    if(!self _hasPerk(perk)) {
       self givePerk(perk, false);
+    }
   }
 
   self thread maps\mp\gametypes\_hud_message::SplashNotify("mp_dig_all_perks");
@@ -1447,8 +1494,9 @@ resetPerkBonus() {
 
   stopFXOnTag(level.dig_fx["shrine"]["player"], self, "tag_origin");
 
-  if(isDefined(self.shrine_effect_ent))
+  if(isDefined(self.shrine_effect_ent)) {
     self.shrine_effect_ent delete();
+  }
 
   level notify("reset_perk_bonus");
 }
@@ -1469,8 +1517,9 @@ watchPerkBlessing() {
     if(level.player_life_counter < 4 && !self isJuggernaut()) {
       self givePerkBonus();
 
-      if(!self hasPerkInLoadout("specialty_blindeye") || !self hasPerkInLoadout("specialty_gpsjammer"))
+      if(!self hasPerkInLoadout("specialty_blindeye") || !self hasPerkInLoadout("specialty_gpsjammer")) {
         self childthread reGiveSpawnPerks();
+      }
     } else if(level.player_life_counter == 4)
       self notify("blessing_ended");
   }
@@ -1494,11 +1543,13 @@ hasPerkInLoadout(checkPerk) {
 reGiveSpawnPerks() {
   self waittill("starting_perks_unset");
 
-  if(!self _hasPerk("specialty_blindeye"))
+  if(!self _hasPerk("specialty_blindeye")) {
     self givePerk("specialty_blindeye", false);
+  }
 
-  if(!self _hasPerk("specialty_gpsjammer"))
+  if(!self _hasPerk("specialty_gpsjammer")) {
     self givePerk("specialty_gpsjammer", false);
+  }
 }
 
 watchJuggUse() {
@@ -1588,8 +1639,9 @@ showBlessingFX(blessingUser) {
   level endon("game_ended");
 
   foreach(player in level.players) {
-    if(isDefined(player) && isDefined(blessingUser) && IsReallyAlive(blessingUser))
+    if(isDefined(player) && isDefined(blessingUser) && IsReallyAlive(blessingUser)) {
       PlayFXOnTagForClients(level.dig_fx["shrine"]["player"], blessingUser, "tag_origin", player);
+    }
 
     waitframe();
   }
@@ -1603,8 +1655,9 @@ playFXOnPlayerspawn(blessingUser) {
 
   self waittill("spawned_player");
 
-  if(isDefined(self) && isDefined(blessingUser) && IsReallyAlive(blessingUser))
+  if(isDefined(self) && isDefined(blessingUser) && IsReallyAlive(blessingUser)) {
     PlayFXOnTagForClients(level.dig_fx["shrine"]["player"], blessingUser, "tag_origin", self);
+  }
 }
 
 watchLifeTime(sendNotify, endonNotify, lifeTime) {
@@ -1621,8 +1674,9 @@ watchLifeTime(sendNotify, endonNotify, lifeTime) {
 doPeriodicDamage(screenEffect, damage, interval, damageType, notifyObject, notifyMsg, owner, source) {
   level endon("game_ended");
 
-  if(!isDefined(damageType))
+  if(!isDefined(damageType)) {
     damageType = "MOD_CRUSH";
+  }
 
   hasPlayedDeathSound = false;
 
@@ -1642,13 +1696,16 @@ doPeriodicDamage(screenEffect, damage, interval, damageType, notifyObject, notif
         rand = RandomIntRange(1, 8);
 
         type = "male";
-        if(self hasFemaleCustomizationModel())
+        if(self hasFemaleCustomizationModel()) {
           type = "female";
+        }
 
-        if(self.team == "axis")
+        if(self.team == "axis") {
           self playSound(type + "_scarab_death_russian" + rand);
-        else
+        }
+        else {
           self playSound(type + "_scarab_death_american" + rand);
+        }
 
         hasPlayedDeathSound = true;
       }
@@ -1657,21 +1714,25 @@ doPeriodicDamage(screenEffect, damage, interval, damageType, notifyObject, notif
     wait(interval);
   }
 
-  if(isDefined(notifyObject) && isDefined(notifyMsg))
+  if(isDefined(notifyObject) && isDefined(notifyMsg)) {
     notifyObject notify(notifyMsg);
+  }
 }
 
 killFXOnPlayerDeath(effect, endonMSG, endonMSG2, endonMSG3) {
   level endon("game_ended");
 
-  if(isDefined(endonMSG))
+  if(isDefined(endonMSG)) {
     level endon(endonMSG);
+  }
 
-  if(isDefined(endonMSG2))
+  if(isDefined(endonMSG2)) {
     level endon(endonMSG2);
+  }
 
-  if(isDefined(endonMSG3))
+  if(isDefined(endonMSG3)) {
     level endon(endonMSG3);
+  }
 
   self waittill_any("killed_player", "disconnect");
 
@@ -1714,8 +1775,9 @@ drawLinkedSphere(radius, length, singleShot) {
 
 getFirstAlivePlayer() {
   foreach(player in level.participants) {
-    if(isDefined(player) && isReallyAlive(player))
+    if(isDefined(player) && isReallyAlive(player)) {
       return player;
+    }
   }
 }
 
@@ -1733,8 +1795,9 @@ killAll(waitNotify, damage, meansOfDeath) {
 
   level waittill(waitNotify);
 
-  if(isDefined(self.trigger_off))
+  if(isDefined(self.trigger_off)) {
     self trigger_on();
+  }
 
   waitframe();
 
@@ -1773,13 +1836,15 @@ killAll(waitNotify, damage, meansOfDeath) {
   }
 
   foreach(package in level.carePackages) {
-    if(package.friendlyModel IsTouching(self) || package.enemyModel IsTouching(self))
+    if(package.friendlyModel IsTouching(self) || package.enemyModel IsTouching(self)) {
       package maps\mp\killstreaks\_airdrop::deleteCrate();
+    }
   }
 
   if(isDefined(level.intelEnt)) {
-    if(level.intelEnt["visuals"] IsTouching(self))
+    if(level.intelEnt["visuals"] IsTouching(self)) {
       level.intelEnt["dropped_time"] = -60000;
+    }
   }
 
   level thread activateKillTrigger(self, damage);
@@ -1791,10 +1856,12 @@ killAllTouchingTrigger(entArray, type, damage, meansOfDeath, attacker, inflictor
       switch (type) {
         case CONST_CHARACTERS:
 
-          if(IsAgent(ent) && isDefined(ent.team) && ent.team == attacker.team)
+          if(IsAgent(ent) && isDefined(ent.team) && ent.team == attacker.team) {
             ent DoDamage(damage, ent.origin, undefined, inflictor, meansOfDeath);
-          else
+          }
+          else {
             ent DoDamage(damage, ent.origin, attacker, inflictor, meansOfDeath);
+          }
           break;
         case CONST_KILLSTREAKS:
         case CONST_EQUIPMENT:
@@ -1907,8 +1974,10 @@ delayTrigger(time, state) {
 
   wait(time);
 
-  if(state == "on")
+  if(state == "on") {
     self trigger_on();
-  else
+  }
+  else {
     self trigger_off();
+  }
 }

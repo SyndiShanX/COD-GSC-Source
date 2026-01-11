@@ -4,11 +4,13 @@
 ***************************************/
 
 init() {
-  if(!isDefined(level.planes))
+  if(!isDefined(level.planes)) {
     level.planes = [];
+  }
 
-  if(!isDefined(level.planeconfigs))
+  if(!isDefined(level.planeconfigs)) {
     level.planeconfigs = [];
+  }
 
   level.fighter_deathfx = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
   level.fx_airstrike_afterburner = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
@@ -65,15 +67,17 @@ planespawn(var_00, var_01, var_02, var_03, var_04) {
   var_8.owner = var_01;
   var_08 setModel(var_7.func_B923[var_1.team]);
 
-  if(isDefined(var_7.compassiconfriendly))
+  if(isDefined(var_7.compassiconfriendly)) {
     var_08 setobjectiveicons(var_7.compassiconfriendly, var_7.compassiconenemy);
+  }
 
   var_08 thread handledamage();
   var_08 thread handledeath();
   starttrackingplane(var_08);
 
-  if(!isDefined(var_7.nolightfx))
+  if(!isDefined(var_7.nolightfx)) {
     var_08 thread playplanefx();
+  }
 
   var_08 playLoopSound(var_7.inboundsfx);
   var_08 createkillcam(var_04);
@@ -84,11 +88,13 @@ planemove(var_00, var_01, var_02, var_03) {
   var_04 = level.planeconfigs[var_03];
   self moveto(var_00, var_01, 0, 0);
 
-  if(isDefined(var_4.onattackdelegate))
+  if(isDefined(var_4.onattackdelegate)) {
     self thread[[var_4.onattackdelegate]](var_00, var_01, var_02, self.owner, var_03);
+  }
 
-  if(isDefined(var_4.sonicboomsfx))
+  if(isDefined(var_4.sonicboomsfx)) {
     thread playsonicboom(var_4.sonicboomsfx, 0.5 * var_01);
+  }
 
   wait(0.65 * var_01);
 
@@ -97,8 +103,9 @@ planemove(var_00, var_01, var_02, var_03) {
     self playLoopSound(var_4.outboundsfx);
   }
 
-  if(isDefined(var_4.outboundflightanim))
+  if(isDefined(var_4.outboundflightanim)) {
     self scriptmodelplayanimdeltamotion(var_4.outboundflightanim);
+  }
 
   wait(0.35 * var_01);
 }
@@ -106,16 +113,18 @@ planemove(var_00, var_01, var_02, var_03) {
 planecleanup() {
   var_00 = level.planeconfigs[self.streakname];
 
-  if(isDefined(var_0.onflybycompletedelegate))
+  if(isDefined(var_0.onflybycompletedelegate)) {
     thread[[var_0.onflybycompletedelegate]](self.owner, self, self.streakname);
+  }
 
   if(isDefined(self.friendlyteamid)) {
     scripts\mp\objidpoolmanager::returnminimapid(self.friendlyteamid);
     scripts\mp\objidpoolmanager::returnminimapid(self.enemyteamid);
   }
 
-  if(isDefined(self.killcament))
+  if(isDefined(self.killcament)) {
     self.killcament delete();
+  }
 
   stoptrackingplane(self);
   self notify("delete");
@@ -181,13 +190,15 @@ playplanefx() {
 _meth_806A() {
   var_00 = getent("airstrikeheight", "targetname");
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     return var_0.origin[2];
+  }
   else {
     var_01 = 950;
 
-    if(isDefined(level.airstrikeheightscale))
+    if(isDefined(level.airstrikeheightscale)) {
       var_01 = var_01 * level.airstrikeheightscale;
+    }
 
     return var_01;
   }
@@ -202,8 +213,9 @@ _meth_8069(var_00) {
     var_1.targetpos = var_2.origin;
     var_1.func_6F25 = anglesToForward(var_2.angles);
 
-    if(randomint(2) == 0)
+    if(randomint(2) == 0) {
       var_1.func_6F25 = var_1.func_6F25 * -1;
+    }
   } else {
     var_03 = anglesToForward(self.angles);
     var_04 = anglestoright(self.angles);
@@ -235,25 +247,29 @@ stoptrackingplane(var_00) {
 selectairstrikelocation(var_00, var_01, var_02) {
   var_03 = level.mapsize / 6.46875;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     var_03 = var_03 * 1.5;
+  }
 
   var_04 = level.planeconfigs[var_01];
 
-  if(isDefined(var_4.selectlocationvo))
+  if(isDefined(var_4.selectlocationvo)) {
     self playlocalsound(game["voice"][self.team] + var_4.selectlocationvo);
+  }
 
   scripts\mp\utility\game::_beginlocationselection(var_01, "map_artillery_selector", var_4.choosedirection, var_03);
   self endon("stop_location_selection");
   self waittill("confirm_location", var_05, var_06);
 
-  if(!var_4.choosedirection)
+  if(!var_4.choosedirection) {
     var_06 = randomint(360);
+  }
 
   self setblurforplayer(0, 0.3);
 
-  if(isDefined(var_4.inboundvo))
+  if(isDefined(var_4.inboundvo)) {
     self playlocalsound(game["voice"][self.team] + var_4.inboundvo);
+  }
 
   self thread[[var_02]](var_00, var_05, var_06, var_01);
   return 1;
@@ -278,19 +294,23 @@ setobjectiveicons(var_00, var_01) {
   self.enemyteamid = var_03;
 
   if(level.teambased) {
-    if(var_02 != -1)
+    if(var_02 != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_team(var_02, self.team);
+    }
 
-    if(var_03 != -1)
+    if(var_03 != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_team(var_03, scripts\mp\utility\game::getotherteam(self.team));
+    }
   } else {
     var_04 = self.owner getentitynumber();
 
-    if(var_02 != -1)
+    if(var_02 != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_playerteam(var_02, var_04);
+    }
 
-    if(var_03 != -1)
+    if(var_03 != -1) {
       scripts\mp\objidpoolmanager::minimap_objective_playerenemyteam(var_03, var_04);
+    }
   }
 }
 

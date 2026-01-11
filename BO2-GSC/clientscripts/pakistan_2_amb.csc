@@ -197,8 +197,9 @@ menendezstartrecording(localclientnum, set, newent) {
     level notify("surv_END");
     setdvarfloat("snd_futz", 1);
 
-    if(isDefined(level.survsndent))
+    if(isDefined(level.survsndent)) {
       level.survsndent delete();
+    }
   }
 }
 
@@ -207,8 +208,9 @@ waitfor_failsafe() {
   level waittill("surv_END");
   setdvarfloat("snd_futz", 1);
 
-  if(isDefined(level.survsndent))
+  if(isDefined(level.survsndent)) {
     level.survsndent delete();
+  }
 }
 
 menendezchangedvar(menendez) {
@@ -218,8 +220,9 @@ menendezchangedvar(menendez) {
   min_set = -1;
   max_set = -0.1;
 
-  if(!isDefined(level.survsndent))
+  if(!isDefined(level.survsndent)) {
     level.survsndent = spawn(0, (0, 0, 0), "script_origin");
+  }
 
   loop_id = level.survsndent playLoopSound("evt_static_loop", 1);
   setsoundvolume(loop_id, 0);

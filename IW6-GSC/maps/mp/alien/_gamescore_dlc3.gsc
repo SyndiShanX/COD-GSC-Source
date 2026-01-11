@@ -88,10 +88,12 @@ init_gryphon_personal_score_component() {
 }
 
 init_gryphon_personal_score(var_0) {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     var_0.max_score_damage_taken = 4000;
-  else
+  }
+  else {
     var_0.max_score_damage_taken = 1000;
+  }
 
   return var_0;
 }
@@ -106,10 +108,12 @@ calculate_rgyphon_personal_skill_score(var_0, var_1) {
 }
 
 get_gryphon_score_component_list() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     return ["gryphon", "gryphon_personal"];
-  else
+  }
+  else {
     return ["gryphon", "gryphon_team", "gryphon_personal"];
+  }
 }
 
 init_cortex_score_component() {
@@ -117,10 +121,12 @@ init_cortex_score_component() {
 }
 
 inti_cortex_score(var_0) {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     var_0.max_cortex_score = 6000;
-  else
+  }
+  else {
     var_0.max_cortex_score = 4500;
+  }
 
   reset_cortex_score(var_0);
   return var_0;
@@ -145,10 +151,12 @@ init_cortex_personal_component() {
 }
 
 get_ark_score_component_list() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     return ["cortex", "cortex_personal"];
-  else
+  }
+  else {
     return ["cortex", "cortex_team", "cortex_personal"];
+  }
 }
 
 init_escape_component() {
@@ -156,10 +164,12 @@ init_escape_component() {
 }
 
 init_escape_score(var_0) {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     var_0.max_escape_score = 6000;
-  else
+  }
+  else {
     var_0.max_escape_score = 4500;
+  }
 
   return var_0;
 }
@@ -188,8 +198,10 @@ init_escape_personal_component() {
 }
 
 get_escape_blocker_score_component_list() {
-  if(maps\mp\alien\_utility::isplayingsolo())
+  if(maps\mp\alien\_utility::isplayingsolo()) {
     return ["escape", "escape_personal"];
-  else
+  }
+  else {
     return ["escape", "escape_team", "escape_personal"];
+  }
 }

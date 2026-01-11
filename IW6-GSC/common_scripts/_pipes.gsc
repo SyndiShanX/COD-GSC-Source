@@ -16,8 +16,9 @@ main() {
   level.pipes_init = true;
 
   pipes = getEntArray("pipe_shootable", "targetname");
-  if(!pipes.size)
+  if(!pipes.size) {
     return;
+  }
   level._pipes = spawnStruct();
   level._pipes.num_pipe_fx = 0;
 
@@ -29,8 +30,9 @@ main() {
 
 post_load(pipes) {
   waittillframeend;
-  if(level.createFX_enabled)
+  if(level.createFX_enabled) {
     return;
+  }
   array_thread(pipes, ::pipesetup);
 }
 
@@ -68,14 +70,16 @@ pipe_wait_loop() {
     self waittill("damage", damage, attacker, direction_vec, P, type);
 
     if(hasTakenDamage) {
-      if(randomint(100) <= level_pipe_fx_chance)
+      if(randomint(100) <= level_pipe_fx_chance) {
         continue;
+      }
     }
     hasTakenDamage = true;
 
     result = self pipe_logic(direction_vec, P, type, attacker);
-    if(result)
+    if(result) {
       remaining--;
+    }
 
     if(remaining <= 0) {
       break;
@@ -86,30 +90,38 @@ pipe_wait_loop() {
 }
 
 pipe_logic(direction_vec, P, type, damageOwner) {
-  if(level._pipes.num_pipe_fx > level_limit_pipe_fx)
+  if(level._pipes.num_pipe_fx > level_limit_pipe_fx) {
     return false;
+  }
 
-  if(!isDefined(level._pipes._pipe_methods[type]))
+  if(!isDefined(level._pipes._pipe_methods[type])) {
     P = self pipe_calc_nofx(P, type);
-  else
+  }
+  else {
     P = self[[level._pipes._pipe_methods[type]]](P, type);
+  }
 
-  if(!isDefined(P))
+  if(!isDefined(P)) {
     return false;
+  }
 
-  if(isDefined(damageOwner.classname) && damageOwner.classname == "worldspawn")
+  if(isDefined(damageOwner.classname) && damageOwner.classname == "worldspawn") {
     return false;
+  }
 
   foreach(value in self.pipe_fx_array) {
-    if(DistanceSquared(P, value.origin) < 25)
+    if(DistanceSquared(P, value.origin) < 25) {
       return false;
+    }
   }
 
   E = undefined;
-  if(IsAI(damageOwner))
+  if(IsAI(damageOwner)) {
     E = damageOwner getEye();
-  else
+  }
+  else {
     E = damageOwner.origin;
+  }
 
   temp_vec = P - E;
 
@@ -138,8 +150,9 @@ pipefx(P, vec, damageOwner) {
   snd playLoopSound(loopsnd);
   self.pipe_fx_array[self.pipe_fx_array.size] = snd;
 
-  if(isSP() || self.script_noteworthy != "steam")
+  if(isSP() || self.script_noteworthy != "steam") {
     self thread pipe_damage(P, vec, damageOwner, snd);
+  }
 
   if(self.script_noteworthy == "oil_leak") {
     efx_rot = spawn("script_model", P);
@@ -205,11 +218,13 @@ pipe_damage(P, vec, damageOwner, fx) {
 }
 
 allow_pipe_damage() {
-  if(!isSP())
+  if(!isSP()) {
     return false;
+  }
 
-  if(!isDefined(level.pipesDamage))
+  if(!isDefined(level.pipesDamage)) {
     return true;
+  }
 
   return (level.pipesDamage);
 }
@@ -249,8 +264,9 @@ precacheFX() {
   oil_leak = false;
   oil_cap = false;
   foreach(value in self) {
-    if(value.script_noteworthy == "water")
+    if(value.script_noteworthy == "water") {
       value.script_noteworthy = "steam";
+    }
 
     if(value.script_noteworthy == "steam") {
       value willNeverChange();

@@ -35,10 +35,12 @@ main(model, type) {
   build_deathfx(bmp_death_fx[model], undefined, "exp_armor_vehicle", undefined, undefined, undefined, 0);
   build_drive( % bmp_movement, % bmp_movement_backwards, 10);
 
-  if(issubstr(model, "_low"))
+  if(issubstr(model, "_low")) {
     build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun_low");
-  else
+  }
+  else {
     build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun");
+  }
 
   build_radiusdamage((0, 0, 53), 512, 300, 20, false);
 
@@ -76,8 +78,9 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 4; i++)
+  for(i = 0; i < 4; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].sittag = "tag_guy1";
   positions[1].sittag = "tag_guy2";

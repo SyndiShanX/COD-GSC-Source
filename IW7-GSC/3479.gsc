@@ -7,8 +7,9 @@ init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("drone_hive", ::tryusedronehive, undefined, undefined, undefined, ::func_13C8C);
   level.dronemissilespawnarray = getEntArray("remoteMissileSpawn", "targetname");
 
-  foreach(var_01 in level.dronemissilespawnarray)
+  foreach(var_01 in level.dronemissilespawnarray) {
   var_1.func_1155F = getent(var_1.target, "targetname");
+  }
 
   var_03 = ["passive_predator", "passive_no_missiles", "passive_implosion", "passive_rapid_missiles"];
   scripts\mp\killstreak_loot::func_DF07("drone_hive", var_03);
@@ -23,13 +24,15 @@ tryusedronehive(var_00) {
 }
 
 usedronehive(var_00, var_01, var_02) {
-  if(isDefined(self.underwater) && self.underwater)
+  if(isDefined(self.underwater) && self.underwater) {
     return 0;
+  }
 
   var_03 = scripts\mp\killstreaks\killstreaks::func_D507(var_02);
 
-  if(!var_03)
+  if(!var_03) {
     return 0;
+  }
 
   var_00 scripts\engine\utility::allow_weapon_switch(0);
   level thread func_B9CB(var_00);
@@ -103,8 +106,9 @@ func_E846(var_00, var_01, var_02, var_03) {
   var_06 = "switch_blade_child_mp";
   var_07 = scripts\mp\killstreak_loot::getrarityforlootitem(var_3.variantid);
 
-  if(var_07 != "")
+  if(var_07 != "") {
     var_04 = var_04 + "_" + var_07;
+  }
 
   if(scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_implosion")) {
     var_05 = "drone_hive_impulse_mp";
@@ -154,8 +158,9 @@ func_E846(var_00, var_01, var_02, var_03) {
     var_11 getrankxpmultiplier();
   }
 
-  if(scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_rapid_missiles"))
+  if(scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_rapid_missiles")) {
     var_11.func_12BA7 = 1;
+  }
 
   var_13 = 2;
   var_00 setclientomnvar("ui_predator_missiles_left", var_11.missilesleft);
@@ -172,8 +177,9 @@ func_E846(var_00, var_01, var_02, var_03) {
     }
     if(scripts\mp\utility\game::istrue(var_11.func_12BA7)) {
       if(scripts\mp\utility\game::istrue(var_11.lasttimefired)) {
-        if(gettime() < var_11.lasttimefired + var_13 * 1000 && var_12 == 0)
+        if(gettime() < var_11.lasttimefired + var_13 * 1000 && var_12 == 0) {
           continue;
+        }
       }
 
       level thread firerapidmissiles(var_11, var_12, var_03, var_06);
@@ -182,8 +188,9 @@ func_E846(var_00, var_01, var_02, var_03) {
       var_11.missilesleft = 2 - var_12;
       var_15 = var_11.missilesleft;
 
-      if(var_11.missilesleft == 0)
+      if(var_11.missilesleft == 0) {
         var_15 = -1;
+      }
 
       var_00 setclientomnvar("ui_predator_missiles_left", var_15);
 
@@ -203,8 +210,9 @@ func_E846(var_00, var_01, var_02, var_03) {
         var_11.missilesleft = 2 - var_12;
         var_00 setclientomnvar("ui_predator_missiles_left", var_11.missilesleft);
 
-        if(var_12 == 2)
+        if(var_12 == 2) {
           var_11 getrankxpmultiplier();
+        }
       }
     }
   }
@@ -220,8 +228,9 @@ firerapidmissiles(var_00, var_01, var_02, var_03) {
     level thread spawnswitchblade(var_00, var_04, var_02, var_03);
     var_4++;
 
-    if(var_04 > 1)
+    if(var_04 > 1) {
       var_04 = 0;
+    }
 
     wait 0.1;
   }
@@ -272,8 +281,9 @@ spawnswitchblade(var_00, var_01, var_02, var_03) {
   var_07 = (100, 100, 100);
   var_08 = (15000, 15000, 15000);
 
-  if(var_01)
+  if(var_01) {
     var_07 = var_07 * -1;
+  }
 
   var_09 = bulletTrace(var_0.origin, var_0.origin + var_05 * var_08, 0, var_00);
   var_08 = var_08 * var_9["fraction"];
@@ -282,8 +292,9 @@ spawnswitchblade(var_00, var_01, var_02, var_03) {
   var_12 = scripts\mp\utility\game::_magicbullet(var_03, var_10, var_11, var_0.owner);
   var_13 = var_00 getclosesttargetinview(var_0.owner, var_11);
 
-  if(isDefined(var_13) && !scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_rapid_missiles"))
+  if(isDefined(var_13) && !scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_rapid_missiles")) {
     var_12 missile_settargetent(var_13);
+  }
 
   var_12 setCanDamage(1);
   var_12 give_player_next_weapon(1);
@@ -360,8 +371,9 @@ watchtarget(var_00) {
 
   self.trinityrocketlocked = undefined;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 missile_cleartarget();
+  }
 }
 
 looptriggeredeffect(var_00, var_01) {
@@ -378,8 +390,9 @@ looptriggeredeffect(var_00, var_01) {
 getnextmissilespawnindex(var_00) {
   var_01 = var_00 + 1;
 
-  if(var_01 == level.dronemissilespawnarray.size)
+  if(var_01 == level.dronemissilespawnarray.size) {
     var_01 = 0;
+  }
 
   return var_01;
 }
@@ -409,8 +422,9 @@ func_7DFE(var_00, var_01) {
     var_2[var_2.size] = var_04;
   }
 
-  if(!var_2.size)
+  if(!var_2.size) {
     return var_1[randomint(var_1.size)];
+  }
 
   var_06 = scripts\engine\utility::array_randomize(var_01);
   var_07 = var_6[0];
@@ -437,11 +451,13 @@ func_7DFE(var_00, var_01) {
       scripts\mp\hostmigration::waittillhostmigrationdone();
     }
 
-    if(var_9.func_101E4 == var_2.size)
+    if(var_9.func_101E4 == var_2.size) {
       return var_09;
+    }
 
-    if(var_9.func_101E4 > var_7.func_101E4)
+    if(var_9.func_101E4 > var_7.func_101E4) {
       var_07 = var_09;
+    }
   }
 
   return var_07;
@@ -493,17 +509,21 @@ monitordeath(var_00, var_01) {
   var_00 waittill("death");
   scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  if(isDefined(var_0.func_114F1))
+  if(isDefined(var_0.func_114F1)) {
     var_0.func_114F1 delete();
+  }
 
-  if(isDefined(var_0.entitynumber))
+  if(isDefined(var_0.entitynumber)) {
     level.rockets[var_0.entitynumber] = undefined;
+  }
 
-  if(var_01)
+  if(var_01) {
     level.remotemissileinprogress = undefined;
+  }
 
-  if(isDefined(var_02) && !scripts\mp\utility\game::isreallyalive(var_02) && scripts\mp\utility\game::istrue(var_01))
+  if(isDefined(var_02) && !scripts\mp\utility\game::isreallyalive(var_02) && scripts\mp\utility\game::istrue(var_01)) {
     var_02 thread stopmissilesoundonspawn();
+  }
 }
 
 stopmissilesoundonspawn() {
@@ -520,8 +540,9 @@ func_E474(var_00, var_01, var_02) {
   }
   var_00 playlocalsound("trinity_rocket_exp_plr");
 
-  if(!scripts\mp\utility\game::istrue(var_02))
+  if(!scripts\mp\utility\game::istrue(var_02)) {
     var_00 thread scripts\mp\killstreaks\killstreaks::func_11086();
+  }
 
   var_00 setclientomnvar("ui_predator_missile", 2);
   var_00 notify("end_kill_streak");
@@ -583,11 +604,13 @@ watchmissileextraeffect(var_00, var_01) {
     wait 1;
   }
 
-  if(isDefined(var_07))
+  if(isDefined(var_07)) {
     var_07 delete();
+  }
 
-  if(isDefined(var_06))
+  if(isDefined(var_06)) {
     var_06 delete();
+  }
 }
 
 watchgastrigger(var_00, var_01) {
@@ -622,6 +645,7 @@ applygasdamageovertime(var_00, var_01, var_02) {
     }
   }
 
-  if(scripts\mp\utility\game::istrue(var_2.gettinggassed))
+  if(scripts\mp\utility\game::istrue(var_2.gettinggassed)) {
     var_2.gettinggassed = undefined;
+  }
 }

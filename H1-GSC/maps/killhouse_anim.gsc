@@ -464,8 +464,9 @@ anim_chair() {
 #using_animtree("generic_human");
 
 play_idle_facial_anim(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = randomint(anim.facial["idle"].size);
+  }
 
   self setanimknoballrestart(anim.facial["idle"][var_0], % head, 1);
   self setanimlimited( % head, 1);

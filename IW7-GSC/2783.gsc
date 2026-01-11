@@ -8,11 +8,13 @@ func_D446() {
   self endon("disconnect");
   self endon("player_trophy_unset");
 
-  if(!isDefined(level._effect["pts_detonate"]))
+  if(!isDefined(level._effect["pts_detonate"])) {
     level._effect["pts_detonate"] = loadfx("vfx\iw7\_requests\mp\vfx_generic_equipment_exp.vfx");
+  }
 
-  if(!isDefined(level._effect["pts_drone_drop"]))
+  if(!isDefined(level._effect["pts_drone_drop"])) {
     level._effect["pts_drone_drop"] = loadfx("vfx\iw7\_requests\mp\vfx_pts_drone_drop.vfx");
+  }
 
   for(;;) {
     func_D447();
@@ -31,8 +33,9 @@ func_D447() {
   self endon("player_trophy_start");
   self setclientomnvar("ui_dodge_charges", 5);
 
-  if(self.loadoutarchetype == "archetype_engineer")
+  if(self.loadoutarchetype == "archetype_engineer") {
     self setscriptablepartstate("pts_drone", "active");
+  }
 
   thread playertrophy_watchemp();
   thread playertrophy_watchownerdeath();
@@ -43,8 +46,9 @@ func_D441() {
   self notify("player_trophy_end");
   self setclientomnvar("ui_dodge_charges", 0);
 
-  if(self.loadoutarchetype == "archetype_engineer")
+  if(self.loadoutarchetype == "archetype_engineer") {
     self setscriptablepartstate("pts_drone", "off");
+  }
 }
 
 func_D449() {
@@ -70,8 +74,9 @@ func_D449() {
       }
       var_06 = var_5.owner;
 
-      if(!isDefined(var_06) && isDefined(var_5.weapon_name) && weaponclass(var_5.weapon_name) == "grenade")
+      if(!isDefined(var_06) && isDefined(var_5.weapon_name) && weaponclass(var_5.weapon_name) == "grenade") {
         var_06 = getmissileowner(var_05);
+      }
 
       if(isDefined(var_06) && !scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self, var_5.owner))) {
         continue;
@@ -103,12 +108,15 @@ func_D445(var_00) {
   var_01 = var_0.origin;
   var_02 = var_0.angles;
 
-  if(scripts\mp\weapons::isplantedequipment(var_00))
+  if(scripts\mp\weapons::isplantedequipment(var_00)) {
     var_00 scripts\mp\weapons::deleteexplosive();
-  else if(var_00 scripts\mp\domeshield::isdomeshield())
+  }
+  else if(var_00 scripts\mp\domeshield::isdomeshield()) {
     var_00 thread scripts\mp\domeshield::domeshield_delete();
-  else
+  }
+  else {
     var_00 delete();
+  }
 
   radiusdamage(var_01, 128, 70, 10, self, "MOD_EXPLOSIVE", "player_trophy_system_mp");
   thread playertrophy_protectionfx(var_01, var_02);
@@ -119,8 +127,9 @@ playertrophy_watchemp() {
   self endon("disconnect");
   self endon("player_trophy_end");
 
-  while(!scripts\mp\killstreaks\emp_common::isemped())
+  while(!scripts\mp\killstreaks\emp_common::isemped()) {
     scripts\engine\utility::waitframe();
+  }
 
   thread func_D441();
 }
@@ -142,28 +151,33 @@ func_D444() {
 playertrophy_checkignorelist(var_00) {
   var_01 = scripts\mp\trophy_system::trophy_checkignorelist(var_00);
 
-  if(isDefined(var_0.weapon_name) && (issubstr(var_0.weapon_name, "iw7_tacburst") || issubstr(var_0.weapon_name, "power_smoke_drone_mp")))
+  if(isDefined(var_0.weapon_name) && (issubstr(var_0.weapon_name, "iw7_tacburst") || issubstr(var_0.weapon_name, "power_smoke_drone_mp"))) {
     var_01 = 1;
+  }
 
   if(!var_01 && isDefined(var_0.weapon_name)) {
     var_02 = scripts\mp\utility\game::getequipmenttype(var_0.weapon_name);
 
-    if(isDefined(var_02) && var_02 != "lethal")
+    if(isDefined(var_02) && var_02 != "lethal") {
       var_01 = 1;
+    }
   }
 
-  if(!var_01 && scripts\mp\weapons::isplantedequipment(var_00))
+  if(!var_01 && scripts\mp\weapons::isplantedequipment(var_00)) {
     var_01 = 1;
+  }
 
   return var_01;
 }
 
 playertrophy_modifieddamage(var_00, var_01, var_02, var_03, var_04) {
-  if(!isDefined(var_02) || var_02 != "player_trophy_system_mp")
+  if(!isDefined(var_02) || var_02 != "player_trophy_system_mp") {
     return var_04;
+  }
 
-  if(!isDefined(var_00) || !isDefined(var_01))
+  if(!isDefined(var_00) || !isDefined(var_01)) {
     return var_04;
+  }
 
   return scripts\engine\utility::ter_op(var_00 == var_01, 0, var_04);
 }

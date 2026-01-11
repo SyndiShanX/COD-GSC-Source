@@ -217,8 +217,9 @@ cw_chaos_vault_light() {
 check_trigger_moon_off(var_0) {
   var_1 = getEntArray("moon_off", "targetname");
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 thread set_flag_moon_off();
+  }
 }
 
 set_flag_moon_off() {

@@ -53,8 +53,9 @@ main() {
   animscripts\utility::initialize("flashed");
 
   flashDuration = self flashBangGetTimeLeftSec();
-  if(flashDuration <= 0)
+  if(flashDuration <= 0) {
     return;
+  }
 
   self animscripts\face::SayGenericDialogue("flashbang");
 
@@ -75,8 +76,9 @@ flashBangedLoop(animation, duration) {
   assert(isDefined(duration));
   assert(duration > 0);
 
-  if(self.a.pose == "prone")
+  if(self.a.pose == "prone") {
     self ExitProneWrapper(1);
+  }
 
   self.a.pose = "stand";
   self.allowdeath = true;

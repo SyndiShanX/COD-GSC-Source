@@ -6,10 +6,10 @@
 #include common_scripts\utility;
 
 main() {
-  if(!isDefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
+  }
 
   model = "foliage_dead_pine_med_animated_sway2";
   level.anim_prop_models[model]["sway2"] = "foliage_dead_pine_med_mp_sway2";
 }
-

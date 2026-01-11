@@ -25,10 +25,12 @@ main() {
 
   thread hackangle();
   self OrientMode("face enemy");
-  if(randomint(100) > 50)
+  if(randomint(100) > 50) {
     nextaction = ("stand");
-  else
+  }
+  else {
     nextaction = ("crouch");
+  }
 
   for(;;) {
     // Nothing below will work if our gun is completely empty.
@@ -54,8 +56,9 @@ main() {
 
         //				self animscripts\aim::aim();
         success = ShootVolley();
-        if(!success)
+        if(!success) {
           continue;
+        }
         nextaction = ("stand");
       }
 
@@ -103,8 +106,9 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
       self decrementBulletsInClip();
       enemyAngle = animscripts\utility::AbsYawToEnemy();
     }
-    if(completeLastShot)
+    if(completeLastShot) {
       wait animscripts\weaponList::waitAfterShot();
+    }
     self notify("stopautofireFace");
   } else if(animscripts\weaponList::usingSemiAutoWeapon()) {
     self animscripts\face::SetIdleFace(anim.aimface);
@@ -116,17 +120,20 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
     for(i = 0;
       (i < rand && self.bulletsInClip > 0); i++) {
       self setFlaggedAnimKnobRestart("shootdone", anim_semiautofire, 1, 0, 1);
-      if(isDefined(posOverrideEntity))
+      if(isDefined(posOverrideEntity)) {
         self shoot(1, posOverrideEntity.origin);
-      else
+      }
+      else {
         self shoot();
+      }
       self decrementBulletsInClip();
       /#thread [[ anim.locspam ]]( "c17.1b" );
       shootTime = animscripts\weaponList::shootAnimTime();
       quickTime = animscripts\weaponList::waitAfterShot();
       wait quickTime;
-      if(((completeLastShot) || (i < rand - 1)) && shootTime > quickTime)
+      if(((completeLastShot) || (i < rand - 1)) && shootTime > quickTime) {
         wait shootTime - quickTime;
+      }
     }
   } else // Bolt action
   {
@@ -139,10 +146,12 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
     wait 0.2;
 
     self setFlaggedAnimKnobRestart("shootdone", anim_boltfire, 1, 0, 1);
-    if(isDefined(posOverrideEntity))
+    if(isDefined(posOverrideEntity)) {
       self shoot(1, posOverrideEntity.origin);
-    else
+    }
+    else {
       self shoot();
+    }
     self.a.needsToRechamber = 1;
     self decrementBulletsInClip();
     shootTime = animscripts\weaponList::shootAnimTime();

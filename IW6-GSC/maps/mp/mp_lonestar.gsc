@@ -298,17 +298,20 @@ quake_run(quake_events) {
 }
 
 quake_event_trigger(duration, waitTime) {
-  if(isDefined(waitTime) && waitTime > 0)
+  if(isDefined(waitTime) && waitTime > 0) {
     wait waitTime;
+  }
 
   self notify("trigger", duration);
 }
 
 quake_event_wait() {
-  if(isDefined(self.script_wait))
+  if(isDefined(self.script_wait)) {
     return self.script_wait;
-  else if(isDefined(self.script_wait_min) && isDefined(self.script_wait_max))
+  }
+  else if(isDefined(self.script_wait_min) && isDefined(self.script_wait_max)) {
     return RandomFloatRange(self.script_wait_min, self.script_wait_max);
+  }
 
   return 0;
 }
@@ -316,20 +319,27 @@ quake_event_wait() {
 quake_event_trigger_wait(func, var1, var2, var3, var4, var5, var6) {
   while(1) {
     self waittill("trigger", quakeTime);
-    if(isDefined(var6))
+    if(isDefined(var6)) {
       self thread[[func]](quakeTime, var1, var2, var3, var4, var5, var6);
-    else if(isDefined(var5))
+    }
+    else if(isDefined(var5)) {
       self thread[[func]](quakeTime, var1, var2, var3, var4, var5);
-    else if(isDefined(var4))
+    }
+    else if(isDefined(var4)) {
       self thread[[func]](quakeTime, var1, var2, var3, var4);
-    else if(isDefined(var3))
+    }
+    else if(isDefined(var3)) {
       self thread[[func]](quakeTime, var1, var2, var3);
-    else if(isDefined(var2))
+    }
+    else if(isDefined(var2)) {
       self thread[[func]](quakeTime, var1, var2);
-    else if(isDefined(var1))
+    }
+    else if(isDefined(var1)) {
       self thread[[func]](quakeTime, var1);
-    else
+    }
+    else {
       self thread[[func]](quakeTime);
+    }
   }
 }
 
@@ -372,10 +382,12 @@ quake_event_init() {
           self thread quake_event_trigger_wait(::quake_event_shake, ent);
           break;
         case "hurt":
-          if(!isDefined(ent.script_damage))
+          if(!isDefined(ent.script_damage)) {
             ent.script_damage = 25;
-          if(!isDefined(ent.script_delay))
+          }
+          if(!isDefined(ent.script_delay)) {
             ent.script_delay = 1;
+          }
           self thread quake_event_trigger_wait(::quake_event_hurt, ent, ent.script_delay, ent.script_damage);
           break;
         case "hurt_fire":
@@ -411,8 +423,9 @@ quake_event_init() {
           break;
         case "move_to_end":
           move_time = 1;
-          if(isDefined(ent.script_parameters))
+          if(isDefined(ent.script_parameters)) {
             move_time = Float(ent.script_parameters);
+          }
           self thread quake_event_trigger_wait(::quake_event_move_to, ent, .5, ent.script_delay);
           break;
         case "gas_leak":
@@ -439,18 +452,21 @@ quake_event_init() {
     }
     switch (struct.script_noteworthy) {
       case "fx":
-        if(!isDefined(struct.script_parameters))
+        if(!isDefined(struct.script_parameters)) {
           struct.script_parameters = "gas_leak";
-        if(!isDefined(struct.angles))
+        }
+        if(!isDefined(struct.angles)) {
           struct.angles = (0, 0, 0);
+        }
 
         fx_ent = SpawnFx(level._effect[struct.script_parameters], struct.origin, anglesToForward(struct.angles));
         self thread quake_event_trigger_wait(::quake_event_fx, fx_ent);
         break;
       case "exploder":
         exploder_id = struct.script_prefab_exploder;
-        if(!isDefined(exploder_id))
+        if(!isDefined(exploder_id)) {
           exploder_id = struct.script_exploder;
+        }
         if(isDefined(exploder_id)) {
           self thread quake_event_trigger_wait(::quake_event_exploder, exploder_id);
         }
@@ -501,8 +517,9 @@ quake_event_init() {
     }
   }
 
-  if(!isDefined(self.count))
+  if(!isDefined(self.count)) {
     self.count = 1;
+  }
 }
 
 is_dynamic_path() {
@@ -531,8 +548,9 @@ quake_event_init_ent(ent) {
       case "origin":
         ent.move_ent = spawn("script_model", target.origin);
         ent.move_ent.angles = (0, 0, 0);
-        if(isDefined(target.angles))
+        if(isDefined(target.angles)) {
           ent.move_ent.angles = target.angles;
+        }
         ent.move_ent setModel("tag_origin");
         ent LinkTo(ent.move_ent);
         break;
@@ -540,11 +558,13 @@ quake_event_init_ent(ent) {
         ent.end_location = target;
         break;
       case "start":
-        if(ent is_dynamic_path())
+        if(ent is_dynamic_path()) {
           ent ConnectPaths();
+        }
         ent.origin = target.origin;
-        if(isDefined(target.angles))
+        if(isDefined(target.angles)) {
           ent.angles = target.angles;
+        }
         break;
       default:
         break;
@@ -556,15 +576,19 @@ quake_event_move_to(quakeTime, ent, time, delay, accel, decel, delete_at_end) {
   if(!isDefined(ent.end_location)) {
     return;
   }
-  if(!isDefined(accel))
+  if(!isDefined(accel)) {
     accel = 0;
-  if(!isDefined(decel))
+  }
+  if(!isDefined(decel)) {
     decel = 0;
-  if(!isDefined(delete_at_end))
+  }
+  if(!isDefined(delete_at_end)) {
     delete_at_end = false;
+  }
 
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait delay;
+  }
 
   if(ent.end_location.origin != ent.origin) {
     ent.move_ent MoveTo(ent.end_location.origin, time, accel, decel);
@@ -582,8 +606,9 @@ quake_event_move_to(quakeTime, ent, time, delay, accel, decel, delete_at_end) {
 
   if(delete_at_end) {
     ent.move_ent Delete();
-    if(isDefined(ent))
+    if(isDefined(ent)) {
       ent Delete();
+    }
   }
 
 }
@@ -627,11 +652,13 @@ quake_hurt_trigger(hurt_trigger, damage_rate, damage) {
   while(1) {
     hurt_trigger waittill("trigger", player);
 
-    if(!isDefined(player.quake_hurt_time))
+    if(!isDefined(player.quake_hurt_time)) {
       player.quake_hurt_time = [];
+    }
 
-    if(!isDefined(player.quake_hurt_time[ent_num]))
+    if(!isDefined(player.quake_hurt_time[ent_num])) {
       player.quake_hurt_time[ent_num] = -1 * damage_rate_ms;
+    }
 
     if(player.quake_hurt_time[ent_num] + damage_rate_ms > GetTime()) {
       continue;
@@ -720,26 +747,31 @@ quake_event_pole_link_nodes() {
   nodes = getnodearray("dog_pole_vault", "script_noteworthy");
   if(isDefined(nodes)) {
     assert(nodes.size == 2);
-    if(isDefined(nodes[0].target) && isDefined(nodes[1].targetname) && nodes[0].target == nodes[1].targetname)
+    if(isDefined(nodes[0].target) && isDefined(nodes[1].targetname) && nodes[0].target == nodes[1].targetname) {
       ConnectNodePair(nodes[0], nodes[1], true);
-    else
+    }
+    else {
       ConnectNodePair(nodes[1], nodes[0], true);
+    }
   }
 
   nodes2 = getnodearray("dog_pole_vault2", "script_noteworthy");
   if(isDefined(nodes2)) {
     assert(nodes2.size == 2);
-    if(isDefined(nodes2[0].target) && isDefined(nodes2[1].targetname) && nodes2[0].target == nodes2[1].targetname)
+    if(isDefined(nodes2[0].target) && isDefined(nodes2[1].targetname) && nodes2[0].target == nodes2[1].targetname) {
       ConnectNodePair(nodes2[0], nodes2[1], true);
-    else
+    }
+    else {
       ConnectNodePair(nodes2[1], nodes2[0], true);
+    }
   }
 }
 
 quake_event_pole_fall_on_car_init(ent) {
   broken_base = GetEnt("pole_that_falls_on_cop_car_base", "targetname");
-  if(isDefined(broken_base))
+  if(isDefined(broken_base)) {
     broken_base hide();
+  }
 
   pole = GetEnt("pole_that_falls_on_cop_car", "targetname");
   if(!isDefined(pole)) {
@@ -762,8 +794,9 @@ quake_event_pole_fall_on_car_init(ent) {
 
 quake_event_pole_fall_on_car(quakeTime, ent) {
   broken_base = GetEnt("pole_that_falls_on_cop_car_base", "targetname");
-  if(isDefined(broken_base))
+  if(isDefined(broken_base)) {
     broken_base Show();
+  }
 
   pole = GetEnt("pole_that_falls_on_cop_car", "targetname");
   if(!isDefined(pole)) {
@@ -805,8 +838,9 @@ quake_event_pole_fall_on_car(quakeTime, ent) {
 }
 
 quake_event_playSound(quakeTime, ent) {
-  if(!isDefined(ent.script_sound))
+  if(!isDefined(ent.script_sound)) {
     return;
+  }
   playSoundAtPos(ent.origin, ent.script_sound);
 }
 

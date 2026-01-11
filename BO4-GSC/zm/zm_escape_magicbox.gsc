@@ -156,4 +156,3 @@ function_be66db38() {
     e_box.zbarrier zm_magicbox::set_magic_box_zbarrier_state("<dev string:x5d>");
   }
 }
-

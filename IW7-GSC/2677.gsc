@@ -67,18 +67,21 @@ _meth_8329(var_00, var_01, var_02) {
   removeperks();
   self.carriedsentry = var_03;
 
-  if(var_00)
+  if(var_00) {
     var_3.firstplacement = 1;
+  }
 
   var_04 = func_F687(var_03, var_00, var_01);
   self.carriedsentry = undefined;
   thread waitrestoreperks();
   self.iscarrying = 0;
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 func_F687(var_00, var_01, var_02) {
@@ -103,8 +106,9 @@ func_F687(var_00, var_01, var_02) {
       return 1;
     }
 
-    if(!isDefined(var_03))
+    if(!isDefined(var_03)) {
       var_03 = "force_cancel_placement";
+    }
 
     if(var_03 == "cancel_revocator" || var_03 == "force_cancel_placement") {
       if(!var_01 && var_03 == "cancel_revocator") {
@@ -113,10 +117,12 @@ func_F687(var_00, var_01, var_02) {
       scripts\engine\utility::allow_weapon(1);
       var_00 func_E4B6();
 
-      if(var_03 != "force_cancel_placement")
+      if(var_03 != "force_cancel_placement") {
         thread watch_dpad();
-      else if(var_01)
+      }
+      else if(var_01) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
+      }
 
       return 0;
     }
@@ -124,8 +130,9 @@ func_F687(var_00, var_01, var_02) {
     if(!var_0.canbeplaced) {
       continue;
     }
-    if(var_01)
+    if(var_01) {
       scripts\cp\utility::remove_crafted_item_from_inventory(self);
+    }
 
     var_00 func_E4B9(var_02, self);
     scripts\engine\utility::allow_weapon(1);
@@ -168,10 +175,12 @@ func_4A08(var_00, var_01) {
   var_02 makeunusable();
   var_02 setsentryowner(var_00);
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_2.func_130D2 = 1;
-  else
+  }
+  else {
     var_2.func_130D2 = var_01;
+  }
 
   var_02 func_E4B4(var_00);
   return var_02;
@@ -191,16 +200,19 @@ func_E4B1(var_00) {
   func_E4B8();
   playLoopSound(self.origin, "trap_revocator_deactivate");
 
-  if(isDefined(self.charge_fx))
+  if(isDefined(self.charge_fx)) {
     self.charge_fx delete();
+  }
 
-  if(isDefined(self.zap_model))
+  if(isDefined(self.zap_model)) {
     self.zap_model delete();
+  }
 
   scripts\cp\utility::removefromtraplist();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 func_E4B9(var_00, var_01) {
@@ -224,8 +236,9 @@ func_E4B9(var_00, var_01) {
 func_E4B6() {
   self.carriedby getrigindexfromarchetyperef();
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self.owner.iscarrying = 0;
+  }
 
   self.carriedrevocator delete();
   self delete();
@@ -280,8 +293,9 @@ func_E4B2() {
     self playSound("trap_revocator_pickup");
     var_00 thread _meth_8329(0, self.lifespan, self.func_130D2);
 
-    if(isDefined(self.charge_fx))
+    if(isDefined(self.charge_fx)) {
       self.charge_fx delete();
+    }
 
     scripts\cp\utility::removefromtraplist();
     self delete();
@@ -315,10 +329,12 @@ func_E4BA() {
       if(distancesquared(self.origin, var_4.origin) < var_01) {
         self setscriptablepartstate("base", "active");
 
-        if(scripts\engine\utility::is_true(var_4.is_suicide_bomber) || scripts\engine\utility::is_true(var_4.is_dancing) || scripts\engine\utility::flag_exist("defense_sequence_active") && scripts\engine\utility::flag("defense_sequence_active"))
+        if(scripts\engine\utility::is_true(var_4.is_suicide_bomber) || scripts\engine\utility::is_true(var_4.is_dancing) || scripts\engine\utility::flag_exist("defense_sequence_active") && scripts\engine\utility::flag("defense_sequence_active")) {
           var_04 getrandomarmkillstreak(var_4.health + 50, self.origin);
-        else
+        }
+        else {
           var_04 turn_zombie(self.owner);
+        }
 
         self.func_130D2--;
         wait 1;
@@ -348,8 +364,9 @@ turn_zombie(var_00) {
   var_01 notify("turned");
 
   if(scripts\engine\utility::is_true(var_1.about_to_dance)) {
-    if(isDefined(var_1.og_goalradius))
+    if(isDefined(var_1.og_goalradius)) {
       var_1.goalradius = var_1.og_goalradius;
+    }
 
     var_1.og_goalradius = undefined;
     var_1.about_to_dance = 0;
@@ -365,15 +382,17 @@ turn_zombie(var_00) {
   var_01 thread kill_turned_zombie_after_time(180);
   var_01 thread remove_zombie_from_turned_list_on_death();
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 scripts\cp\cp_merits::processmerit("mt_turned_zombies");
+  }
 
   func_B2EB(var_01);
 }
 
 func_B2EB(var_00) {
-  if(!isDefined(level.turned_zombies))
+  if(!isDefined(level.turned_zombies)) {
     level.turned_zombies = [];
+  }
 
   level.turned_zombies[level.turned_zombies.size] = var_00;
 

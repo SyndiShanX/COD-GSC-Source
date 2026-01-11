@@ -119,8 +119,9 @@ got_player_notetrack(soap) {
 
   flag_set("player_evac");
 
-  if(flag("player_uses_rig"))
+  if(flag("player_uses_rig")) {
     return;
+  }
 
   wait(2);
   thread maps\gulag_ending_code::player_dies_to_cavein(0);

@@ -28,8 +28,9 @@ main() {
   level.func_91B0 = scripts\mp\hud_util::setpoint;
   thread scripts\mp\tweakables::init();
 
-  if(!isDefined(level.func))
+  if(!isDefined(level.func)) {
     level.func = [];
+  }
 
   level.func["precacheMpAnim"] = ::precachempanim;
   level.func["scriptModelPlayAnim"] = ::scriptmodelplayanim;
@@ -52,8 +53,9 @@ main() {
   visionsetpain("", 0);
   var_00 = getEntArray("lantern_glowFX_origin", "targetname");
 
-  for(var_01 = 0; var_01 < var_0.size; var_1++)
+  for(var_01 = 0; var_01 < var_0.size; var_1++) {
     var_0[var_01] thread lanterns();
+  }
 
   scripts\mp\audio::init_audio();
   scripts\mp\art::main();
@@ -103,11 +105,13 @@ main() {
     var_04 = getEntArray(var_03, "classname");
 
     for(var_01 = 0; var_01 < var_4.size; var_1++) {
-      if(isDefined(var_4[var_01].script_prefab_exploder))
+      if(isDefined(var_4[var_01].script_prefab_exploder)) {
         var_4[var_01].targetname = var_4[var_01].script_prefab_exploder;
+      }
 
-      if(isDefined(var_4[var_01].targetname))
+      if(isDefined(var_4[var_01].targetname)) {
         level thread exploder_load(var_4[var_01]);
+      }
 
       if(var_03 == "trigger_multiple_arbitrary_up") {
         var_05 = var_4[var_01];
@@ -149,10 +153,12 @@ exploder_load(var_00) {
   var_00 waittill("trigger");
 
   if(isDefined(var_0.script_chance) && randomfloat(1) > var_0.script_chance) {
-    if(isDefined(var_0.script_delay))
+    if(isDefined(var_0.script_delay)) {
       wait(var_0.script_delay);
-    else
+    }
+    else {
       wait 4;
+    }
 
     level thread exploder_load(var_00);
     return;
@@ -166,12 +172,14 @@ setupexploders() {
   var_00 = getEntArray("script_brushmodel", "classname");
   var_01 = getEntArray("script_model", "classname");
 
-  for(var_02 = 0; var_02 < var_1.size; var_2++)
+  for(var_02 = 0; var_02 < var_1.size; var_2++) {
     var_0[var_0.size] = var_1[var_02];
+  }
 
   for(var_02 = 0; var_02 < var_0.size; var_2++) {
-    if(isDefined(var_0[var_02].script_prefab_exploder))
+    if(isDefined(var_0[var_02].script_prefab_exploder)) {
       var_0[var_02].targetname = var_0[var_02].script_prefab_exploder;
+    }
 
     if(isDefined(var_0[var_02].targetname)) {
       if(var_0[var_02].model == "fx" && (!isDefined(var_0[var_02].targetname) || var_0[var_02].targetname != "exploderchunk")) {
@@ -196,35 +204,42 @@ setupexploders() {
   var_04 = getEntArray("script_brushmodel", "classname");
 
   for(var_02 = 0; var_02 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_02].script_prefab_exploder))
+    if(isDefined(var_4[var_02].script_prefab_exploder)) {
       var_4[var_02].targetname = var_4[var_02].script_prefab_exploder;
+    }
 
-    if(isDefined(var_4[var_02].targetname))
+    if(isDefined(var_4[var_02].targetname)) {
       var_3[var_3.size] = var_4[var_02];
+    }
   }
 
   var_04 = getEntArray("script_model", "classname");
 
   for(var_02 = 0; var_02 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_02].script_prefab_exploder))
+    if(isDefined(var_4[var_02].script_prefab_exploder)) {
       var_4[var_02].targetname = var_4[var_02].script_prefab_exploder;
+    }
 
-    if(isDefined(var_4[var_02].targetname))
+    if(isDefined(var_4[var_02].targetname)) {
       var_3[var_3.size] = var_4[var_02];
+    }
   }
 
   var_04 = getEntArray("item_health", "classname");
 
   for(var_02 = 0; var_02 < var_4.size; var_2++) {
-    if(isDefined(var_4[var_02].script_prefab_exploder))
+    if(isDefined(var_4[var_02].script_prefab_exploder)) {
       var_4[var_02].targetname = var_4[var_02].script_prefab_exploder;
+    }
 
-    if(isDefined(var_4[var_02].targetname))
+    if(isDefined(var_4[var_02].targetname)) {
       var_3[var_3.size] = var_4[var_02];
+    }
   }
 
-  if(!isDefined(level.createfxent))
+  if(!isDefined(level.createfxent)) {
     level.createfxent = [];
+  }
 
   var_05 = [];
   var_5["exploderchunk visible"] = 1;
@@ -253,15 +268,18 @@ setupexploders() {
     var_7.v["ender"] = var_6.script_ender;
     var_7.v["type"] = "exploder";
 
-    if(!isDefined(var_6.script_fxid))
+    if(!isDefined(var_6.script_fxid)) {
       var_7.v["fxid"] = "No FX";
-    else
+    }
+    else {
       var_7.v["fxid"] = var_6.script_fxid;
+    }
 
     var_7.v["exploder"] = var_6.targetname;
 
-    if(!isDefined(var_7.v["delay"]))
+    if(!isDefined(var_7.v["delay"])) {
       var_7.v["delay"] = 0;
+    }
 
     if(isDefined(var_6.target)) {
       var_08 = getent(var_7.v["target"], "targetname").origin;
@@ -273,18 +291,21 @@ setupexploders() {
       var_7.model.disconnect_paths = var_6.script_disconnectpaths;
     }
 
-    if(isDefined(var_6.targetname) && isDefined(var_5[var_6.targetname]))
+    if(isDefined(var_6.targetname) && isDefined(var_5[var_6.targetname])) {
       var_7.v["exploder_type"] = var_6.targetname;
-    else
+    }
+    else {
       var_7.v["exploder_type"] = "normal";
+    }
 
     var_07 scripts\common\createfx::post_entity_creation_function();
   }
 }
 
 lanterns() {
-  if(!isDefined(level._effect["lantern_light"]))
+  if(!isDefined(level._effect["lantern_light"])) {
     level._effect["lantern_light"] = loadfx("vfx\props\glow_latern");
+  }
 
   scripts\common\fx::loopfx("lantern_light", self.origin, 0.3, self.origin + (0, 0, 1));
 }
@@ -322,6 +343,7 @@ deletedestructiblekillcament() {
   self waittill("death");
   wait 10;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 delete();
+  }
 }

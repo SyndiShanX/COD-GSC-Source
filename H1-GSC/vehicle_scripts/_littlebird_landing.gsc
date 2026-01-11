@@ -56,8 +56,9 @@ setup_gag_stage_littlebird_load() {
     var_0 settargetyaw(self.angles[1]);
     var_0 vehicle_setspeed(20, 7, 7);
 
-    while(distance(common_scripts\utility::flat_origin(var_0.origin), common_scripts\utility::flat_origin(self.origin)) > 256)
+    while(distance(common_scripts\utility::flat_origin(var_0.origin), common_scripts\utility::flat_origin(self.origin)) > 256) {
       wait 0.05;
+    }
 
     var_0 endon("death");
     var_0 thread vehicle_land_beneath_node(220, self);
@@ -77,8 +78,9 @@ littlebird_lands_and_unloads(var_0) {
   var_0 settargetyaw(self.angles[1]);
   var_0 vehicle_setspeed(20, 7, 7);
 
-  while(distance(common_scripts\utility::flat_origin(var_0.origin), common_scripts\utility::flat_origin(self.origin)) > 512)
+  while(distance(common_scripts\utility::flat_origin(var_0.origin), common_scripts\utility::flat_origin(self.origin)) > 512) {
     wait 0.05;
+  }
 
   var_0 endon("death");
   var_1 = "landing" + randomint(99999);
@@ -117,35 +119,43 @@ littlebird_lands_and_unloads(var_0) {
   var_0 notify("stable_for_unlink");
   wait 0.2;
 
-  if(isDefined(self.script_flag_set))
+  if(isDefined(self.script_flag_set)) {
     common_scripts\utility::flag_set(self.script_flag_set);
+  }
 
-  if(isDefined(self.script_flag_wait))
+  if(isDefined(self.script_flag_wait)) {
     common_scripts\utility::flag_wait(self.script_flag_wait);
+  }
 
   var_0 notify("littlebird_liftoff");
 }
 
 set_stage(var_0, var_1, var_2) {
-  if(!maps\_utility::ent_flag_exist("staged_guy_" + var_2))
+  if(!maps\_utility::ent_flag_exist("staged_guy_" + var_2)) {
     maps\_utility::ent_flag_init("staged_guy_" + var_2);
-  else
+  }
+  else {
     maps\_utility::ent_flag_clear("staged_guy_" + var_2);
+  }
 
-  if(!maps\_utility::ent_flag_exist("guy2_in_" + var_2))
+  if(!maps\_utility::ent_flag_exist("guy2_in_" + var_2)) {
     maps\_utility::ent_flag_init("guy2_in_" + var_2);
-  else
+  }
+  else {
     maps\_utility::ent_flag_clear("guy2_in_" + var_2);
+  }
 
   var_3 = get_stage_nodes(var_0, var_2);
   var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
   var_5 = spawn("script_model", (0, 0, 0));
   var_5 setModel(self.model);
 
-  if(isDefined(self.new_stage_heli_spawn))
+  if(isDefined(self.new_stage_heli_spawn)) {
     var_5.origin = self.origin;
-  else
+  }
+  else {
     var_5.origin = common_scripts\utility::drop_to_ground(var_4.origin) + (0, 0, self.originheightoffset);
+  }
 
   var_5.angles = var_4.angles;
   var_5 hide();
@@ -163,8 +173,9 @@ set_stage(var_0, var_1, var_2) {
       }
     }
 
-    if(!isDefined(var_11))
+    if(!isDefined(var_11)) {
       var_11 = common_scripts\utility::getclosest(var_10.origin, var_1);
+    }
 
     var_11.script_startingposition = var_10.script_startingposition;
 
@@ -190,8 +201,9 @@ get_stage_nodes(var_0, var_1) {
   var_3 = [];
 
   foreach(var_5 in var_2) {
-    if(var_5.script_noteworthy == "stage_" + var_1)
+    if(var_5.script_noteworthy == "stage_" + var_1) {
       var_3[var_3.size] = var_5;
+    }
   }
 
   return var_3;
@@ -203,8 +215,9 @@ get_landing_node() {
   for(;;) {
     var_1 = maps\_utility::getent_or_struct(var_0.target, "targetname");
 
-    if(isDefined(var_1.script_unload))
+    if(isDefined(var_1.script_unload)) {
       return var_1;
+    }
 
     var_0 = var_1;
   }
@@ -226,8 +239,9 @@ load_side(var_0, var_1) {
       continue;
     }
 
-    if(var_6.script_startingposition == 4 || var_6.script_startingposition == 7)
+    if(var_6.script_startingposition == 4 || var_6.script_startingposition == 7) {
       var_3 = var_6;
+    }
   }
 
   maps\_utility::ent_flag_wait("staged_guy_" + var_0);
@@ -239,13 +253,15 @@ load_side(var_0, var_1) {
 }
 
 vehicle_land_beneath_node(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   self notify("newpath");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 2;
+  }
 
   self setneargoalnotifydist(var_0);
   self sethoverparams(0, 0, 0);

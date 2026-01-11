@@ -27,41 +27,49 @@ init() {
   level.fx_door_ambient = loadfx("vehicle/treadfx/fx_heli_clouds_chopper_gunner");
 }
 warnMissileLocking(localClientNum, set) {
-  if(set && !(self IsLocalClientDriver(localClientNum)))
+  if(set && !(self IsLocalClientDriver(localClientNum))) {
     return;
+  }
   clientscripts\mp\_helicopter_sounds::play_targeted_sound(set);
   playWarningLight(localClientNum, set);
 }
 warnMissileLocked(localClientNum, set) {
-  if(set && !(self IsLocalClientDriver(localClientNum)))
+  if(set && !(self IsLocalClientDriver(localClientNum))) {
     return;
+  }
   clientscripts\mp\_helicopter_sounds::play_locked_sound(set);
   playWarningLight(localClientNum, set);
 }
 warnMissileFired(localClientNum, set) {
-  if(set && !(self IsLocalClientDriver(localClientNum)))
+  if(set && !(self IsLocalClientDriver(localClientNum))) {
     return;
+  }
   clientscripts\mp\_helicopter_sounds::play_fired_sound(set);
   playWarningLight(localClientNum, set);
 }
 warnLeavingBattlefield(localClientNum, set) {
-  if(!(self IsLocalClientDriver(localClientNum)))
+  if(!(self IsLocalClientDriver(localClientNum))) {
     return;
+  }
   clientscripts\mp\_helicopter_sounds::play_leaving_battlefield_alarm(set);
   playWarningLight(localClientNum, set);
 }
 playWarningLight(localClientNum, set) {
   if(set) {
-    if(!isDefined(self.warningLightCount))
+    if(!isDefined(self.warningLightCount)) {
       self.warningLightCount = 1;
-    else
+    }
+    else {
       self.warningLightCount++;
-    if(!isDefined(self.warningLight))
+    }
+    if(!isDefined(self.warningLight)) {
       self thread spawnWarningLight(localClientNum);
+    }
   } else {
     if(isDefined(self.warningLightCount)) {
-      if(self.warningLightCount > 0)
+      if(self.warningLightCount > 0) {
         self.warningLightCount--;
+      }
       if((self.warningLightCount == 0) && isDefined(self.warningLight)) {
         DeleteFX(localClientNum, self.warningLight);
         self.warningLight = undefined;
@@ -71,12 +79,14 @@ playWarningLight(localClientNum, set) {
 }
 spawnWarningLight(localClientNum) {
   self endon("entityshutdown");
-  if(!IsInVehicle(localClientNum, self))
+  if(!IsInVehicle(localClientNum, self)) {
     return;
+  }
   self.warningLight = playFXOnTag(localClientnum, level.fx_hind_warning, self, "tag_origin");
   for(;;) {
-    if(!isDefined(self.warningLight))
+    if(!isDefined(self.warningLight)) {
       return;
+    }
     if(!IsInVehicle(localClientNum, self)) {
       DeleteFX(localClientNum, self.warningLight);
       self.warningLight = undefined;
@@ -87,8 +97,9 @@ spawnWarningLight(localClientNum) {
 }
 chopperGunnerSpawned(localClientNum, set) {
   self endon("entityshutdown");
-  if(!set)
+  if(!set) {
     return;
+  }
   self thread checkForPlayerSwitch(localClientNum);
   self thread spawnFakePlayer(localClientNum);
   self thread spawnFakeArms(localClientNum);
@@ -135,8 +146,9 @@ spawnFakePlayer(localClientNum) {
         self.fakePlayer Attach(level.chopper_gunner_player_head[level.allies_team], "");
       }
       wait(0.2);
-      if(!isDefined(self.fakePlayer))
+      if(!isDefined(self.fakePlayer)) {
         continue;
+      }
       result = self.fakePlayer UseAnimTree(#animtree, true);
       if(isDefined(result) && !result) {
         self.fakePlayer notify("removed_early");
@@ -221,10 +233,12 @@ playerHelicopterSwitch(localClientNum, set) {
 }
 getBlend(angle) {
   blend = angle / 60;
-  if(blend > 1)
+  if(blend > 1) {
     blend = 1;
-  if(blend < -1)
+  }
+  if(blend < -1) {
     blend = -1;
+  }
   return blend;
 }
 setFakePlayerVerticalAnims(blend, rightLeftBlend, verticalAnim, name) {
@@ -298,14 +312,17 @@ chopperGunnerInteriorLight(localClientNum, fxID, timeout) {
   self notify("interior_light_play");
   self endon("interior_light_play");
   self waittill_dobj(localClientNum);
-  if(isDefined(self.doorStateFX))
+  if(isDefined(self.doorStateFX)) {
     stopfx(localClientNum, self.doorStateFX);
+  }
   self.doorStateFX = playFXOnTag(localClientNum, fxID, self, "tag_origin");
-  if(!isDefined(timeout))
+  if(!isDefined(timeout)) {
     return;
+  }
   wait(timeout);
-  if(isDefined(self.doorStateFX))
+  if(isDefined(self.doorStateFX)) {
     stopfx(localClientNum, self.doorStateFX);
+  }
 }
 debugAnimLoop() {
   self endon("entityshutdown");
@@ -326,8 +343,9 @@ chopperGunnerOpenDoor(localClientNum, set) {
     self chopperUseAnimTree();
     wait(0.1);
   }
-  if(isDefined(self.chopperGunnerOpenDoorFlag) && self.chopperGunnerOpenDoorFlag == true)
+  if(isDefined(self.chopperGunnerOpenDoorFlag) && self.chopperGunnerOpenDoorFlag == true) {
     return;
+  }
   animTime = 0.2;
   if(set) {
     self.chopperGunnerOpenDoorFlag = true;
@@ -359,8 +377,9 @@ chopperDoorOpenSound() {
 chopperCrashing(localClientNum, set) {
   self endon("entityshutdown");
   PrintLn("chopperCrashing");
-  if(!set)
+  if(!set) {
     return;
+  }
   localPlayers = getlocalplayers();
   for(i = 0; i < localPlayers.size; i++) {
     self thread chopperCrashingFX(localPlayers[i]);

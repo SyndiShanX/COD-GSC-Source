@@ -148,8 +148,9 @@ processFaceEvents(localClientNum) {
     PrintLn("Selected anim " + self.face_curr_base_idx + " for entity " + self getEntityNumber());
   }
   self SetAnimKnob(level.faceStates[self.face_anim_tree][self.face_curr_base]["animation"][self.face_curr_base_idx], 1.0, 0.0, 1.0);
-  if(isDefined(self.face_death) && self.face_death)
+  if(isDefined(self.face_death) && self.face_death) {
     state = "face_death";
+  }
   self.face_state = state;
   self thread showState();
   self thread watchfor_death();
@@ -240,16 +241,21 @@ showState(state) {
     if(GetDvarInt(#"cg_debugFace") != 0) {
       if(isDefined(self.face_state) && isDefined(self.origin)) {
         entNum = self getEntityNumber();
-        if(!isDefined(entNum))
+        if(!isDefined(entNum)) {
           entNum = "?";
-        if(isDefined(self.face_disable) && self.face_disable)
+        }
+        if(isDefined(self.face_disable) && self.face_disable) {
           disableChar = "-";
-        else
+        }
+        else {
           disableChar = "+";
-        if(isDefined(self.face_death) && self.face_death)
+        }
+        if(isDefined(self.face_death) && self.face_death) {
           deathChar = "D";
-        else
+        }
+        else {
           deathChar = "A";
+        }
         Print3d(self.origin + (0, 0, 72), disableChar + deathChar + "[" + entNum + "]" + self.face_state, (1, 1, 1), 1, 0.25);
       }
     }

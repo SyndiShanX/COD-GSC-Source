@@ -114,10 +114,12 @@ triggerCheck(target) {
     if(distance <= 90) {
       target notify("targetStopMoving");
       while(isDefined(player) && player isTouching(self) && distance <= 90) {
-        if(DistanceSquared(target.origin, target.railPoints[0]) < DistanceSquared(player.origin, target.railPoints[0]))
+        if(DistanceSquared(target.origin, target.railPoints[0]) < DistanceSquared(player.origin, target.railPoints[0])) {
           target.preferredNextPos = 0;
-        else
+        }
+        else {
           target.preferredNextPos = 1;
+        }
         wait(0.25);
       }
     }
@@ -139,8 +141,9 @@ damageTarget(dir) {
         rotation = 1;
         if(isDefined(attacker) && isPlayer(attacker)) {
           yaw = get2DYaw(attacker.origin, self.origin);
-          if(attacker.angles[1] > yaw)
+          if(attacker.angles[1] > yaw) {
             rotation = -1;
+          }
         }
         self rotateyaw(self.angles[2] + (180 * rotation), .3);
         self playSound("amb_target_twirl");
@@ -223,10 +226,12 @@ moveTarget(dir, dis, speed) {
   self.playerTrigger = false;
   while(1) {
     nextPos = self.railPoints[self.preferredNextPos];
-    if(self.preferredNextPos == 0)
+    if(self.preferredNextPos == 0) {
       self.preferredNextPos = 1;
-    else
+    }
+    else {
       self.preferredNextPos = 0;
+    }
     self moveto(nextPos, speed);
     self waittill_either("movedone", "targetStopMoving");
     self playSound("amb_target_stop");

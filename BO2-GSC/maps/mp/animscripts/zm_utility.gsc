@@ -9,15 +9,17 @@
 #include maps\mp\_utility;
 
 append_missing_legs_suffix(animstate) {
-  if(isDefined(self.has_legs) && !self.has_legs && self hasanimstatefromasd(animstate + "_crawl"))
+  if(isDefined(self.has_legs) && !self.has_legs && self hasanimstatefromasd(animstate + "_crawl")) {
     return animstate + "_crawl";
+  }
 
   return animstate;
 }
 
 initanimtree(animscript) {
-  if(animscript != "pain" && animscript != "death")
+  if(animscript != "pain" && animscript != "death") {
     self.a.special = "none";
+  }
 
   assert(isDefined(animscript), "Animscript not specified in initAnimTree");
   self.a.script = animscript;
@@ -30,8 +32,9 @@ updateanimpose() {
 
 initialize(animscript) {
   if(isDefined(self.longdeathstarting)) {
-    if(animscript != "pain" && animscript != "death")
+    if(animscript != "pain" && animscript != "death") {
       self dodamage(self.health + 100, self.origin);
+    }
 
     if(animscript != "pain") {
       self.longdeathstarting = undefined;
@@ -39,8 +42,9 @@ initialize(animscript) {
     }
   }
 
-  if(isDefined(self.a.mayonlydie) && animscript != "death")
+  if(isDefined(self.a.mayonlydie) && animscript != "death") {
     self dodamage(self.health + 100, self.origin);
+  }
 
   if(isDefined(self.a.postscriptfunc)) {
     scriptfunc = self.a.postscriptfunc;
@@ -48,8 +52,9 @@ initialize(animscript) {
     [[scriptfunc]](animscript);
   }
 
-  if(animscript != "death")
+  if(animscript != "death") {
     self.a.nodeath = 0;
+  }
 
   self.isholdinggrenade = undefined;
   self.covernode = undefined;
@@ -57,18 +62,21 @@ initialize(animscript) {
   self.a.scriptstarttime = gettime();
   self.a.atconcealmentnode = 0;
 
-  if(isDefined(self.node) && (self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand"))
+  if(isDefined(self.node) && (self.node.type == "Conceal Crouch" || self.node.type == "Conceal Stand")) {
     self.a.atconcealmentnode = 1;
+  }
 
   initanimtree(animscript);
   updateanimpose();
 }
 
 getnodeyawtoorigin(pos) {
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     yaw = self.node.angles[1] - getyaw(pos);
-  else
+  }
+  else {
     yaw = self.angles[1] - getyaw(pos);
+  }
 
   yaw = angleclamp180(yaw);
   return yaw;
@@ -77,22 +85,27 @@ getnodeyawtoorigin(pos) {
 getnodeyawtoenemy() {
   pos = undefined;
 
-  if(isvalidenemy(self.enemy))
+  if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
+  }
   else {
-    if(isDefined(self.node))
+    if(isDefined(self.node)) {
       forward = anglesToForward(self.node.angles);
-    else
+    }
+    else {
       forward = anglesToForward(self.angles);
+    }
 
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
   }
 
-  if(isDefined(self.node))
+  if(isDefined(self.node)) {
     yaw = self.node.angles[1] - getyaw(pos);
-  else
+  }
+  else {
     yaw = self.angles[1] - getyaw(pos);
+  }
 
   yaw = angleclamp180(yaw);
   return yaw;
@@ -101,8 +114,9 @@ getnodeyawtoenemy() {
 getcovernodeyawtoenemy() {
   pos = undefined;
 
-  if(isvalidenemy(self.enemy))
+  if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
+  }
   else {
     forward = anglesToForward(self.covernode.angles + self.animarray["angle_step_out"][self.a.cornermode]);
     forward = vectorscale(forward, 150);
@@ -124,8 +138,9 @@ getyawtospot(spot) {
 getyawtoenemy() {
   pos = undefined;
 
-  if(isvalidenemy(self.enemy))
+  if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
+  }
   else {
     forward = anglesToForward(self.angles);
     forward = vectorscale(forward, 150);
@@ -152,8 +167,9 @@ absyawtoenemy() {
   yaw = self.angles[1] - getyaw(self.enemy.origin);
   yaw = angleclamp180(yaw);
 
-  if(yaw < 0)
+  if(yaw < 0) {
     yaw = -1 * yaw;
+  }
 
   return yaw;
 }
@@ -163,8 +179,9 @@ absyawtoenemy2d() {
   yaw = self.angles[1] - getyaw2d(self.enemy.origin);
   yaw = angleclamp180(yaw);
 
-  if(yaw < 0)
+  if(yaw < 0) {
     yaw = -1 * yaw;
+  }
 
   return yaw;
 }
@@ -173,8 +190,9 @@ absyawtoorigin(org) {
   yaw = self.angles[1] - getyaw(org);
   yaw = angleclamp180(yaw);
 
-  if(yaw < 0)
+  if(yaw < 0) {
     yaw = -1 * yaw;
+  }
 
   return yaw;
 }
@@ -183,8 +201,9 @@ absyawtoangles(angles) {
   yaw = self.angles[1] - angles;
   yaw = angleclamp180(yaw);
 
-  if(yaw < 0)
+  if(yaw < 0) {
     yaw = -1 * yaw;
+  }
 
   return yaw;
 }
@@ -219,8 +238,9 @@ getcovernodeyawtoorigin(org) {
 }
 
 isstanceallowedwrapper(stance) {
-  if(isDefined(self.covernode))
+  if(isDefined(self.covernode)) {
     return self.covernode doesnodeallowstance(stance);
+  }
 
   return self isstanceallowed(stance);
 }
@@ -228,8 +248,9 @@ isstanceallowedwrapper(stance) {
 getclaimednode() {
   mynode = self.node;
 
-  if(isDefined(mynode) && (self nearnode(mynode) || isDefined(self.covernode) && mynode == self.covernode))
+  if(isDefined(mynode) && (self nearnode(mynode) || isDefined(self.covernode) && mynode == self.covernode)) {
     return mynode;
+  }
 
   return undefined;
 }
@@ -237,8 +258,9 @@ getclaimednode() {
 getnodetype() {
   mynode = getclaimednode();
 
-  if(isDefined(mynode))
+  if(isDefined(mynode)) {
     return mynode.type;
+  }
 
   return "none";
 }
@@ -246,8 +268,9 @@ getnodetype() {
 getnodedirection() {
   mynode = getclaimednode();
 
-  if(isDefined(mynode))
+  if(isDefined(mynode)) {
     return mynode.angles[1];
+  }
 
   return self.desiredangle;
 }
@@ -255,8 +278,9 @@ getnodedirection() {
 getnodeforward() {
   mynode = getclaimednode();
 
-  if(isDefined(mynode))
+  if(isDefined(mynode)) {
     return anglesToForward(mynode.angles);
+  }
 
   return anglesToForward(self.angles);
 }
@@ -264,8 +288,9 @@ getnodeforward() {
 getnodeorigin() {
   mynode = getclaimednode();
 
-  if(isDefined(mynode))
+  if(isDefined(mynode)) {
     return mynode.origin;
+  }
 
   return self.origin;
 }
@@ -301,26 +326,33 @@ quadrantanimweights(yaw) {
   if(forwardweight > 0) {
     result["front"] = forwardweight;
 
-    if(leftweight > 0)
+    if(leftweight > 0) {
       result["left"] = leftweight;
-    else
+    }
+    else {
       result["right"] = -1 * leftweight;
+    }
   } else if(useleans) {
     result["back"] = -1 * forwardweight;
 
-    if(leftweight > 0)
+    if(leftweight > 0) {
       result["left"] = leftweight;
-    else
+    }
+    else {
       result["right"] = -1 * leftweight;
+    }
   } else {
     backweight = -1 * forwardweight;
 
-    if(leftweight > backweight)
+    if(leftweight > backweight) {
       result["left"] = 1;
-    else if(leftweight < forwardweight)
+    }
+    else if(leftweight < forwardweight) {
       result["right"] = 1;
-    else
+    }
+    else {
       result["back"] = 1;
+    }
   }
 
   return result;
@@ -329,22 +361,27 @@ quadrantanimweights(yaw) {
 getquadrant(angle) {
   angle = angleclamp(angle);
 
-  if(angle < 45 || angle > 315)
+  if(angle < 45 || angle > 315) {
     quadrant = "front";
-  else if(angle < 135)
+  }
+  else if(angle < 135) {
     quadrant = "left";
-  else if(angle < 225)
+  }
+  else if(angle < 225) {
     quadrant = "back";
-  else
+  }
+  else {
     quadrant = "right";
+  }
 
   return quadrant;
 }
 
 isinset(input, set) {
   for(i = set.size - 1; i >= 0; i--) {
-    if(input == set[i])
+    if(input == set[i]) {
       return true;
+    }
   }
 
   return false;
@@ -375,10 +412,12 @@ showlastenemysightpos(string) {
   if(!isvalidenemy(self.enemy)) {
     return;
   }
-  if(self.enemy.team == "allies")
+  if(self.enemy.team == "allies") {
     color = (0.4, 0.7, 1);
-  else
+  }
+  else {
     color = (1, 0.7, 0.4);
+  }
 
   while(true) {
     wait 0.05;
@@ -404,10 +443,12 @@ debugposinternal(org, string, size) {
   ent thread debugtimeout();
   ent endon("timeout");
 
-  if(self.enemy.team == "allies")
+  if(self.enemy.team == "allies") {
     color = (0.4, 0.7, 1);
-  else
+  }
+  else {
     color = (1, 0.7, 0.4);
+  }
 
   while(true) {
     wait 0.05;
@@ -440,8 +481,9 @@ showdebugline(frompoint, topoint, color, printtime) {
 }
 
 getnodeoffset(node) {
-  if(isDefined(node.offset))
+  if(isDefined(node.offset)) {
     return node.offset;
+  }
 
   cover_left_crouch_offset = (-26, 0.4, 36);
   cover_left_stand_offset = (-32, 7, 63);
@@ -457,18 +499,22 @@ getnodeoffset(node) {
   switch (node.type) {
     case "Cover Left":
     case "Cover Left Wide":
-      if(node isnodedontstand() && !node isnodedontcrouch())
+      if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_left_crouch_offset);
-      else
+      }
+      else {
         nodeoffset = calculatenodeoffset(right, forward, cover_left_stand_offset);
+      }
 
       break;
     case "Cover Right":
     case "Cover Right Wide":
-      if(node isnodedontstand() && !node isnodedontcrouch())
+      if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_right_crouch_offset);
-      else
+      }
+      else {
         nodeoffset = calculatenodeoffset(right, forward, cover_right_stand_offset);
+      }
 
       break;
     case "Conceal Stand":
@@ -495,11 +541,13 @@ checkpitchvisibility(frompoint, topoint, atnode) {
   pitch = angleclamp180(vectortoangles(topoint - frompoint)[0]);
 
   if(abs(pitch) > 45) {
-    if(isDefined(atnode) && atnode.type != "Cover Crouch" && atnode.type != "Conceal Crouch")
+    if(isDefined(atnode) && atnode.type != "Cover Crouch" && atnode.type != "Conceal Crouch") {
       return false;
+    }
 
-    if(pitch > 45 || pitch < anim.covercrouchleanpitch - 45)
+    if(pitch > 45 || pitch < anim.covercrouchleanpitch - 45) {
       return false;
+    }
   }
 
   return true;
@@ -521,14 +569,16 @@ anim_array(animarray, animweights) {
   assert(total_anims);
   assert(animarray.size == animweights.size);
 
-  if(total_anims == 1)
+  if(total_anims == 1) {
     return animarray[0];
+  }
 
   weights = 0;
   total_weight = 0;
 
-  for(i = 0; i < total_anims; i++)
+  for(i = 0; i < total_anims; i++) {
     total_weight = total_weight + animweights[i];
+  }
 
   anim_play = randomfloat(total_weight);
   current_weight = 0;
@@ -596,18 +646,21 @@ getgrenademodel() {
 }
 
 sawenemymove(timer) {
-  if(!isDefined(timer))
+  if(!isDefined(timer)) {
     timer = 500;
+  }
 
   return gettime() - self.personalsighttime < timer;
 }
 
 canthrowgrenade() {
-  if(!self.grenadeammo)
+  if(!self.grenadeammo) {
     return 0;
+  }
 
-  if(self.script_forcegrenade)
+  if(self.script_forcegrenade) {
     return 1;
+  }
 
   return isplayer(self.enemy);
 }
@@ -618,8 +671,9 @@ random_weight(array) {
   if(array.size > 1) {
     anim_weight = 0;
 
-    for(i = 0; i < array.size; i++)
+    for(i = 0; i < array.size; i++) {
       anim_weight = anim_weight + array[i];
+    }
 
     anim_play = randomfloat(anim_weight);
     anim_weight = 0;
@@ -641,8 +695,9 @@ setfootstepeffect(name, fx) {
   assert(isDefined(name), "Need to define the footstep surface type.");
   assert(isDefined(fx), "Need to define the mud footstep effect.");
 
-  if(!isDefined(anim.optionalstepeffects))
+  if(!isDefined(anim.optionalstepeffects)) {
     anim.optionalstepeffects = [];
+  }
 
   anim.optionalstepeffects[anim.optionalstepeffects.size] = name;
   level._effect["step_" + name] = fx;
@@ -670,8 +725,9 @@ isnodedontcrouch() {
 }
 
 doesnodeallowstance(stance) {
-  if(stance == "stand")
+  if(stance == "stand") {
     return !self isnodedontstand();
+  }
   else {
     assert(stance == "crouch");
     return !self isnodedontcrouch();
@@ -710,10 +766,12 @@ animarraypickrandom(animname) {
 
   assert(self.a.array[animname].size > 0);
 
-  if(self.a.array[animname].size > 1)
+  if(self.a.array[animname].size > 1) {
     index = randomint(self.a.array[animname].size);
-  else
+  }
+  else {
     index = 0;
+  }
 
   return self.a.array[animname][index];
 }
@@ -739,78 +797,101 @@ getanimendpos(theanim) {
 }
 
 isvalidenemy(enemy) {
-  if(!isDefined(enemy))
+  if(!isDefined(enemy)) {
     return false;
+  }
 
   return true;
 }
 
 damagelocationisany(a, b, c, d, e, f, g, h, i, j, k, ovr) {
-  if(!isDefined(a))
+  if(!isDefined(a)) {
     return false;
+  }
 
-  if(self.damagelocation == a)
+  if(self.damagelocation == a) {
     return true;
+  }
 
-  if(!isDefined(b))
+  if(!isDefined(b)) {
     return false;
+  }
 
-  if(self.damagelocation == b)
+  if(self.damagelocation == b) {
     return true;
+  }
 
-  if(!isDefined(c))
+  if(!isDefined(c)) {
     return false;
+  }
 
-  if(self.damagelocation == c)
+  if(self.damagelocation == c) {
     return true;
+  }
 
-  if(!isDefined(d))
+  if(!isDefined(d)) {
     return false;
+  }
 
-  if(self.damagelocation == d)
+  if(self.damagelocation == d) {
     return true;
+  }
 
-  if(!isDefined(e))
+  if(!isDefined(e)) {
     return false;
+  }
 
-  if(self.damagelocation == e)
+  if(self.damagelocation == e) {
     return true;
+  }
 
-  if(!isDefined(f))
+  if(!isDefined(f)) {
     return false;
+  }
 
-  if(self.damagelocation == f)
+  if(self.damagelocation == f) {
     return true;
+  }
 
-  if(!isDefined(g))
+  if(!isDefined(g)) {
     return false;
+  }
 
-  if(self.damagelocation == g)
+  if(self.damagelocation == g) {
     return true;
+  }
 
-  if(!isDefined(h))
+  if(!isDefined(h)) {
     return false;
+  }
 
-  if(self.damagelocation == h)
+  if(self.damagelocation == h) {
     return true;
+  }
 
-  if(!isDefined(i))
+  if(!isDefined(i)) {
     return false;
+  }
 
-  if(self.damagelocation == i)
+  if(self.damagelocation == i) {
     return true;
+  }
 
-  if(!isDefined(j))
+  if(!isDefined(j)) {
     return false;
+  }
 
-  if(self.damagelocation == j)
+  if(self.damagelocation == j) {
     return true;
+  }
 
-  if(!isDefined(k))
+  if(!isDefined(k)) {
     return false;
+  }
 
-  if(self.damagelocation == k)
+  if(self.damagelocation == k) {
     return true;
+  }
 
   assert(!isDefined(ovr));
   return false;
@@ -864,15 +945,17 @@ is_heavy_machine_gun() {
 }
 
 is_zombie() {
-  if(isDefined(self.is_zombie) && self.is_zombie)
+  if(isDefined(self.is_zombie) && self.is_zombie) {
     return true;
+  }
 
   return false;
 }
 
 is_civilian() {
-  if(isDefined(self.is_civilian) && self.is_civilian)
+  if(isDefined(self.is_civilian) && self.is_civilian) {
     return true;
+  }
 
   return false;
 }
@@ -882,30 +965,36 @@ is_zombie_gibbed() {
 }
 
 set_zombie_gibbed() {
-  if(self is_zombie())
+  if(self is_zombie()) {
     self.gibbed = 1;
+  }
 }
 
 is_skeleton(skeleton) {
-  if(skeleton == "base" && issubstr(get_skeleton(), "scaled"))
+  if(skeleton == "base" && issubstr(get_skeleton(), "scaled")) {
     return true;
+  }
 
   return get_skeleton() == skeleton;
 }
 
 get_skeleton() {
-  if(isDefined(self.skeleton))
+  if(isDefined(self.skeleton)) {
     return self.skeleton;
-  else
+  }
+  else {
     return "base";
+  }
 }
 
 debug_anim_print(text) {
-  if(isDefined(level.dog_debug_anims) && level.dog_debug_anims)
+  if(isDefined(level.dog_debug_anims) && level.dog_debug_anims) {
     println(text + " " + gettime());
+  }
 
-  if(isDefined(level.dog_debug_anims_ent) && level.dog_debug_anims_ent == self getentnum())
+  if(isDefined(level.dog_debug_anims_ent) && level.dog_debug_anims_ent == self getentnum()) {
     println(text + " " + gettime());
+  }
 }
 
 debug_turn_print(text, line) {
@@ -931,26 +1020,31 @@ play_sound_on_tag_endon_death(alias, tag) {
 play_sound_in_space(alias, origin, master) {
   org = spawn("script_origin", (0, 0, 1));
 
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     origin = self.origin;
+  }
 
   org.origin = origin;
 
-  if(isDefined(master) && master)
+  if(isDefined(master) && master) {
     org playsoundasmaster(alias);
-  else
+  }
+  else {
     org playSound(alias);
+  }
 
-  if(isDefined(org))
+  if(isDefined(org)) {
     org delete();
+  }
 }
 
 wait_network_frame() {
   if(numremoteclients()) {
     snapshot_ids = getsnapshotindexarray();
 
-    for(acked = undefined; !isDefined(acked); acked = snapshotacknowledged(snapshot_ids))
+    for(acked = undefined; !isDefined(acked); acked = snapshotacknowledged(snapshot_ids)) {
       level waittill("snapacknowledged");
+    }
   } else
     wait 0.1;
 }

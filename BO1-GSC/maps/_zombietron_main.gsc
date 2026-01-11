@@ -192,8 +192,9 @@ mini_boss_spawn_think() {
     time = randomFloatRange(level.zombie_vars["mini_boss_interval_min"], level.zombie_vars["mini_boss_interval_max"]);
     time = time / GetPlayers().size;
     time -= (level.round_number / 10);
-    if(time < 1)
+    if(time < 1) {
       time = 1;
+    }
     wait(time);
     if(randomInt(100) < (level.zombie_vars["mini_boss_spawn_percentage"] + (level.round_number * GetPlayers().size))) {
       spawn_locations = level.current_spawners[level.current_wave.spawn_side];
@@ -221,8 +222,9 @@ wave_spawn(current_wave) {
           ai = maps\_zombietron_spawner::spawn_a_mini_boss(spawn_point, level.challenge.spawner_secondary_type);
         }
       }
-      if(!isDefined(ai))
+      if(!isDefined(ai)) {
         ai = maps\_zombietron_spawner::spawn_a_mini_boss(spawn_point, level.challenge.type);
+      }
     } else {
       ai = spawn_zombie(spawn_point);
     }
@@ -326,14 +328,18 @@ get_all_the_map_spawners() {
 }
 
 get_opposite_side(side) {
-  if(side == "top")
+  if(side == "top") {
     return "bottom";
-  if(side == "bottom")
+  }
+  if(side == "bottom") {
     return "top";
-  if(side == "left")
+  }
+  if(side == "left") {
     return "right";
-  if(side == "right")
+  }
+  if(side == "right") {
     return "left";
+  }
   assertex(0, "side parameter was not handled");
 }
 
@@ -746,12 +752,15 @@ steal_life_cooldown(time) {
 steal_life_from(source, dest) {
   self endon("disconnect");
   level endon("end_the_game");
-  if(!isDefined(source) || source.lives < 1)
+  if(!isDefined(source) || source.lives < 1) {
     return;
-  if(isDefined(source.stealing))
+  }
+  if(isDefined(source.stealing)) {
     return;
-  if(isDefined(dest.stealing))
+  }
+  if(isDefined(dest.stealing)) {
     return;
+  }
   source thread steal_life_cooldown(10);
   dest thread steal_life_cooldown(level.zombie_vars["auto_respawn_timeout"] + 5);
   source thread life_link(source, dest);
@@ -873,10 +882,12 @@ player_respawn_now() {
 
 player_respawn() {
   wait 2;
-  if(self.lives < 1 && !isDefined(self.stolen_life))
+  if(self.lives < 1 && !isDefined(self.stolen_life)) {
     return;
-  if(level.gameEnded)
+  }
+  if(level.gameEnded) {
     return;
+  }
   if(!isDefined(self.stolen_life)) {
     self.lives--;
     if(self.lives < 0) {
@@ -1295,20 +1306,25 @@ player_damage_override(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
 }
 
 actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, sHitLoc, modelIndex, psOffsetTime) {
-  if(!isDefined(self) || !isDefined(attacker))
+  if(!isDefined(self) || !isDefined(attacker)) {
     return damage;
-  if(!isplayer(attacker) && !isplayer(self))
+  }
+  if(!isplayer(attacker) && !isplayer(self)) {
     return damage;
-  if(!isDefined(damage) || !isDefined(meansofdeath))
+  }
+  if(!isDefined(damage) || !isDefined(meansofdeath)) {
     return damage;
-  if(meansofdeath == "")
+  }
+  if(meansofdeath == "") {
     return damage;
+  }
   final_damage = damage;
   if(isDefined(self.actor_damage_func)) {
     final_damage = [[self.actor_damage_func]](weapon, final_damage);
   }
-  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner))
+  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner)) {
     attacker = attacker.owner;
+  }
   return int(final_damage);
 }
 
@@ -1394,15 +1410,19 @@ detect_and_change_music_states() {
 
 zombietron_upload_highscore() {
   playersRank = 1;
-  if(level.players_playing == 1)
+  if(level.players_playing == 1) {
     playersRank = 4;
-  else if(level.players_playing == 2)
+  }
+  else if(level.players_playing == 2) {
     playersRank = 3;
-  else if(level.players_playing == 3)
+  }
+  else if(level.players_playing == 3) {
     playersRank = 2;
+  }
   map_name = getDvar(#"mapname");
-  if(!isZombieLeaderboardAvailable(map_name, "waves") || !isZombieLeaderboardAvailable(map_name, "points"))
+  if(!isZombieLeaderboardAvailable(map_name, "waves") || !isZombieLeaderboardAvailable(map_name, "points")) {
     return;
+  }
   players = get_players();
   for(i = 0; i < players.size; i++) {
     pre_highest_wave = players[i] playerZombieStatGet(map_name, "highestwave");
@@ -1433,22 +1453,26 @@ zombietron_upload_highscore() {
 }
 
 isZombieLeaderboardAvailable(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map]))
+  if(!isDefined(level.zombieLeaderboardNumber[map])) {
     return 0;
-  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
+  }
+  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
     return 0;
+  }
   return 1;
 }
 
 getZombieLeaderboardNumber(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
+  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
     assertMsg("Unknown leaderboard number for map " + map + "and type " + type);
+  }
   return level.zombieLeaderboardNumber[map][type];
 }
 
 getZombieStatVariable(map, variable) {
-  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable]))
+  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable])) {
     assertMsg("Unknown stat variable " + variable + " for map " + map);
+  }
   return level.zombieLeaderboardStatVariable[map][variable];
 }
 
@@ -1482,17 +1506,22 @@ zombietron_set_new_zombie_stats() {
 }
 
 makeRankNumber(wave, players, time) {
-  if(time > 86400)
+  if(time > 86400) {
     time = 86400;
+  }
   padding = "";
-  if(10 > time)
+  if(10 > time) {
     padding += "0000";
-  else if(100 > time)
+  }
+  else if(100 > time) {
     padding += "000";
-  else if(1000 > time)
+  }
+  else if(1000 > time) {
     padding += "00";
-  else if(10000 > time)
+  }
+  else if(10000 > time) {
     padding += "0";
+  }
   rank = wave + "" + players + padding + time;
   return rank;
 }

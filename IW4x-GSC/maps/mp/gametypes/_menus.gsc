@@ -88,17 +88,21 @@ onPlayerConnect() {
 }
 
 isOptionsMenu(menu) {
-  if(menu == game["menu_changeclass"])
+  if(menu == game["menu_changeclass"]) {
     return true;
+  }
 
-  if(menu == game["menu_team"])
+  if(menu == game["menu_team"]) {
     return true;
+  }
 
-  if(menu == game["menu_controls"])
+  if(menu == game["menu_controls"]) {
     return true;
+  }
 
-  if(isSubStr(menu, "pc_options"))
+  if(isSubStr(menu, "pc_options")) {
     return true;
+  }
 
   return false;
 }
@@ -114,10 +118,12 @@ onMenuResponse() {
       self closeInGameMenu();
 
       if(isOptionsMenu(menu)) {
-        if(self.pers["team"] == "allies")
+        if(self.pers["team"] == "allies") {
           self openpopupMenu(game["menu_class_allies"]);
-        if(self.pers["team"] == "axis")
+        }
+        if(self.pers["team"] == "axis") {
           self openpopupMenu(game["menu_class_axis"]);
+        }
       }
       continue;
     }
@@ -131,8 +137,9 @@ onMenuResponse() {
     if(response == "changeclass_marines") {
       self closepopupMenu();
       self closeInGameMenu();
-      if(allowClassChoice())
+      if(allowClassChoice()) {
         self openpopupMenu(game["menu_changeclass_allies"]);
+      }
 
       continue;
     }
@@ -141,17 +148,20 @@ onMenuResponse() {
       self closepopupMenu();
       self closeInGameMenu();
 
-      if(allowClassChoice())
+      if(allowClassChoice()) {
         self openpopupMenu(game["menu_changeclass_axis"]);
+      }
 
       continue;
     }
 
-    if(response == "changeclass_marines_splitscreen")
+    if(response == "changeclass_marines_splitscreen") {
       self openpopupMenu("changeclass_marines_splitscreen");
+    }
 
-    if(response == "changeclass_opfor_splitscreen")
+    if(response == "changeclass_opfor_splitscreen") {
       self openpopupMenu("changeclass_opfor_splitscreen");
+    }
 
     if(response == "endround") {
       if(!self isHost()) {
@@ -197,12 +207,15 @@ onMenuResponse() {
       self.selectedClass = true;
       self[[level.class]](response);
     } else if(!level.console) {
-      if(menu == game["menu_quickcommands"])
+      if(menu == game["menu_quickcommands"]) {
         maps\mp\gametypes\_quickmessages::quickcommands(response);
-      else if(menu == game["menu_quickstatements"])
+      }
+      else if(menu == game["menu_quickstatements"]) {
         maps\mp\gametypes\_quickmessages::quickstatements(response);
-      else if(menu == game["menu_quickresponses"])
+      }
+      else if(menu == game["menu_quickresponses"]) {
         maps\mp\gametypes\_quickmessages::quickresponses(response);
+      }
     }
   }
 }
@@ -211,8 +224,9 @@ getTeamAssignment() {
   teams[0] = "allies";
   teams[1] = "axis";
 
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return teams[randomInt(2)];
+  }
 
   if(self.sessionteam != "none" && self.sessionteam != "spectator" && self.sessionstate != "playing" && self.sessionstate != "dead") {
     assignment = self.sessionteam;
@@ -220,12 +234,15 @@ getTeamAssignment() {
     playerCounts = self maps\mp\gametypes\_teams::CountPlayers();
 
     if(playerCounts["allies"] == playerCounts["axis"]) {
-      if(getTeamScore("allies") == getTeamScore("axis"))
+      if(getTeamScore("allies") == getTeamScore("axis")) {
         assignment = teams[randomInt(2)];
-      else if(getTeamScore("allies") < getTeamScore("axis"))
+      }
+      else if(getTeamScore("allies") < getTeamScore("axis")) {
         assignment = "allies";
-      else
+      }
+      else {
         assignment = "axis";
+      }
     } else if(playerCounts["allies"] < playerCounts["axis"]) {
       assignment = "allies";
     } else {
@@ -257,8 +274,9 @@ menuAutoAssign() {
   self.pers["class"] = undefined;
   self.class = undefined;
 
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     self.statusicon = "hud_status_dead";
+  }
 
   self notify("end_respawn");
 
@@ -270,13 +288,16 @@ beginClassChoice(forceNewChoice) {
 
   team = self.pers["team"];
 
-  if(allowClassChoice())
+  if(allowClassChoice()) {
     self openpopupMenu(game["menu_changeclass_" + team]);
-  else
+  }
+  else {
     self thread bypassClassChoice();
+  }
 
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     self thread maps\mp\gametypes\_playerlogic::predictAboutToSpawnPlayerOverTime(0.1);
+  }
 }
 
 bypassClassChoice() {
@@ -285,10 +306,12 @@ bypassClassChoice() {
 }
 
 beginTeamChoice() {
-  if(getDvarInt("scr_player_forceautoassign") != 0)
+  if(getDvarInt("scr_player_forceautoassign") != 0) {
     self notify("menuresponse", game["menu_team"], "autoassign");
-  else
+  }
+  else {
     self openpopupMenu(game["menu_team"]);
+  }
 }
 
 showMainMenuForTeam() {
@@ -308,8 +331,9 @@ menuAllies() {
       return;
     }
 
-    if(level.inGracePeriod && !self.hasDoneCombat)
+    if(level.inGracePeriod && !self.hasDoneCombat) {
       self.hasSpawned = false;
+    }
 
     if(self.sessionstate == "playing") {
       self.switching_teams = true;
@@ -337,8 +361,9 @@ menuAxis() {
       return;
     }
 
-    if(level.inGracePeriod && !self.hasDoneCombat)
+    if(level.inGracePeriod && !self.hasDoneCombat) {
       self.hasSpawned = false;
+    }
 
     if(self.sessionstate == "playing") {
       self.switching_teams = true;
@@ -428,16 +453,18 @@ menuClass(response) {
     if(game["state"] == "postgame") {
       return;
     }
-    if(game["state"] == "playing" && !isInKillcam())
+    if(game["state"] == "playing" && !isInKillcam()) {
       self thread maps\mp\gametypes\_playerlogic::spawnClient();
+    }
   }
 
   self thread maps\mp\gametypes\_spectating::setSpectatePermissions();
 }
 
 addToTeam(team, firstConnect) {
-  if(isDefined(self.team))
+  if(isDefined(self.team)) {
     self maps\mp\gametypes\_playerlogic::removeFromTeamCount();
+  }
 
   self.pers["team"] = team;
 
@@ -447,20 +474,24 @@ addToTeam(team, firstConnect) {
     if(level.teamBased) {
       self.sessionteam = team;
     } else {
-      if(team == "spectator")
+      if(team == "spectator") {
         self.sessionteam = "spectator";
-      else
+      }
+      else {
         self.sessionteam = "none";
+      }
     }
   }
 
-  if(game["state"] != "postgame")
+  if(game["state"] != "postgame") {
     self maps\mp\gametypes\_playerlogic::addToTeamCount();
+  }
 
   self updateObjectiveText();
 
-  if(isDefined(firstConnect) && firstConnect)
+  if(isDefined(firstConnect) && firstConnect) {
     waittillframeend;
+  }
 
   self updateMainMenu();
 

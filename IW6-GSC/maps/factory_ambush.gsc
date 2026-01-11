@@ -101,8 +101,9 @@ ambush_setup() {
   var_3 = common_scripts\utility::array_combine(var_3, var_4);
 
   foreach(var_6 in var_3) {
-    if(isDefined(var_6.script_parameters))
+    if(isDefined(var_6.script_parameters)) {
       var_6 connectpaths();
+    }
 
     var_6 notsolid();
     var_6 hide();
@@ -110,28 +111,32 @@ ambush_setup() {
 
   var_8 = getEntArray("smoke_canister", "script_noteworthy");
 
-  foreach(var_10 in var_8)
+  foreach(var_10 in var_8) {
   var_10 hide();
+  }
 
   var_12 = getent("ambush_breach_player_pda", "targetname");
   var_12 hide();
   maps\_utility::set_custom_gameskill_func(::factory_ambush_grenade_params);
   var_13 = getEntArray("ambush_window_mantle", "targetname");
 
-  foreach(var_15 in var_13)
+  foreach(var_15 in var_13) {
   var_15 movez(-100, 0.1);
+  }
 
   var_17 = [];
   var_17 = getEntArray("ambush_fan", "targetname");
 
-  foreach(var_19 in var_17)
+  foreach(var_19 in var_17) {
   var_19 thread ambush_fan_spin();
+  }
 
   thread maps\factory_anim::ambush_anim_setup();
   maps\factory_fx::fx_assembly_setup();
 
-  if(!level.player.thermal)
+  if(!level.player.thermal) {
     common_scripts\utility::exploder("assembly_ambient_off_in_thermal");
+  }
 
   setlasermaterial("fac_gfx_laser", "fac_gfx_laser_light");
   maps\factory_anim::setup_smoke_archetype();
@@ -149,8 +154,9 @@ ambush_dialogue() {
   common_scripts\utility::flag_wait("start_ambush_moment");
   var_0 = getent("ambush_office_volume", "targetname");
 
-  while(!level.squad["ALLY_ALPHA"] istouching(var_0))
+  while(!level.squad["ALLY_ALPHA"] istouching(var_0)) {
     wait 0.2;
+  }
 
   level.squad["ALLY_ALPHA"] maps\_utility::smart_dialogue("factory_bkr_grabthedata");
   var_1 = ["factory_mrk_adamusethecomputer", "factory_mrk_adamgivemea", "factory_mrk_adamoverhere"];
@@ -238,8 +244,9 @@ ambush_smoke_clear_dialog() {
   level endon("thermal_battle_clear");
   common_scripts\utility::flag_wait("ambush_thermal_flashed");
 
-  while(level.player common_scripts\utility::isflashed())
+  while(level.player common_scripts\utility::isflashed()) {
     wait 0.1;
+  }
 
   wait 6.5;
   level.squad["ALLY_CHARLIE"] maps\_utility::smart_dialogue("factory_hsh_mythermalsarefried");
@@ -330,12 +337,15 @@ setup_computer_use_hint() {
   for(;;) {
     var_0 waittill("trigger");
 
-    if(level.player.thermal_anim_active)
+    if(level.player.thermal_anim_active) {
       continue;
-    else if(level.player isthrowinggrenade() || level.player ismeleeing())
+    }
+    else if(level.player isthrowinggrenade() || level.player ismeleeing()) {
       continue;
-    else
+    }
+    else {
       break;
+    }
 
     wait 0.1;
   }
@@ -431,8 +441,9 @@ breach_door() {
   wait 1.2;
   common_scripts\utility::exploder("ambush_door_exploder_strobe");
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     common_scripts\utility::exploder("ambush_door_exploder_strobe_ng");
+  }
 }
 
 break_ambush_glass() {
@@ -523,10 +534,12 @@ ambush_fastrope(var_0, var_1, var_2, var_3, var_4) {
   if(maps\_utility::spawn_failed(var_6)) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_0 + "_node";
-  else
+  }
+  else {
     var_1 = var_1 + "_node";
+  }
 
   var_6 thread maps\factory_anim::ambush_fastrope_do_anim(var_1, var_2, var_3, var_4);
   return var_6;
@@ -564,11 +577,13 @@ ambush_weapons_drop() {
 
 ambush_riotshield_no_melee() {
   for(;;) {
-    if(player_is_using_riot_shield())
+    if(player_is_using_riot_shield()) {
       level.player.dontmelee = 1;
+    }
 
-    if(!player_is_using_riot_shield())
+    if(!player_is_using_riot_shield()) {
       level.player.dontmelee = undefined;
+    }
 
     wait 0.1;
   }
@@ -577,10 +592,12 @@ ambush_riotshield_no_melee() {
 player_is_using_riot_shield() {
   var_0 = level.player getcurrentweapon();
 
-  if(var_0 == "riotshield_iw6_sp")
+  if(var_0 == "riotshield_iw6_sp") {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 thermal_battle_logic() {
@@ -631,17 +648,20 @@ thermal_battle_logic() {
   thread ambush_wave_03_killcounter();
   common_scripts\utility::flag_wait_any("ambush_wave_3_done", "ambush_player_approaching_mezzanine");
 
-  if(!common_scripts\utility::flag("ambush_player_approaching_mezzanine"))
+  if(!common_scripts\utility::flag("ambush_player_approaching_mezzanine")) {
     thread ambush_allies_move_up_stairs();
+  }
 
   maps\_utility::autosave_by_name_silent("ambush");
   common_scripts\utility::flag_wait_any("ambush_player_on_mezzanine_right", "ambush_player_on_mezzanine_left");
   thread wait_and_kill_guys_in_volume(0.5, "ambush_back_corner_lower");
 
-  if(common_scripts\utility::flag("ambush_player_on_mezzanine_left"))
+  if(common_scripts\utility::flag("ambush_player_on_mezzanine_left")) {
     thread ambush_wave_4_left_path();
-  else
+  }
+  else {
     thread ambush_wave_4_right_path();
+  }
 
   maps\_utility::waittill_aigroupcount("ambush_groundtroops_04", 2);
   maps\factory_util::safe_trigger_by_targetname("ambush_sec_office_allies_postup");
@@ -667,15 +687,17 @@ safety_to_prevent_rushing() {
     wait 0.1;
     var_1 = var_1 + 0.1;
 
-    if(var_1 >= var_0)
+    if(var_1 >= var_0) {
       level notify("safety_timeout");
+    }
   }
 
   var_2 = maps\_utility::get_closest_ai(level.player.origin, "axis");
 
   while(level.player.health > 25) {
-    if(isDefined(var_2) && isalive(var_2))
+    if(isDefined(var_2) && isalive(var_2)) {
       level.player dodamage(30, var_2.origin, var_2, var_2, "MOD_RIFLE_BULLET");
+    }
     else {
       var_3 = getent("ambush_fastroper_mid_5_node", "targetname");
       level.player dodamage(30, var_3.origin, undefined, undefined, "MOD_RIFLE_BULLET");
@@ -698,20 +720,24 @@ thermal_battle_elongate() {
   wait 8;
   common_scripts\utility::flag_set("ambush_thermal_allies_movedup_01");
 
-  foreach(var_1 in level.squad)
+  foreach(var_1 in level.squad) {
   var_1 thread ally_pick_up_weapon();
+  }
 }
 
 ally_pick_up_weapon() {
   level endon("thermal_battle_clear");
   wait_until_out_of_sight();
 
-  if(self == level.squad["ALLY_ALPHA"])
+  if(self == level.squad["ALLY_ALPHA"]) {
     maps\_utility::forceuseweapon("cz805bren+reflex_sp", "primary");
-  else if(self == level.squad["ALLY_BRAVO"])
+  }
+  else if(self == level.squad["ALLY_BRAVO"]) {
     maps\_utility::forceuseweapon("pp19+reflexsmg_sp", "primary");
-  else if(self == level.squad["ALLY_CHARLIE"])
+  }
+  else if(self == level.squad["ALLY_CHARLIE"]) {
     maps\_utility::forceuseweapon("m27", "primary");
+  }
 }
 
 wait_until_out_of_sight() {
@@ -757,8 +783,9 @@ ambush_set_lower_back_clear() {
     var_1 = var_0 maps\_utility::get_ai_touching_volume("axis");
     var_2 = maps\_utility::get_ai_group_count("riotshield_back");
 
-    if(!common_scripts\utility::flag("ambush_smoke_off_tooltip") && (var_2 < 2 || var_1.size < 2))
+    if(!common_scripts\utility::flag("ambush_smoke_off_tooltip") && (var_2 < 2 || var_1.size < 2)) {
       common_scripts\utility::flag_set("ambush_smoke_off_tooltip");
+    }
 
     if(var_1.size <= 2 && var_2 < 1) {
       common_scripts\utility::flag_set("ambush_lower_back_clear");
@@ -810,8 +837,9 @@ ambush_wave_4_right_path() {
   var_0 = getEntArray("ambush_groundtroops_04", "targetname");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2.script_parameters))
+    if(isDefined(var_2.script_parameters)) {
       var_2.target = var_2.script_parameters;
+    }
   }
 
   maps\factory_util::safe_trigger_by_noteworthy("ambush_groundtroops_04_trigger");
@@ -887,13 +915,16 @@ ambush_riotshield_smoke() {
 
   var_8 = common_scripts\utility::flag_wait_any_return("riotshield_cleanup_left", "riotshield_cleanup_right");
 
-  if(var_8 == "riotshield_cleanup_left")
+  if(var_8 == "riotshield_cleanup_left") {
     var_1 = maps\_utility::get_ai_group_ai("riotshield_right");
-  else
+  }
+  else {
     var_1 = maps\_utility::get_ai_group_ai("riotshield_left");
+  }
 
-  foreach(var_4 in var_1)
+  foreach(var_4 in var_1) {
   var_4 thread kill_after_time(1, 3);
+  }
 }
 
 ambush_riotshield_back() {
@@ -913,8 +944,9 @@ ambush_riotshield_back() {
   thread ambush_riotshield_back_cleanup(var_1);
   maps\_utility::waittill_aigroupcount("riotshield_back", 1);
 
-  foreach(var_4 in var_1)
+  foreach(var_4 in var_1) {
   var_4 thread kill_after_time(12);
+  }
 }
 
 ambush_riotshield_back_cleanup(var_0) {
@@ -950,11 +982,13 @@ show_thermal_tooltip(var_0, var_1) {
   }
 
   if(level.show_thermal_hint == 1) {
-    if(level.player.thermal == 0 && level.player.thermal_anim_active == 0)
+    if(level.player.thermal == 0 && level.player.thermal_anim_active == 0) {
       level.player thread maps\_utility::display_hint(var_2);
+    }
   } else if(level.show_thermal_off_hint == 1) {
-    if(level.player.thermal == 1 && level.player.thermal_anim_active == 0)
+    if(level.player.thermal == 1 && level.player.thermal_anim_active == 0) {
       level.player thread maps\_utility::display_hint(var_2);
+    }
   }
 
   wait 10;
@@ -971,15 +1005,17 @@ thermal_hint_func_off() {
 }
 
 hint_thermal_timeout() {
-  if(!level.show_thermal_hint)
+  if(!level.show_thermal_hint) {
     return 1;
+  }
 
   return 0;
 }
 
 hint_thermal_off_timeout() {
-  if(!level.show_thermal_off_hint)
+  if(!level.show_thermal_off_hint) {
     return 1;
+  }
 
   return 0;
 }
@@ -988,8 +1024,9 @@ thermal_off_tooltip_handler() {
   common_scripts\utility::flag_wait("ambush_thermal_flashed");
   wait 0.5;
 
-  if(level.player.thermal == 1)
+  if(level.player.thermal == 1) {
     level thread show_thermal_tooltip(0);
+  }
 }
 
 ambush_smoke_penalty() {
@@ -1015,8 +1052,9 @@ ambush_smoke_penalty() {
     var_5 = var_1 maps\_utility::get_ai_touching_volume("axis");
 
     foreach(var_7 in var_5) {
-      if(!isDefined(var_7.ambush_original_accuracy))
+      if(!isDefined(var_7.ambush_original_accuracy)) {
         var_7.ambush_original_accuracy = var_7.script_accuracy;
+      }
 
       if(isDefined(var_0) && var_7 istouching(var_0)) {
         var_7.script_accuracy = 0.08;
@@ -1031,8 +1069,9 @@ ambush_smoke_penalty() {
       wait 5;
       var_5 = var_1 maps\_utility::get_ai_touching_volume("axis");
 
-      foreach(var_7 in var_5)
+      foreach(var_7 in var_5) {
       var_7.script_accuracy = 2;
+      }
 
       maps\_utility::clear_custom_gameskill_func();
       common_scripts\utility::flag_set("stop_smoke_penalty");
@@ -1128,8 +1167,9 @@ ally_smoke_reaction_vision(var_0) {
       self.maxvisibledist = 256;
       wait(randomfloatrange(1.0, 3.0));
 
-      if(!isDefined(self) || !isalive(self))
+      if(!isDefined(self) || !isalive(self)) {
         self.maxvisibledist = var_1;
+      }
     }
   }
 }
@@ -1156,24 +1196,29 @@ ambush_smoke_close_enemies() {
 kill_after_time(var_0, var_1) {
   self endon("death");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(randomfloatrange(var_0, var_1));
-  else
+  }
+  else {
     wait(var_0);
+  }
 
-  if(isDefined(self) && isai(self) && isalive(self))
+  if(isDefined(self) && isai(self) && isalive(self)) {
     self kill();
+  }
 }
 
 wait_and_kill_guys_in_volume(var_0, var_1) {
-  if(var_0 > 0)
+  if(var_0 > 0) {
     wait(var_0);
+  }
 
   var_2 = getent(var_1, "targetname");
   var_3 = var_2 maps\_utility::get_ai_touching_volume("axis");
 
-  foreach(var_5 in var_3)
+  foreach(var_5 in var_3) {
   var_5 thread kill_after_time(0.0, 3.0);
+  }
 }
 
 ambush_fan_spin(var_0) {
@@ -1224,8 +1269,9 @@ ambush_cleanup(var_0) {
     var_2 = var_1 maps\_utility::get_ai_touching_volume("axis");
 
     foreach(var_4 in var_2) {
-      if(isDefined(var_4) && isai(var_4) && var_4.team == "axis")
+      if(isDefined(var_4) && isai(var_4) && var_4.team == "axis") {
         var_4 kill();
+      }
     }
   }
 
@@ -1274,8 +1320,9 @@ ambush_cleanup(var_0) {
 }
 
 attach_mover_prefab() {
-  if(!isDefined(level.mover_prefabs))
+  if(!isDefined(level.mover_prefabs)) {
     create_ambush_mover_prefabs();
+  }
 
   for(var_0 = 0; var_0 < level.mover_prefabs.size; var_0++) {
     if(level.mover_prefabs[var_0].in_use == 0) {
@@ -1298,8 +1345,9 @@ create_ambush_mover_prefabs() {
   level.mover_prefabs = [];
   var_0 = 8;
 
-  for(var_1 = 0; var_1 < var_0; var_1++)
+  for(var_1 = 0; var_1 < var_0; var_1++) {
     level.mover_prefabs[level.mover_prefabs.size] = create_mover_prefab("ambush_mover_prefab", var_1 + 1);
+  }
 }
 
 create_mover_prefab(var_0, var_1) {
@@ -1316,8 +1364,9 @@ create_mover_prefab(var_0, var_1) {
     }
 
     if(var_8.code_classname == "script_origin") {
-      if(isDefined(var_8.script_noteworthy))
+      if(isDefined(var_8.script_noteworthy)) {
         var_3 = var_8;
+      }
       else {
         var_2 = var_8;
         var_2.audio_org = undefined;
@@ -1327,8 +1376,9 @@ create_mover_prefab(var_0, var_1) {
     }
   }
 
-  foreach(var_11 in var_4)
+  foreach(var_11 in var_4) {
   var_11 linkto(var_2);
+  }
 
   if(isDefined(var_3)) {
     var_3 linkto(var_2);
@@ -1340,13 +1390,15 @@ create_mover_prefab(var_0, var_1) {
 }
 
 setup_ambush_flood_spawner_limited_triggers() {
-  if(!isDefined(level.flood_spawner_limited_cap))
+  if(!isDefined(level.flood_spawner_limited_cap)) {
     level.flood_spawner_limited_cap = 15;
+  }
 
   var_0 = getEntArray("flood_spawner_limited", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   thread flood_trigger_limited_think(var_2);
+  }
 }
 
 flood_trigger_limited_think(var_0) {
@@ -1378,10 +1430,12 @@ flood_spawner_limited_think(var_0) {
       continue;
     }
 
-    if(isDefined(self.script_forcespawn))
+    if(isDefined(self.script_forcespawn)) {
       var_3 = self stalingradspawn(var_1);
-    else
+    }
+    else {
       var_3 = self dospawn(var_1);
+    }
 
     if(maps\_utility::spawn_failed(var_3)) {
       wait 1;
@@ -1393,13 +1447,15 @@ flood_spawner_limited_think(var_0) {
     var_3 thread maps\_spawner::expand_goalradius(var_0);
     var_3 waittill("death", var_4);
 
-    if(!maps\_spawner::player_saw_kill(var_3, var_4))
+    if(!maps\_spawner::player_saw_kill(var_3, var_4)) {
       self.count++;
+    }
 
     if(!isDefined(var_3)) {
       continue;
     }
-    if(!maps\_utility::script_wait())
+    if(!maps\_utility::script_wait()) {
       wait(randomfloatrange(5, 9));
+    }
   }
 }

@@ -11,20 +11,23 @@ func_20C3() {
   self playLoopSound("emp_nade_lp");
   thread func_5AA9();
 
-  if(var_00 == 0)
+  if(var_00 == 0) {
     thread func_1181();
+  }
 }
 
 func_E0F3() {
   self.func_619B--;
 
-  if(self.func_619B == 0)
+  if(self.func_619B == 0) {
     thread func_13B5();
+  }
 }
 
 func_1181() {
-  if(scripts\mp\utility\game::_hasperk("specialty_localjammer"))
+  if(scripts\mp\utility\game::_hasperk("specialty_localjammer")) {
     self clearscrambler();
+  }
 
   self give_infinite_grenade(1);
   scripts\engine\utility::allow_usability(0);
@@ -32,16 +35,19 @@ func_1181() {
 }
 
 func_13B5() {
-  if(scripts\mp\utility\game::_hasperk("specialty_localjammer"))
+  if(scripts\mp\utility\game::_hasperk("specialty_localjammer")) {
     self makescrambler();
+  }
 
   self give_infinite_grenade(0);
   scripts\engine\utility::allow_usability(1);
 
-  if(scripts\mp\utility\game::isreallyalive(self))
+  if(scripts\mp\utility\game::isreallyalive(self)) {
     thread func_1106A();
-  else
+  }
+  else {
     thread func_1106B();
+  }
 
   self notify("emp_stop_vfx");
   self playSound("emp_nade_lp_end");
@@ -53,11 +59,13 @@ isemped() {
 }
 
 func_FFC5() {
-  if(scripts\mp\utility\game::_hasperk("specialty_empimmune") || !scripts\mp\utility\game::isreallyalive(self))
+  if(scripts\mp\utility\game::_hasperk("specialty_empimmune") || !scripts\mp\utility\game::isreallyalive(self)) {
     return 0;
+  }
 
-  if(scripts\mp\utility\game::func_9EF0(self))
+  if(scripts\mp\utility\game::func_9EF0(self)) {
     return 0;
+  }
 
   return 1;
 }
@@ -219,8 +227,9 @@ func_E24E() {
 }
 
 func_61A2() {
-  if(!isDefined(level.func_61A1))
+  if(!isDefined(level.func_61A1)) {
     func_61C1();
+  }
 
   return level.func_61A1;
 }
@@ -229,40 +238,47 @@ func_61C1(var_00) {
   var_01 = [];
 
   foreach(var_03 in level.mines) {
-    if(isDefined(var_03))
+    if(isDefined(var_03)) {
       var_1[var_1.size] = var_03;
+    }
   }
 
   var_05 = getEntArray("misc_turret", "classname");
 
   foreach(var_07 in var_05) {
-    if(isDefined(var_07))
+    if(isDefined(var_07)) {
       var_1[var_1.size] = var_07;
+    }
   }
 
   foreach(var_10 in level.uplinks) {
-    if(isDefined(var_10))
+    if(isDefined(var_10)) {
       var_1[var_1.size] = var_10;
+    }
   }
 
   foreach(var_13 in level.remote_uav) {
-    if(isDefined(var_13))
+    if(isDefined(var_13)) {
       var_1[var_1.size] = var_13;
+    }
   }
 
   foreach(var_16 in level.balldrones) {
-    if(isDefined(var_16))
+    if(isDefined(var_16)) {
       var_1[var_1.size] = var_16;
+    }
   }
 
   foreach(var_19 in level.placedims) {
-    if(isDefined(var_19))
+    if(isDefined(var_19)) {
       var_1[var_1.size] = var_19;
+    }
   }
 
   foreach(var_00 in level.players) {
-    if(isDefined(var_00) && scripts\mp\utility\game::func_9EF0(var_00))
+    if(isDefined(var_00) && scripts\mp\utility\game::func_9EF0(var_00)) {
       var_1[var_1.size] = var_00;
+    }
   }
 
   level.func_61A1 = var_01;

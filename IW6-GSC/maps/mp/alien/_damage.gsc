@@ -15,13 +15,15 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
     return;
   }
 
-  if(isDefined(level.ancestor_projectile_solo_scalar) && isPlayingSolo() && sWeapon == "alien_ancestor_mp")
+  if(isDefined(level.ancestor_projectile_solo_scalar) && isPlayingSolo() && sWeapon == "alien_ancestor_mp") {
     iDamage = iDamage * level.ancestor_projectile_solo_scalar;
+  }
 
   damageAdd = 0;
 
-  if(self maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4]) && is_trap(eInflictor))
+  if(self maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4]) && is_trap(eInflictor)) {
     iDamage = 0;
+  }
 
   if(isDefined(eAttacker) && (sWeapon == "alienspit_mp" || sWeapon == "alienspit_gas_mp")) {
     if(isDefined(eAttacker.team) && (self.team == eAttacker.team)) {
@@ -32,19 +34,22 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
   current_weapon = self GetCurrentPrimaryWeapon();
 
   blockable_weapon = (sWeapon == "spider_beam_mp" || sWeapon == "alienspit_mp" || sWeapon == "alienspit_gas_mp" || sWeapon == "spore_beam_mp" || sWeapon == "gargoyle_beam_mp" || sWeapon == "alien_ancestor_mp");
-  if(blockable_weapon && sHitLoc == "shield" && !isDefined(self.spider_shield_block))
+  if(blockable_weapon && sHitLoc == "shield" && !isDefined(self.spider_shield_block)) {
     self thread riotshieldAmmoDeplete();
+  }
 
-  if(sWeapon == "spider_beam_mp" && isPlayingSolo() && isDefined(level.spider) && !isDefined(level.spider.has_fired_beam))
+  if(sWeapon == "spider_beam_mp" && isPlayingSolo() && isDefined(level.spider) && !isDefined(level.spider.has_fired_beam)) {
     iDamage = int(iDamage * 0.17);
+  }
 
   if(sMeansOfDeath == "MOD_TRIGGER_HURT") {
     maps\mp\alien\_death::onPlayerKilled(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime);
   } else if(shouldTakeDamage(eAttacker)) {
     isFriendlyFire = maps\mp\gametypes\_damage::isFriendlyFire(self, eAttacker);
 
-    if(!isFriendlyFire && isDefined(eAttacker) && eAttacker != self)
+    if(!isFriendlyFire && isDefined(eAttacker) && eAttacker != self) {
       iDamage = int(iDamage * level.cycle_damage_scalar);
+    }
 
     if(isDefined(eAttacker) && eAttacker == self) {
       switch (sWeapon) {
@@ -75,10 +80,12 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
           iDamage = 0;
           break;
         default:
-          if(!is_hardcore_mode())
+          if(!is_hardcore_mode()) {
             iDamage = int(min(10, iDamage * 0.05));
-          else
+          }
+          else {
             iDamage = int(min(level.ricochetDamageMax, iDamage * 0.10));
+          }
           break;
       }
     } else if(isFriendlyFire) {
@@ -100,10 +107,12 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
 
         if(is_ricochet_damage()) {
           if(isDefined(eAttacker) && IsPlayer(eAttacker) && isDefined(sHitLoc) && sHitLoc != "shield") {
-            if(isDefined(eInflictor))
+            if(isDefined(eInflictor)) {
               eAttacker DoDamage(iDamage, (eAttacker.origin - (0, 0, 50)), eAttacker, eInflictor, sMeansOfDeath);
-            else
+            }
+            else {
               eAttacker DoDamage(iDamage, eAttacker.origin, eAttacker);
+            }
           }
           iDamage = 0;
         }
@@ -118,8 +127,9 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
       iDamage = 1;
     }
     if(isDefined(eAttacker) && isAgent(eAttacker)) {
-      if(sWeapon == "alienbetty_mp" || sWeapon == "alienclaymore_mp")
+      if(sWeapon == "alienbetty_mp" || sWeapon == "alienclaymore_mp") {
         iDamage = 0;
+      }
     }
 
     if(sMeansOfDeath == "MOD_EXPLOSIVE" && isDefined(eInflictor) && isDefined(eInflictor.targetname) && (eInflictor.targetname == "scriptable_destructible_barrel" || eInflictor.targetname == "armory_transformer")) {
@@ -131,19 +141,22 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
         iDamage = 0;
       } else {
         if(iDamage > 10) {
-          if(iDamage > (self.health * CONST_FALL_DAMAGE_SCALAR))
+          if(iDamage > (self.health * CONST_FALL_DAMAGE_SCALAR)) {
             iDamage = int(self.health * CONST_FALL_DAMAGE_SCALAR);
+          }
         } else
           iDamage = 0;
       }
     }
 
-    if(isDefined(eAttacker) && eAttacker should_snare(self))
+    if(isDefined(eAttacker) && eAttacker should_snare(self)) {
       self applyAlienSnare();
+    }
 
     if(sMeansOfDeath == "MOD_EXPLOSIVE_BULLET") {
-      if(!is_hardcore_mode() || (eAttacker == self && shitloc == "none"))
+      if(!is_hardcore_mode() || (eAttacker == self && shitloc == "none")) {
         iDamage = 0;
+      }
     }
 
     if(self has_perk("perk_medic", [3, 4]) && self.isReviving == true) {
@@ -156,10 +169,12 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
 
     if((!isFriendlyFire || (eAttacker == self && is_ricochet_damage())) && isDefined(self.bodyArmorHP) && sMeansOfDeath != "MOD_EXPLOSIVE_BULLET" && !isDefined(self.ability_invulnerable)) {
       self.bodyArmorHP -= (iDamage + damageAdd);
-      if(self maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4]) && is_trap(eInflictor))
+      if(self maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4]) && is_trap(eInflictor)) {
         iDamage = 0;
-      else
+      }
+      else {
         iDamage = 1;
+      }
       damageAdd = 0;
       if(self.bodyArmorHP <= 0) {
         iDamage = abs(self.bodyArmorHP);
@@ -168,16 +183,18 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
       }
       if(isDefined(eAttacker) && eAttacker != self && eAttacker is_alien_agent() && isDefined(self.bodyArmorHP) && self maps\mp\alien\_persistence::is_upgrade_enabled("stun_armor_upgrade") && sMeansOfDeath == "MOD_UNKNOWN") {
         rand = RandomIntRange(0, 100);
-        if(rand <= 25)
+        if(rand <= 25) {
           eAttacker thread delayed_stun_damage(self);
+        }
       }
     }
 
     stunFraction = 0.0;
 
     if(isDefined(eAttacker) && sWeapon == "alien_minion_explosion") {
-      if(self maps\mp\alien\_persistence::is_upgrade_enabled("minion_protection_upgrade"))
+      if(self maps\mp\alien\_persistence::is_upgrade_enabled("minion_protection_upgrade")) {
         iDamage *= 0.8;
+      }
     }
 
     prestige_damage_taken_scalar = self maps\mp\alien\_prestige::prestige_getDamageTakenScalar();
@@ -196,8 +213,9 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
       iDamage = Int(0);
     }
 
-    if(iDamage > 0)
+    if(iDamage > 0) {
       maps\mp\alien\_hud::playPainOverlay(eAttacker, sWeapon, vDir);
+    }
 
     if(!isFriendlyFire || is_hardcore_mode()) {
       self maps\mp\gametypes\_damage::finishPlayerDamageWrapper(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, psOffsetTime, stunFraction);
@@ -210,14 +228,17 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
       level.alienBBData["damage_taken"] += iDamage;
 
       if(isDefined(eAttacker) && IsAgent(eAttacker)) {
-        if(!isDefined(eAttacker.damage_done))
+        if(!isDefined(eAttacker.damage_done)) {
           eAttacker.damage_done = 0;
-        else
+        }
+        else {
           eAttacker.damage_done += iDamage;
+        }
       }
       self notify("dlc_vo_notify", "pain", self);
-      if(!isDefined(level.use_dlc_vo))
+      if(!isDefined(level.use_dlc_vo)) {
         self thread maps\mp\alien\_music_and_dialog::player_pain_vo();
+      }
     }
 
     if(iDamage > 0 && isDefined(eAttacker) && isDefined(level.current_challenge)) {
@@ -241,12 +262,15 @@ delayed_stun_damage(attacker) {
 
 shouldUseInvulnerability(iDamage, isUsingRemoteAndWillBeLowHealth) {
   DAMAGE_BUFFER_LIMIT = 20;
-  if(iDamage == 0)
+  if(iDamage == 0) {
     return false;
-  if(isUsingRemoteAndWillBeLowHealth)
+  }
+  if(isUsingRemoteAndWillBeLowHealth) {
     return true;
-  else
+  }
+  else {
     return (self.haveInvulnerabilityAvailable && iDamage > self.health && iDamage < (self.health + DAMAGE_BUFFER_LIMIT));
+  }
 }
 
 usingRemoteAndWillBeLowHealth(iDamage) {
@@ -267,11 +291,13 @@ useInvulnerability(iDamage) {
 }
 
 shouldTakeDamage(attacker) {
-  if(isDefined(self.inLastStand) && self.inLastStand)
+  if(isDefined(self.inLastStand) && self.inLastStand) {
     return false;
+  }
 
-  if(getTime() < self.damageShieldExpireTime)
+  if(getTime() < self.damageShieldExpireTime) {
     return false;
+  }
 
   return true;
 }
@@ -280,33 +306,42 @@ ALIEN_AP_DAMAGE_SCALAR = 2.0;
 ARMOR_PIERCING_UPGRADE_SCALAR = 1.10;
 
 is_alien_agent_damage_allowed(eInflictor, eAttacker, sWeapon, sMeansOfDeath) {
-  if(level.gameEnded)
+  if(level.gameEnded) {
     return false;
+  }
 
-  if(during_host_migration())
+  if(during_host_migration()) {
     return false;
+  }
 
-  if(!isDefined(self) || !isReallyAlive(self))
+  if(!isDefined(self) || !isReallyAlive(self)) {
     return false;
+  }
 
   isSpiderWeapon = isDefined(sWeapon) && sWeapon == "spider_beam_mp";
-  if(!isSpiderWeapon && isDefined(eAttacker) && isDefined(eAttacker.team) && (self.team == eAttacker.team) && !alienTypeCanDoFriendlyDamage(eAttacker, sWeapon))
+  if(!isSpiderWeapon && isDefined(eAttacker) && isDefined(eAttacker.team) && (self.team == eAttacker.team) && !alienTypeCanDoFriendlyDamage(eAttacker, sWeapon)) {
     return false;
+  }
 
-  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_CRUSH" && isDefined(eInflictor) && isDefined(eInflictor.classname) && eInflictor.classname == "script_vehicle")
+  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_CRUSH" && isDefined(eInflictor) && isDefined(eInflictor.classname) && eInflictor.classname == "script_vehicle") {
     return false;
+  }
 
-  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_FALLING")
+  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_FALLING") {
     return false;
+  }
 
-  if(isDefined(self.noTriggerHurt) && self.noTriggerHurt && isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_TRIGGER_HURT")
+  if(isDefined(self.noTriggerHurt) && self.noTriggerHurt && isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_TRIGGER_HURT") {
     return false;
+  }
 
-  if(isDefined(eAttacker) && isDefined(eAttacker.classname) && eAttacker.classname == "script_origin" && isDefined(eAttacker.type) && eAttacker.type == "soft_landing")
+  if(isDefined(eAttacker) && isDefined(eAttacker.classname) && eAttacker.classname == "script_origin" && isDefined(eAttacker.type) && eAttacker.type == "soft_landing") {
     return false;
+  }
 
-  if(sWeapon == "killstreak_emp_mp")
+  if(sWeapon == "killstreak_emp_mp") {
     return false;
+  }
 
   return true;
 }
@@ -317,22 +352,27 @@ onAlienAgentDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
     return false;
   }
 
-  if(isDefined(eAttacker) && isPlayer(eAttacker) && sMeansofDeath != "MOD_MELEE" && eAttacker maps\mp\alien\_persistence::is_upgrade_enabled("sniper_soft_upgrade") && getweaponclass(sWeapon) == "weapon_sniper")
+  if(isDefined(eAttacker) && isPlayer(eAttacker) && sMeansofDeath != "MOD_MELEE" && eAttacker maps\mp\alien\_persistence::is_upgrade_enabled("sniper_soft_upgrade") && getweaponclass(sWeapon) == "weapon_sniper") {
     sHitLoc = "soft";
+  }
 
-  if(!is_alien_agent_damage_allowed(eInflictor, eAttacker, sWeapon, sMeansOfDeath))
+  if(!is_alien_agent_damage_allowed(eInflictor, eAttacker, sWeapon, sMeansOfDeath)) {
     return false;
+  }
 
   iDamage = scale_alien_damage_func(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
 
-  if(isDefined(level.custom_scale_alien_damage_func))
+  if(isDefined(level.custom_scale_alien_damage_func)) {
     iDamage = [[level.custom_scale_alien_damage_func]](eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
+  }
 
-  if(isDefined(level.custom_OnAlienAgentDamaged_func))
+  if(isDefined(level.custom_OnAlienAgentDamaged_func)) {
     iDamage = [[level.custom_OnAlienAgentDamaged_func]](eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
+  }
 
-  if(sMeansOfDeath == "MOD_MELEE" && level.players.size == 1)
+  if(sMeansOfDeath == "MOD_MELEE" && level.players.size == 1) {
     iDamage = Int(iDamage * 0.9);
+  }
 
   is_burning_damage = false;
   if(isDefined(eAttacker) && isDefined(eAttacker.burning_victim) && eAttacker.burning_victim) {
@@ -342,24 +382,29 @@ onAlienAgentDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
 
   if(isDefined(eAttacker) && isPlayer(eAttacker)) {
     if(sMeansOfDeath == "MOD_MELEE") {
-      if(eAttacker maps\mp\alien\_persistence::is_upgrade_enabled("shock_melee_upgrade") && is_true(eAttacker.meleeStrength) && (WeaponType(sWeapon) != "riotshield"))
+      if(eAttacker maps\mp\alien\_persistence::is_upgrade_enabled("shock_melee_upgrade") && is_true(eAttacker.meleeStrength) && (WeaponType(sWeapon) != "riotshield")) {
         eAttacker thread stun_zap_aliens(self.origin, self, (iDamage), sMeansofDeath);
+      }
     } else if(eAttacker has_stun_ammo(sWeapon) && eAttacker maps\mp\alien\_persistence::is_upgrade_enabled("stun_ammo_upgrade") && sMeansOfDeath != "MOD_UNKNOWN")
       eAttacker thread stun_zap_aliens(self.origin, self, iDamage, sMeansofDeath);
   }
 
   if(isDefined(sWeapon) && sWeapon != "alien_ims_projectile_mp" && isPlayer(eAttacker) && eAttacker _hasPerk("specialty_armorpiercing") && isDefined(sHitloc) && sHitLoc == "armor") {
-    if(eAttacker maps\mp\alien\_persistence::is_upgrade_enabled("armor_piercing_upgrade"))
+    if(eAttacker maps\mp\alien\_persistence::is_upgrade_enabled("armor_piercing_upgrade")) {
       iDamage = Int(iDamage * ALIEN_AP_DAMAGE_SCALAR * ARMOR_PIERCING_UPGRADE_SCALAR);
-    else
+    }
+    else {
       iDamage = Int(iDamage * ALIEN_AP_DAMAGE_SCALAR);
+    }
   }
 
-  if(sWeapon == "alienspit_mp" || sWeapon == "alienspit_gas_mp")
+  if(sWeapon == "alienspit_mp" || sWeapon == "alienspit_gas_mp") {
     iDamage = Int(iDamage * 5);
+  }
 
-  if(isDefined(eAttacker) && isDefined(self.pet) && isDefined(eAttacker.team) && (self.team == eAttacker.team))
+  if(isDefined(eAttacker) && isDefined(self.pet) && isDefined(eAttacker.team) && (self.team == eAttacker.team)) {
     return false;
+  }
 
   maps\mp\alien\_chaos::update_alien_damaged_event(sWeapon);
 
@@ -369,37 +414,47 @@ onAlienAgentDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
     iDamage = scale_alien_damage_by_perks(eAttacker, iDamage, sMeansOfDeath, sWeapon);
     iDamage = scale_alien_damage_by_weapon_type(eAttacker, iDamage, sMeansOfDeath, sWeapon, sHitLoc);
 
-    if(isDefined(sWeapon))
+    if(isDefined(sWeapon)) {
       self thread maps\mp\alien\_achievement::update_achievement_damage_weapon(sWeapon);
+    }
   }
 
   iDamage = typeSpecificDamageProcessing(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset);
 
-  if(iDamage <= 0)
+  if(iDamage <= 0) {
     return false;
+  }
 
   if(isDefined(eAttacker) && eAttacker != self && iDamage > 0 && (!isDefined(sHitLoc) || sHitLoc != "shield")) {
     if(is_burning_damage) {
       typeHit = "standard";
     } else if(isDefined(eInflictor) && eInflictor != eAttacker) {
-      if(means_of_explosive_damage(sMeansOfDeath))
+      if(means_of_explosive_damage(sMeansOfDeath)) {
         typeHit = "standard";
-      else
+      }
+      else {
         typeHit = "none";
+      }
     } else if(isDefined(eInflictor) && isDefined(eInflictor.damageFeedback) && eInflictor.damageFeedback == false)
       typeHit = "none";
-    else if(!maps\mp\gametypes\_damage::shouldWeaponFeedback(sWeapon))
+    else if(!maps\mp\gametypes\_damage::shouldWeaponFeedback(sWeapon)) {
       typeHit = "none";
-    else if(iDFlags &level.iDFLAGS_STUN)
+    }
+    else if(iDFlags &level.iDFLAGS_STUN) {
       typeHit = "stun";
-    else if(!eAttacker _hasperk("specialty_armorpiercing") && sHitLoc == "armor")
+    }
+    else if(!eAttacker _hasperk("specialty_armorpiercing") && sHitLoc == "armor") {
       typeHit = "hitalienarmor";
-    else if(sHitloc == "soft")
+    }
+    else if(sHitloc == "soft") {
       typeHit = "hitaliensoft";
-    else if(sMeansOfDeath == "MOD_MELEE" && sWeapon == "meleestun_mp")
+    }
+    else if(sMeansOfDeath == "MOD_MELEE" && sWeapon == "meleestun_mp") {
       typeHit = "meleestun";
-    else
+    }
+    else {
       typeHit = "standard";
+    }
 
     if(isDefined(level.attack_heli) && eAttacker == level.attack_heli) {
       iDamage = Int(iDamage * 0.6);
@@ -422,17 +477,21 @@ onAlienAgentDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
 
 set_alien_damage_by_weapon_type(sMeansOfDeath, sWeapon, iDamage, eAttacker, iDFlags, vPoint, vDir, sHitLoc, timeOffset, eInflictor) {
   if(isDefined(sWeapon)) {
-    if(sWeapon == "xm25_mp" && sMeansOfDeath == "MOD_IMPACT")
+    if(sWeapon == "xm25_mp" && sMeansOfDeath == "MOD_IMPACT") {
       iDamage = 95;
+    }
 
-    if(sWeapon == "spider_beam_mp")
+    if(sWeapon == "spider_beam_mp") {
       iDamage *= 15;
+    }
 
     if(sWeapon == "alienthrowingknife_mp" && sMeansOfDeath == "MOD_IMPACT") {
-      if(maps\mp\alien\_utility::can_hypno(eAttacker, false, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, eInflictor))
+      if(maps\mp\alien\_utility::can_hypno(eAttacker, false, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, eInflictor)) {
         iDamage = 20000;
-      else if(self.alien_type != "elite")
+      }
+      else if(self.alien_type != "elite") {
         iDamage = 500;
+      }
     }
     if(sWeapon == "iw6_alienminigun_mp" ||
       sWeapon == "iw6_alienminigun1_mp" ||
@@ -441,8 +500,9 @@ set_alien_damage_by_weapon_type(sMeansOfDeath, sWeapon, iDamage, eAttacker, iDFl
       iDamage = 55;
     }
 
-    if(sWeapon == "iw6_alienminigun4_mp")
+    if(sWeapon == "iw6_alienminigun4_mp") {
       iDamage = 75;
+    }
   }
 
   return iDamage;
@@ -469,8 +529,9 @@ update_damage_score(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
 }
 
 scale_alien_damage_by_weapon_type(eAttacker, iDamage, sMeansOfDeath, sWeapon, sHitLoc) {
-  if(isDefined(sHitLoc) && sHitLoc != "none")
+  if(isDefined(sHitLoc) && sHitLoc != "none") {
     iDamage = check_for_explosive_shotgun_damage(self, iDamage, eAttacker, sWeapon, sMeansOfDeath);
+  }
 
   if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_EXPLOSIVE_BULLET" && sHitLoc != "none") {
     if(getweaponclass(sWeapon) == "weapon_shotgun") {
@@ -497,8 +558,9 @@ scale_alien_damage_by_perks(eAttacker, iDamage, sMeansOfDeath, sWeapon) {
     }
   }
 
-  if(sMeansOfDeath == "MOD_EXPLOSIVE")
+  if(sMeansOfDeath == "MOD_EXPLOSIVE") {
     iDamage = Int(iDamage * eAttacker perk_GetExplosiveDamageScalar());
+  }
 
   if(sMeansOfDeath == "MOD_MELEE") {
     if(WeaponType(sWeapon) == "riotshield") {
@@ -513,8 +575,9 @@ scale_alien_damage_by_perks(eAttacker, iDamage, sMeansOfDeath, sWeapon) {
     }
   }
 
-  if(eAttacker maps\mp\alien\_persistence::is_upgrade_enabled("damage_booster_upgrade"))
+  if(eAttacker maps\mp\alien\_persistence::is_upgrade_enabled("damage_booster_upgrade")) {
     iDamage = Int(iDamage * DAMAGE_BOOSTER_UPGRADE_SCALAR);
+  }
 
   return iDamage;
 }
@@ -543,11 +606,13 @@ means_of_explosive_damage(sMeansOfDeath) {
 
 check_for_explosive_shotgun_damage(alien, iDamage, eAttacker, sWeapon, sMeansOfDeath) {
   MAX_DIST = 500;
-  if(!isDefined(alien) || !isReallyAlive(alien))
+  if(!isDefined(alien) || !isReallyAlive(alien)) {
     return iDamage;
+  }
 
-  if(!isDefined(eAttacker) || !isPlayer(eAttacker) || sMeansOfDeath != "MOD_EXPLOSIVE_BULLET")
+  if(!isDefined(eAttacker) || !isPlayer(eAttacker) || sMeansOfDeath != "MOD_EXPLOSIVE_BULLET") {
     return iDamage;
+  }
 
   if(getWeaponClass(sWeapon) == "weapon_shotgun") {
     dist = Distance(eAttacker.origin, alien.origin);
@@ -555,8 +620,9 @@ check_for_explosive_shotgun_damage(alien, iDamage, eAttacker, sWeapon, sMeansOfD
     max_dmg = iDamage * 8;
     scaled_damage = max_dmg * scale;
 
-    if(dist > MAX_DIST)
+    if(dist > MAX_DIST) {
       return (iDamage);
+    }
 
     return int(scaled_damage);
   }
@@ -576,8 +642,9 @@ typeSpecificDamageProcessing(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDe
 }
 
 isAlienNonMannedTurret(weapon) {
-  if(!isDefined(weapon))
+  if(!isDefined(weapon)) {
     return false;
+  }
 
   switch (weapon) {
     case "alien_ball_drone_gun_mp":
@@ -598,8 +665,9 @@ isAlienNonMannedTurret(weapon) {
 }
 
 isAlienTurret(weapon) {
-  if(!isDefined(weapon))
+  if(!isDefined(weapon)) {
     return false;
+  }
 
   switch (weapon) {
     case "alien_ball_drone_gun_mp":
@@ -636,8 +704,9 @@ isAlienTurret(weapon) {
 }
 
 isAlienTrapTurret(weapon) {
-  if(!isDefined(weapon))
+  if(!isDefined(weapon)) {
     return false;
+  }
 
   switch (weapon) {
     case "turret_minigun_alien":
@@ -661,11 +730,13 @@ armorMitigation(vPoint, vDir, sHitLoc) {
 }
 
 alienTypeCanDoFriendlyDamage(attacker, sWeapon) {
-  if(!isDefined(attacker.alien_type))
+  if(!isDefined(attacker.alien_type)) {
     return true;
+  }
 
-  if(isDefined(sWeapon) && sWeapon == "spider_beam_mp")
+  if(isDefined(sWeapon) && sWeapon == "spider_beam_mp") {
     return true;
+  }
 
   switch (attacker get_alien_type()) {
     case "minion":
@@ -694,8 +765,9 @@ riotshieldAmmoTracker() {
   if(self GetWeaponAmmoClip(riot_shield) <= 0) {
     front = true;
 
-    if(self.hasRiotShield && !self.hasRiotshieldequipped)
+    if(self.hasRiotShield && !self.hasRiotshieldequipped) {
       front = false;
+    }
 
     self TakeWeapon(riot_shield);
     self.hasRiotShield = false;
@@ -707,8 +779,9 @@ riotshieldAmmoTracker() {
 
       weapon_list = self GetWeaponsList("primary");
       Assert(weapon_list.size);
-      if(weapon_list.size > 0)
+      if(weapon_list.size > 0) {
         self SwitchToWeapon(weapon_list[0]);
+      }
     } else {
       self DetachShieldModel("weapon_riot_shield_iw6", "tag_shield_back");
       self IPrintLnBold(&"ALIENS_STOWED_RIOT_DESTROYED");
@@ -809,10 +882,12 @@ damage_alien_over_time(player, burn_time, total_damage, fire_ammo) {
       burn_time = CONST_BURN_TIME_DEFAULT;
     }
   } else {
-    if(!isDefined(total_damage))
+    if(!isDefined(total_damage)) {
       total_damage = CONST_BURN_DAMAGE_DEFAULT;
-    if(!isDefined(burn_time))
+    }
+    if(!isDefined(burn_time)) {
       burn_time = CONST_BURN_TIME_DEFAULT;
+    }
   }
 
   if(isDefined(player) && isDefined(fire_ammo) && player maps\mp\alien\_persistence::is_upgrade_enabled("incendiary_ammo_upgrade") && isDefined(fire_ammo)) {
@@ -828,24 +903,27 @@ damage_alien_over_time(player, burn_time, total_damage, fire_ammo) {
 
   for(i = 0; i < samples; i++) {
     wait(interval_wait);
-    if(IsAlive(self))
+    if(IsAlive(self)) {
       self DoDamage(interval_damage, self.origin, player, player, "MOD_UNKNOWN");
+    }
   }
 }
 
 setbodyArmor(optionalArmorValue) {
   self notify("give_light_armor");
 
-  if(isDefined(self.bodyArmorHP))
+  if(isDefined(self.bodyArmorHP)) {
     unsetbodyArmor();
+  }
 
   self thread removebodyArmorOnDeath();
   self thread removebodyArmorOnMatchEnd();
 
   self.bodyArmorHP = 150;
 
-  if(isDefined(optionalArmorValue))
+  if(isDefined(optionalArmorValue)) {
     self.bodyArmorHP = optionalArmorValue;
+  }
 }
 
 removebodyArmorOnDeath() {
@@ -910,15 +988,17 @@ applyAlienSnareInternal() {
 }
 
 scale_alien_damage_func(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
-  if(self get_alien_type() == "mammoth")
+  if(self get_alien_type() == "mammoth") {
     iDamage = self adjust_mammoth_damage(iDamage);
+  }
   weap_class = getWeaponClass(sWeapon);
   if(level.script == "mp_alien_dlc3" && weap_class != "weapon_pistol") {
     scalar = 1.25;
     if(isBulletDamage(sMeansOfDeath) && !isAlienTurret(sWeapon)) {
       if(isDefined(eAttacker) && isPlayer(eAttacker) && isDefined(sWeapon) && weapon_has_alien_attachment(sWeapon)) {
-        if(eAttacker maps\mp\alien\_perk_utility::has_perk("perk_bullet_damage", [0, 1, 2, 3, 4]))
+        if(eAttacker maps\mp\alien\_perk_utility::has_perk("perk_bullet_damage", [0, 1, 2, 3, 4])) {
           scalar = 1.15;
+        }
 
         adjusted_damage = int(iDamage * scalar);
         return adjusted_damage;
@@ -930,8 +1010,9 @@ scale_alien_damage_func(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, 
 }
 
 adjust_mammoth_damage(damage_amount) {
-  if(isDefined(self.burrowing) && self.burrowing)
+  if(isDefined(self.burrowing) && self.burrowing) {
     return 0;
+  }
 
   return damage_amount;
 }
@@ -943,12 +1024,14 @@ stun_zap_aliens(current_origin, enemy, iDamage, sMeansofDeath) {
   dist_sq = 62500;
 
   aliens = maps\mp\alien\_spawnlogic::get_alive_agents();
-  if(isDefined(level.seeder_active_turrets))
+  if(isDefined(level.seeder_active_turrets)) {
     aliens = array_combine(aliens, level.seeder_active_turrets);
+  }
   alien_array = [];
   foreach(alien in aliens) {
-    if(DistanceSquared(current_origin, alien.origin) < dist_sq)
+    if(DistanceSquared(current_origin, alien.origin) < dist_sq) {
       alien_array[alien_array.size] = alien;
+    }
   }
 
   if(alien_array.size < 1) {
@@ -967,8 +1050,9 @@ stun_zap_aliens(current_origin, enemy, iDamage, sMeansofDeath) {
 
   stun_ammo_level = self maps\mp\alien\_persistence::get_dpad_up_level();
 
-  if(isDefined(sMeansofDeath) && sMeansofDeath != "MOD_MELEE")
+  if(isDefined(sMeansofDeath) && sMeansofDeath != "MOD_MELEE") {
     max_bolts = max_bolts + stun_ammo_level;
+  }
   else {
     max_bolts = 4;
     iDamage = iDamage / 4;
@@ -999,17 +1083,20 @@ stun_bolt_death(player, iDamage, sMeansofDeath) {
 
   move_spot = undefined;
 
-  if(isDefined(self.alien_type) && self.alien_type == "seeder_spore")
+  if(isDefined(self.alien_type) && self.alien_type == "seeder_spore") {
     move_spot = self GetTagOrigin("J_Spore_46");
-  else if(isDefined(self) && isalive(self) && has_tag(self.model, "J_SpineUpper"))
+  }
+  else if(isDefined(self) && isalive(self) && has_tag(self.model, "J_SpineUpper")) {
     move_spot = self GetTagOrigin("J_SpineUpper");
+  }
 
   if(isDefined(move_spot)) {
     player.stun_struct.attack_bolt moveto(move_spot, .05);
     wait(.05);
 
-    if(isDefined(self) && sMeansofDeath == "MOD_MELEE")
+    if(isDefined(self) && sMeansofDeath == "MOD_MELEE") {
       self playSound("alien_fence_shock");
+    }
 
     wait(.05);
 
@@ -1017,10 +1104,12 @@ stun_bolt_death(player, iDamage, sMeansofDeath) {
 
     if(isDefined(self)) {
       guy_to_hurt = self;
-      if(isDefined(self.alien_type) && self.alien_type == "seeder_spore")
+      if(isDefined(self.alien_type) && self.alien_type == "seeder_spore") {
         guy_to_hurt = self.coll_model;
-      if(isDefined(guy_to_hurt))
+      }
+      if(isDefined(guy_to_hurt)) {
         guy_to_hurt doDamage(stun_bolt_damage, self.origin, player, player.stun_struct.attack_bolt, sMeansofDeath);
+      }
     }
   }
   stopFXOnTag(level._effect["stun_attack"], player.stun_struct.attack_bolt, "TAG_ORIGIN");

@@ -1088,8 +1088,9 @@ remove_chunk_rotate_grate(chunk) {
 }
 
 zombie_boardtear_audio_offset(chunk) {
-  if(isDefined(chunk.material) && !isDefined(chunk.already_broken))
+  if(isDefined(chunk.material) && !isDefined(chunk.already_broken)) {
     chunk.already_broken = false;
+  }
   if(isDefined(chunk.material) && chunk.material == "glass" && chunk.already_broken == false) {
     chunk playSound("zmb_break_glass_barrier");
     wait(randomfloat(0.3, 0.6));

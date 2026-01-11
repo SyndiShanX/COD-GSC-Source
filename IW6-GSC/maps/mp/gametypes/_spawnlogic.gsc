@@ -42,13 +42,15 @@ init() {
   level thread trackHostMigrationEnd();
 
   if(GetDvarInt("scr_frontlineSpawns", 0) == 1) {
-    if(level.gameType == "war" || level.gameType == "conf" || level.gameType == "cranked")
+    if(level.gameType == "war" || level.gameType == "conf" || level.gameType == "cranked") {
       level thread maps\mp\gametypes\_spawnfactor::spawnFrontLineThink();
+    }
   } else {
     anchorSpawnActive = Int(GetDvar("scr_anchorSpawns"));
 
-    if(level.gameType == "war" || level.gameType == "conf" || level.gameType == "cranked")
+    if(level.gameType == "war" || level.gameType == "conf" || level.gameType == "cranked") {
       level thread maps\mp\gametypes\_spawnfactor::correctHomogenization();
+    }
   }
 
   for(i = 0; i < level.teamNameList.size; i++) {
@@ -196,8 +198,9 @@ addSpawnPoints(team, spawnPointName, isSetOptional) {
   newSpawnPoints = [];
   newSpawnPoints = getSpawnpointArray(spawnPointName);
 
-  if(!isDefined(level.clientTraceSpawnClass))
+  if(!isDefined(level.clientTraceSpawnClass)) {
     level.clientTraceSpawnClass = spawnPointName;
+  }
 
   AssertEx((level.clientTraceSpawnClass == spawnPointName), "only one spawn point class allowed");
 
@@ -302,8 +305,9 @@ getSpawnpoint_Random(spawnPoints) {
 }
 
 getSpawnpoint_startspawn(spawnPoints) {
-  if(!isDefined(spawnPoints))
+  if(!isDefined(spawnPoints)) {
     return undefined;
+  }
 
   bestSpawn = undefined;
 
@@ -321,8 +325,9 @@ getSpawnpoint_startspawn(spawnPoints) {
     bestSpawn = spawnPoint;
   }
 
-  if(!isDefined(bestSpawn))
+  if(!isDefined(bestSpawn)) {
     bestSpawn = getSpawnpoint_Random(spawnPoints);
+  }
 
   bestSpawn.selected = true;
   return bestSpawn;
@@ -729,22 +734,28 @@ expandSpawnpointBounds(classname) {
 }
 
 expandMins(mins, point) {
-  if(mins[0] > point[0])
+  if(mins[0] > point[0]) {
     mins = (point[0], mins[1], mins[2]);
-  if(mins[1] > point[1])
+  }
+  if(mins[1] > point[1]) {
     mins = (mins[0], point[1], mins[2]);
-  if(mins[2] > point[2])
+  }
+  if(mins[2] > point[2]) {
     mins = (mins[0], mins[1], point[2]);
+  }
   return mins;
 }
 
 expandMaxs(maxs, point) {
-  if(maxs[0] < point[0])
+  if(maxs[0] < point[0]) {
     maxs = (point[0], maxs[1], maxs[2]);
-  if(maxs[1] < point[1])
+  }
+  if(maxs[1] < point[1]) {
     maxs = (maxs[0], point[1], maxs[2]);
-  if(maxs[2] < point[2])
+  }
+  if(maxs[2] < point[2]) {
     maxs = (maxs[0], maxs[1], point[2]);
+  }
   return maxs;
 }
 
@@ -800,14 +811,17 @@ spawningDebugHUD(spawnPoint) {
 }
 
 allowDebugHud() {
-  if(!level.debugSpawning)
+  if(!level.debugSpawning) {
     return false;
+  }
 
-  if(level.inGracePeriod)
+  if(level.inGracePeriod) {
     return false;
+  }
 
-  if(level.players.size == 1)
+  if(level.players.size == 1) {
     return false;
+  }
 
   switch (level.gametype) {
     case "war":

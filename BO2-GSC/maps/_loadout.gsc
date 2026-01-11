@@ -14,8 +14,9 @@ init_loadout() {
     level.player_loadout_slots = [];
   }
 
-  if(!isDefined(level.player_perks))
+  if(!isDefined(level.player_perks)) {
     level.player_perks = [];
+  }
 
   animscripts\assign_weapon::assign_weapon_init();
   init_models_and_variables_loadout();
@@ -34,8 +35,9 @@ init_melee_weapon() {
   if(level.script == "frontend") {
   } else if(level.script == "angola" || level.script == "angola_2")
     add_weapon("machete_sp");
-  else
+  else {
     add_weapon("knife_sp");
+  }
 }
 
 init_loadout_weapons() {
@@ -96,10 +98,12 @@ init_loadout_weapons() {
 
   println("GiveWeapon( " + specialgrenade + " ) -- secondary grenade");
 
-  if(primary != "weapon_null_sp")
+  if(primary != "weapon_null_sp") {
     set_switch_weapon(primary);
-  else if(secondary != "weapon_null_sp")
+  }
+  else if(secondary != "weapon_null_sp") {
     set_switch_weapon(secondary);
+  }
 
   precacheitem("frag_grenade_sp");
 }
@@ -234,8 +238,9 @@ do_additional_precaching(str_weapon_name) {
     precacheitem("titus_explosive_dart_sp");
   }
 
-  if(str_weapon_name == "crossbow_sp" || str_weapon_name == "crossbow80s_sp")
+  if(str_weapon_name == "crossbow_sp" || str_weapon_name == "crossbow80s_sp") {
     precacheitem("explosive_bolt_sp");
+  }
 }
 
 add_weapon(weapon_name, options, slot_instructions) {
@@ -246,13 +251,15 @@ add_weapon(weapon_name, options, slot_instructions) {
   do_additional_precaching(weapon_name);
   level.player_loadout[level.player_loadout.size] = weapon_name;
 
-  if(!isDefined(options))
+  if(!isDefined(options)) {
     options = -1;
+  }
 
   level.player_loadout_options[level.player_loadout_options.size] = options;
 
-  if(!isDefined(slot_instructions))
+  if(!isDefined(slot_instructions)) {
     slot_instructions = "";
+  }
 
   level.player_loadout_slots[level.player_loadout_slots.size] = slot_instructions;
 }
@@ -263,8 +270,9 @@ add_perk(perk_name) {
   }
   perk_specialties = strtok(perk_name, "|");
 
-  for(i = 0; i < perk_specialties.size; i++)
+  for(i = 0; i < perk_specialties.size; i++) {
     level.player_perks[level.player_perks.size] = perk_specialties[i];
+  }
 }
 
 set_secondary_offhand(weapon_name) {
@@ -288,15 +296,17 @@ set_action_slot(num, option1, option2) {
     }
   }
 
-  if(!isDefined(level.player_actionslots))
+  if(!isDefined(level.player_actionslots)) {
     level.player_actionslots = [];
+  }
 
   action_slot = spawnStruct();
   action_slot.num = num;
   action_slot.option1 = option1;
 
-  if(isDefined(option2))
+  if(isDefined(option2)) {
     action_slot.option2 = option2;
+  }
 
   level.player_actionslots[level.player_actionslots.size] = action_slot;
 }
@@ -326,17 +336,21 @@ set_laststand_pistol(weapon) {
 }
 
 give_loadout(wait_for_switch_weapon) {
-  if(!isDefined(game["gaveweapons"]))
+  if(!isDefined(game["gaveweapons"])) {
     game["gaveweapons"] = 0;
+  }
 
-  if(!isDefined(game["expectedlevel"]))
+  if(!isDefined(game["expectedlevel"])) {
     game["expectedlevel"] = "";
+  }
 
-  if(game["expectedlevel"] != level.script)
+  if(game["expectedlevel"] != level.script) {
     game["gaveweapons"] = 0;
+  }
 
-  if(game["gaveweapons"] == 0)
+  if(game["gaveweapons"] == 0) {
     game["gaveweapons"] = 1;
+  }
 
   gave_grenade = 0;
 
@@ -348,10 +362,12 @@ give_loadout(wait_for_switch_weapon) {
   }
 
   if(!gave_grenade) {
-    if(isDefined(level.player_grenade))
+    if(isDefined(level.player_grenade)) {
       grenade = level.player_grenade;
-    else
+    }
+    else {
       grenade = "frag_grenade_sp";
+    }
 
     self giveweapon(grenade);
     self setweaponammoclip(grenade, 0);
@@ -361,8 +377,9 @@ give_loadout(wait_for_switch_weapon) {
 
   bmaxammo = 0;
 
-  if(!array_check_for_dupes(level.player_perks, "specialty_extraammo"))
+  if(!array_check_for_dupes(level.player_perks, "specialty_extraammo")) {
     bmaxammo = 1;
+  }
 
   for(i = 0; i < level.player_loadout.size; i++) {
     if(isDefined(level.player_loadout_options[i]) && level.player_loadout_options[i] != -1) {
@@ -381,12 +398,14 @@ give_loadout(wait_for_switch_weapon) {
       }
     }
 
-    if(bmaxammo)
+    if(bmaxammo) {
       self givemaxammo(level.player_loadout[i]);
+    }
   }
 
-  for(i = 0; i < level.player_perks.size; i++)
+  for(i = 0; i < level.player_perks.size; i++) {
     self setperk(level.player_perks[i]);
+  }
 
   self setactionslot(1, "");
   self setactionslot(2, "");
@@ -409,8 +428,9 @@ give_loadout(wait_for_switch_weapon) {
   }
 
   if(isDefined(level.player_switchweapon)) {
-    if(isDefined(wait_for_switch_weapon) && wait_for_switch_weapon == 1)
+    if(isDefined(wait_for_switch_weapon) && wait_for_switch_weapon == 1) {
       wait 0.5;
+    }
 
     self setspawnweapon(level.player_switchweapon);
     self switchtoweapon(level.player_switchweapon);
@@ -426,6 +446,7 @@ give_model() {
   if(level.campaign == "none") {
   }
 
-  if(isDefined(level.player_viewmodel))
+  if(isDefined(level.player_viewmodel)) {
     self setviewmodel(level.player_viewmodel);
+  }
 }

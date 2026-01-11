@@ -64,16 +64,19 @@ init() {
     level.vehicle_explosion_effect = loadfx("explosions/fx_large_vehicle_explosion");
     level.veh_husk_models = [];
 
-    if(isDefined(level.use_new_veh_husks))
+    if(isDefined(level.use_new_veh_husks)) {
       level.veh_husk_models["t34_mp"] = "veh_t34_destroyed_mp";
+    }
 
-    if(isDefined(level.onaddvehiclehusks))
+    if(isDefined(level.onaddvehiclehusks)) {
       [[level.onaddvehiclehusks]]();
+    }
 
     keys = getarraykeys(level.veh_husk_models);
 
-    for(i = 0; i < keys.size; i++)
+    for(i = 0; i < keys.size; i++) {
       precachemodel(level.veh_husk_models[keys[i]]);
+    }
 
     precacherumble("tank_damage_light_mp");
     precacherumble("tank_damage_heavy_mp");
@@ -86,8 +89,9 @@ init() {
   chopper_door_closed_state = % v_huey_door_close_state;
   killbrushes = getEntArray("water_killbrush", "targetname");
 
-  foreach(brush in killbrushes)
+  foreach(brush in killbrushes) {
   brush thread water_killbrush_think();
+  }
 }
 
 water_killbrush_think() {
@@ -96,14 +100,17 @@ water_killbrush_think() {
 
     if(isDefined(entity)) {
       if(isDefined(entity.targetname)) {
-        if(entity.targetname == "rcbomb")
+        if(entity.targetname == "rcbomb") {
           entity maps\mp\killstreaks\_rcbomb::rcbomb_force_explode();
-        else if(entity.targetname == "talon" && !is_true(entity.dead))
+        }
+        else if(entity.targetname == "talon" && !is_true(entity.dead)) {
           entity notify("death");
+        }
       }
 
-      if(isDefined(entity.helitype) && entity.helitype == "qrdrone")
+      if(isDefined(entity.helitype) && entity.helitype == "qrdrone") {
         entity maps\mp\killstreaks\_qrdrone::qrdrone_force_destroy();
+      }
     }
   }
 }
@@ -166,8 +173,9 @@ get_vehicle_name(vehicle) {
   name = "";
 
   if(isDefined(vehicle)) {
-    if(isDefined(vehicle.vehicletype))
+    if(isDefined(vehicle.vehicletype)) {
       name = vehicle.vehicletype;
+    }
   }
 
   return name;
@@ -180,8 +188,9 @@ get_default_vehicle_name() {
 get_vehicle_name_key_for_damage_states(vehicle) {
   vehicle_name = get_vehicle_name(vehicle);
 
-  if(!isDefined(level.vehicles_damage_states[vehicle_name]))
+  if(!isDefined(level.vehicles_damage_states[vehicle_name])) {
     vehicle_name = get_default_vehicle_name();
+  }
 
   return vehicle_name;
 }
@@ -211,15 +220,18 @@ update_damage_effects(vehicle, attacker) {
     if(previous_damage_state_index != current_damage_state_index) {
       vehicle notify("damage_state_changed");
 
-      if(previous_damage_state_index < 0)
+      if(previous_damage_state_index < 0) {
         start_damage_state_index = 0;
-      else
+      }
+      else {
         start_damage_state_index = previous_damage_state_index + 1;
+      }
 
       play_damage_state_effects(vehicle, start_damage_state_index, current_damage_state_index);
 
-      if(vehicle.health <= 0)
+      if(vehicle.health <= 0) {
         vehicle kill_vehicle(attacker);
+      }
     }
   }
 }
@@ -239,20 +251,24 @@ play_vehicle_effects(effects, isdamagedtread) {
   self endon("delete");
   self endon("removed");
 
-  if(!isDefined(isdamagedtread) || isdamagedtread == 0)
+  if(!isDefined(isdamagedtread) || isdamagedtread == 0) {
     self endon("damage_state_changed");
+  }
 
-  if(isDefined(effects.sound_effect))
+  if(isDefined(effects.sound_effect)) {
     self playSound(effects.sound_effect);
+  }
 
   waittime = 0;
 
-  if(isDefined(effects.damage_effect_loop_time))
+  if(isDefined(effects.damage_effect_loop_time)) {
     waittime = effects.damage_effect_loop_time;
+  }
 
   while(waittime > 0) {
-    if(isDefined(effects.damage_effect))
+    if(isDefined(effects.damage_effect)) {
       playFXOnTag(effects.damage_effect, self, effects.vehicle_tag);
+    }
 
     wait(waittime);
   }
@@ -262,8 +278,9 @@ init_vehicle_entities() {
   vehicles = getEntArray("script_vehicle", "classname");
   array_thread(vehicles, ::init_original_vehicle);
 
-  if(isDefined(vehicles))
+  if(isDefined(vehicles)) {
     return vehicles.size;
+  }
 
   return 0;
 }
@@ -272,22 +289,25 @@ precache_vehicles() {
 }
 
 register_vehicle() {
-  if(!isDefined(level.vehicles_list))
+  if(!isDefined(level.vehicles_list)) {
     level.vehicles_list = [];
+  }
 
   level.vehicles_list[level.vehicles_list.size] = self;
 }
 
 manage_vehicles() {
-  if(!isDefined(level.vehicles_list))
+  if(!isDefined(level.vehicles_list)) {
     return true;
+  }
   else {
     max_vehicles = getmaxvehicles();
     newarray = [];
 
     for(i = 0; i < level.vehicles_list.size; i++) {
-      if(isDefined(level.vehicles_list[i]))
+      if(isDefined(level.vehicles_list[i])) {
         newarray[newarray.size] = level.vehicles_list[i];
+      }
     }
 
     level.vehicles_list = newarray;
@@ -323,8 +343,9 @@ manage_vehicles() {
 init_vehicle() {
   self register_vehicle();
 
-  if(isDefined(level.vehiclehealths) && isDefined(level.vehiclehealths[self.vehicletype]))
+  if(isDefined(level.vehiclehealths) && isDefined(level.vehiclehealths[self.vehicletype])) {
     self.maxhealth = level.vehiclehealths[self.vehicletype];
+  }
   else {
     self.maxhealth = getdvarint(#"scr_veh_health_tank");
 
@@ -381,8 +402,9 @@ vehicle_wait_damage_t() {
     occupants = self getvehoccupants();
 
     if(isDefined(occupants)) {
-      for(i = 0; i < occupants.size; i++)
+      for(i = 0; i < occupants.size; i++) {
         occupants[i] player_update_vehicle_hud(1, self);
+      }
     }
   }
 }
@@ -435,22 +457,26 @@ init_vehicle_threads() {
   self thread vehicle_wait_tread_damage();
   self thread vehicle_overturn_eject_occupants();
 
-  if(getdvarint(#"scr_veh_disableoverturndamage") == 0)
+  if(getdvarint(#"scr_veh_disableoverturndamage") == 0) {
     self thread vehicle_overturn_suicide();
+  }
 
   self thread cleanup_debug_print_t();
   self thread cleanup_debug_print_clearmsg_t();
 }
 
 build_template(type, model, typeoverride) {
-  if(isDefined(typeoverride))
+  if(isDefined(typeoverride)) {
     type = typeoverride;
+  }
 
-  if(!isDefined(level.vehicle_death_fx))
+  if(!isDefined(level.vehicle_death_fx)) {
     level.vehicle_death_fx = [];
+  }
 
-  if(!isDefined(level.vehicle_death_fx[type]))
+  if(!isDefined(level.vehicle_death_fx[type])) {
     level.vehicle_death_fx[type] = [];
+  }
 
   level.vehicle_compassicon[type] = 0;
   level.vehicle_team[type] = "axis";
@@ -462,8 +488,9 @@ build_template(type, model, typeoverride) {
 }
 
 build_rumble(rumble, scale, duration, radius, basetime, randomaditionaltime) {
-  if(!isDefined(level.vehicle_rumble))
+  if(!isDefined(level.vehicle_rumble)) {
     level.vehicle_rumble = [];
+  }
 
   struct = build_quake(scale, duration, radius, basetime, randomaditionaltime);
   assert(isDefined(rumble));
@@ -479,11 +506,13 @@ build_quake(scale, duration, radius, basetime, randomaditionaltime) {
   struct.duration = duration;
   struct.radius = radius;
 
-  if(isDefined(basetime))
+  if(isDefined(basetime)) {
     struct.basetime = basetime;
+  }
 
-  if(isDefined(randomaditionaltime))
+  if(isDefined(randomaditionaltime)) {
     struct.randomaditionaltime = randomaditionaltime;
+  }
 
   return struct;
 }
@@ -498,8 +527,9 @@ cleanup_debug_print_t() {
   self endon("delete");
 
   while(true) {
-    if(isDefined(self.debug_message) && getdvarint(#"scr_veh_cleanupdebugprint") != 0)
+    if(isDefined(self.debug_message) && getdvarint(#"scr_veh_cleanupdebugprint") != 0) {
       print3d(self.origin + vectorscale((0, 0, 1), 150.0), self.debug_message, (0, 1, 0), 1, 1, 1);
+    }
 
     wait 0.01;
   }
@@ -548,10 +578,12 @@ wait_until_severely_damaged() {
   while(true) {
     health_percentage = self.health / self.initial_state.health;
 
-    if(isDefined(level.k_severe_damage_health_percentage))
+    if(isDefined(level.k_severe_damage_health_percentage)) {
       self cleanup_debug_print("Damage Test: Still healthy - (" + health_percentage + " >= " + level.k_severe_damage_health_percentage + ") and working treads");
-    else
+    }
+    else {
       self cleanup_debug_print("Damage Test: Still healthy and working treads");
+    }
 
     self waittill("damage");
     health_percentage = self.health / self.initial_state.health;
@@ -567,10 +599,12 @@ get_random_cleanup_wait_time(state) {
   mintime = getdvarfloat(varnameprefix + "min");
   maxtime = getdvarfloat(varnameprefix + "max");
 
-  if(maxtime > mintime)
+  if(maxtime > mintime) {
     return randomfloatrange(mintime, maxtime);
-  else
+  }
+  else {
     return maxtime;
+  }
 }
 
 do_alive_cleanup_wait(test_name) {
@@ -586,17 +620,21 @@ do_alive_cleanup_wait(test_name) {
     treaddeaddamagefactor = getdvarfloat(#"scr_veh_cleanuptime_dmgfactor_deadtread");
     damagefraction = 0.0;
 
-    if(self is_vehicle())
+    if(self is_vehicle()) {
       damagefraction = (self.initial_state.health - self.health) / self.initial_state.health;
-    else
+    }
+    else {
       damagefraction = 1.0;
+    }
 
     damagefactor = 0.0;
 
-    if(damagefraction <= curve_begin)
+    if(damagefraction <= curve_begin) {
       damagefactor = factor_max;
-    else if(damagefraction >= curve_end)
+    }
+    else if(damagefraction >= curve_end) {
       damagefactor = factor_min;
+    }
     else {
       dydx = (factor_min - factor_max) / (curve_end - curve_begin);
       damagefactor = factor_max + (damagefraction - curve_begin) * dydx;
@@ -655,11 +693,13 @@ vehicle_wait_tread_damage() {
     self waittill("broken", brokennotify);
 
     if(brokennotify == "left_tread_destroyed") {
-      if(isDefined(level.vehicles_damage_treadfx[vehicle_name]) && isDefined(level.vehicles_damage_treadfx[vehicle_name][0]))
+      if(isDefined(level.vehicles_damage_treadfx[vehicle_name]) && isDefined(level.vehicles_damage_treadfx[vehicle_name][0])) {
         self thread play_vehicle_effects(level.vehicles_damage_treadfx[vehicle_name][0], 1);
+      }
     } else if(brokennotify == "right_tread_destroyed") {
-      if(isDefined(level.vehicles_damage_treadfx[vehicle_name]) && isDefined(level.vehicles_damage_treadfx[vehicle_name][1]))
+      if(isDefined(level.vehicles_damage_treadfx[vehicle_name]) && isDefined(level.vehicles_damage_treadfx[vehicle_name][1])) {
         self thread play_vehicle_effects(level.vehicles_damage_treadfx[vehicle_name][1], 1);
+      }
     }
   }
 }
@@ -674,10 +714,12 @@ wait_for_vehicle_to_stop_outside_min_radius() {
     speedmph = self getspeedmph();
     cutoffmph = getdvarfloat(#"scr_veh_cleanupmaxspeedmph");
 
-    if(speedmph > cutoffmph)
+    if(speedmph > cutoffmph) {
       cleanup_debug_print("(" + (maxwaittime - totalsecondswaited) + "s) Speed: " + speedmph + ">" + cutoffmph);
-    else
+    }
+    else {
       break;
+    }
 
     wait(iterationwaitseconds);
   }
@@ -715,13 +757,15 @@ vehicle_ghost_entering_occupants_t() {
     self waittill("enter_vehicle", player, seat);
     isdriver = seat == 0;
 
-    if(getdvarint(#"scr_veh_driversarehidden") != 0 && isdriver)
+    if(getdvarint(#"scr_veh_driversarehidden") != 0 && isdriver) {
       player ghost();
+    }
 
     occupants = self getvehoccupants();
 
-    if(occupants.size == 1)
+    if(occupants.size == 1) {
       self play_start_stop_sound("tank_startup_sfx");
+    }
 
     player thread player_change_seat_handler_t(self);
     player thread player_leave_vehicle_cleanup_t(self);
@@ -729,27 +773,31 @@ vehicle_ghost_entering_occupants_t() {
 }
 
 player_is_occupant_invulnerable(smeansofdeath) {
-  if(self isremotecontrolling())
+  if(self isremotecontrolling()) {
     return 0;
+  }
 
-  if(!isDefined(level.vehicle_drivers_are_invulnerable))
+  if(!isDefined(level.vehicle_drivers_are_invulnerable)) {
     level.vehicle_drivers_are_invulnerable = 0;
+  }
 
   invulnerable = level.vehicle_drivers_are_invulnerable && self player_is_driver();
   return invulnerable;
 }
 
 player_is_driver() {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return false;
+  }
 
   vehicle = self getvehicleoccupied();
 
   if(isDefined(vehicle)) {
     seat = vehicle getoccupantseat(self);
 
-    if(isDefined(seat) && seat == 0)
+    if(isDefined(seat) && seat == 0) {
       return true;
+    }
   }
 
   return false;
@@ -764,8 +812,9 @@ player_change_seat_handler_t(vehicle) {
     isdriver = newseat == 0;
 
     if(isdriver) {
-      if(getdvarint(#"scr_veh_driversarehidden") != 0)
+      if(getdvarint(#"scr_veh_driversarehidden") != 0) {
         self ghost();
+      }
     } else
       self show();
   }
@@ -776,8 +825,9 @@ player_leave_vehicle_cleanup_t(vehicle) {
   self waittill("exit_vehicle");
   currentweapon = self getcurrentweapon();
 
-  if(self.lastweapon != currentweapon && self.lastweapon != "none")
+  if(self.lastweapon != currentweapon && self.lastweapon != "none") {
     self switchtoweapon(self.lastweapon);
+  }
 
   self show();
 }
@@ -787,17 +837,21 @@ vehicle_is_tank() {
 }
 
 vehicle_record_initial_values() {
-  if(!isDefined(self.initial_state))
+  if(!isDefined(self.initial_state)) {
     self.initial_state = spawnStruct();
+  }
 
-  if(isDefined(self.origin))
+  if(isDefined(self.origin)) {
     self.initial_state.origin = self.origin;
+  }
 
-  if(isDefined(self.angles))
+  if(isDefined(self.angles)) {
     self.initial_state.angles = self.angles;
+  }
 
-  if(isDefined(self.health))
+  if(isDefined(self.health)) {
     self.initial_state.health = self.health;
+  }
 
   self initialize_vehicle_damage_state_data();
 }
@@ -810,8 +864,9 @@ vehicle_fireweapon_t() {
   for(;;) {
     self waittill("turret_fire", player);
 
-    if(isDefined(player) && isalive(player) && player isinvehicle())
+    if(isDefined(player) && isalive(player) && player isinvehicle()) {
       self fireweapon();
+    }
   }
 }
 
@@ -837,12 +892,14 @@ wait_for_vehicle_overturn() {
       up = anglestoup(self.angles);
       dot = vectordot(up, worldup);
 
-      if(dot <= 0.0)
+      if(dot <= 0.0) {
         overturned = 1;
+      }
     }
 
-    if(!overturned)
+    if(!overturned) {
       wait 1.0;
+    }
   }
 }
 
@@ -854,8 +911,9 @@ vehicle_overturn_eject_occupants() {
   for(;;) {
     self waittill("veh_ejectoccupants");
 
-    if(isDefined(level.onejectoccupants))
+    if(isDefined(level.onejectoccupants)) {
       [[level.onejectoccupants]]();
+    }
 
     wait 0.25;
   }
@@ -866,8 +924,9 @@ vehicle_eject_all_occupants() {
 
   if(isDefined(occupants)) {
     for(i = 0; i < occupants.size; i++) {
-      if(isDefined(occupants[i]))
+      if(isDefined(occupants[i])) {
         occupants[i] unlink();
+      }
     }
   }
 }
@@ -893,8 +952,9 @@ kill_vehicle(attacker) {
 }
 
 value_with_default(preferred_value, default_value) {
-  if(isDefined(preferred_value))
+  if(isDefined(preferred_value)) {
     return preferred_value;
+  }
 
   return default_value;
 }
@@ -938,18 +998,22 @@ vehicle_transmute(attacker) {
 
     husk _init_husk(vehicle_name, respawn_parameters);
 
-    if(getdvarint(#"scr_veh_respawnafterhuskcleanup") != 0)
+    if(getdvarint(#"scr_veh_respawnafterhuskcleanup") != 0) {
       respawn_vehicle_now = 0;
+    }
   }
 
-  if(!isDefined(self.is_husk))
+  if(!isDefined(self.is_husk)) {
     self remove_vehicle_from_world();
+  }
 
-  if(getdvarint(#"scr_veh_disablerespawn") != 0)
+  if(getdvarint(#"scr_veh_disablerespawn") != 0) {
     respawn_vehicle_now = 0;
+  }
 
-  if(respawn_vehicle_now)
+  if(respawn_vehicle_now) {
     respawn_vehicle(respawn_parameters);
+  }
 }
 
 respawn_vehicle(respawn_parameters) {
@@ -963,10 +1027,12 @@ respawn_vehicle(respawn_parameters) {
     iprintln("Vehicle can't respawn because MAX_VEHICLES has been reached and none of the vehicles could be cleaned up.");
 
   } else {
-    if(isDefined(respawn_parameters.destructibledef))
+    if(isDefined(respawn_parameters.destructibledef)) {
       vehicle = spawnvehicle(respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles, respawn_parameters.destructibledef);
-    else
+    }
+    else {
       vehicle = spawnvehicle(respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles);
+    }
 
     vehicle.vehicletype = respawn_parameters.vehicletype;
     vehicle.destructibledef = respawn_parameters.destructibledef;
@@ -1059,8 +1125,9 @@ vehicle_position_will_telefrag(position) {
   players_s = get_all_alive_players_s();
 
   for(i = 0; i < players_s.a.size; i++) {
-    if(players_s.a[i] player_vehicle_position_will_telefrag(position))
+    if(players_s.a[i] player_vehicle_position_will_telefrag(position)) {
       return true;
+    }
   }
 
   return false;
@@ -1074,8 +1141,9 @@ vehicle_telefrag_griefers_at_position(position) {
   for(i = 0; i < players_s.a.size; i++) {
     player = players_s.a[i];
 
-    if(player player_vehicle_position_will_telefrag(position))
+    if(player player_vehicle_position_will_telefrag(position)) {
       player dodamage(20000, player.origin + (0, 0, 1), attacker, inflictor, "none");
+    }
   }
 }
 
@@ -1090,8 +1158,9 @@ vehicle_recycle_spawner_t() {
   self endon("delete");
   self waittill("death", attacker);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self vehicle_transmute(attacker);
+  }
 }
 
 vehicle_play_explosion_sound() {
@@ -1113,8 +1182,9 @@ vehicle_damage_t() {
       vehicle = players[i] getvehicleoccupied();
 
       if(isDefined(vehicle) && self == vehicle && players[i] player_is_driver()) {
-        if(damage > 0)
+        if(damage > 0) {
           earthquake(damage / 400, 1.0, players[i].origin, 512, players[i]);
+        }
 
         if(damage > 100.0) {
           println("Playing heavy rumble.");
@@ -1133,8 +1203,9 @@ vehicle_damage_t() {
 
     update_damage_effects(self, attacker);
 
-    if(self.health <= 0)
+    if(self.health <= 0) {
       return;
+    }
   }
 }
 
@@ -1155,8 +1226,9 @@ swap_to_husk_model() {
   if(isDefined(self.vehicletype)) {
     husk_model = level.veh_husk_models[self.vehicletype];
 
-    if(isDefined(husk_model))
+    if(isDefined(husk_model)) {
       self setModel(husk_model);
+    }
   }
 }
 
@@ -1178,10 +1250,12 @@ _init_husk(vehicle_name, respawn_parameters) {
   initialvelocityz = randomfloatrange(vertvelocitymin, vertvelocitymax);
   initialvelocity = (initialvelocityx, initialvelocityy, initialvelocityz);
 
-  if(self is_vehicle())
+  if(self is_vehicle()) {
     self launchvehicle(initialvelocity, forcepoint);
-  else
+  }
+  else {
     self physicslaunch(forcepoint, initialvelocity);
+  }
 
   self thread husk_cleanup_t();
 
@@ -1202,16 +1276,18 @@ final_husk_cleanup_t(respawn_parameters) {
   self husk_do_cleanup();
 
   if(getdvarint(#"scr_veh_respawnafterhuskcleanup") != 0) {
-    if(getdvarint(#"scr_veh_disablerespawn") == 0)
+    if(getdvarint(#"scr_veh_disablerespawn") == 0) {
       respawn_vehicle(respawn_parameters);
+    }
   }
 }
 
 husk_do_cleanup() {
   self _spawn_explosion(self.origin);
 
-  if(self is_vehicle())
+  if(self is_vehicle()) {
     return self remove_vehicle_from_world();
+  }
   else {
     self _delete_entity();
     return 1;
@@ -1246,8 +1322,9 @@ vehicle_get_occupant_team() {
   if(occupants.size != 0) {
     occupant = occupants[0];
 
-    if(isplayer(occupant))
+    if(isplayer(occupant)) {
       return occupant.team;
+    }
   }
 
   return "free";
@@ -1261,10 +1338,12 @@ vehicledeathwaiter() {
   while(true) {
     self waittill("vehicle_death", vehicle_died);
 
-    if(vehicle_died)
+    if(vehicle_died) {
       self.diedonvehicle = 1;
-    else
+    }
+    else {
       self.diedonturret = 1;
+    }
   }
 }
 
@@ -1288,13 +1367,15 @@ vehicle_disconnect_paths() {
 
   while(isDefined(self)) {
     if(self getspeed() < 1) {
-      if(!isDefined(self.dontdisconnectpaths))
+      if(!isDefined(self.dontdisconnectpaths)) {
         self disconnectpaths();
+      }
 
       self notify("speed_zero_path_disconnect");
 
-      while(self getspeed() < 1)
+      while(self getspeed() < 1) {
         wait 0.05;
+      }
     }
 
     self connectpaths();
@@ -1307,8 +1388,9 @@ follow_path(node) {
   assert(isDefined(node), "vehicle_path() called without a path");
   self notify("newpath");
 
-  if(isDefined(node))
+  if(isDefined(node)) {
     self.attachedpath = node;
+  }
 
   pathstart = self.attachedpath;
   self.currentnode = self.attachedpath;

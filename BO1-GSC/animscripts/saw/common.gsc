@@ -7,25 +7,34 @@ main(turret) {
   self endon("killanimscript");
   assert(isDefined(turret));
   animscripts\utility::initialize("saw");
-  if(!isDefined(turret))
+  if(!isDefined(turret)) {
     return;
+  }
   self.a.special = "saw";
-  if(isDefined(turret.script_delay_min))
+  if(isDefined(turret.script_delay_min)) {
     turret_delay = turret.script_delay_min;
-  else
+  }
+  else {
     turret_delay = maps\_mgturret::burst_fire_settings("delay");
-  if(isDefined(turret.script_delay_max))
+  }
+  if(isDefined(turret.script_delay_max)) {
     turret_delay_range = turret.script_delay_max - turret_delay;
-  else
+  }
+  else {
     turret_delay_range = maps\_mgturret::burst_fire_settings("delay_range");
-  if(isDefined(turret.script_burst_min))
+  }
+  if(isDefined(turret.script_burst_min)) {
     turret_burst = turret.script_burst_min;
-  else
+  }
+  else {
     turret_burst = maps\_mgturret::burst_fire_settings("burst");
-  if(isDefined(turret.script_burst_max))
+  }
+  if(isDefined(turret.script_burst_max)) {
     turret_burst_range = turret.script_burst_max - turret_burst;
-  else
+  }
+  else {
     turret_burst_range = maps\_mgturret::burst_fire_settings("burst_range");
+  }
   pauseUntilTime = getTime();
   turretState = "start";
   self animscripts\shared::placeWeaponOn(self.weapon, "none");
@@ -74,8 +83,9 @@ fireController(turret) {
   for(;;) {
     while(isDefined(self.enemy)) {
       enemypos = self.enemy.origin;
-      if(isSentient(enemypos))
+      if(isSentient(enemypos)) {
         enemypos += (0, 0, 32);
+      }
       turretAimPos = turret getTagAngles("tag_aim");
       if(within_fov(turret.origin, turretAimPos, enemypos, fovdot) || distanceSquared(turret.origin, enemyPos) < 200 * 200) {
         if(!turret.doFiring) {
@@ -97,8 +107,9 @@ fireController(turret) {
 }
 
 turretTimer(duration, turret) {
-  if(duration <= 0)
+  if(duration <= 0) {
     return;
+  }
   self endon("killanimscript");
   turret endon("turretstatechange");
   wait(duration);
@@ -108,8 +119,9 @@ turretTimer(duration, turret) {
 stopUsingTurretWhenNodeLost() {
   self endon("killanimscript");
   while(1) {
-    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64)
+    if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64) {
       self stopUseTurret();
+    }
     wait .25;
   }
 }

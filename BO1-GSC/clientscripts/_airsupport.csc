@@ -37,10 +37,12 @@ plane_position_updater(fake_ent, plane, flybySound, flybySoundLoop, lengthOfFlyb
         time = dist / length(velocity);
         assert(isDefined(time));
         if(time < lengthOfFlyby) {
-          if(isDefined(flybysoundloop))
+          if(isDefined(flybysoundloop)) {
             soundid = playLoopSound(0, fake_ent, flybySoundLoop, 0);
-          if(isDefined(flybySound))
+          }
+          if(isDefined(flybySound)) {
             plane playSound(0, flybySound);
+          }
           startTime = getRealTime();
         }
       }
@@ -109,17 +111,20 @@ planeTurnLeft(plane, yaw, halflife) {
   oy = getDvarFloatDefault(#"scr_planeoy", 30000.0);
   maxoX = getDvarFloatDefault(#"scr_maxo_planex", -1.0);
   maxoY = getDvarFloatDefault(#"scr_maxo_planey", -1.0);
-  if(plane.angles[1] == 360)
+  if(plane.angles[1] == 360) {
     plane.angles = (plane.angles[0], 0, plane.angles[2]);
+  }
   origX = plane.origin[0];
   origY = plane.origin[1];
   accumTurn = 0;
   looptime = 0.1;
   while(loopTime <= halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
-    if(minRoll != -1 && plane.angles[2] <= minRoll)
+    }
+    if(minRoll != -1 && plane.angles[2] <= minRoll) {
       rollZ = 0.0;
+    }
     accumTurn += yawY;
     if(accumTurn >= maxYaw) {
       yawY = 0.0;
@@ -147,10 +152,12 @@ planeTurnLeft(plane, yaw, halflife) {
   maxy = getDvarFloatDefault(#"scr_max_planey2", 90);
   accumTurn = 0;
   while(loopTime < halflife + halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
-    if(minRoll != -1 && plane.angles[2] >= 0)
+    }
+    if(minRoll != -1 && plane.angles[2] >= 0) {
       rollZ = 0.0;
+    }
     accumTurn += yawY;
     if(accumTurn >= maxYaw) {
       yawY = 0.0;
@@ -179,17 +186,20 @@ planeTurnRight(plane, yaw, halflife) {
   oy = getDvarFloatDefault(#"scr_planeoy", -30000.0);
   maxoX = getDvarFloatDefault(#"scr_maxo_planex", -1.0);
   maxoY = getDvarFloatDefault(#"scr_maxo_planey", -1.0);
-  if(plane.angles[1] == 360)
+  if(plane.angles[1] == 360) {
     plane.angles = (plane.angles[0], 0, plane.angles[2]);
+  }
   origX = plane.origin[0];
   origY = plane.origin[1];
   accumTurn = 0;
   looptime = 0.1;
   while(loopTime <= halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
-    if(minRoll != -1 && plane.angles[2] >= minRoll)
+    }
+    if(minRoll != -1 && plane.angles[2] >= minRoll) {
       rollZ = 0.0;
+    }
     accumTurn += yawY;
     if(accumTurn <= maxYaw) {
       yawY = 0.0;
@@ -218,10 +228,12 @@ planeTurnRight(plane, yaw, halflife) {
   maxy = getDvarFloatDefault(#"scr_max_planey2", 90);
   accumTurn = 0;
   while(loopTime < halflife + halflife) {
-    if(plane.angles[1] == 360)
+    if(plane.angles[1] == 360) {
       plane.angles = (plane.angles[0], 0, plane.angles[2]);
-    if(minRoll != -1 && plane.angles[2] >= 0)
+    }
+    if(minRoll != -1 && plane.angles[2] >= 0) {
       rollZ = 0.0;
+    }
     accumTurn += yawY;
     if(accumTurn >= maxYaw) {
       yawY = 0.0;

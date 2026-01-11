@@ -38,8 +38,9 @@ main() {
   self thread deathnotify();
   self.baseaccuracy = self.accuracy;
 
-  if(!isDefined(self.script_accuracy))
+  if(!isDefined(self.script_accuracy)) {
     self.script_accuracy = 1;
+  }
 
   self.a.misstime = 0;
   self.a.yawtransition = "none";
@@ -56,8 +57,9 @@ main() {
   self.a.crouchpain = 0;
   self.a.nextstandinghitdying = 0;
 
-  if(!isDefined(self.script_forcegrenade))
+  if(!isDefined(self.script_forcegrenade)) {
     self.script_forcegrenade = 0;
+  }
 
   self.a.lastdebugprint = "";
 
@@ -96,14 +98,17 @@ firstinit() {
   anim.notfirsttime = 1;
   anim.usefacialanims = 0;
 
-  if(!isDefined(anim.dog_health))
+  if(!isDefined(anim.dog_health)) {
     anim.dog_health = 1;
+  }
 
-  if(!isDefined(anim.dog_presstime))
+  if(!isDefined(anim.dog_presstime)) {
     anim.dog_presstime = 350;
+  }
 
-  if(!isDefined(anim.dog_hits_before_kill))
+  if(!isDefined(anim.dog_hits_before_kill)) {
     anim.dog_hits_before_kill = 1;
+  }
 
   level.nextgrenadedrop = randomint(3);
   level.lastplayersighted = 100;

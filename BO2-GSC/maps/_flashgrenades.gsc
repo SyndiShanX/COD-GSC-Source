@@ -33,10 +33,12 @@ monitorflash() {
     if(!isalive(self)) {
       continue;
     }
-    if(amount_angle < 0.5)
+    if(amount_angle < 0.5) {
       amount_angle = 0.5;
-    else if(amount_angle > 0.8)
+    }
+    else if(amount_angle > 0.8) {
       amount_angle = 1;
+    }
 
     duration = amount_distance * amount_angle * 6;
 
@@ -45,21 +47,25 @@ monitorflash() {
     }
     rumbleduration = undefined;
 
-    if(duration > 2)
+    if(duration > 2) {
       rumbleduration = 0.75;
-    else
+    }
+    else {
       rumbleduration = 0.25;
+    }
 
     self thread applyflash(duration, rumbleduration);
   }
 }
 
 applyflash(duration, rumbleduration) {
-  if(!isDefined(self.flashduration) || duration > self.flashduration)
+  if(!isDefined(self.flashduration) || duration > self.flashduration) {
     self.flashduration = duration;
+  }
 
-  if(!isDefined(self.flashrumbleduration) || rumbleduration > self.flashrumbleduration)
+  if(!isDefined(self.flashrumbleduration) || rumbleduration > self.flashrumbleduration) {
     self.flashrumbleduration = rumbleduration;
+  }
 
   wait 0.05;
 
@@ -68,8 +74,9 @@ applyflash(duration, rumbleduration) {
     self.flashendtime = gettime() + self.flashduration * 1000;
   }
 
-  if(isDefined(self.flashrumbleduration))
+  if(isDefined(self.flashrumbleduration)) {
     self thread flashrumbleloop(self.flashrumbleduration);
+  }
 
   self.flashduration = undefined;
   self.flashrumbleduration = undefined;

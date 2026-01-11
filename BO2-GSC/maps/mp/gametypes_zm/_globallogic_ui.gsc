@@ -26,13 +26,16 @@ init() {
   precachestring(&"gun_level_complete");
   precachestring(&"challenge_complete");
 
-  if(sessionmodeiszombiesgame())
+  if(sessionmodeiszombiesgame()) {
     precachestring(&"hud_update_survival_team");
+  }
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     precachestring(&"MP_ENDED_GAME");
-  else
+  }
+  else {
     precachestring(&"MP_HOST_ENDED_GAME");
+  }
 }
 
 setupcallbacks() {
@@ -77,42 +80,53 @@ freegameplayhudelems() {
     }
   }
 
-  if(isDefined(self.perkhudelem))
+  if(isDefined(self.perkhudelem)) {
     self.perkhudelem destroyelem();
+  }
 
   if(isDefined(self.killstreakicon)) {
-    if(isDefined(self.killstreakicon[0]))
+    if(isDefined(self.killstreakicon[0])) {
       self.killstreakicon[0] destroyelem();
+    }
 
-    if(isDefined(self.killstreakicon[1]))
+    if(isDefined(self.killstreakicon[1])) {
       self.killstreakicon[1] destroyelem();
+    }
 
-    if(isDefined(self.killstreakicon[2]))
+    if(isDefined(self.killstreakicon[2])) {
       self.killstreakicon[2] destroyelem();
+    }
 
-    if(isDefined(self.killstreakicon[3]))
+    if(isDefined(self.killstreakicon[3])) {
       self.killstreakicon[3] destroyelem();
+    }
 
-    if(isDefined(self.killstreakicon[4]))
+    if(isDefined(self.killstreakicon[4])) {
       self.killstreakicon[4] destroyelem();
+    }
   }
 
   self notify("perks_hidden");
 
-  if(isDefined(self.lowermessage))
+  if(isDefined(self.lowermessage)) {
     self.lowermessage destroyelem();
+  }
 
-  if(isDefined(self.lowertimer))
+  if(isDefined(self.lowertimer)) {
     self.lowertimer destroyelem();
+  }
 
-  if(isDefined(self.proxbar))
+  if(isDefined(self.proxbar)) {
     self.proxbar destroyelem();
+  }
 
-  if(isDefined(self.proxbartext))
+  if(isDefined(self.proxbartext)) {
     self.proxbartext destroyelem();
+  }
 
-  if(isDefined(self.carryicon))
+  if(isDefined(self.carryicon)) {
     self.carryicon destroyelem();
+  }
 }
 
 teamplayercountsequal(playercounts) {
@@ -124,8 +138,9 @@ teamplayercountsequal(playercounts) {
       continue;
     }
 
-    if(count != playercounts[team])
+    if(count != playercounts[team]) {
       return false;
+    }
   }
 
   return true;
@@ -150,12 +165,14 @@ menuautoassign(comingfrommenu) {
   assignment = teamkeys[randomint(teamkeys.size)];
   self closemenus();
 
-  if(isDefined(level.forceallallies) && level.forceallallies)
+  if(isDefined(level.forceallallies) && level.forceallallies) {
     assignment = "allies";
+  }
   else if(level.teambased) {
     if(getdvarint(#"party_autoteams") == 1) {
-      if(level.allow_teamchange == "1" && (self.hasspawned || comingfrommenu))
+      if(level.allow_teamchange == "1" && (self.hasspawned || comingfrommenu)) {
         assignment = "";
+      }
       else {
         team = getassignedteam(self);
 
@@ -177,8 +194,9 @@ menuautoassign(comingfrommenu) {
           default:
             assignment = "";
 
-            if(isDefined(level.teams[team]))
+            if(isDefined(level.teams[team])) {
               assignment = team;
+            }
             else if(team == "spectator" && !level.forceautoassign) {
               self setclientscriptmainmenu(game["menu_class"]);
               return;
@@ -188,8 +206,9 @@ menuautoassign(comingfrommenu) {
     }
 
     if(assignment == "" || getdvarint(#"party_autoteams") == 0) {
-      if(sessionmodeiszombiesgame())
+      if(sessionmodeiszombiesgame()) {
         assignment = "allies";
+      }
     }
 
     if(assignment == self.pers["team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
@@ -200,8 +219,9 @@ menuautoassign(comingfrommenu) {
     if(level.allow_teamchange != "1" || !self.hasspawned && !comingfrommenu) {
       team = getassignedteam(self);
 
-      if(isDefined(level.teams[team]))
+      if(isDefined(level.teams[team])) {
         assignment = team;
+      }
       else if(team == "spectator" && !level.forceautoassign) {
         self setclientscriptmainmenu(game["menu_class"]);
         return;
@@ -224,15 +244,17 @@ menuautoassign(comingfrommenu) {
   self.pers["savedmodel"] = undefined;
   self updateobjectivetext();
 
-  if(level.teambased)
+  if(level.teambased) {
     self.sessionteam = assignment;
+  }
   else {
     self.sessionteam = "none";
     self.ffateam = assignment;
   }
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     self.statusicon = "hud_status_dead";
+  }
 
   self notify("joined_team");
   level notify("joined_team");
@@ -250,8 +272,9 @@ teamscoresequal() {
       continue;
     }
 
-    if(score != getteamscore(team))
+    if(score != getteamscore(team)) {
       return false;
+    }
   }
 
   return true;
@@ -262,8 +285,9 @@ teamwithlowestscore() {
   lowest_team = undefined;
 
   foreach(team in level.teams) {
-    if(score > getteamscore(team))
+    if(score > getteamscore(team)) {
       lowest_team = team;
+    }
   }
 
   return lowest_team;
@@ -272,10 +296,12 @@ teamwithlowestscore() {
 pickteamfromscores(teams) {
   assignment = "allies";
 
-  if(teamscoresequal())
+  if(teamscoresequal()) {
     assignment = teams[randomint(teams.size)];
-  else
+  }
+  else {
     assignment = teamwithlowestscore();
+  }
 
   return assignment;
 }
@@ -293,8 +319,9 @@ getsplitscreenteam() {
     }
     team = level.players[index].sessionteam;
 
-    if(team != "spectator")
+    if(team != "spectator") {
       return team;
+    }
   }
 
   return "";
@@ -306,10 +333,12 @@ updateobjectivetext() {
     return;
   }
 
-  if(level.scorelimit > 0)
+  if(level.scorelimit > 0) {
     self setclientcgobjectivetext(getobjectivescoretext(self.pers["team"]));
-  else
+  }
+  else {
     self setclientcgobjectivetext(getobjectivetext(self.pers["team"]));
+  }
 }
 
 closemenus() {
@@ -325,30 +354,36 @@ beginclasschoice(forcenewchoice) {
     self.pers["class"] = level.defaultclass;
     self.class = level.defaultclass;
 
-    if(self.sessionstate != "playing" && game["state"] == "playing")
+    if(self.sessionstate != "playing" && game["state"] == "playing") {
       self thread[[level.spawnclient]]();
+    }
 
     level thread maps\mp\gametypes_zm\_globallogic::updateteamstatus();
     self thread maps\mp\gametypes_zm\_spectating::setspectatepermissionsformachine();
     return;
   }
 
-  if(level.wagermatch)
+  if(level.wagermatch) {
     self openmenu(game["menu_changeclass_wager"]);
-  else if(getdvarint(#"barebones_class_mode"))
+  }
+  else if(getdvarint(#"barebones_class_mode")) {
     self openmenu(game["menu_changeclass_barebones"]);
-  else
+  }
+  else {
     self openmenu(game["menu_changeclass_" + team]);
+  }
 }
 
 showmainmenuforteam() {
   assert(isDefined(level.teams[self.pers["team"]]));
   team = self.pers["team"];
 
-  if(level.wagermatch)
+  if(level.wagermatch) {
     self openmenu(game["menu_changeclass_wager"]);
-  else
+  }
+  else {
     self openmenu(game["menu_changeclass_" + team]);
+  }
 }
 
 menuteam(team) {
@@ -358,8 +393,9 @@ menuteam(team) {
     return;
   }
   if(self.pers["team"] != team) {
-    if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat))
+    if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat)) {
       self.hasspawned = 0;
+    }
 
     if(self.sessionstate == "playing") {
       self.switching_teams = 1;
@@ -376,8 +412,9 @@ menuteam(team) {
     self.pers["savedmodel"] = undefined;
     self updateobjectivetext();
 
-    if(level.teambased)
+    if(level.teambased) {
       self.sessionteam = team;
+    }
     else {
       self.sessionteam = "none";
       self.ffateam = team;
@@ -412,8 +449,9 @@ menuspectator() {
     self updateobjectivetext();
     self.sessionteam = "spectator";
 
-    if(!level.teambased)
+    if(!level.teambased) {
       self.ffateam = "spectator";
+    }
 
     [[level.spawnspectator]]();
     self thread maps\mp\gametypes_zm\_globallogic_player::spectate_player_watcher();

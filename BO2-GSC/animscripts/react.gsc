@@ -26,11 +26,13 @@ main() {
   }
   reactanim = getreactanim();
 
-  if(getdvarint(#"_id_817739B8") == 1)
+  if(getdvarint(#"_id_817739B8") == 1) {
     record3dtext("going to react", self.origin + vectorscale((0, 0, 1), 70.0), (1, 1, 1), "Animscript");
+  }
 
-  if(isDefined(reactanim))
+  if(isDefined(reactanim)) {
     playreactanim(reactanim);
+  }
 }
 
 reactglobalsinit() {
@@ -93,42 +95,53 @@ shouldreact() {
 
   self thread draweventpointanddir(self.reactorigin, undefined, (1, 0, 0));
 
-  if(getdvarint(#"_id_3B5BF640"))
+  if(getdvarint(#"_id_3B5BF640")) {
     return true;
-
-  if(self.a.disablereact)
-    return false;
-
-  if(weaponisgasweapon(self.weapon))
-    return false;
-
-  if(self.a.pose == "prone")
-    return false;
-
-  if(isDefined(self.covernode))
-    return false;
-
-  if(self.ignoreall && !isDefined(self.specialreact))
-    return false;
-
-  if(isDefined(self.attacker) && self.attacker isvehicle())
-    return false;
-
-  if(self.a.script == "move" && self.lookaheaddist < 250)
-    return false;
-
-  if(isDefined(self.a.runonlyreact) && self.a.runonlyreact) {
-    if(self.a.script != "move")
-      return false;
   }
 
-  if(self animscripts\run::shouldtacticalwalk())
+  if(self.a.disablereact) {
     return false;
+  }
+
+  if(weaponisgasweapon(self.weapon)) {
+    return false;
+  }
+
+  if(self.a.pose == "prone") {
+    return false;
+  }
+
+  if(isDefined(self.covernode)) {
+    return false;
+  }
+
+  if(self.ignoreall && !isDefined(self.specialreact)) {
+    return false;
+  }
+
+  if(isDefined(self.attacker) && self.attacker isvehicle()) {
+    return false;
+  }
+
+  if(self.a.script == "move" && self.lookaheaddist < 250) {
+    return false;
+  }
+
+  if(isDefined(self.a.runonlyreact) && self.a.runonlyreact) {
+    if(self.a.script != "move") {
+      return false;
+    }
+  }
+
+  if(self animscripts\run::shouldtacticalwalk()) {
+    return false;
+  }
 
   reactanim = getreactanim();
 
-  if(!isDefined(reactanim))
+  if(!isDefined(reactanim)) {
     return false;
+  }
 
   if(self.team == "allies" && isDefined(self.attacker) && isplayer(self.attacker)) {
     dist = distancesquared(self.attacker.origin, self.origin);
@@ -139,8 +152,9 @@ shouldreact() {
         dirtoreactorigin = vectornormalize(self.reactorigin - self.origin);
         isreactoriginfront = vectordot(dirtoreactorigin, forwardvec) >= 0;
 
-        if(isreactoriginfront && sighttracepassed(self getEye(), self.reactorigin, 0, undefined))
+        if(isreactoriginfront && sighttracepassed(self getEye(), self.reactorigin, 0, undefined)) {
           return true;
+        }
       }
     }
   }
@@ -149,8 +163,9 @@ shouldreact() {
     dist = distancesquared(self.attacker.origin, self.origin);
 
     if(dist < anim.reactiondistancesquaredmax && dist > anim.reactiondistancesquaredmin) {
-      if(sighttracepassed(self getEye(), self.reactorigin, 0, undefined))
+      if(sighttracepassed(self getEye(), self.reactorigin, 0, undefined)) {
         return true;
+      }
     }
   }
 
@@ -168,8 +183,9 @@ getreactanim() {
   if(self.a.pose == "stand" && self.a.movement == "run" && self getmotionangle() < 60 && self getmotionangle() > -60) {
     reactanim = getrunningforwardreactanim(location, friendlyreaction);
 
-    if(isDefined(reactanim))
+    if(isDefined(reactanim)) {
       return reactanim;
+    }
   }
 
   return reactanim;
@@ -187,24 +203,31 @@ getrunningforwardreactanim(location, friendlyreaction) {
   reactarray = [];
   type = "run";
 
-  if(self.sprint)
+  if(self.sprint) {
     type = "sprint";
+  }
 
-  if(is_true(friendlyreaction))
+  if(is_true(friendlyreaction)) {
     reactarray[reactarray.size] = animarray(type + "_lower_torso_stop", "react");
-  else if(issubstr(location, "upper") || issubstr(location, "head"))
+  }
+  else if(issubstr(location, "upper") || issubstr(location, "head")) {
     reactarray[reactarray.size] = animarray(type + "_head", "react");
-  else if(cointoss())
+  }
+  else if(cointoss()) {
     reactarray[reactarray.size] = animarray(type + "_lower_torso_fast", "react");
-  else
+  }
+  else {
     reactarray[reactarray.size] = animarray(type + "_lower_torso_stop", "react");
+  }
 
   reactarray = removeblockedanims(reactarray);
 
-  if(reactarray.size > 0)
+  if(reactarray.size > 0) {
     return reactarray[randomint(reactarray.size)];
-  else
+  }
+  else {
     return undefined;
+  }
 }
 
 geteventlocationinfo() {
@@ -221,12 +244,15 @@ calculatelocationinfo(point) {
   tag_main_root_dist = distancefromtagorigin(pos);
   point_dist = distancefromtagorigin((self.origin[0], self.origin[1], point[2]));
 
-  if(point_dist < tag_main_root_dist)
+  if(point_dist < tag_main_root_dist) {
     location = direction + "_lower_torso";
-  else if(point_dist < tag_neck_dist)
+  }
+  else if(point_dist < tag_neck_dist) {
     location = direction + "_upper_torso";
-  else
+  }
+  else {
     location = direction + "_head";
+  }
 
   return location;
 }
@@ -236,10 +262,12 @@ getpointdirection(point) {
   forwarddir = anglestoright(self.angles);
   dotproduct = vectordot(forwarddir, closestpointdir);
 
-  if(dotproduct > 0)
+  if(dotproduct > 0) {
     side = "right";
-  else
+  }
+  else {
     side = "left";
+  }
 
   return side;
 }
@@ -255,8 +283,9 @@ removeblockedanims(array) {
     localdeltavector = getmovedelta(array[index], 0, 1);
     endpoint = self localtoworldcoords(localdeltavector);
 
-    if(self maymovetopoint(endpoint))
+    if(self maymovetopoint(endpoint)) {
       newarray[newarray.size] = array[index];
+    }
   }
 
   return newarray;
@@ -271,8 +300,9 @@ doreactnotetracks(flagname) {
 }
 
 canreacttonewenemyagain() {
-  if(!isDefined(self.a.newenemyreacttime))
+  if(!isDefined(self.a.newenemyreacttime)) {
     return true;
+  }
 
   return !self.a.newenemyreacttime || gettime() - self.a.newenemyreacttime > 2000;
 }
@@ -283,8 +313,9 @@ newenemyreactionanim() {
   self.a.newenemyreacttime = gettime();
   reactanim = self getnewenemyreactionanim();
 
-  if(!isDefined(reactanim))
+  if(!isDefined(reactanim)) {
     return false;
+  }
 
   self clearanim( % root, 0.2);
   self setflaggedanimknobrestart("reactanim", reactanim, 1, 0.2, 1);
@@ -297,8 +328,9 @@ getnewenemyreactionanim() {
   reactanim = undefined;
 
   if(self nearclaimnodeandangle()) {
-    if(!animarrayanyexist(self.a.prevscript + "_ne"))
+    if(!animarrayanyexist(self.a.prevscript + "_ne")) {
       return reactanim;
+    }
 
     nodeforward = anglesToForward(self.node.angles);
     dirtoreactiontarget = vectornormalize(self.newenemyreactionpos - self.origin);
@@ -312,10 +344,12 @@ getnewenemyreactionanim() {
   if(!isDefined(reactanim)) {
     reactanimarray = animarray("combat_ne");
 
-    if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.newenemyreactionpos) < 65536)
+    if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.newenemyreactionpos) < 65536) {
       self orientmode("face enemy");
-    else
+    }
+    else {
       self orientmode("face point", self.newenemyreactionpos);
+    }
 
     if(self.a.pose == "crouch") {
       dirtoreactiontarget = vectornormalize(self.newenemyreactionpos - self.origin);
@@ -336,25 +370,31 @@ getnewenemyreactionanim() {
 newenemysurprisedreaction() {
   self endon("death");
 
-  if(isDefined(self.a.disablereact) && self.a.disablereact)
+  if(isDefined(self.a.disablereact) && self.a.disablereact) {
     return 0;
+  }
 
-  if(self weaponanims() == "pistol")
+  if(self weaponanims() == "pistol") {
     return 0;
+  }
 
-  if(!self.newenemyreaction)
+  if(!self.newenemyreaction) {
     return 0;
+  }
 
-  if(!canreacttonewenemyagain())
+  if(!canreacttonewenemyagain()) {
     return 0;
+  }
 
-  if(self.a.pose == "prone" || self.a.pose == "back")
+  if(self.a.pose == "prone" || self.a.pose == "back") {
     return 0;
+  }
 
   self animmode("gravity");
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     return newenemyreactionanim();
+  }
 }
 
 draweventpointanddir(position, location, color) {
@@ -364,8 +404,9 @@ draweventpointanddir(position, location, color) {
   if(!getdvarint(#"_id_817739B8")) {
     return;
   }
-  if(isDefined(location))
+  if(isDefined(location)) {
     recordenttext("Location - " + location, self, level.color_debug["white"], "Animscript");
+  }
 
   while(true) {
     drawdebugcross(position, 1, color, 0.05);

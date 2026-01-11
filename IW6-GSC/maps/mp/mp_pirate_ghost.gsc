@@ -40,8 +40,9 @@ setupCallbacks() {
 }
 
 customCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
@@ -192,20 +193,24 @@ spawn_agent_ghost(optional_spawnOrigin, optional_spawnAngles, optional_owner, us
 
   self maps\mp\bots\_bots_util::bot_set_personality("cqb");
 
-  if(isDefined(difficulty))
+  if(isDefined(difficulty)) {
     self maps\mp\bots\_bots_util::bot_set_difficulty(difficulty);
+  }
 
   self maps\mp\agents\_agents::initPlayerClass();
 
   self maps\mp\agents\_agent_common::set_agent_health(200);
-  if(isDefined(respawn_on_death) && respawn_on_death)
+  if(isDefined(respawn_on_death) && respawn_on_death) {
     self.respawn_on_death = true;
+  }
 
-  if(isDefined(optional_owner))
+  if(isDefined(optional_owner)) {
     self set_agent_team(optional_owner.team, optional_owner);
+  }
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self thread maps\mp\agents\_agents::destroyOnOwnerDisconnect(self.owner);
+  }
 
   self thread maps\mp\_flashgrenades::monitorFlash();
 
@@ -223,8 +228,9 @@ spawn_agent_ghost(optional_spawnOrigin, optional_spawnAngles, optional_owner, us
   self thread maps\mp\bots\_bots_strategy::bot_think_tactical_goals();
   self thread[[self agentFunc("think")]]();
 
-  if(!self.hasDied)
+  if(!self.hasDied) {
     self maps\mp\gametypes\_spawnlogic::addToParticipantsArray();
+  }
 
   self.hasDied = false;
 
@@ -248,8 +254,9 @@ squadmate_agent_think() {
     self BotSetFlag("cautious", true);
     handled_by_gametype = self[[self agentFunc("gametype_update")]]();
     if(!handled_by_gametype) {
-      if(!self bot_is_guarding_player(self.owner))
+      if(!self bot_is_guarding_player(self.owner)) {
         self bot_guard_player(self.owner, 350);
+      }
     }
 
     wait(0.05);

@@ -8,8 +8,10 @@ main() {
   level.tweakfile = 1;
   level.player = getEntArray("player", "classname")[0];
 
-  if(isusinghdr())
+  if(isusinghdr()) {
     maps\createart\jeepride_fog_hdr::main();
-  else
+  }
+  else {
     maps\createart\jeepride_fog::main();
+  }
 }

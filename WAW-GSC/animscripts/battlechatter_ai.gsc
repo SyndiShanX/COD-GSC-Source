@@ -25,8 +25,9 @@ addToSystem(squadName) {
     return;
   }
   assert(isDefined(self.squad));
-  if(!isDefined(self.squad.chatInitialized) || !self.squad.chatInitialized)
+  if(!isDefined(self.squad.chatInitialized) || !self.squad.chatInitialized) {
     self.squad init_squadBattleChatter();
+  }
   self.enemyClass = "infantry";
   self.calledOut = [];
   if(isPlayer(self)) {
@@ -42,20 +43,27 @@ addToSystem(squadName) {
   self.countryID = anim.countryIDs[self.voice];
   if(isDefined(self.script_friendname)) {
     friendname = tolower(self.script_friendname);
-    if(issubstr(friendname, "sullivan"))
+    if(issubstr(friendname, "sullivan")) {
       self.npcID = "sul";
-    else if(issubstr(friendname, "roebuck"))
+    }
+    else if(issubstr(friendname, "roebuck")) {
       self.npcID = "roe";
-    else if(issubstr(friendname, "polonsky"))
+    }
+    else if(issubstr(friendname, "polonsky")) {
       self.npcID = "pol";
-    else if(issubstr(friendname, "reznov"))
+    }
+    else if(issubstr(friendname, "reznov")) {
       self.npcID = "rez";
-    else if(issubstr(friendname, "chernov"))
+    }
+    else if(issubstr(friendname, "chernov")) {
       self.npcID = "che";
-    else if(issubstr(friendname, "commissar"))
+    }
+    else if(issubstr(friendname, "commissar")) {
       self.npcID = "com";
-    else
+    }
+    else {
       self setNPCID();
+    }
   } else {
     self setNPCID();
   }
@@ -88,8 +96,9 @@ setNPCID() {
   startIndex = randomIntRange(0, numIDs);
   lowestID = startIndex;
   for(index = 0; index <= numIDs; index++) {
-    if(usedIDs[(startIndex + index) % numIDs].count < usedIDs[lowestID].count)
+    if(usedIDs[(startIndex + index) % numIDs].count < usedIDs[lowestID].count) {
       lowestID = (startIndex + index) % numIDs;
+    }
   }
   self thread npcIDTracker(lowestID);
   self.npcID = usedIDs[lowestID].npcID;
@@ -126,8 +135,9 @@ removeFromSystem(squadName) {
   }
   self notify("removed from battleChatter");
   if(isDefined(self)) {
-    if(getdvar("debug_bclotsoprint") == "on")
+    if(getdvar("debug_bclotsoprint") == "on") {
       println("BC DEBUG removing " + self.bcname);
+    }
     self.chatQueue = undefined;
     self.nextSayTime = undefined;
     self.nextSayTimes = undefined;
@@ -168,10 +178,12 @@ init_aiBattleChatter() {
   self.nextSayTimes["custom"] = 0;
   self.isSpeaking = false;
   self.bcs_minPriority = 0.0;
-  if(isDefined(self.script_battlechatter) && !self.script_battlechatter)
+  if(isDefined(self.script_battlechatter) && !self.script_battlechatter) {
     self.battleChatter = false;
-  else
+  }
+  else {
     self.battleChatter = level.battlechatter[self.team];
+  }
   self.chatInitialized = true;
 }
 
@@ -246,10 +258,12 @@ evaluateMoveEvent(leavingCover) {
     anim.moveOrigin.origin = self.node.origin;
     self.squad animscripts\squadmanager::updateStates();
     if(self.squad.squadStates["move"].isActive) {
-      if(self isHero())
+      if(self isHero()) {
         self addOrder("move", "follow");
-      else
+      }
+      else {
         self addOrder("action", "coverme");
+      }
     } else {
       addOrder("cover", "generic");
     }
@@ -298,10 +312,12 @@ addSituationalOrder() {
   if(!isDefined(self.squad.chatInitialized)) {
     return;
   }
-  if(self.squad.squadStates["combat"].isActive)
+  if(self.squad.squadStates["combat"].isActive) {
     self addSituationalCombatOrder();
-  else
+  }
+  else {
     self addSituationalIdleOrder();
+  }
 }
 
 addSituationalIdleOrder() {
@@ -309,8 +325,9 @@ addSituationalIdleOrder() {
   self endon("removed from battleChatter");
   squad = self.squad;
   squad animscripts\squadmanager::updateStates();
-  if(squad.squadStates["move"].isActive)
+  if(squad.squadStates["move"].isActive) {
     self addOrder("move", "generic");
+  }
 }
 
 addSituationalCombatOrder() {
@@ -327,10 +344,12 @@ addSituationalCombatOrder() {
       self addOrder("cover", "generic");
     }
   } else {
-    if(self.team == "allies")
+    if(self.team == "allies") {
       soldiers = getAIArray("axis");
-    else
+    }
+    else {
       soldiers = getAIArray("allies");
+    }
     closestSoldier = undefined;
     closestSoldierDistance = 1000000000;
     closestSoldierInCover = undefined;

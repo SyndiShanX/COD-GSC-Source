@@ -91,10 +91,12 @@ precacheFX() {
   level._effect["sub_surface_runner"] = loadfx("water/sub_surface_runner");
 
   // "hunted light" required zfeather == 1 and r_zfeather is undefined on console.So, test for != "0".
-  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0")
+  if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
     level._effect["spotlight"] = loadfx("misc/hunted_spotlight_model");
-  else
+  }
+  else {
     level._effect["spotlight"] = loadfx("misc/spotlight_large");
+  }
 
   level._effect["heli_dlight_blue"] = loadfx("misc/aircraft_light_cockpit_blue");
 }

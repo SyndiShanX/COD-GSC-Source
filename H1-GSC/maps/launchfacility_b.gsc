@@ -216,10 +216,12 @@ main() {
   level thread spawn_telemetry_enemies();
   level thread spawn_telemetry_friendlies();
 
-  if(getdvarint("use_old_keyboard_typing") == 1)
+  if(getdvarint("use_old_keyboard_typing") == 1) {
     level thread upload_codes();
-  else
+  }
+  else {
     level thread upload_codes_h1();
+  }
 
   level thread control_room_dialogue();
   level thread elevator();
@@ -231,8 +233,9 @@ main() {
   level thread end_of_level();
   var_8 = getEntArray("autosave", "targetname");
 
-  for(var_9 = 0; var_9 < var_8.size; var_9++)
+  for(var_9 = 0; var_9 < var_8.size; var_9++) {
     var_8[var_9] thread my_autosave();
+  }
 }
 
 h1_typing_dof_start() {
@@ -416,8 +419,9 @@ autosave_by_name_wraper(var_0, var_1) {
     var_4 = level.stopwatch - var_3;
     var_1 = var_1 * level.requried_time_scale;
 
-    if(var_4 < var_1)
+    if(var_4 < var_1) {
       return;
+    }
   }
 
   maps\_utility::autosave_or_timeout(var_0, 12);
@@ -440,8 +444,9 @@ grigsby_think() {
 }
 
 team1_think() {
-  if(!isDefined(level.team1))
+  if(!isDefined(level.team1)) {
     level.team1 = [];
+  }
 
   self.animname = "steve";
   level.team1[level.team1.size] = self;
@@ -559,8 +564,9 @@ obj_upload_the_abort_codes() {
   soundscripts\_snd::snd_message("start_code_input_mix");
   var_0 = getent("control_room_friendlies_group", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 maps\_utility::activate_trigger();
+  }
 
   hide_triggers("control_room_friendlies_group");
   maps\_utility::radio_dialogue("grg_clearR");
@@ -581,8 +587,9 @@ obj_upload_the_abort_codes() {
   logstring(var_4);
   objective_state(var_1, "done");
 
-  if(level.usetimer)
+  if(level.usetimer) {
     level thread killtimer();
+  }
 
   wait 1;
 }
@@ -609,8 +616,9 @@ lock_obj_location(var_0) {
 }
 
 countdown_begins() {
-  if(maps\_utility::is_default_start())
+  if(maps\_utility::is_default_start()) {
     maps\_utility::wait_for_targetname_trigger("countdown_start");
+  }
 
   var_0 = undefined;
 
@@ -639,8 +647,9 @@ countdown_begins() {
 
   common_scripts\utility::flag_wait("begin_countdown");
 
-  if(maps\_utility::is_default_start())
+  if(maps\_utility::is_default_start()) {
     maps\_utility::radio_dialogue(var_0);
+  }
 
   common_scripts\utility::flag_set("countdown_started");
   common_scripts\utility::flag_set("aa_countdown_started");
@@ -655,8 +664,9 @@ countdown_begins() {
 grigsby_countdown_spam() {
   common_scripts\utility::flag_wait("countdown_started");
 
-  if(level.stopwatch > 10)
+  if(level.stopwatch > 10) {
     thread maps\_utility::flag_set_delayed("10min_left", level.stopwatch * 60 - 602);
+  }
 
   thread maps\_utility::flag_set_delayed("8min_left", level.stopwatch * 60 - 482);
   thread maps\_utility::flag_set_delayed("6min_left", level.stopwatch * 60 - 362);
@@ -710,8 +720,9 @@ mission_failed_out_of_time() {
 killtimer() {
   level notify("kill_timer");
 
-  if(isDefined(level.timer))
+  if(isDefined(level.timer)) {
     maps\_hud_util::destroy_countdown_hud(level.timer);
+  }
 }
 
 ai_duct() {
@@ -784,8 +795,9 @@ vent_enemies_group2_spawner_think() {
   self.health = 2;
   wait 10;
 
-  if(isalive(self))
+  if(isalive(self)) {
     self kill();
+  }
 }
 
 vent_trigger_friendlies_vent_jump() {
@@ -846,8 +858,9 @@ warehouse_trigger_kill_allied_teammate() {
   var_0 = getent("kill_yellow_allied", "targetname");
   var_0 waittill("trigger");
 
-  if(isalive(level.team1[0]))
+  if(isalive(level.team1[0])) {
     level.team1[0] kill();
+  }
 }
 
 warehouse_trigger_kill_enemies() {
@@ -864,8 +877,9 @@ warehouse_kill_all_enemy() {
   var_1 = getaiarray("axis");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2] istouching(var_0))
+    if(var_1[var_2] istouching(var_0)) {
       var_1[var_2] dodamage(var_1[var_2].health + 1000, var_1[var_2].origin);
+    }
   }
 }
 
@@ -875,8 +889,9 @@ play_sound_on_speaker(var_0, var_1) {
   if(isDefined(var_1)) {
     level notify("speaker_interrupt");
 
-    for(var_3 = 0; var_3 < var_2.size; var_3++)
+    for(var_3 = 0; var_3 < var_2.size; var_3++) {
       var_2[var_3] stopsounds();
+    }
 
     wait 0.5;
   } else if(common_scripts\utility::flag("speakers_active")) {
@@ -953,8 +968,9 @@ launchtubes_clear() {
   var_1 = getaiarray("axis");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2] istouching(var_0))
+    if(var_1[var_2] istouching(var_0)) {
       var_1[var_2] dodamage(var_1[var_2].health + 1000, var_1[var_2].origin);
+    }
   }
 }
 
@@ -994,12 +1010,14 @@ in_volume() {
     var_2 = 0;
 
     for(var_3 = 0; var_3 < var_1.size; var_3++) {
-      if(var_1[var_3] istouching(var_0))
+      if(var_1[var_3] istouching(var_0)) {
         var_2++;
+      }
     }
 
-    if(var_2 == var_1.size)
+    if(var_2 == var_1.size) {
       return;
+    }
   }
 }
 
@@ -1110,8 +1128,9 @@ kill_launchtube_steam_fx() {
   var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("hallway_steam_loop"));
   var_0 = common_scripts\utility::array_combine(var_0, maps\_utility::getfxarraybyid("steam_jet_med_loop_rand"));
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] common_scripts\utility::pauseeffect();
+  }
 }
 
 blast_door_clip() {
@@ -1128,8 +1147,9 @@ kill_enemy_in_tubes() {
   var_1 = getaiarray("axis");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    if(var_1[var_2] istouching(var_0))
+    if(var_1[var_2] istouching(var_0)) {
       var_1[var_2] dodamage(var_1[var_2].health + 1000, var_1[var_2].origin);
+    }
   }
 }
 
@@ -1164,21 +1184,24 @@ guard_the_vaultdoors_grigsby() {
   common_scripts\utility::flag_init("vaultdoors_grigs_approach_done");
   level.grigsby thread guard_the_vaultdoors_grigsby_wait_for_approach(var_0);
 
-  while(level.grigsby.script == "cover_arrival")
+  while(level.grigsby.script == "cover_arrival") {
     wait 0.05;
+  }
 
   level.grigsby.a.dontstartaim = undefined;
   level.grigsby.approachtypefunc = undefined;
 
-  if(!common_scripts\utility::flag("vaultdoors_grigs_approach_done"))
+  if(!common_scripts\utility::flag("vaultdoors_grigs_approach_done")) {
     self setisforcedincombat(1);
+  }
 }
 
 vault_doors_dialogue() {
   common_scripts\utility::flag_wait("open_vault_doors");
 
-  if(getdvarint("use_old_vaultdoors") != 1)
+  if(getdvarint("use_old_vaultdoors") != 1) {
     wait 3;
+  }
 
   maps\_utility::radio_dialogue("controlbasesec");
 
@@ -1556,8 +1579,9 @@ startprogressbar(var_0) {
 }
 
 setprogressbarprogress(var_0) {
-  if(var_0 > 1)
+  if(var_0 > 1) {
     var_0 = 1;
+  }
 
   self.progressbar maps\_hud_util::updatebar(var_0);
 }
@@ -1634,8 +1658,9 @@ control_room_screen_h1() {
   maps\_utility::delaythread(24.25, ::play_display_change_sfx);
   maps\_utility::delaythread(28.25, ::play_display_change_sfx);
 
-  while(iscinematicplaying())
+  while(iscinematicplaying()) {
     wait 0.05;
+  }
 
   cinematicingameloop("h1_icbm_norad_screen_abort");
   var_0 maps\_utility::play_sound_on_entity("h1_Inchb_display_off");
@@ -1649,8 +1674,9 @@ play_display_change_sfx() {
 update_keyboard_monitor_screen(var_0, var_1) {
   level endon("stop_update_monitor_material");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level endon(var_1);
+  }
 
   level waittill("wall_c4_planted");
   var_2 = getent(var_0, "targetname");
@@ -1679,8 +1705,9 @@ update_keyboard_monitor_screen(var_0, var_1) {
     var_2 overridematerial("mtl_h1_mwr_ch_icbm_consolemonitor5", var_4[var_3]);
     var_3++;
 
-    if(var_3 == var_4.size)
+    if(var_3 == var_4.size) {
       var_3 = 0;
+    }
 
     waitframe();
   }
@@ -1727,10 +1754,12 @@ delete_controlroom_friendlies() {
 }
 
 elevator() {
-  if(level.start_point != "elevator")
+  if(level.start_point != "elevator") {
     maps\_utility::waittill_aigroupcleared("elevator");
-  else
+  }
+  else {
     wait 1;
+  }
 
   level.price maps\_anim::anim_single_queue(level.price, "pri_movemove");
   level.anim_ent = getent("tunnel_animent", "targetname");
@@ -1764,8 +1793,9 @@ price_to_elevator(var_0) {
   level.anim_ent maps\_anim::anim_reach_solo(self, "h1_elevator_run_to_idle1");
   level.anim_ent maps\_anim::anim_single_solo(self, "h1_elevator_run_to_idle1");
 
-  if(!common_scripts\utility::flag("player_in_elevator"))
+  if(!common_scripts\utility::flag("player_in_elevator")) {
     level.anim_ent thread maps\_anim::anim_loop_solo(self, "h1_elevator_idle1", undefined, "stop_price_idle1");
+  }
 
   common_scripts\utility::flag_wait("player_in_elevator");
   level.anim_ent notify("stop_price_idle1");
@@ -1811,8 +1841,9 @@ check_elevator() {
     wait 0.05;
 
     if(level.player istouching(var_0)) {
-      if(!common_scripts\utility::flag("player_in_elevator"))
+      if(!common_scripts\utility::flag("player_in_elevator")) {
         common_scripts\utility::flag_set("player_in_elevator");
+      }
     } else if(common_scripts\utility::flag("player_in_elevator"))
       common_scripts\utility::flag_clear("player_in_elevator");
 
@@ -1843,8 +1874,9 @@ in_the_elevator() {
   for(;;) {
     var_0 waittill("trigger");
 
-    if(level.price istouching(var_0) && level.grigsby istouching(var_0))
+    if(level.price istouching(var_0) && level.grigsby istouching(var_0)) {
       return;
+    }
   }
 }
 
@@ -2147,15 +2179,17 @@ music_countdown(var_0) {
 hide_triggers(var_0) {
   var_1 = getEntArray(var_0, "script_noteworthy");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_1[var_2] common_scripts\utility::trigger_off();
+  }
 }
 
 show_triggers(var_0) {
   var_1 = getEntArray(var_0, "script_noteworthy");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_1[var_2] common_scripts\utility::trigger_on();
+  }
 }
 
 keep_price_griggs_distance_hallway_after_staircase() {

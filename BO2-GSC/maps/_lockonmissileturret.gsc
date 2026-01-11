@@ -21,26 +21,33 @@ init(buseadslockon, func_getbestmissileturrettarget, maxtargets, bmanualtargetse
   precachestring(&"hud_missile_fire");
   precachestring(&"hud_turret_zoom");
 
-  if(!isDefined(buseadslockon))
+  if(!isDefined(buseadslockon)) {
     buseadslockon = 0;
+  }
 
   game["missileTurret_useadslockon"] = buseadslockon;
   thread onplayerconnect();
 
-  if(!isDefined(func_getbestmissileturrettarget))
+  if(!isDefined(func_getbestmissileturrettarget)) {
     level.func_getbestmissileturrettarget = ::getbestmissileturrettarget;
-  else
+  }
+  else {
     level.func_getbestmissileturrettarget = func_getbestmissileturrettarget;
+  }
 
-  if(!isDefined(maxtargets))
+  if(!isDefined(maxtargets)) {
     level.missileturretmaxtargets = 1;
-  else
+  }
+  else {
     level.missileturretmaxtargets = maxtargets;
+  }
 
-  if(!isDefined(bmanualtargetset))
+  if(!isDefined(bmanualtargetset)) {
     level.bmanualtargetset = 0;
-  else
+  }
+  else {
     level.bmanualtargetset = bmanualtargetset;
+  }
 }
 
 main() {
@@ -173,10 +180,12 @@ missilefirednotify(b_multi_target_turret) {
 
     if(isDefined(b_multi_target_turret) && b_multi_target_turret) {
       if(isDefined(self.missileturretfiring) && !self.missileturretfiring) {
-        if(level.missileturretmaxtargets > 1 && self.missileturrettargetlist.size > 0)
+        if(level.missileturretmaxtargets > 1 && self.missileturrettargetlist.size > 0) {
           self thread multilockmissilefire();
-        else
+        }
+        else {
           missile missile_settarget(undefined);
+        }
       }
     }
 
@@ -194,13 +203,15 @@ multilockmissilefire() {
   turret = self getturretweapon();
   seat = turret getoccupantseat(level.player);
 
-  if(isDefined(turret))
+  if(isDefined(turret)) {
     turret cleargunnertarget(seat);
+  }
 
   for(i = 1; i < self.missileturrettargetlist.size; i++) {
     if(isstillvalidtarget(self.missileturrettargetlist[i])) {
-      if(seat == 0)
+      if(seat == 0) {
         turret fireweapon(self.missileturrettargetlist[i]);
+      }
       else {
         turret setgunnertargetent(self.missileturrettargetlist[i], (0, 0, 0), seat - 1);
         missile = turret firegunnerweapon(seat - 1);
@@ -232,8 +243,9 @@ multilockmissilefire() {
   vehicles = getvehiclearray("axis");
 
   foreach(vehicle in vehicles) {
-    if(isDefined(vehicle.locked_on) && vehicle.locked_on)
+    if(isDefined(vehicle.locked_on) && vehicle.locked_on) {
       vehicle.locked_on = 0;
+    }
   }
 
   self thread missileturretclientflags();
@@ -265,8 +277,9 @@ missileturretloop() {
   lock_lost_time = 1000;
   self thread oneshot_lockon_sound();
 
-  if(isDefined(self.missile_turret_lock_lost_time) && isint(self.missile_turret_lock_lost_time))
+  if(isDefined(self.missile_turret_lock_lost_time) && isint(self.missile_turret_lock_lost_time)) {
     lock_lost_time = self.missile_turret_lock_lost_time;
+  }
 
   for(;;) {
     wait 0.05;
@@ -278,8 +291,9 @@ missileturretloop() {
       }
 
       if(!insidemissileturretreticlelocked(self.missileturrettarget)) {
-        if(self.missileturretlockloststarttime == 0)
+        if(self.missileturretlockloststarttime == 0) {
           self.missileturretlockloststarttime = gettime();
+        }
 
         timepassed = gettime() - self.missileturretlockloststarttime;
 
@@ -360,11 +374,13 @@ missileturretmultilockloop() {
   self endon("missileTurret_off");
   locklength = weaponlockonspeed(self getturretweaponname());
 
-  if(!isDefined(self.missileturrettargetlist))
+  if(!isDefined(self.missileturrettargetlist)) {
     self.missileturrettargetlist = [];
+  }
   else {
-    for(i = 0; i < self.missileturrettargetlist.size; i++)
+    for(i = 0; i < self.missileturrettargetlist.size; i++) {
       self.missileturrettargetlist[i] = undefined;
+    }
 
     arrayremovevalue(self.missileturrettargetlist, undefined);
   }
@@ -397,8 +413,9 @@ missileturretmultilockloop() {
       }
 
       if(!insidemissileturretreticlelocked(self.missileturrettarget)) {
-        if(self.missileturretlockloststarttime == 0)
+        if(self.missileturretlockloststarttime == 0) {
           self.missileturretlockloststarttime = gettime();
+        }
 
         timepassed = gettime() - self.missileturretlockloststarttime;
 
@@ -424,15 +441,18 @@ missileturretmultilockloop() {
       if(!level.bmanualtargetset) {
         turret = self getturretweapon();
 
-        if(isDefined(turret))
+        if(isDefined(turret)) {
           turret cleartargetentity();
+        }
 
         self.seat = turret getoccupantseat(level.player);
 
-        if(self.seat == 0)
+        if(self.seat == 0) {
           turret settargetentity(self.missileturrettargetlist[0]);
-        else
+        }
+        else {
           turret settargetentity(self.missileturrettargetlist[0], (0, 0, 0), self.seat - 1);
+        }
       }
 
       continue;
@@ -488,13 +508,15 @@ missileturretmultilockloop() {
 missileturrettargetdeathtread(player) {
   self waittill("death");
 
-  if(isDefined(player.missileturretfiring) && player.missileturretfiring)
+  if(isDefined(player.missileturretfiring) && player.missileturretfiring) {
     player waittill("missile_turret_firing_done");
+  }
 
   for(i = 0; i < player.missileturrettargetlist.size; i++) {
     if(isDefined(player.missileturrettargetlist[i])) {
-      if(self == player.missileturrettargetlist[i])
+      if(self == player.missileturrettargetlist[i]) {
         player.missileturrettargetlist[i] = undefined;
+      }
     }
   }
 }
@@ -502,25 +524,29 @@ missileturrettargetdeathtread(player) {
 locksighttest(target) {
   eyepos = self getEye();
 
-  if(!isDefined(target))
+  if(!isDefined(target)) {
     return false;
+  }
 
   passed = bullettracepassed(eyepos, target.origin, 0, target);
 
-  if(!passed)
+  if(!passed) {
     return false;
+  }
 
   front = target getpointinbounds(1, 0, 0);
   bullettracepassed(eyepos, front, 0, target);
 
-  if(!passed)
+  if(!passed) {
     return false;
+  }
 
   back = target getpointinbounds(-1, 0, 0);
   passed = bullettracepassed(eyepos, back, 0, target);
 
-  if(!passed)
+  if(!passed) {
     return false;
+  }
 
   return true;
 }
@@ -531,8 +557,9 @@ softsighttest() {
     return true;
   }
 
-  if(self.missileturretlostsightlinetime == 0)
+  if(self.missileturretlostsightlinetime == 0) {
     self.missileturretlostsightlinetime = gettime();
+  }
 
   timepassed = gettime() - self.missileturretlostsightlinetime;
 
@@ -555,12 +582,14 @@ getbestmissileturrettarget() {
     if(isDefined(targetsall[idx].locked_on) && targetsall[idx].locked_on == 1) {
       continue;
     }
-    if(self insidemissileturretreticlenolock(targetsall[idx]))
+    if(self insidemissileturretreticlenolock(targetsall[idx])) {
       targetsvalid[targetsvalid.size] = targetsall[idx];
+    }
   }
 
-  if(targetsvalid.size == 0)
+  if(targetsvalid.size == 0) {
     return undefined;
+  }
 
   chosenent = targetsvalid[0];
   bestdot = -999;
@@ -580,8 +609,9 @@ getbestmissileturrettarget() {
     }
   }
 
-  if(chosenindex > -1)
+  if(chosenindex > -1) {
     chosenent = targetsvalid[chosenindex];
+  }
 
   return chosenent;
 }
@@ -592,8 +622,9 @@ getbestmissileturrettargetlist() {
 insidemissileturretreticlenolock(target) {
   weaponname = self getturretweaponname();
 
-  if(weaponname == "none")
+  if(weaponname == "none") {
     return 0;
+  }
 
   fov = getdvarfloat(#"cg_fov");
   radius = weaponlockonradius(weaponname);
@@ -603,8 +634,9 @@ insidemissileturretreticlenolock(target) {
 insidemissileturretreticlelocked(target, falloff) {
   weaponname = self getturretweaponname();
 
-  if(weaponname == "none")
+  if(weaponname == "none") {
     return 0;
+  }
 
   fov = getdvarfloat(#"cg_fov");
   radius = isDefined(falloff) ? weaponlockonradius(weaponname) + falloff : weaponlockonradius(weaponname);
@@ -612,20 +644,25 @@ insidemissileturretreticlelocked(target, falloff) {
 }
 
 isstillvalidtarget(ent) {
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return false;
+  }
 
-  if(!target_istarget(ent))
+  if(!target_istarget(ent)) {
     return false;
+  }
 
-  if(isDefined(ent.isacorpse) && ent.isacorpse)
+  if(isDefined(ent.isacorpse) && ent.isacorpse) {
     return false;
+  }
 
-  if(isDefined(ent.classname) && ent.classname == "script_vehicle_corpse")
+  if(isDefined(ent.classname) && ent.classname == "script_vehicle_corpse") {
     return false;
+  }
 
-  if(ent.health <= 0)
+  if(ent.health <= 0) {
     return false;
+  }
 
   return true;
 }
@@ -633,8 +670,9 @@ isstillvalidtarget(ent) {
 isstillbesttarget(ent) {
   besttarget = [[level.func_getbestmissileturrettarget]]();
 
-  if(isDefined(besttarget) && ent == besttarget)
+  if(isDefined(besttarget) && ent == besttarget) {
     return true;
+  }
 
   return false;
 }
@@ -650,8 +688,9 @@ setnoclearance() {
   checks[4] = vectorscale((1, 0, 1), 40.0);
   debug = 0;
 
-  if(getdvar(#"_id_64296AD0") == "1")
+  if(getdvar(#"_id_64296AD0") == "1") {
     debug = 1;
+  }
 
   playerangles = self getplayerangles();
   forward = anglesToForward(playerangles);
@@ -673,8 +712,9 @@ setnoclearance() {
       } else
         break;
     } else {
-      if(debug)
+      if(debug) {
         line(origin, trace["position"], color_passed, 1);
+      }
 
     }
   }
@@ -684,8 +724,9 @@ setnoclearance() {
 }
 
 settargettooclose(ent) {
-  if(!isDefined(ent))
+  if(!isDefined(ent)) {
     return false;
+  }
 
   dist = distance2d(self.origin, ent.origin);
 
@@ -723,8 +764,9 @@ looplocallocksound(alias, interval) {
   wait 0.5;
   self thread missile_lock_loop_audio(alias);
 
-  for(;;)
+  for(;;) {
     wait(interval);
+  }
 
   self.missileturretlocksound = undefined;
 }
@@ -750,24 +792,29 @@ looplocaltrackingsound(alias, drone) {
     d = sqrt(distance2d(missile.origin, drone.origin));
     e = d * 0.001;
 
-    if(!isDefined(olde))
+    if(!isDefined(olde)) {
       olde = e;
+    }
 
     de = e - olde;
 
-    if(de > 0.1)
+    if(de > 0.1) {
       de = 0.1;
+    }
 
-    if(de < 0.1 * -1)
+    if(de < 0.1 * -1) {
       de = 0.1 * -1;
+    }
 
     e = de + olde;
 
-    if(e > 1)
+    if(e > 1) {
       e = 1;
+    }
 
-    if(e < 0.05)
+    if(e < 0.05) {
       e = 0.05;
+    }
 
     self playlocalsound(alias);
     wait(e);
@@ -822,8 +869,9 @@ playlocalkillshotsound(alias, drone) {
 usingvalidweapon() {
   weapon_name = getturretweaponname();
 
-  if(isDefined(weapon_name) && weaponguidedmissiletype(weapon_name) != "none")
+  if(isDefined(weapon_name) && weaponguidedmissiletype(weapon_name) != "none") {
     return true;
+  }
 
   return false;
 }
@@ -833,20 +881,23 @@ getturretweaponname() {
   viewlockedent = self.viewlockedentity;
 
   if(isDefined(viewlockedent)) {
-    if(viewlockedent.classname == "misc_turret")
+    if(viewlockedent.classname == "misc_turret") {
       return viewlockedent.weaponinfo;
+    }
     else if(viewlockedent.classname == "script_vehicle") {
       for(i = 0; i < 5; i++) {
         weapon_name = viewlockedent seatgetweapon(i);
 
-        if(isDefined(weapon_name) && weaponguidedmissiletype(weapon_name) != "none")
+        if(isDefined(weapon_name) && weaponguidedmissiletype(weapon_name) != "none") {
           return weapon_name;
+        }
       }
     }
   }
 
-  if(!isDefined(weapon_name))
+  if(!isDefined(weapon_name)) {
     weapon_name = "none";
+  }
 
   return weapon_name;
 }
@@ -854,8 +905,9 @@ getturretweaponname() {
 getturretweapon() {
   viewlockent = self.viewlockedentity;
 
-  if(isDefined(viewlockent))
+  if(isDefined(viewlockent)) {
     return viewlockent;
+  }
 
   return undefined;
 }
@@ -872,8 +924,9 @@ startmissilecam() {
 }
 
 canlockon() {
-  if(isDefined(self.lockondisabled) && self.lockondisabled)
+  if(isDefined(self.lockondisabled) && self.lockondisabled) {
     return false;
+  }
 
   if(game["missileTurret_useadslockon"]) {
     if(self adsbuttonpressed()) {

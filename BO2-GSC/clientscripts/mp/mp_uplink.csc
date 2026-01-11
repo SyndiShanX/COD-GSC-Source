@@ -36,8 +36,9 @@ _glasssmashcbfunc(org, dir) {
   level notify("_glassSmashCBFunc");
   level endon("_glassSmashCBFunc");
 
-  if(!isDefined(level._uplinkglasssmashed))
+  if(!isDefined(level._uplinkglasssmashed)) {
     level._uplinkglasssmashed = [];
+  }
 
   level._uplinkglasssmashed[level._uplinkglasssmashed.size] = org;
 
@@ -66,14 +67,16 @@ uplinkonplayerconnect(localclientnum) {
   windvanearray = getEntArray(localclientnum, "wind_direction", "targetname");
 
   if(isDefined(windvanearray) && windvanearray.size > 0) {
-    foreach(windvane in windvanearray)
+    foreach(windvane in windvanearray) {
     windvane thread windvanedirection(localclientnum);
+    }
   }
 
   lightpost = getent(localclientnum, "sway_lightpost", "targetname");
 
-  if(isDefined(lightpost) && !isdemoplaying())
+  if(isDefined(lightpost) && !isdemoplaying()) {
     lightpost thread lightpostsway();
+  }
 }
 
 initlightningloop(localclientnum) {
@@ -144,8 +147,9 @@ initrainfx(localclientnum) {
     if(ent.v["exploder"] >= 6001 && ent.v["exploder"] <= 6020) {
       shattered_window_exploders[shattered_window_exploders.size] = ent;
 
-      if(ent.v["exploder"] >= 6003 && ent.v["exploder"] <= 6006)
+      if(ent.v["exploder"] >= 6003 && ent.v["exploder"] <= 6006) {
         directional_exploders[directional_exploders.size] = ent;
+      }
     }
   }
 
@@ -168,8 +172,9 @@ rainexploderswitch(localclientnum, directional_exploders) {
     if(!isDefined(level.createfxexploders)) {
       return;
     }
-    for(i = 0; i < directional_exploders.size; i++)
+    for(i = 0; i < directional_exploders.size; i++) {
       clientscripts\mp\_fx::deactivate_exploder(directional_exploders[i].v["exploder"]);
+    }
 
     if(randomint(2)) {
       level.current_rain_exploder = 1002;
@@ -180,8 +185,9 @@ rainexploderswitch(localclientnum, directional_exploders) {
 
       if(isdemoplaying() == 0) {
         for(i = 0; i < directional_exploders.size; i++) {
-          if(isDefined(directional_exploders[i].glass_broken))
+          if(isDefined(directional_exploders[i].glass_broken)) {
             clientscripts\mp\_fx::activate_exploder(directional_exploders[i].v["exploder"]);
+          }
         }
       }
     }
@@ -217,8 +223,9 @@ windvanejitter(originalangles, yaw) {
 
 activateintactwindowexploders(intact_window_exploders) {
   if(intact_window_exploders.size > 0) {
-    for(i = 0; i < intact_window_exploders.size; i++)
+    for(i = 0; i < intact_window_exploders.size; i++) {
       clientscripts\mp\_fx::activate_exploder(intact_window_exploders[i].v["exploder"]);
+    }
   }
 }
 
@@ -277,10 +284,12 @@ glasssmashdetected(localclientnum, origin, intact_window_exploders, shattered_wi
     }
     distsq = distancesquared(shattered_window_exploder.v["origin"], origin);
 
-    if(issouthernexploder(shattered_window_exploder))
+    if(issouthernexploder(shattered_window_exploder)) {
       currentthreshold = 7225;
-    else
+    }
+    else {
       currentthreshold = 2500;
+    }
 
     if(distsq > currentthreshold) {
       continue;

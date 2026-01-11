@@ -19,8 +19,9 @@ init() {
   level thread func_12F82();
   level thread func_12F83();
 
-  if(level.func_768F)
+  if(level.func_768F) {
     level thread func_C799();
+  }
 
   var_00 = spawnStruct();
   var_0.streakname = "uplink";
@@ -103,8 +104,9 @@ func_12E5B() {
 func_4419() {
   var_00 = [];
 
-  if(!level.teambased)
+  if(!level.teambased) {
     level waittill("radar_status_change_players");
+  }
   else {
     while(var_0.size < 2) {
       level waittill("radar_status_change", var_01);
@@ -122,13 +124,16 @@ func_12F41(var_00) {
   var_04 = var_01 >= 3;
   var_05 = var_01 >= 4;
 
-  if(var_03)
+  if(var_03) {
     unblockteamradar(var_00);
+  }
 
-  if(var_04)
+  if(var_04) {
     level.radarmode[var_00] = "fast_radar";
-  else
+  }
+  else {
     level.radarmode[var_00] = "normal_radar";
+  }
 
   foreach(var_07 in level.participants) {
     if(!isDefined(var_07)) {
@@ -186,18 +191,23 @@ setturretmodechangewait() {
 func_12F09(var_00) {
   var_01 = 0;
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_01 = disableusability(var_00);
-  else
+  }
+  else {
     var_01 = _meth_80A7(self);
+  }
 
-  if(scripts\mp\utility\game::_hasperk("specialty_comexp"))
+  if(scripts\mp\utility\game::_hasperk("specialty_comexp")) {
     var_01 = _meth_80A6(self);
+  }
 
-  if(var_01 > 0)
+  if(var_01 > 0) {
     self setclientomnvar("ui_satcom_active", 1);
-  else
+  }
+  else {
     self setclientomnvar("ui_satcom_active", 0);
+  }
 }
 
 func_E0DF() {
@@ -221,15 +231,17 @@ func_F7F7(var_00, var_01) {
   var_0.hasradar = var_03;
   var_0.isradarblocked = 0;
 
-  if(var_04)
+  if(var_04) {
     var_0.radarmode = "fast_radar";
+  }
 }
 
 func_1290C(var_00, var_01) {
   var_02 = scripts\mp\killstreaks\placeable::giveplaceable(var_01, 1);
 
-  if(var_02)
+  if(var_02) {
     scripts\mp\matchdata::logkillstreakevent("uplink", self.origin);
+  }
 
   self.iscarrying = undefined;
   return var_02;
@@ -238,16 +250,18 @@ func_1290C(var_00, var_01) {
 oncarried(var_00) {
   var_01 = self getentitynumber();
 
-  if(isDefined(level.uplinks[var_01]))
+  if(isDefined(level.uplinks[var_01])) {
     func_11099();
+  }
 }
 
 func_13A7B() {
   self waittill("satComTimedOut");
 
   foreach(var_01 in level.participants) {
-    if(isDefined(var_1.func_2A3B))
+    if(isDefined(var_1.func_2A3B)) {
       var_1.func_2A3B delete();
+    }
   }
 }
 
@@ -270,15 +284,17 @@ func_12AEF() {
         continue;
       }
       if(!scripts\mp\utility\game::isreallyalive(var_04)) {
-        if(isDefined(var_4.func_2A3B))
+        if(isDefined(var_4.func_2A3B)) {
           var_4.func_2A3B delete();
+        }
 
         continue;
       }
 
       if(isDefined(var_4.func_12AF1)) {
-        if(isDefined(var_4.func_2A3B))
+        if(isDefined(var_4.func_2A3B)) {
           var_4.func_2A3B delete();
+        }
 
         var_4.func_12AF1.origin = var_4.origin;
         var_4.func_12AF2.origin = var_4.origin;
@@ -310,8 +326,9 @@ func_B37E() {
     return;
   }
   if(isDefined(self.func_12AF1)) {
-    if(isDefined(self.func_2A3B))
+    if(isDefined(self.func_2A3B)) {
       self.func_2A3B delete();
+    }
 
     self.func_12AF1.origin = self.origin;
     self.func_12AF2.origin = self.origin;
@@ -330,8 +347,9 @@ func_B37E() {
   self.func_2A3B = playloopedfx(scripts\engine\utility::getfx("uav_beam"), var_00, self.origin);
   wait(var_01);
 
-  if(isDefined(self.func_2A3B))
+  if(isDefined(self.func_2A3B)) {
     self.func_2A3B delete();
+  }
 }
 
 func_6AB8(var_00, var_01) {
@@ -356,8 +374,9 @@ onplaced(var_00) {
   scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground", self.owner);
   self.config = var_01;
 
-  if(level.func_768F)
+  if(level.func_768F) {
     thread func_12AEF();
+  }
 
   func_10E04(1);
   thread watchempdamage();
@@ -372,8 +391,9 @@ func_11099() {
   scripts\mp\weapons::stopblinkinglight();
   self scriptmodelclearanim();
 
-  if(isDefined(self.bombsquadmodel))
+  if(isDefined(self.bombsquadmodel)) {
     self.bombsquadmodel scriptmodelclearanim();
+  }
 
   func_E188(self);
   self stoploopsound();
@@ -389,8 +409,9 @@ ondeath_clearscriptedanim(var_00, var_01, var_02, var_03) {
   func_E188(self);
   self scriptmodelclearanim();
 
-  if(!self.func_933C)
+  if(!self.func_933C) {
     wait 3.0;
+  }
 
   scripts\mp\weapons::equipmentdeletevfx();
 }
@@ -412,15 +433,18 @@ disableusability(var_00) {
   var_01 = 0;
 
   foreach(var_03 in level.uplinks) {
-    if(isDefined(var_03) && var_3.team == var_00)
+    if(isDefined(var_03) && var_3.team == var_00) {
       var_1++;
+    }
   }
 
-  if(var_01 == 0 && isDefined(level.func_8DD7) && level.func_8DD7.team == var_00)
+  if(var_01 == 0 && isDefined(level.func_8DD7) && level.func_8DD7.team == var_00) {
     var_1++;
+  }
 
-  if(var_01 == 1)
+  if(var_01 == 1) {
     var_01 = 2;
+  }
 
   return clamp(var_01, 0, 4);
 }
@@ -431,8 +455,9 @@ _meth_80A7(var_00) {
   foreach(var_03 in level.uplinks) {
     if(isDefined(var_03)) {
       if(isDefined(var_3.owner)) {
-        if(var_3.owner.guid == var_0.guid)
+        if(var_3.owner.guid == var_0.guid) {
           var_1++;
+        }
 
         continue;
       }
@@ -442,8 +467,9 @@ _meth_80A7(var_00) {
     }
   }
 
-  if(!level.teambased && var_01 > 0)
+  if(!level.teambased && var_01 > 0) {
     var_1++;
+  }
 
   return clamp(var_01, 0, 4);
 }
@@ -452,12 +478,14 @@ _meth_80A6(var_00) {
   var_01 = 0;
 
   foreach(var_03 in level.uplinks) {
-    if(isDefined(var_03))
+    if(isDefined(var_03)) {
       var_1++;
+    }
   }
 
-  if(!level.teambased && var_01 > 0)
+  if(!level.teambased && var_01 > 0) {
     var_1++;
+  }
 
   return clamp(var_01, 0, 4);
 }

@@ -9,8 +9,9 @@ deleteportableradar(var_0) {
     return;
   }
   foreach(var_2 in level.players) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2.inplayerportableradar = undefined;
+    }
   }
 
   var_0 notify("death");
@@ -33,14 +34,16 @@ monitorportableradaruse() {
 
       self.portableradararray = common_scripts\utility::array_removeundefined(self.portableradararray);
 
-      if(self.portableradararray.size >= level.maxperplayerexplosives)
+      if(self.portableradararray.size >= level.maxperplayerexplosives) {
         deleteportableradar(self.portableradararray[0]);
+      }
 
       var_0 waittill("missile_stuck");
       var_2 = var_0.origin;
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         var_0 delete();
+      }
 
       var_3 = spawn("script_model", var_2);
       var_3.health = 100;
@@ -60,10 +63,12 @@ monitorportableradaruse() {
 portableradarsetup(var_0) {
   self setModel("weapon_radar");
 
-  if(level.teambased)
+  if(level.teambased) {
     maps\mp\_entityheadicons::setteamheadicon(self.team, (0, 0, 20));
-  else
+  }
+  else {
     maps\mp\_entityheadicons::setplayerheadicon(var_0, (0, 0, 20));
+  }
 
   thread portableradardamagelistener(var_0);
   thread portableradaruselistener(var_0);
@@ -100,10 +105,12 @@ portableradardamagelistener(var_0) {
     if(!maps\mp\gametypes\_weapons::friendlyfirecheck(self.owner, var_2)) {
       continue;
     }
-    if(isDefined(var_10))
+    if(isDefined(var_10)) {
       var_11 = maps\mp\_utility::strip_suffix(var_10, "_lefthand");
-    else
+    }
+    else {
       var_11 = undefined;
+    }
 
     if(isDefined(var_11)) {
       switch (var_11) {
@@ -117,21 +124,25 @@ portableradardamagelistener(var_0) {
     if(!isDefined(self)) {
       return;
     }
-    if(maps\mp\_utility::ismeleemod(var_5))
+    if(maps\mp\_utility::ismeleemod(var_5)) {
       self.damagetaken = self.damagetaken + self.maxhealth;
+    }
 
-    if(isDefined(var_9) && var_9 &level.idflags_penetration)
+    if(isDefined(var_9) && var_9 &level.idflags_penetration) {
       self.wasdamagedfrombulletpenetration = 1;
+    }
 
     self.wasdamaged = 1;
     self.damagetaken = self.damagetaken + var_1;
 
-    if(isplayer(var_2))
+    if(isplayer(var_2)) {
       var_2 maps\mp\gametypes\_damagefeedback::updatedamagefeedback("portable_radar");
+    }
 
     if(self.damagetaken >= self.maxhealth) {
-      if(isDefined(var_0) && var_2 != var_0)
+      if(isDefined(var_0) && var_2 != var_0) {
         var_2 notify("destroyed_explosive");
+      }
 
       self playSound("sentry_explode");
       self.deatheffect = playFX(common_scripts\utility::getfx("equipment_explode"), self.origin);

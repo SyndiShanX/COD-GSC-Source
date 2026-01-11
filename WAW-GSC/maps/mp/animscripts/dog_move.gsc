@@ -56,8 +56,9 @@ main() {
   while(1) {
     self moveLoop();
     if(self.a.movement == "run") {
-      if(self.disableArrivals == false)
+      if(self.disableArrivals == false) {
         self thread stopMove();
+      }
       self waittill("run");
     }
   }
@@ -67,10 +68,12 @@ moveLoop() {
   self endon("killanimscript");
   self endon("stop_soon");
   while(1) {
-    if(self.disableArrivals)
+    if(self.disableArrivals) {
       self.stopAnimDistSq = 0;
-    else
+    }
+    else {
       self.stopAnimDistSq = level.dogStoppingDistSq;
+    }
     if(self.a.movement == "run") {
       if(self need_to_turn()) {
         self turn();
@@ -149,10 +152,12 @@ get_turn_angle_delta(print_it) {
   lookaheadYaw = AngleClamp180(lookaheadAngles[1]);
   deltaYaw = lookaheadYaw - currentYaw;
   preDeltaYaw = deltaYaw;
-  if(deltaYaw > 180)
+  if(deltaYaw > 180) {
     deltaYaw -= 360;
-  if(deltaYaw < -180)
+  }
+  if(deltaYaw < -180) {
     deltaYaw += 360;
+  }
   return deltaYaw;
 }
 

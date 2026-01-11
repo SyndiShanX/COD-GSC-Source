@@ -37,10 +37,12 @@ setmeleeattackdist() {
   self endon("death");
 
   for(;;) {
-    if(isDefined(self.enemy) && isplayer(self.enemy))
+    if(isDefined(self.enemy) && isplayer(self.enemy)) {
       self.meleeattackdist = anim.dogattackplayerdist;
-    else
+    }
+    else {
       self.meleeattackdist = anim.dogattackaidist;
+    }
 
     self waittill("enemy");
   }
@@ -101,8 +103,9 @@ initdoganimations() {
   var_1 = 5;
   var_2 = [];
 
-  for(var_3 = 0; var_3 <= var_1; var_3++)
+  for(var_3 = 0; var_3 <= var_1; var_3++) {
     var_2[var_2.size] = var_3 / var_1;
+  }
 
   level.dog_melee_index = 0;
   level.dog_melee_timing_array = common_scripts\utility::array_randomize(var_2);

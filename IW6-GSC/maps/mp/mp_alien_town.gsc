@@ -26,8 +26,9 @@ main() {
   level._effect["alien_ark_gib"] = loadfx("vfx/gameplay/alien/vfx_alien_ark_gib_01");
   level.custom_alien_death_func = maps\mp\alien\_death::general_alien_custom_death;
 
-  if(is_chaos_mode())
+  if(is_chaos_mode()) {
     level.adjust_spawnLocation_func = ::town_chaos_adjust_spawnLocation;
+  }
 
   alien_mode_enable("kill_resource", "wave", "airdrop", "lurker", "collectible", "loot", "pillage", "challenge", "outline", "scenes");
   alien_areas = ["lodge", "city", "lake"];
@@ -326,8 +327,9 @@ test_meteoroid() {
 amb_quakes() {
   level.quake_trigs = getEntArray("quake_trig", "targetname");
 
-  foreach(quake_trig in level.quake_trigs)
+  foreach(quake_trig in level.quake_trigs) {
   quake_trig thread run_quake_scene();
+  }
 }
 
 run_quake_scene() {
@@ -344,11 +346,13 @@ run_quake_scene() {
       if(!isDefined(targeted_ent.script_noteworthy)) {
         continue;
       }
-      if(targeted_ent.script_noteworthy == "moveable")
+      if(targeted_ent.script_noteworthy == "moveable") {
         self.movables[self.movables.size] = targeted_ent;
+      }
 
-      if(targeted_ent.script_noteworthy == "fx")
+      if(targeted_ent.script_noteworthy == "fx") {
         self.fx[self.fx.size] = targeted_ent;
+      }
     }
   }
 
@@ -367,8 +371,9 @@ run_quake_scene() {
         PhysicsJitter(quake_origin, outter_radius, inner_radius, 4.0, 6.0);
         player PlayRumbleOnEntity("heavy_3s");
 
-        foreach(movable in self.movables)
+        foreach(movable in self.movables) {
         self thread quake_rotate(movable);
+        }
 
         count--;
         wait RandomIntRange(20, 30);
@@ -428,19 +433,22 @@ mp_alien_town_intro_dialog() {
 }
 
 should_play_next_hive_vo_func() {
-  if(level.cycle_count + 1 == 14)
+  if(level.cycle_count + 1 == 14) {
     return false;
+  }
 
-  if(flag_exist("hives_cleared") && flag("hives_cleared"))
+  if(flag_exist("hives_cleared") && flag("hives_cleared")) {
     return false;
+  }
 
   return (!isDefined(level.blocker_hives[level.cycle_count + 1]));
 }
 
 mp_alien_town_post_intro_func() {
   foreach(player in level.players) {
-    if(isDefined(player.default_starting_pistol))
+    if(isDefined(player.default_starting_pistol)) {
       player SwitchToWeapon(player.default_starting_pistol);
+    }
   }
 }
 
@@ -484,8 +492,9 @@ set_drill_location(target_name, location, orientation) {
 }
 
 TU_electric_fence_fix() {
-  while(!isDefined(level.electric_fences))
+  while(!isDefined(level.electric_fences)) {
     wait 0.05;
+  }
 
   wait 5;
 
@@ -494,13 +503,15 @@ TU_electric_fence_fix() {
     target_name_array = StrTok(fence.generator.target, "_");
     if(target_name_array.size > 0) {
       foreach(name in target_name_array) {
-        if(IsSubStr(name, "auto"))
+        if(IsSubStr(name, "auto")) {
           target_name = name;
+        }
       }
     }
 
-    if(isDefined(fence.generator.target) && (target_name == "auto92"))
+    if(isDefined(fence.generator.target) && (target_name == "auto92")) {
       fence.shock_trig.origin += (0, 0, 30);
+    }
 
     if(isDefined(fence.generator.target) && (target_name == "auto3")) {
       fence.shock_trig.origin += (102, 64, 30);
@@ -577,10 +588,12 @@ delete_intro_heli_clip() {
 }
 
 set_hardcore_extinction_spawn_table() {
-  if(isPlayingSolo())
+  if(isPlayingSolo()) {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_town_hardcore_sp.csv";
-  else
+  }
+  else {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_town_hardcore.csv";
+  }
 }
 
 mp_alien_town_onSpawnPlayer_func() {

@@ -22,6 +22,7 @@ main() {
   level._effect["room_smoke_400"] = loadfx("smoke/room_smoke_400");
   level._effect["hallway_smoke_light"] = loadfx("smoke/hallway_smoke_light");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_boneyard_fx::main();
+  }
 }

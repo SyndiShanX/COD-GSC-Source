@@ -4,10 +4,12 @@
 *****************************************************/
 
 satfarm_m880_init(var_0, var_1, var_2) {
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(var_0);
-  else
+  }
+  else {
     var_3 = maps\_vehicle::spawn_vehicle_from_targetname(var_0);
+  }
 
   level.air_strip_m880s = common_scripts\utility::array_add(level.air_strip_m880s, var_3);
   var_3 maps\_utility::ent_flag_init("launch_prep");
@@ -24,10 +26,12 @@ satfarm_m880_init(var_0, var_1, var_2) {
 
   var_3 thread maps\satfarm_code::target_settings();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 thread launch_prep_drive();
-  else
+  }
+  else {
     var_3 thread launch_prep_static();
+  }
 }
 
 death_watcher() {
@@ -49,8 +53,9 @@ death_watcher() {
         var_5.angles = self.angles;
         level.air_strip_m880_corpses = common_scripts\utility::array_add(level.air_strip_m880_corpses, var_5);
 
-        if(isDefined(self))
+        if(isDefined(self)) {
           self delete();
+        }
 
         level.air_strip_m880_death_count++;
         return;
@@ -116,8 +121,9 @@ m880_missile(var_0, var_1) {
   var_2 = "m880_missile_" + var_0;
   var_3 = maps\_utility::spawn_anim_model(var_2);
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     thread fx_missile_launch(var_0);
+  }
 
   var_4 = "m880_missile_" + var_0;
   var_3 thread m880_missile_trail_fx();
@@ -140,8 +146,9 @@ fx_missile_launch(var_0) {
   self endon("launch_done");
   var_1 = "rocket_cover_rear_" + var_0 + "_jnt";
 
-  if(var_0 != "01")
+  if(var_0 != "01") {
     wait 0.5;
+  }
 
   playFXOnTag(level._effect["m880_afterburn_ignite"], self, var_1);
 }

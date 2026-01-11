@@ -154,15 +154,17 @@ laser_targeting_device()
 				self.fake_laser LaserHideFromClient( level.ground_player );
 				
 				// turn off hint when laser used, if there is a hint
-				if( self ent_flag_exist( "player_used_laser" ) )
+				if( self ent_flag_exist( "player_used_laser" ) ) {
 					self ent_flag_set( "player_used_laser" );
+				}
 			}
 		}
 
 		self giveBackWeapon();
 
-		while( self getcurrentweapon() == "laser_targeting_device" )
+		while( self getcurrentweapon() == "laser_targeting_device" ) {
 			wait 0.05;
+		}
 	}
 }
 */
@@ -181,7 +183,8 @@ giveBackWeapon() {
     self switchToWeapon(self.lastUsedWeapon);
   } else {
     weaponList = self GetWeaponsListPrimaries();
-    if(isDefined(weaponList[0]))
+    if(isDefined(weaponList[0])) {
       self switchToWeapon(weaponList[0]);
+    }
   }
 }

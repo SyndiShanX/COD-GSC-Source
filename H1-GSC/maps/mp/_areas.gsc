@@ -45,7 +45,8 @@ softlandingwaiter() {
   for(;;) {
     self waittill("soft_landing", var_0, var_1);
 
-    if(!isDefined(var_0.destructible))
+    if(!isDefined(var_0.destructible)) {
       continue;
+    }
   }
 }

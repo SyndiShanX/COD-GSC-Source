@@ -43,8 +43,9 @@ adddeathicon(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(level.hardcoremode) {
     return;
   }
-  if(isDefined(self.lastdeathicon))
+  if(isDefined(self.lastdeathicon)) {
     self.lastdeathicon destroy();
+  }
 
   var_7 = newteamhudelem(var_2);
   var_7.x = var_6[0];
@@ -53,10 +54,12 @@ adddeathicon(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7.alpha = 0.61;
   var_7.archived = 1;
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     var_7 setshader("headicon_dead", 14, 14);
-  else
+  }
+  else {
     var_7 setshader("headicon_dead", 7, 7);
+  }
 
   var_7 setwaypoint(0);
   self.lastdeathicon = var_7;

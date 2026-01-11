@@ -147,11 +147,13 @@ main() {
   level._effect["cloud_bank_cloud_filler_light_gulag"] = LoadFX("weather/cloud_bank_cloud_filler_light_gulag");
   level._effect["gulag_clouds"] = LoadFX("weather/gulag_clouds");
 
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = ToLower(GetDvar("mapname"));
+  }
 
-  if(!getdvarint("r_reflectionProbeGenerate"))
+  if(!getdvarint("r_reflectionProbeGenerate")) {
     maps\createfx\gulag_fx::main();
+  }
 
   thread treadfx_override();
 }

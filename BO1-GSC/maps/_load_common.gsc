@@ -156,8 +156,9 @@ setupExploders() {
       } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
         ents[i] hide();
         ents[i] NotSolid();
-        if(isDefined(ents[i].script_disconnectpaths))
+        if(isDefined(ents[i].script_disconnectpaths)) {
           ents[i] ConnectPaths();
+        }
       } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploderchunk")) {
         ents[i] hide();
         ents[i] NotSolid();
@@ -285,8 +286,9 @@ setupExploders() {
   }
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
-    if(ent.v["type"] != "exploder")
+    if(ent.v["type"] != "exploder") {
       continue;
+    }
     ent.v["exploder_id"] = getExploderId(ent);
   }
   reportExploderIds();
@@ -332,13 +334,15 @@ player_special_death_hint() {
     return;
   }
   if(level.gameskill >= 2) {
-    if(!map_is_early_in_the_game())
+    if(!map_is_early_in_the_game()) {
       return;
+    }
   }
   if(cause == "MOD_SUICIDE") {
     TimeSinceThrown = GetTime() - self.lastgrenadetime;
-    if((TimeSinceThrown) < 3.5 * 1000 || (TimeSinceThrown) > 4.5 * 1000)
+    if((TimeSinceThrown) < 3.5 * 1000 || (TimeSinceThrown) > 4.5 * 1000) {
       return;
+    }
     level notify("new_quote_string");
     SetDvar("ui_deadquote", "");
     self thread grenade_death_text_hudelement(&"SCRIPT_GRENADE_SUICIDE_LINE1", &"SCRIPT_GRENADE_SUICIDE_LINE2");
@@ -505,14 +509,18 @@ special_death_indicator_hudelement(shader, iWidth, iHeight, fDelay, x, y) {
   }
   wait(fDelay);
   overlay = NewClientHudElem(self);
-  if(isDefined(x))
+  if(isDefined(x)) {
     overlay.x = x;
-  else
+  }
+  else {
     overlay.x = 0;
-  if(isDefined(y))
+  }
+  if(isDefined(y)) {
     overlay.y = y;
-  else
+  }
+  else {
     overlay.y = 40;
+  }
   overlay SetShader(shader, iWidth, iHeight);
   overlay.alignX = "center";
   overlay.alignY = "middle";

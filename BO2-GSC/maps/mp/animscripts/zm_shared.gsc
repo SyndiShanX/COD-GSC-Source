@@ -24,15 +24,19 @@ lookatposition(looktargetpos, lookduration, lookspeed, eyesonly, interruptothers
     self.a.looktargetpos = looktargetpos;
     self.a.lookendtime = gettime() + lookduration * 1000;
 
-    if(lookspeed == "casual")
+    if(lookspeed == "casual") {
       self.a.looktargetspeed = 800;
-    else
+    }
+    else {
       self.a.looktargetspeed = 1600;
+    }
 
-    if(isDefined(eyesonly) && eyesonly == "eyes only")
+    if(isDefined(eyesonly) && eyesonly == "eyes only") {
       self notify("eyes look now");
-    else
+    }
+    else {
       self notify("look now");
+    }
   }
 }
 
@@ -49,15 +53,18 @@ handledogsoundnotetracks(note) {
 
   prefix = getsubstr(note, 0, 5);
 
-  if(prefix != "sound")
+  if(prefix != "sound") {
     return false;
+  }
 
   alias = "aml" + getsubstr(note, 5);
 
-  if(isalive(self))
+  if(isalive(self)) {
     self thread play_sound_on_tag_endon_death(alias, "tag_eye");
-  else
+  }
+  else {
     self thread play_sound_in_space(alias, self gettagorigin("tag_eye"));
+  }
 
   return true;
 }
@@ -102,28 +109,33 @@ notetrackstartragdoll(note, flagname) {
 }
 
 notetrackmovementstop(note, flagname) {
-  if(issentient(self))
+  if(issentient(self)) {
     self.a.movement = "stop";
+  }
 }
 
 notetrackmovementwalk(note, flagname) {
-  if(issentient(self))
+  if(issentient(self)) {
     self.a.movement = "walk";
+  }
 }
 
 notetrackmovementrun(note, flagname) {
-  if(issentient(self))
+  if(issentient(self)) {
     self.a.movement = "run";
+  }
 }
 
 notetrackalertnesscasual(note, flagname) {
-  if(issentient(self))
+  if(issentient(self)) {
     self.a.alertness = "casual";
+  }
 }
 
 notetrackalertnessalert(note, flagname) {
-  if(issentient(self))
+  if(issentient(self)) {
     self.a.alertness = "alert";
+  }
 }
 
 notetrackposestand(note, flagname) {
@@ -142,8 +154,9 @@ notetrackposecrouch(note, flagname) {
 }
 
 notetrackgravity(note, flagname) {
-  if(issubstr(note, "on"))
+  if(issubstr(note, "on")) {
     self animmode("gravity");
+  }
   else if(issubstr(note, "off")) {
     self animmode("nogravity");
     self.nogravity = 1;
@@ -154,54 +167,67 @@ notetrackgravity(note, flagname) {
 }
 
 notetrackbodyfall(note, flagname) {
-  if(isDefined(self.groundtype))
+  if(isDefined(self.groundtype)) {
     groundtype = self.groundtype;
-  else
+  }
+  else {
     groundtype = "dirt";
+  }
 
-  if(issubstr(note, "large"))
+  if(issubstr(note, "large")) {
     self playSound("fly_bodyfall_large_" + groundtype);
-  else if(issubstr(note, "small"))
+  }
+  else if(issubstr(note, "small")) {
     self playSound("fly_bodyfall_small_" + groundtype);
+  }
 }
 
 notetrackfootstep(note, flagname) {
-  if(issubstr(note, "left"))
+  if(issubstr(note, "left")) {
     playfootstep("J_Ball_LE");
-  else
+  }
+  else {
     playfootstep("J_BALL_RI");
+  }
 
-  if(!level.clientscripts)
+  if(!level.clientscripts) {
     self playSound("fly_gear_run");
+  }
 }
 
 notetrackfootscrape(note, flagname) {
-  if(isDefined(self.groundtype))
+  if(isDefined(self.groundtype)) {
     groundtype = self.groundtype;
-  else
+  }
+  else {
     groundtype = "dirt";
+  }
 
   self playSound("fly_step_scrape_" + groundtype);
 }
 
 notetrackland(note, flagname) {
-  if(isDefined(self.groundtype))
+  if(isDefined(self.groundtype)) {
     groundtype = self.groundtype;
-  else
+  }
+  else {
     groundtype = "dirt";
+  }
 
   self playSound("fly_land_npc_" + groundtype);
 }
 
 handlenotetrack(note, flagname, customfunction, var1) {
   if(isai(self) && self.isdog) {
-    if(handledogsoundnotetracks(note))
+    if(handledogsoundnotetracks(note)) {
       return;
+    }
   } else {
     notetrackfunc = anim.notetracks[note];
 
-    if(isDefined(notetrackfunc))
+    if(isDefined(notetrackfunc)) {
       return [
+    }
         [notetrackfunc]
       ](note, flagname);
   }
@@ -252,12 +278,14 @@ handlenotetrack(note, flagname, customfunction, var1) {
       break;
     default:
       if(isDefined(customfunction)) {
-        if(!isDefined(var1))
+        if(!isDefined(var1)) {
           return [
+        }
             [customfunction]
           ](note);
-        else
+        else {
           return [
+        }
             [customfunction]
           ](note, var1);
       }
@@ -270,19 +298,22 @@ donotetracks(flagname, customfunction, var1) {
   for(;;) {
     self waittill(flagname, note);
 
-    if(!isDefined(note))
+    if(!isDefined(note)) {
       note = "undefined";
+    }
 
     val = self handlenotetrack(note, flagname, customfunction, var1);
 
-    if(isDefined(val))
+    if(isDefined(val)) {
       return val;
+    }
   }
 }
 
 donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, var1) {
-  if(isDefined(killstring))
+  if(isDefined(killstring)) {
     self endon(killstring);
+  }
 
   self endon("killanimscript");
 
@@ -339,8 +370,9 @@ playfootstep(foot) {
 
   if(!isDefined(self.groundtype)) {
     if(!isDefined(self.lastgroundtype)) {
-      if(!level.clientscripts)
+      if(!level.clientscripts) {
         self playSound("fly_step_run_dirt");
+      }
 
       return;
     }
@@ -351,8 +383,9 @@ playfootstep(foot) {
     self.lastgroundtype = self.groundtype;
   }
 
-  if(!level.clientscripts)
+  if(!level.clientscripts) {
     self playSound("fly_step_run_" + groundtype);
+  }
 
   [[anim.optionalstepeffectfunction]](foot, groundtype);
 }
@@ -362,8 +395,9 @@ playfootstepeffect(foot, groundtype) {
     return;
   }
   for(i = 0; i < anim.optionalstepeffects.size; i++) {
-    if(isDefined(self.fire_footsteps) && self.fire_footsteps)
+    if(isDefined(self.fire_footsteps) && self.fire_footsteps) {
       groundtype = "fire";
+    }
 
     if(groundtype != anim.optionalstepeffects[i]) {
       continue;

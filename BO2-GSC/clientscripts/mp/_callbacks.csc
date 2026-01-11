@@ -32,16 +32,19 @@
 #include clientscripts\mp\_fx;
 
 statechange(clientnum, system, newstate) {
-  if(!isDefined(level._systemstates))
+  if(!isDefined(level._systemstates)) {
     level._systemstates = [];
+  }
 
-  if(!isDefined(level._systemstates[system]))
+  if(!isDefined(level._systemstates[system])) {
     level._systemstates[system] = spawnStruct();
+  }
 
   level._systemstates[system].state = newstate;
 
-  if(isDefined(level._systemstates[system].callback))
+  if(isDefined(level._systemstates[system].callback)) {
     [[level._systemstates[system].callback]](clientnum, newstate);
+  }
   else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
 
@@ -68,8 +71,9 @@ localclientdisconnect(clientnum) {
 glass_smash(org, dir) {
   level notify("glass_smash", org, dir);
 
-  if(isDefined(level._glasssmashcbfunc))
+  if(isDefined(level._glasssmashcbfunc)) {
     level thread[[level._glasssmashcbfunc]](org, dir);
+  }
 }
 
 soundsetambientstate(ambientroom, ambientpackage, roomcollidercent, packagecollidercent, defaultroom) {
@@ -100,18 +104,21 @@ playerspawned(localclientnum) {
   if(!sessionmodeiszombiesgame()) {
   }
 
-  if(isDefined(level._faceanimcbfunc))
+  if(isDefined(level._faceanimcbfunc)) {
     self thread[[level._faceanimcbfunc]](localclientnum);
+  }
 }
 
 codecallback_gibevent(localclientnum, type, locations) {
-  if(isDefined(level._gibeventcbfunc))
+  if(isDefined(level._gibeventcbfunc)) {
     self thread[[level._gibeventcbfunc]](localclientnum, type, locations);
+  }
 }
 
 codecallback_precachegametype() {
-  if(isDefined(level.callbackprecachegametype))
+  if(isDefined(level.callbackprecachegametype)) {
     [[level.callbackprecachegametype]]();
+  }
 }
 
 codecallback_startgametype() {
@@ -136,8 +143,9 @@ entityspawned(localclientnum) {
   }
 
   if(self.type == "missile") {
-    if(isdumbrocketlauncherweapon(self.weapon))
+    if(isdumbrocketlauncherweapon(self.weapon)) {
       self thread clientscripts\mp\_audio::rpgwhizbywatcher();
+    }
 
     switch (self.weapon) {
       case "explosive_bolt_mp":
@@ -171,12 +179,14 @@ entityspawned(localclientnum) {
   }
 
   if(self.type == "vehicle") {
-    if(!isDefined(level.vehicles_inited))
+    if(!isDefined(level.vehicles_inited)) {
       clientscripts\mp\_vehicle::init_vehicles();
+    }
 
     if(self.vehicleclass == "4 wheel") {
-      if(self.vehicletype == "rc_car_medium_mp")
+      if(self.vehicletype == "rc_car_medium_mp") {
         self thread clientscripts\mp\_rcbomb::spawned(localclientnum);
+      }
     } else if(self.vehicletype == "ai_tank_drone_mp")
       self thread clientscripts\mp\_ai_tank::spawned(localclientnum);
     else if(self.vehicleclass == "tank") {
@@ -192,27 +202,31 @@ entityspawned(localclientnum) {
     self thread clientscripts\mp\_helicopter_sounds::start_helicopter_sounds();
     self thread clientscripts\mp\_helicopter::startfx_loop(localclientnum);
 
-    if(self.vehicletype == "qrdrone_mp")
+    if(self.vehicletype == "qrdrone_mp") {
       self thread clientscripts\mp\_qrdrone::spawned(localclientnum);
+    }
   }
 
-  if(self.type == "actor")
+  if(self.type == "actor") {
     self thread clientscripts\mp\_dogs::spawned(localclientnum);
+  }
 }
 
 codecallback_soundnotify(localclientnum, entity, note) {
   switch (note) {
     case "scr_bomb_beep":
-      if(getgametypesetting("silentPlant") == 0)
+      if(getgametypesetting("silentPlant") == 0) {
         entity playSound(localclientnum, "fly_bomb_buttons_npc");
+      }
 
       break;
   }
 }
 
 entityshutdown_callback(localclientnum, entity) {
-  if(isDefined(level._entityshutdowncbfunc))
+  if(isDefined(level._entityshutdowncbfunc)) {
     [[level._entityshutdowncbfunc]](localclientnum, entity);
+  }
 }
 
 localclientchanged_callback(localclientnum) {
@@ -345,10 +359,12 @@ stunned_callback(localclientnum, set) {
 
   println("stunned_callback");
 
-  if(set)
+  if(set) {
     self notify("stunned");
-  else
+  }
+  else {
     self notify("not_stunned");
+  }
 }
 
 emp_callback(localclientnum, set) {
@@ -356,10 +372,12 @@ emp_callback(localclientnum, set) {
 
   println("emp_callback");
 
-  if(set)
+  if(set) {
     self notify("emp");
-  else
+  }
+  else {
     self notify("not_emp");
+  }
 }
 
 proximity_callback(localclientnum, set) {
@@ -367,8 +385,9 @@ proximity_callback(localclientnum, set) {
 }
 
 client_flag_debug(msg) {
-  if(getdvarintdefault("scr_client_flag_debug", 0) > 0)
+  if(getdvarintdefault("scr_client_flag_debug", 0) > 0) {
     println(msg);
+  }
 }
 
 client_flag_callback(localclientnum, flag, set) {
@@ -383,20 +402,23 @@ client_flag_callback(localclientnum, flag, set) {
   }
 
   if(isarray(level._client_flag_callbacks[self.type])) {
-    if(isDefined(level._client_flag_callbacks[self.type][flag]))
+    if(isDefined(level._client_flag_callbacks[self.type][flag])) {
       self thread[[level._client_flag_callbacks[self.type][flag]]](localclientnum, set);
+    }
   } else
     self thread[[level._client_flag_callbacks[self.type]]](localclientnum, flag, set);
 }
 
 client_flagasval_callback(localclientnum, val) {
-  if(isDefined(level._client_flagasval_callbacks) && isDefined(level._client_flagasval_callbacks[self.type]))
+  if(isDefined(level._client_flagasval_callbacks) && isDefined(level._client_flagasval_callbacks[self.type])) {
     self thread[[level._client_flagasval_callbacks[self.type]]](localclientnum, val);
+  }
 }
 
 codecallback_creatingcorpse(localclientnum, player) {
-  if(self isburning())
+  if(self isburning()) {
     self thread clientscripts\mp\_burnplayer::corpseflamefx(localclientnum);
+  }
 }
 
 codecallback_playerjump(client_num, player, ground_type, firstperson, quiet, islouder) {
@@ -406,8 +428,9 @@ codecallback_playerjump(client_num, player, ground_type, firstperson, quiet, isl
 codecallback_playerland(client_num, player, ground_type, firstperson, quiet, damageplayer, islouder) {
   clientscripts\mp\_footsteps::playerland(client_num, player, ground_type, firstperson, quiet, damageplayer, islouder);
 
-  if(isDefined(level.playerland))
+  if(isDefined(level.playerland)) {
     level thread[[level.playerland]](client_num, player, ground_type, firstperson, quiet, damageplayer);
+  }
 }
 
 codecallback_playerfoliage(client_num, player, firstperson, quiet) {
@@ -425,8 +448,9 @@ onfinalizeinitialization_callback(func) {
 addcallback(event, func) {
   assert(isDefined(event), "Trying to set a callback on an undefined event.");
 
-  if(!isDefined(level._callbacks) || !isDefined(level._callbacks[event]))
+  if(!isDefined(level._callbacks) || !isDefined(level._callbacks[event])) {
     level._callbacks[event] = [];
+  }
 
   level._callbacks[event] = add_to_array(level._callbacks[event], func, 0);
 }
@@ -436,8 +460,9 @@ callback(event) {
     for(i = 0; i < level._callbacks[event].size; i++) {
       callback = level._callbacks[event][i];
 
-      if(isDefined(callback))
+      if(isDefined(callback)) {
         self thread[[callback]]();
+      }
     }
   }
 }

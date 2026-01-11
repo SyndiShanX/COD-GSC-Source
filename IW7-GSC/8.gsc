@@ -7,8 +7,9 @@ codecallback_agentadded() {
   self[[level.initagentscriptvariables]]();
   var_00 = "axis";
 
-  if(level.numagents % 2 == 0)
+  if(level.numagents % 2 == 0) {
     var_00 = "allies";
+  }
 
   level.numagents++;
   self sethitlocdamagetable("locdmgtable\mp_lochit_dmgtable");
@@ -22,13 +23,15 @@ codecallback_agentdamaged(var_00, var_01, var_02, var_03, var_04, var_05, var_06
   ](var_01);
   var_12 = self[[level.agentfunc]]("on_damaged");
 
-  if(isDefined(var_12))
+  if(isDefined(var_12)) {
     self[[var_12]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
+  }
 }
 
 codecallback_agentimpaled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
-  if(isDefined(level.callbackplayerimpaled))
+  if(isDefined(level.callbackplayerimpaled)) {
     [[level.callbackplayerimpaled]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07);
+  }
 }
 
 codecallback_agentkilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {
@@ -37,8 +40,9 @@ codecallback_agentkilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06,
   ](var_01);
   var_10 = self[[level.agentfunc]]("on_killed");
 
-  if(isDefined(var_10))
+  if(isDefined(var_10)) {
     self thread[[var_10]](var_00, var_01, var_02, var_04, var_05, var_06, var_07, var_08, var_09);
+  }
 }
 
 func_00A7(var_00, var_01, var_02, var_03) {}
@@ -61,16 +65,20 @@ connectnewagent(var_00, var_01, var_02) {
   if(isDefined(var_03)) {
     var_3.connecttime = gettime();
 
-    if(isDefined(var_01))
+    if(isDefined(var_01)) {
       var_03[[level.setagentteam]](var_01);
-    else
+    }
+    else {
       var_03[[level.setagentteam]](var_3.team);
+    }
 
-    if(isDefined(var_02))
+    if(isDefined(var_02)) {
       var_3.class_override = var_02;
+    }
 
-    if(isDefined(level.agent_funcs[var_00]["onAIConnect"]))
+    if(isDefined(level.agent_funcs[var_00]["onAIConnect"])) {
       var_03[[var_03[[level.agentfunc]]("onAIConnect")]]();
+    }
 
     var_03[[level.addtocharactersarray]]();
   }

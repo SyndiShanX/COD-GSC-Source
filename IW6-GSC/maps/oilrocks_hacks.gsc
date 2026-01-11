@@ -5,13 +5,15 @@
 
 main_pre_load() {
   foreach(var_1 in getEntArray("apache_factory_gaz_road", "targetname")) {
-    if(var_1.classname == "script_vehicle_m800")
+    if(var_1.classname == "script_vehicle_m800") {
       var_1.targetname = "apache_factory_m800_road";
+    }
   }
 
   foreach(var_4 in getEntArray("blackhawk_riders", "script_noteworthy")) {
-    if(isDefined(var_4.script_friendname) && var_4.script_friendname == "HeroGuy")
+    if(isDefined(var_4.script_friendname) && var_4.script_friendname == "HeroGuy") {
       var_4.script_friendname = "Logan";
+    }
   }
 
   maps\_utility::post_load_precache(::clean_up_first_half_thread);
@@ -22,8 +24,9 @@ clean_up_first_half_thread() {
 }
 
 clean_up_first_half() {
-  while(level.player.origin[0] < 16000)
+  while(level.player.origin[0] < 16000) {
     wait 1;
+  }
 
   var_0 = ["script_vehicle_m800", "script_vehicle_hind_battle_oilrocks", "script_vehicle_zpu4_oilrocks"];
   var_1 = [];
@@ -33,8 +36,9 @@ clean_up_first_half() {
     var_5 = getEntArray(var_4, "classname");
 
     foreach(var_7 in var_5) {
-      if(var_7.origin[0] < var_2)
+      if(var_7.origin[0] < var_2) {
         var_1[var_1.size] = var_7;
+      }
     }
   }
 

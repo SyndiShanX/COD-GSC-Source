@@ -18,14 +18,16 @@ minefield_think() {
   while(1) {
     self waittill("trigger", other);
 
-    if(isPlayer(other))
+    if(isPlayer(other)) {
       other thread minefield_kill(self);
+    }
   }
 }
 
 minefield_kill(trigger) {
-  if(isDefined(self.minefield))
+  if(isDefined(self.minefield)) {
     return;
+  }
 
   self.minefield = true;
   self playSound("minefield_click");

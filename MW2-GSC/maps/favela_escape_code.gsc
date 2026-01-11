@@ -2881,11 +2881,13 @@ solorun_timer_extend_when_close(timerTime, timerLoc) {
 }
 
 solorun_timer(iSeconds, sLabel, bUseTick) {
-  if(getdvar("notimer") == "1")
+  if(getdvar("notimer") == "1") {
     return;
+  }
 
-  if(!isDefined(bUseTick))
+  if(!isDefined(bUseTick)) {
     bUseTick = false;
+  }
   // destroy any previous timer just in case
   killTimer();
   level endon("kill_timer");
@@ -2899,8 +2901,9 @@ solorun_timer(iSeconds, sLabel, bUseTick) {
   level.start_time = gettime();
 
   // -- timer expired --
-  if(bUseTick == true)
+  if(bUseTick == true) {
     thread timer_tick();
+  }
   wait(iSeconds);
 
   flag_set("timer_expired");
@@ -4254,8 +4257,9 @@ window_smash(smashAnime) {
 
 // ---- curtain pulldown guys ----
 curtain_pulldown(bWaitForPlayer, specialWaitFunc) {
-  if(!isDefined(bWaitForPlayer))
+  if(!isDefined(bWaitForPlayer)) {
     bWaitForPlayer = false;
+  }
 
   assert(isDefined(self.target));
   node = self curtain_pulldown_getnode();
@@ -4264,8 +4268,9 @@ curtain_pulldown(bWaitForPlayer, specialWaitFunc) {
   curtain = curtain_pulldown_spawnmodel(node);
 
   self waittill("spawned", guy);
-  if(spawn_failed(guy))
+  if(spawn_failed(guy)) {
     return;
+  }
 
   guy endon("death");
 
@@ -4321,8 +4326,9 @@ curtain_pulldown_spawnmodel(node) {
 curtain_pulldown_getnode() {
   nodes = getEntArray(self.target, "targetname");
   foreach(node in nodes) {
-    if(node.classname == "script_origin")
+    if(node.classname == "script_origin") {
       return node;
+    }
   }
   assertMsg("curtain pulldown guy doesn't target a script_origin");
 }
@@ -4348,8 +4354,9 @@ dialogue_print(line, timeout) {
 
   level endon("clearing_hints");
 
-  if(isDefined(level.tempHint))
+  if(isDefined(level.tempHint)) {
     level.tempHint destroyElem();
+  }
 
   level.tempHint = createFontString("default", 1.5);
   level.tempHint setPoint("BOTTOM", undefined, 0, -40);

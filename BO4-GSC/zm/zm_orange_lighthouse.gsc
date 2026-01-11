@@ -772,4 +772,3 @@ function_f6d23861() {
     waitframe(1);
   }
 }
-

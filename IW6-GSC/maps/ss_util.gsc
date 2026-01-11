@@ -8,10 +8,12 @@ fake_death_over_time(var_0, var_1, var_2) {
   wait(randomintrange(var_1, var_2));
 
   if(isDefined(self) && isai(self) && isalive(self)) {
-    if(var_0 == "bullet")
+    if(var_0 == "bullet") {
       fake_death_bullet();
-    else
+    }
+    else {
       fake_death_bullet();
+    }
   }
 }
 
@@ -26,8 +28,9 @@ fake_death_bullet(var_0) {
   }
   self.bloody_death = 1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     wait(randomfloat(var_0));
+  }
 
   var_1 = [];
   var_1[0] = "j_hip_le";
@@ -49,8 +52,9 @@ fake_death_bullet(var_0) {
 }
 
 fake_death_bullet_fx(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = level._effect["flesh_hit"];
+  }
 
   playFXOnTag(var_1, self, var_0);
 }
@@ -82,45 +86,57 @@ dialogue_queue_single(var_0) {
 dialogue_random_line(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = [];
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_8[var_8.size] = var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_8[var_8.size] = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_8[var_8.size] = var_2;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_8[var_8.size] = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_8[var_8.size] = var_4;
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     var_8[var_8.size] = var_5;
+  }
 
-  if(isDefined(var_6))
+  if(isDefined(var_6)) {
     var_8[var_8.size] = var_6;
+  }
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     var_8[var_8.size] = var_7;
+  }
 
-  if(!isDefined(level.dialogue_random_last_line))
+  if(!isDefined(level.dialogue_random_last_line)) {
     level.dialogue_random_last_line = undefined;
+  }
 
   var_9 = 0;
 
   while(!var_9) {
     var_10 = common_scripts\utility::random(var_8);
 
-    if(isDefined(level.dialogue_random_last_line) && level.dialogue_random_last_line == var_10)
+    if(isDefined(level.dialogue_random_last_line) && level.dialogue_random_last_line == var_10) {
       continue;
+    }
     else {
-      if(isDefined(self) && isai(self))
+      if(isDefined(self) && isai(self)) {
         dialogue_queue_single(var_10);
-      else
+      }
+      else {
         radio_dialogue_queue_single(var_10);
+      }
 
       level.dialogue_random_last_line = var_10;
       var_9 = 1;
@@ -139,16 +155,18 @@ hint_neverbreak() {
 setup_ignore_suppression_triggers() {
   var_0 = getEntArray("trigger_ignore_suppression", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   level thread ignore_suppression_trigger_think(var_2);
+  }
 }
 
 ignore_suppression_trigger_think(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
 
-    if(isDefined(var_1) && isai(var_1) && !var_1 isbadguy())
+    if(isDefined(var_1) && isai(var_1) && !var_1 isbadguy()) {
       var_1 thread ignore_suppression_trigger_ai_think(var_0);
+    }
   }
 }
 
@@ -158,17 +176,20 @@ ignore_suppression_trigger_ai_think(var_0) {
   self endon("death");
   maps\_utility::set_ignoresuppression(1);
 
-  while(self istouching(var_0))
+  while(self istouching(var_0)) {
     wait 0.5;
+  }
 
   maps\_utility::set_ignoresuppression(0);
 }
 
 add_hint_background(var_0) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level.hintbackground = maps\_hud_util::createicon("popmenu_bg", 650, 50);
-  else
+  }
+  else {
     level.hintbackground = maps\_hud_util::createicon("popmenu_bg", 650, 30);
+  }
 
   level.hintbackground.hidewheninmenu = 1;
   level.hintbackground maps\_hud_util::setpoint("TOP", undefined, 0, 110);
@@ -177,20 +198,25 @@ add_hint_background(var_0) {
 }
 
 clear_hints() {
-  if(isDefined(level.hintelem))
+  if(isDefined(level.hintelem)) {
     level.hintelem maps\_hud_util::destroyelem();
+  }
 
-  if(isDefined(level.iconelem))
+  if(isDefined(level.iconelem)) {
     level.iconelem maps\_hud_util::destroyelem();
+  }
 
-  if(isDefined(level.iconelem2))
+  if(isDefined(level.iconelem2)) {
     level.iconelem2 maps\_hud_util::destroyelem();
+  }
 
-  if(isDefined(level.iconelem3))
+  if(isDefined(level.iconelem3)) {
     level.iconelem3 maps\_hud_util::destroyelem();
+  }
 
-  if(isDefined(level.hintbackground))
+  if(isDefined(level.hintbackground)) {
     level.hintbackground maps\_hud_util::destroyelem();
+  }
 
   level notify("clearing_hints");
 }
@@ -206,10 +232,12 @@ hint_with_background(var_0, var_1, var_2) {
   level.high_priority_hint = 1;
   level.hintelem settext(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     wait(var_1);
-  else
+  }
+  else {
     return;
+  }
 
   level.high_priority_hint = undefined;
   level.hintelem fadeovertime(0.5);
@@ -264,8 +292,9 @@ so_can_player_see_dog(var_0) {
   var_1 = self getEye();
   var_2 = var_0 getEye();
 
-  if(sighttracepassed(var_1, var_2, 1, self, var_0))
+  if(sighttracepassed(var_1, var_2, 1, self, var_0)) {
     return 1;
+  }
 
   return 0;
 }
@@ -273,15 +302,17 @@ so_can_player_see_dog(var_0) {
 get_next_allow_melee_time(var_0) {
   var_1 = 0;
 
-  if(isDefined(self.enemy.dogattackallowtime))
+  if(isDefined(self.enemy.dogattackallowtime)) {
     var_1 = self.enemy.dogattackallowtime + 2500;
+  }
 
   return var_1;
 }
 
 dog_enemy_laststand_check() {
-  if(!maps\_utility::is_coop())
+  if(!maps\_utility::is_coop()) {
     return 0;
+  }
 
   if(isDefined(self.favoriteenemy.laststand) && self.favoriteenemy.laststand) {
     dog_swap_enemy();

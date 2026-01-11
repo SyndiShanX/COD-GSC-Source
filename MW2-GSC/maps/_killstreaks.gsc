@@ -30,8 +30,9 @@ init() {
 initKillstreakData() {
   for(i = 1; true; i++) {
     retVal = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 1);
-    if(!isDefined(retVal) || retVal == "")
+    if(!isDefined(retVal) || retVal == "") {
       break;
+    }
 
     streakRef = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 1);
     assert(streakRef != "");
@@ -66,8 +67,9 @@ initKillstreakData() {
     */
 
     streakWeapon = tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 12);
-    if(streakWeapon != "")
+    if(streakWeapon != "") {
       precacheItem(streakWeapon);
+    }
 
     streakPoints = int(tableLookup(KILLSTREAK_STRING_TABLE, 0, i, 13));
     assert(streakPoints != 0);
@@ -107,10 +109,12 @@ killstreakUsePressed() {
 		
     //array_thread( level.players, ::playLocalSoundWrapper, level.pmc.sound[ "juggernaut_attack" ] );
 		
-    if( level.teamBased )
+    if( level.teamBased ) {
     	thread leaderDialog( streakName + "_inbound", team );
-    else
+    }
+    else {
     	self thread leaderDialogOnPlayer( streakName + "_inbound" );
+    }
     */
 
     self playLocalSound("weap_c4detpack_trigger_plr");
@@ -132,17 +136,21 @@ killstreakUseWaiter() {
   for(;;) {
     self waittill("use killstreak");
 
-    if(!isAlive(self))
+    if(!isAlive(self)) {
       continue;
+    }
 
-    if(isDefined(self.canUseKillstreaks) && !self.canUseKillstreaks)
+    if(isDefined(self.canUseKillstreaks) && !self.canUseKillstreaks) {
       continue;
+    }
 
-    if(isDefined(self.placingSentry))
+    if(isDefined(self.placingSentry)) {
       continue;
+    }
 
-    if(!isDefined(self.pers["killstreak"]))
+    if(!isDefined(self.pers["killstreak"])) {
       continue;
+    }
 
     self killstreakUsePressed();
   }
@@ -151,12 +159,14 @@ killstreakUseWaiter() {
 checkKillstreakReward(streakCount) {
   streak = streakCount;
 
-  if(streak < 3)
+  if(streak < 3) {
     return;
+  }
 
   if(!isDefined(self.killStreaks[streak])) {
-    if(streak >= 10 && (streak % 5 == 0))
+    if(streak >= 10 && (streak % 5 == 0)) {
       self streakNotify(streak);
+    }
     return;
   }
 
@@ -195,15 +205,18 @@ rewardNotify(streakName, streakVal) {
 }
 
 tryGiveKillstreak(streakName, streakVal) {
-  if(!isDefined(level.killstreakFuncs[streakName]))
+  if(!isDefined(level.killstreakFuncs[streakName])) {
     return false;
+  }
 
-  if(isDefined(self.selectingLocation))
+  if(isDefined(self.selectingLocation)) {
     return false;
+  }
 
   if(isDefined(self.pers["killstreak"])) {
-    if(getStreakCost(streakName) < getStreakCost(self.pers["killstreak"]))
+    if(getStreakCost(streakName) < getStreakCost(self.pers["killstreak"])) {
       return false;
+    }
   }
 
   self thread rewardNotify(streakName, streakVal);
@@ -225,8 +238,9 @@ giveKillstreak(streakName) {
 
   self.pers["killstreak"] = streakName;
 
-  if(isDefined(level.killstreakSetupFuncs[streakName]))
+  if(isDefined(level.killstreakSetupFuncs[streakName])) {
     self[[level.killstreakSetupFuncs[streakName]]]();
+  }
 }
 
 giveKillstreakWeapon(weapon) {
@@ -236,10 +250,12 @@ giveKillstreakWeapon(weapon) {
 }
 
 getStreakCost(streakName) {
-  if(is_coop())
+  if(is_coop()) {
     return int(tableLookup(KILLSTREAK_STRING_TABLE, 1, streakName, 5));
-  else
+  }
+  else {
     return int(tableLookup(KILLSTREAK_STRING_TABLE, 1, streakName, 4));
+  }
 }
 
 getKillstreakHint(streakName) {
@@ -263,8 +279,9 @@ getKillstreakWeapon(streakName) {
 }
 
 giveOwnedKillstreakItem() {
-  if(isDefined(self.pers["killstreak"]))
+  if(isDefined(self.pers["killstreak"])) {
     self giveKillstreak(self.pers["killstreak"]);
+  }
 }
 
 setKillstreaks(streak1, streak2, streak3) {

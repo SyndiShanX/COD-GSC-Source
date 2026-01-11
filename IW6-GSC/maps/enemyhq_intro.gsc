@@ -62,8 +62,9 @@ begin_drive_in() {
   thread obj_getingetajaxgetout();
   thread gold_door_on_player_truck();
 
-  foreach(var_1 in level.allies)
+  foreach(var_1 in level.allies) {
   var_1.alertlevel = "noncombat";
+  }
 
   thread maps\_utility::autosave_now();
   thread get_in_truck_nag_vo();
@@ -157,8 +158,9 @@ gold_door_on_player_truck() {
 }
 
 setup_allies_vehicle_approach() {
-  foreach(var_1 in level.allies)
+  foreach(var_1 in level.allies) {
   var_1 maps\_utility::enable_ai_color();
+  }
 
   if(level.start_point != "drive_in") {
     thread maps\enemyhq_rooftop_intro::merrick_look_at_flyby();
@@ -525,8 +527,9 @@ spawn_trucks() {
 spawn_player_truck() {
   level.player_truck = maps\_vehicle::spawn_vehicle_from_targetname("player_truck");
 
-  if(level.start_point == "intro" || level.start_point == "introshoot" || level.start_point == "drive_in")
+  if(level.start_point == "intro" || level.start_point == "introshoot" || level.start_point == "drive_in") {
     thread handle_truck_windshield_break();
+  }
 }
 
 handle_truck_windshield_break() {
@@ -579,8 +582,9 @@ truck_exploder_start_driving() {
   common_scripts\utility::flag_wait("FLAG_truck_exploder_start");
   var_0 = maps\_utility::get_ai_group_ai("field_chaos1_guys");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 delete();
+  }
 }
 
 truck_pathblockers() {
@@ -616,8 +620,9 @@ sticky_grenade_02() {
   common_scripts\utility::flag_wait("FLAG_clacked_the_clacker");
   var_0 = getent("convoy_veh_02_blow_spot", "targetname");
 
-  foreach(var_2 in level.truck_bash_guys)
+  foreach(var_2 in level.truck_bash_guys) {
   var_2 kill();
+  }
 
   var_4 = getent("truck_bash_jeep", "targetname");
   thread maps\enemyhq_audio::aud_blow_vehicle_low(var_4);
@@ -762,8 +767,9 @@ sticky_grenade_05() {
   var_1 = maps\enemyhq_code::array_spawn_targetname_allow_fail("field_guys6");
   var_2 = maps\enemyhq_code::array_spawn_targetname_allow_fail("field_guys6_ignore");
 
-  foreach(var_4 in var_2)
+  foreach(var_4 in var_2) {
   var_4.ignoreall = 1;
+  }
 }
 
 stop_truck_05_fx(var_0) {
@@ -789,23 +795,29 @@ sticky_grenade_07() {
 }
 
 ehq_intro_flag_wait_all(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     common_scripts\utility::flag_wait(var_0);
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     common_scripts\utility::flag_wait(var_1);
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     common_scripts\utility::flag_wait(var_2);
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     common_scripts\utility::flag_wait(var_3);
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     common_scripts\utility::flag_wait(var_4);
+  }
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     common_scripts\utility::flag_wait(var_5);
+  }
 }
 
 obj_getingetajaxgetout() {

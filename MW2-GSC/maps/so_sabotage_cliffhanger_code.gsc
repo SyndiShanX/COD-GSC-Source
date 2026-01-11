@@ -187,8 +187,9 @@ increase_fov_when_player_is_near() {
 
 player_is_near() {
   foreach(player in level.players) {
-    if(DistanceSquared(self.origin, player.origin) < squared(self.footstepDetectDistSprint))
+    if(DistanceSquared(self.origin, player.origin) < squared(self.footstepDetectDistSprint)) {
       return true;
+    }
   }
 
   return false;
@@ -279,8 +280,9 @@ stealth_settings() {
 stealth_cliffhanger_clifftop() {
   self stealth_plugin_basic();
 
-  if(isplayer(self))
+  if(isplayer(self)) {
     return;
+  }
 
   threat_array["warning1"] = maps\_stealth_threat_enemy::enemy_alert_level_warning2;
   switch (self.team) {
@@ -343,14 +345,16 @@ dialog_stealth_spotted() {
     flag_wait("_stealth_spotted");
 
     wait 1;
-    if(flag("_stealth_spotted"))
+    if(flag("_stealth_spotted")) {
       dialog_stealth_throttle(failure[line]);
+    }
 
     level.stealth_broken_time = gettime();
 
     line++;
-    if(line >= failure.size)
+    if(line >= failure.size) {
       line = 0;
+    }
 
     flag_waitopen("_stealth_spotted");
   }
@@ -375,17 +379,20 @@ dialog_stealth_failure() {
     flag_waitopen("_stealth_spotted");
     wait 1;
 
-    if(!flag("_stealth_spotted"))
+    if(!flag("_stealth_spotted")) {
       dialog_stealth_throttle(failure[line]);
+    }
     line++;
-    if(line >= failure.size)
+    if(line >= failure.size) {
       line = 0;
+    }
   }
 }
 
 dialog_stealth_throttle(dialog_alias) {
-  if(level.stealth_broken_time + 5000 < gettime())
+  if(level.stealth_broken_time + 5000 < gettime()) {
     radio_dialogue(dialog_alias);
+  }
 }
 
 dialog_unsilenced_weapons() {
@@ -396,14 +403,17 @@ dialog_unsilenced_weapons() {
     self waittill("weapon_change");
 
     current_weapon = self getcurrentprimaryweapon();
-    if(!isDefined(current_weapon))
+    if(!isDefined(current_weapon)) {
       continue;
+    }
 
-    if(current_weapon == "none")
+    if(current_weapon == "none") {
       continue;
+    }
 
-    if(issubstr(current_weapon, "silence"))
+    if(issubstr(current_weapon, "silence")) {
       continue;
+    }
 
     //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
     thread radio_dialogue("cliff_pri_attractattn");
@@ -506,13 +516,16 @@ unload_and_attack_if_stealth_broken_and_close() {
 
   while(1) {
     flag_wait("_stealth_spotted");
-    foreach(player in level.players)
+    foreach(player in level.players) {
     thread waittill_player_in_range(player);
+    }
     self waittill("player_in_range");
-    if(!flag("_stealth_spotted"))
+    if(!flag("_stealth_spotted")) {
       continue;
-    else
+    }
+    else {
       break;
+    }
   }
   flag_set("truck_guys_alerted");
 }
@@ -537,8 +550,9 @@ truck_headlights() {
 
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     delete_truck_headlights();
+  }
 }
 
 delete_truck_headlights() {
@@ -574,8 +588,9 @@ dialog_truck_coming() {
 
 waittill_player_in_truck_range() {
   self.close_player = undefined;
-  foreach(player in level.players)
+  foreach(player in level.players) {
   player thread watch_for_truck(self);
+  }
 
   level waittill("player_in_truck_range");
 }
@@ -592,14 +607,16 @@ dialog_jeep_stopped() {
   level endon("special_op_terminated");
   self waittill("unloading");
 
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
+  }
 
   //Heads up, the truck just stopped.	
   radio_dialogue("cliff_pri_headsup");
 
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
+  }
 
   //Four tangos just got out and are looking around.	
   radio_dialogue("cliff_pri_lookingaround");
@@ -633,8 +650,9 @@ setup_explosives() {
   waittillframeend;
 
   Objective_Add(1, "current", level.challenge_objective);
-  for(i = 0; i < level.plant_targets.size; i++)
+  for(i = 0; i < level.plant_targets.size; i++) {
     Objective_AdditionalPosition(1, level.plant_targets[i].id, level.plant_targets[i].origin);
+  }
 }
 
 setup_explosive() {
@@ -690,12 +708,14 @@ explosives_planted_monitor() {
 
   while(1) {
     all_planted = true;
-    foreach(plant_target in level.plant_targets)
+    foreach(plant_target in level.plant_targets) {
     if(plant_target.planted == false)
+    }
       all_planted = false;
 
-    if(all_planted)
+    if(all_planted) {
       break;
+    }
 
     level waittill("an_explosive_planted");
   }
@@ -714,8 +734,9 @@ explosives_planted_monitor() {
 
 wind_blown_flag_think() {
   animname = "flag_square";
-  if(isDefined(self.script_noteworthy))
+  if(isDefined(self.script_noteworthy)) {
     animname = self.script_noteworthy;
+  }
   waving_flag = spawn_anim_model(animname);
   waving_flag.origin = self.origin;
   waving_flag.angles = self.angles;
@@ -730,8 +751,9 @@ flag_waves() {
   animation = self getanim("flag_waves");
   self SetAnim(animation, 1, 0, 1);
   for(;;) {
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return;
+    }
     flap_rate = RandomFloatRange(0.8, 1.2);
     self SetAnim(animation, 1, 0, flap_rate);
     wait(RandomFloatRange(0.3, 0.7));
@@ -741,8 +763,9 @@ flag_waves() {
 // ---------------------------------------------------------------------------------
 
 force_players_prone() {
-  if(!is_coop())
+  if(!is_coop()) {
     return;
+  }
 
   foreach(player in level.players) {
     //		player AllowStand( false );
@@ -771,8 +794,9 @@ threeD_objective_hint() {
 type_spawners_special() {
   special_case = !(isDefined(self.script_noteworthy) && self.script_noteworthy == "high_threat_spawner");
   test = 0;
-  if(!special_case)
+  if(!special_case) {
     test = 0;
+  }
 
   original_case = self type_spawners();
   return special_case && original_case;
@@ -780,8 +804,9 @@ type_spawners_special() {
 
 type_vehicle_special() {
   // keep all collmaps
-  if(isDefined(self.code_classname) && self.code_classname == "script_vehicle_collmap")
+  if(isDefined(self.code_classname) && self.code_classname == "script_vehicle_collmap") {
     return false;
+  }
 
   special_case = !(isDefined(self.script_noteworthy) && self.script_noteworthy == "tarmac_snowmobile");
   special_case2 = !(isDefined(self.targetname) && self.targetname == "truck_patrol");
@@ -789,8 +814,9 @@ type_vehicle_special() {
   original_case = self type_vehicle();
 
   test = 0;
-  if(original_case)
+  if(original_case) {
     test = 0;
+  }
 
   return special_case && special_case2 && original_case;
 }

@@ -283,19 +283,23 @@ angola2_finale_hudson_ground() {
 }
 
 ramp_dvar(str_dvar, n_start, n_end, n_transition_time, n_increment_time) {
-  if(!isDefined(n_transition_time))
+  if(!isDefined(n_transition_time)) {
     n_transition_time = 2;
+  }
 
-  if(!isDefined(n_increment_time))
+  if(!isDefined(n_increment_time)) {
     n_increment_time = 0.1;
+  }
 
   assert(n_start != n_end, "Nothing to ramp for " + str_dvar + " because start value (" + n_start + ") equals end value (" + n_end + ")");
 
-  if(n_transition_time <= 0)
+  if(n_transition_time <= 0) {
     n_transition_time = 2;
+  }
 
-  if(n_transition_time <= 0)
+  if(n_transition_time <= 0) {
     n_increment_time = 0.1;
+  }
 
   n_iterations = n_transition_time / n_increment_time;
   n_new = n_start;
@@ -425,14 +429,16 @@ victory_ending_dof_end(m_player_body) {
 vision_set() {
   time = 2.0;
 
-  if(isDefined(self.script_float))
+  if(isDefined(self.script_float)) {
     time = self.script_float;
+  }
 
   while(true) {
     self waittill("trigger");
     player = get_players()[0];
 
-    if(player getvisionsetnaked() != self.script_noteworthy)
+    if(player getvisionsetnaked() != self.script_noteworthy) {
       visionsetnaked(self.script_noteworthy, time);
+    }
   }
 }

@@ -36,8 +36,9 @@ autoexec _camo_suit_perk_init() {
     delay_thread(0.05, ::data_glove_on, "lockbreaker_perk");
   }
 
-  if(level.script == "yemen")
+  if(level.script == "yemen") {
     level thread yemen_vo();
+  }
 
   remove_objective_perk(level.obj_lockbreaker);
   flag_set("lock_breaker_perk_used");
@@ -85,10 +86,12 @@ setup_anim() {
 player_camo_suit() {
   self endon("death");
 
-  if(level.script == "monsoon")
+  if(level.script == "monsoon") {
     self.camo_visible_dist = 350;
-  else
+  }
+  else {
     self.camo_visible_dist = 500;
+  }
 
   self ent_flag_init("camo_suit_on");
   self ent_flag_init("camo_suit_damaged");
@@ -117,10 +120,12 @@ player_camo_suit() {
     self thread player_camo_suit_damage_watch();
 
     while(ent_flag("camo_suit_on")) {
-      if(self isfiring() && !issubstr(self getcurrentweapon(), "silencer"))
+      if(self isfiring() && !issubstr(self getcurrentweapon(), "silencer")) {
         self.maxvisibledist = self.camo_visible_dist * 2;
-      else if(!ent_flag("camo_suit_damaged"))
+      }
+      else if(!ent_flag("camo_suit_damaged")) {
         self.maxvisibledist = self.camo_visible_dist;
+      }
 
       wait 0.05;
     }
@@ -185,8 +190,9 @@ _watch_toggle_suit() {
       self disableoffhandweapons();
       wait 1;
 
-      if(old_weapon == "none")
+      if(old_weapon == "none") {
         old_weapon = self getweaponslistprimaries()[0];
+      }
 
       self switchtoweapon(old_weapon);
       self waittill_notify_or_timeout("weapon_change", 0.25);

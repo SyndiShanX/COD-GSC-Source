@@ -13,21 +13,25 @@ placeweaponon(var_0, var_1, var_2) {
   }
   detachallweaponmodels();
 
-  if(var_3 != "none")
+  if(var_3 != "none") {
     detachweapon(var_0);
+  }
 
   if(var_1 == "none") {
     updateattachedweaponmodels();
     return;
   }
 
-  if(self.a.weaponpos[var_1] != "none")
+  if(self.a.weaponpos[var_1] != "none") {
     detachweapon(self.a.weaponpos[var_1]);
-  else if(isDefined(self.weaponinfo["none"]))
+  }
+  else if(isDefined(self.weaponinfo["none"])) {
     self.weaponinfo["none"].position = "none";
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   if(var_2 && (var_1 == "left" || var_1 == "right")) {
     attachweapon(var_0, var_1);
@@ -56,8 +60,9 @@ attachweapon(var_0, var_1) {
 getweaponforpos(var_0) {
   var_1 = self.a.weaponpos[var_0];
 
-  if(var_1 == "none")
+  if(var_1 == "none") {
     return self.a.weaponposdropping[var_0];
+  }
 
   return var_1;
 }
@@ -119,8 +124,9 @@ updateattachedweaponmodels() {
 }
 
 updatelaserstatus() {
-  if(isDefined(self.custom_laser_function))
+  if(isDefined(self.custom_laser_function)) {
     [[self.custom_laser_function]]();
+  }
   else {
     if(self.a.weaponpos["right"] == "none") {
       return;
@@ -135,14 +141,17 @@ updatelaserstatus() {
 }
 
 canuselaser() {
-  if(!self.a.laseron)
+  if(!self.a.laseron) {
     return 0;
+  }
 
-  if(animscripts\utility::isshotgun(self.weapon))
+  if(animscripts\utility::isshotgun(self.weapon)) {
     return 0;
+  }
 
-  if(!isDefined(level.player.nightvision_enabled))
+  if(!isDefined(level.player.nightvision_enabled)) {
     return 0;
+  }
 
   return isalive(self);
 }
@@ -165,8 +174,9 @@ gettagforpos(var_0) {
 }
 
 dropaiweapon(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self.weapon;
+  }
 
   if(var_0 == "none") {
     return;
@@ -177,20 +187,23 @@ dropaiweapon(var_0) {
   detachallweaponmodels();
   var_1 = self.weaponinfo[var_0].position;
 
-  if(self.dropweapon && var_1 != "none")
+  if(self.dropweapon && var_1 != "none") {
     thread dropweaponwrapper(var_0, var_1);
+  }
 
   detachweapon(var_0);
 
-  if(var_0 == self.weapon)
+  if(var_0 == self.weapon) {
     self.weapon = "none";
+  }
 
   updateattachedweaponmodels();
 }
 
 dropallaiweapons() {
-  if(isDefined(self.nodrop))
+  if(isDefined(self.nodrop)) {
     return "none";
+  }
 
   var_0 = [];
   var_0[var_0.size] = "left";
@@ -208,8 +221,9 @@ dropallaiweapons() {
     self.weaponinfo[var_3].position = "none";
     self.a.weaponpos[var_2] = "none";
 
-    if(self.dropweapon)
+    if(self.dropweapon) {
       thread dropweaponwrapper(var_3, var_2);
+    }
   }
 
   self.weapon = "none";
@@ -217,17 +231,20 @@ dropallaiweapons() {
 }
 
 dropweaponwrapper(var_0, var_1) {
-  if(self isragdoll())
+  if(self isragdoll()) {
     return "none";
+  }
 
   self.a.weaponposdropping[var_1] = var_0;
   var_2 = var_0;
 
-  if(issubstr(tolower(var_2), "rpg"))
+  if(issubstr(tolower(var_2), "rpg")) {
     var_2 = "rpg_player";
+  }
 
-  if(issubstr(tolower(var_2), "mahem"))
+  if(issubstr(tolower(var_2), "mahem")) {
     var_2 = "iw5_mahemplayer_sp_mahemscopebase";
+  }
 
   self dropweapon(var_2, var_1, 0);
   self endon("end_weapon_drop_" + var_1);
@@ -245,20 +262,23 @@ donotetracks(var_0, var_1, var_2, var_3) {
   for(;;) {
     self waittill(var_0, var_4);
 
-    if(!isDefined(var_4))
+    if(!isDefined(var_4)) {
       var_4 = "undefined";
+    }
 
     var_5 = animscripts\notetracks::handlenotetrack(var_4, var_0, var_1, var_3);
 
-    if(isDefined(var_5))
+    if(isDefined(var_5)) {
       return var_5;
+    }
   }
 }
 
 getpredictedaimyawtoshootentorpos(var_0) {
   if(!isDefined(self.shootent)) {
-    if(!isDefined(self.shootpos))
+    if(!isDefined(self.shootpos)) {
       return 0;
+    }
 
     return getaimyawtopoint(self.shootpos);
   }
@@ -269,39 +289,46 @@ getpredictedaimyawtoshootentorpos(var_0) {
 
 getaimyawtoshootentorpos() {
   if(!isDefined(self.shootent)) {
-    if(!isDefined(self.shootpos))
+    if(!isDefined(self.shootpos)) {
       return 0;
+    }
 
     return getaimyawtopoint(self.shootpos);
   }
 
-  if(common_scripts\utility::flag("_cloaked_stealth_enabled"))
+  if(common_scripts\utility::flag("_cloaked_stealth_enabled")) {
     return getaimyawtopoint(animscripts\combat_utility::get_last_known_shoot_pos(self.shootent));
-  else
+  }
+  else {
     return getaimyawtopoint(self.shootent getshootatpos());
+  }
 }
 
 getaimpitchtoshootentorpos() {
   var_0 = getpitchtoshootentorpos();
 
-  if(self.script == "cover_crouch" && isDefined(self.a.covermode) && self.a.covermode == "lean")
+  if(self.script == "cover_crouch" && isDefined(self.a.covermode) && self.a.covermode == "lean") {
     var_0 = var_0 - anim.covercrouchleanpitch;
+  }
 
   return var_0;
 }
 
 getpitchtoshootentorpos() {
   if(!isDefined(self.shootent)) {
-    if(!isDefined(self.shootpos))
+    if(!isDefined(self.shootpos)) {
       return 0;
+    }
 
     return animscripts\combat_utility::getpitchtospot(self.shootpos);
   }
 
-  if(common_scripts\utility::flag("_cloaked_stealth_enabled"))
+  if(common_scripts\utility::flag("_cloaked_stealth_enabled")) {
     return animscripts\combat_utility::getpitchtospot(animscripts\combat_utility::get_last_known_shoot_pos(self.shootent));
-  else
+  }
+  else {
     return animscripts\combat_utility::getpitchtospot(self.shootent getshootatpos());
+  }
 }
 
 getshootfrompos() {
@@ -314,8 +341,9 @@ getshootfrompos() {
     if(self gettagindex("tag_flash") != -1) {
       var_1 = self gettagorigin("tag_flash");
 
-      if(isDefined(var_1))
+      if(isDefined(var_1)) {
         return var_1;
+      }
     }
   }
 
@@ -360,10 +388,12 @@ ramboaiminternal(var_0) {
       var_3 = angleclamp180(var_3 - var_0);
 
       if(abs(var_3 - var_2) > 10) {
-        if(var_3 > var_2)
+        if(var_3 > var_2) {
           var_3 = var_2 + 10;
-        else
+        }
+        else {
           var_3 = var_2 - 10;
+        }
       }
 
       var_2 = var_3;
@@ -372,16 +402,18 @@ ramboaiminternal(var_0) {
     if(var_2 < 0) {
       var_4 = var_2 / -45;
 
-      if(var_4 > 1)
+      if(var_4 > 1) {
         var_4 = 1;
+      }
 
       self setanimlimited( % generic_aim_right, var_4, var_1);
       self setanimlimited( % generic_aim_left, 0, var_1);
     } else {
       var_4 = var_2 / 45;
 
-      if(var_4 > 1)
+      if(var_4 > 1) {
         var_4 = 1;
+      }
 
       self setanimlimited( % generic_aim_left, var_4, var_1);
       self setanimlimited( % generic_aim_right, 0, var_1);
@@ -395,20 +427,26 @@ decidenumshotsforburst() {
   var_0 = 0;
   var_1 = weaponburstcount(self.weapon);
 
-  if(var_1)
+  if(var_1) {
     var_0 = var_1;
-  else if(animscripts\weaponlist::usingsemiautoweapon())
+  }
+  else if(animscripts\weaponlist::usingsemiautoweapon()) {
     var_0 = anim.semifirenumshots[randomint(anim.semifirenumshots.size)];
-  else if(self.fastburst)
+  }
+  else if(self.fastburst) {
     var_0 = anim.fastburstfirenumshots[randomint(anim.fastburstfirenumshots.size)];
-  else
+  }
+  else {
     var_0 = anim.burstfirenumshots[randomint(anim.burstfirenumshots.size)];
+  }
 
-  if(var_0 <= self.bulletsinclip)
+  if(var_0 <= self.bulletsinclip) {
     return var_0;
+  }
 
-  if(self.bulletsinclip <= 0)
+  if(self.bulletsinclip <= 0) {
     return 1;
+  }
 
   return self.bulletsinclip;
 }
@@ -419,12 +457,15 @@ decidenumshotsforfull() {
   if(weaponclass(self.weapon) == "mg") {
     var_1 = randomfloat(10);
 
-    if(var_1 < 3)
+    if(var_1 < 3) {
       var_0 = randomintrange(2, 6);
-    else if(var_1 < 8)
+    }
+    else if(var_1 < 8) {
       var_0 = randomintrange(6, 12);
-    else
+    }
+    else {
       var_0 = randomintrange(12, 20);
+    }
   }
 
   return var_0;
@@ -435,14 +476,17 @@ handledropclip(var_0) {
   self endon("abort_reload");
   var_1 = undefined;
 
-  if(self.weaponinfo[self.weapon].useclip)
+  if(self.weaponinfo[self.weapon].useclip) {
     var_1 = getweaponclipmodel(self.weapon);
+  }
 
   if(self.weaponinfo[self.weapon].hasclip) {
-    if(animscripts\utility::usingsidearm())
+    if(animscripts\utility::usingsidearm()) {
       self playSound("weap_reload_pistol_clipout_npc");
-    else
+    }
+    else {
       self playSound("weap_reload_smg_clipout_npc");
+    }
 
     if(isDefined(var_1)) {
       var_2 = getweaponmodel(self.weapon);
@@ -472,8 +516,9 @@ handledropclip(var_0) {
         animscripts\weaponlist::refillclip();
         break;
       case "detach clip nohand":
-        if(isDefined(var_1))
+        if(isDefined(var_1)) {
           self detach(var_1, "tag_inhand");
+        }
 
         break;
       case "detach clip right":
@@ -486,10 +531,12 @@ handledropclip(var_0) {
           self.weaponinfo[self.weapon].hasclip = 1;
         }
 
-        if(animscripts\utility::usingsidearm())
+        if(animscripts\utility::usingsidearm()) {
           self playSound("weap_reload_pistol_clipin_npc");
-        else
+        }
+        else {
           self playSound("weap_reload_smg_clipin_npc");
+        }
 
         self.a.needstorechamber = 0;
         return;
@@ -505,8 +552,9 @@ resetcliponabort(var_0, var_1) {
   if(!isDefined(self)) {
     return;
   }
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self detach(var_0, var_1);
+  }
 
   if(isalive(self)) {
     if(self.weapon != "none" && self.weaponinfo[self.weapon].position != "none") {
@@ -526,8 +574,9 @@ dropclipmodel(var_0, var_1) {
   var_2 physicslaunchclient(var_2.origin, (0, 0, 0));
   wait 10;
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 movetonodeovertime(var_0, var_1) {
@@ -565,8 +614,9 @@ returntrue() {
 }
 
 playlookanimation(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = ::returntrue;
+  }
 
   for(var_3 = 0; var_3 < var_1 * 10; var_3++) {
     if(isalive(self.enemy)) {
@@ -622,8 +672,9 @@ rpgplayerrepulsor() {
     thread rpgplayerrepulsor_create();
     var_0--;
 
-    if(var_0 <= 0)
+    if(var_0 <= 0) {
       return;
+    }
   }
 }
 

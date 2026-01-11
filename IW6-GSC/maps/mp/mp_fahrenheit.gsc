@@ -238,14 +238,17 @@ plant_set_stage_directional(stage, angle, time, rand) {
   foreach(plant in level.plants) {
     dist = DistToLine(plant.origin, (0, 0, 0), right);
 
-    if(LRTest(plant.origin, (0, 0, 0), right) == SIDE_RIGHT)
+    if(LRTest(plant.origin, (0, 0, 0), right) == SIDE_RIGHT) {
       dist *= -1;
+    }
 
-    if(!isDefined(min_dist) || dist < min_dist)
+    if(!isDefined(min_dist) || dist < min_dist) {
       min_dist = dist;
+    }
 
-    if(!isDefined(max_dist) || dist > max_dist)
+    if(!isDefined(max_dist) || dist > max_dist) {
       max_dist = dist;
+    }
 
     plant.temp_dist = dist;
   }
@@ -254,8 +257,9 @@ plant_set_stage_directional(stage, angle, time, rand) {
     frac = (plant.temp_dist - min_dist) / (max_dist - min_dist);
 
     delay = time * frac;
-    if(isDefined(rand) && rand > 0)
+    if(isDefined(rand) && rand > 0) {
       delay += RandomFloatRange(0, rand);
+    }
 
     level thread plant_set_stage(plant, stage, delay);
   }
@@ -263,8 +267,9 @@ plant_set_stage_directional(stage, angle, time, rand) {
 }
 
 plant_set_stage(plant, stage, delay) {
-  if(isDefined(delay) && delay > 0)
+  if(isDefined(delay) && delay > 0) {
     wait delay;
+  }
 
   plant SetScriptablePartState("storm_plant", stage);
 }
@@ -500,8 +505,9 @@ AreaTriange(A, B, C) {
 }
 
 LRTest(Test, Start, End, Tolerance) {
-  if(!isDefined(Tolerance))
+  if(!isDefined(Tolerance)) {
     Tolerance = 0.0;
+  }
 
   Area = AreaParallelPipid(Start, End, Test);
   if(Area > Tolerance) {

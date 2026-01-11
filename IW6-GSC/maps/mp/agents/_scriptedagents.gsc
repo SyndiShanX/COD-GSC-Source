@@ -4,8 +4,9 @@
 **********************************************/
 
 OnEnterState(prevState, nextState) {
-  if(isDefined(self.OnEnterAnimState))
+  if(isDefined(self.OnEnterAnimState)) {
     self[[self.OnEnterAnimState]](prevState, nextState);
+  }
 }
 
 OnDeactivate() {
@@ -19,8 +20,9 @@ PlayAnimUntilNotetrack(animState, animLabel, notetrack, customFunction) {
 PlayAnimNUntilNotetrack(animState, animIndex, animLabel, notetrack, customFunction) {
   self SetAnimState(animState, animIndex);
 
-  if(!isDefined(notetrack))
+  if(!isDefined(notetrack)) {
     notetrack = "end";
+  }
 
   WaitUntilNotetrack(animLabel, notetrack, animState, animIndex, customFunction);
 }
@@ -28,8 +30,9 @@ PlayAnimNUntilNotetrack(animState, animIndex, animLabel, notetrack, customFuncti
 PlayAnimNAtRateUntilNotetrack(animState, animIndex, animRate, animLabel, notetrack, customFunction) {
   self SetAnimState(animState, animIndex, animRate);
 
-  if(!isDefined(notetrack))
+  if(!isDefined(notetrack)) {
     notetrack = "end";
+  }
 
   WaitUntilNotetrack(animLabel, notetrack, animState, animIndex, customFunction);
 }
@@ -39,14 +42,16 @@ WaitUntilNotetrack(animLabel, notetrack, animState, animIndex, customFunction) {
   animTime = undefined;
   animLength = undefined;
 
-  if(isDefined(animState) && isDefined(animIndex))
+  if(isDefined(animState) && isDefined(animIndex)) {
     animLength = getAnimLength(self GetAnimEntry(animState, animIndex));
+  }
 
   while(true) {
     self waittill(animLabel, note);
 
-    if(isDefined(animLength))
+    if(isDefined(animLength)) {
       animTime = (getTime() - startTime) * 0.001 / animLength;
+    }
 
     if(!isDefined(animLength) || animTime > 0) {
       if(note == notetrack || note == "end" || note == "anim_will_finish" || note == "finish") {
@@ -54,8 +59,9 @@ WaitUntilNotetrack(animLabel, notetrack, animState, animIndex, customFunction) {
       }
     }
 
-    if(isDefined(customFunction))
+    if(isDefined(customFunction)) {
       [[customFunction]](note, animState, animIndex, animTime);
+    }
   }
 }
 
@@ -84,17 +90,20 @@ GetAnimScaleFactors(delta, animDelta, bAnimInWorldSpace) {
   if(isDefined(bAnimInWorldSpace) && bAnimInWorldSpace) {
     animDelta2D = (animDelta[0], animDelta[1], 0);
     animDeltaDir = VectorNormalize(animDelta2D);
-    if(VectorDot(animDeltaDir, delta) < 0)
+    if(VectorDot(animDeltaDir, delta) < 0) {
       scaleXY = 0;
-    else if(animXY > 0)
+    }
+    else if(animXY > 0) {
       scaleXY = distXY / animXY;
+    }
   } else if(animXY > 0)
     scaleXY = distXY / animXY;
 
   assert(scaleXY >= 0);
 
-  if(abs(animZ) > 0.001 && animZ * distZ >= 0)
+  if(abs(animZ) > 0.001 && animZ * distZ >= 0) {
     scaleZ = distZ / animZ;
+  }
 
   assert(scaleZ >= 0);
 
@@ -106,30 +115,36 @@ GetAnimScaleFactors(delta, animDelta, bAnimInWorldSpace) {
 }
 
 GetAngleIndex(angle, threshold) {
-  if(!isDefined(threshold))
+  if(!isDefined(threshold)) {
     threshold = 10;
+  }
 
-  if(angle < 0)
+  if(angle < 0) {
     return int(ceil((180 + angle - threshold) / 45));
-  else
+  }
+  else {
     return int(floor((180 + angle + threshold) / 45));
+  }
 }
 
 DropPosToGround(position, drop_distance) {
   assert(isDefined(self.radius) && isDefined(self.height));
-  if(!isDefined(drop_distance))
+  if(!isDefined(drop_distance)) {
     drop_distance = 18;
+  }
 
   startPos = position + (0, 0, drop_distance);
   endPos = position + (0, 0, drop_distance * -1);
 
   droppedPos = self AIPhysicsTrace(startPos, endPos, self.radius, self.height, true);
 
-  if(abs(droppedPos[2] - startPos[2]) < 0.1)
+  if(abs(droppedPos[2] - startPos[2]) < 0.1) {
     return undefined;
+  }
 
-  if(abs(droppedPos[2] - endPos[2]) < 0.1)
+  if(abs(droppedPos[2] - endPos[2]) < 0.1) {
     return undefined;
+  }
 
   return droppedPos;
 }

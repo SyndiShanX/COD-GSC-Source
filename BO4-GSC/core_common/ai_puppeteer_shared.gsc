@@ -474,4 +474,3 @@ ai_puppeteer_highlight_ai(ai, color) {
 
   level.ai_puppet_highlighting = 0;
 }
-

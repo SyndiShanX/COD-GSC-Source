@@ -51,28 +51,39 @@ vehicle_rumble(localClientNum) {
   rumblestruct = level.vehicle_rumble[type];
   height = rumblestruct.radius * 2;
   zoffset = -1 * rumblestruct.radius;
-  if(!isDefined(self.rumbleon))
+  if(!isDefined(self.rumbleon)) {
     self.rumbleon = true;
-  if(isDefined(rumblestruct.scale))
+  }
+  if(isDefined(rumblestruct.scale)) {
     self.rumble_scale = rumblestruct.scale;
-  else
+  }
+  else {
     self.rumble_scale = 0.15;
-  if(isDefined(rumblestruct.duration))
+  }
+  if(isDefined(rumblestruct.duration)) {
     self.rumble_duration = rumblestruct.duration;
-  else
+  }
+  else {
     self.rumble_duration = 4.5;
-  if(isDefined(rumblestruct.radius))
+  }
+  if(isDefined(rumblestruct.radius)) {
     self.rumble_radius = rumblestruct.radius;
-  else
+  }
+  else {
     self.rumble_radius = 600;
-  if(isDefined(rumblestruct.basetime))
+  }
+  if(isDefined(rumblestruct.basetime)) {
     self.rumble_basetime = rumblestruct.basetime;
-  else
+  }
+  else {
     self.rumble_basetime = 1;
-  if(isDefined(rumblestruct.randomaditionaltime))
+  }
+  if(isDefined(rumblestruct.randomaditionaltime)) {
     self.rumble_randomaditionaltime = rumblestruct.randomaditionaltime;
-  else
+  }
+  else {
     self.rumble_randomaditionaltime = 1;
+  }
   self.player_touching = 0;
   radius_squared = rumblestruct.radius * rumblestruct.radius;
   while(1) {
@@ -139,10 +150,12 @@ tread(localClientNum, tagname, side, relativeOffset) {
     }
     waitTime = (1 / speed);
     waitTime = (waitTime * 35);
-    if(waitTime < 0.1)
+    if(waitTime < 0.1) {
       waitTime = 0.1;
-    else if(waitTime > 0.3)
+    }
+    else if(waitTime > 0.3) {
       waitTime = 0.3;
+    }
     wait waitTime;
     lastfx = treadfx;
     treadfx = treadget(self, side);
@@ -176,8 +189,9 @@ treadget(vehicle, side) {
     return -1;
   }
   treadfx = level._vehicle_effect[vehicle.vehicletype][surface];
-  if(!isDefined(treadfx))
+  if(!isDefined(treadfx)) {
     treadfx = -1;
+  }
   return treadfx;
 }
 
@@ -305,17 +319,20 @@ build_quake(scale, duration, radius, basetime, randomaditionaltime) {
   struct.scale = scale;
   struct.duration = duration;
   struct.radius = radius;
-  if(isDefined(basetime))
+  if(isDefined(basetime)) {
     struct.basetime = basetime;
-  if(isDefined(randomaditionaltime))
+  }
+  if(isDefined(randomaditionaltime)) {
     struct.randomaditionaltime = randomaditionaltime;
+  }
   return struct;
 }
 
 build_rumble(type, rumble, scale, duration, radius, basetime, randomaditionaltime) {
   println("*** Client : Building rumble for " + type);
-  if(!isDefined(level.vehicle_rumble))
+  if(!isDefined(level.vehicle_rumble)) {
     level.vehicle_rumble = [];
+  }
   struct = build_quake(scale, duration, radius, basetime, randomaditionaltime);
   assert(isDefined(rumble));
   struct.rumble = precacherumble(rumble);

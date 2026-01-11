@@ -91,8 +91,9 @@ getUpIfProne() {
       self orientMode("face current");
       self animMode("zonly_physics", false);
       rate = 1;
-      if(isDefined(self.grenade))
+      if(isDefined(self.grenade)) {
         rate = 2;
+      }
       self animscripts\cover_prone::proneTo(newPose, rate);
       self animMode("none", false);
       self orientMode("face default");
@@ -166,8 +167,9 @@ MoveMainLoopInternal(doWalkCheck) {
   // if initial destination is closer than 64 walk to it.
   for(;;) {
     loopTime = self getAnimTime( % walk_and_run_loops);
-    if(loopTime < prevLoopTime)
+    if(loopTime < prevLoopTime) {
       self.a.runLoopCount++;
+    }
     prevLoopTime = loopTime;
 
     ChangeMoveMode(self.moveMode);
@@ -207,16 +209,19 @@ MoveMainLoopProcess(moveMode) {
 }
 
 MayShootWhileMoving() {
-  if(self.weapon == "none")
+  if(self.weapon == "none") {
     return false;
+  }
 
   weapclass = weaponClass(self.weapon);
-  if(!usingRifleLikeWeapon())
+  if(!usingRifleLikeWeapon()) {
     return false;
+  }
 
   if(self isSniper()) {
-    if(!(self isCQBWalking()) && self.faceMotion)
+    if(!(self isCQBWalking()) && self.faceMotion) {
       return false;
+    }
   }
 
   if(isDefined(self.dontShootWhileMoving)) {
@@ -237,10 +242,12 @@ shootWhileMoving() {
 
   self.a.array["fire"] = % exposed_shoot_auto_v3;
 
-  if(isDefined(self.weapon) && weapon_pump_action_shotgun())
+  if(isDefined(self.weapon) && weapon_pump_action_shotgun()) {
     self.a.array["single"] = array( % shotgun_stand_fire_1A, % shotgun_stand_fire_1B);
-  else
+  }
+  else {
     self.a.array["single"] = array( % exposed_shoot_semi1);
+  }
 
   self.a.array["burst2"] = % exposed_shoot_burst3;
   self.a.array["burst3"] = % exposed_shoot_burst3;
@@ -293,8 +300,9 @@ stairsCheck() {
     wait .05;
     if(self.prevStairsState != self.stairsState) {
       // don't interrupt path change animation if getting off stairs to flat ground
-      if(!isDefined(self.ignorePathChange) || self.stairsState != "none")
+      if(!isDefined(self.ignorePathChange) || self.stairsState != "none") {
         self notify("move_loop_restart");
+      }
     }
 
     self.prevStairsState = self.stairsState;
@@ -304,8 +312,9 @@ stairsCheck() {
 restartMoveLoop(skipMoveTransition) {
   self endon("killanimscript");
 
-  if(!skipMoveTransition)
+  if(!skipMoveTransition) {
     animscripts\cover_arrival::startMoveTransition();
+  }
 
   self.ignorePathChange = undefined;
 
@@ -331,17 +340,21 @@ pathChangeCheck() {
 
     assert(!isDefined(self.ignorePathChange) || self.ignorePathChange); // should be true or undefined
 
-    if(isDefined(self.ignorePathChange) || isDefined(self.noTurnAnims))
+    if(isDefined(self.ignorePathChange) || isDefined(self.noTurnAnims)) {
       continue;
+    }
 
-    if(!self.faceMotion || abs(self getMotionAngle()) > 15)
+    if(!self.faceMotion || abs(self getMotionAngle()) > 15) {
       continue;
+    }
 
-    if(self.a.movement != "run" && self.a.movement != "walk")
+    if(self.a.movement != "run" && self.a.movement != "walk") {
       continue;
+    }
 
-    if(self.a.pose != "stand")
+    if(self.a.pose != "stand") {
       continue;
+    }
 
     self notify("stop_move_anim_update");
     self.update_move_anim_type = undefined;
@@ -362,16 +375,19 @@ pathChangeCheck() {
 }
 
 pathChange_getTurnAnim(angleDiff) {
-  if(isDefined(self.pathTurnAnimOverrideFunc))
+  if(isDefined(self.pathTurnAnimOverrideFunc)) {
     return [[self.pathTurnAnimOverrideFunc]](angleDiff);
+  }
 
   turnAnim = undefined;
   secondTurnAnim = undefined;
 
-  if(self shouldCQB() || self.movemode == "walk")
+  if(self shouldCQB() || self.movemode == "walk") {
     animArray = anim.cqbTurnAnims;
-  else
+  }
+  else {
     animArray = anim.runTurnAnims;
+  }
 
   if(angleDiff < -30) {
     if(angleDiff > -60) // bias for 45 turns
@@ -383,16 +399,20 @@ pathChange_getTurnAnim(angleDiff) {
       //	secondTurnAnim = animArray[ "L90" ];
     } else if(angleDiff > -112.5) {
       turnAnim = animArray["L90"];
-      if(angleDiff > -90)
+      if(angleDiff > -90) {
         secondTurnAnim = animArray["L45"];
-      else
+      }
+      else {
         secondTurnAnim = animArray["L135"];
+      }
     } else if(angleDiff > -157.5) {
       turnAnim = animArray["L135"];
-      if(angleDiff > -135)
+      if(angleDiff > -135) {
         secondTurnAnim = animArray["L90"];
-      else
+      }
+      else {
         secondTurnAnim = animArray["180"];
+      }
     } else {
       turnAnim = animArray["180"];
       secondTurnAnim = animArray["L135"];
@@ -406,16 +426,20 @@ pathChange_getTurnAnim(angleDiff) {
       //	secondTurnAnim = animArray[ "R90" ];
     } else if(angleDiff < 112.5) {
       turnAnim = animArray["R90"];
-      if(angleDiff < 90)
+      if(angleDiff < 90) {
         secondTurnAnim = animArray["R45"];
-      else
+      }
+      else {
         secondTurnAnim = animArray["R135"];
+      }
     } else if(angleDiff < 157.5) {
       turnAnim = animArray["R135"];
-      if(angleDiff < 135)
+      if(angleDiff < 135) {
         secondTurnAnim = animArray["R90"];
-      else
+      }
+      else {
         secondTurnAnim = animArray["180"];
+      }
     } else {
       turnAnim = animArray["180"];
       secondTurnAnim = animArray["R135"];
@@ -423,21 +447,24 @@ pathChange_getTurnAnim(angleDiff) {
   }
 
   if(isDefined(turnAnim)) {
-    if(pathChange_canDoTurnAnim(turnAnim))
+    if(pathChange_canDoTurnAnim(turnAnim)) {
       return turnAnim;
+    }
   }
 
   if(isDefined(secondTurnAnim)) {
-    if(pathChange_canDoTurnAnim(secondTurnAnim))
+    if(pathChange_canDoTurnAnim(secondTurnAnim)) {
       return secondTurnAnim;
+    }
   }
 
   return undefined;
 }
 
 pathChange_canDoTurnAnim(turnAnim) {
-  if(!isDefined(self.pathgoalpos))
+  if(!isDefined(self.pathgoalpos)) {
     return false;
+  }
 
   codeMoveTimes = getNotetrackTimes(turnAnim, "code_move");
   assert(codeMoveTimes.size == 1);
@@ -452,8 +479,9 @@ pathChange_canDoTurnAnim(turnAnim) {
   animscripts\utility::drawDebugLine(self.origin, self.pathgoalpos, (0, 1, 0), 20);
 
     //if( distanceSquared( self.origin, codeMovePoint ) > distanceSquared( self.origin, self.pathgoalpos ) )
-    if(isDefined(self.arrivalStartDist) && (squared(self.arrivalStartDist) > distanceSquared(self.pathgoalpos, codeMovePoint)))
+    if(isDefined(self.arrivalStartDist) && (squared(self.arrivalStartDist) > distanceSquared(self.pathgoalpos, codeMovePoint))) {
       return false;
+    }
 
   moveDelta = getMoveDelta(turnAnim, 0, 1);
   endPoint = self localToWorldCoords(moveDelta);
@@ -472,8 +500,9 @@ pathChange_doTurnAnim() {
 
   turnAnim = self.turnAnim;
 
-  if(gettime() > self.turnTime + 50)
+  if(gettime() > self.turnTime + 50) {
     return; // too late
+  }
 
   self animMode("zonly_physics", false);
   self clearanim( % body, 0.1);
@@ -483,8 +512,9 @@ pathChange_doTurnAnim() {
   self.ignorePathChange = true;
 
   blendTime = 0.05;
-  if(isDefined(self.pathTurnAnimBlendTime))
+  if(isDefined(self.pathTurnAnimBlendTime)) {
     blendTime = isDefined(self.pathTurnAnimBlendTime);
+  }
 
   self setflaggedanimrestart("turnAnim", turnAnim, 1, blendTime, self.movePlaybackRate);
   self OrientMode("face current");
@@ -502,8 +532,9 @@ pathChange_doTurnAnim() {
 
 pathChange_doMoveTransition() {
   self.moveLoopOverrideFunc = undefined;
-  if(gettime() > self.turnTime + 50)
+  if(gettime() > self.turnTime + 50) {
     return; // too late
+  }
 
   self.moveLoopCleanupFunc = ::pathChange_cleanupTurnAnim;
 
@@ -529,8 +560,9 @@ dodgeMoveLoopOverride() {
   self animmode("none", false);
   self orientMode("face default");
 
-  if(animHasNotetrack(self.currentDodgeAnim, "code_move"))
+  if(animHasNotetrack(self.currentDodgeAnim, "code_move")) {
     self animscripts\shared::DoNoteTracks("dodgeAnim"); // return on code_move
+  }
 
   self clearanim( % civilian_dodge, 0.2);
 
@@ -554,22 +586,25 @@ tryDodgeWithAnim(dodgeAnim, dodgeAnimDelta) {
     self.moveLoopOverrideFunc = ::dodgeMoveLoopOverride;
     self notify("move_loop_restart");
 
-    if(getdvar("scr_debugdodge") == "1")
+    if(getdvar("scr_debugdodge") == "1") {
       thread debugline(self.origin, dodgePos, (0, 1, 0), 3);
+    }
 
       return true;
   }
 
-  if(getdvar("scr_debugdodge") == "1")
+  if(getdvar("scr_debugdodge") == "1") {
     thread debugline(self.origin, dodgePos, (0.5, 0.5, 0), 3);
+  }
 
     self pushPlayer(false);
   return false;
 }
 
 animDodgeObstacle() {
-  if(!isDefined(self.dodgeLeftAnim) || !isDefined(self.dodgeRightAnim))
+  if(!isDefined(self.dodgeLeftAnim) || !isDefined(self.dodgeRightAnim)) {
     return;
+  }
 
   self endon("killanimscript");
   self endon("move_interrupt");
@@ -583,8 +618,9 @@ animDodgeObstacle() {
       return;
     }
 
-    if(!isSentient(dodgeEnt))
+    if(!isSentient(dodgeEnt)) {
       continue;
+    }
 
     if(getdvar("scr_debugdodge") == "1") {
       thread debugline(dodgeEnt.origin + (0, 0, 10), dodgeEntPos, (1, 1, 0), 3);
@@ -595,18 +631,22 @@ animDodgeObstacle() {
 
     if((self.lookAheadDir[0] * dirToDodgeEnt[1]) - (dirToDodgeEnt[0] * self.lookAheadDir[1]) > 0) {
       // right first
-      if(!tryDodgeWithAnim(self.dodgeRightAnim, self.dodgeRightAnimOffset))
+      if(!tryDodgeWithAnim(self.dodgeRightAnim, self.dodgeRightAnimOffset)) {
         tryDodgeWithAnim(self.dodgeLeftAnim, self.dodgeLeftAnimOffset);
+      }
     } else {
       // left first
-      if(!tryDodgeWithAnim(self.dodgeLeftAnim, self.dodgeLeftAnimOffset))
+      if(!tryDodgeWithAnim(self.dodgeLeftAnim, self.dodgeLeftAnimOffset)) {
         tryDodgeWithAnim(self.dodgeRightAnim, self.dodgeRightAnimOffset);
+      }
     }
 
-    if(isDefined(self.currentDodgeAnim))
+    if(isDefined(self.currentDodgeAnim)) {
       wait getanimlength(self.currentDodgeAnim);
-    else
+    }
+    else {
       wait 0.1;
+    }
   }
 }
 
@@ -618,14 +658,16 @@ setDodgeAnims(leftAnim, rightAnim) {
   self.dodgeRightAnim = rightAnim;
 
   time = 1;
-  if(animHasNoteTrack(leftAnim, "code_move"))
+  if(animHasNoteTrack(leftAnim, "code_move")) {
     time = getNotetrackTimes(leftAnim, "code_move")[0];
+  }
 
   self.dodgeLeftAnimOffset = getMoveDelta(leftAnim, 0, time);
 
   time = 1;
-  if(animHasNoteTrack(rightAnim, "code_move"))
+  if(animHasNoteTrack(rightAnim, "code_move")) {
     time = getNotetrackTimes(rightAnim, "code_move")[0];
+  }
 
   self.dodgeRightAnimOffset = getMoveDelta(rightAnim, 0, time);
 
@@ -657,17 +699,20 @@ meleeAttackCheck_whileMoving() {
 bulletWhizbyCheck_whileMoving() {
   self endon("killanimscript");
 
-  if(isDefined(self.disableBulletWhizbyReaction))
+  if(isDefined(self.disableBulletWhizbyReaction)) {
     return;
+  }
 
   while(1) {
     self waittill("bulletwhizby", shooter);
 
-    if(self.moveMode != "run" || !self.faceMotion || self.a.pose != "stand" || isDefined(self.reactingToBullet))
+    if(self.moveMode != "run" || !self.faceMotion || self.a.pose != "stand" || isDefined(self.reactingToBullet)) {
       continue;
+    }
 
-    if(self.stairsState != "none")
+    if(self.stairsState != "none") {
       continue;
+    }
 
     if(!isDefined(self.enemy) && !self.ignoreAll && isDefined(shooter.team) && isEnemyTeam(self.team, shooter.team)) {
       self.whizbyEnemy = shooter;
@@ -675,8 +720,9 @@ bulletWhizbyCheck_whileMoving() {
       continue;
     }
 
-    if(self.lookaheadHitsStairs || self.lookaheadDist < 100)
+    if(self.lookaheadHitsStairs || self.lookaheadDist < 100) {
       continue;
+    }
 
     if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) < 10000) {
       wait 0.2;
@@ -697,10 +743,12 @@ get_shuffle_to_corner_start_anim(shuffleLeft, startNode) {
     assert(shuffleLeft);
     return % CornerCrR_alert_2_shuffle;
   } else {
-    if(shuffleLeft)
+    if(shuffleLeft) {
       return % covercrouch_hide_2_shuffleL;
-    else
+    }
+    else {
       return % covercrouch_hide_2_shuffleR;
+    }
   }
 }
 
@@ -736,18 +784,22 @@ setup_shuffle_anim_array(shuffleLeft, startNode, endNode) {
       anim_array["shuffle_start"] = get_shuffle_to_corner_start_anim(shuffleLeft, startNode);
       anim_array["shuffle"] = % covercrouch_shuffleL;
 
-      if(endNode.type == "Cover Stand")
+      if(endNode.type == "Cover Stand") {
         anim_array["shuffle_end"] = % coverstand_shuffleL_2_hide;
-      else
+      }
+      else {
         anim_array["shuffle_end"] = % covercrouch_shuffleL_2_hide;
+      }
     } else {
       anim_array["shuffle_start"] = get_shuffle_to_corner_start_anim(shuffleLeft, startNode);
       anim_array["shuffle"] = % covercrouch_shuffleR;
 
-      if(endNode.type == "Cover Stand")
+      if(endNode.type == "Cover Stand") {
         anim_array["shuffle_end"] = % coverstand_shuffleR_2_hide;
-      else
+      }
+      else {
         anim_array["shuffle_end"] = % covercrouch_shuffleR_2_hide;
+      }
     }
   }
 
@@ -785,32 +837,38 @@ moveCoverToCover() {
   self.shuffleNode = undefined;
   self.shuffleMoveInterrupted = true;
 
-  if(!isDefined(self.prevNode))
+  if(!isDefined(self.prevNode)) {
     return;
+  }
 
-  if(!isDefined(self.node) || !isDefined(shuffleNode) || self.node != shuffleNode)
+  if(!isDefined(self.node) || !isDefined(shuffleNode) || self.node != shuffleNode) {
     return;
+  }
 
   shuffleNodeType = self.prevNode;
 
   node = self.node;
 
   moveDir = node.origin - self.origin;
-  if(lengthSquared(moveDir) < 1)
+  if(lengthSquared(moveDir) < 1) {
     return;
+  }
 
   moveDir = vectornormalize(moveDir);
   forward = anglesToForward(node.angles);
 
   shuffleLeft = ((forward[0] * moveDir[1]) - (forward[1] * moveDir[0])) > 0;
 
-  if(moveDoorSideToSide(shuffleLeft, shuffleNodeType, node))
+  if(moveDoorSideToSide(shuffleLeft, shuffleNodeType, node)) {
     return;
+  }
 
-  if(moveCoverToCover_checkStartPose(shuffleNodeType, node))
+  if(moveCoverToCover_checkStartPose(shuffleNodeType, node)) {
     blendTime = 0.1;
-  else
+  }
+  else {
     blendTime = 0.4;
+  }
 
   setup_shuffle_anim_array(shuffleLeft, shuffleNodeType, node);
 
@@ -823,10 +881,12 @@ moveCoverToCover() {
   endAnim = animarray("shuffle_end");
 
   //assertEx( animhasnotetrack( startAnim, "finish" ), "animation doesn't have finish notetrack " + startAnim );
-  if(animhasnotetrack(startAnim, "finish"))
+  if(animhasnotetrack(startAnim, "finish")) {
     startEndTime = getNotetrackTimes(startAnim, "finish")[0];
-  else
+  }
+  else {
     startEndTime = 1;
+  }
 
   startDist = length(getMoveDelta(startAnim, 0, startEndTime));
   shuffleDist = length(getMoveDelta(shuffleAnim, 0, 1));
@@ -863,26 +923,31 @@ moveCoverToCover() {
   // account for loopTime not being exact since loop animation delta isn't uniform over time
   for(i = 0; i < 2; i++) {
     remainingDist = distance(self.origin, node.origin);
-    if(playEnd)
+    if(playEnd) {
       remainingDist -= endDist;
+    }
 
-    if(remainingDist < 4)
+    if(remainingDist < 4) {
       break;
+    }
 
     playTime = loopTime * (remainingDist / shuffleDist) * 0.9; // don't overshoot
     playTime = floor(playTime * serverFPS) * serverSPF;
 
-    if(playTime < 0.05)
+    if(playTime < 0.05) {
       break;
+    }
 
     self animscripts\shared::DoNoteTracksForTime(playTime, "shuffle");
   }
 
   if(playEnd) {
-    if(moveCoverToCover_checkEndPose(node))
+    if(moveCoverToCover_checkEndPose(node)) {
       blendTime = 0.2;
-    else
+    }
+    else {
       blendTime = 0.4;
+    }
 
     self clearAnim(shuffleAnim, blendTime);
     self setflaggedanim("shuffle_end", endAnim, 1, blendTime);
@@ -914,13 +979,16 @@ moveCoverToCoverFinish() {
 moveDoorSideToSide(shuffleLeft, startNode, endNode) {
   sideToSideAnim = undefined;
 
-  if(startNode.type == "Cover Right" && endNode.type == "Cover Left" && !shuffleLeft)
+  if(startNode.type == "Cover Right" && endNode.type == "Cover Left" && !shuffleLeft) {
     sideToSideAnim = % corner_standR_Door_R2L;
-  else if(startNode.type == "Cover Left" && endNode.type == "Cover Right" && shuffleLeft)
+  }
+  else if(startNode.type == "Cover Left" && endNode.type == "Cover Right" && shuffleLeft) {
     sideToSideAnim = % corner_standL_Door_L2R;
+  }
 
-  if(!isDefined(sideToSideAnim))
+  if(!isDefined(sideToSideAnim)) {
     return false;
+  }
 
   self animMode("zonly_physics", false);
   self orientmode("face current");
@@ -964,8 +1032,9 @@ moveDoorSideToSide(shuffleLeft, startNode, endNode) {
 }
 
 handleSideToSideNotetracks(note) {
-  if(note == "slide_start")
+  if(note == "slide_start") {
     return true;
+  }
 }
 
 slideForTime(slideIncrement, slideFrames) {
@@ -990,10 +1059,12 @@ MoveStandMoveOverride(override_anim, weights) {
   }
 
   if(isarray(override_anim)) {
-    if(isDefined(self.run_override_weights))
+    if(isDefined(self.run_override_weights)) {
       moveAnim = choose_from_weighted_array(override_anim, weights);
-    else
+    }
+    else {
       moveAnim = override_anim[randomint(override_anim.size)];
+    }
   } else {
     moveAnim = override_anim;
   }

@@ -31,16 +31,18 @@ emp_filter_over_time(n_duration) {
   level.localplayers[0] playSound(0, "wpn_emp_bomb_static_start", (0, 0, 0));
   n_emp_filter_intensity = 1;
 
-  if(n_duration > level.localplayers[0].emp_filter_duration)
+  if(n_duration > level.localplayers[0].emp_filter_duration) {
     level.localplayers[0].emp_filter_duration = n_duration;
+  }
 
   n_fade_out_step = 0.5 / level.localplayers[0].emp_filter_duration * 0.016667;
 
   while(n_emp_filter_intensity > 0.5) {
     n_emp_filter_intensity = n_emp_filter_intensity - n_fade_out_step;
 
-    if(n_emp_filter_intensity < 0.5)
+    if(n_emp_filter_intensity < 0.5) {
       n_emp_filter_intensity = 0.5;
+    }
 
     set_filter_emp_amount(level.localplayers[0], 7, n_emp_filter_intensity);
     level.localplayers[0] playLoopSound("wpn_emp_bomb_static_loop");

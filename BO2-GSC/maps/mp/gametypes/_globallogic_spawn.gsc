@@ -25,67 +25,82 @@
 #include maps\mp\gametypes\_spawnlogic;
 
 timeuntilspawn(includeteamkilldelay) {
-  if(level.ingraceperiod && !self.hasspawned)
+  if(level.ingraceperiod && !self.hasspawned) {
     return 0;
+  }
 
   respawndelay = 0;
 
   if(self.hasspawned) {
     result = self[[level.onrespawndelay]]();
 
-    if(isDefined(result))
+    if(isDefined(result)) {
       respawndelay = result;
-    else
+    }
+    else {
       respawndelay = level.playerrespawndelay;
+    }
 
-    if(self.suicide && level.suicidespawndelay > 0)
+    if(self.suicide && level.suicidespawndelay > 0) {
       respawndelay = respawndelay + level.suicidespawndelay;
+    }
 
-    if(self.teamkilled && level.teamkilledspawndelay > 0)
+    if(self.teamkilled && level.teamkilledspawndelay > 0) {
       respawndelay = respawndelay + level.teamkilledspawndelay;
+    }
 
-    if(includeteamkilldelay && is_true(self.teamkillpunish))
+    if(includeteamkilldelay && is_true(self.teamkillpunish)) {
       respawndelay = respawndelay + maps\mp\gametypes\_globallogic_player::teamkilldelay();
+    }
   }
 
   wavebased = level.waverespawndelay > 0;
 
-  if(wavebased)
+  if(wavebased) {
     return self timeuntilwavespawn(respawndelay);
+  }
 
   return respawndelay;
 }
 
 allteamshaveexisted() {
   foreach(team in level.teams) {
-    if(!level.everexisted[team])
+    if(!level.everexisted[team]) {
       return false;
+    }
   }
 
   return true;
 }
 
 mayspawn() {
-  if(isDefined(level.mayspawn) && !self[[level.mayspawn]]())
+  if(isDefined(level.mayspawn) && !self[[level.mayspawn]]()) {
     return false;
+  }
 
-  if(level.inovertime)
+  if(level.inovertime) {
     return false;
+  }
 
-  if(level.playerqueuedrespawn && !isDefined(self.allowqueuespawn) && !level.ingraceperiod && !level.usestartspawns)
+  if(level.playerqueuedrespawn && !isDefined(self.allowqueuespawn) && !level.ingraceperiod && !level.usestartspawns) {
     return false;
+  }
 
   if(level.numlives) {
-    if(level.teambased)
+    if(level.teambased) {
       gamehasstarted = allteamshaveexisted();
-    else
+    }
+    else {
       gamehasstarted = level.maxplayercount > 1 || !isoneround() && !isfirstround();
+    }
 
-    if(!self.pers["lives"])
+    if(!self.pers["lives"]) {
       return false;
+    }
     else if(gamehasstarted) {
-      if(!level.ingraceperiod && !self.hasspawned && !level.wagermatch)
+      if(!level.ingraceperiod && !self.hasspawned && !level.wagermatch) {
         return false;
+      }
     }
   }
 
@@ -97,15 +112,17 @@ timeuntilwavespawn(minimumwait) {
   lastwavetime = level.lastwave[self.pers["team"]];
   wavedelay = level.wavedelay[self.pers["team"]] * 1000;
 
-  if(wavedelay == 0)
+  if(wavedelay == 0) {
     return 0;
+  }
 
   numwavespassedearliestspawntime = (earliestspawntime - lastwavetime) / wavedelay;
   numwaves = ceil(numwavespassedearliestspawntime);
   timeofspawn = lastwavetime + numwaves * wavedelay;
 
-  if(isDefined(self.wavespawnindex))
+  if(isDefined(self.wavespawnindex)) {
     timeofspawn = timeofspawn + 50 * self.wavespawnindex;
+  }
 
   return (timeofspawn - gettime()) / 1000;
 }
@@ -128,10 +145,12 @@ spawnplayerprediction() {
   while(true) {
     wait 0.5;
 
-    if(isDefined(level.onspawnplayerunified) && getdvarint(#"_id_CF6EEB8B") == 0)
+    if(isDefined(level.onspawnplayerunified) && getdvarint(#"_id_CF6EEB8B") == 0) {
       maps\mp\gametypes\_spawning::onspawnplayer_unified(1);
-    else
+    }
+    else {
       self[[level.onspawnplayer]](1);
+    }
   }
 }
 
@@ -146,25 +165,31 @@ doinitialspawnmessaging() {
 
   if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
     if(!isDefined(level.infinalfight) || !level.infinalfight) {
-      if(level.hardcoremode && maps\mp\gametypes\_persistence::ispartygamemode() == 0)
+      if(level.hardcoremode && maps\mp\gametypes\_persistence::ispartygamemode() == 0) {
         self maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("gametype_hardcore");
-      else
+      }
+      else {
         self maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("gametype");
+      }
     }
   }
 
-  while(level.inprematchperiod)
+  while(level.inprematchperiod) {
     wait 0.05;
+  }
 
   hintmessage = getobjectivehinttext(team);
 
-  if(isDefined(hintmessage))
+  if(isDefined(hintmessage)) {
     self thread maps\mp\gametypes\_hud_message::hintmessage(hintmessage);
+  }
 
-  if(team == game["attackers"])
+  if(team == game["attackers"]) {
     self maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("offense_obj", "introboost");
-  else
+  }
+  else {
     self maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("defense_obj", "introboost");
+  }
 }
 
 spawnplayer() {
@@ -186,8 +211,9 @@ spawnplayer() {
     self.pers["resetMomentumOnSpawn"] = undefined;
   }
 
-  if(level.teambased)
+  if(level.teambased) {
     self.sessionteam = self.team;
+  }
   else {
     self.sessionteam = "none";
     self.ffateam = self.team;
@@ -202,10 +228,12 @@ spawnplayer() {
   self.statusicon = "";
   self.damagedplayers = [];
 
-  if(getdvarint(#"scr_csmode") > 0)
+  if(getdvarint(#"scr_csmode") > 0) {
     self.maxhealth = getdvarint(#"scr_csmode");
-  else
+  }
+  else {
     self.maxhealth = level.playermaxhealth;
+  }
 
   self.health = self.maxhealth;
   self.friendlydamage = undefined;
@@ -236,21 +264,25 @@ spawnplayer() {
   self.diedonvehicle = undefined;
 
   if(!self.wasaliveatmatchstart) {
-    if(level.ingraceperiod || maps\mp\gametypes\_globallogic_utils::gettimepassed() < 20000)
+    if(level.ingraceperiod || maps\mp\gametypes\_globallogic_utils::gettimepassed() < 20000) {
       self.wasaliveatmatchstart = 1;
+    }
   }
 
   self setdepthoffield(0, 0, 512, 512, 4, 0);
   self resetfov();
   pixbeginevent("onSpawnPlayer");
 
-  if(isDefined(level.onspawnplayerunified) && getdvarint(#"_id_CF6EEB8B") == 0)
+  if(isDefined(level.onspawnplayerunified) && getdvarint(#"_id_CF6EEB8B") == 0) {
     self[[level.onspawnplayerunified]]();
-  else
+  }
+  else {
     self[[level.onspawnplayer]](0);
+  }
 
-  if(isDefined(level.playerspawnedcb))
+  if(isDefined(level.playerspawnedcb)) {
     self[[level.playerspawnedcb]]();
+  }
 
   pixendevent();
   pixendevent();
@@ -261,8 +293,9 @@ spawnplayer() {
   self stopburning();
   assert(maps\mp\gametypes\_globallogic_utils::isvalidclass(self.class));
 
-  if(sessionmodeiszombiesgame())
+  if(sessionmodeiszombiesgame()) {
     self maps\mp\gametypes\_class::giveloadoutlevelspecific(self.team, self.class);
+  }
   else {
     self maps\mp\gametypes\_class::setclass(self.class);
     self maps\mp\gametypes\_class::giveloadout(self.team, self.class);
@@ -273,20 +306,24 @@ spawnplayer() {
     team = self.pers["team"];
 
     if(isDefined(self.pers["music"].spawn) && self.pers["music"].spawn == 0) {
-      if(level.wagermatch)
+      if(level.wagermatch) {
         music = "SPAWN_WAGER";
-      else
+      }
+      else {
         music = game["music"]["spawn_" + team];
+      }
 
       self thread maps\mp\gametypes\_globallogic_audio::set_music_on_player(music, 0, 0);
       self.pers["music"].spawn = 1;
     }
 
     if(level.splitscreen) {
-      if(isDefined(level.playedstartingmusic))
+      if(isDefined(level.playedstartingmusic)) {
         music = undefined;
-      else
+      }
+      else {
         level.playedstartingmusic = 1;
+      }
     }
 
     self thread doinitialspawnmessaging();
@@ -305,10 +342,12 @@ spawnplayer() {
       }
 
       if(level.splitscreen) {
-        if(isDefined(level.playedstartingmusic))
+        if(isDefined(level.playedstartingmusic)) {
           music = undefined;
-        else
+        }
+        else {
           level.playedstartingmusic = 1;
+        }
       }
 
       self thread doinitialspawnmessaging();
@@ -316,25 +355,29 @@ spawnplayer() {
     }
   }
 
-  if(getdvar(#"scr_showperksonspawn") == "")
+  if(getdvar(#"scr_showperksonspawn") == "") {
     setdvar("scr_showperksonspawn", "0");
+  }
 
-  if(level.hardcoremode)
+  if(level.hardcoremode) {
     setdvar("scr_showperksonspawn", "0");
+  }
 
   if(getdvarint(#"scr_showperksonspawn") == 1 && game["state"] != "postgame") {
     pixbeginevent("showperksonspawn");
 
-    if(level.perksenabled == 1)
+    if(level.perksenabled == 1) {
       self maps\mp\gametypes\_hud_util::showperks();
+    }
 
     self thread maps\mp\gametypes\_globallogic_ui::hideloadoutaftertime(3.0);
     self thread maps\mp\gametypes\_globallogic_ui::hideloadoutondeath();
     pixendevent();
   }
 
-  if(isDefined(self.pers["momentum"]))
+  if(isDefined(self.pers["momentum"])) {
     self.momentum = self.pers["momentum"];
+  }
 
   pixendevent();
   waittillframeend;
@@ -354,8 +397,9 @@ spawnplayer() {
     self thread maps\mp\_vehicles::turretdeathwaiter();
   }
 
-  if(getdvarint(#"_id_F8D00F60") > 0)
+  if(getdvarint(#"_id_F8D00F60") > 0) {
     self thread maps\mp\gametypes\_globallogic_score::xpratethread();
+  }
 
   if(game["state"] == "postgame") {
     assert(!level.intermission);
@@ -377,8 +421,9 @@ in_spawnspectator(origin, angles) {
   pixmarker("BEGIN: in_spawnSpectator");
   self setspawnvariables();
 
-  if(self.pers["team"] == "spectator")
+  if(self.pers["team"] == "spectator") {
     self clearlowermessage();
+  }
 
   self.sessionstate = "spectator";
   self.spectatorclient = -1;
@@ -387,16 +432,19 @@ in_spawnspectator(origin, angles) {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
 
-  if(self.pers["team"] == "spectator")
+  if(self.pers["team"] == "spectator") {
     self.statusicon = "";
-  else
+  }
+  else {
     self.statusicon = "hud_status_dead";
+  }
 
   maps\mp\gametypes\_spectating::setspectatepermissionsformachine();
   [[level.onspawnspectator]](origin, angles);
 
-  if(level.teambased && !level.splitscreen)
+  if(level.teambased && !level.splitscreen) {
     self thread spectatorthirdpersonness();
+  }
 
   level thread maps\mp\gametypes\_globallogic::updateteamstatus();
   pixmarker("END: in_spawnSpectator");
@@ -415,8 +463,9 @@ forcespawn(time) {
   self endon("disconnect");
   self endon("spawned");
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 60;
+  }
 
   wait(time);
 
@@ -451,13 +500,15 @@ kickifidontspawninternal() {
   self endon("spawned");
   waittime = 90;
 
-  if(getdvar(#"_id_4257CF5C") != "")
+  if(getdvar(#"_id_4257CF5C") != "") {
     waittime = getdvarfloat(#"_id_4257CF5C");
+  }
 
   mintime = 45;
 
-  if(getdvar(#"_id_0DF057E0") != "")
+  if(getdvar(#"_id_0DF057E0") != "") {
     mintime = getdvarfloat(#"_id_0DF057E0");
+  }
 
   starttime = gettime();
   kickwait(waittime);
@@ -519,10 +570,12 @@ spawnintermission(usedefaultcallback) {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
 
-  if(isDefined(usedefaultcallback) && usedefaultcallback)
+  if(isDefined(usedefaultcallback) && usedefaultcallback) {
     maps\mp\gametypes\_globallogic_defaults::default_onspawnintermission();
-  else
+  }
+  else {
     [[level.onspawnintermission]]();
+  }
 
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 }
@@ -554,8 +607,9 @@ spawnqueuedclient(dead_player_team, killer) {
   maps\mp\gametypes\_globallogic_utils::waittillslowprocessallowed();
   spawn_team = undefined;
 
-  if(isDefined(killer) && isDefined(killer.team) && isDefined(level.teams[killer.team]))
+  if(isDefined(killer) && isDefined(killer.team) && isDefined(level.teams[killer.team])) {
     spawn_team = killer.team;
+  }
 
   if(isDefined(spawn_team)) {
     spawnqueuedclientonteam(spawn_team);
@@ -571,32 +625,39 @@ spawnqueuedclient(dead_player_team, killer) {
 }
 
 allteamsnearscorelimit() {
-  if(!level.teambased)
+  if(!level.teambased) {
     return false;
+  }
 
-  if(level.scorelimit <= 1)
+  if(level.scorelimit <= 1) {
     return false;
+  }
 
   foreach(team in level.teams) {
-    if(!(game["teamScores"][team] >= level.scorelimit - 1))
+    if(!(game["teamScores"][team] >= level.scorelimit - 1)) {
       return false;
+    }
   }
 
   return true;
 }
 
 shouldshowrespawnmessage() {
-  if(waslastround())
+  if(waslastround()) {
     return false;
+  }
 
-  if(isoneround())
+  if(isoneround()) {
     return false;
+  }
 
-  if(isDefined(level.livesdonotreset) && level.livesdonotreset)
+  if(isDefined(level.livesdonotreset) && level.livesdonotreset) {
     return false;
+  }
 
-  if(allteamsnearscorelimit())
+  if(allteamsnearscorelimit()) {
     return false;
+  }
 
   return true;
 }
@@ -607,8 +668,9 @@ default_spawnmessage() {
 }
 
 showspawnmessage() {
-  if(shouldshowrespawnmessage())
+  if(shouldshowrespawnmessage()) {
     self thread[[level.spawnmessage]]();
+  }
 }
 
 spawnclient(timealreadypassed) {
@@ -634,8 +696,9 @@ spawnclient(timealreadypassed) {
   self.allowqueuespawn = undefined;
   self waitandspawnclient(timealreadypassed);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.waitingtospawn = 0;
+  }
 
   pixendevent();
 }
@@ -645,8 +708,9 @@ waitandspawnclient(timealreadypassed) {
   self endon("end_respawn");
   level endon("game_ended");
 
-  if(!isDefined(timealreadypassed))
+  if(!isDefined(timealreadypassed)) {
     timealreadypassed = 0;
+  }
 
   spawnedasspectator = 0;
 
@@ -687,12 +751,15 @@ waitandspawnclient(timealreadypassed) {
   }
 
   if(timeuntilspawn > 0) {
-    if(level.playerqueuedrespawn)
+    if(level.playerqueuedrespawn) {
       setlowermessage(game["strings"]["you_will_spawn"], timeuntilspawn);
-    else if(self issplitscreen())
+    }
+    else if(self issplitscreen()) {
       setlowermessage(game["strings"]["waiting_to_spawn_ss"], timeuntilspawn, 1);
-    else
+    }
+    else {
       setlowermessage(game["strings"]["waiting_to_spawn"], timeuntilspawn);
+    }
 
     if(!spawnedasspectator) {
       spawnorigin = self.origin + vectorscale((0, 0, 1), 60.0);
@@ -718,8 +785,9 @@ waitandspawnclient(timealreadypassed) {
   }
 
   if(isDefined(level.gametypespawnwaiter)) {
-    if(!spawnedasspectator)
+    if(!spawnedasspectator) {
       self thread respawn_asspectator(self.origin + vectorscale((0, 0, 1), 60.0), self.angles);
+    }
 
     spawnedasspectator = 1;
 
@@ -737,8 +805,9 @@ waitandspawnclient(timealreadypassed) {
   if(!level.playerforcerespawn && self.hasspawned && !wavebased && !self.wantsafespawn && !level.playerqueuedrespawn) {
     setlowermessage(game["strings"]["press_to_spawn"]);
 
-    if(!spawnedasspectator)
+    if(!spawnedasspectator) {
       self thread respawn_asspectator(self.origin + vectorscale((0, 0, 1), 60.0), self.angles);
+    }
 
     spawnedasspectator = 1;
     self waitrespawnorsafespawnbutton();

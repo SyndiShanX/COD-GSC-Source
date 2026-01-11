@@ -5,8 +5,9 @@
 ********************************/
 
 main() {
-  if(getdvar("cobrapilot_surface_to_air_missiles_enabled") == "")
+  if(getdvar("cobrapilot_surface_to_air_missiles_enabled") == "") {
     setdvar("cobrapilot_surface_to_air_missiles_enabled", "1");
+  }
 
   tryreload();
   thread firemissile();
@@ -30,27 +31,34 @@ turret_think() {
   }
   self.attackradius = 30000;
 
-  if(isDefined(self.radius))
+  if(isDefined(self.radius)) {
     self.attackradius = self.radius;
+  }
 
-  while(!isDefined(level.cobrapilot_difficulty))
+  while(!isDefined(level.cobrapilot_difficulty)) {
     wait 0.05;
+  }
 
   var_0 = 1.0;
 
-  if(level.cobrapilot_difficulty == "easy")
+  if(level.cobrapilot_difficulty == "easy") {
     var_0 = 0.5;
-  else if(level.cobrapilot_difficulty == "medium")
+  }
+  else if(level.cobrapilot_difficulty == "medium") {
     var_0 = 1.7;
-  else if(level.cobrapilot_difficulty == "hard")
+  }
+  else if(level.cobrapilot_difficulty == "hard") {
     var_0 = 1.0;
-  else if(level.cobrapilot_difficulty == "insane")
+  }
+  else if(level.cobrapilot_difficulty == "insane") {
     var_0 = 1.5;
+  }
 
   self.attackradius = self.attackradius * var_0;
 
-  if(getdvar("cobrapilot_debug") == "1")
+  if(getdvar("cobrapilot_debug") == "1") {
     iprintln("surface-to-air missile range difficultyScaler = " + var_0);
+  }
 
   for(;;) {
     wait(2 + randomfloat(1));
@@ -62,8 +70,9 @@ turret_think() {
     }
     var_2 = var_1.origin;
 
-    if(isDefined(var_1.script_targetoffset_z))
+    if(isDefined(var_1.script_targetoffset_z)) {
       var_2 = var_2 + (0, 0, var_1.script_targetoffset_z);
+    }
 
     self setturrettargetvec(var_2);
     level thread turret_rotate_timeout(self, 5.0);
@@ -89,8 +98,9 @@ turret_think() {
           continue;
         } else if(level.cobrapilot_difficulty == "insane")
           continue;
-        else
+        else {
           var_4 waittill("death");
+        }
       }
 
       continue;
@@ -109,13 +119,15 @@ within_attack_range(var_0) {
   var_1 = distance((self.origin[0], self.origin[1], 0), (var_0.origin[0], var_0.origin[1], 0));
   var_2 = var_0.origin[2] - self.origin[2];
 
-  if(var_2 <= 750)
+  if(var_2 <= 750) {
     return 0;
+  }
 
   var_3 = var_2 * 2.5;
 
-  if(var_1 <= self.attackradius + var_3)
+  if(var_1 <= self.attackradius + var_3) {
     return 1;
+  }
 
   return 0;
 }
@@ -127,24 +139,28 @@ firemissile() {
     self waittill("shoot_target", var_0);
     var_1 = undefined;
 
-    if(!isDefined(var_0.script_targetoffset_z))
+    if(!isDefined(var_0.script_targetoffset_z)) {
       var_0.script_targetoffset_z = 0;
+    }
 
     var_2 = (0, 0, var_0.script_targetoffset_z);
     var_1 = self fireweapon(self.missiletags[self.missilelaunchnexttag], var_0, var_2);
     var_1 thread maps\_utility::play_sound_on_tag_endon_death("weap_bm21_missile_projectile");
 
-    if(getdvar("cobrapilot_debug") == "1")
+    if(getdvar("cobrapilot_debug") == "1") {
       level thread draw_missile_target_line(var_1, var_0, var_2);
+    }
 
-    if(!isDefined(var_0.incomming_missiles))
+    if(!isDefined(var_0.incomming_missiles)) {
       var_0.incomming_missiles = [];
+    }
 
     var_0.incomming_missiles = common_scripts\utility::array_add(var_0.incomming_missiles, var_1);
     thread maps\_helicopter_globals::missile_deathwait(var_1, var_0);
 
-    if(maps\_utility::hastag(self.missilemodel, self.missiletags[self.missilelaunchnexttag]))
+    if(maps\_utility::hastag(self.missilemodel, self.missiletags[self.missilelaunchnexttag])) {
       self detach(self.missilemodel, self.missiletags[self.missilelaunchnexttag]);
+    }
 
     self.missilelaunchnexttag++;
     self.missileammo--;
@@ -158,23 +174,27 @@ firemissile() {
 draw_missile_target_line(var_0, var_1, var_2) {
   var_0 endon("death");
 
-  for(;;)
+  for(;;) {
     wait 0.05;
+  }
 }
 
 tryreload() {
-  if(!isDefined(self.missileammo))
+  if(!isDefined(self.missileammo)) {
     self.missileammo = 0;
+  }
 
-  if(!isDefined(self.missilelaunchnexttag))
+  if(!isDefined(self.missilelaunchnexttag)) {
     self.missilelaunchnexttag = 0;
+  }
 
   if(self.missileammo > 0) {
     return;
   }
   for(var_0 = 0; var_0 < self.missiletags.size; var_0++) {
-    if(maps\_utility::hastag(self.missilemodel, self.missiletags[var_0]))
+    if(maps\_utility::hastag(self.missilemodel, self.missiletags[var_0])) {
       self attach(self.missilemodel, self.missiletags[var_0]);
+    }
   }
 
   self.missileammo = self.missiletags.size;

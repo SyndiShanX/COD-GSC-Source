@@ -135,8 +135,9 @@ force_instagib() {
   }
   if(!self.gibbed) {
     direction = -1;
-    if(randomintrange(0, 10) >= 5)
+    if(randomintrange(0, 10) >= 5) {
       direction = 1;
+    }
     self launchragdoll((randomintrange(-35, 35), randomintrange(75, 150) * direction, randomintrange(40, 60)));
     self.a.gib_ref = "head";
     self thread animscripts\death::do_gib();

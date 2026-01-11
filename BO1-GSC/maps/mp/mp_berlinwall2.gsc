@@ -125,8 +125,9 @@ acquired_target(gun) {
     level thread aim_at_player(fire_pos, gun);
     fire_at_player(fire_pos, gun);
     start_z += level._berlin_firing_increment_z;
-    if(start_z >= level._berlin_firing_end_z)
+    if(start_z >= level._berlin_firing_end_z) {
       start_z = level._berlin_firing_end_z;
+    }
     wait(level._berlin_firing_delay);
   }
 }

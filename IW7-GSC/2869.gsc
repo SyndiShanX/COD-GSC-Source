@@ -26,15 +26,17 @@ func_95F9() {
 }
 
 func_F848(var_00) {
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = tolower(getdvar("mapname"));
+  }
 
   if(!isDefined(var_00) || var_00 == 0) {
     if(isDefined(level.func_7683)) {
       return;
     }
-    if(!isDefined(level.func_4C6B))
+    if(!isDefined(level.func_4C6B)) {
       level.func_4C6B = ::func_E44D;
+    }
 
     level._meth_83D4 = ::func_61BA;
     level._meth_83D3 = ::func_61BA;
@@ -58,8 +60,9 @@ func_F848(var_00) {
       var_02 scripts\sp\utility::func_65E0("global_hint_in_use");
       var_2.pers = [];
 
-      if(!isDefined(var_2.func_28A4))
+      if(!isDefined(var_2.func_28A4)) {
         var_2.func_28A4 = 0;
+      }
 
       var_2.disabledweapon = 0;
       var_2.disabledweaponswitch = 0;
@@ -336,8 +339,9 @@ func_F848(var_00) {
   level.playermeleedamagemultiplier_dvar = 0.8;
   _setsaveddvar("player_meleeDamageMultiplier", level.playermeleedamagemultiplier_dvar);
 
-  if(isDefined(level.func_4C53))
+  if(isDefined(level.func_4C53)) {
     [[level.func_4C53]]();
+  }
 
   updategameskill();
   func_12E5A();
@@ -366,8 +370,9 @@ func_12E5A() {
   func_F725();
   func_F761();
 
-  for(var_00 = 0; var_00 < level.players.size; var_0++)
+  for(var_00 = 0; var_00 < level.players.size; var_0++) {
     level.players[var_00] func_F6C3();
+  }
 }
 
 func_F6C3() {
@@ -397,8 +402,9 @@ func_F725() {
 }
 
 func_F761() {
-  if(!isDefined(level.func_A48E))
+  if(!isDefined(level.func_A48E)) {
     level.func_A48E = spawnStruct();
+  }
 
   if(scripts\sp\utility::func_93A6()) {
     var_00 = "veteran";
@@ -445,10 +451,12 @@ func_F762() {
     level.func_D127.func_B154 = level.func_D127.func_B154 * var_00;
   }
 
-  if(isDefined(level.func_D127.func_4C15) && isDefined(level.func_D127.func_4C15.func_105EE))
+  if(isDefined(level.func_D127.func_4C15) && isDefined(level.func_D127.func_4C15.func_105EE)) {
     _setsaveddvar("spaceshipTargetLockAnglesScale", level.func_D127.func_4C15.func_105EE * level.func_A48E.func_D3B9);
-  else
+  }
+  else {
     _setsaveddvar("spaceshipTargetLockAnglesScale", level.func_A48E.func_D3B9);
+  }
 }
 
 func_F679() {
@@ -466,13 +474,15 @@ func_F679() {
 }
 
 updategameskill() {
-  foreach(var_01 in level.players)
+  foreach(var_01 in level.players) {
   var_1.func_7683 = var_01 scripts\sp\utility::func_7B93();
+  }
 
   level.func_7683 = level.player.func_7683;
 
-  if(isDefined(level.func_72B4))
+  if(isDefined(level.func_72B4)) {
     level.func_7683 = level.func_72B4;
+  }
 
   return level.func_7683;
 }
@@ -637,27 +647,33 @@ func_1D5A() {
 }
 
 func_C868() {
-  if(!func_C869())
+  if(!func_C869()) {
     return 0;
+  }
 
   return randomint(100) > 25;
 }
 
 func_C869() {
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return 0;
+  }
 
-  if(!isplayer(self.enemy))
+  if(!isplayer(self.enemy)) {
     return 0;
+  }
 
-  if(!isalive(level.func_C870) || level.func_C870.script != "pain")
+  if(!isalive(level.func_C870) || level.func_C870.script != "pain") {
     level.func_C870 = self;
+  }
 
-  if(self == level.func_C870)
+  if(self == level.func_C870) {
     return 0;
+  }
 
-  if(self.damageweapon != "none" && weaponisboltaction(self.damageweapon))
+  if(self.damageweapon != "none" && weaponisboltaction(self.damageweapon)) {
     return 0;
+  }
 
   return 1;
 }
@@ -678,20 +694,24 @@ func_F288() {
   }
 
   if(self.script == "move") {
-    if(scripts\engine\utility::actor_is3d() && isDefined(self.var_1198.func_AA3D) && (self.var_1198.func_AA3D.type == "Exposed 3D" || self.var_1198.func_AA3D.type == "Path 3D"))
+    if(scripts\engine\utility::actor_is3d() && isDefined(self.var_1198.func_AA3D) && (self.var_1198.func_AA3D.type == "Exposed 3D" || self.var_1198.func_AA3D.type == "Path 3D")) {
       self.accuracy = self.func_2894;
-    else if(scripts\anim\utility::func_9D9C())
+    }
+    else if(scripts\anim\utility::func_9D9C()) {
       self.accuracy = anim.func_1385F * self.func_2894;
-    else
+    }
+    else {
       self.accuracy = anim.func_E7D4 * self.func_2894;
+    }
 
     return;
   }
 
   self.accuracy = self.func_2894;
 
-  if(isDefined(self.func_9F15) && isDefined(self.func_DC58))
+  if(isDefined(self.func_9F15) && isDefined(self.func_DC58)) {
     self.accuracy = self.accuracy * self.func_DC58;
+  }
 }
 
 func_F84B() {
@@ -710,39 +730,47 @@ func_F84B() {
   self.func_103BF++;
   var_02 = level.func_7683;
 
-  if(isplayer(self.enemy))
+  if(isplayer(self.enemy)) {
     var_02 = self.enemy.func_7683;
+  }
 
   if(func_10019()) {
     self.accuracy = 0;
 
-    if(var_02 > 0 || self.func_103BF > 1)
+    if(var_02 > 0 || self.func_103BF > 1) {
       self.func_A9BA = self.enemy;
+    }
 
     return;
   }
 
-  if(self.accuracy <= 10)
+  if(self.accuracy <= 10) {
     self.accuracy = (1 + 1 * self.func_103BA) * self.func_2894;
+  }
 
   self.func_103BA++;
 
-  if(var_02 < 1 && self.func_103BA == 1)
+  if(var_02 < 1 && self.func_103BA == 1) {
     self.func_A9BA = undefined;
+  }
 }
 
 func_10019() {
-  if(isDefined(self.func_BEF8) && self.func_BEF8)
+  if(isDefined(self.func_BEF8) && self.func_BEF8) {
     return 0;
+  }
 
-  if(self.team == "allies")
+  if(self.team == "allies") {
     return 0;
+  }
 
-  if(isDefined(self.func_A9BA) && self.enemy == self.func_A9BA)
+  if(isDefined(self.func_A9BA) && self.enemy == self.func_A9BA) {
     return 0;
+  }
 
-  if(distancesquared(self.origin, self.enemy.origin) > 250000)
+  if(distancesquared(self.origin, self.enemy.origin) > 250000) {
     return 0;
+  }
 
   return 1;
 }
@@ -763,14 +791,17 @@ func_13847() {
   var_00 = 0;
   waittillframeend;
 
-  if(!isalive(self.enemy))
+  if(!isalive(self.enemy)) {
     return var_00;
+  }
 
-  if(!isplayer(self.enemy))
+  if(!isplayer(self.enemy)) {
     return var_00;
+  }
 
-  if(self.enemy scripts\sp\utility::func_65DB("player_is_invulnerable"))
+  if(self.enemy scripts\sp\utility::func_65DB("player_is_invulnerable")) {
     var_00 = 0.3 + randomfloat(0.4);
+  }
 
   return var_00;
 }
@@ -778,8 +809,9 @@ func_13847() {
 func_D8EB(var_00, var_01, var_02, var_03) {
   var_03 = var_03 * 20;
 
-  for(var_04 = 0; var_04 < var_03; var_4++)
+  for(var_04 = 0; var_04 < var_03; var_4++) {
     wait 0.05;
+  }
 }
 
 resetmisstime_code() {
@@ -817,8 +849,9 @@ func_F79C(var_00) {
   if(self.a.func_B8D8 > gettime()) {
     return;
   }
-  if(var_00 > 0)
+  if(var_00 > 0) {
     self.accuracy = 0;
+  }
 
   var_00 = var_00 * 1000;
   self.a.func_B8D6 = gettime() + var_00;
@@ -833,8 +866,9 @@ func_CF4D() {
   for(;;) {
     var_00 = (0, 1, 0);
 
-    if(self.a.func_B8D6 > gettime())
+    if(self.a.func_B8D6 > gettime()) {
       var_00 = (1, 0, 0);
+    }
 
     wait 0.05;
   }
@@ -858,8 +892,9 @@ func_ECC2(var_00, var_01, var_02) {
 func_ECC3(var_00, var_01, var_02) {
   var_03 = 1;
 
-  if(var_02)
+  if(var_02) {
     var_03 = -1;
+  }
 
   var_04 = randomfloatrange(-15, 15);
   var_05 = randomfloatrange(-15, 15);
@@ -900,8 +935,9 @@ forcehidegrenadehudwarning(var_00) {
   var_01 = "fullscreen_dirt_" + var_00;
   var_02 = undefined;
 
-  if(var_00 == "bottom")
+  if(var_00 == "bottom") {
     var_02 = "fullscreen_dirt_bottom_b";
+  }
 
   thread func_56C6("dirt", var_00, var_01, var_02, randomfloatrange(0.55, 0.66));
 }
@@ -985,11 +1021,13 @@ func_D3A9() {
     self.damageattacker = var_04;
     var_08 = undefined;
 
-    if(isDefined(self.func_B940))
+    if(isDefined(self.func_B940)) {
       var_08 = self.func_B940[var_07];
+    }
 
-    if(!isDefined(var_08) && isDefined(var_2[var_07]))
+    if(!isDefined(var_08) && isDefined(var_2[var_07])) {
       var_08 = var_2[var_07];
+    }
 
     if(isDefined(var_08)) {
       waittillframeend;
@@ -1035,8 +1073,9 @@ playerhealthregen() {
     waittillframeend;
 
     if(self.health == self.maxhealth) {
-      if(scripts\sp\utility::func_65DB("player_has_red_flashing_overlay"))
+      if(scripts\sp\utility::func_65DB("player_has_red_flashing_overlay")) {
         func_D259();
+      }
 
       var_07 = 1;
       var_03 = 0;
@@ -1079,16 +1118,19 @@ playerhealthregen() {
       if(var_02) {
         var_06 = var_09;
 
-        if(gettime() > var_05 + self.gs.longregentime)
+        if(gettime() > var_05 + self.gs.longregentime) {
           var_06 = var_06 + self.gs.func_DE8D;
+        }
 
-        if(var_06 >= 1)
+        if(var_06 >= 1) {
           func_DE3C();
+        }
       } else
         var_06 = 1;
 
-      if(var_06 > 1.0)
+      if(var_06 > 1.0) {
         var_06 = 1.0;
+      }
 
       if(var_06 <= 0) {
         return;
@@ -1101,8 +1143,9 @@ playerhealthregen() {
     var_00 = var_07;
     var_10 = self.gs.worthydamageratio;
 
-    if(self.attackercount == 1)
+    if(self.attackercount == 1) {
       var_10 = var_10 * 3;
+    }
 
     var_11 = var_00 - var_09 >= var_10;
 
@@ -1131,8 +1174,9 @@ playerhealthregen() {
       var_03 = 0;
     } else if(var_02)
       var_04 = self.gs.invultime_postshield;
-    else
+    else {
       var_04 = self.gs.invultime_preshield;
+    }
 
     var_07 = self.health / self.maxhealth;
     thread func_D3B1(var_04);
@@ -1154,12 +1198,14 @@ func_DE3C() {
 }
 
 func_D3B1(var_00) {
-  if(isDefined(self.flashendtime) && self.flashendtime > gettime())
+  if(isDefined(self.flashendtime) && self.flashendtime > gettime()) {
     var_00 = var_00 * func_7E4A("flashbangedInvulFactor");
+  }
 
   if(var_00 > 0) {
-    if(!isDefined(self.func_C088))
+    if(!isDefined(self.func_C088)) {
       self.attackeraccuracy = 0;
+    }
 
     self.ignorerandombulletdamage = 1;
     wait(var_00);
@@ -1170,14 +1216,17 @@ func_D3B1(var_00) {
 }
 
 func_4FE9() {
-  if(self.team == "allies")
+  if(self.team == "allies") {
     self.func_5A0E = 0.6;
+  }
 
   if(self isbadguy()) {
-    if(level.func_7683 >= 2)
+    if(level.func_7683 >= 2) {
       self.func_5A0E = 0.8;
-    else
+    }
+    else {
       self.func_5A0E = 0.6;
+    }
   }
 }
 
@@ -1200,14 +1249,17 @@ grenadeawareness() {
 
   if(self isbadguy()) {
     if(level.func_7683 >= 2) {
-      if(randomint(100) < 33)
+      if(randomint(100) < 33) {
         self.grenadeawareness = 0.2;
-      else
+      }
+      else {
         self.grenadeawareness = 0.5;
+      }
     } else if(randomint(100) < 33)
       self.grenadeawareness = 0;
-    else
+    else {
       self.grenadeawareness = 0.2;
+    }
 
     self.grenadereturnthrowchance = self.grenadeawareness;
   }
@@ -1241,15 +1293,18 @@ func_D369(var_00) {
     if(isDefined(self.func_550A) && self.func_550A) {
       continue;
     }
-    if(isDefined(level.func_7684))
+    if(isDefined(level.func_7684)) {
       [[level.func_7684]]("breathing_hurt");
-    else
+    }
+    else {
       self playlocalsound("breathing_hurt");
+    }
 
     var_02 = 0.1;
 
-    if(isDefined(level.player.gs.func_4C82))
+    if(isDefined(level.player.gs.func_4C82)) {
       var_02 = level.player.gs.func_4C82;
+    }
 
     wait(var_02 + randomfloat(0.8));
   }
@@ -1285,8 +1340,9 @@ func_8CBA() {
       break;
     }
     if(scripts\sp\utility::func_93A6()) {
-      if(scripts\sp\specialist_MAYBE::func_2C97())
+      if(scripts\sp\specialist_MAYBE::func_2C97()) {
         var_02 = 0;
+      }
       else {
         var_04 = 0.1;
         var_05 = 1.0 - self.health / level.player.maxhealth;
@@ -1303,11 +1359,13 @@ func_8CBA() {
       var_08 = var_05 * var_05 * 1.2;
       var_08 = clamp(var_08, 0, 1);
 
-      if(var_02 > var_08)
+      if(var_02 > var_08) {
         var_02 = var_02 - var_04 * var_03;
+      }
 
-      if(var_02 < var_08)
+      if(var_02 < var_08) {
         var_02 = var_08;
+      }
     }
 
     if(isDefined(level.player.func_111B8) && level.player.func_111B8) {
@@ -1327,10 +1385,12 @@ func_11431(var_00) {
 }
 
 func_16F1(var_00) {
-  if(level.console)
+  if(level.console) {
     self.fontscale = 2;
-  else
+  }
+  else {
     self.fontscale = 1.6;
+  }
 
   self.x = 0;
   self.y = -36;
@@ -1349,10 +1409,12 @@ func_16F1(var_00) {
   self.func_272E.horzalign = "center";
   self.func_272E.vertalign = "middle";
 
-  if(level.console)
+  if(level.console) {
     self.func_272E setshader("popmenu_bg", 650, 52);
-  else
+  }
+  else {
     self.func_272E setshader("popmenu_bg", 650, 42);
+  }
 
   self.func_272E.alpha = 0.5;
 }
@@ -1391,24 +1453,29 @@ func_52BC(var_00) {
 }
 
 func_B4DA(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
-  if(isDefined(var_0.func_2A88))
+  if(isDefined(var_0.func_2A88)) {
     return 0;
+  }
 
   return 1;
 }
 
 func_11432() {
-  if(isDefined(level.func_470F))
+  if(isDefined(level.func_470F)) {
     return 0;
+  }
 
-  if(isDefined(self.melee))
+  if(isDefined(self.melee)) {
     return 0;
+  }
 
-  if(isDefined(self.vehicle))
+  if(isDefined(self.vehicle)) {
     return 0;
+  }
 
   return 1;
 }
@@ -1417,8 +1484,9 @@ func_8C1D() {
   var_00 = self getweaponslist("offhand");
 
   foreach(var_02 in var_00) {
-    if(issubstr(var_02, "offhandshield"))
+    if(issubstr(var_02, "offhandshield")) {
       return 1;
+    }
   }
 
   return 0;
@@ -1429,76 +1497,96 @@ func_E34F() {
 }
 
 func_FF8B() {
-  if(scripts\sp\utility::func_93A6())
+  if(scripts\sp\utility::func_93A6()) {
     return 0;
+  }
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     return 0;
+  }
 
-  if(self getteamflagcount())
+  if(self getteamflagcount()) {
     return 0;
+  }
 
-  if(self.ignoreme)
+  if(self.ignoreme) {
     return 0;
+  }
 
-  if(level.func_B8D0)
+  if(level.func_B8D0) {
     return 0;
+  }
 
-  if(!func_11432())
+  if(!func_11432()) {
     return 0;
+  }
 
-  if(self.func_7683 > 1 && !func_B327())
+  if(self.func_7683 > 1 && !func_B327()) {
     return 0;
+  }
 
-  if(scripts\sp\utility::func_65DB("player_retract_shield_active"))
+  if(scripts\sp\utility::func_65DB("player_retract_shield_active")) {
     return 0;
+  }
 
   var_00 = self _meth_8139("takeCoverWarnings");
 
-  if(var_00 <= 3)
+  if(var_00 <= 3) {
     return 0;
+  }
 
   return 1;
 }
 
 func_FF89() {
-  if(scripts\sp\utility::func_93A6())
+  if(scripts\sp\utility::func_93A6()) {
     return 0;
+  }
 
-  if(!isalive(self))
+  if(!isalive(self)) {
     return 0;
+  }
 
-  if(self getteamflagcount())
+  if(self getteamflagcount()) {
     return 0;
+  }
 
-  if(self.ignoreme)
+  if(self.ignoreme) {
     return 0;
+  }
 
-  if(level.func_B8D0)
+  if(level.func_B8D0) {
     return 0;
+  }
 
-  if(!func_11432())
+  if(!func_11432()) {
     return 0;
+  }
 
-  if(self.func_7683 > 1 && !func_B327())
+  if(self.func_7683 > 1 && !func_B327()) {
     return 0;
+  }
 
   var_00 = self _meth_8139("takeCoverWarnings");
 
-  if(var_00 <= 3)
+  if(var_00 <= 3) {
     return 0;
+  }
 
   return 1;
 }
 
 func_B327() {
-  if(!isDefined(level.func_5FB0))
+  if(!isDefined(level.func_5FB0)) {
     return 1;
+  }
 
-  if(isDefined(level.func_5FB0[level.script]))
+  if(isDefined(level.func_5FB0[level.script])) {
     return level.func_5FB0[level.script];
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 maps_with_jackal_arenas() {
@@ -1506,10 +1594,12 @@ maps_with_jackal_arenas() {
 }
 
 jackal_arena_is_early_in_the_game() {
-  if(map_has_jackal_arena() && get_num_jackal_arenas_completed() <= 4)
+  if(map_has_jackal_arena() && get_num_jackal_arenas_completed() <= 4) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 get_num_jackal_arenas_completed() {
@@ -1518,18 +1608,21 @@ get_num_jackal_arenas_completed() {
   foreach(var_02 in maps_with_jackal_arenas()) {
     var_03 = level.player _meth_84C6("missionStateData", var_02);
 
-    if(isDefined(var_03) && var_03 == "complete")
+    if(isDefined(var_03) && var_03 == "complete") {
       var_0++;
+    }
   }
 
   return var_00;
 }
 
 map_has_jackal_arena() {
-  if(scripts\engine\utility::array_contains(maps_with_jackal_arenas(), level.script))
+  if(scripts\engine\utility::array_contains(maps_with_jackal_arenas(), level.script)) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 func_11430(var_00) {
@@ -1544,11 +1637,13 @@ func_11430(var_00) {
     var_03 = gettime() + self.gs.longregentime;
     func_4766(1, var_02);
 
-    while(gettime() < var_03 && isalive(self) && scripts\sp\utility::func_65DB("player_has_red_flashing_overlay") && !scripts\sp\utility::func_65DB("player_retract_shield_active"))
+    while(gettime() < var_03 && isalive(self) && scripts\sp\utility::func_65DB("player_has_red_flashing_overlay") && !scripts\sp\utility::func_65DB("player_retract_shield_active")) {
       func_4766(0.9, var_02);
+    }
 
-    if(isalive(self))
+    if(isalive(self)) {
       func_4766(0.65, var_02);
+    }
 
     func_4766(0, var_02);
   }
@@ -1563,28 +1658,33 @@ func_4766(var_00, var_01) {
     return;
   }
   if(var_00 == 1) {
-    if(var_01)
+    if(var_01) {
       setomnvar("ui_gettocover_state", 1);
+    }
 
     wait 0.7;
   } else if(var_00 == 0.9) {
-    if(var_01)
+    if(var_01) {
       setomnvar("ui_gettocover_state", 2);
+    }
 
     wait 0.7;
   } else if(var_00 == 6.5) {
-    if(var_01)
+    if(var_01) {
       setomnvar("ui_gettocover_state", 3);
+    }
 
     wait 0.65;
   } else if(var_00 == 0) {
-    if(var_01 || getomnvar("ui_gettocover_state") > 0 && getomnvar("ui_gettocover_state") < 4)
+    if(var_01 || getomnvar("ui_gettocover_state") > 0 && getomnvar("ui_gettocover_state") < 4) {
       setomnvar("ui_gettocover_state", 4);
+    }
 
     wait 0.5;
   } else if(var_00 == 5) {
-    if(var_01 || getomnvar("ui_gettocover_state") > 0 && getomnvar("ui_gettocover_state") < 5)
+    if(var_01 || getomnvar("ui_gettocover_state") > 0 && getomnvar("ui_gettocover_state") < 5) {
       setomnvar("ui_gettocover_state", 5);
+    }
 
     wait 0.5;
   }
@@ -1595,11 +1695,13 @@ func_DE16(var_00) {
   var_01 = gettime() + level.player.gs.longregentime;
   func_DE15(var_00, 1, 1);
 
-  while(gettime() < var_01 && isalive(level.player))
+  while(gettime() < var_01 && isalive(level.player)) {
     func_DE15(var_00, 0.9, 1);
+  }
 
-  if(isalive(level.player))
+  if(isalive(level.player)) {
     func_DE15(var_00, 0.65, 0.8);
+  }
 
   func_DE15(var_00, 0, 0.6);
   var_00 fadeovertime(0.5);
@@ -1617,8 +1719,9 @@ func_DE15(var_00, var_01, var_02) {
   var_08 = var_03 * 0.3;
   var_09 = var_03 - var_05 - var_06 - var_07 - var_08;
 
-  if(var_09 < 0)
+  if(var_09 < 0) {
     var_09 = 0;
+  }
 
   var_10 = 0.8 + var_01 * 0.1;
   var_11 = 0.5 + var_01 * 0.3;
@@ -1649,10 +1752,12 @@ func_7D51() {
 }
 
 func_7A59() {
-  if(scripts\sp\utility::func_D15B("hull"))
+  if(scripts\sp\utility::func_D15B("hull")) {
     return level.func_A48E.func_D3BA * 1.5;
-  else
+  }
+  else {
     return level.func_A48E.func_D3BA;
+  }
 }
 
 func_D259() {
@@ -1679,8 +1784,9 @@ func_E26C() {
 func_9772() {
   var_00 = isDefined(level.func_9F0B) && level.func_9F0B;
 
-  if(self _meth_8139("takeCoverWarnings") == -1 || var_00)
+  if(self _meth_8139("takeCoverWarnings") == -1 || var_00) {
     self _meth_8302("takeCoverWarnings", 9);
+  }
 }
 
 func_93F7() {
@@ -1696,16 +1802,18 @@ func_93F7() {
   }
   var_00 = self _meth_8139("takeCoverWarnings");
 
-  if(var_00 < 10)
+  if(var_00 < 10) {
     self _meth_8302("takeCoverWarnings", var_00 + 1);
+  }
 }
 
 func_2624() {
   var_00 = self.origin;
   wait 5;
 
-  if(func_2693(var_00))
+  if(func_2693(var_00)) {
     level.func_2641[level.func_2641.size] = var_00;
+  }
 }
 
 func_2693(var_00) {
@@ -1723,8 +1831,9 @@ func_2623() {
     var_00 = [];
     var_01 = level.func_2641.size - 5;
 
-    if(var_01 < 0)
+    if(var_01 < 0) {
       var_01 = 0;
+    }
 
     for(var_02 = var_01; var_02 < level.func_2641.size; var_2++) {
       if(!level.player func_2693(level.func_2641[var_02])) {
@@ -1750,8 +1859,9 @@ func_2626() {
   var_00 = gettime();
 
   for(;;) {
-    if(level.player attackbuttonpressed())
+    if(level.player attackbuttonpressed()) {
       var_00 = gettime();
+    }
 
     level.func_118E5 = gettime() - var_00;
     wait 0.05;
@@ -1770,16 +1880,18 @@ func_913D() {
   level.func_9184 = 0;
 
   if(isDefined(level.func_9177)) {
-    for(var_00 = 0; var_00 < level.func_9177.size; var_0++)
+    for(var_00 = 0; var_00 < level.func_9177.size; var_0++) {
       level.func_9177[var_00] destroy();
+    }
   }
 
   level.func_9177 = [];
 }
 
 func_9139(var_00) {
-  if(!isDefined(level.func_9183))
+  if(!isDefined(level.func_9183)) {
     level.func_9183 = [];
+  }
 
   if(!isDefined(level.func_9183[var_00])) {
     var_01 = newhudelem();
@@ -1949,12 +2061,14 @@ func_14ED() {
 func_4423(var_00) {
   var_01 = _getkeybinding(var_00);
 
-  if(var_1["count"] <= 0)
+  if(var_1["count"] <= 0) {
     return 0;
+  }
 
   for(var_02 = 1; var_02 < var_1["count"] + 1; var_2++) {
-    if(self buttonpressed(var_1["key" + var_02]))
+    if(self buttonpressed(var_1["key" + var_02])) {
       return 1;
+    }
   }
 
   return 0;
@@ -1963,8 +2077,9 @@ func_4423(var_00) {
 func_14F4() {
   waittillframeend;
 
-  for(;;)
+  for(;;) {
     wait 0.2;
+  }
 }
 
 func_14EF() {
@@ -1975,8 +2090,9 @@ func_14EF() {
     if(level.player scripts\sp\utility::func_9D27()) {
       level.func_CF4B = gettime();
 
-      while(level.player scripts\sp\utility::func_9D27())
+      while(level.player scripts\sp\utility::func_9D27()) {
         wait 0.05;
+      }
 
       continue;
     }
@@ -1998,8 +2114,9 @@ func_14F1() {
 }
 
 func_262A(var_00) {
-  if(!isDefined(level.func_2629))
+  if(!isDefined(level.func_2629)) {
     level.func_2629 = [];
+  }
 
   scripts\engine\utility::flag_wait("auto_adjust_initialized");
   level.func_262B[var_00] = [];
@@ -2074,8 +2191,9 @@ func_262C(var_00) {
     var_19 = getdvarint("aa_player_damage_taken") - var_05;
     var_20 = 0;
 
-    if(var_09 > 0)
+    if(var_09 > 0) {
       var_20 = var_19 / var_09;
+    }
 
     var_21 = var_20 * 60;
     var_21 = int(var_21);
@@ -2091,8 +2209,9 @@ func_262C(var_00) {
     var_24 = var_24 + (level.script + "\" + var_00);
       var_25 = getarraykeys(var_23);
 
-      for(var_26 = 0; var_26 < var_25.size; var_26++)
+      for(var_26 = 0; var_26 < var_25.size; var_26++) {
         var_24 = var_24 + ", " + var_25[var_26] + ": " + var_23[var_25[var_26]];
+      }
 
       logstring(var_24);
     }
@@ -2123,11 +2242,13 @@ func_262C(var_00) {
         ](var_00))
         return 1;
 
-      if(isplayer(var_00))
+      if(isplayer(var_00)) {
         return 1;
+      }
 
-      if(!isDefined(var_0.func_3A49))
+      if(!isDefined(var_0.func_3A49)) {
         return 0;
+      }
 
       return var_00 func_D021();
     }
@@ -2190,15 +2311,17 @@ func_262C(var_00) {
     }
 
     func_3234(var_00) {
-      if(var_00 == "MOD_PISTOL_BULLET")
+      if(var_00 == "MOD_PISTOL_BULLET") {
         return 1;
+      }
 
       return var_00 == "MOD_RIFLE_BULLET";
     }
 
     func_16D9(var_00, var_01, var_02) {
-      if(!isDefined(level.func_54D1[var_00]))
+      if(!isDefined(level.func_54D1[var_00])) {
         level.func_54D1[var_00] = [];
+      }
 
       var_03 = [];
       var_3["frac"] = var_01;
@@ -2289,12 +2412,15 @@ func_262C(var_00) {
       if(!isDefined(var_00)) {
         return;
       }
-      if(scripts\sp\endmission::getitemslot(var_00))
+      if(scripts\sp\endmission::getitemslot(var_00)) {
         return;
-      else if(scripts\sp\endmission::getitemdroporiginandangles(var_00))
+      }
+      else if(scripts\sp\endmission::getitemdroporiginandangles(var_00)) {
         return;
-      else if(scripts\sp\utility::func_93A6())
+      }
+      else if(scripts\sp\utility::func_93A6()) {
         return;
+      }
       else if(level.func_7683 >= 2 && !func_B327()) {
         return;
       }
@@ -2307,31 +2433,39 @@ func_262C(var_00) {
       var_03 = level.player _meth_84C6("hintAltERAD");
       var_04 = level.player _meth_84C6("hintAltRipper");
 
-      if(isDefined(var_01))
+      if(isDefined(var_01)) {
         level.func_13062 = var_01;
+      }
 
-      if(isDefined(var_02))
+      if(isDefined(var_02)) {
         level.func_1305F = var_02;
+      }
 
-      if(isDefined(var_03))
+      if(isDefined(var_03)) {
         level.func_1305E = var_03;
+      }
 
-      if(isDefined(var_04))
+      if(isDefined(var_04)) {
         level.func_13069 = var_04;
+      }
 
       var_05 = 0;
 
-      if(level.func_13062)
+      if(level.func_13062) {
         var_5++;
+      }
 
-      if(level.func_1305F)
+      if(level.func_1305F) {
         var_5++;
+      }
 
-      if(level.func_1305E)
+      if(level.func_1305E) {
         var_5++;
+      }
 
-      if(level.func_13069)
+      if(level.func_13069) {
         var_5++;
+      }
 
       wait 300;
 
@@ -2393,7 +2527,8 @@ func_262C(var_00) {
             continue;
         }
 
-        if(var_09 != "")
+        if(var_09 != "") {
           thread func_12855(var_09);
+        }
       }
     }

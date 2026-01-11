@@ -156,16 +156,20 @@ add_context_sensative_dialog(name1, name2, group, soundAlias) {
 }
 
 add_context_sensative_timeout(name1, name2, groupNum, timeoutDuration) {
-  if(!isDefined(level.context_sensative_dialog_timeouts))
+  if(!isDefined(level.context_sensative_dialog_timeouts)) {
     level.context_sensative_dialog_timeouts = [];
+  }
 
   createStruct = false;
-  if(!isDefined(level.context_sensative_dialog_timeouts[name1]))
+  if(!isDefined(level.context_sensative_dialog_timeouts[name1])) {
     createStruct = true;
-  else if(!isDefined(level.context_sensative_dialog_timeouts[name1][name2]))
+  }
+  else if(!isDefined(level.context_sensative_dialog_timeouts[name1][name2])) {
     createStruct = true;
-  if(createStruct)
+  }
+  if(createStruct) {
     level.context_sensative_dialog_timeouts[name1][name2] = spawnStruct();
+  }
 
   if(isDefined(groupNum)) {
     level.context_sensative_dialog_timeouts[name1][name2].groups = [];

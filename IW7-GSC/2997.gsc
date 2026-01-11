@@ -44,10 +44,12 @@ main(var_00, var_01, var_02) {
   precacheturret("cap_turret_cannon_large_un_zerog");
   precachemodel("veh_mil_air_un_retribution_interior_01");
 
-  if(issubstr(var_02, "_damaged"))
+  if(issubstr(var_02, "_damaged")) {
     precachemodel("veh_mil_air_un_retribution_repair");
-  else if(issubstr(var_02, "_repaired"))
+  }
+  else if(issubstr(var_02, "_repaired")) {
     precachemodel("veh_mil_air_un_retribution_repair");
+  }
 
   level._effect["retribution_un_warp_pre"] = loadfx("vfx\iw7\core\vehicle\retr\vfx_vehicle_retr_warp_in_anticipation.vfx");
   level._effect["retribution_un_warp_in"] = loadfx("vfx\iw7\core\vehicle\retr\vfx_vehicle_retr_warp_in.vfx");
@@ -61,10 +63,12 @@ main(var_00, var_01, var_02) {
 }
 
 init_location() {
-  if(issubstr(self.classname, "_damaged"))
+  if(issubstr(self.classname, "_damaged")) {
     self.func_B210 = "veh_mil_air_un_retribution_repair";
-  else if(issubstr(self.classname, "_repaired"))
+  }
+  else if(issubstr(self.classname, "_repaired")) {
     self.func_B210 = "veh_mil_air_un_retribution_repair";
+  }
 
   self.func_24C4 = ["tag_origin", "amb_turret_sml_t_l_4", "tag_engine_bottom_rear_a", "amb_missile_l_2", "tag_engine_bottom_midlf_a", "mdl_ftl_a_al", "amb_turret_sml_t_l_2", "mdl_ftl_b_el", "mdl_ftl_b_bl", "amb_turret_sml_t_r_1", "mdl_ftl_b_gr", "mdl_ftl_a_ar", "tag_lockon", "amb_missile_r_3", "amb_turret_sml_t_r_4"];
   thread func_0BA9::func_396E("un");

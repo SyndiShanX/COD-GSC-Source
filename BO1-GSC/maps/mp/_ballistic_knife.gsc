@@ -26,10 +26,12 @@ onspawn(watcher, player) {
     retrievable_model.name = watcher.weapon;
     retrievable_model.targetname = "sticky_weapon";
     if(isDefined(prey)) {
-      if(level.teamBased && isPlayer(prey) && player.team == prey.team)
+      if(level.teamBased && isPlayer(prey) && player.team == prey.team) {
         isFriendly = true;
-      else if(level.teamBased && isAI(prey) && player.team == prey.aiTeam)
+      }
+      else if(level.teamBased && isAI(prey) && player.team == prey.aiTeam) {
         isFriendly = true;
+      }
       if(!isFriendly) {
         if(IsAlive(prey)) {
           retrievable_model dropToGround(retrievable_model.origin, 80);
@@ -42,13 +44,16 @@ onspawn(watcher, player) {
       }
     }
     watcher.objectArray[watcher.objectArray.size] = retrievable_model;
-    if(isFriendly)
+    if(isFriendly) {
       retrievable_model waittill("stationary");
+    }
     retrievable_model thread dropKnivesToGround();
-    if(isFriendly)
+    if(isFriendly) {
       player notify("ballistic_knife_stationary", retrievable_model, normal);
-    else
+    }
+    else {
       player notify("ballistic_knife_stationary", retrievable_model, normal, prey);
+    }
     retrievable_model thread wait_to_show_glowing_model(prey);
   }
 }
@@ -69,10 +74,12 @@ watch_shutdown() {
   otherTeamPickUpTrigger = self.otherTeamPickUpTrigger;
   glowing_model = self.glowing_model;
   self waittill("death");
-  if(isDefined(pickUpTrigger))
+  if(isDefined(pickUpTrigger)) {
     pickUpTrigger delete();
-  if(isDefined(otherTeamPickUpTrigger))
+  }
+  if(isDefined(otherTeamPickUpTrigger)) {
     otherTeamPickUpTrigger delete();
+  }
   if(isDefined(glowing_model)) {
     glowing_model delete();
   }
@@ -82,8 +89,9 @@ onSpawnRetrieveTrigger(watcher, player) {
   player endon("disconnect");
   level endon("game_ended");
   player waittill("ballistic_knife_stationary", retrievable_model, normal, prey);
-  if(!isDefined(retrievable_model))
+  if(!isDefined(retrievable_model)) {
     return;
+  }
   vec_scale = 10;
   trigger_pos = [];
   if(isDefined(prey) && (isPlayer(prey) || isAI(prey))) {
@@ -105,15 +113,19 @@ onSpawnRetrieveTrigger(watcher, player) {
   } else {
     pickup_trigger SetHintString(&"MP_GENERIC_PICKUP");
   }
-  if(!level.teamBased)
+  if(!level.teamBased) {
     pickup_trigger SetTeamForTrigger("none");
-  else
+  }
+  else {
     pickup_trigger SetTeamForTrigger(player.team);
+  }
   pickup_trigger EnableLinkTo();
-  if(isDefined(prey))
+  if(isDefined(prey)) {
     pickup_trigger LinkTo(prey);
-  else
+  }
+  else {
     pickup_trigger LinkTo(retrievable_model);
+  }
   retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, ::pick_up, watcher.pickUpSoundPlayer, watcher.pickUpSound);
   other_team_pickup_trigger = spawn("trigger_radius_use", (trigger_pos[0], trigger_pos[1], trigger_pos[2]));
   other_team_pickup_trigger SetCursorHint("HINT_NOICON");
@@ -200,19 +212,25 @@ watch_use_trigger(trigger, model, callback, playerSoundOnUse, npcSoundOnUse) {
   level endon("game_ended");
   while(true) {
     trigger waittill("trigger", player);
-    if(!IsAlive(player))
+    if(!IsAlive(player)) {
       continue;
-    if(!player IsOnGround())
+    }
+    if(!player IsOnGround()) {
       continue;
-    if(isDefined(trigger.triggerTeam) && (player.team != trigger.triggerTeam))
+    }
+    if(isDefined(trigger.triggerTeam) && (player.team != trigger.triggerTeam)) {
       continue;
-    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy))
+    }
+    if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy)) {
       continue;
+    }
     if(player UseButtonPressed() && !player.throwingGrenade && !player meleeButtonPressed()) {
-      if(isDefined(playerSoundOnUse))
+      if(isDefined(playerSoundOnUse)) {
         player playLocalSound(playerSoundOnUse);
-      if(isDefined(npcSoundOnUse))
+      }
+      if(isDefined(npcSoundOnUse)) {
         player playSound(npcSoundOnUse);
+      }
       self thread[[callback]](player);
       break;
     }
@@ -238,10 +256,12 @@ destroy_ent() {
   if(isDefined(self)) {
     pickUpTrigger = self.pickUpTrigger;
     otherTeamPickUpTrigger = self.otherTeamPickUpTrigger;
-    if(isDefined(pickUpTrigger))
+    if(isDefined(pickUpTrigger)) {
       pickUpTrigger delete();
-    if(isDefined(otherTeamPickUpTrigger))
+    }
+    if(isDefined(otherTeamPickUpTrigger)) {
       otherTeamPickUpTrigger delete();
+    }
     if(isDefined(self.glowing_model)) {
       self.glowing_model delete();
     }

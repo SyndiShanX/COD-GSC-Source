@@ -66,8 +66,9 @@ lander_poi_init() {
   }
 }
 activate_lander_poi(station) {
-  if(!isDefined(station))
+  if(!isDefined(station)) {
     return;
+  }
   current_poi = undefined;
   lander_poi = getEntArray("lander_poi", "targetname");
   for(i = 0; i < lander_poi.size; i++) {

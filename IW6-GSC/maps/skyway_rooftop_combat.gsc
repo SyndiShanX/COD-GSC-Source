@@ -38,23 +38,26 @@ start() {
   common_scripts\utility::flag_set("flag_helo_end");
   var_2 = ["train_rt0", "train_rt1", "train_rt2"];
 
-  foreach(var_4 in var_2)
+  foreach(var_4 in var_2) {
   common_scripts\utility::array_call(level._train.cars[var_4].trigs, ::setmovingplatformtrigger);
+  }
 }
 
 main() {
   var_0 = ["train_rt3"];
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   common_scripts\utility::array_call(level._train.cars[var_2].trigs, ::setmovingplatformtrigger);
+  }
 
   thread hesh_killer_tracker_enabler();
   rt_combat();
   rt_run();
   maps\_utility::clearthreatbias("player", "axis");
 
-  if(isDefined(level.old_goalradius))
+  if(isDefined(level.old_goalradius)) {
     level.default_goalradius = level.old_goalradius;
+  }
 }
 
 hesh_killer_tracker_enabler() {
@@ -83,15 +86,17 @@ rt_combat() {
   maps\skyway_util::delay_retreat("rt_opfor", maps\skyway_util::kt_time(75), 0, "flag_rooftops_fight_end");
   var_0 = getent("rt3_color_end", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 rt_follow_path_and_die(var_0) {
   self endon("death");
 
-  if(distance(self.origin, level._train.cars["train_rt3"].sus_f.origin) > 800)
+  if(distance(self.origin, level._train.cars["train_rt3"].sus_f.origin) > 800) {
     self kill();
+  }
 
   maps\_utility::follow_path(var_0);
   self kill();
@@ -100,11 +105,13 @@ rt_follow_path_and_die(var_0) {
 rt_achievement_grapple_kill(var_0, var_1) {
   level endon("stop_achievement_grapple_kill");
 
-  if(!isDefined(level.kill_count[var_1]))
+  if(!isDefined(level.kill_count[var_1])) {
     level.kill_count[var_1] = 0;
+  }
 
-  while(level.kill_count[var_1] < var_0)
+  while(level.kill_count[var_1] < var_0) {
     level waittill(var_1);
+  }
 
   level.player maps\_utility::player_giveachievement_wrapper("LEVEL_18A");
 }
@@ -115,13 +122,16 @@ rt_run() {
   level._ally thread maps\_utility::disable_careful();
   level._ally thread maps\_utility::disable_ai_color();
 
-  if(!common_scripts\utility::flag("flag_rt3_ally_at_end"))
+  if(!common_scripts\utility::flag("flag_rt3_ally_at_end")) {
     level._ally thread maps\_utility::follow_path(getnode("rt3_node_run_center", "targetname"));
-  else
+  }
+  else {
     level._ally thread maps\_utility::follow_path(getnode("rt3_node_run_sides", "targetname"));
+  }
 
-  if(!issubstr(level._ally.weapon, "k7"))
+  if(!issubstr(level._ally.weapon, "k7")) {
     level._ally maps\_utility::place_weapon_on("k7+eotechsmg_sp", "right");
+  }
 
   common_scripts\utility::flag_wait("flag_rooftops_end");
 }
@@ -129,8 +139,9 @@ rt_run() {
 rt_run_cleanup_proc() {
   common_scripts\utility::flag_wait("flag_rooftops_combat_done");
 
-  while(level.player.car != "train_loco")
+  while(level.player.car != "train_loco") {
     wait 0.05;
+  }
 
   level notify("stop_achievement_grapple_kill");
   maps\_utility::clearthreatbias("axis", "player");
@@ -150,13 +161,15 @@ rt_run_cleanup_proc() {
   level._ally teleportentityrelative(level._ally, getent("rt_tele_end_run_ally", "targetname"));
   level._ally dontinterpolate();
 
-  if(!common_scripts\utility::flag("flag_loco_started"))
+  if(!common_scripts\utility::flag("flag_loco_started")) {
     level._ally thread maps\_utility::follow_path(getnode("loco_breach_ally_cover_node", "targetname"));
+  }
 }
 
 rt_combat_fic() {
-  if(!common_scripts\utility::flag("flag_helo_end"))
+  if(!common_scripts\utility::flag("flag_helo_end")) {
     level._ally maps\_utility::smart_dialogue("skyway_hsh_whereareyougoing");
+  }
   else {
     wait 3;
     level._ally maps\_utility::smart_dialogue("skyway_hsh_theyreropingupthe");
@@ -173,8 +186,9 @@ rt_run_fic() {
   level._ally maps\_utility::smart_dialogue(var_0[randomint(var_0.size)]);
   common_scripts\utility::flag_wait("flag_rooftops_end");
 
-  if(!common_scripts\utility::flag("flag_rt3_ally_at_end"))
+  if(!common_scripts\utility::flag("flag_rt3_ally_at_end")) {
     level._ally maps\_utility::smart_dialogue("skyway_hsh_wereatthelast");
+  }
 
   level._ally maps\_utility::smart_dialogue("skyway_hsh_rorkespinnedheknows");
   common_scripts\utility::flag_set("flag_loco_ready");
@@ -200,14 +214,17 @@ setup_spawners() {
 rt_spawn_node_check(var_0, var_1) {
   self endon("death");
 
-  if(isDefined(self.script_wtf))
+  if(isDefined(self.script_wtf)) {
     self waittill("infil_done");
+  }
 
-  if(!isarray(var_0))
+  if(!isarray(var_0)) {
     var_0 = [var_0];
+  }
 
-  if(!isarray(var_1))
+  if(!isarray(var_1)) {
     var_1 = [var_1];
+  }
 
   var_2 = int(max(0, min(var_0.size, var_1.size) - 1));
 
@@ -226,8 +243,9 @@ opfor_rope(var_0, var_1, var_2) {
   if(!isDefined(self.script_index)) {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = "j_spineupper";
+  }
 
   thread rt_inc_kill_count(var_2);
   maps\_utility::set_ignoreall(1);
@@ -304,8 +322,9 @@ get_entry(var_0) {
   for(;;) {
     var_1 = var_0[randomint(var_0.size)];
 
-    if(randomint(100) < var_1.script_index && !maps\skyway_util::istrue(var_1.in_use))
+    if(randomint(100) < var_1.script_index && !maps\skyway_util::istrue(var_1.in_use)) {
       return var_1;
+    }
 
     wait 0.05;
   }
@@ -322,24 +341,29 @@ flag_set_near_ent(var_0, var_1, var_2) {
   level endon(var_0);
   self endon("stop_dist_flag");
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 300;
+  }
 
-  while(distance(var_1.origin, self.origin) > var_2)
+  while(distance(var_1.origin, self.origin) > var_2) {
     wait 0.05;
+  }
 
   common_scripts\utility::flag_set(var_0);
 }
 
 rt_brief_reprieve(var_0, var_1, var_2) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = [0, 36000];
+  }
 
-  if(!isarray(var_0))
+  if(!isarray(var_0)) {
     var_0 = [0, var_0];
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   if(!isDefined(var_2)) {
     common_scripts\utility::flag_init("flag_rt_brief_reprieve");
@@ -359,8 +383,9 @@ ignore_run(var_0, var_1) {
   self notify("stop_ignore_run");
   self endon("stop_ignore_run");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 1.0;
+  }
 
   self.old = [];
   self.old["react_dist"] = self.newenemyreactiondistsq;

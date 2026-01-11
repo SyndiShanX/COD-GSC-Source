@@ -38,8 +38,9 @@ gas_station_init() {
     if(!isDefined(target_ent.script_noteworthy)) {
       continue;
     }
-    if(!isDefined(target_ent.script_parameters))
+    if(!isDefined(target_ent.script_parameters)) {
       target_ent.script_parameters = "corner1_hit";
+    }
 
     switch (target_ent.script_noteworthy) {
       case "clip_up":
@@ -120,8 +121,9 @@ gas_station_init() {
   }
 
   foreach(pump in gas_pumps) {
-    if(pump == exploded_pump)
+    if(pump == exploded_pump) {
       continue;
+    }
     if(isDefined(level.player_who_caused_gas_station_explosion)) {
       pump.attacker = level.player_who_caused_gas_station_explosion;
       if(isDefined(level.player_who_caused_gas_station_explosion.team)) {
@@ -184,8 +186,9 @@ gas_station_update_clip() {
     clip.unresolved_collision_func = maps\mp\_movers::unresolved_collision_void;
 
     clip trigger_on();
-    if(!isDefined(clip.nodisconnect) || !clip.nodisconnect)
+    if(!isDefined(clip.nodisconnect) || !clip.nodisconnect) {
       clip DisconnectPaths();
+    }
 
     foreach(character in level.characters) {
       if(character IsTouching(clip) && IsAlive(character)) {
@@ -278,8 +281,9 @@ gas_station_run_events() {
       if((GetTime() - start_time) / 1000 >= event.time) {
         self notify(event.note);
         event.done = true;
-        if(event.note == "end")
+        if(event.note == "end") {
           return;
+        }
       }
     }
     wait 0.05;
@@ -287,8 +291,9 @@ gas_station_run_events() {
 }
 
 gas_station_add_event(note, time) {
-  if(!isDefined(self.gas_station_events))
+  if(!isDefined(self.gas_station_events)) {
     self.gas_station_events = [];
+  }
   s = spawnStruct();
   s.time = time;
   s.note = note;
@@ -447,11 +452,13 @@ breach() {
 }
 
 setExtraBreachExceptions(breach) {
-  if(!isDefined(breach.script_noteworthy))
+  if(!isDefined(breach.script_noteworthy)) {
     return breach;
+  }
 
-  if(level.gametype == "siege")
+  if(level.gametype == "siege") {
     breach.script_noteworthy = breach.script_noteworthy + "," + "not_in_siege";
+  }
 
   return breach;
 }
@@ -489,8 +496,9 @@ breach_init() {
   targets = array_combine(target_structs, target_ents);
 
   foreach(target in targets) {
-    if(isDefined(target.classname) && target.classname == "trigger_use_touch")
+    if(isDefined(target.classname) && target.classname == "trigger_use_touch") {
       add_to_bot_use_targets(target, 1.5);
+    }
 
     if(!isDefined(target.script_noteworthy)) {
       continue;
@@ -503,8 +511,9 @@ breach_init() {
       case "triggers_with":
         if(isDefined(target.target)) {
           other_breach = getstruct(target.target, "targetname");
-          if(isDefined(other_breach))
+          if(isDefined(other_breach)) {
             self thread breach_other_watch(other_breach);
+          }
         }
         break;
       case "care_package":
@@ -551,8 +560,9 @@ add_care_package(origin, angles, owner, owner_team, crateType, dropType) {
   if(!is_valid_crateType(dropType, crateType)) {
     return;
   }
-  if(!isDefined(angles))
+  if(!isDefined(angles)) {
     angles = (0, 0, 0);
+  }
 
   dropCrate = spawn("script_model", origin);
   dropCrate setModel(maps\mp\killstreaks\_airdrop::get_friendly_crate_model());
@@ -581,27 +591,32 @@ add_care_package(origin, angles, owner, owner_team, crateType, dropType) {
 }
 
 is_valid_dropType(dropType) {
-  if(!isDefined(dropType))
+  if(!isDefined(dropType)) {
     return false;
+  }
 
   foreach(key, value in level.crateTypes) {
-    if(key == dropType)
+    if(key == dropType) {
       return true;
+    }
   }
 
   return false;
 }
 
 is_valid_crateType(dropType, crateType) {
-  if(!is_valid_dropType(dropType))
+  if(!is_valid_dropType(dropType)) {
     return false;
+  }
 
-  if(!isDefined(crateType))
+  if(!isDefined(crateType)) {
     return false;
+  }
 
   foreach(key, value in level.crateTypes[dropType]) {
-    if(key == crateType)
+    if(key == crateType) {
       return true;
+    }
   }
 
   return false;
@@ -653,8 +668,9 @@ breach_door_init(door) {
     }
   }
 
-  if(!isDefined(door.open_pos) || !isDefined(door.closed_pos) || !isDefined(pivot) || door_parts.size == 0)
+  if(!isDefined(door.open_pos) || !isDefined(door.closed_pos) || !isDefined(pivot) || door_parts.size == 0) {
     return false;
+  }
 
   door.closed_pos.move_angles = get_rotate_angle(door.open_pos.angles, door.closed_pos.angles, pivot.angles);
   door.open_pos.move_angles = -1 * door.closed_pos.move_angles;
@@ -681,8 +697,9 @@ breach_open_watch() {
 
   target_ents = getEntArray(self.target, "targetname");
   foreach(target_ent in target_ents) {
-    if(isDefined(target_ent.classname) && target_ent.classname == "trigger_use_touch")
+    if(isDefined(target_ent.classname) && target_ent.classname == "trigger_use_touch") {
       remove_from_bot_use_targets(target_ent);
+    }
   }
 
   if(isDefined(player) && !isMLGMatch()) {
@@ -754,21 +771,26 @@ breach_move_door(door, pos, time) {
   origin = pos.origin;
 
   if(isDefined(time) && time > 0) {
-    if(isDefined(angles) && angles != door.link_ent.angles)
+    if(isDefined(angles) && angles != door.link_ent.angles) {
       door.link_ent RotateBy(pos.move_angles, time, time);
-    if(isDefined(origin) && origin != door.link_ent.origin)
+    }
+    if(isDefined(origin) && origin != door.link_ent.origin) {
       door.link_ent MoveTo(origin, time);
+    }
   } else {
-    if(isDefined(angles))
+    if(isDefined(angles)) {
       door.link_ent.angles = angles;
-    if(isDefined(origin))
+    }
+    if(isDefined(origin)) {
       door.link_ent.origin = origin;
+    }
   }
 }
 
 is_explosive(cause) {
-  if(!isDefined(cause))
+  if(!isDefined(cause)) {
     return false;
+  }
 
   cause = ToLower(cause);
   switch (cause) {
@@ -798,8 +820,9 @@ get_rotate_angle(start, end, through) {
     for(i = 0; i < 3; i++) {
       if(dir[i] * delta[i] < 0) {
         change = 360;
-        if(dir[i] < 0)
+        if(dir[i] < 0) {
           change = -360;
+        }
         delta = (delta[0] + (change * (i == 0)), delta[1] + (change * (i == 1)), delta[2] + (change * (i == 2)));
       }
     }
@@ -812,8 +835,9 @@ ceiling_rubble() {
   level thread ceiling_rubble_onPlayerConnect();
   wait 0.05;
 
-  if(!isDefined(level.fx_tag_origin))
+  if(!isDefined(level.fx_tag_origin)) {
     level.fx_tag_origin = spawn_tag_origin();
+  }
 
   rubbles = [];
 
@@ -836,8 +860,9 @@ do_rubble(fxvolumes) {
         level.fx_tag_origin.origin = position;
         if(level.fx_tag_origin IsTouching(volume)) {
           if(isDefined(volume.script_index)) {
-            if(!isDefined(volume.playing_effect))
+            if(!isDefined(volume.playing_effect)) {
               volume.playing_effect = false;
+            }
             if(volume.playing_effect == false) {
               volume.playing_effect = true;
               exploder(volume.script_index);
@@ -904,8 +929,9 @@ ceiling_rubble_missile_explode_watch() {
 }
 
 search_bot() {
-  while(!isDefined(level.players) || level.players.size == 0)
+  while(!isDefined(level.players) || level.players.size == 0) {
     wait 0.05;
+  }
 
   allnodes = GetAllNodes();
   current_node = random(allnodes);

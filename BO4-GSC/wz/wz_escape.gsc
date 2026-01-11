@@ -871,4 +871,3 @@ private function_1880c93d() {
   var_fa3df96 = self item_inventory::function_e66dcff5(item);
   self item_world::function_de2018e3(item, self, var_fa3df96);
 }
-

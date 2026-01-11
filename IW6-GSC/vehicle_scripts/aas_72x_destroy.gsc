@@ -26,8 +26,9 @@ init_local() {
 }
 
 handle_rider_death() {
-  foreach(var_1 in self.riders)
+  foreach(var_1 in self.riders) {
   var_1 delete();
+  }
 }
 
 #using_animtree("vehicles");

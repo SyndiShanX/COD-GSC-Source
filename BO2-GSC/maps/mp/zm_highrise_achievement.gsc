@@ -119,8 +119,9 @@ achievement_mad_without_power() {
   while(level.round_number < round_number_max) {
     level waittill("start_of_round");
 
-    if(flag("power_on"))
+    if(flag("power_on")) {
       return;
+    }
   }
 
   self giveachievement_wrapper("ZM_DLC1_MAD_WITHOUT_POWER", 1);
@@ -146,8 +147,9 @@ achievement_shafted() {
 }
 
 player_buys_perk_machine(perk) {
-  if(!isDefined(self.perk_machines_bought))
+  if(!isDefined(self.perk_machines_bought)) {
     self.perk_machines_bought = [];
+  }
 
   found = 0;
 

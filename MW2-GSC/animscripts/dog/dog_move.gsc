@@ -15,8 +15,9 @@ main() {
   self clearanim( % root, 0.2);
   self clearanim( % german_shepherd_run_stop, 0);
 
-  if(!isDefined(self.traverseComplete) && !isDefined(self.skipStartMove) && self.a.movement == "run" && (!isDefined(self.disableExits) || self.disableExits == false))
+  if(!isDefined(self.traverseComplete) && !isDefined(self.skipStartMove) && self.a.movement == "run" && (!isDefined(self.disableExits) || self.disableExits == false)) {
     self startMove();
+  }
 
   self thread randomSoundDuringRunLoop();
 
@@ -43,8 +44,9 @@ main() {
     self moveLoop();
 
     if(self.a.movement == "run") {
-      if(self.disableArrivals == false)
+      if(self.disableArrivals == false) {
         self thread stopMove();
+      }
 
       // if a "run" notify is received while stopping, clear stop anim and go back to moveLoop
       self waittill("run");
@@ -60,20 +62,24 @@ moveLoop() {
   self.moveLoopCleanupFunc = undefined;
 
   while(1) {
-    if(self.disableArrivals)
+    if(self.disableArrivals) {
       self.stopAnimDistSq = 0;
-    else
+    }
+    else {
       self.stopAnimDistSq = anim.dogStoppingDistSq;
+    }
 
     if(isDefined(self.moveLoopCleanupFunc)) {
       self[[self.moveLoopCleanupFunc]]();
       self.moveLoopCleanupFunc = undefined;
     }
 
-    if(isDefined(self.moveLoopOverrideFunc))
+    if(isDefined(self.moveLoopOverrideFunc)) {
       self[[self.moveLoopOverrideFunc]]();
-    else
+    }
+    else {
       self moveLoopStep();
+    }
   }
 }
 
@@ -110,11 +116,13 @@ pathChangeCheck() {
     self waittill("path_changed", doingReacquire, newDir);
 
     // no need to check for doingReacquire since faceMotion should be a good check
-    if(isDefined(self.ignorePathChange) || isDefined(self.noTurnAnims))
+    if(isDefined(self.ignorePathChange) || isDefined(self.noTurnAnims)) {
       continue;
+    }
 
-    if(self.a.movement != "run")
+    if(self.a.movement != "run") {
       continue;
+    }
 
     angleDiff = AngleClamp180(self.angles[1] - vectortoyaw(newDir));
 
@@ -149,8 +157,9 @@ pathChange_doDogTurnAnim() {
 
   turnAnim = self.turnAnim;
 
-  if(gettime() > self.turnTime + 50)
+  if(gettime() > self.turnTime + 50) {
     return; // too late
+  }
 
   self animMode("zonly_physics", false);
   self clearanim( % root, 0.2);
@@ -201,19 +210,25 @@ playMoveStartAnim() {
     angle = AngleClamp180(lookaheadAngle[1] - self.angles[1]);
 
     if(angle >= 0) {
-      if(angle < 45)
+      if(angle < 45) {
         index = 8;
-      else if(angle < 135)
+      }
+      else if(angle < 135) {
         index = 6;
-      else
+      }
+      else {
         index = 3;
+      }
     } else {
-      if(angle > -45)
+      if(angle > -45) {
         index = 8;
-      else if(angle > -135)
+      }
+      else if(angle > -135) {
         index = 4;
-      else
+      }
+      else {
         index = 1;
+      }
     }
 
     self setanimrestart(anim.dogStartMoveAnim[index], 1, 0.2, 1);
@@ -271,8 +286,9 @@ stopMove() {
 
 dogPlaySoundAndNotify(sound, notifyStr) {
   self play_sound_on_tag_endon_death(sound, "tag_eye");
-  if(isalive(self))
+  if(isalive(self)) {
     self notify(notifyStr);
+  }
 }
 
 randomSoundDuringRunLoop() {
@@ -281,23 +297,28 @@ randomSoundDuringRunLoop() {
   wait 0.2; // incase move script gets killed right away
 
   while(1) {
-    if(getdebugdvar("debug_dog_sound") != "")
+    if(getdebugdvar("debug_dog_sound") != "") {
       iprintln("dog " + (self getentnum()) + " bark start " + getTime());
+    }
 
       sound = undefined;
-    if(isDefined(self.script_growl))
+    if(isDefined(self.script_growl)) {
       sound = "anml_dog_growl";
-    else if(!isDefined(self.script_nobark))
+    }
+    else if(!isDefined(self.script_nobark)) {
       sound = "anml_dog_bark";
+    }
 
-    if(!isDefined(sound))
+    if(!isDefined(sound)) {
       break;
+    }
 
     self thread dogPlaySoundAndNotify(sound, "randomRunSound");
     self waittill("randomRunSound");
 
-    if(getdebugdvar("debug_dog_sound") != "")
+    if(getdebugdvar("debug_dog_sound") != "") {
       iprintln("dog " + (self getentnum()) + " bark end " + getTime());
+    }
 
       wait(randomfloatrange(0.1, 0.3));
   }
@@ -310,29 +331,35 @@ getRunAnimWeights() {
   weights["right"] = 0;
 
   if(self.leanAmount > 0) {
-    if(self.leanAmount < 0.95)
+    if(self.leanAmount < 0.95) {
       self.leanAmount = 0.95;
+    }
 
     weights["left"] = 0;
     weights["right"] = (1 - self.leanAmount) * 20;
 
-    if(weights["right"] > 1)
+    if(weights["right"] > 1) {
       weights["right"] = 1;
-    else if(weights["right"] < 0)
+    }
+    else if(weights["right"] < 0) {
       weights["right"] = 0;
+    }
 
     weights["center"] = 1 - weights["right"];
   } else if(self.leanAmount < 0) {
-    if(self.leanAmount > -0.95)
+    if(self.leanAmount > -0.95) {
       self.leanAmount = -0.95;
+    }
 
     weights["right"] = 0;
     weights["left"] = (1 + self.leanAmount) * 20;
 
-    if(weights["left"] > 1)
+    if(weights["left"] > 1) {
       weights["left"] = 1;
-    if(weights["left"] < 0)
+    }
+    if(weights["left"] < 0) {
       weights["left"] = 0;
+    }
 
     weights["center"] = 1 - weights["left"];
   } else {

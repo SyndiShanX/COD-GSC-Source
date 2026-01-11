@@ -2345,4 +2345,3 @@ function_46d7a37() {
 
     level.var_80d31f80 = 1;
 }
-

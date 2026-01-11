@@ -21,10 +21,12 @@ init_vehicles() {
   var_0 = maps\_vehicle_code::precache_scripts();
   maps\_vehicle_code::setup_vehicles(var_0);
 
-  if(isDefined(level.optimizedvehicletriggerprocess))
+  if(isDefined(level.optimizedvehicletriggerprocess)) {
     common_scripts\utility::array_levelthread(level.vehicle_processtriggers, ::trigger_process_set);
-  else
+  }
+  else {
     common_scripts\utility::array_levelthread(level.vehicle_processtriggers, maps\_vehicle_code::trigger_process);
+  }
 
   level.vehicle_processtriggers = undefined;
   level.levelhasvehicles = getEntArray("script_vehicle", "code_classname").size > 0;
@@ -33,8 +35,9 @@ init_vehicles() {
   common_scripts\utility::create_lock("aircraft_wash_math");
 
   if(isDefined(level.helicopter_landed_fx_override)) {
-    foreach(var_3, var_2 in level.helicopter_landed_fx_override)
+    foreach(var_3, var_2 in level.helicopter_landed_fx_override) {
     level._heli_landed_fx[loadfx(var_3)] = loadfx(var_2);
+    }
   }
 
   set_crush_vehicle_clips(undefined, "postcrushed", 0);
@@ -51,8 +54,9 @@ vehicle_paths(var_0, var_1, var_2) {
 create_vehicle_from_spawngroup_and_gopath(var_0) {
   var_1 = scripted_spawn(var_0);
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   level thread gopath(var_3);
+  }
 
   return var_1;
 }
@@ -72,8 +76,9 @@ vehicle_spawn(var_0) {
 waittill_vehiclespawn(var_0) {
   var_1 = getent(var_0, "targetname");
 
-  if(isspawner(var_1))
+  if(isspawner(var_1)) {
     var_1 waittill("spawned", var_1);
+  }
 
   return var_1;
 }
@@ -88,26 +93,31 @@ kill_fx(var_0, var_1) {
 }
 
 vehicle_flag_arrived(var_0) {
-  if(!isDefined(self.vehicle_flags))
+  if(!isDefined(self.vehicle_flags)) {
     self.vehicle_flags = [];
+  }
 
   while(!isDefined(self.vehicle_flags[var_0])) {
     self waittill("vehicle_flag_arrived", var_1);
 
-    if(var_0 == var_1)
+    if(var_0 == var_1) {
       return;
+    }
   }
 }
 
 build_radiusdamage(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level.vehicle_death_radiusdamage))
+  if(!isDefined(level.vehicle_death_radiusdamage)) {
     level.vehicle_death_radiusdamage = [];
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = (0, 0, 0);
+  }
 
   var_6 = spawnStruct();
   var_6.offset = var_0;
@@ -120,8 +130,9 @@ build_radiusdamage(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 build_rumble(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level.vehicle_rumble))
+  if(!isDefined(level.vehicle_rumble)) {
     level.vehicle_rumble = [];
+  }
 
   var_6 = build_quake(var_1, var_2, var_3, var_4, var_5);
   precacherumble(var_0);
@@ -130,8 +141,9 @@ build_rumble(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 build_rumble_override(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if(!isDefined(level.vehicle_rumble_override))
+  if(!isDefined(level.vehicle_rumble_override)) {
     level.vehicle_rumble_override = [];
+  }
 
   var_7 = build_quake(var_2, var_3, var_4, var_5, var_6);
   precacherumble(var_1);
@@ -150,15 +162,17 @@ build_rumble_unique(var_0, var_1, var_2, var_3, var_4, var_5) {
 build_deathquake(var_0, var_1, var_2) {
   var_3 = level.vtclassname;
 
-  if(!isDefined(level.vehicle_death_earthquake))
+  if(!isDefined(level.vehicle_death_earthquake)) {
     level.vehicle_death_earthquake = [];
+  }
 
   level.vehicle_death_earthquake[var_3] = build_quake(var_0, var_1, var_2);
 }
 
 build_deathquake_with_classname(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.vehicle_death_earthquake))
+  if(!isDefined(level.vehicle_death_earthquake)) {
     level.vehicle_death_earthquake = [];
+  }
 
   level.vehicle_death_earthquake[var_0] = build_quake(var_1, var_2, var_3);
 }
@@ -169,24 +183,29 @@ build_quake(var_0, var_1, var_2, var_3, var_4) {
   var_5.duration = var_1;
   var_5.radius = var_2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_5.basetime = var_3;
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_5.randomaditionaltime = var_4;
+  }
 
   return var_5;
 }
 
 build_fx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if(!isDefined(var_5))
+  if(!isDefined(var_5)) {
     var_5 = 0;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 0;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 1;
+  }
 
   var_11 = spawnStruct();
   var_11.effect = loadfx(var_0);
@@ -204,24 +223,28 @@ build_fx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 }
 
 build_deathfx_override(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12) {
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = tolower(getdvar("mapname"));
+  }
 
   level.vttype = var_1;
   level.vtmodel = var_2;
   level.vtoverride = 1;
   level.vtclassname = var_0;
 
-  if(!isDefined(level.vehicle_death_fx))
+  if(!isDefined(level.vehicle_death_fx)) {
     level.vehicle_death_fx = [];
+  }
 
-  if(!is_overrode(var_0))
+  if(!is_overrode(var_0)) {
     level.vehicle_death_fx[var_0] = [];
+  }
 
   level.vehicle_death_fx_override[var_0] = 1;
 
-  if(!isDefined(level.vehicle_death_fx[var_0]))
+  if(!isDefined(level.vehicle_death_fx[var_0])) {
     level.vehicle_death_fx[var_0] = [];
+  }
 
   level.vehicle_death_fx[var_0][level.vehicle_death_fx[var_0].size] = build_fx(var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12);
   level.vtoverride = undefined;
@@ -246,16 +269,19 @@ swap_deathfx_effect_only(var_0, var_1, var_2, var_3) {
     if(var_6.tag != var_2) {
       continue;
     }
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       var_6.effect = loadfx(var_3);
-    else
+    }
+    else {
       var_6.effect = undefined;
+    }
 
     var_4 = 1;
   }
 
-  if(!var_4)
+  if(!var_4) {
     return;
+  }
 }
 
 build_deathfx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
@@ -264,8 +290,9 @@ build_deathfx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var
   if(is_overrode(var_11)) {
     return;
   }
-  if(!isDefined(level.vehicle_death_fx[var_11]))
+  if(!isDefined(level.vehicle_death_fx[var_11])) {
     level.vehicle_death_fx[var_11] = [];
+  }
 
   level.vehicle_death_fx[var_11][level.vehicle_death_fx[var_11].size] = build_fx(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 }
@@ -282,13 +309,15 @@ build_deathanim(var_0, var_1) {
 }
 
 override_deathanim(var_0, var_1, var_2) {
-  if(!isDefined(level.vehicle_deathanim))
+  if(!isDefined(level.vehicle_deathanim)) {
     level.vehicle_deathanim = [];
+  }
 
   var_3 = var_0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_3 + "_" + var_1;
+  }
 
   if(!isDefined(var_2)) {
     level.vehicle_deathanim[var_3] = undefined;
@@ -308,52 +337,67 @@ custom_deathanim(var_0) {
 }
 
 process_deathanim(var_0, var_1) {
-  if(!isDefined(var_1.is_directional))
+  if(!isDefined(var_1.is_directional)) {
     var_1.is_directional = 0;
+  }
 
   if(var_1.is_directional) {}
 
-  if(!isDefined(var_1.clear_anims))
+  if(!isDefined(var_1.clear_anims)) {
     var_1.clear_anims = 0;
+  }
 
-  if(!isDefined(var_1.clear_anims_time))
+  if(!isDefined(var_1.clear_anims_time)) {
     var_1.clear_anims_time = 0;
+  }
 
-  if(!isDefined(var_1.alter_velocity))
+  if(!isDefined(var_1.alter_velocity)) {
     var_1.alter_velocity = 0;
+  }
 
-  if(!isDefined(var_1.alter_velocity_speed))
+  if(!isDefined(var_1.alter_velocity_speed)) {
     var_1.alter_velocity_speed = 0;
+  }
 
-  if(!isDefined(var_1.alter_velocity_accel))
+  if(!isDefined(var_1.alter_velocity_accel)) {
     var_1.alter_velocity_accel = 40;
+  }
 
-  if(!isDefined(var_1.alter_velocity_decel))
+  if(!isDefined(var_1.alter_velocity_decel)) {
     var_1.alter_velocity_decel = 20;
+  }
 
-  if(!isDefined(var_1.delay_crash))
+  if(!isDefined(var_1.delay_crash)) {
     var_1.delay_crash = 0;
+  }
 
-  if(!isDefined(var_1.delay_crash_time))
+  if(!isDefined(var_1.delay_crash_time)) {
     var_1.delay_crash_time = -1;
+  }
 
-  if(!isDefined(var_1.delay_crash_force_end))
+  if(!isDefined(var_1.delay_crash_force_end)) {
     var_1.delay_crash_force_end = 0;
+  }
 
-  if(!isDefined(var_1.turn_off_engine))
+  if(!isDefined(var_1.turn_off_engine)) {
     var_1.turn_off_engine = 1;
+  }
 
-  if(!isDefined(var_1.can_damage))
+  if(!isDefined(var_1.can_damage)) {
     var_1.can_damage = 0;
+  }
 
-  if(!isDefined(var_1.delete_time))
+  if(!isDefined(var_1.delete_time)) {
     var_1.delete_time = -1;
+  }
 
-  if(!isDefined(var_1.notetrack_notifies))
+  if(!isDefined(var_1.notetrack_notifies)) {
     var_1.notetrack_notifies = [];
+  }
 
-  if(!isDefined(var_1.death_fx_on_self))
+  if(!isDefined(var_1.death_fx_on_self)) {
     var_1.death_fx_on_self = 1;
+  }
 
   return var_1;
 }
@@ -386,14 +430,17 @@ validate_deathanim_directional(var_0) {
 }
 
 is_overrode(var_0) {
-  if(!isDefined(level.vehicle_death_fx_override))
+  if(!isDefined(level.vehicle_death_fx_override)) {
     return 0;
+  }
 
-  if(!isDefined(level.vehicle_death_fx_override[var_0]))
+  if(!isDefined(level.vehicle_death_fx_override[var_0])) {
     return 0;
+  }
 
-  if(isDefined(level.vtoverride))
+  if(isDefined(level.vtoverride)) {
     return 1;
+  }
 
   return level.vehicle_death_fx_override[var_0];
 }
@@ -430,13 +477,15 @@ isvehicle() {
 }
 
 build_missile_launcher(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if(!isDefined(level.vehicle_missile_launcher))
+  if(!isDefined(level.vehicle_missile_launcher)) {
     level.vehicle_missile_launcher = [];
+  }
 
   var_12 = level.vtclassname;
 
-  if(!isDefined(level.vehicle_missile_launcher[var_12]))
+  if(!isDefined(level.vehicle_missile_launcher[var_12])) {
     level.vehicle_missile_launcher[var_12] = [];
+  }
 
   precachemodel(var_2);
   precacheitem(var_3);
@@ -456,13 +505,15 @@ build_missile_launcher(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 }
 
 build_turret(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  if(!isDefined(level.vehicle_mgturret))
+  if(!isDefined(level.vehicle_mgturret)) {
     level.vehicle_mgturret = [];
+  }
 
   var_9 = level.vtclassname;
 
-  if(!isDefined(level.vehicle_mgturret[var_9]))
+  if(!isDefined(level.vehicle_mgturret[var_9])) {
     level.vehicle_mgturret[var_9] = [];
+  }
 
   precachemodel(var_2);
   precacheturret(var_0);
@@ -476,8 +527,9 @@ build_turret(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_10.defaultdroppitch = var_6;
   var_10.defaultdropyaw = var_7;
 
-  if(isDefined(var_8))
+  if(isDefined(var_8)) {
     var_10.offset_tag = var_8;
+  }
 
   level.vehicle_mgturret[var_9][level.vehicle_mgturret[var_9].size] = var_10;
 }
@@ -519,8 +571,9 @@ move_truck_junk_here(var_0, var_1) {
 }
 
 dummy_to_vehicle() {
-  if(ishelicopter())
+  if(ishelicopter()) {
     self.modeldummy.origin = self gettagorigin("tag_ground");
+  }
   else {
     self.modeldummy.origin = self.origin;
     self.modeldummy.angles = self.angles;
@@ -575,8 +628,9 @@ get_script_vehicles() {
   var_1 = getEntArray("script_vehicle", "code_classname");
 
   foreach(var_3 in var_1) {
-    if(!isspawner(var_3))
+    if(!isspawner(var_3)) {
       var_0[var_0.size] = var_3;
+    }
   }
 
   return var_0;
@@ -593,8 +647,9 @@ get_vehicles_from_targetname(var_0) {
   var_2 = getEntArray(var_0, "targetname");
 
   foreach(var_4 in var_2) {
-    if(isDefined(var_4.last_spawned_vehicle))
+    if(isDefined(var_4.last_spawned_vehicle)) {
       var_1[var_1.size] = var_4.last_spawned_vehicle;
+    }
   }
 
   return var_1;
@@ -611,22 +666,27 @@ get_vehicle_from_targetname(var_0) {
 }
 
 vehicle_spawner_has_targetname(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     return 0;
+  }
 
   var_2 = var_0.vehicle_spawner;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     return 0;
+  }
 
-  if(!isDefined(var_2.targetname))
+  if(!isDefined(var_2.targetname)) {
     return 0;
+  }
 
-  if(var_2.targetname != var_1)
+  if(var_2.targetname != var_1) {
     return 0;
+  }
 
   return 1;
 }
@@ -640,8 +700,9 @@ spawn_vehicle_from_targetname_and_drive(var_0) {
 spawn_vehicles_from_targetname_and_drive(var_0) {
   var_1 = spawn_vehicles_from_targetname(var_0);
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   thread gopath(var_3);
+  }
 
   return var_1;
 }
@@ -659,11 +720,13 @@ vehicle_wheels_backward() {
 }
 
 build_light(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level.vehicle_lights))
+  if(!isDefined(level.vehicle_lights)) {
     level.vehicle_lights = [];
+  }
 
-  if(!isDefined(level.vehicle_lights_group_override))
+  if(!isDefined(level.vehicle_lights_group_override)) {
     level.vehicle_lights_group_override = [];
+  }
 
   if(isDefined(level.vehicle_lights_group_override[var_4]) && !level.vtoverride) {
     return;
@@ -676,13 +739,15 @@ build_light(var_0, var_1, var_2, var_3, var_4, var_5) {
   level.vehicle_lights[var_0][var_1] = var_6;
   maps\_vehicle_code::group_light(var_0, var_1, "all");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     maps\_vehicle_code::group_light(var_0, var_1, var_4);
+  }
 }
 
 build_light_override(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = tolower(getdvar("mapname"));
+  }
 
   level.vtclassname = var_0;
   build_light(var_0, var_1, var_2, var_3, var_4, var_5);
@@ -691,8 +756,9 @@ build_light_override(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 build_hideparts(var_0, var_1) {
-  if(!isDefined(level.vehicle_hide_list))
+  if(!isDefined(level.vehicle_hide_list)) {
     level.vehicle_hide_list = [];
+  }
 
   level.vehicle_hide_list[var_0] = var_1;
 }
@@ -701,14 +767,16 @@ build_deathmodel(var_0, var_1, var_2, var_3) {
   if(var_0 != level.vtmodel && level.vtmodel != "script_model") {
     return;
   }
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = var_0;
+  }
 
   precachemodel(var_0);
   precachemodel(var_1);
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   if(!isDefined(var_3)) {
     level.vehicle_deathmodel[var_0] = var_1;
@@ -725,48 +793,59 @@ build_shoot_shock(var_0) {
 }
 
 build_idle(var_0) {
-  if(!isDefined(level.vehicle_idleanim))
+  if(!isDefined(level.vehicle_idleanim)) {
     level.vehicle_idleanim = [];
+  }
 
-  if(!isDefined(level.vehicle_idleanim[level.vtmodel]))
+  if(!isDefined(level.vehicle_idleanim[level.vtmodel])) {
     level.vehicle_idleanim[level.vtmodel] = [];
+  }
 
   level.vehicle_idleanim[level.vtmodel][level.vehicle_idleanim[level.vtmodel].size] = var_0;
 }
 
 build_drive(var_0, var_1, var_2, var_3) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 10;
+  }
 
   level.vehicle_driveidle[level.vtmodel] = var_0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level.vehicle_driveidle_r[level.vtmodel] = var_1;
+  }
 
   level.vehicle_driveidle_normal_speed[level.vtmodel] = var_2;
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level.vehicle_driveidle_animrate[level.vtmodel] = var_3;
+  }
 }
 
 build_template(var_0, var_1, var_2, var_3) {
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = tolower(getdvar("mapname"));
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_0 = var_2;
+  }
 
-  if(var_0 != "script_model")
+  if(var_0 != "script_model") {
     precachevehicle(var_0);
+  }
 
-  if(!isDefined(level.vehicle_death_fx))
+  if(!isDefined(level.vehicle_death_fx)) {
     level.vehicle_death_fx = [];
+  }
 
-  if(!isDefined(level.vehicle_deathanim))
+  if(!isDefined(level.vehicle_deathanim)) {
     level.vehicle_deathanim = [];
+  }
 
-  if(!isDefined(level.vehicle_death_fx[var_3]))
+  if(!isDefined(level.vehicle_death_fx[var_3])) {
     level.vehicle_death_fx[var_3] = [];
+  }
 
   level.vehicle_team[var_3] = "axis";
   level.vehicle_life[var_3] = 999;
@@ -800,21 +879,25 @@ build_treadfx_script_model(var_0, var_1, var_2, var_3, var_4) {
 }
 
 build_treadfx_override_tags(var_0, var_1) {
-  if(!isDefined(level._vehicle_effect_custom_param))
+  if(!isDefined(level._vehicle_effect_custom_param)) {
     level._vehicle_effect_custom_param = [];
+  }
 
-  if(!isDefined(level._vehicle_effect_custom_param[var_0]))
+  if(!isDefined(level._vehicle_effect_custom_param[var_0])) {
     level._vehicle_effect_custom_param[var_0] = spawnStruct();
+  }
 
   level._vehicle_effect_custom_param[var_0].tags = var_1;
 }
 
 build_treadfx_override_get_surface_function(var_0, var_1) {
-  if(!isDefined(level._vehicle_effect_custom_param))
+  if(!isDefined(level._vehicle_effect_custom_param)) {
     level._vehicle_effect_custom_param = [];
+  }
 
-  if(!isDefined(level._vehicle_effect_custom_param[var_0]))
+  if(!isDefined(level._vehicle_effect_custom_param[var_0])) {
     level._vehicle_effect_custom_param[var_0] = spawnStruct();
+  }
 
   level._vehicle_effect_custom_param[var_0].get_surface_override_function = var_1;
 }
@@ -822,30 +905,36 @@ build_treadfx_override_get_surface_function(var_0, var_1) {
 build_all_treadfx(var_0, var_1) {
   var_2 = get_surface_types();
 
-  foreach(var_4 in var_2)
+  foreach(var_4 in var_2) {
   set_vehicle_effect(var_0, var_4);
+  }
 }
 
 set_vehicle_effect(var_0, var_1, var_2, var_3, var_4) {
-  if(!isDefined(level._vehicle_effect))
+  if(!isDefined(level._vehicle_effect)) {
     level._vehicle_effect = [];
+  }
 
-  if(!isDefined(level._vehicle_effect_name))
+  if(!isDefined(level._vehicle_effect_name)) {
     level._vehicle_effect_name = [];
+  }
 
-  if(!isDefined(level._vehicle_sound_effect))
+  if(!isDefined(level._vehicle_sound_effect)) {
     level._vehicle_sound_effect = [];
+  }
 
   if(isDefined(var_3)) {
     var_1 = var_1 + var_3;
     var_2 = var_2 + var_3;
 
-    if(isDefined(var_4))
+    if(isDefined(var_4)) {
       var_4 = var_4 + var_3;
+    }
   }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     update_vehicle_effect(var_0, var_1, var_2, var_4);
+  }
   else if(isDefined(level._vehicle_effect[var_0]) && isDefined(level._vehicle_effect[var_0][var_1])) {
     level._vehicle_effect[var_0][var_1] = undefined;
     level._vehicle_sound_effect[var_0][var_1] = var_4;
@@ -905,8 +994,9 @@ add_vehicle_fx_to_bank(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(!isDefined(level._vehicle_effect_bank))
+  if(!isDefined(level._vehicle_effect_bank)) {
     level._vehicle_effect_bank = [];
+  }
 
   var_1 = get_surface_types();
   var_2 = [];
@@ -915,8 +1005,9 @@ add_vehicle_fx_to_bank(var_0) {
     level._vehicle_effect_bank[var_0][var_4] = loadfx(var_0);
     var_2 = maps\_treadfx::get_surface_types_variation(var_4);
 
-    foreach(var_6 in var_2)
+    foreach(var_6 in var_2) {
     level._vehicle_effect_bank[var_0][var_6] = loadfx(var_0);
+    }
   }
 }
 
@@ -940,8 +1031,9 @@ switch_vehicle_fx(var_0, var_1) {
     override_vehicle_effect(var_0, var_8, var_5, var_4, var_3, var_1);
     var_6 = maps\_treadfx::get_surface_types_variation(var_8);
 
-    foreach(var_10 in var_6)
+    foreach(var_10 in var_6) {
     override_vehicle_effect(var_0, var_10, var_5, var_4, var_3, var_1);
+    }
   }
 }
 
@@ -958,17 +1050,21 @@ build_team(var_0) {
 build_mainturret(var_0, var_1, var_2, var_3) {
   level.vehicle_hasmainturret[level.vtmodel] = 1;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     level.vehicle_mainturrets[level.vtmodel][var_0] = 1;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level.vehicle_mainturrets[level.vtmodel][var_1] = 1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.vehicle_mainturrets[level.vtmodel][var_2] = 1;
+  }
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     level.vehicle_mainturrets[level.vtmodel][var_3] = 1;
+  }
 }
 
 build_bulletshield(var_0) {
@@ -983,15 +1079,17 @@ build_aianims(var_0, var_1) {
   var_2 = level.vtclassname;
   level.vehicle_aianims[var_2] = [[var_0]]();
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level.vehicle_aianims[var_2] = [[var_1]](level.vehicle_aianims[var_2]);
+  }
 }
 
 build_aianims_with_classname(var_0, var_1, var_2) {
   level.vehicle_aianims[var_0] = [[var_1]]();
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     level.vehicle_aianims[var_0] = [[var_2]](level.vehicle_aianims[var_0]);
+  }
 }
 
 build_frontarmor(var_0) {
@@ -1049,8 +1147,9 @@ vehicle_load_ai_single(var_0, var_1, var_2) {
 }
 
 build_death_badplace(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if(!isDefined(level.vehicle_death_badplace))
+  if(!isDefined(level.vehicle_death_badplace)) {
     level.vehicle_death_badplace = [];
+  }
 
   var_6 = spawnStruct();
   var_6.delay = var_0;
@@ -1070,8 +1169,9 @@ spawn_vehicle_and_gopath() {
   var_0 = maps\_utility::spawn_vehicle();
 
   if(isDefined(self.script_speed)) {
-    if(!ishelicopter())
+    if(!ishelicopter()) {
       var_0 vehphys_setspeed(self.script_speed);
+    }
   }
 
   var_0 thread gopath(var_0);
@@ -1082,18 +1182,21 @@ vehicle_get_riders_by_group(var_0) {
   var_1 = [];
   var_2 = self.classname;
 
-  if(!isDefined(level.vehicle_unloadgroups[var_2]))
+  if(!isDefined(level.vehicle_unloadgroups[var_2])) {
     return var_1;
+  }
 
   var_3 = level.vehicle_unloadgroups[var_2];
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return var_1;
+  }
 
   foreach(var_5 in self.riders) {
     foreach(var_7 in var_3[var_0]) {
-      if(var_5.vehicle_position == var_7)
+      if(var_5.vehicle_position == var_7) {
         var_1[var_1.size] = var_5;
+      }
     }
   }
 
@@ -1141,8 +1244,9 @@ vehicle_get_path_array() {
   var_0 = [];
   var_1 = self.attachedpath;
 
-  if(!isDefined(self.attachedpath))
+  if(!isDefined(self.attachedpath)) {
     return var_0;
+  }
 
   var_2 = var_1;
   var_2.counted = 0;
@@ -1171,15 +1275,17 @@ vehicle_get_path_array() {
 }
 
 vehicle_lights_on(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "all";
+  }
 
   maps\_vehicle_code::lights_on(var_0, var_1);
 }
 
 vehicle_lights_off(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = "all";
+  }
 
   maps\_vehicle_code::lights_off(var_0, var_1);
 }
@@ -1196,10 +1302,12 @@ vehicle_single_light_on(var_0) {
   if(!isDefined(var_1)) {
     return;
   }
-  if(isDefined(var_1.delay))
+  if(isDefined(var_1.delay)) {
     var_2 = var_1.delay;
-  else
+  }
+  else {
     var_2 = 0;
+  }
 
   self endon("death");
   childthread common_scripts\utility::noself_delaycall_proc(::playfxontag, var_2, var_1.effect, self, var_1.tag);
@@ -1237,47 +1345,56 @@ vehicle_resume_named(var_0) {
 }
 
 build_is_helicopter(var_0) {
-  if(!isDefined(level.helicopter_list))
+  if(!isDefined(level.helicopter_list)) {
     level.helicopter_list = [];
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level.vttype;
+  }
 
   level.helicopter_list[var_0] = 1;
 }
 
 build_is_airplane(var_0) {
-  if(!isDefined(level.airplane_list))
+  if(!isDefined(level.airplane_list)) {
     level.airplane_list = [];
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level.vttype;
+  }
 
   level.airplane_list[var_0] = 1;
 }
 
 build_single_tread(var_0) {
-  if(!isDefined(level.vehicle_single_tread_list))
+  if(!isDefined(level.vehicle_single_tread_list)) {
     level.vehicle_single_tread_list = [];
+  }
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = level.vttype;
+  }
 
   level.vehicle_single_tread_list[var_0] = 1;
 }
 
 vehicle_set_health(var_0) {
-  if(isDefined(self.healthbuffer))
+  if(isDefined(self.healthbuffer)) {
     self.health = var_0 + self.healthbuffer;
-  else
+  }
+  else {
     self.health = var_0;
+  }
 
   self.currenthealth = self.health;
 }
 
 build_rider_death_func(var_0) {
-  if(!isDefined(level.vehicle_rider_death_func))
+  if(!isDefined(level.vehicle_rider_death_func)) {
     level.vehicle_rider_death_func = [];
+  }
 
   level.vehicle_rider_death_func[level.vtclassname] = var_0;
 }
@@ -1297,8 +1414,9 @@ get_dummy() {
 #using_animtree("vehicles");
 
 vehicle_to_dummy(var_0, var_1) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   if(!var_1) {
     self.modeldummy = spawn("script_model", self.origin);
@@ -1323,8 +1441,9 @@ vehicle_to_dummy(var_0, var_1) {
   maps\_vehicle_code::move_effects_ent_here(self.modeldummy, var_0);
   maps\_vehicle_code::copy_attachments(self.modeldummy);
 
-  if(isDefined(self.customvehicletodummytransferfunc))
+  if(isDefined(self.customvehicletodummytransferfunc)) {
     self thread[[self.customvehicletodummytransferfunc]](self.modeldummy, var_0);
+  }
 
   self.modeldummyon = 1;
 
@@ -1337,8 +1456,9 @@ vehicle_to_dummy(var_0, var_1) {
 }
 
 build_death_jolt_delay(var_0) {
-  if(!isDefined(level.vehicle_death_jolt))
+  if(!isDefined(level.vehicle_death_jolt)) {
     level.vehicle_death_jolt = [];
+  }
 
   var_1 = spawnStruct();
   var_1.delay = var_0;
@@ -1388,8 +1508,9 @@ tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_33 = var_33 + maps\_utility::vector_multiply(var_27, var_31);
   var_32.angles = vectortoangles(var_33);
 
-  if(isDefined(var_5))
+  if(isDefined(var_5)) {
     level thread common_scripts\utility::play_sound_in_space(var_5, var_15);
+  }
 
   var_8 linkto(var_32);
   var_0 useanimtree(var_4);
@@ -1414,8 +1535,9 @@ tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_0 animscripted("tank_crush_anim", var_15, var_16, var_3);
   var_8 animscripted("tank_crush_anim", var_32.origin, var_32.angles, var_2);
 
-  if(isDefined(var_7))
+  if(isDefined(var_7)) {
     thread[[var_7]](var_0);
+  }
 
   var_32 moveto(var_15, var_13, var_13 / 2, var_13 / 2);
   var_32 rotateto(var_16, var_13, var_13 / 2, var_13 / 2);
@@ -1472,8 +1594,9 @@ tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   wait(var_14);
   self attachpath(var_1);
 
-  if(isDefined(var_6) && var_6)
+  if(isDefined(var_6) && var_6) {
     self vehicle_setspeed(var_9, var_10, var_11);
+  }
 
   dummy_to_vehicle();
 }
@@ -1485,19 +1608,22 @@ set_crush_vehicle_clips(var_0, var_1, var_2) {
   if(var_1 != "precrushed" && var_1 != "postcrushed") {
     return;
   }
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
   var_3 = [];
 
-  if(isDefined(var_0) && isDefined(var_0.targetname))
+  if(isDefined(var_0) && isDefined(var_0.targetname)) {
     var_3 = getEntArray(var_0.targetname + "_" + var_1 + "_clip", "targetname");
+  }
   else {
     var_4 = getEntArray("script_brushmodel", "classname");
 
     foreach(var_6 in var_4) {
-      if(isDefined(var_6.targetname) && issubstr(var_6.targetname, var_1))
+      if(isDefined(var_6.targetname) && issubstr(var_6.targetname, var_1)) {
         var_3 = common_scripts\utility::array_add(var_3, var_6);
+      }
     }
   }
 
@@ -1512,13 +1638,15 @@ set_crush_vehicle_clips(var_0, var_1, var_2) {
 }
 
 tank_crush_fx_on_tag(var_0, var_1, var_2, var_3) {
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     wait(var_3);
+  }
 
   playFXOnTag(var_1, self, var_0);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     thread maps\_utility::play_sound_on_tag(var_2, var_0);
+  }
 }
 
 notetrack_tank_crush_fx_on_tag(var_0, var_1, var_2, var_3, var_4) {
@@ -1531,30 +1659,37 @@ notetrack_tank_crush_fx_on_tag(var_0, var_1, var_2, var_3, var_4) {
   wait(var_5);
   playFXOnTag(var_1, self, var_0);
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     thread maps\_utility::play_sound_on_tag(var_2, var_0);
+  }
 }
 
 tank_crush_fx_validation(var_0, var_1) {
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     return var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return var_1;
+  }
 }
 
 tank_crush_has_notetracks(var_0) {
-  if(animhasnotetrack(var_0, "left_glass_fx"))
+  if(animhasnotetrack(var_0, "left_glass_fx")) {
     return 1;
+  }
 
-  if(animhasnotetrack(var_0, "right_glass_fx"))
+  if(animhasnotetrack(var_0, "right_glass_fx")) {
     return 1;
+  }
 
-  if(animhasnotetrack(var_0, "back_glass_fx"))
+  if(animhasnotetrack(var_0, "back_glass_fx")) {
     return 1;
+  }
 
-  if(animhasnotetrack(var_0, "front_glass_fx"))
+  if(animhasnotetrack(var_0, "front_glass_fx")) {
     return 1;
+  }
 
   return 0;
 }
@@ -1582,8 +1717,9 @@ show_rigs(var_0) {
   if(!self.riders.size) {
     return;
   }
-  for(var_1 = 0; var_1 < self.riders.size; var_1++)
+  for(var_1 = 0; var_1 < self.riders.size; var_1++) {
     thread maps\_vehicle_aianim::getout_rigspawn(self, self.riders[var_1].vehicle_position);
+  }
 }
 
 build_exploder_event_with_targetname(var_0, var_1, var_2, var_3) {
@@ -1603,8 +1739,9 @@ build_exploder_event(var_0, var_1, var_2, var_3) {
 build_exploder_event_internal(var_0, var_1, var_2, var_3) {
   var_0 waittill(var_1);
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     wait(var_3);
+  }
 
   common_scripts\_exploder::exploder(var_2);
 }
@@ -1615,10 +1752,12 @@ volume_up(var_0) {
   self endon("death");
   self scalevolume(0, 0);
 
-  if(isDefined(self.snd_disable_vehicle_system))
+  if(isDefined(self.snd_disable_vehicle_system)) {
     self.snd_disable_vehicle_system = 0;
-  else
+  }
+  else {
     self vehicle_turnengineon();
+  }
 
   self scalevolume(1.0, var_0);
   wait(var_0);
@@ -1631,10 +1770,12 @@ volume_down(var_0) {
   self scalevolume(0.0, var_0);
   wait(var_0);
 
-  if(isDefined(self.snd_disable_vehicle_system))
+  if(isDefined(self.snd_disable_vehicle_system)) {
     self.snd_disable_vehicle_system = 1;
-  else
+  }
+  else {
     self vehicle_turnengineoff();
+  }
 }
 
 lerp_enginesound(var_0, var_1, var_2) {}

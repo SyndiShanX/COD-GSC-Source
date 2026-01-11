@@ -48,8 +48,9 @@ section_post_inits() {
     level._tanks.bridge_destroyed maps\_utility::assign_animtree("tanks_bridge");
     level._tanks.bridge_destroyed hide();
 
-    if(maps\black_ice_util::start_point_is_before("tanks"))
+    if(maps\black_ice_util::start_point_is_before("tanks")) {
       common_scripts\utility::array_call(getEntArray("opt_hide_tanks", "script_noteworthy"), ::hide);
+    }
 
     var_0 = [level._tanks.pipe, level._tanks.bridge_destroyed, level._tanks.bridge];
     level._tanks.struct_bridge maps\_anim::anim_first_frame(var_0, "tanks_bridge_fall_scene");
@@ -130,8 +131,9 @@ main_mudpumps() {
   thread cleanup_topdrive();
   thread maps\black_ice_refinery::util_refinery_stack_cleanup();
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     thread maps\black_ice_anim::spawn_dead_bodies_mudpumps();
+  }
 
   common_scripts\utility::flag_set("flag_fx_screen_bokehdots_rain");
   thread maps\black_ice_fx::fx_command_window_light_on();
@@ -183,8 +185,9 @@ allies_tanks() {
   common_scripts\utility::flag_set("flag_tanks_end");
 
   if(!common_scripts\utility::flag("flag_engineroom_engagement_start")) {
-    if(!common_scripts\utility::flag_exist("trig_allies_engine_room_start") || !common_scripts\utility::flag("trig_allies_engine_room_start"))
+    if(!common_scripts\utility::flag_exist("trig_allies_engine_room_start") || !common_scripts\utility::flag("trig_allies_engine_room_start")) {
       maps\_utility::activate_trigger_with_targetname("trig_allies_engine_room_enter");
+    }
 
     var_1 = level._engine_room.baker_enter_struct;
     var_0 maps\_utility::disable_ai_color();
@@ -282,12 +285,15 @@ player_smoke_duck() {
 player_smoke_hint() {
   self endon("notify_stop_player_smoke_duck");
 
-  if(level.console || level.player usinggamepad())
+  if(level.console || level.player usinggamepad()) {
     maps\_utility::display_hint("hint_crouch_stance");
-  else if(maps\_utility::is_command_bound("+togglecrouch") || !maps\_utility::is_command_bound("+stance"))
+  }
+  else if(maps\_utility::is_command_bound("+togglecrouch") || !maps\_utility::is_command_bound("+stance")) {
     maps\_utility::display_hint("hint_crouch_crouch");
-  else
+  }
+  else {
     maps\_utility::display_hint("hint_crouch_stance");
+  }
 }
 
 player_cough_damage() {
@@ -296,8 +302,9 @@ player_cough_damage() {
 
   for(;;) {
     if(self.health > 40) {
-      if(!common_scripts\utility::flag("flag_engine_room_nodamage"))
+      if(!common_scripts\utility::flag("flag_engine_room_nodamage")) {
         self dodamage(40, level.player.origin, level._engine_room.damage_smoke_ent);
+      }
     } else if(!common_scripts\utility::flag("flag_engine_room_nodamage")) {
       level.player kill();
       setdvar("ui_deadquote", &"BLACK_ICE_ENGINE_ROOM_SMOKE_DEATH");
@@ -333,8 +340,9 @@ player_cough_sound() {
   level endon("flag_player_crouching");
 
   for(;;) {
-    if(!common_scripts\utility::flag("flag_engine_room_nodamage"))
+    if(!common_scripts\utility::flag("flag_engine_room_nodamage")) {
       maps\_utility::smart_radio_dialogue("blackice_plr_cough");
+    }
 
     wait 0.05;
   }
@@ -464,8 +472,9 @@ util_delete_on_vignette_kill(var_0) {
   var_0 endon("death");
   self waittill("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 delete();
+  }
 }
 
 enemies_engineroom_extinguisher(var_0) {
@@ -568,8 +577,9 @@ event_topdrive_fall_ally1_duck(var_0) {
   maps\_utility::trigger_wait_targetname("trig_mudpumps_ally1_duck");
   var_0 maps\_anim::anim_reach_solo(self, "topdrive_duck");
 
-  if(common_scripts\utility::flag("flag_player_at_topdrive"))
+  if(common_scripts\utility::flag("flag_player_at_topdrive")) {
     var_0 maps\_anim::anim_single_solo(self, "topdrive_duck");
+  }
   else {
     common_scripts\utility::flag_set("flag_topdrive_ally1_full_anim");
     var_0 maps\_anim::anim_single_solo(self, "topdrive_duck_full");
@@ -592,8 +602,9 @@ cleanup_topdrive() {
   var_1 = getEntArray("topdrive_debris", "targetname");
   common_scripts\utility::array_call(var_1, ::hide);
 
-  while(!common_scripts\utility::flag("flag_topdrive_duck_ally1") || !common_scripts\utility::flag("flag_topdrive_duck_ally2") || common_scripts\utility::flag("flag_vision_mudpumps") || common_scripts\utility::flag("flag_vision_engine_room"))
+  while(!common_scripts\utility::flag("flag_topdrive_duck_ally1") || !common_scripts\utility::flag("flag_topdrive_duck_ally2") || common_scripts\utility::flag("flag_vision_mudpumps") || common_scripts\utility::flag("flag_vision_engine_room")) {
     wait 0.05;
+  }
 
   common_scripts\utility::array_call(var_1, ::show);
   var_0 moveto(var_0.origin - (0, 0, 136), 0.05);
@@ -603,11 +614,13 @@ heli_spawn() {
   common_scripts\utility::flag_set("flag_mudpumps_heli_scene_active");
   var_0 = 1;
 
-  if(maps\black_ice_util::start_point_is_after("mudpumps"))
+  if(maps\black_ice_util::start_point_is_after("mudpumps")) {
     var_0 = 0;
+  }
 
-  if(var_0)
+  if(var_0) {
     level waittill("notify_spawn_pipedeck_heli");
+  }
 
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname("vehicle_exfil_helo");
   level._vehicles["exfil_heli"] = var_1;
@@ -625,10 +638,12 @@ heli_spawn() {
   var_1 thread heli_turret_and_spotlight_aim(1.5);
   var_1 thread maps\black_ice_pipe_deck::heli_spot_on_single(level.player, 0.5, 1);
 
-  if(var_0 && common_scripts\utility::flag("flag_player_at_topdrive") && common_scripts\utility::flag("flag_topdrive_ally1_full_anim"))
+  if(var_0 && common_scripts\utility::flag("flag_player_at_topdrive") && common_scripts\utility::flag("flag_topdrive_ally1_full_anim")) {
     var_1 thread heli_spot_search_intro();
-  else
+  }
+  else {
     var_1 heli_spotlight_on();
+  }
 
   var_1 thread maps\black_ice_pipe_deck::heli_player_quake();
   var_1 thread maps\black_ice_pipe_deck::heli_player_rumble();

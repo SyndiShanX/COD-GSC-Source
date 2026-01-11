@@ -17,6 +17,7 @@ init() {
 }
 
 tazer_flourish(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval)
+  if(newval) {
     playviewmodelfx(localclientnum, level._effect["fx_zmb_taser_flourish"], "tag_weapon");
+  }
 }

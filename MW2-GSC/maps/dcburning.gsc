@@ -57,8 +57,9 @@ main() {
   trigs = getEntArray("trigger_multiple", "classname");
   level.aColornodeTriggers = [];
   foreach(trigger in trigs) {
-    if((isDefined(trigger.script_noteworthy)) && (getsubstr(trigger.script_noteworthy, 0, 10) == "colornodes"))
+    if((isDefined(trigger.script_noteworthy)) && (getsubstr(trigger.script_noteworthy, 0, 10) == "colornodes")) {
       level.aColornodeTriggers = array_add(level.aColornodeTriggers, trigger);
+    }
   }
   //level.motiontrackergun_off = "masada_dcburn_mt_black_off";
   //level.motiontrackergun_on = "masada_dcburn_mt_black_on";
@@ -307,15 +308,18 @@ init_air_vehicle_flags() {
 }
 
 air_nodes_think() {
-  if(!isDefined(self.script_flag))
+  if(!isDefined(self.script_flag)) {
     return;
+  }
   flag_init(self.script_flag);
-  if(getdvar("dc_debug") == "1")
+  if(getdvar("dc_debug") == "1") {
     self thread debug_message(self.script_flag, self.origin, 9999);
+  }
   self waittill("trigger");
   flag_set(self.script_flag);
-  if(getdvar("dc_debug") == "1")
+  if(getdvar("dc_debug") == "1") {
     iPrintlnbold("flag: " + self.script_flag + " has been set");
+  }
 }
 
 /****************************************************************************
@@ -707,8 +711,9 @@ AAA_sequence_bunker_to_commerce() {
 
   hostiles = getaiarray("axis");
   foreach(guy in hostiles) {
-    if(!isDefined(guy))
+    if(!isDefined(guy)) {
       continue;
+    }
     guy.ignoresuppression = false;
     guy.aggressivemode = false; //dont linger at cover when you cant see your enemy
   }
@@ -756,8 +761,9 @@ AAA_sequence_bunker_to_commerce() {
   flag_clear("lav_is_suppressing");
   hostiles = getaiarray("axis");
   foreach(guy in hostiles) {
-    if(!isDefined(guy))
+    if(!isDefined(guy)) {
       continue;
+    }
     guy.ignoresuppression = true;
     guy.aggressivemode = true; //dont linger at cover when you cant see your enemy
   }
@@ -783,8 +789,9 @@ AAA_sequence_bunker_to_commerce() {
   volume_commerce_lobby_upper = getent("volume_commerce_lobby_upper", "targetname");
   upper_floor_enemies = volume_commerce_lobby_upper get_ai_touching_volume("axis");
 
-  if((isDefined(upper_floor_enemies)) && (upper_floor_enemies.size > 0))
+  if((isDefined(upper_floor_enemies)) && (upper_floor_enemies.size > 0)) {
     level.bradleyPreferredTargets = upper_floor_enemies;
+  }
 
   wait(1);
   thread commerce_first_floor_enemies_dead_monitor();
@@ -884,8 +891,9 @@ seaknight_drone_loaders(spawner, sFlagToSetWhenLoaded, sFlagToStop) {
 }
 
 vehicle_littlebird_gopath_when_loaded_and_flag_set(sFlag, pathStart) {
-  while(self.riders.size < 6)
+  while(self.riders.size < 6) {
     wait(.1);
+  }
 
   //	newArray = [];
   //	foreach( guy in self.riders )
@@ -1303,8 +1311,9 @@ dialogue_bunker() {
 }
 
 bunker_radio(sLine) {
-  if(!isDefined(level.bunker_radio_org))
+  if(!isDefined(level.bunker_radio_org)) {
     return;
+  }
   if(isDefined(level.bunker_radio_org.deleteme)) {
     level.bunker_radio_org delete();
   }
@@ -1336,46 +1345,53 @@ dialogue_nag_cross_the_street() {
     flag_set("leader_orders_everyone_across_street");
 
     wait(randomintrange(7, 11));
-    if(flag("player_entering_commerce"))
+    if(flag("player_entering_commerce")) {
       break;
+    }
 
     //Sgt. Macey	Move up and stay out of that Humvee's line of fire!	
     radio_dialogue("dcburn_mcy_lineoffire");
 
     wait(randomintrange(7, 11));
-    if(flag("player_entering_commerce"))
+    if(flag("player_entering_commerce")) {
       break;
+    }
 
     //Sgt. Macey	Move! Move!	
     radio_dialogue("dcburn_mcy_movemove");
 
     wait(randomintrange(7, 11));
-    if(flag("player_entering_commerce"))
+    if(flag("player_entering_commerce")) {
       break;
+    }
     //Sgt. Macey	The 50cal has them suppressed! Move in! Move in!	
     radio_dialogue("dcburn_mcy_50calsupp");
 
     wait(randomintrange(7, 11));
-    if(flag("player_entering_commerce"))
+    if(flag("player_entering_commerce")) {
       break;
+    }
     //Sgt. Macey	Push, push, push! We're sitting ducks out here!	
     radio_dialogue("dcburn_mcy_sittingducks");
 
     wait(randomintrange(7, 11));
-    if(flag("player_entering_commerce"))
+    if(flag("player_entering_commerce")) {
       break;
+    }
     //Sgt. Macey	Get out of the killzone before you get your ass blown off! Move up!	
     radio_dialogue("dcburn_mcy_blownoff");
 
     wait(randomintrange(7, 11));
-    if(flag("player_entering_commerce"))
+    if(flag("player_entering_commerce")) {
       break;
+    }
     //Sgt. Macey	Move up, get out of the killzone!	
     radio_dialogue("dcburn_mcy_moveup");
 
     wait(randomintrange(7, 11));
-    if(flag("player_entering_commerce"))
+    if(flag("player_entering_commerce")) {
       break;
+    }
     //Sgt. Macey	Get your ass out of the killzone and into the target building, NOW!	
     radio_dialogue("dcburn_mcy_intotargbuilding");
 
@@ -1393,8 +1409,9 @@ dialogue_nag_get_to_elevator() {
   while(!flag("player_approaching_bottom_elevators")) {
     wait(randomintrange(5, 8));
 
-    if(flag("player_approaching_bottom_elevators"))
+    if(flag("player_approaching_bottom_elevators")) {
       break;
+    }
 
     if(grenadeHintGiven == false) {
       //Sgt. Foley	Use your grenade launchers!	
@@ -1403,26 +1420,30 @@ dialogue_nag_get_to_elevator() {
       wait(randomintrange(7, 11));
     }
 
-    if(flag("player_approaching_bottom_elevators"))
+    if(flag("player_approaching_bottom_elevators")) {
       break;
+    }
     //Sgt. Macey: Move in!
     level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_01");
 
     wait(randomintrange(7, 11));
-    if(flag("player_approaching_bottom_elevators"))
+    if(flag("player_approaching_bottom_elevators")) {
       break;
+    }
     //Sgt. Macey: Push forward! Move! Move!
     level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_02");
 
     wait(randomintrange(7, 11));
-    if(flag("player_approaching_bottom_elevators"))
+    if(flag("player_approaching_bottom_elevators")) {
       break;
+    }
     //Sgt. Macey: Keep moving forward!
     level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_03");
 
     wait(randomintrange(7, 11));
-    if(flag("player_approaching_bottom_elevators"))
+    if(flag("player_approaching_bottom_elevators")) {
       break;
+    }
     //Sgt. Macey: Move up! Move up!
     level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_04");
     wait(randomintrange(7, 11));
@@ -1615,8 +1636,9 @@ javelins_trench() {
 
   while(true) {
     monument_heli_owned waittill("damage", amount, attacker);
-    if((isDefined(attacker)) && (!isplayer(attacker)))
+    if((isDefined(attacker)) && (!isplayer(attacker))) {
       break;
+    }
   }
 
   thread maps\dcburning_fx::monument_heli_destroyed(monument_heli_owned);
@@ -1851,8 +1873,9 @@ humvee_commerce() {
   if(isDefined(level.commercerappelers)) {
     while(level.commercerappelers.size > 0) {
       wait(0.05);
-      if(flag("commerce_rappelers_done"))
+      if(flag("commerce_rappelers_done")) {
         break;
+      }
       iRand = randomint(level.commercerappelers.size);
       level.commercerappelers = remove_dead_from_array(level.commercerappelers);
       eTarget = level.commercerappelers[iRand];
@@ -1905,8 +1928,9 @@ bradley_commerce() {
 
     if((isDefined(level.bradleyPreferredTargets)) && (level.bradleyPreferredTargets.size > 0)) {
       level.bradleyPreferredTargets = remove_dead_from_array(level.bradleyPreferredTargets);
-      if(level.bradleyPreferredTargets.size == 0)
+      if(level.bradleyPreferredTargets.size == 0) {
         continue;
+      }
       iRand = randomInt(level.bradleyPreferredTargets.size);
       eTarget = level.bradleyPreferredTargets[iRand];
       eTarget.health = 1;
@@ -1917,8 +1941,9 @@ bradley_commerce() {
     /*-----------------------
     OTHERWISE JUST GET A TARGET
     -------------------------*/
-    else
+    else {
       eTarget = level.bradley_commerce vehicle_get_target();
+    }
     if(!isDefined(eTarget)) {
       wait(randomfloatrange(2, 4));
       continue;
@@ -1947,8 +1972,9 @@ bradley_commerce() {
 
 humvee_magically_kill_dude(eTarget) {
   eTarget endon("death");
-  if((!isDefined(eTarget)) || (!isalive(eTarget)))
+  if((!isDefined(eTarget)) || (!isalive(eTarget))) {
     return;
+  }
   targetTagOrigin = eTarget gettagorigin("tag_eye");
   magicbullet("m14_scoped", self.origin, targetTagOrigin);
   bullettracer(self.origin, targetTagOrigin, true);
@@ -1970,8 +1996,9 @@ vehicle_get_target() {
       eTarget = maps\_helicopter_globals::getEnemyTarget(level.CannonRange, level.cosine["180"], true, true, false, true);
       break;
   }
-  if(isDefined(eTarget))
+  if(isDefined(eTarget)) {
     return eTarget;
+  }
 }
 
 commerce_rappelers() {
@@ -2010,8 +2037,9 @@ commerce_rappelers_think() {
   }
   self waittill("jumpedout");
   eAnimEnt anim_generic_first_frame(self, sRappelAnim);
-  if(!flag("commerce_rappelers_rappeling"))
+  if(!flag("commerce_rappelers_rappeling")) {
     flag_set("commerce_rappelers_rappeling");
+  }
   eAnimEnt anim_generic(self, sRappelAnim);
   self delete();
 }
@@ -2051,17 +2079,20 @@ humvee_spotlight_think(humvee, HummerTurret) {
   while(isDefined(self)) {
     if(isDefined(self.spotlightPreferredTarget)) {
       self settargetentity(self.spotlightPreferredTarget, offset);
-      if(isDefined(HummerTurret))
+      if(isDefined(HummerTurret)) {
         HummerTurret SetTargetEntity(self.spotlightPreferredTarget, offset);
+      }
     } else if(isDefined(humvee.eTarget)) {
       self settargetentity(humvee.eTarget, offset);
-      if(isDefined(HummerTurret))
+      if(isDefined(HummerTurret)) {
         HummerTurret SetTargetEntity(humvee.eTarget, offset);
+      }
     } else {
       if(isDefined(self.defaultTarget)) {
         self settargetentity(self.defaultTarget);
-        if(isDefined(HummerTurret))
+        if(isDefined(HummerTurret)) {
           HummerTurret SetTargetEntity(self.defaultTarget);
+        }
       }
 
     }
@@ -2087,17 +2118,21 @@ spotlight_preferred_targets() {
   while((isDefined(self)) && (!flag("player_entering_top_elevator_area"))) {
     aAI = array_merge(enemies1, enemies2);
     aAI = remove_dead_from_array(aAI);
-    if((isDefined(level.playerAttacker)) && (is_in_array(aAI, level.playerAttacker)))
+    if((isDefined(level.playerAttacker)) && (is_in_array(aAI, level.playerAttacker))) {
       self.spotlightPreferredTarget = level.playerAttacker;
+    }
     else {
-      if(aAI.size > 0)
+      if(aAI.size > 0) {
         self.spotlightPreferredTarget = getClosest(level.player.origin, aAI);
+      }
     }
 
-    if(isDefined(self.spotlightPreferredTarget))
+    if(isDefined(self.spotlightPreferredTarget)) {
       wait(randomfloatrange(3, 5));
-    else
+    }
+    else {
       wait(.5);
+    }
     enemies1 = volume_commerce_lobby_lower get_ai_touching_volume("axis"); //want to get these guys again in case more spawned in
   }
 
@@ -2125,13 +2160,15 @@ find_player_attacker_for_spotlight(spotlight_turret) {
   level.playerAttacker = undefined;
   while(isDefined(self)) {
     level.player waittill("damage", amount, attacker);
-    if(!isDefined(attacker))
+    if(!isDefined(attacker)) {
       continue;
+    }
     if((isDefined(attacker.team)) && (attacker.team == "axis")) {
       level.playerAttacker = attacker;
       self waittill_death_or_timeout(4);
-      if(level.playerAttacker == self)
+      if(level.playerAttacker == self) {
         level.playerAttacker = undefined;
+      }
     }
 
   }
@@ -2147,8 +2184,9 @@ humvee_default_targets_think(targets, turret) {
   }
 
   //cleanup
-  foreach(target in targets)
+  foreach(target in targets) {
   target delete();
+  }
 }
 
 humvee_convoy() {
@@ -2208,8 +2246,9 @@ AAA_sequence_elevator_bottom_to_top() {
   array_thread(aFodder_friendlies, ::AI_fixednode_off);
   array_thread(aFodder_friendlies, ::try_to_magic_bullet_shield);
   foreach(guy in aFodder_friendlies) {
-    if(!isDefined(guy))
+    if(!isDefined(guy)) {
       continue;
+    }
     guy.attackeraccuracy = 0;
     //guy.useChokePoints = true;
   }
@@ -2220,8 +2259,9 @@ AAA_sequence_elevator_bottom_to_top() {
   thread autosave_by_name("bottom_elevators");
   array_thread(aFodder_friendlies, ::stop_magic_bullet_shield);
   foreach(guy in aFodder_friendlies) {
-    if(!isDefined(guy))
+    if(!isDefined(guy)) {
       continue;
+    }
     guy.attackeraccuracy = .1;
   }
   array_thread(aFodder_friendlies, ::AI_redshirt_think);
@@ -2359,8 +2399,9 @@ samsite_c4_think() {
   fx = spawnFx(getFx("thin_black_smoke_L"), self.base.origin);
   triggerFx(fx);
   earthquake(0.6, 1.2, self.base.origin, 1600);
-  if(distance(self.base.origin, level.player.origin) < 2048)
+  if(distance(self.base.origin, level.player.origin) < 2048) {
     level.player PlayRumbleOnEntity("damage_heavy");
+  }
   flag_wait("player_entering_top_elevator_area");
   fx delete();
 }
@@ -2385,8 +2426,9 @@ atrium_guys() {
     assert(isDefined(guy.deathanim));
     atrium_guys[atrium_guys.size] = guy;
     guy.puller = false;
-    if(spawner.animation == "airport_civ_dying_groupB_pull")
+    if(spawner.animation == "airport_civ_dying_groupB_pull") {
       puller = guy;
+    }
     guy.animation = spawner.animation;
     guy.reference anim_generic_first_frame(guy, guy.animation);
   }
@@ -2507,8 +2549,9 @@ samsite_turret_think() {
     earthquake(.3, .5, self.origin, 1600);
     magicBullet("slamraam_missile_dcburning", self gettagorigin(self.missileTags[0]), targetOrg.origin);
     self.missileTags = array_remove(self.missileTags, self.missileTags[0]);
-    if(self.missileTags.size < 1)
+    if(self.missileTags.size < 1) {
       break;
+    }
     wait(randomfloatrange(.3, 2));
   }
 }
@@ -2853,8 +2896,9 @@ crows_nest_bmp_flood(aSpawners) {
 }
 
 crows_nest_bmp_flood_think(spawner) {
-  if(!flag("obj_commerce_defend_javelin_complete"))
+  if(!flag("obj_commerce_defend_javelin_complete")) {
     return;
+  }
   level endon("obj_commerce_defend_javelin_complete");
   wait(randomfloatrange(40, 41));
   bmp = spawner spawn_vehicle_and_gopath();
@@ -2895,10 +2939,12 @@ AAA_sequence_elevator_top_2_crowsnest() {
   flag_wait("player_entering_top_elevator_area");
   thread autosave_by_name("elevator_top");
   thread AI_cleanup_non_squad("all");
-  if(isDefined(level.helis_ambient_trenches))
+  if(isDefined(level.helis_ambient_trenches)) {
     array_thread(level.helis_ambient_trenches, ::vehicle_delete);
-  if(isDefined(level.vehicles_commerce_ambient))
+  }
+  if(isDefined(level.vehicles_commerce_ambient)) {
     array_thread(level.vehicles_commerce_ambient, ::vehicle_delete);
+  }
 
   /*-----------------------
   SETUP
@@ -2927,8 +2973,9 @@ AAA_sequence_elevator_top_2_crowsnest() {
   helis_ambient_crowsnest = spawn_vehicles_from_targetname_and_drive("helis_ambient_crowsnest");
   helis_crows_snipe = spawn_vehicles_from_targetname_and_drive("helis_crows_snipe");
   array_thread(helis_crows_snipe, ::helis_crows_snipe_think);
-  if(isDefined(level.helis_ambient_capitol))
+  if(isDefined(level.helis_ambient_capitol)) {
     array_thread(level.helis_ambient_capitol, ::helis_ambient_capitol_think);
+  }
   thread AI_cleanup_non_squad("allies", 128);
 }
 
@@ -3141,10 +3188,12 @@ crowsnest_friendlies_inside() {
   player_in_crowsnest_room = getent("player_in_crowsnest_room", "targetname");
   while(!flag("player_shot_at_crowsnest_guys")) {
     wait(.1);
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       return;
-    if(self istouching(player_in_crowsnest_room))
+    }
+    if(self istouching(player_in_crowsnest_room)) {
       break;
+    }
   }
 
   thread axis_not_ignored();
@@ -3154,8 +3203,9 @@ crowsnest_friendlies_inside() {
 axis_not_ignored() {
   ai = getaiarray("axis");
   foreach(guy in ai) {
-    if(!isDefined(guy))
+    if(!isDefined(guy)) {
       continue;
+    }
     guy.ignoreme = false;
   }
 }
@@ -3290,8 +3340,9 @@ player_barrett_damage() {
     level.player viewkick(127, level.player.origin);
     wait(randomfloatrange(1, 2));
     iLoveTaps++;
-    if(iLoveTaps > 3)
+    if(iLoveTaps > 3) {
       break;
+    }
   }
 
   //Player can't take a hint, throw a nade at his ass
@@ -3304,8 +3355,9 @@ player_barrett_damage() {
 
 retreat_to_elevators() {
   self endon("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self notify("stop_seeking");
   position = getstruct("obj_commerce_sector_1d", "targetname");
   self setgoalpos(position.origin);
@@ -3313,8 +3365,9 @@ retreat_to_elevators() {
 
 AI_crowsnest_assault_guys_wave1_think() {
   level endon("player_killed_enough");
-  if(!isalive(self))
+  if(!isalive(self)) {
     return;
+  }
   while(isalive(self)) {
     self waittill("death", attacker);
     if((isDefined(attacker)) && (isplayer(attacker))) {
@@ -3350,16 +3403,19 @@ friendly_shoot_stingers_and_jav_think(stingerJavNode) {
   -------------------------*/
   while(!flag("only_1_javelin_enemies_remaining")) {
     wait(1);
-    if(within_fov(level.player.origin, level.player.angles, stingerJavNode.origin + (0, 0, 32), level.cosine["90"]))
+    if(within_fov(level.player.origin, level.player.angles, stingerJavNode.origin + (0, 0, 32), level.cosine["90"])) {
       continue;
-    if(within_fov(level.player.origin, level.player.angles, self.origin + (0, 0, 32), level.cosine["90"]))
+    }
+    if(within_fov(level.player.origin, level.player.angles, self.origin + (0, 0, 32), level.cosine["90"])) {
       continue;
+    }
     break;
   }
   self friendly_shoot_at_crows_drones_stop();
 
-  if(flag("only_1_javelin_enemies_remaining"))
+  if(flag("only_1_javelin_enemies_remaining")) {
     return;
+  }
 
   /*-----------------------
   FRIENDLY IDLES WITH WEAPON
@@ -3413,8 +3469,9 @@ friendly_shoot_stingers_and_jav_think(stingerJavNode) {
       }
     }
     self waittillmatch("single anim", "end");
-    if((flag("only_1_javelin_enemies_remaining")) || (flag("obj_commerce_defend_javelin_complete")))
+    if((flag("only_1_javelin_enemies_remaining")) || (flag("obj_commerce_defend_javelin_complete"))) {
       break;
+    }
   }
   self.ignoreme = false;
   self notify("stop_shooting_stingers_and_javs");
@@ -3427,21 +3484,25 @@ friendly_shoot_stingers_and_jav_think(stingerJavNode) {
 }
 
 player_is_not_in_the_way(playerBadPlace) {
-  if(distance(playerBadPlace, level.player.origin) > 64)
+  if(distance(playerBadPlace, level.player.origin) > 64) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 friendly_shoot_stingers_stop() {
 }
 
 friendly_shoot_stingers_get_target(aDummyTargets) {
-  if(!isDefined(self.scriptedTargets))
+  if(!isDefined(self.scriptedTargets)) {
     return aDummyTargets[randomint(aDummyTargets.size)];
+  }
 
-  if(self.scriptedTargets.size == 0)
+  if(self.scriptedTargets.size == 0) {
     return aDummyTargets[randomint(aDummyTargets.size)];
+  }
 
   self.scriptedTargets = remove_dead_from_array(self.scriptedTargets);
 
@@ -3458,18 +3519,22 @@ friendly_stinger_target_nodes_think(guy) {
   //self ==> the node the heli target will trigger to show its in a good place to be shot
   while((!flag("only_1_javelin_enemies_remaining")) && (isDefined(guy.scriptedTargets))) {
     self waittill("trigger", heli);
-    if(!isDefined(heli))
+    if(!isDefined(heli)) {
       break;
-    if(!isDefined(guy.scriptedTargets))
+    }
+    if(!isDefined(guy.scriptedTargets)) {
       break;
+    }
     guy.scriptedTargets = array_add(guy.scriptedTargets, heli);
     guy notify("new_target");
     wait(2);
-    if(isDefined(heli))
+    if(isDefined(heli)) {
       guy.scriptedTargets = array_remove(guy.scriptedTargets, heli);
+    }
 
-    if((flag("only_1_javelin_enemies_remaining")) || (flag("obj_commerce_defend_javelin_complete")))
+    if((flag("only_1_javelin_enemies_remaining")) || (flag("obj_commerce_defend_javelin_complete"))) {
       break;
+    }
   }
 }
 
@@ -3502,8 +3567,9 @@ friendlies_shoot_at_crows_drones_think() {
 }
 
 friendlies_shoot_at_crows_drones_stop() {
-  if(isDefined(level.hostiles_fodder_crowsnest))
+  if(isDefined(level.hostiles_fodder_crowsnest)) {
     level.hostiles_fodder_crowsnest AI_delete();
+  }
   aFriendlies = [];
   aFriendlies[0] = level.teamleader;
   aFriendlies[1] = level.friendly02;
@@ -3521,20 +3587,23 @@ friendly_shoot_at_crows_drones_stop() {
 dialogue_nag_hostiles_at_crows() {
   level endon("player_killed_enough");
   while(!flag("player_killed_enough")) {
-    if(flag("player_killed_enough"))
+    if(flag("player_killed_enough")) {
       break;
+    }
     //Cpl. Dunn	22	2	Hostiles inside the perimeter! Open fire! Open fire!	
     level.friendly02 dialogue_execute("dcburn_cpd_inperimeter");
     wait(randomfloatrange(8, 14));
 
-    if(flag("player_killed_enough"))
+    if(flag("player_killed_enough")) {
       break;
+    }
     //Cpl. Dunn	22	4	Taking fire! Taking fire! Foot mobiles inside the perimeter! 	
     level.friendly02 dialogue_execute("dcburn_cpd_takingfire");
     wait(randomfloatrange(8, 14));
 
-    if(flag("player_killed_enough"))
+    if(flag("player_killed_enough")) {
       break;
+    }
     //Cpl. Dunn	22	3	Eyes up! Hostiles on our six!!!	
     level.friendly02 dialogue_execute("dcburn_cpd_hostatsix");
     wait(randomfloatrange(8, 14));
@@ -3549,8 +3618,9 @@ AI_sneak_monitor(sFlagToSet) {
   //self waittill_any( "grenade danger", "damage", "gunshot", "death" );
   self waittill_any("damage", "death", "shot_at");
   flag_set(sFlagToSet);
-  if(isDefined(self))
+  if(isDefined(self)) {
     self thread AI_become_alerted();
+  }
 }
 
 AI_player_gunshot_monitor() {
@@ -3566,12 +3636,15 @@ AI_player_gunshot_monitor() {
   wait(.5);
   while(isalive(self)) {
     self waittill("ai_event", eventtype);
-    if((eventtype == "grenade danger") || (eventtype == "damage") || (eventtype == "projectile_impact") || (eventtype == "explode"))
+    if((eventtype == "grenade danger") || (eventtype == "damage") || (eventtype == "projectile_impact") || (eventtype == "explode")) {
       break;
-    if(distancesquared(self.origin, level.player.origin) > distSquared)
+    }
+    if(distancesquared(self.origin, level.player.origin) > distSquared) {
       continue;
-    if((eventtype == "grenade danger") || (eventtype == "damage") || (eventtype == "gunshot") || (eventtype == "bulletwhizby") || (eventtype == "projectile_impact") || (eventtype == "explode"))
+    }
+    if((eventtype == "grenade danger") || (eventtype == "damage") || (eventtype == "gunshot") || (eventtype == "bulletwhizby") || (eventtype == "projectile_impact") || (eventtype == "explode")) {
       break;
+    }
   }
   self notify("shot_at");
 }
@@ -3590,8 +3663,9 @@ evac_site_enemies_fire_live() {
   GRADUALLY MAKE ENEMIES FIRE AT LIVE TARGETS (BUT NOT FOR VET/HARDENED)
   -------------------------*/
   iRampInterval = 4;
-  if((level.gameskill == 2) || (level.gameskill == 3))
+  if((level.gameskill == 2) || (level.gameskill == 3)) {
     iRampInterval = 0.1;
+  }
 
   foreach(guy in level.evacSiteEnemies) {
     if(isalive(guy)) {
@@ -3617,17 +3691,21 @@ crowsnest_nags_snipe() {
 
   while(!flag("obj_commerce_defend_snipe_complete")) {
     //reset nag numbers
-    if(barret_nag_number > barret_nag_number_max)
+    if(barret_nag_number > barret_nag_number_max) {
       barret_nag_number = 0;
-    if(stay_in_nest_nag_number > stay_in_nest_nag_number_max)
+    }
+    if(stay_in_nest_nag_number > stay_in_nest_nag_number_max) {
       stay_in_nest_nag_number = 0;
-    if(barret_shoot_nag_number > barret_shoot_nag_number_max)
+    }
+    if(barret_shoot_nag_number > barret_shoot_nag_number_max) {
       barret_shoot_nag_number = 0;
+    }
 
     nag_wait();
     flag_wait("can_start_crow_nags");
-    if(flag("obj_commerce_defend_snipe_complete"))
+    if(flag("obj_commerce_defend_snipe_complete")) {
       break;
+    }
 
     if((!level.player istouching(volume_crowsnest)) && (flag("can_talk"))) {
       flag_clear("can_talk");
@@ -3696,11 +3774,13 @@ crowsnest_defend_failure() {
   while(!flag("obj_commerce_defend_snipe_complete")) {
     //HUDpercentage setText( get_evac_site_percent_destroyed() );
     percentDestroyed = get_evac_site_percent_destroyed();
-    if(flag("obj_commerce_defend_snipe_complete"))
+    if(flag("obj_commerce_defend_snipe_complete")) {
       break;
+    }
     level waittill_either("evac_vehicle_owned", "obj_commerce_defend_snipe_complete");
-    if(flag("obj_commerce_defend_snipe_complete"))
+    if(flag("obj_commerce_defend_snipe_complete")) {
       break;
+    }
     if(level.evacSiteVehicles.size < 2) {
       thread crowsnest_failure_check();
     }
@@ -3784,21 +3864,26 @@ get_evac_site_percent_destroyed() {
 }
 
 roundDecimalPlaces(value, places, style) {
-  if(!isDefined(style))
+  if(!isDefined(style)) {
     style = "nearest";
+  }
 
   modifier = 1;
-  for(i = 0; i < places; i++)
+  for(i = 0; i < places; i++) {
     modifier *= 10;
+  }
 
   newValue = value * modifier;
 
-  if(style == "up")
+  if(style == "up") {
     roundedValue = ceil(newValue);
-  else if(style == "down")
+  }
+  else if(style == "down") {
     roundedValue = floor(newValue);
-  else
+  }
+  else {
     roundedValue = newvalue + 0.5;
+  }
 
   newvalue = Int(roundedValue);
   newvalue = newvalue / modifier;
@@ -3867,31 +3952,40 @@ vehicles_crowsnest_defend_think() {
   -------------------------*/
   while(isDefined(self)) {
     self waittill("damage", amount, attacker, enemy_org, impact_org, type);
-    if(!isDefined(type))
+    if(!isDefined(type)) {
       continue;
-    if(!isDefined(attacker))
+    }
+    if(!isDefined(attacker)) {
       continue;
+    }
     if((isDefined(attacker.code_classname)) && (attacker.code_classname == "misc_turret")) //don't blow up if using barrett
       continue;
-    if(!isDefined(amount))
+    if(!isDefined(amount)) {
       continue;
-    if(isplayer(attacker))
+    }
+    if(isplayer(attacker)) {
       continue;
-    if((isDefined(attacker.team)) && (attacker.team != "axis"))
+    }
+    if((isDefined(attacker.team)) && (attacker.team != "axis")) {
       continue;
-    if((type == "MOD_PROJECTILE") && (amount > 999))
+    }
+    if((type == "MOD_PROJECTILE") && (amount > 999)) {
       break;
-    if((type == "MOD_PROJECTILE_SPLASH") && (amount == 4000))
+    }
+    if((type == "MOD_PROJECTILE_SPLASH") && (amount == 4000)) {
       break;
+    }
   }
 
   /*-----------------------
   REMOVE FROM POOL OF TARGETS/VEHICLES
   -------------------------*/
-  if(is_in_array(level.evacSiteVehicles, self))
+  if(is_in_array(level.evacSiteVehicles, self)) {
     level.evacSiteVehicles = array_remove(level.evacSiteVehicles, self);
-  if(is_in_array(level.targetsScriptedJavStinger, self))
+  }
+  if(is_in_array(level.targetsScriptedJavStinger, self)) {
     level.targetsScriptedJavStinger = array_remove(level.targetsScriptedJavStinger, self);
+  }
   self.dead = true;
   level notify("evac_vehicle_owned");
 
@@ -3942,18 +4036,24 @@ vehicles_cheap_waittill_destroyed_think() {
   -------------------------*/
   while(isDefined(self)) {
     self waittill("damage", amount, attacker, enemy_org, impact_org, type);
-    if(!isDefined(type))
+    if(!isDefined(type)) {
       continue;
-    if(!isDefined(attacker))
+    }
+    if(!isDefined(attacker)) {
       continue;
-    if(!isDefined(amount))
+    }
+    if(!isDefined(amount)) {
       continue;
-    if(isplayer(attacker))
+    }
+    if(isplayer(attacker)) {
       continue;
-    if((type == "MOD_PROJECTILE") && (amount > 999))
+    }
+    if((type == "MOD_PROJECTILE") && (amount > 999)) {
       break;
-    if((type == "MOD_PROJECTILE_SPLASH") && (amount == 4000))
+    }
+    if((type == "MOD_PROJECTILE_SPLASH") && (amount == 4000)) {
       break;
+    }
   }
 
   /*-----------------------
@@ -4028,17 +4128,20 @@ javelin_hints() {
 
   wait(5);
 
-  if(flag("player_has_killed_at_least_one_javelin_target"))
+  if(flag("player_has_killed_at_least_one_javelin_target")) {
     return;
+  }
 
   while(!flag("player_has_killed_at_least_one_javelin_target")) {
     wait(20);
 
-    if(player_has_javelin())
+    if(player_has_javelin()) {
       wait(10);
+    }
 
-    if(flag("player_has_killed_at_least_one_javelin_target"))
+    if(flag("player_has_killed_at_least_one_javelin_target")) {
       return;
+    }
 
     if(!player_has_javelin()) {
       level.player thread display_hint("javelin_pickup"); //it will endon this thread if not threaded
@@ -4051,32 +4154,38 @@ javelin_hints() {
 }
 
 should_break_javelin_fire_hint() {
-  if(flag("player_has_killed_at_least_one_javelin_target"))
+  if(flag("player_has_killed_at_least_one_javelin_target")) {
     return true;
-  if(!player_has_javelin())
+  }
+  if(!player_has_javelin()) {
     return true;
-  if(!javelin_equipped())
+  }
+  if(!javelin_equipped()) {
     return true;
+  }
   return maps\_javelin::PlayerJavelinAds();
 }
 
 should_break_javelin_switch_hint() {
-  if(flag("player_has_killed_at_least_one_javelin_target"))
+  if(flag("player_has_killed_at_least_one_javelin_target")) {
     return true;
+  }
   return javelin_equipped();
 }
 
 should_break_javelin_pickup_hint() {
-  if(flag("player_has_killed_at_least_one_javelin_target"))
+  if(flag("player_has_killed_at_least_one_javelin_target")) {
     return true;
+  }
 
   assert(isplayer(self));
 
   //if( gettime() > level.heartbeat_timeout )
   //return true;
 
-  if(javelin_equipped())
+  if(javelin_equipped()) {
     return true;
+  }
 
   weapons = level.player getweaponslistprimaries();
   has_javelin = false;
@@ -4086,21 +4195,25 @@ should_break_javelin_pickup_hint() {
 
 player_has_javelin() {
   weapons = level.player GetWeaponsListAll();
-  if(!isDefined(weapons))
+  if(!isDefined(weapons)) {
     return false;
+  }
   foreach(weapon in weapons) {
-    if(IsSubStr(weapon, "javelin"))
+    if(IsSubStr(weapon, "javelin")) {
       return true;
+    }
   }
   return false;
 }
 
 javelin_equipped() {
   weapon = level.player getCurrentWeapon();
-  if(IsSubStr(weapon, "javelin"))
+  if(IsSubStr(weapon, "javelin")) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 music_crowsnest_armor() {
@@ -4133,8 +4246,9 @@ backup_enemies_for_javelin_sequence() {
 }
 
 player_invulnerable_till_one_javelin_target_killed() {
-  if(level.gameskill > 1)
+  if(level.gameskill > 1) {
     return;
+  }
 
   level.player enableinvulnerability();
   flag_wait("player_has_killed_at_least_one_javelin_target");
@@ -4198,8 +4312,9 @@ javelin_weapon_switch() {
   /*-----------------------
   SWITCH OUT JAVELIN, GIVE EOTECH IF PLAYER DOES NOT HAVE
   -------------------------*/
-  if(!player_has_javelin())
+  if(!player_has_javelin()) {
     return;
+  }
 
   hasGren = false;
   tookWeapon = false;
@@ -4233,8 +4348,9 @@ javelin_weapon_switch() {
     level.player giveWeapon("m4m203_eotech");
   }
 
-  if(tookMainWeapon)
+  if(tookMainWeapon) {
     level.player switchToWeapon("m4m203_eotech");
+  }
 }
 
 dialogue_crow_armor() {
@@ -4271,17 +4387,21 @@ crowsnest_nags_armor() {
 
   while(!flag("obj_commerce_defend_javelin_complete")) {
     //reset nag numbers
-    if(rocket_nag_number > rocket_nag_number_max)
+    if(rocket_nag_number > rocket_nag_number_max) {
       rocket_nag_number = 0;
-    if(stay_in_nest_nag_number > stay_in_nest_nag_number_max)
+    }
+    if(stay_in_nest_nag_number > stay_in_nest_nag_number_max) {
       stay_in_nest_nag_number = 0;
-    if(rocket_shoot_nag_number > rocket_shoot_nag_number_max)
+    }
+    if(rocket_shoot_nag_number > rocket_shoot_nag_number_max) {
       rocket_shoot_nag_number = 0;
+    }
 
     nag_wait();
 
-    if(flag("obj_commerce_defend_javelin_complete"))
+    if(flag("obj_commerce_defend_javelin_complete")) {
       break;
+    }
 
     if((!level.player istouching(volume_crowsnest)) && (flag("can_talk"))) {
       flag_clear("can_talk");
@@ -4331,30 +4451,38 @@ monument_target_think() {
   flag_set("monument_dummy_target_setup");
   while(!flag("obj_commerce_defend_javelin_complete")) {
     self waittill("damage", amount, attacker, enemy_org, impact_org, type);
-    if(!isDefined(attacker))
+    if(!isDefined(attacker)) {
       continue;
-    if(!isDefined(amount))
+    }
+    if(!isDefined(amount)) {
       continue;
-    if(isplayer(attacker))
+    }
+    if(isplayer(attacker)) {
       continue;
-    if((isDefined(attacker.team)) && (attacker.team != "axis"))
+    }
+    if((isDefined(attacker.team)) && (attacker.team != "axis")) {
       continue;
-    if(!isDefined(type))
+    }
+    if(!isDefined(type)) {
       continue;
+    }
     if(type == "MOD_PROJECTILE") {
       self reduce_monument_hitpoints(100);
-      if(self.hitpoints < 1)
+      if(self.hitpoints < 1) {
         break;
+      }
     }
 
     if(type == "MOD_PROJECTILE_SPLASH") {
       self reduce_monument_hitpoints(50);
-      if(self.hitpoints < 1)
+      if(self.hitpoints < 1) {
         break;
+      }
     }
   }
-  if(!flag("obj_commerce_defend_javelin_complete"))
+  if(!flag("obj_commerce_defend_javelin_complete")) {
     thread crowsnest_mission_fail_armor();
+  }
 }
 
 reduce_monument_hitpoints(hitpoints) {
@@ -4364,8 +4492,9 @@ reduce_monument_hitpoints(hitpoints) {
   fPercentDestroyed = 100 - fPercentRemaining;
   level.evacSitePercentDestroyed = fPercentDestroyed;
   level notify("monument_dummy_hit");
-  if(getdvar("dc_debug") == "1")
+  if(getdvar("dc_debug") == "1") {
     println("evac damage = " + level.evacSitePercentDestroyed);
+  }
 }
 
 evac_site_damage_nags_armor() {
@@ -4443,8 +4572,9 @@ heli_crowsnest_respawn() {
 
 heli_pathnodes_think(heli) {
   heli endon("death");
-  if(!isDefined(self.script_noteworthy))
+  if(!isDefined(self.script_noteworthy)) {
     return;
+  }
   eTarget = undefined;
   bGunTarget = undefined;
   switch (self.script_noteworthy) {
@@ -4464,10 +4594,12 @@ heli_pathnodes_think(heli) {
   }
   while(isDefined(heli)) {
     self waittill("trigger");
-    if(!isDefined(eTarget))
+    if(!isDefined(eTarget)) {
       heli clearLookAtEnt();
-    else
+    }
+    else {
       heli SetLookAtEnt(eTarget);
+    }
     if(isDefined(bGunTarget)) {
       heli thread vehicle_heli_fire_turret(bGunTarget);
     } else
@@ -4589,14 +4721,16 @@ AAA_sequence_get_to_roof() {
   -------------------------*/
   flag_wait("obj_rooftop_given");
 
-  if((isDefined(level.crowsArmor)) && (level.crowsArmor.size > 0))
+  if((isDefined(level.crowsArmor)) && (level.crowsArmor.size > 0)) {
     array_thread(level.crowsArmor, ::crows_armor_cleanup);
+  }
 
   //thread friendly_speed_adjustment_on();
   friendlies = getaiarray("allies");
   array_thread(friendlies, ::cqb_walk, "off");
-  foreach(guy in friendlies)
+  foreach(guy in friendlies) {
   guy.neverEnableCQB = true;
+  }
 
   //wait( 2 );
 
@@ -4618,8 +4752,9 @@ AAA_sequence_get_to_roof() {
 
   setsaveddvar("ai_friendlyFireBlockDuration", 0); //ai won't stop in front of player line of fire
   foreach(guy in level.squad) {
-    if(!isalive(guy))
+    if(!isalive(guy)) {
       continue;
+    }
     //guy.fixednode = true;
     //guy.ignoreall = true;
     guy.a.disablePain = true;
@@ -4650,15 +4785,17 @@ AAA_sequence_get_to_roof() {
   /*-----------------------
   MAIN SQUAD HEADS TO THE ROOF IF PLAYER NOT ON HIS WAY
   -------------------------*/
-  if(!flag("player_roof_stairs_00"))
+  if(!flag("player_roof_stairs_00")) {
     thread dummy_trigger("dummy_colornodes_to_roof");
+  }
 
   /*-----------------------
   CLEANUP
   -------------------------*/
   flag_wait("player_roof_stairs_01");
-  if((isDefined(level.evacSiteEnemies)) && (level.evacSiteEnemies.size > 0))
+  if((isDefined(level.evacSiteEnemies)) && (level.evacSiteEnemies.size > 0)) {
     array_thread(level.evacSiteEnemies, ::AI_delete);
+  }
   thread drone_flood_stop("hostiles_drones_comm_south");
   thread vehicle_delete_all();
   thread AI_drone_cleanup("all", 1024, true);
@@ -4689,8 +4826,9 @@ AAA_sequence_get_to_roof() {
 
   flag_wait("player_at_commerce_rooftop");
 
-  if(isDefined(eHeli))
+  if(isDefined(eHeli)) {
     eHeli delete();
+  }
 
   flag_set("obj_rooftop_complete");
 
@@ -4707,15 +4845,17 @@ heli_balcony_think() {
   flag_wait("balcony_heli_raised_up");
   self ClearLookAtEnt();
   flag_wait("player_at_commerce_rooftop");
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 crows_armor_cleanup() {
   self endon("death");
   flag_wait("player_roof_stairs_01");
-  if(isDefined(self))
+  if(isDefined(self)) {
     self vehicle_delete();
+  }
 }
 
 AI_roof_escape_redshirts_think() {
@@ -4737,8 +4877,9 @@ AI_roof_escape_redshirts_think() {
 dummy_trigger(dummyName) {
   dummy = getent(dummyName, "targetname");
   trigger = getEnt(dummy.script_LinkTo, "script_linkname");
-  if(isDefined(trigger))
+  if(isDefined(trigger)) {
     trigger notify("trigger", level.player);
+  }
 }
 
 roof_breach_monitor(eVoloume) {
@@ -4779,36 +4920,41 @@ dialogue_get_to_roof() {
     level.teamleader dialogue_execute("dcburn_mcy_rvwithseals");
 
     wait(randomfloatrange(8, 12));
-    if(flag("roof_breach_complete"))
+    if(flag("roof_breach_complete")) {
       break;
+    }
 
     //Sgt. Macey	26	3	Keep moving! This sector's gonna be crawlin' with hostiles! We gotta go, NOW!!
     level.teamleader dialogue_execute("dcburn_mcy_crawlin");
 
     wait(randomfloatrange(8, 12));
-    if(flag("roof_breach_complete"))
+    if(flag("roof_breach_complete")) {
       break;
+    }
 
     //Sgt. Macey	Ramirez! Let's move out!	
     level.teamleader dialogue_execute("dcburn_mcy_letsmoveout");
 
     wait(randomfloatrange(8, 12));
-    if(flag("roof_breach_complete"))
+    if(flag("roof_breach_complete")) {
       break;
+    }
 
     //Sgt. Macey	Ramirez! Move your ass! We've gotta get to the roof, NOW!	
     level.teamleader dialogue_execute("dcburn_mcy_gettoroofnow");
 
     wait(randomfloatrange(8, 12));
-    if(flag("roof_breach_complete"))
+    if(flag("roof_breach_complete")) {
       break;
+    }
 
     //Sgt. Macey	Ramirez, let's go! Hostiles are overrunning this position!	
     level.teamleader dialogue_execute("dcburn_mcy_overrunningpos");
 
     wait(randomfloatrange(8, 12));
-    if(flag("roof_breach_complete"))
+    if(flag("roof_breach_complete")) {
       break;
+    }
 
   }
 
@@ -4824,22 +4970,25 @@ dialogue_get_to_roof() {
     level.teamleader dialogue_execute("dcburn_mcy_outnumbered");
 
     wait(randomfloatrange(8, 12));
-    if(flag("player_roof_stairs_00"))
+    if(flag("player_roof_stairs_00")) {
       break;
+    }
 
     //Sgt. Macey	Ramirez! Up the stairs! Let's go!	
     level.teamleader dialogue_execute("dcburn_mcy_upthestairsgo");
 
     wait(randomfloatrange(8, 12));
-    if(flag("player_roof_stairs_00"))
+    if(flag("player_roof_stairs_00")) {
       break;
+    }
 
     //Sgt. Macey	Ramirez! Get up the stairs to the roof ASAP…our evac choppers aren't going to wait all day!	
     level.teamleader dialogue_execute("dcburn_mcy_waitallday");
 
     wait(randomfloatrange(8, 12));
-    if(flag("player_roof_stairs_00"))
+    if(flag("player_roof_stairs_00")) {
       break;
+    }
 
     //Sgt. Macey	We're getting overrun! Everyone to the roof! Now!	
     level.teamleader dialogue_execute("dcburn_mcy_gettingoverrun");
@@ -4871,13 +5020,15 @@ dialogue_get_to_roof() {
     //Sgt. Foley There's no time! Keep moving!
     level.teamleader dialogue_execute("dcburn_mcy_notime");
 
-    if(flag("player_headed_to_roof"))
+    if(flag("player_headed_to_roof")) {
       break;
+    }
 
     wait(2);
 
-    if(flag("player_headed_to_roof"))
+    if(flag("player_headed_to_roof")) {
       break;
+    }
 
     //Sgt. Foley We have to keep moving! Go! Go! Go!	
     level.teamleader dialogue_execute("dcburn_mcy_keepmoving");
@@ -4895,51 +5046,59 @@ dialogue_get_to_roof() {
   while(!flag("player_at_commerce_rooftop")) {
     wait(1);
 
-    if(flag("player_at_commerce_rooftop"))
+    if(flag("player_at_commerce_rooftop")) {
       break;
+    }
 
     wait(1);
 
-    if(flag("player_at_commerce_rooftop"))
+    if(flag("player_at_commerce_rooftop")) {
       break;
+    }
 
     //Sgt. Foley We're getting overrun! Move! Move! Move!	
     level.teamleader dialogue_execute("dcburn_mcy_overrun");
 
     wait(1);
 
-    if(flag("player_at_commerce_rooftop"))
+    if(flag("player_at_commerce_rooftop")) {
       break;
+    }
 
     wait(1);
 
-    if(flag("player_at_commerce_rooftop"))
+    if(flag("player_at_commerce_rooftop")) {
       break;
+    }
     //Sgt. Macey: Move up! Go! Go!
     level.teamleader dialogue_execute("dcburn_mcy_lobby_move_nag_00");
 
     wait(1);
 
-    if(flag("player_at_commerce_rooftop"))
+    if(flag("player_at_commerce_rooftop")) {
       break;
+    }
 
     wait(1);
 
-    if(flag("player_at_commerce_rooftop"))
+    if(flag("player_at_commerce_rooftop")) {
       break;
+    }
 
     //Sgt. Foley We're out of time! Go!	
     level.teamleader dialogue_execute("dcburn_mcy_outoftimego");
 
     wait(1);
 
-    if(flag("player_at_commerce_rooftop"))
+    if(flag("player_at_commerce_rooftop")) {
       break;
+    }
 
     wait(1);
 
-    if(flag("player_at_commerce_rooftop"))
+    if(flag("player_at_commerce_rooftop")) {
       break;
+    }
 
     //Sgt. Macey	26	5	We're outnumbered - we need to get to the roof ASAP!!!! Go! Go! Go!	
     level.teamleader dialogue_execute("dcburn_mcy_outnumbered");
@@ -4986,8 +5145,9 @@ dialogue_roof() {
   level.player SetActionSlot(1, "");
   level.player NightVisionForceOff();
 
-  while(!flag("can_talk"))
+  while(!flag("can_talk")) {
     wait(.5);
+  }
 
   //Sgt. Macey Overlord, we've linked up with the SEALs on the rooftop and are heading out. Interrogative - has the bunker been evacuated, over?	
   radio_dialogue("dcburn_mcy_bunkerevac");
@@ -5092,93 +5252,107 @@ dialogue_nag_minigun() {
     level.teamleader dialogue_execute("dcburn_mcy_moveminigun");
     flag_set("can_talk");
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
     wait(30);
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
     flag_clear("can_talk");
     //Sgt. Macey Ramirez, get on the minigun!!!	
     level.teamleader dialogue_execute("dcburn_mcy_getonminigun");
     flag_set("can_talk");
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
     wait(30);
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
     flag_clear("can_talk");
     //Sgt. Macey	Ramirez!!! Get in the chopper!!!	
     level.teamleader dialogue_execute("dcburn_mcy_getinchopper");
     flag_set("can_talk");
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
     wait(30);
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
     flag_clear("can_talk");
     //Sgt. Macey	Ramirez!!! We are way outnumbered! Get on board!! Move!!!	
     level.teamleader dialogue_execute("dcburn_mcy_wayoutnumbered");
     flag_set("can_talk");
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
     wait(30);
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
     flag_clear("can_talk");
     //Sgt. Macey	Ramirez!! Forget about it! We got a minigun on board! Get on the helicopter! Let's go!!!	
     level.teamleader dialogue_execute("dcburn_mcy_forgetaboutit");
     flag_set("can_talk");
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
     wait(30);
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
     flag_clear("can_talk");
     //Sgt. Macey	Ramirez!!! You're polishing brass on the Titanic! Get on the minigun, let's go!!!	
     level.teamleader dialogue_execute("dcburn_mcy_brassontitanic");
     flag_set("can_talk");
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
     wait(30);
 
-    if(flag("player_getting_on_minigun"))
+    if(flag("player_getting_on_minigun")) {
       break;
+    }
 
   }
 }
 
 AI_awesome_accuracy_untill_flag(sFlag) {
   self endon("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self.old_baseaccuracy = self.baseaccuracy;
   self.baseaccuracy = 1000;
 
   flag_wait(sFlag);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.baseaccuracy = self.old_baseaccuracy;
+  }
 }
 
 AI_roof_defenders_think() {
@@ -5218,12 +5392,14 @@ AAA_sequence_heli_ride() {
   -------------------------*/
   spawner = getent("rooftop_defender", "targetname");
   defender = spawner spawn_ai();
-  if(isDefined(defender))
+  if(isDefined(defender)) {
     defender thread AI_roof_defenders_think();
+  }
 
   turret2 = getent("turret2", "targetname");
-  if(isDefined(turret2))
+  if(isDefined(turret2)) {
     turret2 delete();
+  }
 
   //thread autosave_by_name( "headed_to_roof" );
   triggersEnable("colornodes_roof", "script_noteworthy", true);
@@ -5281,8 +5457,9 @@ AAA_sequence_heli_ride() {
   balackHawkOrigin = level.blackhawk gettagorigin("TAG_ORIGIN");
   while(true) {
     level.blackhawk.trigger waittill("trigger");
-    if(within_fov(level.player getEye(), level.player getPlayerAngles(), balackHawkOrigin, level.cosine["90"]))
+    if(within_fov(level.player getEye(), level.player getPlayerAngles(), balackHawkOrigin, level.cosine["90"])) {
       break;
+    }
 
   }
 
@@ -5500,8 +5677,9 @@ AAA_sequence_heli_ride() {
   /*-----------------------
   WW2 HELI LIFT OFF
   -------------------------*/
-  if(isDefined(ww2_heli))
+  if(isDefined(ww2_heli)) {
     ww2_heli thread notify_delay("liftoff", 3);
+  }
 
   /*-----------------------
   BTR80s
@@ -5552,8 +5730,9 @@ sam_launch(iNum, sourceEnt, destEnt) {
     iNum--;
   }
 
-  if(isDefined(targetOrg))
+  if(isDefined(targetOrg)) {
     targetOrg delete();
+  }
 }
 
 delete_squad() {
@@ -5642,13 +5821,16 @@ try_to_teleport_friendlies_to_roof(eNode) {
   fDistSquared = 300 * 300;
   while(isDefined(self)) {
     wait(.1);
-    if(distancesquared(level.player.origin, self.origin) < fDistSquared)
+    if(distancesquared(level.player.origin, self.origin) < fDistSquared) {
       continue;
+    }
     playerEye = level.player getEye();
-    if(within_fov(playerEye, level.player.angles, self.origin + (0, 0, 32), level.cosine["90"]))
+    if(within_fov(playerEye, level.player.angles, self.origin + (0, 0, 32), level.cosine["90"])) {
       continue;
-    else
+    }
+    else {
       break;
+    }
   }
   self forceTeleport(eNode.origin, eNode.angles);
   self notify("end_melee");
@@ -5826,8 +6008,9 @@ littlebird_wingman_02_think() {
   /*-----------------------
   MAKE RIGHT RIDERS GET ON WHEN PLAYER ARRIVES
   -------------------------*/
-  while(level.littlebird_wingman_02.riders.size < 6)
+  while(level.littlebird_wingman_02.riders.size < 6) {
     wait(.1);
+  }
 
   thread flag_set("roof_littlebird_lifted_off");
   /*-----------------------
@@ -5964,12 +6147,15 @@ AAA_sequence_heli_ride2() {
   //level.player enableinvulnerability();
   level.blackhawk Vehicle_SetSpeed(70);
 
-  if(isDefined(level.littlebird_wingman_armed))
+  if(isDefined(level.littlebird_wingman_armed)) {
     level.littlebird_wingman_armed vehicle_delete();
-  if(isDefined(level.littlebird_wingman_01))
+  }
+  if(isDefined(level.littlebird_wingman_01)) {
     level.littlebird_wingman_01 vehicle_delete();
-  if(isDefined(level.littlebird_wingman_02))
+  }
+  if(isDefined(level.littlebird_wingman_02)) {
     level.littlebird_wingman_02 vehicle_delete();
+  }
 
   /*-----------------------
   CLEANUP AI
@@ -6211,10 +6397,12 @@ AAA_sequence_heli_ride2() {
   level.player SetActionSlot(1, "nightvision");
 
   //reset hunted spotlight to dynamic version
-  if(GetDvarInt("sm_enable") && GetDvar("r_zfeather") != "0")
+  if(GetDvarInt("sm_enable") && GetDvar("r_zfeather") != "0") {
     level._effect["_attack_heli_spotlight"] = LoadFX("misc/hunted_spotlight_model_dim");
-  else
+  }
+  else {
     level._effect["_attack_heli_spotlight"] = LoadFX("misc/spotlight_large");
+  }
 }
 
 player_heli_damaged_think() {
@@ -6316,8 +6504,9 @@ player_spinout() {
 
 AI_ambush_behavior() {
   // drone?
-  if(!issentient(self))
+  if(!issentient(self)) {
     return;
+  }
 
   self.combatMode = "ambush";
 }
@@ -6442,10 +6631,12 @@ obj_commerce_defend_snipe_enemies_think() {
   level.snipeEnemies = (level.snipeEnemies - 1);
   //Objective_String( 3, &"DCBURNING_OBJ_COMMERCE_DEFEND_SNIPE", level.evacSiteEnemies.size );
 
-  if(level.snipeEnemies < 3)
+  if(level.snipeEnemies < 3) {
     flag_set("only_2_sniper_enemies_remaining");
-  if(level.snipeEnemies == 0)
+  }
+  if(level.snipeEnemies == 0) {
     flag_set("obj_commerce_defend_snipe_complete");
+  }
 
   //	if( level.evacSiteEnemies.size < 3 )
   //		flag_set( "only_2_sniper_enemies_remaining" );
@@ -6515,19 +6706,23 @@ obj_commerce_defend_javelin_enemies_think() {
   if((isDefined(attacker)) && (isplayer(attacker))) {
     level.lasttimePlayerKilledEnemy = getTime();
 
-    if(!flag("player_has_killed_at_least_one_javelin_target"))
+    if(!flag("player_has_killed_at_least_one_javelin_target")) {
       flag_set("player_has_killed_at_least_one_javelin_target");
+    }
 
     level.requiredJavTargets = level.requiredJavTargets - 1;
 
     //Objective_String( 4, &"DCBURNING_OBJ_COMMERCE_DEFEND_JAVELIN", level.requiredJavTargets );
 
-    if(level.requiredJavTargets < 3)
+    if(level.requiredJavTargets < 3) {
       flag_set("only_2_javelin_enemies_remaining");
-    if(level.requiredJavTargets < 2)
+    }
+    if(level.requiredJavTargets < 2) {
       flag_set("only_1_javelin_enemies_remaining");
-    if(level.requiredJavTargets == 0)
+    }
+    if(level.requiredJavTargets == 0) {
       flag_set("obj_commerce_defend_javelin_complete");
+    }
   }
   level.crowsArmor = array_remove(level.crowsArmor, self);
   level.crowsArmor = remove_dead_from_array(level.crowsArmor);
@@ -6625,11 +6820,13 @@ AA_utility() {
 }
 
 AI_think(guy) {
-  if(guy.team == "axis")
+  if(guy.team == "axis") {
     guy thread AI_axis_think();
+  }
 
-  if(guy.team == "allies")
+  if(guy.team == "allies") {
     guy thread AI_allies_think();
+  }
 }
 
 AI_allies_think() {
@@ -6671,10 +6868,12 @@ AI_blood_spatter_when_sniped() {
     self waittill("damage", amount, attacker, direction_vec, impact_org);
 
     if((isDefined(attacker)) && (isDefined(attacker.classname) && (attacker.classname == "misc_turret"))) {
-      if(!isDefined(impact_org))
+      if(!isDefined(impact_org)) {
         break;
-      if(!isDefined(direction_vec))
+      }
+      if(!isDefined(direction_vec)) {
         direction_vec = (0, 0, 1);
+      }
 
       //playFX( getfx( "headshot" ), impact_org, direction_vec );
       playFX(getfx("thermal_body_gib"), impact_org);
@@ -6687,8 +6886,9 @@ AI_blood_spatter_when_sniped() {
 
 ai_no_suppress_think() {
   self endon("death");
-  if(flag("lav_is_suppressing"))
+  if(flag("lav_is_suppressing")) {
     return;
+  }
   self.ignoresuppression = true;
   self.aggressivemode = true; //dont linger at cover when you cant see your enemy
 }
@@ -6696,8 +6896,9 @@ ai_no_suppress_think() {
 AI_redshirt_think() {
   self endon("death");
 
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self thread try_to_magic_bullet_shield(true);
   self.baseaccuracy = .01; //lousy shot
   self.attackeraccuracy = 10; //makes any AI attacking him have super high accuracy
@@ -6718,25 +6919,29 @@ AI_redshirt_think() {
     }
 
   }
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     self stop_magic_bullet_shield();
+  }
   self kill(impact_org, attacker);
 }
 
 try_to_magic_bullet_shield(no_death_detection) {
   self endon("death");
   //make sure he's not in the process of melee
-  while(isDefined(self.melee))
+  while(isDefined(self.melee)) {
     wait(.1);
+  }
   self thread magic_bullet_shield(no_death_detection);
 }
 
 AI_ignored_and_oblivious_on() {
   self endon("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if((isDefined(self.code_classname)) && (self.code_classname == "script_model"))
+  }
+  if((isDefined(self.code_classname)) && (self.code_classname == "script_model")) {
     return;
+  }
   self setFlashbangImmunity(true);
   self.ignoreme = true;
   self.ignoreall = true;
@@ -6745,10 +6950,12 @@ AI_ignored_and_oblivious_on() {
 }
 
 AI_ignored_and_oblivious_off() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if((isDefined(self.code_classname)) && (self.code_classname == "script_model"))
+  }
+  if((isDefined(self.code_classname)) && (self.code_classname == "script_model")) {
     return;
+  }
   self endon("death");
   self setFlashbangImmunity(false);
   self.ignoreme = false;
@@ -6758,14 +6965,16 @@ AI_ignored_and_oblivious_off() {
 }
 
 AI_fixednode_off() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self.fixednode = false;
 }
 
 AI_fixednode_on() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self.fixednode = true;
 }
 AI_commerce_flare_guys_think() {
@@ -6847,8 +7056,9 @@ AI_jav_sting_spot_think() {
   /*-----------------------
   ADD SCRIPTED TARGETS TO THE POOL FOR OTHERS TO USE IF THEY RUN OUT
   -------------------------*/
-  if(self.targetsScripted.size > 0)
+  if(self.targetsScripted.size > 0) {
     level.targetsScriptedJavStinger = array_merge(level.targetsScriptedJavStinger, self.targetsScripted);
+  }
 
   /*-----------------------
   SETUP ANIMS FOR THIS GUY AND THREAD OFF
@@ -6942,10 +7152,12 @@ AI_stinger_think() {
 AI_jav_sting_spot_death() {
   self waittill("death");
   self endon("weapon_detached");
-  if((isDefined(self.javelin)) && (!isDefined(self.dk)))
+  if((isDefined(self.javelin)) && (!isDefined(self.dk))) {
     self waittill_match_or_timeout("deathanim", "end", 4);
-  if(!isDefined(self))
+  }
+  if(!isDefined(self)) {
     return;
+  }
   if(isDefined(self.stinger)) {
     if(isDefined(self)) {
       self detach("weapon_stinger", "TAG_INHAND");
@@ -6965,8 +7177,9 @@ AI_javelin_think() {
   self thread AI_jav_sting_spot_death();
   self endon("alerted");
   javelin_death_nodes = getnodearray("javelin_death_node", "targetname");
-  if(!isDefined(self.firenodes))
+  if(!isDefined(self.firenodes)) {
     self.reference anim_generic_first_frame(self, self.sAnimIdleStart);
+  }
   eTarget = undefined;
   newMissile = undefined;
   self attach("weapon_javelin_sp", "TAG_INHAND", 1);
@@ -6978,8 +7191,9 @@ AI_javelin_think() {
   while(isalive(self)) {
     if(isDefined(self.firenodes)) {
       self.deathanim = undefined;
-      if(iFireNodeCounter + 1 > self.firenodes.size)
+      if(iFireNodeCounter + 1 > self.firenodes.size) {
         iFireNodeCounter = 0;
+      }
       self.goalradius = 16;
 
       //retreat and delete, if objective completed
@@ -7073,19 +7287,22 @@ AI_spotter_think() {
 }
 
 AI_jav_sting_spot_react() {
-  if((isDefined(self.team)) && (self.team == "allies"))
+  if((isDefined(self.team)) && (self.team == "allies")) {
     return;
+  }
   self endon("death");
   self waittill("alerted");
   self.goalradius = self.old_goalradius;
 
   //get stinger reaction anim depending on pose
   if(isDefined(self.stinger)) {
-    if((isDefined(self.a.pose)) && (self.a.pose == "crouch"))
+    if((isDefined(self.a.pose)) && (self.a.pose == "crouch")) {
       self.sAnimReact = "stinger_react_crouch";
+    }
   }
-  if(isDefined(self.reference))
+  if(isDefined(self.reference)) {
     self.reference notify("stop_idle");
+  }
   self notify("stop_idle");
   self anim_stopanimscripted();
   anim_generic(self, self.sAnimReact);
@@ -7115,11 +7332,13 @@ AI_become_alerted() {
 AI_waittill_damaged_and_set_flag_think() {
   self endon("death");
   level endon(self.script_flag);
-  if(!flag_exist(self.script_flag))
+  if(!flag_exist(self.script_flag)) {
     flag_init(self.script_flag);
+  }
   while(isalive(self)) {
-    if(flag(self.script_flag))
+    if(flag(self.script_flag)) {
       break;
+    }
     self waittill("damage");
     if(!flag(self.script_flag)) {
       flag_set(self.script_flag);
@@ -7171,8 +7390,9 @@ AI_drone_think() {
     self.nocorpsedelete = true;
   }
 
-  if(isDefined(self.nocorpsedelete))
+  if(isDefined(self.nocorpsedelete)) {
     self thread AI_drone_corpse_delete();
+  }
 
   if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "ai_ambient")) {
     self.dontDoNotetracks = true; //allows using of ai _anim functons without getting errors
@@ -7199,8 +7419,9 @@ AI_drone_think() {
 }
 
 AI_drone_corpse_delete() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
 
   self thread maps\_drone::drone_drop_real_weapon_on_death();
   self waittill("death");
@@ -7208,13 +7429,15 @@ AI_drone_corpse_delete() {
   wait(10);
 
   while(isDefined(self)) {
-    if(!within_fov(level.player getEye(), level.player getPlayerAngles(), self.origin, level.cosine["90"]))
+    if(!within_fov(level.player getEye(), level.player getPlayerAngles(), self.origin, level.cosine["90"])) {
       break;
+    }
     wait(5);
   }
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 AI_drone_warrior_think() {
@@ -7241,8 +7464,9 @@ AI_drone_warrior_fodder_think() {
 AI_drone_headshot_death(trigger) {
   self endon("death");
 
-  if(isDefined(trigger))
+  if(isDefined(trigger)) {
     trigger waittill("trigger");
+  }
 
   origin = random(level.sniperOrgs).origin;
 
@@ -7255,23 +7479,27 @@ AI_drone_headshot_death(trigger) {
   //magicbullet( "m14_scoped", origin, headOrigin );
   //bullettracer( origin, headOrigin, true );
   self notify("stop_drone_fighting");
-  if(cointoss())
+  if(cointoss()) {
     thread play_sound_in_space("generic_death_american_1", self.origin);
+  }
   self kill();
 }
 
 AI_drone_mortar_death(trigger) {
   self endon("death");
 
-  if(isDefined(trigger))
+  if(isDefined(trigger)) {
     trigger waittill("trigger");
+  }
 
-  if(!level.onHeli)
+  if(!level.onHeli) {
     play_sound_in_space("mortar_incoming", self.origin);
+  }
   thread ambient_mortar_explosion(self.origin);
   self notify("stop_drone_fighting");
-  if(cointoss())
+  if(cointoss()) {
     thread play_sound_in_space("generic_death_american_1", self.origin);
+  }
 
   //Pick a death anim....either the mortar-specific ones or just the default deathanim
   if(!isDefined(self.animset)) {
@@ -7283,8 +7511,9 @@ AI_drone_mortar_death(trigger) {
   }
 
   if(isDefined(self.deathanim)) {
-    if(cointoss())
+    if(cointoss()) {
       sAnim = self.deathanim;
+    }
   }
 
   self.deathanim = sAnim;
@@ -7294,13 +7523,15 @@ AI_drone_mortar_death(trigger) {
 AI_ragdoll(bIsDrone) {
   self waittill("death", attacker, cause);
 
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return;
+  }
 
   if((isDefined(attacker.targetname)) && (attacker.targetname == "heli_player") && (flag("player_on_minigun"))) {
     self.skipDeathAnim = true;
-    if((isDefined(bIsDrone)) && (bIsDrone == true))
+    if((isDefined(bIsDrone)) && (bIsDrone == true)) {
       arcadeMode_kill(self.origin, "explosive", 50);
+    }
   }
 }
 
@@ -7418,28 +7649,34 @@ lights() {
   array_thread(fires, ::flicker_fire);
 
   flares = getEntArray("flickerlight1", "targetname");
-  foreach(flare in flares)
+  foreach(flare in flares) {
   flare thread flareFlicker();
+  }
 
   fluorescents = getEntArray("fluorescentFlicker", "targetname");
-  foreach(fluorescent in fluorescents)
+  foreach(fluorescent in fluorescents) {
   fluorescent thread fluorescentFlicker();
+  }
 
   fluorescents = getEntArray("fluorescentFlickerBig", "targetname");
-  foreach(fluorescent in fluorescents)
+  foreach(fluorescent in fluorescents) {
   fluorescent thread fluorescentFlickerBig();
+  }
 
   strobes = getEntArray("strobe1", "targetname");
-  foreach(strobe in strobes)
+  foreach(strobe in strobes) {
   strobe thread emergencyStrobe();
+  }
 }
 
 initFriendlies(sStartPoint, bDontSpawnFriendlies, bWarpPlayer) {
-  if(!isDefined(bWarpPlayer))
+  if(!isDefined(bWarpPlayer)) {
     bWarpPlayer = true;
+  }
 
-  if(!isDefined(bDontSpawnFriendlies))
+  if(!isDefined(bDontSpawnFriendlies)) {
     bDontSpawnFriendlies = false;
+  }
 
   waittillframeend;
   assert(isDefined(sStartPoint));
@@ -7465,8 +7702,9 @@ initFriendlies(sStartPoint, bDontSpawnFriendlies, bWarpPlayer) {
   /*-----------------------
   END HERE IF THIS IS THE BUNKER
   -------------------------*/
-  if(sStartPoint == "Bunker")
+  if(sStartPoint == "Bunker") {
     return;
+  }
 
   /*-----------------------
   TELEPORT PLAYERS
@@ -7522,16 +7760,18 @@ friendly_squad_think() {
 AI_squad_fixed_node_interior() {
   level.fixednodesaferadius_default = 128;
   foreach(guy in level.squad) {
-    if(isDefined(self))
+    if(isDefined(self)) {
       self.fixedNodeSafeRadius = level.fixednodesaferadius_default;
+    }
   }
 }
 
 AI_squad_fixed_node_default() {
   level.fixednodesaferadius_default = undefined;
   foreach(guy in level.squad) {
-    if(isDefined(self))
+    if(isDefined(self)) {
       self.fixedNodeSafeRadius = 64;
+    }
   }
 }
 
@@ -7569,8 +7809,9 @@ heli_teleport_to_newpath(sSpawnerTargetname, eNode) {
   assertex(isDefined(spawner), "No helicopter spawner with the targetname: " + sSpawnerTargetname);
   spawner.target = eNode.targetname;
   spawner.origin = eNode.origin;
-  if(isDefined(eNode.angles))
+  if(isDefined(eNode.angles)) {
     spawner.angles = (eNode.angles[0], eNode.angles[1], spawner.angles[2]);
+  }
   eHeli = spawn_vehicle_from_targetname(sSpawnerTargetname);
   eHeli thread vehicle_paths(eNode);
   eHeli vehicle_ai_event("idle_alert_to_casual");
@@ -7578,8 +7819,9 @@ heli_teleport_to_newpath(sSpawnerTargetname, eNode) {
 }
 
 vehicle_think() {
-  if((getdvar("dc_debug") == "1") && (isDefined(self.spawner.targetname)))
+  if((getdvar("dc_debug") == "1") && (isDefined(self.spawner.targetname))) {
     self thread debug_message(self.spawner.targetname, self.origin, 9999, self);
+  }
 
   if(self maps\_vehicle::isCheap()) {
     self thread maps\_vehicle::friendlyfire_shield();
@@ -7632,8 +7874,9 @@ vehicle_slamraam_think() {
     self.missileTags = array_remove(self.missileTags, tag);
     self detach(self.missileModel, tag);
     eMissile = magicBullet("slamraam_missile_dcburning", self gettagorigin(tag), targetOrg.origin);
-    if(self.missileTags.size < 1)
+    if(self.missileTags.size < 1) {
       break;
+    }
   }
   self clearturrettarget();
 }
@@ -7674,8 +7917,9 @@ vehicle_mi28_think() {
     //Target_SetAttackMode( self, "top" );
   }
 
-  if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "regular"))
+  if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "regular")) {
     return;
+  }
 
   self thread vehicle_damage_think();
 }
@@ -7708,18 +7952,21 @@ vehicle_littlebird_think() {
 }
 
 vehicle_delete() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self endon("death");
   //cleanly delete riders even if magic_bullet_shielded
-  if((isDefined(self.riders)) && (self.riders.size))
+  if((isDefined(self.riders)) && (self.riders.size)) {
     array_thread(self.riders, ::AI_delete);
+  }
 
   //delete any attached turrets
   if(isDefined(self.mgturret)) {
     foreach(turret in self.mgturret) {
-      if(isDefined(turret))
+      if(isDefined(turret)) {
         turret delete();
+      }
     }
 
   }
@@ -7732,8 +7979,9 @@ vehicle_m1a1_think() {
 }
 
 vehicle_btr80_think() {
-  if((isDefined(self.targetname)) && (self.targetname == "btr80s_end"))
+  if((isDefined(self.targetname)) && (self.targetname == "btr80s_end")) {
     return;
+  }
 
   self.hitsRemaining = 3;
   //self SetDeceleration( 1 );
@@ -7741,12 +7989,15 @@ vehicle_btr80_think() {
   target_setJavelinOnly(self, true);
   Target_SetAttackMode(self, "top");
   self thread vehicle_damage_think();
-  if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "no_ai"))
+  if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "no_ai")) {
     return;
-  if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "crows_nest_bmps"))
+  }
+  if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "crows_nest_bmps")) {
     return;
-  if(!level.onHeli)
+  }
+  if(!level.onHeli) {
     return;
+  }
   else {
     self thread vehicle_turret_think();
   }
@@ -7767,28 +8018,36 @@ vehicle_damage_think() {
   killedByPlayerJavelin = undefined;
   while(isDefined(self)) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
-    if(!isDefined(attacker))
+    if(!isDefined(attacker)) {
       continue;
-    if(IsString(attacker))
+    }
+    if(IsString(attacker)) {
       continue;
+    }
     if((isDefined(attacker.code_classname)) && (attacker.code_classname == "misc_turret")) //don't blow up if using barrett
       continue;
-    if((isDefined(attacker.script_team)) && (attacker.script_team == "axis"))
+    if((isDefined(attacker.script_team)) && (attacker.script_team == "axis")) {
       continue;
-    if((isDefined(attacker.team)) && (attacker.team == "axis"))
+    }
+    if((isDefined(attacker.team)) && (attacker.team == "axis")) {
       continue;
+    }
     if((isDefined(level.blackhawk)) && (attacker == level.blackhawk)) {
-      if(isDefined(self.immuneToBlackhawk))
+      if(isDefined(self.immuneToBlackhawk)) {
         continue;
+      }
       assertex(isDefined(self.hitsRemaining), "Need to have 'self.hitsRemaining' defined for vehicles for heli ride!");
       self.hitsRemaining--;
-      if(self.hitsRemaining <= 0)
+      if(self.hitsRemaining <= 0) {
         break;
-      else
+      }
+      else {
         continue;
+      }
     }
-    if(!isDefined(type))
+    if(!isDefined(type)) {
       continue;
+    }
     if((type == "MOD_PROJECTILE") && (amount > 399)) {
       if(isplayer(attacker)) {
         killedByPlayerJavelin = true;
@@ -7802,8 +8061,9 @@ vehicle_damage_think() {
     //
   } else if(!isplayer(attacker)) {
     self notify("killed_by_friendly");
-    if(getdvar("dc_debug") == "1")
+    if(getdvar("dc_debug") == "1") {
       iprintlnbold("friendly just owned a vehicle");
+    }
     level.friendlyArmorTargets--;
     //assertex( level.friendlyArmorTargets > -1, "Friendlies have killed more vehicles than they should have" );
     thread friendly_crows_help_cooldown();
@@ -7826,10 +8086,12 @@ vehicle_turret_think() {
     /*-----------------------
     DISTANCE CHECK TO PLAYER
     -------------------------*/
-    if(distancesquared(level.player.origin, self.origin) > level.CannonRangeSquared)
+    if(distancesquared(level.player.origin, self.origin) > level.CannonRangeSquared) {
       eTarget = undefined;
-    else
+    }
+    else {
       eTarget = level.player;
+    }
 
     /*-----------------------
     IF CURRENT IS PLAYER, DO SIGHT TRACE
@@ -7848,8 +8110,9 @@ vehicle_turret_think() {
     /*-----------------------
     IF PLAYER ISN'T CURRENT TARGET, GET ANOTHER
     -------------------------*/
-    if(!isDefined(eTarget))
+    if(!isDefined(eTarget)) {
       eTarget = self vehicle_get_target();
+    }
 
     /*-----------------------
     ROTATE TURRET TO CURRENT TARGET
@@ -7867,14 +8130,16 @@ vehicle_turret_think() {
         playerEye = level.player getEye();
         bInFOV = within_fov(playerEye, level.blackhawk.angles + (0, -90, 0), self.origin, level.cosine["45"]);
         if(bInFOV) {
-          if(!self.turretFiring)
+          if(!self.turretFiring) {
             self thread vehicle_fire_main_cannon();
+          }
         }
 
       }
       if((isDefined(eTarget)) && (!isplayer(eTarget))) {
-        if(!self.turretFiring)
+        if(!self.turretFiring) {
           self thread vehicle_fire_main_cannon();
+        }
       }
 
     }
@@ -7923,8 +8188,9 @@ friendly_crows_help_cooldown() {
 
 vehicle_death(killedByPlayerJavelin) {
   if(!level.onHeli) {
-    if(Target_IsTarget(self))
+    if(Target_IsTarget(self)) {
       Target_Remove(self);
+    }
   }
 
   self maps\_vehicle::godoff();
@@ -8047,8 +8313,9 @@ ai_ambient_prop_think() {
 
 ai_ambient_cleanup() {
   self waittill("death");
-  if((isDefined(self.eAnimEnt)) && (!isspawner(self.eAnimEnt)))
+  if((isDefined(self.eAnimEnt)) && (!isspawner(self.eAnimEnt))) {
     self.eAnimEnt delete();
+  }
 }
 
 make_ambient_ai(targetname) {
@@ -8071,8 +8338,9 @@ ai_ambient_noprop_think() {
   assert(isDefined(self.animation)); //must be defined in the spawner
   sAnim = self.animation;
   bSpecial = false;
-  if(!isDefined(self.eAnimEnt))
+  if(!isDefined(self.eAnimEnt)) {
     self.eAnimEnt = self.spawner;
+  }
 
   sFailSafeFlag = undefined;
   /*-----------------------
@@ -8119,8 +8387,9 @@ ai_ambient_noprop_think() {
       eBuddy gun_remove();
       bSpecial = true;
       eEndOrg = getent(self.script_Linkto, "script_linkname");
-      if(isDefined(self.script_flag))
+      if(isDefined(self.script_flag)) {
         flag_wait(self.script_flag);
+      }
 
       while(distance(eEndOrg.origin, self.origin) > 128) {
         thread anim_generic(self, sAnim);
@@ -8172,8 +8441,9 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
   /*-----------------------
   DOES AI HAVE A GOAL NODE?
   -------------------------*/
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     eGoal = getnode(self.target, "targetname");
+  }
 
   /*-----------------------
   CLEANUP PROPS AND ANIMATION NODE WHEN DEAD
@@ -8187,25 +8457,30 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     looping = true;
     self.eAnimEnt thread anim_generic_loop(self, sAnim, "stop_idle");
     sAnimGo = sAnim + "_go"; //This will be the next animation to play after the loop (if defined)
-    if(anim_exists(sAnimGo))
+    if(anim_exists(sAnimGo)) {
       sAnim = sAnimGo;
-    else
+    }
+    else {
       sAnimGo = undefined;
+    }
   }
   /*-----------------------
   FREEZE FRAME AT START OF ANIM (IF IT'S NOT A LOOP)
   -------------------------*/
-  else
+  else {
     self.eAnimEnt anim_generic_first_frame(self, sAnim);
+  }
 
   /*-----------------------
   WAIT FOR A FLAG (IF DEFINED IN THE SPAWNER) THEN PLAY ANIM
   -------------------------*/
   if(isDefined(self.script_flag)) {
-    if(isDefined(sFailSafeFlag))
+    if(isDefined(sFailSafeFlag)) {
       flag_wait_either(self.script_flag, sFailSafeFlag);
-    else
+    }
+    else {
       flag_wait(self.script_flag);
+    }
 
   }
 
@@ -8227,8 +8502,9 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     self.disableexits = true;
   }
 
-  if(!looping)
+  if(!looping) {
     self.eAnimEnt anim_generic(self, sAnim);
+  }
 
   if(isDefined(sAnimGo)) {
     self.eAnimEnt notify("stop_idle");
@@ -8253,37 +8529,44 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     self.disablearrivals = false;
     self.disableexits = false;
     self waittill("goal");
-    if(isDefined(self.cqbwalking) && self.cqbwalking)
+    if(isDefined(self.cqbwalking) && self.cqbwalking) {
       self cqb_walk("off");
+    }
   }
 
   /*-----------------------
   FINISH ANIM THEN PLAY LOOPING IDLE
   -------------------------*/
-  else if(isDefined(level.scr_anim["generic"][sAnim + "_idle"]))
+  else if(isDefined(level.scr_anim["generic"][sAnim + "_idle"])) {
     self.eAnimEnt thread anim_generic_loop(self, sAnim + "_idle", "stop_idle");
+  }
 
   /*-----------------------
   PLAY MORTAR REACTIONS IF AVAILABLE
   -------------------------*/
   if(anim_exists(sAnim + "_react")) {
-    if(!looping)
+    if(!looping) {
       sAnim = sAnim + "_idle";
+    }
     sAnimReact = sAnim + "_react";
 
-    if(anim_exists(sAnim + "_react2"))
+    if(anim_exists(sAnim + "_react2")) {
       sAnimReact2 = sAnim + "_react2";
-    else
+    }
+    else {
       sAnimReact2 = sAnimReact;
+    }
     while(isDefined(self)) {
       level waittill("mortar_hit");
       self.eAnimEnt notify("stop_idle");
       self notify("stop_idle");
       waittillframeend;
-      if(RandomInt(100) > 50)
+      if(RandomInt(100) > 50) {
         self.eAnimEnt anim_generic(self, sAnimReact);
-      else
+      }
+      else {
         self.eAnimEnt anim_generic(self, sAnimReact2);
+      }
       self.eAnimEnt thread anim_generic_loop(self, sAnim, "stop_idle");
     }
   }
@@ -8351,19 +8634,22 @@ vehicle_owned_by_javelin(javelin_source_org) {
   newMissile Missile_SetFlightmodeTop();
   while(true) {
     self waittill("damage", amount, attacker, enemy_org, impact_org, type);
-    if((isDefined(attacker.classname)) && (attacker.classname == "worldspawn") && (isDefined(amount)) && (amount > 24))
+    if((isDefined(attacker.classname)) && (attacker.classname == "worldspawn") && (isDefined(amount)) && (amount > 24)) {
       break;
+    }
   }
-  if(isDefined(self))
+  if(isDefined(self)) {
     self notify("death");
+  }
 }
 
 ignoreme_on_squad_and_player() {
   level.player.ignoreme = true;
   level.squad = remove_dead_from_array(level.squad);
   for(i = 0; i < level.squad.size; i++) {
-    if(!isDefined(level.squad[i]))
+    if(!isDefined(level.squad[i])) {
       continue;
+    }
     level.squad[i].ignoreme = true;
     level.squad[i] setthreatbiasgroup("oblivious");
   }
@@ -8373,8 +8659,9 @@ ignoreme_off_squad_and_player() {
   level.player.ignoreme = false;
   level.squad = remove_dead_from_array(level.squad);
   for(i = 0; i < level.squad.size; i++) {
-    if(!isDefined(level.squad[i]))
+    if(!isDefined(level.squad[i])) {
       continue;
+    }
     level.squad[i].ignoreme = false;
     level.squad[i] setthreatbiasgroup("allies");
   }
@@ -8471,8 +8758,9 @@ flare_ramp_up(transitionTime, intensity) {
     curr += increment_on;
     randomFlicker = randomfloatrange(-.05, .05);
     curr = curr + randomFlicker;
-    if(curr < 0)
+    if(curr < 0) {
       break;
+    }
     self setLightIntensity(curr);
     time += .05;
     wait(.05);
@@ -8490,8 +8778,9 @@ flare_ramp_down(transitionTime) {
     curr -= increment;
     randomFlicker = randomfloatrange(-.05, .05);
     curr = curr + randomFlicker;
-    if(curr < 2)
+    if(curr < 2) {
       break;
+    }
     self setLightIntensity(curr);
     time += .05;
     wait(.05);
@@ -8504,10 +8793,12 @@ flare_flicker(minIntensity, maxIntensity) {
   dynamicLight = getent(self.target, "targetname");
   assertex(maps\_lights::is_light_entity(dynamicLight), "The flare script_model must be targeting a scriptable primary light");
 
-  if(!isDefined(minIntensity))
+  if(!isDefined(minIntensity)) {
     minIntensity = 0.6;
-  if(!isDefined(maxIntensity))
+  }
+  if(!isDefined(maxIntensity)) {
     maxIntensity = 1.8;
+  }
 
   self thread play_loop_sound_on_entity("flare_burn_loop");
 
@@ -8518,48 +8809,59 @@ flare_flicker(minIntensity, maxIntensity) {
 }
 
 anim_exists(sAnim, animname) {
-  if(!isDefined(animname))
+  if(!isDefined(animname)) {
     animname = "generic";
-  if(isDefined(level.scr_anim[animname][sAnim]))
+  }
+  if(isDefined(level.scr_anim[animname][sAnim])) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 dialouge_random_friendly(sLine) {
   guy = get_closest_ai_exclude(level.player.origin, "allies", level.excludedAi);
-  if(isDefined(guy))
+  if(isDefined(guy)) {
     guy play_sound_in_space(level.scr_sound[sLine]);
-  else
+  }
+  else {
     iprintln("unable to play random friendly dialogue " + sLine + " because couldn't find an AI");
+  }
 }
 
 triggersEnable(triggerName, noteworthyOrTargetname, bool) {
   assertEX(isDefined(bool), "Must specify true/false parameter for triggersEnable() function");
   aTriggers = getEntArray(triggername, noteworthyOrTargetname);
   assertEx(isDefined(aTriggers), triggerName + " does not exist");
-  if(bool == true)
+  if(bool == true) {
     array_thread(aTriggers, ::trigger_on);
-  else
+  }
+  else {
     array_thread(aTriggers, ::trigger_off);
+  }
 }
 
 hideAll(stuffToHide) {
-  if(!isDefined(stuffToHide))
+  if(!isDefined(stuffToHide)) {
     stuffToHide = getEntArray("hide", "script_noteworthy");
+  }
   array_thread(stuffToHide, ::hide_entity);
 }
 
 AI_delete(excluders) {
   self endon("death");
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
-  if((isDefined(excluders)) && (excluders.size > 0)) {
-    if(is_in_array(excluders, self))
-      return;
   }
-  if(isDefined(self.magic_bullet_shield))
+  if((isDefined(excluders)) && (excluders.size > 0)) {
+    if(is_in_array(excluders, self)) {
+      return;
+    }
+  }
+  if(isDefined(self.magic_bullet_shield)) {
     self stop_magic_bullet_shield();
+  }
   if(!isSentient(self)) {
     //		self notify( "death" );
     //		waittillframeend;
@@ -8574,8 +8876,9 @@ set_threatbias(iValue) {
 }
 
 reset_threatbias() {
-  if(isDefined(self.oldthreatbias))
+  if(isDefined(self.oldthreatbias)) {
     self.threatbias = self.oldthreatbias;
+  }
 }
 
 humvee_spotlight_setup() {
@@ -8601,8 +8904,9 @@ waittill_dead_then_set_flag(aGuys, sFlag) {
 }
 
 dialogue_execute(sLineToExecute) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self endon("death");
   self dialogue_queue(sLineToExecute);
 }
@@ -8619,8 +8923,9 @@ hint_temp(string, timeOut) {
 
   level endon("clearing_hints");
 
-  if(isDefined(level.tempHint))
+  if(isDefined(level.tempHint)) {
     level.tempHint destroyElem();
+  }
 
   level.tempHint = createFontString("default", 1.5);
   level.tempHint setPoint("BOTTOM", undefined, 0, -40);
@@ -8633,10 +8938,12 @@ hint_temp(string, timeOut) {
   wait(0.5);
   level.tempHint endon("death");
 
-  if(isDefined(timeOut))
+  if(isDefined(timeOut)) {
     wait(timeOut);
-  else
+  }
+  else {
     return;
+  }
 
   level.tempHint fadeOverTime(hintfade);
   level.tempHint.alpha = 0;
@@ -8648,8 +8955,9 @@ hint_temp(string, timeOut) {
 vehicle_animated_think() {
   self hide();
   aRideSpawners = undefined;
-  if(isDefined(self.target))
+  if(isDefined(self.target)) {
     aRideSpawners = getEntArray(self.target, "targetname");
+  }
   reference = spawn("script_origin", self.origin);
   self thread delete_on_death(reference);
   reference.origin = self.origin;
@@ -8683,14 +8991,18 @@ vehicle_animated_think() {
   }
 
   self show();
-  if(anim_exists(sAnimIdle, self.animname))
+  if(anim_exists(sAnimIdle, self.animname)) {
     reference thread anim_loop_solo(self, sAnimIdle, "stop_idle");
-  if(bHasRotors)
+  }
+  if(bHasRotors) {
     self thread vehicle_animated_rotors();
-  if(isDefined(loop))
+  }
+  if(isDefined(loop)) {
     self thread play_loop_sound_on_entity(loop);
-  if(isDefined(groundFx))
+  }
+  if(isDefined(groundFx)) {
     self thread vehicle_animated_ground_fx(eOrgFx, groundFx);
+  }
   self waittill("play_anim");
   self notify_delay("taking_off", 4);
   reference notify("stop_idle");
@@ -8759,8 +9071,9 @@ vehicle_animated_rotors() {
   length = getanimlength(xanim);
 
   while(true) {
-    if(!isDefined(self))
+    if(!isDefined(self)) {
       break;
+    }
     self setanim(xanim);
     wait length;
   }
@@ -8773,23 +9086,28 @@ waittill_death_or_timeout(timeout) {
 
 AI_cleanup(sTeam, dist, bImmediate) {
   aAI_to_delete = undefined;
-  if(sTeam == "all")
+  if(sTeam == "all") {
     aAI_to_delete = getaiarray();
-  else
-    aAI_to_delete = getaiarray(sTeam);
-  if(isDefined(bImmediate))
-    array_thread(aAI_to_delete, ::AI_delete);
+  }
   else {
-    if(!isDefined(dist))
+    aAI_to_delete = getaiarray(sTeam);
+  }
+  if(isDefined(bImmediate)) {
+    array_thread(aAI_to_delete, ::AI_delete);
+  }
+  else {
+    if(!isDefined(dist)) {
       dist = 1024;
+    }
     thread AI_delete_when_out_of_sight(aAI_to_delete, dist);
   }
 
 }
 
 AI_drone_cleanup(sTeam, dist, bImmediate) {
-  if(!isDefined(sTeam))
+  if(!isDefined(sTeam)) {
     sTeam = "all";
+  }
 
   aDrones = [];
   if(sTeam == "all") {
@@ -8798,11 +9116,13 @@ AI_drone_cleanup(sTeam, dist, bImmediate) {
   } else
     aDrones = level.drones[sTeam].array;
 
-  if(isDefined(bImmediate))
+  if(isDefined(bImmediate)) {
     array_thread(aDrones, ::AI_delete);
+  }
   else {
-    if(!isDefined(dist))
+    if(!isDefined(dist)) {
       dist = 1024;
+    }
     thread AI_delete_when_out_of_sight(aDrones, dist);
   }
 
@@ -8836,10 +9156,12 @@ AI_door_breaker_think() {
   //waittill door clear
   while(true) {
     wait(0.05);
-    if(level.player istouching(trigger))
+    if(level.player istouching(trigger)) {
       continue;
-    if(flag("door_being_blocked"))
+    }
+    if(flag("door_being_blocked")) {
       continue;
+    }
     break;
   }
 
@@ -8900,16 +9222,20 @@ AI_player_seek() {
 }
 
 AI_cleanup_non_squad(sTeam, dist) {
-  if(!isDefined(dist))
+  if(!isDefined(dist)) {
     dist = 1024;
-  if(sTeam == "all")
+  }
+  if(sTeam == "all") {
     aAI = getaiarray();
-  else
+  }
+  else {
     aAI = getaiarray(sTeam);
+  }
   if((sTeam == "allies") || (sTeam == "all")) {
     foreach(guy in level.squad) {
-      if(is_in_array(aAI, guy))
+      if(is_in_array(aAI, guy)) {
         aAI = array_remove(aAI, guy);
+      }
     }
   }
 
@@ -8917,16 +9243,18 @@ AI_cleanup_non_squad(sTeam, dist) {
 }
 
 AI_cleanup_volume(sVolume, sTeam, dist) {
-  if(!isDefined(dist))
+  if(!isDefined(dist)) {
     dist = 1024;
+  }
   eVolume = getent(sVolume, "targetname");
   aAI_to_delete = eVolume get_ai_touching_volume(sTeam);
 
   if(sTeam != "axis") {
     level.squad = remove_dead_from_array(level.squad);
     foreach(guy in level.squad) {
-      if(is_in_array(aAI_to_delete, guy))
+      if(is_in_array(aAI_to_delete, guy)) {
         aAI_to_delete = array_remove(aAI_to_delete, guy);
+      }
     }
   }
   thread AI_delete_when_out_of_sight(aAI_to_delete, dist);
@@ -8935,8 +9263,9 @@ AI_cleanup_volume(sVolume, sTeam, dist) {
 ent_cleanup(owner) {
   owner waittill("death");
   owner endon("death");
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 nag_wait() {
@@ -8946,12 +9275,15 @@ nag_wait() {
 player_killing_crow_targets_at_a_good_pace() {
   currentTime = getTime();
   timeElapsed = currentTime - level.lasttimePlayerKilledEnemy;
-  if(currentTime == level.lasttimePlayerKilledEnemy)
+  if(currentTime == level.lasttimePlayerKilledEnemy) {
     return true;
-  else if(timeElapsed > 10000)
+  }
+  else if(timeElapsed > 10000) {
     return false;
-  else
+  }
+  else {
     return true;
+  }
 }
 
 drone_flood_start(aSpawners, groupName) {
@@ -9074,8 +9406,9 @@ friendly_should_speed_up() {
 get_ai_touching_volume_non_squad() {
   aAI = self get_ai_touching_volume();
   foreach(guy in level.squad) {
-    if(is_in_array(aAI, guy))
+    if(is_in_array(aAI, guy)) {
       aAI = array_remove(aAI, guy);
+    }
   }
   return aAI;
 }
@@ -9086,8 +9419,9 @@ ai_cleanup_trigger_think() {
   aAI = undefined;
   foreach(volume in aLinkedVolumes) {
     aAI = volume get_ai_touching_volume("axis");
-    if(!aAI.size)
+    if(!aAI.size) {
       continue;
+    }
     array_call(aAI, ::delete);
   }
   self delete();
@@ -9133,8 +9467,9 @@ rpg_targets_think() {
   assert(isDefined(eRPGsource));
   while(!flag(sFlagToEnd)) {
     eTrigger waittill("trigger");
-    if(level.firemagicRPGs == false)
+    if(level.firemagicRPGs == false) {
       wait(1);
+    }
     else if(within_fov(level.player getEye(), level.player getPlayerAngles(), self.origin, level.cosine["60"])) {
       MagicBullet("rpg", eRPGsource.origin, self.origin);
       level.firemagicRPGs = false;
@@ -9161,8 +9496,9 @@ rpg_targets_think() {
 //}
 
 fx_management() {
-  if(getdvar("r_reflectionProbeGenerate") == "1")
+  if(getdvar("r_reflectionProbeGenerate") == "1") {
     return;
+  }
   /*-----------------------
   CREATE ARRAYS OF FX FOR THE LEVEL
   -------------------------*/
@@ -9201,8 +9537,9 @@ fx_management() {
     ASSIGN FX TO TRIGGERED VOLUMES (EX: FLARES THAT GO THROUGH FLOORS)
     -------------------------*/
     foreach(volume in triggered_fx_volumes) {
-      if(dummy istouching(volume))
+      if(dummy istouching(volume)) {
         volume.fx[volume.fx.size] = EntFx;
+      }
     }
 
     /*-----------------------
@@ -9308,27 +9645,33 @@ cheap_destructibles_think() {
   while(true) {
     self waittill("damage", damage, attacker);
 
-    if(!isDefined(attacker))
+    if(!isDefined(attacker)) {
       continue;
-    if((isDefined(level.blackhawk)) && (attacker != level.blackhawk))
+    }
+    if((isDefined(level.blackhawk)) && (attacker != level.blackhawk)) {
       continue;
+    }
 
     hitsRemaining--;
 
-    if(hitsRemaining <= 0)
+    if(hitsRemaining <= 0) {
       break;
+    }
   }
 
   // blows up
   playFX(getfx(effect), self.origin);
   self thread play_sound_in_space(sound);
-  if(bEarthquake)
+  if(bEarthquake) {
     earthquake(.4, 1.53, self.origin, 1024);
+  }
 
-  if(isDefined(destroyedModel))
+  if(isDefined(destroyedModel)) {
     self setModel(destroyedModel);
-  else
+  }
+  else {
     self delete();
+  }
 
   if(isDefined(fireFx)) {
     dummy = spawn("script_origin", self.origin + fireOffset);
@@ -9347,17 +9690,20 @@ vehicle_delete_non_squad() {
   vehicles_to_delete2 = level.vehicles["allies"];
   vehicles_to_delete2 = array_remove(vehicles_to_delete2, level.blackhawk);
   foreach(vehicle in vehicles_to_delete2) {
-    if(!isDefined(vehicle))
+    if(!isDefined(vehicle)) {
       continue;
-    if((isDefined(vehicle.vehicletype)) && (GetSubStr(vehicle.vehicletype, 0) == "littlebird"))
+    }
+    if((isDefined(vehicle.vehicletype)) && (GetSubStr(vehicle.vehicletype, 0) == "littlebird")) {
       vehicles_to_delete2 = array_remove(vehicles_to_delete2, vehicle);
+    }
 
   }
   vehicles_to_delete = array_merge(vehicles_to_delete1, vehicles_to_delete2);
   vehicles_to_delete = remove_dead_from_array(vehicles_to_delete);
   foreach(vehicle in vehicles_to_delete) {
-    if(!isDefined(vehicle))
+    if(!isDefined(vehicle)) {
       continue;
+    }
     vehicle maps\_vehicle::godoff();
     vehicle delete();
   }
@@ -9369,8 +9715,9 @@ vehicle_delete_all() {
   vehicles_to_delete2 = level.vehicles["allies"];
   vehicles_to_delete = array_merge(vehicles_to_delete1, vehicles_to_delete2);
   foreach(vehicle in vehicles_to_delete) {
-    if(!isDefined(vehicle))
+    if(!isDefined(vehicle)) {
       continue;
+    }
     vehicle maps\_vehicle::godoff();
     vehicle vehicle_delete();
   }
@@ -9379,8 +9726,9 @@ vehicle_delete_all() {
 vehicle_delete_all_axis() {
   vehicles_to_delete = level.vehicles["axis"];
   foreach(vehicle in vehicles_to_delete) {
-    if(!isDefined(vehicle))
+    if(!isDefined(vehicle)) {
       continue;
+    }
     vehicle maps\_vehicle::godoff();
     vehicle vehicle_delete();
   }
@@ -9390,24 +9738,28 @@ should_break_m203_hint(nothing) {
   player = get_player_from_self();
   assert(isplayer(player));
 
-  if(gettime() > level.grenadeHint_timeout)
+  if(gettime() > level.grenadeHint_timeout) {
     return true;
+  }
 
   // am I using my m203 weapon?
   weapon = player getcurrentweapon();
   prefix = getsubstr(weapon, 0, 4);
-  if(prefix == "m203")
+  if(prefix == "m203") {
     return true;
+  }
 
   // do I have any m203 ammo to switch to?
   heldweapons = player GetWeaponsListAll();
   foreach(weapon in heldweapons) {
     prefix = getsubstr(weapon, 0, 4);
-    if(prefix != "m203")
+    if(prefix != "m203") {
       continue;
+    }
     ammo = player getWeaponAmmoClip(weapon);
-    if(ammo > 0)
+    if(ammo > 0) {
       return false;
+    }
   }
 
   //no m203 being used, no m203 ammo to switch to....stop the hint
@@ -9416,8 +9768,9 @@ should_break_m203_hint(nothing) {
 
 drones_trenches() {
   drone_warriors_trenches = getEntArray("drone_warriors_trenches", "targetname");
-  foreach(drone in drone_warriors_trenches)
+  foreach(drone in drone_warriors_trenches) {
   thread dronespawn(drone);
+  }
 }
 
 struct_delete(array, sFlag) {
@@ -9472,24 +9825,28 @@ play_sound_then_kill_on_flag(sLine, origin, sFlag) {
   soundOrg.origin = origin;
   soundOrg thread kill_me_on_flag(sFlag);
   soundOrg play_sound_on_tag_endon_death(sLine, "tag_origin");
-  if(isDefined(soundOrg))
+  if(isDefined(soundOrg)) {
     soundOrg delete();
+  }
 }
 
 kill_me_on_flag(sFlag) {
   self endon("death");
   flag_wait(sFlag);
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 }
 
 remove_dead_targets_from_array(array) {
   newArray = [];
   foreach(ent in array) {
-    if(!isDefined(ent))
+    if(!isDefined(ent)) {
       continue;
-    if(!isDefined(ent.dead))
+    }
+    if(!isDefined(ent.dead)) {
       newArray[newArray.size] = ent;
+    }
   }
   return newArray;
 }
@@ -9549,8 +9906,9 @@ mission_failed_out_of_time() {
 
 kill_timer() {
   level notify("kill_timer");
-  if(isDefined(level.timer))
+  if(isDefined(level.timer)) {
     level.timer destroy();
+  }
 }
 
 vehicle_delete_when_hit_script_noteworthy(script_noteworthy) {
@@ -9571,13 +9929,15 @@ vehicle_delete_when_hit_script_noteworthy(script_noteworthy) {
 }
 
 vehicle_delete_when_out_of_sight() {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return;
+  }
   self endon("death");
   while(isDefined(self)) {
     wait(2);
-    if(within_fov(level.player.origin, level.player.angles, self.origin, level.cosine["90"]))
+    if(within_fov(level.player.origin, level.player.angles, self.origin, level.cosine["90"])) {
       continue;
+    }
 
     break;
   }
@@ -9642,12 +10002,15 @@ flag_set_when_volume_cleared_of_bad_guys(volume, sFlagToSet) {
   while(true) {
     wait(1);
     ai = volume get_ai_touching_volume("axis");
-    if(!isDefined(ai))
+    if(!isDefined(ai)) {
       break;
-    if(ai.size)
+    }
+    if(ai.size) {
       continue;
-    else
+    }
+    else {
       break;
+    }
   }
   flag_set(sFlagToSet);
 }

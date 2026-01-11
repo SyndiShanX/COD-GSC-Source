@@ -77,15 +77,17 @@ section_hint_string_init() {
 }
 
 hint_drop_kill_should_break() {
-  if(common_scripts\utility::flag("playerkill_jump_from_ledge") || !common_scripts\utility::flag("player_ready_for_drop_kill"))
+  if(common_scripts\utility::flag("playerkill_jump_from_ledge") || !common_scripts\utility::flag("player_ready_for_drop_kill")) {
     return 1;
+  }
 
   return 0;
 }
 
 hint_train_stab_should_break() {
-  if(common_scripts\utility::flag("trainyard_kill_sequence_used") || !common_scripts\utility::flag("player_ready_for_train_kill") || common_scripts\utility::flag("trainyard_enemy_dead"))
+  if(common_scripts\utility::flag("trainyard_kill_sequence_used") || !common_scripts\utility::flag("player_ready_for_train_kill") || common_scripts\utility::flag("trainyard_enemy_dead")) {
     return 1;
+  }
 
   return 0;
 }
@@ -179,8 +181,9 @@ infil_creep_up(var_0) {
   thread maps\factory_audio::audio_baker_intro();
   var_0 maps\_anim::anim_single_solo(self, "factory_intro_jungle_drop_ally01");
 
-  if(!common_scripts\utility::flag("playerkill_jump_from_ledge"))
+  if(!common_scripts\utility::flag("playerkill_jump_from_ledge")) {
     var_0 thread maps\_anim::anim_loop_solo(self, "factory_intro_jungle_drop_ally01_loop01", "stop_loop01");
+  }
 }
 
 lightning_flashes() {
@@ -223,8 +226,9 @@ player_movement_reset() {
   common_scripts\utility::flag_wait("playerkill_jump_from_ledge");
   setsaveddvar("cg_footsteps", 1);
 
-  if(common_scripts\utility::flag("playerkill_R3_Pressed"))
+  if(common_scripts\utility::flag("playerkill_R3_Pressed")) {
     common_scripts\utility::flag_wait("intro_drop_kill_done");
+  }
 
   maps\_utility::player_speed_percent(70);
   level.player allowjump(1);
@@ -261,8 +265,9 @@ intro_infil_part2(var_0) {
   thread intro_allied_entrance();
   common_scripts\utility::flag_wait("intro_end_slide");
 
-  if(!common_scripts\utility::flag("ally_start_sliding"))
+  if(!common_scripts\utility::flag("ally_start_sliding")) {
     thread ally_slide_now();
+  }
 
   level.player setmovespeedscale(1.0);
   common_scripts\utility::flag_wait("player_near_train_kill");
@@ -277,15 +282,18 @@ slide_orient_player() {
   while(!common_scripts\utility::flag("intro_end_slide")) {
     var_0 = self getplayerangles();
 
-    if(var_0[1] > -60)
+    if(var_0[1] > -60) {
       self setplayerangles((var_0[0], var_0[1] - 5, var_0[2]));
-    else if(var_0[1] < -120)
+    }
+    else if(var_0[1] < -120) {
       self setplayerangles((var_0[0], var_0[1] + 5, var_0[2]));
+    }
 
     var_1 = length(self.slidemodel.slidevelocity);
 
-    if(var_1 > 100)
+    if(var_1 > 100) {
       self.slidemodel.slidevelocity = self.slidemodel.slidevelocity * 0.9;
+    }
 
     wait 0.05;
   }
@@ -305,19 +313,22 @@ intro_infil_part2_dialog() {
   maps\_utility::smart_dialogue("factory_mrk_housemainwehave");
   maps\_utility::smart_radio_dialogue("factory_hqr_rogerjerichomoveto");
 
-  if(!common_scripts\utility::flag("approaching_reveal"))
+  if(!common_scripts\utility::flag("approaching_reveal")) {
     maps\_utility::smart_dialogue("factory_mrk_copythatapproachingentry");
+  }
 
   common_scripts\utility::flag_wait("approaching_reveal");
 
-  if(!common_scripts\utility::flag("player_at_first_reveal"))
+  if(!common_scripts\utility::flag("player_at_first_reveal")) {
     maps\_utility::smart_dialogue("factory_mrk_jerichoatentrya");
+  }
 
   maps\_utility::smart_radio_dialogue("factory_kgn_creeperatentryb");
   common_scripts\utility::flag_wait("player_at_first_reveal");
 
-  if(!common_scripts\utility::flag("intro_end_slide"))
+  if(!common_scripts\utility::flag("intro_end_slide")) {
     maps\_utility::smart_dialogue("factory_mrk_copymovingregroupfifty");
+  }
 
   common_scripts\utility::flag_wait("intro_end_slide");
   maps\_utility::smart_dialogue("factory_mrk_weseeyoucreeper");
@@ -445,14 +456,16 @@ check_for_player_fall() {
     common_scripts\utility::flag_clear("introkill_weapon_switched");
     level.player enableweaponswitch();
 
-    while(isalive(level.infil_dropkill_player_enemy))
+    while(isalive(level.infil_dropkill_player_enemy)) {
       wait 0.1;
+    }
 
     wait 0.1;
     thread maps\factory_fx::fx_intro_kill_player_jump_stab(level.infil_dropkill_player_enemy);
   } else {
-    while(isDefined(level.player.in_stab_animation))
+    while(isDefined(level.player.in_stab_animation)) {
       wait 0.1;
+    }
   }
 
   setsaveddvar("compass", 1);
@@ -462,8 +475,9 @@ check_for_player_fall() {
   level.infil_dropkill_player_enemy waittill("death");
   common_scripts\utility::flag_set("intro_drop_kill_done");
 
-  if(level.player getcurrentweapon() == "factory_knife")
+  if(level.player getcurrentweapon() == "factory_knife") {
     level.player switchtoweapon(level.default_weapon);
+  }
 
   level.player takeweapon("factory_knife");
   level.player enableweaponpickup();
@@ -533,21 +547,26 @@ start_enemy_enemy_logic(var_0, var_1, var_2, var_3, var_4) {
   self.ignoreall = 1;
   self.ignoreme = 1;
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     maps\factory_powerstealth::attach_flashlight(1, undefined, 1);
+  }
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     thread introkill_ally_enemy_killcheck();
-  else
+  }
+  else {
     thread introkill_player_enemy_killcheck();
+  }
 
   var_5 = common_scripts\utility::getstruct("drop_kill_node", "script_noteworthy");
   maps\_utility::delaythread(0.5, maps\_anim::anim_set_rate_single, self, var_2, 0.6);
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     maps\_utility::delaythread(6.1, maps\_anim::anim_set_rate_single, self, var_2, 1.2);
-  else
+  }
+  else {
     maps\_utility::delaythread(8.1, maps\_anim::anim_set_rate_single, self, var_2, 1.6);
+  }
 
   maps\_utility::delaythread(10, maps\_anim::anim_set_rate_single, self, var_2, 1);
   thread start_enemy_anims(var_5, var_2, var_3, var_1);
@@ -640,8 +659,9 @@ intro_ally_wait_then_slide() {
   level.squad["ALLY_ALPHA"] setlookatentity();
   common_scripts\utility::flag_set("lgt_playerkill_done");
 
-  while(isalive(level.infil_dropkill_player_enemy))
+  while(isalive(level.infil_dropkill_player_enemy)) {
     wait 0.1;
+  }
 
   level.squad["ALLY_ALPHA"] maps\_utility::set_generic_run_anim("crouch_fastwalk_F");
   level.squad["ALLY_ALPHA"].goalradius = 8;
@@ -740,8 +760,9 @@ loop_train(var_0, var_1, var_2) {
   thread train_car_rumble_generator(var_4);
   var_5 = var_4[0];
 
-  foreach(var_7 in var_4)
+  foreach(var_7 in var_4) {
   thread set_up_train_car(var_7, var_5, var_1, var_2, var_3);
+  }
 
   foreach(var_7 in var_4) {
     var_7 notify("go");
@@ -752,8 +773,9 @@ loop_train(var_0, var_1, var_2) {
   var_11 = getEntArray("fac_intro_trains", "script_noteworthy");
 
   foreach(var_13 in var_11) {
-    if(isDefined(var_13))
+    if(isDefined(var_13)) {
       var_13 delete();
+    }
   }
 }
 
@@ -761,8 +783,9 @@ set_up_train_car(var_0, var_1, var_2, var_3, var_4) {
   var_5 = getEntArray(var_0.target, "targetname");
 
   foreach(var_7 in var_5) {
-    if(var_7.classname == "trigger_hurt")
+    if(var_7.classname == "trigger_hurt") {
       var_7 enablelinkto();
+    }
 
     var_7 linkto(var_0);
   }
@@ -779,8 +802,9 @@ train_car_rumble_generator(var_0) {
   for(;;) {
     var_2 = common_scripts\utility::getclosest(level.player.origin, var_0, var_1);
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 playrumblelooponentity("tank_rumble");
+    }
 
     wait 1;
   }
@@ -865,18 +889,21 @@ factory_reveal_activity() {
   level.drone_anims["axis"]["stand"]["run"] = % patrol_bored_patrolwalk;
   var_0 = getEntArray("intro_reveal_pmcs", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 maps\_utility::add_spawn_function(::intro_reveal_pmc_think);
+  }
 
   var_4 = getEntArray("reveal_vehicles", "targetname");
 
-  foreach(var_2 in var_4)
+  foreach(var_2 in var_4) {
   var_2 maps\_utility::add_spawn_function(::reveal_vehicles_think_veh);
+  }
 
   var_7 = getEntArray("intro_reveal_vehicle_pmcs", "targetname");
 
-  foreach(var_2 in var_7)
+  foreach(var_2 in var_7) {
   var_2 maps\_utility::add_spawn_function(::reveal_vehicles_think_pmc);
+  }
 }
 
 reveal_vehicles_think_veh() {
@@ -969,8 +996,9 @@ intro_train_start() {
 }
 
 intro_train() {
-  foreach(var_1 in level.squad)
+  foreach(var_1 in level.squad) {
   var_1.ignoreall = 1;
+  }
 
   level.cosine["70"] = cos(70);
   level.goodfriendlydistancefromplayersquared = 62500;
@@ -984,8 +1012,9 @@ intro_train_pass() {
   wait 0.3;
   maps\_utility::radio_dialogue_stop();
 
-  if(!common_scripts\utility::flag("trainyard_enemy_dead"))
+  if(!common_scripts\utility::flag("trainyard_enemy_dead")) {
     level.squad["ALLY_ALPHA"] thread maps\_utility::smart_radio_dialogue("factory_bkr_twoapproaching");
+  }
 
   wait 0.7;
   var_0 = getent("infil_kill", "targetname");
@@ -994,22 +1023,25 @@ intro_train_pass() {
   thread factory_entrance_setup();
   thread intro_kill_vignette();
 
-  if(!common_scripts\utility::flag("trainyard_enemy_dead"))
+  if(!common_scripts\utility::flag("trainyard_enemy_dead")) {
     level.squad["ALLY_ALPHA"] thread maps\_utility::smart_radio_dialogue("factory_bkr_gotthem");
+  }
 
   thread train_kill_ally_second_pos(level.train_kill);
   thread intro_scene();
   common_scripts\utility::flag_wait("trainyard_enemy_dead");
 
-  if(common_scripts\utility::flag("trainyard_kill_sequence_used"))
+  if(common_scripts\utility::flag("trainyard_kill_sequence_used")) {
     wait 1.0;
+  }
 
   maps\_utility::radio_dialogue_stop();
   wait 0.5;
   level.squad["ALLY_ALPHA"] thread maps\_utility::smart_dialogue("factory_mrk_letsmove");
 
-  foreach(var_2 in level.squad)
+  foreach(var_2 in level.squad) {
   var_2 maps\_utility::disable_cqbwalk();
+  }
 
   level.player.ignoreme = 0;
   wait 1.0;
@@ -1023,8 +1055,9 @@ intro_train_pass() {
   common_scripts\utility::flag_wait("factory_exterior_approach_infil");
   wait 3.1;
 
-  if(!common_scripts\utility::flag("player_entered_awning"))
+  if(!common_scripts\utility::flag("player_entered_awning")) {
     level.squad["ALLY_BRAVO"] thread maps\_utility::smart_dialogue("factory_bkr_throughhere");
+  }
 
   thread factory_entrance_dialogue_management();
 }
@@ -1129,8 +1162,9 @@ trainyard_enemy_logic_dialogue() {
   level endon("trainyard_enemy_alerted");
   wait 4;
 
-  if(isalive(self))
+  if(isalive(self)) {
     thread maps\_utility::smart_dialogue("factory_vs2_rogerpatrol");
+  }
 }
 
 trainyard_enemy_logic_wait_too_long() {
@@ -1239,8 +1273,9 @@ intro_ally_moveout() {
   thread intro_ally_charlie_train_rollout();
   common_scripts\utility::flag_wait("trainyard_enemy_dead");
 
-  foreach(var_1 in level.squad)
+  foreach(var_1 in level.squad) {
   var_1 maps\_utility::enable_ai_color();
+  }
 }
 
 intro_ally_charlie_train_rollout() {
@@ -1249,8 +1284,9 @@ intro_ally_charlie_train_rollout() {
   var_0 maps\_anim::anim_first_frame_solo(level.squad["ALLY_CHARLIE"], "factory_intro_ally03");
   common_scripts\utility::flag_wait("trainyard_enemy_dead");
 
-  if(common_scripts\utility::flag("trainyard_kill_sequence_used"))
+  if(common_scripts\utility::flag("trainyard_kill_sequence_used")) {
     wait 1.0;
+  }
 
   var_0 maps\_anim::anim_single_solo(level.squad["ALLY_CHARLIE"], "factory_intro_ally03");
   waittillframeend;
@@ -1266,8 +1302,9 @@ intro_kill_vignette() {
   thread intro_ally_moveout();
   common_scripts\utility::flag_wait("player_exited_train");
 
-  foreach(var_1 in level.squad)
+  foreach(var_1 in level.squad) {
   var_1 maps\_utility::disable_cqbwalk();
+  }
 
   level.squad["ALLY_BRAVO"] stopanimscripted();
   level.squad["ALLY_ECHO"] stopanimscripted();
@@ -1278,8 +1315,9 @@ intro_kill_vignette() {
   level.squad["ALLY_CHARLIE"] pushplayer(1);
   level.squad["ALLY_ALPHA"].disableplayeradsloscheck = 0;
 
-  foreach(var_4 in level.squad)
+  foreach(var_4 in level.squad) {
   var_4 maps\_utility::enable_ai_color();
+  }
 
   maps\factory_util::safe_trigger_by_targetname("intro_allies_first_moveout");
 }
@@ -1295,8 +1333,9 @@ intro_scene() {
   common_scripts\utility::flag_wait("player_exited_train");
   common_scripts\utility::flag_wait("factory_exterior_reveal");
 
-  if(!common_scripts\utility::flag("trainyard_enemy_dead"))
+  if(!common_scripts\utility::flag("trainyard_enemy_dead")) {
     kill_trainyard_enemy(level.train_kill);
+  }
 
   level.squad["ALLY_ALPHA"] maps\_utility::disable_cqbwalk();
   level.squad["ALLY_BRAVO"] maps\_utility::disable_cqbwalk();
@@ -1335,8 +1374,9 @@ delta_splitup() {
   thread buddy_boost_echo();
   var_0 = getent("vol_delete_squad_splinter", "targetname");
 
-  while(!level.squad["ALLY_ECHO"] istouching(var_0))
+  while(!level.squad["ALLY_ECHO"] istouching(var_0)) {
     wait 0.1;
+  }
 
   thread delete_squad_splinter();
   common_scripts\utility::flag_wait("factory_exterior_reveal");
@@ -1360,8 +1400,9 @@ delete_squad_splinter() {
   level.squad["ALLY_CHARLIE"] = var_2;
   level notify("deleting_echo");
 
-  if(isDefined(level.squad["ALLY_ECHO"]))
+  if(isDefined(level.squad["ALLY_ECHO"])) {
     level.squad["ALLY_ECHO"] delete();
+  }
 }
 
 handle_player_leaving_mission() {
@@ -1371,8 +1412,9 @@ handle_player_leaving_mission() {
   var_0 = ["factory_mrk_adamwhatreyoudoing", "factory_mrk_adamgetbackon", "factory_mrk_adamgetbackhere"];
   level.squad["ALLY_ALPHA"] thread maps\factory_util::nag_line_generator(undefined, "player_came_back");
 
-  while(common_scripts\utility::flag("player_exited_mission_warning"))
+  while(common_scripts\utility::flag("player_exited_mission_warning")) {
     wait 0.1;
+  }
 
   level notify("player_came_back");
   thread handle_player_leaving_mission();
@@ -1476,13 +1518,15 @@ factory_ingress() {
   level.cosine["70"] = cos(70);
   level.goodfriendlydistancefromplayersquared = 62500;
 
-  foreach(var_1 in level.squad)
+  foreach(var_1 in level.squad) {
   var_1.ignoreall = 1;
+  }
 
   var_3 = maps\_utility::get_living_ai_array("intro_pmcs", "targetname");
 
-  foreach(var_5 in var_3)
+  foreach(var_5 in var_3) {
   var_5.ignoreall = 1;
+  }
 
   common_scripts\utility::flag_set("factory_entrance_setup");
 
@@ -1540,11 +1584,13 @@ factory_entrance_enc() {
   level thread truck_kill_timeout();
   common_scripts\utility::flag_wait("intro_truck_driver_dead");
 
-  if(!common_scripts\utility::flag("all_allies_at_entrance"))
+  if(!common_scripts\utility::flag("all_allies_at_entrance")) {
     level notify("stealth_broken");
+  }
 
-  foreach(var_4 in var_6)
+  foreach(var_4 in var_6) {
   var_4 stopsounds();
+  }
 
   eliminate_all_targets(var_6);
   common_scripts\utility::flag_set("truck_kills_done");
@@ -1582,8 +1628,9 @@ factory_entrance_enc() {
 eliminate_all_targets(var_0) {
   level endon("entered_factory_1");
 
-  if(isDefined(level.squad["ALLY_ECHO"]))
+  if(isDefined(level.squad["ALLY_ECHO"])) {
     delete_squad_splinter();
+  }
 
   level.truck_kills = 0;
   level.ai_friendlyfireblockduration = getdvarfloat("ai_friendlyFireBlockDuration");
@@ -1594,8 +1641,9 @@ eliminate_all_targets(var_0) {
     wait 0.25;
   }
 
-  while(level.truck_kills < 3)
+  while(level.truck_kills < 3) {
     wait 0.1;
+  }
 
   setsaveddvar("ai_friendlyFireBlockDuration", level.ai_friendlyfireblockduration);
 }
@@ -1617,10 +1665,12 @@ eliminate_my_target() {
     thread fire_on_target(self.favoriteenemy, var_0, var_1);
     wait 0.05;
 
-    if(self.favoriteenemy.script_noteworthy != "entrance_enemy_02")
+    if(self.favoriteenemy.script_noteworthy != "entrance_enemy_02") {
       self.favoriteenemy kill();
-    else
+    }
+    else {
       self.favoriteenemy dodamage(1, (0, 0, 0));
+    }
 
     self.favoriteenemy dropweapon(self.favoriteenemy.weapon, "right", 0);
     self.favoriteenemy maps\_utility::gun_remove();
@@ -1633,8 +1683,9 @@ eliminate_my_target() {
 detect_ally_at_entrance() {
   var_0 = getent("vol_entrance_squad_count", "script_noteworthy");
 
-  while(!self istouching(var_0))
+  while(!self istouching(var_0)) {
     wait 0.1;
+  }
 }
 
 fire_on_target(var_0, var_1, var_2) {
@@ -1716,8 +1767,9 @@ factory_door_kill() {
   level.squad["ALLY_BRAVO"] thread maps\_utility::smart_dialogue("factory_kgn_twoahead");
   common_scripts\utility::flag_wait_or_timeout("first_door_guard_shot", 2);
 
-  if(!common_scripts\utility::flag("first_door_guard_shot"))
+  if(!common_scripts\utility::flag("first_door_guard_shot")) {
     level.squad["ALLY_ALPHA"] maps\_utility::smart_dialogue("factory_bkr_dropem");
+  }
 
   wait 0.4;
 
@@ -1774,15 +1826,18 @@ safe_magic_bullet(var_0, var_1, var_2) {
   var_5 = 0;
 
   foreach(var_7 in level.squad) {
-    if(isDefined(var_4["entity"]) && var_4["entity"] == var_7)
+    if(isDefined(var_4["entity"]) && var_4["entity"] == var_7) {
       var_5 = 1;
+    }
   }
 
-  if(isDefined(var_4["entity"]) && var_4["entity"] == level.player || var_5 == 1)
+  if(isDefined(var_4["entity"]) && var_4["entity"] == level.player || var_5 == 1) {
     var_3 = 1;
+  }
 
-  if(isDefined(var_4["fraction"]) < 0.8)
+  if(isDefined(var_4["fraction"]) < 0.8) {
     var_3 = 1;
+  }
 
   playFXOnTag(common_scripts\utility::getfx("silencer_flash"), self, "tag_flash");
 
@@ -1794,10 +1849,12 @@ safe_magic_bullet(var_0, var_1, var_2) {
 
   self shootblank();
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     magicbullet(var_2, var_0, var_1);
-  else
+  }
+  else {
     magicbullet(self.weapon, var_0, var_1);
+  }
 }
 
 factory_door_guard_stationary() {
@@ -1817,8 +1874,9 @@ factory_door_guard_stationary() {
   wait 0.2;
   var_3 = maps\_utility::get_living_ai("factory_door_kill_mobile", "script_noteworthy");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 maps\_anim::anim_single_solo(var_3, "patrol_bored_walk_2_scared_idle_turn_r_90");
+  }
 }
 
 factory_door_guard_mobile() {
@@ -1836,8 +1894,9 @@ factory_door_guard_mobile() {
   wait 0.2;
   var_3 = maps\_utility::get_living_ai("factory_door_kill_stationary", "script_noteworthy");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 maps\_anim::anim_single_solo(var_3, "scared_idle_turn_l_90");
+  }
 }
 
 factory_door_guard_player_spotted() {
@@ -1925,8 +1984,9 @@ handle_player_exposing(var_0) {
       var_2.ignoreall = 0;
       var_2.favoriteenemy = level.player;
 
-      if(var_2.team == "axis")
+      if(var_2.team == "axis") {
         var_2 stopanimscripted();
+      }
 
       var_2 setgoalpos(var_2.origin);
       var_2 maps\_utility::cqb_aim(level.player);
@@ -1967,8 +2027,9 @@ ingress_enc_think_enemy01() {
 ingress_enc_enemy01_kill(var_0) {
   self waittill("damage", var_1, var_2);
 
-  if(common_scripts\utility::flag("truck_kill_timed_out"))
+  if(common_scripts\utility::flag("truck_kill_timed_out")) {
     wait 1.0;
+  }
 }
 
 ingress_enc_think_enemy02() {
@@ -2008,8 +2069,9 @@ ingress_enc_enemy02_kill(var_0, var_1) {
   self setcontents(0);
   var_1 thread maps\_anim::anim_single_solo(self, "factory_truck_enemy02_death");
 
-  if(common_scripts\utility::flag("truck_kill_timed_out"))
+  if(common_scripts\utility::flag("truck_kill_timed_out")) {
     var_1 thread maps\_anim::anim_single_solo(level.clipboard, "factory_truck_enemy02_death");
+  }
 
   wait 2;
   wait(getanimlength(maps\_utility::getanim("factory_truck_enemy02_death")) - 2);
@@ -2023,8 +2085,9 @@ ingress_enc_enemy02_kill(var_0, var_1) {
 wait_for_damage_or_flag(var_0) {
   self endon("death");
 
-  while(!common_scripts\utility::flag(var_0))
+  while(!common_scripts\utility::flag(var_0)) {
     common_scripts\utility::waittill_notify_or_timeout_return("damage", 0.1);
+  }
 }
 
 ingress_enc_think_enemy03() {
@@ -2159,8 +2222,9 @@ factory_entrance_dialogue_management() {
   level endon("entered_factory_1");
   common_scripts\utility::flag_wait("player_entered_awning");
 
-  if(!common_scripts\utility::flag("intro_truck_driver_dead") && !common_scripts\utility::flag("player_scene_interrupt"))
+  if(!common_scripts\utility::flag("intro_truck_driver_dead") && !common_scripts\utility::flag("player_scene_interrupt")) {
     level.squad["ALLY_ALPHA"] maps\_utility::radio_dialogue("factory_bkr_targetsahead");
+  }
 
   common_scripts\utility::flag_wait("factory_entrance_reveal");
   common_scripts\utility::flag_wait_any("all_allies_at_entrance", "intro_truck_driver_dead", "player_scene_interrupt");
@@ -2208,8 +2272,9 @@ train_cleanup() {
   var_0 = getEntArray("fac_intro_trains", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 delete();
+    }
   }
 }
 

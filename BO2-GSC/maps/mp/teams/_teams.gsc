@@ -13,14 +13,16 @@ init() {
   game["strings"]["autobalance"] = &"MP_AUTOBALANCE_NOW";
   precachestring(&"MP_AUTOBALANCE_NOW");
 
-  if(getdvar(#"scr_teambalance") == "")
+  if(getdvar(#"scr_teambalance") == "") {
     setdvar("scr_teambalance", "0");
+  }
 
   level.teambalance = getdvarint(#"scr_teambalance");
   level.teambalancetimer = 0;
 
-  if(getdvar(#"scr_timeplayedcap") == "")
+  if(getdvar(#"scr_timeplayedcap") == "") {
     setdvar("scr_timeplayedcap", "1800");
+  }
 
   level.timeplayedcap = int(getdvarint(#"scr_timeplayedcap"));
   level.freeplayers = [];
@@ -32,14 +34,16 @@ init() {
     level thread updateteambalancedvar();
     wait 0.15;
 
-    if(level.rankedmatch || level.leaguematch)
+    if(level.rankedmatch || level.leaguematch) {
       level thread updateplayertimes();
+    }
   } else {
     level thread onfreeplayerconnect();
     wait 0.15;
 
-    if(level.rankedmatch || level.leaguematch)
+    if(level.rankedmatch || level.leaguematch) {
       level thread updateplayertimes();
+    }
   }
 }
 
@@ -81,18 +85,21 @@ onjoinedspectators() {
 trackplayedtime() {
   self endon("disconnect");
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   self.timeplayed[team] = 0;
+  }
 
   self.timeplayed["free"] = 0;
   self.timeplayed["other"] = 0;
   self.timeplayed["alive"] = 0;
 
-  if(!isDefined(self.timeplayed["total"]) || !(level.gametype == "twar" && 0 < game["roundsplayed"] && 0 < self.timeplayed["total"]))
+  if(!isDefined(self.timeplayed["total"]) || !(level.gametype == "twar" && 0 < game["roundsplayed"] && 0 < self.timeplayed["total"])) {
     self.timeplayed["total"] = 0;
+  }
 
-  while(level.inprematchperiod)
+  while(level.inprematchperiod) {
     wait 0.05;
+  }
 
   for(;;) {
     if(game["state"] == "playing") {
@@ -100,8 +107,9 @@ trackplayedtime() {
         self.timeplayed[self.sessionteam]++;
         self.timeplayed["total"]++;
 
-        if(isalive(self))
+        if(isalive(self)) {
           self.timeplayed["alive"]++;
+        }
       } else if(self.sessionteam == "spectator")
         self.timeplayed["other"]++;
     }
@@ -116,8 +124,9 @@ updateplayertimes() {
   for(;;) {
     nexttoupdate++;
 
-    if(nexttoupdate >= level.players.size)
+    if(nexttoupdate >= level.players.size) {
       nexttoupdate = 0;
+    }
 
     if(isDefined(level.players[nexttoupdate])) {
       level.players[nexttoupdate] updateplayedtime();
@@ -154,8 +163,9 @@ updateplayedtime() {
   if(game["state"] == "postgame") {
     return;
   }
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   self.timeplayed[team] = 0;
+  }
 
   self.timeplayed["other"] = 0;
   self.timeplayed["alive"] = 0;
@@ -172,13 +182,15 @@ updateteambalancedvar() {
   for(;;) {
     teambalance = getdvarint(#"scr_teambalance");
 
-    if(level.teambalance != teambalance)
+    if(level.teambalance != teambalance) {
       level.teambalance = getdvarint(#"scr_teambalance");
+    }
 
     timeplayedcap = getdvarint(#"scr_timeplayedcap");
 
-    if(level.timeplayedcap != timeplayedcap)
+    if(level.timeplayedcap != timeplayedcap) {
       level.timeplayedcap = int(getdvarint(#"scr_timeplayedcap"));
+    }
 
     wait 1;
   }
@@ -200,8 +212,9 @@ changeteam(team) {
   self.pers["teamTime"] = undefined;
   self.sessionteam = self.pers["team"];
 
-  if(!level.teambased)
+  if(!level.teambased) {
     self.ffateam = team;
+  }
 
   self maps\mp\gametypes\_globallogic_ui::updateobjectivetext();
   self maps\mp\gametypes\_spectating::setspectatepermissions();
@@ -214,8 +227,9 @@ countplayers() {
   players = level.players;
   playercounts = [];
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   playercounts[team] = 0;
+  }
 
   foreach(player in level.players) {
     if(player == self) {
@@ -223,8 +237,9 @@ countplayers() {
     }
     team = player.pers["team"];
 
-    if(isDefined(team) && isDefined(level.teams[team]))
+    if(isDefined(team) && isDefined(level.teams[team])) {
       playercounts[team]++;
+    }
   }
 
   return playercounts;
@@ -233,8 +248,9 @@ countplayers() {
 trackfreeplayedtime() {
   self endon("disconnect");
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   self.timeplayed[team] = 0;
+  }
 
   self.timeplayed["other"] = 0;
   self.timeplayed["total"] = 0;
@@ -248,8 +264,9 @@ trackfreeplayedtime() {
         self.timeplayed[team]++;
         self.timeplayed["total"]++;
 
-        if(isalive(self))
+        if(isalive(self)) {
           self.timeplayed["alive"]++;
+        }
       } else
         self.timeplayed["other"]++;
     }

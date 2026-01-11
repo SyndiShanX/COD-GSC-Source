@@ -38,16 +38,18 @@ init() {
     level thread trackhostmigrationend();
   }
 
-  for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++)
+  for(var_0 = 0; var_0 < level.teamnamelist.size; var_0++) {
     level.teamspawnpoints[level.teamnamelist[var_0]] = [];
+  }
 }
 
 trackhostmigrationend() {
   for(;;) {
     self waittill("host_migration_end");
 
-    foreach(var_1 in level.participants)
+    foreach(var_1 in level.participants) {
     var_1.canperformclienttraces = canperformclienttraces(var_1);
+    }
   }
 }
 
@@ -105,24 +107,29 @@ calculatespawntospawnsights() {
         continue;
       }
 
-      if(var_9 > 0.0)
+      if(var_9 > 0.0) {
         var_2.cornersightspawns[var_2.cornersightspawns.size] = var_7;
+      }
     }
   }
 }
 
 canperformclienttraces(var_0) {
-  if(level.disableclientspawntraces)
+  if(level.disableclientspawntraces) {
     return 0;
+  }
 
-  if(!isDefined(level.clienttracespawnclass))
+  if(!isDefined(level.clienttracespawnclass)) {
     return 0;
+  }
 
-  if(isai(var_0))
+  if(isai(var_0)) {
     return 0;
+  }
 
-  if(var_0 ishost())
+  if(var_0 ishost()) {
     return 0;
+  }
 
   return 1;
 }
@@ -137,8 +144,9 @@ addstartspawnpoints(var_0, var_1) {
     return;
   }
 
-  if(!isDefined(level.startspawnpoints))
+  if(!isDefined(level.startspawnpoints)) {
     level.startspawnpoints = [];
+  }
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_2[var_3] spawnpointinit();
@@ -173,17 +181,20 @@ addstartspawnpoints(var_0, var_1) {
 }
 
 addspawnpoints(var_0, var_1) {
-  if(!isDefined(level.spawnpoints))
+  if(!isDefined(level.spawnpoints)) {
     level.spawnpoints = [];
+  }
 
-  if(!isDefined(level.teamspawnpoints[var_0]))
+  if(!isDefined(level.teamspawnpoints[var_0])) {
     level.teamspawnpoints[var_0] = [];
+  }
 
   var_2 = [];
   var_2 = getspawnpointarray(var_1);
 
-  if(!isDefined(level.clienttracespawnclass))
+  if(!isDefined(level.clienttracespawnclass)) {
     level.clienttracespawnclass = var_1;
+  }
 
   if(!var_2.size) {
     return;
@@ -213,8 +224,9 @@ spawnpointinit() {
   if(!bullettracepassed(var_0.sighttracepoint, var_0.sighttracepoint + (0, 0, var_1), 0, undefined)) {
     var_2 = var_0.sighttracepoint + var_0.forward * 100;
 
-    if(!bullettracepassed(var_2, var_2 + (0, 0, var_1), 0, undefined))
+    if(!bullettracepassed(var_2, var_2 + (0, 0, var_1), 0, undefined)) {
       var_0.outside = 0;
+    }
   }
 
   var_3 = anglestoright(var_0.angles);
@@ -241,15 +253,17 @@ addalternatespawnpoint(var_0, var_1) {
 }
 
 getspawnpointarray(var_0) {
-  if(!isDefined(level.spawnpointarray))
+  if(!isDefined(level.spawnpointarray)) {
     level.spawnpointarray = [];
+  }
 
   if(!isDefined(level.spawnpointarray[var_0])) {
     level.spawnpointarray[var_0] = [];
     level.spawnpointarray[var_0] = getspawnarray(var_0);
 
-    foreach(var_2 in level.spawnpointarray[var_0])
+    foreach(var_2 in level.spawnpointarray[var_0]) {
     var_2.classname = var_0;
+    }
   }
 
   return level.spawnpointarray[var_0];
@@ -271,39 +285,44 @@ cananyplayerseeffaspawnpoint(var_0) {
     }
     var_5 = var_4.origin + var_1;
 
-    if(sighttracepassed(var_2, var_5, 0, var_4))
+    if(sighttracepassed(var_2, var_5, 0, var_4)) {
       return 1;
+    }
   }
 
   return 0;
 }
 
 getstartspawnffa(var_0) {
-  if(!isDefined(level.ffastartspawnpoints))
+  if(!isDefined(level.ffastartspawnpoints)) {
     level.ffastartspawnpoints = [];
+  }
 
   if(!isDefined(level.ffastartspawnpoints[var_0])) {
     var_1 = getteamspawnpoints(var_0);
     level.ffastartspawnpoints[var_0] = [];
 
     foreach(var_3 in var_1) {
-      if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "start_spawn")
+      if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "start_spawn") {
         level.ffastartspawnpoints[var_0][level.ffastartspawnpoints[var_0].size] = var_3;
+      }
     }
   }
 
   var_5 = undefined;
 
-  if(level.ffastartspawnpoints[var_0].size >= level.players.size)
+  if(level.ffastartspawnpoints[var_0].size >= level.players.size) {
     var_5 = getspawnpoint_random(level.ffastartspawnpoints[var_0], 1);
+  }
 
   if(!isDefined(var_5)) {
     var_6 = getteamspawnpoints(var_0);
     var_6 = common_scripts\utility::array_randomize(var_6);
 
     foreach(var_8 in var_6) {
-      if(!isDefined(var_8.ffastartspawnsighted))
+      if(!isDefined(var_8.ffastartspawnsighted)) {
         var_8.ffastartspawnsighted = 0;
+      }
       else if(var_8.ffastartspawnsighted) {
         continue;
       }
@@ -318,27 +337,31 @@ getstartspawnffa(var_0) {
       }
     }
 
-    if(!isDefined(var_5))
+    if(!isDefined(var_5)) {
       var_5 = getspawnpoint_random(var_6);
+    }
   }
 
   return var_5;
 }
 
 getspawnpoint_random(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   var_0 = maps\mp\gametypes\_spawnscoring::checkdynamicspawns(var_0);
   var_0 = common_scripts\utility::array_randomize(var_0);
 
   foreach(var_3 in var_0) {
-    if(canspawn(var_3.origin) && !positionwouldtelefrag(var_3.origin))
+    if(canspawn(var_3.origin) && !positionwouldtelefrag(var_3.origin)) {
       return var_3;
+    }
   }
 
-  if(!maps\mp\_utility::is_true(var_1) && var_0.size > 0)
+  if(!maps\mp\_utility::is_true(var_1) && var_0.size > 0) {
     return var_0[var_0.size - 1];
+  }
 
   return undefined;
 }
@@ -369,15 +392,17 @@ getrandomstartspawn(var_0) {
     var_2 = getspawnpoint_random(var_3, 1);
   }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = getspawnpoint_random(var_1);
+  }
 
   return var_2;
 }
 
 getspawnpoint_startspawn(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   var_1 = undefined;
   var_0 = maps\mp\gametypes\_spawnscoring::checkdynamicspawns(var_0);
@@ -394,15 +419,17 @@ getspawnpoint_startspawn(var_0) {
     var_1 = var_3;
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1.selected = 1;
+  }
 
   return var_1;
 }
 
 getspawnpoint_nearteam(var_0, var_1) {
-  for(;;)
+  for(;;) {
     wait 5;
+  }
 }
 
 trackgrenades() {
@@ -440,8 +467,9 @@ ispathdataavailable() {
 }
 
 addtoparticipantsarray() {
-  if(isDefined(level.ishorde) && level.ishorde)
+  if(isDefined(level.ishorde) && level.ishorde) {
     level notify("participant_added", self);
+  }
 
   level.participants[level.participants.size] = self;
 }
@@ -451,8 +479,9 @@ removefromparticipantsarray() {
 
   for(var_1 = 0; var_1 < level.participants.size; var_1++) {
     if(level.participants[var_1] == self) {
-      for(var_0 = 1; var_1 < level.participants.size - 1; var_1++)
+      for(var_0 = 1; var_1 < level.participants.size - 1; var_1++) {
         level.participants[var_1] = level.participants[var_1 + 1];
+      }
 
       level.participants[var_1] = undefined;
       break;
@@ -469,8 +498,9 @@ removefromcharactersarray() {
 
   for(var_1 = 0; var_1 < level.characters.size; var_1++) {
     if(level.characters[var_1] == self) {
-      for(var_0 = 1; var_1 < level.characters.size - 1; var_1++)
+      for(var_0 = 1; var_1 < level.characters.size - 1; var_1++) {
         level.characters[var_1] = level.characters[var_1 + 1];
+      }
 
       level.characters[var_1] = undefined;
       break;
@@ -482,8 +512,9 @@ spawnpointupdate() {
   if(maps\mp\_utility::invirtuallobby()) {
     return;
   }
-  while(!isDefined(level.spawnpoints) || level.spawnpoints.size == 0)
+  while(!isDefined(level.spawnpoints) || level.spawnpoints.size == 0) {
     wait 0.05;
+  }
 
   calculatespawntospawnsights();
   level thread spawnpointsightupdate();
@@ -503,14 +534,16 @@ updateactiveplayerlist() {
   var_1 = level.gametype;
   var_2 = 0;
 
-  if(var_1 == "dm" || var_1 == "gun")
+  if(var_1 == "dm" || var_1 == "gun") {
     var_2 = 1;
+  }
 
   foreach(var_4 in level.characters) {
     var_4.isactiveplayer = 0;
 
-    if(isplayer(var_4) && var_2 && (var_4.sessionstate == "playing" || var_4.sessionstate == "dead"))
+    if(isplayer(var_4) && var_2 && (var_4.sessionstate == "playing" || var_4.sessionstate == "dead")) {
       level.active_ffa_players++;
+    }
 
     if(!maps\mp\_utility::isreallyalive(var_4)) {
       continue;
@@ -572,10 +605,12 @@ spawnpointclientsightupdate() {
         var_11 = isDefined(var_10);
         var_12 = 0;
 
-        if(var_9)
+        if(var_9) {
           var_12 = var_8.time;
-        else if(var_11)
+        }
+        else if(var_11) {
           var_12 = var_10.time;
+        }
 
         if(var_7 <= var_12) {
           continue;
@@ -583,11 +618,13 @@ spawnpointclientsightupdate() {
         var_13 = var_4 clientspawnsighttracepassed(var_6.index, var_6.classname);
 
         if(var_13 >= 1.0) {
-          if(var_9)
+          if(var_9) {
             var_8.time = var_7;
+          }
           else {
-            if(var_11)
+            if(var_11) {
               removecornersightsfromspawnforplayer(var_6, var_4);
+            }
 
             addfullsightspawnforplayer(var_6, var_4, var_7);
           }
@@ -596,11 +633,13 @@ spawnpointclientsightupdate() {
         }
 
         if(var_13 >= 0.5 && level.active_ffa_players <= 8) {
-          if(var_11)
+          if(var_11) {
             var_10.time = var_7;
+          }
           else {
-            if(var_9)
+            if(var_9) {
               removefullsightsfromspawnforplayer(var_6, var_4);
+            }
 
             addcornersightspawnforplayer(var_6, var_4, var_7);
           }
@@ -608,11 +647,13 @@ spawnpointclientsightupdate() {
           continue;
         }
 
-        if(var_11)
+        if(var_11) {
           removecornersightsfromspawnforplayer(var_6, var_4);
+        }
 
-        if(var_9)
+        if(var_9) {
           removefullsightsfromspawnforplayer(var_6, var_4);
+        }
       }
 
       if(var_0 + level.spawnpoints.size > level.maxclientupdatesperframe) {
@@ -705,15 +746,17 @@ spawnpointdistanceupdate() {
         }
         var_9 = distancesquared(var_8.origin, var_6.origin);
 
-        if(var_9 < var_6.mindistsquared[var_8.spawnlogicteam])
+        if(var_9 < var_6.mindistsquared[var_8.spawnlogicteam]) {
           var_6.mindistsquared[var_8.spawnlogicteam] = var_9;
+        }
 
         var_6.distsumsquared[var_8.spawnlogicteam] = var_6.distsumsquared[var_8.spawnlogicteam] + var_9;
         var_6.totalplayers[var_8.spawnlogicteam]++;
 
         if(var_9 < 1638400) {
-          if(maps\mp\_utility::isreallyalive(var_8))
+          if(maps\mp\_utility::isreallyalive(var_8)) {
             var_6.nearbyplayers[var_8.spawnlogicteam]++;
+          }
         }
       }
 
@@ -738,8 +781,9 @@ spawnpointdistanceupdate() {
 getspawnteam(var_0) {
   var_1 = "all";
 
-  if(level.teambased)
+  if(level.teambased) {
     var_1 = var_0.team;
+  }
 
   return var_1;
 }
@@ -751,16 +795,18 @@ initspawnpointvalues(var_0) {
 
 clearspawnpointsightdata(var_0) {
   if(level.teambased) {
-    foreach(var_2 in level.teamnamelist)
+    foreach(var_2 in level.teamnamelist) {
     clearteamspawnpointsightdata(var_0, var_2);
+    }
   } else
     clearteamspawnpointsightdata(var_0, "all");
 }
 
 clearspawnpointdistancedata(var_0) {
   if(level.teambased) {
-    foreach(var_2 in level.teamnamelist)
+    foreach(var_2 in level.teamnamelist) {
     clearteamspawnpointdistancedata(var_0, var_2);
+    }
   } else
     clearteamspawnpointdistancedata(var_0, "all");
 }
@@ -818,11 +864,13 @@ addspawnsights(var_0, var_1) {
   if(!maps\mp\_utility::is_true(var_0.trackplayersights)) {
     return;
   }
-  foreach(var_3 in var_0.fullsightspawns)
+  foreach(var_3 in var_0.fullsightspawns) {
   addfullsightspawnforplayer(var_3, var_1, gettime());
+  }
 
-  foreach(var_6 in var_0.cornersightspawns)
+  foreach(var_6 in var_0.cornersightspawns) {
   addcornersightspawnforplayer(var_6, var_1, gettime());
+  }
 }
 
 addfullsightspawnforplayer(var_0, var_1, var_2) {
@@ -852,16 +900,19 @@ addcornersightspawnforplayer(var_0, var_1, var_2) {
 }
 
 getplayertraceheight(var_0, var_1) {
-  if(isDefined(var_1) && var_1)
+  if(isDefined(var_1) && var_1) {
     return 64.0;
+  }
 
   var_2 = var_0 getstance();
 
-  if(var_2 == "stand")
+  if(var_2 == "stand") {
     return 64.0;
+  }
 
-  if(var_2 == "crouch")
+  if(var_2 == "crouch") {
     return 44.0;
+  }
 
   return 32.0;
 }
@@ -897,8 +948,9 @@ finalizespawnpointchoice(var_0) {
   var_0.lastspawntime = var_1;
   var_0.lastspawnteam = self.team;
 
-  if(maps\mp\gametypes\_legacyspawnlogic::uselegacyspawning())
+  if(maps\mp\gametypes\_legacyspawnlogic::uselegacyspawning()) {
     var_0.lastspawnedplayer = self;
+  }
   else {
     removespawnsightsforplayer(self);
     addspawnsights(var_0, self);
@@ -915,27 +967,33 @@ expandspawnpointbounds(var_0) {
 }
 
 expandmins(var_0, var_1) {
-  if(var_0[0] > var_1[0])
+  if(var_0[0] > var_1[0]) {
     var_0 = (var_1[0], var_0[1], var_0[2]);
+  }
 
-  if(var_0[1] > var_1[1])
+  if(var_0[1] > var_1[1]) {
     var_0 = (var_0[0], var_1[1], var_0[2]);
+  }
 
-  if(var_0[2] > var_1[2])
+  if(var_0[2] > var_1[2]) {
     var_0 = (var_0[0], var_0[1], var_1[2]);
+  }
 
   return var_0;
 }
 
 expandmaxs(var_0, var_1) {
-  if(var_0[0] < var_1[0])
+  if(var_0[0] < var_1[0]) {
     var_0 = (var_1[0], var_0[1], var_0[2]);
+  }
 
-  if(var_0[1] < var_1[1])
+  if(var_0[1] < var_1[1]) {
     var_0 = (var_0[0], var_1[1], var_0[2]);
+  }
 
-  if(var_0[2] < var_1[2])
+  if(var_0[2] < var_1[2]) {
     var_0 = (var_0[0], var_0[1], var_1[2]);
+  }
 
   return var_0;
 }
@@ -961,8 +1019,9 @@ shoulduseteamstartspawn() {
 }
 
 recon_set_spawnpoint(var_0) {
-  if(!isDefined(self.spawninfo))
+  if(!isDefined(self.spawninfo)) {
     self.spawninfo = spawnStruct();
+  }
 
   self.spawninfo.spawnpoint = var_0;
 }

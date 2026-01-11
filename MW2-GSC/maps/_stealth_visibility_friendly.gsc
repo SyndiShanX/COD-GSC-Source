@@ -28,8 +28,9 @@ friendly_visibility_logic() {
   //for right now - we only do this for player...the system actually looks good doing it for player only,
   //but maybe in the future we'll want to change this...if we do theres a bunch of evaluation stuff
   //based on stance in the _behavior script that will have to be changed.
-  if(isPlayer(self))
+  if(isPlayer(self)) {
     self thread player_movespeed_calc_loop();
+  }
 
   while(1) {
     self ent_flag_wait("_stealth_enabled");
@@ -68,16 +69,19 @@ player_getvelocity_pc() {
   sub["crouch"] = 25;
   sub["prone"] = 10;
 
-  if(!velocity)
+  if(!velocity) {
     self._stealth.logic.player_pc_velocity = 0;
+  }
   else if(velocity > self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity += add[stance];
-    if(self._stealth.logic.player_pc_velocity > velocity)
+    if(self._stealth.logic.player_pc_velocity > velocity) {
       self._stealth.logic.player_pc_velocity = velocity;
+    }
   } else if(velocity < self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity -= sub[stance];
-    if(self._stealth.logic.player_pc_velocity < 0)
+    if(self._stealth.logic.player_pc_velocity < 0) {
       self._stealth.logic.player_pc_velocity = 0;
+    }
   }
 
   //println( self._stealth.logic.player_pc_velocity );
@@ -85,11 +89,13 @@ player_getvelocity_pc() {
 }
 
 friendly_compute_score(stance) {
-  if(!isDefined(stance))
+  if(!isDefined(stance)) {
     stance = self._stealth.logic.stance;
+  }
 
-  if(stance == "back")
+  if(stance == "back") {
     stance = "prone";
+  }
 
   detection_level = level._stealth.logic.detection_level;
 
@@ -97,13 +103,15 @@ friendly_compute_score(stance) {
 
   if(self ent_flag("_stealth_in_shadow")) {
     score_range *= .5;
-    if(score_range < level._stealth.logic.detect_range["hidden"]["prone"])
+    if(score_range < level._stealth.logic.detect_range["hidden"]["prone"]) {
       score_range = level._stealth.logic.detect_range["hidden"]["prone"];
+    }
   }
 
   score_move = self._stealth.logic.movespeed_multiplier[detection_level][stance];
-  if(isDefined(self._stealth_move_detection_cap) && score_move > self._stealth_move_detection_cap)
+  if(isDefined(self._stealth_move_detection_cap) && score_move > self._stealth_move_detection_cap) {
     score_move = self._stealth_move_detection_cap;
+  }
 
   return (score_range + score_move);
 }
@@ -178,12 +186,14 @@ friendly_compute_stances_player() {
     //of moving down...if moving down
     switch (stance) {
       case "prone":
-        if(self._stealth.logic.oldstance != "prone")
+        if(self._stealth.logic.oldstance != "prone") {
           self._stealth.logic.stance_change = self._stealth.logic.stance_change_time;
+        }
         break;
       case "crouch":
-        if(self._stealth.logic.oldstance == "stand")
+        if(self._stealth.logic.oldstance == "stand") {
           self._stealth.logic.stance_change = self._stealth.logic.stance_change_time;
+        }
         break;
     }
   }
@@ -196,8 +206,9 @@ friendly_compute_stances_player() {
     self._stealth.logic.stance = self._stealth.logic.oldstance;
     // fuckin retarded floating point miscaclculation that i need to detect for...this will
     // never hit 0 - it will hit an incredibly small number, then go negative...ghey
-    if(self._stealth.logic.stance_change > .05)
+    if(self._stealth.logic.stance_change > .05) {
       self._stealth.logic.stance_change -= .05;
+    }
     else {
       self._stealth.logic.stance_change = 0;
       self._stealth.logic.stance = stance;
@@ -232,8 +243,9 @@ friendly_init() {
   if(isPlayer(self)) {
     self._stealth.logic.getstance_func = ::friendly_getstance_player;
     self._stealth.logic.getangles_func = ::friendly_getangles_player;
-    if(level.Console)
+    if(level.Console) {
       self._stealth.logic.getvelocity_func = ::friendly_getvelocity;
+    }
     else {
       self._stealth.logic.getvelocity_func = ::player_getvelocity_pc;
       self._stealth.logic.player_pc_velocity = 0;

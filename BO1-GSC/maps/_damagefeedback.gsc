@@ -8,10 +8,12 @@ precache() {
 }
 
 init() {
-  if(getDvar(#"scr_damagefeedback") == "")
+  if(getDvar(#"scr_damagefeedback") == "") {
     setDvar("scr_damagefeedback", "1");
-  if(!GetDvarInt(#"scr_damagefeedback"))
+  }
+  if(!GetDvarInt(#"scr_damagefeedback")) {
     return;
+  }
   self.hud_damagefeedback = newclientHudElem(self);
   self.hud_damagefeedback.horzAlign = "center";
   self.hud_damagefeedback.vertAlign = "middle";
@@ -42,15 +44,18 @@ doDamageFeedback(sWeapon, eInflictor) {
 }
 
 monitorDamage() {
-  if(!GetDvarInt(#"scr_damagefeedback"))
+  if(!GetDvarInt(#"scr_damagefeedback")) {
     return;
+  }
 }
 
 updateDamageFeedback() {
-  if(!GetDvarInt(#"scr_damagefeedback"))
+  if(!GetDvarInt(#"scr_damagefeedback")) {
     return;
-  if(!IsPlayer(self))
+  }
+  if(!IsPlayer(self)) {
     return;
+  }
   self playlocalsound("SP_hit_alert");
   self.hud_damagefeedback.alpha = 1;
   self.hud_damagefeedback fadeOverTime(1);

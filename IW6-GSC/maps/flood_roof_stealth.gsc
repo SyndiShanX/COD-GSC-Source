@@ -35,8 +35,9 @@ roof_stealth_start() {
   level.allies[0] thread ally0_main();
   var_0 = level.player getweaponslistprimaries();
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   level.player takeweapon(var_2);
+  }
 
   level.player disableoffhandweapons();
   maps\flood_util::setup_default_weapons(1);
@@ -109,10 +110,12 @@ ally0_instruction_vo(var_0) {
   level endon("player_passed_table");
 
   if(!common_scripts\utility::flag("player_passed_table")) {
-    if(common_scripts\utility::flag("cw_player_underwater"))
+    if(common_scripts\utility::flag("cw_player_underwater")) {
       maps\_utility::radio_dialogue("flood_vrg_onlytwomoreup");
-    else
+    }
+    else {
       var_0 maps\_utility::dialogue_queue("flood_diz_yougoleft");
+    }
 
     wait 3;
     var_1 = [];
@@ -149,8 +152,9 @@ play_nag_stealth(var_0, var_1, var_2, var_3, var_4, var_5) {
         var_8 = 0;
         var_6 = var_6 * var_5;
 
-        if(var_7 < var_6)
+        if(var_7 < var_6) {
           var_6 = var_7;
+        }
       }
     }
   }
@@ -166,10 +170,12 @@ ally0_instruction_vo_table() {
 
 ally0_instruction_vo_holdup(var_0) {
   if(!common_scripts\utility::flag("player_passed_table")) {
-    if(common_scripts\utility::flag("cw_player_underwater"))
+    if(common_scripts\utility::flag("cw_player_underwater")) {
       maps\_utility::radio_dialogue("flood_vrg_holdup_2");
-    else
+    }
+    else {
       var_0 thread maps\_utility::dialogue_queue("flood_vrg_holdup");
+    }
   }
 }
 
@@ -348,8 +354,9 @@ drop_grenade_bag() {
 float_stuff() {
   var_0 = getEntArray("stealth_bob", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 maps\_utility::delaythread(randomfloatrange(0, 1.5), ::floater_logic, "stealth_bob");
+  }
 }
 
 floater_logic(var_0) {
@@ -440,8 +447,9 @@ ai_alert_player_break_stealth() {
   level.allies[0] thread take_hatchet();
   level.allies[0] stopanimscripted();
 
-  if(!isDefined(level.allies[0].magic_bullet_shield))
+  if(!isDefined(level.allies[0].magic_bullet_shield)) {
     level.allies[0] maps\_utility::stop_magic_bullet_shield();
+  }
 
   level.allies[0].health = 1;
   var_0 = getnode("ally_stealth_break_01_node", "targetname");
@@ -507,26 +515,33 @@ break_stealth_mg(var_0) {
     wait(randomfloatrange(0.05, 0.15));
   }
 
-  if(var_0 == "start")
+  if(var_0 == "start") {
     setdvar("ui_deadquote", &"FLOOD_STEALTH_FAIL0");
-  else if(randomint(2))
+  }
+  else if(randomint(2)) {
     setdvar("ui_deadquote", &"FLOOD_STEALTH_FAIL1");
-  else
+  }
+  else {
     setdvar("ui_deadquote", &"FLOOD_STEALTH_FAIL2");
+  }
 }
 
 no_attack_hint() {
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     return 1;
+  }
 
-  if(!isDefined(level.player.ready_to_attack) || !level.player.ready_to_attack)
+  if(!isDefined(level.player.ready_to_attack) || !level.player.ready_to_attack) {
     return 1;
+  }
 
-  if(isDefined(level.player.in_attack) && level.player.in_attack)
+  if(isDefined(level.player.in_attack) && level.player.in_attack) {
     return 1;
+  }
 
-  if(common_scripts\utility::flag("stealth_attack_player"))
+  if(common_scripts\utility::flag("stealth_attack_player")) {
     return 1;
+  }
 
   return 0;
 }
@@ -537,11 +552,13 @@ ready_to_attack() {
 }
 
 clean_up_attack(var_0) {
-  if(isDefined(level.player.ready_to_attack) && level.player.ready_to_attack)
+  if(isDefined(level.player.ready_to_attack) && level.player.ready_to_attack) {
     level.player.ready_to_attack = undefined;
+  }
 
-  if(var_0)
+  if(var_0) {
     level.player allowmelee(1);
+  }
 }
 
 check_for_melee_stab() {
@@ -575,8 +592,9 @@ check_for_melee_stab() {
       }
     } else if(var_1 < var_0 && common_scripts\utility::flag("cw_player_underwater"))
       clean_up_attack(0);
-    else
+    else {
       clean_up_attack(1);
+    }
 
     common_scripts\utility::waitframe();
   }
@@ -623,8 +641,9 @@ crouch_hint() {
 }
 
 no_crouch_hint() {
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     return 1;
+  }
 
   return 0;
 }
@@ -725,11 +744,13 @@ take_flashlight() {
 }
 
 off_flashlight(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = self;
+  }
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   if(var_1) {
     stopFXOnTag(level._effect["flood_swept_flashlight"], var_0.flashlight, "tag_light");
@@ -772,8 +793,9 @@ check_break_stealth_end() {
 }
 
 create_hatchet() {
-  if(!isDefined(self.hatchet))
+  if(!isDefined(self.hatchet)) {
     self.hatchet = maps\_utility::spawn_anim_model("stealth_hatchet", (4191.98, -2684.73, 66.7125));
+  }
 
   self.hatchet.angles = (90, 0, 0);
 }
@@ -784,8 +806,9 @@ give_hatchet(var_0) {
   var_0 clearanim( % flood_stealthkill_01_ally1_face1, 0.2);
   common_scripts\utility::flag_set("hatchet_linked");
 
-  if(!common_scripts\utility::flag("player_passed_table"))
+  if(!common_scripts\utility::flag("player_passed_table")) {
     var_0 thread maps\_utility::dialogue_queue("flood_vrg_thiswillbeuseful");
+  }
 
   var_0.hatchet.origin = var_0 gettagorigin("tag_inhand");
   var_0.hatchet.angles = var_0 gettagangles("tag_inhand");
@@ -794,8 +817,9 @@ give_hatchet(var_0) {
 }
 
 take_hatchet() {
-  if(common_scripts\utility::flag("hatchet_linked"))
+  if(common_scripts\utility::flag("hatchet_linked")) {
     self detach("com_hatchet", "tag_inhand");
+  }
 }
 
 detach_hatchet(var_0) {

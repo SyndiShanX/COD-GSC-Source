@@ -13,8 +13,9 @@ main() {
   common_scripts\utility::flag_init("coop_show_constant_icon");
   setdvarifuninitialized("coop_show_constant_icon", 1);
 
-  if(getdvarint("coop_show_constant_icon") == 1)
+  if(getdvarint("coop_show_constant_icon") == 1) {
     common_scripts\utility::flag_set("coop_show_constant_icon");
+  }
 
   precacheshader("hint_health");
   precacheshader("coop_player_location");
@@ -60,18 +61,21 @@ rebuild_friendly_icon(var_0, var_1, var_2) {
   if(isDefined(self.nofriendlyhudicon)) {
     return;
   }
-  if(!isDefined(self.friendlyicon) || self.friendlyicon.material != var_1)
+  if(!isDefined(self.friendlyicon) || self.friendlyicon.material != var_1) {
     create_fresh_friendly_icon(var_1);
+  }
 
   self.friendlyicon.color = var_0;
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     self.friendlyicon setwaypointedgestyle_rotatingicon();
+  }
 }
 
 create_fresh_friendly_icon(var_0) {
-  if(isDefined(self.friendlyicon))
+  if(isDefined(self.friendlyicon)) {
     self.friendlyicon destroy();
+  }
 
   self.friendlyicon = newclienthudelem(self);
   self.friendlyicon setshader(var_0, 1, 1);
@@ -81,10 +85,12 @@ create_fresh_friendly_icon(var_0) {
   self.friendlyicon.material = var_0;
   self.friendlyicon.hidewheninmenu = 1;
 
-  if(common_scripts\utility::flag("coop_show_constant_icon"))
+  if(common_scripts\utility::flag("coop_show_constant_icon")) {
     self.friendlyicon.alpha = 1.0;
-  else
+  }
+  else {
     self.friendlyicon.alpha = 0.0;
+  }
 }
 
 friendly_hud_icon_blink_on_fire() {
@@ -150,13 +156,15 @@ friendly_hud_init() {
 friendly_hud_destroy_on_mission_end() {
   level waittill("special_op_terminated");
 
-  foreach(var_1 in level.players)
+  foreach(var_1 in level.players) {
   var_1 player_friendly_hud_destroy();
+  }
 }
 
 player_friendly_hud_destroy() {
-  if(isDefined(self.friendlyicon))
+  if(isDefined(self.friendlyicon)) {
     self.friendlyicon destroy();
+  }
 }
 
 friendlyhudicon_hideall() {
@@ -175,8 +183,9 @@ friendlyhudicon_disable() {
 friendlyhudicon_enable() {
   self.nofriendlyhudicon = undefined;
 
-  if(!isDefined(self.friendlyicon))
+  if(!isDefined(self.friendlyicon)) {
     friendlyhudicon_normal();
+  }
 }
 
 friendlyhudicon_normal() {

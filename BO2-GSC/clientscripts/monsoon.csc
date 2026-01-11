@@ -41,8 +41,9 @@ main() {
 }
 
 swing_trail_fx(localclientnum, set, newent) {
-  if(set)
+  if(set) {
     self.trailfx = playFXOnTag(localclientnum, level._effect["harper_swing_trail"], self, "j_spineupper");
+  }
   else if(isDefined(self.trailfx)) {
     stopfx(localclientnum, self.trailfx);
     self.trailfx = undefined;
@@ -99,8 +100,9 @@ toggle_camo_suit(localclientnum, set, newent) {
       n_current_time = s_timer get_time_in_seconds();
       n_delta_val = lerpfloat(0, 1, n_current_time / 3);
 
-      if(isDefined(self))
+      if(isDefined(self)) {
         self setshaderconstant(localclientnum, 0, n_delta_val, 0, 0, 0);
+      }
     }
     while(n_current_time < 3);
   } else {
@@ -132,10 +134,12 @@ toggle_gas_suit(localclientnum, set, newent) {
 }
 
 toggle_outline(localclientnum, set, newent) {
-  if(set)
+  if(set) {
     self sethudoutlinecolor(1);
-  else
+  }
+  else {
     self sethudoutlinecolor(0);
+  }
 }
 
 toggle_data_stream(localclientnum, set, newent) {
@@ -231,17 +235,20 @@ frost_filter_over_time(n_duration, inside_chamber, set) {
   s_timer = new_timer();
   n_frost_filter_intensity = 1;
 
-  if(n_duration > level.localplayers[0].frost_filter_duration)
+  if(n_duration > level.localplayers[0].frost_filter_duration) {
     level.localplayers[0].frost_filter_duration = n_duration;
+  }
 
   if(set) {
     do {
       wait 0.016667;
 
-      if(isDefined(inside_chamber))
+      if(isDefined(inside_chamber)) {
         max_intensity = 0.2;
-      else
+      }
+      else {
         max_intensity = 1;
+      }
 
       n_current_time = s_timer get_time_in_seconds();
       n_delta_val = lerpfloat(0, max_intensity, n_current_time / level.localplayers[0].frost_filter_duration);
@@ -253,10 +260,12 @@ frost_filter_over_time(n_duration, inside_chamber, set) {
     do {
       wait 0.016667;
 
-      if(isDefined(inside_chamber))
+      if(isDefined(inside_chamber)) {
         max_intensity = 0.2;
-      else
+      }
+      else {
         max_intensity = 1;
+      }
 
       n_current_time = s_timer get_time_in_seconds();
       n_delta_val = lerpfloat(max_intensity, 0, n_current_time / level.localplayers[0].frost_filter_duration);

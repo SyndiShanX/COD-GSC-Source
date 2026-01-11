@@ -139,4 +139,3 @@ anim_origin_render(org, angles, line_length, str_label) {
     }
   }
 }
-

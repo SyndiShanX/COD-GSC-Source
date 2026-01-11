@@ -58,13 +58,15 @@ begin_finale() {
   level.sniper_vision_override = "enemyhq_sniper_view_b";
   var_1 = getent("finale_dead_truck_clip", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 solid();
+  }
 
   var_1 = getent("finale_dead_truck", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_1 show();
+  }
 
   maps\_utility::stop_exploder(8);
   common_scripts\utility::exploder(888);
@@ -160,13 +162,15 @@ digital_out(var_0, var_1) {
   var_3 = 0.3;
   var_4 = var_2;
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_3 = var_0;
+  }
 
   var_5 = 1.25;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_5 = var_1;
+  }
 
   var_6 = 0.05;
   var_7 = var_5 / var_6;
@@ -227,13 +231,16 @@ hesh_ride_chopper() {
 dog_ride_chopper(var_0) {
   level.dog maps\enemyhq_code::set_dog_scripted_mode(level.player);
 
-  if(isDefined(var_0) && var_0 == "right")
+  if(isDefined(var_0) && var_0 == "right") {
     wait 3.0;
-  else
+  }
+  else {
     level.finale_chopper maps\_anim::anim_single_solo(level.dog, "get_in_chopper", "tag_origin");
+  }
 
-  if(isDefined(level.dog.magic_bullet_shield) && level.dog.magic_bullet_shield == 1)
+  if(isDefined(level.dog.magic_bullet_shield) && level.dog.magic_bullet_shield == 1) {
     level.dog maps\_utility::stop_magic_bullet_shield();
+  }
 
   level.dog maps\_utility_dogs::kill_dog_fur_effect_and_delete();
 }
@@ -330,8 +337,9 @@ spawn_lockdown_guy() {
     var_0 = maps\_utility::spawn_ai(1);
     var_0 maps\enemyhq_code::gasmask_on_npc();
 
-    if(isDefined(self.script_aigroup) && self.script_aigroup == "finale_lmgs")
+    if(isDefined(self.script_aigroup) && self.script_aigroup == "finale_lmgs") {
       var_0 getenemyinfo(level.player);
+    }
 
     var_0 thread handle_butchdance_enemies();
 
@@ -368,8 +376,9 @@ handle_agressive_player() {
     while(common_scripts\utility::flag("finale_kill") || common_scripts\utility::flag("finale_really_kill")) {
       magicbullet("m27", var_0.origin, level.player.origin + (0, 0, 32));
 
-      if(common_scripts\utility::flag("finale_really_kill"))
+      if(common_scripts\utility::flag("finale_really_kill")) {
         level.player kill();
+      }
 
       wait(var_1);
 
@@ -380,8 +389,9 @@ handle_agressive_player() {
 
       var_1 = var_1 - 0.1;
 
-      if(var_1 < 0.1)
+      if(var_1 < 0.1) {
         var_1 = 0.1;
+      }
     }
   }
 }
@@ -389,8 +399,9 @@ handle_agressive_player() {
 butchdance_combat() {
   var_0 = getEntArray("exfil_guys1", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread spawn_lockdown_guy();
+  }
 
   thread maps\enemyhq_code::toggle_ally_outlines(0);
   level.player waittill("player_switching_to_tablet");
@@ -417,15 +428,17 @@ butchdance_combat() {
   var_4 = maps\enemyhq_code::array_spawn_targetname_allow_fail("ghost_exfil_wave1", 1);
   thread maps\enemyhq_code::ai_array_killcount_flag_set(var_4, var_4.size - 1, "ghosts_exfil2");
 
-  foreach(var_8 in var_4)
+  foreach(var_8 in var_4) {
   var_8 thread maps\enemyhq_audio::aud_handle_remote_sniper_ai(level.aud_finale_sniper);
+  }
 
   common_scripts\utility::flag_wait("ghost_timer_start");
   level.player thread maps\enemyhq_code::radio_dialog_add_and_go("enemyhq_mrk_giveussomecovering");
   common_scripts\utility::flag_wait_or_timeout("ghosts_exfil2", 10);
 
-  if(!common_scripts\utility::flag("ghosts_exfil2"))
+  if(!common_scripts\utility::flag("ghosts_exfil2")) {
     level.player thread maps\enemyhq_code::radio_dialog_add_and_go("enemyhq_mrk_weretakingfire");
+  }
 
   common_scripts\utility::flag_wait_or_timeout("ghosts_exfil2", 10);
 
@@ -532,8 +545,9 @@ butchdance_combat() {
   var_16 = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("flyaway_lynx");
   var_17 = get_vehicle_turret_ai(var_16);
 
-  foreach(var_8 in var_17)
+  foreach(var_8 in var_17) {
   var_8 getenemyinfo(level.allies[0]);
+  }
 
   common_scripts\utility::array_thread(var_16, ::flyaway_lynx_death_watcher);
   common_scripts\utility::array_thread(var_16, ::handle_truck_shooting);
@@ -567,8 +581,9 @@ butchdance_combat() {
   thread maps\enemyhq_audio::aud_lynx_turrets(var_16);
   common_scripts\utility::array_thread(var_16, ::handle_end_lynxes);
 
-  while(level.dead_finale_trucks < 2)
+  while(level.dead_finale_trucks < 2) {
     wait 0.1;
+  }
 
   common_scripts\utility::flag_set("killed_trucks");
   common_scripts\utility::flag_wait("finale_done");
@@ -614,8 +629,9 @@ flyaway_lynx_death_watcher() {
 handle_ghost_chopper_removal() {
   level.ghost_chopper waittill("reached_dynamic_path_end");
 
-  foreach(var_1 in level.ghost_chopper.riders)
+  foreach(var_1 in level.ghost_chopper.riders) {
   var_1 maps\enemyhq_code::die_quietly();
+  }
 
   level.ghost_chopper delete();
 }
@@ -625,8 +641,9 @@ get_vehicle_turret_ai(var_0) {
 
   foreach(var_3 in var_0) {
     foreach(var_5 in var_3.riders) {
-      if(var_5.vehicle_position == 3)
+      if(var_5.vehicle_position == 3) {
         var_1[var_1.size] = var_5;
+      }
     }
   }
 
@@ -715,8 +732,9 @@ handle_final_finale_guys() {
   while(!common_scripts\utility::flag("finale_done")) {
     var_0 = maps\enemyhq_code::array_spawn_targetname_allow_fail("exfil_guys3", 1);
 
-    if(common_scripts\utility::flag("get_in_choppa"))
+    if(common_scripts\utility::flag("get_in_choppa")) {
       common_scripts\utility::array_thread(var_0, ::fire_at_chopper, level.allies[0], 3, 5);
+    }
 
     var_0 = getaiarray("axis");
     maps\enemyhq_code::ai_array_killcount_flag_set(var_0, int(var_0.size / 2), "more_finale_guys");
@@ -796,8 +814,9 @@ finale_vo() {
     level.player thread maps\enemyhq_code::radio_dialog_add_and_go("enemyhq_hsh_shootthetrucks");
     wait 5;
 
-    if(!common_scripts\utility::flag("killed_trucks"))
+    if(!common_scripts\utility::flag("killed_trucks")) {
       level.player thread maps\enemyhq_code::radio_dialog_add_and_go("enemyhq_hsh_yougottahitthose");
+    }
   }
 
   common_scripts\utility::flag_wait("killed_trucks");
@@ -815,8 +834,9 @@ hurry_lines() {
   level.player maps\enemyhq_code::radio_dialog_add_and_go("enemyhq_hsh_chopperswindingup");
   wait 1;
 
-  if(!common_scripts\utility::flag("end_of_sniping"))
+  if(!common_scripts\utility::flag("end_of_sniping")) {
     level.player maps\enemyhq_code::radio_dialog_add_and_go("enemyhq_hsh_loganhurry");
+  }
 }
 
 enable_finale_and_ghost_chopper_clips() {

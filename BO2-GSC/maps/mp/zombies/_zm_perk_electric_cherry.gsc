@@ -20,8 +20,9 @@ enable_electric_cherry_perk_for_level() {
   maps\mp\zombies\_zm_perks::register_perk_machine("specialty_grenadepulldeath", ::electric_cherry_perk_machine_setup, ::electric_cherry_perk_machine_think);
   maps\mp\zombies\_zm_perks::register_perk_host_migration_func("specialty_grenadepulldeath", ::electric_cherry_host_migration_func);
 
-  if(isDefined(level.custom_electric_cherry_perk_threads) && level.custom_electric_cherry_perk_threads)
+  if(isDefined(level.custom_electric_cherry_perk_threads) && level.custom_electric_cherry_perk_threads) {
     level thread[[level.custom_electric_cherry_perk_threads]]();
+  }
 }
 
 init_electric_cherry() {
@@ -61,8 +62,9 @@ electric_cherry_perk_machine_setup(use_trigger, perk_machine, bump_trigger, coll
   perk_machine.script_string = "electriccherry_perk";
   perk_machine.targetname = "vendingelectric_cherry";
 
-  if(isDefined(bump_trigger))
+  if(isDefined(bump_trigger)) {
     bump_trigger.script_string = "electriccherry_perk";
+  }
 }
 
 electric_cherry_perk_machine_think() {
@@ -72,8 +74,9 @@ electric_cherry_perk_machine_think() {
     machine = getEntArray("vendingelectric_cherry", "targetname");
     machine_triggers = getEntArray("vending_electriccherry", "target");
 
-    for(i = 0; i < machine.size; i++)
+    for(i = 0; i < machine.size; i++) {
       machine[i] setModel("p6_zm_vending_electric_cherry_off");
+    }
 
     level thread do_initial_power_off_callback(machine, "electriccherry");
     array_thread(machine_triggers, maps\mp\zombies\_zm_perks::set_power_on, 0);
@@ -121,8 +124,9 @@ electric_cherry_laststand() {
         if(a_zombies[i].health <= 1000) {
           a_zombies[i] thread electric_cherry_death_fx();
 
-          if(isDefined(self.cherry_kills))
+          if(isDefined(self.cherry_kills)) {
             self.cherry_kills++;
+          }
 
           self maps\mp\zombies\_zm_score::add_to_player_score(40);
         } else {
@@ -144,14 +148,16 @@ electric_cherry_death_fx() {
   tag = "J_SpineUpper";
   fx = "tesla_shock";
 
-  if(self.isdog)
+  if(self.isdog) {
     tag = "J_Spine1";
+  }
 
   self playSound("zmb_elec_jib_zombie");
   network_safe_play_fx_on_tag("tesla_death_fx", 2, level._effect[fx], self, tag);
 
-  if(isDefined(self.tesla_head_gib_func) && !self.head_gibbed)
+  if(isDefined(self.tesla_head_gib_func) && !self.head_gibbed) {
     [[self.tesla_head_gib_func]]();
+  }
 }
 
 electric_cherry_shock_fx() {
@@ -159,8 +165,9 @@ electric_cherry_shock_fx() {
   tag = "J_SpineUpper";
   fx = "tesla_shock_secondary";
 
-  if(self.isdog)
+  if(self.isdog) {
     tag = "J_Spine1";
+  }
 
   self playSound("zmb_elec_jib_zombie");
   network_safe_play_fx_on_tag("tesla_shock_fx", 2, level._effect[fx], self, tag);
@@ -251,22 +258,26 @@ electric_cherry_reload_attack() {
       for(i = 0; i < a_zombies.size; i++) {
         if(isalive(self)) {
           if(isDefined(n_zombie_limit)) {
-            if(n_zombies_hit < n_zombie_limit)
+            if(n_zombies_hit < n_zombie_limit) {
               n_zombies_hit++;
-            else
+            }
+            else {
               break;
+            }
           }
 
           if(a_zombies[i].health <= perk_dmg) {
             a_zombies[i] thread electric_cherry_death_fx();
 
-            if(isDefined(self.cherry_kills))
+            if(isDefined(self.cherry_kills)) {
               self.cherry_kills++;
+            }
 
             self maps\mp\zombies\_zm_score::add_to_player_score(40);
           } else {
-            if(!isDefined(a_zombies[i].is_brutus))
+            if(!isDefined(a_zombies[i].is_brutus)) {
               a_zombies[i] thread electric_cherry_stun();
+            }
 
             a_zombies[i] thread electric_cherry_shock_fx();
           }
@@ -288,8 +299,9 @@ electric_cherry_cooldown_timer(str_current_weapon) {
   self endon("disconnect");
   n_reload_time = weaponreloadtime(str_current_weapon);
 
-  if(self hasperk("specialty_fastreload"))
+  if(self hasperk("specialty_fastreload")) {
     n_reload_time = n_reload_time * getdvarfloat(#"perk_weapReloadMultiplier");
+  }
 
   n_cooldown_time = n_reload_time + 3;
   wait(n_cooldown_time);
@@ -332,12 +344,15 @@ weapon_replaced_monitor(weapon) {
 }
 
 electric_cherry_reload_fx(n_fraction) {
-  if(n_fraction >= 0.67)
+  if(n_fraction >= 0.67) {
     self setclientfield("electric_cherry_reload_fx", 1);
-  else if(n_fraction >= 0.33 && n_fraction < 0.67)
+  }
+  else if(n_fraction >= 0.33 && n_fraction < 0.67) {
     self setclientfield("electric_cherry_reload_fx", 2);
-  else
+  }
+  else {
     self setclientfield("electric_cherry_reload_fx", 3);
+  }
 
   wait 1.0;
   self setclientfield("electric_cherry_reload_fx", 0);

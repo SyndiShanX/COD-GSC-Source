@@ -74,8 +74,9 @@ mig29_missile_set_target(var_0) {
   wait 0.2;
   self missile_settargetent(var_0);
 
-  if(isDefined(var_0.godmode) && var_0.godmode == 1)
+  if(isDefined(var_0.godmode) && var_0.godmode == 1) {
     var_0 maps\_vehicle::godoff();
+  }
 }
 
 mig29_fire_missiles(var_0, var_1) {
@@ -91,19 +92,22 @@ mig29_fire_missiles(var_0, var_1) {
   if(isDefined(var_0)) {
     var_6 thread mig29_missile_set_target(var_0);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_6 thread monitor_missile_distance(260000, var_0, var_7);
+    }
   }
 }
 
 monitor_missile_distance(var_0, var_1, var_2) {
-  while(isDefined(self) && distancesquared(self.origin, var_1.origin) > var_0)
+  while(isDefined(self) && distancesquared(self.origin, var_1.origin) > var_0) {
     wait 0.05;
+  }
 
   playFXOnTag(level._effect["vehicle_explosion_slamraam_no_missiles"], var_1, "tag_origin");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self delete();
+  }
 
   wait 0.1;
 
@@ -115,8 +119,9 @@ monitor_missile_distance(var_0, var_1, var_2) {
     var_1 kill();
     wait 0.25;
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_1 delete();
+    }
   } else {
     playFXOnTag(level._effect["airplane_damage_blacksmoke_fire"], var_1, "tag_engine_right");
     wait 0.1;

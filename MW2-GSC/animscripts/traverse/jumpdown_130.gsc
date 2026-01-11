@@ -8,10 +8,12 @@
 #using_animtree("generic_human");
 
 main() {
-  if(self.type == "dog")
+  if(self.type == "dog") {
     dog_jump_down(7, 0.7);
-  else
+  }
+  else {
     jumpdown_130_human();
+  }
 }
 
 jumpdown_130_human() {

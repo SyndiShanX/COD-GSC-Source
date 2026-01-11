@@ -51,10 +51,12 @@ main() {
   game["dialog"]["kc_denied"] = "mpl_kc_killdeny";
   level.conf_fx["vanish"] = loadfx("maps/mp_maps/fx_mp_kill_confirmed_vanish");
 
-  if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen())
+  if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen()) {
     setscoreboardcolumns("score", "kills", "killsconfirmed", "killsdenied", "deaths");
-  else
+  }
+  else {
     setscoreboardcolumns("score", "kills", "deaths", "killsconfirmed", "killsdenied");
+  }
 }
 
 onprecachegametype() {
@@ -67,8 +69,9 @@ onprecachegametype() {
 onstartgametype() {
   setclientnamemode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   if(game["switchedsides"]) {
     oldattackers = game["attackers"];
@@ -86,10 +89,12 @@ onstartgametype() {
     setobjectivetext(team, &"OBJECTIVES_CONF");
     setobjectivehinttext(team, &"OBJECTIVES_CONF_HINT");
 
-    if(level.splitscreen)
+    if(level.splitscreen) {
       setobjectivescoretext(team, &"OBJECTIVES_CONF");
-    else
+    }
+    else {
       setobjectivescoretext(team, &"OBJECTIVES_CONF_SCORE");
+    }
 
     maps\mp\gametypes\_spawnlogic::placespawnpoints(maps\mp\gametypes\_spawning::gettdmstartspawnname(team));
     maps\mp\gametypes\_spawnlogic::addspawnpoints(team, "mp_tdm_spawn");
@@ -98,8 +103,9 @@ onstartgametype() {
   maps\mp\gametypes\_spawning::updateallspawnpoints();
   level.spawn_start = [];
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   level.spawn_start[team] = maps\mp\gametypes\_spawnlogic::getspawnpointarray(maps\mp\gametypes\_spawning::gettdmstartspawnname(team));
+  }
 
   level.mapcenter = maps\mp\gametypes\_spawnlogic::findboxcenter(level.spawnmins, level.spawnmaxs);
   setmapcenter(level.mapcenter);
@@ -110,8 +116,9 @@ onstartgametype() {
   if(!isoneround()) {
     level.displayroundendtext = 1;
 
-    if(isscoreroundbased())
+    if(isscoreroundbased()) {
       maps\mp\gametypes\_globallogic_score::resetteamscores();
+    }
   }
 }
 
@@ -178,8 +185,9 @@ showtoteam(gameobject, team) {
   self hide();
 
   foreach(player in level.players) {
-    if(player.team == team)
+    if(player.team == team) {
       self showtoplayer(player);
+    }
   }
 
   for(;;) {
@@ -187,11 +195,13 @@ showtoteam(gameobject, team) {
     self hide();
 
     foreach(player in level.players) {
-      if(player.team == team)
+      if(player.team == team) {
         self showtoplayer(player);
+      }
 
-      if(gameobject.victimteam == player.team && player == gameobject.attacker)
+      if(gameobject.victimteam == player.team && player == gameobject.attacker) {
         objective_state(gameobject.objid, "invisible");
+      }
     }
   }
 }
@@ -202,8 +212,9 @@ showtoenemyteams(gameobject, friend_team) {
   self hide();
 
   foreach(player in level.players) {
-    if(player.team != friend_team)
+    if(player.team != friend_team) {
       self showtoplayer(player);
+    }
   }
 
   for(;;) {
@@ -211,11 +222,13 @@ showtoenemyteams(gameobject, friend_team) {
     self hide();
 
     foreach(player in level.players) {
-      if(player.team != friend_team)
+      if(player.team != friend_team) {
         self showtoplayer(player);
+      }
 
-      if(gameobject.victimteam == player.team && player == gameobject.attacker)
+      if(gameobject.victimteam == player.team && player == gameobject.attacker) {
         objective_state(gameobject.objid, "invisible");
+      }
     }
   }
 }
@@ -260,8 +273,9 @@ onuse(player) {
     assert(isDefined(player.lastkillconfirmedtime));
     assert(isDefined(player.lastkillconfirmedcount));
 
-    if(self.attacker != player)
+    if(self.attacker != player) {
       self.attacker thread onpickup("teammate_kill_confirmed", splash);
+    }
 
     player maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("kc_start");
     player.pers["killsconfirmed"]++;
@@ -293,8 +307,9 @@ onpickup(event, splash) {
   level endon("game_ended");
   self endon("disconnect");
 
-  while(!isDefined(self.pers))
+  while(!isDefined(self.pers)) {
     wait 0.05;
+  }
 
   maps\mp\_scoreevents::processscoreevent(event, self);
 }
@@ -376,8 +391,9 @@ clearonvictimdisconnect(victim) {
       objective_delete(level.dogtags[guid].objid);
       level.dogtags[guid].trigger delete();
 
-      for(i = 0; i < level.dogtags[guid].visuals.size; i++)
+      for(i = 0; i < level.dogtags[guid].visuals.size; i++) {
         level.dogtags[guid].visuals[i] delete();
+      }
 
       level.dogtags[guid] notify("deleted");
       level.dogtags[guid] = undefined;
@@ -388,8 +404,9 @@ clearonvictimdisconnect(victim) {
 onspawnplayerunified() {
   self.usingobj = undefined;
 
-  if(level.usestartspawns && !level.ingraceperiod)
+  if(level.usestartspawns && !level.ingraceperiod) {
     level.usestartspawns = 0;
+  }
 
   self.lastkillconfirmedtime = 0;
   self.lastkillconfirmedcount = 0;
@@ -401,8 +418,9 @@ onspawnplayerunified() {
       mindistsqr = mindist * mindist;
       distsqr = distancesquared(self.origin, level.dogtags[self.entnum].curorigin);
 
-      if(distsqr < mindistsqr)
+      if(distsqr < mindistsqr) {
         level.dogtags[self.entnum].tacinsert = 1;
+      }
     }
   }
 }
@@ -415,8 +433,9 @@ onspawnplayer(predictedspawn) {
   if(level.ingraceperiod) {
     spawnpoints = maps\mp\gametypes\_spawnlogic::getspawnpointarray(maps\mp\gametypes\_spawning::gettdmstartspawnname(spawnteam));
 
-    if(!spawnpoints.size)
+    if(!spawnpoints.size) {
       spawnpoints = maps\mp\gametypes\_spawnlogic::getspawnpointarray(maps\mp\gametypes\_spawning::gettdmstartspawnname(spawnteam));
+    }
 
     if(!spawnpoints.size) {
       spawnpoints = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(spawnteam);
@@ -428,10 +447,12 @@ onspawnplayer(predictedspawn) {
     spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_nearteam(spawnpoints);
   }
 
-  if(predictedspawn)
+  if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  else
+  }
+  else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "tdm");
+  }
 
   pixendevent();
 }

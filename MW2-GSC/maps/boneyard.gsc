@@ -571,8 +571,9 @@ scene_a_suburban() {
   while(true) {
     self waittill("damage", damage, guy);
     assert(isDefined(guy));
-    if(isDefined(self.rpg_guy) && guy == self.rpg_guy)
+    if(isDefined(self.rpg_guy) && guy == self.rpg_guy) {
       break;
+    }
   }
 
   self maps\_vehicle::godoff();
@@ -620,8 +621,9 @@ littlebird_init(no_repulsor) {
   waittillframeend;
   self thread makesentient(self.script_team);
 
-  if(!isDefined(no_repulsor))
+  if(!isDefined(no_repulsor)) {
     self thread toggle_repulsor();
+  }
 
   self.fake_target = spawn("script_model", (0, 0, 0));
   //	self.fake_target setModel( "fx" );
@@ -645,12 +647,15 @@ toggle_repulsor() {
 }
 
 littlebird_alive() {
-  if(!isDefined(level.heli))
+  if(!isDefined(level.heli)) {
     return false;
-  if(!isalive(level.heli))
+  }
+  if(!isalive(level.heli)) {
     return false;
-  if(level.heli.health < level.heli.healthbuffer)
+  }
+  if(level.heli.health < level.heli.healthbuffer) {
     return false;
+  }
   return true;
 }
 
@@ -740,8 +745,9 @@ road() {
   getent("road_hummer", "script_noteworthy") add_spawn_function(::road_hummer);
 
   triggers = getEntArray("middle_road", "targetname");
-  foreach(trigger in triggers)
+  foreach(trigger in triggers) {
   level waittill_stack_add("trigger", trigger);
+  }
 
   level waittill("waittill_stack", msg, trigger);
 
@@ -750,12 +756,14 @@ road() {
   while(true) {
     wait 0.5;
     ai = getaiarray("axis", "team3");
-    if(!isDefined(ai[0]))
+    if(!isDefined(ai[0])) {
       continue;
+    }
 
     ai = SortByDistance(ai, level.player.origin);
-    if(distance(ai[0].origin, level.player.origin) > dist)
+    if(distance(ai[0].origin, level.player.origin) > dist) {
       break;
+    }
     dist *= 0.95;
   }
 
@@ -769,8 +777,9 @@ road_hummer() {
   turret waittill("turret_ready"); // could this break it?
   mg_guy = turret getturretowner();
 
-  if(littlebird_alive())
+  if(littlebird_alive()) {
     self thread turret_track_target(turret, level.heli);
+  }
 
   array_thread(self.riders, ::set_flag_on_player_damage, "road");
   self thread set_flag_on_player_damage("road");
@@ -804,8 +813,9 @@ road_rocket_guys() {
   while(true) {
     flag_wait("road_rocket_guys");
 
-    if(!littlebird_alive())
+    if(!littlebird_alive()) {
       return;
+    }
 
     level.heli endon("death");
 
@@ -815,12 +825,14 @@ road_rocket_guys() {
       spawner = spawner_arr[i - 1];
       spawner.count++;
       guy = spawner spawn_ai();
-      if(!spawn_failed(guy))
+      if(!spawn_failed(guy)) {
         break;
+      }
     }
 
-    if(distance(level.player.origin, guy.origin) > 800)
+    if(distance(level.player.origin, guy.origin) > 800) {
       guy.ignoreme = true;
+    }
 
     guy.rocket_target = level.heli;
     guy thread road_rocket_guys_clear();
@@ -992,8 +1004,9 @@ higround_ride_force_start(living) {
   flag_wait("higround_2");
   flag_wait_either("btr80_at_end", "btr80_destroyed");
 
-  while(level.higround_guy > living)
+  while(level.higround_guy > living) {
     wait 0.5;
+  }
 
   activate_trigger_with_noteworthy("ride_start_trigger");
 }
@@ -1001,8 +1014,9 @@ higround_ride_force_start(living) {
 higround_guy() {
   level endon("ride_uaz_arriving");
 
-  if(!isDefined(level.higround_guy))
+  if(!isDefined(level.higround_guy)) {
     level.higround_guy = 0;
+  }
 
   level.higround_guy++;
 
@@ -1177,16 +1191,19 @@ higround_btr80_target_littlebird() {
   while(true) {
     flag_wait("btr80_target_littlebird");
 
-    if(!isDefined(level.heli))
+    if(!isDefined(level.heli)) {
       return;
+    }
 
     level.heli endon("death");
 
     // addes the heli as a target.
-    if(self.main_turret_enemies.size == 0)
+    if(self.main_turret_enemies.size == 0) {
       self.main_turret_enemies = array_add(self.main_turret_enemies, level.heli);
-    else
+    }
+    else {
       self.main_turret_enemies = array_insert(self.main_turret_enemies, level.heli, 0);
+    }
 
     self notify("clear_turret_target");
 
@@ -1280,10 +1297,12 @@ ride() {
   weaponlist = level.player GetWeaponsListPrimaries();
 
   foreach(weapon in weaponlist) {
-    if(IsSubStr(tolower(weapon), "rpg"))
+    if(IsSubStr(tolower(weapon), "rpg")) {
       continue;
-    if(level.player GetFractionMaxAmmo(weapon) > 0.5)
+    }
+    if(level.player GetFractionMaxAmmo(weapon) > 0.5) {
       continue;
+    }
 
     level.player GiveStartAmmo(weapon);
   }
@@ -1435,8 +1454,9 @@ ride_rider() {
   // don't do minigun guys since they get their health raised elsewhere.
 
   difficulty = level.gameskill;
-  if(difficulty == 0)
+  if(difficulty == 0) {
     difficulty = 1;
+  }
 
   self.health *= difficulty;
 }
@@ -1496,8 +1516,9 @@ ride_c130() {
   // failsafe in case some other vehicle drivs into the trigger.
   while(true) {
     level.c130.ramp_trigger waittill("trigger", vehicle);
-    if(vehicle == level.uaz)
+    if(vehicle == level.uaz) {
       break;
+    }
   }
 
   flag_set("uaz_park");
@@ -1510,8 +1531,9 @@ ride_c130() {
 }
 
 add_player_tractor_beam() {
-  if(!isDefined(level.uaz))
+  if(!isDefined(level.uaz)) {
     return;
+  }
 
   self endon("death");
   level.uaz endon("death");
@@ -1523,8 +1545,9 @@ add_player_tractor_beam() {
     forward = anglesToForward(self.angles);
     org = self.origin + forward * back_dist;
 
-    if(distance(self.origin, level.uaz.origin) < enter_dist)
+    if(distance(self.origin, level.uaz.origin) < enter_dist) {
       break;
+    }
 
     wait(0.05);
   }
@@ -1595,13 +1618,15 @@ ride_track_health() {
   while(true) {
     self waittill("damage", damage, attacker);
 
-    if(!isDefined(level.ride_minigunner) || attacker != level.ride_minigunner)
+    if(!isDefined(level.ride_minigunner) || attacker != level.ride_minigunner) {
       continue;
+    }
 
     self.damage_taken += damage;
     println("DAMAGE: " + self.damage_taken);
-    if(self.damage_taken > 37000)
+    if(self.damage_taken > 37000) {
       break;
+    }
   }
 
   self maps\_vehicle::godoff();
@@ -1669,16 +1694,18 @@ ride_uaz_player_crash() {
 
   self thread ride_uaz_player_force_crash();
 
-  if(isDefined(level.use_ent))
+  if(isDefined(level.use_ent)) {
     level.use_ent delete();
+  }
 
   crash_limit = 15000;
 
   while(true) {
     self waittill("veh_jolt", vector);
     force = abs(vector[0]) + abs(vector[1]) + abs(vector[2]);
-    if(force > crash_limit)
+    if(force > crash_limit) {
       break;
+    }
   }
 
   ride_uaz_player_launch();
@@ -1782,8 +1809,9 @@ ride_uaz_driver_attack() {
 
     attractor = Missile_CreateAttractorEnt(level.btr80, 20000, 512);
 
-    if(!flag("uaz_driver_mount"))
+    if(!flag("uaz_driver_mount")) {
       self waittill("missile_fire");
+    }
     self clearentitytarget();
   }
 
@@ -1793,8 +1821,9 @@ ride_uaz_driver_attack() {
 
     self SetEntityTarget(etarget, 1);
 
-    if(!flag("uaz_driver_mount"))
+    if(!flag("uaz_driver_mount")) {
       self waittill("missile_fire");
+    }
     self clearentitytarget();
   }
 
@@ -1829,11 +1858,13 @@ get_tanker(tanker_name, disable_explosion) {
   tanker_arr = getEntArray(tanker_name, "script_noteworthy");
   tanker = undefined;
   foreach(tanker in tanker_arr) {
-    if(tanker.classname == "script_model")
+    if(tanker.classname == "script_model") {
       break;
+    }
   }
-  if(isDefined(disable_explosion))
+  if(isDefined(disable_explosion)) {
     tanker destructible_disable_explosion();
+  }
 
   return tanker;
 }

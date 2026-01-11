@@ -82,8 +82,9 @@ init() {
   minimapOrigins = getEntArray("minimap_corner", "targetname");
   ac130Origin = (0, 0, 0);
 
-  if(miniMapOrigins.size)
+  if(miniMapOrigins.size) {
     ac130Origin = maps\mp\gametypes\_spawnlogic::findBoxCenter(miniMapOrigins[0].origin, miniMapOrigins[1].origin);
+  }
 
   level.ac130 = spawn("script_model", ac130Origin);
   level.ac130 setModel("c130_zoomrig");
@@ -126,8 +127,9 @@ tryUseAC130(lifeId) {
   self setUsingRemote("ac130");
   result = self maps\mp\killstreaks\_killstreaks::initRideKillstreak();
   if(result != "success") {
-    if(result != "disconnect")
+    if(result != "disconnect") {
       self clearUsingRemote();
+    }
 
     level.ac130InUse = false;
     return false;
@@ -250,16 +252,20 @@ add_context_sensative_dialog(name1, name2, group, soundAlias) {
 }
 
 add_context_sensative_timeout(name1, name2, groupNum, timeoutDuration) {
-  if(!isDefined(level.context_sensative_dialog_timeouts))
+  if(!isDefined(level.context_sensative_dialog_timeouts)) {
     level.context_sensative_dialog_timeouts = [];
+  }
 
   createStruct = false;
-  if(!isDefined(level.context_sensative_dialog_timeouts[name1]))
+  if(!isDefined(level.context_sensative_dialog_timeouts[name1])) {
     createStruct = true;
-  else if(!isDefined(level.context_sensative_dialog_timeouts[name1][name2]))
+  }
+  else if(!isDefined(level.context_sensative_dialog_timeouts[name1][name2])) {
     createStruct = true;
-  if(createStruct)
+  }
+  if(createStruct) {
     level.context_sensative_dialog_timeouts[name1][name2] = spawnStruct();
+  }
 
   if(isDefined(groupNum)) {
     level.context_sensative_dialog_timeouts[name1][name2].groups = [];
@@ -314,8 +320,9 @@ within_fov(start_origin, start_angles, end_origin, fov) {
 
 array_remove_nokeys(ents, remover) {
   newents = [];
-  for(i = 0; i < ents.size; i++)
+  for(i = 0; i < ents.size; i++) {
     if(ents[i] != remover)
+  }
       newents[newents.size] = ents[i];
   return newents;
 }
@@ -324,8 +331,9 @@ array_remove_index(array, index) {
   newArray = [];
   keys = getArrayKeys(array);
   for(i = (keys.size - 1); i >= 0; i--) {
-    if(keys[i] != index)
+    if(keys[i] != index) {
       newArray[newArray.size] = array[keys[i]];
+    }
   }
 
   return newArray;
@@ -388,8 +396,9 @@ setAC130Player(player) {
   	{
   		if( result != "disconnect" )
   		{
-  			if( result == "fail" )
+  			if( result == "fail" ) {
   				player maps\mp\killstreaks\_killstreaks::giveKillstreak( "ac130", player.ac130LifeId == player.pers["deaths"], false );
+  			}
 
   			level thread removeAC130Player( player, result == "disconnect" );
   		}
@@ -403,8 +412,9 @@ setAC130Player(player) {
   player ThermalVisionOn();
   player ThermalVisionFOFOverlayOn();
 
-  if(getDvarInt("camera_thirdPerson"))
+  if(getDvarInt("camera_thirdPerson")) {
     player setThirdPersonDOF(false);
+  }
 
   player _giveWeapon("ac130_105mm_mp");
   player _giveWeapon("ac130_40mm_mp");
@@ -445,8 +455,9 @@ playAC130Effects() {
 AC130_AltScene() {
   // need team check
   foreach(player in level.players) {
-    if(player != level.ac130player && player.team == level.ac130player.team)
+    if(player != level.ac130player && player.team == level.ac130player.team) {
       player thread setAltSceneObj(level.ac130.cameraModel, "tag_origin", 20);
+    }
   }
 }
 
@@ -536,15 +547,18 @@ removeAC130Player(player, disconnected) {
     player setBlurForPlayer(0, 0);
     player stopAC130();
 
-    if(getDvarInt("camera_thirdPerson"))
+    if(getDvarInt("camera_thirdPerson")) {
       player setThirdPersonDOF(true);
+    }
 
     weaponList = player GetWeaponsListExclusives();
-    foreach(weapon in weaponList)
+    foreach(weapon in weaponList) {
     player takeWeapon(weapon);
+    }
 
-    if(isDefined(player.darkScreenOverlay))
+    if(isDefined(player.darkScreenOverlay)) {
       player.darkScreenOverlay destroy();
+    }
 
     keys = getArrayKeys(level.HUDItem);
 
@@ -672,8 +686,9 @@ overlay(player) {
     level.HUDItem["thermal_mode"].alpha = 1.0;
   }
 
-  if(!level.splitscreen)
+  if(!level.splitscreen) {
     player thread overlay_coords();
+  }
 
   if(thermalEnabled) {
     player setBlurForPlayer(1.2, 0);
@@ -810,8 +825,9 @@ weaponFiredThread() {
       earthquake(0.1, 0.5, level.ac130.planeModel.origin, 1000);
     }
 
-    if(self getWeaponAmmoClip(weapon))
+    if(self getWeaponAmmoClip(weapon)) {
       continue;
+    }
 
     self thread weaponReload(weapon);
   }
@@ -835,8 +851,9 @@ weaponReload(weapon) {
 thermalVision() {
   self endon("ac130player_removed");
 
-  if(getIntProperty("ac130_thermal_enabled", 1) == 0)
+  if(getIntProperty("ac130_thermal_enabled", 1) == 0) {
     return;
+  }
 
   inverted = false;
 
@@ -849,12 +866,14 @@ thermalVision() {
 
     if(!inverted) {
       self visionSetThermalForPlayer("missilecam", 0.62);
-      if(isDefined(level.HUDItem["thermal_mode"]))
+      if(isDefined(level.HUDItem["thermal_mode"])) {
         level.HUDItem["thermal_mode"] settext(&"AC130_HUD_THERMAL_BHOT");
+      }
     } else {
       self visionSetThermalForPlayer(game["thermal_vision"], 0.51);
-      if(isDefined(level.HUDItem["thermal_mode"]))
+      if(isDefined(level.HUDItem["thermal_mode"])) {
         level.HUDItem["thermal_mode"] settext(&"AC130_HUD_THERMAL_WHOT");
+      }
     }
 
     inverted = !inverted;
@@ -873,8 +892,9 @@ clouds() {
 }
 
 clouds_create() {
-  if((isDefined(level.playerWeapon)) && (issubstr(tolower(level.playerWeapon), "25")))
+  if((isDefined(level.playerWeapon)) && (issubstr(tolower(level.playerWeapon), "25"))) {
     return;
+  }
   playfxontagforclients(level._effect["cloud"], level.ac130, "tag_player", level.ac130player);
 }
 
@@ -885,8 +905,9 @@ gun_fired_and_ready_105mm() {
 
   wait 0.5;
 
-  if(randomint(2) == 0)
+  if(randomint(2) == 0) {
     thread context_Sensative_Dialog_Play_Random_Group_Sound("weapons", "105mm_fired");
+  }
 
   wait 5.0;
 
@@ -906,8 +927,9 @@ shotFired() {
       earthquake(0.2, 0.5, position, 2000);
     }
 
-    if(getIntProperty("ac130_ragdoll_deaths", 0))
+    if(getIntProperty("ac130_ragdoll_deaths", 0)) {
       thread shotFiredPhysicsSphere(position, weaponName);
+    }
 
     wait 0.05;
   }
@@ -951,8 +973,9 @@ add_beacon_effect() {
 
   wait randomfloat(3.0);
   for(;;) {
-    if(level.ac130player)
+    if(level.ac130player) {
       playfxontagforclients(level._effect["beacon"], self, "j_spine4", level.ac130player);
+    }
     wait flashDelay;
   }
 }
@@ -973,8 +996,9 @@ context_Sensative_Dialog_Guy_In_Sight() {
   self endon("ac130player_removed");
 
   for(;;) {
-    if(context_Sensative_Dialog_Guy_In_Sight_Check())
+    if(context_Sensative_Dialog_Guy_In_Sight_Check()) {
       thread context_Sensative_Dialog_Play_Random_Group_Sound("ai", "in_sight");
+    }
     wait randomfloatrange(1, 3);
   }
 }
@@ -987,11 +1011,13 @@ context_Sensative_Dialog_Guy_In_Sight_Check() {
   enemies = [];
 
   for(i = 0; i < enemies.size; i++) {
-    if(!isDefined(enemies[i]))
+    if(!isDefined(enemies[i])) {
       continue;
+    }
 
-    if(!isalive(enemies[i]))
+    if(!isalive(enemies[i])) {
       continue;
+    }
 
     if(within_fov(level.ac130player getEye(), level.ac130player getPlayerAngles(), enemies[i].origin, level.cosine["5"])) {
       prof_end("AI_in_sight_check");
@@ -1011,8 +1037,9 @@ context_Sensative_Dialog_Guy_Crawling() {
     level waittill("ai_crawling", guy);
 
     if((isDefined(guy)) && (isDefined(guy.origin))) {
-      if(getdvar("ac130_debug_context_sensative_dialog", 0) == "1")
+      if(getdvar("ac130_debug_context_sensative_dialog", 0) == "1") {
         thread debug_line(level.ac130player.origin, guy.origin, 5.0, (0, 1, 0));
+      }
     }
 
       thread context_Sensative_Dialog_Play_Random_Group_Sound("ai", "wounded_crawl");
@@ -1026,8 +1053,9 @@ context_Sensative_Dialog_Guy_Pain() {
     level waittill("ai_pain", guy);
     /#		
     if((isDefined(guy)) && (isDefined(guy.origin))) {
-      if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+      if(getdvar("ac130_debug_context_sensative_dialog") == "1") {
         thread debug_line(level.ac130player.origin, guy.origin, 5.0, (1, 0, 0));
+      }
     }
 
       thread context_Sensative_Dialog_Play_Random_Group_Sound("ai", "wounded_pain");
@@ -1043,8 +1071,9 @@ context_Sensative_Dialog_Secondary_Explosion_Vehicle() {
     wait 1;
 
     if(isDefined(vehicle_origin)) {
-      if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+      if(getdvar("ac130_debug_context_sensative_dialog") == "1") {
         thread debug_line(level.ac130player.origin, vehicle_origin, 5.0, (0, 0, 1));
+      }
     }
 
       thread context_Sensative_Dialog_Play_Random_Group_Sound("explosion", "secondary");
@@ -1063,19 +1092,22 @@ enemy_killed_thread() {
 }
 
 context_Sensative_Dialog_Kill(guy, attacker) {
-  if(!isDefined(attacker))
+  if(!isDefined(attacker)) {
     return;
+  }
 
-  if(!isplayer(attacker))
+  if(!isplayer(attacker)) {
     return;
+  }
 
   level.enemiesKilledInTimeWindow++;
   level notify("enemy_killed");
 
   /#	
   if((isDefined(guy)) && (isDefined(guy.origin))) {
-    if(getdvar("ac130_debug_context_sensative_dialog") == "1")
+    if(getdvar("ac130_debug_context_sensative_dialog") == "1") {
       thread debug_line(level.ac130player.origin, guy.origin, 5.0, (1, 1, 0));
+    }
   }
 
 }
@@ -1093,8 +1125,9 @@ context_Sensative_Dialog_Kill_Thread() {
     soundAlias1 = "kill";
     soundAlias2 = undefined;
 
-    if(level.enemiesKilledInTimeWindow >= 2)
+    if(level.enemiesKilledInTimeWindow >= 2) {
       soundAlias2 = "small_group";
+    }
     else {
       soundAlias2 = "single";
       if(randomint(3) != 1) {
@@ -1134,8 +1167,9 @@ context_Sensative_Dialog_Locations_Thread() {
       continue;
     }
 
-    if(!flag("allow_context_sensative_dialog"))
+    if(!flag("allow_context_sensative_dialog")) {
       continue;
+    }
 
     thread context_Sensative_Dialog_Play_Random_Group_Sound("location", locationType);
 
@@ -1149,11 +1183,13 @@ context_Sensative_Dialog_Locations_Add_Notify_Event(locationType) {
   for(;;) {
     self waittill("trigger", triggerer);
 
-    if(!isDefined(triggerer))
+    if(!isDefined(triggerer)) {
       continue;
+    }
 
-    if((!isDefined(triggerer.team)) || (triggerer.team != "axis"))
+    if((!isDefined(triggerer.team)) || (triggerer.team != "axis")) {
       continue;
+    }
 
     level notify("context_location", locationType);
 
@@ -1162,15 +1198,17 @@ context_Sensative_Dialog_Locations_Add_Notify_Event(locationType) {
 }
 
 context_Sensative_Dialog_Vehiclespawn(vehicle) {
-  if(vehicle.script_team != "axis")
+  if(vehicle.script_team != "axis") {
     return;
+  }
 
   thread context_Sensative_Dialog_VehicleDeath(vehicle);
 
   vehicle endon("death");
 
-  while(!within_fov(level.ac130player getEye(), level.ac130player getPlayerAngles(), vehicle.origin, level.cosine["45"]))
+  while(!within_fov(level.ac130player getEye(), level.ac130player getPlayerAngles(), vehicle.origin, level.cosine["45"])) {
     wait 0.5;
+  }
 
   context_Sensative_Dialog_Play_Random_Group_Sound("vehicle", "incoming");
 }
@@ -1184,8 +1222,9 @@ context_Sensative_Dialog_Filler() {
   self endon("ac130player_removed");
 
   for(;;) {
-    if((isDefined(level.radio_in_use)) && (level.radio_in_use == true))
+    if((isDefined(level.radio_in_use)) && (level.radio_in_use == true)) {
       level waittill("radio_not_in_use");
+    }
 
     // if 3 seconds has passed and nothing has been transmitted then play a sound
     currentTime = getTime();
@@ -1204,14 +1243,17 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
   assert(isDefined(level.scr_sound[name1]));
   assert(isDefined(level.scr_sound[name1][name2]));
 
-  if(!isDefined(force_transmit_on_turn))
+  if(!isDefined(force_transmit_on_turn)) {
     force_transmit_on_turn = false;
+  }
 
   if(!flag("allow_context_sensative_dialog")) {
-    if(force_transmit_on_turn)
+    if(force_transmit_on_turn) {
       flag_wait("allow_context_sensative_dialog");
-    else
+    }
+    else {
       return;
+    }
   }
 
   validGroupNum = undefined;
@@ -1224,18 +1266,21 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
 
     for(i = 0; i < level.scr_sound[name1][name2].size; i++) {
       randGroup++;
-      if(randGroup >= level.scr_sound[name1][name2].size)
+      if(randGroup >= level.scr_sound[name1][name2].size) {
         randGroup = 0;
-      if(level.scr_sound[name1][name2][randGroup].played == true)
+      }
+      if(level.scr_sound[name1][name2][randGroup].played == true) {
         continue;
+      }
       validGroupNum = randGroup;
       break;
     }
 
     // all groups have been played, reset all groups to false and pick a new random one
     if(!isDefined(validGroupNum)) {
-      for(i = 0; i < level.scr_sound[name1][name2].size; i++)
+      for(i = 0; i < level.scr_sound[name1][name2].size; i++) {
         level.scr_sound[name1][name2][i].played = false;
+      }
       validGroupNum = randomint(level.scr_sound[name1][name2].size);
     }
   } else
@@ -1244,8 +1289,9 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
   assert(isDefined(validGroupNum));
   assert(validGroupNum >= 0);
 
-  if(context_Sensative_Dialog_Timedout(name1, name2, validGroupNum))
+  if(context_Sensative_Dialog_Timedout(name1, name2, validGroupNum)) {
     return;
+  }
 
   level.scr_sound[name1][name2][validGroupNum].played = true;
   randSound = randomint(level.scr_sound[name1][name2][validGroupNum].size);
@@ -1255,22 +1301,26 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
 context_Sensative_Dialog_Timedout(name1, name2, groupNum) {
   // dont play this sound if it has a timeout specified and the timeout has not expired
 
-  if(!isDefined(level.context_sensative_dialog_timeouts))
+  if(!isDefined(level.context_sensative_dialog_timeouts)) {
     return false;
+  }
 
-  if(!isDefined(level.context_sensative_dialog_timeouts[name1]))
+  if(!isDefined(level.context_sensative_dialog_timeouts[name1])) {
     return false;
+  }
 
-  if(!isDefined(level.context_sensative_dialog_timeouts[name1][name2]))
+  if(!isDefined(level.context_sensative_dialog_timeouts[name1][name2])) {
     return false;
+  }
 
   if(isDefined(level.context_sensative_dialog_timeouts[name1][name2].groups) && isDefined(level.context_sensative_dialog_timeouts[name1][name2].groups[string(groupNum)])) {
     assert(isDefined(level.context_sensative_dialog_timeouts[name1][name2].groups[string(groupNum)].v["timeoutDuration"]));
     assert(isDefined(level.context_sensative_dialog_timeouts[name1][name2].groups[string(groupNum)].v["lastPlayed"]));
 
     currentTime = getTime();
-    if((currentTime - level.context_sensative_dialog_timeouts[name1][name2].groups[string(groupNum)].v["lastPlayed"]) < level.context_sensative_dialog_timeouts[name1][name2].groups[string(groupNum)].v["timeoutDuration"])
+    if((currentTime - level.context_sensative_dialog_timeouts[name1][name2].groups[string(groupNum)].v["lastPlayed"]) < level.context_sensative_dialog_timeouts[name1][name2].groups[string(groupNum)].v["timeoutDuration"]) {
       return true;
+    }
 
     level.context_sensative_dialog_timeouts[name1][name2].groups[string(groupNum)].v["lastPlayed"] = currentTime;
   } else if(isDefined(level.context_sensative_dialog_timeouts[name1][name2].v)) {
@@ -1278,8 +1328,9 @@ context_Sensative_Dialog_Timedout(name1, name2, groupNum) {
     assert(isDefined(level.context_sensative_dialog_timeouts[name1][name2].v["lastPlayed"]));
 
     currentTime = getTime();
-    if((currentTime - level.context_sensative_dialog_timeouts[name1][name2].v["lastPlayed"]) < level.context_sensative_dialog_timeouts[name1][name2].v["timeoutDuration"])
+    if((currentTime - level.context_sensative_dialog_timeouts[name1][name2].v["lastPlayed"]) < level.context_sensative_dialog_timeouts[name1][name2].v["timeoutDuration"]) {
       return true;
+    }
 
     level.context_sensative_dialog_timeouts[name1][name2].v["lastPlayed"] = currentTime;
   }
@@ -1288,48 +1339,59 @@ context_Sensative_Dialog_Timedout(name1, name2, groupNum) {
 }
 
 playSoundOverRadio(soundAlias, force_transmit_on_turn, timeout) {
-  if(!isDefined(level.radio_in_use))
+  if(!isDefined(level.radio_in_use)) {
     level.radio_in_use = false;
-  if(!isDefined(force_transmit_on_turn))
+  }
+  if(!isDefined(force_transmit_on_turn)) {
     force_transmit_on_turn = false;
-  if(!isDefined(timeout))
+  }
+  if(!isDefined(timeout)) {
     timeout = 0;
+  }
   timeout = timeout * 1000;
   soundQueueTime = gettime();
 
   soundPlayed = false;
   soundPlayed = playAliasOverRadio(soundAlias);
-  if(soundPlayed)
+  if(soundPlayed) {
     return;
+  }
 
   // Dont make the sound wait to be played if force transmit wasn't set to true
-  if(!force_transmit_on_turn)
+  if(!force_transmit_on_turn) {
     return;
+  }
 
   level.radioForcedTransmissionQueue[level.radioForcedTransmissionQueue.size] = soundAlias;
   while(!soundPlayed) {
-    if(level.radio_in_use)
+    if(level.radio_in_use) {
       level waittill("radio_not_in_use");
+    }
 
-    if((timeout > 0) && (getTime() - soundQueueTime > timeout))
+    if((timeout > 0) && (getTime() - soundQueueTime > timeout)) {
       break;
+    }
 
-    if(!isDefined(level.ac130player))
+    if(!isDefined(level.ac130player)) {
       break;
+    }
 
     soundPlayed = playAliasOverRadio(level.radioForcedTransmissionQueue[0]);
-    if(!level.radio_in_use && isDefined(level.ac130player) && !soundPlayed)
+    if(!level.radio_in_use && isDefined(level.ac130player) && !soundPlayed) {
       assertMsg("The radio wasn't in use but the sound still did not play. This should never happen.");
+    }
   }
   level.radioForcedTransmissionQueue = array_remove_index(level.radioForcedTransmissionQueue, 0);
 }
 
 playAliasOverRadio(soundAlias) {
-  if(level.radio_in_use)
+  if(level.radio_in_use) {
     return false;
+  }
 
-  if(!isDefined(level.ac130player))
+  if(!isDefined(level.ac130player)) {
     return false;
+  }
 
   level.radio_in_use = true;
   if(self.team == "allies" || self.team == "axis") {
@@ -1358,35 +1420,42 @@ debug_circle(center, radius, duration, color, startDelay, fillCenter) {
     circlepoints[circlepoints.size] = (x, y, z);
   }
 
-  if(isDefined(startDelay))
+  if(isDefined(startDelay)) {
     wait startDelay;
+  }
 
   thread debug_circle_drawlines(circlepoints, duration, color, fillCenter, center);
 }
 
 debug_circle_drawlines(circlepoints, duration, color, fillCenter, center) {
-  if(!isDefined(fillCenter))
+  if(!isDefined(fillCenter)) {
     fillCenter = false;
-  if(!isDefined(center))
+  }
+  if(!isDefined(center)) {
     fillCenter = false;
+  }
 
   for(i = 0; i < circlepoints.size; i++) {
     start = circlepoints[i];
-    if(i + 1 >= circlepoints.size)
+    if(i + 1 >= circlepoints.size) {
       end = circlepoints[0];
-    else
+    }
+    else {
       end = circlepoints[i + 1];
+    }
 
     thread debug_line(start, end, duration, color);
 
-    if(fillCenter)
+    if(fillCenter) {
       thread debug_line(center, start, duration, color);
+    }
   }
 }
 
 debug_line(start, end, duration, color) {
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 1, 1);
+  }
 
   for(i = 0; i < (duration * 20); i++) {
     line(start, end, color);
@@ -1400,8 +1469,9 @@ handleIncomingStinger() {
   for(;;) {
     level waittill("stinger_fired", player, missile, lockTarget);
 
-    if(!isDefined(lockTarget) || (lockTarget != level.ac130.planeModel))
+    if(!isDefined(lockTarget) || (lockTarget != level.ac130.planeModel)) {
       continue;
+    }
 
     missile thread stingerProximityDetonate(player, player.team);
   }
@@ -1416,8 +1486,9 @@ deleteAfterTime(delay) {
 stingerProximityDetonate(player, missileTeam) {
   self endon("death");
 
-  if(isDefined(level.ac130player))
+  if(isDefined(level.ac130player)) {
     level.ac130player playLocalSound("missile_incoming");
+  }
 
   level.ac130.incomingMissile = true;
 
@@ -1446,8 +1517,9 @@ stingerProximityDetonate(player, missileTeam) {
       self Missile_SetTargetEnt(newTarget);
       missileTarget = newTarget;
 
-      if(isDefined(level.ac130player))
+      if(isDefined(level.ac130player)) {
         level.ac130player stopLocalSound("missile_incoming");
+      }
     }
 
     if(curDist < minDist) {
@@ -1455,8 +1527,9 @@ stingerProximityDetonate(player, missileTeam) {
       eta = (curDist / speedPerFrame);
 
       if(eta < 1.5 && !didSeatbelts && missileTarget == level.ac130.planeModel) {
-        if(isDefined(level.ac130player))
+        if(isDefined(level.ac130player)) {
           level.ac130player playLocalSound("fasten_seatbelts");
+        }
 
         didSeatbelts = true;
       }
@@ -1465,14 +1538,16 @@ stingerProximityDetonate(player, missileTeam) {
     }
 
     if(curDist > minDist) {
-      if(curDist > 1536)
+      if(curDist > 1536) {
         return;
+      }
 
       if(isDefined(level.ac130player)) {
         level.ac130player stopLocalSound("missile_incoming");
 
-        if(level.ac130player.team != missileTeam)
+        if(level.ac130player.team != missileTeam) {
           radiusDamage(self.origin, 1000, 1000, 1000, player);
+        }
       }
 
       /*
@@ -1591,13 +1666,15 @@ assign_model()
 		randIndex = RandomInt( level.scr_model[ self.animname ].size );
 		self setModel( level.scr_model[ self.animname ][ randIndex ] );
 	}
-	else
+	else {
 		self setModel( level.scr_model[ self.animname ] );
+	}
 }
 assign_animtree( animname )
 {
-	if( isDefined( animname ) )
+	if( isDefined( animname ) ) {
 		self.animname = animname;
+	}
 
 	AssertEx( isDefined( level.scr_animtree[ self.animname ] ), "There is no level.scr_animtree for animname " + self.animname );
 	self UseAnimTree( level.scr_animtree[ self.animname ] );
@@ -1605,8 +1682,9 @@ assign_animtree( animname )
 
 spawn_anim_model( animname, origin )
 {
-	if( !isDefined( origin ) )
+	if( !isDefined( origin ) ) {
 		origin = ( 0, 0, 0 );
+	}
 	model = spawn( "script_model", origin );
 	model.animname = animname;
 	model assign_animtree();

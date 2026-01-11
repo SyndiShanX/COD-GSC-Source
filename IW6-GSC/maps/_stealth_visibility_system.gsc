@@ -55,8 +55,9 @@ system_state_spotted() {
       var_2 = common_scripts\utility::array_removeundefined(var_2);
 
       if(var_2.size > 0) {
-        if(var_2[0].team == "allies")
+        if(var_2[0].team == "allies") {
           continue;
+        }
       }
 
       thread system_state_try_clear_flag(var_4);
@@ -67,8 +68,9 @@ system_state_spotted() {
 
   var_0 = level._stealth.group.groups;
 
-  foreach(var_4, var_2 in var_0)
+  foreach(var_4, var_2 in var_0) {
   maps\_stealth_shared_utilities::group_flag_clear("_stealth_spotted", var_4);
+  }
 }
 
 system_state_try_clear_flag(var_0) {
@@ -85,8 +87,9 @@ system_state_try_clear_flag(var_0) {
     wait(level._stealth.logic.detection_timeout);
     var_2 = system_state_check_no_enemy(var_0);
 
-    if(!var_2)
+    if(!var_2) {
       return;
+    }
   }
 
   level notify("enemy_" + var_0 + "_stop");
@@ -127,8 +130,9 @@ player_grenade_check_dieout(var_0) {
   level._stealth.logic.player_nades--;
   waittillframeend;
 
-  if(!level._stealth.logic.player_nades)
+  if(!level._stealth.logic.player_nades) {
     common_scripts\utility::flag_clear("_stealth_player_nade");
+  }
 }
 
 system_init_shadows() {
@@ -156,8 +160,9 @@ stealth_shadow_ai_in_volume(var_0) {
   self endon("death");
   maps\_utility::ent_flag_set("_stealth_in_shadow");
 
-  while(self istouching(var_0))
+  while(self istouching(var_0)) {
     wait 0.05;
+  }
 
   maps\_utility::ent_flag_clear("_stealth_in_shadow");
 }
@@ -165,8 +170,9 @@ stealth_shadow_ai_in_volume(var_0) {
 system_handle_clipbrush() {
   self endon("death");
 
-  if(isDefined(self.script_flag_wait))
+  if(isDefined(self.script_flag_wait)) {
     common_scripts\utility::flag_wait(self.script_flag_wait);
+  }
 
   waittillframeend;
   var_0 = "_stealth_spotted";
@@ -187,8 +193,9 @@ system_handle_clipbrush() {
   level maps\_utility::add_wait(common_scripts\utility::flag_wait, var_2);
   maps\_utility::do_wait_any();
 
-  if(self.spawnflags & 1)
+  if(self.spawnflags & 1) {
     self connectpaths();
+  }
 
   self delete();
 }
@@ -290,8 +297,9 @@ system_default_event_distances() {
 
 system_set_event_distances(var_0) {
   foreach(var_6, var_2 in var_0) {
-    foreach(var_5, var_4 in var_2)
+    foreach(var_5, var_4 in var_2) {
     level._stealth.logic.ai_event[var_6][var_5] = var_4;
+    }
   }
 }
 

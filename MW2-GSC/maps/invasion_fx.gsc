@@ -89,8 +89,9 @@ main() {
   footstep_effects();
 
   //testing in different map that doesn't have soundaliases
-  if(GetDvar("mapname") == "invasion" || GetDvar("mapname") == "so_chopper_invasion")
+  if(GetDvar("mapname") == "invasion" || GetDvar("mapname") == "so_chopper_invasion") {
     maps\createfx\invasion_fx::main();
+  }
 
   //glass breaks when you shoot exploders
   //glassarray = getEntArray( "glass", "targetname" );
@@ -104,8 +105,9 @@ main() {
   array_thread(getEntArray("traffic_light_blinky", "targetname"), ::traffic_light_blinky);
 
   light = GetEnt("tree_fire_light", "targetname");
-  if(isDefined(light))
+  if(isDefined(light)) {
     light SetLightIntensity(0);
+  }
 
   flag_init("super_exploder_exploded");
   //	thread test_exploders();
@@ -122,8 +124,9 @@ hide_destructibles_for_uav() {
 glasstest() {
   wait 10;
 
-  if(!getdvarint("scr_glasstest"))
+  if(!getdvarint("scr_glasstest")) {
     return;
+  }
 
   PrintLn("NOW");
   array = GetGlassArray("nates_glass_delete");
@@ -151,8 +154,9 @@ window_blaster(glassarray) {
   Assert(isDefined(self.radius));
   Assert(isDefined(self.script_exploder) || isDefined(self.script_prefab_exploder));
   script_exploder = self.script_exploder;
-  if(!isDefined(script_exploder))
+  if(!isDefined(script_exploder)) {
     script_exploder = self.script_prefab_exploder;
+  }
   glass_inradius = [];
   glass_inradius = get_array_of_closest(self.origin, glassarray, undefined, undefined, self.radius);
   //	nearest_three_windows = get_array_of_closest( self.origin , glass_inradius , undefined , 3, self.radius );
@@ -160,8 +164,9 @@ window_blaster(glassarray) {
   //		glass_inradius = array_remove( glass_inradius , window );
 
   level waittill("exploding_" + script_exploder);
-  foreach(glass in glass_inradius)
+  foreach(glass in glass_inradius) {
   glass notify("damage", 150, undefined, undefined, undefined, "bullet");
+  }
   //	foreach( glass in nearest_three_windows )
   //		glass notify ( "damage" );
 }
@@ -171,25 +176,30 @@ super_nates_exploder() {
   for(i = 139; i < 152; i++) {
     stop_exploder(i);
   }
-  for(i = 139; i < 152; i++)
+  for(i = 139; i < 152; i++) {
     delete_exploder(i);
+  }
 
   //array_thread( getEntArray( "nates_glass", "script_noteworthy" ), ::delete_glass );
 
   destroyGlass = GetGlassArray("nates_glass_destroy");
   deleteGlass = GetGlassArray("nates_glass_delete");
 
-  foreach(glass in destroyGlass)
+  foreach(glass in destroyGlass) {
   DestroyGlass(glass);
-  foreach(glass in deleteGlass)
+  }
+  foreach(glass in deleteGlass) {
   DeleteGlass(glass);
+  }
 
-  for(i = 0; i < 6; i++)
+  for(i = 0; i < 6; i++) {
     noself_delayCall(.1 * i, ::physicsexplosionsphere, (245 + randomint(55), -4730 + randomint(55), 2594 + randomint(55)), 3000, 2000, 6);
+  }
 
   nates_lights = getEntArray("nates_lights", "targetname");
-  foreach(light in nates_lights)
+  foreach(light in nates_lights) {
   light SetLightIntensity(0);
+  }
 
   flag_set("super_exploder_exploded");
 }
@@ -212,8 +222,9 @@ traffic_light_blinky() {
 
 tree_fire_light() {
   light = GetEnt("tree_fire_light", "targetname");
-  if(!isDefined(light))
+  if(!isDefined(light)) {
     return;
+  }
   light SetLightColor((0.909804, 0.482353, 0.200000));
   light SetLightIntensity(3);
 
@@ -236,14 +247,16 @@ tree_fire_light() {
   	while( 1 )
   	{
   		delay = RandomFloatRange( 0.4, 0.7 );
-  		if( RandomInt( 50 ) > 25)
+  		if( RandomInt( 50 ) > 25) {
   			dir *= -1;
+  		}
   		//start down and move upish
   		light moveto( original_origin + ( 0, 0, -64 ), .1 ) ;
   		wait .1;
   		light MoveTo( original_origin + ( dir * org_range ) + flare_offset, delay );
-  		if( RandomInt( 50 ) > 25 )
+  		if( RandomInt( 50 ) > 25 ) {
   			dir *= -1;
+  		}
   		light RotateTo( original_angles + ( dir * ang_range ), delay );
   		wait delay-.05;
   	}
@@ -349,8 +362,9 @@ hide_start_exploders_thread() {
   array_call(getEntArray("window_poster", "targetname"), ::hide);
   array_call(getEntArray("escape_door", "targetname"), ::hide);
 
-  if(flag("super_exploder_exploded"))
+  if(flag("super_exploder_exploded")) {
     array_call(getEntArray("super_exploder_uav_hide", "script_noteworthy"), ::hide);
+  }
 
   array_thread(getEntArray("destructible_vehicle", "targetname"), ::hide_destructibles_for_uav);
   array_thread(getEntArray("destructible_toy", "targetname"), ::hide_destructibles_for_uav);
@@ -377,8 +391,9 @@ show_start_exploders_thread() {
   array_call(getEntArray("window_poster", "targetname"), ::show);
   array_call(getEntArray("escape_door", "targetname"), ::show);
 
-  if(flag("super_exploder_exploded"))
+  if(flag("super_exploder_exploded")) {
     array_call(getEntArray("super_exploder_uav_hide", "script_noteworthy"), ::show);
+  }
 
   array_thread(getEntArray("destructible_vehicle", "targetname"), ::show_destructibles_for_uav);
   array_thread(getEntArray("destructible_toy", "targetname"), ::show_destructibles_for_uav);
@@ -411,8 +426,9 @@ debug_brushmodels() {
 
   while(1) {
     bmodels = getEntArray("script_brushmodel", "code_classname");
-    foreach(model in bmodels)
+    foreach(model in bmodels) {
     line(level.player.origin, model getcentroid());
+    }
     wait .05;
   }
 }

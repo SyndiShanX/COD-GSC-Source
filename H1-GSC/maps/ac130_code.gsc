@@ -128,8 +128,9 @@ spawn_friendlies(var_0) {
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2] stalingradspawn();
 
-    if(!maps\_utility::spawn_failed(var_3))
+    if(!maps\_utility::spawn_failed(var_3)) {
       level.friendlies[level.friendlies.size] = var_3;
+    }
   }
 
   common_scripts\utility::array_thread(level.friendlies, maps\ac130::friendly_health_init);
@@ -174,8 +175,9 @@ damage_church() {
 }
 
 autosavefriendlycountcheck(var_0) {
-  if(level.friendlycount >= level.minimumautosavefriendlycount)
+  if(level.friendlycount >= level.minimumautosavefriendlycount) {
     thread maps\_utility::autosave_by_name(var_0);
+  }
 }
 
 missionfail_church() {
@@ -248,8 +250,9 @@ level_scripted_unloadnode() {
     if(!isDefined(var_0.riders[var_2].vehicle_position)) {
       continue;
     }
-    if(var_0.riders[var_2].vehicle_position >= 1 && var_0.riders[var_2].vehicle_position <= 4)
+    if(var_0.riders[var_2].vehicle_position >= 1 && var_0.riders[var_2].vehicle_position <= 4) {
       var_1[var_1.size] = var_0.riders[var_2];
+    }
   }
 
   var_0 notify("unload");
@@ -280,8 +283,9 @@ attack_fleeing_helicopter(var_0) {
 }
 
 seaknight_doors() {
-  if(!isDefined(level.seaknight_doors_close_anim))
+  if(!isDefined(level.seaknight_doors_close_anim)) {
     level.seaknight_doors_close_anim = level.vehicle_aianims["script_vehicle_ch46e_opened_door"][1].vehicle_getinanim;
+  }
 
   level.vehicle_aianims["script_vehicle_ch46e_opened_door"][1].vehicle_getinanim = undefined;
   maps\_utility::ent_flag_wait("loaded");
@@ -308,18 +312,21 @@ friendlies_into_choppers() {
     if(!isalive(level.friendlies[var_2])) {
       continue;
     }
-    if(var_1 == 0)
+    if(var_1 == 0) {
       var_1 = 1;
-    else if(var_1 == 1)
+    }
+    else if(var_1 == 1) {
       var_1 = 0;
+    }
 
     level.friendlies[var_2] thread friendly_run_into_chopper(var_0[var_1]);
   }
 
   common_scripts\utility::flag_set("friendlies_moving_to_choppers");
 
-  while(level.friendlies_not_in_chopper > 0)
+  while(level.friendlies_not_in_chopper > 0) {
     wait 0.05;
+  }
 
   common_scripts\utility::flag_set("friendlies_in_choppers");
 }
@@ -339,8 +346,9 @@ friendly_run_into_chopper(var_0) {
   self setgoalnode(var_0);
   self waittill("goal");
 
-  if(isDefined(self.magic_bullet_shield))
+  if(isDefined(self.magic_bullet_shield)) {
     maps\_utility::stop_magic_bullet_shield();
+  }
 
   self notify("boarded_chopper");
   level.friendlies_not_in_chopper--;
@@ -371,10 +379,12 @@ friendly_fire_vehicle_thread() {
     }
     common_scripts\utility::flag_set("mission_failed");
 
-    if(common_scripts\utility::flag("friendlies_loading_vehicles"))
+    if(common_scripts\utility::flag("friendlies_loading_vehicles")) {
       setdvar("ui_deadquote", "@AC130_FRIENDLY_FIRE");
-    else
+    }
+    else {
       setdvar("ui_deadquote", "@AC130_CIVILIAN_FIRE_VEHICLE");
+    }
 
     maps\_utility::missionfailedwrapper();
   }
@@ -384,8 +394,9 @@ helicopter_driver_beacons(var_0) {
   var_1 = maps\_vehicle::waittill_vehiclespawn(var_0);
 
   for(var_2 = 0; var_2 < var_1.riders.size; var_2++) {
-    if(var_1.riders[var_2].vehicle_position == 0 || var_1.riders[var_2].vehicle_position == 5)
+    if(var_1.riders[var_2].vehicle_position == 0 || var_1.riders[var_2].vehicle_position == 5) {
       var_1.riders[var_2] thread maps\_ac130::add_beacon_effect(undefined, 1);
+    }
   }
 }
 
@@ -415,8 +426,9 @@ resetplayerkillcount() {
 }
 
 waitforplayerkillcount(var_0) {
-  while(level.enemieskilledbyplayer < var_0)
+  while(level.enemieskilledbyplayer < var_0) {
     wait 1;
+  }
 }
 
 civilian_car_riders_spawn_and_idle() {
@@ -549,12 +561,14 @@ sim_destruction() {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4);
 
     if(!isDefined(level.credits_active)) {
-      if(!isplayer(var_1))
+      if(!isplayer(var_1)) {
         continue;
+      }
     }
 
-    if(var_0 >= 999)
+    if(var_0 >= 999) {
       common_scripts\_exploder::exploder(self.script_noteworthy);
+    }
 
     if(var_0 == 990) {
       self notify("40mm_damage");
@@ -594,11 +608,13 @@ destructible_building() {
     }
   }
 
-  for(var_4 = 0; var_4 < var_0.size; var_4++)
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
     var_0[var_4] hide();
+  }
 
-  for(var_4 = 0; var_4 < var_2.size; var_4++)
+  for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_2[var_4] hide();
+  }
 
   thread trigger_40mm_hit_timeframe();
 
@@ -606,8 +622,9 @@ destructible_building() {
     self waittill("damage", var_7, var_8, var_9, var_10, var_11);
 
     if(!isDefined(level.credits_active)) {
-      if(!isplayer(var_8))
+      if(!isplayer(var_8)) {
         continue;
+      }
     }
 
     if(issubstr(tolower(var_11), "splash")) {
@@ -626,8 +643,9 @@ destructible_building() {
 
   thread maps\_utility::arcademode_kill(self.origin, "explosive", 1000);
 
-  for(var_4 = 0; var_4 < var_0.size; var_4++)
+  for(var_4 = 0; var_4 < var_0.size; var_4++) {
     var_0[var_4] show();
+  }
 
   if(var_7 == 1000) {
     for(var_4 = 0; var_4 < var_2.size; var_4++) {
@@ -676,8 +694,9 @@ trigger_40mm_hit_timeframe_wait(var_0, var_1) {
   var_2 = gettime();
   var_1--;
 
-  for(var_3 = 0; var_3 < var_1; var_3++)
+  for(var_3 = 0; var_3 < var_1; var_3++) {
     self waittill("40mm_damage");
+  }
 
   var_4 = gettime();
   var_5 = var_4 - var_2;
@@ -692,10 +711,12 @@ get_exploder_anim_name() {
   var_0 = undefined;
   var_1 = strtok(self.targetname, ":;, ");
 
-  if(var_1.size > 1 && isDefined(var_1[1]))
+  if(var_1.size > 1 && isDefined(var_1[1])) {
     var_0 = var_1[1];
-  else
+  }
+  else {
     var_0 = self.model + "_anim";
+  }
 
   return var_0;
 }
@@ -704,8 +725,9 @@ get_exploderanimhides_in_array(var_0) {
   var_1 = [];
 
   foreach(var_3 in level.exploders[var_0]) {
-    if(isDefined(var_3.targetname) && issubstr(var_3.targetname, "exploderanimhide"))
+    if(isDefined(var_3.targetname) && issubstr(var_3.targetname, "exploderanimhide")) {
       var_1[var_1.size] = var_3;
+    }
   }
 
   return var_1;
@@ -714,14 +736,16 @@ get_exploderanimhides_in_array(var_0) {
 exploderanimhide_setup() {
   level.ac130_exploder_finalstates = ["h1_ac130_1story_final", "h1_ac130_1story_house_d_final", "h1_ac130_2story_house_d_final", "h1_ac130_2story_d_final", "h1_ac130_barn_sm_final", "h1_ac130_crane_final", "h1_ac130_l2story_final", "h1_ac130_shed_sm_final", "h1_ac130_watertower_final"];
 
-  foreach(var_1 in level.ac130_exploder_finalstates)
+  foreach(var_1 in level.ac130_exploder_finalstates) {
   precachemodel(var_1);
+  }
 
   foreach(var_4 in getarraykeys(level.exploders)) {
     var_5 = get_exploderanimhides_in_array(var_4);
 
-    if(isDefined(var_5) && var_5.size > 0)
+    if(isDefined(var_5) && var_5.size > 0) {
       thread exploderanimhide_think(var_5);
+    }
   }
 }
 
@@ -744,8 +768,9 @@ exploderanimhide_think(var_0) {
       var_6.angles = var_1.angles;
       var_6 show();
 
-      foreach(var_8 in var_0)
+      foreach(var_8 in var_0) {
       var_8 delete();
+      }
     } else {
     }
   }

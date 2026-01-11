@@ -7,10 +7,12 @@
 #include clientscripts\mp\zombies\_zm_utility;
 
 main_start() {
-  if(65 < getdvarfloat(#"cg_fov"))
+  if(65 < getdvarfloat(#"cg_fov")) {
     zacklodscalerigid(0.65, 0.64);
-  else
+  }
+  else {
     zacklodscalerigid(1, 0.64);
+  }
 
   level thread buried_watch_for_fov_change();
 }
@@ -23,10 +25,12 @@ buried_watch_for_fov_change() {
     current_fov = getdvarfloat(#"cg_fov");
 
     if(current_fov != previous_fov) {
-      if(current_fov <= 65)
+      if(current_fov <= 65) {
         setdvarfloat("r_lodScaleRigid", 1);
-      else
+      }
+      else {
         setdvarfloat("r_lodScaleRigid", 0.65);
+      }
 
       previous_fov = current_fov;
     }

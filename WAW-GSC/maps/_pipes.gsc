@@ -86,8 +86,9 @@ pipemasterIterate(sample) {
     family[i].master = self;
     level.pipe_breaks = array_remove(level.pipe_breaks, family[i]);
   }
-  for(i = 0; i < family.size; i++)
+  for(i = 0; i < family.size; i++) {
     self pipemasterIterate(family[i]);
+  }
 }
 
 get_pipes_in_range(sample, pipes) {
@@ -261,10 +262,12 @@ pipebreak_damage() {
   minDamage = 1;
   maxDamage = 250;
   blastRadius = 200;
-  if(self.script_noteworthy == "fueltanker")
+  if(self.script_noteworthy == "fueltanker") {
     blastRadius = 350;
-  for(i = 0; i < self.hurtnode.size; i++)
+  }
+  for(i = 0; i < self.hurtnode.size; i++) {
     radiusDamage(self.hurtnode[i], blastRadius, maxDamage, minDamage);
+  }
 }
 
 pipebreakthink() {
@@ -306,8 +309,9 @@ pipebreakthink4() {
     }
     break;
     default: {
-      if(isDefined(self.master.firstsnd))
+      if(isDefined(self.master.firstsnd)) {
         thread play_sound_in_space("expl_gas_pipe_burst", self.fxnode.origin);
+      }
       else {
         self.master.firstsnd = true;
         thread play_sound_in_space("expl_gas_pipe_burst_decay", self.fxnode.origin);
@@ -324,12 +328,14 @@ pipebreakthink4() {
   self show();
   self solid();
   if(isDefined(self.fx_multinode)) {
-    for(i = 0; i < self.fx_multinode.size; i++)
+    for(i = 0; i < self.fx_multinode.size; i++) {
       playFX(level._effect["pipe_interactive"][self.script_noteworthy], self.fx_multinode[i].origin, self.fx_multinode[i].forward, self.fx_multinode[i].up);
+    }
   } else
     playFX(level._effect["pipe_interactive"][self.script_noteworthy], self.fxnode.origin, self.fxnode.forward, self.fxnode.up);
-  if(self.script_noteworthy == "fueltanker")
+  if(self.script_noteworthy == "fueltanker") {
     earthquake(0.4, 1.5, self.fxnode.origin, 600);
+  }
   self thread pipeimpact();
 }
 
@@ -349,8 +355,9 @@ pipesetup() {
     vec1 = vector_multiply(vec, -64);
     self.B = self.origin + vec1;
   }
-  if(self.script_noteworthy == "fire")
+  if(self.script_noteworthy == "fire") {
     self.limit = 4;
+  }
   self thread pipethink();
 }
 
@@ -413,8 +420,9 @@ pipefx(P, vec) {
     self.burnsec -= self.burninterval;
   thread play_sound_in_space("mtl_gas_pipe_hit", P);
   self thread pipesndloopfx("mtl_gas_pipe_flame_loop", P, "pipe_breaking");
-  if(vec == (0, 0, 0))
+  if(vec == (0, 0, 0)) {
     vec = (0, 360, 0);
+  }
   for(i = 0; i < self.burnsec; i++) {
     playFX(level._effect["pipe_interactive"][self.script_noteworthy], P, vec);
     wait time;
@@ -427,8 +435,9 @@ pipeimpact() {
   self endon("deleting");
   while(1) {
     self waittill("damage", other, damage, direction_vec, P, type);
-    if(type == "MOD_MELEE" || type == "MOD_IMPACT" || type == "MOD_BURNED")
+    if(type == "MOD_MELEE" || type == "MOD_IMPACT" || type == "MOD_BURNED") {
       continue;
+    }
     P = self[[level._pipe_methods[type]]](P, type);
     direction_vec = vector_multiply(direction_vec, -1);
     playFX(level._effect["pipe_interactive"]["impact"], P, direction_vec);
@@ -437,8 +446,9 @@ pipeimpact() {
 
 pipesndloopfx(snd, P, msg, time) {
   self endon(msg);
-  if(isDefined(time))
+  if(isDefined(time)) {
     wait time;
+  }
   while(1) {
     play_sound_in_space(snd, P);
   }

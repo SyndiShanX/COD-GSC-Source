@@ -14,14 +14,17 @@ init() {
   precacheShader("white");
   level.killcam = maps\mp\gametypes\_tweakables::getTweakableValue("game", "allowkillcam");
   level.finalkillcam = maps\mp\gametypes\_tweakables::getTweakableValue("game", "allowfinalkillcam");
-  if(level.killcam)
+  if(level.killcam) {
     setArchive(true);
+  }
 }
 finalKillcamWaiter() {
-  if(!level.inFinalKillcam)
+  if(!level.inFinalKillcam) {
     return;
-  while(level.inFinalKillcam)
+  }
+  while(level.inFinalKillcam) {
     wait(0.05);
+  }
 }
 postRoundFinalKillcam() {
   if(isDefined(level.sidebet) && level.sidebet) {
@@ -45,24 +48,30 @@ startFinalKillcam(
   killstreaks,
   attacker
 ) {
-  if(!level.finalkillcam)
+  if(!level.finalkillcam) {
     return;
-  if(attackerNum < 0)
+  }
+  if(attackerNum < 0) {
     return;
+  }
   recordKillcamSettings(attackerNum, targetNum, sWeapon, deathTime, deathTimeOffset, offsetTime, killcamentityindex, killcamentitystarttime, perks, killstreaks, attacker);
   startLastKillcam();
 }
 startLastKillcam() {
-  if(!level.finalkillcam)
+  if(!level.finalkillcam) {
     return;
-  if(level.inFinalKillcam)
+  }
+  if(level.inFinalKillcam) {
     return;
-  if(!isDefined(level.lastKillCam))
+  }
+  if(!isDefined(level.lastKillCam)) {
     return;
+  }
   level.inFinalKillcam = true;
   level waittill("play_final_killcam");
-  if(isDefined(level.lastKillCam.attacker))
+  if(isDefined(level.lastKillCam.attacker)) {
     level.lastKillCam.attacker notify("finalKillCamKiller");
+  }
   visionSetNaked(GetDvar(#"mapname"), 0.0);
   players = level.players;
   for(index = 0; index < players.size; index++) {
@@ -72,16 +81,18 @@ startLastKillcam() {
     player thread finalKillcam();
   }
   wait(0.1);
-  while(areAnyPlayersWatchingTheKillcam())
+  while(areAnyPlayersWatchingTheKillcam()) {
     wait(0.05);
+  }
   level.inFinalKillcam = false;
 }
 areAnyPlayersWatchingTheKillcam() {
   players = level.players;
   for(index = 0; index < players.size; index++) {
     player = players[index];
-    if(isDefined(player.killcam))
+    if(isDefined(player.killcam)) {
       return true;
+    }
   }
   return false;
 }
@@ -104,16 +115,18 @@ killcam(
   self endon("disconnect");
   self endon("spawned");
   level endon("game_ended");
-  if(attackerNum < 0)
+  if(attackerNum < 0) {
     return;
+  }
   postDeathDelay = (getTime() - deathTime) / 1000;
   predelay = postDeathDelay + deathTimeOffset;
   camtime = calcKillcamTime(sWeapon, killcamentitystarttime, predelay, respawn, maxtime);
   postdelay = calcPostDelay();
   killcamlength = camtime + postdelay;
   if(isDefined(maxtime) && killcamlength > maxtime) {
-    if(maxtime < 2)
+    if(maxtime < 2) {
       return;
+    }
     if(maxtime - camtime >= 1) {
       postdelay = maxtime - camtime;
     } else {
@@ -128,8 +141,9 @@ killcam(
   self.sessionstate = "spectator";
   self.spectatorclient = attackerNum;
   self.killcamentity = -1;
-  if(killcamentityindex >= 0)
+  if(killcamentityindex >= 0) {
     self thread setKillCamEntity(killcamentityindex, killcamentitystarttime - killcamstarttime - 100);
+  }
   self.killcamtargetentity = targetNum;
   self.archivetime = killcamoffset;
   self.killcamlength = killcamlength;
@@ -178,8 +192,9 @@ setKillCamEntity(killcamentityindex, delayms) {
   self endon("disconnect");
   self endon("end_killcam");
   self endon("spawned");
-  if(delayms > 0)
+  if(delayms > 0) {
     wait delayms / 1000;
+  }
   self.killcamentity = killcamentityindex;
 }
 waitKillcamTime() {
@@ -205,10 +220,12 @@ waitFinalKillcamSlowdown(startTime) {
 waitSkipKillcamButton() {
   self endon("disconnect");
   self endon("end_killcam");
-  while(self useButtonPressed())
+  while(self useButtonPressed()) {
     wait .05;
-  while(!(self useButtonPressed()))
+  }
+  while(!(self useButtonPressed())) {
     wait .05;
+  }
   self notify("end_killcam");
   self clientNotify("fkce");
 }
@@ -221,18 +238,22 @@ waitTeamChangeEndKillcam() {
 waitSkipKillcamSafeSpawnButton() {
   self endon("disconnect");
   self endon("end_killcam");
-  while(self fragButtonPressed())
+  while(self fragButtonPressed()) {
     wait .05;
-  while(!(self fragButtonPressed()))
+  }
+  while(!(self fragButtonPressed())) {
     wait .05;
+  }
   self.wantSafeSpawn = true;
   self notify("end_killcam");
 }
 endKillcam(final) {
-  if(isDefined(self.kc_skiptext))
+  if(isDefined(self.kc_skiptext)) {
     self.kc_skiptext.alpha = 0;
-  if(isDefined(self.kc_timer))
+  }
+  if(isDefined(self.kc_timer)) {
     self.kc_timer.alpha = 0;
+  }
   self.killcam = undefined;
   if(!(self IsSplitscreen())) {
     self hidePerk(0);
@@ -310,15 +331,17 @@ cancelKillCamOnUse_specificButton(pressingButtonFunc, finishedFunc) {
       buttonTime += 0.05;
       wait(0.05);
     }
-    if(buttonTime >= 0.5)
+    if(buttonTime >= 0.5) {
       continue;
+    }
     buttonTime = 0;
     while(!self[[pressingButtonFunc]]() && buttonTime < 0.5) {
       buttonTime += 0.05;
       wait(0.05);
     }
-    if(buttonTime >= 0.5)
+    if(buttonTime >= 0.5) {
       continue;
+    }
     self[[finishedFunc]]();
     return;
   }
@@ -349,8 +372,9 @@ finalKillcam() {
     setMatchFlag("final_killcam", 0);
     setMatchFlag("round_end_killcam", 1);
   }
-  if(level.console)
+  if(level.console) {
     self maps\mp\gametypes\_globallogic_spawn::setThirdPerson(false);
+  }
   postDeathDelay = (getTime() - level.lastKillCam.deathTime) / 1000;
   predelay = postDeathDelay + level.lastKillCam.deathTimeOffset;
   camtime = calcKillcamTime(level.lastKillCam.weapon, level.lastKillCam.entitystarttime, predelay, false, undefined);
@@ -362,8 +386,9 @@ finalKillcam() {
   self.sessionstate = "spectator";
   self.spectatorclient = level.lastKillCam.spectatorclient;
   self.killcamentity = -1;
-  if(level.lastKillCam.entityindex >= 0)
+  if(level.lastKillCam.entityindex >= 0) {
     self thread setKillCamEntity(level.lastKillCam.entityindex, level.lastKillCam.entitystarttime - killcamstarttime - 100);
+  }
   self.killcamtargetentity = level.lastKillCam.targetentityindex;
   self.archivetime = killcamoffset;
   self.killcamlength = killcamlength;
@@ -436,10 +461,12 @@ calcKillcamTime(sWeapon, entitystarttime, predelay, respawn, maxtime) {
   } else
     camtime = GetDvarFloat(#"scr_killcam_time");
   if(isDefined(maxtime)) {
-    if(camtime > maxtime)
+    if(camtime > maxtime) {
       camtime = maxtime;
-    if(camtime < .05)
+    }
+    if(camtime < .05) {
       camtime = .05;
+    }
   }
   return camtime;
 }
@@ -449,8 +476,9 @@ calcPostDelay() {
     postdelay = 2;
   } else {
     postdelay = GetDvarFloat(#"scr_killcam_posttime");
-    if(postdelay < 0.05)
+    if(postdelay < 0.05) {
       postdelay = 0.05;
+    }
   }
   return postdelay;
 }
@@ -474,19 +502,23 @@ addKillcamSkipText(respawn) {
       self.kc_skiptext.fontscale = 2;
     }
   }
-  if(respawn)
+  if(respawn) {
     self.kc_skiptext setText(&"PLATFORM_PRESS_TO_RESPAWN");
-  else
+  }
+  else {
     self.kc_skiptext setText(&"PLATFORM_PRESS_TO_SKIP");
+  }
   self.kc_skiptext.alpha = 1;
 }
 addKillcamTimer(camtime) {
   if(!isDefined(self.kc_timer)) {
     self.kc_timer = createFontString("extrabig", 3.0);
-    if(level.console)
+    if(level.console) {
       self.kc_timer setPoint("TOP", undefined, 0, 45);
-    else
+    }
+    else {
       self.kc_timer setPoint("TOP", undefined, 0, 55);
+    }
     self.kc_timer.archived = false;
     self.kc_timer.foreground = true;
   }

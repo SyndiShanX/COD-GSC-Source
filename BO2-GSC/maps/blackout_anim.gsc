@@ -176,8 +176,9 @@ mason_shadow_rig(m_player_body) {
 }
 
 mason_shadow_head_show(m_player_body) {
-  if(!isDefined(m_player_body.head_showing))
+  if(!isDefined(m_player_body.head_showing)) {
     m_player_body.head_showing = 0;
+  }
 
   if(!m_player_body.head_showing) {
     m_player_body attach("c_usa_cia_combat_masonjr_head_shadow");
@@ -186,8 +187,9 @@ mason_shadow_head_show(m_player_body) {
 }
 
 mason_shadow_head_hide(m_player_body) {
-  if(!isDefined(m_player_body.head_showing))
+  if(!isDefined(m_player_body.head_showing)) {
     m_player_body.head_showing = 0;
+  }
 
   if(m_player_body.head_showing) {
     m_player_body detach("c_usa_cia_combat_masonjr_head_shadow");
@@ -834,10 +836,12 @@ meat_shield_sequence() {
   add_player_anim("player_body", % p_command_03_08_cctv_menendez_player, 1, 0, undefined, 1, 1, 15, 15, 12, 10, 1, 1);
   add_prop_anim("menendez_start_door", % o_command_03_08_cctv_menendez_door, "p6_blackout_door_server_room");
 
-  if(level.is_defalco_alive)
+  if(level.is_defalco_alive) {
     anim_defalco = % ch_command_03_08_cctv_menendez_defalco;
-  else
+  }
+  else {
     anim_defalco = % ch_command_03_08_cctv_menendez_guy;
+  }
 
   add_actor_anim("defalco", anim_defalco, 0, 1);
   add_scene("console_chair_karma_sit_loop", "server_anim_node");
@@ -1328,13 +1332,15 @@ f38_fire_guns() {
 }
 
 aftermath_vo1(guy) {
-  if(level.briggs_loop_aftermath)
+  if(level.briggs_loop_aftermath) {
     level.player say_dialog("reds_briggs_is_dead_1");
+  }
 }
 
 aftermath_vo2(guy) {
-  if(level.karma_loop_aftermath)
+  if(level.karma_loop_aftermath) {
     level.player say_dialog("sect_we_ll_need_our_tech_0");
+  }
 }
 
 detatch_f38_parts(guy) {

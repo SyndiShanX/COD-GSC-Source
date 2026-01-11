@@ -1843,15 +1843,18 @@ check_for_valid_spawn_near_team(revivee) {
   closest_distance = 100000000;
   backup_group = undefined;
   backup_distance = 100000000;
-  if(spawn_points.size == 0)
+  if(spawn_points.size == 0) {
     return undefined;
+  }
   for(i = 0; i < players.size; i++) {
     if(is_player_valid(players[i])) {
       for(j = 0; j < spawn_points.size; j++) {
-        if(isDefined(spawn_points[i].script_int))
+        if(isDefined(spawn_points[i].script_int)) {
           ideal_distance = spawn_points[i].script_int;
-        else
+        }
+        else {
           ideal_distance = 1000;
+        }
         if(spawn_points[j].locked == false) {
           distance = distanceSquared(players[i].origin, spawn_points[j].origin);
           if(distance < (ideal_distance * ideal_distance)) {
@@ -2384,8 +2387,9 @@ chalk_round_over() {
 round_think() {
   for(;;) {
     maxreward = 50 * level.round_number;
-    if(maxreward > 500)
+    if(maxreward > 500) {
       maxreward = 500;
+    }
     level.zombie_vars["rebuild_barrier_cap_per_round"] = maxreward;
     level.pro_tips_start_time = GetTime();
     level.zombie_last_run_time = GetTime();
@@ -2463,8 +2467,9 @@ round_spawn_failsafe() {
     }
     wait(30);
     if(isDefined(self.lastchunk_destroy_time)) {
-      if((GetTime() - self.lastchunk_destroy_time) < 8000)
+      if((GetTime() - self.lastchunk_destroy_time) < 8000) {
         continue;
+      }
     }
     if(self.origin[2] < level.zombie_vars["below_world_check"]) {
       if(is_true(level.put_timed_out_zombies_back_in_queue) && !flag("dog_round")) {
@@ -2949,19 +2954,24 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
       return 0;
     }
   }
-  if(!isDefined(self) || !isDefined(attacker))
+  if(!isDefined(self) || !isDefined(attacker)) {
     return damage;
+  }
   if(!isplayer(attacker) && isDefined(self.non_attacker_func)) {
     override_damage = self[[self.non_attacker_func]](damage, weapon);
-    if(override_damage)
+    if(override_damage) {
       return override_damage;
+    }
   }
-  if(!isplayer(attacker) && !isplayer(self))
+  if(!isplayer(attacker) && !isplayer(self)) {
     return damage;
-  if(!isDefined(damage) || !isDefined(meansofdeath))
+  }
+  if(!isDefined(damage) || !isDefined(meansofdeath)) {
     return damage;
-  if(meansofdeath == "")
+  }
+  if(meansofdeath == "") {
     return damage;
+  }
   old_damage = damage;
   final_damage = damage;
   if(isDefined(self.actor_damage_func)) {
@@ -2970,8 +2980,9 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   if(isDefined(self.actor_full_damage_func)) {
     final_damage = [[self.actor_full_damage_func]](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, sHitLoc, modelIndex, psOffsetTime);
   }
-  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner))
+  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner)) {
     attacker = attacker.owner;
+  }
   if(!isDefined(self.damage_assists)) {
     self.damage_assists = [];
   }
@@ -2997,14 +3008,17 @@ is_headshot(sWeapon, sHitLoc, sMeansOfDeath) {
 }
 
 actor_killed_override(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime) {
-  if(game["state"] == "postgame")
+  if(game["state"] == "postgame") {
     return;
-  if(isai(attacker) && isDefined(attacker.script_owner)) {
-    if(attacker.script_owner.team != self.aiteam)
-      attacker = attacker.script_owner;
   }
-  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner))
+  if(isai(attacker) && isDefined(attacker.script_owner)) {
+    if(attacker.script_owner.team != self.aiteam) {
+      attacker = attacker.script_owner;
+    }
+  }
+  if(attacker.classname == "script_vehicle" && isDefined(attacker.owner)) {
     attacker = attacker.owner;
+  }
   if(IsPlayer(level.monkey_bolt_holder) && sMeansOfDeath == "MOD_GRENADE_SPLASH" &&
     (sWeapon == "crossbow_explosive_upgraded_zm" || sWeapon == "explosive_bolt_upgraded_zm")) {
     level._bolt_on_back = level._bolt_on_back + 1;
@@ -3044,10 +3058,12 @@ process_assist(type, attacker) {
   if(isDefined(self.damage_assists)) {
     for(j = 0; j < self.damage_assists.size; j++) {
       player = self.damage_assists[j];
-      if(!isDefined(player))
+      if(!isDefined(player)) {
         continue;
-      if(player == attacker)
+      }
+      if(player == attacker) {
         continue;
+      }
     }
     self.damage_assists = undefined;
   }
@@ -3399,8 +3415,9 @@ to_mins(seconds) {
 
 nazizombies_upload_solo_highscore() {
   map_name = getDvar(#"mapname");
-  if(!isZombieLeaderboardAvailable(map_name, "kills"))
+  if(!isZombieLeaderboardAvailable(map_name, "kills")) {
     return;
+  }
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(map_name == "zombie_moon") {
@@ -3438,34 +3455,44 @@ nazizombies_upload_solo_highscore() {
 
 makeNMLRankNumberSolo(total_kills, total_score) {
   maximum_survival_time = 108000;
-  if(total_kills > 2000)
+  if(total_kills > 2000) {
     total_kills = 2000;
-  if(total_score > 99999)
+  }
+  if(total_score > 99999) {
     total_score = 99999;
+  }
   score_padding = "";
-  if(total_score < 10)
+  if(total_score < 10) {
     score_padding += "0000";
-  else if(total_score < 100)
+  }
+  else if(total_score < 100) {
     score_padding += "000";
-  else if(total_score < 1000)
+  }
+  else if(total_score < 1000) {
     score_padding += "00";
-  else if(total_score < 10000)
+  }
+  else if(total_score < 10000) {
     score_padding += "0";
+  }
   rankNumber = total_kills + score_padding + total_score;
   return rankNumber;
 }
 
 nazizombies_upload_highscore() {
   playersRank = 1;
-  if(level.players_playing == 1)
+  if(level.players_playing == 1) {
     playersRank = 4;
-  else if(level.players_playing == 2)
+  }
+  else if(level.players_playing == 2) {
     playersRank = 3;
-  else if(level.players_playing == 3)
+  }
+  else if(level.players_playing == 3) {
     playersRank = 2;
+  }
   map_name = getDvar(#"mapname");
-  if(!isZombieLeaderboardAvailable(map_name, "waves") || !isZombieLeaderboardAvailable(map_name, "points"))
+  if(!isZombieLeaderboardAvailable(map_name, "waves") || !isZombieLeaderboardAvailable(map_name, "points")) {
     return;
+  }
   players = get_players();
   for(i = 0; i < players.size; i++) {
     pre_highest_wave = players[i] playerZombieStatGet(map_name, "highestwave");
@@ -3496,22 +3523,26 @@ nazizombies_upload_highscore() {
 }
 
 isZombieLeaderboardAvailable(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map]))
+  if(!isDefined(level.zombieLeaderboardNumber[map])) {
     return 0;
-  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
+  }
+  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
     return 0;
+  }
   return 1;
 }
 
 getZombieLeaderboardNumber(map, type) {
-  if(!isDefined(level.zombieLeaderboardNumber[map][type]))
+  if(!isDefined(level.zombieLeaderboardNumber[map][type])) {
     assertMsg("Unknown leaderboard number for map " + map + "and type " + type);
+  }
   return level.zombieLeaderboardNumber[map][type];
 }
 
 getZombieStatVariable(map, variable) {
-  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable]))
+  if(!isDefined(level.zombieLeaderboardStatVariable[map][variable])) {
     assertMsg("Unknown stat variable " + variable + " for map " + map);
+  }
   return level.zombieLeaderboardStatVariable[map][variable];
 }
 
@@ -3549,17 +3580,22 @@ nazizombies_set_new_zombie_stats() {
 }
 
 makeRankNumber(wave, players, time) {
-  if(time > 86400)
+  if(time > 86400) {
     time = 86400;
+  }
   padding = "";
-  if(10 > time)
+  if(10 > time) {
     padding += "0000";
-  else if(100 > time)
+  }
+  else if(100 > time) {
     padding += "000";
-  else if(1000 > time)
+  }
+  else if(1000 > time) {
     padding += "00";
-  else if(10000 > time)
+  }
+  else if(10000 > time) {
     padding += "0";
+  }
   rank = wave + "" + players + padding + time;
   return rank;
 }

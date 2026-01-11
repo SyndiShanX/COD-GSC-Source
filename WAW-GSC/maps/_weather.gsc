@@ -75,8 +75,9 @@ lightning(normal, flash) {
   }
   [[normal]]();
   waittillframeend;
-  for(;;)
+  for(;;) {
     lightningThink(normal, flash);
+  }
 }
 
 rainEffectChange(change, transition) {
@@ -137,72 +138,94 @@ player_weather_loop() {
 }
 
 rainlevelRandomwait() {
-  if(level.rainLevel == 0)
+  if(level.rainLevel == 0) {
     return (randomfloat(30));
-  else
+  }
+  else {
   if(level.rainLevel == 1)
+  }
     return (randomfloat(24));
-  else
+  else {
   if(level.rainLevel == 2)
+  }
     return (randomfloat(20));
-  else
+  else {
   if(level.rainLevel == 3)
+  }
     return (randomfloat(15));
-  else
+  else {
   if(level.rainLevel == 4)
+  }
     return (randomfloat(12));
-  else
+  else {
   if(level.rainLevel == 5)
+  }
     return (randomfloat(9));
-  else
+  else {
   if(level.rainLevel == 6)
+  }
     return (randomfloat(8));
-  else
+  else {
   if(level.rainLevel == 7)
+  }
     return (randomfloat(8));
-  else
+  else {
   if(level.rainLevel == 8)
+  }
     return (randomfloat(7));
-  else
+  else {
   if(level.rainLevel == 9)
+  }
     return (randomfloat(6));
-  else
+  else {
   if(level.rainLevel == 10)
+  }
     return (randomfloat(5));
 }
 
 rainlevelwait() {
-  if(level.rainLevel == 0)
+  if(level.rainLevel == 0) {
     return (20);
-  else
+  }
+  else {
   if(level.rainLevel == 1)
+  }
     return (18);
-  else
+  else {
   if(level.rainLevel == 2)
+  }
     return (16);
-  else
+  else {
   if(level.rainLevel == 3)
+  }
     return (14);
-  else
+  else {
   if(level.rainLevel == 4)
+  }
     return (12);
-  else
+  else {
   if(level.rainLevel == 5)
+  }
     return (10);
-  else
+  else {
   if(level.rainLevel == 6)
+  }
     return (9);
-  else
+  else {
   if(level.rainLevel == 7)
+  }
     return (8);
-  else
+  else {
   if(level.rainLevel == 8)
+  }
     return (7);
-  else
+  else {
   if(level.rainLevel == 9)
+  }
     return (6);
-  else
+  else {
   if(level.rainLevel == 10)
+  }
     return (5);
 }
 
@@ -268,45 +291,57 @@ lightningStrike(normalfunc, flashfunc) {
 }
 
 lightningflash(normalfunc, flashfunc) {
-  if(isDefined(level.lightningExploderIndex))
+  if(isDefined(level.lightningExploderIndex)) {
     exploder(level.lightningExploder[level.lightningExploderIndex]);
+  }
   [[flashfunc]]();
   wait RandomFloatRange(0.05, 0.1);
   [[normalfunc]]();
 }
 
 thunder(flashType) {
-  if(level.rainLevel == 0)
+  if(level.rainLevel == 0) {
     wait(6 + randomfloat(2));
-  else
+  }
+  else {
   if(level.rainLevel == 1)
+  }
     wait(5 + randomfloat(1.8));
-  else
+  else {
   if(level.rainLevel == 2)
+  }
     wait(4.5 + randomfloat(1.6));
-  else
+  else {
   if(level.rainLevel == 3)
+  }
     wait(4 + randomfloat(1.6));
-  else
+  else {
   if(level.rainLevel == 4)
+  }
     wait(3.5 + randomfloat(1.5));
-  else
+  else {
   if(level.rainLevel == 5)
+  }
     wait(3 + randomfloat(1.5));
-  else
+  else {
   if(level.rainLevel == 6)
+  }
     wait(2.5 + randomfloat(1.2));
-  else
+  else {
   if(level.rainLevel == 7)
+  }
     wait(2 + randomfloat(0.75));
-  else
+  else {
   if(level.rainLevel == 8)
+  }
     wait(1.25 + randomfloat(0.5));
-  else
+  else {
   if(level.rainLevel == 9)
+  }
     wait(1);
-  else
+  else {
   if(level.rainLevel == 10)
+  }
     wait(0.75);
   thunderDistant = "thunder_farL";
   thunderClose = "thunder_closeL";

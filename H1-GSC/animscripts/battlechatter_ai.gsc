@@ -13,8 +13,9 @@ addtosystem(var_0) {
   if(self.chatinitialized) {
     return;
   }
-  if(!isDefined(self.squad.chatinitialized) || !self.squad.chatinitialized)
+  if(!isDefined(self.squad.chatinitialized) || !self.squad.chatinitialized) {
     self.squad animscripts\battlechatter::init_squadbattlechatter();
+  }
 
   self.enemyclass = "infantry";
   self.calledout = [];
@@ -36,16 +37,21 @@ addtosystem(var_0) {
   if(isDefined(self.script_friendname)) {
     var_1 = tolower(self.script_friendname);
 
-    if(issubstr(var_1, "grigsby"))
+    if(issubstr(var_1, "grigsby")) {
       self.npcid = "grg";
-    else if(issubstr(var_1, "griggs"))
+    }
+    else if(issubstr(var_1, "griggs")) {
       self.npcid = "grg";
-    else if(issubstr(var_1, "price"))
+    }
+    else if(issubstr(var_1, "price")) {
       self.npcid = "pri";
-    else if(issubstr(var_1, "gaz"))
+    }
+    else if(issubstr(var_1, "gaz")) {
       self.npcid = "gaz";
-    else
+    }
+    else {
       setnpcid();
+    }
   } else
     setnpcid();
 
@@ -79,8 +85,9 @@ setnpcid() {
   var_3 = var_2;
 
   for(var_4 = 0; var_4 <= var_1; var_4++) {
-    if(var_0[(var_2 + var_4) % var_1].count < var_0[var_3].count)
+    if(var_0[(var_2 + var_4) % var_1].count < var_0[var_3].count) {
       var_3 = (var_2 + var_4) % var_1;
+    }
   }
 
   thread npcidtracker(var_3);
@@ -173,10 +180,12 @@ init_aibattlechatter() {
   self.isspeaking = 0;
   self.bcs_minpriority = 0.0;
 
-  if(isDefined(self.script_battlechatter) && !self.script_battlechatter)
+  if(isDefined(self.script_battlechatter) && !self.script_battlechatter) {
     self.battlechatter = 0;
-  else
+  }
+  else {
     self.battlechatter = level.battlechatter[self.team];
+  }
 
   self.chatinitialized = 1;
 }
@@ -202,8 +211,9 @@ addthreatevent(var_0, var_1, var_2) {
       break;
   }
 
-  if(isDefined(var_1.squad))
+  if(isDefined(var_1.squad)) {
     self.squad animscripts\battlechatter::updatecontact(var_1.squad.squadname, self);
+  }
 
   self.chatqueue["threat"] = undefined;
   self.chatqueue["threat"] = var_3;
@@ -217,10 +227,12 @@ addresponseevent(var_0, var_1, var_2, var_3) {
     return;
   }
   if(var_2 != level.player) {
-    if(isstring(var_2.npcid) && isstring(self.npcid) && var_2.npcid == self.npcid)
+    if(isstring(var_2.npcid) && isstring(self.npcid) && var_2.npcid == self.npcid) {
       return;
-    else if(!isstring(var_2.npcid) && !isstring(self.npcid) && var_2.npcid == self.npcid)
+    }
+    else if(!isstring(var_2.npcid) && !isstring(self.npcid) && var_2.npcid == self.npcid) {
       return;
+    }
   }
 
   var_4 = animscripts\battlechatter::createchatevent("response", var_0, var_3);
@@ -311,16 +323,19 @@ squadofficerwaiter() {
   for(;;) {
     var_0 = undefined;
 
-    if(self.officers.size)
+    if(self.officers.size) {
       var_1 = self.officers;
-    else
+    }
+    else {
       var_1 = self.members;
+    }
 
     var_2 = [];
 
     for(var_3 = 0; var_3 < var_1.size; var_3++) {
-      if(isalive(var_1[var_3]))
+      if(isalive(var_1[var_3])) {
         var_2[var_2.size] = var_1[var_3];
+      }
     }
 
     if(var_2.size) {
@@ -374,8 +389,9 @@ squadthreatwaiter() {
 
       for(var_3 = 0; var_3 < var_0.size; var_3++) {
         if(!isDefined(var_0[var_3])) {
-          if(var_3 == 0)
+          if(var_3 == 0) {
             var_0 = [];
+          }
 
           continue;
         }
@@ -392,8 +408,9 @@ squadthreatwaiter() {
         var_0[var_3] = var_0[var_0.size - 1];
         var_0[var_0.size - 1] = undefined;
 
-        if(!isDefined(var_0[0]))
+        if(!isDefined(var_0[0])) {
           var_0 = [];
+        }
 
         break;
       }
@@ -424,8 +441,9 @@ flexiblethreatwaiter() {
 
       for(var_3 = 0; var_3 < var_0.size; var_3++) {
         if(!isDefined(var_0[var_3])) {
-          if(var_3 == 0)
+          if(var_3 == 0) {
             var_0 = [];
+          }
 
           continue;
         }
@@ -434,16 +452,18 @@ flexiblethreatwaiter() {
           if(!isDefined(self.members[var_2].enemy) || var_0[var_3] != self.members[var_2].enemy) {
             continue;
           }
-          if(gettime() > self.members[var_2].lastenemysighttime + 2000)
+          if(gettime() > self.members[var_2].lastenemysighttime + 2000) {
             continue;
+          }
         } else if(!self.members[var_2] cansee(var_0[var_3])) {
           continue;
         }
         if(getdvar("bcs_threatLimitSpeakerDist") != "off") {
           var_4 = int(getdvar("bcs_threatLimitSpeakerDist"));
 
-          if(distance(level.player.origin, self.members[var_2].origin) > var_4)
+          if(distance(level.player.origin, self.members[var_2].origin) > var_4) {
             continue;
+          }
         }
 
         self.members[var_2] addthreatevent(var_0[var_3].enemyclass, var_0[var_3]);
@@ -452,8 +472,9 @@ flexiblethreatwaiter() {
         var_0[var_3] = var_0[var_0.size - 1];
         var_0[var_0.size - 1] = undefined;
 
-        if(!isDefined(var_0[0]))
+        if(!isDefined(var_0[0])) {
           var_0 = [];
+        }
 
         break;
       }
@@ -469,25 +490,29 @@ filterthreats(var_0) {
       continue;
     }
     if(getdvar("bcs_threatLimitTargetingPlayer") == "on") {
-      if(!isDefined(var_0[var_2].enemy) || var_0[var_2].enemy != level.player)
+      if(!isDefined(var_0[var_2].enemy) || var_0[var_2].enemy != level.player) {
         continue;
+      }
     }
 
     if(getdvar("bcs_threatLimitInPlayerFOV") == "on") {
-      if(!level.player animscripts\battlechatter::pointinfov(var_0[var_2].origin))
+      if(!level.player animscripts\battlechatter::pointinfov(var_0[var_2].origin)) {
         continue;
+      }
     }
 
     if(getdvar("bcs_threatLimitThreatDist") != "off") {
       var_3 = int(getdvar("bcs_threatLimitThreatDist"));
 
-      if(distance(level.player.origin, var_0[var_2].origin) > var_3)
+      if(distance(level.player.origin, var_0[var_2].origin) > var_3) {
         continue;
+      }
     }
 
     if(getdvar("bcs_threatLimitInLocation") == "on") {
-      if(!isDefined(var_0[var_2] animscripts\battlechatter::getlocation()) && !isDefined(var_0[var_2] animscripts\battlechatter::getlandmark()))
+      if(!isDefined(var_0[var_2] animscripts\battlechatter::getlocation()) && !isDefined(var_0[var_2] animscripts\battlechatter::getlandmark())) {
         continue;
+      }
     }
 
     var_0[var_2].threatid = var_1.size;
@@ -543,14 +568,16 @@ aideathfriendly() {
 
   if(isDefined(self)) {
     for(var_1 = 0; var_1 < self.squad.members.size; var_1++) {
-      if(isalive(self.squad.members[var_1]))
+      if(isalive(self.squad.members[var_1])) {
         self.squad.members[var_1] thread aideatheventthread();
+      }
     }
   }
 
   if(isalive(var_0) && issentient(var_0) && isDefined(var_0.squad) && var_0.battlechatter) {
-    if(isDefined(var_0.calledout[var_0.squad.squadname]))
+    if(isDefined(var_0.calledout[var_0.squad.squadname])) {
       var_0.calledout[var_0.squad.squadname] = undefined;
+    }
 
     for(var_1 = 0; var_1 < self.squad.members.size; var_1++) {
       if(!isDefined(var_0.enemyclass)) {
@@ -600,8 +627,9 @@ aiofficerorders() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!isDefined(self.squad.chatinitialized))
+  if(!isDefined(self.squad.chatinitialized)) {
     self.squad waittill("squad chat initialized");
+  }
 
   for(;;) {
     if(getdvar("bcs_enable") == "off") {
@@ -627,8 +655,9 @@ aigrenadedangerwaiter() {
     if(!isDefined(var_0) || var_0.model != "projectile_m67fraggrenade") {
       continue;
     }
-    if(distance(var_0.origin, level.player.origin) < 512)
+    if(distance(var_0.origin, level.player.origin) < 512) {
       addinformevent("incoming", "grenade");
+    }
   }
 }
 
@@ -691,8 +720,9 @@ evaluatemoveevent(var_0) {
   }
   var_2 = animscripts\battlechatter::getclosestspeaker("order", 0);
 
-  if(!isDefined(var_2) || distance(self.origin, var_2.origin) > 800)
+  if(!isDefined(var_2) || distance(self.origin, var_2.origin) > 800) {
     var_2 = animscripts\battlechatter::getclosestspeaker("order");
+  }
 
   if(isDefined(var_2) && distance(self.origin, var_2.origin) < 800 && self.combattime > 0.0) {
     anim.moveorigin.origin = self.node.origin;
@@ -713,8 +743,9 @@ evaluatemoveevent(var_0) {
     return;
     return;
   } else if(isDefined(var_2) && distance(self.origin, var_2.origin) < 600) {
-    if(animscripts\battlechatter::isofficer())
+    if(animscripts\battlechatter::isofficer()) {
       addorderevent("move", "follow", var_2);
+    }
     else {
       if(self.combattime < 0.0) {
         return;
@@ -750,8 +781,9 @@ aifolloworderwaiter() {
     if(!animscripts\battlechatter::cansay("response")) {
       continue;
     }
-    if(distance(self.origin, var_0.origin) < 600)
+    if(distance(self.origin, var_0.origin) < 600) {
       addresponseevent("ack", "follow", var_0);
+    }
   }
 }
 
@@ -764,8 +796,9 @@ evaluatereloadevent() {
   }
   var_0 = animscripts\battlechatter::getclosestspeaker("response");
 
-  if(isDefined(var_0) && isDefined(var_0.a.personimmeleeing))
+  if(isDefined(var_0) && isDefined(var_0.a.personimmeleeing)) {
     var_0 = undefined;
+  }
 
   addinformevent("reloading", "generic");
 }
@@ -774,11 +807,13 @@ evaluatemeleeevent() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(!animscripts\battlechatter::bcsenabled())
+  if(!animscripts\battlechatter::bcsenabled()) {
     return 0;
+  }
 
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return 0;
+  }
 
   return 0;
 }
@@ -790,8 +825,9 @@ evaluatefiringevent() {
   if(!animscripts\battlechatter::bcsenabled()) {
     return;
   }
-  if(!isDefined(self.enemy))
+  if(!isDefined(self.enemy)) {
     return;
+  }
 }
 
 evaluatesuppressionevent() {
@@ -825,10 +861,12 @@ addsituationalorder() {
   self endon("death");
   self endon("removed from battleChatter");
 
-  if(self.squad.squadstates["combat"].isactive)
+  if(self.squad.squadstates["combat"].isactive) {
     addsituationalcombatorder();
-  else
+  }
+  else {
     addsituationalidleorder();
+  }
 }
 
 addsituationalidleorder() {
@@ -837,8 +875,9 @@ addsituationalidleorder() {
   var_0 = self.squad;
   var_0 animscripts\squadmanager::updatestates();
 
-  if(var_0.squadstates["move"].isactive)
+  if(var_0.squadstates["move"].isactive) {
     addorderevent("move", "generic");
+  }
 }
 
 addsituationalcombatorder() {
@@ -848,26 +887,33 @@ addsituationalcombatorder() {
   var_0 animscripts\squadmanager::updatestates();
 
   if(var_0.squadstates["suppressed"].isactive) {
-    if(var_0.squadstates["move"].isactive)
+    if(var_0.squadstates["move"].isactive) {
       addorderevent("cover", "generic");
-    else if(var_0.squadstates["cover"].isactive)
+    }
+    else if(var_0.squadstates["cover"].isactive) {
       addorderevent("action", "grenade");
-    else if(randomfloat(1) > 0.5)
+    }
+    else if(randomfloat(1) > 0.5) {
       addorderevent("displace", "generic");
-    else
+    }
+    else {
       addorderevent("cover", "generic");
+    }
   } else {
-    if(self.team == "allies")
+    if(self.team == "allies") {
       var_1 = getaiarray("axis");
-    else
+    }
+    else {
       var_1 = getaiarray("allies");
+    }
 
     if(var_0.squadstates["attacking"].isactive) {
       var_2 = 0;
 
       for(var_3 = 0; var_3 < var_1.size; var_3++) {
-        if(var_1[var_3] animscripts\battlechatter::isclaimednodewindow())
+        if(var_1[var_3] animscripts\battlechatter::isclaimednodewindow()) {
           var_2 = 1;
+        }
       }
 
       if(var_2) {
@@ -881,14 +927,17 @@ addsituationalcombatorder() {
       var_2 = 0;
 
       for(var_3 = 0; var_3 < var_1.size; var_3++) {
-        if(var_1[var_3] animscripts\battlechatter::isclaimednodewindow())
+        if(var_1[var_3] animscripts\battlechatter::isclaimednodewindow()) {
           var_2 = 1;
+        }
       }
 
-      if(var_2)
+      if(var_2) {
         addorderevent("attack", "window");
-      else
+      }
+      else {
         addorderevent("action", "suppress");
+      }
     }
   }
 }
@@ -920,13 +969,16 @@ endcustomevent(var_0, var_1) {
   }
   var_2 = animscripts\battlechatter::createchatevent("custom", "generic", 1.0);
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_2.expiretime = gettime() + var_0;
+  }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_2.type = var_1;
-  else
+  }
+  else {
     var_2.type = "custom";
+  }
 
   self.chatqueue["custom"] = undefined;
   self.chatqueue["custom"] = var_2;

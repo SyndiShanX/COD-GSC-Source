@@ -23,10 +23,12 @@ init() {
     door.origin_opened = door.origin;
     door.force_open_time = 0;
 
-    if(isDefined(door.script_noteworthy) && door.script_noteworthy == "flip")
+    if(isDefined(door.script_noteworthy) && door.script_noteworthy == "flip") {
       door.origin_closed = door.origin + right;
-    else
+    }
+    else {
       door.origin_closed = door.origin - right;
+    }
 
     door.mins = door getmins();
     door.maxs = door getmaxs();
@@ -56,22 +58,26 @@ door_think(index) {
   for(;;) {
     wait 0.25;
 
-    if(self door_should_open())
+    if(self door_should_open()) {
       self door_open();
-    else
+    }
+    else {
       self door_close();
+    }
 
     self movement_process();
   }
 }
 
 door_should_open() {
-  if(gettime() < self.force_open_time)
+  if(gettime() < self.force_open_time) {
     return true;
+  }
 
   foreach(trigger in self.triggers) {
-    if(trigger trigger_is_occupied())
+    if(trigger trigger_is_occupied()) {
       return true;
+    }
   }
 
   return false;
@@ -105,8 +111,9 @@ movement_process() {
   moving = 0;
 
   if(self.opened) {
-    if(distancesquared(self.origin, self.origin_opened) > 0.001)
+    if(distancesquared(self.origin, self.origin_opened) > 0.001) {
       moving = 1;
+    }
   } else if(distancesquared(self.origin, self.origin_closed) > 0.001)
     moving = 1;
 
@@ -133,14 +140,16 @@ movement_process() {
         continue;
       }
       if(isDefined(entity.classname) && entity.classname == "auto_turret") {
-        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath)
+        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
           entity domaxdamage(self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
+        }
 
         continue;
       }
 
-      if(isDefined(entity.model) && entity.model == "t6_wpn_tac_insert_world")
+      if(isDefined(entity.model) && entity.model == "t6_wpn_tac_insert_world") {
         entity maps\mp\_tacticalinsertion::destroy_tactical_insertion();
+      }
     }
   }
 }
@@ -150,8 +159,9 @@ trigger_is_occupied() {
 
   foreach(entity in entities) {
     if(isalive(entity)) {
-      if(isplayer(entity) || isai(entity) || isvehicle(entity))
+      if(isplayer(entity) || isai(entity) || isvehicle(entity)) {
         return true;
+      }
     }
   }
 
@@ -159,11 +169,13 @@ trigger_is_occupied() {
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return undefined;
+  }
 
-  if(!isplayer(self))
+  if(!isplayer(self)) {
     return undefined;
+  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {
@@ -184,7 +196,8 @@ door_damage_think() {
     self.maxhealth = 99999;
     self.health = self.maxhealth;
 
-    if(mod == "MOD_PISTOL_BULLET" || mod == "MOD_RIFLE_BULLET")
+    if(mod == "MOD_PISTOL_BULLET" || mod == "MOD_RIFLE_BULLET") {
       self.force_open_time = gettime() + 1500;
+    }
   }
 }

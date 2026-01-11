@@ -17,8 +17,9 @@ register_game_module() {
 }
 
 register_turned_match(start_func, end_func, name) {
-  if(!isDefined(level._registered_turned_matches))
+  if(!isDefined(level._registered_turned_matches)) {
     level._registered_turned_matches = [];
+  }
 
   match = spawnStruct();
   match.match_name = name;
@@ -29,8 +30,9 @@ register_turned_match(start_func, end_func, name) {
 
 get_registered_turned_match(name) {
   foreach(struct in level._registered_turned_matches) {
-    if(struct.match_name == name)
+    if(struct.match_name == name) {
       return struct;
+    }
   }
 }
 

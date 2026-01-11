@@ -1089,12 +1089,15 @@ monkey_wait_to_drop() {
 
 play_player_perk_theft_vox(perk, monkey) {
   force_quit = 0;
-  if(!isDefined(level.perk_theft_vox))
+  if(!isDefined(level.perk_theft_vox)) {
     level.perk_theft_vox = [];
-  if(!isDefined(level.perk_theft_vox[perk]))
+  }
+  if(!isDefined(level.perk_theft_vox[perk])) {
     level.perk_theft_vox[perk] = false;
-  if(level.perk_theft_vox[perk])
+  }
+  if(level.perk_theft_vox[perk]) {
     return;
+  }
   level.perk_theft_vox[perk] = true;
   while(1) {
     player = getplayers();
@@ -1121,8 +1124,9 @@ play_player_perk_theft_vox(perk, monkey) {
 play_attack_impacts(time) {
   self endon("death");
   for(i = 0; i < time; i++) {
-    if(RandomIntRange(0, 100) >= 41)
+    if(RandomIntRange(0, 100) >= 41) {
       self playSound("zmb_monkey_attack_machine");
+    }
     wait(RandomFloatRange(.7, 1.1));
   }
 }
@@ -1650,8 +1654,9 @@ monkey_zombie_die() {
   playFX(level._effect["monkey_death"], self.origin);
   level maps\_zombiemode_spawner::zombie_death_points(self.origin, self.damagemod, self.damagelocation, self.attacker, self);
   if(RandomIntRange(0, 100) >= 75) {
-    if(isDefined(self.attacker) && IsPlayer(self.attacker))
+    if(isDefined(self.attacker) && IsPlayer(self.attacker)) {
       self.attacker maps\_zombiemode_audio::create_and_play_dialog("kill", "space_monkey");
+    }
   }
   if(self.damagemod == "MOD_BURNED") {
     self thread animscripts\zombie_death::flame_death_fx();

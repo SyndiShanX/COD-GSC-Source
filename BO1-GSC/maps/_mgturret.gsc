@@ -287,8 +287,9 @@ _spawner_mg42_think() {
     ai = GetAiArray();
     for(i = 0; i < ai.size; i++) {
       excluded = true;
-      if((isDefined(ai[i].script_mg42)) && (ai[i].script_mg42 == self.script_mg42))
+      if((isDefined(ai[i].script_mg42)) && (ai[i].script_mg42 == self.script_mg42)) {
         excluded = false;
+      }
       if(isDefined(ai[i].used_an_mg42)) {
         excluded = true;
       }
@@ -544,34 +545,41 @@ saw_mgTurretLink(nodes) {
   possible_turrets = getEntArray("misc_turret", "classname");
   turrets = [];
   for(i = 0; i < possible_turrets.size; i++) {
-    if(isDefined(possible_turrets[i].targetname))
+    if(isDefined(possible_turrets[i].targetname)) {
       continue;
+    }
     if(isDefined(possible_turrets[i].isvehicleattached)) {
       assertEx(possible_turrets[i].isvehicleattached != 0, "Setting must be either true or undefined");
       continue;
     }
     turrets[possible_turrets[i].origin + ""] = possible_turrets[i];
   }
-  if(!turrets.size)
+  if(!turrets.size) {
     return;
+  }
   for(nodeIndex = 0; nodeIndex < nodes.size; nodeIndex++) {
     node = nodes[nodeIndex];
-    if(node.type == "Path")
+    if(node.type == "Path") {
       continue;
-    if(node.type == "Begin")
+    }
+    if(node.type == "Begin") {
       continue;
-    if(node.type == "End")
+    }
+    if(node.type == "End") {
       continue;
+    }
     nodeForward = anglesToForward((0, node.angles[1], 0));
     keys = getArrayKeys(turrets);
     for(i = 0; i < keys.size; i++) {
       turret = turrets[keys[i]];
-      if(distance(node.origin, turret.origin) > 75)
+      if(distance(node.origin, turret.origin) > 75) {
         continue;
+      }
       turretForward = anglesToForward((0, turret.angles[1], 0));
       dot = vectorDot(nodeForward, turretForward);
-      if(dot < 0.9)
+      if(dot < 0.9) {
         continue;
+      }
       node.turretInfo = spawnStruct();
       node.turretInfo.origin = turret.origin;
       node.turretInfo.angles = turret.angles;
@@ -596,8 +604,9 @@ auto_mgTurretLink(nodes) {
   possible_turrets = getEntArray("misc_turret", "classname");
   turrets = [];
   for(i = 0; i < possible_turrets.size; i++) {
-    if(!isDefined(possible_turrets[i].targetname) || tolower(possible_turrets[i].targetname) != "auto_mgturret")
+    if(!isDefined(possible_turrets[i].targetname) || tolower(possible_turrets[i].targetname) != "auto_mgturret") {
       continue;
+    }
     if(!isDefined(possible_turrets[i].export)) {
       continue;
     }

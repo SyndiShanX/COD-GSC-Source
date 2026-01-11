@@ -424,4 +424,3 @@ showonespawnpoint(spawn_point, color, notification, height, print) {
 
   return;
 }
-

@@ -45,8 +45,9 @@ func_B9D9() {
     if(isDefined(self.owner) && isDefined(var_04) && var_04 == self.owner) {
       continue;
     }
-    if(!isDefined(var_06))
+    if(!isDefined(var_06)) {
       var_06 = 0;
+    }
 
     var_07 = 0;
     var_08 = 1;
@@ -60,14 +61,17 @@ func_B9D9() {
     }
     var_10 = undefined;
 
-    if(var_09 > 2)
+    if(var_09 > 2) {
       var_10 = 0.75;
-    else
+    }
+    else {
       var_10 = 0.25;
+    }
 
     if(level.teambased && isDefined(var_04) && isDefined(var_4.team) && var_4.team == self.team && var_04 != self) {
-      if(level.friendlyfire == 0)
+      if(level.friendlyfire == 0) {
         continue;
+      }
       else if(level.friendlyfire == 1) {} else if(level.friendlyfire == 2) {
         var_09 = var_09 * 0.5;
         var_10 = var_10 * 0.5;
@@ -81,8 +85,9 @@ func_B9D9() {
     } else if(isDefined(var_04)) {
       var_04 notify("flash_hit");
 
-      if(var_04 != self)
+      if(var_04 != self) {
         var_04 scripts\mp\missions::processchallenge("ch_indecentexposure");
+      }
     }
 
     if(var_08 && isDefined(self)) {
@@ -92,24 +97,28 @@ func_B9D9() {
         var_04 thread scripts\mp\damagefeedback::updatedamagefeedback("flash");
         var_11 = self;
 
-        if(isplayer(var_04) && var_04 getteamdompoints("specialty_paint", "perk") && var_04 scripts\mp\utility\game::_hasperk("specialty_paint"))
+        if(isplayer(var_04) && var_04 getteamdompoints("specialty_paint", "perk") && var_04 scripts\mp\utility\game::_hasperk("specialty_paint")) {
           var_11 thread scripts\mp\perks\perkfunctions::setpainted(var_04);
+        }
       }
     }
 
-    if(var_07 && isDefined(var_04))
+    if(var_07 && isDefined(var_04)) {
       var_04 thread func_20CA(var_09, var_10);
+    }
   }
 }
 
 func_20CA(var_00, var_01) {
   self endon("disconnect");
 
-  if(!isDefined(self.func_6EC8) || var_00 > self.func_6EC8)
+  if(!isDefined(self.func_6EC8) || var_00 > self.func_6EC8) {
     self.func_6EC8 = var_00;
+  }
 
-  if(!isDefined(self.func_6EDB) || var_01 > self.func_6EDB)
+  if(!isDefined(self.func_6EDB) || var_01 > self.func_6EDB) {
     self.func_6EDB = var_01;
+  }
 
   wait 0.05;
   self.func_6EC8 = undefined;

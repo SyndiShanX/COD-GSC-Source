@@ -24,10 +24,12 @@ main() {
   // we have room to simulate all corpses plus our deadbody counts
   maxSim = getdvarint("ragdoll_max_simulating") - 6;
 
-  if(maxSim > 0)
+  if(maxSim > 0) {
     level.max_number_of_dead_bodies = maxSim;
-  else
+  }
+  else {
     level.max_number_of_dead_bodies = 0;
+  }
 
   struct = spawnStruct();
   struct.bodies = [];
@@ -46,19 +48,22 @@ trigger_body(struct) {
 }
 
 spawn_dead_body(struct) {
-  if(!getdvarint("ragdoll_enable") && isDefined(self.script_parameters) && self.script_parameters == "require_ragdoll")
+  if(!getdvarint("ragdoll_enable") && isDefined(self.script_parameters) && self.script_parameters == "require_ragdoll") {
     return;
+  }
 
-  if(level.max_number_of_dead_bodies == 0)
+  if(level.max_number_of_dead_bodies == 0) {
     return;
+  }
 
   index = undefined;
   if(isDefined(self.script_index)) {
     index = self.script_index;
   } else {
     level.dead_body_count++;
-    if(level.dead_body_count > 3)
+    if(level.dead_body_count > 3) {
       level.dead_body_count = 1;
+    }
     index = level.dead_body_count;
   }
 
@@ -82,14 +87,16 @@ spawn_dead_body(struct) {
   model setflaggedanim("flag", model getanim(self.script_noteworthy), 1, 0, 1);
   model waittillmatch("flag", "end");
 
-  if(!isDefined(self.script_start))
+  if(!isDefined(self.script_start)) {
     model startragdoll();
+  }
 }
 
 que_body(model) {
   self.bodies[self.bodies.size] = model;
-  if(self.bodies.size <= level.max_number_of_dead_bodies)
+  if(self.bodies.size <= level.max_number_of_dead_bodies) {
     return;
+  }
   self.bodies[0] delete();
   self.bodies = array_removeUndefined(self.bodies);
 }

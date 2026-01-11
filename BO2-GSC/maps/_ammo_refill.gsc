@@ -86,8 +86,9 @@ _setup_ammo_cache() {
     self thread _check_extra_slots();
   }
 
-  if(isDefined(level._ammo_refill_think_alt))
+  if(isDefined(level._ammo_refill_think_alt)) {
     self thread[[level._ammo_refill_think_alt]]();
+  }
 }
 
 _setup_weapon_cache() {
@@ -143,10 +144,12 @@ _place_player_loadout() {
       break;
   }
 
-  if(!issubstr(str_primary_weapon, "+"))
+  if(!issubstr(str_primary_weapon, "+")) {
     str_primary_weapon_base = str_primary_weapon;
-  else
+  }
+  else {
     str_primary_weapon_base = strtok(str_primary_weapon, "+")[0];
+  }
 
   if(!issubstr(str_primary_weapon_base, "null") && isassetloaded("weapon", str_primary_weapon_base)) {
     primary_weapon_pos = self gettagorigin("loadOut_B");
@@ -170,10 +173,12 @@ _place_player_loadout() {
       break;
   }
 
-  if(!issubstr(str_secondary_weapon, "+"))
+  if(!issubstr(str_secondary_weapon, "+")) {
     str_secondary_weapon_base = str_secondary_weapon;
-  else
+  }
+  else {
     str_secondary_weapon_base = strtok(str_secondary_weapon, "+")[0];
+  }
 
   if(!issubstr(str_secondary_weapon_base, "null") && isassetloaded("weapon", str_secondary_weapon_base)) {
     secondary_weapon_pos = self gettagorigin("loadOut_A");
@@ -239,14 +244,16 @@ _debug_tags() {
   tag_array[tag_array.size] = "loadOut_B";
   tag_array[tag_array.size] = "secondary_A";
 
-  foreach(tag in tag_array)
+  foreach(tag in tag_array) {
   self thread _loop_text(tag);
+  }
 }
 
 _loop_text(tag) {
   while(true) {
-    if(isDefined(self gettagorigin(tag)))
+    if(isDefined(self gettagorigin(tag))) {
       print3d(self gettagorigin(tag), tag, (1, 1, 1), 1, 0.15);
+    }
 
     wait 0.05;
   }
@@ -300,23 +307,27 @@ cleanup_cache() {
     a_item_list = getitemarray();
 
     foreach(item in a_item_list) {
-      if(issubstr(item.classname, "weapon_"))
+      if(issubstr(item.classname, "weapon_")) {
         a_weapons_list[a_weapons_list.size] = item;
+      }
     }
 
     n_weapon_counter = 2;
 
-    if(isDefined(self.ac_slot1))
+    if(isDefined(self.ac_slot1)) {
       n_weapon_counter++;
+    }
 
-    if(isDefined(self.ac_slot2))
+    if(isDefined(self.ac_slot2)) {
       n_weapon_counter++;
+    }
 
     for(x = 0; x < n_weapon_counter; x++) {
       e_closest_weapon = getclosest(self.origin, a_weapons_list, 50);
 
-      if(isDefined(e_closest_weapon))
+      if(isDefined(e_closest_weapon)) {
         e_closest_weapon delete();
+      }
 
       a_weapons_list = remove_undefined_from_array(a_weapons_list);
     }
@@ -326,8 +337,9 @@ cleanup_cache() {
     self notify("disable_ammo_cache");
     t_ammo_trigger = _get_closest_ammo_trigger();
 
-    if(isDefined(t_ammo_trigger))
+    if(isDefined(t_ammo_trigger)) {
       t_ammo_trigger delete();
+    }
 
     self delete();
   }

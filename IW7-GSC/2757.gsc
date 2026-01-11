@@ -37,17 +37,20 @@ func_6A61() {
   var_03 = var_00 + var_02 * 15000;
   var_04 = bulletTrace(var_00, var_03, 0, undefined);
 
-  if(var_4["surfacetype"] == "none")
+  if(var_4["surfacetype"] == "none") {
     return undefined;
+  }
 
-  if(var_4["surfacetype"] == "default")
+  if(var_4["surfacetype"] == "default") {
     return undefined;
+  }
 
   var_05 = var_4["entity"];
 
   if(isDefined(var_05)) {
-    if(var_05 == level.ac130.planemodel)
+    if(var_05 == level.ac130.planemodel) {
       return undefined;
+    }
   }
 
   var_06 = [];
@@ -61,17 +64,20 @@ func_AF27() {
 }
 
 func_AF25() {
-  if(!isDefined(self.func_A43E))
+  if(!isDefined(self.func_A43E)) {
     self.func_A43E = 1;
-  else
+  }
+  else {
     self.func_A43E++;
+  }
 }
 
 func_AF26() {
   var_00 = 4;
 
-  if(isDefined(self.func_A43E) && self.func_A43E >= var_00)
+  if(isDefined(self.func_A43E) && self.func_A43E >= var_00) {
     return 1;
+  }
 
   return 0;
 }
@@ -80,8 +86,9 @@ func_11579(var_00) {
   var_01 = 1100;
   var_02 = distance(self.origin, var_00);
 
-  if(var_02 < var_01)
+  if(var_02 < var_01) {
     return 1;
+  }
 
   return 0;
 }
@@ -102,8 +109,9 @@ func_11A03(var_00, var_01) {
   var_03 = var_02 + (0, 0, 2000);
   var_04 = bulletTrace(var_02, var_03, 0, undefined);
 
-  if(sighttracepassed(var_02, var_03, 0, undefined))
+  if(sighttracepassed(var_02, var_03, 0, undefined)) {
     return 1;
+  }
 
   return 0;
 }
@@ -127,8 +135,9 @@ func_A448() {
     var_07 = self getcurrentweapon();
 
     if(isbot(self) && var_07 != "javelin_mp" || !issubstr(var_07, "javelin") || scripts\mp\killstreaks\emp_common::isemped()) {
-      if(isDefined(self.func_A449))
+      if(isDefined(self.func_A449)) {
         func_E254();
+      }
 
       continue;
     }
@@ -141,18 +150,21 @@ func_A448() {
 
     var_08 = 0;
 
-    if(getdvar("missileDebugDraw") == "1")
+    if(getdvar("missileDebugDraw") == "1") {
       var_08 = 1;
+    }
 
     var_09 = 0;
 
-    if(getdvar("missileDebugText") == "1")
+    if(getdvar("missileDebugText") == "1") {
       var_09 = 1;
+    }
 
     self.func_A449 = 1;
 
-    if(!isDefined(self.func_A444))
+    if(!isDefined(self.func_A444)) {
       self.func_A444 = 1;
+    }
 
     if(self.func_A444 == 1) {
       var_10 = scripts\mp\weapons::func_AF2B();
@@ -163,8 +175,9 @@ func_A448() {
         foreach(var_13 in var_10) {
           var_14 = self worldpointinreticle_circle(var_13.origin, 65, 40);
 
-          if(var_14)
+          if(var_14) {
             var_11[var_11.size] = var_13;
+          }
         }
 
         if(var_11.size != 0) {
@@ -177,8 +190,9 @@ func_A448() {
 
           self.func_A445 = var_16[0];
 
-          if(!isDefined(self.func_A43F))
+          if(!isDefined(self.func_A43F)) {
             self.func_A43F = gettime();
+          }
 
           self.func_A444 = 2;
           self.func_A441 = 0;
@@ -256,10 +270,12 @@ func_A448() {
         continue;
       }
 
-      if(func_11579(self.func_A447))
+      if(func_11579(self.func_A447)) {
         self _meth_8406(1);
-      else
+      }
+      else {
         self _meth_8406(0);
+      }
 
       var_17 = gettime() - self.func_A43F;
 
@@ -280,10 +296,12 @@ func_A448() {
         continue;
       }
 
-      if(func_11579(self.func_A447))
+      if(func_11579(self.func_A447)) {
         self _meth_8406(1);
-      else
+      }
+      else {
         self _meth_8406(0);
+      }
 
       continue;
     }
@@ -298,22 +316,25 @@ func_13263(var_00) {
   var_03 = sighttracepassed(var_01, var_02, 0, var_00);
   func_4F53(var_01, var_02, var_03);
 
-  if(var_03)
+  if(var_03) {
     return 1;
+  }
 
   var_04 = var_00 getpointinbounds(1, 0, 0);
   var_03 = sighttracepassed(var_01, var_04, 0, var_00);
   func_4F53(var_01, var_04, var_03);
 
-  if(var_03)
+  if(var_03) {
     return 1;
+  }
 
   var_05 = var_00 getpointinbounds(-1, 0, 0);
   var_03 = sighttracepassed(var_01, var_05, 0, var_00);
   func_4F53(var_01, var_05, var_03);
 
-  if(var_03)
+  if(var_03) {
     return 1;
+  }
 
   return 0;
 }
@@ -343,15 +364,18 @@ func_A440(var_00) {
     var_02 = gettime() - self.func_A43F;
 
     if(scripts\mp\utility\game::_hasperk("specialty_fasterlockon")) {
-      if(var_02 < var_00 * 0.5)
+      if(var_02 < var_00 * 0.5) {
         return;
+      }
     } else if(var_02 < var_00) {
       return;
     }
-    if(isplayer(self.func_A445))
+    if(isplayer(self.func_A445)) {
       self _meth_8402(self.func_A445, (0, 0, 64), 0);
-    else
+    }
+    else {
       self _meth_8402(self.func_A445, (0, 0, 0), 0);
+    }
 
     self notify("stop_lockon_sound");
 
@@ -377,11 +401,13 @@ func_A440(var_00) {
 }
 
 func_10F9B(var_00) {
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return 0;
+  }
 
-  if(!self worldpointinreticle_circle(var_0.origin, 65, 85))
+  if(!self worldpointinreticle_circle(var_0.origin, 65, 85)) {
     return 0;
+  }
 
   return 1;
 }
@@ -394,8 +420,9 @@ softsighttest() {
     return 1;
   }
 
-  if(self.func_A441 == 0)
+  if(self.func_A441 == 0) {
     self.func_A441 = gettime();
+  }
 
   var_01 = gettime() - self.func_A441;
 

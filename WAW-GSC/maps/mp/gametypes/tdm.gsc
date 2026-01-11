@@ -51,8 +51,9 @@ onStartGameType() {
   level.mapCenter = maps\mp\gametypes\_spawnlogic::findBoxCenter(level.spawnMins, level.spawnMaxs);
   setMapCenter(level.mapCenter);
   allowed[0] = "tdm";
-  if(getDvarInt("scr_oldHardpoints") > 0)
+  if(getDvarInt("scr_oldHardpoints") > 0) {
     allowed[1] = "hardpoint";
+  }
   level.displayRoundEndText = false;
   maps\mp\gametypes\_gameobjects::main(allowed);
   maps\mp\gametypes\_spawning::create_map_placed_influencers();
@@ -72,8 +73,9 @@ onSpawnPlayer() {
   self.usingObj = undefined;
   if(level.inGracePeriod) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + self.pers["team"] + "_start");
-    if(!spawnPoints.size)
+    if(!spawnPoints.size) {
       spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_sab_spawn_" + self.pers["team"] + "_start");
+    }
     if(!spawnPoints.size) {
       spawnPoints = maps\mp\gametypes\_spawnlogic::getTeamSpawnPoints(self.pers["team"]);
       spawnPoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(spawnPoints);
@@ -88,6 +90,7 @@ onSpawnPlayer() {
 }
 
 onEndGame(winningTeam) {
-  if(isDefined(winningTeam) && (winningTeam == "allies" || winningTeam == "axis"))
+  if(isDefined(winningTeam) && (winningTeam == "allies" || winningTeam == "axis")) {
     [[level._setTeamScore]](winningTeam, [[level._getTeamScore]](winningTeam) + 1);
+  }
 }

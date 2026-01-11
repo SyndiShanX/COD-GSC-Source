@@ -9,33 +9,40 @@ init_move_transition_arrays() {
   }
   anim.move_transition_arrays = 1;
 
-  if(!isDefined(anim.covertrans))
+  if(!isDefined(anim.covertrans)) {
     anim.covertrans = [];
+  }
 
-  if(!isDefined(anim.coverexit))
+  if(!isDefined(anim.coverexit)) {
     anim.coverexit = [];
+  }
 
   anim.maxdirections = [];
   anim.excludedir = [];
   anim.traverseinfo = [];
 
-  if(!isDefined(anim.covertranslongestdist))
+  if(!isDefined(anim.covertranslongestdist)) {
     anim.covertranslongestdist = [];
+  }
 
-  if(!isDefined(anim.covertransdist))
+  if(!isDefined(anim.covertransdist)) {
     anim.covertransdist = [];
+  }
 
-  if(!isDefined(anim.coverexitdist))
+  if(!isDefined(anim.coverexitdist)) {
     anim.coverexitdist = [];
+  }
 
   anim.coverexitpostdist = [];
   anim.covertranspredist = [];
 
-  if(!isDefined(anim.covertransangles))
+  if(!isDefined(anim.covertransangles)) {
     anim.covertransangles = [];
+  }
 
-  if(!isDefined(anim.coverexitangles))
+  if(!isDefined(anim.coverexitangles)) {
     anim.coverexitangles = [];
+  }
 
   anim.arrivalendstance = [];
 }
@@ -406,10 +413,12 @@ initmovestartstoptransitions() {
       }
 
       if(isDefined(anim.archetypes["soldier"]["cover_exit"][var_5]) && isDefined(anim.archetypes["soldier"]["cover_exit"][var_5][var_3])) {
-        if(animhasnotetrack(anim.archetypes["soldier"]["cover_exit"][var_5][var_3], "code_move"))
+        if(animhasnotetrack(anim.archetypes["soldier"]["cover_exit"][var_5][var_3], "code_move")) {
           var_6 = getnotetracktimes(anim.archetypes["soldier"]["cover_exit"][var_5][var_3], "code_move")[0];
-        else
+        }
+        else {
           var_6 = 1;
+        }
 
         anim.archetypes["soldier"]["cover_exit_dist"][var_5][var_3] = getmovedelta(anim.archetypes["soldier"]["cover_exit"][var_5][var_3], 0, var_6);
         anim.archetypes["soldier"]["cover_exit_angles"][var_5][var_3] = getangledelta(anim.archetypes["soldier"]["cover_exit"][var_5][var_3], 0, 1);
@@ -427,8 +436,9 @@ initmovestartstoptransitions() {
       }
       var_7 = lengthsquared(anim.archetypes["soldier"]["cover_trans_dist"][var_5][var_3]);
 
-      if(anim.covertranslongestdist[var_5] < var_7)
+      if(anim.covertranslongestdist[var_5] < var_7) {
         anim.covertranslongestdist[var_5] = var_7;
+      }
     }
 
     anim.covertranslongestdist[var_5] = sqrt(anim.covertranslongestdist[var_5]);
@@ -442,8 +452,9 @@ initmovestartstoptransitions() {
   anim.exposedtransition["exposed_ready"] = 1;
   anim.exposedtransition["heat"] = 1;
 
-  if(!isDefined(anim.longestexposedapproachdist))
+  if(!isDefined(anim.longestexposedapproachdist)) {
     anim.longestexposedapproachdist = 0;
+  }
 
   foreach(var_5, var_9 in anim.exposedtransition) {
     for(var_3 = 7; var_3 <= 9; var_3++) {
@@ -465,8 +476,9 @@ initmovestartstoptransitions() {
       }
       var_10 = length(anim.archetypes["soldier"]["cover_trans_dist"][var_5][var_3]);
 
-      if(var_10 > anim.longestexposedapproachdist)
+      if(var_10 > anim.longestexposedapproachdist) {
         anim.longestexposedapproachdist = var_10;
+      }
     }
   }
 

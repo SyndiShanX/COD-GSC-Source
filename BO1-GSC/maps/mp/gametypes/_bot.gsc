@@ -136,14 +136,16 @@ basic_training_auto_assign() {
   self.pers["weapon"] = undefined;
   self.pers["savedmodel"] = undefined;
   self maps\mp\gametypes\_globallogic_ui::updateObjectiveText();
-  if(level.teamBased)
+  if(level.teamBased) {
     self.sessionteam = assignment;
+  }
   else {
     self.sessionteam = "none";
     self.ffateam = assignment;
   }
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     self.statusicon = "hud_status_dead";
+  }
   self notify("joined_team");
   level notify("joined_team");
   self notify("end_respawn");
@@ -217,16 +219,18 @@ bot_set_rank() {
     self.bot = [];
   }
   for(i = 0; i < players.size; i++) {
-    if(players[i] == self)
+    if(players[i] == self) {
       continue;
+    }
     if(players[i] is_bot() && isDefined(players[i].bot) && isDefined(players[i].bot["rank"])) {
       bot_ranks[bot_ranks.size] = players[i].bot["rank"];
     } else if(!players[i] is_bot() && !players[i] isdemoclient() && isDefined(players[i].pers["rank"])) {
       human_ranks[human_ranks.size] = players[i].pers["rank"];
     }
   }
-  if(!human_ranks.size)
+  if(!human_ranks.size) {
     human_ranks[human_ranks.size] = 10;
+  }
   human_avg = array_average(human_ranks);
   while(bot_ranks.size + human_ranks.size < 5) {
     rank = human_avg + RandomIntRange(-10, 10);
@@ -503,10 +507,12 @@ bot_give_random_weapon(slot, weaponOptions) {
     for(i = 0; i < keys.size; i++) {
       key = keys[i];
       id = level.tbl_weaponIDs[key];
-      if(id["reference"] == "weapon_null")
+      if(id["reference"] == "weapon_null") {
         continue;
-      if(id["cost"] == "-1")
+      }
+      if(id["cost"] == "-1") {
         continue;
+      }
       if(id["slot"] == slot) {
         level.bot_weapon_ids[slot][level.bot_weapon_ids[slot].size] = id;
       }
@@ -540,20 +546,24 @@ bot_give_random_weapon(slot, weaponOptions) {
       }
     }
     unlock = Int(id["unlock_level"]);
-    if(unlock > 3 && unlock > rank)
+    if(unlock > 3 && unlock > rank) {
       continue;
+    }
     if(slot == "equipment") {
       if(tries >= level.bot_weapon_ids[slot].size) {
         pixendevent();
         return undefined;
       }
-      if(!maps\mp\gametypes\_class::isEquipmentAllowed(id["reference"] + "_mp"))
+      if(!maps\mp\gametypes\_class::isEquipmentAllowed(id["reference"] + "_mp")) {
         continue;
-      if(id["reference"] == "satchel_charge")
+      }
+      if(id["reference"] == "satchel_charge") {
         continue;
+      }
       cost = Int(id["cost"]);
-      if(cost > self.bot["cod_points"])
+      if(cost > self.bot["cod_points"]) {
         continue;
+      }
       self.bot["cod_points"] = self.bot["cod_points"] - cost;
     }
     if(id["unlock_level"] != "" && id["attachment"] != "" && RandomFloatRange(0, 1) < (rank / level.maxRank)) {
@@ -660,13 +670,16 @@ bot_give_random_perk(slot) {
   for(;;) {
     id = random(level.allowedPerks[0]);
     id = level.tbl_PerkData[id];
-    if(id["reference"] == "specialty_null")
+    if(id["reference"] == "specialty_null") {
       continue;
-    if(id["slot"] != slot)
+    }
+    if(id["slot"] != slot) {
       continue;
+    }
     cost = Int(id["cost"]);
-    if(cost > self.bot["cod_points"])
+    if(cost > self.bot["cod_points"]) {
       continue;
+    }
     self.bot["cod_points"] = self.bot["cod_points"] - cost;
     self.bot[slot] = id["reference_full"];
     perks = StrTok(id["reference"], "|");
@@ -742,8 +755,9 @@ bot_get_cod_points() {
     }
     total_points[total_points.size] = players[i].pers["currencyspent"] + players[i].pers["codpoints"];
   }
-  if(!total_points.size)
+  if(!total_points.size) {
     total_points[total_points.size] = 10000;
+  }
   point_average = array_average(total_points);
   self.bot["cod_points"] = Int(point_average * RandomFloatRange(0.6, 0.8));
 }
@@ -1812,25 +1826,30 @@ bot_spawner_think() {
   wait(0.5);
   for(;;) {
     wait 10.0;
-    if(game["state"] == "postgame")
+    if(game["state"] == "postgame") {
       return;
-    if(!GetDvarInt(#"scr_bots_managed_spawn"))
+    }
+    if(!GetDvarInt(#"scr_bots_managed_spawn")) {
       continue;
+    }
     humans = 0;
     players = level.players;
     for(i = 0; i < players.size; i++) {
       player = players[i];
-      if(player is_bot() || player isdemoclient())
+      if(player is_bot() || player isdemoclient()) {
         continue;
+      }
       humans++;
       break;
     }
     countAllies = 0;
     countAxis = 0;
-    if(isDefined(level.botsCount["axis"]))
+    if(isDefined(level.botsCount["axis"])) {
       countAxis = level.botsCount["axis"];
-    if(isDefined(level.botsCount["allies"]))
+    }
+    if(isDefined(level.botsCount["allies"])) {
       countAllies = level.botsCount["allies"];
+    }
     num = GetDvarInt(#"scr_bots_managed_all");
     if(num > 0) {
       axis_num = Ceil(num / 2);
@@ -1843,8 +1862,9 @@ bot_spawner_think() {
       players = level.players;
       for(i = 0; i < players.size; i++) {
         player = players[i];
-        if(!isDefined(player.pers["isBot"]))
+        if(!isDefined(player.pers["isBot"])) {
           continue;
+        }
         kick(player getEntityNumber());
         wait(0.25);
       }
@@ -1861,8 +1881,9 @@ bot_spawner_think() {
           break;
         }
         player = players[i];
-        if(!isDefined(player.pers["isBot"]))
+        if(!isDefined(player.pers["isBot"])) {
           continue;
+        }
         if("axis" == player.team) {
           kick(player getEntityNumber());
           differenceAxis = differenceAxis + 1;
@@ -1888,8 +1909,9 @@ bot_spawner_think() {
           break;
         }
         player = players[i];
-        if(!isDefined(player.pers["isBot"]))
+        if(!isDefined(player.pers["isBot"])) {
           continue;
+        }
         if("allies" == player.team) {
           kick(player getEntityNumber());
           differenceAllies = differenceAllies + 1;

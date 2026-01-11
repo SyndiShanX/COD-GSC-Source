@@ -185,4 +185,3 @@ init_devgui() {
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:x83>");
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:xc4>");
 }
-

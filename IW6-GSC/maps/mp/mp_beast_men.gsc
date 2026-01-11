@@ -63,8 +63,9 @@ delayedSpawnBeast(delayTime) {
 createSquadmate(spawnOverride) {
   spawnOrigin = findSpawnLocation();
 
-  if(isDefined(spawnOverride))
+  if(isDefined(spawnOverride)) {
     spawnOrigin = spawnOverride;
+  }
 
   spawnAngles = VectorToAngles(self.origin - spawnOrigin);
 
@@ -121,20 +122,24 @@ spawn_agent_beast(optional_spawnOrigin, optional_spawnAngles, optional_owner, us
 
   self maps\mp\bots\_bots_util::bot_set_personality("cqb");
 
-  if(isDefined(difficulty))
+  if(isDefined(difficulty)) {
     self maps\mp\bots\_bots_util::bot_set_difficulty(difficulty);
+  }
 
   self maps\mp\agents\_agents::initPlayerClass();
 
   self maps\mp\agents\_agent_common::set_agent_health(CONST_AGENT_HEALTH);
-  if(isDefined(respawn_on_death) && respawn_on_death)
+  if(isDefined(respawn_on_death) && respawn_on_death) {
     self.respawn_on_death = true;
+  }
 
-  if(isDefined(optional_owner))
+  if(isDefined(optional_owner)) {
     self set_agent_team(optional_owner.team, optional_owner);
+  }
 
-  if(isDefined(self.owner))
+  if(isDefined(self.owner)) {
     self thread maps\mp\agents\_agents::destroyOnOwnerDisconnect(self.owner);
+  }
 
   self thread maps\mp\_flashgrenades::monitorFlash();
 
@@ -149,8 +154,9 @@ spawn_agent_beast(optional_spawnOrigin, optional_spawnAngles, optional_owner, us
   self thread maps\mp\bots\_bots_strategy::bot_think_tactical_goals();
   self thread[[self agentFunc("think")]]();
 
-  if(!self.hasDied)
+  if(!self.hasDied) {
     self maps\mp\gametypes\_spawnlogic::addToParticipantsArray();
+  }
 
   self.hasDied = false;
 
@@ -266,10 +272,12 @@ delayplayFXOnTag(FX, tag, delayTime, intervalTime) {
   while(true) {
     playFXOnTag(FX, self, tag);
 
-    if(isDefined(intervalTime))
+    if(isDefined(intervalTime)) {
       wait(intervalTime);
-    else
+    }
+    else {
       break;
+    }
   }
 }
 

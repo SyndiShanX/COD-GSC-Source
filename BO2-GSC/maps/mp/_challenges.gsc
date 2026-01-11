@@ -7,8 +7,9 @@
 #include common_scripts\utility;
 
 init() {
-  if(!isDefined(level.challengescallbacks))
+  if(!isDefined(level.challengescallbacks)) {
     level.challengescallbacks = [];
+  }
 
   waittillframeend;
 
@@ -20,27 +21,32 @@ init() {
 
   level thread onplayerconnect();
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   initteamchallenges(team);
+  }
 }
 
 addflyswatterstat(weapon, aircraft) {
-  if(!isDefined(self.pers["flyswattercount"]))
+  if(!isDefined(self.pers["flyswattercount"])) {
     self.pers["flyswattercount"] = 0;
+  }
 
   self addweaponstat(weapon, "destroyed_aircraft", 1);
   self.pers["flyswattercount"]++;
 
-  if(self.pers["flyswattercount"] == 5)
+  if(self.pers["flyswattercount"] == 5) {
     self addweaponstat(weapon, "destroyed_5_aircraft", 1);
-
-  if(isDefined(aircraft) && isDefined(aircraft.birthtime)) {
-    if(gettime() - aircraft.birthtime < 20000)
-      self addweaponstat(weapon, "destroyed_aircraft_under20s", 1);
   }
 
-  if(!isDefined(self.destroyedaircrafttime))
+  if(isDefined(aircraft) && isDefined(aircraft.birthtime)) {
+    if(gettime() - aircraft.birthtime < 20000) {
+      self addweaponstat(weapon, "destroyed_aircraft_under20s", 1);
+    }
+  }
+
+  if(!isDefined(self.destroyedaircrafttime)) {
     self.destroyedaircrafttime = [];
+  }
 
   if(isDefined(self.destroyedaircrafttime[weapon]) && gettime() - self.destroyedaircrafttime[weapon] < 10000) {
     self addweaponstat(weapon, "destroyed_2aircraft_quickly", 1);
@@ -50,18 +56,21 @@ addflyswatterstat(weapon, aircraft) {
 }
 
 canprocesschallenges() {
-  if(getdvarintdefault("scr_debug_challenges", 0))
+  if(getdvarintdefault("scr_debug_challenges", 0)) {
     return true;
+  }
 
-  if(level.rankedmatch || level.wagermatch)
+  if(level.rankedmatch || level.wagermatch) {
     return true;
+  }
 
   return false;
 }
 
 initteamchallenges(team) {
-  if(!isDefined(game["challenge"]))
+  if(!isDefined(game["challenge"])) {
     game["challenge"] = [];
+  }
 
   if(!isDefined(game["challenge"][team])) {
     game["challenge"][team] = [];
@@ -74,8 +83,9 @@ initteamchallenges(team) {
 }
 
 registerchallengescallback(callback, func) {
-  if(!isDefined(level.challengescallbacks[callback]))
+  if(!isDefined(level.challengescallbacks[callback])) {
     level.challengescallbacks[callback] = [];
+  }
 
   level.challengescallbacks[callback][level.challengescallbacks[callback].size] = func;
 }
@@ -88,11 +98,13 @@ dochallengecallback(callback, data) {
     return;
   }
   if(isDefined(data)) {
-    for(i = 0; i < level.challengescallbacks[callback].size; i++)
+    for(i = 0; i < level.challengescallbacks[callback].size; i++) {
       thread[[level.challengescallbacks[callback][i]]](data);
+    }
   } else {
-    for(i = 0; i < level.challengescallbacks[callback].size; i++)
+    for(i = 0; i < level.challengescallbacks[callback].size; i++) {
       thread[[level.challengescallbacks[callback][i]]]();
+    }
   }
 }
 
@@ -118,11 +130,13 @@ monitorreloads() {
     time = gettime();
     self.lastreloadtime = time;
 
-    if(currentweapon == "crossbow_mp")
+    if(currentweapon == "crossbow_mp") {
       self.crossbowclipkillcount = 0;
+    }
 
-    if(weaponhasattachment(currentweapon, "dualclip"))
+    if(weaponhasattachment(currentweapon, "dualclip")) {
       self thread reloadthenkill(currentweapon);
+    }
   }
 }
 
@@ -137,8 +151,9 @@ reloadthenkill(reloadweapon) {
   for(;;) {
     self waittill("killed_enemy_player", time, weapon);
 
-    if(reloadweapon == weapon)
+    if(reloadweapon == weapon) {
       self addplayerstat("reload_then_kill_dualclip", 1);
+    }
   }
 }
 
@@ -162,13 +177,15 @@ isdamagefromplayercontrolledaitank(eattacker, einflictor, sweapon) {
   if(sweapon == "ai_tank_drone_gun_mp") {
     if(isDefined(eattacker) && isDefined(eattacker.remoteweapon) && isDefined(einflictor)) {
       if(isDefined(einflictor.controlled) && einflictor.controlled == 1) {
-        if(eattacker.remoteweapon == einflictor)
+        if(eattacker.remoteweapon == einflictor) {
           return true;
+        }
       }
     }
   } else if(sweapon == "ai_tank_drone_rocket_mp") {
-    if(isDefined(einflictor) && !isDefined(einflictor.from_ai))
+    if(isDefined(einflictor) && !isDefined(einflictor.from_ai)) {
       return true;
+    }
   }
 
   return false;
@@ -178,8 +195,9 @@ isdamagefromplayercontrolledsentry(eattacker, einflictor, sweapon) {
   if(sweapon == "auto_gun_turret_mp") {
     if(isDefined(eattacker) && isDefined(eattacker.remoteweapon) && isDefined(einflictor)) {
       if(eattacker.remoteweapon == einflictor) {
-        if(isDefined(einflictor.controlled) && einflictor.controlled == 1)
+        if(isDefined(einflictor.controlled) && einflictor.controlled == 1) {
           return true;
+        }
       }
     }
   }
@@ -212,18 +230,21 @@ challengekills(data, time) {
   game["challenge"][victim.team]["allAlive"] = 0;
 
   if(level.teambased) {
-    if(player.team == victim.team)
+    if(player.team == victim.team) {
       return;
+    }
   } else if(player == victim) {
     return;
   }
-  if(isdamagefromplayercontrolledaitank(player, inflictor, weapon) == 1)
+  if(isdamagefromplayercontrolledaitank(player, inflictor, weapon) == 1) {
     player addplayerstat("kill_with_remote_control_ai_tank", 1);
+  }
 
   if(weapon == "auto_gun_turret_mp") {
     if(isDefined(inflictor)) {
-      if(!isDefined(inflictor.killcount))
+      if(!isDefined(inflictor.killcount)) {
         inflictor.killcount = 0;
+      }
 
       inflictor.killcount++;
 
@@ -233,8 +254,9 @@ challengekills(data, time) {
       }
     }
 
-    if(isdamagefromplayercontrolledsentry(player, inflictor, weapon) == 1)
+    if(isdamagefromplayercontrolledsentry(player, inflictor, weapon) == 1) {
       player addplayerstat("kill_with_remote_control_sentry_gun", 1);
+    }
   }
 
   if(weapon == "minigun_mp" || weapon == "inventory_minigun_mp") {
@@ -246,8 +268,9 @@ challengekills(data, time) {
     }
   }
 
-  if(data.waslockingon == 1 && weapon == "chopper_minigun_mp")
+  if(data.waslockingon == 1 && weapon == "chopper_minigun_mp") {
     player addplayerstat("kill_enemy_locking_on_with_chopper_gunner", 1);
+  }
 
   if(isDefined(level.iskillstreakweapon)) {
     if([
@@ -275,8 +298,9 @@ challengekills(data, time) {
     } else
       player.primaryweaponkill = 1;
   } else if(isDefined(player.secondaryloadoutweapon) && weapon == player.secondaryloadoutweapon || isDefined(player.secondaryloadoutaltweapon) && weapon == player.secondaryloadoutaltweapon) {
-    if(player isbonuscardactive(1, player.class_num))
+    if(player isbonuscardactive(1, player.class_num)) {
       player addbonuscardstat(1, "kills", 1, player.class_num);
+    }
 
     if(isDefined(player.primaryweaponkill) && player.primaryweaponkill == 1) {
       player.primaryweaponkill = 0;
@@ -290,19 +314,22 @@ challengekills(data, time) {
       player.secondaryweaponkill = 1;
   }
 
-  if(player isbonuscardactive(5, player.class_num) || player isbonuscardactive(4, player.class_num) || player isbonuscardactive(3, player.class_num))
+  if(player isbonuscardactive(5, player.class_num) || player isbonuscardactive(4, player.class_num) || player isbonuscardactive(3, player.class_num)) {
     player addplayerstat("kill_with_2_perks_same_category", 1);
+  }
 
   baseweaponname = getreffromitemindex(getbaseweaponitemindex(weapon)) + "_mp";
 
   if(isDefined(player.weaponkills[baseweaponname])) {
     player.weaponkills[baseweaponname]++;
 
-    if(player.weaponkills[baseweaponname] == 5)
+    if(player.weaponkills[baseweaponname] == 5) {
       player addweaponstat(baseweaponname, "killstreak_5", 1);
+    }
 
-    if(player.weaponkills[baseweaponname] == 10)
+    if(player.weaponkills[baseweaponname] == 10) {
       player addweaponstat(baseweaponname, "killstreak_10", 1);
+    }
   } else
     player.weaponkills[baseweaponname] = 1;
 
@@ -312,8 +339,9 @@ challengekills(data, time) {
     if(isDefined(player.attachmentkills[attachmentname])) {
       player.attachmentkills[attachmentname]++;
 
-      if(player.attachmentkills[attachmentname] == 5)
+      if(player.attachmentkills[attachmentname] == 5) {
         player addweaponstat(weapon, "killstreak_5_attachment", 1);
+      }
     } else
       player.attachmentkills[attachmentname] = 1;
   }
@@ -322,22 +350,26 @@ challengekills(data, time) {
   assert(isDefined(player.activeuavs));
   assert(isDefined(player.activesatellites));
 
-  if(player.activeuavs > 0)
+  if(player.activeuavs > 0) {
     player addplayerstat("kill_while_uav_active", 1);
+  }
 
-  if(player.activecounteruavs > 0)
+  if(player.activecounteruavs > 0) {
     player addplayerstat("kill_while_cuav_active", 1);
+  }
 
-  if(player.activesatellites > 0)
+  if(player.activesatellites > 0) {
     player addplayerstat("kill_while_satellite_active", 1);
+  }
 
   if(isDefined(attacker.tacticalinsertiontime) && attacker.tacticalinsertiontime + 5000 > time) {
     player addplayerstat("kill_after_tac_insert", 1);
     player addweaponstat("tactical_insertion_mp", "CombatRecordStat", 1);
   }
 
-  if(isDefined(victim.tacticalinsertiontime) && victim.tacticalinsertiontime + 5000 > time)
+  if(isDefined(victim.tacticalinsertiontime) && victim.tacticalinsertiontime + 5000 > time) {
     player addweaponstat("tactical_insertion_mp", "headshots", 1);
+  }
 
   if(isDefined(level.isplayertrackedfunc)) {
     if(attacker[[level.isplayertrackedfunc]](victim, time)) {
@@ -350,23 +382,27 @@ challengekills(data, time) {
     activeempowner = level.empowners[player.team];
 
     if(isDefined(activeempowner)) {
-      if(activeempowner == player)
+      if(activeempowner == player) {
         player addplayerstat("kill_while_emp_active", 1);
+      }
     }
   } else if(isDefined(level.empplayer)) {
-    if(level.empplayer == player)
+    if(level.empplayer == player) {
       player addplayerstat("kill_while_emp_active", 1);
+    }
   }
 
-  if(isDefined(player.flakjacketclaymore[victim.clientid]) && player.flakjacketclaymore[victim.clientid] == 1)
+  if(isDefined(player.flakjacketclaymore[victim.clientid]) && player.flakjacketclaymore[victim.clientid] == 1) {
     player addplayerstat("survive_claymore_kill_planter_flak_jacket_equipped", 1);
+  }
 
   if(isDefined(player.dogsactive)) {
     if(weapon != "dog_bite_mp") {
       player.dogsactivekillstreak++;
 
-      if(player.dogsactivekillstreak > 5)
+      if(player.dogsactivekillstreak > 5) {
         player addplayerstat("killstreak_5_dogs", 1);
+      }
     }
   }
 
@@ -391,8 +427,9 @@ challengekills(data, time) {
   }
 
   if(isDefined(player.laststunnedby)) {
-    if(player.laststunnedby == victim && player.laststunnedtime + 5000 > time)
+    if(player.laststunnedby == victim && player.laststunnedtime + 5000 > time) {
       player addplayerstat("kill_enemy_who_shocked_you", 1);
+    }
   }
 
   if(isDefined(victim.laststunnedby) && victim.laststunnedtime + 5000 > time) {
@@ -402,13 +439,15 @@ challengekills(data, time) {
       player addplayerstat("kill_shocked_enemy", 1);
       player addweaponstat("proximity_grenade_mp", "CombatRecordStat", 1);
 
-      if(data.smeansofdeath == "MOD_MELEE")
+      if(data.smeansofdeath == "MOD_MELEE") {
         player addplayerstat("shock_enemy_then_stab_them", 1);
+      }
     }
   }
 
-  if(player.mantletime + 5000 > time)
+  if(player.mantletime + 5000 > time) {
     player addplayerstat("mantle_then_kill", 1);
+  }
 
   if(isDefined(player.tookweaponfrom) && isDefined(player.tookweaponfrom[weapon]) && isDefined(player.tookweaponfrom[weapon].previousowner)) {
     if(level.teambased) {
@@ -428,20 +467,25 @@ challengekills(data, time) {
   }
 
   if(isDefined(victim.explosiveinfo["originalOwnerKill"]) && victim.explosiveinfo["originalOwnerKill"] == 1) {
-    if(victim.explosiveinfo["damageExplosiveKill"] == 1)
+    if(victim.explosiveinfo["damageExplosiveKill"] == 1) {
       player addplayerstat("kill_enemy_shoot_their_explosive", 1);
+    }
   }
 
-  if(data.attackerstance == "crouch")
+  if(data.attackerstance == "crouch") {
     player addplayerstat("kill_enemy_while_crouched", 1);
-  else if(data.attackerstance == "prone")
+  }
+  else if(data.attackerstance == "prone") {
     player addplayerstat("kill_enemy_while_prone", 1);
+  }
 
-  if(data.victimstance == "prone")
+  if(data.victimstance == "prone") {
     player addplayerstat("kill_prone_enemy", 1);
+  }
 
-  if(data.smeansofdeath == "MOD_HEAD_SHOT" || data.smeansofdeath == "MOD_PISTOL_BULLET" || data.smeansofdeath == "MOD_RIFLE_BULLET")
+  if(data.smeansofdeath == "MOD_HEAD_SHOT" || data.smeansofdeath == "MOD_PISTOL_BULLET" || data.smeansofdeath == "MOD_RIFLE_BULLET") {
     player genericbulletkill(data, victim, weapon);
+  }
 
   if(level.teambased) {
     if(!isDefined(player.pers["kill_every_enemy"]) && (level.playercount[victim.pers["team"]] > 3 && player.pers["killed_players"].size >= level.playercount[victim.pers["team"]])) {
@@ -481,13 +525,15 @@ challengekills(data, time) {
         player addplayerstat("kill_enemy_one_bullet_sniper", 1);
         player addweaponstat(weapon, "kill_enemy_one_bullet_sniper", 1);
 
-        if(!isDefined(player.pers["one_shot_sniper_kills"]))
+        if(!isDefined(player.pers["one_shot_sniper_kills"])) {
           player.pers["one_shot_sniper_kills"] = 0;
+        }
 
         player.pers["one_shot_sniper_kills"]++;
 
-        if(player.pers["one_shot_sniper_kills"] == 10)
+        if(player.pers["one_shot_sniper_kills"] == 10) {
           player addplayerstat("kill_10_enemy_one_bullet_sniper_onegame", 1);
+        }
       }
 
       break;
@@ -496,13 +542,15 @@ challengekills(data, time) {
         player addplayerstat("kill_enemy_one_bullet_shotgun", 1);
         player addweaponstat(weapon, "kill_enemy_one_bullet_shotgun", 1);
 
-        if(!isDefined(player.pers["one_shot_shotgun_kills"]))
+        if(!isDefined(player.pers["one_shot_shotgun_kills"])) {
           player.pers["one_shot_shotgun_kills"] = 0;
+        }
 
         player.pers["one_shot_shotgun_kills"]++;
 
-        if(player.pers["one_shot_shotgun_kills"] == 10)
+        if(player.pers["one_shot_shotgun_kills"] == 10) {
           player addplayerstat("kill_10_enemy_one_bullet_shotgun_onegame", 1);
+        }
       }
 
       break;
@@ -518,16 +566,19 @@ challengekills(data, time) {
     } else if(weapon == "knife_held_mp" || weapon == "knife_mp")
       player bladekill();
     else if(weapon == "riotshield_mp") {
-      if(victim.lastfiretime + 3000 > time)
+      if(victim.lastfiretime + 3000 > time) {
         player addweaponstat(weapon, "shield_melee_while_enemy_shooting", 1);
+      }
     }
   } else {
     if(data.smeansofdeath == "MOD_IMPACT" && baseweaponname == "crossbow_mp") {
-      if(weaponhasattachment(weapon, "stackfire"))
+      if(weaponhasattachment(weapon, "stackfire")) {
         player addplayerstat("KILL_CROSSBOW_STACKFIRE", 1);
+      }
     } else if(isDefined(ownerweaponatlaunch)) {
-      if(weaponhasattachment(ownerweaponatlaunch, "stackfire"))
+      if(weaponhasattachment(ownerweaponatlaunch, "stackfire")) {
         player addplayerstat("KILL_CROSSBOW_STACKFIRE", 1);
+      }
     }
 
     if(weapon == "knife_ballistic_mp") {
@@ -565,8 +616,9 @@ challengekills(data, time) {
       player notify("lethalGrenadeKill");
       player addplayerstat("kill_with_claymore", 1);
 
-      if(data.washacked)
+      if(data.washacked) {
         player addplayerstat("kill_with_hacked_claymore", 1);
+      }
 
       break;
     case "satchel_charge_mp":
@@ -577,8 +629,9 @@ challengekills(data, time) {
     case "destructible_car_mp":
       player addplayerstat("kill_enemy_withcar", 1);
 
-      if(isDefined(inflictor.destroyingweapon))
+      if(isDefined(inflictor.destroyingweapon)) {
         player addweaponstat(inflictor.destroyingweapon, "kills_from_cars", 1);
+      }
 
       break;
     case "sticky_grenade_mp":
@@ -599,17 +652,20 @@ challengekills(data, time) {
       lethalgrenadekill = 1;
       player notify("lethalGrenadeKill");
 
-      if(isDefined(data.victim.explosiveinfo["cookedKill"]) && data.victim.explosiveinfo["cookedKill"] == 1)
+      if(isDefined(data.victim.explosiveinfo["cookedKill"]) && data.victim.explosiveinfo["cookedKill"] == 1) {
         player addplayerstat("kill_with_cooked_grenade", 1);
+      }
 
-      if(isDefined(data.victim.explosiveinfo["throwbackKill"]) && data.victim.explosiveinfo["throwbackKill"] == 1)
+      if(isDefined(data.victim.explosiveinfo["throwbackKill"]) && data.victim.explosiveinfo["throwbackKill"] == 1) {
         player addplayerstat("kill_with_tossed_back_lethal", 1);
+      }
 
       break;
     case "crossbow_mp":
     case "explosive_bolt_mp":
-      if(!isDefined(player.crossbowclipkillcount))
+      if(!isDefined(player.crossbowclipkillcount)) {
         player.crossbowclipkillcount = 0;
+      }
 
       player.crossbowclipkillcount++;
 
@@ -625,13 +681,15 @@ challengekills(data, time) {
     if(player isbonuscardactive(6, player.class_num)) {
       player addbonuscardstat(6, "kills", 1, player.class_num);
 
-      if(!isDefined(player.pers["dangerCloseKills"]))
+      if(!isDefined(player.pers["dangerCloseKills"])) {
         player.pers["dangerCloseKills"] = 0;
+      }
 
       player.pers["dangerCloseKills"]++;
 
-      if(player.pers["dangerCloseKills"] == 5)
+      if(player.pers["dangerCloseKills"] == 5) {
         player addplayerstat("kill_with_dual_lethal_grenades", 1);
+      }
     }
   }
 
@@ -641,30 +699,37 @@ challengekills(data, time) {
 perkkills(victim, isstunned, time) {
   player = self;
 
-  if(player hasperk("specialty_movefaster"))
+  if(player hasperk("specialty_movefaster")) {
     player addplayerstat("perk_movefaster_kills", 1);
+  }
 
-  if(player hasperk("specialty_noname"))
+  if(player hasperk("specialty_noname")) {
     player addplayerstat("perk_noname_kills", 1);
+  }
 
-  if(player hasperk("specialty_quieter"))
+  if(player hasperk("specialty_quieter")) {
     player addplayerstat("perk_quieter_kills", 1);
+  }
 
   if(player hasperk("specialty_longersprint")) {
-    if(isDefined(player.lastsprinttime) && gettime() - player.lastsprinttime < 2500)
+    if(isDefined(player.lastsprinttime) && gettime() - player.lastsprinttime < 2500) {
       player addplayerstat("perk_longersprint", 1);
+    }
   }
 
   if(player hasperk("specialty_fastmantle")) {
-    if(isDefined(player.lastsprinttime) && gettime() - player.lastsprinttime < 2500 && player playerads() >= 1)
+    if(isDefined(player.lastsprinttime) && gettime() - player.lastsprinttime < 2500 && player playerads() >= 1) {
       player addplayerstat("perk_fastmantle_kills", 1);
+    }
   }
 
-  if(player hasperk("specialty_loudenemies"))
+  if(player hasperk("specialty_loudenemies")) {
     player addplayerstat("perk_loudenemies_kills", 1);
+  }
 
-  if(isstunned == 1 && player hasperk("specialty_stunprotection"))
+  if(isstunned == 1 && player hasperk("specialty_stunprotection")) {
     player addplayerstat("perk_protection_stun_kills", 1);
+  }
 
   assert(isDefined(victim.activecounteruavs));
   activeemp = 0;
@@ -680,8 +745,9 @@ perkkills(victim, isstunned, time) {
       }
     }
   } else if(isDefined(level.empplayer)) {
-    if(level.empplayer != player)
+    if(level.empplayer != player) {
       activeemp = 1;
+    }
   }
 
   activecuav = 0;
@@ -710,54 +776,63 @@ perkkills(victim, isstunned, time) {
   }
 
   if(activecuav == 1 || activeemp == 1) {
-    if(player hasperk("specialty_immunecounteruav"))
+    if(player hasperk("specialty_immunecounteruav")) {
       player addplayerstat("perk_immune_cuav_kills", 1);
+    }
   }
 
   activeuavvictim = 0;
 
   if(level.teambased) {
-    if(level.activeuavs[victim.team] > 0)
+    if(level.activeuavs[victim.team] > 0) {
       activeuavvictim = 1;
+    }
   } else
     activeuavvictim = isDefined(level.activeuavs[victim.entnum]) && level.activeuavs[victim.entnum] > 0;
 
   if(activeuavvictim == 1) {
-    if(player hasperk("specialty_gpsjammer"))
+    if(player hasperk("specialty_gpsjammer")) {
       player addplayerstat("perk_gpsjammer_immune_kills", 1);
+    }
   }
 
   if(player.lastweaponchange + 5000 > time) {
-    if(player hasperk("specialty_fastweaponswitch"))
+    if(player hasperk("specialty_fastweaponswitch")) {
       player addplayerstat("perk_fastweaponswitch_kill_after_swap", 1);
+    }
   }
 
   if(player.scavenged == 1) {
-    if(player hasperk("specialty_scavenger"))
+    if(player hasperk("specialty_scavenger")) {
       player addplayerstat("perk_scavenger_kills_after_resupply", 1);
+    }
   }
 }
 
 flakjacketprotected(weapon, attacker) {
-  if(weapon == "claymore_mp")
+  if(weapon == "claymore_mp") {
     self.flakjacketclaymore[attacker.clientid] = 1;
+  }
 
   self addplayerstat("perk_flak_survive", 1);
 }
 
 earnedkillstreak() {
-  if(self hasperk("specialty_earnmoremomentum"))
+  if(self hasperk("specialty_earnmoremomentum")) {
     self addplayerstat("perk_earnmoremomentum_earn_streak", 1);
+  }
 }
 
 genericbulletkill(data, victim, weapon) {
   player = self;
   time = data.time;
 
-  if(player.pers["lastBulletKillTime"] == time)
+  if(player.pers["lastBulletKillTime"] == time) {
     player.pers["bulletStreak"]++;
-  else
+  }
+  else {
     player.pers["bulletStreak"] = 1;
+  }
 
   player.pers["lastBulletKillTime"] = time;
 
@@ -765,22 +840,26 @@ genericbulletkill(data, victim, weapon) {
     if(data.victim.idflags &level.idflags_penetration) {
       player addplayerstat("kill_enemy_through_wall", 1);
 
-      if(isDefined(weapon) && weaponhasattachment(weapon, "fmj"))
+      if(isDefined(weapon) && weaponhasattachment(weapon, "fmj")) {
         player addplayerstat("kill_enemy_through_wall_with_fmj", 1);
+      }
     }
   }
 }
 
 ishighestscoringplayer(player) {
-  if(!isDefined(player.score) || player.score < 1)
+  if(!isDefined(player.score) || player.score < 1) {
     return false;
+  }
 
   players = level.players;
 
-  if(level.teambased)
+  if(level.teambased) {
     team = player.pers["team"];
-  else
+  }
+  else {
     team = "all";
+  }
 
   highscore = player.score;
 
@@ -797,8 +876,9 @@ ishighestscoringplayer(player) {
     if(team != "all" && players[i].pers["team"] != team) {
       continue;
     }
-    if(players[i].score >= highscore)
+    if(players[i].score >= highscore) {
       return false;
+    }
   }
 
   return true;
@@ -908,11 +988,13 @@ challengeroundend(data) {
   switch (level.gametype) {
     case "sd":
       if(player.team == winner) {
-        if(game["challenge"][winner]["allAlive"])
+        if(game["challenge"][winner]["allAlive"]) {
           player addgametypestat("round_win_no_deaths", 1);
+        }
 
-        if(isDefined(player.lastmansddefeat3enemies))
+        if(isDefined(player.lastmansddefeat3enemies)) {
           player addgametypestat("last_man_defeat_3_enemies", 1);
+        }
       }
 
       break;
@@ -927,8 +1009,9 @@ roundend(winner) {
   data.time = gettime();
 
   if(level.teambased) {
-    if(isDefined(winner) && isDefined(level.teams[winner]))
+    if(isDefined(winner) && isDefined(level.teams[winner])) {
       data.winner = winner;
+    }
   } else if(isDefined(winner))
     data.winner = winner;
 
@@ -945,8 +1028,9 @@ gameend(winner) {
   data.time = gettime();
 
   if(level.teambased) {
-    if(isDefined(winner) && isDefined(level.teams[winner]))
+    if(isDefined(winner) && isDefined(level.teams[winner])) {
       data.winner = winner;
+    }
   } else if(isDefined(winner) && isplayer(winner))
     data.winner = winner;
 
@@ -958,27 +1042,31 @@ gameend(winner) {
 }
 
 getfinalkill(player) {
-  if(isplayer(player))
+  if(isplayer(player)) {
     player addplayerstat("get_final_kill", 1);
+  }
 }
 
 destroyrcbomb(weaponname) {
   self destroyscorestreak(weaponname);
 
-  if(weaponname == "hatchet_mp")
+  if(weaponname == "hatchet_mp") {
     self addplayerstat("destroy_rcbomb_with_hatchet", 1);
+  }
 }
 
 capturedcrate() {
   if(isDefined(self.lastrescuedby) && isDefined(self.lastrescuedtime)) {
-    if(self.lastrescuedtime + 5000 > gettime())
+    if(self.lastrescuedtime + 5000 > gettime()) {
       self.lastrescuedby addplayerstat("defend_teammate_who_captured_package", 1);
+    }
   }
 }
 
 destroyscorestreak(weaponname) {
-  if(isDefined(weaponname) && weaponname == "qrdrone_turret_mp")
+  if(isDefined(weaponname) && weaponname == "qrdrone_turret_mp") {
     self addplayerstat("destroy_score_streak_with_qrdrone", 1);
+  }
 }
 
 capturedobjective(capturetime) {
@@ -996,8 +1084,9 @@ capturedobjective(capturetime) {
 }
 
 hackedordestroyedequipment() {
-  if(self hasperk("specialty_showenemyequipment"))
+  if(self hasperk("specialty_showenemyequipment")) {
     self addplayerstat("perk_hacker_destroy", 1);
+  }
 }
 
 destroyedequipment(weaponname) {
@@ -1011,8 +1100,9 @@ destroyedequipment(weaponname) {
 }
 
 destroyedtacticalinsert() {
-  if(!isDefined(self.pers["tacticalInsertsDestroyed"]))
+  if(!isDefined(self.pers["tacticalInsertsDestroyed"])) {
     self.pers["tacticalInsertsDestroyed"] = 0;
+  }
 
   self.pers["tacticalInsertsDestroyed"]++;
 
@@ -1023,8 +1113,9 @@ destroyedtacticalinsert() {
 }
 
 bladekill() {
-  if(!isDefined(self.pers["bladeKills"]))
+  if(!isDefined(self.pers["bladeKills"])) {
     self.pers["bladeKills"] = 0;
+  }
 
   self.pers["bladeKills"]++;
 
@@ -1076,21 +1167,25 @@ teamcompletedchallenge(team, challenge) {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    if(isDefined(players[i].team) && players[i].team == team)
+    if(isDefined(players[i].team) && players[i].team == team) {
       players[i] addgametypestat(challenge, 1);
+    }
   }
 }
 
 endedearly(winner) {
-  if(level.hostforcedend)
+  if(level.hostforcedend) {
     return true;
+  }
 
-  if(!isDefined(winner))
+  if(!isDefined(winner)) {
     return true;
+  }
 
   if(level.teambased) {
-    if(winner == "tie")
+    if(winner == "tie") {
       return true;
+    }
   }
 
   return false;
@@ -1114,8 +1209,9 @@ didloserfailchallenge(winner, challenge) {
     if(team == winner) {
       continue;
     }
-    if(game["challenge"][team][challenge])
+    if(game["challenge"][team][challenge]) {
       return false;
+    }
   }
 
   return true;
@@ -1125,8 +1221,9 @@ challengegameend(data) {
   player = data.player;
   winner = data.winner;
 
-  if(isDefined(level.scoreeventgameendcallback))
+  if(isDefined(level.scoreeventgameendcallback)) {
     [[level.scoreeventgameendcallback]](data);
+  }
 
   if(endedearly(winner)) {
     return;
@@ -1139,22 +1236,26 @@ challengegameend(data) {
   switch (level.gametype) {
     case "tdm":
       if(player.team == winner) {
-        if(winnerscore >= loserscore + 20)
+        if(winnerscore >= loserscore + 20) {
           player addgametypestat("CRUSH", 1);
+        }
       }
 
       mostkillsleastdeaths = 1;
 
       for(index = 0; index < level.placement["all"].size; index++) {
-        if(level.placement["all"][index].deaths < player.deaths)
+        if(level.placement["all"][index].deaths < player.deaths) {
           mostkillsleastdeaths = 0;
+        }
 
-        if(level.placement["all"][index].kills > player.kills)
+        if(level.placement["all"][index].kills > player.kills) {
           mostkillsleastdeaths = 0;
+        }
       }
 
-      if(mostkillsleastdeaths && player.kills > 0 && level.placement["all"].size > 3)
+      if(mostkillsleastdeaths && player.kills > 0 && level.placement["all"].size > 3) {
         player addgametypestat("most_kills_least_deaths", 1);
+      }
 
       break;
     case "dm":
@@ -1162,56 +1263,64 @@ challengegameend(data) {
         if(level.placement["all"].size >= 2) {
           secondplace = level.placement["all"][1];
 
-          if(player.kills >= secondplace.kills + 7)
+          if(player.kills >= secondplace.kills + 7) {
             player addgametypestat("CRUSH", 1);
+          }
         }
       }
 
       break;
     case "ctf":
       if(player.team == winner) {
-        if(loserscore == 0)
+        if(loserscore == 0) {
           player addgametypestat("SHUT_OUT", 1);
+        }
       }
 
       break;
     case "dom":
       if(player.team == winner) {
-        if(winnerscore >= loserscore + 70)
+        if(winnerscore >= loserscore + 70) {
           player addgametypestat("CRUSH", 1);
+        }
       }
 
       break;
     case "hq":
       if(player.team == winner && winnerscore > 0) {
-        if(winnerscore >= loserscore + 70)
+        if(winnerscore >= loserscore + 70) {
           player addgametypestat("CRUSH", 1);
+        }
       }
 
       break;
     case "koth":
       if(player.team == winner && winnerscore > 0) {
-        if(winnerscore >= loserscore + 70)
+        if(winnerscore >= loserscore + 70) {
           player addgametypestat("CRUSH", 1);
+        }
       }
 
       if(player.team == winner && winnerscore > 0) {
-        if(winnerscore >= loserscore + 110)
+        if(winnerscore >= loserscore + 110) {
           player addgametypestat("ANNIHILATION", 1);
+        }
       }
 
       break;
     case "dem":
       if(player.team == game["defenders"] && player.team == winner) {
-        if(loserscore == 0)
+        if(loserscore == 0) {
           player addgametypestat("SHUT_OUT", 1);
+        }
       }
 
       break;
     case "sd":
       if(player.team == winner) {
-        if(loserscore <= 1)
+        if(loserscore <= 1) {
           player addgametypestat("CRUSH", 1);
+        }
       }
     default:
       break;
@@ -1220,8 +1329,9 @@ challengegameend(data) {
 
 multikill(killcount, weapon) {
   if(killcount >= 3 && isDefined(self.lastkillwheninjured)) {
-    if(self.lastkillwheninjured + 5000 > gettime())
+    if(self.lastkillwheninjured + 5000 > gettime()) {
       self addplayerstat("multikill_3_near_death", 1);
+    }
   }
 }
 
@@ -1264,8 +1374,9 @@ multi_lmg_smg_kill() {
 }
 
 killedzoneattacker(weapon) {
-  if(weapon == "planemortar_mp" || weapon == "remote_missile_missile_mp" || weapon == "remote_missile_bomblet_mp")
+  if(weapon == "planemortar_mp" || weapon == "remote_missile_missile_mp" || weapon == "remote_missile_bomblet_mp") {
     self thread updatezonemultikills();
+  }
 }
 
 killeddog() {
@@ -1294,14 +1405,16 @@ updatezonemultikills() {
   self notify("updateRecentZoneKills");
   self endon("updateRecentZoneKills");
 
-  if(!isDefined(self.recentzonekillcount))
+  if(!isDefined(self.recentzonekillcount)) {
     self.recentzonekillcount = 0;
+  }
 
   self.recentzonekillcount++;
   wait 4.0;
 
-  if(self.recentzonekillcount > 1)
+  if(self.recentzonekillcount > 1) {
     self addplayerstat("multikill_2_zone_attackers", 1);
+  }
 
   self.recentzonekillcount = 0;
 }
@@ -1350,37 +1463,43 @@ calledincarepackage() {
 destroyedhelicopter(attacker, weapon, damagetype, playercontrolled) {
   attacker destroyscorestreak(weapon);
 
-  if(damagetype == "MOD_RIFLE_BULLET" || damagetype == "MOD_PISTOL_BULLET")
+  if(damagetype == "MOD_RIFLE_BULLET" || damagetype == "MOD_PISTOL_BULLET") {
     attacker addplayerstat("destroyed_helicopter_with_bullet", 1);
+  }
 }
 
 destroyedqrdrone(damagetype, weapon) {
   self destroyscorestreak(weapon);
   self addplayerstat("destroy_qrdrone", 1);
 
-  if(damagetype == "MOD_RIFLE_BULLET" || damagetype == "MOD_PISTOL_BULLET")
+  if(damagetype == "MOD_RIFLE_BULLET" || damagetype == "MOD_PISTOL_BULLET") {
     self addplayerstat("destroyed_qrdrone_with_bullet", 1);
+  }
 
   self destroyedplayercontrolledaircraft();
 }
 
 destroyedplayercontrolledaircraft() {
-  if(self hasperk("specialty_noname"))
+  if(self hasperk("specialty_noname")) {
     self addplayerstat("destroy_helicopter", 1);
+  }
 }
 
 destroyedaircraft(attacker, weapon) {
   attacker destroyscorestreak(weapon);
 
   if(isDefined(weapon)) {
-    if(weapon == "emp_mp" || weapon == "killstreak_emp_mp")
+    if(weapon == "emp_mp" || weapon == "killstreak_emp_mp") {
       attacker addplayerstat("destroy_aircraft_with_emp", 1);
-    else if(weapon == "missile_drone_projectile_mp" || weapon == "missile_drone_mp")
+    }
+    else if(weapon == "missile_drone_projectile_mp" || weapon == "missile_drone_mp") {
       attacker addplayerstat("destroy_aircraft_with_missile_drone", 1);
+    }
   }
 
-  if(attacker hasperk("specialty_nottargetedbyairsupport"))
+  if(attacker hasperk("specialty_nottargetedbyairsupport")) {
     attacker addplayerstat("perk_nottargetedbyairsupport_destroy_aircraft", 1);
+  }
 
   attacker addplayerstat("destroy_aircraft", 1);
 }
@@ -1409,8 +1528,9 @@ killstreakten() {
   for(numspecialties = 0; numspecialties < level.maxspecialties; numspecialties++) {
     perk = self getloadoutitem(self.class_num, "specialty" + (numspecialties + 1));
 
-    if(perk != 0)
+    if(perk != 0) {
       return;
+    }
   }
 
   self addplayerstat("killstreak_10_no_weapons_perks", 1);
@@ -1437,11 +1557,13 @@ playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, shitloc, att
 
   self.anglesondeath = self getplayerangles();
 
-  if(isDefined(attacker))
+  if(isDefined(attacker)) {
     attacker.anglesonkill = attacker getplayerangles();
+  }
 
-  if(!isDefined(sweapon))
+  if(!isDefined(sweapon)) {
     sweapon = "none";
+  }
 
   self endon("disconnect");
   data = spawnStruct();
@@ -1456,37 +1578,45 @@ playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, shitloc, att
   data.shitloc = shitloc;
   data.time = gettime();
 
-  if(isDefined(einflictor) && isDefined(einflictor.lastweaponbeforetoss))
+  if(isDefined(einflictor) && isDefined(einflictor.lastweaponbeforetoss)) {
     data.lastweaponbeforetoss = einflictor.lastweaponbeforetoss;
+  }
 
-  if(isDefined(einflictor) && isDefined(einflictor.ownerweaponatlaunch))
+  if(isDefined(einflictor) && isDefined(einflictor.ownerweaponatlaunch)) {
     data.ownerweaponatlaunch = einflictor.ownerweaponatlaunch;
+  }
 
   waslockingon = 0;
 
-  if(isDefined(einflictor.locking_on))
+  if(isDefined(einflictor.locking_on)) {
     waslockingon = waslockingon | einflictor.locking_on;
+  }
 
-  if(isDefined(einflictor.locked_on))
+  if(isDefined(einflictor.locked_on)) {
     waslockingon = waslockingon | einflictor.locked_on;
+  }
 
   waslockingon = waslockingon & 1 << data.victim.entnum;
 
-  if(waslockingon != 0)
+  if(waslockingon != 0) {
     data.waslockingon = 1;
-  else
+  }
+  else {
     data.waslockingon = 0;
+  }
 
   data.washacked = einflictor maps\mp\_utility::ishacked();
   data.wasplanting = data.victim.isplanting;
 
-  if(!isDefined(data.wasplanting))
+  if(!isDefined(data.wasplanting)) {
     data.wasplanting = 0;
+  }
 
   data.wasdefusing = data.victim.isdefusing;
 
-  if(!isDefined(data.wasdefusing))
+  if(!isDefined(data.wasdefusing)) {
     data.wasdefusing = 0;
+  }
 
   data.victimweapon = data.victim.currentweapon;
   data.victimonground = data.victim isonground();
@@ -1494,8 +1624,9 @@ playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, shitloc, att
   if(isplayer(attacker)) {
     data.attackeronground = data.attacker isonground();
 
-    if(!isDefined(data.attackerstance))
+    if(!isDefined(data.attackerstance)) {
       data.attackerstance = data.attacker getstance();
+    }
   } else {
     data.attackeronground = 0;
     data.attackerstance = "stand";
@@ -1506,8 +1637,9 @@ playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, shitloc, att
 }
 
 waittillslowprocessallowed() {
-  while(level.lastslowprocessframe == gettime())
+  while(level.lastslowprocessframe == gettime()) {
     wait 0.05;
+  }
 
   level.lastslowprocessframe = gettime();
 }
@@ -1520,17 +1652,20 @@ doscoreeventcallback(callback, data) {
     return;
   }
   if(isDefined(data)) {
-    for(i = 0; i < level.scoreeventcallbacks[callback].size; i++)
+    for(i = 0; i < level.scoreeventcallbacks[callback].size; i++) {
       thread[[level.scoreeventcallbacks[callback][i]]](data);
+    }
   } else {
-    for(i = 0; i < level.scoreeventcallbacks[callback].size; i++)
+    for(i = 0; i < level.scoreeventcallbacks[callback].size; i++) {
       thread[[level.scoreeventcallbacks[callback][i]]]();
+    }
   }
 }
 
 waitandprocessplayerkilledcallback(data) {
-  if(isDefined(data.attacker))
+  if(isDefined(data.attacker)) {
     data.attacker endon("disconnect");
+  }
 
   wait 0.05;
   waittillslowprocessallowed();
@@ -1539,8 +1674,9 @@ waitandprocessplayerkilledcallback(data) {
 }
 
 weaponisknife(weapon) {
-  if(weapon == "knife_held_mp" || weapon == "knife_mp" || weapon == "knife_ballistic_mp")
+  if(weapon == "knife_held_mp" || weapon == "knife_mp" || weapon == "knife_ballistic_mp") {
     return true;
+  }
 
   return false;
 }
@@ -1551,54 +1687,72 @@ eventreceived(eventname) {
 
   switch (level.gametype) {
     case "tdm":
-      if(eventname == "killstreak_10")
+      if(eventname == "killstreak_10") {
         self addgametypestat("killstreak_10", 1);
-      else if(eventname == "killstreak_15")
+      }
+      else if(eventname == "killstreak_15") {
         self addgametypestat("killstreak_15", 1);
-      else if(eventname == "killstreak_20")
+      }
+      else if(eventname == "killstreak_20") {
         self addgametypestat("killstreak_20", 1);
-      else if(eventname == "multikill_3")
+      }
+      else if(eventname == "multikill_3") {
         self addgametypestat("multikill_3", 1);
-      else if(eventname == "kill_enemy_who_killed_teammate")
+      }
+      else if(eventname == "kill_enemy_who_killed_teammate") {
         self addgametypestat("kill_enemy_who_killed_teammate", 1);
-      else if(eventname == "kill_enemy_injuring_teammate")
+      }
+      else if(eventname == "kill_enemy_injuring_teammate") {
         self addgametypestat("kill_enemy_injuring_teammate", 1);
+      }
 
       break;
     case "dm":
-      if(eventname == "killstreak_10")
+      if(eventname == "killstreak_10") {
         self addgametypestat("killstreak_10", 1);
-      else if(eventname == "killstreak_15")
+      }
+      else if(eventname == "killstreak_15") {
         self addgametypestat("killstreak_15", 1);
-      else if(eventname == "killstreak_20")
+      }
+      else if(eventname == "killstreak_20") {
         self addgametypestat("killstreak_20", 1);
-      else if(eventname == "killstreak_30")
+      }
+      else if(eventname == "killstreak_30") {
         self addgametypestat("killstreak_30", 1);
+      }
 
       break;
     case "sd":
-      if(eventname == "defused_bomb_last_man_alive")
+      if(eventname == "defused_bomb_last_man_alive") {
         self addgametypestat("defused_bomb_last_man_alive", 1);
-      else if(eventname == "elimination_and_last_player_alive")
+      }
+      else if(eventname == "elimination_and_last_player_alive") {
         self addgametypestat("elimination_and_last_player_alive", 1);
-      else if(eventname == "killed_bomb_planter")
+      }
+      else if(eventname == "killed_bomb_planter") {
         self addgametypestat("killed_bomb_planter", 1);
-      else if(eventname == "killed_bomb_defuser")
+      }
+      else if(eventname == "killed_bomb_defuser") {
         self addgametypestat("killed_bomb_defuser", 1);
+      }
 
       break;
     case "ctf":
-      if(eventname == "kill_flag_carrier")
+      if(eventname == "kill_flag_carrier") {
         self addgametypestat("kill_flag_carrier", 1);
-      else if(eventname == "defend_flag_carrier")
+      }
+      else if(eventname == "defend_flag_carrier") {
         self addgametypestat("defend_flag_carrier", 1);
+      }
 
       break;
     case "dem":
-      if(eventname == "killed_bomb_planter")
+      if(eventname == "killed_bomb_planter") {
         self addgametypestat("killed_bomb_planter", 1);
-      else if(eventname == "killed_bomb_defuser")
+      }
+      else if(eventname == "killed_bomb_defuser") {
         self addgametypestat("killed_bomb_defuser", 1);
+      }
 
       break;
     default:

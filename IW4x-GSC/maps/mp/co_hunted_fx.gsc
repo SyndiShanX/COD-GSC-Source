@@ -69,8 +69,9 @@ main() {
 setFootstepEffect(name, fx) {
   assertEx(isDefined(name), "Need to define the footstep surface type.");
   assertEx(isDefined(fx), "Need to define the mud footstep effect.");
-  if(!isDefined(anim.optionalStepEffects))
+  if(!isDefined(anim.optionalStepEffects)) {
     anim.optionalStepEffects = [];
+  }
   anim.optionalStepEffects[anim.optionalStepEffects.size] = name;
   level._effect["step_" + name] = fx;
   anim.optionalStepEffectFunction = playFootStepEffect();
@@ -78,8 +79,9 @@ setFootstepEffect(name, fx) {
 
 playFootStepEffect(foot, groundType) {
   for(i = 0; i < anim.optionalStepEffects.size; i++) {
-    if(groundType != anim.optionalStepEffects[i])
+    if(groundType != anim.optionalStepEffects[i]) {
       continue;
+    }
     org = self gettagorigin(foot);
     playFX(level._effect["step_" + anim.optionalStepEffects[i]], org, org + (0, 0, 100));
     return;

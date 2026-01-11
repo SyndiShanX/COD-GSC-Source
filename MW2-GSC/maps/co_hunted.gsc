@@ -31,10 +31,12 @@ main() {
   precacheLevelStuff();
   vehicleScripts();
 
-  if(level.console)
+  if(level.console) {
     level.hint_text_size = 1.6;
-  else
+  }
+  else {
     level.hint_text_size = 1.2;
+  }
 
   precacheShader("waypoint_targetneutral");
   precacheShader("waypoint_checkpoint_neutral_a");
@@ -95,8 +97,9 @@ main() {
 }
 
 gameplay_logic(gametype) {
-  if(!isDefined(gametype))
+  if(!isDefined(gametype)) {
     gametype = "default";
+  }
 
   flag_init("timer_expired");
 
@@ -135,10 +138,12 @@ gameplay_logic(gametype) {
       array_thread(level.bravoTeam, ::add_beacon_effect);
     }
 
-    if(level.player == level.ac130gunner)
+    if(level.player == level.ac130gunner) {
       level.ground_player = level.player2;
-    else
+    }
+    else {
       level.ground_player = level.player;
+    }
 
     level.ground_player thread add_beacon_effect();
 
@@ -184,10 +189,12 @@ gameplay_logic(gametype) {
   /*level.timed = false;
   gameskill_p1 = level.player get_player_gameskill();
   gameskill_p2 = level.player2 get_player_gameskill();
-  if( ( gameskill_p1 > 1 ) && ( gameskill_p2 > 1 ) )
+  if( ( gameskill_p1 > 1 ) && ( gameskill_p2 > 1 ) ) {
   	level.timed = true;
-  else
+  }
+  else {
   	level.timed = false;
+  }
   */
 
   if(gametype != "specop") {
@@ -199,8 +206,9 @@ gameplay_logic(gametype) {
   thread open_all_doors();
   thread enemy_monitor();
 
-  if(level.timed)
+  if(level.timed) {
     thread timer_start();
+  }
 
   thread objective(gametype);
   thread checkpoint_system(gametype);
@@ -229,10 +237,12 @@ move_enemies_to_closest_goal_radius(gametype) {
   spawners = getspawnerarray();
   array_thread(spawners, ::add_spawn_function, ::create_hunter_enemy);
 
-  if(gametype == "specop")
+  if(gametype == "specop") {
     move_deadlier_hunters_to_new_goal(level.current_goal);
-  else
+  }
+  else {
     move_hunters_to_new_goal(level.current_goal);
+  }
 
   while(1) {
     closest_goal = getclosest(level.ground_player.origin, goals);
@@ -240,18 +250,21 @@ move_enemies_to_closest_goal_radius(gametype) {
     if(level.current_goal != closest_goal) {
       level.current_goal = closest_goal;
 
-      if(gametype == "specop")
+      if(gametype == "specop") {
         move_deadlier_hunters_to_new_goal(closest_goal);
-      else
+      }
+      else {
         move_hunters_to_new_goal(closest_goal);
+      }
     }
     wait 1;
   }
 }
 
 create_hunter_enemy() {
-  if(self.team != "axis")
+  if(self.team != "axis") {
     return;
+  }
   level.hunter_enemies[self.unique_id] = self;
   self setgoalpos(level.current_goal.origin);
 
@@ -265,8 +278,9 @@ move_hunters_to_new_goal(closest_goal) {
   //waittillframeend because you may be in the part of the frame that is before
   //the script has received the "death" notify but after the AI has died.
 
-  foreach(enemy in level.hunter_enemies)
+  foreach(enemy in level.hunter_enemies) {
   enemy setgoalpos(closest_goal.origin);
+  }
 }
 
 move_deadlier_hunters_to_new_goal(closest_goal) {
@@ -274,10 +288,12 @@ move_deadlier_hunters_to_new_goal(closest_goal) {
   //Sent half the enemies to player, and the other half to set goal,
 
   foreach(enemy in level.hunter_enemies) {
-    if(RandomInt(100) < CONST_specop_difficulty)
+    if(RandomInt(100) < CONST_specop_difficulty) {
       enemy setgoalpos(closest_goal.origin);
-    else
+    }
+    else {
       enemy setgoalentity(level.ground_player);
+    }
   }
 }
 
@@ -295,18 +311,22 @@ hint_timeout() {
 }
 
 ShouldBreakLaserHintPrint() {
-  if(!isDefined(level.ground_player))
+  if(!isDefined(level.ground_player)) {
     return false;
-  else if(isDefined(level.ground_player.hint_timeout) && level.ground_player.hint_timeout <= 0)
+  }
+  else if(isDefined(level.ground_player.hint_timeout) && level.ground_player.hint_timeout <= 0) {
     return true;
-  else
+  }
+  else {
     return level.ground_player ent_flag("player_used_laser");
+  }
 }
 
 ac130_change_weapon_hint() {
   wait 12;
-  if(!flag("player_changed_weapons"))
+  if(!flag("player_changed_weapons")) {
     level.ac130gunner thread display_hint("ac130_changed_weapons");
+  }
   // Press ^3[{weapnext}]^7 to cycle through weapons.
   //hintPrint_coop(&"AC130_HINT_CYCLE_WEAPONS" );
 }
@@ -354,8 +374,9 @@ checkpoint_logic(time, flag_name, shader, timer_string, timer_expired_string) {
   checkpoint_origin = getent(flag_name, "targetname");
   checkpoint_origin thread threeD_objective_hint(shader, "kill_3d_checkpoint_icon");
 
-  if(level.timed)
+  if(level.timed) {
     thread checkpoint_timer_logic(time, timer_string, timer_expired_string);
+  }
   thread waittill_checkpoint_hit(flag_name);
 
   level waittill_either("checkpoint_timer_expired", flag_name);
@@ -370,8 +391,9 @@ waittill_checkpoint_hit(flag_name) {
 
   flag_wait(flag_name);
 
-  if(isDefined(level.checkpoint_timer))
+  if(isDefined(level.checkpoint_timer)) {
     level.checkpoint_timer destroy();
+  }
   level notify("kill_checkpoint_timer");
 
   /*if( getdvar( "do_saves" ) == "1" )
@@ -418,10 +440,12 @@ open_all_doors() {
   {
   	doors[i] connectpaths();
 
-  	if( doors[i].script_noteworthy == "right" )
+  	if( doors[i].script_noteworthy == "right" ) {
   		doors[i] rotateto( doors[i].angles + (0,-160,0), .6, 0 , .1 );
-  	else
+  	}
+  	else {
   		doors[i] rotateto( doors[i].angles + (0,175,0), .75, 0 , .1 );
+  	}
   }
   */
 
@@ -626,18 +650,21 @@ enemy_monitor() {
 
 spawn_enemy_group() {
   if(level.selection >= level.enemy_force.size) {
-    if(getdvar("no_respawn") == "1")
+    if(getdvar("no_respawn") == "1") {
       return;
-    else
+    }
+    else {
       level.selection = 0;
+    }
   }
   s_name = level.enemy_force[level.selection].name;
   s_number = level.selection;
   level.selection++;
 
   if(level.enemy_force[s_number].type == "one_use_vehicle") {
-    if(level.enemy_force[s_number].drove)
+    if(level.enemy_force[s_number].drove) {
       return;
+    }
     vehicle = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(s_name);
     level.enemy_force[s_number].drove = true;
     return;
@@ -652,8 +679,9 @@ spawn_enemy_group() {
   //thread commander_dialog ( level.dialog[ selection ][ sound_selection ] );
 
   enemy_spawners = getEntArray(s_name, "targetname");
-  for(i = 0; i < enemy_spawners.size; i++)
+  for(i = 0; i < enemy_spawners.size; i++) {
     guy = enemy_spawners[i] spawn_ai();
+  }
 
   wait 1; // make sure the spawning is done before checking to see how many are spawned
 }
@@ -664,14 +692,17 @@ enemy_monitor_loop() {
     total = enemies.size;
     roaming = total;
 
-    for(i = 0; i < enemies.size; i++)
+    for(i = 0; i < enemies.size; i++) {
       if(isDefined(enemies[i].script_noteworthy))
-        if(enemies[i].script_noteworthy == "defender")
+    }
+        if(enemies[i].script_noteworthy == "defender") {
           roaming--;
+        }
 
     println("roaming/total: " + roaming + "/" + total);
-    if(roaming < 13)
+    if(roaming < 13) {
       spawn_enemy_group();
+    }
     wait 1;
   }
 }
@@ -702,8 +733,9 @@ timer_start(gametype) {
 }
 
 bridge_timer_logic(iSeconds, sLabel, bUseTick) {
-  if(!isDefined(bUseTick))
+  if(!isDefined(bUseTick)) {
     bUseTick = false;
+  }
   // destroy any previous timer just in case
   killTimer();
   level endon("kill_timer");
@@ -721,8 +753,9 @@ bridge_timer_logic(iSeconds, sLabel, bUseTick) {
   /*-----------------------
   TIMER EXPIRED
   -------------------------*/
-  if(bUseTick == true)
+  if(bUseTick == true) {
     thread timer_tick();
+  }
   wait(iSeconds);
 
   flag_set("timer_expired");
@@ -822,14 +855,16 @@ timer_tick() {
 
 killTimer() {
   level notify("kill_timer");
-  if(isDefined(level.timer))
+  if(isDefined(level.timer)) {
     level.timer destroy();
+  }
 }
 
 kill_after_time(time) {
   wait(time);
-  if(isalive(self))
+  if(isalive(self)) {
     self kill();
+  }
 }
 
 set_thermal_LOD() {
@@ -839,8 +874,9 @@ set_thermal_LOD() {
 /*
 hint( text, timeOut, double_line )
 {
-	if( getdvar( "chaplincheat" ) == "1" )
+	if( getdvar( "chaplincheat" ) == "1" ) {
 		return;
+	}
 
 	clear_hints();
 	level endon( "clearing_hints" );
@@ -854,10 +890,12 @@ hint( text, timeOut, double_line )
 	level.hintElem setText( text );
 	//level.hintElem endon ( "death" );
 
-	if( isDefined( timeOut ) )
+	if( isDefined( timeOut ) ) {
 		wait( timeOut );
-	else
+	}
+	else {
 		return;
+	}
 
 	level.hintElem fadeOverTime( 0.5 );
 	level.hintElem.alpha = 0;
@@ -868,16 +906,21 @@ hint( text, timeOut, double_line )
 
 clear_hints()
 {
-	if( isDefined( level.hintElem ) )
+	if( isDefined( level.hintElem ) ) {
 		level.hintElem destroyElem();
-	if( isDefined( level.iconElem ) )
+	}
+	if( isDefined( level.iconElem ) ) {
 		level.iconElem destroyElem();
-	if( isDefined( level.iconElem2 ) )
+	}
+	if( isDefined( level.iconElem2 ) ) {
 		level.iconElem2 destroyElem();
-	if( isDefined( level.iconElem3 ) )
+	}
+	if( isDefined( level.iconElem3 ) ) {
 		level.iconElem3 destroyElem();
-	if( isDefined( level.hintbackground ) )
+	}
+	if( isDefined( level.hintbackground ) ) {
 		level.hintbackground destroyElem();
+	}
 	level notify( "clearing_hints" );
 }
 */

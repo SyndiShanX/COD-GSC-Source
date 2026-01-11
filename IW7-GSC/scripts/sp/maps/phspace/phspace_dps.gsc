@@ -4,8 +4,9 @@
 ***************************************************/
 
 func_107B7() {
-  if(!isDefined(level.func_12B67))
+  if(!isDefined(level.func_12B67)) {
     level.func_12B67 = scripts\sp\vehicle::func_1080C("un_retribution");
+  }
 
   level.func_12B67 scripts\sp\vehicle::playgestureviewmodel();
   level.func_12B67.func_1FBB = "retribution";
@@ -25,8 +26,9 @@ func_A0F0() {
   var_00 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
   var_01 = "jackal_callin";
 
-  if(getdvarint("E3", 0))
+  if(getdvarint("E3", 0)) {
     var_01 = "jackal_callin_dps";
+  }
 
   wait 0.1;
   scripts\sp\vehicle_build::func_31C6("script_vehicle_jackal_friendly_pearl", "default", "vfx\iw7\core\vehicle\jackal\vfx_jackal_wash_concrete.vfx", 1);
@@ -39,16 +41,19 @@ func_A0F0() {
     level.func_D127 func_0BDC::func_6B4C("none", 0);
     level.func_D127 func_0BDC::func_104A6(1);
 
-    if(getdvarint("E3", 0))
+    if(getdvarint("E3", 0)) {
       scripts\sp\utility::func_15F5("jackals_salter_to_jackal_dps");
-    else
+    }
+    else {
       scripts\sp\utility::func_15F5("jackals_salter_to_jackal");
+    }
 
     func_0BDC::func_137CF();
   }
 
-  if(getdvarint("e3", 0))
+  if(getdvarint("e3", 0)) {
     thread func_1358D();
+  }
 
   level.func_D127 func_0BDC::func_A167();
   func_0BDC::func_A153(1);
@@ -165,8 +170,9 @@ func_1130D(var_00) {
   if(!isDefined(var_01)) {
     return;
   }
-  if(level.player istouching(var_01))
+  if(level.player istouching(var_01)) {
     level.player _meth_81D0();
+  }
 
   var_01 solid();
   func_0BDC::func_137CF();
@@ -178,8 +184,9 @@ func_376D(var_00, var_01) {
   var_0.func_1FBB = "retribution";
   var_00 scripts\sp\anim::func_F64A();
 
-  if(!isDefined(level.func_10256))
+  if(!isDefined(level.func_10256)) {
     scripts\sp\anim::func_1F35(var_00, var_01);
+  }
   else {
     thread scripts\sp\anim::func_1F35(var_00, var_01);
     var_02 = [var_00];
@@ -210,8 +217,9 @@ func_CA93() {
 }
 
 func_107C1() {
-  if(!isDefined(level.func_EA99))
+  if(!isDefined(level.func_EA99)) {
     level.func_EA99 = scripts\sp\vehicle::func_1080C("jackal_salter");
+  }
 
   level.func_EA99.func_1FBB = "salter_jackal";
   level.func_EA99.unittype = "jackal";

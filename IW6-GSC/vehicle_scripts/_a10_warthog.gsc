@@ -7,10 +7,12 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("a10_warthog", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
 
-  if(var_2 == "script_vehicle_a10_warthog_cheap" || var_2 == "script_vehicle_a10_warthog_cheaper")
+  if(var_2 == "script_vehicle_a10_warthog_cheap" || var_2 == "script_vehicle_a10_warthog_cheaper") {
     maps\_vehicle::build_deathmodel("vehicle_a10_warthog");
-  else
+  }
+  else {
     maps\_vehicle::build_deathmodel("vehicle_a10_warthog_iw6");
+  }
 
   level._effect["engineeffect"] = loadfx("fx/fire/a10_warthog_afterburner");
   level._effect["afterburner"] = loadfx("fx/fire/a10_warthog_afterburner_ignite");
@@ -61,8 +63,9 @@ landing_gear_up() {
 setanims() {
   var_0 = [];
 
-  for(var_1 = 0; var_1 < 1; var_1++)
+  for(var_1 = 0; var_1 < 1; var_1++) {
     var_0[var_1] = spawnStruct();
+  }
 
   return var_0;
 }
@@ -151,20 +154,24 @@ add_contrail(var_0, var_1) {
 playerisclose(var_0) {
   var_1 = playerisinfront(var_0);
 
-  if(var_1)
+  if(var_1) {
     var_2 = 1;
-  else
+  }
+  else {
     var_2 = -1;
+  }
 
   var_3 = common_scripts\utility::flat_origin(var_0.origin);
   var_4 = var_3 + anglesToForward(common_scripts\utility::flat_angle(var_0.angles)) * (var_2 * 100000);
   var_5 = pointonsegmentnearesttopoint(var_3, var_4, level.player.origin);
   var_6 = distance(var_3, var_5);
 
-  if(var_6 < 3000)
+  if(var_6 < 3000) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 playerisinfront(var_0) {
@@ -172,10 +179,12 @@ playerisinfront(var_0) {
   var_2 = vectornormalize(common_scripts\utility::flat_origin(level.player.origin) - var_0.origin);
   var_3 = vectordot(var_1, var_2);
 
-  if(var_3 > 0)
+  if(var_3 > 0) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 plane_sound_node() {
@@ -201,8 +210,9 @@ plane_bomb_node() {
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_2++;
 
-    if(var_2 == 3)
+    if(var_2 == 3) {
       var_2 = 1;
+    }
 
     var_1[var_3] thread maps\_utility::play_sound_on_entity("airstrike_explosion");
     playFX(level._effect["plane_bomb_explosion" + var_2], var_1[var_3].origin);
@@ -222,8 +232,9 @@ plane_bomb_cluster() {
   var_4 = anglestoup(var_1.angles) * -0.2;
   var_5 = [];
 
-  for(var_6 = 0; var_6 < 3; var_6++)
+  for(var_6 = 0; var_6 < 3; var_6++) {
     var_5[var_6] = (var_3[var_6] + var_4[var_6]) / 2;
+  }
 
   var_5 = (var_5[0], var_5[1], var_5[2]);
   var_5 = var_5 * 7000;

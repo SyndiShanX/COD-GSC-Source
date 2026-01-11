@@ -8,26 +8,30 @@
 #include maps\mp\gametypes\_weapons;
 
 initairsupport() {
-  if(!isDefined(level.airsupportheightscale))
+  if(!isDefined(level.airsupportheightscale)) {
     level.airsupportheightscale = 1;
+  }
 
   level.airsupportheightscale = getdvarintdefault("scr_airsupportHeightScale", level.airsupportheightscale);
   level.noflyzones = [];
   level.noflyzones = getEntArray("no_fly_zone", "targetname");
   airsupport_heights = getstructarray("air_support_height", "targetname");
 
-  if(airsupport_heights.size > 1)
+  if(airsupport_heights.size > 1) {
     error("Found more then one 'air_support_height' structs in the map");
+  }
 
   airsupport_heights = getEntArray("air_support_height", "targetname");
 
-  if(airsupport_heights.size > 0)
+  if(airsupport_heights.size > 0) {
     error("Found an entity in the map with an 'air_support_height' targetname.There should be only structs.");
+  }
 
   heli_height_meshes = getEntArray("heli_height_lock", "classname");
 
-  if(heli_height_meshes.size > 1)
+  if(heli_height_meshes.size > 1) {
     error("Found more then one 'heli_height_lock' classname in the map");
+  }
 }
 
 finishhardpointlocationusage(location, usedcallback) {
@@ -76,8 +80,9 @@ endselectionthink() {
     self.selectinglocation = undefined;
   }
 
-  if(event != "used")
+  if(event != "used") {
     self notify("confirm_location", undefined, undefined);
+  }
 }
 
 stoploopsoundaftertime(time) {
@@ -102,8 +107,9 @@ calculatereleasetime(flytime, flyheight, flyspeed, bombspeedscale) {
 getminimumflyheight() {
   airsupport_height = getstruct("air_support_height", "targetname");
 
-  if(isDefined(airsupport_height))
+  if(isDefined(airsupport_height)) {
     planeflyheight = airsupport_height.origin[2];
+  }
   else {
     println("WARNING:Missing air_support_height entity in the map.Using default height.");
 
@@ -114,8 +120,9 @@ getminimumflyheight() {
       planeflyheight = planeflyheight * getdvarintdefault("scr_airsupportHeightScale", level.airsupportheightscale);
     }
 
-    if(isDefined(level.forceairsupportmapheight))
+    if(isDefined(level.forceairsupportmapheight)) {
       planeflyheight = planeflyheight + level.forceairsupportmapheight;
+    }
   }
 
   return planeflyheight;
@@ -136,8 +143,9 @@ callstrike(flightplan) {
   flytime = d / flightplan.speed;
   bombtime = calculatereleasetime(flytime, flightplan.height, flightplan.speed, flightplan.bombspeedscale);
 
-  if(bombtime < 0)
+  if(bombtime < 0) {
     bombtime = 0;
+  }
 
   assert(flytime > bombtime);
   flightplan.owner endon("disconnect");
@@ -162,8 +170,9 @@ planestrike(owner, requireddeathcount, pathstart, pathend, bombtime, flytime, fl
   plane moveto(pathend, flytime, 0, 0);
   thread debug_plane_line(flytime, flyspeed, pathstart, pathend);
 
-  if(isDefined(planespawnedfunction))
+  if(isDefined(planespawnedfunction)) {
     plane[[planespawnedfunction]](owner, requireddeathcount, pathstart, pathend, bombtime, bombspeedscale, flytime, flyspeed);
+  }
 
   wait(flytime);
   plane notify("delete");
@@ -193,25 +202,29 @@ clamptarget(target) {
   min = getmintargetheight();
   max = getmaxtargetheight();
 
-  if(target[2] < min)
+  if(target[2] < min) {
     target[2] = min;
+  }
 
-  if(target[2] > max)
+  if(target[2] > max) {
     target[2] = max;
+  }
 
   return target;
 }
 
 _insidecylinder(point, base, radius, height) {
   if(isDefined(height)) {
-    if(point[2] > base[2] + height)
+    if(point[2] > base[2] + height) {
       return false;
+    }
   }
 
   dist = distance2d(point, base);
 
-  if(dist < radius)
+  if(dist < radius) {
     return true;
+  }
 
   return false;
 }
@@ -219,8 +232,9 @@ _insidecylinder(point, base, radius, height) {
 _insidenoflyzonebyindex(point, index, disregardheight) {
   height = level.noflyzones[index].height;
 
-  if(isDefined(disregardheight))
+  if(isDefined(disregardheight)) {
     height = undefined;
+  }
 
   return _insidecylinder(point, level.noflyzones[index].origin, level.noflyzones[index].radius, height);
 }
@@ -238,8 +252,9 @@ getnoflyzoneheight(point) {
     }
   }
 
-  if(!isDefined(origin))
+  if(!isDefined(origin)) {
     return point[2];
+  }
 
   return origin[2] + height;
 }
@@ -248,8 +263,9 @@ insidenoflyzones(point, disregardheight) {
   noflyzones = [];
 
   for(i = 0; i < level.noflyzones.size; i++) {
-    if(_insidenoflyzonebyindex(point, i, disregardheight))
+    if(_insidenoflyzonebyindex(point, i, disregardheight)) {
       noflyzones[noflyzones.size] = i;
+    }
   }
 
   return noflyzones;
@@ -263,8 +279,9 @@ crossesnoflyzone(start, end) {
     if(point[2] > level.noflyzones[i].origin[2] + level.noflyzones[i].height) {
       continue;
     }
-    if(dist < level.noflyzones[i].radius)
+    if(dist < level.noflyzones[i].radius) {
       return i;
+    }
   }
 
   return undefined;
@@ -280,8 +297,9 @@ crossesnoflyzones(start, end) {
     if(point[2] > level.noflyzones[i].origin[2] + level.noflyzones[i].height) {
       continue;
     }
-    if(dist < level.noflyzones[i].radius)
+    if(dist < level.noflyzones[i].radius) {
       zones[zones.size] = i;
+    }
   }
 
   return zones;
@@ -295,8 +313,9 @@ getnoflyzoneheightcrossed(start, end, minheight) {
     dist = distance2d(point, level.noflyzones[i].origin);
 
     if(dist < level.noflyzones[i].radius) {
-      if(height < level.noflyzones[i].height)
+      if(height < level.noflyzones[i].height) {
         height = level.noflyzones[i].height;
+      }
     }
   }
 
@@ -304,26 +323,31 @@ getnoflyzoneheightcrossed(start, end, minheight) {
 }
 
 _shouldignorenoflyzone(noflyzone, noflyzones) {
-  if(!isDefined(noflyzone))
+  if(!isDefined(noflyzone)) {
     return true;
+  }
 
   for(i = 0; i < noflyzones.size; i++) {
-    if(isDefined(noflyzones[i]) && noflyzones[i] == noflyzone)
+    if(isDefined(noflyzones[i]) && noflyzones[i] == noflyzone) {
       return true;
+    }
   }
 
   return false;
 }
 
 _shouldignorestartgoalnoflyzone(noflyzone, startnoflyzones, goalnoflyzones) {
-  if(!isDefined(noflyzone))
+  if(!isDefined(noflyzone)) {
     return true;
+  }
 
-  if(_shouldignorenoflyzone(noflyzone, startnoflyzones))
+  if(_shouldignorenoflyzone(noflyzone, startnoflyzones)) {
     return true;
+  }
 
-  if(_shouldignorenoflyzone(noflyzone, goalnoflyzones))
+  if(_shouldignorenoflyzone(noflyzone, goalnoflyzones)) {
     return true;
+  }
 
   return false;
 }
@@ -333,13 +357,15 @@ gethelipath(start, goal) {
   thread debug_line(start, goal, (1, 1, 1));
   goalnoflyzones = insidenoflyzones(goal);
 
-  if(goalnoflyzones.size)
+  if(goalnoflyzones.size) {
     goal = (goal[0], goal[1], getnoflyzoneheight(goal));
+  }
 
   goal_points = calculatepath(start, goal, startnoflyzones, goalnoflyzones);
 
-  if(!isDefined(goal_points))
+  if(!isDefined(goal_points)) {
     return undefined;
+  }
 
   assert(goal_points.size >= 1);
   return goal_points;
@@ -356,13 +382,15 @@ followpath(path, donenotify, stopatgoal) {
   thread debug_line(self.origin, path[i], (1, 1, 0));
   self waittill("goal");
 
-  if(isDefined(donenotify))
+  if(isDefined(donenotify)) {
     self notify(donenotify);
+  }
 }
 
 setgoalposition(goal, donenotify, stopatgoal) {
-  if(!isDefined(stopatgoal))
+  if(!isDefined(stopatgoal)) {
     stopatgoal = 1;
+  }
 
   start = self.origin;
   goal_points = gethelipath(start, goal);
@@ -379,16 +407,18 @@ clearpath(start, end, startnoflyzone, goalnoflyzone) {
   noflyzones = crossesnoflyzones(start, end);
 
   for(i = 0; i < noflyzones.size; i++) {
-    if(!_shouldignorestartgoalnoflyzone(noflyzones[i], startnoflyzone, goalnoflyzone))
+    if(!_shouldignorestartgoalnoflyzone(noflyzones[i], startnoflyzone, goalnoflyzone)) {
       return false;
+    }
   }
 
   return true;
 }
 
 append_array(dst, src) {
-  for(i = 0; i < src.size; i++)
+  for(i = 0; i < src.size; i++) {
     dst[dst.size] = src[i];
+  }
 }
 
 calculatepath_r(start, end, points, startnoflyzones, goalnoflyzones, depth) {
@@ -404,8 +434,9 @@ calculatepath_r(start, end, points, startnoflyzones, goalnoflyzones, depth) {
   for(i = 0; i < noflyzones.size; i++) {
     noflyzone = noflyzones[i];
 
-    if(!_shouldignorestartgoalnoflyzone(noflyzone, startnoflyzones, goalnoflyzones))
+    if(!_shouldignorestartgoalnoflyzone(noflyzone, startnoflyzones, goalnoflyzones)) {
       return undefined;
+    }
   }
 
   points[points.size] = end;
@@ -416,8 +447,9 @@ calculatepath(start, end, startnoflyzones, goalnoflyzones) {
   points = [];
   points = calculatepath_r(start, end, points, startnoflyzones, goalnoflyzones, 3);
 
-  if(!isDefined(points))
+  if(!isDefined(points)) {
     return undefined;
+  }
 
   assert(points.size >= 1);
   debug_sphere(points[points.size - 1], 10, (1, 0, 0), 1, 1000);
@@ -456,8 +488,9 @@ getstrikepath(target, height, halfdistance, yaw) {
   noflyzoneheight = getnoflyzoneheight(target);
   worldheight = target[2] + height;
 
-  if(noflyzoneheight > worldheight)
+  if(noflyzoneheight > worldheight) {
     worldheight = noflyzoneheight;
+  }
 
   goal = (target[0], target[1], worldheight);
   path = [];
@@ -503,8 +536,9 @@ entlosradiusdamage(ent, pos, radius, max, min, owner, einflictor) {
         debug_star((pos[0], pos[1], head_height), (0, 1, 0), debug_display_time);
         dist = dist * 4;
 
-        if(dist > radius)
+        if(dist > radius) {
           return false;
+        }
       } else {
         debug_star((pos[0], pos[1], head_height), (1, 0, 0), debug_display_time);
         trace = maps\mp\gametypes\_weapons::weapondamagetrace((pos[0], pos[1], head_height), pos, 0, undefined);
@@ -514,8 +548,9 @@ entlosradiusdamage(ent, pos, radius, max, min, owner, einflictor) {
           debug_star(pos, (0, 1, 0), debug_display_time);
           dist = dist * 4;
 
-          if(dist > radius)
+          if(dist > radius) {
             return false;
+          }
         } else
           debug_star(pos, (1, 0, 0), debug_display_time);
       }
@@ -531,16 +566,18 @@ entlosradiusdamage(ent, pos, radius, max, min, owner, einflictor) {
 }
 
 debug_no_fly_zones() {
-  for(i = 0; i < level.noflyzones.size; i++)
+  for(i = 0; i < level.noflyzones.size; i++) {
     debug_cylinder(level.noflyzones[i].origin, level.noflyzones[i].radius, level.noflyzones[i].height, (1, 1, 1), undefined, 5000);
+  }
 }
 
 debug_plane_line(flytime, flyspeed, pathstart, pathend) {
   thread debug_line(pathstart, pathend, (1, 1, 1));
   delta = vectornormalize(pathend - pathstart);
 
-  for(i = 0; i < flytime; i++)
+  for(i = 0; i < flytime; i++) {
     thread debug_star(pathstart + vectorscale(delta, i * flyspeed), (1, 0, 0));
+  }
 }
 
 debug_draw_bomb_explosion(prevpos) {
@@ -556,8 +593,9 @@ debug_draw_bomb_path(projectile, color, time) {
   self endon("death");
   level.airsupport_debug = getdvarintdefault("scr_airsupport_debug", 0);
 
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (0.5, 1, 0);
+  }
 
   if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1.0) {
     prevpos = self.origin;
@@ -566,8 +604,9 @@ debug_draw_bomb_path(projectile, color, time) {
       thread debug_line(prevpos, self.origin, color, time);
       prevpos = self.origin;
 
-      if(isDefined(projectile) && projectile)
+      if(isDefined(projectile) && projectile) {
         thread debug_draw_bomb_explosion(prevpos);
+      }
 
       wait 0.2;
     }
@@ -579,10 +618,12 @@ debug_print3d_simple(message, ent, offset, frames) {
   level.airsupport_debug = getdvarintdefault("scr_airsupport_debug", 0);
 
   if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1.0) {
-    if(isDefined(frames))
+    if(isDefined(frames)) {
       thread draw_text(message, vectorscale((1, 1, 1), 0.8), ent, offset, frames);
-    else
+    }
+    else {
       thread draw_text(message, vectorscale((1, 1, 1), 0.8), ent, offset, 0);
+    }
   }
 
 }
@@ -609,19 +650,22 @@ draw_text(msg, color, ent, offset, frames) {
 debug_print3d(message, color, ent, origin_offset, frames) {
   level.airsupport_debug = getdvarintdefault("scr_airsupport_debug", 0);
 
-  if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1.0)
+  if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1.0) {
     self thread draw_text(message, color, ent, origin_offset, frames);
+  }
 }
 
 debug_line(from, to, color, time, depthtest) {
   level.airsupport_debug = getdvarintdefault("scr_airsupport_debug", 0);
 
   if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1.0) {
-    if(!isDefined(time))
+    if(!isDefined(time)) {
       time = 1000;
+    }
 
-    if(!isDefined(depthtest))
+    if(!isDefined(depthtest)) {
       depthtest = 1;
+    }
 
     line(from, to, color, 1, depthtest, time);
   }
@@ -632,11 +676,13 @@ debug_star(origin, color, time) {
   level.airsupport_debug = getdvarintdefault("scr_airsupport_debug", 0);
 
   if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1.0) {
-    if(!isDefined(time))
+    if(!isDefined(time)) {
       time = 1000;
+    }
 
-    if(!isDefined(color))
+    if(!isDefined(color)) {
       color = (1, 1, 1);
+    }
 
     debugstar(origin, time, color);
   }
@@ -647,11 +693,13 @@ debug_circle(origin, radius, color, time) {
   level.airsupport_debug = getdvarintdefault("scr_airsupport_debug", 0);
 
   if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1) {
-    if(!isDefined(time))
+    if(!isDefined(time)) {
       time = 1000;
+    }
 
-    if(!isDefined(color))
+    if(!isDefined(color)) {
       color = (1, 1, 1);
+    }
 
     circle(origin, radius, color, 1, 1, time);
   }
@@ -662,11 +710,13 @@ debug_sphere(origin, radius, color, alpha, time) {
   level.airsupport_debug = getdvarintdefault("scr_airsupport_debug", 0);
 
   if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1) {
-    if(!isDefined(time))
+    if(!isDefined(time)) {
       time = 1000;
+    }
 
-    if(!isDefined(color))
+    if(!isDefined(color)) {
       color = (1, 1, 1);
+    }
 
     sides = int(10 * (1 + int(radius / 100)));
     sphere(origin, radius, color, alpha, 1, sides, time);
@@ -679,11 +729,13 @@ debug_cylinder(origin, radius, height, color, mustrenderheight, time) {
   subdivision = 600;
 
   if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1) {
-    if(!isDefined(time))
+    if(!isDefined(time)) {
       time = 1000;
+    }
 
-    if(!isDefined(color))
+    if(!isDefined(color)) {
       color = (1, 1, 1);
+    }
 
     count = height / subdivision;
 
@@ -707,8 +759,9 @@ getpointonline(startpoint, endpoint, ratio) {
 
 cantargetplayerwithspecialty() {
   if(self hasperk("specialty_nottargetedbyairsupport") || isDefined(self.specialty_nottargetedbyairsupport) && self.specialty_nottargetedbyairsupport) {
-    if(!isDefined(self.nottargettedai_underminspeedtimer) || self.nottargettedai_underminspeedtimer < getdvarint(#"perk_nottargetedbyai_graceperiod"))
+    if(!isDefined(self.nottargettedai_underminspeedtimer) || self.nottargettedai_underminspeedtimer < getdvarint(#"perk_nottargetedbyai_graceperiod")) {
       return false;
+    }
   }
 
   return true;
@@ -732,23 +785,27 @@ monitorspeed(spawnprotectiontime) {
   }
   self.nottargettedai_underminspeedtimer = 0;
 
-  if(isDefined(spawnprotectiontime))
+  if(isDefined(spawnprotectiontime)) {
     wait(spawnprotectiontime);
+  }
 
   while(true) {
     velocity = self getvelocity();
     speedsq = lengthsquared(velocity);
 
-    if(speedsq < minspeedsq)
+    if(speedsq < minspeedsq) {
       self.nottargettedai_underminspeedtimer = self.nottargettedai_underminspeedtimer + waitperiodmilliseconds;
-    else
+    }
+    else {
       self.nottargettedai_underminspeedtimer = 0;
+    }
 
     wait(waitperiod);
   }
 }
 
 clearmonitoredspeed() {
-  if(isDefined(self.nottargettedai_underminspeedtimer))
+  if(isDefined(self.nottargettedai_underminspeedtimer)) {
     self.nottargettedai_underminspeedtimer = 0;
+  }
 }

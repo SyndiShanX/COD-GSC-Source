@@ -141,8 +141,10 @@ canUseDeployable(boxEnt) {
   if(is_aliens() && isDefined(boxEnt) && boxEnt.owner == self && !isDefined(boxEnt.air_dropped)) {
     return false;
   }
-  if(!is_aliens())
+  if(!is_aliens()) {
     return (!self isJuggernaut());
-  else
+  }
+  else {
     return true;
+  }
 }

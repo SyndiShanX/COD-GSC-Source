@@ -1073,4 +1073,3 @@ function_fafff2f(obbs) {
     sphere(obb.center, 20, (1, 0, 0));
   }
 }
-

@@ -38,8 +38,9 @@ main() {
   level.scoreroundbased = getgametypesetting("roundscorecarry") == 0;
   maps\mp\gametypes\_globallogic::registerfriendlyfiredelay(level.gametype, 15, 0, 1440);
 
-  if(getdvar(#"scr_ctf_spawnPointFacingAngle") == "")
+  if(getdvar(#"scr_ctf_spawnPointFacingAngle") == "") {
     setdvar("scr_ctf_spawnPointFacingAngle", "0");
+  }
 
   level.teambased = 1;
   level.overrideteamscore = 1;
@@ -77,10 +78,12 @@ main() {
   level.lastdialogtime = gettime();
   level thread ctf_icon_hide();
 
-  if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen())
+  if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen()) {
     setscoreboardcolumns("score", "kills", "captures", "returns", "deaths");
-  else
+  }
+  else {
     setscoreboardcolumns("score", "kills", "deaths", "captures", "returns");
+  }
 
   maps\mp\gametypes\_globallogic_audio::registerdialoggroup("ctf_flag", 0);
   maps\mp\gametypes\_globallogic_audio::registerdialoggroup("ctf_flag_enemy", 0);
@@ -128,8 +131,9 @@ onprecachegametype() {
 }
 
 onstartgametype() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   setdebugsideswitch(game["switchedsides"]);
 
@@ -154,8 +158,9 @@ onstartgametype() {
     [[level._setteamscore]]("axis", 0);
     registerscorelimit(1, 1);
 
-    if(isDefined(game["ctf_overtime_time_to_beat"]))
+    if(isDefined(game["ctf_overtime_time_to_beat"])) {
       registertimelimit(game["ctf_overtime_time_to_beat"] / 60000, game["ctf_overtime_time_to_beat"] / 60000);
+    }
 
     if(game["overtime_round"] == 1) {
       setobjectivehinttext("allies", &"MP_CTF_OVERTIME_ROUND_1");
@@ -187,8 +192,9 @@ onstartgametype() {
   level.spawn_allies = maps\mp\gametypes\_spawnlogic::getspawnpointarray("mp_ctf_spawn_allies");
   level.spawn_start = [];
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   level.spawn_start[team] = maps\mp\gametypes\_spawnlogic::getspawnpointarray("mp_ctf_spawn_" + team + "_start");
+  }
 
   thread updategametypedvars();
   thread ctf();
@@ -196,24 +202,28 @@ onstartgametype() {
 
 shouldplayovertimeround() {
   if(isDefined(game["overtime_round"])) {
-    if(game["overtime_round"] == 1 || !level.gameended)
+    if(game["overtime_round"] == 1 || !level.gameended) {
       return true;
+    }
 
     return false;
   }
 
   if(level.roundscorecarry) {
-    if(game["teamScores"]["allies"] == game["teamScores"]["axis"] && (hitroundlimit() || game["teamScores"]["allies"] == level.scorelimit - 1))
+    if(game["teamScores"]["allies"] == game["teamScores"]["axis"] && (hitroundlimit() || game["teamScores"]["allies"] == level.scorelimit - 1)) {
       return true;
+    }
   } else {
     alliesroundswon = getroundswon("allies");
     axisroundswon = getroundswon("axis");
 
-    if(level.roundwinlimit > 0 && axisroundswon == level.roundwinlimit - 1 && alliesroundswon == level.roundwinlimit - 1)
+    if(level.roundwinlimit > 0 && axisroundswon == level.roundwinlimit - 1 && alliesroundswon == level.roundwinlimit - 1) {
       return true;
+    }
 
-    if(hitroundlimit() && alliesroundswon == axisroundswon)
+    if(hitroundlimit() && alliesroundswon == axisroundswon) {
       return true;
+    }
   }
 
   return false;
@@ -224,26 +234,33 @@ minutesandsecondsstring(milliseconds) {
   milliseconds = milliseconds - minutes * 60000;
   seconds = floor(milliseconds / 1000);
 
-  if(seconds < 10)
+  if(seconds < 10) {
     return minutes + ":0" + seconds;
-  else
+  }
+  else {
     return minutes + ":" + seconds;
+  }
 }
 
 setmatchscorehudelemforteam(team) {
-  if(!isDefined(game["overtime_round"]))
+  if(!isDefined(game["overtime_round"])) {
     self maps\mp\gametypes\_hud_message::setmatchscorehudelemforteam(team);
-  else if(isDefined(game["ctf_overtime_second_winner"]) && game["ctf_overtime_second_winner"] == team)
+  }
+  else if(isDefined(game["ctf_overtime_second_winner"]) && game["ctf_overtime_second_winner"] == team) {
     self settext(minutesandsecondsstring(game["ctf_overtime_best_time"]));
-  else if(isDefined(game["ctf_overtime_first_winner"]) && game["ctf_overtime_first_winner"] == team)
+  }
+  else if(isDefined(game["ctf_overtime_first_winner"]) && game["ctf_overtime_first_winner"] == team) {
     self settext(minutesandsecondsstring(game["ctf_overtime_time_to_beat"]));
-  else
+  }
+  else {
     self settext(&"");
+  }
 }
 
 onroundswitch() {
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = 0;
+  }
 
   level.halftimetype = "halftime";
   game["switchedsides"] = !game["switchedsides"];
@@ -266,8 +283,9 @@ onendgame(winningteam) {
 onroundendgame(winningteam) {
   if(isDefined(game["overtime_round"])) {
     if(isDefined(game["ctf_overtime_first_winner"])) {
-      if(!isDefined(winningteam) || winningteam == "tie")
+      if(!isDefined(winningteam) || winningteam == "tie") {
         winningteam = game["ctf_overtime_first_winner"];
+      }
 
       if(game["ctf_overtime_first_winner"] == winningteam) {
         level.endvictoryreasontext = &"MPUI_CTF_OVERTIME_FASTEST_CAP_TIME";
@@ -305,22 +323,28 @@ onspawnplayer(predictedspawn) {
   self clearclientflag(0);
   spawnteam = self.pers["team"];
 
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     spawnteam = getotherteam(spawnteam);
+  }
 
-  if(level.usestartspawns)
+  if(level.usestartspawns) {
     spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_random(level.spawn_start[spawnteam]);
-  else if(spawnteam == "axis")
+  }
+  else if(spawnteam == "axis") {
     spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_nearteam(level.spawn_axis);
-  else
+  }
+  else {
     spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_nearteam(level.spawn_allies);
+  }
 
   assert(isDefined(spawnpoint));
 
-  if(predictedspawn)
+  if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  else
+  }
+  else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "ctf");
+  }
 }
 
 updategametypedvars() {
@@ -334,15 +358,18 @@ updategametypedvars() {
   level.teamkillpenaltymultiplier = getgametypesetting("teamKillPenalty");
   level.teamkillscoremultiplier = getgametypesetting("teamKillScore");
 
-  if(level.flagtouchreturntime >= 0 && level.flagtouchreturntime != 63)
+  if(level.flagtouchreturntime >= 0 && level.flagtouchreturntime != 63) {
     level.touchreturn = 1;
-  else
+  }
+  else {
     level.touchreturn = 0;
+  }
 }
 
 createflag(trigger) {
-  if(isDefined(trigger.target))
+  if(isDefined(trigger.target)) {
     visuals[0] = getent(trigger.target, "targetname");
+  }
   else {
     visuals[0] = spawn("script_model", trigger.origin);
     visuals[0].angles = trigger.angles;
@@ -350,8 +377,9 @@ createflag(trigger) {
 
   entityteam = trigger.script_team;
 
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     entityteam = getotherteam(entityteam);
+  }
 
   visuals[0] setModel(maps\mp\teams\_teams::getteamflagmodel(entityteam));
   visuals[0] setteam(entityteam);
@@ -367,8 +395,9 @@ createflag(trigger) {
   flag maps\mp\gametypes\_gameobjects::set3dicon("enemy", level.iconcapture3d);
   flag maps\mp\gametypes\_gameobjects::setcarryicon(maps\mp\teams\_teams::getteamflagicon(entityteam));
 
-  if(level.enemycarriervisible == 2)
+  if(level.enemycarriervisible == 2) {
     flag.objidpingfriendly = 1;
+  }
 
   flag.allowweapons = 1;
   flag.onpickup = ::onpickup;
@@ -376,10 +405,12 @@ createflag(trigger) {
   flag.ondrop = ::ondrop;
   flag.onreset = ::onreset;
 
-  if(level.idleflagreturntime > 0)
+  if(level.idleflagreturntime > 0) {
     flag.autoresettime = level.idleflagreturntime;
-  else
+  }
+  else {
     flag.autoresettime = undefined;
+  }
 
   return flag;
 }
@@ -388,8 +419,9 @@ createflagzone(trigger) {
   visuals = [];
   entityteam = trigger.script_team;
 
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     entityteam = getotherteam(entityteam);
+  }
 
   flagzone = maps\mp\gametypes\_gameobjects::createuseobject(entityteam, trigger, visuals, (0, 0, 0), istring(entityteam + "_base"));
   flagzone maps\mp\gametypes\_gameobjects::allowuse("friendly");
@@ -523,8 +555,9 @@ removeinfluencers() {
 }
 
 ondrop(player) {
-  if(isDefined(player))
+  if(isDefined(player)) {
     player clearclientflag(0);
+  }
 
   team = self maps\mp\gametypes\_gameobjects::getownerteam();
   otherteam = getotherteam(team);
@@ -546,13 +579,16 @@ ondrop(player) {
   maps\mp\gametypes\_globallogic_audio::leaderdialog("wedrop_flag", otherteam, "ctf_flag");
   maps\mp\gametypes\_globallogic_audio::leaderdialog("theydrop_flag", team, "ctf_flag_enemy");
 
-  if(isDefined(player))
+  if(isDefined(player)) {
     player logstring(team + " flag dropped");
-  else
+  }
+  else {
     logstring(team + " flag dropped");
+  }
 
-  if(isDefined(player))
+  if(isDefined(player)) {
     player playlocalsound("mpl_flag_drop_plr");
+  }
 
   maps\mp\gametypes\_globallogic_audio::play_2d_on_team("mpl_flagdrop_sting_friend", otherteam);
   maps\mp\gametypes\_globallogic_audio::play_2d_on_team("mpl_flagdrop_sting_enemy", team);
@@ -571,8 +607,9 @@ ondrop(player) {
   thread maps\mp\_utility::playsoundonplayers(game["flag_dropped_sound"], game["attackers"]);
   self thread returnflagaftertimemsg(level.idleflagreturntime);
 
-  if(isDefined(player))
+  if(isDefined(player)) {
     self removeinfluencers();
+  }
   else {
     self.spawn_influencer_friendly_carrier = undefined;
     self.spawn_influencer_enemy_carrier = undefined;
@@ -582,10 +619,12 @@ ondrop(player) {
   player_team_mask = getteammask(otherteam);
   enemy_team_mask = getteammask(team);
 
-  if(isDefined(player))
+  if(isDefined(player)) {
     flag_origin = player.origin;
-  else
+  }
+  else {
     flag_origin = self.curorigin;
+  }
 
   self.spawn_influencer_dropped = addsphereinfluencer(level.spawnsystem.einfluencer_type_game_mode, flag_origin, ss.ctf_dropped_influencer_radius, ss.ctf_dropped_influencer_score, player_team_mask | enemy_team_mask, "ctf_flag_dropped,r,s", maps\mp\gametypes\_spawning::get_score_curve_index(ss.ctf_dropped_influencer_score_curve), level.idleflagreturntime, self.trigger);
 }
@@ -601,8 +640,9 @@ onpickup(player) {
 
   player addplayerstatwithgametype("PICKUPS", 1);
 
-  if(level.touchreturn)
+  if(level.touchreturn) {
     self maps\mp\gametypes\_gameobjects::allowcarry("enemy");
+  }
 
   self removeinfluencers();
   team = self maps\mp\gametypes\_gameobjects::getownerteam();
@@ -618,10 +658,12 @@ onpickup(player) {
       player.returns = player.pers["returns"];
     }
 
-    if(isDefined(carrierkilledby) && carrierkilledby == player)
+    if(isDefined(carrierkilledby) && carrierkilledby == player) {
       maps\mp\_scoreevents::processscoreevent("flag_carrier_kill_return_close", player);
-    else if(distancesquared(self.trigger.baseorigin, player.origin) > 90000)
+    }
+    else if(distancesquared(self.trigger.baseorigin, player.origin) > 90000) {
       maps\mp\_scoreevents::processscoreevent("flag_return", player);
+    }
 
     maps\mp\_demo::bookmark("event", gettime(), player);
     player addplayerstatwithgametype("RETURNS", 1);
@@ -634,10 +676,12 @@ onpickup(player) {
     self returnflag();
     self maps\mp\gametypes\_gameobjects::returnhome();
 
-    if(isDefined(player))
+    if(isDefined(player)) {
       player logstring(team + " flag returned");
-    else
+    }
+    else {
       logstring(team + " flag returned");
+    }
 
     return;
   } else {
@@ -658,10 +702,12 @@ onpickup(player) {
     maps\mp\gametypes\_globallogic_audio::play_2d_on_team("mpl_flagget_sting_friend", otherteam);
     maps\mp\gametypes\_globallogic_audio::play_2d_on_team("mpl_flagget_sting_enemy", team);
 
-    if(level.enemycarriervisible)
+    if(level.enemycarriervisible) {
       self maps\mp\gametypes\_gameobjects::setvisibleteam("any");
-    else
+    }
+    else {
       self maps\mp\gametypes\_gameobjects::setvisibleteam("enemy");
+    }
 
     self maps\mp\gametypes\_gameobjects::set2dicon("friendly", level.iconkill2d);
     self maps\mp\gametypes\_gameobjects::set3dicon("friendly", level.iconkill3d);
@@ -688,11 +734,13 @@ onpickupmusicstate(player) {
 }
 
 ishome() {
-  if(isDefined(self.carrier))
+  if(isDefined(self.carrier)) {
     return false;
+  }
 
-  if(self.curorigin != self.trigger.baseorigin)
+  if(self.curorigin != self.trigger.baseorigin) {
     return false;
+  }
 
   return true;
 }
@@ -706,8 +754,9 @@ returnflag() {
   level.teamflagzones[otherteam] maps\mp\gametypes\_gameobjects::setvisibleteam("friendly");
   update_hints();
 
-  if(level.touchreturn)
+  if(level.touchreturn) {
     self maps\mp\gametypes\_gameobjects::allowcarry("enemy");
+  }
 
   self maps\mp\gametypes\_gameobjects::returnhome();
   self maps\mp\gametypes\_gameobjects::setvisibleteam("any");
@@ -777,8 +826,9 @@ onreset() {
   self maps\mp\gametypes\_gameobjects::set3dicon("enemy", level.iconcapture3d);
   self maps\mp\gametypes\_gameobjects::set2dicon("enemy", level.iconcapture2d);
 
-  if(level.touchreturn)
+  if(level.touchreturn) {
     self maps\mp\gametypes\_gameobjects::allowcarry("enemy");
+  }
 
   level.teamflagzones[team] maps\mp\gametypes\_gameobjects::setvisibleteam("friendly");
   level.teamflagzones[team] maps\mp\gametypes\_gameobjects::allowuse("friendly");
@@ -788,8 +838,9 @@ onreset() {
 }
 
 getotherflag(flag) {
-  if(flag == level.flags[0])
+  if(flag == level.flags[0]) {
     return level.flags[1];
+  }
 
   return level.flags[0];
 }
@@ -810,8 +861,9 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
         if(isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
           if(isDefined(level.flags[index].carrier.attackerdata)) {
             if(level.flags[index].carrier != attacker) {
-              if(isDefined(level.flags[index].carrier.attackerdata[self.clientid]))
+              if(isDefined(level.flags[index].carrier.attackerdata[self.clientid])) {
                 maps\mp\_scoreevents::processscoreevent("rescue_flag_carrier", attacker, undefined, sweapon);
+              }
             }
           }
         }
@@ -825,10 +877,12 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
       if(dist < level.defaultoffenseradius) {
         inflagzone = 1;
 
-        if(level.flags[index].ownerteam == attacker.pers["team"])
+        if(level.flags[index].ownerteam == attacker.pers["team"]) {
           defendedflag = 1;
-        else
+        }
+        else {
           offendedflag = 1;
+        }
       }
 
       dist = distance2d(attacker.origin, flagorigin);
@@ -836,20 +890,24 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
       if(dist < level.defaultoffenseradius) {
         inflagzone = 1;
 
-        if(level.flags[index].ownerteam == attacker.pers["team"])
+        if(level.flags[index].ownerteam == attacker.pers["team"]) {
           defendedflag = 1;
-        else
+        }
+        else {
           offendedflag = 1;
+        }
       }
 
       if(inflagzone && isplayer(attacker) && attacker.pers["team"] != self.pers["team"]) {
         if(defendedflag) {
           attacker addplayerstatwithgametype("DEFENDS", 1);
 
-          if(isDefined(self.isflagcarrier) && self.isflagcarrier)
+          if(isDefined(self.isflagcarrier) && self.isflagcarrier) {
             maps\mp\_scoreevents::processscoreevent("kill_flag_carrier", attacker, undefined, sweapon);
-          else
+          }
+          else {
             maps\mp\_scoreevents::processscoreevent("killed_attacker", attacker, undefined, sweapon);
+          }
 
           self recordkillmodifier("assaulting");
         }
@@ -858,10 +916,12 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
           attacker addplayerstatwithgametype("OFFENDS", 1);
 
           if(iscarried == 1) {
-            if(isDefined(flagcarrier) && attacker == flagcarrier)
+            if(isDefined(flagcarrier) && attacker == flagcarrier) {
               maps\mp\_scoreevents::processscoreevent("killed_enemy_while_carrying_flag", attacker, undefined, sweapon);
-            else
+            }
+            else {
               maps\mp\_scoreevents::processscoreevent("defend_flag_carrier", attacker, undefined, sweapon);
+            }
           } else
             maps\mp\_scoreevents::processscoreevent("killed_defender", attacker, undefined, sweapon);
 
@@ -931,8 +991,9 @@ returnflagaftertimemsg(time) {
   self removeinfluencers();
   self clearreturnflaghudelems();
 
-  if(!isDefined(result))
+  if(!isDefined(result)) {
     return;
+  }
 }
 
 returnflaghudelems(time) {
@@ -946,10 +1007,12 @@ returnflaghudelems(time) {
   level.returnmessageelems["allies"][ownerteam].alpha = 1;
   level.returnmessageelems["allies"][ownerteam] settimer(time);
 
-  if(time <= 0)
+  if(time <= 0) {
     return false;
-  else
+  }
+  else {
     wait(time);
+  }
 
   return true;
 }
@@ -963,8 +1026,9 @@ clearreturnflaghudelems() {
 resetflagbaseeffect() {
   wait 0.1;
 
-  if(isDefined(self.baseeffect))
+  if(isDefined(self.baseeffect)) {
     self.baseeffect delete();
+  }
 
   team = self maps\mp\gametypes\_gameobjects::getownerteam();
 
@@ -994,15 +1058,19 @@ update_hints() {
   if(!level.touchreturn) {
     return;
   }
-  if(isDefined(allied_flag.carrier) && axis_flag maps\mp\gametypes\_gameobjects::isobjectawayfromhome())
+  if(isDefined(allied_flag.carrier) && axis_flag maps\mp\gametypes\_gameobjects::isobjectawayfromhome()) {
     level.flaghints["axis"] turn_on();
-  else
+  }
+  else {
     level.flaghints["axis"] turn_off();
+  }
 
-  if(isDefined(axis_flag.carrier) && allied_flag maps\mp\gametypes\_gameobjects::isobjectawayfromhome())
+  if(isDefined(axis_flag.carrier) && allied_flag maps\mp\gametypes\_gameobjects::isobjectawayfromhome()) {
     level.flaghints["allies"] turn_on();
-  else
+  }
+  else {
     level.flaghints["allies"] turn_off();
+  }
 }
 
 claim_trigger(trigger) {
@@ -1048,8 +1116,9 @@ ctf_gamemodespawndvars(reset_dvars) {
 ctf_getteamkillpenalty(einflictor, attacker, smeansofdeath, sweapon) {
   teamkill_penalty = maps\mp\gametypes\_globallogic_defaults::default_getteamkillpenalty(einflictor, attacker, smeansofdeath, sweapon);
 
-  if(isDefined(self.isflagcarrier) && self.isflagcarrier)
+  if(isDefined(self.isflagcarrier) && self.isflagcarrier) {
     teamkill_penalty = teamkill_penalty * level.teamkillpenaltymultiplier;
+  }
 
   return teamkill_penalty;
 }
@@ -1057,8 +1126,9 @@ ctf_getteamkillpenalty(einflictor, attacker, smeansofdeath, sweapon) {
 ctf_getteamkillscore(einflictor, attacker, smeansofdeath, sweapon) {
   teamkill_score = maps\mp\gametypes\_rank::getscoreinfovalue("kill");
 
-  if(isDefined(self.isflagcarrier) && self.isflagcarrier)
+  if(isDefined(self.isflagcarrier) && self.isflagcarrier) {
     teamkill_score = teamkill_score * level.teamkillscoremultiplier;
+  }
 
   return int(teamkill_score);
 }

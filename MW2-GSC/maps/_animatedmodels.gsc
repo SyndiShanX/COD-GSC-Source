@@ -15,16 +15,18 @@ main() {
   level.init_animatedmodels_dump = false;
   level.anim_prop_models_animtree = #animtree;
 
-  if(!isDefined(level.anim_prop_models))
+  if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = []; // this is what the LD puts in their map
+  }
 
   animated_models = getEntArray("animated_model", "targetname");
   array_thread(animated_models, ::model_init);
 
   // one or more of the models initialized by model_init() was not setup by the map
   // so print this helpful note so the designer can see how to add it ot their level
-  if(level.init_animatedmodels_dump)
+  if(level.init_animatedmodels_dump) {
     AssertMsg("anims not cached for animated prop model, Repackage Zones and Rebuild Precache Script in Launcher:");
+  }
 
   // Handle blended tree anims differently
   foreach(model in animated_models) {
@@ -37,16 +39,19 @@ main() {
       }
     }
 
-    if(scriptedWind)
+    if(scriptedWind) {
       model thread animateTreeWind();
-    else
+    }
+    else {
       model thread animateModel();
+    }
   }
 }
 
 init_wind_if_uninitialized() {
-  if(isDefined(level.wind))
+  if(isDefined(level.wind)) {
     return;
+  }
   level.wind = spawnStruct();
   level.wind.rate = 0.4;
   level.wind.weight = 1;
@@ -54,8 +59,9 @@ init_wind_if_uninitialized() {
 }
 
 model_init() {
-  if(!isDefined(level.anim_prop_models[self.model]))
+  if(!isDefined(level.anim_prop_models[self.model])) {
     level.init_animatedmodels_dump = true;
+  }
 }
 
 // TODO: instead of purely random, do round-robin animation selection to get an even spread

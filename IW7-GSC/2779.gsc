@@ -96,10 +96,12 @@ statadd(var_00, var_01, var_02) {
 }
 
 statgetchild(var_00, var_01) {
-  if(var_00 == "round")
+  if(var_00 == "round") {
     return self getrankedplayerdata("common", var_00, var_01);
-  else
+  }
+  else {
     return self getrankedplayerdata("mp", var_00, var_01);
+  }
 }
 
 statsetchild(var_00, var_01, var_02, var_03) {
@@ -125,8 +127,9 @@ stataddchild(var_00, var_01, var_02) {
 }
 
 statgetchildbuffered(var_00, var_01, var_02) {
-  if(!scripts\mp\utility\game::rankingenabled() && !scripts\mp\utility\game::istrue(var_02))
+  if(!scripts\mp\utility\game::rankingenabled() && !scripts\mp\utility\game::istrue(var_02)) {
     return 0;
+  }
 
   return self.bufferedchildstats[var_00][var_01];
 }
@@ -152,11 +155,13 @@ stataddbufferedwithmax(var_00, var_01, var_02) {
   }
   var_03 = statgetbuffered(var_00) + var_01;
 
-  if(var_03 > var_02)
+  if(var_03 > var_02) {
     var_03 = var_02;
+  }
 
-  if(var_03 < statgetbuffered(var_00))
+  if(var_03 < statgetbuffered(var_00)) {
     var_03 = var_02;
+  }
 
   func_10E55(var_00, var_03);
 }
@@ -167,25 +172,29 @@ stataddchildbufferedwithmax(var_00, var_01, var_02, var_03) {
   }
   var_04 = statgetchildbuffered(var_00, var_01) + var_02;
 
-  if(var_04 > var_03)
+  if(var_04 > var_03) {
     var_04 = var_03;
+  }
 
-  if(var_04 < statgetchildbuffered(var_00, var_01))
+  if(var_04 < statgetchildbuffered(var_00, var_01)) {
     var_04 = var_03;
+  }
 
   statsetchildbuffered(var_00, var_01, var_04);
 }
 
 statgetbuffered(var_00, var_01) {
-  if(!scripts\mp\utility\game::rankingenabled() && !scripts\mp\utility\game::istrue(var_01))
+  if(!scripts\mp\utility\game::rankingenabled() && !scripts\mp\utility\game::istrue(var_01)) {
     return 0;
+  }
 
   return self.bufferedstats[var_00];
 }
 
 func_10E37(var_00) {
-  if(!scripts\mp\utility\game::rankingenabled())
+  if(!scripts\mp\utility\game::rankingenabled()) {
     return 0;
+  }
 
   return self.squadmemberbufferedstats[var_00];
 }
@@ -228,8 +237,9 @@ func_12E6A() {
     scripts\mp\hostmigration::waittillhostmigrationdone();
     var_0++;
 
-    if(var_00 >= level.players.size)
+    if(var_00 >= level.players.size) {
       var_00 = 0;
+    }
 
     if(isDefined(level.players[var_00])) {
       level.players[var_00] writebufferedstats();
@@ -260,8 +270,9 @@ setbestscore(var_00, var_01) {
 writebestscores() {
   foreach(var_01 in level.players) {
     if(isDefined(var_01) && var_01 scripts\mp\utility\game::rankingenabled()) {
-      foreach(var_04, var_03 in var_1.bufferedbestscorestats)
+      foreach(var_04, var_03 in var_1.bufferedbestscorestats) {
       var_01 setrankedplayerdata("mp", "bestScores", var_04, var_03);
+      }
     }
   }
 }
@@ -270,12 +281,14 @@ writebufferedstats() {
   var_00 = scripts\mp\utility\game::rankingenabled();
 
   if(var_00) {
-    foreach(var_03, var_02 in self.bufferedstats)
+    foreach(var_03, var_02 in self.bufferedstats) {
     self setrankedplayerdata("mp", var_03, var_02);
+    }
 
     if(!isai(self)) {
-      foreach(var_03, var_02 in self.squadmemberbufferedstats)
+      foreach(var_03, var_02 in self.squadmemberbufferedstats) {
       self setrankedplayerdata("rankedloadouts", "squadMembers", var_03, var_02);
+      }
     }
   }
 
@@ -287,8 +300,9 @@ writebufferedstats() {
         continue;
       }
 
-      if(var_00)
+      if(var_00) {
         self setrankedplayerdata("mp", var_03, var_08, var_07);
+      }
     }
   }
 }
@@ -301,8 +315,9 @@ func_13E05() {
   wait 0.1;
 
   if(scripts\mp\utility\game::waslastround() || !scripts\mp\utility\game::isroundbased() && scripts\mp\utility\game::hittimelimit()) {
-    foreach(var_01 in level.players)
+    foreach(var_01 in level.players) {
     var_01 func_93FB(var_1.kills, var_1.deaths);
+    }
   }
 }
 
@@ -494,8 +509,9 @@ func_12F85() {
   var_04 = 0;
   var_05 = 0;
 
-  foreach(var_07 in level.players)
+  foreach(var_07 in level.players) {
   var_05 = var_05 + var_7.timeplayed["total"];
+  }
 
   incrementcounter("global_minutes", int(var_05 / 60));
 
@@ -516,6 +532,7 @@ func_12F85() {
   incrementcounter("global_suicides", var_04);
   incrementcounter("global_games", 1);
 
-  if(!isDefined(level.assists_disabled))
+  if(!isDefined(level.assists_disabled)) {
     incrementcounter("global_assists", var_02);
+  }
 }

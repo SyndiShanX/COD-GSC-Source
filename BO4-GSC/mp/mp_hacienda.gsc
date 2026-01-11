@@ -292,4 +292,3 @@ init_devgui() {
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:x48>");
   adddebugcommand("<dev string:x38>" + mapname + "<dev string:x89>");
 }
-

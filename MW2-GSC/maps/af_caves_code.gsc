@@ -448,17 +448,20 @@ scripted_covercrouch_shuffle_left() {
   // account for loopTime not being exact since loop animation delta isn't uniform over time
   for(i = 0; i < 2; i++) {
     remainingDist = Distance(self.origin, node.origin);
-    if(playEnd)
+    if(playEnd) {
       remainingDist -= endDist;
+    }
 
-    if(remainingDist < 4)
+    if(remainingDist < 4) {
       break;
+    }
 
     playTime = loopTime * (remainingDist / shuffleDist) * 0.9; // don't overshoot
     playTime = floor(playTime * serverFPS) * serverSPF;
 
-    if(playTime < 0.05)
+    if(playTime < 0.05) {
       break;
+    }
 
     self animscripts\shared::DoNoteTracksForTime(playTime, "shuffle");
   }
@@ -527,8 +530,9 @@ clip_nosight_logic() {
 }
 
 clip_nosight_wait() {
-  if(flag("_stealth_spotted"))
+  if(flag("_stealth_spotted")) {
     return;
+  }
   level endon("_stealth_spotted");
 
   self waittill("damage");
@@ -551,8 +555,9 @@ delay_lerpViewAngleClamp() {
 }
 
 should_stop_descend_hint() {
-  if(flag("rappel_end"))
+  if(flag("rappel_end")) {
     return true;
+  }
 
   return flag("player_braked");
 }
@@ -580,8 +585,9 @@ af_caves_rappel_behavior() {
   stance = level.player GetStance();
   level.player SetStance("stand");
 
-  if(stance != "stand")
+  if(stance != "stand") {
     wait(0.5);
+  }
 
   old_weapon = level.player GetCurrentWeapon();
 
@@ -713,8 +719,9 @@ af_caves_rappel_behavior() {
 
   // the amount of time you have to be moving at max speed to DIE if you dont brake.
   death_buffer = 20000; // no fail on easy / normal
-  if(level.gameskill >= 2)
+  if(level.gameskill >= 2) {
     death_buffer = 1500;
+  }
 
   //tag_origin thread liner();
   was_breaking = false;
@@ -739,27 +746,31 @@ af_caves_rappel_behavior() {
 
     breaking = level.player AdsButtonPressed() || level.player AttackButtonPressed() && !flag("rappel_end");
 
-    if(breaking)
+    if(breaking) {
       flag_set("player_braked");
+    }
 
     if(flag("rappel_end")) {
-      if(level.player MeleeButtonPressed())
+      if(level.player MeleeButtonPressed()) {
         break;
+      }
     }
 
     // last_time_braked + the amount of time you have to fall before you can brake
     if(breaking && GetTime() > last_time_braked + 5 && GetTime() > able_to_break_time) {
       nobreak_speed = nobreak_minspeed;
       speed -= break_speed;
-      if(speed < min_speed)
+      if(speed < min_speed) {
         speed = min_speed;
+      }
 
       player_rig SetAnimLimited(close_anim, 1, 0, speed);
       player_rig SetAnimLimited(far_anim, 1, 0, speed);
 
       far_anim_dest -= far_anim_rate * 3;
-      if(far_anim_dest <= far_anim_min)
+      if(far_anim_dest <= far_anim_min) {
         far_anim_dest = far_anim_min;
+      }
 
       if(!was_breaking) {
         was_breaking = true;
@@ -768,15 +779,17 @@ af_caves_rappel_behavior() {
         sin_index_max = 180;
         sin_index_old = sin_index;
         speaker StopSounds();
-        if(!flag("rappel_end"))
+        if(!flag("rappel_end")) {
           speaker playSound("scn_afcaves_rappel_stop_plr");
+        }
       }
 
     } else {
       animtime = player_rig GetAnimTime(far_anim);
       nobreak_speed += nobreak_rate;
-      if(nobreak_speed > nobreak_maxspeed)
+      if(nobreak_speed > nobreak_maxspeed) {
         nobreak_speed = nobreak_maxspeed;
+      }
 
       speed += nobreak_speed;
       if(speed > max_speed) {
@@ -809,8 +822,9 @@ af_caves_rappel_behavior() {
 
       if(was_breaking) {
         speaker StopSounds();
-        if(!flag("rappel_end"))
+        if(!flag("rappel_end")) {
           speaker playSound("scn_afcaves_rappel_start_plr");
+        }
 
         last_time_braked = GetTime();
         was_breaking = false;
@@ -821,13 +835,15 @@ af_caves_rappel_behavior() {
 
       if(!flag("rappel_end")) {
         far_anim_dest += far_anim_rate;
-        if(far_anim_dest >= far_anim_max)
+        if(far_anim_dest >= far_anim_max) {
           far_anim_dest = far_anim_max;
+        }
       } else {
         // use the
         far_anim_dest -= far_anim_rate * 3;
-        if(far_anim_dest <= far_anim_min)
+        if(far_anim_dest <= far_anim_min) {
           far_anim_dest = far_anim_min;
+        }
       }
     }
 
@@ -858,8 +874,9 @@ af_caves_rappel_behavior() {
       player_rig SetAnimLimited(close_anim_node, close_anim_dest, 0, speed);
       player_rig SetAnimLimited(far_anim_node, far_anim_dest, 0, speed);
 
-      if(player_rig GetAnimTime(far_anim) >= 0.78)
+      if(player_rig GetAnimTime(far_anim) >= 0.78) {
         break;
+      }
 
       wait(0.05);
     }
@@ -883,11 +900,13 @@ af_caves_rappel_behavior() {
     level.player Kill();
   } else {
     for(;;) {
-      if(!isalive(level.player))
+      if(!isalive(level.player)) {
         break;
+      }
 
-      if(level.player MeleeButtonPressed())
+      if(level.player MeleeButtonPressed()) {
         break;
+      }
       wait(0.05);
     }
 
@@ -895,15 +914,17 @@ af_caves_rappel_behavior() {
     // since I removed it at the begining no point in reseting it here.
     // level.player PlayerSetGroundReferenceEnt( undefined );
     // level.player EnableWeapons();
-    if(flag("player_failed_rappel"))
+    if(flag("player_failed_rappel")) {
       return;
+    }
 
     wait(0.1);
 
     flag_set("player_killing_guard");
 
-    if(!isalive(level.player))
+    if(!isalive(level.player)) {
       return;
+    }
     level.player endon("death");
 
     knife = spawn("script_model", (0, 0, 0));
@@ -1014,13 +1035,16 @@ relink_player_for_knife_kill(percentage) {
   waittillframeend;
 
   /*
-  if( percentage < 0.94 )
+  if( percentage < 0.94 ) {
   	time = 0.8;	
-  else
+  }
+  else {
   if( percentage < 0.96 )
+  }
   	time = 0.6;	
-  else
+  else {
   	time = 0.4;	
+  }
   */
 
   time = 0.4;
@@ -1033,8 +1057,9 @@ relink_player_for_knife_kill(percentage) {
 }
 
 hurt_player_on_bounce() {
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     return;
+  }
 
   level.player endon("death");
   org = self.origin;
@@ -1050,8 +1075,9 @@ hurt_player_on_bounce() {
     }
     //println(vel );
 
-    if(vel > old_vel)
+    if(vel > old_vel) {
       old_vel = vel;
+    }
     org = self.origin;
     wait(0.05);
   }
@@ -1062,14 +1088,16 @@ attach_model_if_not_attached(model, tag) {
 
   attachedCount = self GetAttachSize();
   for(i = 0; i < attachedCount; i++) {
-    if(self GetAttachModelName(i) != model)
+    if(self GetAttachModelName(i) != model) {
       continue;
+    }
     hasModel = true;
     break;
   }
 
-  if(!hasModel)
+  if(!hasModel) {
     self Attach(model, tag);
+  }
 }
 
 liner() {
@@ -1173,8 +1201,9 @@ explosion_earthquake() {
     dist = Distance(level.player.origin, exploding_ent_origin);
     intensity = (max_dist - dist) / max_dist;
 
-    if(intensity < 0)
+    if(intensity < 0) {
       intensity = 0.01;
+    }
     intensity = Int(ceil(max_intensity * intensity));
 
     duration = intensity / 2.5;
@@ -1189,8 +1218,9 @@ explosion_earthquake() {
       end = start + (0, 0, 1024);
 
       ceiling = PhysicsTrace(start, end);
-      if(ceiling == end)
+      if(ceiling == end) {
         continue;
+      }
 
       fx_index = intensity - i;
       forward = anglesToForward(fx_angles[fx_index]);
@@ -1394,8 +1424,9 @@ drone_vehicle_flood_start(aSpawners, groupName, minWait, maxWait, noSound) {
       vehicle = spawner thread spawn_vehicle_and_gopath();
       vehicle thread friendlyfire_shield();
       vehicle godon();
-      if(isDefined(noSound))
+      if(isDefined(noSound)) {
         vehicle Vehicle_TurnEngineOff();
+      }
       vehicle = undefined;
       wait(RandomFloatRange(minWait, maxWait));
     }
@@ -1416,8 +1447,9 @@ get_global_fx(name) {
 
 delete_corpse_in_volume(volume) {
   Assert(isDefined(volume));
-  if(self IsTouching(volume))
+  if(self IsTouching(volume)) {
     self Delete();
+  }
 }
 
 half_particles_setup() {
@@ -1434,15 +1466,17 @@ half_particles_setup() {
 
 // if any trigger is activated in a trigger array
 waittill_trigger_array(triggers) {
-  for(k = 1; k < triggers.size; k++)
+  for(k = 1; k < triggers.size; k++) {
     triggers[k] endon("trigger");
+  }
   triggers[0] waittill("trigger");
 }
 
 hide_triggers(trigger_name) {
   friendly_trigger = getEntArray(trigger_name, "script_noteworthy");
-  foreach(trigger in friendly_trigger)
+  foreach(trigger in friendly_trigger) {
   trigger trigger_off();
+  }
 }
 
 delete_by_targetname_safe(entTN) {
@@ -1545,8 +1579,9 @@ dialogue_print(line, timeout) {
 }
 
 should_not_do_melee_rappel_hint() {
-  if(!isalive(level.player))
+  if(!isalive(level.player)) {
     return true;
+  }
 
   return flag("player_failed_rappel") || flag("player_killing_guard");
 }

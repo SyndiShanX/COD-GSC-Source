@@ -322,8 +322,9 @@ death_trigger_manager() {
     agents = array_combine(agents, level.players);
 
     foreach(agent in agents) {
-      if(isPlayer(agent) && (agent.sessionstate == "intermission" || agent.sessionstate == "spectator" || !isReallyAlive(agent)))
+      if(isPlayer(agent) && (agent.sessionstate == "intermission" || agent.sessionstate == "spectator" || !isReallyAlive(agent))) {
         agents = array_remove(agents, agent);
+      }
     }
 
     agents_in_trigger = self GetIsTouchingEntities(agents);
@@ -347,8 +348,9 @@ disable_drones_watcher(trigger) {
   while(1) {
     touchers = trigger GetIsTouchingEntities(level.players);
     foreach(toucher in touchers) {
-      if(isDefined(toucher.drones_disabled))
+      if(isDefined(toucher.drones_disabled)) {
         continue;
+      }
       toucher.drones_disabled = true;
       toucher.seekers_disabled = true;
       toucher thread enable_drones_watcher(trigger);
@@ -358,11 +360,13 @@ disable_drones_watcher(trigger) {
 }
 
 enable_drones_watcher(trigger) {
-  if(!isPlayer(self))
+  if(!isPlayer(self)) {
     self endon("death");
+  }
   self endon("disconnect");
-  while(self isTouching(trigger))
+  while(self isTouching(trigger)) {
     wait(0.05);
+  }
   self.drones_disabled = undefined;
   self.seekers_disabled = undefined;
 }
@@ -377,8 +381,9 @@ gate_watcher(gate_triggers, crane_trigger) {
     players = level.players;
 
     foreach(player in players) {
-      if(player.sessionstate == "intermission" || player.sessionstate == "spectator" || !isReallyAlive(player))
+      if(player.sessionstate == "intermission" || player.sessionstate == "spectator" || !isReallyAlive(player)) {
         player = array_remove(players, player);
+      }
     }
 
     foreach(trigger in gate_triggers) {
@@ -482,8 +487,9 @@ crane_available_check() {
   }
 
   foreach(blocker in blockers) {
-    if(blocker.classname == "script_brushmodel")
+    if(blocker.classname == "script_brushmodel") {
       blocker ConnectPaths();
+    }
     blocker delete();
   }
 
@@ -537,10 +543,12 @@ crane_target_setup(targetname, joint, exploderID) {
 
 crane_damage_manager(hitEnt) {
   if(isDefined(level.triggerer)) {
-    if(isDefined(hitEnt.team) && hitEnt.team == level.triggerer.team)
+    if(isDefined(hitEnt.team) && hitEnt.team == level.triggerer.team) {
       hitEnt DoDamage(1000, hitEnt.origin, self, self, "MOD_CRUSH");
-    else
+    }
+    else {
       hitEnt DoDamage(1000, hitEnt.origin, level.triggerer, self, "MOD_CRUSH");
+    }
 
   } else {
     hitEnt DoDamage(1000, hitEnt.origin, undefined, undefined, "MOD_CRUSH");
@@ -558,16 +566,18 @@ clean_tube_watcher() {
     agents = array_combine(agents, level.remote_uav);
 
     foreach(agent in agents) {
-      if(isPlayer(agent) && (agent.sessionstate == "intermission" || agent.sessionstate == "spectator" || !isReallyAlive(agent)))
+      if(isPlayer(agent) && (agent.sessionstate == "intermission" || agent.sessionstate == "spectator" || !isReallyAlive(agent))) {
         agents = array_remove(agents, agent);
+      }
     }
     waitframe();
 
     agents_in_trigger = trigger GetIsTouchingEntities(agents);
 
     foreach(agent in agents_in_trigger) {
-      if(IsPlayer(agent))
+      if(IsPlayer(agent)) {
         agent.drones_disabled = true;
+      }
       agent thread enable_drones_watcher(trigger);
     }
 
@@ -588,8 +598,9 @@ door_trigger_watcher(trigger) {
     agents = array_combine(agents, level.remote_uav);
 
     foreach(agent in agents) {
-      if(isPlayer(agent) && (agent.sessionstate == "intermission" || agent.sessionstate == "spectator" || !isReallyAlive(agent)))
+      if(isPlayer(agent) && (agent.sessionstate == "intermission" || agent.sessionstate == "spectator" || !isReallyAlive(agent))) {
         agents = array_remove(agents, agent);
+      }
     }
     waitframe();
 
@@ -646,30 +657,40 @@ auto_door_manager(trigger) {
   foreach(piece in door_entities) {
     parameters = piece.script_parameters;
 
-    if(piece.script_parameters == "door_left;")
+    if(piece.script_parameters == "door_left;") {
       thing = piece;
+    }
 
-    if(!isDefined(parameters))
+    if(!isDefined(parameters)) {
       parameters = "";
+    }
 
     params = StrTok(parameters, ";");
     foreach(param in params) {
-      if(params[0] == "door_left")
+      if(params[0] == "door_left") {
         left_door = piece;
-      if(params[0] == "door_right")
+      }
+      if(params[0] == "door_right") {
         right_door = piece;
-      if(params[0] == "closed_left")
+      }
+      if(params[0] == "closed_left") {
         closed_left = piece;
-      if(params[0] == "closed_right")
+      }
+      if(params[0] == "closed_right") {
         closed_right = piece;
-      if(params[0] == "open_left")
+      }
+      if(params[0] == "open_left") {
         open_left = piece;
-      if(params[0] == "open_right")
+      }
+      if(params[0] == "open_right") {
         open_right = piece;
-      if(params[0] == "door_animated_right")
+      }
+      if(params[0] == "door_animated_right") {
         door_animated_right = piece;
-      if(params[0] == "door_animated_left")
+      }
+      if(params[0] == "door_animated_left") {
         door_animated_left = piece;
+      }
     }
   }
 
@@ -724,8 +745,9 @@ fx_crane_light(platform_sfx_origin) {
 DOME_NS_ALIEN_DOG_WEIGHT = 200;
 
 dome_nsCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstreak"]))
+  if(!isDefined(game["player_holding_level_killstreak"])) {
     game["player_holding_level_killstreak"] = false;
+  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstreak"]) {
     return;
@@ -811,16 +833,21 @@ sfx_misters_on() {
   }
   flag_set("misters_on");
 
-  if(!isDefined(level.mister_01))
+  if(!isDefined(level.mister_01)) {
     level.mister_01 = spawn("script_origin", (1735, 1546, -133));
-  if(!isDefined(level.mister_02))
+  }
+  if(!isDefined(level.mister_02)) {
     level.mister_02 = spawn("script_origin", (1745, 1707, -140));
-  if(!isDefined(level.mister_03))
+  }
+  if(!isDefined(level.mister_03)) {
     level.mister_03 = spawn("script_origin", (1753, 1835, -140));
-  if(!isDefined(level.mister_04))
+  }
+  if(!isDefined(level.mister_04)) {
     level.mister_04 = spawn("script_origin", (1698, 1952, -140));
-  if(!isDefined(level.mister_05))
+  }
+  if(!isDefined(level.mister_05)) {
     level.mister_05 = spawn("script_origin", (1540, 1981, -133));
+  }
 
   level.mister_01 playLoopSound("emt_dome_ns_mist_01");
   level.mister_02 playLoopSound("emt_dome_ns_mist_02");
@@ -916,10 +943,12 @@ sfx_crane_bar(trip, sfx_time, direction) {
     soundalias2 = "scn_crane_bar_up";
   }
 
-  if(!isDefined(level.sfx_crane_bar_01))
+  if(!isDefined(level.sfx_crane_bar_01)) {
     level.sfx_crane_bar_01 = spawn("script_origin", coord_01);
-  if(!isDefined(level.sfx_crane_bar_02))
+  }
+  if(!isDefined(level.sfx_crane_bar_02)) {
     level.sfx_crane_bar_02 = spawn("script_origin", coord_02);
+  }
 
   level.sfx_crane_bar_01 playSound(soundalias);
 

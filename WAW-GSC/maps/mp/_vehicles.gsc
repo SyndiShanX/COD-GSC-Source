@@ -327,12 +327,14 @@ monitorTankDeath() {
     self waittill("death", attacker, damageFromUnderneath, weaponName);
     if(isDefined(attacker) && isDefined(weaponName)) {
       if(attacker.health < 100 && isDefined(attacker.lastTankThatAttacked)) {
-        if(self == attacker.lastTankThatAttacked)
+        if(self == attacker.lastTankThatAttacked) {
           attacker maps\mp\gametypes\_missions::doMissionCallback("youtalkintome", attacker);
+        }
       }
       if(isDefined(damageFromUnderneath) && isDefined(attacker.pers) && vehicle_get_occupant_team() != attacker.pers["team"] || game["dialog"]["gametype"] == "freeforall") {
-        if(damageFromUnderneath && weaponName == "satchel_charge_mp")
+        if(damageFromUnderneath && weaponName == "satchel_charge_mp") {
           attacker maps\mp\gametypes\_missions::doMissionCallback("trapper", attacker);
+        }
       }
     }
   }
@@ -353,12 +355,15 @@ init_vehicle_threads() {
 }
 
 build_template(type, model, typeoverride) {
-  if(isDefined(typeoverride))
+  if(isDefined(typeoverride)) {
     type = typeoverride;
-  if(!isDefined(level.vehicle_death_fx))
+  }
+  if(!isDefined(level.vehicle_death_fx)) {
     level.vehicle_death_fx = [];
-  if(!isDefined(level.vehicle_death_fx[type]))
+  }
+  if(!isDefined(level.vehicle_death_fx[type])) {
     level.vehicle_death_fx[type] = [];
+  }
   level.vehicle_compassicon[type] = false;
   level.vehicle_team[type] = "axis";
   level.vehicle_life[type] = 999;
@@ -369,8 +374,9 @@ build_template(type, model, typeoverride) {
 }
 
 build_rumble(rumble, scale, duration, radius, basetime, randomaditionaltime) {
-  if(!isDefined(level.vehicle_rumble))
+  if(!isDefined(level.vehicle_rumble)) {
     level.vehicle_rumble = [];
+  }
   struct = build_quake(scale, duration, radius, basetime, randomaditionaltime);
   assert(isDefined(rumble));
   precacherumble(rumble);
@@ -384,10 +390,12 @@ build_quake(scale, duration, radius, basetime, randomaditionaltime) {
   struct.scale = scale;
   struct.duration = duration;
   struct.radius = radius;
-  if(isDefined(basetime))
+  if(isDefined(basetime)) {
     struct.basetime = basetime;
-  if(isDefined(randomaditionaltime))
+  }
+  if(isDefined(randomaditionaltime)) {
     struct.randomaditionaltime = randomaditionaltime;
+  }
   return struct;
 }
 
@@ -396,8 +404,9 @@ build_exhaust(effect) {
 }
 
 build_treadfx(type) {
-  if(!isDefined(type))
+  if(!isDefined(type)) {
     type = level.vttype;
+  }
   maps\mp\_treadfx::main(type);
 }
 
@@ -630,13 +639,15 @@ player_is_occupant_invulnerable(sMeansOfDeath) {
 }
 
 player_is_driver() {
-  if(!isalive(self))
+  if(!isalive(self)) {
     return false;
+  }
   vehicle = self GetVehicleOccupied();
   if(isDefined(vehicle)) {
     seat = vehicle GetOccupantSeat(self);
-    if(isDefined(seat) && seat == 0)
+    if(isDefined(seat) && seat == 0) {
       return true;
+    }
   }
   return false;
 }
@@ -661,8 +672,9 @@ player_leave_vehicle_cleanup_t(vehicle) {
   self endon("disconnect");
   self waittill("exit_vehicle");
   currentWeapon = self getCurrentWeapon();
-  if(self.lastWeapon != currentWeapon && self.lastWeapon != "none")
+  if(self.lastWeapon != currentWeapon && self.lastWeapon != "none") {
     self switchToWeapon(self.lastWeapon);
+  }
   self Show();
 }
 
@@ -697,8 +709,9 @@ vehicle_fireweapon_t() {
   self endon("delete");
   for(;;) {
     self waittill("turret_fire", player);
-    if(isDefined(player) && isalive(player) && player isinvehicle())
+    if(isDefined(player) && isalive(player) && player isinvehicle()) {
       self fireweapon();
+    }
   }
 }
 
@@ -722,11 +735,13 @@ wait_for_vehicle_overturn() {
     if(isDefined(self.angles)) {
       up = AnglesToUp(self.angles);
       dot = vectordot(up, worldup);
-      if(dot <= 0.0)
+      if(dot <= 0.0) {
         overturned = 1;
+      }
     }
-    if(!overturned)
+    if(!overturned) {
       wait(1.0);
+    }
   }
 }
 
@@ -1118,11 +1133,13 @@ vehicle_disconnect_paths() {
   wait(randomfloat(1));
   while(isDefined(self)) {
     if(self getspeed() < 1) {
-      if(!isDefined(self.dontDisconnectPaths))
+      if(!isDefined(self.dontDisconnectPaths)) {
         self disconnectpaths();
+      }
       self notify("speed_zero_path_disconnect");
-      while(self getspeed() < 1)
+      while(self getspeed() < 1) {
         wait .05;
+      }
     }
     self connectpaths();
     wait 1;

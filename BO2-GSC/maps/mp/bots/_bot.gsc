@@ -47,8 +47,9 @@ init() {
     level thread bot_comp_stomp_think(team);
   } else if(is_bot_ranked_match())
     level thread bot_ranked_think();
-  else
+  else {
     level thread bot_local_think();
+  }
 }
 
 spawn_bot(team) {
@@ -57,8 +58,9 @@ spawn_bot(team) {
   if(isDefined(bot)) {
     bot.pers["isBot"] = 1;
 
-    if(team != "autoassign")
+    if(team != "autoassign") {
       bot.pers["team"] = team;
+    }
 
     bot thread bot_spawn_think(team);
     return true;
@@ -70,8 +72,9 @@ spawn_bot(team) {
 getenemyteamwithlowestplayercount(player_team) {
   counts = [];
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   counts[team] = 0;
+  }
 
   foreach(player in level.players) {
     if(!isDefined(player.team)) {
@@ -105,8 +108,9 @@ getenemyteamwithlowestplayercount(player_team) {
 getenemyteamwithgreatestbotcount(player_team) {
   counts = [];
 
-  foreach(team in level.teams)
+  foreach(team in level.teams) {
   counts[team] = 0;
+  }
 
   foreach(player in level.players) {
     if(!isDefined(player.team)) {
@@ -141,11 +145,13 @@ getenemyteamwithgreatestbotcount(player_team) {
 }
 
 bot_wait_for_host() {
-  for(host = gethostplayerforbots(); !isDefined(host); host = gethostplayerforbots())
+  for(host = gethostplayerforbots(); !isDefined(host); host = gethostplayerforbots()) {
     wait 0.25;
+  }
 
-  if(level.prematchperiod > 0 && level.inprematchperiod == 1)
+  if(level.prematchperiod > 0 && level.inprematchperiod == 1) {
     wait 1;
+  }
 }
 
 bot_count_humans(team) {
@@ -157,8 +163,9 @@ bot_count_humans(team) {
       continue;
     }
     if(isDefined(team)) {
-      if(getassignedteam(player) == team)
+      if(getassignedteam(player) == team) {
         count++;
+      }
 
       continue;
     }
@@ -178,8 +185,9 @@ bot_count_bots(team) {
       continue;
     }
     if(isDefined(team)) {
-      if(isDefined(player.team) && player.team == team)
+      if(isDefined(player.team) && player.team == team) {
         count++;
+      }
 
       continue;
     }
@@ -191,8 +199,9 @@ bot_count_bots(team) {
 }
 
 bot_count_enemy_bots(friend_team) {
-  if(!level.teambased)
+  if(!level.teambased) {
     return bot_count_bots();
+  }
 
   enemies = 0;
 
@@ -226,11 +235,13 @@ bot_comp_stomp_think(team) {
         break;
       }
 
-      if(bots < humans)
+      if(bots < humans) {
         spawn_bot(team);
+      }
 
-      if(bots > humans)
+      if(bots > humans) {
         bot_comp_stomp_remove(team);
+      }
 
       wait 1;
     }
@@ -250,8 +261,9 @@ bot_comp_stomp_remove(team) {
     }
     if(player is_bot()) {
       if(level.teambased) {
-        if(player.team == team)
+        if(player.team == team) {
           bots[bots.size] = player;
+        }
 
         continue;
       }
@@ -270,8 +282,9 @@ bot_comp_stomp_remove(team) {
     }
   }
 
-  if(!isDefined(remove))
+  if(!isDefined(remove)) {
     remove = random(bots);
+  }
 
   remove botleavegame();
 }
@@ -335,8 +348,9 @@ bot_ranked_think() {
     level waittill_any("connected", "disconnect");
     wait 5;
 
-    while(isDefined(level.hostmigrationtimer))
+    while(isDefined(level.hostmigrationtimer)) {
       wait 1;
+    }
   }
 }
 
@@ -372,8 +386,9 @@ bot_local_enemies(expected_enemies, max, host_team) {
   if(enemies > expected_enemies) {
     team = getenemyteamwithgreatestbotcount(host_team);
 
-    if(isDefined(team))
+    if(isDefined(team)) {
       bot_comp_stomp_remove(team);
+    }
 
     return true;
   }
@@ -387,8 +402,9 @@ bot_local_think() {
   assert(isDefined(host));
   host_team = host.team;
 
-  if(!isDefined(host_team) || host_team == "spectator")
+  if(!isDefined(host_team) || host_team == "spectator") {
     host_team = "allies";
+  }
 
   bot_expected_friends = getdvarint(#"bot_friends");
   bot_expected_enemies = getdvarint(#"bot_enemies");
@@ -426,11 +442,13 @@ is_bot_comp_stomp() {
 bot_spawn_think(team) {
   self endon("disconnect");
 
-  while(!isDefined(self.pers["bot_loadout"]))
+  while(!isDefined(self.pers["bot_loadout"])) {
     wait 0.1;
+  }
 
-  while(!isDefined(self.team))
+  while(!isDefined(self.team)) {
     wait 0.05;
+  }
 
   if(level.teambased) {
     self notify("menuresponse", game["menu_team"], team);
@@ -523,8 +541,9 @@ bot_spawn() {
     weapon = player getcurrentweapon();
   }
 
-  if(getdvar(#"devgui_bot_weapon") != "")
+  if(getdvar(#"devgui_bot_weapon") != "") {
     weapon = getdvar(#"devgui_bot_weapon");
+  }
 
   if(isDefined(weapon)) {
     self maps\mp\gametypes\_weapons::detach_all_weapons();
@@ -537,8 +556,9 @@ bot_spawn() {
 
   self bot_spawn_init();
 
-  if(isDefined(self.bot_first_spawn))
+  if(isDefined(self.bot_first_spawn)) {
     self bot_choose_class();
+  }
 
   self.bot_first_spawn = 1;
   self thread bot_main();
@@ -629,14 +649,18 @@ bot_damage_think() {
       continue;
     }
     if(isDefined(weapon)) {
-      if(weapon == "proximity_grenade_mp" || weapon == "proximity_grenade_aoe_mp")
+      if(weapon == "proximity_grenade_mp" || weapon == "proximity_grenade_aoe_mp") {
         continue;
-      else if(weapon == "claymore_mp")
+      }
+      else if(weapon == "claymore_mp") {
         continue;
-      else if(weapon == "satchel_charge_mp")
+      }
+      else if(weapon == "satchel_charge_mp") {
         continue;
-      else if(weapon == "bouncingbetty_mp")
+      }
+      else if(weapon == "bouncingbetty_mp") {
         continue;
+      }
     }
 
     if(isDefined(inflictor)) {
@@ -648,11 +672,13 @@ bot_damage_think() {
       }
     }
 
-    if(isDefined(attacker.viewlockedentity))
+    if(isDefined(attacker.viewlockedentity)) {
       attacker = attacker.viewlockedentity;
+    }
 
-    if(maps\mp\bots\_bot_combat::threat_requires_rocket(attacker) || maps\mp\bots\_bot_combat::threat_is_warthog(attacker))
+    if(maps\mp\bots\_bot_combat::threat_requires_rocket(attacker) || maps\mp\bots\_bot_combat::threat_is_warthog(attacker)) {
       level thread bot_killstreak_dangerous_think(self.origin, self.team, attacker);
+    }
 
     self.bot.attacker = attacker;
     self notify("wakeup", damage, attacker, direction);
@@ -666,13 +692,16 @@ bot_killcam_think() {
   level endon("game_ended");
   wait_time = 0.5;
 
-  if(level.playerrespawndelay)
+  if(level.playerrespawndelay) {
     wait_time = level.playerrespawndelay + 1.5;
+  }
 
-  if(!level.killcam)
+  if(!level.killcam) {
     self waittill("death");
-  else
+  }
+  else {
     self waittill("begin_killcam");
+  }
 
   wait(wait_time);
 
@@ -738,25 +767,32 @@ bot_main() {
 }
 
 bot_failsafe_node_valid(nearest, node) {
-  if(isDefined(node.script_noteworthy))
+  if(isDefined(node.script_noteworthy)) {
     return false;
+  }
 
-  if(node.origin[2] - self.origin[2] > 18)
+  if(node.origin[2] - self.origin[2] > 18) {
     return false;
+  }
 
-  if(nearest == node)
+  if(nearest == node) {
     return false;
+  }
 
-  if(!nodesvisible(nearest, node))
+  if(!nodesvisible(nearest, node)) {
     return false;
+  }
 
-  if(self bot_friend_in_radius(node.origin, 32))
+  if(self bot_friend_in_radius(node.origin, 32)) {
     return false;
+  }
 
-  if(isDefined(level.spawn_all) && level.spawn_all.size > 0)
+  if(isDefined(level.spawn_all) && level.spawn_all.size > 0) {
     spawns = arraysort(level.spawn_all, node.origin);
-  else if(isDefined(level.spawnpoints) && level.spawnpoints.size > 0)
+  }
+  else if(isDefined(level.spawnpoints) && level.spawnpoints.size > 0) {
     spawns = arraysort(level.spawnpoints, node.origin);
+  }
   else if(isDefined(level.spawn_start) && level.spawn_start.size > 0) {
     spawns = arraycombine(level.spawn_start["allies"], level.spawn_start["axis"], 1, 0);
     spawns = arraysort(spawns, node.origin);
@@ -765,8 +801,9 @@ bot_failsafe_node_valid(nearest, node) {
 
   goal = bot_nearest_node(spawns[0].origin);
 
-  if(isDefined(goal) && findpath(node.origin, goal.origin, undefined, 0, 1))
+  if(isDefined(goal) && findpath(node.origin, goal.origin, undefined, 0, 1)) {
     return true;
+  }
 
   return false;
 }
@@ -783,8 +820,9 @@ bot_get_mantle_start() {
       origin = self.origin + dir;
       nodes = getnodesinradius(origin, 16, 0, 16, "Begin");
 
-      if(nodes.size && nodes[0].spawnflags & 8388608)
+      if(nodes.size && nodes[0].spawnflags & 8388608) {
         return nodes[0];
+      }
     }
   }
 
@@ -792,8 +830,9 @@ bot_get_mantle_start() {
 }
 
 bot_is_traversing() {
-  if(!self isonground())
+  if(!self isonground()) {
     return !self ismantling() && !self isonladder();
+  }
 
   return false;
 }
@@ -888,8 +927,9 @@ bot_update_crouch() {
     start = self.origin + vectorscale((0, 0, 1), 70.0);
     end = start + dir;
 
-    if(dist >= 256)
+    if(dist >= 256) {
       self.bot.update_crouch = time + 1500;
+    }
 
     if(self getstance() == "stand") {
       trace = worldtrace(start, end);
@@ -901,8 +941,9 @@ bot_update_crouch() {
     } else if(self getstance() == "crouch") {
       trace = worldtrace(start, end);
 
-      if(trace["fraction"] >= 1)
+      if(trace["fraction"] >= 1) {
         self setstance("stand");
+      }
     }
   }
 }
@@ -927,15 +968,17 @@ bot_update_glass() {
 }
 
 bot_has_radar() {
-  if(level.teambased)
+  if(level.teambased) {
     return maps\mp\killstreaks\_radar::teamhasspyplane(self.team) || maps\mp\killstreaks\_radar::teamhassatellite(self.team);
+  }
 
   return isDefined(self.hasspyplane) && self.hasspyplane || isDefined(self.hassatellite) && self.hassatellite;
 }
 
 bot_get_enemies(on_radar) {
-  if(!isDefined(on_radar))
+  if(!isDefined(on_radar)) {
     on_radar = 0;
+  }
 
   enemies = self getenemies(1);
 
@@ -985,8 +1028,9 @@ bot_friend_goal_in_radius(goal_name, origin, radius) {
     if(friend is_bot()) {
       goal = friend getgoal(goal_name);
 
-      if(isDefined(goal) && distancesquared(origin, goal) < radius * radius)
+      if(isDefined(goal) && distancesquared(origin, goal) < radius * radius) {
         count++;
+      }
     }
   }
 
@@ -997,8 +1041,9 @@ bot_friend_in_radius(origin, radius) {
   friends = bot_get_friends();
 
   foreach(friend in friends) {
-    if(distancesquared(friend.origin, origin) < radius * radius)
+    if(distancesquared(friend.origin, origin) < radius * radius) {
       return true;
+    }
   }
 
   return false;
@@ -1008,8 +1053,9 @@ bot_get_closest_enemy(origin, on_radar) {
   enemies = self bot_get_enemies(on_radar);
   enemies = arraysort(enemies, origin);
 
-  if(enemies.size)
+  if(enemies.size) {
     return enemies[0];
+  }
 
   return undefined;
 }
@@ -1018,14 +1064,17 @@ bot_update_wander() {
   goal = self getgoal("wander");
 
   if(isDefined(goal)) {
-    if(distancesquared(goal, self.origin) > 65536)
+    if(distancesquared(goal, self.origin) > 65536) {
       return;
+    }
   }
 
-  if(isDefined(level.spawn_all) && level.spawn_all.size > 0)
+  if(isDefined(level.spawn_all) && level.spawn_all.size > 0) {
     spawns = arraysort(level.spawn_all, self.origin);
-  else if(isDefined(level.spawnpoints) && level.spawnpoints.size > 0)
+  }
+  else if(isDefined(level.spawnpoints) && level.spawnpoints.size > 0) {
     spawns = arraysort(level.spawnpoints, self.origin);
+  }
   else if(isDefined(level.spawn_start) && level.spawn_start.size > 0) {
     spawns = arraycombine(level.spawn_start["allies"], level.spawn_start["axis"], 1, 0);
     spawns = arraysort(spawns, self.origin);
@@ -1048,29 +1097,34 @@ bot_get_look_at() {
   if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
 
-    if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024)
+    if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024) {
       return node.origin;
+    }
   }
 
   enemies = self maps\mp\bots\_bot::bot_get_enemies(0);
 
-  if(enemies.size)
+  if(enemies.size) {
     enemy = random(enemies);
+  }
 
   if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
 
-    if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024)
+    if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024) {
       return node.origin;
+    }
   }
 
   spawn = self getgoal("wander");
 
-  if(isDefined(spawn))
+  if(isDefined(spawn)) {
     node = getvisiblenode(self.origin, spawn);
+  }
 
-  if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024)
+  if(isDefined(node) && distancesquared(self.origin, node.origin) > 1024) {
     return node.origin;
+  }
 
   return undefined;
 }
@@ -1131,8 +1185,9 @@ bot_update_toss_flash() {
   enemy = self maps\mp\bots\_bot::bot_get_closest_enemy(self.origin, 1);
   node = undefined;
 
-  if(isDefined(enemy))
+  if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
+  }
 
   if(isDefined(node) && distancesquared(self.origin, node.origin) < 65536) {
     self lookat(node.origin);
@@ -1163,8 +1218,9 @@ bot_update_toss_frag() {
   enemy = self maps\mp\bots\_bot::bot_get_closest_enemy(self.origin, 1);
   node = undefined;
 
-  if(isDefined(enemy))
+  if(isDefined(enemy)) {
     node = getvisiblenode(self.origin, enemy.origin);
+  }
 
   if(isDefined(node) && distancesquared(self.origin, node.origin) < 65536) {
     self lookat(node.origin);
@@ -1195,8 +1251,9 @@ bot_set_rank() {
     }
   }
 
-  if(!human_ranks.size)
+  if(!human_ranks.size) {
     human_ranks[human_ranks.size] = 10;
+  }
 
   human_avg = array_average(human_ranks);
 
@@ -1251,14 +1308,18 @@ bot_get_difficulty() {
     level.bot_difficulty = "normal";
     difficulty = getdvarintdefault("bot_difficulty", 1);
 
-    if(difficulty == 0)
+    if(difficulty == 0) {
       level.bot_difficulty = "easy";
-    else if(difficulty == 1)
+    }
+    else if(difficulty == 1) {
       level.bot_difficulty = "normal";
-    else if(difficulty == 2)
+    }
+    else if(difficulty == 2) {
       level.bot_difficulty = "hard";
-    else if(difficulty == 3)
+    }
+    else if(difficulty == 3) {
       level.bot_difficulty = "fu";
+    }
   }
 
   return level.bot_difficulty;
@@ -1369,8 +1430,9 @@ bot_set_difficulty() {
     setdvar("bot_MaxAdsTime", "2000");
   }
 
-  if(level.gametype == "oic" && (difficulty == "hard" || difficulty == "fu"))
+  if(level.gametype == "oic" && (difficulty == "hard" || difficulty == "fu")) {
     setdvar("bot_SprintDistance", "256");
+  }
 }
 
 bot_update_c4() {
@@ -1461,8 +1523,9 @@ bot_update_weapon() {
   if(self maps\mp\bots\_bot_combat::bot_can_reload()) {
     frac = 0.5;
 
-    if(maps\mp\bots\_bot_combat::bot_has_lmg())
+    if(maps\mp\bots\_bot_combat::bot_has_lmg()) {
       frac = 0.25;
+    }
 
     frac = frac + randomfloatrange(-0.1, 0.1);
 
@@ -1505,14 +1568,17 @@ bot_update_crate() {
         if(crate.hacker == self) {
           continue;
         }
-        if(crate.hacker.team == self.team)
+        if(crate.hacker.team == self.team) {
           continue;
+        }
       }
 
-      if(crate.owner == self)
+      if(crate.owner == self) {
         time = level.crateownerusetime / 1000 + 0.5;
-      else
+      }
+      else {
         time = level.cratenonownerusetime / 1000 + 0.5;
+      }
 
       self setstance("crouch");
       self addgoal(self.origin, 24, 4, "care package");
@@ -1534,8 +1600,9 @@ bot_update_crate() {
         if(crate.hacker == self) {
           continue;
         }
-        if(crate.hacker.team == self.team)
+        if(crate.hacker.team == self.team) {
           continue;
+        }
       }
 
       if(self botsighttracepassed(crate)) {
@@ -1549,10 +1616,12 @@ bot_update_crate() {
           return;
         }
 
-        if(crate.owner == self)
+        if(crate.owner == self) {
           end = level.crateownerusetime + 1000;
-        else
+        }
+        else {
           end = level.cratenonownerusetime + 1000;
+        }
 
         while(gettime() < start + end) {
           self pressattackbutton(2);
@@ -1649,10 +1718,12 @@ bot_update_killstreak() {
 
 bot_get_vehicle_entity() {
   if(self isremotecontrolling()) {
-    if(isDefined(self.rcbomb))
+    if(isDefined(self.rcbomb)) {
       return self.rcbomb;
-    else if(isDefined(self.qrdrone))
+    }
+    else if(isDefined(self.qrdrone)) {
       return self.qrdrone;
+    }
   }
 
   return undefined;
@@ -1691,14 +1762,16 @@ bot_rccar_think() {
         continue;
       }
       if(bot_get_difficulty() == "easy") {
-        if(distancesquared(ent.origin, player.origin) < 262144)
+        if(distancesquared(ent.origin, player.origin) < 262144) {
           self pressattackbutton();
+        }
 
         continue;
       }
 
-      if(distancesquared(ent.origin, player.origin) < 40000)
+      if(distancesquared(ent.origin, player.origin) < 40000) {
         self pressattackbutton();
+      }
     }
   }
 }
@@ -1723,8 +1796,9 @@ bot_rccar_kill() {
       if(!isDefined(ent)) {
         return;
       }
-      if(distancesquared(og_origin, ent.origin) < 256)
+      if(distancesquared(og_origin, ent.origin) < 256) {
         self pressattackbutton();
+      }
     }
 
     og_origin = ent.origin;
@@ -1773,8 +1847,9 @@ bot_turret_location(weapon) {
 
 bot_use_supply_drop(weapon) {
   if(weapon == "inventory_supplydrop_mp" || weapon == "supplydrop_mp") {
-    if(gettime() - self.spawntime > 5000)
+    if(gettime() - self.spawntime > 5000) {
       return;
+    }
   }
 
   yaw = (0, self.angles[1], 0);
@@ -1796,10 +1871,12 @@ bot_use_supply_drop(weapon) {
   }
   self addgoal(self.origin, 24, 4, "killstreak");
 
-  if(weapon == "missile_drone_mp" || weapon == "inventory_missile_drone_mp")
+  if(weapon == "missile_drone_mp" || weapon == "inventory_missile_drone_mp") {
     self lookat(drop_point + vectorscale((0, 0, 1), 384.0));
-  else
+  }
+  else {
     self lookat(drop_point);
+  }
 
   wait 0.5;
 
@@ -1820,10 +1897,12 @@ bot_use_item(weapon) {
   wait 0.5;
 
   for(i = 0; i < 10; i++) {
-    if(self getcurrentweapon() == weapon || self getcurrentweapon() == "none")
+    if(self getcurrentweapon() == weapon || self getcurrentweapon() == "none") {
       self pressattackbutton();
-    else
+    }
+    else {
       return;
+    }
 
     wait 0.5;
   }
@@ -1876,17 +1955,20 @@ bot_killstreak_dangerous_think(origin, team, attacker) {
   nodes = getnodesinradius(origin + vectorscale((0, 0, 1), 384.0), 384, 0);
 
   foreach(node in nodes) {
-    if(node isdangerous(team))
+    if(node isdangerous(team)) {
       return;
+    }
   }
 
-  foreach(node in nodes)
+  foreach(node in nodes) {
   node setdangerous(team, 1);
+  }
 
   attacker wait_endon(25, "death");
 
-  foreach(node in nodes)
+  foreach(node in nodes) {
   node setdangerous(team, 0);
+  }
 }
 
 weapon_switch_failsafe() {
@@ -1913,36 +1995,43 @@ gametype_void() {
 }
 
 bot_debug_star(origin, seconds, color) {
-  if(!isDefined(seconds))
+  if(!isDefined(seconds)) {
     seconds = 1;
+  }
 
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 0, 0);
+  }
 
   frames = int(20 * seconds);
   debugstar(origin, frames, color);
 }
 
 bot_debug_circle(origin, radius, seconds, color) {
-  if(!isDefined(seconds))
+  if(!isDefined(seconds)) {
     seconds = 1;
+  }
 
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 0, 0);
+  }
 
   frames = int(20 * seconds);
   circle(origin, radius, color, 0, 1, frames);
 }
 
 bot_debug_box(origin, mins, maxs, yaw, seconds, color) {
-  if(!isDefined(yaw))
+  if(!isDefined(yaw)) {
     yaw = 0;
+  }
 
-  if(!isDefined(seconds))
+  if(!isDefined(seconds)) {
     seconds = 1;
+  }
 
-  if(!isDefined(color))
+  if(!isDefined(color)) {
     color = (1, 0, 0);
+  }
 
   frames = int(20 * seconds);
   box(origin, mins, maxs, yaw, color, 1, 0, frames);
@@ -1982,8 +2071,9 @@ bot_devgui_think() {
         break;
     }
 
-    if(reset)
+    if(reset) {
       setdvar("devgui_bot", "");
+    }
   }
 
 }
@@ -2035,8 +2125,9 @@ bot_system_devgui_think() {
         break;
     }
 
-    if(reset)
+    if(reset) {
       setdvar("devgui_bot", "");
+    }
   }
 
 }

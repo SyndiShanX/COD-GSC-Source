@@ -18,20 +18,24 @@ init() {
   precacheString(&"MP_AUTOBALANCE_NOW");
   precacheString(&"MP_AUTOBALANCE_NEXT_ROUND");
   precacheString(&"MP_AUTOBALANCE_SECONDS");
-  if(getdvar("scr_teambalance") == "")
+  if(getdvar("scr_teambalance") == "") {
     setdvar("scr_teambalance", "0");
+  }
   if(getDvar("scr_" + level.gameType + "_teamBalanceEndOfRound") == "") {
     dvarString = ("scr_" + level.gameType + "_teamBalanceEndOfRound");
-    if(level.gameType == "sd")
+    if(level.gameType == "sd") {
       setdvar(dvarString, "1");
-    else
+    }
+    else {
       setdvar(dvarString, "0");
+    }
   }
   level.teamBalance = getdvarInt("scr_teambalance");
   level.teamBalanceEndOfRound = getdvarInt("scr_" + level.gameType + "_teamBalanceEndOfRound");
   level.maxClients = getDvarInt("sv_maxclients");
-  if(getdvar("scr_timeplayedcap") == "")
+  if(getdvar("scr_timeplayedcap") == "") {
     setdvar("scr_timeplayedcap", "1800");
+  }
   level.timeplayedcap = int(getdvarInt("scr_timeplayedcap"));
   setPlayerModels();
   level.freeplayers = [];
@@ -88,10 +92,12 @@ trackPlayedTime() {
   self.timePlayed["axis"] = 0;
   self.timePlayed["free"] = 0;
   self.timePlayed["other"] = 0;
-  if(!isDefined(self.timePlayed["total"]) || !((level.gameType == "twar") && (0 < game["roundsplayed"]) && (0 < self.timeplayed["total"])))
+  if(!isDefined(self.timePlayed["total"]) || !((level.gameType == "twar") && (0 < game["roundsplayed"]) && (0 < self.timeplayed["total"]))) {
     self.timePlayed["total"] = 0;
-  while(level.inPrematchPeriod)
+  }
+  while(level.inPrematchPeriod) {
     wait(0.05);
+  }
   for(;;) {
     if(game["state"] == "playing") {
       if(self.sessionteam == "allies") {
@@ -112,10 +118,12 @@ updatePlayerTimes() {
   nextToUpdate = 0;
   for(;;) {
     nextToUpdate++;
-    if(nextToUpdate >= level.players.size)
+    if(nextToUpdate >= level.players.size) {
       nextToUpdate = 0;
-    if(isDefined(level.players[nextToUpdate]))
+    }
+    if(isDefined(level.players[nextToUpdate])) {
       level.players[nextToUpdate] updatePlayedTime();
+    }
     wait(4.0);
   }
 }
@@ -150,11 +158,13 @@ updateTeamTime() {
 
 updateTeamBalanceDvars() {
   teambalance = getdvarInt("scr_teambalance");
-  if(level.teambalance != teambalance)
+  if(level.teambalance != teambalance) {
     level.teambalance = teambalance;
+  }
   timeplayedcap = getdvarInt("scr_timeplayedcap");
-  if(level.timeplayedcap != timeplayedcap)
+  if(level.timeplayedcap != timeplayedcap) {
     level.timeplayedcap = int(getdvarInt("scr_timeplayedcap"));
+  }
 }
 
 updateTeamBalanceWarning() {
@@ -186,8 +196,9 @@ updateTeamBalance() {
         if(!getTeamBalance()) {
           iPrintLnBold(&"MP_AUTOBALANCE_SECONDS", 15);
           wait 15.0;
-          if(!getTeamBalance())
+          if(!getTeamBalance()) {
             level balanceTeams();
+          }
         }
       }
       updateTeamBalanceDvars();
@@ -200,22 +211,28 @@ getTeamBalance() {
   level.team["axis"] = 0;
   players = level.players;
   for(i = 0; i < players.size; i++) {
-    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies"))
+    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       level.team["allies"]++;
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis"))
+    }
+    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       level.team["axis"]++;
+    }
   }
-  if((level.team["allies"] > (level.team["axis"] + level.teambalance)) || (level.team["axis"] > (level.team["allies"] + level.teambalance)))
+  if((level.team["allies"] > (level.team["axis"] + level.teambalance)) || (level.team["axis"] > (level.team["allies"] + level.teambalance))) {
     return false;
-  else
+  }
+  else {
     return true;
+  }
 }
 
 canAutobalance(player) {
-  if(!level.teamBalanceEndOfRound && ((isDefined(player.isDefusing) && player.isDefusing) || (isDefined(player.isPlanting) && player.isPlanting) || isDefined(player.carryObject) || isDefined(player.dont_auto_balance)))
+  if(!level.teamBalanceEndOfRound && ((isDefined(player.isDefusing) && player.isDefusing) || (isDefined(player.isPlanting) && player.isPlanting) || isDefined(player.carryObject) || isDefined(player.dont_auto_balance))) {
     return false;
-  else
+  }
+  else {
     return true;
+  }
 }
 
 balanceMostRecent() {
@@ -226,10 +243,12 @@ balanceMostRecent() {
     if(!isDefined(players[i].pers["teamTime"])) {
       continue;
     }
-    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies"))
+    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       AlliedPlayers[AlliedPlayers.size] = players[i];
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis"))
+    }
+    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       AxisPlayers[AxisPlayers.size] = players[i];
+    }
   }
   MostRecent = undefined;
   while((AlliedPlayers.size > (AxisPlayers.size + 1)) || (AxisPlayers.size > (AlliedPlayers.size + 1))) {
@@ -238,19 +257,24 @@ balanceMostRecent() {
         if(!canAutobalance(AlliedPlayers[j])) {
           continue;
         }
-        if(!isDefined(MostRecent))
+        if(!isDefined(MostRecent)) {
           MostRecent = AlliedPlayers[j];
-        else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"])
+        }
+        else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
           MostRecent = AlliedPlayers[j];
+        }
       }
-      if(isDefined(MostRecent))
+      if(isDefined(MostRecent)) {
         MostRecent changeTeam("axis");
+      }
       else {
         for(j = 0; j < AlliedPlayers.size; j++) {
-          if(!isDefined(MostRecent))
+          if(!isDefined(MostRecent)) {
             MostRecent = AlliedPlayers[j];
-          else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"])
+          }
+          else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
             MostRecent = AlliedPlayers[j];
+          }
         }
         MostRecent changeTeam("axis");
       }
@@ -259,19 +283,24 @@ balanceMostRecent() {
         if(!canAutobalance(AxisPlayers[j])) {
           continue;
         }
-        if(!isDefined(MostRecent))
+        if(!isDefined(MostRecent)) {
           MostRecent = AxisPlayers[j];
-        else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"])
+        }
+        else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
           MostRecent = AxisPlayers[j];
+        }
       }
-      if(isDefined(MostRecent))
+      if(isDefined(MostRecent)) {
         MostRecent changeTeam("allies");
+      }
       else {
         for(j = 0; j < AxisPlayers.size; j++) {
-          if(!isDefined(MostRecent))
+          if(!isDefined(MostRecent)) {
             MostRecent = AxisPlayers[j];
-          else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"])
+          }
+          else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
             MostRecent = AxisPlayers[j];
+          }
         }
         MostRecent changeTeam("allies");
       }
@@ -281,10 +310,12 @@ balanceMostRecent() {
     AxisPlayers = [];
     players = level.players;
     for(i = 0; i < players.size; i++) {
-      if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies"))
+      if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
         AlliedPlayers[AlliedPlayers.size] = players[i];
-      else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis"))
+      }
+      else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
         AxisPlayers[AxisPlayers.size] = players[i];
+      }
     }
   }
 }
@@ -297,10 +328,12 @@ balanceDeadPlayers() {
   AxisPlayers = [];
   players = level.players;
   for(i = 0; i < players.size; i++) {
-    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies"))
+    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       AlliedPlayers[AlliedPlayers.size] = players[i];
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis"))
+    }
+    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       AxisPlayers[AxisPlayers.size] = players[i];
+    }
   }
   numToBalance = int(abs(AxisPlayers.size - AlliedPlayers.size)) - 1;
   while(numToBalance > 0 && ((AlliedPlayers.size > (AxisPlayers.size + 1)) || (AxisPlayers.size > (AlliedPlayers.size + 1)))) {
@@ -324,10 +357,12 @@ balanceDeadPlayers() {
     numToBalance--;
     players = level.players;
     for(i = 0; i < players.size; i++) {
-      if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies"))
+      if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
         AlliedPlayers[AlliedPlayers.size] = players[i];
-      else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis"))
+      }
+      else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
         AxisPlayers[AxisPlayers.size] = players[i];
+      }
     }
   }
 }
@@ -356,13 +391,15 @@ changeTeam(team) {
   self.pers["teamTime"] = undefined;
   self.sessionteam = self.pers["team"];
   self maps\mp\gametypes\_globallogic::updateObjectiveText();
-  if(level.teamBased)
+  if(level.teamBased) {
     self.sessionteam = assignment;
+  }
   else {
     self.sessionteam = "none";
   }
-  if(!isAlive(self))
+  if(!isAlive(self)) {
     self.statusicon = "hud_status_dead";
+  }
   lpselfnum = self getEntityNumber();
   lpselfname = self.name;
   lpselfteam = self.pers["team"];
@@ -543,10 +580,12 @@ CountPlayers() {
     if(players[i] == self) {
       continue;
     }
-    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies"))
+    if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       allies++;
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis"))
+    }
+    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       axis++;
+    }
   }
   players["allies"] = allies;
   players["axis"] = axis;
@@ -579,10 +618,12 @@ updateFreePlayerTimes() {
   nextToUpdate = 0;
   for(;;) {
     nextToUpdate++;
-    if(nextToUpdate >= level.players.size)
+    if(nextToUpdate >= level.players.size) {
       nextToUpdate = 0;
-    if(isDefined(level.players[nextToUpdate]))
+    }
+    if(isDefined(level.players[nextToUpdate])) {
       level.players[nextToUpdate] updateFreePlayedTime();
+    }
     wait(1.0);
   }
 }

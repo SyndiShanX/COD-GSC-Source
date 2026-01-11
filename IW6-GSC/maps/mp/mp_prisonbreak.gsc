@@ -74,8 +74,9 @@ setOnBombTimerEnd() {
 
   level waittill("bomb_planted", destroyedObj);
 
-  if(destroyedObj maps\mp\gametypes\_gameobjects::getLabel() == "_b")
+  if(destroyedObj maps\mp\gametypes\_gameobjects::getLabel() == "_b") {
     level.sd_onBombTimerEnd = undefined;
+  }
 }
 
 onBombTimerEnd() {
@@ -101,8 +102,9 @@ initPrisoners() {
   level.bot_funcs["think"] = maps\mp\gametypes\_globallogic::blank;
 
   spawnPoints = getEntArray("mp_spawn", "classname");
-  foreach(spawnPoint in spawnPoints)
+  foreach(spawnPoint in spawnPoints) {
   level thread createPrisoner(spawnPoint);
+  }
 }
 
 createPrisoner(spawnPoint) {
@@ -111,8 +113,9 @@ createPrisoner(spawnPoint) {
   bot.equipment_enabled = true;
   bot.bot_team = game["attackers"];
 
-  while(!isDefined(bot.pers["team"]))
+  while(!isDefined(bot.pers["team"])) {
     wait(0.05);
+  }
 
   bot notify("menuresponse", game["menu_team"], game["attackers"]);
   wait(0.5);
@@ -204,10 +207,12 @@ initInsertionVehicles() {
     waypoint = getEnt(start.target, "targetname");
     while(isDefined(waypoint)) {
       path[path.size] = waypoint;
-      if(isDefined(waypoint.target))
+      if(isDefined(waypoint.target)) {
         waypoint = getEnt(waypoint.target, "targetname");
-      else
+      }
+      else {
         break;
+      }
     }
 
     level.sd_insertionVehicles[start.script_count] = spawnStruct();
@@ -229,8 +234,9 @@ onAttackerspawn() {
   while(true) {
     level waittill("player_spawned", player);
 
-    if(game["state"] != "postgame" && player.pers["team"] == game["attackers"])
+    if(game["state"] != "postgame" && player.pers["team"] == game["attackers"]) {
       player thread attackerRide();
+    }
   }
 }
 
@@ -259,10 +265,12 @@ attackerRide() {
       self playerLinkToDelta(vehicle, "tag_driver", 1, 30, 30, 30, 30, 1);
       self setStance("crouch");
 
-      if(i == 2)
+      if(i == 2) {
         exitTag = "tag_walker3";
-      else
+      }
+      else {
         exitTag = "tag_walker0";
+      }
 
       break;
     } else if(!level.sd_insertionVehicles[i].passenger) {
@@ -271,20 +279,24 @@ attackerRide() {
       self playerLinkToDelta(vehicle, "tag_passenger", 1, 30, 30, 30, 30, 1);
       self setStance("crouch");
 
-      if(i == 2)
+      if(i == 2) {
         exitTag = "tag_walker1";
-      else
+      }
+      else {
         exitTag = "tag_walker2";
+      }
 
       break;
     }
   }
-  if(vehIndex < 0)
+  if(vehIndex < 0) {
     assertMsg("Couldn't find seat for attacker in insertion vehicles!");
+  }
 
   wait(0.05);
-  while(!level.sd_insertionVehicles[vehIndex].arrived)
+  while(!level.sd_insertionVehicles[vehIndex].arrived) {
     wait(0.05);
+  }
 
   self unlink();
   self setStance("stand");
@@ -307,10 +319,12 @@ attackerRide() {
 
   self _enableWeapon();
 
-  if(isDriver)
+  if(isDriver) {
     level.sd_insertionVehicles[vehIndex].driver = false;
-  else
+  }
+  else {
     level.sd_insertionVehicles[vehIndex].passenger = false;
+  }
 }
 
 startInsertionVehicles() {
@@ -334,10 +348,12 @@ vehicleMove(vehicleIndex) {
     time = distance(vehicle.origin, path[i].origin) / 550;
     accelTime = 0;
     decelTime = 0;
-    if(i == 0)
+    if(i == 0) {
       accelTime = time / 2;
-    else if(i == path.size - 1)
+    }
+    else if(i == path.size - 1) {
       decelTime = time / 2;
+    }
 
     vehicle moveTo(path[i].origin, time, accelTime, decelTime);
     vehicle rotateTo(path[i].angles, time);
@@ -353,16 +369,19 @@ normalize_angles_180(angles) {
 }
 
 angle_180(ang) {
-  while(ang > 180)
+  while(ang > 180) {
     ang -= 360;
-  while(ang < -180)
+  }
+  while(ang < -180) {
     ang += 360;
+  }
   return ang;
 }
 
 is_explosive(cause) {
-  if(!isDefined(cause))
+  if(!isDefined(cause)) {
     return false;
+  }
 
   cause = tolower(cause);
   switch (cause) {
@@ -381,8 +400,9 @@ trap_init(remove) {
   if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
-  if(!isDefined(remove))
+  if(!isDefined(remove)) {
     remove = false;
+  }
 
   targets = getEntArray(self.target, "targetname");
 
@@ -506,18 +526,21 @@ trap_active_watch() {
 }
 
 trap_can_player_trigger(player) {
-  if(!isDefined(self.owner))
+  if(!isDefined(self.owner)) {
     return false;
+  }
 
-  if(IsAgent(player) && isDefined(player.owner) && isDefined(self.owner) && player.owner == self.owner)
+  if(IsAgent(player) && isDefined(player.owner) && isDefined(self.owner) && player.owner == self.owner) {
     return false;
+  }
 
   if(!level.teamBased) {
     return player != self.owner;
   }
 
-  if(player.team != self.owner.team)
+  if(player.team != self.owner.team) {
     return true;
+  }
 
   return false;
 }
@@ -593,8 +616,9 @@ tree_bridge_init() {
 tree_bridge_damage_watch(watch_ent, delete_on_trigger) {
   self endon("tree_down");
 
-  if(!isDefined(delete_on_trigger))
+  if(!isDefined(delete_on_trigger)) {
     delete_on_trigger = false;
+  }
 
   large_health_value = 1000000;
   damage_needed_to_fall = 100;
@@ -617,8 +641,9 @@ tree_bridge_damage_watch(watch_ent, delete_on_trigger) {
     self.tree playSound("scn_prison_tree_fall");
   }
 
-  if(delete_on_trigger)
+  if(delete_on_trigger) {
     watch_ent Delete();
+  }
 
   self.attacker = attacker;
   self notify("tree_down");
@@ -632,8 +657,9 @@ tree_bridge_run() {
     self.decal Delete();
   }
 
-  if(isDefined(self.clip_up_delete))
+  if(isDefined(self.clip_up_delete)) {
     self.clip_up_delete Delete();
+  }
 
   self.clip_up ConnectPaths();
 
@@ -720,8 +746,9 @@ log_pile_init() {
   link_visuals_to = undefined;
   link_visuals_to_tag = undefined;
 
-  if(!isDefined(self.angles))
+  if(!isDefined(self.angles)) {
     self.angles = (0, 0, 0);
+  }
 
   targets = getEntArray(self.target, "targetname");
   targets = array_combine(targets, getstructarray(self.target, "targetname"));
@@ -736,13 +763,15 @@ log_pile_init() {
 
       case "log":
         self.logs[self.logs.size] = target_ent;
-        if(isDefined(target_ent.target))
+        if(isDefined(target_ent.target)) {
           target_ent.endpos = getstruct(target_ent.target, "targetname");
+        }
         break;
       case "animated_log_use_visuals":
         link_visuals_to = target_ent;
-        if(isDefined(target_ent.script_animation))
+        if(isDefined(target_ent.script_animation)) {
           link_visuals_to_tag = level.log_visual_link_joints[target_ent.script_animation];
+        }
         self thread log_pile_support_damage_watch(target_ent);
 
       case "animated_log":
@@ -769,8 +798,9 @@ log_pile_init() {
             target_ent.start_pos = getstruct(target_ent.end_pos.target, "targetname");
             if(isDefined(target_ent.start_pos)) {
               target_ent.move_delta = target_ent.end_pos.origin - target_ent.start_pos.origin;
-              if(target_ent is_dynamic_path())
+              if(target_ent is_dynamic_path()) {
                 target_ent ConnectPaths();
+              }
               target_ent.origin = target_ent.origin - target_ent.move_delta;
               self.clip_move[self.clip_move.size] = target_ent;
             }
@@ -894,8 +924,9 @@ log_pile_run() {
   array_call(self.clip_show, ::Solid);
 
   foreach(clip_move in self.clip_move) {
-    if(clip_move is_dynamic_path())
+    if(clip_move is_dynamic_path()) {
       clip_move delayCall(log_roll_time, ::DisconnectPaths);
+    }
 
     clip_move thread log_pile_clip_move(1.5, 0.5);
   }
@@ -964,8 +995,9 @@ log_pile_kill_trigger(trigger) {
       continue;
     }
     inflictor = trigger;
-    if(isDefined(trigger.script_mover))
+    if(isDefined(trigger.script_mover)) {
       inflictor = trigger.script_mover;
+    }
 
     attacker = self.owner;
     if(IsAgent(player) && isDefined(player.owner) && isDefined(attacker) && (player.owner == attacker)) {
@@ -1040,8 +1072,9 @@ falling_rock_init() {
             if(isDefined(target.start_pos)) {
               target.move_delta = target.end_pos.origin - target.start_pos.origin;
               target.origin = target.origin - target.move_delta;
-              if(target is_dynamic_path())
+              if(target is_dynamic_path()) {
                 target ConnectPaths();
+              }
               self.clip_move[self.clip_move.size] = target;
             }
           }
@@ -1099,8 +1132,9 @@ falling_rock_run() {
 
     if(i == self.fall_to.size - 1) {
       foreach(clip_move in self.clip_move) {
-        if(clip_move is_dynamic_path())
+        if(clip_move is_dynamic_path()) {
           clip_move delayCall(time, ::DisconnectPaths);
+        }
         clip_move MoveTo(clip_move.origin + clip_move.move_delta, time);
       }
     }
@@ -1221,8 +1255,9 @@ rock_slide_run() {
   foreach(rock in self.rocks) {
     rock MoveTo(rock.end_pos.origin, rock_time, rock_time, 0);
     rock RotateTo(rock.end_pos.angles, rock_time, rock_time, 0);
-    if(rock.move_delete)
+    if(rock.move_delete) {
       rock delayCall(rock_time, ::delete);
+    }
   }
 
   wait .5;
@@ -1231,16 +1266,19 @@ rock_slide_run() {
   foreach(ent in self.ground_ents) {
     ent.move_ent MoveTo(ent.end_pos.origin, slide_time, slide_time, 0);
     ent.move_ent RotateTo(ent.end_pos.angles, slide_time, slide_time, 0);
-    if(ent.move_delete)
+    if(ent.move_delete) {
       ent delayCall(rock_time, ::delete);
+    }
   }
 }
 
 hand_icon(type, origin, angles, end_ons) {
-  if(level.createFX_enabled)
+  if(level.createFX_enabled) {
     return;
-  if(!isDefined(level.hand_icon_count))
+  }
+  if(!isDefined(level.hand_icon_count)) {
     level.hand_icon_count = 0;
+  }
 
   level.hand_icon_count++;
 
@@ -1257,15 +1295,18 @@ hand_icon(type, origin, angles, end_ons) {
 
 hand_icon_update(type, origin, angles, icon_id, end_ons) {
   if(isDefined(end_ons)) {
-    if(isString(end_ons))
+    if(isString(end_ons)) {
       end_ons = [end_ons];
+    }
 
-    foreach(end_on in end_ons)
+    foreach(end_on in end_ons) {
     self endon(end_on);
+    }
   }
 
-  while(!isDefined(level.players))
+  while(!isDefined(level.players)) {
     wait .05;
+  }
 
   show_dist = 200;
   icon = "hint_usable";
@@ -1284,8 +1325,9 @@ hand_icon_update(type, origin, angles, icon_id, end_ons) {
 
   while(1) {
     foreach(player in level.players) {
-      if(!isDefined(player.hand_icons))
+      if(!isDefined(player.hand_icons)) {
         player.hand_icons = [];
+      }
 
       test_origin = player.origin + (0, 0, 50);
       dist_sqr = DistanceSquared(test_origin, origin);

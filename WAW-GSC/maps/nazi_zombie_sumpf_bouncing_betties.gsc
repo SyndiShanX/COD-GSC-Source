@@ -170,10 +170,12 @@ setup_client_hintelem() {
 show_betty_hint(string) {
   self endon("death");
   self endon("disconnect");
-  if(string == "betty_purchased")
+  if(string == "betty_purchased") {
     text = &"ZOMBIE_BETTY_HOWTO";
-  else
+  }
+  else {
     text = &"ZOMBIE_BETTY_ALREADY_PURCHASED";
+  }
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);

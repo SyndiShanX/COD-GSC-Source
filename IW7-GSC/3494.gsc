@@ -120,8 +120,9 @@ init() {
   level.killstreakweildweapons["deploy_rc8_mp"] = "marker";
   level.killstreakweildweapons["deploy_warden_mp"] = "marker";
 
-  if(isDefined(level.func_B334))
+  if(isDefined(level.func_B334)) {
     [[level.func_B334]]();
+  }
 
   level.func_A6AA = scripts\mp\utility\game::getintproperty("scr_game_killstreakdelay", 12);
   level thread scripts\mp\killstreaks\killstreaks::onplayerconnect();

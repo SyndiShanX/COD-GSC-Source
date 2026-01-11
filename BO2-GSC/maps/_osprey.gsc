@@ -20,8 +20,9 @@ main() {
       self raise_gear();
     }
 
-    if(self.vehicletype == "heli_v78_rts" || self.vehicletype == "heli_osprey_rts_axis" || self.vehicletype == "heli_osprey_rts" || self.vehicletype == "heli_osprey")
+    if(self.vehicletype == "heli_v78_rts" || self.vehicletype == "heli_osprey_rts_axis" || self.vehicletype == "heli_osprey_rts" || self.vehicletype == "heli_osprey") {
       self raise_gear();
+    }
     else if(self.vehicletype == "heli_v78_yemen" || self.vehicletype == "heli_v78_low") {
       self thread close_hatch();
       self raise_gear();
@@ -59,8 +60,9 @@ setanims() {
   positions = [];
   num_positions = issubstr(self.vehicletype, "heli_v78") ? 7 : 6;
 
-  for(i = 0; i < num_positions; i++)
+  for(i = 0; i < num_positions; i++) {
     positions[i] = spawnStruct();
+  }
 
   positions[0].bhasgunwhileriding = 0;
   positions[1].bhasgunwhileriding = 0;
@@ -154,8 +156,9 @@ open_hatch() {
 }
 
 close_hatch(close_time) {
-  if(!isDefined(close_time))
+  if(!isDefined(close_time)) {
     close_time = undefined;
+  }
 
   self endon("death");
 

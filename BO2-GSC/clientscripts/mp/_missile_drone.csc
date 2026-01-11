@@ -26,26 +26,32 @@ missile_drone_projectile_animate_cb(localclientnum, oldval, newval, bnewent, bin
 }
 
 missile_drone_projectile_active_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     self thread clientscripts\mp\_fx::blinky_light(localclientnum, "tag_target", level._effect["missile_drone_friendly_light"], level._effect["missile_drone_enemy_light"]);
-  else
+  }
+  else {
     self thread clientscripts\mp\_fx::stop_blinky_light(localclientnum);
+  }
 }
 
 missile_drone_active_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 2)
+  if(newval == 2) {
     self targetacquired(localclientnum);
-  else if(newval == 1)
+  }
+  else if(newval == 1) {
     self targetscan(localclientnum);
-  else
+  }
+  else {
     self targetlost(localclientnum);
+  }
 }
 
 targetlost(localclientnum) {
   self notify("targetLost");
 
-  if(isDefined(self.missile_drone_fx))
+  if(isDefined(self.missile_drone_fx)) {
     stopfx(localclientnum, self.missile_drone_fx);
+  }
 }
 
 targetacquired(localclientnum) {
@@ -77,8 +83,9 @@ targetacquired(localclientnum) {
 
     self.missile_drone_fx = playviewmodelfx(localclientnum, level._effect["missile_drone_enemy_light"], "tag_target");
 
-    if(!soundplayed)
+    if(!soundplayed) {
       playSound(localclientnum, "fly_hunter_raise_plr", self.origin);
+    }
 
     soundplayed = 1;
     waitrealtime(0.5);

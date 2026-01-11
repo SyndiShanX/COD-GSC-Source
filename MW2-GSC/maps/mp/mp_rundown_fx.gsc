@@ -18,6 +18,7 @@ main() {
   level._effect["insects_carcass_runner"] = loadfx("misc/insects_carcass_runner");
   level._effect["insect_trail_runner_icbm"] = loadfx("misc/insect_trail_runner_icbm");
 
-  if(getdvar("clientSideEffects") != "1")
+  if(getdvar("clientSideEffects") != "1") {
     maps\createfx\mp_rundown_fx::main();
+  }
 }

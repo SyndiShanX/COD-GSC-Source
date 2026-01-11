@@ -86,8 +86,9 @@ swampSlasherCreateFunc(juggType) {
 }
 
 juggSwampSlasherCanUseKillstreak(streakName) {
-  if(streakName == "heli_sniper" || self isRideKillstreak(streakname))
+  if(streakName == "heli_sniper" || self isRideKillstreak(streakname)) {
     return false;
+  }
 
   return true;
 }
@@ -132,8 +133,9 @@ disable_level_killstreak() {
 }
 
 swampCustomCrateFunc() {
-  if(!isDefined(game["player_holding_level_killstrek"]))
+  if(!isDefined(game["player_holding_level_killstrek"])) {
     game["player_holding_level_killstrek"] = false;
+  }
 
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;

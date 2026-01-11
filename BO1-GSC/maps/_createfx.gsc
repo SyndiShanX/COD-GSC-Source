@@ -368,8 +368,9 @@ createFxLogic() {
         paste_ents();
       }
     }
-    if(isDefined(level.selected_fx_option_index))
+    if(isDefined(level.selected_fx_option_index)) {
       menu_fx_option_set();
+    }
     if(button_is_held("BUTTON_RTRIG") && button_is_held("BUTTON_LTRIG")) {
       move_player_around_map_fast();
       wait(0.25);

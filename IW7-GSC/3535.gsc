@@ -9,8 +9,9 @@ runequipmentping(var_00, var_01) {
   var_02 = self.owner;
   var_03 = level.uavsettings["uav_3dping"];
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = 0;
+  }
 
   self.equipping_lastpingtime = var_01;
 
@@ -34,14 +35,16 @@ runequipmentping(var_00, var_01) {
           }
           var_07 = scripts\engine\utility::array_add(level.players, self);
 
-          if(isDefined(var_00))
+          if(isDefined(var_00)) {
             var_07 = scripts\engine\utility::array_add(var_07, var_00);
+          }
 
           var_08 = self.origin + anglestoup(self.angles) * 10;
 
           if(distance2d(var_6.origin, self.origin) < 300 && scripts\engine\trace::ray_trace_passed(var_08, var_06 gettagorigin("j_head"), var_07)) {
-            if(!var_06 scripts\mp\utility\game::_hasperk("specialty_gpsjammer"))
+            if(!var_06 scripts\mp\utility\game::_hasperk("specialty_gpsjammer")) {
               var_02 thread markasrelaysource(var_06);
+            }
 
             var_04 = 1;
           }
@@ -95,8 +98,9 @@ markasrelaysource(var_00) {
   self endon("disconnect");
   var_01 = var_00 getentitynumber();
 
-  if(!isDefined(self.relaysource))
+  if(!isDefined(self.relaysource)) {
     self.relaysource = [];
+  }
   else if(isDefined(self.relaysource[var_01])) {
     self notify("markAsRelaySource");
     self endon("markAsRelaySource");

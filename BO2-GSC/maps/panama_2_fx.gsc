@@ -180,8 +180,9 @@ veh_destructible_headlights() {
   a_destructibles = getEntArray("destructible", "targetname");
 
   foreach(e_destructible in a_destructibles) {
-    if(e_destructible.destructibledef == "veh_t6_smallhatch_destructible_white")
+    if(e_destructible.destructibledef == "veh_t6_smallhatch_destructible_white") {
       e_destructible thread small_hatch_headlights();
+    }
   }
 }
 

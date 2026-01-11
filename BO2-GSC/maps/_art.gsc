@@ -7,17 +7,21 @@
 #include common_scripts\utility;
 
 main() {
-  if(getdvar(#"scr_art_tweak") == "" || getdvar(#"scr_art_tweak") == "0")
+  if(getdvar(#"scr_art_tweak") == "" || getdvar(#"scr_art_tweak") == "0") {
     setdvar("scr_art_tweak", 0);
+  }
 
-  if(getdvar(#"scr_dof_enable") == "")
+  if(getdvar(#"scr_dof_enable") == "") {
     setdvar("scr_dof_enable", "1");
+  }
 
-  if(getdvar(#"scr_cinematic_autofocus") == "")
+  if(getdvar(#"scr_cinematic_autofocus") == "") {
     setdvar("scr_cinematic_autofocus", "1");
+  }
 
-  if(getdvar(#"scr_art_visionfile") == "")
+  if(getdvar(#"scr_art_visionfile") == "") {
     setdvar("scr_art_visionfile", level.script);
+  }
 
   if(!isDefined(level.dofdefault)) {
     level.dofdefault["nearStart"] = 0;
@@ -32,8 +36,9 @@ main() {
 
   thread tweakart();
 
-  if(!isDefined(level.script))
+  if(!isDefined(level.script)) {
     level.script = tolower(getdvar(#"mapname"));
+  }
 }
 
 artfxprintln(file, string) {
@@ -65,11 +70,13 @@ setfogsliders() {
 }
 
 tweakart() {
-  if(!isDefined(level.tweakfile))
+  if(!isDefined(level.tweakfile)) {
     level.tweakfile = 0;
+  }
 
-  if(level.tweakfile && level.bscriptgened)
+  if(level.tweakfile && level.bscriptgened) {
     script_gen_dump_addline("maps\\createart\\" + level.script + "_art::main();", level.script + "_art");
+  }
 
   if(getdvar(#"scr_fog_baseheight") == "") {
     setdvar("scr_fog_exp_halfplane", "500");

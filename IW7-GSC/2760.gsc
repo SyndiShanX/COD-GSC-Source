@@ -13,8 +13,9 @@ func_AC1A(var_00, var_01) {
   var_02 = self getcurrentweapon();
 
   for(;;) {
-    while(var_02 != var_00)
+    while(var_02 != var_00) {
       self waittill("weapon_change", var_02);
+    }
 
     childthread func_AC08(var_02, var_01);
     self waittill("weapon_change", var_02);
@@ -26,8 +27,9 @@ func_AC13() {
   self endon("LGM_player_endMonitorFire");
   scripts\engine\utility::waittill_any("death", "disconnect");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     func_AC04();
+  }
 }
 
 func_AC07() {
@@ -50,8 +52,9 @@ func_AC08(var_00, var_01, var_02) {
     if(var_05 != var_00) {
       continue;
     }
-    if(!isDefined(var_03))
+    if(!isDefined(var_03)) {
       var_03 = func_AC17(self);
+    }
 
     thread func_AC06(var_00, var_01, var_02, 0.35, 0.1, var_04, var_03);
   }
@@ -80,10 +83,12 @@ func_AC06(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
     var_13 = 20;
     var_14 = 0;
 
-    if(var_12 == 0)
+    if(var_12 == 0) {
       var_14 = 20;
-    else if(var_12 == 1)
+    }
+    else if(var_12 == 1) {
       var_14 = -20;
+    }
     else if(var_12 == 2) {}
 
     var_15 = rotatepointaroundvector(var_10, var_08, var_13);
@@ -116,8 +121,9 @@ func_AC15(var_00, var_01) {
     var_0.func_B8AC = func_AC16(var_0.func_B8AC);
   }
 
-  if(!isDefined(var_0.func_B8AC) || var_0.func_B8AC.size == 0)
+  if(!isDefined(var_0.func_B8AC) || var_0.func_B8AC.size == 0) {
     self notify("LGM_player_allMissilesDestroyed");
+  }
 }
 
 func_AC09(var_00, var_01) {
@@ -141,8 +147,9 @@ func_AC09(var_00, var_01) {
         self notify("LGM_player_targetLost");
         var_03 = undefined;
 
-        foreach(var_09 in var_0.func_B8AC)
+        foreach(var_09 in var_0.func_B8AC) {
         var_09 notify("missile_targetChanged");
+        }
       }
 
       var_04 = undefined;
@@ -181,8 +188,9 @@ func_AC09(var_00, var_01) {
             var_09 delete();
           }
 
-          if(var_16.size > 0)
+          if(var_16.size > 0) {
             level thread func_AC0E(var_03, self, var_01, var_16);
+          }
 
           var_0.func_B8AC = [];
         } else
@@ -197,11 +205,13 @@ func_AC09(var_00, var_01) {
 }
 
 func_AC17(var_00) {
-  if(!isDefined(level.func_A875))
+  if(!isDefined(level.func_A875)) {
     level.func_A875 = [];
+  }
 
-  if(!isDefined(level.func_A876))
+  if(!isDefined(level.func_A876)) {
     level.func_A876 = [];
+  }
 
   var_01 = undefined;
 
@@ -221,17 +231,20 @@ func_AC14(var_00, var_01) {
   var_01 scripts\engine\utility::waittill_any("death", "disconnect", "LGM_player_endMonitorFire");
 
   foreach(var_03 in var_0.func_B8AC) {
-    if(isvalidmissile(var_03))
+    if(isvalidmissile(var_03)) {
       var_03 missile_cleartarget();
+    }
   }
 
   var_0.func_B8AC = undefined;
   level.func_A875 = scripts\engine\utility::array_remove(level.func_A875, var_00);
 
-  if(level.func_A876.size + level.func_A875.size < 4)
+  if(level.func_A876.size + level.func_A875.size < 4) {
     level.func_A876[level.func_A876.size] = var_00;
-  else
+  }
+  else {
     var_00 delete();
+  }
 }
 
 func_AC11(var_00, var_01) {
@@ -240,8 +253,9 @@ func_AC11(var_00, var_01) {
   level thread func_AC10(var_00, var_01);
   var_01 scripts\engine\utility::waittill_any("death", "disconnect", "LGM_player_endMonitorFire", "LGM_player_newMissilesFired", "LGM_player_targetLost", "LGM_player_lockedOn", "LGM_player_allMissilesDestroyed", "LGM_player_targetDied");
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     scripts\mp\utility\game::outlinedisable(var_02, var_00);
+  }
 
   if(isDefined(var_01)) {
     var_01 notify("LGM_player_lockingDone");
@@ -319,13 +333,15 @@ func_AC0E(var_00, var_01, var_02, var_03) {
     func_AC19(var_00, var_01, var_04);
   }
 
-  if(!isDefined(var_0.func_AC03))
+  if(!isDefined(var_0.func_AC03)) {
     var_0.func_AC03 = [];
+  }
 
   var_0.func_AC03[var_05] = var_04;
 
-  foreach(var_11 in var_04)
+  foreach(var_11 in var_04) {
   level thread func_AC0C(var_11, var_00, var_05);
+  }
 
   var_13 = 1;
 
@@ -335,8 +351,9 @@ func_AC0E(var_00, var_01, var_02, var_03) {
     if(var_14 == "death") {
       var_13 = 0;
 
-      if(isDefined(var_00))
+      if(isDefined(var_00)) {
         var_0.func_AC03[var_05] = undefined;
+      }
 
       continue;
     }
@@ -344,13 +361,15 @@ func_AC0E(var_00, var_01, var_02, var_03) {
     if(var_14 == "LGM_target_lockedMissilesDestroyed") {
       waittillframeend;
 
-      if(!isDefined(var_0.func_AC03[var_05]) || var_0.func_AC03[var_05].size == 0)
+      if(!isDefined(var_0.func_AC03[var_05]) || var_0.func_AC03[var_05].size == 0) {
         var_13 = 0;
+      }
     }
   }
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     scripts\mp\utility\game::outlinedisable(var_05, var_00);
+  }
 }
 
 func_AC18() {
@@ -376,8 +395,9 @@ func_AC05() {
 }
 
 func_AC04() {
-  if(isDefined(self.func_A874) && self.func_A874 == 1)
+  if(isDefined(self.func_A874) && self.func_A874 == 1) {
     scripts\mp\utility\game::disableweaponlaser();
+  }
 
   self.func_A874 = undefined;
 }
@@ -386,8 +406,9 @@ func_AC16(var_00) {
   var_01 = [];
 
   foreach(var_03 in var_00) {
-    if(isvalidmissile(var_03))
+    if(isvalidmissile(var_03)) {
       var_1[var_1.size] = var_03;
+    }
   }
 
   return var_01;
@@ -401,13 +422,16 @@ func_AC19(var_00, var_01, var_02) {
 func_AC0A(var_00) {
   var_01 = undefined;
 
-  if(var_0.model != "vehicle_av8b_harrier_jet_mp")
+  if(var_0.model != "vehicle_av8b_harrier_jet_mp") {
     var_01 = var_00 gettagorigin("tag_missile_target");
-  else
+  }
+  else {
     var_01 = var_00 gettagorigin("tag_body");
+  }
 
-  if(!isDefined(var_01))
+  if(!isDefined(var_01)) {
     var_01 = var_00 getpointinbounds(0, 0, 0);
+  }
 
   return var_01 - var_0.origin;
 }

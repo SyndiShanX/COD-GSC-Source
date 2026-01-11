@@ -279,6 +279,7 @@ vignette_actor_aware_everything() {
   maps\_utility::enable_pain();
   self.dontavoidplayer = 0;
 
-  if(isDefined(self.og_newenemyreactiondistsq))
+  if(isDefined(self.og_newenemyreactiondistsq)) {
     self.newenemyreactiondistsq = self.og_newenemyreactiondistsq;
+  }
 }

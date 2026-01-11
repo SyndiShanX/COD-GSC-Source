@@ -93,11 +93,13 @@ combat_two() {
 play_helmet_light_damage(var_0) {
   level.player.helmet_show_damage = 1;
 
-  while(!common_scripts\utility::flag("moving_cover_done2"))
+  while(!common_scripts\utility::flag("moving_cover_done2")) {
     common_scripts\utility::waitframe();
+  }
 
-  for(var_1 = 0; var_1 < var_0; var_1++)
+  for(var_1 = 0; var_1 < var_0; var_1++) {
     wait 1.0;
+  }
 
   level.player.helmet_show_damage = 0;
 }
@@ -121,8 +123,9 @@ hide_combat_two_intro_debris() {
 
   var_4 = getEntArray("intel_laptop", "script_noteworthy");
 
-  foreach(var_6 in var_4)
+  foreach(var_6 in var_4) {
   var_6 hide();
+  }
 }
 
 show_combat_two_intro_debris() {
@@ -136,16 +139,18 @@ show_combat_two_intro_debris() {
   var_4 = getEntArray("intel_laptop", "script_noteworthy");
 
   foreach(var_6 in var_4) {
-    if(!getdvarint("ui_level_player_cheatpoints"))
+    if(!getdvarint("ui_level_player_cheatpoints")) {
       var_6 show();
+    }
   }
 }
 
 trigger_enemy_spawn(var_0, var_1, var_2) {
   var_3 = getent(var_0, "targetname");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     var_3 waittill("trigger");
+  }
 
   enemy_spawn(var_1, var_2);
 }
@@ -153,8 +158,9 @@ trigger_enemy_spawn(var_0, var_1, var_2) {
 trigger_enemy_spawn_in_order(var_0, var_1, var_2, var_3) {
   var_4 = getent(var_0, "targetname");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 waittill("trigger");
+  }
 
   thread maps\loki_audio::sfx_set_combat_two_amb();
   var_5 = 1;
@@ -169,8 +175,9 @@ enemy_spawn(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2 = getEntArray(var_0, "targetname");
 
-    foreach(var_4 in var_2)
+    foreach(var_4 in var_2) {
     var_4 maps\_utility::add_spawn_function(var_1);
+    }
   }
 
   var_6 = maps\loki_util::spawn_space_ais_from_targetname(var_0);
@@ -191,10 +198,12 @@ detectexposedandreacquire() {
   for(;;) {
     var_4 = 0;
 
-    if(isDefined(self.node) && self.node.type != "Exposed 3D" && distancesquared(self.origin, self.node.origin) < var_0)
+    if(isDefined(self.node) && self.node.type != "Exposed 3D" && distancesquared(self.origin, self.node.origin) < var_0) {
       var_4 = 1;
-    else if(distancesquared(self.origin, var_2) > var_0)
+    }
+    else if(distancesquared(self.origin, var_2) > var_0) {
       var_4 = 1;
+    }
 
     var_5 = gettime();
 
@@ -216,14 +225,16 @@ set_ai_attackeraccuracy() {
   var_0 = getent("combat_two_second_wave_retreat", "targetname");
   var_1 = getent("no_cover", "targetname");
 
-  if(isDefined(var_0) && isDefined(var_1))
+  if(isDefined(var_0) && isDefined(var_1)) {
     common_scripts\utility::waittill_any_ents(var_0, "trigger", var_1, "trigger");
+  }
 
   self.attackeraccuracy = 0.1;
   var_0 = getent("combat_two_third_wave_extra", "targetname");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     common_scripts\utility::waittill_any_ents(var_0, "trigger");
+  }
 
   self.attackeraccuracy = 0.1;
 }
@@ -236,8 +247,9 @@ wait_until_volume_empty(var_0) {
     var_3 = 1;
 
     foreach(var_5 in var_2) {
-      if(var_5 istouching(var_1))
+      if(var_5 istouching(var_1)) {
         var_3 = 0;
+      }
     }
 
     if(var_3) {
@@ -274,8 +286,9 @@ convert_moving_cover_enemies_to_wave_3() {
       level.moving_cover_guys[level.moving_cover_guys.size] = var_4;
 
       if(isDefined(var_4) && isalive(var_4)) {
-        if(isDefined(var_4.magic_bullet_shield))
+        if(isDefined(var_4.magic_bullet_shield)) {
           var_4 maps\_utility::stop_magic_bullet_shield();
+        }
 
         var_4 kill();
       }
@@ -290,8 +303,9 @@ combat_two_fire_straight_setup() {
 }
 
 combat_two_fire_straight() {
-  if(maps\_utility::get_ai_group_sentient_count("combat_two_enemies"))
+  if(maps\_utility::get_ai_group_sentient_count("combat_two_enemies")) {
     animscripts\notetracks::fire_straight();
+  }
 }
 
 trigger_on_ai_group_size(var_0, var_1) {
@@ -320,20 +334,23 @@ turn_off_triggers_until_trigger() {
   foreach(var_2 in var_0) {
     var_2 = getent(var_2, "targetname");
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 common_scripts\utility::trigger_off();
+    }
   }
 
   var_2 = getent("combat_two_third_wave_extra", "targetname");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 waittill("trigger");
+  }
 
   foreach(var_2 in var_0) {
     var_2 = getent(var_2, "targetname");
 
-    if(isDefined(var_2))
+    if(isDefined(var_2)) {
       var_2 common_scripts\utility::trigger_on();
+    }
   }
 }
 
@@ -456,8 +473,9 @@ set_stop_ignore_flag() {
   var_1 = getent("combat_two_second_wave_retreat", "targetname");
   var_2 = getent("no_cover", "targetname");
 
-  if(isDefined(var_1) && isDefined(var_2))
+  if(isDefined(var_1) && isDefined(var_2)) {
     common_scripts\utility::waittill_any_ents(var_1, "trigger", var_2, "trigger", var_0, "time_up");
+  }
 
   common_scripts\utility::flag_set("combat_two_stop_ignore");
 }
@@ -472,8 +490,9 @@ waittill_player_advances_or_timeout() {
   var_0 = getent("ignore_volume", "targetname");
   var_1 = getent("no_cover", "targetname");
 
-  if(isDefined(var_0) && isDefined(var_1))
+  if(isDefined(var_0) && isDefined(var_1)) {
     common_scripts\utility::waittill_any_ents(var_0, "trigger", var_1, "trigger", self, "initial_path_completed", self, "stop_ignoring");
+  }
 }
 
 ai_advancing_logic() {
@@ -505,8 +524,9 @@ ai_advancing_logic() {
   wait 4.0;
   setsaveddvar("player_swimSpeed", var_2 * 2);
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     setsaveddvar("r_mbEnable", 0);
+  }
 
   wait 3.0;
   level.player enableweapons();
@@ -520,22 +540,25 @@ ai_advancing_logic() {
 set_flag_on_trigger_or_ai_count(var_0, var_1, var_2, var_3) {
   var_4 = getent(var_1, "targetname");
 
-  if(isDefined(var_4))
+  if(isDefined(var_4)) {
     var_4 waittill("trigger");
+  }
 
   common_scripts\utility::flag_set(var_0);
 }
 
 spawn_enemies_on_ai_count() {
-  while(maps\_utility::get_ai_group_sentient_count("combat_two_enemies") > 3 || level.combat_two_spawns < 6)
+  while(maps\_utility::get_ai_group_sentient_count("combat_two_enemies") > 3 || level.combat_two_spawns < 6) {
     wait 0.1;
+  }
 
   common_scripts\utility::flag_set("section3_justmove");
   wait 0.5;
 
   while(maps\_utility::get_ai_group_sentient_count("combat_two_enemies") > 3 || level.combat_two_spawns < 9) {
-    if(!common_scripts\utility::flag("section3") && maps\_utility::get_ai_group_sentient_count("combat_two_enemies") < 1)
+    if(!common_scripts\utility::flag("section3") && maps\_utility::get_ai_group_sentient_count("combat_two_enemies") < 1) {
       common_scripts\utility::flag_set("section3");
+    }
 
     wait 0.1;
   }
@@ -543,13 +566,15 @@ spawn_enemies_on_ai_count() {
   common_scripts\utility::flag_set("section4");
   wait 0.5;
 
-  while(maps\_utility::get_ai_group_sentient_count("combat_two_enemies") > 2 || level.combat_two_spawns < 13)
+  while(maps\_utility::get_ai_group_sentient_count("combat_two_enemies") > 2 || level.combat_two_spawns < 13) {
     wait 0.1;
+  }
 
   level notify("enemies_charge_player");
 
-  while(maps\_utility::get_ai_group_sentient_count("combat_two_enemies") > 0)
+  while(maps\_utility::get_ai_group_sentient_count("combat_two_enemies") > 0) {
     wait 0.1;
+  }
 
   common_scripts\utility::flag_set("section5");
 }
@@ -571,29 +596,33 @@ allies_color_advance_logic() {
     if(common_scripts\utility::flag("section5")) {
       var_0 = getent("combat_two_third_wave_push_1_5", "targetname");
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         var_0 notify("trigger");
+      }
 
       break;
     } else if(common_scripts\utility::flag("section4")) {
       var_0 = getent("combat_two_third_wave_push_1", "targetname");
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         var_0 notify("trigger");
+      }
     } else if(common_scripts\utility::flag("section3") || common_scripts\utility::flag("section3_justmove")) {
       var_0 = getent("combat_two_third_wave_push_0", "targetname");
 
       if(isDefined(var_0)) {
         var_0 notify("trigger");
 
-        if(!common_scripts\utility::flag("section3"))
+        if(!common_scripts\utility::flag("section3")) {
           level notify("section_3_move_up");
+        }
       }
     } else if(common_scripts\utility::flag("section2")) {
       var_0 = getent("combat_two_second_wave_retreat", "targetname");
 
-      if(isDefined(var_0))
+      if(isDefined(var_0)) {
         var_0 notify("trigger");
+      }
     }
 
     wait 0.1;
@@ -601,8 +630,9 @@ allies_color_advance_logic() {
 }
 
 ally0_traversal_logic() {
-  while(!common_scripts\utility::flag("section2"))
+  while(!common_scripts\utility::flag("section2")) {
     wait 0.1;
+  }
 }
 
 ally_target_logic() {
@@ -624,8 +654,9 @@ ally_target_logic() {
 enemies_around_nitro(var_0) {
   if(isDefined(var_0)) {
     foreach(var_2 in level.enemy_chargers) {
-      if(isalive(var_2) && distance(var_2.origin, var_0.origin) < 250)
+      if(isalive(var_2) && distance(var_2.origin, var_0.origin) < 250) {
         return 1;
+      }
     }
   }
 
@@ -647,8 +678,9 @@ wait_for_time_then_shoot_bomb(var_0) {
 }
 
 set_flag_when_first_enemies_dead(var_0, var_1) {
-  while(!isDefined(level.enemy_chargers) || level.enemy_chargers.size < 2)
+  while(!isDefined(level.enemy_chargers) || level.enemy_chargers.size < 2) {
     wait 0.1;
+  }
 
   while(level.enemy_chargers.size) {
     level.enemy_chargers = maps\_utility::array_removedead_or_dying(level.enemy_chargers);
@@ -731,8 +763,9 @@ turn_off_trigger_on_notify(var_0, var_1) {
   level waittill(var_1);
   var_2 = getent(var_0, "targetname");
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_2 delete();
+  }
 }
 
 swap_goal_volumes(var_0) {
@@ -747,8 +780,9 @@ swap_goal_volumes(var_0) {
   if(isalive(self)) {
     self setgoalvolumeauto(var_0);
 
-    if(isDefined(self.node))
+    if(isDefined(self.node)) {
       self setgoalpos(self.node.origin);
+    }
 
     var_5 = level.current_volume;
     var_6 = self.baseaccuracy;
@@ -784,8 +818,9 @@ send_guy_to_node_then_rotate() {
     var_1 = getaiarray("axis");
 
     foreach(var_3 in var_1) {
-      if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "spinning_cover_guy")
+      if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "spinning_cover_guy") {
         var_0 = var_3;
+      }
     }
 
     wait 0.1;
@@ -830,13 +865,15 @@ spinning_object(var_0, var_1) {
 check_for_combat_two_done() {
   common_scripts\utility::flag_wait("section5");
 
-  while(level.combat_two_spawns < 13)
+  while(level.combat_two_spawns < 13) {
     wait 0.1;
+  }
 
   wait 1.0;
 
-  while(maps\_utility::get_ai_group_sentient_count("combat_two_enemies") > 0)
+  while(maps\_utility::get_ai_group_sentient_count("combat_two_enemies") > 0) {
     wait 0.1;
+  }
 
   level.allies[0].goalradius = 4;
   level.allies[1].goalradius = 4;
@@ -897,14 +934,16 @@ set_flag_when_not_firing(var_0) {
     if(level.player attackbuttonpressed()) {
       var_2 = 0;
 
-      if(!common_scripts\utility::flag("player_is_firing"))
+      if(!common_scripts\utility::flag("player_is_firing")) {
         common_scripts\utility::flag_set("player_is_firing");
+      }
     } else
       var_2++;
 
     if(var_2 > var_1) {
-      if(common_scripts\utility::flag("player_is_firing"))
+      if(common_scripts\utility::flag("player_is_firing")) {
         common_scripts\utility::flag_clear("player_is_firing");
+      }
     }
 
     common_scripts\utility::waitframe();
@@ -917,8 +956,9 @@ set_accuracy_when_allies_are_close() {
   for(;;) {
     foreach(var_1 in level.allies) {
       if(isalive(var_1)) {
-        if(distance(self.origin, var_1.origin) < 300)
+        if(distance(self.origin, var_1.origin) < 300) {
           self.attackeraccuracy = 1;
+        }
       }
     }
 
@@ -972,8 +1012,9 @@ ally_0_animation() {
   wait_until_volume_empty("combat_two_safe_volume_2");
   var_5 = getnode("combat_two_ally0_node_2", "targetname");
 
-  while(distance(level.player.origin, var_5.origin) < 50)
+  while(distance(level.player.origin, var_5.origin) < 50) {
     wait 0.1;
+  }
 
   var_3 = [];
   var_3["ally_0"] = level.allies[0];
@@ -988,8 +1029,9 @@ ally_0_animation() {
   wait 4.0;
   var_5 = getnode("combat_two_ally0_node_3", "targetname");
 
-  while(distance(level.player.origin, var_5.origin) < 50)
+  while(distance(level.player.origin, var_5.origin) < 50) {
     wait 0.1;
+  }
 
   thread maps\loki_combat_one::force_traversal_check_hit();
   var_1 maps\_anim::anim_reach_solo(self, "combat_two_trans_3");
@@ -1031,8 +1073,9 @@ ally_1_animation() {
   var_4 linkto(var_2);
   var_5 = getEntArray("spinning_crate_collision", "targetname");
 
-  foreach(var_7 in var_5)
+  foreach(var_7 in var_5) {
   var_7 linkto(var_4);
+  }
 
   var_3 = [];
   var_3["ally_1"] = level.allies[1];
@@ -1054,8 +1097,9 @@ ally_1_animation() {
   wait_until_volume_empty("combat_two_safe_volume_2");
   var_9 = getnode("combat_two_ally1_node_2", "targetname");
 
-  while(distance(level.player.origin, var_9.origin) < 50)
+  while(distance(level.player.origin, var_9.origin) < 50) {
     wait 0.1;
+  }
 
   thread maps\loki_combat_one::force_traversal_check_hit();
   var_1 maps\_anim::anim_reach_solo(self, "combat_two_trans_2");
@@ -1073,8 +1117,9 @@ ally_1_animation() {
   wait_until_volume_empty("combat_two_safe_volume_3");
   var_9 = getnode("combat_two_ally1_node_3", "targetname");
 
-  while(distance(level.player.origin, var_9.origin) < 50)
+  while(distance(level.player.origin, var_9.origin) < 50) {
     wait 0.1;
+  }
 
   thread maps\loki_combat_one::force_traversal_check_hit();
   var_1 maps\_anim::anim_reach_solo(self, "combat_two_trans_3");
@@ -1174,8 +1219,9 @@ kill_enemy_at_arm_node() {
       var_3 = undefined;
 
       foreach(var_7 in var_5) {
-        if(distance(var_7.origin, var_1.origin) < 60)
+        if(distance(var_7.origin, var_1.origin) < 60) {
           var_3 = var_7;
+        }
       }
 
       if(isDefined(var_3)) {
@@ -1203,8 +1249,9 @@ kill_enemy_at_arm_node() {
 diable_nodes_if_near_player() {
   var_0 = getEntArray("disable_nodes", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread turn_off_nodes();
+  }
 }
 
 disable_nodes_if_allies_nearby(var_0) {
@@ -1222,8 +1269,9 @@ disable_nodes_if_allies_nearby(var_0) {
       }
     }
 
-    if(!var_2)
+    if(!var_2) {
       badplace_delete(var_0);
+    }
 
     wait 0.1;
   }
@@ -1256,13 +1304,15 @@ turn_off_nodes() {
     if(level.player istouching(self)) {
       var_0 = getnodearray("node_to_disable", "targetname");
 
-      foreach(var_2 in var_0)
+      foreach(var_2 in var_0) {
       var_2 disconnectnode();
+      }
     } else {
       var_0 = getnodearray("node_to_disable", "targetname");
 
-      foreach(var_2 in var_0)
+      foreach(var_2 in var_0) {
       var_2 connectnode();
+      }
     }
 
     wait 0.1;
@@ -1289,8 +1339,9 @@ node_preference_logic() {
 }
 
 node_change_logic(var_0, var_1) {
-  if(!isarray(var_1))
+  if(!isarray(var_1)) {
     var_1 = maps\_utility::make_array(var_1);
+  }
 
   var_2 = 1;
 
@@ -1324,8 +1375,9 @@ moving_large_debris() {
   var_2 = 20000;
   var_3 = 2000;
 
-  foreach(var_5 in var_0)
+  foreach(var_5 in var_0) {
   var_5 hide();
+  }
 
   common_scripts\utility::flag_wait("moving_cover_done2");
 
@@ -1349,8 +1401,9 @@ moving_large_debris() {
 
   common_scripts\utility::flag_wait("charge_set");
 
-  foreach(var_5 in var_0)
+  foreach(var_5 in var_0) {
   var_5 delete();
+  }
 }
 
 fail_if_player_too_far() {
@@ -1408,16 +1461,18 @@ vo_move_up() {
   level waittill("section_3_move_up");
   wait 5.0;
 
-  if(!common_scripts\utility::flag("section3"))
+  if(!common_scripts\utility::flag("section3")) {
     maps\_utility::smart_radio_dialogue("loki_kgn_keeppressingthompson");
+  }
 }
 
 waittill_trigger_targetname(var_0, var_1) {
   var_2 = getent(var_0, "targetname");
 
   if(isDefined(var_2)) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       var_2 childthread common_scripts\utility::_timeout(var_1);
+    }
 
     var_2 common_scripts\utility::waittill_any("trigger", "returned");
   }

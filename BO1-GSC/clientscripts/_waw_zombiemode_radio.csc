@@ -63,8 +63,9 @@ add_song(song) {
 
 fade(id, time) {
   rate = 0;
-  if(time != 0)
+  if(time != 0) {
     rate = 1.0 / time;
+  }
   setSoundVolumeRate(id, rate);
   setSoundVolume(id, 0.0);
   wait(time);

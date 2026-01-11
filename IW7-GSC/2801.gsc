@@ -31,19 +31,23 @@ func_109C1(var_00) {
   var_03 setotherent(self);
   var_03 scripts\mp\weapons::explosivehandlemovers(var_2["entity"], 1);
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 delete();
+  }
 
   var_03 thread func_109B3(self);
   var_03 thread func_109B9(45);
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     var_03 scripts\mp\weapons::explosivehandlemovers(var_01, 1);
+  }
 
-  if(level.teambased)
+  if(level.teambased) {
     var_03 scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 40));
-  else
+  }
+  else {
     var_03 scripts\mp\entityheadicons::setplayerheadicon(self, (0, 0, 40));
+  }
 
   scripts\mp\weapons::ontacticalequipmentplanted(var_03, "power_speedStrip");
 }
@@ -80,8 +84,9 @@ func_109C3() {
   wait 3;
 
   if(isDefined(self)) {
-    if(isDefined(self.killcament))
+    if(isDefined(self.killcament)) {
       self.killcament delete();
+    }
 
     scripts\mp\weapons::equipmentdeletevfx();
     scripts\mp\weapons::deleteexplosive();
@@ -160,8 +165,9 @@ func_13B54(var_00, var_01) {
     if(!isDefined(var_2.func_109B2)) {
       var_2.func_109B2 = 1;
 
-      foreach(var_04 in level.func_109BE)
+      foreach(var_04 in level.func_109BE) {
       var_02 scripts\mp\utility\game::giveperk(var_04);
+      }
 
       if(!(isDefined(var_2.powers) && var_02 scripts\mp\powers::hasequipment("power_speedBoost") && var_2.powers["power_speedBoost"].active)) {
         var_2.speedstripmod = 0.2;
@@ -214,8 +220,9 @@ func_13B4F() {
   level endon("game_ended");
   scripts\engine\utility::waittill_any("speed_strip_end", "death", "disconnect");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     func_41E0();
+  }
 }
 
 func_41E0() {
@@ -223,8 +230,9 @@ func_41E0() {
     self.func_109B2 = undefined;
     self.func_109BA = undefined;
 
-    foreach(var_01 in level.func_109BE)
+    foreach(var_01 in level.func_109BE) {
     scripts\mp\utility\game::removeperk(var_01);
+    }
 
     if(isDefined(self.speedstripmod)) {
       self.speedstripmod = undefined;
@@ -233,16 +241,18 @@ func_41E0() {
       self.func_109BD = undefined;
     }
 
-    if(isDefined(self.func_109A9))
+    if(isDefined(self.func_109A9)) {
       self.func_109A9 delete();
+    }
   }
 }
 
 func_13B4E(var_00, var_01, var_02, var_03, var_04, var_05) {
   level endon("game_ended");
 
-  if(isDefined(var_05))
+  if(isDefined(var_05)) {
     self endon(var_05);
+  }
 
   var_00 waittill("death");
 
@@ -262,8 +272,9 @@ func_13B4E(var_00, var_01, var_02, var_03, var_04, var_05) {
     self notify(var_04);
 
   if(isDefined(var_01)) {
-    if(isDefined(self))
+    if(isDefined(self)) {
       self delete();
+    }
   }
 }
 
@@ -286,8 +297,9 @@ func_13B51(var_00) {
   self endon("death");
 
   for(;;) {
-    if(self.origin != var_0.origin)
+    if(self.origin != var_0.origin) {
       self.origin = var_0.origin;
+    }
 
     wait 0.5;
   }
@@ -301,10 +313,12 @@ func_D534(var_00, var_01) {
 
   for(;;) {
     if(isDefined(var_00) && var_04) {
-      if(self.team == var_0.team)
+      if(self.team == var_0.team) {
         var_02 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_friendly"), var_03, self, anglestoup(var_0.angles), anglesToForward(var_0.angles));
-      else
+      }
+      else {
         var_02 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_enemy"), var_03, self, anglestoup(var_0.angles), anglesToForward(var_0.angles));
+      }
 
       if(isDefined(var_02)) {
         triggerfx(var_02);
@@ -319,8 +333,9 @@ func_D534(var_00, var_01) {
     wait 0.5;
 
     if(var_03 != var_0.origin) {
-      if(isDefined(var_02))
+      if(isDefined(var_02)) {
         var_02 delete();
+      }
 
       var_03 = var_0.origin;
       self notify("speed_strip_moved");
@@ -333,16 +348,19 @@ func_13B52(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_00 endon("death");
   self endon("speed_strip_moved");
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     self endon(var_03);
+  }
 
   self waittill(var_04);
 
-  if(isDefined(var_02))
+  if(isDefined(var_02)) {
     var_02 delete();
+  }
 
-  if(isDefined(var_05) && var_05)
+  if(isDefined(var_05) && var_05) {
     thread func_D534(var_00, var_01);
+  }
 }
 
 func_109C0() {

@@ -23,15 +23,18 @@ init() {
     targets = [];
     target = getEnt(triggers[i].target, "targetname");
 
-    if(!isDefined(target))
+    if(!isDefined(target)) {
       assertmsg("No target found for zipline trigger located at: ( " + triggers[i].origin[0] + ", " + triggers[i].origin[1] + ", " + triggers[i].origin[2] + " )");
+    }
 
     while(isDefined(target)) {
       targets[targets.size] = target;
-      if(isDefined(target.target))
+      if(isDefined(target.target)) {
         target = getEnt(target.target, "targetname");
-      else
+      }
+      else {
         break;
+      }
     }
 
     zipline.targets = targets;
@@ -69,11 +72,13 @@ zip(useObj) {
     time = distance(carrier.origin, targets[i].origin) / 600;
 
     acceleration = 0.0;
-    if(i == 0)
+    if(i == 0) {
       acceleration = time * 0.2;
+    }
     carrier moveTo(targets[i].origin, time, acceleration);
-    if(carrier.angles != targets[i].angles)
+    if(carrier.angles != targets[i].angles) {
       carrier rotateTo(targets[i].angles, time * 0.8);
+    }
 
     wait(time);
   }

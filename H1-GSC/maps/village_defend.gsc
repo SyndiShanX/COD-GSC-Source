@@ -212,10 +212,12 @@ main() {
     level.minigunbreachbaglimit = 10;
   }
 
-  if(getdvar("village_defend_one_minute") != "1")
+  if(getdvar("village_defend_one_minute") != "1") {
     level.stopwatch = 4;
-  else
+  }
+  else {
     level.stopwatch = 1;
+  }
 
   level.encroachminwait = 3;
   level.encroachmaxwait = 5;
@@ -258,14 +260,18 @@ main() {
   level.delayingactionenemywaves = 0;
   level.activeairstrikes = 0;
 
-  if(level.gameskill == 0)
+  if(level.gameskill == 0) {
     level.enemywavesallowed = 1;
-  else if(level.gameskill == 1)
+  }
+  else if(level.gameskill == 1) {
     level.enemywavesallowed = 3;
-  else if(level.gameskill == 2)
+  }
+  else if(level.gameskill == 2) {
     level.enemywavesallowed = 4;
-  else if(level.gameskill == 3)
+  }
+  else if(level.gameskill == 3) {
     level.enemywavesallowed = 5;
+  }
 
   level.sniperfx = "weap_m40a3sniper_fire_village";
   level thread objectives();
@@ -319,8 +325,9 @@ stash_counter() {
     level.player waittill("weapon_fired");
     var_1 = level.player getcurrentweapon();
 
-    if(var_1 == "rpg_player")
+    if(var_1 == "rpg_player") {
       var_0++;
+    }
   }
 
   maps\_utility::giveachievement_wrapper("THE_MAN_IN_THE_HIGH_TOWER");
@@ -335,8 +342,9 @@ should_break_minigun_spin_hint() {
     return 1;
   }
 
-  if(!common_scripts\utility::flag("minigun_lesson_learned"))
+  if(!common_scripts\utility::flag("minigun_lesson_learned")) {
     return 0;
+  }
 
   return self == var_1;
 }
@@ -368,8 +376,9 @@ start_southern_hill() {
   level.price teleport(var_1.origin);
   var_2 = getEntArray("introHillTrig", "targetname");
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++)
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_2[var_3] notify("trigger");
+  }
 
   thread southern_hill_defense();
 }
@@ -390,8 +399,9 @@ start_minigun_fallback() {
   thread moveredshirts("redshirt_southern_start1", "redshirt_southern_start2");
   var_2 = getEntArray("introHillTrig", "targetname");
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++)
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_2[var_3] notify("trigger");
+  }
 
   thread southern_hill_smokescreens();
   thread saw_gunner_friendly();
@@ -574,8 +584,9 @@ start_seaknight() {
   wait 0.05;
   var_1 = getaiarray("axis");
 
-  for(var_2 = 0; var_2 < var_1.size; var_2++)
+  for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_1[var_2] delete();
+  }
 }
 
 moveredshirts(var_0, var_1) {
@@ -608,11 +619,13 @@ intro() {
 
   var_2 = getEntArray("introTrig", "targetname");
 
-  for(var_1 = 0; var_1 < var_2.size; var_1++)
+  for(var_1 = 0; var_1 < var_2.size; var_1++) {
     var_2[var_1] notify("trigger");
+  }
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1] allowedstances("stand", "crouch", "prone");
+  }
 
   wait 18;
   var_3 = getnode("price_intro_route", "targetname");
@@ -647,8 +660,9 @@ intro_church_tower_explode() {
   var_1 = getent("church_explosion_damage", "targetname");
 
   for(var_2 = 0; var_2 < 20; var_2++) {
-    if(level.player istouching(var_1))
+    if(level.player istouching(var_1)) {
       level.player kill();
+    }
 
     wait 0.05;
   }
@@ -669,11 +683,13 @@ intro_ridgeline_check(var_0, var_1) {
     wait 0.1;
   }
 
-  if(var_0 == level.price)
+  if(var_0 == level.price) {
     common_scripts\utility::flag_set("objective_on_ridgeline");
+  }
 
-  if(isplayer(var_0))
+  if(isplayer(var_0)) {
     common_scripts\utility::flag_set("objective_player_at_vantage_point");
+  }
 }
 
 intro_loudspeaker() {
@@ -686,8 +702,9 @@ intro_loudspeaker() {
   var_3 = 0;
 
   for(var_4 = 0; var_4 < var_0.size; var_4++) {
-    if(var_3 >= var_2)
+    if(var_3 >= var_2) {
       var_3 = 0;
+    }
 
     common_scripts\utility::play_sound_in_space(var_0[var_4], var_1[var_3].origin);
     wait(randomfloatrange(5, 8));
@@ -786,8 +803,9 @@ magic_sniper() {
         continue;
       }
 
-      if(var_6.script_noteworthy == "spawnHillFlank")
+      if(var_6.script_noteworthy == "spawnHillFlank") {
         common_scripts\utility::add_to_array(var_4, var_6);
+      }
     }
 
     if(var_4.size == 0) {
@@ -827,8 +845,9 @@ southern_hill_vanguard_setup() {
   var_0 = [];
   var_0 = getEntArray("vanguard", "targetname");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1].goalradius = 16;
+  }
 
   common_scripts\utility::flag_wait("objective_player_on_ridgeline");
 
@@ -850,8 +869,9 @@ southern_hill_vanguard_nav() {
   self endon("death");
   var_0 = undefined;
 
-  if(!isDefined(self.script_noteworthy))
+  if(!isDefined(self.script_noteworthy)) {
     var_0 = getnode("default_vanguard_dest", "targetname");
+  }
   else {
     var_1 = getnodearray("vanguard_node", "targetname");
 
@@ -971,10 +991,12 @@ southern_hill_killzone_sequence() {
   for(;;) {
     var_0[var_0.size] = var_2;
 
-    if(isDefined(var_2.target))
+    if(isDefined(var_2.target)) {
       var_2 = getent(var_2.target, "targetname");
-    else
+    }
+    else {
       break;
+    }
 
     wait 0.05;
   }
@@ -982,10 +1004,12 @@ southern_hill_killzone_sequence() {
   for(;;) {
     var_1[var_1.size] = var_3;
 
-    if(isDefined(var_3.target))
+    if(isDefined(var_3.target)) {
       var_3 = getent(var_3.target, "targetname");
-    else
+    }
+    else {
       break;
+    }
 
     wait 0.05;
   }
@@ -1146,8 +1170,9 @@ southern_hill_deathmonitor() {
   self waittill("death", var_0);
   common_scripts\utility::flag_set("southern_hill_action_started");
 
-  if(isDefined(var_0) && isplayer(var_0))
+  if(isDefined(var_0) && isplayer(var_0)) {
     level notify("player_killed_southern_hill_enemy");
+  }
 }
 
 southern_hill_damagemonitor() {
@@ -1331,20 +1356,25 @@ minigun_orders() {
   for(;;) {
     wait(var_1);
 
-    if(var_0 == 0)
+    if(var_0 == 0) {
       maps\_utility::radio_dialogue_queue("miniguncrashed");
+    }
 
-    if(var_0 == 1)
+    if(var_0 == 1) {
       maps\_utility::radio_dialogue_queue("gazminigunonline");
+    }
 
-    if(var_0 == 2)
+    if(var_0 == 2) {
       maps\_utility::radio_dialogue_queue("minigunarse");
+    }
 
-    if(var_0 == 3)
+    if(var_0 == 3) {
       maps\_utility::radio_dialogue_queue("priceminiguninheli");
+    }
 
-    if(var_0 == 4)
+    if(var_0 == 4) {
       level.gaz maps\_anim::anim_single_queue(level.gaz, "gazuseminigun");
+    }
 
     if(var_0 == 5) {
       maps\_utility::radio_dialogue_queue("priceminiguninhelimove");
@@ -1377,8 +1407,9 @@ minigun_fallback_shouting() {
         continue;
       }
 
-      if(var_4 == 0)
+      if(var_4 == 0) {
         maps\_utility::radio_dialogue_queue("detminigunfallbackremind1");
+      }
 
       if(var_4 == 1) {
         maps\_utility::radio_dialogue_queue("detminigunfallbackremind2");
@@ -1393,11 +1424,13 @@ minigun_fallback_shouting() {
       continue;
     }
 
-    if(var_7 == 0)
+    if(var_7 == 0) {
       maps\_utility::radio_dialogue_queue("detfallbackremind1");
+    }
 
-    if(var_7 == 1)
+    if(var_7 == 1) {
       maps\_utility::radio_dialogue_queue("detfallbackremind2");
+    }
 
     if(var_7 == 2) {
       maps\_utility::radio_dialogue_queue("detfallbackremind3");
@@ -1476,13 +1509,15 @@ minigun_primary_attack() {
 minigun_breach_deathmonitor() {
   self waittill("death", var_0);
 
-  if(isDefined(var_0) && isplayer(var_0))
+  if(isDefined(var_0) && isplayer(var_0)) {
     level notify("player_killed_minigun_breach_enemy");
+  }
 }
 
 minigun_breach_baglimit() {
-  for(var_0 = 0; var_0 < level.minigunbreachbaglimit; var_0++)
+  for(var_0 = 0; var_0 < level.minigunbreachbaglimit; var_0++) {
     level waittill("player_killed_minigun_breach_enemy");
+  }
 
   common_scripts\utility::flag_set("objective_minigun_baglimit_done");
   common_scripts\utility::flag_set("divert_for_clacker");
@@ -1506,11 +1541,13 @@ minigun_barbed_wire_detonate(var_0, var_1) {
     radiusdamage(var_4.origin, 256, 1000, 500);
   }
 
-  for(var_3 = 0; var_3 < var_2.size; var_3++)
+  for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_2[var_3] delete();
+  }
 
-  if(!common_scripts\utility::flag("enemy_breached_wire"))
+  if(!common_scripts\utility::flag("enemy_breached_wire")) {
     soundscripts\_snd::snd_message("aud_start_minigun_mix");
+  }
 
   common_scripts\utility::flag_set("enemy_breached_wire");
   level.magicsnipertalk = 1;
@@ -1527,8 +1564,9 @@ minigun_firstuse_check() {
       continue;
     }
 
-    if(level.player common_scripts\utility::is_player_gamepad_enabled())
+    if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
       level.player thread maps\_utility::display_hint("minigun_spin_left_trigger");
+    }
   }
 }
 
@@ -1570,8 +1608,9 @@ heli_destroyed(var_0) {
   if(isDefined(var_2) && var_2 == level.player) {
     level.fly_swatter_kill_count++;
 
-    if(level.fly_swatter_kill_count >= 8)
+    if(level.fly_swatter_kill_count >= 8) {
       maps\_utility::giveachievement_wrapper("FLYSWATTER");
+    }
   }
 }
 
@@ -1648,8 +1687,9 @@ hunt_player(var_0) {
   self endon("death");
   self endon("going_to_baitnode");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 waittill("unloaded");
+  }
 
   self.goalradius = 1800;
   self.pathenemyfightdist = 1800;
@@ -1658,10 +1698,12 @@ hunt_player(var_0) {
   var_2 = getnode("bait_crashsite", "targetname");
 
   while(self.goalradius > 640) {
-    if(level.player istouching(var_1))
+    if(level.player istouching(var_1)) {
       self setgoalnode(var_2);
-    else
+    }
+    else {
       self setgoalpos(level.player.origin);
+    }
 
     self.goalradius = self.goalradius * level.encroachrate;
     self waittill("goal");
@@ -1672,37 +1714,46 @@ hunt_player(var_0) {
 helidrop_clacker_divert(var_0) {
   self endon("death");
 
-  if(isDefined(var_0))
+  if(isDefined(var_0)) {
     var_0 waittill("unloaded");
+  }
 
   common_scripts\utility::flag_wait("player_entered_clacker_house_top_floor");
   self notify("going_to_baitnode");
   var_1 = undefined;
 
   if(isDefined(self.script_noteworthy)) {
-    if(self.script_noteworthy == "helidrop_bait_grassyknoll" && !common_scripts\utility::flag("farslope_exploded"))
+    if(self.script_noteworthy == "helidrop_bait_grassyknoll" && !common_scripts\utility::flag("farslope_exploded")) {
       var_1 = getnode("bait_farslope", "targetname");
-    else if(self.script_noteworthy == "helidrop_bait_grassyknoll" && common_scripts\utility::flag("farslope_exploded") && !common_scripts\utility::flag("nearslope_exploded"))
+    }
+    else if(self.script_noteworthy == "helidrop_bait_grassyknoll" && common_scripts\utility::flag("farslope_exploded") && !common_scripts\utility::flag("nearslope_exploded")) {
       var_1 = getnode("bait_nearslope", "targetname");
+    }
     else if(self.script_noteworthy == "helidrop_bait_grassyknoll" && common_scripts\utility::flag("farslope_exploded") && common_scripts\utility::flag("nearslope_exploded")) {
-      if(common_scripts\utility::flag("fall_back_to_barn"))
+      if(common_scripts\utility::flag("fall_back_to_barn")) {
         common_scripts\utility::flag_wait("storm_the_tavern");
+      }
 
       thread hunt_player();
       return;
     } else if(self.script_noteworthy == "helidrop_bait_crashsite" && !common_scripts\utility::flag("crashsite_exploded"))
       var_1 = getnode("bait_crashsite", "targetname");
-    else if(self.script_noteworthy == "helidrop_bait_crashsite" && common_scripts\utility::flag("crashsite_exploded") && !common_scripts\utility::flag("cliffside_exploded"))
+    else if(self.script_noteworthy == "helidrop_bait_crashsite" && common_scripts\utility::flag("crashsite_exploded") && !common_scripts\utility::flag("cliffside_exploded")) {
       var_1 = getnode("bait_crashsite", "targetname");
-    else if(self.script_noteworthy == "helidrop_bait_crashsite" && common_scripts\utility::flag("crashsite_exploded") && common_scripts\utility::flag("cliffside_exploded"))
+    }
+    else if(self.script_noteworthy == "helidrop_bait_crashsite" && common_scripts\utility::flag("crashsite_exploded") && common_scripts\utility::flag("cliffside_exploded")) {
       var_1 = getnode("bait_crashsite", "targetname");
-    else if(self.script_noteworthy == "helidrop_bait_trees" && !common_scripts\utility::flag("cliffside_exploded"))
+    }
+    else if(self.script_noteworthy == "helidrop_bait_trees" && !common_scripts\utility::flag("cliffside_exploded")) {
       var_1 = getnode("bait_trees", "targetname");
+    }
 
-    if(self.script_noteworthy == "helidrop_bait_trees" && common_scripts\utility::flag("cliffside_exploded") && !common_scripts\utility::flag("crashsite_exploded"))
+    if(self.script_noteworthy == "helidrop_bait_trees" && common_scripts\utility::flag("cliffside_exploded") && !common_scripts\utility::flag("crashsite_exploded")) {
       var_1 = getnode("bait_crashsite", "targetname");
-    else if(self.script_noteworthy == "spawnHillFlank")
+    }
+    else if(self.script_noteworthy == "spawnHillFlank") {
       var_1 = getnode("bait_nearslope", "targetname");
+    }
     else {
       self.goalradius = 2400;
 
@@ -1718,8 +1769,9 @@ helidrop_clacker_divert(var_0) {
       }
     }
   } else {
-    if(common_scripts\utility::flag("fall_back_to_barn"))
+    if(common_scripts\utility::flag("fall_back_to_barn")) {
       common_scripts\utility::flag_wait("storm_the_tavern");
+    }
 
     thread hunt_player();
     return;
@@ -1729,13 +1781,15 @@ helidrop_clacker_divert(var_0) {
   wait 0.5;
   var_3 = distance(var_1.origin, self.origin);
 
-  if(level.divertclackerrange < var_2 && var_3 < var_2)
+  if(level.divertclackerrange < var_2 && var_3 < var_2) {
     self setgoalnode(var_1);
+  }
 
   common_scripts\utility::flag_wait("fall_back_to_barn");
 
-  if(common_scripts\utility::flag("fall_back_to_barn"))
+  if(common_scripts\utility::flag("fall_back_to_barn")) {
     common_scripts\utility::flag_wait("storm_the_tavern");
+  }
 
   thread hunt_player();
 }
@@ -1747,8 +1801,9 @@ tavern_storming_delay() {
   wait 5;
   soundscripts\_snd::snd_message("start_fall_back_to_barn_mix");
 
-  if(!common_scripts\utility::flag("player_running_to_farm"))
+  if(!common_scripts\utility::flag("player_running_to_farm")) {
     common_scripts\utility::flag_clear("can_save");
+  }
 
   wait 55;
   common_scripts\utility::flag_set("storm_the_tavern");
@@ -1762,13 +1817,15 @@ tavern_storming_hints() {
     maps\_utility::radio_dialogue_queue("fallbacktofarm1");
     wait 1;
 
-    if(var_0 < 1)
+    if(var_0 < 1) {
       level.gaz maps\_anim::anim_single_queue(level.gaz, "fallbackgeneric");
+    }
 
     wait 1;
 
-    if(var_0 < 1)
+    if(var_0 < 1) {
       level.gaz maps\_anim::anim_single_queue(level.gaz, "fallbacktofarm3");
+    }
 
     wait 12;
     maps\_utility::radio_dialogue_queue("fallbacktofarm2");
@@ -1864,10 +1921,12 @@ clacker_marker_setup() {
   for(;;) {
     var_0[var_0.size] = var_1;
 
-    if(isDefined(var_1.target))
+    if(isDefined(var_1.target)) {
       var_1 = getent(var_1.target, "targetname");
-    else
+    }
+    else {
       break;
+    }
 
     wait 0.05;
   }
@@ -1888,14 +1947,16 @@ clacker_standby(var_0) {
     var_1 sethintstring(&"SCRIPT_PLATFORM_HINT_GET_DETONATOR");
     var_1 waittill("trigger");
 
-    while(common_scripts\utility::flag("putting_clacker_away"))
+    while(common_scripts\utility::flag("putting_clacker_away")) {
       wait 0.05;
+    }
 
     level notify("picked_up_new_clacker");
     var_4 = level.player getcurrentweapon();
 
-    if(var_4 != "c4")
+    if(var_4 != "c4") {
       level.player.clacker_current_weapon = var_4;
+    }
 
     thread clacker_noc4(var_1, var_2);
     thread clacker_enable(var_1, var_2, var_0);
@@ -1911,8 +1972,9 @@ clacker_markers(var_0, var_1) {
     }
 
     while(isDefined(var_0) && level.player istouching(var_0)) {
-      if(!isDefined(var_2) || var_2.size <= 0)
+      if(!isDefined(var_2) || var_2.size <= 0) {
         var_2 = clacker_markers_init_fx(var_1);
+      }
 
       wait 0.05;
     }
@@ -1920,8 +1982,9 @@ clacker_markers(var_0, var_1) {
     if(isDefined(var_2)) {
       var_3 = var_2.size;
 
-      for(var_4 = 0; var_4 < var_3; var_4++)
+      for(var_4 = 0; var_4 < var_3; var_4++) {
         var_2[var_4] delete();
+      }
 
       var_2 = undefined;
       setthreatbias("player", "axis", 1000);
@@ -1956,11 +2019,13 @@ clacker_markers_monitor_fx() {
   for(;;) {
     var_2 = level.player getcurrentweapon();
 
-    if(var_2 != "c4")
+    if(var_2 != "c4") {
       level.player.clacker_current_weapon = var_2;
+    }
 
-    if(common_scripts\utility::flag("putting_clacker_away"))
+    if(common_scripts\utility::flag("putting_clacker_away")) {
       var_2 = "putting_clacker_away";
+    }
 
     if(var_2 == "c4") {
       if(!var_1) {
@@ -1991,8 +2056,9 @@ clacker_enable(var_0, var_1, var_2) {
     common_scripts\utility::flag_clear(var_3);
     thread clacker_fire(var_0, var_1, var_2);
 
-    while(level.player getcurrentweapon() != "c4")
+    while(level.player getcurrentweapon() != "c4") {
       wait 0.05;
+    }
 
     common_scripts\utility::flag_clear("got_the_clacker");
   }
@@ -2002,23 +2068,26 @@ clacker_drop(var_0, var_1) {
   while(isDefined(var_1) && level.player istouching(var_1) && !common_scripts\utility::flag("got_the_clacker")) {
     var_2 = level.player getcurrentweapon();
 
-    if(var_2 != "c4")
+    if(var_2 != "c4") {
       thread clacker_disable(var_0, var_1);
+    }
 
     wait 0.05;
   }
 }
 
 clacker_notouch(var_0, var_1) {
-  while(isDefined(var_1) && level.player istouching(var_1))
+  while(isDefined(var_1) && level.player istouching(var_1)) {
     wait 0.1;
+  }
 
   thread clacker_disable(var_0, var_1);
 }
 
 clacker_noc4(var_0, var_1) {
-  while(level.player getcurrentweapon() != "c4")
+  while(level.player getcurrentweapon() != "c4") {
     wait 0.05;
+  }
 
   while(isDefined(var_1) && level.player istouching(var_1)) {
     if(level.player getcurrentweapon() != "c4") {
@@ -2073,17 +2142,21 @@ clacker_fire(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
     return;
   }
-  if(self.script_noteworthy == "detonator_nearslope")
+  if(self.script_noteworthy == "detonator_nearslope") {
     common_scripts\utility::flag_set("nearslope_exploded");
+  }
 
-  if(self.script_noteworthy == "detonator_farslope")
+  if(self.script_noteworthy == "detonator_farslope") {
     common_scripts\utility::flag_set("farslope_exploded");
+  }
 
-  if(self.script_noteworthy == "detonator_crashsite")
+  if(self.script_noteworthy == "detonator_crashsite") {
     common_scripts\utility::flag_set("crashsite_exploded");
+  }
 
-  if(self.script_noteworthy == "detonator_cliffside")
+  if(self.script_noteworthy == "detonator_cliffside") {
     common_scripts\utility::flag_set("cliffside_exploded");
+  }
 
   thread killzone_detonation(var_2, level.player);
   earthquake(0.5, 2, level.player.origin, 1650);
@@ -2109,8 +2182,9 @@ clacker_fire(var_0, var_1, var_2) {
   for(var_6 = 0; var_6 < var_7.size; var_6++) {
     var_8 = var_7[var_6];
 
-    if(var_8 == var_4)
+    if(var_8 == var_4) {
       var_7 = common_scripts\utility::array_remove(var_7, var_8);
+    }
   }
 
   var_1 delete();
@@ -2121,8 +2195,9 @@ clacker_fire(var_0, var_1, var_2) {
   for(var_6 = 0; var_6 < var_7.size; var_6++) {
     var_8 = var_7[var_6];
 
-    if(isDefined(var_8))
+    if(isDefined(var_8)) {
       objective_additionalposition(5, var_6, var_8.origin);
+    }
   }
 
   var_0 delete();
@@ -2146,16 +2221,19 @@ player_interior_detect_init() {
 
   for(;;) {
     for(var_2 = 0; var_2 < var_0.size; var_2++) {
-      if(level.player istouching(var_0[var_2]))
+      if(level.player istouching(var_0[var_2])) {
         level.playerindoors = 1;
-      else
+      }
+      else {
         var_1++;
+      }
 
       wait 0.5;
     }
 
-    if(var_1 == var_0.size)
+    if(var_1 == var_0.size) {
       level.playerindoors = 0;
+    }
 
     var_1 = 0;
     wait 0.5;
@@ -2224,8 +2302,9 @@ tanks_init() {
     common_scripts\utility::flag_set("objective_armor_arrival");
     common_scripts\utility::flag_wait("got_the_javelin");
 
-    for(var_0 = 1; var_0 < 5; var_0++)
+    for(var_0 = 1; var_0 < 5; var_0++) {
       thread tanks_deploy("tank_backyard_0" + var_0);
+    }
   }
 }
 
@@ -2287,8 +2366,9 @@ tanks_deploy(var_0) {
     common_scripts\utility::flag_set("kill_jav_glow");
   }
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     target_remove(var_1);
+  }
 
   maps\_utility::arcademode_kill(var_1.origin, "explosive", 1000);
 }
@@ -2409,17 +2489,21 @@ return_trip_friendly_boost() {
   var_0 = getaiarray("allies");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    if(level.gameskill == 0)
+    if(level.gameskill == 0) {
       var_0[var_1].baseaccuracy = 12;
+    }
 
-    if(level.gameskill == 1)
+    if(level.gameskill == 1) {
       var_0[var_1].baseaccuracy = 6;
+    }
 
-    if(level.gameskill == 2)
+    if(level.gameskill == 2) {
       var_0[var_1].baseaccuracy = 2;
+    }
 
-    if(level.gameskill == 3)
+    if(level.gameskill == 3) {
       var_0[var_1].baseaccuracy = 1.5;
+    }
   }
 }
 
@@ -2479,8 +2563,9 @@ objectives() {
   var_2 = getent("farm_reached_trig", "targetname");
   var_3 = getent("extraction_point", "targetname");
 
-  if(maps\_utility::is_default_start())
+  if(maps\_utility::is_default_start()) {
     wait 25;
+  }
 
   common_scripts\utility::flag_wait("objective_price_orders_southern_hill");
   common_scripts\utility::flag_set("aa_southernhill");
@@ -2524,8 +2609,9 @@ objectives() {
   maps\_utility::arcademode_checkpoint(3.5, "c");
   thread farm_javelin_nag();
 
-  if(getdvar("start") != "final_battle" && getdvar("start") != "seaknight" && getdvar("start") != "javelin")
+  if(getdvar("start") != "final_battle" && getdvar("start") != "seaknight" && getdvar("start") != "javelin") {
     var_2 waittill("trigger");
+  }
 
   common_scripts\utility::flag_set("farm_reached");
   objective_state(6, "done");
@@ -2575,8 +2661,9 @@ objectives() {
   var_14[2] = level.redshirt;
   var_14[3] = level.sasgunner;
 
-  for(var_4 = 0; var_4 < var_14.size; var_4++)
+  for(var_4 = 0; var_4 < var_14.size; var_4++) {
     var_14[var_4] thread friendly_player_tracking_nav();
+  }
 
   common_scripts\utility::flag_wait("lz_reached");
   level notify("stop_airstrike_reminders");
@@ -2620,16 +2707,19 @@ autosaves_return_trip() {
 }
 
 autosaves_safety(var_0, var_1, var_2) {
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 0;
+  }
 
   if(var_0 <= var_1) {
     maps\_utility::autosave_or_timeout("return_trip_section", 10);
 
-    if(var_2)
+    if(var_2) {
       wait 3;
-    else
+    }
+    else {
       wait 10;
+    }
 
     common_scripts\utility::flag_clear("can_save");
     wait 2;
@@ -2642,8 +2732,9 @@ objective_stopwatch() {
   level notify("start stopwatch");
   var_0 = 1200;
 
-  if(isDefined(level.stopwatch))
+  if(isDefined(level.stopwatch)) {
     var_0 = level.stopwatch * 60;
+  }
 
   level.hudelem = maps\_hud_util::get_countdown_hud(undefined, undefined, undefined, undefined, var_0);
   level.hudelem setpulsefx(30, 900000, 700);
@@ -2725,31 +2816,37 @@ init_warning_font_color() {
 change_color_with_notify(var_0, var_1, var_2, var_3) {
   self endon("death");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self endon(var_3);
+  }
 
   self waittill(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     self.color = var_1;
+  }
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     self.glowcolor = var_2;
+  }
 }
 
 fading_pulse_effect(var_0, var_1, var_2, var_3) {
   self endon("death");
 
-  if(isDefined(var_3))
+  if(isDefined(var_3)) {
     self endon(var_3);
+  }
 
   var_4 = 0;
 
   for(;;) {
-    if(level.hudelem.alpha >= 1)
+    if(level.hudelem.alpha >= 1) {
       var_4 = var_1;
-    else
+    }
+    else {
       var_4 = var_2;
+    }
 
     level.hudelem fadeovertime(var_0);
     level.hudelem.alpha = var_4;
@@ -2770,11 +2867,13 @@ countdown_events() {
   if(getdvar("village_defend_one_minute") != "1") {
     wait 60;
 
-    if(!common_scripts\utility::flag("reached_evac_point") && !common_scripts\utility::flag("lz_reached"))
+    if(!common_scripts\utility::flag("reached_evac_point") && !common_scripts\utility::flag("lz_reached")) {
       thread countdown_speech("almosttherethree");
+    }
 
-    if(!common_scripts\utility::flag("lz_reached"))
+    if(!common_scripts\utility::flag("lz_reached")) {
       thread countdown_speech("gettolandingzone");
+    }
 
     wait 60;
     thread countdown_speech("twominutesleft");
@@ -2793,14 +2892,16 @@ countdown_events() {
 
   thread countdown_speech("oneminutebingo");
 
-  if(!common_scripts\utility::flag("lz_reached"))
+  if(!common_scripts\utility::flag("lz_reached")) {
     thread countdown_speech("bottomofthehill");
+  }
 
   wait 30;
   thread countdown_speech("thirtyseconds");
 
-  if(!common_scripts\utility::flag("lz_reached"))
+  if(!common_scripts\utility::flag("lz_reached")) {
     thread countdown_speech("gettothelzgogo");
+  }
 
   wait 30;
 
@@ -2836,8 +2937,9 @@ seaknight_music() {
 }
 
 rescue_chopper() {
-  if(getdvar("village_defend_one_minute") != "1")
+  if(getdvar("village_defend_one_minute") != "1") {
     common_scripts\utility::flag_wait("rescue_chopper_ingress");
+  }
 
   thread maps\village_defend_code::seaknight();
   common_scripts\utility::flag_wait("seaknight_can_be_boarded");
@@ -2848,10 +2950,12 @@ rescue_chopper() {
   for(;;) {
     wait 0.05;
 
-    if(distance(level.player.origin, var_0.origin) >= var_0.radius)
+    if(distance(level.player.origin, var_0.origin) >= var_0.radius) {
       continue;
-    else
+    }
+    else {
       break;
+    }
   }
 
   if(!common_scripts\utility::flag("seaknight_unboardable")) {
@@ -2861,8 +2965,9 @@ rescue_chopper() {
     thread rescue_teleport_friendlies();
     thread rescue_failsafe();
 
-    if(isDefined(level.hudelem))
+    if(isDefined(level.hudelem)) {
       maps\_hud_util::destroy_countdown_hud(level.hudelem);
+    }
 
     common_scripts\utility::flag_wait("outtahere");
     wait 2;
@@ -2974,10 +3079,12 @@ killzone_detonation(var_0, var_1) {
     var_4 playSound(var_6);
     earthquake(0.1, 0.5, level.player.origin, 1250);
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       radiusdamage(var_4.origin, 240, 100500, 100500);
-    else
+    }
+    else {
       radiusdamage(var_4.origin, 240, 100500, 100500, var_1);
+    }
 
     var_7 = isDefined(var_1) && var_1 == level.player;
     var_8 = distancesquared(level.player.origin, var_4.origin) <= 2250000;
@@ -2987,18 +3094,22 @@ killzone_detonation(var_0, var_1) {
       var_10 = common_scripts\utility::ter_op(var_7, "generic_attack_medium_500", "generic_attack_heavy_500");
       var_11 = common_scripts\utility::ter_op(var_7, "generic_attack_heavy_500", "generic_attack_heavy_1000");
 
-      if(var_3 == var_0.size - 1)
+      if(var_3 == var_0.size - 1) {
         level.player playrumbleonentity(var_11);
-      else if(randomint(3) == 0)
+      }
+      else if(randomint(3) == 0) {
         level.player playrumbleonentity(var_9);
-      else
+      }
+      else {
         level.player playrumbleonentity(var_10);
+      }
     }
 
     var_2++;
 
-    if(var_2 >= level.killzonefxprogram.size)
+    if(var_2 >= level.killzonefxprogram.size) {
       var_2 = 0;
+    }
 
     wait(randomfloatrange(0.05, 0.15));
   }
@@ -3030,8 +3141,9 @@ killzonefxprogram() {
 }
 
 followscriptedpath(var_0, var_1, var_2) {
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   wait(var_1);
   var_3 = [];
@@ -3053,16 +3165,19 @@ followscriptedpath(var_0, var_1, var_2) {
     var_0 = var_3[var_4];
     self setgoalnode(var_0);
 
-    if(isDefined(var_0.radius))
+    if(isDefined(var_0.radius)) {
       self.goalradius = var_0.radius;
+    }
 
-    if(isDefined(var_0.script_stance))
+    if(isDefined(var_0.script_stance)) {
       self allowedstances(var_0.script_stance);
+    }
 
     self waittill("goal");
 
-    if(!isDefined(var_0.target))
+    if(!isDefined(var_0.target)) {
       self notify("reached_last_node_in_chain");
+    }
 
     if(!isDefined(var_0.script_noteworthy)) {
       continue;
@@ -3084,8 +3199,9 @@ friendly_setup() {
   common_scripts\utility::flag_wait("objective_price_orders_minigun");
   var_0 = getaiarray("allies");
 
-  for(var_1 = 0; var_1 < var_0.size; var_1++)
+  for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1].grenadeammo = 5;
+  }
 }
 
 hero() {
@@ -3104,8 +3220,9 @@ encroach_start(var_0, var_1, var_2, var_3, var_4) {
 
   for(var_8 = 0; var_8 < var_5.size; var_8++) {
     if(isDefined(var_5[var_8].script_noteworthy)) {
-      if(var_5[var_8].script_noteworthy == var_3)
+      if(var_5[var_8].script_noteworthy == var_3) {
         var_6[var_6.size] = var_5[var_8];
+      }
     }
   }
 
@@ -3116,21 +3233,24 @@ encroach_start(var_0, var_1, var_2, var_3, var_4) {
     if(maps\_utility::spawn_failed(var_7)) {
       return;
     }
-    if(common_scripts\utility::flag("no_more_grenades"))
+    if(common_scripts\utility::flag("no_more_grenades")) {
       self.grenadeammo = 0;
+    }
 
     var_7 thread encroach_nav(var_0, var_2);
     var_9 = getent("minigun", "targetname");
     var_10 = var_9 getturretowner();
 
     if(isDefined(var_4)) {
-      if(var_4 == "southern_hill")
+      if(var_4 == "southern_hill") {
         var_7 thread southern_hill_deathmonitor();
+      }
     }
 
     if(isDefined(var_4)) {
-      if(var_4 == "minigun_breach")
+      if(var_4 == "minigun_breach") {
         var_7 thread minigun_breach_deathmonitor();
+      }
     }
   }
 }
@@ -3166,8 +3286,9 @@ encroach_nav(var_0, var_1) {
     common_scripts\utility::flag_wait("divert_for_clacker");
   }
 
-  if(common_scripts\utility::flag("fall_back_to_barn"))
+  if(common_scripts\utility::flag("fall_back_to_barn")) {
     common_scripts\utility::flag_wait("storm_the_tavern");
+  }
 
   thread hunt_player();
   thread helidrop_clacker_divert();
@@ -3187,17 +3308,21 @@ southern_hill_mortar_detonate(var_0) {
 begin_delaying_action() {
   common_scripts\utility::flag_wait("arm_delaying_action");
 
-  if(level.gameskill == 0)
+  if(level.gameskill == 0) {
     level.detectioncycletime = 60;
+  }
 
-  if(level.gameskill == 1)
+  if(level.gameskill == 1) {
     level.detectioncycletime = 25;
+  }
 
-  if(level.gameskill == 2)
+  if(level.gameskill == 2) {
     level.detectioncycletime = 22;
+  }
 
-  if(level.gameskill == 3)
+  if(level.gameskill == 3) {
     level.detectioncycletime = 19;
+  }
 
   var_0 = getent("delaying_action_trigger", "targetname");
   var_0 waittill("trigger");
@@ -3224,8 +3349,9 @@ player_detection_collect(var_0) {
   var_1 = getEntArray(var_0.target, "targetname");
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_1.size; var_3++)
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_2 = getEntArray(var_1[var_3].target, "targetname");
+  }
 
   return var_1;
 }
@@ -3256,11 +3382,13 @@ player_detection_loop(var_0, var_1, var_2) {
       if(level.player istouching(var_0)) {
         thread ai_spawnprocessor(var_0, var_1, var_2);
 
-        if(common_scripts\utility::flag("objective_all_tanks_destroyed"))
+        if(common_scripts\utility::flag("objective_all_tanks_destroyed")) {
           level.delayingactionenemywaves++;
+        }
 
-        if(level.delayingactionenemywaves >= level.enemywavesallowed)
+        if(level.delayingactionenemywaves >= level.enemywavesallowed) {
           common_scripts\utility::flag_set("engage_delaying_action");
+        }
       }
 
       wait(level.detectioncycletime);
@@ -3271,8 +3399,9 @@ player_detection_loop(var_0, var_1, var_2) {
 }
 
 ai_spawnprocessor(var_0, var_1, var_2) {
-  for(var_3 = 0; var_3 < var_1.size; var_3++)
+  for(var_3 = 0; var_3 < var_1.size; var_3++) {
     thread ai_spawn_control_set_create(var_1[var_3], var_0, var_2[var_3]);
+  }
 }
 
 ai_spawn_control_set_create(var_0, var_1, var_2) {
@@ -3284,8 +3413,9 @@ ai_spawn_control_set_create(var_0, var_1, var_2) {
     if(!isDefined(var_5.targetname)) {
       continue;
     }
-    if(var_5.targetname == var_0.target)
+    if(var_5.targetname == var_0.target) {
       var_3[var_3.size] = var_5;
+    }
   }
 
   var_6 = undefined;
@@ -3328,8 +3458,9 @@ ai_spawn_and_attack(var_0, var_1, var_2, var_3) {
     wait(level.smokebuildtime);
     var_4 = length(level.player.origin - var_1.origin);
 
-    if(var_4 < level.smokespawnsafedist)
+    if(var_4 < level.smokespawnsafedist) {
       return;
+    }
   }
 
   for(var_5 = 0; var_5 < var_0.size; var_5++) {
@@ -3343,8 +3474,9 @@ ai_spawn_and_attack(var_0, var_1, var_2, var_3) {
       if(maps\_utility::spawn_failed(var_8)) {
         continue;
       }
-      if(common_scripts\utility::flag("no_more_grenades"))
+      if(common_scripts\utility::flag("no_more_grenades")) {
         self.grenadeammo = 0;
+      }
 
       var_8 thread ai_flank_route(var_2);
       var_8 thread ai_reacquire_player(var_3);
@@ -3359,8 +3491,9 @@ ai_flank_route(var_0) {
   for(;;) {
     self setgoalnode(var_0);
 
-    if(isDefined(var_0.radius))
+    if(isDefined(var_0.radius)) {
       self.goalradius = var_0.radius;
+    }
 
     self waittill("goal");
 
@@ -3370,8 +3503,9 @@ ai_flank_route(var_0) {
     }
 
     if(!isDefined(var_0.target)) {
-      if(common_scripts\utility::flag("fall_back_to_barn"))
+      if(common_scripts\utility::flag("fall_back_to_barn")) {
         common_scripts\utility::flag_wait("storm_the_tavern");
+      }
 
       thread hunt_player();
       break;
@@ -3392,8 +3526,9 @@ ai_reacquire_player(var_0) {
         self notify("reacquire_player");
         wait 0.5;
 
-        if(common_scripts\utility::flag("fall_back_to_barn"))
+        if(common_scripts\utility::flag("fall_back_to_barn")) {
           common_scripts\utility::flag_wait("storm_the_tavern");
+        }
 
         thread hunt_player();
         break;
@@ -3467,14 +3602,17 @@ airstrike_hint_pc() {
 clear_hints() {
   maps\_utility::hint_fade(0);
 
-  if(isDefined(level.iconelem))
+  if(isDefined(level.iconelem)) {
     level.iconelem maps\_hud_util::destroyelem();
+  }
 
-  if(isDefined(level.iconelem2))
+  if(isDefined(level.iconelem2)) {
     level.iconelem2 maps\_hud_util::destroyelem();
+  }
 
-  if(isDefined(level.iconelem3))
+  if(isDefined(level.iconelem3)) {
     level.iconelem3 maps\_hud_util::destroyelem();
+  }
 
   level notify("clearing_hints");
 }
@@ -3498,8 +3636,9 @@ airstrike_support() {
 
     thread airstrike_support_activate();
 
-    while(level.player getcurrentweapon() == "airstrike_support")
+    while(level.player getcurrentweapon() == "airstrike_support") {
       wait 0.05;
+    }
 
     level notify("air_support_canceled");
     thread airstrike_support_deactive();
@@ -3520,8 +3659,9 @@ airstrike_support_deactive() {
   level endon("air_support_activated");
   wait 0.05;
 
-  if(isDefined(level.airstrikeattackarrow))
+  if(isDefined(level.airstrikeattackarrow)) {
     level.airstrikeattackarrow delete();
+  }
 }
 
 airstrike_support_paint_target() {
@@ -3532,20 +3672,25 @@ airstrike_support_paint_target() {
   level.activeairstrikes++;
   var_0 = level.player getweaponammostock("airstrike_support");
 
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     level notify("no_airstrike_ammo");
-  else if(var_0 == 0)
+  }
+  else if(var_0 == 0) {
     level notify("no_airstrike_ammo");
+  }
 
   thread airstrike_support_mark();
   var_1 = level.player getweaponslistprimaries();
 
-  if(isDefined(var_1[0]) && var_1[0] == level.playerpreviousweapon)
+  if(isDefined(var_1[0]) && var_1[0] == level.playerpreviousweapon) {
     level.player switchtoweapon(var_1[0]);
-  else if(isDefined(var_1[1]) && var_1[1] == level.playerpreviousweapon)
+  }
+  else if(isDefined(var_1[1]) && var_1[1] == level.playerpreviousweapon) {
     level.player switchtoweapon(var_1[1]);
-  else
+  }
+  else {
     level.player switchtoweapon(var_1[0]);
+  }
 
   var_2 = level.airstrikeattackarrow.origin;
   thread airstrike_support_launch(var_2);
@@ -3554,17 +3699,21 @@ airstrike_support_paint_target() {
   level.airstrikesupportcallsremaining--;
   thread airstrike_support_weapon_refresh();
 
-  if(level.airstrikesupportcallsremaining % 2 == 0)
+  if(level.airstrikesupportcallsremaining % 2 == 0) {
     maps\_utility::radio_dialogue_queue("airstrikewarning");
-  else if(level.airstrikesupportcallsremaining % 2 != 0)
+  }
+  else if(level.airstrikesupportcallsremaining % 2 != 0) {
     maps\_utility::radio_dialogue_queue("airstrikewarning");
-  else if(level.airstrikesupportcallsremaining <= 0)
+  }
+  else if(level.airstrikesupportcallsremaining <= 0) {
     maps\_utility::radio_dialogue_queue("airstrikewarning");
+  }
 }
 
 airstrike_support_weapon_refresh() {
-  while(level.player getcurrentweapon() == "airstrike_support")
+  while(level.player getcurrentweapon() == "airstrike_support") {
     waitframe();
+  }
 
   var_0 = level.player getweaponammostock("airstrike_support");
   var_0--;
@@ -3630,8 +3779,9 @@ callstrike(var_0, var_1, var_2, var_3) {
   var_15 = abs(var_15 / 2 + var_10);
   var_17 = var_15 / var_12;
 
-  if(isDefined(var_3) && var_3)
+  if(isDefined(var_3) && var_3) {
     level thread maps\_utility::notify_delay("airstrike_inbound", max(var_17 - 2.0, 0));
+  }
 
   if(isDefined(var_1)) {
     level thread doplanestrike(var_0, var_13 + (0, 0, randomint(500)), var_14 + (0, 0, randomint(500)), var_17, var_16, var_2, var_1);
@@ -3678,10 +3828,12 @@ doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 playcontrail() {
   self endon("death");
 
-  if(!isDefined(level.mapcenter))
+  if(!isDefined(level.mapcenter)) {
     var_0 = (0, 0, 0);
-  else
+  }
+  else {
     var_0 = level.mapcenter;
+  }
 
   while(isDefined(self)) {
     if(distance(self.origin, var_0) <= 8000) {
@@ -3697,8 +3849,9 @@ playcontrail() {
 callstrike_planesound(var_0, var_1) {
   level.player endon("death");
 
-  while(!targetisclose(var_0, level.player.origin))
+  while(!targetisclose(var_0, level.player.origin)) {
     wait 0.05;
+  }
 
   var_0 maps\_utility::play_sound_on_entity("veh_mig29_passby");
 }
@@ -3708,29 +3861,35 @@ targetisinfront(var_0, var_1) {
   var_3 = vectornormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
-  if(var_4 > 0)
+  if(var_4 > 0) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 targetisclose(var_0, var_1) {
   var_2 = targetisinfront(var_0, var_1);
 
-  if(var_2)
+  if(var_2) {
     var_3 = 1;
-  else
+  }
+  else {
     var_3 = -1;
+  }
 
   var_4 = common_scripts\utility::flat_origin(var_0.origin);
   var_5 = var_4 + maps\_utility::vector_multiply(anglesToForward(common_scripts\utility::flat_angle(var_0.angles)), var_3 * 100000);
   var_6 = pointonsegmentnearesttopoint(var_4, var_5, var_1);
   var_7 = distance(var_4, var_6);
 
-  if(var_7 < 10500)
+  if(var_7 < 10500) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 callstrike_bombeffect(var_0, var_1, var_2) {
@@ -3780,15 +3939,18 @@ callstrike_bombeffect(var_0, var_1, var_2) {
 playsoundinspace(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", (0, 0, 1));
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = self.origin;
+  }
 
   var_3.origin = var_1;
 
-  if(isDefined(var_2) && var_2)
+  if(isDefined(var_2) && var_2) {
     var_3 playsoundasmaster(var_0);
-  else
+  }
+  else {
     var_3 playSound(var_0);
+  }
 
   wait 10.0;
   var_3 delete();
@@ -3839,8 +4001,9 @@ do_kaboom(var_0) {
   common_scripts\utility::flag_set("southern_hill_killzone_detonate");
   wait 0.5;
 
-  if(!common_scripts\utility::flag("southern_hill_action_started"))
+  if(!common_scripts\utility::flag("southern_hill_action_started")) {
     common_scripts\utility::flag_set("southern_hill_action_started");
+  }
 }
 
 toggle_detonator(var_0, var_1) {

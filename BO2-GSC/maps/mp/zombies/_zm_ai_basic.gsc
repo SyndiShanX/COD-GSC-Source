@@ -27,25 +27,30 @@ find_flesh() {
   self maps\mp\zombies\_zm_spawner::zombie_history("find flesh -> start");
   self.goalradius = 32;
 
-  if(isDefined(self.custom_goalradius_override))
+  if(isDefined(self.custom_goalradius_override)) {
     self.goalradius = self.custom_goalradius_override;
+  }
 
   while(true) {
     zombie_poi = undefined;
 
-    if(isDefined(level.zombietheaterteleporterseeklogicfunc))
+    if(isDefined(level.zombietheaterteleporterseeklogicfunc)) {
       self[[level.zombietheaterteleporterseeklogicfunc]]();
+    }
 
-    if(isDefined(level._poi_override))
+    if(isDefined(level._poi_override)) {
       zombie_poi = self[[level._poi_override]]();
+    }
 
-    if(!isDefined(zombie_poi))
+    if(!isDefined(zombie_poi)) {
       zombie_poi = self get_zombie_point_of_interest(self.origin);
+    }
 
     players = get_players();
 
-    if(!isDefined(self.ignore_player) || players.size == 1)
+    if(!isDefined(self.ignore_player) || players.size == 1) {
       self.ignore_player = [];
+    }
     else if(!isDefined(level._should_skip_ignore_player_logic) || ![
         [level._should_skip_ignore_player_logic]
       ]()) {
@@ -56,8 +61,9 @@ find_flesh() {
           self.ignore_player[i].ignore_counter = 0;
           self.ignore_player = arrayremovevalue(self.ignore_player, self.ignore_player[i]);
 
-          if(!isDefined(self.ignore_player))
+          if(!isDefined(self.ignore_player)) {
             self.ignore_player = [];
+          }
 
           i = 0;
           continue;
@@ -111,15 +117,18 @@ find_flesh() {
 
     self thread attractors_generated_listener();
 
-    if(isDefined(level._zombie_path_timer_override))
+    if(isDefined(level._zombie_path_timer_override)) {
       self.zombie_path_timer = [
+    }
         [level._zombie_path_timer_override]
       ]();
-    else
+    else {
       self.zombie_path_timer = gettime() + randomfloatrange(1, 3) * 1000;
+    }
 
-    while(gettime() < self.zombie_path_timer)
+    while(gettime() < self.zombie_path_timer) {
       wait 0.1;
+    }
 
     self notify("path_timer_done");
     self maps\mp\zombies\_zm_spawner::zombie_history("find flesh -> bottom of loop");
@@ -213,8 +222,9 @@ start_inert(in_place) {
   self playSound("zmb_zombie_go_inert");
 
   if(isDefined(self.barricade_enter) && self.barricade_enter) {
-    while(isDefined(self.barricade_enter) && self.barricade_enter)
+    while(isDefined(self.barricade_enter) && self.barricade_enter) {
       wait 0.1;
+    }
   } else if(isDefined(self.ai_state) && self.ai_state == "zombie_goto_entrance") {
     self notify("stop_zombie_goto_entrance");
     self maps\mp\zombies\_zm_spawner::reset_attack_spot();
@@ -230,8 +240,9 @@ start_inert(in_place) {
     self waittill("risen", find_flesh_struct_string);
 
     if(self maps\mp\zombies\_zm_spawner::should_skip_teardown(find_flesh_struct_string)) {
-      if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area))
+      if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area)) {
         self waittill("completed_emerging_into_playable_area");
+      }
 
       self notify("stop_find_flesh");
       self notify("zombie_acquire_enemy");
@@ -239,12 +250,14 @@ start_inert(in_place) {
   }
 
   if(isDefined(self.is_traversing) && self.is_traversing) {
-    while(self isinscriptedstate())
+    while(self isinscriptedstate()) {
       wait 0.1;
+    }
   }
 
-  if(isDefined(self.doing_equipment_attack) && self.doing_equipment_attack)
+  if(isDefined(self.doing_equipment_attack) && self.doing_equipment_attack) {
     self stopanimscripted();
+  }
 
   if(isDefined(self.inert_delay)) {
     self[[self.inert_delay]]();
@@ -275,16 +288,19 @@ inert_think(in_place) {
     } else {
       substate = get_inert_substate();
 
-      if(isDefined(level.inert_substate_override))
+      if(isDefined(level.inert_substate_override)) {
         substate = self[[level.inert_substate_override]](substate);
+      }
 
       self setanimstatefromasd("zm_inert", substate);
       self maps\mp\zombies\_zm_spawner::zombie_history("zm_inert ASD " + gettime());
 
-      if(substate == "inert3" || substate == "inert4" || substate == "inert5" || substate == "inert6")
+      if(substate == "inert3" || substate == "inert4" || substate == "inert5" || substate == "inert6") {
         self thread inert_watch_goal();
-      else
+      }
+      else {
         self.in_place = 1;
+      }
     }
   } else {
     self setanimstatefromasd("zm_inert_crawl", get_inert_crawl_substate());
@@ -298,16 +314,19 @@ inert_think(in_place) {
   self inert_transition();
   self maps\mp\zombies\_zm_spawner::zombie_history("inert transition done");
 
-  if(isDefined(self.ai_state) && self.ai_state == "zombie_goto_entrance")
+  if(isDefined(self.ai_state) && self.ai_state == "zombie_goto_entrance") {
     self thread maps\mp\zombies\_zm_spawner::zombie_goto_entrance(self.first_node);
+  }
 
-  if(isDefined(self.inert_wakeup_override))
+  if(isDefined(self.inert_wakeup_override)) {
     self[[self.inert_wakeup_override]]();
+  }
   else if(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) {
     self.ignoreall = 0;
 
-    if(isDefined(level.ignore_find_flesh) && !self[[level.ignore_find_flesh]]())
+    if(isDefined(level.ignore_find_flesh) && !self[[level.ignore_find_flesh]]()) {
       self thread maps\mp\zombies\_zm_ai_basic::find_flesh();
+    }
   }
 
   self.becoming_inert = undefined;
@@ -334,8 +353,9 @@ inert_watch_goal() {
       }
     }
 
-    if(locs.size > 0)
+    if(locs.size > 0) {
       self setgoalpos(locs[0].origin);
+    }
   }
 }
 
@@ -417,8 +437,9 @@ inert_damage() {
       continue;
     }
     if(isDefined(inflictor)) {
-      if(isDefined(inflictor._trap_type) && inflictor._trap_type == "fire")
+      if(isDefined(inflictor._trap_type) && inflictor._trap_type == "fire") {
         continue;
+      }
     }
   }
 
@@ -432,8 +453,9 @@ grenade_watcher(grenade) {
   if(!isDefined(zombies)) {
     return;
   }
-  foreach(zombie in zombies)
+  foreach(zombie in zombies) {
   zombie stop_inert();
+  }
 }
 
 stop_inert() {
@@ -454,17 +476,21 @@ inert_transition() {
   }
 
   if(self.zombie_move_speed == "run") {
-    if(self.has_legs)
+    if(self.has_legs) {
       trans_set = level.inert_trans_run;
-    else
+    }
+    else {
       trans_set = level.inert_crawl_trans_run;
+    }
 
     trans_num = 2;
   } else if(self.zombie_move_speed == "sprint") {
-    if(self.has_legs)
+    if(self.has_legs) {
       trans_set = level.inert_trans_sprint;
-    else
+    }
+    else {
       trans_set = level.inert_crawl_trans_sprint;
+    }
 
     trans_num = 2;
   }
@@ -481,8 +507,9 @@ inert_eye_glow() {
   while(true) {
     self waittill("inert_trans_anim", note);
 
-    if(note == "end")
+    if(note == "end") {
       return;
+    }
     else if(note == "zmb_awaken") {
       self maps\mp\zombies\_zm_spawner::zombie_eye_glow();
       return;

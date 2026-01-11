@@ -38,10 +38,12 @@ scriptstruct_debug_render() {
   while(true) {
     level waittill("obstacle", selected_struct);
 
-    if(isDefined(selected_struct))
+    if(isDefined(selected_struct)) {
       level thread render_struct(selected_struct);
-    else
+    }
+    else {
       level notify("stop_struct_render");
+    }
   }
 
 }
@@ -60,10 +62,12 @@ node_debug_render() {
   while(true) {
     level waittill("node_not_safe", node);
 
-    if(isDefined(node))
+    if(isDefined(node)) {
       spawn_johnny_node_chaser(node);
-    else if(isDefined(level.johnny_node_chaser))
+    }
+    else if(isDefined(level.johnny_node_chaser)) {
       level.johnny_node_chaser thread delete_timer();
+    }
   }
 
 }
@@ -89,8 +93,9 @@ animate_at_node(node) {
 
 spawn_johnny_node_chaser(node) {
   if(!isDefined(level.johnny_node_chaser)) {
-    if(!isDefined(level.enemy_spawner))
+    if(!isDefined(level.enemy_spawner)) {
       maps\_debug::dynamic_ai_spawner_init();
+    }
 
     if(!isDefined(level.enemy_spawner)) {
       return;
@@ -112,8 +117,9 @@ spawn_johnny_node_chaser(node) {
   }
 
   if(isDefined(level.johnny_node_chaser)) {
-    if(!findpath(level.johnny_node_chaser.origin, node.origin))
+    if(!findpath(level.johnny_node_chaser.origin, node.origin)) {
       level.johnny_node_chaser forceteleport(node.origin, node.angles);
+    }
 
     level.johnny_node_chaser.script_accuracy = 0;
     level.johnny_node_chaser notify("stop_delete_timer");
@@ -144,8 +150,9 @@ keepupwithnode(node) {
 animate_nodedrone_at_node(node) {
   angles = node.angles;
 
-  if(isDefined(level.node_offset[node.type]))
+  if(isDefined(level.node_offset[node.type])) {
     angles = angles + level.node_offset[node.type];
+  }
 
   self.origin = node.origin;
   self.angles = angles;
@@ -165,17 +172,20 @@ stay_animated_at_node(node) {
       prev_ang = node.angles;
       angles = node.angles;
 
-      if(isDefined(level.node_offset[self.currentnode.type]))
+      if(isDefined(level.node_offset[self.currentnode.type])) {
         angles = angles + level.node_offset[self.currentnode.type];
+      }
 
       self.origin = node.origin;
       self.angles = angles;
       self notify("stop_loop");
 
-      if(node_has_animations(node))
+      if(node_has_animations(node)) {
         self anim_generic_loop(self, node.type, "stop_loop");
-      else
+      }
+      else {
         prev_org = (0, 0, 0);
+      }
     }
 
     wait 0.05;
@@ -184,8 +194,9 @@ stay_animated_at_node(node) {
 }
 
 node_has_animations(node) {
-  if(isDefined(level.scr_anim["generic"][node.type]))
+  if(isDefined(level.scr_anim["generic"][node.type])) {
     return true;
+  }
 
   return false;
 }

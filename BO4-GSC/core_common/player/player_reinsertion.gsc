@@ -633,4 +633,3 @@ private function_c833e81f(killer) {
   wait 1;
   self dodamage(self.health + 10000, self.origin + (0, 0, 1), killer);
 }
-

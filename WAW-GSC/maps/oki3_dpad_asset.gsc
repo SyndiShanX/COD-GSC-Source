@@ -295,10 +295,12 @@ get_firepoint_target(fire_point) {
 air_support_switch_back() {
   primaryWeapons = self GetWeaponsListPrimaries();
   if(isDefined(primaryWeapons)) {
-    if(maps\_collectibles::has_collectible("collectible_sticksstones") || maps\_collectibles::has_collectible("collectible_berserker"))
+    if(maps\_collectibles::has_collectible("collectible_sticksstones") || maps\_collectibles::has_collectible("collectible_berserker")) {
       self SwitchToWeapon(primaryWeapons[0]);
-    else
+    }
+    else {
       self SwitchToWeapon(primaryWeapons[1]);
+    }
   }
   self.rocket_targeting_on = false;
 }

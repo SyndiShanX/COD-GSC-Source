@@ -92,8 +92,9 @@ init() {
   }
 }
 useKillstreakHelicopterPlayer(hardpointType) {
-  if((self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) || !self IsOnGround())
+  if((self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) || !self IsOnGround()) {
     return false;
+  }
   if((!isDefined(level.heli_paths) || !level.heli_paths.size)) {
     iprintlnbold("Need to add helicopter paths to the level");
     return false;
@@ -110,18 +111,21 @@ useKillstreakHelicopterPlayer(hardpointType) {
   }
   self thread maps\mp\gametypes\_hud::fadeToBlackForXSec(0.5, 1.0, 0.5, 0.5);
   self.exitblackscreenTime = 0.1;
-  if(hardpointType == "helicopter_player_firstperson_mp")
+  if(hardpointType == "helicopter_player_firstperson_mp") {
     result = self usePlayerHelicopter("player_firstperson", hardpointType);
-  else
+  }
+  else {
     result = self usePlayerHelicopter("player", hardpointType);
+  }
   if(result == true) {
     self thread maps\mp\_helicopter::announceHelicopterInbound(hardpointType);
   }
   return result;
 }
 useKillstreakHelicopterGunner(hardpointType) {
-  if((self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) || !self IsOnGround())
+  if((self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) || !self IsOnGround()) {
     return false;
+  }
   if((!isDefined(level.heli_paths) || !level.heli_paths.size)) {
     iprintlnbold("Need to add helicopter paths to the level");
     return false;
@@ -147,8 +151,9 @@ useKillstreakHelicopterGunner(hardpointType) {
 spawnPlayerHelicopter(owner, type, origin, angles, hardpointtype) {
   debug_print_heli(">>>>>>>spawnHelicopter " + type);
   heli = maps\mp\_helicopter::spawn_helicopter(self, origin, angles, level.chopper_defs[type], level.chopper_models[type]["friendly"], (0, 0, -100), hardpointtype);
-  if(!isDefined(heli))
+  if(!isDefined(heli)) {
     return undefined;
+  }
   Target_SetTurretAquire(heli, false);
   heli.lockOnDelay = true;
   heli setenemymodel(level.chopper_models[type]["enemy"]);
@@ -179,16 +184,19 @@ deletePlayerHeli() {
   self.heli ClearClientFlag(level.const_flag_player_helicopter);
   self notify("heli_timeup");
   debug_print_heli(">>>>>>>Unlink and delete");
-  if(isDefined(self.viewlockedentity))
+  if(isDefined(self.viewlockedentity)) {
     self Unlink();
+  }
   self.heli maps\mp\_helicopter::destroyHelicopter();
   self.heli = undefined;
 }
 destroyPlayerHelicopter() {
-  if(isDefined(self.owner) && isDefined(self.owner.heli))
+  if(isDefined(self.owner) && isDefined(self.owner.heli)) {
     self.owner deletePlayerHeli();
-  else
+  }
+  else {
     self maps\mp\_helicopter::destroyHelicopter();
+  }
 }
 debugtag(tagName) {
   start_origin = self GetTagOrigin(tagName);
@@ -201,16 +209,18 @@ debugTags() {
   while(1) {
     wait(0.05);
     tagName = GetDvar(#"tagname");
-    if(!isDefined(tagName) || tagname == "")
+    if(!isDefined(tagName) || tagname == "") {
       continue;
+    }
     self debugTag(tagName);
   }
 }
 startHelicopter(type, player_driven, hardpointtype, startnode) {
   self endon("disconnect");
   self endon("game_ended");
-  if(self maps\mp\_killstreakrules::killstreakStart(hardpointtype, self.team, undefined, false) == false)
+  if(self maps\mp\_killstreakrules::killstreakStart(hardpointtype, self.team, undefined, false) == false) {
     return false;
+  }
   self.enteringVehicle = true;
   self freeze_player_controls(true);
   wait(1.0);
@@ -245,8 +255,9 @@ startHelicopter(type, player_driven, hardpointtype, startnode) {
   self freeze_player_controls(false);
   self.enteringVehicle = false;
   self StopShellshock();
-  if(isDefined(level.killstreaks[hardpointType]) && isDefined(level.killstreaks[hardpointType].inboundtext))
+  if(isDefined(level.killstreaks[hardpointType]) && isDefined(level.killstreaks[hardpointType].inboundtext)) {
     level thread maps\mp\_popups::DisplayKillstreakTeamMessageToAll(hardpointType, self);
+  }
   return true;
 }
 gunnerStartPath(startnode) {
@@ -263,8 +274,9 @@ useGunnerHelicopter(hardpointtype) {
     println("ERROR: Chopper gunner vehicle spline not found!");
     return false;
   }
-  if(!(self startHelicopter("gunner", false, hardpointtype, startnode)))
+  if(!(self startHelicopter("gunner", false, hardpointtype, startnode))) {
     return false;
+  }
   self.heli chopperUseAnimTree();
   self.heli chopperGunnerOpenDoor(false);
   self.heli usevehicle(self, 2);
@@ -276,8 +288,9 @@ usePlayerHelicopter(type, hardpointtype) {
   self endon("disconnect");
   self endon("game_ended");
   AssertEx(isDefined(level.Heli_primary_path) && (level.heli_primary_path.size > 0), "No primary helicopter path found in map");
-  if(!(self startHelicopter(type, true, hardpointtype, level.heli_primary_path[0])))
+  if(!(self startHelicopter(type, true, hardpointtype, level.heli_primary_path[0]))) {
     return false;
+  }
   self.heli endon("crashing");
   self.heli endon("leaving");
   self.heli endon("death");
@@ -296,23 +309,27 @@ watchForOpenDoor() {
   self.heli endon("heli_timeup");
   self.heli endon("death");
   self.heli waittill("open_door");
-  if(!isDefined(self.heli))
+  if(!isDefined(self.heli)) {
     return;
+  }
   self PlayLocalSound(level.heli_vo[self.team]["door"]);
   wait(1);
-  if(!isDefined(self.heli))
+  if(!isDefined(self.heli)) {
     return;
+  }
   self.heli SetClientFlag(level.const_flag_opendoor);
   self.heli chopperGunnerOpenDoor(true);
   self PlayLocalSound(level.heli_vo[self.team]["ready"]);
   lengthOfClientAnimation = 2.25;
   wait(lengthOfClientAnimation);
-  if(!isDefined(self.heli))
+  if(!isDefined(self.heli)) {
     return;
+  }
   self.heli usevehicle(self, 1);
   wait(0.25);
-  if(!isDefined(self.heli))
+  if(!isDefined(self.heli)) {
     return;
+  }
   self PlayLocalSound(level.heli_vo[self.team]["shoot"]);
   Target_SetTurretAquire(self.heli, true);
   self.heli.lockOnDelay = false;
@@ -385,10 +402,12 @@ initHelicopter(isDriver, hardpointtype) {
     self.heli thread hind_setup_rocket_attack(hardpointtype, self);
     self.heli thread hind_watch_rocket_fire(self);
     self.heli.current_weapon = "mini_gun";
-    if(hardpointtype == "helicopter_player_firstperson_mp")
+    if(hardpointtype == "helicopter_player_firstperson_mp") {
       self.heli SetVehWeapon("hind_minigun_pilot_firstperson_mp");
-    else
+    }
+    else {
       self.heli SetVehWeapon("hind_minigun_pilot_2_mp");
+    }
     self.heli.numberRockets = 2;
     self.heli.numberMiniGun = 999;
     self.heli setjitterparams((3, 3, 3), 0.5, 1.5);
@@ -423,8 +442,9 @@ waitAndActivatePlayerControl() {
   self endon("heli_timeup");
   wait(1.0);
   for(;;) {
-    if(!isDefined(self.heli))
+    if(!isDefined(self.heli)) {
       return;
+    }
     distance_in = self.heli IsInsideHeliHeightLock();
     if(distance_in > level.heli_warning_distance) {
       self.heli SetHeliHeightLock(true);
@@ -456,8 +476,9 @@ watchLeavingBattlefield(hardpointtype) {
         }
         self.heli.beingWarnedAboutLeaving = 1;
         self.heli SetClientFlag(level.const_flag_outofbounds);
-        if(isDefined(self.leaving_play_area.alpha))
+        if(isDefined(self.leaving_play_area.alpha)) {
           self.leaving_play_area.alpha = 1.0;
+        }
       }
     } else if(distance_in == 0) {
       if(!isDefined(self.heli.beingWarnedAboutLeaving) || self.heli.beingWarnedAboutLeaving < 2) {
@@ -467,8 +488,9 @@ watchLeavingBattlefield(hardpointtype) {
       }
     } else if(isDefined(self.heli.beingWarnedAboutLeaving)) {
       self.heli notify("reentered_battlefield");
-      if(isDefined(self.leaving_play_area.alpha))
+      if(isDefined(self.leaving_play_area.alpha)) {
         self.leaving_play_area.alpha = 0.0;
+      }
       self.heli.beingWarnedAboutLeaving = undefined;
       self.heli ClearClientFlag(level.const_flag_outofbounds);
     }
@@ -480,8 +502,9 @@ warnLeavingBattlefield(hardpointtype) {
   self endon("heli_timeup");
   self.heli endon("death");
   self.heli endon("reentered_battlefield");
-  if(isDefined(self.leaving_play_area.alpha))
+  if(isDefined(self.leaving_play_area.alpha)) {
     self.leaving_play_area.alpha = 1.0;
+  }
   self thread crashLeavingBattlefield(hardpointtype);
   for(;;) {
     wait 1.0;
@@ -506,20 +529,26 @@ heli_player_damage_monitor(player) {
   self endon("leaving");
   for(;;) {
     self waittill("damage", damage, attacker, direction, point, type);
-    if(!isDefined(attacker) || !isplayer(attacker))
+    if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
+    }
     heli_friendlyfire = maps\mp\gametypes\_weaponobjects::friendlyFireCheck(self.owner, attacker);
-    if(!heli_friendlyfire)
+    if(!heli_friendlyfire) {
       continue;
+    }
     if(!level.hardcoreMode) {
-      if(isDefined(self.owner) && attacker == self.owner)
+      if(isDefined(self.owner) && attacker == self.owner) {
         continue;
-      if(level.teamBased)
+      }
+      if(level.teamBased) {
         isValidAttacker = (isDefined(attacker.team) && attacker.team != self.team);
-      else
+      }
+      else {
         isValidAttacker = true;
-      if(!isValidAttacker)
+      }
+      if(!isValidAttacker) {
         continue;
+      }
     }
     if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
       earthquake(0.1, 0.5, point, 1000, player);
@@ -553,18 +582,22 @@ hind_setup_rocket_attack(hardpointtype, player) {
       if(self.numberRockets > 0) {
         self fireWeapon("tag_flash");
         self.numberRockets = self.numberRockets - 1;
-        if(isDefined(player.alt_ammo_hud))
+        if(isDefined(player.alt_ammo_hud)) {
           player.alt_ammo_hud SetValue(self.numberRockets);
+        }
       } else if(self.numberMiniGun > 0) {
-        if(hardpointtype == "helicopter_player_firstperson_mp")
+        if(hardpointtype == "helicopter_player_firstperson_mp") {
           self.heli SetVehWeapon("hind_minigun_pilot_firstperson_mp");
-        else
+        }
+        else {
           self.heli SetVehWeapon("hind_minigun_pilot_2_mp");
+        }
         self.current_weapon = "mini_gun";
         self fireWeapon("tag_flash");
         self.numberMiniGun = self.numberMiniGun - 1;
-        if(isDefined(player.ammo_hud))
+        if(isDefined(player.ammo_hud)) {
           player.ammo_hud SetValue(self.numberMiniGun);
+        }
       }
       wait 0.3;
     } else {
@@ -572,8 +605,9 @@ hind_setup_rocket_attack(hardpointtype, player) {
         self SetVehWeapon("hind_minigun_pilot_firstperson_mp");
         self fireWeapon("tag_flash");
         self.numberMiniGun = self.numberMiniGun - 1;
-        if(isDefined(player.ammo_hud))
+        if(isDefined(player.ammo_hud)) {
           player.ammo_hud SetValue(self.numberMiniGun);
+        }
       }
     }
   }
@@ -589,20 +623,23 @@ hind_watch_rocket_fire(player) {
   rocketTags[1] = "tag_rocket2";
   rocketTag = 0;
   while(isDefined(self) && (self.health > 0)) {
-    while(!player ThrowButtonPressed())
+    while(!player ThrowButtonPressed()) {
       wait 0.05;
+    }
     if(self.numberRockets > 0) {
       self fire_rocket(rocketTags[rocketTag]);
       self.numberRockets--;
-      if(isDefined(player.alt_ammo_hud))
+      if(isDefined(player.alt_ammo_hud)) {
         player.alt_ammo_hud SetValue(self.numberRockets);
+      }
       rocketTag = (rocketTag + 1) % rocketTags.size;
       if(self.numberRockets == 0) {
         self thread hind_out_of_rockets(player);
       }
     }
-    while(player ThrowButtonPressed())
+    while(player ThrowButtonPressed()) {
       wait 0.05;
+    }
   }
 }
 hind_out_of_rockets(player) {
@@ -610,20 +647,25 @@ hind_out_of_rockets(player) {
   self endon("death");
   self endon("exit_vehicle");
   self endon("heli_timeup");
-  if(isDefined(player.alt_title))
+  if(isDefined(player.alt_title)) {
     player.alt_title.alpha = 0.0;
-  if(isDefined(player.alt_ammo_hud))
+  }
+  if(isDefined(player.alt_ammo_hud)) {
     player.alt_ammo_hud.alpha = 0.0;
+  }
   wait(max(0, level.heli_missile_reload_time - 0.5));
   self.snd_ent playSound(level.chopper_sounds["missile_reload"]);
   wait(0.5);
-  if(isDefined(player.alt_title))
+  if(isDefined(player.alt_title)) {
     player.alt_title.alpha = 1.0;
-  if(isDefined(player.alt_ammo_hud))
+  }
+  if(isDefined(player.alt_ammo_hud)) {
     player.alt_ammo_hud.alpha = 1.0;
+  }
   self.numberRockets = 2;
-  if(isDefined(player.alt_ammo_hud))
+  if(isDefined(player.alt_ammo_hud)) {
     player.alt_ammo_hud SetValue(2);
+  }
 }
 fire_rocket(tagName) {
   start_origin = self GetTagOrigin(tagName);
@@ -653,8 +695,9 @@ exitHeliWaiter() {
     self thread maps\mp\gametypes\_hud::fadeToBlackForXSec(0.0, 0.5, 0.5, 0.5);
     wait(0.7);
     debug_print_heli(">>>>>>>Unlink and delete");
-    if(isDefined(self.viewlockedentity))
+    if(isDefined(self.viewlockedentity)) {
       self Unlink();
+    }
     self.heli = undefined;
   }
   self.killstreak_waitamount = undefined;
@@ -712,16 +755,21 @@ create_hud(isDriver) {
 }
 remove_hud() {
   debug_print_heli(">>>>>>>remove_hud");
-  if(isDefined(self.ammo_hud))
+  if(isDefined(self.ammo_hud)) {
     self.ammo_hud destroy();
-  if(isDefined(self.title))
+  }
+  if(isDefined(self.title)) {
     self.title destroy();
-  if(isDefined(self.alt_ammo_hud))
+  }
+  if(isDefined(self.alt_ammo_hud)) {
     self.alt_ammo_hud destroy();
-  if(isDefined(self.alt_title))
+  }
+  if(isDefined(self.alt_title)) {
     self.alt_title destroy();
-  if(isDefined(self.leaving_play_area))
+  }
+  if(isDefined(self.leaving_play_area)) {
     self.leaving_play_area destroy();
+  }
   self.ammo_hud = undefined;
   self.alt_ammo_hud = undefined;
   self.alt_title = undefined;
@@ -909,8 +957,9 @@ hud_rocket_think() {
       }
     }
     if(last_rocket_count != self.heli.numberRockets) {
-      if(self.heli.numberRockets == 0)
+      if(self.heli.numberRockets == 0) {
         rateOfChange = level.heli_missile_reload_time;
+      }
       last_rocket_count = self.heli.numberRockets;
       self.rocket_hud["loading_bar_bg"] updateAmmoBarScale(self.heli.numberRockets * 0.5);
       if(self.heli.numberRockets == 0) {
@@ -923,8 +972,9 @@ hud_rocket_think() {
 }
 updateAmmoBarScale(barFrac, rateOfChange) {
   barWidth = int(self.width * barFrac + 0.5);
-  if(!barWidth)
+  if(!barWidth) {
     barWidth = 1;
+  }
   if(isDefined(rateOfChange) && barWidth <= self.width) {
     self.bar scaleOverTime(rateOfChange, barWidth, self.height);
   } else {

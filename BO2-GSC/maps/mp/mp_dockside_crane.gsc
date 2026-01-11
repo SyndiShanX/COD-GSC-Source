@@ -32,8 +32,9 @@ init() {
     arm_z.parent = arm_y;
   }
 
-  foreach(arm_y in arms_y)
+  foreach(arm_y in arms_y) {
   arm_y.parent = claw;
+  }
 
   claw claw_link_arms("claw_arm_y");
   claw claw_link_arms("claw_arm_z");
@@ -59,8 +60,9 @@ init() {
   foreach(wire in claw.wires) {
     wire linkto(claw);
 
-    if(wire.origin[2] > claw.z_wire_max)
+    if(wire.origin[2] > claw.z_wire_max) {
       wire ghost();
+    }
   }
 
   placements = getEntArray("crate_placement", "targetname");
@@ -158,8 +160,9 @@ crane_think(claw, rail, crates, crate_data, placements) {
 
       claw claw_crate_move(crate);
 
-      if(lower)
+      if(lower) {
         crate crate_lower(target_crate, crate_data[target]);
+      }
 
       crate = target_crate;
       target = (i + 2) % (crates.size - placements.size);
@@ -207,8 +210,9 @@ crane_move(claw, desired, z_dist) {
   speed = getdvarfloat(#"scr_crane_claw_drop_speed");
   time = diff / speed;
 
-  if(time < getdvarfloat(#"scr_crane_claw_drop_time_min"))
+  if(time < getdvarfloat(#"scr_crane_claw_drop_time_min")) {
     time = getdvarfloat(#"scr_crane_claw_drop_time_min");
+  }
 
   self.roller moveto(goal, time, time * 0.25, time * 0.25);
   self.roller thread physics_move();
@@ -234,8 +238,9 @@ physics_move() {
     crates = getEntArray("care_package", "script_noteworthy");
 
     foreach(crate in crates) {
-      if(crate istouching(self))
+      if(crate istouching(self)) {
         crate physicslaunch(crate.origin, (0, 0, 0));
+      }
     }
   }
 }
@@ -392,15 +397,17 @@ arms_close(crate) {
 
 claw_link_arms(name) {
   foreach(arm in self.arms) {
-    if(arm.targetname == name)
+    if(arm.targetname == name) {
       arm linkto(arm.parent);
+    }
   }
 }
 
 claw_unlink_arms(name) {
   foreach(arm in self.arms) {
-    if(arm.targetname == name)
+    if(arm.targetname == name) {
       arm unlink();
+    }
   }
 }
 
@@ -436,8 +443,9 @@ claw_move_arms(dist, crate) {
   assert(arms.size == 4);
   waittill_multiple_ents(arms[0], "movedone", arms[1], "movedone", arms[2], "movedone", arms[3], "movedone");
 
-  foreach(arm in self.arms)
+  foreach(arm in self.arms) {
   arm.origin = arm.goal;
+  }
 
   self claw_link_arms("claw_arm_y");
 }
@@ -525,8 +533,9 @@ crate_drop_think(claw) {
       }
 
       if(entity.classname == "auto_turret") {
-        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath)
+        if(!isDefined(entity.damagedtodeath) || !entity.damagedtodeath) {
           entity domaxdamage(self.origin + (0, 0, 1), self, self, 0, "MOD_CRUSH");
+        }
 
         continue;
       }
@@ -541,21 +550,24 @@ crate_drop_think(claw) {
 
     self destroy_supply_crates();
 
-    if(gettime() > corpse_delay)
+    if(gettime() > corpse_delay) {
       self destroy_corpses();
+    }
 
     if(level.gametype == "ctf") {
       foreach(flag in level.flags) {
-        if(flag.visuals[0] istouching(self.kill_trigger))
+        if(flag.visuals[0] istouching(self.kill_trigger)) {
           flag maps\mp\gametypes\ctf::returnflag();
+        }
       }
 
       continue;
     }
 
     if(level.gametype == "sd" && !level.multibomb) {
-      if(level.sdbomb.visuals[0] istouching(self.kill_trigger))
+      if(level.sdbomb.visuals[0] istouching(self.kill_trigger)) {
         level.sdbomb maps\mp\gametypes\_gameobjects::returnhome();
+      }
     }
   }
 }
@@ -601,17 +613,20 @@ destroy_corpses() {
   corpses = getcorpsearray();
 
   for(i = 0; i < corpses.size; i++) {
-    if(distancesquared(corpses[i].origin, self.origin) < 40000)
+    if(distancesquared(corpses[i].origin, self.origin) < 40000) {
       corpses[i] delete();
+    }
   }
 }
 
 getwatcherforweapon(weapname) {
-  if(!isDefined(self))
+  if(!isDefined(self)) {
     return undefined;
+  }
 
-  if(!isplayer(self))
+  if(!isplayer(self)) {
     return undefined;
+  }
 
   for(i = 0; i < self.weaponobjectwatcherarray.size; i++) {
     if(self.weaponobjectwatcherarray[i].weapon != weapname) {

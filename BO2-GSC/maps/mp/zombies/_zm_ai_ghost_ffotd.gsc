@@ -32,8 +32,9 @@ ghost_round_end() {
 is_player_in_ghost_zone(player) {
   result = 0;
 
-  if(!isDefined(level.ghost_zone_overrides))
+  if(!isDefined(level.ghost_zone_overrides)) {
     level.ghost_zone_overrides = getEntArray("ghost_round_override", "script_noteworthy");
+  }
 
   is_player_in_override_trigger = 0;
 
@@ -48,8 +49,9 @@ is_player_in_ghost_zone(player) {
 
   curr_zone = player get_current_zone();
 
-  if(!is_player_in_override_trigger && isDefined(curr_zone) && curr_zone == "zone_mansion")
+  if(!is_player_in_override_trigger && isDefined(curr_zone) && curr_zone == "zone_mansion") {
     result = 1;
+  }
 
   return result;
 }
@@ -130,8 +132,9 @@ ghost_bad_path_failsafe() {
           }
 
           if(isDefined(zone.flag) && flag(zone.flag)) {
-            if(self maps\mp\zombies\_zm_zonemgr::entity_in_zone(zone.flag_adjacent))
+            if(self maps\mp\zombies\_zm_zonemgr::entity_in_zone(zone.flag_adjacent)) {
               ghost_is_adjacent = 1;
+            }
           }
 
           if(!ghost_is_adjacent) {
@@ -144,10 +147,12 @@ ghost_bad_path_failsafe() {
       if(in_bad_zone) {
         nodes = getnodesinradiussorted(player.origin, 540, 180, 60, "Path");
 
-        if(nodes.size > 0)
+        if(nodes.size > 0) {
           node = nodes[randomint(nodes.size)];
-        else
+        }
+        else {
           node = getnearestnode(player.origin);
+        }
 
         if(isDefined(node)) {
           while(true) {
@@ -186,8 +191,9 @@ non_ghost_round_failsafe() {
 
 disable_traversal_clip_around_mansion() {
   if(isDefined(level.ghost_zone_door_clips) && level.ghost_zone_door_clips.size > 0) {
-    foreach(door_clip in level.ghost_zone_door_clips)
+    foreach(door_clip in level.ghost_zone_door_clips) {
     door_clip notsolid();
+    }
   }
 }
 
@@ -199,14 +205,17 @@ ghost_bad_spawn_zone_init() {
 }
 
 can_use_mansion_back_flying_out_node(zone_name) {
-  if(zone_name == "zone_mansion_backyard")
+  if(zone_name == "zone_mansion_backyard") {
     return true;
+  }
 
-  if(zone_name == "zone_maze")
+  if(zone_name == "zone_maze") {
     return true;
+  }
 
-  if(zone_name == "zone_maze_staircase")
+  if(zone_name == "zone_maze_staircase") {
     return true;
+  }
 
   return false;
 }
@@ -237,10 +246,12 @@ ghost_teleport_to_playable_area() {
             }
 
             if(!is_true(self.is_teleported_in_bad_zone)) {
-              if(can_use_mansion_back_flying_out_node(bad_spawn_zone_name))
+              if(can_use_mansion_back_flying_out_node(bad_spawn_zone_name)) {
                 ghost forceteleport(level.ghost_back_flying_out_path_starts[0].origin, (0, 0, 0));
-              else
+              }
+              else {
                 ghost forceteleport(level.ghost_front_flying_out_path_starts[0].origin, (0, 0, 0));
+              }
 
               self.is_teleported_in_bad_zone = 1;
             }

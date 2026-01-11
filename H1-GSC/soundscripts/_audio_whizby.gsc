@@ -114,8 +114,9 @@ whizx_get_mix_preset_from_stringtable_internal(var_0, var_1) {
       var_2["spread"] = var_7;
       var_2["probability"] = var_8;
 
-      if(isDefined(var_9))
+      if(isDefined(var_9)) {
         var_2["offset"] = var_9;
+      }
     }
 
     return var_2;

@@ -4,8 +4,9 @@
 ***************************************/
 
 codecallback_startgametype() {
-  if(getdvar("r_reflectionProbeGenerate") == "1")
+  if(getdvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
+  }
 
   if(!isDefined(level.gametypestarted) || !level.gametypestarted) {
     [[level.callbackstartgametype]]();
@@ -14,8 +15,9 @@ codecallback_startgametype() {
 }
 
 codecallback_playerconnect() {
-  if(getdvar("r_reflectionProbeGenerate") == "1")
+  if(getdvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
+  }
 
   self endon("disconnect");
   [
@@ -33,8 +35,9 @@ codecallback_playerdisconnect(var_00) {
 codecallback_playerdamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
   self endon("disconnect");
 
-  if(isDefined(level.weaponmapfunc))
+  if(isDefined(level.weaponmapfunc)) {
     var_05 = [[level.weaponmapfunc]](var_05, var_00);
+  }
 
   [
     [level.callbackplayerdamage]
@@ -44,38 +47,45 @@ codecallback_playerdamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06
 func_00B4(var_00, var_01, var_02, var_03) {
   self endon("disconnect");
 
-  if(isDefined(level.weaponmapfunc))
+  if(isDefined(level.weaponmapfunc)) {
     var_00 = [[level.weaponmapfunc]](var_00);
+  }
 
-  if(isDefined(level.weaponmapfunc))
+  if(isDefined(level.weaponmapfunc)) {
     var_02 = [[level.weaponmapfunc]](var_02);
+  }
 }
 
 func_00B5(var_00, var_01) {
   self endon("disconnect");
 
-  if(isDefined(level.weaponmapfunc))
+  if(isDefined(level.weaponmapfunc)) {
     var_00 = [[level.weaponmapfunc]](var_00);
+  }
 }
 
 func_00B6(var_00, var_01, var_02, var_03) {
   self endon("disconnect");
 
-  if(isDefined(level.weaponmapfunc))
+  if(isDefined(level.weaponmapfunc)) {
     var_00 = [[level.weaponmapfunc]](var_00);
+  }
 
-  if(isDefined(level.weaponmapfunc))
+  if(isDefined(level.weaponmapfunc)) {
     var_02 = [[level.weaponmapfunc]](var_02);
+  }
 
-  if(isDefined(level.callbackfinishweaponchange))
+  if(isDefined(level.callbackfinishweaponchange)) {
     [[level.callbackfinishweaponchange]](var_02, var_00, var_03, var_01);
+  }
 }
 
 codecallback_playerimpaled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   self endon("disconnect");
 
-  if(isDefined(level.weaponmapfunc))
+  if(isDefined(level.weaponmapfunc)) {
     var_01 = [[level.weaponmapfunc]](var_01);
+  }
 
   [
     [level.callbackplayerimpaled]
@@ -85,8 +95,9 @@ codecallback_playerimpaled(var_00, var_01, var_02, var_03, var_04, var_05, var_0
 codecallback_playerkilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {
   self endon("disconnect");
 
-  if(isDefined(level.weaponmapfunc))
+  if(isDefined(level.weaponmapfunc)) {
     var_05 = [[level.weaponmapfunc]](var_05, var_00);
+  }
 
   [
     [level.callbackplayerkilled]
@@ -94,27 +105,32 @@ codecallback_playerkilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06
 }
 
 codecallback_vehicledamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
-  if(isDefined(level.weaponmapfunc))
+  if(isDefined(level.weaponmapfunc)) {
     var_05 = [[level.weaponmapfunc]](var_05, var_00);
+  }
 
   if(isDefined(self.nullownerdamagefunc)) {
     var_12 = [[self.nullownerdamagefunc]](var_01);
 
-    if(isDefined(var_12) && var_12)
+    if(isDefined(var_12) && var_12) {
       return;
+    }
   }
 
-  if(isDefined(self.damagecallback))
+  if(isDefined(self.damagecallback)) {
     self[[self.damagecallback]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
-  else
+  }
+  else {
     self vehicle_finishdamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
+  }
 }
 
 codecallback_playerlaststand(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
   self endon("disconnect");
 
-  if(isDefined(level.weaponmapfunc))
+  if(isDefined(level.weaponmapfunc)) {
     var_04 = [[level.weaponmapfunc]](var_04, var_00);
+  }
 
   [
     [level.callbackplayerlaststand]

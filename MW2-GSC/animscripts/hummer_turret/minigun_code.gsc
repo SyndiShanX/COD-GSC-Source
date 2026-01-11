@@ -116,8 +116,9 @@ fireController_minigun(turret) {
       }
     }
 
-    if(turret.turretstate == "fire")
+    if(turret.turretstate == "fire") {
       turret.fireTime += 0.05; // ( GetTime() - startFireTime ) / 1000;
+    }
 
     if(turret.fireTime > turret.secsOfFiringBeforeReload) {
       //println( "reload" );
@@ -134,8 +135,9 @@ fireController_minigun(turret) {
 
     wait(0.05);
 
-    if(!isDefined(turret))
+    if(!isDefined(turret)) {
       break;
+    }
   }
 }
 

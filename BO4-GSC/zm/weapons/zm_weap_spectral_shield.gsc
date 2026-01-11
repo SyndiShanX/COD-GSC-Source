@@ -1439,4 +1439,3 @@ function_4df187a9(w_shield) {
     self notify(#"hash_22a49f7903e394a5");
   }
 }
-

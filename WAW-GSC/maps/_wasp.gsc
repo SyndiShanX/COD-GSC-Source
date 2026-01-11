@@ -31,8 +31,9 @@ set_vehicle_anims(positions) {
 
 setanims() {
   positions = [];
-  for(i = 0; i < 6; i++)
+  for(i = 0; i < 6; i++) {
     positions[i] = spawnStruct();
+  }
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
   positions[0].idle = % crew_jeep1_driver_drive_idle;

@@ -52,13 +52,15 @@ damagefeedback_took_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
     var_11["MOD_RIFLE_BULLET"] = 1;
 
     if(isDefined(var_11[var_4])) {
-      if(var_0 <= self.bullet_resistance && (!isDefined(self.mech) || !self.mech || !isDefined(var_9) || !issubstr(var_9, "iw5_em1")))
+      if(var_0 <= self.bullet_resistance && (!isDefined(self.mech) || !self.mech || !isDefined(var_9) || !issubstr(var_9, "iw5_em1"))) {
         return;
+      }
     }
   }
 
-  if(isDefined(self.damagelocation) && (self.damagelocation == "head" || self.damagelocation == "helmet"))
+  if(isDefined(self.damagelocation) && (self.damagelocation == "head" || self.damagelocation == "helmet")) {
     var_10 = 1;
+  }
 
   var_1 updatedamagefeedback(self, var_10);
 }
@@ -66,10 +68,12 @@ damagefeedback_took_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
 updatedamagefeedback(var_0, var_1) {
   var_2 = undefined;
 
-  if(isDefined(var_0.team))
+  if(isDefined(var_0.team)) {
     var_2 = var_0.team;
-  else if(isDefined(var_0.script_team))
+  }
+  else if(isDefined(var_0.script_team)) {
     var_2 = var_0.script_team;
+  }
 
   if(!isDefined(var_2)) {
     return;
@@ -117,8 +121,9 @@ updatedamagefeedbackhud(var_0, var_1) {
   }
   var_2 = 1;
 
-  if(isDefined(level.slowmo.speed_slow))
+  if(isDefined(level.slowmo.speed_slow)) {
     var_2 = level.slowmo.speed_slow;
+  }
 
   if(0 && isDefined(var_0) && var_0 && isDefined(var_1) && !isalive(var_1)) {
     self.hud_damagefeedback_headshot.alpha = 1;

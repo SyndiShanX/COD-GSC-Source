@@ -99,8 +99,9 @@ collectible_init() {
     collectibles[items] = map_collectibles[i];
     items++;
   }
-  if(!level.collectible_save_restored)
+  if(!level.collectible_save_restored) {
     RegisterClientSys("collectibles");
+  }
   return collectibles;
 }
 
@@ -159,20 +160,24 @@ collectible_get_unlock_value(collectible_name) {
 }
 
 collectible_has_been_found(collectible_name) {
-  if(IsCoopEPD())
+  if(IsCoopEPD()) {
     return true;
-  if(coopGame() && collectible_coop_found())
+  }
+  if(coopGame() && collectible_coop_found()) {
     return true;
-  if(coopGame())
+  }
+  if(coopGame()) {
     return false;
+  }
   unlocks = GetDvarInt(level.collectible_dvar);
   collectible_value = collectible_get_unlock_value(collectible_name);
   return ((unlocks &(1 << collectible_value)) != 0);
 }
 
 collectible_coop_found() {
-  if(level.collectible_save_restored == true && GetDvar("coop_collectibles_found") == level.script)
+  if(level.collectible_save_restored == true && GetDvar("coop_collectibles_found") == level.script) {
     return true;
+  }
   return false;
 }
 
@@ -269,8 +274,9 @@ collectibleNotify(Unlock, num_found) {
   notifyData.textLabel = &"SCRIPT_COLLECTIBLE_OF_THIRTEEN";
   notifyData.notifyText2 = message;
   notifyData.sound = undefined;
-  if(!GetDvarInt(level.collectible_dvar))
+  if(!GetDvarInt(level.collectible_dvar)) {
     notifyData.notifyText3 = &"SCRIPT_COLLECTIBLE_USAGE";
+  }
   if(CoopGame()) {
     notifyData.notifyText = undefined;
     notifyData.textLabel = undefined;

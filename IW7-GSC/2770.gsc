@@ -6,19 +6,22 @@
 minefields() {
   var_00 = getEntArray("minefield", "targetname");
 
-  if(var_0.size > 0)
+  if(var_0.size > 0) {
     level._effect["mine_explosion"] = loadfx("vfx\core\expl\weap\gre\vfx_exp_gre_dirt_cg");
+  }
 
-  for(var_01 = 0; var_01 < var_0.size; var_1++)
+  for(var_01 = 0; var_01 < var_0.size; var_1++) {
     var_0[var_01] thread minefield_think();
+  }
 }
 
 minefield_think() {
   for(;;) {
     self waittill("trigger", var_00);
 
-    if(isplayer(var_00))
+    if(isplayer(var_00)) {
       var_00 thread minefield_kill(self);
+    }
   }
 }
 

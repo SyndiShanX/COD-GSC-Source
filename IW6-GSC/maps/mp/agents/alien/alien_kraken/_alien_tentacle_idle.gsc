@@ -28,18 +28,22 @@ play_idle() {
   self scragentsetorientmode("face angle abs", self.angles);
   maps\mp\agents\_scriptedagents::playanimnuntilnotetrack(var_0, var_1, "idle", "end");
 
-  if(!isheatedphaseactive())
+  if(!isheatedphaseactive()) {
     self setscriptablepartstate("tentacle", "normal");
+  }
 }
 
 selectidleanimstate() {
-  if(isheatedphaseactive())
+  if(isheatedphaseactive()) {
     var_0 = "heat_";
-  else
+  }
+  else {
     var_0 = "idle_";
+  }
 
-  if(isDefined(level.kraken.anim_state_modifier))
+  if(isDefined(level.kraken.anim_state_modifier)) {
     var_0 = var_0 + (level.kraken.anim_state_modifier + "_");
+  }
 
   var_1 = var_0 + level.alien_types["kraken"].attributes[level.kraken.stage]["ship_side"];
   return var_1;

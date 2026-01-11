@@ -524,8 +524,9 @@ ghost_intro_nav() {
 
   starter = getent("ghost_starter", "targetname");
 
-  if(isDefined(starter))
+  if(isDefined(starter)) {
     starter notify("trigger");
+  }
 
   level.ghost allowedstances("crouch", "prone", "stand");
 }
@@ -538,8 +539,9 @@ ghost_intro_interrupt() {
 
   starter = getent("ghost_starter", "targetname");
 
-  if(isDefined(starter))
+  if(isDefined(starter)) {
     starter waittill("trigger");
+  }
 
   level.ghost allowedstances("crouch", "prone", "stand");
 }
@@ -945,8 +947,9 @@ bouncing_betty_fx(specialPlayerCase, gameplayOn, skipFX) {
 
     friendlies = getaiarray("allies");
     foreach(guy in friendlies) {
-      if(!isDefined(guy.name))
+      if(!isDefined(guy.name)) {
         continue;
+      }
 
       if(guy.name != "Archer" && guy.name != "Toad") {
         //knockdown the guy
@@ -1022,8 +1025,9 @@ bouncing_betty_fx(specialPlayerCase, gameplayOn, skipFX) {
 
   wait 0.2;
 
-  if(isDefined(spinner))
+  if(isDefined(spinner)) {
     spinner delete();
+  }
 
   wait 0.5;
 
@@ -1144,13 +1148,15 @@ bouncing_betty_throwplayer(mineOrg) {
 
   wait 0.5;
 
-  if(touchingVol)
+  if(touchingVol) {
     level.player thread endsliding();
+  }
 
   flag_set("bouncing_betty_player_released");
 
-  if(touchingVol)
+  if(touchingVol) {
     wait 3.5;
+  }
 
   level.player freezeControls(false);
 
@@ -1662,8 +1668,9 @@ house_extra_breachguys_init() {
 
   self thread house_normalguy_accuracy();
 
-  if(!isDefined(self.script_noteworthy))
+  if(!isDefined(self.script_noteworthy)) {
     return;
+  }
 
   if(self.script_noteworthy == "hunter") {
     wait randomfloatrange(5, 10);
@@ -1719,8 +1726,9 @@ house_extras_tally(battlePlanName, waitName) {
   spawners = getEntArray("breach_extraguy", "targetname");
 
   foreach(spawner in spawners) {
-    if(!isDefined(spawner.script_battleplan))
+    if(!isDefined(spawner.script_battleplan)) {
       continue;
+    }
 
     if(spawner.script_battleplan == battlePlanName) {
       assertEX(isDefined(spawner.script_namenumber), "spawner for extras in house didn't have a script_namenumber for floortype");
@@ -1779,8 +1787,9 @@ house_extras_cancel_floorpop_monitor(endonMsg, activeCancelName, unlockName) {
   spawners = getspawnerarray();
 
   foreach(spawner in spawners) {
-    if(!isDefined(spawner.script_battleplan))
+    if(!isDefined(spawner.script_battleplan)) {
       continue;
+    }
 
     if(spawner.script_battleplan == endonMsg) {
       assertEX(isDefined(spawner.script_namenumber), "Missing a script_namenumber on an Extra spawner in house.");
@@ -1842,8 +1851,9 @@ house_extras_spawn(battlePlan) {
   guys = [];
 
   foreach(spawner in spawners) {
-    if(!isDefined(spawner.script_battleplan))
+    if(!isDefined(spawner.script_battleplan)) {
       continue;
+    }
 
     if(spawner.script_battleplan == battlePlan) {
       guys[guys.size] = spawner;
@@ -1856,8 +1866,9 @@ house_extras_spawn(battlePlan) {
 house_extras_bathroom_screamingguy_setup() {
   spawners = getEntArray("breach_extraguy", "targetname");
   foreach(spawner in spawners) {
-    if(!isDefined(spawner.script_battleplan))
+    if(!isDefined(spawner.script_battleplan)) {
       continue;
+    }
 
     if(spawner.script_battleplan == "breach0_bathroomrush") {
       spawner thread add_spawn_function(::house_extras_bathroom_screamingguy);
@@ -2172,8 +2183,9 @@ house_check_upstairs_mainfloor_dialogue() {
       flag_waitopen("dialogue_topfloor_cleared");
       flag_waitopen("dialogue_basement_cleared");
 
-      if(flag("scarecrow_said_upstairs"))
+      if(flag("scarecrow_said_upstairs")) {
         wait 30;
+      }
 
       if(!flag("topfloor_breached")) {
         flag_set("scripted_dialogue_on");
@@ -2360,8 +2372,9 @@ house_battlechatter_check() {
 }
 
 house_autosaves() {
-  if(flag("all_enemies_killed_up_to_house_capture"))
+  if(flag("all_enemies_killed_up_to_house_capture")) {
     return;
+  }
 
   level endon("all_enemies_killed_up_to_house_capture");
 
@@ -3053,8 +3066,9 @@ randomStrikePackage(zone) {
   level endon("main_defense_fight_finished");
   level endon("player_is_escaping");
 
-  if(!isDefined(level.strikePackage[zone]))
+  if(!isDefined(level.strikePackage[zone])) {
     return (false);
+  }
 
   if(!level.strikePackage[zone].size) {
     level.strikePackage[zone] = undefined;
@@ -3100,8 +3114,9 @@ randomStrikeComponent(zone) {
   level endon("main_defense_fight_finished");
   level endon("player_is_escaping");
 
-  if(!isDefined(level.strikeComponents[zone]))
+  if(!isDefined(level.strikeComponents[zone])) {
     return (false);
+  }
 
   if(!level.strikeComponents[zone].size) {
     level.strikeComponents[zone] = undefined;
@@ -3948,8 +3963,9 @@ defense_helidrop_rider_deploy(heli, heliName, startNode) {
 
   self endon("death");
 
-  if(isDefined(heli))
+  if(isDefined(heli)) {
     heli waittill("unloaded");
+  }
 
   //access thread for customsettings
 
@@ -4144,10 +4160,12 @@ roaming_nodechain_nav(node, nodeLoiterTime, nodeInitRadius, nodeEndRadius, nodeC
 
     wait nodeLoiterTime;
 
-    if(isDefined(node.target))
+    if(isDefined(node.target)) {
       node = getnode(node.target, "targetname");
-    else
+    }
+    else {
       break;
+    }
   }
 }
 
@@ -4804,56 +4822,69 @@ download_progress() {
 
   flag_set("download_complete");
 
-  if(!flag("can_save"))
+  if(!flag("can_save")) {
     flag_set("can_save");
+  }
 
   thread download_display_delete();
 }
 
 download_display_delete() {
-  if(isDefined(level.hudelem))
+  if(isDefined(level.hudelem)) {
     level.hudelem destroy();
+  }
 
-  if(isDefined(level.hudelem_status))
+  if(isDefined(level.hudelem_status)) {
     level.hudelem_status destroy();
+  }
 
-  if(isDefined(level.hudelem_status_total))
+  if(isDefined(level.hudelem_status_total)) {
     level.hudelem_status_total destroy();
+  }
 
   //TIMER
 
-  if(isDefined(level.hudelem_dltimer))
+  if(isDefined(level.hudelem_dltimer)) {
     level.hudelem_dltimer destroy();
+  }
 
-  if(isDefined(level.hudelem_dltimer_value))
+  if(isDefined(level.hudelem_dltimer_value)) {
     level.hudelem_dltimer_value destroy();
+  }
 
-  if(isDefined(level.hudelem_dltimer_heading))
+  if(isDefined(level.hudelem_dltimer_heading)) {
     level.hudelem_dltimer_heading destroy();
+  }
 
-  if(isDefined(level.hudelem_dltimer_secs))
+  if(isDefined(level.hudelem_dltimer_secs)) {
     level.hudelem_dltimer_secs destroy();
+  }
 
   //DATA RATE
 
-  if(isDefined(level.hudelem_dlrate_heading))
+  if(isDefined(level.hudelem_dlrate_heading)) {
     level.hudelem_dlrate_heading destroy();
+  }
 
-  if(isDefined(level.hudelem_dltimer_units))
+  if(isDefined(level.hudelem_dltimer_units)) {
     level.hudelem_dltimer_units destroy();
+  }
 
-  if(isDefined(level.hudelem_dlrate_value))
+  if(isDefined(level.hudelem_dlrate_value)) {
     level.hudelem_dlrate_value destroy();
+  }
 
-  if(isDefined(level.hudelem_dlrate_units))
+  if(isDefined(level.hudelem_dlrate_units)) {
     level.hudelem_dlrate_units destroy();
+  }
 }
 
 download_update(fileSegment, segment, rateTime, marker) {
   level endon("dsm_has_been_destroyed");
 
-  if(!level.downloadGroups[marker])
+  if(!level.downloadGroups[marker]) {
     return;
+  }
 
   //set the download Mbps rate to dovetail the change in file acquisition speed
   //make the time remaining based off a constant known data size	

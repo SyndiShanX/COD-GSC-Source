@@ -67,8 +67,9 @@ ambientpackagetrigger() {
     return;
   }
 
-  if(!isDefined(self.script_ambientpriority))
+  if(!isDefined(self.script_ambientpriority)) {
     self.script_ambientpriority = 1;
+  }
 }
 
 init_ambient_package_triggers() {
@@ -119,10 +120,12 @@ declareambientpackage(package, defaultpackage) {
   level.ambientpackages[package].refcount = [];
   level.ambientpackages[package].elements = [];
 
-  if(isDefined(defaultpackage))
+  if(isDefined(defaultpackage)) {
     level.ambientpackages[package].defaultpackage = defaultpackage;
-  else
+  }
+  else {
     level.ambientpackages[package].defaultpackage = 0;
+  }
 }
 
 addambientelement(package, alias, spawnmin, spawnmax, distmin, distmax, anglemin, anglemax) {
@@ -136,11 +139,13 @@ addambientelement(package, alias, spawnmin, spawnmax, distmin, distmax, anglemin
   level.ambientpackages[package].elements[index] = spawnStruct();
   level.ambientpackages[package].elements[index].alias = alias;
 
-  if(spawnmin < 0)
+  if(spawnmin < 0) {
     spawnmin = 0;
+  }
 
-  if(spawnmin >= spawnmax)
+  if(spawnmin >= spawnmax) {
     spawnmax = spawnmin + 1;
+  }
 
   level.ambientpackages[package].elements[index].spawnmin = spawnmin;
   level.ambientpackages[package].elements[index].spawnmax = spawnmax;
@@ -170,10 +175,12 @@ declareambientroom(room, defaultroom) {
   level.ambientrooms[room].refcount = [];
   level.ambientrooms[room].ent = spawnfakeent(0);
 
-  if(isDefined(defaultroom))
+  if(isDefined(defaultroom)) {
     level.ambientrooms[room].defaultroom = defaultroom;
-  else
+  }
+  else {
     level.ambientrooms[room].defaultroom = 0;
+  }
 }
 
 gettriggers(name) {
@@ -224,13 +231,15 @@ setambientroomtone(room, alias, fadein, fadeout) {
   level.ambientrooms[room].tone = alias;
   level.ambientrooms[room].fadein = 2;
 
-  if(isDefined(fadein) && fadein >= 0)
+  if(isDefined(fadein) && fadein >= 0) {
     level.ambientrooms[room].fadein = fadein;
+  }
 
   level.ambientrooms[room].fadeout = 2;
 
-  if(isDefined(fadeout) && fadeout >= 0)
+  if(isDefined(fadeout) && fadeout >= 0) {
     level.ambientrooms[room].fadeout = fadeout;
+  }
 }
 
 setambientroomsnapshot(room, snapshot) {
@@ -260,13 +269,15 @@ setambientroomcontext(room, type, value) {
     return;
   }
 
-  if(!isDefined(level.ambientrooms[room].context))
+  if(!isDefined(level.ambientrooms[room].context)) {
     level.ambientrooms[room].context = [];
+  }
 
   level.ambientrooms[room].context[type] = value;
 
-  if(!isDefined(level.ambientcontexts))
+  if(!isDefined(level.ambientcontexts)) {
     level.ambientcontexts = [];
+  }
 
   level.ambientcontexts[type] = type;
 }
@@ -284,8 +295,9 @@ setambientroomreverb(room, reverbroomtype, dry, wet, fade) {
   level.ambientrooms[room].reverb.wet = wet;
   level.ambientrooms[room].reverb.fade = 2;
 
-  if(isDefined(fade) && fade >= 0)
+  if(isDefined(fade) && fade >= 0) {
     level.ambientrooms[room].reverb.fade = fade;
+  }
 }
 
 activateambientpackage(clientnum, package, priority) {
@@ -353,8 +365,9 @@ activateambientroom(clientnum, room, priority) {
     }
 
     if(isDefined(defaultroom)) {
-      if(defaultroom == room)
+      if(defaultroom == room) {
         forceambientroom(1, 1, room);
+      }
     }
   }
 }
@@ -482,8 +495,9 @@ ambientelementthread() {
       timer = randomfloatrange(self.spawnmin, self.spawnmax);
       wait(timer);
 
-      if(getdvarint(#"_id_0AEB127D") > 0)
+      if(getdvarint(#"_id_0AEB127D") > 0) {
         iprintlnbold("AP : playing2d: " + self.alias);
+      }
 
       playSound(0, self.alias);
     }
@@ -509,16 +523,19 @@ ambientelementthread() {
         level.ambientpackagescriptoriginpool[index].soundid = playSound(0, self.alias, pos);
 
         if(getdvarint(#"_id_0AEB127D") > 0) {
-          if(level.ambientpackagescriptoriginpool[index].soundid == -1)
+          if(level.ambientpackagescriptoriginpool[index].soundid == -1) {
             col = vectorscale((1, 0, 0), 0.8);
-          else
+          }
+          else {
             col = vectorscale((0, 1, 0), 0.8);
+          }
 
           print3d(pos, "AP : " + self.alias, col, 1, 3, 30);
         }
 
-        while(level.ambientpackagescriptoriginpool[index].soundid != -1)
+        while(level.ambientpackagescriptoriginpool[index].soundid != -1) {
           wait 0.01;
+        }
       }
     }
   }
@@ -536,8 +553,9 @@ getscriptoriginpoolindex() {
   level.ambientnummissedsounds++;
   level.ambientnumseqmissedsounds++;
 
-  if(getdvarint(#"_id_0AEB127D") > 0)
+  if(getdvarint(#"_id_0AEB127D") > 0) {
     iprintlnbold("No free origins " + level.ambientnumseqmissedsounds + " ( " + level.ambientnummissedsounds + " )");
+  }
 
   return -1;
 }
@@ -630,8 +648,9 @@ updateactiveambientroom() {
   for(;;) {
     newambientroom = findhighestpriorityambientroom();
 
-    if(newambientroom == level.activeambientroomname)
+    if(newambientroom == level.activeambientroomname) {
       level waittill("updateActiveAmbientRoom");
+    }
 
     println("*** nar " + newambientroom + " " + level.activeambientroomname);
 
@@ -646,30 +665,36 @@ updateactiveambientroom() {
       newroom.ent = oldroom.ent;
       oldroom.ent = tmp;
     } else {
-      if(isDefined(newroom) && isDefined(newroom.tone))
+      if(isDefined(newroom) && isDefined(newroom.tone)) {
         newroom.id = playLoopSound(0, newroom.ent, newroom.tone, newroom.fadein);
+      }
       else {
       }
 
-      if(isDefined(oldroom) && isDefined(oldroom.tone))
+      if(isDefined(oldroom) && isDefined(oldroom.tone)) {
         stoploopsound(0, oldroom.ent, oldroom.fadeout);
+      }
     }
 
-    if(!isDefined(newroom) || !isDefined(newroom.reverb))
+    if(!isDefined(newroom) || !isDefined(newroom.reverb)) {
       deactivatereverb("snd_enveffectsprio_level", 2);
-    else
+    }
+    else {
       setreverb("snd_enveffectsprio_level", newroom.reverb.reverbroomtype, newroom.reverb.dry, newroom.reverb.wet, newroom.reverb.fade);
+    }
 
     snapshot = "default";
 
-    if(isDefined(newroom) && isDefined(newroom.snapshot))
+    if(isDefined(newroom) && isDefined(newroom.snapshot)) {
       snapshot = newroom.snapshot;
+    }
 
     setambientsnapshot(snapshot);
     sidechainduck = "default";
 
-    if(isDefined(newroom) && isDefined(newroom.sidechainduck))
+    if(isDefined(newroom) && isDefined(newroom.sidechainduck)) {
       sidechainduck = newroom.sidechainduck;
+    }
 
     setambientsidechainduck(sidechainduck);
     level.activeambientroomname = newambientroom;
@@ -708,8 +733,9 @@ init_trigger_data() {
         keys = getarraykeys(room.context);
 
         if(isDefined(keys)) {
-          for(j = 0; j < keys.size; j++)
+          for(j = 0; j < keys.size; j++) {
             setambientroomcontextengine(roomname, keys[j], room.context[keys[j]], 0);
+          }
         }
       }
     }
@@ -729,8 +755,9 @@ finddefaultroom() {
 
   if(isDefined(roomarray)) {
     for(i = 0; i < roomarray.size; i++) {
-      if(level.ambientrooms[roomarray[i]].defaultroom == 1)
+      if(level.ambientrooms[roomarray[i]].defaultroom == 1) {
         return roomarray[i];
+      }
     }
   }
 
@@ -742,8 +769,9 @@ finddefaultpackage() {
 
   if(isDefined(packagearray)) {
     for(i = 0; i < packagearray.size; i++) {
-      if(level.ambientpackages[packagearray[i]].defaultpackage == 1)
+      if(level.ambientpackages[packagearray[i]].defaultpackage == 1) {
         return packagearray[i];
+      }
     }
   }
 
@@ -751,11 +779,13 @@ finddefaultpackage() {
 }
 
 switchactiveambientroom(ambientroom, roomcollidercent) {
-  if(isDefined(level.activeambientroom))
+  if(isDefined(level.activeambientroom)) {
     oldroom = level.activeambientroom;
+  }
 
-  if(isDefined(ambientroom) && ambientroom != "")
+  if(isDefined(ambientroom) && ambientroom != "") {
     newroom = level.ambientrooms[ambientroom];
+  }
   else {
     newroom = undefined;
     defaultroom = finddefaultroom();
@@ -771,38 +801,46 @@ switchactiveambientroom(ambientroom, roomcollidercent) {
     newroom.ent = oldroom.ent;
     oldroom.ent = tmp;
   } else {
-    if(isDefined(newroom) && isDefined(newroom.tone))
+    if(isDefined(newroom) && isDefined(newroom.tone)) {
       newroom.id = playLoopSound(0, newroom.ent, newroom.tone, newroom.fadein);
+    }
     else {
     }
 
-    if(isDefined(oldroom) && isDefined(oldroom.tone))
+    if(isDefined(oldroom) && isDefined(oldroom.tone)) {
       stoploopsound(0, oldroom.ent, oldroom.fadeout);
+    }
   }
 
-  if(!isDefined(newroom) || !isDefined(newroom.reverb))
+  if(!isDefined(newroom) || !isDefined(newroom.reverb)) {
     deactivatereverb("snd_enveffectsprio_level", 2);
-  else
+  }
+  else {
     setreverb("snd_enveffectsprio_level", newroom.reverb.reverbroomtype, newroom.reverb.dry, newroom.reverb.wet, newroom.reverb.fade);
+  }
 
   snapshot = "default";
 
-  if(isDefined(newroom) && isDefined(newroom.snapshot))
+  if(isDefined(newroom) && isDefined(newroom.snapshot)) {
     snapshot = newroom.snapshot;
+  }
 
   setambientsnapshot(snapshot);
   sidechainduck = "default";
 
-  if(isDefined(newroom) && isDefined(newroom.sidechainduck))
+  if(isDefined(newroom) && isDefined(newroom.sidechainduck)) {
     sidechainduck = newroom.sidechainduck;
+  }
 
   setambientsidechainduck(sidechainduck);
 
-  if(isDefined(newroom))
+  if(isDefined(newroom)) {
     level.activeambientroom = newroom;
+  }
 
-  if(isDefined(level.sndambientcontextonplayer))
+  if(isDefined(level.sndambientcontextonplayer)) {
     level thread[[level.sndambientcontextonplayer]](ambientroom, roomcollidercent);
+  }
 }
 
 switchactiveambientpackage(ambientpackage, packagecollidercent) {
@@ -823,8 +861,9 @@ switchactiveambientpackage(ambientpackage, packagecollidercent) {
     }
   }
 
-  if(isDefined(level.activeambientpackage) && level.activeambientpackage != "")
+  if(isDefined(level.activeambientpackage) && level.activeambientpackage != "") {
     level notify("killambientElementThread" + level.activeambientpackage);
+  }
 
   if(isDefined(newpackage)) {
     level.activeambientpackage = packagename;

@@ -36,8 +36,9 @@ displaypopupswaiter() {
   self.startmessagenotifyqueue = [];
 
   while(true) {
-    if(self.killstreaknotifyqueue.size == 0 && self.messagenotifyqueue.size == 0)
+    if(self.killstreaknotifyqueue.size == 0 && self.messagenotifyqueue.size == 0) {
       self waittill("received award");
+    }
 
     waittillframeend;
 
@@ -45,15 +46,18 @@ displaypopupswaiter() {
       self clearcenterpopups();
       nextnotifydata = self.startmessagenotifyqueue[0];
 
-      for(i = 1; i < self.startmessagenotifyqueue.size; i++)
+      for(i = 1; i < self.startmessagenotifyqueue.size; i++) {
         self.startmessagenotifyqueue[i - 1] = self.startmessagenotifyqueue[i];
+      }
 
       self.startmessagenotifyqueue[i - 1] = undefined;
 
-      if(isDefined(nextnotifydata.duration))
+      if(isDefined(nextnotifydata.duration)) {
         duration = nextnotifydata.duration;
-      else
+      }
+      else {
         duration = level.startmessagedefaultduration;
+      }
 
       wait(duration);
     } else if(self.killstreaknotifyqueue.size > 0) {
@@ -61,13 +65,15 @@ displaypopupswaiter() {
       killstreaktablenumber = self.killstreaknotifyqueue[0].killstreaktablenumber;
       hardpointtype = self.killstreaknotifyqueue[0].hardpointtype;
 
-      for(i = 1; i < self.killstreaknotifyqueue.size; i++)
+      for(i = 1; i < self.killstreaknotifyqueue.size; i++) {
         self.killstreaknotifyqueue[i - 1] = self.killstreaknotifyqueue[i];
+      }
 
       self.killstreaknotifyqueue[i - 1] = undefined;
 
-      if(!isDefined(streakcount))
+      if(!isDefined(streakcount)) {
         streakcount = 0;
+      }
 
       self displaykillstreak(streakcount, killstreaktablenumber);
       wait(level.killstreaksettings.waittime);
@@ -75,15 +81,18 @@ displaypopupswaiter() {
       self clearcenterpopups();
       nextnotifydata = self.messagenotifyqueue[0];
 
-      for(i = 1; i < self.messagenotifyqueue.size; i++)
+      for(i = 1; i < self.messagenotifyqueue.size; i++) {
         self.messagenotifyqueue[i - 1] = self.messagenotifyqueue[i];
+      }
 
       self.messagenotifyqueue[i - 1] = undefined;
 
-      if(isDefined(nextnotifydata.duration))
+      if(isDefined(nextnotifydata.duration)) {
         duration = nextnotifydata.duration;
-      else
+      }
+      else {
         duration = level.regulargamemessages.waittime;
+      }
     }
   }
 }

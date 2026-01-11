@@ -51,15 +51,17 @@ onplayerspawned() {
 
     foreach(s_stat in level._challenges.a_players[self.characterindex].a_stats) {
       if(s_stat.b_medal_awarded && !s_stat.b_reward_claimed) {
-        foreach(m_board in level.a_m_challenge_boards)
+        foreach(m_board in level.a_m_challenge_boards) {
         self setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
+        }
       }
     }
 
     foreach(s_stat in level._challenges.s_team.a_stats) {
       if(s_stat.b_medal_awarded && s_stat.a_b_player_rewarded[self.characterindex]) {
-        foreach(m_board in level.a_m_challenge_boards)
+        foreach(m_board in level.a_m_challenge_boards) {
         self setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
+        }
       }
     }
   }
@@ -68,31 +70,37 @@ onplayerspawned() {
 stats_init() {
   level._challenges.a_stats = [];
 
-  if(isDefined(level.challenges_add_stats))
+  if(isDefined(level.challenges_add_stats)) {
     [[level.challenges_add_stats]]();
+  }
 
   foreach(stat in level._challenges.a_stats) {
-    if(isDefined(stat.fp_init_stat))
+    if(isDefined(stat.fp_init_stat)) {
       level thread[[stat.fp_init_stat]]();
+    }
   }
 
   level._challenges.a_players = [];
 
-  for(i = 0; i < 4; i++)
+  for(i = 0; i < 4; i++) {
     player_stats_init(i);
+  }
 
   team_stats_init();
 }
 
 add_stat(str_name, b_team, str_hint, n_goal, str_reward_model, fp_give_reward, fp_init_stat) {
-  if(!isDefined(b_team))
+  if(!isDefined(b_team)) {
     b_team = 0;
+  }
 
-  if(!isDefined(str_hint))
+  if(!isDefined(str_hint)) {
     str_hint = &"";
+  }
 
-  if(!isDefined(n_goal))
+  if(!isDefined(n_goal)) {
     n_goal = 1;
+  }
 
   stat = spawnStruct();
   stat.str_name = str_name;
@@ -102,8 +110,9 @@ add_stat(str_name, b_team, str_hint, n_goal, str_reward_model, fp_give_reward, f
   stat.str_reward_model = str_reward_model;
   stat.fp_give_reward = fp_give_reward;
 
-  if(isDefined(fp_init_stat))
+  if(isDefined(fp_init_stat)) {
     stat.fp_init_stat = fp_init_stat;
+  }
 
   level._challenges.a_stats[str_name] = stat;
   stat.cf_complete = "challenge_complete_" + level._challenges.a_stats.size;
@@ -123,8 +132,9 @@ player_stats_init(n_index) {
 
   foreach(s_challenge in level._challenges.a_stats) {
     if(!s_challenge.b_team) {
-      if(!isDefined(s_player_set.a_stats[s_challenge.str_name]))
+      if(!isDefined(s_player_set.a_stats[s_challenge.str_name])) {
         s_player_set.a_stats[s_challenge.str_name] = spawnStruct();
+      }
 
       s_stat = s_player_set.a_stats[s_challenge.str_name];
       s_stat.s_parent = s_challenge;
@@ -153,8 +163,9 @@ team_stats_init(n_index) {
 
   foreach(s_challenge in level._challenges.a_stats) {
     if(s_challenge.b_team) {
-      if(!isDefined(s_team_set.a_stats[s_challenge.str_name]))
+      if(!isDefined(s_team_set.a_stats[s_challenge.str_name])) {
         s_team_set.a_stats[s_challenge.str_name] = spawnStruct();
+      }
 
       s_stat = s_team_set.a_stats[s_challenge.str_name];
       s_stat.s_parent = s_challenge;
@@ -173,10 +184,12 @@ team_stats_init(n_index) {
 }
 
 challenge_exists(str_name) {
-  if(isDefined(level._challenges.a_stats[str_name]))
+  if(isDefined(level._challenges.a_stats[str_name])) {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 get_stat(str_stat, player) {
@@ -184,17 +197,20 @@ get_stat(str_stat, player) {
   assert(isDefined(s_parent_stat), "Challenge stat: " + str_stat + " does not exist");
   assert(s_parent_stat.b_team || isDefined(player), "Challenge stat: " + str_stat + " is a player stat, but no player passed in");
 
-  if(s_parent_stat.b_team)
+  if(s_parent_stat.b_team) {
     s_stat = level._challenges.s_team.a_stats[str_stat];
-  else
+  }
+  else {
     s_stat = level._challenges.a_players[player.characterindex].a_stats[str_stat];
+  }
 
   return s_stat;
 }
 
 increment_stat(str_stat, n_increment) {
-  if(!isDefined(n_increment))
+  if(!isDefined(n_increment)) {
     n_increment = 1;
+  }
 
   s_stat = get_stat(str_stat, self);
 
@@ -214,8 +230,9 @@ set_stat(str_stat, n_set) {
 }
 
 check_stat_complete(s_stat) {
-  if(s_stat.b_medal_awarded)
+  if(s_stat.b_medal_awarded) {
     return true;
+  }
 
   if(s_stat.n_value >= s_stat.s_parent.n_goal) {
     s_stat.b_medal_awarded = 1;
@@ -239,17 +256,20 @@ check_stat_complete(s_stat) {
       self setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
     }
 
-    foreach(m_board in level.a_m_challenge_boards)
+    foreach(m_board in level.a_m_challenge_boards) {
     m_board showpart(s_stat.str_glow_tag);
+    }
 
     if(isplayer(self)) {
-      if(level._challenges.a_players[self.characterindex].n_completed + level._challenges.s_team.n_completed == level._challenges.a_stats.size)
+      if(level._challenges.a_players[self.characterindex].n_completed + level._challenges.s_team.n_completed == level._challenges.a_stats.size) {
         self notify("all_challenges_complete");
+      }
     } else {
       foreach(player in get_players()) {
         if(isDefined(player.characterindex)) {
-          if(level._challenges.a_players[player.characterindex].n_completed + level._challenges.s_team.n_completed == level._challenges.a_stats.size)
+          if(level._challenges.a_players[player.characterindex].n_completed + level._challenges.s_team.n_completed == level._challenges.a_stats.size) {
             player notify("all_challenges_complete");
+          }
         }
       }
     }
@@ -259,27 +279,33 @@ check_stat_complete(s_stat) {
 }
 
 stat_reward_available(stat, player) {
-  if(isstring(stat))
+  if(isstring(stat)) {
     s_stat = get_stat(stat, player);
-  else
+  }
+  else {
     s_stat = stat;
+  }
 
-  if(!s_stat.b_medal_awarded)
+  if(!s_stat.b_medal_awarded) {
     return false;
+  }
 
-  if(s_stat.b_reward_claimed)
+  if(s_stat.b_reward_claimed) {
     return false;
+  }
 
-  if(s_stat.s_parent.b_team && s_stat.a_b_player_rewarded[player.characterindex])
+  if(s_stat.s_parent.b_team && s_stat.a_b_player_rewarded[player.characterindex]) {
     return false;
+  }
 
   return true;
 }
 
 player_has_unclaimed_team_reward() {
   foreach(s_stat in level._challenges.s_team.a_stats) {
-    if(s_stat.b_medal_awarded && !s_stat.a_b_player_rewarded[self.characterindex])
+    if(s_stat.b_medal_awarded && !s_stat.a_b_player_rewarded[self.characterindex]) {
       return true;
+    }
   }
 
   return false;
@@ -348,8 +374,9 @@ box_init() {
   s_unitrigger_stub.m_box = self;
   s_unitrigger_stub.b_disable_trigger = 0;
 
-  if(isDefined(self.script_string))
+  if(isDefined(self.script_string)) {
     s_unitrigger_stub.str_location = self.script_string;
+  }
 
   if(isDefined(s_unitrigger_stub.m_box.target)) {
     s_unitrigger_stub.m_board = getent(s_unitrigger_stub.m_box.target, "targetname");
@@ -362,8 +389,9 @@ box_init() {
 }
 
 box_prompt_and_visiblity(player) {
-  if(self.stub.b_disable_trigger)
+  if(self.stub.b_disable_trigger) {
     return false;
+  }
 
   self thread update_box_prompt(player);
   return true;
@@ -383,10 +411,12 @@ update_box_prompt(player) {
     self.b_can_open = 0;
 
     if(self.stub.b_busy) {
-      if(self.stub ent_flag("waiting_for_grab") && (!isDefined(self.stub.player_using) || self.stub.player_using == player))
+      if(self.stub ent_flag("waiting_for_grab") && (!isDefined(self.stub.player_using) || self.stub.player_using == player)) {
         str_hint = &"ZM_TOMB_CH_G";
-      else
+      }
+      else {
         str_hint = &"";
+      }
     } else {
       str_hint = &"";
       player.s_lookat_stat = undefined;
@@ -441,8 +471,9 @@ update_box_prompt(player) {
         str_name = s_hint_tag.s_stat.s_parent.str_name;
         n_character_index = s_hint_tag.n_character_index;
 
-        if(n_character_index != 4)
+        if(n_character_index != 4) {
           s_player_stat = level._challenges.a_players[n_character_index].a_stats[str_name];
+        }
         else {
         }
       }
@@ -473,11 +504,13 @@ box_think() {
       }
 
       if(self.stub ent_flag("waiting_for_grab")) {
-        if(!isDefined(self.stub.player_using))
+        if(!isDefined(self.stub.player_using)) {
           self.stub.player_using = player;
+        }
 
-        if(player == self.stub.player_using)
+        if(player == self.stub.player_using) {
           self.stub ent_flag_clear("waiting_for_grab");
+        }
       }
 
       wait 0.05;
@@ -493,11 +526,13 @@ box_think() {
 }
 
 get_reward_category(player, s_select_stat) {
-  if(isDefined(s_select_stat) && s_select_stat.s_parent.b_team || level._challenges.s_team.n_medals_held > 0)
+  if(isDefined(s_select_stat) && s_select_stat.s_parent.b_team || level._challenges.s_team.n_medals_held > 0) {
     return level._challenges.s_team;
+  }
 
-  if(level._challenges.a_players[player.characterindex].n_medals_held > 0)
+  if(level._challenges.a_players[player.characterindex].n_medals_held > 0) {
     return level._challenges.a_players[player.characterindex];
+  }
 
   return undefined;
 }
@@ -518,23 +553,27 @@ get_reward_stat(s_category) {
 open_box(player, ut_stub, fp_reward_override, param1) {
   m_box = ut_stub.m_box;
 
-  while(ut_stub.b_busy)
+  while(ut_stub.b_busy) {
     wait 1;
+  }
 
   ut_stub.b_busy = 1;
   ut_stub.player_using = player;
 
-  if(isDefined(player) && isDefined(player.s_lookat_stat))
+  if(isDefined(player) && isDefined(player.s_lookat_stat)) {
     s_select_stat = player.s_lookat_stat;
+  }
 
   m_box setanim( % o_zombie_dlc4_challenge_box_open);
   m_box delay_thread(0.75, ::setclientfield, "foot_print_box_glow", 1);
   wait 0.5;
 
-  if(isDefined(fp_reward_override))
+  if(isDefined(fp_reward_override)) {
     ut_stub[[fp_reward_override]](player, param1);
-  else
+  }
+  else {
     ut_stub spawn_reward(player, s_select_stat);
+  }
 
   wait 1;
   m_box setanim( % o_zombie_dlc4_challenge_box_close);
@@ -551,8 +590,9 @@ spawn_reward(player, s_select_stat) {
     if(isDefined(s_select_stat)) {
       s_category = get_reward_category(player, s_select_stat);
 
-      if(stat_reward_available(s_select_stat, player))
+      if(stat_reward_available(s_select_stat, player)) {
         s_stat = s_select_stat;
+      }
     }
 
     if(!isDefined(s_stat)) {
@@ -561,16 +601,18 @@ spawn_reward(player, s_select_stat) {
     }
 
     if(self[[s_stat.s_parent.fp_give_reward]](player, s_stat)) {
-      if(isDefined(s_stat.s_parent.cf_complete))
+      if(isDefined(s_stat.s_parent.cf_complete)) {
         player setclientfieldtoplayer(s_stat.s_parent.cf_complete, 0);
+      }
 
       if(s_stat.s_parent.b_team) {
         s_stat.a_b_player_rewarded[player.characterindex] = 1;
         a_players = get_players();
 
         foreach(player in a_players) {
-          if(!s_stat.a_b_player_rewarded[player.characterindex])
+          if(!s_stat.a_b_player_rewarded[player.characterindex]) {
             return;
+          }
         }
       }
 
@@ -581,8 +623,9 @@ spawn_reward(player, s_select_stat) {
 }
 
 reward_grab_wait(n_timeout) {
-  if(!isDefined(n_timeout))
+  if(!isDefined(n_timeout)) {
     n_timeout = 10;
+  }
 
   self ent_flag_clear("reward_timeout");
   self ent_flag_set("waiting_for_grab");
@@ -600,8 +643,9 @@ reward_sink(n_delay, n_z, n_time) {
   if(isDefined(n_delay)) {
     wait(n_delay);
 
-    if(isDefined(self))
+    if(isDefined(self)) {
       self movez(n_z * -1, n_time);
+    }
   }
 }
 
@@ -609,13 +653,15 @@ reward_rise_and_grab(m_reward, n_z, n_rise_time, n_delay, n_timeout) {
   m_reward movez(n_z, n_rise_time);
   wait(n_rise_time);
 
-  if(n_timeout > 0)
+  if(n_timeout > 0) {
     m_reward thread reward_sink(n_delay, n_z, n_timeout + 1);
+  }
 
   self reward_grab_wait(n_timeout);
 
-  if(self ent_flag("reward_timeout"))
+  if(self ent_flag("reward_timeout")) {
     return false;
+  }
 
   return true;
 }
@@ -663,8 +709,9 @@ devgui_award_challenge(n_index) {
       player setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
     }
 
-    foreach(m_board in level.a_m_challenge_boards)
+    foreach(m_board in level.a_m_challenge_boards) {
     m_board showpart(s_stat.str_glow_tag);
+    }
   } else {
     a_keys = getarraykeys(level._challenges.a_players[0].a_stats);
     a_players = get_players();
@@ -678,8 +725,9 @@ devgui_award_challenge(n_index) {
       s_stat.b_reward_claimed = 0;
       player setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
 
-      foreach(m_board in level.a_m_challenge_boards)
+      foreach(m_board in level.a_m_challenge_boards) {
       m_board showpart(s_stat.str_glow_tag);
+      }
     }
   }
 

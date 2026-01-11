@@ -61,8 +61,9 @@ set_level_lighting_values() {
 setup_fade_angle_lights() {
   var_0 = getEntArray("fade_angle_light", "targetname");
 
-  foreach(var_2 in var_0)
+  foreach(var_2 in var_0) {
   var_2 thread update_fade_angle_lights();
+  }
 }
 
 update_fade_angle_lights() {
@@ -72,11 +73,13 @@ update_fade_angle_lights() {
   if(isDefined(self.script_noteworthy)) {
     var_2 = strtok(self.script_noteworthy, "-");
 
-    if(isDefined(var_2[0]))
+    if(isDefined(var_2[0])) {
       var_0 = float(var_2[0]);
+    }
 
-    if(isDefined(var_2[1]))
+    if(isDefined(var_2[1])) {
       var_1 = float(var_2[1]);
+    }
   }
 
   var_3 = var_0 / 180.0;
@@ -513,8 +516,9 @@ exp_fade_overlay(var_0, var_1) {
 set_specular_scale(var_0, var_1) {
   var_2 = getdvarfloat("r_specularcolorscale");
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 0;
+  }
 
   var_3 = abs(int(var_1 * 4));
   var_4 = var_0 - var_2;
@@ -564,8 +568,9 @@ setup_lighting_pass_interior() {
 }
 
 apply_lighting_pass_hunted_outside(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 5.0;
+  }
 
   maps\_utility::vision_set_fog_changes("hunted", 2);
   level.player maps\_utility::set_light_set_player("hunted");

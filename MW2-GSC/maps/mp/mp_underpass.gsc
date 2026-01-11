@@ -24,6 +24,7 @@ main() {
   setdvar("r_lightGridIntensity", 1.3);
   setdvar("r_lightGridContrast", .5);
 
-  if(level.ps3)
+  if(level.ps3) {
     setdvar("sm_sunShadowScale", "0.5"); // ps3 optimization
+  }
 }

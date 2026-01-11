@@ -79,11 +79,13 @@ main() {
   if(isDefined(self.deathfunction)) {
     var_1 = self[[self.deathfunction]]();
 
-    if(!isDefined(var_1))
+    if(!isDefined(var_1)) {
       var_1 = 1;
+    }
 
-    if(var_1)
+    if(var_1) {
       return;
+    }
   }
 
   animscripts\utility::initialize("death");
@@ -91,24 +93,28 @@ main() {
   anim.numdeathsuntilcrawlingpain--;
   anim.numdeathsuntilcornergrenadedeath--;
 
-  if(isDefined(self.ragdoll_immediate) || self.forceragdollimmediate)
+  if(isDefined(self.ragdoll_immediate) || self.forceragdollimmediate) {
     doimmediateragdolldeath();
+  }
 
   if(isDefined(self.deathanim)) {
     playdeathanim(self.deathanim);
 
-    if(isDefined(self.deathanimscript))
+    if(isDefined(self.deathanimscript)) {
       self[[self.deathanimscript]]();
+    }
 
     return;
   }
 
   var_2 = animscripts\pain::wasdamagedbyexplosive();
 
-  if(self.damagelocation == "helmet" || self.damagelocation == "head")
+  if(self.damagelocation == "helmet" || self.damagelocation == "head") {
     helmetpop();
-  else if(var_2 && randomint(3) == 0)
+  }
+  else if(var_2 && randomint(3) == 0) {
     helmetpop();
+  }
 
   self clearanim( % root, 0.3);
 
@@ -140,28 +146,34 @@ doimmediateragdolldeath() {
   var_0 = 10;
   var_1 = common_scripts\_destructible::getdamagetype(self.damagemod);
 
-  if(isDefined(self.attacker) && self.attacker == level.player && var_1 == "melee")
+  if(isDefined(self.attacker) && self.attacker == level.player && var_1 == "melee") {
     var_0 = 5;
+  }
 
   var_2 = self.damagetaken;
 
-  if(var_1 == "bullet")
+  if(var_1 == "bullet") {
     var_2 = max(var_2, 300);
+  }
 
   var_3 = var_0 * var_2;
   var_4 = max(0.3, self.damagedir[2]);
   var_5 = (self.damagedir[0], self.damagedir[1], var_4);
 
-  if(isDefined(self.ragdoll_directionscale))
+  if(isDefined(self.ragdoll_directionscale)) {
     var_5 = var_5 * self.ragdoll_directionscale;
-  else
+  }
+  else {
     var_5 = var_5 * var_3;
+  }
 
-  if(self.forceragdollimmediate)
+  if(self.forceragdollimmediate) {
     var_5 = var_5 + self.prevanimdelta * 20 * 10;
+  }
 
-  if(isDefined(self.ragdoll_start_vel))
+  if(isDefined(self.ragdoll_start_vel)) {
     var_5 = var_5 + self.ragdoll_start_vel * 10;
+  }
 
   self startragdollfromimpact(self.damagelocation, var_5);
   wait 0.05;
@@ -176,14 +188,17 @@ meleegetattackercardinaldirection(var_0, var_1) {
   var_3 = cos(60);
 
   if(squared(var_2) < squared(var_3)) {
-    if(cross2d(var_0, var_1) > 0)
+    if(cross2d(var_0, var_1) > 0) {
       return 1;
-    else
+    }
+    else {
       return 3;
+    }
   } else if(var_2 < 0)
     return 0;
-  else
+  else {
     return 2;
+  }
 }
 
 orientmeleevictim() {
@@ -202,32 +217,37 @@ orientmeleevictim() {
 }
 
 playdeathanim(var_0) {
-  if(!animhasnotetrack(var_0, "dropgun") && !animhasnotetrack(var_0, "fire_spray"))
+  if(!animhasnotetrack(var_0, "dropgun") && !animhasnotetrack(var_0, "fire_spray")) {
     animscripts\shared::dropallaiweapons();
+  }
 
   orientmeleevictim();
   self setflaggedanimknoballrestart("deathanim", var_0, % body, 1, 0.1);
   animscripts\face::playfacialanim(var_0, "death");
 
   if(isDefined(self.skipdeathanim)) {
-    if(!isDefined(self.noragdoll))
+    if(!isDefined(self.noragdoll)) {
       self startragdoll();
+    }
 
     wait 0.05;
     self animmode("gravity");
   } else if(isDefined(self.ragdolltime))
     thread waitforragdoll(self.ragdolltime);
   else if(!animhasnotetrack(var_0, "start_ragdoll")) {
-    if(self.damagemod == "MOD_MELEE")
+    if(self.damagemod == "MOD_MELEE") {
       var_1 = 0.7;
-    else
+    }
+    else {
       var_1 = 0.35;
+    }
 
     thread waitforragdoll(getanimlength(var_0) * var_1);
   }
 
-  if(!isDefined(self.skipdeathanim))
+  if(!isDefined(self.skipdeathanim)) {
     thread playdeathfx();
+  }
 
   self endon("forcedRagdoll");
 
@@ -276,11 +296,13 @@ checkforceragdoll() {
 waitforragdoll(var_0) {
   wait(var_0);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     animscripts\shared::dropallaiweapons();
+  }
 
-  if(isDefined(self) && !isDefined(self.noragdoll))
+  if(isDefined(self) && !isDefined(self.noragdoll)) {
     self startragdoll();
+  }
 }
 
 playdeathfx() {
@@ -308,16 +330,19 @@ play_blood_pool(var_0, var_1) {
   var_2 = var_2 + var_4 * -8.5 + var_5 * 5 + var_6 * 0;
   var_7 = bulletTrace(var_2 + (0, 0, 30), var_2 - (0, 0, 100), 0, undefined);
 
-  if(var_7["normal"][2] > 0.9)
+  if(var_7["normal"][2] > 0.9) {
     playFX(level._effect["deathfx_bloodpool_generic"], var_2);
+  }
 }
 
 specialdeath() {
-  if(self.a.special == "none")
+  if(self.a.special == "none") {
     return 0;
+  }
 
-  if(self.damagemod == "MOD_MELEE")
+  if(self.damagemod == "MOD_MELEE") {
     return 0;
+  }
 
   switch (self.a.special) {
     case "cover_right":
@@ -327,10 +352,12 @@ specialdeath() {
       } else {
         var_0 = [];
 
-        if(animscripts\utility::damagelocationisany("head", "neck"))
+        if(animscripts\utility::damagelocationisany("head", "neck")) {
           var_0 = animscripts\utility::lookupanim("death", "cover_right_crouch_head");
-        else
+        }
+        else {
           var_0 = animscripts\utility::lookupanim("death", "cover_right_crouch_default");
+        }
 
         dodeathfromarray(var_0);
       }
@@ -353,22 +380,27 @@ specialdeath() {
     case "cover_crouch":
       var_0 = [];
 
-      if(animscripts\utility::damagelocationisany("head", "neck") && (self.damageyaw > 135 || self.damageyaw <= -45))
+      if(animscripts\utility::damagelocationisany("head", "neck") && (self.damageyaw > 135 || self.damageyaw <= -45)) {
         var_0[var_0.size] = animscripts\utility::lookupanim("death", "cover_crouch_head");
+      }
 
-      if(self.damageyaw > -45 && self.damageyaw <= 45)
+      if(self.damageyaw > -45 && self.damageyaw <= 45) {
         var_0[var_0.size] = animscripts\utility::lookupanim("death", "cover_crouch_back");
+      }
 
       var_0[var_0.size] = animscripts\utility::lookupanim("death", "cover_crouch_default");
       dodeathfromarray(var_0);
       return 1;
     case "saw":
-      if(self.a.pose == "stand")
+      if(self.a.pose == "stand") {
         dodeathfromarray(animscripts\utility::lookupanim("death", "saw_stand"));
-      else if(self.a.pose == "crouch")
+      }
+      else if(self.a.pose == "crouch") {
         dodeathfromarray(animscripts\utility::lookupanim("death", "saw_crouch"));
-      else
+      }
+      else {
         dodeathfromarray(animscripts\utility::lookupanim("death", "saw_prone"));
+      }
 
       return 1;
     case "dying_crawl":
@@ -393,8 +425,9 @@ dodeathfromarray(var_0) {
   var_1 = var_0[randomint(var_0.size)];
   playdeathanim(var_1);
 
-  if(isDefined(self.deathanimscript))
+  if(isDefined(self.deathanimscript)) {
     self[[self.deathanimscript]]();
+  }
 }
 
 playdeathsound() {
@@ -404,8 +437,9 @@ playdeathsound() {
 print3dfortime(var_0, var_1, var_2) {
   var_3 = var_2 * 20;
 
-  for(var_4 = 0; var_4 < var_3; var_4++)
+  for(var_4 = 0; var_4 < var_3; var_4++) {
     wait 0.05;
+  }
 }
 
 helmetpop() {
@@ -456,8 +490,9 @@ helmetlaunch(var_0) {
 }
 
 removeselffrom_squadlastseenenemypos(var_0) {
-  for(var_1 = 0; var_1 < anim.squadindex.size; var_1++)
+  for(var_1 = 0; var_1 < anim.squadindex.size; var_1++) {
     anim.squadindex[var_1] clearsightposnear(var_0);
+  }
 }
 
 clearsightposnear(var_0) {
@@ -471,64 +506,79 @@ clearsightposnear(var_0) {
 }
 
 shoulddorunningforwarddeath() {
-  if(self.a.movement != "run")
+  if(self.a.movement != "run") {
     return 0;
+  }
 
-  if(self getmotionangle() > 60 || self getmotionangle() < -60)
+  if(self getmotionangle() > 60 || self getmotionangle() < -60) {
     return 0;
+  }
 
-  if(self.damagemod == "MOD_MELEE")
+  if(self.damagemod == "MOD_MELEE") {
     return 0;
+  }
 
   return 1;
 }
 
 shoulddostrongbulletdamage(var_0, var_1, var_2, var_3) {
-  if(isDefined(self.a.doinglongdeath))
+  if(isDefined(self.a.doinglongdeath)) {
     return 0;
-
-  if(self.a.pose == "prone" || isDefined(self.a.onback))
-    return 0;
-
-  if(var_0 == "none")
-    return 0;
-
-  if(var_2 > 500)
-    return 1;
-
-  if(var_1 == "MOD_MELEE")
-    return 0;
-
-  if(self.a.movement == "run" && !isattackerwithindist(var_3, 275)) {
-    if(randomint(100) < 65)
-      return 0;
   }
 
-  if(animscripts\utility::issniperrifle(var_0) && self.maxhealth < var_2)
-    return 1;
+  if(self.a.pose == "prone" || isDefined(self.a.onback)) {
+    return 0;
+  }
 
-  if(animscripts\utility::isshotgun(var_0) && isattackerwithindist(var_3, 512))
-    return 1;
+  if(var_0 == "none") {
+    return 0;
+  }
 
-  if(isdeserteagle(var_0) && isattackerwithindist(var_3, 425))
+  if(var_2 > 500) {
     return 1;
+  }
+
+  if(var_1 == "MOD_MELEE") {
+    return 0;
+  }
+
+  if(self.a.movement == "run" && !isattackerwithindist(var_3, 275)) {
+    if(randomint(100) < 65) {
+      return 0;
+    }
+  }
+
+  if(animscripts\utility::issniperrifle(var_0) && self.maxhealth < var_2) {
+    return 1;
+  }
+
+  if(animscripts\utility::isshotgun(var_0) && isattackerwithindist(var_3, 512)) {
+    return 1;
+  }
+
+  if(isdeserteagle(var_0) && isattackerwithindist(var_3, 425)) {
+    return 1;
+  }
 
   return 0;
 }
 
 isdeserteagle(var_0) {
-  if(var_0 == "deserteagle")
+  if(var_0 == "deserteagle") {
     return 1;
+  }
 
   return 0;
 }
 
 isattackerwithindist(var_0, var_1) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(distance(self.origin, var_0.origin) > var_1)
+  if(distance(self.origin, var_0.origin) > var_1) {
     return 0;
+  }
 
   return 1;
 }
@@ -537,26 +587,32 @@ getdeathanim() {
   if(shoulddostrongbulletdamage(self.damageweapon, self.damagemod, self.damagetaken, self.attacker)) {
     var_0 = getstrongbulletdamagedeathanim();
 
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       return var_0;
+    }
   }
 
   if(isDefined(self.a.onback)) {
-    if(self.a.pose == "crouch")
+    if(self.a.pose == "crouch") {
       return getbackdeathanim();
-    else
+    }
+    else {
       animscripts\notetracks::stoponback();
+    }
   }
 
   if(self.a.pose == "stand") {
-    if(shoulddorunningforwarddeath())
+    if(shoulddorunningforwarddeath()) {
       return getrunningforwarddeathanim();
-    else
+    }
+    else {
       return getstanddeathanim();
+    }
   } else if(self.a.pose == "crouch")
     return getcrouchdeathanim();
-  else if(self.a.pose == "prone")
+  else if(self.a.pose == "prone") {
     return getpronedeathanim();
+  }
 }
 
 getstrongbulletdamagedeathanim() {
@@ -566,16 +622,20 @@ getstrongbulletdamagedeathanim() {
     return;
   }
   if(var_0 > 150) {
-    if(animscripts\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot"))
+    if(animscripts\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot")) {
       var_1 = animscripts\utility::lookupanim("death", "strong_legs");
-    else if(self.damagelocation == "torso_lower")
+    }
+    else if(self.damagelocation == "torso_lower") {
       var_1 = animscripts\utility::lookupanim("death", "strong_torso_lower");
-    else
+    }
+    else {
       var_1 = animscripts\utility::lookupanim("death", "strong_default");
+    }
   } else if(self.damageyaw < 0)
     var_1 = animscripts\utility::lookupanim("death", "strong_right");
-  else
+  else {
     var_1 = animscripts\utility::lookupanim("death", "strong_left");
+  }
 
   return var_1[randomint(var_1.size)];
 }
@@ -585,22 +645,25 @@ getrunningforwarddeathanim() {
     var_0 = animscripts\utility::lookupanim("death", "running_forward_f");
     var_1 = getrandomunblockedanim(var_0);
 
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       return var_1;
+    }
   }
 
   var_0 = animscripts\utility::lookupanim("death", "running_forward");
   var_1 = getrandomunblockedanim(var_0);
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     return var_1;
+  }
 
   return getstanddeathanim();
 }
 
 getrandomunblockedanim(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return undefined;
+  }
 
   var_1 = undefined;
 
@@ -608,8 +671,9 @@ getrandomunblockedanim(var_0) {
     var_3 = randomint(var_2);
     var_1 = var_0[var_3];
 
-    if(!isanimblocked(var_1))
+    if(!isanimblocked(var_1)) {
       return var_1;
+    }
 
     var_0[var_3] = var_0[var_2 - 1];
     var_0[var_2 - 1] = undefined;
@@ -634,8 +698,9 @@ removeundefined(var_0) {
 isanimblocked(var_0) {
   var_1 = 1;
 
-  if(animhasnotetrack(var_0, "code_move"))
+  if(animhasnotetrack(var_0, "code_move")) {
     var_1 = getnotetracktimes(var_0, "code_move")[0];
+  }
 
   var_2 = getmovedelta(var_0, 0, var_1);
   var_3 = self localtoworldcoords(var_2);
@@ -645,22 +710,28 @@ isanimblocked(var_0) {
 getstandpistoldeathanim() {
   var_0 = [];
 
-  if(abs(self.damageyaw) < 50)
+  if(abs(self.damageyaw) < 50) {
     var_0 = animscripts\utility::lookupanim("death", "stand_pistol_forward");
+  }
   else {
-    if(abs(self.damageyaw) < 110)
+    if(abs(self.damageyaw) < 110) {
       var_0 = animscripts\utility::lookupanim("death", "stand_pistol_front");
+    }
 
-    if(self.damagelocation == "torso_upper")
+    if(self.damagelocation == "torso_upper") {
       var_0 = common_scripts\utility::array_combine(animscripts\utility::lookupanim("death", "stand_pistol_torso_upper"), var_0);
-    else if(animscripts\utility::damagelocationisany("torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower"))
+    }
+    else if(animscripts\utility::damagelocationisany("torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower")) {
       var_0 = common_scripts\utility::array_combine(animscripts\utility::lookupanim("death", "stand_pistol_torso_upper"), var_0);
+    }
 
-    if(!animscripts\utility::damagelocationisany("head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun") && randomint(2) == 0)
+    if(!animscripts\utility::damagelocationisany("head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun") && randomint(2) == 0) {
       var_0 = common_scripts\utility::array_combine(animscripts\utility::lookupanim("death", "stand_pistol_upper_body"), var_0);
+    }
 
-    if(var_0.size == 0 || animscripts\utility::damagelocationisany("torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper"))
+    if(var_0.size == 0 || animscripts\utility::damagelocationisany("torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper")) {
       var_0 = common_scripts\utility::array_combine(animscripts\utility::lookupanim("death", "stand_pistol_default"), var_0);
+    }
   }
 
   return var_0;
@@ -670,27 +741,34 @@ getstanddeathanim() {
   var_0 = [];
   var_1 = [];
 
-  if(animscripts\utility::usingsidearm())
+  if(animscripts\utility::usingsidearm()) {
     var_0 = getstandpistoldeathanim();
+  }
   else if(isDefined(self.attacker) && self shouldplaymeleedeathanim(self.attacker)) {
-    if(self.damageyaw <= 120 || self.damageyaw > -120)
+    if(self.damageyaw <= 120 || self.damageyaw > -120) {
       var_0 = animscripts\utility::lookupanim("death", "melee_standing_front");
-    else if(self.damageyaw <= -60 && self.damageyaw > 60)
+    }
+    else if(self.damageyaw <= -60 && self.damageyaw > 60) {
       var_0 = animscripts\utility::lookupanim("death", "melee_standing_back");
-    else if(self.damageyaw < 0)
+    }
+    else if(self.damageyaw < 0) {
       var_0 = animscripts\utility::lookupanim("death", "melee_standing_left");
-    else
+    }
+    else {
       var_0 = animscripts\utility::lookupanim("death", "melee_standing_right");
+    }
   } else {
     if(animscripts\utility::damagelocationisany("torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_lower", "right_leg_lower")) {
       var_0 = animscripts\utility::lookupanim("death", "stand_lower_body");
       var_1 = animscripts\utility::lookupanim("death", "stand_lower_body_extended");
     } else if(animscripts\utility::damagelocationisany("head", "helmet"))
       var_0 = animscripts\utility::lookupanim("death", "stand_head");
-    else if(animscripts\utility::damagelocationisany("neck"))
+    else if(animscripts\utility::damagelocationisany("neck")) {
       var_0 = animscripts\utility::lookupanim("death", "stand_neck");
-    else if(animscripts\utility::damagelocationisany("torso_upper", "left_arm_upper"))
+    }
+    else if(animscripts\utility::damagelocationisany("torso_upper", "left_arm_upper")) {
       var_0 = animscripts\utility::lookupanim("death", "stand_left_shoulder");
+    }
 
     if(animscripts\utility::damagelocationisany("torso_upper")) {
       var_0 = common_scripts\utility::array_combine(var_0, animscripts\utility::lookupanim("death", "stand_torso_upper"));
@@ -712,8 +790,9 @@ getstanddeathanim() {
 
     var_2 = var_0.size > 0;
 
-    if(!var_2 || randomint(100) < 15)
+    if(!var_2 || randomint(100) < 15) {
       var_0 = common_scripts\utility::array_combine(var_0, animscripts\utility::lookupanim("death", "stand_default"));
+    }
 
     if(randomint(100) < 10 && firingdeathallowed()) {
       var_0 = common_scripts\utility::array_combine(var_0, animscripts\utility::lookupanim("death", "stand_default_firing"));
@@ -721,16 +800,19 @@ getstanddeathanim() {
     }
   }
 
-  if(var_0.size == 0)
+  if(var_0.size == 0) {
     var_0[var_0.size] = animscripts\utility::lookupanim("death", "stand_backup_default");
+  }
 
   if(!self.a.disablelongdeath && self.stairsstate == "none" && !isDefined(self.a.painonstairs)) {
     var_3 = randomint(var_0.size + var_1.size);
 
-    if(var_3 < var_0.size)
+    if(var_3 < var_0.size) {
       return var_0[var_3];
-    else
+    }
+    else {
       return var_1[var_3 - var_0.size];
+    }
   }
 
   return var_0[randomint(var_0.size)];
@@ -740,36 +822,46 @@ getcrouchdeathanim() {
   var_0 = [];
 
   if(isDefined(self.attacker) && self shouldplaymeleedeathanim(self.attacker)) {
-    if(self.damageyaw <= 120 || self.damageyaw > -120)
+    if(self.damageyaw <= 120 || self.damageyaw > -120) {
       var_0 = animscripts\utility::lookupanim("death", "melee_crouching_front");
-    else if(self.damageyaw <= -60 && self.damageyaw > 60)
+    }
+    else if(self.damageyaw <= -60 && self.damageyaw > 60) {
       var_0 = animscripts\utility::lookupanim("death", "melee_crouching_back");
-    else if(self.damageyaw < 0)
+    }
+    else if(self.damageyaw < 0) {
       var_0 = animscripts\utility::lookupanim("death", "melee_crouching_left");
-    else
+    }
+    else {
       var_0 = animscripts\utility::lookupanim("death", "melee_crouching_right");
+    }
   } else {
-    if(animscripts\utility::damagelocationisany("head", "neck"))
+    if(animscripts\utility::damagelocationisany("head", "neck")) {
       var_0 = animscripts\utility::lookupanim("death", "crouch_head");
+    }
 
-    if(animscripts\utility::damagelocationisany("torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck"))
+    if(animscripts\utility::damagelocationisany("torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck")) {
       var_0 = common_scripts\utility::array_combine(var_0, animscripts\utility::lookupanim("death", "crouch_torso"));
+    }
 
-    if(var_0.size < 2)
+    if(var_0.size < 2) {
       var_0 = common_scripts\utility::array_combine(var_0, animscripts\utility::lookupanim("death", "crouch_default1"));
+    }
 
-    if(var_0.size < 2)
+    if(var_0.size < 2) {
       var_0 = common_scripts\utility::array_combine(var_0, animscripts\utility::lookupanim("death", "crouch_default2"));
+    }
   }
 
   return var_0[randomint(var_0.size)];
 }
 
 getpronedeathanim() {
-  if(isDefined(self.a.proneaiming))
+  if(isDefined(self.a.proneaiming)) {
     return % prone_death_quickdeath;
-  else
+  }
+  else {
     return % dying_crawl_death_v1;
+  }
 }
 
 getbackdeathanim() {
@@ -778,11 +870,13 @@ getbackdeathanim() {
 }
 
 firingdeathallowed() {
-  if(!isDefined(self.weapon) || !animscripts\utility::usingriflelikeweapon() || !weaponisauto(self.weapon) || self.diequietly)
+  if(!isDefined(self.weapon) || !animscripts\utility::usingriflelikeweapon() || !weaponisauto(self.weapon) || self.diequietly) {
     return 0;
+  }
 
-  if(self.a.weaponpos["right"] == "none")
+  if(self.a.weaponpos["right"] == "none") {
     return 0;
+  }
 
   return 1;
 }
@@ -796,11 +890,13 @@ tryaddfiringdeathanim(var_0) {
 }
 
 playexplodedeathanim() {
-  if(isDefined(self.juggernaut))
+  if(isDefined(self.juggernaut)) {
     return 0;
+  }
 
-  if(self.damagelocation != "none")
+  if(self.damagelocation != "none") {
     return 0;
+  }
 
   var_0 = [];
 
@@ -845,8 +941,9 @@ playexplodedeathanim() {
     var_2 = getmovedelta(var_1, 0, 1);
     var_3 = self localtoworldcoords(var_2);
 
-    if(!self maymovetopoint(var_3, 0))
+    if(!self maymovetopoint(var_3, 0)) {
       return 0;
+    }
   }
 
   self animmode("nogravity");

@@ -163,8 +163,9 @@ busisonormovingbuildableupdateprompt(player, sethintstringnow, buildabletrigger)
     if(isDefined(self)) {
       self.hint_string = "";
 
-      if(isDefined(sethintstringnow) && sethintstringnow && isDefined(buildabletrigger))
+      if(isDefined(sethintstringnow) && sethintstringnow && isDefined(buildabletrigger)) {
         buildabletrigger sethintstring(self.hint_string);
+      }
     }
 
     return false;
@@ -232,19 +233,23 @@ onpickup_common(player) {
   self.piece_owner = player;
 
   if(isDefined(self.buildablename)) {
-    if(self.buildablename == "turbine")
+    if(self.buildablename == "turbine") {
       check_for_buildable_turbine_vox(level.turbine_buildable, 0);
-    else if(self.buildablename == "jetgun_zm")
+    }
+    else if(self.buildablename == "jetgun_zm") {
       check_for_buildable_jetgun_vox(level.jetgun_buildable, 0);
+    }
   }
 }
 
 onbuyweapon_riotshield(player) {
-  if(isDefined(player.player_shield_reset_health))
+  if(isDefined(player.player_shield_reset_health)) {
     player[[player.player_shield_reset_health]]();
+  }
 
-  if(isDefined(player.player_shield_reset_location))
+  if(isDefined(player.player_shield_reset_location)) {
     player[[player.player_shield_reset_location]]();
+  }
 }
 
 onuseplantobject_powerswitch(player) {
@@ -297,11 +302,13 @@ check_for_buildable_turbine_vox(stub, start_build_counter) {
   build_counter = start_build_counter;
 
   for(i = 0; i < buildable.pieces.size; i++) {
-    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built || isDefined(buildable.pieces[i].piece_owner))
+    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built || isDefined(buildable.pieces[i].piece_owner)) {
       piece_counter++;
+    }
 
-    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built)
+    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built) {
       build_counter++;
+    }
   }
 
   if(build_counter >= 2 && piece_counter == 3) {
@@ -325,17 +332,21 @@ check_for_buildable_jetgun_vox(stub, start_build_counter) {
   build_counter = start_build_counter;
 
   for(i = 0; i < buildable.pieces.size; i++) {
-    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built || isDefined(buildable.pieces[i].piece_owner))
+    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built || isDefined(buildable.pieces[i].piece_owner)) {
       piece_counter++;
+    }
 
-    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built)
+    if(isDefined(buildable.pieces[i].built) && buildable.pieces[i].built) {
       build_counter++;
+    }
   }
 
-  if(build_counter == 3 && piece_counter == 4)
+  if(build_counter == 3 && piece_counter == 4) {
     level thread maps\mp\zm_transit_sq::richtofensay("vox_zmba_sidequest_jet_last_0");
-  else if(build_counter == 4)
+  }
+  else if(build_counter == 4) {
     level thread maps\mp\zm_transit_sq::richtofensay("vox_zmba_sidequest_jet_complete_0");
+  }
 }
 
 onenduse_sidequestcommon(team, player, result) {
@@ -358,12 +369,14 @@ droponbus(player) {
 
 pickupfrombus() {
   if(isDefined(self.linked_to_bus) && self.linked_to_bus) {
-    if(isDefined(self.model))
+    if(isDefined(self.model)) {
       self.model unlink();
+    }
 
     self.linked_to_bus = undefined;
   }
 
-  if(isDefined(self.unitrigger))
+  if(isDefined(self.unitrigger)) {
     self.unitrigger.link_parent = undefined;
+  }
 }

@@ -48,18 +48,21 @@ createbombcarryobject(var_0, var_1, var_2, var_3) {
   var_4.allowweapons = 1;
   var_4.canuseobject = ::canusebomb;
 
-  foreach(var_6 in var_3)
+  foreach(var_6 in var_3) {
   var_6 notsolid();
+  }
 
   return var_4;
 }
 
 canusebomb(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     return 0;
+  }
 
-  if(var_0 maps\mp\_utility::isjuggernaut())
+  if(var_0 maps\mp\_utility::isjuggernaut()) {
     return 0;
+  }
 
   return 1;
 }
@@ -76,10 +79,12 @@ oncarrybombpickup(var_0, var_1) {
   maps\mp\gametypes\_gameobjects::set2dicon("friendly", "waypoint_escort");
   maps\mp\gametypes\_gameobjects::set3dicon("friendly", "waypoint_escort");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     maps\mp\_utility::playsoundonplayers(game["bomb_recovered_sound"], var_1);
-  else
+  }
+  else {
     maps\mp\_utility::playsoundonplayers(game["bomb_recovered_sound"]);
+  }
 
   var_0 playlocalsound(game["bomb_grabbed_sound"]);
 }
@@ -205,8 +210,9 @@ onbegindefusebomb(var_0, var_1) {
 play_looping_beep_on_player(var_0) {
   var_1 = common_scripts\utility::array_remove(level.players, var_0);
 
-  if(var_1.size)
+  if(var_1.size) {
     var_0 maps\mp\_utility::playloopsoundtoplayers("snd_bomb_button_press_lp", undefined, var_1);
+  }
 }
 
 stop_looping_beep_on_player(var_0) {
@@ -310,8 +316,9 @@ onbombexploded(var_0, var_1, var_2) {
 
   var_3 = "bomb_explosion";
 
-  if(isDefined(self.trigger.effect))
+  if(isDefined(self.trigger.effect)) {
     var_3 = self.trigger.effect;
+  }
 
   var_4 = randomfloat(360);
   var_5 = var_0 + (0, 0, 50);
@@ -322,6 +329,7 @@ onbombexploded(var_0, var_1, var_2) {
   earthquake(0.75, 2.0, var_0, 2000);
   thread maps\mp\_utility::playsoundinspace("h1_briefcase_exp_mid", var_0);
 
-  if(isDefined(self.exploderindex))
+  if(isDefined(self.exploderindex)) {
     common_scripts\_exploder::exploder(self.exploderindex);
+  }
 }

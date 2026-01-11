@@ -19,20 +19,24 @@ start_overhead_waves() {
   for(;;) {
     thread start_individual_wave();
 
-    if(level.panfront == 1)
+    if(level.panfront == 1) {
       level.panfront = 0;
-    else
+    }
+    else {
       level.panfront = 1;
+    }
 
     wait 6;
   }
 }
 
 start_individual_wave() {
-  if(level.panfront == 1)
+  if(level.panfront == 1) {
     var_0 = randomintrange(350, 550);
-  else
+  }
+  else {
     var_0 = randomintrange(-600, -500);
+  }
 
   var_1 = spawn("script_origin", level.player.origin + (800, var_0, level.water_level_z - level.player.origin[2]));
   var_1 playSound("elm_waves_pass_by");

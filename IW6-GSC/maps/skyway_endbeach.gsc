@@ -67,11 +67,13 @@ start() {
   var_0 = getEntArray("bridge_end_1", "script_noteworthy");
   var_1 = getEntArray("bridge_end_2", "script_noteworthy");
 
-  foreach(var_3 in var_0)
+  foreach(var_3 in var_0) {
   var_3 hide();
+  }
 
-  foreach(var_3 in var_1)
+  foreach(var_3 in var_1) {
   var_3 hide();
+  }
 
   if(level.start_point == "end_beach_final") {
     maps\_utility::vision_set_fog_changes("skyway_beach", 0.1);
@@ -102,13 +104,15 @@ main() {
   thread beach_dof_changes();
   var_3 = [];
 
-  for(var_4 = 0; var_4 < 3; var_4++)
+  for(var_4 = 0; var_4 < 3; var_4++) {
     var_3 = common_scripts\utility::array_add(var_3, getent("model_rog_hit_ref_end" + (var_4 + 1), "targetname"));
+  }
 
   var_5 = [];
 
-  for(var_4 = 0; var_4 < 10; var_4++)
+  for(var_4 = 0; var_4 < 10; var_4++) {
     var_5 = common_scripts\utility::array_add(var_5, getent("model_rog_hit_ref_end_far" + (var_4 + 1), "targetname"));
+  }
 
   thread dialogue_intro();
   thread music_second_swell();
@@ -161,11 +165,13 @@ main() {
   level.player playersetgroundreferenceent(undefined);
   maps\_art::dof_disable_script(0.1);
 
-  if(maps\_utility::is_gen4())
+  if(maps\_utility::is_gen4()) {
     setsaveddvar("sm_sunSampleSizeNear", 0.1328);
+  }
 
-  if(level.start_point != "end_beach_final")
+  if(level.start_point != "end_beach_final") {
     thread maps\skyway_audio::skyway_beach_music_transition();
+  }
 
   var_12 thread rock_idle([var_8, var_9]);
   var_12 thread rock_radio(var_7);
@@ -409,31 +415,38 @@ player_drags_ally(var_0) {
   var_6 = 0;
   var_7 = 1;
 
-  if(level.console || level.player usinggamepad())
+  if(level.console || level.player usinggamepad()) {
     var_7 = 0;
+  }
 
   for(var_8 = 0; var_8 < var_2.size; var_8++) {
     thread beach_idle(var_0, var_2[var_8]);
 
-    if(var_8 == 0)
+    if(var_8 == 0) {
       level waittill("notify_beach_drag_control_start");
+    }
 
     common_scripts\utility::flag_set("hint_drag");
 
     if(var_4 == "LR") {
-      if(var_7)
+      if(var_7) {
         maps\_utility::display_hint_timeout("hint_drag_leftright_pc");
-      else
+      }
+      else {
         maps\_utility::display_hint_timeout("hint_drag_leftright");
+      }
     } else if(var_4 == "L") {
-      if(var_7)
+      if(var_7) {
         maps\_utility::display_hint_timeout("hint_drag_left_pc");
-      else
+      }
+      else {
         maps\_utility::display_hint_timeout("hint_drag_left");
+      }
     } else if(var_7)
       maps\_utility::display_hint_timeout("hint_drag_right_pc");
-    else
+    else {
       maps\_utility::display_hint_timeout("hint_drag_right");
+    }
 
     var_9 = 0;
     var_10 = 1;
@@ -443,8 +456,9 @@ player_drags_ally(var_0) {
       if(get_ltrig_press(var_7)) {
         var_5++;
 
-        if(var_10 && var_5 != 0)
+        if(var_10 && var_5 != 0) {
           var_11 = 1;
+        }
       } else {
         var_11 = 0;
         var_5 = 0;
@@ -453,8 +467,9 @@ player_drags_ally(var_0) {
       if(get_rtrig_press(var_7)) {
         var_6++;
 
-        if(var_10 && var_6 != 0)
+        if(var_10 && var_6 != 0) {
           var_12 = 1;
+        }
       } else {
         var_12 = 0;
         var_6 = 0;
@@ -462,18 +477,21 @@ player_drags_ally(var_0) {
 
       switch (var_4) {
         case "L":
-          if(var_5 > var_1 && !var_11)
+          if(var_5 > var_1 && !var_11) {
             var_9 = 1;
+          }
 
           break;
         case "R":
-          if(var_6 > var_1 && !var_12)
+          if(var_6 > var_1 && !var_12) {
             var_9 = 1;
+          }
 
           break;
         case "LR":
-          if(var_6 > var_1 && var_5 > var_1 && !var_12 && !var_11)
+          if(var_6 > var_1 && var_5 > var_1 && !var_12 && !var_11) {
             var_9 = 1;
+          }
 
           break;
         default:
@@ -487,19 +505,23 @@ player_drags_ally(var_0) {
         level.player lerpviewangleclamp(1, 1, 0, 0, 0, 0, 0);
 
         if(var_3.size > var_8) {
-          if(var_8 == 0 && level._ally._animactive < 2)
+          if(var_8 == 0 && level._ally._animactive < 2) {
             level.scr_goaltime["ally1"]["drag1_L"] = 0;
+          }
 
           level notify("sfx_drag");
           self.current_drag_anim = var_3[var_8];
           thread maps\_anim::anim_single(var_0, self.current_drag_anim);
 
-          if(var_8 == var_3.size - 1)
+          if(var_8 == var_3.size - 1) {
             var_4 = "LR";
-          else if(var_4 == "L")
+          }
+          else if(var_4 == "L") {
             var_4 = "R";
-          else
+          }
+          else {
             var_4 = "L";
+          }
 
           var_13 = getanimlength(level.player_rig maps\_utility::getanim(var_3[var_8]));
           wait(var_13 - level._endbeach.early_prompt);
@@ -510,38 +532,49 @@ player_drags_ally(var_0) {
 }
 
 get_ltrig_press(var_0) {
-  if(var_0)
+  if(var_0) {
     return level.player buttonpressed("mouse1");
-  else
+  }
+  else {
     return level.player adsbuttonpressed();
+  }
 }
 
 get_rtrig_press(var_0) {
-  if(var_0)
+  if(var_0) {
     return level.player buttonpressed("mouse2");
-  else
+  }
+  else {
     return level.player attackbuttonpressed();
+  }
 }
 
 beach_idle(var_0, var_1) {
   self endon("stop_loop");
 
-  if(!issubstr(var_1, "1_1"))
+  if(!issubstr(var_1, "1_1")) {
     wait(level._endbeach.early_prompt);
+  }
 
-  if(issubstr(var_1, "1_1"))
+  if(issubstr(var_1, "1_1")) {
     level.player common_scripts\utility::delaycall(2, ::lerpviewangleclamp, 3.4, 1, 0, 25, 60, 45, 15);
-  else if(issubstr(var_1, "1_2"))
+  }
+  else if(issubstr(var_1, "1_2")) {
     level.player lerpviewangleclamp(0.05, 0, 0, 5, 120, 45, 0);
-  else if(issubstr(var_1, "2_1"))
+  }
+  else if(issubstr(var_1, "2_1")) {
     level.player lerpviewangleclamp(0.05, 0, 0, 25, 60, 45, 15);
-  else if(issubstr(var_1, "2_2"))
+  }
+  else if(issubstr(var_1, "2_2")) {
     level.player lerpviewangleclamp(0.05, 0, 0, 5, 120, 45, 0);
-  else if(issubstr(var_1, "5_1"))
+  }
+  else if(issubstr(var_1, "5_1")) {
     level.player lerpviewangleclamp(0.05, 0, 0, 45, 30, 50, 15);
+  }
 
-  if(issubstr(var_1, "1_1"))
+  if(issubstr(var_1, "1_1")) {
     wait(getanimlength(level.player_rig maps\_utility::getanim("surface")));
+  }
 
   thread maps\_anim::anim_loop(var_0, var_1);
 }
@@ -650,8 +683,9 @@ fx_rorke_bleedout(var_0) {
 }
 
 event_sinking_boats() {
-  foreach(var_1 in level._endbeach.boats)
+  foreach(var_1 in level._endbeach.boats) {
   thread maps\_anim::anim_single_solo(var_1, "sink");
+  }
 
   level waittill("notify_start_rogs");
   maps\_utility::stop_exploder("sw_end_aa");
@@ -736,8 +770,9 @@ tunnel_vision_logic() {
 }
 
 pain_heartbeat(var_0) {
-  if(!isDefined(var_0))
+  if(!isDefined(var_0)) {
     var_0 = 8;
+  }
 
   var_1 = 0.05;
 
@@ -781,10 +816,12 @@ rog_hits_far(var_0, var_1) {
   level endon("notify_stop_far_rogs");
   var_2 = 0.0;
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     var_3 = var_1;
-  else
+  }
+  else {
     var_3 = 0;
+  }
 
   for(;;) {
     var_0[var_3] thread rog_hits_solo_far();
@@ -792,8 +829,9 @@ rog_hits_far(var_0, var_1) {
     wait(var_2);
     var_3 = var_3 + 1;
 
-    if(var_3 == var_0.size)
+    if(var_3 == var_0.size) {
       var_3 = 0;
+    }
   }
 }
 
@@ -837,17 +875,21 @@ play_fullscreen_shader(var_0, var_1, var_2, var_3, var_4) {
   var_6.vertalign = "fullscreen";
   var_6.alpha = 0;
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
-  if(!isDefined(var_4))
+  if(!isDefined(var_4)) {
     var_4 = 0;
+  }
 
-  if(var_2 > 0)
+  if(var_2 > 0) {
     var_6 shader_fade_in(var_2, var_5);
+  }
 
   var_6.alpha = var_5;
 
@@ -859,8 +901,9 @@ play_fullscreen_shader(var_0, var_1, var_2, var_3, var_4) {
   } else
     wait(var_1);
 
-  if(var_3 > 0)
+  if(var_3 > 0) {
     var_6 shader_fade_out(var_3, var_5);
+  }
 
   var_6.alpha = 0;
   var_6 destroy();
@@ -995,14 +1038,17 @@ play_fullscreen_blood_bottom(var_0, var_1, var_2) {
   var_4.alpha = 0;
   var_5 = 0;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   var_6 = 0.05;
 
@@ -1062,14 +1108,17 @@ play_fullscreen_blood(var_0, var_1, var_2) {
   var_5.vertalign = "fullscreen";
   var_5.alpha = 0;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   var_6 = 0.05;
 
@@ -1123,14 +1172,17 @@ play_fullscreen_blood_splatter_alt(var_0, var_1, var_2) {
   var_4.alpha = 0;
   var_5 = 0;
 
-  if(!isDefined(var_1))
+  if(!isDefined(var_1)) {
     var_1 = 1;
+  }
 
-  if(!isDefined(var_2))
+  if(!isDefined(var_2)) {
     var_2 = 1;
+  }
 
-  if(!isDefined(var_3))
+  if(!isDefined(var_3)) {
     var_3 = 1;
+  }
 
   var_6 = 0.05;
 
@@ -1171,24 +1223,28 @@ sickly_vision() {
 
 god_rays_from_world_location(var_0, var_1, var_2, var_3, var_4) {
   if(maps\_utility::is_gen4()) {
-    if(isDefined(var_1))
+    if(isDefined(var_1)) {
       common_scripts\utility::flag_wait(var_1);
+    }
 
     var_5 = 0;
     var_6 = 0;
 
-    if(isDefined(var_3))
+    if(isDefined(var_3)) {
       maps\_utility::vision_set_fog_changes(var_3, 5);
+    }
 
     var_7 = maps\_utility::create_sunflare_setting("default");
 
     for(;;) {
       var_5 = atan((level.player.origin[2] - var_0[2]) / sqrt(squared(level.player.origin[0] - var_0[0]) + squared(level.player.origin[1] - var_0[1])));
 
-      if(level.player.origin[0] < var_0[0])
+      if(level.player.origin[0] < var_0[0]) {
         var_6 = atan((level.player.origin[1] - var_0[1]) / (level.player.origin[0] - var_0[0]));
-      else
+      }
+      else {
         var_6 = 180 + atan((level.player.origin[1] - var_0[1]) / (level.player.origin[0] - var_0[0]));
+      }
 
       var_7.position = (var_5, var_6, 0);
       maps\_art::sunflare_changes("default", 0);

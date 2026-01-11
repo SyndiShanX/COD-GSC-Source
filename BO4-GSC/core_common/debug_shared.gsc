@@ -144,4 +144,3 @@ drawdebugline(frompoint, topoint, color, durationframes) {
 drawdebuglineenttoent(ent1, ent2, color, durationframes) {
   thread drawdebugenttoentinternal(ent1, ent2, color, durationframes);
 }
-

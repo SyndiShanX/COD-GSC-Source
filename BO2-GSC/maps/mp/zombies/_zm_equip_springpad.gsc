@@ -25,15 +25,17 @@ init(pickupstring, howtostring) {
   maps\mp\gametypes_zm\_weaponobjects::createretrievablehint("equip_springpad", pickupstring);
   level._effect["springpade_on"] = loadfx("maps/zombie_highrise/fx_highrise_trmpl_steam_os");
 
-  if(!isDefined(level.springpad_trigger_radius))
+  if(!isDefined(level.springpad_trigger_radius)) {
     level.springpad_trigger_radius = 72;
+  }
 
   thread wait_init_damage();
 }
 
 wait_init_damage() {
-  while(!isDefined(level.zombie_vars) || !isDefined(level.zombie_vars["zombie_health_start"]))
+  while(!isDefined(level.zombie_vars) || !isDefined(level.zombie_vars["zombie_health_start"])) {
     wait 1;
+  }
 
   level.springpad_damage = maps\mp\zombies\_zm::ai_zombie_health(50);
 }
@@ -141,14 +143,16 @@ transferspringpad(fromplayer, toplayer) {
   buildablespringpad = toplayer.buildablespringpad;
   toarmed = 0;
 
-  if(isDefined(buildablespringpad))
+  if(isDefined(buildablespringpad)) {
     toarmed = isDefined(buildablespringpad.is_armed) && buildablespringpad.is_armed;
+  }
 
   springpad_kills = toplayer.springpad_kills;
   fromarmed = 0;
 
-  if(isDefined(fromplayer.buildablespringpad))
+  if(isDefined(fromplayer.buildablespringpad)) {
     fromarmed = isDefined(fromplayer.buildablespringpad.is_armed) && fromplayer.buildablespringpad.is_armed;
+  }
 
   toplayer.buildablespringpad = fromplayer.buildablespringpad;
   toplayer.buildablespringpad.original_owner = toplayer;
@@ -169,8 +173,9 @@ transferspringpad(fromplayer, toplayer) {
 }
 
 springpad_in_range(delta, origin, radius) {
-  if(distancesquared(self.target.origin, origin) < radius * radius)
+  if(distancesquared(self.target.origin, origin) < radius * radius) {
     return true;
+  }
 
   return false;
 }
@@ -206,8 +211,9 @@ startspringpaddeploy(weapon, armed) {
     self.springpad_kills = undefined;
   }
 
-  if(!isDefined(weapon.springpad_kills))
+  if(!isDefined(weapon.springpad_kills)) {
     weapon.springpad_kills = 0;
+  }
 
   if(isDefined(weapon)) {
     weapon thread debugspringpad(electricradius);
@@ -218,8 +224,9 @@ startspringpaddeploy(weapon, armed) {
     } else
       weapon.power_on = 1;
 
-    if(!weapon.power_on)
+    if(!weapon.power_on) {
       self iprintlnbold(&"ZOMBIE_NEED_LOCAL_POWER");
+    }
 
     self thread springpadthink(weapon, electricradius, armed);
 
@@ -257,8 +264,9 @@ springpad_animate(weapon, armed) {
   weapon thread springpad_audio();
   prearmed = 0;
 
-  if(isDefined(armed) && armed)
+  if(isDefined(armed) && armed) {
     prearmed = 1;
+  }
 
   fast_reset = 0;
 
@@ -369,8 +377,9 @@ springpadthink(weapon, electricradius, armed) {
         }
 
         if(isDefined(ent) && isDefined(ent.custom_springpad_fling)) {
-          if(!isDefined(self.num_zombies_flung))
+          if(!isDefined(self.num_zombies_flung)) {
             self.num_zombies_flung = 0;
+          }
 
           self.num_zombies_flung++;
           self notify("zombie_flung");
@@ -379,17 +388,20 @@ springpadthink(weapon, electricradius, armed) {
         }
 
         if(isDefined(ent)) {
-          if(!isDefined(self.num_zombies_flung))
+          if(!isDefined(self.num_zombies_flung)) {
             self.num_zombies_flung = 0;
+          }
 
           self.num_zombies_flung++;
           self notify("zombie_flung");
 
-          if(!isDefined(weapon.fling_scaler))
+          if(!isDefined(weapon.fling_scaler)) {
             weapon.fling_scaler = 1;
+          }
 
-          if(isDefined(weapon.direction_vec_override))
+          if(isDefined(weapon.direction_vec_override)) {
             direction_vector = weapon.direction_vec_override;
+          }
 
           ent dodamage(ent.health + 666, ent.origin);
           ent startragdoll();
@@ -398,8 +410,9 @@ springpadthink(weapon, electricradius, armed) {
         }
       }
 
-      if(weapon.springpad_kills >= 28)
+      if(weapon.springpad_kills >= 28) {
         self thread springpad_expired(weapon);
+      }
 
       weapon.fling_targets = [];
       weapon waittill("armed");
@@ -440,8 +453,9 @@ targeting_thread(weapon, trigger) {
         if(isDefined(zombie.ignore_spring_pad) && zombie.ignore_spring_pad) {
           continue;
         }
-        if(zombie istouching(trigger))
+        if(zombie istouching(trigger)) {
           weapon springpad_add_fling_ent(zombie);
+        }
       }
 
       players = get_players();
@@ -453,8 +467,9 @@ targeting_thread(weapon, trigger) {
         }
       }
 
-      if(!weapon.zombies_only)
+      if(!weapon.zombies_only) {
         weapon notify("hi_priority_target");
+      }
     }
 
     wait 0.05;
@@ -464,8 +479,9 @@ targeting_thread(weapon, trigger) {
 springpad_fling_attacker(ent) {
   springpad_add_fling_ent(ent);
 
-  if(isDefined(level.springpad_attack_delay))
+  if(isDefined(level.springpad_attack_delay)) {
     wait(level.springpad_attack_delay);
+  }
 }
 
 springpad_add_fling_ent(ent) {
@@ -484,13 +500,15 @@ player_fling(origin, angles, velocity, weapon) {
   trace = physicstrace(origin, torigin, vectorscale((-1, -1, 0), 15.0), (15, 15, 30), self);
 
   if(!isDefined(trace) || !isDefined(trace["fraction"]) || trace["fraction"] < 1.0) {
-    if(!isDefined(weapon.springpad_kills))
+    if(!isDefined(weapon.springpad_kills)) {
       weapon.springpad_kills = 0;
+    }
 
     weapon.springpad_kills = weapon.springpad_kills + 5;
 
-    if(weapon.springpad_kills >= 28)
+    if(weapon.springpad_kills >= 28) {
       weapon.owner thread springpad_expired(weapon);
+    }
 
     return;
   }
@@ -503,8 +521,9 @@ player_fling(origin, angles, velocity, weapon) {
 springpadthinkcleanup(trigger) {
   self waittill("death");
 
-  if(isDefined(trigger))
+  if(isDefined(trigger)) {
     trigger delete();
+  }
 }
 
 debugspringpad(radius) {
@@ -516,8 +535,9 @@ debugspringpad(radius) {
       if(isDefined(self.trigger)) {
         color = color_unarmed;
 
-        if(isDefined(self.is_armed) && self.is_armed)
+        if(isDefined(self.is_armed) && self.is_armed) {
           color = color_armed;
+        }
 
         vec = self.trigger.extent;
         box(self.trigger.origin, vec * -1, vec, self.trigger.angles[1], color, 1, 0, 1);
@@ -526,10 +546,12 @@ debugspringpad(radius) {
       color = (0, 1, 0);
       text = "";
 
-      if(isDefined(self.springpad_kills))
+      if(isDefined(self.springpad_kills)) {
         text = "" + self.springpad_kills + "";
-      else if(isDefined(self.owner.springpad_kills))
+      }
+      else if(isDefined(self.owner.springpad_kills)) {
         text = "[" + self.owner.springpad_kills + "]";
+      }
 
       print3d(self.origin + vectorscale((0, 0, 1), 30.0), text, color, 1, 0.5, 1);
     }

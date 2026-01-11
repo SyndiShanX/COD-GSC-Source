@@ -63,8 +63,9 @@ change_chopper_spawner(var_0, var_1) {
   var_2.angles = vectortoangles(var_4.origin - var_3.origin);
   var_5 = getEntArray(var_2.target, "targetname");
 
-  foreach(var_7 in var_5)
+  foreach(var_7 in var_5) {
   var_7.targetname = var_3.targetname;
+  }
 
   var_2.target = var_3.targetname;
 }
@@ -84,8 +85,9 @@ entrance() {
   entrance_init();
   init_courtyard();
 
-  foreach(var_1 in level.heroes)
+  foreach(var_1 in level.heroes) {
   var_1 show();
+  }
 
   setsaveddvar("ai_friendlyFireBlockDuration", "2000");
   level.merrick maps\las_vegas_code::set_not_wounded();
@@ -202,8 +204,9 @@ getup_enemy_radio() {
 getup_screen_effects() {
   thread custom_dirt_hud();
 
-  if(isDefined(level.fadein))
+  if(isDefined(level.fadein)) {
     level.fadein destroy();
+  }
 
   thread maps\_hud_util::fade_in(3);
   level.player shellshock("las_vegas_getup", 5);
@@ -262,8 +265,9 @@ entrance_combat() {
     var_1.ignoreall = 1;
     var_1.grenadeawareness = 1;
 
-    if(var_1.type != "dog")
+    if(var_1.type != "dog") {
       var_1 thread waittill_combat_start();
+    }
   }
 
   level.keegan allowedstances("crouch");
@@ -282,8 +286,9 @@ entrance_combat() {
 fail_no_pickup() {
   common_scripts\utility::flag_wait("start_train_fall");
 
-  if(!common_scripts\utility::flag("dog_first_pickup"))
+  if(!common_scripts\utility::flag("dog_first_pickup")) {
     maps\las_vegas_code::dog_mission_fail();
+  }
 }
 
 combat_enemy_radio() {
@@ -301,8 +306,9 @@ entrance_combat_dialogue() {
 }
 
 entrance_pursuers() {
-  if(level.start_point != "entrance_combat")
+  if(level.start_point != "entrance_combat") {
     wait 4;
+  }
 
   maps\_vehicle::spawn_vehicles_from_targetname_and_drive("entrance_chopper");
 }
@@ -372,8 +378,9 @@ start_walk(var_0, var_1) {
 waittill_combat_start() {
   common_scripts\utility::flag_wait("entrance_combat_start");
 
-  if(self.team == "axis")
+  if(self.team == "axis") {
     self.goalradius = level.default_goalradius;
+  }
 
   maps\las_vegas_code::clear_ignore_everything();
 }
@@ -418,8 +425,9 @@ courtyard_sniper() {
   common_scripts\utility::flag_wait("leaving_entrance");
   wait(randomfloatrange(10, 20));
 
-  if(isDefined(var_0) && isalive(var_0))
+  if(isDefined(var_0) && isalive(var_0)) {
     var_0 kill();
+  }
 }
 
 courtyard_sniper_laser(var_0) {
@@ -524,8 +532,9 @@ keegan_cover_dog() {
   level.keegan setgoalnode(var_0);
   var_1 = getent("courtyard_sniper_ai", "targetname");
 
-  if(isDefined(var_1))
+  if(isDefined(var_1)) {
     level.keegan.favoriteenemy = var_1;
+  }
 }
 
 dog_friendly_react_wait() {
@@ -717,12 +726,14 @@ train_fall() {
       var_13 = 0;
 
       foreach(var_9 in var_12) {
-        if(level.player maps\_utility::player_looking_at(var_9))
+        if(level.player maps\_utility::player_looking_at(var_9)) {
           var_13++;
+        }
       }
 
-      if(var_13 == 0)
+      if(var_13 == 0) {
         continue;
+      }
     }
 
     wait(randomfloat(1));
@@ -764,8 +775,9 @@ train_crash_fx(var_0) {
 train_crash_fx_sparks(var_0, var_1, var_2) {
   var_3 = "vfx_train_track_sparks";
 
-  if(isDefined(var_2))
+  if(isDefined(var_2)) {
     var_3 = var_2;
+  }
 
   wait(var_0);
   var_4 = gettime();
@@ -835,8 +847,9 @@ exfil() {
     level.courtyard.choppers = common_scripts\utility::array_removeundefined(level.courtyard.choppers);
 
     foreach(var_2 in level.courtyard.choppers) {
-      if(isDefined(var_2))
+      if(isDefined(var_2)) {
         level thread f18_sidewinder(var_2);
+      }
 
       wait 0.5;
     }
@@ -864,10 +877,12 @@ f18_sidewinder(var_0) {
   var_7 = undefined;
 
   for(;;) {
-    if(isDefined(var_0))
+    if(isDefined(var_0)) {
       var_7 = var_0.origin;
-    else
+    }
+    else {
       var_7 = (-20000, randomfloatrange(-38000, -36000), randomfloatrange(3000, 6000));
+    }
 
     if(var_2.origin[0] > var_7[0]) {
       break;
@@ -890,13 +905,16 @@ f18_sidewinder(var_0) {
 }
 
 postspawn_exfil_chopper() {
-  if(!isDefined(level.exfil_choppers))
+  if(!isDefined(level.exfil_choppers)) {
     level.exfil_choppers = [];
+  }
 
-  if(self.script_index == 1)
+  if(self.script_index == 1) {
     self.preferred_death_anim = "aas_72x_explode_C";
-  else
+  }
+  else {
     self.preferred_death_anim = "aas_72x_explode_B";
+  }
 
   level.exfil_choppers[level.exfil_choppers.size] = self;
   common_scripts\utility::waittill_either("death", "reached_dynamic_path_end");
@@ -907,10 +925,12 @@ postspawn_exfil_f18() {
   var_0 = spawn("script_origin", self.origin + (-1000, 0, 0));
   var_0 linkto(self);
 
-  if(isDefined(self.script_index))
+  if(isDefined(self.script_index)) {
     var_0 playSound("veh_f18_long_flyby2");
-  else
+  }
+  else {
     var_0 playSound("veh_f18_long_flyby");
+  }
 }
 
 exfil_silenthawk() {
@@ -941,8 +961,9 @@ exfil_chopper_dialogue() {
 exfil_end() {
   common_scripts\utility::flag_wait("exfil_run");
 
-  if(!level.dog maps\_utility::ent_flag("picked_up"))
+  if(!level.dog maps\_utility::ent_flag("picked_up")) {
     level.dog maps\_utility::ent_flag_wait("picked_up");
+  }
 
   level.dog maps\_utility::ent_flag_set("disable_put_down");
   level.dog maps\las_vegas_code::dog_disable_trigger();
@@ -1014,8 +1035,9 @@ get_hover_points() {
   var_0 = [];
   var_1 = common_scripts\utility::getstruct("exfil_hover_struct", "targetname");
 
-  for(var_2 = 0; var_2 < 15; var_2++)
+  for(var_2 = 0; var_2 < 15; var_2++) {
     var_0[var_2] = get_hover_point(var_1, var_2);
+  }
 
   return var_0;
 }
@@ -1036,14 +1058,18 @@ postspawn_entrance_chopper_unloader() {
     var_2 = var_1.vehicle_position;
     var_3 = 0;
 
-    if(var_2 == 2)
+    if(var_2 == 2) {
       var_1.delay = 0 + var_3;
-    else if(var_2 == 3)
+    }
+    else if(var_2 == 3) {
       var_1.delay = 1 + var_3;
-    else if(var_2 == 4)
+    }
+    else if(var_2 == 4) {
       var_1.delay = 3 + var_3;
-    else if(var_2 == 5)
+    }
+    else if(var_2 == 5) {
       var_1.delay = 4 + var_3;
+    }
 
     var_1 thread entrance_enemy_alert_thread();
   }
@@ -1070,8 +1096,9 @@ postspawn_courtyard_chopper() {
   thread maps\las_vegas_code::vehicle_path_notifies();
   thread maps\las_vegas_code::shooter_range();
 
-  if(isDefined(self.shooters))
+  if(isDefined(self.shooters)) {
     common_scripts\utility::array_thread(self.shooters, ::unload_thread);
+  }
 }
 
 postspawn_chopper_shooter() {
@@ -1100,19 +1127,22 @@ follow_path_node_anim(var_0) {
   }
   var_1 = "normal";
 
-  if(isDefined(var_0.script_type))
+  if(isDefined(var_0.script_type)) {
     var_1 = var_0.script_type;
+  }
 
   var_2 = var_0.animation;
 
-  if(var_1 == "play_once")
+  if(var_1 == "play_once") {
     var_0.animation = undefined;
+  }
 
   var_3 = 1;
 
   if(isDefined(var_0.script_parameters)) {
-    if(var_0.script_parameters == "no_arrivals")
+    if(var_0.script_parameters == "no_arrivals") {
       var_3 = 0;
+    }
   }
 
   if(!var_3) {
@@ -1154,8 +1184,9 @@ switch_to_sniper_internal() {
 array_remove_after_index(var_0, var_1) {
   var_2 = [];
 
-  for(var_3 = 0; var_3 < var_1; var_3++)
+  for(var_3 = 0; var_3 < var_1; var_3++) {
     var_2[var_2.size] = var_0[var_3];
+  }
 
   return var_2;
 }

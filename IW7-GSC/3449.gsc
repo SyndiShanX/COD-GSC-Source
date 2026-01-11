@@ -25,10 +25,12 @@ func_2D5A() {
   self botsetflag("disable_attack", 0);
 
   for(;;) {
-    if(var_00)
+    if(var_00) {
       wait 0.05;
-    else
+    }
+    else {
       wait 0.5;
+    }
 
     if(var_00) {
       self botsetflag("disable_attack", 0);
@@ -66,21 +68,24 @@ bot_think_powers() {
 
   if(isDefined(self.powers) && self.powers.size > 0) {
     if(isDefined(self.func_AE7B) && isDefined(self.powers[self.func_AE7B])) {
-      if(isDefined(level.func_2D1C[self.func_AE7B]))
+      if(isDefined(level.func_2D1C[self.func_AE7B])) {
         self thread[[level.func_2D1C[self.func_AE7B]]](self.func_AE7B, "primary");
+      }
     }
 
     if(isDefined(self.func_AE7D) && isDefined(self.powers[self.func_AE7D])) {
-      if(isDefined(level.func_2D1C[self.func_AE7D]))
+      if(isDefined(level.func_2D1C[self.func_AE7D])) {
         self thread[[level.func_2D1C[self.func_AE7D]]](self.func_AE7D, "secondary");
+      }
     }
   }
 
   for(;;) {
     self waittill("power_available", var_00, var_01);
 
-    if(isDefined(level.func_2D1C[var_00]))
+    if(isDefined(level.func_2D1C[var_00])) {
       self thread[[level.func_2D1C[var_00]]](var_00, var_01);
+    }
   }
 }
 
@@ -106,8 +111,9 @@ func_5234(var_00, var_01) {
   self endon("powers_cleanUp");
 
   for(;;) {
-    while(!isDefined(self.enemy) || !isalive(self.enemy))
+    while(!isDefined(self.enemy) || !isalive(self.enemy)) {
       wait 0.1;
+    }
 
     if(!self botcanseeentity(self.enemy)) {
       wait 0.1;
@@ -118,8 +124,9 @@ func_5234(var_00, var_01) {
     var_03 = 1400;
     var_04 = distance(self.origin, self.enemy.origin);
 
-    if(self _meth_8520())
+    if(self _meth_8520()) {
       var_02 = 700;
+    }
 
     if(var_02 != 0) {
       if(var_04 < var_02) {
@@ -148,11 +155,13 @@ func_897E(var_00, var_01) {
 }
 
 func_8BEE() {
-  if(!isalive(self) || !isDefined(self.enemy))
+  if(!isalive(self) || !isDefined(self.enemy)) {
     return 0;
+  }
 
-  if(self botcanseeentity(self.enemy) && self _meth_8520())
+  if(self botcanseeentity(self.enemy) && self _meth_8520()) {
     return 1;
+  }
 
   return 0;
 }
@@ -175,8 +184,9 @@ func_9D7E() {
         continue;
       }
       if(var_1.useobj.id == "domFlag") {
-        if(scripts\mp\bots\gametype_dom::bot_is_capturing_flag(var_01))
+        if(scripts\mp\bots\gametype_dom::bot_is_capturing_flag(var_01)) {
           return 1;
+        }
       }
     }
   }
@@ -191,14 +201,16 @@ useprompt(var_00, var_01, var_02, var_03) {
   self endon("domeshield_used");
   self endon("powers_cleanUp");
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = ::usepowerweapon;
+  }
 
   for(;;) {
     wait 0.05;
 
-    while(!func_8BEE() && !func_9D7E())
+    while(!func_8BEE() && !func_9D7E()) {
       wait 0.25;
+    }
 
     if(!func_9D7E()) {
       for(var_04 = self getcurrentweaponclipammo(); var_04 > 0; var_04 = self getcurrentweaponclipammo()) {
@@ -233,8 +245,9 @@ usequickrope(var_00, var_01, var_02, var_03, var_04) {
   self endon("domeshield_used");
   self endon("powers_cleanUp");
 
-  if(!isDefined(var_04))
+  if(!isDefined(var_04)) {
     var_04 = ::usepowerweapon;
+  }
 
   for(;;) {
     self waittill("damage");
@@ -242,8 +255,9 @@ usequickrope(var_00, var_01, var_02, var_03, var_04) {
     if(isDefined(self.enemy)) {
       var_05 = distancesquared(self.origin, self.enemy.origin);
 
-      if(var_05 < var_02 * var_02)
+      if(var_05 < var_02 * var_02) {
         continue;
+      }
     }
 
     if(self.health < var_03) {

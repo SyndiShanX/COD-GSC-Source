@@ -44,8 +44,9 @@ onPrecacheGameType() {
 onStartGameType() {
   setClientNameMode("auto_change");
 
-  if(!isDefined(game["switchedsides"]))
+  if(!isDefined(game["switchedsides"])) {
     game["switchedsides"] = false;
+  }
 
   if(game["switchedsides"]) {
     oldAttackers = game["attackers"];
@@ -87,8 +88,9 @@ onStartGameType() {
 
 getSpawnPoint() {
   spawnteam = self.pers["team"];
-  if(game["switchedsides"])
+  if(game["switchedsides"]) {
     spawnteam = getOtherTeam(spawnteam);
+  }
 
   if(level.inGracePeriod) {
     spawnPoints = maps\mp\gametypes\_spawnlogic::getSpawnpointArray("mp_tdm_spawn_" + spawnteam + "_start");
@@ -104,8 +106,9 @@ getSpawnPoint() {
 onNormalDeath(victim, attacker, lifeId) {
   level thread spawnDogTags(victim, attacker);
 
-  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]])
+  if(game["state"] == "postgame" && game["teamScores"][attacker.team] > game["teamScores"][level.otherTeam[attacker.team]]) {
     attacker.finalKill = true;
+  }
 }
 
 spawnDogTags(victim, attacker) {
@@ -168,8 +171,9 @@ showToTeam(gameObject, team) {
   self hide();
 
   foreach(player in level.players) {
-    if(player.team == team)
+    if(player.team == team) {
       self ShowToPlayer(player);
+    }
   }
 
   for(;;) {
@@ -177,11 +181,13 @@ showToTeam(gameObject, team) {
 
     self hide();
     foreach(player in level.players) {
-      if(player.team == team)
+      if(player.team == team) {
         self ShowToPlayer(player);
+      }
 
-      if(gameObject.victimTeam == player.team && player == gameObject.attacker)
+      if(gameObject.victimTeam == player.team && player == gameObject.attacker) {
         objective_state(gameObject.objId, "invisible");
+      }
     }
   }
 }
@@ -198,8 +204,9 @@ onUse(player) {
       splash = &"SPLASHES_KILL_DENIED";
     }
 
-    if(isDefined(self.attacker))
+    if(isDefined(self.attacker)) {
       self.attacker thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DENIED_KILL", (1, 0.5, 0.5));
+    }
   }
 
   else {
@@ -208,8 +215,9 @@ onUse(player) {
     event = "kill_confirmed";
     splash = &"SPLASHES_KILL_CONFIRMED";
 
-    if(self.attacker != player)
+    if(self.attacker != player) {
       self.attacker onPickup(event, splash);
+    }
 
     self.trigger playSoundToPlayer(game["voice"][player.pers["team"]] + "kill_confirmed", player);
 
@@ -305,8 +313,9 @@ clearOnVictimDisconnect(victim) {
   if(isDefined(level.dogtags[guid])) {
     level.dogtags[guid] maps\mp\gametypes\_gameobjects::allowUse("none");
 
-    if(isDefined(level.dogtags[guid].attacker))
+    if(isDefined(level.dogtags[guid].attacker)) {
       level.dogtags[guid].attacker thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DENIED_KILL", (1, 0.5, 0.5));
+    }
 
     playFX(level.conf_fx["vanish"], level.dogtags[guid].curOrigin);
     level.dogtags[guid] notify("reset");
@@ -315,8 +324,9 @@ clearOnVictimDisconnect(victim) {
     if(isDefined(level.dogtags[guid])) {
       objective_delete(level.dogtags[guid].objId);
       level.dogtags[guid].trigger delete();
-      for(i = 0; i < level.dogtags[guid].visuals.size; i++)
+      for(i = 0; i < level.dogtags[guid].visuals.size; i++) {
         level.dogtags[guid].visuals[i] delete();
+      }
       level.dogtags[guid] notify("deleted");
 
       level.dogtags[guid] = undefined;

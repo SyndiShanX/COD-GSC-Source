@@ -169,21 +169,25 @@ drone_spawngroup(spawnpoint, qFakeDeath, spawnSize, qSightTrace, team) {
     spawncount = spawnpoint.size;
   }
   offsets = [];
-  if(isDefined(self.script_noteworthy) && (IsSubStr(self.script_noteworthy, "group")))
+  if(isDefined(self.script_noteworthy) && (IsSubStr(self.script_noteworthy, "group"))) {
     offsets = generate_offsets(spawncount);
+  }
   for(i = 0; i < spawncount; i++) {
     if(isDefined(self.script_int)) {
       wait RandomFloat(0.1, 1.0);
     }
-    while(!self ok_to_trigger_spawn())
+    while(!self ok_to_trigger_spawn()) {
       wait_network_frame();
+    }
     if(i < spawnpoint.size) {
       spawnpoint[i] thread drone_spawn(qFakeDeath, qSightTrace, team, offsets[i]);
     } else {
-      if(i > 0 && offsets[i - 1] == offsets[i])
+      if(i > 0 && offsets[i - 1] == offsets[i]) {
         wait(randomfloat(.8, 1.1));
-      else
+      }
+      else {
         wait(randomfloat(.5, .9));
+      }
       spawnpoint[spawnpoint.size - 1] thread drone_spawn(qFakeDeath, qSightTrace, team, offsets[i]);
     }
     level._numTriggerSpawned++;
@@ -211,15 +215,18 @@ drone_spawn(qFakeDeath, qSightTrace, team, offset, respawner) {
   if(level.drones[team].lastindex > level.max_drones[team]) {
     return;
   }
-  if(isDefined(offset))
+  if(isDefined(offset)) {
     spawnoffset = offset * 2 - 1;
-  else
+  }
+  else {
     spawnoffset = 0;
+  }
   spawnpos = self.origin;
   if(isDefined(self.radius)) {
     angles = (0, 0, 0);
-    if(isDefined(self.angles))
+    if(isDefined(self.angles)) {
       angles = self.angles;
+    }
     right = AnglesToRight(angles);
     spawnpos += vector_scale(right, (spawnoffset * self.radius));
   }
@@ -618,16 +625,21 @@ do_death_sound() {
   camp = level.campaign;
   team = self.team;
   alias = undefined;
-  if(camp == "american" && team == "allies")
+  if(camp == "american" && team == "allies") {
     alias = "dds_generic_death_american";
-  if(camp == "american" && team == "axis")
+  }
+  if(camp == "american" && team == "axis") {
     alias = "dds_generic_death_japanese";
-  if(camp == "russian" && team == "allies")
+  }
+  if(camp == "russian" && team == "allies") {
     alias = "dds_generic_death_russian";
-  if(camp == "russian" && team == "axis")
+  }
+  if(camp == "russian" && team == "axis") {
     alias = "dds_generic_death_german";
-  if(camp == "vietnamese" && team == "axis")
+  }
+  if(camp == "vietnamese" && team == "axis") {
     alias = "dds_generic_death_vietnamese ";
+  }
   if(isDefined(alias) && SoundExists(alias) && !isDefined(level._drones_sounds_disable)) {
     self thread play_sound_in_space(alias);
   }

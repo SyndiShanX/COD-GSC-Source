@@ -7,8 +7,9 @@
 #include maps\mp\gametypes\_hud_util;
 
 exploder_sound() {
-  if(isDefined(self.script_delay))
+  if(isDefined(self.script_delay)) {
     wait self.script_delay;
+  }
 
   self playSound(level.scr_sound[self.script_sound]);
 }
@@ -42,8 +43,9 @@ loadModel(info)
 	attachInfo = info["attach"];
 	attachSize = attachInfo.size;
 
-	for(i = 0; i < attachSize; i++)
+	for(i = 0; i < attachSize; i++) {
 		self attach(attachInfo[i]["model"], attachInfo[i]["tag"], attachInfo[i]["ignoreCollision"]);
+	}
 }
 */
 
@@ -155,8 +157,9 @@ getPlant() {
     }
   }
 
-  if(besttracefraction == 1)
+  if(besttracefraction == 1) {
     besttraceposition = self.origin;
+  }
 
   temp = spawnStruct();
   temp.origin = besttraceposition;
@@ -168,8 +171,9 @@ orientToNormal(normal) {
   hor_normal = (normal[0], normal[1], 0);
   hor_length = length(hor_normal);
 
-  if(!hor_length)
+  if(!hor_length) {
     return (0, 0, 0);
+  }
 
   hor_dir = vectornormalize(hor_normal);
   neg_height = normal[2] * -1;
@@ -198,32 +202,37 @@ playSoundOnPlayers(sound, team, excludeList) {
   assert(isDefined(level.players));
 
   if(level.splitscreen) {
-    if(isDefined(level.players[0]))
+    if(isDefined(level.players[0])) {
       level.players[0] playLocalSound(sound);
+    }
   } else {
     if(isDefined(team)) {
       if(isDefined(excludeList)) {
         for(i = 0; i < level.players.size; i++) {
           player = level.players[i];
-          if(isDefined(player.pers["team"]) && (player.pers["team"] == team) && !isExcluded(player, excludeList))
+          if(isDefined(player.pers["team"]) && (player.pers["team"] == team) && !isExcluded(player, excludeList)) {
             player playLocalSound(sound);
+          }
         }
       } else {
         for(i = 0; i < level.players.size; i++) {
           player = level.players[i];
-          if(isDefined(player.pers["team"]) && (player.pers["team"] == team))
+          if(isDefined(player.pers["team"]) && (player.pers["team"] == team)) {
             player playLocalSound(sound);
+          }
         }
       }
     } else {
       if(isDefined(excludeList)) {
         for(i = 0; i < level.players.size; i++) {
-          if(!isExcluded(level.players[i], excludeList))
+          if(!isExcluded(level.players[i], excludeList)) {
             level.players[i] playLocalSound(sound);
+          }
         }
       } else {
-        for(i = 0; i < level.players.size; i++)
+        for(i = 0; i < level.players.size; i++) {
           level.players[i] playLocalSound(sound);
+        }
       }
     }
   }
@@ -233,8 +242,9 @@ sortLowerMessages() {
   for(i = 1; i < self.lowerMessages.size; i++) {
     message = self.lowerMessages[i];
     priority = message.priority;
-    for(j = i - 1; j >= 0 && priority > self.lowerMessages[j].priority; j--)
+    for(j = i - 1; j >= 0 && priority > self.lowerMessages[j].priority; j--) {
       self.lowerMessages[j + 1] = self.lowerMessages[j];
+    }
     self.lowerMessages[j + 1] = message;
   }
 }
@@ -243,8 +253,9 @@ addLowerMessage(name, text, time, priority) {
   newMessage = undefined;
   foreach(message in self.lowerMessages) {
     if(message.name == name) {
-      if(message.text == text && message.priority == priority)
+      if(message.text == text && message.priority == priority) {
         return;
+      }
 
       newMessage = message;
       break;
@@ -267,12 +278,14 @@ addLowerMessage(name, text, time, priority) {
 
 removeLowerMessage(name) {
   for(i = 0; i < self.lowerMessages.size; i++) {
-    if(self.lowerMessages[i].name != name)
+    if(self.lowerMessages[i].name != name) {
       continue;
+    }
 
     message = self.lowerMessages[i];
-    if(i < self.lowerMessages.size - 1)
+    if(i < self.lowerMessages.size - 1) {
       self.lowerMessages[i] = self.lowerMessages[self.lowerMessages.size - 1];
+    }
 
     self.lowerMessages[self.lowerMessages.size - 1] = undefined;
   }
@@ -285,11 +298,13 @@ getLowerMessage() {
 }
 
 setLowerMessage(name, text, time, priority) {
-  if(!isDefined(priority))
+  if(!isDefined(priority)) {
     priority = 1;
+  }
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 0;
+  }
 
   self addLowerMessage(name, text, time, priority);
   self updateLowerMessage();
@@ -306,10 +321,12 @@ updateLowerMessage() {
   }
 
   self.lowerMessage setText(message.text);
-  if(isDefined(message.time) && message.time > 0)
+  if(isDefined(message.time) && message.time > 0) {
     self.lowerTimer setTimer(max(message.time - ((getTime() - message.addTime) / 1000), 0.1));
-  else
+  }
+  else {
     self.lowerTimer setText("");
+  }
 
   self.lowerMessage.alpha = 0.85;
   self.lowerTimer.alpha = 1;
@@ -321,19 +338,22 @@ clearLowerMessage(name, fadetime) {
 }
 
 clearLowerMessages() {
-  for(i = 0; i < self.lowerMessages.size; i++)
+  for(i = 0; i < self.lowerMessages.size; i++) {
     self.lowerMessages[i] = undefined;
+  }
 
-  if(!isDefined(self.lowerMessage))
+  if(!isDefined(self.lowerMessage)) {
     return;
+  }
 
   self updateLowerMessage();
 }
 
 printOnTeam(printString, team) {
   foreach(player in level.players) {
-    if(player.team != team)
+    if(player.team != team) {
       continue;
+    }
 
     player iPrintLn(printString);
   }
@@ -343,8 +363,9 @@ printBoldOnTeam(text, team) {
   assert(isDefined(level.players));
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
+    if((isDefined(player.pers["team"])) && (player.pers["team"] == team)) {
       player iprintlnbold(text);
+    }
   }
 }
 
@@ -352,8 +373,9 @@ printBoldOnTeamArg(text, team, arg) {
   assert(isDefined(level.players));
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
+    if((isDefined(player.pers["team"])) && (player.pers["team"] == team)) {
       player iprintlnbold(text, arg);
+    }
   }
 }
 
@@ -361,8 +383,9 @@ printOnTeamArg(text, team, arg) {
   assert(isDefined(level.players));
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    if((isDefined(player.pers["team"])) && (player.pers["team"] == team))
+    if((isDefined(player.pers["team"])) && (player.pers["team"] == team)) {
       player iprintln(text, arg);
+    }
   }
 }
 
@@ -370,8 +393,9 @@ printOnPlayers(text, team) {
   players = level.players;
   for(i = 0; i < players.size; i++) {
     if(isDefined(team)) {
-      if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == team))
+      if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == team)) {
         players[i] iprintln(text);
+      }
     } else {
       players[i] iprintln(text);
     }
@@ -392,10 +416,12 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
       player = level.players[i];
       playerteam = player.pers["team"];
       if(isDefined(playerteam)) {
-        if(playerteam == team && isDefined(printFriendly))
+        if(playerteam == team && isDefined(printFriendly)) {
           player iprintln(printFriendly, printarg);
-        else if(playerteam == otherteam && isDefined(printEnemy))
+        }
+        else if(playerteam == otherteam && isDefined(printEnemy)) {
           player iprintln(printEnemy, printarg);
+        }
       }
     }
     if(shouldDoSounds) {
@@ -410,12 +436,14 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
         playerteam = player.pers["team"];
         if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printFriendly))
+            if(isDefined(printFriendly)) {
               player iprintln(printFriendly, printarg);
+            }
             player playLocalSound(soundFriendly);
           } else if(playerteam == otherteam) {
-            if(isDefined(printEnemy))
+            if(isDefined(printEnemy)) {
               player iprintln(printEnemy, printarg);
+            }
             player playLocalSound(soundEnemy);
           }
         }
@@ -426,12 +454,14 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
         playerteam = player.pers["team"];
         if(isDefined(playerteam)) {
           if(playerteam == team) {
-            if(isDefined(printFriendly))
+            if(isDefined(printFriendly)) {
               player iprintln(printFriendly, printarg);
+            }
             player playLocalSound(soundFriendly);
           } else if(playerteam == otherteam) {
-            if(isDefined(printEnemy))
+            if(isDefined(printEnemy)) {
               player iprintln(printEnemy, printarg);
+            }
           }
         }
       }
@@ -441,8 +471,9 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
 
 printAndSoundOnTeam(team, printString, soundAlias) {
   foreach(player in level.players) {
-    if(player.team != team)
+    if(player.team != team) {
       continue;
+    }
 
     player printAndSoundOnPlayer(printString, soundAlias);
   }
@@ -454,8 +485,9 @@ printAndSoundOnPlayer(printString, soundAlias) {
 }
 
 _playLocalSound(soundAlias) {
-  if(level.splitscreen && self getEntityNumber() != 0)
+  if(level.splitscreen && self getEntityNumber() != 0) {
     return;
+  }
 
   self playLocalSound(soundAlias);
 }
@@ -469,12 +501,15 @@ dvarIntValue(dVar, defVal, minVal, maxVal) {
 
   value = getDvarInt(dVar);
 
-  if(value > maxVal)
+  if(value > maxVal) {
     value = maxVal;
-  else if(value < minVal)
+  }
+  else if(value < minVal) {
     value = minVal;
-  else
+  }
+  else {
     return value;
+  }
 
   setDvar(dVar, value);
   return value;
@@ -489,12 +524,15 @@ dvarFloatValue(dVar, defVal, minVal, maxVal) {
 
   value = getDvarFloat(dVar);
 
-  if(value > maxVal)
+  if(value > maxVal) {
     value = maxVal;
-  else if(value < minVal)
+  }
+  else if(value < minVal) {
     value = minVal;
-  else
+  }
+  else {
     return value;
+  }
 
   setDvar(dVar, value);
   return value;
@@ -509,20 +547,24 @@ play_sound_on_tag(alias, tag) {
 }
 
 getOtherTeam(team) {
-  if(team == "allies")
+  if(team == "allies") {
     return "axis";
-  else if(team == "axis")
+  }
+  else if(team == "axis") {
     return "allies";
+  }
 
   assertMsg("getOtherTeam: invalid team " + team);
 }
 
 wait_endon(waitTime, endOnString, endonString2, endonString3) {
   self endon(endOnString);
-  if(isDefined(endonString2))
+  if(isDefined(endonString2)) {
     self endon(endonString2);
-  if(isDefined(endonString3))
+  }
+  if(isDefined(endonString3)) {
     self endon(endonString3);
+  }
 
   wait(waitTime);
 }
@@ -532,8 +574,9 @@ isMG(weapon) {
 }
 
 initPersStat(dataName) {
-  if(!isDefined(self.pers[dataName]))
+  if(!isDefined(self.pers[dataName])) {
     self.pers[dataName] = 0;
+  }
 }
 
 getPersStat(dataName) {
@@ -554,8 +597,9 @@ setPersStat(dataName, value) {
 
 initPlayerStat(ref, defaultvalue) {
   if(!isDefined(self.stats["stats_" + ref])) {
-    if(!isDefined(defaultvalue))
+    if(!isDefined(defaultvalue)) {
       defaultvalue = 0;
+    }
 
     self.stats["stats_" + ref] = spawnStruct();
     self.stats["stats_" + ref].value = defaultvalue;
@@ -584,22 +628,25 @@ getPlayerStatTime(ref) {
 setPlayerStatIfGreater(ref, newvalue) {
   currentvalue = self getPlayerStat(ref);
 
-  if(newvalue > currentvalue)
+  if(newvalue > currentvalue) {
     self setPlayerStat(ref, newvalue);
+  }
 }
 
 setPlayerStatIfLower(ref, newvalue) {
   currentvalue = self getPlayerStat(ref);
 
-  if(newvalue < currentvalue)
+  if(newvalue < currentvalue) {
     self setPlayerStat(ref, newvalue);
+  }
 }
 
 updatePersRatio(ratio, num, denom) {
   numValue = self maps\mp\gametypes\_persistence::statGet(num);
   denomValue = self maps\mp\gametypes\_persistence::statGet(denom);
-  if(denomValue == 0)
+  if(denomValue == 0) {
     denomValue = 1;
+  }
 
   self maps\mp\gametypes\_persistence::statSet(ratio, int((numValue * 1000) / denomValue));
 }
@@ -607,8 +654,9 @@ updatePersRatio(ratio, num, denom) {
 updatePersRatioBuffered(ratio, num, denom) {
   numValue = self maps\mp\gametypes\_persistence::statGetBuffered(num);
   denomValue = self maps\mp\gametypes\_persistence::statGetBuffered(denom);
-  if(denomValue == 0)
+  if(denomValue == 0) {
     denomValue = 1;
+  }
 
   self maps\mp\gametypes\_persistence::statSetBuffered(ratio, int((numValue * 1000) / denomValue));
 }
@@ -621,8 +669,9 @@ WaitTillSlowProcessAllowed(allowLoop) {
   // i'm trying to avoid using a loop because i don't want any extra variables
   if(level.lastSlowProcessFrame == gettime()) {
     if(isDefined(allowLoop) && allowLoop) {
-      while(level.lastSlowProcessFrame == getTime())
+      while(level.lastSlowProcessFrame == getTime()) {
         wait(0.05);
+      }
     } else {
       wait .05;
       if(level.lastSlowProcessFrame == gettime()) {
@@ -647,8 +696,9 @@ waitForTimeOrNotify(time, notifyname) {
 
 isExcluded(entity, entityList) {
   for(index = 0; index < entityList.size; index++) {
-    if(entity == entityList[index])
+    if(entity == entityList[index]) {
       return true;
+    }
   }
   return false;
 }
@@ -656,11 +706,13 @@ isExcluded(entity, entityList) {
 leaderDialog(dialog, team, group, excludeList) {
   assert(isDefined(level.players));
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     return;
+  }
 
-  if(dialog == "null")
+  if(dialog == "null") {
     return;
+  }
 
   if(!isDefined(team)) {
     leaderDialogBothTeams(dialog, "allies", dialog, "axis", group, excludeList);
@@ -668,22 +720,25 @@ leaderDialog(dialog, team, group, excludeList) {
   }
 
   if(level.splitscreen) {
-    if(level.players.size)
+    if(level.players.size) {
       level.players[0] leaderDialogOnPlayer(dialog, group);
+    }
     return;
   }
 
   if(isDefined(excludeList)) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      if((isDefined(player.pers["team"]) && (player.pers["team"] == team)) && !isExcluded(player, excludeList))
+      if((isDefined(player.pers["team"]) && (player.pers["team"] == team)) && !isExcluded(player, excludeList)) {
         player leaderDialogOnPlayer(dialog, group);
+      }
     }
   } else {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      if(isDefined(player.pers["team"]) && (player.pers["team"] == team))
+      if(isDefined(player.pers["team"]) && (player.pers["team"] == team)) {
         player leaderDialogOnPlayer(dialog, group);
+      }
     }
   }
 }
@@ -691,12 +746,14 @@ leaderDialog(dialog, team, group, excludeList) {
 leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
   assert(isDefined(level.players));
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     return;
+  }
 
   if(level.splitscreen) {
-    if(level.players.size)
+    if(level.players.size) {
       level.players[0] leaderDialogOnPlayer(dialog1, group);
+    }
     return;
   }
 
@@ -705,52 +762,64 @@ leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
       player = level.players[i];
       team = player.pers["team"];
 
-      if(!isDefined(team))
+      if(!isDefined(team)) {
         continue;
+      }
 
-      if(isExcluded(player, excludeList))
+      if(isExcluded(player, excludeList)) {
         continue;
+      }
 
-      if(team == team1)
+      if(team == team1) {
         player leaderDialogOnPlayer(dialog1, group);
-      else if(team == team2)
+      }
+      else if(team == team2) {
         player leaderDialogOnPlayer(dialog2, group);
+      }
     }
   } else {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
       team = player.pers["team"];
 
-      if(!isDefined(team))
+      if(!isDefined(team)) {
         continue;
+      }
 
-      if(team == team1)
+      if(team == team1) {
         player leaderDialogOnPlayer(dialog1, group);
-      else if(team == team2)
+      }
+      else if(team == team2) {
         player leaderDialogOnPlayer(dialog2, group);
+      }
     }
   }
 }
 
 leaderDialogOnPlayers(dialog, players, group) {
-  foreach(player in players)
+  foreach(player in players) {
   player leaderDialogOnPlayer(dialog, group);
+  }
 }
 
 leaderDialogOnPlayer(dialog, group, groupOverride) {
-  if(!isDefined(groupOverride))
+  if(!isDefined(groupOverride)) {
     groupOverride = false;
+  }
 
   team = self.pers["team"];
 
-  if(level.splitscreen)
+  if(level.splitscreen) {
     return;
+  }
 
-  if(!isDefined(team))
+  if(!isDefined(team)) {
     return;
+  }
 
-  if(team != "allies" && team != "axis")
+  if(team != "allies" && team != "axis") {
     return;
+  }
 
   if(isDefined(group)) {
     // ignore the message if one from the same group is already playing
@@ -769,14 +838,17 @@ leaderDialogOnPlayer(dialog, group, groupOverride) {
     dialog = group;
 
     // exit because the "group" dialog call is already in the queue
-    if(hadGroupDialog)
+    if(hadGroupDialog) {
       return;
+    }
   }
 
-  if(self.leaderDialogActive == "")
+  if(self.leaderDialogActive == "") {
     self thread playLeaderDialogOnPlayer(dialog, team);
-  else
+  }
+  else {
     self.leaderDialogQueue[self.leaderDialogQueue.size] = dialog;
+  }
 }
 
 playLeaderDialogOnPlayer(dialog, team) {
@@ -794,8 +866,9 @@ playLeaderDialogOnPlayer(dialog, team) {
 
   assertEx(isDefined(game["dialog"][dialog]), "Dialog " + dialog + " was not defined in game[dialog] array.");
 
-  if(isSubStr(game["dialog"][dialog], "null"))
+  if(isSubStr(game["dialog"][dialog], "null")) {
     return;
+  }
 
   self.leaderDialogActive = game["voice"][team] + game["dialog"][dialog];
   self playLocalSound(game["voice"][team] + game["dialog"][dialog]);
@@ -809,8 +882,9 @@ playLeaderDialogOnPlayer(dialog, team) {
   if(self.leaderDialogQueue.size > 0) {
     nextDialog = self.leaderDialogQueue[0];
 
-    for(i = 1; i < self.leaderDialogQueue.size; i++)
+    for(i = 1; i < self.leaderDialogQueue.size; i++) {
       self.leaderDialogQueue[i - 1] = self.leaderDialogQueue[i];
+    }
     self.leaderDialogQueue[i - 1] = undefined;
 
     self thread playLeaderDialogOnPlayer(nextDialog, team);
@@ -832,10 +906,12 @@ updateObjectiveText() {
   }
 
   if(getWatchedDvar("scorelimit") > 0 && !isObjectiveBased()) {
-    if(level.splitScreen)
+    if(level.splitScreen) {
       self setclientdvar("cg_objectiveText", getObjectiveScoreText(self.pers["team"]));
-    else
+    }
+    else {
       self setclientdvar("cg_objectiveText", getObjectiveScoreText(self.pers["team"]), getWatchedDvar("scorelimit"));
+    }
   } else {
     self setclientdvar("cg_objectiveText", getObjectiveText(self.pers["team"]));
   }
@@ -869,13 +945,16 @@ getObjectiveHintText(team) {
 }
 
 getTimePassed() {
-  if(!isDefined(level.startTime))
+  if(!isDefined(level.startTime)) {
     return 0;
+  }
 
-  if(level.timerStopped)
+  if(level.timerStopped) {
     return (level.timerPauseTime - level.startTime) - level.discardTime;
-  else
+  }
+  else {
     return (gettime() - level.startTime) - level.discardTime;
+  }
 }
 
 getSecondsPassed() {
@@ -902,12 +981,15 @@ isValidClass(class) {
 }
 
 getValueInRange(value, minValue, maxValue) {
-  if(value > maxValue)
+  if(value > maxValue) {
     return maxValue;
-  else if(value < minValue)
+  }
+  else if(value < minValue) {
     return minValue;
-  else
+  }
+  else {
     return value;
+  }
 }
 
 waitForTimeOrNotifies(desiredDelay) {
@@ -929,14 +1011,16 @@ closeMenus() {
 }
 
 logXPGains() {
-  if(!isDefined(self.xpGains))
+  if(!isDefined(self.xpGains)) {
     return;
+  }
 
   xpTypes = getArrayKeys(self.xpGains);
   for(index = 0; index < xpTypes.size; index++) {
     gain = self.xpGains[xpTypes[index]];
-    if(!gain)
+    if(!gain) {
       continue;
+    }
 
     self logString("xp " + xpTypes[index] + ": " + gain);
   }
@@ -952,10 +1036,12 @@ registerRoundSwitchDvar(dvarString, defaultValue, minValue, maxValue) {
   level.roundswitchMax = maxValue;
   level.roundswitch = getDvarInt(dvarString, defaultValue);
 
-  if(level.roundswitch < minValue)
+  if(level.roundswitch < minValue) {
     level.roundswitch = minValue;
-  else if(level.roundswitch > maxValue)
+  }
+  else if(level.roundswitch > maxValue) {
     level.roundswitch = maxValue;
+  }
 }
 
 registerRoundLimitDvar(dvarString, defaultValue, minValue, maxValue) {
@@ -1028,13 +1114,15 @@ get_damageable_grenade_pos(grenade) {
 getDvarVec(dvarName) {
   dvarString = getDvar(dvarName);
 
-  if(dvarString == "")
+  if(dvarString == "") {
     return (0, 0, 0);
+  }
 
   dvarTokens = strTok(dvarString, " ");
 
-  if(dvarTokens.size < 3)
+  if(dvarTokens.size < 3) {
     return (0, 0, 0);
+  }
 
   setDvar("tempR", dvarTokens[0]);
   setDvar("tempG", dvarTokens[1]);
@@ -1044,11 +1132,13 @@ getDvarVec(dvarName) {
 }
 
 strip_suffix(lookupString, stripString) {
-  if(lookupString.size <= stripString.size)
+  if(lookupString.size <= stripString.size) {
     return lookupString;
+  }
 
-  if(getSubStr(lookupString, lookupString.size - stripString.size, lookupString.size) == stripString)
+  if(getSubStr(lookupString, lookupString.size - stripString.size, lookupString.size) == stripString) {
     return getSubStr(lookupString, 0, lookupString.size - stripString.size);
+  }
 
   return lookupString;
 }
@@ -1076,11 +1166,13 @@ saveData() {
   weaponsList = self GetWeaponsListAll();
   saveData.weapons = [];
   foreach(weapon in weaponsList) {
-    if(weaponInventoryType(weapon) == "exclusive")
+    if(weaponInventoryType(weapon) == "exclusive") {
       continue;
+    }
 
-    if(weaponInventoryType(weapon) == "altmode")
+    if(weaponInventoryType(weapon) == "altmode") {
       continue;
+    }
 
     saveWeapon = spawnStruct();
     saveWeapon.name = weapon;
@@ -1089,8 +1181,9 @@ saveData() {
     saveWeapon.stockAmmo = self getWeaponAmmoStock(weapon);
     /* save camo? */
 
-    if(isDefined(self.throwingGrenade) && self.throwingGrenade == weapon)
+    if(isDefined(self.throwingGrenade) && self.throwingGrenade == weapon) {
       saveWeapon.stockAmmo--;
+    }
 
     assert(saveWeapon.stockAmmo >= 0);
 
@@ -1112,20 +1205,23 @@ restoreData() {
     //self _giveWeapon( weapon.name );
 
     self setWeaponAmmoClip(weapon.name, weapon.clipAmmoR, "right");
-    if(isSubStr(weapon.name, "akimbo"))
+    if(isSubStr(weapon.name, "akimbo")) {
       self setWeaponAmmoClip(weapon.name, weapon.clipAmmoL, "left");
+    }
 
     self setWeaponAmmoStock(weapon.name, weapon.stockAmmo);
   }
 
-  foreach(slotID, actionSlot in saveData.actionSlots)
+  foreach(slotID, actionSlot in saveData.actionSlots) {
   self _setActionSlot(slotID, actionSlot.type, actionSlot.item);
+  }
 
   if(self getCurrentWeapon() == "none") {
     weapon = saveData.currentWeapon;
 
-    if(weapon == "none")
+    if(weapon == "none") {
       weapon = self getLastWeapon();
+    }
 
     // Can remove this when "spawn" isn't used after final stand
     self setSpawnWeapon(weapon);
@@ -1141,8 +1237,9 @@ _setActionSlot(slotID, type, item) {
 }
 
 isFloat(value) {
-  if(int(value) != value)
+  if(int(value) != value) {
     return true;
+  }
 
   return false;
 }
@@ -1184,12 +1281,15 @@ updateWatchedDvars() {
     watchDvars = getArrayKeys(level.watchDvars);
 
     foreach(dvarString in watchDvars) {
-      if(level.watchDvars[dvarString].type == "string")
+      if(level.watchDvars[dvarString].type == "string") {
         dvarValue = getProperty(dvarString, level.watchDvars[dvarString].value);
-      else if(level.watchDvars[dvarString].type == "float")
+      }
+      else if(level.watchDvars[dvarString].type == "float") {
         dvarValue = getFloatProperty(dvarString, level.watchDvars[dvarString].value);
-      else
+      }
+      else {
         dvarValue = getIntProperty(dvarString, level.watchDvars[dvarString].value);
+      }
 
       if(dvarValue != level.watchDvars[dvarString].value) {
         level.watchDvars[dvarString].value = dvarValue;
@@ -1202,100 +1302,121 @@ updateWatchedDvars() {
 }
 
 isRoundBased() {
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return false;
+  }
 
-  if(getWatchedDvar("winlimit") != 1 && getWatchedDvar("roundlimit") != 1)
+  if(getWatchedDvar("winlimit") != 1 && getWatchedDvar("roundlimit") != 1) {
     return true;
+  }
 
   return false;
 }
 
 isLastRound() {
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return true;
+  }
 
-  if(getWatchedDvar("roundlimit") > 1 && game["roundsPlayed"] >= (getWatchedDvar("roundlimit") - 1))
+  if(getWatchedDvar("roundlimit") > 1 && game["roundsPlayed"] >= (getWatchedDvar("roundlimit") - 1)) {
     return true;
+  }
 
-  if(getWatchedDvar("winlimit") > 1 && game["roundsWon"]["allies"] >= getWatchedDvar("winlimit") - 1 && game["roundsWon"]["axis"] >= getWatchedDvar("winlimit") - 1)
+  if(getWatchedDvar("winlimit") > 1 && game["roundsWon"]["allies"] >= getWatchedDvar("winlimit") - 1 && game["roundsWon"]["axis"] >= getWatchedDvar("winlimit") - 1) {
     return true;
+  }
 
   return false;
 }
 
 wasOnlyRound() {
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return true;
+  }
 
-  if(getWatchedDvar("winlimit") == 1 && hitWinLimit())
+  if(getWatchedDvar("winlimit") == 1 && hitWinLimit()) {
     return true;
+  }
 
-  if(getWatchedDvar("roundlimit") == 1)
+  if(getWatchedDvar("roundlimit") == 1) {
     return true;
+  }
 
   return false;
 }
 
 wasLastRound() {
-  if(level.forcedEnd)
+  if(level.forcedEnd) {
     return true;
+  }
 
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return true;
+  }
 
-  if(hitRoundLimit() || hitWinLimit())
+  if(hitRoundLimit() || hitWinLimit()) {
     return true;
+  }
 
   return false;
 }
 
 hitRoundLimit() {
-  if(getWatchedDvar("roundlimit") <= 0)
+  if(getWatchedDvar("roundlimit") <= 0) {
     return false;
+  }
 
   return (game["roundsPlayed"] >= getWatchedDvar("roundlimit"));
 }
 
 hitScoreLimit() {
-  if(isObjectiveBased())
+  if(isObjectiveBased()) {
     return false;
+  }
 
-  if(getWatchedDvar("scorelimit") <= 0)
+  if(getWatchedDvar("scorelimit") <= 0) {
     return false;
+  }
 
   if(level.teamBased) {
-    if(game["teamScores"]["allies"] >= getWatchedDvar("scorelimit") || game["teamScores"]["axis"] >= getWatchedDvar("scorelimit"))
+    if(game["teamScores"]["allies"] >= getWatchedDvar("scorelimit") || game["teamScores"]["axis"] >= getWatchedDvar("scorelimit")) {
       return true;
+    }
   } else {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      if(isDefined(player.score) && player.score >= getWatchedDvar("scorelimit"))
+      if(isDefined(player.score) && player.score >= getWatchedDvar("scorelimit")) {
         return true;
+      }
     }
   }
   return false;
 }
 
 hitWinLimit() {
-  if(getWatchedDvar("winlimit") <= 0)
+  if(getWatchedDvar("winlimit") <= 0) {
     return false;
+  }
 
-  if(!level.teamBased)
+  if(!level.teamBased) {
     return true;
+  }
 
-  if(getRoundsWon("allies") >= getWatchedDvar("winlimit") || getRoundsWon("axis") >= getWatchedDvar("winlimit"))
+  if(getRoundsWon("allies") >= getWatchedDvar("winlimit") || getRoundsWon("axis") >= getWatchedDvar("winlimit")) {
     return true;
+  }
 
   return false;
 }
 
 getScoreLimit() {
   if(isRoundBased()) {
-    if(getWatchedDvar("roundlimit"))
+    if(getWatchedDvar("roundlimit")) {
       return (getWatchedDvar("roundlimit"));
-    else
+    }
+    else {
       return (getWatchedDvar("winlimit"));
+    }
   } else {
     return (getWatchedDvar("scorelimit"));
   }
@@ -1313,10 +1434,12 @@ getTimeLimit() {
   if(inOvertime() && (!isDefined(game["inNukeOvertime"]) || !game["inNukeOvertime"])) {
     timeLimit = int(getDvar("overtimeTimeLimit"));
 
-    if(isDefined(timeLimit))
+    if(isDefined(timeLimit)) {
       return timeLimit;
-    else
+    }
+    else {
       return 1;
+    }
   } else if(isDefined(level.dd) && level.dd && isDefined(level.bombexploded) && level.bombexploded > 0) //to handle extra time added by dd bombs
   {
     return (getWatchedDvar("timelimit") + (level.bombexploded * level.ddTimeToAdd));
@@ -1326,12 +1449,15 @@ getTimeLimit() {
 }
 
 getHalfTime() {
-  if(inOvertime())
+  if(inOvertime()) {
     return false;
-  else if(isDefined(game["inNukeOvertime"]) && game["inNukeOvertime"])
+  }
+  else if(isDefined(game["inNukeOvertime"]) && game["inNukeOvertime"]) {
     return false;
-  else
+  }
+  else {
     return getWatchedDvar("halftime");
+  }
 }
 
 inOvertime() {
@@ -1339,20 +1465,24 @@ inOvertime() {
 }
 
 gameHasStarted() {
-  if(level.teamBased)
+  if(level.teamBased) {
     return (level.hasSpawned["axis"] && level.hasSpawned["allies"]);
-  else
+  }
+  else {
     return (level.maxPlayerCount > 1);
+  }
 }
 
 getAverageOrigin(ent_array) {
   avg_origin = (0, 0, 0);
 
-  if(!ent_array.size)
+  if(!ent_array.size) {
     return undefined;
+  }
 
-  foreach(ent in ent_array)
+  foreach(ent in ent_array) {
   avg_origin += ent.origin;
+  }
 
   avg_x = int(avg_origin[0] / ent_array.size);
   avg_y = int(avg_origin[1] / ent_array.size);
@@ -1367,12 +1497,14 @@ getLivingPlayers(team) {
   player_array = [];
 
   foreach(player in level.players) {
-    if(!isAlive(player))
+    if(!isAlive(player)) {
       continue;
+    }
 
     if(level.teambased && isDefined(team)) {
-      if(team == player.pers["team"])
+      if(team == player.pers["team"]) {
         player_array[player_array.size] = player;
+      }
     } else {
       player_array[player_array.size] = player;
     }
@@ -1382,8 +1514,9 @@ getLivingPlayers(team) {
 }
 
 setUsingRemote(remoteName) {
-  if(isDefined(self.carryIcon))
+  if(isDefined(self.carryIcon)) {
     self.carryIcon.alpha = 0;
+  }
 
   assert(!self isUsingRemote());
   self.usingRemote = remoteName;
@@ -1411,16 +1544,18 @@ clearUsingRemote() {
   //if( !isWeaponEnabled() )
   //	self disableWeapons();
 
-  if(isDefined(self.carryIcon))
+  if(isDefined(self.carryIcon)) {
     self.carryIcon.alpha = 1;
+  }
 
   self.usingRemote = undefined;
   self _enableOffhandWeapons();
 
   curWeapon = self getCurrentWeapon();
 
-  if(curWeapon == "none" || isKillstreakWeapon(curWeapon))
+  if(curWeapon == "none" || isKillstreakWeapon(curWeapon)) {
     self switchToWeapon(self Getlastweapon());
+  }
 
   self freezeControlsWrapper(false);
 
@@ -1432,8 +1567,9 @@ isUsingRemote() {
 }
 
 queueCreate(queueName) {
-  if(!isDefined(level.queues))
+  if(!isDefined(level.queues)) {
     level.queues = [];
+  }
 
   assert(!isDefined(level.queues[queueName]));
 
@@ -1451,13 +1587,16 @@ queueRemoveFirst(queueName) {
   first = undefined;
   newQueue = [];
   foreach(element in level.queues[queueName]) {
-    if(!isDefined(element))
+    if(!isDefined(element)) {
       continue;
+    }
 
-    if(!isDefined(first))
+    if(!isDefined(first)) {
       first = element;
-    else
+    }
+    else {
       newQueue[newQueue.size] = element;
+    }
   }
 
   level.queues[queueName] = newQueue;
@@ -1466,18 +1605,22 @@ queueRemoveFirst(queueName) {
 }
 
 _giveWeapon(weapon, variant, dualWieldOverRide) {
-  if(!isDefined(variant))
+  if(!isDefined(variant)) {
     variant = 0;
+  }
 
-  if(isSubstr(weapon, "_akimbo") || isDefined(dualWieldOverRide) && dualWieldOverRide == true)
+  if(isSubstr(weapon, "_akimbo") || isDefined(dualWieldOverRide) && dualWieldOverRide == true) {
     self giveWeapon(weapon, variant, true);
-  else
+  }
+  else {
     self giveWeapon(weapon, variant, false);
+  }
 }
 
 _hasPerk(perkName) {
-  if(isDefined(self.perks[perkName]))
+  if(isDefined(self.perks[perkName])) {
     return true;
+  }
 
   return false;
 }
@@ -1485,8 +1628,9 @@ _hasPerk(perkName) {
 _setPerk(perkName) {
   self.perks[perkName] = true;
 
-  if(isDefined(level.perkSetFuncs[perkName]))
+  if(isDefined(level.perkSetFuncs[perkName])) {
     self thread[[level.perkSetFuncs[perkName]]]();
+  }
 
   self setPerk(perkName, !isDefined(level.scriptPerks[perkName]));
 }
@@ -1494,16 +1638,18 @@ _setPerk(perkName) {
 _unsetPerk(perkName) {
   self.perks[perkName] = undefined;
 
-  if(isDefined(level.perkUnsetFuncs[perkName]))
+  if(isDefined(level.perkUnsetFuncs[perkName])) {
     self thread[[level.perkUnsetFuncs[perkName]]]();
+  }
 
   self unsetPerk(perkName, !isDefined(level.scriptPerks[perkName]));
 }
 
 _clearPerks() {
   foreach(perkName, perkValue in self.perks) {
-    if(isDefined(level.perkUnsetFuncs[perkName]))
+    if(isDefined(level.perkUnsetFuncs[perkName])) {
       self[[level.perkUnsetFuncs[perkName]]]();
+    }
   }
 
   self.perks = [];
@@ -1523,12 +1669,15 @@ quickSortMid(array, start, end) {
     pivot = array[start];
 
     while(k > i) {
-      while(array[i] <= pivot && i <= end && k > i)
+      while(array[i] <= pivot && i <= end && k > i) {
         i++;
-      while(array[k] > pivot && k >= start && k >= i)
+      }
+      while(array[k] > pivot && k >= start && k >= i) {
         k--;
-      if(k > i)
+      }
+      if(k > i) {
         array = swap(array, i, k);
+      }
     }
     array = swap(array, start, k);
     array = quickSortMid(array, start, k - 1);
@@ -1547,15 +1696,18 @@ swap(array, index1, index2) {
 }
 
 _suicide() {
-  if(self isUsingRemote() && !isDefined(self.fauxDead))
+  if(self isUsingRemote() && !isDefined(self.fauxDead)) {
     self thread maps\mp\gametypes\_damage::PlayerKilled_internal(self, self, self, 10000, "MOD_SUICIDE", "frag_grenade_mp", (0, 0, 0), "none", 0, 1116, true);
-  else if(!self isUsingRemote() && !isDefined(self.fauxDead))
+  }
+  else if(!self isUsingRemote() && !isDefined(self.fauxDead)) {
     self suicide();
+  }
 }
 
 isReallyAlive(player) {
-  if(isAlive(player) && !isDefined(player.fauxDead))
+  if(isAlive(player) && !isDefined(player.fauxDead)) {
     return true;
+  }
 
   return false;
 }
@@ -1563,10 +1715,12 @@ isReallyAlive(player) {
 playDeathSound() {
   rand = RandomIntRange(1, 8);
 
-  if(self.team == "axis")
+  if(self.team == "axis") {
     self playSound("generic_death_russian_" + rand);
-  else
+  }
+  else {
     self playSound("generic_death_american_" + rand);
+  }
 }
 
 rankingEnabled() {
@@ -1586,19 +1740,23 @@ matchMakingGame() {
 
 setAltSceneObj(object, tagName, fov, forceLink) {
   /*
-  if( !isDefined( forceLink ) )
+  if( !isDefined( forceLink ) ) {
   	forceLink = false;
+  }
 
-  if( !getDvarInt( "scr_pipmode" ) && !forceLink )
+  if( !getDvarInt( "scr_pipmode" ) && !forceLink ) {
   	return;
+  }
 	
   self endon ( "disconnect" );
 
-  if( !isReallyAlive( self ) )
+  if( !isReallyAlive( self ) ) {
   	return;
+  }
 
-  if( !forceLink && isDefined( self.altSceneObject ) )
+  if( !forceLink && isDefined( self.altSceneObject ) ) {
   	return;
+  }
 
   self notify ( "altscene" );
 	
@@ -1642,16 +1800,18 @@ getGametypeNumLives() {
 }
 
 registerAdrenalineInfo(type, value) {
-  if(!isDefined(level.adrenalineInfo))
+  if(!isDefined(level.adrenalineInfo)) {
     level.adrenalineInfo = [];
+  }
 
   level.adrenalineInfo[type] = value;
 }
 
 giveAdrenaline(type) {
   /*
-  if( self.adrenaline >= 1000 )
+  if( self.adrenaline >= 1000 ) {
   	return;
+  }
 
   assertEx( isDefined( level.adrenalineInfo[type] ), "Unknown adrenaline type: " + type );
 
@@ -1670,8 +1830,9 @@ setAdrenaline(value) {
   self.adrenaline = min(value, 1000);
   self setClientDvar("ui_adrenaline", self.adrenaline);
 
-  if(self.adrenaline < 1000)
+  if(self.adrenaline < 1000) {
     self.combatHigh = undefined;
+  }
 }
 
 giveCombatHigh(combatHighName) {
@@ -1718,11 +1879,13 @@ getFloatProperty(dvar, defValue) {
 statusMenu(duration) {
   self endon("disconnect");
 
-  if(!isDefined(self._statusMenu))
+  if(!isDefined(self._statusMenu)) {
     self.statusMenu = false;
+  }
 
-  if(self.statusMenu)
+  if(self.statusMenu) {
     return;
+  }
 
   self.statusMenu = true;
 
@@ -1743,14 +1906,17 @@ isChangingWeapon() {
 }
 
 isKillstreakWeapon(weapon) {
-  if(weapon == "none")
+  if(weapon == "none") {
     return false;
+  }
 
-  if(weaponInventoryType(weapon) == "exclusive" && weapon != "destructible_car")
+  if(weaponInventoryType(weapon) == "exclusive" && weapon != "destructible_car") {
     return true;
+  }
 
-  if(isSubStr(weapon, "killstreak"))
+  if(isSubStr(weapon, "killstreak")) {
     return true;
+  }
 
   switch (weapon) {
     case "airdrop_sentry_marker_mp":
@@ -1785,16 +1951,20 @@ getWeaponClass(weapon) {
     weaponClass = tablelookup("mp/statstable.csv", 4, weaponName, 2);
   }
 
-  if(isMG(weapon))
+  if(isMG(weapon)) {
     weaponClass = "weapon_mg";
-  else if(isKillstreakWeapon(weapon))
+  }
+  else if(isKillstreakWeapon(weapon)) {
     weaponClass = "killstreak";
-  else if(isDeathStreakWeapon(weapon))
+  }
+  else if(isDeathStreakWeapon(weapon)) {
     weaponClass = "deathstreak";
+  }
   else if(weapon == "none") //airdrop crates
     weaponClass = "other";
-  else if(weaponClass == "")
+  else if(weaponClass == "") {
     weaponClass = "other";
+  }
 
   assertEx(weaponClass != "", "ERROR: invalid weapon class for weapon " + weapon);
 
@@ -1802,10 +1972,12 @@ getWeaponClass(weapon) {
 }
 
 isDeathStreakWeapon(weapon) {
-  if(weapon == "c4death_mp" || weapon == "frag_grenade_short_mp")
+  if(weapon == "c4death_mp" || weapon == "frag_grenade_short_mp") {
     return true;
-  else
+  }
+  else {
     return false;
+  }
 }
 
 getBaseWeaponName(weaponName) {
@@ -1819,8 +1991,9 @@ playSoundinSpace(alias, origin) {
 
 limitDecimalPlaces(value, places) {
   modifier = 1;
-  for(i = 0; i < places; i++)
+  for(i = 0; i < places; i++) {
     modifier *= 10;
+  }
 
   newvalue = value * modifier;
   newvalue = Int(newvalue);
@@ -1830,21 +2003,26 @@ limitDecimalPlaces(value, places) {
 }
 
 roundDecimalPlaces(value, places, style) {
-  if(!isDefined(style))
+  if(!isDefined(style)) {
     style = "nearest";
+  }
 
   modifier = 1;
-  for(i = 0; i < places; i++)
+  for(i = 0; i < places; i++) {
     modifier *= 10;
+  }
 
   newValue = value * modifier;
 
-  if(style == "up")
+  if(style == "up") {
     roundedValue = ceil(newValue);
-  else if(style == "down")
+  }
+  else if(style == "down") {
     roundedValue = floor(newValue);
-  else
+  }
+  else {
     roundedValue = newvalue + 0.5;
+  }
 
   newvalue = Int(roundedValue);
   newvalue = newvalue / modifier;
@@ -1854,16 +2032,18 @@ roundDecimalPlaces(value, places, style) {
 
 playerForClientId(clientId) {
   foreach(player in level.players) {
-    if(player.clientId == clientId)
+    if(player.clientId == clientId) {
       return player;
+    }
   }
 
   return undefined;
 }
 
 isRested() {
-  if(!self rankingEnabled())
+  if(!self rankingEnabled()) {
     return false;
+  }
 
   return (self getPlayerData("restXPGoal") > self getPlayerData("experience"));
 }
@@ -1874,8 +2054,9 @@ stringToFloat(stringVal) {
   floatVal = int(floatElements[0]);
   if(isDefined(floatElements[1])) {
     modifier = 1;
-    for(i = 0; i < floatElements[1].size; i++)
+    for(i = 0; i < floatElements[1].size; i++) {
       modifier *= 0.1;
+    }
 
     floatVal += int(floatElements[1]) * modifier;
   }
@@ -1887,10 +2068,12 @@ setSelfUsable(caller) {
   self makeUsable();
 
   foreach(player in level.players) {
-    if(player != caller)
+    if(player != caller) {
       self disablePlayerUse(player);
-    else
+    }
+    else {
       self enablePlayerUse(player);
+    }
   }
 }
 
@@ -1904,10 +2087,12 @@ _updateTeamUsable(team) {
 
   for(;;) {
     foreach(player in level.players) {
-      if(player.team == team)
+      if(player.team == team) {
         self enablePlayerUse(player);
-      else
+      }
+      else {
         self disablePlayerUse(player);
+      }
     }
 
     level waittill("joined_team");
@@ -1932,17 +2117,21 @@ _updateEnemyUsable(owner) {
   for(;;) {
     if(level.teambased) {
       foreach(player in level.players) {
-        if(player.team != team)
+        if(player.team != team) {
           self enablePlayerUse(player);
-        else
+        }
+        else {
           self disablePlayerUse(player);
+        }
       }
     } else {
       foreach(player in level.players) {
-        if(player != owner)
+        if(player != owner) {
           self enablePlayerUse(player);
-        else
+        }
+        else {
           self disablePlayerUse(player);
+        }
       }
     }
 
@@ -1952,15 +2141,17 @@ _updateEnemyUsable(owner) {
 
 getNextLifeId() {
   lifeId = getMatchData("lifeCount");
-  if(lifeId < level.MaxLives)
+  if(lifeId < level.MaxLives) {
     setMatchData("lifeCount", lifeId + 1);
+  }
 
   return (lifeId);
 }
 
 initGameFlags() {
-  if(!isDefined(game["flags"]))
+  if(!isDefined(game["flags"])) {
     game["flags"] = [];
+  }
 }
 
 gameFlagInit(flagName, isEnabled) {
@@ -1987,29 +2178,33 @@ gameFlagClear(flagName) {
 
 gameFlagWait(flagName) {
   assertEx(isDefined(game["flags"][flagName]), "gameFlag " + flagName + " referenced without being initialized; usegameFlagInit( <flagName>, <isEnabled> )");
-  while(!gameFlag(flagName))
+  while(!gameFlag(flagName)) {
     level waittill(flagName);
+  }
 }
 
 // including grenade launcher, grenade, RPG, C4, claymore
 isExplosiveDamage(meansofdeath) {
   explosivedamage = "MOD_GRENADE MOD_GRENADE_SPLASH MOD_PROJECTILE MOD_PROJECTILE_SPLASH MOD_EXPLOSIVE mod_explosive";
-  if(isSubstr(explosivedamage, meansofdeath))
+  if(isSubstr(explosivedamage, meansofdeath)) {
     return true;
+  }
   return false;
 }
 
 // if primary weapon damage
 isPrimaryDamage(meansofdeath) {
   // including pistols as well since sometimes they share ammo
-  if(meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_EXPLOSIVE_BULLET")
+  if(meansofdeath == "MOD_RIFLE_BULLET" || meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_EXPLOSIVE_BULLET") {
     return true;
+  }
   return false;
 }
 
 initLevelFlags() {
-  if(!isDefined(level.levelFlags))
+  if(!isDefined(level.levelFlags)) {
     level.levelFlags = [];
+  }
 }
 
 levelFlagInit(flagName, isEnabled) {
@@ -2038,14 +2233,16 @@ levelFlagClear(flagName) {
 
 levelFlagWait(flagName) {
   assertEx(isDefined(level.levelFlags[flagName]), "levelFlag " + flagName + " referenced without being initialized; use levelFlagInit( <flagName>, <isEnabled> )");
-  while(!levelFlag(flagName))
+  while(!levelFlag(flagName)) {
     level waittill(flagName);
+  }
 }
 
 levelFlagWaitOpen(flagName) {
   assertEx(isDefined(level.levelFlags[flagName]), "levelFlag " + flagName + " referenced without being initialized; use levelFlagInit( <flagName>, <isEnabled> )");
-  while(levelFlag(flagName))
+  while(levelFlag(flagName)) {
     level waittill(flagName);
+  }
 }
 
 getWeaponAttachments(weapon) {
@@ -2065,45 +2262,53 @@ getWeaponAttachments(weapon) {
 }
 
 isEMPed() {
-  if(self.team == "spectator")
+  if(self.team == "spectator") {
     return false;
+  }
 
-  if(level.teamBased)
+  if(level.teamBased) {
     return (level.teamEMPed[self.team]);
-  else
+  }
+  else {
     return (isDefined(level.empPlayer) && level.empPlayer != self);
+  }
 }
 
 isNuked() {
-  if(self.team == "spectator")
+  if(self.team == "spectator") {
     return false;
+  }
 
   return (isDefined(self.nuked));
 }
 
 isBulletDamage(meansofdeath) {
   bulletDamage = "MOD_RIFLE_BULLET MOD_PISTOL_BULLET MOD_HEADSHOT";
-  if(isSubstr(bulletDamage, meansofdeath))
+  if(isSubstr(bulletDamage, meansofdeath)) {
     return true;
+  }
   return false;
 }
 
 getPlayerForGuid(guid) {
   foreach(player in level.players) {
-    if(player.guid == guid)
+    if(player.guid == guid) {
       return player;
+    }
   }
 
   return undefined;
 }
 
 teamPlayerCardSplash(splash, owner, team) {
-  if(level.hardCoreMode)
+  if(level.hardCoreMode) {
     return;
+  }
 
   foreach(player in level.players) {
-    if(isDefined(team) && player.team != team)
+    if(isDefined(team) && player.team != team) {
       continue;
+    }
 
     player thread maps\mp\gametypes\_hud_message::playerCardSplashNotify(splash, owner);
   }
@@ -2138,11 +2343,13 @@ getLastLivingPlayer(team) {
   livePlayer = undefined;
 
   foreach(player in level.players) {
-    if(isDefined(team) && player.team != team)
+    if(isDefined(team) && player.team != team) {
       continue;
+    }
 
-    if(!isReallyAlive(player) && !player maps\mp\gametypes\_playerlogic::mayspawn())
+    if(!isReallyAlive(player) && !player maps\mp\gametypes\_playerlogic::mayspawn()) {
       continue;
+    }
 
     assertEx(!isDefined(livePlayer), "getLastLivingPlayer() found more than one live player on team.");
 
@@ -2156,8 +2363,9 @@ getPotentialLivingPlayers() {
   livePlayers = [];
 
   foreach(player in level.players) {
-    if(!isReallyAlive(player) && !player maps\mp\gametypes\_playerlogic::mayspawn())
+    if(!isReallyAlive(player) && !player maps\mp\gametypes\_playerlogic::mayspawn()) {
       continue;
+    }
 
     livePlayers[livePlayers.size] = player;
   }
@@ -2171,22 +2379,27 @@ waitTillRecoveredHealth(time, interval) {
 
   fullHealthTime = 0;
 
-  if(!isDefined(interval))
+  if(!isDefined(interval)) {
     interval = .05;
+  }
 
-  if(!isDefined(time))
+  if(!isDefined(time)) {
     time = 0;
+  }
 
   while(1) {
-    if(self.health != self.maxhealth)
+    if(self.health != self.maxhealth) {
       fullHealthTime = 0;
-    else
+    }
+    else {
       fullHealthTime += interval;
+    }
 
     wait interval;
 
-    if(self.health == self.maxhealth && fullHealthTime >= time)
+    if(self.health == self.maxhealth && fullHealthTime >= time) {
       break;
+    }
   }
 
   return;
@@ -2206,40 +2419,47 @@ _objective_delete(objID) {
 touchingBadTrigger() {
   killTriggers = getEntArray("trigger_hurt", "classname");
   foreach(trigger in killTriggers) {
-    if(self isTouching(trigger))
+    if(self isTouching(trigger)) {
       return true;
+    }
   }
 
   radTriggers = getEntArray("radiation", "targetname");
   foreach(trigger in radTriggers) {
-    if(self isTouching(trigger))
+    if(self isTouching(trigger)) {
       return true;
+    }
   }
 
   return false;
 }
 
 setThirdPersonDOF(isEnabled) {
-  if(isEnabled)
+  if(isEnabled) {
     self setDepthOfField(0, 110, 512, 4096, 6, 1.8);
-  else
+  }
+  else {
     self setDepthOfField(0, 0, 512, 512, 4, 0);
+  }
 }
 
 killTrigger(pos, radius, height) {
   trig = spawn("trigger_radius", pos, 0, radius, height);
 
-  if(getdvar("scr_killtriggerdebug") == "1")
+  if(getdvar("scr_killtriggerdebug") == "1") {
     thread killTriggerDebug(pos, radius, height);
+  }
 
     for(;;) {
-      if(getdvar("scr_killtriggerradius") != "")
+      if(getdvar("scr_killtriggerradius") != "") {
         radius = int(getdvar("scr_killtriggerradius"));
+      }
 
         trig waittill("trigger", player);
 
-      if(!isPlayer(player))
+      if(!isPlayer(player)) {
         continue;
+      }
 
       player suicide();
     }

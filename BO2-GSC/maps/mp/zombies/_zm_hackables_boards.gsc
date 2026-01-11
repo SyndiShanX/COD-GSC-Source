@@ -18,18 +18,21 @@ hack_boards() {
     struct = spawnStruct();
     spot = window;
 
-    if(isDefined(window.trigger_location))
+    if(isDefined(window.trigger_location)) {
       spot = window.trigger_location;
+    }
 
     org = groundpos(spot.origin) + vectorscale((0, 0, 1), 4.0);
     r = 96;
     h = 96;
 
-    if(isDefined(spot.radius))
+    if(isDefined(spot.radius)) {
       r = spot.radius;
+    }
 
-    if(isDefined(spot.height))
+    if(isDefined(spot.height)) {
       h = spot.height;
+    }
 
     struct.origin = org + vectorscale((0, 0, 1), 48.0);
     struct.radius = r;
@@ -59,13 +62,15 @@ board_hack(hacker) {
 
   self.num_hacks++;
 
-  if(self.num_hacks < 3)
+  if(self.num_hacks < 3) {
     hacker maps\mp\zombies\_zm_score::add_to_player_score(100);
+  }
   else {
     cost = int(min(300, hacker.score));
 
-    if(cost)
+    if(cost) {
       hacker maps\mp\zombies\_zm_score::minus_to_player_score(cost);
+    }
   }
 
   while(true) {
@@ -98,12 +103,14 @@ board_hack(hacker) {
 
   if(isDefined(self.window.zbarrier)) {
     if(isDefined(last_repaired_chunk)) {
-      while(self.window.zbarrier getzbarrierpiecestate(last_repaired_chunk) == "closing")
+      while(self.window.zbarrier getzbarrierpiecestate(last_repaired_chunk) == "closing") {
         wait 0.05;
+      }
     }
   } else {
-    while(isDefined(last_repaired_chunk) && last_repaired_chunk.state == "mid_repair")
+    while(isDefined(last_repaired_chunk) && last_repaired_chunk.state == "mid_repair") {
       wait 0.05;
+    }
   }
 
   maps\mp\zombies\_zm_equip_hacker::register_pooled_hackable_struct(self, ::board_hack, ::board_qualifier);
@@ -112,8 +119,9 @@ board_hack(hacker) {
 }
 
 board_qualifier(player) {
-  if(all_chunks_intact(self.window, self.window.barrier_chunks) || no_valid_repairable_boards(self.window, self.window.barrier_chunks))
+  if(all_chunks_intact(self.window, self.window.barrier_chunks) || no_valid_repairable_boards(self.window, self.window.barrier_chunks)) {
     return false;
+  }
 
   return true;
 }

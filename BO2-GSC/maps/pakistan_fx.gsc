@@ -42,8 +42,9 @@ play_water_fx() {
   self setclientflag(n_client_flag);
   self waittill("death");
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self clearclientflag(n_client_flag);
+  }
 }
 
 precache_createfx_fx() {

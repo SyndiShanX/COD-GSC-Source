@@ -41,8 +41,9 @@ spawnsolarpanels(var_0, var_1) {
     var_5 = self gettagangles(var_3);
     var_6 = spawn("script_model", var_4);
 
-    if(var_1)
+    if(var_1) {
       var_6 hide();
+    }
 
     var_6 setModel(var_0);
     var_6.my_name = var_3;
@@ -55,15 +56,17 @@ spawnsolarpanels(var_0, var_1) {
 
 unhideallpanels() {
   foreach(var_1 in level.frames) {
-    foreach(var_3 in var_1.panel_array)
+    foreach(var_3 in var_1.panel_array) {
     var_3 show();
+    }
   }
 }
 
 destructisolarpanelsinit(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
-    foreach(var_4 in level.frames[var_0].panel_array)
+    foreach(var_4 in level.frames[var_0].panel_array) {
     level.frames[var_0] thread destructsolarpanels(var_4, level.frames[var_0].panel_time_array[var_4.my_name], 0.1, var_1, var_2);
+    }
   }
 }
 
@@ -83,8 +86,9 @@ destructsolarpanels(var_0, var_1, var_2, var_3, var_4) {
   var_8 = randomintrange(-1024 * var_6, -512 * var_6);
   var_9 = randomintrange(512 * var_6, 1024 * var_6);
 
-  if(randomint(2) > 0)
+  if(randomint(2) > 0) {
     var_9 = var_9 * -1;
+  }
 
   var_10 = (var_7, var_8, var_9);
   var_11 = (-6257, 50029, -17584);
@@ -99,8 +103,9 @@ destructsolarpanels(var_0, var_1, var_2, var_3, var_4) {
   var_0 moveto(var_0.origin + var_12 * (var_13 * var_15) + var_10 * var_15, var_14);
   wait 0.1;
 
-  if(randomint(2) == 0)
+  if(randomint(2) == 0) {
     playFXOnTag(level._effect["solar_panel_trail"], var_0, "tag_origin");
+  }
 
   wait 5;
   var_0 delete();

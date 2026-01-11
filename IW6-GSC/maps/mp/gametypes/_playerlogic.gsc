@@ -10,8 +10,9 @@
 CONST_PREDICT_SPAWN_POINT = false;
 
 TimeUntilWavespawn(minimumWait) {
-  if(!self.hasSpawned)
+  if(!self.hasSpawned) {
     return 0;
+  }
 
   earliestSpawnTime = gettime() + minimumWait * 1000;
 
@@ -27,12 +28,14 @@ TimeUntilWavespawn(minimumWait) {
   if(isDefined(self.respawnTimerStartTime)) {
     timeAlreadyPassed = (gettime() - self.respawnTimerStartTime) / 1000.0;
 
-    if(self.respawnTimerStartTime < lastWaveTime)
+    if(self.respawnTimerStartTime < lastWaveTime) {
       return 0;
+    }
   }
 
-  if(isDefined(self.waveSpawnIndex))
+  if(isDefined(self.waveSpawnIndex)) {
     timeOfSpawn += 50 * self.waveSpawnIndex;
+  }
 
   return (timeOfSpawn - gettime()) / 1000;
 }
@@ -40,62 +43,73 @@ TimeUntilWavespawn(minimumWait) {
 TeamKillDelay() {
   teamKills = self.pers["teamkills"];
 
-  if(level.maxAllowedTeamKills < 0 || teamkills <= level.maxAllowedTeamKills)
+  if(level.maxAllowedTeamKills < 0 || teamkills <= level.maxAllowedTeamKills) {
     return 0;
+  }
 
   exceeded = (teamkills - level.maxAllowedTeamKills);
   return maps\mp\gametypes\_tweakables::getTweakableValue("team", "teamkillspawndelay") * exceeded;
 }
 
 TimeUntilspawn(includeTeamkillDelay) {
-  if((level.inGracePeriod && !self.hasSpawned) || level.gameended)
+  if((level.inGracePeriod && !self.hasSpawned) || level.gameended) {
     return 0;
+  }
 
   respawnDelay = 0;
   if(self.hasSpawned) {
     result = self[[level.onRespawnDelay]]();
-    if(isDefined(result))
+    if(isDefined(result)) {
       respawnDelay = result;
-    else
+    }
+    else {
       respawnDelay = getDvarInt("scr_" + level.gameType + "_playerrespawndelay");
+    }
 
-    if(includeTeamkillDelay && isDefined(self.pers["teamKillPunish"]) && self.pers["teamKillPunish"])
+    if(includeTeamkillDelay && isDefined(self.pers["teamKillPunish"]) && self.pers["teamKillPunish"]) {
       respawnDelay += TeamKillDelay();
+    }
 
     if(isDefined(self.respawnTimerStartTime)) {
       timeAlreadyPassed = (gettime() - self.respawnTimerStartTime) / 1000.0;
       respawnDelay -= timeAlreadyPassed;
-      if(respawnDelay < 0)
+      if(respawnDelay < 0) {
         respawnDelay = 0;
+      }
     }
 
-    if(isDefined(self.setSpawnPoint))
+    if(isDefined(self.setSpawnPoint)) {
       respawnDelay += level.tiSpawnDelay;
+    }
 
   }
 
   waveBased = (getDvarInt("scr_" + level.gameType + "_waverespawndelay") > 0);
 
-  if(waveBased)
+  if(waveBased) {
     return self TimeUntilWavespawn(respawnDelay);
+  }
 
   return respawnDelay;
 }
 
 mayspawn() {
   if(getGametypeNumLives() || isDefined(level.disableSpawning)) {
-    if(isDefined(level.disableSpawning) && level.disableSpawning)
+    if(isDefined(level.disableSpawning) && level.disableSpawning) {
       return false;
+    }
 
-    if(isDefined(self.pers["teamKillPunish"]) && self.pers["teamKillPunish"])
+    if(isDefined(self.pers["teamKillPunish"]) && self.pers["teamKillPunish"]) {
       return false;
+    }
 
     if(self.pers["lives"] <= 0 && gameHasStarted()) {
       return false;
     } else if(gameHasStarted()) {
       if(!level.inGracePeriod && !self.hasSpawned && (isDefined(level.allowLateComers) && !level.allowLateComers)) {
-        if(isDefined(self.siegeLateComer) && !self.siegeLateComer)
+        if(isDefined(self.siegeLateComer) && !self.siegeLateComer) {
           return true;
+        }
 
         return false;
       }
@@ -110,8 +124,9 @@ spawnClient() {
   assert(isDefined(self.team));
   assert(isValidClass(self.class));
 
-  if(isDefined(self.waitingToSelectClass) && self.waitingToSelectClass)
+  if(isDefined(self.waitingToSelectClass) && self.waitingToSelectClass) {
     self waittill("okToSpawn");
+  }
 
   if(isDefined(self.addToTeam)) {
     self maps\mp\gametypes\_menus::addToTeam(self.addToTeam);
@@ -131,8 +146,9 @@ spawnClient() {
       self.pers["teamkills"] = max(self.pers["teamkills"] - 1, 0);
       setLowerMessage("friendly_fire", &"MP_FRIENDLY_FIRE_WILL_NOT");
 
-      if(!self.hasSpawned && self.pers["teamkills"] <= level.maxAllowedTeamkills)
+      if(!self.hasSpawned && self.pers["teamkills"] <= level.maxAllowedTeamkills) {
         self.pers["teamKillPunish"] = false;
+      }
 
     } else if(isRoundBased() && !isLastRound()) {
       if(isDefined(self.tagAvailable) && self.tagAvailable) {
@@ -145,8 +161,9 @@ spawnClient() {
       self thread removeSpawnMessageShortly(3.0);
     }
 
-    if(self.sessionstate != "spectator")
+    if(self.sessionstate != "spectator") {
       currentorigin = currentorigin + (0, 0, 60);
+    }
 
     self thread spawnSpectator(currentorigin, currentangles);
     return;
@@ -159,8 +176,9 @@ spawnClient() {
 
   self waitAndSpawnClient();
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self.waitingToSpawn = false;
+  }
 }
 
 waitAndSpawnClient() {
@@ -211,8 +229,9 @@ waitAndSpawnClient() {
   if(timeUntilSpawn > 0) {
     setLowerMessage("spawn_info", game["strings"]["waiting_to_spawn"], timeUntilSpawn, 1, true);
 
-    if(!spawnedAsSpectator)
+    if(!spawnedAsSpectator) {
       self thread respawn_asSpectator(self.origin + (0, 0, 60), self.angles);
+    }
     spawnedAsSpectator = true;
 
     self waitForTimeOrNotify(timeUntilSpawn, "force_spawn");
@@ -223,8 +242,9 @@ waitAndSpawnClient() {
   if(self needsButtonToRespawn()) {
     setLowerMessage("spawn_info", game["strings"]["press_to_spawn"], undefined, undefined, undefined, undefined, undefined, undefined, true);
 
-    if(!spawnedAsSpectator)
+    if(!spawnedAsSpectator) {
       self thread respawn_asSpectator(self.origin + (0, 0, 60), self.angles);
+    }
     spawnedAsSpectator = true;
 
     self waitRespawnButton();
@@ -240,18 +260,22 @@ waitAndSpawnClient() {
 }
 
 needsButtonToRespawn() {
-  if(maps\mp\gametypes\_tweakables::getTweakableValue("player", "forcerespawn") != 0)
+  if(maps\mp\gametypes\_tweakables::getTweakableValue("player", "forcerespawn") != 0) {
     return false;
+  }
 
-  if(!self.hasSpawned)
+  if(!self.hasSpawned) {
     return false;
+  }
 
   waveBased = (getDvarInt("scr_" + level.gameType + "_waverespawndelay") > 0);
-  if(waveBased)
+  if(waveBased) {
     return false;
+  }
 
-  if(self.wantSafeSpawn)
+  if(self.wantSafeSpawn) {
     return false;
+  }
 
   return true;
 }
@@ -285,19 +309,22 @@ removeSpawnMessageShortly(delay) {
 lastStandRespawnPlayer() {
   self LastStandRevive();
 
-  if(self _hasPerk("specialty_finalstand") && !level.dieHardMode)
+  if(self _hasPerk("specialty_finalstand") && !level.dieHardMode) {
     self _unsetPerk("specialty_finalstand");
+  }
 
-  if(level.dieHardMode)
+  if(level.dieHardMode) {
     self.headicon = "";
+  }
 
   self setStance("crouch");
   self.revived = true;
 
   self notify("revive");
 
-  if(isDefined(self.standardmaxHealth))
+  if(isDefined(self.standardmaxHealth)) {
     self.maxHealth = self.standardMaxHealth;
+  }
 
   self.health = self.maxHealth;
   self _enableUsability();
@@ -317,11 +344,13 @@ getDeathSpawnPoint() {
 }
 
 showSpawnNotifies() {
-  if(isDefined(game["defcon"]))
+  if(isDefined(game["defcon"])) {
     thread maps\mp\gametypes\_hud_message::defconSplashNotify(game["defcon"], false);
+  }
 
-  if(!is_aliens() && self isRested())
+  if(!is_aliens() && self isRested()) {
     thread maps\mp\gametypes\_hud_message::splashNotify("rested");
+  }
 }
 
 predictAboutToSpawnPlayerOverTime(preduration) {
@@ -338,8 +367,9 @@ predictAboutToSpawnPlayerOverTime(preduration) {
   if(preduration <= 0) {
     return;
   }
-  if(preduration > 1.0)
+  if(preduration > 1.0) {
     wait preduration - 1.0;
+  }
 
   self predictAboutToSpawnPlayer();
 
@@ -383,8 +413,9 @@ checkPredictedSpawnpointCorrectness(spawnpointorigin) {
   if(!isDefined(level.spawnpointPrediction)) {
     level.spawnpointPrediction = spawnStruct();
     level.spawnpointPrediction.failures = 0;
-    for(i = 0; i < 7; i++)
+    for(i = 0; i < 7; i++) {
       level.spawnpointPrediction.buckets[i] = 0;
+    }
   }
 
   if(!isDefined(self.predictedSpawnPoint)) {
@@ -394,26 +425,35 @@ checkPredictedSpawnpointCorrectness(spawnpointorigin) {
     level.spawnpointPrediction.failures++;
   } else {
     dist = distance(self.predictedSpawnPoint.origin, spawnpointorigin);
-    if(dist <= 0)
+    if(dist <= 0) {
       level.spawnpointPrediction.buckets[0]++;
-    else if(dist <= 128)
+    }
+    else if(dist <= 128) {
       level.spawnpointPrediction.buckets[1]++;
-    else if(dist <= 256)
+    }
+    else if(dist <= 256) {
       level.spawnpointPrediction.buckets[2]++;
-    else if(dist <= 512)
+    }
+    else if(dist <= 512) {
       level.spawnpointPrediction.buckets[3]++;
-    else if(dist <= 1024)
+    }
+    else if(dist <= 1024) {
       level.spawnpointPrediction.buckets[4]++;
-    else if(dist <= 2048)
+    }
+    else if(dist <= 2048) {
       level.spawnpointPrediction.buckets[5]++;
-    else
+    }
+    else {
       level.spawnpointPrediction.buckets[6]++;
+    }
 
     if(getDvarInt("g_debugPredictedSpawnPoint")) {
-      if(dist > 0)
+      if(dist > 0) {
         println("Predicted player " + self.name + " would spawn at " + self.predictedSpawnPoint.origin + ", but spawned " + dist + " units away at " + spawnpointorigin);
-      else
+      }
+      else {
         println("Predicted " + self.name + "'s spawn " + ((gettime() - self.predictedSpawnPointTime) / 1000) + " seconds ahead of time");
+      }
     }
   }
 
@@ -430,8 +470,9 @@ printPredictedSpawnpointCorrectness() {
     return;
   }
   total = level.spawnpointPrediction.failures;
-  for(i = 0; i < 7; i++)
+  for(i = 0; i < 7; i++) {
     total += level.spawnpointPrediction.buckets[i];
+  }
 
   if(total <= 0) {
     return;
@@ -456,23 +497,27 @@ printPredictedSpawnpointCorrectness() {
 }
 
 getSpawnOrigin(spawnpoint) {
-  if(!positionWouldTelefrag(spawnpoint.origin))
+  if(!positionWouldTelefrag(spawnpoint.origin)) {
     return spawnpoint.origin;
+  }
 
-  if(!isDefined(spawnpoint.alternates))
+  if(!isDefined(spawnpoint.alternates)) {
     return spawnpoint.origin;
+  }
 
   foreach(alternate in spawnpoint.alternates) {
-    if(!positionWouldTelefrag(alternate))
+    if(!positionWouldTelefrag(alternate)) {
       return alternate;
+    }
   }
 
   return spawnpoint.origin;
 }
 
 tiValidationCheck() {
-  if(!isDefined(self.setSpawnPoint))
+  if(!isDefined(self.setSpawnPoint)) {
     return false;
+  }
 
   carePackages = getEntArray("care_package", "targetname");
 
@@ -480,15 +525,17 @@ tiValidationCheck() {
     if(distance(package.origin, self.setSpawnPoint.playerSpawnPos) > 64) {
       continue;
     }
-    if(isDefined(package.owner))
+    if(isDefined(package.owner)) {
       self maps\mp\gametypes\_hud_message::playerCardSplashNotify("destroyed_insertion", package.owner);
+    }
 
     maps\mp\perks\_perkfunctions::deleteTI(self.setSpawnpoint);
     return false;
   }
 
-  if(!BulletTracePassed(self.setSpawnPoint.origin + (0, 0, 60), self.setSpawnPoint.origin, false, self.setSpawnPoint))
+  if(!BulletTracePassed(self.setSpawnPoint.origin + (0, 0, 60), self.setSpawnPoint.origin, false, self.setSpawnPoint)) {
     return false;
+  }
 
   traceStartPos = self.setSpawnPoint.origin + (0, 0, 1);
   traceEndPos = PlayerPhysicsTrace(traceStartPos, self.setSpawnPoint.origin + (0, 0, -16));
@@ -514,8 +561,9 @@ spawnPlayer(fauxSpawn) {
   self notify("end_respawn");
   self notify("started_spawnPlayer");
 
-  if(!isDefined(fauxSpawn))
+  if(!isDefined(fauxSpawn)) {
     fauxSpawn = false;
+  }
 
   spawnPoint = undefined;
   self.TI_spawn = false;
@@ -585,13 +633,15 @@ spawnPlayer(fauxSpawn) {
         }
       } else if(level.teamBased)
         self playSoundToTeam("tactical_spawn", level.otherTeam[self.team]);
-      else
+      else {
         self playSound("tactical_spawn");
+      }
     }
 
     foreach(tank in level.ugvs) {
-      if(DistanceSquared(tank.origin, spawnPoint.playerSpawnPos) < 1024)
+      if(DistanceSquared(tank.origin, spawnPoint.playerSpawnPos) < 1024) {
         tank notify("damage", 5000, tank.owner, (0, 0, 0), (0, 0, 0), "MOD_EXPLOSIVE", "", "", "", undefined, "killstreak_emp_mp");
+      }
     }
 
     assert(isDefined(spawnPoint.playerSpawnPos));
@@ -600,8 +650,9 @@ spawnPlayer(fauxSpawn) {
     spawnOrigin = self.setSpawnPoint.playerSpawnPos;
     spawnAngles = self.setSpawnPoint.angles;
 
-    if(isDefined(self.setSpawnPoint.enemyTrigger))
+    if(isDefined(self.setSpawnPoint.enemyTrigger)) {
       self.setSpawnPoint.enemyTrigger Delete();
+    }
 
     self.setSpawnPoint delete();
 
@@ -627,8 +678,9 @@ spawnPlayer(fauxSpawn) {
     self SetClientOmnvar("cam_scene_support", self getEntityNumber());
 
   } else if(isDefined(self.heliSpawning) && (!isDefined(self.firstSpawn) || isDefined(self.firstSpawn) && self.firstSpawn) && level.prematchPeriod > 0 && self.team == "allies") {
-    while(!isDefined(level.alliesChopper))
+    while(!isDefined(level.alliesChopper)) {
       wait 0.1;
+    }
 
     spawnOrigin = level.alliesChopper.origin;
     spawnAngles = level.alliesChopper.angles;
@@ -636,8 +688,9 @@ spawnPlayer(fauxSpawn) {
     self.firstSpawn = false;
 
   } else if(isDefined(self.heliSpawning) && (!isDefined(self.firstSpawn) || isDefined(self.firstSpawn) && self.firstSpawn) && level.prematchPeriod > 0 && self.team == "axis") {
-    while(!isDefined(level.axisChopper))
+    while(!isDefined(level.axisChopper)) {
       wait 0.1;
+    }
 
     spawnOrigin = level.axisChopper.origin;
     spawnAngles = level.axisChopper.angles;
@@ -657,8 +710,9 @@ spawnPlayer(fauxSpawn) {
 
   self setSpawnVariables();
 
-  if(!getDvarInt("scr_forcerankedmatch") && !bot_is_fireteam_mode())
+  if(!getDvarInt("scr_forcerankedmatch") && !bot_is_fireteam_mode()) {
     assert((level.teamBased && (!allowTeamChoice() || self.sessionteam == self.team)) || (!level.teamBased && self.sessionteam == "none"));
+  }
 
   hadSpawned = self.hasSpawned;
 
@@ -709,22 +763,26 @@ spawnPlayer(fauxSpawn) {
         maps\mp\gametypes\_playerlogic::addToLivesCount();
       }
 
-      if(self_pers_lives)
+      if(self_pers_lives) {
         self.pers["lives"]--;
+      }
     }
 
     self maps\mp\gametypes\_playerlogic::addToAliveCount();
 
-    if(!hadSpawned || gameHasStarted() || (gameHasStarted() && level.inGracePeriod && self.hasDoneCombat))
+    if(!hadSpawned || gameHasStarted() || (gameHasStarted() && level.inGracePeriod && self.hasDoneCombat)) {
       self maps\mp\gametypes\_playerlogic::removeFromLivesCount();
+    }
 
     if(!self.wasAliveAtMatchStart) {
       acceptablePassedTime = 20;
-      if(getTimeLimit() > 0 && acceptablePassedTime < getTimeLimit() * 60 / 4)
+      if(getTimeLimit() > 0 && acceptablePassedTime < getTimeLimit() * 60 / 4) {
         acceptablePassedTime = getTimeLimit() * 60 / 4;
+      }
 
-      if(level.inGracePeriod || getTimePassed() < acceptablePassedTime * 1000)
+      if(level.inGracePeriod || getTimePassed() < acceptablePassedTime * 1000) {
         self.wasAliveAtMatchStart = true;
+      }
     }
   }
 
@@ -760,17 +818,20 @@ spawnPlayer(fauxSpawn) {
 
   [[level.onSpawnPlayer]]();
 
-  if(isDefined(spawnPoint))
+  if(isDefined(spawnPoint)) {
     self checkPredictedSpawnpointCorrectness(spawnPoint.origin);
+  }
 
   if(!fauxSpawn) {
     self maps\mp\gametypes\_missions::playerSpawned();
 
-    if(IsAI(self) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["player_spawned"]))
+    if(IsAI(self) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["player_spawned"])) {
       self[[level.bot_funcs["player_spawned"]]]();
+    }
 
-    if(!IsAI(self))
+    if(!IsAI(self)) {
       self thread watchForSlide();
+    }
   }
 
   prof_begin("spawnPlayer_postUTS");
@@ -793,26 +854,31 @@ spawnPlayer(fauxSpawn) {
     }
   }
 
-  if(getDvarInt("camera_thirdPerson"))
+  if(getDvarInt("camera_thirdPerson")) {
     self setThirdPersonDOF(true);
+  }
 
-  if(!gameFlag("prematch_done"))
+  if(!gameFlag("prematch_done")) {
     self freezeControlsWrapper(true);
-  else
+  }
+  else {
     self freezeControlsWrapper(false);
+  }
 
   if(!gameFlag("prematch_done") || !hadSpawned && game["state"] == "playing") {
     if(!is_aliens()) {
-      if(game["status"] == "overtime")
+      if(game["status"] == "overtime") {
         thread maps\mp\gametypes\_hud_message::oldNotifyMessage(game["strings"]["overtime"], game["strings"]["overtime_hint"], undefined, (1, 0, 0), "mp_last_stand");
+      }
     }
 
     thread showSpawnNotifies();
   }
 
   if(getIntProperty("scr_showperksonspawn", 1) == 1 && game["state"] != "postgame") {
-    if(!is_aliens())
+    if(!is_aliens()) {
       self SetClientOmnvar("ui_spawn_abilities_show", 1);
+    }
   }
 
   prof_end("spawnPlayer_postUTS");
@@ -846,8 +912,9 @@ in_spawnSpectator(origin, angles) {
   self setSpawnVariables();
 
   self_pers_team = self.pers["team"];
-  if(isDefined(self_pers_team) && self_pers_team == "spectator" && !level.gameEnded)
+  if(isDefined(self_pers_team) && self_pers_team == "spectator" && !level.gameEnded) {
     self clearLowerMessage("spawn_info");
+  }
 
   self updateSessionState("spectator");
   self ClearKillcamState();
@@ -855,26 +922,31 @@ in_spawnSpectator(origin, angles) {
 
   self resetUIDvarsOnSpectate();
 
-  if(isDefined(self_pers_team) && self_pers_team == "spectator")
+  if(isDefined(self_pers_team) && self_pers_team == "spectator") {
     self.statusicon = "";
-  else
+  }
+  else {
     self.statusicon = "hud_status_dead";
+  }
 
   maps\mp\gametypes\_spectating::setSpectatePermissions();
 
   onSpawnSpectator(origin, angles);
 
-  if(level.teamBased && !level.splitscreen && !self IsSplitScreenPlayer())
+  if(level.teamBased && !level.splitscreen && !self IsSplitScreenPlayer()) {
     self setDepthOfField(0, 128, 512, 4000, 6, 1.8);
+  }
 }
 
 getPlayerFromClientNum(clientNum) {
-  if(clientNum < 0)
+  if(clientNum < 0) {
     return undefined;
+  }
 
   for(i = 0; i < level.players.size; i++) {
-    if(level.players[i] getEntityNumber() == clientNum)
+    if(level.players[i] getEntityNumber() == clientNum) {
       return level.players[i];
+    }
   }
   return undefined;
 }
@@ -967,20 +1039,25 @@ spawnIntermission() {
 
   self_pers_postGameChallenges = self.pers["postGameChallenges"];
   if(!is_aliens() && level.rankedMatch && (self.postGamePromotion || (isDefined(self_pers_postGameChallenges) && self_pers_postGameChallenges))) {
-    if(self.postGamePromotion)
+    if(self.postGamePromotion) {
       self playLocalSound("mp_level_up");
-    else if(isDefined(self_pers_postGameChallenges))
+    }
+    else if(isDefined(self_pers_postGameChallenges)) {
       self playLocalSound("mp_challenge_complete");
+    }
 
-    if(self.postGamePromotion > level.postGameNotifies)
+    if(self.postGamePromotion > level.postGameNotifies) {
       level.postGameNotifies = 1;
+    }
 
-    if(isDefined(self_pers_postGameChallenges) && self_pers_postGameChallenges > level.postGameNotifies)
+    if(isDefined(self_pers_postGameChallenges) && self_pers_postGameChallenges > level.postGameNotifies) {
       level.postGameNotifies = self_pers_postGameChallenges;
+    }
 
     waitTime = 7.0;
-    if(isDefined(self_pers_postGameChallenges))
+    if(isDefined(self_pers_postGameChallenges)) {
       waitTime = 4.0 + min(self_pers_postGameChallenges, 3);
+    }
 
     while(waitTime) {
       wait(0.25);
@@ -988,8 +1065,9 @@ spawnIntermission() {
     }
   }
 
-  if((isDefined(level.finalKillCam_winner) && level.finalKillCam_winner != "none") && isDefined(level.match_end_delay) && wasLastRound())
+  if((isDefined(level.finalKillCam_winner) && level.finalKillCam_winner != "none") && isDefined(level.match_end_delay) && wasLastRound()) {
     wait level.match_end_delay;
+  }
 
   self updateSessionState("intermission");
   self ClearKillcamState();
@@ -1058,8 +1136,9 @@ setSpawnVariables() {
 notifyConnecting() {
   waittillframeend;
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     level notify("connecting", self);
+  }
 }
 
 Callback_PlayerDisconnect(reason) {
@@ -1087,20 +1166,23 @@ Callback_PlayerDisconnect(reason) {
 
   entNum = self GetEntityNumber();
 
-  if(!level.teamBased)
+  if(!level.teamBased) {
     game["roundsWon"][self.guid] = undefined;
+  }
 
   if(level.splitscreen) {
     players = level.players;
 
-    if(players.size <= 1)
+    if(players.size <= 1) {
       level thread maps\mp\gametypes\_gamelogic::forceEnd();
+    }
   }
 
   if(isDefined(self.score) && isDefined(self.pers["team"])) {
     spm = self.score;
-    if(getMinutesPassed())
+    if(getMinutesPassed()) {
       spm = self.score / getMinutesPassed();
+    }
 
     println("Score:" + self.score + " Minutes Passed:" + getMinutesPassed() + " SPM:" + spm);
 
@@ -1113,16 +1195,20 @@ Callback_PlayerDisconnect(reason) {
 
   self thread maps\mp\_events::disconnected();
 
-  if(level.gameEnded)
+  if(level.gameEnded) {
     self maps\mp\gametypes\_gamescore::removeDisconnectedPlayerFromPlacement();
+  }
 
-  if(isDefined(self.team))
+  if(isDefined(self.team)) {
     self maps\mp\gametypes\_playerlogic::removeFromTeamCount();
+  }
 
-  if(self.sessionstate == "playing" && !(isDefined(self.fauxDead) && self.fauxdead))
+  if(self.sessionstate == "playing" && !(isDefined(self.fauxDead) && self.fauxdead)) {
     self maps\mp\gametypes\_playerlogic::removeFromAliveCount(true);
-  else if(self.sessionstate == "spectator" || self.sessionstate == "dead")
+  }
+  else if(self.sessionstate == "spectator" || self.sessionstate == "dead") {
     level thread maps\mp\gametypes\_gamelogic::updateGameEvents();
+  }
 }
 
 removePlayerOnDisconnect() {
@@ -1177,10 +1263,12 @@ initClientDvars() {
     setDvar("cg_hudGrenadeIconMaxRangeFrag", 0);
   }
 
-  if(isDefined(level.alwaysdrawfriendlyNames) && level.alwaysdrawfriendlyNames)
+  if(isDefined(level.alwaysdrawfriendlyNames) && level.alwaysdrawfriendlyNames) {
     setDvar("cg_drawFriendlyNamesAlways", 1);
-  else
+  }
+  else {
     setDvar("cg_drawFriendlyNamesAlways", 0);
+  }
 
   self SetClientDvars("cg_drawSpectatorMessages", 1,
     "cg_scoreboardPingGraph", 1);
@@ -1199,8 +1287,9 @@ initClientDvars() {
       "cg_deadHearAllLiving", 0);
   }
 
-  if(level.teamBased)
+  if(level.teamBased) {
     self SetClientDvars("cg_everyonehearseveryone", 0);
+  }
 
   self SetClientDvar("ui_altscene", 0);
 
@@ -1267,21 +1356,25 @@ Callback_PlayerConnect() {
 
   self.connected = true;
 
-  if(self isHost())
+  if(self isHost()) {
     level.player = self;
+  }
 
-  if(!level.splitscreen && !isDefined(self.pers["score"]))
+  if(!level.splitscreen && !isDefined(self.pers["score"])) {
     iPrintLn(&"MP_CONNECTED", self);
+  }
 
   self.usingOnlineDataOffline = self isUsingOnlineDataOffline();
 
   self initClientDvars();
 
-  if(!is_aliens())
+  if(!is_aliens()) {
     self initPlayerStats();
+  }
 
-  if(getdvar("r_reflectionProbeGenerate") == "1")
+  if(getdvar("r_reflectionProbeGenerate") == "1") {
     level waittill("eternity");
+  }
 
   self.guid = self getUniqueId();
 
@@ -1293,14 +1386,16 @@ Callback_PlayerConnect() {
       self.pers["clientid"] = game["clientid"];
     }
 
-    if(game["clientid"] < 30)
+    if(game["clientid"] < 30) {
       game["clientid"]++;
+    }
 
     firstConnect = true;
   }
 
-  if(firstConnect)
+  if(firstConnect) {
     self maps\mp\killstreaks\_killstreaks::resetAdrenaline();
+  }
 
   self.clientid = self.pers["clientid"];
   self.pers["teamKillPunish"] = false;
@@ -1311,8 +1406,9 @@ Callback_PlayerConnect() {
     connectionIDChunkHigh = 0;
     connectionIDChunkLow = 0;
 
-    if(!isAI(self) && matchMakingGame())
+    if(!isAI(self) && matchMakingGame()) {
       self registerParty(self.clientid);
+    }
 
     setMatchData("playerCount", game["clientid"]);
     setMatchData("players", self.clientid, "playerID", "xuid", self getXuid());
@@ -1336,10 +1432,12 @@ Callback_PlayerConnect() {
       self maps\mp\_matchdata::logInitialStats();
     }
 
-    if(isDefined(self.pers["isBot"]) && self.pers["isBot"] || IsAI(self))
+    if(isDefined(self.pers["isBot"]) && self.pers["isBot"] || IsAI(self)) {
       connectedBot = true;
-    else
+    }
+    else {
       connectedBot = false;
+    }
 
     if(matchMakingGame() && allowTeamChoice() && !connectedBot) {
       assert(getdvarint("scr_runlevelandquit") == 1 || (level.multiTeamBased) || (level.teamBased && (self.sessionteam == "allies" || self.sessionteam == "axis")) || (!level.teamBased && self.sessionteam == "none"));
@@ -1348,8 +1446,9 @@ Callback_PlayerConnect() {
     }
   }
 
-  if(!level.teamBased)
+  if(!level.teamBased) {
     game["roundsWon"][self.guid] = 0;
+  }
 
   self.leaderDialogQueue = [];
   self.leaderDialogLocQueue = [];
@@ -1357,19 +1456,25 @@ Callback_PlayerConnect() {
   self.leaderDialogGroups = [];
   self.leaderDialogGroup = "";
 
-  if(!isDefined(self.pers["cur_kill_streak"]))
+  if(!isDefined(self.pers["cur_kill_streak"])) {
     self.pers["cur_kill_streak"] = 0;
-  if(!isDefined(self.pers["cur_death_streak"]))
+  }
+  if(!isDefined(self.pers["cur_death_streak"])) {
     self.pers["cur_death_streak"] = 0;
-  if(!isDefined(self.pers["assistsToKill"]))
+  }
+  if(!isDefined(self.pers["assistsToKill"])) {
     self.pers["assistsToKill"] = 0;
-  if(!isDefined(self.pers["cur_kill_streak_for_nuke"]))
+  }
+  if(!isDefined(self.pers["cur_kill_streak_for_nuke"])) {
     self.pers["cur_kill_streak_for_nuke"] = 0;
-  if(!isDefined(self.pers["objectivePointStreak"]))
+  }
+  if(!isDefined(self.pers["objectivePointStreak"])) {
     self.pers["objectivePointStreak"] = 0;
+  }
 
-  if(self rankingEnabled() && !is_aliens())
+  if(self rankingEnabled() && !is_aliens()) {
     self.kill_streak = self maps\mp\gametypes\_persistence::statGet("killStreak");
+  }
 
   self.lastGrenadeSuicideTime = -1;
 
@@ -1386,8 +1491,9 @@ Callback_PlayerConnect() {
   self.objectiveScaler = 1;
   self.isSniper = false;
 
-  if(!is_aliens())
+  if(!is_aliens()) {
     self setRestXPGoal();
+  }
 
   self setupSavedActionSlots();
 
@@ -1397,15 +1503,17 @@ Callback_PlayerConnect() {
 
   waittillframeend;
 
-  foreach(player in level.players)
+  foreach(player in level.players) {
   assert(player != self);
+  }
 
   level.players[level.players.size] = self;
   self maps\mp\gametypes\_spawnlogic::addToParticipantsArray();
   self maps\mp\gametypes\_spawnlogic::addToCharactersArray();
 
-  if(level.teambased)
+  if(level.teambased) {
     self updateScores();
+  }
 
   if(game["state"] == "postgame") {
     self.connectedPostGame = true;
@@ -1419,19 +1527,22 @@ Callback_PlayerConnect() {
   if(getDvarInt("scr_debug_postgameconnect")) {
     self.pers["class"] = "";
     self.class = "";
-    if(self.sessionteam != "spectator")
+    if(self.sessionteam != "spectator") {
       self.pers["team"] = self.sessionteam;
+    }
 
     self.team = "free";
   }
 
-  if(IsAI(self) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["think"]))
+  if(IsAI(self) && isDefined(level.bot_funcs) && isDefined(level.bot_funcs["think"])) {
     self thread[[level.bot_funcs["think"]]]();
+  }
 
   level endon("game_ended");
 
-  if(isDefined(level.hostMigrationTimer))
+  if(isDefined(level.hostMigrationTimer)) {
     self thread maps\mp\gametypes\_hostmigration::hostMigrationTimerThink();
+  }
 
   if(isDefined(level.onPlayerConnectAudioInit)) {
     [[level.onPlayerConnectAudioInit]]();
@@ -1445,8 +1556,9 @@ Callback_PlayerConnect() {
       self thread spawnSpectator();
       self thread maps\mp\gametypes\_menus::setTeam(self.sessionteam);
 
-      if(allowClassChoice() || (showFakeLoadout() && !isAI(self)))
+      if(allowClassChoice() || (showFakeLoadout() && !isAI(self))) {
         self SetClientOmnvar("ui_options_menu", 2);
+      }
 
       self thread kickIfDontspawn();
       return;
@@ -1461,11 +1573,13 @@ Callback_PlayerConnect() {
       self thread spawnSpectator();
       self maps\mp\gametypes\_menus::autoAssign();
 
-      if(allowClassChoice() || (showFakeLoadout() && !isAI(self)))
+      if(allowClassChoice() || (showFakeLoadout() && !isAI(self))) {
         self SetClientOmnvar("ui_options_menu", 2);
+      }
 
-      if(matchMakingGame())
+      if(matchMakingGame()) {
         self thread kickIfDontspawn();
+      }
 
       return;
     }
@@ -1485,10 +1599,12 @@ Callback_PlayerConnect() {
         self thread maps\mp\gametypes\_spectating::setMLGCamVisibility(true);
         self thread maps\mp\gametypes\_spectating::setSpectatePermissions();
       }
-      if(allowTeamChoice())
+      if(allowTeamChoice()) {
         self maps\mp\gametypes\_menus::beginTeamChoice();
-      else
+      }
+      else {
         self[[level.autoassign]]();
+      }
     } else
       self maps\mp\gametypes\_menus::beginClassChoice();
 
@@ -1505,8 +1621,9 @@ Callback_PlayerMigrated() {
     self updateObjectiveText();
     self updateMainMenu();
 
-    if(level.teambased)
+    if(level.teambased) {
       self updateScores();
+    }
   }
 
   if(self isHost()) {
@@ -1515,8 +1632,9 @@ Callback_PlayerMigrated() {
 
   humanPlayerCount = 0;
   foreach(player in level.players) {
-    if(!isDefined(player.pers["isBot"]) || player.pers["isBot"] == false)
+    if(!isDefined(player.pers["isBot"]) || player.pers["isBot"] == false) {
       humanPlayerCount++;
+    }
   }
 
   if(!isDefined(self.pers["isBot"]) || self.pers["isBot"] == false) {
@@ -1580,8 +1698,9 @@ setRestXPGoal() {
 
   restXPGoal = self getRankedPlayerData("restXPGoal");
 
-  if(restXPGoal < experience)
+  if(restXPGoal < experience) {
     restXPGoal = experience;
+  }
 
   oldRestXPGoal = restXPGoal;
 
@@ -1636,10 +1755,12 @@ kickIfDontspawn() {
 
   starttime = gettime();
 
-  if(self isHost())
+  if(self isHost()) {
     kickWait(host_wait_time);
-  else
+  }
+  else {
     kickWait(wait_time);
+  }
 
   timePassed = (gettime() - starttime) / 1000;
   if(timePassed < wait_time - .1 && timePassed < min_time) {
@@ -1806,8 +1927,9 @@ initPlayerStats() {
     self maps\mp\gametypes\_persistence::statSetChild("round", "sguardWeaponLevel", 0);
   }
 
-  if(!isDefined(self.pers["teamKillPunish"]))
+  if(!isDefined(self.pers["teamKillPunish"])) {
     self.pers["teamKillPunish"] = false;
+  }
 
   self initPersStat("longestStreak");
 
@@ -1828,10 +1950,12 @@ addToTeamCount() {
 
   level.teamCount[self.team]++;
 
-  if(!isDefined(level.teamList))
+  if(!isDefined(level.teamList)) {
     level.teamList = [];
-  if(!isDefined(level.teamList[self.team]))
+  }
+  if(!isDefined(level.teamList[self.team])) {
     level.teamList[self.team] = [];
+  }
   level.teamList[self.team][level.teamList[self.team].size] = self;
 
   maps\mp\gametypes\_gamelogic::updateGameEvents();
@@ -1848,8 +1972,9 @@ removeFromTeamCount() {
   if(isDefined(level.teamList) && isDefined(level.teamList[self.team])) {
     teamList = [];
     foreach(player in level.teamList[self.team]) {
-      if(!isDefined(player) || player == self)
+      if(!isDefined(player) || player == self) {
         continue;
+      }
       teamList[teamList.size] = player;
     }
     level.teamList[self.team] = teamList;
@@ -1868,17 +1993,20 @@ addToAliveCount() {
 
   self.alreadyAddedToAliveCount = undefined;
 
-  if(level.aliveCount["allies"] + level.aliveCount["axis"] > level.maxPlayerCount)
+  if(level.aliveCount["allies"] + level.aliveCount["axis"] > level.maxPlayerCount) {
     level.maxPlayerCount = level.aliveCount["allies"] + level.aliveCount["axis"];
+  }
 }
 
 incrementAliveCount(teamAdding) {
   level.aliveCount[teamAdding]++;
   /#	
-  if(!isDefined(level.alive_players))
+  if(!isDefined(level.alive_players)) {
     level.alive_players = [];
-  if(!isDefined(level.alive_players[teamAdding]))
+  }
+  if(!isDefined(level.alive_players[teamAdding])) {
     level.alive_players[teamAdding] = [];
+  }
 
   AssertEx(!array_contains(level.alive_players[teamAdding], self), "Player " + self.name + " somehow added to level.aliveCount twice");
   level.alive_players[teamAdding] = array_add(level.alive_players[teamAdding], self);
@@ -1896,8 +2024,9 @@ removeFromAliveCount(disconnected) {
   assert(isPlayer(self));
 
   teamRemoving = self.team;
-  if(isDefined(self.switching_teams) && self.switching_teams && isDefined(self.joining_team) && self.joining_team == self.team)
+  if(isDefined(self.switching_teams) && self.switching_teams && isDefined(self.joining_team) && self.joining_team == self.team) {
     teamRemoving = self.leaving_team;
+  }
 
   if(isDefined(disconnected)) {
     self maps\mp\gametypes\_playerlogic::removeAllFromLivesCount();

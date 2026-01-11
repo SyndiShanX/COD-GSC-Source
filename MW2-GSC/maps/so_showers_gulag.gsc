@@ -344,8 +344,9 @@ so_showers_update_objective() {
 
 // This does not appear to be call from anywhere
 so_showers_timed_setup_get_spawners(randomize) {
-  if(!isDefined(randomize))
+  if(!isDefined(randomize)) {
     randomize = true;
+  }
 
   // Access all the enemy spawners used in the bathroom
   level.bathroom_initial = getEntArray("bathroom_initial_spawner", "script_noteworthy");
@@ -364,8 +365,9 @@ so_showers_timed_setup_get_spawners(randomize) {
 
   // Purge the riot_shield guys not actually used in the bathroom.
   for(i = 0; i < level.riot_shield.size; i++) {
-    if(level.riot_shield[i].classname == "actor_enemy_arctic_SMG")
+    if(level.riot_shield[i].classname == "actor_enemy_arctic_SMG") {
       level.riot_shield[i] = undefined;
+    }
   }
   array_removeUndefined(level.riot_shield);
 }
@@ -397,8 +399,9 @@ challenge_only_think() {
     return;
   }
 
-  if(self.classname == "script_brushmodel")
+  if(self.classname == "script_brushmodel") {
     self connectpaths();
+  }
 
   self delete();
 }

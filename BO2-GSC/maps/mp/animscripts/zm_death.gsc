@@ -18,8 +18,9 @@ main() {
   if(isDefined(self.deathfunction)) {
     successful_death = self[[self.deathfunction]]();
 
-    if(!isDefined(successful_death) || successful_death)
+    if(!isDefined(successful_death) || successful_death) {
       return;
+    }
   }
 
   if(isDefined(self.a.nodeath) && self.a.nodeath == 1) {
@@ -30,16 +31,19 @@ main() {
 
   self unlink();
 
-  if(isDefined(self.anchor))
+  if(isDefined(self.anchor)) {
     self.anchor delete();
+  }
 
-  if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self)
+  if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self) {
     self.enemy.syncedmeleetarget = undefined;
+  }
 
   self thread do_gib();
 
-  if(isDefined(self.a.gib_ref) && (self.a.gib_ref == "no_legs" || self.a.gib_ref == "right_leg" || self.a.gib_ref == "left_leg"))
+  if(isDefined(self.a.gib_ref) && (self.a.gib_ref == "no_legs" || self.a.gib_ref == "right_leg" || self.a.gib_ref == "left_leg")) {
     self.has_legs = 0;
+  }
 
   if(!isDefined(self.deathanim)) {
     self.deathanim = "zm_death";
@@ -50,24 +54,29 @@ main() {
   self animmode("gravity");
   self setanimstatefromasd(self.deathanim, self.deathanim_substate);
 
-  if(!self getanimhasnotetrackfromasd("start_ragdoll"))
+  if(!self getanimhasnotetrackfromasd("start_ragdoll")) {
     self thread waitforragdoll(self getanimlengthfromasd() * 0.35);
+  }
 
-  if(isDefined(self.skip_death_notetracks) && self.skip_death_notetracks)
+  if(isDefined(self.skip_death_notetracks) && self.skip_death_notetracks) {
     self waittillmatch("death_anim", "end");
-  else
+  }
+  else {
     self maps\mp\animscripts\zm_shared::donotetracks("death_anim", self.handle_death_notetracks);
+  }
 }
 
 waitforragdoll(time) {
   wait(time);
   do_ragdoll = 1;
 
-  if(isDefined(self.nodeathragdoll) && self.nodeathragdoll)
+  if(isDefined(self.nodeathragdoll) && self.nodeathragdoll) {
     do_ragdoll = 0;
+  }
 
-  if(isDefined(self) && do_ragdoll)
+  if(isDefined(self) && do_ragdoll) {
     self startragdoll();
+  }
 }
 
 on_fire_timeout() {
@@ -90,8 +99,9 @@ flame_death_fx() {
   self thread on_fire_timeout();
 
   if(isDefined(level._effect) && isDefined(level._effect["character_fire_death_torso"])) {
-    if(!self.isdog)
+    if(!self.isdog) {
       playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
+    }
   } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_death_torso\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_torso\"");
 
@@ -138,24 +148,33 @@ randomize_array(array) {
 get_tag_for_damage_location() {
   tag = "J_SpineLower";
 
-  if(self.damagelocation == "helmet")
+  if(self.damagelocation == "helmet") {
     tag = "j_head";
-  else if(self.damagelocation == "head")
+  }
+  else if(self.damagelocation == "head") {
     tag = "j_head";
-  else if(self.damagelocation == "neck")
+  }
+  else if(self.damagelocation == "neck") {
     tag = "j_neck";
-  else if(self.damagelocation == "torso_upper")
+  }
+  else if(self.damagelocation == "torso_upper") {
     tag = "j_spineupper";
-  else if(self.damagelocation == "torso_lower")
+  }
+  else if(self.damagelocation == "torso_lower") {
     tag = "j_spinelower";
-  else if(self.damagelocation == "right_arm_upper")
+  }
+  else if(self.damagelocation == "right_arm_upper") {
     tag = "j_elbow_ri";
-  else if(self.damagelocation == "left_arm_upper")
+  }
+  else if(self.damagelocation == "left_arm_upper") {
     tag = "j_elbow_le";
-  else if(self.damagelocation == "right_arm_lower")
+  }
+  else if(self.damagelocation == "right_arm_lower") {
     tag = "j_wrist_ri";
-  else if(self.damagelocation == "left_arm_lower")
+  }
+  else if(self.damagelocation == "left_arm_lower") {
     tag = "j_wrist_le";
+  }
 
   return tag;
 }
@@ -251,8 +270,9 @@ do_gib() {
     return;
   }
 
-  if(!(isDefined(self.dont_throw_gib) && self.dont_throw_gib))
+  if(!(isDefined(self.dont_throw_gib) && self.dont_throw_gib)) {
     self thread throw_gib(limb_data["spawn_tags_array"]);
+  }
 
   if(gib_ref == "head") {
     self.hat_gibbed = 1;
@@ -263,13 +283,15 @@ do_gib() {
       model = self getattachmodelname(i);
 
       if(issubstr(model, "head")) {
-        if(isDefined(self.hatmodel))
+        if(isDefined(self.hatmodel)) {
           self detach(self.hatmodel, "");
+        }
 
         self detach(model, "");
 
-        if(isDefined(self.torsodmg5))
+        if(isDefined(self.torsodmg5)) {
           self attach(self.torsodmg5, "", 1);
+        }
 
         break;
       }
@@ -331,8 +353,9 @@ get_limb_data(gib_ref) {
     temp_array["guts"]["spawn_tags_array"] = [];
     temp_array["guts"]["spawn_tags_array"][0] = level._zombie_gib_piece_index_guts;
 
-    if(isDefined(self.gibspawn2) && isDefined(self.gibspawntag2))
+    if(isDefined(self.gibspawn2) && isDefined(self.gibspawntag2)) {
       temp_array["guts"]["spawn_tags_array"][1] = level._zombie_gib_piece_index_left_arm;
+    }
   }
 
   if("head" == gib_ref && isDefined(self.torsodmg5) && isDefined(self.legdmg1)) {
@@ -341,24 +364,30 @@ get_limb_data(gib_ref) {
     temp_array["head"]["spawn_tags_array"] = [];
     temp_array["head"]["spawn_tags_array"][0] = level._zombie_gib_piece_index_head;
 
-    if(!(isDefined(self.hat_gibbed) && self.hat_gibbed) && isDefined(self.gibspawn5) && isDefined(self.gibspawntag5))
+    if(!(isDefined(self.hat_gibbed) && self.hat_gibbed) && isDefined(self.gibspawn5) && isDefined(self.gibspawntag5)) {
       temp_array["head"]["spawn_tags_array"][1] = level._zombie_gib_piece_index_hat;
+    }
   }
 
-  if(isDefined(temp_array[gib_ref]))
+  if(isDefined(temp_array[gib_ref])) {
     return temp_array[gib_ref];
-  else
+  }
+  else {
     return undefined;
+  }
 }
 
 throw_gib(limb_tags_array) {
   if(isDefined(limb_tags_array)) {
-    if(isDefined(level.track_gibs))
+    if(isDefined(level.track_gibs)) {
       level[[level.track_gibs]](self, limb_tags_array);
+    }
 
-    if(isDefined(self.launch_gib_up))
+    if(isDefined(self.launch_gib_up)) {
       self gib("up", limb_tags_array);
-    else
+    }
+    else {
       self gib("normal", limb_tags_array);
+    }
   }
 }

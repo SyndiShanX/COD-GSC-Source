@@ -13,17 +13,20 @@ func_45D0(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   var_06 = scripts\mp\killstreaks\killstreaks::func_D507(var_01, 1);
 
-  if(!var_06)
+  if(!var_06) {
     return 0;
+  }
 
   thread watchplayerkillstreakend(var_02);
   thread watchgameend();
 
-  if(!isDefined(var_04) || !var_04)
+  if(!isDefined(var_04) || !var_04) {
     thread watchplayerkillstreakearlyexit(var_02);
+  }
 
-  if(isalive(var_00) && !scripts\mp\utility\game::istrue(var_0.func_5F6F))
+  if(isalive(var_00) && !scripts\mp\utility\game::istrue(var_0.func_5F6F)) {
     startcontrol(var_00, var_1.streakname, var_02, var_05);
+  }
   else {
     self notify(var_02);
     return 0;
@@ -97,8 +100,9 @@ watchplayerkillstreakemp(var_00) {
   self endon("disconnect");
   self endon(var_00);
 
-  for(;;)
+  for(;;) {
     self waittill("emp_damage", var_01, var_02);
+  }
 }
 
 watchplayerkillstreakend(var_00) {
@@ -115,8 +119,9 @@ startcontrol(var_00, var_01, var_02, var_03) {
   if(isDefined(self) && isalive(var_00)) {
     self controlagent(var_00);
 
-    if(isDefined(var_03))
+    if(isDefined(var_03)) {
       self visionsetnakedforplayer(var_03, 0);
+    }
 
     self.playerproxyagent = var_00;
   }
@@ -181,8 +186,9 @@ func_DDA3(var_00) {
 
   scripts\mp\class::loadout_updateplayerperks(var_00);
 
-  if(isDefined(var_01))
+  if(isDefined(var_01)) {
     self[[var_01]]();
+  }
 }
 
 func_A670(var_00) {}

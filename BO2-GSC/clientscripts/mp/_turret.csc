@@ -13,10 +13,12 @@ init() {
 }
 
 turret_microwave_sounds(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1)
+  if(newval == 1) {
     self thread turret_microwave_sound_start(localclientnum);
-  else if(newval == 0)
+  }
+  else if(newval == 0) {
     self notify("sound_stop");
+  }
 }
 
 turret_microwave_sound_start(localclientnum) {

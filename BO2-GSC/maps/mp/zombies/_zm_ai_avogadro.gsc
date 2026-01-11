@@ -46,8 +46,9 @@ init() {
   array_thread(level.avogadro_spawners, ::add_spawn_function, maps\mp\zombies\_zm_ai_avogadro::avogadro_prespawn);
   level.zombie_ai_limit_avogadro = 1;
 
-  if(!isDefined(level.vsmgr_prio_overlay_zm_ai_avogadro_electrified))
+  if(!isDefined(level.vsmgr_prio_overlay_zm_ai_avogadro_electrified)) {
     level.vsmgr_prio_overlay_zm_ai_avogadro_electrified = 75;
+  }
 
   maps\mp\_visionset_mgr::vsmgr_register_info("overlay", "zm_ai_avogadro_electrified", 1, level.vsmgr_prio_overlay_zm_ai_avogadro_electrified, 15, 1, maps\mp\_visionset_mgr::vsmgr_duration_lerp_thread_per_player, 0);
   maps\mp\zombies\_zm::register_player_damage_callback(::avogadro_player_damage_callback);
@@ -142,8 +143,9 @@ avogadro_prespawn() {
   self.core_model = getent("core_model", "targetname");
 
   if(isDefined(self.core_model)) {
-    if(!isDefined(self.core_model.angles))
+    if(!isDefined(self.core_model.angles)) {
       self.core_model.angles = (0, 0, 0);
+    }
 
     self forceteleport(self.core_model.origin, self.core_model.angles);
   }
@@ -326,20 +328,25 @@ chase_player() {
 }
 
 chase_update() {
-  if(self check_bus_attack())
+  if(self check_bus_attack()) {
     self chase_bus();
-  else if(self check_phase())
+  }
+  else if(self check_phase()) {
     self do_phase();
-  else if(self check_range_attack())
+  }
+  else if(self check_range_attack()) {
     self range_attack();
+  }
 
-  if(self region_empty())
+  if(self region_empty()) {
     self avogadro_exit("exit_idle");
+  }
 }
 
 check_bus_attack() {
-  if(isDefined(self.favoriteenemy) && (isDefined(self.favoriteenemy.isonbus) && self.favoriteenemy.isonbus))
+  if(isDefined(self.favoriteenemy) && (isDefined(self.favoriteenemy.isonbus) && self.favoriteenemy.isonbus)) {
     return true;
+  }
 
   return false;
 }
@@ -397,8 +404,9 @@ chase_bus_update() {
 
   dist_sq = distancesquared(self.origin, tag_pos);
 
-  if(dist_sq < 14400)
+  if(dist_sq < 14400) {
     self bus_attack();
+  }
 }
 
 bus_attack() {
@@ -424,15 +432,17 @@ bus_attack() {
   self.ignoreall = 1;
 
   for(i = 0; i < 4; i++) {
-    while(isDefined(self.in_pain) && self.in_pain)
+    while(isDefined(self.in_pain) && self.in_pain) {
       wait 0.1;
+    }
 
     attack_struct = random_attack_struct[i];
 
     window = getdvarint(#"_id_5628DC9F");
 
-    if(window >= 0)
+    if(window >= 0) {
       attack_struct = bus_attack_struct[window];
+    }
 
     self bus_disable(attack_struct);
 
@@ -607,8 +617,9 @@ avogadro_exit(from) {
     maps\mp\animscripts\zm_shared::donotetracks("exit_anim");
   }
 
-  if(!isDefined(from) || from != "chamber")
+  if(!isDefined(from) || from != "chamber") {
     level thread do_avogadro_flee_vo(self);
+  }
 
   self ghost();
   self.hit_by_melee = 0;
@@ -616,10 +627,12 @@ avogadro_exit(from) {
   self.anchor.angles = self.angles;
   self linkto(self.anchor);
 
-  if(isDefined(from) && from == "exit_idle")
+  if(isDefined(from) && from == "exit_idle") {
     self.return_round = level.round_number + 1;
-  else
+  }
+  else {
     self.return_round = level.round_number + randomintrange(2, 5);
+  }
 
   level.next_avogadro_round = self.return_round;
   self.state = "cloud";
@@ -655,13 +668,15 @@ cloud_update_fx() {
       rand_region = array_randomize(region);
       region_str = rand_region[0];
 
-      if(!isDefined(self.current_region))
+      if(!isDefined(self.current_region)) {
         region_str = region[4];
+      }
 
       idx = getdvarint(#"_id_FD251E42");
 
-      if(idx >= 0)
+      if(idx >= 0) {
         region_str = region[idx];
+      }
 
       avogadro_print("clouds in region " + region_str);
 
@@ -676,10 +691,12 @@ cloud_update_fx() {
       player = self get_player_in_region();
 
       if(isDefined(player)) {
-        if(isDefined(self._in_cloud) && self._in_cloud)
+        if(isDefined(self._in_cloud) && self._in_cloud) {
           player thread do_player_general_vox("general", "avogadro_above", 90, 10);
-        else
+        }
+        else {
           player thread do_player_general_vox("general", "avogadro_arrive", 60, 40);
+        }
       } else
         level thread avogadro_storm_vox();
 
@@ -713,8 +730,9 @@ cloud_update() {
       self.sndent = undefined;
     }
 
-    if(!isDefined(new_origin))
+    if(!isDefined(new_origin)) {
       new_origin = maps\mp\zombies\_zm::check_for_valid_spawn_near_team();
+    }
 
     if(isDefined(new_origin)) {
       self thread avogadro_update_health();
@@ -770,8 +788,9 @@ get_player_in_region() {
   foreach(zone in zones) {
     if(level.zones[zone].is_occupied) {
       foreach(player in players) {
-        if(player maps\mp\zombies\_zm_zonemgr::is_player_in_zone(zone))
+        if(player maps\mp\zombies\_zm_zonemgr::is_player_in_zone(zone)) {
           return player;
+        }
       }
     }
   }
@@ -797,8 +816,9 @@ cloud_find_spawn() {
     if(level.zones[zone].is_enabled && level.zones[zone].is_spawning_allowed) {
       locations = level.zones[zone].avogadro_locations;
 
-      foreach(loc in locations)
+      foreach(loc in locations) {
       use_points[use_points.size] = loc;
+      }
     }
   }
 
@@ -845,8 +865,9 @@ avogadro_teleport(dest_pos, dest_angles, lerp_time, tag_override) {
   self forceteleport(dest_pos, dest_angles);
   playFX(level._effect["avogadro_phasing"], self.origin);
 
-  if(isDefined(self.phase_fx))
+  if(isDefined(self.phase_fx)) {
     self.phase_fx delete();
+  }
 
   self avogadro_reveal(0.1);
   self playSound("zmb_avogadro_warp_in");
@@ -854,8 +875,9 @@ avogadro_teleport(dest_pos, dest_angles, lerp_time, tag_override) {
 }
 
 check_range_attack() {
-  if(getdvarint(#"_id_A40002E9"))
+  if(getdvarint(#"_id_A40002E9")) {
     return false;
+  }
 
   enemy = self.favoriteenemy;
 
@@ -874,8 +896,9 @@ check_range_attack() {
         eye_pos = self getEye();
         passed = bullettracepassed(eye_pos, enemy_eye_pos, 0, undefined);
 
-        if(passed)
+        if(passed) {
           return true;
+        }
       }
     }
   }
@@ -994,8 +1017,9 @@ get_random_phase_state() {
 }
 
 check_phase() {
-  if(getdvarint(#"_id_CFB33742"))
+  if(getdvarint(#"_id_CFB33742")) {
     return false;
+  }
 
   if(gettime() > self.phase_time) {
     if(isDefined(self.is_traversing) && self.is_traversing) {
@@ -1007,8 +1031,9 @@ check_phase() {
     self.phase_substate = randomint(3);
     anim_id = self getanimfromasd(self.phase_state, self.phase_substate);
 
-    if(self maymovefrompointtopoint(self.origin, getanimendpos(anim_id)))
+    if(self maymovefrompointtopoint(self.origin, getanimendpos(anim_id))) {
       return true;
+    }
   }
 
   return false;
@@ -1059,8 +1084,9 @@ phase_failsafe() {
   if(self.state == "phasing" || self.state == "chasing_bus") {
     avogadro_print("phasing too long, failsafe kicking in");
 
-    if(isDefined(self.phase_fx))
+    if(isDefined(self.phase_fx)) {
       self.phase_fx delete();
+    }
 
     playFX(level._effect["avogadro_phasing"], self.origin);
     self avogadro_reveal(0.1);
@@ -1110,10 +1136,12 @@ avogadro_pain(einflictor) {
   if(self.state == "attacking_bus" || self.state == "stay_attached") {
     tag = self.bus_attack_struct.window_tag;
 
-    if(tag == "window_left_rear_jnt")
+    if(tag == "window_left_rear_jnt") {
       animstate = "zm_bus_back_pain";
-    else
+    }
+    else {
       animstate = "zm_bus_pain";
+    }
 
     origin = level.the_bus gettagorigin(tag);
     angles = level.the_bus gettagangles(tag);
@@ -1126,8 +1154,9 @@ avogadro_pain(einflictor) {
     self ghost();
     self.phase_time = gettime() - 1;
 
-    if(self.state == "stay_attached")
+    if(self.state == "stay_attached") {
       self attach_to_bus();
+    }
   } else {
     self notify("stop_bus_attack");
     level notify("avogadro_defeated");
@@ -1150,21 +1179,25 @@ avogadro_pain(einflictor) {
       core_mover = getent("core_mover", "targetname");
       self linkto(core_mover, "tag_origin");
 
-      while(flag("power_on"))
+      while(flag("power_on")) {
         wait 0.1;
+      }
 
       self show();
       self.state = "chamber";
       self setanimstatefromasd("zm_chamber_idle");
     } else {
-      if(!flag("power_on"))
+      if(!flag("power_on")) {
         avogadro_print("no power");
+      }
 
-      if(!flag("switches_on"))
+      if(!flag("switches_on")) {
         avogadro_print("no switches");
+      }
 
-      if(!self maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_prr"))
+      if(!self maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_prr")) {
         avogadro_print("no zone");
+      }
 
       self show();
       self avogadro_exit();
@@ -1202,17 +1235,21 @@ avogadro_update_health_fx() {
     wait 0.1;
   }
 
-  if(self.hit_by_melee == 0)
+  if(self.hit_by_melee == 0) {
     playFXOnTag(level._effect["avogadro_health_full"], self.health_fx, "tag_origin");
-  else if(self.hit_by_melee <= 2)
+  }
+  else if(self.hit_by_melee <= 2) {
     playFXOnTag(level._effect["avogadro_health_half"], self.health_fx, "tag_origin");
-  else
+  }
+  else {
     playFXOnTag(level._effect["avogadro_health_low"], self.health_fx, "tag_origin");
+  }
 }
 
 avogadro_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex) {
-  if(self.state == "exiting" || self.state == "phasing")
+  if(self.state == "exiting" || self.state == "phasing") {
     return false;
+  }
 
   if(smeansofdeath == "MOD_MELEE") {
     if(isplayer(einflictor)) {
@@ -1236,10 +1273,12 @@ avogadro_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
       self.shield = 1;
       self notify("melee_pain");
 
-      if(sweapon == "tazer_knuckles_zm")
+      if(sweapon == "tazer_knuckles_zm") {
         self.hit_by_melee = self.hit_by_melee + 2;
-      else
+      }
+      else {
         self.hit_by_melee++;
+      }
 
       self thread avogadro_pain(einflictor);
 
@@ -1274,8 +1313,9 @@ update_damage_absorbed(damage) {
 }
 
 avogadro_non_attacker(damage, weapon) {
-  if(weapon == "zombie_bullet_crouch_zm")
+  if(weapon == "zombie_bullet_crouch_zm") {
     self update_damage_absorbed(damage);
+  }
 
   return false;
 }
@@ -1289,8 +1329,9 @@ stun_avogadro() {
   ignore_emp_states[4] = "cloud";
 
   foreach(state in ignore_emp_states) {
-    if(self.state == state)
+    if(self.state == state) {
       return;
+    }
   }
 
   if(self.hit_by_melee < 4) {
@@ -1334,8 +1375,9 @@ avogadro_print(str) {
     if(isDefined(self.debug_msg)) {
       self.debug_msg[self.debug_msg.size] = str;
 
-      if(self.debug_msg.size > 64)
+      if(self.debug_msg.size > 64) {
         self.debug_msg = [];
+      }
     } else {
       self.debug_msg = [];
       self.debug_msg[self.debug_msg.size] = str;

@@ -10,10 +10,12 @@ main() {
   animscripts\utility::UpdateAnimPose();
   self endon("killanimscript");
   self traverseMode("nogravity");
-  if(self animscripts\utility::weaponAnims() == "none" || self animscripts\utility::weaponAnims() == "pistol")
+  if(self animscripts\utility::weaponAnims() == "none" || self animscripts\utility::weaponAnims() == "pistol") {
     climbAnim = % climbstairs_up;
-  else
+  }
+  else {
     climbAnim = % climbstairs_up_armed;
+  }
   startnode = self getnegotiationstartnode();
   assert(isDefined(startNode));
   self OrientMode("face angle", startnode.angles[1]);

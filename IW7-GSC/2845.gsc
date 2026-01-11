@@ -83,8 +83,9 @@ begingrenadetracking() {
     if(isDefined(var_00) && scripts\engine\utility::is_true(var_0._meth_8589)) {
       continue;
     }
-    if(isDefined(level.func["player_grenade_thrown"]))
+    if(isDefined(level.func["player_grenade_thrown"])) {
       level thread[[level.func["player_grenade_thrown"]]](var_00);
+    }
 
     switch (var_01) {
       case "seeker_autohold":
@@ -104,8 +105,9 @@ begingrenadetracking() {
       case "frag":
         thread func_734F(var_00);
 
-        if(self == level.player)
+        if(self == level.player) {
           level.player thread scripts\anim\battlechatter_ai::func_67CF("frag");
+        }
 
         break;
       case "c8_grenade":
@@ -183,8 +185,9 @@ func_734F(var_00) {
   if(self == level.player) {
     thread func_734D(var_04, var_02, 256);
 
-    if(isDefined(level.player.func_735A))
+    if(isDefined(level.player.func_735A)) {
       thread func_7352(var_04, var_1.func_4D40);
+    }
   }
 
   thread func_DBDB(var_04);
@@ -197,31 +200,36 @@ func_734F(var_00) {
   var_05 = 1;
   var_06 = distance2dsquared(level.player.origin, var_04);
 
-  if(var_05 && var_06 > 102400)
+  if(var_05 && var_06 > 102400) {
     var_05 = 0;
+  }
 
   if(var_05 && var_06 > 4096) {
     var_07 = vectordot(scripts\engine\utility::flatten_vector(vectornormalize(var_04 - level.player.origin)), anglesToForward(level.player.angles));
 
-    if(var_07 < 0.0)
+    if(var_07 < 0.0) {
       var_05 = 0;
+    }
   }
 
   if(var_05) {
-    if(!scripts\engine\trace::ray_trace_passed(var_04 + (0, 0, 12), level.player getEye(), undefined, scripts\engine\trace::create_world_contents()))
+    if(!scripts\engine\trace::ray_trace_passed(var_04 + (0, 0, 12), level.player getEye(), undefined, scripts\engine\trace::create_world_contents())) {
       var_05 = 0;
+    }
   }
 
-  if(var_05)
+  if(var_05) {
     level.player thread logplayerendmatchdatamatchresult(var_04);
+  }
 }
 
 func_13771(var_00) {
   thread func_1376E(var_00);
   thread func_13582(var_00);
 
-  while(isDefined(self))
+  while(isDefined(self)) {
     wait 0.05;
+  }
 }
 
 func_1376E(var_00) {
@@ -259,8 +267,9 @@ func_DFBF() {
   level endon("removing_all_frags_instantly");
   scripts\engine\utility::flag_set("frag_force_delete");
 
-  foreach(var_01 in level.func_0149.func_B37A)
+  foreach(var_01 in level.func_0149.func_B37A) {
   var_01 func_E012();
+  }
 
   scripts\engine\utility::waitframe();
 
@@ -297,16 +306,18 @@ func_734D(var_00, var_01, var_02, var_03) {
   level.player notify("new_frag_info_reticles");
   level.player endon("new_frag_info_reticles");
 
-  if(isDefined(var_03))
+  if(isDefined(var_03)) {
     scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", var_03);
+  }
 
   var_04 = [];
   var_05 = [];
   var_06 = [];
 
   for(var_07 = 0; var_07 < var_1.size; var_7++) {
-    if(distance(var_1[var_07].origin, var_00) > var_02)
+    if(distance(var_1[var_07].origin, var_00) > var_02) {
       continue;
+    }
     else if(!isDefined(var_1[var_07].ent) || !isalive(var_1[var_07].ent)) {
       var_4[var_4.size] = var_1[var_07];
       continue;
@@ -335,8 +346,9 @@ func_734D(var_00, var_01, var_02, var_03) {
       var_13[var_13.size] = var_15;
       setomnvar("ui_fragreticles_" + var_07 + "_target_ent", var_15);
 
-      if(var_07 < var_08)
+      if(var_07 < var_08) {
         setomnvar("ui_fragreticles_" + var_07 + "_lock_state", 1);
+      }
       else if(var_07 < var_08 + var_09) {
         if(!isalive(var_11[var_07])) {
           setomnvar("ui_fragreticles_" + var_07 + "_lock_state", 2);
@@ -359,15 +371,18 @@ func_734D(var_00, var_01, var_02, var_03) {
     setomnvar("ui_fragreticles_" + var_07 + "_lock_state", 0);
   }
 
-  for(var_07 = 0; var_07 < var_13.size; var_7++)
+  for(var_07 = 0; var_07 < var_13.size; var_7++) {
     var_13[var_07] delete();
+  }
 }
 
 func_129D(var_00) {
-  if(isDefined(var_0.classname) && !issubstr(var_0.classname, "seeker"))
+  if(isDefined(var_0.classname) && !issubstr(var_0.classname, "seeker")) {
     return "j_SpineUpper";
-  else
+  }
+  else {
     return "tag_origin";
+  }
 }
 
 func_7352(var_00, var_01) {
@@ -383,14 +398,16 @@ func_7352(var_00, var_01) {
     }
   }
 
-  if(var_2.size > 0)
+  if(var_2.size > 0) {
     playFX(level.func_7649["frag_tel_radius"], var_00);
+  }
 
   scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", var_01);
   scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", 2.0);
 
-  foreach(var_04 in var_02)
+  foreach(var_04 in var_02) {
   var_04 notify("frag_outline_display_done");
+  }
 }
 
 func_7353() {
@@ -451,35 +468,44 @@ func_1339D(var_00) {
 }
 
 func_385C(var_00, var_01) {
-  if(_isent(self) || isai(self))
+  if(_isent(self) || isai(self)) {
     var_02 = [self, var_01, level.player];
-  else
+  }
+  else {
     var_02 = [var_01, level.player];
+  }
 
-  if(scripts\engine\trace::ray_trace_passed(var_00, var_1.origin, var_02))
+  if(scripts\engine\trace::ray_trace_passed(var_00, var_1.origin, var_02)) {
     return 1;
+  }
 
-  if(scripts\engine\trace::ray_trace_passed(var_00, var_01 gettagorigin("j_spine4"), var_02))
+  if(scripts\engine\trace::ray_trace_passed(var_00, var_01 gettagorigin("j_spine4"), var_02)) {
     return 1;
+  }
 
-  if(scripts\engine\trace::ray_trace_passed(var_00, var_01 getEye(), var_02))
+  if(scripts\engine\trace::ray_trace_passed(var_00, var_01 getEye(), var_02)) {
     return 1;
+  }
 
-  if(scripts\engine\trace::ray_trace_passed(var_00, var_01 gettagorigin("j_helmet"), var_02))
+  if(scripts\engine\trace::ray_trace_passed(var_00, var_01 gettagorigin("j_helmet"), var_02)) {
     return 1;
+  }
 
   return 0;
 }
 
 func_385D(var_00) {
-  if(scripts\engine\trace::ray_trace_passed(var_00, level.player.origin, level.player))
+  if(scripts\engine\trace::ray_trace_passed(var_00, level.player.origin, level.player)) {
     return 1;
+  }
 
-  if(scripts\engine\trace::ray_trace_passed(var_00, level.player.origin + (0, 0, 30), level.player))
+  if(scripts\engine\trace::ray_trace_passed(var_00, level.player.origin + (0, 0, 30), level.player)) {
     return 1;
+  }
 
-  if(scripts\engine\trace::ray_trace_passed(var_00, level.player getEye(), level.player))
+  if(scripts\engine\trace::ray_trace_passed(var_00, level.player getEye(), level.player)) {
     return 1;
+  }
 
   return 0;
 }
@@ -487,11 +513,13 @@ func_385D(var_00) {
 getdamageableents(var_00, var_01, var_02, var_03) {
   var_04 = [];
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
-  if(!isDefined(var_03))
+  if(!isDefined(var_03)) {
     var_03 = 0;
+  }
 
   for(var_05 = 0; var_05 < level.players.size; var_5++) {
     if(!isalive(level.players[var_05]) || level.players[var_05].sessionstate != "playing") {
@@ -549,16 +577,18 @@ func_13C7E(var_00, var_01, var_02, var_03) {
   var_04 = undefined;
   var_05 = var_01 - var_00;
 
-  if(lengthsquared(var_05) < var_02 * var_02)
+  if(lengthsquared(var_05) < var_02 * var_02) {
     var_04 = var_01;
+  }
 
   var_06 = vectornormalize(var_05);
   var_04 = var_00 + (var_6[0] * var_02, var_6[1] * var_02, var_6[2] * var_02);
   var_07 = bulletTrace(var_04, var_01, 0, var_03);
 
   if(getdvarint("scr_damage_debug") != 0) {
-    if(var_7["fraction"] == 1)
+    if(var_7["fraction"] == 1) {
       thread debugline(var_04, var_01, (1, 1, 1));
+    }
     else {
       thread debugline(var_04, var_7["position"], (1, 0.9, 0.8));
       thread debugline(var_7["position"], var_01, (1, 0.4, 0.3));
@@ -581,8 +611,9 @@ damageent(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 }
 
 debugline(var_00, var_01, var_02) {
-  for(var_03 = 0; var_03 < 600; var_3++)
+  for(var_03 = 0; var_03 < 600; var_3++) {
     wait 0.05;
+  }
 }
 
 onweapondamage(var_00, var_01, var_02, var_03) {
@@ -624,8 +655,9 @@ func_3D27() {
     var_03 = scripts\engine\trace::sphere_trace_get_all_results(var_01, self.origin, var_00, self.owner, scripts\engine\trace::create_character_contents());
 
     foreach(var_05 in var_03) {
-      if(isDefined(var_5["entity"]) && isai(var_5["entity"]))
+      if(isDefined(var_5["entity"]) && isai(var_5["entity"])) {
         var_5["entity"] thread func_0E25::func_5772(self, var_00);
+      }
     }
 
     var_01 = self.origin;

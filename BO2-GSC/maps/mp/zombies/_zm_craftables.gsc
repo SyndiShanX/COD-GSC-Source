@@ -29,8 +29,9 @@ init() {
   level.craftable_piece_count = 0;
   level._effect["building_dust"] = loadfx("maps/zombie/fx_zmb_buildable_assemble_dust");
 
-  if(isDefined(level.init_craftables))
+  if(isDefined(level.init_craftables)) {
     [[level.init_craftables]]();
+  }
 
   open_table = spawnStruct();
   open_table.name = "open_table";
@@ -39,8 +40,9 @@ init() {
   include_zombie_craftable(open_table);
   add_zombie_craftable("open_table", &"");
 
-  if(isDefined(level.use_swipe_protection))
+  if(isDefined(level.use_swipe_protection)) {
     onplayerconnect_callback(::craftables_watch_swipes);
+  }
 }
 
 anystub_update_prompt(player) {
@@ -63,8 +65,9 @@ anystub_update_prompt(player) {
 }
 
 anystub_get_unitrigger_origin() {
-  if(isDefined(self.origin_parent))
+  if(isDefined(self.origin_parent)) {
     return self.origin_parent.origin;
+  }
 
   return self.origin;
 }
@@ -93,8 +96,9 @@ craftables_watch_swipes() {
     if(isDefined(trigger) && isDefined(trigger.stub.piece)) {
       piece = trigger.stub.piece;
 
-      if(!isDefined(piece.damage))
+      if(!isDefined(piece.damage)) {
         piece.damage = 0;
+      }
 
       piece.damage++;
 
@@ -103,8 +107,9 @@ craftables_watch_swipes() {
         piece maps\mp\zombies\_zm_craftables::piece_unspawn();
         self maps\mp\zombies\_zm_stats::increment_client_stat("cheat_total", 0);
 
-        if(isalive(self))
+        if(isalive(self)) {
           self playlocalsound(level.zmb_laugh_alias);
+        }
       }
     }
   }
@@ -127,25 +132,30 @@ make_zombie_craftable_open(str_craftable, str_model, v_angle_offset, v_origin_of
 }
 
 add_zombie_craftable(craftable_name, str_to_craft, str_crafting, str_taken, onfullycrafted, need_all_pieces) {
-  if(!isDefined(level.zombie_include_craftables))
+  if(!isDefined(level.zombie_include_craftables)) {
     level.zombie_include_craftables = [];
+  }
 
   if(isDefined(level.zombie_include_craftables) && !isDefined(level.zombie_include_craftables[craftable_name])) {
     return;
   }
-  if(isDefined(str_to_craft))
+  if(isDefined(str_to_craft)) {
     precachestring(str_to_craft);
+  }
 
-  if(isDefined(str_crafting))
+  if(isDefined(str_crafting)) {
     precachestring(str_crafting);
+  }
 
-  if(isDefined(str_taken))
+  if(isDefined(str_taken)) {
     precachestring(str_taken);
+  }
 
   craftable_struct = level.zombie_include_craftables[craftable_name];
 
-  if(!isDefined(level.zombie_craftablestubs))
+  if(!isDefined(level.zombie_craftablestubs)) {
     level.zombie_craftablestubs = [];
+  }
 
   craftable_struct.str_to_craft = str_to_craft;
   craftable_struct.str_crafting = str_crafting;
@@ -171,8 +181,9 @@ add_zombie_craftable_vox_category(craftable_name, vox_id) {
 }
 
 include_zombie_craftable(craftablestub) {
-  if(!isDefined(level.zombie_include_craftables))
+  if(!isDefined(level.zombie_include_craftables)) {
     level.zombie_include_craftables = [];
+  }
 
   println("ZM >> Including craftable - " + craftablestub.name);
 
@@ -180,28 +191,33 @@ include_zombie_craftable(craftablestub) {
 }
 
 generate_zombie_craftable_piece(craftablename, piecename, modelname, radius, height, drop_offset, hud_icon, onpickup, ondrop, oncrafted, use_spawn_num, tag_name, can_reuse, client_field_value, is_shared, vox_id, b_one_time_vo) {
-  if(!isDefined(is_shared))
+  if(!isDefined(is_shared)) {
     is_shared = 0;
+  }
 
-  if(!isDefined(b_one_time_vo))
+  if(!isDefined(b_one_time_vo)) {
     b_one_time_vo = 0;
+  }
 
   precachemodel(modelname);
 
-  if(isDefined(hud_icon))
+  if(isDefined(hud_icon)) {
     precacheshader(hud_icon);
+  }
 
   piecestub = spawnStruct();
   craftable_pieces = [];
   piece_alias = "";
 
-  if(!isDefined(piecename))
+  if(!isDefined(piecename)) {
     piecename = modelname;
+  }
 
   craftable_pieces_structs = getstructarray(craftablename + "_" + piecename, "targetname");
 
-  if(craftable_pieces_structs.size < 1)
+  if(craftable_pieces_structs.size < 1) {
     println("ERROR: Missing craftable piece <" + craftablename + "> <" + piecename + ">\\n");
+  }
 
   foreach(index, struct in craftable_pieces_structs) {
     craftable_pieces[index] = struct;
@@ -226,8 +242,9 @@ generate_zombie_craftable_piece(craftablename, piecename, modelname, radius, hei
   piecestub.is_shared = is_shared;
   piecestub.vox_id = vox_id;
 
-  if(isDefined(b_one_time_vo) && b_one_time_vo)
+  if(isDefined(b_one_time_vo) && b_one_time_vo) {
     piecestub.b_one_time_vo = b_one_time_vo;
+  }
 
   if(isDefined(client_field_value)) {
     if(isDefined(is_shared) && is_shared) {
@@ -264,14 +281,17 @@ combine_craftable_pieces(piece1, piece2, piece3) {
 }
 
 add_craftable_piece(piecestub, tag_name, can_reuse) {
-  if(!isDefined(self.a_piecestubs))
+  if(!isDefined(self.a_piecestubs)) {
     self.a_piecestubs = [];
+  }
 
-  if(isDefined(tag_name))
+  if(isDefined(tag_name)) {
     piecestub.tag_name = tag_name;
+  }
 
-  if(isDefined(can_reuse))
+  if(isDefined(can_reuse)) {
     piecestub.can_reuse = can_reuse;
+  }
 
   self.a_piecestubs[self.a_piecestubs.size] = piecestub;
 }
@@ -289,17 +309,21 @@ onplayerlaststand() {
     return_to_start_pos = 0;
 
     if(isDefined(level.safe_place_for_craftable_piece)) {
-      if(!self[[level.safe_place_for_craftable_piece]](piece))
+      if(!self[[level.safe_place_for_craftable_piece]](piece)) {
         return_to_start_pos = 1;
+      }
     }
 
-    if(return_to_start_pos)
+    if(return_to_start_pos) {
       piece piece_spawn_at();
-    else
+    }
+    else {
       piece piece_spawn_at(self.origin + vectorscale((1, 1, 0), 5.0), self.angles);
+    }
 
-    if(isDefined(piece.ondrop))
+    if(isDefined(piece.ondrop)) {
       piece[[piece.ondrop]](self);
+    }
 
     self setclientfieldtoplayer("craftable", 0);
   }
@@ -309,46 +333,57 @@ onplayerlaststand() {
 }
 
 piecestub_get_unitrigger_origin() {
-  if(isDefined(self.origin_parent))
+  if(isDefined(self.origin_parent)) {
     return self.origin_parent.origin + vectorscale((0, 0, 1), 12.0);
+  }
 
   return self.origin;
 }
 
 generate_piece_unitrigger(classname, origin, angles, flags, radius, script_height, moving) {
-  if(!isDefined(radius))
+  if(!isDefined(radius)) {
     radius = 64;
+  }
 
-  if(!isDefined(script_height))
+  if(!isDefined(script_height)) {
     script_height = 64;
+  }
 
   script_width = script_height;
 
-  if(!isDefined(script_width))
+  if(!isDefined(script_width)) {
     script_width = 64;
+  }
 
   script_length = script_height;
 
-  if(!isDefined(script_length))
+  if(!isDefined(script_length)) {
     script_length = 64;
+  }
 
   unitrigger_stub = spawnStruct();
   unitrigger_stub.origin = origin;
 
-  if(isDefined(script_length))
+  if(isDefined(script_length)) {
     unitrigger_stub.script_length = script_length;
-  else
+  }
+  else {
     unitrigger_stub.script_length = 13.5;
+  }
 
-  if(isDefined(script_width))
+  if(isDefined(script_width)) {
     unitrigger_stub.script_width = script_width;
-  else
+  }
+  else {
     unitrigger_stub.script_width = 27.5;
+  }
 
-  if(isDefined(script_height))
+  if(isDefined(script_height)) {
     unitrigger_stub.script_height = script_height;
-  else
+  }
+  else {
     unitrigger_stub.script_height = 24;
+  }
 
   unitrigger_stub.radius = radius;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
@@ -376,10 +411,12 @@ generate_piece_unitrigger(classname, origin, angles, flags, radius, script_heigh
   unitrigger_stub.originfunc = ::piecestub_get_unitrigger_origin;
   unitrigger_stub.onspawnfunc = ::anystub_on_spawn_trigger;
 
-  if(isDefined(moving) && moving)
+  if(isDefined(moving) && moving) {
     maps\mp\zombies\_zm_unitrigger::register_unitrigger(unitrigger_stub, ::piece_unitrigger_think);
-  else
+  }
+  else {
     maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(unitrigger_stub, ::piece_unitrigger_think);
+  }
 
   return unitrigger_stub;
 }
@@ -392,12 +429,14 @@ piecetrigger_update_prompt(player) {
 }
 
 piecestub_update_prompt(player) {
-  if(!self anystub_update_prompt(player))
+  if(!self anystub_update_prompt(player)) {
     return false;
+  }
 
   if(isDefined(player.current_craftable_piece) && !(isDefined(self.piece.is_shared) && self.piece.is_shared)) {
-    if(!level.craftable_piece_swap_allowed)
+    if(!level.craftable_piece_swap_allowed) {
       self.hint_string = &"ZM_CRAFTABLES_PIECE_NO_SWITCH";
+    }
     else {
       spiece = self.piece;
       cpiece = player.current_craftable_piece;
@@ -446,8 +485,9 @@ piece_unitrigger_think() {
 }
 
 player_can_take_piece(piece) {
-  if(!isDefined(piece))
+  if(!isDefined(piece)) {
     return false;
+  }
 
   return true;
 }
@@ -493,8 +533,9 @@ player_throw_piece(piece, origin, dir, return_to_spawn, return_time, endangles) 
       landed_on = grenade getgroundent();
       grenade delete();
 
-      if(isDefined(landed_on) && landed_on == level)
+      if(isDefined(landed_on) && landed_on == level) {
         done = 1;
+      }
       else {
         origin = grenade_origin;
         dir = (dir[0] * -1 / 10, dir[1] * -1 / 10, -1);
@@ -502,19 +543,23 @@ player_throw_piece(piece, origin, dir, return_to_spawn, return_time, endangles) 
       }
     }
 
-    if(!isDefined(endangles))
+    if(!isDefined(endangles)) {
       endangles = grenade_angles;
+    }
 
     piece piece_spawn_at(grenade_origin, endangles);
 
-    if(isDefined(altmodel))
+    if(isDefined(altmodel)) {
       altmodel delete();
+    }
 
-    if(isDefined(piece.ondrop))
+    if(isDefined(piece.ondrop)) {
       piece[[piece.ondrop]](self);
+    }
 
-    if(isDefined(return_to_spawn) && return_to_spawn)
+    if(isDefined(return_to_spawn) && return_to_spawn) {
       piece piece_wait_and_return(return_time);
+    }
   }
 }
 
@@ -525,8 +570,9 @@ watch_hit_players() {
   while(isDefined(self)) {
     self waittill("grenade_bounce", pos, normal, ent);
 
-    if(isplayer(ent))
+    if(isplayer(ent)) {
       ent explosiondamage(25, pos);
+    }
   }
 }
 
@@ -534,10 +580,12 @@ piece_wait_and_return(return_time) {
   self endon("pickup");
   wait 0.15;
 
-  if(isDefined(level.exploding_jetgun_fx))
+  if(isDefined(level.exploding_jetgun_fx)) {
     playFXOnTag(level.exploding_jetgun_fx, self.model, "tag_origin");
-  else
+  }
+  else {
     playFXOnTag(level._effect["powerup_on"], self.model, "tag_origin");
+  }
 
   wait(return_time - 6);
   self piece_hide();
@@ -578,21 +626,24 @@ player_drop_piece_on_death() {
   self waittill("disconnect");
   piece piece_spawn_at(origin, angles);
 
-  if(isDefined(self))
+  if(isDefined(self)) {
     self setclientfieldtoplayer("craftable", 0);
+  }
 }
 
 player_drop_piece(piece) {
-  if(!isDefined(piece))
+  if(!isDefined(piece)) {
     piece = self.current_craftable_piece;
+  }
 
   if(isDefined(piece)) {
     piece.damage = 0;
     piece piece_spawn_at(self.origin, self.angles);
     self setclientfieldtoplayer("craftable", 0);
 
-    if(isDefined(piece.ondrop))
+    if(isDefined(piece.ondrop)) {
       piece[[piece.ondrop]](self);
+    }
   }
 
   self.current_craftable_piece = undefined;
@@ -610,20 +661,23 @@ player_take_piece(piecespawn) {
     self do_player_general_vox("general", "craft_swap");
   }
 
-  if(isDefined(piecestub.onpickup))
+  if(isDefined(piecestub.onpickup)) {
     piecespawn[[piecestub.onpickup]](self);
+  }
 
   if(isDefined(piecestub.is_shared) && piecestub.is_shared) {
-    if(isDefined(piecestub.client_field_id))
+    if(isDefined(piecestub.client_field_id)) {
       level setclientfield(piecestub.client_field_id, 1);
+    }
   } else if(isDefined(piecestub.client_field_state))
     self setclientfieldtoplayer("craftable", piecestub.client_field_state);
 
   piecespawn piece_unspawn();
   piecespawn notify("pickup");
 
-  if(isDefined(piecestub.is_shared) && piecestub.is_shared)
+  if(isDefined(piecestub.is_shared) && piecestub.is_shared) {
     piecespawn.in_shared_inventory = 1;
+  }
   else {
     self.current_craftable_piece = piecespawn;
     self thread player_drop_piece_on_death();
@@ -633,19 +687,22 @@ player_take_piece(piecespawn) {
 }
 
 player_destroy_piece(piece) {
-  if(!isDefined(piece))
+  if(!isDefined(piece)) {
     piece = self.current_craftable_piece;
+  }
 
-  if(isDefined(piece))
+  if(isDefined(piece)) {
     self setclientfieldtoplayer("craftable", 0);
+  }
 
   self.current_craftable_piece = undefined;
   self notify("craftable_piece_released");
 }
 
 claim_location(location) {
-  if(!isDefined(level.craftable_claimed_locations))
+  if(!isDefined(level.craftable_claimed_locations)) {
     level.craftable_claimed_locations = [];
+  }
 
   if(!isDefined(level.craftable_claimed_locations[location])) {
     level.craftable_claimed_locations[location] = 1;
@@ -659,16 +716,18 @@ is_point_in_craft_trigger(point) {
   candidate_list = [];
 
   foreach(zone in level.zones) {
-    if(isDefined(zone.unitrigger_stubs))
+    if(isDefined(zone.unitrigger_stubs)) {
       candidate_list = arraycombine(candidate_list, zone.unitrigger_stubs, 1, 0);
+    }
   }
 
   valid_range = 128;
   closest = maps\mp\zombies\_zm_unitrigger::get_closest_unitriggers(point, candidate_list, valid_range);
 
   for(index = 0; index < closest.size; index++) {
-    if(isDefined(closest[index].registered) && closest[index].registered && isDefined(closest[index].piece))
+    if(isDefined(closest[index].registered) && closest[index].registered && isDefined(closest[index].piece)) {
       return true;
+    }
   }
 
   return false;
@@ -686,8 +745,9 @@ piece_allocate_spawn(piecestub) {
     spawnweights = [];
 
     for(i = 0; i < self.spawns.size; i++) {
-      if(isDefined(piecestub.piece_allocated[i]) && piecestub.piece_allocated[i])
+      if(isDefined(piecestub.piece_allocated[i]) && piecestub.piece_allocated[i]) {
         spawnweights[i] = 0;
+      }
       else if(is_point_in_craft_trigger(self.spawns[i].origin)) {
         any_okay = 1;
         spawnweights[i] = 0.01;
@@ -701,8 +761,9 @@ piece_allocate_spawn(piecestub) {
 
     assert(any_good || any_okay, "There is nowhere to spawn this piece");
 
-    if(any_good)
+    if(any_good) {
       totalweight = float(int(totalweight));
+    }
 
     r = randomfloat(totalweight);
 
@@ -757,8 +818,9 @@ piece_pick_random_spawn() {
 piece_set_spawn(num) {
   self.current_spawn = 0;
 
-  if(self.spawns.size >= 1 && self.spawns.size > 1)
+  if(self.spawns.size >= 1 && self.spawns.size > 1) {
     self.current_spawn = int(min(num, self.spawns.size - 1));
+  }
 }
 
 piece_spawn_in(piecestub) {
@@ -766,12 +828,14 @@ piece_spawn_in(piecestub) {
     return;
   }
   if(isDefined(self.managed_spawn) && self.managed_spawn) {
-    if(!isDefined(self.current_spawn))
+    if(!isDefined(self.current_spawn)) {
       self piece_allocate_spawn(self.piecestub);
+    }
   }
 
-  if(!isDefined(self.current_spawn))
+  if(!isDefined(self.current_spawn)) {
     self.current_spawn = 0;
+  }
 
   spawndef = self.spawns[self.current_spawn];
   self.unitrigger = generate_piece_unitrigger("trigger_radius_use", spawndef.origin + vectorscale((0, 0, 1), 12.0), spawndef.angles, 0, piecestub.radius, piecestub.height, 0);
@@ -790,13 +854,15 @@ piece_spawn_in(piecestub) {
   self.is_shared = piecestub.is_shared;
   self.model = spawn("script_model", self.start_origin);
 
-  if(isDefined(self.start_angles))
+  if(isDefined(self.start_angles)) {
     self.model.angles = self.start_angles;
+  }
 
   self.model setModel(piecestub.modelname);
 
-  if(isDefined(piecestub.onspawn))
+  if(isDefined(piecestub.onspawn)) {
     self[[piecestub.onspawn]]();
+  }
 
   self.model ghostindemo();
   self.model.hud_icon = piecestub.hud_icon;
@@ -828,18 +894,21 @@ piece_spawn_at(origin, angles, use_random_start) {
     origin = spawndef.origin;
     angles = spawndef.angles;
   } else {
-    if(!isDefined(origin))
+    if(!isDefined(origin)) {
       origin = self.start_origin;
+    }
     else {
       origin = origin + (0, 0, self.drop_offset);
       unitrigger_offset = unitrigger_offset - (0, 0, self.drop_offset);
     }
 
-    if(!isDefined(angles))
+    if(!isDefined(angles)) {
       angles = self.start_angles;
+    }
 
-    if(!isDefined(level.drop_offset))
+    if(!isDefined(level.drop_offset)) {
       level.drop_offset = 0;
+    }
 
     origin = origin + (0, 0, level.drop_offset);
     unitrigger_offset = unitrigger_offset - (0, 0, level.drop_offset);
@@ -848,8 +917,9 @@ piece_spawn_at(origin, angles, use_random_start) {
 
   self.model = spawn("script_model", origin);
 
-  if(isDefined(angles))
+  if(isDefined(angles)) {
     self.model.angles = angles;
+  }
 
   self.model setModel(self.modelname);
 
@@ -864,8 +934,9 @@ piece_spawn_at(origin, angles, use_random_start) {
     }
   }
 
-  if(isDefined(self.onspawn))
+  if(isDefined(self.onspawn)) {
     self[[self.onspawn]]();
+  }
 
   self.unitrigger = generate_piece_unitrigger("trigger_radius_use", origin + unitrigger_offset, angles, 0, self.radius, self.height, isDefined(self.model.canmove) && self.model.canmove);
   self.unitrigger.piece = self;
@@ -874,58 +945,72 @@ piece_spawn_at(origin, angles, use_random_start) {
 }
 
 piece_unspawn() {
-  if(isDefined(self.managed_spawn) && self.managed_spawn)
+  if(isDefined(self.managed_spawn) && self.managed_spawn) {
     self piece_deallocate_spawn();
+  }
 
-  if(isDefined(self.model))
+  if(isDefined(self.model)) {
     self.model delete();
+  }
 
   self.model = undefined;
 
-  if(isDefined(self.unitrigger))
+  if(isDefined(self.unitrigger)) {
     thread maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(self.unitrigger);
+  }
 
   self.unitrigger = undefined;
 }
 
 piece_hide() {
-  if(isDefined(self.model))
+  if(isDefined(self.model)) {
     self.model ghost();
+  }
 }
 
 piece_show() {
-  if(isDefined(self.model))
+  if(isDefined(self.model)) {
     self.model show();
+  }
 }
 
 generate_piece(piecestub) {
   piecespawn = spawnStruct();
   piecespawn.spawns = piecestub.spawns;
 
-  if(isDefined(piecestub.managing_pieces) && piecestub.managing_pieces)
+  if(isDefined(piecestub.managing_pieces) && piecestub.managing_pieces) {
     piecespawn piece_allocate_spawn(piecestub);
-  else if(isDefined(piecestub.use_spawn_num))
+  }
+  else if(isDefined(piecestub.use_spawn_num)) {
     piecespawn piece_set_spawn(piecestub.use_spawn_num);
-  else
+  }
+  else {
     piecespawn piece_pick_random_spawn();
+  }
 
   piecespawn piece_spawn_in(piecestub);
 
-  if(piecespawn.spawns.size >= 1)
+  if(piecespawn.spawns.size >= 1) {
     piecespawn.hud_icon = piecestub.hud_icon;
+  }
 
-  if(isDefined(piecestub.onpickup))
+  if(isDefined(piecestub.onpickup)) {
     piecespawn.onpickup = piecestub.onpickup;
-  else
+  }
+  else {
     piecespawn.onpickup = ::onpickuputs;
+  }
 
-  if(isDefined(piecestub.ondrop))
+  if(isDefined(piecestub.ondrop)) {
     piecespawn.ondrop = piecestub.ondrop;
-  else
+  }
+  else {
     piecespawn.ondrop = ::ondroputs;
+  }
 
-  if(isDefined(piecestub.oncrafted))
+  if(isDefined(piecestub.oncrafted)) {
     piecespawn.oncrafted = piecestub.oncrafted;
+  }
 
   return piecespawn;
 }
@@ -935,26 +1020,31 @@ craftable_piece_unitriggers(craftable_name, origin) {
   assert(isDefined(level.zombie_craftablestubs[craftable_name]), "Called craftable_think() without including the craftable - " + craftable_name);
   craftable = level.zombie_craftablestubs[craftable_name];
 
-  if(!isDefined(craftable.a_piecestubs))
+  if(!isDefined(craftable.a_piecestubs)) {
     craftable.a_piecestubs = [];
+  }
 
   flag_wait("start_zombie_round_logic");
   craftablespawn = spawnStruct();
   craftablespawn.craftable_name = craftable_name;
 
-  if(!isDefined(craftablespawn.a_piecespawns))
+  if(!isDefined(craftablespawn.a_piecespawns)) {
     craftablespawn.a_piecespawns = [];
+  }
 
   craftablepickups = [];
 
   foreach(piecestub in craftable.a_piecestubs) {
-    if(!isDefined(piecestub.generated_instances))
+    if(!isDefined(piecestub.generated_instances)) {
       piecestub.generated_instances = 0;
+    }
 
-    if(isDefined(piecestub.piecespawn) && (isDefined(piecestub.can_reuse) && piecestub.can_reuse))
+    if(isDefined(piecestub.piecespawn) && (isDefined(piecestub.can_reuse) && piecestub.can_reuse)) {
       piece = piecestub.piecespawn;
-    else if(piecestub.generated_instances >= piecestub.max_instances)
+    }
+    else if(piecestub.generated_instances >= piecestub.max_instances) {
       piece = piecestub.piecespawn;
+    }
     else {
       piece = generate_piece(piecestub);
       piecestub.piecespawn = piece;
@@ -997,8 +1087,9 @@ setup_unitrigger_craftable_array(trigger_targetname, equipname, weaponname, trig
   triggers = getEntArray(trigger_targetname, "targetname");
   stubs = [];
 
-  foreach(trig in triggers)
+  foreach(trig in triggers) {
   stubs[stubs.size] = setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigger_hintstring, delete_trigger, persistent);
+  }
 
   return stubs;
 }
@@ -1011,14 +1102,16 @@ setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigger_hintstr
   unitrigger_stub.craftablestub = level.zombie_include_craftables[equipname];
   angles = trig.script_angles;
 
-  if(!isDefined(angles))
+  if(!isDefined(angles)) {
     angles = (0, 0, 0);
+  }
 
   unitrigger_stub.origin = trig.origin + anglestoright(angles) * -6;
   unitrigger_stub.angles = trig.angles;
 
-  if(isDefined(trig.script_angles))
+  if(isDefined(trig.script_angles)) {
     unitrigger_stub.angles = trig.script_angles;
+  }
 
   unitrigger_stub.equipname = equipname;
   unitrigger_stub.weaponname = weaponname;
@@ -1032,20 +1125,26 @@ setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigger_hintstr
   unitrigger_stub.onuse = ::onuseplantobjectuts;
   unitrigger_stub.oncantuse = ::oncantuseuts;
 
-  if(isDefined(trig.script_length))
+  if(isDefined(trig.script_length)) {
     unitrigger_stub.script_length = trig.script_length;
-  else
+  }
+  else {
     unitrigger_stub.script_length = 32;
+  }
 
-  if(isDefined(trig.script_width))
+  if(isDefined(trig.script_width)) {
     unitrigger_stub.script_width = trig.script_width;
-  else
+  }
+  else {
     unitrigger_stub.script_width = 100;
+  }
 
-  if(isDefined(trig.script_height))
+  if(isDefined(trig.script_height)) {
     unitrigger_stub.script_height = trig.script_height;
-  else
+  }
+  else {
     unitrigger_stub.script_height = 64;
+  }
 
   unitrigger_stub.target = trig.target;
   unitrigger_stub.targetname = trig.targetname;
@@ -1053,15 +1152,17 @@ setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigger_hintstr
   unitrigger_stub.script_parameters = trig.script_parameters;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
 
-  if(isDefined(level.zombie_craftablestubs[equipname].str_to_craft))
+  if(isDefined(level.zombie_craftablestubs[equipname].str_to_craft)) {
     unitrigger_stub.hint_string = level.zombie_craftablestubs[equipname].str_to_craft;
+  }
 
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   unitrigger_stub.require_look_at = 1;
   unitrigger_force_per_player_triggers(unitrigger_stub, 1);
 
-  if(isDefined(unitrigger_stub.craftablestub.custom_craftablestub_update_prompt))
+  if(isDefined(unitrigger_stub.craftablestub.custom_craftablestub_update_prompt)) {
     unitrigger_stub.custom_craftablestub_update_prompt = unitrigger_stub.craftablestub.custom_craftablestub_update_prompt;
+  }
 
   unitrigger_stub.prompt_and_visibility_func = ::craftabletrigger_update_prompt;
   maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(unitrigger_stub, ::craftable_place_think);
@@ -1073,8 +1174,9 @@ setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigger_hintstr
     unitrigger_stub.model = getent(unitrigger_stub.target, "targetname");
 
     if(isDefined(unitrigger_stub.model)) {
-      if(isDefined(unitrigger_stub.zombie_weapon_upgrade))
+      if(isDefined(unitrigger_stub.zombie_weapon_upgrade)) {
         unitrigger_stub.model useweaponhidetags(unitrigger_stub.zombie_weapon_upgrade);
+      }
 
       unitrigger_stub.model ghost();
       unitrigger_stub.model notsolid();
@@ -1089,8 +1191,9 @@ setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigger_hintstr
 
   unitrigger_stub.craftablespawn = unitrigger_stub craftable_piece_unitriggers(equipname, unitrigger_stub.origin);
 
-  if(delete_trigger)
+  if(delete_trigger) {
     trig delete();
+  }
 
   level.a_uts_craftables[level.a_uts_craftables.size] = unitrigger_stub;
   return unitrigger_stub;
@@ -1107,44 +1210,52 @@ setup_craftable_pieces() {
 
 craftable_has_piece(piece) {
   for(i = 0; i < self.a_piecespawns.size; i++) {
-    if(self.a_piecespawns[i].piecename == piece.piecename && self.a_piecespawns[i].craftablename == piece.craftablename)
+    if(self.a_piecespawns[i].piecename == piece.piecename && self.a_piecespawns[i].craftablename == piece.craftablename) {
       return true;
+    }
   }
 
   return false;
 }
 
 get_actual_uts_craftable() {
-  if(self.craftable_name == "open_table" && self.n_open_craftable_choice != -1)
+  if(self.craftable_name == "open_table" && self.n_open_craftable_choice != -1) {
     return self.stub.a_uts_open_craftables_available[self.n_open_craftable_choice];
-  else
+  }
+  else {
     return self.stub;
+  }
 }
 
 get_actual_craftablespawn() {
-  if(self.craftable_name == "open_table" && self.stub.n_open_craftable_choice != -1 && isDefined(self.stub.a_uts_open_craftables_available[self.stub.n_open_craftable_choice].craftablespawn))
+  if(self.craftable_name == "open_table" && self.stub.n_open_craftable_choice != -1 && isDefined(self.stub.a_uts_open_craftables_available[self.stub.n_open_craftable_choice].craftablespawn)) {
     return self.stub.a_uts_open_craftables_available[self.stub.n_open_craftable_choice].craftablespawn;
-  else
+  }
+  else {
     return self;
+  }
 }
 
 craftable_can_use_shared_piece() {
   uts_craftable = self.stub;
 
-  if(isDefined(uts_craftable.n_open_craftable_choice) && uts_craftable.n_open_craftable_choice != -1 && isDefined(uts_craftable.a_uts_open_craftables_available[uts_craftable.n_open_craftable_choice]))
+  if(isDefined(uts_craftable.n_open_craftable_choice) && uts_craftable.n_open_craftable_choice != -1 && isDefined(uts_craftable.a_uts_open_craftables_available[uts_craftable.n_open_craftable_choice])) {
     return true;
+  }
 
   if(isDefined(uts_craftable.craftablestub.need_all_pieces) && uts_craftable.craftablestub.need_all_pieces) {
     foreach(piece in self.a_piecespawns) {
-      if(!(isDefined(piece.in_shared_inventory) && piece.in_shared_inventory))
+      if(!(isDefined(piece.in_shared_inventory) && piece.in_shared_inventory)) {
         return false;
+      }
     }
 
     return true;
   } else {
     foreach(piece in self.a_piecespawns) {
-      if(!(isDefined(piece.crafted) && piece.crafted) && (isDefined(piece.in_shared_inventory) && piece.in_shared_inventory))
+      if(!(isDefined(piece.crafted) && piece.crafted) && (isDefined(piece.in_shared_inventory) && piece.in_shared_inventory)) {
         return true;
+      }
     }
   }
 
@@ -1159,8 +1270,9 @@ craftable_set_piece_crafted(piecespawn_check, player) {
       if(piecespawn.piecename == piecespawn_check.piecename && piecespawn.craftablename == piecespawn_check.craftablename) {
         piecespawn.crafted = 1;
 
-        if(isDefined(piecespawn.oncrafted))
+        if(isDefined(piecespawn.oncrafted)) {
           piecespawn thread[[piecespawn.oncrafted]](player);
+        }
 
         continue;
       }
@@ -1169,8 +1281,9 @@ craftable_set_piece_crafted(piecespawn_check, player) {
     if(isDefined(piecespawn.is_shared) && piecespawn.is_shared && (isDefined(piecespawn.in_shared_inventory) && piecespawn.in_shared_inventory)) {
       piecespawn.crafted = 1;
 
-      if(isDefined(piecespawn.oncrafted))
+      if(isDefined(piecespawn.oncrafted)) {
         piecespawn thread[[piecespawn.oncrafted]](player);
+      }
 
       piecespawn.in_shared_inventory = 0;
     }
@@ -1182,31 +1295,36 @@ craftable_set_piece_crafting(piecespawn_check) {
 
   foreach(piecespawn in craftablespawn_check.a_piecespawns) {
     if(isDefined(piecespawn_check)) {
-      if(piecespawn.piecename == piecespawn_check.piecename && piecespawn.craftablename == piecespawn_check.craftablename)
+      if(piecespawn.piecename == piecespawn_check.piecename && piecespawn.craftablename == piecespawn_check.craftablename) {
         piecespawn.crafting = 1;
+      }
     }
 
-    if(isDefined(piecespawn.is_shared) && piecespawn.is_shared && (isDefined(piecespawn.in_shared_inventory) && piecespawn.in_shared_inventory))
+    if(isDefined(piecespawn.is_shared) && piecespawn.is_shared && (isDefined(piecespawn.in_shared_inventory) && piecespawn.in_shared_inventory)) {
       piecespawn.crafting = 1;
+    }
   }
 }
 
 craftable_clear_piece_crafting(piecespawn_check) {
-  if(isDefined(piecespawn_check))
+  if(isDefined(piecespawn_check)) {
     piecespawn_check.crafting = 0;
+  }
 
   craftablespawn_check = get_actual_craftablespawn();
 
   foreach(piecespawn in craftablespawn_check.a_piecespawns) {
-    if(isDefined(piecespawn.is_shared) && piecespawn.is_shared && (isDefined(piecespawn.in_shared_inventory) && piecespawn.in_shared_inventory))
+    if(isDefined(piecespawn.is_shared) && piecespawn.is_shared && (isDefined(piecespawn.in_shared_inventory) && piecespawn.in_shared_inventory)) {
       piecespawn.crafting = 0;
+    }
   }
 }
 
 craftable_is_piece_crafted(piece) {
   for(i = 0; i < self.a_piecespawns.size; i++) {
-    if(self.a_piecespawns[i].piecename == piece.piecename && self.a_piecespawns[i].craftablename == piece.craftablename)
+    if(self.a_piecespawns[i].piecename == piece.piecename && self.a_piecespawns[i].craftablename == piece.craftablename) {
       return isDefined(self.a_piecespawns[i].crafted) && self.a_piecespawns[i].crafted;
+    }
   }
 
   return false;
@@ -1217,12 +1335,14 @@ craftable_is_piece_crafting(piecespawn_check) {
 
   foreach(piecespawn in craftablespawn_check.a_piecespawns) {
     if(isDefined(piecespawn_check)) {
-      if(piecespawn.piecename == piecespawn_check.piecename && piecespawn.craftablename == piecespawn_check.craftablename)
+      if(piecespawn.piecename == piecespawn_check.piecename && piecespawn.craftablename == piecespawn_check.craftablename) {
         return piecespawn.crafting;
+      }
     }
 
-    if(isDefined(piecespawn.is_shared) && piecespawn.is_shared && (isDefined(piecespawn.in_shared_inventory) && piecespawn.in_shared_inventory) && (isDefined(piecespawn.crafting) && piecespawn.crafting))
+    if(isDefined(piecespawn.is_shared) && piecespawn.is_shared && (isDefined(piecespawn.in_shared_inventory) && piecespawn.in_shared_inventory) && (isDefined(piecespawn.crafting) && piecespawn.crafting)) {
       return 1;
+    }
   }
 
   return 0;
@@ -1230,8 +1350,9 @@ craftable_is_piece_crafting(piecespawn_check) {
 
 craftable_is_piece_crafted_or_crafting(piece) {
   for(i = 0; i < self.a_piecespawns.size; i++) {
-    if(self.a_piecespawns[i].piecename == piece.piecename && self.a_piecespawns[i].craftablename == piece.craftablename)
+    if(self.a_piecespawns[i].piecename == piece.piecename && self.a_piecespawns[i].craftablename == piece.craftablename) {
       return isDefined(self.a_piecespawns[i].crafted) && self.a_piecespawns[i].crafted || isDefined(self.a_piecespawns[i].crafting) && self.a_piecespawns[i].crafting;
+    }
   }
 
   return false;
@@ -1239,8 +1360,9 @@ craftable_is_piece_crafted_or_crafting(piece) {
 
 craftable_all_crafted() {
   for(i = 0; i < self.a_piecespawns.size; i++) {
-    if(!(isDefined(self.a_piecespawns[i].crafted) && self.a_piecespawns[i].crafted))
+    if(!(isDefined(self.a_piecespawns[i].crafted) && self.a_piecespawns[i].crafted)) {
       return false;
+    }
   }
 
   return true;
@@ -1252,25 +1374,30 @@ waittill_crafted(craftable_name) {
 }
 
 player_can_craft(craftablespawn, continuing) {
-  if(!isDefined(craftablespawn))
+  if(!isDefined(craftablespawn)) {
     return false;
+  }
 
   if(!craftablespawn craftable_can_use_shared_piece()) {
-    if(!isDefined(self.current_craftable_piece))
+    if(!isDefined(self.current_craftable_piece)) {
       return false;
+    }
 
-    if(!craftablespawn craftable_has_piece(self.current_craftable_piece))
+    if(!craftablespawn craftable_has_piece(self.current_craftable_piece)) {
       return false;
+    }
 
     if(isDefined(continuing) && continuing) {
-      if(craftablespawn craftable_is_piece_crafted(self.current_craftable_piece))
+      if(craftablespawn craftable_is_piece_crafted(self.current_craftable_piece)) {
         return false;
+      }
     } else if(craftablespawn craftable_is_piece_crafted_or_crafting(self.current_craftable_piece))
       return false;
   }
 
-  if(isDefined(craftablespawn.stub) && isDefined(craftablespawn.stub.custom_craftablestub_update_prompt) && isDefined(craftablespawn.stub.playertrigger[0]) && isDefined(craftablespawn.stub.playertrigger[0].stub) && !craftablespawn.stub.playertrigger[0].stub[[craftablespawn.stub.custom_craftablestub_update_prompt]](self, 1, craftablespawn.stub.playertrigger[self getentitynumber()]))
+  if(isDefined(craftablespawn.stub) && isDefined(craftablespawn.stub.custom_craftablestub_update_prompt) && isDefined(craftablespawn.stub.playertrigger[0]) && isDefined(craftablespawn.stub.playertrigger[0].stub) && !craftablespawn.stub.playertrigger[0].stub[[craftablespawn.stub.custom_craftablestub_update_prompt]](self, 1, craftablespawn.stub.playertrigger[self getentitynumber()])) {
     return false;
+  }
 
   return true;
 }
@@ -1304,8 +1431,9 @@ craftable_transfer_data() {
 player_craft(craftablespawn) {
   craftablespawn craftable_set_piece_crafted(self.current_craftable_piece, self);
 
-  if(isDefined(self.current_craftable_piece) && (isDefined(self.current_craftable_piece.crafted) && self.current_craftable_piece.crafted))
+  if(isDefined(self.current_craftable_piece) && (isDefined(self.current_craftable_piece.crafted) && self.current_craftable_piece.crafted)) {
     player_destroy_piece(self.current_craftable_piece);
+  }
 
   if(isDefined(craftablespawn.stub.n_open_craftable_choice)) {
     uts_craftable = craftablespawn craftable_transfer_data();
@@ -1321,13 +1449,15 @@ player_craft(craftablespawn) {
     if(isDefined(s_model)) {
       m_spawn = spawn("script_model", s_model.origin);
 
-      if(isDefined(craftablestub.v_origin_offset))
+      if(isDefined(craftablestub.v_origin_offset)) {
         m_spawn.origin = m_spawn.origin + craftablestub.v_origin_offset;
+      }
 
       m_spawn.angles = s_model.angles;
 
-      if(isDefined(craftablestub.v_angle_offset))
+      if(isDefined(craftablestub.v_angle_offset)) {
         m_spawn.angles = m_spawn.angles + craftablestub.v_angle_offset;
+      }
 
       m_spawn setModel(craftablestub.str_model);
       uts_craftable.model = m_spawn;
@@ -1356,16 +1486,18 @@ player_craft(craftablespawn) {
     self player_finish_craftable(craftablespawn);
     self track_craftables_crafted(craftablespawn);
 
-    if(isDefined(level.craftable_crafted_custom_func))
+    if(isDefined(level.craftable_crafted_custom_func)) {
       self thread[[level.craftable_crafted_custom_func]](craftablespawn);
+    }
 
     self playSound("zmb_buildable_complete");
   } else {
     self playSound("zmb_buildable_piece_add");
     assert(isDefined(level.zombie_craftablestubs[craftablespawn.craftable_name].str_crafting), "Missing builing hint");
 
-    if(isDefined(level.zombie_craftablestubs[craftablespawn.craftable_name].str_crafting))
+    if(isDefined(level.zombie_craftablestubs[craftablespawn.craftable_name].str_crafting)) {
       return level.zombie_craftablestubs[craftablespawn.craftable_name].str_crafting;
+    }
   }
 
   return "";
@@ -1385,15 +1517,17 @@ update_open_table_status() {
         }
       }
 
-      if(!b_piece_crafted)
+      if(!b_piece_crafted) {
         b_open_craftables_remaining = 1;
+      }
     }
   }
 
   if(!b_open_craftables_remaining) {
     foreach(uts_craftable in level.a_uts_craftables) {
-      if(uts_craftable.equipname == "open_table")
+      if(uts_craftable.equipname == "open_table") {
         thread maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(uts_craftable);
+      }
     }
   }
 }
@@ -1413,8 +1547,9 @@ complete_craftable(str_craftable_name) {
       player player_finish_craftable(uts_craftable.craftablespawn);
       thread maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(uts_craftable);
 
-      if(isDefined(uts_craftable.craftablestub.onfullycrafted))
+      if(isDefined(uts_craftable.craftablestub.onfullycrafted)) {
         uts_craftable[[uts_craftable.craftablestub.onfullycrafted]]();
+      }
 
       return;
     }
@@ -1432,16 +1567,19 @@ craftabletrigger_update_prompt(player) {
 }
 
 craftablestub_update_prompt(player, unitrigger) {
-  if(!self anystub_update_prompt(player))
+  if(!self anystub_update_prompt(player)) {
     return false;
+  }
 
-  if(isDefined(self.is_locked) && self.is_locked)
+  if(isDefined(self.is_locked) && self.is_locked) {
     return true;
+  }
 
   can_use = 1;
 
-  if(isDefined(self.custom_craftablestub_update_prompt) && !self[[self.custom_craftablestub_update_prompt]](player))
+  if(isDefined(self.custom_craftablestub_update_prompt) && !self[[self.custom_craftablestub_update_prompt]](player)) {
     return false;
+  }
 
   if(!(isDefined(self.crafted) && self.crafted)) {
     if(!self.craftablespawn craftable_can_use_shared_piece()) {
@@ -1498,8 +1636,9 @@ choose_open_craftable(player) {
   hinttexthudelem.vertalign = "bottom";
   hinttexthudelem.y = -100;
 
-  if(player issplitscreen())
+  if(player issplitscreen()) {
     hinttexthudelem.y = -50;
+  }
 
   hinttexthudelem.foreground = 1;
   hinttexthudelem.font = "default";
@@ -1508,8 +1647,9 @@ choose_open_craftable(player) {
   hinttexthudelem.color = (1, 1, 1);
   hinttexthudelem settext(&"ZM_CRAFTABLES_CHANGE_BUILD");
 
-  if(!isDefined(self.opencraftablehudelem))
+  if(!isDefined(self.opencraftablehudelem)) {
     self.opencraftablehudelem = [];
+  }
 
   self.opencraftablehudelem[n_playernum] = hinttexthudelem;
 
@@ -1522,10 +1662,12 @@ choose_open_craftable(player) {
       b_got_input = 1;
     }
 
-    if(self.n_open_craftable_choice >= self.a_uts_open_craftables_available.size)
+    if(self.n_open_craftable_choice >= self.a_uts_open_craftables_available.size) {
       self.n_open_craftable_choice = 0;
-    else if(self.n_open_craftable_choice < 0)
+    }
+    else if(self.n_open_craftable_choice < 0) {
       self.n_open_craftable_choice = self.a_uts_open_craftables_available.size - 1;
+    }
 
     if(b_got_input) {
       self.equipname = self.a_uts_open_craftables_available[self.n_open_craftable_choice].equipname;
@@ -1534,10 +1676,12 @@ choose_open_craftable(player) {
       b_got_input = 0;
     }
 
-    if(player is_player_looking_at(self.playertrigger[n_playernum].origin, 0.76))
+    if(player is_player_looking_at(self.playertrigger[n_playernum].origin, 0.76)) {
       self.opencraftablehudelem[n_playernum].alpha = 1;
-    else
+    }
+    else {
       self.opencraftablehudelem[n_playernum].alpha = 0;
+    }
 
     wait 0.05;
   }
@@ -1552,8 +1696,9 @@ open_craftablestub_update_prompt(player) {
     self.a_uts_open_craftables_available = [];
 
     foreach(uts_craftable in level.a_uts_craftables) {
-      if(isDefined(uts_craftable.craftablestub.is_open_table) && uts_craftable.craftablestub.is_open_table && !(isDefined(uts_craftable.crafted) && uts_craftable.crafted) && uts_craftable.craftablespawn.craftable_name != "open_table" && uts_craftable.craftablespawn craftable_can_use_shared_piece())
+      if(isDefined(uts_craftable.craftablestub.is_open_table) && uts_craftable.craftablestub.is_open_table && !(isDefined(uts_craftable.crafted) && uts_craftable.crafted) && uts_craftable.craftablespawn.craftable_name != "open_table" && uts_craftable.craftablespawn craftable_can_use_shared_piece()) {
         self.a_uts_open_craftables_available[self.a_uts_open_craftables_available.size] = uts_craftable;
+      }
     }
 
     if(self.a_uts_open_craftables_available.size < 2) {
@@ -1581,8 +1726,9 @@ open_craftablestub_update_prompt(player) {
         self.equipname = self.a_uts_open_craftables_available[self.n_open_craftable_choice].equipname;
         return true;
       default:
-        if(!self.b_open_craftable_checking_input)
+        if(!self.b_open_craftable_checking_input) {
           thread choose_open_craftable(player);
+        }
 
         return true;
     }
@@ -1593,20 +1739,25 @@ open_craftablestub_update_prompt(player) {
 }
 
 player_continue_crafting(craftablespawn) {
-  if(self maps\mp\zombies\_zm_laststand::player_is_in_laststand() || self in_revive_trigger())
+  if(self maps\mp\zombies\_zm_laststand::player_is_in_laststand() || self in_revive_trigger()) {
     return false;
+  }
 
-  if(!self player_can_craft(craftablespawn, 1))
+  if(!self player_can_craft(craftablespawn, 1)) {
     return false;
+  }
 
-  if(isDefined(self.screecher))
+  if(isDefined(self.screecher)) {
     return false;
+  }
 
-  if(!self usebuttonpressed())
+  if(!self usebuttonpressed()) {
     return false;
+  }
 
-  if(!craftablespawn craftable_is_piece_crafting(self.current_craftable_piece))
+  if(!craftablespawn craftable_is_piece_crafting(self.current_craftable_piece)) {
     return false;
+  }
 
   trigger = craftablespawn.stub maps\mp\zombies\_zm_unitrigger::unitrigger_trigger(self);
 
@@ -1615,13 +1766,15 @@ player_continue_crafting(craftablespawn) {
     porigin = self getEye();
     radius_sq = 2.25 * craftablespawn.stub.radius * craftablespawn.stub.radius;
 
-    if(distance2dsquared(torigin, porigin) > radius_sq)
+    if(distance2dsquared(torigin, porigin) > radius_sq) {
       return false;
+    }
   } else if(!isDefined(trigger) || !trigger istouching(self))
     return false;
 
-  if(isDefined(craftablespawn.stub.require_look_at) && craftablespawn.stub.require_look_at && !self is_player_looking_at(trigger.origin, 0.76))
+  if(isDefined(craftablespawn.stub.require_look_at) && craftablespawn.stub.require_look_at && !self is_player_looking_at(trigger.origin, 0.76)) {
     return false;
+  }
 
   return true;
 }
@@ -1635,11 +1788,13 @@ player_progress_bar_update(start_time, craft_time) {
   while(isDefined(self) && gettime() - start_time < craft_time) {
     progress = (gettime() - start_time) / craft_time;
 
-    if(progress < 0)
+    if(progress < 0) {
       progress = 0;
+    }
 
-    if(progress > 1)
+    if(progress > 1) {
       progress = 1;
+    }
 
     self.usebar updatebar(progress);
     wait 0.05;
@@ -1651,8 +1806,9 @@ player_progress_bar(start_time, craft_time) {
   self.usebartext = self createprimaryprogressbartext();
   self.usebartext settext(&"ZOMBIE_BUILDING");
 
-  if(isDefined(self) && isDefined(start_time) && isDefined(craft_time))
+  if(isDefined(self) && isDefined(start_time) && isDefined(craft_time)) {
     self player_progress_bar_update(start_time, craft_time);
+  }
 
   self.usebartext destroyelem();
   self.usebar destroyelem();
@@ -1672,8 +1828,9 @@ craftable_use_hold_think_internal(player) {
     return;
   }
 
-  if(!isDefined(self.usetime))
+  if(!isDefined(self.usetime)) {
     self.usetime = int(3000);
+  }
 
   self.craft_time = self.usetime;
   self.craft_start_time = gettime();
@@ -1687,18 +1844,21 @@ craftable_use_hold_think_internal(player) {
   self.stub.craftablespawn craftable_set_piece_crafting(player.current_craftable_piece);
   player thread player_progress_bar(craft_start_time, craft_time);
 
-  if(isDefined(level.craftable_craft_custom_func))
+  if(isDefined(level.craftable_craft_custom_func)) {
     player thread[[level.craftable_craft_custom_func]](self.stub);
+  }
 
-  while(isDefined(self) && player player_continue_crafting(self.stub.craftablespawn) && gettime() - self.craft_start_time < self.craft_time)
+  while(isDefined(self) && player player_continue_crafting(self.stub.craftablespawn) && gettime() - self.craft_start_time < self.craft_time) {
     wait 0.05;
+  }
 
   player notify("craftable_progress_end");
   player maps\mp\zombies\_zm_weapons::switch_back_primary_weapon(orgweapon);
   player takeweapon("zombie_builder_zm");
 
-  if(isDefined(player.is_drinking) && player.is_drinking)
+  if(isDefined(player.is_drinking) && player.is_drinking) {
     player decrement_is_drinking();
+  }
 
   player enable_player_move_states();
 
@@ -1732,8 +1892,9 @@ craftable_use_hold_think(player) {
   self thread craftable_use_hold_think_internal(player);
   retval = self waittill_any_return("craft_succeed", "craft_failed");
 
-  if(retval == "craft_succeed")
+  if(retval == "craft_succeed") {
     return true;
+  }
 
   return false;
 }
@@ -1748,8 +1909,9 @@ craftable_place_think() {
     if(isDefined(level.custom_craftable_validation)) {
       valid = self[[level.custom_craftable_validation]](player);
 
-      if(!valid)
+      if(!valid) {
         continue;
+      }
     }
 
     if(player != self.parent_player) {
@@ -1769,23 +1931,27 @@ craftable_place_think() {
       self.stub.hint_string = "";
       self sethintstring(self.stub.hint_string);
 
-      if(isDefined(self.stub.oncantuse))
+      if(isDefined(self.stub.oncantuse)) {
         self.stub[[self.stub.oncantuse]](player);
+      }
     } else {
-      if(isDefined(self.stub.onbeginuse))
+      if(isDefined(self.stub.onbeginuse)) {
         self.stub[[self.stub.onbeginuse]](player);
+      }
 
       result = self craftable_use_hold_think(player);
       team = player.pers["team"];
 
-      if(isDefined(self.stub.onenduse))
+      if(isDefined(self.stub.onenduse)) {
         self.stub[[self.stub.onenduse]](team, player, result);
+      }
 
       if(!result) {
         continue;
       }
-      if(isDefined(self.stub.onuse))
+      if(isDefined(self.stub.onuse)) {
         self.stub[[self.stub.onuse]](player);
+      }
 
       prompt = player player_craft(self.stub.craftablespawn);
       player_crafted = player;
@@ -1797,8 +1963,9 @@ craftable_place_think() {
   if(isDefined(self.stub.craftablestub.onfullycrafted)) {
     b_result = self.stub[[self.stub.craftablestub.onfullycrafted]]();
 
-    if(!b_result)
+    if(!b_result) {
       return;
+    }
   }
 
   if(isDefined(player_crafted)) {
@@ -1816,8 +1983,9 @@ craftable_place_think() {
   }
 
   if(self.stub.persistent == 2) {
-    if(isDefined(player_crafted))
+    if(isDefined(player_crafted)) {
       self craftabletrigger_update_prompt(player_crafted);
+    }
 
     if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
       self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
@@ -1845,8 +2013,9 @@ craftable_place_think() {
       if(isDefined(level.custom_craftable_validation)) {
         valid = self[[level.custom_craftable_validation]](player);
 
-        if(!valid)
+        if(!valid) {
           continue;
+        }
       }
 
       if(!(isDefined(self.stub.crafted) && self.stub.crafted)) {
@@ -1865,18 +2034,22 @@ craftable_place_think() {
 
       self.stub.bought = 1;
 
-      if(isDefined(self.stub.model))
+      if(isDefined(self.stub.model)) {
         self.stub.model thread model_fly_away(self);
+      }
 
       player maps\mp\zombies\_zm_weapons::weapon_give(self.stub.weaponname);
 
-      if(isDefined(level.zombie_include_craftables[self.stub.equipname].onbuyweapon))
+      if(isDefined(level.zombie_include_craftables[self.stub.equipname].onbuyweapon)) {
         self[[level.zombie_include_craftables[self.stub.equipname].onbuyweapon]](player);
+      }
 
-      if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined))
+      if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
         self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
-      else
+      }
+      else {
         self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
+      }
 
       self sethintstring(self.stub.hint_string);
       player track_craftables_pickedup(self.stub.craftablespawn);
@@ -1896,8 +2069,9 @@ craftable_place_think() {
       if(isDefined(level.custom_craftable_validation)) {
         valid = self[[level.custom_craftable_validation]](player);
 
-        if(!valid)
+        if(!valid) {
           continue;
+        }
       }
 
       if(!(isDefined(self.stub.crafted) && self.stub.crafted)) {
@@ -1918,13 +2092,15 @@ craftable_place_think() {
         continue;
       }
       if(isDefined(level.zombie_craftable_persistent_weapon)) {
-        if(self[[level.zombie_craftable_persistent_weapon]](player))
+        if(self[[level.zombie_craftable_persistent_weapon]](player)) {
           continue;
+        }
       }
 
       if(isDefined(level.zombie_custom_equipment_setup)) {
-        if(self[[level.zombie_custom_equipment_setup]](player))
+        if(self[[level.zombie_custom_equipment_setup]](player)) {
           continue;
+        }
       }
 
       if(!maps\mp\zombies\_zm_equipment::is_limited_equipment(self.stub.weaponname) || !maps\mp\zombies\_zm_equipment::limited_equipment_in_use(self.stub.weaponname)) {
@@ -1932,15 +2108,19 @@ craftable_place_think() {
         player giveweapon(self.stub.weaponname);
         player setweaponammoclip(self.stub.weaponname, 1);
 
-        if(isDefined(level.zombie_include_craftables[self.stub.equipname].onbuyweapon))
+        if(isDefined(level.zombie_include_craftables[self.stub.equipname].onbuyweapon)) {
           self[[level.zombie_include_craftables[self.stub.equipname].onbuyweapon]](player);
-        else if(self.stub.weaponname != "keys_zm")
+        }
+        else if(self.stub.weaponname != "keys_zm") {
           player setactionslot(1, "weapon", self.stub.weaponname);
+        }
 
-        if(isDefined(level.zombie_craftablestubs[self.stub.equipname].str_taken))
+        if(isDefined(level.zombie_craftablestubs[self.stub.equipname].str_taken)) {
           self.stub.hint_string = level.zombie_craftablestubs[self.stub.equipname].str_taken;
-        else
+        }
+        else {
           self.stub.hint_string = "";
+        }
 
         self sethintstring(self.stub.hint_string);
         player track_craftables_pickedup(self.stub.craftablespawn);
@@ -1957,10 +2137,12 @@ model_fly_away(unitrigger) {
   direction = self.origin;
   direction = (direction[1], direction[0], 0);
 
-  if(direction[1] < 0 || direction[0] > 0 && direction[1] > 0)
+  if(direction[1] < 0 || direction[0] > 0 && direction[1] > 0) {
     direction = (direction[0], direction[1] * -1, 0);
-  else if(direction[0] < 0)
+  }
+  else if(direction[0] < 0) {
     direction = (direction[0] * -1, direction[1], 0);
+  }
 
   self vibrate(direction, 10, 0.5, 4);
   self waittill("movedone");
@@ -1970,8 +2152,9 @@ model_fly_away(unitrigger) {
 
 find_craftable_stub(equipname) {
   foreach(stub in level.a_uts_craftables) {
-    if(stub.equipname == equipname)
+    if(stub.equipname == equipname) {
       return stub;
+    }
   }
 
   return undefined;
@@ -1997,20 +2180,23 @@ stub_uncraft_craftable(stub, return_pieces, origin, angles, use_random_start) {
       if(isDefined(craftable.a_piecespawns[i].tag_name)) {
         craftable.stub.model notsolid();
 
-        if(!(isDefined(craftable.a_piecespawns[i].crafted) && craftable.a_piecespawns[i].crafted))
+        if(!(isDefined(craftable.a_piecespawns[i].crafted) && craftable.a_piecespawns[i].crafted)) {
           craftable.stub.model hidepart(craftable.a_piecespawns[i].tag_name);
+        }
         else {
           craftable.stub.model show();
           craftable.stub.model showpart(craftable.a_piecespawns[i].tag_name);
         }
       }
 
-      if(isDefined(return_pieces) && return_pieces)
+      if(isDefined(return_pieces) && return_pieces) {
         craftable.a_piecespawns[i] piece_spawn_at(origin, angles, use_random_start);
+      }
     }
 
-    if(isDefined(craftable.stub.model))
+    if(isDefined(craftable.stub.model)) {
       craftable.stub.model ghost();
+    }
   }
 }
 
@@ -2032,8 +2218,9 @@ player_explode_craftable(equipname, origin, speed, return_to_spawn, return_time)
       if(isDefined(craftable.a_piecespawns[i].tag_name)) {
         craftable.stub.model notsolid();
 
-        if(!(isDefined(craftable.a_piecespawns[i].crafted) && craftable.a_piecespawns[i].crafted))
+        if(!(isDefined(craftable.a_piecespawns[i].crafted) && craftable.a_piecespawns[i].crafted)) {
           craftable.stub.model hidepart(craftable.a_piecespawns[i].tag_name);
+        }
         else {
           craftable.stub.model show();
           craftable.stub.model showpart(craftable.a_piecespawns[i].tag_name);
@@ -2052,16 +2239,18 @@ player_explode_craftable(equipname, origin, speed, return_to_spawn, return_time)
 
 think_craftables() {
   foreach(craftable in level.zombie_include_craftables) {
-    if(isDefined(craftable.triggerthink))
+    if(isDefined(craftable.triggerthink)) {
       craftable[[craftable.triggerthink]]();
+    }
   }
 }
 
 opentablecraftable() {
   a_trigs = getEntArray("open_craftable_trigger", "targetname");
 
-  foreach(trig in a_trigs)
+  foreach(trig in a_trigs) {
   setup_unitrigger_craftable_internal(trig, "open_table", "", "OPEN_CRAFTABLE", 1, 0);
+  }
 }
 
 craftable_trigger_think(trigger_targetname, equipname, weaponname, trigger_hintstring, delete_trigger, persistent) {
@@ -2099,25 +2288,33 @@ setup_vehicle_unitrigger_craftable(parent, trigger_targetname, equipname, weapon
   unitrigger_stub.onuse = ::onuseplantobjectuts;
   unitrigger_stub.oncantuse = ::oncantuseuts;
 
-  if(isDefined(trig.script_length))
+  if(isDefined(trig.script_length)) {
     unitrigger_stub.script_length = trig.script_length;
-  else
+  }
+  else {
     unitrigger_stub.script_length = 24;
+  }
 
-  if(isDefined(trig.script_width))
+  if(isDefined(trig.script_width)) {
     unitrigger_stub.script_width = trig.script_width;
-  else
+  }
+  else {
     unitrigger_stub.script_width = 64;
+  }
 
-  if(isDefined(trig.script_height))
+  if(isDefined(trig.script_height)) {
     unitrigger_stub.script_height = trig.script_height;
-  else
+  }
+  else {
     unitrigger_stub.script_height = 24;
+  }
 
-  if(isDefined(trig.radius))
+  if(isDefined(trig.radius)) {
     unitrigger_stub.radius = trig.radius;
-  else
+  }
+  else {
     unitrigger_stub.radius = 64;
+  }
 
   unitrigger_stub.target = trig.target;
   unitrigger_stub.targetname = trig.targetname + "_trigger";
@@ -2125,8 +2322,9 @@ setup_vehicle_unitrigger_craftable(parent, trigger_targetname, equipname, weapon
   unitrigger_stub.script_parameters = trig.script_parameters;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
 
-  if(isDefined(level.zombie_craftablestubs[equipname].str_to_craft))
+  if(isDefined(level.zombie_craftablestubs[equipname].str_to_craft)) {
     unitrigger_stub.hint_string = level.zombie_craftablestubs[equipname].str_to_craft;
+  }
 
   unitrigger_stub.script_unitrigger_type = "unitrigger_radius_use";
   unitrigger_stub.require_look_at = 1;
@@ -2137,8 +2335,9 @@ setup_vehicle_unitrigger_craftable(parent, trigger_targetname, equipname, weapon
   trig.trigger_stub = unitrigger_stub;
   unitrigger_stub.craftablespawn = unitrigger_stub craftable_piece_unitriggers(equipname, unitrigger_stub.origin);
 
-  if(delete_trigger)
+  if(delete_trigger) {
     trig delete();
+  }
 
   level.a_uts_craftables[level.a_uts_craftables.size] = unitrigger_stub;
   return unitrigger_stub;
@@ -2149,23 +2348,27 @@ vehicle_craftable_trigger_think(vehicle, trigger_targetname, equipname, weaponna
 }
 
 onpickuputs(player) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Craftable piece recovered by - " + player.name);
+  }
 }
 
 ondroputs(player) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Craftable piece dropped by - " + player.name);
+  }
 
   player notify("event_ended");
 }
 
 onbeginuseuts(player) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Craftable piece begin use by - " + player.name);
+  }
 
-  if(isDefined(self.craftablestub.onbeginuse))
+  if(isDefined(self.craftablestub.onbeginuse)) {
     self[[self.craftablestub.onbeginuse]](player);
+  }
 
   if(isDefined(player) && !isDefined(player.craftableaudio)) {
     player.craftableaudio = spawn("script_origin", player.origin);
@@ -2174,8 +2377,9 @@ onbeginuseuts(player) {
 }
 
 onenduseuts(team, player, result) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Craftable piece end use by - " + player.name);
+  }
 
   if(!isDefined(player)) {
     return;
@@ -2185,40 +2389,48 @@ onenduseuts(team, player, result) {
     player.craftableaudio = undefined;
   }
 
-  if(isDefined(self.craftablestub.onenduse))
+  if(isDefined(self.craftablestub.onenduse)) {
     self[[self.craftablestub.onenduse]](team, player, result);
+  }
 
   player notify("event_ended");
 }
 
 oncantuseuts(player) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Craftable piece can't use by - " + player.name);
+  }
 
-  if(isDefined(self.craftablestub.oncantuse))
+  if(isDefined(self.craftablestub.oncantuse)) {
     self[[self.craftablestub.oncantuse]](player);
+  }
 }
 
 onuseplantobjectuts(player) {
-  if(isDefined(player) && isDefined(player.name))
+  if(isDefined(player) && isDefined(player.name)) {
     println("ZM >> Craftable piece crafted by - " + player.name);
+  }
 
-  if(isDefined(self.craftablestub.onuseplantobject))
+  if(isDefined(self.craftablestub.onuseplantobject)) {
     self[[self.craftablestub.onuseplantobject]](player);
+  }
 
   player notify("bomb_planted");
 }
 
 is_craftable() {
-  if(!isDefined(level.zombie_craftablestubs))
+  if(!isDefined(level.zombie_craftablestubs)) {
     return false;
+  }
 
-  if(isDefined(self.zombie_weapon_upgrade) && isDefined(level.zombie_craftablestubs[self.zombie_weapon_upgrade]))
+  if(isDefined(self.zombie_weapon_upgrade) && isDefined(level.zombie_craftablestubs[self.zombie_weapon_upgrade])) {
     return true;
+  }
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "specialty_weapupgrade") {
-    if(isDefined(level.craftables_crafted["pap"]) && level.craftables_crafted["pap"])
+    if(isDefined(level.craftables_crafted["pap"]) && level.craftables_crafted["pap"]) {
       return false;
+    }
 
     return true;
   }
@@ -2231,8 +2443,9 @@ craftable_crafted() {
 }
 
 craftable_complete() {
-  if(self.a_piecespawns <= 0)
+  if(self.a_piecespawns <= 0) {
     return true;
+  }
 
   return false;
 }
@@ -2246,8 +2459,9 @@ delete_on_disconnect(craftable, self_notify, skip_delete) {
   craftable endon("death");
   self waittill("disconnect");
 
-  if(isDefined(self_notify))
+  if(isDefined(self_notify)) {
     self notify(self_notify);
+  }
 
   if(!(isDefined(skip_delete) && skip_delete)) {
     if(isDefined(craftable.stub)) {
@@ -2255,15 +2469,17 @@ delete_on_disconnect(craftable, self_notify, skip_delete) {
       craftable.stub = undefined;
     }
 
-    if(isDefined(craftable))
+    if(isDefined(craftable)) {
       craftable delete();
+    }
   }
 }
 
 is_holding_part(craftable_name, piece_name) {
   if(isDefined(self.current_craftable_piece)) {
-    if(self.current_craftable_piece.craftablename == craftable_name && self.current_craftable_piece.modelname == piece_name)
+    if(self.current_craftable_piece.craftablename == craftable_name && self.current_craftable_piece.modelname == piece_name) {
       return true;
+    }
   }
 
   if(isDefined(level.a_uts_craftables)) {
@@ -2271,8 +2487,9 @@ is_holding_part(craftable_name, piece_name) {
       if(craftable_stub.craftablestub.name == craftable_name) {
         foreach(piece in craftable_stub.craftablespawn.a_piecespawns) {
           if(piece.piecename == piece_name) {
-            if(isDefined(piece.in_shared_inventory) && piece.in_shared_inventory)
+            if(isDefined(piece.in_shared_inventory) && piece.in_shared_inventory) {
               return true;
+            }
           }
         }
       }
@@ -2286,13 +2503,15 @@ is_part_crafted(craftable_name, piece_name) {
   if(isDefined(level.a_uts_craftables)) {
     foreach(craftable_stub in level.a_uts_craftables) {
       if(craftable_stub.craftablestub.name == craftable_name) {
-        if(isDefined(craftable_stub.crafted) && craftable_stub.crafted)
+        if(isDefined(craftable_stub.crafted) && craftable_stub.crafted) {
           return true;
+        }
 
         foreach(piece in craftable_stub.craftablespawn.a_piecespawns) {
           if(piece.piecename == piece_name) {
-            if(isDefined(piece.crafted) && piece.crafted)
+            if(isDefined(piece.crafted) && piece.crafted) {
               return true;
+            }
           }
         }
       }
@@ -2313,8 +2532,9 @@ track_craftable_piece_pickedup(piece) {
 
   if(isDefined(piece.piecestub.vox_id)) {
     if(isDefined(piece.piecestub.b_one_time_vo) && piece.piecestub.b_one_time_vo) {
-      if(!isDefined(self.a_one_time_piece_pickup_vo))
+      if(!isDefined(self.a_one_time_piece_pickup_vo)) {
         self.a_one_time_piece_pickup_vo = [];
+      }
 
       if(isDefined(self.dontspeak) && self.dontspeak) {
         return;
@@ -2339,13 +2559,15 @@ track_craftable_pieces_crafted(craftable) {
 
   bname = craftable.craftable_name;
 
-  if(isDefined(craftable.stat_name))
+  if(isDefined(craftable.stat_name)) {
     bname = craftable.stat_name;
+  }
 
   self add_map_craftable_stat(bname, "pieces_built", 1);
 
-  if(!craftable craftable_all_crafted())
+  if(!craftable craftable_all_crafted()) {
     self thread do_player_general_vox("general", "build_add");
+  }
 }
 
 track_craftables_crafted(craftable) {
@@ -2357,16 +2579,18 @@ track_craftables_crafted(craftable) {
 
   bname = craftable.craftable_name;
 
-  if(isDefined(craftable.stat_name))
+  if(isDefined(craftable.stat_name)) {
     bname = craftable.stat_name;
+  }
 
   self add_map_craftable_stat(bname, "buildable_built", 1);
   self maps\mp\zombies\_zm_stats::increment_client_stat("buildables_built", 0);
   self maps\mp\zombies\_zm_stats::increment_player_stat("buildables_built");
 
   if(isDefined(craftable.stub.craftablestub.vox_id)) {
-    if(isDefined(level.zombie_custom_craftable_built_vo))
+    if(isDefined(level.zombie_custom_craftable_built_vo)) {
       self thread[[level.zombie_custom_craftable_built_vo]](craftable.stub);
+    }
 
     self thread do_player_general_vox("general", craftable.stub.craftablestub.vox_id + "_final");
   }
@@ -2389,8 +2613,9 @@ track_craftables_pickedup(craftable) {
 
   self add_map_craftable_stat(stat_name, "buildable_pickedup", 1);
 
-  if(isDefined(craftable.stub.craftablestub.vox_id))
+  if(isDefined(craftable.stub.craftablestub.vox_id)) {
     self thread do_player_general_vox("general", craftable.stub.craftablestub.vox_id + "_plc");
+  }
 
   self say_pickup_craftable_vo(craftable, 0);
 }
@@ -2404,8 +2629,9 @@ track_craftables_planted(equipment) {
 
   craftable_name = undefined;
 
-  if(isDefined(equipment.name))
+  if(isDefined(equipment.name)) {
     craftable_name = get_craftable_stat_name(equipment.name);
+  }
 
   if(!isDefined(craftable_name)) {
     println("STAT TRACKING FAILURE: NO CRAFTABLE NAME FOR track_craftables_planted() " + equipment.name + "\\n");
@@ -2453,8 +2679,9 @@ track_placed_craftables(craftable_name) {
   self add_map_craftable_stat(craftable_name, "buildable_placed", 1);
   vo_name = undefined;
 
-  if(craftable_name == level.riotshield_name)
+  if(craftable_name == level.riotshield_name) {
     vo_name = "craft_plc_shield";
+  }
 
   if(!isDefined(vo_name)) {
     return;
@@ -2502,8 +2729,9 @@ get_craftable_stat_name(craftable_name) {
 get_craftable_model(str_craftable) {
   foreach(uts_craftable in level.a_uts_craftables) {
     if(uts_craftable.craftablestub.name == str_craftable) {
-      if(isDefined(uts_craftable.model))
+      if(isDefined(uts_craftable.model)) {
         return uts_craftable.model;
+      }
 
       break;
     }
@@ -2516,8 +2744,9 @@ get_craftable_piece(str_craftable, str_piece) {
   foreach(uts_craftable in level.a_uts_craftables) {
     if(uts_craftable.craftablestub.name == str_craftable) {
       foreach(piecespawn in uts_craftable.craftablespawn.a_piecespawns) {
-        if(piecespawn.piecename == str_piece)
+        if(piecespawn.piecename == str_piece) {
           return piecespawn;
+        }
       }
 
       break;
@@ -2530,16 +2759,18 @@ get_craftable_piece(str_craftable, str_piece) {
 player_get_craftable_piece(str_craftable, str_piece) {
   piecespawn = get_craftable_piece(str_craftable, str_piece);
 
-  if(isDefined(piecespawn))
+  if(isDefined(piecespawn)) {
     self player_take_piece(piecespawn);
+  }
 }
 
 get_craftable_piece_model(str_craftable, str_piece) {
   foreach(uts_craftable in level.a_uts_craftables) {
     if(uts_craftable.craftablestub.name == str_craftable) {
       foreach(piecespawn in uts_craftable.craftablespawn.a_piecespawns) {
-        if(piecespawn.piecename == str_piece && isDefined(piecespawn.model))
+        if(piecespawn.piecename == str_piece && isDefined(piecespawn.model)) {
           return piecespawn.model;
+        }
       }
 
       break;

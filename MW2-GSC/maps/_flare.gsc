@@ -9,8 +9,9 @@
 #include common_scripts\utility;
 #using_animtree("vehicles");
 main(model, type) {
-  if(!isDefined(level._effect))
+  if(!isDefined(level._effect)) {
     level._effect = [];
+  }
   level._effect["flare_runner_intro"] = loadfx("misc/flare_start");
   level._effect["flare_runner"] = loadfx("misc/flare");
   level._effect["flare_runner_fizzout"] = loadfx("misc/flare_end");
@@ -89,8 +90,9 @@ combine_sunlight_and_brightness() {
   for(;;) {
     brightness = level.sun_brightness;
     // add some flicker
-    if(brightness > 1)
+    if(brightness > 1) {
       brightness += randomfloat(0.2);
+    }
 
     rgb = vector_Multiply(level.sun_color, brightness);
     setSunLight(rgb[0], rgb[1], rgb[2]);
@@ -210,8 +212,9 @@ flare_from_targetname(targetname) {
   oldForward = anglesToForward(angles);
   for(;;) {
     wait(0.05);
-    if(flag("flare_stop_setting_sundir"))
+    if(flag("flare_stop_setting_sundir")) {
       break;
+    }
     angles = vectortoangles(flare.origin - sunPointsTo);
     forward = anglesToForward(angles);
     lerpSunDirection(oldForward, forward, 0.05);

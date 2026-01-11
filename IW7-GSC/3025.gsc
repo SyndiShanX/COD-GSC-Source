@@ -63,28 +63,34 @@ func_680A() {
 }
 
 func_6809(var_00) {
-  if(self.func_54F1)
+  if(self.func_54F1) {
     return 0;
+  }
 
-  if(scripts\engine\utility::flag("jackal_missile_drone_active"))
+  if(scripts\engine\utility::flag("jackal_missile_drone_active")) {
     return 0;
+  }
 
-  if(var_0.func_54F1)
+  if(var_0.func_54F1) {
     return 0;
+  }
 
-  if(var_0.cooling_down)
+  if(var_0.cooling_down) {
     return 0;
+  }
 
   return 1;
 }
 
 func_5F9C(var_00) {
-  while(!level.player buttonpressed("DPAD_DOWN"))
+  while(!level.player buttonpressed("DPAD_DOWN")) {
     wait 0.05;
+  }
 
   foreach(var_02 in var_00) {
-    if(isDefined(var_02))
+    if(isDefined(var_02)) {
       var_02 func_0BDC::func_A36A();
+    }
   }
 
   func_0BDC::func_A1A9(0);
@@ -93,8 +99,9 @@ func_5F9C(var_00) {
 }
 
 func_6889() {
-  while(!isDefined(level.func_D127.func_93D2) || level.func_D127.func_93D2.size == 0)
+  while(!isDefined(level.func_D127.func_93D2) || level.func_D127.func_93D2.size == 0) {
     wait 0.05;
+  }
 
   wait 3;
   func_0BDC::func_A1AA("save_salter", ::func_6887, ::func_6886, ::func_6888);
@@ -144,8 +151,9 @@ func_6886(var_00) {
   var_0.enemy thread func_688B();
   level.func_EA99 thread func_688A();
 
-  while(isalive(var_0.enemy))
+  while(isalive(var_0.enemy)) {
     wait 0.05;
+  }
 
   level notify("salter_saved");
   level.func_EA99 func_0BDC::func_A36A();
@@ -166,14 +174,16 @@ func_6892() {
 func_688D() {
   self endon("death");
 
-  if(!isDefined(level.func_EA99.func_93D2))
+  if(!isDefined(level.func_EA99.func_93D2)) {
     level.func_EA99.func_93D2 = [];
+  }
 
   for(;;) {
     func_0B76::func_1945(level.func_EA99, ["tag_flash_right", "tag_flash_left"], randomintrange(1, 3));
 
-    while(level.func_EA99.func_93D2.size > 0)
+    while(level.func_EA99.func_93D2.size > 0) {
       wait 0.05;
+    }
 
     wait(randomfloatrange(2, 4));
   }
@@ -183,8 +193,9 @@ func_688B() {
   self endon("death");
 
   for(;;) {
-    while(!self.func_AEDF.func_2A93 && !level.player buttonpressed("button_lstick"))
+    while(!self.func_AEDF.func_2A93 && !level.player buttonpressed("button_lstick")) {
       wait 0.05;
+    }
 
     func_0BDC::func_1991();
   }
@@ -194,8 +205,9 @@ func_688A() {
   self endon("death");
 
   for(;;) {
-    while(!isDefined(self.func_93D2) || self.func_93D2.size == 0)
+    while(!isDefined(self.func_93D2) || self.func_93D2.size == 0) {
       wait 0.05;
+    }
 
     func_0BDC::func_1991();
   }
@@ -220,8 +232,9 @@ func_6890() {
 }
 
 func_688F(var_00) {
-  while(!isDefined(var_0.func_93D2) || var_0.func_93D2.size == 0)
+  while(!isDefined(var_0.func_93D2) || var_0.func_93D2.size == 0) {
     wait 0.05;
+  }
 
   level notify("event_missile_out");
   func_11685("reyes", "got a shot- fox out!");
@@ -243,8 +256,9 @@ func_11685(var_00, var_01, var_02) {
   if(getdvarint("loc_warnings", 0)) {
     return;
   }
-  if(!isDefined(level.func_545A))
+  if(!isDefined(level.func_545A)) {
     level.func_545A = [];
+  }
 
   var_03 = 0;
 
@@ -257,8 +271,9 @@ func_11685(var_00, var_01, var_02) {
 
   var_04 = "^3";
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 1;
+  }
 
   var_02 = max(1, var_02);
   level.func_545A[var_03] = 1;
@@ -291,11 +306,13 @@ func_11685(var_00, var_01, var_02) {
 }
 
 func_67E9(var_00) {
-  if(level.func_A056.func_191E.size == 0 || level.func_A056.func_1914.size == 0)
+  if(level.func_A056.func_191E.size == 0 || level.func_A056.func_1914.size == 0) {
     return 0;
+  }
 
-  if(!isDefined(var_0.func_A419) || var_0.func_A419.size == 0)
+  if(!isDefined(var_0.func_A419) || var_0.func_A419.size == 0) {
     var_0.func_A419 = level.func_A056.func_1630;
+  }
 
   var_01 = anglesToForward(level.func_D127.angles);
   var_02 = -1;
@@ -304,8 +321,9 @@ func_67E9(var_00) {
   foreach(var_05 in var_0.func_A419) {
     var_2++;
 
-    if(var_02 > var_03)
+    if(var_02 > var_03) {
       return 0;
+    }
 
     if(!isDefined(var_05) || !isalive(var_05)) {
       var_0.func_A419 = scripts\engine\utility::array_remove(var_0.func_A419, var_05);
@@ -345,8 +363,9 @@ func_67E9(var_00) {
     break;
   }
 
-  if(!isDefined(var_0.func_1152A))
+  if(!isDefined(var_0.func_1152A)) {
     return 0;
+  }
 
   wait 0.05;
 
@@ -355,10 +374,12 @@ func_67E9(var_00) {
     return 0;
   }
 
-  if(var_0.func_1152A.script_team == "allies")
+  if(var_0.func_1152A.script_team == "allies") {
     var_12 = level.func_A056.func_191E;
-  else
+  }
+  else {
     var_12 = level.func_A056.func_1914;
+  }
 
   foreach(var_05 in var_12) {
     if(!isDefined(var_05) || !isalive(var_05)) {
@@ -408,17 +429,20 @@ func_67EA(var_00) {
 }
 
 func_6823(var_00) {
-  if(func_F0C6(2))
+  if(func_F0C6(2)) {
     return 0;
+  }
 
-  if(level.func_90E2.func_1112E == 0)
+  if(level.func_90E2.func_1112E == 0) {
     return 0;
+  }
 
   var_01 = anglesToForward(level.func_D127.angles);
   var_0.func_A419 = scripts\engine\utility::array_removeundefined(level.func_A056.func_933B);
 
-  if(var_0.func_A419.size == 0)
+  if(var_0.func_A419.size == 0) {
     return 0;
+  }
 
   foreach(var_03 in var_0.func_A419) {
     if(!var_03 func_6825(var_01)) {
@@ -433,38 +457,45 @@ func_6823(var_00) {
 }
 
 func_6825(var_00) {
-  if(!func_0BDC::func_9C06())
+  if(!func_0BDC::func_9C06()) {
     return 0;
+  }
 
-  if(isDefined(self.var_1198.func_90EB) && gettime() - self.var_1198.func_90EB < 2000)
+  if(isDefined(self.var_1198.func_90EB) && gettime() - self.var_1198.func_90EB < 2000) {
     return 0;
+  }
 
-  if(!level.player scripts\sp\utility::func_65DB("jackal_enemy_homing_missile_allowed_hyperaggressive"))
+  if(!level.player scripts\sp\utility::func_65DB("jackal_enemy_homing_missile_allowed_hyperaggressive")) {
     return 0;
+  }
 
   var_01 = anglesToForward(self.angles);
   var_02 = self.origin - level.func_D127.origin;
   var_03 = length(var_02);
 
-  if(var_03 > 25000 || var_03 < 500)
+  if(var_03 > 25000 || var_03 < 500) {
     return 0;
+  }
 
   var_04 = vectordot(vectornormalize(level.func_D127.origin - self.origin), var_01);
 
-  if(var_04 < 0.7)
+  if(var_04 < 0.7) {
     return 0;
+  }
 
   var_04 = vectordot(vectornormalize(var_02), var_00);
 
-  if(var_04 < 0.85)
+  if(var_04 < 0.85) {
     return 0;
+  }
 
   return 1;
 }
 
 func_6822(var_00) {
-  if(var_0.func_907F)
+  if(var_0.func_907F) {
     var_00 func_686E(["tag_flash_right", "tag_flash_left"], randomintrange(2, 4));
+  }
 
   var_0.enemy.var_1198.func_90EB = gettime();
 }
@@ -484,19 +515,23 @@ func_682D(var_00) {
 }
 
 func_682A(var_00, var_01) {
-  if(func_F0C6(3))
+  if(func_F0C6(3)) {
     return 0;
+  }
 
-  if(!level.player scripts\sp\utility::func_65DB("jackal_enemy_homing_missile_allowed"))
+  if(!level.player scripts\sp\utility::func_65DB("jackal_enemy_homing_missile_allowed")) {
     return 0;
+  }
 
-  if(func_D30D())
+  if(func_D30D()) {
     return 0;
+  }
 
   var_02 = anglesToForward(level.func_D127.angles);
 
-  if(!isDefined(var_0.func_A419) || var_0.func_A419.size == 0)
+  if(!isDefined(var_0.func_A419) || var_0.func_A419.size == 0) {
     var_0.func_A419 = level.func_A056.func_1630;
+  }
 
   var_03 = -1;
   var_04 = 5;
@@ -504,8 +539,9 @@ func_682A(var_00, var_01) {
   foreach(var_06 in var_0.func_A419) {
     var_3++;
 
-    if(var_03 > var_04)
+    if(var_03 > var_04) {
       return 0;
+    }
 
     if(!var_06 func_682E(var_02, var_01)) {
       var_0.func_A419 = scripts\engine\utility::array_remove(var_0.func_A419, var_06);
@@ -520,35 +556,42 @@ func_682A(var_00, var_01) {
 }
 
 func_682E(var_00, var_01) {
-  if(!isDefined(self) || !isalive(self) || self.script_team != "axis")
+  if(!isDefined(self) || !isalive(self) || self.script_team != "axis") {
     return 0;
+  }
 
-  if(!func_0BDC::func_3819())
+  if(!func_0BDC::func_3819()) {
     return 0;
+  }
 
   var_02 = anglesToForward(self.angles);
   var_03 = self.origin + var_02 * 9000;
   var_04 = var_03 - level.func_D127.origin;
   var_05 = vectordot(vectornormalize(var_04), var_00);
 
-  if(var_01)
+  if(var_01) {
     var_06 = 0.97;
-  else
+  }
+  else {
     var_06 = 0.8;
+  }
 
-  if(var_05 < var_06)
+  if(var_05 < var_06) {
     return 0;
+  }
 
   var_07 = length(var_04);
 
-  if(var_07 > 35000 || var_07 < 10000)
+  if(var_07 > 35000 || var_07 < 10000) {
     return 0;
+  }
 
   if(var_01) {
     var_08 = vectordot(vectornormalize(level.func_D127.origin - self.origin), var_02);
 
-    if(var_08 < -0.1)
+    if(var_08 < -0.1) {
       return 0;
+    }
   }
 
   return 1;
@@ -567,13 +610,15 @@ func_682C(var_00) {
 func_686E(var_00, var_01, var_02) {
   self.enemy endon("death");
 
-  if(!isDefined(self.func_B8A4))
+  if(!isDefined(self.func_B8A4)) {
     self.func_B8A4 = [];
+  }
 
   self.enemy func_0B76::func_A278();
 
-  if(!isDefined(var_02))
+  if(!isDefined(var_02)) {
     var_02 = 0;
+  }
 
   if(var_02) {
     var_03 = 1;
@@ -588,8 +633,9 @@ func_686E(var_00, var_01, var_02) {
   var_05 = 0;
 
   while(var_01 > 0) {
-    if(var_05 == var_0.size)
+    if(var_05 == var_0.size) {
       var_05 = 0;
+    }
 
     var_06 = var_0[var_05];
     var_5++;
@@ -599,8 +645,9 @@ func_686E(var_00, var_01, var_02) {
       var_7.func_438D = self.enemy;
       self.func_B8A4 = scripts\engine\utility::array_add(self.func_B8A4, var_07);
 
-      if(!var_02)
+      if(!var_02) {
         var_07 func_0B76::func_A279();
+      }
       else {
         var_07 linkto(self.enemy);
         var_07 thread func_0B76::func_B804();
@@ -616,28 +663,35 @@ func_686E(var_00, var_01, var_02) {
 }
 
 func_6831(var_00) {
-  if(func_F0C6(3))
+  if(func_F0C6(3)) {
     return 0;
+  }
 
-  if(level.func_D127.spaceship_boosting)
+  if(level.func_D127.spaceship_boosting) {
     return 0;
+  }
 
-  if(level.func_D127.func_93D2.size > 0)
+  if(level.func_D127.func_93D2.size > 0) {
     return 0;
+  }
 
-  if(scripts\sp\utility::func_7B9D() < 0.5)
+  if(scripts\sp\utility::func_7B9D() < 0.5) {
     return 0;
+  }
 
-  if(isDefined(level.func_D127.func_4BC7))
+  if(isDefined(level.func_D127.func_4BC7)) {
     return 0;
+  }
 
-  if(!func_647A(var_00))
+  if(!func_647A(var_00)) {
     return 0;
+  }
 
   func_6521(var_00);
 
-  if(!isDefined(var_0.enemy))
+  if(!isDefined(var_0.enemy)) {
     return 0;
+  }
 
   return 1;
 }
@@ -685,8 +739,9 @@ func_6835(var_00, var_01, var_02) {
 
   var_0.var_3135.func_3F28 = var_00 func_0A0D::func_7E02(50000, 3000);
 
-  if(isDefined(var_0.var_3135.func_3F28))
+  if(isDefined(var_0.var_3135.func_3F28)) {
     var_00 func_0A0D::func_6CAB(undefined, "spline");
+  }
 
   var_00 notify("stop_strafeattack");
 }
@@ -707,8 +762,9 @@ func_6830(var_00, var_01) {
     self notify("near_goal");
   }
 
-  if(isDefined(var_00))
+  if(isDefined(var_00)) {
     var_00 delete();
+  }
 
   var_01 delete();
 }
@@ -750,8 +806,9 @@ func_6833(var_00) {
     var_00 playSound("enemy_lockon_bullet_impacts");
     thread scripts\engine\utility::play_sound_in_space("enemy_lockon_whizby", var_0.origin);
 
-    if(scripts\sp\utility::func_7B9D() > 0.6)
+    if(scripts\sp\utility::func_7B9D() > 0.6) {
       level.func_D127 getrandomarmkillstreak(50, self.origin, self, self, "MOD_PROJECTILE", "spaceship_scripted_locked_enemy_bullets");
+    }
 
     wait 0.1;
     var_3--;
@@ -762,10 +819,12 @@ func_6832(var_00) {
   var_01 = randomfloatrange(2, 10);
 
   for(var_02 = 0; var_01 > 0; var_01 = var_01 - 0.05) {
-    if(level.func_D127.spaceship_mode == "hover")
+    if(level.func_D127.spaceship_mode == "hover") {
       var_02 = var_02 + 0.05;
-    else
+    }
+    else {
       var_02 = 0;
+    }
 
     if(var_02 > 3) {
       break;
@@ -815,31 +874,38 @@ func_6522(var_00) {
 }
 
 func_6508() {
-  if(!isDefined(self.var_1198))
+  if(!isDefined(self.var_1198)) {
     return 0;
+  }
 
-  if(!func_0BDC::func_3819())
+  if(!func_0BDC::func_3819()) {
     return 0;
+  }
 
-  if(func_0BDC::func_9BCF())
+  if(func_0BDC::func_9BCF()) {
     return 0;
+  }
 
-  if(func_0BDC::func_9C06())
+  if(func_0BDC::func_9C06()) {
     return 0;
+  }
 
-  if(self.func_9B4C)
+  if(self.func_9B4C) {
     return 0;
+  }
 
   var_00 = self.origin - level.func_D127.origin;
   var_01 = length(var_00);
   var_02 = vectornormalize(var_00);
   var_03 = vectordot(anglesToForward(level.func_D127.angles), var_02);
 
-  if(var_03 > -0.0)
+  if(var_03 > -0.0) {
     return 0;
+  }
 
-  if(var_01 > 50000)
+  if(var_01 > 50000) {
     return 0;
+  }
 
   return 1;
 }
@@ -860,8 +926,9 @@ func_647A(var_00) {
   var_12 = level.func_D127.origin + var_10 * var_05 + var_11 + var_07;
   var_13 = level.func_D127.origin + var_09 * var_06 + var_11;
 
-  if(!_navtrace3d(var_12, var_13))
+  if(!_navtrace3d(var_12, var_13)) {
     return 0;
+  }
 
   var_0.func_6516 = var_12;
   var_0.func_6458 = var_13;
@@ -894,34 +961,43 @@ func_6828(var_00) {
 }
 
 func_6827(var_00) {
-  if(func_F0C6(4))
+  if(func_F0C6(4)) {
     return 0;
+  }
 
-  if(level.func_D127.spaceship_mode != "fly")
+  if(level.func_D127.spaceship_mode != "fly") {
     return 0;
+  }
 
-  if(level.func_D127.spaceship_boosting)
+  if(level.func_D127.spaceship_boosting) {
     return 0;
+  }
 
-  if(level.func_D127.func_93D2.size > 0)
+  if(level.func_D127.func_93D2.size > 0) {
     return 0;
+  }
 
-  if(scripts\sp\utility::func_7B9D() < 0.4)
+  if(scripts\sp\utility::func_7B9D() < 0.4) {
     return 0;
+  }
 
-  if(func_0BDC::func_7B9C() < 300)
+  if(func_0BDC::func_7B9C() < 300) {
     return 0;
+  }
 
-  if(length(level.func_D127.spaceship_rotvel) > 60)
+  if(length(level.func_D127.spaceship_rotvel) > 60) {
     return 0;
+  }
 
-  if(isDefined(level.func_D127.func_4BC7) && level.func_D127.func_4BC8 > 0)
+  if(isDefined(level.func_D127.func_4BC7) && level.func_D127.func_4BC8 > 0) {
     return 0;
+  }
 
   var_0.enemy = func_64C1();
 
-  if(!isDefined(var_0.enemy))
+  if(!isDefined(var_0.enemy)) {
     return 0;
+  }
 
   return 1;
 }
@@ -937,42 +1013,50 @@ func_64C1() {
     }
   }
 
-  if(!isDefined(var_00))
+  if(!isDefined(var_00)) {
     return undefined;
+  }
 
   return var_00;
 }
 
 func_6507() {
-  if(!isDefined(self.var_1198))
+  if(!isDefined(self.var_1198)) {
     return 0;
+  }
 
-  if(!func_0BDC::func_3819())
+  if(!func_0BDC::func_3819()) {
     return 0;
+  }
 
-  if(func_0BDC::func_9BCF())
+  if(func_0BDC::func_9BCF()) {
     return 0;
+  }
 
-  if(func_0BDC::func_9C06())
+  if(func_0BDC::func_9C06()) {
     return 0;
+  }
 
   var_00 = self.origin - level.func_D127.origin;
   var_01 = length(var_00);
   var_02 = vectornormalize(var_00);
   var_03 = vectordot(anglesToForward(level.func_D127.angles), var_02);
 
-  if(var_03 > -0.45)
+  if(var_03 > -0.45) {
     return 0;
+  }
 
-  if(var_01 > 30000)
+  if(var_01 > 30000) {
     return 0;
+  }
 
   var_04 = self.origin - level.func_D127.origin;
   var_02 = vectornormalize(var_04);
   var_03 = vectordot(anglesToForward(self.angles), var_02);
 
-  if(var_03 < 0.0)
+  if(var_03 < 0.0) {
     return 0;
+  }
 
   return 1;
 }
@@ -1027,8 +1111,9 @@ func_64A8() {
     func_64D5(randomfloatrange(0.2, 1.2));
 
     if(self.func_B83E) {
-      while(self.func_B83E)
+      while(self.func_B83E) {
         wait 0.05;
+      }
 
       func_64D5(randomfloatrange(0.5, 1.2));
     }
@@ -1043,8 +1128,9 @@ func_64A8() {
 func_64B0() {
   self.func_B83E = 0;
 
-  while(!self.func_20F5)
+  while(!self.func_20F5) {
     wait 0.05;
+  }
 
   func_64D5(randomfloatrange(2, 10));
 
@@ -1053,8 +1139,9 @@ func_64B0() {
     self.func_B83E = 1;
 
     if(self.func_FEAE) {
-      while(self.func_FEAE)
+      while(self.func_FEAE) {
         wait 0.05;
+      }
 
       wait(randomfloatrange(0.3, 1.2));
     }
@@ -1176,8 +1263,9 @@ func_64AD() {
     var_36 = scripts\sp\math::func_C097(0, 300, self.func_D080);
     var_37 = scripts\sp\math::func_6A8E(0, 0.06, var_36);
 
-    if(level.func_D127.spaceship_boosting)
+    if(level.func_D127.spaceship_boosting) {
       var_37 = var_37 + 0.04;
+    }
 
     var_38 = randomfloatrange(-1, 1) * var_37;
     var_39 = randomfloatrange(-1, 1) * var_37;
@@ -1197,13 +1285,15 @@ func_64AD() {
     if(self.func_C4BB < var_42) {
       var_14 = var_14 + 0.05;
 
-      if(var_14 == var_15 && !self.func_C4B9)
+      if(var_14 == var_15 && !self.func_C4B9) {
         self.func_C4B9 = 1;
+      }
     } else {
       var_14 = var_14 - 0.05;
 
-      if(self.func_C4B9)
+      if(self.func_C4B9) {
         self.func_C4B9 = 0;
+      }
     }
 
     var_14 = clamp(var_14, 0, var_15);
@@ -1214,10 +1304,12 @@ func_64AD() {
     if(self.func_C4BB > var_43) {
       break;
     }
-    if(self.func_20F5)
+    if(self.func_20F5) {
       var_44 = 0.9999;
-    else
+    }
+    else {
       var_44 = 0.95;
+    }
 
     if(var_19.func_ABAC > var_44) {
       break;
@@ -1248,16 +1340,19 @@ func_6868() {
   self.func_B8A4 = scripts\engine\utility::array_removeundefined(self.func_B8A4);
 
   if(!func_64AF()) {
-    foreach(var_02 in self.func_B8A4)
+    foreach(var_02 in self.func_B8A4) {
     var_02 func_6867();
+    }
 
     return;
   }
 
-  if(var_00)
+  if(var_00) {
     func_6864();
-  else
+  }
+  else {
     func_6865();
+  }
 
   while(self.func_6DA7 || self.func_B8A4.size > 0) {
     foreach(var_02 in self.func_B8A4) {
@@ -1270,10 +1365,12 @@ func_6868() {
       var_02 unlink();
       var_2.func_898B = 1;
 
-      if(var_00)
+      if(var_00) {
         var_02 func_6869();
-      else
+      }
+      else {
         var_02 func_6862();
+      }
 
       wait 0.3;
     }
@@ -1343,8 +1440,9 @@ func_6866() {
       break;
     }
     if(gettime() - level.func_D127.func_6E9C.func_A989 < 1300) {
-      if(gettime() - level.func_D127.func_6E9C.func_A989 > 400)
+      if(gettime() - level.func_D127.func_6E9C.func_A989 > 400) {
         var_02 = 1;
+      }
     }
 
     var_04 func_6863(var_01, var_03);
@@ -1381,22 +1479,27 @@ func_64DB(var_00, var_01) {
   self.func_6AE5 = self.func_6AE5 + var_05;
 
   if(level.func_D127.spaceship_boosting) {
-    if(var_00)
+    if(var_00) {
       var_06 = 0.01 * level.func_A48E.func_A408;
-    else
+    }
+    else {
       var_06 = 0.03 * level.func_A48E.func_A40A;
+    }
   } else if(var_00)
     var_06 = 0.0;
-  else
+  else {
     var_06 = -0.02;
+  }
 
   self.func_6AE5 = self.func_6AE5 + var_06;
   var_07 = scripts\sp\math::func_C097(0, 250, self.func_D060);
 
-  if(var_00)
+  if(var_00) {
     var_08 = scripts\sp\math::func_6A8E(-0.05, var_01, var_07);
-  else
+  }
+  else {
     var_08 = scripts\sp\math::func_6A8E(-0.01, 0, var_07);
+  }
 
   self.func_6AE5 = self.func_6AE5 + var_08;
   var_09 = scripts\sp\math::func_C097(0, 1, self.func_D05F[0]);
@@ -1430,8 +1533,9 @@ func_64CF() {
   func_0BDC::func_A112("jackal_hud_enemylock_detected", 0.5);
 
   if(isDefined(self.func_20F5)) {
-    while(!self.func_20F5)
+    while(!self.func_20F5) {
       wait 0.05;
+    }
   }
 
   var_00 = 4;
@@ -1444,10 +1548,12 @@ func_64CF() {
 }
 
 func_64DD(var_00) {
-  if(var_00)
+  if(var_00) {
     setomnvar("ui_jackal_enemy_lockon_on_target", 1);
-  else
+  }
+  else {
     setomnvar("ui_jackal_enemy_lockon_on_target", 0);
+  }
 }
 
 func_64DC(var_00) {
@@ -1488,8 +1594,9 @@ func_6865() {
 func_64AC() {
   self endon("enemy_lock_broke");
 
-  while(isDefined(self.enemy) && isalive(self.enemy))
+  while(isDefined(self.enemy) && isalive(self.enemy)) {
     wait 0.05;
+  }
 
   self notify("enemy_lock_broke");
 }
@@ -1498,8 +1605,9 @@ func_64C2() {
   self endon("enemy_lock_broke");
   self.enemy endon("death");
 
-  while(!self.func_20F5)
+  while(!self.func_20F5) {
     wait 0.05;
+  }
 
   wait 2;
   var_00 = 0;
@@ -1529,8 +1637,9 @@ func_64C2() {
 }
 
 func_64E0() {
-  while(self.func_B83E || self.func_FEAE)
+  while(self.func_B83E || self.func_FEAE) {
     wait 0.05;
+  }
 }
 
 func_64AE() {
@@ -1555,15 +1664,17 @@ func_64A2() {
   setomnvar("ui_jackal_enemy_lockon_missile", 0);
   self.func_B8A4 = scripts\engine\utility::array_removeundefined(self.func_B8A4);
 
-  foreach(var_01 in self.func_B8A4)
+  foreach(var_01 in self.func_B8A4) {
   var_01 func_6867();
+  }
 
   self.func_680B = 1;
   level.func_D127.func_6E9C.func_B88A = 0;
   scripts\engine\utility::flag_clear("jackal_lose_lock_hint");
 
-  if(isDefined(self.enemy))
+  if(isDefined(self.enemy)) {
     self.enemy thread func_64D0();
+  }
 
   self.func_323B delete();
   self.func_3240 delete();
@@ -1599,26 +1710,31 @@ func_64D0() {
   self.ignoreme = 0;
   func_0BDC::func_1986();
 
-  if(self.func_13902)
+  if(self.func_13902) {
     func_0BDC::func_1990(1);
+  }
 
   self.func_13902 = undefined;
 }
 
 func_64AF() {
-  if(isDefined(self.enemy) && isalive(self.enemy))
+  if(isDefined(self.enemy) && isalive(self.enemy)) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 func_64B8(var_00) {
   var_01 = 150;
 
-  if(scripts\sp\utility::func_93A6())
+  if(scripts\sp\utility::func_93A6()) {
     var_02 = 45;
-  else
+  }
+  else {
     var_02 = 150;
+  }
 
   self.func_323B playLoopSound("jackal_gatling_fire_at_plr");
   self.func_FEAE = 1;
@@ -1727,23 +1843,28 @@ func_64AB(var_00, var_01, var_02) {
   var_03 = var_00 + var_01 * (var_02 * 0.12);
   var_04 = scripts\engine\trace::capsule_trace(var_00, var_03, 150, 300, self.angles, self, undefined, 1);
 
-  if(var_4["fraction"] < 1)
+  if(var_4["fraction"] < 1) {
     return var_04;
+  }
 }
 
 func_F0C6(var_00) {
-  if(level.func_D127.func_58B5 || gettime() - level.func_A056.func_A976 < var_00 * 1000)
+  if(level.func_D127.func_58B5 || gettime() - level.func_A056.func_A976 < var_00 * 1000) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }
 
 func_D30D() {
   var_00 = level.player _meth_848A();
   var_01 = level.player adsbuttonpressed();
 
-  if(var_01 && isDefined(var_00) && isDefined(var_0[0]) && var_0[1] > 0.1)
+  if(var_01 && isDefined(var_00) && isDefined(var_0[0]) && var_0[1] > 0.1) {
     return 1;
-  else
+  }
+  else {
     return 0;
+  }
 }

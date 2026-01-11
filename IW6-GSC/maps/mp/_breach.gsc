@@ -29,8 +29,9 @@ breach_init() {
   if(getDvar("r_reflectionProbeGenerate") == "1") {
     return;
   }
-  if(!isDefined(self.target))
+  if(!isDefined(self.target)) {
     return;
+  }
   self.breach_targets = [];
   self.auto_breach_gametypes = [];
 
@@ -67,8 +68,9 @@ breach_init() {
       target UseTriggerRequireLookAt();
       target.script_noteworthy = "trigger_use";
     }
-    if(!isDefined(target.isPathNode) || target.isPathNode == false)
+    if(!isDefined(target.isPathNode) || target.isPathNode == false) {
       target.script_noteworthy = ToLower(target.script_noteworthy);
+    }
     types = StrTok(target.script_noteworthy, ", ");
 
     foreach(type in types) {
@@ -77,8 +79,9 @@ breach_init() {
       if(toks.size >= 3 && toks[toks.size - 2] == "on") {
         event_name = toks[toks.size - 1];
         type = toks[0];
-        for(i = 1; i < toks.size - 2; i++)
+        for(i = 1; i < toks.size - 2; i++) {
           type = type + "_" + toks[i];
+        }
       }
 
       useSide = false;
@@ -86,8 +89,9 @@ breach_init() {
       if(toks.size >= 2 && toks[toks.size - 1] == "useside") {
         useSide = true;
         type = toks[0];
-        for(i = 1; i < toks.size - 2; i++)
+        for(i = 1; i < toks.size - 2; i++) {
           type = type + "_" + toks[i];
+        }
       }
 
       add_breach_target(target, type, event_name, useSide);
@@ -113,8 +117,9 @@ breach_init() {
           self thread breach_damage_watch(target);
           break;
         case "fx":
-          if(!isDefined(target.angles))
+          if(!isDefined(target.angles)) {
             target.angles = (0, 0, 0);
+          }
           break;
         case "connect_node":
           target DisconnectNode();
@@ -150,12 +155,15 @@ breach_init() {
 
     damages = get_breach_targets("damage");
     foreach(damage in damages) {
-      if(!isDefined(damage.radius))
+      if(!isDefined(damage.radius)) {
         damage.radius = 128;
-      if(!isDefined(damage.max_damage))
+      }
+      if(!isDefined(damage.max_damage)) {
         damage.max_damage = 100;
-      if(!isDefined(damage.min_damage))
+      }
+      if(!isDefined(damage.min_damage)) {
         damage.min_damage = 1;
+      }
     }
     self thread breach_use_watch();
   }
@@ -174,16 +182,20 @@ breach_init() {
 }
 
 add_breach_target(target, action, event_name, useSide) {
-  if(!isDefined(event_name))
+  if(!isDefined(event_name)) {
     event_name = "activate";
-  if(!isDefined(useSide))
+  }
+  if(!isDefined(useSide)) {
     useSide = false;
+  }
 
-  if(!isDefined(self.breach_targets[event_name]))
+  if(!isDefined(self.breach_targets[event_name])) {
     self.breach_targets[event_name] = [];
+  }
 
-  if(!isDefined(self.breach_targets[event_name][action]))
+  if(!isDefined(self.breach_targets[event_name][action])) {
     self.breach_targets[event_name][action] = [];
+  }
 
   s = spawnStruct();
   s.target = target;
@@ -205,11 +217,13 @@ add_breach_target(target, action, event_name, useSide) {
             s.facing_angles3d = true;
 
           case "angles_2d":
-            if(!isDefined(s.angles3d))
+            if(!isDefined(s.angles3d)) {
               s.facing_angles3d = false;
+            }
             s.facing_dir = anglesToForward(target_target.angles);
-            if(isDefined(target_target.script_dot))
+            if(isDefined(target_target.script_dot)) {
               s.facing_dot = target_target.script_dot;
+            }
             break;
           default:
             break;
@@ -234,24 +248,29 @@ get_breach_target(action, event_name, player) {
 get_breach_targets(action, event_name, player) {
   targets = [];
 
-  if(!isDefined(event_name))
+  if(!isDefined(event_name)) {
     event_name = "activate";
+  }
 
-  if(!isDefined(self.breach_targets[event_name]))
+  if(!isDefined(self.breach_targets[event_name])) {
     return targets;
-  if(!isDefined(self.breach_targets[event_name][action]))
+  }
+  if(!isDefined(self.breach_targets[event_name][action])) {
     return targets;
+  }
 
   foreach(s in self.breach_targets[event_name][action]) {
     if(isDefined(s.facing_dir) && isDefined(player)) {
       player_dir = player.origin - s.target.origin;
-      if(!s.facing_angles3d)
+      if(!s.facing_angles3d) {
         player_dir = (player_dir[0], player_dir[1], 0);
+      }
       player_dir = VectorNormalize(player_dir);
 
       dot = VectorDot(player_dir, s.facing_dir);
-      if(dot < s.facing_dot)
+      if(dot < s.facing_dot) {
         continue;
+      }
     }
 
     targets[targets.size] = s.target;
@@ -270,8 +289,9 @@ breach_damage_watch(trigger) {
 
 breach_on_activate() {
   self waittill("breach_activated", player, no_fx);
-  if(!isDefined(no_fx))
+  if(!isDefined(no_fx)) {
     no_fx = false;
+  }
 
   if(isDefined(self.useObject) && !no_fx) {
     self.useObject breach_set_2dIcon("hud_grenadeicon_back_red");
@@ -280,15 +300,17 @@ breach_on_activate() {
 
   breach_on_event("activate", player, no_fx);
 
-  if(isDefined(self.useObject))
+  if(isDefined(self.useObject)) {
     self.useObject.visuals = [];
+  }
 
   breach_set_can_use(false);
 }
 
 breach_on_event(event_name, player, no_fx) {
-  if(!isDefined(no_fx))
+  if(!isDefined(no_fx)) {
     no_fx = false;
+  }
 
   if(event_name == "use") {
     targets = get_breach_targets("damage", "activate", player);
@@ -500,8 +522,9 @@ breach_set_2dIcon(icon) {
 
 breach_warning_icon(useObject) {
   icon_origin = useObject.curOrigin + (0, 0, 5);
-  if(useobject.parent get_breach_targets("use_icon").size)
+  if(useobject.parent get_breach_targets("use_icon").size) {
     icon_origin = useobject.parent get_breach_targets("use_icon")[0].origin;
+  }
 
   useObject.parent thread breach_icon("warning", icon_origin, undefined, "breach_activated");
 }
@@ -525,11 +548,13 @@ breach_icon(type, origin, angles, end_ons) {
 
 breach_icon_update(type, origin, angles, icon_id, end_ons) {
   if(isDefined(end_ons)) {
-    if(IsString(end_ons))
+    if(IsString(end_ons)) {
       end_ons = [end_ons];
+    }
 
-    foreach(end_on in end_ons)
+    foreach(end_on in end_ons) {
     self endon(end_on);
+    }
   }
 
   show_dist = 100;
@@ -545,8 +570,9 @@ breach_icon_update(type, origin, angles, icon_id, end_ons) {
     case "warning":
       show_dist = 400;
       damage_info = get_breach_target("damage");
-      if(isDefined(damage_info))
+      if(isDefined(damage_info)) {
         show_dist = damage_info.radius;
+      }
       icon = "hud_grenadeicon";
       pin = true;
       break;
@@ -561,8 +587,9 @@ breach_icon_update(type, origin, angles, icon_id, end_ons) {
 
   while(1) {
     foreach(player in level.players) {
-      if(!isDefined(player.breach_icons))
+      if(!isDefined(player.breach_icons)) {
         player.breach_icons = [];
+      }
 
       if(breach_icon_update_is_player_in_range(player, origin, show_dist, show_dir, show_z)) {
         if(!isDefined(player.breach_icons[icon_id])) {
@@ -585,21 +612,24 @@ breach_icon_update(type, origin, angles, icon_id, end_ons) {
 breach_icon_update_is_player_in_range(player, origin, show_dist, show_dir, show_z) {
   test_origin = player.origin + (0, 0, 30);
 
-  if(isDefined(show_z) && abs(test_origin[2] - origin[2]) > show_z)
+  if(isDefined(show_z) && abs(test_origin[2] - origin[2]) > show_z) {
     return false;
+  }
 
   if(isDefined(show_dist)) {
     show_dist_sqr = show_dist * show_dist;
     dist_sqr = DistanceSquared(test_origin, origin);
-    if(dist_sqr > show_dist_sqr)
+    if(dist_sqr > show_dist_sqr) {
       return false;
+    }
   }
 
   if(isDefined(show_dir)) {
     dir_to_player = test_origin - origin;
 
-    if(VectorDot(show_dir, dir_to_player) < 0)
+    if(VectorDot(show_dir, dir_to_player) < 0) {
       return false;
+    }
   }
 
   return true;
